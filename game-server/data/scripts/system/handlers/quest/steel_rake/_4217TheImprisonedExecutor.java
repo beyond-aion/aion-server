@@ -7,10 +7,8 @@ import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
  */
 public class _4217TheImprisonedExecutor extends QuestHandler {
 
-	private static final int questId = 4217;
-
 	public _4217TheImprisonedExecutor() {
-		super(questId);
+		super(4217);
 	}
 
 	@Override

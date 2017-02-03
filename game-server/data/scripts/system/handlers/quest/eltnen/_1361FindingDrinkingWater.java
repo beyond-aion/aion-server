@@ -1,6 +1,6 @@
 package quest.eltnen;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -19,10 +19,8 @@ import com.aionemu.gameserver.world.zone.ZoneName;
  */
 public class _1361FindingDrinkingWater extends QuestHandler {
 
-	private final static int questId = 1361;
-
 	public _1361FindingDrinkingWater() {
-		super(questId);
+		super(1361);
 	}
 
 	@Override
@@ -71,9 +69,9 @@ public class _1361FindingDrinkingWater extends QuestHandler {
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 203943) // Turiel
 			{
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
+				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 1011);
-				else if (env.getDialogId() == DialogAction.QUEST_ACCEPT_1.id()) {
+				else if (env.getDialogActionId() == QUEST_ACCEPT_1) {
 					if (giveQuestItem(env, 182201326, 1))
 						return sendQuestStartDialog(env);
 					else
@@ -83,9 +81,9 @@ public class _1361FindingDrinkingWater extends QuestHandler {
 			}
 		} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) // Reward
 		{
-			if (env.getDialog() == DialogAction.QUEST_SELECT)
+			if (env.getDialogActionId() == QUEST_SELECT)
 				return sendQuestDialog(env, 2375);
-			else if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id()) {
+			else if (env.getDialogActionId() == SELECT_QUEST_REWARD) {
 				qs.setQuestVar(2);
 				qs.setStatus(QuestStatus.REWARD);
 				updateQuestStatus(env);
@@ -97,7 +95,7 @@ public class _1361FindingDrinkingWater extends QuestHandler {
 		else if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 1) {
 			switch (targetId) {
 				case 700173: // Water Tank
-					if (qs.getQuestVarById(0) == 1 && env.getDialog() == DialogAction.USE_OBJECT) {
+					if (qs.getQuestVarById(0) == 1 && env.getDialogActionId() == USE_OBJECT) {
 						return useQuestObject(env, 1, 1, true, 0, 0, 0, 182201327, 1); // reward
 					}
 			}

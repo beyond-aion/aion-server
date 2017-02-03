@@ -1,6 +1,7 @@
 package quest.verteron;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -59,7 +60,7 @@ public class _14011FragmentsInTheSky extends QuestHandler {
 
 		if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 203109) { // Kairon
-				switch (env.getDialog()) {
+				switch (env.getDialogActionId()) {
 					case QUEST_SELECT:
 						if (var == 0) {
 							return sendQuestDialog(env, 1011);
@@ -71,7 +72,7 @@ public class _14011FragmentsInTheSky extends QuestHandler {
 						return defaultCloseDialog(env, 0, 1); // 1
 				}
 			} else if (targetId == 203122) { // Hynops
-				switch (env.getDialog()) {
+				switch (env.getDialogActionId()) {
 					case QUEST_SELECT:
 						if (var == 1) {
 							return sendQuestDialog(env, 1352);
@@ -84,7 +85,7 @@ public class _14011FragmentsInTheSky extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203109) { // Kairon
-				if (env.getDialog() == DialogAction.USE_OBJECT) {
+				if (env.getDialogActionId() == USE_OBJECT) {
 					return sendQuestDialog(env, 1693);
 				} else {
 					return sendQuestEndDialog(env);

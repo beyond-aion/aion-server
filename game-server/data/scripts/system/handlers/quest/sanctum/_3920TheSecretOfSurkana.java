@@ -1,6 +1,7 @@
 package quest.sanctum;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -15,10 +16,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 public class _3920TheSecretOfSurkana extends QuestHandler {
 
-	private final static int questId = 3920;
-
 	public _3920TheSecretOfSurkana() {
-		super(questId);
+		super(3920);
 	}
 
 	@Override
@@ -34,11 +33,11 @@ public class _3920TheSecretOfSurkana extends QuestHandler {
 	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		int targetId = env.getTargetId();
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 798357) {
-				switch (dialog) {
+				switch (dialogActionId) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 1011);
 					case QUEST_ACCEPT_1:
@@ -50,7 +49,7 @@ public class _3920TheSecretOfSurkana extends QuestHandler {
 			int var = qs.getQuestVarById(0);
 			switch (targetId) {
 				case 730212: // Balaur Material Converter
-					switch (dialog) {
+					switch (dialogActionId) {
 						case USE_OBJECT:
 							if ((var == 0) && player.getInventory().getItemCountByItemId(182206073) > 0) {
 								return useQuestObject(env, 0, 1, true, 0, 182206074, 1, 182206073, 1, 0, false);

@@ -217,7 +217,7 @@ public class NpcController extends CreatureController<Npc> {
 					rewardDp *= percentage;
 					rewardAp *= percentage;
 
-					QuestEngine.getInstance().onKill(new QuestEnv(getOwner(), player, 0, 0));
+					QuestEngine.getInstance().onKill(new QuestEnv(getOwner(), player, 0));
 					player.getCommonData().addExp(rewardXp, RewardType.HUNTING, this.getOwner().getObjectTemplate().getNameId());
 					player.getCommonData().addDp(rewardDp);
 					if (getOwner().getAi().ask(AIQuestion.SHOULD_REWARD_AP)) {
@@ -257,14 +257,14 @@ public class NpcController extends CreatureController<Npc> {
 	}
 
 	@Override
-	public void onDialogSelect(int dialogId, int prevDialogId, final Player player, int questId, int extendedRewardIndex) {
-		QuestEnv env = new QuestEnv(getOwner(), player, questId, dialogId);
+	public void onDialogSelect(int dialogActionId, int prevDialogId, final Player player, int questId, int extendedRewardIndex) {
+		QuestEnv env = new QuestEnv(getOwner(), player, questId, dialogActionId);
 		if (!MathUtil.isInRange(getOwner(), player, getOwner().getObjectTemplate().getTalkDistance() + 1, false)
 			&& !QuestEngine.getInstance().onDialog(env)) {
 			return;
 		}
-		if (!getOwner().getAi().onDialogSelect(player, dialogId, questId, extendedRewardIndex)) {
-			DialogService.onDialogSelect(dialogId, player, getOwner(), questId, extendedRewardIndex);
+		if (!getOwner().getAi().onDialogSelect(player, dialogActionId, questId, extendedRewardIndex)) {
+			DialogService.onDialogSelect(dialogActionId, player, getOwner(), questId, extendedRewardIndex);
 		}
 	}
 
@@ -273,9 +273,9 @@ public class NpcController extends CreatureController<Npc> {
 		if (isNewInAggroList && attacker instanceof Player) {
 			if (((Player) attacker).isInTeam()) {
 				for (Player player : ((Player) attacker).getCurrentTeam().filterMembers(m -> MathUtil.isIn3dRange(getOwner(), m, 50)))
-					QuestEngine.getInstance().onAddAggroList(new QuestEnv(getOwner(), player, 0, 0));
+					QuestEngine.getInstance().onAddAggroList(new QuestEnv(getOwner(), player, 0));
 			} else {
-				QuestEngine.getInstance().onAddAggroList(new QuestEnv(getOwner(), (Player) attacker, 0, 0));
+				QuestEngine.getInstance().onAddAggroList(new QuestEnv(getOwner(), (Player) attacker, 0));
 			}
 		}
 		super.onAddHate(attacker, isNewInAggroList);
@@ -299,7 +299,7 @@ public class NpcController extends CreatureController<Npc> {
 		Npc npc = getOwner();
 		ShoutEventHandler.onEnemyAttack((NpcAI) npc.getAi(), attacker);
 		if (actingCreature instanceof Player)
-			QuestEngine.getInstance().onAttack(new QuestEnv(npc, (Player) actingCreature, 0, 0));
+			QuestEngine.getInstance().onAttack(new QuestEnv(npc, (Player) actingCreature, 0));
 	}
 
 	@Override

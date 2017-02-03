@@ -1,6 +1,7 @@
 package quest.poeta;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
@@ -77,8 +78,8 @@ public class _1001TheKerubThreat extends QuestHandler {
 
 		if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 203071) {
-				switch (env.getDialog()) {
-					case SELECT_ACTION_1012:
+				switch (env.getDialogActionId()) {
+					case SELECT1_1:
 						playQuestMovie(env, 15);
 						return false;
 					case QUEST_SELECT:
@@ -94,7 +95,7 @@ public class _1001TheKerubThreat extends QuestHandler {
 						if (var == 7) {
 							long itemCount = player.getInventory().getItemCountByItemId(182200001);
 							if (itemCount >= 3) {
-								if (env.getDialogId() == DialogAction.CHECK_USER_HAS_QUEST_ITEM.id()) {
+								if (env.getDialogActionId() == CHECK_USER_HAS_QUEST_ITEM) {
 									return sendQuestDialog(env, 1694);
 								} else {
 									removeQuestItem(env, 182200001, itemCount);

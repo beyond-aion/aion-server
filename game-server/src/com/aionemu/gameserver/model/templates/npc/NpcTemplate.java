@@ -9,7 +9,6 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlID;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.TribeClass;
 import com.aionemu.gameserver.model.items.NpcEquippedGear;
@@ -276,9 +275,9 @@ public class NpcTemplate extends VisibleObjectTemplate {
 	 * @param action
 	 * @return True if the npc supports this function/action.
 	 */
-	public boolean supportsAction(DialogAction action) {
+	public boolean supportsAction(int dialogActionId) {
 		List<Integer> dialogIds = getFuncDialogIds();
-		return dialogIds != null && dialogIds.contains(action.id());
+		return dialogIds != null && dialogIds.contains(dialogActionId);
 	}
 
 	public int getMassiveLootCount() {

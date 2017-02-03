@@ -1,11 +1,12 @@
 package com.aionemu.gameserver.questEngine.handlers.template;
 
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.DescriptionId;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
@@ -59,11 +60,11 @@ public class ItemOrders extends QuestHandler {
 	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.isStartable()) {
-			switch (dialog) {
+			switch (dialogActionId) {
 				case QUEST_ACCEPT:
 				case QUEST_ACCEPT_1:
 				case QUEST_ACCEPT_SIMPLE:
@@ -80,9 +81,9 @@ public class ItemOrders extends QuestHandler {
 		} else if (qs.getStatus() == QuestStatus.START) {
 			int var0 = qs.getQuestVarById(0);
 			if (targetId == talkNpcId1 || targetId == talkNpcId2) {
-				if (dialog == DialogAction.QUEST_SELECT) {
+				if (dialogActionId == QUEST_SELECT) {
 					return sendQuestDialog(env, 1352);
-				} else if (dialog == DialogAction.SETPRO1) {
+				} else if (dialogActionId == SETPRO1) {
 					boolean reward = ((var0 == 0 && talkNpcId2 == 0) || (var0 == 1 && talkNpcId2 != 0));
 					qs.setQuestVarById(0, var0 + 1);
 					if (reward)
@@ -91,15 +92,15 @@ public class ItemOrders extends QuestHandler {
 					return closeDialogWindow(env);
 				}
 			} else if (targetId == endNpcId) {
-				if (dialog == DialogAction.QUEST_SELECT) {
+				if (dialogActionId == QUEST_SELECT) {
 					return sendQuestDialog(env, 2375);
-				} else if (dialog == DialogAction.SELECT_QUEST_REWARD) {
+				} else if (dialogActionId == SELECT_QUEST_REWARD) {
 					return defaultCloseDialog(env, 0, 1, true, true);
 				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == endNpcId) {
-				switch (dialog) {
+				switch (dialogActionId) {
 					case USE_OBJECT:
 						return sendQuestDialog(env, 2375);
 					default: {

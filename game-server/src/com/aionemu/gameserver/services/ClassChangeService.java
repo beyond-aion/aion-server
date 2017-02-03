@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.services;
 
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.PlayerClass;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -23,11 +25,11 @@ public class ClassChangeService {
 		Race playerRace = player.getRace();
 		if (player.getLevel() >= 9 && playerClass.isStartingClass())
 			PacketSendUtility.sendPacket(player,
-				new SM_DIALOG_WINDOW(0, getClassSelectionDialogId(playerRace, playerClass), playerRace == Race.ELYOS ? 1006 : 2008));
+				new SM_DIALOG_WINDOW(0, getClassSelectionDialogPageId(playerRace, playerClass), playerRace == Race.ELYOS ? 1006 : 2008));
 	}
 
-	public static void changeClassToSelection(Player player, int dialogId) {
-		setClass(player, getSelectedPlayerClass(player.getRace(), dialogId), true, true);
+	public static void changeClassToSelection(Player player, int dialogActionId) {
+		setClass(player, getSelectedPlayerClass(player.getRace(), dialogActionId), true, true);
 		PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(0, 0)); // close dialog window
 	}
 
@@ -84,7 +86,7 @@ public class ClassChangeService {
 		return true;
 	}
 
-	public static int getClassSelectionDialogId(Race playerRace, PlayerClass playerClass) {
+	public static int getClassSelectionDialogPageId(Race playerRace, PlayerClass playerClass) {
 		switch (playerClass) {
 			case WARRIOR:
 				return playerRace == Race.ELYOS ? 2375 : 3057;
@@ -103,64 +105,60 @@ public class ClassChangeService {
 		}
 	}
 
-	public static PlayerClass getSelectedPlayerClass(Race race, int dialogId) {
+	public static PlayerClass getSelectedPlayerClass(Race race, int dialogActionId) {
 		switch (race) {
 			case ELYOS:
-				switch (dialogId) {
-					case 2376:
+				switch (dialogActionId) {
+					case SELECT5_1:
 						return PlayerClass.GLADIATOR;
-					case 2461:
+					case SELECT5_2:
 						return PlayerClass.TEMPLAR;
-					case 2717:
+					case SELECT6_1:
 						return PlayerClass.ASSASSIN;
-					case 2802:
+					case SELECT6_2:
 						return PlayerClass.RANGER;
-					case 3058:
+					case SELECT7_1:
 						return PlayerClass.SORCERER;
-					case 3143:
+					case SELECT7_2:
 						return PlayerClass.SPIRIT_MASTER;
-					case 3399:
+					case SELECT8_1:
 						return PlayerClass.CLERIC;
-					case 3484:
+					case SELECT8_2:
 						return PlayerClass.CHANTER;
-					case 3825:
-						return PlayerClass.RIDER;
-					case 3740:
+					case SELECT9_1:
 						return PlayerClass.GUNNER;
-					case 4081:
+					case SELECT9_2:
+						return PlayerClass.RIDER;
+					case SELECT10_1:
 						return PlayerClass.BARD;
-					default:
-						return null;
 				}
+				break;
 			case ASMODIANS:
-				switch (dialogId) {
-					case 3058:
+				switch (dialogActionId) {
+					case SELECT7_1:
 						return PlayerClass.GLADIATOR;
-					case 3143:
+					case SELECT7_2:
 						return PlayerClass.TEMPLAR;
-					case 3399:
+					case SELECT8_1:
 						return PlayerClass.ASSASSIN;
-					case 3484:
+					case SELECT8_2:
 						return PlayerClass.RANGER;
-					case 3740:
+					case SELECT9_1:
 						return PlayerClass.SORCERER;
-					case 3825:
+					case SELECT9_2:
 						return PlayerClass.SPIRIT_MASTER;
-					case 4081:
+					case SELECT10_1:
 						return PlayerClass.CLERIC;
-					case 4166:
+					case SELECT10_2:
 						return PlayerClass.CHANTER;
-					case 3591:
-						return PlayerClass.RIDER;
-					case 3570:
+					case SELECT8_3_1:
 						return PlayerClass.GUNNER;
-					case 3911:
+					case SELECT8_3_2:
+						return PlayerClass.RIDER;
+					case SELECT9_3_1:
 						return PlayerClass.BARD;
-					default:
-						return null;
 				}
-			default:
-				return null;
 		}
+		return null;
 	}
 }

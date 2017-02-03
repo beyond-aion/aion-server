@@ -1,6 +1,6 @@
 package quest.morheim;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -13,11 +13,10 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _2436LookingForBuBuPat extends QuestHandler {
 
-	private final static int questId = 2436;
 	private final static int[] npcs = { 204390, 204401 };
 
 	public _2436LookingForBuBuPat() {
-		super(questId);
+		super(2436);
 	}
 
 	@Override
@@ -42,22 +41,22 @@ public class _2436LookingForBuBuPat extends QuestHandler {
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 204390) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
+				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 4762);
 				else
 					return sendQuestStartDialog(env);
 			}
 		} else if (qs != null && qs.getStatus() == QuestStatus.START) {
 			if (targetId == 204401) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT) {
+				if (env.getDialogActionId() == QUEST_SELECT) {
 					if (qs.getQuestVarById(0) == 0)
 						return sendQuestDialog(env, 1011);
-				} else if (env.getDialog() == DialogAction.SETPRO1)
+				} else if (env.getDialogActionId() == SETPRO1)
 					return defaultStartFollowEvent(env, (Npc) env.getVisibleObject(), 204390, 0, 1); // 1
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204390) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
+				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 1693);
 				else
 					return sendQuestEndDialog(env);

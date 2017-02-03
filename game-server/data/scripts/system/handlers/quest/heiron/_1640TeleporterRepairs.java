@@ -1,6 +1,7 @@
 package quest.heiron;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -18,10 +19,8 @@ import com.aionemu.gameserver.world.WorldMapType;
 
 public class _1640TeleporterRepairs extends QuestHandler {
 
-	private final static int questId = 1640;
-
 	public _1640TeleporterRepairs() {
-		super(questId);
+		super(1640);
 	}
 
 	@Override
@@ -34,14 +33,14 @@ public class _1640TeleporterRepairs extends QuestHandler {
 	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 730033) {
-				if (dialog == DialogAction.QUEST_SELECT) {
+				if (dialogActionId == QUEST_SELECT) {
 					return sendQuestDialog(env, 1011);
-				} else if (dialog == DialogAction.SETPRO1) {
+				} else if (dialogActionId == SETPRO1) {
 					QuestService.startQuest(env);
 					return closeDialogWindow(env);
 				} else {
@@ -50,7 +49,7 @@ public class _1640TeleporterRepairs extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 730033) {
-				switch (dialog) {
+				switch (dialogActionId) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 1352);
 					case SETPRO2:

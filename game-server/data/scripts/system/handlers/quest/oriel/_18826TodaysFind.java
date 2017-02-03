@@ -1,6 +1,7 @@
 package quest.oriel;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -12,10 +13,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _18826TodaysFind extends QuestHandler {
 
-	private static final int questId = 18826;
-
 	public _18826TodaysFind() {
-		super(questId);
+		super(18826);
 	}
 
 	@Override
@@ -33,19 +32,19 @@ public class _18826TodaysFind extends QuestHandler {
 	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 830520 || targetId == 830660 || targetId == 830661) {
-				if (dialog == DialogAction.QUEST_SELECT)
+				if (dialogActionId == QUEST_SELECT)
 					return sendQuestDialog(env, 1011);
 				else
 					return sendQuestStartDialog(env);
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 730522) {
-				switch (dialog) {
+				switch (dialogActionId) {
 					case USE_OBJECT:
 						return sendQuestDialog(env, 2375);
 					case SELECT_QUEST_REWARD:

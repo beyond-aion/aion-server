@@ -1,6 +1,7 @@
 package quest.miragent_holy_templar;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -18,12 +19,11 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _3940Loyalty extends QuestHandler {
 
-	private static final int questId = 3940;
 	private static final int[] npcs = { 203701, 203752 };
 	private static final int[] mobs = { 251002, 251021, 251018, 251039, 251033, 251036, 214823, 216850 };
 
 	public _3940Loyalty() {
-		super(questId);
+		super(3940);
 	}
 
 	@Override
@@ -42,10 +42,10 @@ public class _3940Loyalty extends QuestHandler {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		int targetId = env.getTargetId();
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		if (qs == null) {
 			if (targetId == 203701) { // Lavirintos
-				if (dialog == DialogAction.QUEST_SELECT) {
+				if (dialogActionId == QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);
 				} else {
 					return sendQuestStartDialog(env);
@@ -61,7 +61,7 @@ public class _3940Loyalty extends QuestHandler {
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 203701: // Lavirintos
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var == 0) {
 								return sendQuestDialog(env, 1011);
@@ -84,13 +84,13 @@ public class _3940Loyalty extends QuestHandler {
 					}
 					break;
 				case 203752: // Jucleas
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var == 5) {
 								return sendQuestDialog(env, 2716);
 							}
 							return false;
-						case SELECT_ACTION_2718:
+						case SELECT6_1_1:
 							if (player.getCommonData().getDp() >= 4000) {
 								return checkItemExistence(env, 5, 5, false, 186000083, 1, true, 2718, 2887, 0, 0);
 							} else {
@@ -106,7 +106,7 @@ public class _3940Loyalty extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203701) { // Lavirintos
-				if (dialog == DialogAction.QUEST_SELECT) {
+				if (dialogActionId == QUEST_SELECT) {
 					return sendQuestDialog(env, 10002);
 				} else {
 					return sendQuestEndDialog(env);

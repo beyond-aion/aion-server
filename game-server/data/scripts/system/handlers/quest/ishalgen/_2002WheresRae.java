@@ -1,6 +1,7 @@
 package quest.ishalgen;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -50,11 +51,11 @@ public class _2002WheresRae extends QuestHandler {
 
 		int var = qs.getQuestVarById(0);
 		int targetId = env.getTargetId();
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 203519:
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var == 0)
 								return sendQuestDialog(env, 1011);
@@ -69,12 +70,12 @@ public class _2002WheresRae extends QuestHandler {
 					}
 					return false;
 				case 203534:
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var == 1)
 								return sendQuestDialog(env, 1352);
 							return false;
-						case SELECT_ACTION_1353:
+						case SELECT2_1:
 							playQuestMovie(env, 52);
 							break;
 						case SETPRO2:
@@ -87,7 +88,7 @@ public class _2002WheresRae extends QuestHandler {
 					}
 					return false;
 				case 790002:
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var == 2)
 								return sendQuestDialog(env, 1693);
@@ -139,13 +140,13 @@ public class _2002WheresRae extends QuestHandler {
 					}
 					break;
 				case 700045:
-					if (var == 11 && env.getDialog() == DialogAction.USE_OBJECT) {
+					if (var == 11 && env.getDialogActionId() == USE_OBJECT) {
 						SkillEngine.getInstance().applyEffectDirectly(8343, player, player, 0);
 						return true;
 					}
 					return false;
 				case 203538:
-					if (var == 14 && env.getDialog() == DialogAction.USE_OBJECT) {
+					if (var == 14 && env.getDialogActionId() == USE_OBJECT) {
 						qs.setQuestVarById(0, var + 1);
 						updateQuestStatus(env);
 						Npc npc = (Npc) env.getVisibleObject();
@@ -156,7 +157,7 @@ public class _2002WheresRae extends QuestHandler {
 					}
 					break;
 				case 203553:
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var == 15)
 								return sendQuestDialog(env, 3057);
@@ -172,7 +173,7 @@ public class _2002WheresRae extends QuestHandler {
 					}
 					return false;
 				case 205020:
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var >= 12) {
 								player.setState(CreatureState.FLYING);
@@ -197,9 +198,9 @@ public class _2002WheresRae extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203516) {
-				if (dialog == DialogAction.USE_OBJECT || dialog == DialogAction.QUEST_SELECT)
+				if (dialogActionId == USE_OBJECT || dialogActionId == QUEST_SELECT)
 					return sendQuestDialog(env, 3398);
-				else if (dialog == DialogAction.SETPRO8)
+				else if (dialogActionId == SETPRO8)
 					return sendQuestDialog(env, 5);
 				else
 					return sendQuestEndDialog(env);

@@ -1,6 +1,6 @@
 package quest.poeta;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -40,7 +40,7 @@ public class _1100KaliosCall extends QuestHandler {
 		if (targetId != 203067)
 			return false;
 		if (qs.getStatus() == QuestStatus.START) {
-			if (env.getDialog() == DialogAction.QUEST_SELECT) {
+			if (env.getDialogActionId() == QUEST_SELECT) {
 				qs.setStatus(QuestStatus.REWARD);
 				updateQuestStatus(env);
 				return sendQuestDialog(env, 1011);

@@ -1,8 +1,9 @@
 package quest.reshanta;
 
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import java.util.List;
 
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -24,10 +25,8 @@ import com.aionemu.gameserver.world.World;
  */
 public class _14045RumorsOnWings extends QuestHandler {
 
-	private final static int questId = 14045;
-
 	public _14045RumorsOnWings() {
-		super(questId);
+		super(14045);
 	}
 
 	@Override
@@ -49,18 +48,18 @@ public class _14045RumorsOnWings extends QuestHandler {
 		}
 		int var = qs.getQuestVarById(0);
 		int targetId = env.getTargetId();
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 278506: // Tellus
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var == 0) {
 								return sendQuestDialog(env, 1011);
 							}
 							return false;
-						case SELECT_ACTION_1013:
+						case SELECT1_1_1:
 							playQuestMovie(env, 272);
 							break;
 						case SETPRO1:
@@ -68,7 +67,7 @@ public class _14045RumorsOnWings extends QuestHandler {
 					}
 					break;
 				case 279023: // Agemonerk
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var == 1) {
 								return sendQuestDialog(env, 1352);
@@ -84,7 +83,7 @@ public class _14045RumorsOnWings extends QuestHandler {
 					}
 					break;
 				case 278643: // Raithor
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var == 2) {
 								return sendQuestDialog(env, 1693);
@@ -122,7 +121,7 @@ public class _14045RumorsOnWings extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 279023) { // Agemonerk
-				if (dialog == DialogAction.USE_OBJECT) {
+				if (dialogActionId == USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
 				} else {
 					return sendQuestEndDialog(env);

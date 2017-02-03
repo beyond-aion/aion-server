@@ -1,8 +1,10 @@
 package ai.instance.beshmundirTemple;
 
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.ai.AIActions;
-import com.aionemu.gameserver.ai.AIRequest;
 import com.aionemu.gameserver.ai.AIName;
+import com.aionemu.gameserver.ai.AIRequest;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.DescriptionId;
 import com.aionemu.gameserver.model.autogroup.AutoGroupType;
@@ -31,7 +33,7 @@ public class BeshmundirsWalkAI extends ActionItemNpcAI {
 	}
 
 	@Override
-	public boolean onDialogSelect(Player player, final int dialogId, int questId, int extendedRewardIndex) {
+	public boolean onDialogSelect(Player player, int dialogActionId, int questId, int extendedRewardIndex) {
 		AIRequest request = new AIRequest() {
 
 			@Override
@@ -45,14 +47,14 @@ public class BeshmundirsWalkAI extends ActionItemNpcAI {
 			}
 
 		};
-		switch (dialogId) {
-			case 105:
+		switch (dialogActionId) {
+			case OPEN_INSTANCE_RECRUIT:
 				AutoGroupType agt = AutoGroupType.getAutoGroup(player.getLevel(), getNpcId());
 				if (agt != null) {
 					PacketSendUtility.sendPacket(player, new SM_FIND_GROUP(0x1A, agt.getInstanceMapId()));
 				}
 				break;
-			case 65:// I'm ready to enter
+			case INSTANCE_ENTRY: // I'm ready to enter
 				if (!player.isInGroup()) {
 					PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1390256));
 					return true;
@@ -67,14 +69,14 @@ public class BeshmundirsWalkAI extends ActionItemNpcAI {
 					moveToInstance(player, (byte) 0);
 				}
 				break;
-			case 4763:// I'll take the safer path
-				AIActions.addRequest(this, player, SM_QUESTION_WINDOW.STR_INSTANCE_DUNGEON_WITH_DIFFICULTY_ENTER_CONFIRM, getObjectId(), request,
-					"300170000", new DescriptionId(1804103));
+			case SELECT_NONE_1: // I'll take the safer path
+				AIActions.addRequest(this, player, SM_QUESTION_WINDOW.STR_INSTANCE_DUNGEON_WITH_DIFFICULTY_ENTER_CONFIRM, getObjectId(), request, "300170000",
+					new DescriptionId(1804103));
 				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 4762)); // Path selection
 				break;
-			case 4848:// Give me the dangerous path
-				AIActions.addRequest(this, player, SM_QUESTION_WINDOW.STR_INSTANCE_DUNGEON_WITH_DIFFICULTY_ENTER_CONFIRM, getObjectId(), request,
-					"300170000", new DescriptionId(1804105));
+			case SELECT_NONE_2: // Give me the dangerous path
+				AIActions.addRequest(this, player, SM_QUESTION_WINDOW.STR_INSTANCE_DUNGEON_WITH_DIFFICULTY_ENTER_CONFIRM, getObjectId(), request, "300170000",
+					new DescriptionId(1804105));
 				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 4762)); // Path selection
 				break;
 		}

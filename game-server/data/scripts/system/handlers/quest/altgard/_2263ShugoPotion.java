@@ -1,6 +1,7 @@
 package quest.altgard;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -14,12 +15,11 @@ import com.aionemu.gameserver.services.QuestService;
  */
 public class _2263ShugoPotion extends QuestHandler {
 
-	private final static int questId = 2263; // Altgard - Shugo Potion
 	private final static int questDropItemId = 182203242; // Malodor Pollen
 	private final static int questStartNpcId = 798036; // Mabrunerk
 
 	public _2263ShugoPotion() {
-		super(questId);
+		super(2263);
 	}
 
 	@Override
@@ -38,11 +38,11 @@ public class _2263ShugoPotion extends QuestHandler {
 			targetId = ((Npc) env.getVisibleObject()).getNpcId();
 		}
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == questStartNpcId) { // Mabrunerk
-				switch (dialog) {
+				switch (dialogActionId) {
 					case QUEST_ACCEPT_1:
 						if (QuestService.startQuest(env)) {
 							QuestService.questTimerStart(env, 300);
@@ -58,7 +58,7 @@ public class _2263ShugoPotion extends QuestHandler {
 		} else if (qs.getStatus() == QuestStatus.START) {
 
 			if (targetId == questStartNpcId) { // Mabrunerk
-				switch (dialog) {
+				switch (dialogActionId) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 2375);
 

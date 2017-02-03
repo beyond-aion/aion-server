@@ -2,7 +2,7 @@ package ai.instance.eternalBastion;
 
 import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.TribeClass;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -25,8 +25,8 @@ public class SiegeCannonAI extends ActionItemNpcAI {
 	}
 
 	@Override
-	public boolean onDialogSelect(Player player, int dialogId, int questId, int extendedRewardIndex) {
-		if (dialogId == DialogAction.SETPRO1.id()) {
+	public boolean onDialogSelect(Player player, int dialogActionId, int questId, int extendedRewardIndex) {
+		if (dialogActionId == SETPRO1) {
 			checkItem(player);
 		}
 		PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 0));

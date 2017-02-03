@@ -1,6 +1,7 @@
 package quest.aturam_sky_fortress;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -31,14 +32,14 @@ public class _18301MyPrecHious extends QuestHandler {
 	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 799530) {
-				if (dialog == DialogAction.QUEST_SELECT) {
+				if (dialogActionId == QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);
-				} else if (dialog == DialogAction.QUEST_ACCEPT_1) {
+				} else if (dialogActionId == QUEST_ACCEPT_1) {
 					playQuestMovie(env, 468);
 					return sendQuestStartDialog(env);
 				} else {
@@ -47,7 +48,7 @@ public class _18301MyPrecHious extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 730374 && qs.getQuestVarById(0) == 7) {
-				switch (dialog) {
+				switch (dialogActionId) {
 					case USE_OBJECT:
 						return sendQuestDialog(env, 1352);
 					case SETPRO2:
@@ -61,7 +62,7 @@ public class _18301MyPrecHious extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 799530) {
-				switch (dialog) {
+				switch (dialogActionId) {
 					case USE_OBJECT:
 						return sendQuestDialog(env, 10002);
 					case SELECT_QUEST_REWARD:

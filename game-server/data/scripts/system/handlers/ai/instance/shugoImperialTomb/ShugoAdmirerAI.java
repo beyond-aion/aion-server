@@ -4,6 +4,7 @@ import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.instance.handlers.InstanceHandler;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.instance.StageList;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
@@ -21,9 +22,9 @@ public class ShugoAdmirerAI extends NpcAI {
 	}
 
 	@Override
-	public boolean onDialogSelect(Player player, int dialogId, int questId, int extendedRewardIndex) {
+	public boolean onDialogSelect(Player player, int dialogActionId, int questId, int extendedRewardIndex) {
 		InstanceHandler instanceHandler = getPosition().getWorldMapInstance().getInstanceHandler();
-		if (dialogId == 10000) {
+		if (dialogActionId == SETPRO1) {
 			switch (getNpcId()) {
 				case 831110: // start stage 1
 					instanceHandler.onChangeStageList(StageList.START_STAGE_1_PHASE_1);

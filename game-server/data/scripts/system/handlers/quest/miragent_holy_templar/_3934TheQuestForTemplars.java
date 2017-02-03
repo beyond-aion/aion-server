@@ -1,6 +1,7 @@
 package quest.miragent_holy_templar;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -12,10 +13,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _3934TheQuestForTemplars extends QuestHandler {
 
-	private final static int questId = 3934;
-
 	public _3934TheQuestForTemplars() {
-		super(questId);
+		super(3934);
 	}
 
 	@Override
@@ -32,12 +31,12 @@ public class _3934TheQuestForTemplars extends QuestHandler {
 		Player player = env.getPlayer();
 		int targetId = env.getTargetId();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 
 		// 0 - Start to Lavirintos
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 203701) {
-				if (dialog == DialogAction.QUEST_SELECT)
+				if (dialogActionId == QUEST_SELECT)
 					return sendQuestDialog(env, 4762);
 				else
 					return sendQuestStartDialog(env, 182206088, 1);
@@ -53,7 +52,7 @@ public class _3934TheQuestForTemplars extends QuestHandler {
 			switch (targetId) {
 				// 1 - Talk with Nianalo
 				case 798359:
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							return sendQuestDialog(env, 1011);
 						case SETPRO1:
@@ -63,7 +62,7 @@ public class _3934TheQuestForTemplars extends QuestHandler {
 				// 2 - Talk with Navid
 				case 798360:
 					if (var == 1) {
-						switch (dialog) {
+						switch (dialogActionId) {
 							case QUEST_SELECT:
 								return sendQuestDialog(env, 1352);
 							case SETPRO2:
@@ -74,7 +73,7 @@ public class _3934TheQuestForTemplars extends QuestHandler {
 				// 3 - Talk with Pavel
 				case 798361:
 					if (var == 2) {
-						switch (dialog) {
+						switch (dialogActionId) {
 							case QUEST_SELECT:
 								return sendQuestDialog(env, 1693);
 							case SETPRO3:
@@ -85,7 +84,7 @@ public class _3934TheQuestForTemplars extends QuestHandler {
 				// 4 - Talk with Pendaon
 				case 798362:
 					if (var == 3) {
-						switch (dialog) {
+						switch (dialogActionId) {
 							case QUEST_SELECT:
 								return sendQuestDialog(env, 2034);
 							case SETPRO4:
@@ -96,7 +95,7 @@ public class _3934TheQuestForTemplars extends QuestHandler {
 				// 5 - Talk with Poevius
 				case 798363:
 					if (var == 4) {
-						switch (dialog) {
+						switch (dialogActionId) {
 							case QUEST_SELECT:
 								return sendQuestDialog(env, 2375);
 							case SETPRO5:
@@ -107,7 +106,7 @@ public class _3934TheQuestForTemplars extends QuestHandler {
 				// 6 - Talk with Belicanon
 				case 798364:
 					if (var == 5) {
-						switch (dialog) {
+						switch (dialogActionId) {
 							case QUEST_SELECT:
 								return sendQuestDialog(env, 2716);
 							case SETPRO6:
@@ -118,7 +117,7 @@ public class _3934TheQuestForTemplars extends QuestHandler {
 				// 7 - Talk with Mahelnu
 				case 798365:
 					if (var == 6) {
-						switch (dialog) {
+						switch (dialogActionId) {
 							case QUEST_SELECT:
 								return sendQuestDialog(env, 3057);
 							case SETPRO7:
@@ -129,7 +128,7 @@ public class _3934TheQuestForTemplars extends QuestHandler {
 				// 8 - Talk with Pater
 				case 798366:
 					if (var == 7) {
-						switch (dialog) {
+						switch (dialogActionId) {
 							case QUEST_SELECT:
 								return sendQuestDialog(env, 3398);
 							case SETPRO8:
@@ -139,7 +138,7 @@ public class _3934TheQuestForTemplars extends QuestHandler {
 					break;
 				// 9 - Report the result to Jucleas with the Oath Stone
 				case 203752:
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var == 8) {
 								return sendQuestDialog(env, 3739);
@@ -162,7 +161,7 @@ public class _3934TheQuestForTemplars extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203701) {
-				if (dialog == DialogAction.USE_OBJECT) {
+				if (dialogActionId == USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
 				} else {
 					return sendQuestEndDialog(env, new int[] { 182206089 });

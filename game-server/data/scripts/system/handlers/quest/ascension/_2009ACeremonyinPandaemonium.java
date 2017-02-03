@@ -1,5 +1,7 @@
 package quest.ascension;
 
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.model.PlayerClass;
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
@@ -53,7 +55,7 @@ public class _2009ACeremonyinPandaemonium extends QuestHandler {
 
 		if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 203550) {
-				switch (env.getDialog()) {
+				switch (env.getDialogActionId()) {
 					case QUEST_SELECT:
 						if (var == 0) {
 							return sendQuestDialog(env, 1011);
@@ -72,12 +74,12 @@ public class _2009ACeremonyinPandaemonium extends QuestHandler {
 						}
 				}
 			} else if (targetId == 204182) {
-				switch (env.getDialog()) {
+				switch (env.getDialogActionId()) {
 					case QUEST_SELECT:
 						if (var == 1)
 							return sendQuestDialog(env, 1352);
 						return false;
-					case SELECT_ACTION_1353:
+					case SELECT2_1:
 						if (var == 1) {
 							playQuestMovie(env, 121);
 							return false;
@@ -87,12 +89,12 @@ public class _2009ACeremonyinPandaemonium extends QuestHandler {
 						return defaultCloseDialog(env, 1, 2); // 2
 				}
 			} else if (targetId == 204075) {
-				switch (env.getDialog()) {
+				switch (env.getDialogActionId()) {
 					case QUEST_SELECT:
 						if (var == 2)
 							return sendQuestDialog(env, 1693);
 						return false;
-					case SELECT_ACTION_1694:
+					case SELECT3_1:
 						if (var == 2) {
 							playQuestMovie(env, 122);
 							return false;
@@ -121,43 +123,43 @@ public class _2009ACeremonyinPandaemonium extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204080 && var == 10) {
-				switch (env.getDialogId()) {
-					case -1:
+				switch (env.getDialogActionId()) {
+					case USE_OBJECT:
 						return sendQuestDialog(env, 2034);
 					default:
 						return sendQuestEndDialog(env, 0);
 				}
 			} else if (targetId == 204081 && var == 20) {
-				switch (env.getDialogId()) {
-					case -1:
+				switch (env.getDialogActionId()) {
+					case USE_OBJECT:
 						return sendQuestDialog(env, 2375);
 					default:
 						return sendQuestEndDialog(env, 1);
 				}
 			} else if (targetId == 204082 && var == 30) {
-				switch (env.getDialogId()) {
-					case -1:
+				switch (env.getDialogActionId()) {
+					case USE_OBJECT:
 						return sendQuestDialog(env, 2716);
 					default:
 						return sendQuestEndDialog(env, 2);
 				}
 			} else if (targetId == 204083 && var == 40) {
-				switch (env.getDialogId()) {
-					case -1:
+				switch (env.getDialogActionId()) {
+					case USE_OBJECT:
 						return sendQuestDialog(env, 3057);
 					default:
 						return sendQuestEndDialog(env, 3);
 				}
 			} else if (targetId == 801220 && var == 50) {
-				switch (env.getDialogId()) {
-					case -1:
+				switch (env.getDialogActionId()) {
+					case USE_OBJECT:
 						return sendQuestDialog(env, 3398);
 					default:
 						return sendQuestEndDialog(env, 4);
 				}
 			} else if (targetId == 801221 && var == 60) {
-				switch (env.getDialogId()) {
-					case -1:
+				switch (env.getDialogActionId()) {
+					case USE_OBJECT:
 						return sendQuestDialog(env, 3739);
 					default:
 						return sendQuestEndDialog(env, 5);

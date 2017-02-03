@@ -1,6 +1,6 @@
 package quest.esoterrace;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
@@ -19,10 +19,8 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
  */
 public class _28406FindersFee extends QuestHandler {
 
-	private final static int questId = 28406;
-
 	public _28406FindersFee() {
-		super(questId);
+		super(28406);
 	}
 
 	@Override
@@ -39,16 +37,16 @@ public class _28406FindersFee extends QuestHandler {
 		int targetId = env.getTargetId();
 
 		if (targetId == 0) {
-			if (env.getDialog() == DialogAction.QUEST_ACCEPT_1) {
+			if (env.getDialogActionId() == QUEST_ACCEPT_1) {
 				QuestService.startQuest(env);
 				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(0, 0));
 				return true;
 			}
 		} else if (targetId == 799557) {
 			if (qs != null) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT && qs.getStatus() == QuestStatus.START)
+				if (env.getDialogActionId() == QUEST_SELECT && qs.getStatus() == QuestStatus.START)
 					return sendQuestDialog(env, 2375);
-				else if (env.getDialog() == DialogAction.SELECT_QUEST_REWARD) {
+				else if (env.getDialogActionId() == SELECT_QUEST_REWARD) {
 					player.getInventory().decreaseByItemId(182215015, 1);
 					qs.setQuestVar(1);
 					qs.setStatus(QuestStatus.REWARD);

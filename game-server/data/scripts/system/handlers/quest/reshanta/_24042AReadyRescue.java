@@ -1,6 +1,7 @@
 package quest.reshanta;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -14,11 +15,10 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _24042AReadyRescue extends QuestHandler {
 
-	private final static int questId = 24042;
 	private final static int[] npcs = { 278002, 278019, 278088, 253626 };
 
 	public _24042AReadyRescue() {
-		super(questId);
+		super(24042);
 	}
 
 	@Override
@@ -47,7 +47,7 @@ public class _24042AReadyRescue extends QuestHandler {
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 278002: // Jebal
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case QUEST_SELECT:
 							if (var == 0)
 								return sendQuestDialog(env, 1011);
@@ -57,7 +57,7 @@ public class _24042AReadyRescue extends QuestHandler {
 					}
 					break;
 				case 278019: // Lakadi
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case QUEST_SELECT:
 							if (var == 1)
 								return sendQuestDialog(env, 1352);
@@ -67,7 +67,7 @@ public class _24042AReadyRescue extends QuestHandler {
 					}
 					break;
 				case 278088: // Glati
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case QUEST_SELECT:
 							if (var == 2)
 								return sendQuestDialog(env, 1693);
@@ -77,13 +77,13 @@ public class _24042AReadyRescue extends QuestHandler {
 					}
 					break;
 				case 253626: // Captured Asmodian Prisoner
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case QUEST_SELECT:
 							if (var == 3) {
 								return sendQuestDialog(env, 2034);
 							}
 							return false;
-						case SELECT_ACTION_2035:
+						case SELECT4_1:
 							playQuestMovie(env, 294);
 							return sendQuestDialog(env, 2035);
 						case SETPRO4:
@@ -93,7 +93,7 @@ public class _24042AReadyRescue extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 278019) { // Lakadi
-				if (env.getDialog() == DialogAction.USE_OBJECT)
+				if (env.getDialogActionId() == USE_OBJECT)
 					return sendQuestDialog(env, 10002);
 				else
 					return sendQuestEndDialog(env);

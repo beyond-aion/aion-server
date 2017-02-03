@@ -139,7 +139,7 @@ public class DredgionInstance2 extends GeneralInstanceHandler {
 				ItemService.addItem(player, 186000147, 1); // Mithril Medal
 			}
 			AbyssPointsService.addAp(player, (int) (abyssPoint * RateConfig.DREDGION_REWARD_RATE));
-			QuestEnv env = new QuestEnv(null, player, 0, 0);
+			QuestEnv env = new QuestEnv(null, player, 0);
 			QuestEngine.getInstance().onDredgionReward(env);
 		}
 		for (Npc npc : instance.getNpcs())

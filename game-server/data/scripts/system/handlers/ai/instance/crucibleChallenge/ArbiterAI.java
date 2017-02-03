@@ -2,7 +2,7 @@ package ai.instance.crucibleChallenge;
 
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.NpcAI;
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.services.teleport.TeleportService;
@@ -24,9 +24,9 @@ public class ArbiterAI extends NpcAI {
 	}
 
 	@Override
-	public boolean onDialogSelect(Player player, int dialogId, int questId, int extendedRewardIndex) {
+	public boolean onDialogSelect(Player player, int dialogActionId, int questId, int extendedRewardIndex) {
 		int instanceId = getPosition().getInstanceId();
-		if (dialogId == DialogAction.SETPRO1.id() && player.getInventory().decreaseByItemId(186000134, 1)) {
+		if (dialogActionId == SETPRO1 && player.getInventory().decreaseByItemId(186000134, 1)) {
 			switch (getNpcId()) {
 				case 205682:
 					TeleportService.teleportTo(player, 300320000, instanceId, 357.10208f, 1662.702f, 95.9803f, (byte) 60);

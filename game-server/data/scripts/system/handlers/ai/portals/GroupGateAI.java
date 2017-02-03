@@ -3,8 +3,8 @@ package ai.portals;
 import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE.STR_SKILL_CAN_NOT_USE_GROUPGATE_NO_RIGHT;
 
 import com.aionemu.gameserver.ai.AIActions;
-import com.aionemu.gameserver.ai.AIRequest;
 import com.aionemu.gameserver.ai.AIName;
+import com.aionemu.gameserver.ai.AIRequest;
 import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Creature;

@@ -1,6 +1,6 @@
 package quest.pandaemonium;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
@@ -18,11 +18,10 @@ import com.aionemu.gameserver.world.WorldMapType;
  */
 public class _2938SecretLibraryAccess extends QuestHandler {
 
-	private final static int questId = 2938;
 	private final static int[] npc_ids = { 204267, 203557 }; // Oubliette and Suthran
 
 	public _2938SecretLibraryAccess() {
-		super(questId);
+		super(2938);
 	}
 
 	@Override
@@ -49,19 +48,19 @@ public class _2938SecretLibraryAccess extends QuestHandler {
 
 		if (targetId == 204267) {
 			if (qs == null || qs.isStartable()) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
+				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 4762);
 				else
 					return sendQuestStartDialog(env);
 			} else if (qs.getStatus() == QuestStatus.REWARD && qs.getQuestVarById(0) == 0) {
-				if (env.getDialog() == DialogAction.USE_OBJECT && qs.getStatus() == QuestStatus.REWARD)
+				if (env.getDialogActionId() == USE_OBJECT && qs.getStatus() == QuestStatus.REWARD)
 					return sendQuestDialog(env, 10002);
-				else if (env.getDialogId() == DialogAction.SELECTED_QUEST_NOREWARD.id()) {
+				else if (env.getDialogActionId() == SELECTED_QUEST_NOREWARD) {
 					removeQuestItem(env, 182207026, 1);
 					qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
 					updateQuestStatus(env);
 					return sendQuestEndDialog(env);
-				} else if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id()) {
+				} else if (env.getDialogActionId() == SELECT_QUEST_REWARD) {
 					return sendQuestEndDialog(env);
 				}
 			} else if (qs.getStatus() == QuestStatus.COMPLETE) {
@@ -75,12 +74,12 @@ public class _2938SecretLibraryAccess extends QuestHandler {
 			}
 		} else if (targetId == 203557) {
 			if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 0) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT) {
+				if (env.getDialogActionId() == QUEST_SELECT) {
 					if (AreAltgardQuestsFinished(player)) {
 						return sendQuestDialog(env, 1011);
 					} else
 						return sendQuestDialog(env, 1097);
-				} else if (env.getDialogId() == DialogAction.SET_SUCCEED.id()) {
+				} else if (env.getDialogActionId() == SET_SUCCEED) {
 					if (giveQuestItem(env, 182207026, 1)) {
 						qs.setStatus(QuestStatus.REWARD);
 						updateQuestStatus(env);

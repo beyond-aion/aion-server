@@ -3,7 +3,7 @@ package quest.morheim;
 import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.ai.event.AIEventType;
 import com.aionemu.gameserver.ai.manager.WalkManager;
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Item;
@@ -25,10 +25,8 @@ import com.aionemu.gameserver.world.zone.ZoneName;
  */
 public class _2333ARibbitOutOfWater extends QuestHandler {
 
-	private final static int questId = 2333;
-
 	public _2333ARibbitOutOfWater() {
-		super(questId);
+		super(2333);
 	}
 
 	public void register() {
@@ -47,12 +45,12 @@ public class _2333ARibbitOutOfWater extends QuestHandler {
 	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 798084) {
-				if (dialog == DialogAction.QUEST_SELECT) {
+				if (dialogActionId == QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);
 				} else {
 					return sendQuestStartDialog(env);
@@ -61,14 +59,14 @@ public class _2333ARibbitOutOfWater extends QuestHandler {
 		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			if (targetId == 798084) {
-				if (dialog == DialogAction.QUEST_SELECT) {
+				if (dialogActionId == QUEST_SELECT) {
 					if (var == 0)
 						return sendQuestDialog(env, 1011);
 					else if (var == 1)
 						return sendQuestDialog(env, 1352);
-				} else if (dialog == DialogAction.CHECK_USER_HAS_QUEST_ITEM) {
+				} else if (dialogActionId == CHECK_USER_HAS_QUEST_ITEM) {
 					return checkQuestItems(env, 0, 1, false, 10000, 10001);
-				} else if (dialog == DialogAction.SETPRO2) {
+				} else if (dialogActionId == SETPRO2) {
 					Npc debrie = (Npc) QuestService.spawnQuestNpc(player.getWorldId(), player.getInstanceId(), 204416, player.getX(), player.getY(),
 						player.getZ(), (byte) 8);
 					WalkManager.startWalking((NpcAI) debrie.getAi());

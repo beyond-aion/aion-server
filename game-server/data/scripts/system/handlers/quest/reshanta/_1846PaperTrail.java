@@ -1,6 +1,7 @@
 package quest.reshanta;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -18,10 +19,8 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 public class _1846PaperTrail extends QuestHandler {
 
-	private final static int questId = 1846;
-
 	public _1846PaperTrail() {
-		super(questId);
+		super(1846);
 	}
 
 	@Override
@@ -42,7 +41,7 @@ public class _1846PaperTrail extends QuestHandler {
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 0) {
-				if (env.getDialog() == DialogAction.QUEST_ACCEPT_1) {
+				if (env.getDialogActionId() == QUEST_ACCEPT_1) {
 					QuestService.startQuest(env);
 					return closeDialogWindow(env);
 				}
@@ -54,9 +53,9 @@ public class _1846PaperTrail extends QuestHandler {
 		int var = qs.getQuestVarById(0);
 		if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 798024) {
-				if (env.getDialog() == DialogAction.USE_OBJECT)
+				if (env.getDialogActionId() == USE_OBJECT)
 					return sendQuestDialog(env, 2375);
-				else if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id())
+				else if (env.getDialogActionId() == SELECT_QUEST_REWARD)
 					return sendQuestDialog(env, 5);
 				else
 					return sendQuestEndDialog(env);
@@ -65,7 +64,7 @@ public class _1846PaperTrail extends QuestHandler {
 			return false;
 		}
 		if (targetId == 279015) {
-			switch (env.getDialog()) {
+			switch (env.getDialogActionId()) {
 				case QUEST_SELECT:
 					if (var == 0)
 						return sendQuestDialog(env, 1352);
@@ -80,7 +79,7 @@ public class _1846PaperTrail extends QuestHandler {
 					return false;
 			}
 		} else if (targetId == 279005) {
-			switch (env.getDialog()) {
+			switch (env.getDialogActionId()) {
 				case QUEST_SELECT:
 					if (var == 1)
 						return sendQuestDialog(env, 1693);

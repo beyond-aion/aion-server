@@ -1,6 +1,6 @@
 package quest.talocs_hollow;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -31,14 +31,14 @@ public class _11467DeathToTheQueen extends QuestHandler {
 	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 799527) {
-				if (dialog == DialogAction.QUEST_SELECT) {
+				if (dialogActionId == QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);
-				} else if (dialog == DialogAction.QUEST_ACCEPT_1) {
+				} else if (dialogActionId == QUEST_ACCEPT_1) {
 					QuestService.questTimerStart(env, 480);
 					return sendQuestStartDialog(env);
 				} else {
@@ -55,7 +55,7 @@ public class _11467DeathToTheQueen extends QuestHandler {
 			else if (var == 3)
 				rewardGroup = 3;
 			if (targetId == 799503) {
-				if (dialog == DialogAction.USE_OBJECT) {
+				if (dialogActionId == USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
 				} else {
 					return sendQuestEndDialog(env, rewardGroup);

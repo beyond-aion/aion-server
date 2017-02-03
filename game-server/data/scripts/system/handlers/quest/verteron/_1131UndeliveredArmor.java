@@ -1,6 +1,7 @@
 package quest.verteron;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -14,10 +15,8 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 public class _1131UndeliveredArmor extends QuestHandler {
 
-	private final static int questId = 1131;
-
 	public _1131UndeliveredArmor() {
-		super(questId);
+		super(1131);
 	}
 
 	@Override
@@ -36,14 +35,14 @@ public class _1131UndeliveredArmor extends QuestHandler {
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 203097) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
+				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 1011);
 				else
 					return sendQuestStartDialog(env);
 			}
 		} else if (qs != null && qs.getStatus() == QuestStatus.START) {
 			if (targetId == 799093) {
-				switch (env.getDialog()) {
+				switch (env.getDialogActionId()) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 1352);
 					case SETPRO1:
@@ -55,7 +54,7 @@ public class _1131UndeliveredArmor extends QuestHandler {
 						return sendQuestStartDialog(env);
 				}
 			} else if (targetId == 203101) {
-				switch (env.getDialog()) {
+				switch (env.getDialogActionId()) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 2375);
 					case SELECT_QUEST_REWARD:

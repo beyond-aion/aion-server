@@ -1,6 +1,6 @@
 package quest.brusthonin;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
@@ -15,10 +15,8 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 public class _4036HeirnirWantstoRest extends QuestHandler {
 
-	private final static int questId = 4036;
-
 	public _4036HeirnirWantstoRest() {
-		super(questId);
+		super(4036);
 	}
 
 	@Override
@@ -38,14 +36,14 @@ public class _4036HeirnirWantstoRest extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (targetId == 205187) {
 			if (qs == null || qs.isStartable()) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
+				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 1011);
 				else
 					return sendQuestStartDialog(env);
 			} else if (qs != null && qs.getStatus() == QuestStatus.START) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
+				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 2375);
-				else if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id() && qs.getStatus() != QuestStatus.COMPLETE) {
+				else if (env.getDialogActionId() == SELECT_QUEST_REWARD && qs.getStatus() != QuestStatus.COMPLETE) {
 					qs.setStatus(QuestStatus.REWARD);
 					updateQuestStatus(env);
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
@@ -57,9 +55,9 @@ public class _4036HeirnirWantstoRest extends QuestHandler {
 			}
 		} else if (targetId == 205144) {
 			if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 0) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
+				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 1352);
-				else if (env.getDialog() == DialogAction.SETPRO1) {
+				else if (env.getDialogActionId() == SETPRO1) {
 					qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
 					updateQuestStatus(env);
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
@@ -69,9 +67,9 @@ public class _4036HeirnirWantstoRest extends QuestHandler {
 			}
 		} else if (targetId == 205190) {
 			if (qs != null) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT && qs.getStatus() == QuestStatus.START)
+				if (env.getDialogActionId() == QUEST_SELECT && qs.getStatus() == QuestStatus.START)
 					return sendQuestDialog(env, 2375);
-				else if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id() && qs.getStatus() != QuestStatus.COMPLETE) {
+				else if (env.getDialogActionId() == SELECT_QUEST_REWARD && qs.getStatus() != QuestStatus.COMPLETE) {
 					qs.setQuestVar(3);
 					qs.setStatus(QuestStatus.REWARD);
 					updateQuestStatus(env);

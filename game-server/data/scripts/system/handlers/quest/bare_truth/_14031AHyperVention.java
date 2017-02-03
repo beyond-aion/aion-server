@@ -1,6 +1,7 @@
 package quest.bare_truth;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.actions.NpcActions;
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Item;
@@ -47,14 +48,14 @@ public class _14031AHyperVention extends QuestHandler {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		int targetId = env.getTargetId();
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		if (qs == null)
 			return false;
 		if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			switch (targetId) {
 				case 203700:// Fasimedes
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							return sendQuestDialog(env, 1011);
 						case SETPRO1:
@@ -64,7 +65,7 @@ public class _14031AHyperVention extends QuestHandler {
 					}
 					break;
 				case 801216:// Losthes
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							return sendQuestDialog(env, 1352);
 						case SETPRO2:
@@ -74,7 +75,7 @@ public class _14031AHyperVention extends QuestHandler {
 					}
 					break;
 				case 790001:// Pernos
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							return sendQuestDialog(env, 1693);
 						case SETPRO3:
@@ -86,7 +87,7 @@ public class _14031AHyperVention extends QuestHandler {
 					}
 					break;
 				case 203183:// Khidia
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							return sendQuestDialog(env, 2375);
 						case SETPRO5:
@@ -98,7 +99,7 @@ public class _14031AHyperVention extends QuestHandler {
 					}
 					break;
 				case 203989:// Tumblusen
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var == 6) {
 								return sendQuestDialog(env, 3057);
@@ -123,7 +124,7 @@ public class _14031AHyperVention extends QuestHandler {
 					}
 					break;
 				case 730888:// Large Teleporter
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							Npc npc = (Npc) env.getVisibleObject();
 							if (targetId == 730888)
@@ -137,7 +138,7 @@ public class _14031AHyperVention extends QuestHandler {
 					}
 					break;
 				case 730898:// Broken Large Teleporter
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							Npc npc = (Npc) env.getVisibleObject();
 							if (targetId == 730898)
@@ -152,7 +153,7 @@ public class _14031AHyperVention extends QuestHandler {
 		}
 		if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203700)// Fasimedes
-				switch (dialog) {
+				switch (dialogActionId) {
 					case USE_OBJECT:
 						return sendQuestDialog(env, 4083);
 					case SELECT_QUEST_REWARD:

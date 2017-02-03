@@ -5,7 +5,7 @@ import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.ai.handler.TalkEventHandler;
 import com.aionemu.gameserver.ai.poll.AIQuestion;
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
@@ -25,11 +25,11 @@ public class SiegeCannonAI extends NpcAI {
 	}
 
 	@Override
-	public boolean onDialogSelect(Player player, int dialogId, int questId, int extendedRewardIndex) {
+	public boolean onDialogSelect(Player player, int dialogActionId, int questId, int extendedRewardIndex) {
 		int morphSkill = getMorphSkill();
 		Npc owner = getOwner();
 
-		if ((DialogAction.getByActionId(dialogId)) == DialogAction.SETPRO1 && (morphSkill != 0)) {
+		if (dialogActionId == SETPRO1 && morphSkill != 0) {
 			TeleportService.teleportTo(player, owner.getWorldId(), owner.getInstanceId(), owner.getX(), owner.getY(), owner.getZ(), owner.getHeading());
 			SkillEngine.getInstance().getSkill(getOwner(), morphSkill >> 8, morphSkill & 0xFF, player).useNoAnimationSkill();
 			player.getController().stopProtectionActiveTask();

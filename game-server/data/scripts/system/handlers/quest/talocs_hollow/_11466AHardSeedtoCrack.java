@@ -1,6 +1,7 @@
 package quest.talocs_hollow;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
@@ -19,10 +20,8 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
  */
 public class _11466AHardSeedtoCrack extends QuestHandler {
 
-	private final static int questId = 11466;
-
 	public _11466AHardSeedtoCrack() {
-		super(questId);
+		super(11466);
 	}
 
 	@Override
@@ -35,15 +34,15 @@ public class _11466AHardSeedtoCrack extends QuestHandler {
 	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		int targetId = env.getTargetId();
 
 		if (targetId == 0) {
-			if (env.getDialogId() == DialogAction.QUEST_ACCEPT_1.id()) {
+			if (env.getDialogActionId() == QUEST_ACCEPT_1) {
 				QuestService.startQuest(env);
 				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(0, 0));
 				return true;
-			} else if (env.getDialogId() == DialogAction.QUEST_REFUSE_1.id()) {
+			} else if (env.getDialogActionId() == QUEST_REFUSE_1) {
 				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(0, 0));
 				return true;
 			}
@@ -52,7 +51,7 @@ public class _11466AHardSeedtoCrack extends QuestHandler {
 			return false;
 		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 279000) {
-				switch (dialog) {
+				switch (dialogActionId) {
 					case USE_OBJECT:
 						return sendQuestDialog(env, 2375);
 					case SELECT_QUEST_REWARD:

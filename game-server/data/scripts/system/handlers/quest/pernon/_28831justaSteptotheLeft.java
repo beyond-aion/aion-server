@@ -1,10 +1,11 @@
 package quest.pernon;
 
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.house.House;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -17,7 +18,6 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _28831justaSteptotheLeft extends QuestHandler {
 
-	private static final int questId = 28831;
 	private static final Set<Integer> butlers;
 
 	static {
@@ -30,7 +30,7 @@ public class _28831justaSteptotheLeft extends QuestHandler {
 	}
 
 	public _28831justaSteptotheLeft() {
-		super(questId);
+		super(28831);
 	}
 
 	@Override
@@ -47,12 +47,12 @@ public class _28831justaSteptotheLeft extends QuestHandler {
 	public boolean onDialogEvent(QuestEnv env) {
 		final Player player = env.getPlayer();
 		int targetId = env.getTargetId();
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 830651) {
-				switch (dialog) {
+				switch (dialogActionId) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 1011);
 					case QUEST_ACCEPT_1:
@@ -66,7 +66,7 @@ public class _28831justaSteptotheLeft extends QuestHandler {
 			House house = player.getActiveHouse();
 			if (house.getButler().getNpcId() != targetId)
 				return false;
-			switch (dialog) {
+			switch (dialogActionId) {
 				case USE_OBJECT:
 					return sendQuestDialog(env, 2375);
 				case SELECT_QUEST_REWARD:

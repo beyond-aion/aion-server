@@ -1,6 +1,6 @@
 package quest.morheim;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -13,10 +13,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _2484OurManInElysea extends QuestHandler {
 
-	private final static int questId = 2484;
-
 	public _2484OurManInElysea() {
-		super(questId);
+		super(2484);
 	}
 
 	@Override
@@ -36,9 +34,9 @@ public class _2484OurManInElysea extends QuestHandler {
 		final QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 204407) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
+				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 4762);
-				else if (env.getDialogId() == DialogAction.QUEST_ACCEPT_1.id()) {
+				else if (env.getDialogActionId() == QUEST_ACCEPT_1) {
 					if (giveQuestItem(env, 182204205, 1))
 						return sendQuestStartDialog(env);
 					else
@@ -49,7 +47,7 @@ public class _2484OurManInElysea extends QuestHandler {
 		} else if (qs != null && qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 700267:
-					if (qs.getQuestVarById(0) == 0 && env.getDialog() == DialogAction.USE_OBJECT) {
+					if (qs.getQuestVarById(0) == 0 && env.getDialogActionId() == USE_OBJECT) {
 						qs.setQuestVarById(0, 1);
 						updateQuestStatus(env);
 						removeQuestItem(env, 182204205, 1);
@@ -57,9 +55,9 @@ public class _2484OurManInElysea extends QuestHandler {
 					return false;
 				case 203331:
 					if (qs.getQuestVarById(0) == 1) {
-						if (env.getDialogId() == DialogAction.SELECTED_QUEST_NOREWARD.id())
+						if (env.getDialogActionId() == SELECTED_QUEST_NOREWARD)
 							return sendQuestDialog(env, 5);
-						else if (env.getDialog() == DialogAction.QUEST_SELECT) {
+						else if (env.getDialogActionId() == QUEST_SELECT) {
 							qs.setStatus(QuestStatus.REWARD);
 							updateQuestStatus(env);
 							return sendQuestDialog(env, 5);

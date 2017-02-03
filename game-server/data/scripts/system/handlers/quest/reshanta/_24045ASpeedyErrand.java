@@ -1,6 +1,7 @@
 package quest.reshanta;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -19,11 +20,10 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 public class _24045ASpeedyErrand extends QuestHandler {
 
-	private final static int questId = 24045;
 	private final static int[] npc_ids = { 278034, 279004, 279024, 279006 };
 
 	public _24045ASpeedyErrand() {
-		super(questId);
+		super(24045);
 	}
 
 	@Override
@@ -58,7 +58,7 @@ public class _24045ASpeedyErrand extends QuestHandler {
 
 		if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 278034) {
-				if (env.getDialog() == DialogAction.USE_OBJECT)
+				if (env.getDialogActionId() == USE_OBJECT)
 					return sendQuestDialog(env, 10002);
 				return sendQuestEndDialog(env);
 			}
@@ -67,7 +67,7 @@ public class _24045ASpeedyErrand extends QuestHandler {
 			return false;
 		}
 		if (targetId == 278034) {
-			switch (env.getDialog()) {
+			switch (env.getDialogActionId()) {
 				case QUEST_SELECT:
 					if (var == 0)
 						return sendQuestDialog(env, 1011);
@@ -81,12 +81,12 @@ public class _24045ASpeedyErrand extends QuestHandler {
 					}
 			}
 		} else if (targetId == 279004) {
-			switch (env.getDialog()) {
+			switch (env.getDialogActionId()) {
 				case QUEST_SELECT:
 					if (var == 1)
 						return sendQuestDialog(env, 1352);
 					return false;
-				case SELECT_ACTION_1353:
+				case SELECT2_1:
 					playQuestMovie(env, 292);
 					break;
 				case SETPRO2:
@@ -98,7 +98,7 @@ public class _24045ASpeedyErrand extends QuestHandler {
 					}
 			}
 		} else if (targetId == 279024) {
-			switch (env.getDialog()) {
+			switch (env.getDialogActionId()) {
 				case QUEST_SELECT:
 					if (var == 2)
 						return sendQuestDialog(env, 1693);
@@ -126,7 +126,7 @@ public class _24045ASpeedyErrand extends QuestHandler {
 					}
 			}
 		} else if (targetId == 279006) {
-			switch (env.getDialog()) {
+			switch (env.getDialogActionId()) {
 				case QUEST_SELECT:
 					if (var == 3)
 						return sendQuestDialog(env, 2034);

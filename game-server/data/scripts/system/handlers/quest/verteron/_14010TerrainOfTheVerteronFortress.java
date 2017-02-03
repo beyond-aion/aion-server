@@ -1,6 +1,6 @@
 package quest.verteron;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -37,7 +37,7 @@ public class _14010TerrainOfTheVerteronFortress extends QuestHandler {
 		if (targetId != 203098)
 			return false;
 		if (qs.getStatus() == QuestStatus.START) {
-			if (env.getDialog() == DialogAction.QUEST_SELECT) {
+			if (env.getDialogActionId() == QUEST_SELECT) {
 				qs.setStatus(QuestStatus.REWARD);
 				updateQuestStatus(env);
 				return sendQuestDialog(env, 1011);

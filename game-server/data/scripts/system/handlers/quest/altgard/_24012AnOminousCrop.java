@@ -1,6 +1,7 @@
 package quest.altgard;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -37,19 +38,19 @@ public class _24012AnOminousCrop extends QuestHandler {
 
 		final int var = qs.getQuestVarById(0);
 		int targetId = env.getTargetId();
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 203605: // Loriniah
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var == 0)
 								return sendQuestDialog(env, 1011);
 							else if (var == 5)
 								return sendQuestDialog(env, 2716);
 							return false;
-						case SELECT_ACTION_1013:
+						case SELECT1_1_1:
 							playQuestMovie(env, 61);
 							return sendQuestDialog(env, 1013);
 						case SETPRO1:
@@ -59,7 +60,7 @@ public class _24012AnOminousCrop extends QuestHandler {
 					}
 					break;
 				case 700096: // MuMu Cart
-					switch (dialog) {
+					switch (dialogActionId) {
 						case USE_OBJECT:
 							if (var >= 2 && var < 5) {
 								return useQuestObject(env, var, var + 1, false, true); // 4,5

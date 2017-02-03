@@ -1,6 +1,7 @@
 package quest.terath_dredgion;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -13,10 +14,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _30610TheGoodNewsAndBad extends QuestHandler {
 
-	private final static int questId = 30610;
-
 	public _30610TheGoodNewsAndBad() {
-		super(questId);
+		super(30610);
 	}
 
 	@Override
@@ -33,13 +32,13 @@ public class _30610TheGoodNewsAndBad extends QuestHandler {
 	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.isStartable()) {
 			switch (targetId) {
 				case 205864:
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							return sendQuestDialog(env, 1011);
 						default:
@@ -50,7 +49,7 @@ public class _30610TheGoodNewsAndBad extends QuestHandler {
 			int var = qs.getQuestVarById(0);
 			switch (targetId) {
 				case 800327:
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							return sendQuestDialog(env, 1352);
 						case SETPRO1: {
@@ -59,7 +58,7 @@ public class _30610TheGoodNewsAndBad extends QuestHandler {
 					}
 					return false;
 				case 205864:
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							return sendQuestDialog(env, 2375);
 						case SELECT_QUEST_REWARD: {

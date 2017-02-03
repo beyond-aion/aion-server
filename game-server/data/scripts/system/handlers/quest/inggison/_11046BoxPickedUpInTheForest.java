@@ -1,6 +1,7 @@
 package quest.inggison;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -19,10 +20,8 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 public class _11046BoxPickedUpInTheForest extends QuestHandler {
 
-	private final static int questId = 11046;
-
 	public _11046BoxPickedUpInTheForest() {
-		super(questId);
+		super(11046);
 	}
 
 	@Override
@@ -40,7 +39,7 @@ public class _11046BoxPickedUpInTheForest extends QuestHandler {
 		if (env.getVisibleObject() instanceof Npc)
 			targetId = ((Npc) env.getVisibleObject()).getNpcId();
 		if (targetId == 0) {
-			switch (env.getDialog()) {
+			switch (env.getDialogActionId()) {
 				case QUEST_ACCEPT_1:
 					QuestService.startQuest(env);
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(0, 0));
@@ -51,9 +50,9 @@ public class _11046BoxPickedUpInTheForest extends QuestHandler {
 			}
 		} else if (targetId == 798954) {
 			if (qs != null) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT && qs.getStatus() == QuestStatus.START) {
+				if (env.getDialogActionId() == QUEST_SELECT && qs.getStatus() == QuestStatus.START) {
 					return sendQuestDialog(env, 2375);
-				} else if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id() && qs.getStatus() != QuestStatus.COMPLETE) {
+				} else if (env.getDialogActionId() == SELECT_QUEST_REWARD && qs.getStatus() != QuestStatus.COMPLETE) {
 					removeQuestItem(env, 182206745, 1);
 					qs.setQuestVar(1);
 					qs.setStatus(QuestStatus.REWARD);

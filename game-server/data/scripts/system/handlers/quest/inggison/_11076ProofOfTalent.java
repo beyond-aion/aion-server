@@ -1,6 +1,6 @@
 package quest.inggison;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -14,10 +14,8 @@ import com.aionemu.gameserver.services.teleport.TeleportService;
  */
 public class _11076ProofOfTalent extends QuestHandler {
 
-	private final static int questId = 11076;
-
 	public _11076ProofOfTalent() {
-		super(questId);
+		super(11076);
 	}
 
 	@Override
@@ -32,12 +30,12 @@ public class _11076ProofOfTalent extends QuestHandler {
 	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 799025) {
-				if (dialog == DialogAction.QUEST_SELECT) {
+				if (dialogActionId == QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);
 				} else {
 					return sendQuestStartDialog(env);
@@ -45,17 +43,17 @@ public class _11076ProofOfTalent extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 799084) {
-				if (dialog == DialogAction.QUEST_SELECT) {
+				if (dialogActionId == QUEST_SELECT) {
 					if (qs.getQuestVarById(0) == 3)
 						return sendQuestDialog(env, 2034);
-				} else if (dialog == DialogAction.SETPRO4) {
+				} else if (dialogActionId == SETPRO4) {
 					TeleportService.teleportTo(player, 210050000, 1338.6f, 279.6f, 590, (byte) 80, TeleportAnimation.FADE_OUT_BEAM);
 					return defaultCloseDialog(env, 3, 4, true, false);
 				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 799025) {
-				if (dialog == DialogAction.USE_OBJECT) {
+				if (dialogActionId == USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
 				}
 				return sendQuestEndDialog(env);

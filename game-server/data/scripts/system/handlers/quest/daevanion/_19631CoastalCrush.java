@@ -1,6 +1,6 @@
 package quest.daevanion;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -12,12 +12,11 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _19631CoastalCrush extends QuestHandler {
 
-	private static final int questId = 19631;
 	private static final int[] npcIds = { 798155, 800411 }; // Atropos & Banirinrinerk
 	private static final int[] mobIds = { 214216, 214217, 214198, 214199 };
 
 	public _19631CoastalCrush() {
-		super(questId);
+		super(19631);
 	}
 
 	@Override
@@ -35,12 +34,12 @@ public class _19631CoastalCrush extends QuestHandler {
 	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == npcIds[0]) { // Atropos
-				if (dialog == DialogAction.QUEST_SELECT) {
+				if (dialogActionId == QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);
 				} else {
 					return sendQuestStartDialog(env);
@@ -48,7 +47,7 @@ public class _19631CoastalCrush extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == npcIds[1]) { // Banirinrinerk
-				if (dialog == DialogAction.USE_OBJECT) {
+				if (dialogActionId == USE_OBJECT) {
 					return sendQuestDialog(env, 5);
 				} else {
 					return sendQuestEndDialog(env);

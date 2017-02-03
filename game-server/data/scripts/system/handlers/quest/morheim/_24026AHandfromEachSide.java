@@ -1,8 +1,9 @@
 package quest.morheim;
 
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import java.util.List;
 
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -66,11 +67,11 @@ public class _24026AHandfromEachSide extends QuestHandler {
 			return false;
 		int var = qs.getQuestVarById(0);
 		int targetId = env.getTargetId();
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 
 		if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204301) { // Aegir
-				if (dialog == DialogAction.USE_OBJECT)
+				if (dialogActionId == USE_OBJECT)
 					return sendQuestDialog(env, 2375);
 				else
 					return sendQuestEndDialog(env);
@@ -78,7 +79,7 @@ public class _24026AHandfromEachSide extends QuestHandler {
 		} else if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 204301: // Aegir
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var == 0)
 								return sendQuestDialog(env, 1011);
@@ -90,7 +91,7 @@ public class _24026AHandfromEachSide extends QuestHandler {
 					}
 					break;
 				case 204403: // Taisan
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var == 1)
 								return sendQuestDialog(env, 1352);
@@ -102,7 +103,7 @@ public class _24026AHandfromEachSide extends QuestHandler {
 					}
 					break;
 				case 204432: // Kargate
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var == 2)
 								return sendQuestDialog(env, 1693);

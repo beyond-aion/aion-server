@@ -1,5 +1,7 @@
 package quest.levinshor;
 
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -15,10 +17,8 @@ import com.aionemu.gameserver.world.zone.ZoneName;
  */
 public class _13744AgentinNeed extends QuestHandler {
 
-	private static final int questId = 13744;
-
 	public _13744AgentinNeed() {
-		super(questId);
+		super(13744);
 	}
 
 	@Override
@@ -79,7 +79,7 @@ public class _13744AgentinNeed extends QuestHandler {
 
 		if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
 			if (env.getTargetId() == 832840) {
-				switch (env.getDialog()) {
+				switch (env.getDialogActionId()) {
 					case USE_OBJECT:
 						return sendQuestDialog(env, 10002);
 					case SELECT_QUEST_REWARD:

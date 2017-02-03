@@ -1,6 +1,7 @@
 package quest.gelkmaros;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_PLAY_MOVIE;
@@ -55,11 +56,11 @@ public class _20031GotoGelkmaros extends QuestHandler {
 		}
 		int var = qs.getQuestVarById(0);
 		int targetId = env.getTargetId();
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 
 		if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 204052) { // Vidar
-				switch (dialog) {
+				switch (dialogActionId) {
 					case QUEST_SELECT:
 						if (var == 0) {
 							return sendQuestDialog(env, 1011);
@@ -69,7 +70,7 @@ public class _20031GotoGelkmaros extends QuestHandler {
 						return defaultCloseDialog(env, var, var + 1); // 1
 				}
 			} else if (targetId == 798800) { // Agehia
-				switch (env.getDialog()) {
+				switch (env.getDialogActionId()) {
 					case QUEST_SELECT:
 						if (var == 1) {
 							return sendQuestDialog(env, 1352);
@@ -79,7 +80,7 @@ public class _20031GotoGelkmaros extends QuestHandler {
 						return defaultCloseDialog(env, var, var + 1); // 2
 				}
 			} else if (targetId == 798409) { // Tigrina
-				switch (dialog) {
+				switch (dialogActionId) {
 					case QUEST_SELECT:
 						if (var == 2) {
 							return sendQuestDialog(env, 1693);
@@ -92,7 +93,7 @@ public class _20031GotoGelkmaros extends QuestHandler {
 						return closeDialogWindow(env); // 1
 				}
 			} else if (targetId == 799225) { // Richelle
-				switch (dialog) {
+				switch (dialogActionId) {
 					case QUEST_SELECT:
 						if (var == 4) {
 							return sendQuestDialog(env, 2375);
@@ -102,20 +103,20 @@ public class _20031GotoGelkmaros extends QuestHandler {
 						return defaultCloseDialog(env, var, var + 1); // 5
 				}
 			} else if (targetId == 799364) { // Merhen
-				switch (dialog) {
+				switch (dialogActionId) {
 					case QUEST_SELECT:
 						if (var == 5) {
 							return sendQuestDialog(env, 2716);
 						}
 						break;
-					case SELECT_ACTION_2717:
+					case SELECT6_1:
 						PacketSendUtility.sendPacket(player, new SM_PLAY_MOVIE(1, 31));
 						return sendQuestDialog(env, 2717);
 					case SETPRO6:
 						return defaultCloseDialog(env, var, var + 1); // 6
 				}
 			} else if (targetId == 799365) { // Hogidin
-				switch (dialog) {
+				switch (dialogActionId) {
 					case QUEST_SELECT:
 						if (var == 6) {
 							return sendQuestDialog(env, 3057);
@@ -125,7 +126,7 @@ public class _20031GotoGelkmaros extends QuestHandler {
 						return defaultCloseDialog(env, var, var + 1); // 7
 				}
 			} else if (targetId == 799226) { // Valetta
-				switch (dialog) {
+				switch (dialogActionId) {
 					case QUEST_SELECT:
 						if (var == 7) {
 							return sendQuestDialog(env, 3398);
@@ -155,7 +156,7 @@ public class _20031GotoGelkmaros extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 799225) {
-				if (dialog == DialogAction.USE_OBJECT) {
+				if (dialogActionId == USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
 				}
 				return sendQuestEndDialog(env);

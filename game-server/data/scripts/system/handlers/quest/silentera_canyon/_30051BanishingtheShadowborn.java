@@ -1,6 +1,6 @@
 package quest.silentera_canyon;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -12,10 +12,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _30051BanishingtheShadowborn extends QuestHandler {
 
-	private final static int questId = 30051;
-
 	public _30051BanishingtheShadowborn() {
-		super(questId);
+		super(30051);
 	}
 
 	@Override
@@ -42,12 +40,12 @@ public class _30051BanishingtheShadowborn extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (env.getTargetId() == 799381) {
 			if (qs == null || qs.isStartable()) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
+				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 1011);
 				else
 					return sendQuestStartDialog(env);
 			} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
+				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 1352);
 				else
 					return sendQuestEndDialog(env);

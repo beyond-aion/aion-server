@@ -1,7 +1,8 @@
 package quest.altgard;
 
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.commons.utils.Rnd;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -43,13 +44,13 @@ public class _2252ChasingtheLegend extends QuestHandler {
 		final Player player = env.getPlayer();
 		int targetId = env.getTargetId();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == questStartNpcId) {
-				if (dialog == DialogAction.QUEST_SELECT) {
+				if (dialogActionId == QUEST_SELECT) {
 					return sendQuestDialog(env, 1011);
-				} else if (dialog == DialogAction.QUEST_ACCEPT_1) {
+				} else if (dialogActionId == QUEST_ACCEPT_1) {
 					if (QuestService.startQuest(env)) {
 						giveQuestItem(env, questActionItemId, 1);
 						return sendQuestDialog(env, 1003);
@@ -61,7 +62,7 @@ public class _2252ChasingtheLegend extends QuestHandler {
 		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			if (targetId == questStartNpcId) {
-				switch (dialog) {
+				switch (dialogActionId) {
 					case QUEST_SELECT:
 						if (var == 0) {
 							if (giveQuestItem(env, questActionItemId, 1)) { // Player hasn't action item; dialogue for a new chance
@@ -74,7 +75,7 @@ public class _2252ChasingtheLegend extends QuestHandler {
 				}
 			}
 			if (targetId == questStep1NpcId) {
-				switch (dialog) {
+				switch (dialogActionId) {
 					case USE_OBJECT:
 						final Npc npc = (Npc) player.getTarget();
 						if (npc == null)
@@ -101,7 +102,7 @@ public class _2252ChasingtheLegend extends QuestHandler {
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			int var = qs.getQuestVarById(0);
 
-			switch (dialog) {
+			switch (dialogActionId) {
 				case SELECT_QUEST_REWARD:
 				case SELECTED_QUEST_NOREWARD:
 					int reward = var - 1;

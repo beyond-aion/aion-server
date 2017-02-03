@@ -1,8 +1,8 @@
 package quest.inggison;
 
+import static com.aionemu.gameserver.model.DialogAction.*;
 import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE.STR_MSG_FULL_INVENTORY;
 
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -52,12 +52,12 @@ public class _10032HelpintheHollow extends QuestHandler {
 			return false;
 		int var = qs.getQuestVarById(0);
 		int targetId = env.getTargetId();
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 
 		if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 798952) { // Crosia
 				if (var == 0) {
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							return sendQuestDialog(env, 1011);
 						case SETPRO1:
@@ -66,7 +66,7 @@ public class _10032HelpintheHollow extends QuestHandler {
 				}
 			} else if (targetId == 798954) { // Tialla
 				if (var == 1) {
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							return sendQuestDialog(env, 1352);
 						case SETPRO2:
@@ -74,7 +74,7 @@ public class _10032HelpintheHollow extends QuestHandler {
 					}
 				}
 			} else if (targetId == 799022) { // Lothas
-				switch (dialog) {
+				switch (dialogActionId) {
 					case QUEST_SELECT:
 						if (var == 2) {
 							if (player.getInventory().getItemCountByItemId(182215618) > 0) {
@@ -106,7 +106,7 @@ public class _10032HelpintheHollow extends QuestHandler {
 						return closeDialogWindow(env);
 				}
 			} else if (targetId == 799503) { // Taloc's Mirage
-				switch (dialog) {
+				switch (dialogActionId) {
 					case QUEST_SELECT:
 						if (var == 6) {
 							return sendQuestDialog(env, 3057);
@@ -118,7 +118,7 @@ public class _10032HelpintheHollow extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 798952) { // Crosia
-				if (dialog == DialogAction.USE_OBJECT) {
+				if (dialogActionId == USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
 				}
 				return sendQuestEndDialog(env);

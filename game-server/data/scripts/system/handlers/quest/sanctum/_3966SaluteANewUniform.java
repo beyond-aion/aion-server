@@ -1,6 +1,6 @@
 package quest.sanctum;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
@@ -15,10 +15,8 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 public class _3966SaluteANewUniform extends QuestHandler {
 
-	private final static int questId = 3966;
-
 	public _3966SaluteANewUniform() {
-		super(questId);
+		super(3966);
 	}
 
 	@Override
@@ -39,7 +37,7 @@ public class _3966SaluteANewUniform extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (targetId == 798391) {
 			if (qs == null || qs.isStartable()) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
+				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 1011);
 				else
 					return sendQuestStartDialog(env);
@@ -53,9 +51,9 @@ public class _3966SaluteANewUniform extends QuestHandler {
 
 		if (targetId == 203994) {
 			if (qs.getStatus() == QuestStatus.START && var == 0) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
+				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 1352);
-				else if (env.getDialog() == DialogAction.SETPRO1) {
+				else if (env.getDialogActionId() == SETPRO1) {
 					qs.setQuestVar(++var);
 					updateQuestStatus(env);
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
@@ -65,9 +63,9 @@ public class _3966SaluteANewUniform extends QuestHandler {
 			}
 		} else if (targetId == 204030) {
 			if (qs.getStatus() == QuestStatus.START && var == 1) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
+				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 1693);
-				else if (env.getDialog() == DialogAction.SETPRO2) {
+				else if (env.getDialogActionId() == SETPRO2) {
 					qs.setQuestVar(++var);
 					updateQuestStatus(env);
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
@@ -77,9 +75,9 @@ public class _3966SaluteANewUniform extends QuestHandler {
 			}
 		} else if (targetId == 204568) {
 			if (qs.getStatus() == QuestStatus.START && var == 2) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
+				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 2034);
-				else if (env.getDialog() == DialogAction.SETPRO3) {
+				else if (env.getDialogActionId() == SETPRO3) {
 					qs.setQuestVar(++var);
 					qs.setStatus(QuestStatus.REWARD);
 					updateQuestStatus(env);
@@ -89,7 +87,7 @@ public class _3966SaluteANewUniform extends QuestHandler {
 					return sendQuestStartDialog(env);
 			}
 		} else if (targetId == 798391) {
-			if (env.getDialog() == DialogAction.USE_OBJECT && qs.getStatus() == QuestStatus.REWARD)
+			if (env.getDialogActionId() == USE_OBJECT && qs.getStatus() == QuestStatus.REWARD)
 				return sendQuestDialog(env, 2375);
 			return sendQuestEndDialog(env);
 		}

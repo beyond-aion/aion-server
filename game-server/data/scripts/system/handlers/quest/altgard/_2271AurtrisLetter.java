@@ -1,6 +1,6 @@
 package quest.altgard;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -13,10 +13,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _2271AurtrisLetter extends QuestHandler {
 
-	private final static int questId = 2271;
-
 	public _2271AurtrisLetter() {
-		super(questId);
+		super(2271);
 	}
 
 	@Override
@@ -36,9 +34,9 @@ public class _2271AurtrisLetter extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (targetId == 203655) {
 			if (qs == null || qs.isStartable()) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
+				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 1011);
-				else if (env.getDialogId() == DialogAction.QUEST_ACCEPT_1.id()) {
+				else if (env.getDialogActionId() == QUEST_ACCEPT_1) {
 					if (giveQuestItem(env, 182203247, 1))
 						return sendQuestStartDialog(env);
 					else
@@ -46,23 +44,23 @@ public class _2271AurtrisLetter extends QuestHandler {
 				} else
 					return sendQuestStartDialog(env);
 			} else if (qs.getStatus() == QuestStatus.START) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
+				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 2375);
 			}
 		} else if (targetId == 203654) {
 			if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 0) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
+				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 1352);
-				else if (env.getDialog() == DialogAction.SETPRO1) {
+				else if (env.getDialogActionId() == SETPRO1) {
 					return defaultCloseDialog(env, 0, 1); // 1
 				} else
 					return sendQuestStartDialog(env);
 			}
 		} else if (targetId == 203557) {
 			if (qs != null) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT && qs.getStatus() == QuestStatus.START)
+				if (env.getDialogActionId() == QUEST_SELECT && qs.getStatus() == QuestStatus.START)
 					return sendQuestDialog(env, 2375);
-				else if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id() && qs.getStatus() != QuestStatus.COMPLETE) {
+				else if (env.getDialogActionId() == SELECT_QUEST_REWARD && qs.getStatus() != QuestStatus.COMPLETE) {
 					qs.setQuestVar(3);
 					qs.setStatus(QuestStatus.REWARD);
 					updateQuestStatus(env);

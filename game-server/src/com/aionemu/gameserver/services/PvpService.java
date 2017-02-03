@@ -287,11 +287,11 @@ public class PvpService {
 				continue;
 
 			for (ZoneInstance zone : zones) {
-				QuestEngine.getInstance().onKillInZone(new QuestEnv(victim, p, 0, 0), zone.getAreaTemplate().getZoneName().name());
+				QuestEngine.getInstance().onKillInZone(new QuestEnv(victim, p, 0), zone.getAreaTemplate().getZoneName().name());
 			}
 
-			QuestEngine.getInstance().onKillInWorld(new QuestEnv(victim, p, 0, 0), worldId);
-			QuestEngine.getInstance().onKillRanked(new QuestEnv(victim, p, 0, 0), victim.getAbyssRank().getRank());
+			QuestEngine.getInstance().onKillInWorld(new QuestEnv(victim, p, 0), worldId);
+			QuestEngine.getInstance().onKillRanked(new QuestEnv(victim, p, 0), victim.getAbyssRank().getRank());
 		}
 		rewarded.clear();
 	}

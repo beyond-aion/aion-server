@@ -1,6 +1,6 @@
 package quest.inggison;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -13,10 +13,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _11053TheseShoesAreMadeForStalking extends QuestHandler {
 
-	private final static int questId = 11053;
-
 	public _11053TheseShoesAreMadeForStalking() {
-		super(questId);
+		super(11053);
 	}
 
 	@Override
@@ -29,11 +27,11 @@ public class _11053TheseShoesAreMadeForStalking extends QuestHandler {
 	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		int targetId = env.getTargetId();
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 799015) {
-				if (dialog == DialogAction.QUEST_SELECT) {
+				if (dialogActionId == QUEST_SELECT) {
 					return sendQuestDialog(env, 1011);
 				} else {
 					return sendQuestStartDialog(env);
@@ -41,9 +39,9 @@ public class _11053TheseShoesAreMadeForStalking extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 799015) {
-				if (dialog == DialogAction.QUEST_SELECT) {
+				if (dialogActionId == QUEST_SELECT) {
 					return sendQuestDialog(env, 2375);
-				} else if (dialog == DialogAction.CHECK_USER_HAS_QUEST_ITEM) {
+				} else if (dialogActionId == CHECK_USER_HAS_QUEST_ITEM) {
 					long itemCount = player.getInventory().getItemCountByItemId(182206838);
 					if (player.getInventory().tryDecreaseKinah(50000) && itemCount > 29) {
 						player.getInventory().decreaseByItemId(182206838, 30);
@@ -51,7 +49,7 @@ public class _11053TheseShoesAreMadeForStalking extends QuestHandler {
 						return sendQuestDialog(env, 5);
 					} else
 						return sendQuestDialog(env, 2716);
-				} else if (dialog == DialogAction.FINISH_DIALOG) {
+				} else if (dialogActionId == FINISH_DIALOG) {
 					return defaultCloseDialog(env, 0, 0);
 				}
 			}

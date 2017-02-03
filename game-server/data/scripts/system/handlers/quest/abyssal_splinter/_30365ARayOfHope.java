@@ -2,7 +2,8 @@
 
 package quest.abyssal_splinter;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
@@ -17,10 +18,8 @@ import com.aionemu.gameserver.services.QuestService;
  */
 public class _30365ARayOfHope extends QuestHandler {
 
-	private final static int questId = 30365;
-
 	public _30365ARayOfHope() {
-		super(questId);
+		super(30365);
 	}
 
 	@Override
@@ -35,7 +34,7 @@ public class _30365ARayOfHope extends QuestHandler {
 	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.isStartable()) {
@@ -44,7 +43,7 @@ public class _30365ARayOfHope extends QuestHandler {
 			int var = qs.getQuestVarById(0);
 			switch (targetId) {
 				case 204241: // Annemari
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var == 0) {
 								return sendQuestDialog(env, 1352);
@@ -55,7 +54,7 @@ public class _30365ARayOfHope extends QuestHandler {
 					}
 					break;
 				case 203574: // Arekedil
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var == 1) {
 								return sendQuestDialog(env, 1693);
@@ -71,7 +70,7 @@ public class _30365ARayOfHope extends QuestHandler {
 					}
 					break;
 				case 278040: // Haug
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var == 2) {
 								return sendQuestDialog(env, 2034);

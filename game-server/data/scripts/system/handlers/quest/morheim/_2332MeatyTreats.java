@@ -1,6 +1,8 @@
 package quest.morheim;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
+import com.aionemu.gameserver.model.DialogPage;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -15,10 +17,8 @@ import com.aionemu.gameserver.services.QuestService;
 
 public class _2332MeatyTreats extends QuestHandler {
 
-	private final static int questId = 2332;
-
 	public _2332MeatyTreats() {
-		super(questId);
+		super(2332);
 	}
 
 	@Override
@@ -36,27 +36,30 @@ public class _2332MeatyTreats extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 798084) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
+				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 4762);
 				else
 					return sendQuestStartDialog(env);
 			}
 		} else if (qs != null && qs.getStatus() == QuestStatus.START) {
 			if (targetId == 798084) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT) {
-					if (QuestService.collectItemCheck(env, true))
-						return sendQuestDialog(env, 1352);
-					else
-						return sendQuestDialog(env, 1693);
-				} else if (env.getDialogId() >= 10000 && env.getDialogId() <= 10002) {
-					qs.setQuestVarById(0, qs.getQuestVarById(0) + (env.getDialogId() - 10000));
-					qs.setStatus(QuestStatus.REWARD);
-					updateQuestStatus(env);
-					return sendQuestDialog(env, env.getDialogId() - 9995);
-
+				switch (env.getDialogActionId()) {
+					case QUEST_SELECT:
+						if (QuestService.collectItemCheck(env, true))
+							return sendQuestDialog(env, 1352);
+						else
+							return sendQuestDialog(env, 1693);
+					case SETPRO1:
+					case SETPRO2:
+					case SETPRO3:
+						int choice = env.getDialogActionId() - SETPRO1;
+						qs.setQuestVarById(0, qs.getQuestVarById(0) + choice);
+						qs.setStatus(QuestStatus.REWARD);
+						updateQuestStatus(env);
+						return sendQuestDialog(env, DialogPage.getRewardPageByIndex(choice).id());
 				}
 			}
-		} else if (env.getDialogId() == DialogAction.SELECTED_QUEST_NOREWARD.id() && qs.getStatus() == QuestStatus.REWARD && targetId == 798084) {
+		} else if (env.getDialogActionId() == SELECTED_QUEST_NOREWARD && qs.getStatus() == QuestStatus.REWARD && targetId == 798084) {
 			QuestService.finishQuest(env, qs.getQuestVarById(0));
 			return sendQuestDialog(env, 1008);
 		}

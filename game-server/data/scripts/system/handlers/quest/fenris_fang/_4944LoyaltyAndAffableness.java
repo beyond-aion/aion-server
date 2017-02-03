@@ -1,6 +1,7 @@
 package quest.fenris_fang;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -18,12 +19,11 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _4944LoyaltyAndAffableness extends QuestHandler {
 
-	private static final int questId = 4944;
 	private static final int[] npcs = { 204053, 204075 };
 	private static final int[] mobs = { 251002, 251021, 251018, 251039, 251033, 251036, 214823, 216850 };
 
 	public _4944LoyaltyAndAffableness() {
-		super(questId);
+		super(4944);
 	}
 
 	@Override
@@ -42,10 +42,10 @@ public class _4944LoyaltyAndAffableness extends QuestHandler {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		int targetId = env.getTargetId();
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		if (qs == null) {
 			if (targetId == 204053) { // Kvasir
-				if (dialog == DialogAction.QUEST_SELECT) {
+				if (dialogActionId == QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);
 				} else {
 					return sendQuestStartDialog(env);
@@ -55,7 +55,7 @@ public class _4944LoyaltyAndAffableness extends QuestHandler {
 			int var = qs.getQuestVars().getQuestVars();
 			switch (targetId) {
 				case 204053: // Kvasir
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var == 0) {
 								return sendQuestDialog(env, 1011);
@@ -78,13 +78,13 @@ public class _4944LoyaltyAndAffableness extends QuestHandler {
 					}
 					break;
 				case 204075: // Balder
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var == 5) {
 								return sendQuestDialog(env, 2716);
 							}
 							return false;
-						case SELECT_ACTION_2718:
+						case SELECT6_1_1:
 							if (player.getCommonData().getDp() >= 4000) {
 								return checkItemExistence(env, 5, 5, false, 186000087, 1, true, 2718, 2887, 0, 0);
 							} else {
@@ -100,7 +100,7 @@ public class _4944LoyaltyAndAffableness extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204053) { // Kvasir
-				if (dialog == DialogAction.QUEST_SELECT) {
+				if (dialogActionId == QUEST_SELECT) {
 					return sendQuestDialog(env, 10002);
 				} else {
 					return sendQuestEndDialog(env);

@@ -1,6 +1,7 @@
 package quest.eltnen;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -13,11 +14,10 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _3329DinnersonMe extends QuestHandler {
 
-	private final static int questId = 3329;
 	private final static int[] mob_ids = { 210887, 210912, 210914, 210932 };
 
 	public _3329DinnersonMe() {
-		super(questId);
+		super(3329);
 	}
 
 	@Override
@@ -43,21 +43,21 @@ public class _3329DinnersonMe extends QuestHandler {
 	public boolean onDialogEvent(QuestEnv env) {
 		final Player player = env.getPlayer();
 		int targetId = 0;
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		if (env.getVisibleObject() instanceof Npc)
 			targetId = ((Npc) env.getVisibleObject()).getNpcId();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 203909) {
-				if (dialog == DialogAction.QUEST_SELECT)
+				if (dialogActionId == QUEST_SELECT)
 					return sendQuestDialog(env, 1011);
 				else
 					return sendQuestStartDialog(env);
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 203956) {
-				switch (dialog) {
+				switch (dialogActionId) {
 					case QUEST_SELECT:
 						qs.setStatus(QuestStatus.REWARD);
 						updateQuestStatus(env);

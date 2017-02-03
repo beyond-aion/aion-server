@@ -1,6 +1,7 @@
 package quest.altgard;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
@@ -16,10 +17,8 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 public class _2239MalodorAntidote extends QuestHandler {
 
-	private final static int questId = 2239;
-
 	public _2239MalodorAntidote() {
-		super(questId);
+		super(2239);
 	}
 
 	@Override
@@ -37,11 +36,11 @@ public class _2239MalodorAntidote extends QuestHandler {
 			targetId = ((Npc) env.getVisibleObject()).getNpcId();
 		}
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 203613) { // Gilungk
-				if (dialog == DialogAction.QUEST_SELECT) {
+				if (dialogActionId == QUEST_SELECT) {
 					return sendQuestDialog(env, 1011);
 				} else {
 					return sendQuestStartDialog(env);
@@ -50,7 +49,7 @@ public class _2239MalodorAntidote extends QuestHandler {
 		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			if (targetId == 203630) { // Vovetirn
-				switch (dialog) {
+				switch (dialogActionId) {
 					case QUEST_SELECT:
 						if (var == 0) {
 							return sendQuestDialog(env, 1352);
@@ -87,7 +86,7 @@ public class _2239MalodorAntidote extends QuestHandler {
 				}
 			}
 			if (targetId == 203613) { // Gilungk
-				switch (dialog) {
+				switch (dialogActionId) {
 					case QUEST_SELECT:
 						if (var == 3) {
 							return sendQuestDialog(env, 2034);

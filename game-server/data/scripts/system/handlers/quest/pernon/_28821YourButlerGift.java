@@ -1,10 +1,11 @@
 package quest.pernon;
 
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.house.House;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -17,7 +18,6 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _28821YourButlerGift extends QuestHandler {
 
-	private static final int questId = 28821;
 	private static final Set<Integer> butlers;
 
 	static {
@@ -30,7 +30,7 @@ public class _28821YourButlerGift extends QuestHandler {
 	}
 
 	public _28821YourButlerGift() {
-		super(questId);
+		super(28821);
 	}
 
 	@Override
@@ -55,11 +55,11 @@ public class _28821YourButlerGift extends QuestHandler {
 		if (house == null || house.getButler() == null || house.getButler().getNpcId() != targetId)
 			return false;
 
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 
 		if (qs == null || qs.isStartable()) {
-			switch (dialog) {
+			switch (dialogActionId) {
 				case QUEST_SELECT:
 					return sendQuestDialog(env, 1011);
 				case QUEST_ACCEPT_1:
@@ -70,7 +70,7 @@ public class _28821YourButlerGift extends QuestHandler {
 					return sendQuestDialog(env, 1004);
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
-			switch (dialog) {
+			switch (dialogActionId) {
 				case QUEST_SELECT:
 					return sendQuestDialog(env, 2375);
 				case SELECT_QUEST_REWARD:
@@ -81,7 +81,7 @@ public class _28821YourButlerGift extends QuestHandler {
 					return true;
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
-			switch (dialog) {
+			switch (dialogActionId) {
 				case USE_OBJECT:
 					return sendQuestDialog(env, 5);
 				case SELECTED_QUEST_NOREWARD:

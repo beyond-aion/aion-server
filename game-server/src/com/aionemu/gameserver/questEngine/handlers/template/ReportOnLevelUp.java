@@ -67,7 +67,7 @@ public class ReportOnLevelUp extends QuestHandler {
 
 	private boolean startQuest(Player player) {
 		if (!player.getQuestStateList().hasQuest(questId))
-			return QuestService.startQuest(new QuestEnv(null, player, questId, 0), QuestStatus.REWARD, false);
+			return QuestService.startQuest(new QuestEnv(null, player, questId), QuestStatus.REWARD, false);
 		return false;
 	}
 }

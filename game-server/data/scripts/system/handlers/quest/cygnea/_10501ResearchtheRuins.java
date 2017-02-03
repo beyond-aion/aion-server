@@ -1,6 +1,6 @@
 package quest.cygnea;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ITEM_USAGE_ANIMATION;
@@ -56,25 +56,25 @@ public class _10501ResearchtheRuins extends QuestHandler {
 
 		int var = qs.getQuestVarById(0);
 		int targetId = env.getTargetId();
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 
 		switch (targetId) {
 			case 804700: // Mosphera
 				if (qs.getStatus() == QuestStatus.START) {
 					if (var == 0) { // Step 0: Talk with Mosphera at the Aequis First Hold.
-						if (dialog == DialogAction.QUEST_SELECT)
+						if (dialogActionId == QUEST_SELECT)
 							return sendQuestDialog(env, 1011);
 
-						if (dialog == DialogAction.SETPRO1)
+						if (dialogActionId == SETPRO1)
 							return defaultCloseDialog(env, var, var + 1, workItemId, 1); // Gives item Ruins Location Map [ID: 182215598]
 					}
 
 					if (var == 6) { // Step 6: Obtain the Token of Balaur and take it to Mosphera.
-						if (dialog == DialogAction.QUEST_SELECT)
+						if (dialogActionId == QUEST_SELECT)
 							return sendQuestDialog(env, 3057);
 
 						// @ToCheck: is Cygnea Aetheric Field Stone [ID: 702760] related with mission?
-						if (dialog == DialogAction.CHECK_USER_HAS_QUEST_ITEM) {
+						if (dialogActionId == CHECK_USER_HAS_QUEST_ITEM) {
 							long itemCount = player.getInventory().getItemCountByItemId(182215599);
 							if (itemCount > 0) {
 								removeQuestItem(env, 182215599, itemCount);
@@ -88,7 +88,7 @@ public class _10501ResearchtheRuins extends QuestHandler {
 					}
 				}
 				if (qs.getStatus() == QuestStatus.REWARD) {
-					if (dialog == DialogAction.USE_OBJECT) {
+					if (dialogActionId == USE_OBJECT) {
 						return sendQuestDialog(env, 10002);
 					}
 
@@ -97,9 +97,9 @@ public class _10501ResearchtheRuins extends QuestHandler {
 				break;
 			case 731535: // Ancient Balaur Corpse
 				if (var == 4) { // Step 4: Examine the Ancient Balaur Corpse.
-					if (dialog == DialogAction.QUEST_SELECT)
+					if (dialogActionId == QUEST_SELECT)
 						return sendQuestDialog(env, 2375);
-					if (dialog == DialogAction.SETPRO5) {
+					if (dialogActionId == SETPRO5) {
 						// Beritra Raider [ID: 236250] is spawned for 10 minutes
 						QuestService.addNewSpawn(210070000, player.getInstanceId(), 236250, (float) 2067.6863, (float) 386.52222, (float) 565.7099, (byte) 70,
 							10);
@@ -109,9 +109,9 @@ public class _10501ResearchtheRuins extends QuestHandler {
 				break;
 			case 731536: // Collapsed Ruins
 				if (var == 2) { // Step 2: Examine the Collapsed Ruins
-					if (dialog == DialogAction.QUEST_SELECT)
+					if (dialogActionId == QUEST_SELECT)
 						return sendQuestDialog(env, 1693);
-					if (dialog == DialogAction.SETPRO3)
+					if (dialogActionId == SETPRO3)
 						return defaultCloseDialog(env, var, var + 1);
 				}
 				break;

@@ -1,6 +1,6 @@
 package quest.daevanion;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -12,12 +12,11 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _19638TroublewithTwos extends QuestHandler {
 
-	private static final int questId = 19638;
 	private static final int[] npcIds = { 798926, 799022 }; // Outremus & Lothas
 	private static final int[] mobIds = { 215510, 215511, 216649, 215514, 215515, 216651 };
 
 	public _19638TroublewithTwos() {
-		super(questId);
+		super(19638);
 	}
 
 	@Override
@@ -35,12 +34,12 @@ public class _19638TroublewithTwos extends QuestHandler {
 	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == npcIds[0]) { // Outremus
-				if (dialog == DialogAction.QUEST_SELECT)
+				if (dialogActionId == QUEST_SELECT)
 					return sendQuestDialog(env, 4762);
 				else
 					return sendQuestStartDialog(env);

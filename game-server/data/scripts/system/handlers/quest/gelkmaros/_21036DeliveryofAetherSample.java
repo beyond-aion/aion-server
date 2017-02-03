@@ -1,5 +1,7 @@
 package quest.gelkmaros;
 
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
@@ -10,10 +12,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _21036DeliveryofAetherSample extends QuestHandler {
 
-	private final static int questId = 21036;
-
 	public _21036DeliveryofAetherSample() {
-		super(questId);
+		super(21036);
 	}
 
 	@Override
@@ -36,7 +36,7 @@ public class _21036DeliveryofAetherSample extends QuestHandler {
 		int var = qs.getQuestVarById(0);
 		if (qs.getStatus() == QuestStatus.START) {
 			if (env.getTargetId() == 799238) {
-				switch (env.getDialog()) {
+				switch (env.getDialogActionId()) {
 					case QUEST_SELECT:
 						if (var == 0)
 							return sendQuestDialog(env, 1352);
@@ -45,7 +45,7 @@ public class _21036DeliveryofAetherSample extends QuestHandler {
 						return defaultCloseDialog(env, 0, 1);
 				}
 			} else if (env.getTargetId() == 798713) {
-				switch (env.getDialog()) {
+				switch (env.getDialogActionId()) {
 					case QUEST_SELECT:
 						if (var == 1)
 							return sendQuestDialog(env, 1693);

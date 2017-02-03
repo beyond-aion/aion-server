@@ -301,7 +301,7 @@ public class QuestEngine implements GameEngine {
 	 */
 	public void onQuestCompleted(Player player, int questId) {
 		try {
-			QuestEnv env = new QuestEnv(null, player, questId, 0);
+			QuestEnv env = new QuestEnv(null, player, questId);
 			for (int index = 0; index < questOnCompleted.size(); index++) {
 				QuestHandler questHandler = getQuestHandlerByQuestId(questOnCompleted.get(index));
 				if (questHandler != null)
@@ -389,7 +389,7 @@ public class QuestEngine implements GameEngine {
 				int questId = questOnEnterWorld.get(index);
 				QuestHandler questHandler = getQuestHandlerByQuestId(questId);
 				if (questHandler != null)
-					questHandler.onEnterWorldEvent(new QuestEnv(null, player, questId, 0));
+					questHandler.onEnterWorldEvent(new QuestEnv(null, player, questId));
 			}
 		} catch (Exception ex) {
 			log.error("QE: exception in onEnterWorld", ex);
@@ -436,7 +436,7 @@ public class QuestEngine implements GameEngine {
 				int questId = questItems.get(itemId).get(i);
 				QuestHandler questHandler = getQuestHandlerByQuestId(questId);
 				if (questHandler != null)
-					questHandler.onGetItemEvent(new QuestEnv(null, player, questId, 0));
+					questHandler.onGetItemEvent(new QuestEnv(null, player, questId));
 			}
 		}
 		if (questUpdateItems.contains(itemId))

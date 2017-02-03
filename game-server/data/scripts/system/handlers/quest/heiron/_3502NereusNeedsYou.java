@@ -1,6 +1,6 @@
 package quest.heiron;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -17,12 +17,11 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _3502NereusNeedsYou extends QuestHandler {
 
-	private final static int questId = 3502;
 	private final static int[] npcs = { 204656, 203752, 730192 };
 	private final static int[] mobs = { 214894, 214895, 214896, 214897, 214904 };
 
 	public _3502NereusNeedsYou() {
-		super(questId);
+		super(3502);
 	}
 
 	@Override
@@ -42,11 +41,11 @@ public class _3502NereusNeedsYou extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		Npc npc = (Npc) env.getVisibleObject();
 		int targetId = npc.getNpcId();
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 204656) { // Maloren
-				if (dialog == DialogAction.QUEST_SELECT)
+				if (dialogActionId == QUEST_SELECT)
 					return sendQuestDialog(env, 4762);
 				else
 					return sendQuestStartDialog(env);
@@ -55,16 +54,16 @@ public class _3502NereusNeedsYou extends QuestHandler {
 			int var = qs.getQuestVarById(0);
 			switch (targetId) {
 				case 730192: // Balaur Operation Orders
-					if (dialog == DialogAction.USE_OBJECT && var == 0) {
+					if (dialogActionId == USE_OBJECT && var == 0) {
 						return sendQuestDialog(env, 1011);
 					}
-					if (dialog == DialogAction.SETPRO1)
+					if (dialogActionId == SETPRO1)
 						return defaultCloseDialog(env, 0, 1); // 1
 					break;
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204656) {
-				if (dialog == DialogAction.QUEST_SELECT)
+				if (dialogActionId == QUEST_SELECT)
 					return sendQuestDialog(env, 10002);
 				else
 					return sendQuestEndDialog(env);

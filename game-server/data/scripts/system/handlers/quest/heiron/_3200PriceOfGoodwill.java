@@ -1,6 +1,7 @@
 package quest.heiron;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -22,7 +23,6 @@ import com.aionemu.gameserver.world.WorldMapInstance;
  */
 public class _3200PriceOfGoodwill extends QuestHandler {
 
-	private final static int questId = 3200;
 	private final static int[] npc_ids = { 204658, 798332, 700522, 279006, 798322 };
 
 	/*
@@ -30,7 +30,7 @@ public class _3200PriceOfGoodwill extends QuestHandler {
 	 */
 
 	public _3200PriceOfGoodwill() {
-		super(questId);
+		super(3200);
 	}
 
 	@Override
@@ -53,7 +53,7 @@ public class _3200PriceOfGoodwill extends QuestHandler {
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 204658)// Roikinerk
 			{
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
+				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 4762);
 				else
 					return sendQuestStartDialog(env);
@@ -67,9 +67,9 @@ public class _3200PriceOfGoodwill extends QuestHandler {
 		if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 798322)// Kuruminerk
 			{
-				if (env.getDialog() == DialogAction.USE_OBJECT)
+				if (env.getDialogActionId() == USE_OBJECT)
 					return sendQuestDialog(env, 10002);
-				else if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id())
+				else if (env.getDialogActionId() == SELECT_QUEST_REWARD)
 					return sendQuestDialog(env, 5);
 				else
 					return sendQuestEndDialog(env);
@@ -78,10 +78,10 @@ public class _3200PriceOfGoodwill extends QuestHandler {
 		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 204658)// Roikinerk
 			{
-				switch (env.getDialog()) {
+				switch (env.getDialogActionId()) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 1003);
-					case SELECT_ACTION_1011:
+					case SELECT1:
 						return sendQuestDialog(env, 1011);
 					case SETPRO1:
 						// Create instance
@@ -96,10 +96,10 @@ public class _3200PriceOfGoodwill extends QuestHandler {
 
 			} else if (targetId == 798332 && var == 1)// Haorunerk
 			{
-				switch (env.getDialog()) {
+				switch (env.getDialogActionId()) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 1352);
-					case SELECT_ACTION_1353:
+					case SELECT2_1:
 						playQuestMovie(env, 431);
 						break;
 					case SETPRO2:
@@ -120,7 +120,7 @@ public class _3200PriceOfGoodwill extends QuestHandler {
 				return true;
 			} else if (targetId == 279006 && var == 3)// Garkbinerk
 			{
-				switch (env.getDialog()) {
+				switch (env.getDialogActionId()) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 2034);
 					case SET_SUCCEED:

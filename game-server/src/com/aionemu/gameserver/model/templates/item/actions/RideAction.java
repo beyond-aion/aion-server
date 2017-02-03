@@ -100,7 +100,7 @@ public class RideAction extends AbstractItemAction {
 				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(),
 					0, 1, 1), true);
 				player.getController().cancelTask(TaskId.ITEM_USE);
-				QuestEngine.getInstance().rideAction(new QuestEnv(null, player, 0, 0), itemTemplate.getTemplateId());
+				QuestEngine.getInstance().rideAction(new QuestEnv(null, player, 0), itemTemplate.getTemplateId());
 			}
 
 		}, 3000));

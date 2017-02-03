@@ -1,5 +1,7 @@
 package quest.heiron;
 
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -61,7 +63,7 @@ public class _14051RootOfTheProblem extends QuestHandler {
 			return false;
 		}
 		if (targetId == 204500) { // Perento
-			switch (env.getDialog()) {
+			switch (env.getDialogActionId()) {
 				case QUEST_SELECT:
 					if (var == 0)
 						return sendQuestDialog(env, 1011);
@@ -70,16 +72,16 @@ public class _14051RootOfTheProblem extends QuestHandler {
 					return defaultCloseDialog(env, 0, 1); // 1
 			}
 		} else if (targetId == 204549) { // Aphesius
-			switch (env.getDialog()) {
+			switch (env.getDialogActionId()) {
 				case QUEST_SELECT:
 					if (var == 1)
 						return sendQuestDialog(env, 1352);
 					else if (var == 2)
 						return sendQuestDialog(env, 1693);
 					return false;
-				case SELECT_ACTION_1353:
+				case SELECT2_1:
 					return sendQuestDialog(env, 1353);
-				case SELECT_ACTION_1354:
+				case SELECT2_1_1:
 					return sendQuestDialog(env, 1354);
 				case SETPRO2:
 					return defaultCloseDialog(env, 1, 2); // 2
@@ -92,12 +94,12 @@ public class _14051RootOfTheProblem extends QuestHandler {
 						return sendQuestDialog(env, 10001);
 			}
 		} else if (targetId == 730026) {// Mersephon
-			switch (env.getDialog()) {
+			switch (env.getDialogActionId()) {
 				case QUEST_SELECT:
 					if (var == 3)
 						return sendQuestDialog(env, 2034);
 					return false;
-				case SELECT_ACTION_2035:
+				case SELECT4_1:
 					return sendQuestDialog(env, 2035);
 				case SETPRO4:
 					return defaultCloseDialog(env, 3, 4, true, false); // 4

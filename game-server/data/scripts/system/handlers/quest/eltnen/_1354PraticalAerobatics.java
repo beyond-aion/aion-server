@@ -1,6 +1,7 @@
 package quest.eltnen;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.LOG;
@@ -18,13 +19,12 @@ import com.aionemu.gameserver.skillengine.SkillEngine;
  */
 public class _1354PraticalAerobatics extends QuestHandler {
 
-	private final static int questId = 1354;
 	// chronological order of the flight rings has been changed
 	private String[] rings = { "ERACUS_TEMPLE_210020000_1", "ERACUS_TEMPLE_210020000_4", "ERACUS_TEMPLE_210020000_3", "ERACUS_TEMPLE_210020000_6",
 		"ERACUS_TEMPLE_210020000_5", "ERACUS_TEMPLE_210020000_2", "ERACUS_TEMPLE_210020000_7" };
 
 	public _1354PraticalAerobatics() {
-		super(questId);
+		super(1354);
 	}
 
 	@Override
@@ -81,14 +81,14 @@ public class _1354PraticalAerobatics extends QuestHandler {
 	public boolean onDialogEvent(QuestEnv env) {
 		final Player player = env.getPlayer();
 		int targetId = 0;
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		if (env.getVisibleObject() instanceof Npc)
 			targetId = ((Npc) env.getVisibleObject()).getNpcId();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 203983) {
-				if (dialog == DialogAction.QUEST_SELECT)
+				if (dialogActionId == QUEST_SELECT)
 					return sendQuestDialog(env, 1011);
 				else
 					return sendQuestStartDialog(env);
@@ -96,7 +96,7 @@ public class _1354PraticalAerobatics extends QuestHandler {
 		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 203983) {
 				int var0 = qs.getQuestVarById(0);
-				switch (dialog) {
+				switch (dialogActionId) {
 					case QUEST_SELECT:
 						if (var0 == 0)
 							return sendQuestDialog(env, 1003);

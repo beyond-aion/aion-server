@@ -105,7 +105,7 @@ public class CM_BUY_ITEM extends AionClientPacket {
 		} else if (target instanceof Npc) {
 			Npc npc = (Npc) target;
 			TradeListTemplate tradeTemplate = null;
-			if (DialogService.isSubDialogRestricted(0, player, npc)) {
+			if (DialogService.isSubDialogRestricted(player, npc)) {
 				AuditLogger.info(player, "Tried to buy item without right.");
 				return;
 			}

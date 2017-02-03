@@ -1,6 +1,6 @@
 package quest.sanctum;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
@@ -14,10 +14,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _19048AndreasTeachings extends QuestHandler {
 
-	private final static int questId = 19048;
-
 	public _19048AndreasTeachings() {
-		super(questId);
+		super(19048);
 	}
 
 	@Override
@@ -31,12 +29,12 @@ public class _19048AndreasTeachings extends QuestHandler {
 	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 798303) {
-				if (dialog == DialogAction.QUEST_SELECT) {
+				if (dialogActionId == QUEST_SELECT) {
 					return sendQuestDialog(env, 1011);
 				} else {
 					return sendQuestStartDialog(env, 182212216, 1);
@@ -44,7 +42,7 @@ public class _19048AndreasTeachings extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 798303) {
-				if (dialog == DialogAction.USE_OBJECT) {
+				if (dialogActionId == USE_OBJECT) {
 					return sendQuestDialog(env, 2375);
 				}
 				removeQuestItem(env, 182212216, 1);

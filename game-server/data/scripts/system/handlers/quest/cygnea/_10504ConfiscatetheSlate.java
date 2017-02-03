@@ -1,6 +1,6 @@
 package quest.cygnea;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -51,27 +51,27 @@ public class _10504ConfiscatetheSlate extends QuestHandler {
 
 		int var = qs.getQuestVarById(0);
 		int targetId = env.getTargetId();
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 
 		switch (targetId) {
 			case 804706: // Atrape
 				if (qs.getStatus() == QuestStatus.START) {
 					if (var == 0) { // Step 0: Talk with Atrape at Andrea Territory Village.
-						if (dialog == DialogAction.QUEST_SELECT) {
+						if (dialogActionId == QUEST_SELECT) {
 							return sendQuestDialog(env, 1011);
 						}
 
-						if (dialog == DialogAction.SETPRO1) {
+						if (dialogActionId == SETPRO1) {
 							return defaultCloseDialog(env, 0, 1, workItem, 1); // 1
 						}
 					}
 
 					if (var == 3) { // Step 2: Obtain the Old Balaur Document from the Scattered Balaur Document and take it to Euvia
-						if (dialog == DialogAction.QUEST_SELECT) {
+						if (dialogActionId == QUEST_SELECT) {
 							return sendQuestDialog(env, 2034);
 						}
 
-						if (dialog == DialogAction.CHECK_USER_HAS_QUEST_ITEM) {
+						if (dialogActionId == CHECK_USER_HAS_QUEST_ITEM) {
 							long itemCount = player.getInventory().getItemCountByItemId(collectItemId);
 							if (itemCount > 0) {
 								removeQuestItem(env, collectItemId, itemCount);
@@ -87,14 +87,14 @@ public class _10504ConfiscatetheSlate extends QuestHandler {
 				}
 
 				if (qs.getStatus() == QuestStatus.REWARD) {
-					if (dialog == DialogAction.USE_OBJECT) {
+					if (dialogActionId == USE_OBJECT) {
 						return sendQuestDialog(env, 10002);
 					}
 					return sendQuestEndDialog(env);
 				}
 				break;
 			case 702671:
-				if (dialog == DialogAction.USE_OBJECT && var == 3) { // Step 3: Obtain the Broken Slate Piece from the Cracked Oath Slate and take it to
+				if (dialogActionId == USE_OBJECT && var == 3) { // Step 3: Obtain the Broken Slate Piece from the Cracked Oath Slate and take it to
 																															// Atrape.
 					return useQuestObject(env, 3, 3, false, 0);
 				}

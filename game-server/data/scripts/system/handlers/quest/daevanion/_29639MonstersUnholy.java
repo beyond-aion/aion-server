@@ -1,6 +1,6 @@
 package quest.daevanion;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -12,12 +12,11 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _29639MonstersUnholy extends QuestHandler {
 
-	private static final int questId = 29639;
 	private static final int npcId = 799248; // Vesvola
 	private static final int[] mobIds = { 215988, 215989 };
 
 	public _29639MonstersUnholy() {
-		super(questId);
+		super(29639);
 	}
 
 	@Override
@@ -33,12 +32,12 @@ public class _29639MonstersUnholy extends QuestHandler {
 	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == npcId) {
-				if (dialog == DialogAction.QUEST_SELECT) {
+				if (dialogActionId == QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);
 				} else {
 					return sendQuestStartDialog(env);
@@ -46,7 +45,7 @@ public class _29639MonstersUnholy extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == npcId) {
-				if (dialog == DialogAction.USE_OBJECT) {
+				if (dialogActionId == USE_OBJECT) {
 					return sendQuestDialog(env, 5);
 				} else {
 					return sendQuestEndDialog(env);

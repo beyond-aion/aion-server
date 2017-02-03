@@ -1,6 +1,7 @@
 package quest.inggison;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -39,13 +40,13 @@ public class _10033PetrifiedSubside extends QuestHandler {
 		if (qs == null) {
 			return false;
 		}
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		int var = qs.getQuestVarById(0);
 		int targetId = env.getTargetId();
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 798970: // Pomponia
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var == 0) {
 								return sendQuestDialog(env, 1011);
@@ -56,7 +57,7 @@ public class _10033PetrifiedSubside extends QuestHandler {
 					}
 					break;
 				case 798975: // Sulla
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var == 1) {
 								return sendQuestDialog(env, 1352);
@@ -77,7 +78,7 @@ public class _10033PetrifiedSubside extends QuestHandler {
 					}
 					break;
 				case 798981: // Philon
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var == 2) {
 								return sendQuestDialog(env, 1693);
@@ -90,11 +91,11 @@ public class _10033PetrifiedSubside extends QuestHandler {
 					break;
 				case 730226: // Western Petrified Mass
 					if (var == 3) {
-						if (dialog == DialogAction.QUEST_SELECT) {
+						if (dialogActionId == QUEST_SELECT) {
 							return sendQuestDialog(env, 2034);
 						}
 
-						if (dialog == DialogAction.SETPRO4) {
+						if (dialogActionId == SETPRO4) {
 							removeQuestItem(env, 182215622, 1);
 							giveQuestItem(env, 182215623, 1);
 							return defaultCloseDialog(env, var, var + 1);
@@ -103,11 +104,11 @@ public class _10033PetrifiedSubside extends QuestHandler {
 					break;
 				case 730227: // Eastern Petrified Mass
 					if (var == 4) {
-						if (dialog == DialogAction.QUEST_SELECT) {
+						if (dialogActionId == QUEST_SELECT) {
 							return sendQuestDialog(env, 2375);
 						}
 
-						if (dialog == DialogAction.SETPRO5) {
+						if (dialogActionId == SETPRO5) {
 							removeQuestItem(env, 182215623, 1);
 							giveQuestItem(env, 182215624, 1);
 							return defaultCloseDialog(env, var, var + 1);
@@ -116,11 +117,11 @@ public class _10033PetrifiedSubside extends QuestHandler {
 					break;
 				case 730228: // Southern Petrified Mass
 					if (var == 5) {
-						if (dialog == DialogAction.QUEST_SELECT) {
+						if (dialogActionId == QUEST_SELECT) {
 							return sendQuestDialog(env, 2716);
 						}
 
-						if (dialog == DialogAction.SETPRO6) {
+						if (dialogActionId == SETPRO6) {
 							removeQuestItem(env, 182215624, 1);
 							giveQuestItem(env, 182215625, 1);
 							return defaultCloseDialog(env, var, var + 1);
@@ -130,7 +131,7 @@ public class _10033PetrifiedSubside extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 798970) { // Pomponia
-				if (env.getDialog() == DialogAction.USE_OBJECT) {
+				if (env.getDialogActionId() == USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
 				}
 				return sendQuestEndDialog(env);

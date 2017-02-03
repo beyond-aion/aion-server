@@ -22,7 +22,7 @@ import ai.ActionItemNpcAI;
 public class StudioPortalAI extends ActionItemNpcAI {
 
 	@Override
-	public boolean onDialogSelect(Player player, int dialogId, int questId, int extendedRewardIndex) {
+	public boolean onDialogSelect(Player player, int dialogActionId, int questId, int extendedRewardIndex) {
 		return true;
 	}
 

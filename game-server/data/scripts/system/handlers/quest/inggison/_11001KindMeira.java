@@ -1,6 +1,7 @@
 package quest.inggison;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
@@ -16,10 +17,8 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 
 public class _11001KindMeira extends QuestHandler {
 
-	private final static int questId = 11001;
-
 	public _11001KindMeira() {
-		super(questId);
+		super(11001);
 	}
 
 	@Override
@@ -42,9 +41,9 @@ public class _11001KindMeira extends QuestHandler {
 
 		if (targetId == 798945) {
 			if (qs == null) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
+				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 1011);
-				else if (env.getDialogId() == DialogAction.QUEST_ACCEPT_1.id()) {
+				else if (env.getDialogActionId() == QUEST_ACCEPT_1) {
 					if (giveQuestItem(env, 182206700, 1))
 						return sendQuestStartDialog(env);
 					else
@@ -60,7 +59,7 @@ public class _11001KindMeira extends QuestHandler {
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 798918:
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case QUEST_SELECT: {
 							return sendQuestDialog(env, 1352);
 						}
@@ -73,7 +72,7 @@ public class _11001KindMeira extends QuestHandler {
 					}
 					return false;
 				case 798946:
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case QUEST_SELECT: {
 							return sendQuestDialog(env, 1693);
 						}
@@ -86,7 +85,7 @@ public class _11001KindMeira extends QuestHandler {
 					}
 					return false;
 				case 798943:
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case QUEST_SELECT: {
 							return sendQuestDialog(env, 2034);
 						}
@@ -99,7 +98,7 @@ public class _11001KindMeira extends QuestHandler {
 					}
 					return false;
 				case 798945:
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case QUEST_SELECT: {
 							return sendQuestDialog(env, 2375);
 						}
@@ -115,7 +114,7 @@ public class _11001KindMeira extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 798945) {
-				switch (env.getDialog()) {
+				switch (env.getDialogActionId()) {
 					case SELECT_QUEST_REWARD:
 						return sendQuestDialog(env, 5);
 					default:

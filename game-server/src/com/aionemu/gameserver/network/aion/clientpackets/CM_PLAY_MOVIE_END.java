@@ -33,7 +33,7 @@ public class CM_PLAY_MOVIE_END extends AionClientPacket {
 	protected void runImpl() {
 		Player player = getConnection().getActivePlayer();
 		player.unsetCustomState(CustomPlayerState.WATCHING_CUTSCENE);
-		QuestEngine.getInstance().onMovieEnd(new QuestEnv(null, player, 0, 0), movieId);
+		QuestEngine.getInstance().onMovieEnd(new QuestEnv(null, player, 0), movieId);
 		player.getPosition().getWorldMapInstance().getInstanceHandler().onPlayMovieEnd(player, movieId);
 	}
 }

@@ -1,6 +1,6 @@
 package quest.morheim;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.actions.NpcActions;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -15,10 +15,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _2493BringingUpTayga extends QuestHandler {
 
-	private final static int questId = 2493;
-
 	public _2493BringingUpTayga() {
-		super(questId);
+		super(2493);
 	}
 
 	@Override
@@ -33,12 +31,12 @@ public class _2493BringingUpTayga extends QuestHandler {
 	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 204325) { // Ipoderr
-				if (dialog == DialogAction.QUEST_SELECT) {
+				if (dialogActionId == QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);
 				} else {
 					return sendQuestStartDialog(env);
@@ -47,18 +45,18 @@ public class _2493BringingUpTayga extends QuestHandler {
 		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			if (targetId == 204435) { // Purra? 1st Spot
-				if (dialog == DialogAction.QUEST_SELECT) {
+				if (dialogActionId == QUEST_SELECT) {
 					if (var == 0) {
 						return sendQuestDialog(env, 1011);
 					}
-				} else if (dialog == DialogAction.SET_SUCCEED) {
+				} else if (dialogActionId == SET_SUCCEED) {
 					final Npc npc = (Npc) env.getVisibleObject();
 					NpcActions.delete(npc, true);
 					changeQuestStep(env, 0, 0, true); // reward
 					return closeDialogWindow(env);
 				}
 			} else if (targetId == 204436 || targetId == 204437 || targetId == 204438) { // Purra? other Spots
-				if (dialog == DialogAction.QUEST_SELECT) {
+				if (dialogActionId == QUEST_SELECT) {
 					if (var == 0) {
 						return sendQuestDialog(env, 1353);
 					}
@@ -66,7 +64,7 @@ public class _2493BringingUpTayga extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204325) { // Ipoderr
-				if (dialog == DialogAction.USE_OBJECT) {
+				if (dialogActionId == USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
 				} else {
 					return sendQuestEndDialog(env);

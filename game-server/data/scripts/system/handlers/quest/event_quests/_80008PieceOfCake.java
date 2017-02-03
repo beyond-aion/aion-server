@@ -1,6 +1,7 @@
 package quest.event_quests;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -24,7 +25,7 @@ public class _80008PieceOfCake extends QuestHandler {
 		Player player = env.getPlayer();
 
 		if (env.getTargetId() == 0) {
-			if (env.getDialog() == DialogAction.QUEST_ACCEPT_1) {
+			if (env.getDialogActionId() == QUEST_ACCEPT_1) {
 				QuestService.startEventQuest(env, QuestStatus.START);
 				closeDialogWindow(env);
 				return true;
@@ -39,7 +40,7 @@ public class _80008PieceOfCake extends QuestHandler {
 
 		if (qs.getStatus() == QuestStatus.START) {
 			if (env.getTargetId() == 798415) {
-				switch (env.getDialog()) {
+				switch (env.getDialogActionId()) {
 					case QUEST_SELECT:
 						if (var == 0)
 							return sendQuestDialog(env, 2375);

@@ -1,6 +1,7 @@
 package quest.terath_dredgion;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -13,10 +14,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _30600FightOfTheNavigators extends QuestHandler {
 
-	private final static int questId = 30600;
-
 	public _30600FightOfTheNavigators() {
-		super(questId);
+		super(30600);
 	}
 
 	@Override
@@ -36,10 +35,10 @@ public class _30600FightOfTheNavigators extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		final int targetId = env.getTargetId();
 
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 205842) {
-				switch (dialog) {
+				switch (dialogActionId) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 1011);
 					default:
@@ -50,7 +49,7 @@ public class _30600FightOfTheNavigators extends QuestHandler {
 			int var = qs.getQuestVarById(0);// the station is important
 			switch (targetId) {
 				case 800325:
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							return sendQuestDialog(env, 1352);
 						case SETPRO1: {
@@ -59,7 +58,7 @@ public class _30600FightOfTheNavigators extends QuestHandler {
 					}
 					return false;
 				case 205842:
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							return sendQuestDialog(env, 2375);
 						case SELECT_QUEST_REWARD: {

@@ -1,5 +1,7 @@
 package quest.ascension;
 
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -37,7 +39,7 @@ public class _29070ADispatchtoAltgard extends QuestHandler {
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 204191:
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case QUEST_SELECT:
 							if (var == 0)
 								return sendQuestDialog(env, 1352);
@@ -51,7 +53,7 @@ public class _29070ADispatchtoAltgard extends QuestHandler {
 					}
 					return false;
 				case 203559:
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case QUEST_SELECT:
 							if (var == 1) {
 								qs.setStatus(QuestStatus.REWARD);

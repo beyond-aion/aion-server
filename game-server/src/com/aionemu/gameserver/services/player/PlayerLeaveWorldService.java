@@ -140,7 +140,7 @@ public class PlayerLeaveWorldService {
 		if (player.isLegionMember())
 			LegionService.getInstance().onLogout(player);
 
-		QuestEngine.getInstance().onLogOut(new QuestEnv(null, player, 0, 0));
+		QuestEngine.getInstance().onLogOut(new QuestEnv(null, player, 0));
 		Timestamp lastOnline = new Timestamp(System.currentTimeMillis());
 		player.getController().delete();
 		player.getCommonData().setOnline(false);

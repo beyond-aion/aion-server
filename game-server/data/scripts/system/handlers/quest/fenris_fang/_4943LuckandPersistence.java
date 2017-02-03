@@ -1,6 +1,7 @@
 package quest.fenris_fang;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -14,10 +15,8 @@ import com.aionemu.gameserver.services.QuestService;
  */
 public class _4943LuckandPersistence extends QuestHandler {
 
-	private final static int questId = 4943;
-
 	public _4943LuckandPersistence() {
-		super(questId);
+		super(4943);
 	}
 
 	@Override
@@ -33,12 +32,12 @@ public class _4943LuckandPersistence extends QuestHandler {
 		Player player = env.getPlayer();
 		int targetId = env.getTargetId();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 
 		// 0 - Start to Kvasir
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 204053) {
-				if (dialog == DialogAction.QUEST_SELECT)
+				if (dialogActionId == QUEST_SELECT)
 					return sendQuestDialog(env, 4762);
 				else
 					return sendQuestStartDialog(env);
@@ -55,7 +54,7 @@ public class _4943LuckandPersistence extends QuestHandler {
 				// 1 - Talk with Latatusk
 				case 204096:
 					if (var == 0) {
-						switch (dialog) {
+						switch (dialogActionId) {
 							case QUEST_SELECT:
 								return sendQuestDialog(env, 1011);
 							case SETPRO1:
@@ -63,7 +62,7 @@ public class _4943LuckandPersistence extends QuestHandler {
 						}
 					}
 					if (var == 2) {
-						switch (dialog) {
+						switch (dialogActionId) {
 							case QUEST_SELECT:
 								return sendQuestDialog(env, 1693);
 							case CHECK_USER_HAS_QUEST_ITEM:
@@ -79,10 +78,10 @@ public class _4943LuckandPersistence extends QuestHandler {
 				// 2 - Talk with Relir.
 				case 204097:
 					if (var == 1) {
-						switch (dialog) {
+						switch (dialogActionId) {
 							case QUEST_SELECT:
 								return sendQuestDialog(env, 1352);
-							case SELECT_ACTION_1354:
+							case SELECT2_1_1:
 								if (player.getInventory().tryDecreaseKinah(3400000)) {
 									if (player.getInventory().getItemCountByItemId(182207123) == 0) {
 										if (!giveQuestItem(env, 182207123, 1))
@@ -97,13 +96,13 @@ public class _4943LuckandPersistence extends QuestHandler {
 					}
 					break;
 				case 700538:
-					if (dialog == DialogAction.USE_OBJECT && var == 2) {
+					if (dialogActionId == USE_OBJECT && var == 2) {
 						return useQuestObject(env, 2, 2, false, 0);
 					}
 					break;
 				// 4 - Better purify yourself! Take Glossy Holy Water and visit High Priest Balder
 				case 204075:
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var == 3) {
 								return sendQuestDialog(env, 2034);
@@ -127,7 +126,7 @@ public class _4943LuckandPersistence extends QuestHandler {
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			// 5 - Talk with Kvasir
 			if (targetId == 204053) {
-				if (dialog == DialogAction.USE_OBJECT) {
+				if (dialogActionId == USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
 				} else {
 					return sendQuestEndDialog(env);

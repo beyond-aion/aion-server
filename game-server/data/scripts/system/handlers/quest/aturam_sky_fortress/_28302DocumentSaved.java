@@ -1,6 +1,7 @@
 package quest.aturam_sky_fortress;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -14,13 +15,12 @@ import com.aionemu.gameserver.services.QuestService;
  */
 public class _28302DocumentSaved extends QuestHandler {
 
-	private static final int questId = 28302;
 	private int[] npcIds = { 799530, 730375 };
 	private int[] generatorIds = { 702650, 702651, 702652, 702653, 702654 };
 	private int popuchinId = 217373;
 
 	public _28302DocumentSaved() {
-		super(questId);
+		super(28302);
 	}
 
 	@Override
@@ -37,14 +37,14 @@ public class _28302DocumentSaved extends QuestHandler {
 	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == npcIds[0]) {
-				if (dialog == DialogAction.QUEST_SELECT) {
+				if (dialogActionId == QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);
-				} else if (dialog == DialogAction.QUEST_ACCEPT_1) {
+				} else if (dialogActionId == QUEST_ACCEPT_1) {
 					playQuestMovie(env, 469);
 					return sendQuestStartDialog(env);
 				} else {
@@ -54,7 +54,7 @@ public class _28302DocumentSaved extends QuestHandler {
 		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == npcIds[1]) {
 				if (qs.getQuestVarById(0) == 5) {
-					switch (dialog) {
+					switch (dialogActionId) {
 						case USE_OBJECT:
 							return sendQuestDialog(env, 1352);
 						case SET_SUCCEED:
@@ -70,9 +70,9 @@ public class _28302DocumentSaved extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == npcIds[0]) {
-				if (dialog == DialogAction.USE_OBJECT)
+				if (dialogActionId == USE_OBJECT)
 					return sendQuestDialog(env, 10002);
-				if (dialog == DialogAction.SELECT_QUEST_REWARD) {
+				if (dialogActionId == SELECT_QUEST_REWARD) {
 					removeQuestItem(env, 182212101, 1);
 					return sendQuestDialog(env, 5);
 				} else {

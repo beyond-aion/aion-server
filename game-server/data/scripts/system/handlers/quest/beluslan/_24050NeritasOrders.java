@@ -1,6 +1,6 @@
 package quest.beluslan;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -34,14 +34,14 @@ public class _24050NeritasOrders extends QuestHandler {
 			return false;
 
 		int targetId = env.getTargetId();
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 
 		if (targetId != 204702)
 			return false;
 		if (qs.getStatus() == QuestStatus.START) {
-			if (dialog == DialogAction.QUEST_SELECT)
+			if (dialogActionId == QUEST_SELECT)
 				return sendQuestDialog(env, 10002);
-			else if (dialog == DialogAction.SELECT_QUEST_REWARD) {
+			else if (dialogActionId == SELECT_QUEST_REWARD) {
 				qs.setStatus(QuestStatus.REWARD);
 				updateQuestStatus(env);
 				return sendQuestDialog(env, 5);
@@ -63,6 +63,6 @@ public class _24050NeritasOrders extends QuestHandler {
 
 	@Override
 	public void onLevelChangedEvent(Player player) {
-		onEnterWorldEvent(new QuestEnv(null, player, questId, 0));
+		onEnterWorldEvent(new QuestEnv(null, player, questId));
 	}
 }

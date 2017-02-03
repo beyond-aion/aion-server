@@ -1,6 +1,7 @@
 package quest.heiron;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
@@ -58,7 +59,7 @@ public class _14052RestlessSouls extends QuestHandler {
 			return false;
 		}
 		if (targetId == 204629) {
-			switch (env.getDialog()) {
+			switch (env.getDialogActionId()) {
 				case QUEST_SELECT:
 					if (var == 0)
 						return sendQuestDialog(env, 1011);
@@ -71,7 +72,7 @@ public class _14052RestlessSouls extends QuestHandler {
 					}
 			}
 		} else if (targetId == 204625) {
-			switch (env.getDialog()) {
+			switch (env.getDialogActionId()) {
 				case QUEST_SELECT:
 					if (var == 1)
 						return sendQuestDialog(env, 1352);
@@ -94,7 +95,7 @@ public class _14052RestlessSouls extends QuestHandler {
 					return false;
 			}
 		} else if (targetId == 204628) {
-			switch (env.getDialog()) {
+			switch (env.getDialogActionId()) {
 				case QUEST_SELECT:
 					if (var == 2)
 						return sendQuestDialog(env, 1694);
@@ -111,7 +112,7 @@ public class _14052RestlessSouls extends QuestHandler {
 					return false;
 			}
 		} else if (targetId == 204627) {
-			switch (env.getDialog()) {
+			switch (env.getDialogActionId()) {
 				case QUEST_SELECT:
 					if (var == 2)
 						return sendQuestDialog(env, 1781);
@@ -128,7 +129,7 @@ public class _14052RestlessSouls extends QuestHandler {
 					return false;
 			}
 		} else if (targetId == 204626) {
-			switch (env.getDialog()) {
+			switch (env.getDialogActionId()) {
 				case QUEST_SELECT:
 					if (var == 2)
 						return sendQuestDialog(env, 1864);
@@ -145,7 +146,7 @@ public class _14052RestlessSouls extends QuestHandler {
 					return false;
 			}
 		} else if (targetId == 204622) {
-			switch (env.getDialog()) {
+			switch (env.getDialogActionId()) {
 				case QUEST_SELECT:
 					if (var == 2)
 						return sendQuestDialog(env, 1949);
@@ -162,7 +163,7 @@ public class _14052RestlessSouls extends QuestHandler {
 					return false;
 			}
 		} else if (targetId == 700270) {
-			if (env.getDialog() == DialogAction.USE_OBJECT) {
+			if (env.getDialogActionId() == USE_OBJECT) {
 				return useQuestObject(env, 3, 4, false, 0, 0, 1, 182215344, 1); // 4
 			}
 		}

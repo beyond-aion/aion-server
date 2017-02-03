@@ -1,6 +1,7 @@
 package quest.crafting;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -15,12 +16,11 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 public class _29002ExpertAethertappersTest extends QuestHandler {
 
-	private final static int questId = 29002;
 	private static final int itemId1 = 152003007;
 	private static final int itemId2 = 152003008;
 
 	public _29002ExpertAethertappersTest() {
-		super(questId);
+		super(29002);
 	}
 
 	@Override
@@ -34,12 +34,12 @@ public class _29002ExpertAethertappersTest extends QuestHandler {
 	public boolean onDialogEvent(QuestEnv env) {
 		final Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 204257) {
-				if (dialog == DialogAction.QUEST_SELECT)
+				if (dialogActionId == QUEST_SELECT)
 					return sendQuestDialog(env, 4762);
 				else
 					return sendQuestStartDialog(env);
@@ -47,7 +47,7 @@ public class _29002ExpertAethertappersTest extends QuestHandler {
 		} else if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 204099:
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							return sendQuestDialog(env, 1011);
 						case SETPRO1:
@@ -60,7 +60,7 @@ public class _29002ExpertAethertappersTest extends QuestHandler {
 					}
 					return false;
 				case 204257:
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT: {
 							long itemCount1 = player.getInventory().getItemCountByItemId(itemId1);
 							long itemCount2 = player.getInventory().getItemCountByItemId(itemId2);
@@ -78,7 +78,7 @@ public class _29002ExpertAethertappersTest extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204257) {
-				if (dialog == DialogAction.CHECK_USER_HAS_QUEST_ITEM)
+				if (dialogActionId == CHECK_USER_HAS_QUEST_ITEM)
 					return sendQuestDialog(env, 5);
 				else
 					return sendQuestEndDialog(env);

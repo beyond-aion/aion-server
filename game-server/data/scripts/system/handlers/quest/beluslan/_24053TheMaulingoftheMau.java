@@ -1,7 +1,8 @@
 package quest.beluslan;
 
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.ai.event.AIEventType;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -76,11 +77,11 @@ public class _24053TheMaulingoftheMau extends QuestHandler {
 
 		int var = qs.getQuestVarById(0);
 		int targetId = env.getTargetId();
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 
 		if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204700) {
-				if (dialog == DialogAction.USE_OBJECT)
+				if (dialogActionId == USE_OBJECT)
 					return sendQuestDialog(env, 10002);
 				else
 					return sendQuestEndDialog(env);
@@ -90,14 +91,14 @@ public class _24053TheMaulingoftheMau extends QuestHandler {
 			return false;
 		}
 		if (targetId == 204787) {
-			switch (dialog) {
+			switch (dialogActionId) {
 				case QUEST_SELECT:
 					if (var == 0)
 						return sendQuestDialog(env, 1011);
 					else if (var == 4)
 						return sendQuestDialog(env, 2375);
 					return false;
-				case SELECT_ACTION_1012:
+				case SELECT1_1:
 					playQuestMovie(env, 252);
 					break;
 				case SETPRO1:
@@ -111,7 +112,7 @@ public class _24053TheMaulingoftheMau extends QuestHandler {
 					}
 			}
 		} else if (targetId == 204795) {
-			switch (dialog) {
+			switch (dialogActionId) {
 				case QUEST_SELECT:
 					if (var == 1)
 						return sendQuestDialog(env, 1352);
@@ -122,7 +123,7 @@ public class _24053TheMaulingoftheMau extends QuestHandler {
 					}
 			}
 		} else if (targetId == 204796) {
-			switch (dialog) {
+			switch (dialogActionId) {
 				case QUEST_SELECT:
 					if (var == 2)
 						return sendQuestDialog(env, 1693);

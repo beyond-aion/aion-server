@@ -50,10 +50,10 @@ public class SummonSkillAreaEffect extends SummonServantEffect {
 				break;
 		}
 		final Servant servant = spawnServant(effect, useTime, NpcObjectType.SKILLAREA, x, y, z);
-		
+
 		int delay = 3000;
 		String group = effect.getSkillTemplate().getGroup();
-		
+
 		if (group != null && group.equalsIgnoreCase("KN_THREATENINGWAVE"))
 			delay = 2000;
 		else if (group != null && group.equalsIgnoreCase("WI_SUMMONTORNADO"))
@@ -61,12 +61,12 @@ public class SummonSkillAreaEffect extends SummonServantEffect {
 
 		Future<?> task = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
 
-			int position = 1;
+			private int skillPos = 1;
 
 			@Override
 			public void run() {
-				servant.getController().useSkill(servant.getSkillList().getSkillOnPosition(position).getSkillId());
-				position++;
+				servant.getController().useSkill(servant.getSkillList().getSkillOnPosition(skillPos).getSkillId());
+				skillPos++;
 			}
 		}, 0, delay);
 		servant.getController().addTask(TaskId.SKILL_USE, task);

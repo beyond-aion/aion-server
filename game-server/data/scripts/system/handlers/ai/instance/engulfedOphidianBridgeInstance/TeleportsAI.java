@@ -1,7 +1,7 @@
 package ai.instance.engulfedOphidianBridgeInstance;
 
 import com.aionemu.gameserver.ai.AIName;
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
@@ -22,13 +22,13 @@ public class TeleportsAI extends ActionItemNpcAI {
 	}
 
 	@Override
-	public boolean onDialogSelect(Player player, int dialogId, int questId, int extendedRewardIndex) {
+	public boolean onDialogSelect(Player player, int dialogActionId, int questId, int extendedRewardIndex) {
 		if (checkScroll(player)) {
-			if (dialogId == DialogAction.SETPRO1.id()) {
+			if (dialogActionId == SETPRO1) {
 				// TP North
 				TeleportService.teleportTo(player, 301210000, 576.3873f, 462.34897f, 618.9187f, (byte) 26);
 				player.getInventory().decreaseByItemId(164000279, 1);
-			} else if (dialogId == DialogAction.SETPRO2.id()) {
+			} else if (dialogActionId == SETPRO2) {
 				// TP South
 				TeleportService.teleportTo(player, 301210000, 608.5137f, 518.11066f, 591.4151f, (byte) 0);
 				player.getInventory().decreaseByItemId(164000279, 1);

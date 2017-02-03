@@ -1,6 +1,7 @@
 package quest.marchutan_priory;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -12,10 +13,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _48006TheMarchutanPrioryBeckons extends QuestHandler {
 
-	public static final int questId = 48006;
-
 	public _48006TheMarchutanPrioryBeckons() {
-		super(questId);
+		super(48006);
 	}
 
 	@Override
@@ -28,12 +27,12 @@ public class _48006TheMarchutanPrioryBeckons extends QuestHandler {
 	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 204191) {
-				if (dialog == DialogAction.QUEST_SELECT) {
+				if (dialogActionId == QUEST_SELECT) {
 					return sendQuestDialog(env, 1011);
 				} else {
 					return sendQuestStartDialog(env);
@@ -41,9 +40,9 @@ public class _48006TheMarchutanPrioryBeckons extends QuestHandler {
 			}
 		} else if (qs != null && qs.getStatus() == QuestStatus.START) {
 			if (targetId == 799847) {
-				if (dialog == DialogAction.QUEST_SELECT) {
+				if (dialogActionId == QUEST_SELECT) {
 					return sendQuestDialog(env, 2375);
-				} else if (dialog == DialogAction.SELECT_QUEST_REWARD) {
+				} else if (dialogActionId == SELECT_QUEST_REWARD) {
 					return defaultCloseDialog(env, 0, 1, true, true);
 				}
 			}

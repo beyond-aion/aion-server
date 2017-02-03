@@ -1,6 +1,6 @@
 package quest.eltnen;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -15,10 +15,8 @@ import com.aionemu.gameserver.services.teleport.TeleportService;
  */
 public class _1430ATeleportationExperiment extends QuestHandler {
 
-	private final static int questId = 1430;
-
 	public _1430ATeleportationExperiment() {
-		super(questId);
+		super(1430);
 	}
 
 	@Override
@@ -38,7 +36,7 @@ public class _1430ATeleportationExperiment extends QuestHandler {
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 203919) // Onesimus
 			{
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
+				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 4762);
 				else
 					return sendQuestStartDialog(env);
@@ -49,9 +47,9 @@ public class _1430ATeleportationExperiment extends QuestHandler {
 		{
 
 			if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 0) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
+				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 1011);
-				else if (env.getDialog() == DialogAction.SETPRO1) {
+				else if (env.getDialogActionId() == SETPRO1) {
 					qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
 					updateQuestStatus(env);
 					qs.setStatus(QuestStatus.REWARD);
@@ -62,9 +60,9 @@ public class _1430ATeleportationExperiment extends QuestHandler {
 
 			else if (qs != null && qs.getStatus() == QuestStatus.REWARD) // Reward
 			{
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
+				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 4080);
-				else if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id()) {
+				else if (env.getDialogActionId() == SELECT_QUEST_REWARD) {
 					qs.setQuestVar(2);
 					updateQuestStatus(env);
 					return sendQuestEndDialog(env);

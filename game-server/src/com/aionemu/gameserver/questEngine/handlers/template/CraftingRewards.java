@@ -1,7 +1,8 @@
 package com.aionemu.gameserver.questEngine.handlers.template;
 
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.skill.PlayerSkillEntry;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -50,13 +51,13 @@ public class CraftingRewards extends QuestHandler {
 	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		int targetId = env.getTargetId();
 		PlayerSkillEntry skill = player.getSkillList().getSkillEntry(skillId);
 
 		if (skill != null) {
 			int playerSkillLevel = skill.getSkillLevel();
-			if (dialog == DialogAction.QUEST_SELECT) {
+			if (dialogActionId == QUEST_SELECT) {
 				if (playerSkillLevel != levelReward && !canLearn(player)) {
 					return sendQuestSelectionDialog(env);
 				}
@@ -64,7 +65,7 @@ public class CraftingRewards extends QuestHandler {
 		}
 		if (qs == null || qs.isStartable()) {
 			if (targetId == startNpcId) {
-				switch (dialog) {
+				switch (dialogActionId) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, isDataDriven ? 4762 : 1011);
 					default: {
@@ -74,7 +75,7 @@ public class CraftingRewards extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == endNpcId) {
-				switch (dialog) {
+				switch (dialogActionId) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, isDataDriven ? 1011 : 2375);
 					case SELECT_QUEST_REWARD:

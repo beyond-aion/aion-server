@@ -1,6 +1,6 @@
 package quest.inggison;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
@@ -15,10 +15,8 @@ import com.aionemu.gameserver.services.QuestService;
  */
 public class _11123SuspiciousBook extends QuestHandler {
 
-	private final static int questId = 11123;
-
 	public _11123SuspiciousBook() {
-		super(questId);
+		super(11123);
 	}
 
 	@Override
@@ -33,12 +31,12 @@ public class _11123SuspiciousBook extends QuestHandler {
 	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 0) {
-				if (dialog == DialogAction.QUEST_ACCEPT_1) {
+				if (dialogActionId == QUEST_ACCEPT_1) {
 					QuestService.startQuest(env);
 					return closeDialogWindow(env);
 				}
@@ -47,16 +45,16 @@ public class _11123SuspiciousBook extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 798991) {
-				if (dialog == DialogAction.QUEST_SELECT) {
+				if (dialogActionId == QUEST_SELECT) {
 					return sendQuestDialog(env, 1352);
-				} else if (dialog == DialogAction.SETPRO1) {
+				} else if (dialogActionId == SETPRO1) {
 					qs.setQuestVar(1);
 					return defaultCloseDialog(env, 1, 1, true, true);
 				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 798947) {
-				if (dialog == DialogAction.USE_OBJECT) {
+				if (dialogActionId == USE_OBJECT) {
 					return sendQuestDialog(env, 2375);
 				}
 				removeQuestItem(env, 182206798, 1);

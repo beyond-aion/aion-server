@@ -1,6 +1,7 @@
 package quest.poeta;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -41,7 +42,7 @@ public class _1005BarringtheGate extends QuestHandler {
 
 		if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 203067) {
-				switch (env.getDialog()) {
+				switch (env.getDialogActionId()) {
 					case QUEST_SELECT:
 						if (var == 0)
 							return sendQuestDialog(env, 1011);
@@ -55,7 +56,7 @@ public class _1005BarringtheGate extends QuestHandler {
 						}
 				}
 			} else if (targetId == 203081) {
-				switch (env.getDialog()) {
+				switch (env.getDialogActionId()) {
 					case QUEST_SELECT:
 						if (var == 1)
 							return sendQuestDialog(env, 1352);
@@ -69,7 +70,7 @@ public class _1005BarringtheGate extends QuestHandler {
 						}
 				}
 			} else if (targetId == 790001) {
-				switch (env.getDialog()) {
+				switch (env.getDialogActionId()) {
 					case QUEST_SELECT:
 						if (var == 2)
 							return sendQuestDialog(env, 1693);
@@ -83,7 +84,7 @@ public class _1005BarringtheGate extends QuestHandler {
 						}
 				}
 			} else if (targetId == 203085) {
-				switch (env.getDialog()) {
+				switch (env.getDialogActionId()) {
 					case QUEST_SELECT:
 						if (var == 3)
 							return sendQuestDialog(env, 2034);
@@ -97,7 +98,7 @@ public class _1005BarringtheGate extends QuestHandler {
 						}
 				}
 			} else if (targetId == 203086) {
-				switch (env.getDialog()) {
+				switch (env.getDialogActionId()) {
 					case QUEST_SELECT:
 						if (var == 4)
 							return sendQuestDialog(env, 2375);
@@ -134,7 +135,7 @@ public class _1005BarringtheGate extends QuestHandler {
 
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203067) {
-				if (env.getDialog() == DialogAction.USE_OBJECT) {
+				if (env.getDialogActionId() == USE_OBJECT) {
 					playQuestMovie(env, 171);
 					return sendQuestDialog(env, 2716);
 				} else

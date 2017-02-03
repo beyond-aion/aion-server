@@ -1,6 +1,7 @@
 package quest.ishalgen;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -33,14 +34,14 @@ public class _2006HitThemWhereitHurts extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs == null)
 			return false;
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		int var = qs.getQuestVarById(0);
 		int targetId = env.getTargetId();
 
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 203540: // Mijou
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var == 0) {
 								return sendQuestDialog(env, 1011);
@@ -63,7 +64,7 @@ public class _2006HitThemWhereitHurts extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203516) { // Ulgorn
-				if (dialog == DialogAction.USE_OBJECT) {
+				if (dialogActionId == USE_OBJECT) {
 					return sendQuestDialog(env, 1693);
 				} else {
 					return sendQuestEndDialog(env);

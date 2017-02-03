@@ -1,5 +1,7 @@
 package quest.sanctum;
 
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -13,10 +15,8 @@ import com.aionemu.gameserver.services.QuestService;
  */
 public class _1947ALuckyDay extends QuestHandler {
 
-	private final static int questId = 1947;
-
 	public _1947ALuckyDay() {
-		super(questId);
+		super(1947);
 	}
 
 	@Override
@@ -34,9 +34,8 @@ public class _1947ALuckyDay extends QuestHandler {
 			targetId = ((Npc) env.getVisibleObject()).getNpcId();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 
-		if (qs == null || qs.isStartable())// TODO: If cube size is bigger than 5
-		{
-			switch (env.getDialog()) {
+		if (qs == null || qs.isStartable()) { // TODO: If cube size is bigger than 5
+			switch (env.getDialogActionId()) {
 				case QUEST_SELECT:
 					return sendQuestDialog(env, 1011);
 				case ASK_QUEST_ACCEPT:
@@ -56,7 +55,7 @@ public class _1947ALuckyDay extends QuestHandler {
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 798012:// Yiehmonerk
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case QUEST_SELECT:
 							if (var == 0)
 								return sendQuestDialog(env, 2375);

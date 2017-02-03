@@ -28,7 +28,7 @@ public class QuestDialog {
 	protected int id;
 
 	public boolean operate(QuestEnv env, QuestState qs) {
-		if (env.getDialogId() != id)
+		if (env.getDialogActionId() != id)
 			return false;
 		if (conditions == null || conditions.checkConditionOfSet(env)) {
 			if (operations != null) {

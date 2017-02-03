@@ -1,6 +1,6 @@
 package quest.sanctum;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
@@ -15,10 +15,8 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 public class _3967AndusDyeBox extends QuestHandler {
 
-	private final static int questId = 3967;
-
 	public _3967AndusDyeBox() {
-		super(questId);
+		super(3967);
 	}
 
 	@Override
@@ -44,7 +42,7 @@ public class _3967AndusDyeBox extends QuestHandler {
 		if (targetId == 798391)// Andu
 		{
 			if (qs == null || qs.isStartable()) {
-				if (env.getDialog() == DialogAction.USE_OBJECT)
+				if (env.getDialogActionId() == USE_OBJECT)
 					return sendQuestDialog(env, 1011);
 				else
 					return sendQuestStartDialog(env);
@@ -59,9 +57,9 @@ public class _3967AndusDyeBox extends QuestHandler {
 		if (targetId == 798309)// Arenzes
 		{
 			if (qs.getStatus() == QuestStatus.START && var == 0) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
+				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 1352);
-				else if (env.getDialog() == DialogAction.SETPRO1) {
+				else if (env.getDialogActionId() == SETPRO1) {
 					if (giveQuestItem(env, 182206122, 1)) {
 						qs.setQuestVar(++var);
 						qs.setStatus(QuestStatus.REWARD);
@@ -74,9 +72,9 @@ public class _3967AndusDyeBox extends QuestHandler {
 			}
 		} else if (targetId == 798391 && qs.getStatus() == QuestStatus.REWARD)// Andu
 		{
-			if (env.getDialog() == DialogAction.USE_OBJECT)
+			if (env.getDialogActionId() == USE_OBJECT)
 				return sendQuestDialog(env, 2375);
-			else if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id()) {
+			else if (env.getDialogActionId() == SELECT_QUEST_REWARD) {
 				removeQuestItem(env, 182206122, 1);
 				return sendQuestEndDialog(env);
 			} else

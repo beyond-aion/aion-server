@@ -1,6 +1,7 @@
 package quest.heiron;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -14,10 +15,8 @@ import com.aionemu.gameserver.services.QuestService;
  */
 public class _1647DressingUpForBollvig extends QuestHandler {
 
-	private final static int questId = 1647;
-
 	public _1647DressingUpForBollvig() {
-		super(questId);
+		super(1647);
 	}
 
 	@Override
@@ -32,12 +31,12 @@ public class _1647DressingUpForBollvig extends QuestHandler {
 	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 790019) { // Zetus
-				switch (dialog) {
+				switch (dialogActionId) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 4762);
 					default: {
@@ -47,7 +46,7 @@ public class _1647DressingUpForBollvig extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 700272) { // Suspicious Stone Statue
-				if (dialog == DialogAction.USE_OBJECT) {
+				if (dialogActionId == USE_OBJECT) {
 					// Wearing Stenon Blouse and Stenon Skirt
 					if (!player.getEquipment().getEquippedItemsByItemId(110100150).isEmpty()
 						&& !player.getEquipment().getEquippedItemsByItemId(113100144).isEmpty()) {
@@ -61,7 +60,7 @@ public class _1647DressingUpForBollvig extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 790019) { // Zetus
-				switch (dialog) {
+				switch (dialogActionId) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 10002);
 					default: {

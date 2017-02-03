@@ -1,6 +1,7 @@
 package quest.morheim;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -17,10 +18,8 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 public class _2443TaisanMessage extends QuestHandler {
 
-	private final static int questId = 2443;
-
 	public _2443TaisanMessage() {
-		super(questId);
+		super(2443);
 	}
 
 	@Override
@@ -38,7 +37,7 @@ public class _2443TaisanMessage extends QuestHandler {
 		final QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 204403) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
+				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 4762);
 				else
 					return sendQuestStartDialog(env);
@@ -46,7 +45,7 @@ public class _2443TaisanMessage extends QuestHandler {
 		} else if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 204403:
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case QUEST_SELECT: {
 							if (qs.getQuestVarById(0) == 0)
 								return sendQuestDialog(env, 1003);
@@ -60,14 +59,14 @@ public class _2443TaisanMessage extends QuestHandler {
 							PacketSendUtility.sendPacket(player, new SM_EMOTION(player, EmotionType.START_FLYTELEPORT, 30001, 0));
 							return defaultCloseDialog(env, 0, 1, true, false);
 						}
-						case SELECT_ACTION_1013: {
+						case SELECT1_1_1: {
 							return sendQuestDialog(env, 1013);
 						}
 					}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 790016) {
-				if (env.getDialog() == DialogAction.USE_OBJECT) {
+				if (env.getDialogActionId() == USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
 				} else {
 					return sendQuestEndDialog(env);

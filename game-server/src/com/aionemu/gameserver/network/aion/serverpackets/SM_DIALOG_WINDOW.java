@@ -19,16 +19,16 @@ import com.aionemu.gameserver.world.zone.ZoneInstance;
 public class SM_DIALOG_WINDOW extends AionServerPacket {
 
 	private final int targetObjectId;
-	private final int dialogID;
+	private final int dialogPageId;
 	private final int questId;
 
-	public SM_DIALOG_WINDOW(int targetObjectId, int dlgID) {
-		this(targetObjectId, dlgID, 0);
+	public SM_DIALOG_WINDOW(int targetObjectId, int dialogPageId) {
+		this(targetObjectId, dialogPageId, 0);
 	}
 
-	public SM_DIALOG_WINDOW(int targetObjectId, int dlgID, int questId) {
+	public SM_DIALOG_WINDOW(int targetObjectId, int dialogPageId, int questId) {
 		this.targetObjectId = targetObjectId;
-		this.dialogID = dlgID;
+		this.dialogPageId = dialogPageId;
 		this.questId = questId;
 	}
 
@@ -37,10 +37,10 @@ public class SM_DIALOG_WINDOW extends AionServerPacket {
 		Player player = con.getActivePlayer();
 
 		writeD(targetObjectId);
-		writeH(dialogID);
+		writeH(dialogPageId);
 		writeD(questId);
 		writeH(0);
-		if (this.dialogID == DialogPage.MAIL.id()) {
+		if (dialogPageId == DialogPage.MAIL.id()) {
 			AionObject object = World.getInstance().findVisibleObject(targetObjectId);
 			if (object instanceof Npc) {
 				Npc znpc = (Npc) object;
@@ -51,7 +51,7 @@ public class SM_DIALOG_WINDOW extends AionServerPacket {
 					player.getMailbox().mailBoxState = PlayerMailboxState.REGULAR;
 			} else
 				writeH(0);
-		} else if (this.dialogID == DialogPage.TOWN_CHALLENGE_TASK.id()) {
+		} else if (dialogPageId == DialogPage.TOWN_CHALLENGE_TASK.id()) {
 			AionObject object = World.getInstance().findVisibleObject(targetObjectId);
 			if (object instanceof Npc) {
 				Npc npc = (Npc) object;

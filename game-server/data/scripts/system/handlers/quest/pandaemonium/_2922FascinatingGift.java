@@ -1,6 +1,6 @@
 package quest.pandaemonium;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -12,10 +12,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _2922FascinatingGift extends QuestHandler {
 
-	private final static int questId = 2922;
-
 	public _2922FascinatingGift() {
-		super(questId);
+		super(2922);
 	}
 
 	@Override
@@ -30,12 +28,12 @@ public class _2922FascinatingGift extends QuestHandler {
 	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 204261) {
-				if (dialog == DialogAction.QUEST_SELECT) {
+				if (dialogActionId == QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);
 				} else {
 					return sendQuestStartDialog(env);
@@ -43,29 +41,29 @@ public class _2922FascinatingGift extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 204261) {
-				if (dialog == DialogAction.QUEST_SELECT) {
+				if (dialogActionId == QUEST_SELECT) {
 					if (qs.getQuestVarById(0) == 0)
 						return sendQuestDialog(env, 1003);
-				} else if (dialog == DialogAction.SELECT_ACTION_1012) {
+				} else if (dialogActionId == SELECT1_1) {
 					return sendQuestDialog(env, 1012);
-				} else if (dialog == DialogAction.SELECT_ACTION_1097) {
+				} else if (dialogActionId == SELECT1_2) {
 					return sendQuestDialog(env, 1097);
-				} else if (dialog == DialogAction.SETPRO10) {
+				} else if (dialogActionId == SETPRO10) {
 					qs.setQuestVar(10);
 					return defaultCloseDialog(env, 10, 10, true, false);
-				} else if (dialog == DialogAction.SETPRO20) {
+				} else if (dialogActionId == SETPRO20) {
 					qs.setQuestVar(20);
 					return defaultCloseDialog(env, 20, 20, true, false);
 				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 798058 && qs.getQuestVarById(0) == 10) {
-				if (dialog == DialogAction.USE_OBJECT) {
+				if (dialogActionId == USE_OBJECT) {
 					return sendQuestDialog(env, 1352);
 				}
 				return sendQuestEndDialog(env);
 			} else if (targetId == 204108 && qs.getQuestVarById(0) == 20) {
-				if (dialog == DialogAction.USE_OBJECT) {
+				if (dialogActionId == USE_OBJECT) {
 					return sendQuestDialog(env, 1693);
 				}
 				return sendQuestEndDialog(env, 1);

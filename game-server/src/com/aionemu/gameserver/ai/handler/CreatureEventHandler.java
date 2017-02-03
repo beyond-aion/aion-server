@@ -28,7 +28,7 @@ public class CreatureEventHandler {
 		checkAggro(npcAI, creature);
 		if (creature instanceof Player) {
 			Player player = (Player) creature;
-			QuestEngine.getInstance().onAtDistance(new QuestEnv(npcAI.getOwner(), player, 0, 0));
+			QuestEngine.getInstance().onAtDistance(new QuestEnv(npcAI.getOwner(), player, 0));
 		}
 	}
 
@@ -40,7 +40,7 @@ public class CreatureEventHandler {
 		checkAggro(npcAI, creature);
 		if (creature instanceof Player) {
 			Player player = (Player) creature;
-			QuestEngine.getInstance().onAtDistance(new QuestEnv(npcAI.getOwner(), player, 0, 0));
+			QuestEngine.getInstance().onAtDistance(new QuestEnv(npcAI.getOwner(), player, 0));
 		}
 	}
 

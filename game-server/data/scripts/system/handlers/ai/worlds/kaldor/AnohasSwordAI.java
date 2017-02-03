@@ -7,7 +7,8 @@ import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.controllers.NpcController;
 import com.aionemu.gameserver.controllers.observer.ActionObserver;
 import com.aionemu.gameserver.controllers.observer.ObserverType;
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+import com.aionemu.gameserver.model.DialogPage;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.TaskId;
@@ -45,12 +46,12 @@ public class AnohasSwordAI extends NpcAI {
 	}
 
 	@Override
-	public boolean onDialogSelect(Player player, int dialogId, int questId, int extendedRewardIndex) {
-		if (dialogId != DialogAction.SETPRO1.id())
+	public boolean onDialogSelect(Player player, int dialogActionId, int questId, int extendedRewardIndex) {
+		if (dialogActionId != SETPRO1)
 			return false;
 
 		if (!player.getInventory().decreaseByItemId(185000215, 1)) {
-			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 27));
+			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), DialogPage.NO_RIGHT.id()));
 			return false;
 		}
 
@@ -92,7 +93,7 @@ public class AnohasSwordAI extends NpcAI {
 
 	private void startQuest(Player player, int questId) {
 		final QuestState qs = player.getQuestStateList().getQuestState(questId);
-		QuestEnv env = new QuestEnv(null, player, questId, 0);
+		QuestEnv env = new QuestEnv(null, player, questId);
 		if (qs == null || qs.isStartable())
 			QuestService.startQuest(env);
 	}

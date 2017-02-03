@@ -1,6 +1,7 @@
 package quest.heiron;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -21,10 +22,8 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
  */
 public class _1644AVeryOldLetter extends QuestHandler {
 
-	private final static int questId = 1644;
-
 	public _1644AVeryOldLetter() {
-		super(questId);
+		super(1644);
 	}
 
 	@Override
@@ -45,7 +44,7 @@ public class _1644AVeryOldLetter extends QuestHandler {
 			targetId = ((Npc) env.getVisibleObject()).getNpcId();
 
 		if (targetId == 0) {
-			if (env.getDialogId() == DialogAction.QUEST_ACCEPT_1.id()) {
+			if (env.getDialogActionId() == QUEST_ACCEPT_1) {
 				QuestService.startQuest(env);
 				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(0, 0));
 				return true;
@@ -55,7 +54,7 @@ public class _1644AVeryOldLetter extends QuestHandler {
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 204545:
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case QUEST_SELECT: {
 							if (qs.getQuestVarById(0) == 0) {
 								return sendQuestDialog(env, 1352);
@@ -74,7 +73,7 @@ public class _1644AVeryOldLetter extends QuestHandler {
 					}
 					return false;
 				case 204537:
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case QUEST_SELECT: {
 							return sendQuestDialog(env, 1693);
 						}
@@ -85,7 +84,7 @@ public class _1644AVeryOldLetter extends QuestHandler {
 			}
 		} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204546) {
-				switch (env.getDialog()) {
+				switch (env.getDialogActionId()) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 2375);
 					default: {

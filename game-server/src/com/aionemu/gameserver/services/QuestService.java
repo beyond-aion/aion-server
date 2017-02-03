@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.services;
 
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import java.sql.Timestamp;
 import java.time.DayOfWeek;
 import java.time.LocalTime;
@@ -21,7 +23,6 @@ import com.aionemu.gameserver.configs.main.GroupConfig;
 import com.aionemu.gameserver.configs.main.MembershipConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.DescriptionId;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.PlayerClass;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.TaskId;
@@ -152,12 +153,12 @@ public final class QuestService {
 	private static List<QuestItems> getRewardItems(QuestEnv env, QuestTemplate template, boolean extended, Integer rewardGroup) {
 		Player player = env.getPlayer();
 		int id = env.getQuestId();
-		int dialogId = env.getDialogId();
+		int dialogActionId = env.getDialogActionId();
 		List<QuestItems> questItems = new FastTable<>();
 		if (extended) {
 			Rewards rewards = template.getExtendedRewards();
 			questItems.addAll(rewards.getRewardItem());
-			if (dialogId == DialogAction.SELECTED_QUEST_NOREWARD.id() && !rewards.getSelectableRewardItem().isEmpty()) {
+			if (dialogActionId == SELECTED_QUEST_NOREWARD && !rewards.getSelectableRewardItem().isEmpty()) {
 				int index = env.getExtendedRewardIndex();
 				if (index - 8 >= 0 && index - 8 < rewards.getSelectableRewardItem().size()) {
 					questItems.add(rewards.getSelectableRewardItem().get(index - 8));
@@ -174,7 +175,7 @@ public final class QuestService {
 				questItems.addAll(rewards.getRewardItem());
 				QuestState qs = player.getQuestStateList().getQuestState(id);
 				PlayerClass playerClass = player.getCommonData().getPlayerClass();
-				int rewardIndex = env.getDialog().getRewardIndex();
+				int rewardIndex = getRewardIndex(env.getDialogActionId());
 				if (rewardIndex >= 0) {
 					boolean isLastRepeat = qs.getCompleteCount() == template.getRewardRepeatCount() - 1;
 					if (isLastRepeat && template.isSingleTimeClassReward() || template.isClassRewardOnEveryRepeat()) {
@@ -189,14 +190,15 @@ public final class QuestService {
 					} else {
 						log.warn("The SelectableRewardItem list has no element on index " + rewardIndex + ". See quest id " + env.getQuestId());
 					}
-				} else if (dialogId == DialogAction.SELECTED_QUEST_NOREWARD.id()) {
+				} else if (dialogActionId == SELECTED_QUEST_NOREWARD) {
 					rewardIndex = env.getExtendedRewardIndex() - 8;
 					boolean isLastRepeat = qs.getCompleteCount() == template.getRewardRepeatCount() - 1;
 					if (isLastRepeat && template.isSingleTimeClassReward() || template.isClassRewardOnEveryRepeat()) {
 						if (rewardIndex >= 0 && rewardIndex < template.getSelectableRewardByClass(playerClass).size()) {
 							questItems.add(template.getSelectableRewardByClass(playerClass).get(rewardIndex));
 						} else {
-							log.warn("The SelectableRewardByClass list has no element on index " + rewardIndex + ". See quest id " + env.getQuestId());
+							log.warn("The SelectableRewardByClass list has no element on index " + rewardIndex + ". See quest id " + env.getQuestId(),
+								new Throwable());
 						}
 					}
 				}
@@ -216,6 +218,15 @@ public final class QuestService {
 		return questItems;
 	}
 
+	/**
+	 * Converts the dialog action ID to the corresponding reward ID.
+	 * 
+	 * @return The reward index selected, starting at 0. -1 if this action is no reward action.
+	 */
+	public static int getRewardIndex(int dialogActionId) {
+		return dialogActionId >= SELECTED_QUEST_REWARD1 && dialogActionId <= SELECTED_QUEST_REWARD15 ? dialogActionId - SELECTED_QUEST_REWARD1 : -1;
+	}
+
 	private static void giveReward(QuestEnv env, Rewards rewards) {
 		Player player = env.getPlayer();
 		if (rewards.getGold() != null)
@@ -228,7 +239,8 @@ public final class QuestService {
 			player.getTitleList().addTitle(rewards.getTitle(), true, 0);
 		if (rewards.getAp() != null) {
 			int ap = rewards.getAp();
-			if (DataManager.QUEST_DATA.getQuestById(env.getQuestId()).getCategory() != QuestCategory.NON_COUNT) // don't multiply with quest rates for relic exchanges
+			if (DataManager.QUEST_DATA.getQuestById(env.getQuestId()).getCategory() != QuestCategory.NON_COUNT) // don't multiply with quest rates for relic
+																																																					// exchanges
 				ap *= player.getRates().getQuestApRate();
 			AbyssPointsService.addAp(player, ap);
 		}
@@ -374,7 +386,7 @@ public final class QuestService {
 					return false;
 			}
 
-			QuestEnv env = new QuestEnv(null, player, questId, 0);
+			QuestEnv env = new QuestEnv(null, player, questId);
 			if (!inventoryItemCheck(env, warn))
 				return false;
 
@@ -399,22 +411,10 @@ public final class QuestService {
 		return false;
 	}
 
-	/*
-	 * Check the starting conditions and start a quest Reworked 12.06.2011
-	 * @author vlog
-	 */
 	public static boolean startQuest(QuestEnv env) {
-		return startQuest(env, QuestStatus.START, env.getDialogId() != 0);
+		return startQuest(env, QuestStatus.START, env.getDialogActionId() != NULL);
 	}
 
-	public static boolean startQuest(QuestEnv env, QuestStatus status) {
-		return startQuest(env, status, env.getDialogId() != 0);
-	}
-
-	/*
-	 * Check the starting conditions and start a quest Reworked 12.06.2011
-	 * @author vlog
-	 */
 	public static boolean startQuest(QuestEnv env, QuestStatus status, boolean warn) {
 		Player player = env.getPlayer();
 		int id = env.getQuestId();
@@ -932,7 +932,7 @@ public final class QuestService {
 
 			@Override
 			public void run() {
-				QuestEngine.getInstance().onQuestTimerEnd(new QuestEnv(null, player, 0, 0));
+				QuestEngine.getInstance().onQuestTimerEnd(new QuestEnv(null, player, 0));
 			}
 		}, timeInSeconds * 1000);
 		player.getController().addTask(TaskId.QUEST_TIMER, task);
@@ -948,7 +948,7 @@ public final class QuestService {
 
 			@Override
 			public void run() {
-				QuestEngine.getInstance().onInvisibleTimerEnd(new QuestEnv(null, player, 0, 0));
+				QuestEngine.getInstance().onInvisibleTimerEnd(new QuestEnv(null, player, 0));
 			}
 		}, timeInSeconds * 1000);
 		return true;
@@ -993,7 +993,7 @@ public final class QuestService {
 		}
 
 		if (player.getController().getTask(TaskId.QUEST_TIMER) != null)
-			questTimerEnd(new QuestEnv(null, player, questId, 0));
+			questTimerEnd(new QuestEnv(null, player, questId));
 
 		PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(ActionType.ABANDON, qs));
 		player.getController().updateNearbyQuests();

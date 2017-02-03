@@ -1,6 +1,7 @@
 package quest.theobomos;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -17,10 +18,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 public class _3092VisonTheDrakie extends QuestHandler {
 
-	private final static int questId = 3092;
-
 	public _3092VisonTheDrakie() {
-		super(questId);
+		super(3092);
 	}
 
 	@Override
@@ -42,7 +41,7 @@ public class _3092VisonTheDrakie extends QuestHandler {
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 798191) { // Tityus
-				switch (env.getDialog()) {
+				switch (env.getDialogActionId()) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 1011);
 					default:
@@ -52,7 +51,7 @@ public class _3092VisonTheDrakie extends QuestHandler {
 		} else if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 798214: // Vison
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case QUEST_SELECT:
 							if (qs.getQuestVarById(0) == 0) {
 								long itemCount = player.getInventory().getItemCountByItemId(182208066);
@@ -66,17 +65,17 @@ public class _3092VisonTheDrakie extends QuestHandler {
 					}
 					return false;
 				case 798191:
-					if (env.getDialog() == DialogAction.QUEST_SELECT)
+					if (env.getDialogActionId() == QUEST_SELECT)
 						return sendQuestDialog(env, 2375);
-					if (env.getDialog() == DialogAction.CHECK_USER_HAS_QUEST_ITEM) {
+					if (env.getDialogActionId() == CHECK_USER_HAS_QUEST_ITEM) {
 						return checkQuestItems(env, 1, 2, true, 5, 2716); // reward
 					}
-					if (env.getDialogId() == DialogAction.FINISH_DIALOG.id())
+					if (env.getDialogActionId() == FINISH_DIALOG)
 						return defaultCloseDialog(env, 1, 1);
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 798191) {
-				if (env.getDialog() == DialogAction.USE_OBJECT) {
+				if (env.getDialogActionId() == USE_OBJECT) {
 					return sendQuestDialog(env, 5);
 				} else {
 					return sendQuestEndDialog(env);

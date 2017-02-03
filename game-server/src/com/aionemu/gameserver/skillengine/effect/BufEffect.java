@@ -7,7 +7,6 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
-import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.model.gameobjects.Creature;
@@ -31,8 +30,6 @@ public abstract class BufEffect extends EffectTemplate {
 
 	@XmlAttribute
 	protected boolean maxstat;
-
-	private static final Logger log = LoggerFactory.getLogger(BufEffect.class);
 
 	@Override
 	public void applyEffect(Effect effect) {
@@ -80,7 +77,7 @@ public abstract class BufEffect extends EffectTemplate {
 
 		for (Change changeItem : change) {
 			if (changeItem.getStat() == null) {
-				log.warn("Skill stat has wrong name for skillid: " + skillId);
+				LoggerFactory.getLogger(BufEffect.class).warn("Skill stat has wrong name for skillid: " + skillId);
 				continue;
 			}
 

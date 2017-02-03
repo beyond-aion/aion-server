@@ -1,6 +1,7 @@
 package quest.ishalgen;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -43,12 +44,12 @@ public class _2004ACharmedCube extends QuestHandler {
 			return false;
 		int var = qs.getQuestVarById(0);
 		int targetId = env.getTargetId();
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 203539: // Derot
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var == 0) {
 								return sendQuestDialog(env, 1011);
@@ -68,14 +69,14 @@ public class _2004ACharmedCube extends QuestHandler {
 					}
 					break;
 				case 700047: // Tombstone
-					if (var == 1 && env.getVisibleObject().getObjectTemplate().getTemplateId() == 700047 && dialog == DialogAction.USE_OBJECT) {
+					if (var == 1 && env.getVisibleObject().getObjectTemplate().getTemplateId() == 700047 && dialogActionId == USE_OBJECT) {
 						Npc npc = (Npc) env.getVisibleObject();
 						QuestService.addNewSpawn(player.getWorldId(), player.getInstanceId(), 211755, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading());
 						return true;
 					}
 					return false;
 				case 203550: // Munin
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var == 2) {
 								return sendQuestDialog(env, 1693);
@@ -91,7 +92,7 @@ public class _2004ACharmedCube extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203539) { // Derot
-				if (dialog == DialogAction.USE_OBJECT) {
+				if (dialogActionId == USE_OBJECT) {
 					return sendQuestDialog(env, 2375);
 				} else {
 					return sendQuestEndDialog(env);

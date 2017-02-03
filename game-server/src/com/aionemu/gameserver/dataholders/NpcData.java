@@ -46,9 +46,9 @@ public class NpcData {
 			if (npc.getTribe() != null && !npc.getTribe().isUsed())
 				npc.getTribe().setUsed(true);
 			if (npc.getFuncDialogIds() != null) {
-				for (Integer dialogId : npc.getFuncDialogIds()) {
-					if (DialogAction.getByActionId(dialogId) == DialogAction.NULL && dialogId != DialogAction.NULL.id())
-						LoggerFactory.getLogger(NpcData.class).warn("Unknown dialog action " + dialogId + " for Npc " + npc.getTemplateId());
+				for (Integer dialogActionId : npc.getFuncDialogIds()) {
+					if (DialogAction.nameOf(dialogActionId) == null)
+						LoggerFactory.getLogger(NpcData.class).warn("Unknown dialog action " + dialogActionId + " for Npc " + npc.getTemplateId());
 				}
 			}
 			if (npc.getTribe() != TribeClass.PET && npc.getTribe() != TribeClass.PET_DARK) { // summons and siege weapons have fixed stats

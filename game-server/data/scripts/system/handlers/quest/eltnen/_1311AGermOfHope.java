@@ -1,6 +1,6 @@
 package quest.eltnen;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -13,10 +13,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _1311AGermOfHope extends QuestHandler {
 
-	private final static int questId = 1311;
-
 	public _1311AGermOfHope() {
-		super(questId);
+		super(1311);
 	}
 
 	@Override
@@ -36,9 +34,9 @@ public class _1311AGermOfHope extends QuestHandler {
 		final QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 203997) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
+				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 1011);
-				else if (env.getDialogId() == DialogAction.SELECT_ACTION_1013.id()) {
+				else if (env.getDialogActionId() == SELECT1_1_1) {
 					if (giveQuestItem(env, 182201305, 1))
 						return sendQuestDialog(env, 4);
 					else
@@ -49,7 +47,7 @@ public class _1311AGermOfHope extends QuestHandler {
 		} else if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 700164:
-					if (qs.getQuestVarById(0) == 0 && env.getDialog() == DialogAction.USE_OBJECT) {
+					if (qs.getQuestVarById(0) == 0 && env.getDialogActionId() == USE_OBJECT) {
 						removeQuestItem(env, 182201305, 1);
 						qs.setStatus(QuestStatus.REWARD);
 						qs.setQuestVarById(0, 3);
@@ -59,9 +57,9 @@ public class _1311AGermOfHope extends QuestHandler {
 					return false;
 				case 203997:
 					if (qs.getQuestVarById(0) == 1) {
-						if (env.getDialog() == DialogAction.QUEST_SELECT)
+						if (env.getDialogActionId() == QUEST_SELECT)
 							return sendQuestDialog(env, 2375);
-						else if (env.getDialogId() == DialogAction.CHECK_USER_HAS_QUEST_ITEM.id()) {
+						else if (env.getDialogActionId() == CHECK_USER_HAS_QUEST_ITEM) {
 							removeQuestItem(env, 182201305, 1);
 							qs.setStatus(QuestStatus.REWARD);
 							updateQuestStatus(env);

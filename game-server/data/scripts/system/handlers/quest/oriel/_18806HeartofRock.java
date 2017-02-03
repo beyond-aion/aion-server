@@ -1,10 +1,11 @@
 package quest.oriel;
 
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -16,7 +17,6 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _18806HeartofRock extends QuestHandler {
 
-	private static final int questId = 18806;
 
 	private static final Set<Integer> butlers;
 
@@ -30,7 +30,7 @@ public class _18806HeartofRock extends QuestHandler {
 	}
 
 	public _18806HeartofRock() {
-		super(questId);
+		super(18806);
 	}
 
 	@Override
@@ -49,12 +49,12 @@ public class _18806HeartofRock extends QuestHandler {
 	public boolean onDialogEvent(QuestEnv env) {
 		final Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.isStartable()) {
 			if (butlers.contains(targetId)) {
-				switch (dialog) {
+				switch (dialogActionId) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 1011);
 					case QUEST_ACCEPT_1:
@@ -65,11 +65,11 @@ public class _18806HeartofRock extends QuestHandler {
 		} else if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 830528:
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT: {
 							return sendQuestDialog(env, 1352);
 						}
-						case SELECT_ACTION_1353: {
+						case SELECT2_1: {
 							return sendQuestDialog(env, 1353);
 						}
 						case SETPRO1: {
@@ -78,7 +78,7 @@ public class _18806HeartofRock extends QuestHandler {
 					}
 					break;
 				case 830194:
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT: {
 							return sendQuestDialog(env, 2375);
 						}

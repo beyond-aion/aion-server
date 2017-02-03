@@ -1,6 +1,7 @@
 package quest.poeta;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.actions.NpcActions;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -44,7 +45,7 @@ public class _1002RequestoftheElim extends QuestHandler {
 	public boolean onDialogEvent(final QuestEnv env) {
 		final Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		if (qs == null)
 			return false;
 		int var = qs.getQuestVarById(0);
@@ -53,7 +54,7 @@ public class _1002RequestoftheElim extends QuestHandler {
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 203076: // Ampeis
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var == 0) {
 								return sendQuestDialog(env, 1011);
@@ -64,7 +65,7 @@ public class _1002RequestoftheElim extends QuestHandler {
 					}
 					break;
 				case 730007: // Forest Protector Noah
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var == 1) {
 								return sendQuestDialog(env, 1352);
@@ -76,7 +77,7 @@ public class _1002RequestoftheElim extends QuestHandler {
 								return sendQuestDialog(env, 2120);
 							}
 							return false;
-						case SELECT_ACTION_1353:
+						case SELECT2_1:
 							if (var == 1) {
 								playQuestMovie(env, 20);
 								return sendQuestDialog(env, 1353);
@@ -100,7 +101,7 @@ public class _1002RequestoftheElim extends QuestHandler {
 					}
 					break;
 				case 730010: // Sleeping Elder
-					if (dialog == DialogAction.USE_OBJECT) {
+					if (dialogActionId == USE_OBJECT) {
 						if (player.getInventory().getItemCountByItemId(182200002) == 1) {
 							if (var == 2) {
 								NpcActions.delete(env.getVisibleObject(), true);
@@ -113,7 +114,7 @@ public class _1002RequestoftheElim extends QuestHandler {
 					}
 					break;
 				case 730008: // Daminu
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var == 13) {
 								return sendQuestDialog(env, 2375);
@@ -131,7 +132,7 @@ public class _1002RequestoftheElim extends QuestHandler {
 					}
 					break;
 				case 205000: // Belpartan
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var == 20) {
 								player.setState(CreatureState.FLYING);
@@ -152,7 +153,7 @@ public class _1002RequestoftheElim extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203067) { // Kalio
-				if (dialog == DialogAction.USE_OBJECT) {
+				if (dialogActionId == USE_OBJECT) {
 					return sendQuestDialog(env, 2716);
 				} else {
 					return sendQuestEndDialog(env);

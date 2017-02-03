@@ -1,6 +1,6 @@
 package quest.reshanta;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -13,10 +13,8 @@ import com.aionemu.gameserver.utils.stats.AbyssRankEnum;
  */
 public class _1854GeneralPurge extends QuestHandler {
 
-	private final static int questId = 1854;
-
 	public _1854GeneralPurge() {
-		super(questId);
+		super(1854);
 	}
 
 	@Override
@@ -37,14 +35,14 @@ public class _1854GeneralPurge extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (env.getTargetId() == 278501) {
 			if (qs == null || qs.isStartable()) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT) {
+				if (env.getDialogActionId() == QUEST_SELECT) {
 					return sendQuestDialog(env, 1011);
 				} else {
 					return sendQuestStartDialog(env);
 				}
 			} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
 				if (env.getTargetId() == 278501) {
-					if (env.getDialog() == DialogAction.USE_OBJECT) {
+					if (env.getDialogActionId() == USE_OBJECT) {
 						return sendQuestDialog(env, 1352);
 					} else {
 						return sendQuestEndDialog(env);

@@ -1,6 +1,6 @@
 package quest.ishalgen;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -34,11 +34,11 @@ public class _2100OrderoftheCaptain extends QuestHandler {
 			return false;
 
 		int targetId = env.getTargetId();
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		if (targetId != 203516)
 			return false;
 		if (qs.getStatus() == QuestStatus.START) {
-			if (dialog == DialogAction.QUEST_SELECT) {
+			if (dialogActionId == QUEST_SELECT) {
 				qs.setStatus(QuestStatus.REWARD);
 				updateQuestStatus(env);
 				return sendQuestDialog(env, 1011);

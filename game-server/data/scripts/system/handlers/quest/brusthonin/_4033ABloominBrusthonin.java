@@ -1,6 +1,6 @@
 package quest.brusthonin;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
@@ -16,10 +16,8 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 public class _4033ABloominBrusthonin extends QuestHandler {
 
-	private final static int questId = 4033;
-
 	public _4033ABloominBrusthonin() {
-		super(questId);
+		super(4033);
 	}
 
 	@Override
@@ -39,16 +37,16 @@ public class _4033ABloominBrusthonin extends QuestHandler {
 		if (targetId == 205155) // Heintz
 		{
 			if (qs == null || qs.isStartable()) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
+				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 1011);
 				else
 					return sendQuestStartDialog(env);
 			}
 
 			else if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 0) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
+				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 1352);
-				else if (env.getDialogId() == DialogAction.CHECK_USER_HAS_QUEST_ITEM.id()) {
+				else if (env.getDialogActionId() == CHECK_USER_HAS_QUEST_ITEM) {
 					if (QuestService.collectItemCheck(env, true)) {
 						qs.setQuestVarById(0, qs.getQuestVarById(0) + 2);
 						updateQuestStatus(env);
@@ -61,9 +59,9 @@ public class _4033ABloominBrusthonin extends QuestHandler {
 			}
 
 			else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
+				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 2034);
-				else if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id()) {
+				else if (env.getDialogActionId() == SELECT_QUEST_REWARD) {
 					qs.setStatus(QuestStatus.REWARD);
 					updateQuestStatus(env);
 					return sendQuestEndDialog(env);
@@ -75,7 +73,7 @@ public class _4033ABloominBrusthonin extends QuestHandler {
 		else if (qs != null && qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 700379: { // Portaro's Tomb
-					if (qs.getQuestVarById(0) == 2 && env.getDialog() == DialogAction.USE_OBJECT) {
+					if (qs.getQuestVarById(0) == 2 && env.getDialogActionId() == USE_OBJECT) {
 						return useQuestObject(env, 2, 2, true, false); // reward
 					}
 				}

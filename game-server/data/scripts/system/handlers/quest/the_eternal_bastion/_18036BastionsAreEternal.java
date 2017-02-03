@@ -1,6 +1,6 @@
 package quest.the_eternal_bastion;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -9,10 +9,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 public class _18036BastionsAreEternal extends QuestHandler {
 
-	private final static int questId = 18036;
-
 	public _18036BastionsAreEternal() {
-		super(questId);
+		super(18036);
 	}
 
 	@Override
@@ -27,11 +25,11 @@ public class _18036BastionsAreEternal extends QuestHandler {
 		Player player = env.getPlayer();
 		int targetId = env.getTargetId();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 801037) {
-				if (dialog == DialogAction.QUEST_SELECT) {
+				if (dialogActionId == QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);
 				} else {
 					return sendQuestStartDialog(env);
@@ -39,10 +37,10 @@ public class _18036BastionsAreEternal extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 802008) {
-				if (dialog == DialogAction.QUEST_SELECT)
+				if (dialogActionId == QUEST_SELECT)
 					return sendQuestDialog(env, 1011);
 
-				if (dialog == DialogAction.SETPRO1) {
+				if (dialogActionId == SETPRO1) {
 					changeQuestStep(env, 0, 1, true);
 					updateQuestStatus(env);
 					return closeDialogWindow(env);

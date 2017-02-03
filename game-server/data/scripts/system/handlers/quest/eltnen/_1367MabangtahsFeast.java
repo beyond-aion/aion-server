@@ -1,6 +1,6 @@
 package quest.eltnen;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.DialogPage;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -39,7 +39,7 @@ public class _1367MabangtahsFeast extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (targetId == 204023) {
 			if (qs == null || qs.isStartable()) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
+				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 1011);
 				else
 					return sendQuestStartDialog(env);
@@ -47,13 +47,13 @@ public class _1367MabangtahsFeast extends QuestHandler {
 				itemCount1 = player.getInventory().getItemCountByItemId(ITEM_ID_1);
 				itemCount2 = player.getInventory().getItemCountByItemId(ITEM_ID_2);
 				itemCount3 = player.getInventory().getItemCountByItemId(ITEM_ID_3);
-				if (env.getDialog() == DialogAction.QUEST_SELECT && qs.getQuestVarById(0) == 0) {
+				if (env.getDialogActionId() == QUEST_SELECT && qs.getQuestVarById(0) == 0) {
 					if (itemCount1 >= 1 || itemCount2 >= 5 || itemCount3 >= 2) {
 						return sendQuestDialog(env, 1352);
 					} else {
 						return sendQuestDialog(env, 1693);
 					}
-				} else if (env.getDialog() == DialogAction.SETPRO1) {
+				} else if (env.getDialogActionId() == SETPRO1) {
 					if (itemCount1 >= 1) {
 						qs.setStatus(QuestStatus.REWARD);
 						updateQuestStatus(env);
@@ -62,7 +62,7 @@ public class _1367MabangtahsFeast extends QuestHandler {
 						return sendQuestDialog(env, DialogPage.getRewardPageByIndex(qs.getReward()).id());
 					} else
 						return sendQuestDialog(env, 1352);
-				} else if (env.getDialog() == DialogAction.SETPRO2) {
+				} else if (env.getDialogActionId() == SETPRO2) {
 					if (itemCount2 >= 5) {
 						qs.setStatus(QuestStatus.REWARD);
 						updateQuestStatus(env);
@@ -71,7 +71,7 @@ public class _1367MabangtahsFeast extends QuestHandler {
 						return sendQuestDialog(env, DialogPage.getRewardPageByIndex(qs.getReward()).id());
 					} else
 						return sendQuestDialog(env, 1352);
-				} else if (env.getDialog() == DialogAction.SETPRO3) {
+				} else if (env.getDialogActionId() == SETPRO3) {
 					if (itemCount3 >= 2) {
 						qs.setStatus(QuestStatus.REWARD);
 						updateQuestStatus(env);

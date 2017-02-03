@@ -1,6 +1,7 @@
 package quest.pandaemonium;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -51,12 +52,12 @@ public class _2900NoEscapingDestiny extends QuestHandler {
 		}
 		int var = qs.getQuestVars().getQuestVars();
 		int targetId = env.getTargetId();
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 204182: // Heimdall
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var == 0) {
 								return sendQuestDialog(env, 1011);
@@ -70,7 +71,7 @@ public class _2900NoEscapingDestiny extends QuestHandler {
 					}
 					break;
 				case 203550: // Munin
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var == 1) {
 								return sendQuestDialog(env, 1352);
@@ -87,7 +88,7 @@ public class _2900NoEscapingDestiny extends QuestHandler {
 					}
 					break;
 				case 790003: // Urd
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var == 2) {
 								return sendQuestDialog(env, 1693);
@@ -98,7 +99,7 @@ public class _2900NoEscapingDestiny extends QuestHandler {
 					}
 					break;
 				case 790002: // Verdandi
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var == 3) {
 								return sendQuestDialog(env, 2034);
@@ -109,7 +110,7 @@ public class _2900NoEscapingDestiny extends QuestHandler {
 					}
 					break;
 				case 203546: // Skuld
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var == 4) {
 								return sendQuestDialog(env, 2375);
@@ -134,7 +135,7 @@ public class _2900NoEscapingDestiny extends QuestHandler {
 					}
 					break;
 				case 204264: // Skuld 2
-					switch (dialog) {
+					switch (dialogActionId) {
 						case USE_OBJECT:
 							if (var == 99 && !isStigmaEquipped(env)) {
 								return sendQuestDialog(env, 3057);
@@ -155,7 +156,7 @@ public class _2900NoEscapingDestiny extends QuestHandler {
 								return closeDialogWindow(env);
 							}
 							return false;
-						case SELECT_ACTION_3058:
+						case SELECT7_1:
 							if (var == 96) {
 								if (!player.getInventory().isFull()) {
 									if (giveQuestItem(env, getStoneId(player), 1) && !isStigmaEquipped(env)) {

@@ -1,6 +1,7 @@
 package quest.poeta;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
@@ -16,10 +17,8 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 public class _1122DeliveringPernossRobe extends QuestHandler {
 
-	private final static int questId = 1122;
-
 	public _1122DeliveringPernossRobe() {
-		super(questId);
+		super(1122);
 	}
 
 	@Override
@@ -38,9 +37,9 @@ public class _1122DeliveringPernossRobe extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (targetId == 203060) {
 			if (qs == null) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
+				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 1011);
-				else if (env.getDialogId() == DialogAction.QUEST_ACCEPT_1.id()) {
+				else if (env.getDialogActionId() == QUEST_ACCEPT_1) {
 					if (giveQuestItem(env, 182200216, 1))
 						return sendQuestStartDialog(env);
 					else
@@ -51,7 +50,7 @@ public class _1122DeliveringPernossRobe extends QuestHandler {
 		} else if (targetId == 790001) {
 			if (qs != null && qs.getStatus() == QuestStatus.START) {
 				long itemCount;
-				switch (env.getDialog()) {
+				switch (env.getDialogActionId()) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 1352);
 					case SETPRO1:
@@ -92,9 +91,9 @@ public class _1122DeliveringPernossRobe extends QuestHandler {
 						return sendQuestStartDialog(env);
 				}
 			} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
-				if (env.getDialog() == DialogAction.USE_OBJECT || env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id()) {
+				if (env.getDialogActionId() == USE_OBJECT || env.getDialogActionId() == SELECT_QUEST_REWARD) {
 					return sendQuestDialog(env, 4 + qs.getQuestVars().getQuestVars());
-				} else if (env.getDialogId() == DialogAction.SELECTED_QUEST_NOREWARD.id()) {
+				} else if (env.getDialogActionId() == SELECTED_QUEST_NOREWARD) {
 					QuestService.finishQuest(env, qs.getQuestVars().getQuestVars() - 1);
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 					return true;

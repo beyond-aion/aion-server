@@ -1,6 +1,7 @@
 package quest.crafting;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -15,10 +16,8 @@ import com.aionemu.gameserver.services.craft.CraftSkillUpdateService;
  */
 public class _19038MasterCooksPotential extends QuestHandler {
 
-	private final static int questId = 19038;
-
 	public _19038MasterCooksPotential() {
-		super(questId);
+		super(19038);
 	}
 
 	@Override
@@ -36,16 +35,16 @@ public class _19038MasterCooksPotential extends QuestHandler {
 	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		int targetId = env.getTargetId();
 
-		if (dialog == DialogAction.QUEST_SELECT && !CraftSkillUpdateService.getInstance().canLearnMoreMasterCraftingSkill(player)) {
+		if (dialogActionId == QUEST_SELECT && !CraftSkillUpdateService.getInstance().canLearnMoreMasterCraftingSkill(player)) {
 			return sendQuestSelectionDialog(env);
 		}
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 203784) { // Hestia
-				if (env.getDialog() == DialogAction.QUEST_SELECT) {
+				if (env.getDialogActionId() == QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);
 				} else {
 					return sendQuestStartDialog(env);
@@ -56,7 +55,7 @@ public class _19038MasterCooksPotential extends QuestHandler {
 			switch (targetId) {
 				case 203785: // Luelas
 					long kinah = player.getInventory().getKinah();
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (kinah >= 6500) {
 								switch (var) {
@@ -137,7 +136,7 @@ public class _19038MasterCooksPotential extends QuestHandler {
 					}
 					break;
 				case 203784: // Hestia
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							switch (var) {
 								case 2: {

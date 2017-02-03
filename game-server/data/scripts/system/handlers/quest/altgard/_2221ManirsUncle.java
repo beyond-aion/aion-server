@@ -1,6 +1,6 @@
 package quest.altgard;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -13,10 +13,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _2221ManirsUncle extends QuestHandler {
 
-	private final static int questId = 2221;
-
 	public _2221ManirsUncle() {
-		super(questId);
+		super(2221);
 	}
 
 	@Override
@@ -33,11 +31,11 @@ public class _2221ManirsUncle extends QuestHandler {
 		Player player = env.getPlayer();
 		int targetId = env.getTargetId();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 203607) { // Manir
-				if (dialog == DialogAction.QUEST_SELECT) {
+				if (dialogActionId == QUEST_SELECT) {
 					return sendQuestDialog(env, 1011);
 				} else {
 					return sendQuestStartDialog(env);
@@ -47,26 +45,26 @@ public class _2221ManirsUncle extends QuestHandler {
 			int var = qs.getQuestVarById(0);
 			switch (targetId) {
 				case 203608: // Groken
-					if (dialog == DialogAction.QUEST_SELECT) {
+					if (dialogActionId == QUEST_SELECT) {
 						if (var == 0) {
 							return sendQuestDialog(env, 1352);
 						} else if (var == 2) {
 							return sendQuestDialog(env, 2375);
 						}
-					} else if (dialog == DialogAction.SETPRO1) {
+					} else if (dialogActionId == SETPRO1) {
 						return defaultCloseDialog(env, 0, 1); // 1
-					} else if (dialog == DialogAction.SELECT_QUEST_REWARD) {
+					} else if (dialogActionId == SELECT_QUEST_REWARD) {
 						removeQuestItem(env, 182203215, 1);
 						changeQuestStep(env, 2, 2, true); // reward
 						return sendQuestDialog(env, 5);
 					}
 					break;
 				case 700214: { // Groken's Safe
-					if (dialog == DialogAction.USE_OBJECT) {
+					if (dialogActionId == USE_OBJECT) {
 						if (var == 1) {
 							return sendQuestDialog(env, 1693);
 						}
-					} else if (dialog == DialogAction.SETPRO2) {
+					} else if (dialogActionId == SETPRO2) {
 						return closeDialogWindow(env);
 					}
 				}

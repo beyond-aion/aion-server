@@ -1,6 +1,6 @@
 package quest.beluslan;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -96,7 +96,7 @@ public class _28602IntotheUnknown extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 205234) { // Bridget
-				if (env.getDialog() == DialogAction.QUEST_SELECT) {
+				if (env.getDialogActionId() == QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);
 				}
 				return sendQuestStartDialog(env);
@@ -104,9 +104,9 @@ public class _28602IntotheUnknown extends QuestHandler {
 		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			if (targetId == 205234) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT) {
+				if (env.getDialogActionId() == QUEST_SELECT) {
 					return sendQuestDialog(env, 1011);
-				} else if (env.getDialog() == DialogAction.SETPRO1) {
+				} else if (env.getDialogActionId() == SETPRO1) {
 					WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(300230000);
 					InstanceService.registerPlayerWithInstance(newInstance, player);
 					TeleportService.teleportTo(player, 300230000, newInstance.getInstanceId(), 244.98566f, 244.14162f, 189.52058f, (byte) 30,
@@ -115,13 +115,13 @@ public class _28602IntotheUnknown extends QuestHandler {
 					return closeDialogWindow(env);
 				}
 			} else if (targetId == 730308) {
-				if (env.getDialog() == DialogAction.USE_OBJECT) {
+				if (env.getDialogActionId() == USE_OBJECT) {
 					if (var == 1) {
 						return sendQuestDialog(env, 1352);
 					}
-				} else if (env.getDialog() == DialogAction.SELECT_ACTION_1353) {
+				} else if (env.getDialogActionId() == SELECT2_1) {
 					return sendQuestDialog(env, 1353);
-				} else if (env.getDialog() == DialogAction.SETPRO2) {
+				} else if (env.getDialogActionId() == SETPRO2) {
 
 					// Check item
 					if (var == 1) {
@@ -138,11 +138,11 @@ public class _28602IntotheUnknown extends QuestHandler {
 					}
 				}
 			} else if (targetId == 700939) { // Robstin's Corpse
-				if (env.getDialog() == DialogAction.USE_OBJECT) {
+				if (env.getDialogActionId() == USE_OBJECT) {
 					if (var == 2) {
 						return sendQuestDialog(env, 1693);
 					}
-				} else if (env.getDialog() == DialogAction.SETPRO3) {
+				} else if (env.getDialogActionId() == SETPRO3) {
 					if (!player.getEffectController().hasAbnormalEffect(19288)) {
 						SkillEngine.getInstance().applyEffectDirectly(19288, player, player, 0); // Rage of Kromede
 					}
@@ -151,7 +151,7 @@ public class _28602IntotheUnknown extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 205234) { // Bridget
-				if (env.getDialog() == DialogAction.USE_OBJECT) {
+				if (env.getDialogActionId() == USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
 				}
 				return sendQuestEndDialog(env);

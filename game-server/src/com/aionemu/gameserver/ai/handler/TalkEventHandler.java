@@ -28,7 +28,7 @@ public class TalkEventHandler {
 
 		if (creature instanceof Player) {
 			Player player = (Player) creature;
-			if (QuestEngine.getInstance().onDialog(new QuestEnv(npcAI.getOwner(), player, 0, -1)))
+			if (QuestEngine.getInstance().onDialog(new QuestEnv(npcAI.getOwner(), player, 0, DialogAction.USE_OBJECT)))
 				return;
 			// only player villagers can use villager npcs in oriel/pernon
 			switch (npcAI.getOwner().getObjectTemplate().getTitleId()) {
@@ -43,11 +43,11 @@ public class TalkEventHandler {
 						return;
 					}
 				default:
-					int dialogId = 10;
-					if (DialogService.isSubDialogRestricted(dialogId, player, npcAI.getOwner())) {
-						dialogId = DialogAction.SELECT_ACTION_1011.id();
+					int dialogPageId = 10;
+					if (DialogService.isSubDialogRestricted(player, npcAI.getOwner())) {
+						dialogPageId = 1011;
 					}
-					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(npcAI.getOwner().getObjectId(), dialogId));
+					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(npcAI.getOwner().getObjectId(), dialogPageId));
 					break;
 			}
 		}

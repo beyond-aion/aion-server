@@ -1,6 +1,7 @@
 package quest.eltnen;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
@@ -13,13 +14,10 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 /**
  * @author Xitanium
  */
-public class _1319PrioritesMoney extends QuestHandler // NEED FIX ITEM
-{
-
-	private final static int questId = 1319;
+public class _1319PrioritesMoney extends QuestHandler {
 
 	public _1319PrioritesMoney() {
-		super(questId);
+		super(1319);
 	}
 
 	@Override
@@ -37,7 +35,7 @@ public class _1319PrioritesMoney extends QuestHandler // NEED FIX ITEM
 	}
 
 	@Override
-	public boolean onDialogEvent(QuestEnv env) {
+	public boolean onDialogEvent(QuestEnv env) { // NEED FIX ITEM
 		final Player player = env.getPlayer();
 		int targetId = 0;
 		if (env.getVisibleObject() instanceof Npc)
@@ -46,16 +44,16 @@ public class _1319PrioritesMoney extends QuestHandler // NEED FIX ITEM
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 203908) // Priorite
 			{
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
+				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 1011);
 				else
 					return sendQuestStartDialog(env);
 			}
 		} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) // Reward
 		{
-			if (env.getDialog() == DialogAction.QUEST_SELECT)
+			if (env.getDialogActionId() == QUEST_SELECT)
 				return sendQuestDialog(env, 4080);
-			else if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id()) {
+			else if (env.getDialogActionId() == SELECT_QUEST_REWARD) {
 				qs.setQuestVar(8);
 				qs.setStatus(QuestStatus.REWARD);
 				updateQuestStatus(env);
@@ -68,9 +66,9 @@ public class _1319PrioritesMoney extends QuestHandler // NEED FIX ITEM
 		{
 
 			if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 0) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
+				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 1352);
-				else if (env.getDialog() == DialogAction.SETPRO1) {
+				else if (env.getDialogActionId() == SETPRO1) {
 					qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
 					updateQuestStatus(env);
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
@@ -84,9 +82,9 @@ public class _1319PrioritesMoney extends QuestHandler // NEED FIX ITEM
 		else if (targetId == 203910) // Hebestis
 		{
 			if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 1) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
+				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 1693);
-				else if (env.getDialog() == DialogAction.SETPRO2) {
+				else if (env.getDialogActionId() == SETPRO2) {
 					qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
 					updateQuestStatus(env);
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
@@ -99,9 +97,9 @@ public class _1319PrioritesMoney extends QuestHandler // NEED FIX ITEM
 		else if (targetId == 203906) // Benos
 		{
 			if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 2) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
+				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 2034);
-				else if (env.getDialog() == DialogAction.SETPRO3) {
+				else if (env.getDialogActionId() == SETPRO3) {
 					qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
 					updateQuestStatus(env);
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
@@ -114,9 +112,9 @@ public class _1319PrioritesMoney extends QuestHandler // NEED FIX ITEM
 		else if (targetId == 203915) // Diokles
 		{
 			if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 3) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
+				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 2375);
-				else if (env.getDialog() == DialogAction.SETPRO4) {
+				else if (env.getDialogActionId() == SETPRO4) {
 					qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
 					updateQuestStatus(env);
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
@@ -129,9 +127,9 @@ public class _1319PrioritesMoney extends QuestHandler // NEED FIX ITEM
 		else if (targetId == 203907) // Tuskeos
 		{
 			if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 4) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
+				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 2716);
-				else if (env.getDialogId() == DialogAction.SETPRO5.id()) {
+				else if (env.getDialogActionId() == SETPRO5) {
 					qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
 					updateQuestStatus(env);
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
@@ -144,9 +142,9 @@ public class _1319PrioritesMoney extends QuestHandler // NEED FIX ITEM
 		else if (targetId == 798050) // Girrinerk
 		{
 			if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 5) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
+				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 3057);
-				else if (env.getDialogId() == DialogAction.SETPRO6.id()) {
+				else if (env.getDialogActionId() == SETPRO6) {
 					qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
 					updateQuestStatus(env);
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
@@ -159,9 +157,9 @@ public class _1319PrioritesMoney extends QuestHandler // NEED FIX ITEM
 		else if (targetId == 798049) // Shaoranranerk
 		{
 			if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 6) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
+				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 3398);
-				else if (env.getDialogId() == DialogAction.SETPRO7.id()) {
+				else if (env.getDialogActionId() == SETPRO7) {
 					qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
 					updateQuestStatus(env);
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
@@ -174,9 +172,9 @@ public class _1319PrioritesMoney extends QuestHandler // NEED FIX ITEM
 		else if (targetId == 205240) // Arnesonerk
 		{
 			if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 7) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
+				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 3739);
-				else if (env.getDialogId() == DialogAction.SETPRO8.id() && qs.getStatus() != QuestStatus.COMPLETE) {
+				else if (env.getDialogActionId() == SETPRO8 && qs.getStatus() != QuestStatus.COMPLETE) {
 					qs.setStatus(QuestStatus.REWARD);
 					updateQuestStatus(env);
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));

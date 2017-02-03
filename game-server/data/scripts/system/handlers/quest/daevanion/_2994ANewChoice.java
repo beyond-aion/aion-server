@@ -1,6 +1,7 @@
 package quest.daevanion;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.DialogPage;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -15,7 +16,6 @@ import com.aionemu.gameserver.services.QuestService;
  */
 public class _2994ANewChoice extends QuestHandler {
 
-	private final static int questId = 2994;
 	private final static int dialogs[] = { 1013, 1034, 1055, 1076, 5103, 1098, 1119, 1140, 1161, 1204, 1225, 1246, 5105, 1183 };
 	private final static int items[][] = { { 100000723, 100000724 }, { 100900554, 100900555 }, { 101300538, 101300539 }, { 100200673, 100200674 },
 		{ 101700594, 101700595 }, // physical
@@ -23,7 +23,7 @@ public class _2994ANewChoice extends QuestHandler {
 		{ 101900562, 101900563 }, { 102000592, 102000593 }, { 102100517, 102100518 }, { 115000826, 115000828 } }; // shield
 
 	public _2994ANewChoice() {
-		super(questId);
+		super(2994);
 	}
 
 	@Override
@@ -38,21 +38,21 @@ public class _2994ANewChoice extends QuestHandler {
 			return false;
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		int dialogId = env.getDialogId();
+		int dialogActionId = env.getDialogActionId();
 
 		if (qs == null || qs.isStartable()) {
-			if (dialogId == DialogAction.EXCHANGE_COIN.id()) {
+			if (dialogActionId == EXCHANGE_COIN) {
 				QuestService.startQuest(env);
 				return sendQuestDialog(env, 1011);
 			} else {
 				return sendQuestStartDialog(env);
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
-			if (dialogId == DialogAction.EXCHANGE_COIN.id())
+			if (dialogActionId == EXCHANGE_COIN)
 				return sendQuestDialog(env, 1011);
 
 			for (int dialogIndex = 0; dialogIndex < dialogs.length; dialogIndex++) {
-				if (dialogs[dialogIndex] == dialogId) {
+				if (dialogs[dialogIndex] == dialogActionId) {
 					for (int itemId : items[dialogIndex]) {
 						if (player.getInventory().getItemCountByItemId(itemId) > 0) {
 							qs.setReward(dialogIndex);
@@ -62,18 +62,14 @@ public class _2994ANewChoice extends QuestHandler {
 					return sendQuestDialog(env, 1352);
 				}
 			}
-			switch (dialogId) {
-				case 1012:
-				case 1097:
-				case 1182:
-				case 1267:
-					return sendQuestDialog(env, dialogId);
-				case 10000:
-				case 10001:
-				case 10002:
-				case 10003:
-				case 10004:
-				case 10005:
+
+			switch (dialogActionId) {
+				case SETPRO1:
+				case SETPRO2:
+				case SETPRO3:
+				case SETPRO4:
+				case SETPRO5:
+				case SETPRO6:
 					if (player.getInventory().getItemCountByItemId(186000041) == 0) // Daevanion's Light
 						return sendQuestDialog(env, 1009);
 					Integer savedData = qs.getReward();
@@ -87,9 +83,10 @@ public class _2994ANewChoice extends QuestHandler {
 					changeQuestStep(env, 0, 0, true);
 					removeQuestItem(env, 186000041, 1);
 					removeQuestItem(env, itemIdToRemove, 1);
-					qs.setReward(dialogId - 10000);
+					qs.setReward(dialogActionId - SETPRO1); // 0 - 4
 					return sendQuestDialog(env, DialogPage.getRewardPageByIndex(qs.getReward()).id());
 			}
+			return super.onDialogEvent(env);
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			return sendQuestEndDialog(env, qs.getReward());
 		}

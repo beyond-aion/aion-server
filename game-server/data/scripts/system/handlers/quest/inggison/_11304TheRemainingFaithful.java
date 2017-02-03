@@ -1,6 +1,7 @@
 package quest.inggison;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -12,10 +13,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _11304TheRemainingFaithful extends QuestHandler {
 
-	private final static int questId = 11304;
-
 	public _11304TheRemainingFaithful() {
-		super(questId);
+		super(11304);
 	}
 
 	@Override
@@ -31,13 +30,13 @@ public class _11304TheRemainingFaithful extends QuestHandler {
 	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 798927) {
-				switch (dialog) {
+				switch (dialogActionId) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 1011);
 					default: {
@@ -48,7 +47,7 @@ public class _11304TheRemainingFaithful extends QuestHandler {
 		} else if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 798941:
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT: {
 							return sendQuestDialog(env, 1352);
 						}

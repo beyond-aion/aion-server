@@ -1,5 +1,7 @@
 package quest.ascension;
 
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import java.util.List;
 
 import com.aionemu.gameserver.configs.main.CustomConfig;
@@ -106,7 +108,7 @@ public class _2008Ascension extends QuestHandler {
 
 		if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 203550) {
-				switch (env.getDialog()) {
+				switch (env.getDialogActionId()) {
 					case QUEST_SELECT:
 						if (var == 0)
 							return sendQuestDialog(env, 1011);
@@ -115,7 +117,7 @@ public class _2008Ascension extends QuestHandler {
 						else if (var == 6)
 							return sendQuestDialog(env, 2716);
 						return false;
-					case SELECT_ACTION_2376:
+					case SELECT5_1:
 						if (var == 4) {
 							playQuestMovie(env, 57);
 							removeQuestItem(env, 182203009, 1);
@@ -140,9 +142,9 @@ public class _2008Ascension extends QuestHandler {
 						}
 						return false;
 					case SETPRO6:
-						int dialogId = ClassChangeService.getClassSelectionDialogId(player.getRace(), player.getPlayerClass());
-						if (var == 6 && dialogId != 0)
-							return sendQuestDialog(env, dialogId);
+						int dialogPageId = ClassChangeService.getClassSelectionDialogPageId(player.getRace(), player.getPlayerClass());
+						if (var == 6 && dialogPageId != 0)
+							return sendQuestDialog(env, dialogPageId);
 						return false;
 					case SETPRO7:
 						return var == 6 && setPlayerClass(env, qs, PlayerClass.GLADIATOR);
@@ -168,7 +170,7 @@ public class _2008Ascension extends QuestHandler {
 						return var == 6 && setPlayerClass(env, qs, PlayerClass.RIDER);
 				}
 			} else if (targetId == 790003) {
-				switch (env.getDialog()) {
+				switch (env.getDialogActionId()) {
 					case QUEST_SELECT:
 						if (var == 1)
 							return sendQuestDialog(env, 1352);
@@ -184,7 +186,7 @@ public class _2008Ascension extends QuestHandler {
 						return false;
 				}
 			} else if (targetId == 790002) {
-				switch (env.getDialog()) {
+				switch (env.getDialogActionId()) {
 					case QUEST_SELECT:
 						if (var == 2)
 							return sendQuestDialog(env, 1693);
@@ -200,7 +202,7 @@ public class _2008Ascension extends QuestHandler {
 						return false;
 				}
 			} else if (targetId == 203546) {
-				switch (env.getDialog()) {
+				switch (env.getDialogActionId()) {
 					case QUEST_SELECT:
 						if (var == 3)
 							return sendQuestDialog(env, 2034);
@@ -217,7 +219,7 @@ public class _2008Ascension extends QuestHandler {
 						return false;
 				}
 			} else if (targetId == 205020) {
-				switch (env.getDialog()) {
+				switch (env.getDialogActionId()) {
 					case QUEST_SELECT:
 						if (var == 99) {
 							SkillEngine.getInstance().applyEffectDirectly(257, player, player, 0);
@@ -250,7 +252,7 @@ public class _2008Ascension extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203550) {
-				switch (env.getDialog()) {
+				switch (env.getDialogActionId()) {
 					case SELECTED_QUEST_NOREWARD:
 						if (player.getWorldId() == 320020000) {
 							TeleportService.teleportTo(player, 220010000, 386.03476f, 1893.9309f, 327.62283f, (byte) 59, TeleportAnimation.FADE_OUT_BEAM);

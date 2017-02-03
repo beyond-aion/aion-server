@@ -1,5 +1,7 @@
 package quest.verteron;
 
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
@@ -56,7 +58,7 @@ public class _14013AFrillOfAFuss extends QuestHandler {
 
 		if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 203129) {
-				switch (env.getDialog()) {
+				switch (env.getDialogActionId()) {
 					case QUEST_SELECT:
 						if (var == 0) {
 							return sendQuestDialog(env, 1011);
@@ -64,7 +66,7 @@ public class _14013AFrillOfAFuss extends QuestHandler {
 							return sendQuestDialog(env, 1352);
 						}
 						return false;
-					case SELECT_ACTION_1012:
+					case SELECT1_1:
 						playQuestMovie(env, 27);
 						return sendQuestDialog(env, 1012);
 					case SETPRO1:

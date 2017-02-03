@@ -1,7 +1,8 @@
 package quest.ascension;
 
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.configs.main.CustomConfig;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.PlayerClass;
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -39,7 +40,7 @@ public class _1007ACeremonyinSanctum extends QuestHandler {
 	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		int targetId = env.getTargetId();
 		if (qs == null) {
 			return false;
@@ -49,7 +50,7 @@ public class _1007ACeremonyinSanctum extends QuestHandler {
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 790001: // Pernos
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var == 0) {
 								return sendQuestDialog(env, 1011);
@@ -69,55 +70,49 @@ public class _1007ACeremonyinSanctum extends QuestHandler {
 					}
 					break;
 				case 203725: // Leah
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var == 1) {
 								return sendQuestDialog(env, 1352);
 							}
 							return false;
-						case SELECT_ACTION_1353:
+						case SELECT2_1:
 							return playQuestMovie(env, 92);
 						case SETPRO2:
 							return defaultCloseDialog(env, 1, 2); // 2
 					}
 					break;
 				case 203752: // Jucleas
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var == 2) {
 								return sendQuestDialog(env, 1693);
 							}
 							return false;
-						case SELECT_ACTION_1694:
+						case SELECT3_1:
 							return playQuestMovie(env, 91);
 						case SETPRO3:
 							if (var == 2) {
 								PlayerClass playerClass = PlayerClass.getStartingClassFor(player.getCommonData().getPlayerClass());
 								switch (playerClass) {
-									case WARRIOR: {
+									case WARRIOR:
 										qs.setQuestVar(10);
 										break;
-									}
-									case SCOUT: {
+									case SCOUT:
 										qs.setQuestVar(20);
 										break;
-									}
-									case MAGE: {
+									case MAGE:
 										qs.setQuestVar(30);
 										break;
-									}
-									case PRIEST: {
+									case PRIEST:
 										qs.setQuestVar(40);
 										break;
-									}
-									case ENGINEER: {
+									case ENGINEER:
 										qs.setQuestVar(50);
 										break;
-									}
-									case ARTIST: {
+									case ARTIST:
 										qs.setQuestVar(60);
 										break;
-									}
 								}
 								qs.setStatus(QuestStatus.REWARD);
 								updateQuestStatus(env);
@@ -129,43 +124,43 @@ public class _1007ACeremonyinSanctum extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203758 && var == 10) {
-				switch (env.getDialogId()) {
-					case -1:
+				switch (env.getDialogActionId()) {
+					case USE_OBJECT:
 						return sendQuestDialog(env, 2034);
 					default:
 						return sendQuestEndDialog(env, 0);
 				}
 			} else if (targetId == 203759 && var == 20) {
-				switch (env.getDialogId()) {
-					case -1:
+				switch (env.getDialogActionId()) {
+					case USE_OBJECT:
 						return sendQuestDialog(env, 2375);
 					default:
 						return sendQuestEndDialog(env, 1);
 				}
 			} else if (targetId == 203760 && var == 30) {
-				switch (env.getDialogId()) {
-					case -1:
+				switch (env.getDialogActionId()) {
+					case USE_OBJECT:
 						return sendQuestDialog(env, 2716);
 					default:
 						return sendQuestEndDialog(env, 2);
 				}
 			} else if (targetId == 203761 && var == 40) {
-				switch (env.getDialogId()) {
-					case -1:
+				switch (env.getDialogActionId()) {
+					case USE_OBJECT:
 						return sendQuestDialog(env, 3057);
 					default:
 						return sendQuestEndDialog(env, 3);
 				}
 			} else if (targetId == 801212 && var == 50) {
-				switch (env.getDialogId()) {
-					case -1:
+				switch (env.getDialogActionId()) {
+					case USE_OBJECT:
 						return sendQuestDialog(env, 3398);
 					default:
 						return sendQuestEndDialog(env, 4);
 				}
 			} else if (targetId == 801213 && var == 60) {
-				switch (env.getDialogId()) {
-					case -1:
+				switch (env.getDialogActionId()) {
+					case USE_OBJECT:
 						return sendQuestDialog(env, 3739);
 					default:
 						return sendQuestEndDialog(env, 5);

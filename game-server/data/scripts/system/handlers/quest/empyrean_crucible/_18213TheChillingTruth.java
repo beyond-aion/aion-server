@@ -1,6 +1,7 @@
 package quest.empyrean_crucible;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
@@ -14,10 +15,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _18213TheChillingTruth extends QuestHandler {
 
-	private final static int questId = 18213;
-
 	public _18213TheChillingTruth() {
-		super(questId);
+		super(18213);
 	}
 
 	@Override
@@ -34,11 +33,11 @@ public class _18213TheChillingTruth extends QuestHandler {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		int targetId = env.getTargetId();
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 205985) {
-				switch (dialog) {
+				switch (dialogActionId) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 1011);
 					case ASK_QUEST_ACCEPT:
@@ -50,10 +49,10 @@ public class _18213TheChillingTruth extends QuestHandler {
 		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			if (targetId == 205316) {
-				switch (dialog) {
+				switch (dialogActionId) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 1352);
-					case SELECT_ACTION_1353:
+					case SELECT2_1:
 						removeQuestItem(env, 182212219, 1);
 						giveQuestItem(env, 182212220, 1);
 						return sendQuestDialog(env, 1353);
@@ -61,7 +60,7 @@ public class _18213TheChillingTruth extends QuestHandler {
 						return defaultCloseDialog(env, 0, 1);
 				}
 			} else if (targetId == 798604) {
-				switch (dialog) {
+				switch (dialogActionId) {
 					case QUEST_SELECT:
 						if (var == 1) {
 							return sendQuestDialog(env, 1693);
@@ -78,7 +77,7 @@ public class _18213TheChillingTruth extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 798604) {
-				if (dialog == DialogAction.USE_OBJECT) {
+				if (dialogActionId == USE_OBJECT) {
 					return sendQuestDialog(env, 2375);
 				} else {
 					return sendQuestEndDialog(env);

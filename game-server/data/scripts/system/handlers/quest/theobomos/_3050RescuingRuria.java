@@ -1,6 +1,7 @@
 package quest.theobomos;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -18,10 +19,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 public class _3050RescuingRuria extends QuestHandler {
 
-	private final static int questId = 3050;
-
 	public _3050RescuingRuria() {
-		super(questId);
+		super(3050);
 	}
 
 	@Override
@@ -46,7 +45,7 @@ public class _3050RescuingRuria extends QuestHandler {
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 798211) { // Ruria
-				switch (env.getDialog()) {
+				switch (env.getDialogActionId()) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 4762);
 					default:
@@ -56,7 +55,7 @@ public class _3050RescuingRuria extends QuestHandler {
 		} else if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 798211: // Ruria
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case QUEST_SELECT:
 							if (qs.getQuestVarById(0) == 0) {
 								long itemCount = player.getInventory().getItemCountByItemId(182208035);
@@ -68,7 +67,7 @@ public class _3050RescuingRuria extends QuestHandler {
 								return sendQuestDialog(env, 1013);
 							}
 							return false;
-						case SELECT_ACTION_1012:
+						case SELECT1_1:
 							removeQuestItem(env, 182208035, 1);
 							changeQuestStep(env, 0, 1);
 							return sendQuestDialog(env, 1012);
@@ -78,7 +77,7 @@ public class _3050RescuingRuria extends QuestHandler {
 					}
 					break;
 				case 798208: // Melleas
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case QUEST_SELECT:
 							if (qs.getQuestVarById(0) == 3) {
 								return sendQuestDialog(env, 2034);
@@ -90,7 +89,7 @@ public class _3050RescuingRuria extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 798190) { // Rosina
-				if (env.getDialog() == DialogAction.USE_OBJECT)
+				if (env.getDialogActionId() == USE_OBJECT)
 					return sendQuestDialog(env, 10002);
 				else
 					return sendQuestEndDialog(env);

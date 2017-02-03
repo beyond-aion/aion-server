@@ -1,6 +1,7 @@
 package quest.fatebound_abbey;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -13,12 +14,11 @@ import com.aionemu.gameserver.services.QuestService;
  */
 public class _29600WelcomeBack extends QuestHandler {
 
-	private static final int questId = 29600;
 	private static final int npcId = 804662; // Melanka
 	private static final int itemId = 164000336; // Abbey Return Stone
 
 	public _29600WelcomeBack() {
-		super(questId);
+		super(29600);
 	}
 
 	@Override
@@ -31,7 +31,7 @@ public class _29600WelcomeBack extends QuestHandler {
 	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		int targetId = env.getTargetId();
 
 		if (qs == null)
@@ -39,7 +39,7 @@ public class _29600WelcomeBack extends QuestHandler {
 
 		if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == npcId) {
-				switch (dialog) {
+				switch (dialogActionId) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 1011);
 					case SETPRO1:

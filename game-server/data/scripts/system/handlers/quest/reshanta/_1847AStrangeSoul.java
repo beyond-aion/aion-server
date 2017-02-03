@@ -1,6 +1,6 @@
 package quest.reshanta;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
@@ -16,10 +16,8 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 public class _1847AStrangeSoul extends QuestHandler {
 
-	private final static int questId = 1847;
-
 	public _1847AStrangeSoul() {
-		super(questId);
+		super(1847);
 	}
 
 	@Override
@@ -38,7 +36,7 @@ public class _1847AStrangeSoul extends QuestHandler {
 			targetId = ((Npc) env.getVisibleObject()).getNpcId();
 
 		if (qs == null || qs.isStartable()) {
-			if (env.getDialogId() == DialogAction.QUEST_ACCEPT_1.id()) {
+			if (env.getDialogActionId() == QUEST_ACCEPT_1) {
 				QuestService.startQuest(env);
 				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(0, 0));
 				return true;
@@ -48,18 +46,18 @@ public class _1847AStrangeSoul extends QuestHandler {
 
 		else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 278592) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
+				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 1352);
-				else if (env.getDialog() == DialogAction.SETPRO1) {
+				else if (env.getDialogActionId() == SETPRO1) {
 					qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
 					updateQuestStatus(env);
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 					return true;
 				}
 			} else if (targetId == 203933) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
+				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 1693);
-				else if (env.getDialog() == DialogAction.SETPRO2) {
+				else if (env.getDialogActionId() == SETPRO2) {
 					qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
 					updateQuestStatus(env);
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
@@ -68,9 +66,9 @@ public class _1847AStrangeSoul extends QuestHandler {
 			}
 
 			else if (targetId == 203991) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
+				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 2375);
-				else if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id()) {
+				else if (env.getDialogActionId() == SELECT_QUEST_REWARD) {
 					qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
 					qs.setStatus(QuestStatus.REWARD);
 					updateQuestStatus(env);

@@ -1,6 +1,6 @@
 package quest.udas_temple;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -13,10 +13,8 @@ import com.aionemu.gameserver.world.zone.ZoneName;
  */
 public class _30111CenterOfTheWeb extends QuestHandler {
 
-	private final static int questId = 30111;
-
 	public _30111CenterOfTheWeb() {
-		super(questId);
+		super(30111);
 	}
 
 	@Override
@@ -31,27 +29,27 @@ public class _30111CenterOfTheWeb extends QuestHandler {
 	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 799335) {
-				if (dialog == DialogAction.QUEST_SELECT) {
+				if (dialogActionId == QUEST_SELECT) {
 					return sendQuestDialog(env, 1011);
 				} else
 					return sendQuestStartDialog(env);
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 799335) {
-				if (dialog == DialogAction.QUEST_SELECT) {
+				if (dialogActionId == QUEST_SELECT) {
 					return sendQuestDialog(env, 1352);
-				} else if (dialog == DialogAction.SELECT_QUEST_REWARD) {
+				} else if (dialogActionId == SELECT_QUEST_REWARD) {
 					return defaultCloseDialog(env, 2, 2, true, true);
 				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 799335) {
-				if (dialog == DialogAction.USE_OBJECT) {
+				if (dialogActionId == USE_OBJECT) {
 					return sendQuestDialog(env, 5);
 				}
 				return sendQuestEndDialog(env);

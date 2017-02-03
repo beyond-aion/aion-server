@@ -1,6 +1,7 @@
 package quest.clash_of_destiny;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -44,14 +45,14 @@ public class _24030ShowdownWithDestiny extends QuestHandler {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		int targetId = env.getTargetId();
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		if (qs == null)
 			return false;
 		if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			switch (targetId) {
 				case 204206:// Cavalorn
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var == 0)
 								return sendQuestDialog(env, 1011);
@@ -61,7 +62,7 @@ public class _24030ShowdownWithDestiny extends QuestHandler {
 					}
 					break;
 				case 204207:// Kasir
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var == 1)
 								return sendQuestDialog(env, 1352);
@@ -74,7 +75,7 @@ public class _24030ShowdownWithDestiny extends QuestHandler {
 					}
 					break;
 				case 203550:// Munin
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var == 2)
 								return sendQuestDialog(env, 1693);
@@ -115,7 +116,7 @@ public class _24030ShowdownWithDestiny extends QuestHandler {
 					}
 					break;
 				case 205020:// Hagen
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							return sendQuestDialog(env, 2716);
 						case SETPRO6:
@@ -132,7 +133,7 @@ public class _24030ShowdownWithDestiny extends QuestHandler {
 			}
 		}
 		if (targetId == 204052 && qs.getStatus() == QuestStatus.REWARD) {// Vidar
-			switch (dialog) {
+			switch (dialogActionId) {
 				case USE_OBJECT:
 					return sendQuestDialog(env, 10002);
 				case SELECT_QUEST_REWARD:

@@ -1,6 +1,7 @@
 package quest.ishalgen;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
@@ -15,11 +16,10 @@ import com.aionemu.gameserver.services.QuestService;
  */
 public class _2122AshesToAshes extends QuestHandler {
 
-	private final static int questId = 2122;
 	private int[] npcs = { 203551, 700148, 730029 };
 
 	public _2122AshesToAshes() {
-		super(questId);
+		super(2122);
 	}
 
 	@Override
@@ -36,34 +36,34 @@ public class _2122AshesToAshes extends QuestHandler {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		int targetId = env.getTargetId();
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 0) {
-				if (dialog == DialogAction.QUEST_ACCEPT_1) {
+				if (dialogActionId == QUEST_ACCEPT_1) {
 					QuestService.startQuest(env);
 					return closeDialogWindow(env);
 				}
 			}
 		} else if (qs != null && qs.getStatus() == QuestStatus.START) {
 			if (targetId == 203551) {
-				switch (dialog) {
+				switch (dialogActionId) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 1011);
-					case SELECT_ACTION_1012:
+					case SELECT1_1:
 						removeQuestItem(env, 182203120, 1);
 						return sendQuestDialog(env, 1012);
 					case SETPRO1:
 						return defaultCloseDialog(env, 0, 1);
 				}
 			} else if (targetId == 730029) {
-				switch (dialog) {
+				switch (dialogActionId) {
 					case USE_OBJECT:
 						if (player.getInventory().getItemCountByItemId(182203133) >= 1)
 							return sendQuestDialog(env, 1352);
 						else
 							return sendQuestDialog(env, 1693);
-					case SELECT_ACTION_1353:
+					case SELECT2_1:
 						removeQuestItem(env, 182203133, 1);
 						return sendQuestDialog(env, 1353);
 					case FINISH_DIALOG:
@@ -76,7 +76,7 @@ public class _2122AshesToAshes extends QuestHandler {
 			}
 		} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203551) {
-				if (dialog == DialogAction.USE_OBJECT) {
+				if (dialogActionId == USE_OBJECT) {
 					return sendQuestDialog(env, 2375);
 				} else {
 					return sendQuestEndDialog(env);

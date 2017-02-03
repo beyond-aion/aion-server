@@ -1,6 +1,7 @@
 package quest.sanctum;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -12,11 +13,10 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _1932AMatterOfReputation extends QuestHandler {
 
-	private final static int questId = 1932;
 	private final static int[] npcs = { 203893, 203946 };
 
 	public _1932AMatterOfReputation() {
-		super(questId);
+		super(1932);
 	}
 
 	@Override
@@ -31,7 +31,7 @@ public class _1932AMatterOfReputation extends QuestHandler {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		int targetId = env.getTargetId();
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 
 		if (sendQuestNoneDialog(env, 203893))
 			return true;
@@ -44,7 +44,7 @@ public class _1932AMatterOfReputation extends QuestHandler {
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 203946:
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var == 0)
 								return sendQuestDialog(env, 1352);
@@ -54,7 +54,7 @@ public class _1932AMatterOfReputation extends QuestHandler {
 					}
 					break;
 				case 203893:
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var == 1)
 								return sendQuestDialog(env, 2375);

@@ -1,6 +1,7 @@
 package quest.brusthonin;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -13,11 +14,10 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _4078ALightThroughtheTrees extends QuestHandler {
 
-	private final static int questId = 4078;
 	private final static int[] npc_ids = { 205157, 700427, 700428, 700429 };
 
 	public _4078ALightThroughtheTrees() {
-		super(questId);
+		super(4078);
 	}
 
 	@Override
@@ -31,12 +31,12 @@ public class _4078ALightThroughtheTrees extends QuestHandler {
 	public boolean onDialogEvent(final QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		int targetId = env.getTargetId();
 
 		if (targetId == 205157) {
 			if (qs == null || qs.isStartable()) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
+				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 4762);
 				else
 					return sendQuestStartDialog(env);
@@ -50,7 +50,7 @@ public class _4078ALightThroughtheTrees extends QuestHandler {
 
 		if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 205157) {
-				switch (dialog) {
+				switch (dialogActionId) {
 					case USE_OBJECT:
 						return sendQuestDialog(env, 10002);
 					case SELECT_QUEST_REWARD:
@@ -64,7 +64,7 @@ public class _4078ALightThroughtheTrees extends QuestHandler {
 		}
 
 		if (targetId == 205157) {
-			switch (env.getDialog()) {
+			switch (env.getDialogActionId()) {
 				case QUEST_SELECT:
 					if (var == 0)
 						return sendQuestDialog(env, 1011);
@@ -81,7 +81,7 @@ public class _4078ALightThroughtheTrees extends QuestHandler {
 						return sendQuestDialog(env, 10001);
 			}
 		} else if (targetId == 700428) {
-			switch (env.getDialog()) {
+			switch (env.getDialogActionId()) {
 				case USE_OBJECT:
 					if (var == 1) {
 						if (player.getInventory().getItemCountByItemId(182209050) == 1) {
@@ -91,7 +91,7 @@ public class _4078ALightThroughtheTrees extends QuestHandler {
 					return false;
 			}
 		} else if (targetId == 700427) {
-			switch (env.getDialog()) {
+			switch (env.getDialogActionId()) {
 				case USE_OBJECT:
 					if (var == 2) {
 						if (player.getInventory().getItemCountByItemId(182209050) == 1) {
@@ -101,7 +101,7 @@ public class _4078ALightThroughtheTrees extends QuestHandler {
 					return false;
 			}
 		} else if (targetId == 700429) {
-			switch (env.getDialog()) {
+			switch (env.getDialogActionId()) {
 				case USE_OBJECT:
 					if (var == 3) {
 						if (player.getInventory().getItemCountByItemId(182209050) == 1) {

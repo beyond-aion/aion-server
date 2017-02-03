@@ -1,6 +1,6 @@
 package quest.daevanion;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -12,12 +12,11 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _19634FurtherAidforAlisary extends QuestHandler {
 
-	private static final int questId = 19634;
 	private static final int npcId = 205304; // Ionse
 	private static final int[] mobIds = { 214226, 214227, 214228 };
 
 	public _19634FurtherAidforAlisary() {
-		super(questId);
+		super(19634);
 	}
 
 	@Override
@@ -33,12 +32,12 @@ public class _19634FurtherAidforAlisary extends QuestHandler {
 	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == npcId) {
-				if (dialog == DialogAction.QUEST_SELECT) {
+				if (dialogActionId == QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);
 				} else {
 					return sendQuestStartDialog(env);
@@ -46,7 +45,7 @@ public class _19634FurtherAidforAlisary extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == npcId) {
-				if (dialog == DialogAction.USE_OBJECT) {
+				if (dialogActionId == USE_OBJECT) {
 					return sendQuestDialog(env, 5);
 				} else {
 					return sendQuestEndDialog(env);

@@ -1,6 +1,7 @@
 package quest.poeta;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -19,11 +20,10 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 public class _1114TheNymphsGown extends QuestHandler {
 
-	private final static int questId = 1114;
 	private final static int[] npc_ids = { 203075, 203058, 700008 };
 
 	public _1114TheNymphsGown() {
-		super(questId);
+		super(1114);
 	}
 
 	@Override
@@ -43,7 +43,7 @@ public class _1114TheNymphsGown extends QuestHandler {
 
 		if (targetId == 0) {
 			if (qs == null || qs.isStartable()) {
-				if (env.getDialogId() == DialogAction.QUEST_ACCEPT_1.id()) {
+				if (env.getDialogActionId() == QUEST_ACCEPT_1) {
 					QuestService.startQuest(env);
 					if (!giveQuestItem(env, 182200226, 1))
 						;
@@ -64,9 +64,9 @@ public class _1114TheNymphsGown extends QuestHandler {
 		if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203075 && var == 4) // Namus
 			{
-				if (env.getDialog() == DialogAction.USE_OBJECT)
+				if (env.getDialogActionId() == USE_OBJECT)
 					return sendQuestDialog(env, 2375);
-				else if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id())
+				else if (env.getDialogActionId() == SELECT_QUEST_REWARD)
 					return sendQuestDialog(env, 6);
 				else
 					return sendQuestEndDialog(env);
@@ -77,7 +77,7 @@ public class _1114TheNymphsGown extends QuestHandler {
 
 		if (targetId == 203075) // Namus
 		{
-			switch (env.getDialog()) {
+			switch (env.getDialogActionId()) {
 				case QUEST_SELECT:
 					if (var == 0)
 						return sendQuestDialog(env, 1011);
@@ -120,7 +120,7 @@ public class _1114TheNymphsGown extends QuestHandler {
 					}
 			}
 		} else if (targetId == 700008) { // Seirenia's clothes
-			switch (env.getDialog()) {
+			switch (env.getDialogActionId()) {
 				case USE_OBJECT:
 					if (var == 1) {
 						player.getKnownList().forEachNpc(npc -> {
@@ -137,7 +137,7 @@ public class _1114TheNymphsGown extends QuestHandler {
 		}
 		if (targetId == 203058) // Asteros
 		{
-			switch (env.getDialog()) {
+			switch (env.getDialogActionId()) {
 				case QUEST_SELECT:
 					if (var == 3)
 						return sendQuestDialog(env, 2034);

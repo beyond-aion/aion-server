@@ -1,6 +1,7 @@
 package quest.heiron;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -18,11 +19,10 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 public class _1687TheTigrakiAgreement extends QuestHandler {
 
-	private final static int questId = 1687;
 	private int rewardGroup;
 
 	public _1687TheTigrakiAgreement() {
-		super(questId);
+		super(1687);
 	}
 
 	@Override
@@ -42,7 +42,7 @@ public class _1687TheTigrakiAgreement extends QuestHandler {
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 204601) { // Brosia
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
+				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 4762);
 				else
 					return sendQuestStartDialog(env);
@@ -50,7 +50,7 @@ public class _1687TheTigrakiAgreement extends QuestHandler {
 		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			if (targetId == 204601) { // Brosia
-				switch (env.getDialog()) {
+				switch (env.getDialogActionId()) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 1011);
 					case CHECK_USER_HAS_QUEST_ITEM:

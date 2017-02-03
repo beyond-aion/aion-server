@@ -1,6 +1,7 @@
 package quest.reshanta;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -22,10 +23,8 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 public class _14043DrawlingBalaur extends QuestHandler {
 
-	private final static int questId = 14043;
-
 	public _14043DrawlingBalaur() {
-		super(questId);
+		super(14043);
 	}
 
 	@Override
@@ -63,9 +62,9 @@ public class _14043DrawlingBalaur extends QuestHandler {
 
 		if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 278532) {
-				if (env.getDialog() == DialogAction.USE_OBJECT)
+				if (env.getDialogActionId() == USE_OBJECT)
 					return sendQuestDialog(env, 10002);
-				else if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id())
+				else if (env.getDialogActionId() == SELECT_QUEST_REWARD)
 					return sendQuestDialog(env, 5);
 				else
 					return sendQuestEndDialog(env);
@@ -75,7 +74,7 @@ public class _14043DrawlingBalaur extends QuestHandler {
 			return false;
 		}
 		if (targetId == 278532) {
-			switch (env.getDialog()) {
+			switch (env.getDialogActionId()) {
 				case QUEST_SELECT:
 					if (var == 0)
 						return sendQuestDialog(env, 1011);
@@ -93,7 +92,7 @@ public class _14043DrawlingBalaur extends QuestHandler {
 					return false;
 			}
 		} else if (targetId == 798026) {
-			switch (env.getDialog()) {
+			switch (env.getDialogActionId()) {
 				case QUEST_SELECT:
 					if (var == 1)
 						return sendQuestDialog(env, 1352);
@@ -142,7 +141,7 @@ public class _14043DrawlingBalaur extends QuestHandler {
 					return false;
 			}
 		} else if (targetId == 798025) {
-			switch (env.getDialog()) {
+			switch (env.getDialogActionId()) {
 				case QUEST_SELECT:
 					if (var == 2)
 						return sendQuestDialog(env, 1693);
@@ -157,7 +156,7 @@ public class _14043DrawlingBalaur extends QuestHandler {
 					return false;
 			}
 		} else if (targetId == 279019) {
-			switch (env.getDialog()) {
+			switch (env.getDialogActionId()) {
 				case QUEST_SELECT:
 					if (var == 3)
 						return sendQuestDialog(env, 2034);

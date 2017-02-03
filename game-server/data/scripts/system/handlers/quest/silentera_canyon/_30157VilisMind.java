@@ -1,6 +1,7 @@
 package quest.silentera_canyon;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -15,10 +16,8 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
  */
 public class _30157VilisMind extends QuestHandler {
 
-	private final static int questId = 30157;
-
 	public _30157VilisMind() {
-		super(questId);
+		super(30157);
 	}
 
 	@Override
@@ -35,13 +34,13 @@ public class _30157VilisMind extends QuestHandler {
 		final Player player = env.getPlayer();
 		int targetId = env.getTargetId();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 204304) {
-				if (dialog == DialogAction.QUEST_SELECT)
+				if (dialogActionId == QUEST_SELECT)
 					return sendQuestDialog(env, 1011);
-				else if (dialog == DialogAction.QUEST_ACCEPT_1) {
+				else if (dialogActionId == QUEST_ACCEPT_1) {
 					if (!giveQuestItem(env, 182209254, 1))
 						return true;
 					return sendQuestStartDialog(env);
@@ -50,7 +49,7 @@ public class _30157VilisMind extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 799234) {
-				switch (dialog) {
+				switch (dialogActionId) {
 					case USE_OBJECT:
 						return sendQuestDialog(env, 2375);
 					case SELECT_QUEST_REWARD:
@@ -60,7 +59,7 @@ public class _30157VilisMind extends QuestHandler {
 		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			if (targetId == 700570) {
-				switch (dialog) {
+				switch (dialogActionId) {
 					case USE_OBJECT:
 						if (var == 0) {
 							QuestService.addNewSpawn(600010000, player.getInstanceId(), 799339, (float) 545.3877, (float) 1232.0298, (float) 304.3357, (byte) 76);
@@ -69,7 +68,7 @@ public class _30157VilisMind extends QuestHandler {
 				}
 			}
 			if (targetId == 799339) {
-				switch (dialog) {
+				switch (dialogActionId) {
 					case QUEST_SELECT:
 						if (var == 0)
 							return sendQuestDialog(env, 1352);

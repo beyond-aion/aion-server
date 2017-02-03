@@ -1,7 +1,8 @@
 package ai.instance.linkgateFoundry;
 
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.ai.AIName;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
@@ -22,13 +23,13 @@ public class LinkgateFoundrySecretTeleportAI extends ActionItemNpcAI {
 	}
 
 	@Override
-	public boolean onDialogSelect(Player player, int dialogId, int questId, int extendedRewardIndex) {
-		switchFloor(player, dialogId);
+	public boolean onDialogSelect(Player player, int dialogActionId, int questId, int extendedRewardIndex) {
+		switchFloor(player, dialogActionId);
 		return true;
 	}
 
-	private void switchFloor(Player player, int dialogId) {
-		switch (DialogAction.getByActionId(dialogId)) {
+	private void switchFloor(Player player, int dialogActionId) {
+		switch (dialogActionId) {
 			case SETPRO1:
 				TeleportService.teleportTo(player, 301270000, 177.65f, 258.15f, 313, (byte) 60, TeleportAnimation.FADE_OUT_BEAM);
 				break;

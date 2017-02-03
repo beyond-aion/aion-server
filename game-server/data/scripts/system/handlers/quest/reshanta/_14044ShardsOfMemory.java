@@ -1,6 +1,7 @@
 package quest.reshanta;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -18,10 +19,8 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 public class _14044ShardsOfMemory extends QuestHandler {
 
-	private final static int questId = 14044;
-
 	public _14044ShardsOfMemory() {
-		super(questId);
+		super(14044);
 	}
 
 	@Override
@@ -49,7 +48,7 @@ public class _14044ShardsOfMemory extends QuestHandler {
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 278501:
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case QUEST_SELECT:
 							if (var == 0)
 								return sendQuestDialog(env, 1011);
@@ -63,7 +62,7 @@ public class _14044ShardsOfMemory extends QuestHandler {
 					}
 					break;
 				case 279029:
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case QUEST_SELECT:
 							if (var == 2)
 								return sendQuestDialog(env, 1693);
@@ -86,7 +85,7 @@ public class _14044ShardsOfMemory extends QuestHandler {
 					}
 					break;
 				case 790001:
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case QUEST_SELECT:
 							if (var == 1)
 								return sendQuestDialog(env, 1352);
@@ -102,9 +101,9 @@ public class _14044ShardsOfMemory extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 279029) {
-				if (env.getDialog() == DialogAction.USE_OBJECT)
+				if (env.getDialogActionId() == USE_OBJECT)
 					return sendQuestDialog(env, 10002);
-				else if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id())
+				else if (env.getDialogActionId() == SELECT_QUEST_REWARD)
 					return sendQuestDialog(env, 5);
 				else
 					return sendQuestEndDialog(env);

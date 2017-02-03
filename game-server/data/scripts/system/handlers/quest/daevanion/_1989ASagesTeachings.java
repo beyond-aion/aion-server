@@ -1,6 +1,7 @@
 package quest.daevanion;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.PlayerClass;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -16,10 +17,8 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 public class _1989ASagesTeachings extends QuestHandler {
 
-	private final static int questId = 1989;
-
 	public _1989ASagesTeachings() {
-		super(questId);
+		super(1989);
 	}
 
 	@Override
@@ -45,7 +44,7 @@ public class _1989ASagesTeachings extends QuestHandler {
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 203771) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
+				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 1011);
 				else
 					return sendQuestStartDialog(env);
@@ -61,7 +60,7 @@ public class _1989ASagesTeachings extends QuestHandler {
 			PlayerClass playerClass = player.getCommonData().getPlayerClass();
 			switch (targetId) {
 				case 203704:// Boreas
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case QUEST_SELECT:
 							if (playerClass == PlayerClass.GLADIATOR || playerClass == PlayerClass.TEMPLAR)
 								return sendQuestDialog(env, 1352);
@@ -75,7 +74,7 @@ public class _1989ASagesTeachings extends QuestHandler {
 					}
 					return false;
 				case 203705:// Jumentis
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case QUEST_SELECT:
 							if (playerClass == PlayerClass.ASSASSIN || playerClass == PlayerClass.RANGER)
 								return sendQuestDialog(env, 1693);
@@ -89,7 +88,7 @@ public class _1989ASagesTeachings extends QuestHandler {
 					}
 					return false;
 				case 203706:// Charna
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case QUEST_SELECT:
 							if (playerClass == PlayerClass.SORCERER || playerClass == PlayerClass.SPIRIT_MASTER)
 								return sendQuestDialog(env, 2034);
@@ -103,7 +102,7 @@ public class _1989ASagesTeachings extends QuestHandler {
 					}
 					return false;
 				case 203707:// Thrasymedes
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case QUEST_SELECT:
 							if (playerClass == PlayerClass.CLERIC || playerClass == PlayerClass.CHANTER)
 								return sendQuestDialog(env, 2375);
@@ -117,7 +116,7 @@ public class _1989ASagesTeachings extends QuestHandler {
 					}
 					return false;
 				case 801214:
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case QUEST_SELECT:
 							if (playerClass == PlayerClass.GUNNER || playerClass == PlayerClass.RIDER)
 								return sendQuestDialog(env, 2548);
@@ -131,7 +130,7 @@ public class _1989ASagesTeachings extends QuestHandler {
 					}
 					return false;
 				case 801215:
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case QUEST_SELECT:
 							if (playerClass == PlayerClass.BARD)
 								return sendQuestDialog(env, 2633);
@@ -145,7 +144,7 @@ public class _1989ASagesTeachings extends QuestHandler {
 					}
 					return false;
 				case 203771:
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case QUEST_SELECT:
 							if (var == 1)
 								return sendQuestDialog(env, 2716);

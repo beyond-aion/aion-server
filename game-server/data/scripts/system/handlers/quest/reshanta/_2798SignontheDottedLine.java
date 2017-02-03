@@ -1,5 +1,7 @@
 package quest.reshanta;
 
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
@@ -7,10 +9,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 public class _2798SignontheDottedLine extends QuestHandler {
 
-	private final static int questId = 2798;
-
 	public _2798SignontheDottedLine() {
-		super(questId);
+		super(2798);
 	}
 
 	@Override
@@ -31,7 +31,7 @@ public class _2798SignontheDottedLine extends QuestHandler {
 		int var = qs.getQuestVarById(0);
 		if (env.getTargetId() == 263569) {
 			if (qs.getStatus() == QuestStatus.START && var == 0)
-				switch (env.getDialog()) {
+				switch (env.getDialogActionId()) {
 					case QUEST_SELECT:
 						if (var == 0)
 							return sendQuestDialog(env, 1011);
@@ -41,7 +41,7 @@ public class _2798SignontheDottedLine extends QuestHandler {
 				}
 		} else if (env.getTargetId() == 263267) {
 			if (qs.getStatus() == QuestStatus.START && var == 1)
-				switch (env.getDialog()) {
+				switch (env.getDialogActionId()) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 1352);
 					case SETPRO2:
@@ -49,7 +49,7 @@ public class _2798SignontheDottedLine extends QuestHandler {
 				}
 		} else if (env.getTargetId() == 264769) {
 			if (qs.getStatus() == QuestStatus.START && var == 2)
-				switch (env.getDialog()) {
+				switch (env.getDialogActionId()) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 1693);
 					case SETPRO3:
@@ -57,7 +57,7 @@ public class _2798SignontheDottedLine extends QuestHandler {
 				}
 		} else if (env.getTargetId() == 271054) {
 			if (qs.getStatus() == QuestStatus.START && var == 3)
-				switch (env.getDialog()) {
+				switch (env.getDialogActionId()) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 2034);
 					case SETPRO4:
@@ -65,7 +65,7 @@ public class _2798SignontheDottedLine extends QuestHandler {
 				}
 		} else if (env.getTargetId() == 266554) {
 			if (qs.getStatus() == QuestStatus.START && var == 4)
-				switch (env.getDialog()) {
+				switch (env.getDialogActionId()) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 2375);
 					case SETPRO5:
@@ -73,7 +73,7 @@ public class _2798SignontheDottedLine extends QuestHandler {
 				}
 		} else if (env.getTargetId() == 270152) {
 			if (qs.getStatus() == QuestStatus.START && var == 5)
-				switch (env.getDialog()) {
+				switch (env.getDialogActionId()) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 2716);
 					case SETPRO6:
@@ -81,7 +81,7 @@ public class _2798SignontheDottedLine extends QuestHandler {
 				}
 		} else if (env.getTargetId() == 269252) {
 			if (qs.getStatus() == QuestStatus.START && var == 6)
-				switch (env.getDialog()) {
+				switch (env.getDialogActionId()) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 3057);
 					case SETPRO7:
@@ -89,7 +89,7 @@ public class _2798SignontheDottedLine extends QuestHandler {
 				}
 		} else if (env.getTargetId() == 268052) {
 			if (qs.getStatus() == QuestStatus.START && var == 7)
-				switch (env.getDialog()) {
+				switch (env.getDialogActionId()) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 3398);
 					case SETPRO8:
@@ -97,7 +97,7 @@ public class _2798SignontheDottedLine extends QuestHandler {
 				}
 		} else if (env.getTargetId() == 260236) {
 			if (qs.getStatus() == QuestStatus.START && var == 8)
-				switch (env.getDialog()) {
+				switch (env.getDialogActionId()) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 3739);
 					case SET_SUCCEED:

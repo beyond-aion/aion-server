@@ -3,7 +3,7 @@ package ai.instance.tallocsHollow;
 import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.NpcAI;
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
@@ -17,8 +17,8 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 public class WrithingCocoonAI extends NpcAI {
 
 	@Override
-	public boolean onDialogSelect(Player player, int dialogId, int questId, int extendedRewardIndex) {
-		if (dialogId == DialogAction.SELECT_ACTION_1012.id() && player.getInventory().decreaseByItemId(185000088, 1)) {
+	public boolean onDialogSelect(Player player, int dialogActionId, int questId, int extendedRewardIndex) {
+		if (dialogActionId == SELECT1_1 && player.getInventory().decreaseByItemId(185000088, 1)) {
 			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 0));
 			switch (getNpcId()) {
 				case 730232:
@@ -39,7 +39,7 @@ public class WrithingCocoonAI extends NpcAI {
 					break;
 			}
 			AIActions.deleteOwner(this);
-		} else if (dialogId == DialogAction.SELECT_ACTION_1012.id()) {
+		} else if (dialogActionId == SELECT1_1) {
 			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 1097));
 		}
 		return true;

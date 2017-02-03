@@ -1,6 +1,7 @@
 package quest.bare_truth;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -45,7 +46,7 @@ public class _14030RetrievedMemory extends QuestHandler {
 	public boolean onDialogEvent(final QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		int targetId = env.getTargetId();
 
 		if (qs == null)
@@ -55,7 +56,7 @@ public class _14030RetrievedMemory extends QuestHandler {
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 203700: // Fasimedes
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var == 0) {
 								return sendQuestDialog(env, 1011);
@@ -66,7 +67,7 @@ public class _14030RetrievedMemory extends QuestHandler {
 					}
 					break;
 				case 790001: // Pernos
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var == 1) {
 								return sendQuestDialog(env, 1352);
@@ -84,7 +85,7 @@ public class _14030RetrievedMemory extends QuestHandler {
 					}
 					break;
 				case 700551: // Fissure of Destiny
-					if (dialog == DialogAction.USE_OBJECT && var == 4) {
+					if (dialogActionId == USE_OBJECT && var == 4) {
 						WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(310120000);
 						InstanceService.registerPlayerWithInstance(newInstance, player);
 						TeleportService.teleportTo(player, 310120000, newInstance.getInstanceId(), 52, 174, 229);
@@ -92,7 +93,7 @@ public class _14030RetrievedMemory extends QuestHandler {
 					}
 					break;
 				case 205119: // Hermione
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var == 4) {
 								return sendQuestDialog(env, 2375);
@@ -111,7 +112,7 @@ public class _14030RetrievedMemory extends QuestHandler {
 					}
 					break;
 				case 700552: // Artifact of Memory
-					if (dialog == DialogAction.USE_OBJECT && var == 56) {
+					if (dialogActionId == USE_OBJECT && var == 56) {
 						qs.setStatus(QuestStatus.REWARD);
 						updateQuestStatus(env);
 						TeleportService.teleportTo(player, 110010000, 1876.29f, 1511f, 812.675f, (byte) 60, TeleportAnimation.FADE_OUT_BEAM);
@@ -121,7 +122,7 @@ public class _14030RetrievedMemory extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203700) { // Fasimedes
-				switch (dialog) {
+				switch (dialogActionId) {
 					case USE_OBJECT:
 						return sendQuestDialog(env, 3739);
 					case SELECT_QUEST_REWARD:

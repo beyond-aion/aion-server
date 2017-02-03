@@ -1,5 +1,7 @@
 package quest.beluslan;
 
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
@@ -10,10 +12,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _28600SuspiciousErrand extends QuestHandler {
 
-	private final static int questId = 28600;
-
 	public _28600SuspiciousErrand() {
-		super(questId);
+		super(28600);
 	}
 
 	@Override
@@ -34,7 +34,7 @@ public class _28600SuspiciousErrand extends QuestHandler {
 		int var = qs.getQuestVarById(0);
 		if (qs.getStatus() == QuestStatus.START) {
 			if (env.getTargetId() == 205233) {
-				switch (env.getDialog()) {
+				switch (env.getDialogActionId()) {
 					case QUEST_SELECT:
 						if (var == 0)
 							return sendQuestDialog(env, 1352);
@@ -48,7 +48,7 @@ public class _28600SuspiciousErrand extends QuestHandler {
 						return defaultCloseDialog(env, 3, 3, true, false, 182213005, 1, 182213004, 1);
 				}
 			} else if (env.getTargetId() == 804607) {
-				switch (env.getDialog()) {
+				switch (env.getDialogActionId()) {
 					case QUEST_SELECT:
 						if (var == 1)
 							return sendQuestDialog(env, 1693);

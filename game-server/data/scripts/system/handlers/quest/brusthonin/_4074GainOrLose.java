@@ -1,7 +1,8 @@
 package quest.brusthonin;
 
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.commons.utils.Rnd;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -31,11 +32,11 @@ public class _4074GainOrLose extends QuestHandler {
 		Player player = env.getPlayer();
 		int targetId = env.getTargetId();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 205181) { // Bonarunerk
-				if (dialog == DialogAction.EXCHANGE_COIN) {
+				if (dialogActionId == EXCHANGE_COIN) {
 					if (QuestService.startQuest(env)) {
 						return sendQuestDialog(env, 1011);
 					} else {
@@ -47,10 +48,10 @@ public class _4074GainOrLose extends QuestHandler {
 			if (targetId == 205181) { // Bonarunerk
 				long kinahAmount = player.getInventory().getKinah();
 				long demonsEye = player.getInventory().getItemCountByItemId(186000038);
-				switch (dialog) {
+				switch (dialogActionId) {
 					case EXCHANGE_COIN:
 						return sendQuestDialog(env, 1011);
-					case SELECT_ACTION_1011:
+					case SELECT1:
 						if (kinahAmount >= 1000 && demonsEye >= 1) {
 							changeQuestStep(env, 0, 0, true);
 							qs.setReward(0);
@@ -58,7 +59,7 @@ public class _4074GainOrLose extends QuestHandler {
 						} else {
 							return sendQuestDialog(env, 1009);
 						}
-					case SELECT_ACTION_1352:
+					case SELECT2:
 						if (kinahAmount >= 5000 && demonsEye >= 1) {
 							changeQuestStep(env, 0, 0, true);
 							qs.setReward(1);
@@ -66,7 +67,7 @@ public class _4074GainOrLose extends QuestHandler {
 						} else {
 							return sendQuestDialog(env, 1009);
 						}
-					case SELECT_ACTION_1693:
+					case SELECT3:
 						if (kinahAmount >= 25000 && demonsEye >= 1) {
 							changeQuestStep(env, 0, 0, true);
 							qs.setReward(2);
@@ -80,7 +81,7 @@ public class _4074GainOrLose extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 205181) { // Bonarunerk
-				if (dialog == DialogAction.SELECTED_QUEST_NOREWARD) {
+				if (dialogActionId == SELECTED_QUEST_NOREWARD) {
 					if (qs.getReward() == null)
 						return false;
 					switch (qs.getReward()) {

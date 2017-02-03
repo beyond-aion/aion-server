@@ -26,7 +26,7 @@ public class PortalAI extends ActionItemNpcAI {
 	protected PortalUse portalUse;
 
 	@Override
-	public boolean onDialogSelect(Player player, int dialogId, int questId, int extendedRewardIndex) {
+	public boolean onDialogSelect(Player player, int dialogActionId, int questId, int extendedRewardIndex) {
 		return true;
 	}
 
@@ -39,7 +39,7 @@ public class PortalAI extends ActionItemNpcAI {
 
 	@Override
 	protected void handleDialogStart(Player player) {
-		QuestEngine.getInstance().onDialog(new QuestEnv(getOwner(), player, 0, DialogAction.USE_OBJECT.id()));
+		QuestEngine.getInstance().onDialog(new QuestEnv(getOwner(), player, 0, DialogAction.USE_OBJECT));
 		super.handleDialogStart(player);
 	}
 

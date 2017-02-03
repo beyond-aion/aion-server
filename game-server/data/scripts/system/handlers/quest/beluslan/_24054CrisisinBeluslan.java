@@ -1,6 +1,7 @@
 package quest.beluslan;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -71,11 +72,11 @@ public class _24054CrisisinBeluslan extends QuestHandler {
 
 		int var = qs.getQuestVarById(0);
 		int targetId = env.getTargetId();
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 
 		if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204702) { // Nerita
-				if (dialog == DialogAction.USE_OBJECT)
+				if (dialogActionId == USE_OBJECT)
 					return sendQuestDialog(env, 10002);
 				else
 					return sendQuestEndDialog(env);
@@ -85,12 +86,12 @@ public class _24054CrisisinBeluslan extends QuestHandler {
 			return false;
 		}
 		if (targetId == 204702) { // Nerita
-			switch (dialog) {
+			switch (dialogActionId) {
 				case QUEST_SELECT:
 					if (var == 0)
 						return sendQuestDialog(env, 1011);
 					break;
-				case SELECT_ACTION_1097:
+				case SELECT1_2:
 					playQuestMovie(env, 255);
 					break;
 				case SETPRO1:
@@ -98,7 +99,7 @@ public class _24054CrisisinBeluslan extends QuestHandler {
 						return defaultCloseDialog(env, 0, 1); // 1
 			}
 		} else if (targetId == 802053) { // Fafner
-			switch (dialog) {
+			switch (dialogActionId) {
 				case QUEST_SELECT:
 					if (var == 1)
 						return sendQuestDialog(env, 1352);
@@ -108,7 +109,7 @@ public class _24054CrisisinBeluslan extends QuestHandler {
 						return defaultCloseDialog(env, 1, 2); // 2
 			}
 		} else if (targetId == 204701) { // Hod
-			switch (dialog) {
+			switch (dialogActionId) {
 				case QUEST_SELECT:
 					if (var == 6)
 						return sendQuestDialog(env, 2375);

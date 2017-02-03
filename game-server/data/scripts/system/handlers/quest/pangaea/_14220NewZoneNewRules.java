@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
@@ -15,7 +15,6 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _14220NewZoneNewRules extends QuestHandler {
 
-	private static final int questId = 14220;
 	private static final int startEndNpcId = 802540;
 	private static final int talkNpcId = 802541;
 	private static final List<Integer> belusNpcIds = new ArrayList<>(Arrays.asList(802544, 804080, 804081, 804082, 804689));
@@ -24,7 +23,7 @@ public class _14220NewZoneNewRules extends QuestHandler {
 	private static final List<Integer> disillonNpcIds = new ArrayList<>(Arrays.asList(802547, 804089, 804090, 804091, 804692));
 
 	public _14220NewZoneNewRules() {
-		super(questId);
+		super(14220);
 	}
 
 	@Override
@@ -45,12 +44,12 @@ public class _14220NewZoneNewRules extends QuestHandler {
 	@Override
 	public boolean onDialogEvent(QuestEnv env) {
 		QuestState qs = env.getPlayer().getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == startEndNpcId) {
-				if (dialog == DialogAction.QUEST_SELECT) {
+				if (dialogActionId == QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);
 				} else {
 					return sendQuestStartDialog(env);
@@ -60,14 +59,14 @@ public class _14220NewZoneNewRules extends QuestHandler {
 			int var0 = qs.getQuestVarById(0);
 			if (var0 == 0) {
 				if (targetId == talkNpcId) {
-					if (dialog == DialogAction.QUEST_SELECT) {
+					if (dialogActionId == QUEST_SELECT) {
 						return sendQuestDialog(env, 1011);
-					} else if (dialog == DialogAction.SETPRO1) {
+					} else if (dialogActionId == SETPRO1) {
 						return defaultCloseDialog(env, 0, 1);
 					}
 				}
 			} else if (var0 == 1) {
-				if (dialog == DialogAction.QUEST_SELECT) {
+				if (dialogActionId == QUEST_SELECT) {
 					if (belusNpcIds.contains(targetId)) {
 						return sendQuestDialog(env, 1352);
 					} else if (aspidaNpcIds.contains(targetId)) {
@@ -77,13 +76,13 @@ public class _14220NewZoneNewRules extends QuestHandler {
 					} else if (disillonNpcIds.contains(targetId)) {
 						return sendQuestDialog(env, 2375);
 					}
-				} else if (dialog == DialogAction.SETPRO2) {
+				} else if (dialogActionId == SETPRO2) {
 					return defaultCloseDialog(env, 1, 1, true, false);
 				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == startEndNpcId) {
-				if (dialog == DialogAction.QUEST_SELECT) {
+				if (dialogActionId == QUEST_SELECT) {
 					return sendQuestDialog(env, 10002);
 				} else {
 					return sendQuestEndDialog(env);

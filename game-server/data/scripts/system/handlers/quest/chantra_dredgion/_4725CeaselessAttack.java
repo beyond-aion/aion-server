@@ -1,6 +1,6 @@
 package quest.chantra_dredgion;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -30,12 +30,12 @@ public class _4725CeaselessAttack extends QuestHandler {
 	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 799403) { // Yorgen
-				if (dialog == DialogAction.QUEST_SELECT) {
+				if (dialogActionId == QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);
 				} else {
 					return sendQuestStartDialog(env);
@@ -45,11 +45,11 @@ public class _4725CeaselessAttack extends QuestHandler {
 			int var1 = qs.getQuestVarById(1);
 			int var2 = qs.getQuestVarById(2);
 			if (targetId == 799226) { // Valetta
-				if (dialog == DialogAction.QUEST_SELECT) {
+				if (dialogActionId == QUEST_SELECT) {
 					if (var1 == 6 && var2 == 15) {
 						return sendQuestDialog(env, 10002);
 					}
-				} else if (dialog == DialogAction.SELECT_QUEST_REWARD) {
+				} else if (dialogActionId == SELECT_QUEST_REWARD) {
 					qs.setStatus(QuestStatus.REWARD);
 					updateQuestStatus(env);
 					return sendQuestDialog(env, 5);

@@ -1,6 +1,6 @@
 package quest.esoterrace;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -12,10 +12,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _28402GroupSavingDalia extends QuestHandler {
 
-	private final static int questId = 28402;
-
 	public _28402GroupSavingDalia() {
-		super(questId);
+		super(28402);
 	}
 
 	@Override
@@ -33,14 +31,14 @@ public class _28402GroupSavingDalia extends QuestHandler {
 
 		if (targetId == 799590) {
 			if (qs == null || qs.isStartable()) {
-				if (env.getDialogId() == DialogAction.QUEST_SELECT.id())
+				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 4762);
 				else
 					return sendQuestStartDialog(env);
 			} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
-				if (env.getDialogId() == DialogAction.USE_OBJECT.id())
+				if (env.getDialogActionId() == USE_OBJECT)
 					return sendQuestDialog(env, 10002);
-				else if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id())
+				else if (env.getDialogActionId() == SELECT_QUEST_REWARD)
 					return sendQuestDialog(env, 5);
 				else
 					return sendQuestEndDialog(env);

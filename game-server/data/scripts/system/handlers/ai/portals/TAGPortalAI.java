@@ -1,7 +1,8 @@
 package ai.portals;
 
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.ai.AIName;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.autogroup.AutoGroupType;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_AUTO_GROUP;
@@ -15,13 +16,13 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 public class TAGPortalAI extends PortalDialogAI {
 
 	@Override
-	public boolean onDialogSelect(Player player, int dialogId, int questId, int extendedRewardIndex) {
+	public boolean onDialogSelect(Player player, int dialogActionId, int questId, int extendedRewardIndex) {
 		if (questId != 0) {
-			super.onDialogSelect(player, dialogId, questId, extendedRewardIndex);
+			super.onDialogSelect(player, dialogActionId, questId, extendedRewardIndex);
 			return true;
 		}
 		int worldId = 0;
-		switch (DialogAction.getByActionId(dialogId)) {
+		switch (dialogActionId) {
 			case SETPRO1:
 				worldId = 300430000;
 				break;

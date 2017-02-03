@@ -1,6 +1,7 @@
 package quest.morheim;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -61,12 +62,12 @@ public class _24023ABlazingRescue extends QuestHandler {
 
 		int var = qs.getQuestVarById(0);
 		int targetId = env.getTargetId();
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 204317:
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var == 0)
 								return sendQuestDialog(env, 1011);
@@ -78,14 +79,14 @@ public class _24023ABlazingRescue extends QuestHandler {
 					}
 					break;
 				case 204408:
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var == 1)
 								return sendQuestDialog(env, 1352);
 							else if (var == 3)
 								return sendQuestDialog(env, 2034);
 							return false;
-						case SELECT_ACTION_1354:
+						case SELECT2_1_1:
 							playQuestMovie(env, 78);
 							break;
 						case SETPRO2:
@@ -114,7 +115,7 @@ public class _24023ABlazingRescue extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204372) {
-				if (dialog == DialogAction.USE_OBJECT)
+				if (dialogActionId == USE_OBJECT)
 					return sendQuestDialog(env, 10002);
 				else
 					return sendQuestEndDialog(env);

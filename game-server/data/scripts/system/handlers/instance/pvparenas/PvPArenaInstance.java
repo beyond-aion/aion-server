@@ -62,7 +62,7 @@ public class PvPArenaInstance extends GeneralInstanceHandler {
 
 				// notify Kill-Quests
 				int worldId = winner.getWorldId();
-				QuestEngine.getInstance().onKillInWorld(new QuestEnv(player, winner, 0, 0), worldId);
+				QuestEngine.getInstance().onKillInWorld(new QuestEnv(player, winner, 0), worldId);
 			}
 		}
 

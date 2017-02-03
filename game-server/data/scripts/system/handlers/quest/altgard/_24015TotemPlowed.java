@@ -1,6 +1,7 @@
 package quest.altgard;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -59,15 +60,15 @@ public class _24015TotemPlowed extends QuestHandler {
 			return false;
 
 		int targetId = env.getTargetId();
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 203669: // Taora
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							return sendQuestDialog(env, 1011);
-						case SELECT_ACTION_1013:
+						case SELECT1_1_1:
 							playQuestMovie(env, 218);
 							qs.setQuestVarById(0, 1);
 							updateQuestStatus(env);
@@ -78,7 +79,7 @@ public class _24015TotemPlowed extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203557) { // Suthran
-				if (dialog == DialogAction.USE_OBJECT) {
+				if (dialogActionId == USE_OBJECT) {
 					return sendQuestDialog(env, 1352);
 				}
 				return sendQuestEndDialog(env);

@@ -1,6 +1,7 @@
 package quest.abyssal_splinter;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
@@ -15,10 +16,8 @@ import com.aionemu.gameserver.services.QuestService;
  */
 public class _30261WeirdFragment extends QuestHandler {
 
-	private final static int questId = 30261;
-
 	public _30261WeirdFragment() {
-		super(questId);
+		super(30261);
 	}
 
 	@Override
@@ -33,7 +32,7 @@ public class _30261WeirdFragment extends QuestHandler {
 	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		int targetId = env.getTargetId();
 		if (qs == null || qs.isStartable()) {
 			return false;
@@ -41,7 +40,7 @@ public class _30261WeirdFragment extends QuestHandler {
 			int var = qs.getQuestVarById(0);
 			switch (targetId) {
 				case 278533: // Rentia
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var == 0) {
 								return sendQuestDialog(env, 1352);
@@ -52,7 +51,7 @@ public class _30261WeirdFragment extends QuestHandler {
 					}
 					break;
 				case 279029: // Lugbug
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var == 1) {
 								return sendQuestDialog(env, 1693);

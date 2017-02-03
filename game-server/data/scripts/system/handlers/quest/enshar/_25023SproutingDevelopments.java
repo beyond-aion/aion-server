@@ -1,6 +1,6 @@
 package quest.enshar;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ITEM_USAGE_ANIMATION;
@@ -18,10 +18,8 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
  */
 public class _25023SproutingDevelopments extends QuestHandler {
 
-	private final static int questId = 25023;
-
 	public _25023SproutingDevelopments() {
-		super(questId);
+		super(25023);
 	}
 
 	@Override
@@ -41,11 +39,11 @@ public class _25023SproutingDevelopments extends QuestHandler {
 		final Player player = env.getPlayer();
 		final QuestState qs = player.getQuestStateList().getQuestState(questId);
 		int targetId = env.getTargetId();
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 804909) { // Malthorn
-				if (dialog == DialogAction.QUEST_SELECT)
+				if (dialogActionId == QUEST_SELECT)
 					return sendQuestDialog(env, 4762);
 				else
 					return sendQuestStartDialog(env);
@@ -56,24 +54,24 @@ public class _25023SproutingDevelopments extends QuestHandler {
 			switch (targetId) {
 				case 804909: // Malthorn
 					if (var == 0) {
-						if (dialog == DialogAction.QUEST_SELECT)
+						if (dialogActionId == QUEST_SELECT)
 							return sendQuestDialog(env, 1011);
 
-						if (dialog == DialogAction.CHECK_USER_HAS_QUEST_ITEM)
+						if (dialogActionId == CHECK_USER_HAS_QUEST_ITEM)
 							return checkQuestItems(env, var, var + 1, false, 10000, 10001, 182215709, 1);
 					}
 					if (var == 1) {
-						if (dialog == DialogAction.QUEST_SELECT)
+						if (dialogActionId == QUEST_SELECT)
 							return sendQuestDialog(env, 1352);
 
-						if (dialog == DialogAction.SETPRO2)
+						if (dialogActionId == SETPRO2)
 							return defaultCloseDialog(env, var, var + 1, 182215711, 1);
 					}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			switch (targetId) {
 				case 804910: // Varla
-					if (dialog == DialogAction.USE_OBJECT)
+					if (dialogActionId == USE_OBJECT)
 						return sendQuestDialog(env, 10002);
 
 					return sendQuestEndDialog(env);

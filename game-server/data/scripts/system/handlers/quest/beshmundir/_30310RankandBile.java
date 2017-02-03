@@ -1,6 +1,7 @@
 package quest.beshmundir;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -13,10 +14,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 public class _30310RankandBile extends QuestHandler {
 
-	private final static int questId = 30310;
-
 	public _30310RankandBile() {
-		super(questId);
+		super(30310);
 	}
 
 	@Override
@@ -31,10 +30,10 @@ public class _30310RankandBile extends QuestHandler {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		int targetId = env.getTargetId();
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 204225) {
-				if (dialog == DialogAction.QUEST_SELECT)
+				if (dialogActionId == QUEST_SELECT)
 					return sendQuestDialog(env, 4762);
 				else
 					return sendQuestStartDialog(env);
@@ -47,9 +46,9 @@ public class _30310RankandBile extends QuestHandler {
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			if (targetId == 204225) {
-				if (dialog == DialogAction.QUEST_SELECT)
+				if (dialogActionId == QUEST_SELECT)
 					return sendQuestDialog(env, 1011);
-				else if (dialog == DialogAction.CHECK_USER_HAS_QUEST_ITEM) {
+				else if (dialogActionId == CHECK_USER_HAS_QUEST_ITEM) {
 					if (var == 0 && player.getInventory().getItemCountByItemId(182209713) >= 40) {
 						removeQuestItem(env, 182209713, 40);
 						changeQuestStep(env, 0, 0, true);
@@ -61,7 +60,7 @@ public class _30310RankandBile extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 799322) {
-				switch (dialog) {
+				switch (dialogActionId) {
 					case USE_OBJECT:
 						return sendQuestDialog(env, 10002);
 					case SELECT_QUEST_REWARD:

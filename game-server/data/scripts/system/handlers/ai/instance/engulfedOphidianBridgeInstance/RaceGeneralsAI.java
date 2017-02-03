@@ -1,5 +1,7 @@
 package ai.instance.engulfedOphidianBridgeInstance;
 
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import java.util.List;
 
 import com.aionemu.gameserver.ai.AIActions;
@@ -23,12 +25,12 @@ public class RaceGeneralsAI extends NpcAI {
 	}
 
 	@Override
-	public boolean onDialogSelect(Player player, int dialogId, int questId, int extendedRewardIndex) {
+	public boolean onDialogSelect(Player player, int dialogActionId, int questId, int extendedRewardIndex) {
 		WorldMapInstance instance = getPosition().getWorldMapInstance();
 		switch (getOwner().getNpcId()) {
 			case 701989: // asmo
-				switch (dialogId) {
-					case 10000:
+				switch (dialogActionId) {
+					case SETPRO1:
 						deleteNpcs(instance.getNpcs(701987));
 						deleteNpcs(instance.getNpcs(701985));
 						spawn(233495, 678.5313f, 471.29727f, 599.6582f, (byte) 116);
@@ -37,7 +39,7 @@ public class RaceGeneralsAI extends NpcAI {
 						PacketSendUtility.broadcastToMap(getOwner(), 1402060);
 						AIActions.deleteOwner(this);
 						break;
-					case 10001:
+					case SETPRO2:
 						deleteNpcs(instance.getNpcs(701987));
 						deleteNpcs(instance.getNpcs(701985));
 						spawn(233495, 519.66113f, 446.24088f, 620.125f, (byte) 116);
@@ -46,7 +48,7 @@ public class RaceGeneralsAI extends NpcAI {
 						PacketSendUtility.broadcastToMap(getOwner(), 1402055);
 						AIActions.deleteOwner(this);
 						break;
-					case 10002:
+					case SETPRO3:
 						deleteNpcs(instance.getNpcs(701987));
 						deleteNpcs(instance.getNpcs(701985));
 						spawn(233495, 603.4207f, 538.19196f, 590.976f, (byte) 28);
@@ -55,7 +57,7 @@ public class RaceGeneralsAI extends NpcAI {
 						PacketSendUtility.broadcastToMap(getOwner(), 1402070);
 						AIActions.deleteOwner(this);
 						break;
-					case 10003:
+					case SETPRO4:
 						deleteNpcs(instance.getNpcs(701987));
 						deleteNpcs(instance.getNpcs(701985));
 						spawn(233495, 481.47342f, 526.27606f, 597.375f, (byte) 19);
@@ -67,8 +69,8 @@ public class RaceGeneralsAI extends NpcAI {
 				}
 				break;
 			default: // elyos
-				switch (dialogId) {
-					case 10000:
+				switch (dialogActionId) {
+					case SETPRO1:
 						deleteNpcs(instance.getNpcs(701986));
 						deleteNpcs(instance.getNpcs(701984));
 						spawn(233494, 691.1125f, 467.0932f, 599.875f, (byte) 54);
@@ -77,7 +79,7 @@ public class RaceGeneralsAI extends NpcAI {
 						AIActions.deleteOwner(this);
 						PacketSendUtility.broadcastToMap(getOwner(), 1402060);
 						break;
-					case 10001:
+					case SETPRO2:
 						deleteNpcs(instance.getNpcs(701986));
 						deleteNpcs(instance.getNpcs(701984));
 						spawn(233494, 531.18066f, 446.37927f, 620.25f, (byte) 58);
@@ -86,7 +88,7 @@ public class RaceGeneralsAI extends NpcAI {
 						AIActions.deleteOwner(this);
 						PacketSendUtility.broadcastToMap(getOwner(), 1402055);
 						break;
-					case 10002:
+					case SETPRO3:
 						deleteNpcs(instance.getNpcs(701986));
 						deleteNpcs(instance.getNpcs(701984));
 						spawn(233494, 618.9949f, 551.4716f, 590.75f, (byte) 55);
@@ -95,7 +97,7 @@ public class RaceGeneralsAI extends NpcAI {
 						AIActions.deleteOwner(this);
 						PacketSendUtility.broadcastToMap(getOwner(), 1402070);
 						break;
-					case 10003:
+					case SETPRO4:
 						deleteNpcs(instance.getNpcs(701986));
 						deleteNpcs(instance.getNpcs(701984));
 						spawn(233494, 478.23563f, 543.6911f, 597.5f, (byte) 112);

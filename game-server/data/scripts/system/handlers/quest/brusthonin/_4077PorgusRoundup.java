@@ -1,6 +1,6 @@
 package quest.brusthonin;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.actions.NpcActions;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -15,10 +15,8 @@ import com.aionemu.gameserver.utils.MathUtil;
  */
 public class _4077PorgusRoundup extends QuestHandler {
 
-	private final static int questId = 4077;
-
 	public _4077PorgusRoundup() {
-		super(questId);
+		super(4077);
 	}
 
 	@Override
@@ -76,7 +74,7 @@ public class _4077PorgusRoundup extends QuestHandler {
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 205158) // Holekk
 			{
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
+				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 4762);
 				else
 					return sendQuestStartDialog(env);

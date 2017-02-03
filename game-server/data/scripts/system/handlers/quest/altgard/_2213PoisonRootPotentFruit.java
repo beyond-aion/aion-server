@@ -1,6 +1,6 @@
 package quest.altgard;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -15,10 +15,8 @@ import com.aionemu.gameserver.skillengine.SkillEngine;
  */
 public class _2213PoisonRootPotentFruit extends QuestHandler {
 
-	private final static int questId = 2213;
-
 	public _2213PoisonRootPotentFruit() {
-		super(questId);
+		super(2213);
 	}
 
 	@Override
@@ -40,7 +38,7 @@ public class _2213PoisonRootPotentFruit extends QuestHandler {
 		final QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 203604) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
+				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 1011);
 				else
 					return sendQuestStartDialog(env);
@@ -48,14 +46,14 @@ public class _2213PoisonRootPotentFruit extends QuestHandler {
 		} else if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 700057: // Okaru Tree
-					if (env.getDialog() == DialogAction.USE_OBJECT)
+					if (env.getDialogActionId() == USE_OBJECT)
 						return true; // loot
 					return false;
 				case 203604:
 					if (qs.getQuestVarById(0) == 1) {
-						if (env.getDialog() == DialogAction.QUEST_SELECT)
+						if (env.getDialogActionId() == QUEST_SELECT)
 							return sendQuestDialog(env, 2375);
-						else if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id()) {
+						else if (env.getDialogActionId() == SELECT_QUEST_REWARD) {
 							removeQuestItem(env, 182203208, 1);
 							player.getEffectController().removeEffect(255); // Remove Okaru Log Poison effect [ID: 255]
 							qs.setStatus(QuestStatus.REWARD);

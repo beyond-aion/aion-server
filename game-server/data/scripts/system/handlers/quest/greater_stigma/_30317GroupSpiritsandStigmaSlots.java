@@ -1,6 +1,7 @@
 package quest.greater_stigma;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
@@ -16,10 +17,8 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 public class _30317GroupSpiritsandStigmaSlots extends QuestHandler {
 
-	private final static int questId = 30317;
-
 	public _30317GroupSpiritsandStigmaSlots() {
-		super(questId);
+		super(30317);
 	}
 
 	@Override
@@ -41,7 +40,7 @@ public class _30317GroupSpiritsandStigmaSlots extends QuestHandler {
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 799208) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
+				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 4762);
 				else
 					return sendQuestStartDialog(env);
@@ -56,7 +55,7 @@ public class _30317GroupSpiritsandStigmaSlots extends QuestHandler {
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 799322:
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case QUEST_SELECT:
 							return sendQuestDialog(env, 1011);
 						case SETPRO1:
@@ -69,7 +68,7 @@ public class _30317GroupSpiritsandStigmaSlots extends QuestHandler {
 					}
 					return false;
 				case 799208:
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case QUEST_SELECT:
 							long itemCount1 = player.getInventory().getItemCountByItemId(182209718);
 							long itemCount2 = player.getInventory().getItemCountByItemId(182209719);
@@ -86,7 +85,7 @@ public class _30317GroupSpiritsandStigmaSlots extends QuestHandler {
 					}
 					return false;
 				case 799506:
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case QUEST_SELECT:
 							if (var == 1)
 								return sendQuestDialog(env, 1352);
@@ -100,7 +99,7 @@ public class _30317GroupSpiritsandStigmaSlots extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 799208) {
-				if (env.getDialogId() == DialogAction.CHECK_USER_HAS_QUEST_ITEM.id())
+				if (env.getDialogActionId() == CHECK_USER_HAS_QUEST_ITEM)
 					return sendQuestDialog(env, 5);
 				else
 					return sendQuestEndDialog(env);

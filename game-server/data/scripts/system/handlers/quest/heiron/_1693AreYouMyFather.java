@@ -1,6 +1,7 @@
 package quest.heiron;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -15,11 +16,10 @@ import com.aionemu.gameserver.services.teleport.TeleportService;
  */
 public class _1693AreYouMyFather extends QuestHandler {
 
-	private final static int questId = 1693;
 	private final static int[] npcs = { 798386, 204514, 798388, 203893 };
 
 	public _1693AreYouMyFather() {
-		super(questId);
+		super(1693);
 	}
 
 	@Override
@@ -45,7 +45,7 @@ public class _1693AreYouMyFather extends QuestHandler {
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 798386) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
+				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 4762);
 				else
 					return sendQuestStartDialog(env);
@@ -53,7 +53,7 @@ public class _1693AreYouMyFather extends QuestHandler {
 		} else if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 204514:
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case QUEST_SELECT: {
 							if (qs.getQuestVarById(0) == 0)
 								return sendQuestDialog(env, 1011);
@@ -66,7 +66,7 @@ public class _1693AreYouMyFather extends QuestHandler {
 					}
 					break;
 				case 798388:
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case QUEST_SELECT: {
 							if (qs.getQuestVarById(0) == 1)
 								return sendQuestDialog(env, 1352);
@@ -78,7 +78,7 @@ public class _1693AreYouMyFather extends QuestHandler {
 					}
 					break;
 				case 203893:
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case QUEST_SELECT: {
 							if (qs.getQuestVarById(0) == 2)
 								return sendQuestDialog(env, 1693);
@@ -91,7 +91,7 @@ public class _1693AreYouMyFather extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203893) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
+				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 10002);
 				else
 					return sendQuestEndDialog(env);

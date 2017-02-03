@@ -1,6 +1,6 @@
 package quest.brusthonin;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -13,10 +13,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _4012TroublesomePromise extends QuestHandler {
 
-	private final static int questId = 4012;
-
 	public _4012TroublesomePromise() {
-		super(questId);
+		super(4012);
 	}
 
 	@Override
@@ -38,7 +36,7 @@ public class _4012TroublesomePromise extends QuestHandler {
 		final QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 205142) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
+				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 1011);
 				else
 					return sendQuestStartDialog(env);
@@ -46,15 +44,15 @@ public class _4012TroublesomePromise extends QuestHandler {
 		} else if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 700342:
-					if (qs.getQuestVarById(0) == 0 && env.getDialog() == DialogAction.USE_OBJECT) {
+					if (qs.getQuestVarById(0) == 0 && env.getDialogActionId() == USE_OBJECT) {
 						return true; // loot
 					}
 					break;
 				case 730104:
 					if (qs.getQuestVarById(0) == 1) {
-						if (env.getDialog() == DialogAction.QUEST_SELECT)
+						if (env.getDialogActionId() == QUEST_SELECT)
 							return sendQuestDialog(env, 2375);
-						else if (env.getDialogId() == DialogAction.CHECK_USER_HAS_QUEST_ITEM.id()) {
+						else if (env.getDialogActionId() == CHECK_USER_HAS_QUEST_ITEM) {
 							removeQuestItem(env, 182209005, 1);
 							qs.setStatus(QuestStatus.REWARD);
 							updateQuestStatus(env);

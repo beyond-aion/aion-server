@@ -1,6 +1,6 @@
 package quest.sanctum;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -10,10 +10,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 public class _1940WingsofMastery extends QuestHandler {
 
-	private final static int questId = 1940;
-
 	public _1940WingsofMastery() {
-		super(questId);
+		super(1940);
 	}
 
 	@Override
@@ -40,9 +38,9 @@ public class _1940WingsofMastery extends QuestHandler {
 		if (targetId != 203879)
 			return false;
 		if (qs.getStatus() == QuestStatus.START) {
-			if (env.getDialog() == DialogAction.QUEST_SELECT)
+			if (env.getDialogActionId() == QUEST_SELECT)
 				return sendQuestDialog(env, 10002);
-			else if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id()) {
+			else if (env.getDialogActionId() == SELECT_QUEST_REWARD) {
 				qs.setStatus(QuestStatus.REWARD);
 				qs.setQuestVarById(0, 1);
 				updateQuestStatus(env);

@@ -52,7 +52,7 @@ public class CM_WINDSTREAM extends AionClientPacket {
 				player.setFlyState(FlyState.FLYING);
 				PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.WINDSTREAM, teleportId, distance), true);
 				player.getLifeStats().triggerFpRestore();
-				QuestEngine.getInstance().onEnterWindStream(new QuestEnv(null, player, 0, 0), teleportId);
+				QuestEngine.getInstance().onEnterWindStream(new QuestEnv(null, player, 0), teleportId);
 				return; // don't send SM_WINDSTREAM
 			case 2: // leaving windstream (gliding)
 			case 3: // leaving windstream

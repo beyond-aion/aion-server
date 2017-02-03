@@ -104,7 +104,7 @@ public class PlayerTeamDistributionService {
 		@Override
 		public boolean apply(Player member) {
 			if (member.isOnline() && MathUtil.isIn3dRange(member, owner, GroupConfig.GROUP_MAX_DISTANCE)) {
-				QuestEngine.getInstance().onKill(new QuestEnv(owner, member, 0, 0));
+				QuestEngine.getInstance().onKill(new QuestEnv(owner, member, 0));
 
 				if (member.isMentor()) {
 					mentorCount++;

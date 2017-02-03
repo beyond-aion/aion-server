@@ -1,6 +1,7 @@
 package quest.daevanion;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -10,10 +11,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 public class _80295DurableDaevanionWeapon extends QuestHandler {
 
-	private final static int questId = 80295;
-
 	public _80295DurableDaevanionWeapon() {
-		super(questId);
+		super(80295);
 	}
 
 	@Override
@@ -33,7 +32,7 @@ public class _80295DurableDaevanionWeapon extends QuestHandler {
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 831387) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT) {
+				if (env.getDialogActionId() == QUEST_SELECT) {
 					int plate = player.getEquipment().itemSetPartsEquipped(303);
 					int chain = player.getEquipment().itemSetPartsEquipped(302);
 					int leather = player.getEquipment().itemSetPartsEquipped(301);
@@ -56,7 +55,7 @@ public class _80295DurableDaevanionWeapon extends QuestHandler {
 
 		if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 831387) {
-				switch (env.getDialog()) {
+				switch (env.getDialogActionId()) {
 					case QUEST_SELECT:
 						if (var == 0)
 							return sendQuestDialog(env, 1011);
@@ -66,7 +65,7 @@ public class _80295DurableDaevanionWeapon extends QuestHandler {
 							return checkQuestItems(env, 0, 1, true, 5, 0);
 						}
 						break;
-					case SELECT_ACTION_1352:
+					case SELECT2:
 						if (var == 0)
 							return sendQuestDialog(env, 1352);
 				}

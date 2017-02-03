@@ -1,6 +1,6 @@
 package quest.enshar;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -57,16 +57,16 @@ public class _20501WhattheRuinsSay extends QuestHandler {
 
 		int var = qs.getQuestVarById(0);
 		int targetId = env.getTargetId();
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 
 		switch (targetId) {
 			case 804720: // Bonat
 				if (qs.getStatus() == QuestStatus.START) {
 					if (var == 0) { // Step 0: Meet with Bonat in Sky Fortress Insurgent Post.
-						if (dialog == DialogAction.QUEST_SELECT)
+						if (dialogActionId == QUEST_SELECT)
 							return sendQuestDialog(env, 1011);
 
-						if (dialog == DialogAction.SETPRO1)
+						if (dialogActionId == SETPRO1)
 							return defaultCloseDialog(env, var, var + 1);
 					}
 				}
@@ -74,16 +74,16 @@ public class _20501WhattheRuinsSay extends QuestHandler {
 			case 804721: // Nixie
 				if (qs.getStatus() == QuestStatus.START) {
 					if (var == 1) { // Step 1: Meet and talk with Nixie.
-						if (dialog == DialogAction.QUEST_SELECT)
+						if (dialogActionId == QUEST_SELECT)
 							return sendQuestDialog(env, 1352);
 
-						if (dialog == DialogAction.SETPRO2)
+						if (dialogActionId == SETPRO2)
 							return defaultCloseDialog(env, var, var + 1, workItemId, 1); // Gives item Ruins Location Map [ID: 182215598]
 					}
 				}
 
 				if (qs.getStatus() == QuestStatus.REWARD) { // Step 7: Report back to Nixie.
-					if (dialog == DialogAction.USE_OBJECT) {
+					if (dialogActionId == USE_OBJECT) {
 						return sendQuestDialog(env, 10002);
 					}
 
@@ -92,34 +92,34 @@ public class _20501WhattheRuinsSay extends QuestHandler {
 				break;
 			case 731538: // Crumbled Ruins
 				if (var == 3) { // Step 3: Investigate the Crumbled Ruins.
-					if (dialog == DialogAction.QUEST_SELECT)
+					if (dialogActionId == QUEST_SELECT)
 						return sendQuestDialog(env, 2034);
-					if (dialog == DialogAction.SETPRO4) {
+					if (dialogActionId == SETPRO4) {
 						return defaultCloseDialog(env, var, var + 1);
 					}
 				}
 				break;
 			case 731539: // Destroyed Balaur Ruins
 				if (var == 4) { // Step 4: Investigate the Destroyed Balaur Ruins
-					if (dialog == DialogAction.QUEST_SELECT)
+					if (dialogActionId == QUEST_SELECT)
 						return sendQuestDialog(env, 2375);
-					if (dialog == DialogAction.SETPRO5)
+					if (dialogActionId == SETPRO5)
 						return defaultCloseDialog(env, var, var + 1);
 				}
 				break;
 			case 731540: // Intact Balaur Ruins
 				if (var == 5) { // Step 5: Look for the Intact Balaur Ruins.
-					if (dialog == DialogAction.QUEST_SELECT)
+					if (dialogActionId == QUEST_SELECT)
 						return sendQuestDialog(env, 2716);
-					if (dialog == DialogAction.SETPRO6)
+					if (dialogActionId == SETPRO6)
 						return defaultCloseDialog(env, var, var + 1);
 				}
 				break;
 			case 804722: // Putrid Balaur Corpse.
 				if (var == 6) { // Step 6: Examine the Putrid Balaur Corpse.
-					if (dialog == DialogAction.QUEST_SELECT)
+					if (dialogActionId == QUEST_SELECT)
 						return sendQuestDialog(env, 3057);
-					if (dialog == DialogAction.SET_SUCCEED) {
+					if (dialogActionId == SET_SUCCEED) {
 						// Beritra Special Assassin [ID: 219935] is spawned
 						Npc npc = (Npc) env.getVisibleObject();
 						if (npc != null)

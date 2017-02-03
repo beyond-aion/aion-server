@@ -26,7 +26,7 @@ public class _1012SensoryArea extends QuestZoneHandler {
 			public void onMoved(float distanceScouted, float distanceToCenter, int steps, long timeSpent) {
 				// Another way to do the same is like this:
 				//
-				// QuestEngine.getInstance().onEnterZone(new QuestEnv(null, player, questId, 0), observedZone.getName());
+				// QuestEngine.getInstance().onEnterZone(new QuestEnv(null, player, questId), observedZone.getName());
 				//
 				// In this case, it will be handled inside the quest script. But you need to register
 				// each zone in the quest script. For scouting you may save distance, time and send the event back

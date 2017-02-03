@@ -7,10 +7,8 @@ import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
  */
 public class _3208ThePuzzlingBlueprint extends QuestHandler {
 
-	private static final int questId = 3208;
-
 	public _3208ThePuzzlingBlueprint() {
-		super(questId);
+		super(3208);
 	}
 
 	@Override

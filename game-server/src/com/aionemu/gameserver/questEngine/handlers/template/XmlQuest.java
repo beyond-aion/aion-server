@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.handlers.models.Monster;
@@ -82,7 +82,7 @@ public class XmlQuest extends QuestHandler {
 		
 		if (qs == null || qs.isStartable()) {
 			if (startNpcIds.contains(targetId)) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
+				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, isDataDriven ? 4762 : 1011);
 				else
 					return sendQuestStartDialog(env);

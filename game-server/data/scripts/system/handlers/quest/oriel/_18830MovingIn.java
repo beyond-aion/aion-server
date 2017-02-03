@@ -1,10 +1,11 @@
 package quest.oriel;
 
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.house.House;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
@@ -19,7 +20,6 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 public class _18830MovingIn extends QuestHandler {
 
-	private static final int questId = 18830;
 	private static final Set<Integer> butlers;
 
 	static {
@@ -32,7 +32,7 @@ public class _18830MovingIn extends QuestHandler {
 	}
 
 	public _18830MovingIn() {
-		super(questId);
+		super(18830);
 	}
 
 	@Override
@@ -52,7 +52,7 @@ public class _18830MovingIn extends QuestHandler {
 	public boolean onDialogEvent(QuestEnv env) {
 		final Player player = env.getPlayer();
 		int targetId = env.getTargetId();
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		House house = player.getActiveHouse();
 
@@ -62,7 +62,7 @@ public class _18830MovingIn extends QuestHandler {
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 830584) {
-				switch (dialog) {
+				switch (dialogActionId) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 1011);
 					case QUEST_ACCEPT_1:
@@ -77,20 +77,20 @@ public class _18830MovingIn extends QuestHandler {
 			if (butlers.contains(targetId) && qs.getQuestVarById(0) == 0) {
 				if (house.getButler().getNpcId() != targetId)
 					return false;
-				switch (dialog) {
+				switch (dialogActionId) {
 					case USE_OBJECT:
 						return sendQuestDialog(env, 1352);
 					case SETPRO1:
 						return defaultCloseDialog(env, 0, 1);
 				}
 			} else if (targetId == 830645) {
-				if (dialog == DialogAction.QUEST_SELECT) {
+				if (dialogActionId == QUEST_SELECT) {
 					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_ANOTHER_SINGLE_STEP_NOT_COMPLETED());
 					return closeDialogWindow(env);
 				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD && targetId == 830645) {
-			switch (dialog) {
+			switch (dialogActionId) {
 				case USE_OBJECT:
 					return sendQuestDialog(env, 2375);
 				case SELECT_QUEST_REWARD:

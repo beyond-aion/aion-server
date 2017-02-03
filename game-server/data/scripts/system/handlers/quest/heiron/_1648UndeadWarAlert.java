@@ -1,6 +1,7 @@
 package quest.heiron;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
@@ -16,10 +17,8 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 
 public class _1648UndeadWarAlert extends QuestHandler {
 
-	private final static int questId = 1648;
-
 	public _1648UndeadWarAlert() {
-		super(questId);
+		super(1648);
 	}
 
 	@Override
@@ -42,7 +41,7 @@ public class _1648UndeadWarAlert extends QuestHandler {
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 204545) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT) {
+				if (env.getDialogActionId() == QUEST_SELECT) {
 					return sendQuestDialog(env, 1011);
 				} else
 					return sendQuestStartDialog(env);
@@ -55,7 +54,7 @@ public class _1648UndeadWarAlert extends QuestHandler {
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 204612:
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case QUEST_SELECT: {
 							if (qs.getQuestVarById(0) == 0) {
 								return sendQuestDialog(env, 1352);
@@ -71,7 +70,7 @@ public class _1648UndeadWarAlert extends QuestHandler {
 					}
 					return false;
 				case 204500:
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case QUEST_SELECT: {
 							if (qs.getQuestVarById(0) == 1) {
 								return sendQuestDialog(env, 1693);
@@ -89,7 +88,7 @@ public class _1648UndeadWarAlert extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204590) {
-				if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id())
+				if (env.getDialogActionId() == SELECT_QUEST_REWARD)
 					return sendQuestDialog(env, 5);
 				else
 					return sendQuestEndDialog(env);

@@ -1,6 +1,7 @@
 package quest.pernon;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -12,10 +13,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _28809FirstClassorCoach extends QuestHandler {
 
-	private static final int questId = 28809;
-
 	public _28809FirstClassorCoach() {
-		super(questId);
+		super(28809);
 	}
 
 	@Override
@@ -30,12 +29,12 @@ public class _28809FirstClassorCoach extends QuestHandler {
 	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 830169) {
-				switch (dialog) {
+				switch (dialogActionId) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 1011);
 					case QUEST_ACCEPT_1:
@@ -47,7 +46,7 @@ public class _28809FirstClassorCoach extends QuestHandler {
 		} else if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 830408:
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT: {
 							return sendQuestDialog(env, 1352);
 						}
@@ -57,7 +56,7 @@ public class _28809FirstClassorCoach extends QuestHandler {
 					}
 					return false;
 				case 830417:
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT: {
 							return sendQuestDialog(env, 1693);
 						}
@@ -67,7 +66,7 @@ public class _28809FirstClassorCoach extends QuestHandler {
 					}
 					return false;
 				case 830169:
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT: {
 							return sendQuestDialog(env, 2375);
 						}

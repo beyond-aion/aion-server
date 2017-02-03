@@ -1,6 +1,6 @@
 package quest.event_quests;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -13,10 +13,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 public class _80029EventUsingYourCharms extends QuestHandler {
 
-	private final static int questId = 80029;
-
 	public _80029EventUsingYourCharms() {
-		super(questId);
+		super(80029);
 	}
 
 	@Override
@@ -36,14 +34,14 @@ public class _80029EventUsingYourCharms extends QuestHandler {
 
 		if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 799766) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
+				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 1011);
-				else if (env.getDialog() == DialogAction.QUEST_ACCEPT_1)
+				else if (env.getDialogActionId() == QUEST_ACCEPT_1)
 					return sendQuestDialog(env, 2375);
-				else if (env.getDialog() == DialogAction.SELECT_QUEST_REWARD) {
+				else if (env.getDialogActionId() == SELECT_QUEST_REWARD) {
 					defaultCloseDialog(env, 0, 0, true, true);
 					return sendQuestDialog(env, 5);
-				} else if (env.getDialog() == DialogAction.SELECTED_QUEST_NOREWARD)
+				} else if (env.getDialogActionId() == SELECTED_QUEST_NOREWARD)
 					return sendQuestRewardDialog(env, 799766, 5);
 				else
 					return sendQuestStartDialog(env);

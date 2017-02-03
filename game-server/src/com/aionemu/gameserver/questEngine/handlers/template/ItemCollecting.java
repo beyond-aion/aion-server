@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.questEngine.handlers.template;
 
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -8,7 +10,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.quest.QuestCategory;
 import com.aionemu.gameserver.model.templates.quest.QuestItems;
@@ -91,19 +92,19 @@ public class ItemCollecting extends QuestHandler {
 	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.isStartable()) {
 			if (startNpcIds.isEmpty() || startNpcIds.contains(targetId)
 				|| DataManager.QUEST_DATA.getQuestById(questId).getCategory() == QuestCategory.FACTION) {
-				switch (dialog) {
+				switch (dialogActionId) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, startDialogId != 0 ? startDialogId : isDataDriven ? 4762 : 1011);
 					case SETPRO1:
 						QuestService.startQuest(env);
 						return closeDialogWindow(env);
-					case SELECT_ACTION_1012:
+					case SELECT1_1:
 						if (questMovie != 0) {
 							playQuestMovie(env, questMovie);
 						}
@@ -119,14 +120,14 @@ public class ItemCollecting extends QuestHandler {
 		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			if (targetId == nextNpcId && var == 0) {
-				switch (dialog) {
+				switch (dialogActionId) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 1352);
 					case SETPRO1:
 						return defaultCloseDialog(env, 0, 1);
 				}
 			} else if (endNpcIds.contains(targetId)) {
-				switch (dialog) {
+				switch (dialogActionId) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, startDialogId2 != 0 ? startDialogId2 : isDataDriven ? 1011 : 2375);
 					case CHECK_USER_HAS_QUEST_ITEM:

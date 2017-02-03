@@ -1,6 +1,6 @@
 package quest.eltnen;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
@@ -15,10 +15,8 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 public class _1322ALeafFromLodas extends QuestHandler {
 
-	private final static int questId = 1322;
-
 	public _1322ALeafFromLodas() {
-		super(questId);
+		super(1322);
 	}
 
 	@Override
@@ -38,30 +36,30 @@ public class _1322ALeafFromLodas extends QuestHandler {
 		if (targetId == 730019) // Lodas
 		{
 			if (qs == null || qs.isStartable()) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
+				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 1011);
 				else
 					return sendQuestStartDialog(env);
 			} else if (qs != null && qs.getStatus() == QuestStatus.START) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
+				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 2375);
-				else if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id()) {
+				else if (env.getDialogActionId() == SELECT_QUEST_REWARD) {
 					qs.setQuestVar(2);
 					updateQuestStatus(env);
 					return sendQuestEndDialog(env);
 				} else
 					return sendQuestEndDialog(env);
 			} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
-				if (env.getDialog() == DialogAction.USE_OBJECT)
+				if (env.getDialogActionId() == USE_OBJECT)
 					return sendQuestDialog(env, 2375);
 				return sendQuestEndDialog(env);
 			}
 		} else if (targetId == 730008) // Daminu
 		{
 			if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 0) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
+				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 1352);
-				else if (env.getDialog() == DialogAction.SETPRO1 || env.getDialog() == DialogAction.SETPRO2) {
+				else if (env.getDialogActionId() == SETPRO1 || env.getDialogActionId() == SETPRO2) {
 					qs.setStatus(QuestStatus.REWARD);
 					updateQuestStatus(env);
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));

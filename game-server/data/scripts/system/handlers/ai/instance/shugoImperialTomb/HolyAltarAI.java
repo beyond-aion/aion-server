@@ -1,8 +1,11 @@
 package ai.instance.shugoImperialTomb;
 
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import java.util.List;
 
 import com.aionemu.gameserver.ai.AIName;
+import com.aionemu.gameserver.model.DialogPage;
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
@@ -23,24 +26,17 @@ import ai.GeneralNpcAI;
 @AIName("holy_altar")
 public class HolyAltarAI extends GeneralNpcAI {
 
-	protected int rewardDialogId = 5;
-	protected int startingDialogId = 10;
-	protected int questDialogId = 10;
-
 	@Override
 	protected void handleDialogStart(Player player) {
 		checkDialog(player);
 	}
 
 	@Override
-	public boolean onDialogSelect(Player player, int dialogId, int questId, int extendedRewardIndex) {
-		QuestEnv env = new QuestEnv(getOwner(), player, questId, dialogId);
+	public boolean onDialogSelect(Player player, int dialogActionId, int questId, int extendedRewardIndex) {
+		QuestEnv env = new QuestEnv(getOwner(), player, questId, dialogActionId);
 		env.setExtendedRewardIndex(extendedRewardIndex);
-		checkEntryConditions(player, dialogId, questId);
-		if (QuestEngine.getInstance().onDialog(env)) {
-			return true;
-		}
-		return true;
+		checkEntryConditions(player, dialogActionId, questId);
+		return QuestEngine.getInstance().onDialog(env);
 	}
 
 	private void checkDialog(Player player) {
@@ -68,74 +64,69 @@ public class HolyAltarAI extends GeneralNpcAI {
 			for (int questId : relatedQuests) {
 				QuestState qs = player.getQuestStateList().getQuestState(questId);
 				if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
-					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), rewardDialogId, questId));
+					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), DialogPage.SELECT_QUEST_REWARD_WINDOW1.id(), questId));
 					isRewardStep = true;
 					break;
 				}
 			}
 			if (!isRewardStep) {
-				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), questDialogId));
+				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 10));
 			}
 		} else if (playerCanStartQuest) {
-			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), startingDialogId));
+			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 10));
 		} else {
-			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 1011, 0));
+			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 1011));
 		}
 	}
 
-	private void checkEntryConditions(Player player, int dialogId, int questId) {
+	private void checkEntryConditions(Player player, int dialogActionId, int questId) {
 		int instanceId = player.getInstanceId();
 		int entryCount = 0;
-		if (dialogId == 10000) // Emperor treasure room
-		{
-			if (player.getInventory().decreaseByItemId(182006989, 1) && entryCount == 0) {
-				entryCount++;
-				TeleportService.teleportTo(player, 300560000, instanceId, 74.292816f, 350.66525f, 285.14545f, (byte) 0, TeleportAnimation.FADE_OUT_BEAM);
-			} else if (player.getInventory().decreaseByItemId(182006989, 1) && entryCount == 1) {
-				entryCount++;
-				TeleportService.teleportTo(player, 300560000, instanceId, 375.25629f, 198.02574f, 306.84357f, (byte) 0, TeleportAnimation.FADE_OUT_BEAM);
-			} else if (player.getInventory().decreaseByItemId(182006989, 1) && entryCount == 2) {
-				entryCount++;
-				TeleportService.teleportTo(player, 300560000, instanceId, 335.55219f, 334.60947f, 458.5939f, (byte) 0, TeleportAnimation.FADE_OUT_BEAM);
-			}
-			{
+		switch (dialogActionId) {
+			case SETPRO1: // Emperor treasure room
+				if (player.getInventory().decreaseByItemId(182006989, 1) && entryCount == 0) {
+					entryCount++;
+					TeleportService.teleportTo(player, 300560000, instanceId, 74.292816f, 350.66525f, 285.14545f, (byte) 0, TeleportAnimation.FADE_OUT_BEAM);
+				} else if (player.getInventory().decreaseByItemId(182006989, 1) && entryCount == 1) {
+					entryCount++;
+					TeleportService.teleportTo(player, 300560000, instanceId, 375.25629f, 198.02574f, 306.84357f, (byte) 0, TeleportAnimation.FADE_OUT_BEAM);
+				} else if (player.getInventory().decreaseByItemId(182006989, 1) && entryCount == 2) {
+					entryCount++;
+					TeleportService.teleportTo(player, 300560000, instanceId, 335.55219f, 334.60947f, 458.5939f, (byte) 0, TeleportAnimation.FADE_OUT_BEAM);
+				}
 				PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1401579));
-				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 0, 0));
-			}
-		}
-		if (dialogId == 10001) // Empress treasure room
-		{
-			if (player.getInventory().decreaseByItemId(182006990, 1) && entryCount == 0) {
-				entryCount++;
-				TeleportService.teleportTo(player, 300560000, instanceId, 347.96069f, 41.424923f, 358.3918f, (byte) 0, TeleportAnimation.FADE_OUT_BEAM);
-			} else if (player.getInventory().decreaseByItemId(182006990, 1) && entryCount == 1) {
-				entryCount++;
-				TeleportService.teleportTo(player, 300560000, instanceId, 82.877762f, 240.61363f, 421.79004f, (byte) 0, TeleportAnimation.FADE_OUT_BEAM);
-			} else if (player.getInventory().decreaseByItemId(182006990, 1) && entryCount == 2) {
-				entryCount++;
-				TeleportService.teleportTo(player, 300560000, instanceId, 75.203018f, 432.58603f, 455.82312f, (byte) 0, TeleportAnimation.FADE_OUT_BEAM);
-			} else {
-				PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1401580));
-				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 0, 0));
-			}
-		}
-		if (dialogId == 10002) // Prince treasure room
-		{
-			if (player.getInventory().decreaseByItemId(182006991, 1) && entryCount == 0) {
-				entryCount++;
-				TeleportService.teleportTo(player, 300560000, instanceId, 409.74783f, 247.3778f, 516.4457f, (byte) 0, TeleportAnimation.FADE_OUT_BEAM);
-			} else if (player.getInventory().decreaseByItemId(182006991, 1) && entryCount == 1) {
-				entryCount++;
-				TeleportService.teleportTo(player, 300560000, instanceId, 181.56918f, 385.08932f, 616.1734f, (byte) 0, TeleportAnimation.FADE_OUT_BEAM);
-			} else if (player.getInventory().decreaseByItemId(182006991, 1) && entryCount == 2) {
-				entryCount++;
-				TeleportService.teleportTo(player, 300560000, instanceId, 177.63902f, 77.778755f, 466.1734f, (byte) 0, TeleportAnimation.FADE_OUT_BEAM);
-			} else {
-				PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1401581));
-				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 0, 0));
-			}
-		} else {
-			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), dialogId, questId));
+				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 0));
+				break;
+			case SETPRO2: // Empress treasure room
+				if (player.getInventory().decreaseByItemId(182006990, 1) && entryCount == 0) {
+					entryCount++;
+					TeleportService.teleportTo(player, 300560000, instanceId, 347.96069f, 41.424923f, 358.3918f, (byte) 0, TeleportAnimation.FADE_OUT_BEAM);
+				} else if (player.getInventory().decreaseByItemId(182006990, 1) && entryCount == 1) {
+					entryCount++;
+					TeleportService.teleportTo(player, 300560000, instanceId, 82.877762f, 240.61363f, 421.79004f, (byte) 0, TeleportAnimation.FADE_OUT_BEAM);
+				} else if (player.getInventory().decreaseByItemId(182006990, 1) && entryCount == 2) {
+					entryCount++;
+					TeleportService.teleportTo(player, 300560000, instanceId, 75.203018f, 432.58603f, 455.82312f, (byte) 0, TeleportAnimation.FADE_OUT_BEAM);
+				} else {
+					PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1401580));
+					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 0));
+				}
+				break;
+			case SETPRO3: // Prince treasure room
+				if (player.getInventory().decreaseByItemId(182006991, 1) && entryCount == 0) {
+					entryCount++;
+					TeleportService.teleportTo(player, 300560000, instanceId, 409.74783f, 247.3778f, 516.4457f, (byte) 0, TeleportAnimation.FADE_OUT_BEAM);
+				} else if (player.getInventory().decreaseByItemId(182006991, 1) && entryCount == 1) {
+					entryCount++;
+					TeleportService.teleportTo(player, 300560000, instanceId, 181.56918f, 385.08932f, 616.1734f, (byte) 0, TeleportAnimation.FADE_OUT_BEAM);
+				} else if (player.getInventory().decreaseByItemId(182006991, 1) && entryCount == 2) {
+					entryCount++;
+					TeleportService.teleportTo(player, 300560000, instanceId, 177.63902f, 77.778755f, 466.1734f, (byte) 0, TeleportAnimation.FADE_OUT_BEAM);
+				} else {
+					PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1401581));
+					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 0));
+				}
+				break;
 		}
 	}
 }

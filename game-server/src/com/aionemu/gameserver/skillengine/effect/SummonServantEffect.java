@@ -6,9 +6,6 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.aionemu.gameserver.ai.event.AIEventType;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Creature;
@@ -29,8 +26,6 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "SummonServantEffect")
 public class SummonServantEffect extends SummonEffect {
-
-	private static final Logger log = LoggerFactory.getLogger(SummonServantEffect.class);
 
 	@Override
 	public void applyEffect(Effect effect) {
@@ -57,11 +52,9 @@ public class SummonServantEffect extends SummonEffect {
 
 		SkillTemplate template = effect.getSkillTemplate();
 
-		if (template.getProperties().getFirstTarget() != FirstTargetAttribute.POINT &&
-			template.getProperties().getFirstTarget() != FirstTargetAttribute.ME && target == null) {
-			log.warn("Servant trying to attack null target!!");
-			return null;
-		}
+		if (target == null && template.getProperties().getFirstTarget() != FirstTargetAttribute.POINT
+			&& template.getProperties().getFirstTarget() != FirstTargetAttribute.ME)
+			throw new IllegalArgumentException("Servant " + npcId + "cannot be spawned by " + effector + " (target = null)");
 
 		SpawnTemplate spawn = SpawnEngine.addNewSingleTimeSpawn(worldId, npcId, x, y, z, heading);
 		final Servant servant = VisibleObjectSpawner.spawnServant(spawn, instanceId, effector, effect.getSkillLevel(), npcObjectType);

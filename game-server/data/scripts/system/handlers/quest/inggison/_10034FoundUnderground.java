@@ -1,7 +1,8 @@
 package quest.inggison;
 
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.instance.handlers.InstanceHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -52,14 +53,14 @@ public class _10034FoundUnderground extends QuestHandler {
 		if (qs == null) {
 			return false;
 		}
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		int var = qs.getQuestVarById(0);
 		int targetId = env.getTargetId();
 
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 799030: // Sueros
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var == 0) {
 								return sendQuestDialog(env, 1011);
@@ -70,7 +71,7 @@ public class _10034FoundUnderground extends QuestHandler {
 					}
 					break;
 				case 799029:
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var == 1) {
 								return sendQuestDialog(env, 1352);
@@ -81,13 +82,13 @@ public class _10034FoundUnderground extends QuestHandler {
 					}
 					break;
 				case 798990:
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var == 2) {
 								return sendQuestDialog(env, 1693);
 							}
 							return false;
-						case SELECT_ACTION_1695:
+						case SELECT3_1_1:
 							playQuestMovie(env, 504);
 							return sendQuestDialog(env, 1695);
 						case SETPRO3:
@@ -95,7 +96,7 @@ public class _10034FoundUnderground extends QuestHandler {
 					}
 					break;
 				case 730295:
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var == 3) {
 								return sendQuestDialog(env, 2034);
@@ -120,7 +121,7 @@ public class _10034FoundUnderground extends QuestHandler {
 					}
 					break;
 				case 700604:
-					if (var == 4 && dialog == DialogAction.USE_OBJECT) {
+					if (var == 4 && dialogActionId == USE_OBJECT) {
 						InstanceHandler instanceHandler = player.getPosition().getWorldMapInstance().getInstanceHandler();
 						instanceHandler.handleUseItemFinish(player, (Npc) env.getVisibleObject());
 						return useQuestObject(env, 4, 5, false, 0);
@@ -128,11 +129,11 @@ public class _10034FoundUnderground extends QuestHandler {
 					break;
 				case 730229:
 					if (var == 6) {
-						if (dialog == DialogAction.QUEST_SELECT) {
+						if (dialogActionId == QUEST_SELECT) {
 							return sendQuestDialog(env, 3057);
 						}
 
-						if (dialog == DialogAction.SETPRO7) {
+						if (dialogActionId == SETPRO7) {
 							giveQuestItem(env, 182215628, 1);
 							return defaultCloseDialog(env, 6, 7);
 						}
@@ -141,7 +142,7 @@ public class _10034FoundUnderground extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 799030) {
-				if (env.getDialog() == DialogAction.USE_OBJECT) {
+				if (env.getDialogActionId() == USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
 				}
 				return sendQuestEndDialog(env);

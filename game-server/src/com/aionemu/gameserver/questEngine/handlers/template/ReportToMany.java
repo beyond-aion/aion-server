@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.questEngine.handlers.template;
 
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -8,7 +10,6 @@ import java.util.Set;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.quest.QuestItems;
@@ -72,13 +73,13 @@ public class ReportToMany extends QuestHandler {
 	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.isStartable()) {
 			if ((startNpcIds.isEmpty() || startNpcIds.contains(targetId))
 				&& (startItemId == 0 || player.getInventory().getFirstItemByItemId(startItemId) != null)) {
-				switch (dialog) {
+				switch (dialogActionId) {
 					case QUEST_ACCEPT:
 					case QUEST_ACCEPT_1:
 					case QUEST_ACCEPT_SIMPLE:
@@ -100,7 +101,7 @@ public class ReportToMany extends QuestHandler {
 			if (!targetNpcInfo.getNpcIds().contains(targetId))
 				return false;
 
-			switch (dialog) {
+			switch (dialogActionId) {
 				case QUEST_SELECT:
 					return sendQuestDialog(env, getDialogId(step));
 				case SETPRO1:
@@ -123,11 +124,11 @@ public class ReportToMany extends QuestHandler {
 				case SELECT_QUEST_REWARD:
 				case CHECK_USER_HAS_QUEST_ITEM:
 				case CHECK_USER_HAS_QUEST_ITEM_SIMPLE:
-					if (dialog == DialogAction.SET_SUCCEED) { // set reward from pre-end npc (end npc is another one who will then give the reward)
+					if (dialogActionId == SET_SUCCEED) { // set reward from pre-end npc (end npc is another one who will then give the reward)
 						rewardStatusFromRewardNpc = false;
 						step++;
 					}
-					if (step < getMaxStep() || !validateAndRemoveItems(env, dialog))
+					if (step < getMaxStep() || !validateAndRemoveItems(env))
 						return sendQuestSelectionDialog(env);
 					qs.setQuestVarById(0, step);
 					qs.setStatus(QuestStatus.REWARD);
@@ -142,7 +143,7 @@ public class ReportToMany extends QuestHandler {
 			NpcInfos endNpcInfo = npcInfos.get(getMaxStep());
 			if (!endNpcInfo.getNpcIds().contains(targetId))
 				return false;
-			if (dialog == DialogAction.USE_OBJECT && !rewardStatusFromRewardNpc) // if talking to an end npc who did not set the reward state himself
+			if (dialogActionId == USE_OBJECT && !rewardStatusFromRewardNpc) // if talking to an end npc who did not set the reward state himself
 				return sendQuestDialog(env, isDataDriven ? 10002 : 2375); // show full reward dialog instead of only last page (otherwise it's never readable)
 			return sendQuestEndDialog(env);
 		}
@@ -160,7 +161,7 @@ public class ReportToMany extends QuestHandler {
 			return (isDataDriven ? 1011 : 1352) + var * 341;
 	}
 
-	private boolean validateAndRemoveItems(QuestEnv env, DialogAction dialog) {
+	private boolean validateAndRemoveItems(QuestEnv env) {
 		if (!QuestService.collectItemCheck(env, true))
 			return false;
 		if (startItemId != 0 && !removeQuestItem(env, startItemId, 1))

@@ -1,6 +1,6 @@
 package quest.sanctum;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
@@ -15,10 +15,8 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 public class _1937ALepharistMonstrosity extends QuestHandler {
 
-	private final static int questId = 1937;
-
 	public _1937ALepharistMonstrosity() {
-		super(questId);
+		super(1937);
 	}
 
 	@Override
@@ -44,7 +42,7 @@ public class _1937ALepharistMonstrosity extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs == null) {
 			if (targetId == 203833) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
+				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 1011);
 				else
 					return sendQuestStartDialog(env);
@@ -53,9 +51,9 @@ public class _1937ALepharistMonstrosity extends QuestHandler {
 			switch (targetId) {
 				case 203837:
 					if (qs.getQuestVarById(0) == 0) {
-						if (env.getDialog() == DialogAction.QUEST_SELECT)
+						if (env.getDialogActionId() == QUEST_SELECT)
 							return sendQuestDialog(env, 1352);
-						else if (env.getDialog() == DialogAction.SETPRO1) {
+						else if (env.getDialogActionId() == SETPRO1) {
 							qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
 							updateQuestStatus(env);
 							PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
@@ -65,9 +63,9 @@ public class _1937ALepharistMonstrosity extends QuestHandler {
 					break;
 				case 203761:
 					if (qs.getQuestVarById(0) == 1) {
-						if (env.getDialog() == DialogAction.QUEST_SELECT)
+						if (env.getDialogActionId() == QUEST_SELECT)
 							return sendQuestDialog(env, 1693);
-						else if (env.getDialog() == DialogAction.SETPRO2) {
+						else if (env.getDialogActionId() == SETPRO2) {
 							qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
 							updateQuestStatus(env);
 							PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
@@ -77,9 +75,9 @@ public class _1937ALepharistMonstrosity extends QuestHandler {
 					break;
 				case 203833:
 					if (qs.getQuestVarById(0) == 2) {
-						if (env.getDialog() == DialogAction.QUEST_SELECT)
+						if (env.getDialogActionId() == QUEST_SELECT)
 							return sendQuestDialog(env, 2034);
-						else if (env.getDialog() == DialogAction.SETPRO3) {
+						else if (env.getDialogActionId() == SETPRO3) {
 							qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
 							updateQuestStatus(env);
 							PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
@@ -89,9 +87,9 @@ public class _1937ALepharistMonstrosity extends QuestHandler {
 					break;
 				case 204573:
 					if (qs.getQuestVarById(0) == 3) {
-						if (env.getDialog() == DialogAction.QUEST_SELECT)
+						if (env.getDialogActionId() == QUEST_SELECT)
 							return sendQuestDialog(env, 2375);
-						else if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id()) {
+						else if (env.getDialogActionId() == SELECT_QUEST_REWARD) {
 							qs.setStatus(QuestStatus.REWARD);
 							updateQuestStatus(env);
 							return sendQuestEndDialog(env);

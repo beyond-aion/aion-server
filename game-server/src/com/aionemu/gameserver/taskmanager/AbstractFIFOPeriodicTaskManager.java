@@ -2,9 +2,6 @@ package com.aionemu.gameserver.taskmanager;
 
 import java.util.concurrent.ConcurrentLinkedQueue;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.aionemu.commons.utils.concurrent.RunnableStatsManager;
 
 /**
@@ -13,7 +10,6 @@ import com.aionemu.commons.utils.concurrent.RunnableStatsManager;
  */
 public abstract class AbstractFIFOPeriodicTaskManager<T> extends AbstractPeriodicTaskManager {
 
-	private static final Logger log = LoggerFactory.getLogger(AbstractFIFOPeriodicTaskManager.class);
 	private final ConcurrentLinkedQueue<T> tasks = new ConcurrentLinkedQueue<>();
 	private int counter = 0;
 

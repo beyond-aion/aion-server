@@ -4,7 +4,7 @@ import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.instance.handlers.InstanceHandler;
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.instance.StageType;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
@@ -63,9 +63,9 @@ public class EmpyreanRecordKeeperAI extends NpcAI {
 	}
 
 	@Override
-	public boolean onDialogSelect(Player player, int dialogId, int questId, int extendedRewardIndex) {
+	public boolean onDialogSelect(Player player, int dialogActionId, int questId, int extendedRewardIndex) {
 		InstanceHandler instanceHandler = getPosition().getWorldMapInstance().getInstanceHandler();
-		if (dialogId == DialogAction.SETPRO1.id()) {
+		if (dialogActionId == SETPRO1) {
 			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 0));
 			switch (getNpcId()) {
 				case 799567:
@@ -121,7 +121,7 @@ public class EmpyreanRecordKeeperAI extends NpcAI {
 					break;
 			}
 			AIActions.deleteOwner(this);
-		} else if (dialogId == 10001 && getNpcId() == 799567) { // start with stage 7
+		} else if (dialogActionId == SETPRO2 && getNpcId() == 799567) { // start with stage 7
 			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 0));
 			instanceHandler.onChangeStage(StageType.START_STAGE_7);
 			AIActions.deleteOwner(this);

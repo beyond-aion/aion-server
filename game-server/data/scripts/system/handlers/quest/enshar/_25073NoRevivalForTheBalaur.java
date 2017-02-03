@@ -1,6 +1,6 @@
 package quest.enshar;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -13,10 +13,8 @@ import com.aionemu.gameserver.services.QuestService;
  */
 public class _25073NoRevivalForTheBalaur extends QuestHandler {
 
-	private final static int questId = 25073;
-
 	public _25073NoRevivalForTheBalaur() {
-		super(questId);
+		super(25073);
 	}
 
 	@Override
@@ -36,11 +34,11 @@ public class _25073NoRevivalForTheBalaur extends QuestHandler {
 		final Player player = env.getPlayer();
 		final QuestState qs = player.getQuestStateList().getQuestState(questId);
 		int targetId = env.getTargetId();
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 804918) { // Sorg
-				if (dialog == DialogAction.QUEST_SELECT)
+				if (dialogActionId == QUEST_SELECT)
 					return sendQuestDialog(env, 4762);
 				else
 					return sendQuestStartDialog(env);
@@ -51,11 +49,11 @@ public class _25073NoRevivalForTheBalaur extends QuestHandler {
 			switch (targetId) {
 				case 731556: // Drak tribe's heart
 					if (var == 0) {
-						if (dialog == DialogAction.QUEST_SELECT) {
+						if (dialogActionId == QUEST_SELECT) {
 							return sendQuestDialog(env, 1011);
 						}
 
-						if (dialog == DialogAction.SET_SUCCEED) {
+						if (dialogActionId == SET_SUCCEED) {
 							if (QuestService.collectItemCheck(env, true)) {
 								qs.setQuestVar(var + 1);
 								return defaultCloseDialog(env, var + 1, var + 1, true, false);
@@ -67,7 +65,7 @@ public class _25073NoRevivalForTheBalaur extends QuestHandler {
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			switch (targetId) {
 				case 804732: // Cenute
-					if (dialog == DialogAction.USE_OBJECT)
+					if (dialogActionId == USE_OBJECT)
 						return sendQuestDialog(env, 10002);
 
 					return sendQuestEndDialog(env);

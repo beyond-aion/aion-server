@@ -7,7 +7,7 @@ import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.instance.handlers.InstanceHandler;
 import com.aionemu.gameserver.model.DescriptionId;
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.portal.PortalPath;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
@@ -25,8 +25,8 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 public class LegionDominionPortalAI extends PortalDialogAI {
 
 	@Override
-	public boolean onDialogSelect(Player player, int dialogId, int questId, int extendedRewardIndex) {
-		if (dialogId != DialogAction.SETPRO1.id()) {
+	public boolean onDialogSelect(Player player, int dialogActionId, int questId, int extendedRewardIndex) {
+		if (dialogActionId != SETPRO1) {
 			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 0, questId));
 			return true;
 		}
@@ -44,7 +44,7 @@ public class LegionDominionPortalAI extends PortalDialogAI {
 		}
 
 		if (player.isInAlliance() && !player.isInLeague()) {
-			PortalPath portalPath = DataManager.PORTAL2_DATA.getPortalDialog(getNpcId(), dialogId, player.getRace());
+			PortalPath portalPath = DataManager.PORTAL2_DATA.getPortalDialog(getNpcId(), dialogActionId, player.getRace());
 			WorldMapInstance instance = InstanceService.getRegisteredInstance(301500000, player.getPlayerAlliance().getObjectId());
 			if (portalPath == null) {
 				PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1401106));
@@ -62,7 +62,7 @@ public class LegionDominionPortalAI extends PortalDialogAI {
 						return true;
 					} else {
 						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_INSTANCE_CANT_ENTER_WITHOUT_ITEM());
-						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 0, 0));
+						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 0));
 						return true;
 					}
 				} else {
@@ -107,7 +107,7 @@ public class LegionDominionPortalAI extends PortalDialogAI {
 
 	private boolean hasCd(Player player) {
 		if (player.getPortalCooldownList().isPortalUseDisabled(301500000)) {
-			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 0, 0));
+			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 0));
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANNOT_MAKE_INSTANCE_COOL_TIME());
 			return true;
 		}

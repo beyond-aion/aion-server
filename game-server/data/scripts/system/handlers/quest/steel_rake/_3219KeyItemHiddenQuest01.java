@@ -7,10 +7,8 @@ import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
  */
 public class _3219KeyItemHiddenQuest01 extends QuestHandler {
 
-	private static final int questId = 3219;
-
 	public _3219KeyItemHiddenQuest01() {
-		super(questId);
+		super(3219);
 	}
 
 	@Override

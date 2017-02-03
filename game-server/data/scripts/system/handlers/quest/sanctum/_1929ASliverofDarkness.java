@@ -1,6 +1,7 @@
 package quest.sanctum;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -53,14 +54,14 @@ public class _1929ASliverofDarkness extends QuestHandler {
 		if (qs == null) {
 			return false;
 		}
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		int targetId = env.getTargetId();
 		int var = qs.getQuestVars().getQuestVars();
 
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 203752: // Jucleas
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var == 0) {
 								return sendQuestDialog(env, 1011);
@@ -71,7 +72,7 @@ public class _1929ASliverofDarkness extends QuestHandler {
 					}
 					break;
 				case 203852: // Ludina
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var == 1) {
 								return sendQuestDialog(env, 1352);
@@ -85,7 +86,7 @@ public class _1929ASliverofDarkness extends QuestHandler {
 					}
 					break;
 				case 203164: // Morai
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var == 2) {
 								return sendQuestDialog(env, 1693);
@@ -110,7 +111,7 @@ public class _1929ASliverofDarkness extends QuestHandler {
 					}
 					break;
 				case 205110: // Icaronix
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var == 93) {
 								return sendQuestDialog(env, 2034);
@@ -128,7 +129,7 @@ public class _1929ASliverofDarkness extends QuestHandler {
 					}
 					break;
 				case 700240: { // Icaronix's Box
-					if (dialog == DialogAction.USE_OBJECT) {
+					if (dialogActionId == USE_OBJECT) {
 						if (var == 94) {
 							return playQuestMovie(env, 155);
 						}
@@ -136,7 +137,7 @@ public class _1929ASliverofDarkness extends QuestHandler {
 					break;
 				}
 				case 205111: // Ecus
-					switch (dialog) {
+					switch (dialogActionId) {
 						case USE_OBJECT:
 							if (var == 96) {
 								if (isStigmaEquipped(env)) {
@@ -152,7 +153,7 @@ public class _1929ASliverofDarkness extends QuestHandler {
 								return sendQuestDialog(env, 2375);
 							}
 							return false;
-						case SELECT_ACTION_2546:
+						case SELECT5_3:
 							if (var == 98) {
 								if (giveQuestItem(env, getStoneId(player), 1)) {
 									PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 1));
@@ -160,7 +161,7 @@ public class _1929ASliverofDarkness extends QuestHandler {
 								}
 							}
 							return false;
-						case SELECT_ACTION_2720:
+						case SELECT6_1_1_1_1:
 							if (var == 96) {
 								Npc npc = (Npc) env.getVisibleObject();
 								npc.getController().delete();
@@ -171,7 +172,7 @@ public class _1929ASliverofDarkness extends QuestHandler {
 					}
 					break;
 				case 203701: // Lavirintos
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var == 9) {
 								return sendQuestDialog(env, 3398);
@@ -183,7 +184,7 @@ public class _1929ASliverofDarkness extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203711) { // Miriya
-				if (env.getDialog() == DialogAction.USE_OBJECT) {
+				if (env.getDialogActionId() == USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
 				} else {
 					return sendQuestEndDialog(env);

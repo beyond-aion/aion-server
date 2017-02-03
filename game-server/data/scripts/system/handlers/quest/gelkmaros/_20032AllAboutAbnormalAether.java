@@ -1,8 +1,8 @@
 package quest.gelkmaros;
 
+import static com.aionemu.gameserver.model.DialogAction.*;
 import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE.STR_MSG_FULL_INVENTORY;
 
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -53,12 +53,12 @@ public class _20032AllAboutAbnormalAether extends QuestHandler {
 			return false;
 		int var = qs.getQuestVarById(0);
 		int targetId = env.getTargetId();
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 
 		if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 799247) { // Angrad
 				if (var == 0) {
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							return sendQuestDialog(env, 1011);
 						case SETPRO1:
@@ -67,7 +67,7 @@ public class _20032AllAboutAbnormalAether extends QuestHandler {
 				}
 			} else if (targetId == 799250) { // Eddas
 				if (var == 1) {
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							return sendQuestDialog(env, 1352);
 						case SETPRO2:
@@ -75,7 +75,7 @@ public class _20032AllAboutAbnormalAether extends QuestHandler {
 					}
 				}
 			} else if (targetId == 799325) { // Taloc's Guardian
-				switch (dialog) {
+				switch (dialogActionId) {
 					case QUEST_SELECT:
 						if (var == 2) {
 							return sendQuestDialog(env, 1693);
@@ -98,7 +98,7 @@ public class _20032AllAboutAbnormalAether extends QuestHandler {
 			/*
 			 * To check on retail if there is a dedicate portal to exit.
 			 * else if (targetId == 799503) { // Taloc's Mirage
-			 * switch (dialog) {
+			 * switch (dialogActionId) {
 			 * case USE_OBJECT:
 			 * if (var == 7) {
 			 * return sendQuestDialog(env, 3057);
@@ -116,7 +116,7 @@ public class _20032AllAboutAbnormalAether extends QuestHandler {
 			 */
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 799247) { // Angrad
-				if (dialog == DialogAction.USE_OBJECT) {
+				if (dialogActionId == USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
 				}
 				return sendQuestEndDialog(env);

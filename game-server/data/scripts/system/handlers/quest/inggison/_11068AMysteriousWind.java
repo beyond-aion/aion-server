@@ -1,6 +1,7 @@
 package quest.inggison;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
@@ -15,11 +16,10 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 public class _11068AMysteriousWind extends QuestHandler {
 
-	private final static int questId = 11068;
 	private final static int[] npc_ids = { 799025, 799026 };
 
 	public _11068AMysteriousWind() {
-		super(questId);
+		super(11068);
 	}
 
 	@Override
@@ -38,7 +38,7 @@ public class _11068AMysteriousWind extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (targetId == 799025) {
 			if (qs == null || qs.isStartable()) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
+				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 1011);
 				else
 					return sendQuestStartDialog(env);
@@ -56,7 +56,7 @@ public class _11068AMysteriousWind extends QuestHandler {
 			return false;
 		}
 		if (targetId == 799026) {
-			switch (env.getDialog()) {
+			switch (env.getDialogActionId()) {
 				case QUEST_SELECT:
 					if (var == 0)
 						return sendQuestDialog(env, 1352);
@@ -72,7 +72,7 @@ public class _11068AMysteriousWind extends QuestHandler {
 					return false;
 			}
 		} else if (targetId == 799025) {
-			switch (env.getDialog()) {
+			switch (env.getDialogActionId()) {
 				case QUEST_SELECT:
 					if (var == 1)
 						return sendQuestDialog(env, 2375);

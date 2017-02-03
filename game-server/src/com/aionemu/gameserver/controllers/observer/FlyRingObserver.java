@@ -68,7 +68,7 @@ public class FlyRingObserver extends ActionObserver {
 				speedUp.applyEffect();
 			}
 
-			QuestEngine.getInstance().onPassFlyingRing(new QuestEnv(null, player, 0, 0), ring.getName());
+			QuestEngine.getInstance().onPassFlyingRing(new QuestEnv(null, player, 0), ring.getName());
 		}
 
 		oldPosition = newPosition;

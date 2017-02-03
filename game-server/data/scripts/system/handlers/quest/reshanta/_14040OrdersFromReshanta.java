@@ -1,6 +1,6 @@
 package quest.reshanta;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -40,9 +40,9 @@ public class _14040OrdersFromReshanta extends QuestHandler {
 		if (targetId != 278501)
 			return false;
 		if (qs.getStatus() == QuestStatus.START) {
-			if (env.getDialog() == DialogAction.QUEST_SELECT)
+			if (env.getDialogActionId() == QUEST_SELECT)
 				return sendQuestDialog(env, 10002);
-			else if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id()) {
+			else if (env.getDialogActionId() == SELECT_QUEST_REWARD) {
 				qs.setStatus(QuestStatus.REWARD);
 				updateQuestStatus(env);
 				return sendQuestDialog(env, 5);
@@ -64,6 +64,6 @@ public class _14040OrdersFromReshanta extends QuestHandler {
 
 	@Override
 	public void onLevelChangedEvent(Player player) {
-		onEnterWorldEvent(new QuestEnv(null, player, questId, 0));
+		onEnterWorldEvent(new QuestEnv(null, player, questId));
 	}
 }

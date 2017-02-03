@@ -1,6 +1,6 @@
 package quest.event_quests;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -26,7 +26,7 @@ public class _80001FestiveDaevasDay extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 
 		if (env.getTargetId() == 0) {
-			if (env.getDialog() == DialogAction.QUEST_ACCEPT_1) {
+			if (env.getDialogActionId() == QUEST_ACCEPT_1) {
 				QuestService.startEventQuest(env, QuestStatus.START);
 				closeDialogWindow(env);
 				return true;
@@ -34,9 +34,9 @@ public class _80001FestiveDaevasDay extends QuestHandler {
 		} else if (env.getTargetId() == 798417) // Belenus
 		{
 			if (qs != null) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT && qs.getStatus() == QuestStatus.START) {
+				if (env.getDialogActionId() == QUEST_SELECT && qs.getStatus() == QuestStatus.START) {
 					return sendQuestDialog(env, 2375);
-				} else if (env.getDialog() == DialogAction.SELECT_QUEST_REWARD) {
+				} else if (env.getDialogActionId() == SELECT_QUEST_REWARD) {
 					qs.setQuestVar(1);
 					qs.setStatus(QuestStatus.REWARD);
 					updateQuestStatus(env);

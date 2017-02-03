@@ -1,6 +1,6 @@
 package quest.reshanta;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -14,10 +14,8 @@ import com.aionemu.gameserver.services.QuestService;
  */
 public class _2758CarryTheFlame extends QuestHandler {
 
-	private final static int questId = 2758;
-
 	public _2758CarryTheFlame() {
-		super(questId);
+		super(2758);
 	}
 
 	@Override
@@ -36,25 +34,25 @@ public class _2758CarryTheFlame extends QuestHandler {
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 279000) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
+				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 4762);
 				else
 					return sendQuestStartDialog(env);
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 279000) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT) {
+				if (env.getDialogActionId() == QUEST_SELECT) {
 					return sendQuestDialog(env, 1011);
 				}
-				if (env.getDialog() == DialogAction.SETPRO1) {
+				if (env.getDialogActionId() == SETPRO1) {
 					giveQuestItem(env, 182205645, 1);
 					QuestService.questTimerStart(env, 900);
 					return defaultCloseDialog(env, 0, 1);
 				}
 			} else if (targetId == 790016) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT) {
+				if (env.getDialogActionId() == QUEST_SELECT) {
 					return sendQuestDialog(env, 1352);
-				} else if (env.getDialog() == DialogAction.SET_SUCCEED) {
+				} else if (env.getDialogActionId() == SET_SUCCEED) {
 					QuestService.questTimerEnd(env);
 					removeQuestItem(env, 182205645, 1);
 					qs.setStatus(QuestStatus.REWARD);
@@ -65,7 +63,7 @@ public class _2758CarryTheFlame extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 790016) {
-				if (env.getDialog() == DialogAction.USE_OBJECT) {
+				if (env.getDialogActionId() == USE_OBJECT) {
 					return sendQuestDialog(env, 5);
 				} else {
 					return sendQuestEndDialog(env);

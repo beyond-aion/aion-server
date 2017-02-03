@@ -1,6 +1,7 @@
 package quest.eltnen;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -84,18 +85,18 @@ public class _14025CookingUpDisasters extends QuestHandler {
 
 		int var = qs.getQuestVarById(0);
 		int targetId = env.getTargetId();
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 
 		if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203901) // Telemachus
-				if (dialog == DialogAction.USE_OBJECT) {
+				if (dialogActionId == USE_OBJECT) {
 					return sendQuestDialog(env, 3057);
 				}
 			return sendQuestEndDialog(env);
 		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 203989) // Tumblusen
 			{
-				switch (dialog) {
+				switch (dialogActionId) {
 					case QUEST_SELECT:
 						if (var == 0)
 							return sendQuestDialog(env, 1011);
@@ -106,7 +107,7 @@ public class _14025CookingUpDisasters extends QuestHandler {
 						else if (var == 5)
 							return sendQuestDialog(env, 2716);
 						break;
-					case SELECT_ACTION_1013:
+					case SELECT1_1_1:
 						if (var == 0)
 							playQuestMovie(env, 183);
 						break;
@@ -139,7 +140,7 @@ public class _14025CookingUpDisasters extends QuestHandler {
 						}
 				}
 			} else if (targetId == 204020) { // Mabangtah
-				switch (dialog) {
+				switch (dialogActionId) {
 					case QUEST_SELECT:
 						if (var == 3)
 							return sendQuestDialog(env, 1693);

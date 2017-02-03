@@ -1,6 +1,6 @@
 package quest.event_quests;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -41,19 +41,19 @@ public class _80030EventAnUnwelcomeGaze extends QuestHandler {
 
 		if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 799766) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
+				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 1011);
-				else if (env.getDialog() == DialogAction.QUEST_ACCEPT_1) {
+				else if (env.getDialogActionId() == QUEST_ACCEPT_1) {
 					Storage storage = player.getInventory();
 					if (storage.getItemCountByItemId(164002015) > 0)
 						return sendQuestDialog(env, 2375);
 					else
 						return sendQuestDialog(env, 2716);
-				} else if (env.getDialog() == DialogAction.SELECT_QUEST_REWARD) {
+				} else if (env.getDialogActionId() == SELECT_QUEST_REWARD) {
 					if (qs.getQuestVarById(0) == 0)
 						defaultCloseDialog(env, 0, 1, true, true, 0, 0, 164002015, 1);
 					return sendQuestDialog(env, 5);
-				} else if (env.getDialog() == DialogAction.SELECTED_QUEST_NOREWARD)
+				} else if (env.getDialogActionId() == SELECTED_QUEST_NOREWARD)
 					return sendQuestRewardDialog(env, 799766, 5);
 				else
 					return sendQuestStartDialog(env);
@@ -81,22 +81,22 @@ public class _80030EventAnUnwelcomeGaze extends QuestHandler {
 					if (storage.getItemCountByItemId(164002015) > 0) {
 						status = getQuestUpdateStatus(player, questId);
 						// got a Beritra's Gaze, then start me
-						QuestService.startEventQuest(new QuestEnv(null, player, questId, 0), status);
+						QuestService.startEventQuest(new QuestEnv(null, player, questId), status);
 					}
 					if (storage.getItemCountByItemId(164002016) > 9) // Israphel's Glory
 					{
 						status = getQuestUpdateStatus(player, 80034);
-						QuestService.startEventQuest(new QuestEnv(null, player, 80034, 0), status);
+						QuestService.startEventQuest(new QuestEnv(null, player, 80034), status);
 					}
 					if (storage.getItemCountByItemId(164002017) > 4) // Siel's Gift
 					{
 						status = getQuestUpdateStatus(player, 80035);
-						QuestService.startEventQuest(new QuestEnv(null, player, 80035, 0), status);
+						QuestService.startEventQuest(new QuestEnv(null, player, 80035), status);
 					}
 					if (storage.getItemCountByItemId(164002018) > 0) // Aion's Grace
 					{
 						status = getQuestUpdateStatus(player, 80036);
-						QuestService.startEventQuest(new QuestEnv(null, player, 80036, 0), status);
+						QuestService.startEventQuest(new QuestEnv(null, player, 80036), status);
 					}
 				}
 			}, 10000);

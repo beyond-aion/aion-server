@@ -1,11 +1,12 @@
 package com.aionemu.gameserver.questEngine.handlers.template;
 
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -47,12 +48,12 @@ public class RelicRewards extends QuestHandler {
 	public boolean onDialogEvent(QuestEnv env) {
 		final Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.isStartable()) {
 			if (startNpcIds.contains(targetId)) {
-				switch (dialog) {
+				switch (dialogActionId) {
 					case EXCHANGE_COIN:
 						if (player.getCommonData().getLevel() >= 30) {
 							int rewardId = QuestService.getCollectItemsReward(env, false, false);
@@ -67,19 +68,19 @@ public class RelicRewards extends QuestHandler {
 		} else if (qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 0) {
 			if (startNpcIds.contains(targetId)) {
 				int rewardId = -1;
-				switch (dialog) {
+				switch (dialogActionId) {
 					case USE_OBJECT:
 						return sendQuestDialog(env, isDataDriven ? 4762 : 1011);
-					case SELECT_ACTION_1011:
+					case SELECT1:
 						rewardId = QuestService.checkCollectItemsReward(env, false, true, 0);
 						break;
-					case SELECT_ACTION_1352:
+					case SELECT2:
 						rewardId = QuestService.checkCollectItemsReward(env, false, true, 1);
 						break;
-					case SELECT_ACTION_1693:
+					case SELECT3:
 						rewardId = QuestService.checkCollectItemsReward(env, false, true, 2);
 						break;
-					case SELECT_ACTION_2034:
+					case SELECT4:
 						rewardId = QuestService.checkCollectItemsReward(env, false, true, 3);
 						break;
 				}
@@ -94,7 +95,7 @@ public class RelicRewards extends QuestHandler {
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (startNpcIds.contains(targetId)) {
 				int var = qs.getQuestVarById(0);
-				switch (dialog) {
+				switch (dialogActionId) {
 					case USE_OBJECT:
 						return sendQuestDialog(env, var + 4);
 					case SELECTED_QUEST_NOREWARD:

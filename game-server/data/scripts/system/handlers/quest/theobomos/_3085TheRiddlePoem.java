@@ -1,6 +1,7 @@
 package quest.theobomos;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
@@ -16,10 +17,8 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 
 public class _3085TheRiddlePoem extends QuestHandler {
 
-	private final static int questId = 3085;
-
 	public _3085TheRiddlePoem() {
-		super(questId);
+		super(3085);
 	}
 
 	@Override
@@ -42,7 +41,7 @@ public class _3085TheRiddlePoem extends QuestHandler {
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 798144) {
-				switch (env.getDialog()) {
+				switch (env.getDialogActionId()) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 1011);
 					case QUEST_ACCEPT_1:
@@ -58,7 +57,7 @@ public class _3085TheRiddlePoem extends QuestHandler {
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 203830:
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case QUEST_SELECT: {
 							if (qs.getQuestVarById(0) == 0) {
 								return sendQuestDialog(env, 1352);
@@ -77,7 +76,7 @@ public class _3085TheRiddlePoem extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 798132) {
-				if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id())
+				if (env.getDialogActionId() == SELECT_QUEST_REWARD)
 					return sendQuestDialog(env, 5);
 				else
 					return sendQuestEndDialog(env);

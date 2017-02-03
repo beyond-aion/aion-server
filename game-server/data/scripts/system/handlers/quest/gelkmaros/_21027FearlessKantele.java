@@ -1,5 +1,7 @@
 package quest.gelkmaros;
 
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
@@ -10,10 +12,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _21027FearlessKantele extends QuestHandler {
 
-	private final static int questId = 21027;
-
 	public _21027FearlessKantele() {
-		super(questId);
+		super(21027);
 	}
 
 	@Override
@@ -35,7 +35,7 @@ public class _21027FearlessKantele extends QuestHandler {
 		int var = qs.getQuestVarById(0);
 		if (qs.getStatus() == QuestStatus.START) {
 			if (env.getTargetId() == 799255) {
-				switch (env.getDialog()) {
+				switch (env.getDialogActionId()) {
 					case QUEST_SELECT:
 						if (var == 0)
 							return sendQuestDialog(env, 1011);

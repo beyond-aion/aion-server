@@ -1,7 +1,7 @@
 package ai.instance.RukibukiCircusTroupe;
 
 import com.aionemu.gameserver.ai.AIName;
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
@@ -33,17 +33,17 @@ public class NightmareHarlequinAI extends GeneralNpcAI {
 	}
 
 	@Override
-	public boolean onDialogSelect(Player player, int dialogId, int questId, int extendedRewardIndex) {
-		QuestEnv env = new QuestEnv(getOwner(), player, questId, dialogId);
+	public boolean onDialogSelect(Player player, int dialogActionId, int questId, int extendedRewardIndex) {
+		QuestEnv env = new QuestEnv(getOwner(), player, questId, dialogActionId);
 		env.setExtendedRewardIndex(extendedRewardIndex);
-		if (QuestEngine.getInstance().onDialog(env) && dialogId != DialogAction.SETPRO1.id()) {
+		if (QuestEngine.getInstance().onDialog(env) && dialogActionId != SETPRO1) {
 			return true;
 		}
-		if (dialogId == DialogAction.SETPRO1.id()) {
+		if (dialogActionId == SETPRO1) {
 			SkillEngine.getInstance().getSkill(getOwner(), player.getRace() == Race.ELYOS ? 21331 : 21334, 1, player).useWithoutPropSkill();
 			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 0));
-		} else if (dialogId == DialogAction.QUEST_SELECT.id() && questId != 0) {
-			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), dialogId, questId));
+		} else if (dialogActionId == QUEST_SELECT && questId != 0) {
+			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 10, questId));
 		}
 		return true;
 	}

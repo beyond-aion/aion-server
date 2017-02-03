@@ -1,6 +1,7 @@
 package quest.reshanta;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -12,13 +13,12 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _3205FortheBlackCloudTraders extends QuestHandler {
 
-	private static final int questId = 3205;
 
 	private static final int[] npcIds = { 279010, 203735, 798321 };
 	private static final int mobId = 219024;
 
 	public _3205FortheBlackCloudTraders() {
-		super(questId);
+		super(3205);
 	}
 
 	@Override
@@ -33,12 +33,12 @@ public class _3205FortheBlackCloudTraders extends QuestHandler {
 	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == npcIds[0]) { // Jielinlinerk
-				if (dialog == DialogAction.QUEST_SELECT) {
+				if (dialogActionId == QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);
 				} else {
 					return sendQuestStartDialog(env);
@@ -46,14 +46,14 @@ public class _3205FortheBlackCloudTraders extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == npcIds[0]) { // Jielinlinerk
-				switch (dialog) {
+				switch (dialogActionId) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 1352);
 					case SETPRO2:
 						return defaultCloseDialog(env, 15, 16);
 				}
 			} else if (targetId == npcIds[1]) { // Himusus
-				switch (dialog) {
+				switch (dialogActionId) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 1693);
 					case SET_SUCCEED:
@@ -62,7 +62,7 @@ public class _3205FortheBlackCloudTraders extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == npcIds[2]) { // Koruchinerk
-				if (dialog == DialogAction.USE_OBJECT) {
+				if (dialogActionId == USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
 				} else {
 					return sendQuestEndDialog(env);

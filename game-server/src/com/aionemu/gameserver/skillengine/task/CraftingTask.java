@@ -24,7 +24,7 @@ public class CraftingTask extends AbstractCraftTask {
 	private final int bonus;
 	private ItemTemplate itemTemplate;
 	private int critCount;
-	private int delay;
+	private int showBarDelay;
 	private int executionSpeed;
 
 	/**
@@ -91,7 +91,7 @@ public class CraftingTask extends AbstractCraftTask {
 	@Override
 	protected void sendInteractionUpdate() {
 		PacketSendUtility.sendPacket(requestor, new SM_CRAFT_UPDATE(recipeTemplate.getSkillId(), itemTemplate, currentSuccessValue, currentFailureValue,
-			craftType.getProgressId(), executionSpeed, delay));
+			craftType.getProgressId(), executionSpeed, showBarDelay));
 	}
 
 	@Override
@@ -172,7 +172,6 @@ public class CraftingTask extends AbstractCraftTask {
 
 		int speed = bonusModifier < 1 ? Math.round(900 * (2 - bonusModifier)) : (900 - (skillLvlDiff * 30));
 		executionSpeed = speed < 300 ? 300 : speed;
-		int showDelay = bonusModifier < 1 ? 1200 : (1200 - (skillLvlDiff * 30));
-		delay = showDelay < 500 ? 500 : showDelay;
+		showBarDelay = bonusModifier < 1 ? 1200 : Math.max(500, 1200 - (skillLvlDiff * 30));
 	}
 }

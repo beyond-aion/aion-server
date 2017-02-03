@@ -1,6 +1,7 @@
 package quest.rentus_base;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -13,10 +14,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _30553ComradesInArms extends QuestHandler {
 
-	private final static int questId = 30553;
-
 	public _30553ComradesInArms() {
-		super(questId);
+		super(30553);
 	}
 
 	@Override
@@ -33,11 +32,11 @@ public class _30553ComradesInArms extends QuestHandler {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		int targetId = env.getTargetId();
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		if (qs == null || qs.isStartable()) {
 			switch (targetId) {
 				case 205438:
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							return sendQuestDialog(env, 4762);
 						default:
@@ -48,7 +47,7 @@ public class _30553ComradesInArms extends QuestHandler {
 
 			switch (targetId) {
 				case 205438:
-					switch (dialog) {
+					switch (dialogActionId) {
 						case SELECT_QUEST_REWARD:
 							return defaultCloseDialog(env, 1, 1, true, true);
 					}
@@ -58,7 +57,7 @@ public class _30553ComradesInArms extends QuestHandler {
 					npc.getController().delete();
 					return true;
 				case 799541:
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							return sendQuestDialog(env, 1011);
 						case SET_SUCCEED: {

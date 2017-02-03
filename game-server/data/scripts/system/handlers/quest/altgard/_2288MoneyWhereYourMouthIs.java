@@ -1,6 +1,7 @@
 package quest.altgard;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -16,11 +17,10 @@ import com.aionemu.gameserver.services.QuestService;
  */
 public class _2288MoneyWhereYourMouthIs extends QuestHandler {
 
-	private final static int questId = 2288;
 	private final static int questStartNpcId = 203621; // Shania
 
 	public _2288MoneyWhereYourMouthIs() {
-		super(questId);
+		super(2288);
 	}
 
 	@Override
@@ -45,17 +45,17 @@ public class _2288MoneyWhereYourMouthIs extends QuestHandler {
 		}
 
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 
 		if (targetId == questStartNpcId) {
 			if (qs == null || qs.isStartable()) {
-				if (dialog == DialogAction.QUEST_SELECT) {
+				if (dialogActionId == QUEST_SELECT) {
 					return sendQuestDialog(env, 1011);
 				} else {
 					return sendQuestStartDialog(env);
 				}
 			} else if (qs.getStatus() == QuestStatus.START) {
-				switch (dialog) {
+				switch (dialogActionId) {
 					case SELECT_QUEST_REWARD:
 						qs.setStatus(QuestStatus.REWARD);
 						updateQuestStatus(env);

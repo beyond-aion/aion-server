@@ -14,10 +14,8 @@ import com.aionemu.gameserver.services.QuestService;
  */
 public class _30264ANecklacewithHistory extends QuestHandler {
 
-	private final static int questId = 30264;
-
 	public _30264ANecklacewithHistory() {
-		super(questId);
+		super(30264);
 	}
 
 	@Override

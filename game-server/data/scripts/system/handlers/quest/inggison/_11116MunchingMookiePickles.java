@@ -1,6 +1,7 @@
 package quest.inggison;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
@@ -15,11 +16,10 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 public class _11116MunchingMookiePickles extends QuestHandler {
 
-	private final static int questId = 11116;
 	private final static int[] npc_ids = { 798986, 798964, 203784, 203785 };
 
 	public _11116MunchingMookiePickles() {
-		super(questId);
+		super(11116);
 	}
 
 	@Override
@@ -39,7 +39,7 @@ public class _11116MunchingMookiePickles extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (targetId == 798986) {
 			if (qs == null || qs.isStartable()) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
+				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 4762);
 				else
 					return sendQuestStartDialog(env);
@@ -51,9 +51,9 @@ public class _11116MunchingMookiePickles extends QuestHandler {
 		int var = qs.getQuestVarById(0);
 		if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 798986) {
-				if (env.getDialog() == DialogAction.USE_OBJECT)
+				if (env.getDialogActionId() == USE_OBJECT)
 					return sendQuestDialog(env, 10002);
-				else if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id())
+				else if (env.getDialogActionId() == SELECT_QUEST_REWARD)
 					return sendQuestDialog(env, 5);
 				else
 					return sendQuestEndDialog(env);
@@ -62,7 +62,7 @@ public class _11116MunchingMookiePickles extends QuestHandler {
 			return false;
 		}
 		if (targetId == 798964) {
-			switch (env.getDialog()) {
+			switch (env.getDialogActionId()) {
 				case QUEST_SELECT:
 					if (var == 0)
 						return sendQuestDialog(env, 1011);
@@ -77,7 +77,7 @@ public class _11116MunchingMookiePickles extends QuestHandler {
 					return false;
 			}
 		} else if (targetId == 203784) {
-			switch (env.getDialog()) {
+			switch (env.getDialogActionId()) {
 				case QUEST_SELECT:
 					if (var == 1)
 						return sendQuestDialog(env, 1352);
@@ -86,7 +86,7 @@ public class _11116MunchingMookiePickles extends QuestHandler {
 					return checkQuestItems(env, 1, 2, false, 10000, 10001, 182206791, 1);
 			}
 		} else if (targetId == 203785) {
-			switch (env.getDialog()) {
+			switch (env.getDialogActionId()) {
 				case QUEST_SELECT:
 					if (var == 2)
 						return sendQuestDialog(env, 1693);

@@ -3,6 +3,7 @@ package ai.instance.theShugoEmperorsVault;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.ai.handler.TalkEventHandler;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.services.teleport.TeleportService;
@@ -25,8 +26,8 @@ public class IDSweep_In_Npc extends GeneralNpcAI {
 	}
 	
 	@Override
-	public boolean onDialogSelect(Player player, int dialogId, int questId, int extendedRewardIndex) {
-		if (dialogId == 104) {
+	public boolean onDialogSelect(Player player, int dialogActionId, int questId, int extendedRewardIndex) {
+		if (dialogActionId == TELEPORT_SIMPLE) {
 			TeleportService.teleportTo(player, 301400000, player.getInstanceId(), 423.715f, 700.375f, 399f, (byte) 44, com.aionemu.gameserver.model.animations.TeleportAnimation.FADE_OUT_BEAM);
 		}
 		return true;

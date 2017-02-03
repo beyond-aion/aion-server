@@ -1,6 +1,7 @@
 package quest.morheim;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -15,10 +16,8 @@ import com.aionemu.gameserver.services.teleport.TeleportService;
  */
 public class _2422LiquorThatMakesYouVanish extends QuestHandler {
 
-	private final static int questId = 2422;
-
 	public _2422LiquorThatMakesYouVanish() {
-		super(questId);
+		super(2422);
 	}
 
 	@Override
@@ -34,11 +33,11 @@ public class _2422LiquorThatMakesYouVanish extends QuestHandler {
 		Player player = env.getPlayer();
 		int targetId = env.getTargetId();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 204326) { // Hapenill
-				if (dialog == DialogAction.QUEST_SELECT) {
+				if (dialogActionId == QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);
 				} else {
 					return sendQuestStartDialog(env);
@@ -48,7 +47,7 @@ public class _2422LiquorThatMakesYouVanish extends QuestHandler {
 			int var = qs.getQuestVarById(0);
 			switch (targetId) {
 				case 204327: // Sveinn
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var == 0) {
 								return sendQuestDialog(env, 1011);
@@ -59,7 +58,7 @@ public class _2422LiquorThatMakesYouVanish extends QuestHandler {
 					}
 					break;
 				case 204375: // Otis
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var == 1) {
 								return sendQuestDialog(env, 1352);
@@ -77,7 +76,7 @@ public class _2422LiquorThatMakesYouVanish extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204326) { // Hapenill
-				if (dialog == DialogAction.USE_OBJECT) {
+				if (dialogActionId == USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
 				} else {
 					return sendQuestEndDialog(env);

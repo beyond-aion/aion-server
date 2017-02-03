@@ -1,5 +1,7 @@
 package quest.ishalgen;
 
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
@@ -15,10 +17,8 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 public class _2114TheInsectProblem extends QuestHandler {
 
-	private final static int questId = 2114;
-
 	public _2114TheInsectProblem() {
-		super(questId);
+		super(2114);
 	}
 
 	@Override
@@ -39,7 +39,7 @@ public class _2114TheInsectProblem extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (targetId == 203533) {
 			if (qs == null || qs.isStartable()) {
-				switch (env.getDialog()) {
+				switch (env.getDialogActionId()) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 1011);
 					case SETPRO1:
@@ -62,7 +62,7 @@ public class _2114TheInsectProblem extends QuestHandler {
 				}
 			} else if (qs.getStatus() == QuestStatus.REWARD) {
 				int var = qs.getQuestVarById(0);
-				switch (env.getDialog()) {
+				switch (env.getDialogActionId()) {
 					case USE_OBJECT:
 						if (var == 10)
 							return sendQuestDialog(env, 5);

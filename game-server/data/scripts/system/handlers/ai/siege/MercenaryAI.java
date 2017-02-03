@@ -1,7 +1,9 @@
 package ai.siege;
 
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.ai.AIName;
-import com.aionemu.gameserver.model.DialogAction;
+import com.aionemu.gameserver.model.DialogPage;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.siege.SiegeNpc;
 import com.aionemu.gameserver.model.siege.FortressLocation;
@@ -38,26 +40,26 @@ public class MercenaryAI extends GeneralNpcAI {
 	}
 
 	@Override
-	public boolean onDialogSelect(Player player, int dialogId, int questId, int extendedRewardIndex) {
+	public boolean onDialogSelect(Player player, int dialogActionId, int questId, int extendedRewardIndex) {
 		int siegeId = ((SiegeNpc) getOwner()).getSiegeId();
 		int zoneId = 0;
-		switch (DialogAction.getByActionId(dialogId)) {
-			case SELECT_ACTION_1097:
+		switch (dialogActionId) {
+			case SELECT1_2:
 				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 1097));
 				break;
-			case SELECT_ACTION_1182:
+			case SELECT1_3:
 				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 1182));
 				break;
-			case SELECT_ACTION_1267:
+			case SELECT1_4:
 				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 1267));
 				break;
-			case SELECT_ACTION_1352:
+			case SELECT2:
 				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 1352));
 				break;
-			case SELECT_ACTION_1693:
+			case SELECT3:
 				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 1693));
 				break;
-			case SELECT_ACTION_2034:
+			case SELECT4:
 				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 2034));
 				break;
 			case SETPRO1:
@@ -182,7 +184,7 @@ public class MercenaryAI extends GeneralNpcAI {
 	private boolean hasRequiredItems(Player player, long itemCount) {
 		long count = player.getInventory().getItemCountByItemId(186000236);
 		if (count < itemCount) {
-			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 27));
+			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), DialogPage.NO_RIGHT.id()));
 			return false;
 		}
 		return true;

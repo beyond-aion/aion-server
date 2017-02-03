@@ -2,7 +2,8 @@ package ai.instance.kromedesTrial;
 
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.NpcAI;
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+import com.aionemu.gameserver.model.DialogPage;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_PLAY_MOVIE;
@@ -15,14 +16,14 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 public class KromedesMagasAI extends NpcAI {
 
 	@Override
-	public boolean onDialogSelect(final Player player, int dialogId, int questId, int extendedRewardIndex) {
-		if (dialogId == DialogAction.SETPRO1.id()) {
+	public boolean onDialogSelect(Player player, int dialogActionId, int questId, int extendedRewardIndex) {
+		if (dialogActionId == SETPRO1) {
 			if (player.getInventory().getItemCountByItemId(185000109) > 0) {
 				PacketSendUtility.sendPacket(player, new SM_PLAY_MOVIE(0, 454));
 				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 0));
 			} else
-				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 27));
-		} else if (dialogId == DialogAction.SELECT_ACTION_1012.id())
+				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), DialogPage.NO_RIGHT.id()));
+		} else if (dialogActionId == SELECT1_1)
 			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 1012));
 		return true;
 	}

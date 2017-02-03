@@ -1,6 +1,6 @@
 package quest.heiron;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -12,12 +12,11 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _80217ToDarkPoeta extends QuestHandler {
 
-	private final static int questId = 80217;
 
 	int[] mobs = { 214904 };
 
 	public _80217ToDarkPoeta() {
-		super(questId);
+		super(80217);
 	}
 
 	@Override
@@ -34,7 +33,7 @@ public class _80217ToDarkPoeta extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs == null || qs.isStartable()) {
 			if (env.getTargetId() == 831024) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT) {
+				if (env.getDialogActionId() == QUEST_SELECT) {
 					return sendQuestDialog(env, 1011);
 				} else {
 					return sendQuestStartDialog(env);
@@ -42,7 +41,7 @@ public class _80217ToDarkPoeta extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (env.getTargetId() == 831024) {
-				if (env.getDialog() == DialogAction.USE_OBJECT) {
+				if (env.getDialogActionId() == USE_OBJECT) {
 					return sendQuestDialog(env, 1352);
 				} else {
 					return sendQuestEndDialog(env);

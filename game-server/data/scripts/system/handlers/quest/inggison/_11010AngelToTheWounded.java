@@ -1,6 +1,7 @@
 package quest.inggison;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -15,10 +16,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 public class _11010AngelToTheWounded extends QuestHandler {
 
-	private final static int questId = 11010;
-
 	public _11010AngelToTheWounded() {
-		super(questId);
+		super(11010);
 	}
 
 	@Override
@@ -41,7 +40,7 @@ public class _11010AngelToTheWounded extends QuestHandler {
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 798931) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
+				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 1011);
 				else
 					return sendQuestStartDialog(env);
@@ -55,7 +54,7 @@ public class _11010AngelToTheWounded extends QuestHandler {
 			int var = qs.getQuestVarById(0);
 			switch (targetId) {
 				case 799071:
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case QUEST_SELECT:
 							if (var == 0)
 								return sendQuestDialog(env, 1352);
@@ -65,7 +64,7 @@ public class _11010AngelToTheWounded extends QuestHandler {
 					}
 					break;
 				case 798906:
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case QUEST_SELECT:
 							if (var == 1)
 								return sendQuestDialog(env, 1693);
@@ -75,14 +74,14 @@ public class _11010AngelToTheWounded extends QuestHandler {
 					}
 					break;
 				case 730323:
-					if (env.getDialog() == DialogAction.USE_OBJECT)
+					if (env.getDialogActionId() == USE_OBJECT)
 						return useQuestObject(env, 2, 3, true, 0); // reward
 					return false;
 			}
 		}
 		if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 799071) {
-				if (env.getDialog() == DialogAction.USE_OBJECT)
+				if (env.getDialogActionId() == USE_OBJECT)
 					return sendQuestDialog(env, 2375);
 				return sendQuestEndDialog(env);
 			}

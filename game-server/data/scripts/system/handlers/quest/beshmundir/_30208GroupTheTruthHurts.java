@@ -1,6 +1,7 @@
 package quest.beshmundir;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -20,10 +21,8 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 public class _30208GroupTheTruthHurts extends QuestHandler {
 
-	private final static int questId = 30208;
-
 	public _30208GroupTheTruthHurts() {
-		super(questId);
+		super(30208);
 	}
 
 	@Override
@@ -45,7 +44,7 @@ public class _30208GroupTheTruthHurts extends QuestHandler {
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 798941) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT) {
+				if (env.getDialogActionId() == QUEST_SELECT) {
 					if (giveQuestItem(env, 182209610, 1))
 						return sendQuestDialog(env, 4762);
 				} else
@@ -60,7 +59,7 @@ public class _30208GroupTheTruthHurts extends QuestHandler {
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 799506:
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case QUEST_SELECT:
 							return sendQuestDialog(env, 1011);
 						case SET_SUCCEED:

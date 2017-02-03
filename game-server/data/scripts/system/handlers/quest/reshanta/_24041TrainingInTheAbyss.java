@@ -1,6 +1,7 @@
 package quest.reshanta;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
@@ -16,11 +17,10 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 public class _24041TrainingInTheAbyss extends QuestHandler {
 
-	private final static int questId = 24041;
 	private final static int[] npc_ids = { 278126, 278127, 278128, 278129, 278130, 278131, 278136, 278054 };
 
 	public _24041TrainingInTheAbyss() {
-		super(questId);
+		super(24041);
 	}
 
 	@Override
@@ -55,9 +55,9 @@ public class _24041TrainingInTheAbyss extends QuestHandler {
 
 		if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 278054) {
-				if (env.getDialog() == DialogAction.USE_OBJECT)
+				if (env.getDialogActionId() == USE_OBJECT)
 					return sendQuestDialog(env, 10002);
-				else if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id())
+				else if (env.getDialogActionId() == SELECT_QUEST_REWARD)
 					return sendQuestDialog(env, 5);
 				else
 					return sendQuestEndDialog(env);
@@ -67,12 +67,12 @@ public class _24041TrainingInTheAbyss extends QuestHandler {
 			return false;
 		}
 		if (targetId == 278126) {
-			switch (env.getDialog()) {
+			switch (env.getDialogActionId()) {
 				case QUEST_SELECT:
 					if (var == 0)
 						return sendQuestDialog(env, 1011);
 					return false;
-				case SELECT_ACTION_1013:
+				case SELECT1_1_1:
 					playQuestMovie(env, 282);
 					break;
 				case SETPRO1:
@@ -85,12 +85,12 @@ public class _24041TrainingInTheAbyss extends QuestHandler {
 					return false;
 			}
 		} else if (targetId == 278127) {
-			switch (env.getDialog()) {
+			switch (env.getDialogActionId()) {
 				case QUEST_SELECT:
 					if (var == 1)
 						return sendQuestDialog(env, 1352);
 					return false;
-				case SELECT_ACTION_1353:
+				case SELECT2_1:
 					playQuestMovie(env, 283);
 					break;
 				case SETPRO2:
@@ -103,12 +103,12 @@ public class _24041TrainingInTheAbyss extends QuestHandler {
 					return false;
 			}
 		} else if (targetId == 278128) {
-			switch (env.getDialog()) {
+			switch (env.getDialogActionId()) {
 				case QUEST_SELECT:
 					if (var == 2)
 						return sendQuestDialog(env, 1693);
 					return false;
-				case SELECT_ACTION_1694:
+				case SELECT3_1:
 					playQuestMovie(env, 284);
 					break;
 				case SETPRO3:
@@ -121,12 +121,12 @@ public class _24041TrainingInTheAbyss extends QuestHandler {
 					return false;
 			}
 		} else if (targetId == 278129) {
-			switch (env.getDialog()) {
+			switch (env.getDialogActionId()) {
 				case QUEST_SELECT:
 					if (var == 3)
 						return sendQuestDialog(env, 2034);
 					return false;
-				case SELECT_ACTION_2035:
+				case SELECT4_1:
 					playQuestMovie(env, 285);
 					break;
 				case SETPRO4:
@@ -139,12 +139,12 @@ public class _24041TrainingInTheAbyss extends QuestHandler {
 					return false;
 			}
 		} else if (targetId == 278130) {
-			switch (env.getDialog()) {
+			switch (env.getDialogActionId()) {
 				case QUEST_SELECT:
 					if (var == 4)
 						return sendQuestDialog(env, 2375);
 					return false;
-				case SELECT_ACTION_2376:
+				case SELECT5_1:
 					playQuestMovie(env, 286);
 					break;
 				case SETPRO5:
@@ -157,12 +157,12 @@ public class _24041TrainingInTheAbyss extends QuestHandler {
 					return false;
 			}
 		} else if (targetId == 278131) {
-			switch (env.getDialog()) {
+			switch (env.getDialogActionId()) {
 				case QUEST_SELECT:
 					if (var == 5)
 						return sendQuestDialog(env, 2716);
 					return false;
-				case SELECT_ACTION_2717:
+				case SELECT6_1:
 					playQuestMovie(env, 287);
 					break;
 				case SETPRO6:
@@ -175,12 +175,12 @@ public class _24041TrainingInTheAbyss extends QuestHandler {
 					return false;
 			}
 		} else if (targetId == 278136) {
-			switch (env.getDialog()) {
+			switch (env.getDialogActionId()) {
 				case QUEST_SELECT:
 					if (var == 6)
 						return sendQuestDialog(env, 3057);
 					return false;
-				case SELECT_ACTION_3058:
+				case SELECT7_1:
 					playQuestMovie(env, 288);
 					break;
 				case SET_SUCCEED:

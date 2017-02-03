@@ -1,6 +1,7 @@
 package quest.sanctum;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
@@ -15,10 +16,8 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 public class _3210RescueHaorunerk extends QuestHandler {
 
-	private final static int questId = 3210;
-
 	public _3210RescueHaorunerk() {
-		super(questId);
+		super(3210);
 	}
 
 	@Override
@@ -35,7 +34,7 @@ public class _3210RescueHaorunerk extends QuestHandler {
 	public boolean onDialogEvent(QuestEnv env) {
 		final Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 
 		int targetId = 0;
 		if (env.getVisibleObject() instanceof Npc)
@@ -43,7 +42,7 @@ public class _3210RescueHaorunerk extends QuestHandler {
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 798318) {
-				switch (dialog) {
+				switch (dialogActionId) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 4762);
 					case ASK_QUEST_ACCEPT:
@@ -58,10 +57,10 @@ public class _3210RescueHaorunerk extends QuestHandler {
 
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			if (targetId == 798332 && qs.getQuestVarById(0) == 0) {
-				switch (dialog) {
+				switch (dialogActionId) {
 					case USE_OBJECT:
 						return sendQuestDialog(env, 1011);
-					case SELECT_ACTION_1012:
+					case SELECT1_1:
 						return sendQuestDialog(env, 1012);
 					case SETPRO1:
 						qs.setQuestVarById(0, 1);
@@ -74,10 +73,10 @@ public class _3210RescueHaorunerk extends QuestHandler {
 
 		if (targetId == 798331) {
 			if (qs != null && qs.getStatus() == QuestStatus.START) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT) {
+				if (env.getDialogActionId() == QUEST_SELECT) {
 					return sendQuestDialog(env, 10002);
 				}
-				if (env.getDialog() == DialogAction.SELECT_QUEST_REWARD && qs.getQuestVarById(1) == 1 && qs.getQuestVarById(2) == 1) {
+				if (env.getDialogActionId() == SELECT_QUEST_REWARD && qs.getQuestVarById(1) == 1 && qs.getQuestVarById(2) == 1) {
 					qs.setStatus(QuestStatus.REWARD);
 					updateQuestStatus(env);
 					return sendQuestDialog(env, 5);

@@ -27,22 +27,22 @@ public enum DialogPage {
 	DEPOSIT_ACCOUNT_WAREHOUSE(DialogAction.DEPOSIT_ACCOUNT_WAREHOUSE, 17),
 	MAIL(DialogAction.OPEN_POSTBOX, 18),
 	CHANGE_ITEM_SKIN(DialogAction.CHANGE_ITEM_SKIN, 19),
-	REMOVE_MANASTONE(DialogAction.REMOVE_MANASTONE, 20),
+	REMOVE_MANASTONE(DialogAction.REMOVE_ITEM_OPTION, 20),
 	GIVE_ITEM_PROC(DialogAction.GIVE_ITEM_PROC, 21),
 	GATHER_SKILL_LEVELUP(DialogAction.GATHER_SKILL_LEVELUP, 23),
-	LOOT(DialogAction.NULL, 24),
+	LOOT(24),
 	LEGION_WAREHOUSE(DialogAction.OPEN_LEGION_WAREHOUSE, 25),
 	// PERSONAL_WAREHOUSE(DialogAction.OPEN_PERSONAL_WAREHOUSE, 26),
 	NO_RIGHT(27),
-	COMBINETASK_WINDOW(DialogAction.CRAFT, 28),
+	COMBINETASK_WINDOW(DialogAction.COMBINE_TASK, 28),
 	COMPOUND_WEAPON(DialogAction.COMPOUND_WEAPON, 29),
 	DECOMPOUND_WEAPON(DialogAction.DECOMPOUND_WEAPON, 30),
 	HOUSING_MARKER(DialogAction.HOUSING_BUILD, 32), // housing build
 	HOUSING_LIFETIME(DialogAction.HOUSING_DESTRUCT, 33), // housing destruct
 	CHARGE_ITEM(DialogAction.CHARGE_ITEM_SINGLE, 35), // Actually, two choices
 	CHARGE_ITEM2(DialogAction.CHARGE_ITEM_SINGLE2, 42),
-	HOUSING_FRIENDLIST(DialogAction.HOUSING_FRIENDLIST, 36),
-	HOUSING_POST(DialogAction.NULL, 37), // Unknown
+	HOUSING_FRIENDLIST(DialogAction.HOUSING_BUDDY_LIST, 36),
+	HOUSING_POST(37), // Unknown
 	HOUSING_AUCTION(DialogAction.HOUSING_PERSONAL_AUCTION, 38),
 	HOUSING_PAY_RENT(DialogAction.HOUSING_PAY_RENT, 39),
 	HOUSING_KICK(DialogAction.HOUSING_KICK, 40),
@@ -52,30 +52,24 @@ public enum DialogPage {
 	OPEN_STIGMA_ENCHANT(DialogAction.OPEN_STIGMA_ENCHANT, 53);
 
 	private int id;
-	private DialogAction action;
+	private int dialogActionId;
 
 	private DialogPage(int id) {
 		this.id = id;
 	}
 
-	private DialogPage(DialogAction action, int id) {
+	private DialogPage(int dialogActionId, int id) {
 		this.id = id;
-		this.action = action;
+		this.dialogActionId = dialogActionId;
 	}
 
 	public int id() {
 		return id;
 	}
 
-	public int actionId() {
-		return action.id();
-	}
-
-	public static DialogPage getPageByAction(int dialogId) {
+	public static DialogPage getByActionId(int dialogActionId) {
 		for (DialogPage page : DialogPage.values()) {
-			if (page.action == null)
-				continue;
-			if (page.actionId() == dialogId)
+			if (page.dialogActionId == dialogActionId)
 				return page;
 		}
 		return DialogPage.NULL;

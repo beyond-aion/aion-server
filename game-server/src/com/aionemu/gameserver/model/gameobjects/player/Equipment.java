@@ -261,7 +261,7 @@ public class Equipment {
 			owner.getLifeStats().updateCurrentStats();
 			owner.getGameStats().updateStatsAndSpeedVisually();
 			setPersistentState(PersistentState.UPDATE_REQUIRED);
-			QuestEngine.getInstance().onEquipItem(new QuestEnv(null, owner, 0, 0), item.getItemId());
+			QuestEngine.getInstance().onEquipItem(new QuestEnv(null, owner, 0), item.getItemId());
 
 			if (item.getItemTemplate().isStigma())
 				StigmaService.addLinkedStigmaSkills(owner);

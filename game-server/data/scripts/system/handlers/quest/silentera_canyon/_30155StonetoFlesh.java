@@ -1,6 +1,7 @@
 package quest.silentera_canyon;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -15,10 +16,8 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 public class _30155StonetoFlesh extends QuestHandler {
 
-	private final static int questId = 30155;
-
 	public _30155StonetoFlesh() {
-		super(questId);
+		super(30155);
 	}
 
 	@Override
@@ -33,13 +32,13 @@ public class _30155StonetoFlesh extends QuestHandler {
 	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 799234) {
-				if (dialog == DialogAction.QUEST_SELECT) {
+				if (dialogActionId == QUEST_SELECT) {
 					return sendQuestDialog(env, 1011);
 				} else
 					return sendQuestStartDialog(env);
@@ -50,7 +49,7 @@ public class _30155StonetoFlesh extends QuestHandler {
 				if (var == 3)
 					return sendQuestEndDialog(env);
 			} else if (targetId == 799234) {
-				switch (dialog) {
+				switch (dialogActionId) {
 					case SELECTED_QUEST_NOREWARD:
 						if (var == 2) {
 							QuestService.finishQuest(env, qs.getQuestVars().getQuestVars() - 2);
@@ -62,7 +61,7 @@ public class _30155StonetoFlesh extends QuestHandler {
 		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			if (targetId == 799234) {
-				switch (dialog) {
+				switch (dialogActionId) {
 					case QUEST_SELECT:
 						if (var == 1)
 							return sendQuestDialog(env, 1693);
@@ -82,7 +81,7 @@ public class _30155StonetoFlesh extends QuestHandler {
 						}
 				}
 			} else if (targetId == 204433) {
-				switch (dialog) {
+				switch (dialogActionId) {
 					case QUEST_SELECT:
 						if (var == 0)
 							return sendQuestDialog(env, 1352);
@@ -92,7 +91,7 @@ public class _30155StonetoFlesh extends QuestHandler {
 							return defaultCloseDialog(env, 0, 1, false, false, 182209252, 1, 0, 0);
 				}
 			} else if (targetId == 204304) {
-				switch (dialog) {
+				switch (dialogActionId) {
 					case QUEST_SELECT:
 						if (var == 1)
 							return sendQuestDialog(env, 2034);

@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.handlers.models.QuestSkillData;
@@ -55,12 +55,12 @@ public class SkillUse extends QuestHandler {
 	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.isStartable()) {
 			if (startNpcIds.isEmpty() || startNpcIds.contains(targetId)) {
-				if (dialog == DialogAction.QUEST_SELECT)
+				if (dialogActionId == QUEST_SELECT)
 					return sendQuestDialog(env, 4762);
 				else
 					return sendQuestStartDialog(env);
@@ -69,9 +69,9 @@ public class SkillUse extends QuestHandler {
 			// TODO: check skill use count, see MonsterHunt.java how to get total count
 			int var = qs.getQuestVarById(0);
 			if (endNpcIds.contains(targetId)) {
-				if (dialog == DialogAction.QUEST_SELECT) {
+				if (dialogActionId == QUEST_SELECT) {
 					return sendQuestDialog(env, 10002);
-				} else if (dialog == DialogAction.SELECT_QUEST_REWARD) {
+				} else if (dialogActionId == SELECT_QUEST_REWARD) {
 					changeQuestStep(env, var, var, true); // reward
 					return sendQuestDialog(env, 5);
 				}

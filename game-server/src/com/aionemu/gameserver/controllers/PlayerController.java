@@ -25,7 +25,7 @@ import com.aionemu.gameserver.controllers.observer.ActionObserver;
 import com.aionemu.gameserver.controllers.observer.ObserverType;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.DescriptionId;
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.TaskId;
@@ -145,7 +145,7 @@ public class PlayerController extends CreatureController<Player> {
 					if (getOwner().getRace() == ((Kisk) npc).getOwnerRace())
 						PacketSendUtility.sendPacket(getOwner(), new SM_KISK_UPDATE((Kisk) npc));
 				} else {
-					QuestEngine.getInstance().onAtDistance(new QuestEnv(npc, getOwner(), 0, 0));
+					QuestEngine.getInstance().onAtDistance(new QuestEnv(npc, getOwner(), 0));
 				}
 			} else if (creature instanceof Player) {
 				Player player = (Player) creature;
@@ -261,7 +261,7 @@ public class PlayerController extends CreatureController<Player> {
 		if (zoneName == null)
 			log.error("No name found for a Zone in the map " + zone.getAreaTemplate().getWorldId());
 		else if (!zone.hasQuestZoneHandlers()) // Zone handlers should notify QuestEngine directly
-			QuestEngine.getInstance().onEnterZone(new QuestEnv(null, player, 0, 0), zone.getAreaTemplate().getZoneName());
+			QuestEngine.getInstance().onEnterZone(new QuestEnv(null, player, 0), zone.getAreaTemplate().getZoneName());
 	}
 
 	@Override
@@ -273,7 +273,7 @@ public class PlayerController extends CreatureController<Player> {
 		if (zoneName == null)
 			log.error("No name found for a Zone in the map " + zone.getAreaTemplate().getWorldId());
 		else
-			QuestEngine.getInstance().onLeaveZone(new QuestEnv(null, player, 0, 0), zoneName);
+			QuestEngine.getInstance().onLeaveZone(new QuestEnv(null, player, 0), zoneName);
 	}
 
 	/**
@@ -386,7 +386,7 @@ public class PlayerController extends CreatureController<Player> {
 
 		sendDieFromCreature(lastAttacker, !player.hasResurrectBase());
 
-		QuestEngine.getInstance().onDie(new QuestEnv(null, player, 0, 0));
+		QuestEngine.getInstance().onDie(new QuestEnv(null, player, 0));
 	}
 
 	public void sendDie() {
@@ -450,7 +450,7 @@ public class PlayerController extends CreatureController<Player> {
 		}
 
 		if (target instanceof Npc) {
-			QuestEngine.getInstance().onAttack(new QuestEnv(target, getOwner(), 0, 0));
+			QuestEngine.getInstance().onAttack(new QuestEnv(target, getOwner(), 0));
 		}
 
 		int attackSpeed = gameStats.getAttackSpeed().getCurrent();
@@ -489,7 +489,7 @@ public class PlayerController extends CreatureController<Player> {
 
 		if (attacker instanceof Npc) {
 			ShoutEventHandler.onAttack((NpcAI) attacker.getAi(), getOwner());
-			QuestEngine.getInstance().onAttack(new QuestEnv(attacker, getOwner(), 0, 0));
+			QuestEngine.getInstance().onAttack(new QuestEnv(attacker, getOwner(), 0));
 		}
 
 		lastAttackedMillis = System.currentTimeMillis();
@@ -628,8 +628,8 @@ public class PlayerController extends CreatureController<Player> {
 	}
 
 	@Override
-	public void onDialogSelect(int dialogId, int prevDialogId, Player player, int questId, int extendedRewardIndex) {
-		switch (DialogAction.getByActionId(dialogId)) {
+	public void onDialogSelect(int dialogActionId, int prevDialogId, Player player, int questId, int extendedRewardIndex) {
+		switch (dialogActionId) {
 			case BUY:
 				PacketSendUtility.sendPacket(player, new SM_PRIVATE_STORE(getOwner().getStore(), player));
 				break;
@@ -637,7 +637,7 @@ public class PlayerController extends CreatureController<Player> {
 			case QUEST_ACCEPT_SIMPLE:
 				if (!getOwner().equals(player) && MathUtil.isInRange(getOwner(), player, 100)) { // TODO check if owner really shared
 					if (!DataManager.QUEST_DATA.getQuestById(questId).isCannotShare())
-						QuestService.startQuest(new QuestEnv(null, player, questId, dialogId));
+						QuestService.startQuest(new QuestEnv(null, player, questId, dialogActionId));
 				}
 				break;
 		}

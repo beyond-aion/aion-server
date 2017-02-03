@@ -1,6 +1,6 @@
 package quest.cygnea;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ITEM_USAGE_ANIMATION;
@@ -62,24 +62,24 @@ public class _10503GuardDownSecretsOut extends QuestHandler {
 
 		int var = qs.getQuestVarById(0);
 		int targetId = env.getTargetId();
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 
 		switch (targetId) {
 			case 804704: // Eukraton
 				if (qs.getStatus() == QuestStatus.START) {
 					if (var == 0) { // Step 0: Talk with Eukraton at Aequis Advance Post.
-						if (dialog == DialogAction.QUEST_SELECT) {
+						if (dialogActionId == QUEST_SELECT) {
 							return sendQuestDialog(env, 1011);
 						}
 
-						if (dialog == DialogAction.SETPRO1) {
+						if (dialogActionId == SETPRO1) {
 							return defaultCloseDialog(env, var, var + 1);
 						}
 					}
 				}
 
 				if (qs.getStatus() == QuestStatus.REWARD) {
-					if (dialog == DialogAction.USE_OBJECT) {
+					if (dialogActionId == USE_OBJECT) {
 						return sendQuestDialog(env, 10002);
 					}
 					return sendQuestEndDialog(env);
@@ -88,11 +88,11 @@ public class _10503GuardDownSecretsOut extends QuestHandler {
 			case 804705: // Euvia
 				if (qs.getStatus() == QuestStatus.START) {
 					if (var == 2) { // Step 2: Obtain the Old Balaur Document from the Scattered Balaur Document and take it to Euvia
-						if (dialog == DialogAction.QUEST_SELECT) {
+						if (dialogActionId == QUEST_SELECT) {
 							return sendQuestDialog(env, 1693);
 						}
 
-						if (dialog == DialogAction.CHECK_USER_HAS_QUEST_ITEM) {
+						if (dialogActionId == CHECK_USER_HAS_QUEST_ITEM) {
 							long itemCount = player.getInventory().getItemCountByItemId(collectItemId);
 							if (itemCount > 0) {
 								removeQuestItem(env, collectItemId, itemCount);
@@ -106,29 +106,29 @@ public class _10503GuardDownSecretsOut extends QuestHandler {
 					}
 
 					if (var == 3) { // Step 3: Talk with Euvia at Dragon Lord's Gardens.
-						if (dialog == DialogAction.QUEST_SELECT) {
+						if (dialogActionId == QUEST_SELECT) {
 							return sendQuestDialog(env, 2034);
 						}
 
-						if (dialog == DialogAction.SETPRO4) {
+						if (dialogActionId == SETPRO4) {
 							giveQuestItem(env, workItemId, 1);
 							return defaultCloseDialog(env, var, var + 1);
 						}
 					}
 
 					if (var == 5) { // Step 5: Talk with Euvia at Dragon Lord's Gardens.
-						if (dialog == DialogAction.QUEST_SELECT) {
+						if (dialogActionId == QUEST_SELECT) {
 							return sendQuestDialog(env, 2716);
 						}
 
-						if (dialog == DialogAction.SETPRO6) {
+						if (dialogActionId == SETPRO6) {
 							return defaultCloseDialog(env, var, var + 1);
 						}
 					}
 				}
 				break;
 			case 702670:
-				if (dialog == DialogAction.USE_OBJECT && var == 2) { // Step 2: Obtain the Old Balaur Document from the Scattered Balaur Document and take it
+				if (dialogActionId == USE_OBJECT && var == 2) { // Step 2: Obtain the Old Balaur Document from the Scattered Balaur Document and take it
 																															// to Euvia.
 					return useQuestObject(env, 2, 2, false, 0);
 				}

@@ -1,6 +1,6 @@
 package quest.enshar;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -14,10 +14,8 @@ import com.aionemu.gameserver.services.QuestService;
  */
 public class _25052AnOfferingPeace extends QuestHandler {
 
-	private final static int questId = 25052;
-
 	public _25052AnOfferingPeace() {
-		super(questId);
+		super(25052);
 	}
 
 	@Override
@@ -37,11 +35,11 @@ public class _25052AnOfferingPeace extends QuestHandler {
 		final Player player = env.getPlayer();
 		final QuestState qs = player.getQuestStateList().getQuestState(questId);
 		int targetId = env.getTargetId();
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 804913) { // Redelf
-				if (dialog == DialogAction.QUEST_SELECT)
+				if (dialogActionId == QUEST_SELECT)
 					return sendQuestDialog(env, 4762);
 				else
 					return sendQuestStartDialog(env);
@@ -52,10 +50,10 @@ public class _25052AnOfferingPeace extends QuestHandler {
 			switch (targetId) {
 				case 731561: // Sea Jotun's treasure
 					if (var == 0) {
-						if (dialog == DialogAction.QUEST_SELECT)
+						if (dialogActionId == QUEST_SELECT)
 							return sendQuestDialog(env, 1011);
 
-						if (dialog == DialogAction.SET_SUCCEED) {
+						if (dialogActionId == SET_SUCCEED) {
 							Npc npc = (Npc) env.getVisibleObject();
 							if (npc != null)
 								QuestService.addNewSpawn(220080000, player.getInstanceId(), 220032, npc.getPosition().getX(), npc.getPosition().getY(),
@@ -69,7 +67,7 @@ public class _25052AnOfferingPeace extends QuestHandler {
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			switch (targetId) {
 				case 804915: // Soglo
-					if (dialog == DialogAction.USE_OBJECT)
+					if (dialogActionId == USE_OBJECT)
 						return sendQuestDialog(env, 10002);
 
 					removeQuestItem(env, 182215721, 1);

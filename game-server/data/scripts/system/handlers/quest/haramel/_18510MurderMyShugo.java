@@ -1,6 +1,7 @@
 package quest.haramel;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -12,10 +13,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _18510MurderMyShugo extends QuestHandler {
 
-	private final static int questId = 18510;
-
 	public _18510MurderMyShugo() {
-		super(questId);
+		super(18510);
 	}
 
 	@Override
@@ -37,12 +36,12 @@ public class _18510MurderMyShugo extends QuestHandler {
 	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		int targetId = env.getTargetId();
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 203166) {
-				if (dialog == DialogAction.QUEST_SELECT) {
+				if (dialogActionId == QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);
 				} else {
 					return sendQuestStartDialog(env, 182212009, 1);
@@ -52,7 +51,7 @@ public class _18510MurderMyShugo extends QuestHandler {
 			int var = qs.getQuestVarById(0);
 			switch (targetId) {
 				case 700953:
-					if (dialog == DialogAction.USE_OBJECT) {
+					if (dialogActionId == USE_OBJECT) {
 						if (var >= 3 && var < 5) {
 							return useQuestObject(env, var, var + 1, false, true); // 4,5
 						} else if (var == 5) {
@@ -62,7 +61,7 @@ public class _18510MurderMyShugo extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203166) {
-				switch (dialog) {
+				switch (dialogActionId) {
 					case USE_OBJECT:
 						return sendQuestDialog(env, 10002);
 					case SELECT_QUEST_REWARD:

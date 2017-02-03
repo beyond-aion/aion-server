@@ -188,7 +188,7 @@ public class FortressSiege extends Siege<FortressLocation> {
 		if (isBossKilled()) {
 			getSiegeLocation().forEachPlayer(p -> {
 				if (SiegeRace.getByRace(p.getRace()) == getSiegeLocation().getRace())
-					QuestEngine.getInstance().onKill(new QuestEnv(getBoss(), p, 0, 0));
+					QuestEngine.getInstance().onKill(new QuestEnv(getBoss(), p, 0));
 			});
 		}
 	}

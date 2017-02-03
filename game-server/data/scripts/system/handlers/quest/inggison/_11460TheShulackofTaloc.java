@@ -1,6 +1,7 @@
 package quest.inggison;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -12,10 +13,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _11460TheShulackofTaloc extends QuestHandler {
 
-	private static final int questId = 11460;
-
 	public _11460TheShulackofTaloc() {
-		super(questId);
+		super(11460);
 	}
 
 	@Override
@@ -30,12 +29,12 @@ public class _11460TheShulackofTaloc extends QuestHandler {
 	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 798954) { // Tialla
-				if (dialog == DialogAction.QUEST_SELECT) {
+				if (dialogActionId == QUEST_SELECT) {
 					return sendQuestDialog(env, 1011);
 				} else {
 					return sendQuestStartDialog(env);
@@ -45,7 +44,7 @@ public class _11460TheShulackofTaloc extends QuestHandler {
 			int var = qs.getQuestVarById(0);
 			switch (targetId) {
 				case 799502: // Dorkin
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var == 0) {
 								return sendQuestDialog(env, 1352);
@@ -56,7 +55,7 @@ public class _11460TheShulackofTaloc extends QuestHandler {
 					}
 					break;
 				case 798985: // Seikin
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var == 1) {
 								return sendQuestDialog(env, 2375);

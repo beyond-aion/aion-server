@@ -1,6 +1,7 @@
 package quest.clash_of_destiny;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.actions.NpcActions;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -42,14 +43,14 @@ public class _24031EnemyAtTheDoorstep extends QuestHandler {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		int targetId = env.getTargetId();
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		if (qs == null)
 			return false;
 		if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			switch (targetId) {
 				case 204052:// vidar
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							return sendQuestDialog(env, 1011);
 						case SETPRO1:
@@ -59,7 +60,7 @@ public class _24031EnemyAtTheDoorstep extends QuestHandler {
 					}
 					break;
 				case 801224:// Rapidfire Rita
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							return sendQuestDialog(env, 1352);
 						case SETPRO2:
@@ -69,7 +70,7 @@ public class _24031EnemyAtTheDoorstep extends QuestHandler {
 					}
 					break;
 				case 203550:// Munin
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							return sendQuestDialog(env, 1693);
 						case SETPRO3:
@@ -81,7 +82,7 @@ public class _24031EnemyAtTheDoorstep extends QuestHandler {
 					}
 					break;
 				case 203654:// Aurtri
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							return sendQuestDialog(env, 2375);
 						case SETPRO5:
@@ -93,7 +94,7 @@ public class _24031EnemyAtTheDoorstep extends QuestHandler {
 					}
 					break;
 				case 204369:// Tyr
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var == 6) {
 								return sendQuestDialog(env, 3057);
@@ -115,7 +116,7 @@ public class _24031EnemyAtTheDoorstep extends QuestHandler {
 					}
 					break;
 				case 730888:// Teleporter Device
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							// TODO:play movie find movie ID
 							Npc npc = (Npc) env.getVisibleObject();
@@ -129,7 +130,7 @@ public class _24031EnemyAtTheDoorstep extends QuestHandler {
 					}
 					break;
 				case 730898:// Broken Teleporter
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							Npc npc = (Npc) env.getVisibleObject();
 							if (targetId == 730898)
@@ -143,7 +144,7 @@ public class _24031EnemyAtTheDoorstep extends QuestHandler {
 		}
 		if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204052)// vidar
-				switch (dialog) {
+				switch (dialogActionId) {
 					case USE_OBJECT:
 						return sendQuestDialog(env, 4083);
 					case SELECT_QUEST_REWARD:

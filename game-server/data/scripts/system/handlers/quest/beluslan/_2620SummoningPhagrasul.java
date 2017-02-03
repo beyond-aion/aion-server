@@ -1,6 +1,7 @@
 package quest.beluslan;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -20,11 +21,10 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
  */
 public class _2620SummoningPhagrasul extends QuestHandler {
 
-	private final static int questId = 2620;
 	private final static int[] mob_ids = { 213109, 213111 };
 
 	public _2620SummoningPhagrasul() {
-		super(questId);
+		super(2620);
 	}
 
 	@Override
@@ -75,13 +75,13 @@ public class _2620SummoningPhagrasul extends QuestHandler {
 		if (env.getVisibleObject() instanceof Npc)
 			targetId = ((Npc) env.getVisibleObject()).getNpcId();
 		final QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 204787) {// Chieftain Akagitan
-				if (dialog == DialogAction.QUEST_SELECT)
+				if (dialogActionId == QUEST_SELECT)
 					return sendQuestDialog(env, 4762);
-				else if (dialog == DialogAction.QUEST_ACCEPT_1) {
+				else if (dialogActionId == QUEST_ACCEPT_1) {
 					if (!giveQuestItem(env, 182204498, 1))
 						return true;
 					return sendQuestStartDialog(env);
@@ -91,7 +91,7 @@ public class _2620SummoningPhagrasul extends QuestHandler {
 		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			if (targetId == 204824) {
-				switch (dialog) {
+				switch (dialogActionId) {
 					case QUEST_SELECT:
 						if (var == 0)
 							return sendQuestDialog(env, 1011);
@@ -114,7 +114,7 @@ public class _2620SummoningPhagrasul extends QuestHandler {
 				}
 			}
 			if (targetId == 700323) {// Hugh mamut skull
-				switch (dialog) {
+				switch (dialogActionId) {
 					case USE_OBJECT:
 						if (var == 0) {
 							final int targetObjectId = env.getVisibleObject().getObjectId();
@@ -137,7 +137,7 @@ public class _2620SummoningPhagrasul extends QuestHandler {
 				}
 			}
 			if (targetId == 204787) {// Chieftain Akagitan
-				switch (dialog) {
+				switch (dialogActionId) {
 					case USE_OBJECT:
 						qs.setStatus(QuestStatus.REWARD);
 						updateQuestStatus(env);

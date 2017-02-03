@@ -1,6 +1,7 @@
 package quest.beluslan;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
@@ -16,11 +17,10 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 public class _2600HumongousMalek extends QuestHandler {
 
-	private final static int questId = 2600;
 	private final static int[] npc_ids = { 204734, 798119, 700512 };
 
 	public _2600HumongousMalek() {
-		super(questId);
+		super(2600);
 	}
 
 	@Override
@@ -39,7 +39,7 @@ public class _2600HumongousMalek extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (targetId == 204734) {
 			if (qs == null || qs.isStartable()) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
+				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 1011);
 				else
 					return sendQuestStartDialog(env);
@@ -57,7 +57,7 @@ public class _2600HumongousMalek extends QuestHandler {
 			return false;
 		}
 		if (targetId == 798119) {
-			switch (env.getDialog()) {
+			switch (env.getDialogActionId()) {
 				case QUEST_SELECT:
 					if (var == 0)
 						return sendQuestDialog(env, 1352);
@@ -75,7 +75,7 @@ public class _2600HumongousMalek extends QuestHandler {
 					return false;
 			}
 		} else if (targetId == 700512) {
-			switch (env.getDialog()) {
+			switch (env.getDialogActionId()) {
 				case USE_OBJECT:
 					if (var == 1) {
 						if (player.getInventory().getItemCountByItemId(182204528) == 1) {
@@ -87,7 +87,7 @@ public class _2600HumongousMalek extends QuestHandler {
 					return false;
 			}
 		} else if (targetId == 204734) {
-			switch (env.getDialog()) {
+			switch (env.getDialogActionId()) {
 				case QUEST_SELECT:
 					if (var == 1)
 						return sendQuestDialog(env, 2375);

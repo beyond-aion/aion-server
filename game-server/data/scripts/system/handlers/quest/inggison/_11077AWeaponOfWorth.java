@@ -1,6 +1,7 @@
 package quest.inggison;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -12,10 +13,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _11077AWeaponOfWorth extends QuestHandler {
 
-	private final static int questId = 11077;
-
 	public _11077AWeaponOfWorth() {
-		super(questId);
+		super(11077);
 	}
 
 	@Override
@@ -31,12 +30,12 @@ public class _11077AWeaponOfWorth extends QuestHandler {
 	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 798926) {
-				switch (dialog) {
+				switch (dialogActionId) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 1011);
 					case QUEST_ACCEPT_1:
@@ -53,10 +52,10 @@ public class _11077AWeaponOfWorth extends QuestHandler {
 			switch (targetId) {
 				case 799028: // Brontes
 				{
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							return sendQuestDialog(env, 1353);
-						case SELECT_ACTION_1353:
+						case SELECT2_1:
 							return sendQuestDialog(env, 1353);
 						case SETPRO1:
 							return defaultCloseDialog(env, 0, 1);
@@ -65,10 +64,10 @@ public class _11077AWeaponOfWorth extends QuestHandler {
 				}
 				case 798918: // Pilipides
 				{
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							return sendQuestDialog(env, 1693);
-						case SELECT_ACTION_1694:
+						case SELECT3_1:
 							return sendQuestDialog(env, 1694);
 						case SETPRO2:
 							return defaultCloseDialog(env, 1, 2);
@@ -77,7 +76,7 @@ public class _11077AWeaponOfWorth extends QuestHandler {
 				}
 				case 798903: // Drenia
 				{
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							return sendQuestDialog(env, 2375);
 						case SELECT_QUEST_REWARD:
@@ -88,8 +87,8 @@ public class _11077AWeaponOfWorth extends QuestHandler {
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 798903) // Drenia
 			{
-				switch (env.getDialogId()) {
-					case 1009:
+				switch (env.getDialogActionId()) {
+					case SELECT_QUEST_REWARD:
 						return sendQuestDialog(env, 5);
 					default:
 						return sendQuestEndDialog(env);

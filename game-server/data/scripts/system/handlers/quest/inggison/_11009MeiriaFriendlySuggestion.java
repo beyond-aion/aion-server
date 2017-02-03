@@ -1,6 +1,7 @@
 package quest.inggison;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
@@ -16,10 +17,8 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 
 public class _11009MeiriaFriendlySuggestion extends QuestHandler {
 
-	private final static int questId = 11009;
-
 	public _11009MeiriaFriendlySuggestion() {
-		super(questId);
+		super(11009);
 	}
 
 	@Override
@@ -40,9 +39,9 @@ public class _11009MeiriaFriendlySuggestion extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (targetId == 798945) {
 			if (qs == null) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT) {
+				if (env.getDialogActionId() == QUEST_SELECT) {
 					return sendQuestDialog(env, 1011);
-				} else if (env.getDialogId() == DialogAction.QUEST_ACCEPT_1.id()) {
+				} else if (env.getDialogActionId() == QUEST_ACCEPT_1) {
 					if (giveQuestItem(env, 182206711, 2))
 						return sendQuestStartDialog(env);
 					else
@@ -58,7 +57,7 @@ public class _11009MeiriaFriendlySuggestion extends QuestHandler {
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 799008:
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case QUEST_SELECT: {
 							return sendQuestDialog(env, 1352);
 						}
@@ -72,7 +71,7 @@ public class _11009MeiriaFriendlySuggestion extends QuestHandler {
 					}
 					return false;
 				case 799017:
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case QUEST_SELECT: {
 							return sendQuestDialog(env, 1693);
 						}
@@ -87,7 +86,7 @@ public class _11009MeiriaFriendlySuggestion extends QuestHandler {
 					}
 					return false;
 				case 798941:
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case QUEST_SELECT: {
 							return sendQuestDialog(env, 2034);
 						}
@@ -103,7 +102,7 @@ public class _11009MeiriaFriendlySuggestion extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 798945) {
-				if (env.getDialog() == DialogAction.USE_OBJECT) {
+				if (env.getDialogActionId() == USE_OBJECT) {
 					return sendQuestDialog(env, 2375);
 				} else
 					return sendQuestEndDialog(env);

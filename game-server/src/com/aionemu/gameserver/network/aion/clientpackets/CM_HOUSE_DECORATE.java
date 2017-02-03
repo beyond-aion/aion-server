@@ -59,7 +59,7 @@ public class CM_HOUSE_DECORATE extends AionClientPacket {
 		sendPacket(new SM_HOUSE_EDIT(4, 2, objectId));
 		house.getRegistry().setPersistentState(PersistentState.UPDATE_REQUIRED);
 		house.getController().updateAppearance();
-		QuestEngine.getInstance().onHouseItemUseEvent(new QuestEnv(null, player, 0, 0));
+		QuestEngine.getInstance().onHouseItemUseEvent(new QuestEnv(null, player, 0));
 	}
 
 }

@@ -1,6 +1,7 @@
 package quest.rentus_base;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -12,10 +13,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _30550MomentOfCrisis extends QuestHandler {
 
-	private final static int questId = 30550;
-
 	public _30550MomentOfCrisis() {
-		super(questId);
+		super(30550);
 	}
 
 	@Override
@@ -32,10 +31,10 @@ public class _30550MomentOfCrisis extends QuestHandler {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		int targetId = env.getTargetId();
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 205864) {
-				switch (dialog) {
+				switch (dialogActionId) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 1011);
 					default:
@@ -47,7 +46,7 @@ public class _30550MomentOfCrisis extends QuestHandler {
 			switch (targetId) {
 
 				case 805156:
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							return sendQuestDialog(env, 1352);
 						case SETPRO1: {
@@ -57,7 +56,7 @@ public class _30550MomentOfCrisis extends QuestHandler {
 					return false;
 				case 799592:
 				case 799666:
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							return sendQuestDialog(env, 2375);
 						case SELECT_QUEST_REWARD: {

@@ -1,6 +1,7 @@
 package quest.eltnen;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
@@ -16,10 +17,8 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 
 public class _3319AnOrderforGojirunerk extends QuestHandler {
 
-	private final static int questId = 3319;
-
 	public _3319AnOrderforGojirunerk() {
-		super(questId);
+		super(3319);
 	}
 
 	@Override
@@ -40,7 +39,7 @@ public class _3319AnOrderforGojirunerk extends QuestHandler {
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 798050) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT) {
+				if (env.getDialogActionId() == QUEST_SELECT) {
 					return sendQuestDialog(env, 1011);
 				} else
 					return sendQuestStartDialog(env);
@@ -53,7 +52,7 @@ public class _3319AnOrderforGojirunerk extends QuestHandler {
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 798138:
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case QUEST_SELECT: {
 							return sendQuestDialog(env, 1352);
 						}
@@ -66,7 +65,7 @@ public class _3319AnOrderforGojirunerk extends QuestHandler {
 					}
 					return false;
 				case 798050:
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case QUEST_SELECT: {
 							return sendQuestDialog(env, 2375);
 						}
@@ -82,7 +81,7 @@ public class _3319AnOrderforGojirunerk extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 798050) {
-				switch (env.getDialog()) {
+				switch (env.getDialogActionId()) {
 					case SELECT_QUEST_REWARD:
 						return sendQuestDialog(env, 5);
 					default:

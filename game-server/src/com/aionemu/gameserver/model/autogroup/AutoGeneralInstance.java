@@ -3,6 +3,7 @@ package com.aionemu.gameserver.model.autogroup;
 import java.util.List;
 
 import com.aionemu.gameserver.dataholders.DataManager;
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.PlayerClass;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.team.TeamType;
@@ -73,7 +74,7 @@ public class AutoGeneralInstance extends AutoInstance {
 	public void onPressEnter(Player player) {
 		super.onPressEnter(player);
 		int worldId = instance.getMapId();
-		PortalPath portal = DataManager.PORTAL2_DATA.getPortalDialog(worldId, 10000, player.getRace());
+		PortalPath portal = DataManager.PORTAL2_DATA.getPortalDialog(worldId, DialogAction.SETPRO1, player.getRace());
 		if (portal == null) {
 			return;
 		}

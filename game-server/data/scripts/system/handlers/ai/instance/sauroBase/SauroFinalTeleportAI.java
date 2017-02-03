@@ -1,9 +1,10 @@
 package ai.instance.sauroBase;
 
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.NpcAI;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
@@ -21,13 +22,13 @@ public class SauroFinalTeleportAI extends NpcAI {
 	}
 
 	@Override
-	public boolean onDialogSelect(Player player, int dialogId, int questId, int extendedRewardIndex) {
-		switchWay(player, dialogId);
+	public boolean onDialogSelect(Player player, int dialogActionId, int questId, int extendedRewardIndex) {
+		switchWay(player, dialogActionId);
 		return true;
 	}
 
-	private void switchWay(Player player, int dialogId) {
-		switch (DialogAction.getByActionId(dialogId)) {
+	private void switchWay(Player player, int dialogActionId) {
+		switch (dialogActionId) {
 			case SELECT_BOSS_LEVEL3:
 				checkKeys(player, 1);
 				break;

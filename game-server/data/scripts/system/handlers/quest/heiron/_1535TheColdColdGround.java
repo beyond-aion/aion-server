@@ -1,6 +1,7 @@
 package quest.heiron;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
@@ -15,10 +16,8 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 public class _1535TheColdColdGround extends QuestHandler {
 
-	private final static int questId = 1535;
-
 	public _1535TheColdColdGround() {
-		super(questId);
+		super(1535);
 	}
 
 	@Override
@@ -44,7 +43,7 @@ public class _1535TheColdColdGround extends QuestHandler {
 
 		final QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs == null || qs.isStartable()) {
-			if (env.getDialog() == DialogAction.QUEST_SELECT)
+			if (env.getDialogActionId() == QUEST_SELECT)
 				return sendQuestDialog(env, 4762);
 			else
 				return sendQuestStartDialog(env);
@@ -55,7 +54,7 @@ public class _1535TheColdColdGround extends QuestHandler {
 			boolean worgSkins = player.getInventory().getItemCountByItemId(182201819) > 2;
 			boolean karnifSkins = player.getInventory().getItemCountByItemId(182201820) > 0;
 
-			switch (env.getDialog()) {
+			switch (env.getDialogActionId()) {
 				case USE_OBJECT:
 				case QUEST_SELECT:
 					if (abexSkins || worgSkins || karnifSkins)

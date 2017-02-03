@@ -1,6 +1,7 @@
 package quest.eltnen;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -14,10 +15,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 public class _3326TheShugoMenace extends QuestHandler {
 
-	private final static int questId = 3326;
-
 	public _3326TheShugoMenace() {
-		super(questId);
+		super(3326);
 	}
 
 	@Override
@@ -42,7 +41,7 @@ public class _3326TheShugoMenace extends QuestHandler {
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 798053) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT) {
+				if (env.getDialogActionId() == QUEST_SELECT) {
 					return sendQuestDialog(env, 4);
 				} else
 					return sendQuestStartDialog(env);
@@ -54,7 +53,7 @@ public class _3326TheShugoMenace extends QuestHandler {
 
 		if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 798053) {
-				switch (env.getDialog()) {
+				switch (env.getDialogActionId()) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 10002);
 					case SELECT_QUEST_REWARD:
@@ -69,7 +68,7 @@ public class _3326TheShugoMenace extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 798053) {
-				if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id())
+				if (env.getDialogActionId() == SELECT_QUEST_REWARD)
 					return sendQuestDialog(env, 5);
 				else
 					return sendQuestEndDialog(env);

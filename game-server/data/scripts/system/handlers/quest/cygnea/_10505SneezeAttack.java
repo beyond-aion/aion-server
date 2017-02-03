@@ -1,6 +1,6 @@
 package quest.cygnea;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ITEM_USAGE_ANIMATION;
@@ -58,24 +58,24 @@ public class _10505SneezeAttack extends QuestHandler {
 
 		int var = qs.getQuestVarById(0);
 		int targetId = env.getTargetId();
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 
 		switch (targetId) {
 			case 804707: // Averse
 				if (qs.getStatus() == QuestStatus.START) {
 					if (var == 0) { // Step 0: Talk with Averse at Erivale Territory Village.
-						if (dialog == DialogAction.QUEST_SELECT) {
+						if (dialogActionId == QUEST_SELECT) {
 							return sendQuestDialog(env, 1011);
 						}
 
-						if (dialog == DialogAction.SETPRO1) {
+						if (dialogActionId == SETPRO1) {
 							return defaultCloseDialog(env, var, var + 1);
 						}
 					}
 				}
 
 				if (qs.getStatus() == QuestStatus.REWARD) {
-					if (dialog == DialogAction.USE_OBJECT) {
+					if (dialogActionId == USE_OBJECT) {
 						return sendQuestDialog(env, 10002);
 					}
 					return sendQuestEndDialog(env);
@@ -84,21 +84,21 @@ public class _10505SneezeAttack extends QuestHandler {
 			case 804708: // Erinos
 				if (qs.getStatus() == QuestStatus.START) {
 					if (var == 1) { // Step 1: Talk with Investigator Erinos who has been dispatched to Twilight Temple.
-						if (dialog == DialogAction.QUEST_SELECT) {
+						if (dialogActionId == QUEST_SELECT) {
 							return sendQuestDialog(env, 1352);
 						}
 
-						if (dialog == DialogAction.SETPRO2) {
+						if (dialogActionId == SETPRO2) {
 							return defaultCloseDialog(env, var, var + 1);
 						}
 					}
 
 					if (var == 2) { // Step 2: Gather the Balaur Maneuver Plans and talk with Erinos. (Item check)
-						if (dialog == DialogAction.QUEST_SELECT) {
+						if (dialogActionId == QUEST_SELECT) {
 							return sendQuestDialog(env, 1693);
 						}
 
-						if (dialog == DialogAction.CHECK_USER_HAS_QUEST_ITEM) {
+						if (dialogActionId == CHECK_USER_HAS_QUEST_ITEM) {
 							if (QuestService.collectItemCheck(env, true)) {
 								qs.setQuestVar(var + 1);
 								updateQuestStatus(env);
@@ -109,18 +109,18 @@ public class _10505SneezeAttack extends QuestHandler {
 					}
 
 					if (var == 3) { // Step 3: Talk with Erinos.
-						if (dialog == DialogAction.QUEST_SELECT) {
+						if (dialogActionId == QUEST_SELECT) {
 							return sendQuestDialog(env, 2034);
 						}
 
-						if (dialog == DialogAction.SETPRO4) {
+						if (dialogActionId == SETPRO4) {
 							return defaultCloseDialog(env, var, var + 1, workItemId, 1);
 						}
 					}
 				}
 				break;
 			case 702672:
-				if (dialog == DialogAction.USE_OBJECT && var == 2) { // Step 2: Gather the Balaur Maneuver Plans and talk with Erinos.
+				if (dialogActionId == USE_OBJECT && var == 2) { // Step 2: Gather the Balaur Maneuver Plans and talk with Erinos.
 					return useQuestObject(env, var, var, false, 0);
 				}
 				break;

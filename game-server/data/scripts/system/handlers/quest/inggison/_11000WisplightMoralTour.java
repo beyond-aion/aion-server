@@ -1,6 +1,7 @@
 package quest.inggison;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
@@ -16,10 +17,8 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 
 public class _11000WisplightMoralTour extends QuestHandler {
 
-	private final static int questId = 11000;
-
 	public _11000WisplightMoralTour() {
-		super(questId);
+		super(11000);
 	}
 
 	@Override
@@ -42,7 +41,7 @@ public class _11000WisplightMoralTour extends QuestHandler {
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 798927) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
+				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 1011);
 				else
 					return sendQuestStartDialog(env);
@@ -55,7 +54,7 @@ public class _11000WisplightMoralTour extends QuestHandler {
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 798929:
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case QUEST_SELECT: {
 							return sendQuestDialog(env, 1352);
 						}
@@ -68,7 +67,7 @@ public class _11000WisplightMoralTour extends QuestHandler {
 					}
 					return false;
 				case 798934:
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case QUEST_SELECT: {
 							return sendQuestDialog(env, 1693);
 						}
@@ -81,7 +80,7 @@ public class _11000WisplightMoralTour extends QuestHandler {
 					}
 					return false;
 				case 798933:
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case QUEST_SELECT: {
 							return sendQuestDialog(env, 2034);
 						}
@@ -94,7 +93,7 @@ public class _11000WisplightMoralTour extends QuestHandler {
 					}
 					return false;
 				case 798927:
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case QUEST_SELECT: {
 							return sendQuestDialog(env, 2375);
 						}
@@ -110,7 +109,7 @@ public class _11000WisplightMoralTour extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 798927) {
-				switch (env.getDialog()) {
+				switch (env.getDialogActionId()) {
 					case SELECT_QUEST_REWARD:
 						return sendQuestDialog(env, 5);
 					default:

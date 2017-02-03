@@ -1,6 +1,7 @@
 package quest.esoterrace;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
@@ -19,11 +20,10 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
  */
 public class _18405MemoriesInTheCornerOfHisMind extends QuestHandler {
 
-	public static final int questId = 18405;
-	public static final int npcDaidra = 799553, npcTillen = 799552;
+	private static final int npcDaidra = 799553, npcTillen = 799552;
 
 	public _18405MemoriesInTheCornerOfHisMind() {
-		super(questId);
+		super(18405);
 	}
 
 	@Override
@@ -37,7 +37,7 @@ public class _18405MemoriesInTheCornerOfHisMind extends QuestHandler {
 	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 
-		if (env.getTargetId() == 0 && env.getDialog() == DialogAction.QUEST_ACCEPT_1) {
+		if (env.getTargetId() == 0 && env.getDialogActionId() == QUEST_ACCEPT_1) {
 			QuestService.startQuest(env);
 			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(0, 0));
 			return true;
@@ -51,17 +51,17 @@ public class _18405MemoriesInTheCornerOfHisMind extends QuestHandler {
 			switch (env.getTargetId()) {
 				case npcDaidra:
 					if (qs.getQuestVarById(0) == 0) {
-						if (env.getDialog() == DialogAction.QUEST_SELECT)
+						if (env.getDialogActionId() == QUEST_SELECT)
 							return sendQuestDialog(env, 1352);
-						else if (env.getDialog() == DialogAction.SETPRO1)
+						else if (env.getDialogActionId() == SETPRO1)
 							return defaultCloseDialog(env, 0, 1, 182215024, 1, 182215002, 1);
 					}
 					return false;
 				case npcTillen:
 					if (qs.getQuestVarById(0) == 1) {
-						if (env.getDialog() == DialogAction.QUEST_SELECT)
+						if (env.getDialogActionId() == QUEST_SELECT)
 							return sendQuestDialog(env, 2375);
-						else if (env.getDialog() == DialogAction.SELECT_QUEST_REWARD)
+						else if (env.getDialogActionId() == SELECT_QUEST_REWARD)
 							removeQuestItem(env, 182215024, 1);
 						return defaultCloseDialog(env, 1, 2, true, true);
 					}

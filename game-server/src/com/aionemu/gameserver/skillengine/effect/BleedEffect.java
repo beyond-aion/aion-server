@@ -29,8 +29,8 @@ public class BleedEffect extends AbstractOverTimeEffect {
 	@Override
 	public void startEffect(final Effect effect) {
 		int valueWithDelta = value + delta * effect.getSkillLevel();
-		int critAddDmg = this.critAddDmg2 + this.critAddDmg1 * effect.getSkillLevel();
-		int finalDamage = AttackUtil.calculateMagicalOverTimeSkillResult(effect, valueWithDelta, element, this.position, false, this.critProbMod2,
+		int critAddDmg = critAddDmg2 + critAddDmg1 * effect.getSkillLevel();
+		int finalDamage = AttackUtil.calculateMagicalOverTimeSkillResult(effect, valueWithDelta, element, position, false, critProbMod2,
 			critAddDmg);
 		effect.setReserveds(new EffectReserved(position, finalDamage, ResourceType.HP, true, false), true);
 		super.startEffect(effect, AbnormalState.BLEED);

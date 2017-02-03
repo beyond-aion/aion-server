@@ -1,5 +1,7 @@
 package quest.event_quests;
 
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -32,7 +34,7 @@ public class _80009TheCakeIsTheTruth extends QuestHandler {
 
 		if (qs.getStatus() == QuestStatus.START) {
 			if (env.getTargetId() == 798417) {
-				switch (env.getDialog()) {
+				switch (env.getDialogActionId()) {
 					case QUEST_SELECT:
 						if (var == 0)
 							return sendQuestDialog(env, 2375);

@@ -1,6 +1,6 @@
 package quest.esoterrace;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -12,10 +12,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _28400InspecttheInspectors extends QuestHandler {
 
-	private final static int questId = 28400;
-
 	public _28400InspecttheInspectors() {
-		super(questId);
+		super(28400);
 	}
 
 	@Override
@@ -34,16 +32,16 @@ public class _28400InspecttheInspectors extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (targetId == 799557) {
 			if (qs == null || qs.isStartable()) {
-				if (env.getDialogId() == DialogAction.QUEST_SELECT.id())
+				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 1011);
 				else
 					return sendQuestStartDialog(env);
 			}
 		} else if (targetId == 799587 || targetId == 799588) {
 			if (qs != null) {
-				if (env.getDialogId() == DialogAction.QUEST_SELECT.id() && qs.getStatus() == QuestStatus.START)
+				if (env.getDialogActionId() == QUEST_SELECT && qs.getStatus() == QuestStatus.START)
 					return sendQuestDialog(env, 2375);
-				else if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id()) {
+				else if (env.getDialogActionId() == SELECT_QUEST_REWARD) {
 					qs.setQuestVar(1);
 					qs.setStatus(QuestStatus.REWARD);
 					updateQuestStatus(env);

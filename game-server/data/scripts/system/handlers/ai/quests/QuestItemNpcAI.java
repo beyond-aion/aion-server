@@ -29,7 +29,7 @@ public class QuestItemNpcAI extends ActionItemNpcAI {
 
 	@Override
 	protected void handleDialogStart(Player player) {
-		if (!(QuestEngine.getInstance().onCanAct(new QuestEnv(getOwner(), player, 0, 0), getObjectTemplate().getTemplateId(),
+		if (!(QuestEngine.getInstance().onCanAct(new QuestEnv(getOwner(), player, 0), getObjectTemplate().getTemplateId(),
 			QuestActionType.ACTION_ITEM_USE))) {
 			return;
 		}
@@ -38,10 +38,10 @@ public class QuestItemNpcAI extends ActionItemNpcAI {
 
 	@Override
 	protected void handleUseItemFinish(Player player) {
-		QuestEnv env = new QuestEnv(getOwner(), player, 0, DialogAction.USE_OBJECT.id());
+		QuestEnv env = new QuestEnv(getOwner(), player, 0, DialogAction.USE_OBJECT);
 		if (!QuestEngine.getInstance().onDialog(env)) {
 			if (getObjectTemplate().isDialogNpc()) // show default dialog
-				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), DialogAction.SELECT_ACTION_1011.id()));
+				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 1011));
 			return;
 		}
 

@@ -1,6 +1,7 @@
 package quest.reshanta;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
@@ -15,11 +16,10 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 public class _1722RastinsHomesickness extends QuestHandler {
 
-	private final static int questId = 1722;
 	private final static int[] npc_ids = { 278547, 278560, 278517, 278544, 278532, 278539, 278524, 278555, 278567 };
 
 	public _1722RastinsHomesickness() {
-		super(questId);
+		super(1722);
 	}
 
 	@Override
@@ -38,7 +38,7 @@ public class _1722RastinsHomesickness extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (targetId == 278547) {
 			if (qs == null || qs.isStartable()) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
+				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 4762);
 				else
 					return sendQuestStartDialog(env);
@@ -56,7 +56,7 @@ public class _1722RastinsHomesickness extends QuestHandler {
 			return false;
 		}
 		if (targetId == 278560) {
-			switch (env.getDialog()) {
+			switch (env.getDialogActionId()) {
 				case QUEST_SELECT:
 					if (var == 0)
 						return sendQuestDialog(env, 1011);
@@ -71,7 +71,7 @@ public class _1722RastinsHomesickness extends QuestHandler {
 					return false;
 			}
 		} else if (targetId == 278517) {
-			switch (env.getDialog()) {
+			switch (env.getDialogActionId()) {
 				case QUEST_SELECT:
 					if (var == 1)
 						return sendQuestDialog(env, 1352);
@@ -86,7 +86,7 @@ public class _1722RastinsHomesickness extends QuestHandler {
 					return false;
 			}
 		} else if (targetId == 278544) {
-			switch (env.getDialog()) {
+			switch (env.getDialogActionId()) {
 				case QUEST_SELECT:
 					if (var == 2)
 						return sendQuestDialog(env, 1693);
@@ -101,7 +101,7 @@ public class _1722RastinsHomesickness extends QuestHandler {
 					return false;
 			}
 		} else if (targetId == 278532) {
-			switch (env.getDialog()) {
+			switch (env.getDialogActionId()) {
 				case QUEST_SELECT:
 					if (var == 3)
 						return sendQuestDialog(env, 2034);
@@ -116,7 +116,7 @@ public class _1722RastinsHomesickness extends QuestHandler {
 					return false;
 			}
 		} else if (targetId == 278539) {
-			switch (env.getDialog()) {
+			switch (env.getDialogActionId()) {
 				case QUEST_SELECT:
 					if (var == 4)
 						return sendQuestDialog(env, 2375);
@@ -131,7 +131,7 @@ public class _1722RastinsHomesickness extends QuestHandler {
 					return false;
 			}
 		} else if (targetId == 278524) {
-			switch (env.getDialog()) {
+			switch (env.getDialogActionId()) {
 				case QUEST_SELECT:
 					if (var == 5)
 						return sendQuestDialog(env, 2716);
@@ -146,7 +146,7 @@ public class _1722RastinsHomesickness extends QuestHandler {
 					return false;
 			}
 		} else if (targetId == 278555) {
-			switch (env.getDialog()) {
+			switch (env.getDialogActionId()) {
 				case QUEST_SELECT:
 					if (var == 6)
 						return sendQuestDialog(env, 3057);
@@ -161,7 +161,7 @@ public class _1722RastinsHomesickness extends QuestHandler {
 					return false;
 			}
 		} else if (targetId == 278567) {
-			switch (env.getDialog()) {
+			switch (env.getDialogActionId()) {
 				case QUEST_SELECT:
 					if (var == 7)
 						return sendQuestDialog(env, 3398);

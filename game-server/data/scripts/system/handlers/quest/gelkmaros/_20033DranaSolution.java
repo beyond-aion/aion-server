@@ -1,6 +1,7 @@
 package quest.gelkmaros;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ITEM_USAGE_ANIMATION;
@@ -50,11 +51,11 @@ public class _20033DranaSolution extends QuestHandler {
 
 		int var = qs.getQuestVarById(0);
 		int targetId = env.getTargetId();
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 
 		if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 799270) {
-				switch (dialog) {
+				switch (dialogActionId) {
 					case QUEST_SELECT:
 						if (var == 0) {
 							return sendQuestDialog(env, 1011);
@@ -66,14 +67,14 @@ public class _20033DranaSolution extends QuestHandler {
 						return defaultCloseDialog(env, 0, 1); // 1
 				}
 			} else if (targetId == 700701) {
-				switch (dialog) {
+				switch (dialogActionId) {
 					case USE_OBJECT:
 						return useQuestObject(env, 2, 3, false, 0, 0, 0, 182215614, 1); // 3
 				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 799270) {
-				if (dialog == DialogAction.USE_OBJECT) {
+				if (dialogActionId == USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
 				}
 				return sendQuestEndDialog(env);

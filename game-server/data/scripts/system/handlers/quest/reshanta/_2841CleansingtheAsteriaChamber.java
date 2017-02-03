@@ -1,6 +1,6 @@
 package quest.reshanta;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -14,10 +14,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 public class _2841CleansingtheAsteriaChamber extends QuestHandler {
 
-	private final static int questId = 2841;
-
 	public _2841CleansingtheAsteriaChamber() {
-		super(questId);
+		super(2841);
 	}
 
 	@Override
@@ -42,7 +40,7 @@ public class _2841CleansingtheAsteriaChamber extends QuestHandler {
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 271068) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
+				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 1011);
 				else
 					return sendQuestStartDialog(env);

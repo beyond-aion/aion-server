@@ -1,5 +1,7 @@
 package quest.event_quests;
 
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import java.util.List;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -42,7 +44,7 @@ public class _80149EventWarpedRiftSecuring extends QuestHandler {
 
 		if (qs.getStatus() == QuestStatus.START) {
 			if (env.getTargetId() == 830246) {
-				switch (env.getDialog()) {
+				switch (env.getDialogActionId()) {
 					case QUEST_SELECT:
 						if (var == 0)
 							return sendQuestDialog(env, 2375);

@@ -1,6 +1,7 @@
 package quest.abyss_entry;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -64,12 +65,12 @@ public class _2947FollowingThrough extends QuestHandler {
 			return false;
 		int var = qs.getQuestVarById(0);
 		int targetId = env.getTargetId();
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 204053: // Kvasir
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var == 0) {
 								return sendQuestDialog(env, 1011);
@@ -91,7 +92,7 @@ public class _2947FollowingThrough extends QuestHandler {
 					}
 					break;
 				case 204301: // Aegir
-					switch (dialog) {
+					switch (dialogActionId) {
 						case USE_OBJECT:
 							if (var == 7) {
 								return sendQuestDialog(env, 3739);
@@ -103,7 +104,7 @@ public class _2947FollowingThrough extends QuestHandler {
 					}
 					break;
 				case 204089: // Garm
-					switch (dialog) {
+					switch (dialogActionId) {
 						case USE_OBJECT:
 							if (var == 6) {
 								return sendQuestDialog(env, 1779);
@@ -128,13 +129,13 @@ public class _2947FollowingThrough extends QuestHandler {
 					}
 					break;
 				case 700268: // Statue of Urgasch
-					if (var == 9 && dialog == DialogAction.USE_OBJECT) {
+					if (var == 9 && dialogActionId == USE_OBJECT) {
 						return true; // loot
 					}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204301) { // Aegir
-				if (env.getDialog() == DialogAction.USE_OBJECT)
+				if (env.getDialogActionId() == USE_OBJECT)
 					return sendQuestDialog(env, 3739);
 				else
 					return sendQuestEndDialog(env, 1); // not variable anymore (previously you had 3 choices how to finish the quest), so always reward group 1

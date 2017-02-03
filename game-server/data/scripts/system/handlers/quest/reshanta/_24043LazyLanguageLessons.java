@@ -1,7 +1,8 @@
 package quest.reshanta;
 
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.spawns.SpawnSearchResult;
@@ -17,10 +18,8 @@ import com.aionemu.gameserver.utils.MathUtil;
  */
 public class _24043LazyLanguageLessons extends QuestHandler {
 
-	private final static int questId = 24043;
-
 	public _24043LazyLanguageLessons() {
-		super(questId);
+		super(24043);
 	}
 
 	@Override
@@ -39,7 +38,7 @@ public class _24043LazyLanguageLessons extends QuestHandler {
 	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		if (qs == null)
 			return false;
 		int var = qs.getQuestVarById(0);
@@ -48,7 +47,7 @@ public class _24043LazyLanguageLessons extends QuestHandler {
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 278003: // Hisui
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var == 0) {
 								return sendQuestDialog(env, 1011);
@@ -59,7 +58,7 @@ public class _24043LazyLanguageLessons extends QuestHandler {
 					}
 					break;
 				case 278086: // Sinjah
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var == 1) {
 								return sendQuestDialog(env, 1352);
@@ -70,7 +69,7 @@ public class _24043LazyLanguageLessons extends QuestHandler {
 					}
 					break;
 				case 278039: // Grunn
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var == 3) {
 								return sendQuestDialog(env, 2034);
@@ -81,7 +80,7 @@ public class _24043LazyLanguageLessons extends QuestHandler {
 					}
 					break;
 				case 279027: // Kaoranerk
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var == 4) {
 								return sendQuestDialog(env, 2375);
@@ -89,7 +88,7 @@ public class _24043LazyLanguageLessons extends QuestHandler {
 								return sendQuestDialog(env, 3057);
 							}
 							return false;
-						case SELECT_ACTION_3058:
+						case SELECT7_1:
 							removeQuestItem(env, 182215373, 1);
 							playQuestMovie(env, 293);
 							return sendQuestDialog(env, 3058);
@@ -100,7 +99,7 @@ public class _24043LazyLanguageLessons extends QuestHandler {
 					}
 					break;
 				case 204210: // Phosphor
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var == 5) {
 								return sendQuestDialog(env, 2716);
@@ -112,7 +111,7 @@ public class _24043LazyLanguageLessons extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 278003) { // Hisui
-				if (env.getDialog() == DialogAction.USE_OBJECT) {
+				if (env.getDialogActionId() == USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
 				} else {
 					return sendQuestEndDialog(env);

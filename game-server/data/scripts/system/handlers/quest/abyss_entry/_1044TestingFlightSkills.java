@@ -1,6 +1,7 @@
 package quest.abyss_entry;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -42,7 +43,7 @@ public class _1044TestingFlightSkills extends QuestHandler {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		int targetId = env.getTargetId();
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		if (qs == null)
 			return false;
 		int var = qs.getQuestVarById(0);
@@ -50,7 +51,7 @@ public class _1044TestingFlightSkills extends QuestHandler {
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 203901: // Telemachus
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var == 0) {
 								return sendQuestDialog(env, 1011);
@@ -63,7 +64,7 @@ public class _1044TestingFlightSkills extends QuestHandler {
 					}
 					break;
 				case 203930: // Daedalus
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var == 1) {
 								return sendQuestDialog(env, 1352);
@@ -75,7 +76,7 @@ public class _1044TestingFlightSkills extends QuestHandler {
 								return sendQuestDialog(env, 3057);
 							}
 							return false;
-						case SELECT_ACTION_1354:
+						case SELECT2_1_1:
 							if (var == 1 || var == 10) {
 								playQuestMovie(env, 40);
 								return sendQuestDialog(env, 1354);
@@ -103,7 +104,7 @@ public class _1044TestingFlightSkills extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203901) { // Telemachus
-				if (dialog == DialogAction.USE_OBJECT) {
+				if (dialogActionId == USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
 				} else {
 					return sendQuestEndDialog(env);

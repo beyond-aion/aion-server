@@ -1,6 +1,7 @@
 package quest.abyssal_splinter;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
@@ -15,10 +16,8 @@ import com.aionemu.gameserver.services.QuestService;
  */
 public class _30364RemembranceOfSpiritsPast extends QuestHandler {
 
-	private final static int questId = 30364;
-
 	public _30364RemembranceOfSpiritsPast() {
-		super(questId);
+		super(30364);
 	}
 
 	@Override
@@ -32,14 +31,14 @@ public class _30364RemembranceOfSpiritsPast extends QuestHandler {
 	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		int targetId = env.getTargetId();
 		if (qs == null || qs.isStartable()) {
 			return false;
 		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			if (targetId == 204108) { // Lanse
-				switch (dialog) {
+				switch (dialogActionId) {
 					case QUEST_SELECT:
 						if (var == 0) {
 							return sendQuestDialog(env, 1352);
@@ -49,7 +48,7 @@ public class _30364RemembranceOfSpiritsPast extends QuestHandler {
 						return defaultCloseDialog(env, 0, 1); // 1
 				}
 			} else if (targetId == 204058) { // Sif
-				switch (dialog) {
+				switch (dialogActionId) {
 					case QUEST_SELECT:
 						if (var == 1) {
 							return sendQuestDialog(env, 2375);

@@ -1,6 +1,7 @@
 package quest.morheim;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -14,10 +15,8 @@ import com.aionemu.gameserver.services.QuestService;
  */
 public class _2430SecretInformation extends QuestHandler {
 
-	private final static int questId = 2430;
-
 	public _2430SecretInformation() {
-		super(questId);
+		super(2430);
 	}
 
 	@Override
@@ -34,11 +33,11 @@ public class _2430SecretInformation extends QuestHandler {
 		Player player = env.getPlayer();
 		int targetId = env.getTargetId();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 204327) { // Sveinn
-				switch (dialog) {
+				switch (dialogActionId) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 4762);
 					case ASK_QUEST_ACCEPT:
@@ -87,7 +86,7 @@ public class _2430SecretInformation extends QuestHandler {
 			int var = qs.getQuestVarById(0);
 			switch (targetId) {
 				case 204327: // Sveinn
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							switch (var) {
 								case 1: {
@@ -110,7 +109,7 @@ public class _2430SecretInformation extends QuestHandler {
 					}
 					break;
 				case 204377: // Grall
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var == 2) {
 								return sendQuestDialog(env, 1693);
@@ -123,7 +122,7 @@ public class _2430SecretInformation extends QuestHandler {
 					}
 					break;
 				case 205244: // Hugorunerk
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var == 4) {
 								return sendQuestDialog(env, 2375);
@@ -134,7 +133,7 @@ public class _2430SecretInformation extends QuestHandler {
 					}
 					break;
 				case 798081: // Nicoyerk
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var == 5) {
 								return sendQuestDialog(env, 2716);
@@ -145,7 +144,7 @@ public class _2430SecretInformation extends QuestHandler {
 					}
 					break;
 				case 798082: // Bicorunerk
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var == 6) {
 								return sendQuestDialog(env, 3057);
@@ -157,7 +156,7 @@ public class _2430SecretInformation extends QuestHandler {
 					}
 					break;
 				case 204300: // Bolverk
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var == 8) {
 								if (player.getInventory().getItemCountByItemId(182204222) > 0) {

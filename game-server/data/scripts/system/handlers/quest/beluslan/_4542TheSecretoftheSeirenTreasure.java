@@ -1,6 +1,7 @@
 package quest.beluslan;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -10,11 +11,10 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 public class _4542TheSecretoftheSeirenTreasure extends QuestHandler {
 
-	private final static int questId = 4542;
 	private final static int[] npc_ids = { 204768, 204743, 204808 };
 
 	public _4542TheSecretoftheSeirenTreasure() {
-		super(questId);
+		super(4542);
 	}
 
 	@Override
@@ -35,7 +35,7 @@ public class _4542TheSecretoftheSeirenTreasure extends QuestHandler {
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 204768) { // Sleipnir
-				if (env.getDialog() == DialogAction.QUEST_SELECT) {
+				if (env.getDialogActionId() == QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);
 				} else {
 					return sendQuestStartDialog(env, 182215327, 1);
@@ -45,30 +45,30 @@ public class _4542TheSecretoftheSeirenTreasure extends QuestHandler {
 			int var = qs.getQuestVarById(0);
 			switch (targetId) {
 				case 204743: // Rubelik
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case QUEST_SELECT:
 							if (var == 0)
 								return sendQuestDialog(env, 1011);
 							return false;
-						case SELECT_ACTION_1012:
+						case SELECT1_1:
 							return sendQuestDialog(env, 1012);
-						case SELECT_ACTION_1097:
+						case SELECT1_2:
 							return sendQuestDialog(env, 1097);
 						case SETPRO1:
 							return defaultCloseDialog(env, 0, 1); // 1
 					}
 					break;
 				case 204768: // Sleipnir
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case QUEST_SELECT:
 							if (var == 1)
 								return sendQuestDialog(env, 1352);
 							if (var == 5)
 								return sendQuestDialog(env, 2716);
 							return false;
-						case SELECT_ACTION_1353:
+						case SELECT2_1:
 							return sendQuestDialog(env, 1353);
-						case SELECT_ACTION_1438:
+						case SELECT2_2:
 							return sendQuestDialog(env, 1438);
 						case SETPRO2:
 							removeQuestItem(env, 182215327, 1);
@@ -76,7 +76,7 @@ public class _4542TheSecretoftheSeirenTreasure extends QuestHandler {
 						case SELECT_QUEST_REWARD:
 							removeQuestItem(env, 182215330, 1);
 							return defaultCloseDialog(env, 5, 5, true, true); // reward
-						case SELECT_ACTION_2717:
+						case SELECT6_1:
 							return sendQuestDialog(env, 2717);
 						case SETPRO6:
 							changeQuestStep(env, 5, 6, true); // 6
@@ -85,7 +85,7 @@ public class _4542TheSecretoftheSeirenTreasure extends QuestHandler {
 					}
 					break;
 				case 204808: // Esnu
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case QUEST_SELECT:
 							if (var == 2)
 								return sendQuestDialog(env, 1693);
@@ -94,9 +94,9 @@ public class _4542TheSecretoftheSeirenTreasure extends QuestHandler {
 							if (var == 4)
 								return sendQuestDialog(env, 2375);
 							return false;
-						case SELECT_ACTION_1694:
+						case SELECT3_1:
 							return sendQuestDialog(env, 1694);
-						case SELECT_ACTION_1779:
+						case SELECT3_2:
 							return sendQuestDialog(env, 1779);
 						case SETPRO3:
 							removeQuestItem(env, 182215328, 1);
@@ -107,7 +107,7 @@ public class _4542TheSecretoftheSeirenTreasure extends QuestHandler {
 							if (var == 3)
 								defaultCloseDialog(env, 3, 3); // 3
 							return false;
-						case SELECT_ACTION_2376:
+						case SELECT5_1:
 							return sendQuestDialog(env, 2376);
 						case SETPRO5:
 							removeQuestItem(env, 182215329, 1);

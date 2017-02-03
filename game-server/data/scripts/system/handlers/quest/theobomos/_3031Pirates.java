@@ -1,6 +1,7 @@
 package quest.theobomos;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
@@ -17,10 +18,8 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 
 public class _3031Pirates extends QuestHandler {
 
-	private final static int questId = 3031;
-
 	public _3031Pirates() {
-		super(questId);
+		super(3031);
 	}
 
 	@Override
@@ -45,7 +44,7 @@ public class _3031Pirates extends QuestHandler {
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 730144) {
-				switch (env.getDialog()) {
+				switch (env.getDialogActionId()) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 4762);
 					case SETPRO1:
@@ -63,7 +62,7 @@ public class _3031Pirates extends QuestHandler {
 
 		if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 798172) {
-				if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id())
+				if (env.getDialogActionId() == SELECT_QUEST_REWARD)
 					return sendQuestDialog(env, 5);
 				else
 					return sendQuestEndDialog(env);

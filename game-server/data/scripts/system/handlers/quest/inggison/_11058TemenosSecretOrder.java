@@ -1,6 +1,6 @@
 package quest.inggison;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
@@ -15,10 +15,8 @@ import com.aionemu.gameserver.services.QuestService;
  */
 public class _11058TemenosSecretOrder extends QuestHandler {
 
-	private final static int questId = 11058;
-
 	public _11058TemenosSecretOrder() {
-		super(questId);
+		super(11058);
 	}
 
 	@Override
@@ -34,12 +32,12 @@ public class _11058TemenosSecretOrder extends QuestHandler {
 	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 0) {
-				if (dialog == DialogAction.QUEST_ACCEPT_1) {
+				if (dialogActionId == QUEST_ACCEPT_1) {
 					removeQuestItem(env, 182206844, 1);
 					QuestService.startQuest(env);
 					return closeDialogWindow(env);
@@ -47,11 +45,11 @@ public class _11058TemenosSecretOrder extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 799049) {
-				if (dialog == DialogAction.USE_OBJECT) {
+				if (dialogActionId == USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
-				} else if (dialog == DialogAction.SELECT_ACTION_2034) {
+				} else if (dialogActionId == SELECT4) {
 					return sendQuestDialog(env, 2034);
-				} else if (dialog == DialogAction.SELECT_QUEST_REWARD) {
+				} else if (dialogActionId == SELECT_QUEST_REWARD) {
 					if (player.getInventory().getKinah() >= 20000000) {
 						player.getInventory().decreaseKinah(20000000);
 						return sendQuestDialog(env, 5);

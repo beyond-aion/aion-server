@@ -1,6 +1,6 @@
 package quest.gelkmaros;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.actions.NpcActions;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -15,10 +15,8 @@ import com.aionemu.gameserver.services.QuestService;
  */
 public class _21249TheInvincibleStarket extends QuestHandler {
 
-	private final static int questId = 21249;
-
 	public _21249TheInvincibleStarket() {
-		super(questId);
+		super(21249);
 	}
 
 	@Override
@@ -32,32 +30,32 @@ public class _21249TheInvincibleStarket extends QuestHandler {
 	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 799416) {
-				if (dialog == DialogAction.QUEST_SELECT) {
+				if (dialogActionId == QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);
 				} else
 					return sendQuestStartDialog(env);
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 799416) {
-				if (dialog == DialogAction.QUEST_SELECT) {
+				if (dialogActionId == QUEST_SELECT) {
 					if (qs.getQuestVarById(0) == 0)
 						return sendQuestDialog(env, 1011);
-				} else if (dialog == DialogAction.SETPRO1) {
+				} else if (dialogActionId == SETPRO1) {
 					Npc npc = (Npc) env.getVisibleObject();
 					NpcActions.delete(npc, true);
 					QuestService.addNewSpawn(player.getWorldId(), player.getInstanceId(), 799529, player.getX(), player.getY(), player.getZ(), (byte) 0);
 					return defaultCloseDialog(env, 0, 1);
 				}
 			} else if (targetId == 799529) {
-				if (dialog == DialogAction.QUEST_SELECT) {
+				if (dialogActionId == QUEST_SELECT) {
 					if (qs.getQuestVarById(0) == 1)
 						return sendQuestDialog(env, 1352);
-				} else if (dialog == DialogAction.SET_SUCCEED) {
+				} else if (dialogActionId == SET_SUCCEED) {
 					changeQuestStep(env, 0, 1);
 					Npc npc = (Npc) env.getVisibleObject();
 					npc.getController().delete();
@@ -66,7 +64,7 @@ public class _21249TheInvincibleStarket extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 799417) {
-				if (dialog == DialogAction.USE_OBJECT) {
+				if (dialogActionId == USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
 				}
 				return sendQuestEndDialog(env);

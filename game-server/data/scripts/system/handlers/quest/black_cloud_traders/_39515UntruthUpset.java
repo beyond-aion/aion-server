@@ -1,7 +1,8 @@
 package quest.black_cloud_traders;
 
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.commons.utils.Rnd;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -15,11 +16,10 @@ import com.aionemu.gameserver.services.QuestService;
  */
 public class _39515UntruthUpset extends QuestHandler {
 
-	private final static int questId = 39515;
 	private int[] mobs = { 218307, 218309, 218311, 218313, 218315 };
 
 	public _39515UntruthUpset() {
-		super(questId);
+		super(39515);
 	}
 
 	@Override
@@ -36,10 +36,10 @@ public class _39515UntruthUpset extends QuestHandler {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		int targetId = env.getTargetId();
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 
 		if (targetId == 0) {
-			switch (dialog) {
+			switch (dialogActionId) {
 				case QUEST_ACCEPT_1:
 					QuestService.startQuest(env);
 					return closeDialogWindow(env);
@@ -53,7 +53,7 @@ public class _39515UntruthUpset extends QuestHandler {
 
 		if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 701154) {
-				switch (dialog) {
+				switch (dialogActionId) {
 					case USE_OBJECT:
 						return sendQuestDialog(env, 1352);
 					case SETPRO1:
@@ -65,7 +65,7 @@ public class _39515UntruthUpset extends QuestHandler {
 						return defaultCloseDialog(env, 0, 1);
 				}
 			} else if (targetId == 205884) {
-				switch (dialog) {
+				switch (dialogActionId) {
 					case USE_OBJECT:
 						return sendQuestDialog(env, 2375);
 					case SELECT_QUEST_REWARD:
@@ -75,7 +75,7 @@ public class _39515UntruthUpset extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 205884) {
-				if (dialog == DialogAction.USE_OBJECT) {
+				if (dialogActionId == USE_OBJECT) {
 					return sendQuestDialog(env, 2375);
 				} else {
 					return sendQuestEndDialog(env);

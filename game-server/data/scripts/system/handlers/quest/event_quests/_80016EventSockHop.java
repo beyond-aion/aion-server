@@ -1,5 +1,7 @@
 package quest.event_quests;
 
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import java.util.List;
 
 import com.aionemu.commons.utils.Rnd;
@@ -35,7 +37,7 @@ public class _80016EventSockHop extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs == null || qs.isStartable()) {
 			if (env.getTargetId() == 799763) {
-				switch (env.getDialog()) {
+				switch (env.getDialogActionId()) {
 					case USE_OBJECT:
 						return sendQuestDialog(env, 1011);
 					case QUEST_ACCEPT_1:
@@ -52,7 +54,7 @@ public class _80016EventSockHop extends QuestHandler {
 
 		if (qs.getStatus() == QuestStatus.START) {
 			if (env.getTargetId() == 799763) {
-				switch (env.getDialog()) {
+				switch (env.getDialogActionId()) {
 					case USE_OBJECT:
 					case QUEST_SELECT:
 						if (var == 0)

@@ -1,6 +1,7 @@
 package quest.beluslan;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -13,11 +14,10 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _2664AnAntidotetotheLepharists extends QuestHandler {
 
-	private final static int questId = 2664;
 	private final static int[] npc_ids = { 204777, 700324 };
 
 	public _2664AnAntidotetotheLepharists() {
-		super(questId);
+		super(2664);
 	}
 
 	@Override
@@ -36,7 +36,7 @@ public class _2664AnAntidotetotheLepharists extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (targetId == 204777) {
 			if (qs == null || qs.isStartable()) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
+				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 4762);
 				else
 					return sendQuestStartDialog(env);
@@ -48,9 +48,9 @@ public class _2664AnAntidotetotheLepharists extends QuestHandler {
 		int var = qs.getQuestVarById(0);
 		if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204777) {
-				if (env.getDialog() == DialogAction.USE_OBJECT)
+				if (env.getDialogActionId() == USE_OBJECT)
 					return sendQuestDialog(env, 10002);
-				else if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id())
+				else if (env.getDialogActionId() == SELECT_QUEST_REWARD)
 					return sendQuestDialog(env, 5);
 				else
 					return sendQuestEndDialog(env);
@@ -59,7 +59,7 @@ public class _2664AnAntidotetotheLepharists extends QuestHandler {
 			return false;
 		}
 		if (targetId == 700324) {
-			switch (env.getDialog()) {
+			switch (env.getDialogActionId()) {
 				case USE_OBJECT:
 					if (var >= 0 && var < 4) {
 						if (player.getInventory().getItemCountByItemId(182204489) >= 1) {

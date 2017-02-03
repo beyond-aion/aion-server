@@ -1,6 +1,7 @@
 package quest.sanctum;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -16,10 +17,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _3961GrowthFlorasFirstCharm extends QuestHandler {
 
-	private final static int questId = 3961;
-
 	public _3961GrowthFlorasFirstCharm() {
-		super(questId);
+		super(3961);
 	}
 
 	@Override
@@ -40,7 +39,7 @@ public class _3961GrowthFlorasFirstCharm extends QuestHandler {
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 798384) { // Flora
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
+				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 1011);
 				else
 					return sendQuestStartDialog(env, 182206108, 1);
@@ -49,7 +48,7 @@ public class _3961GrowthFlorasFirstCharm extends QuestHandler {
 			int var = qs.getQuestVarById(0);
 			switch (targetId) {
 				case 203740: // Erdos
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case QUEST_SELECT:
 							if (var == 0)
 								return sendQuestDialog(env, 1352);
@@ -59,7 +58,7 @@ public class _3961GrowthFlorasFirstCharm extends QuestHandler {
 					}
 					return false;
 				case 798384: // Flora
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case QUEST_SELECT:
 							if (var == 1) {
 								removeQuestItem(env, 182206108, 1);

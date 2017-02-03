@@ -1,6 +1,6 @@
 package quest.event_quests;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.EmotionId;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -33,7 +33,7 @@ public class _80021EventFestiveUs extends QuestHandler {
 
 		if (qs == null || qs.isStartable()) {
 			if (env.getTargetId() == 799784) {
-				if (env.getDialog() == DialogAction.USE_OBJECT || env.getDialog() == DialogAction.QUEST_SELECT)
+				if (env.getDialogActionId() == USE_OBJECT || env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 1011);
 				else
 					return sendQuestNoneDialog(env, 799784, 182214014, 1);
@@ -45,31 +45,31 @@ public class _80021EventFestiveUs extends QuestHandler {
 
 		if (qs.getStatus() == QuestStatus.START) {
 			if (env.getTargetId() == 799783) {
-				if (env.getDialog() == DialogAction.USE_OBJECT || env.getDialog() == DialogAction.QUEST_SELECT)
+				if (env.getDialogActionId() == USE_OBJECT || env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 1352);
-				else if (env.getDialog() == DialogAction.SETPRO1) {
+				else if (env.getDialogActionId() == SETPRO1) {
 					defaultCloseDialog(env, 0, 1, 182214015, 2, 182214014, 1);
 					return true;
 				} else
 					return sendQuestStartDialog(env);
 			} else if (env.getTargetId() == 203618 && var == 1) {
-				if (env.getDialog() == DialogAction.USE_OBJECT || env.getDialog() == DialogAction.QUEST_SELECT)
+				if (env.getDialogActionId() == USE_OBJECT || env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 1693);
-				else if (env.getDialog() == DialogAction.SELECT_ACTION_1694) {
+				else if (env.getDialogActionId() == SELECT3_1) {
 					sendEmotion(env, (Creature) env.getVisibleObject(), EmotionId.NO, true);
 					return sendQuestDialog(env, 1694);
-				} else if (env.getDialog() == DialogAction.SETPRO2) {
+				} else if (env.getDialogActionId() == SETPRO2) {
 					defaultCloseDialog(env, 1, 2, 0, 0, 182214015, 1);
 					return true;
 				} else
 					return sendQuestStartDialog(env);
 			} else if (env.getTargetId() == 203650 && var == 2) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
+				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 2034);
-				else if (env.getDialog() == DialogAction.SELECT_ACTION_2035) {
+				else if (env.getDialogActionId() == SELECT4_1) {
 					sendEmotion(env, (Creature) env.getVisibleObject(), EmotionId.PANIC, true);
 					return sendQuestDialog(env, 2035);
-				} else if (env.getDialog() == DialogAction.SETPRO3)
+				} else if (env.getDialogActionId() == SETPRO3)
 					return defaultCloseDialog(env, 2, 3, true, false, 0, 0, 0, 182214015, 1);
 				else
 					return sendQuestStartDialog(env);

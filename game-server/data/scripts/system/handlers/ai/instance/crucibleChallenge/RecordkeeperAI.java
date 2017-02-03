@@ -5,7 +5,7 @@ import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.instance.handlers.InstanceHandler;
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.instance.StageType;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
@@ -24,10 +24,10 @@ public class RecordkeeperAI extends NpcAI {
 	}
 
 	@Override
-	public boolean onDialogSelect(Player player, int dialogId, int questId, int extendedRewardIndex) {
+	public boolean onDialogSelect(Player player, int dialogActionId, int questId, int extendedRewardIndex) {
 		int instanceId = getPosition().getInstanceId();
 		InstanceHandler instanceHandler = getPosition().getWorldMapInstance().getInstanceHandler();
-		if (dialogId == DialogAction.SETPRO1.id()) {
+		if (dialogActionId == SETPRO1) {
 			switch (getNpcId()) {
 				case 205668: // start stage 1
 					instanceHandler.onChangeStage(StageType.START_STAGE_1_ROUND_1);

@@ -1,6 +1,6 @@
 package quest.heiron;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -22,10 +22,8 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
  */
 public class _1561TheMisersMap extends QuestHandler {
 
-	private final static int questId = 1561;
-
 	public _1561TheMisersMap() {
-		super(questId);
+		super(1561);
 	}
 
 	@Override
@@ -73,9 +71,9 @@ public class _1561TheMisersMap extends QuestHandler {
 		if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 700188) { // Jewel Box
 				if (var == 0) {
-					if (env.getDialog() == DialogAction.QUEST_SELECT || env.getDialog() == DialogAction.USE_OBJECT) {
+					if (env.getDialogActionId() == QUEST_SELECT || env.getDialogActionId() == USE_OBJECT) {
 						return sendQuestDialog(env, 2375);
-					} else if (env.getDialog() == DialogAction.SELECT_QUEST_REWARD) {
+					} else if (env.getDialogActionId() == SELECT_QUEST_REWARD) {
 						return defaultCloseDialog(env, 0, 0, true, true);
 					}
 				}

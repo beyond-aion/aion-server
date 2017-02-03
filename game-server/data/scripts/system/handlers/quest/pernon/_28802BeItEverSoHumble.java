@@ -1,6 +1,7 @@
 package quest.pernon;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -13,10 +14,8 @@ import com.aionemu.gameserver.services.HousingService;
  */
 public class _28802BeItEverSoHumble extends QuestHandler {
 
-	private static final int questId = 28802;
-
 	public _28802BeItEverSoHumble() {
-		super(questId);
+		super(28802);
 	}
 
 	@Override
@@ -30,12 +29,12 @@ public class _28802BeItEverSoHumble extends QuestHandler {
 	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 830102) {
-				switch (dialog) {
+				switch (dialogActionId) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 1011);
 					case QUEST_ACCEPT_1:
@@ -46,7 +45,7 @@ public class _28802BeItEverSoHumble extends QuestHandler {
 		} else if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 830153:
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT: {
 							return sendQuestDialog(env, 2375);
 						}
@@ -58,7 +57,7 @@ public class _28802BeItEverSoHumble extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 830153) {
-				if (dialog.equals(DialogAction.SELECTED_QUEST_NOREWARD)) {
+				if (dialogActionId == SELECTED_QUEST_NOREWARD) {
 					HousingService.getInstance().registerPlayerStudio(player);
 				}
 				return sendQuestEndDialog(env);

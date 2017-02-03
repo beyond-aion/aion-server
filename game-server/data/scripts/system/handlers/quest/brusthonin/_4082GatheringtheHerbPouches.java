@@ -1,6 +1,6 @@
 package quest.brusthonin;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -19,10 +19,8 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
  */
 public class _4082GatheringtheHerbPouches extends QuestHandler {
 
-	private final static int questId = 4082;
-
 	public _4082GatheringtheHerbPouches() {
-		super(questId);
+		super(4082);
 	}
 
 	@Override
@@ -68,9 +66,9 @@ public class _4082GatheringtheHerbPouches extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (targetId == 205190) {
 			if (qs == null || qs.isStartable()) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
+				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 1011);
-				else if (env.getDialogId() == DialogAction.QUEST_ACCEPT_1.id()) {
+				else if (env.getDialogActionId() == QUEST_ACCEPT_1) {
 					if (giveQuestItem(env, 182209058, 1))
 						return sendQuestStartDialog(env);
 					return true;
@@ -79,9 +77,9 @@ public class _4082GatheringtheHerbPouches extends QuestHandler {
 			}
 
 			if (qs != null && qs.getStatus() == QuestStatus.START) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
+				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 2375);
-				else if (env.getDialogId() == DialogAction.CHECK_USER_HAS_QUEST_ITEM.id()) {
+				else if (env.getDialogActionId() == CHECK_USER_HAS_QUEST_ITEM) {
 					if (QuestService.collectItemCheck(env, true)) {
 						removeQuestItem(env, 182209058, 1);
 						qs.setStatus(QuestStatus.REWARD);
@@ -102,7 +100,7 @@ public class _4082GatheringtheHerbPouches extends QuestHandler {
 				case 700430:
 				case 700431:
 				case 700432:
-					if (qs.getQuestVarById(0) == 0 && env.getDialog() == DialogAction.USE_OBJECT)
+					if (qs.getQuestVarById(0) == 0 && env.getDialogActionId() == USE_OBJECT)
 						return true;
 			}
 		}

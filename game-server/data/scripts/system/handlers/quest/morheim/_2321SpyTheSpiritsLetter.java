@@ -1,6 +1,6 @@
 package quest.morheim;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -20,10 +20,8 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
  */
 public class _2321SpyTheSpiritsLetter extends QuestHandler {
 
-	private final static int questId = 2321;
-
 	public _2321SpyTheSpiritsLetter() {
-		super(questId);
+		super(2321);
 	}
 
 	@Override
@@ -42,7 +40,7 @@ public class _2321SpyTheSpiritsLetter extends QuestHandler {
 		if (env.getVisibleObject() instanceof Npc)
 			targetId = ((Npc) env.getVisibleObject()).getNpcId();
 		if (qs == null || qs.isStartable()) {
-			if (env.getDialogId() == DialogAction.QUEST_ACCEPT_1.id()) {
+			if (env.getDialogActionId() == QUEST_ACCEPT_1) {
 				QuestService.startQuest(env);
 				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(0, 0));
 				return true;
@@ -50,9 +48,9 @@ public class _2321SpyTheSpiritsLetter extends QuestHandler {
 		} else if (qs != null && qs.getStatus() == QuestStatus.START) {
 			if (targetId == 204225) {
 				if (qs != null) {
-					if (env.getDialog() == DialogAction.QUEST_SELECT)
+					if (env.getDialogActionId() == QUEST_SELECT)
 						return sendQuestDialog(env, 1352);
-					else if (env.getDialog() == DialogAction.SETPRO1) {
+					else if (env.getDialogActionId() == SETPRO1) {
 						qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
 						updateQuestStatus(env);
 						removeQuestItem(env, 182204242, 1);
@@ -63,9 +61,9 @@ public class _2321SpyTheSpiritsLetter extends QuestHandler {
 				}
 			} else if (targetId == 790018) {
 				if (qs != null) {
-					if (env.getDialog() == DialogAction.QUEST_SELECT && qs.getStatus() == QuestStatus.START) {
+					if (env.getDialogActionId() == QUEST_SELECT && qs.getStatus() == QuestStatus.START) {
 						return sendQuestDialog(env, 2375);
-					} else if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id()) {
+					} else if (env.getDialogActionId() == SELECT_QUEST_REWARD) {
 						qs.setQuestVar(1);
 						qs.setStatus(QuestStatus.REWARD);
 						updateQuestStatus(env);

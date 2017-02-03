@@ -1,6 +1,7 @@
 package quest.miragent_holy_templar;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -17,10 +18,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _3939PersistenceAndLuck extends QuestHandler {
 
-	private final static int questId = 3939;
-
 	public _3939PersistenceAndLuck() {
-		super(questId);
+		super(3939);
 	}
 
 	@Override
@@ -37,11 +36,11 @@ public class _3939PersistenceAndLuck extends QuestHandler {
 		Player player = env.getPlayer();
 		int targetId = env.getTargetId();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 203701) { // Lavirintos
-				if (dialog == DialogAction.QUEST_SELECT)
+				if (dialogActionId == QUEST_SELECT)
 					return sendQuestDialog(env, 4762);
 				else
 					return sendQuestStartDialog(env);
@@ -56,7 +55,7 @@ public class _3939PersistenceAndLuck extends QuestHandler {
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 203780: // Cornelius
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var == 0)
 								return sendQuestDialog(env, 1011);
@@ -72,12 +71,12 @@ public class _3939PersistenceAndLuck extends QuestHandler {
 					}
 					break;
 				case 203781: // Sabotes
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var == 1)
 								return sendQuestDialog(env, 1352);
 							return false;
-						case SELECT_ACTION_1354:
+						case SELECT2_1_1:
 							if (var == 1 && player.getInventory().tryDecreaseKinah(3400000)) {
 								return defaultCloseDialog(env, 1, 2, 122001274, 1, 0, 0); // 2
 							} else {
@@ -88,12 +87,12 @@ public class _3939PersistenceAndLuck extends QuestHandler {
 					}
 					break;
 				case 700537:
-					if (dialog == DialogAction.USE_OBJECT && var == 2) {
+					if (dialogActionId == USE_OBJECT && var == 2) {
 						return useQuestObject(env, 2, 2, false, 0);
 					}
 					break;
 				case 203752: // Jucleas
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var == 3) {
 								return sendQuestDialog(env, 2034);
@@ -116,7 +115,7 @@ public class _3939PersistenceAndLuck extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203701) { // Lavirintos
-				if (dialog == DialogAction.QUEST_SELECT)
+				if (dialogActionId == QUEST_SELECT)
 					return sendQuestDialog(env, 10002);
 				else
 					return sendQuestEndDialog(env);

@@ -1,6 +1,6 @@
 package quest.heiron;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -13,10 +13,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _1661FindingTheForges extends QuestHandler {
 
-	private final static int questId = 1661;
-
 	public _1661FindingTheForges() {
-		super(questId);
+		super(1661);
 	}
 
 	@Override
@@ -35,13 +33,13 @@ public class _1661FindingTheForges extends QuestHandler {
 		if (env.getVisibleObject() instanceof Npc)
 			targetId = ((Npc) env.getVisibleObject()).getNpcId();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 204600) {
-				if (dialog == DialogAction.QUEST_SELECT) {
+				if (dialogActionId == QUEST_SELECT) {
 					return sendQuestDialog(env, 1011);
-				} else if (dialog == DialogAction.QUEST_ACCEPT_1) {
+				} else if (dialogActionId == QUEST_ACCEPT_1) {
 					playQuestMovie(env, 200);
 					return sendQuestStartDialog(env);
 				} else
@@ -49,7 +47,7 @@ public class _1661FindingTheForges extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204600) {
-				if (dialog == DialogAction.QUEST_SELECT) {
+				if (dialogActionId == QUEST_SELECT) {
 					return sendQuestDialog(env, 1352);
 				} else
 					return sendQuestEndDialog(env);

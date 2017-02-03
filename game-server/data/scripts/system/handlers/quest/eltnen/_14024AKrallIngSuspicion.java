@@ -1,5 +1,7 @@
 package quest.eltnen;
 
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
@@ -58,7 +60,7 @@ public class _14024AKrallIngSuspicion extends QuestHandler {
 			return false;
 		}
 		if (targetId == 203904) {
-			switch (env.getDialog()) {
+			switch (env.getDialogActionId()) {
 				case QUEST_SELECT:
 					if (var == 0)
 						return sendQuestDialog(env, 1011);
@@ -69,12 +71,12 @@ public class _14024AKrallIngSuspicion extends QuestHandler {
 					}
 			}
 		} else if (targetId == 204045) {
-			switch (env.getDialog()) {
+			switch (env.getDialogActionId()) {
 				case QUEST_SELECT:
 					if (var == 1)
 						return sendQuestDialog(env, 1352);
 					return false;
-				case SELECT_ACTION_1354:
+				case SELECT2_1_1:
 					if (var == 1)
 						playQuestMovie(env, 32);
 					break;
@@ -88,7 +90,7 @@ public class _14024AKrallIngSuspicion extends QuestHandler {
 					return false;
 			}
 		} else if (targetId == 204003) {
-			switch (env.getDialog()) {
+			switch (env.getDialogActionId()) {
 				case QUEST_SELECT:
 					if (var == 2)
 						return sendQuestDialog(env, 1693);
@@ -115,7 +117,7 @@ public class _14024AKrallIngSuspicion extends QuestHandler {
 					return false;
 			}
 		} else if (targetId == 204004) {
-			switch (env.getDialog()) {
+			switch (env.getDialogActionId()) {
 				case QUEST_SELECT:
 					if (var == 2)
 						return sendQuestDialog(env, 2034);

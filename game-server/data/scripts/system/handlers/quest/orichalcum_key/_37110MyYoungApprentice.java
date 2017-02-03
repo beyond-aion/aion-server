@@ -3,7 +3,7 @@ package quest.orichalcum_key;
 import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE.STR_MSG_DailyQuest_Ask_Mentee;
 
 import com.aionemu.gameserver.configs.main.GroupConfig;
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.actions.NpcActions;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -21,10 +21,8 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 public class _37110MyYoungApprentice extends QuestHandler {
 
-	private final static int questId = 37110;
-
 	public _37110MyYoungApprentice() {
-		super(questId);
+		super(37110);
 	}
 
 	@Override
@@ -43,12 +41,12 @@ public class _37110MyYoungApprentice extends QuestHandler {
 	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 0) {
-				if (dialog == DialogAction.QUEST_ACCEPT_1) {
+				if (dialogActionId == QUEST_ACCEPT_1) {
 					QuestService.startQuest(env);
 					return closeDialogWindow(env);
 				}
@@ -71,17 +69,17 @@ public class _37110MyYoungApprentice extends QuestHandler {
 				}
 			}
 			if (targetId == 799906) {
-				if (dialog == DialogAction.QUEST_SELECT) {
+				if (dialogActionId == QUEST_SELECT) {
 					if (qs.getQuestVarById(0) == 5) {
 						return sendQuestDialog(env, 1352);
 					}
-				} else if (dialog == DialogAction.SELECT_QUEST_REWARD) {
+				} else if (dialogActionId == SELECT_QUEST_REWARD) {
 					return defaultCloseDialog(env, 5, 5, true, true);
 				}
 			}
 		} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 799906) {
-				if (dialog == DialogAction.USE_OBJECT) {
+				if (dialogActionId == USE_OBJECT) {
 					return sendQuestDialog(env, 5);
 				} else {
 					return sendQuestEndDialog(env);

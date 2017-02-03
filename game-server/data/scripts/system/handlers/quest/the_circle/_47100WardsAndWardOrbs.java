@@ -3,7 +3,7 @@ package quest.the_circle;
 import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE.STR_MSG_DailyQuest_Ask_Mentee;
 
 import com.aionemu.gameserver.configs.main.GroupConfig;
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.team.group.PlayerGroup;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -19,10 +19,8 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 public class _47100WardsAndWardOrbs extends QuestHandler {
 
-	private final static int questId = 47100;
-
 	public _47100WardsAndWardOrbs() {
-		super(questId);
+		super(47100);
 	}
 
 	@Override
@@ -36,12 +34,12 @@ public class _47100WardsAndWardOrbs extends QuestHandler {
 	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 0) {
-				if (dialog == DialogAction.QUEST_ACCEPT_1) {
+				if (dialogActionId == QUEST_ACCEPT_1) {
 					QuestService.startQuest(env);
 					return closeDialogWindow(env);
 				}
@@ -61,17 +59,17 @@ public class _47100WardsAndWardOrbs extends QuestHandler {
 				}
 			}
 			if (targetId == 799881) {
-				if (dialog == DialogAction.QUEST_SELECT) {
+				if (dialogActionId == QUEST_SELECT) {
 					if (qs.getQuestVarById(0) == 0) {
 						return sendQuestDialog(env, 2375);
 					}
-				} else if (dialog == DialogAction.CHECK_USER_HAS_QUEST_ITEM) {
+				} else if (dialogActionId == CHECK_USER_HAS_QUEST_ITEM) {
 					return checkQuestItems(env, 0, 1, true, 5, 2716);
 				}
 			}
 		} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 799881) {
-				if (dialog == DialogAction.USE_OBJECT) {
+				if (dialogActionId == USE_OBJECT) {
 					return sendQuestDialog(env, 5);
 				} else {
 					return sendQuestEndDialog(env);

@@ -1,7 +1,8 @@
 package quest.gelkmaros;
 
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -120,12 +121,12 @@ public class _20034RescuetheReians extends QuestHandler {
 		int var = qs.getQuestVarById(0);
 		// int var1 = qs.getQuestVarById(1);
 		int targetId = env.getTargetId();
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 
 		Npc npc = (Npc) player.getTarget();
 		if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 799295) { // Ortiz
-				if (dialog == DialogAction.USE_OBJECT) {
+				if (dialogActionId == USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
 				}
 				return sendQuestEndDialog(env);
@@ -135,7 +136,7 @@ public class _20034RescuetheReians extends QuestHandler {
 			return false;
 		}
 		if (targetId == 799297) { // Fjoelnir
-			switch (dialog) {
+			switch (dialogActionId) {
 				case QUEST_SELECT:
 					if (var == 0) {
 						return sendQuestDialog(env, 1011);
@@ -147,7 +148,7 @@ public class _20034RescuetheReians extends QuestHandler {
 
 			}
 		} else if (targetId == 799295) { // Ortiz
-			switch (dialog) {
+			switch (dialogActionId) {
 				case QUEST_SELECT:
 					if (var == 1) {
 						return sendQuestDialog(env, 1352);
@@ -159,7 +160,7 @@ public class _20034RescuetheReians extends QuestHandler {
 					return defaultCloseDialog(env, 1, 2); // 2
 			}
 		} else if (targetId == 730243) { // Destroyed Gargoyle
-			switch (dialog) {
+			switch (dialogActionId) {
 				case USE_OBJECT:
 					if (var == 2) {
 						return sendQuestDialog(env, 1693);
@@ -176,7 +177,7 @@ public class _20034RescuetheReians extends QuestHandler {
 					}
 			}
 		} else if (targetId == 799513 || targetId == 799514 || targetId == 799515 || targetId == 799516) {
-			switch (dialog) {
+			switch (dialogActionId) {
 				case QUEST_SELECT:
 					if (var == 3) {
 						int var1 = qs.getQuestVarById(1);
@@ -210,7 +211,7 @@ public class _20034RescuetheReians extends QuestHandler {
 			}
 			return sendQuestSelectionDialog(env);
 		} else if (targetId == 799341) { // Anilmo
-			switch (dialog) {
+			switch (dialogActionId) {
 				case QUEST_SELECT:
 					if (var == 5) {
 						return sendQuestDialog(env, 2716);

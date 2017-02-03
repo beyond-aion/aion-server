@@ -10,7 +10,6 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
-import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.utils.Rnd;
@@ -97,9 +96,6 @@ public abstract class EffectTemplate {
 
 	@XmlTransient
 	protected EffectType effectType = null;
-
-	@XmlTransient
-	protected Logger log = LoggerFactory.getLogger(this.getClass());
 
 	/**
 	 * @return the value
@@ -651,7 +647,7 @@ public abstract class EffectTemplate {
 		try {
 			toReturn = StatEnum.valueOf(statEnum.toString() + "_PENETRATION");
 		} catch (Exception e) {
-			log.info("[WARN]missing statenum penetration for " + statEnum.toString());
+			LoggerFactory.getLogger(EffectTemplate.class).warn("Missing statenum penetration for " + statEnum.toString());
 		}
 		return toReturn;
 	}

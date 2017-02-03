@@ -1,6 +1,7 @@
 package quest.crafting;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -17,12 +18,11 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 public class _29057MasterConstructorsPotential extends QuestHandler {
 
-	private final static int questId = 29057;
 	private final static int[] recipesItemIds = { 152208541, 152208542 };
 	private final static int[] recipesIds = { 155008541, 155008542 };
 
 	public _29057MasterConstructorsPotential() {
-		super(questId);
+		super(29057);
 	}
 
 	@Override
@@ -36,16 +36,16 @@ public class _29057MasterConstructorsPotential extends QuestHandler {
 	public boolean onDialogEvent(QuestEnv env) {
 		final Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		int targetId = env.getTargetId();
 
-		if (dialog == DialogAction.QUEST_SELECT && !CraftSkillUpdateService.getInstance().canLearnMoreMasterCraftingSkill(player)) {
+		if (dialogActionId == QUEST_SELECT && !CraftSkillUpdateService.getInstance().canLearnMoreMasterCraftingSkill(player)) {
 			return sendQuestSelectionDialog(env);
 		}
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 798452) {
-				if (dialog == DialogAction.QUEST_SELECT)
+				if (dialogActionId == QUEST_SELECT)
 					return sendQuestDialog(env, 4762);
 				else
 					return sendQuestStartDialog(env);
@@ -55,7 +55,7 @@ public class _29057MasterConstructorsPotential extends QuestHandler {
 			switch (targetId) {
 				case 798453:
 					long kinah = player.getInventory().getKinah();
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							switch (var) {
 								case 0:
@@ -90,7 +90,7 @@ public class _29057MasterConstructorsPotential extends QuestHandler {
 					}
 					return false;
 				case 798452:
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							return sendQuestDialog(env, 1352);
 						case CHECK_USER_HAS_QUEST_ITEM:

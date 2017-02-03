@@ -1,6 +1,7 @@
 package quest.abyss_entry;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -49,7 +50,7 @@ public class _1922DeliveronYourPromises extends QuestHandler {
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 203830: // Fuchsia
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case QUEST_SELECT:
 							if (var == 0) {
 								return sendQuestDialog(env, 1011);
@@ -62,7 +63,7 @@ public class _1922DeliveronYourPromises extends QuestHandler {
 					}
 					break;
 				case 203901: // Telemachus
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case USE_OBJECT:
 							if (var == 7)
 								return sendQuestDialog(env, 3739);
@@ -78,7 +79,7 @@ public class _1922DeliveronYourPromises extends QuestHandler {
 					}
 					break;
 				case 203764: // Epeios
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case USE_OBJECT:
 							if (var == 6) {
 								return sendQuestDialog(env, 1779);
@@ -108,9 +109,9 @@ public class _1922DeliveronYourPromises extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203901) { // Telemachus
-				if (env.getDialog() == DialogAction.USE_OBJECT)
+				if (env.getDialogActionId() == USE_OBJECT)
 					return sendQuestDialog(env, 3739);
-				else if (env.getDialog() == DialogAction.SELECT_QUEST_REWARD)
+				else if (env.getDialogActionId() == SELECT_QUEST_REWARD)
 					return sendQuestDialog(env, 6);
 				else
 					return sendQuestEndDialog(env, 1); // always reward group 1 since other choices than arena are not available anymore

@@ -1,7 +1,7 @@
 package ai.worlds;
 
 import com.aionemu.gameserver.ai.AIName;
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.questEngine.QuestEngine;
@@ -36,19 +36,19 @@ public class WorldBlesserAI extends GeneralNpcAI {
 	}
 
 	@Override
-	public boolean onDialogSelect(Player player, int dialogId, int questId, int extendedRewardIndex) {
-		QuestEnv env = new QuestEnv(getOwner(), player, questId, dialogId);
+	public boolean onDialogSelect(Player player, int dialogActionId, int questId, int extendedRewardIndex) {
+		QuestEnv env = new QuestEnv(getOwner(), player, questId, dialogActionId);
 		env.setExtendedRewardIndex(extendedRewardIndex);
-		if (QuestEngine.getInstance().onDialog(env) && dialogId != DialogAction.SETPRO1.id()) {
+		if (QuestEngine.getInstance().onDialog(env) && dialogActionId != SETPRO1) {
 			return true;
 		}
-		if (dialogId == DialogAction.SETPRO1.id()) {
+		if (dialogActionId == SETPRO1) {
 			// int chance = Rnd.get(1, 2);
 			// 951: Blessing of Health I, 955: Blessing of Rock I : 3.9
 			// 20950 : Blessing of Growth : 4.0
 			SkillEngine.getInstance().getSkill(getOwner(), 20950, 1, player).useWithoutPropSkill();
-		} else if (dialogId == DialogAction.QUEST_SELECT.id() && questId != 0) {
-			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), dialogId, questId));
+		} else if (dialogActionId == QUEST_SELECT && questId != 0) {
+			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 10, questId));
 		}
 		return true;
 	}

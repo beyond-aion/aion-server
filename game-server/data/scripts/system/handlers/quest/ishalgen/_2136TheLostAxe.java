@@ -1,6 +1,7 @@
 package quest.ishalgen;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -21,11 +22,10 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
  */
 public class _2136TheLostAxe extends QuestHandler {
 
-	private final static int questId = 2136;
 	private final static int[] npc_ids = { 700146, 790009 };
 
 	public _2136TheLostAxe() {
-		super(questId);
+		super(2136);
 	}
 
 	@Override
@@ -44,7 +44,7 @@ public class _2136TheLostAxe extends QuestHandler {
 			targetId = ((Npc) env.getVisibleObject()).getNpcId();
 
 		if (qs == null || qs.isStartable()) {
-			if (env.getDialogId() == DialogAction.QUEST_ACCEPT_1.id()) {
+			if (env.getDialogActionId() == QUEST_ACCEPT_1) {
 				QuestService.startQuest(env);
 				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(0, 0));
 				return true;
@@ -73,7 +73,7 @@ public class _2136TheLostAxe extends QuestHandler {
 			return false;
 
 		if (targetId == 790009) {
-			switch (env.getDialog()) {
+			switch (env.getDialogActionId()) {
 				case QUEST_SELECT:
 					if (var == 1)
 						return sendQuestDialog(env, 1011);
@@ -97,7 +97,7 @@ public class _2136TheLostAxe extends QuestHandler {
 					}
 			}
 		} else if (targetId == 700146) {
-			switch (env.getDialog()) {
+			switch (env.getDialogActionId()) {
 				case USE_OBJECT:
 					if (var == 0) {
 						playQuestMovie(env, 59);

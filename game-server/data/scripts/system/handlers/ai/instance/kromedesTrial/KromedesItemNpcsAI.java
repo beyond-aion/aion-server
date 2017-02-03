@@ -1,6 +1,8 @@
 package ai.instance.kromedesTrial;
 
 import com.aionemu.gameserver.ai.AIName;
+import static com.aionemu.gameserver.model.DialogAction.*;
+import com.aionemu.gameserver.model.DialogPage;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
@@ -16,8 +18,8 @@ import ai.ActionItemNpcAI;
 public class KromedesItemNpcsAI extends ActionItemNpcAI {
 
 	@Override
-	public boolean onDialogSelect(final Player player, int dialogId, int questId, int extendedRewardIndex) {
-		if (dialogId == 1012) {
+	public boolean onDialogSelect(Player player, int dialogActionId, int questId, int extendedRewardIndex) {
+		if (dialogActionId == SELECT1_1) {
 			switch (getNpcId()) {
 				case 730325:
 					if (player.getInventory().getItemCountByItemId(164000142) < 1) {
@@ -26,7 +28,7 @@ public class KromedesItemNpcsAI extends ActionItemNpcAI {
 																																									// now not needed!
 						ItemService.addItem(player, 164000142, 1);
 					} else
-						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 27));
+						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), DialogPage.NO_RIGHT.id()));
 					break;
 				case 730340:
 					if (player.getInventory().getItemCountByItemId(164000140) < 1) {
@@ -35,7 +37,7 @@ public class KromedesItemNpcsAI extends ActionItemNpcAI {
 																																									// now not needed!
 						ItemService.addItem(player, 164000140, 1);
 					} else
-						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 27));
+						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), DialogPage.NO_RIGHT.id()));
 					break;
 				case 730341:
 					if (player.getInventory().getItemCountByItemId(164000143) < 1) {
@@ -44,7 +46,7 @@ public class KromedesItemNpcsAI extends ActionItemNpcAI {
 																																									// now not needed!
 						ItemService.addItem(player, 164000143, 1);
 					} else
-						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 27));
+						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), DialogPage.NO_RIGHT.id()));
 					break;
 			}
 		}

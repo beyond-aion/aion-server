@@ -1,7 +1,8 @@
 package quest.beluslan;
 
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.ai.event.AIEventType;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -19,11 +20,10 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 public class _2634TheDraupnirRedemption extends QuestHandler {
 
-	private final static int questId = 2634;
 	private final static int[] npcs = { 204828, 700350, 204830 };
 
 	public _2634TheDraupnirRedemption() {
-		super(questId);
+		super(2634);
 	}
 
 	@Override
@@ -48,7 +48,7 @@ public class _2634TheDraupnirRedemption extends QuestHandler {
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 204828) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
+				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 4762);
 				else
 					return sendQuestStartDialog(env);
@@ -56,7 +56,7 @@ public class _2634TheDraupnirRedemption extends QuestHandler {
 		} else if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 700350:
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case USE_OBJECT: {
 							if (qs.getQuestVarById(0) == 0)
 								return sendQuestDialog(env, 1011);
@@ -76,7 +76,7 @@ public class _2634TheDraupnirRedemption extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204828) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
+				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 10002);
 				else
 					return sendQuestEndDialog(env);

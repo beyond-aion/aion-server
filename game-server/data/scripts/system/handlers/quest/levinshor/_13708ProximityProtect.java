@@ -1,6 +1,7 @@
 package quest.levinshor;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
@@ -15,12 +16,11 @@ import com.aionemu.gameserver.world.zone.ZoneName;
  */
 public class _13708ProximityProtect extends QuestHandler {
 
-	private static final int questId = 13708;
 	private static final int npcId = 802332; // Feleus
 	private static final int itemId = 182215529;
 
 	public _13708ProximityProtect() {
-		super(questId);
+		super(13708);
 	}
 
 	@Override
@@ -34,12 +34,12 @@ public class _13708ProximityProtect extends QuestHandler {
 	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == npcId) {
-				if (dialog == DialogAction.QUEST_SELECT) {
+				if (dialogActionId == QUEST_SELECT) {
 					return sendQuestDialog(env, 1011);
 				} else {
 					return sendQuestStartDialog(env, itemId, 1);
@@ -48,7 +48,7 @@ public class _13708ProximityProtect extends QuestHandler {
 		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			if (targetId == npcId) {
-				switch (dialog) {
+				switch (dialogActionId) {
 					case QUEST_SELECT:
 						if (var == 1) {
 							return sendQuestDialog(env, 2375);

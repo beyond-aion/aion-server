@@ -1,6 +1,7 @@
 package quest.heiron;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
@@ -16,10 +17,8 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 
 public class _1691TheLittleLeatherSlipper extends QuestHandler {
 
-	private final static int questId = 1691;
-
 	public _1691TheLittleLeatherSlipper() {
-		super(questId);
+		super(1691);
 	}
 
 	@Override
@@ -41,7 +40,7 @@ public class _1691TheLittleLeatherSlipper extends QuestHandler {
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 798386) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT) {
+				if (env.getDialogActionId() == QUEST_SELECT) {
 					return sendQuestDialog(env, 1011);
 				} else
 					return sendQuestStartDialog(env);
@@ -53,7 +52,7 @@ public class _1691TheLittleLeatherSlipper extends QuestHandler {
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 790005:
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case QUEST_SELECT: {
 							if (qs.getQuestVarById(0) == 0) {
 								return sendQuestDialog(env, 1352);
@@ -69,7 +68,7 @@ public class _1691TheLittleLeatherSlipper extends QuestHandler {
 					}
 					return false;
 				case 798386:
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case QUEST_SELECT: {
 							if (qs.getQuestVarById(0) == 1) {
 								return sendQuestDialog(env, 1693);
@@ -85,7 +84,7 @@ public class _1691TheLittleLeatherSlipper extends QuestHandler {
 					}
 					return false;
 				case 700563:
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case USE_OBJECT: {
 							if (qs.getQuestVarById(0) == 2) {
 								return sendQuestDialog(env, 2034);
@@ -103,7 +102,7 @@ public class _1691TheLittleLeatherSlipper extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 798386) {
-				if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id())
+				if (env.getDialogActionId() == SELECT_QUEST_REWARD)
 					return sendQuestDialog(env, 5);
 				else
 					return sendQuestEndDialog(env);

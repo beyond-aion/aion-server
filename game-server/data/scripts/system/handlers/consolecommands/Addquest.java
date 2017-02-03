@@ -61,7 +61,7 @@ public class Addquest extends ConsoleCommand {
 			return;
 		}
 
-		QuestEnv env = new QuestEnv(null, player, id, 0);
+		QuestEnv env = new QuestEnv(null, player, id);
 
 		if (QuestService.startQuest(env)) {
 			PacketSendUtility.sendMessage(admin, "Quest started.");

@@ -1,10 +1,11 @@
 package quest.pernon;
 
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.house.House;
@@ -19,7 +20,6 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _28828TheManyFacetsOfFriendship extends QuestHandler {
 
-	private static final int questId = 28828;
 	private static final Set<Integer> butlers;
 
 	static {
@@ -32,7 +32,7 @@ public class _28828TheManyFacetsOfFriendship extends QuestHandler {
 	}
 
 	public _28828TheManyFacetsOfFriendship() {
-		super(questId);
+		super(28828);
 	}
 
 	@Override
@@ -58,11 +58,11 @@ public class _28828TheManyFacetsOfFriendship extends QuestHandler {
 		if (house == null || house.getButler() == null || house.getButler().getNpcId() != targetId)
 			return false;
 
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 
 		if (qs == null || qs.isStartable()) {
-			switch (dialog) {
+			switch (dialogActionId) {
 				case QUEST_SELECT:
 					return sendQuestDialog(env, 1011);
 				case QUEST_ACCEPT_1:
@@ -70,7 +70,7 @@ public class _28828TheManyFacetsOfFriendship extends QuestHandler {
 					return sendQuestStartDialog(env, 182213205, 1);
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
-			switch (dialog) {
+			switch (dialogActionId) {
 				case USE_OBJECT:
 					return sendQuestDialog(env, 2375);
 				case SELECT_QUEST_REWARD:

@@ -1,6 +1,6 @@
 package quest.brusthonin;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -18,10 +18,8 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 public class _4042MessageinaBottle extends QuestHandler {
 
-	private final static int questId = 4042;
-
 	public _4042MessageinaBottle() {
-		super(questId);
+		super(4042);
 	}
 
 	@Override
@@ -43,7 +41,7 @@ public class _4042MessageinaBottle extends QuestHandler {
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 0) {
-				if (env.getDialog() == DialogAction.QUEST_ACCEPT_1) {
+				if (env.getDialogActionId() == QUEST_ACCEPT_1) {
 					QuestService.startQuest(env);
 					return closeDialogWindow(env);
 				}
@@ -55,9 +53,9 @@ public class _4042MessageinaBottle extends QuestHandler {
 		switch (targetId) {
 			case 205192:
 				if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 0) {
-					if (env.getDialog() == DialogAction.QUEST_SELECT)
+					if (env.getDialogActionId() == QUEST_SELECT)
 						return sendQuestDialog(env, 1352);
-					else if (env.getDialog() == DialogAction.SETPRO1) {
+					else if (env.getDialogActionId() == SETPRO1) {
 						if (!giveQuestItem(env, 182209025, 1))
 							return true;
 						removeQuestItem(env, 182209024, 1);
@@ -68,9 +66,9 @@ public class _4042MessageinaBottle extends QuestHandler {
 					} else
 						return sendQuestStartDialog(env);
 				} else if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 2) {
-					if (env.getDialog() == DialogAction.QUEST_SELECT)
+					if (env.getDialogActionId() == QUEST_SELECT)
 						return sendQuestDialog(env, 2375);
-					else if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id()) {
+					else if (env.getDialogActionId() == SELECT_QUEST_REWARD) {
 						qs.setStatus(QuestStatus.REWARD);
 						updateQuestStatus(env);
 						return sendQuestDialog(env, 5);
@@ -84,9 +82,9 @@ public class _4042MessageinaBottle extends QuestHandler {
 				return false;
 			case 204225:
 				if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 1) {
-					if (env.getDialog() == DialogAction.QUEST_SELECT)
+					if (env.getDialogActionId() == QUEST_SELECT)
 						return sendQuestDialog(env, 1693);
-					else if (env.getDialog() == DialogAction.SETPRO2) {
+					else if (env.getDialogActionId() == SETPRO2) {
 						removeQuestItem(env, 182209025, 1);
 						qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
 						updateQuestStatus(env);

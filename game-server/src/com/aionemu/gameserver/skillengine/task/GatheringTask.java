@@ -120,7 +120,6 @@ public class GatheringTask extends AbstractCraftTask {
 
 		int speed = 900 - (skillLvlDiff * 30);
 		executionSpeed = speed < 300 ? 300 : speed;
-		int showDelay = 1200 - (skillLvlDiff * 30);
-		showBarDelay = showDelay < 500 ? 500 : showDelay;
+		showBarDelay = Math.max(500, 1200 - (skillLvlDiff * 30));
 	}
 }

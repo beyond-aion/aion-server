@@ -1,6 +1,7 @@
 package quest.crafting;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -13,10 +14,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _29003ExpertAethertappingExpert extends QuestHandler {
 
-	private final static int questId = 29003;
-
 	public _29003ExpertAethertappingExpert() {
-		super(questId);
+		super(29003);
 	}
 
 	@Override
@@ -30,12 +29,12 @@ public class _29003ExpertAethertappingExpert extends QuestHandler {
 	public boolean onDialogEvent(QuestEnv env) {
 		final Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 204257) {
-				switch (dialog) {
+				switch (dialogActionId) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 1011);
 					case ASK_QUEST_ACCEPT:
@@ -51,7 +50,7 @@ public class _29003ExpertAethertappingExpert extends QuestHandler {
 		} else if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 204052:
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							qs.setStatus(QuestStatus.REWARD);
 							updateQuestStatus(env);
@@ -60,7 +59,7 @@ public class _29003ExpertAethertappingExpert extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204052) {
-				if (dialog == DialogAction.CHECK_USER_HAS_QUEST_ITEM)
+				if (dialogActionId == CHECK_USER_HAS_QUEST_ITEM)
 					return sendQuestDialog(env, 5);
 				else {
 					player.getSkillList().addSkill(player, 30003, 400);

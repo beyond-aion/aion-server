@@ -17,12 +17,12 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 public abstract class ChatCommand implements Comparable<ChatCommand> {
 
+	private static final Logger log = LoggerFactory.getLogger(ChatCommand.class);
 	private String prefix;
 	private String alias;
 	private String description;
 	private String[] paramInfo = {};
 	private byte level;
-	static final Logger log = LoggerFactory.getLogger(ChatCommand.class);
 
 	/**
 	 * Initializes a chat command.

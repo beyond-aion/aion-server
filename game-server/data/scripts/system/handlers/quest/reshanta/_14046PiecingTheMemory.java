@@ -1,6 +1,7 @@
 package quest.reshanta;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -16,11 +17,10 @@ import com.aionemu.gameserver.services.teleport.TeleportService;
  */
 public class _14046PiecingTheMemory extends QuestHandler {
 
-	private final static int questId = 14046;
 	private final static int[] npc_ids = { 278500, 203834, 203786, 203754, 203704 };
 
 	public _14046PiecingTheMemory() {
-		super(questId);
+		super(14046);
 	}
 
 	@Override
@@ -57,7 +57,7 @@ public class _14046PiecingTheMemory extends QuestHandler {
 
 		if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203704) {
-				if (env.getDialog() == DialogAction.USE_OBJECT)
+				if (env.getDialogActionId() == USE_OBJECT)
 					return sendQuestDialog(env, 10002);
 				return sendQuestEndDialog(env);
 			}
@@ -66,7 +66,7 @@ public class _14046PiecingTheMemory extends QuestHandler {
 			return false;
 		}
 		if (targetId == 278500) {
-			switch (env.getDialog()) {
+			switch (env.getDialogActionId()) {
 				case QUEST_SELECT:
 					if (var == 0)
 						return sendQuestDialog(env, 1011);
@@ -79,7 +79,7 @@ public class _14046PiecingTheMemory extends QuestHandler {
 					}
 			}
 		} else if (targetId == 203834) {
-			switch (env.getDialog()) {
+			switch (env.getDialogActionId()) {
 				case QUEST_SELECT:
 					if (var == 1)
 						return sendQuestDialog(env, 1352);
@@ -88,7 +88,7 @@ public class _14046PiecingTheMemory extends QuestHandler {
 					else if (var == 5)
 						return sendQuestDialog(env, 2716);
 					return false;
-				case SELECT_ACTION_1353:
+				case SELECT2_1:
 					playQuestMovie(env, 102);
 					break;
 				case SETPRO2:
@@ -111,7 +111,7 @@ public class _14046PiecingTheMemory extends QuestHandler {
 					}
 			}
 		} else if (targetId == 203786) {
-			switch (env.getDialog()) {
+			switch (env.getDialogActionId()) {
 				case QUEST_SELECT:
 					if (var == 2)
 						return sendQuestDialog(env, 1693);
@@ -120,7 +120,7 @@ public class _14046PiecingTheMemory extends QuestHandler {
 					return checkQuestItems(env, 2, 3, false, 10000, 10001, 182215354, 1);
 			}
 		} else if (targetId == 203754) {
-			switch (env.getDialog()) {
+			switch (env.getDialogActionId()) {
 				case QUEST_SELECT:
 					if (var == 6)
 						return sendQuestDialog(env, 3057);

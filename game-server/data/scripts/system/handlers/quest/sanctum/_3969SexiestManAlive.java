@@ -1,6 +1,6 @@
 package quest.sanctum;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
@@ -15,10 +15,8 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 public class _3969SexiestManAlive extends QuestHandler {
 
-	private final static int questId = 3969;
-
 	public _3969SexiestManAlive() {
-		super(questId);
+		super(3969);
 	}
 
 	@Override
@@ -44,9 +42,9 @@ public class _3969SexiestManAlive extends QuestHandler {
 		if (targetId == 798390)// Palentine
 		{
 			if (qs == null || qs.isStartable()) {
-				if (env.getDialog() == DialogAction.USE_OBJECT)
+				if (env.getDialogActionId() == USE_OBJECT)
 					return sendQuestDialog(env, 1011);
-				else if (env.getDialogId() == DialogAction.QUEST_ACCEPT_1.id()) {
+				else if (env.getDialogActionId() == QUEST_ACCEPT_1) {
 					if (giveQuestItem(env, 182206126, 1)) {
 						return sendQuestStartDialog(env);
 					}
@@ -64,9 +62,9 @@ public class _3969SexiestManAlive extends QuestHandler {
 		if (targetId == 798391)// Andu
 		{
 			if (qs.getStatus() == QuestStatus.START && var == 0) {
-				if (env.getDialog() == DialogAction.USE_OBJECT)
+				if (env.getDialogActionId() == USE_OBJECT)
 					return sendQuestDialog(env, 1352);
-				else if (env.getDialog() == DialogAction.SETPRO1) {
+				else if (env.getDialogActionId() == SETPRO1) {
 					if (player.getInventory().getItemCountByItemId(182206126) > 0) {
 						removeQuestItem(env, 182206126, 1);
 						qs.setQuestVar(++var);
@@ -81,7 +79,7 @@ public class _3969SexiestManAlive extends QuestHandler {
 		} else if (targetId == 798390)// Palentine
 		{
 			if (qs.getStatus() == QuestStatus.REWARD) {
-				if (env.getDialog() == DialogAction.USE_OBJECT)
+				if (env.getDialogActionId() == USE_OBJECT)
 					return sendQuestDialog(env, 2375);
 				return sendQuestEndDialog(env);
 			}

@@ -1,6 +1,6 @@
 package quest.kromedes_trial;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestActionType;
@@ -16,10 +16,8 @@ import com.aionemu.gameserver.world.zone.ZoneName;
  */
 public class _28604RecoveringRotan extends QuestHandler {
 
-	private static final int questId = 28604;
-
 	public _28604RecoveringRotan() {
-		super(questId);
+		super(28604);
 	}
 
 	@Override
@@ -37,7 +35,7 @@ public class _28604RecoveringRotan extends QuestHandler {
 		}
 
 		if (env.getTargetId() == 700961) {
-			if (env.getDialog() == DialogAction.USE_OBJECT) {
+			if (env.getDialogActionId() == USE_OBJECT) {
 				if (checkItemExistence(env, 164000141, 1, false)) {
 					env.setQuestId(0);
 					return sendQuestDialog(env, 27);
@@ -49,7 +47,7 @@ public class _28604RecoveringRotan extends QuestHandler {
 					env.setQuestId(0);
 					return sendQuestDialog(env, 1012);
 				}
-			} else if (env.getDialog() == DialogAction.SELECT_QUEST_REWARD) {
+			} else if (env.getDialogActionId() == SELECT_QUEST_REWARD) {
 				return sendQuestDialog(env, 5);
 			} else {
 				changeQuestStep(env, 0, 0, true);

@@ -1,6 +1,6 @@
 package quest.eltnen;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -13,10 +13,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _1385RescuingGriffo extends QuestHandler {
 
-	private final static int questId = 1385;
-
 	public _1385RescuingGriffo() {
-		super(questId);
+		super(1385);
 	}
 
 	@Override
@@ -62,7 +60,7 @@ public class _1385RescuingGriffo extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (targetId == 204028) {
 			if (qs == null || qs.isStartable()) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
+				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 1011);
 				else
 					return sendQuestStartDialog(env);
@@ -71,9 +69,9 @@ public class _1385RescuingGriffo extends QuestHandler {
 			}
 		} else if (targetId == 204029) {
 			if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 0) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
+				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 1352);
-				else if (env.getDialog() == DialogAction.SETPRO1) {
+				else if (env.getDialogActionId() == SETPRO1) {
 					return defaultStartFollowEvent(env, (Npc) env.getVisibleObject(), 1923.47f, 2541.46f, 355.61f, 0, 1); // 1
 				} else
 					return sendQuestStartDialog(env);

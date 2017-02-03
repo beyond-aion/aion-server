@@ -1,6 +1,6 @@
 package quest.verteron;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
@@ -15,10 +15,8 @@ import com.aionemu.gameserver.services.QuestService;
  */
 public class _1198TheWritingOnTheWall extends QuestHandler {
 
-	private final static int questId = 1198;
-
 	public _1198TheWritingOnTheWall() {
-		super(questId);
+		super(1198);
 	}
 
 	@Override
@@ -32,12 +30,12 @@ public class _1198TheWritingOnTheWall extends QuestHandler {
 	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 0) {
-				if (dialog == DialogAction.QUEST_ACCEPT_1) {
+				if (dialogActionId == QUEST_ACCEPT_1) {
 					QuestService.startQuest(env);
 					return closeDialogWindow(env);
 				}
@@ -46,9 +44,9 @@ public class _1198TheWritingOnTheWall extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 203098) {
-				if (dialog == DialogAction.QUEST_SELECT) {
+				if (dialogActionId == QUEST_SELECT) {
 					return sendQuestDialog(env, 2375);
-				} else if (dialog == DialogAction.SELECT_QUEST_REWARD) {
+				} else if (dialogActionId == SELECT_QUEST_REWARD) {
 					removeQuestItem(env, 182213168, 1);
 					return defaultCloseDialog(env, 0, 1, true, true);
 				}

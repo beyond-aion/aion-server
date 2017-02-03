@@ -2,7 +2,7 @@ package quest.pandaemonium;
 
 import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.ai.manager.WalkManager;
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -20,10 +20,8 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 public class _4212MissingSidrunerk extends QuestHandler {
 
-	private final static int questId = 4212;
-
 	public _4212MissingSidrunerk() {
-		super(questId);
+		super(4212);
 	}
 
 	@Override
@@ -43,12 +41,12 @@ public class _4212MissingSidrunerk extends QuestHandler {
 	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 204283) {
-				if (dialog == DialogAction.QUEST_SELECT) {
+				if (dialogActionId == QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);
 				} else {
 					return sendQuestStartDialog(env);
@@ -56,25 +54,25 @@ public class _4212MissingSidrunerk extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 798065) {
-				if (dialog == DialogAction.QUEST_SELECT) {
+				if (dialogActionId == QUEST_SELECT) {
 					if (qs.getQuestVarById(0) == 0) {
 						return sendQuestDialog(env, 1011);
 					}
-				} else if (dialog == DialogAction.SETPRO1) {
+				} else if (dialogActionId == SETPRO1) {
 					return defaultCloseDialog(env, 0, 1);
 				}
 			} else if (targetId == 798058) {
-				if (dialog == DialogAction.QUEST_SELECT) {
+				if (dialogActionId == QUEST_SELECT) {
 					if (qs.getQuestVarById(0) == 1)
 						return sendQuestDialog(env, 1352);
-				} else if (dialog == DialogAction.SETPRO2) {
+				} else if (dialogActionId == SETPRO2) {
 					return defaultCloseDialog(env, 1, 2);
 				}
 			} else if (targetId == 798337) {
-				if (dialog == DialogAction.QUEST_SELECT) {
+				if (dialogActionId == QUEST_SELECT) {
 					if (qs.getQuestVarById(0) == 2)
 						return sendQuestDialog(env, 1693);
-				} else if (dialog == DialogAction.SETPRO3) {
+				} else if (dialogActionId == SETPRO3) {
 					Npc npc = (Npc) env.getVisibleObject();
 					npc.getSpawn().setWalkerId("4212");
 					WalkManager.startWalking((NpcAI) npc.getAi());
@@ -89,7 +87,7 @@ public class _4212MissingSidrunerk extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 798058) {
-				if (dialog == DialogAction.USE_OBJECT) {
+				if (dialogActionId == USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
 				}
 				return sendQuestEndDialog(env);

@@ -1,6 +1,7 @@
 package quest.heiron;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
@@ -16,10 +17,8 @@ import com.aionemu.gameserver.world.zone.ZoneName;
  */
 public class _1607MappingTheRevolutionaries extends QuestHandler {
 
-	private static final int questId = 1607;
-
 	public _1607MappingTheRevolutionaries() {
-		super(questId);
+		super(1607);
 	}
 
 	@Override
@@ -49,7 +48,7 @@ public class _1607MappingTheRevolutionaries extends QuestHandler {
 	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		int targetId = env.getTargetId();
 		if (qs == null) {
 			return false;
@@ -62,18 +61,18 @@ public class _1607MappingTheRevolutionaries extends QuestHandler {
 			int var3 = qs.getQuestVarById(3);
 			int var4 = qs.getQuestVarById(4);
 			if (targetId == 204578) { // Kuobe
-				switch (dialog) {
+				switch (dialogActionId) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 1011);
 					case SETPRO1:
 						return defaultCloseDialog(env, 0, 1); // 1
 				}
 			} else if (targetId == 204574) { // Finn
-				if (dialog == DialogAction.QUEST_SELECT) {
+				if (dialogActionId == QUEST_SELECT) {
 					if (var == 1 && var1 == 1 && var2 == 1 && var3 == 1 && var4 == 1) {
 						return sendQuestDialog(env, 10002);
 					}
-				} else if (dialog == DialogAction.SELECT_QUEST_REWARD) {
+				} else if (dialogActionId == SELECT_QUEST_REWARD) {
 					changeQuestStep(env, 1, 1, true);
 					return sendQuestDialog(env, 5);
 				}

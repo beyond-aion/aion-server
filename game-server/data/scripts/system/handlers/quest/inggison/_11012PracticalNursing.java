@@ -1,6 +1,6 @@
 package quest.inggison;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
@@ -15,10 +15,8 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 public class _11012PracticalNursing extends QuestHandler {
 
-	private final static int questId = 11012;
-
 	public _11012PracticalNursing() {
-		super(questId);
+		super(11012);
 	}
 
 	@Override
@@ -39,9 +37,9 @@ public class _11012PracticalNursing extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (targetId == 799071) {
 			if (qs == null) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT) {
+				if (env.getDialogActionId() == QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);
-				} else if (env.getDialogId() == DialogAction.QUEST_ACCEPT_1.id()) {
+				} else if (env.getDialogActionId() == QUEST_ACCEPT_1) {
 					if (giveQuestItem(env, 182206715, 3))
 						return sendQuestStartDialog(env);
 					else
@@ -58,9 +56,9 @@ public class _11012PracticalNursing extends QuestHandler {
 
 		if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 799072 && var == 0) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT) {
+				if (env.getDialogActionId() == QUEST_SELECT) {
 					return sendQuestDialog(env, 1011);
-				} else if (env.getDialog() == DialogAction.SETPRO1) {
+				} else if (env.getDialogActionId() == SETPRO1) {
 					qs.setQuestVar(++var);
 					updateQuestStatus(env);
 					removeQuestItem(env, 182206715, 1);
@@ -69,9 +67,9 @@ public class _11012PracticalNursing extends QuestHandler {
 				} else
 					return sendQuestStartDialog(env);
 			} else if (targetId == 799073 && var == 1) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT) {
+				if (env.getDialogActionId() == QUEST_SELECT) {
 					return sendQuestDialog(env, 1352);
-				} else if (env.getDialog() == DialogAction.SETPRO2) {
+				} else if (env.getDialogActionId() == SETPRO2) {
 					qs.setQuestVar(++var);
 					updateQuestStatus(env);
 					removeQuestItem(env, 182206715, 1);
@@ -80,9 +78,9 @@ public class _11012PracticalNursing extends QuestHandler {
 				} else
 					return sendQuestStartDialog(env);
 			} else if (targetId == 799074 && var == 2) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT) {
+				if (env.getDialogActionId() == QUEST_SELECT) {
 					return sendQuestDialog(env, 1693);
-				} else if (env.getDialog() == DialogAction.SETPRO3) {
+				} else if (env.getDialogActionId() == SETPRO3) {
 					qs.setStatus(QuestStatus.REWARD);
 					updateQuestStatus(env);
 					removeQuestItem(env, 182206715, 1);
@@ -93,7 +91,7 @@ public class _11012PracticalNursing extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 799071) {
-				if (env.getDialog() == DialogAction.USE_OBJECT) {
+				if (env.getDialogActionId() == USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
 				}
 				return sendQuestEndDialog(env);

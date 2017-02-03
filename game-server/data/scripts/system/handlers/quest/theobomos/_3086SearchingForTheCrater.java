@@ -1,6 +1,7 @@
 package quest.theobomos;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -14,10 +15,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 public class _3086SearchingForTheCrater extends QuestHandler {
 
-	private final static int questId = 3086;
-
 	public _3086SearchingForTheCrater() {
-		super(questId);
+		super(3086);
 	}
 
 	@Override
@@ -39,7 +38,7 @@ public class _3086SearchingForTheCrater extends QuestHandler {
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 798132) {
-				switch (env.getDialog()) {
+				switch (env.getDialogActionId()) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 1011);
 					default:
@@ -54,7 +53,7 @@ public class _3086SearchingForTheCrater extends QuestHandler {
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 700418:
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case USE_OBJECT: {
 							if (player.getInventory().getItemCountByItemId(182208062) < 1) {
 								qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
@@ -67,7 +66,7 @@ public class _3086SearchingForTheCrater extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 798201) {
-				if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id())
+				if (env.getDialogActionId() == SELECT_QUEST_REWARD)
 					return sendQuestDialog(env, 5);
 				else
 					return sendQuestEndDialog(env);

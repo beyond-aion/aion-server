@@ -1,6 +1,7 @@
 package quest.gelkmaros;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
@@ -46,7 +47,7 @@ public class _20035SilenteraSupport extends QuestHandler {
 	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		if (qs == null) {
 			return false;
 		}
@@ -56,7 +57,7 @@ public class _20035SilenteraSupport extends QuestHandler {
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 799226: // Valetta
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var == 0) {
 								return sendQuestDialog(env, 1011);
@@ -73,7 +74,7 @@ public class _20035SilenteraSupport extends QuestHandler {
 					}
 					break;
 				case 799329: // Notud
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var == 1) {
 								return sendQuestDialog(env, 1352);
@@ -85,7 +86,7 @@ public class _20035SilenteraSupport extends QuestHandler {
 					}
 					break;
 				case 799323: // Mastarius
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var == 2) {
 								return sendQuestDialog(env, 1693);
@@ -98,7 +99,7 @@ public class _20035SilenteraSupport extends QuestHandler {
 					}
 					break;
 				case 799283: // Jecasti
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var == 3) {
 								return sendQuestDialog(env, 2034);
@@ -110,13 +111,13 @@ public class _20035SilenteraSupport extends QuestHandler {
 					}
 					break;
 				case 799309: // Arango
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var == 4) {
 								return sendQuestDialog(env, 2375);
 							}
 							return false;
-						case SELECT_ACTION_2376:
+						case SELECT5_1:
 							playQuestMovie(env, 567);
 							return sendQuestDialog(env, 2376);
 						case SETPRO5:
@@ -128,7 +129,7 @@ public class _20035SilenteraSupport extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 799225) { // Richelle
-				if (dialog == DialogAction.USE_OBJECT) {
+				if (dialogActionId == USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
 				}
 				return sendQuestEndDialog(env);

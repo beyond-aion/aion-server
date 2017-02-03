@@ -1,6 +1,6 @@
 package quest.enshar;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -12,10 +12,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _25032AvengeVarnur extends QuestHandler {
 
-	private final static int questId = 25032;
-
 	public _25032AvengeVarnur() {
-		super(questId);
+		super(25032);
 	}
 
 	@Override
@@ -36,11 +34,11 @@ public class _25032AvengeVarnur extends QuestHandler {
 		final Player player = env.getPlayer();
 		final QuestState qs = player.getQuestStateList().getQuestState(questId);
 		int targetId = env.getTargetId();
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 804912) { // Muwel
-				if (dialog == DialogAction.QUEST_SELECT)
+				if (dialogActionId == QUEST_SELECT)
 					return sendQuestDialog(env, 4762);
 				else
 					return sendQuestStartDialog(env);
@@ -51,19 +49,19 @@ public class _25032AvengeVarnur extends QuestHandler {
 			switch (targetId) {
 				case 804912: // Muwel
 					if (var == 1) {
-						if (dialog == DialogAction.QUEST_SELECT)
+						if (dialogActionId == QUEST_SELECT)
 							return sendQuestDialog(env, 1352);
 
-						if (dialog == DialogAction.SETPRO2)
+						if (dialogActionId == SETPRO2)
 							return defaultCloseDialog(env, var, var + 1);
 					}
 					break;
 				case 804913: // Redelf
 					if (var == 2) {
-						if (dialog == DialogAction.QUEST_SELECT)
+						if (dialogActionId == QUEST_SELECT)
 							return sendQuestDialog(env, 1693);
 
-						if (dialog == DialogAction.SET_SUCCEED) {
+						if (dialogActionId == SET_SUCCEED) {
 							qs.setQuestVar(var + 1);
 							return defaultCloseDialog(env, var + 1, var + 1, true, false);
 						}
@@ -73,7 +71,7 @@ public class _25032AvengeVarnur extends QuestHandler {
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			switch (targetId) {
 				case 804914: // Grandung
-					if (dialog == DialogAction.USE_OBJECT)
+					if (dialogActionId == USE_OBJECT)
 						return sendQuestDialog(env, 10002);
 
 					return sendQuestEndDialog(env);

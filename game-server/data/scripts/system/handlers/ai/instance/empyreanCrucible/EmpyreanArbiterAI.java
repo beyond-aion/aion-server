@@ -4,7 +4,7 @@ import java.util.function.Consumer;
 
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.NpcAI;
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.instance.instancereward.InstanceReward;
 import com.aionemu.gameserver.model.instance.playerreward.CruciblePlayerReward;
@@ -30,10 +30,10 @@ public class EmpyreanArbiterAI extends NpcAI {
 	}
 
 	@Override
-	public boolean onDialogSelect(final Player player, int dialogId, int questId, int extendedRewardIndex) {
+	public boolean onDialogSelect(Player player, int dialogActionId, int questId, int extendedRewardIndex) {
 		int instanceId = getPosition().getInstanceId();
 
-		if (dialogId == DialogAction.SETPRO1.id() && player.getInventory().decreaseByItemId(186000124, 1)) {
+		if (dialogActionId == SETPRO1 && player.getInventory().decreaseByItemId(186000124, 1)) {
 			switch (getNpcId()) {
 				case 799573:
 					TeleportService.teleportTo(player, 300300000, instanceId, 358.2547f, 349.26443f, 96.09108f, (byte) 59);

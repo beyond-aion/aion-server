@@ -1,6 +1,6 @@
 package quest.danuar_sanctuary;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -14,11 +14,10 @@ import com.aionemu.gameserver.world.zone.ZoneName;
 
 public class _26987ExploretheElyosCorridor extends QuestHandler {
 
-	private static final int questId = 26987;
 	private static final int npcId = 804867;
 
 	public _26987ExploretheElyosCorridor() {
-		super(questId);
+		super(26987);
 	}
 
 	@Override
@@ -32,12 +31,12 @@ public class _26987ExploretheElyosCorridor extends QuestHandler {
 	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == npcId) {
-				if (dialog == DialogAction.QUEST_SELECT)
+				if (dialogActionId == QUEST_SELECT)
 					return sendQuestDialog(env, 4762);
 				else
 					return sendQuestStartDialog(env);

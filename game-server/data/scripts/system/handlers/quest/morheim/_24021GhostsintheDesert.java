@@ -1,6 +1,7 @@
 package quest.morheim;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
@@ -50,12 +51,12 @@ public class _24021GhostsintheDesert extends QuestHandler {
 
 		int var = qs.getQuestVarById(0);
 		int targetId = env.getTargetId();
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 204302: // Bragi
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							return sendQuestDialog(env, 1011);
 						case SETPRO1:
@@ -63,7 +64,7 @@ public class _24021GhostsintheDesert extends QuestHandler {
 					}
 					break;
 				case 204329: // Tofa
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							switch (var) {
 								case 1: {
@@ -77,7 +78,7 @@ public class _24021GhostsintheDesert extends QuestHandler {
 								}
 							}
 							return false;
-						case SELECT_ACTION_1353:
+						case SELECT2_1:
 							if (var == 1) {
 								playQuestMovie(env, 73);
 								return sendQuestDialog(env, 1353);
@@ -88,7 +89,7 @@ public class _24021GhostsintheDesert extends QuestHandler {
 					}
 					return false;
 				case 802046: // Tofynir
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var == 2) {
 								return sendQuestDialog(env, 1693);
@@ -111,7 +112,7 @@ public class _24021GhostsintheDesert extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204329) { // Tofa
-				if (dialog == DialogAction.USE_OBJECT) {
+				if (dialogActionId == USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
 				} else {
 					return sendQuestEndDialog(env);

@@ -1,6 +1,7 @@
 package quest.beluslan;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ITEM_USAGE_ANIMATION;
@@ -54,11 +55,11 @@ public class _24052AFrozenCity extends QuestHandler {
 
 		int var = qs.getQuestVarById(0);
 		int targetId = env.getTargetId();
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 
 		if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204753) {
-				if (dialog == DialogAction.USE_OBJECT) {
+				if (dialogActionId == USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
 				}
 				int[] questItems = { 182215378, 182215379, 182215380 };
@@ -68,15 +69,15 @@ public class _24052AFrozenCity extends QuestHandler {
 			return false;
 		}
 		if (targetId == 204753) {
-			switch (dialog) {
+			switch (dialogActionId) {
 				case QUEST_SELECT:
 					if (var == 0)
 						return sendQuestDialog(env, 1011);
 					return false;
-				case SELECT_ACTION_1012:
+				case SELECT1_1:
 					playQuestMovie(env, 242);
 					break;
-				case SELECT_ACTION_1097:
+				case SELECT1_2:
 					if (var == 0 && player.getInventory().getItemCountByItemId(182215378) != 1) {
 						if (giveQuestItem(env, 182215378, 1))
 							return sendQuestDialog(env, 1097);

@@ -64,11 +64,11 @@ public class Portal2Data {
 		return portalScrolls.size() + portalDialogs.size() + portalUses.size();
 	}
 
-	public PortalPath getPortalDialog(int npcId, int dialogId, Race race) {
+	public PortalPath getPortalDialog(int npcId, int dialogActionId, Race race) {
 		PortalDialog portal = portalDialogs.get(npcId);
 		if (portal != null) {
 			for (PortalPath path : portal.getPortalPath()) {
-				if (path.getDialog() == dialogId && (race.equals(path.getRace()) || path.getRace().equals(Race.PC_ALL))) {
+				if (path.getDialog() == dialogActionId && (race.equals(path.getRace()) || path.getRace().equals(Race.PC_ALL))) {
 					return path;
 				}
 			}

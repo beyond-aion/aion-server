@@ -1,6 +1,7 @@
 package quest.beluslan;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -13,11 +14,10 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _2669AtlaEscape extends QuestHandler {
 
-	private final static int questId = 2669;
 	private final static int[] npcs = { 204815, 204777 };
 
 	public _2669AtlaEscape() {
-		super(questId);
+		super(2669);
 	}
 
 	@Override
@@ -42,7 +42,7 @@ public class _2669AtlaEscape extends QuestHandler {
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 204815) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
+				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 4762);
 				else
 					return sendQuestStartDialog(env);
@@ -50,7 +50,7 @@ public class _2669AtlaEscape extends QuestHandler {
 		} else if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 204815:
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case QUEST_SELECT: {
 							if (qs.getQuestVarById(0) == 0)
 								return sendQuestDialog(env, 1011);
@@ -63,7 +63,7 @@ public class _2669AtlaEscape extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204777) {
-				if (env.getDialog() == DialogAction.USE_OBJECT)
+				if (env.getDialogActionId() == USE_OBJECT)
 					return sendQuestDialog(env, 10002);
 				else
 					return sendQuestEndDialog(env);

@@ -1,6 +1,7 @@
 package quest.crafting;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -14,10 +15,8 @@ import com.aionemu.gameserver.services.craft.CraftSkillUpdateService;
  */
 public class _2978ExpertCooksTest extends QuestHandler {
 
-	private final static int questId = 2978;
-
 	public _2978ExpertCooksTest() {
-		super(questId);
+		super(2978);
 	}
 
 	@Override
@@ -30,16 +29,16 @@ public class _2978ExpertCooksTest extends QuestHandler {
 	public boolean onDialogEvent(QuestEnv env) {
 		final Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		int targetId = env.getTargetId();
 
-		if (dialog == DialogAction.QUEST_SELECT && !CraftSkillUpdateService.getInstance().canLearnMoreExpertCraftingSkill(player)) {
+		if (dialogActionId == QUEST_SELECT && !CraftSkillUpdateService.getInstance().canLearnMoreExpertCraftingSkill(player)) {
 			return sendQuestSelectionDialog(env);
 		}
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 204100) {
-				if (dialog == DialogAction.QUEST_SELECT)
+				if (dialogActionId == QUEST_SELECT)
 					return sendQuestDialog(env, 1011);
 				else
 					return sendQuestStartDialog(env);
@@ -47,7 +46,7 @@ public class _2978ExpertCooksTest extends QuestHandler {
 		} else if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 204100:
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT: {
 							long itemCount1 = player.getInventory().getItemCountByItemId(182207972);
 							long itemCount2 = player.getInventory().getItemCountByItemId(182207973);
@@ -66,7 +65,7 @@ public class _2978ExpertCooksTest extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204100) {
-				if (dialog == DialogAction.CHECK_USER_HAS_QUEST_ITEM)
+				if (dialogActionId == CHECK_USER_HAS_QUEST_ITEM)
 					return sendQuestDialog(env, 5);
 				else
 					return sendQuestEndDialog(env);

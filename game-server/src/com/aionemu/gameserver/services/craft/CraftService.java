@@ -45,7 +45,7 @@ public class CraftService {
 		if (recipetemplate.getMaxProductionCount() != null) {
 			player.getRecipeList().deleteRecipe(player, recipetemplate.getId());
 			if (critCount == 0) {
-				QuestEngine.getInstance().onFailCraft(new QuestEnv(null, player, 0, 0),
+				QuestEngine.getInstance().onFailCraft(new QuestEnv(null, player, 0),
 					recipetemplate.getComboProduct(1) == null ? 0 : recipetemplate.getComboProduct(1));
 			}
 		}

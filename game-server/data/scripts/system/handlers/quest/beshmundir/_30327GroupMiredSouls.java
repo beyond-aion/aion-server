@@ -1,6 +1,7 @@
 package quest.beshmundir;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -15,10 +16,8 @@ import com.aionemu.gameserver.services.QuestService;
 
 public class _30327GroupMiredSouls extends QuestHandler {
 
-	private final static int questId = 30327;
-
 	public _30327GroupMiredSouls() {
-		super(questId);
+		super(30327);
 	}
 
 	@Override
@@ -38,11 +37,11 @@ public class _30327GroupMiredSouls extends QuestHandler {
 		final Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		int targetId = env.getTargetId();
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 799244) {
-				if (dialog == DialogAction.QUEST_SELECT) {
+				if (dialogActionId == QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);
 				} else {
 					return sendQuestStartDialog(env);
@@ -56,7 +55,7 @@ public class _30327GroupMiredSouls extends QuestHandler {
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 799521:
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT: {
 							if (qs.getQuestVarById(0) == 0) {
 								return sendQuestDialog(env, 1011);
@@ -68,7 +67,7 @@ public class _30327GroupMiredSouls extends QuestHandler {
 					}
 					return false;
 				case 799517:
-					switch (dialog) {
+					switch (dialogActionId) {
 						case SETPRO1: {
 							QuestService.questTimerStart(env, 300);
 							return true;
@@ -77,7 +76,7 @@ public class _30327GroupMiredSouls extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 799244) {
-				switch (dialog) {
+				switch (dialogActionId) {
 					case USE_OBJECT:
 						return sendQuestDialog(env, 10002);
 					case SELECT_QUEST_REWARD:

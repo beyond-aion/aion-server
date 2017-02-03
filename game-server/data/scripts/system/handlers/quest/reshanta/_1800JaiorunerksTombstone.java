@@ -1,6 +1,7 @@
 package quest.reshanta;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -13,10 +14,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _1800JaiorunerksTombstone extends QuestHandler {
 
-	private final static int questId = 1800;
-
 	public _1800JaiorunerksTombstone() {
-		super(questId);
+		super(1800);
 	}
 
 	@Override
@@ -31,11 +30,11 @@ public class _1800JaiorunerksTombstone extends QuestHandler {
 		Player player = env.getPlayer();
 		int targetId = env.getTargetId();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 279016) { // Vindachinerk
-				if (dialog == DialogAction.QUEST_SELECT) {
+				if (dialogActionId == QUEST_SELECT) {
 					return sendQuestDialog(env, 1011);
 				} else {
 					return sendQuestStartDialog(env, 182202163, 1);
@@ -45,7 +44,7 @@ public class _1800JaiorunerksTombstone extends QuestHandler {
 			int var = qs.getQuestVarById(0);
 			switch (targetId) {
 				case 730141: { // Jaiorunerk's Tomb
-					switch (dialog) {
+					switch (dialogActionId) {
 						case USE_OBJECT:
 							if (var == 0) {
 								if (player.getInventory().getItemCountByItemId(182202163) > 0) {
@@ -61,7 +60,7 @@ public class _1800JaiorunerksTombstone extends QuestHandler {
 					break;
 				}
 				case 279016: // Vindachinerk
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var == 1) {
 								return sendQuestDialog(env, 2375);

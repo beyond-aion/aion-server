@@ -1,6 +1,7 @@
 package quest.beluslan;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
@@ -46,11 +47,11 @@ public class _24051InvesetigatetheDisappearance extends QuestHandler {
 
 		int var = qs.getQuestVarById(0);
 		int targetId = env.getTargetId();
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 
 		if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 204707) { // Mani
-				switch (dialog) {
+				switch (dialogActionId) {
 					case QUEST_SELECT:
 						if (var == 0) {
 							return sendQuestDialog(env, 1011);
@@ -64,7 +65,7 @@ public class _24051InvesetigatetheDisappearance extends QuestHandler {
 						return defaultCloseDialog(env, 3, 4); // 4
 				}
 			} else if (targetId == 204749) { // Paeru
-				switch (dialog) {
+				switch (dialogActionId) {
 					case QUEST_SELECT:
 						if (var == 1) {
 							return sendQuestDialog(env, 1352);
@@ -74,7 +75,7 @@ public class _24051InvesetigatetheDisappearance extends QuestHandler {
 						return defaultCloseDialog(env, 1, 2, 182215375, 1, 0, 0); // 2
 				}
 			} else if (targetId == 204800) { // Hammel
-				switch (dialog) {
+				switch (dialogActionId) {
 					case QUEST_SELECT:
 						if (var == 4) {
 							return sendQuestDialog(env, 2375);
@@ -84,14 +85,14 @@ public class _24051InvesetigatetheDisappearance extends QuestHandler {
 						return defaultCloseDialog(env, 4, 5); // 5
 				}
 			} else if (targetId == 700359 && var == 5 && player.getInventory().getItemCountByItemId(182215377) >= 1) { // Secret Port Entrance
-				if (env.getDialog() == DialogAction.USE_OBJECT) {
+				if (env.getDialogActionId() == USE_OBJECT) {
 					TeleportService.teleportTo(player, player.getWorldId(), player.getInstanceId(), 1757.82f, 1392.94f, 401.75f, (byte) 94);
 					return true;
 				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204707) { // Mani
-				if (env.getDialog() == DialogAction.USE_OBJECT) {
+				if (env.getDialogActionId() == USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
 				} else {
 					return sendQuestEndDialog(env);

@@ -1,6 +1,6 @@
 package quest.verteron;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -13,10 +13,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _1141BelbuasTreasure extends QuestHandler {
 
-	private final static int questId = 1141;
-
 	public _1141BelbuasTreasure() {
-		super(questId);
+		super(1141);
 	}
 
 	@Override
@@ -34,7 +32,7 @@ public class _1141BelbuasTreasure extends QuestHandler {
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 730001) { // Nola
-				if (env.getDialog() == DialogAction.QUEST_SELECT) {
+				if (env.getDialogActionId() == QUEST_SELECT) {
 					return sendQuestDialog(env, 1011);
 				} else {
 					return sendQuestStartDialog(env);
@@ -42,9 +40,9 @@ public class _1141BelbuasTreasure extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 700122) { // Belbua's Wine Barrel
-				if (env.getDialog() == DialogAction.USE_OBJECT) {
+				if (env.getDialogActionId() == USE_OBJECT) {
 					return sendQuestDialog(env, 2375);
-				} else if (env.getDialog() == DialogAction.SELECT_QUEST_REWARD) {
+				} else if (env.getDialogActionId() == SELECT_QUEST_REWARD) {
 					changeQuestStep(env, 0, 0, true); // reward
 					return sendQuestDialog(env, 5);
 				}

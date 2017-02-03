@@ -1,6 +1,7 @@
 package quest.heiron;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
@@ -15,10 +16,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _1563TheLegendofVindachinerk extends QuestHandler {
 
-	private final static int questId = 1563;
-
 	public _1563TheLegendofVindachinerk() {
-		super(questId);
+		super(1563);
 	}
 
 	@Override
@@ -33,12 +32,12 @@ public class _1563TheLegendofVindachinerk extends QuestHandler {
 	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		int targetId = env.getTargetId();
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 798096) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
+				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 4762);
 				else
 					return sendQuestStartDialog(env);
@@ -53,7 +52,7 @@ public class _1563TheLegendofVindachinerk extends QuestHandler {
 		if (qs.getStatus() == QuestStatus.START && var == 1) {
 			switch (targetId) {
 				case 798096: // Poporinerk
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							return sendQuestDialog(env, 1352);
 						case SETPRO2:
@@ -69,7 +68,7 @@ public class _1563TheLegendofVindachinerk extends QuestHandler {
 					}
 					break;
 				case 279005: // Kohrunerk
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							return sendQuestDialog(env, 1438);
 						case SETPRO2:

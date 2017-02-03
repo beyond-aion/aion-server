@@ -1,6 +1,7 @@
 package quest.event_quests;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -12,10 +13,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _80331TransformWithTheMagicCane extends QuestHandler {
 
-	private final static int questId = 80331;
-
 	public _80331TransformWithTheMagicCane() {
-		super(questId);
+		super(80331);
 	}
 
 	@Override
@@ -28,12 +27,12 @@ public class _80331TransformWithTheMagicCane extends QuestHandler {
 	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 831531) {
-				switch (dialog) {
+				switch (dialogActionId) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 1011);
 					case QUEST_ACCEPT_1:
@@ -43,7 +42,7 @@ public class _80331TransformWithTheMagicCane extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 831531)
-				switch (dialog) {
+				switch (dialogActionId) {
 					case QUEST_SELECT:
 					case SELECT_QUEST_REWARD:
 						changeQuestStep(env, 0, 0, true); // reward

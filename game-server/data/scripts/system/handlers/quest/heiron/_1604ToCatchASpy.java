@@ -1,6 +1,6 @@
 package quest.heiron;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -15,10 +15,8 @@ import com.aionemu.gameserver.utils.MathUtil;
 
 public class _1604ToCatchASpy extends QuestHandler {
 
-	private final static int questId = 1604;
-
 	public _1604ToCatchASpy() {
-		super(questId);
+		super(1604);
 	}
 
 	@Override
@@ -39,7 +37,7 @@ public class _1604ToCatchASpy extends QuestHandler {
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 204576) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
+				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 4762);
 				else
 					return sendQuestStartDialog(env);
@@ -51,7 +49,7 @@ public class _1604ToCatchASpy extends QuestHandler {
 
 		if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204576) {
-				if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id())
+				if (env.getDialogActionId() == SELECT_QUEST_REWARD)
 					return sendQuestDialog(env, 10002);
 				else
 					return sendQuestEndDialog(env);

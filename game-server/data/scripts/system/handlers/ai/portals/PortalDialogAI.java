@@ -1,10 +1,11 @@
 package ai.portals;
 
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import java.util.List;
 
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.DialogPage;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.autogroup.AutoGroupType;
@@ -52,53 +53,42 @@ public class PortalDialogAI extends PortalAI {
 	}
 
 	@Override
-	public boolean onDialogSelect(Player player, int dialogId, int questId, int extendedRewardIndex) {
-		QuestEnv env = new QuestEnv(getOwner(), player, questId, dialogId);
+	public boolean onDialogSelect(Player player, int dialogActionId, int questId, int extendedRewardIndex) {
+		QuestEnv env = new QuestEnv(getOwner(), player, questId, dialogActionId);
 		env.setExtendedRewardIndex(extendedRewardIndex);
 		if (questId > 0 && QuestEngine.getInstance().onDialog(env)) {
 			return true;
 		}
-		if (dialogId == DialogAction.INSTANCE_PARTY_MATCH.id()) { // auto groups
-			AutoGroupType agt = AutoGroupType.getAutoGroup(player.getLevel(), getNpcId());
-			if (agt != null) {
-				PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(agt.getInstanceMaskId()));
-			}
-			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 0));
-		} else if (dialogId == DialogAction.OPEN_INSTANCE_RECRUIT.id()) {
-			AutoGroupType agt = AutoGroupType.getAutoGroup(player.getLevel(), getNpcId());
-			if (agt != null) {
-				PacketSendUtility.sendPacket(player, new SM_FIND_GROUP(0x1A, agt.getInstanceMapId()));
-			}
-		} else {
-			if (dialogId == DialogAction.SELECT_ACTION_1012.id()) {
-				AutoGroupType agt = AutoGroupType.getAutoGroup(player.getLevel(), getNpcId());
+		AutoGroupType agt = AutoGroupType.getAutoGroup(player.getLevel(), getNpcId());
+		switch (dialogActionId) {
+			case INSTANCE_PARTY_MATCH: // auto groups
+				if (agt != null)
+					PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(agt.getInstanceMaskId()));
+				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 0));
+				return true;
+			case OPEN_INSTANCE_RECRUIT:
+				if (agt != null)
+					PacketSendUtility.sendPacket(player, new SM_FIND_GROUP(0x1A, agt.getInstanceMapId()));
+				return true;
+			case SELECT1_1:
 				if (agt != null) {
-					if (agt.getPlayerSize() <= 6) {
-						if (!player.isInGroup()) {
-							PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 1182));
-							return true;
-						}
-					} else {
-						if (!player.isInAlliance()) {
-							PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 1182));
-							return true;
-						}
+					if (agt.getPlayerSize() <= 6 && !player.isInGroup() || agt.getPlayerSize() > 6 && !player.isInAlliance()) {
+						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 1182));
+						return true;
 					}
 				}
-			}
-			if (questId == 0) {
-				PortalPath portalPath = DataManager.PORTAL2_DATA.getPortalDialog(getNpcId(), dialogId, player.getRace());
-				if (portalPath != null) {
-					if (portalPath.getMinRank() > player.getAbyssRank().getRank().getId()) {
-						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), DialogPage.NO_RIGHT.id(), questId));
-					} else
-						PortalService.port(portalPath, player, getObjectId());
-				}
-			} else {
-				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), dialogId, questId));
-			}
 		}
-		return true;
+		if (questId == 0) {
+			PortalPath portalPath = DataManager.PORTAL2_DATA.getPortalDialog(getNpcId(), dialogActionId, player.getRace());
+			if (portalPath != null) {
+				if (portalPath.getMinRank() > player.getAbyssRank().getRank().getId()) {
+					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), DialogPage.NO_RIGHT.id(), questId));
+				} else
+					PortalService.port(portalPath, player, getObjectId());
+			}
+			return true;
+		}
+		return false;
 	}
 
 	@Override
@@ -107,8 +97,8 @@ public class PortalDialogAI extends PortalAI {
 	}
 
 	protected void checkDialog(Player player) {
-		if (DialogService.isSubDialogRestricted(startingDialogId, player, getOwner())) {
-			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), DialogAction.SELECT_ACTION_1011.id()));
+		if (DialogService.isSubDialogRestricted(player, getOwner())) {
+			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 1011));
 			return;
 		}
 
@@ -137,7 +127,7 @@ public class PortalDialogAI extends PortalAI {
 			for (int questId : relatedQuests) {
 				QuestState qs = player.getQuestStateList().getQuestState(questId);
 				if (qs != null && qs.getStatus() == QuestStatus.REWARD) { // reward dialog
-					QuestEnv env = new QuestEnv(getOwner(), player, questId, DialogAction.USE_OBJECT.id());
+					QuestEnv env = new QuestEnv(getOwner(), player, questId, USE_OBJECT);
 					isRewardStep = QuestEngine.getInstance().onDialog(env);
 					if (isRewardStep)
 						break;
@@ -151,34 +141,34 @@ public class PortalDialogAI extends PortalAI {
 			switch (npcId) {
 				case 831117:
 				case 831131:
-					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 1012, 0));
+					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 1012));
 					break;
 				case 730841:
 				case 730883:
 				case 804621:
 				case 804624:
 				case 804625:
-					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 4762, 0));
+					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 4762));
 					break;
 				case 731583:
-					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 10, 0));
+					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 10));
 					break;
 				case 731570:
 					if (player.getRace() == Race.ASMODIANS) {
-						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 1352, 0)); // seized danuar sanctuary
+						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 1352)); // seized danuar sanctuary
 					} else {
-						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 1011, 0)); // danuar sanctuary
+						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 1011)); // danuar sanctuary
 					}
 					break;
 				case 731549:
 					if (player.getRace() == Race.ELYOS) {
-						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 1011, 0)); // seized danuar sanctuary
+						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 1011)); // seized danuar sanctuary
 					} else {
-						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 1352, 0)); // danuar sanctuary
+						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 1352)); // danuar sanctuary
 					}
 					break;
 				default:
-					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), teleportationDialogId, 0));
+					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), teleportationDialogId));
 					break;
 			}
 		}

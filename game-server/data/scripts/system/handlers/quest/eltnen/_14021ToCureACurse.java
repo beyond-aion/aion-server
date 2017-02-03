@@ -1,6 +1,7 @@
 package quest.eltnen;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -56,7 +57,7 @@ public class _14021ToCureACurse extends QuestHandler {
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 203902: // Aurelius
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case QUEST_SELECT:
 							if (var == 0)
 								return sendQuestDialog(env, 1011);
@@ -67,17 +68,17 @@ public class _14021ToCureACurse extends QuestHandler {
 					break;
 				case 700179: // Paper Glider
 					if (var == 7) {
-						switch (env.getDialog()) {
+						switch (env.getDialogActionId()) {
 							case USE_OBJECT:
 								return sendQuestDialog(env, 2034);
-							case SELECT_ACTION_2035:
+							case SELECT4_1:
 								changeQuestStep(env, 7, 8); // 7
 								return sendQuestDialog(env, 0);
 						}
 					}
 					break;
 				case 204043: // Melginie
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case QUEST_SELECT:
 							if (var == 8)
 								return sendQuestDialog(env, 2036);
@@ -87,7 +88,7 @@ public class _14021ToCureACurse extends QuestHandler {
 					}
 					break;
 				case 204030: // Celestine
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case QUEST_SELECT:
 							if (var == 9)
 								return sendQuestDialog(env, 2376);
@@ -101,7 +102,7 @@ public class _14021ToCureACurse extends QuestHandler {
 		if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203902) // Aurelius
 			{
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
+				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 2716);
 				else
 					return sendQuestEndDialog(env);

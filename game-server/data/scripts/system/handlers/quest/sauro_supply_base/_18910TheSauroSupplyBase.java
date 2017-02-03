@@ -1,6 +1,7 @@
 package quest.sauro_supply_base;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -12,10 +13,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _18910TheSauroSupplyBase extends QuestHandler {
 
-	private final static int questId = 18910;
-
 	public _18910TheSauroSupplyBase() {
-		super(questId);
+		super(18910);
 	}
 
 	@Override
@@ -28,11 +27,11 @@ public class _18910TheSauroSupplyBase extends QuestHandler {
 	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		int targetId = env.getTargetId();
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 801944) { // Amalde.
-				switch (dialog) {
+				switch (dialogActionId) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 1011);
 					case QUEST_ACCEPT_1:
@@ -43,7 +42,7 @@ public class _18910TheSauroSupplyBase extends QuestHandler {
 		} else if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 801945: { // Kanix.
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							return sendQuestDialog(env, 2375);
 						case SELECT_QUEST_REWARD:

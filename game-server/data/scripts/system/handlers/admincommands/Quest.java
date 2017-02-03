@@ -45,7 +45,7 @@ public class Quest extends AdminCommand {
 			"[player] <quest> <status> - Shows the quest status of the specified quest.",
 			"[player] <quest> <set> <status> <var> [varNum] - Sets the specified quest state (default: apply var to all varNums, optional: set var to varNum [0-5]).",
 			"[player] <quest> <setflags> <flags> - Sets the specified quest flags.",
-			"[player] <quest> <dialog> <dialog_id> - Sends the specified quest dialog.",
+			"[player] <quest> <dialog> <dialog_page_id> - Sends the dialog page with the given page ID.",
 			"Note: Player name parameters are optional. If missing, your current target will be taken."
 		);
 		// @formatter:on
@@ -152,16 +152,16 @@ public class Quest extends AdminCommand {
 
 			setQuestFlags(admin, target, questId, flags);
 		} else if (params[index].equalsIgnoreCase("dialog")) {
-			int dialogId;
+			int dialogPageId;
 
 			try {
-				dialogId = Integer.valueOf(params[++index]);
+				dialogPageId = Integer.valueOf(params[++index]);
 			} catch (IndexOutOfBoundsException | NumberFormatException e) {
-				sendInfo(admin, "<dialog_id> must be an int value.");
+				sendInfo(admin, "<dialog_page_id> must be an int value.");
 				return;
 			}
 
-			sendQuestDialog(admin, questId, dialogId);
+			sendQuestDialog(admin, questId, dialogPageId);
 		} else {
 			sendInfo(admin);
 		}
@@ -192,7 +192,7 @@ public class Quest extends AdminCommand {
 		if (template.getNpcFactionId() > 0) {
 			startNpcFactionQuest(admin, target, questId, template.getNpcFactionId());
 			return;
-		} else if (QuestService.startQuest(new QuestEnv(null, target, questId, 0))) {
+		} else if (QuestService.startQuest(new QuestEnv(null, target, questId))) {
 			sendInfo(admin, "Started " + ChatUtil.quest(questId) + " for player " + target.getName() + ".");
 			return;
 		}
@@ -336,12 +336,12 @@ public class Quest extends AdminCommand {
 		sendInfo(admin, "Set " + target.getName() + "'s quest flags to " + flags + ".");
 	}
 
-	private void sendQuestDialog(Player admin, int questId, int dialogId) {
+	private void sendQuestDialog(Player admin, int questId, int dialogPageId) {
 		if (admin.getAccessLevel() < AdminConfig.CMD_QUEST_ADV_PARAMS) {
 			sendInfo(admin, "<You need access level " + AdminConfig.CMD_QUEST_ADV_PARAMS + " or higher to use this function>");
 			return;
 		}
-		PacketSendUtility.sendPacket(admin, new SM_DIALOG_WINDOW(0, dialogId, questId));
-		sendInfo(admin, "Sent dialog " + dialogId + " of Q" + questId + ".");
+		PacketSendUtility.sendPacket(admin, new SM_DIALOG_WINDOW(0, dialogPageId, questId));
+		sendInfo(admin, "Sent dialog page " + dialogPageId + " of Q" + questId + ".");
 	}
 }

@@ -1,6 +1,7 @@
 package quest.morheim;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -13,11 +14,10 @@ import com.aionemu.gameserver.services.QuestService;
  */
 public class _2303DaevaWheresMyHerb extends QuestHandler {
 
-	private static final int questId = 2303;
 	private int choice = 0;
 
 	public _2303DaevaWheresMyHerb() {
-		super(questId);
+		super(2303);
 	}
 
 	@Override
@@ -35,12 +35,12 @@ public class _2303DaevaWheresMyHerb extends QuestHandler {
 	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 798082) { // Bicorunerk
-				switch (dialog) {
+				switch (dialogActionId) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 4762);
 					case ASK_QUEST_ACCEPT:
@@ -72,19 +72,19 @@ public class _2303DaevaWheresMyHerb extends QuestHandler {
 		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			if (targetId == 798082) { // Bicorunerk
-				if (dialog == DialogAction.FINISH_DIALOG) {
+				if (dialogActionId == FINISH_DIALOG) {
 					return sendQuestSelectionDialog(env);
-				} else if (dialog == DialogAction.USE_OBJECT) {
+				} else if (dialogActionId == USE_OBJECT) {
 					if (var == 0) {
 						return sendQuestDialog(env, 1003);
 					} else {
 						return sendQuestSelectionDialog(env);
 					}
-				} else if (dialog == DialogAction.SETPRO10) {
+				} else if (dialogActionId == SETPRO10) {
 					changeQuestStep(env, 0, 11); // 11
 					choice = 0;
 					return sendQuestDialog(env, 1012);
-				} else if (dialog == DialogAction.SETPRO20) {
+				} else if (dialogActionId == SETPRO20) {
 					changeQuestStep(env, 0, 21); // 21
 					choice = 1;
 					return sendQuestDialog(env, 1097);
@@ -93,7 +93,7 @@ public class _2303DaevaWheresMyHerb extends QuestHandler {
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			int var = qs.getQuestVarById(0);
 			if (targetId == 204378) { // Favyr
-				switch (dialog) {
+				switch (dialogActionId) {
 					case USE_OBJECT:
 						if (var == 15) {
 							return sendQuestDialog(env, 1353);

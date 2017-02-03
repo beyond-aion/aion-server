@@ -7,7 +7,7 @@ import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.controllers.SummonController;
 import com.aionemu.gameserver.controllers.effect.EffectController;
 import com.aionemu.gameserver.model.CreatureType;
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.Summon;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -27,8 +27,8 @@ public class TallocsSummonAI extends NpcAI {
 	private AtomicBoolean isTransformed = new AtomicBoolean(false);
 
 	@Override
-	public boolean onDialogSelect(Player player, int dialogId, int questId, int extendedRewardIndex) {
-		if (dialogId == DialogAction.MAKE_MERCENARY.id() && isTransformed.compareAndSet(false, true)) {
+	public boolean onDialogSelect(Player player, int dialogActionId, int questId, int extendedRewardIndex) {
+		if (dialogActionId == MAKE_MERCENARY && isTransformed.compareAndSet(false, true)) {
 			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 0));
 			if (player.getSummon() != null) { // to do remove
 				PacketSendUtility.sendMessage(player, "Please dismiss your summon first.");

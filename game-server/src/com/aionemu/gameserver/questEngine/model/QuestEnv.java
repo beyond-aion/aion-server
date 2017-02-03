@@ -12,20 +12,18 @@ public class QuestEnv {
 	private VisibleObject visibleObject;
 	private Player player;
 	private int questId;
-	private DialogAction dialogAction;
+	private int dialogActionId;
 	private int extendedRewardIndex;
 
-	/**
-	 * @param creature
-	 * @param player
-	 * @param questId
-	 * @param dialogId
-	 */
-	public QuestEnv(VisibleObject visibleObject, Player player, int questId, int dialogId) {
+	public QuestEnv(VisibleObject visibleObject, Player player, int questId) {
+		this(visibleObject, player, questId, DialogAction.NULL);
+	}
+
+	public QuestEnv(VisibleObject visibleObject, Player player, int questId, int dialogActionId) {
 		this.visibleObject = visibleObject;
 		this.player = player;
 		this.questId = questId;
-		this.dialogAction = DialogAction.getByActionId(dialogId);
+		this.dialogActionId = dialogActionId;
 	}
 
 	/**
@@ -73,19 +71,12 @@ public class QuestEnv {
 		this.questId = questId;
 	}
 
-	/**
-	 * @return the dialogId
-	 */
-	public int getDialogId() {
-		return dialogAction.id();
+	public int getDialogActionId() {
+		return dialogActionId;
 	}
 
-	public DialogAction getDialog() {
-		return dialogAction;
-	}
-
-	public void setDialogAction(DialogAction dialogAction) {
-		this.dialogAction = dialogAction;
+	public void setDialogActionId(int dialogActionId) {
+		this.dialogActionId = dialogActionId;
 	}
 
 	/**

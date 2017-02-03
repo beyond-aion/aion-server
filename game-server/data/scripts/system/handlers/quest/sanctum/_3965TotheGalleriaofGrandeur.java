@@ -1,6 +1,7 @@
 package quest.sanctum;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -13,10 +14,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _3965TotheGalleriaofGrandeur extends QuestHandler {
 
-	private final static int questId = 3965;
-
 	public _3965TotheGalleriaofGrandeur() {
-		super(questId);
+		super(3965);
 	}
 
 	@Override
@@ -32,11 +31,11 @@ public class _3965TotheGalleriaofGrandeur extends QuestHandler {
 		Player player = env.getPlayer();
 		int targetId = env.getTargetId();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 798311) { // Senarinrinerk
-				if (dialog == DialogAction.QUEST_SELECT) {
+				if (dialogActionId == QUEST_SELECT) {
 					return sendQuestDialog(env, 1011);
 				} else {
 					return sendQuestStartDialog(env, 182206120, 2);
@@ -46,7 +45,7 @@ public class _3965TotheGalleriaofGrandeur extends QuestHandler {
 			int var = qs.getQuestVarById(0);
 			switch (targetId) {
 				case 798391: // Andu
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var == 0) {
 								return sendQuestDialog(env, 1352);
@@ -57,7 +56,7 @@ public class _3965TotheGalleriaofGrandeur extends QuestHandler {
 					}
 					break;
 				case 798390: // Palentine
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var == 1) {
 								return sendQuestDialog(env, 2375);

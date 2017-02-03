@@ -1,6 +1,6 @@
 package quest.altgard;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -14,10 +14,8 @@ import com.aionemu.gameserver.services.QuestService;
  */
 public class _2284EscapingAsmodae extends QuestHandler {
 
-	private final static int questId = 2284;
-
 	public _2284EscapingAsmodae() {
-		super(questId);
+		super(2284);
 	}
 
 	@Override
@@ -36,12 +34,12 @@ public class _2284EscapingAsmodae extends QuestHandler {
 	public boolean onDialogEvent(final QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 203645) {
-				if (dialog == DialogAction.QUEST_SELECT) {
+				if (dialogActionId == QUEST_SELECT) {
 					return sendQuestDialog(env, 1011);
 				} else {
 					return sendQuestStartDialog(env);
@@ -49,9 +47,9 @@ public class _2284EscapingAsmodae extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 798040) {
-				if (dialog == DialogAction.QUEST_SELECT) {
+				if (dialogActionId == QUEST_SELECT) {
 					return sendQuestDialog(env, 1352);
-				} else if (dialog == DialogAction.SETPRO2) {
+				} else if (dialogActionId == SETPRO2) {
 					if (env.getVisibleObject() instanceof Npc) {
 						targetId = ((Npc) env.getVisibleObject()).getNpcId();
 						Npc npc = (Npc) env.getVisibleObject();
@@ -61,15 +59,15 @@ public class _2284EscapingAsmodae extends QuestHandler {
 					}
 				}
 			} else if (targetId == 798041) {
-				if (dialog == DialogAction.QUEST_SELECT) {
+				if (dialogActionId == QUEST_SELECT) {
 					return sendQuestDialog(env, 1693);
-				} else if (dialog == DialogAction.SETPRO3) {
+				} else if (dialogActionId == SETPRO3) {
 					return defaultStartFollowEvent(env, (Npc) env.getVisibleObject(), 798034, 1, 2);
 				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 798034) {
-				if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id())
+				if (env.getDialogActionId() == SELECT_QUEST_REWARD)
 					return sendQuestDialog(env, 10002);
 				else
 					return sendQuestEndDialog(env);

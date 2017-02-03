@@ -3,8 +3,8 @@ package ai.siege;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.ai.AIActions;
-import com.aionemu.gameserver.ai.AIRequest;
 import com.aionemu.gameserver.ai.AIName;
+import com.aionemu.gameserver.ai.AIRequest;
 import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.configs.main.GeoDataConfig;

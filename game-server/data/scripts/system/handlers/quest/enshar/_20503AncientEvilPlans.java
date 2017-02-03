@@ -1,6 +1,6 @@
 package quest.enshar;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -48,22 +48,22 @@ public class _20503AncientEvilPlans extends QuestHandler {
 
 		int var = qs.getQuestVarById(0);
 		int targetId = env.getTargetId();
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 
 		switch (targetId) {
 			case 804728:
 				if (qs.getStatus() == QuestStatus.START) {
 					if (var == 0) { // Step 0: Talk with Engrid.
-						if (dialog == DialogAction.QUEST_SELECT)
+						if (dialogActionId == QUEST_SELECT)
 							return sendQuestDialog(env, 1011);
 
-						if (dialog == DialogAction.SETPRO1)
+						if (dialogActionId == SETPRO1)
 							return defaultCloseDialog(env, var, var + 1);
 					}
 				}
 
 				if (qs.getStatus() == QuestStatus.REWARD) {
-					if (dialog == DialogAction.USE_OBJECT) {
+					if (dialogActionId == USE_OBJECT) {
 						return sendQuestDialog(env, 10002);
 					}
 
@@ -73,17 +73,17 @@ public class _20503AncientEvilPlans extends QuestHandler {
 			case 804729: // Egzen
 				if (qs.getStatus() == QuestStatus.START) {
 					if (var == 1) { // Step 1: Talk with Egzen.
-						if (dialog == DialogAction.QUEST_SELECT)
+						if (dialogActionId == QUEST_SELECT)
 							return sendQuestDialog(env, 1352);
 
-						if (dialog == DialogAction.SETPRO2)
+						if (dialogActionId == SETPRO2)
 							return defaultCloseDialog(env, var, var + 1);
 					}
 
 					if (var == 2) { // Step 2: Kill Aetheric Protection Dominators to get information and return to Egzen.
-						if (dialog == DialogAction.QUEST_SELECT)
+						if (dialogActionId == QUEST_SELECT)
 							return sendQuestDialog(env, 1693);
-						if (dialog == DialogAction.CHECK_USER_HAS_QUEST_ITEM) {
+						if (dialogActionId == CHECK_USER_HAS_QUEST_ITEM) {
 							long itemCount = player.getInventory().getItemCountByItemId(182215640); // Aetheric Token
 							if (itemCount >= 1) {
 								removeQuestItem(env, 182215640, itemCount);

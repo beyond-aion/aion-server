@@ -1,6 +1,6 @@
 package quest.altgard;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.PlayerClass;
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -45,29 +45,29 @@ public class _24016AStrangeNewThread extends QuestHandler {
 
 		int var = qs.getQuestVarById(0);
 		int targetId = env.getTargetId();
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 203557: // Suthran
 					if (var == 0) {
 						if (player.getPlayerClass() == PlayerClass.RIDER) { // Path for Rider
-							if (dialog == DialogAction.QUEST_SELECT) {
+							if (dialogActionId == QUEST_SELECT) {
 								return sendQuestDialog(env, 1011);
-							} else if (dialog == DialogAction.SELECT_ACTION_1013) {
+							} else if (dialogActionId == SELECT1_1_1) {
 								playQuestMovie(env, 219);
 								return sendQuestDialog(env, 1013);
 							}
 						} else { // Path for other classes
-							if (dialog == DialogAction.QUEST_SELECT) {
+							if (dialogActionId == QUEST_SELECT) {
 								return sendQuestDialog(env, 1693);
-							} else if (dialog == DialogAction.SELECT_ACTION_1695) {
+							} else if (dialogActionId == SELECT3_1_1) {
 								playQuestMovie(env, 66);
 								return sendQuestDialog(env, 1695);
 							}
 						}
 
-						if (dialog == DialogAction.SETPRO1) {
+						if (dialogActionId == SETPRO1) {
 							TeleportService.teleportTo(player, 220030000, 2467.6052f, 2548.0076f, 316.12375f, (byte) 63, TeleportAnimation.FADE_OUT_BEAM);
 							changeQuestStep(env, 0, 1); // 1
 							return closeDialogWindow(env);
@@ -76,7 +76,7 @@ public class _24016AStrangeNewThread extends QuestHandler {
 					break;
 				case 700140: // Gate Guardian Stone
 					if (var == 2) {
-						if (dialog == DialogAction.USE_OBJECT) {
+						if (dialogActionId == USE_OBJECT) {
 							if (player.getPlayerClass() == PlayerClass.RIDER) { // Spawn for Rider
 								QuestService.addNewSpawn(320030000, player.getInstanceId(), 233876, (float) 260.12, (float) 234.93, (float) 216.00, (byte) 90); // Officer
 																																																																								// Tavasha
@@ -97,7 +97,7 @@ public class _24016AStrangeNewThread extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203557) { // Suthran
-				if (dialog == DialogAction.USE_OBJECT) {
+				if (dialogActionId == USE_OBJECT) {
 					if (player.getPlayerClass() == PlayerClass.RIDER) { // Reward for Rider
 						return sendQuestDialog(env, 2034);
 					} else { // Reward for other classes

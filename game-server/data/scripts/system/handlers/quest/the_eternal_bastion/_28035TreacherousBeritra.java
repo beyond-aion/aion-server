@@ -1,6 +1,7 @@
 package quest.the_eternal_bastion;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
@@ -12,10 +13,8 @@ import com.aionemu.gameserver.services.QuestService;
 
 public class _28035TreacherousBeritra extends QuestHandler {
 
-	private final static int questId = 28035;
-
 	public _28035TreacherousBeritra() {
-		super(questId);
+		super(28035);
 	}
 
 	@Override
@@ -29,12 +28,12 @@ public class _28035TreacherousBeritra extends QuestHandler {
 	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialogAction = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 0) {
-				switch (dialogAction) {
+				switch (dialogActionId) {
 					case QUEST_ACCEPT_SIMPLE:
 						QuestService.startQuest(env);
 						return sendQuestStartDialog(env);
@@ -43,10 +42,10 @@ public class _28035TreacherousBeritra extends QuestHandler {
 		} else if (qs != null && qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 801047:
-					switch (dialogAction) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							return sendQuestDialog(env, 1352);
-						case SELECT_ACTION_1353:
+						case SELECT2_1:
 							return sendQuestDialog(env, 1353);
 						case SETPRO1:
 							return defaultCloseDialog(env, 0, 1);
@@ -55,7 +54,7 @@ public class _28035TreacherousBeritra extends QuestHandler {
 					}
 					return false;
 				case 800529:
-					switch (dialogAction) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							return sendQuestDialog(env, 2375);
 						case SELECT_QUEST_REWARD:

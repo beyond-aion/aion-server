@@ -1,10 +1,11 @@
 package com.aionemu.gameserver.questEngine.handlers.template;
 
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -42,11 +43,11 @@ public class FountainRewards extends QuestHandler {
 		Player player = env.getPlayer();
 		int targetId = env.getTargetId();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		
 		if (qs == null || qs.isStartable()) {
 			if (startNpcIds.contains(targetId)) { // Coin Fountain
-				switch (dialog) {
+				switch (dialogActionId) {
 					case USE_OBJECT:
 						if (!QuestService.inventoryItemCheck(env, true)) {
 							return true;
@@ -70,7 +71,7 @@ public class FountainRewards extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (startNpcIds.contains(targetId)) { // Coin Fountain
-				if (dialog == DialogAction.SELECTED_QUEST_NOREWARD) {
+				if (dialogActionId == SELECTED_QUEST_NOREWARD) {
 					if (QuestService.collectItemCheck(env, true))
 						return sendQuestEndDialog(env);
 				} else {

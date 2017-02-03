@@ -1,6 +1,7 @@
 package quest.reshanta;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -14,10 +15,8 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 public class _24044ChangeTheFuture extends QuestHandler {
 
-	private final static int questId = 24044;
-
 	public _24044ChangeTheFuture() {
-		super(questId);
+		super(24044);
 	}
 
 	@Override
@@ -36,7 +35,7 @@ public class _24044ChangeTheFuture extends QuestHandler {
 	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		if (qs == null)
 			return false;
 		int targetId = env.getTargetId();
@@ -45,7 +44,7 @@ public class _24044ChangeTheFuture extends QuestHandler {
 			int var = qs.getQuestVarById(0);
 			switch (targetId) {
 				case 278036: // Scoda
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var == 0) {
 								return sendQuestDialog(env, 1011);
@@ -56,7 +55,7 @@ public class _24044ChangeTheFuture extends QuestHandler {
 					}
 					break;
 				case 203550: // Munin
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var == 1) {
 								return sendQuestDialog(env, 1352);
@@ -67,7 +66,7 @@ public class _24044ChangeTheFuture extends QuestHandler {
 					}
 					break;
 				case 204207: // Kasir
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var == 2) {
 								return sendQuestDialog(env, 1693);
@@ -78,7 +77,7 @@ public class _24044ChangeTheFuture extends QuestHandler {
 					}
 					break;
 				case 798067: // Lyeanenerk
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var == 3) {
 								return sendQuestDialog(env, 2034);
@@ -89,7 +88,7 @@ public class _24044ChangeTheFuture extends QuestHandler {
 					}
 					break;
 				case 279029: // Lugbug
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var == 4) {
 								return sendQuestDialog(env, 2375);
@@ -104,7 +103,7 @@ public class _24044ChangeTheFuture extends QuestHandler {
 					}
 					break;
 				case 700355: // Artifact of the Inception
-					switch (dialog) {
+					switch (dialogActionId) {
 						case USE_OBJECT:
 							if (var == 5) {
 								if (player.getInventory().getItemCountByItemId(188020000) > 0) {
@@ -117,7 +116,7 @@ public class _24044ChangeTheFuture extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 278036) { // Scoda
-				if (env.getDialog() == DialogAction.USE_OBJECT) {
+				if (env.getDialogActionId() == USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
 				} else {
 					return sendQuestEndDialog(env);

@@ -128,7 +128,7 @@ public class CM_USE_ITEM extends AionClientPacket {
 				return;
 			}
 		}
-		HandlerResult result = QuestEngine.getInstance().onItemUseEvent(new QuestEnv(null, player, 0, 0), item);
+		HandlerResult result = QuestEngine.getInstance().onItemUseEvent(new QuestEnv(null, player, 0), item);
 		if (result == HandlerResult.FAILED)
 			return; // don't remove item
 

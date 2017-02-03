@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.questEngine.handlers.template;
 
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -10,7 +12,6 @@ import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.configs.administration.AdminConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.rift.RiftLocation;
 import com.aionemu.gameserver.model.templates.quest.QuestCategory;
@@ -109,13 +110,13 @@ public class MonsterHunt extends QuestHandler {
 	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.isStartable()) {
 			if (startNpcIds.isEmpty() || startNpcIds.contains(targetId)
 				|| DataManager.QUEST_DATA.getQuestById(questId).getCategory() == QuestCategory.FACTION) {
-				switch (dialog) {
+				switch (dialogActionId) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, startDialogId != 0 ? startDialogId : isDataDriven ? 4762 : 1011);
 					case QUEST_ACCEPT:
@@ -128,9 +129,9 @@ public class MonsterHunt extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
 			if (endNpcIds.contains(targetId)) {
-				if (dialog == DialogAction.QUEST_SELECT) {
+				if (dialogActionId == QUEST_SELECT) {
 					return sendQuestDialog(env, endDialogId != 0 ? endDialogId : 1352);
-				} else if (dialog == DialogAction.SELECT_QUEST_REWARD) {
+				} else if (dialogActionId == SELECT_QUEST_REWARD) {
 					for (Monster mi : monsters.keySet()) {
 						int endVar = mi.getEndVar();
 						int varId = mi.getVar();
@@ -155,7 +156,7 @@ public class MonsterHunt extends QuestHandler {
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (endNpcIds.contains(targetId)) {
 				if (!aggroNpcIds.isEmpty() || isDataDriven) {
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 						case USE_OBJECT:
 							return sendQuestDialog(env, 10002);

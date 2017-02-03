@@ -1,6 +1,7 @@
 package quest.verteron;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -14,10 +15,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _1158VillageSealFound extends QuestHandler {
 
-	private final static int questId = 1158;
-
 	public _1158VillageSealFound() {
-		super(questId);
+		super(1158);
 	}
 
 	@Override
@@ -32,7 +31,7 @@ public class _1158VillageSealFound extends QuestHandler {
 	public boolean onDialogEvent(final QuestEnv env) {
 		final Player player = env.getPlayer();
 		final QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 
 		int targetId = 0;
 		if (env.getVisibleObject() instanceof Npc)
@@ -40,7 +39,7 @@ public class _1158VillageSealFound extends QuestHandler {
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 798003) {
-				switch (dialog) {
+				switch (dialogActionId) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 1011);
 					default:
@@ -54,10 +53,10 @@ public class _1158VillageSealFound extends QuestHandler {
 		int var = qs.getQuestVarById(0);
 		if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 700003 && var == 0) {
-				switch (dialog) {
+				switch (dialogActionId) {
 					case USE_OBJECT:
 						return sendQuestDialog(env, 1352);
-					case SELECT_ACTION_1353:
+					case SELECT2_1:
 						return sendQuestDialog(env, 1353);
 					case SETPRO1:
 						if (!giveQuestItem(env, 182200502, 1))
@@ -70,7 +69,7 @@ public class _1158VillageSealFound extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203128) {
-				switch (dialog) {
+				switch (dialogActionId) {
 					case USE_OBJECT:
 						return sendQuestDialog(env, 2375);
 					case SELECT_QUEST_REWARD:

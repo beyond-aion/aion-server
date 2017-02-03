@@ -1,6 +1,7 @@
 package quest.morheim;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -15,10 +16,8 @@ import com.aionemu.gameserver.services.teleport.TeleportService;
  */
 public class _2423ThereAndBackAgain extends QuestHandler {
 
-	private final static int questId = 2423;
-
 	public _2423ThereAndBackAgain() {
-		super(questId);
+		super(2423);
 	}
 
 	@Override
@@ -36,7 +35,7 @@ public class _2423ThereAndBackAgain extends QuestHandler {
 		final QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 204326) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
+				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 4762);
 				else
 					return sendQuestStartDialog(env);
@@ -44,7 +43,7 @@ public class _2423ThereAndBackAgain extends QuestHandler {
 		} else if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 204375:
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case QUEST_SELECT: {
 							if (qs.getQuestVarById(0) == 0)
 								return sendQuestDialog(env, 1011);
@@ -62,7 +61,7 @@ public class _2423ThereAndBackAgain extends QuestHandler {
 							qs.setQuestVar(3);
 							return defaultCloseDialog(env, 3, 3, true, false);
 						}
-						case SELECT_ACTION_1779: {
+						case SELECT3_2: {
 							return sendQuestDialog(env, 1779);
 						}
 						case SETPRO1: {
@@ -73,7 +72,7 @@ public class _2423ThereAndBackAgain extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204375) {
-				if (env.getDialog() == DialogAction.USE_OBJECT) {
+				if (env.getDialogActionId() == USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
 				} else {
 					return sendQuestEndDialog(env);

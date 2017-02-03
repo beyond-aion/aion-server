@@ -1,6 +1,7 @@
 package quest.reshanta;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -55,7 +56,7 @@ public class _14047ChainingMemories extends QuestHandler {
 	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.isStartable()) {
@@ -63,7 +64,7 @@ public class _14047ChainingMemories extends QuestHandler {
 		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			if (targetId == npc_ids[0]) {
-				switch (dialog) {
+				switch (dialogActionId) {
 					case QUEST_SELECT:
 						if (var == 0) {
 							return sendQuestDialog(env, 1011);
@@ -78,7 +79,7 @@ public class _14047ChainingMemories extends QuestHandler {
 						break;
 				}
 			} else if (targetId == npc_ids[1]) {
-				switch (dialog) {
+				switch (dialogActionId) {
 					case QUEST_SELECT:
 						if (var == 1) {
 							return sendQuestDialog(env, 1352);
@@ -93,7 +94,7 @@ public class _14047ChainingMemories extends QuestHandler {
 						break;
 				}
 			} else if (targetId == npc_ids[2]) {
-				switch (dialog) {
+				switch (dialogActionId) {
 					case QUEST_SELECT:
 						if (var == 2) {
 							return sendQuestDialog(env, 1693);
@@ -110,7 +111,7 @@ public class _14047ChainingMemories extends QuestHandler {
 						return true;
 				}
 			} else if (targetId == npc_ids[3]) {
-				switch (dialog) {
+				switch (dialogActionId) {
 					case QUEST_SELECT:
 						if (var == 6) {
 							return sendQuestDialog(env, 3057);
@@ -134,13 +135,13 @@ public class _14047ChainingMemories extends QuestHandler {
 						break;
 				}
 			} else if (targetId == npc_ids[4]) {
-				switch (dialog) {
+				switch (dialogActionId) {
 					case QUEST_SELECT:
 						if (var >= 4) {
 							return sendQuestDialog(env, 2375);
 						}
 						break;
-					case SELECT_ACTION_2376:
+					case SELECT5_1:
 						if (var == 4) {
 							playQuestMovie(env, 421);
 						}
@@ -159,9 +160,9 @@ public class _14047ChainingMemories extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == npc_ids[5]) {
-				if (dialog == DialogAction.USE_OBJECT)
+				if (dialogActionId == USE_OBJECT)
 					return sendQuestDialog(env, 3398);
-				else if (dialog == DialogAction.SELECT_QUEST_REWARD)
+				else if (dialogActionId == SELECT_QUEST_REWARD)
 					return sendQuestDialog(env, 5);
 				else
 					return sendQuestEndDialog(env);

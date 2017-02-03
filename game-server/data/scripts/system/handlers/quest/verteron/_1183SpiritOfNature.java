@@ -1,6 +1,7 @@
 package quest.verteron;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
@@ -15,10 +16,8 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 public class _1183SpiritOfNature extends QuestHandler {
 
-	private final static int questId = 1183;
-
 	public _1183SpiritOfNature() {
-		super(questId);
+		super(1183);
 	}
 
 	@Override
@@ -40,7 +39,7 @@ public class _1183SpiritOfNature extends QuestHandler {
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 730012) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT) {
+				if (env.getDialogActionId() == QUEST_SELECT) {
 					return sendQuestDialog(env, 1011);
 				} else
 					return sendQuestStartDialog(env);
@@ -52,7 +51,7 @@ public class _1183SpiritOfNature extends QuestHandler {
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 730013:
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case USE_OBJECT: {
 							return sendQuestDialog(env, 1352);
 						}
@@ -68,7 +67,7 @@ public class _1183SpiritOfNature extends QuestHandler {
 					}
 					return false;
 				case 730014:
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case QUEST_SELECT: {
 							return sendQuestDialog(env, 1693);
 						}
@@ -85,7 +84,7 @@ public class _1183SpiritOfNature extends QuestHandler {
 							return sendQuestEndDialog(env);
 					}
 				case 730012:
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case QUEST_SELECT: {
 							return sendQuestDialog(env, 2375);
 						}
@@ -101,7 +100,7 @@ public class _1183SpiritOfNature extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 730012) {
-				if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id())
+				if (env.getDialogActionId() == SELECT_QUEST_REWARD)
 					return sendQuestDialog(env, 5);
 				else
 					return sendQuestEndDialog(env);

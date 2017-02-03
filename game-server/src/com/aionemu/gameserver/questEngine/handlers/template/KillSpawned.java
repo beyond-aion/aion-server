@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Set;
 
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.spawns.SpawnSearchResult;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -65,12 +65,12 @@ public class KillSpawned extends QuestHandler {
 	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.isStartable()) {
 			if (startNpcIds.isEmpty() || startNpcIds.contains(targetId)) {
-				if (dialog == DialogAction.QUEST_SELECT) {
+				if (dialogActionId == QUEST_SELECT) {
 					return sendQuestDialog(env, isDataDriven ? 4762 : 1011);
 				} else {
 					return sendQuestStartDialog(env);
@@ -78,7 +78,7 @@ public class KillSpawned extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
 			if (spawnerObjectIds.contains(targetId)) {
-				if (dialog == DialogAction.USE_OBJECT) {
+				if (dialogActionId == USE_OBJECT) {
 					int monsterId = 0;
 					for (Monster m : spawnedMonsters.values()) {
 						if (m.getSpawnerNpcId() == targetId) {
@@ -100,9 +100,9 @@ public class KillSpawned extends QuestHandler {
 					}
 				}
 				if (endNpcIds.contains(targetId)) {
-					if (dialog == DialogAction.QUEST_SELECT) {
+					if (dialogActionId == QUEST_SELECT) {
 						return sendQuestDialog(env, 10002);
-					} else if (dialog == DialogAction.SELECT_QUEST_REWARD) {
+					} else if (dialogActionId == SELECT_QUEST_REWARD) {
 						return sendQuestDialog(env, 5);
 					}
 				}

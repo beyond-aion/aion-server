@@ -1,6 +1,7 @@
 package quest.sanctum;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -12,10 +13,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _1948WheresVindachinerk extends QuestHandler {
 
-	private static final int questId = 1948;
-
 	public _1948WheresVindachinerk() {
-		super(questId);
+		super(1948);
 	}
 
 	@Override
@@ -31,12 +30,12 @@ public class _1948WheresVindachinerk extends QuestHandler {
 	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		int targetId = env.getTargetId();
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 798012) {
-				if (dialog == DialogAction.QUEST_SELECT) {
+				if (dialogActionId == QUEST_SELECT) {
 					return sendQuestDialog(env, 1011);
 				} else {
 					return sendQuestStartDialog(env);
@@ -46,14 +45,14 @@ public class _1948WheresVindachinerk extends QuestHandler {
 			int var = qs.getQuestVarById(0);
 			switch (targetId) {
 				case 798004:
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT: {
 							if (var == 0) {
 								return sendQuestDialog(env, 1352);
 							}
 							return false;
 						}
-						case SELECT_ACTION_1353: {
+						case SELECT2_1: {
 							playQuestMovie(env, 0);
 							return sendQuestDialog(env, 1353);
 						}
@@ -63,12 +62,12 @@ public class _1948WheresVindachinerk extends QuestHandler {
 					}
 					return false;
 				case 798132:
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var == 1)
 								return sendQuestDialog(env, 1693);
 							break;
-						case SELECT_ACTION_1694:
+						case SELECT3_1:
 							return sendQuestDialog(env, 1694);
 						case SETPRO2:
 							changeQuestStep(env, 1, 2);
@@ -77,7 +76,7 @@ public class _1948WheresVindachinerk extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 279006) {
-				if (dialog == DialogAction.USE_OBJECT) {
+				if (dialogActionId == USE_OBJECT) {
 					return sendQuestDialog(env, 2375);
 				} else {
 					return sendQuestEndDialog(env);

@@ -1,6 +1,7 @@
 package quest.verteron;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -13,10 +14,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _1163ArachnaAntidote extends QuestHandler {
 
-	private final static int questId = 1163;
-
 	public _1163ArachnaAntidote() {
-		super(questId);
+		super(1163);
 	}
 
 	@Override
@@ -38,7 +37,7 @@ public class _1163ArachnaAntidote extends QuestHandler {
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 203096) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
+				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 1011);
 				else
 					return sendQuestStartDialog(env, 182200564, 1);
@@ -51,7 +50,7 @@ public class _1163ArachnaAntidote extends QuestHandler {
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 203151:
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case QUEST_SELECT: {
 							return sendQuestDialog(env, 1352);
 						}
@@ -63,7 +62,7 @@ public class _1163ArachnaAntidote extends QuestHandler {
 						}
 					}
 				case 203155:
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case QUEST_SELECT: {
 							return sendQuestDialog(env, 2375);
 						}
@@ -79,7 +78,7 @@ public class _1163ArachnaAntidote extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203155) {
-				if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id())
+				if (env.getDialogActionId() == SELECT_QUEST_REWARD)
 					return sendQuestDialog(env, 5);
 				else
 					return sendQuestEndDialog(env);

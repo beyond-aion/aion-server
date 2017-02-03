@@ -1,6 +1,7 @@
 package quest.fenris_fang;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -13,10 +14,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _4937RecognitionOfThePreceptors extends QuestHandler {
 
-	private final static int questId = 4937;
-
 	public _4937RecognitionOfThePreceptors() {
-		super(questId);
+		super(4937);
 	}
 
 	@Override
@@ -36,7 +35,7 @@ public class _4937RecognitionOfThePreceptors extends QuestHandler {
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 204053) { // Kvasir
-				if (env.getDialog() == DialogAction.QUEST_SELECT) {
+				if (env.getDialogActionId() == QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);
 				} else {
 					return sendQuestStartDialog(env, 182207112, 1);
@@ -46,7 +45,7 @@ public class _4937RecognitionOfThePreceptors extends QuestHandler {
 			int var = qs.getQuestVarById(0);
 			switch (targetId) {
 				case 204059: // Freyr
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case QUEST_SELECT:
 							return sendQuestDialog(env, 1011);
 						case SETPRO1:
@@ -54,7 +53,7 @@ public class _4937RecognitionOfThePreceptors extends QuestHandler {
 					}
 					break;
 				case 204058: // Sif
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case QUEST_SELECT:
 							if (var == 1) {
 								return sendQuestDialog(env, 1352);
@@ -65,7 +64,7 @@ public class _4937RecognitionOfThePreceptors extends QuestHandler {
 					}
 					break;
 				case 204057: // Sigyn
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case QUEST_SELECT:
 							if (var == 2) {
 								return sendQuestDialog(env, 1693);
@@ -76,7 +75,7 @@ public class _4937RecognitionOfThePreceptors extends QuestHandler {
 					}
 					break;
 				case 204056: // Traufnir
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case QUEST_SELECT:
 							if (var == 3) {
 								return sendQuestDialog(env, 2034);
@@ -87,7 +86,7 @@ public class _4937RecognitionOfThePreceptors extends QuestHandler {
 					}
 					break;
 				case 801222: // Hadubrant
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case QUEST_SELECT:
 							if (var == 4) {
 								return sendQuestDialog(env, 2375);
@@ -98,7 +97,7 @@ public class _4937RecognitionOfThePreceptors extends QuestHandler {
 					}
 					break;
 				case 801223: // Brynhilde
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case QUEST_SELECT:
 							if (var == 5) {
 								return sendQuestDialog(env, 2716);
@@ -109,7 +108,7 @@ public class _4937RecognitionOfThePreceptors extends QuestHandler {
 					}
 					break;
 				case 204075: // Balder
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case QUEST_SELECT:
 							if (var == 6 && checkItemExistence(env, 182207113, 1, false)) {
 								return sendQuestDialog(env, 3057);
@@ -123,9 +122,9 @@ public class _4937RecognitionOfThePreceptors extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204053) { // Kvasir
-				if (env.getDialog() == DialogAction.USE_OBJECT) {
+				if (env.getDialogActionId() == USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
-				} else if (env.getDialog() == DialogAction.SELECT_QUEST_REWARD) {
+				} else if (env.getDialogActionId() == SELECT_QUEST_REWARD) {
 					return sendQuestDialog(env, 5);
 				} else {
 					if (checkItemExistence(env, 182207113, 1, true)) {

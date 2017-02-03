@@ -3,6 +3,7 @@ package ai.instance.theShugoEmperorsVault;
 import java.util.Map;
 
 import com.aionemu.gameserver.ai.AIName;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
@@ -24,13 +25,13 @@ public class VaultKeeper extends GeneralNpcAI {
 	private Map<Integer, Integer> playerAndRoom = new FastMap<>();
 	
 	@Override
-	public boolean onDialogSelect(Player player, int dialogId, int questId, int extendedRewardIndex) {
-		checkEntryConditions(player, dialogId);
+	public boolean onDialogSelect(Player player, int dialogActionId, int questId, int extendedRewardIndex) {
+		checkEntryConditions(player, dialogActionId);
 		return true;
 	}
 	
-	private synchronized void checkEntryConditions(Player player, int dialogId) {
-		if (dialogId == 10000) {
+	private synchronized void checkEntryConditions(Player player, int dialogActionId) {
+		if (dialogActionId == SETPRO1) {
 			int roomNo = room;
 			
 			if (playerAndRoom.containsKey(player.getObjectId())) {
@@ -50,7 +51,7 @@ public class VaultKeeper extends GeneralNpcAI {
 				room++;
 				TeleportService.teleportTo(player, 301400000, player.getInstanceId(), 171.741f, 541.754f, 395f, (byte) 88, TeleportAnimation.FADE_OUT_BEAM);
 			} else {
-				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 0, 0));
+				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 0));
 			}
 		}
 	}

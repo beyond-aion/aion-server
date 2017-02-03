@@ -1,6 +1,6 @@
 package quest.theobomos;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -20,10 +20,8 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
  */
 public class _3060TheRedJournal extends QuestHandler {
 
-	private final static int questId = 3060;
-
 	public _3060TheRedJournal() {
-		super(questId);
+		super(3060);
 	}
 
 	@Override
@@ -48,11 +46,11 @@ public class _3060TheRedJournal extends QuestHandler {
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 0) {
-				if (env.getDialog() == DialogAction.QUEST_ACCEPT_1) {
+				if (env.getDialogActionId() == QUEST_ACCEPT_1) {
 					QuestService.startQuest(env);
 					return closeDialogWindow(env);
 				}
-				if (env.getDialogId() == DialogAction.QUEST_REFUSE_1.id()) {
+				if (env.getDialogActionId() == QUEST_REFUSE_1) {
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(0, 0));
 					return sendQuestEndDialog(env);
 				}
@@ -63,9 +61,9 @@ public class _3060TheRedJournal extends QuestHandler {
 
 		else if (targetId == 798190) {
 			if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 0) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
+				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 1352);
-				else if (env.getDialog() == DialogAction.SETPRO1) {
+				else if (env.getDialogActionId() == SETPRO1) {
 					qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
 					updateQuestStatus(env);
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
@@ -75,9 +73,9 @@ public class _3060TheRedJournal extends QuestHandler {
 			}
 		} else if (targetId == 798191) {
 			if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 1) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
+				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 1693);
-				else if (env.getDialog() == DialogAction.SETPRO2) {
+				else if (env.getDialogActionId() == SETPRO2) {
 					qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
 					updateQuestStatus(env);
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
@@ -87,9 +85,9 @@ public class _3060TheRedJournal extends QuestHandler {
 			}
 		} else if (targetId == 798192) {
 			if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 2) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
+				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 2034);
-				else if (env.getDialog() == DialogAction.SETPRO3) {
+				else if (env.getDialogActionId() == SETPRO3) {
 					qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
 					updateQuestStatus(env);
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
@@ -99,9 +97,9 @@ public class _3060TheRedJournal extends QuestHandler {
 			}
 		} else if (targetId == 798193) {
 			if (qs != null) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT && qs.getStatus() == QuestStatus.START) {
+				if (env.getDialogActionId() == QUEST_SELECT && qs.getStatus() == QuestStatus.START) {
 					return sendQuestDialog(env, 2375);
-				} else if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id() && qs.getStatus() != QuestStatus.COMPLETE) {
+				} else if (env.getDialogActionId() == SELECT_QUEST_REWARD && qs.getStatus() != QuestStatus.COMPLETE) {
 					removeQuestItem(env, 182208043, 1);
 					qs.setQuestVar(1);
 					qs.setStatus(QuestStatus.REWARD);

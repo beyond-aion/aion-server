@@ -1,6 +1,7 @@
 package quest.daevanion;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
@@ -16,11 +17,10 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 public class _2990MakingTheDaevanionWeapon extends QuestHandler {
 
-	private final static int questId = 2990;
 	private final static int[] npc_ids = { 204146 };
 
 	public _2990MakingTheDaevanionWeapon() {
-		super(questId);
+		super(2990);
 	}
 
 	@Override
@@ -45,7 +45,7 @@ public class _2990MakingTheDaevanionWeapon extends QuestHandler {
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 204146)// Kanensa
 			{
-				if (env.getDialog() == DialogAction.QUEST_SELECT) {
+				if (env.getDialogActionId() == QUEST_SELECT) {
 					int plate = player.getEquipment().itemSetPartsEquipped(9);
 					int chain = player.getEquipment().itemSetPartsEquipped(8);
 					int leather = player.getEquipment().itemSetPartsEquipped(7);
@@ -69,7 +69,7 @@ public class _2990MakingTheDaevanionWeapon extends QuestHandler {
 
 		if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 204146) {
-				switch (env.getDialog()) {
+				switch (env.getDialogActionId()) {
 					case QUEST_SELECT:
 						if (var == 0)
 							return sendQuestDialog(env, 1011);
@@ -90,11 +90,11 @@ public class _2990MakingTheDaevanionWeapon extends QuestHandler {
 								return sendQuestDialog(env, 10001);
 						}
 						break;
-					case SELECT_ACTION_1352:
+					case SELECT2:
 						if (var == 0)
 							return sendQuestDialog(env, 1352);
 						return false;
-					case SELECT_ACTION_2035:
+					case SELECT4_1:
 						if (var == 3) {
 							if (player.getCommonData().getDp() == 4000 && player.getInventory().getItemCountByItemId(186000040) > 0) {
 								removeQuestItem(env, 186000040, 1);

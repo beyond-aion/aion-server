@@ -1,6 +1,7 @@
 package quest.haramel;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -14,10 +15,8 @@ import com.aionemu.gameserver.world.zone.ZoneName;
  */
 public class _28500OdellaOdellaWhereArtThou extends QuestHandler {
 
-	private final static int questId = 28500;
-
 	public _28500OdellaOdellaWhereArtThou() {
-		super(questId);
+		super(28500);
 	}
 
 	@Override
@@ -35,12 +34,12 @@ public class _28500OdellaOdellaWhereArtThou extends QuestHandler {
 	public boolean onDialogEvent(QuestEnv env) {
 		final Player player = env.getPlayer();
 		int targetId = env.getTargetId();
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 203560) { // Morn
-				if (dialog == DialogAction.QUEST_SELECT) {
+				if (dialogActionId == QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);
 				} else {
 					return sendQuestStartDialog(env);
@@ -50,7 +49,7 @@ public class _28500OdellaOdellaWhereArtThou extends QuestHandler {
 			int var = qs.getQuestVarById(0);
 			switch (targetId) {
 				case 203649: // Gulkalla
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var == 0) {
 								return sendQuestDialog(env, 1011);
@@ -61,7 +60,7 @@ public class _28500OdellaOdellaWhereArtThou extends QuestHandler {
 					}
 					break;
 				case 730306: // Discarded Odium Piece
-					switch (dialog) {
+					switch (dialogActionId) {
 						case USE_OBJECT:
 							if (var == 1) {
 								return sendQuestDialog(env, 1352);
@@ -72,7 +71,7 @@ public class _28500OdellaOdellaWhereArtThou extends QuestHandler {
 					}
 					break;
 				case 730307: // Discarded Odium Pile
-					switch (dialog) {
+					switch (dialogActionId) {
 						case USE_OBJECT:
 							if (var == 2) {
 								return sendQuestDialog(env, 1693);
@@ -85,9 +84,9 @@ public class _28500OdellaOdellaWhereArtThou extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 799522) { // Moorilerk
-				if (dialog == DialogAction.USE_OBJECT) {
+				if (dialogActionId == USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
-				} else if (dialog == DialogAction.SELECT_QUEST_REWARD) {
+				} else if (dialogActionId == SELECT_QUEST_REWARD) {
 					return sendQuestDialog(env, 5);
 				} else {
 					return sendQuestEndDialog(env);

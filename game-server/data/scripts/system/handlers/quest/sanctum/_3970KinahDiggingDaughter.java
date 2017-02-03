@@ -1,6 +1,6 @@
 package quest.sanctum;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -12,10 +12,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _3970KinahDiggingDaughter extends QuestHandler {
 
-	private final static int questId = 3970;
-
 	public _3970KinahDiggingDaughter() {
-		super(questId);
+		super(3970);
 	}
 
 	@Override
@@ -31,12 +29,12 @@ public class _3970KinahDiggingDaughter extends QuestHandler {
 	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 203893) {
-				if (dialog == DialogAction.QUEST_SELECT) {
+				if (dialogActionId == QUEST_SELECT) {
 					return sendQuestDialog(env, 1011);
 				} else {
 					return sendQuestStartDialog(env, 182206112, 1);
@@ -44,33 +42,33 @@ public class _3970KinahDiggingDaughter extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 798072) {
-				if (dialog == DialogAction.QUEST_SELECT) {
+				if (dialogActionId == QUEST_SELECT) {
 					if (qs.getQuestVarById(0) == 0) {
 						return sendQuestDialog(env, 1352);
 					}
-				} else if (dialog == DialogAction.SETPRO1) {
+				} else if (dialogActionId == SETPRO1) {
 					removeQuestItem(env, 182206112, 1);
 					giveQuestItem(env, 182206113, 1);
 					return defaultCloseDialog(env, 0, 1);
 				}
 			}
 			if (targetId == 279020) {
-				if (dialog == DialogAction.QUEST_SELECT) {
+				if (dialogActionId == QUEST_SELECT) {
 					if (qs.getQuestVarById(0) == 1) {
 						return sendQuestDialog(env, 1693);
 					}
-				} else if (dialog == DialogAction.SETPRO2) {
+				} else if (dialogActionId == SETPRO2) {
 					removeQuestItem(env, 182206113, 1);
 					giveQuestItem(env, 182206114, 1);
 					return defaultCloseDialog(env, 1, 2);
 				}
 			}
 			if (targetId == 798053) {
-				if (dialog == DialogAction.QUEST_SELECT) {
+				if (dialogActionId == QUEST_SELECT) {
 					if (qs.getQuestVarById(0) == 2) {
 						return sendQuestDialog(env, 2034);
 					}
-				} else if (dialog == DialogAction.SETPRO3) {
+				} else if (dialogActionId == SETPRO3) {
 					removeQuestItem(env, 182206114, 1);
 					giveQuestItem(env, 182206115, 1);
 					qs.setQuestVar(3);
@@ -79,7 +77,7 @@ public class _3970KinahDiggingDaughter extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 798386) {
-				if (dialog == DialogAction.USE_OBJECT) {
+				if (dialogActionId == USE_OBJECT) {
 					return sendQuestDialog(env, 2375);
 				}
 				removeQuestItem(env, 182206115, 1);

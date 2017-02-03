@@ -46,14 +46,14 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 
 	private class EmpyreanStage {
 
-		private List<Npc> npcs = new FastTable<>();
+		private final List<Npc> stageNpcs;
 
 		public EmpyreanStage(List<Npc> npcs) {
-			this.npcs = npcs;
+			this.stageNpcs = npcs;
 		}
 
 		private boolean containNpc() {
-			for (Npc npc : npcs) {
+			for (Npc npc : stageNpcs) {
 				if (instance.getNpcs().contains(npc)) {
 					return true;
 				}
@@ -1076,7 +1076,7 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 
 	private EmpyreanStage getEmpyreanStage(Npc npc) {
 		for (EmpyreanStage es : emperyanStage) {
-			if (es.npcs.contains(npc)) {
+			if (es.stageNpcs.contains(npc)) {
 				return es;
 			}
 		}

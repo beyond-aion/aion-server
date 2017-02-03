@@ -1,6 +1,6 @@
 package quest.altgard;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -18,10 +18,8 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
  */
 public class _2208MauInTenMinutesADay extends QuestHandler {
 
-	private final static int questId = 2208;
-
 	public _2208MauInTenMinutesADay() {
-		super(questId);
+		super(2208);
 	}
 
 	@Override
@@ -41,9 +39,9 @@ public class _2208MauInTenMinutesADay extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 203591) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
+				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 1011);
-				else if (env.getDialogId() == DialogAction.QUEST_ACCEPT_1.id()) {
+				else if (env.getDialogActionId() == QUEST_ACCEPT_1) {
 					if (giveQuestItem(env, 182203205, 1))
 						return sendQuestStartDialog(env);
 					return true;
@@ -53,12 +51,12 @@ public class _2208MauInTenMinutesADay extends QuestHandler {
 		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 203589) {
 				int var = qs.getQuestVarById(0);
-				if (env.getDialog() == DialogAction.QUEST_SELECT) {
+				if (env.getDialogActionId() == QUEST_SELECT) {
 					if (var == 0)
 						return sendQuestDialog(env, 1693);
 					else if (var == 1)
 						return sendQuestDialog(env, 1352);
-				} else if (env.getDialog() == DialogAction.SETPRO1) {
+				} else if (env.getDialogActionId() == SETPRO1) {
 					qs.setStatus(QuestStatus.REWARD);
 					updateQuestStatus(env);
 					return sendQuestSelectionDialog(env);

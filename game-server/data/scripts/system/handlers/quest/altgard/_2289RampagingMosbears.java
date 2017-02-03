@@ -1,6 +1,7 @@
 package quest.altgard;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -12,10 +13,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _2289RampagingMosbears extends QuestHandler {
 
-	private static final int questId = 2289;
-
 	public _2289RampagingMosbears() {
-		super(questId);
+		super(2289);
 	}
 
 	@Override
@@ -32,12 +31,12 @@ public class _2289RampagingMosbears extends QuestHandler {
 	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 203616) { // Gefion
-				if (dialog == DialogAction.QUEST_SELECT) {
+				if (dialogActionId == QUEST_SELECT) {
 					return sendQuestDialog(env, 1011);
 				} else {
 					return sendQuestStartDialog(env);
@@ -47,7 +46,7 @@ public class _2289RampagingMosbears extends QuestHandler {
 			int var = qs.getQuestVarById(0);
 			switch (targetId) {
 				case 203616: // Gefion
-					switch (dialog) {
+					switch (dialogActionId) {
 						case SETPRO1:
 							return sendQuestSelectionDialog(env);
 						case QUEST_SELECT:
@@ -57,7 +56,7 @@ public class _2289RampagingMosbears extends QuestHandler {
 								return sendQuestDialog(env, 2034);
 							}
 							return false;
-						case SELECT_ACTION_1354:
+						case SELECT2_1_1:
 							playQuestMovie(env, 62);
 							return sendQuestDialog(env, 1354);
 						case SETPRO2:
@@ -69,7 +68,7 @@ public class _2289RampagingMosbears extends QuestHandler {
 					}
 					break;
 				case 203618: // Skanin
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var == 6) {
 								return sendQuestDialog(env, 1693);

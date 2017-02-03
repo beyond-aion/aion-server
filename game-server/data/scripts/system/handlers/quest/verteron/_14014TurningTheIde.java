@@ -1,5 +1,7 @@
 package quest.verteron;
 
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -51,7 +53,7 @@ public class _14014TurningTheIde extends QuestHandler {
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 203146:
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case QUEST_SELECT:
 							if (var == 0)
 								return sendQuestDialog(env, 1011);
@@ -62,7 +64,7 @@ public class _14014TurningTheIde extends QuestHandler {
 					}
 					break;
 				case 203147:
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case QUEST_SELECT:
 							if (var == 2)
 								return sendQuestDialog(env, 1693);
@@ -72,7 +74,7 @@ public class _14014TurningTheIde extends QuestHandler {
 					}
 					break;
 				case 802045:
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case QUEST_SELECT:
 							if (var == 3)
 								return sendQuestDialog(env, 2034);
@@ -83,7 +85,7 @@ public class _14014TurningTheIde extends QuestHandler {
 					}
 					break;
 				case 203098:
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case QUEST_SELECT:
 							if (var == 8)
 								return sendQuestDialog(env, 3057);

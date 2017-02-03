@@ -1,6 +1,7 @@
 package quest.eltnen;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -14,10 +15,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 public class _1423ExpertAdvice extends QuestHandler {
 
-	private final static int questId = 1423;
-
 	public _1423ExpertAdvice() {
-		super(questId);
+		super(1423);
 	}
 
 	@Override
@@ -37,7 +36,7 @@ public class _1423ExpertAdvice extends QuestHandler {
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 203983) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT) {
+				if (env.getDialogActionId() == QUEST_SELECT) {
 					return sendQuestDialog(env, 1011);
 				} else {
 					return sendQuestStartDialog(env);
@@ -51,7 +50,7 @@ public class _1423ExpertAdvice extends QuestHandler {
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 203983:
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case SETPRO1: {
 							playQuestMovie(env, 41);
 							return sendQuestDialog(env, 2375);
@@ -68,7 +67,7 @@ public class _1423ExpertAdvice extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203983) {
-				if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id())
+				if (env.getDialogActionId() == SELECT_QUEST_REWARD)
 					return sendQuestDialog(env, 5);
 				else
 					return sendQuestEndDialog(env);

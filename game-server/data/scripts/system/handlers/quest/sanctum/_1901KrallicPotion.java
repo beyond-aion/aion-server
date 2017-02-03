@@ -1,6 +1,7 @@
 package quest.sanctum;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.items.storage.Storage;
@@ -16,10 +17,8 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 public class _1901KrallicPotion extends QuestHandler {
 
-	private final static int questId = 1901;
-
 	public _1901KrallicPotion() {
-		super(questId);
+		super(1901);
 	}
 
 	@Override
@@ -43,18 +42,18 @@ public class _1901KrallicPotion extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (targetId == 203830)// Marmeia
 		{
-			if (env.getDialog() == DialogAction.QUEST_SELECT)
+			if (env.getDialogActionId() == QUEST_SELECT)
 				return sendQuestDialog(env, 1011);
 			else
 				return sendQuestStartDialog(env);
 		} else {
 			if (targetId == 203864) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
+				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 2375);
-				else if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id() && qs.getStatus() != QuestStatus.COMPLETE) {
+				else if (env.getDialogActionId() == SELECT_QUEST_REWARD && qs.getStatus() != QuestStatus.COMPLETE) {
 					return sendQuestEndDialog(env);
 				} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
-					if (env.getDialog() == DialogAction.USE_OBJECT)
+					if (env.getDialogActionId() == USE_OBJECT)
 						return sendQuestDialog(env, 3398);
 					return sendQuestEndDialog(env);
 				}
@@ -63,14 +62,14 @@ public class _1901KrallicPotion extends QuestHandler {
 					int var = qs.getQuestVarById(0);
 					switch (targetId) {
 						case 798026:// Kunberunerk
-							switch (env.getDialog()) {
+							switch (env.getDialogActionId()) {
 								case QUEST_SELECT:
 									if (var == 0)
 										return sendQuestDialog(env, 1352);
 									else if (var == 5)
 										return sendQuestDialog(env, 3057);
 									return false;
-								case SELECT_ACTION_1438:
+								case SELECT2_2:
 									Storage inventory = player.getInventory();
 									if (inventory.tryDecreaseKinah(10000)) {
 										return sendQuestDialog(env, 1438);
@@ -97,7 +96,7 @@ public class _1901KrallicPotion extends QuestHandler {
 									return sendQuestStartDialog(env);
 							}
 						case 798025:// Mapireck
-							switch (env.getDialog()) {
+							switch (env.getDialogActionId()) {
 								case QUEST_SELECT:
 									if (var == 1)
 										return sendQuestDialog(env, 1693);
@@ -118,7 +117,7 @@ public class _1901KrallicPotion extends QuestHandler {
 							}
 							return false;
 						case 203131:// Maniparas
-							switch (env.getDialog()) {
+							switch (env.getDialogActionId()) {
 								case QUEST_SELECT:
 									return sendQuestDialog(env, 2034);
 								case SETPRO4:
@@ -129,7 +128,7 @@ public class _1901KrallicPotion extends QuestHandler {
 							}
 							return false;
 						case 798003:// Gaphyrk
-							switch (env.getDialog()) {
+							switch (env.getDialogActionId()) {
 								case QUEST_SELECT:
 									return sendQuestDialog(env, 2375);
 								case SETPRO5:

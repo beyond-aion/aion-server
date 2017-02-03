@@ -1,6 +1,7 @@
 package quest.gelkmaros;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -12,10 +13,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _21052DragonHuntin extends QuestHandler {
 
-	private final static int questId = 21052;
-
 	public _21052DragonHuntin() {
-		super(questId);
+		super(21052);
 	}
 
 	@Override
@@ -28,15 +27,15 @@ public class _21052DragonHuntin extends QuestHandler {
 	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 799268) {
-				switch (dialog) {
+				switch (dialogActionId) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 1011);
-					case SELECT_ACTION_1012:
+					case SELECT1_1:
 						return sendQuestDialog(env, 1012);
 					case ASK_QUEST_ACCEPT:
 						return sendQuestDialog(env, 4);
@@ -49,10 +48,10 @@ public class _21052DragonHuntin extends QuestHandler {
 		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			if (targetId == 799268) {
-				switch (dialog) {
+				switch (dialogActionId) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 2375);
-					case SELECT_ACTION_2034:
+					case SELECT4:
 						return sendQuestDialog(env, 2034);
 					case CHECK_USER_HAS_QUEST_ITEM:
 						return checkQuestItems(env, var, var, true, 5, 2716);

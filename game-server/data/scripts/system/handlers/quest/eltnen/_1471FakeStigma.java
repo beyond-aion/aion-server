@@ -1,6 +1,7 @@
 package quest.eltnen;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -14,10 +15,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _1471FakeStigma extends QuestHandler {
 
-	private final static int questId = 1471;
-
 	public _1471FakeStigma() {
-		super(questId);
+		super(1471);
 	}
 
 	@Override
@@ -33,12 +32,12 @@ public class _1471FakeStigma extends QuestHandler {
 	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 203991) {
-				if (dialog == DialogAction.QUEST_SELECT)
+				if (dialogActionId == QUEST_SELECT)
 					return sendQuestDialog(env, 1011);
 				else
 					return sendQuestStartDialog(env);
@@ -46,7 +45,7 @@ public class _1471FakeStigma extends QuestHandler {
 		} else if (qs.getStatus() == QuestStatus.START) {
 			int var0 = qs.getQuestVarById(0);
 			if (targetId == 203703) {
-				switch (dialog) {
+				switch (dialogActionId) {
 					case QUEST_SELECT:
 						if (var0 == 0)
 							return sendQuestDialog(env, 1352);
@@ -59,14 +58,14 @@ public class _1471FakeStigma extends QuestHandler {
 						return defaultCloseDialog(env, 3, 3, true, true);
 				}
 			} else if (targetId == 798024) {
-				switch (dialog) {
+				switch (dialogActionId) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 1693);
 					case SETPRO2:
 						return defaultCloseDialog(env, 1, 2);
 				}
 			} else if (targetId == 798321) {
-				switch (dialog) {
+				switch (dialogActionId) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 2034);
 					case SETPRO3:

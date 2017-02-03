@@ -1,6 +1,7 @@
 package quest.theobomos;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.actions.NpcActions;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -15,10 +16,8 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 public class _3090InSearchOfPippiThePorgus extends QuestHandler {
 
-	private final static int questId = 3090;
-
 	public _3090InSearchOfPippiThePorgus() {
-		super(questId);
+		super(3090);
 	}
 
 	@Override
@@ -35,12 +34,12 @@ public class _3090InSearchOfPippiThePorgus extends QuestHandler {
 	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 798182) {
-				if (dialog == DialogAction.QUEST_SELECT) {
+				if (dialogActionId == QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);
 				} else {
 					return sendQuestStartDialog(env);
@@ -48,22 +47,22 @@ public class _3090InSearchOfPippiThePorgus extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 798193) {
-				if (dialog == DialogAction.QUEST_SELECT) {
+				if (dialogActionId == QUEST_SELECT) {
 					if (qs.getQuestVarById(0) == 0) {
 						return sendQuestDialog(env, 1011);
 					} else if (qs.getQuestVarById(0) == 2) {
 						return sendQuestDialog(env, 1693);
 					}
-				} else if (dialog == DialogAction.SETPRO1) {
+				} else if (dialogActionId == SETPRO1) {
 					return defaultCloseDialog(env, 0, 1);
-				} else if (dialog == DialogAction.SETPRO3) {
+				} else if (dialogActionId == SETPRO3) {
 					if (player.getInventory().getKinah() >= 10000) {
 						giveQuestItem(env, 182208050, 1);
 						player.getInventory().decreaseKinah(10000);
 						return defaultCloseDialog(env, 2, 3);
 					} else
 						return sendQuestDialog(env, 1779);
-				} else if (dialog == DialogAction.SELECT_ACTION_1779) {
+				} else if (dialogActionId == SELECT3_2) {
 					return sendQuestDialog(env, 1779);
 				}
 			}
@@ -78,11 +77,11 @@ public class _3090InSearchOfPippiThePorgus extends QuestHandler {
 				}
 			}
 			if (targetId == 700421) {
-				if (dialog == DialogAction.USE_OBJECT) {
+				if (dialogActionId == USE_OBJECT) {
 					if (qs.getQuestVarById(0) == 3) {
 						return sendQuestDialog(env, 2034);
 					}
-				} else if (dialog == DialogAction.SET_SUCCEED) {
+				} else if (dialogActionId == SET_SUCCEED) {
 					Npc npc = (Npc) env.getVisibleObject();
 					NpcActions.delete(npc, true);
 					removeQuestItem(env, 182208050, 1);
@@ -92,7 +91,7 @@ public class _3090InSearchOfPippiThePorgus extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 798182) {
-				switch (dialog) {
+				switch (dialogActionId) {
 					case USE_OBJECT:
 						return sendQuestDialog(env, 10002);
 					default: {

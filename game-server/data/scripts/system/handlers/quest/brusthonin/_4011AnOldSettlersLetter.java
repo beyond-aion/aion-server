@@ -1,6 +1,7 @@
 package quest.brusthonin;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
@@ -16,11 +17,10 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 public class _4011AnOldSettlersLetter extends QuestHandler {
 
-	private final static int questId = 4011;
 	private final static int[] npc_ids = { 730139, 205132, 203522 };
 
 	public _4011AnOldSettlersLetter() {
-		super(questId);
+		super(4011);
 	}
 
 	@Override
@@ -38,9 +38,9 @@ public class _4011AnOldSettlersLetter extends QuestHandler {
 			targetId = ((Npc) env.getVisibleObject()).getNpcId();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (targetId == 730139) {
-			if (env.getDialog() == DialogAction.USE_OBJECT)
+			if (env.getDialogActionId() == USE_OBJECT)
 				return sendQuestDialog(env, 1011);
-			else if (env.getDialog() == DialogAction.SETPRO1) {
+			else if (env.getDialogActionId() == SETPRO1) {
 				QuestService.startQuest(env);
 				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 0));
 				return true;
@@ -52,9 +52,9 @@ public class _4011AnOldSettlersLetter extends QuestHandler {
 		int var = qs.getQuestVarById(0);
 		if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 205132) {
-				if (env.getDialog() == DialogAction.USE_OBJECT)
+				if (env.getDialogActionId() == USE_OBJECT)
 					return sendQuestDialog(env, 10002);
-				else if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id())
+				else if (env.getDialogActionId() == SELECT_QUEST_REWARD)
 					return sendQuestDialog(env, 5);
 				else
 					return sendQuestEndDialog(env);
@@ -63,7 +63,7 @@ public class _4011AnOldSettlersLetter extends QuestHandler {
 			return false;
 		}
 		if (targetId == 205132) {
-			switch (env.getDialog()) {
+			switch (env.getDialogActionId()) {
 				case QUEST_SELECT:
 					if (var == 0)
 						return sendQuestDialog(env, 1352);
@@ -78,7 +78,7 @@ public class _4011AnOldSettlersLetter extends QuestHandler {
 					return false;
 			}
 		} else if (targetId == 203522) {
-			switch (env.getDialog()) {
+			switch (env.getDialogActionId()) {
 				case QUEST_SELECT:
 					if (var == 1)
 						return sendQuestDialog(env, 1693);

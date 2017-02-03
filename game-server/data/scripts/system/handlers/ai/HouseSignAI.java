@@ -13,8 +13,8 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 public class HouseSignAI extends GeneralNpcAI {
 
 	@Override
-	public boolean onDialogSelect(Player player, int dialogId, int questId, int extendedRewardIndex) {
-		DialogPage page = DialogPage.getPageByAction(dialogId);
+	public boolean onDialogSelect(Player player, int dialogActionId, int questId, int extendedRewardIndex) {
+		DialogPage page = DialogPage.getByActionId(dialogActionId);
 		if (page == DialogPage.NULL)
 			return false;
 

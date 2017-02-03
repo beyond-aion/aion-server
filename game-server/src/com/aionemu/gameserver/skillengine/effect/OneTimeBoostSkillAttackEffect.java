@@ -27,7 +27,6 @@ public class OneTimeBoostSkillAttackEffect extends BufEffect {
 	public void startEffect(final Effect effect) {
 		super.startEffect(effect);
 
-		final int stopCount = count;
 		final float percent = 1.0f + value / 100.0f;
 		AttackCalcObserver observer = null;
 
@@ -35,11 +34,11 @@ public class OneTimeBoostSkillAttackEffect extends BufEffect {
 			case MAGICAL:
 				observer = new AttackCalcObserver() {
 
-					private int count = 0;
+					private int boostCount = 0;
 
 					@Override
 					public float getBaseMagicalDamageMultiplier() {
-						if (count++ < stopCount)
+						if (boostCount++ < count)
 							return percent;
 						else {
 							ThreadPoolManager.getInstance().schedule(new Runnable() {
@@ -57,15 +56,15 @@ public class OneTimeBoostSkillAttackEffect extends BufEffect {
 			case PHYSICAL:
 				observer = new AttackCalcObserver() {
 
-					private int count = 0;
+					private int boostCount = 0;
 
 					@Override
 					public float getBasePhysicalDamageMultiplier(boolean isSkill) {
 						if (!isSkill)
 							return 1f;
 
-						if (count++ < stopCount) {
-							if (count == stopCount) {
+						if (boostCount++ < count) {
+							if (boostCount == count) {
 								ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 									@Override
@@ -83,15 +82,15 @@ public class OneTimeBoostSkillAttackEffect extends BufEffect {
 			case ALL:
 				observer = new AttackCalcObserver() {
 
-					private int count = 0;
+					private int boostCount = 0;
 
 					@Override
 					public float getBasePhysicalDamageMultiplier(boolean isSkill) {
 						if (!isSkill)
 							return 1f;
 
-						if (count++ < stopCount) {
-							if (count == stopCount) {
+						if (boostCount++ < count) {
+							if (boostCount == count) {
 								ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 									@Override
@@ -107,7 +106,7 @@ public class OneTimeBoostSkillAttackEffect extends BufEffect {
 
 					@Override
 					public float getBaseMagicalDamageMultiplier() {
-						if (count++ < stopCount)
+						if (boostCount++ < count)
 							return percent;
 						else {
 							ThreadPoolManager.getInstance().schedule(new Runnable() {

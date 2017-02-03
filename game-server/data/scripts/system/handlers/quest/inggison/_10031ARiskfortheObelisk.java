@@ -1,6 +1,7 @@
 package quest.inggison;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -58,11 +59,11 @@ public class _10031ARiskfortheObelisk extends QuestHandler {
 		}
 		int var = qs.getQuestVarById(0);
 		int targetId = env.getTargetId();
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 
 		if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 203700) { // Fasimedes
-				switch (dialog) {
+				switch (dialogActionId) {
 					case QUEST_SELECT:
 						if (var == 0) {
 							return sendQuestDialog(env, 1011);
@@ -72,7 +73,7 @@ public class _10031ARiskfortheObelisk extends QuestHandler {
 						return defaultCloseDialog(env, var, var + 1); // 1
 				}
 			} else if (targetId == 798600) { // Eremitia
-				switch (env.getDialog()) {
+				switch (env.getDialogActionId()) {
 					case QUEST_SELECT:
 						if (var == 1) {
 							return sendQuestDialog(env, 1352);
@@ -82,7 +83,7 @@ public class _10031ARiskfortheObelisk extends QuestHandler {
 						return defaultCloseDialog(env, var, var + 1); // 2
 				}
 			} else if (targetId == 798408) { // Sibylle
-				switch (dialog) {
+				switch (dialogActionId) {
 					case QUEST_SELECT:
 						if (var == 2) {
 							return sendQuestDialog(env, 1693);
@@ -95,7 +96,7 @@ public class _10031ARiskfortheObelisk extends QuestHandler {
 						return closeDialogWindow(env); // 1
 				}
 			} else if (targetId == 798926) { // Outremus
-				switch (dialog) {
+				switch (dialogActionId) {
 					case QUEST_SELECT:
 						if (var == 4) {
 							return sendQuestDialog(env, 2375);
@@ -105,26 +106,26 @@ public class _10031ARiskfortheObelisk extends QuestHandler {
 						return defaultCloseDialog(env, var, var + 1); // 5
 				}
 			} else if (targetId == 799052) { // Steropes
-				switch (dialog) {
+				switch (dialogActionId) {
 					case QUEST_SELECT:
 						if (var == 5) {
 							return sendQuestDialog(env, 2716);
 						}
 						break;
-					case SELECT_ACTION_2717:
+					case SELECT6_1:
 						PacketSendUtility.sendPacket(player, new SM_PLAY_MOVIE(1, 30));
 						return sendQuestDialog(env, 2717);
 					case SETPRO6:
 						return defaultCloseDialog(env, var, var + 1); // 6
 				}
 			} else if (targetId == 798927) { // Versetti
-				switch (dialog) {
+				switch (dialogActionId) {
 					case QUEST_SELECT:
 						if (var == 6) {
 							return sendQuestDialog(env, 3057);
 						}
 						break;
-					case SELECT_ACTION_3058:
+					case SELECT7_1:
 						playQuestMovie(env, 516);
 						return sendQuestDialog(env, 3058);
 					case SETPRO7:
@@ -133,7 +134,7 @@ public class _10031ARiskfortheObelisk extends QuestHandler {
 						return defaultCloseDialog(env, var, var + 1); // 7
 				}
 			} else if (targetId == 730224) { // Overheated Obelisk
-				switch (dialog) {
+				switch (dialogActionId) {
 					case USE_OBJECT:
 						if (var == 7) {
 							removeQuestItem(env, 182215616, 1); // Aether Wave Stone
@@ -142,7 +143,7 @@ public class _10031ARiskfortheObelisk extends QuestHandler {
 						break;
 				}
 			} else if (targetId == 702662) { // Southern Obelisk Support
-				switch (dialog) {
+				switch (dialogActionId) {
 					case USE_OBJECT:
 						if (var == 8) {
 							removeQuestItem(env, 182215617, 1); // Obelisk
@@ -156,7 +157,7 @@ public class _10031ARiskfortheObelisk extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 798927) {
-				if (dialog == DialogAction.USE_OBJECT) {
+				if (dialogActionId == USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
 				}
 				return sendQuestEndDialog(env);

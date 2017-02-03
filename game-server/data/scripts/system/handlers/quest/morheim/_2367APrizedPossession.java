@@ -1,6 +1,6 @@
 package quest.morheim;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -12,12 +12,11 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _2367APrizedPossession extends QuestHandler {
 
-	private final static int questId = 2367;
 
 	int rewardIndex;
 
 	public _2367APrizedPossession() {
-		super(questId);
+		super(2367);
 	}
 
 	@Override
@@ -31,12 +30,12 @@ public class _2367APrizedPossession extends QuestHandler {
 	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 204339) {
-				if (dialog == DialogAction.QUEST_SELECT) {
+				if (dialogActionId == QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);
 				} else {
 					return sendQuestStartDialog(env);
@@ -44,20 +43,20 @@ public class _2367APrizedPossession extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 204339) {
-				if (dialog == DialogAction.QUEST_SELECT) {
+				if (dialogActionId == QUEST_SELECT) {
 					return sendQuestDialog(env, 1003);
-				} else if (dialog == DialogAction.SELECT_ACTION_1012) {
+				} else if (dialogActionId == SELECT1_1) {
 					giveQuestItem(env, 182204147, 1);
 					return sendQuestDialog(env, 1012);
-				} else if (dialog == DialogAction.SELECT_ACTION_1097) {
+				} else if (dialogActionId == SELECT1_2) {
 					giveQuestItem(env, 182204147, 1);
 					return sendQuestDialog(env, 1097);
-				} else if (dialog == DialogAction.SETPRO10) {
+				} else if (dialogActionId == SETPRO10) {
 					changeQuestStep(env, 0, 10);
 					qs.setStatus(QuestStatus.REWARD);
 					updateQuestStatus(env);
 					return closeDialogWindow(env);
-				} else if (dialog == DialogAction.SETPRO20) {
+				} else if (dialogActionId == SETPRO20) {
 					rewardIndex = 1;
 					changeQuestStep(env, 0, 20);
 					qs.setStatus(QuestStatus.REWARD);
@@ -67,11 +66,11 @@ public class _2367APrizedPossession extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 798079) {
-				if (dialog == DialogAction.USE_OBJECT) {
+				if (dialogActionId == USE_OBJECT) {
 					return sendQuestDialog(env, 1352);
 				}
 			} else if (targetId == 798080) {
-				if (dialog == DialogAction.USE_OBJECT) {
+				if (dialogActionId == USE_OBJECT) {
 					return sendQuestDialog(env, 1693);
 				}
 			}

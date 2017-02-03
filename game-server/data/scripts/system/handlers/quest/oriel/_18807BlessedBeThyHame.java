@@ -1,6 +1,7 @@
 package quest.oriel;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -12,10 +13,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _18807BlessedBeThyHame extends QuestHandler {
 
-	private static final int questId = 18807;
-
 	public _18807BlessedBeThyHame() {
-		super(questId);
+		super(18807);
 	}
 
 	@Override
@@ -29,12 +28,12 @@ public class _18807BlessedBeThyHame extends QuestHandler {
 	public boolean onDialogEvent(QuestEnv env) {
 		final Player player = env.getPlayer();
 		int targetId = env.getTargetId();
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 830194) {
-				switch (dialog) {
+				switch (dialogActionId) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 1011);
 					case QUEST_ACCEPT_1:
@@ -45,17 +44,17 @@ public class _18807BlessedBeThyHame extends QuestHandler {
 		} else if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 730524:
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							return sendQuestDialog(env, 1352);
-						case SELECT_ACTION_1353:
+						case SELECT2_1:
 							return sendQuestDialog(env, 1353);
 						case SETPRO1:
 							return defaultCloseDialog(env, 0, 1);
 					}
 					break;
 				case 830194:
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT: {
 							return sendQuestDialog(env, 2375);
 						}

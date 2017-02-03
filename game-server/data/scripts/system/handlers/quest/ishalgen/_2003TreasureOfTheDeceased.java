@@ -1,5 +1,7 @@
 package quest.ishalgen;
 
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -37,14 +39,14 @@ public class _2003TreasureOfTheDeceased extends QuestHandler {
 		int targetId = env.getTargetId();
 		if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 203539) {
-				switch (env.getDialog()) {
+				switch (env.getDialogActionId()) {
 					case QUEST_SELECT:
 						if (var == 0)
 							return sendQuestDialog(env, 1011);
 						else if (var == 1)
 							return sendQuestDialog(env, 1352);
 						return false;
-					case SELECT_ACTION_1012:
+					case SELECT1_1:
 						playQuestMovie(env, 53);
 						break;
 					case SETPRO1:

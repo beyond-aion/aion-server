@@ -1,6 +1,6 @@
 package quest.cygnea;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -62,24 +62,24 @@ public class _10506MindOverMatter extends QuestHandler {
 
 		int var = qs.getQuestVarById(0);
 		int targetId = env.getTargetId();
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 
 		switch (targetId) {
 			case 804709: // Brunte
 				if (qs.getStatus() == QuestStatus.START) {
 					if (var == 0) { // Step 0: Talk with Brunte at Aequis Outpost.
-						if (dialog == DialogAction.QUEST_SELECT) {
+						if (dialogActionId == QUEST_SELECT) {
 							return sendQuestDialog(env, 1011);
 						}
 
-						if (dialog == DialogAction.SETPRO1) {
+						if (dialogActionId == SETPRO1) {
 							return defaultCloseDialog(env, var, var + 1);
 						}
 					}
 				}
 
 				if (qs.getStatus() == QuestStatus.REWARD) {
-					if (dialog == DialogAction.USE_OBJECT) {
+					if (dialogActionId == USE_OBJECT) {
 						return sendQuestDialog(env, 10002);
 					}
 					return sendQuestEndDialog(env);
@@ -88,21 +88,21 @@ public class _10506MindOverMatter extends QuestHandler {
 			case 804710: // Noep
 				if (qs.getStatus() == QuestStatus.START) {
 					if (var == 1) {
-						if (dialog == DialogAction.QUEST_SELECT) {
+						if (dialogActionId == QUEST_SELECT) {
 							return sendQuestDialog(env, 1352);
 						}
 
-						if (dialog == DialogAction.SETPRO2) {
+						if (dialogActionId == SETPRO2) {
 							return defaultCloseDialog(env, var, var + 1);
 						}
 					}
 
 					if (var == 5) {
-						if (dialog == DialogAction.QUEST_SELECT) {
+						if (dialogActionId == QUEST_SELECT) {
 							return sendQuestDialog(env, 2716);
 						}
 
-						if (dialog == DialogAction.SETPRO6) {
+						if (dialogActionId == SETPRO6) {
 							// Spawn Noep's Ego [ID: 236263]
 							Npc npc = (Npc) env.getVisibleObject();
 							if (npc != null) {
@@ -115,11 +115,11 @@ public class _10506MindOverMatter extends QuestHandler {
 					}
 
 					if (var == 7) {
-						if (dialog == DialogAction.QUEST_SELECT) {
+						if (dialogActionId == QUEST_SELECT) {
 							return sendQuestDialog(env, 3398);
 						}
 
-						if (dialog == DialogAction.SET_SUCCEED) {
+						if (dialogActionId == SET_SUCCEED) {
 							qs.setStatus(QuestStatus.REWARD);
 							qs.setQuestVar(var + 1);
 							updateQuestStatus(env);
@@ -130,7 +130,7 @@ public class _10506MindOverMatter extends QuestHandler {
 				break;
 			case 702666: // Beritra Invasion Corridor
 				if (qs.getStatus() == QuestStatus.START) {
-					if (dialog == DialogAction.USE_OBJECT) {
+					if (dialogActionId == USE_OBJECT) {
 						if (var == 4) {
 							TeleportService.teleportTo(player, 210070000, 2837f, 2991f, 680f, (byte) 67, TeleportAnimation.FADE_OUT_BEAM);
 							qs.setQuestVar(var + 1);

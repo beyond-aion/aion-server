@@ -1,6 +1,7 @@
 package quest.heiron;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
@@ -16,10 +17,8 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 
 public class _1634TheWreckOfTheArgos extends QuestHandler {
 
-	private final static int questId = 1634;
-
 	public _1634TheWreckOfTheArgos() {
-		super(questId);
+		super(1634);
 	}
 
 	@Override
@@ -42,7 +41,7 @@ public class _1634TheWreckOfTheArgos extends QuestHandler {
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 204547) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT) {
+				if (env.getDialogActionId() == QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);
 				} else
 					return sendQuestStartDialog(env);
@@ -55,7 +54,7 @@ public class _1634TheWreckOfTheArgos extends QuestHandler {
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 204547:
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case QUEST_SELECT: {
 							long itemCount1 = player.getInventory().getItemCountByItemId(182201760);
 							if (qs.getQuestVarById(0) == 0 && itemCount1 >= 3) {
@@ -63,7 +62,7 @@ public class _1634TheWreckOfTheArgos extends QuestHandler {
 							}
 							return false;
 						}
-						case SELECT_ACTION_4763: {
+						case SELECT_NONE_1: {
 							qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
 							updateQuestStatus(env);
 							PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 0));
@@ -72,11 +71,11 @@ public class _1634TheWreckOfTheArgos extends QuestHandler {
 					}
 					return false;
 				case 204540:
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case QUEST_SELECT: {
 							return sendQuestDialog(env, 1693);
 						}
-						case SELECT_ACTION_1694: {
+						case SELECT3_1: {
 							qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
 							removeQuestItem(env, 182201760, 1);
 							updateQuestStatus(env);
@@ -86,11 +85,11 @@ public class _1634TheWreckOfTheArgos extends QuestHandler {
 					}
 					return false;
 				case 790018:
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case QUEST_SELECT: {
 							return sendQuestDialog(env, 2034);
 						}
-						case SELECT_ACTION_2035: {
+						case SELECT4_1: {
 							qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
 							removeQuestItem(env, 182201760, 1);
 							qs.setStatus(QuestStatus.REWARD);
@@ -102,7 +101,7 @@ public class _1634TheWreckOfTheArgos extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204541) {
-				switch (env.getDialog()) {
+				switch (env.getDialogActionId()) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 2375);
 					case SELECTED_QUEST_NOREWARD:

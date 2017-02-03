@@ -1,7 +1,8 @@
 package quest.theobomos;
 
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.commons.utils.Rnd;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -16,10 +17,8 @@ import com.aionemu.gameserver.services.item.ItemService;
  */
 public class _3074DangerousProbability extends QuestHandler {
 
-	private final static int questId = 3074;
-
 	public _3074DangerousProbability() {
-		super(questId);
+		super(3074);
 	}
 
 	@Override
@@ -33,11 +32,11 @@ public class _3074DangerousProbability extends QuestHandler {
 		final Player player = env.getPlayer();
 		int targetId = env.getTargetId();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 798193) { // Nagrunerk
-				if (dialog == DialogAction.EXCHANGE_COIN) {
+				if (dialogActionId == EXCHANGE_COIN) {
 					if (QuestService.startQuest(env)) {
 						return sendQuestDialog(env, 1011);
 					} else {
@@ -49,10 +48,10 @@ public class _3074DangerousProbability extends QuestHandler {
 			if (targetId == 798193) { // Nagrunerk
 				long kinahAmount = player.getInventory().getKinah();
 				long angelsEye = player.getInventory().getItemCountByItemId(186000037);
-				switch (dialog) {
+				switch (dialogActionId) {
 					case EXCHANGE_COIN:
 						return sendQuestDialog(env, 1011);
-					case SELECT_ACTION_1011:
+					case SELECT1:
 						if (kinahAmount >= 1000 && angelsEye >= 1) {
 							changeQuestStep(env, 0, 0, true);
 							qs.setReward(0);
@@ -60,7 +59,7 @@ public class _3074DangerousProbability extends QuestHandler {
 						} else {
 							return sendQuestDialog(env, 1009);
 						}
-					case SELECT_ACTION_1352:
+					case SELECT2:
 						if (kinahAmount >= 5000 && angelsEye >= 1) {
 							changeQuestStep(env, 0, 0, true);
 							qs.setReward(1);
@@ -68,7 +67,7 @@ public class _3074DangerousProbability extends QuestHandler {
 						} else {
 							return sendQuestDialog(env, 1009);
 						}
-					case SELECT_ACTION_1693:
+					case SELECT3:
 						if (kinahAmount >= 25000 && angelsEye >= 1) {
 							changeQuestStep(env, 0, 0, true);
 							qs.setReward(2);
@@ -82,7 +81,7 @@ public class _3074DangerousProbability extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 798193) { // Nagrunerk
-				if (dialog == DialogAction.SELECTED_QUEST_NOREWARD) {
+				if (dialogActionId == SELECTED_QUEST_NOREWARD) {
 					switch (qs.getReward()) {
 						case 0:
 							if (player.getInventory().tryDecreaseKinah(1000) && QuestService.finishQuest(env, 0)) {

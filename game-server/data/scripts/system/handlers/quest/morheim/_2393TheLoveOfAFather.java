@@ -1,6 +1,6 @@
 package quest.morheim;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -19,10 +19,8 @@ import com.aionemu.gameserver.world.zone.ZoneName;
  */
 public class _2393TheLoveOfAFather extends QuestHandler {
 
-	private final static int questId = 2393;
-
 	public _2393TheLoveOfAFather() {
-		super(questId);
+		super(2393);
 	}
 
 	@Override
@@ -69,9 +67,9 @@ public class _2393TheLoveOfAFather extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (targetId == 204343) {
 			if (qs == null || qs.isStartable()) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
+				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 4762);
-				else if (env.getDialogId() == DialogAction.QUEST_ACCEPT_1.id()) {
+				else if (env.getDialogActionId() == QUEST_ACCEPT_1) {
 					if (giveQuestItem(env, 182204162, 1))
 						return sendQuestStartDialog(env);
 					else
@@ -81,9 +79,9 @@ public class _2393TheLoveOfAFather extends QuestHandler {
 			}
 
 			else if (qs.getStatus() == QuestStatus.REWARD) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT && qs.getStatus() == QuestStatus.REWARD)
+				if (env.getDialogActionId() == QUEST_SELECT && qs.getStatus() == QuestStatus.REWARD)
 					return sendQuestDialog(env, 2375);
-				else if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id()) {
+				else if (env.getDialogActionId() == SELECT_QUEST_REWARD) {
 					qs.setQuestVar(2);
 					qs.setStatus(QuestStatus.REWARD);
 					updateQuestStatus(env);

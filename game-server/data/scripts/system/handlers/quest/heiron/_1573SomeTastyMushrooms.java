@@ -1,6 +1,7 @@
 package quest.heiron;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -16,10 +17,8 @@ import com.aionemu.gameserver.world.zone.ZoneName;
  */
 public class _1573SomeTastyMushrooms extends QuestHandler {
 
-	private final static int questId = 1573;
-
 	public _1573SomeTastyMushrooms() {
-		super(questId);
+		super(1573);
 	}
 
 	@Override
@@ -50,11 +49,11 @@ public class _1573SomeTastyMushrooms extends QuestHandler {
 		if (env.getVisibleObject() instanceof Npc)
 			targetId = ((Npc) env.getVisibleObject()).getNpcId();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 730025) {
-				if (dialog == DialogAction.QUEST_SELECT)
+				if (dialogActionId == QUEST_SELECT)
 					return sendQuestDialog(env, 4762);
 				else
 					return sendQuestStartDialog(env);
@@ -65,7 +64,7 @@ public class _1573SomeTastyMushrooms extends QuestHandler {
 				return true;
 			}
 			if (targetId == 730025) {
-				switch (dialog) {
+				switch (dialogActionId) {
 					case QUEST_SELECT:
 						if (var == 0)
 							return sendQuestDialog(env, 1011);

@@ -1,6 +1,6 @@
 package quest.cygnea;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -63,34 +63,34 @@ public class _10507ABigPlottoFoil extends QuestHandler {
 
 		int var = qs.getQuestVarById(0);
 		int targetId = env.getTargetId();
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 
 		switch (targetId) {
 			case 804711: // Aithria
 				if (qs.getStatus() == QuestStatus.START) {
 					if (var == 0) { // Step 0: Talk with Aithria at Aequis Detachment Post.
-						if (dialog == DialogAction.QUEST_SELECT) {
+						if (dialogActionId == QUEST_SELECT) {
 							return sendQuestDialog(env, 1011);
 						}
 
-						if (dialog == DialogAction.SETPRO1) {
+						if (dialogActionId == SETPRO1) {
 							return defaultCloseDialog(env, var, var + 1);
 						}
 					}
 
 					if (var == 4) { // Step 4: Talk with Aithria at Aequis Detachment Post.
-						if (dialog == DialogAction.QUEST_SELECT) {
+						if (dialogActionId == QUEST_SELECT) {
 							return sendQuestDialog(env, 2375);
 						}
 
-						if (dialog == DialogAction.SETPRO5) {
+						if (dialogActionId == SETPRO5) {
 							return defaultCloseDialog(env, var, var + 1);
 						}
 					}
 				}
 
 				if (qs.getStatus() == QuestStatus.REWARD) {
-					if (dialog == DialogAction.USE_OBJECT) {
+					if (dialogActionId == USE_OBJECT) {
 						return sendQuestDialog(env, 10002);
 					}
 					return sendQuestEndDialog(env);
@@ -99,11 +99,11 @@ public class _10507ABigPlottoFoil extends QuestHandler {
 			case 804712: // Pluvis
 				if (qs.getStatus() == QuestStatus.START) {
 					if (var == 1) { // Step 1: Talk with Pluvis at Aequis Detachment Post.
-						if (dialog == DialogAction.QUEST_SELECT) {
+						if (dialogActionId == QUEST_SELECT) {
 							return sendQuestDialog(env, 1352);
 						}
 
-						if (dialog == DialogAction.SETPRO2) {
+						if (dialogActionId == SETPRO2) {
 							return defaultCloseDialog(env, var, var + 1); // 1
 						}
 					}
@@ -112,11 +112,11 @@ public class _10507ABigPlottoFoil extends QuestHandler {
 			case 804713: // Pruina
 				if (qs.getStatus() == QuestStatus.START) {
 					if (var == 2) { // Step 2: Talk with Pruina at Aequis Detachment Post.
-						if (dialog == DialogAction.QUEST_SELECT) {
+						if (dialogActionId == QUEST_SELECT) {
 							return sendQuestDialog(env, 1693);
 						}
 
-						if (dialog == DialogAction.SETPRO3) {
+						if (dialogActionId == SETPRO3) {
 							return defaultCloseDialog(env, var, var + 1); // 1
 						}
 					}
@@ -125,11 +125,11 @@ public class _10507ABigPlottoFoil extends QuestHandler {
 			case 804714: // Ricoro
 				if (qs.getStatus() == QuestStatus.START) {
 					if (var == 3) { // Step 3: Talk with Ricoro at Aequis Detachment Post.
-						if (dialog == DialogAction.QUEST_SELECT) {
+						if (dialogActionId == QUEST_SELECT) {
 							return sendQuestDialog(env, 2034);
 						}
 
-						if (dialog == DialogAction.SETPRO4) {
+						if (dialogActionId == SETPRO4) {
 							return defaultCloseDialog(env, var, var + 1); // 1
 						}
 					}
@@ -138,11 +138,11 @@ public class _10507ABigPlottoFoil extends QuestHandler {
 			case 804715: // Nostibas
 				if (qs.getStatus() == QuestStatus.START) {
 					if (var == 5) { // Step 5:
-						if (dialog == DialogAction.QUEST_SELECT) {
+						if (dialogActionId == QUEST_SELECT) {
 							return sendQuestDialog(env, 2716);
 						}
 
-						if (dialog == DialogAction.SETPRO6) {
+						if (dialogActionId == SETPRO6) {
 							return defaultCloseDialog(env, var, var + 1); // 1
 						}
 					}

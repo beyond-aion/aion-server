@@ -1,6 +1,7 @@
 package quest.heiron;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -18,10 +19,8 @@ import com.aionemu.gameserver.services.QuestService;
 
 public class _1562CrossedDestiny extends QuestHandler {
 
-	private final static int questId = 1562;
-
 	public _1562CrossedDestiny() {
-		super(questId);
+		super(1562);
 	}
 
 	@Override
@@ -45,13 +44,13 @@ public class _1562CrossedDestiny extends QuestHandler {
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 204589) { // Berone
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
+				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 4762);
-				if (env.getDialogId() == DialogAction.ASK_QUEST_ACCEPT.id())
+				if (env.getDialogActionId() == ASK_QUEST_ACCEPT)
 					return sendQuestDialog(env, 4);
-				if (env.getDialogId() == DialogAction.QUEST_REFUSE_1.id())
+				if (env.getDialogActionId() == QUEST_REFUSE_1)
 					return sendQuestDialog(env, 1004);
-				if (env.getDialog() == DialogAction.QUEST_ACCEPT_1) {
+				if (env.getDialogActionId() == QUEST_ACCEPT_1) {
 					QuestService.startQuest(env);
 					return defaultCloseDialog(env, 0, 1, false, false, 182201780, 1, 0, 0);
 				}
@@ -59,7 +58,7 @@ public class _1562CrossedDestiny extends QuestHandler {
 		} else if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 204616: // Litonos
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case QUEST_SELECT:
 							if (qs.getQuestVarById(0) == 1 && player.getInventory().getItemCountByItemId(182201780) == 1)
 								return sendQuestDialog(env, 1352);
@@ -81,7 +80,7 @@ public class _1562CrossedDestiny extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204589) { // Berone
-				if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id())
+				if (env.getDialogActionId() == SELECT_QUEST_REWARD)
 					return sendQuestDialog(env, 10002);
 				else
 					return sendQuestEndDialog(env);

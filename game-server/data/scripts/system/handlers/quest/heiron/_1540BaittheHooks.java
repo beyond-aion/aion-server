@@ -1,6 +1,7 @@
 package quest.heiron;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -14,10 +15,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 public class _1540BaittheHooks extends QuestHandler {
 
-	private final static int questId = 1540;
-
 	public _1540BaittheHooks() {
-		super(questId);
+		super(1540);
 	}
 
 	@Override
@@ -40,7 +39,7 @@ public class _1540BaittheHooks extends QuestHandler {
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 204588) {
-				switch (env.getDialog()) {
+				switch (env.getDialogActionId()) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 1011);
 					case QUEST_ACCEPT_1:
@@ -56,7 +55,7 @@ public class _1540BaittheHooks extends QuestHandler {
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 730189:
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case USE_OBJECT: {
 							if (player.getInventory().getItemCountByItemId(182201822) == 1) {
 								return useQuestObject(env, 0, 1, false, 0); // 1
@@ -65,7 +64,7 @@ public class _1540BaittheHooks extends QuestHandler {
 					}
 					return false;
 				case 730190:
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case USE_OBJECT: {
 							if (player.getInventory().getItemCountByItemId(182201822) == 1) {
 								return useQuestObject(env, 1, 2, false, 0); // 2
@@ -74,7 +73,7 @@ public class _1540BaittheHooks extends QuestHandler {
 					}
 					return false;
 				case 730191:
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case USE_OBJECT: {
 							if (qs.getQuestVarById(0) == 2 && player.getInventory().getItemCountByItemId(182201822) == 1) {
 								qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
@@ -88,7 +87,7 @@ public class _1540BaittheHooks extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204588) {
-				if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id())
+				if (env.getDialogActionId() == SELECT_QUEST_REWARD)
 					return sendQuestDialog(env, 5);
 				else
 					return sendQuestEndDialog(env);

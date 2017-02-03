@@ -1,5 +1,7 @@
 package quest.levinshor;
 
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -12,12 +14,11 @@ import com.aionemu.gameserver.services.QuestService;
  */
 public class _13745EljersRequest extends QuestHandler {
 
-	private static final int questId = 13745;
 	private static final int npcId = 802350;
 	private static final int worldId = 600100000;
 
 	public _13745EljersRequest() {
-		super(questId);
+		super(13745);
 	}
 
 	@Override
@@ -35,7 +36,7 @@ public class _13745EljersRequest extends QuestHandler {
 
 		if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == npcId) {
-				switch (env.getDialog()) {
+				switch (env.getDialogActionId()) {
 					case USE_OBJECT:
 						return sendQuestDialog(env, 10002);
 					case SELECT_QUEST_REWARD:

@@ -2,7 +2,7 @@ package quest.reshanta;
 
 import java.util.List;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -16,11 +16,10 @@ import javolution.util.FastTable;
  */
 public class _2759TenaciousGuardian extends QuestHandler {
 
-	private static final int questId = 2759;
 	private final List<Integer> killedMobs = new FastTable<>();
 
 	public _2759TenaciousGuardian() {
-		super(questId);
+		super(2759);
 	}
 
 	@Override
@@ -36,12 +35,12 @@ public class _2759TenaciousGuardian extends QuestHandler {
 	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 264769) { // Gudharten
-				if (dialog == DialogAction.QUEST_SELECT) {
+				if (dialogActionId == QUEST_SELECT) {
 					return sendQuestDialog(env, 1011);
 				} else {
 					return sendQuestStartDialog(env);
@@ -50,11 +49,11 @@ public class _2759TenaciousGuardian extends QuestHandler {
 		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			if (targetId == 264769) { // Gudharten
-				if (dialog == DialogAction.QUEST_SELECT) {
+				if (dialogActionId == QUEST_SELECT) {
 					if (var == 3) {
 						return sendQuestDialog(env, 1352);
 					}
-				} else if (dialog == DialogAction.SELECT_QUEST_REWARD) {
+				} else if (dialogActionId == SELECT_QUEST_REWARD) {
 					changeQuestStep(env, 3, 3, true); // reward
 					killedMobs.clear();
 					return sendQuestDialog(env, 5);

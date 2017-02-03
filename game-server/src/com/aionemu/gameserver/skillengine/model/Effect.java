@@ -233,8 +233,11 @@ public class Effect implements StatOwner {
 	}
 
 	public void setPeriodicTask(Future<?> periodicTask) {
-		if (this.periodicTask != null)
+		if (this.periodicTask != null) {
+			if (periodicTask != null)
+				periodicTask.cancel(false);
 			throw new IllegalStateException(getClass().getSimpleName() + " already has a periodic task");
+		}
 		this.periodicTask = periodicTask;
 	}
 

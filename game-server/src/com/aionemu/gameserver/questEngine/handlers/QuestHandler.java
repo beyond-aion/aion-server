@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.questEngine.handlers;
 
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -108,74 +110,15 @@ public abstract class QuestHandler extends AbstractQuestHandler {
 
 	@Override
 	public boolean onDialogEvent(QuestEnv env) {
-		DialogAction action = env.getDialog();
-		switch (action) {
-			case SELECT_ACTION_1011:
-			case SELECT_ACTION_1012:
-			case SELECT_ACTION_1013:
-			case SELECT_ACTION_1014:
-			case SELECT_ACTION_1015:
-			case SELECT_ACTION_1016:
-			case SELECT_ACTION_1017:
-			case SELECT_ACTION_1018:
-			case SELECT_ACTION_1019:
-			case SELECT_ACTION_1034:
-			case SELECT_ACTION_1097:
-			case SELECT_ACTION_1182:
-			case SELECT_ACTION_1267:
-			case SELECT_ACTION_1352:
-			case SELECT_ACTION_1353:
-			case SELECT_ACTION_1354:
-			case SELECT_ACTION_1355:
-			case SELECT_ACTION_1370:
-			case SELECT_ACTION_1396:
-			case SELECT_ACTION_1438:
-			case SELECT_ACTION_1609:
-			case SELECT_ACTION_1693:
-			case SELECT_ACTION_1694:
-			case SELECT_ACTION_1695:
-			case SELECT_ACTION_1696:
-			case SELECT_ACTION_1701:
-			case SELECT_ACTION_1737:
-			case SELECT_ACTION_1779:
-			case SELECT_ACTION_2034:
-			case SELECT_ACTION_2035:
-			case SELECT_ACTION_2036:
-			case SELECT_ACTION_2037:
-			case SELECT_ACTION_2052:
-			case SELECT_ACTION_2099:
-			case SELECT_ACTION_2205:
-			case SELECT_ACTION_2376:
-			case SELECT_ACTION_2377:
-			case SELECT_ACTION_2461:
-			case SELECT_ACTION_2546:
-			case SELECT_ACTION_2716:
-			case SELECT_ACTION_2717:
-			case SELECT_ACTION_2718:
-			case SELECT_ACTION_2719:
-			case SELECT_ACTION_2720:
-			case SELECT_ACTION_2803:
-			case SELECT_ACTION_3058:
-			case SELECT_ACTION_3059:
-			case SELECT_ACTION_3060:
-			case SELECT_ACTION_3143:
-			case SELECT_ACTION_3399:
-			case SELECT_ACTION_3400:
-			case SELECT_ACTION_3484:
-			case SELECT_ACTION_3570:
-			case SELECT_ACTION_3740:
-			case SELECT_ACTION_3741:
-			case SELECT_ACTION_3825:
-			case SELECT_ACTION_3826:
-			case SELECT_ACTION_3911:
-			case SELECT_ACTION_4081:
-			case SELECT_ACTION_4763:
-				// simple "next page" event (action ID = next dialog page ID)
-				// there are only very few quests, where this default behavior does not apply (e.g. 4074)
-				sendDialogPacket(env, action.id(), questId);
-				return true;
-			case ASK_QUEST_ACCEPT:
-				// show quest accept dialog (coming from pre-conversation)
+		int dialogActionId = env.getDialogActionId();
+		if (dialogActionId >= SELECT1 && dialogActionId <= SELECT15_4_4_4_4) {
+			// simple "next page" event (action ID = next dialog page ID), but there are some quests where this default behavior does not apply (e.g.
+			// 4074)
+			sendDialogPacket(env, dialogActionId, questId);
+			return true;
+		}
+		switch (dialogActionId) {
+			case ASK_QUEST_ACCEPT: // show quest accept dialog (coming from pre-conversation)
 				sendDialogPacket(env, DialogPage.ASK_QUEST_ACCEPT_WINDOW.id(), questId);
 				return true;
 			case QUEST_REFUSE:
@@ -424,34 +367,28 @@ public abstract class QuestHandler extends AbstractQuestHandler {
 	}
 
 	/** Send dialog to the player */
-	public boolean sendQuestDialog(QuestEnv env, int dialogId) {
-		switch (DialogPage.getPageByAction(dialogId)) {
-			case SELECT_QUEST_REWARD_WINDOW1:
-			case SELECT_QUEST_REWARD_WINDOW2:
-			case SELECT_QUEST_REWARD_WINDOW3:
-			case SELECT_QUEST_REWARD_WINDOW4:
-			case SELECT_QUEST_REWARD_WINDOW5:
-			case SELECT_QUEST_REWARD_WINDOW6:
-			case SELECT_QUEST_REWARD_WINDOW7:
-			case SELECT_QUEST_REWARD_WINDOW8:
-			case SELECT_QUEST_REWARD_WINDOW9:
-			case SELECT_QUEST_REWARD_WINDOW10:
-				QuestState qs = env.getPlayer().getQuestStateList().getQuestState(questId);
-				if (qs == null || qs.getStatus() != QuestStatus.REWARD) // reward packet exploitation fix
-					return false;
+	public boolean sendQuestDialog(QuestEnv env, int dialogPageId) {
+		if (dialogPageId == DialogPage.SELECT_QUEST_REWARD_WINDOW1.id() || dialogPageId == DialogPage.SELECT_QUEST_REWARD_WINDOW2.id()
+			|| dialogPageId == DialogPage.SELECT_QUEST_REWARD_WINDOW3.id() || dialogPageId == DialogPage.SELECT_QUEST_REWARD_WINDOW4.id()
+			|| dialogPageId == DialogPage.SELECT_QUEST_REWARD_WINDOW5.id() || dialogPageId == DialogPage.SELECT_QUEST_REWARD_WINDOW6.id()
+			|| dialogPageId == DialogPage.SELECT_QUEST_REWARD_WINDOW7.id() || dialogPageId == DialogPage.SELECT_QUEST_REWARD_WINDOW8.id()
+			|| dialogPageId == DialogPage.SELECT_QUEST_REWARD_WINDOW9.id() || dialogPageId == DialogPage.SELECT_QUEST_REWARD_WINDOW10.id()) {
+			QuestState qs = env.getPlayer().getQuestStateList().getQuestState(questId);
+			if (qs == null || qs.getStatus() != QuestStatus.REWARD) // reward packet exploitation fix
+				return false;
 		}
 		// Not using handler questId, because some quests may handle events when quests are finished
 		// In that case questId must be zero!!! (Kromede entry for example)
-		sendDialogPacket(env, dialogId, env.getQuestId());
+		sendDialogPacket(env, dialogPageId, env.getQuestId());
 		return true;
 	}
 
-	private void sendDialogPacket(QuestEnv env, int dialogId, int questId) {
+	private void sendDialogPacket(QuestEnv env, int dialogPageId, int questId) {
 		int objId = 0;
 		if (env.getVisibleObject() != null) {
 			objId = env.getVisibleObject().getObjectId();
 		}
-		PacketSendUtility.sendPacket(env.getPlayer(), new SM_DIALOG_WINDOW(objId, dialogId, questId));
+		PacketSendUtility.sendPacket(env.getPlayer(), new SM_DIALOG_WINDOW(objId, dialogPageId, questId));
 	}
 
 	public boolean sendQuestSelectionDialog(QuestEnv env) {
@@ -474,7 +411,7 @@ public abstract class QuestHandler extends AbstractQuestHandler {
 
 	/** Send default start quest dialog and start it (give the item on start) */
 	public boolean sendQuestStartDialog(QuestEnv env, int itemId, long itemCount) {
-		switch (env.getDialog()) {
+		switch (env.getDialogActionId()) {
 			case ASK_QUEST_ACCEPT:
 				return sendQuestDialog(env, 4);
 			case QUEST_ACCEPT:
@@ -483,7 +420,7 @@ public abstract class QuestHandler extends AbstractQuestHandler {
 				if (QuestService.startQuest(env)) {
 					if (itemId != 0 && itemCount != 0)
 						giveQuestItem(env, itemId, itemCount);
-					if (env.getDialog() != DialogAction.QUEST_ACCEPT_SIMPLE && env.getVisibleObject() instanceof Npc)
+					if (env.getDialogActionId() != QUEST_ACCEPT_SIMPLE && env.getVisibleObject() instanceof Npc)
 						return sendQuestDialog(env, 1003);
 					else
 						return closeDialogWindow(env);
@@ -514,8 +451,8 @@ public abstract class QuestHandler extends AbstractQuestHandler {
 	public boolean sendQuestEndDialog(QuestEnv env) {
 		int rewardGroups = DataManager.QUEST_DATA.getQuestById(env.getQuestId()).getRewards().size();
 		// you should explicitly specify the reward group when there are more than 1
-		if (rewardGroups > 1 && env.getDialogId() >= DialogAction.SELECTED_QUEST_REWARD1.id()
-			&& env.getDialogId() <= DialogAction.SELECTED_QUEST_NOREWARD.id())
+		if (rewardGroups > 1 && env.getDialogActionId() >= SELECTED_QUEST_REWARD1
+			&& env.getDialogActionId() <= SELECTED_QUEST_NOREWARD)
 			log.warn("Quest handler for quest: " + env.getQuestId() + " possibly rewarded the wrong reward group.");
 		return sendQuestEndDialog(env, rewardGroups == 0 ? null : 0);
 	}
@@ -529,11 +466,11 @@ public abstract class QuestHandler extends AbstractQuestHandler {
 	 */
 	public boolean sendQuestEndDialog(QuestEnv env, Integer rewardGroup) {
 		Player player = env.getPlayer();
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs == null || qs.getStatus() != QuestStatus.REWARD)
 			return false; // reward packet exploitation fix (or buggy quest handler)
-		if (dialog.id() >= DialogAction.SELECTED_QUEST_REWARD1.id() && dialog.id() <= DialogAction.SELECTED_QUEST_NOREWARD.id()) {
+		if (dialogActionId >= SELECTED_QUEST_REWARD1 && dialogActionId <= SELECTED_QUEST_NOREWARD) {
 			if (QuestService.finishQuest(env, rewardGroup)) {
 				Npc npc = (Npc) env.getVisibleObject();
 				QuestNpc questNpc = QuestEngine.getInstance().getQuestNpc(npc.getNpcId());
@@ -542,8 +479,8 @@ public abstract class QuestHandler extends AbstractQuestHandler {
 					QuestState qs2 = player.getQuestStateList().getQuestState(questId);
 					if (qs2 != null && qs2.getStatus() == QuestStatus.REWARD) { // TODO make sure that this npc is the end npc
 						env.setQuestId(questId);
-						env.setDialogAction(DialogAction.USE_OBJECT); // show default dialog (reward selection for next quest)
-						return QuestEngine.getInstance().onDialog(new QuestEnv(npc, player, questId, DialogAction.USE_OBJECT.id()));
+						env.setDialogActionId(DialogAction.USE_OBJECT); // show default dialog (reward selection for next quest)
+						return QuestEngine.getInstance().onDialog(new QuestEnv(npc, player, questId, DialogAction.USE_OBJECT));
 					} else if (!npcHasActiveQuest && qs2 != null && qs2.getStatus() == QuestStatus.START) {
 						boolean isQuestStartNpc = questNpc.getOnQuestStart().contains(questId);
 						if (!isQuestStartNpc
@@ -562,7 +499,7 @@ public abstract class QuestHandler extends AbstractQuestHandler {
 								for (FinishedQuestCond fcondition : finishedQuests) {
 									if (fcondition.getQuestId() == env.getQuestId()) {
 										env.setQuestId(questId);
-										env.setDialogAction(DialogAction.QUEST_SELECT);
+										env.setDialogActionId(DialogAction.QUEST_SELECT);
 										return QuestEngine.getInstance().onDialog(env); // show start dialog of follow-up quest
 									}
 								}
@@ -574,7 +511,7 @@ public abstract class QuestHandler extends AbstractQuestHandler {
 			}
 			return false;
 		} else {
-			switch (dialog) {
+			switch (dialogActionId) {
 				case SET_SUCCEED: // report to pre-end npc (another npc is actually responsible for rewarding, so close this window)
 					return closeDialogWindow(env);
 				case USE_OBJECT: // start talking to npc
@@ -1281,7 +1218,7 @@ public abstract class QuestHandler extends AbstractQuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs.getStatus() == QuestStatus.REWARD) {
 			if (env.getTargetId() == rewardNpcId) {
-				if (env.getDialog() == DialogAction.USE_OBJECT && reportDialogId != 0) {
+				if (env.getDialogActionId() == USE_OBJECT && reportDialogId != 0) {
 					return sendQuestDialog(env, reportDialogId);
 				} else {
 					return sendQuestEndDialog(env, rewardId);
@@ -1296,18 +1233,18 @@ public abstract class QuestHandler extends AbstractQuestHandler {
 		return sendQuestNoneDialog(env, template, startNpcId, 1011);
 	}
 
-	public boolean sendQuestNoneDialog(QuestEnv env, int startNpcId, int dialogId) {
+	public boolean sendQuestNoneDialog(QuestEnv env, int startNpcId, int dialogPageId) {
 		QuestTemplate template = DataManager.QUEST_DATA.getQuestById(questId);
-		return sendQuestNoneDialog(env, template, startNpcId, dialogId);
+		return sendQuestNoneDialog(env, template, startNpcId, dialogPageId);
 	}
 
-	public boolean sendQuestNoneDialog(QuestEnv env, QuestTemplate template, int startNpcId, int dialogId) {
+	public boolean sendQuestNoneDialog(QuestEnv env, QuestTemplate template, int startNpcId, int dialogPageId) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs == null || qs.isStartable()) {
 			if (env.getTargetId() == startNpcId) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT) {
-					return sendQuestDialog(env, dialogId);
+				if (env.getDialogActionId() == QUEST_SELECT) {
+					return sendQuestDialog(env, dialogPageId);
 				} else {
 					return sendQuestStartDialog(env);
 				}
@@ -1316,9 +1253,9 @@ public abstract class QuestHandler extends AbstractQuestHandler {
 		return false;
 	}
 
-	public boolean sendQuestNoneDialog(QuestEnv env, int startNpcId, int dialogId, int itemId, int itemCout) {
+	public boolean sendQuestNoneDialog(QuestEnv env, int startNpcId, int dialogPageId, int itemId, int itemCout) {
 		QuestTemplate template = DataManager.QUEST_DATA.getQuestById(questId);
-		return sendQuestNoneDialog(env, template, startNpcId, dialogId, itemId, itemCout);
+		return sendQuestNoneDialog(env, template, startNpcId, dialogPageId, itemId, itemCout);
 	}
 
 	public boolean sendQuestNoneDialog(QuestEnv env, int startNpcId, int itemId, int itemCout) {
@@ -1326,16 +1263,16 @@ public abstract class QuestHandler extends AbstractQuestHandler {
 		return sendQuestNoneDialog(env, template, startNpcId, 1011, itemId, itemCout);
 	}
 
-	public boolean sendQuestNoneDialog(QuestEnv env, QuestTemplate template, int startNpcId, int dialogId, int itemId, int itemCout) {
+	public boolean sendQuestNoneDialog(QuestEnv env, QuestTemplate template, int startNpcId, int dialogPageId, int itemId, int itemCout) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs == null || qs.isStartable()) {
 			if (env.getTargetId() == startNpcId) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT) {
-					return sendQuestDialog(env, dialogId);
+				if (env.getDialogActionId() == QUEST_SELECT) {
+					return sendQuestDialog(env, dialogPageId);
 				}
 				if (itemId != 0 && itemCout != 0) {
-					if (env.getDialog() == DialogAction.QUEST_ACCEPT_1) {
+					if (env.getDialogActionId() == QUEST_ACCEPT_1) {
 						if (giveQuestItem(env, itemId, itemCout)) {
 							return sendQuestStartDialog(env);
 						} else {
@@ -1353,7 +1290,7 @@ public abstract class QuestHandler extends AbstractQuestHandler {
 	}
 
 	public boolean sendItemCollectingStartDialog(QuestEnv env) {
-		switch (env.getDialog()) {
+		switch (env.getDialogActionId()) {
 			case QUEST_ACCEPT_1:
 				QuestService.startQuest(env);
 				return sendQuestSelectionDialog(env);

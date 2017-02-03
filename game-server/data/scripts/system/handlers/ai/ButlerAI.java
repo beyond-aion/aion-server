@@ -18,8 +18,8 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 public class ButlerAI extends GeneralNpcAI {
 
 	@Override
-	public boolean onDialogSelect(Player player, int dialogId, int questId, int extendedRewardIndex) {
-		return kickDialog(player, DialogPage.getPageByAction(dialogId));
+	public boolean onDialogSelect(Player player, int dialogActionId, int questId, int extendedRewardIndex) {
+		return kickDialog(player, DialogPage.getByActionId(dialogActionId));
 	}
 
 	private boolean kickDialog(Player player, DialogPage page) {

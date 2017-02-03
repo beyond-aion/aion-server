@@ -23,7 +23,7 @@ public interface AI {
 	/**
 	 * If already handled dialog return true.
 	 */
-	boolean onDialogSelect(Player player, int dialogId, int questId, int extendedRewardIndex);
+	boolean onDialogSelect(Player player, int dialogActionId, int questId, int extendedRewardIndex);
 
 	void think();
 

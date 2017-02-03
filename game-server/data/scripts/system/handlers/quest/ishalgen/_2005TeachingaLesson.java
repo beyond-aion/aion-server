@@ -1,5 +1,7 @@
 package quest.ishalgen;
 
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -38,14 +40,14 @@ public class _2005TeachingaLesson extends QuestHandler {
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 203540:
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case QUEST_SELECT:
 							if (var == 0)
 								return sendQuestDialog(env, 1011);
 							else if (var == 1)
 								return sendQuestDialog(env, 1352);
 							break;
-						case SELECT_ACTION_1012:
+						case SELECT1_1:
 							playQuestMovie(env, 54);
 							break;
 						case SETPRO1:

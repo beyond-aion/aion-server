@@ -1,6 +1,6 @@
 package quest.reshanta;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -18,11 +18,10 @@ import com.aionemu.gameserver.world.zone.ZoneName;
  */
 public class _24046TheShadowCalls extends QuestHandler {
 
-	private final static int questId = 24046;
 	private final static int[] npcs = { 798300, 204253, 700369, 204089, 203550 };
 
 	public _24046TheShadowCalls() {
-		super(questId);
+		super(24046);
 	}
 
 	@Override
@@ -56,45 +55,45 @@ public class _24046TheShadowCalls extends QuestHandler {
 		Npc target = (Npc) env.getVisibleObject();
 		int targetId = target.getNpcId();
 		int var = qs.getQuestVarById(0);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 798300: // Phyper
-					if (dialog == DialogAction.QUEST_SELECT && var == 0) {
+					if (dialogActionId == QUEST_SELECT && var == 0) {
 						return sendQuestDialog(env, 1011);
 					}
-					if (dialog == DialogAction.SETPRO1) {
+					if (dialogActionId == SETPRO1) {
 						return defaultCloseDialog(env, 0, 1); // 1
 					}
 					break;
 				case 204253: // Khrudgelmir
-					if (dialog == DialogAction.QUEST_SELECT && var == 2) {
+					if (dialogActionId == QUEST_SELECT && var == 2) {
 						return sendQuestDialog(env, 1693);
 					}
-					if (dialog == DialogAction.QUEST_SELECT && var == 6) {
+					if (dialogActionId == QUEST_SELECT && var == 6) {
 						return sendQuestDialog(env, 3057);
 					}
-					if (dialog == DialogAction.SETPRO3) {
+					if (dialogActionId == SETPRO3) {
 						removeQuestItem(env, 182205502, 1);
 						return defaultCloseDialog(env, 2, 3); // 3
 					}
-					if (dialog == DialogAction.SET_SUCCEED) {
+					if (dialogActionId == SET_SUCCEED) {
 						return defaultCloseDialog(env, 6, 6, true, false); // reward
 					}
 					break;
 				case 700369: // Underground Arena Exit
-					if (dialog == DialogAction.USE_OBJECT && var == 5) {
+					if (dialogActionId == USE_OBJECT && var == 5) {
 						TeleportService.teleportTo(player, 120010000, 981.6009f, 1552.97f, 210.46f);
 						changeQuestStep(env, 5, 6); // 6
 						return true;
 					}
 					break;
 				case 204089: // Garm
-					if (dialog == DialogAction.QUEST_SELECT && var == 3) {
+					if (dialogActionId == QUEST_SELECT && var == 3) {
 						return sendQuestDialog(env, 2034);
 					}
-					if (dialog == DialogAction.SETPRO4) {
+					if (dialogActionId == SETPRO4) {
 						WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(320120000);
 						InstanceService.registerPlayerWithInstance(newInstance, player);
 						TeleportService.teleportTo(player, 320120000, newInstance.getInstanceId(), 591.47894f, 420.20865f, 202.97754f);
@@ -106,7 +105,7 @@ public class _24046TheShadowCalls extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203550) { // Munin
-				if (dialog == DialogAction.USE_OBJECT) {
+				if (dialogActionId == USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
 				} else {
 					int[] questItems = { 182205502 };

@@ -1,5 +1,7 @@
 package quest.theobomos;
 
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
@@ -15,10 +17,8 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 
 public class _3013AClueLeftByTheDead extends QuestHandler {
 
-	private final static int questId = 3013;
-
 	public _3013AClueLeftByTheDead() {
-		super(questId);
+		super(3013);
 	}
 
 	@Override
@@ -39,7 +39,7 @@ public class _3013AClueLeftByTheDead extends QuestHandler {
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 798132) {
-				switch (env.getDialog()) {
+				switch (env.getDialogActionId()) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 4762);
 					default:
@@ -54,7 +54,7 @@ public class _3013AClueLeftByTheDead extends QuestHandler {
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 798132:
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case QUEST_SELECT: {
 							if (qs.getQuestVarById(0) == 0) {
 								return sendQuestDialog(env, 1011);
@@ -74,7 +74,7 @@ public class _3013AClueLeftByTheDead extends QuestHandler {
 					}
 					return false;
 				case 798146:
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case QUEST_SELECT: {
 							if (qs.getQuestVarById(0) == 1) {
 								return sendQuestDialog(env, 1352);
@@ -91,7 +91,7 @@ public class _3013AClueLeftByTheDead extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 798132) {
-				switch (env.getDialog()) {
+				switch (env.getDialogActionId()) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 10002);
 					case SELECT_QUEST_REWARD:

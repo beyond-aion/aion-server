@@ -1,5 +1,7 @@
 package quest.theobomos;
 
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -14,10 +16,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 public class _3096ExamineTheExtractionDevices extends QuestHandler {
 
-	private final static int questId = 3096;
-
 	public _3096ExamineTheExtractionDevices() {
-		super(questId);
+		super(3096);
 	}
 
 	@Override
@@ -41,7 +41,7 @@ public class _3096ExamineTheExtractionDevices extends QuestHandler {
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 798225) {
-				switch (env.getDialog()) {
+				switch (env.getDialogActionId()) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 1011);
 					default:
@@ -56,7 +56,7 @@ public class _3096ExamineTheExtractionDevices extends QuestHandler {
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 798225:
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case QUEST_SELECT: {
 							return sendQuestDialog(env, 2375);
 						}
@@ -66,7 +66,7 @@ public class _3096ExamineTheExtractionDevices extends QuestHandler {
 					}
 					return false;
 				case 700423:
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case USE_OBJECT: {
 							if (player.getInventory().getItemCountByItemId(182208067) < 1) {
 								return true;
@@ -75,7 +75,7 @@ public class _3096ExamineTheExtractionDevices extends QuestHandler {
 					}
 					return false;
 				case 700424:
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case USE_OBJECT: {
 							if (player.getInventory().getItemCountByItemId(182208068) < 1) {
 								return true;
@@ -84,7 +84,7 @@ public class _3096ExamineTheExtractionDevices extends QuestHandler {
 					}
 					return false;
 				case 700425:
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case USE_OBJECT: {
 							if (player.getInventory().getItemCountByItemId(182208069) < 1) {
 								return true;
@@ -93,7 +93,7 @@ public class _3096ExamineTheExtractionDevices extends QuestHandler {
 					}
 					return false;
 				case 700426:
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case USE_OBJECT: {
 							if (player.getInventory().getItemCountByItemId(182208070) < 1) {
 								return true;

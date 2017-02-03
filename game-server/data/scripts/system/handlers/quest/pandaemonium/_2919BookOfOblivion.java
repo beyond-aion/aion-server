@@ -1,6 +1,6 @@
 package quest.pandaemonium;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -12,10 +12,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _2919BookOfOblivion extends QuestHandler {
 
-	private final static int questId = 2919;
-
 	public _2919BookOfOblivion() {
-		super(questId);
+		super(2919);
 	}
 
 	@Override
@@ -32,12 +30,12 @@ public class _2919BookOfOblivion extends QuestHandler {
 	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 204206) {
-				if (dialog == DialogAction.QUEST_SELECT) {
+				if (dialogActionId == QUEST_SELECT) {
 					return sendQuestDialog(env, 1011);
 				} else {
 					return sendQuestStartDialog(env);
@@ -45,61 +43,61 @@ public class _2919BookOfOblivion extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 204215) {
-				if (dialog == DialogAction.QUEST_SELECT) {
+				if (dialogActionId == QUEST_SELECT) {
 					if (qs.getQuestVarById(0) == 0)
 						return sendQuestDialog(env, 1352);
-				} else if (dialog == DialogAction.SETPRO2) {
+				} else if (dialogActionId == SETPRO2) {
 					return defaultCloseDialog(env, 0, 1);
 				}
 			} else if (targetId == 204192) {
-				if (dialog == DialogAction.QUEST_SELECT) {
+				if (dialogActionId == QUEST_SELECT) {
 					if (qs.getQuestVarById(0) == 1)
 						return sendQuestDialog(env, 1693);
-				} else if (dialog == DialogAction.SETPRO3) {
+				} else if (dialogActionId == SETPRO3) {
 					return defaultCloseDialog(env, 1, 2);
 				}
 			} else if (targetId == 700212) {
-				if (dialog == DialogAction.USE_OBJECT) {
+				if (dialogActionId == USE_OBJECT) {
 					if (qs.getQuestVarById(0) == 2)
 						return sendQuestDialog(env, 2034);
 					else if (qs.getQuestVarById(0) == 6)
 						return sendQuestDialog(env, 3057);
-				} else if (dialog == DialogAction.SETPRO4) {
+				} else if (dialogActionId == SETPRO4) {
 					changeQuestStep(env, 2, 3);
 					return closeDialogWindow(env);
-				} else if (dialog == DialogAction.SETPRO7) {
+				} else if (dialogActionId == SETPRO7) {
 					giveQuestItem(env, 182207013, 1);
 					changeQuestStep(env, 6, 7);
 					return closeDialogWindow(env);
 				}
 			} else if (targetId == 204206) {
 				if (qs.getQuestVarById(0) == 7) {
-					if (dialog == DialogAction.USE_OBJECT) {
+					if (dialogActionId == USE_OBJECT) {
 						return sendQuestDialog(env, 3398);
 					}
 				}
-				if (dialog == DialogAction.QUEST_SELECT) {
+				if (dialogActionId == QUEST_SELECT) {
 					if (qs.getQuestVarById(0) == 3)
 						return sendQuestDialog(env, 2375);
-				} else if (dialog == DialogAction.SETPRO5) {
+				} else if (dialogActionId == SETPRO5) {
 					return defaultCloseDialog(env, 3, 4);
-				} else if (dialog == DialogAction.SELECT_QUEST_REWARD) {
+				} else if (dialogActionId == SELECT_QUEST_REWARD) {
 					removeQuestItem(env, 182207013, 1);
 					return defaultCloseDialog(env, 7, 7, true, true);
 				}
 			} else if (targetId == 204224) {
-				if (dialog == DialogAction.QUEST_SELECT) {
+				if (dialogActionId == QUEST_SELECT) {
 					if (qs.getQuestVarById(0) == 4)
 						return sendQuestDialog(env, 2716);
-				} else if (dialog == DialogAction.CHECK_USER_HAS_QUEST_ITEM) {
+				} else if (dialogActionId == CHECK_USER_HAS_QUEST_ITEM) {
 					return checkQuestItems(env, 4, 6, false, 2802, 2717);
-				} else if (dialog == DialogAction.SETPRO6) {
+				} else if (dialogActionId == SETPRO6) {
 					return closeDialogWindow(env);
 				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204206) {
-				if (dialog == DialogAction.USE_OBJECT) {
+				if (dialogActionId == USE_OBJECT) {
 					return sendQuestDialog(env, 5);
 				}
 				return sendQuestEndDialog(env);

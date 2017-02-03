@@ -7,10 +7,8 @@ import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
  */
 public class _4208TruthOfTheBookmark extends QuestHandler {
 
-	private static final int questId = 4208;
-
 	public _4208TruthOfTheBookmark() {
-		super(questId);
+		super(4208);
 	}
 
 	@Override

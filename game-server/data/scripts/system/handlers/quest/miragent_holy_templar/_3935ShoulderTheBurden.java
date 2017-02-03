@@ -1,6 +1,7 @@
 package quest.miragent_holy_templar;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -13,10 +14,8 @@ import com.aionemu.gameserver.services.QuestService;
  */
 public class _3935ShoulderTheBurden extends QuestHandler {
 
-	private final static int questId = 3935;
-
 	public _3935ShoulderTheBurden() {
-		super(questId);
+		super(3935);
 	}
 
 	@Override
@@ -31,13 +30,13 @@ public class _3935ShoulderTheBurden extends QuestHandler {
 	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		int targetId = env.getTargetId();
 
 		// 0 - Start to Lavirintos
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 203701) {
-				if (dialog == DialogAction.QUEST_SELECT)
+				if (dialogActionId == QUEST_SELECT)
 					return sendQuestDialog(env, 4762);
 				else
 					return sendQuestStartDialog(env);
@@ -54,7 +53,7 @@ public class _3935ShoulderTheBurden extends QuestHandler {
 			switch (targetId) {
 				// 1 - Talk with Ettamirel
 				case 203316:
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							return sendQuestDialog(env, 1011);
 						case SETPRO1:
@@ -64,7 +63,7 @@ public class _3935ShoulderTheBurden extends QuestHandler {
 				// 2 - Talk with Jupion
 				case 203702:
 					if (var == 1) {
-						switch (dialog) {
+						switch (dialogActionId) {
 							case QUEST_SELECT:
 								return sendQuestDialog(env, 1352);
 							case SETPRO2:
@@ -75,7 +74,7 @@ public class _3935ShoulderTheBurden extends QuestHandler {
 				// 3 - Talk with Elizar
 				case 203329:
 					if (var == 2) {
-						switch (dialog) {
+						switch (dialogActionId) {
 							case QUEST_SELECT:
 								return sendQuestDialog(env, 1693);
 							case SETPRO3:
@@ -84,7 +83,7 @@ public class _3935ShoulderTheBurden extends QuestHandler {
 					}
 					// 4 - Collect Holy Templar Medal and take them to Elizar
 					if (var == 3) {
-						switch (dialog) {
+						switch (dialogActionId) {
 							case QUEST_SELECT:
 								return sendQuestDialog(env, 2034);
 							case CHECK_USER_HAS_QUEST_ITEM:
@@ -98,7 +97,7 @@ public class _3935ShoulderTheBurden extends QuestHandler {
 					break;
 				// 5 - Report the result to Jucleas with the Oath Stone
 				case 203752:
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var == 4) {
 								return sendQuestDialog(env, 2375);
@@ -121,7 +120,7 @@ public class _3935ShoulderTheBurden extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203701) {
-				if (dialog == DialogAction.USE_OBJECT) {
+				if (dialogActionId == USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
 				} else {
 					return sendQuestEndDialog(env);

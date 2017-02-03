@@ -1,6 +1,6 @@
 package quest.eltnen;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -17,10 +17,8 @@ import com.aionemu.gameserver.world.zone.ZoneName;
  */
 public class _1373WaterTherapy extends QuestHandler {
 
-	private final static int questId = 1373;
-
 	public _1373WaterTherapy() {
-		super(questId);
+		super(1373);
 	}
 
 	@Override
@@ -50,7 +48,7 @@ public class _1373WaterTherapy extends QuestHandler {
 	public boolean onDialogEvent(QuestEnv env) {
 		final Player player = env.getPlayer();
 		int targetId = 0;
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		if (env.getVisibleObject() instanceof Npc)
 			targetId = ((Npc) env.getVisibleObject()).getNpcId();
 		final QuestState qs = player.getQuestStateList().getQuestState(questId);
@@ -58,9 +56,9 @@ public class _1373WaterTherapy extends QuestHandler {
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 203949) // Aerope
 			{
-				if (dialog == DialogAction.QUEST_SELECT)
+				if (dialogActionId == QUEST_SELECT)
 					return sendQuestDialog(env, 1011);
-				else if (dialog == DialogAction.QUEST_ACCEPT_1) {
+				else if (dialogActionId == QUEST_ACCEPT_1) {
 					if (!giveQuestItem(env, 182201372, 1))
 						return true;
 					return sendQuestStartDialog(env);
@@ -71,9 +69,9 @@ public class _1373WaterTherapy extends QuestHandler {
 			switch (targetId) {
 				case 203949:
 					if (qs.getQuestVarById(0) == 2) {
-						if (dialog == DialogAction.QUEST_SELECT)
+						if (dialogActionId == QUEST_SELECT)
 							return sendQuestDialog(env, 2375);
-						else if (dialog == DialogAction.CHECK_USER_HAS_QUEST_ITEM) {
+						else if (dialogActionId == CHECK_USER_HAS_QUEST_ITEM) {
 							if (player.getInventory().getItemCountByItemId(182201373) == 1) {
 								QuestService.questTimerEnd(env);
 								return checkQuestItems(env, 2, 3, true, 5, 2716);

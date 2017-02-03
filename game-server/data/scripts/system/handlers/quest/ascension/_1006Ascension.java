@@ -1,9 +1,10 @@
 package quest.ascension;
 
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import java.util.List;
 
 import com.aionemu.gameserver.configs.main.CustomConfig;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.PlayerClass;
 import com.aionemu.gameserver.model.actions.NpcActions;
@@ -71,7 +72,7 @@ public class _1006Ascension extends QuestHandler {
 		final QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs == null)
 			return false;
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		int var = qs.getQuestVarById(0);
 		int targetId = 0;
 		if (env.getVisibleObject() instanceof Npc)
@@ -80,7 +81,7 @@ public class _1006Ascension extends QuestHandler {
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 790001: // Pernos
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var == 0)
 								return sendQuestDialog(env, 1011);
@@ -104,9 +105,9 @@ public class _1006Ascension extends QuestHandler {
 							removeQuestItem(env, 182200009, 1);
 							return closeDialogWindow(env);
 						case SETPRO4:
-							int dialogId = ClassChangeService.getClassSelectionDialogId(player.getRace(), player.getPlayerClass());
-							if (var == 5 && dialogId != 0)
-								return sendQuestDialog(env, dialogId);
+							int dialogPageId = ClassChangeService.getClassSelectionDialogPageId(player.getRace(), player.getPlayerClass());
+							if (var == 5 && dialogPageId != 0)
+								return sendQuestDialog(env, dialogPageId);
 							return false;
 						case SETPRO5:
 							return var == 5 && setPlayerClass(env, qs, PlayerClass.GLADIATOR);
@@ -133,12 +134,12 @@ public class _1006Ascension extends QuestHandler {
 					}
 					break;
 				case 730008: // Daminu
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var == 2 && player.getInventory().getItemCountByItemId(182200008) >= 1)
 								return sendQuestDialog(env, 1352);
 							return false;
-						case SELECT_ACTION_1353:
+						case SELECT2_1:
 							playQuestMovie(env, 14);
 							return sendQuestDialog(env, 1353);
 						case SETPRO2:
@@ -153,7 +154,7 @@ public class _1006Ascension extends QuestHandler {
 					}
 					break;
 				case 205000: // Belpartan
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (qs.getQuestVars().getQuestVars() == 99) {
 								SkillEngine.getInstance().applyEffectDirectly(281, player, player, 0);
@@ -186,7 +187,7 @@ public class _1006Ascension extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 790001) { // Pernos
-				switch (env.getDialog()) {
+				switch (env.getDialogActionId()) {
 					case SELECTED_QUEST_NOREWARD:
 						if (player.getWorldId() == 310020000)
 							TeleportService.teleportTo(player, 210010000, 245.14868f, 1639.1372f, 100.35713f, (byte) 60, TeleportAnimation.FADE_OUT_BEAM);

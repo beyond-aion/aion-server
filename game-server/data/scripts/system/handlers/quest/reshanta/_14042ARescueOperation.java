@@ -1,6 +1,7 @@
 package quest.reshanta;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -14,11 +15,10 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _14042ARescueOperation extends QuestHandler {
 
-	private final static int questId = 14042;
 	private final static int[] npcs = { 278502, 278517, 278590, 253623 };
 
 	public _14042ARescueOperation() {
-		super(questId);
+		super(14042);
 	}
 
 	@Override
@@ -47,7 +47,7 @@ public class _14042ARescueOperation extends QuestHandler {
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 278502: // Sakmis
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case QUEST_SELECT:
 							if (var == 0)
 								return sendQuestDialog(env, 1011);
@@ -57,7 +57,7 @@ public class _14042ARescueOperation extends QuestHandler {
 					}
 					break;
 				case 278517: // Nereus
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case QUEST_SELECT:
 							if (var == 1)
 								return sendQuestDialog(env, 1352);
@@ -67,7 +67,7 @@ public class _14042ARescueOperation extends QuestHandler {
 					}
 					break;
 				case 278590: // Dactyl
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case QUEST_SELECT:
 							if (var == 2)
 								return sendQuestDialog(env, 1693);
@@ -77,13 +77,13 @@ public class _14042ARescueOperation extends QuestHandler {
 					}
 					break;
 				case 253623: // Captured Elyos Prisoner
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case QUEST_SELECT:
 							if (var == 3) {
 								return sendQuestDialog(env, 2034);
 							}
 							return false;
-						case SELECT_ACTION_2035:
+						case SELECT4_1:
 							playQuestMovie(env, 269);
 							return sendQuestDialog(env, 2035);
 						case SETPRO4:
@@ -93,7 +93,7 @@ public class _14042ARescueOperation extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 278517) { // Nereus
-				if (env.getDialog() == DialogAction.USE_OBJECT)
+				if (env.getDialogActionId() == USE_OBJECT)
 					return sendQuestDialog(env, 10002);
 				return sendQuestEndDialog(env);
 			}

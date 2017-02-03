@@ -160,7 +160,7 @@ public class AgentSiege extends Siege<AgentLocation> {
 					questId = 23744;
 				QuestState qs = player.getQuestStateList().getQuestState(questId);
 				if (qs == null || qs.isStartable())
-					QuestService.startQuest(new QuestEnv(null, player, questId, 0));
+					QuestService.startQuest(new QuestEnv(null, player, questId));
 			}
 		}
 	}

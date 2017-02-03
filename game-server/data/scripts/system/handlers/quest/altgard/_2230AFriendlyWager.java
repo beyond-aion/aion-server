@@ -1,6 +1,7 @@
 package quest.altgard;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -15,13 +16,12 @@ import com.aionemu.gameserver.services.QuestService;
  */
 public class _2230AFriendlyWager extends QuestHandler {
 
-	private final static int questId = 2230;
 	private final static int questDropItemId = 182203223; // Mosbear Tusks
 	private final static int questStartNpcId = 203621; // Shania
 	private final static int questDurationTime = 1800; // Duration time of the quest 1800
 
 	public _2230AFriendlyWager() {
-		super(questId);
+		super(2230);
 	}
 
 	@Override
@@ -38,12 +38,12 @@ public class _2230AFriendlyWager extends QuestHandler {
 		int targetId = env.getTargetId();
 
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 
 		if (targetId == questStartNpcId) {
 			if (qs == null || qs.isStartable()) {
 
-				switch (dialog) {
+				switch (dialogActionId) {
 					case QUEST_ACCEPT_1:
 						if (QuestService.startQuest(env)) {
 							QuestService.questTimerStart(env, questDurationTime);
@@ -56,7 +56,7 @@ public class _2230AFriendlyWager extends QuestHandler {
 						return sendQuestStartDialog(env);
 				}
 			} else if (qs.getStatus() == QuestStatus.START) {
-				switch (dialog) {
+				switch (dialogActionId) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 2375);
 					case SETPRO1:

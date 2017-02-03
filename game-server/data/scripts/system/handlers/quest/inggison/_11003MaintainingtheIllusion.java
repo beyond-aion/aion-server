@@ -1,6 +1,7 @@
 package quest.inggison;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -13,10 +14,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _11003MaintainingtheIllusion extends QuestHandler {
 
-	private final static int questId = 11003;
-
 	public _11003MaintainingtheIllusion() {
-		super(questId);
+		super(11003);
 	}
 
 	@Override
@@ -36,7 +35,7 @@ public class _11003MaintainingtheIllusion extends QuestHandler {
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 798933) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
+				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 1011);
 				else
 					return sendQuestStartDialog(env);
@@ -46,7 +45,7 @@ public class _11003MaintainingtheIllusion extends QuestHandler {
 		else if (qs != null && qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 798942:
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case QUEST_SELECT: {
 							long itemCount1 = player.getInventory().getItemCountByItemId(182206701);
 							long itemCount2 = player.getInventory().getItemCountByItemId(182206702);
@@ -63,7 +62,7 @@ public class _11003MaintainingtheIllusion extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 798942) {
-				if (env.getDialogId() == DialogAction.CHECK_USER_HAS_QUEST_ITEM.id())
+				if (env.getDialogActionId() == CHECK_USER_HAS_QUEST_ITEM)
 					return sendQuestDialog(env, 5);
 				else
 					return sendQuestEndDialog(env);

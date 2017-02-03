@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.services;
 
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import java.time.DayOfWeek;
 import java.time.ZonedDateTime;
 import java.util.List;
@@ -25,7 +27,7 @@ import com.aionemu.gameserver.model.gameobjects.player.RequestResponseHandler;
 import com.aionemu.gameserver.model.siege.FortressLocation;
 import com.aionemu.gameserver.model.team.legion.LegionWarehouse;
 import com.aionemu.gameserver.model.templates.goods.GoodsList;
-import com.aionemu.gameserver.model.templates.npc.SubDialogType;
+import com.aionemu.gameserver.model.templates.npc.TalkInfo;
 import com.aionemu.gameserver.model.templates.portal.PortalPath;
 import com.aionemu.gameserver.model.templates.teleport.TeleportLocation;
 import com.aionemu.gameserver.model.templates.teleport.TeleporterTemplate;
@@ -102,14 +104,13 @@ public class DialogService {
 			mailbox.mailBoxState = PlayerMailboxState.CLOSED;
 	}
 
-	public static void onDialogSelect(int dialogId, final Player player, Npc npc, int questId, int extendedRewardIndex) {
-		QuestEnv env = new QuestEnv(npc, player, questId, dialogId);
+	public static void onDialogSelect(int dialogActionId, final Player player, Npc npc, int questId, int extendedRewardIndex) {
+		QuestEnv env = new QuestEnv(npc, player, questId, dialogActionId);
 		env.setExtendedRewardIndex(extendedRewardIndex);
 		int targetObjectId = npc.getObjectId();
 
 		if (questId == 0) {
-			DialogAction action = DialogAction.getByActionId(dialogId);
-			switch (action) {
+			switch (dialogActionId) {
 				case BUY: {
 					TradeListTemplate tradeListTemplate = DataManager.TRADE_LIST_DATA.getTradeListTemplate(npc.getNpcId());
 					if (tradeListTemplate == null) {
@@ -137,18 +138,18 @@ public class DialogService {
 				case DEPOSIT_CHAR_WAREHOUSE: // warehouse (2.5)
 					if (!RestrictionsManager.canUseWarehouse(player))
 						return;
-					sendDialogWindow(action, player, npc);
+					sendDialogWindow(dialogActionId, player, npc);
 					break;
 				case OPEN_VENDOR: // Consign trade?? npc karinerk, koorunerk (2.5)
 				case OPEN_STIGMA_WINDOW: // stigma
 				case CREATE_LEGION: // create legion
 				case OPEN_STIGMA_ENCHANT:
 				case GIVE_ITEM_PROC: // Godstone socketing (2.5)
-				case REMOVE_MANASTONE: // remove mana stone (2.5)
+				case REMOVE_ITEM_OPTION: // remove manastone (2.5)
 				case CHANGE_ITEM_SKIN: // modify appearance (2.5)
 				case ITEM_UPGRADE: // item upgrade (4.7)
 				case CLOSE_LEGION_WAREHOUSE: // WTF??? Quest dialog packet (2.5)
-				case CRAFT: // (2.5)
+				case COMBINE_TASK: // crafting (2.5)
 				case OPEN_INSTANCE_RECRUIT: // TODO NEW INSTANCE FIND GROUP SYSTEM
 				case INSTANCE_ENTRY: // (2.5)
 				case COMPOUND_WEAPON: // armsfusion (2.5)
@@ -159,7 +160,7 @@ public class DialogService {
 				case CHARGE_ITEM_SINGLE2: // augmenting an individual item
 				case TOWN_CHALLENGE: // town improvement
 					// Custom Feature: Quests can be done in any village
-					sendDialogWindow(action, player, npc);
+					sendDialogWindow(dialogActionId, player, npc);
 					break;
 				case DISPERSE_LEGION: // disband legion
 					LegionService.getInstance().requestDisbandLegion(npc, player);
@@ -253,11 +254,11 @@ public class DialogService {
 				case OPEN_LEGION_WAREHOUSE: // legion warehouse (2.5)
 					LegionService.getInstance().openLegionWarehouse(player, npc);
 					break;
-				case EDIT_CHARACTER:
-				case EDIT_GENDER: // (2.5) and (4.3)
+				case EDIT_CHARACTER_ALL:
+				case EDIT_CHARACTER_GENDER: // (2.5) and (4.3)
 					byte changesex = 0; // 0 plastic surgery, 1 gender switch
 					byte check_ticket = 2; // 2 no ticket, 1 have ticket
-					if (dialogId == DialogAction.EDIT_GENDER.id()) {
+					if (dialogActionId == EDIT_CHARACTER_GENDER) {
 						// Gender Switch
 						changesex = 1;
 						if (player.getInventory().getItemCountByItemId(169660000) > 0 || player.getInventory().getItemCountByItemId(169660001) > 0
@@ -294,10 +295,10 @@ public class DialogService {
 				case BUY_AGAIN: // repurchase (2.5)
 					PacketSendUtility.sendPacket(player, new SM_REPURCHASE(player, npc.getObjectId()));
 					break;
-				case PET_ADOPT: // adopt pet (2.5)
+				case FUNC_PET_ADOPT: // adopt pet (2.5)
 					PacketSendUtility.sendPacket(player, new SM_PET(PetAction.TALK_WITH_MERCHANT));
 					break;
-				case PET_ABANDON: // surrender pet (2.5)
+				case FUNC_PET_ABANDON: // surrender pet (2.5)
 					PacketSendUtility.sendPacket(player, new SM_PET(PetAction.TALK_WITH_MINDER));
 					break;
 				case CHARGE_ITEM_MULTI: // condition all equiped items
@@ -329,7 +330,7 @@ public class DialogService {
 							PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_CANT_OWN_NOT_COMPLETE_QUEST(28802));
 						return;
 					}
-					sendDialogWindow(action, player, npc);
+					sendDialogWindow(dialogActionId, player, npc);
 					break;
 				case FUNC_PET_H_ADOPT:
 					PacketSendUtility.sendPacket(player, new SM_PET(PetAction.H_ADOPT));
@@ -351,7 +352,7 @@ public class DialogService {
 						return;
 					}
 					TeleporterTemplate template = DataManager.TELEPORTER_DATA.getTeleporterTemplateByNpcId(npc.getNpcId());
-					PortalPath portalPath = DataManager.PORTAL2_DATA.getPortalDialog(npc.getNpcId(), dialogId, player.getRace());
+					PortalPath portalPath = DataManager.PORTAL2_DATA.getPortalDialog(npc.getNpcId(), dialogActionId, player.getRace());
 					if (portalPath != null) {
 						PortalService.port(portalPath, player, targetObjectId);
 					} else if (template != null) {
@@ -362,35 +363,32 @@ public class DialogService {
 					}
 					break;
 				default:
-					if (action == DialogAction.NULL && dialogId != DialogAction.NULL.id()) {
-						log.warn("Dialog Service: unknown dialog action, dialog id:" + dialogId);
-						return;
-					}
 					if (QuestEngine.getInstance().onDialog(env))
 						return;
-					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(targetObjectId, dialogId));
+					// action id = next page id
+					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(targetObjectId, dialogActionId));
 					break;
 			}
 		} else {
 			if (QuestEngine.getInstance().onDialog(env))
 				return;
-			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(targetObjectId, dialogId, questId));
+			// action id = next page id
+			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(targetObjectId, dialogActionId, questId));
 		}
 	}
 
-	private static void sendDialogWindow(DialogAction action, final Player player, Npc npc) {
-		if (npc.getObjectTemplate().supportsAction(action))
-			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(npc.getObjectId(), DialogPage.getPageByAction(action.id()).id()));
+	private static void sendDialogWindow(int dialogActionId, final Player player, Npc npc) {
+		if (npc.getObjectTemplate().supportsAction(dialogActionId))
+			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(npc.getObjectId(), DialogPage.getByActionId(dialogActionId).id()));
 	}
 
-	public static boolean isSubDialogRestricted(int dialogId, final Player player, Npc npc) {
-		if (npc.getObjectTemplate().getTalkInfo() == null)
+	public static boolean isSubDialogRestricted(Player player, Npc npc) {
+		TalkInfo talkInfo = npc.getObjectTemplate().getTalkInfo();
+		if (talkInfo == null)
 			return false;
-		SubDialogType subdialog = npc.getObjectTemplate().getTalkInfo().getSubDialogType();
-		if (subdialog == SubDialogType.ALL_ALLOWED)
-			return false;
-		Integer value = npc.getObjectTemplate().getTalkInfo().getSubDialogValue();
-		switch (subdialog) {
+		switch (talkInfo.getSubDialogType()) {
+			case ALL_ALLOWED:
+				return false;
 			case FORT_CAPTURE:
 				if (player.getLegion() == null)
 					return true;
@@ -418,25 +416,25 @@ public class DialogService {
 				}
 				return true;
 			case SKILL_ID:
-				return player.getSkillList().getSkillEntry(value) == null;
+				return player.getSkillList().getSkillEntry(talkInfo.getSubDialogValue()) == null;
 			case ITEM_ID:
-				return player.getInventory().getItemCountByItemId(value) == 0;
+				return player.getInventory().getItemCountByItemId(talkInfo.getSubDialogValue()) == 0;
 			case ABYSSRANK:
-				return player.getAbyssRank().getRank().getId() < value;
+				return player.getAbyssRank().getRank().getId() < talkInfo.getSubDialogValue();
 			case TARGET_LEGION_DOMINION:
 				ZonedDateTime now = ServerTime.now();
 				if (now.getDayOfWeek() == DayOfWeek.WEDNESDAY && now.getHour() >= 8 && now.getHour() <= 10) {
 					return true;
 				}
 				if (player.getLegion() != null) {
-					if (player.getLegion().getCurrentLegionDominion() == value) {
+					if (player.getLegion().getCurrentLegionDominion() == talkInfo.getSubDialogValue()) {
 						return false;
 					}
 				}
 				return true;
 			case LEGION_DOMINION_NPC:
 				if (player.getLegion() != null) {
-					if (player.getLegion().getOccupiedLegionDominion() == value) {
+					if (player.getLegion().getOccupiedLegionDominion() == talkInfo.getSubDialogValue()) {
 						return false;
 					}
 				}

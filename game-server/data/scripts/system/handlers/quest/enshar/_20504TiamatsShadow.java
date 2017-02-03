@@ -1,6 +1,6 @@
 package quest.enshar;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -57,30 +57,30 @@ public class _20504TiamatsShadow extends QuestHandler {
 
 		int var = qs.getQuestVarById(0);
 		int targetId = env.getTargetId();
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 
 		switch (targetId) {
 			case 804730: // Xeikun
 				if (qs.getStatus() == QuestStatus.START) {
 					if (var == 0) { // Step 0: Talk with Xeikun.
-						if (dialog == DialogAction.QUEST_SELECT)
+						if (dialogActionId == QUEST_SELECT)
 							return sendQuestDialog(env, 1011);
 
-						if (dialog == DialogAction.SETPRO1)
+						if (dialogActionId == SETPRO1)
 							return defaultCloseDialog(env, var, var + 1);
 					}
 
 					if (var == 2) { // Step 2: Talk with Xeikun.
-						if (dialog == DialogAction.QUEST_SELECT)
+						if (dialogActionId == QUEST_SELECT)
 							return sendQuestDialog(env, 1693);
 
-						if (dialog == DialogAction.SETPRO3)
+						if (dialogActionId == SETPRO3)
 							return defaultCloseDialog(env, var, var + 1);
 					}
 				}
 
 				if (qs.getStatus() == QuestStatus.REWARD) {
-					if (dialog == DialogAction.USE_OBJECT) {
+					if (dialogActionId == USE_OBJECT) {
 						return sendQuestDialog(env, 10002);
 					}
 
@@ -90,10 +90,10 @@ public class _20504TiamatsShadow extends QuestHandler {
 			case 804742: // Gilgamesh
 				if (qs.getStatus() == QuestStatus.START) {
 					if (var == 5) { // Step 5: Talk with Gilgamesh.
-						if (dialog == DialogAction.QUEST_SELECT)
+						if (dialogActionId == QUEST_SELECT)
 							return sendQuestDialog(env, 2716);
 
-						if (dialog == DialogAction.SETPRO6)
+						if (dialogActionId == SETPRO6)
 							return defaultCloseDialog(env, var, var + 1);
 					}
 				}
@@ -101,10 +101,10 @@ public class _20504TiamatsShadow extends QuestHandler {
 			case 804731: // Jalturan
 				if (qs.getStatus() == QuestStatus.START) {
 					if (var == 6) { // Step 6: Talk with Jalturan somewhere near Cet Siege Territory.
-						if (dialog == DialogAction.QUEST_SELECT)
+						if (dialogActionId == QUEST_SELECT)
 							return sendQuestDialog(env, 3057);
 
-						if (dialog == DialogAction.SET_SUCCEED) {
+						if (dialogActionId == SET_SUCCEED) {
 							qs.setStatus(QuestStatus.REWARD);
 							qs.setQuestVar(var + 1);
 							updateQuestStatus(env);

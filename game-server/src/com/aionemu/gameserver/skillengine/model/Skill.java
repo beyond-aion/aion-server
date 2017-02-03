@@ -785,7 +785,7 @@ public class Skill {
 					((Player) effector).getChainSkills().resetChain();
 			}
 
-			QuestEngine.getInstance().onUseSkill(new QuestEnv(effector.getTarget(), (Player) effector, 0, 0), skillTemplate.getSkillId());
+			QuestEngine.getInstance().onUseSkill(new QuestEnv(effector.getTarget(), (Player) effector, 0), skillTemplate.getSkillId());
 		}
 
 		if (setCooldowns && !isPenaltySkill)

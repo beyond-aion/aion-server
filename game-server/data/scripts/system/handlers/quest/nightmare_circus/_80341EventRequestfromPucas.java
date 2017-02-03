@@ -1,6 +1,7 @@
 package quest.nightmare_circus;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -12,10 +13,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _80341EventRequestfromPucas extends QuestHandler {
 
-	private static final int questId = 80341;
-
 	public _80341EventRequestfromPucas() {
-		super(questId);
+		super(80341);
 	}
 
 	@Override
@@ -44,13 +43,13 @@ public class _80341EventRequestfromPucas extends QuestHandler {
 	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 831717 || targetId == 831716 || targetId == 831715 || targetId == 831714 || targetId == 831713 || targetId == 831712
 				|| targetId == 831711 || targetId == 831710 || targetId == 831709) {
-				if (dialog == DialogAction.QUEST_SELECT)
+				if (dialogActionId == QUEST_SELECT)
 					return sendQuestDialog(env, 1011);
 				else
 					return sendQuestStartDialog(env);
@@ -71,7 +70,7 @@ public class _80341EventRequestfromPucas extends QuestHandler {
 				case 831711:
 				case 831710:
 				case 831709:
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT: {
 							if (var == 0) {
 								return sendQuestDialog(env, 2375);

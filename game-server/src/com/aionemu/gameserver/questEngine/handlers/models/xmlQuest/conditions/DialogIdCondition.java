@@ -28,9 +28,9 @@ public class DialogIdCondition extends QuestCondition {
 	public boolean doCheck(QuestEnv env) {
 		switch (getOp()) {
 			case EQUAL:
-				return env.getDialogId() == value;
+				return env.getDialogActionId() == value;
 			case NOT_EQUAL:
-				return env.getDialogId() != value;
+				return env.getDialogActionId() != value;
 			default:
 				return false;
 		}

@@ -1,6 +1,7 @@
 package quest.inggison;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -43,7 +44,7 @@ public class _10035SoartotheCorridor extends QuestHandler {
 	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 		if (qs == null) {
 			return false;
 		}
@@ -53,7 +54,7 @@ public class _10035SoartotheCorridor extends QuestHandler {
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 798928: // Yulia
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var == 0) {
 								return sendQuestDialog(env, 1011);
@@ -71,7 +72,7 @@ public class _10035SoartotheCorridor extends QuestHandler {
 					}
 					break;
 				case 799025: // Laokon
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var == 1) {
 								return sendQuestDialog(env, 1352);
@@ -82,7 +83,7 @@ public class _10035SoartotheCorridor extends QuestHandler {
 					}
 					break;
 				case 798958: // Veille
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var == 2) {
 								return sendQuestDialog(env, 1693);
@@ -93,13 +94,13 @@ public class _10035SoartotheCorridor extends QuestHandler {
 					}
 					break;
 				case 798996: // Laetia
-					switch (dialog) {
+					switch (dialogActionId) {
 						case QUEST_SELECT:
 							if (var == 3) {
 								return sendQuestDialog(env, 2034);
 							}
 							break;
-						case SELECT_ACTION_2035:
+						case SELECT4_1:
 							playQuestMovie(env, 517);
 							return sendQuestDialog(env, 2035);
 						case SETPRO4:
@@ -108,7 +109,7 @@ public class _10035SoartotheCorridor extends QuestHandler {
 					}
 					break;
 				case 702663: // Corridor Entry Controller
-					switch (dialog) {
+					switch (dialogActionId) {
 						case USE_OBJECT:
 							if (var == 6) {
 								removeQuestItem(env, 182215629, 1);
@@ -124,7 +125,7 @@ public class _10035SoartotheCorridor extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 798926) { // Outremus
-				if (env.getDialog() == DialogAction.USE_OBJECT) {
+				if (env.getDialogActionId() == USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
 				}
 				return sendQuestEndDialog(env);

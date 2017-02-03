@@ -1,6 +1,7 @@
 package quest.pandaemonium;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -14,10 +15,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _2952WinningVindachinerksFavor extends QuestHandler {
 
-	private final static int questId = 2952;
-
 	public _2952WinningVindachinerksFavor() {
-		super(questId);
+		super(2952);
 	}
 
 	@Override
@@ -37,7 +36,7 @@ public class _2952WinningVindachinerksFavor extends QuestHandler {
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 279006) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT) {
+				if (env.getDialogActionId() == QUEST_SELECT) {
 					return sendQuestDialog(env, 1011);
 				} else {
 					return sendQuestStartDialog(env);
@@ -53,7 +52,7 @@ public class _2952WinningVindachinerksFavor extends QuestHandler {
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 279016: // Vindachinerk
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case QUEST_SELECT:
 							if (var == 0) {
 								return sendQuestDialog(env, 2375);

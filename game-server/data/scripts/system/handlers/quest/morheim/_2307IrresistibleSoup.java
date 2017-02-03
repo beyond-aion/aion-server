@@ -1,6 +1,7 @@
 package quest.morheim;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
@@ -15,10 +16,8 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 public class _2307IrresistibleSoup extends QuestHandler {
 
-	private final static int questId = 2307; // INGREDIENT CHECK NEED TO SCRIPT
-
 	public _2307IrresistibleSoup() {
-		super(questId);
+		super(2307);
 	}
 
 	@Override
@@ -30,7 +29,7 @@ public class _2307IrresistibleSoup extends QuestHandler {
 	}
 
 	@Override
-	public boolean onDialogEvent(final QuestEnv env) {
+	public boolean onDialogEvent(final QuestEnv env) { // INGREDIENT CHECK NEED TO SCRIPT
 		final Player player = env.getPlayer();
 		int targetId = 0;
 		if (env.getVisibleObject() instanceof Npc)
@@ -39,7 +38,7 @@ public class _2307IrresistibleSoup extends QuestHandler {
 		if (targetId == 204378) // Favyr
 		{
 			if (qs == null || qs.isStartable()) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
+				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 4762);
 				else
 					return sendQuestStartDialog(env);
@@ -51,23 +50,23 @@ public class _2307IrresistibleSoup extends QuestHandler {
 		} else if (targetId == 204336) // Spedor
 		{
 			if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 1) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
+				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 1011);
-				else if (env.getDialog() == DialogAction.SETPRO1) {
+				else if (env.getDialogActionId() == SETPRO1) {
 					qs.setQuestVar(2);
 					qs.setStatus(QuestStatus.REWARD);
 					updateQuestStatus(env);
 					removeQuestItem(env, 182204106, 1);
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 					return true;
-				} else if (env.getDialogId() == DialogAction.SELECT_ACTION_1182.id()) {
+				} else if (env.getDialogActionId() == SELECT1_3) {
 					qs.setQuestVar(1);
 					qs.setStatus(QuestStatus.REWARD);
 					updateQuestStatus(env);
 					removeQuestItem(env, 182204107, 1);
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 					return true;
-				} else if (env.getDialogId() == DialogAction.SELECT_ACTION_1267.id()) {
+				} else if (env.getDialogActionId() == SELECT1_4) {
 					qs.setQuestVar(1);
 					qs.setStatus(QuestStatus.REWARD);
 					updateQuestStatus(env);
@@ -82,7 +81,7 @@ public class _2307IrresistibleSoup extends QuestHandler {
 		else if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 0) {
 			switch (targetId) {
 				case 700247: // Aromatic Soup
-					if (qs.getQuestVarById(0) == 0 && env.getDialog() == DialogAction.USE_OBJECT) {
+					if (qs.getQuestVarById(0) == 0 && env.getDialogActionId() == USE_OBJECT) {
 						qs.setQuestVar(1);
 						updateQuestStatus(env);
 					}

@@ -1,6 +1,7 @@
 package quest.beshmundir;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -13,10 +14,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 public class _30213GroupMagicalEssence extends QuestHandler {
 
-	private final static int questId = 30213;
-
 	public _30213GroupMagicalEssence() {
-		super(questId);
+		super(30213);
 	}
 
 	@Override
@@ -33,11 +32,11 @@ public class _30213GroupMagicalEssence extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 
 		int targetId = env.getTargetId();
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 798941) {
-				if (dialog == DialogAction.QUEST_SELECT) {
+				if (dialogActionId == QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);
 				} else {
 					return sendQuestStartDialog(env);
@@ -51,7 +50,7 @@ public class _30213GroupMagicalEssence extends QuestHandler {
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 730275:
-					switch (dialog) {
+					switch (dialogActionId) {
 						case SETPRO1: {
 							removeQuestItem(env, 182209617, 1);
 							qs.setStatus(QuestStatus.REWARD);
@@ -62,7 +61,7 @@ public class _30213GroupMagicalEssence extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 798926) {
-				switch (dialog) {
+				switch (dialogActionId) {
 					case USE_OBJECT:
 						return sendQuestDialog(env, 10002);
 					case SELECT_QUEST_REWARD:

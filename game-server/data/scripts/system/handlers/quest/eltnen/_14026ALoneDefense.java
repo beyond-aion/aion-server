@@ -1,5 +1,7 @@
 package quest.eltnen;
 
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import java.util.Collection;
 import java.util.List;
 
@@ -73,7 +75,7 @@ public class _14026ALoneDefense extends QuestHandler {
 		if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 203901:
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case QUEST_SELECT: {
 							if (qs.getQuestVarById(0) == 0) {
 								return sendQuestDialog(env, 1011);
@@ -91,7 +93,7 @@ public class _14026ALoneDefense extends QuestHandler {
 					}
 					return false;
 				case 204020:
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case QUEST_SELECT: {
 							if (qs.getQuestVarById(0) == 1) {
 								return sendQuestDialog(env, 1352);
@@ -109,7 +111,7 @@ public class _14026ALoneDefense extends QuestHandler {
 					}
 					return false;
 				case 204044:
-					switch (env.getDialog()) {
+					switch (env.getDialogActionId()) {
 						case QUEST_SELECT: {
 							switch (qs.getQuestVarById(0)) {
 								case 2: {
@@ -140,7 +142,7 @@ public class _14026ALoneDefense extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203901) {
-				switch (env.getDialog()) {
+				switch (env.getDialogActionId()) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 2375);
 					default:

@@ -1,5 +1,7 @@
 package quest.inggison;
 
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
@@ -10,11 +12,10 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _11118MakingSetzkikiLaugh extends QuestHandler {
 
-	private final static int questId = 11118;
 	private final static int[] npc_ids = { 798985, 798963, 798986 };
 
 	public _11118MakingSetzkikiLaugh() {
-		super(questId);
+		super(11118);
 	}
 
 	@Override
@@ -36,7 +37,7 @@ public class _11118MakingSetzkikiLaugh extends QuestHandler {
 		int var = qs.getQuestVarById(0);
 		if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 798963) {
-				switch (env.getDialog()) {
+				switch (env.getDialogActionId()) {
 					case QUEST_SELECT:
 						if (var == 0)
 							return sendQuestDialog(env, 1011);
@@ -49,7 +50,7 @@ public class _11118MakingSetzkikiLaugh extends QuestHandler {
 						return checkQuestItems(env, 1, 2, false, 10000, 10001, 182206795, 1);
 				}
 			} else if (targetId == 798984) {
-				switch (env.getDialog()) {
+				switch (env.getDialogActionId()) {
 					case QUEST_SELECT:
 						if (var == 2)
 							return sendQuestDialog(env, 2034);

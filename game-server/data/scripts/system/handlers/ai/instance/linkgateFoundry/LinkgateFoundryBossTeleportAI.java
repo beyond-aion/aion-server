@@ -1,8 +1,9 @@
 package ai.instance.linkgateFoundry;
 
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.DialogPage;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
@@ -25,16 +26,16 @@ public class LinkgateFoundryBossTeleportAI extends ActionItemNpcAI {
 	}
 
 	@Override
-	public boolean onDialogSelect(Player player, int dialogId, int questId, int extendedRewardIndex) {
-		selectBoss(player, dialogId);
+	public boolean onDialogSelect(Player player, int dialogActionId, int questId, int extendedRewardIndex) {
+		selectBoss(player, dialogActionId);
 		return true;
 	}
 
-	private void selectBoss(Player player, int dialogId) {
+	private void selectBoss(Player player, int dialogActionId) {
 		int keyId = 185000196;
 		int minKeyCount, bossId, msgId;
 		boolean spawnGuardian;
-		switch (DialogAction.getByActionId(dialogId)) {
+		switch (dialogActionId) {
 			case SELECT_BOSS_LEVEL2:
 				minKeyCount = 1;
 				bossId = 234990;

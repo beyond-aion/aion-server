@@ -1,6 +1,7 @@
 package quest.altgard;
 
-import com.aionemu.gameserver.model.DialogAction;
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -13,10 +14,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _2232TheBrokenHoneyJar extends QuestHandler {
 
-	private final static int questId = 2232;
-
 	public _2232TheBrokenHoneyJar() {
-		super(questId);
+		super(2232);
 	}
 
 	@Override
@@ -32,11 +31,11 @@ public class _2232TheBrokenHoneyJar extends QuestHandler {
 		final Player player = env.getPlayer();
 		int targetId = env.getTargetId();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+		int dialogActionId = env.getDialogActionId();
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 203613) { // Gilungk
-				if (dialog == DialogAction.QUEST_SELECT) {
+				if (dialogActionId == QUEST_SELECT) {
 					return sendQuestDialog(env, 1011);
 				} else {
 					return sendQuestStartDialog(env);
@@ -45,7 +44,7 @@ public class _2232TheBrokenHoneyJar extends QuestHandler {
 		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			if (targetId == 203613) { // Gilungk
-				switch (dialog) {
+				switch (dialogActionId) {
 					case QUEST_SELECT:
 						if (var == 1) {
 							return sendQuestDialog(env, 2375);
@@ -57,15 +56,15 @@ public class _2232TheBrokenHoneyJar extends QuestHandler {
 						return sendQuestSelectionDialog(env);
 				}
 			} else if (targetId == 700061) { // Beehive
-				if (dialog == DialogAction.USE_OBJECT) {
+				if (dialogActionId == USE_OBJECT) {
 					return true; // loot
 				}
 			} else if (targetId == 203622) { // Tatural
-				if (dialog == DialogAction.QUEST_SELECT) {
+				if (dialogActionId == QUEST_SELECT) {
 					if (var == 0) {
 						return sendQuestDialog(env, 1352);
 					}
-				} else if (env.getDialog() == DialogAction.SETPRO1) {
+				} else if (env.getDialogActionId() == SETPRO1) {
 					return defaultCloseDialog(env, 0, 1); // 1
 				}
 			}
