@@ -13,12 +13,6 @@ public class WorldConfig {
 	@Property(key = "gameserver.world.region.size", defaultValue = "128")
 	public static int WORLD_REGION_SIZE;
 
-	/**
-	 * Trace active regions and deactivate inactive
-	 */
-	@Property(key = "gameserver.world.region.active.trace", defaultValue = "true")
-	public static boolean WORLD_ACTIVE_TRACE;
-
 	@Property(key = "gameserver.world.max.twincount.usual", defaultValue = "1")
 	public static int WORLD_MAX_TWINS_USUAL;
 

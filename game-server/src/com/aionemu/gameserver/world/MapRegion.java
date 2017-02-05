@@ -19,7 +19,6 @@ import com.aionemu.gameserver.ai.AIState;
 import com.aionemu.gameserver.ai.event.AIEventType;
 import com.aionemu.gameserver.configs.administration.DeveloperConfig;
 import com.aionemu.gameserver.configs.main.SiegeConfig;
-import com.aionemu.gameserver.configs.main.WorldConfig;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.StaticDoor;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
@@ -222,7 +221,7 @@ public class MapRegion {
 					}
 				}
 				walkers.removeIf(w -> w.getPosition().isMapRegionActive());
-				if (walkers.size() > 0) {
+				if (walkers.size() > 2) { // small threshold to accommodate the walkers near the borders of deactivated regions
 					String npcs = walkers.stream().map(o -> o.toString()).collect(Collectors.joining("\n"));
 					log.warn("There are {} objects walking on inactive map {} [{}]:\n{}", walkers.size(), getMapId(), getParent().getInstanceId(), npcs);
 				}
@@ -271,7 +270,7 @@ public class MapRegion {
 	}
 
 	public boolean isMapRegionActive() {
-		return !WorldConfig.WORLD_ACTIVE_TRACE || regionActive.get();
+		return regionActive.get();
 	}
 
 	boolean isNeighboursActive() {
