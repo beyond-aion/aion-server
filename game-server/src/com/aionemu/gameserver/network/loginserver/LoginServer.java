@@ -30,7 +30,6 @@ import com.aionemu.gameserver.network.loginserver.serverpackets.SM_ACCOUNT_RECON
 import com.aionemu.gameserver.network.loginserver.serverpackets.SM_BAN;
 import com.aionemu.gameserver.network.loginserver.serverpackets.SM_LS_CONTROL;
 import com.aionemu.gameserver.services.AccountService;
-import com.aionemu.gameserver.services.player.PlayerLeaveWorldService;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.World;
 
@@ -210,7 +209,6 @@ public class LoginServer {
 				Player player = World.getInstance().findPlayer(accountData.getPlayerCommonData().getPlayerObjId());
 				if (player != null && player.getClientConnection() != null) {
 					player.getClientConnection().close(SM_SYSTEM_MESSAGE.STR_KICK_ANOTHER_USER_TRY_LOGIN()); // kick
-					PlayerLeaveWorldService.leaveWorld(player);
 				}
 				return false;
 			}
