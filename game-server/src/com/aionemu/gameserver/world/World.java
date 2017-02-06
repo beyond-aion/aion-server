@@ -24,6 +24,8 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.siege.SiegeNpc;
 import com.aionemu.gameserver.model.templates.spawns.basespawns.BaseSpawnTemplate;
 import com.aionemu.gameserver.model.templates.world.WorldMapTemplate;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
+import com.aionemu.gameserver.utils.audit.AuditLogger;
 import com.aionemu.gameserver.world.container.PlayerContainer;
 import com.aionemu.gameserver.world.exceptions.AlreadySpawnedException;
 import com.aionemu.gameserver.world.exceptions.DuplicateAionObjectException;
@@ -268,7 +270,7 @@ public class World {
 				((Player) object).getController().stopProtectionActiveTask();
 			}
 		}
-		this.updatePosition(object, newX, newY, newZ, newHeading, true);
+		updatePosition(object, newX, newY, newZ, newHeading, true);
 	}
 
 	/**
@@ -279,7 +281,7 @@ public class World {
 	 * @param newHeading
 	 */
 	public void updatePosition(VisibleObject object, float newX, float newY, float newZ, byte newHeading, boolean updateKnownList) {
-		if (!object.isSpawned()) { // MapRegion would be null
+		if (!object.isSpawned()) { // despawned objects should never move
 			if (object instanceof Creature)
 				log.warn("Can't update position of despawned object: {}\nDespawned on {}", object, ((Creature) object).getDespawnCause(), new Throwable());
 			else
@@ -287,9 +289,19 @@ public class World {
 			return;
 		}
 
-		MapRegion oldRegion = object.getActiveRegion();
+		WorldPosition position = object.getPosition();
+		MapRegion oldRegion = position.getMapRegion();
 		if (oldRegion == null) {
-			log.warn("Old MapRegion was null when trying to update position of {}", object, new Throwable());
+			if (object instanceof Player) {
+				Player player = (Player) object;
+				if (!player.isGM()) {
+					AuditLogger.info(player, "outside valid regions: " + position);
+					// he will be sent to bind point in PlayerLeaveWorldService
+					player.getClientConnection().close(SM_SYSTEM_MESSAGE.STR_KICK_CHARACTER());
+				}
+			} else {
+				log.warn("Old MapRegion was null when trying to update position of {}", object, new Throwable());
+			}
 			return;
 		}
 
@@ -323,7 +335,7 @@ public class World {
 			return;
 		}
 
-		object.getPosition().setXYZH(newX, newY, newZ, newHeading);
+		position.setXYZH(newX, newY, newZ, newHeading);
 
 		if (newRegion != oldRegion) {
 			if (object instanceof Creature) {
@@ -332,7 +344,7 @@ public class World {
 			}
 			oldRegion.remove(object);
 			newRegion.add(object);
-			object.getPosition().setMapRegion(newRegion);
+			position.setMapRegion(newRegion);
 		}
 
 		if (updateKnownList)
@@ -413,14 +425,15 @@ public class World {
 	public void spawn(VisibleObject object, boolean updateKnownlist) throws AlreadySpawnedException {
 		if (object == null)
 			return;
-		if (object.getPosition().isSpawned())
+		WorldPosition position = object.getPosition();
+		if (position.isSpawned())
 			throw new AlreadySpawnedException(object);
 
 		object.getController().onBeforeSpawn();
-		object.getPosition().setIsSpawned(true);
+		position.setIsSpawned(true);
 
-		object.getActiveRegion().getParent().addObject(object);
-		object.getActiveRegion().add(object);
+		position.getMapRegion().getParent().addObject(object);
+		position.getMapRegion().add(object);
 		object.getController().onAfterSpawn();
 
 		if (updateKnownlist)
@@ -447,8 +460,9 @@ public class World {
 		try {
 			object.getController().onDespawn();
 		} finally {
-			MapRegion oldMapRegion = object.getActiveRegion();
-			object.getPosition().setIsSpawned(false);
+			WorldPosition position = object.getPosition();
+			MapRegion oldMapRegion = position.getMapRegion();
+			position.setIsSpawned(false);
 			if (object instanceof Creature) {
 				((Creature) object).setDespawnCause();
 			}

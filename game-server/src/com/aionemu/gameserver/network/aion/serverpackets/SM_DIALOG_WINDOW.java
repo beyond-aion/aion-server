@@ -1,7 +1,5 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
-import java.util.List;
-
 import com.aionemu.gameserver.model.DialogPage;
 import com.aionemu.gameserver.model.gameobjects.AionObject;
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -9,7 +7,6 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 import com.aionemu.gameserver.services.player.PlayerMailboxState;
-import com.aionemu.gameserver.world.MapRegion;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
 
@@ -57,18 +54,12 @@ public class SM_DIALOG_WINDOW extends AionServerPacket {
 				Npc npc = (Npc) object;
 				if (npc.getNpcId() == 205770 || npc.getNpcId() == 730677 || npc.getNpcId() == 730679) {
 					int townId = 0;
-					MapRegion region = npc.getPosition().getMapRegion();
-					if (region == null) {
-						// some npc without region !!!
-					} else {
-						List<ZoneInstance> zones = region.getZones(npc);
-						for (ZoneInstance zone : zones) {
-							townId = zone.getTownId();
-							if (townId > 0)
-								break;
-						}
-						writeH(townId);
+					for (ZoneInstance zone : npc.findZones()) {
+						townId = zone.getTownId();
+						if (townId > 0)
+							break;
 					}
+					writeH(townId);
 				}
 			}
 		} else

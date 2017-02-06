@@ -429,17 +429,12 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 	}
 
 	private int getZoneNameId(Player player) {
-		List<ZoneInstance> zones = player.getPosition().getMapRegion().getZones(player);
-		if (zones.isEmpty()) {
-			return 0;
-		} else {
-			for (ZoneInstance zone : zones) {
-				if (!zone.getAreaTemplate().getZoneName().name().equalsIgnoreCase("301220000")) {
-					return getZoneNameIdByZoneName(zone.getAreaTemplate().getZoneName().name());
-				}
+		for (ZoneInstance zone : player.findZones()) {
+			if (!zone.getAreaTemplate().getZoneName().name().equalsIgnoreCase("301220000")) {
+				return getZoneNameIdByZoneName(zone.getAreaTemplate().getZoneName().name());
 			}
-			return 0;
 		}
+		return 0;
 	}
 
 	private int getZoneNameIdByZoneName(String name) {

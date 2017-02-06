@@ -43,7 +43,7 @@ public class SimpleAbyssGuardHandler {
 		if (creature.getTarget() != null)
 			return;
 
-		if (!owner.getActiveRegion().isMapRegionActive())
+		if (!owner.getPosition().isMapRegionActive())
 			return;
 
 		if (!ai.isInState(AIState.FIGHT) && (MathUtil.isIn3dRange(owner, creature, owner.getAggroRange()))) {

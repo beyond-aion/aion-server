@@ -66,7 +66,7 @@ public class CreatureEventHandler {
 		if (!owner.isSpawned())
 			return;
 
-		if (!owner.getActiveRegion().isMapRegionActive()) // must be spawned first in order to have a valid mapregion
+		if (!owner.getPosition().isMapRegionActive())
 			return;
 
 		if (MathUtil.isIn3dRange(owner, creature, owner.getAggroRange())) {

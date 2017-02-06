@@ -111,7 +111,7 @@ public class LifeStatsRestoreService {
 
 		@Override
 		public void run() {
-			if (lifeStats.isAlreadyDead() || !lifeStats.getOwner().isInWorld()) {
+			if (lifeStats.isAlreadyDead() || !lifeStats.getOwner().isSpawned()) {
 				lifeStats.cancelFpReduce();
 				lifeStats = null;
 				return;

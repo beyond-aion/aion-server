@@ -119,7 +119,7 @@ public abstract class Base<T extends BaseLocation> {
 		assaultTask = ThreadPoolManager.getInstance().schedule(() -> {
 			if (isFinished.get())
 				return;
-			if (flag.getActiveRegion().isMapRegionActive()) {
+			if (flag.getPosition().isMapRegionActive()) {
 				spawnBySpawnHandler(SpawnHandlerType.ATTACKER, chooseAssaultRace());
 				SM_SYSTEM_MESSAGE assaultMsg = getAssaultMsg();
 				if (assaultMsg != null)

@@ -18,6 +18,7 @@ import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.world.MapRegion;
+import com.aionemu.gameserver.world.WorldPosition;
 
 /**
  * KnownList.
@@ -182,9 +183,10 @@ public class KnownList {
 		if (owner == null || !owner.isSpawned())
 			return;
 
+		WorldPosition position = owner.getPosition();
 		if (owner instanceof Npc) {
 			if (((Creature) owner).isFlag()) {
-				owner.getPosition().getWorldMapInstance().forEachPlayer(new Consumer<Player>() {
+				position.getWorldMapInstance().forEachPlayer(new Consumer<Player>() {
 
 					@Override
 					public void accept(Player player) {
@@ -195,7 +197,7 @@ public class KnownList {
 				});
 			}
 		} else if (owner instanceof Player) {
-			for (Npc npc : owner.getPosition().getWorldMapInstance().getNpcs()) {
+			for (Npc npc : position.getWorldMapInstance().getNpcs()) {
 				if (npc.isFlag()) {
 					if (add(npc)) {
 						npc.getKnownList().add(owner);
@@ -203,7 +205,7 @@ public class KnownList {
 				}
 			}
 		}
-		for (MapRegion region : owner.getActiveRegion().getNeighbours()) {
+		for (MapRegion region : position.getMapRegion().getNeighbours()) {
 			for (VisibleObject newObject : region.getObjects().values()) {
 				if (newObject == null || owner.equals(newObject))
 					continue;

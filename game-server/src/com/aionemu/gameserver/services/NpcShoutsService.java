@@ -18,7 +18,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
-import com.aionemu.gameserver.world.World;
 
 /**
  * This class is handling NPC shouts
@@ -36,7 +35,6 @@ public class NpcShoutsService {
 
 	public void registerShoutTask(Npc npc) {
 		int worldId = npc.getSpawn().getWorldId();
-		int objectId = npc.getObjectId();
 
 		List<NpcShout> shouts = DataManager.NPC_SHOUT_DATA.getNpcShouts(worldId, npc.getNpcId(), ShoutEventType.IDLE);
 		if (shouts == null || shouts.isEmpty())
@@ -48,7 +46,7 @@ public class NpcShoutsService {
 				pollDelay = shout.getPollDelay();
 		}
 
-		npc.getController().addTask(TaskId.SHOUT, ThreadPoolManager.getInstance().scheduleAtFixedRate(new NpcShoutTask(objectId, shouts), 0, pollDelay));
+		npc.getController().addTask(TaskId.SHOUT, ThreadPoolManager.getInstance().scheduleAtFixedRate(new NpcShoutTask(npc, shouts), 0, pollDelay));
 	}
 
 	public void removeShoutCooldown(Npc npc) {
@@ -109,20 +107,18 @@ public class NpcShoutsService {
 
 	private class NpcShoutTask implements Runnable {
 
-		private int objectId;
+		private Npc npc;
 		private List<NpcShout> shouts;
 
-		NpcShoutTask(int objectId, List<NpcShout> shouts) {
-			this.objectId = objectId;
+		NpcShoutTask(Npc npc, List<NpcShout> shouts) {
+			this.npc = npc;
 			this.shouts = shouts;
 		}
 
 		@Override
 		public void run() {
-			Npc npc = World.getInstance().findNpc(objectId);
-			if (npc == null || !npc.getPosition().isMapRegionActive() || !npc.getAi().ask(AIQuestion.CAN_SHOUT))
-				return;
-			shoutRandom(npc, null, shouts, 0);
+			if (npc.getPosition().isMapRegionActive() && npc.getAi().ask(AIQuestion.CAN_SHOUT))
+				shoutRandom(npc, null, shouts, 0);
 		}
 	}
 }

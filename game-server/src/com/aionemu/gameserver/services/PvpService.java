@@ -273,7 +273,6 @@ public class PvpService {
 
 		List<Player> rewarded = new FastTable<>();
 		int worldId = victim.getWorldId();
-		List<ZoneInstance> zones = victim.getPosition().getMapRegion().getZones(victim);
 
 		if (winner.isInGroup()) {
 			rewarded.addAll(winner.getPlayerGroup().getOnlineMembers());
@@ -282,6 +281,7 @@ public class PvpService {
 		} else
 			rewarded.add(winner);
 
+		List<ZoneInstance> zones = victim.findZones();
 		for (Player p : rewarded) {
 			if (!MathUtil.isIn3dRange(p, victim, GroupConfig.GROUP_MAX_DISTANCE) || p.getLifeStats().isAlreadyDead())
 				continue;

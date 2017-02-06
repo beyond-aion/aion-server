@@ -231,9 +231,11 @@ public class TargetRangeProperty {
 
 	@SuppressWarnings("unused")
 	private static final boolean isInsideDisablePvpZone(Creature creature) {
-		for (ZoneInstance zone : creature.getPosition().getMapRegion().getZones(creature)) {
-			if (creature.isInsideZoneType(ZoneType.PVP) && zone.getZoneTemplate().getFlags() == 0)
-				return true;
+		if (creature.isInsideZoneType(ZoneType.PVP)) {
+			for (ZoneInstance zone : creature.findZones()) {
+				if (zone.getZoneTemplate().getFlags() == 0)
+					return true;
+			}
 		}
 		return false;
 	}

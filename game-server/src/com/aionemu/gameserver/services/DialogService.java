@@ -62,7 +62,6 @@ import com.aionemu.gameserver.skillengine.model.DispelSlotType;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.time.ServerTime;
-import com.aionemu.gameserver.world.MapRegion;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
 
 /**
@@ -392,10 +391,8 @@ public class DialogService {
 			case FORT_CAPTURE:
 				if (player.getLegion() == null)
 					return true;
-				MapRegion region = npc.getPosition().getMapRegion();
-				List<ZoneInstance> zones = region.getZones(npc);
 				ZoneTemplate fortZone = null;
-				for (ZoneInstance zone : zones) {
+				for (ZoneInstance zone : npc.findZones()) {
 					if (zone.getZoneTemplate().getZoneType() != ZoneClassName.FORT)
 						continue;
 					fortZone = zone.getZoneTemplate();

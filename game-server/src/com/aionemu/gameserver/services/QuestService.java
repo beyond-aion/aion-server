@@ -748,7 +748,7 @@ public final class QuestService {
 
 	public static void addNewSpawn(int worldId, int instanceId, int templateId, float x, float y, float z, byte heading, int timeInMin) {
 		final Npc npc = (Npc) spawnQuestNpc(worldId, instanceId, templateId, x, y, z, heading);
-		if (timeInMin > 0 && !npc.getPosition().isInstanceMap()) {
+		if (timeInMin > 0 && !npc.isInInstance()) {
 			ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 				@Override

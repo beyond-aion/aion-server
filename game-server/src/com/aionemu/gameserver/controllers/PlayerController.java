@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.controllers;
 
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -25,7 +27,6 @@ import com.aionemu.gameserver.controllers.observer.ActionObserver;
 import com.aionemu.gameserver.controllers.observer.ObserverType;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.DescriptionId;
-import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.TaskId;
@@ -226,11 +227,8 @@ public class PlayerController extends CreatureController<Player> {
 	}
 
 	public void updateNearbyQuests() {
-		MapRegion region = getOwner().getPosition().getMapRegion();
-		if (region == null) // usually when player isn't spawned yet
-			return;
 		Map<Integer, Integer> nearbyQuestList = new FastMap<>();
-		for (int questId : region.getParent().getQuestIds()) {
+		for (int questId : getOwner().getPosition().getMapRegion().getParent().getQuestIds()) {
 			if (QuestService.checkStartConditions(getOwner(), questId, false, 2, false, false, false))
 				nearbyQuestList.put(questId, QuestService.getLevelRequirementDiff(questId, getOwner().getCommonData().getLevel()));
 		}

@@ -21,7 +21,7 @@ public class ActivateEventHandler {
 		Npc npc = npcAI.getOwner();
 		npc.updateKnownlist();
 		npc.getController().loseAggro(false);
-		if (!npc.getPosition().isInstanceMap())
+		if (!npc.isInInstance())
 			npc.getEffectController().removeAllEffects();
 	}
 }

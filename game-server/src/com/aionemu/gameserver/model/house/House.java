@@ -205,18 +205,18 @@ public class House extends VisibleObject {
 			if (spawn.getType() == SpawnType.MANAGER && spawns.get(SpawnType.MANAGER) == null) {
 				t = SpawnEngine.addNewSingleTimeSpawn(getAddress().getMapId(), getLand().getManagerNpcId(), spawn.getX(), spawn.getY(), spawn.getZ(),
 					spawn.getH());
-				SummonedHouseNpc npc = VisibleObjectSpawner.spawnHouseNpc(t, getPosition().getInstanceId(), this, masterName);
+				SummonedHouseNpc npc = VisibleObjectSpawner.spawnHouseNpc(t, getInstanceId(), this, masterName);
 				spawns.put(SpawnType.MANAGER, npc);
 			} else if (spawn.getType() == SpawnType.TELEPORT && spawns.get(SpawnType.TELEPORT) == null) {
 				t = SpawnEngine.addNewSingleTimeSpawn(getAddress().getMapId(), getLand().getTeleportNpcId(), spawn.getX(), spawn.getY(), spawn.getZ(),
 					spawn.getH());
-				SummonedHouseNpc npc = VisibleObjectSpawner.spawnHouseNpc(t, getPosition().getInstanceId(), this, masterName);
+				SummonedHouseNpc npc = VisibleObjectSpawner.spawnHouseNpc(t, getInstanceId(), this, masterName);
 				spawns.put(SpawnType.TELEPORT, npc);
 			} else if (spawn.getType() == SpawnType.SIGN && spawns.get(SpawnType.SIGN) == null) {
 				// Signs do not have master name displayed, but have creatorId
 				t = SpawnEngine.addNewSingleTimeSpawn(getAddress().getMapId(), getCurrentSignNpcId(), spawn.getX(), spawn.getY(), spawn.getZ(), spawn.getH(),
 					creatorId, StringUtils.EMPTY);
-				spawns.put(SpawnType.SIGN, (Npc) SpawnEngine.spawnObject(t, getPosition().getInstanceId()));
+				spawns.put(SpawnType.SIGN, (Npc) SpawnEngine.spawnObject(t, getInstanceId()));
 			}
 		}
 	}
@@ -316,7 +316,7 @@ public class House extends VisibleObject {
 					sign.setSpawn(null);
 					sign.getController().delete();
 					t = SpawnEngine.addNewSingleTimeSpawn(t.getWorldId(), newNpcId, t.getX(), t.getY(), t.getZ(), t.getHeading());
-					sign = (Npc) SpawnEngine.spawnObject(t, this.getPosition().getInstanceId());
+					sign = (Npc) SpawnEngine.spawnObject(t, getInstanceId());
 					spawns.put(SpawnType.SIGN, sign);
 				}
 			}

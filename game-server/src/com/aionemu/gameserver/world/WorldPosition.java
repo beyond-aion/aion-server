@@ -3,6 +3,8 @@ package com.aionemu.gameserver.world;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.aionemu.gameserver.model.gameobjects.VisibleObject;
+
 /**
  * Position of object in the world.
  * 
@@ -93,17 +95,19 @@ public class WorldPosition {
 	}
 
 	/**
-	 * Return map region
+	 * If you need the map region under any conditions use this method, but for most use cases you should use {@link VisibleObject#getMapRegion()},
+	 * since it respects the isSpawned state.
 	 * 
 	 * @return Map region
 	 */
 	public MapRegion getMapRegion() {
-		return isSpawned ? mapRegion : null;
+		return mapRegion;
 	}
 
-	/**
-	 * @return
-	 */
+	public boolean isMapRegionActive() {
+		return mapRegion == null ? false : mapRegion.isActive();
+	}
+
 	public int getInstanceId() {
 		return mapRegion == null ? 1 : mapRegion.getParent().getInstanceId();
 	}
@@ -111,22 +115,8 @@ public class WorldPosition {
 	/**
 	 * @return
 	 */
-	public int getInstanceCount() {
-		return mapRegion.getParent().getParent().getInstanceCount();
-	}
-
-	/**
-	 * @return
-	 */
 	public boolean isInstanceMap() {
-		return mapRegion.getParent().getParent().isInstanceType();
-	}
-
-	/**
-	 * @return
-	 */
-	public boolean isMapRegionActive() {
-		return mapRegion.isMapRegionActive();
+		return mapRegion == null ? false : mapRegion.getParent().getParent().isInstanceType();
 	}
 
 	/**

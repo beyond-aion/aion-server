@@ -86,7 +86,7 @@ public class SkillCooltimeResetAI extends NpcAI {
 		if (!getOwner().canSee(creature))
 			return;
 
-		if (!getOwner().getActiveRegion().isMapRegionActive())
+		if (!getOwner().getPosition().isMapRegionActive())
 			return;
 
 		if (playersInSight.containsKey(creature.getObjectId()))

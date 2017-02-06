@@ -1,6 +1,7 @@
 package com.aionemu.gameserver.model.gameobjects;
 
 import java.time.format.DateTimeFormatter;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -667,8 +668,17 @@ public abstract class Creature extends VisibleObject {
 		return false;
 	}
 
+	/**
+	 * @return All zones the the creature currently is in (even if not currently spawned, so make sure to check isSpawned yourself if needed).
+	 */
+	public List<ZoneInstance> findZones() {
+		return getPosition().getMapRegion() == null ? Collections.emptyList() : getPosition().getMapRegion().findZones(this);
+	}
+
 	public void revalidateZones() {
-		MapRegion mapRegion = this.getPosition().getMapRegion();
+		if (!isSpawned())
+			return;
+		MapRegion mapRegion = getPosition().getMapRegion();
 		if (mapRegion != null)
 			mapRegion.revalidateZones(this);
 	}
@@ -686,14 +696,13 @@ public abstract class Creature extends VisibleObject {
 	}
 
 	public boolean isInsideWeatherZone(int weatherZoneId) {
-		if (getActiveRegion() == null)
+		if (!isSpawned())
 			return false;
-		List<ZoneInstance> zones = getActiveRegion().getZones(this);
-		for (ZoneInstance regionZone : zones) {
+		for (ZoneInstance regionZone : findZones()) {
 			if (regionZone.getZoneTemplate().getZoneType() == ZoneClassName.WEATHER) {
-				if (!regionZone.getAreaTemplate().isInside3D(getPosition().getX(), getPosition().getY(), getPosition().getZ()))
+				if (DataManager.ZONE_DATA.getWeatherZoneId(regionZone.getZoneTemplate()) != weatherZoneId)
 					continue;
-				if (DataManager.ZONE_DATA.getWeatherZoneId(regionZone.getZoneTemplate()) == weatherZoneId)
+				if (regionZone.getAreaTemplate().isInside3D(getPosition().getX(), getPosition().getY(), getPosition().getZ()))
 					return true;
 			}
 		}

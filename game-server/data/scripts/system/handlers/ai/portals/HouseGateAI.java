@@ -46,7 +46,7 @@ public class HouseGateAI extends NpcAI {
 			// msg
 			return;
 		boolean returnBattle = true;
-		for (ZoneInstance zone : player.getPosition().getMapRegion().getZones(player)) {
+		for (ZoneInstance zone : player.findZones()) {
 			if (!zone.canReturnToBattle()) {
 				returnBattle = false;
 				break;
@@ -94,7 +94,7 @@ public class HouseGateAI extends NpcAI {
 				else if (exitMapId == 720010000) // oriel apartment
 					heading = 63;
 				boolean canReturnToBattle = true;
-				for (ZoneInstance zone : responder.getPosition().getMapRegion().getZones(responder)) {
+				for (ZoneInstance zone : responder.findZones()) {
 					if (!zone.canReturnToBattle()) {
 						canReturnToBattle = false;
 						break;

@@ -532,7 +532,7 @@ public class DropService {
 	}
 
 	private void announceDrop(Player player, ItemTemplate template) {
-		if (DropConfig.MIN_ANNOUNCE_QUALITY == null || player.getPosition().isInstanceMap())
+		if (DropConfig.MIN_ANNOUNCE_QUALITY == null || player.isInInstance())
 			return;
 		if (template.getItemQuality().getQualityId() < DropConfig.MIN_ANNOUNCE_QUALITY.getQualityId())
 			return;

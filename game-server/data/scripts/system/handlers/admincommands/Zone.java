@@ -27,12 +27,11 @@ public class Zone extends AdminCommand {
 		else
 			target = (Creature) admin.getTarget();
 		if (params.length == 0) {
-			List<ZoneInstance> zones = target.getPosition().getMapRegion().getZones(target);
+			List<ZoneInstance> zones = target.findZones();
 			if (zones.isEmpty()) {
-				PacketSendUtility.sendMessage(admin, target.getName() + " are out of any zone");
+				PacketSendUtility.sendMessage(admin, target.getName() + " is not in any zone.");
 			} else {
-				PacketSendUtility.sendMessage(admin, target.getName() + " are in zone: ");
-				PacketSendUtility.sendMessage(admin, "Registered zones:");
+				PacketSendUtility.sendMessage(admin, target.getName() + "'s zone(s): ");
 				if (admin.isInsideZoneType(ZoneType.DAMAGE))
 					PacketSendUtility.sendMessage(admin, "DAMAGE");
 				if (admin.isInsideZoneType(ZoneType.FLY))

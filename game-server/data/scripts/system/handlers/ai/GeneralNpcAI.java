@@ -94,7 +94,7 @@ public class GeneralNpcAI extends NpcAI {
 	
 	@Override
 	public void handleCreatureDetected(Creature creature) {
-		if (getOwner().getPosition().isInstanceMap())
+		if (getOwner().isInInstance())
 			getOwner().getPosition().getWorldMapInstance().getInstanceHandler().onCreatureDetected(getOwner(), creature);
 	}
 

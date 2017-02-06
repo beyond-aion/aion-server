@@ -431,7 +431,7 @@ public class PlayerRestrictions extends AbstractRestrictions {
 			ZoneName restriction = item.getItemTemplate().getUseArea();
 			if (restriction == ZoneName.get("_ABYSS_CASTLE_AREA_")) {
 				boolean isInFortZone = false;
-				for (ZoneInstance zone : player.getPosition().getMapRegion().getZones(player)) {
+				for (ZoneInstance zone : player.findZones()) {
 					if (zone.getZoneTemplate().getZoneType().equals(ZoneClassName.FORT)) {
 						isInFortZone = true;
 						break;

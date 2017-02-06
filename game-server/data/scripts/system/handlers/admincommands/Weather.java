@@ -1,7 +1,5 @@
 package admincommands;
 
-import java.util.List;
-
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.world.WeatherTable;
@@ -29,8 +27,7 @@ public class Weather extends AdminCommand {
 
 		if (params.length == 0) {
 			int weatherCode = -1;
-			List<ZoneInstance> zones = admin.getActiveRegion().getZones(admin);
-			for (ZoneInstance regionZone : zones) {
+			for (ZoneInstance regionZone : admin.findZones()) {
 				if (regionZone.getZoneTemplate().getZoneType() == ZoneClassName.WEATHER) {
 					int weatherZoneId = DataManager.ZONE_DATA.getWeatherZoneId(regionZone.getZoneTemplate());
 					weatherCode = WeatherService.getInstance().getWeatherCode(admin.getWorldId(), weatherZoneId);

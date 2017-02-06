@@ -19,7 +19,6 @@ import com.aionemu.gameserver.model.templates.housing.HousingLand;
 import com.aionemu.gameserver.model.town.Town;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_TOWNS_LIST;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-import com.aionemu.gameserver.world.MapRegion;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
 
 /**
@@ -90,14 +89,9 @@ public class TownService {
 				return ((Npc) creature).getTownId();
 		}
 		if (creature.isSpawned()) {
-			MapRegion region = creature.getPosition().getMapRegion();
-			if (region == null) {
-				log.warn("TownService: " + creature + " has no map region!");
-			} else {
-				for (ZoneInstance zone : region.getZones(creature)) {
-					if (zone.getTownId() > 0)
-						return zone.getTownId();
-				}
+			for (ZoneInstance zone : creature.findZones()) {
+				if (zone.getTownId() > 0)
+					return zone.getTownId();
 			}
 		}
 		return 0;

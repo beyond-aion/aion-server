@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.controllers.observer;
 
-import java.util.List;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
@@ -27,7 +26,6 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.time.gametime.DayTime;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
 
-
 /**
  * @author Rolandas
  */
@@ -49,6 +47,9 @@ public class CollisionMaterialActor extends AbstractCollisionObserver implements
 	 */
 
 	private MaterialSkill getSkillForTarget(Creature creature) {
+		if (!creature.isSpawned())
+			return null;
+
 		if (creature instanceof Player) {
 			Player player = (Player) creature;
 			if (player.isProtectionActive())
@@ -66,10 +67,7 @@ public class CollisionMaterialActor extends AbstractCollisionObserver implements
 			return null;
 
 		int weatherCode = -1;
-		if (creature.getActiveRegion() == null)
-			return null;
-		List<ZoneInstance> zones = creature.getActiveRegion().getZones(creature);
-		for (ZoneInstance regionZone : zones) {
+		for (ZoneInstance regionZone : creature.findZones()) {
 			if (regionZone.getZoneTemplate().getZoneType() == ZoneClassName.WEATHER) {
 				Vector3f center = geometry.getWorldBound().getCenter();
 				if (!regionZone.getAreaTemplate().isInside3D(center.x, center.y, center.z))

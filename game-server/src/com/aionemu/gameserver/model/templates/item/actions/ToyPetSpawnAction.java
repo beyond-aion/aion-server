@@ -134,7 +134,7 @@ public class ToyPetSpawnAction extends AbstractItemAction {
 	}
 
 	private boolean isPutKiskZone(Player player) {
-		for (ZoneInstance zone : player.getPosition().getMapRegion().getZones(player)) {
+		for (ZoneInstance zone : player.findZones()) {
 			if (!zone.canPutKisk())
 				return false;
 		}

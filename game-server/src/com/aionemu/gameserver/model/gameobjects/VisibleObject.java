@@ -5,7 +5,6 @@ import com.aionemu.gameserver.model.animations.ObjectDeleteAnimation;
 import com.aionemu.gameserver.model.templates.VisibleObjectTemplate;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.utils.MathUtil;
-import com.aionemu.gameserver.world.MapRegion;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.WorldDropType;
 import com.aionemu.gameserver.world.WorldPosition;
@@ -64,13 +63,6 @@ public abstract class VisibleObject extends AionObject {
 	 * Spawn template of this visibleObject. .
 	 */
 	private SpawnTemplate spawn;
-
-	/**
-	 * Returns current WorldRegion AionObject is in.
-	 */
-	public MapRegion getActiveRegion() {
-		return getPosition().getMapRegion();
-	}
 
 	public int getInstanceId() {
 		return getPosition().getInstanceId();

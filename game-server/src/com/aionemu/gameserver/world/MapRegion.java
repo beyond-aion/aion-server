@@ -84,15 +84,6 @@ public class MapRegion {
 	}
 
 	/**
-	 * Return World map id.
-	 * 
-	 * @return world map id
-	 */
-	public Integer getMapId() {
-		return getParent().getMapId();
-	}
-
-	/**
 	 * Returns region id of this map region. [NOT WORLD ID!]
 	 * 
 	 * @return region id.
@@ -196,7 +187,7 @@ public class MapRegion {
 
 			@Override
 			public void run() {
-				log.debug("Activating in map {} region {}", getMapId(), regionId);
+				log.debug("Activating in map {} region {}", getParent().getMapId(), regionId);
 				MapRegion.this.activateObjects();
 				for (MapRegion neighbor : getNeighbours()) {
 					neighbor.activate();
@@ -210,7 +201,7 @@ public class MapRegion {
 
 			@Override
 			public void run() {
-				log.debug("Deactivating inactive regions around region {} on map {} [{}]", regionId, getMapId(), getParent().getInstanceId());
+				log.debug("Deactivating inactive regions around region {} on map {} [{}]", regionId, getParent().getMapId(), getParent().getInstanceId());
 				List<Creature> walkers = new FastTable<>();
 				for (MapRegion neighbor : getNeighbours()) {
 					if (!neighbor.isNeighboursActive() && neighbor.deactivate()) {
@@ -223,7 +214,8 @@ public class MapRegion {
 				walkers.removeIf(w -> w.getPosition().isMapRegionActive());
 				if (walkers.size() > 2) { // small threshold to accommodate the walkers near the borders of deactivated regions
 					String npcs = walkers.stream().map(o -> o.toString()).collect(Collectors.joining("\n"));
-					log.warn("There are {} objects walking on inactive map {} [{}]:\n{}", walkers.size(), getMapId(), getParent().getInstanceId(), npcs);
+					log.warn("There are {} objects walking on inactive map {} [{}]:\n{}", walkers.size(), getParent().getMapId(), getParent().getInstanceId(),
+						npcs);
 				}
 			}
 		}, 60000);
@@ -269,7 +261,7 @@ public class MapRegion {
 		}
 	}
 
-	public boolean isMapRegionActive() {
+	public boolean isActive() {
 		return regionActive.get();
 	}
 
@@ -304,7 +296,7 @@ public class MapRegion {
 		}
 	}
 
-	public List<ZoneInstance> getZones(Creature creature) {
+	public List<ZoneInstance> findZones(Creature creature) {
 		List<ZoneInstance> z = new FastTable<>();
 		for (Entry<Integer, TreeSet<ZoneInstance>> e : zoneMap.entrySet()) {
 			TreeSet<ZoneInstance> zones = e.getValue();

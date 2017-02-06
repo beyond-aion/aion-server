@@ -65,8 +65,8 @@ public class PlayerLeaveWorldService {
 	 */
 	public static final void leaveWorld(Player player) {
 		WorldPosition pos = player.getPosition();
-		if (pos == null || pos.isSpawned() && pos.getMapRegion() == null) { // ensure safe logout
-			log.error(player + " had position: " + pos + " so he was reset to bind point");
+		if (pos == null || pos.getMapRegion() == null) { // ensure safe logout
+			log.warn(player + " had invalid position: " + pos + " so he was reset to bind point");
 			BindPointPosition bp = player.getBindPoint();
 			if (bp != null)
 				pos = World.getInstance().createPosition(bp.getMapId(), bp.getX(), bp.getY(), bp.getZ(), bp.getHeading(), 1);
