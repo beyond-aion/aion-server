@@ -1,7 +1,5 @@
 package com.aionemu.gameserver.model.enchants;
 
-import com.aionemu.commons.utils.Rnd;
-
 /**
  * @author Whoop
  */
@@ -30,7 +28,7 @@ public enum EnchantStone {
 		return this.maxLevel;
 	}
 
-	public int getRndLevel() {
-		return Rnd.get(this.minLevel, this.maxLevel);
+	public int getBaseEnchantStoneLevel() {
+		return Math.max(20, (minLevel + maxLevel) / 2);
 	}
 }

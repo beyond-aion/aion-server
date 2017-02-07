@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.aionemu.commons.utils.Rnd;
+import com.aionemu.gameserver.configs.administration.AdminConfig;
 import com.aionemu.gameserver.configs.main.EnchantsConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.DescriptionId;
@@ -118,10 +119,10 @@ public class EnchantService {
 	 * @return true, if successful
 	 */
 	public static boolean enchantItem(Player player, Item parentItem, Item targetItem, Item supplementItem) {
-		float success;
+		float successChance;
 
 		if (targetItem.isAmplified()) {
-			success = EnchantsConfig.AMPLIFIED_ENCHANT_CHANCE;
+			successChance = EnchantsConfig.AMPLIFIED_ENCHANT_CHANCE;
 		} else {
 			ItemTemplate enchantStone = parentItem.getItemTemplate();
 			int enchantStoneLevel;
@@ -129,47 +130,51 @@ public class EnchantService {
 			// new with 4.7.5
 			switch (parentItem.getItemId()) {
 				case 166000191:
-					enchantStoneLevel = EnchantStone.ALPHA.getRndLevel();
+					enchantStoneLevel = EnchantStone.ALPHA.getBaseEnchantStoneLevel();
 					break;
 				case 166000192:
-					enchantStoneLevel = EnchantStone.BETA.getRndLevel();
+					enchantStoneLevel = EnchantStone.BETA.getBaseEnchantStoneLevel();
 					break;
 				case 166000193:
-					enchantStoneLevel = EnchantStone.GAMMA.getRndLevel();
+					enchantStoneLevel = EnchantStone.GAMMA.getBaseEnchantStoneLevel();
 					break;
 				case 166000194:
-					enchantStoneLevel = EnchantStone.DELTA.getRndLevel();
+					enchantStoneLevel = EnchantStone.DELTA.getBaseEnchantStoneLevel();
 					break;
 				case 166000195:
-					enchantStoneLevel = EnchantStone.EPSILON.getRndLevel();
+					enchantStoneLevel = EnchantStone.EPSILON.getBaseEnchantStoneLevel();
 					break;
 				case 166020000:
 				case 166020003:
-					enchantStoneLevel = EnchantStone.OMEGA.getRndLevel();
+					enchantStoneLevel = EnchantStone.OMEGA.getBaseEnchantStoneLevel();
 					break;
-				default: // its temporary for existing old enchantment stones
-					if (enchantStone.getLevel() <= 120)
-						enchantStoneLevel = enchantStone.getLevel();
-					else
-						enchantStoneLevel = 120;
+				default: // old enchantment stones (1-190)
+					enchantStoneLevel = enchantStone.getLevel();
+					if (enchantStoneLevel > 100)
+						enchantStoneLevel = 100 + (enchantStoneLevel - 100) / 2;
 					break;
 			}
 
-			// Increases the chance to enchant
-			float qualityMod;
-
 			switch (targetItem.getItemTemplate().getItemQuality()) {
+				case JUNK:
+				case COMMON:
+					successChance = 50.0f;
+					break;
+				case RARE:
+					successChance = 45.0f;
+					break;
+				case LEGEND:
+					successChance = 35.0f;
+					break;
 				case UNIQUE:
-					qualityMod = 30.0f;
+					successChance = 30.0f;
 					break;
 				case EPIC:
-					qualityMod = 25.0f;
+					successChance = 25.0f;
 					break;
 				case MYTHIC:
-					qualityMod = 12.5f;
-					break;
 				default:
-					qualityMod = 35.0f;
+					successChance = 12.5f;
 					break;
 			}
 
@@ -180,14 +185,13 @@ public class EnchantService {
 			int levelDiff = enchantStoneLevel - targetItemLevel;
 
 			// Retail Tests: constant rates for 0 -> 10 and 11 -> 15
-			if (nextEnchantitemLevel <= 10)
-				success = levelDiff + qualityMod;
-			else
-				success = Math.round(levelDiff / 1.25f + qualityMod);
+			successChance += levelDiff;
+			if (nextEnchantitemLevel > 10)
+				successChance *= 0.8f;
 
 			// Retail Tests: 80% = Success Cap for Enchanting without Supplements
-			if (success >= 80)
-				success = 80;
+			if (successChance >= 80)
+				successChance = 80;
 
 			// Supplement is used
 			if (supplementItem != null) {
@@ -218,27 +222,21 @@ public class EnchantService {
 					return false;
 
 				// Add success rate of the supplement to the overall chance
-				success += addSuccessRate;
+				successChance += addSuccessRate;
 
 				// Put supplements to wait for update
 				player.subtractSupplements(supplementUseCount, supplementTemplate.getTemplateId());
 
 				// Success can't be higher than 95%
-				if (success >= 95)
-					success = 95;
+				if (successChance >= 95)
+					successChance = 95;
 			}
 		}
 
-		boolean result = false;
-		float random = Rnd.chance();
+		boolean result = Rnd.chance() < successChance;
 
-		// If the random number is < overall success rate, the item will be successfully enchanted
-		if (random < success)
-			result = true;
-
-		// For test purpose. To use by administrator
-		if (player.getAccessLevel() > 2)
-			PacketSendUtility.sendMessage(player, (result ? "Success" : "Fail") + " Rnd:" + random + " Luck:" + success);
+		if (player.getAccessLevel() >= AdminConfig.ENCHANT_INFO)
+			PacketSendUtility.sendMessage(player, (result ? "Success" : "Fail") + " (success chance:" + successChance + "%)");
 
 		return result;
 	}

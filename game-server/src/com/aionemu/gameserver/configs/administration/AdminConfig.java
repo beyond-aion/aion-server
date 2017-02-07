@@ -32,6 +32,8 @@ public class AdminConfig {
 	public static byte ADMIN_VIEW_DETAILS;
 	@Property(key = "gameserver.administration.dialog_info", defaultValue = "3")
 	public static byte DIALOG_INFO;
+	@Property(key = "gameserver.administration.enchant_info", defaultValue = "3")
+	public static byte ENCHANT_INFO;
 
 	/**
 	 * Admin options
