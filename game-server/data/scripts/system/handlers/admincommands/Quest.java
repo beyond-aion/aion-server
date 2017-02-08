@@ -46,7 +46,7 @@ public class Quest extends AdminCommand {
 			"[player] <quest> <set> <status> <var> [varNum] - Sets the specified quest state (default: apply var to all varNums, optional: set var to varNum [0-5]).",
 			"[player] <quest> <setflags> <flags> - Sets the specified quest flags.",
 			"[player] <quest> <dialog> <dialog_page_id> - Sends the dialog page with the given page ID.",
-			"Note: Player name parameters are optional. If missing, your current target will be taken."
+			"Note: If no player parameter is given, your current target will be taken (defaults to your character, if no player is targeted)."
 		);
 		// @formatter:on
 	}
@@ -76,12 +76,10 @@ public class Quest extends AdminCommand {
 
 			questId = ChatUtil.getQuestId(params[index]);
 		} else {
-			if (!(admin.getTarget() instanceof Player)) {
-				PacketSendUtility.sendPacket(admin, SM_SYSTEM_MESSAGE.STR_INVALID_TARGET());
-				return;
-			}
-
-			target = (Player) admin.getTarget();
+			if (!(admin.getTarget() instanceof Player))
+				target = admin;
+			else
+				target = (Player) admin.getTarget();
 		}
 
 		if (questId == 0 || DataManager.QUEST_DATA.getQuestById(questId) == null) {
