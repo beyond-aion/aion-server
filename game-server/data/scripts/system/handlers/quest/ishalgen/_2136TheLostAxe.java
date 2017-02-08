@@ -67,7 +67,7 @@ public class _2136TheLostAxe extends QuestHandler {
 						npc.getController().delete();
 					}
 				}, 10000);
-				return sendQuestEndDialog(env);
+				return sendQuestEndDialog(env, qs.getReward());
 			}
 		} else if (qs.getStatus() != QuestStatus.START)
 			return false;
@@ -83,7 +83,7 @@ public class _2136TheLostAxe extends QuestHandler {
 						qs.setStatus(QuestStatus.REWARD);
 						updateQuestStatus(env);
 						removeQuestItem(env, 182203130, 1);
-						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 0));
+						qs.setReward(1);
 						return sendQuestDialog(env, 6);
 					}
 					return false;
@@ -92,7 +92,7 @@ public class _2136TheLostAxe extends QuestHandler {
 						qs.setStatus(QuestStatus.REWARD);
 						updateQuestStatus(env);
 						removeQuestItem(env, 182203130, 1);
-						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 0));
+						qs.setReward(0);
 						return sendQuestDialog(env, 5);
 					}
 			}
