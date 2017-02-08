@@ -307,7 +307,7 @@ public class DropService {
 		}
 
 		if (requestedItem == null) {
-			log.warn("Null requested index item: " + itemIndex + " npcObjId" + npcObjectId + " player: " + player.getObjectId());
+			log.warn(player + " requested drop at invalid index " + itemIndex + " from " + World.getInstance().findNpc(npcObjectId));
 			return;
 		}
 
@@ -536,8 +536,7 @@ public class DropService {
 			return;
 		if (template.getItemQuality().getQualityId() < DropConfig.MIN_ANNOUNCE_QUALITY.getQualityId())
 			return;
-		PacketSendUtility.broadcastToMap(player,
-			SM_SYSTEM_MESSAGE.STR_FORCE_ITEM_WIN(player.getName(), ChatUtil.item(template.getTemplateId())), 0,
+		PacketSendUtility.broadcastToMap(player, SM_SYSTEM_MESSAGE.STR_FORCE_ITEM_WIN(player.getName(), ChatUtil.item(template.getTemplateId())), 0,
 			p -> !p.equals(player) && p.getRace() == player.getRace());
 	}
 
