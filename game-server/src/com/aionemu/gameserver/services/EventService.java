@@ -96,7 +96,7 @@ public class EventService {
 								ActionType actionType = qs.getStatus() == QuestStatus.COMPLETE ? ActionType.ADD : ActionType.UPDATE;
 								qs.setStatus(QuestStatus.START);
 								qs.setQuestVar(0);
-								qs.setReward(null);
+								qs.setRewardGroup(null);
 								PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(actionType, qs));
 							}
 							break;

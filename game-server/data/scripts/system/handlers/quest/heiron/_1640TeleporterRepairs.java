@@ -56,7 +56,7 @@ public class _1640TeleporterRepairs extends QuestHandler {
 						if (player.getInventory().getItemCountByItemId(182201790) > 0) {
 							removeQuestItem(env, 182201790, 1);
 							qs.setStatus(QuestStatus.REWARD);
-							QuestService.finishQuest(env, 0);
+							QuestService.finishQuest(env);
 							TeleportService.teleportTo(player, WorldMapType.HEIRON.getId(), 187.71689f, 2712.14870f, 141.91672f, (byte) 195,
 								TeleportAnimation.FADE_OUT_BEAM);
 							return closeDialogWindow(env);

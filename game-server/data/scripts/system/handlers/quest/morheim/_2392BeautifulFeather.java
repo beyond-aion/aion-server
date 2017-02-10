@@ -1,6 +1,7 @@
 package quest.morheim;
 
 import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -45,6 +46,7 @@ public class _2392BeautifulFeather extends QuestHandler {
 					if (player.getInventory().getItemCountByItemId(182204159) != 0) {
 						removeQuestItem(env, 182204159, 1);
 						changeQuestStep(env, 0, 1);
+						qs.setRewardGroup(0);
 						qs.setStatus(QuestStatus.REWARD);
 						updateQuestStatus(env);
 						return sendQuestDialog(env, 5);
@@ -54,6 +56,7 @@ public class _2392BeautifulFeather extends QuestHandler {
 					if (player.getInventory().getItemCountByItemId(182204160) != 0) {
 						removeQuestItem(env, 182204160, 1);
 						changeQuestStep(env, 0, 2);
+						qs.setRewardGroup(1);
 						qs.setStatus(QuestStatus.REWARD);
 						updateQuestStatus(env);
 						return sendQuestDialog(env, 6);
@@ -63,6 +66,7 @@ public class _2392BeautifulFeather extends QuestHandler {
 					if (player.getInventory().getItemCountByItemId(182204161) != 0) {
 						removeQuestItem(env, 182204161, 1);
 						changeQuestStep(env, 0, 3);
+						qs.setRewardGroup(2);
 						qs.setStatus(QuestStatus.REWARD);
 						updateQuestStatus(env);
 						return sendQuestDialog(env, 7);
@@ -71,14 +75,8 @@ public class _2392BeautifulFeather extends QuestHandler {
 				}
 			}
 		} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
-			if (targetId == 798085) {
-				int rewInd = 0;
-				if (qs.getQuestVarById(0) == 2)
-					rewInd = 1;
-				else if (qs.getQuestVarById(0) == 3)
-					rewInd = 2;
-				return sendQuestEndDialog(env, rewInd);
-			}
+			if (targetId == 798085)
+				return sendQuestEndDialog(env);
 		}
 		return false;
 	}

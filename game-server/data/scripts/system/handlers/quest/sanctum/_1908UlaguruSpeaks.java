@@ -1,6 +1,7 @@
 package quest.sanctum;
 
 import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -54,25 +55,25 @@ public class _1908UlaguruSpeaks extends QuestHandler {
 					}
 				} else if (dialogActionId == SETPRO21) {
 					qs.setQuestVar(21);
+					qs.setRewardGroup(0);
 					return sendQuestDialog(env, 2376);
 				} else if (dialogActionId == SETPRO22) {
 					qs.setQuestVar(22);
+					qs.setRewardGroup(1);
 					return sendQuestDialog(env, 2461);
 				} else if (dialogActionId == SETPRO23) {
 					qs.setQuestVar(23);
+					qs.setRewardGroup(2);
 					return sendQuestDialog(env, 2546);
 				} else if (dialogActionId == SELECT_QUEST_REWARD) {
-					return defaultCloseDialog(env, qs.getQuestVarById(0), qs.getQuestVarById(0), true, true);
+					qs.setStatus(QuestStatus.REWARD);
+					updateQuestStatus(env);
+					return sendQuestEndDialog(env);
 				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203864) {
-				if (qs.getQuestVarById(0) == 21)
-					return sendQuestEndDialog(env, 0);
-				else if (qs.getQuestVarById(0) == 22)
-					return sendQuestEndDialog(env, 1);
-				else if (qs.getQuestVarById(0) == 23)
-					return sendQuestEndDialog(env, 2);
+				return sendQuestEndDialog(env);
 			}
 		}
 		return false;

@@ -1,6 +1,7 @@
 package quest.morheim;
 
 import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -12,13 +13,11 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _2345OrashunerkSpecialOrder extends QuestHandler {
 
-
-	int rewardIndex;
-
 	public _2345OrashunerkSpecialOrder() {
 		super(2345);
 	}
 
+	@Override
 	public void register() {
 		qe.registerQuestNpc(798084).addOnQuestStart(questId);
 		qe.registerQuestNpc(798084).addOnTalkEvent(questId);
@@ -51,19 +50,17 @@ public class _2345OrashunerkSpecialOrder extends QuestHandler {
 						return sendQuestDialog(env, 1352);
 				} else if (dialogActionId == CHECK_USER_HAS_QUEST_ITEM) {
 					return checkQuestItems(env, 0, 1, false, 10000, 10001);
-				} else if (dialogActionId == SELECT2_1) {
-					return sendQuestDialog(env, 1353);
-				} else if (dialogActionId == SELECT2_2) {
-					return sendQuestDialog(env, 1438);
 				} else if (dialogActionId == SETPRO10) {
 					giveQuestItem(env, 182204137, 1);
 					changeQuestStep(env, 1, 10);
+					qs.setRewardGroup(0);
 					qs.setStatus(QuestStatus.REWARD);
 					updateQuestStatus(env);
 					return closeDialogWindow(env);
 				} else if (dialogActionId == SETPRO20) {
 					giveQuestItem(env, 182204138, 1);
 					changeQuestStep(env, 1, 20);
+					qs.setRewardGroup(1);
 					qs.setStatus(QuestStatus.REWARD);
 					updateQuestStatus(env);
 					return closeDialogWindow(env);
@@ -78,12 +75,11 @@ public class _2345OrashunerkSpecialOrder extends QuestHandler {
 						removeQuestItem(env, 182204137, 1);
 						return sendQuestDialog(env, 1693);
 					} else if (qs.getQuestVarById(0) == 20) {
-						rewardIndex = 1;
 						removeQuestItem(env, 182204138, 1);
 						return sendQuestDialog(env, 2034);
 					}
 				}
-				return sendQuestEndDialog(env, rewardIndex);
+				return sendQuestEndDialog(env);
 			}
 		}
 

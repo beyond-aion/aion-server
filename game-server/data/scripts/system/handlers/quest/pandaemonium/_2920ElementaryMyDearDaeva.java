@@ -13,8 +13,6 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class _2920ElementaryMyDearDaeva extends QuestHandler {
 
-	private int choice = 0;
-
 	public _2920ElementaryMyDearDaeva() {
 		super(2920);
 	}
@@ -51,17 +49,17 @@ public class _2920ElementaryMyDearDaeva extends QuestHandler {
 						return sendQuestDialog(env, 1693);
 					case SETPRO11:
 						changeQuestStep(env, 0, 0, true); // reward
-						choice = 0;
+						qs.setRewardGroup(0);
 						return sendQuestDialog(env, 5);
 					case SETPRO12:
 						changeQuestStep(env, 0, 0, true); // reward
-						choice = 1;
+						qs.setRewardGroup(1);
 						return sendQuestDialog(env, 6);
 				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204141) { // Deyla
-				return sendQuestEndDialog(env, choice);
+				return sendQuestEndDialog(env);
 			}
 		}
 		return false;

@@ -111,7 +111,7 @@ public class _4943LuckandPersistence extends QuestHandler {
 						case SET_SUCCEED:
 							if (player.getInventory().getItemCountByItemId(186000084) >= 1) {
 								removeQuestItem(env, 186000084, 1);
-								return defaultCloseDialog(env, 3, 3, true, false, 0);
+								return defaultCloseDialog(env, 3, 3, true, false);
 							} else {
 								return sendQuestDialog(env, 2120);
 							}

@@ -54,7 +54,7 @@ public class _28600SuspiciousErrand extends QuestHandler {
 							return sendQuestDialog(env, 1693);
 						return false;
 					case SETPRO2:
-						return defaultCloseDialog(env, 1, 2, false, false, 182213004, 1, 0, 0);
+						return defaultCloseDialog(env, 1, 2, 182213004, 1);
 				}
 			}
 		}

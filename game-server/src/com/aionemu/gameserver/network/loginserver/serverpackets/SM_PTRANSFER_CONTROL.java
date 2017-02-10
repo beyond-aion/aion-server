@@ -332,7 +332,7 @@ public class SM_PTRANSFER_CONTROL extends LsServerPacket {
 					writeS(qs.getStatus().toString());
 					writeD(qs.getQuestVars().getQuestVars());
 					writeD(qs.getCompleteCount());
-					writeD(qs.getReward() == null ? -1 : qs.getReward());
+					writeD(qs.getRewardGroup() == null ? -1 : qs.getRewardGroup());
 					writeQ(qs.getLastCompleteTime().getTime());
 					writeQ(qs.getNextRepeatTime().getTime());
 					writeD(qs.getFlags());

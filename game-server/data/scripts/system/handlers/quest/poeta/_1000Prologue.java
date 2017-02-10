@@ -47,7 +47,7 @@ public class _1000Prologue extends QuestHandler {
 		if (qs == null || qs.getStatus() != QuestStatus.START)
 			return false;
 		qs.setStatus(QuestStatus.REWARD);
-		QuestService.finishQuest(env, 0);
+		QuestService.finishQuest(env);
 		return true;
 	}
 }

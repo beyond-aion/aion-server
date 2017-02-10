@@ -127,7 +127,7 @@ public class MySQL5PlayerQuestListDAO extends PlayerQuestListDAO {
 				ps.setInt(5, qs.getFlags());
 				ps.setInt(6, qs.getCompleteCount());
 				ps.setObject(7, qs.getNextRepeatTime(), Types.TIMESTAMP); // supports inserting null value
-				ps.setObject(8, qs.getReward(), Types.SMALLINT); // supports inserting null value
+				ps.setObject(8, qs.getRewardGroup(), Types.SMALLINT); // supports inserting null value
 				ps.setObject(9, qs.getLastCompleteTime(), Types.TIMESTAMP); // supports inserting null value
 				ps.addBatch();
 			}
@@ -152,7 +152,7 @@ public class MySQL5PlayerQuestListDAO extends PlayerQuestListDAO {
 				ps.setInt(3, qs.getFlags());
 				ps.setInt(4, qs.getCompleteCount());
 				ps.setObject(5, qs.getNextRepeatTime(), Types.TIMESTAMP); // supports inserting null value
-				ps.setObject(6, qs.getReward(), Types.SMALLINT); // supports inserting null value
+				ps.setObject(6, qs.getRewardGroup(), Types.SMALLINT); // supports inserting null value
 				ps.setObject(7, qs.getLastCompleteTime(), Types.TIMESTAMP); // supports inserting null value
 				ps.setInt(8, playerId);
 				ps.setInt(9, qs.getQuestId());

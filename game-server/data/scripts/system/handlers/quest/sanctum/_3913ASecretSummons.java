@@ -41,11 +41,8 @@ public class _3913ASecretSummons extends QuestHandler {
 						return sendQuestDialog(env, 4);
 					case QUEST_ACCEPT_1:
 						return sendQuestStartDialog(env);
-					case QUEST_REFUSE_1:
-						return sendQuestEndDialog(env, 1003);
-					case QUEST_REFUSE_2:
-						return sendQuestEndDialog(env, 1004);
 				}
+				return super.onDialogEvent(env);
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 203752) {

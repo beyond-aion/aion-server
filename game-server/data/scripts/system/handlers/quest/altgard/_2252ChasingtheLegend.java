@@ -105,8 +105,8 @@ public class _2252ChasingtheLegend extends QuestHandler {
 			switch (dialogActionId) {
 				case SELECT_QUEST_REWARD:
 				case SELECTED_QUEST_NOREWARD:
-					int reward = var - 1;
-					return sendQuestEndDialog(env, reward);
+					qs.setRewardGroup(var - 1);
+					return sendQuestEndDialog(env);
 				default:
 					return sendQuestDialog(env, 1352);
 			}

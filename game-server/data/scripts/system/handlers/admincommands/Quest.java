@@ -167,20 +167,17 @@ public class Quest extends AdminCommand {
 
 	private void resetQuest(Player admin, Player target, int questId) {
 		QuestState qs = target.getQuestStateList().getQuestState(questId);
-		if (qs == null || (qs.getStatus() != QuestStatus.START && qs.getStatus() != QuestStatus.REWARD)) {
+		if (qs == null || qs.getStatus() != QuestStatus.START) {
 			sendInfo(admin, "Only currently active quests can be reset.");
 			return;
 		}
-		if (questId == 1006 || questId == 2008 || (qs.getStatus() == QuestStatus.REWARD && qs.getQuestVars().getQuestVars() == 1)) {
-			sendInfo(admin, "Quest " + ChatUtil.quest(questId) + " can't be reset.");
-			return;
-		}
-		if (qs.getQuestVars().getQuestVars() == 0) {
+		if (qs.getQuestVars().getQuestVars() == 0 && qs.getRewardGroup() == null) {
 			sendInfo(admin, "Player " + target.getName() + "'s quest is already at the beginning.");
 			return;
 		}
 		qs.setStatus(QuestStatus.START);
 		qs.setQuestVar(0);
+		qs.setRewardGroup(null);
 		PacketSendUtility.sendPacket(target, new SM_QUEST_ACTION(ActionType.UPDATE, qs));
 		sendInfo(admin, "Reset " + ChatUtil.quest(questId) + " for player " + target.getName() + ".");
 	}
@@ -303,7 +300,7 @@ public class Quest extends AdminCommand {
 		if (status == QuestStatus.COMPLETE) {
 			qs.setQuestVar(0); // completed quests vars are always 0
 			if (!DataManager.QUEST_DATA.getQuestById(qs.getQuestId()).getRewards().isEmpty())
-				qs.setReward(0); // follow quests could require reward group > 0 to be unlocked (see quest_data.xml)
+				qs.setRewardGroup(0); // follow quests could require reward group > 0 to be unlocked (see quest_data.xml)
 			QuestEngine.getInstance().onQuestCompleted(target, questId);
 		} else {
 			if (varNum == -1)

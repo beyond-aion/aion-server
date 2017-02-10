@@ -1,6 +1,7 @@
 package quest.morheim;
 
 import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -11,9 +12,6 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  * @author Cheatkiller
  */
 public class _2448ChaomirkSendsForHelp extends QuestHandler {
-
-
-	int rewardIndex;
 
 	public _2448ChaomirkSendsForHelp() {
 		super(2448);
@@ -51,12 +49,13 @@ public class _2448ChaomirkSendsForHelp extends QuestHandler {
 					return sendQuestDialog(env, 1097);
 				} else if (dialogActionId == SETPRO10) {
 					changeQuestStep(env, 0, 10);
+					qs.setRewardGroup(0);
 					qs.setStatus(QuestStatus.REWARD);
 					updateQuestStatus(env);
 					return closeDialogWindow(env);
 				} else if (dialogActionId == SETPRO20) {
-					rewardIndex = 1;
 					changeQuestStep(env, 0, 20);
+					qs.setRewardGroup(1);
 					qs.setStatus(QuestStatus.REWARD);
 					updateQuestStatus(env);
 					return closeDialogWindow(env);
@@ -73,7 +72,7 @@ public class _2448ChaomirkSendsForHelp extends QuestHandler {
 				}
 			}
 			removeQuestItem(env, 182204210, 1);
-			return sendQuestEndDialog(env, rewardIndex);
+			return sendQuestEndDialog(env);
 		}
 		return false;
 	}

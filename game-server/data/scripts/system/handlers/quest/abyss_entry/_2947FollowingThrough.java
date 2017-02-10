@@ -137,8 +137,10 @@ public class _2947FollowingThrough extends QuestHandler {
 			if (targetId == 204301) { // Aegir
 				if (env.getDialogActionId() == USE_OBJECT)
 					return sendQuestDialog(env, 3739);
-				else
-					return sendQuestEndDialog(env, 1); // not variable anymore (previously you had 3 choices how to finish the quest), so always reward group 1
+				else {
+					qs.setRewardGroup(1); // not variable anymore (previously you had 3 choices how to finish the quest), so always reward group 1
+					return sendQuestEndDialog(env);
+				}
 			}
 		}
 		return false;

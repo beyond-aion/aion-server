@@ -12,9 +12,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
 
 /**
- * @author stpavel
+ * @author stpavel, Neon
  */
-
 public class _2332MeatyTreats extends QuestHandler {
 
 	public _2332MeatyTreats() {
@@ -41,27 +40,28 @@ public class _2332MeatyTreats extends QuestHandler {
 				else
 					return sendQuestStartDialog(env);
 			}
-		} else if (qs != null && qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 798084) {
 				switch (env.getDialogActionId()) {
 					case QUEST_SELECT:
-						if (QuestService.collectItemCheck(env, true))
+						if (QuestService.collectItemCheck(env, false))
 							return sendQuestDialog(env, 1352);
 						else
 							return sendQuestDialog(env, 1693);
 					case SETPRO1:
 					case SETPRO2:
 					case SETPRO3:
-						int choice = env.getDialogActionId() - SETPRO1;
-						qs.setQuestVarById(0, qs.getQuestVarById(0) + choice);
-						qs.setStatus(QuestStatus.REWARD);
-						updateQuestStatus(env);
-						return sendQuestDialog(env, DialogPage.getRewardPageByIndex(choice).id());
+						if (QuestService.collectItemCheck(env, true)) {
+							qs.setQuestVar(1);
+							qs.setRewardGroup(env.getDialogActionId() - SETPRO1);
+							qs.setStatus(QuestStatus.REWARD);
+							updateQuestStatus(env);
+							return sendQuestDialog(env, DialogPage.getRewardPageByIndex(qs.getRewardGroup()).id());
+						}
 				}
 			}
-		} else if (env.getDialogActionId() == SELECTED_QUEST_NOREWARD && qs.getStatus() == QuestStatus.REWARD && targetId == 798084) {
-			QuestService.finishQuest(env, qs.getQuestVarById(0));
-			return sendQuestDialog(env, 1008);
+		} else if (qs.getStatus() == QuestStatus.REWARD && targetId == 798084) {
+			return sendQuestEndDialog(env);
 		}
 		return false;
 	}

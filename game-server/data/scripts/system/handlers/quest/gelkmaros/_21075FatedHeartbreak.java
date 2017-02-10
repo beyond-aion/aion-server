@@ -1,6 +1,7 @@
 package quest.gelkmaros;
 
 import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -11,8 +12,6 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  * @author Cheatkiller
  */
 public class _21075FatedHeartbreak extends QuestHandler {
-
-	private int rewardIndex;
 
 	public _21075FatedHeartbreak() {
 		super(21075);
@@ -58,6 +57,7 @@ public class _21075FatedHeartbreak extends QuestHandler {
 					if (qs.getQuestVarById(0) == 1)
 						return sendQuestDialog(env, 1352);
 				} else if (dialogActionId == SET_SUCCEED) {
+					qs.setRewardGroup(0);
 					removeQuestItem(env, 182207917, 1);
 					return defaultCloseDialog(env, 1, 1, true, false);
 				}
@@ -66,7 +66,7 @@ public class _21075FatedHeartbreak extends QuestHandler {
 					if (qs.getQuestVarById(0) == 2)
 						return sendQuestDialog(env, 1693);
 				} else if (dialogActionId == SET_SUCCEED) {
-					rewardIndex = 1;
+					qs.setRewardGroup(1);
 					removeQuestItem(env, 182207917, 1);
 					return defaultCloseDialog(env, 2, 2, true, false);
 				}
@@ -76,7 +76,7 @@ public class _21075FatedHeartbreak extends QuestHandler {
 				if (dialogActionId == USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
 				}
-				return sendQuestEndDialog(env, rewardIndex);
+				return sendQuestEndDialog(env);
 			}
 		}
 		return false;

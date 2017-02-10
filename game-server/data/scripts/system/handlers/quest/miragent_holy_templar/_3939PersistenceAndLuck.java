@@ -101,7 +101,7 @@ public class _3939PersistenceAndLuck extends QuestHandler {
 						case SET_SUCCEED:
 							if (player.getInventory().getItemCountByItemId(186000080) >= 1) {
 								removeQuestItem(env, 186000080, 1);
-								return defaultCloseDialog(env, 3, 3, true, false, 0);
+								return defaultCloseDialog(env, 3, 3, true, false);
 							} else {
 								return sendQuestDialog(env, 2120);
 							}

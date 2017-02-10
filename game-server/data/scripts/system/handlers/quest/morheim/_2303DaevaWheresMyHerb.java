@@ -14,8 +14,6 @@ import com.aionemu.gameserver.services.QuestService;
  */
 public class _2303DaevaWheresMyHerb extends QuestHandler {
 
-	private int choice = 0;
-
 	public _2303DaevaWheresMyHerb() {
 		super(2303);
 	}
@@ -52,7 +50,7 @@ public class _2303DaevaWheresMyHerb extends QuestHandler {
 					case SETPRO10:
 						if (QuestService.startQuest(env)) {
 							changeQuestStep(env, 0, 11); // 11
-							choice = 0;
+							qs.setRewardGroup(0);
 							return sendQuestDialog(env, 1012);
 						} else {
 							return sendQuestSelectionDialog(env);
@@ -60,7 +58,7 @@ public class _2303DaevaWheresMyHerb extends QuestHandler {
 					case SETPRO20:
 						if (QuestService.startQuest(env)) {
 							changeQuestStep(env, 0, 21); // 21
-							choice = 1;
+							qs.setRewardGroup(1);
 							return sendQuestDialog(env, 1097);
 						} else {
 							return sendQuestSelectionDialog(env);
@@ -82,11 +80,11 @@ public class _2303DaevaWheresMyHerb extends QuestHandler {
 					}
 				} else if (dialogActionId == SETPRO10) {
 					changeQuestStep(env, 0, 11); // 11
-					choice = 0;
+					qs.setRewardGroup(0);
 					return sendQuestDialog(env, 1012);
 				} else if (dialogActionId == SETPRO20) {
 					changeQuestStep(env, 0, 21); // 21
-					choice = 1;
+					qs.setRewardGroup(1);
 					return sendQuestDialog(env, 1097);
 				}
 			}
@@ -101,10 +99,8 @@ public class _2303DaevaWheresMyHerb extends QuestHandler {
 							return sendQuestDialog(env, 1438);
 						}
 						return false;
-					case SELECT_QUEST_REWARD:
-						return sendQuestDialog(env, 5 + choice);
 					default: {
-						return sendQuestEndDialog(env, choice);
+						return sendQuestEndDialog(env);
 					}
 				}
 			}

@@ -1,6 +1,7 @@
 package quest.pandaemonium;
 
 import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -15,8 +16,6 @@ public class _2962JafnharWhereabouts extends QuestHandler {
 	public _2962JafnharWhereabouts() {
 		super(2962);
 	}
-
-	int rewIdex;
 
 	@Override
 	public void register() {
@@ -66,19 +65,16 @@ public class _2962JafnharWhereabouts extends QuestHandler {
 				} else if (dialogActionId == SELECT3_2) {
 					return sendQuestDialog(env, 1779);
 				} else if (dialogActionId == SETPRO3) {
+					qs.setRewardGroup(0);
 					return defaultCloseDialog(env, 2, 2, true, true);
 				} else if (dialogActionId == SETPRO4) {
-					rewIdex = 1;
+					qs.setRewardGroup(1);
 					return defaultCloseDialog(env, 2, 2, true, true);
 				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
-			if (targetId == 204253) {
-				if (dialogActionId == USE_OBJECT) {
-					return sendQuestDialog(env, 5 + rewIdex);
-				}
-				return sendQuestEndDialog(env, rewIdex);
-			}
+			if (targetId == 204253)
+				return sendQuestEndDialog(env);
 		}
 		return false;
 	}

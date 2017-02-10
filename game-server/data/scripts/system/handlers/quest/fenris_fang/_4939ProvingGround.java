@@ -106,7 +106,7 @@ public class _4939ProvingGround extends QuestHandler {
 						case SET_SUCCEED:
 							if (player.getInventory().getItemCountByItemId(186000084) >= 1) {
 								removeQuestItem(env, 186000084, 1);
-								return defaultCloseDialog(env, 4, 4, true, false, 0);
+								return defaultCloseDialog(env, 4, 4, true, false);
 							} else {
 								return sendQuestDialog(env, 2461);
 							}

@@ -55,7 +55,7 @@ public class _2994ANewChoice extends QuestHandler {
 				if (dialogs[dialogIndex] == dialogActionId) {
 					for (int itemId : items[dialogIndex]) {
 						if (player.getInventory().getItemCountByItemId(itemId) > 0) {
-							qs.setReward(dialogIndex);
+							qs.setRewardGroup(dialogIndex);
 							return sendQuestDialog(env, 1013);
 						}
 					}
@@ -72,7 +72,7 @@ public class _2994ANewChoice extends QuestHandler {
 				case SETPRO6:
 					if (player.getInventory().getItemCountByItemId(186000041) == 0) // Daevanion's Light
 						return sendQuestDialog(env, 1009);
-					Integer savedData = qs.getReward();
+					Integer savedData = qs.getRewardGroup();
 					int itemIdToRemove = 0;
 					for (int itemId : items[savedData]) {
 						if (player.getInventory().getItemCountByItemId(itemId) > 0)
@@ -83,12 +83,12 @@ public class _2994ANewChoice extends QuestHandler {
 					changeQuestStep(env, 0, 0, true);
 					removeQuestItem(env, 186000041, 1);
 					removeQuestItem(env, itemIdToRemove, 1);
-					qs.setReward(dialogActionId - SETPRO1); // 0 - 4
-					return sendQuestDialog(env, DialogPage.getRewardPageByIndex(qs.getReward()).id());
+					qs.setRewardGroup(dialogActionId - SETPRO1); // 0 - 5
+					return sendQuestDialog(env, DialogPage.getRewardPageByIndex(qs.getRewardGroup()).id());
 			}
 			return super.onDialogEvent(env);
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
-			return sendQuestEndDialog(env, qs.getReward());
+			return sendQuestEndDialog(env);
 		}
 		return false;
 	}

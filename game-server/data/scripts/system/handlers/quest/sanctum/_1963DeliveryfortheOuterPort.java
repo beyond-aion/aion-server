@@ -43,7 +43,7 @@ public class _1963DeliveryfortheOuterPort extends QuestHandler {
 						return false;
 					case SETPRO1:
 						changeQuestStep(env, 0, 1);
-						return defaultCloseDialog(env, 1, 1, true, false, 0, 0, 0, 182206032, 1);
+						return defaultCloseDialog(env, 1, 1, true, false, 0, 0, 182206032, 1);
 				}
 			}
 		}
