@@ -52,7 +52,7 @@ public class Effect implements StatOwner {
 	private PeriodicActions periodicActions;
 	private SkillMoveType skillMoveType = SkillMoveType.DEFAULT;
 	private Future<?> endTask = null;
-	private Future<?> periodicTask = null;
+	private Future<?>[] periodicTasks = null;
 	private Future<?> periodicActionsTask = null;
 	private boolean isSubEffect = false;
 
@@ -229,16 +229,17 @@ public class Effect implements StatOwner {
 	}
 
 	public boolean isPeriodic() {
-		return periodicTask != null;
+		return periodicTasks != null;
 	}
 
-	public void setPeriodicTask(Future<?> periodicTask) {
-		if (this.periodicTask != null) {
-			if (periodicTask != null)
-				periodicTask.cancel(false);
-			throw new IllegalStateException(getClass().getSimpleName() + " already has a periodic task");
+	public void setPeriodicTask(Future<?> periodicTask, int position) {
+		if (periodicTasks == null)
+			periodicTasks = new Future<?>[4];
+		else if (periodicTasks[position] != null && periodicTask != null) {
+			periodicTask.cancel(false);
+			throw new IllegalStateException(getClass().getSimpleName() + " already has a periodic task at position " + position);
 		}
-		this.periodicTask = periodicTask;
+		this.periodicTasks[position - 1] = periodicTask;
 	}
 
 	public AttackStatus getAttackStatus() {
@@ -725,9 +726,13 @@ public class Effect implements StatOwner {
 			endTask = null;
 		}
 
-		if (periodicTask != null) {
-			periodicTask.cancel(false);
-			periodicTask = null;
+		if (periodicTasks != null) {
+			for (int i = 0; i < periodicTasks.length; i++) {
+				if (periodicTasks[i] != null) {
+					periodicTasks[i].cancel(false);
+					periodicTasks[i] = null;
+				}
+			}
 		}
 
 		stopPeriodicActions();

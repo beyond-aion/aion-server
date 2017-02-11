@@ -42,7 +42,7 @@ public abstract class AbstractOverTimeEffect extends EffectTemplate {
 
 	public void startEffect(final Effect effect, AbnormalState abnormal) {
 		final Creature effected = effect.getEffected();
-		long waitingTime = (checktime > this.getDuration2() ? checktime - this.getDuration2() : checktime) - 800;
+		long waitingTime = (checktime > getDuration2() ? checktime - getDuration2() : checktime) - 800;
 
 		if (abnormal != null) {
 			effect.setAbnormal(abnormal.getId());
@@ -58,7 +58,7 @@ public abstract class AbstractOverTimeEffect extends EffectTemplate {
 				onPeriodicAction(effect);
 			}
 		}, waitingTime, checktime);
-		effect.setPeriodicTask(task);
+		effect.setPeriodicTask(task, position);
 	}
 
 	public void endEffect(Effect effect, AbnormalState abnormal) {
