@@ -3,7 +3,6 @@ package com.aionemu.gameserver.network.aion.clientpackets;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.gameserver.configs.administration.AdminConfig;
 import com.aionemu.gameserver.model.gameobjects.player.DeniedStatus;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.team.alliance.PlayerAllianceService;
@@ -50,7 +49,7 @@ public class CM_INVITE_TO_GROUP extends AionClientPacket {
 		}
 
 		if (invited.getPlayerSettings().isInDeniedStatus(DeniedStatus.GROUP)) {
-			sendPacket(SM_SYSTEM_MESSAGE.STR_MSG_REJECTED_INVITE_PARTY(invited.getName(AdminConfig.CUSTOMTAG_ENABLE)));
+			sendPacket(SM_SYSTEM_MESSAGE.STR_MSG_REJECTED_INVITE_PARTY(invited.getName(true)));
 			return;
 		}
 

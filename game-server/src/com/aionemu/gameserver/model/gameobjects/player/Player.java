@@ -285,20 +285,17 @@ public class Player extends Creature {
 	}
 
 	@Override
-	public String getName() {
-		return playerCommonData.getName();
+	public final String getName() {
+		return getName(false);
 	}
 
 	public String getName(boolean displayCustomTag) {
-		if (displayCustomTag && getAccessLevel() > 0) {
-			try {
-				String tagID = "CUSTOMTAG_ACCESS" + getAccessLevel();
-				return String.format(AdminConfig.class.getField(tagID).get(null).toString(), getName());
-			} catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException | SecurityException e) {
-				// should never happen
-			}
+		if (displayCustomTag && AdminConfig.NAME_TAGS.length > 0) {
+			int index = getAccessLevel() - 1;
+			if (index >= 0 && index < AdminConfig.NAME_TAGS.length)
+				return String.format(AdminConfig.NAME_TAGS[index], playerCommonData.getName());
 		}
-		return getName();
+		return playerCommonData.getName();
 	}
 
 	public PlayerAppearance getPlayerAppearance() {

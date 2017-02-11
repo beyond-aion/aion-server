@@ -63,29 +63,12 @@ public class AdminConfig {
 	public static boolean ENABLE_TRADEITEM_RESTRICTION;
 
 	/**
-	 * Custom TAG based on access level
+	 * Custom name tags based on access level
 	 */
-	@Property(key = "gameserver.customtag.enable", defaultValue = "false")
-	public static boolean CUSTOMTAG_ENABLE;
-	@Property(key = "gameserver.customtag.access1", defaultValue = "<GM> %s")
-	public static String CUSTOMTAG_ACCESS1;
-	@Property(key = "gameserver.customtag.access2", defaultValue = "<HEADGM> %s")
-	public static String CUSTOMTAG_ACCESS2;
-	@Property(key = "gameserver.customtag.access3", defaultValue = "<ADMIN> %s")
-	public static String CUSTOMTAG_ACCESS3;
-	@Property(key = "gameserver.customtag.access4", defaultValue = "<TAG_HERE> %s")
-	public static String CUSTOMTAG_ACCESS4;
-	@Property(key = "gameserver.customtag.access5", defaultValue = "<TAG_HERE> %s")
-	public static String CUSTOMTAG_ACCESS5;
-	@Property(key = "gameserver.customtag.access6", defaultValue = "<TAG_HERE> %s")
-	public static String CUSTOMTAG_ACCESS6;
-	@Property(key = "gameserver.customtag.access7", defaultValue = "<TAG_HERE> %s")
-	public static String CUSTOMTAG_ACCESS7;
-	@Property(key = "gameserver.customtag.access8", defaultValue = "<TAG_HERE> %s")
-	public static String CUSTOMTAG_ACCESS8;
-	@Property(key = "gameserver.customtag.access9", defaultValue = "<TAG_HERE> %s")
-	public static String CUSTOMTAG_ACCESS9;
-	
+	@Property(key = "gameserver.administration.customtags",
+		defaultValue = "%s, \u00BBJDev\u00AB\uE04A%s, \u00BBDev\u00AB\uE04A%s, \u00BBJEM\u00AB\uE04A%s, \u00BBEM\u00AB\uE04A%s, \u00BBJGM\u00AB\uE04A%s, \u00BBGM\u00AB\uE04A%s, \u00BBSGM\u00AB\uE04A%s, \u00BBAdmin\u00AB\uE04A%s")
+	public static String[] NAME_TAGS;
+
 	/**
 	 * Special command permissions
 	 */
