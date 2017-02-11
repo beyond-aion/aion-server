@@ -113,8 +113,8 @@ public class Configure extends AdminCommand {
 				Object value = property.get(null);
 				if (params.length > 2) {
 					String newValue = StringUtils.join(params, " ", 2, params.length);
+					Class<?> classType = property.getType();
 					try {
-						Class<?> classType = property.getType();
 						if (classType == String.class)
 							property.set(null, newValue);
 						else if (classType == boolean.class || classType == Boolean.class)
@@ -131,10 +131,12 @@ public class Configure extends AdminCommand {
 							property.set(null, Float.parseFloat(newValue));
 						else if (classType == double.class || classType == Double.class)
 							property.set(null, Double.parseDouble(newValue));
-						else
-							throw new UnsupportedOperationException();
+						else {
+							sendInfo(admin, "The value cannot be changed via command. Please modify the corresponding *.properties file and reload the config.");
+							return;
+						}
 					} catch (Exception e) {
-						sendInfo(admin, "The new value could not be set.");
+						sendInfo(admin, "The new value could not be set (data type: " + classType.getSimpleName() + ").");
 						return;
 					}
 					sendInfo(admin, "The value of " + cls.getSimpleName() + "." + fieldName + " has been changed from " + value + " to " + property.get(null));

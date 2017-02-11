@@ -130,7 +130,7 @@ public class ConfigurableProcessor {
 		} catch (TransformationException e) {
 			throw e;
 		} catch (Exception e) {
-			throw new RuntimeException("Error modifying field " + f.getName() + " of class " + f.getDeclaringClass(), e);
+			throw new RuntimeException("Error modifying field " + f.getName() + " of " + f.getDeclaringClass(), e);
 		} finally {
 			if (!oldAccessible)
 				f.setAccessible(false);
