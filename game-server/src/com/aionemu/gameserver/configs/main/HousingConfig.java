@@ -13,15 +13,6 @@ public class HousingConfig {
 	@Property(key = "gameserver.housing.visibility.distance", defaultValue = "200")
 	public static float VISIBILITY_DISTANCE = 200f;
 
-	/**
-	 * Show house door editor id
-	 */
-	@Property(key = "gameserver.housedoor.showid", defaultValue = "true")
-	public static boolean ENABLE_SHOW_HOUSE_DOORID;
-
-	@Property(key = "gameserver.housedoor.accesslevel", defaultValue = "3")
-	public static int ENTER_HOUSE_ACCESSLEVEL;
-
 	@Property(key = "gameserver.housing.auction.enable", defaultValue = "false")
 	public static boolean ENABLE_HOUSE_AUCTIONS;
 

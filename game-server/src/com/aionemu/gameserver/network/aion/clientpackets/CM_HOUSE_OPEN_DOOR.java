@@ -1,7 +1,7 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import com.aionemu.gameserver.configs.administration.AdminConfig;
 import com.aionemu.gameserver.configs.main.GeoDataConfig;
-import com.aionemu.gameserver.configs.main.HousingConfig;
 import com.aionemu.gameserver.geoEngine.collision.CollisionIntention;
 import com.aionemu.gameserver.geoEngine.math.Vector3f;
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
@@ -17,7 +17,6 @@ import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.geo.GeoService;
-
 
 /**
  * @author Rolandas
@@ -44,18 +43,14 @@ public class CM_HOUSE_OPEN_DOOR extends AionClientPacket {
 		if (player == null)
 			return;
 
-		if (player.getAccessLevel() >= 3 && HousingConfig.ENABLE_SHOW_HOUSE_DOORID) {
-			PacketSendUtility.sendMessage(player, "House door id: " + address);
-		}
-
 		House house = HousingService.getInstance().getHouseByAddress(address);
 		if (house == null)
 			return;
 
 		if (leave) {
 			if (house.getAddress().getExitMapId() != null) {
-				TeleportService.teleportTo(player, house.getAddress().getExitMapId(), house.getAddress().getExitX(), house.getAddress().getExitY(), house
-					.getAddress().getExitZ(), (byte) 0, TeleportAnimation.FADE_OUT_BEAM);
+				TeleportService.teleportTo(player, house.getAddress().getExitMapId(), house.getAddress().getExitX(), house.getAddress().getExitY(),
+					house.getAddress().getExitZ(), (byte) 0, TeleportAnimation.FADE_OUT_BEAM);
 			} else {
 				if (GeoDataConfig.GEO_ENABLE) {
 					Npc sign = house.getCurrentSign();
@@ -76,17 +71,17 @@ public class CM_HOUSE_OPEN_DOOR extends AionClientPacket {
 				}
 			}
 		} else {
-			if (house.getOwnerId() != player.getObjectId()) {
+			if (player.getAccessLevel() >= AdminConfig.HOUSES_SHOW_ADDRESS)
+				PacketSendUtility.sendMessage(player, "House address: " + address);
+			if (house.getOwnerId() != player.getObjectId() && player.getAccessLevel() < AdminConfig.HOUSES_ENTER) {
 				boolean allowed = false;
 				if (house.getDoorState() == HousePermissions.DOOR_OPENED_FRIENDS) {
 					allowed = player.getFriendList().getFriend(house.getOwnerId()) != null
 						|| (player.getLegion() != null && player.getLegion().isMember(house.getOwnerId()));
 				}
 				if (!allowed) {
-					if (player.getAccessLevel() < HousingConfig.ENTER_HOUSE_ACCESSLEVEL) {
-						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_CANT_ENTER_NO_RIGHT2());
-						return;
-					}
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_CANT_ENTER_NO_RIGHT2());
+					return;
 				}
 			}
 			double radian = Math.toRadians(MathUtil.convertHeadingToDegree(player.getHeading()));

@@ -24,12 +24,16 @@ public class AdminConfig {
 	public static byte GM_FLIGHT_UNLIMITED;
 	@Property(key = "gameserver.administration.doors.opening", defaultValue = "3")
 	public static byte DOORS_OPEN;
+	@Property(key = "gameserver.administration.houses.enter_all", defaultValue = "3")
+	public static byte HOUSES_ENTER;
+	@Property(key = "gameserver.administration.houses.show_address", defaultValue = "3")
+	public static byte HOUSES_SHOW_ADDRESS;
 	@Property(key = "gameserver.administration.auto.res", defaultValue = "3")
 	public static byte ADMIN_AUTO_RES;
 	@Property(key = "gameserver.administration.instancereq", defaultValue = "3")
 	public static byte INSTANCE_REQ;
 	@Property(key = "gameserver.administration.view.player", defaultValue = "3")
-	public static byte ADMIN_VIEW_DETAILS;
+	public static byte VIEW_PLAYER_DETAILS;
 	@Property(key = "gameserver.administration.dialog_info", defaultValue = "3")
 	public static byte DIALOG_INFO;
 	@Property(key = "gameserver.administration.enchant_info", defaultValue = "3")

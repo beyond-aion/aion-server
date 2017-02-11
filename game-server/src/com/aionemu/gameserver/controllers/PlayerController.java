@@ -288,7 +288,7 @@ public class PlayerController extends CreatureController<Player> {
 			} else {
 				player.getFlyController().endFly(true);
 				if (player.isSpawned()) // not spawned means leaving by teleporter
-					AuditLogger.info(player, "On leave Fly zone in fly state");
+					AuditLogger.info(player, "left fly zone in fly state");
 			}
 		}
 	}

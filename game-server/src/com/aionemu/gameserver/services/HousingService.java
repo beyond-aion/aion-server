@@ -26,7 +26,6 @@ import com.aionemu.gameserver.model.templates.housing.Building;
 import com.aionemu.gameserver.model.templates.housing.BuildingType;
 import com.aionemu.gameserver.model.templates.housing.HouseAddress;
 import com.aionemu.gameserver.model.templates.housing.HousingLand;
-import com.aionemu.gameserver.model.templates.spawns.SpawnType;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_FRIEND_LIST;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_HOUSE_ACQUIRE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_HOUSE_OWNER_INFO;
@@ -293,9 +292,7 @@ public class HousingService {
 			studio = studios.get(ownerId);
 		}
 		if (studio != null) {
-			studio.setSpawn(SpawnType.MANAGER, null);
-			studio.setSpawn(SpawnType.TELEPORT, null);
-			studio.setSpawn(SpawnType.SIGN, null);
+			studio.despawnNpcs();
 			studio.save();
 		}
 	}

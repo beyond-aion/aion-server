@@ -1,8 +1,5 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.aionemu.gameserver.configs.administration.AdminConfig;
 import com.aionemu.gameserver.model.gameobjects.player.DeniedStatus;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -15,8 +12,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_VIEW_PLAYER_DETAILS;
  * @author Avol
  */
 public class CM_VIEW_PLAYER_DETAILS extends AionClientPacket {
-
-	private static final Logger log = LoggerFactory.getLogger(CM_VIEW_PLAYER_DETAILS.class);
 
 	private int targetObjectId;
 
@@ -31,15 +26,12 @@ public class CM_VIEW_PLAYER_DETAILS extends AionClientPacket {
 
 	@Override
 	protected void runImpl() {
-		Player player = this.getConnection().getActivePlayer();
+		Player player = getConnection().getActivePlayer();
 		Player target = player.getKnownList().getPlayer(targetObjectId);
-		if (target == null) {
-			// probably targetObjectId can be 0
-			log.warn("CHECKPOINT: can't show player details for " + targetObjectId);
+		if (target == null)
 			return;
-		}
 
-		if (!target.getPlayerSettings().isInDeniedStatus(DeniedStatus.VIEW_DETAILS) || player.getAccessLevel() >= AdminConfig.ADMIN_VIEW_DETAILS)
+		if (!target.getPlayerSettings().isInDeniedStatus(DeniedStatus.VIEW_DETAILS) || player.getAccessLevel() >= AdminConfig.VIEW_PLAYER_DETAILS)
 			sendPacket(new SM_VIEW_PLAYER_DETAILS(target.getEquipment().getEquippedItemsWithoutStigma(), target));
 		else {
 			sendPacket(SM_SYSTEM_MESSAGE.STR_MSG_REJECTED_WATCH(target.getName()));
