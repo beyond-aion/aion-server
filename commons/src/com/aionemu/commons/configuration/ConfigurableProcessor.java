@@ -162,6 +162,8 @@ public class ConfigurableProcessor {
 		if (value == null || value.trim().equals("")) {
 			value = defaultValue;
 			log.debug("Using default value for field " + field.getName() + " of class " + field.getDeclaringClass().getName());
+		} else if (value.trim().equals("\"\"")) {
+			value = "";
 		}
 
 		Class<?> cls = field.getType();
