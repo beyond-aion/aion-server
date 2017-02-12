@@ -473,12 +473,12 @@ public class PlayerController extends CreatureController<Player> {
 		boolean allowGodstoneActivation) {
 		if (getOwner().getLifeStats().isAlreadyDead())
 			return;
-
-		// avoid killing players after duel
-		if (attacker.getActingCreature() instanceof Player && !getOwner().isEnemy(attacker))
+		
+		if (getOwner().isProtectionActive())
 			return;
 
-		if (getOwner().isProtectionActive())
+		// avoid killing players after duel
+		if (!getOwner().equals(attacker) && attacker.getActingCreature() instanceof Player && !getOwner().isEnemy(attacker))
 			return;
 
 		cancelUseItem();
