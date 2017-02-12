@@ -64,12 +64,9 @@ public class CM_BAN extends GsClientPacket {
 			Account account = null;
 
 			// Find account on GameServers
-			for (GameServerInfo gsi : GameServerTable.getGameServers()) {
-				if (gsi.isAccountOnGameServer(accountId)) {
-					account = gsi.getAccountFromGameServer(accountId);
-					break;
-				}
-			}
+			GameServerInfo gsi = GameServerTable.findLoggedInAccountGs(accountId);
+			if (gsi != null)
+				account = gsi.getAccountFromGameServer(accountId);
 
 			if (time >= 0) {
 				// 1000 is 'infinity' value

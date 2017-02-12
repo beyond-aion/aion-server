@@ -373,7 +373,7 @@ public class AccountController {
 		Map<Byte, Integer> characterCount = accountsGSCharacterCounts.get(accountId);
 
 		if (characterCount != null) {
-			if (characterCount.size() == GameServerTable.getGameServers().size())
+			if (characterCount.size() == GameServerTable.size())
 				return true;
 		}
 

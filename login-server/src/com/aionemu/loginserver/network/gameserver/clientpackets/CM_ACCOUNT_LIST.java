@@ -1,8 +1,8 @@
 package com.aionemu.loginserver.network.gameserver.clientpackets;
 
+import com.aionemu.loginserver.GameServerInfo;
 import com.aionemu.loginserver.GameServerTable;
 import com.aionemu.loginserver.controller.AccountController;
-import com.aionemu.loginserver.model.Account;
 import com.aionemu.loginserver.network.gameserver.GsClientPacket;
 import com.aionemu.loginserver.network.gameserver.serverpackets.SM_REQUEST_KICK_ACCOUNT;
 
@@ -28,12 +28,11 @@ public class CM_ACCOUNT_LIST extends GsClientPacket {
 	@Override
 	protected void runImpl() {
 		for (int id : accountIds) {
-			Account a = AccountController.loadAccount(id);
-			if (GameServerTable.isAccountOnAnyGameServer(a)) {
+			GameServerInfo gsi = GameServerTable.findLoggedInAccountGs(id);
+			if (gsi == null)
+				getConnection().getGameServerInfo().addAccountToGameServer(AccountController.loadAccount(id));
+			else if (gsi.getId() != getConnection().getGameServerInfo().getId()) // account already plays on another gameserver
 				getConnection().sendPacket(new SM_REQUEST_KICK_ACCOUNT(id, false));
-				continue;
-			}
-			getConnection().getGameServerInfo().addAccountToGameServer(a);
 		}
 	}
 }
