@@ -538,8 +538,8 @@ public class TeleportService {
 				return;
 
 			if (animation != TeleportAnimation.NONE && player.getLifeStats().isAlreadyDead()) {
+				PacketSendUtility.sendPacket(player, new SM_PLAYER_INFO(player));
 				World.getInstance().spawn(player);
-				PacketSendUtility.broadcastPacket(player, new SM_PLAYER_INFO(player), true);
 				return;
 			}
 
