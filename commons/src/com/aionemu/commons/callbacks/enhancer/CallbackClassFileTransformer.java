@@ -35,14 +35,14 @@ public abstract class CallbackClassFileTransformer implements ClassFileTransform
 	@Override
 	public byte[] transform(ClassLoader loader, String className, Class<?> classBeingRedefined, ProtectionDomain protectionDomain,
 		byte[] classfileBuffer) throws IllegalClassFormatException {
-		try {
-			// no need to scan whole jvm boot classpath
-			// also there is no need to transform classes from jvm 'ext' dir
-			if (loader == null || loader.getClass().getName().equals("sun.misc.Launcher$ExtClassLoader")) {
-				log.trace("Class " + className + " ignored.");
-				return null;
-			}
+		// no need to scan whole jvm boot classpath
+		// also there is no need to transform classes from jvm 'ext' dir
+		if (loader == null || loader.getClass().getName().equals("sun.misc.Launcher$ExtClassLoader")) {
+			log.trace("Class " + className + " ignored.");
+			return null;
+		}
 
+		try {
 			// actual class transformation
 			return transformClass(loader, classfileBuffer);
 		} catch (Exception e) {

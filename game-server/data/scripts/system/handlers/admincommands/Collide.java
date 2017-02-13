@@ -124,7 +124,7 @@ public class Collide extends AdminCommand {
 			}
 		}
 
-		if (params.length == 0 && closest.getContactPoint().z + 0.5f < target.getZ()) {
+		if (params.length == 0 && closest != null && closest.getContactPoint().z + 0.5f < target.getZ()) {
 			PacketSendUtility.sendMessage(admin, "Below actual Z!");
 		} else {
 			if (closest != null) {

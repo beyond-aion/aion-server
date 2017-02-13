@@ -41,31 +41,10 @@ public class _2303DaevaWheresMyHerb extends QuestHandler {
 				switch (dialogActionId) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 4762);
-					case ASK_QUEST_ACCEPT:
-						return sendQuestDialog(env, 4);
 					case QUEST_ACCEPT_1:
-						return sendQuestDialog(env, 1003);
-					case QUEST_REFUSE_1:
-						return sendQuestDialog(env, 1004);
-					case SETPRO10:
-						if (QuestService.startQuest(env)) {
-							changeQuestStep(env, 0, 11); // 11
-							qs.setRewardGroup(0);
-							return sendQuestDialog(env, 1012);
-						} else {
-							return sendQuestSelectionDialog(env);
-						}
-					case SETPRO20:
-						if (QuestService.startQuest(env)) {
-							changeQuestStep(env, 0, 21); // 21
-							qs.setRewardGroup(1);
-							return sendQuestDialog(env, 1097);
-						} else {
-							return sendQuestSelectionDialog(env);
-						}
-					case FINISH_DIALOG:
-						return sendQuestSelectionDialog(env);
+						QuestService.startQuest(env);
 				}
+				return super.onDialogEvent(env);
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);

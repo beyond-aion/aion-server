@@ -691,18 +691,17 @@ public final class QuestService {
 			Rewards reward = template.getRewards().get(result);
 			toCheck = reward.getCollectItemChecks();
 
-			if (reward.getCollectItemChecks().size() == 0) { // all items are required
+			if (toCheck == null) { // all items are required
 				toCheck = new FastTable<>();
 				for (int index = 0; index < collectItems.getCollectItem().size(); index++)
 					toCheck.add(index);
+			} else if (toCheck.contains(-1)) { // no check/remove is required
+				removeItem = false;
+				break;
 			}
 
 			Integer index = 0;
 			for (int i = 0; i < toCheck.size(); i++) {
-				index = toCheck.get(i);
-				if (index == -1) {
-					break; // no check/remove is required
-				}
 				CollectItem ci = collectItems.getCollectItem().get(index);
 				int itemId = ci.getItemId();
 				long count = itemId == ItemId.KINAH.value() ? player.getInventory().getKinah() : player.getInventory().getItemCountByItemId(itemId);
@@ -737,11 +736,9 @@ public final class QuestService {
 		} else if (qs.getStatus() != QuestStatus.START && collectItems.getStartCheck())
 			return -1;
 
-		if (removeItem) {
+		if (removeItem && toCheck != null) {
 			for (int i = 0; i < toCheck.size(); i++) {
 				int index = toCheck.get(i);
-				if (index == -1)
-					return result;
 				CollectItem collectItem = collectItems.getCollectItem().get(index);
 				if (collectItem.getItemId() == ItemId.KINAH.value())
 					player.getInventory().decreaseKinah(collectItem.getCount());
@@ -775,7 +772,7 @@ public final class QuestService {
 
 				@Override
 				public void run() {
-					if (npc != null && !npc.getLifeStats().isAlreadyDead())
+					if (!npc.getLifeStats().isAlreadyDead())
 						npc.getController().delete();
 				}
 

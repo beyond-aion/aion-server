@@ -62,6 +62,10 @@ public class InstanceWalkerFormations {
 					maxSize = npcs.size();
 				}
 			}
+			if (maxSize == 0 || npcs == null) {
+				log.warn("Walkers missing for route: " + candidates.get(0).getWalkTemplate().getRouteId());
+				continue;
+			}
 			if (maxSize == 1) {
 				if (candidates.size() != 1) {
 					log.warn("Walkers not aligned for route: " + candidates.get(0).getWalkTemplate().getRouteId());

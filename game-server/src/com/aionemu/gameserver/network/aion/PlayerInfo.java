@@ -24,6 +24,7 @@ public abstract class PlayerInfo extends AionServerPacket {
 	protected PlayerInfo() {
 	}
 
+	@SuppressWarnings("null")
 	protected void writePlayerInfo(PlayerAccountData accPlData) {
 		PlayerCommonData pcd = accPlData.getPlayerCommonData();
 		int playerId = pcd.getPlayerObjId();

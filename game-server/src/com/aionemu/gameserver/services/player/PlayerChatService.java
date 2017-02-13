@@ -63,7 +63,7 @@ public class PlayerChatService {
 
 		switch (type) {
 			case WHISPER:
-				log.info(String.format("[%s] - [%s]>[%s]: %s", type.toString(), sender.getName(), receiver.getName(), message));
+				log.info(String.format("[%s] - [%s]>[%s]: %s", type.toString(), sender.getName(), receiver != null ? receiver.getName() : "", message));
 				break;
 			case GROUP:
 			case ALLIANCE:

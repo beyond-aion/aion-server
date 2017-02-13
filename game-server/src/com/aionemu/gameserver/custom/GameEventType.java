@@ -69,11 +69,11 @@ public enum GameEventType {
 
 		try {
 			event = eventClazz.newInstance();
+			event.setGameType(this);
+			activeEvents.add(event);
 		} catch (Exception e) {
 			BattleService.getInstance().logError("Could not create new class instance of " + (eventClazz != null ? eventClazz.getName() : "null"), e);
 		}
-		event.setGameType(this);
-		activeEvents.add(event);
 		return event;
 	}
 

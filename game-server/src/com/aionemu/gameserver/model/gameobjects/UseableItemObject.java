@@ -3,6 +3,8 @@ package com.aionemu.gameserver.model.gameobjects;
 import java.nio.ByteBuffer;
 import java.time.LocalTime;
 
+import org.slf4j.LoggerFactory;
+
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.DescriptionId;
 import com.aionemu.gameserver.model.TaskId;
@@ -120,6 +122,13 @@ public class UseableItemObject extends UseableHouseObject<HousingUseableItem> {
 			}
 		}
 
+		if (requiredItem != null ^ action.getRemoveCount() != null) {
+			LoggerFactory.getLogger(UseableItemObject.class)
+				.warn(this + " doesn't have valid usage requirements " + (requiredItem == null ? " (item missing)" : "(remove count missing)"));
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_OBJECT_ALL_CANT_USE());
+			return;
+		}
+
 		if (player.getInventory().isFull()) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_WAREHOUSE_TOO_MANY_ITEMS_INVENTORY());
 			return;
@@ -139,7 +148,7 @@ public class UseableItemObject extends UseableHouseObject<HousingUseableItem> {
 			@Override
 			public void run() {
 				PacketSendUtility.sendPacket(player, new SM_USE_OBJECT(player.getObjectId(), getObjectId(), 0, 9));
-				if (action.getRemoveCount() != null && action.getRemoveCount() > 0) {
+				if (requiredItem != null && action.getRemoveCount() != null && action.getRemoveCount() > 0) {
 					if (!player.getInventory().decreaseByItemId(requiredItem, action.getRemoveCount()))
 						return;
 				}

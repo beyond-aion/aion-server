@@ -36,7 +36,7 @@ public class _28407GroupTheGathering extends QuestHandler {
 					return sendQuestDialog(env, 1011);
 				else
 					return sendQuestStartDialog(env);
-			} else if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 1) {
+			} else if (qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 1) {
 				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 1693);
 				else if (env.getDialogActionId() == SETPRO2)

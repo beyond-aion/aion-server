@@ -388,7 +388,7 @@ public class XmlMerger {
 						event = eventFactory.createStartElement(startElement.getName(), startElement.getAttributes(), null);
 				}
 
-				if (skipEndElement && event.isEndElement() && event.asEndElement().getName().equals(startElement.getName()))
+				if (skipEndElement && event.isEndElement() && startElement != null && event.asEndElement().getName().equals(startElement.getName()))
 					continue;
 
 				// finally - write tag

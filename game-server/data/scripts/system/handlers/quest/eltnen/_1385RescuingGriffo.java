@@ -64,7 +64,7 @@ public class _1385RescuingGriffo extends QuestHandler {
 					return sendQuestDialog(env, 1011);
 				else
 					return sendQuestStartDialog(env);
-			} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
+			} else if (qs.getStatus() == QuestStatus.REWARD) {
 				return sendQuestEndDialog(env);
 			}
 		} else if (targetId == 204029) {

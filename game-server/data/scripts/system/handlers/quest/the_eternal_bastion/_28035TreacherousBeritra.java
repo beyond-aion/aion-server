@@ -39,7 +39,7 @@ public class _28035TreacherousBeritra extends QuestHandler {
 						return sendQuestStartDialog(env);
 				}
 			}
-		} else if (qs != null && qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 801047:
 					switch (dialogActionId) {

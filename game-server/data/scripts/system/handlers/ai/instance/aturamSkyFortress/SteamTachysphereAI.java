@@ -26,7 +26,7 @@ public class SteamTachysphereAI extends ActionItemNpcAI {
 		final QuestState qs = player.getQuestStateList().getQuestState(player.getRace().equals(Race.ELYOS) ? 18302 : 28302);
 		if (qs == null) {
 			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), DialogPage.NO_RIGHT.id()));
-		} else if (qs != null && qs.getStatus() != QuestStatus.COMPLETE) {
+		} else if (qs.getStatus() != QuestStatus.COMPLETE) {
 			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 10));
 		} else {
 			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 1011));

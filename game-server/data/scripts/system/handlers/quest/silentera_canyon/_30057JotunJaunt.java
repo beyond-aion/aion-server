@@ -53,7 +53,7 @@ public class _30057JotunJaunt extends QuestHandler {
 					return sendQuestStartDialog(env);
 			}
 
-			else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
+			else if (qs.getStatus() == QuestStatus.REWARD) {
 				if (dialogActionId == USE_OBJECT)
 					return sendQuestDialog(env, 10002);
 				else if (dialogActionId == SELECT_QUEST_REWARD)

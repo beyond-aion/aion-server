@@ -43,7 +43,7 @@ public class _50008SoloriusShugoSlackers extends QuestHandler {
 					return sendQuestStartDialog(env);
 				}
 			}
-		} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 831038) {
 				if (dialogActionId == USE_OBJECT) {
 					return sendQuestDialog(env, 10002);

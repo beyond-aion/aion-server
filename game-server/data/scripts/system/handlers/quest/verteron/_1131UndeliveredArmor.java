@@ -40,7 +40,7 @@ public class _1131UndeliveredArmor extends QuestHandler {
 				else
 					return sendQuestStartDialog(env);
 			}
-		} else if (qs != null && qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 799093) {
 				switch (env.getDialogActionId()) {
 					case QUEST_SELECT:

@@ -1734,7 +1734,7 @@ public final class Matrix4f implements Cloneable {
      */
     @Override
     public boolean equals(Object o) {
-        if (!(o instanceof Matrix4f) || o == null) {
+        if (!(o instanceof Matrix4f)) {
             return false;
         }
 

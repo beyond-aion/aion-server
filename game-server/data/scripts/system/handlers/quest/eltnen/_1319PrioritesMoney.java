@@ -49,7 +49,7 @@ public class _1319PrioritesMoney extends QuestHandler {
 				else
 					return sendQuestStartDialog(env);
 			}
-		} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) // Reward
+		} else if (qs.getStatus() == QuestStatus.REWARD) // Reward
 		{
 			if (env.getDialogActionId() == QUEST_SELECT)
 				return sendQuestDialog(env, 4080);

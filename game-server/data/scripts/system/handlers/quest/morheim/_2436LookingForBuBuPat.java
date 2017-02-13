@@ -46,7 +46,7 @@ public class _2436LookingForBuBuPat extends QuestHandler {
 				else
 					return sendQuestStartDialog(env);
 			}
-		} else if (qs != null && qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 204401) {
 				if (env.getDialogActionId() == QUEST_SELECT) {
 					if (qs.getQuestVarById(0) == 0)
