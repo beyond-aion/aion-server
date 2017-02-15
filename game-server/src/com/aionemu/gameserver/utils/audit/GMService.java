@@ -10,7 +10,6 @@ import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.configs.administration.AdminConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.model.ChatType;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.player.CustomPlayerState;
 import com.aionemu.gameserver.model.gameobjects.player.FriendList.Status;
@@ -34,7 +33,7 @@ public class GMService {
 		return SingletonHolder.instance;
 	}
 
-	private final Map<Integer, Player> gms = new ConcurrentHashMap<>();
+	private final Map<Integer, Player> staffMembers = new ConcurrentHashMap<>();
 	private final List<SkillTemplate> gmSkills;
 
 	private GMService() {
@@ -44,64 +43,51 @@ public class GMService {
 			LoggerFactory.getLogger(GMService.class).warn("No GM skills found, possibly because of changed or missing skill templates.");
 	}
 
-	public Collection<Player> getGms() {
-		return gms.values();
+	public Collection<Player> getOnlineStaffMembers() {
+		return staffMembers.values();
 	}
 
 	public void onPlayerLogin(Player player) {
-		if (player.isGM()) {
+		if (player.isStaff()) {
 			String delimiter = "=============================";
 			StringBuilder sb = new StringBuilder(delimiter);
-			if (AdminConfig.INVULNERABLE_GM_CONNECTION) {
-				player.setCustomState(CustomPlayerState.INVULNERABLE);
-				sb.append("\n>> Connection in Invulnerable mode <<");
-			}
-			if (AdminConfig.INVISIBLE_GM_CONNECTION) {
+			if (AdminConfig.LOGIN_INVISIBLE) {
 				player.getEffectController().setAbnormal(AbnormalState.HIDE.getId());
 				player.setVisualState(CreatureVisualState.HIDE20);
 				PacketSendUtility.broadcastPacket(player, new SM_PLAYER_STATE(player), true);
 				sb.append("\n>> Connection in Invisible mode <<");
 			}
-			if (AdminConfig.ENEMITY_MODE_GM_CONNECTION.equalsIgnoreCase("Neutral")) {
+			if (AdminConfig.LOGIN_INVULNERABLE) {
+				player.setCustomState(CustomPlayerState.INVULNERABLE);
+				sb.append("\n>> Connection in Invulnerable mode <<");
+			}
+			if (AdminConfig.LOGIN_NEUTRAL) {
 				player.setCustomState(CustomPlayerState.NEUTRAL_TO_EVERYONE);
 				sb.append("\n>> Connection in Neutral mode <<");
 			}
-			if (AdminConfig.ENEMITY_MODE_GM_CONNECTION.equalsIgnoreCase("Enemy")) {
-				player.setCustomState(CustomPlayerState.ENEMY_OF_EVERYONE);
-				sb.append("\n>> Connection in Enemy mode <<");
-			}
-			if (AdminConfig.VISION_GM_CONNECTION) {
+			if (AdminConfig.LOGIN_VISION) {
 				player.setSeeState(CreatureSeeState.SEARCH10);
 				PacketSendUtility.broadcastPacket(player, new SM_PLAYER_STATE(player), true);
 				sb.append("\n>> Connection in Vision mode <<");
 			}
-			if (AdminConfig.WHISPER_GM_CONNECTION) {
-				player.setCustomState(CustomPlayerState.NO_WHISPERS_MODE);
-				sb.append("\n>> Accepting Whisper: OFF <<");
-			}
 			if (sb.length() > delimiter.length())
 				PacketSendUtility.sendMessage(player, sb.append("\n" + delimiter).toString());
 
-			gms.put(player.getObjectId(), player);
+			staffMembers.put(player.getObjectId(), player);
 			scheduleBroadcastLogin(player);
 		}
 	}
 
 	public void onPlayerLogout(Player player) {
-		if (gms.remove(player.getObjectId()) != null && isAnnounceable(player))
+		if (staffMembers.remove(player.getObjectId()) != null && isAnnounceable(player))
 			broadcastConnectionStatus(player, false);
 	}
 
 	public boolean isAnnounceable(Player player) {
-		return player.isOnline() && player.isGM() && !player.isInCustomState(CustomPlayerState.NO_WHISPERS_MODE)
+		return player.isOnline() && player.isStaff() && !player.isInCustomState(CustomPlayerState.NO_WHISPERS_MODE)
 			&& player.getFriendList().getStatus() != Status.OFFLINE
-			&& (AdminConfig.ANNOUNCE_LEVEL_LIST.contains(String.valueOf(player.getAccessLevel())) || AdminConfig.ANNOUNCE_LEVEL_LIST.contains("*"));
-	}
-
-	public void broadcastMessageToGMs(String message) {
-		for (Player gm : getGms()) {
-			PacketSendUtility.sendMessage(gm, message, ChatType.YELLOW);
-		}
+			&& (AdminConfig.ANNOUNCE_LEVELS.contains(String.valueOf(player.getPlayerAccount().getAccessLevel()))
+				|| AdminConfig.ANNOUNCE_LEVELS.contains("*"));
 	}
 
 	private void broadcastConnectionStatus(Player gm, boolean connected) {
@@ -111,7 +97,7 @@ public class GMService {
 		if ((connected && AdminConfig.ANNOUNCE_LOGIN_TO_ALL_PLAYERS) || (!connected && AdminConfig.ANNOUNCE_LOGOUT_TO_ALL_PLAYERS)) {
 			PacketSendUtility.broadcastToWorld(sysMsg, p -> !p.equals(gm));
 		} else {
-			PacketSendUtility.broadcastToWorld(sysMsg, p -> p.isGM() && !p.equals(gm));
+			PacketSendUtility.broadcastToWorld(sysMsg, p -> p.isStaff() && !p.equals(gm));
 		}
 	}
 

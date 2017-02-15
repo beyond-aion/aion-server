@@ -22,7 +22,7 @@ public class GmList extends PlayerCommand {
 		StringBuilder sb = new StringBuilder();
 		int count = 0;
 
-		for (Player gm : GMService.getInstance().getGms()) {
+		for (Player gm : GMService.getInstance().getOnlineStaffMembers()) {
 			FriendList.Status status = gm.getFriendList().getStatus();
 			if (!gm.isInCustomState(CustomPlayerState.NO_WHISPERS_MODE) && status != FriendList.Status.OFFLINE) {
 				sb.append("\n\t" + ChatUtil.name(gm) + " (" + status.name().toLowerCase() + ")");

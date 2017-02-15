@@ -163,7 +163,7 @@ public class AhserionRaid {
 	private void scheduleObservation() {
 		observeTask = ThreadPoolManager.getInstance().scheduleAtFixedRate((Runnable) () -> {
 			for (Player player : World.getInstance().getWorldMap(400030000).getMainWorldMapInstance().getPlayersInside()) {
-				if (!player.isGM()) {
+				if (!player.isStaff()) {
 					if (player.getPanesterraTeam() == null || player.getPanesterraTeam().isEliminated()) {
 						player.setPanesterraTeam(null);
 						leaveTeam(player);
@@ -191,7 +191,7 @@ public class AhserionRaid {
 		for (VisibleObject obj : World.getInstance().getWorldMap(400030000).getMainWorldMapInstance()) {
 			if (obj instanceof Player) { // in case someone wasn't ported via team.moveToBindPoint
 				Player player = (Player) obj;
-				if (!player.isGM()) {
+				if (!player.isStaff()) {
 					player.setPanesterraTeam(null);
 					leaveTeam(player);
 					TeleportService.moveToBindLocation(player);
@@ -334,7 +334,7 @@ public class AhserionRaid {
 	}
 
 	private void validatePlayer(Player player) {
-		if (player.isGM())
+		if (player.isStaff())
 			return;
 		if ((player.getPanesterraTeam() == null || (player.getPanesterraTeam() != null && player.getPanesterraTeam().isEliminated()))
 			&& player.getPosition().getMapId() == 400030000) {

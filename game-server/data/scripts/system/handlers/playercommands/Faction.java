@@ -52,7 +52,7 @@ public class Faction extends PlayerCommand {
 			player.getInventory().decreaseKinah(CustomConfig.FACTION_USE_PRICE);
 		}
 
-		String senderName = player.getName(player.isGM());
+		String senderName = player.getName(player.isStaff());
 		String message = CustomConfig.FACTION_CHAT_CHANNEL ? StringUtils.join(params, ' ') : senderName + ": " + StringUtils.join(params, ' ');
 		ChatType channel = CustomConfig.FACTION_CHAT_CHANNEL ? ChatType.CH1 : ChatType.BRIGHT_YELLOW;
 
@@ -63,8 +63,8 @@ public class Faction extends PlayerCommand {
 			@Override
 			public void accept(Player listener) {
 				// GMs can read both factions (but only write to their own)
-				if (listener.getRace() == player.getRace() || listener.isGM()) {
-					String name = listener.isGM() ? (player.getRace() == Race.ASMODIANS ? "(A) " : "(E) ") + senderName : senderName;
+				if (listener.getRace() == player.getRace() || listener.isStaff()) {
+					String name = listener.isStaff() ? (player.getRace() == Race.ASMODIANS ? "(A) " : "(E) ") + senderName : senderName;
 					PacketSendUtility.sendPacket(listener, new SM_MESSAGE(player.getObjectId(), name, message, channel));
 				}
 			}

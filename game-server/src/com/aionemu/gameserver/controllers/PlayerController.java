@@ -279,7 +279,7 @@ public class PlayerController extends CreatureController<Player> {
 	 */
 	public void onLeaveFlyArea() {
 		Player player = getOwner();
-		if (player.isInFlyingState() && player.getAccessLevel() < AdminConfig.GM_FLIGHT_FREE) {
+		if (player.isInFlyingState() && !player.hasAccess(AdminConfig.FREE_FLIGHT)) {
 			if (player.isInGlidingState()) {
 				player.unsetFlyState(FlyState.FLYING);
 				player.unsetState(CreatureState.FLYING);

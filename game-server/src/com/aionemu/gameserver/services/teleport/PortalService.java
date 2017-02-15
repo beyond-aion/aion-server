@@ -60,7 +60,7 @@ public class PortalService {
 		int playerSize = portalPath.getPlayerCount();
 		boolean isInstance = portalPath.isInstance();
 
-		if (player.getAccessLevel() < AdminConfig.INSTANCE_REQ) {
+		if (!player.hasAccess(AdminConfig.INSTANCE_ENTER_ALL)) {
 			instanceTitleReq = !player.havePermission(MembershipConfig.INSTANCES_TITLE_REQ);
 			instanceLevelReq = !player.havePermission(MembershipConfig.INSTANCES_LEVEL_REQ);
 			instanceRaceReq = !player.havePermission(MembershipConfig.INSTANCES_RACE_REQ);

@@ -86,7 +86,7 @@ public class MailService {
 
 		int recipientObjId = recipientCommonData.getPlayerObjId();
 
-		if ((recipientCommonData.getRace() != sender.getRace()) && !sender.isGM()) {
+		if ((recipientCommonData.getRace() != sender.getRace()) && !sender.isStaff()) {
 			PacketSendUtility.sendPacket(sender, new SM_MAIL_SERVICE(MailMessage.MAIL_IS_ONE_RACE_ONLY));
 			return;
 		}

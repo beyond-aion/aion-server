@@ -10,9 +10,6 @@ public class SecurityConfig {
 	@Property(key = "gameserver.security.aion.bin.check", defaultValue = "false")
 	public static boolean AION_BIN_CHECK;
 
-	@Property(key = "gameserver.security.gmaudit.message.broadcast", defaultValue = "false")
-	public static boolean GM_AUDIT_MESSAGE_BROADCAST;
-
 	@Property(key = "gameserver.security.antihack.teleportation", defaultValue = "false")
 	public static boolean TELEPORTATION;
 

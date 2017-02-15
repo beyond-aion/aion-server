@@ -31,11 +31,9 @@ public class CM_VIEW_PLAYER_DETAILS extends AionClientPacket {
 		if (target == null)
 			return;
 
-		if (!target.getPlayerSettings().isInDeniedStatus(DeniedStatus.VIEW_DETAILS) || player.getAccessLevel() >= AdminConfig.VIEW_PLAYER_DETAILS)
+		if (!target.getPlayerSettings().isInDeniedStatus(DeniedStatus.VIEW_DETAILS) || player.hasAccess(AdminConfig.VIEW_PLAYER_DETAILS))
 			sendPacket(new SM_VIEW_PLAYER_DETAILS(target.getEquipment().getEquippedItemsWithoutStigma(), target));
-		else {
+		else
 			sendPacket(SM_SYSTEM_MESSAGE.STR_MSG_REJECTED_WATCH(target.getName()));
-			return;
-		}
 	}
 }

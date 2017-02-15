@@ -26,7 +26,7 @@ public class CM_GM_COMMAND extends AionClientPacket {
 	@Override
 	protected void runImpl() {
 		Player admin = getConnection().getActivePlayer();
-		if (admin.getAccessLevel() < AdminConfig.GM_PANEL)
+		if (!admin.hasAccess(AdminConfig.GM_PANEL))
 			return;
 		ChatProcessor.getInstance().handleConsoleCommand(admin, command);
 	}

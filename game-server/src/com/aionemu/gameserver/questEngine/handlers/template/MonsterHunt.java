@@ -143,7 +143,7 @@ public class MonsterHunt extends QuestHandler {
 							varId++;
 						} while (endVar > 0);
 						if (mi.getEndVar() > total) {
-							if (player.getAccessLevel() >= AdminConfig.DIALOG_INFO)
+							if (player.hasAccess(AdminConfig.DIALOG_INFO))
 								PacketSendUtility.sendMessage(player, "varId: " + varId + "; req endVar: " + mi.getEndVar() + "; curr total: " + total);
 							return false;
 						}

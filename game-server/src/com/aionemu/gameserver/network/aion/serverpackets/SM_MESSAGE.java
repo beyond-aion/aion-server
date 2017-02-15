@@ -126,7 +126,7 @@ public class SM_MESSAGE extends AionServerPacket {
 			message = message.substring(0, MESSAGE_SIZE_LIMIT); // shorten message to avoid send log error
 		}
 		if (sender != null) {
-			if (sender instanceof Player && !chatType.isSysMsg() && !CustomConfig.SPEAKING_BETWEEN_FACTIONS && !((Player) sender).isGM()) {
+			if (sender instanceof Player && !chatType.isSysMsg() && !CustomConfig.SPEAKING_BETWEEN_FACTIONS && !((Player) sender).isStaff()) {
 				this.senderRace = (byte) (((Player) sender).getRace().getRaceId() + 1);
 			}
 			this.x = sender.getX();
@@ -142,7 +142,7 @@ public class SM_MESSAGE extends AionServerPacket {
 	@Override
 	protected void writeImpl(AionConnection con) {
 		writeC(chatType.getId());
-		writeC(con.getActivePlayer().isGM() ? 0 : senderRace);
+		writeC(con.getActivePlayer().isStaff() ? 0 : senderRace);
 		writeD(senderObjectId);
 		writeS(senderName);
 		writeS(message);

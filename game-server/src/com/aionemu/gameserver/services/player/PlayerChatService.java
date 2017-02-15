@@ -46,7 +46,7 @@ public class PlayerChatService {
 		Logger log = playerLog;
 
 		// log whisper to adminaudit.log, if GM is involved (ignores private chat logging settings)
-		if (type == ChatType.WHISPER && (sender.isGM() || (receiver != null && receiver.isGM())) && LoggingConfig.LOG_GMAUDIT)
+		if (type == ChatType.WHISPER && (sender.isStaff() || (receiver != null && receiver.isStaff())) && LoggingConfig.LOG_GMAUDIT)
 			log = gmLog;
 		else {
 			switch (type) {

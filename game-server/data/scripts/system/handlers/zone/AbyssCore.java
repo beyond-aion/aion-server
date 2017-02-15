@@ -42,7 +42,7 @@ public class AbyssCore implements ZoneHandler {
 	@Override
 	public void onEnterZone(Creature creature, ZoneInstance zone) {
 		Creature acting = creature.getActingCreature();
-		if (acting instanceof Player && !((Player) acting).isGM()) {
+		if (acting instanceof Player && !((Player) acting).isStaff()) {
 
 			CollisionDieActor observer = new CollisionDieActor(creature, geometry);
 			creature.getObserveController().addObserver(observer);
@@ -53,7 +53,7 @@ public class AbyssCore implements ZoneHandler {
 	@Override
 	public void onLeaveZone(Creature creature, ZoneInstance zone) {
 		Creature acting = creature.getActingCreature();
-		if (acting instanceof Player && !((Player) acting).isGM()) {
+		if (acting instanceof Player && !((Player) acting).isStaff()) {
 			CollisionDieActor observer = observed.get(creature.getObjectId());
 			if (observer != null) {
 				creature.getObserveController().removeObserver(observer);

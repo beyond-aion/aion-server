@@ -235,7 +235,7 @@ public class EnchantService {
 
 		boolean result = Rnd.chance() < successChance;
 
-		if (player.getAccessLevel() >= AdminConfig.ENCHANT_INFO)
+		if (player.hasAccess(AdminConfig.ENCHANT_INFO))
 			PacketSendUtility.sendMessage(player, (result ? "Success" : "Fail") + " (success chance:" + successChance + "%)");
 
 		return result;
@@ -382,7 +382,6 @@ public class EnchantService {
 
 		int stoneLevel = parentItem.getItemTemplate().getLevel();
 		int slotLevel = (int) (10 * Math.ceil((targetItemLevel + 10) / 10d));
-		boolean result = false;
 
 		// The current amount of socketed stones
 		int stoneCount;
@@ -417,16 +416,16 @@ public class EnchantService {
 		}
 
 		// Start value of success
-		float success = EnchantsConfig.MANA_STONE_CHANCE;
+		float successChance = EnchantsConfig.MANA_STONE_CHANCE;
 
 		if (parentItem.getItemTemplate().getItemQuality().getQualityId() >= ItemQuality.RARE.getQualityId())
-			success *= 0.8f;
+			successChance *= 0.8f;
 
 		// Next socket difficulty modifier
 		float socketDiff = stoneCount * 1.25f + 1.75f;
 
 		// Level difference
-		success += (slotLevel - stoneLevel) / socketDiff;
+		successChance += (slotLevel - stoneLevel) / socketDiff;
 
 		// The supplement item is used
 		if (supplementItem != null) {
@@ -465,20 +464,17 @@ public class EnchantService {
 				return false;
 
 			// Add successRate
-			success += addSuccessRate;
+			successChance += addSuccessRate;
 
 			// Put up supplements to wait for update
 			player.subtractSupplements(supplementUseCount, supplementTemplate.getTemplateId());
 		}
 
-		float random = Rnd.get(1, 1000) / 10f;
-
-		if (random <= success)
-			result = true;
+		boolean result = Rnd.chance() < successChance;
 
 		// For test purpose. To use by administrator
-		if (player.getAccessLevel() > 2)
-			PacketSendUtility.sendMessage(player, (result ? "Success" : "Fail") + " Rnd:" + random + " Luck:" + success);
+		if (player.hasAccess(AdminConfig.ENCHANT_INFO))
+			PacketSendUtility.sendMessage(player, (result ? "Success" : "Fail") + " (success chance:" + successChance + "%)");
 
 		return result;
 	}

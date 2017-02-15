@@ -51,9 +51,9 @@ public class CM_HOUSE_OPEN_DOOR extends AionClientPacket {
 				teleportNearHouseDoor(player, house, true);
 			}
 		} else {
-			if (player.getAccessLevel() >= AdminConfig.HOUSES_SHOW_ADDRESS)
+			if (player.hasAccess(AdminConfig.HOUSE_SHOW_ADDRESS))
 				PacketSendUtility.sendMessage(player, "House address: " + address);
-			if (house.getOwnerId() != player.getObjectId() && player.getAccessLevel() < AdminConfig.HOUSES_ENTER) {
+			if (house.getOwnerId() != player.getObjectId() && !player.hasAccess(AdminConfig.HOUSE_ENTER_ALL)) {
 				boolean allowed = false;
 				if (house.getDoorState() == HousePermissions.DOOR_OPENED_FRIENDS) {
 					allowed = player.getFriendList().getFriend(house.getOwnerId()) != null

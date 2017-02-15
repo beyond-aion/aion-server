@@ -21,7 +21,4 @@ public class WorldConfig {
 
 	@Property(key = "gameserver.world.emulate.fasttrack", defaultValue = "true")
 	public static boolean WORLD_EMULATE_FASTTRACK;
-
-	@Property(key = "gameserver.world.specialzone.shownames", defaultValue = "true")
-	public static boolean ENABLE_SHOW_ZONEENTER;
 }

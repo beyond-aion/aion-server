@@ -473,7 +473,7 @@ public class PlayerRestrictions extends AbstractRestrictions {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GLIDE_ONLY_DEVA_CAN());
 			return false;
 		}
-		if (player.getAccessLevel() < AdminConfig.GM_FLIGHT_FREE) {
+		if (!player.hasAccess(AdminConfig.FREE_FLIGHT)) {
 			if (!player.isInsideZoneType(ZoneType.FLY)) {
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_FLYING_FORBIDDEN_HERE());
 				return false;

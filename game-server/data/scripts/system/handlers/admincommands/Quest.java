@@ -244,7 +244,7 @@ public class Quest extends AdminCommand {
 	}
 
 	private void deleteQuest(Player admin, Player target, int questId) {
-		if (admin.getAccessLevel() < AdminConfig.CMD_QUEST_ADV_PARAMS) {
+		if (!admin.hasAccess(AdminConfig.CMD_QUEST_ADV_PARAMS)) {
 			sendInfo(admin, "<You need access level " + AdminConfig.CMD_QUEST_ADV_PARAMS + " or higher to use this function>");
 			return;
 		}
@@ -262,7 +262,7 @@ public class Quest extends AdminCommand {
 	}
 
 	private void showQuestStatus(Player admin, Player target, int questId) {
-		if (admin.getAccessLevel() < AdminConfig.CMD_QUEST_ADV_PARAMS) {
+		if (!admin.hasAccess(AdminConfig.CMD_QUEST_ADV_PARAMS)) {
 			sendInfo(admin, "<You need access level " + AdminConfig.CMD_QUEST_ADV_PARAMS + " or higher to use this function>");
 			return;
 		}
@@ -283,7 +283,7 @@ public class Quest extends AdminCommand {
 	}
 
 	private void setQuestStatus(Player admin, Player target, int questId, QuestStatus status, int var, int varNum) {
-		if (admin.getAccessLevel() < AdminConfig.CMD_QUEST_ADV_PARAMS) {
+		if (!admin.hasAccess(AdminConfig.CMD_QUEST_ADV_PARAMS)) {
 			sendInfo(admin, "<You need access level " + AdminConfig.CMD_QUEST_ADV_PARAMS + " or higher to use this function>");
 			return;
 		}
@@ -317,7 +317,7 @@ public class Quest extends AdminCommand {
 	}
 
 	private void setQuestFlags(Player admin, Player target, int questId, int flags) { // needs rework when flags are implemented like vars
-		if (admin.getAccessLevel() < AdminConfig.CMD_QUEST_ADV_PARAMS) {
+		if (!admin.hasAccess(AdminConfig.CMD_QUEST_ADV_PARAMS)) {
 			sendInfo(admin, "<You need access level " + AdminConfig.CMD_QUEST_ADV_PARAMS + " or higher to use this function>");
 			return;
 		}
@@ -332,7 +332,7 @@ public class Quest extends AdminCommand {
 	}
 
 	private void sendQuestDialog(Player admin, int questId, int dialogPageId) {
-		if (admin.getAccessLevel() < AdminConfig.CMD_QUEST_ADV_PARAMS) {
+		if (!admin.hasAccess(AdminConfig.CMD_QUEST_ADV_PARAMS)) {
 			sendInfo(admin, "<You need access level " + AdminConfig.CMD_QUEST_ADV_PARAMS + " or higher to use this function>");
 			return;
 		}

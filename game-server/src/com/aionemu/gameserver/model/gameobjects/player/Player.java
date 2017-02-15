@@ -291,7 +291,7 @@ public class Player extends Creature {
 
 	public String getName(boolean displayCustomTag) {
 		if (displayCustomTag && AdminConfig.NAME_TAGS.length > 0) {
-			int index = getAccessLevel() - 1;
+			int index = playerAccount.getAccessLevel() - 1;
 			if (index >= 0 && index < AdminConfig.NAME_TAGS.length)
 				return String.format(AdminConfig.NAME_TAGS[index], playerCommonData.getName());
 		}
@@ -763,15 +763,6 @@ public class Player extends Creature {
 	}
 
 	/**
-	 * Access level of this player
-	 * 
-	 * @return byte
-	 */
-	public byte getAccessLevel() {
-		return playerAccount.getAccessLevel();
-	}
-
-	/**
 	 * @return The account name of this player.
 	 */
 	public String getAcountName() {
@@ -1012,8 +1003,19 @@ public class Player extends Creature {
 		return isInState(CreatureState.FLYING) && flightTeleportId != 0;
 	}
 
-	public boolean isGM() {
-		return getAccessLevel() >= AdminConfig.GM_LEVEL;
+	/**
+	 * @param accessLevel
+	 * @return True if the player has the specified access level or higher
+	 */
+	public boolean hasAccess(byte accessLevel) {
+		return playerAccount.getAccessLevel() >= accessLevel;
+	}
+
+	/**
+	 * @return True if the player is a member of the server staff
+	 */
+	public boolean isStaff() {
+		return playerAccount.getAccessLevel() > 0;
 	}
 
 	@Override
@@ -1562,7 +1564,7 @@ public class Player extends Creature {
 
 	@Override
 	public byte isPlayer() {
-		if (isGM())
+		if (isStaff())
 			return 2;
 		else
 			return 1;
@@ -1662,7 +1664,7 @@ public class Player extends Creature {
 	 * @return
 	 */
 	public boolean haveSelfRezEffect() {
-		if (getAccessLevel() >= AdminConfig.ADMIN_AUTO_RES)
+		if (hasAccess(AdminConfig.AUTO_RES))
 			return true;
 
 		// Store the effect info.

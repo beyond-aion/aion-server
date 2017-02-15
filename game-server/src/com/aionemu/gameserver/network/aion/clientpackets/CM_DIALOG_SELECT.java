@@ -64,7 +64,7 @@ public class CM_DIALOG_SELECT extends AionClientPacket {
 			return;
 
 		String dialogActionName = nameOf(dialogActionId);
-		if (player.getAccessLevel() >= AdminConfig.DIALOG_INFO) {
+		if (player.hasAccess(AdminConfig.DIALOG_INFO)) {
 			PacketSendUtility.sendMessage(player, "Quest ID: " + questId + ", Dialog Action: " + dialogActionName + " (ID: " + dialogActionId + ")");
 		}
 		if (dialogActionName == null) {
