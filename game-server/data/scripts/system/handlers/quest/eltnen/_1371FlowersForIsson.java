@@ -65,7 +65,7 @@ public class _1371FlowersForIsson extends QuestHandler {
 						return sendQuestSelectionDialog(env);
 				}
 			} else if (targetId == 730039) {
-				if (qs != null && qs.getStatus() == QuestStatus.START) {
+				if (qs.getStatus() == QuestStatus.START) {
 					return useQuestObject(env, 2, 2, true, false); // reward
 				}
 			}

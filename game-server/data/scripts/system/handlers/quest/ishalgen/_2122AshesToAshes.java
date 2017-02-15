@@ -45,7 +45,7 @@ public class _2122AshesToAshes extends QuestHandler {
 					return closeDialogWindow(env);
 				}
 			}
-		} else if (qs != null && qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 203551) {
 				switch (dialogActionId) {
 					case QUEST_SELECT:
@@ -74,7 +74,7 @@ public class _2122AshesToAshes extends QuestHandler {
 			} else if (targetId == 700148) {
 				return true; // just give quest drop on use
 			}
-		} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203551) {
 				if (dialogActionId == USE_OBJECT) {
 					return sendQuestDialog(env, 2375);

@@ -100,8 +100,7 @@ public class _14021ToCureACurse extends QuestHandler {
 			}
 		}
 		if (qs.getStatus() == QuestStatus.REWARD) {
-			if (targetId == 203902) // Aurelius
-			{
+			if (targetId == 203902) { // Aurelius
 				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 2716);
 				else

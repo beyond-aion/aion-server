@@ -38,12 +38,7 @@ public class _30210WritteninBlood extends QuestHandler {
 				else
 					return sendQuestStartDialog(env);
 			}
-		}
-
-		if (qs == null)
-			return false;
-
-		if (qs != null && qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			if (targetId == 203837) {
 				if (dialogActionId == QUEST_SELECT)

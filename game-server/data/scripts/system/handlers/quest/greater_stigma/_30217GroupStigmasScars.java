@@ -45,19 +45,13 @@ public class _30217GroupStigmasScars extends QuestHandler {
 				else
 					return sendQuestStartDialog(env);
 			}
-		}
-
-		if (qs == null)
-			return false;
-
-		int var = qs.getQuestVarById(0);
-
-		if (qs != null && qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
+			int var = qs.getQuestVarById(0);
 			switch (targetId) {
 				case 798941:
 					switch (env.getDialogActionId()) {
 						case QUEST_SELECT:
-							if (var == 0 && qs != null)
+							if (var == 0)
 								return sendQuestDialog(env, 1011);
 							return false;
 						case SETPRO1:

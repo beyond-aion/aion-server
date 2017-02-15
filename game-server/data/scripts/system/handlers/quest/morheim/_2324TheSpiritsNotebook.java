@@ -48,7 +48,7 @@ public class _2324TheSpiritsNotebook extends QuestHandler {
 				return true;
 			}
 		} else if (targetId == 204373) {
-			if (qs != null && qs.getStatus() == QuestStatus.START) {
+			if (qs.getStatus() == QuestStatus.START) {
 				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 2375);
 				else if (env.getDialogActionId() == SELECT_QUEST_REWARD && qs.getStatus() != QuestStatus.COMPLETE) {

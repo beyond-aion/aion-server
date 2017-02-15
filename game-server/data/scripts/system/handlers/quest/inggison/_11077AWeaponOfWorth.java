@@ -85,8 +85,7 @@ public class _11077AWeaponOfWorth extends QuestHandler {
 				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
-			if (targetId == 798903) // Drenia
-			{
+			if (targetId == 798903) { // Drenia
 				switch (env.getDialogActionId()) {
 					case SELECT_QUEST_REWARD:
 						return sendQuestDialog(env, 5);

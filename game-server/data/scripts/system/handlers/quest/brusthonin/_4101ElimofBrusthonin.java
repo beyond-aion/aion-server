@@ -42,7 +42,7 @@ public class _4101ElimofBrusthonin extends QuestHandler {
 					return sendQuestDialog(env, 1011);
 				else
 					return sendQuestStartDialog(env);
-			} else if (qs != null && qs.getStatus() == QuestStatus.START) {
+			} else if (qs.getStatus() == QuestStatus.START) {
 				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 2375);
 				else if (env.getDialogActionId() == SELECT_QUEST_REWARD) {
@@ -52,7 +52,7 @@ public class _4101ElimofBrusthonin extends QuestHandler {
 					return true;
 				} else
 					return sendQuestEndDialog(env);
-			} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
+			} else if (qs.getStatus() == QuestStatus.REWARD) {
 				return sendQuestEndDialog(env);
 			}
 		} else if (targetId == 205194) {

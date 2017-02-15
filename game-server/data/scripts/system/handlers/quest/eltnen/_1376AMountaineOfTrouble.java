@@ -35,16 +35,14 @@ public class _1376AMountaineOfTrouble extends QuestHandler {
 			targetId = ((Npc) env.getVisibleObject()).getNpcId();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs == null || qs.isStartable()) {
-			if (targetId == 203947) // Beramones
-			{
+			if (targetId == 203947) { // Beramones
 				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 1011);
 				else
 					return sendQuestStartDialog(env);
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
-			if (targetId == 203964) // Agrips
-			{
+			if (targetId == 203964) { // Agrips
 				if (env.getDialogActionId() == USE_OBJECT)
 					return sendQuestDialog(env, 1352);
 				return sendQuestEndDialog(env);

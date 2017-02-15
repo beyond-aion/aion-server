@@ -67,8 +67,7 @@ public class _1361FindingDrinkingWater extends QuestHandler {
 			targetId = ((Npc) env.getVisibleObject()).getNpcId();
 		final QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs == null || qs.isStartable()) {
-			if (targetId == 203943) // Turiel
-			{
+			if (targetId == 203943) { // Turiel
 				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 1011);
 				else if (env.getDialogActionId() == QUEST_ACCEPT_1) {
@@ -79,8 +78,7 @@ public class _1361FindingDrinkingWater extends QuestHandler {
 				} else
 					return sendQuestStartDialog(env);
 			}
-		} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) // Reward
-		{
+		} else if (qs.getStatus() == QuestStatus.REWARD) { // Reward
 			if (env.getDialogActionId() == QUEST_SELECT)
 				return sendQuestDialog(env, 2375);
 			else if (env.getDialogActionId() == SELECT_QUEST_REWARD) {
@@ -92,7 +90,7 @@ public class _1361FindingDrinkingWater extends QuestHandler {
 				return sendQuestEndDialog(env);
 		}
 
-		else if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 1) {
+		else if (qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 1) {
 			switch (targetId) {
 				case 700173: // Water Tank
 					if (qs.getQuestVarById(0) == 1 && env.getDialogActionId() == USE_OBJECT) {

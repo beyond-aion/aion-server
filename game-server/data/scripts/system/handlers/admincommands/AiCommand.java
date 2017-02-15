@@ -101,15 +101,11 @@ public class AiCommand extends AdminCommand {
 			AIEngine.getInstance().setupAI(aiName, npc);
 		} else if (param0.equals("event")) {
 			AIEventType eventType = AIEventType.valueOf(param1.toUpperCase());
-			if (eventType != null) {
-				npc.getAi().onGeneralEvent(eventType);
-			}
+			npc.getAi().onGeneralEvent(eventType);
 		} else if (param0.equals("event2")) {
 			AIEventType eventType = AIEventType.valueOf(param1.toUpperCase());
 			Creature creature = (Creature) World.getInstance().findVisibleObject(Integer.valueOf(params[2]));
-			if (eventType != null) {
-				npc.getAi().onCreatureEvent(eventType, creature);
-			}
+			npc.getAi().onCreatureEvent(eventType, creature);
 		} else if (param0.equals("state")) {
 			AIState state = AIState.valueOf(param1.toUpperCase());
 			((NpcAI) npc.getAi()).setStateIfNot(state);

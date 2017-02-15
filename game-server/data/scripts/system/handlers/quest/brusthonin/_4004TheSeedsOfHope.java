@@ -1,6 +1,7 @@
 package quest.brusthonin;
 
 import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -39,18 +40,18 @@ public class _4004TheSeedsOfHope extends QuestHandler {
 				else
 					return sendQuestStartDialog(env);
 			}
-		} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 205128) {
 				if (env.getDialogActionId() == USE_OBJECT)
 					return sendQuestDialog(env, 10002);
 				else
 					return sendQuestEndDialog(env);
 			}
-		} else if (qs != null && qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			final int var = qs.getQuestVarById(0);
 			switch (targetId) {
 				case 700340: // Earth Mound
-					if (qs != null && env.getDialogActionId() == USE_OBJECT) {
+					if (env.getDialogActionId() == USE_OBJECT) {
 						if (var < 4) {
 							return useQuestObject(env, var, var + 1, false, true);
 						} else if (var == 4) {

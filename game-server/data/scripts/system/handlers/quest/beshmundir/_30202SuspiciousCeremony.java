@@ -45,7 +45,7 @@ public class _30202SuspiciousCeremony extends QuestHandler {
 						return true;
 				} else
 					return sendQuestStartDialog(env);
-			} else if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 2) {
+			} else if (qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 2) {
 				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 2375);
 				else if (env.getDialogActionId() == SELECT_QUEST_REWARD) {
@@ -54,7 +54,7 @@ public class _30202SuspiciousCeremony extends QuestHandler {
 					return sendQuestDialog(env, 5);
 				} else
 					return sendQuestStartDialog(env);
-			} else if (qs != null && qs.getStatus() == QuestStatus.REWARD)
+			} else if (qs.getStatus() == QuestStatus.REWARD)
 				return sendQuestEndDialog(env);
 		} else if (targetId == 798942) {
 			if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 0) {

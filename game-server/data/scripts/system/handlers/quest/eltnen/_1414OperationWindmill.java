@@ -32,8 +32,7 @@ public class _1414OperationWindmill extends QuestHandler {
 			targetId = ((Npc) env.getVisibleObject()).getNpcId();
 		final QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs == null || qs.isStartable()) {
-			if (targetId == 203989) // Tumblusen
-			{
+			if (targetId == 203989) { // Tumblusen
 				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 1011);
 				else if (env.getDialogActionId() == QUEST_ACCEPT_1) {
@@ -45,11 +44,11 @@ public class _1414OperationWindmill extends QuestHandler {
 					return sendQuestStartDialog(env);
 			}
 
-		} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			return sendQuestEndDialog(env);
 		}
 
-		else if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 0) {
+		else if (qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 0) {
 			switch (targetId) {
 				case 700175: // Old Gear
 					if (qs.getQuestVarById(0) == 0 && env.getDialogActionId() == USE_OBJECT) {

@@ -41,7 +41,7 @@ public class _30550MomentOfCrisis extends QuestHandler {
 						return sendQuestStartDialog(env);
 				}
 			}
-		} else if (qs != null && qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			switch (targetId) {
 
@@ -69,7 +69,7 @@ public class _30550MomentOfCrisis extends QuestHandler {
 					}
 			}
 
-		} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			switch (targetId) {
 				case 799592:
 				case 799666:

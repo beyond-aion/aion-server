@@ -1,6 +1,7 @@
 package quest.theobomos;
 
 import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -60,7 +61,7 @@ public class _3060TheRedJournal extends QuestHandler {
 		}
 
 		else if (targetId == 798190) {
-			if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 0) {
+			if (qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 0) {
 				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 1352);
 				else if (env.getDialogActionId() == SETPRO1) {
@@ -72,7 +73,7 @@ public class _3060TheRedJournal extends QuestHandler {
 					return sendQuestStartDialog(env);
 			}
 		} else if (targetId == 798191) {
-			if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 1) {
+			if (qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 1) {
 				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 1693);
 				else if (env.getDialogActionId() == SETPRO2) {
@@ -84,7 +85,7 @@ public class _3060TheRedJournal extends QuestHandler {
 					return sendQuestStartDialog(env);
 			}
 		} else if (targetId == 798192) {
-			if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 2) {
+			if (qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 2) {
 				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 2034);
 				else if (env.getDialogActionId() == SETPRO3) {
@@ -96,18 +97,16 @@ public class _3060TheRedJournal extends QuestHandler {
 					return sendQuestStartDialog(env);
 			}
 		} else if (targetId == 798193) {
-			if (qs != null) {
-				if (env.getDialogActionId() == QUEST_SELECT && qs.getStatus() == QuestStatus.START) {
-					return sendQuestDialog(env, 2375);
-				} else if (env.getDialogActionId() == SELECT_QUEST_REWARD && qs.getStatus() != QuestStatus.COMPLETE) {
-					removeQuestItem(env, 182208043, 1);
-					qs.setQuestVar(1);
-					qs.setStatus(QuestStatus.REWARD);
-					updateQuestStatus(env);
-					return sendQuestEndDialog(env);
-				} else
-					return sendQuestEndDialog(env);
-			}
+			if (env.getDialogActionId() == QUEST_SELECT && qs.getStatus() == QuestStatus.START) {
+				return sendQuestDialog(env, 2375);
+			} else if (env.getDialogActionId() == SELECT_QUEST_REWARD && qs.getStatus() != QuestStatus.COMPLETE) {
+				removeQuestItem(env, 182208043, 1);
+				qs.setQuestVar(1);
+				qs.setStatus(QuestStatus.REWARD);
+				updateQuestStatus(env);
+				return sendQuestEndDialog(env);
+			} else
+				return sendQuestEndDialog(env);
 		}
 		return false;
 	}

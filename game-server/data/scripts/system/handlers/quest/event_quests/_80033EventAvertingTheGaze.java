@@ -85,18 +85,15 @@ public class _80033EventAvertingTheGaze extends QuestHandler {
 						// got a Beritra's Gaze, then start me
 						QuestService.startEventQuest(new QuestEnv(null, player, questId), status);
 					}
-					if (storage.getItemCountByItemId(164002016) > 9) // Israphel's Glory
-					{
+					if (storage.getItemCountByItemId(164002016) > 9) { // Israphel's Glory
 						status = getQuestUpdateStatus(player, 80037);
 						QuestService.startEventQuest(new QuestEnv(null, player, 80037), status);
 					}
-					if (storage.getItemCountByItemId(164002017) > 4) // Siel's Gift
-					{
+					if (storage.getItemCountByItemId(164002017) > 4) { // Siel's Gift
 						status = getQuestUpdateStatus(player, 80038);
 						QuestService.startEventQuest(new QuestEnv(null, player, 80038), status);
 					}
-					if (storage.getItemCountByItemId(164002018) > 0) // Aion's Grace
-					{
+					if (storage.getItemCountByItemId(164002018) > 0) { // Aion's Grace
 						status = getQuestUpdateStatus(player, 80039);
 						QuestService.startEventQuest(new QuestEnv(null, player, 80039), status);
 					}

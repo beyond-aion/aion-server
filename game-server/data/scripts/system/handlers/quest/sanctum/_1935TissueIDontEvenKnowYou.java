@@ -46,14 +46,14 @@ public class _1935TissueIDontEvenKnowYou extends QuestHandler {
 					return sendQuestDialog(env, 1011);
 				else
 					return sendQuestStartDialog(env);
-			} else if (qs != null && qs.getStatus() == QuestStatus.START) {
+			} else if (qs.getStatus() == QuestStatus.START) {
 				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 2375);
 				else if (env.getDialogActionId() == SELECT_QUEST_REWARD) {
 					return defaultCloseDialog(env, 2, 2, true, true);
 				} else
 					return sendQuestEndDialog(env);
-			} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
+			} else if (qs.getStatus() == QuestStatus.REWARD) {
 				return sendQuestEndDialog(env);
 			}
 		} else if (targetId == 203837) {

@@ -34,8 +34,7 @@ public class _1430ATeleportationExperiment extends QuestHandler {
 			targetId = ((Npc) env.getVisibleObject()).getNpcId();
 		final QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs == null || qs.isStartable()) {
-			if (targetId == 203919) // Onesimus
-			{
+			if (targetId == 203919) { // Onesimus
 				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 4762);
 				else
@@ -43,10 +42,9 @@ public class _1430ATeleportationExperiment extends QuestHandler {
 			}
 		}
 
-		else if (targetId == 203337) // Sonirim
-		{
+		else if (targetId == 203337) { // Sonirim
 
-			if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 0) {
+			if (qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 0) {
 				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 1011);
 				else if (env.getDialogActionId() == SETPRO1) {
@@ -58,8 +56,7 @@ public class _1430ATeleportationExperiment extends QuestHandler {
 					return sendQuestStartDialog(env);
 			}
 
-			else if (qs.getStatus() == QuestStatus.REWARD) // Reward
-			{
+			else if (qs.getStatus() == QuestStatus.REWARD) { // Reward
 				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 4080);
 				else if (env.getDialogActionId() == SELECT_QUEST_REWARD) {

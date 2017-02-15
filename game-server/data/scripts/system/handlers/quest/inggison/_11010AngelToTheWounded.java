@@ -45,12 +45,7 @@ public class _11010AngelToTheWounded extends QuestHandler {
 				else
 					return sendQuestStartDialog(env);
 			}
-		}
-
-		if (qs == null)
-			return false;
-
-		if (qs != null && qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			switch (targetId) {
 				case 799071:
@@ -78,8 +73,7 @@ public class _11010AngelToTheWounded extends QuestHandler {
 						return useQuestObject(env, 2, 3, true, 0); // reward
 					return false;
 			}
-		}
-		if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 799071) {
 				if (env.getDialogActionId() == USE_OBJECT)
 					return sendQuestDialog(env, 2375);

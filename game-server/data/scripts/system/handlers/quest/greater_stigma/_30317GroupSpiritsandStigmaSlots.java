@@ -45,14 +45,8 @@ public class _30317GroupSpiritsandStigmaSlots extends QuestHandler {
 				else
 					return sendQuestStartDialog(env);
 			}
-		}
-
-		if (qs == null)
-			return false;
-
-		int var = qs.getQuestVarById(0);
-
-		if (qs != null && qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
+			int var = qs.getQuestVarById(0);
 			switch (targetId) {
 				case 799322:
 					switch (env.getDialogActionId()) {

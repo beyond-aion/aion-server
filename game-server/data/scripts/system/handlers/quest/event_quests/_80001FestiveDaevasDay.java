@@ -31,8 +31,7 @@ public class _80001FestiveDaevasDay extends QuestHandler {
 				closeDialogWindow(env);
 				return true;
 			}
-		} else if (env.getTargetId() == 798417) // Belenus
-		{
+		} else if (env.getTargetId() == 798417) { // Belenus
 			if (qs != null) {
 				if (env.getDialogActionId() == QUEST_SELECT && qs.getStatus() == QuestStatus.START) {
 					return sendQuestDialog(env, 2375);

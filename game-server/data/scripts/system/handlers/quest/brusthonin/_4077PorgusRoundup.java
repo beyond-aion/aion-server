@@ -72,8 +72,7 @@ public class _4077PorgusRoundup extends QuestHandler {
 			targetId = ((Npc) env.getVisibleObject()).getNpcId();
 
 		if (qs == null || qs.isStartable()) {
-			if (targetId == 205158) // Holekk
-			{
+			if (targetId == 205158) { // Holekk
 				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 4762);
 				else

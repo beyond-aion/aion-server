@@ -62,8 +62,7 @@ public class _1114TheNymphsGown extends QuestHandler {
 		int var = qs.getQuestVarById(0);
 
 		if (qs.getStatus() == QuestStatus.REWARD) {
-			if (targetId == 203075 && var == 4) // Namus
-			{
+			if (targetId == 203075 && var == 4) { // Namus
 				if (env.getDialogActionId() == USE_OBJECT)
 					return sendQuestDialog(env, 2375);
 				else if (env.getDialogActionId() == SELECT_QUEST_REWARD)
@@ -75,8 +74,7 @@ public class _1114TheNymphsGown extends QuestHandler {
 		} else if (qs.getStatus() != QuestStatus.START)
 			return false;
 
-		if (targetId == 203075) // Namus
-		{
+		if (targetId == 203075) { // Namus
 			switch (env.getDialogActionId()) {
 				case QUEST_SELECT:
 					if (var == 0)
@@ -135,8 +133,7 @@ public class _1114TheNymphsGown extends QuestHandler {
 					return true;
 			}
 		}
-		if (targetId == 203058) // Asteros
-		{
+		if (targetId == 203058) { // Asteros
 			switch (env.getDialogActionId()) {
 				case QUEST_SELECT:
 					if (var == 3)

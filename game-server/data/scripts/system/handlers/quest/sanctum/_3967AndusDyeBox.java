@@ -70,8 +70,7 @@ public class _3967AndusDyeBox extends QuestHandler {
 				} else
 					return sendQuestStartDialog(env);
 			}
-		} else if (targetId == 798391 && qs.getStatus() == QuestStatus.REWARD)// Andu
-		{
+		} else if (targetId == 798391 && qs.getStatus() == QuestStatus.REWARD) { // Andu
 			if (env.getDialogActionId() == USE_OBJECT)
 				return sendQuestDialog(env, 2375);
 			else if (env.getDialogActionId() == SELECT_QUEST_REWARD) {

@@ -81,7 +81,7 @@ public class TriroansSummonAI extends AggressiveNpcAI {
 
 					@Override
 					public void run() {
-						if (boss != null && checkDistance() == 0 && !boss.getLifeStats().isAlreadyDead())
+						if (checkDistance() == 0 && !boss.getLifeStats().isAlreadyDead())
 							checkSkillUse(boss);
 					}
 				}, 5000);

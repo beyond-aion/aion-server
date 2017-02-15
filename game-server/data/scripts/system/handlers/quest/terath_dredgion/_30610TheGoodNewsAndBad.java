@@ -45,7 +45,7 @@ public class _30610TheGoodNewsAndBad extends QuestHandler {
 							return sendQuestStartDialog(env);
 					}
 			}
-		} else if (qs != null && qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			switch (targetId) {
 				case 800327:
@@ -71,7 +71,7 @@ public class _30610TheGoodNewsAndBad extends QuestHandler {
 
 					}
 			}
-		} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			switch (targetId) {
 				case 205864:
 					return sendQuestEndDialog(env);
