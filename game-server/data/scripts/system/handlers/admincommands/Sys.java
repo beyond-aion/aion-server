@@ -56,15 +56,11 @@ public class Sys extends AdminCommand {
 			// JVM Infos
 			for (String line : SystemInfoUtil.getJvmInfo())
 				PacketSendUtility.sendMessage(player, line);
-		}
-
-		else if (params[0].equals("memory")) {
+		} else if (params[0].equals("memory")) {
 			// Memory Infos
 			for (String line : SystemInfoUtil.getMemoryInfo())
 				PacketSendUtility.sendMessage(player, line);
-		}
-
-		else if (params[0].equals("gc")) {
+		} else if (params[0].equals("gc")) {
 			long time = System.currentTimeMillis();
 			PacketSendUtility.sendMessage(player, "RAM Used (Before): "
 				+ ((Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / 1048576));

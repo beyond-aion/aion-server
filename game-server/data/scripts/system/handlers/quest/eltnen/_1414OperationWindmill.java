@@ -46,9 +46,7 @@ public class _1414OperationWindmill extends QuestHandler {
 
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			return sendQuestEndDialog(env);
-		}
-
-		else if (qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 0) {
+		} else if (qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 0) {
 			switch (targetId) {
 				case 700175: // Old Gear
 					if (qs.getQuestVarById(0) == 0 && env.getDialogActionId() == USE_OBJECT) {

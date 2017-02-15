@@ -58,9 +58,7 @@ public class _3060TheRedJournal extends QuestHandler {
 			} else if (targetId == 730148) {
 				return giveQuestItem(env, 182208043, 1);
 			}
-		}
-
-		else if (targetId == 798190) {
+		} else if (targetId == 798190) {
 			if (qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 0) {
 				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 1352);

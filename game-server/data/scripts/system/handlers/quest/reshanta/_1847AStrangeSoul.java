@@ -42,9 +42,7 @@ public class _1847AStrangeSoul extends QuestHandler {
 				return true;
 			} else
 				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(0, 0));
-		}
-
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 278592) {
 				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 1352);
@@ -63,9 +61,7 @@ public class _1847AStrangeSoul extends QuestHandler {
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 					return true;
 				}
-			}
-
-			else if (targetId == 203991) {
+			} else if (targetId == 203991) {
 				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 2375);
 				else if (env.getDialogActionId() == SELECT_QUEST_REWARD) {
@@ -76,9 +72,7 @@ public class _1847AStrangeSoul extends QuestHandler {
 					return sendQuestEndDialog(env);
 				}
 			}
-		}
-
-		else if (qs.getStatus() == QuestStatus.REWARD && targetId == 203991) {
+		} else if (qs.getStatus() == QuestStatus.REWARD && targetId == 203991) {
 			return sendQuestEndDialog(env);
 		}
 		return false;

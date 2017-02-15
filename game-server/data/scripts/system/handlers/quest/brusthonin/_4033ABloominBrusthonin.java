@@ -40,9 +40,7 @@ public class _4033ABloominBrusthonin extends QuestHandler {
 					return sendQuestDialog(env, 1011);
 				else
 					return sendQuestStartDialog(env);
-			}
-
-			else if (qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 0) {
+			} else if (qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 0) {
 				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 1352);
 				else if (env.getDialogActionId() == CHECK_USER_HAS_QUEST_ITEM) {
@@ -55,9 +53,7 @@ public class _4033ABloominBrusthonin extends QuestHandler {
 						return sendQuestDialog(env, 1438);
 				} else
 					return sendQuestStartDialog(env);
-			}
-
-			else if (qs.getStatus() == QuestStatus.REWARD) {
+			} else if (qs.getStatus() == QuestStatus.REWARD) {
 				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 2034);
 				else if (env.getDialogActionId() == SELECT_QUEST_REWARD) {
@@ -67,9 +63,7 @@ public class _4033ABloominBrusthonin extends QuestHandler {
 				} else
 					return sendQuestEndDialog(env);
 			}
-		}
-
-		else if (qs != null && qs.getStatus() == QuestStatus.START) {
+		} else if (qs != null && qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 700379: { // Portaro's Tomb
 					if (qs.getQuestVarById(0) == 2 && env.getDialogActionId() == USE_OBJECT) {

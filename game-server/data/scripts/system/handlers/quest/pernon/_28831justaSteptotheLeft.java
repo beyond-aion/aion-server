@@ -60,9 +60,7 @@ public class _28831justaSteptotheLeft extends QuestHandler {
 						return sendQuestStartDialog(env);
 				}
 			}
-		}
-
-		else if (qs.getStatus() == QuestStatus.START && butlers.contains(targetId)) {
+		} else if (qs.getStatus() == QuestStatus.START && butlers.contains(targetId)) {
 			House house = player.getActiveHouse();
 			if (house.getButler().getNpcId() != targetId)
 				return false;

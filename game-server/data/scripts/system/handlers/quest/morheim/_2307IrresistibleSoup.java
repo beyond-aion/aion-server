@@ -41,9 +41,7 @@ public class _2307IrresistibleSoup extends QuestHandler {
 					return sendQuestDialog(env, 4762);
 				else
 					return sendQuestStartDialog(env);
-			}
-
-			else if (qs.getStatus() == QuestStatus.REWARD) {
+			} else if (qs.getStatus() == QuestStatus.REWARD) {
 				return sendQuestEndDialog(env);
 			}
 		} else if (targetId == 204336) { // Spedor
@@ -74,9 +72,7 @@ public class _2307IrresistibleSoup extends QuestHandler {
 				} else
 					return sendQuestStartDialog(env);
 			}
-		}
-
-		else if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 0) {
+		} else if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 0) {
 			switch (targetId) {
 				case 700247: // Aromatic Soup
 					if (qs.getQuestVarById(0) == 0 && env.getDialogActionId() == USE_OBJECT) {

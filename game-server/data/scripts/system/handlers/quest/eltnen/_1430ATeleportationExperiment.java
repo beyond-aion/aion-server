@@ -40,9 +40,7 @@ public class _1430ATeleportationExperiment extends QuestHandler {
 				else
 					return sendQuestStartDialog(env);
 			}
-		}
-
-		else if (targetId == 203337) { // Sonirim
+		} else if (targetId == 203337) { // Sonirim
 
 			if (qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 0) {
 				if (env.getDialogActionId() == QUEST_SELECT)
@@ -54,9 +52,7 @@ public class _1430ATeleportationExperiment extends QuestHandler {
 					return TeleportService.teleportTo(player, 220020000, 1, 638, 2337, 425, (byte) 20, TeleportAnimation.FADE_OUT_BEAM);
 				} else
 					return sendQuestStartDialog(env);
-			}
-
-			else if (qs.getStatus() == QuestStatus.REWARD) { // Reward
+			} else if (qs.getStatus() == QuestStatus.REWARD) { // Reward
 				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 4080);
 				else if (env.getDialogActionId() == SELECT_QUEST_REWARD) {

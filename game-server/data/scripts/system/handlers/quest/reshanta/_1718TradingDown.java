@@ -46,9 +46,7 @@ public class _1718TradingDown extends QuestHandler {
 				return true;
 			} else
 				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(0, 0));
-		}
-
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 203190) {
 				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 1352);
@@ -67,9 +65,7 @@ public class _1718TradingDown extends QuestHandler {
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 					return true;
 				}
-			}
-
-			else if (targetId == 204611) {
+			} else if (targetId == 204611) {
 				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 2034);
 				else if (env.getDialogActionId() == SETPRO3) {
@@ -78,9 +74,7 @@ public class _1718TradingDown extends QuestHandler {
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 					return true;
 				}
-			}
-
-			else if (targetId == 279029) {
+			} else if (targetId == 279029) {
 				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 2375);
 				else if (env.getDialogActionId() == SELECT_QUEST_REWARD) {
@@ -90,9 +84,7 @@ public class _1718TradingDown extends QuestHandler {
 					return sendQuestEndDialog(env);
 				}
 			}
-		}
-
-		else if (qs.getStatus() == QuestStatus.REWARD && targetId == 279029) {
+		} else if (qs.getStatus() == QuestStatus.REWARD && targetId == 279029) {
 			return sendQuestEndDialog(env);
 		}
 		return false;

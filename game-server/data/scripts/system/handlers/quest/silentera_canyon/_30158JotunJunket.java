@@ -55,9 +55,7 @@ public class _30158JotunJunket extends QuestHandler {
 					return sendQuestDialog(env, 4762);
 				else
 					return sendQuestStartDialog(env);
-			}
-
-			else if (qs.getStatus() == QuestStatus.REWARD) {
+			} else if (qs.getStatus() == QuestStatus.REWARD) {
 				if (dialogActionId == USE_OBJECT)
 					return sendQuestDialog(env, 10002);
 				else if (dialogActionId == SELECT_QUEST_REWARD)

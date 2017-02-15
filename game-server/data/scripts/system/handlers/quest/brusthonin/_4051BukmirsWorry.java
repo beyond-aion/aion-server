@@ -39,14 +39,10 @@ public class _4051BukmirsWorry extends QuestHandler {
 					return sendQuestDialog(env, 4762);
 				else
 					return sendQuestStartDialog(env);
-			}
-
-			else if (qs.getStatus() == QuestStatus.REWARD) {
+			} else if (qs.getStatus() == QuestStatus.REWARD) {
 				return sendQuestEndDialog(env);
 			}
-		}
-
-		else if (targetId == 205202) { // BuBu Chi
+		} else if (targetId == 205202) { // BuBu Chi
 			if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 0) {
 				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 1011);
