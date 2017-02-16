@@ -22,7 +22,7 @@ public class Kill extends AdminCommand {
 		super("kill", "Kills the specified NPC(s) or player.");
 
 		// @formatter:off
-		setParamInfo(
+		setSyntaxInfo(
 			" - kills your target (can be NPC or player)",
 			"<all> [neutral|enemy] - kills all NPCs in the surrounding area (default: all, optional: only neutral/hostile NPCs)",
 			"<range (in meters)> [neutral|enemy] - kills NPCs in the specified radius around you (default: all, optional: only neutral/hostile NPCs)"

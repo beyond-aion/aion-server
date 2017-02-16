@@ -31,7 +31,8 @@ public class Help extends PlayerCommand {
 				String desc = cmd.getDescription().isEmpty() ? "No description available." : cmd.getDescription();
 				sb.append("\n\t" + ChatUtil.color(cmd.getAliasWithPrefix(), Color.WHITE) + " - " + desc);
 			}
-			sb.append("\nType in " + ChatUtil.color("<command> help", Color.WHITE) + " to get further information about a command.");
+			sb.append("\nType <" + ChatUtil.color("command", Color.WHITE) + "> " + ChatUtil.color("help", Color.WHITE)
+				+ " to get further information about a command.");
 			sendInfo(player, sb.toString());
 		} else {
 			sendInfo(player, "You are not allowed to use any chat commands other than " + ChatUtil.color(getAliasWithPrefix(), Color.WHITE) + ".");

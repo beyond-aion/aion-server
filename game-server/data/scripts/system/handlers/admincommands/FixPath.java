@@ -39,7 +39,7 @@ public class FixPath extends AdminCommand {
 		super("fixpath", "Fixes Z-coordinates for npc walk routes.");
 
 		// @formatter:off
-		setParamInfo(
+		setSyntaxInfo(
 			"[z-offset] - Gathers new Z-coordinates for the route of your target (default: uses old Z values as a base, optional: adds the offset to old values).",
 			"<route id> [z-offset] - Gathers new Z-coordinates for the specified route (default: uses old Z values as a base, optional: adds the offset to old values).",
 			"<cancel> - Cancels route fixing."

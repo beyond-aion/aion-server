@@ -14,7 +14,7 @@ public class MonsterRaid extends AdminCommand {
 	public MonsterRaid() {
 		super("monsterraid", "Starts/stops the Beritra Invasion event.");
 
-		setParamInfo("<start|stop> <location id> - Starts or stops the Beritra Invasion event for a specific location.");
+		setSyntaxInfo("<start|stop> <location id> - Starts or stops the Beritra Invasion event for a specific location.");
 	}
 
 	@Override

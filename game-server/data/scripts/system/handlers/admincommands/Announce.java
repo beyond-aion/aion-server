@@ -18,7 +18,7 @@ public class Announce extends AdminCommand {
 	public Announce() {
 		super("announce", "Sends a server-wide notice.");
 
-		setParamInfo(
+		setSyntaxInfo(
 			"<n|a> <message> - Sends the message either with your <n>ame or <a>nonymously.",
 			"<ely|asmo> <message> - Sends an anonymous message to <ely>os or <asmo>dian players."
 		);

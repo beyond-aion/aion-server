@@ -16,7 +16,7 @@ public class Kick extends AdminCommand {
 		super("kick", "Disconnects players from the server.");
 
 		// @formatter:off
-		setParamInfo(
+		setSyntaxInfo(
 			"<name> - Disconnects the player with the specified name.",
 			"<ALL> - Disconnects everyone (parameter must be typed in uppercase, for safety)."
 		);

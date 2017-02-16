@@ -69,11 +69,11 @@ public class Configure extends AdminCommand {
 		super("configure", "Shows/changes config settings.");
 
 		// @formatter:off
-		setParamInfo(
-			"<list> - Shows a list of available configuration categories.",
-			"<configname> - Lists all available properties of the specified configuration.",
-			"<configname> <property> - Shows the current setting of the specified configuration.",
-			"<configname> <property> <value> - Changes the specified configuration setting to the new value."
+		setSyntaxInfo(
+			"<list> - Shows all available configuration categories.",
+			"<category> - Shows all available properties of the specified configuration.",
+			"<category> <property> - Shows the properties active value.",
+			"<category> <property> <value> - Changes the properties value to the new value."
 		);
 		// @formatter:on
 	}

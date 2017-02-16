@@ -29,7 +29,7 @@ public class SpawnUpdate extends AdminCommand {
 	public SpawnUpdate() {
 		super("spawnu", "Updates spawn data.");
 
-		setParamInfo(
+		setSyntaxInfo(
 			"<x|y|z|h> [value] - Update X, Y, or Z coordinate or the heading of the selected npc/gatherable (default: takes your current position, optional: the specified value).",
 			"<xyz|xyzh> - Update position or position and heading of the selected npc/gatherable to your own one.",
 			"<w> [walker_id] - Set walker data of the selected npc (default: remove walker data, optional: set walker id to npc).");

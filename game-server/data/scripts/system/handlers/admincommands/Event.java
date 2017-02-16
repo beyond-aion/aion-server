@@ -28,7 +28,7 @@ public class Event extends AdminCommand {
 		super("event", "Manages event functions and player event-states.");
 
 		// @formatter:off
-		setParamInfo(
+		setSyntaxInfo(
 			"<setStatus> [name] - Disables ap gain/loss for the given player and sets him to event state.",
 			"<setGroupStatus> [name] - Gets and sets the group of the given player to event state and disables ap gain/loss for them.",
 			"<setEnemy> <cancel|team|ffa> [name] - Sets the specific state (cancel: normal, team: everyone outside the players team is an enemy, ffa: everyone is an enemy).",

@@ -17,7 +17,7 @@ public class Classup extends ConsoleCommand {
 	public Classup() {
 		super("classup", "Promotes a players class.");
 
-		setParamInfo("<class> - Promotes your characters class to the one specified.");
+		setSyntaxInfo("<class> - Promotes your characters class to the one specified.");
 	}
 
 	@Override

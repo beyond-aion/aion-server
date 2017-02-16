@@ -38,7 +38,7 @@ public class Reload extends AdminCommand {
 	public Reload() {
 		super("reload", "Reloads templates or handlers (static data).");
 
-		setParamInfo(
+		setSyntaxInfo(
 			"<config> - Reloads all configuration settings.",
 			"<commands|ai> - Reloads the specified handlers.",
 			"<quests> - Reloads quest templates and handlers.",

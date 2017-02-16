@@ -19,7 +19,7 @@ public class Say extends AdminCommand {
 	public Say() {
 		super("say", "Let's your target say a message.");
 
-		setParamInfo("<message> - Sends the message as your target (npc only).");
+		setSyntaxInfo("<message> - Sends the message as your target (npc only).");
 	}
 
 	@Override

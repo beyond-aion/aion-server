@@ -26,7 +26,7 @@ public class Faction extends PlayerCommand {
 		super("faction", "Faction chat.");
 
 		String priceInfo = CustomConfig.FACTION_USE_PRICE > 0 ? " Price: " + CustomConfig.FACTION_USE_PRICE + " Kinah." : "";
-		setParamInfo("<message> - Sends the message to all players of your faction." + priceInfo);
+		setSyntaxInfo("<message> - Sends the message to all players of your faction." + priceInfo);
 	}
 
 	@Override

@@ -33,7 +33,7 @@ public class Preview extends PlayerCommand {
 	public Preview() {
 		super("preview", "Previews equipment.");
 
-		setParamInfo("<item> [color] - Previews the specified item on your character (default: standard item color, optional: dye item link/ID, color name or color HEX code).");
+		setSyntaxInfo("<item> [color] - Previews the specified item on your character (default: standard item color, optional: dye item link/ID, color name or color HEX code).");
 	}
 
 	@Override

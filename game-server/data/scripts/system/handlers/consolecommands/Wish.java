@@ -35,7 +35,7 @@ public class Wish extends ConsoleCommand {
 	public Wish() {
 		super("wish", "Spawns npcs and adds items.");
 
-		setParamInfo("<npc name> - Spawns the specified npc on your targets position.", "<count> <item name> - Adds the specified item to your target.",
+		setSyntaxInfo("<npc name> - Spawns the specified npc on your targets position.", "<count> <item name> - Adds the specified item to your target.",
 			"<item name> <enchant> - Adds the specified item with the enchant level to your target.");
 	}
 

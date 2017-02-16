@@ -21,7 +21,7 @@ public class Id extends PlayerCommand {
 	public Id() {
 		super("id", "Shows item/quest/npc IDs.");
 
-		setParamInfo(
+		setSyntaxInfo(
 			" - Shows the ID of the selected npc.",
 			"<item|quest> - Shows the ID of the specified item or quest."
 		);

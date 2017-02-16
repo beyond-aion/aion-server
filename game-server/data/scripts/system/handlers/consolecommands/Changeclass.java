@@ -17,7 +17,7 @@ public class Changeclass extends ConsoleCommand {
 	public Changeclass() {
 		super("changeclass", "Changes a players class.");
 
-		setParamInfo("<class> - Changes your characters class to the one specified.");
+		setSyntaxInfo("<class> - Changes your characters class to the one specified.");
 	}
 
 	@Override

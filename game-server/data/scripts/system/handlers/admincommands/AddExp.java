@@ -11,7 +11,7 @@ public class AddExp extends AdminCommand {
 	public AddExp() {
 		super("addexp", "Increases/decreases a players experience points.");
 
-		setParamInfo("<exp> - The experience points to add (may be negative).");
+		setSyntaxInfo("<exp> - The experience points to add (may be negative).");
 	}
 
 	@Override

@@ -18,7 +18,7 @@ public class Morph extends AdminCommand {
 	public Morph() {
 		super("morph", "Morphs a player into any npc.");
 
-		setParamInfo(
+		setSyntaxInfo(
 			" - morphs you into the npc you are targeting.",
 			"<id> - Morphs your target into the specified npc (0 to cancel)."
 		);

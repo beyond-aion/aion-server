@@ -19,7 +19,7 @@ public class Gag extends AdminCommand {
 	public Gag() {
 		super("gag", "Bans a player from all chats.");
 
-		setParamInfo(
+		setSyntaxInfo(
 			"<player> <duration> <reason> - Chat bans the player for the specified time in minutes.",
 			"<player> <remove> - Removes the chat ban of this player."
 		);

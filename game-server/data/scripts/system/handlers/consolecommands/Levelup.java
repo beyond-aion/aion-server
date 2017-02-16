@@ -16,7 +16,7 @@ public class Levelup extends ConsoleCommand {
 	public Levelup() {
 		super("levelup", "Levels a player up.");
 
-		setParamInfo("<value> - Levels your target up by the specified number of levels.");
+		setSyntaxInfo("<value> - Levels your target up by the specified number of levels.");
 	}
 
 	@Override

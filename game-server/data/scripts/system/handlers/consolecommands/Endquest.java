@@ -21,7 +21,7 @@ public class Endquest extends ConsoleCommand {
 	public Endquest() {
 		super("endquest", "Completes a quest.");
 
-		setParamInfo("<quest> - Completes the specified quest (without giving rewards).");
+		setSyntaxInfo("<quest> - Completes the specified quest (without giving rewards).");
 	}
 
 	@Override

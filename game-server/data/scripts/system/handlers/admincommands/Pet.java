@@ -23,7 +23,7 @@ public class Pet extends AdminCommand {
 	public Pet() {
 		super("pet", "Adds or removes a pet.");
 
-		setParamInfo(
+		setSyntaxInfo(
 			"<list> - Lists all available Pet IDs.",
 			"<add> <pet id> <name> - Adds the pet with the specified ID and names it.",
 			"<del> <pet id> - Deletes the pet with the specified ID."

@@ -22,7 +22,7 @@ public class Speed extends AdminCommand implements StatOwner {
 	public Speed() {
 		super("speed", "Sets your speed.");
 
-		setParamInfo("<0-100> - Set your speed to the specified value (0 to reset).");
+		setSyntaxInfo("<0-100> - Set your speed to the specified value (0 to reset).");
 	}
 
 	@Override

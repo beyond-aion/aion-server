@@ -40,7 +40,7 @@ public class Quest extends AdminCommand {
 		super("quest", "Handles quest states of your target.");
 
 		// @formatter:off
-		setParamInfo(
+		setSyntaxInfo(
 			"[player] <quest> <reset|start|delete> - Resets/starts/deletes the specified quest.",
 			"[player] <quest> <status> - Shows the quest status of the specified quest.",
 			"[player] <quest> <set> <status> <var> [varNum] - Sets the specified quest state (default: apply var to all varNums, optional: set var to varNum [0-5]).",

@@ -18,10 +18,10 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 public abstract class ChatCommand implements Comparable<ChatCommand> {
 
 	private static final Logger log = LoggerFactory.getLogger(ChatCommand.class);
-	private String prefix;
-	private String alias;
-	private String description;
-	private String[] paramInfo = {};
+	private final String prefix;
+	private final String alias;
+	private final String description;
+	private String syntaxInfo;
 	private byte level;
 
 	/**
@@ -45,7 +45,7 @@ public abstract class ChatCommand implements Comparable<ChatCommand> {
 			StringBuilder sb = new StringBuilder();
 			sb.append("Command: ").append(ChatUtil.color(getAliasWithPrefix(), Color.WHITE)).append("\n");
 			sb.append("\t").append((getDescription().isEmpty() ? "No description available." : getDescription())).append("\n");
-			sb.append(getFormattedSyntaxInfo());
+			sb.append(getSyntaxInfo());
 			sendMessagePackets(player, sb.toString());
 			return true;
 		}
@@ -78,33 +78,44 @@ public abstract class ChatCommand implements Comparable<ChatCommand> {
 	/**
 	 * Sets the command parameter info.<br>
 	 * This parameter info is needed to generate the syntax info in {@link #sendInfo(Player, String...)}.<br>
-	 * You can pass multiple comma separated <b>paramInfo</b> strings. Each string will result in a line of text output.
+	 * You can pass multiple comma separated <b>syntaxInfo</b> strings. Each string will result in a line of text output.
 	 * 
-	 * @param paramInfo
+	 * @param syntaxInfo
 	 *          strings should look like this:<br>
 	 *          &nbsp;&nbsp;" - Short description for no parameter.",<br>
 	 *          &nbsp;&nbsp;"&lt;param1a|param1b&gt; - Short parameter description.",<br>
 	 *          &nbsp;&nbsp;"&lt;param1&gt; &lt;param2&gt; [optional param3] - Short parameter description."
 	 */
-	protected final void setParamInfo(String... paramInfo) {
-		this.paramInfo = paramInfo;
+	protected final void setSyntaxInfo(String... lines) {
+		this.syntaxInfo = parseSyntaxInfo(lines);
 	}
 
-	private final String[] getParamInfo() {
-		return paramInfo;
+	private final String getSyntaxInfo() {
+		if (syntaxInfo == null) // init default info if handler did not set any syntax info
+			setSyntaxInfo();
+		return syntaxInfo;
 	}
 
-	private final String getFormattedSyntaxInfo() {
+	private final String parseSyntaxInfo(String... lines) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Syntax:");
-		if (getParamInfo().length > 0) {
-			for (String info : getParamInfo()) {
-				if (StringUtils.startsWithAny(info, " ", "<", "[", "-"))
-					sb.append("\n\t" + getAliasWithPrefix() + " " + info.trim());
-				else
-					sb.append("\n" + info);
+		if (lines.length > 0) {
+			for (String info : lines) {
+				if (StringUtils.startsWithAny(info, " ", "<", "[")) {
+					sb.append("\n\t").append(ChatUtil.color(getAliasWithPrefix(), Color.WHITE)).append(' ');
+					String[] split = info.split(" - ", 2);
+					if (split.length == 2) {
+						sb.append(split[0].replaceAll("([^<>\\[\\]| ]+)", ChatUtil.color("$1", Color.WHITE)).trim());
+						sb.append(" - ");
+						sb.append(split[1]);
+					} else {
+						sb.append(info);
+					}
+				} else {
+					sb.append("\n").append(info);
+				}
 			}
-			if (sb.toString().contains("["))
+			if (sb.indexOf("[") > -1)
 				sb.append("\nNote: Parameters enclosed in square brackets are optional.");
 		} else {
 			sb.append("\n\tNo syntax info available.");
@@ -146,7 +157,7 @@ public abstract class ChatCommand implements Comparable<ChatCommand> {
 	/**
 	 * Sends an info message to the player.<br>
 	 * If no (or <tt>null</tt>) message parameter is specified, the default syntax info will be sent.<br>
-	 * You can set syntax info via {@link #setParamInfo(String...)}
+	 * You can set syntax info via {@link #setSyntaxInfo(String...)}
 	 * 
 	 * @param player
 	 *          player who will receive the message
@@ -160,7 +171,7 @@ public abstract class ChatCommand implements Comparable<ChatCommand> {
 				sb.append((i > 0 ? "\n" : "") + message[i]);
 			}
 		} else {
-			sb.append(getFormattedSyntaxInfo());
+			sb.append(getSyntaxInfo());
 		}
 		sendMessagePackets(player, sb.toString());
 	}
