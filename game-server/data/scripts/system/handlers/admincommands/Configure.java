@@ -1,6 +1,7 @@
 package admincommands;
 
 import java.lang.reflect.Field;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -99,8 +100,10 @@ public class Configure extends AdminCommand {
 				StringBuilder sb = new StringBuilder("List of available properties for ").append(cls.getSimpleName()).append(":");
 				for (Field field : cls.getDeclaredFields()) {
 					try {
-						String val = String.valueOf(field.get(null)); // can throw an exception if not accessible
-						sb.append("\n\t").append(field.getName()).append("\t-\t(").append(val).append(")");
+						Object value = field.get(null);
+						if (value != null && value.getClass().isArray())
+							value = Arrays.toString((Object[]) value);
+						sb.append("\n\t").append(field.getName()).append("\t=\t").append(value);
 					} catch (IllegalArgumentException | IllegalAccessException e) { // skip this property
 					}
 				}
