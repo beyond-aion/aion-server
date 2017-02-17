@@ -55,9 +55,9 @@ public class CM_SUMMON_ATTACK extends AionClientPacket {
 		}
 
 		VisibleObject obj = summon.getKnownList().getObject(targetObjId);
-		if (obj instanceof Creature) {
+		if (obj instanceof Creature)
 			summon.getController().attackTarget((Creature) obj, time, false);
-		} else
-			log.warn(player + " tried to use summon attack on a wrong target: " + obj);
+		else
+			log.warn(player + " tried to use summon attack on a wrong target: " + obj + " id: " + targetObjId);
 	}
 }
