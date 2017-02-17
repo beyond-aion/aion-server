@@ -151,12 +151,12 @@ public class PlayerController extends CreatureController<Player> {
 			} else if (creature instanceof Player) {
 				Player player = (Player) creature;
 				PacketSendUtility.sendPacket(getOwner(), new SM_PLAYER_INFO(player, getOwner().isAggroIconTo(player)));
-				Pet pet = player.getPet();
-				if (pet != null) { // pet must spawn after player, otherwise it will not be displayed
-					if (!getOwner().getKnownList().knows(pet)) // update pos + knownlist, since client sends pet position only every 50m
+				Pet pet = player.getPet(); // pet spawn packet must be sent after SM_PLAYER_INFO, otherwise the pet will not be displayed
+				if (pet != null && pet.isSpawned()) { // if it's not spawned, it'll spawn after the player and no action is needed
+					if (getOwner().getKnownList().knows(pet)) // if it's already known, it means we have suppressed addVisualObject() before
+						getOwner().getKnownList().addVisualObject(pet); // send pet spawn packet
+					else // update pos + knownlist, since client sends pet position only every 50m
 						World.getInstance().updatePosition(pet, player.getX(), player.getY(), player.getZ(), player.getHeading(), true);
-					else
-						getOwner().getKnownList().addVisualObject(pet);
 				}
 				PacketSendUtility.sendPacket(getOwner(), new SM_MOTION(player.getObjectId(), player.getMotions().getActiveMotions()));
 				if (player.isInPlayerMode(PlayerMode.RIDE))
@@ -473,7 +473,7 @@ public class PlayerController extends CreatureController<Player> {
 		boolean allowGodstoneActivation) {
 		if (getOwner().getLifeStats().isAlreadyDead())
 			return;
-		
+
 		if (getOwner().isProtectionActive())
 			return;
 

@@ -1,12 +1,9 @@
 package com.aionemu.gameserver.model.gameobjects;
 
-import java.time.format.DateTimeFormatter;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-
-import org.apache.commons.lang3.exception.ExceptionUtils;
 
 import com.aionemu.gameserver.ai.AI;
 import com.aionemu.gameserver.ai.AIEngine;
@@ -34,7 +31,6 @@ import com.aionemu.gameserver.model.templates.zone.ZoneType;
 import com.aionemu.gameserver.skillengine.effect.AbnormalState;
 import com.aionemu.gameserver.skillengine.model.Skill;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
-import com.aionemu.gameserver.utils.time.ServerTime;
 import com.aionemu.gameserver.world.MapRegion;
 import com.aionemu.gameserver.world.WorldPosition;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
@@ -49,10 +45,6 @@ import javolution.util.FastMap;
  */
 public abstract class Creature extends VisibleObject {
 
-	/**
-	 * XXX remove me later
-	 */
-	private String despawnCause;
 	private AI ai;
 
 	private CreatureLifeStats<? extends Creature> lifeStats;
@@ -95,17 +87,8 @@ public abstract class Creature extends VisibleObject {
 		this.aggroList = createAggroList();
 	}
 
-	public String getDespawnCause() {
-		return despawnCause;
-	}
-
-	public void setDespawnCause() {
-		Throwable t = new Throwable();
-		despawnCause = ExceptionUtils.getStackTrace(t).replace(t.getClass().getName(), ServerTime.now().format(DateTimeFormatter.ISO_OFFSET_DATE_TIME));
-	}
-
 	public MoveController getMoveController() {
-		return this.moveController;
+		return moveController;
 	}
 
 	protected AggroList createAggroList() {

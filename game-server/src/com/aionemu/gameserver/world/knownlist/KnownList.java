@@ -180,7 +180,7 @@ public class KnownList {
 	 * Find objects that are in visibility range.
 	 */
 	protected void findVisibleObjects() {
-		if (owner == null || !owner.isSpawned())
+		if (!owner.isSpawned())
 			return;
 
 		WorldPosition position = owner.getPosition();
