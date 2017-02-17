@@ -621,11 +621,6 @@ public class PlayerController extends CreatureController<Player> {
 	}
 
 	@Override
-	public Player getOwner() {
-		return (Player) super.getOwner();
-	}
-
-	@Override
 	public void onDialogSelect(int dialogActionId, int prevDialogId, Player player, int questId, int extendedRewardIndex) {
 		switch (dialogActionId) {
 			case BUY:

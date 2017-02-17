@@ -28,7 +28,7 @@ public abstract class VisibleObjectController<T extends VisibleObject> {
 	/**
 	 * Get owner (controller object).
 	 */
-	public T getOwner() {
+	public final T getOwner() {
 		return owner;
 	}
 

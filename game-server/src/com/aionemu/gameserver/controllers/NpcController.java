@@ -235,11 +235,6 @@ public class NpcController extends CreatureController<Npc> {
 	}
 
 	@Override
-	public Npc getOwner() {
-		return (Npc) super.getOwner();
-	}
-
-	@Override
 	public void onDialogRequest(Player player) {
 		// notify npc dialog request observer
 		if (!getOwner().getObjectTemplate().canInteract())

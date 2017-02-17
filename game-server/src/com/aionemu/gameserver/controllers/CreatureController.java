@@ -63,7 +63,7 @@ import com.aionemu.gameserver.world.zone.ZoneUpdateService;
  * @author -Nemesiss-, ATracer(2009-09-29), Sarynth
  * @modified by Wakizashi
  */
-public abstract class CreatureController<T extends Creature> extends VisibleObjectController<Creature> {
+public abstract class CreatureController<T extends Creature> extends VisibleObjectController<T> {
 
 	private static final Logger log = LoggerFactory.getLogger(CreatureController.class);
 	private ConcurrentHashMap<Integer, Future<?>> tasks = new ConcurrentHashMap<>();
