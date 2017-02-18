@@ -497,18 +497,19 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 		});
 	}
 
-	public void abortCast() {
+	public Skill abortCast() {
 		Creature creature = getOwner();
-		Skill skill = creature.getCastingSkill();
-		if (skill == null)
-			return;
-		creature.setCasting(null);
-		if (creature instanceof Npc) {
-			removeQueuedSkill((Npc) creature);
-			((Npc) creature).getGameStats().setLastSkill(null);
+		Skill castingSkill = creature.getCastingSkill();
+		if (castingSkill != null) {
+			castingSkill.cancelCast();
+			creature.setCasting(null);
+			if (creature instanceof Npc) {
+				((NpcAI) creature.getAi()).setSubStateIfNot(AISubState.NONE);
+				removeQueuedSkill((Npc) creature);
+				((Npc) creature).getGameStats().setLastSkill(null);
+			}
 		}
-		if (creature.getSkillNumber() > 0)
-			creature.setSkillNumber(creature.getSkillNumber() - 1);
+		return castingSkill;
 	}
 
 	public void cancelCurrentSkill(Creature lastAttacker) {
@@ -519,26 +520,14 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 	 * Cancel current skill and remove cooldown
 	 */
 	public void cancelCurrentSkill(Creature lastAttacker, SM_SYSTEM_MESSAGE msg) {
-		if (getOwner().getCastingSkill() == null) {
+		Skill castingSkill = abortCast();
+		if (castingSkill == null)
 			return;
-		}
 
-		Creature creature = getOwner();
-		Skill castingSkill = creature.getCastingSkill();
-		castingSkill.cancelCast();
-		creature.removeSkillCoolDown(castingSkill.getSkillTemplate().getCooldownId());
-		creature.setCasting(null);
-		if (creature instanceof Npc) {
-			removeQueuedSkill((Npc) creature);
-			((Npc) creature).getGameStats().setLastSkill(null);
-		}
-		PacketSendUtility.broadcastPacketAndReceive(creature, new SM_SKILL_CANCEL(creature, castingSkill.getSkillTemplate().getSkillId()));
+		PacketSendUtility.broadcastPacketAndReceive(getOwner(), new SM_SKILL_CANCEL(getOwner(), castingSkill.getSkillTemplate().getSkillId()));
 		if (getOwner().getAi() instanceof NpcAI) {
 			NpcAI npcAI = (NpcAI) getOwner().getAi();
-			npcAI.setSubStateIfNot(AISubState.NONE);
 			npcAI.onGeneralEvent(AIEventType.ATTACK_COMPLETE);
-			if (creature.getSkillNumber() > 0)
-				creature.setSkillNumber(creature.getSkillNumber() - 1);
 		}
 		if (lastAttacker instanceof Player) {
 			PacketSendUtility.sendPacket((Player) lastAttacker, SM_SYSTEM_MESSAGE.STR_SKILL_TARGET_SKILL_CANCELED());
