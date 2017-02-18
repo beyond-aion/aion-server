@@ -5,7 +5,6 @@ import static com.aionemu.gameserver.model.DialogAction.*;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.Future;
 
 import javax.annotation.Nonnull;
 
@@ -690,15 +689,7 @@ public class PlayerController extends CreatureController<Player> {
 			AttackUtil.cancelCastOn(getOwner());
 			AttackUtil.removeTargetFrom(getOwner());
 			PacketSendUtility.broadcastPacket(getOwner(), new SM_PLAYER_STATE(getOwner()), true);
-			Future<?> task = ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-				@Override
-				public void run() {
-					stopProtectionActiveTask();
-				}
-
-			}, 60000);
-			addTask(TaskId.PROTECTION_ACTIVE, task);
+			addTask(TaskId.PROTECTION_ACTIVE, ThreadPoolManager.getInstance().schedule(() -> stopProtectionActiveTask(), 60000));
 		}
 	}
 

@@ -264,12 +264,6 @@ public class World {
 	 * @param newHeading
 	 */
 	public void updatePosition(VisibleObject object, float newX, float newY, float newZ, byte newHeading) {
-		if (object instanceof Player) {
-			Player player = (Player) object;
-			if (player.isProtectionActive() && (player.getX() != newX || player.getY() != newY || player.getZ() > newZ + 0.5f)) {
-				((Player) object).getController().stopProtectionActiveTask();
-			}
-		}
 		updatePosition(object, newX, newY, newZ, newHeading, true);
 	}
 

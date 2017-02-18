@@ -1,7 +1,8 @@
 package ai.instance.aturamSkyFortress;
 
-import com.aionemu.gameserver.ai.AIName;
 import static com.aionemu.gameserver.model.DialogAction.*;
+
+import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.model.DialogPage;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -40,7 +41,8 @@ public class SteamTachysphereAI extends ActionItemNpcAI {
 			if (qs != null && qs.getStatus() == QuestStatus.COMPLETE) {
 				TeleportService.teleportTo(player, 300240000, 175.28925f, 625.1088f, 901.009f, (byte) 33);
 				PacketSendUtility.sendPacket(player, new SM_PLAY_MOVIE(0, 0, 471, 16777216));
-				player.getController().stopProtectionActiveTask();
+				if (player.isProtectionActive())
+					player.getController().stopProtectionActiveTask();
 				SkillEngine.getInstance().getSkill(player, 19502, 1, player).useNoAnimationSkill();
 				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 0));
 			}
