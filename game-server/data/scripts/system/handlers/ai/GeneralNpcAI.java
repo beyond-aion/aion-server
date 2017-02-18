@@ -41,6 +41,14 @@ public class GeneralNpcAI extends NpcAI {
 	}
 
 	@Override
+	protected void handleCreatureNotSee(Creature creature) {
+		if (creature.equals(getTarget())) {
+			getOwner().getController().abortCast();
+			onGeneralEvent(AIEventType.TARGET_TOOFAR);
+		}
+	}
+
+	@Override
 	protected void handleDialogStart(Player player) {
 		TalkEventHandler.onTalk(this, player);
 	}
@@ -91,7 +99,7 @@ public class GeneralNpcAI extends NpcAI {
 		super.handleMoveArrived();
 		MoveEventHandler.onMoveArrived(this);
 	}
-	
+
 	@Override
 	public void handleCreatureDetected(Creature creature) {
 		if (getOwner().isInInstance())
@@ -102,7 +110,8 @@ public class GeneralNpcAI extends NpcAI {
 	protected boolean canHandleEvent(AIEventType eventType) {
 		switch (eventType) {
 			case CREATURE_NEEDS_SUPPORT:
-				return (getState() == AIState.IDLE || getState() == AIState.WALKING) && DataManager.TRIBE_RELATIONS_DATA.hasSupportRelations(getOwner().getTribe());
+				return (getState() == AIState.IDLE || getState() == AIState.WALKING)
+					&& DataManager.TRIBE_RELATIONS_DATA.hasSupportRelations(getOwner().getTribe());
 		}
 		return super.canHandleEvent(eventType);
 	}

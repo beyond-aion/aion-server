@@ -59,12 +59,12 @@ public class NpcController extends CreatureController<Npc> {
 
 	@Override
 	public void notSee(VisibleObject object, ObjectDeleteAnimation animation) {
-		super.notSee(object, animation);
 		if (object instanceof Creature) {
 			Creature creature = (Creature) object;
-			getOwner().getAi().onCreatureEvent(AIEventType.CREATURE_NOT_SEE, creature);
 			getOwner().getAggroList().remove(creature);
+			getOwner().getAi().onCreatureEvent(AIEventType.CREATURE_NOT_SEE, creature);
 		}
+		super.notSee(object, animation);
 	}
 
 	@Override
