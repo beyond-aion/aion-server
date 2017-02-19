@@ -811,60 +811,57 @@ public class EffectController {
 		});
 	}
 
-	/**
-	 * ABNORMAL EFFECTS
-	 */
-
-	public void setAbnormal(int mask) {
-		owner.getObserveController().notifyAbnormalSettedObservers(AbnormalState.getStateById(mask));
-		abnormals |= mask;
+	public void setAbnormal(AbnormalState state) {
+		owner.getObserveController().notifyAbnormalSettedObservers(state);
+		abnormals |= state.getId();
 
 		// TODO move to observer?
 		// if player is sitting when setting certain abnormal states, he is forcefully made to stand up
 		if (owner instanceof Player && owner.isInState(CreatureState.RESTING)) {
-			if (this.isInAnyAbnormalState(AbnormalState.AUTOMATICALLY_STANDUP)) {
+			if (isInAnyAbnormalState(AbnormalState.AUTOMATICALLY_STANDUP)) {
 				owner.unsetState(CreatureState.RESTING);
 				PacketSendUtility.broadcastPacket((Player) owner, new SM_EMOTION(owner, EmotionType.STAND), true);
 			}
 		}
 	}
 
-	public void unsetAbnormal(int mask) {
+	public void unsetAbnormal(AbnormalState state) {
 		int count = 0;
 		for (Effect effect : abnormalEffectMap.values()) {
-			if ((effect.getAbnormals() & mask) == mask)
-				count++;
+			if ((effect.getAbnormals() & state.getId()) == state.getId()) {
+				if (++count == 2)
+					return;
+			}
 		}
-		if (count <= 1)
-			abnormals &= ~mask;
+		abnormals &= ~state.getId();
 	}
 
 	/**
 	 * Used for checking unique abnormal states
 	 * 
-	 * @param id
+	 * @param state
 	 * @return
 	 */
-	public boolean isAbnormalSet(AbnormalState id) {
-		return (abnormals & id.getId()) == id.getId();
+	public boolean isAbnormalSet(AbnormalState state) {
+		return (abnormals & state.getId()) == state.getId();
 	}
 
 	/**
 	 * Used for compound abnormal state checks
 	 * 
-	 * @param id
+	 * @param state
 	 * @return
 	 */
-	public boolean isAbnormalState(AbnormalState id) {
-		if (id == AbnormalState.BUFF)
+	public boolean isAbnormalState(AbnormalState state) {
+		if (state == AbnormalState.BUFF)
 			return abnormals == 0;
-		return (abnormals & id.getId()) == id.getId();
+		return (abnormals & state.getId()) == state.getId();
 	}
 
-	public boolean isInAnyAbnormalState(AbnormalState id) {
-		if (id == AbnormalState.BUFF)
+	public boolean isInAnyAbnormalState(AbnormalState state) {
+		if (state == AbnormalState.BUFF)
 			return abnormals == 0;
-		return (abnormals & id.getId()) != 0;
+		return (abnormals & state.getId()) != 0;
 	}
 
 	public int getAbnormals() {

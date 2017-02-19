@@ -42,7 +42,7 @@ public class PadmarashkasCaveInstance extends GeneralInstanceHandler {
 					killedPadmarashkaProtector.set(0);
 					final Npc padmarashka = getNpc(218756);
 					if (padmarashka != null && !padmarashka.getLifeStats().isAlreadyDead()) {
-						padmarashka.getEffectController().unsetAbnormal(AbnormalState.SLEEP.getId());
+						padmarashka.getEffectController().unsetAbnormal(AbnormalState.SLEEP);
 						// padmarashka.getEffectController().broadCastEffects(0);
 						SkillEngine.getInstance().getSkill(padmarashka, 19187, 55, padmarashka).useNoAnimationSkill();
 						padmarashka.getEffectController().removeEffect(19186); // skill should handle this TODO: fix

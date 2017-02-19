@@ -40,12 +40,12 @@ public class SpinEffect extends EffectTemplate {
 		if (effected instanceof Player)
 			((Player) effected).getFlyController().onStopGliding();
 		effect.getEffected().getEffectController().removeParalyzeEffects();
-		effected.getEffectController().setAbnormal(AbnormalState.SPIN.getId());
-		effect.setAbnormal(AbnormalState.SPIN.getId());
+		effected.getEffectController().setAbnormal(AbnormalState.SPIN);
+		effect.setAbnormal(AbnormalState.SPIN);
 	}
 
 	@Override
 	public void endEffect(Effect effect) {
-		effect.getEffected().getEffectController().unsetAbnormal(AbnormalState.SPIN.getId());
+		effect.getEffected().getEffectController().unsetAbnormal(AbnormalState.SPIN);
 	}
 }

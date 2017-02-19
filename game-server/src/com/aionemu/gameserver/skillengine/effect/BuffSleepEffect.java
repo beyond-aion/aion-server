@@ -23,8 +23,8 @@ public class BuffSleepEffect extends SleepEffect {
 	public void startEffect(final Effect effect) {
 		final Creature effected = effect.getEffected();
 		effected.getController().cancelCurrentSkill(effect.getEffector());
-		effect.setAbnormal(AbnormalState.SLEEP.getId());
-		effected.getEffectController().setAbnormal(AbnormalState.SLEEP.getId());
+		effect.setAbnormal(AbnormalState.SLEEP);
+		effected.getEffectController().setAbnormal(AbnormalState.SLEEP);
 	}
 
 }

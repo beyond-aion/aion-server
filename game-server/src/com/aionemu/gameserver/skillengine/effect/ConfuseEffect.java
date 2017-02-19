@@ -26,14 +26,14 @@ public class ConfuseEffect extends EffectTemplate {
 
 	@Override
 	public void startEffect(Effect effect) {
-		effect.getEffected().getEffectController().setAbnormal(AbnormalState.CONFUSE.getId());
-		effect.setAbnormal(AbnormalState.CONFUSE.getId());
+		effect.getEffected().getEffectController().setAbnormal(AbnormalState.CONFUSE);
+		effect.setAbnormal(AbnormalState.CONFUSE);
 		//TODO implement move events (similar to fear)
 	}
 
 	@Override
 	public void endEffect(Effect effect) {
-		effect.getEffected().getEffectController().unsetAbnormal(AbnormalState.CONFUSE.getId());
+		effect.getEffected().getEffectController().unsetAbnormal(AbnormalState.CONFUSE);
 	}
 
 }

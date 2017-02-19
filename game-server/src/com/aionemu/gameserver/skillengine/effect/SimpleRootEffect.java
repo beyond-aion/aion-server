@@ -42,8 +42,8 @@ public class SimpleRootEffect extends EffectTemplate {
 		byte heading = effect.getEffector().getHeading();
 		effect.setSpellStatus(SpellStatus.NONE);
 		effect.setSkillMoveType(SkillMoveType.KNOCKBACK);
-		effect.getEffected().getEffectController().setAbnormal(AbnormalState.KNOCKBACK.getId());
-		effect.setAbnormal(AbnormalState.KNOCKBACK.getId());
+		effect.getEffected().getEffectController().setAbnormal(AbnormalState.KNOCKBACK);
+		effect.setAbnormal(AbnormalState.KNOCKBACK);
 		double radian = Math.toRadians(MathUtil.convertHeadingToDegree(heading));
 		float x1 = (float) (Math.cos(radian) * 0.7f);
 		float y1 = (float) (Math.sin(radian) * 0.7f);
@@ -65,6 +65,6 @@ public class SimpleRootEffect extends EffectTemplate {
 
 	@Override
 	public void endEffect(Effect effect) {
-		effect.getEffected().getEffectController().unsetAbnormal(AbnormalState.KNOCKBACK.getId());
+		effect.getEffected().getEffectController().unsetAbnormal(AbnormalState.KNOCKBACK);
 	}
 }

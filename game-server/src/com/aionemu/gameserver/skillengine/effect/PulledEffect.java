@@ -56,12 +56,12 @@ public class PulledEffect extends EffectTemplate {
 		World.getInstance().updatePosition(effected, effect.getTargetX(), effect.getTargetY(), effect.getTargetZ(), effected.getHeading());
 		PacketSendUtility.broadcastPacketAndReceive(effected, new SM_FORCED_MOVE(effect.getEffector(), effected.getObjectId(), effect.getTargetX(),
 			effect.getTargetY(), effect.getTargetZ()));
-		effect.getEffected().getEffectController().setAbnormal(AbnormalState.PULLED.getId());
-		effect.setAbnormal(AbnormalState.PULLED.getId());
+		effect.getEffected().getEffectController().setAbnormal(AbnormalState.PULLED);
+		effect.setAbnormal(AbnormalState.PULLED);
 	}
 
 	@Override
 	public void endEffect(Effect effect) {
-		effect.getEffected().getEffectController().unsetAbnormal(AbnormalState.PULLED.getId());
+		effect.getEffected().getEffectController().unsetAbnormal(AbnormalState.PULLED);
 	}
 }

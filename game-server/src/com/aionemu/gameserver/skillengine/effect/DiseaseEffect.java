@@ -29,14 +29,14 @@ public class DiseaseEffect extends EffectTemplate {
 	@Override
 	public void startEffect(Effect effect) {
 		Creature effected = effect.getEffected();
-		effect.setAbnormal(AbnormalState.DISEASE.getId());
-		effected.getEffectController().setAbnormal(AbnormalState.DISEASE.getId());
+		effect.setAbnormal(AbnormalState.DISEASE);
+		effected.getEffectController().setAbnormal(AbnormalState.DISEASE);
 	}
 
 	@Override
 	public void endEffect(Effect effect) {
 		if (effect.getEffected().getEffectController().isAbnormalSet(AbnormalState.DISEASE))
-			effect.getEffected().getEffectController().unsetAbnormal(AbnormalState.DISEASE.getId());
+			effect.getEffected().getEffectController().unsetAbnormal(AbnormalState.DISEASE);
 	}
 
 }

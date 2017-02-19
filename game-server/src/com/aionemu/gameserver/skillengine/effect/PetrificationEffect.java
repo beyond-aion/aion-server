@@ -35,13 +35,13 @@ public class PetrificationEffect extends EffectTemplate {
 		if (effected instanceof Player && ((Player) effected).isInGlidingState()) {
 			((Player) effected).getFlyController().onStopGliding();
 		}
-		effect.getEffected().getEffectController().setAbnormal(AbnormalState.PETRIFICATION.getId());
-		effect.setAbnormal(AbnormalState.PETRIFICATION.getId());
+		effect.getEffected().getEffectController().setAbnormal(AbnormalState.PETRIFICATION);
+		effect.setAbnormal(AbnormalState.PETRIFICATION);
 	}
 
 	@Override
 	public void endEffect(Effect effect) {
-		effect.getEffected().getEffectController().unsetAbnormal(AbnormalState.PETRIFICATION.getId());
+		effect.getEffected().getEffectController().unsetAbnormal(AbnormalState.PETRIFICATION);
 	}
 
 }

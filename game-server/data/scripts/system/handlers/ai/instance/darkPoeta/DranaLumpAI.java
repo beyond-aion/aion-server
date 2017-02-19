@@ -18,7 +18,7 @@ public class DranaLumpAI extends ActionItemNpcAI {
 		// final Creature effected = getOwner().getEffected();
 		// effected.getController().cancelCurrentSkill();
 		// effected.getMoveController().abortMove();
-		// effect.setAbnormal(AbnormalState.PARALYZE.getId());
+		// effect.setAbnormal(AbnormalState.PARALYZE);
 		int skillId = 0;
 		int level = 0;
 		switch (getNpcId()) {

@@ -36,8 +36,8 @@ public class RootEffect extends EffectTemplate {
 	@Override
 	public void startEffect(final Effect effect) {
 		final Creature effected = effect.getEffected();
-		effected.getEffectController().setAbnormal(AbnormalState.ROOT.getId());
-		effect.setAbnormal(AbnormalState.ROOT.getId());
+		effected.getEffectController().setAbnormal(AbnormalState.ROOT);
+		effect.setAbnormal(AbnormalState.ROOT);
 		// PacketSendUtility.broadcastPacketAndReceive(effected, new SM_TARGET_IMMOBILIZE(effected));
 		if (effected instanceof Player)
 			((Player) effected).getFlyController().onStopGliding();
@@ -57,7 +57,7 @@ public class RootEffect extends EffectTemplate {
 
 	@Override
 	public void endEffect(Effect effect) {
-		effect.getEffected().getEffectController().unsetAbnormal(AbnormalState.ROOT.getId());
+		effect.getEffected().getEffectController().unsetAbnormal(AbnormalState.ROOT);
 		ActionObserver observer = effect.getActionObserver(position);
 		if (observer != null)
 			effect.getEffected().getObserveController().removeObserver(observer);

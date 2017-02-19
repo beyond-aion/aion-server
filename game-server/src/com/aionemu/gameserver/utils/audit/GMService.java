@@ -52,7 +52,7 @@ public class GMService {
 			String delimiter = "=============================";
 			StringBuilder sb = new StringBuilder(delimiter);
 			if (AdminConfig.LOGIN_INVISIBLE) {
-				player.getEffectController().setAbnormal(AbnormalState.HIDE.getId());
+				player.getEffectController().setAbnormal(AbnormalState.HIDE);
 				player.setVisualState(CreatureVisualState.HIDE20);
 				PacketSendUtility.broadcastPacket(player, new SM_PLAYER_STATE(player), true);
 				sb.append("\n>> Connection in Invisible mode <<");

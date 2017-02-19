@@ -60,12 +60,4 @@ public enum AbnormalState {
 	public int getId() {
 		return id;
 	}
-
-	public static AbnormalState getStateById(int id) {
-		for (AbnormalState as : values()) {
-			if (as.getId() == id)
-				return as;
-		}
-		return null;
-	}
 }

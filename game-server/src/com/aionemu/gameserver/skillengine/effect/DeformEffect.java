@@ -27,13 +27,13 @@ public class DeformEffect extends TransformEffect {
 	@Override
 	public void startEffect(Effect effect) {
 		super.startEffect(effect);
-		effect.getEffected().getEffectController().setAbnormal(AbnormalState.DEFORM.getId());
-		effect.setAbnormal(AbnormalState.DEFORM.getId());
+		effect.getEffected().getEffectController().setAbnormal(AbnormalState.DEFORM);
+		effect.setAbnormal(AbnormalState.DEFORM);
 	}
 
 	@Override
 	public void endEffect(Effect effect) {
 		super.endEffect(effect);
-		effect.getEffected().getEffectController().unsetAbnormal(AbnormalState.DEFORM.getId());
+		effect.getEffected().getEffectController().unsetAbnormal(AbnormalState.DEFORM);
 	}
 }

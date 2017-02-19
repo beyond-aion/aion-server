@@ -45,8 +45,8 @@ public abstract class AbstractOverTimeEffect extends EffectTemplate {
 		long waitingTime = (checktime > getDuration2() ? checktime - getDuration2() : checktime) - 800;
 
 		if (abnormal != null) {
-			effect.setAbnormal(abnormal.getId());
-			effected.getEffectController().setAbnormal(abnormal.getId());
+			effect.setAbnormal(abnormal);
+			effected.getEffectController().setAbnormal(abnormal);
 		}
 		// TODO figure out what to do with such cases
 		if (checktime == 0)
@@ -63,7 +63,7 @@ public abstract class AbstractOverTimeEffect extends EffectTemplate {
 
 	public void endEffect(Effect effect, AbnormalState abnormal) {
 		if (abnormal != null)
-			effect.getEffected().getEffectController().unsetAbnormal(abnormal.getId());
+			effect.getEffected().getEffectController().unsetAbnormal(abnormal);
 	}
 
 }
