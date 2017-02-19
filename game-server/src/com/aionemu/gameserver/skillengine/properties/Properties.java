@@ -8,6 +8,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
 import com.aionemu.gameserver.model.gameobjects.Creature;
+import com.aionemu.gameserver.skillengine.effect.AbnormalState;
 import com.aionemu.gameserver.skillengine.model.Skill;
 
 /**
@@ -20,16 +21,16 @@ public class Properties {
 	@XmlAttribute(name = "first_target", required = true)
 	protected FirstTargetAttribute firstTarget;
 
-	@XmlAttribute(name = "first_target_range", required = true)
+	@XmlAttribute(name = "first_target_range")
 	protected int firstTargetRange;
 
 	@XmlAttribute(name = "awr")
 	protected boolean addWeaponRange;
 
-	@XmlAttribute(name = "target_relation", required = true)
+	@XmlAttribute(name = "target_relation")
 	protected TargetRelationAttribute targetRelation;
 
-	@XmlAttribute(name = "target_type", required = true)
+	@XmlAttribute(name = "target_type")
 	protected TargetRangeAttribute targetType;
 
 	@XmlAttribute(name = "target_distance")
@@ -39,7 +40,7 @@ public class Properties {
 	protected int targetMaxCount;
 
 	@XmlAttribute(name = "target_status")
-	private List<String> targetStatus;
+	private List<AbnormalState> targetStatus;
 
 	@XmlAttribute(name = "revision_distance")
 	protected int revisionDistance;
@@ -60,11 +61,11 @@ public class Properties {
 	protected AreaDirections direction = AreaDirections.NONE;
 
 	@XmlAttribute(name = "target_species")
-	protected TargetSpeciesAttribute targetSpecies = TargetSpeciesAttribute.ALL;
-	
+	protected TargetSpeciesAttribute targetSpecies;
+
 	@XmlAttribute(name = "ineffective_range")
 	protected int ineffectiveRange;
-	
+
 	/**
 	 * @param skill
 	 */
@@ -89,18 +90,18 @@ public class Properties {
 				return false;
 			}
 		}
-		if (targetType != null) {
-			if (!MaxCountProperty.set(skill, this)) {
-				return false;
-			}
-		}
 		if (targetStatus != null) {
 			if (!TargetStatusProperty.set(skill, this)) {
 				return false;
 			}
 		}
-		if (targetSpecies != TargetSpeciesAttribute.ALL) {
+		if (targetSpecies != null) {
 			if (!TargetSpeciesProperty.set(skill, this)) {
+				return false;
+			}
+		}
+		if (targetType != null) {
+			if (!MaxCountProperty.set(skill, this)) {
 				return false;
 			}
 		}
@@ -130,18 +131,18 @@ public class Properties {
 				return false;
 			}
 		}
-		if (targetType != null) {
-			if (!MaxCountProperty.set(skill, this)) {
-				return false;
-			}
-		}
 		if (targetStatus != null) {
 			if (!TargetStatusProperty.set(skill, this)) {
 				return false;
 			}
 		}
-		if (targetSpecies != TargetSpeciesAttribute.ALL) {
+		if (targetSpecies != null) {
 			if (!TargetSpeciesProperty.set(skill, this)) {
+				return false;
+			}
+		}
+		if (targetType != null) {
+			if (!MaxCountProperty.set(skill, this)) {
 				return false;
 			}
 		}
@@ -176,7 +177,7 @@ public class Properties {
 		return targetMaxCount;
 	}
 
-	public List<String> getTargetStatus() {
+	public List<AbnormalState> getTargetStatus() {
 		return targetStatus;
 	}
 
@@ -212,7 +213,7 @@ public class Properties {
 		CAST_START,
 		CAST_END;
 	}
-	
+
 	public int getIneffectiveRange() {
 		return ineffectiveRange;
 	}

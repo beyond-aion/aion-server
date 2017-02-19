@@ -44,10 +44,6 @@ public class PlayerRestrictions extends AbstractRestrictions {
 		if (skill == null)
 			return false;
 
-		// dont allow to use skills in Fly Teleport state
-		if (target instanceof Player && ((Player) target).isProtectionActive())
-			return false;
-
 		if (player != target && target instanceof Player) {
 			Player tPlayer = (Player) target;
 			if (tPlayer.getRace() != player.getRace()) {

@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.skillengine.model;
 
-import java.util.Iterator;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -45,7 +44,6 @@ import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.skillengine.action.Action;
 import com.aionemu.gameserver.skillengine.action.Actions;
 import com.aionemu.gameserver.skillengine.condition.Conditions;
-import com.aionemu.gameserver.skillengine.effect.AbnormalState;
 import com.aionemu.gameserver.skillengine.properties.FirstTargetAttribute;
 import com.aionemu.gameserver.skillengine.properties.Properties;
 import com.aionemu.gameserver.skillengine.properties.Properties.CastState;
@@ -208,19 +206,9 @@ public class Skill {
 	}
 
 	private boolean validateEffectedList() {
-		Iterator<Creature> effectedIter = effectedList.iterator();
-		while (effectedIter.hasNext()) {
-			Creature effected = effectedIter.next();
-			if (effected == null)
-				effected = effector;
-
-			if (effector instanceof Player) {
-				if (!RestrictionsManager.canAffectBySkill((Player) effector, effected, this))
-					effectedIter.remove();
-			} else {
-				if (effector.getEffectController().isInAnyAbnormalState(AbnormalState.CANT_ATTACK_STATE))
-					effectedIter.remove();
-			}
+		if (effector instanceof Player) {
+			Player player = (Player) effector;
+			effectedList.removeIf(effected -> !RestrictionsManager.canAffectBySkill(player, effected, this));
 		}
 
 		// TODO: Enable non-targeted, non-point AOE skills to trigger.
@@ -239,7 +227,7 @@ public class Skill {
 	/**
 	 * Skill entry point
 	 * 
-	 * @return true if usage is successfull
+	 * @return true if usage is successful
 	 */
 	public boolean useSkill() {
 		return useSkill(true, true);
@@ -450,8 +438,8 @@ public class Skill {
 			if (motion.getName() == null) // skills like Remove Shock (283) or Feint (912)
 				return true; // in this case, no update for NextSkillUse time is needed, so return instantly
 		} else {
-			if (motion.getName() == null) // cannot check animations without motion name (warning is sent on server startup to avoid permanent spam, see DataManager.SKILL_DATA.validateMotions())
-				return true;
+			if (motion.getName() == null)
+				return true; // can't check animations without motion name (warning is sent on server startup, see DataManager.SKILL_DATA.validateMotions())
 			if (hitTime == 0) {
 				AuditLogger.info(player, "modified non-instant skill to hit instantly (skill id: " + getSkillId() + ")");
 				return false;
@@ -827,10 +815,14 @@ public class Skill {
 		if (effects == null || effects.isEmpty()) {
 			return;
 		}
-		effects.stream().filter(effect -> effect.getTauntHate() >= 0 && (effect.getAttackStatus() == AttackStatus.RESIST || effect.getAttackStatus() == AttackStatus.DODGE)).forEach(effect -> {
-			effect.getEffected().getAggroList().addHate(effector, 1);
-			effect.getEffected().getKnownList().forEachNpc(object -> object.getAi().onCreatureEvent(AIEventType.CREATURE_NEEDS_SUPPORT, effect.getEffected()));
-		});
+		effects.stream()
+			.filter(
+				effect -> effect.getTauntHate() >= 0 && (effect.getAttackStatus() == AttackStatus.RESIST || effect.getAttackStatus() == AttackStatus.DODGE))
+			.forEach(effect -> {
+				effect.getEffected().getAggroList().addHate(effector, 1);
+				effect.getEffected().getKnownList()
+					.forEachNpc(object -> object.getAi().onCreatureEvent(AIEventType.CREATURE_NEEDS_SUPPORT, effect.getEffected()));
+			});
 	}
 
 	private void applyEffect(List<Effect> effects) {
@@ -1054,7 +1046,7 @@ public class Skill {
 	 * @return true if the present skill is a Point skill
 	 */
 	public boolean isPointSkill() {
-		return (this.firstTargetAttribute == FirstTargetAttribute.POINT);
+		return (firstTargetAttribute == FirstTargetAttribute.POINT);
 	}
 
 	/**
@@ -1074,7 +1066,7 @@ public class Skill {
 	}
 
 	public int getItemObjectId() {
-		return this.itemObjectId;
+		return itemObjectId;
 	}
 
 	/**
@@ -1226,7 +1218,8 @@ public class Skill {
 		// If creature is at least 2 meters above the terrain, ground skill cannot be applied
 		if (GeoDataConfig.GEO_ENABLE) {
 			if (isGroundSkill()) {
-				if ((object.getZ() - GeoService.getInstance().getZ(object) > 1.0f) || (object.getZ() - GeoService.getInstance().getZ(object) < -2.0f))
+				float zOffset = object.getZ() - GeoService.getInstance().getZ(object);
+				if (zOffset > 1.0f || zOffset < -2.0f)
 					return false;
 			}
 			return GeoService.getInstance().canSee(getFirstTarget(), object);

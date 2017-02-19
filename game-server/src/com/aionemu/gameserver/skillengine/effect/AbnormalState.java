@@ -1,8 +1,11 @@
 package com.aionemu.gameserver.skillengine.effect;
 
+import javax.xml.bind.annotation.XmlEnum;
+
 /**
- * @author ATracer
+ * @author ATracer, Neon
  */
+@XmlEnum
 public enum AbnormalState {
 	BUFF(0),
 	POISON(1 << 0),
@@ -48,7 +51,7 @@ public enum AbnormalState {
 	AUTOMATICALLY_STANDUP(PARALYZE.id | SLEEP.id | FEAR.id | STUN.id | STAGGER.id | OPENAERIAL.id | SPIN.id | DEFORM.id | PULLED.id),
 	ANY_STUN(SPIN.getId() | STUN.getId() | STUMBLE.getId() | STAGGER.getId());
 
-	private int id;
+	private final int id;
 
 	private AbnormalState(int id) {
 		this.id = id;
@@ -56,14 +59,6 @@ public enum AbnormalState {
 
 	public int getId() {
 		return id;
-	}
-
-	public static AbnormalState getIdByName(String name) {
-		for (AbnormalState id : values()) {
-			if (id.name().equals(name))
-				return id;
-		}
-		return null;
 	}
 
 	public static AbnormalState getStateById(int id) {

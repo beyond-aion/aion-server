@@ -6,7 +6,6 @@ import java.util.List;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Servant;
-import com.aionemu.gameserver.model.gameobjects.Summon;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.siege.SiegeNpc;
 import com.aionemu.gameserver.skillengine.model.Skill;
@@ -33,29 +32,12 @@ public class TargetRelationProperty {
 			case ALL:
 				break;
 			case ENEMY:
-				for (Iterator<Creature> iter = targetsList.iterator(); iter.hasNext();) {
-					Creature target = iter.next();
-
-					if (target instanceof Summon) {
-						Summon summon = (Summon) target;
-						if (summon.isEnemy(source) && summon.getMaster().isEnemy(source)) {
-							continue;
-						}
-					} else if (source.isEnemy(target) || isMaterialSkill)
-						continue;
-
-					iter.remove();
-				}
+				if (!isMaterialSkill)
+					targetsList.removeIf(target -> !source.isEnemy(target));
 				break;
 			case FRIEND:
-				for (Iterator<Creature> iter = targetsList.iterator(); iter.hasNext();) {
-					Creature target = iter.next();
-
-					if (!source.isEnemy(target) && isBuffAllowed(source, target) || isMaterialSkill)
-						continue;
-
-					iter.remove();
-				}
+				if (!isMaterialSkill)
+					targetsList.removeIf(target -> source.isEnemy(target) || !isBuffAllowed(source, target));
 
 				if (targetsList.isEmpty()) {
 					skill.setFirstTarget(skill.getEffector());
@@ -79,8 +61,7 @@ public class TargetRelationProperty {
 							}
 
 							if (sourcePlayer.isInAlliance() && targetPlayer.isInAlliance()) {
-								if (!sourcePlayer.isEnemy(targetPlayer)
-									&& sourcePlayer.getPlayerAlliance().equals(targetPlayer.getPlayerAlliance())) {
+								if (!sourcePlayer.isEnemy(targetPlayer) && sourcePlayer.getPlayerAlliance().equals(targetPlayer.getPlayerAlliance())) {
 									continue;
 								}
 							} else if (sourcePlayer.isInGroup() && targetPlayer.isInGroup()) {

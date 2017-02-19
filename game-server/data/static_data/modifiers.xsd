@@ -459,35 +459,6 @@
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
-	<xs:simpleType name="AbnormalState">
-		<xs:restriction base="xs:string">
-			<xs:enumeration value="BUFF"/>
-			<xs:enumeration value="POISON"/>
-			<xs:enumeration value="BLEED"/>
-			<xs:enumeration value="PARALYZE"/>
-			<xs:enumeration value="SLEEP"/>
-			<xs:enumeration value="ROOT"/>
-			<xs:enumeration value="BLIND"/>
-			<xs:enumeration value="UNK"/>
-			<xs:enumeration value="DISEASE"/>
-			<xs:enumeration value="SILENCE"/>
-			<xs:enumeration value="FEAR"/>
-			<xs:enumeration value="CURSE"/>
-			<xs:enumeration value="CHAOS"/>
-			<xs:enumeration value="STUN"/>
-			<xs:enumeration value="PETRIFICATION"/>
-			<xs:enumeration value="STUMBLE"/>
-			<xs:enumeration value="STAGGER"/>
-			<xs:enumeration value="OPENAERIAL"/>
-			<xs:enumeration value="SNARE"/>
-			<xs:enumeration value="SLOW"/>
-			<xs:enumeration value="SPIN"/>
-			<xs:enumeration value="BIND"/>
-			<xs:enumeration value="DEFORM"/>
-			<xs:enumeration value="CLOSEAERIAL"/>
-			<xs:enumeration value="NOFLY"/>
-		</xs:restriction>
-	</xs:simpleType>
 	<xs:simpleType name="LeftHandSlot">
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="SHIELD" />

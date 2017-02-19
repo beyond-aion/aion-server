@@ -1,9 +1,5 @@
 package com.aionemu.gameserver.skillengine.properties;
 
-import java.util.Iterator;
-import java.util.List;
-
-import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.skillengine.model.Skill;
@@ -19,30 +15,12 @@ public class TargetSpeciesProperty {
 	 * @return
 	 */
 	public static boolean set(final Skill skill, Properties properties) {
-		TargetSpeciesAttribute value = properties.getTargetSpecies();
-
-		final List<Creature> effectedList = skill.getEffectedList();
-
-		switch (value) {
+		switch (properties.getTargetSpecies()) {
 			case NPC:
-				for (Iterator<Creature> iter = effectedList.iterator(); iter.hasNext();) {
-					Creature nextEffected = iter.next();
-
-					if (nextEffected instanceof Npc)
-						continue;
-
-					iter.remove();
-				}
+				skill.getEffectedList().removeIf(effected -> !(effected instanceof Npc));
 				break;
 			case PC:
-				for (Iterator<Creature> iter = effectedList.iterator(); iter.hasNext();) {
-					Creature nextEffected = iter.next();
-
-					if (nextEffected instanceof Player)
-						continue;
-
-					iter.remove();
-				}
+				skill.getEffectedList().removeIf(effected -> !(effected instanceof Player));
 				break;
 		}
 		return true;

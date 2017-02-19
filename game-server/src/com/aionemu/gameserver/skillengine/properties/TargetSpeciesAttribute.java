@@ -9,16 +9,6 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "TargetSpeciesAttribute")
 @XmlEnum
 public enum TargetSpeciesAttribute {
-	NONE,
-	ALL,
 	PC,
 	NPC;
-
-	public String value() {
-		return name();
-	}
-
-	public static TargetSpeciesAttribute fromValue(String v) {
-		return valueOf(v);
-	}
 }
