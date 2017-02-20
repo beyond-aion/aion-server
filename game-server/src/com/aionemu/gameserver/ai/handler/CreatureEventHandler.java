@@ -60,7 +60,7 @@ public class CreatureEventHandler {
 		if (!owner.canSee(creature))
 			return;
 
-		if (owner.getEffectController().isAbnormalState(AbnormalState.SANCTUARY))
+		if (owner.getEffectController().isAbnormalSet(AbnormalState.SANCTUARY))
 			return;
 
 		if (!owner.isSpawned())

@@ -843,6 +843,8 @@ public class EffectController {
 	 * @return
 	 */
 	public boolean isAbnormalSet(AbnormalState state) {
+		if (state == AbnormalState.BUFF)
+			return abnormals == 0;
 		return (abnormals & state.getId()) == state.getId();
 	}
 
@@ -852,12 +854,6 @@ public class EffectController {
 	 * @param state
 	 * @return
 	 */
-	public boolean isAbnormalState(AbnormalState state) {
-		if (state == AbnormalState.BUFF)
-			return abnormals == 0;
-		return (abnormals & state.getId()) == state.getId();
-	}
-
 	public boolean isInAnyAbnormalState(AbnormalState state) {
 		if (state == AbnormalState.BUFF)
 			return abnormals == 0;
