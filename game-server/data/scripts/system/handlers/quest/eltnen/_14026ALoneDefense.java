@@ -146,7 +146,7 @@ public class _14026ALoneDefense extends QuestHandler {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 2375);
 					default:
-						return sendQuestEndDialog(env, 0);
+						return sendQuestEndDialog(env);
 				}
 			}
 		}

@@ -105,7 +105,7 @@ public class GMService {
 	}
 
 	private void broadcastConnectionStatus(Player gm, boolean connected) {
-		String name = (AdminConfig.CUSTOMTAG_ENABLE ? "" : "GM: ") + ChatUtil.name(gm);
+		String name = ChatUtil.name(gm);
 		SM_SYSTEM_MESSAGE sysMsg = connected ? SM_SYSTEM_MESSAGE.STR_NOTIFY_LOGIN_BUDDY(name) : SM_SYSTEM_MESSAGE.STR_NOTIFY_LOGOFF_BUDDY(name);
 
 		if ((connected && AdminConfig.ANNOUNCE_LOGIN_TO_ALL_PLAYERS) || (!connected && AdminConfig.ANNOUNCE_LOGOUT_TO_ALL_PLAYERS)) {

@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
-import com.aionemu.gameserver.configs.administration.AdminConfig;
 import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.model.gameobjects.player.DeniedStatus;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -46,7 +45,7 @@ public class CM_FRIEND_ADD extends AionClientPacket {
 		}	else if (activePlayer.equals(targetPlayer)) {
 			sendPacket(SM_SYSTEM_MESSAGE.STR_BUDDYLIST_BUSY());
 		} else if (CustomConfig.FRIENDLIST_GM_RESTRICT && ((targetPlayer.isGM() && !activePlayer.isGM()) || (activePlayer.isGM() && !targetPlayer.isGM()))) {
-			sendPacket(SM_SYSTEM_MESSAGE.STR_BUDDY_CANT_ADD_WHEN_HE_IS_ASKED_QUESTION(targetPlayer.getName(AdminConfig.CUSTOMTAG_ENABLE)));
+			sendPacket(SM_SYSTEM_MESSAGE.STR_BUDDY_CANT_ADD_WHEN_HE_IS_ASKED_QUESTION(targetPlayer.getName(true)));
 		} else if (activePlayer.getFriendList().getFriend(targetPlayer.getObjectId()) != null) {
 			sendPacket(SM_FRIEND_RESPONSE.TARGET_ALREADY_FRIEND);
 		} else if (activePlayer.getRace() != targetPlayer.getRace()) {

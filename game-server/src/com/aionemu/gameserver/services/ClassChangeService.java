@@ -44,7 +44,7 @@ public class ClassChangeService {
 			qs.setStatus(QuestStatus.COMPLETE);
 		}
 		qs.setQuestVar(0);
-		qs.setReward(0);
+		qs.setRewardGroup(0);
 		PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(ActionType.UPDATE, qs));
 	}
 

@@ -10,7 +10,6 @@ import org.slf4j.LoggerFactory;
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.commons.utils.NetworkUtils;
 import com.aionemu.loginserver.dao.GameServersDAO;
-import com.aionemu.loginserver.model.Account;
 import com.aionemu.loginserver.network.gameserver.GsAuthResponse;
 import com.aionemu.loginserver.network.gameserver.GsConnection;
 import com.aionemu.loginserver.network.gameserver.serverpackets.SM_REQUEST_KICK_ACCOUNT;
@@ -39,6 +38,13 @@ public class GameServerTable {
 	 */
 	public static Collection<GameServerInfo> getGameServers() {
 		return Collections.unmodifiableCollection(gameservers.values());
+	}
+
+	/**
+	 * @return Count of all registered [up/down] GameServers
+	 */
+	public static int size() {
+		return gameservers.size();
 	}
 
 	/**
@@ -113,19 +119,14 @@ public class GameServerTable {
 	}
 
 	/**
-	 * Check if account is already in use on any GameServer. If so - kick account from GameServer.
-	 * 
-	 * @param acc
-	 *          account to check
-	 * @return true is account is logged in on one of GameServers
+	 * @return The GameServerInfo object where the specified account is logged in.
 	 */
-	public static boolean isAccountOnAnyGameServer(Account acc) {
+	public static GameServerInfo findLoggedInAccountGs(int accountId) {
 		for (GameServerInfo gsi : getGameServers()) {
-			if (gsi.isAccountOnGameServer(acc.getId())) {
-				return true;
-			}
+			if (gsi.isAccountOnGameServer(accountId))
+				return gsi;
 		}
-		return false;
+		return null;
 	}
 
 	/**
@@ -138,13 +139,11 @@ public class GameServerTable {
 	 * @return True, if account was kicked. False, if he was not on any gameserver.
 	 */
 	public static boolean kickAccountFromGameServer(int accountId, boolean notifyDoubleLogin) {
-		for (GameServerInfo gsi : getGameServers()) {
-			if (gsi.isAccountOnGameServer(accountId)) {
-				gsi.getConnection().sendPacket(new SM_REQUEST_KICK_ACCOUNT(accountId, notifyDoubleLogin));
-				return true;
-			}
-		}
-		return false;
+		GameServerInfo gsi = GameServerTable.findLoggedInAccountGs(accountId);
+		if (gsi == null)
+			return false;
+		gsi.getConnection().sendPacket(new SM_REQUEST_KICK_ACCOUNT(accountId, notifyDoubleLogin));
+		return true;
 	}
 
 	/**

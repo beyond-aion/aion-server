@@ -188,7 +188,7 @@ public class AionPacketHandlerFactory {
 		addPacket(new CM_SUMMON_EMOTION(0x16D, State.IN_GAME));
 		addPacket(new CM_SUMMON_MOVE(0x16C, State.IN_GAME));
 		addPacket(new CM_TARGET_SELECT(0x0E2, State.IN_GAME));
-		addPacket(new CM_TELEPORT_DONE(0x0D2, State.IN_GAME));
+		addPacket(new CM_TELEPORT_ANIMATION_DONE(0x0D2, State.IN_GAME));
 		addPacket(new CM_TELEPORT_SELECT(0x177, State.IN_GAME));
 		addPacket(new CM_TIME_CHECK(0x0F5, State.CONNECTED, State.AUTHED, State.IN_GAME));
 		addPacket(new CM_TITLE_SET(0x12E, State.IN_GAME));

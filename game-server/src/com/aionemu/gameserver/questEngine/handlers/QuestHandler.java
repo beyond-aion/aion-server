@@ -8,9 +8,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.Consumer;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.aionemu.gameserver.ai.event.AIEventType;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.CreatureType;
@@ -64,7 +61,6 @@ import com.aionemu.gameserver.world.zone.ZoneName;
  */
 public abstract class QuestHandler extends AbstractQuestHandler {
 
-	private static final Logger log = LoggerFactory.getLogger(QuestHandler.class);
 	protected static final QuestEngine qe = QuestEngine.getInstance();
 	protected final int questId;
 	protected List<QuestItems> workItems;
@@ -122,14 +118,17 @@ public abstract class QuestHandler extends AbstractQuestHandler {
 				sendDialogPacket(env, DialogPage.ASK_QUEST_ACCEPT_WINDOW.id(), questId);
 				return true;
 			case QUEST_REFUSE:
-			case QUEST_REFUSE_1:
-			case QUEST_REFUSE_2:
-			case QUEST_REFUSE_3:
-			case QUEST_REFUSE_4:
 			case QUEST_REFUSE_SIMPLE:
+			case QUEST_REFUSE_1:
 				return env.getVisibleObject() instanceof Npc ? sendQuestDialog(env, 1004) : closeDialogWindow(env);
-			case FINISH_DIALOG:
-				return closeDialogWindow(env);
+			case QUEST_REFUSE_2:
+				return env.getVisibleObject() instanceof Npc ? sendQuestDialog(env, 1005) : closeDialogWindow(env);
+			case QUEST_REFUSE_3:
+				return env.getVisibleObject() instanceof Npc ? sendQuestDialog(env, 1006) : closeDialogWindow(env);
+			case QUEST_REFUSE_4:
+				return env.getVisibleObject() instanceof Npc ? sendQuestDialog(env, 1007) : closeDialogWindow(env);
+			case FINISH_DIALOG: // clicking X or ^ in quest accept window (client closes the window by itself / returns to quest selection)
+				return true;
 		}
 		return false;
 	}
@@ -447,31 +446,18 @@ public abstract class QuestHandler extends AbstractQuestHandler {
 		return sendQuestEndDialog(env);
 	}
 
-	/** Send completion dialog of the quest and finish it. Give the default reward from quest_data.xml */
-	public boolean sendQuestEndDialog(QuestEnv env) {
-		int rewardGroups = DataManager.QUEST_DATA.getQuestById(env.getQuestId()).getRewards().size();
-		// you should explicitly specify the reward group when there are more than 1
-		if (rewardGroups > 1 && env.getDialogActionId() >= SELECTED_QUEST_REWARD1
-			&& env.getDialogActionId() <= SELECTED_QUEST_NOREWARD)
-			log.warn("Quest handler for quest: " + env.getQuestId() + " possibly rewarded the wrong reward group.");
-		return sendQuestEndDialog(env, rewardGroups == 0 ? null : 0);
-	}
-
 	/**
 	 * Sends reward selection dialog of the quest or finishes it (if selection dialog was active)
-	 * 
-	 * @param env
-	 * @param rewardGroup
-	 *          - Which {@code <rewards>} group (from quest_data.xml) to use, null for none.
 	 */
-	public boolean sendQuestEndDialog(QuestEnv env, Integer rewardGroup) {
+	public boolean sendQuestEndDialog(QuestEnv env) {
 		Player player = env.getPlayer();
-		int dialogActionId = env.getDialogActionId();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs == null || qs.getStatus() != QuestStatus.REWARD)
 			return false; // reward packet exploitation fix (or buggy quest handler)
+
+		int dialogActionId = env.getDialogActionId();
 		if (dialogActionId >= SELECTED_QUEST_REWARD1 && dialogActionId <= SELECTED_QUEST_NOREWARD) {
-			if (QuestService.finishQuest(env, rewardGroup)) {
+			if (QuestService.finishQuest(env)) {
 				Npc npc = (Npc) env.getVisibleObject();
 				QuestNpc questNpc = QuestEngine.getInstance().getQuestNpc(npc.getNpcId());
 				boolean npcHasActiveQuest = false;
@@ -509,7 +495,6 @@ public abstract class QuestHandler extends AbstractQuestHandler {
 				}
 				return npcHasActiveQuest || npcHasNewQuest ? sendQuestSelectionDialog(env) : closeDialogWindow(env);
 			}
-			return false;
 		} else {
 			switch (dialogActionId) {
 				case SET_SUCCEED: // report to pre-end npc (another npc is actually responsible for rewarding, so close this window)
@@ -518,50 +503,36 @@ public abstract class QuestHandler extends AbstractQuestHandler {
 				case SELECT_QUEST_REWARD: // report to end npc
 				case CHECK_USER_HAS_QUEST_ITEM: // report to end npc with collect item checks
 				case CHECK_USER_HAS_QUEST_ITEM_SIMPLE: // report to end npc with collect item checks
+					QuestService.validateAndFixRewardGroup(qs, questId); // fixes the reward group if necessary
 					// show reward selection page
-					return sendQuestDialog(env, DialogPage.getRewardPageByIndex(rewardGroup).id());
+					return sendQuestDialog(env, DialogPage.getRewardPageByIndex(qs.getRewardGroup()).id());
 			}
 		}
 		return false;
 	}
 
 	public boolean defaultCloseDialog(QuestEnv env, int step, int nextStep) {
-		return defaultCloseDialog(env, step, nextStep, false, false, 0, 0, 0, 0, 0);
+		return defaultCloseDialog(env, step, nextStep, false, false, 0, 0, 0, 0);
 	}
 
-	public boolean defaultCloseDialog(QuestEnv env, int step, int nextStep, int giveItemId, int giveItemCount) {
-		return defaultCloseDialog(env, step, nextStep, false, false, 0, giveItemId, giveItemCount, 0, 0);
-	}
-
-	public boolean defaultCloseDialog(QuestEnv env, int step, int nextStep, int varNum) {
-		return defaultCloseDialog(env, step, nextStep, false, false, 0, 0, 0, 0, 0, varNum);
+	public boolean defaultCloseDialog(QuestEnv env, int step, int nextStep, int giveItemId, long giveItemCount) {
+		return defaultCloseDialog(env, step, nextStep, false, false, giveItemId, giveItemCount, 0, 0);
 	}
 
 	public boolean defaultCloseDialog(QuestEnv env, int step, int nextStep, boolean reward, boolean sameNpc) {
-		return defaultCloseDialog(env, step, nextStep, reward, sameNpc, 0, 0, 0, 0, 0);
+		return defaultCloseDialog(env, step, nextStep, reward, sameNpc, 0, 0, 0, 0);
 	}
 
-	public boolean defaultCloseDialog(QuestEnv env, int step, int nextStep, boolean reward, boolean sameNpc, int rewardId) {
-		return defaultCloseDialog(env, step, nextStep, reward, sameNpc, rewardId, 0, 0, 0, 0);
+	public boolean defaultCloseDialog(QuestEnv env, int step, int nextStep, int giveItemId, long giveItemCount, int removeItemId,
+		long removeItemCount) {
+		return defaultCloseDialog(env, step, nextStep, false, false, giveItemId, giveItemCount, removeItemId, removeItemCount);
 	}
 
-	public boolean defaultCloseDialog(QuestEnv env, int step, int nextStep, int giveItemId, int giveItemCount, int removeItemId, int removeItemCount) {
-		return defaultCloseDialog(env, step, nextStep, false, false, 0, giveItemId, giveItemCount, removeItemId, removeItemCount);
-	}
-
-	public boolean defaultCloseDialog(QuestEnv env, int step, int nextStep, boolean reward, boolean sameNpc, int giveItemId, int giveItemCount,
-		int removeItemId, int removeItemCount) {
-		return defaultCloseDialog(env, step, nextStep, reward, sameNpc, 0, giveItemId, giveItemCount, removeItemId, removeItemCount);
-	}
-
-	public boolean defaultCloseDialog(QuestEnv env, int step, int nextStep, boolean reward, boolean sameNpc, int rewardId, int giveItemId,
-		int giveItemCount, int removeItemId, int removeItemCount) {
-		return defaultCloseDialog(env, step, nextStep, reward, sameNpc, rewardId, giveItemId, giveItemCount, removeItemId, removeItemCount, 0);
-	}
-
-	/** Handle on close dialog event, changing the quest status and giving/removing quest items */
-	public boolean defaultCloseDialog(QuestEnv env, int step, int nextStep, boolean reward, boolean sameNpc, int rewardId, int giveItemId,
-		int giveItemCount, int removeItemId, int removeItemCount, int varNum) {
+	/**
+	 * Handle on close dialog event, changing the quest status and giving/removing quest items
+	 */
+	public boolean defaultCloseDialog(QuestEnv env, int step, int nextStep, boolean reward, boolean sameNpc, int giveItemId, long giveItemCount,
+		int removeItemId, long removeItemCount) {
 		QuestState qs = env.getPlayer().getQuestStateList().getQuestState(questId);
 		if (qs.getQuestVarById(0) == step) {
 			if (giveItemId != 0 && giveItemCount != 0) {
@@ -570,9 +541,9 @@ public abstract class QuestHandler extends AbstractQuestHandler {
 				}
 			}
 			removeQuestItem(env, removeItemId, removeItemCount, qs.getStatus());
-			changeQuestStep(env, step, nextStep, reward, varNum);
+			changeQuestStep(env, step, nextStep, reward);
 			if (sameNpc) {
-				return sendQuestEndDialog(env, rewardId);
+				return sendQuestEndDialog(env);
 			}
 			return closeDialogWindow(env);
 		}
@@ -662,8 +633,6 @@ public abstract class QuestHandler extends AbstractQuestHandler {
 	public void sendEmotion(QuestEnv env, Creature emoteCreature, EmotionId emotion, boolean broadcast) {
 		Player player = env.getPlayer();
 		int targetId = player.equals(emoteCreature) ? env.getVisibleObject().getObjectId() : player.getObjectId();
-
-		// TODO: fix it, broadcast and direction sometimes do not work when the emoteCreature is NPC
 		PacketSendUtility.broadcastPacket(player, new SM_EMOTION(emoteCreature, EmotionType.EMOTE, emotion.id(), targetId), broadcast);
 	}
 
@@ -1210,10 +1179,6 @@ public abstract class QuestHandler extends AbstractQuestHandler {
 	}
 
 	public boolean sendQuestRewardDialog(QuestEnv env, int rewardNpcId, int reportDialogId) {
-		return sendQuestRewardDialog(env, rewardNpcId, reportDialogId, 0);
-	}
-
-	public boolean sendQuestRewardDialog(QuestEnv env, int rewardNpcId, int reportDialogId, int rewardId) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs.getStatus() == QuestStatus.REWARD) {
@@ -1221,7 +1186,7 @@ public abstract class QuestHandler extends AbstractQuestHandler {
 				if (env.getDialogActionId() == USE_OBJECT && reportDialogId != 0) {
 					return sendQuestDialog(env, reportDialogId);
 				} else {
-					return sendQuestEndDialog(env, rewardId);
+					return sendQuestEndDialog(env);
 				}
 			}
 		}

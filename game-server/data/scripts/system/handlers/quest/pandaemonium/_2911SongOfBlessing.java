@@ -1,6 +1,7 @@
 package quest.pandaemonium;
 
 import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -44,16 +45,18 @@ public class _2911SongOfBlessing extends QuestHandler {
 					return sendQuestDialog(env, 1352);
 				else if (env.getDialogActionId() == SETPRO1) {
 					qs.setQuestVar(2);
+					qs.setRewardGroup(0);
 					qs.setStatus(QuestStatus.REWARD);
 					updateQuestStatus(env);
 					return sendQuestDialog(env, 5);
 				} else if (env.getDialogActionId() == SETPRO2) {
 					qs.setQuestVar(3);
+					qs.setRewardGroup(1);
 					qs.setStatus(QuestStatus.REWARD);
 					updateQuestStatus(env);
 					return sendQuestDialog(env, 6);
 				} else
-					return sendQuestEndDialog(env, qs.getQuestVarById(0) - 2); // different rewards and follow-up quests, depending on the decision
+					return sendQuestEndDialog(env); // different rewards and follow-up quests, depending on the decision
 			}
 		}
 		return false;

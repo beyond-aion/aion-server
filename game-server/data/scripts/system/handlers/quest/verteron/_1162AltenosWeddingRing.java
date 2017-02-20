@@ -71,6 +71,7 @@ public class _1162AltenosWeddingRing extends QuestHandler {
 							case USE_OBJECT:
 								return sendQuestDialog(env, 2034);
 							case CHECK_USER_HAS_QUEST_ITEM:
+								qs.setRewardGroup(1);
 								return checkQuestItems(env, 1, 1, true, 6, 2375);
 							case SETPRO2:
 								return sendQuestDialog(env, 2375);
@@ -83,6 +84,7 @@ public class _1162AltenosWeddingRing extends QuestHandler {
 							case USE_OBJECT:
 								return sendQuestDialog(env, 1352);
 							case CHECK_USER_HAS_QUEST_ITEM:
+								qs.setRewardGroup(0);
 								return checkQuestItems(env, 1, 1, true, 5, 1693);
 							case SETPRO2:
 								return sendQuestDialog(env, 1693);

@@ -71,7 +71,7 @@ public class _14016AGateAgape extends QuestHandler {
 				if (env.getDialogActionId() == USE_OBJECT)
 					return sendQuestDialog(env, 2034);
 				else
-					return sendQuestEndDialog(env, 0);
+					return sendQuestEndDialog(env);
 			}
 		}
 		return false;

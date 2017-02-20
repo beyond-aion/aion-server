@@ -423,11 +423,11 @@ public abstract class Creature extends VisibleObject {
 	}
 
 	public void endTransformation() {
-		this.getTransformModel().apply(0);
+		getTransformModel().apply(0);
 	}
 
 	public boolean isTransformed() {
-		return this.getTransformModel().isActive();
+		return getTransformModel().isActive();
 	}
 
 	/**

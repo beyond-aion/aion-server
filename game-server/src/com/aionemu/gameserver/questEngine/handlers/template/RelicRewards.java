@@ -8,13 +8,11 @@ import java.util.Set;
 
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author Bobobear, Rolandas
@@ -85,6 +83,7 @@ public class RelicRewards extends QuestHandler {
 						break;
 				}
 				if (rewardId != -1) {
+					qs.setRewardGroup(rewardId);
 					qs.setQuestVar(rewardId + 1);
 					qs.setStatus(QuestStatus.REWARD);
 					updateQuestStatus(env);
@@ -99,8 +98,7 @@ public class RelicRewards extends QuestHandler {
 					case USE_OBJECT:
 						return sendQuestDialog(env, var + 4);
 					case SELECTED_QUEST_NOREWARD:
-						QuestService.finishQuest(env, qs.getQuestVars().getQuestVars() - 1);
-						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
+						sendQuestEndDialog(env);
 						return true;
 				}
 			}

@@ -3,7 +3,6 @@ package com.aionemu.gameserver.network.aion.serverpackets;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.gameserver.configs.administration.AdminConfig;
 import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.model.ChatType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
@@ -83,7 +82,7 @@ public class SM_MESSAGE extends AionServerPacket {
 	 *          what chat type should be used
 	 */
 	public SM_MESSAGE(Player sender, String message, ChatType chatType) {
-		this(sender, sender.getEffectController().isAbnormalSet(AbnormalState.HIDE) ? 0 : sender.getObjectId(), sender.getName(AdminConfig.CUSTOMTAG_ENABLE), message, chatType);
+		this(sender, sender.getEffectController().isAbnormalSet(AbnormalState.HIDE) ? 0 : sender.getObjectId(), sender.getName(true), message, chatType);
 	}
 
 	/**

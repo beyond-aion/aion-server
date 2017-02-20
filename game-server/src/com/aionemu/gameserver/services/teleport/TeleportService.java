@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.services.teleport;
 
+import java.util.concurrent.FutureTask;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -10,6 +12,7 @@ import com.aionemu.gameserver.dataholders.PlayerInitialData;
 import com.aionemu.gameserver.model.DescriptionId;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.Race;
+import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.TribeClass;
 import com.aionemu.gameserver.model.actions.PlayerMode;
 import com.aionemu.gameserver.model.animations.ArrivalAnimation;
@@ -58,7 +61,6 @@ import com.aionemu.gameserver.services.player.PlayerReviveService;
 import com.aionemu.gameserver.services.trade.PricesService;
 import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.WorldMapInstance;
@@ -185,47 +187,18 @@ public class TeleportService {
 
 	private static void sendLoc(Player player, int worldId, int instanceId, float x, float y, float z, byte h, TeleportAnimation animation) {
 		abortPlayerActions(player);
-		// send teleport animation to player and trigger CM_TELEPORT_DONE when player arrived
-		PacketSendUtility.sendPacket(player, new SM_TELEPORT_LOC(worldId, instanceId, x, y, z, h, animation));
 		// despawn from world and send animation to others (also ends flying)
 		World.getInstance().despawn(player, animation.getDefaultObjectDeleteAnimation());
 
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				if (animation.getDuration() > 0 && player.getLifeStats().isAlreadyDead()) {
-					World.getInstance().spawn(player);
-					PacketSendUtility.broadcastPacket(player, new SM_PLAYER_INFO(player), true);
-					return;
-				}
-
-				abortPlayerActions(player);
-				int currentWorldId = player.getWorldId();
-				int currentInstance = player.getInstanceId();
-				if (currentWorldId != worldId || currentInstance != instanceId) {
-					SerialKillerService.getInstance().onLeaveMap(player);
-					InstanceService.onLeaveInstance(player);
-				}
-				World.getInstance().setPosition(player, worldId, instanceId, x, y, z, h);
-				World.getInstance().setPosition(player.getPet(), worldId, instanceId, x, y, z, h);
-
-				player.setPortAnimation(animation.getDefaultArrivalAnimation());
-				if (currentWorldId == worldId && currentInstance == instanceId) {
-					// instant teleport when map is the same
-					spawnOnSameMap(player);
-				} else {
-					// teleport with full map reloading
-					PacketSendUtility.sendPacket(player, new SM_CHANNEL_INFO(player.getPosition()));
-					PacketSendUtility.sendPacket(player, new SM_PLAYER_SPAWN(player));
-					if (DataManager.WORLD_MAPS_DATA.getTemplate(worldId).isInstance() && !WorldMapType.getWorld(worldId).isPersonal())
-						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_INSTANCE_DUNGEON_OPENED_FOR_SELF(worldId));
-				}
-				if (player.isLegionMember())
-					PacketSendUtility.broadcastToLegion(player.getLegion(), new SM_LEGION_UPDATE_MEMBER(player, 0, ""));
-			}
-
-		}, animation.getDuration());
+		SpawnTask spawnTask = new SpawnTask(player, worldId, instanceId, x, y, z, h, animation);
+		if (animation == TeleportAnimation.NONE) // instant teleport (don't wait for player fade-out)
+			spawnTask.run();
+		else {
+			// send teleport animation to player and trigger CM_TELEPORT_ANIMATION_DONE when the animation ended
+			PacketSendUtility.sendPacket(player, new SM_TELEPORT_LOC(worldId, instanceId, x, y, z, h, animation));
+			// task will be triggered from CM_TELEPORT_ANIMATION_DONE
+			player.getController().addTask(TaskId.RESPAWN, new FutureTask<Void>(spawnTask, null));
+		}
 	}
 
 	private static void abortPlayerActions(Player player) {
@@ -538,5 +511,62 @@ public class TeleportService {
 		PacketSendUtility.sendPacket(player,
 			new SM_QUESTION_WINDOW(questionMsgId, 0, 0, new DescriptionId(DataManager.NPC_DATA.getNpcTemplate(npcId).getNameId() * 2 + 1)));
 		return true;
+	}
+
+	private static class SpawnTask implements Runnable {
+
+		private final Player player;
+		private final int worldId, instanceId;
+		private final float x, y, z;
+		private final byte h;
+		private final TeleportAnimation animation;
+
+		public SpawnTask(Player player, int worldId, int instanceId, float x, float y, float z, byte h, TeleportAnimation animation) {
+			this.player = player;
+			this.worldId = worldId;
+			this.instanceId = instanceId;
+			this.x = x;
+			this.y = y;
+			this.z = z;
+			this.h = h;
+			this.animation = animation;
+		}
+
+		@Override
+		public void run() {
+			if (player.isSpawned())
+				return;
+
+			if (animation != TeleportAnimation.NONE && player.getLifeStats().isAlreadyDead()) {
+				PacketSendUtility.sendPacket(player, new SM_PLAYER_INFO(player));
+				World.getInstance().spawn(player);
+				return;
+			}
+
+			abortPlayerActions(player);
+			int currentWorldId = player.getWorldId();
+			int currentInstance = player.getInstanceId();
+			if (currentWorldId != worldId || currentInstance != instanceId) {
+				SerialKillerService.getInstance().onLeaveMap(player);
+				InstanceService.onLeaveInstance(player);
+			}
+			World.getInstance().setPosition(player, worldId, instanceId, x, y, z, h);
+			World.getInstance().setPosition(player.getPet(), worldId, instanceId, x, y, z, h);
+
+			player.setPortAnimation(animation.getDefaultArrivalAnimation());
+			if (currentWorldId == worldId && currentInstance == instanceId) {
+				// instant teleport when map is the same
+				spawnOnSameMap(player);
+			} else {
+				// teleport with full map reloading, player will spawn via CM_LEVEL_READY
+				PacketSendUtility.sendPacket(player, new SM_CHANNEL_INFO(player.getPosition()));
+				PacketSendUtility.sendPacket(player, new SM_PLAYER_SPAWN(player));
+				if (DataManager.WORLD_MAPS_DATA.getTemplate(worldId).isInstance() && !WorldMapType.getWorld(worldId).isPersonal())
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_INSTANCE_DUNGEON_OPENED_FOR_SELF(worldId));
+			}
+			if (player.isLegionMember())
+				PacketSendUtility.broadcastToLegion(player.getLegion(), new SM_LEGION_UPDATE_MEMBER(player, 0, ""));
+		}
+
 	}
 }

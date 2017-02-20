@@ -98,21 +98,16 @@ public final class QuestService {
 	private static final Logger log = LoggerFactory.getLogger(QuestService.class);
 	private static Multimap<Integer, QuestDrop> questDrop = ArrayListMultimap.create();
 
-	public static boolean finishQuest(QuestEnv env) {
-		return finishQuest(env, null);
-	}
-
 	/**
 	 * Finishes the quest and rewards the player.
 	 * 
 	 * @param env
-	 * @param rewardGroup
-	 *          - Which {@code <rewards>} group (from quest_data.xml) to use, null for none.
 	 */
-	public static boolean finishQuest(QuestEnv env, Integer rewardGroup) {
+	public static boolean finishQuest(QuestEnv env) {
 		Player player = env.getPlayer();
 		int id = env.getQuestId();
 		QuestState qs = player.getQuestStateList().getQuestState(id);
+
 		Rewards rewards = new Rewards();
 		Rewards extendedRewards = new Rewards();
 		if (qs == null || qs.getStatus() != QuestStatus.REWARD)
@@ -120,15 +115,17 @@ public final class QuestService {
 		QuestTemplate template = DataManager.QUEST_DATA.getQuestById(id);
 		if (template.getCategory() == QuestCategory.MISSION && qs.getCompleteCount() != 0)
 			return false; // prevent repeatable reward because of wrong quest handling
+
+		validateAndFixRewardGroup(qs, id);
 		List<QuestItems> questItems = new FastTable<>();
 		if (template.getExtendedRewards() != null && qs.getCompleteCount() == template.getRewardRepeatCount() - 1) { // additional reward for the Xth time
 			questItems.addAll(getRewardItems(env, template, true, null));
 			extendedRewards = template.getExtendedRewards();
 		}
 		if (!template.getRewards().isEmpty() || !template.getBonus().isEmpty()) {
-			questItems.addAll(getRewardItems(env, template, false, rewardGroup));
-			if (rewardGroup != null)
-				rewards = template.getRewards().get(rewardGroup);
+			questItems.addAll(getRewardItems(env, template, false, qs.getRewardGroup()));
+			if (qs.getRewardGroup() != null)
+				rewards = template.getRewards().get(qs.getRewardGroup());
 		}
 		for (QuestItems qi : questItems)
 			ItemService.addItem(player, qi.getItemId(), qi.getCount(), true);
@@ -139,7 +136,6 @@ public final class QuestService {
 		removeQuestWorkItems(player, qs); // remove all worker list item if finished
 		qs.setStatus(QuestStatus.COMPLETE);
 		qs.setQuestVar(0);
-		qs.setReward(rewardGroup);
 		if (template.isTimeBased())
 			qs.setNextRepeatTime(calculateRepeatDate(player, template));
 		PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(ActionType.UPDATE, qs));
@@ -148,6 +144,32 @@ public final class QuestService {
 			player.getNpcFactions().completeQuest(template);
 		player.getController().updateNearbyQuests();
 		return true;
+	}
+
+	/**
+	 * Validates and sets/corrects (if necessary) the reward group which is to be used. Must only be called in reward state.
+	 * 
+	 * @return False if the reward group was out of range, or if it was null before and there are more than one possible groups
+	 */
+	public static void validateAndFixRewardGroup(QuestState qs, int questId) {
+		if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
+			List<Rewards> rewardGroups = DataManager.QUEST_DATA.getQuestById(questId).getRewards();
+			if (qs.getRewardGroup() != null) {
+				if (rewardGroups == null) {
+					log.warn("Handler for quest " + questId + " has set a reward group, but there are none in quest_data.xml.");
+					qs.setRewardGroup(null);
+				} else if (qs.getRewardGroup() < 0 || qs.getRewardGroup() >= rewardGroups.size()) {
+					log.warn("Handler for quest " + questId + " tried to reward a nonexistent reward group (index " + qs.getRewardGroup() + ").");
+					qs.setRewardGroup(rewardGroups.size() - 1);
+				}
+			} else { // you must explicitly specify the reward group when there are more than 1
+				if (rewardGroups != null && rewardGroups.size() > 0) {
+					if (rewardGroups.size() > 1)
+						log.warn("Handler for quest " + questId + " possibly rewarded the wrong reward group.");
+					qs.setRewardGroup(0);
+				}
+			}
+		}
 	}
 
 	private static List<QuestItems> getRewardItems(QuestEnv env, QuestTemplate template, boolean extended, Integer rewardGroup) {
@@ -556,7 +578,7 @@ public final class QuestService {
 		} else {
 			qs.setStatus(questStatus);
 			qs.setQuestVar(0);
-			qs.setReward(null);
+			qs.setRewardGroup(null);
 		}
 		return true;
 	}
@@ -643,26 +665,26 @@ public final class QuestService {
 	 * quests)
 	 */
 	public static int getCollectItemsReward(QuestEnv env, boolean showWarning, boolean removeItem) {
-		return checkCollectItemsReward(env, showWarning, removeItem, -1);
+		return checkCollectItemsReward(env, showWarning, removeItem, null);
 	}
 
 	/**
 	 * Returns an index of reward if collected items match the specified rewardIndex. Returns -1 if not matched. If quest wasn't started, starts it
 	 * (useful for relics quests)
 	 */
-	public static int checkCollectItemsReward(QuestEnv env, boolean showWarning, boolean removeItem, int rewardIndex) {
+	public static int checkCollectItemsReward(QuestEnv env, boolean showWarning, boolean removeItem, Integer rewardIndex) {
 		Player player = env.getPlayer();
 		QuestTemplate template = DataManager.QUEST_DATA.getQuestById(env.getQuestId());
 		int requiredItemNameId = 0;
 		int result = -1;
 
 		CollectItems collectItems = template.getCollectItems();
-		if (collectItems == null || template.getRewards().isEmpty() || rewardIndex >= template.getRewards().size())
+		if (collectItems == null || template.getRewards().isEmpty() || rewardIndex != null && rewardIndex >= template.getRewards().size())
 			return result;
 
 		List<Integer> toCheck = null; // collect item indexes
-		int start = rewardIndex >= 0 ? rewardIndex : 0;
-		int end = rewardIndex >= 0 ? rewardIndex + 1 : template.getRewards().size();
+		int start = rewardIndex != null ? rewardIndex : 0;
+		int end = rewardIndex != null ? rewardIndex + 1 : template.getRewards().size();
 
 		for (result = start; result < end; result++) {
 			boolean checkValid = true;

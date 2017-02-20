@@ -1,6 +1,7 @@
 package quest.sanctum;
 
 import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -52,7 +53,7 @@ public class _1909ASongOfPraise extends QuestHandler {
 				if (env.getDialogActionId() == QUEST_SELECT && qs.getStatus() == QuestStatus.START)
 					return sendQuestDialog(env, 2375);
 				else if (env.getDialogActionId() == SELECT_QUEST_REWARD && qs.getStatus() != QuestStatus.COMPLETE) {
-					return defaultCloseDialog(env, 1, 2, true, true, 0, 0, 0, 182206001, 1);
+					return defaultCloseDialog(env, 1, 2, true, true, 0, 0, 182206001, 1);
 				} else
 					return sendQuestEndDialog(env);
 			}

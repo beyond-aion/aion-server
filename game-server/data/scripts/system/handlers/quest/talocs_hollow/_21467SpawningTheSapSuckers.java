@@ -1,6 +1,7 @@
 package quest.talocs_hollow;
 
 import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -46,19 +47,11 @@ public class _21467SpawningTheSapSuckers extends QuestHandler {
 				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
-			int var = qs.getQuestVarById(0);
-			int rewInd = 0;
-			if (var == 1)
-				rewInd = 1;
-			else if (var == 2)
-				rewInd = 2;
-			else if (var == 3)
-				rewInd = 3;
 			if (targetId == 799503) {
 				if (dialogActionId == USE_OBJECT) {
 					return sendQuestDialog(env, 10002);
 				} else {
-					return sendQuestEndDialog(env, rewInd);
+					return sendQuestEndDialog(env);
 				}
 			}
 		}
@@ -70,10 +63,10 @@ public class _21467SpawningTheSapSuckers extends QuestHandler {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
-			int targetId = env.getTargetId();
-			int var = qs.getQuestVarById(0);
-			if (targetId == 215480) {
+			if (env.getTargetId() == 215480) {
+				int var = qs.getQuestVarById(0);
 				QuestService.questTimerEnd(env);
+				qs.setRewardGroup(var); // reward group = count of timer resets (quest retries)
 				changeQuestStep(env, var, var, true);
 				return true;
 			}

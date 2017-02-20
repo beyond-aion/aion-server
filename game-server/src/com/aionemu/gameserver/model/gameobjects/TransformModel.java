@@ -155,7 +155,7 @@ public class TransformModel {
 	}
 
 	public boolean isActive() {
-		return this.isActive;
+		return isActive;
 	}
 
 	/**

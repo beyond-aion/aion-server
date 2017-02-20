@@ -130,7 +130,7 @@ public class ConfigurableProcessor {
 		} catch (TransformationException e) {
 			throw e;
 		} catch (Exception e) {
-			throw new RuntimeException("Error modifying field " + f.getName() + " of class " + f.getDeclaringClass(), e);
+			throw new RuntimeException("Error modifying field " + f.getName() + " of " + f.getDeclaringClass(), e);
 		} finally {
 			if (!oldAccessible)
 				f.setAccessible(false);
@@ -162,6 +162,8 @@ public class ConfigurableProcessor {
 		if (value == null || value.trim().equals("")) {
 			value = defaultValue;
 			log.debug("Using default value for field " + field.getName() + " of class " + field.getDeclaringClass().getName());
+		} else if (value.trim().equals("\"\"")) {
+			value = "";
 		}
 
 		Class<?> cls = field.getType();

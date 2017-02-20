@@ -117,8 +117,9 @@ public class _2430SecretInformation extends QuestHandler {
 							return false;
 						case SELECT_QUEST_REWARD:
 							removeQuestItem(env, 182204221, 1);
-							changeQuestStep(env, 2, 2, true); // reward 0
-							return sendQuestDialog(env, 5);
+							changeQuestStep(env, 2, 2, true);
+							qs.setRewardGroup(0);
+							return sendQuestEndDialog(env);
 					}
 					break;
 				case 205244: // Hugorunerk
@@ -151,8 +152,9 @@ public class _2430SecretInformation extends QuestHandler {
 							}
 							return false;
 						case SELECT_QUEST_REWARD:
-							changeQuestStep(env, 6, 6, true); // reward 1
-							return sendQuestDialog(env, 6);
+							changeQuestStep(env, 6, 6, true);
+							qs.setRewardGroup(1);
+							return sendQuestEndDialog(env);
 					}
 					break;
 				case 204300: // Bolverk
@@ -168,8 +170,9 @@ public class _2430SecretInformation extends QuestHandler {
 							return false;
 						case SELECT_QUEST_REWARD:
 							removeQuestItem(env, 182204222, 1);
-							changeQuestStep(env, 8, 8, true); // reward 2
-							return sendQuestDialog(env, 7);
+							changeQuestStep(env, 8, 8, true);
+							qs.setRewardGroup(2);
+							return sendQuestEndDialog(env);
 						case FINISH_DIALOG:
 							return sendQuestSelectionDialog(env);
 					}
@@ -178,19 +181,16 @@ public class _2430SecretInformation extends QuestHandler {
 			int var = qs.getQuestVarById(0);
 			switch (targetId) {
 				case 204377: // Grall
-					if (var == 2) {
-						return sendQuestEndDialog(env, 0);
-					}
+					if (var == 2)
+						return sendQuestEndDialog(env);
 					break;
 				case 798082: // Bicorunerk
-					if (var == 6) {
-						return sendQuestEndDialog(env, 1);
-					}
+					if (var == 6)
+						return sendQuestEndDialog(env);
 					break;
 				case 204300: // Bolverk
-					if (var == 8) {
-						return sendQuestEndDialog(env, 2);
-					}
+					if (var == 8)
+						return sendQuestEndDialog(env);
 					break;
 			}
 		}

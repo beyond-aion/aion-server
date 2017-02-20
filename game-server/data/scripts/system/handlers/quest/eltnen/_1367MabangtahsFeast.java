@@ -58,8 +58,8 @@ public class _1367MabangtahsFeast extends QuestHandler {
 						qs.setStatus(QuestStatus.REWARD);
 						updateQuestStatus(env);
 						removeQuestItems(env);
-						qs.setReward(0);
-						return sendQuestDialog(env, DialogPage.getRewardPageByIndex(qs.getReward()).id());
+						qs.setRewardGroup(0);
+						return sendQuestDialog(env, DialogPage.getRewardPageByIndex(qs.getRewardGroup()).id());
 					} else
 						return sendQuestDialog(env, 1352);
 				} else if (env.getDialogActionId() == SETPRO2) {
@@ -67,8 +67,8 @@ public class _1367MabangtahsFeast extends QuestHandler {
 						qs.setStatus(QuestStatus.REWARD);
 						updateQuestStatus(env);
 						removeQuestItems(env);
-						qs.setReward(1);
-						return sendQuestDialog(env, DialogPage.getRewardPageByIndex(qs.getReward()).id());
+						qs.setRewardGroup(1);
+						return sendQuestDialog(env, DialogPage.getRewardPageByIndex(qs.getRewardGroup()).id());
 					} else
 						return sendQuestDialog(env, 1352);
 				} else if (env.getDialogActionId() == SETPRO3) {
@@ -76,14 +76,14 @@ public class _1367MabangtahsFeast extends QuestHandler {
 						qs.setStatus(QuestStatus.REWARD);
 						updateQuestStatus(env);
 						removeQuestItems(env);
-						qs.setReward(2);
-						return sendQuestDialog(env, DialogPage.getRewardPageByIndex(qs.getReward()).id());
+						qs.setRewardGroup(2);
+						return sendQuestDialog(env, DialogPage.getRewardPageByIndex(qs.getRewardGroup()).id());
 					} else
 						return sendQuestDialog(env, 1352);
 				} else
 					return sendQuestStartDialog(env);
 			} else if (qs.getStatus() == QuestStatus.REWARD) {
-				return sendQuestEndDialog(env, qs.getReward());
+				return sendQuestEndDialog(env);
 			}
 		}
 		return false;

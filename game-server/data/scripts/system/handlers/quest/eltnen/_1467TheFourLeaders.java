@@ -3,13 +3,11 @@ package quest.eltnen;
 import static com.aionemu.gameserver.model.DialogAction.*;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author Balthazar
@@ -59,26 +57,22 @@ public class _1467TheFourLeaders extends QuestHandler {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 1011);
 					case SETPRO1:
+						qs.setRewardGroup(0);
 						return defaultCloseDialog(env, 0, 1);
 					case SETPRO2:
+						qs.setRewardGroup(1);
 						return defaultCloseDialog(env, 0, 2);
 					case SETPRO3:
+						qs.setRewardGroup(2);
 						return defaultCloseDialog(env, 0, 3);
 					case SETPRO4:
+						qs.setRewardGroup(3);
 						return defaultCloseDialog(env, 0, 4);
 				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
-			if (targetId == npcId) {
-				switch (dialogActionId) {
-					case USE_OBJECT:
-						return sendQuestDialog(env, qs.getQuestVarById(0) + 4);
-					case SELECTED_QUEST_NOREWARD:
-						QuestService.finishQuest(env, qs.getQuestVarById(0) - 1);
-						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
-						return true;
-				}
-			}
+			if (targetId == npcId)
+				return sendQuestEndDialog(env);
 		}
 		return false;
 	}

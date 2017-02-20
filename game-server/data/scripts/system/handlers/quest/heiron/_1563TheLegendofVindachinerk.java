@@ -85,9 +85,12 @@ public class _1563TheLegendofVindachinerk extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 798096)
-				return sendQuestEndDialog(env, 0);
+				qs.setRewardGroup(0);
 			else if (targetId == 279005)
-				return sendQuestEndDialog(env, 1);
+				qs.setRewardGroup(1);
+			else
+				return false;
+			return sendQuestEndDialog(env);
 		}
 		return false;
 	}

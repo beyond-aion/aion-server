@@ -101,7 +101,7 @@ public class _14054KrallIngToKralltumagna extends QuestHandler {
 			if (targetId == 800413) { // Javlantia
 				if (dialogActionId == USE_OBJECT)
 					return sendQuestDialog(env, 3057);
-				return sendQuestEndDialog(env, 0);
+				return sendQuestEndDialog(env);
 			}
 		}
 		return false;

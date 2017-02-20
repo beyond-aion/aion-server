@@ -71,7 +71,7 @@ public class ChatUtil {
 	 * @see #name(String)
 	 */
 	public static String name(Player player) {
-		return name(player.getName(AdminConfig.CUSTOMTAG_ENABLE));
+		return name(player.getName(true));
 	}
 
 	/**

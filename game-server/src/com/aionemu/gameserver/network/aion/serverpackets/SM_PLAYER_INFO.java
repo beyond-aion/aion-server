@@ -2,7 +2,6 @@ package com.aionemu.gameserver.network.aion.serverpackets;
 
 import java.util.List;
 
-import com.aionemu.gameserver.configs.administration.AdminConfig;
 import com.aionemu.gameserver.model.actions.PlayerMode;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.CustomPlayerState;
@@ -78,7 +77,7 @@ public class SM_PLAYER_INFO extends AionServerPacket {
 
 		writeC(player.getHeading());
 
-		writeS(player.getName(AdminConfig.CUSTOMTAG_ENABLE));
+		writeS(player.getName(true));
 
 		writeH(pcd.getTitleId());
 		writeH(player.getCommonData().isHaveMentorFlag() ? 1 : 0);

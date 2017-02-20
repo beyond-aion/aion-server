@@ -83,7 +83,7 @@ public class _2136TheLostAxe extends QuestHandler {
 						qs.setStatus(QuestStatus.REWARD);
 						updateQuestStatus(env);
 						removeQuestItem(env, 182203130, 1);
-						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 0));
+						qs.setRewardGroup(1);
 						return sendQuestDialog(env, 6);
 					}
 					return false;
@@ -92,7 +92,7 @@ public class _2136TheLostAxe extends QuestHandler {
 						qs.setStatus(QuestStatus.REWARD);
 						updateQuestStatus(env);
 						removeQuestItem(env, 182203130, 1);
-						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 0));
+						qs.setRewardGroup(0);
 						return sendQuestDialog(env, 5);
 					}
 			}

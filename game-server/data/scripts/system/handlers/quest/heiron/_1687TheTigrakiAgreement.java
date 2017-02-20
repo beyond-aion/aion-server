@@ -19,8 +19,6 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 public class _1687TheTigrakiAgreement extends QuestHandler {
 
-	private int rewardGroup;
-
 	public _1687TheTigrakiAgreement() {
 		super(1687);
 	}
@@ -65,19 +63,19 @@ public class _1687TheTigrakiAgreement extends QuestHandler {
 					case FINISH_DIALOG:
 						return defaultCloseDialog(env, var, var);
 					case SETPRO10:
-						rewardGroup = 0;
-						return defaultCloseDialog(env, var, var, true, true, 0); // reward 1
+						qs.setRewardGroup(0);
+						return defaultCloseDialog(env, var, var, true, true); // reward 1
 					case SETPRO20:
-						rewardGroup = 1;
-						return defaultCloseDialog(env, var, var, true, true, 1); // reward 2
+						qs.setRewardGroup(1);
+						return defaultCloseDialog(env, var, var, true, true); // reward 2
 					case SETPRO30:
-						rewardGroup = 2;
-						return defaultCloseDialog(env, var, var, true, true, 2); // reward 3
+						qs.setRewardGroup(2);
+						return defaultCloseDialog(env, var, var, true, true); // reward 3
 				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204601) { // Brosia
-				return sendQuestEndDialog(env, rewardGroup);
+				return sendQuestEndDialog(env);
 			}
 		}
 		return false;

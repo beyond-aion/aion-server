@@ -1,6 +1,7 @@
 package quest.ishalgen;
 
-import static com.aionemu.gameserver.model.DialogAction.*;
+import static com.aionemu.gameserver.model.DialogAction.USE_OBJECT;
+
 import com.aionemu.gameserver.model.PlayerClass;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -43,21 +44,27 @@ public class _2132ANewSkill extends QuestHandler {
 				playerClass = PlayerClass.getStartingClassFor(playerClass);
 			switch (playerClass) {
 				case WARRIOR:
+					qs.setRewardGroup(0);
 					qs.setQuestVar(1);
 					break;
 				case SCOUT:
+					qs.setRewardGroup(1);
 					qs.setQuestVar(2);
 					break;
 				case MAGE:
+					qs.setRewardGroup(2);
 					qs.setQuestVar(3);
 					break;
 				case PRIEST:
+					qs.setRewardGroup(3);
 					qs.setQuestVar(4);
 					break;
 				case ENGINEER:
+					qs.setRewardGroup(4);
 					qs.setQuestVar(5);
 					break;
 				case ARTIST:
+					qs.setRewardGroup(5);
 					qs.setQuestVar(6);
 					break;
 			}
@@ -84,7 +91,7 @@ public class _2132ANewSkill extends QuestHandler {
 					if (env.getDialogActionId() == USE_OBJECT)
 						return sendQuestDialog(env, 1011);
 					else
-						return sendQuestEndDialog(env, 0);
+						return sendQuestEndDialog(env);
 				}
 				return false;
 			case 203528:
@@ -92,7 +99,7 @@ public class _2132ANewSkill extends QuestHandler {
 					if (env.getDialogActionId() == USE_OBJECT)
 						return sendQuestDialog(env, 1352);
 					else
-						return sendQuestEndDialog(env, 1);
+						return sendQuestEndDialog(env);
 				}
 				return false;
 			case 203529:
@@ -100,7 +107,7 @@ public class _2132ANewSkill extends QuestHandler {
 					if (env.getDialogActionId() == USE_OBJECT)
 						return sendQuestDialog(env, 1693);
 					else
-						return sendQuestEndDialog(env, 2);
+						return sendQuestEndDialog(env);
 				}
 				return false;
 			case 203530:
@@ -108,7 +115,7 @@ public class _2132ANewSkill extends QuestHandler {
 					if (env.getDialogActionId() == USE_OBJECT)
 						return sendQuestDialog(env, 2034);
 					else
-						return sendQuestEndDialog(env, 3);
+						return sendQuestEndDialog(env);
 				}
 				return false;
 			case 801218:
@@ -116,7 +123,7 @@ public class _2132ANewSkill extends QuestHandler {
 					if (env.getDialogActionId() == USE_OBJECT)
 						return sendQuestDialog(env, 2375);
 					else
-						return sendQuestEndDialog(env, 4);
+						return sendQuestEndDialog(env);
 				}
 				return false;
 			case 801219:
@@ -124,7 +131,7 @@ public class _2132ANewSkill extends QuestHandler {
 					if (env.getDialogActionId() == USE_OBJECT)
 						return sendQuestDialog(env, 2716);
 					else
-						return sendQuestEndDialog(env, 5);
+						return sendQuestEndDialog(env);
 				}
 				return false;
 		}

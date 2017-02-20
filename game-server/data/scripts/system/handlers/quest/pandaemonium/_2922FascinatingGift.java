@@ -1,6 +1,7 @@
 package quest.pandaemonium;
 
 import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -50,9 +51,11 @@ public class _2922FascinatingGift extends QuestHandler {
 					return sendQuestDialog(env, 1097);
 				} else if (dialogActionId == SETPRO10) {
 					qs.setQuestVar(10);
+					qs.setRewardGroup(0);
 					return defaultCloseDialog(env, 10, 10, true, false);
 				} else if (dialogActionId == SETPRO20) {
 					qs.setQuestVar(20);
+					qs.setRewardGroup(1);
 					return defaultCloseDialog(env, 20, 20, true, false);
 				}
 			}
@@ -66,7 +69,7 @@ public class _2922FascinatingGift extends QuestHandler {
 				if (dialogActionId == USE_OBJECT) {
 					return sendQuestDialog(env, 1693);
 				}
-				return sendQuestEndDialog(env, 1);
+				return sendQuestEndDialog(env);
 			}
 		}
 		return false;

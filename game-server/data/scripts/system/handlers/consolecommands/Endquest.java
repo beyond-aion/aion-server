@@ -52,7 +52,7 @@ public class Endquest extends ConsoleCommand {
 		qs.setStatus(QuestStatus.COMPLETE);
 		qs.setQuestVar(0);
 		if (!DataManager.QUEST_DATA.getQuestById(qs.getQuestId()).getRewards().isEmpty())
-			qs.setReward(0); // follow quests could require reward group > 0 to be unlocked (see quest_data.xml)
+			qs.setRewardGroup(0); // follow quests could require reward group > 0 to be unlocked (see quest_data.xml)
 		PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(ActionType.UPDATE, qs));
 		QuestEngine.getInstance().onQuestCompleted(player, qs.getQuestId());
 		player.getController().updateNearbyQuests();

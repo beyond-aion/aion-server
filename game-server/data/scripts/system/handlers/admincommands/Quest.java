@@ -46,7 +46,7 @@ public class Quest extends AdminCommand {
 			"[player] <quest> <set> <status> <var> [varNum] - Sets the specified quest state (default: apply var to all varNums, optional: set var to varNum [0-5]).",
 			"[player] <quest> <setflags> <flags> - Sets the specified quest flags.",
 			"[player] <quest> <dialog> <dialog_page_id> - Sends the dialog page with the given page ID.",
-			"Note: Player name parameters are optional. If missing, your current target will be taken."
+			"Note: If no player parameter is given, your current target will be taken (defaults to your character, if no player is targeted)."
 		);
 		// @formatter:on
 	}
@@ -76,12 +76,10 @@ public class Quest extends AdminCommand {
 
 			questId = ChatUtil.getQuestId(params[index]);
 		} else {
-			if (!(admin.getTarget() instanceof Player)) {
-				PacketSendUtility.sendPacket(admin, SM_SYSTEM_MESSAGE.STR_INVALID_TARGET());
-				return;
-			}
-
-			target = (Player) admin.getTarget();
+			if (!(admin.getTarget() instanceof Player))
+				target = admin;
+			else
+				target = (Player) admin.getTarget();
 		}
 
 		if (questId == 0 || DataManager.QUEST_DATA.getQuestById(questId) == null) {
@@ -169,20 +167,17 @@ public class Quest extends AdminCommand {
 
 	private void resetQuest(Player admin, Player target, int questId) {
 		QuestState qs = target.getQuestStateList().getQuestState(questId);
-		if (qs == null || (qs.getStatus() != QuestStatus.START && qs.getStatus() != QuestStatus.REWARD)) {
+		if (qs == null || qs.getStatus() != QuestStatus.START) {
 			sendInfo(admin, "Only currently active quests can be reset.");
 			return;
 		}
-		if (questId == 1006 || questId == 2008 || (qs.getStatus() == QuestStatus.REWARD && qs.getQuestVars().getQuestVars() == 1)) {
-			sendInfo(admin, "Quest " + ChatUtil.quest(questId) + " can't be reset.");
-			return;
-		}
-		if (qs.getQuestVars().getQuestVars() == 0) {
+		if (qs.getQuestVars().getQuestVars() == 0 && qs.getRewardGroup() == null) {
 			sendInfo(admin, "Player " + target.getName() + "'s quest is already at the beginning.");
 			return;
 		}
 		qs.setStatus(QuestStatus.START);
 		qs.setQuestVar(0);
+		qs.setRewardGroup(null);
 		PacketSendUtility.sendPacket(target, new SM_QUEST_ACTION(ActionType.UPDATE, qs));
 		sendInfo(admin, "Reset " + ChatUtil.quest(questId) + " for player " + target.getName() + ".");
 	}
@@ -305,7 +300,7 @@ public class Quest extends AdminCommand {
 		if (status == QuestStatus.COMPLETE) {
 			qs.setQuestVar(0); // completed quests vars are always 0
 			if (!DataManager.QUEST_DATA.getQuestById(qs.getQuestId()).getRewards().isEmpty())
-				qs.setReward(0); // follow quests could require reward group > 0 to be unlocked (see quest_data.xml)
+				qs.setRewardGroup(0); // follow quests could require reward group > 0 to be unlocked (see quest_data.xml)
 			QuestEngine.getInstance().onQuestCompleted(target, questId);
 		} else {
 			if (varNum == -1)

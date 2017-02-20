@@ -1,6 +1,7 @@
 package quest.event_quests;
 
 import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.EmotionId;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -70,7 +71,7 @@ public class _80021EventFestiveUs extends QuestHandler {
 					sendEmotion(env, (Creature) env.getVisibleObject(), EmotionId.PANIC, true);
 					return sendQuestDialog(env, 2035);
 				} else if (env.getDialogActionId() == SETPRO3)
-					return defaultCloseDialog(env, 2, 3, true, false, 0, 0, 0, 182214015, 1);
+					return defaultCloseDialog(env, 2, 3, true, false, 0, 0, 182214015, 1);
 				else
 					return sendQuestStartDialog(env);
 			}

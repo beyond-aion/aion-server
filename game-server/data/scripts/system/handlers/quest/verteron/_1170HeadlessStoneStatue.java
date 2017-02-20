@@ -1,6 +1,7 @@
 package quest.verteron;
 
 import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -79,7 +80,7 @@ public class _1170HeadlessStoneStatue extends QuestHandler {
 		if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
 			if (movieId == 16) {
 				removeQuestItem(env, 182200504, 1);
-				return QuestService.finishQuest(env, 0);
+				return QuestService.finishQuest(env);
 			}
 		}
 		return false;

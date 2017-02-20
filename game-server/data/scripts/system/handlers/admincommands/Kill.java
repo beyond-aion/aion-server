@@ -6,8 +6,10 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.utils.ChatUtil;
 import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 
 /**
@@ -38,7 +40,7 @@ public class Kill extends AdminCommand {
 		}
 
 		if (params.length == 0) {
-			if (target instanceof Creature && !target.equals(player)) {
+			if (target instanceof Creature) {
 				String targetInfo = target.getClass().getSimpleName().toLowerCase() + ": ";
 				if (target instanceof Npc)
 					targetInfo += ChatUtil.path((Npc) target);
@@ -49,7 +51,7 @@ public class Kill extends AdminCommand {
 				else
 					sendInfo(player, "Couldn't kill " + targetInfo);
 			} else {
-				sendInfo(player, "Invalid target.");
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_INVALID_TARGET());
 			}
 		} else {
 			int count = 0;

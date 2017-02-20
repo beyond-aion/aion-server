@@ -147,7 +147,7 @@ public class _3934TheQuestForTemplars extends QuestHandler {
 						case SET_SUCCEED:
 							if (player.getInventory().getItemCountByItemId(186000080) >= 1) {
 								removeQuestItem(env, 186000080, 1);
-								return defaultCloseDialog(env, 8, 8, true, false, 0);
+								return defaultCloseDialog(env, 8, 8, true, false);
 							} else {
 								return sendQuestDialog(env, 3825);
 							}

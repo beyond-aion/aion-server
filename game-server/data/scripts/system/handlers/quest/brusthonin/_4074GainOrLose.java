@@ -54,7 +54,7 @@ public class _4074GainOrLose extends QuestHandler {
 					case SELECT1:
 						if (kinahAmount >= 1000 && demonsEye >= 1) {
 							changeQuestStep(env, 0, 0, true);
-							qs.setReward(0);
+							qs.setRewardGroup(0);
 							return sendQuestDialog(env, 5);
 						} else {
 							return sendQuestDialog(env, 1009);
@@ -62,7 +62,7 @@ public class _4074GainOrLose extends QuestHandler {
 					case SELECT2:
 						if (kinahAmount >= 5000 && demonsEye >= 1) {
 							changeQuestStep(env, 0, 0, true);
-							qs.setReward(1);
+							qs.setRewardGroup(1);
 							return sendQuestDialog(env, 6);
 						} else {
 							return sendQuestDialog(env, 1009);
@@ -70,7 +70,7 @@ public class _4074GainOrLose extends QuestHandler {
 					case SELECT3:
 						if (kinahAmount >= 25000 && demonsEye >= 1) {
 							changeQuestStep(env, 0, 0, true);
-							qs.setReward(2);
+							qs.setRewardGroup(2);
 							return sendQuestDialog(env, 7);
 						} else {
 							return sendQuestDialog(env, 1009);
@@ -82,23 +82,23 @@ public class _4074GainOrLose extends QuestHandler {
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 205181) { // Bonarunerk
 				if (dialogActionId == SELECTED_QUEST_NOREWARD) {
-					if (qs.getReward() == null)
+					if (qs.getRewardGroup() == null)
 						return false;
-					switch (qs.getReward()) {
+					switch (qs.getRewardGroup()) {
 						case 0:
-							if (player.getInventory().tryDecreaseKinah(1000) && QuestService.finishQuest(env, 0)) {
+							if (player.getInventory().tryDecreaseKinah(1000) && QuestService.finishQuest(env)) {
 								removeQuestItem(env, 186000038, 1);
 								ItemService.addItem(player, 186000010, 1);
 							}
 							break;
 						case 1:
-							if (player.getInventory().tryDecreaseKinah(5000) && QuestService.finishQuest(env, 1)) {
+							if (player.getInventory().tryDecreaseKinah(5000) && QuestService.finishQuest(env)) {
 								removeQuestItem(env, 186000038, 1);
 								ItemService.addItem(player, 186000010, Rnd.get(1, 3));
 							}
 							break;
 						case 2:
-							if (player.getInventory().tryDecreaseKinah(25000) && QuestService.finishQuest(env, 2)) {
+							if (player.getInventory().tryDecreaseKinah(25000) && QuestService.finishQuest(env)) {
 								removeQuestItem(env, 186000038, 1);
 								ItemService.addItem(player, 186000010, Rnd.get(1, 6));
 							}

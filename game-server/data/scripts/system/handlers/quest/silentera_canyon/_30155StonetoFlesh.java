@@ -3,13 +3,10 @@ package quest.silentera_canyon;
 import static com.aionemu.gameserver.model.DialogAction.*;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.services.QuestService;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author Ritsu
@@ -49,14 +46,7 @@ public class _30155StonetoFlesh extends QuestHandler {
 				if (var == 3)
 					return sendQuestEndDialog(env);
 			} else if (targetId == 799234) {
-				switch (dialogActionId) {
-					case SELECTED_QUEST_NOREWARD:
-						if (var == 2) {
-							QuestService.finishQuest(env, qs.getQuestVars().getQuestVars() - 2);
-							PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
-							return true;
-						}
-				}
+				return sendQuestEndDialog(env);
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
@@ -75,6 +65,7 @@ public class _30155StonetoFlesh extends QuestHandler {
 					case SELECT_QUEST_REWARD:
 						if (var == 2) {
 							removeQuestItem(env, 182209252, 1);
+							qs.setRewardGroup(0);
 							qs.setStatus(QuestStatus.REWARD);
 							updateQuestStatus(env);
 							return sendQuestDialog(env, 6);
@@ -88,7 +79,7 @@ public class _30155StonetoFlesh extends QuestHandler {
 						return false;
 					case SETPRO1:
 						if (var == 0)
-							return defaultCloseDialog(env, 0, 1, false, false, 182209252, 1, 0, 0);
+							return defaultCloseDialog(env, 0, 1, 182209252, 1);
 				}
 			} else if (targetId == 204304) {
 				switch (dialogActionId) {
@@ -103,6 +94,7 @@ public class _30155StonetoFlesh extends QuestHandler {
 					case SELECT_QUEST_REWARD:
 						if (var == 3) {
 							removeQuestItem(env, 182209252, 1);
+							qs.setRewardGroup(1);
 							qs.setStatus(QuestStatus.REWARD);
 							updateQuestStatus(env);
 						}

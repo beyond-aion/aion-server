@@ -1,6 +1,7 @@
 package quest.poeta;
 
 import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
@@ -46,17 +47,13 @@ public class _1111InsomniaMedicine extends QuestHandler {
 						removeQuestItem(env, 182200222, 1);
 						return sendQuestDialog(env, 2375);
 					} else if (qs.getQuestVarById(0) == 3) {
+						qs.setRewardGroup(1);
 						removeQuestItem(env, 182200221, 1);
 						return sendQuestDialog(env, 2716);
 					}
 					return false;
-				} else if (env.getDialogActionId() == SELECT_QUEST_REWARD)
-					return sendQuestDialog(env, qs.getQuestVarById(0) + 3);
-				else if (env.getDialogActionId() == SELECTED_QUEST_NOREWARD) {
-					QuestService.finishQuest(env, qs.getQuestVarById(0) - 2);
-					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
-					return true;
 				}
+				return sendQuestEndDialog(env);
 			}
 		} else if (targetId == 203061) {
 			if (env.getDialogActionId() == QUEST_SELECT) {
@@ -76,6 +73,7 @@ public class _1111InsomniaMedicine extends QuestHandler {
 				if (!giveQuestItem(env, 182200222, 1))
 					return true;
 				qs.setQuestVarById(0, 2);
+				qs.setRewardGroup(0);
 				qs.setStatus(QuestStatus.REWARD);
 				updateQuestStatus(env);
 				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
@@ -84,6 +82,7 @@ public class _1111InsomniaMedicine extends QuestHandler {
 				if (!giveQuestItem(env, 182200221, 1))
 					return true;
 				qs.setQuestVarById(0, 3);
+				qs.setRewardGroup(1);
 				qs.setStatus(QuestStatus.REWARD);
 				updateQuestStatus(env);
 				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));

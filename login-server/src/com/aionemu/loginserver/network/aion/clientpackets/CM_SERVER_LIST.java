@@ -38,7 +38,7 @@ public class CM_SERVER_LIST extends AionClientPacket {
 	protected void runImpl() {
 		LoginConnection con = getConnection();
 		if (con.getSessionKey().checkLogin(accountId, loginOk)) {
-			if (GameServerTable.getGameServers().size() == 0)
+			if (GameServerTable.size() == 0)
 				con.close(new SM_LOGIN_FAIL(AionAuthResponse.STR_L2AUTH_S_NO_SERVER_LIST));
 			else
 				AccountController.loadGSCharactersCount(accountId);

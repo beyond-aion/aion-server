@@ -1,16 +1,24 @@
 package com.aionemu.gameserver.model.templates.item.actions;
 
+import java.util.List;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
-import com.aionemu.gameserver.model.DescriptionId;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.stats.container.PlayerLifeStats;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.skillengine.effect.EffectTemplate;
+import com.aionemu.gameserver.skillengine.effect.HealEffect;
+import com.aionemu.gameserver.skillengine.effect.HealInstantEffect;
+import com.aionemu.gameserver.skillengine.effect.MPHealEffect;
+import com.aionemu.gameserver.skillengine.effect.MPHealInstantEffect;
+import com.aionemu.gameserver.skillengine.effect.ProcHealInstantEffect;
+import com.aionemu.gameserver.skillengine.effect.ProcMPHealInstantEffect;
 import com.aionemu.gameserver.skillengine.effect.SummonEffect;
 import com.aionemu.gameserver.skillengine.effect.TransformEffect;
 import com.aionemu.gameserver.skillengine.model.Skill;
@@ -52,20 +60,31 @@ public class SkillUseAction extends AbstractItemAction {
 		Skill skill = SkillEngine.getInstance().getSkill(player, skillid, level, player.getTarget(), parentItem.getItemTemplate(), false);
 		if (skill == null)
 			return false;
-		int nameId = parentItem.getItemTemplate().getNameId();
-		// Cant use transform items while already transformed
-		if (player.isTransformed()) {
-			for (EffectTemplate template : skill.getSkillTemplate().getEffects().getEffects()) {
-				if (template instanceof TransformEffect) {
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANT_USE_ITEM(new DescriptionId(nameId)));
+		List<EffectTemplate> effects = skill.getSkillTemplate().getEffects().getEffects();
+		if (!effects.isEmpty()) {
+			for (EffectTemplate template : effects) {
+				if (player.isTransformed() && template instanceof TransformEffect) { // Cant use transform items while already transformed
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_CAN_NOT_CAST_IN_SHAPECHANGE());
+					return false;
+				}
+				if (player.getSummon() != null && template instanceof SummonEffect) {
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_SUMMON_ALREADY_HAVE_A_FOLLOWER());
 					return false;
 				}
 			}
-		}
-		if (player.getSummon() != null) {
-			for (EffectTemplate template : skill.getSkillTemplate().getEffects().getEffects()) {
-				if (template instanceof SummonEffect) {
-					PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1300072));
+			PlayerLifeStats lifeStats = player.getLifeStats();
+			if (lifeStats.isFullyRestoredHp() || lifeStats.isFullyRestoredMp()) { // convenience feature: block using ineffective heals
+				int hpHealEffects = 0, mpHealEffects = 0;
+				for (EffectTemplate template : effects) {
+					if (template instanceof HealEffect || template instanceof HealInstantEffect || template instanceof ProcHealInstantEffect) {
+						hpHealEffects++;
+					} else if (template instanceof MPHealEffect || template instanceof MPHealInstantEffect || template instanceof ProcMPHealInstantEffect) {
+						mpHealEffects++;
+					}
+				}
+				if (hpHealEffects + mpHealEffects == effects.size() && !(!lifeStats.isFullyRestoredHp() && hpHealEffects > 0)
+					&& !(!lifeStats.isFullyRestoredMp() && mpHealEffects > 0)) {
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_NOTHING_HAPPEN());
 					return false;
 				}
 			}

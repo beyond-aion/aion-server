@@ -31,6 +31,6 @@ public class SM_GS_AUTH_RESPONSE extends GsServerPacket {
 		writeC(0);
 		writeC(response.getResponseId());
 		if (response == GsAuthResponse.AUTHED)
-			writeC(GameServerTable.getGameServers().size());
+			writeC(GameServerTable.size());
 	}
 }

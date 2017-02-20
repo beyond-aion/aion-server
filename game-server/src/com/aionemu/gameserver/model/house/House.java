@@ -369,7 +369,7 @@ public class House extends VisibleObject {
 		return Race.ASMODIANS;
 	}
 
-	public synchronized Npc getTeleport() {
+	public synchronized Npc getRelationshipCrystal() {
 		return spawns.get(SpawnType.TELEPORT);
 	}
 
@@ -378,17 +378,13 @@ public class House extends VisibleObject {
 	}
 
 	/**
-	 * Do not use directly !!! It's for housespawn command only
+	 * Do not use directly !!! It's for instance destroy of studios only (studios and their instance get reused, but house npcs are respawned)
 	 */
-	public synchronized void setSpawn(SpawnType type, Npc npc) {
-		if (npc == null) {
-			npc = spawns.remove(type);
-			if (npc != null) {
-				npc.getController().delete();
-			}
-		} else {
-			spawns.put(type, npc);
+	public synchronized void despawnNpcs() {
+		for (Npc npc : spawns.values()) {
+			npc.getController().delete();
 		}
+		spawns.clear();
 	}
 
 	public int getCurrentSignNpcId() {

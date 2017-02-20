@@ -53,7 +53,7 @@ public class Questrestart extends PlayerCommand {
 		qs.setStatus(QuestStatus.START);
 		qs.setQuestVar(0);
 		qs.setFlags(0);
-		qs.setReward(null);
+		qs.setRewardGroup(null);
 		PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(ActionType.UPDATE, qs));
 		sendInfo(player, "Quest " + ChatUtil.quest(id) + " was restarted.");
 	}

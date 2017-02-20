@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.network.chatserver.serverpackets;
 
-import com.aionemu.gameserver.configs.administration.AdminConfig;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.chatserver.ChatServerConnection;
 import com.aionemu.gameserver.network.chatserver.CsServerPacket;
@@ -20,7 +19,7 @@ public class SM_CS_PLAYER_AUTH extends CsServerPacket {
 		super(0x01);
 		this.playerId = player.getObjectId();
 		this.accName = player.getAcountName();
-		this.nick = player.getName(AdminConfig.CUSTOMTAG_ENABLE);
+		this.nick = player.getName(true);
 		this.raceId = player.getRace().getRaceId();
 		this.accessLevel = player.getAccessLevel();
 	}

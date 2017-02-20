@@ -5,7 +5,6 @@ import java.sql.Timestamp;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.PersistentState;
 import com.aionemu.gameserver.model.templates.QuestTemplate;
-import com.aionemu.gameserver.services.QuestService;
 
 /**
  * @author MrPoke
@@ -109,15 +108,15 @@ public class QuestState {
 		return nextRepeatTime;
 	}
 
-	public void setReward(Integer reward) {
+	public void setRewardGroup(Integer reward) {
 		this.reward = reward;
 		setPersistentState(PersistentState.UPDATE_REQUIRED);
 	}
 
 	/**
-	 * @return The reward group or null if not set. This is set by the quest handler, via {@link QuestService#finishQuest(env, reward)}
+	 * @return The reward group or null if not set
 	 */
-	public Integer getReward() {
+	public Integer getRewardGroup() {
 		return reward;
 	}
 

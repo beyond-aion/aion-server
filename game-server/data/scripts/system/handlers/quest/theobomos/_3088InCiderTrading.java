@@ -1,6 +1,7 @@
 package quest.theobomos;
 
 import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -45,7 +46,14 @@ public class _3088InCiderTrading extends QuestHandler {
 			if (targetId == 798202) {
 				if (dialogActionId == QUEST_SELECT) {
 					if (qs.getQuestVarById(0) == 0) {
-						return sendQuestDialog(env, 1011);
+						if (qs.getRewardGroup() == null)
+							return sendQuestDialog(env, 1011);
+						else if (qs.getRewardGroup() == 0)
+							return sendQuestDialog(env, 1352);
+						else if (qs.getRewardGroup() == 1)
+							return sendQuestDialog(env, 2034);
+						else if (qs.getRewardGroup() == 2)
+							return sendQuestDialog(env, 3398);
 					}
 				} else if (dialogActionId == SELECT1_1) {
 					if (player.getInventory().getItemCountByItemId(160003020) >= 1)
@@ -65,16 +73,19 @@ public class _3088InCiderTrading extends QuestHandler {
 				} else if (dialogActionId == SELECT1) {
 					return sendQuestDialog(env, 1011);
 				} else if (dialogActionId == SETPRO1) {
+					qs.setRewardGroup(0);
 					player.getInventory().decreaseByItemId(160003020, 1);
 					return sendQuestDialog(env, 1352);
 				} else if (dialogActionId == SETPRO2) {
-					return defaultCloseDialog(env, 0, 2);
+					return defaultCloseDialog(env, 0, 2, workItems.get(0).getItemId(), workItems.get(0).getCount());
 				} else if (dialogActionId == SETPRO3) {
+					qs.setRewardGroup(1);
 					player.getInventory().decreaseByItemId(160003020, 10);
 					return sendQuestDialog(env, 2034);
 				} else if (dialogActionId == SETPRO4) {
 					return defaultCloseDialog(env, 0, 4);
 				} else if (dialogActionId == SETPRO7) {
+					qs.setRewardGroup(2);
 					player.getInventory().decreaseByItemId(160003020, 100);
 					return sendQuestDialog(env, 3398);
 				} else if (dialogActionId == SETPRO8) {
@@ -125,21 +136,9 @@ public class _3088InCiderTrading extends QuestHandler {
 				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
-			if (targetId == 798201 && qs.getQuestVarById(0) == 2) {
-				if (dialogActionId == USE_OBJECT) {
-					return sendQuestDialog(env, 5);
-				}
+			if (targetId == 798201 && qs.getQuestVarById(0) == 2 || targetId == 798132 && qs.getQuestVarById(0) == 6
+				|| targetId == 798166 && qs.getQuestVarById(0) == 8) {
 				return sendQuestEndDialog(env);
-			} else if (targetId == 798132 && qs.getQuestVarById(0) == 6) {
-				if (dialogActionId == USE_OBJECT) {
-					return sendQuestDialog(env, 5);
-				}
-				return sendQuestEndDialog(env, 1);
-			} else if (targetId == 798166 && qs.getQuestVarById(0) == 8) {
-				if (dialogActionId == USE_OBJECT) {
-					return sendQuestDialog(env, 5);
-				}
-				return sendQuestEndDialog(env, 2);
 			}
 		}
 		return false;

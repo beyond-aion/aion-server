@@ -103,18 +103,32 @@ public class _2009ACeremonyinPandaemonium extends QuestHandler {
 					case SETPRO3:
 						if (var == 2) {
 							PlayerClass playerClass = PlayerClass.getStartingClassFor(player.getCommonData().getPlayerClass());
-							if (playerClass == PlayerClass.WARRIOR)
-								qs.setQuestVar(10);
-							else if (playerClass == PlayerClass.SCOUT)
-								qs.setQuestVar(20);
-							else if (playerClass == PlayerClass.MAGE)
-								qs.setQuestVar(30);
-							else if (playerClass == PlayerClass.PRIEST)
-								qs.setQuestVar(40);
-							else if (playerClass == PlayerClass.ENGINEER)
-								qs.setQuestVar(50);
-							else if (playerClass == PlayerClass.ARTIST)
-								qs.setQuestVar(60);
+							switch (playerClass) {
+								case WARRIOR:
+									qs.setQuestVar(10);
+									qs.setRewardGroup(0);
+									break;
+								case SCOUT:
+									qs.setQuestVar(20);
+									qs.setRewardGroup(1);
+									break;
+								case MAGE:
+									qs.setQuestVar(30);
+									qs.setRewardGroup(2);
+									break;
+								case PRIEST:
+									qs.setQuestVar(40);
+									qs.setRewardGroup(3);
+									break;
+								case ENGINEER:
+									qs.setQuestVar(50);
+									qs.setRewardGroup(4);
+									break;
+								case ARTIST:
+									qs.setQuestVar(60);
+									qs.setRewardGroup(5);
+									break;
+							}
 							qs.setStatus(QuestStatus.REWARD);
 							updateQuestStatus(env);
 							return sendQuestSelectionDialog(env);
@@ -127,42 +141,42 @@ public class _2009ACeremonyinPandaemonium extends QuestHandler {
 					case USE_OBJECT:
 						return sendQuestDialog(env, 2034);
 					default:
-						return sendQuestEndDialog(env, 0);
+						return sendQuestEndDialog(env);
 				}
 			} else if (targetId == 204081 && var == 20) {
 				switch (env.getDialogActionId()) {
 					case USE_OBJECT:
 						return sendQuestDialog(env, 2375);
 					default:
-						return sendQuestEndDialog(env, 1);
+						return sendQuestEndDialog(env);
 				}
 			} else if (targetId == 204082 && var == 30) {
 				switch (env.getDialogActionId()) {
 					case USE_OBJECT:
 						return sendQuestDialog(env, 2716);
 					default:
-						return sendQuestEndDialog(env, 2);
+						return sendQuestEndDialog(env);
 				}
 			} else if (targetId == 204083 && var == 40) {
 				switch (env.getDialogActionId()) {
 					case USE_OBJECT:
 						return sendQuestDialog(env, 3057);
 					default:
-						return sendQuestEndDialog(env, 3);
+						return sendQuestEndDialog(env);
 				}
 			} else if (targetId == 801220 && var == 50) {
 				switch (env.getDialogActionId()) {
 					case USE_OBJECT:
 						return sendQuestDialog(env, 3398);
 					default:
-						return sendQuestEndDialog(env, 4);
+						return sendQuestEndDialog(env);
 				}
 			} else if (targetId == 801221 && var == 60) {
 				switch (env.getDialogActionId()) {
 					case USE_OBJECT:
 						return sendQuestDialog(env, 3739);
 					default:
-						return sendQuestEndDialog(env, 5);
+						return sendQuestEndDialog(env);
 				}
 			}
 		}

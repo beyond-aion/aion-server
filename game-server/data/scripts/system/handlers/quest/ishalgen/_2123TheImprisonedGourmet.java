@@ -50,6 +50,7 @@ public class _2123TheImprisonedGourmet extends QuestHandler {
 						case SETPRO1:
 							if (player.getInventory().getItemCountByItemId(182203121) >= 1) {
 								qs.setQuestVar(5); // 5
+								qs.setRewardGroup(0);
 								qs.setStatus(QuestStatus.REWARD); // rewatd
 								updateQuestStatus(env);
 								removeQuestItem(env, 182203121, 1);
@@ -60,6 +61,7 @@ public class _2123TheImprisonedGourmet extends QuestHandler {
 						case SETPRO2:
 							if (player.getInventory().getItemCountByItemId(182203122) >= 1) {
 								qs.setQuestVar(6); // 6
+								qs.setRewardGroup(1);
 								qs.setStatus(QuestStatus.REWARD); // rewatd
 								updateQuestStatus(env);
 								removeQuestItem(env, 182203122, 1);
@@ -70,6 +72,7 @@ public class _2123TheImprisonedGourmet extends QuestHandler {
 						case SETPRO3:
 							if (player.getInventory().getItemCountByItemId(182203123) >= 1) {
 								qs.setQuestVar(7); // 7
+								qs.setRewardGroup(2);
 								qs.setStatus(QuestStatus.REWARD); // rewatd
 								updateQuestStatus(env);
 								removeQuestItem(env, 182203123, 1);
@@ -86,7 +89,7 @@ public class _2123TheImprisonedGourmet extends QuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203550) { // Munin
-				return sendQuestEndDialog(env, qs.getQuestVarById(0) - 5);
+				return sendQuestEndDialog(env);
 			}
 		}
 		return false;

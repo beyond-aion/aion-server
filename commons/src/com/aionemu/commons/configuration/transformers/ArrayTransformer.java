@@ -4,13 +4,10 @@ import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.lang.reflect.Type;
 import java.security.InvalidParameterException;
-import java.util.List;
 
 import com.aionemu.commons.configuration.Property;
 import com.aionemu.commons.configuration.PropertyTransformer;
 import com.aionemu.commons.configuration.PropertyTransformerFactory;
-
-import javolution.util.FastTable;
 
 /**
  * Returns an <code>Array</code> containing the comma separated items.<br>
@@ -32,10 +29,11 @@ public class ArrayTransformer extends PropertyTransformer<Object[]> {
 			return (Object[]) Array.newInstance(type, 0); // return empty
 
 		PropertyTransformer<?> pt = PropertyTransformerFactory.getTransformer(type);
-		List<Object> list = new FastTable<>();
-		for (String val : value.split(" *, *"))
-			list.add(pt.transform(val, field));
+		String[] rawValues = value.split(" *, *");
+		Object[] array = (Object[]) Array.newInstance(type, rawValues.length);
+		for (int i = 0; i < rawValues.length; i++)
+			array[i] = pt.transform(rawValues[i], field);
 
-		return list.toArray();
+		return array;
 	}
 }

@@ -53,7 +53,7 @@ public class _14053DangerCubed extends QuestHandler {
 
 		if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204602)
-				return sendQuestEndDialog(env, 0);
+				return sendQuestEndDialog(env);
 		} else if (qs.getStatus() != QuestStatus.START) {
 			return false;
 		}

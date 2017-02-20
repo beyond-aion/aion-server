@@ -117,7 +117,7 @@ public class _3933ClassPreceptorConsent extends QuestHandler {
 						case SET_SUCCEED:
 							if (player.getInventory().getItemCountByItemId(186000080) >= 1) {
 								removeQuestItem(env, 186000080, 1);
-								return defaultCloseDialog(env, 6, 6, true, false, 0);
+								return defaultCloseDialog(env, 6, 6, true, false);
 							} else {
 								return sendQuestDialog(env, 3143);
 							}

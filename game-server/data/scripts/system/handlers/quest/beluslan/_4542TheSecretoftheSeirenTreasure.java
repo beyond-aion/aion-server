@@ -72,7 +72,7 @@ public class _4542TheSecretoftheSeirenTreasure extends QuestHandler {
 							return sendQuestDialog(env, 1438);
 						case SETPRO2:
 							removeQuestItem(env, 182215327, 1);
-							return defaultCloseDialog(env, 1, 2, false, false, 182215328, 1, 0, 0); // 2
+							return defaultCloseDialog(env, 1, 2, 182215328, 1); // 2
 						case SELECT_QUEST_REWARD:
 							removeQuestItem(env, 182215330, 1);
 							return defaultCloseDialog(env, 5, 5, true, true); // reward
@@ -111,7 +111,7 @@ public class _4542TheSecretoftheSeirenTreasure extends QuestHandler {
 							return sendQuestDialog(env, 2376);
 						case SETPRO5:
 							removeQuestItem(env, 182215329, 1);
-							return defaultCloseDialog(env, 4, 5, false, false, 182215330, 1, 0, 0); // 5
+							return defaultCloseDialog(env, 4, 5, 182215330, 1); // 5
 					}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {

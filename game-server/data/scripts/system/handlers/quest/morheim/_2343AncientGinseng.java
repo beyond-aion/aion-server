@@ -1,6 +1,7 @@
 package quest.morheim;
 
-import static com.aionemu.gameserver.model.DialogAction.*;
+import static com.aionemu.gameserver.model.DialogAction.QUEST_ACCEPT_1;
+
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -48,7 +49,7 @@ public class _2343AncientGinseng extends QuestHandler {
 					QuestService.addNewSpawn(player.getWorldId(), player.getInstanceId(), 212814, 1008.36f, 481.88f, 509.3f, (byte) 60);
 				removeQuestItem(env, 182204134, 1);
 				qs.setStatus(QuestStatus.REWARD);
-				QuestService.finishQuest(env, 0);
+				QuestService.finishQuest(env);
 				return true;
 			}
 		}

@@ -71,7 +71,7 @@ public class FearEffect extends EffectTemplate {
 			((NpcAI) effected.getAi()).setStateIfNot(AIState.FEAR);
 		if (GeoDataConfig.FEAR_ENABLE) {
 			ScheduledFuture<?> fearTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new FearTask(effector, effected), 0, 1000);
-			effect.setPeriodicTask(fearTask);
+			effect.setPeriodicTask(fearTask, position);
 		}
 
 		// resistchance of fear effect to damage, if value is lower than 100, fear can be interrupted bz damage
