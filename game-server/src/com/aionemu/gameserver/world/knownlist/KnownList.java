@@ -13,9 +13,9 @@ import org.slf4j.LoggerFactory;
 import com.aionemu.gameserver.model.animations.ObjectDeleteAnimation;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.gameobjects.Pet;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.skillengine.effect.AbnormalState;
 import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.world.MapRegion;
 import com.aionemu.gameserver.world.WorldPosition;
@@ -50,7 +50,7 @@ public class KnownList {
 	 */
 	protected final Map<Integer, VisibleObject> visualObjects = new ConcurrentHashMap<>();
 
-	private ReentrantLock lock = new ReentrantLock();
+	private final ReentrantLock lock = new ReentrantLock();
 
 	/**
 	 * @param owner
@@ -110,7 +110,7 @@ public class KnownList {
 	 * 
 	 * @param object
 	 */
-	protected boolean add(VisibleObject object) {
+	private boolean add(VisibleObject object) {
 		if (!isAwareOf(object))
 			return false;
 
@@ -120,21 +120,34 @@ public class KnownList {
 				knownPlayers.put(object.getObjectId(), (Player) object);
 			}
 
-			if (object instanceof Player && !owner.canSee((Player) object))
-				return true;
-			if (object instanceof Pet && !sees(((Pet) object).getMaster()) && !owner.equals(((Pet) object).getMaster()))
-				return true; // pet won't display if client doesn't already see the master (spawn order is important, so playercontroller must handle it)
-
-			addVisualObject(object);
+			updateVisibleObject(object);
 			return true;
 		}
 
 		return false;
 	}
 
-	public void addVisualObject(VisibleObject object) {
-		if (visualObjects.put(object.getObjectId(), object) == null)
+	/**
+	 * Updates the visibility state in this {@link KnownList}, depending on the current see state of the {@link KnownList} owner.<br>
+	 * IMPORTANT: This method should only be called if the owner already knows the given object. There are no checks preventing adding unknown objects
+	 * to in sight list.
+	 */
+	public void updateVisibleObject(VisibleObject other) {
+		if (owner.canSee(other))
+			addToVisibleObjects(other);
+		else
+			delFromVisibleObjects(other, ObjectDeleteAnimation.FADE_OUT);
+	}
+
+	private void addToVisibleObjects(VisibleObject object) {
+		if (visualObjects.putIfAbsent(object.getObjectId(), object) == null) {
 			owner.getController().see(object);
+			if (object instanceof Player) {
+				Player player = (Player) object;
+				if (player.getPet() != null) // pet spawn packet must be sent after SM_PLAYER_INFO, otherwise the pet will not be displayed
+					addToVisibleObjects(player.getPet());
+			}
+		}
 	}
 
 	/**
@@ -148,7 +161,7 @@ public class KnownList {
 		if (knownObjects.remove(object.getObjectId()) != null) {
 			if (knownPlayers != null)
 				knownPlayers.remove(object.getObjectId());
-			delVisualObject(object, animation);
+			delFromVisibleObjects(object, animation);
 		}
 	}
 
@@ -159,9 +172,17 @@ public class KnownList {
 	 * @param animation
 	 *          - the disappear animation others will see
 	 */
-	public void delVisualObject(VisibleObject object, ObjectDeleteAnimation animation) {
-		if (visualObjects.remove(object.getObjectId()) != null)
+	private void delFromVisibleObjects(VisibleObject object, ObjectDeleteAnimation animation) {
+		if (visualObjects.remove(object.getObjectId()) != null) {
+			if (object instanceof Player) {
+				Player player = (Player) object;
+				if (player.getEffectController().isAbnormalSet(AbnormalState.HIDE))
+					animation = ObjectDeleteAnimation.DELAYED; // fix to show players hide skill animation
+				if (player.getPet() != null) // pets have no visual/see state
+					delFromVisibleObjects(player.getPet(), ObjectDeleteAnimation.FADE_OUT);
+			}
 			owner.getController().notSee(object, animation);
+		}
 	}
 
 	/**
@@ -213,8 +234,10 @@ public class KnownList {
 				if (!isAwareOf(newObject))
 					continue;
 
-				if (knownObjects.containsKey(newObject.getObjectId()))
+				if (knownObjects.containsKey(newObject.getObjectId())) {
+					updateVisibleObject(newObject);
 					continue;
+				}
 
 				if (!MathUtil.isIn3dRange(owner, newObject, newObject.getVisibleDistance()) && !newObject.getKnownList().checkReversedObjectInRange(owner))
 					continue;
@@ -363,26 +386,4 @@ public class KnownList {
 		return knownPlayers == null ? null : knownPlayers.get(targetObjectId);
 	}
 
-	/**
-	 * Updates visibility of all known players, depending on the current see state of the owner of this {@link KnownList}.
-	 */
-	public void updateVisiblePlayers() {
-		if (!(owner instanceof Player))
-			return;
-
-		forEachPlayer(other -> {
-			boolean canSee = owner.canSee(other);
-			boolean isSee = sees(other);
-
-			if (canSee && !isSee) {
-				addVisualObject(other);
-				if (other.getPet() != null)
-					addVisualObject(other.getPet());
-			} else if (!canSee && isSee) {
-				delVisualObject(other, ObjectDeleteAnimation.FADE_OUT);
-				if (other.getPet() != null)
-					delVisualObject(other.getPet(), ObjectDeleteAnimation.FADE_OUT);
-			}
-		});
-	}
 }

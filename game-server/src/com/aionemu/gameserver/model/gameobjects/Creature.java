@@ -473,8 +473,15 @@ public abstract class Creature extends VisibleObject {
 	}
 
 	@Override
-	public boolean canSee(Creature creature) {
-		return creature.getVisualState() <= getSeeState();
+	public boolean canSee(VisibleObject object) {
+		if (object instanceof Creature) {
+			Creature creature = (Creature) object;
+			int visualState = creature.getVisualState();
+			if (visualState <= getSeeState() || visualState == CreatureVisualState.BLINKING.getId())
+				return true;
+			return equals(creature.getMaster()); // traps, summons, etc. should always be visible to the master
+		}
+		return super.canSee(object);
 	}
 
 	/**

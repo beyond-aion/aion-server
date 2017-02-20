@@ -26,9 +26,9 @@ public class Invis extends AdminCommand {
 			player.getController().onHide();
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_EFFECT_INVISIBLE_BEGIN());
 		} else {
-			player.getController().onHideEnd(); // must go before updating visual state
 			player.getEffectController().unsetAbnormal(AbnormalState.HIDE);
 			player.unsetVisualState(CreatureVisualState.HIDE20);
+			player.getController().onHideEnd();
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_EFFECT_INVISIBLE_END());
 		}
 		PacketSendUtility.broadcastPacket(player, new SM_PLAYER_STATE(player), true);

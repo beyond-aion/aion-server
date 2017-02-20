@@ -111,10 +111,8 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
 import com.aionemu.gameserver.world.MapRegion;
-import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.WorldType;
 import com.aionemu.gameserver.world.geo.GeoService;
-import com.aionemu.gameserver.world.knownlist.KnownList;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
 import com.aionemu.gameserver.world.zone.ZoneName;
 
@@ -150,13 +148,6 @@ public class PlayerController extends CreatureController<Player> {
 			} else if (creature instanceof Player) {
 				Player player = (Player) creature;
 				PacketSendUtility.sendPacket(getOwner(), new SM_PLAYER_INFO(player, getOwner().isAggroIconTo(player)));
-				Pet pet = player.getPet(); // pet spawn packet must be sent after SM_PLAYER_INFO, otherwise the pet will not be displayed
-				if (pet != null && pet.isSpawned()) { // if it's not spawned, it'll spawn after the player and no action is needed
-					if (getOwner().getKnownList().knows(pet)) // if it's already known, it means we have suppressed addVisualObject() before
-						getOwner().getKnownList().addVisualObject(pet); // send pet spawn packet
-					else // update pos + knownlist, since client sends pet position only every 50m
-						World.getInstance().updatePosition(pet, player.getX(), player.getY(), player.getZ(), player.getHeading(), true);
-				}
 				PacketSendUtility.sendPacket(getOwner(), new SM_MOTION(player.getObjectId(), player.getMotions().getActiveMotions()));
 				if (player.isInPlayerMode(PlayerMode.RIDE))
 					PacketSendUtility.sendPacket(getOwner(), new SM_EMOTION(player, EmotionType.RIDE, 0, player.ride.getNpcId()));
@@ -195,34 +186,12 @@ public class PlayerController extends CreatureController<Player> {
 		}
 	}
 
-	/**
-	 * Removes owner from the visualObjects lists of all known players who can't see him anymore.
-	 */
-	public void onHide() {
-		Pet pet = getOwner().getPet();
-		getOwner().getKnownList().forEachPlayer(other -> {
-			KnownList knownList = other.getKnownList();
-			if (knownList.sees(getOwner()) && !other.canSee(getOwner())) {
-				knownList.delVisualObject(getOwner(), ObjectDeleteAnimation.DELAYED);
-				if (pet != null)
-					knownList.delVisualObject(pet, ObjectDeleteAnimation.NONE);
-			}
-		});
-	}
-
-	/**
-	 * Re-adds owner to the visualObjects lists of all known players.
-	 */
+	@Override
 	public void onHideEnd() {
 		Pet pet = getOwner().getPet();
 		if (pet != null && !MathUtil.isIn3dRange(getOwner(), pet, 3)) // client sends pet position only every 50m...
 			pet.getPosition().setXYZH(getOwner().getX(), getOwner().getY(), getOwner().getZ(), getOwner().getHeading());
-		getOwner().getKnownList().forEachPlayer(other -> {
-			KnownList knownList = other.getKnownList();
-			knownList.addVisualObject(getOwner());
-			if (pet != null)
-				knownList.addVisualObject(pet);
-		});
+		super.onHideEnd();
 	}
 
 	public void updateNearbyQuests() {

@@ -36,7 +36,7 @@ import com.aionemu.gameserver.model.gameobjects.PersistentState;
 import com.aionemu.gameserver.model.gameobjects.Pet;
 import com.aionemu.gameserver.model.gameobjects.Summon;
 import com.aionemu.gameserver.model.gameobjects.SummonedObject;
-import com.aionemu.gameserver.model.gameobjects.Trap;
+import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.AbyssRank.AbyssRankUpdateType;
 import com.aionemu.gameserver.model.gameobjects.player.emotion.EmotionList;
 import com.aionemu.gameserver.model.gameobjects.player.motion.MotionList;
@@ -1093,15 +1093,12 @@ public class Player extends Creature {
 	}
 
 	@Override
-	public boolean canSee(Creature creature) {
-		if (creature instanceof Player && isInSameTeam((Player) creature))
+	public boolean canSee(VisibleObject object) {
+		if (object instanceof Player && isInSameTeam((Player) object))
 			return true;
-
-		if (creature instanceof Trap && ((Trap) creature).getCreator().equals(this))
-			return true;
-
-		int visualState = creature.getVisualState();
-		return visualState <= getSeeState() || visualState == CreatureVisualState.BLINKING.getId();
+		if (object instanceof Pet && !equals(((Pet) object).getMaster()) && !getKnownList().sees(((Pet) object).getMaster()))
+			return false; // pet spawn packet must be sent after owner's
+		return super.canSee(object);
 	}
 
 	@Override

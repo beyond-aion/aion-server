@@ -76,6 +76,20 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 	}
 
 	/**
+	 * Removes owner from the visualObjects lists of all known objects who can't see him anymore.
+	 */
+	public void onHide() {
+		getOwner().getKnownList().forEachObject(other -> other.getKnownList().updateVisibleObject(getOwner()));
+	}
+
+	/**
+	 * Re-adds owner to the visualObjects lists of all known objects.
+	 */
+	public void onHideEnd() {
+		getOwner().getKnownList().forEachObject(other -> other.getKnownList().updateVisibleObject(getOwner()));
+	}
+
+	/**
 	 * Perform tasks on Creature starting to move
 	 */
 	public void onStartMove() {

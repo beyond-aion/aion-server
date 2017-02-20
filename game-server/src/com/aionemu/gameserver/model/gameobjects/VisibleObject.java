@@ -160,8 +160,11 @@ public abstract class VisibleObject extends AionObject {
 		getKnownList().doUpdate();
 	}
 
-	public boolean canSee(Creature creature) {
-		return creature != null;
+	/**
+	 * @return True, if the object is able to see the given object (basic check without distance validation)
+	 */
+	public boolean canSee(VisibleObject object) {
+		return object != null;
 	}
 
 	/**

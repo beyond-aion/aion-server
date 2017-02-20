@@ -48,10 +48,10 @@ public class HideEffect extends BufEffect {
 		final Creature effected = effect.getEffected();
 		if (effected instanceof Player) {
 			effect.getEffected().getObserveController().removeObserver(effect.getActionObserver(position));
-			((Player) effected).getController().onHideEnd(); // must go before updating visual state
 		}
 		effected.unsetVisualState(state);
 		effected.getEffectController().unsetAbnormal(AbnormalState.HIDE);
+		effected.getController().onHideEnd();
 		PacketSendUtility.broadcastPacketAndReceive(effected, new SM_PLAYER_STATE(effected)); // update visibility
 	}
 

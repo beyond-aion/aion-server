@@ -67,7 +67,7 @@ public class TrapNpcAI extends NpcAI {
 			getOwner().unsetVisualState(CreatureVisualState.HIDE1);
 			PacketSendUtility.broadcastPacket(getOwner(), new SM_PLAYER_STATE(getOwner()));
 			AIActions.targetCreature(TrapNpcAI.this, creature);
-			getOwner().getKnownList().doUpdate();
+			getOwner().updateKnownlist();
 			NpcSkillEntry npcSkill = getSkillList().getRandomSkill();
 			if (npcSkill != null) {
 				AIActions.useSkill(TrapNpcAI.this, npcSkill.getSkillId());
