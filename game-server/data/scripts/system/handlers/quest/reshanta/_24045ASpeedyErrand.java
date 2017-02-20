@@ -6,7 +6,6 @@ import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -73,12 +72,7 @@ public class _24045ASpeedyErrand extends QuestHandler {
 						return sendQuestDialog(env, 1011);
 					return false;
 				case SETPRO1:
-					if (var == 0) {
-						qs.setQuestVarById(0, var + 1);
-						updateQuestStatus(env);
-						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
-						return true;
-					}
+					return defaultCloseDialog(env, 0, 1);
 			}
 		} else if (targetId == 279004) {
 			switch (env.getDialogActionId()) {
@@ -90,12 +84,7 @@ public class _24045ASpeedyErrand extends QuestHandler {
 					playQuestMovie(env, 292);
 					break;
 				case SETPRO2:
-					if (var == 1) {
-						qs.setQuestVarById(0, var + 1);
-						updateQuestStatus(env);
-						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
-						return true;
-					}
+					return defaultCloseDialog(env, 1, 2);
 			}
 		} else if (targetId == 279024) {
 			switch (env.getDialogActionId()) {
@@ -106,10 +95,7 @@ public class _24045ASpeedyErrand extends QuestHandler {
 						return sendQuestDialog(env, 2375);
 					return false;
 				case SETPRO3:
-					if (var == 2) {
-						qs.setQuestVarById(0, var + 1);
-						updateQuestStatus(env);
-						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 0));
+					if (defaultCloseDialog(env, 2, 3)) {
 						player.setState(CreatureState.FLYING);
 						player.unsetState(CreatureState.ACTIVE);
 						player.setFlightTeleportId(55001);
@@ -118,12 +104,7 @@ public class _24045ASpeedyErrand extends QuestHandler {
 					}
 					return false;
 				case SETPRO5:
-					if (var == 4) {
-						qs.setStatus(QuestStatus.REWARD);
-						updateQuestStatus(env);
-						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
-						return true;
-					}
+					return defaultCloseDialog(env, 4, 4, true, false);
 			}
 		} else if (targetId == 279006) {
 			switch (env.getDialogActionId()) {
@@ -132,12 +113,14 @@ public class _24045ASpeedyErrand extends QuestHandler {
 						return sendQuestDialog(env, 2034);
 					return false;
 				case SETPRO4:
-					if (var == 3) {
-						qs.setQuestVarById(0, var + 1);
-						updateQuestStatus(env);
-						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
+					if (defaultCloseDialog(env, 3, 4)) {
+						player.setState(CreatureState.FLYING);
+						player.unsetState(CreatureState.ACTIVE);
+						player.setFlightTeleportId(56001);
+						PacketSendUtility.broadcastPacketAndReceive(player, new SM_EMOTION(player, EmotionType.START_FLYTELEPORT, 56001, 0));
 						return true;
 					}
+					return false;
 			}
 		}
 		return false;
