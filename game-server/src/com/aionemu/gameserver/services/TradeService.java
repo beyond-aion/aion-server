@@ -227,11 +227,6 @@ public class TradeService {
 			if (item == null) // don't allow to sell fake items;
 				return false;
 
-			if (!item.isSellable()) {
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_BUY_SELL_ITEM_CAN_NOT_BE_SELLED_TO_NPC(item.getNameId()));
-				return false;
-			}
-
 			long sellReward;
 
 			if (purchaseTemplate != null) {
@@ -247,8 +242,13 @@ public class TradeService {
 				if (!valid)
 					return false;
 				sellReward = (long) (item.getItemTemplate().getPrice() * purchaseTemplate.getBuyPriceRate() / 100D);
-			} else
+			} else {
+				if (!item.isSellable()) {
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_BUY_SELL_ITEM_CAN_NOT_BE_SELLED_TO_NPC(item.getNameId()));
+					return false;
+				}
 				sellReward = PricesService.getSellReward(item.getItemTemplate().getPrice(), sellModifier);
+			}
 
 			count = PlayerLimitService.updateSellLimit(player, sellReward, count);
 			if (count == 0)
