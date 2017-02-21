@@ -90,7 +90,7 @@
 	<portal_loc world_id="210070000" loc_id="2100703" x="2416.5352" y="627.2169" z="548.0" h="7"/> <!-- Aturan Sky Fortress Entrance/Exit -->
 	<portal_loc world_id="210070000" loc_id="2100704" x="97.80567" y="1469.4922" z="491.5476" h="44"/> <!-- Tiamat Stronghold Entrance/Exit -->
 	<portal_loc world_id="210070000" loc_id="2100705" x="106.4101" y="1466.2885" z="491.8714" h="78"/> <!-- Dragon Lord's Refuge Entrance/Exit -->
-	<portal_loc world_id="210070000" loc_id="2100706" x="1144.6798" y="798.103" z="562.75" h="13"/> <!-- Rentus Base Entrance/Exit -->
+	<portal_loc world_id="210070000" loc_id="2100706" x="1144.6798" y="798.103" z="562.75" h="13"/> <!-- Asmo: Occupied Rentus Base Entrance/Exit, Elyos: Rentus Base Entrance/Exit -->
 	<portal_loc world_id="210070000" loc_id="2100707" x="2099.2441" y="2280.8606" z="294.625" h="83"/> <!-- Danuar Sanctuary Entrance/Exit -->
 	<portal_loc world_id="210070000" loc_id="2100708" x="77.14092" y="2757.5469" z="229.31216" h="51"/> <!-- Drakensphire Depths Entrance/Exit -->
 	<portal_loc world_id="210070000" loc_id="2100709" x="2668.6453" y="1470.2168" z="431.9289" h="40"/> <!-- Raksang Ruins Entrance/Exit -->
@@ -163,7 +163,7 @@
 	<portal_loc world_id="220080000" loc_id="2200802" x="704.18" y="2853.332" z="215.72034" h="67"/> <!-- Aturan Sky Fortress Entrance/Exit -->
 	<portal_loc world_id="220080000" loc_id="2200803" x="2840.8413" y="1664.5078" z="302.76703" h="107"/> <!-- Tiamat Stronghold Entrance/Exit -->
 	<portal_loc world_id="220080000" loc_id="2200804" x="2857.5056" y="1674.4569" z="306.40497" h="13"/> <!-- Dragon Lord's Refuge Entrance/Exit -->
-	<portal_loc world_id="220080000" loc_id="2200805" x="1977.5001" y="2019.8245" z="328.69846" h="68"/> <!-- Rentus Base Entrance/Exit -->
+	<portal_loc world_id="220080000" loc_id="2200805" x="1977.5001" y="2019.8245" z="328.69846" h="68"/> <!-- Asmo: Rentus Base Entrance/Exit, Elyos: Occupied Rentus Base Entrance/Exit -->
 	<portal_loc world_id="220080000" loc_id="2200806" x="1672.2477" y="561.77155" z="257.77853" h="55"/> <!-- Danuar Sanctuary Entrance/Exit -->
 	<portal_loc world_id="220080000" loc_id="2200807" x="2991.0142" y="375.1645" z="309.1385" h="107"/> <!-- Drakensphire Depths Entrance/Exit -->
 	<portal_loc world_id="220080000" loc_id="2200808" x="411.4971" y="1452.091" z="274.5" h="30"/> <!-- Raksang Ruins Entrance/Exit -->

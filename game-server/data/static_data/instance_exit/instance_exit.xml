@@ -77,6 +77,9 @@
 	<!-- Rentus Base -->
 	<instance_exit instance_id="300280000" exit_world="210070000" race="ELYOS" x="1144.6798" y="798.103" z="562.75" h="13"/>
 	<instance_exit instance_id="300280000" exit_world="220080000" race="ASMODIANS" x="1977.5001" y="2019.8245" z="328.69846" h="68"/>
+	<!-- Occupied Rentus Base -->
+	<instance_exit instance_id="300620000" exit_world="210070000" race="ASMODIANS" x="1144.6798" y="798.103" z="562.75" h="13"/>
+	<instance_exit instance_id="300620000" exit_world="220080000" race="ELYOS" x="1977.5001" y="2019.8245" z="328.69846" h="68"/>
 	<!-- Esoterrace -->
 	<instance_exit instance_id="300250000" exit_world="210050000" race="ELYOS" x="1339.667" y="276.2391" z="589.3656"/>
 	<instance_exit instance_id="300250000" exit_world="220070000" race="ASMODIANS" x="1763.0" y="2911.0" z="554.7982"/>
