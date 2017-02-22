@@ -19,7 +19,6 @@ import com.aionemu.commons.database.DatabaseFactory;
 import com.aionemu.commons.utils.GenericValidator;
 import com.aionemu.gameserver.dao.MySQL5DAOUtils;
 import com.aionemu.gameserver.dao.PlayerRegisteredItemsDAO;
-import com.aionemu.gameserver.model.gameobjects.AionObject;
 import com.aionemu.gameserver.model.gameobjects.HouseDecoration;
 import com.aionemu.gameserver.model.gameobjects.HouseObject;
 import com.aionemu.gameserver.model.gameobjects.PersistentState;
@@ -271,17 +270,11 @@ public class MySQL5PlayerRegisteredItemsDAO extends PlayerRegisteredItemsDAO {
 				decor.setPersistentState(PersistentState.UPDATED);
 		}
 
-		if (!objectsToDelete.isEmpty() && objectDeleteResult) {
-			Collection<Integer> idIterator = Collections2.transform(objectsToDelete, AionObject.OBJECT_TO_ID_TRANSFORMER);
-			IDFactory.getInstance().releaseIds(idIterator);
-		}
+		if (objectDeleteResult)
+			IDFactory.getInstance().releaseObjectIds(objectsToDelete);
 
-		if (!partsToDelete.isEmpty() && partsDeleteResult) {
-			for (HouseDecoration part : partsToDelete) {
-				if (part.getObjectId() != 0)
-					IDFactory.getInstance().releaseId(part.getObjectId());
-			}
-		}
+		if (partsDeleteResult)
+			IDFactory.getInstance().releaseObjectIds(partsToDelete);
 
 		return true;
 	}

@@ -15,6 +15,7 @@ import com.aionemu.gameserver.services.ExchangeService;
 import com.aionemu.gameserver.services.LegionService;
 import com.aionemu.gameserver.services.item.ItemPacketService.ItemUpdateType;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.idfactory.IDFactory;
 
 /**
  * @author ATracer
@@ -83,7 +84,7 @@ public class ItemSplitService {
 			PacketSendUtility.sendPacket(player, SM_CUBE_UPDATE.cubeSize(sourceStorage.getStorageType(), player));
 			if (destStorage.add(newItem) == null) {
 				// if item was not added - we can release its id
-				ItemService.releaseItemId(newItem);
+				IDFactory.getInstance().releaseId(newItem.getObjectId());
 			}
 		} else if (targetItem.getItemId() == sourceItem.getItemId()) {
 			if (sourceStorageType != destinationStorageType) {

@@ -10,7 +10,6 @@ import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.configs.main.LoggingConfig;
 import com.aionemu.gameserver.dao.ItemStoneListDAO;
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.model.gameobjects.AionObject;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Equipment;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -23,8 +22,6 @@ import com.aionemu.gameserver.services.item.ItemPacketService.ItemAddType;
 import com.aionemu.gameserver.services.item.ItemPacketService.ItemUpdateType;
 import com.aionemu.gameserver.taskmanager.tasks.ExpireTimerTask;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-import com.aionemu.gameserver.utils.idfactory.IDFactory;
-import com.google.common.collect.Collections2;
 
 /**
  * @author KID
@@ -188,15 +185,6 @@ public class ItemService {
 			inventory.add(newItem, predicate.getAddType());
 		}
 		return count;
-	}
-
-	public static void releaseItemId(Item item) {
-		IDFactory.getInstance().releaseId(item.getObjectId());
-	}
-
-	public static void releaseItemIds(Collection<Item> items) {
-		Collection<Integer> idIterator = Collections2.transform(items, AionObject.OBJECT_TO_ID_TRANSFORMER);
-		IDFactory.getInstance().releaseIds(idIterator);
 	}
 
 	public static class ItemUpdatePredicate {
