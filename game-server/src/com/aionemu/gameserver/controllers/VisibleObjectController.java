@@ -41,12 +41,21 @@ public abstract class VisibleObjectController<T extends VisibleObject> {
 	}
 
 	/**
-	 * Called when controlled object no longer see some other VisibleObject.
+	 * Called when controlled object no longer sees some other VisibleObject.
 	 * 
 	 * @param object
 	 * @param deleteType
 	 */
 	public void notSee(VisibleObject object, ObjectDeleteAnimation animation) {
+	}
+
+	/**
+	 * Called when controlled object no longer knows some other VisibleObject.
+	 * 
+	 * @param object
+	 * @param deleteType
+	 */
+	public void notKnow(VisibleObject object) {
 	}
 
 	/**

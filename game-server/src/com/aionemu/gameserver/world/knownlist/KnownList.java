@@ -162,6 +162,7 @@ public class KnownList {
 			if (knownPlayers != null)
 				knownPlayers.remove(object.getObjectId());
 			delFromVisibleObjects(object, animation);
+			owner.getController().notKnow(object);
 		}
 	}
 

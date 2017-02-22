@@ -46,6 +46,12 @@ public class AbyssGuardSimpleAI extends AggressiveNpcAI {
 	}
 
 	private void checkAggro(Npc npc) {
+		if (isInState(AIState.FIGHT))
+			return;
+
+		if (isInState(AIState.RETURNING))
+			return;
+
 		Npc owner = getOwner();
 		if (npc.getLifeStats().isAlreadyDead() || !owner.canSee(npc))
 			return;
@@ -60,7 +66,7 @@ public class AbyssGuardSimpleAI extends AggressiveNpcAI {
 		if (!owner.getPosition().isMapRegionActive())
 			return;
 
-		if (!isInState(AIState.FIGHT) && (MathUtil.isIn3dRange(owner, npc, owner.getAggroRange()))) {
+		if (MathUtil.isIn3dRange(owner, npc, owner.getAggroRange())) {
 			if (GeoService.getInstance().canSee(owner, npc)) {
 				if (!isInState(AIState.RETURNING))
 					getOwner().getMoveController().storeStep();

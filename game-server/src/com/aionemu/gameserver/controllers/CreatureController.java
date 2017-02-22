@@ -71,8 +71,15 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 	@Override
 	public void notSee(VisibleObject object, ObjectDeleteAnimation animation) {
 		super.notSee(object, animation);
-		if (object.equals(getOwner().getTarget()))
+		if (object.equals(getOwner().getTarget()) && getOwner().getAi().getSubState() != AISubState.TARGET_LOST)
 			getOwner().setTarget(null);
+	}
+
+	@Override
+	public void notKnow(VisibleObject object) {
+		super.notKnow(object);
+		if (object instanceof Creature)
+			getOwner().getAggroList().remove((Creature) object);
 	}
 
 	/**
