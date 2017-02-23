@@ -22,17 +22,21 @@ public class PlaceableObjectController<T extends PlaceableHouseObject> extends V
 
 	@Override
 	public void see(VisibleObject object) {
-		Player p = (Player) object;
-		ActionObserver observer = new ActionObserver(ObserverType.MOVE);
-		p.getObserveController().addObserver(observer);
-		observed.put(p.getObjectId(), observer);
+		if (object instanceof Player) {
+			Player p = (Player) object;
+			ActionObserver observer = new ActionObserver(ObserverType.MOVE);
+			p.getObserveController().addObserver(observer);
+			observed.put(p.getObjectId(), observer);
+		}
 	}
 
 	@Override
 	public void notSee(VisibleObject object, ObjectDeleteAnimation animation) {
-		Player p = (Player) object;
-		ActionObserver observer = observed.remove(p.getObjectId());
-		p.getObserveController().removeObserver(observer);
+		if (object instanceof Player) {
+			Player p = (Player) object;
+			ActionObserver observer = observed.remove(p.getObjectId());
+			p.getObserveController().removeObserver(observer);
+		}
 	}
 
 	@Override

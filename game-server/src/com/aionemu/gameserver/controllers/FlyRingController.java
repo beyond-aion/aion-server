@@ -17,16 +17,20 @@ public class FlyRingController extends VisibleObjectController<FlyRing> {
 
 	@Override
 	public void see(VisibleObject object) {
-		Player p = (Player) object;
-		FlyRingObserver observer = new FlyRingObserver(getOwner(), p);
-		p.getObserveController().addObserver(observer);
-		observed.put(p.getObjectId(), observer);
+		if (object instanceof Player) {
+			Player p = (Player) object;
+			FlyRingObserver observer = new FlyRingObserver(getOwner(), p);
+			p.getObserveController().addObserver(observer);
+			observed.put(p.getObjectId(), observer);
+		}
 	}
 
 	@Override
 	public void notSee(VisibleObject object, ObjectDeleteAnimation animation) {
-		Player p = (Player) object;
-		FlyRingObserver observer = observed.remove(p.getObjectId());
-		p.getObserveController().removeObserver(observer);
+		if (object instanceof Player) {
+			Player p = (Player) object;
+			FlyRingObserver observer = observed.remove(p.getObjectId());
+			p.getObserveController().removeObserver(observer);
+		}
 	}
 }

@@ -17,16 +17,20 @@ public class RoadController extends VisibleObjectController<Road> {
 
 	@Override
 	public void see(VisibleObject object) {
-		Player p = (Player) object;
-		RoadObserver observer = new RoadObserver(getOwner(), p);
-		p.getObserveController().addObserver(observer);
-		observed.put(p.getObjectId(), observer);
+		if (object instanceof Player) {
+			Player p = (Player) object;
+			RoadObserver observer = new RoadObserver(getOwner(), p);
+			p.getObserveController().addObserver(observer);
+			observed.put(p.getObjectId(), observer);
+		}
 	}
 
 	@Override
 	public void notSee(VisibleObject object, ObjectDeleteAnimation animation) {
-		Player p = (Player) object;
-		RoadObserver observer = observed.remove(p.getObjectId());
-		p.getObserveController().removeObserver(observer);
+		if (object instanceof Player) {
+			Player p = (Player) object;
+			RoadObserver observer = observed.remove(p.getObjectId());
+			p.getObserveController().removeObserver(observer);
+		}
 	}
 }
