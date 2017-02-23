@@ -1,6 +1,7 @@
 package quest.eltnen;
 
 import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -49,7 +50,8 @@ public class _1430ATeleportationExperiment extends QuestHandler {
 					qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
 					updateQuestStatus(env);
 					qs.setStatus(QuestStatus.REWARD);
-					return TeleportService.teleportTo(player, 220020000, 1, 638, 2337, 425, (byte) 20, TeleportAnimation.FADE_OUT_BEAM);
+					TeleportService.teleportTo(player, 220020000, 1, 638, 2337, 425, (byte) 20, TeleportAnimation.FADE_OUT_BEAM);
+					return true;
 				} else
 					return sendQuestStartDialog(env);
 			} else if (qs.getStatus() == QuestStatus.REWARD) { // Reward

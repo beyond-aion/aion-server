@@ -252,27 +252,27 @@ public class TeleportService {
 		}
 	}
 
-	public static boolean teleportTo(Player player, int worldId, float x, float y, float z) {
-		return teleportTo(player, worldId, x, y, z, player.getHeading(), TeleportAnimation.NONE);
+	public static void teleportTo(Player player, int worldId, float x, float y, float z) {
+		teleportTo(player, worldId, x, y, z, player.getHeading(), TeleportAnimation.NONE);
 	}
 
-	public static boolean teleportTo(Player player, int worldId, float x, float y, float z, byte h) {
-		return teleportTo(player, worldId, x, y, z, h, TeleportAnimation.NONE);
+	public static void teleportTo(Player player, int worldId, float x, float y, float z, byte h) {
+		teleportTo(player, worldId, x, y, z, h, TeleportAnimation.NONE);
 	}
 
-	public static boolean teleportTo(Player player, int worldId, float x, float y, float z, byte h, TeleportAnimation animation) {
-		return teleportTo(player, worldId, player.getWorldId() != worldId ? 1 : player.getInstanceId(), x, y, z, h, animation);
+	public static void teleportTo(Player player, int worldId, float x, float y, float z, byte h, TeleportAnimation animation) {
+		teleportTo(player, worldId, player.getWorldId() != worldId ? 1 : player.getInstanceId(), x, y, z, h, animation);
 	}
 
-	public static boolean teleportTo(Player player, int worldId, int instanceId, float x, float y, float z) {
-		return teleportTo(player, worldId, instanceId, x, y, z, player.getHeading(), TeleportAnimation.NONE);
+	public static void teleportTo(Player player, int worldId, int instanceId, float x, float y, float z) {
+		teleportTo(player, worldId, instanceId, x, y, z, player.getHeading(), TeleportAnimation.NONE);
 	}
 
-	public static boolean teleportTo(Player player, int worldId, int instanceId, float x, float y, float z, byte h) {
-		return teleportTo(player, worldId, instanceId, x, y, z, h, TeleportAnimation.NONE);
+	public static void teleportTo(Player player, int worldId, int instanceId, float x, float y, float z, byte h) {
+		teleportTo(player, worldId, instanceId, x, y, z, h, TeleportAnimation.NONE);
 	}
 
-	public static boolean teleportTo(final Player player, final int worldId, final int instanceId, final float x, final float y, final float z,
+	public static void teleportTo(final Player player, final int worldId, final int instanceId, final float x, final float y, final float z,
 		final byte heading, TeleportAnimation animation) {
 		if (player.getLifeStats().isAlreadyDead()) {
 			PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.RESURRECT), true);
@@ -281,7 +281,6 @@ public class TeleportService {
 			DuelService.getInstance().loseDuel(player);
 		}
 		sendLoc(player, worldId, instanceId, x, y, z, heading, animation);
-		return true;
 	}
 
 	/**
@@ -414,13 +413,13 @@ public class TeleportService {
 	 * @param distance
 	 * @return true or false
 	 */
-	public static boolean moveToTargetWithDistance(VisibleObject object, Player player, int direction, int distance) {
+	public static void moveToTargetWithDistance(VisibleObject object, Player player, int direction, int distance) {
 		double radian = Math.toRadians(object.getHeading() * 3);
 		float x0 = object.getX();
 		float y0 = object.getY();
 		float x1 = (float) (Math.cos(Math.PI * direction + radian) * distance);
 		float y1 = (float) (Math.sin(Math.PI * direction + radian) * distance);
-		return teleportTo(player, object.getWorldId(), x0 + x1, y0 + y1, object.getZ());
+		teleportTo(player, object.getWorldId(), x0 + x1, y0 + y1, object.getZ());
 	}
 
 	public static void moveToInstanceExit(Player player, int worldId, Race race) {
