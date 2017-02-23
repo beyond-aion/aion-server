@@ -27,10 +27,6 @@ public class MoveTaskManager extends AbstractPeriodicTaskManager {
 		public void accept(Creature creature) {
 			if (creature == null) // concurrent iterating over movingCreatures.values() can cause calling this with an already removed entry (which then is null)
 				return;
-			if (!creature.isSpawned()) {
-				removeCreature(creature);
-				return;
-			}
 			creature.getMoveController().moveToDestination();
 			if (creature.getAi().ask(AIQuestion.DESTINATION_REACHED)) {
 				removeCreature(creature);
