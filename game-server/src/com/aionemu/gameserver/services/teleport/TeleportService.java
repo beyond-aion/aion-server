@@ -536,13 +536,15 @@ public class TeleportService {
 			if (player.isSpawned())
 				return;
 
-			if (animation != TeleportAnimation.NONE && player.getLifeStats().isAlreadyDead()) {
-				PacketSendUtility.sendPacket(player, new SM_PLAYER_INFO(player));
-				World.getInstance().spawn(player);
-				return;
+			if (animation != TeleportAnimation.NONE) { // this is a delayed teleport (triggered after animation end)
+				if (player.getLifeStats().isAlreadyDead()) {
+					PacketSendUtility.sendPacket(player, new SM_PLAYER_INFO(player));
+					World.getInstance().spawn(player);
+					return;
+				}
+				abortPlayerActions(player);
 			}
 
-			abortPlayerActions(player);
 			int currentWorldId = player.getWorldId();
 			int currentInstance = player.getInstanceId();
 			if (currentWorldId != worldId || currentInstance != instanceId) {
