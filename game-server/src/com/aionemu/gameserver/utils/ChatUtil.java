@@ -244,23 +244,17 @@ public class ChatUtil {
 		if (name.matches("^[A-Za-z]+$"))
 			return Util.convertName(name);
 
-		String nameFormat;
 		String nameFlag = "%s";
-		for (int i = 1; i < 99; i++) {
-			try {
-				nameFormat = AdminConfig.class.getField("CUSTOMTAG_ACCESS" + i).get(null).toString();
-				if (nameFormat != null && nameFormat.contains(nameFlag)) {
-					int nameStartIndex = nameFormat.indexOf(nameFlag);
-					String namePrefix = nameFormat.substring(0, nameStartIndex > 0 ? nameStartIndex : 0);
-					String nameSuffix = nameFormat.substring(nameStartIndex + nameFlag.length(), nameFormat.length());
-					if ((namePrefix + nameSuffix).length() > 0 && name.startsWith(namePrefix) && name.endsWith(nameSuffix)) {
-						int endIndex = name.indexOf(nameSuffix) - 1;
-						name = name.substring(namePrefix.length(), endIndex > 0 ? endIndex : name.length());
-						break;
-					}
-				}
-			} catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException | SecurityException e) {
-				break; // (expecting NoSuchFieldException to trigger loop break)
+		for (String nameFormat : AdminConfig.NAME_TAGS) {
+			int nameStartIndex = nameFormat.indexOf(nameFlag);
+			if (nameStartIndex == -1)
+				continue;
+			String namePrefix = nameFormat.substring(0, nameStartIndex > 0 ? nameStartIndex : 0);
+			String nameSuffix = nameFormat.substring(nameStartIndex + nameFlag.length(), nameFormat.length());
+			if ((namePrefix + nameSuffix).length() > 0 && name.startsWith(namePrefix) && name.endsWith(nameSuffix)) {
+				int endIndex = name.indexOf(nameSuffix) - 1;
+				name = name.substring(namePrefix.length(), endIndex > 0 ? endIndex : name.length());
+				break;
 			}
 		}
 
