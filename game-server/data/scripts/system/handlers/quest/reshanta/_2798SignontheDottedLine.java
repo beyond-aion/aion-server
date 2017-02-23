@@ -33,9 +33,7 @@ public class _2798SignontheDottedLine extends QuestHandler {
 			if (qs.getStatus() == QuestStatus.START && var == 0)
 				switch (env.getDialogActionId()) {
 					case QUEST_SELECT:
-						if (var == 0)
-							return sendQuestDialog(env, 1011);
-						return false;
+						return sendQuestDialog(env, 1011);
 					case SETPRO1:
 						return defaultCloseDialog(env, 0, 1);
 				}
