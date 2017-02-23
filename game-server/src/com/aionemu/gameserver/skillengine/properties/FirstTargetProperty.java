@@ -89,14 +89,10 @@ public class FirstTargetProperty {
 				if (relation == TargetRelationAttribute.MYPARTY) {
 					Creature effected = skill.getFirstTarget();
 					boolean myParty = false;
-					if (effected == null || skill.getEffector() == null)
-						myParty = false;
-					if (!(effected instanceof Player) || !(skill.getEffector() instanceof Player) || !((Player) skill.getEffector()).isInTeam())
-						myParty = false;
 					for (Player member : ((Player) skill.getEffector()).getCurrentTeam().getMembers()) {
-						if (member == skill.getEffector())
+						if (member.equals(skill.getEffector()))
 							continue;
-						if (member == effected) {
+						if (member.equals(effected)) {
 							myParty = true;
 							break;
 						}

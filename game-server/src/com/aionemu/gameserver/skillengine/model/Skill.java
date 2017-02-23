@@ -211,13 +211,9 @@ public class Skill {
 			effectedList.removeIf(effected -> !RestrictionsManager.canAffectBySkill(player, effected, this));
 		}
 
-		// TODO: Enable non-targeted, non-point AOE skills to trigger.
-		if (targetType == 0 && effectedList.isEmpty() && firstTargetAttribute != FirstTargetAttribute.ME
-			&& targetRangeAttribute != TargetRangeAttribute.AREA) {
-			log.debug("targettype failed");
-			if (effector instanceof Player) {
+		if (targetType == 0 && effectedList.isEmpty() && !isNonTargetAOE()) {
+			if (effector instanceof Player)
 				PacketSendUtility.sendPacket((Player) effector, SM_SYSTEM_MESSAGE.STR_SKILL_TARGET_IS_NOT_VALID());
-			}
 			return false;
 		}
 
@@ -1016,7 +1012,7 @@ public class Skill {
 	/**
 	 * @return true if the present skill is a non-targeted, non-point AOE skill
 	 */
-	public boolean checkNonTargetAOE() {
+	public boolean isNonTargetAOE() {
 		return (firstTargetAttribute == FirstTargetAttribute.ME && targetRangeAttribute == TargetRangeAttribute.AREA);
 	}
 

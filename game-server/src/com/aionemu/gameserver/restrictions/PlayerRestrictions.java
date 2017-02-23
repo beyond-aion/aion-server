@@ -44,7 +44,7 @@ public class PlayerRestrictions extends AbstractRestrictions {
 		if (skill == null)
 			return false;
 
-		if (player != target && target instanceof Player) {
+		if (target instanceof Player && !player.equals(target)) {
 			Player tPlayer = (Player) target;
 			if (tPlayer.getRace() != player.getRace()) {
 				if (!tPlayer.isEnemyFrom(player))
@@ -60,10 +60,10 @@ public class PlayerRestrictions extends AbstractRestrictions {
 		if (player.isUsingFlyTeleport() || (target instanceof Player && ((Player) target).isUsingFlyTeleport()))
 			return false;
 
-		if (((Creature) target).getLifeStats().isAboutToDie() && !skill.checkNonTargetAOE())
+		if (((Creature) target).getLifeStats().isAboutToDie() && !skill.isNonTargetAOE())
 			return false;
 
-		if (((Creature) target).getLifeStats().isAlreadyDead() && !skill.getSkillTemplate().hasResurrectEffect() && !skill.checkNonTargetAOE()) {
+		if (((Creature) target).getLifeStats().isAlreadyDead() && !skill.getSkillTemplate().hasResurrectEffect() && !skill.isNonTargetAOE()) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_TARGET_IS_NOT_VALID());
 			return false;
 		}
