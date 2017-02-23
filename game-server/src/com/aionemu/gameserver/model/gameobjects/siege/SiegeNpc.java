@@ -12,8 +12,8 @@ import com.aionemu.gameserver.model.templates.spawns.siegespawns.SiegeSpawnTempl
  */
 public class SiegeNpc extends Npc {
 
-	private int siegeId;
-	private SiegeRace siegeRace;
+	private final int siegeId;
+	private final SiegeRace siegeRace;
 
 	/**
 	 * @param objId
