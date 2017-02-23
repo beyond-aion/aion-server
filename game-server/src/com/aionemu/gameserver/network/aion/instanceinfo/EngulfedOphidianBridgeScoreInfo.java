@@ -14,13 +14,13 @@ public class EngulfedOphidianBridgeScoreInfo extends InstanceScoreInfo {
 
 	private final EngulfedOphidianBridgeReward engulfedOBReward;
 	private final int type;
-	private final Integer object;
+	private final int objectId;
 	private final InstanceScoreType instanceScoreType;
 
-	public EngulfedOphidianBridgeScoreInfo(EngulfedOphidianBridgeReward engulfedOBReward, int type, Integer object) {
+	public EngulfedOphidianBridgeScoreInfo(EngulfedOphidianBridgeReward engulfedOBReward, int type, int objectId) {
 		this.engulfedOBReward = engulfedOBReward;
 		this.type = type;
-		this.object = object;
+		this.objectId = objectId;
 		this.instanceScoreType = engulfedOBReward.getInstanceScoreType();
 	}
 
@@ -30,14 +30,14 @@ public class EngulfedOphidianBridgeScoreInfo extends InstanceScoreInfo {
 		EngulfedOphidianBridgePlayerReward engulfedOBPlayerReward = null;
 		switch (type) {
 			case 3:
-				engulfedOBPlayerReward = engulfedOBReward.getPlayerReward(object);
+				engulfedOBPlayerReward = engulfedOBReward.getPlayerReward(objectId);
 				writeD(buf, 0);
 				writeD(buf, 0);
-				writeD(buf, engulfedOBPlayerReward.getOwner()); // objectId
+				writeD(buf, engulfedOBPlayerReward.getOwnerId()); // objectId
 				writeD(buf, engulfedOBPlayerReward.getRace().equals(Race.ELYOS) ? 0 : 1); // elyos 0 asmodians 1
 				break;
 			case 5: // reward
-				engulfedOBPlayerReward = engulfedOBReward.getPlayerReward(object);
+				engulfedOBPlayerReward = engulfedOBReward.getPlayerReward(objectId);
 				writeD(buf, 100); // partitipation
 				writeD(buf, engulfedOBPlayerReward.getBaseReward());
 				writeD(buf, engulfedOBPlayerReward.getBonusReward());
@@ -71,7 +71,7 @@ public class EngulfedOphidianBridgeScoreInfo extends InstanceScoreInfo {
 					if (reward != null) {
 						writeD(buf, 0);
 						writeD(buf, 0);
-						writeD(buf, reward.getOwner());
+						writeD(buf, reward.getOwnerId());
 					} else {
 						writeD(buf, 0);
 						writeD(buf, 0);
@@ -83,7 +83,7 @@ public class EngulfedOphidianBridgeScoreInfo extends InstanceScoreInfo {
 					if (reward != null) {
 						writeD(buf, 0);
 						writeD(buf, 0);
-						writeD(buf, reward.getOwner());
+						writeD(buf, reward.getOwnerId());
 					} else {
 						writeD(buf, 0);
 						writeD(buf, 0);
@@ -105,9 +105,9 @@ public class EngulfedOphidianBridgeScoreInfo extends InstanceScoreInfo {
 				break;
 			case 10:
 				writeC(buf, 0);
-				writeD(buf, engulfedOBReward.getKillsByRace(object == 0 ? Race.ELYOS : Race.ASMODIANS).intValue());
-				writeD(buf, engulfedOBReward.getPointsByRace(object == 0 ? Race.ELYOS : Race.ASMODIANS).intValue());
-				writeD(buf, object); // elyos 0 asmodians 1
+				writeD(buf, engulfedOBReward.getKillsByRace(objectId == 0 ? Race.ELYOS : Race.ASMODIANS).intValue());
+				writeD(buf, engulfedOBReward.getPointsByRace(objectId == 0 ? Race.ELYOS : Race.ASMODIANS).intValue());
+				writeD(buf, objectId); // elyos 0 asmodians 1
 				writeD(buf, 0);
 				break;
 		}

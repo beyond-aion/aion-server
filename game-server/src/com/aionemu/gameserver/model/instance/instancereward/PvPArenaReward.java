@@ -100,8 +100,8 @@ public class PvPArenaReward extends InstanceReward<PvPArenaPlayerReward> {
 		return p;
 	}
 
-	public synchronized void setRndPosition(Integer object) {
-		PvPArenaPlayerReward reward = getPlayerReward(object);
+	public synchronized void setRndPosition(int objectId) {
+		PvPArenaPlayerReward reward = getPlayerReward(objectId);
 		int position = reward.getPosition();
 		if (position != 0) {
 			clearPosition(position, Boolean.FALSE);
@@ -123,9 +123,9 @@ public class PvPArenaReward extends InstanceReward<PvPArenaPlayerReward> {
 		this.round = round;
 	}
 
-	public void regPlayerReward(Integer object) {
-		if (!containPlayer(object)) {
-			addPlayerReward(new PvPArenaPlayerReward(object, bonusTime, buffId));
+	public void regPlayerReward(int objectId) {
+		if (!containPlayer(objectId)) {
+			addPlayerReward(new PvPArenaPlayerReward(objectId, bonusTime, buffId));
 		}
 	}
 
@@ -134,16 +134,11 @@ public class PvPArenaReward extends InstanceReward<PvPArenaPlayerReward> {
 		super.addPlayerReward(reward);
 	}
 
-	@Override
-	public PvPArenaPlayerReward getPlayerReward(Integer object) {
-		return (PvPArenaPlayerReward) super.getPlayerReward(object);
-	}
-
 	public void portToPosition(Player player) {
-		Integer object = player.getObjectId();
-		regPlayerReward(object);
-		setRndPosition(object);
-		PvPArenaPlayerReward playerReward = getPlayerReward(object);
+		int objectId = player.getObjectId();
+		regPlayerReward(objectId);
+		setRndPosition(objectId);
+		PvPArenaPlayerReward playerReward = getPlayerReward(objectId);
 		playerReward.applyBoostMoraleEffect(player);
 		instancePosition.port(player, zone, playerReward.getPosition());
 	}

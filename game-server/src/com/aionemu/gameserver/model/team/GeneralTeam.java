@@ -29,7 +29,7 @@ public abstract class GeneralTeam<M extends AionObject, TM extends TeamMember<M>
 
 	private final MemberTransformFunction<TM, M> TRANSFORM_FUNCTION = new MemberTransformFunction<>();
 
-	public GeneralTeam(Integer objId) {
+	public GeneralTeam(int objId) {
 		super(objId);
 	}
 
@@ -48,12 +48,12 @@ public abstract class GeneralTeam<M extends AionObject, TM extends TeamMember<M>
 	}
 
 	@Override
-	public TM getMember(Integer objectId) {
+	public TM getMember(int objectId) {
 		return members.get(objectId);
 	}
 
 	@Override
-	public boolean hasMember(Integer objectId) {
+	public boolean hasMember(int objectId) {
 		return members.get(objectId) != null;
 	}
 
@@ -72,7 +72,7 @@ public abstract class GeneralTeam<M extends AionObject, TM extends TeamMember<M>
 	}
 
 	@Override
-	public final void removeMember(Integer objectId) {
+	public final void removeMember(int objectId) {
 		removeMember(members.get(objectId));
 	}
 

@@ -25,10 +25,10 @@ public class HarmonyArenaReward extends PvPArenaReward {
 		super(mapId, instanceId, instance);
 	}
 
-	public HarmonyGroupReward getHarmonyGroupReward(Integer object) {
+	public HarmonyGroupReward getHarmonyGroupReward(int objectId) {
 		for (InstancePlayerReward reward : groups) {
 			HarmonyGroupReward harmonyReward = (HarmonyGroupReward) reward;
-			if (harmonyReward.containPlayer(object)) {
+			if (harmonyReward.containPlayer(objectId)) {
 				return harmonyReward;
 			}
 		}
@@ -66,10 +66,10 @@ public class HarmonyArenaReward extends PvPArenaReward {
 		return groups;
 	}
 
-	public void sendPacket(final int type, final Integer object) {
+	public void sendPacket(final int type, final Integer objectId) {
 		instance.forEachPlayer((Player player) -> {
 			PacketSendUtility.sendPacket(player,
-				new SM_INSTANCE_SCORE(new HarmonyScoreInfo(HarmonyArenaReward.this, type, object == null ? player.getObjectId() : object),
+				new SM_INSTANCE_SCORE(new HarmonyScoreInfo(HarmonyArenaReward.this, type, objectId == null ? player.getObjectId() : objectId),
 					getInstanceReward(), getTime()));
 		});
 	}

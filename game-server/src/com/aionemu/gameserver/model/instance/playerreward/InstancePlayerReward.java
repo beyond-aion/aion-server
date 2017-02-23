@@ -8,14 +8,14 @@ public class InstancePlayerReward {
 	private int points;
 	private int playerPvPKills;
 	private int playerMonsterKills;
-	protected Integer object;
+	private final int objectId;
 
-	public InstancePlayerReward(Integer object) {
-		this.object = object;
+	public InstancePlayerReward(int objectId) {
+		this.objectId = objectId;
 	}
 
-	public Integer getOwner() {
-		return object;
+	public int getOwnerId() {
+		return objectId;
 	}
 
 	public int getPoints() {

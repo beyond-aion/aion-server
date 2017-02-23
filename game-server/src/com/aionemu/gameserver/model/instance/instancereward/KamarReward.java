@@ -47,11 +47,6 @@ public class KamarReward extends InstanceReward<KamarPlayerReward> {
 		return players;
 	}
 
-	@Override
-	public KamarPlayerReward getPlayerReward(Integer object) {
-		return (KamarPlayerReward) super.getPlayerReward(object);
-	}
-
 	public MutableInt getPointsByRace(Race race) {
 		switch (race) {
 			case ELYOS:

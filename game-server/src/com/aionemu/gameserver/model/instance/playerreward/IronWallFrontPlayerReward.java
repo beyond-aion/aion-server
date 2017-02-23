@@ -10,8 +10,8 @@ public class IronWallFrontPlayerReward extends InstancePlayerReward {
 	private Race race;
 	private int fragmentedCeramium, ironWarFrontBox, baseReward, bonusReward, gloryPoints;
 
-	public IronWallFrontPlayerReward(Integer object, Race race) {
-		super(object);
+	public IronWallFrontPlayerReward(int objectId, Race race) {
+		super(objectId);
 		this.race = race;
 	}
 

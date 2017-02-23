@@ -55,8 +55,8 @@ public class IdgelDomeInstance extends GeneralInstanceHandler {
 		idgelDomeReward.addPlayerReward(new IdgelDomePlayerReward(player.getObjectId(), player.getRace()));
 	}
 
-	private boolean containPlayer(Integer object) {
-		return idgelDomeReward.containPlayer(object);
+	private boolean containPlayer(int objectId) {
+		return idgelDomeReward.containPlayer(objectId);
 	}
 
 	@Override

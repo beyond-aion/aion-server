@@ -761,10 +761,10 @@ public class CrucibleChallengeInstance extends CrucibleInstance {
 		Set<DropItem> dropItems = DropRegistrationService.getInstance().getCurrentDropMap().get(npc.getObjectId());
 		int npcId = npc.getNpcId();
 		int itemId = 0;
-		Integer object = instance.getSoloPlayerObj();
+		int objectId = instance.getSoloPlayerObj();
 		switch (npcId) {
 			case 217758:
-				dropItems.add(DropRegistrationService.getInstance().regDropItem(1, object, npcId, 186000134, 1));
+				dropItems.add(DropRegistrationService.getInstance().regDropItem(1, objectId, npcId, 186000134, 1));
 				break;
 			case 218571:
 				dropItems.clear();
@@ -779,11 +779,11 @@ public class CrucibleChallengeInstance extends CrucibleInstance {
 						itemId = 182006431;
 						break;
 				}
-				dropItems.add(DropRegistrationService.getInstance().regDropItem(1, object, npcId, itemId, 1));
+				dropItems.add(DropRegistrationService.getInstance().regDropItem(1, objectId, npcId, itemId, 1));
 				break;
 			case 218185:
 				dropItems.clear();
-				dropItems.add(DropRegistrationService.getInstance().regDropItem(1, object, npcId, 188051349, 1));
+				dropItems.add(DropRegistrationService.getInstance().regDropItem(1, objectId, npcId, 188051349, 1));
 				break;
 			case 217827:
 			case 217828:
@@ -868,7 +868,7 @@ public class CrucibleChallengeInstance extends CrucibleInstance {
 					}
 				}
 				dropItems.clear();
-				dropItems.add(DropRegistrationService.getInstance().regDropItem(1, object, npcId, 186000130, count));
+				dropItems.add(DropRegistrationService.getInstance().regDropItem(1, objectId, npcId, 186000130, count));
 				break;
 		}
 	}

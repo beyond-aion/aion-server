@@ -9,7 +9,7 @@ public class PlayerAllianceGroup extends TemporaryPlayerTeam<PlayerAllianceMembe
 
 	private final PlayerAlliance alliance;
 
-	public PlayerAllianceGroup(PlayerAlliance alliance, Integer objId) {
+	public PlayerAllianceGroup(PlayerAlliance alliance, int objId) {
 		super(objId);
 		this.alliance = alliance;
 	}

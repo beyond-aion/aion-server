@@ -53,11 +53,11 @@ public class HarmonyArenaInstance extends GeneralInstanceHandler {
 
 	@Override
 	public void onEnterInstance(final Player player) {
-		Integer object = player.getObjectId();
-		if (!instanceReward.containPlayer(object)) {
-			instanceReward.regPlayerReward(object);
-			instanceReward.getPlayerReward(object).applyBoostMoraleEffect(player);
-			instanceReward.setRndPosition(object);
+		int objectId = player.getObjectId();
+		if (!instanceReward.containPlayer(objectId)) {
+			instanceReward.regPlayerReward(objectId);
+			instanceReward.getPlayerReward(objectId).applyBoostMoraleEffect(player);
+			instanceReward.setRndPosition(objectId);
 		} else {
 			instanceReward.portToPosition(player);
 		}
@@ -65,8 +65,8 @@ public class HarmonyArenaInstance extends GeneralInstanceHandler {
 	}
 
 	private void sendEnterPacket(final Player player) {
-		final Integer object = player.getObjectId();
-		final HarmonyGroupReward group = instanceReward.getHarmonyGroupReward(object);
+		int objectId = player.getObjectId();
+		HarmonyGroupReward group = instanceReward.getHarmonyGroupReward(objectId);
 		if (group == null) {
 			return;
 		}
@@ -74,23 +74,23 @@ public class HarmonyArenaInstance extends GeneralInstanceHandler {
 		instance.forEachPlayer((Player opponent) -> {
 			if (!group.containPlayer(opponent.getObjectId())) {
 				PacketSendUtility.sendPacket(opponent,
-					new SM_INSTANCE_SCORE(new HarmonyScoreInfo(instanceReward, 10, object), getInstanceReward(), getTime()));
+					new SM_INSTANCE_SCORE(new HarmonyScoreInfo(instanceReward, 10, objectId), getInstanceReward(), getTime()));
 				PacketSendUtility.sendPacket(player, new SM_INSTANCE_SCORE(new HarmonyScoreInfo(instanceReward, 10, opponent.getObjectId()),
 					getInstanceReward(), getTime()));
 				PacketSendUtility
-					.sendPacket(opponent, new SM_INSTANCE_SCORE(new HarmonyScoreInfo(instanceReward, 3, object), getInstanceReward(), getTime()));
+					.sendPacket(opponent, new SM_INSTANCE_SCORE(new HarmonyScoreInfo(instanceReward, 3, objectId), getInstanceReward(), getTime()));
 			} else {
 				PacketSendUtility.sendPacket(opponent, new SM_INSTANCE_SCORE(new HarmonyScoreInfo(instanceReward, 10, opponent.getObjectId()),
 					getInstanceReward(), getTime()));
-				if (!Objects.equals(object, opponent.getObjectId())) {
-					PacketSendUtility.sendPacket(opponent, new SM_INSTANCE_SCORE(new HarmonyScoreInfo(instanceReward, 3, object), getInstanceReward(),
+				if (!Objects.equals(objectId, opponent.getObjectId())) {
+					PacketSendUtility.sendPacket(opponent, new SM_INSTANCE_SCORE(new HarmonyScoreInfo(instanceReward, 3, objectId), getInstanceReward(),
 						getTime()));
 				}
 			}
 		});
 		PacketSendUtility.sendPacket(player, new SM_INSTANCE_SCORE(new HarmonyScoreInfo(instanceReward, 6, player.getObjectId()), getInstanceReward(),
 			getTime()));
-		instanceReward.sendPacket(4, object);
+		instanceReward.sendPacket(4, objectId);
 	}
 
 	private void updatePoints(Creature victim) {
@@ -379,7 +379,7 @@ public class HarmonyArenaInstance extends GeneralInstanceHandler {
 		if (lastAttacker != null && lastAttacker != player) {
 			if (lastAttacker instanceof Player) {
 				Player winner = (Player) lastAttacker;
-				Integer winnerObj = winner.getObjectId();
+				int winnerObj = winner.getObjectId();
 				instanceReward.getHarmonyGroupReward(winnerObj).addPvPKillToPlayer();
 				// notify Kill-Quests
 				int worldId = winner.getWorldId();
@@ -392,8 +392,8 @@ public class HarmonyArenaInstance extends GeneralInstanceHandler {
 
 	@Override
 	public void handleUseItemFinish(Player player, Npc npc) {
-		final Integer object = player.getObjectId();
-		final HarmonyGroupReward group = instanceReward.getHarmonyGroupReward(object);
+		int objectId = player.getObjectId();
+		HarmonyGroupReward group = instanceReward.getHarmonyGroupReward(objectId);
 		if (!instanceReward.isStartProgress() || group == null) {
 			return;
 		}
@@ -404,7 +404,7 @@ public class HarmonyArenaInstance extends GeneralInstanceHandler {
 		}
 		group.addPoints(rewardetPoints);
 		sendSystemMsg(player, npc, rewardetPoints);
-		instanceReward.sendPacket(10, object);
+		instanceReward.sendPacket(10, objectId);
 	}
 
 	@Override

@@ -13,15 +13,15 @@ public interface Team<M, TM extends TeamMember<M>> {
 
 	Integer getTeamId();
 
-	TM getMember(Integer objectId);
+	TM getMember(int objectId);
 
-	boolean hasMember(Integer objectId);
+	boolean hasMember(int objectId);
 
 	void addMember(TM member);
 
 	void removeMember(TM member);
 
-	void removeMember(Integer objectId);
+	void removeMember(int objectId);
 
 	Collection<M> getMembers();
 

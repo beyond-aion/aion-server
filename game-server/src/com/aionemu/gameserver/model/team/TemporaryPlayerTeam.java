@@ -21,7 +21,7 @@ public abstract class TemporaryPlayerTeam<TM extends TeamMember<Player>> extends
 
 	private LootGroupRules lootGroupRules = new LootGroupRules();
 
-	public TemporaryPlayerTeam(Integer objId) {
+	public TemporaryPlayerTeam(int objId) {
 		super(objId);
 	}
 

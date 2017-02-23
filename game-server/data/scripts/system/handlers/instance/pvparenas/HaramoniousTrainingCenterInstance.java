@@ -247,8 +247,7 @@ public class HaramoniousTrainingCenterInstance extends HarmonyArenaInstance {
 	}
 
 	private void checkRing(Npc npc, Player player) {
-		final Integer object = player.getObjectId();
-		final HarmonyGroupReward group = instanceReward.getHarmonyGroupReward(object);
+		HarmonyGroupReward group = instanceReward.getHarmonyGroupReward(player.getObjectId());
 		if (npc != null && npc.isSpawned()) {
 			NpcActions.delete(npc, true);
 			if (group == null) {
@@ -256,7 +255,7 @@ public class HaramoniousTrainingCenterInstance extends HarmonyArenaInstance {
 			}
 			group.addPoints(100);
 			sendSystemMsg(player, npc, 250);
-			instanceReward.sendPacket(10, object);
+			instanceReward.sendPacket(10, player.getObjectId());
 		}
 	}
 

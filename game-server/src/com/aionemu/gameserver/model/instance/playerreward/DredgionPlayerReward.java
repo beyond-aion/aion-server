@@ -7,8 +7,8 @@ public class DredgionPlayerReward extends InstancePlayerReward {
 
 	private int zoneCaptured;
 
-	public DredgionPlayerReward(Integer object) {
-		super(object);
+	public DredgionPlayerReward(int objectId) {
+		super(objectId);
 	}
 
 	public void captureZone() {

@@ -91,7 +91,7 @@ public class DropService {
 	 * @param npc
 	 */
 	public void unregisterDrop(Npc npc) {
-		Integer npcObjId = npc.getObjectId();
+		int npcObjId = npc.getObjectId();
 		DropRegistrationService.getInstance().getCurrentDropMap().remove(npcObjId);
 		DropRegistrationService.getInstance().getDropRegistrationMap().remove(npcObjId);
 	}
@@ -180,10 +180,8 @@ public class DropService {
 				LootRuleType lrt = lootGrouRules.getLootRule();
 				if (lrt != LootRuleType.FREEFORALL) {
 					for (Player member : dropNpc.getInRangePlayers()) {
-						if (member != null) {
-							Integer object = member.getObjectId();
-							dropNpc.setPlayerObjectId(object);
-						}
+						if (member != null)
+							dropNpc.setPlayerObjectId(member.getObjectId());
 					}
 					DropRegistrationService.getInstance().setItemsToWinner(dropItems, 0);
 				}

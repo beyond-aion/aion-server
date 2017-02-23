@@ -13,9 +13,9 @@ public abstract class AionObject {
 	/**
 	 * Unique id, for all game objects such as: items, players, monsters.
 	 */
-	private Integer objectId;
+	private final int objectId;
 
-	public AionObject(Integer objId) {
+	public AionObject(int objId) {
 		this.objectId = objId;
 	}
 
@@ -24,16 +24,17 @@ public abstract class AionObject {
 	 * 
 	 * @return Int ObjectId
 	 */
-	public Integer getObjectId() {
+	public int getObjectId() {
 		return objectId;
 	}
 
 	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((objectId == null) ? 0 : objectId.hashCode());
-		return result;
+	public final int hashCode() {
+		return objectId;
+	}
+
+	private int dummyObjHashCode() {
+		return super.hashCode();
 	}
 
 	@Override
@@ -44,12 +45,10 @@ public abstract class AionObject {
 		if (!(obj instanceof AionObject))
 			return false;
 
-		AionObject aionObj = (AionObject) obj;
+		if (objectId == 0) // object is a dummy (no unique ID from IDFactory)
+			return dummyObjHashCode() == ((AionObject) obj).dummyObjHashCode();
 
-		if (getObjectId() == null)
-			return aionObj.getObjectId() == null && super.equals(obj);
-
-		return getObjectId().equals(aionObj.getObjectId());
+		return hashCode() == obj.hashCode(); // cheap direct objectId comparison (see above)
 	}
 
 	/**

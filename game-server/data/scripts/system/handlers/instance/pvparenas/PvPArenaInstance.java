@@ -103,11 +103,11 @@ public class PvPArenaInstance extends GeneralInstanceHandler {
 				continue;
 			}
 			if (master instanceof Player) {
-				Player attaker = (Player) master;
+				Player attacker = (Player) master;
 				int rewardPoints = (victim instanceof Player && instanceReward.getRound() == 3 && rank == 0 ? bonus * 3 : bonus) * damager.getDamage()
 					/ victim.getAggroList().getTotalDamage();
-				getPlayerReward(attaker.getObjectId()).addPoints(rewardPoints);
-				sendSystemMsg(attaker, victim, rewardPoints);
+				getPlayerReward(attacker.getObjectId()).addPoints(rewardPoints);
+				sendSystemMsg(attacker, victim, rewardPoints);
 			}
 		}
 		if (instanceReward.hasCapPoints()) {
@@ -137,11 +137,11 @@ public class PvPArenaInstance extends GeneralInstanceHandler {
 
 	@Override
 	public void onEnterInstance(Player player) {
-		Integer object = player.getObjectId();
-		if (!containPlayer(object)) {
-			instanceReward.regPlayerReward(object);
-			getPlayerReward(object).applyBoostMoraleEffect(player);
-			instanceReward.setRndPosition(object);
+		int objectId = player.getObjectId();
+		if (!containPlayer(objectId)) {
+			instanceReward.regPlayerReward(objectId);
+			getPlayerReward(objectId).applyBoostMoraleEffect(player);
+			instanceReward.setRndPosition(objectId);
 		} else {
 			instanceReward.portToPosition(player);
 		}
@@ -348,13 +348,13 @@ public class PvPArenaInstance extends GeneralInstanceHandler {
 		}
 	}
 
-	private boolean containPlayer(Integer object) {
-		return instanceReward.containPlayer(object);
+	private boolean containPlayer(int objectId) {
+		return instanceReward.containPlayer(objectId);
 	}
 
-	protected PvPArenaPlayerReward getPlayerReward(Integer object) {
-		instanceReward.regPlayerReward(object);
-		return instanceReward.getPlayerReward(object);
+	protected PvPArenaPlayerReward getPlayerReward(int objectId) {
+		instanceReward.regPlayerReward(objectId);
+		return instanceReward.getPlayerReward(objectId);
 	}
 
 	@Override

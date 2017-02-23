@@ -47,7 +47,7 @@ public class DredgionScoreInfo extends InstanceScoreInfo {
 			}
 			InstancePlayerReward playerReward = dredgionReward.getPlayerReward(player.getObjectId());
 			DredgionPlayerReward dpr = (DredgionPlayerReward) playerReward;
-			writeD(buf, playerReward.getOwner()); // playerObjectId
+			writeD(buf, playerReward.getOwnerId()); // playerObjectId
 			writeD(buf, player.getAbyssRank().getRank().getId()); // playerRank
 			writeD(buf, dpr.getPvPKills()); // pvpKills
 			writeD(buf, dpr.getMonsterKills()); // monsterKills

@@ -143,9 +143,9 @@ public class InstanceService {
 	 * @param player
 	 */
 	public static void registerPlayerWithInstance(WorldMapInstance instance, Player player) {
-		Integer obj = player.getObjectId();
+		int obj = player.getObjectId();
 		instance.register(obj);
-		instance.setSoloPlayerObj(obj);
+		instance.setSoloPlayerObjId(obj);
 	}
 
 	/**

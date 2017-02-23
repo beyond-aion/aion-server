@@ -29,7 +29,7 @@ public class CM_GODSTONE_SOCKET extends AionClientPacket {
 	@Override
 	protected void runImpl() {
 		Player player = getConnection().getActivePlayer();
-		if (player.getTarget() instanceof Npc && player.getTarget().getObjectId().equals(npcObjectId) && player.getDistanceToTarget() <= 7)
+		if (player.getTarget() instanceof Npc && player.getTarget().getObjectId() == npcObjectId && player.getDistanceToTarget() <= 7)
 			ItemSocketService.socketGodstone(player, player.getEquipment().getEquippedItemByObjId(weaponId), stoneId);
 	}
 }

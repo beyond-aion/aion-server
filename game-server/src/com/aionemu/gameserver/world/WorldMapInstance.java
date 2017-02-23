@@ -82,7 +82,7 @@ public abstract class WorldMapInstance implements Iterable<VisibleObject> {
 	private InstanceHandler instanceHandler;
 	private Map<ZoneName, ZoneInstance> zones = new HashMap<>();
 	// TODO: Merge this with owner
-	private Integer soloPlayer;
+	private int soloPlayer;
 	private PlayerAlliance registredAlliance;
 	private League registredLeague;
 	private float[] startPos;
@@ -408,11 +408,11 @@ public abstract class WorldMapInstance implements Iterable<VisibleObject> {
 		return mapRegion.isInsideZone(zoneName, pos.getX(), pos.getY(), pos.getZ());
 	}
 
-	public void setSoloPlayerObj(Integer obj) {
+	public void setSoloPlayerObjId(int obj) {
 		soloPlayer = obj;
 	}
 
-	public Integer getSoloPlayerObj() {
+	public int getSoloPlayerObj() {
 		return soloPlayer;
 	}
 

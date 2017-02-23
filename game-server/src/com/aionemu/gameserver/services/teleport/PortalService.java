@@ -226,7 +226,7 @@ public class PortalService {
 			default:
 				PlayerAlliance allianceGroup = player.getPlayerAlliance();
 				if (allianceGroup != null || !instanceGroupReq) {
-					Integer allianceId = player.getObjectId();
+					int allianceId = player.getObjectId();
 					League league = null;
 					if (allianceGroup != null) {
 						league = allianceGroup.getLeague();

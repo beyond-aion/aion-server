@@ -24,7 +24,7 @@ public class ConquestOfferingAggressiveAI extends AggressiveNpcAI {
 	private void findCreator() {
 		if (getCreatorId() != 0) {
 			for (Npc npc : World.getInstance().getWorldMap(getOwner().getWorldId()).getMainWorldMapInstance().getNpcs()) {
-				if (npc.getObjectId().equals(getOwner().getCreatorId())) {
+				if (npc.getObjectId() == getOwner().getCreatorId()) {
 					spawner = npc;
 					break;
 				}

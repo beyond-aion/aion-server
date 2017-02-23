@@ -107,7 +107,7 @@ public class ToyPetSpawnAction extends AbstractItemAction {
 				SpawnTemplate spawn = SpawnEngine.addNewSingleTimeSpawn(worldId, npcid, x, y, z, heading);
 
 				final Kisk kisk = VisibleObjectSpawner.spawnKisk(spawn, instanceId, player);
-				final Integer objOwnerId = player.getObjectId();
+				final int objOwnerId = player.getObjectId();
 				// Schedule Despawn Action
 				Future<?> task = ThreadPoolManager.getInstance().schedule(new Runnable() {
 

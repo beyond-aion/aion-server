@@ -31,7 +31,7 @@ public class ArenaOfChaosInstance extends ChaosTrainingGroundsInstance {
 			PvPArenaPlayerReward reward = (PvPArenaPlayerReward) playerReward;
 			if (!reward.isRewarded()) {
 				float playerRate = 1;
-				Player player = instance.getPlayer(playerReward.getOwner());
+				Player player = instance.getPlayer(playerReward.getOwnerId());
 				if (player != null) {
 					playerRate = player.getRates().getChaosRewardRate();
 				}

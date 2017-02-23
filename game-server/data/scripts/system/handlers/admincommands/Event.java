@@ -160,7 +160,7 @@ public class Event extends AdminCommand {
 			sendInfo(admin, "This map is not an instance!");
 			return;
 		}
-		if (!admin.getObjectId().equals(map.getSoloPlayerObj())) {
+		if (admin.getObjectId() != map.getSoloPlayerObj()) {
 			sendInfo(admin, "This instance was created by another player, you cannot delete NPCs here. Use //goto to create a new one!");
 			return;
 		}

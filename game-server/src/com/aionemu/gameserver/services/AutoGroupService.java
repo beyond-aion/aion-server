@@ -60,7 +60,7 @@ public class AutoGroupService {
 		if (!canEnter(player, ert, agt)) {
 			return;
 		}
-		Integer obj = player.getObjectId();
+		int obj = player.getObjectId();
 		LookingForParty lfp = searchers.get(obj);
 		if (penaltys.contains(obj)) {
 			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1400181, agt.getInstanceMapId()));
@@ -110,7 +110,7 @@ public class AutoGroupService {
 
 	public void onEnterInstance(Player player) {
 		if (player.isInInstance()) {
-			Integer obj = player.getObjectId();
+			int obj = player.getObjectId();
 			AutoInstance autoInstance = autoInstances.get(player.getInstanceId());
 			if (autoInstance != null && autoInstance.players.containsKey(obj)) {
 				autoInstance.onEnterInstance(player);
@@ -119,7 +119,7 @@ public class AutoGroupService {
 	}
 
 	public void unregisterLooking(Player player, int instanceMaskId) {
-		Integer obj = player.getObjectId();
+		int obj = player.getObjectId();
 		LookingForParty lfp = searchers.get(obj);
 		SearchInstance si;
 		if (lfp != null) {
@@ -138,7 +138,7 @@ public class AutoGroupService {
 	public void cancelEnter(Player player, int instanceMaskId) {
 		AutoInstance autoInstance = getAutoInstance(player, instanceMaskId);
 		if (autoInstance != null) {
-			Integer obj = player.getObjectId();
+			int obj = player.getObjectId();
 			if (!autoInstance.players.get(obj).isInInstance()) {
 				autoInstance.unregister(player);
 				if (!searchers.containsKey(obj)) {
@@ -189,7 +189,7 @@ public class AutoGroupService {
 		for (byte maskId : IdgelDomeService.getInstance().getMaskIds())
 			PacketSendUtility.sendPacket(player,
 				new SM_AUTO_GROUP(maskId, SM_AUTO_GROUP.wnd_EntryIcon, !IdgelDomeService.getInstance().isEnterAvailable(player)));
-		Integer obj = player.getObjectId();
+		int obj = player.getObjectId();
 		LookingForParty lfp = searchers.get(obj);
 		if (lfp != null) {
 			for (SearchInstance searchInstance : lfp.getSearchInstances()) {
@@ -250,7 +250,7 @@ public class AutoGroupService {
 	}
 
 	public void onPlayerLogOut(Player player) {
-		Integer obj = player.getObjectId();
+		int obj = player.getObjectId();
 		int instanceId = player.getInstanceId();
 		LookingForParty lfp = searchers.get(obj);
 		if (lfp != null) {
@@ -282,7 +282,7 @@ public class AutoGroupService {
 
 	public void onLeaveInstance(Player player) {
 		if (player.isInInstance()) {
-			Integer obj = player.getObjectId();
+			int obj = player.getObjectId();
 			int instanceId = player.getInstanceId();
 			AutoInstance autoInstance = autoInstances.get(instanceId);
 			if (autoInstance != null && autoInstance.players.containsKey(obj)) {
@@ -374,7 +374,7 @@ public class AutoGroupService {
 					autoInstance.onInstanceCreate(instance);
 					autoInstances.put(instance.getInstanceId(), autoInstance);
 					for (Player player : players) {
-						Integer obj = player.getObjectId();
+						int obj = player.getObjectId();
 						lfp = searchers.get(obj);
 						if (lfp != null) {
 							lfp.setStartEnterTime();

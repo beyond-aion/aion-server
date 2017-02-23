@@ -45,11 +45,6 @@ public class IronWallFrontReward extends InstanceReward<IronWallFrontPlayerRewar
 		return players;
 	}
 
-	@Override
-	public IronWallFrontPlayerReward getPlayerReward(Integer object) {
-		return (IronWallFrontPlayerReward) super.getPlayerReward(object);
-	}
-
 	public MutableInt getPointsByRace(Race race) {
 		switch (race) {
 			case ELYOS:

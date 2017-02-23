@@ -61,11 +61,10 @@ public class DredgionInstance2 extends GeneralInstanceHandler {
 	private Future<?> instanceTask;
 
 	protected DredgionPlayerReward getPlayerReward(Player player) {
-		Integer object = player.getObjectId();
-		if (dredgionReward.getPlayerReward(object) == null) {
+		if (dredgionReward.getPlayerReward(player.getObjectId()) == null) {
 			addPlayerToReward(player);
 		}
-		return (DredgionPlayerReward) dredgionReward.getPlayerReward(object);
+		return dredgionReward.getPlayerReward(player.getObjectId());
 	}
 
 	protected void captureRoom(Race race, int roomId) {
@@ -76,8 +75,8 @@ public class DredgionInstance2 extends GeneralInstanceHandler {
 		dredgionReward.addPlayerReward(new DredgionPlayerReward(player.getObjectId()));
 	}
 
-	private boolean containPlayer(Integer object) {
-		return dredgionReward.containPlayer(object);
+	private boolean containPlayer(int objectId) {
+		return dredgionReward.containPlayer(objectId);
 	}
 
 	protected void startInstanceTask() {
@@ -104,7 +103,6 @@ public class DredgionInstance2 extends GeneralInstanceHandler {
 
 	@Override
 	public void onEnterInstance(final Player player) {
-
 		if (!containPlayer(player.getObjectId())) {
 			addPlayerToReward(player);
 		}

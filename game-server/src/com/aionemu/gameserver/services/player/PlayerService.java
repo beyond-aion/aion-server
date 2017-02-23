@@ -460,7 +460,7 @@ public class PlayerService {
 		return playerCache.get(playerObjectId);
 	}
 
-	public static String getPlayerName(Integer objectId) {
+	public static String getPlayerName(int objectId) {
 		return getPlayerNames(Collections.singleton(objectId)).get(objectId);
 	}
 

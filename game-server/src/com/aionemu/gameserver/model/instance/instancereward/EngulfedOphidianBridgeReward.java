@@ -43,11 +43,6 @@ public class EngulfedOphidianBridgeReward extends InstanceReward<EngulfedOphidia
 		return players;
 	}
 
-	@Override
-	public EngulfedOphidianBridgePlayerReward getPlayerReward(Integer object) {
-		return (EngulfedOphidianBridgePlayerReward) super.getPlayerReward(object);
-	}
-
 	public MutableInt getPointsByRace(Race race) {
 		switch (race) {
 			case ELYOS:

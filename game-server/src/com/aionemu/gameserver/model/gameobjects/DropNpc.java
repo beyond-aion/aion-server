@@ -32,9 +32,9 @@ public class DropNpc {
 		this.allowedList = allowedList;
 	}
 
-	public void setPlayerObjectId(Integer object) {
-		if (!allowedList.contains(object)) {
-			allowedList.add(object);
+	public void setPlayerObjectId(int objectId) {
+		if (!allowedList.contains(objectId)) {
+			allowedList.add(objectId);
 		}
 	}
 

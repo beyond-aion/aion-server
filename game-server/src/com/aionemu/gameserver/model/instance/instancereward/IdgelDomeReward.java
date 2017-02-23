@@ -41,11 +41,6 @@ public class IdgelDomeReward extends InstanceReward<IdgelDomePlayerReward> {
 		return players;
 	}
 
-	@Override
-	public IdgelDomePlayerReward getPlayerReward(Integer object) {
-		return (IdgelDomePlayerReward) super.getPlayerReward(object);
-	}
-
 	public MutableInt getPointsByRace(Race race) {
 		switch (race) {
 			case ELYOS:

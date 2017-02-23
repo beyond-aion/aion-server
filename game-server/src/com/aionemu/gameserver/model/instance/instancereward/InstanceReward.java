@@ -24,9 +24,9 @@ public class InstanceReward<T extends InstancePlayerReward> {
 		return instanceRewards;
 	}
 
-	public boolean containPlayer(Integer object) {
+	public boolean containPlayer(int objectId) {
 		for (InstancePlayerReward instanceReward : instanceRewards) {
-			if (instanceReward.getOwner().equals(object)) {
+			if (instanceReward.getOwnerId() == objectId) {
 				return true;
 			}
 		}
@@ -39,9 +39,9 @@ public class InstanceReward<T extends InstancePlayerReward> {
 		}
 	}
 
-	public InstancePlayerReward getPlayerReward(Integer object) {
-		for (InstancePlayerReward instanceReward : instanceRewards) {
-			if (instanceReward.getOwner().equals(object)) {
+	public T getPlayerReward(int objectId) {
+		for (T instanceReward : instanceRewards) {
+			if (instanceReward.getOwnerId() == objectId) {
 				return instanceReward;
 			}
 		}

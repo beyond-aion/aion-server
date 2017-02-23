@@ -14,13 +14,13 @@ public class IronWallFrontScoreInfo extends InstanceScoreInfo {
 
 	private final IronWallFrontReward ironWallFrontReward;
 	private final int type;
-	private final Integer object;
+	private final int objectId;
 	private final InstanceScoreType instanceScoreType;
 
-	public IronWallFrontScoreInfo(IronWallFrontReward ironWallFrontReward, int type, Integer object) {
+	public IronWallFrontScoreInfo(IronWallFrontReward ironWallFrontReward, int type, int objectId) {
 		this.ironWallFrontReward = ironWallFrontReward;
 		this.type = type;
-		this.object = object;
+		this.objectId = objectId;
 		this.instanceScoreType = ironWallFrontReward.getInstanceScoreType();
 	}
 
@@ -31,14 +31,14 @@ public class IronWallFrontScoreInfo extends InstanceScoreInfo {
 		IronWallFrontPlayerReward ironWallFrontPlayerReward = null;
 		switch (type) {
 			case 3:
-				ironWallFrontPlayerReward = ironWallFrontReward.getPlayerReward(object);
+				ironWallFrontPlayerReward = ironWallFrontReward.getPlayerReward(objectId);
 				writeD(buf, 0);
 				writeD(buf, 0);
-				writeD(buf, ironWallFrontPlayerReward.getOwner()); // objectId
+				writeD(buf, ironWallFrontPlayerReward.getOwnerId()); // objectId
 				writeD(buf, ironWallFrontPlayerReward.getRace().equals(Race.ELYOS) ? 0 : 1); // elyos 0 asmodians 1
 				break;
 			case 5: // reward
-				ironWallFrontPlayerReward = ironWallFrontReward.getPlayerReward(object);
+				ironWallFrontPlayerReward = ironWallFrontReward.getPlayerReward(objectId);
 				writeD(buf, 100); // partitipation
 				writeD(buf, ironWallFrontPlayerReward.getBaseReward());
 				writeD(buf, ironWallFrontPlayerReward.getBonusReward());
@@ -74,7 +74,7 @@ public class IronWallFrontScoreInfo extends InstanceScoreInfo {
 					if (reward != null) {
 						writeD(buf, 0);
 						writeD(buf, 0);
-						writeD(buf, reward.getOwner());
+						writeD(buf, reward.getOwnerId());
 					} else {
 						writeD(buf, 0);
 						writeD(buf, 0);
@@ -86,7 +86,7 @@ public class IronWallFrontScoreInfo extends InstanceScoreInfo {
 					if (reward != null) {
 						writeD(buf, 0);
 						writeD(buf, 0);
-						writeD(buf, reward.getOwner());
+						writeD(buf, reward.getOwnerId());
 					} else {
 						writeD(buf, 0);
 						writeD(buf, 0);
@@ -108,9 +108,9 @@ public class IronWallFrontScoreInfo extends InstanceScoreInfo {
 				break;
 			case 10:
 				writeC(buf, 0);
-				writeD(buf, ironWallFrontReward.getKillsByRace(object == 0 ? Race.ELYOS : Race.ASMODIANS).intValue());
-				writeD(buf, ironWallFrontReward.getPointsByRace(object == 0 ? Race.ELYOS : Race.ASMODIANS).intValue());
-				writeD(buf, object); // elyos 0 asmodians 1
+				writeD(buf, ironWallFrontReward.getKillsByRace(objectId == 0 ? Race.ELYOS : Race.ASMODIANS).intValue());
+				writeD(buf, ironWallFrontReward.getPointsByRace(objectId == 0 ? Race.ELYOS : Race.ASMODIANS).intValue());
+				writeD(buf, objectId); // elyos 0 asmodians 1
 				writeD(buf, 0);
 				break;
 		}
