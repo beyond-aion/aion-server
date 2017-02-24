@@ -60,7 +60,7 @@ public class TargetRangeProperty {
 					if (!(nextCreature instanceof Creature))
 						continue;
 					Creature creature = (Creature) nextCreature;
-					if (!checkCommonRequirements(creature))
+					if (!checkCommonRequirements(creature, skill))
 						continue;
 
 					// if (nextCreature instanceof Kisk && isInsideDisablePvpZone(creature)
@@ -138,7 +138,7 @@ public class TargetRangeProperty {
 						for (Player member : team.getMembers()) {
 							if (!member.isOnline())
 								continue;
-							if (!checkCommonRequirements(member))
+							if (!checkCommonRequirements(member, skill))
 								continue;
 							if (MathUtil.isIn3dRange(effector, member, effectiveRange + 1)) {
 								effectedList.add(member);
@@ -157,7 +157,7 @@ public class TargetRangeProperty {
 					if (!(nextCreature instanceof Creature))
 						continue;
 					Creature creature = (Creature) nextCreature;
-					if (!checkCommonRequirements(creature))
+					if (!checkCommonRequirements(creature, skill))
 						continue;
 
 					if (nextCreature instanceof Trap && !((Trap) nextCreature).getMaster().isEnemy(skillEffector))
@@ -174,9 +174,14 @@ public class TargetRangeProperty {
 		return true;
 	}
 
-	private static final boolean checkCommonRequirements(Creature creature) {
-		if (creature.getLifeStats().isAlreadyDead())
-			return false;
+	private static final boolean checkCommonRequirements(Creature creature, Skill skill) {
+		if (skill.getSkillTemplate().hasResurrectEffect()) {
+			if (!creature.getLifeStats().isAlreadyDead())
+				return false;
+		} else {
+			if (creature.getLifeStats().isAlreadyDead())
+				return false;
+		}
 
 		// blinking state means protection is active (no interaction with creature is possible)
 		if (creature.isInVisualState(CreatureVisualState.BLINKING))
