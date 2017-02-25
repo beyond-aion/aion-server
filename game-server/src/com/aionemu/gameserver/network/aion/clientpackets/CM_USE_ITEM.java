@@ -76,13 +76,8 @@ public class CM_USE_ITEM extends AionClientPacket {
 		}
 
 		// check use item multicast delay exploit cast (spam)
-		if (player.isCasting()) {
-			// PacketSendUtility.sendMessage(this.getOwner(),
-			// "You must wait until cast time finished to use skill again.");
+		if (player.isCasting())
 			player.getController().cancelCurrentSkill(null);
-			// On retail the item is cancelling the current skill and then procs normally
-			// return;
-		}
 
 		if (!RestrictionsManager.canUseItem(player, item))
 			return;

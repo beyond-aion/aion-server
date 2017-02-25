@@ -434,12 +434,12 @@ public class PlayerRestrictions extends AbstractRestrictions {
 					}
 				}
 				if (!isInFortZone) {
-					PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1300143));
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_CAN_NOT_USE_ITEM_IN_CURRENT_POSITION());
 					return false;
 				}
 			} else if (restriction != null && !player.isInsideItemUseZone(restriction)) {
 				// You cannot use that item here.
-				PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1300143));
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_CAN_NOT_USE_ITEM_IN_CURRENT_POSITION());
 				return false;
 			}
 		}

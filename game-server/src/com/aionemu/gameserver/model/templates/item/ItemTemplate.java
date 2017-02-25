@@ -41,9 +41,9 @@ public class ItemTemplate extends VisibleObjectTemplate {
 	@XmlID
 	private String id;
 	@XmlElement(name = "modifiers", required = false)
-	protected ModifiersTemplate modifiers;
+	private ModifiersTemplate modifiers;
 	@XmlElement(name = "actions", required = false)
-	protected ItemActions actions;
+	private ItemActions actions;
 	@XmlAttribute(name = "mask")
 	private int mask;
 	@XmlAttribute(name = "weapon_boost")
@@ -110,11 +110,11 @@ public class ItemTemplate extends VisibleObjectTemplate {
 	@XmlAttribute(name = "max_tampering")
 	private int maxTampering;
 	@XmlAttribute(name = "temp_exchange_time")
-	protected int temExchangeTime;
+	private int temExchangeTime;
 	@XmlAttribute(name = "expire_time")
-	protected int expireTime;
+	private int expireTime;
 	@XmlElement(name = "weapon_stats")
-	protected WeaponStats weaponStats;
+	private WeaponStats weaponStats;
 	@XmlAttribute(name = "activate_target")
 	private String activationTarget;
 	@XmlAttribute(name = "tempering_name")
@@ -130,7 +130,7 @@ public class ItemTemplate extends VisibleObjectTemplate {
 	@XmlAttribute(name = "robot")
 	private Integer robotId;
 	@XmlElement(name = "tradein_list")
-	protected TradeinList tradeinList;
+	private TradeinList tradeinList;
 	@XmlElement(name = "acquisition")
 	private Acquisition acquisition;
 	@XmlElement(name = "disposition")
