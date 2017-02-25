@@ -38,6 +38,7 @@ public class Reload extends AdminCommand {
 	public Reload() {
 		super("reload", "Reloads templates or handlers (static data).");
 
+		// @formatter:off
 		setSyntaxInfo(
 			"<config> - Reloads all configuration settings.",
 			"<commands|ai> - Reloads the specified handlers.",
@@ -46,6 +47,7 @@ public class Reload extends AdminCommand {
 			"<events> - Reloads event templates and (re)starts events.",
 			"<npcs|items|customdrops|gameshop> - Reloads the specified data."
 		);
+		// @formatter:on
 	}
 
 	@Override
