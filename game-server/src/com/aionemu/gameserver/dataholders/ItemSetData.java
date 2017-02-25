@@ -38,7 +38,7 @@ public class ItemSetData {
 
 			// Add reference to the ItemSetTemplate from
 			for (ItemPart part : set.getItempart()) {
-				setItems.put(part.getItemid(), set);
+				setItems.put(part.getItemId(), set);
 			}
 		}
 		itemsetList = null;

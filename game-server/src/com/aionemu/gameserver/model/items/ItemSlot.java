@@ -39,7 +39,6 @@ public enum ItemSlot {
 	SHARD_RIGHT_OR_LEFT(POWER_SHARD_LEFT.slotIdMask | POWER_SHARD_RIGHT.slotIdMask, true), // 24576
 	RIGHT_HAND(MAIN_HAND.slotIdMask | MAIN_OFF_HAND.slotIdMask, true),
 	LEFT_HAND(SUB_HAND.slotIdMask | SUB_OFF_HAND.slotIdMask, true),
-	// TORSO_GLOVE_FOOT_SHOULDER_LEG(0, true), // TODO
 	VISIBLE(MAIN_HAND.slotIdMask
 					| SUB_HAND.slotIdMask
 					| HELMET.slotIdMask
@@ -55,7 +54,7 @@ public enum ItemSlot {
 					| POWER_SHARD_LEFT.slotIdMask
 					| WINGS.slotIdMask
 					| PLUME.slotIdMask,
-					true),
+					true), // rings were designed to be visible (at the players thumbs), but they have no skins
 
 	// STIGMA slots
 	STIGMA1(1L << 30),
