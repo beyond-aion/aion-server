@@ -224,17 +224,6 @@ public class World {
 	}
 
 	/**
-	 * Finds Npc by objectId.
-	 * 
-	 * @param objectId
-	 *          - objectId of Npc
-	 * @return Npc or null if not in world or object ID belongs to other AionObject type in world.
-	 */
-	public Npc findNpc(int objectId) {
-		return findVisibleObject(objectId) instanceof Npc ? (Npc) findVisibleObject(objectId) : null;
-	}
-
-	/**
 	 * Check whether object is in world
 	 * 
 	 * @param objectId
@@ -401,19 +390,6 @@ public class World {
 	 *           when object is already spawned.
 	 */
 	public void spawn(VisibleObject object) throws AlreadySpawnedException {
-		spawn(object, true);
-	}
-
-	/**
-	 * Spawns the object at the current position (use setPosition). Object will be visible by others and will see other objects, if updateKnownlist is
-	 * set to true.
-	 * 
-	 * @param object
-	 * @param updateKnownlist
-	 * @throws AlreadySpawnedException
-	 *           when object is already spawned.
-	 */
-	public void spawn(VisibleObject object, boolean updateKnownlist) throws AlreadySpawnedException {
 		if (object == null)
 			return;
 		WorldPosition position = object.getPosition();
@@ -427,8 +403,7 @@ public class World {
 		position.getMapRegion().add(object);
 		object.getController().onAfterSpawn();
 
-		if (updateKnownlist)
-			object.updateKnownlist();
+		object.updateKnownlist();
 	}
 
 	/**

@@ -305,7 +305,7 @@ public class DropService {
 		}
 
 		if (requestedItem == null) {
-			log.warn(player + " requested drop at invalid index " + itemIndex + " from " + World.getInstance().findNpc(npcObjectId));
+			log.warn(player + " requested drop at invalid index " + itemIndex + " from " + World.getInstance().findVisibleObject(npcObjectId));
 			return;
 		}
 
