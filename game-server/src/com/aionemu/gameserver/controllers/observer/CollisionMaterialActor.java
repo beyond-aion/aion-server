@@ -147,10 +147,7 @@ public class CollisionMaterialActor extends AbstractCollisionObserver implements
 	@Override
 	public void abort() {
 		isCanceled.set(true);
-		Future<?> existingTask = creature.getController().getTask(TaskId.MATERIAL_ACTION);
-		if (existingTask != null) {
-			creature.getController().cancelTask(TaskId.MATERIAL_ACTION);
-		}
+		creature.getController().cancelTask(TaskId.MATERIAL_ACTION);
 		currentSkill.set(null);
 	}
 

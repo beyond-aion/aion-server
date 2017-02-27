@@ -1,6 +1,7 @@
 package com.aionemu.gameserver.controllers;
 
 import java.util.List;
+import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Future;
 
@@ -386,36 +387,21 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 	public void onDialogSelect(int dialogActionId, int prevDialogId, Player player, int questId, int extendedRewardIndex) {
 	}
 
-	/**
-	 * @param taskId
-	 * @return
-	 */
-	public Future<?> getTask(TaskId taskId) {
-		return tasks.get(taskId.ordinal());
-	}
-
-	/**
-	 * @param taskId
-	 * @return
-	 */
 	public boolean hasTask(TaskId taskId) {
 		return tasks.containsKey(taskId.ordinal());
 	}
 
-	/**
-	 * @param taskId
-	 * @return
-	 */
 	public boolean hasScheduledTask(TaskId taskId) {
 		Future<?> task = tasks.get(taskId.ordinal());
-		return task != null ? !task.isDone() : false;
+		return task != null && !task.isDone();
 	}
 
-	/**
-	 * @param taskId
-	 */
+	public Future<?> getAndRemoveTask(TaskId taskId) {
+		return tasks.remove(taskId.ordinal());
+	}
+
 	public Future<?> cancelTask(TaskId taskId) {
-		Future<?> task = tasks.remove(taskId.ordinal());
+		Future<?> task = getAndRemoveTask(taskId);
 		if (task != null) {
 			task.cancel(false);
 		}
@@ -434,16 +420,22 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 	}
 
 	/**
-	 * Cancel all tasks associated with this controller (when deleting object)
+	 * Cancel all tasks associated with this controller, except the respawn task (when deleting object)
 	 */
 	public void cancelAllTasks() {
-		for (int i : tasks.keySet()) {
-			Future<?> task = tasks.get(i);
-			if (task != null && i != TaskId.RESPAWN.ordinal()) {
-				task.cancel(false);
+		Future<?> respawnTask = null;
+		for (Entry<Integer, Future<?>> e : tasks.entrySet()) {
+			Future<?> task = e.getValue();
+			if (task != null) {
+				if (e.getKey() == TaskId.RESPAWN.ordinal())
+					respawnTask = task;
+				else
+					task.cancel(false);
 			}
 		}
 		tasks.clear();
+		if (respawnTask != null) // re-associate task with controller
+			addTask(TaskId.RESPAWN, respawnTask);
 	}
 
 	@Override

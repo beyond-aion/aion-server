@@ -1,7 +1,6 @@
 package com.aionemu.gameserver.services;
 
 import java.time.Duration;
-import java.util.concurrent.Future;
 
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.dao.PlayerPunishmentsDAO;
@@ -98,8 +97,7 @@ public class PunishmentService {
 	 * @param playerObjId
 	 */
 	public static void stopPrisonTask(Player player, boolean save) {
-		Future<?> prisonTask = player.getController().getTask(TaskId.PRISON);
-		if (prisonTask != null) {
+		if (player.getController().hasTask(TaskId.PRISON)) {
 			if (save) {
 				long delay = player.getPrisonTimer();
 				if (delay < 0)
@@ -203,9 +201,7 @@ public class PunishmentService {
 	 * @author Cura
 	 */
 	public static void stopGatherableTask(Player player, boolean save) {
-		Future<?> gatherableTask = player.getController().getTask(TaskId.GATHERABLE);
-
-		if (gatherableTask != null) {
+		if (player.getController().hasTask(TaskId.GATHERABLE)) {
 			if (save) {
 				long delay = player.getGatherableTimer();
 				if (delay < 0)

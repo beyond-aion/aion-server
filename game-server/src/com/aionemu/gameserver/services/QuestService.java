@@ -1011,7 +1011,7 @@ public final class QuestService {
 				player.getRecipeList().deleteRecipe(player, ((WorkOrdersData) xmlQuest).getRecipeId());
 		}
 
-		if (player.getController().getTask(TaskId.QUEST_TIMER) != null)
+		if (player.getController().hasTask(TaskId.QUEST_TIMER))
 			questTimerEnd(new QuestEnv(null, player, questId));
 
 		PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(ActionType.ABANDON, qs));
