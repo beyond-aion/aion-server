@@ -2,8 +2,8 @@ package quest.eltnen;
 
 import static com.aionemu.gameserver.model.DialogAction.*;
 
+import java.util.Arrays;
 import java.util.Collection;
-import java.util.List;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIState;
@@ -25,20 +25,12 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.WorldMapType;
 
-import javolution.util.FastTable;
-
 /**
  * @author Artur
  */
 public class _14026ALoneDefense extends QuestHandler {
 
-	private static List<Integer> mobs = new FastTable<>();
-
-	static {
-		mobs.add(211628);
-		mobs.add(211630);
-		mobs.add(213575);
-	}
+	private static int[] mobs = { 211628, 211630, 213575 };
 
 	public _14026ALoneDefense() {
 		super(14026);
@@ -134,8 +126,7 @@ public class _14026ALoneDefense extends QuestHandler {
 						case SETPRO4: {
 							qs.setStatus(QuestStatus.REWARD);
 							updateQuestStatus(env);
-							TeleportService.teleportTo(player, WorldMapType.ELTNEN.getId(), 271.69f, 2787.04f, 272.47f, (byte) 50,
-								TeleportAnimation.FADE_OUT_BEAM);
+							TeleportService.teleportTo(player, WorldMapType.ELTNEN.getId(), 271.69f, 2787.04f, 272.47f, (byte) 50, TeleportAnimation.FADE_OUT_BEAM);
 							return true;
 						}
 					}
@@ -146,6 +137,7 @@ public class _14026ALoneDefense extends QuestHandler {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 2375);
 					default:
+						qs.setRewardGroup(0); // group 0 and 1 are identical in templates, set anyway to mute warning
 						return sendQuestEndDialog(env);
 				}
 			}
@@ -216,7 +208,7 @@ public class _14026ALoneDefense extends QuestHandler {
 			int var = qs.getQuestVarById(0);
 			if (var == 3) {
 				int targetId = env.getTargetId();
-				if (mobs.contains(targetId)) {
+				if (Arrays.stream(mobs).anyMatch(npcId -> npcId == targetId)) {
 					spawn(player);
 					return true;
 				}
@@ -226,7 +218,7 @@ public class _14026ALoneDefense extends QuestHandler {
 	}
 
 	private void spawn(Player player) {
-		int mobToSpawn = mobs.get(Rnd.get(0, 2));
+		int mobToSpawn = Rnd.get(mobs);
 		float x = 0;
 		float y = 0;
 		final float z = 217.48f;
