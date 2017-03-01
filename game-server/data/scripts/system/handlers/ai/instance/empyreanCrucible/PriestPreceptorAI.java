@@ -10,7 +10,7 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.skillengine.SkillEngine;
-import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldPosition;
 
@@ -93,7 +93,7 @@ public class PriestPreceptorAI extends AggressiveNpcAI {
 	private Player getTargetPlayer() {
 		List<Player> players = new FastTable<>();
 		getKnownList().forEachPlayer(player -> {
-			if (!PlayerActions.isAlreadyDead(player) && MathUtil.isIn3dRange(player, getOwner(), 25)) {
+			if (!PlayerActions.isAlreadyDead(player) && PositionUtil.isInRange(player, getOwner(), 25)) {
 				players.add(player);
 			}
 		});

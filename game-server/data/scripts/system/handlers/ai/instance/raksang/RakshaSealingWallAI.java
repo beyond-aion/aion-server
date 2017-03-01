@@ -8,7 +8,7 @@ import com.aionemu.gameserver.model.actions.NpcActions;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
 import ai.GeneralNpcAI;
@@ -30,7 +30,7 @@ public class RakshaSealingWallAI extends GeneralNpcAI {
 	protected void handleCreatureMoved(Creature creature) {
 		if (creature instanceof Player) {
 			final Player player = (Player) creature;
-			if (MathUtil.getDistance(getOwner(), player) <= 35) {
+			if (PositionUtil.getDistance(getOwner(), player) <= 35) {
 				if (startedEvent.compareAndSet(false, true)) {
 					WorldMapInstance instance = getPosition().getWorldMapInstance();
 					Npc sharik = instance.getNpc(217425);

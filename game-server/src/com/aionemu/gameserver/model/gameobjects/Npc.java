@@ -30,7 +30,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_LOOKATOBJECT;
 import com.aionemu.gameserver.services.TribeRelationService;
 import com.aionemu.gameserver.spawnengine.WalkerGroup;
 import com.aionemu.gameserver.spawnengine.WalkerGroupShift;
-import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.idfactory.IDFactory;
 import com.aionemu.gameserver.world.WorldPosition;
@@ -227,7 +227,7 @@ public class Npc extends Creature {
 	 * @return distance to spawn location
 	 */
 	public double getDistanceToSpawnLocation() {
-		return MathUtil.getDistance(getSpawn().getX(), getSpawn().getY(), getSpawn().getZ(), getX(), getY(), getZ());
+		return PositionUtil.getDistance(getSpawn().getX(), getSpawn().getY(), getSpawn().getZ(), getX(), getY(), getZ());
 	}
 
 	@Override
@@ -279,7 +279,7 @@ public class Npc extends Creature {
 			getGameStats().renewLastChangeTargetTime();
 			if (!getLifeStats().isAlreadyDead()) {
 				if (creature != null && !this.equals(creature))
-					getPosition().setH(MathUtil.getHeadingTowards(this, creature));
+					getPosition().setH(PositionUtil.getHeadingTowards(this, creature));
 				PacketSendUtility.broadcastPacket(this, new SM_LOOKATOBJECT(this));
 			}
 		}

@@ -25,7 +25,7 @@ import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.services.mail.SystemMailService;
 import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.ChatUtil;
-import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 import javolution.util.FastTable;
@@ -125,7 +125,7 @@ public class WebRewardService {
 					PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(ActionType.UPDATE, qs));
 				}
 				VisibleObject questNpc = player.getKnownList().findObject(questNpcId);
-				if (questNpc == null || MathUtil.getDistance(player, questNpc) >= 20)
+				if (questNpc == null || PositionUtil.getDistance(player, questNpc) >= 20)
 					TeleportService.sendTeleportRequest(player, questNpcId); // completing the quest (updates daeva status) calls the reward method again
 			} else {
 				int maxLevel = DataManager.PLAYER_EXPERIENCE_TABLE.getMaxLevel() - 1; // max is 66

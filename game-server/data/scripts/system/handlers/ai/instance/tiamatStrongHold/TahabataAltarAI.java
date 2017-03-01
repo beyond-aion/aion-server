@@ -6,7 +6,7 @@ import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PositionUtil;
 
 /**
  * @author Cheatkiller
@@ -36,8 +36,8 @@ public class TahabataAltarAI extends NpcAI {
 				break;
 		}
 		if (creature instanceof Player) {
-			if (getNpcId() == 283253 && MathUtil.isIn3dRangeLimited(getOwner(), creature, 25, 37) || getNpcId() == 283255
-				&& MathUtil.isIn3dRangeLimited(getOwner(), creature, 20, 25)) {
+			if (getNpcId() == 283253 && PositionUtil.isInRangeLimited(getOwner(), creature, 25, 37) || getNpcId() == 283255
+				&& PositionUtil.isInRangeLimited(getOwner(), creature, 20, 25)) {
 				if (!creature.getEffectController().hasAbnormalEffect(debuff)) {
 					AIActions.useSkill(this, debuff);
 				}

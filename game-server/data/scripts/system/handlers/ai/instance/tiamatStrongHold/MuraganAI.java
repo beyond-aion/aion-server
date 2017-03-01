@@ -14,7 +14,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_ACTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_ACTION.ActionType;
 import com.aionemu.gameserver.questEngine.model.QuestState;
-import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
@@ -49,7 +49,7 @@ public class MuraganAI extends GeneralNpcAI {
 
 	private void checkDistance(NpcAI ai, Creature creature) {
 		if (creature instanceof Player) {
-			if (MathUtil.isIn3dRange(getOwner(), creature, 15) && !isMove) {
+			if (PositionUtil.isInRange(getOwner(), creature, 15) && !isMove) {
 				isMove = true;
 				openSuramaDoor();
 				startWalk((Player) creature);

@@ -5,7 +5,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.shield.Shield;
 import com.aionemu.gameserver.model.utils3d.Point3D;
 import com.aionemu.gameserver.services.SiegeService;
-import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PositionUtil;
 
 /**
  * @author Wakizashi, Source
@@ -29,8 +29,8 @@ public class ShieldObserver extends ActionObserver {
 
 		if (SiegeService.getInstance().getFortress(shield.getId()).isUnderShield())
 			if (!(creature.getZ() < shield.getZ() && oldPosition.getZ() < shield.getZ()))
-				if (MathUtil.isInSphere(shield, (float) oldPosition.getX(), (float) oldPosition.getY(), (float) oldPosition.getZ(),
-					shield.getTemplate().getRadius()) != MathUtil.isIn3dRange(shield, creature, shield.getTemplate().getRadius()))
+				if (PositionUtil.isInRange(shield, (float) oldPosition.getX(), (float) oldPosition.getY(), (float) oldPosition.getZ(),
+					shield.getTemplate().getRadius()) != PositionUtil.isInRange(shield, creature, shield.getTemplate().getRadius()))
 					passedThrough = true;
 
 		if (passedThrough && creature.getController().die()) {

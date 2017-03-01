@@ -21,7 +21,7 @@ public class FrontDamageModifier extends ActionModifier {
 
 	@Override
 	public boolean check(Effect effect) {
-		return PositionUtil.isInFrontOfTarget(effect.getEffector(), effect.getEffected());
+		return PositionUtil.isInFrontOf(effect.getEffector(), effect.getEffected());
 	}
 
 }

@@ -12,7 +12,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_FORCED_MOVE;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.SkillMoveType;
 import com.aionemu.gameserver.skillengine.model.SpellStatus;
-import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.geo.GeoService;
@@ -44,7 +44,7 @@ public class SimpleRootEffect extends EffectTemplate {
 		effect.setSkillMoveType(SkillMoveType.KNOCKBACK);
 		effect.getEffected().getEffectController().setAbnormal(AbnormalState.KNOCKBACK);
 		effect.setAbnormal(AbnormalState.KNOCKBACK);
-		double radian = Math.toRadians(MathUtil.convertHeadingToDegree(heading));
+		double radian = Math.toRadians(PositionUtil.convertHeadingToAngle(heading));
 		float x1 = (float) (Math.cos(radian) * 0.7f);
 		float y1 = (float) (Math.sin(radian) * 0.7f);
 		float z = effected.getZ();

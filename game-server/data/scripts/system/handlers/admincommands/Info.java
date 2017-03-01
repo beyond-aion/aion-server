@@ -98,7 +98,7 @@ public class Info extends AdminCommand {
 					"[Sense range]\n\tRadius: " + npc.getAggroRange() + "\n\tSide: " + npc.getObjectTemplate().getBoundRadius().getSide() + ", Front: "
 						+ npc.getObjectTemplate().getBoundRadius().getFront() + "\n\tDirectional bound: " + PositionUtil.getDirectionalBound(npc, admin, true)
 						+ "\n\tDistance: " + (npc.getAggroRange() + PositionUtil.getDirectionalBound(npc, admin, true)) + "\n\tCollision: "
-						+ (npc.getAggroRange() - npc.getCollision()));
+						+ (npc.getAggroRange() - npc.getObjectTemplate().getBoundRadius().getCollision()));
 				sendInfo(admin, "[Spawn info]\n\tStaticId: " + npc.getSpawn().getStaticId() + ", DistToSpawn: " + npc.getDistanceToSpawnLocation() + "m");
 				if (npc.isPathWalker()) {
 					sendInfo(admin, "\tRouteId: " + npc.getSpawn().getWalkerId());

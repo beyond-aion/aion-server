@@ -24,7 +24,7 @@ import com.aionemu.gameserver.skillengine.model.SkillType;
 import com.aionemu.gameserver.skillengine.properties.FirstTargetAttribute;
 import com.aionemu.gameserver.skillengine.properties.Properties;
 import com.aionemu.gameserver.skillengine.properties.TargetRangeAttribute;
-import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.geo.GeoService;
 
@@ -43,7 +43,7 @@ public class SkillAttackManager {
 	public static void performAttack(NpcAI npcAI, int delay) {
 		if (npcAI.getOwner().getObjectTemplate().getAttackRange() == 0) {
 			if (npcAI.getOwner().getTarget() != null
-				&& !MathUtil.isInRange(npcAI.getOwner(), npcAI.getOwner().getTarget(), npcAI.getOwner().getAggroRange())) {
+				&& !PositionUtil.isInRange(npcAI.getOwner(), npcAI.getOwner().getTarget(), npcAI.getOwner().getAggroRange())) {
 				npcAI.getOwner().getController().abortCast();
 				npcAI.onGeneralEvent(AIEventType.TARGET_TOOFAR);
 				return;
@@ -64,7 +64,7 @@ public class SkillAttackManager {
 	protected static void skillAction(NpcAI npcAI) {
 		Npc owner = npcAI.getOwner();
 		if (owner.getObjectTemplate().getAttackRange() == 0) {
-			if (owner.getTarget() != null && !MathUtil.isInRange(owner, owner.getTarget(), owner.getAggroRange())) {
+			if (owner.getTarget() != null && !PositionUtil.isInRange(owner, owner.getTarget(), owner.getAggroRange())) {
 				owner.getController().abortCast();
 				npcAI.onGeneralEvent(AIEventType.TARGET_TOOFAR);
 				return;
@@ -117,7 +117,7 @@ public class SkillAttackManager {
 											if (temp.getTarget() == NpcSkillTargetAttribute.RANDOM_EXCEPT_MOST_HATED && owner.getAggroList().getMostHated().equals(target3))
 												continue;
 											if (owner.isEnemy(target3) && owner.canSee(target3)
-												&& MathUtil.isIn3dRange(owner, target3, template.getProperties().getFirstTargetRange())
+												&& PositionUtil.isInRange(owner, target3, template.getProperties().getFirstTargetRange())
 												&& GeoService.getInstance().canSee(owner, target3)) {
 												knownCreatures.add(target3);
 											}
@@ -254,9 +254,7 @@ public class SkillAttackManager {
 					return true;
 				}
 				if (prop.getTargetType() != TargetRangeAttribute.AREA) {
-					float collision = owner.getCollision() < 1f ? 1f : owner.getCollision();
-					float targetCollision = target.getCollision() < 1f ? 1f : target.getCollision();
-					if (!MathUtil.isIn3dRange(owner, target, prop.getFirstTargetRange() + collision + targetCollision)) {
+					if (!PositionUtil.isInRange(owner, target, prop.getFirstTargetRange(), false)) {
 						return true;
 					}
 				}

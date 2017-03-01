@@ -22,7 +22,6 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_TARGET_IMMOBILIZE;
 import com.aionemu.gameserver.skillengine.model.Effect;
-import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
@@ -125,10 +124,11 @@ public class FearEffect extends EffectTemplate {
 			if (effected.getEffectController().isUnderFear()) {
 				float x = effected.getX();
 				float y = effected.getY();
-				if (!MathUtil.isNearCoordinates(effected, effector, 40))
+				if (!PositionUtil.isInRange(effected, effector, 40))
 					return;
-				byte moveAwayHeading = PositionUtil.getMoveAwayHeading(effector, effected);
-				double radian = Math.toRadians(MathUtil.convertHeadingToDegree(moveAwayHeading));
+				float angle = PositionUtil.calculateAngleFrom(effector, effected);
+				byte moveAwayHeading = PositionUtil.convertAngleToHeading(angle);
+				double radian = Math.toRadians(angle);
 				float maxDistance = effected.getGameStats().getMovementSpeedFloat();
 				float x1 = (float) (Math.cos(radian) * maxDistance);
 				float y1 = (float) (Math.sin(radian) * maxDistance);

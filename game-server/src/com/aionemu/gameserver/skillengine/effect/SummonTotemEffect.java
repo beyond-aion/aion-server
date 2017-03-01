@@ -7,7 +7,7 @@ import javax.xml.bind.annotation.XmlType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.NpcObjectType;
 import com.aionemu.gameserver.skillengine.model.Effect;
-import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PositionUtil;
 
 /**
  * @author kecimis
@@ -24,7 +24,7 @@ public class SummonTotemEffect extends SummonServantEffect {
 		float z = effector.getZ();
 		if (effect.getSkill().isFirstTargetSelf()) {
 			Creature effected = effect.getEffected();
-			double radian = Math.toRadians(MathUtil.convertHeadingToDegree(effect.getEffector().getHeading()));
+			double radian = Math.toRadians(PositionUtil.convertHeadingToAngle(effect.getEffector().getHeading()));
 			x = effected.getX() + (float) (Math.cos(radian) * 2);
 			y = effected.getY() + (float) (Math.sin(radian) * 2);
 			z = effected.getZ();

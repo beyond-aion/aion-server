@@ -23,7 +23,7 @@ import com.aionemu.gameserver.skillengine.effect.SignetBurstEffect;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
-import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.geo.GeoService;
 
@@ -119,7 +119,7 @@ public class NpcSkillTemplateEntry extends NpcSkillEntry {
 						if (target.getLifeStats().isAlreadyDead() || target.getLifeStats().isAboutToDie())
 							continue;
 						if (creature.canSee(target) && target.getEffectController().hasAbnormalEffect(condTemp.getSkillId())
-								&& MathUtil.isIn3dRange(creature, target, condTemp.getRange())
+								&& PositionUtil.isInRange(creature, target, condTemp.getRange())
 								&& GeoService.getInstance().canSee(creature, target)) {
 								creature.setTarget(target);
 								return true;
@@ -135,7 +135,7 @@ public class NpcSkillTemplateEntry extends NpcSkillEntry {
 							continue;
 						if ((TribeRelationService.isSupport(creature, target) || TribeRelationService.isFriend(creature, target))
 								&& target.getLifeStats().getHpPercentage() <= condTemp.getHpBelow() && creature.canSee(target)
-								&& MathUtil.isIn3dRange(creature, target, condTemp.getRange())
+								&& PositionUtil.isInRange(creature, target, condTemp.getRange())
 								&& GeoService.getInstance().canSee(creature, target)) {
 								creature.setTarget(target);
 								return true;
@@ -284,7 +284,7 @@ public class NpcSkillTemplateEntry extends NpcSkillEntry {
 								float y1 = 0;
 								if (condTemp.getMinDistance() > 0) {
 									float direction = condTemp.isRandomDirection() ? Rnd.get(0, 199)/100f : condTemp.getDirection() / 100f;
-									double radian = Math.toRadians(MathUtil.convertHeadingToDegree(npc.getHeading()));
+									double radian = Math.toRadians(PositionUtil.convertHeadingToAngle(npc.getHeading()));
 									float distance = condTemp.getMaxDistance() > 0 ? Rnd.get(condTemp.getMinDistance(), condTemp.getMaxDistance()) : condTemp.getMinDistance();
 									x1 = (float) (Math.cos(Math.PI * direction + radian) * distance);
 									y1 = (float) (Math.sin(Math.PI * direction + radian) * distance);
@@ -310,7 +310,7 @@ public class NpcSkillTemplateEntry extends NpcSkillEntry {
 						float y1 = 0;
 						if (condTemp.getMinDistance() > 0) {
 							float direction = condTemp.isRandomDirection() ? Rnd.get(0, 199)/100f : condTemp.getDirection() / 100f;
-							double radian = Math.toRadians(MathUtil.convertHeadingToDegree(npc.getHeading()));
+							double radian = Math.toRadians(PositionUtil.convertHeadingToAngle(npc.getHeading()));
 							float distance = condTemp.getMaxDistance() > 0 ? Rnd.get(condTemp.getMinDistance(), condTemp.getMaxDistance()) : condTemp.getMinDistance();
 							x1 = (float) (Math.cos(Math.PI * direction + radian) * distance);
 							y1 = (float) (Math.sin(Math.PI * direction + radian) * distance);

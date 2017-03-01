@@ -11,8 +11,8 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.EnchantService;
 import com.aionemu.gameserver.services.StigmaService;
 import com.aionemu.gameserver.services.item.ItemSocketService;
-import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.PositionUtil;
 
 /**
  * @author ATracer, Wakizashi
@@ -59,7 +59,6 @@ public class CM_MANASTONE extends AionClientPacket {
 	@Override
 	protected void runImpl() {
 		Player player = getConnection().getActivePlayer();
-		VisibleObject obj = player.getKnownList().getObject(npcObjId);
 
 		switch (actionType) {
 			case 1: // enchant stone
@@ -84,7 +83,8 @@ public class CM_MANASTONE extends AionClientPacket {
 				}
 				break;
 			case 3: // remove manastone
-				if (obj instanceof Npc && MathUtil.isInRange(player, obj, 7)) {
+				VisibleObject npc = player.getTarget();
+				if (npc instanceof Npc && npc.getObjectId() == npcObjId && PositionUtil.isInTalkRange(player, (Npc) npc)) {
 					if (targetFusedSlot == 1)
 						ItemSocketService.removeManastone(player, targetItemUniqueId, slotNum);
 					else

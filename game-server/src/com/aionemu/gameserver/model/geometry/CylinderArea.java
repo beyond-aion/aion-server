@@ -1,7 +1,7 @@
 package com.aionemu.gameserver.model.geometry;
 
 import com.aionemu.gameserver.model.templates.zone.Point2D;
-import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
@@ -65,7 +65,7 @@ public class CylinderArea extends AbstractArea {
 
 	@Override
 	public boolean isInside2D(float x, float y) {
-		return MathUtil.getDistance(centerX, centerY, x, y) < radius;
+		return PositionUtil.getDistance(centerX, centerY, x, y) < radius;
 	}
 
 	@Override
@@ -73,7 +73,7 @@ public class CylinderArea extends AbstractArea {
 		if (isInside2D(x, y)) {
 			return 0;
 		} else {
-			return Math.abs(MathUtil.getDistance(centerX, centerY, x, y) - radius);
+			return Math.abs(PositionUtil.getDistance(centerX, centerY, x, y) - radius);
 		}
 	}
 
@@ -85,9 +85,9 @@ public class CylinderArea extends AbstractArea {
 			return getDistance2D(x, y);
 		} else {
 			if (z < getMinZ()) {
-				return MathUtil.getDistance(centerX, centerY, getMinZ(), x, y, z);
+				return PositionUtil.getDistance(centerX, centerY, getMinZ(), x, y, z);
 			} else {
-				return MathUtil.getDistance(centerX, centerY, getMaxZ(), x, y, z);
+				return PositionUtil.getDistance(centerX, centerY, getMaxZ(), x, y, z);
 			}
 		}
 	}
@@ -99,7 +99,7 @@ public class CylinderArea extends AbstractArea {
 		} else {
 			float vX = x - this.centerX;
 			float vY = y - this.centerY;
-			double magV = MathUtil.getDistance(centerX, centerY, x, y);
+			double magV = PositionUtil.getDistance(centerX, centerY, x, y);
 			double pointX = centerX + vX / magV * radius;
 			double pointY = centerY + vY / magV * radius;
 			return new Point2D((float) pointX, (float) pointY);

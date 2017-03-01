@@ -4,7 +4,6 @@ import com.aionemu.gameserver.controllers.VisibleObjectController;
 import com.aionemu.gameserver.model.animations.ObjectDeleteAnimation;
 import com.aionemu.gameserver.model.templates.VisibleObjectTemplate;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
-import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.WorldDropType;
 import com.aionemu.gameserver.world.WorldPosition;
@@ -199,17 +198,6 @@ public abstract class VisibleObject extends AionObject {
 	 */
 	public final VisibleObject getTarget() {
 		return target;
-	}
-
-	/**
-	 * @return distance to target or 0 if no target
-	 */
-	public float getDistanceToTarget() {
-		if (target == null) {
-			return 0;
-		}
-		return (float) MathUtil.getDistance(getX(), getY(), getZ(), target.getX(), target.getY(), target.getZ())
-			- getObjectTemplate().getBoundRadius().getCollision() - target.getObjectTemplate().getBoundRadius().getCollision();
 	}
 
 	/**

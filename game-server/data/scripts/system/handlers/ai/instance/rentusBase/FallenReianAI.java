@@ -6,7 +6,7 @@ import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PositionUtil;
 
 /**
  * @author xTz
@@ -28,8 +28,8 @@ public class FallenReianAI extends NpcAI {
 	protected void handleCreatureMoved(Creature creature) {
 		if (creature instanceof Player) {
 			final Player player = (Player) creature;
-			if (MathUtil.getDistance(getOwner(), player) <= doorId) {
-				if (MathUtil.getDistance(getOwner(), getPosition().getWorldMapInstance().getDoors().get(doorId)) <= 30) {
+			if (PositionUtil.getDistance(getOwner(), player) <= doorId) {
+				if (PositionUtil.getDistance(getOwner(), getPosition().getWorldMapInstance().getDoors().get(doorId)) <= 30) {
 					if (isCollapsed.compareAndSet(false, true)) {
 						getPosition().getWorldMapInstance().getDoors().get(doorId).setOpen(true);
 					}

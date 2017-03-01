@@ -8,7 +8,7 @@ import com.aionemu.gameserver.ai.event.AIEventType;
 import com.aionemu.gameserver.ai.manager.EmoteManager;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
-import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PositionUtil;
 
 /**
  * @author ATracer
@@ -51,7 +51,7 @@ public class FollowEventHandler {
 		if (object == null) {
 			return false;
 		}
-		return MathUtil.isIn3dRange(ai.getOwner(), object, 2);
+		return PositionUtil.isInRange(ai.getOwner(), object, 2);
 	}
 
 	/**

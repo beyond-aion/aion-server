@@ -4,7 +4,7 @@ import com.aionemu.gameserver.ai.AISubState;
 import com.aionemu.gameserver.model.gameobjects.Summon;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_MOVE;
 import com.aionemu.gameserver.taskmanager.tasks.MoveTaskManager;
-import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.World;
 
@@ -39,7 +39,7 @@ public class SiegeWeaponMoveController extends SummonMoveController {
 			PacketSendUtility.broadcastPacket(owner, new SM_MOVE(owner));
 		}
 
-		if (MathUtil.getDistance(owner.getTarget(), pointX, pointY, pointZ) > MOVE_CHECK_OFFSET) {
+		if (PositionUtil.getDistance(owner.getTarget(), pointX, pointY, pointZ) > MOVE_CHECK_OFFSET) {
 			pointX = owner.getTarget().getX();
 			pointY = owner.getTarget().getY();
 			pointZ = owner.getTarget().getZ();
@@ -80,7 +80,7 @@ public class SiegeWeaponMoveController extends SummonMoveController {
 		float currentSpeed = owner.getGameStats().getMovementSpeedFloat();
 		float futureDistPassed = currentSpeed * (System.currentTimeMillis() - lastMoveUpdate) / 1000f;
 
-		float dist = (float) MathUtil.getDistance(ownerX, ownerY, ownerZ, targetX, targetY, targetZ);
+		float dist = (float) PositionUtil.getDistance(ownerX, ownerY, ownerZ, targetX, targetY, targetZ);
 
 		if (dist == 0) {
 			return;

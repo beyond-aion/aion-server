@@ -48,7 +48,7 @@ import com.aionemu.gameserver.skillengine.properties.FirstTargetAttribute;
 import com.aionemu.gameserver.skillengine.properties.Properties;
 import com.aionemu.gameserver.skillengine.properties.Properties.CastState;
 import com.aionemu.gameserver.skillengine.properties.TargetRangeAttribute;
-import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
@@ -265,7 +265,7 @@ public class Skill {
 		// TODO config
 		if (effector instanceof Player)
 			MotionLoggingService.getInstance().logTime((Player) effector, this.getSkillTemplate(), this.getHitTime(),
-				MathUtil.getDistance(effector, firstTarget));
+				PositionUtil.getDistance(effector, firstTarget));
 
 		// send packets to start casting
 		if (skillMethod == SkillMethod.CAST || skillMethod == SkillMethod.ITEM || skillMethod == SkillMethod.CHARGE) {
@@ -460,7 +460,7 @@ public class Skill {
 		// adjust client time with ammotime
 		long ammoTime = 0;
 		if (getSkillTemplate().getAmmoSpeed() != 0) {
-			double distance = MathUtil.getDistance(effector, firstTarget);
+			double distance = PositionUtil.getDistance(effector, firstTarget);
 			ammoTime = Math.round(distance / getSkillTemplate().getAmmoSpeed() * 1000);// checked with client
 			clientTime -= ammoTime;
 		}
@@ -530,7 +530,7 @@ public class Skill {
 						if (p == null || !p.isOnline() || effector.equals(p) || p.getLifeStats().isAlreadyDead()) {
 							continue;
 						}
-						if (MathUtil.isIn3dRange(effector, p, _penaltyTemplate.getProperties().getEffectiveRange())) {
+						if (PositionUtil.isInRange(effector, p, _penaltyTemplate.getProperties().getEffectiveRange())) {
 							SkillEngine.getInstance().applyEffectDirectly(penaltySkill, effector, p, 0);
 							count++;
 						}

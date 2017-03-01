@@ -11,7 +11,7 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
-import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PositionUtil;
 
 /**
  * @author xavier, Source
@@ -54,7 +54,7 @@ public class FlyRingObserver extends ActionObserver {
 					passedThrough = true;
 				}
 			} else {
-				if (MathUtil.isIn3dRange(ring, player, ring.getTemplate().getRadius())) {
+				if (PositionUtil.isInRange(ring, player, ring.getTemplate().getRadius())) {
 					passedThrough = true;
 				}
 			}

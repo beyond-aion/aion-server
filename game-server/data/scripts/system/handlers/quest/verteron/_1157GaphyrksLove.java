@@ -8,7 +8,7 @@ import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PositionUtil;
 
 /**
  * @author Rhys2002
@@ -43,7 +43,7 @@ public class _1157GaphyrksLove extends QuestHandler {
 
 		final Npc npc = (Npc) env.getVisibleObject();
 
-		if (MathUtil.getDistance(892, 2024, 166, npc.getX(), npc.getY(), npc.getZ()) > 13) {
+		if (PositionUtil.getDistance(892, 2024, 166, npc.getX(), npc.getY(), npc.getZ()) > 13) {
 			return false;
 		}
 		NpcActions.delete(npc, true);

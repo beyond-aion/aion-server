@@ -7,7 +7,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.summons.SummonMode;
 import com.aionemu.gameserver.model.summons.UnsummonType;
 import com.aionemu.gameserver.services.summons.SummonsService;
-import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PositionUtil;
 
 /**
  * @author xTz
@@ -51,11 +51,11 @@ public class FollowSummonTaskAI implements Runnable {
 	}
 
 	private boolean isInTargetRange() {
-		return MathUtil.isIn3dRange(target, summon, 2);
+		return PositionUtil.isInRange(target, summon, 2);
 	}
 
 	private boolean isInMasterRange() {
-		return MathUtil.isIn3dRange(master, summon, 50);
+		return PositionUtil.isInRange(master, summon, 50);
 	}
 
 	protected void onDestination() {

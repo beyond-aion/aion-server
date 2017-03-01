@@ -7,7 +7,7 @@ import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.skillengine.model.Effect;
-import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 import ai.AggressiveNpcAI;
@@ -29,7 +29,7 @@ public class SealGeneratorAI extends AggressiveNpcAI {
 	protected void handleCreatureMoved(Creature creature) {
 		if (creature instanceof Player) {
 			final Player player = (Player) creature;
-			if (MathUtil.getDistance(getOwner(), player) <= 30) {
+			if (PositionUtil.getDistance(getOwner(), player) <= 30) {
 				if (startedEvent.compareAndSet(false, true)) {
 					PacketSendUtility.broadcastToMap(getOwner(), 1401156);
 				}

@@ -16,7 +16,6 @@ import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.ProvokeTarget;
 import com.aionemu.gameserver.skillengine.model.SkillType;
-import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.PositionUtil;
 
@@ -63,7 +62,7 @@ public class ProvokerEffect extends ShieldEffect {
 					@Override
 					public void attacked(Creature creature, int id) {
 						if (radius > 0) {
-							if (!MathUtil.isIn3dRange(effector, creature, radius))
+							if (!PositionUtil.isInRange(effector, creature, radius))
 								return;
 						}
 						if (Rnd.chance() < prob2) {
@@ -81,7 +80,7 @@ public class ProvokerEffect extends ShieldEffect {
 					@Override
 					public void attacked(Creature creature, int id) {
 						if (radius > 0) {
-							if (!MathUtil.isIn3dRange(effector, creature, radius))
+							if (!PositionUtil.isInRange(effector, creature, radius))
 								return;
 						}
 						if (Rnd.chance() < prob2) {
@@ -99,7 +98,7 @@ public class ProvokerEffect extends ShieldEffect {
 					@Override
 					public void attacked(Creature creature, int id) {
 						if (radius > 0) {
-							if (!MathUtil.isIn3dRange(effector, creature, radius))
+							if (!PositionUtil.isInRange(effector, creature, radius))
 								return;
 						}
 						if (Rnd.chance() < prob2) {
@@ -114,7 +113,7 @@ public class ProvokerEffect extends ShieldEffect {
 
 					@Override
 					public void attack(Creature creature) {
-						if (PositionUtil.isBehind(creature, effector)) {
+						if (PositionUtil.isBehind(effector, creature)) {
 							if (Rnd.chance() < prob2) {
 								Creature target = getProvokeTarget(provokeTarget, effector, creature);
 								createProvokedEffect(effector, target);

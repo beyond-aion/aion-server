@@ -14,7 +14,7 @@ import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.services.abyss.AbyssPointsService;
 import com.aionemu.gameserver.services.drop.DropRegistrationService;
-import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.stats.StatFunctions;
 import com.google.common.base.Predicate;
 
@@ -103,7 +103,7 @@ public class PlayerTeamDistributionService {
 
 		@Override
 		public boolean apply(Player member) {
-			if (member.isOnline() && MathUtil.isIn3dRange(member, owner, GroupConfig.GROUP_MAX_DISTANCE)) {
+			if (member.isOnline() && PositionUtil.isInRange(member, owner, GroupConfig.GROUP_MAX_DISTANCE)) {
 				QuestEngine.getInstance().onKill(new QuestEnv(owner, member, 0));
 
 				if (member.isMentor()) {

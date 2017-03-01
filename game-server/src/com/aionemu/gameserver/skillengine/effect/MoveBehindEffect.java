@@ -10,7 +10,7 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.skillengine.model.DashStatus;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.SkillMoveType;
-import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.geo.GeoService;
 
@@ -28,7 +28,7 @@ public class MoveBehindEffect extends DamageEffect {
 		effect.setSkillMoveType(SkillMoveType.MOVEBEHIND);
 		final Creature effector = effect.getEffector();
 		final Creature effected = effect.getEffected();
-		double radian = Math.toRadians(MathUtil.convertHeadingToDegree(effected.getHeading()));
+		double radian = Math.toRadians(PositionUtil.convertHeadingToAngle(effected.getHeading()));
 		float x1 = (float) (Math.cos(Math.PI + radian) * 1.3F);
 		float y1 = (float) (Math.sin(Math.PI + radian) * 1.3F);
 		float z = GeoService.getInstance().getZ(effected.getWorldId(), effected.getX() + x1, effected.getY() + y1, effected.getZ(), 0.5f, effected.getInstanceId());

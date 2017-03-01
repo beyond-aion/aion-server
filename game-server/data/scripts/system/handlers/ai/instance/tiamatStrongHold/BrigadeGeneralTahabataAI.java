@@ -17,7 +17,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_FORCED_MOVE;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.skillengine.model.Skill;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
-import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.World;
@@ -110,7 +110,7 @@ public class BrigadeGeneralTahabataAI extends AggressiveNpcAI {
 	private void teleportRandomPlayer() {
 		List<Player> players = new FastTable<>();
 		getKnownList().forEachPlayer(player -> {
-			if (!PlayerActions.isAlreadyDead(player) && MathUtil.isIn3dRange(player, getOwner(), 40)) {
+			if (!PlayerActions.isAlreadyDead(player) && PositionUtil.isInRange(player, getOwner(), 40)) {
 				players.add(player);
 			}
 		});

@@ -39,7 +39,7 @@ import com.aionemu.gameserver.services.item.ItemPacketService.ItemAddType;
 import com.aionemu.gameserver.services.item.ItemPacketService.ItemUpdateType;
 import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.services.item.ItemService.ItemUpdatePredicate;
-import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
 import com.aionemu.gameserver.utils.stats.StatFunctions;
@@ -220,7 +220,7 @@ public class PvpService {
 		int maxLevel = 0;
 
 		for (Player member : teamMember) {
-			if (!member.isOnline() || member.getLifeStats().isAlreadyDead() || !MathUtil.isIn3dRange(member, victim, GroupConfig.GROUP_MAX_DISTANCE))
+			if (!member.isOnline() || member.getLifeStats().isAlreadyDead() || !PositionUtil.isInRange(member, victim, GroupConfig.GROUP_MAX_DISTANCE))
 				continue;
 			players.add(member);
 			if (member.getLevel() > maxLevel)
@@ -283,7 +283,7 @@ public class PvpService {
 
 		List<ZoneInstance> zones = victim.findZones();
 		for (Player p : rewarded) {
-			if (!MathUtil.isIn3dRange(p, victim, GroupConfig.GROUP_MAX_DISTANCE) || p.getLifeStats().isAlreadyDead())
+			if (!PositionUtil.isInRange(p, victim, GroupConfig.GROUP_MAX_DISTANCE) || p.getLifeStats().isAlreadyDead())
 				continue;
 
 			for (ZoneInstance zone : zones) {

@@ -17,7 +17,7 @@ import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.skillengine.properties.FirstTargetAttribute;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.spawnengine.VisibleObjectSpawner;
-import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
@@ -30,7 +30,7 @@ public class SummonServantEffect extends SummonEffect {
 	@Override
 	public void applyEffect(Effect effect) {
 		Creature effector = effect.getEffector();
-		double radian = Math.toRadians(MathUtil.convertHeadingToDegree(effect.getEffector().getHeading()));
+		double radian = Math.toRadians(PositionUtil.convertHeadingToAngle(effect.getEffector().getHeading()));
 		float x = effector.getX() + (float) (Math.cos(radian) * 2);
 		float y = effector.getY() + (float) (Math.sin(radian) * 2);
 		float z = effector.getZ();

@@ -40,7 +40,7 @@ import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.services.item.ItemService.ItemUpdatePredicate;
 import com.aionemu.gameserver.taskmanager.tasks.TemporaryTradeTimeTask;
 import com.aionemu.gameserver.utils.ChatUtil;
-import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.World;
@@ -348,7 +348,7 @@ public class DropService {
 				List<Player> entitledPlayers = new FastTable<>();
 				for (Player member : player.getCurrentTeam().getMembers()) {
 					if (member != null && member.isOnline() && !member.getLifeStats().isAlreadyDead() && !member.isMentor()
-						&& MathUtil.isIn3dRange(member, player, GroupConfig.GROUP_MAX_DISTANCE))
+						&& PositionUtil.isInRange(member, player, GroupConfig.GROUP_MAX_DISTANCE))
 						entitledPlayers.add(member);
 				}
 				long remainder = remainingCount % entitledPlayers.size();

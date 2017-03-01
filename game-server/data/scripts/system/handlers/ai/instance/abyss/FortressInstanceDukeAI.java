@@ -2,7 +2,6 @@ package ai.instance.abyss;
 
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.model.skill.NpcSkillEntry;
-import com.aionemu.gameserver.utils.MathUtil;
 
 import ai.AggressiveNpcAI;
 
@@ -22,7 +21,7 @@ public class FortressInstanceDukeAI extends AggressiveNpcAI {
 	}
 	
 	private void deleteSummons() {
-		getPosition().getWorldMapInstance().getNpcs().stream().filter(n -> MathUtil.isBetween(284978, 284981, n.getNpcId()))
+		getPosition().getWorldMapInstance().getNpcs().stream().filter(n -> n.getNpcId() >= 284978 && n.getNpcId() <= 284981)
 		.forEach(n -> n.getController().delete());
 	}
 

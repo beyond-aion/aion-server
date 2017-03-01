@@ -16,7 +16,7 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.skillengine.effect.AbnormalState;
-import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.world.MapRegion;
 import com.aionemu.gameserver.world.WorldPosition;
 
@@ -191,7 +191,7 @@ public class KnownList {
 	 */
 	private void forgetObjects() {
 		for (VisibleObject object : knownObjects.values()) {
-			if (!MathUtil.isIn3dRange(owner, object, object.getVisibleDistance()) && !object.getKnownList().checkReversedObjectInRange(owner)) {
+			if (!PositionUtil.isInRange(owner, object, object.getVisibleDistance()) && !object.getKnownList().checkReversedObjectInRange(owner)) {
 				del(object, ObjectDeleteAnimation.NONE);
 				object.getKnownList().del(owner, ObjectDeleteAnimation.NONE);
 			}
@@ -240,7 +240,7 @@ public class KnownList {
 					continue;
 				}
 
-				if (!MathUtil.isIn3dRange(owner, newObject, newObject.getVisibleDistance()) && !newObject.getKnownList().checkReversedObjectInRange(owner))
+				if (!PositionUtil.isInRange(owner, newObject, newObject.getVisibleDistance()) && !newObject.getKnownList().checkReversedObjectInRange(owner))
 					continue;
 
 				/**

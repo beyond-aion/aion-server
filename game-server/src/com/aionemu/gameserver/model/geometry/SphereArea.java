@@ -1,7 +1,7 @@
 package com.aionemu.gameserver.model.geometry;
 
 import com.aionemu.gameserver.model.templates.zone.Point2D;
-import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
@@ -47,12 +47,12 @@ public class SphereArea implements Area {
 
 	@Override
 	public boolean isInside3D(Point3D point) {
-		return MathUtil.isIn3dRange(x, y, z, point.getX(), point.getY(), point.getZ(), r);
+		return PositionUtil.isInRange(x, y, z, point.getX(), point.getY(), point.getZ(), r);
 	}
 
 	@Override
 	public boolean isInside3D(float x, float y, float z) {
-		return MathUtil.isIn3dRange(x, y, z, this.x, this.y, this.z, r);
+		return PositionUtil.isInRange(x, y, z, this.x, this.y, this.z, r);
 	}
 
 	@Override
@@ -84,7 +84,7 @@ public class SphereArea implements Area {
 
 	@Override
 	public double getDistance3D(float x, float y, float z) {
-		double distance = MathUtil.getDistance(x, y, z, this.x, this.y, this.z) - r;
+		double distance = PositionUtil.getDistance(x, y, z, this.x, this.y, this.z) - r;
 		return distance > 0 ? distance : 0;
 	}
 

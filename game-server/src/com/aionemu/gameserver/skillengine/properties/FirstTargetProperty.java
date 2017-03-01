@@ -7,7 +7,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.skillengine.model.DispelCategoryType;
 import com.aionemu.gameserver.skillengine.model.Skill;
-import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
@@ -174,7 +174,7 @@ public class FirstTargetProperty {
 		if (skill.getFirstTarget() != null) {
 			// update heading
 			if (!skill.getEffector().equals(skill.getFirstTarget()))
-				skill.getEffector().getPosition().setH(MathUtil.getHeadingTowards(skill.getEffector(), skill.getFirstTarget()));
+				skill.getEffector().getPosition().setH(PositionUtil.getHeadingTowards(skill.getEffector(), skill.getFirstTarget()));
 			skill.getEffectedList().add(skill.getFirstTarget());
 		}
 		return true;

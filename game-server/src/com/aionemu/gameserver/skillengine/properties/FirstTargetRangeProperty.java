@@ -6,7 +6,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.skillengine.effect.AbnormalState;
 import com.aionemu.gameserver.skillengine.model.Skill;
 import com.aionemu.gameserver.skillengine.properties.Properties.CastState;
-import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.geo.GeoService;
 
@@ -47,7 +47,7 @@ public class FirstTargetRangeProperty {
 			firstTargetRange += skill.getEffector().getGameStats().getAttackRange().getCurrent() / 1000f;
 		}
 
-		if (!MathUtil.isInAttackRange(effector, firstTarget, firstTargetRange + 2)
+		if (!PositionUtil.isInAttackRange(effector, firstTarget, firstTargetRange + 2)
 			&& !firstTarget.getEffectController().isInAnyAbnormalState(AbnormalState.CANT_MOVE_STATE)) {
 			if (effector instanceof Player) {
 				PacketSendUtility.sendPacket((Player) effector, SM_SYSTEM_MESSAGE.STR_ATTACK_TOO_FAR_FROM_TARGET());

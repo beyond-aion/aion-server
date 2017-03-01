@@ -26,6 +26,7 @@ import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.services.item.ItemService.ItemUpdatePredicate;
 import com.aionemu.gameserver.skillengine.task.CraftingTask;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
 
 /**
@@ -155,7 +156,7 @@ public class CraftService {
 			if (target == null || !(target instanceof StaticObject)) {
 				AuditLogger.info(player, "Tried to craft with incorrect target.");
 				return false;
-			} else if (player.getDistanceToTarget() > 5) {
+			} else if (!PositionUtil.isInRange(player, target, 5, false)) {
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_COMBINE_TOO_FAR_FROM_TOOL(target.getObjectTemplate().getNameId()));
 				return false;
 			}

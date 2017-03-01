@@ -13,7 +13,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.LOG;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.TYPE;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.HealType;
-import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PositionUtil;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "HealCastorOnAttackedEffect")
@@ -48,18 +48,18 @@ public class HealCastorOnAttackedEffect extends EffectTemplate {
 			public void attacked(Creature creature, int skillId) {
 				if (player.getPlayerGroup() != null) {
 					for (Player p : player.getPlayerGroup().getMembers()) {
-						if (MathUtil.isIn3dRange(effect.getEffected(), p, range))
+						if (PositionUtil.isInRange(effect.getEffected(), p, range))
 							p.getLifeStats().increaseHp(TYPE.HP, valueWithDelta, effect.getSkillId(), LOG.REGULAR);
 					}
 				} else if (player.isInAlliance()) {
 					for (Player p : player.getPlayerAllianceGroup().getMembers()) {
 						if (!p.isOnline())
 							continue;
-						if (MathUtil.isIn3dRange(effect.getEffected(), p, range))
+						if (PositionUtil.isInRange(effect.getEffected(), p, range))
 							p.getLifeStats().increaseHp(TYPE.HP, valueWithDelta, effect.getSkillId(), LOG.REGULAR);
 					}
 				} else {
-					if (MathUtil.isIn3dRange(effect.getEffected(), player, range))
+					if (PositionUtil.isInRange(effect.getEffected(), player, range))
 						effect.getEffected().getLifeStats().increaseHp(TYPE.HP, valueWithDelta, effect.getSkillId(), LOG.REGULAR);
 				}
 			}

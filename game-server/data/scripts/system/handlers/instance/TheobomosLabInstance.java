@@ -5,7 +5,7 @@ import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
 import com.aionemu.gameserver.instance.handlers.InstanceID;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.WorldPosition;
@@ -55,7 +55,7 @@ public class TheobomosLabInstance extends GeneralInstanceHandler {
 		WorldPosition p = npc.getPosition();
 		int npcId = npc.getNpcId();
 		Npc orb = getNpc(280973);
-		if (MathUtil.getDistance(orb, npc) <= 7) {
+		if (PositionUtil.getDistance(orb, npc) <= 7) {
 			switch (npcId) {
 				case 280971:
 					isDead1 = true;

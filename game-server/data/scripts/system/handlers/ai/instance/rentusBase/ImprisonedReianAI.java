@@ -13,7 +13,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.model.templates.walker.WalkerTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
-import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 import ai.GeneralNpcAI;
@@ -55,7 +55,7 @@ public class ImprisonedReianAI extends GeneralNpcAI {
 		if (walkerId != null) {
 			if (creature instanceof Player) {
 				final Player player = (Player) creature;
-				if (MathUtil.getDistance(getOwner(), player) <= 21) {
+				if (PositionUtil.getDistance(getOwner(), player) <= 21) {
 					if (isAsked.compareAndSet(false, true)) {
 						switch (Rnd.get(1, 10)) {
 							case 1:
@@ -67,7 +67,7 @@ public class ImprisonedReianAI extends GeneralNpcAI {
 						}
 					}
 				}
-				if (MathUtil.getDistance(getOwner(), player) <= 6) {
+				if (PositionUtil.getDistance(getOwner(), player) <= 6) {
 					if (isSaved.compareAndSet(false, true)) {
 						getSpawnTemplate().setWalkerId(walkerId);
 						WalkManager.startWalking(this);

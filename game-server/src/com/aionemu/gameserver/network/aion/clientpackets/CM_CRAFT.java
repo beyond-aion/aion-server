@@ -6,7 +6,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.services.craft.CraftService;
-import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PositionUtil;
 
 /**
  * @author Mr. Poke
@@ -56,7 +56,7 @@ public class CM_CRAFT extends AionClientPacket {
 		// 129 = Morph Substances
 		if (unk != 129) {
 			VisibleObject staticObject = player.getKnownList().getObject(targetObjId);
-			if (staticObject == null || !MathUtil.isIn3dRange(player, staticObject, 10)
+			if (staticObject == null || !PositionUtil.isInRange(player, staticObject, 10)
 				|| staticObject.getObjectTemplate().getTemplateId() != targetTemplateId)
 				return;
 		}

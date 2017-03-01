@@ -13,15 +13,15 @@ import javax.xml.bind.annotation.XmlType;
 public class TradeinItem {
 
 	@XmlAttribute
-	protected int id;
+	private int id;
 	@XmlAttribute
-	protected int price;
+	private long price;
 
 	public int getId() {
 		return id;
 	}
 
-	public int getPrice() {
+	public long getPrice() {
 		return price;
 	}
 }

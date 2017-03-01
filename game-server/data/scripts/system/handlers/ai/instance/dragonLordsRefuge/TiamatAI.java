@@ -10,7 +10,7 @@ import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.skillengine.SkillEngine;
-import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
@@ -185,7 +185,7 @@ public class TiamatAI extends AggressiveNpcAI {
 
 	// 105, 110, 115, 120, 125, 5, 10, 20
 	private void spawnSinkingSand(float heading) {
-		double radian = Math.toRadians(MathUtil.convertHeadingToDegree((byte) heading));
+		double radian = Math.toRadians(PositionUtil.convertHeadingToAngle((byte) heading));
 		int dist = 5;
 		for (int i = 0; i < 10; i++) {
 			dist += 3;

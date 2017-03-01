@@ -26,8 +26,8 @@ import com.aionemu.gameserver.model.templates.zone.Point2D;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_MOVE;
 import com.aionemu.gameserver.spawnengine.WalkerFormator;
 import com.aionemu.gameserver.spawnengine.WalkerGroup;
-import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.collections.LastUsedCache;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.geo.GeoService;
@@ -38,7 +38,7 @@ import com.aionemu.gameserver.world.geo.GeoService;
 public class NpcMoveController extends CreatureMoveController<Npc> {
 
 	private static final Logger log = LoggerFactory.getLogger(NpcMoveController.class);
-	public static final float MOVE_CHECK_OFFSET = 0.1f;
+	private static final float MOVE_CHECK_OFFSET = 0.1f;
 	private static final float MOVE_OFFSET = 0.05f;
 
 	private Destination destination = Destination.TARGET_OBJECT;
@@ -159,7 +159,7 @@ public class NpcMoveController extends CreatureMoveController<Npc> {
 				if (!(target instanceof Creature)) {
 					return;
 				}
-				if (MathUtil.getDistance(target, pointX, pointY, pointZ) > MOVE_CHECK_OFFSET) {
+				if (PositionUtil.getDistance(target, pointX, pointY, pointZ) > MOVE_CHECK_OFFSET) {
 					Creature creature = (Creature) target;
 					pointX = target.getX();
 					pointY = target.getY();
@@ -231,7 +231,7 @@ public class NpcMoveController extends CreatureMoveController<Npc> {
 
 		float currentSpeed = owner.getGameStats().getMovementSpeedFloat();
 		float futureDistPassed = currentSpeed * (System.currentTimeMillis() - lastMoveUpdate) / 1000f;
-		float dist = (float) MathUtil.getDistance(ownerX, ownerY, ownerZ, targetX, targetY, targetZ);
+		float dist = (float) PositionUtil.getDistance(ownerX, ownerY, ownerZ, targetX, targetY, targetZ);
 
 		if (owner.getAi().isLogging()) {
 			AILogger.moveinfo(owner, "futureDist: " + futureDistPassed + " dist: " + dist);
@@ -362,7 +362,7 @@ public class NpcMoveController extends CreatureMoveController<Npc> {
 	}
 
 	public boolean isReachedPoint() {
-		return MathUtil.getDistance(owner.getX(), owner.getY(), owner.getZ(), pointX, pointY, pointZ) < MOVE_OFFSET;
+		return PositionUtil.getDistance(owner.getX(), owner.getY(), owner.getZ(), pointX, pointY, pointZ) < MOVE_OFFSET;
 	}
 
 	public boolean isNextRouteStepChosen() {
@@ -433,7 +433,7 @@ public class NpcMoveController extends CreatureMoveController<Npc> {
 		if (owner.getAi().isLogging()) {
 			AILogger.moveinfo(owner, "store back step: X=" + owner.getX() + " Y=" + owner.getY() + " Z=" + owner.getZ());
 		}
-		if (stepSequenceNr == 0 || MathUtil.getDistance(lastSteps.get(stepSequenceNr), currentStep) >= 10)
+		if (stepSequenceNr == 0 || PositionUtil.getDistance(lastSteps.get(stepSequenceNr), currentStep) >= 10)
 			lastSteps.put(++stepSequenceNr, currentStep);
 	}
 

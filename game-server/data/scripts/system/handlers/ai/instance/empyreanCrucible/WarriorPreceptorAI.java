@@ -10,7 +10,7 @@ import com.aionemu.gameserver.model.actions.PlayerActions;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.skillengine.SkillEngine;
-import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
@@ -94,7 +94,7 @@ public class WarriorPreceptorAI extends AggressiveNpcAI {
 	private Player getTargetPlayer() {
 		List<Player> players = new FastTable<>();
 		getKnownList().forEachPlayer(player -> {
-			if (!PlayerActions.isAlreadyDead(player) && MathUtil.isIn3dRange(player, getOwner(), 15)) {
+			if (!PlayerActions.isAlreadyDead(player) && PositionUtil.isInRange(player, getOwner(), 15)) {
 				players.add(player);
 			}
 		});

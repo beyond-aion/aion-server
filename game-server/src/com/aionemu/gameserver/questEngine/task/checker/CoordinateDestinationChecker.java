@@ -1,7 +1,7 @@
 package com.aionemu.gameserver.questEngine.task.checker;
 
 import com.aionemu.gameserver.model.gameobjects.Creature;
-import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PositionUtil;
 
 /**
  * @author ATracer
@@ -22,6 +22,6 @@ public class CoordinateDestinationChecker extends DestinationChecker {
 
 	@Override
 	public boolean check() {
-		return MathUtil.isNearCoordinates(follower, x, y, z, 20);
+		return PositionUtil.isInRange(follower, x, y, z, 20);
 	}
 }

@@ -10,7 +10,7 @@ import com.aionemu.gameserver.geoEngine.models.GeoMap;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.siege.SiegeNpc;
-import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PositionUtil;
 
 
 /**
@@ -97,14 +97,14 @@ public class GeoService {
 		if (target instanceof SiegeNpc && ((SiegeNpc) target).getObjectTemplate().getAi().equals("fortressgate"))
 			return true;
 
-		float limit = (float) (MathUtil.getDistance(object, target) - target.getObjectTemplate().getBoundRadius().getCollision());
+		float limit = (float) (PositionUtil.getDistance(object, target) - target.getObjectTemplate().getBoundRadius().getCollision());
 		if (limit <= 0)
 			return true;
 
 		//a great fix (Copyright (c) (R) Yeats (TM) 2015-2016) @NA Dev Yeats
 		if (object.getWorldId() == 301500000) {
-			return (MathUtil.getDistance(231.14f, 264.399f, object.getX(), object.getY()) < 26.7f &&
-					MathUtil.getDistance(231.14f, 264.399f, target.getX(), target.getY()) < 26.7f);
+			return (PositionUtil.getDistance(231.14f, 264.399f, object.getX(), object.getY()) < 26.7f &&
+					PositionUtil.getDistance(231.14f, 264.399f, target.getX(), target.getY()) < 26.7f);
 		}
 
 		return geoData.getMap(object.getWorldId()).canSee(object.getX(), object.getY(),

@@ -15,7 +15,7 @@ import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.services.TribeRelationService;
 import com.aionemu.gameserver.skillengine.effect.AbnormalState;
-import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.world.geo.GeoService;
 
 /**
@@ -84,7 +84,7 @@ public class CreatureEventHandler {
 		if (!owner.getPosition().isMapRegionActive())
 			return;
 
-		if (MathUtil.isIn3dRange(owner, creature, owner.getAggroRange())) {
+		if (PositionUtil.isInRange(owner, creature, owner.getAggroRange())) {
 			ai.handleCreatureDetected(creature); // TODO: Move to AIEventType, prevent calling multiple times
 			boolean isPlayer = creature instanceof Player;
 			if (isPlayer && ((Player) creature).isInCustomState(CustomPlayerState.ENEMY_OF_ALL_NPCS)

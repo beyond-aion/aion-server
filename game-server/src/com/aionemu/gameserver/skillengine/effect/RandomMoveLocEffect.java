@@ -12,7 +12,7 @@ import com.aionemu.gameserver.skillengine.model.DashStatus;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.Skill;
 import com.aionemu.gameserver.skillengine.model.SkillMoveType;
-import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.geo.GeoService;
 
@@ -49,7 +49,7 @@ public class RandomMoveLocEffect extends EffectTemplate {
 		final Player effector = (Player) effect.getEffector();
 		// Move Effector backwards direction=1 or frontwards direction=0
 		if (distance != 0) {
-			double radian = Math.toRadians(MathUtil.convertHeadingToDegree(effector.getHeading()));
+			double radian = Math.toRadians(PositionUtil.convertHeadingToAngle(effector.getHeading()));
 			float x1 = (float) (Math.cos(Math.PI * direction + radian) * distance);
 			float y1 = (float) (Math.sin(Math.PI * direction + radian) * distance);
 			float targetZ = GeoService.getInstance().getZ(effector.getWorldId(), effector.getX() + x1, effector.getY() + y1, effector.getZ() + 1.5f, 0.2f,

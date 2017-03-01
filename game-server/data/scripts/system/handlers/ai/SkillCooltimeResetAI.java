@@ -24,7 +24,7 @@ import com.aionemu.gameserver.skillengine.action.Action;
 import com.aionemu.gameserver.skillengine.action.DpUseAction;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.skillengine.model.TransformType;
-import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.geo.GeoService;
@@ -50,7 +50,7 @@ public class SkillCooltimeResetAI extends NpcAI {
 				getOwner().getKnownList().forEachPlayer(p -> {
 					if (p.getLifeStats().isAlreadyDead() || !getOwner().canSee(p) || playersInSight.containsKey(p.getObjectId()))
 						return;
-					if (MathUtil.isIn3dRange(getOwner(), p, 8) && GeoService.getInstance().canSee(getOwner(), p)) {
+					if (PositionUtil.isInRange(getOwner(), p, 8) && GeoService.getInstance().canSee(getOwner(), p)) {
 						playersInSight.put(p.getObjectId(), System.currentTimeMillis());
 						PacketSendUtility.sendPacket(p, new SM_MESSAGE(getOwner(),
 							String.format("I can heal you and reset your skill cooldowns for %,d Kinah, yang yang.", price), ChatType.NPC));
@@ -92,7 +92,7 @@ public class SkillCooltimeResetAI extends NpcAI {
 		if (playersInSight.containsKey(creature.getObjectId()))
 			return;
 
-		if (MathUtil.isIn3dRange(getOwner(), creature, 8) && GeoService.getInstance().canSee(getOwner(), creature)) {
+		if (PositionUtil.isInRange(getOwner(), creature, 8) && GeoService.getInstance().canSee(getOwner(), creature)) {
 			playersInSight.put(creature.getObjectId(), System.currentTimeMillis());
 			PacketSendUtility.sendPacket((Player) creature,
 				new SM_MESSAGE(getOwner(), String.format("I can heal you and reset your skill cooldowns for %,d Kinah, yang yang.", price), ChatType.NPC));
@@ -116,7 +116,7 @@ public class SkillCooltimeResetAI extends NpcAI {
 
 			@Override
 			public void acceptRequest(Creature requester, Player responder, int requestId) {
-				if (!MathUtil.isIn3dRange(requester, responder, distance))
+				if (!PositionUtil.isInRange(requester, responder, distance))
 					PacketSendUtility.sendPacket(responder, SM_SYSTEM_MESSAGE.STR_WAREHOUSE_TOO_FAR_FROM_NPC());
 				else if (responder.getInventory().getKinah() < price)
 					PacketSendUtility.sendPacket(responder, SM_SYSTEM_MESSAGE.STR_MSG_NOT_ENOUGH_KINA(price));

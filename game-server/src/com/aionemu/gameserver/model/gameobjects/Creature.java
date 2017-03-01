@@ -624,10 +624,6 @@ public abstract class Creature extends VisibleObject {
 		}
 	}
 
-	public float getCollision() {
-		return getObjectTemplate().getBoundRadius().getCollision();
-	}
-
 	/**
 	 * @return True if this creature can not receive any damage.
 	 */

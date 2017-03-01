@@ -15,7 +15,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.npcshout.NpcShout;
 import com.aionemu.gameserver.model.templates.npcshout.ShoutEventType;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
-import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
@@ -72,7 +72,7 @@ public class NpcShoutsService {
 			return;
 
 		int shoutRange = sender.getObjectTemplate().getMinimumShoutRange();
-		if (target != null && !MathUtil.isIn3dRange(target, sender, shoutRange))
+		if (target != null && !PositionUtil.isInRange(target, sender, shoutRange))
 			return;
 
 		String param = shout.getParam();
@@ -87,7 +87,7 @@ public class NpcShoutsService {
 		if (target != null) {
 			PacketSendUtility.sendPacket(target, message);
 		} else {
-			PacketSendUtility.broadcastPacket(sender, message, player -> MathUtil.isIn3dRange(player, sender, shoutRange));
+			PacketSendUtility.broadcastPacket(sender, message, player -> PositionUtil.isInRange(player, sender, shoutRange));
 		}
 		if (shoutCooldown <= 0)
 			removeShoutCooldown(sender);

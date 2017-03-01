@@ -4,7 +4,7 @@ import java.awt.Point;
 import java.awt.Rectangle;
 
 import com.aionemu.gameserver.model.templates.zone.Point2D;
-import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
@@ -133,7 +133,7 @@ public class RectangleArea extends AbstractArea {
 			return 0;
 		} else {
 			Point2D cp = getClosestPoint(x, y);
-			return MathUtil.getDistance(x, y, cp.getX(), cp.getY());
+			return PositionUtil.getDistance(x, y, cp.getX(), cp.getY());
 		}
 	}
 
@@ -145,7 +145,7 @@ public class RectangleArea extends AbstractArea {
 			return getDistance2D(x, y);
 		} else {
 			Point3D cp = getClosestPoint(x, y, z);
-			return MathUtil.getDistance(x, y, z, cp.getX(), cp.getY(), cp.getZ());
+			return PositionUtil.getDistance(x, y, z, cp.getX(), cp.getY(), cp.getZ());
 		}
 	}
 
@@ -156,28 +156,28 @@ public class RectangleArea extends AbstractArea {
 			return new Point2D(x, y);
 		} else {
 			// bottom edge
-			Point2D closestPoint = MathUtil.getClosestPointOnSegment(minX, minY, maxX, minY, x, y);
-			double distance = MathUtil.getDistance(x, y, closestPoint.getX(), closestPoint.getY());
+			Point2D closestPoint = PositionUtil.getClosestPointOnSegment(minX, minY, maxX, minY, x, y);
+			double distance = PositionUtil.getDistance(x, y, closestPoint.getX(), closestPoint.getY());
 
 			// top edge
-			Point2D cp = MathUtil.getClosestPointOnSegment(minX, maxY, maxX, maxY, x, y);
-			double d = MathUtil.getDistance(x, y, cp.getX(), cp.getY());
+			Point2D cp = PositionUtil.getClosestPointOnSegment(minX, maxY, maxX, maxY, x, y);
+			double d = PositionUtil.getDistance(x, y, cp.getX(), cp.getY());
 			if (d < distance) {
 				closestPoint = cp;
 				distance = d;
 			}
 
 			// left edge
-			cp = MathUtil.getClosestPointOnSegment(minX, minY, minX, maxY, x, y);
-			d = MathUtil.getDistance(x, y, cp.getX(), cp.getY());
+			cp = PositionUtil.getClosestPointOnSegment(minX, minY, minX, maxY, x, y);
+			d = PositionUtil.getDistance(x, y, cp.getX(), cp.getY());
 			if (d < distance) {
 				closestPoint = cp;
 				distance = d;
 			}
 
 			// Right edge
-			cp = MathUtil.getClosestPointOnSegment(maxX, minY, maxX, maxY, x, y);
-			d = MathUtil.getDistance(x, y, cp.getX(), cp.getY());
+			cp = PositionUtil.getClosestPointOnSegment(maxX, minY, maxX, maxY, x, y);
+			d = PositionUtil.getDistance(x, y, cp.getX(), cp.getY());
 			if (d < distance) {
 				closestPoint = cp;
 				// distance = d;

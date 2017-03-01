@@ -10,7 +10,6 @@ import com.aionemu.gameserver.geoEngine.math.Vector3f;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.skillengine.model.DashStatus;
 import com.aionemu.gameserver.skillengine.model.Effect;
-import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.geo.GeoService;
@@ -33,9 +32,9 @@ public class BackDashEffect extends DamageEffect {
 		effect.setDashStatus(DashStatus.BACKDASH);
 		final Player effector = (Player) effect.getEffector();
 		byte h = effector.getHeading();
-		if (PositionUtil.isBehind(effector, effector.getTarget()))
+		if (PositionUtil.isBehind(effector.getTarget(), effector))
 			h -= 60;
-		double radian = Math.toRadians(MathUtil.convertHeadingToDegree(h));
+		double radian = Math.toRadians(PositionUtil.convertHeadingToAngle(h));
 		float x1 = (float) (Math.cos(Math.PI * direction + radian) * distance);
 		float y1 = (float) (Math.sin(Math.PI * direction + radian) * distance);
 		byte intentions = (byte) (CollisionIntention.PHYSICAL.getId() | CollisionIntention.DOOR.getId());

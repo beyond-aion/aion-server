@@ -8,7 +8,7 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
-import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 import ai.AggressiveNpcAI;
@@ -32,8 +32,8 @@ public class AttakersMobsAI extends AggressiveNpcAI {
 	protected void handleCreatureMoved(Creature creature) {
 		Npc generalE = getPosition().getWorldMapInstance().getNpc(209516);
 		Npc generalA = getPosition().getWorldMapInstance().getNpc(209517);
-		if (generalE != null && !getOwner().getAggroList().isHating(generalE) && MathUtil.isIn3dRange(getOwner(), generalE, 20) || generalA != null
-			&& !getOwner().getAggroList().isHating(generalA) && MathUtil.isIn3dRange(getOwner(), generalA, 20)) {
+		if (generalE != null && !getOwner().getAggroList().isHating(generalE) && PositionUtil.isInRange(getOwner(), generalE, 20) || generalA != null
+			&& !getOwner().getAggroList().isHating(generalA) && PositionUtil.isInRange(getOwner(), generalA, 20)) {
 			getSpawnTemplate().setWalkerId(null);
 			WalkManager.stopWalking(this);
 			if (generalE != null) {

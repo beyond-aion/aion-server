@@ -13,7 +13,7 @@ import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_MANTRA_EFFECT;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
-import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
@@ -54,7 +54,7 @@ public class AuraEffect extends EffectTemplate {
 				.getOnlineMembers();
 			final int actualRange = (int) (distance * effector.getGameStats().getStat(StatEnum.BOOST_MANTRA_RANGE, 100).getCurrent() / 100f);
 			for (Player player : onlinePlayers) {
-				if (MathUtil.isIn3dRange(effector, player, actualRange)) {
+				if (PositionUtil.isInRange(effector, player, actualRange)) {
 					applyAuraTo(player, effect);
 				}
 			}

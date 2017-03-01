@@ -20,7 +20,7 @@ public class BackCondition extends Condition {
 		if (env.getFirstTarget() == null || env.getEffector() == null)
 			return false;
 
-		return PositionUtil.isBehindTarget(env.getEffector(), env.getFirstTarget());
+		return PositionUtil.isBehind(env.getEffector(), env.getFirstTarget());
 	}
 
 	@Override
@@ -28,7 +28,7 @@ public class BackCondition extends Condition {
 		if (effect.getEffected() == null || effect.getEffector() == null)
 			return false;
 
-		return PositionUtil.isBehindTarget(effect.getEffector(), effect.getEffected());
+		return PositionUtil.isBehind(effect.getEffector(), effect.getEffected());
 	}
 
 }

@@ -8,7 +8,7 @@ import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.utils.ChatUtil;
-import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 
@@ -79,7 +79,7 @@ public class Kill extends AdminCommand {
 				// is npc or summon
 				if (obj instanceof Creature && !(obj instanceof Player)) {
 					// is in range
-					if (range == -1 || (range > 0 && MathUtil.isIn3dRange(player, obj, range))) {
+					if (range == -1 || (range > 0 && PositionUtil.isInRange(player, obj, range))) {
 						// is target
 						if (params.length <= 1 || (params[1].equalsIgnoreCase("neutral") && !player.isEnemy((Creature) obj))
 							|| (params[1].equalsIgnoreCase("enemy") && player.isEnemy((Creature) obj))) {

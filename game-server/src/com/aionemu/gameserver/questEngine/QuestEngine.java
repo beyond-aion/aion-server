@@ -48,7 +48,7 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
-import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.collections.ListSplitter;
@@ -697,7 +697,7 @@ public class QuestEngine implements GameEngine {
 		if (getQuestNpc(npc.getNpcId()).getOnDistanceEvent().size() == 0)
 			return false;
 		Player player = env.getPlayer();
-		if (!MathUtil.isIn3dRange(npc, player, questNpc.getQuestRange()))
+		if (!PositionUtil.isInRange(npc, player, questNpc.getQuestRange()))
 			return false;
 		try {
 			for (int questId : questNpc.getOnDistanceEvent()) {

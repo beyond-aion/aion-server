@@ -19,7 +19,7 @@ import com.aionemu.gameserver.services.player.PlayerReviveService;
 import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
-import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
@@ -87,7 +87,7 @@ public class KromedesTrialInstance extends GeneralInstanceHandler {
 	public void onPlayMovieEnd(Player player, int movieId) {
 		if (movieId == 454) {
 			Npc magasPotion = instance.getNpc(730308);
-			if (magasPotion != null && MathUtil.isIn3dRange(player, magasPotion, 20)) {
+			if (magasPotion != null && PositionUtil.isInRange(player, magasPotion, 20)) {
 				int relicKeyId = 185000109;
 				player.getInventory().decreaseByItemId(relicKeyId, player.getInventory().getItemCountByItemId(relicKeyId));
 				TeleportService.teleportTo(player, mapId, instanceId, 687.56116f, 681.68225f, 200.28648f, (byte) 30);

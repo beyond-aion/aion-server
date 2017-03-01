@@ -5,7 +5,7 @@ import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.model.gameobjects.Creature;
-import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
@@ -25,7 +25,7 @@ public class TimeAcceleratorAI extends NpcAI {
 	}
 
 	private void checkDistance(NpcAI ai, Creature creature) {
-		if (MathUtil.isIn3dRange(getOwner(), creature, 5) && !creature.getEffectController().hasAbnormalEffect(20727)) {
+		if (PositionUtil.isInRange(getOwner(), creature, 5) && !creature.getEffectController().hasAbnormalEffect(20727)) {
 			AIActions.useSkill(this, 20727);
 		}
 	}

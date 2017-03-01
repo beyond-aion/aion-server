@@ -5,7 +5,7 @@ import com.aionemu.gameserver.ai.AIState;
 import com.aionemu.gameserver.ai.event.AIEventType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.world.geo.GeoService;
 
 /**
@@ -66,7 +66,7 @@ public class AbyssGuardSimpleAI extends AggressiveNpcAI {
 		if (!owner.getPosition().isMapRegionActive())
 			return;
 
-		if (MathUtil.isIn3dRange(owner, npc, owner.getAggroRange())) {
+		if (PositionUtil.isInRange(owner, npc, owner.getAggroRange())) {
 			if (GeoService.getInstance().canSee(owner, npc)) {
 				if (!isInState(AIState.RETURNING))
 					getOwner().getMoveController().storeStep();

@@ -13,7 +13,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_FORCED_MOVE;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.SkillMoveType;
 import com.aionemu.gameserver.skillengine.model.SpellStatus;
-import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.geo.GeoService;
@@ -29,7 +29,7 @@ public class StumbleEffect extends EffectTemplate {
 	public void applyEffect(Effect effect) {
 		final Creature effector = effect.getEffector();
 		final Creature effected = effect.getEffected();
-		double radian = Math.toRadians(MathUtil.convertHeadingToDegree(effector.getHeading()));
+		double radian = Math.toRadians(PositionUtil.convertHeadingToAngle(effector.getHeading()));
 		float x1 = (float) (Math.cos(radian) * 1.5f);
 		float y1 = (float) (Math.sin(radian) * 1.5f);
 		float z = effected.getZ();

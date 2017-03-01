@@ -7,7 +7,7 @@ import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.skillengine.SkillEngine;
-import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 import ai.AggressiveNpcAI;
@@ -85,7 +85,7 @@ public class ShulackGuidedBombAI extends AggressiveNpcAI {
 
 	private void destroy(Creature creature) {
 		if (!isDestroyed && !isAlreadyDead()) {
-			if (creature != null && MathUtil.getDistance(getOwner(), creature) <= 4) {
+			if (creature != null && PositionUtil.getDistance(getOwner(), creature) <= 4) {
 				isDestroyed = true;
 				SkillEngine.getInstance().getSkill(getOwner(), 19415, 49, getOwner()).useNoAnimationSkill();
 				ThreadPoolManager.getInstance().schedule(new Runnable() {

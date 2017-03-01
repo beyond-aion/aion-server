@@ -12,7 +12,7 @@ import com.aionemu.gameserver.questEngine.handlers.models.Monster;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PositionUtil;
 
 /**
  * @author MrPoke
@@ -48,7 +48,7 @@ public class MentorMonsterHunt extends MonsterHunt {
 						PlayerGroup group = player.getPlayerGroup();
 						for (Player member : group.getMembers()) {
 							if (member.getLevel() >= menteMinLevel && member.getLevel() <= menteMaxLevel
-								&& MathUtil.getDistance(player, member) < GroupConfig.GROUP_MAX_DISTANCE) {
+								&& PositionUtil.getDistance(player, member) < GroupConfig.GROUP_MAX_DISTANCE) {
 								return super.onKillEvent(env);
 							}
 						}
@@ -58,7 +58,7 @@ public class MentorMonsterHunt extends MonsterHunt {
 					if (player.isInGroup()) {
 						PlayerGroup group = player.getPlayerGroup();
 						for (Player member : group.getMembers()) {
-							if (member.isMentor() && MathUtil.getDistance(player, member) < GroupConfig.GROUP_MAX_DISTANCE)
+							if (member.isMentor() && PositionUtil.getDistance(player, member) < GroupConfig.GROUP_MAX_DISTANCE)
 								return super.onKillEvent(env);
 						}
 					}

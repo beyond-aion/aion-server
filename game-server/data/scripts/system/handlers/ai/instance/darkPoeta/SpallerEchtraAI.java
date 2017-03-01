@@ -12,7 +12,7 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.skillengine.effect.AbnormalState;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
-import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 import ai.AggressiveNpcAI;
@@ -37,7 +37,7 @@ public class SpallerEchtraAI extends AggressiveNpcAI {
 		SkillTemplate paralyze = DataManager.SKILL_DATA.getSkillTemplate(8256);
 		if (npcs != null) {
 			for (Npc npc : npcs) {
-				if (MathUtil.getDistance(getOwner(), npc) <= 2) {
+				if (PositionUtil.getDistance(getOwner(), npc) <= 2) {
 					TalkEventHandler.onTalk(this, npc);
 					AIActions.applyEffect(this, paralyze, getOwner());
 					getOwner().getController().cancelCurrentSkill(null);

@@ -16,7 +16,7 @@ import com.aionemu.gameserver.model.templates.npc.NpcRating;
 import com.aionemu.gameserver.model.templates.spawns.siegespawns.SiegeSpawnTemplate;
 import com.aionemu.gameserver.model.templates.stats.StatsTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
-import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
@@ -180,7 +180,7 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
 		}
 		int nextAttack = 0;
 		if (lastAttackTime == 0 && owner.getTarget() instanceof Creature
-				&& MathUtil.isInAttackRange(owner, (Creature) owner.getTarget(), getAttackRange().getCurrent() / 1000f)) {
+				&& PositionUtil.isInAttackRange(owner, (Creature) owner.getTarget(), getAttackRange().getCurrent() / 1000f)) {
 			nextAttack = 750;
 		}
 		if (attackDelay < attackSpeed) {

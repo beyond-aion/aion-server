@@ -7,7 +7,7 @@ import com.aionemu.gameserver.ai.handler.MoveEventHandler;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
-import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PositionUtil;
 
 /**
  * @author Rolandas
@@ -25,7 +25,7 @@ public class PolorSerinAI extends WalkGeneralRunnerAI {
 				Npc npc = (Npc) object;
 				if (!ArrayUtils.contains(stopAdults, npc.getNpcId()))
 					continue;
-				if (MathUtil.isIn3dRange(npc, getOwner(), getOwner().getAggroRange())) {
+				if (PositionUtil.isInRange(npc, getOwner(), getOwner().getAggroRange())) {
 					adultsNear = true;
 					break;
 				}

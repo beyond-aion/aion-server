@@ -4,7 +4,7 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_MOVE;
 import com.aionemu.gameserver.taskmanager.tasks.PlayerMoveTaskManager;
-import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.stats.StatFunctions;
 import com.aionemu.gameserver.world.World;
@@ -74,7 +74,7 @@ public abstract class PlayableMoveController<T extends Creature> extends Creatur
 
 		float currentSpeed = StatFunctions.getMovementModifier(owner, StatEnum.SPEED, owner.getGameStats().getMovementSpeedFloat());
 		float futureDistPassed = currentSpeed * (System.currentTimeMillis() - lastMoveUpdate) / 1000f;
-		float dist = (float) MathUtil.getDistance(x, y, z, targetDestX, targetDestY, targetDestZ);
+		float dist = (float) PositionUtil.getDistance(x, y, z, targetDestX, targetDestY, targetDestZ);
 
 		if (dist == 0) {
 			return;
@@ -116,7 +116,7 @@ public abstract class PlayableMoveController<T extends Creature> extends Creatur
 		this.targetDestY = y;
 		this.targetDestZ = z;
 
-		float h = MathUtil.calculateAngleFrom(owner.getX(), owner.getY(), targetDestX, targetDestY);
+		float h = PositionUtil.calculateAngleFrom(owner.getX(), owner.getY(), targetDestX, targetDestY);
 		if (h != 0) {
 			int value = (int) (((heading * 3) - h) / 45);
 			if (value < 0)

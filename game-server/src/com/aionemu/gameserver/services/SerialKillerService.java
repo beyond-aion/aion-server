@@ -12,7 +12,7 @@ import com.aionemu.gameserver.model.legionDominion.LegionDominionLocation;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SERIAL_KILLER;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.serialkillers.SerialKiller;
-import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.World;
@@ -108,7 +108,7 @@ public class SerialKillerService {
 			} else if (rank == 2 && sk.getRank() == 1) {//protectors rank 2 can only see intruders rank 2 & 3
 				continue;
 			} else { //protectors rank 3 & stonespear owner can see all ranks
-				if (MathUtil.isIn3dRange(sk.getOwner(), player, 500))
+				if (PositionUtil.isInRange(sk.getOwner(), player, 500))
 					if (sk.getOwner().getRace() != player.getRace())
 						killers.add(sk.getOwner());
 				}

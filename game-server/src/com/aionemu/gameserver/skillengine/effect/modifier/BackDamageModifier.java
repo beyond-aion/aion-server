@@ -21,6 +21,6 @@ public class BackDamageModifier extends ActionModifier {
 
 	@Override
 	public boolean check(Effect effect) {
-		return PositionUtil.isBehindTarget(effect.getEffector(), effect.getEffected());
+		return PositionUtil.isBehind(effect.getEffector(), effect.getEffected());
 	}
 }

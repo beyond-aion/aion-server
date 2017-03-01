@@ -21,7 +21,7 @@ import com.aionemu.gameserver.skillengine.model.HealType;
 import com.aionemu.gameserver.skillengine.model.HitType;
 import com.aionemu.gameserver.skillengine.model.ShieldType;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
-import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
@@ -135,10 +135,10 @@ public class AttackShieldObserver extends AttackCalcObserver {
 			else if (shieldType == ShieldType.REFLECTOR) {
 				// totalHit is radius
 				if (minradius != 0) {
-					if (MathUtil.isIn3dRange(attacker, effect.getEffected(), minradius))
+					if (PositionUtil.isInRange(attacker, effect.getEffected(), minradius))
 						continue;
 				}
-				if (MathUtil.isIn3dRange(attacker, effect.getEffected(), maxradius)) {
+				if (PositionUtil.isInRange(attacker, effect.getEffected(), maxradius)) {
 					int reflectedHit = attackResult.getDamage();
 					if (hit > 0 || totalHit > 0) {
 						int reflectedDamage = attackResult.getDamage() * totalHit / 100;
@@ -172,7 +172,7 @@ public class AttackShieldObserver extends AttackCalcObserver {
 					break;
 				}
 
-				if (MathUtil.isIn3dRange(effect.getEffector(), effect.getEffected(), totalHit)) {
+				if (PositionUtil.isInRange(effect.getEffector(), effect.getEffected(), totalHit)) {
 					int damageProtected = 0;
 					int effectorDamage = 0;
 

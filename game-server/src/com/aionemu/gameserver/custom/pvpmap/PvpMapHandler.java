@@ -37,7 +37,7 @@ import com.aionemu.gameserver.services.teleport.BindPointTeleportService;
 import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.skillengine.effect.AbnormalState;
 import com.aionemu.gameserver.spawnengine.StaticDoorSpawnManager;
-import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.stats.AbyssRankEnum;
@@ -87,11 +87,11 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 			if (oldShugo != null) {
 				oldShugo.getController().delete();
 			}
-			double radian = Math.toRadians(MathUtil.convertHeadingToDegree(player.getHeading()));
+			double radian = Math.toRadians(PositionUtil.convertHeadingToAngle(player.getHeading()));
 			float x = player.getX() + (float) (Math.cos(radian) * 2);
 			float y = player.getY() + (float) (Math.sin(radian) * 2);
 			float z = GeoService.getInstance().getZ(player.getWorldId(), x, y, player.getZ(), 0.5f, instanceId);
-			spawn(833543, x, y, z, MathUtil.getHeadingTowards(x, y, player.getX(), player.getY()));
+			spawn(833543, x, y, z, PositionUtil.getHeadingTowards(x, y, player.getX(), player.getY()));
 		}
 	}
 

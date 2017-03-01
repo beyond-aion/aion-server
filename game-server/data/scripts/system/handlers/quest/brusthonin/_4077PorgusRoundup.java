@@ -8,7 +8,7 @@ import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PositionUtil;
 
 /**
  * @author Nephis
@@ -39,7 +39,7 @@ public class _4077PorgusRoundup extends QuestHandler {
 
 		final Npc npc = (Npc) env.getVisibleObject();
 		if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 0) {
-			if (MathUtil.getDistance(1356, 1901, 46, npc.getX(), npc.getY(), npc.getZ()) > 10) {
+			if (PositionUtil.getDistance(1356, 1901, 46, npc.getX(), npc.getY(), npc.getZ()) > 10) {
 				return false;
 			}
 			qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
@@ -48,7 +48,7 @@ public class _4077PorgusRoundup extends QuestHandler {
 			return true;
 		} else if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 1) {
 
-			if (MathUtil.getDistance(1356, 1901, 46, npc.getX(), npc.getY(), npc.getZ()) > 10) {
+			if (PositionUtil.getDistance(1356, 1901, 46, npc.getX(), npc.getY(), npc.getZ()) > 10) {
 				return false;
 			}
 			qs.setStatus(QuestStatus.REWARD);

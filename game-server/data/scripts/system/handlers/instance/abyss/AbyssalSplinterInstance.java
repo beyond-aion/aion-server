@@ -11,7 +11,7 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
 import com.aionemu.gameserver.services.item.ItemService;
-import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
@@ -73,7 +73,7 @@ public class AbyssalSplinterInstance extends GeneralInstanceHandler {
 			case 281907:
 				Npc ebonsoul = getNpc(216949);
 				if (ebonsoul != null && !ebonsoul.getLifeStats().isAlreadyDead()) {
-					if (MathUtil.isIn3dRange(npc, ebonsoul, 5)) {
+					if (PositionUtil.isInRange(npc, ebonsoul, 5)) {
 						ebonsoul.getEffectController().removeEffect(19159);
 						deleteNpcs(instance.getNpcs(281907));
 						break;
@@ -84,7 +84,7 @@ public class AbyssalSplinterInstance extends GeneralInstanceHandler {
 			case 281908:
 				Npc rukril = getNpc(216948);
 				if (rukril != null && !rukril.getLifeStats().isAlreadyDead()) {
-					if (MathUtil.isIn3dRange(npc, rukril, 5)) {
+					if (PositionUtil.isInRange(npc, rukril, 5)) {
 						rukril.getEffectController().removeEffect(19266);
 						deleteNpcs(instance.getNpcs(281908));
 						break;

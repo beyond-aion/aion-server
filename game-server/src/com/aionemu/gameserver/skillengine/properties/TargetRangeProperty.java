@@ -16,7 +16,6 @@ import com.aionemu.gameserver.model.team.TeamMember;
 import com.aionemu.gameserver.model.team.TemporaryPlayerTeam;
 import com.aionemu.gameserver.model.templates.zone.ZoneType;
 import com.aionemu.gameserver.skillengine.model.Skill;
-import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
 
@@ -76,7 +75,7 @@ public class TargetRangeProperty {
 						continue;
 
 					if (skill.isPointSkill()) {
-						if (MathUtil.isIn3dRange(skill.getX(), skill.getY(), skill.getZ(), nextCreature.getX(), nextCreature.getY(), nextCreature.getZ(),
+						if (PositionUtil.isInRange(skill.getX(), skill.getY(), skill.getZ(), nextCreature.getX(), nextCreature.getY(), nextCreature.getZ(),
 							effectiveRange)) {
 							skill.getEffectedList().add(creature);
 						}
@@ -84,19 +83,20 @@ public class TargetRangeProperty {
 						// for target_range_area_type = firestorm
 						if (properties.getEffectiveAngle() < 360) {
 							float angle = properties.getEffectiveAngle() / 2f; // e.g. 60 degrees (always positive) = 30 degrees in positive and negative direction
-							float angleToTarget = PositionUtil.getAngleToTarget(skillEffector, nextCreature);
+							float angleToTarget = PositionUtil.calculateAngleTowards(skillEffector, nextCreature);
 							if (angleToTarget > 180) // convert 0 to 360 range => -180 to 180 range (0 is in front of effector)
 								angleToTarget -= 360;
+							angleToTarget = Math.abs(angleToTarget); // flip negative to positive angles for easier checks
 							if (properties.getDirection() != AreaDirections.BACK) {
-								if (!MathUtil.isBetween(-angle, angle, angleToTarget)) // e.g. range from -30 to 30, not inside means miss
+								if (angleToTarget > angle) // e.g. range from -30 to 30, not inside means miss
 									continue;
 							} else {
 								angle = 180 - angle; // convert effective angle to ineffective angle
-								if (MathUtil.isBetween(-angle, angle, angleToTarget)) // e.g. range from -150 to 150, inside means miss
+								if (angleToTarget <= angle) // e.g. range from -150 to 150, inside means miss
 									continue;
 							}
 						}
-						if (!MathUtil.isInRange(skillEffector, nextCreature, properties.getEffectiveDist()))
+						if (!PositionUtil.isInRange(skillEffector, nextCreature, properties.getEffectiveDist()))
 							continue;
 						if (nextCreature == skillEffector) {
 							continue;
@@ -104,18 +104,18 @@ public class TargetRangeProperty {
 						skill.getEffectedList().add(creature);
 					} else if (properties.getEffectiveDist() > 0) {
 						// Lightning bolt
-						if (MathUtil.isInsideAttackCylinder(skillEffector, nextCreature,
+						if (PositionUtil.isInsideAttackCylinder(skillEffector, nextCreature,
 							(properties.getEffectiveDist() + skillEffector.getObjectTemplate().getBoundRadius().getFront()),
 							((effectiveRange / 2f) + skillEffector.getObjectTemplate().getBoundRadius().getSide()), properties.getDirection())) {
 							if (!skill.shouldAffectTarget(nextCreature))
 								continue;
 							skill.getEffectedList().add(creature);
 						}
-					} else if (MathUtil.isIn3dRange(firstTarget, nextCreature,
+					} else if (PositionUtil.isInRange(firstTarget, nextCreature,
 						effectiveRange + firstTarget.getObjectTemplate().getBoundRadius().getCollision())) {
 						// for target_range_area_type = fireball
 						if (ineffectiveRange > 0
-							&& MathUtil.isIn3dRange(firstTarget, nextCreature, ineffectiveRange + firstTarget.getObjectTemplate().getBoundRadius().getCollision()))
+							&& PositionUtil.isInRange(firstTarget, nextCreature, ineffectiveRange + firstTarget.getObjectTemplate().getBoundRadius().getCollision()))
 							continue;
 						if (!skill.shouldAffectTarget(nextCreature))
 							continue;
@@ -140,7 +140,7 @@ public class TargetRangeProperty {
 								continue;
 							if (!checkCommonRequirements(member, skill))
 								continue;
-							if (MathUtil.isIn3dRange(effector, member, effectiveRange + 1)) {
+							if (PositionUtil.isInRange(effector, member, effectiveRange + 1)) {
 								effectedList.add(member);
 								if (value == TargetRangeAttribute.PARTY_WITHPET) {
 									Summon aMemberSummon = member.getSummon();
@@ -163,7 +163,7 @@ public class TargetRangeProperty {
 					if (nextCreature instanceof Trap && !((Trap) nextCreature).getMaster().isEnemy(skillEffector))
 						continue;
 
-					if (MathUtil.getDistance(skill.getX(), skill.getY(), skill.getZ(), nextCreature.getX(), nextCreature.getY(),
+					if (PositionUtil.getDistance(skill.getX(), skill.getY(), skill.getZ(), nextCreature.getX(), nextCreature.getY(),
 						nextCreature.getZ()) <= distanceToTarget + 1) {
 						effectedList.add(creature);
 					}

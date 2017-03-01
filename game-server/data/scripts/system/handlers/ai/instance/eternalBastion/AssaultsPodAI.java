@@ -13,7 +13,7 @@ import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
-import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
@@ -150,7 +150,7 @@ public class AssaultsPodAI extends NpcAI {
 	}
 
 	private void spawnAndMove(int npcId, Npc owner, final String walker) {
-		double radian = Math.toRadians(MathUtil.convertHeadingToDegree(owner.getHeading()));
+		double radian = Math.toRadians(PositionUtil.convertHeadingToAngle(owner.getHeading()));
 		int dist = Rnd.get(2, 10);
 		float x = (float) (Math.cos(radian) * dist);
 		float y = (float) (Math.sin(radian) * dist);

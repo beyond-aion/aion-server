@@ -43,8 +43,8 @@ import com.aionemu.gameserver.services.drop.DropRegistrationService;
 import com.aionemu.gameserver.services.drop.DropService;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.taskmanager.tasks.MoveTaskManager;
-import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.stats.StatFunctions;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
 
@@ -238,7 +238,7 @@ public class NpcController extends CreatureController<Npc> {
 		// notify npc dialog request observer
 		if (!getOwner().getObjectTemplate().canInteract())
 			return;
-		if (!MathUtil.isInRange(getOwner(), player, getOwner().getObjectTemplate().getTalkDistance() + 1, false)) {
+		if (!PositionUtil.isInTalkRange(player, getOwner())) {
 			if (getOwner().getObjectTemplate().isDialogNpc())
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_DIALOG_TOO_FAR_TO_TALK());
 			else
@@ -253,10 +253,8 @@ public class NpcController extends CreatureController<Npc> {
 	@Override
 	public void onDialogSelect(int dialogActionId, int prevDialogId, final Player player, int questId, int extendedRewardIndex) {
 		QuestEnv env = new QuestEnv(getOwner(), player, questId, dialogActionId);
-		if (!MathUtil.isInRange(getOwner(), player, getOwner().getObjectTemplate().getTalkDistance() + 1, false)
-			&& !QuestEngine.getInstance().onDialog(env)) {
+		if (!PositionUtil.isInTalkRange(player, getOwner()) && !QuestEngine.getInstance().onDialog(env))
 			return;
-		}
 		if (!getOwner().getAi().onDialogSelect(player, dialogActionId, questId, extendedRewardIndex)) {
 			DialogService.onDialogSelect(dialogActionId, player, getOwner(), questId, extendedRewardIndex);
 		}
@@ -266,7 +264,7 @@ public class NpcController extends CreatureController<Npc> {
 	public void onAddHate(Creature attacker, boolean isNewInAggroList) {
 		if (isNewInAggroList && attacker instanceof Player) {
 			if (((Player) attacker).isInTeam()) {
-				for (Player player : ((Player) attacker).getCurrentTeam().filterMembers(m -> MathUtil.isIn3dRange(getOwner(), m, 50)))
+				for (Player player : ((Player) attacker).getCurrentTeam().filterMembers(m -> PositionUtil.isInRange(getOwner(), m, 50)))
 					QuestEngine.getInstance().onAddAggroList(new QuestEnv(getOwner(), player, 0));
 			} else {
 				QuestEngine.getInstance().onAddAggroList(new QuestEnv(getOwner(), (Player) attacker, 0));

@@ -1,7 +1,7 @@
 package com.aionemu.gameserver.questEngine.task.checker;
 
 import com.aionemu.gameserver.model.gameobjects.Creature;
-import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PositionUtil;
 
 /**
  * @author ATracer
@@ -18,6 +18,6 @@ public class TargetDestinationChecker extends DestinationChecker {
 
 	@Override
 	public boolean check() {
-		return MathUtil.isIn3dRange(target, follower, 20);
+		return PositionUtil.isInRange(target, follower, 20);
 	}
 }

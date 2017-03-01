@@ -2,12 +2,11 @@ package com.aionemu.gameserver.ai.manager;
 
 import com.aionemu.gameserver.ai.AILogger;
 import com.aionemu.gameserver.ai.AIState;
-import com.aionemu.gameserver.ai.AbstractAI;
 import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.ai.event.AIEventType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.geo.GeoService;
 
@@ -55,14 +54,9 @@ public class SimpleAttackManager {
 	}
 
 	public static boolean isTargetInAttackRange(Npc npc) {
-		if (npc.getAi().isLogging()) {
-			float distance = npc.getDistanceToTarget();
-			AILogger.info((AbstractAI) npc.getAi(), "isTargetInAttackRange: " + distance);
-		}
 		if (npc.getTarget() == null || !(npc.getTarget() instanceof Creature))
 			return false;
-		return MathUtil.isInAttackRange(npc, (Creature) npc.getTarget(), npc.getGameStats().getAttackRange().getCurrent() / 1000f);
-		// return distance <= npc.getController().getAttackDistanceToTarget() + NpcMoveController.MOVE_CHECK_OFFSET;
+		return PositionUtil.isInAttackRange(npc, (Creature) npc.getTarget(), npc.getGameStats().getAttackRange().getCurrent() / 1000f);
 	}
 
 	/**
@@ -97,7 +91,7 @@ public class SimpleAttackManager {
 					npcAI.onGeneralEvent(AIEventType.ATTACK_COMPLETE);
 				}
 			} else {
-				npc.getPosition().setH(MathUtil.getHeadingTowards(npc, target));
+				npc.getPosition().setH(PositionUtil.getHeadingTowards(npc, target));
 				npc.getController().attackTarget(target, 0, false);
 				npcAI.onGeneralEvent(AIEventType.ATTACK_COMPLETE);
 			}

@@ -7,7 +7,7 @@ import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.manager.WalkManager;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.skillengine.SkillEngine;
-import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 import ai.AggressiveNpcAI;
@@ -104,13 +104,13 @@ public class TriroansSummonAI extends AggressiveNpcAI {
 
 	public int checkDistance() {
 		Npc boss = getPosition().getWorldMapInstance().getNpc(214669);
-		if (MathUtil.getDistance(boss, 624.002f, 474.241f, 196.160f) <= 5)
+		if (PositionUtil.getDistance(boss, 624.002f, 474.241f, 196.160f) <= 5)
 			return 1;
-		else if (MathUtil.getDistance(boss, 623.23f, 502.715f, 196.087f) <= 5)
+		else if (PositionUtil.getDistance(boss, 623.23f, 502.715f, 196.087f) <= 5)
 			return 2;
-		else if (MathUtil.getDistance(boss, 579.943f, 500.999f, 196.604f) <= 5)
+		else if (PositionUtil.getDistance(boss, 579.943f, 500.999f, 196.604f) <= 5)
 			return 3;
-		else if (MathUtil.getDistance(boss, 578.323f, 475.784f, 196.463f) <= 5)
+		else if (PositionUtil.getDistance(boss, 578.323f, 475.784f, 196.463f) <= 5)
 			return 4;
 		else
 			return 0;

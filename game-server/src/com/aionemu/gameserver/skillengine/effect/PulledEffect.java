@@ -11,7 +11,7 @@ import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_FORCED_MOVE;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.SkillMoveType;
-import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.World;
 
@@ -39,7 +39,7 @@ public class PulledEffect extends EffectTemplate {
 		effect.setSkillMoveType(SkillMoveType.PULL);
 		final Creature effector = effect.getEffector();
 		// Target must be pulled just one meter away from effector, not IN place of effector
-		double radian = Math.toRadians(MathUtil.convertHeadingToDegree(effector.getHeading()));
+		double radian = Math.toRadians(PositionUtil.convertHeadingToAngle(effector.getHeading()));
 		float z = effector.getZ();
 		final float x1 = (float) Math.cos(radian);
 		final float y1 = (float) Math.sin(radian);

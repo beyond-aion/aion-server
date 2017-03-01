@@ -11,7 +11,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
-import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
@@ -35,7 +35,7 @@ public class AlarmAI extends AggressiveNpcAI {
 	protected void handleCreatureMoved(Creature creature) {
 		if (creature instanceof Player) {
 			final Player player = (Player) creature;
-			if (MathUtil.getDistance(getOwner(), player) <= 23) {
+			if (PositionUtil.getDistance(getOwner(), player) <= 23) {
 				if (startedEvent.compareAndSet(false, true)) {
 					canThink = false;
 					PacketSendUtility.broadcastMessage(getOwner(), 1500380);

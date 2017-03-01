@@ -7,7 +7,7 @@ import com.aionemu.gameserver.model.CreatureType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_CUSTOM_SETTINGS;
-import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
@@ -24,7 +24,7 @@ public class NeutralGuardAI extends AggressiveNpcAI {
 
 	@Override
 	public void creatureNeedsHelp(Creature attacker) {
-		if (MathUtil.isIn3dRange(attacker, getOwner(), 20) && getOwner().getType(attacker) != CreatureType.AGGRESSIVE
+		if (PositionUtil.isInRange(attacker, getOwner(), 20) && getOwner().getType(attacker) != CreatureType.AGGRESSIVE
 			&& attacker.getTarget() instanceof Player) {
 			changeType(CreatureType.AGGRESSIVE);
 			getOwner().getAggroList().addHate(attacker, 1000);

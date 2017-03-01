@@ -48,7 +48,7 @@ import com.aionemu.gameserver.services.RiftService;
 import com.aionemu.gameserver.services.base.Base;
 import com.aionemu.gameserver.skillengine.effect.SummonOwner;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
-import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.idfactory.IDFactory;
 import com.aionemu.gameserver.world.geo.GeoService;
@@ -262,7 +262,7 @@ public class VisibleObjectSpawner {
 	public static Npc spawnPostman(final Player owner) {
 		int npcId = owner.getRace() == Race.ELYOS ? 798100 : 798101;
 		NpcTemplate template = DataManager.NPC_DATA.getNpcTemplate(npcId);
-		double radian = Math.toRadians(MathUtil.convertHeadingToDegree(owner.getHeading()));
+		double radian = Math.toRadians(PositionUtil.convertHeadingToAngle(owner.getHeading()));
 		Vector3f pos = GeoService.getInstance().getClosestCollision(owner, owner.getX() + (float) (Math.cos(radian) * 7),
 			owner.getY() + (float) (Math.sin(radian) * 7), owner.getZ(), false, CollisionIntention.PHYSICAL.getId());
 		SpawnTemplate spawn = SpawnEngine.addNewSingleTimeSpawn(owner.getWorldId(), npcId, pos.getX(), pos.getY(), pos.getZ(), (byte) 0);
@@ -278,7 +278,7 @@ public class VisibleObjectSpawner {
 
 	public static Npc spawnFunctionalNpc(final Player owner, int npcId, SummonOwner summonOwner) {
 		NpcTemplate template = DataManager.NPC_DATA.getNpcTemplate(npcId);
-		double radian = Math.toRadians(MathUtil.convertHeadingToDegree(owner.getHeading()));
+		double radian = Math.toRadians(PositionUtil.convertHeadingToAngle(owner.getHeading()));
 		Vector3f pos = GeoService.getInstance().getClosestCollision(owner, owner.getX() + (float) (Math.cos(radian) * 1),
 			owner.getY() + (float) (Math.sin(radian) * 1), owner.getZ(), false, CollisionIntention.PHYSICAL.getId());
 		SpawnTemplate spawn = SpawnEngine.addNewSingleTimeSpawn(owner.getWorldId(), npcId, pos.getX(), pos.getY(), pos.getZ(), (byte) 0);
@@ -358,7 +358,7 @@ public class VisibleObjectSpawner {
 	}
 
 	public static Summon spawnSummon(Player creator, int npcId, int skillId, int time) {
-		double radian = Math.toRadians(MathUtil.convertHeadingToDegree(creator.getHeading()));
+		double radian = Math.toRadians(PositionUtil.convertHeadingToAngle(creator.getHeading()));
 		float x = creator.getX() + (float) (Math.cos(radian) * 2);
 		float y = creator.getY() + (float) (Math.sin(radian) * 2);
 		float z = creator.getZ();

@@ -106,8 +106,8 @@ import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.taskmanager.tasks.PlayerMoveTaskManager;
 import com.aionemu.gameserver.taskmanager.tasks.TeamEffectUpdater;
 import com.aionemu.gameserver.taskmanager.tasks.TeamMoveUpdater;
-import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
 import com.aionemu.gameserver.world.MapRegion;
@@ -189,7 +189,7 @@ public class PlayerController extends CreatureController<Player> {
 	@Override
 	public void onHideEnd() {
 		Pet pet = getOwner().getPet();
-		if (pet != null && !MathUtil.isIn3dRange(getOwner(), pet, 3)) // client sends pet position only every 50m...
+		if (pet != null && !PositionUtil.isInRange(getOwner(), pet, 3)) // client sends pet position only every 50m...
 			pet.getPosition().setXYZH(getOwner().getX(), getOwner().getY(), getOwner().getZ(), getOwner().getHeading());
 		super.onHideEnd();
 	}
@@ -407,7 +407,7 @@ public class PlayerController extends CreatureController<Player> {
 
 		// Normal attack is already limited client side (ex. Press C and attacker approaches target)
 		// but need a check server side too also for Z axis issue
-		if (!MathUtil.isInAttackRange(getOwner(), target, getOwner().getGameStats().getAttackRange().getCurrent() / 1000f + 1))
+		if (!PositionUtil.isInAttackRange(getOwner(), target, getOwner().getGameStats().getAttackRange().getCurrent() / 1000f + 1))
 			return;
 
 		if (!GeoService.getInstance().canSee(getOwner(), target)) {
@@ -596,7 +596,7 @@ public class PlayerController extends CreatureController<Player> {
 				break;
 			case QUEST_ACCEPT_1:
 			case QUEST_ACCEPT_SIMPLE:
-				if (!getOwner().equals(player) && MathUtil.isInRange(getOwner(), player, 100)) { // TODO check if owner really shared
+				if (!getOwner().equals(player) && PositionUtil.isInRange(getOwner(), player, 100)) { // TODO check if owner really shared
 					if (!DataManager.QUEST_DATA.getQuestById(questId).isCannotShare())
 						QuestService.startQuest(new QuestEnv(null, player, questId, dialogActionId));
 				}

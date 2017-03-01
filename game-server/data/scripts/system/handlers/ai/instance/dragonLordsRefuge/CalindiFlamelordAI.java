@@ -16,11 +16,10 @@ import com.aionemu.gameserver.model.templates.npcskill.QueuedNpcSkillTemplate;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
-import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 import ai.AggressiveNpcAI;
-import javolution.util.FastTable;
 
 /**
  * @author Cheatkiller
@@ -110,7 +109,9 @@ public class CalindiFlamelordAI extends AggressiveNpcAI {
 	}
 
 	private Player getRandomTarget() {
-		List<Player> players = getKnownList().getKnownPlayers().values().stream().filter(player -> !PlayerActions.isAlreadyDead(player) && MathUtil.isIn3dRange(player, getOwner(), 50)).collect(Collectors.toCollection(FastTable::new));
+		List<Player> players = getKnownList().getKnownPlayers().values().stream()
+			.filter(player -> !PlayerActions.isAlreadyDead(player) && PositionUtil.isInRange(player, getOwner(), 50))
+			.collect(Collectors.toList());
 		return Rnd.get(players);
 	}
 

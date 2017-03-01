@@ -48,7 +48,7 @@ import com.aionemu.gameserver.model.templates.spawns.siegespawns.SiegeSpawn;
 import com.aionemu.gameserver.model.templates.spawns.vortexspawns.VortexSpawn;
 import com.aionemu.gameserver.model.templates.world.WorldMapTemplate;
 import com.aionemu.gameserver.spawnengine.SpawnHandlerType;
-import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.WorldMap;
 import com.aionemu.gameserver.world.WorldPosition;
@@ -445,11 +445,11 @@ public class SpawnsData {
 		for (SpawnSpotTemplate template : spawnSpots) {
 			if (temp == null) {
 				temp = template;
-				distance = (float) MathUtil.getDistance(position.getX(), position.getY(), position.getZ(), template.getX(), template.getY(), template.getZ());
+				distance = (float) PositionUtil.getDistance(position.getX(), position.getY(), position.getZ(), template.getX(), template.getY(), template.getZ());
 				if (distance <= 1f)
 					break;
 			} else {
-				float dist = (float) MathUtil.getDistance(position.getX(), position.getY(), position.getZ(), template.getX(), template.getY(), template.getZ());
+				float dist = (float) PositionUtil.getDistance(position.getX(), position.getY(), position.getZ(), template.getX(), template.getY(), template.getZ());
 				if (dist < distance) {
 					distance = dist;
 					temp = template;

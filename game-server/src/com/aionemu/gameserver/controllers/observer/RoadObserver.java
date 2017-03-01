@@ -7,7 +7,7 @@ import com.aionemu.gameserver.model.road.Road;
 import com.aionemu.gameserver.model.templates.road.RoadExit;
 import com.aionemu.gameserver.model.utils3d.Point3D;
 import com.aionemu.gameserver.services.teleport.TeleportService;
-import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.world.WorldType;
 
 /**
@@ -47,7 +47,7 @@ public class RoadObserver extends ActionObserver {
 					passedThrough = true;
 				}
 			} else {
-				if (MathUtil.isIn3dRange(road, player, road.getTemplate().getRadius())) {
+				if (PositionUtil.isInRange(road, player, road.getTemplate().getRadius())) {
 					passedThrough = true;
 				}
 			}

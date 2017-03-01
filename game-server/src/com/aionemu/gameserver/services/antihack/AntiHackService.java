@@ -13,7 +13,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_FORCED_MOVE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_MOVE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUIT_RESPONSE;
 import com.aionemu.gameserver.skillengine.effect.AbnormalState;
-import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
 
@@ -46,7 +46,7 @@ public class AntiHackService {
 			if (type != 0) {
 				if ((type & MovementMask.POSITION) == MovementMask.POSITION) {
 					PlayerMoveController m = player.getMoveController();
-					double vector2D = MathUtil.getDistance(x, y, m.getTargetX2(), m.getTargetY2());
+					double vector2D = PositionUtil.getDistance(x, y, m.getTargetX2(), m.getTargetY2());
 
 					if (vector2D != 0) {
 						if ((type & MovementMask.MANUAL) == MovementMask.MANUAL && vector2D > 5 && vector2D > speed + 0.001)
@@ -62,14 +62,14 @@ public class AntiHackService {
 						}
 					}
 				} else if ((type & MovementMask.ABSOLUTE) == MovementMask.ABSOLUTE && (type & MovementMask.GLIDE) != MovementMask.GLIDE) {
-					double vector = MathUtil.getDistance(x, y, player.getPrevPos().getX(), player.getPrevPos().getY());
+					double vector = PositionUtil.getDistance(x, y, player.getPrevPos().getX(), player.getPrevPos().getY());
 					long timeDiff = System.currentTimeMillis() - player.prevPosUT;
 
 					if ((type & MovementMask.POSITION) == MovementMask.POSITION) {
 						boolean isMoveToTarget = false;
 						if (player.getTarget() != null && player.getTarget() != player) {
 							PlayerMoveController m = player.getMoveController();
-							double distDiff = MathUtil.getDistance(Math.round(player.getTarget().getX()), Math.round(player.getTarget().getY()),
+							double distDiff = PositionUtil.getDistance(Math.round(player.getTarget().getX()), Math.round(player.getTarget().getY()),
 								Math.round(m.getTargetX2()), Math.round(m.getTargetY2()));
 							isMoveToTarget = distDiff <= 5;
 						}
@@ -97,7 +97,7 @@ public class AntiHackService {
 					}
 				}
 			} else {
-				double vector = MathUtil.getDistance(x, y, player.getPrevPos().getX(), player.getPrevPos().getY());
+				double vector = PositionUtil.getDistance(x, y, player.getPrevPos().getX(), player.getPrevPos().getY());
 				long timeDiff = System.currentTimeMillis() - player.prevPosUT;
 
 				if (player.prevMoveType == 0 && vector > timeDiff * speed * 0.00075)
@@ -121,7 +121,7 @@ public class AntiHackService {
 		}
 
 		if (SecurityConfig.TELEPORTATION) {
-			double delta = MathUtil.getDistance(x, y, player.getX(), player.getY()) / speed;
+			double delta = PositionUtil.getDistance(x, y, player.getX(), player.getY()) / speed;
 			if (speed > 5.0 && delta > 5.0 && (type & MovementMask.GLIDE) != MovementMask.GLIDE) {
 				return punish(player, x, y, type, new SM_MOVE(player),
 					"Detected illegal action (Teleportation) S:" + speed + " D:" + Math.rint(1000.0 * delta) / 1000.0 + " type:" + type);

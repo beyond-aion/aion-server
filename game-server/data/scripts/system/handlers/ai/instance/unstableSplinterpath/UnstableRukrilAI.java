@@ -9,7 +9,7 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.LOG;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.TYPE;
 import com.aionemu.gameserver.skillengine.SkillEngine;
-import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 import ai.AggressiveNpcAI;
@@ -67,7 +67,7 @@ public class UnstableRukrilAI extends AggressiveNpcAI {
 
 	private void regen() {
 		Npc ebonsoul = getPosition().getWorldMapInstance().getNpc(219552);
-		if (ebonsoul != null && !ebonsoul.getLifeStats().isAlreadyDead() && MathUtil.isIn3dRange(getOwner(), ebonsoul, 5))
+		if (ebonsoul != null && !ebonsoul.getLifeStats().isAlreadyDead() && PositionUtil.isInRange(getOwner(), ebonsoul, 5))
 			if (!getOwner().getLifeStats().isFullyRestoredHp())
 				getOwner().getLifeStats().increaseHp(TYPE.HP, 10000, 0, LOG.REGULAR);
 

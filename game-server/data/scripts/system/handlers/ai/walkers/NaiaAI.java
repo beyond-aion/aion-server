@@ -9,7 +9,7 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.templates.npcshout.NpcShout;
 import com.aionemu.gameserver.model.templates.npcshout.ShoutEventType;
 import com.aionemu.gameserver.services.NpcShoutsService;
-import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PositionUtil;
 
 import ai.GeneralNpcAI;
 
@@ -28,8 +28,8 @@ public class NaiaAI extends GeneralNpcAI {
 
 		Npc cannon = getPosition().getWorldMapInstance().getNpc(203145);
 		Npc qydro = getPosition().getWorldMapInstance().getNpc(203125);
-		boolean isCannonNear = MathUtil.isIn3dRange(getOwner(), cannon, getOwner().getAggroRange());
-		boolean isQydroNear = MathUtil.isIn3dRange(getOwner(), qydro, getOwner().getAggroRange());
+		boolean isCannonNear = PositionUtil.isInRange(getOwner(), cannon, getOwner().getAggroRange());
+		boolean isQydroNear = PositionUtil.isInRange(getOwner(), qydro, getOwner().getAggroRange());
 
 		List<NpcShout> shouts = null;
 		if (!saidCannon && isCannonNear) {

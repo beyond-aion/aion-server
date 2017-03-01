@@ -9,7 +9,7 @@ import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.skillengine.SkillEngine;
-import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldPosition;
 
@@ -39,7 +39,7 @@ public class UnstableKaluvaSpawnAI extends NpcAI {
 	private void checkDistance(NpcAI ai, Creature creature) {
 		Npc kaluva = getPosition().getWorldMapInstance().getNpc(219553);
 		if (creature instanceof Npc) {
-			if (MathUtil.isIn3dRange(getOwner(), kaluva, 7) && task == null) {
+			if (PositionUtil.isInRange(getOwner(), kaluva, 7) && task == null) {
 				kaluva.getEffectController().removeEffect(19152);
 				scheduleHatch();
 			}

@@ -26,7 +26,7 @@ import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.services.player.PlayerReviveService;
 import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
-import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
@@ -779,8 +779,8 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 	}
 
 	private boolean isValidPoint(float x, float y) {
-		return (MathUtil.getDistance(x, y, 211.254f, 264.134f) >= 2.5) && (MathUtil.getDistance(x, y, 230.8977f, 285.5198f) >= 2.5)
-			&& (MathUtil.getDistance(x, y, 251.3068f, 264.307f) >= 2.5) && (MathUtil.getDistance(x, y, 231.2034f, 243.8273f) >= 2.5);
+		return (PositionUtil.getDistance(x, y, 211.254f, 264.134f) >= 2.5) && (PositionUtil.getDistance(x, y, 230.8977f, 285.5198f) >= 2.5)
+			&& (PositionUtil.getDistance(x, y, 251.3068f, 264.307f) >= 2.5) && (PositionUtil.getDistance(x, y, 231.2034f, 243.8273f) >= 2.5);
 	}
 
 	private void addWorldPoints() {

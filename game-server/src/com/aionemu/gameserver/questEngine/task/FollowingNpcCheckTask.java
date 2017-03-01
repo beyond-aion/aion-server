@@ -7,7 +7,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.task.checker.DestinationChecker;
-import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PositionUtil;
 
 /**
  * @author ATracer
@@ -34,7 +34,7 @@ public class FollowingNpcCheckTask implements Runnable {
 		if (player.getLifeStats().isAlreadyDead() || npc.getLifeStats().isAlreadyDead()) {
 			onFail(env);
 		}
-		if (!MathUtil.isIn3dRange(player, npc, 50)) {
+		if (!PositionUtil.isInRange(player, npc, 50)) {
 			onFail(env);
 		}
 

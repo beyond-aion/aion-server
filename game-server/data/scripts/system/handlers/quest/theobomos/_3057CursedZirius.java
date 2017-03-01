@@ -8,7 +8,7 @@ import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PositionUtil;
 
 /**
  * @author Cheatkiller
@@ -62,7 +62,7 @@ public class _3057CursedZirius extends QuestHandler {
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			int targetId = env.getTargetId();
 			if (targetId == 214576) {
-				if (MathUtil.getDistance(env.getVisibleObject(), 1691.41f, 219.09f, 72.62f) <= 30) {
+				if (PositionUtil.getDistance(env.getVisibleObject(), 1691.41f, 219.09f, 72.62f) <= 30) {
 					((Npc) env.getVisibleObject()).getController().onDie(player);
 					changeQuestStep(env, 0, 1, true);
 					return true;

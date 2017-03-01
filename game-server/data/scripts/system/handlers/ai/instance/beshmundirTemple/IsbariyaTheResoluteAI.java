@@ -15,7 +15,7 @@ import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
-import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
@@ -168,7 +168,7 @@ public class IsbariyaTheResoluteAI extends AggressiveNpcAI {
 	private Player getTargetPlayer() {
 		List<Player> players = new FastTable<>();
 		getKnownList().forEachPlayer(player -> {
-			if (!PlayerActions.isAlreadyDead(player) && MathUtil.isIn3dRange(player, getOwner(), 40) && player != getTarget()) {
+			if (!PlayerActions.isAlreadyDead(player) && PositionUtil.isInRange(player, getOwner(), 40) && player != getTarget()) {
 				players.add(player);
 			}
 		});

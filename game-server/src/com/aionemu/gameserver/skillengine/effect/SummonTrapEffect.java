@@ -13,7 +13,7 @@ import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.spawnengine.VisibleObjectSpawner;
-import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
@@ -29,7 +29,7 @@ public class SummonTrapEffect extends SummonEffect {
 		// should only be set if player has no target to avoid errors
 		if (effect.getEffector().getTarget() == null)
 			effect.getEffector().setTarget(effect.getEffector());
-		double radian = Math.toRadians(MathUtil.convertHeadingToDegree(effect.getEffector().getHeading()));
+		double radian = Math.toRadians(PositionUtil.convertHeadingToAngle(effect.getEffector().getHeading()));
 		float x = effect.getX();
 		float y = effect.getY();
 		float z = effect.getZ();

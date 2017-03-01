@@ -8,7 +8,7 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Summon;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.skillengine.model.Skill;
-import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PositionUtil;
 
 /**
  * @author MrPoke
@@ -31,7 +31,7 @@ public class MaxCountProperty {
 
 				// filter out summons (we want nearest masters), then order by distance, limit to max count
 				List<Creature> nearestCreatures = skill.getEffectedList().stream().filter(c -> !(c instanceof Summon))
-					.sorted(Comparator.comparingDouble(c -> MathUtil.getDistance(firstTarget, c))).limit(maxCount).collect(Collectors.toList());
+					.sorted(Comparator.comparingDouble(c -> PositionUtil.getDistance(firstTarget, c))).limit(maxCount).collect(Collectors.toList());
 
 				// rebuild effected list with correct number of creatures and their summons
 				skill.getEffectedList().clear();

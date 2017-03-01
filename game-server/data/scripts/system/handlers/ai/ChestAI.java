@@ -18,7 +18,7 @@ import com.aionemu.gameserver.model.templates.chest.KeyItem;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.drop.DropRegistrationService;
 import com.aionemu.gameserver.services.drop.DropService;
-import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
 
@@ -52,13 +52,13 @@ public class ChestAI extends ActionItemNpcAI {
 			Collection<Player> players = new HashSet<>();
 			if (player.isInGroup()) {
 				for (Player member : player.getPlayerGroup().getOnlineMembers()) {
-					if (MathUtil.isIn3dRange(member, getOwner(), GroupConfig.GROUP_MAX_DISTANCE)) {
+					if (PositionUtil.isInRange(member, getOwner(), GroupConfig.GROUP_MAX_DISTANCE)) {
 						players.add(member);
 					}
 				}
 			} else if (player.isInAlliance()) {
 				for (Player member : player.getPlayerAlliance().getOnlineMembers()) {
-					if (MathUtil.isIn3dRange(member, getOwner(), GroupConfig.GROUP_MAX_DISTANCE)) {
+					if (PositionUtil.isInRange(member, getOwner(), GroupConfig.GROUP_MAX_DISTANCE)) {
 						players.add(member);
 					}
 				}

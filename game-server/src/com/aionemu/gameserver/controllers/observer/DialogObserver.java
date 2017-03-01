@@ -2,7 +2,7 @@ package com.aionemu.gameserver.controllers.observer;
 
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PositionUtil;
 
 /**
  * @author nrg
@@ -22,7 +22,7 @@ public abstract class DialogObserver extends ActionObserver {
 
 	@Override
 	public void moved() {
-		if (!MathUtil.isIn3dRange(responder, requester, maxDistance))
+		if (!PositionUtil.isInRange(responder, requester, maxDistance))
 			tooFar();
 	}
 

@@ -12,7 +12,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
-import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
@@ -57,7 +57,7 @@ public class CM_QUEST_SHARE extends AionClientPacket {
 		}
 
 		for (Player member : player.isInGroup() ? player.getPlayerGroup().getOnlineMembers() : player.getPlayerAllianceGroup().getOnlineMembers()) {
-			if (player.equals(member) || !MathUtil.isIn3dRange(member, player, GroupConfig.GROUP_MAX_DISTANCE))
+			if (player.equals(member) || !PositionUtil.isInRange(member, player, GroupConfig.GROUP_MAX_DISTANCE))
 				continue;
 
 			if (member.getQuestStateList().hasQuest(questId)) {

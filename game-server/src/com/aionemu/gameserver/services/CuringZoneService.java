@@ -10,7 +10,7 @@ import com.aionemu.gameserver.model.curingzone.CuringObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.curingzones.CuringTemplate;
 import com.aionemu.gameserver.skillengine.SkillEngine;
-import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 import javolution.util.FastTable;
@@ -44,7 +44,7 @@ public class CuringZoneService {
 
 						@Override
 						public void accept(Player player) {
-							if (MathUtil.isIn3dRange(obj, player, obj.getRange()) && !player.getEffectController().hasAbnormalEffect(8751)) {
+							if (PositionUtil.isInRange(obj, player, obj.getRange()) && !player.getEffectController().hasAbnormalEffect(8751)) {
 								SkillEngine.getInstance().getSkill(player, 8751, 1, player).useNoAnimationSkill();
 							}
 						}

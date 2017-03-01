@@ -23,7 +23,7 @@ import com.aionemu.gameserver.model.skill.QueuedNpcSkillEntry;
 import com.aionemu.gameserver.model.templates.npcskill.QueuedNpcSkillTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.skillengine.SkillEngine;
-import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
@@ -73,7 +73,7 @@ public class BrigadeGeneralVashartiAI extends AggressiveNpcAI {
 
 	@Override
 	public void handleMoveArrived() {
-		if (isInState(AIState.FORCED_WALKING) && isInFlameShowerTask.get() && MathUtil.getDistance(getOwner().getX(), getOwner().getY(), 188.17f, 414.06f) <= 1f) {
+		if (isInState(AIState.FORCED_WALKING) && isInFlameShowerTask.get() && PositionUtil.getDistance(getOwner().getX(), getOwner().getY(), 188.17f, 414.06f) <= 1f) {
 			getOwner().getMoveController().abortMove();
 			setStateIfNot(AIState.FIGHT);
 			setSubStateIfNot(AISubState.NONE);

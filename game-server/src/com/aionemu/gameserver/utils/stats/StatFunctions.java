@@ -31,7 +31,6 @@ import com.aionemu.gameserver.model.stats.container.PlayerGameStats;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.model.templates.item.WeaponStats;
 import com.aionemu.gameserver.model.templates.npc.NpcRating;
-import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
 /**
@@ -59,7 +58,7 @@ public class StatFunctions {
 		WorldMapInstance instance = target.getPosition().getWorldMapInstance();
 		int baseXP = calculateBaseExp(target);
 		float mapMulti = instance.getInstanceHandler().getInstanceExpMultiplier(); // map modifier to approach retail exp values
-		if (instance.getParent().isInstanceType() && MathUtil.isBetween(2, 6, instance.getPlayerMaxSize())) {
+		if (instance.getParent().isInstanceType() && instance.getPlayerMaxSize() >= 2 && instance.getPlayerMaxSize() <= 6) {
 			mapMulti *= instance.getPlayerMaxSize(); // on retail you get mob EP * max instance member count (only for group instances)
 			mapMulti /= RateConfig.XP_RATE; // custom: divide by regular xp rates, so they will not affect the rewarded XP
 		}

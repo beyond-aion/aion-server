@@ -1,6 +1,6 @@
 package com.aionemu.gameserver.model.geometry;
 
-import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
@@ -14,12 +14,12 @@ public class SemisphereArea extends SphereArea {
 
 	@Override
 	public boolean isInside3D(Point3D point) {
-		return this.z < point.getZ() && MathUtil.isIn3dRange(x, y, z, point.getX(), point.getY(), point.getZ(), r);
+		return this.z < point.getZ() && PositionUtil.isInRange(x, y, z, point.getX(), point.getY(), point.getZ(), r);
 	}
 
 	@Override
 	public boolean isInside3D(float x, float y, float z) {
-		return this.z < z && MathUtil.isIn3dRange(x, y, z, this.x, this.y, this.z, r);
+		return this.z < z && PositionUtil.isInRange(x, y, z, this.x, this.y, this.z, r);
 	}
 
 	@Override
@@ -44,7 +44,7 @@ public class SemisphereArea extends SphereArea {
 
 	@Override
 	public double getDistance3D(float x, float y, float z) {
-		double distance = MathUtil.getDistance(x, y, z, this.x, this.y, this.z) - r;
+		double distance = PositionUtil.getDistance(x, y, z, this.x, this.y, this.z) - r;
 		if (z < this.z)
 			return distance;
 		return distance > 0 ? distance : 0;

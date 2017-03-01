@@ -6,7 +6,7 @@ import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
@@ -28,9 +28,9 @@ public class ChantraRingsAI extends NpcAI {
 	private void checkDistance(NpcAI ai, Creature creature) {
 		int debuff = getOwner().getNpcId() == 283172 ? 20735 : 20734; // 4.0
 		if (creature instanceof Player) {
-			if (getOwner().getNpcId() == 283172 && MathUtil.isIn3dRangeLimited(getOwner(), creature, 10, 18) // 4.0
-				|| getOwner().getNpcId() == 283171 && MathUtil.isIn3dRangeLimited(getOwner(), creature, 18, 25) // 4.0
-				|| getOwner().getNpcId() == 283171 && MathUtil.isIn3dRangeLimited(getOwner(), creature, 0, 10)) { // 4.0
+			if (getOwner().getNpcId() == 283172 && PositionUtil.isInRangeLimited(getOwner(), creature, 10, 18) // 4.0
+				|| getOwner().getNpcId() == 283171 && PositionUtil.isInRangeLimited(getOwner(), creature, 18, 25) // 4.0
+				|| getOwner().getNpcId() == 283171 && PositionUtil.isInRangeLimited(getOwner(), creature, 0, 10)) { // 4.0
 				if (!creature.getEffectController().hasAbnormalEffect(debuff))
 					AIActions.useSkill(this, debuff);
 			}

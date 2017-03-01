@@ -20,7 +20,7 @@ public class FrontCondition extends Condition {
 		if (env.getFirstTarget() == null || env.getEffector() == null)
 			return false;
 
-		return PositionUtil.isInFrontOfTarget(env.getEffector(), env.getFirstTarget());
+		return PositionUtil.isInFrontOf(env.getEffector(), env.getFirstTarget());
 	}
 
 	@Override
@@ -28,7 +28,7 @@ public class FrontCondition extends Condition {
 		if (effect.getEffected() == null || effect.getEffector() == null)
 			return false;
 
-		return PositionUtil.isInFrontOfTarget(effect.getEffector(), effect.getEffected());
+		return PositionUtil.isInFrontOf(effect.getEffector(), effect.getEffected());
 	}
 
 }

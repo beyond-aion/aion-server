@@ -37,10 +37,8 @@ import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.services.item.ItemService.ItemUpdatePredicate;
 import com.aionemu.gameserver.services.player.PlayerLimitService;
 import com.aionemu.gameserver.services.trade.PricesService;
-import com.aionemu.gameserver.utils.MathUtil;
-import com.aionemu.gameserver.utils.OverflowException;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-import com.aionemu.gameserver.utils.SafeMath;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
 
 import javolution.util.FastSet;
@@ -328,7 +326,7 @@ public class TradeService {
 			return false;
 
 		Npc npc = (Npc) player.getTarget();
-		if (!npc.canTradeIn() || npc.getObjectId() != npcObjectId || MathUtil.getDistance(npc, player) > 10)
+		if (!npc.canTradeIn() || npc.getObjectId() != npcObjectId || PositionUtil.getDistance(npc, player) > 10)
 			return false;
 
 		TradeListTemplate tradeInList = tradeListData.getTradeInListTemplate(npc.getNpcId());
@@ -378,40 +376,35 @@ public class TradeService {
 			}
 		}
 
-		try {
-			for (TradeinItem requiredTradeInItem : requiredTradeInItems) {
-				if (player.getInventory().getItemCountByItemId(requiredTradeInItem.getId()) < SafeMath.multSafe(requiredTradeInItem.getPrice(), count))
-					return false;
-			}
+		for (TradeinItem requiredTradeInItem : requiredTradeInItems) {
+			if (player.getInventory().getItemCountByItemId(requiredTradeInItem.getId()) < requiredTradeInItem.getPrice() * count)
+				return false;
+		}
 
-			Acquisition aquisition = itemTemplate.getAcquisition();
-			if (aquisition != null && (aquisition.getType() == AcquisitionType.ABYSS || aquisition.getType() == AcquisitionType.AP)) {
-				int requiredAp = (int) ((aquisition.getRequiredAp() * count * tradeInList.getSellPriceRate() / 100.0D) * PricesService.getVendorBuyModifier())
-					/ 100;
-				int diferenceAp = 0;
-				for (TradeinItem treadInList : requiredTradeInItems) {
-					ItemTemplate itemReq = DataManager.ITEM_DATA.getItemTemplate(treadInList.getId());
-					if (itemReq != null) {
-						diferenceAp += (int) ((itemReq.getAcquisition().getRequiredAp() * count * tradeInList.getSellPriceRate() / 100.0D)
-							* PricesService.getVendorBuyModifier()) / 100;
-					}
-				}
-				if ((requiredAp - diferenceAp) > 0) {
-					if (player.getAbyssRank().getAp() < (requiredAp - diferenceAp)) {
-						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_NOT_ENOUGH_ABYSSPOINT());
-						return false;
-					}
-					AbyssPointsService.addAp(player, -(requiredAp - diferenceAp));
+		Acquisition aquisition = itemTemplate.getAcquisition();
+		if (aquisition != null && (aquisition.getType() == AcquisitionType.ABYSS || aquisition.getType() == AcquisitionType.AP)) {
+			int requiredAp = (int) ((aquisition.getRequiredAp() * count * tradeInList.getSellPriceRate() / 100.0D) * PricesService.getVendorBuyModifier())
+				/ 100;
+			int diferenceAp = 0;
+			for (TradeinItem treadInList : requiredTradeInItems) {
+				ItemTemplate itemReq = DataManager.ITEM_DATA.getItemTemplate(treadInList.getId());
+				if (itemReq != null) {
+					diferenceAp += (int) ((itemReq.getAcquisition().getRequiredAp() * count * tradeInList.getSellPriceRate() / 100.0D)
+						* PricesService.getVendorBuyModifier()) / 100;
 				}
 			}
-
-			for (TradeinItem requiredTradeInItem : requiredTradeInItems) {
-				if (!player.getInventory().decreaseByItemId(requiredTradeInItem.getId(), SafeMath.multSafe(requiredTradeInItem.getPrice(), count)))
+			if ((requiredAp - diferenceAp) > 0) {
+				if (player.getAbyssRank().getAp() < (requiredAp - diferenceAp)) {
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_NOT_ENOUGH_ABYSSPOINT());
 					return false;
+				}
+				AbyssPointsService.addAp(player, -(requiredAp - diferenceAp));
 			}
-		} catch (OverflowException e) {
-			AuditLogger.info(player, "OverflowException using tradeInTrade " + e.getMessage());
-			return false;
+		}
+
+		for (TradeinItem requiredTradeInItem : requiredTradeInItems) {
+			if (!player.getInventory().decreaseByItemId(requiredTradeInItem.getId(), requiredTradeInItem.getPrice() * count))
+				return false;
 		}
 
 		ItemService.addItem(player, itemId, count);

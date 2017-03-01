@@ -59,8 +59,8 @@ import com.aionemu.gameserver.services.instance.InstanceService;
 import com.aionemu.gameserver.services.item.ItemPacketService.ItemUpdateType;
 import com.aionemu.gameserver.services.player.PlayerReviveService;
 import com.aionemu.gameserver.services.trade.PricesService;
-import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.WorldMapInstance;
@@ -126,7 +126,7 @@ public class TeleportService {
 					return;
 				}
 
-				double dist = MathUtil.getDistance(player, flypath.getStartX(), flypath.getStartY(), flypath.getStartZ());
+				double dist = PositionUtil.getDistance(player, flypath.getStartX(), flypath.getStartY(), flypath.getStartZ());
 				if (dist > 7) {
 					AuditLogger.info(player, "Try to use flyPath #" + location.getLocId() + " but hes too far " + dist);
 					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_MOVE_TO_AIRPORT_NO_ROUTE());
@@ -334,7 +334,7 @@ public class TeleportService {
 
 		if (GeoDataConfig.GEO_ENABLE) {
 			// calculate position 1m in front of the npc
-			double radian = Math.toRadians(MathUtil.convertHeadingToDegree(spot.getHeading()));
+			double radian = Math.toRadians(PositionUtil.convertHeadingToAngle(spot.getHeading()));
 			x += Math.cos(radian) * (1f + npcTemplate.getBoundRadius().getFront());
 			y += Math.sin(radian) * (1f + npcTemplate.getBoundRadius().getFront());
 			z = GeoService.getInstance().getZ(searchResult.getWorldId(), x, y, spot.getZ(), 0.5f, 1);
@@ -414,7 +414,7 @@ public class TeleportService {
 	 * @return true or false
 	 */
 	public static void moveToTargetWithDistance(VisibleObject object, Player player, int direction, int distance) {
-		double radian = Math.toRadians(object.getHeading() * 3);
+		double radian = Math.toRadians(PositionUtil.convertHeadingToAngle(object.getHeading()));
 		float x0 = object.getX();
 		float y0 = object.getY();
 		float x1 = (float) (Math.cos(Math.PI * direction + radian) * distance);

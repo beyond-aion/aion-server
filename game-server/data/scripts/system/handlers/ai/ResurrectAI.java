@@ -23,7 +23,7 @@ import com.aionemu.gameserver.model.templates.BindPointTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_LEVEL_UPDATE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUESTION_WINDOW;
 import com.aionemu.gameserver.services.teleport.TeleportService;
-import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.WorldType;
 
@@ -46,7 +46,7 @@ public class ResurrectAI extends NpcAI {
 
 		if (player.getBindPoint() != null
 			&& player.getBindPoint().getMapId() == getPosition().getMapId()
-			&& MathUtil.getDistance(player.getBindPoint().getX(), player.getBindPoint().getY(), player.getBindPoint().getZ(), getPosition().getX(),
+			&& PositionUtil.getDistance(player.getBindPoint().getX(), player.getBindPoint().getY(), player.getBindPoint().getZ(), getPosition().getX(),
 				getPosition().getY(), getPosition().getZ()) < 20) {
 			PacketSendUtility.sendPacket(player, STR_ALREADY_REGISTER_THIS_RESURRECT_POINT());
 			return;
@@ -81,7 +81,7 @@ public class ResurrectAI extends NpcAI {
 					if (responder.getInventory().getKinah() < bindPointTemplate.getPrice()) {
 						PacketSendUtility.sendPacket(responder, STR_CANNOT_REGISTER_RESURRECT_POINT_NOT_ENOUGH_FEE());
 						return;
-					} else if (MathUtil.getDistance(requester, responder) > 5) {
+					} else if (PositionUtil.getDistance(requester, responder) > 5) {
 						PacketSendUtility.sendPacket(responder, STR_CANNOT_REGISTER_RESURRECT_POINT_FAR_FROM_NPC());
 						return;
 					}

@@ -1,10 +1,12 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
 import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.services.item.ItemSocketService;
+import com.aionemu.gameserver.utils.PositionUtil;
 
 /**
  * @author ATracer
@@ -21,15 +23,16 @@ public class CM_GODSTONE_SOCKET extends AionClientPacket {
 
 	@Override
 	protected void readImpl() {
-		this.npcObjectId = readD();
-		this.weaponId = readD();
-		this.stoneId = readD();
+		npcObjectId = readD();
+		weaponId = readD();
+		stoneId = readD();
 	}
 
 	@Override
 	protected void runImpl() {
 		Player player = getConnection().getActivePlayer();
-		if (player.getTarget() instanceof Npc && player.getTarget().getObjectId() == npcObjectId && player.getDistanceToTarget() <= 7)
+		VisibleObject npc = player.getTarget();
+		if (npc instanceof Npc && npc.getObjectId() == npcObjectId && PositionUtil.isInTalkRange(player, (Npc) npc))
 			ItemSocketService.socketGodstone(player, player.getEquipment().getEquippedItemByObjId(weaponId), stoneId);
 	}
 }

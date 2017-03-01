@@ -64,7 +64,7 @@ public class PacketSendUtility {
 			return;
 		scheduleOrRun(() -> {
 			if (npc.isSpawned())
-				broadcastPacket(npc, new SM_SYSTEM_MESSAGE(ChatType.NPC, npc, msgId, msgParams), player -> MathUtil.isInRange(npc, player, 40));
+				broadcastPacket(npc, new SM_SYSTEM_MESSAGE(ChatType.NPC, npc, msgId, msgParams), player -> PositionUtil.isInRange(npc, player, 40));
 		}, delay);
 	}
 

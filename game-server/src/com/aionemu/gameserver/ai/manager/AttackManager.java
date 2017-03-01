@@ -7,6 +7,8 @@ import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.ai.event.AIEventType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.model.gameobjects.VisibleObject;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
@@ -112,14 +114,13 @@ public class AttackManager {
 	private static boolean checkGiveupDistance(NpcAI npcAI) {
 		Npc npc = npcAI.getOwner();
 		// if target run away too far
-		float distanceToTarget = npc.getDistanceToTarget();
-		if (npcAI.isLogging()) {
-			AILogger.info(npcAI, "AttackManager: distanceToTarget " + distanceToTarget);
-		}
-		// TODO may be ask AI too
-		int chaseTarget = npc.isBoss() ? 50 : npc.getPosition().getWorldMapInstance().getTemplate().getAiInfo().getChaseTarget();
-		if (distanceToTarget > chaseTarget) {
-			return true;
+		VisibleObject target = npc.getTarget();
+		if (target != null) {
+			if (npcAI.isLogging())
+				AILogger.info(npcAI, "AttackManager: distanceToTarget " + PositionUtil.getDistance(npc, target, false));
+			int maxChaseDistance = npc.isBoss() ? 50 : npc.getPosition().getWorldMapInstance().getTemplate().getAiInfo().getChaseTarget();
+			if (!PositionUtil.isInRange(npc, target, maxChaseDistance))
+				return true;
 		}
 		double distanceToHome = npc.getDistanceToSpawnLocation();
 		// if npc is far away from home

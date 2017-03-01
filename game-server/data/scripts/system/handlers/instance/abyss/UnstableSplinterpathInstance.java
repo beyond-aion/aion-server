@@ -10,7 +10,7 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
 import com.aionemu.gameserver.skillengine.SkillEngine;
-import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
@@ -72,7 +72,7 @@ public class UnstableSplinterpathInstance extends GeneralInstanceHandler {
 			case 283204: // ex 284022
 				Npc ebonsoul = getNpc(219552);
 				if (ebonsoul != null && !ebonsoul.getLifeStats().isAlreadyDead()) {
-					if (MathUtil.isIn3dRange(npc, ebonsoul, 5)) {
+					if (PositionUtil.isInRange(npc, ebonsoul, 5)) {
 						ebonsoul.getEffectController().removeEffect(19159);
 						deleteNpcs(instance.getNpcs(281907));
 						break;
@@ -83,7 +83,7 @@ public class UnstableSplinterpathInstance extends GeneralInstanceHandler {
 			case 283205: // ex 284023:
 				Npc rukril = getNpc(219551);
 				if (rukril != null && !rukril.getLifeStats().isAlreadyDead()) {
-					if (MathUtil.isIn3dRange(npc, rukril, 5)) {
+					if (PositionUtil.isInRange(npc, rukril, 5)) {
 						rukril.getEffectController().removeEffect(19266);
 						deleteNpcs(instance.getNpcs(281908));
 						break;

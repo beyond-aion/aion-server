@@ -23,7 +23,7 @@ import com.aionemu.gameserver.services.PunishmentService;
 import com.aionemu.gameserver.services.RespawnService;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.task.GatheringTask;
-import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.captcha.CAPTCHAUtil;
 
@@ -59,7 +59,7 @@ public class GatherableController extends VisibleObjectController<Gatherable> {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GATHER_INVENTORY_IS_FULL());
 			return;
 		}
-		if (MathUtil.getDistance(getOwner(), player) > 6)
+		if (PositionUtil.getDistance(getOwner(), player) > 6)
 			return;
 
 		// check is gatherable

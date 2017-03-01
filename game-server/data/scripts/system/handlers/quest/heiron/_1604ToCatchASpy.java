@@ -7,7 +7,7 @@ import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PositionUtil;
 
 /**
  * @author Balthazar
@@ -75,7 +75,7 @@ public class _1604ToCatchASpy extends QuestHandler {
 			return false;
 		}
 
-		if (MathUtil.getDistance(env.getVisibleObject(), 717.78f, 623.50f, 130) < 30) {
+		if (PositionUtil.getDistance(env.getVisibleObject(), 717.78f, 623.50f, 130) < 30) {
 			((Npc) env.getVisibleObject()).getController().onDie(player);
 			qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
 			qs.setStatus(QuestStatus.REWARD);

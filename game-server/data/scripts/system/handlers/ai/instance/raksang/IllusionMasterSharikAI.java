@@ -10,7 +10,7 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.skillengine.SkillEngine;
-import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
@@ -45,7 +45,7 @@ public class IllusionMasterSharikAI extends AggressiveNpcAI {
 	protected void handleCreatureMoved(Creature creature) {
 		if (creature instanceof Player) {
 			final Player player = (Player) creature;
-			if (MathUtil.getDistance(getOwner(), player) <= 30) {
+			if (PositionUtil.getDistance(getOwner(), player) <= 30) {
 				if (startedEvent.compareAndSet(false, true)) {
 					PacketSendUtility.broadcastMessage(getOwner(), 1401112);
 				}

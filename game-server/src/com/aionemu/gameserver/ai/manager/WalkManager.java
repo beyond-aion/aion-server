@@ -14,7 +14,7 @@ import com.aionemu.gameserver.geoEngine.math.Vector3f;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.templates.walker.RouteStep;
 import com.aionemu.gameserver.model.templates.walker.WalkerTemplate;
-import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.geo.GeoService;
 
@@ -114,7 +114,7 @@ public class WalkManager {
 				nextStep = route.get(owner.getWalkerGroup().getGroupStep() - 1);
 		} else {
 			for (RouteStep step : route) {
-				double stepDist = MathUtil.getDistance(x, y, z, step.getX(), step.getY(), step.getZ());
+				double stepDist = PositionUtil.getDistance(x, y, z, step.getX(), step.getY(), step.getZ());
 				if (closestDist == 0 || stepDist < closestDist) {
 					closestDist = stepDist;
 					nextStep = step;
@@ -132,7 +132,7 @@ public class WalkManager {
 	 */
 	protected static RouteStep findNextRouteStepAfterPause(Npc owner, List<RouteStep> route, int currentPoint) {
 		RouteStep nextStep = route.get(currentPoint);
-		double stepDist = MathUtil.getDistance(owner.getX(), owner.getY(), owner.getZ(), nextStep.getX(), nextStep.getY(), nextStep.getZ());
+		double stepDist = PositionUtil.getDistance(owner.getX(), owner.getY(), owner.getZ(), nextStep.getX(), nextStep.getY(), nextStep.getZ());
 		if (stepDist < 1) {
 			nextStep = nextStep.getNextStep();
 		}

@@ -2,7 +2,7 @@ package com.aionemu.gameserver.controllers.observer;
 
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PositionUtil;
 
 /**
  * @author xTz
@@ -17,12 +17,12 @@ public abstract class GaleCycloneObserver extends ActionObserver {
 		super(ObserverType.MOVE);
 		this.player = player;
 		this.creature = creature;
-		oldRange = MathUtil.getDistance(player, creature);
+		oldRange = PositionUtil.getDistance(player, creature);
 	}
 
 	@Override
 	public void moved() {
-		double newRange = MathUtil.getDistance(player, creature);
+		double newRange = PositionUtil.getDistance(player, creature);
 		if (creature == null || creature.getLifeStats().isAlreadyDead()) {
 			if (player != null) {
 				player.getObserveController().removeObserver(this);

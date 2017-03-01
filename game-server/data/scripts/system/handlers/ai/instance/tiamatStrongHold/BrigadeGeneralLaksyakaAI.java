@@ -15,7 +15,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
-import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 import ai.AggressiveNpcAI;
@@ -68,7 +68,7 @@ public class BrigadeGeneralLaksyakaAI extends AggressiveNpcAI {
 		Npc tiamatEye = getPosition().getWorldMapInstance().getNpc(283089);// 4.0
 		List<Player> players = new FastTable<>();
 		getKnownList().forEachPlayer(player -> {
-			if (!PlayerActions.isAlreadyDead(player) && MathUtil.isIn3dRange(player, tiamatEye, 40)) {
+			if (!PlayerActions.isAlreadyDead(player) && PositionUtil.isInRange(player, tiamatEye, 40)) {
 				players.add(player);
 			}
 		});

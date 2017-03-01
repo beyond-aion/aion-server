@@ -12,7 +12,7 @@ import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUESTION_WINDOW;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.ExchangeService;
-import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.World;
 
@@ -49,7 +49,7 @@ public class CM_EXCHANGE_REQUEST extends AionClientPacket {
 			return;
 		}
 
-		if (!MathUtil.isIn3dRange(activePlayer, targetPlayer, 5)) {
+		if (!PositionUtil.isInRange(activePlayer, targetPlayer, 5)) {
 			sendPacket(SM_SYSTEM_MESSAGE.STR_EXCHANGE_TOO_FAR_TO_EXCHANGE());
 			return;
 		}

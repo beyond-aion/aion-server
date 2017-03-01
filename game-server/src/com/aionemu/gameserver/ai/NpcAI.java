@@ -28,7 +28,7 @@ import com.aionemu.gameserver.model.stats.container.NpcLifeStats;
 import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.services.NpcShoutsService;
-import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.world.WorldType;
 import com.aionemu.gameserver.world.knownlist.KnownList;
 
@@ -103,7 +103,7 @@ public class NpcAI extends AITemplate {
 	}
 
 	protected boolean isInRange(VisibleObject object, int range) {
-		return MathUtil.isIn3dRange(getOwner(), object, range);
+		return PositionUtil.isInRange(getOwner(), object, range);
 	}
 
 	@Override
@@ -180,13 +180,13 @@ public class NpcAI extends AITemplate {
 		AIState state = getState();
 		switch (state) {
 			case FEAR:
-				return MathUtil.isNearCoordinates(getOwner(), getOwner().getMoveController().getTargetX2(), getOwner().getMoveController().getTargetY2(),
+				return PositionUtil.isInRange(getOwner(), getOwner().getMoveController().getTargetX2(), getOwner().getMoveController().getTargetY2(),
 					getOwner().getMoveController().getTargetZ2(), 1);
 			case FIGHT:
 				return SimpleAttackManager.isTargetInAttackRange(getOwner());
 			case RETURNING:
 				SpawnTemplate spawn = getOwner().getSpawn();
-				return MathUtil.isNearCoordinates(getOwner(), spawn.getX(), spawn.getY(), spawn.getZ(), 1);
+				return PositionUtil.isInRange(getOwner(), spawn.getX(), spawn.getY(), spawn.getZ(), 1);
 			case FOLLOWING:
 				return FollowEventHandler.isInRange(this, getOwner().getTarget());
 			case WALKING:

@@ -11,7 +11,7 @@ import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.HousingService;
 import com.aionemu.gameserver.services.teleport.TeleportService;
-import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
@@ -76,7 +76,7 @@ public class CM_HOUSE_OPEN_DOOR extends AionClientPacket {
 		y = (butler.getY() + relationshipCrystal.getY()) / 2;
 		z = Math.max(butler.getZ(), relationshipCrystal.getZ());
 		if (outsideHouse) { // offset the midpoint 2.5m behind the butler, to get coords outside the house, near the door
-			double radian = Math.toRadians(MathUtil.convertHeadingToDegree(h));
+			double radian = Math.toRadians(PositionUtil.convertHeadingToAngle(h));
 			x -= (float) (Math.cos(radian) * 2.5f);
 			y -= (float) (Math.sin(radian) * 2.5f);
 			h -= h >= 60 ? 60 : -60; // opposite direction (player should look away from the door)

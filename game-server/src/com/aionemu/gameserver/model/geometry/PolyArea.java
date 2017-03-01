@@ -4,7 +4,7 @@ import java.util.Collection;
 
 import com.aionemu.gameserver.configs.main.WorldConfig;
 import com.aionemu.gameserver.model.templates.zone.Point2D;
-import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
@@ -72,7 +72,7 @@ public class PolyArea extends AbstractArea {
 			return 0;
 		} else {
 			Point2D cp = getClosestPoint(x, y);
-			return MathUtil.getDistance(cp.getX(), cp.getY(), x, y);
+			return PositionUtil.getDistance(cp.getX(), cp.getY(), x, y);
 		}
 	}
 
@@ -84,7 +84,7 @@ public class PolyArea extends AbstractArea {
 			return getDistance2D(x, y);
 		} else {
 			Point3D cp = getClosestPoint(x, y, z);
-			return MathUtil.getDistance(cp.getX(), cp.getY(), cp.getZ(), x, y, z);
+			return PositionUtil.getDistance(cp.getX(), cp.getY(), cp.getZ(), x, y, z);
 		}
 	}
 
@@ -104,13 +104,13 @@ public class PolyArea extends AbstractArea {
 			float p2x = poly.xpoints[nextIndex];
 			float p2y = poly.ypoints[nextIndex];
 
-			Point2D point = MathUtil.getClosestPointOnSegment(p1x, p1y, p2x, p2y, x, y);
+			Point2D point = PositionUtil.getClosestPointOnSegment(p1x, p1y, p2x, p2y, x, y);
 
 			if (closestPoint == null) {
 				closestPoint = point;
-				closestDistance = MathUtil.getDistance(closestPoint.getX(), closestPoint.getY(), x, y);
+				closestDistance = PositionUtil.getDistance(closestPoint.getX(), closestPoint.getY(), x, y);
 			} else {
-				double newDistance = MathUtil.getDistance(point.getX(), point.getY(), x, y);
+				double newDistance = PositionUtil.getDistance(point.getX(), point.getY(), x, y);
 				if (newDistance < closestDistance) {
 					closestPoint = point;
 					closestDistance = newDistance;
