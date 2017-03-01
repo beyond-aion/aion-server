@@ -53,6 +53,9 @@
 	<instance_exit instance_id="300220000" exit_world="400010000" race="PC_ALL" x="2204.443" y="1928.3447" z="2303.0366"/>
 	<!-- Unstable Abyssal Splinter -->
 	<instance_exit instance_id="300600000" exit_world="400010000" race="PC_ALL" x="2204.443" y="1928.3447" z="2303.0366"/>
+	<!-- Raksang Ruins -->
+	<instance_exit instance_id="300610000" exit_world="210070000" race="ELYOS" x="2668.6453" y="1470.2168" z="431.9289" h="40"/>
+	<instance_exit instance_id="300610000" exit_world="220080000" race="ASMODIANS" x="411.4971" y="1452.091" z="274.5" h="30"/>
 	<!-- Indratu Fortress -->
 	<instance_exit instance_id="310090000" exit_world="210040000" race="ELYOS" x="1896.48" y="2607.92" z="137.672005"/>
 	<instance_exit instance_id="310090000" exit_world="220040000" race="ASMODIANS" x="1466.8792" y="1947.9192" z="588.06555"/>
