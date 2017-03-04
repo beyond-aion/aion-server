@@ -43,7 +43,7 @@ public class XmlDataLoader {
 		File cachedXml = new File(CACHE_XML_FILE);
 		File cleanMainXml = new File(MAIN_XML_FILE);
 
-		log.info("Updating cache file...");
+		log.info("Merging static data into cache file...");
 		mergeXmlFiles(cachedXml, cleanMainXml);
 
 		try {

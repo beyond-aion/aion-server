@@ -12,20 +12,14 @@ import javax.xml.namespace.QName;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
-import javax.xml.stream.XMLEventFactory;
-import javax.xml.stream.XMLEventReader;
-import javax.xml.stream.XMLEventWriter;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLOutputFactory;
 import javax.xml.stream.XMLStreamException;
-import javax.xml.stream.events.Attribute;
-import javax.xml.stream.events.Comment;
-import javax.xml.stream.events.EndElement;
-import javax.xml.stream.events.StartElement;
+import javax.xml.stream.XMLStreamReader;
+import javax.xml.stream.XMLStreamWriter;
 import javax.xml.stream.events.XMLEvent;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.xml.sax.Attributes;
@@ -74,11 +68,23 @@ import com.aionemu.commons.utils.xml.XmlUtil;
  * <p/>
  * Created on: 23.07.2009 12:55:14
  * 
- * @author Aquanox
+ * @author Aquanox, Neon
  */
 public class XmlMerger {
 
-	private static final Logger logger = LoggerFactory.getLogger(XmlMerger.class);
+	private static final Logger log = LoggerFactory.getLogger(XmlMerger.class);
+
+	private static final QName qNameFile = new QName("file");
+
+	/**
+	 * If this option is enabled, the first found root tag will enclose all found files (which will then be written without their root tags).
+	 */
+	private static final QName qNameSingleRootTag = new QName("singleRootTag");
+
+	/**
+	 * If this option is enabled you import the directory, and all its subdirectories. Default is 'true'.
+	 */
+	private static final QName qNameRecursiveImport = new QName("recursiveImport");
 
 	private final File baseDir;
 	private final File sourceFile;
@@ -87,7 +93,6 @@ public class XmlMerger {
 
 	private XMLInputFactory inputFactory = XMLInputFactory.newInstance();
 	private XMLOutputFactory outputFactory = XMLOutputFactory.newInstance();
-	private XMLEventFactory eventFactory = XMLEventFactory.newInstance();
 
 	/**
 	 * Create new instance of <tt>XmlMerger </tt>. Base directory is set to directory which contains source file.
@@ -130,36 +135,23 @@ public class XmlMerger {
 	 *           when XML processing error was occurred.
 	 */
 	public void process() throws Exception {
-		logger.debug("Processing " + sourceFile + " files into " + destFile);
+		log.debug("Processing " + sourceFile + " files into " + destFile);
 
 		if (!sourceFile.exists())
 			throw new FileNotFoundException("Source file " + sourceFile.getPath() + " not found.");
 
-		boolean needUpdate = false;
-
 		if (!destFile.exists()) {
-			logger.debug("Dest file not found - creating new file");
-			needUpdate = true;
+			log.info("Cache file not found. Updating...");
 		} else if (!metaDataFile.exists()) {
-			logger.debug("Meta file not found - creating new file");
-			needUpdate = true;
+			log.info("Meta file not found. Updating...");
+		} else if (checkFileModifications()) {
+			log.info("Modifications found. Updating...");
 		} else {
-			logger.debug("Dest file found - checking file modifications");
-			needUpdate = checkFileModifications();
+			log.info("Cache file is up to date");
+			return;
 		}
 
-		if (needUpdate) {
-			logger.debug("Modifications found. Updating...");
-			try {
-				doUpdate();
-			} catch (Exception e) {
-				FileUtils.deleteQuietly(destFile);
-				FileUtils.deleteQuietly(metaDataFile);
-				throw e;
-			}
-		} else {
-			logger.debug("Files are up-to-date");
-		}
+		doUpdate();
 	}
 
 	/**
@@ -177,7 +169,7 @@ public class XmlMerger {
 		long destFileTime = destFile.lastModified();
 
 		if (sourceFile.lastModified() > destFileTime) {
-			logger.debug("Source file was modified ");
+			log.debug("Source file was modified ");
 			return true;
 		}
 
@@ -207,71 +199,50 @@ public class XmlMerger {
 	 *           for any other reason
 	 */
 	private void doUpdate() throws XMLStreamException, IOException {
-		XMLEventReader reader = null;
-		XMLEventWriter writer = null;
+		XMLStreamReader reader = null;
+		XMLStreamWriter writer = null;
 
 		Properties metadata = new Properties();
 
 		try {
-			writer = outputFactory.createXMLEventWriter(new BufferedWriter(new FileWriter(destFile, false)));
-			reader = inputFactory.createXMLEventReader(new FileReader(sourceFile));
+			writer = outputFactory.createXMLStreamWriter(new BufferedWriter(new FileWriter(destFile, false)));
+			reader = inputFactory.createXMLStreamReader(new FileReader(sourceFile));
 
+			writer.writeStartDocument();
 			while (reader.hasNext()) {
-				final XMLEvent xmlEvent = reader.nextEvent();
-
-				if (xmlEvent.isStartElement() && isImportQName(xmlEvent.asStartElement().getName())) {
-					processImportElement(xmlEvent.asStartElement(), writer, metadata);
-					continue;
-				}
-
-				if (xmlEvent.isEndElement() && isImportQName(xmlEvent.asEndElement().getName()))
-					continue;
-
-				if (xmlEvent instanceof Comment)// skip comments.
-					continue;
-
-				if (xmlEvent.isCharacters())// skip whitespaces.
-					if (xmlEvent.asCharacters().isWhiteSpace() || xmlEvent.asCharacters().isIgnorableWhiteSpace())// skip
-																																																				// whitespaces.
+				switch (reader.next()) {
+					case XMLEvent.START_DOCUMENT: // skip start and end of document.
+					case XMLEvent.END_DOCUMENT:
+					case XMLEvent.COMMENT: // skip comments
+					case XMLEvent.SPACE: // skip ignorable white-space
 						continue;
-
-				writer.add(xmlEvent);
-
-				if (xmlEvent.isStartDocument()) {
-					writer.add(eventFactory.createComment("\nThis file is machine-generated. DO NOT MODIFY IT!\n"));
+					case XMLEvent.START_ELEMENT:
+						if ("import".equals(reader.getLocalName())) { // import declared file
+							processImportElement(reader, writer, metadata);
+							continue;
+						}
+						break;
+					case XMLEvent.END_ELEMENT: // skip closing import tag, since it's replaces by declared file contents
+						if ("import".equals(reader.getLocalName()))
+							continue;
 				}
+
+				if (reader.isWhiteSpace())// skip white-spaces
+					continue;
+
+				write(reader, writer);
 			}
+			writer.writeEndDocument();
+			writer.flush();
 
 			storeFileModifications(metadata, metaDataFile);
 		} finally {
 			if (writer != null)
-				try {
-					writer.close();
-				} catch (Exception ignored) {
-				}
+				writer.close();
 			if (reader != null)
-				try {
-					reader.close();
-				} catch (Exception ignored) {
-				}
+				reader.close();
 		}
 	}
-
-	private boolean isImportQName(QName name) {
-		return "import".equals(name.getLocalPart());
-	}
-
-	private static final QName qNameFile = new QName("file");
-
-	/**
-	 * If this option is enabled, the first found root tag will enclose all found files (which will then be written without their root tags).
-	 */
-	private static final QName qNameSingleRootTag = new QName("singleRootTag");
-
-	/**
-	 * If this option is enabled you import the directory, and all its subdirectories. Default is 'true'.
-	 */
-	private static final QName qNameRecursiveImport = new QName("recursiveImport");
 
 	/**
 	 * This method processes the 'import' element, replacing it by the data from the relevant files.
@@ -281,27 +252,24 @@ public class XmlMerger {
 	 * @throws FileNotFoundException
 	 *           of imported file was not found.
 	 */
-	private void processImportElement(StartElement element, XMLEventWriter writer, Properties metadata) throws XMLStreamException, IOException {
-		File file = new File(baseDir, getAttributeValue(element, qNameFile, null));
+	private void processImportElement(XMLStreamReader reader, XMLStreamWriter writer, Properties metadata) throws XMLStreamException, IOException {
+		File file = new File(baseDir, getAttributeValue(reader, qNameFile, null));
 
 		if (!file.exists())
 			throw new FileNotFoundException("Missing file to import:" + file.getPath());
 
-		EndElement endElement = null;
+		QName startElement = null;
 		if (file.isFile()) {
 			importFile(file, false, false, writer, metadata);
 		} else {
-			boolean singleRootTag = Boolean.valueOf(getAttributeValue(element, qNameSingleRootTag, "false"));
-			boolean recImport = Boolean.valueOf(getAttributeValue(element, qNameRecursiveImport, "true"));
-			logger.debug("Processing dir " + file);
+			boolean singleRootTag = Boolean.valueOf(getAttributeValue(reader, qNameSingleRootTag, "false"));
+			boolean recImport = Boolean.valueOf(getAttributeValue(reader, qNameRecursiveImport, "true"));
+			log.debug("Processing dir " + file);
 			for (File file2 : XmlUtil.listFiles(file, recImport)) {
-				boolean skipRootStartElement = singleRootTag && endElement != null;
-				StartElement startElement = importFile(file2, skipRootStartElement, singleRootTag, writer, metadata);
-				if (endElement == null)
-					endElement = eventFactory.createEndElement(startElement.getName(), null);
+				boolean skipRootStartElement = singleRootTag && startElement != null;
+				startElement = importFile(file2, skipRootStartElement, singleRootTag, writer, metadata);
 			}
-			if (endElement != null)
-				writer.add(endElement);
+			writer.writeEndElement();
 		}
 	}
 
@@ -320,21 +288,21 @@ public class XmlMerger {
 	 * @throws XMLStreamException
 	 *           if attribute is missing and there is no default value set.
 	 */
-	private String getAttributeValue(StartElement element, QName name, String def) throws XMLStreamException {
-		Attribute attribute = element.getAttributeByName(name);
+	private String getAttributeValue(XMLStreamReader reader, QName name, String def) throws XMLStreamException {
+		String attribute = reader.getAttributeValue(null, name.getLocalPart());
 
 		if (attribute == null) {
 			if (def == null)
-				throw new XMLStreamException("Attribute '" + name.getLocalPart() + "' is missing or empty.", element.getLocation());
+				throw new XMLStreamException("Attribute '" + name.getLocalPart() + "' is missing or empty.", reader.getLocation());
 
 			return def;
 		}
 
-		return attribute.getValue();
+		return attribute;
 	}
 
 	/**
-	 * Read all {@link javax.xml.stream.events.XMLEvent}'s from specified file and write them onto the {@link javax.xml.stream.XMLEventWriter}
+	 * Read all {@link javax.xml.stream.events.XMLEvent}'s from specified file and write them onto the {@link javax.xml.stream.XMLStreamWriter}
 	 * 
 	 * @param file
 	 *          File to import
@@ -351,57 +319,73 @@ public class XmlMerger {
 	 * @throws IOException
 	 *           If the reading file does not exist, is a directory rather than a regular file, or for some other reason cannot be opened for reading.
 	 */
-	private StartElement importFile(File file, boolean skipStartElement, boolean skipEndElement, XMLEventWriter writer, Properties metadata)
+	private QName importFile(File file, boolean skipStartElement, boolean skipEndElement, XMLStreamWriter writer, Properties metadata)
 		throws XMLStreamException, IOException {
-		logger.debug("Appending file " + file);
+		log.debug("Appending file " + file);
 		metadata.setProperty(file.getPath(), makeHash(file));
 
-		XMLEventReader reader = null;
+		XMLStreamReader reader = null;
 
 		try {
-			reader = inputFactory.createXMLEventReader(new FileReader(file));
+			reader = inputFactory.createXMLStreamReader(new FileReader(file));
 
-			StartElement startElement = null;
+			QName startElement = null;
 
 			while (reader.hasNext()) {
-				XMLEvent event = reader.nextEvent();
-
-				// skip start and end of document.
-				if (event.isStartDocument() || event.isEndDocument())
-					continue;
-				// skip all comments.
-				if (event instanceof Comment)
-					continue;
-				// skip white-spaces and all ignoreable white-spaces.
-				if (event.isCharacters()) {
-					if (event.asCharacters().isWhiteSpace() || event.asCharacters().isIgnorableWhiteSpace())
+				switch (reader.next()) {
+					case XMLEvent.START_DOCUMENT: // skip start and end of document.
+					case XMLEvent.END_DOCUMENT:
+					case XMLEvent.COMMENT: // skip comments
+					case XMLEvent.SPACE: // skip ignorable white-space
 						continue;
 				}
 
+				if (reader.isWhiteSpace()) // skip white-spaces
+					continue;
+
 				// modify root-tag of imported file.zzy
-				if (startElement == null && event.isStartElement()) {
-					startElement = event.asStartElement();
+				if (startElement == null && reader.isStartElement()) {
+					startElement = reader.getName();
 
 					if (skipStartElement)
 						continue;
-					else
-						event = eventFactory.createStartElement(startElement.getName(), startElement.getAttributes(), null);
 				}
 
-				if (skipEndElement && event.isEndElement() && startElement != null && event.asEndElement().getName().equals(startElement.getName()))
+				if (skipEndElement && reader.isEndElement() && startElement != null && reader.getName().equals(startElement))
 					continue;
 
 				// finally - write tag
-				writer.add(event);
+				write(reader, writer);
 			}
 			return startElement;
 		} finally {
 			if (reader != null)
-				try {
-					reader.close();
-				} catch (Exception ignored) {
-				}
+				reader.close();
 		}
+	}
+
+	private void write(XMLStreamReader reader, XMLStreamWriter writer) throws XMLStreamException {
+		if (reader.isStartElement()) {
+			if (reader.getNamespaceURI() == null)
+				writer.writeStartElement(reader.getLocalName());
+			else
+				writer.writeStartElement(reader.getPrefix(), reader.getLocalName(), reader.getNamespaceURI());
+
+			for (int i = 0, len = reader.getNamespaceCount(); i < len; i++)
+				writer.writeNamespace(reader.getNamespacePrefix(i), reader.getNamespaceURI(i));
+		} else if (reader.isEndElement()) {
+			writer.writeEndElement();
+		}
+		if (reader.isStartElement() || reader.getEventType() == XMLEvent.ATTRIBUTE) {
+			for (int i = 0, len = reader.getAttributeCount(); i < len; i++) {
+				String attUri = reader.getAttributeNamespace(i);
+				if (attUri != null)
+					writer.writeAttribute(attUri, reader.getAttributeLocalName(i), reader.getAttributeValue(i));
+				else
+					writer.writeAttribute(reader.getAttributeLocalName(i), reader.getAttributeValue(i));
+			}
+		} else if (reader.isCharacters())
+			writer.writeCharacters(reader.getTextCharacters(), reader.getTextStart(), reader.getTextLength());
 	}
 
 	private static class TimeCheckerHandler extends DefaultHandler {
@@ -435,7 +419,7 @@ public class XmlMerger {
 
 			File file = new File(basedir, value);
 
-			if (!file.exists()) // noinspection ThrowableInstanceNeverThrown
+			if (!file.exists())
 				throw new SAXParseException("Imported file not found. file=" + file.getPath(), locator);
 
 			if (file.isFile() && checkFile(file)) { // if file - just check it.
@@ -466,8 +450,7 @@ public class XmlMerger {
 				if (!data.equals(hash))// file|dir was changed.
 					return true;
 			} catch (IOException e) {
-				logger.warn("File varification error. File: " + file.getPath() + ", location=" + locator.getLineNumber() + ":" + locator.getColumnNumber(),
-					e);
+				log.warn("File verification error. File: " + file.getPath() + ", location=" + locator.getLineNumber() + ":" + locator.getColumnNumber(), e);
 				return true;// was modified.
 			}
 
@@ -483,35 +466,22 @@ public class XmlMerger {
 		if (!file.exists() || !file.isFile())
 			return null;
 
-		FileReader reader = null;
-
-		try {
+		try (FileReader reader = new FileReader(file)) {
 			Properties props = new Properties();
-
-			reader = new FileReader(file);
-
 			props.load(reader);
-
 			return props;
-		} catch (IOException e)// properties
-		{
-			logger.debug("File modfications restoring error. ", e);
+		} catch (IOException e) { // properties
+			log.debug("File modfications restoring error. ", e);
 			return null;
-		} finally {
-			IOUtils.closeQuietly(reader);
 		}
 	}
 
 	private void storeFileModifications(Properties props, File file) throws IOException {
-		FileWriter writer = null;
-		try {
-			writer = new FileWriter(file, false);
+		try (FileWriter writer = new FileWriter(file, false)) {
 			props.store(writer, " This file is machine-generated. DO NOT EDIT!");
 		} catch (IOException e) {
-			logger.error("Failed to store file modification data.");
+			log.error("Failed to store file modification data.");
 			throw e;
-		} finally {
-			IOUtils.closeQuietly(writer);
 		}
 	}
 
