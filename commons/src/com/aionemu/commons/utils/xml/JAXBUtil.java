@@ -36,7 +36,7 @@ public class JAXBUtil {
 			m.marshal(obj, sw);
 			return sw.toString();
 		} catch (JAXBException e) {
-			throw new RuntimeException("Failed to marshall object of class " + obj.getClass().getName(), e);
+			throw new RuntimeException("Failed to marshal object of class " + obj.getClass().getName(), e);
 		}
 	}
 
@@ -114,7 +114,7 @@ public class JAXBUtil {
 					obj = (T) u.unmarshal(isr);
 				}
 			} else if (xml instanceof Node) { // superinterface of document
-				obj = (T) u.unmarshal((Node) xml);
+				obj = u.unmarshal((Node) xml, clazz).getValue();
 			} else {
 				try (StringReader sr = new StringReader(xml.toString())) {
 					obj = (T) u.unmarshal(sr);
@@ -124,10 +124,7 @@ public class JAXBUtil {
 				throw new NullPointerException("Xml input does not contain any content for " + clazz.getName());
 			return obj;
 		} catch (Exception e) {
-			Throwable cause = e; // generate minimal stack trace (only the relevant part)
-			while (cause.getCause() != null)
-				cause = cause.getCause();
-			throw new RuntimeException("Failed to unmarshal class " + clazz.getName() + " from xml:\n" + xml, cause);
+			throw new RuntimeException("Failed to unmarshal class " + clazz.getName() + " from xml:\n" + xml, e);
 		}
 	}
 
@@ -156,10 +153,7 @@ public class JAXBUtil {
 					throw new NullPointerException("File " + file + " does not contain any content for " + clazz.getName());
 				objects.add(obj);
 			} catch (Exception e) {
-				Throwable cause = e; // generate minimal stack trace (only the relevant part)
-				while (cause.getCause() != null)
-					cause = cause.getCause();
-				throw new RuntimeException("Failed to unmarshal class " + clazz.getName() + " from file:\n" + file, cause);
+				throw new RuntimeException("Failed to unmarshal class " + clazz.getName() + " from file:\n" + file, e);
 			}
 		}
 		return objects;
