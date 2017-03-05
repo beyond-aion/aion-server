@@ -69,7 +69,7 @@ public class CM_PLAYER_SEARCH extends AionClientPacket {
 				continue;
 			else if (!player.isSpawned())
 				continue;
-			else if (player.isGM() && !CustomConfig.SEARCH_GM_LIST)
+			else if (player.isStaff() && !CustomConfig.SEARCH_GM_LIST)
 				continue;
 			else if (lfgOnly == 1 && !player.isLookingForGroup())
 				continue;

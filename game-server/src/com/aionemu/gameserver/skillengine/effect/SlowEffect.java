@@ -27,13 +27,13 @@ public class SlowEffect extends BufEffect {
 	@Override
 	public void startEffect(Effect effect) {
 		super.startEffect(effect);
-		effect.setAbnormal(AbnormalState.SLOW.getId());
-		effect.getEffected().getEffectController().setAbnormal(AbnormalState.SLOW.getId());
+		effect.setAbnormal(AbnormalState.SLOW);
+		effect.getEffected().getEffectController().setAbnormal(AbnormalState.SLOW);
 	}
 
 	@Override
 	public void endEffect(Effect effect) {
 		super.endEffect(effect);
-		effect.getEffected().getEffectController().unsetAbnormal(AbnormalState.SLOW.getId());
+		effect.getEffected().getEffectController().unsetAbnormal(AbnormalState.SLOW);
 	}
 }

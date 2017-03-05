@@ -18,7 +18,7 @@ public class ItemPart {
 	/**
 	 * @return the itemid
 	 */
-	public int getItemid() {
+	public int getItemId() {
 		return itemid;
 	}
 }

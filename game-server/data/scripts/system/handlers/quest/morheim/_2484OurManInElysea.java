@@ -44,7 +44,7 @@ public class _2484OurManInElysea extends QuestHandler {
 				} else
 					return sendQuestStartDialog(env);
 			}
-		} else if (qs != null && qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 700267:
 					if (qs.getQuestVarById(0) == 0 && env.getDialogActionId() == USE_OBJECT) {
@@ -65,7 +65,7 @@ public class _2484OurManInElysea extends QuestHandler {
 							return sendQuestEndDialog(env);
 					}
 			}
-		} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203331)
 				return sendQuestEndDialog(env);
 		}

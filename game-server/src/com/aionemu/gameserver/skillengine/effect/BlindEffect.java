@@ -31,8 +31,8 @@ public class BlindEffect extends EffectTemplate {
 
 	@Override
 	public void startEffect(Effect effect) {
-		effect.setAbnormal(AbnormalState.BLIND.getId());
-		effect.getEffected().getEffectController().setAbnormal(AbnormalState.BLIND.getId());
+		effect.setAbnormal(AbnormalState.BLIND);
+		effect.getEffected().getEffectController().setAbnormal(AbnormalState.BLIND);
 		AttackCalcObserver acObserver = new AttackStatusObserver(value, AttackStatus.DODGE) {
 
 			@Override
@@ -50,7 +50,7 @@ public class BlindEffect extends EffectTemplate {
 		AttackCalcObserver acObserver = effect.getAttackStatusObserver(position);
 		if (acObserver != null)
 			effect.getEffected().getObserveController().removeAttackCalcObserver(acObserver);
-		effect.getEffected().getEffectController().unsetAbnormal(AbnormalState.BLIND.getId());
+		effect.getEffected().getEffectController().unsetAbnormal(AbnormalState.BLIND);
 	}
 
 }

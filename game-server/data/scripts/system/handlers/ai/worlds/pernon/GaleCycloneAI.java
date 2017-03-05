@@ -47,7 +47,7 @@ public class GaleCycloneAI extends NpcAI {
 		}
 		if (creature instanceof Player) {
 			Player player = (Player) creature;
-			Integer obj = player.getObjectId();
+			int obj = player.getObjectId();
 			GaleCycloneObserver observer = observed.remove(obj);
 			if (observer != null) {
 				player.getObserveController().removeObserver(observer);

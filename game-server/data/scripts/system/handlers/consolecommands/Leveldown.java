@@ -16,7 +16,7 @@ public class Leveldown extends ConsoleCommand {
 	public Leveldown() {
 		super("leveldown", "Levels a player down.");
 
-		setParamInfo("<value> - Levels your target down by the specified number of levels.");
+		setSyntaxInfo("<value> - Levels your target down by the specified number of levels.");
 	}
 
 	@Override

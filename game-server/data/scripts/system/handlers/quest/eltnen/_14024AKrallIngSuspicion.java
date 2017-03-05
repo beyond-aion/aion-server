@@ -54,6 +54,7 @@ public class _14024AKrallIngSuspicion extends QuestHandler {
 		if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204020) {
 				removeQuestItem(env, 182201004, 1);
+				qs.setRewardGroup(0); // group 0 and 1 are identical in templates, set anyway to mute warning
 				return sendQuestEndDialog(env);
 			}
 		} else if (qs.getStatus() != QuestStatus.START) {

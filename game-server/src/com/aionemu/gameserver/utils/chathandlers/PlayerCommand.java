@@ -32,7 +32,7 @@ public abstract class PlayerCommand extends ChatCommand {
 	boolean process(Player player, String... params) {
 
 		if (!validateAccess(player)) {
-			if (player.isGM()) {
+			if (player.isStaff()) {
 				sendInfo(player, "<You need membership level " + getLevel() + " or higher to use " + getAliasWithPrefix() + ">");
 				return true;
 			}

@@ -151,9 +151,7 @@ public class Rewards {
 	}
 
 	public List<Integer> getCollectItemChecks() {
-		if (ccheck == null)
-			ccheck = new FastTable<>();
-		return this.ccheck;
+		return ccheck;
 	}
 
 	public List<Integer> getInventoryItemChecks() {

@@ -38,7 +38,7 @@ public class _2392BeautifulFeather extends QuestHandler {
 					return sendQuestStartDialog(env);
 				}
 			}
-		} else if (qs != null && qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 798085) {
 				if (dialogActionId == QUEST_SELECT) {
 					return sendQuestDialog(env, 1011);
@@ -74,7 +74,7 @@ public class _2392BeautifulFeather extends QuestHandler {
 						return sendQuestDialog(env, 1097);
 				}
 			}
-		} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 798085)
 				return sendQuestEndDialog(env);
 		}

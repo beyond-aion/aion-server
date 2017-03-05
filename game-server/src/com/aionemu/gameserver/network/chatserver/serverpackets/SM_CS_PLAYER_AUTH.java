@@ -21,7 +21,7 @@ public class SM_CS_PLAYER_AUTH extends CsServerPacket {
 		this.accName = player.getAcountName();
 		this.nick = player.getName(true);
 		this.raceId = player.getRace().getRaceId();
-		this.accessLevel = player.getAccessLevel();
+		this.accessLevel = player.getPlayerAccount().getAccessLevel();
 	}
 
 	@Override

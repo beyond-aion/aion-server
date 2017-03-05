@@ -1,12 +1,15 @@
 package com.aionemu.gameserver.ai.handler;
 
 import com.aionemu.gameserver.ai.AIState;
+import com.aionemu.gameserver.ai.AISubState;
 import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.ai.event.AIEventType;
+import com.aionemu.gameserver.ai.manager.AttackManager;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.CustomPlayerState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.gameobjects.state.CreatureVisualState;
 import com.aionemu.gameserver.model.templates.npc.NpcTemplateType;
 import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -37,6 +40,13 @@ public class CreatureEventHandler {
 	 * @param creature
 	 */
 	public static void onCreatureSee(NpcAI npcAI, Creature creature) {
+		if (npcAI.isInSubState(AISubState.TARGET_LOST) && creature.equals(npcAI.getTarget())) { // see target again after hide end
+			npcAI.setSubStateIfNot(AISubState.NONE);
+			if (npcAI.isInState(AIState.FIGHT)) { // continue to attack
+				AttackManager.scheduleNextAttack(npcAI);
+				return;
+			}
+		}
 		checkAggro(npcAI, creature);
 		if (creature instanceof Player) {
 			Player player = (Player) creature;
@@ -49,21 +59,26 @@ public class CreatureEventHandler {
 	 * @param creature
 	 */
 	protected static void checkAggro(NpcAI ai, Creature creature) {
-		Npc owner = ai.getOwner();
-
 		if (ai.isInState(AIState.FIGHT))
+			return;
+
+		if (ai.isInState(AIState.RETURNING))
 			return;
 
 		if (creature.getLifeStats().isAlreadyDead())
 			return;
 
+		if (creature.isInVisualState(CreatureVisualState.BLINKING))
+			return;
+
+		Npc owner = ai.getOwner();
+		if (!owner.isSpawned())
+			return;
+
 		if (!owner.canSee(creature))
 			return;
 
-		if (owner.getEffectController().isAbnormalState(AbnormalState.SANCTUARY))
-			return;
-
-		if (!owner.isSpawned())
+		if (owner.getEffectController().isAbnormalSet(AbnormalState.SANCTUARY))
 			return;
 
 		if (!owner.getPosition().isMapRegionActive())

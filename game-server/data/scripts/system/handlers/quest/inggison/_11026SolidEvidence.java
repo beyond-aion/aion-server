@@ -46,10 +46,8 @@ public class _11026SolidEvidence extends QuestHandler {
 				} else
 					return sendQuestStartDialog(env);
 			}
-		}
-
-		else if (targetId == 798941) {
-			if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 0) {
+		} else if (targetId == 798941) {
+			if (qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 0) {
 				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 1352);
 				else if (env.getDialogActionId() == SETPRO1) {
@@ -60,10 +58,8 @@ public class _11026SolidEvidence extends QuestHandler {
 				} else
 					return sendQuestStartDialog(env);
 			}
-		}
-
-		else if (targetId == 203384) {
-			if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 1) {
+		} else if (targetId == 203384) {
+			if (qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 1) {
 				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 2375);
 				else if (env.getDialogActionId() == SELECT_QUEST_REWARD) {
@@ -73,9 +69,7 @@ public class _11026SolidEvidence extends QuestHandler {
 					return sendQuestDialog(env, 2375);
 				} else
 					return sendQuestStartDialog(env);
-			}
-
-			else if (qs != null && qs.getStatus() == QuestStatus.REWARD)
+			} else if (qs.getStatus() == QuestStatus.REWARD)
 				return sendQuestEndDialog(env);
 		}
 

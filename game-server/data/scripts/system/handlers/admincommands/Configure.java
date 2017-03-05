@@ -1,6 +1,7 @@
 package admincommands;
 
 import java.lang.reflect.Field;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -68,11 +69,11 @@ public class Configure extends AdminCommand {
 		super("configure", "Shows/changes config settings.");
 
 		// @formatter:off
-		setParamInfo(
-			"<list> - Shows a list of available configuration categories.",
-			"<configname> - Lists all available properties of the specified configuration.",
-			"<configname> <property> - Shows the current setting of the specified configuration.",
-			"<configname> <property> <value> - Changes the specified configuration setting to the new value."
+		setSyntaxInfo(
+			"<list> - Shows all available configuration categories.",
+			"<category> - Shows all available properties of the specified configuration.",
+			"<category> <property> - Shows the properties active value.",
+			"<category> <property> <value> - Changes the properties value to the new value."
 		);
 		// @formatter:on
 	}
@@ -99,8 +100,10 @@ public class Configure extends AdminCommand {
 				StringBuilder sb = new StringBuilder("List of available properties for ").append(cls.getSimpleName()).append(":");
 				for (Field field : cls.getDeclaredFields()) {
 					try {
-						String val = String.valueOf(field.get(null)); // can throw an exception if not accessible
-						sb.append("\n\t").append(field.getName()).append("\t-\t(").append(val).append(")");
+						Object value = field.get(null);
+						if (value != null && value.getClass().isArray())
+							value = Arrays.toString((Object[]) value);
+						sb.append("\n\t").append(field.getName()).append("\t=\t").append(value);
 					} catch (IllegalArgumentException | IllegalAccessException e) { // skip this property
 					}
 				}

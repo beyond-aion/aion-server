@@ -47,7 +47,7 @@ public class _18510MurderMyShugo extends QuestHandler {
 					return sendQuestStartDialog(env, 182212009, 1);
 				}
 			}
-		} else if (qs != null && qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			switch (targetId) {
 				case 700953:

@@ -54,8 +54,7 @@ public class _1373WaterTherapy extends QuestHandler {
 		final QuestState qs = player.getQuestStateList().getQuestState(questId);
 
 		if (qs == null || qs.isStartable()) {
-			if (targetId == 203949) // Aerope
-			{
+			if (targetId == 203949) { // Aerope
 				if (dialogActionId == QUEST_SELECT)
 					return sendQuestDialog(env, 1011);
 				else if (dialogActionId == QUEST_ACCEPT_1) {

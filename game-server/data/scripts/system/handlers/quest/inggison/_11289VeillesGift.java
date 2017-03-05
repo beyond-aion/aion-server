@@ -40,7 +40,7 @@ public class _11289VeillesGift extends QuestHandler {
 			} else {
 				return sendQuestStartDialog(env);
 			}
-		} else if (qs != null && qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 799038) {
 				if (dialogActionId == QUEST_SELECT) {
 					if (checkItemExistence(env, 182213147, 1, true)) {
@@ -49,7 +49,7 @@ public class _11289VeillesGift extends QuestHandler {
 					}
 				}
 			}
-		} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 799038) {
 				switch (dialogActionId) {
 					case USE_OBJECT:

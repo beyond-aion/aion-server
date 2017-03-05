@@ -41,7 +41,7 @@ public class _30500Desperation extends QuestHandler {
 						return sendQuestStartDialog(env);
 				}
 			}
-		} else if (qs != null && qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 804879) {
 				switch (dialogActionId) {
 					case QUEST_SELECT:
@@ -53,7 +53,7 @@ public class _30500Desperation extends QuestHandler {
 						return closeDialogWindow(env);
 				}
 			}
-		} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 799670) {
 				return sendQuestEndDialog(env);
 			}

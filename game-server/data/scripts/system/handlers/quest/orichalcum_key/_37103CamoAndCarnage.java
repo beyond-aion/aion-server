@@ -1,9 +1,9 @@
 package quest.orichalcum_key;
 
+import static com.aionemu.gameserver.model.DialogAction.*;
 import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE.STR_MSG_DailyQuest_Ask_Mentee;
 
 import com.aionemu.gameserver.configs.main.GroupConfig;
-import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.actions.NpcActions;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;

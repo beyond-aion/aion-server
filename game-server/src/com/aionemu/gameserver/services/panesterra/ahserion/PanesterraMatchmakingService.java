@@ -307,10 +307,8 @@ public class PanesterraMatchmakingService {
 								if (p.getPlayerClass() == pClass) {
 									if (ely1 == null) {
 										ely1 = p;
-									} else if (ely2 == null){
-										ely2 = p;
-										break;
 									} else {
+										ely2 = p;
 										break;
 									}
 								}
@@ -326,10 +324,8 @@ public class PanesterraMatchmakingService {
 								if (p != null) {
 									if (asmo1 == null) {
 										asmo1 = p;
-									} else if (asmo2 == null) {
-										asmo2 = p;
-										break;
 									} else {
+										asmo2 = p;
 										break;
 									}
 								} else {

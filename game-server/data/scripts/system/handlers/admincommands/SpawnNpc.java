@@ -19,7 +19,7 @@ public class SpawnNpc extends AdminCommand {
 	public SpawnNpc() {
 		super("spawn", "Spawns npcs and gatherables.");
 
-		setParamInfo(
+		setSyntaxInfo(
 			"<id> - Spawns a temporary object with the specified ID.",
 			"<id> <static id> [respawn time] - Spawns an object with the specified ID and static ID (default: temporary spawn, optional: respawn time in seconds)."
 		);

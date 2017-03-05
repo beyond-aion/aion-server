@@ -84,11 +84,9 @@ public class SimpleAttackManager {
 				return;
 			}
 			if (!npc.canSee(target)) {
-				npc.getController().cancelCurrentSkill(null);
-				npcAI.onGeneralEvent(AIEventType.TARGET_GIVEUP);
-				return;
-			}
-			if (!isTargetInAttackRange(npc)) {
+				npc.getController().abortCast();
+				npcAI.onGeneralEvent(AIEventType.TARGET_TOOFAR);
+			} else if (!isTargetInAttackRange(npc)) {
 				npcAI.onGeneralEvent(AIEventType.TARGET_TOOFAR);
 			} else if (!GeoService.getInstance().canSee(npc, target)) { //delete geo check when we've implemented a pathfinding system
 				npc.getController().cancelCurrentSkill(null);

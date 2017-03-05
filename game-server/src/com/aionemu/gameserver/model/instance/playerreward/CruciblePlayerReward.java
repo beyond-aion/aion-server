@@ -11,8 +11,8 @@ public class CruciblePlayerReward extends InstancePlayerReward {
 	private boolean isPlayerLeave = false;
 	private boolean isPlayerDefeated = false;
 
-	public CruciblePlayerReward(Integer object) {
-		super(object);
+	public CruciblePlayerReward(int objectId) {
+		super(objectId);
 	}
 
 	public boolean isRewarded() {

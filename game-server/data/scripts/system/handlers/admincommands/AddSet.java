@@ -64,10 +64,10 @@ public class AddSet extends AdminCommand {
 		}
 
 		for (ItemPart setPart : itemSet.getItempart()) {
-			long count = ItemService.addItem(receiver, setPart.getItemid(), 1);
+			long count = ItemService.addItem(receiver, setPart.getItemId(), 1);
 
 			if (count != 0) {
-				PacketSendUtility.sendMessage(player, "Item " + setPart.getItemid() + " couldn't be added");
+				PacketSendUtility.sendMessage(player, "Item " + setPart.getItemId() + " couldn't be added");
 				return;
 			}
 		}

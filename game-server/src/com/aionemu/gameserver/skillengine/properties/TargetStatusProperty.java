@@ -23,23 +23,17 @@ public class TargetStatusProperty {
 	 * @return
 	 */
 	public static final boolean set(final Skill skill, Properties properties) {
-		if (skill.getEffectedList().size() != 1)
-			return false;
+		// TODO find out why skill 2504-2506 ("Protective Shell") has target_status="STUN STAGGER STUMBLE SPIN OPENAERIAL"
+		if (skill.getSkillTemplate().getStack().equals("RI_PROTECTIONCURTAIN"))
+			return true;
 
-		List<String> targetStatus = properties.getTargetStatus();
+		skill.getEffectedList().removeIf(effected -> !hasAnyAbnormalState(effected, properties.getTargetStatus()));
 
-		Creature effected = skill.getFirstTarget();
-		boolean result = false;
+		// if first target was filtered out (= he had no required abnormal state), the skill cannot be cast
+		return skill.getEffectedList().contains(skill.getFirstTarget());
+	}
 
-		if (skill.getSkillTemplate().getPenaltySkillId() == 8674)// TODO find why(skill_id="3842" name="Protective Shell I"
-																															// target_status="STUN STAGGER STUMBLE SPIN OPENAERIAL")
-			result = true;
-
-		for (String status : targetStatus) {
-			if (effected.getEffectController().isAbnormalSet(AbnormalState.valueOf(status)))
-				result = true;
-		}
-
-		return result;
+	private static boolean hasAnyAbnormalState(Creature creature, List<AbnormalState> states) {
+		return states.stream().anyMatch(state -> creature.getEffectController().isAbnormalSet(state));
 	}
 }

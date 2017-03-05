@@ -60,8 +60,8 @@ public class StaggerEffect extends EffectTemplate {
 		World.getInstance().updatePosition(effected, effect.getTargetX(), effect.getTargetY(), effect.getTargetZ(), effected.getHeading());
 		PacketSendUtility.broadcastPacketAndReceive(effect.getEffected(), new SM_FORCED_MOVE(effect.getEffector(), effect.getEffected().getObjectId(),
 			effect.getTargetX(), effect.getTargetY(), effect.getTargetZ()));
-		effect.getEffected().getEffectController().setAbnormal(AbnormalState.STAGGER.getId());
-		effect.setAbnormal(AbnormalState.STAGGER.getId());
+		effect.getEffected().getEffectController().setAbnormal(AbnormalState.STAGGER);
+		effect.setAbnormal(AbnormalState.STAGGER);
 	}
 
 	@Override
@@ -81,6 +81,6 @@ public class StaggerEffect extends EffectTemplate {
 
 	@Override
 	public void endEffect(Effect effect) {
-		effect.getEffected().getEffectController().unsetAbnormal(AbnormalState.STAGGER.getId());
+		effect.getEffected().getEffectController().unsetAbnormal(AbnormalState.STAGGER);
 	}
 }

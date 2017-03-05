@@ -61,8 +61,8 @@ public class FearEffect extends EffectTemplate {
 		final Creature effector = effect.getEffector();
 		final Creature effected = effect.getEffected();
 		effected.getController().cancelCurrentSkill(effector);
-		effect.setAbnormal(AbnormalState.FEAR.getId());
-		effected.getEffectController().setAbnormal(AbnormalState.FEAR.getId());
+		effect.setAbnormal(AbnormalState.FEAR);
+		effected.getEffectController().setAbnormal(AbnormalState.FEAR);
 
 		// PacketSendUtility.broadcastPacketAndReceive(effected, new SM_TARGET_IMMOBILIZE(effected));
 		effected.getMoveController().abortMove();
@@ -92,7 +92,7 @@ public class FearEffect extends EffectTemplate {
 
 	@Override
 	public void endEffect(Effect effect) {
-		effect.getEffected().getEffectController().unsetAbnormal(AbnormalState.FEAR.getId());
+		effect.getEffected().getEffectController().unsetAbnormal(AbnormalState.FEAR);
 
 		// for now we support only players
 		if (GeoDataConfig.FEAR_ENABLE) {

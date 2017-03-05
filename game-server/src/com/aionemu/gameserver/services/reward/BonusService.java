@@ -71,27 +71,25 @@ public class BonusService {
 
 	public BonusItemGroup getRandomGroup(BonusItemGroup[] groups) {
 		float total = 0;
-		
+
 		if (groups == null)
 			return null;
 
 		for (BonusItemGroup gr : groups)
 			total += gr.getChance();
-		
+
 		if (total == 0)
 			return null;
 
 		BonusItemGroup chosenGroup = null;
-		if (groups != null) {
-			int percent = 100;
-			for (BonusItemGroup gr : groups) {
-				float chance = getNormalizedChance(gr.getChance(), total);
-				if (Rnd.get(0, percent) <= chance) {
-					chosenGroup = gr;
-					break;
-				} else
-					percent -= chance;
-			}
+		int percent = 100;
+		for (BonusItemGroup gr : groups) {
+			float chance = getNormalizedChance(gr.getChance(), total);
+			if (Rnd.get(0, percent) <= chance) {
+				chosenGroup = gr;
+				break;
+			} else
+				percent -= chance;
 		}
 		return chosenGroup;
 	}
@@ -106,7 +104,7 @@ public class BonusService {
 
 	public QuestItems getQuestBonus(Player player, QuestTemplate questTemplate) {
 		List<QuestBonuses> bonuses = questTemplate.getBonus();
-		
+
 		if (bonuses.isEmpty())
 			return null;
 
@@ -152,21 +150,21 @@ public class BonusService {
 			}
 		}
 
-		if (group == null)
+		if (group == null || allRewards == null)
 			return null;
-		
+
 		List<ItemRaceEntry> finalList = new FastTable<>();
 		for (ItemRaceEntry allReward : allRewards) {
 			ItemRaceEntry r = allReward;
 			ItemTemplate template = DataManager.ITEM_DATA.getItemTemplate(r.getId());
-			
+
 			if (template == null) {
 				log.warn("Item " + r.getId() + " absent in ItemTemplate");
 				continue;
 			}
 			if (!r.checkRace(player.getCommonData().getRace()))
 				continue;
-			
+
 			finalList.add(r);
 		}
 
@@ -184,7 +182,7 @@ public class BonusService {
 
 	private QuestItems getEventLegendarySymphonyBonus(Player player, QuestBonuses bonus) {
 		List<FullRewardItem> possibleRewards = new ArrayList<>();
-		
+
 		float total = 0;
 		for (FullRewardItem fRI : itemGroups.getEventLegendarySymphony().getItems()) {
 			if (fRI.getLevel() != bonus.getLevel()) {
@@ -193,30 +191,30 @@ public class BonusService {
 			total += fRI.getChance();
 			possibleRewards.add(fRI);
 		}
-		
+
 		if (total == 0)
 			return null;
-		
+
 		float rnd = Rnd.get() * total;
 		float luck = 0;
-		
+
 		for (FullRewardItem fRI : possibleRewards) {
 			luck += fRI.getChance();
-			
+
 			if (rnd <= luck) {
 				return new QuestItems(fRI.getId(), fRI.getCount());
 			}
 		}
 		return null;
 	}
-	
+
 	private QuestItems getMedalBonus(Player player, QuestTemplate template) {
 		BonusItemGroup[] groups = itemGroups.getMedalGroups();
 		MedalGroup group = (MedalGroup) getRandomGroup(groups);
 		FullRewardItem finalReward = null;
 		int bonusLevel = template.getBonus().get(0).getLevel();
 		float total = 0;
-		
+
 		for (FullRewardItem medal : group.getItems()) {
 			if (medal.getLevel() == bonusLevel)
 				total += medal.getChance();
@@ -230,7 +228,7 @@ public class BonusService {
 		for (FullRewardItem medal : group.getItems()) {
 			if (medal.getLevel() != bonusLevel)
 				continue;
-			
+
 			luck += medal.getChance();
 			if (rnd <= luck) {
 				finalReward = medal;
@@ -244,40 +242,40 @@ public class BonusService {
 		ManastoneGroup group = (ManastoneGroup) getRandomGroup(BonusType.MANASTONE);
 		ItemRaceEntry[] allRewards = group.getRewards();
 		List<ItemRaceEntry> finalList = new FastTable<>();
-		
+
 		for (ItemRaceEntry r : allRewards) {
 			ItemTemplate template = DataManager.ITEM_DATA.getItemTemplate(r.getId());
-			
+
 			if (bonus.getLevel() != template.getLevel())
 				continue;
-			
+
 			finalList.add(r);
 		}
-		
+
 		if (finalList.isEmpty())
 			return null;
 
 		ItemRaceEntry reward = Rnd.get(finalList);
 		return new QuestItems(reward.getId(), 1);
 	}
-	
+
 	private QuestItems getMedicineBonus(Player player, QuestBonuses bonus) {
-		MedicineGroup group = (MedicineGroup)getRandomGroup(BonusType.MEDICINE);
+		MedicineGroup group = (MedicineGroup) getRandomGroup(BonusType.MEDICINE);
 		ItemRaceEntry[] allRewards = group.getRewards();
 		List<ItemRaceEntry> finalList = new FastTable<>();
-		
+
 		for (ItemRaceEntry r : allRewards) {
 			ItemTemplate template = DataManager.ITEM_DATA.getItemTemplate(r.getId());
-			
+
 			if (bonus.getLevel() != template.getLevel())
 				continue;
-			
+
 			finalList.add(r);
 		}
-		
+
 		if (finalList.isEmpty())
 			return null;
-		
+
 		ItemRaceEntry reward = Rnd.get(finalList);
 		return new QuestItems(reward.getId(), 1);
 	}

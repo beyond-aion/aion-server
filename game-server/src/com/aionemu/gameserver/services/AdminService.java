@@ -19,7 +19,6 @@ import javolution.util.FastTable;
  */
 public class AdminService {
 
-	private final Logger log = LoggerFactory.getLogger(AdminService.class);
 	private static final Logger itemLog = LoggerFactory.getLogger("GMITEMRESTRICTION");
 	private FastTable<Integer> list;
 	private static AdminService instance = new AdminService();
@@ -30,13 +29,11 @@ public class AdminService {
 
 	public AdminService() {
 		list = new FastTable<>();
-		if (AdminConfig.ENABLE_TRADEITEM_RESTRICTION)
-			reload();
+		reload();
 	}
 
 	public void reload() {
-		if (list.size() > 0)
-			list.clear();
+		list.clear();
 
 		try (BufferedReader br = new BufferedReader(new FileReader("./config/administration/item.restriction.txt"))) {
 			String line = null;
@@ -50,7 +47,7 @@ public class AdminService {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		log.info("AdminService loaded " + list.size() + " operational items.");
+		LoggerFactory.getLogger(AdminService.class).info("AdminService loaded " + list.size() + " operational items.");
 	}
 
 	public boolean canOperate(Player player, Player target, Item item, String type) {
@@ -58,23 +55,21 @@ public class AdminService {
 	}
 
 	public boolean canOperate(Player player, Player target, int itemId, String type) {
-		if (!AdminConfig.ENABLE_TRADEITEM_RESTRICTION)
+		if (!player.isStaff())
 			return true;
 
-		if (target != null && target.getAccessLevel() > 0) // allow between gms
+		if (player.hasAccess(AdminConfig.UNRESTRICTED_ITEMTRADE)) // staff member is allowed to trade with who ever he wants to
 			return true;
 
-		if (player.getAccessLevel() > 0 && player.getAccessLevel() < 4) { // run check only for 1-3 level gms
-			boolean value = list.contains(itemId);
-			String str = "GM " + player.getName() + "|" + player.getObjectId() + " (" + type + "): " + itemId + "|result=" + value;
-			if (target != null)
-				str += "|target=" + target.getName() + "|" + target.getObjectId();
-			itemLog.info(str);
-			if (!value)
-				PacketSendUtility.sendMessage(player, "You cannot use " + type + " with this item.");
-
-			return value;
-		} else
+		if (target != null && target.isStaff()) // allow between server staff
 			return true;
+
+		if (list.contains(itemId)) { // item goes from staff member to normal player, so log it
+			itemLog.info(player + " traded item " + itemId + " via " + type + (target != null ? " to player " + target : ""));
+			return true;
+		}
+
+		PacketSendUtility.sendMessage(player, "You cannot use " + type + " with this item.");
+		return false;
 	}
 }

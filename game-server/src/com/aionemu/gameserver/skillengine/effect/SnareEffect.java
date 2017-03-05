@@ -27,13 +27,13 @@ public class SnareEffect extends BufEffect {
 	@Override
 	public void endEffect(Effect effect) {
 		super.endEffect(effect);
-		effect.getEffected().getEffectController().unsetAbnormal(AbnormalState.SNARE.getId());
+		effect.getEffected().getEffectController().unsetAbnormal(AbnormalState.SNARE);
 	}
 
 	@Override
 	public void startEffect(Effect effect) {
 		super.startEffect(effect);
-		effect.getEffected().getEffectController().setAbnormal(AbnormalState.SNARE.getId());
-		effect.setAbnormal(AbnormalState.SNARE.getId());
+		effect.getEffected().getEffectController().setAbnormal(AbnormalState.SNARE);
+		effect.setAbnormal(AbnormalState.SNARE);
 	}
 }

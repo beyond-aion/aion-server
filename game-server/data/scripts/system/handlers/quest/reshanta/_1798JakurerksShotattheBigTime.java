@@ -48,11 +48,9 @@ public class _1798JakurerksShotattheBigTime extends QuestHandler {
 					return sendQuestDialog(env, 4762);
 				else
 					return sendQuestStartDialog(env);
-			} else if (qs != null && qs.getStatus() == QuestStatus.REWARD)
+			} else if (qs.getStatus() == QuestStatus.REWARD)
 				return sendQuestEndDialog(env);
-		}
-
-		else if (qs != null && qs.getStatus() == QuestStatus.START) {
+		} else if (qs != null && qs.getStatus() == QuestStatus.START) {
 			if (targetId == 263568) {
 				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 1011);
@@ -62,9 +60,7 @@ public class _1798JakurerksShotattheBigTime extends QuestHandler {
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 					return true;
 				}
-			}
-
-			else if (targetId == 263266) {
+			} else if (targetId == 263266) {
 				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 1352);
 				else if (env.getDialogActionId() == SETPRO2) {
@@ -73,9 +69,7 @@ public class _1798JakurerksShotattheBigTime extends QuestHandler {
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 					return true;
 				}
-			}
-
-			else if (targetId == 264768) {
+			} else if (targetId == 264768) {
 				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 1693);
 				else if (env.getDialogActionId() == SETPRO3) {
@@ -84,9 +78,7 @@ public class _1798JakurerksShotattheBigTime extends QuestHandler {
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 					return true;
 				}
-			}
-
-			else if (targetId == 271053) {
+			} else if (targetId == 271053) {
 				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 2035);
 				else if (env.getDialogActionId() == SETPRO4) {
@@ -95,9 +87,7 @@ public class _1798JakurerksShotattheBigTime extends QuestHandler {
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 					return true;
 				}
-			}
-
-			else if (targetId == 266553) {
+			} else if (targetId == 266553) {
 				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 2375);
 				else if (env.getDialogActionId() == SETPRO5) {
@@ -106,9 +96,7 @@ public class _1798JakurerksShotattheBigTime extends QuestHandler {
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 					return true;
 				}
-			}
-
-			else if (targetId == 270151) {
+			} else if (targetId == 270151) {
 				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 2716);
 				else if (env.getDialogActionId() == SETPRO6) {
@@ -117,9 +105,7 @@ public class _1798JakurerksShotattheBigTime extends QuestHandler {
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 					return true;
 				}
-			}
-
-			else if (targetId == 269251) {
+			} else if (targetId == 269251) {
 				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 3057);
 				else if (env.getDialogActionId() == SETPRO7) {
@@ -128,9 +114,7 @@ public class _1798JakurerksShotattheBigTime extends QuestHandler {
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 					return true;
 				}
-			}
-
-			else if (targetId == 268051) {
+			} else if (targetId == 268051) {
 				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 3398);
 				else if (env.getDialogActionId() == SETPRO8) {
@@ -139,9 +123,7 @@ public class _1798JakurerksShotattheBigTime extends QuestHandler {
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 					return true;
 				}
-			}
-
-			else if (targetId == 260235) {
+			} else if (targetId == 260235) {
 				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 3740);
 				else if (env.getDialogActionId() == SET_SUCCEED) {

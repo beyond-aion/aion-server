@@ -21,9 +21,9 @@ public class Visible extends ConsoleCommand {
 	@Override
 	public void execute(Player player, String... params) {
 		if (player.isInVisualState(CreatureVisualState.HIDE20)) {
-			player.getController().onHideEnd(); // must go before updating visual state
-			player.getEffectController().unsetAbnormal(AbnormalState.HIDE.getId());
+			player.getEffectController().unsetAbnormal(AbnormalState.HIDE);
 			player.unsetVisualState(CreatureVisualState.HIDE20);
+			player.getController().onHideEnd();
 			PacketSendUtility.broadcastPacket(player, new SM_PLAYER_STATE(player), true);
 		}
 		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_EFFECT_INVISIBLE_END());

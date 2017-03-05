@@ -36,8 +36,7 @@ public class _3093RecetteSecretedeQuenelles extends QuestHandler {
 			targetId = ((Npc) env.getVisibleObject()).getNpcId();
 		final QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs == null || qs.isStartable()) {
-			if (targetId == 798185) // Bororinerk
-			{
+			if (targetId == 798185) { // Bororinerk
 				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 1011);
 				else if (env.getDialogActionId() == QUEST_ACCEPT_1) {
@@ -48,8 +47,7 @@ public class _3093RecetteSecretedeQuenelles extends QuestHandler {
 				else
 					return sendQuestStartDialog(env);
 			}
-		} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) // Reward
-		{
+		} else if (qs.getStatus() == QuestStatus.REWARD) { // Reward
 			if (env.getDialogActionId() == QUEST_SELECT)
 				return sendQuestDialog(env, 2375);
 			else if (env.getDialogActionId() == SELECT_QUEST_REWARD) {
@@ -57,12 +55,9 @@ public class _3093RecetteSecretedeQuenelles extends QuestHandler {
 				return sendQuestEndDialog(env);
 			} else
 				return sendQuestEndDialog(env);
-		}
+		} else if (targetId == 798177) { // Gastak
 
-		else if (targetId == 798177) // Gastak
-		{
-
-			if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 1) {
+			if (qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 1) {
 				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 1352);
 				else if (env.getDialogActionId() == SETPRO1) {
@@ -74,11 +69,8 @@ public class _3093RecetteSecretedeQuenelles extends QuestHandler {
 					return sendQuestStartDialog(env);
 			}
 
-		}
-
-		else if (targetId == 798179) // Jabala
-		{
-			if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 2) {
+		} else if (targetId == 798179) { // Jabala
+			if (qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 2) {
 				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 1693);
 				else if (env.getDialogActionId() == SETPRO2) {
@@ -89,11 +81,8 @@ public class _3093RecetteSecretedeQuenelles extends QuestHandler {
 				} else
 					return sendQuestStartDialog(env);
 			}
-		}
-
-		else if (targetId == 203784) // Hestia
-		{
-			if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 3) {
+		} else if (targetId == 203784) { // Hestia
+			if (qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 3) {
 				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 2034);
 				else if (env.getDialogActionId() == SETPRO3) {

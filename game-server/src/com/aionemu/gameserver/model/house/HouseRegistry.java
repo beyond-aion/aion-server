@@ -259,7 +259,7 @@ public class HouseRegistry {
 		}
 	}
 
-	public void discardObject(Integer objectId) {
+	public void discardObject(int objectId) {
 		objects.remove(objectId);
 	}
 

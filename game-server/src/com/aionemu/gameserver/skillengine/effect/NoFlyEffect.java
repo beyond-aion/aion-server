@@ -31,12 +31,12 @@ public class NoFlyEffect extends EffectTemplate {
 	public void startEffect(Effect effect) {
 		((Player) effect.getEffected()).getFlyController().endFly(true);
 
-		effect.setAbnormal(AbnormalState.NOFLY.getId());
-		effect.getEffected().getEffectController().setAbnormal(AbnormalState.NOFLY.getId());
+		effect.setAbnormal(AbnormalState.NOFLY);
+		effect.getEffected().getEffectController().setAbnormal(AbnormalState.NOFLY);
 	}
 
 	@Override
 	public void endEffect(Effect effect) {
-		effect.getEffected().getEffectController().unsetAbnormal(AbnormalState.NOFLY.getId());
+		effect.getEffected().getEffectController().unsetAbnormal(AbnormalState.NOFLY);
 	}
 }

@@ -17,7 +17,7 @@ public class MapCommand extends AdminCommand {
 		super("map", "Offers different functions for the current map instance.");
 
 		// @formatter:off
-		setParamInfo(
+		setSyntaxInfo(
 			"<freeze|unfreeze> - (Un)freezes all npcs on this map instance.",
 			"<stats> - Shows peak movement broadcast counts for all maps."
 		);

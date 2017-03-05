@@ -164,7 +164,7 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 	}
 
 	private boolean canJoin(Player p) {
-		if (p.isGM()) {
+		if (p.isStaff()) {
 			return true;
 		} else if (!canJoin.get() || p.getController().hasScheduledTask(TaskId.SKILL_USE)) {
 			PacketSendUtility.sendMessage(p, "You cannot enter the PvP-Map now.");
@@ -194,7 +194,7 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 	}
 
 	private synchronized void updateJoinOrLeaveTime(Player p) {
-		if (!p.isGM())
+		if (!p.isStaff())
 			joinOrLeaveTime.put(p.getObjectId(), System.currentTimeMillis());
 	}
 
@@ -233,7 +233,7 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 	}
 
 	private void announceDeath(final Player player) {
-		if (!player.isGM() && player.getAbyssRank() != null) {
+		if (!player.isStaff() && player.getAbyssRank() != null) {
 			int zoneNameId = getZoneNameId(player);
 			if (zoneNameId > 0)
 				PacketSendUtility.broadcastToMap(instance,
@@ -245,7 +245,7 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 
 	@Override
 	public void onEnterInstance(Player player) {
-		if (!player.isGM()) {
+		if (!player.isStaff()) {
 			updateJoinOrLeaveTime(player);
 			instance.forEachPlayer(p -> {
 				if (!p.equals(player))
@@ -298,7 +298,7 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 		byte asmodians = 0;
 		byte elyos = 0;
 		for (Player player : instance.getPlayersInside()) {
-			if (player.isGM()) {
+			if (player.isStaff()) {
 				continue;
 			} else if (player.getRace() == Race.ASMODIANS) {
 				asmodians++;
@@ -315,7 +315,7 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 	public int getParticipantsSize() {
 		int playerCount = 0;
 		for (Player p : instance.getPlayersInside()) {
-			if (!p.isGM()) {
+			if (!p.isStaff()) {
 				playerCount++;
 			}
 		}

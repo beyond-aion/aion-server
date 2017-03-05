@@ -133,7 +133,7 @@ public class League extends GeneralTeam<PlayerAlliance, LeagueMember> {
 	 *
 	 * @return player object
 	 */
-	public Player getPlayerMember(Integer playerObjId) {
+	public Player getPlayerMember(int playerObjId) {
 		for (PlayerAlliance member : getMembers()) {
 			PlayerAllianceMember playerMember = member.getMember(playerObjId);
 			if (playerMember != null) {

@@ -199,7 +199,7 @@ public final class PlayerEnterWorldService {
 			return;
 		}
 
-		if (SecurityConfig.DUALBOXING && !player.isGM()) {
+		if (SecurityConfig.DUALBOXING && !player.isStaff()) {
 			boolean[] kick = { false };
 			World.getInstance().forEachPlayer(new Consumer<Player>() {
 
@@ -210,7 +210,7 @@ public final class PlayerEnterWorldService {
 				@Override
 				public void accept(Player visitor) {
 					final AionConnection vCon = visitor.getClientConnection();
-					if (visitor.equals(player) || visitor.isGM() || vCon == null)
+					if (visitor.equals(player) || visitor.isStaff() || vCon == null)
 						return;
 
 					boolean sameMac = pMac.equals(vCon.getMacAddress());
@@ -326,7 +326,7 @@ public final class PlayerEnterWorldService {
 
 		InstanceService.onPlayerLogin(player);
 		// Update player skills first!!!
-		if (player.getAccessLevel() >= AdminConfig.GM_SKILLS)
+		if (player.hasAccess(AdminConfig.GM_SKILLS))
 			GMService.getInstance().addGmSkills(player);
 		AbyssSkillService.updateSkills(player);
 		ListSplitter<PlayerSkillEntry> splitter = new ListSplitter<>(player.getSkillList().getAllSkills(), 700, false); // split every 700 (729 worked,

@@ -33,13 +33,13 @@ public class SleepEffect extends EffectTemplate {
 		effected.getController().cancelCurrentSkill(effect.getEffector());
 		if (effected instanceof Player)
 			((Player) effected).getFlyController().onStopGliding();
-		effect.setAbnormal(AbnormalState.SLEEP.getId());
-		effected.getEffectController().setAbnormal(AbnormalState.SLEEP.getId());
+		effect.setAbnormal(AbnormalState.SLEEP);
+		effected.getEffectController().setAbnormal(AbnormalState.SLEEP);
 		effect.setCancelOnDmg(true);
 	}
 
 	@Override
 	public void endEffect(Effect effect) {
-		effect.getEffected().getEffectController().unsetAbnormal(AbnormalState.SLEEP.getId());
+		effect.getEffected().getEffectController().unsetAbnormal(AbnormalState.SLEEP);
 	}
 }

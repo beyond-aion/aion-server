@@ -17,6 +17,7 @@ import com.aionemu.gameserver.model.team.alliance.callback.PlayerAllianceCreateC
 import com.aionemu.gameserver.model.team.alliance.callback.PlayerAllianceDisbandCallback;
 import com.aionemu.gameserver.model.team.alliance.events.AllianceDisbandEvent;
 import com.aionemu.gameserver.model.team.alliance.events.AssignViceCaptainEvent;
+import com.aionemu.gameserver.model.team.alliance.events.AssignViceCaptainEvent.AssignType;
 import com.aionemu.gameserver.model.team.alliance.events.ChangeAllianceLeaderEvent;
 import com.aionemu.gameserver.model.team.alliance.events.ChangeAllianceLootRulesEvent;
 import com.aionemu.gameserver.model.team.alliance.events.ChangeMemberGroupEvent;
@@ -27,11 +28,10 @@ import com.aionemu.gameserver.model.team.alliance.events.PlayerAllianceUpdateEve
 import com.aionemu.gameserver.model.team.alliance.events.PlayerConnectedEvent;
 import com.aionemu.gameserver.model.team.alliance.events.PlayerDisconnectedEvent;
 import com.aionemu.gameserver.model.team.alliance.events.PlayerEnteredEvent;
-import com.aionemu.gameserver.model.team.alliance.events.AssignViceCaptainEvent.AssignType;
+import com.aionemu.gameserver.model.team.common.events.PlayerLeavedEvent.LeaveReson;
 import com.aionemu.gameserver.model.team.common.events.ShowBrandEvent;
 import com.aionemu.gameserver.model.team.common.events.TeamCommand;
 import com.aionemu.gameserver.model.team.common.events.TeamKinahDistributionEvent;
-import com.aionemu.gameserver.model.team.common.events.PlayerLeavedEvent.LeaveReson;
 import com.aionemu.gameserver.model.team.common.legacy.LootGroupRules;
 import com.aionemu.gameserver.model.team.common.legacy.PlayerAllianceEvent;
 import com.aionemu.gameserver.model.team.group.PlayerGroup;
@@ -221,7 +221,7 @@ public class PlayerAllianceService {
 		}
 	}
 
-	public static final PlayerAlliance searchAlliance(Integer playerObjId) {
+	public static final PlayerAlliance searchAlliance(int playerObjId) {
 		for (PlayerAlliance alliance : alliances.values()) {
 			if (alliance.hasMember(playerObjId)) {
 				return alliance;

@@ -40,7 +40,7 @@ public class _2850OfficerObliteration extends QuestHandler {
 				} else {
 					return sendQuestStartDialog(env);
 				}
-			} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
+			} else if (qs.getStatus() == QuestStatus.REWARD) {
 				if (env.getTargetId() == 278001) {
 					if (env.getDialogActionId() == USE_OBJECT) {
 						return sendQuestDialog(env, 1352);

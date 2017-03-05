@@ -35,20 +35,16 @@ public class _2307IrresistibleSoup extends QuestHandler {
 		if (env.getVisibleObject() instanceof Npc)
 			targetId = ((Npc) env.getVisibleObject()).getNpcId();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		if (targetId == 204378) // Favyr
-		{
+		if (targetId == 204378) { // Favyr
 			if (qs == null || qs.isStartable()) {
 				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 4762);
 				else
 					return sendQuestStartDialog(env);
-			}
-
-			else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
+			} else if (qs.getStatus() == QuestStatus.REWARD) {
 				return sendQuestEndDialog(env);
 			}
-		} else if (targetId == 204336) // Spedor
-		{
+		} else if (targetId == 204336) { // Spedor
 			if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 1) {
 				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 1011);
@@ -76,9 +72,7 @@ public class _2307IrresistibleSoup extends QuestHandler {
 				} else
 					return sendQuestStartDialog(env);
 			}
-		}
-
-		else if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 0) {
+		} else if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 0) {
 			switch (targetId) {
 				case 700247: // Aromatic Soup
 					if (qs.getQuestVarById(0) == 0 && env.getDialogActionId() == USE_OBJECT) {

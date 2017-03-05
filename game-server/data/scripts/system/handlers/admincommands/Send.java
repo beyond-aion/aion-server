@@ -43,7 +43,7 @@ public class Send extends AdminCommand {
 	public Send() {
 		super("send", "Sends custom packets.");
 
-		setParamInfo("<file> - Sends packets to your client, based on the ./data/packets/<file>.xml template.");
+		setSyntaxInfo("<file> - Sends packets to your client, based on the ./data/packets/<file>.xml template.");
 	}
 
 	@Override

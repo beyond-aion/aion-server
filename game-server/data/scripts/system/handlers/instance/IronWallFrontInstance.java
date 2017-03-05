@@ -72,8 +72,8 @@ public class IronWallFrontInstance extends GeneralInstanceHandler {
 		ironWallFrontReward.addPlayerReward(new IronWallFrontPlayerReward(player.getObjectId(), player.getRace()));
 	}
 
-	private boolean containPlayer(Integer object) {
-		return ironWallFrontReward.containPlayer(object);
+	private boolean containPlayer(int objectId) {
+		return ironWallFrontReward.containPlayer(objectId);
 	}
 
 	@Override

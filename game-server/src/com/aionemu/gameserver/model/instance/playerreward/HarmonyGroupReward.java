@@ -15,8 +15,8 @@ public class HarmonyGroupReward extends PvPArenaPlayerReward {
 	private int id;
 	private AutoGroupType agt;
 
-	public HarmonyGroupReward(Integer object, int timeBonus, byte buffId, List<AGPlayer> players, AutoGroupType agt) {
-		super(object, timeBonus, buffId);
+	public HarmonyGroupReward(int objectId, int timeBonus, byte buffId, List<AGPlayer> players, AutoGroupType agt) {
+		super(objectId, timeBonus, buffId);
 		this.players = players;
 		id = IDFactory.getInstance().nextId();
 		this.agt = agt;
@@ -30,18 +30,18 @@ public class HarmonyGroupReward extends PvPArenaPlayerReward {
 		return players;
 	}
 
-	public boolean containPlayer(Integer object) {
+	public boolean containPlayer(int objectId) {
 		for (AGPlayer agp : players) {
-			if (agp.getObjectId().equals(object)) {
+			if (agp.getObjectId() == objectId) {
 				return true;
 			}
 		}
 		return false;
 	}
 
-	public AGPlayer getAGPlayer(Integer object) {
+	public AGPlayer getAGPlayer(int objectId) {
 		for (AGPlayer agp : players) {
-			if (agp.getObjectId().equals(object)) {
+			if (agp.getObjectId() == objectId) {
 				return agp;
 			}
 		}

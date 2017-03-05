@@ -28,11 +28,11 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.restrictions.RestrictionsManager;
 import com.aionemu.gameserver.services.item.ItemFactory;
 import com.aionemu.gameserver.services.item.ItemPacketService;
-import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.taskmanager.AbstractFIFOPeriodicTaskManager;
 import com.aionemu.gameserver.taskmanager.tasks.TemporaryTradeTimeTask;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
+import com.aionemu.gameserver.utils.idfactory.IDFactory;
 
 import javolution.util.FastTable;
 
@@ -340,7 +340,7 @@ public class ExchangeService {
 			if (exchange != null && releaseIds) {
 				for (ExchangeItem item : exchange.getItems().values()) {
 					if (item.getItemObjId() != item.getItem().getObjectId() && player.getInventory().getItemByObjId(item.getItem().getObjectId()) == null)
-						ItemService.releaseItemId(item.getItem()); // release ID if it was a newly allocated one
+						IDFactory.getInstance().releaseId(item.getItem().getObjectId()); // release ID if it was a newly allocated one
 				}
 			}
 
@@ -374,7 +374,7 @@ public class ExchangeService {
 				exchangeItem.setItem(itemInInventory);
 				// release when only part stack was added in the beginning -> full stack in the end
 				if (item.getObjectId() != exchangeItem.getItemObjId()) {
-					ItemService.releaseItemId(item);
+					IDFactory.getInstance().releaseId(item.getObjectId());
 				}
 				PacketSendUtility.sendPacket(player, new SM_DELETE_ITEM(itemInInventory.getObjectId()));
 			}

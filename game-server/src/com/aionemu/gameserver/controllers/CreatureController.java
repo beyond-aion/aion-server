@@ -1,6 +1,7 @@
 package com.aionemu.gameserver.controllers;
 
 import java.util.List;
+import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Future;
 
@@ -63,7 +64,7 @@ import com.aionemu.gameserver.world.zone.ZoneUpdateService;
  * @author -Nemesiss-, ATracer(2009-09-29), Sarynth
  * @modified by Wakizashi
  */
-public abstract class CreatureController<T extends Creature> extends VisibleObjectController<Creature> {
+public abstract class CreatureController<T extends Creature> extends VisibleObjectController<T> {
 
 	private static final Logger log = LoggerFactory.getLogger(CreatureController.class);
 	private ConcurrentHashMap<Integer, Future<?>> tasks = new ConcurrentHashMap<>();
@@ -71,8 +72,29 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 	@Override
 	public void notSee(VisibleObject object, ObjectDeleteAnimation animation) {
 		super.notSee(object, animation);
-		if (object.equals(getOwner().getTarget()))
+		if (object.equals(getOwner().getTarget()) && getOwner().getAi().getSubState() != AISubState.TARGET_LOST)
 			getOwner().setTarget(null);
+	}
+
+	@Override
+	public void notKnow(VisibleObject object) {
+		super.notKnow(object);
+		if (object instanceof Creature)
+			getOwner().getAggroList().remove((Creature) object);
+	}
+
+	/**
+	 * Removes owner from the visualObjects lists of all known objects who can't see him anymore.
+	 */
+	public void onHide() {
+		getOwner().getKnownList().forEachObject(other -> other.getKnownList().updateVisibleObject(getOwner()));
+	}
+
+	/**
+	 * Re-adds owner to the visualObjects lists of all known objects.
+	 */
+	public void onHideEnd() {
+		getOwner().getKnownList().forEachObject(other -> other.getKnownList().updateVisibleObject(getOwner()));
 	}
 
 	/**
@@ -365,36 +387,21 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 	public void onDialogSelect(int dialogActionId, int prevDialogId, Player player, int questId, int extendedRewardIndex) {
 	}
 
-	/**
-	 * @param taskId
-	 * @return
-	 */
-	public Future<?> getTask(TaskId taskId) {
-		return tasks.get(taskId.ordinal());
-	}
-
-	/**
-	 * @param taskId
-	 * @return
-	 */
 	public boolean hasTask(TaskId taskId) {
 		return tasks.containsKey(taskId.ordinal());
 	}
 
-	/**
-	 * @param taskId
-	 * @return
-	 */
 	public boolean hasScheduledTask(TaskId taskId) {
 		Future<?> task = tasks.get(taskId.ordinal());
-		return task != null ? !task.isDone() : false;
+		return task != null && !task.isDone();
 	}
 
-	/**
-	 * @param taskId
-	 */
+	public Future<?> getAndRemoveTask(TaskId taskId) {
+		return tasks.remove(taskId.ordinal());
+	}
+
 	public Future<?> cancelTask(TaskId taskId) {
-		Future<?> task = tasks.remove(taskId.ordinal());
+		Future<?> task = getAndRemoveTask(taskId);
 		if (task != null) {
 			task.cancel(false);
 		}
@@ -413,16 +420,22 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 	}
 
 	/**
-	 * Cancel all tasks associated with this controller (when deleting object)
+	 * Cancel all tasks associated with this controller, except the respawn task (when deleting object)
 	 */
 	public void cancelAllTasks() {
-		for (int i : tasks.keySet()) {
-			Future<?> task = tasks.get(i);
-			if (task != null && i != TaskId.RESPAWN.ordinal()) {
-				task.cancel(false);
+		Future<?> respawnTask = null;
+		for (Entry<Integer, Future<?>> e : tasks.entrySet()) {
+			Future<?> task = e.getValue();
+			if (task != null) {
+				if (e.getKey() == TaskId.RESPAWN.ordinal())
+					respawnTask = task;
+				else
+					task.cancel(false);
 			}
 		}
 		tasks.clear();
+		if (respawnTask != null) // re-associate task with controller
+			addTask(TaskId.RESPAWN, respawnTask);
 	}
 
 	@Override
@@ -497,18 +510,19 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 		});
 	}
 
-	public void abortCast() {
+	public Skill abortCast() {
 		Creature creature = getOwner();
-		Skill skill = creature.getCastingSkill();
-		if (skill == null)
-			return;
-		creature.setCasting(null);
-		if (creature instanceof Npc) {
-			removeQueuedSkill((Npc) creature);
-			((Npc) creature).getGameStats().setLastSkill(null);
+		Skill castingSkill = creature.getCastingSkill();
+		if (castingSkill != null) {
+			castingSkill.cancelCast();
+			creature.setCasting(null);
+			if (creature instanceof Npc) {
+				((NpcAI) creature.getAi()).setSubStateIfNot(AISubState.NONE);
+				removeQueuedSkill((Npc) creature);
+				((Npc) creature).getGameStats().setLastSkill(null);
+			}
 		}
-		if (creature.getSkillNumber() > 0)
-			creature.setSkillNumber(creature.getSkillNumber() - 1);
+		return castingSkill;
 	}
 
 	public void cancelCurrentSkill(Creature lastAttacker) {
@@ -519,26 +533,14 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 	 * Cancel current skill and remove cooldown
 	 */
 	public void cancelCurrentSkill(Creature lastAttacker, SM_SYSTEM_MESSAGE msg) {
-		if (getOwner().getCastingSkill() == null) {
+		Skill castingSkill = abortCast();
+		if (castingSkill == null)
 			return;
-		}
 
-		Creature creature = getOwner();
-		Skill castingSkill = creature.getCastingSkill();
-		castingSkill.cancelCast();
-		creature.removeSkillCoolDown(castingSkill.getSkillTemplate().getCooldownId());
-		creature.setCasting(null);
-		if (creature instanceof Npc) {
-			removeQueuedSkill((Npc) creature);
-			((Npc) creature).getGameStats().setLastSkill(null);
-		}
-		PacketSendUtility.broadcastPacketAndReceive(creature, new SM_SKILL_CANCEL(creature, castingSkill.getSkillTemplate().getSkillId()));
+		PacketSendUtility.broadcastPacketAndReceive(getOwner(), new SM_SKILL_CANCEL(getOwner(), castingSkill.getSkillTemplate().getSkillId()));
 		if (getOwner().getAi() instanceof NpcAI) {
 			NpcAI npcAI = (NpcAI) getOwner().getAi();
-			npcAI.setSubStateIfNot(AISubState.NONE);
 			npcAI.onGeneralEvent(AIEventType.ATTACK_COMPLETE);
-			if (creature.getSkillNumber() > 0)
-				creature.setSkillNumber(creature.getSkillNumber() - 1);
 		}
 		if (lastAttacker instanceof Player) {
 			PacketSendUtility.sendPacket((Player) lastAttacker, SM_SYSTEM_MESSAGE.STR_SKILL_TARGET_SKILL_CANCELED());
@@ -567,6 +569,7 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 	@Override
 	public void onDespawn() {
 		cancelTask(TaskId.DECAY);
+		getOwner().getMoveController().abortMove();
 		getOwner().getAggroList().clear();
 	}
 

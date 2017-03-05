@@ -45,8 +45,8 @@ public class MySQL5HousesDAO extends HousesDAO {
 
 	@Override
 	public int[] getUsedIDs() {
-		PreparedStatement statement = DB
-			.prepareStatement("SELECT DISTINCT id FROM houses", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+		PreparedStatement statement = DB.prepareStatement("SELECT DISTINCT id FROM houses", ResultSet.TYPE_SCROLL_INSENSITIVE,
+			ResultSet.CONCUR_READ_ONLY);
 
 		try {
 			ResultSet rs = statement.executeQuery();
@@ -193,51 +193,52 @@ public class MySQL5HousesDAO extends HousesDAO {
 
 		HashMap<Integer, Integer> addressHouseIds = new HashMap<>();
 
-		try {
-			try (Connection con = DatabaseFactory.getConnection();
-				PreparedStatement stmt = con.prepareStatement(studios ? SELECT_STUDIOS_QUERY : SELECT_HOUSES_QUERY)) {
-				try (ResultSet rset = stmt.executeQuery()) {
-					while (rset.next()) {
-						int houseId = rset.getInt("id");
-						int buildingId = rset.getInt("building_id");
-						HouseAddress address = addressesById.get(rset.getInt("address"));
-						Building building = null;
-						for (Building b : buildingsForAddress.get(address.getId())) {
-							if (b.getId() == buildingId) {
-								building = b;
-								break;
-							}
+		try (Connection con = DatabaseFactory.getConnection();
+			PreparedStatement stmt = con.prepareStatement(studios ? SELECT_STUDIOS_QUERY : SELECT_HOUSES_QUERY)) {
+			try (ResultSet rset = stmt.executeQuery()) {
+				while (rset.next()) {
+					int houseId = rset.getInt("id");
+					int buildingId = rset.getInt("building_id");
+					HouseAddress address = addressesById.get(rset.getInt("address"));
+					Building building = null;
+					for (Building b : buildingsForAddress.get(address.getId())) {
+						if (b.getId() == buildingId) {
+							building = b;
+							break;
 						}
-
-						House house = null;
-						if (addressHouseIds.containsKey(address.getId())) {
-							log.warn("Duplicate house address " + address.getId() + "!");
-							continue;
-						} else {
-							house = new House(houseId, building, address, 0);
-							if (building.getType() == BuildingType.PERSONAL_FIELD)
-								addressHouseIds.put(address.getId(), houseId);
-						}
-
-						house.setOwnerId(rset.getInt("player_id"));
-						house.setAcquiredTime(rset.getTimestamp("acquire_time"));
-						house.setPermissions(rset.getInt("settings"));
-						house.setStatus(HouseStatus.valueOf(rset.getString("status")));
-						house.setFeePaid(rset.getInt("fee_paid") != 0);
-						house.setNextPay(rset.getTimestamp("next_pay"));
-						house.setSellStarted(rset.getTimestamp("sell_started"));
-
-						InputStream binaryStream = rset.getBinaryStream("sign_notice");
-						if (binaryStream != null) {
-							byte[] bytes = new byte[House.NOTICE_LENGTH];
-							int bytesRead = binaryStream.read(bytes);
-							if (bytesRead > 0)
-								house.setSignNotice(bytes);
-						}
-
-						int id = studios ? house.getOwnerId() : address.getId();
-						houses.put(id, house);
 					}
+
+					House house = null;
+					if (building == null) {
+						log.warn("Missing building type for address " + address.getId());
+						continue;
+					} else if (addressHouseIds.containsKey(address.getId())) {
+						log.warn("Duplicate house address " + address.getId() + "!");
+						continue;
+					} else {
+						house = new House(houseId, building, address, 0);
+						if (building.getType() == BuildingType.PERSONAL_FIELD)
+							addressHouseIds.put(address.getId(), houseId);
+					}
+
+					house.setOwnerId(rset.getInt("player_id"));
+					house.setAcquiredTime(rset.getTimestamp("acquire_time"));
+					house.setPermissions(rset.getInt("settings"));
+					house.setStatus(HouseStatus.valueOf(rset.getString("status")));
+					house.setFeePaid(rset.getInt("fee_paid") != 0);
+					house.setNextPay(rset.getTimestamp("next_pay"));
+					house.setSellStarted(rset.getTimestamp("sell_started"));
+
+					InputStream binaryStream = rset.getBinaryStream("sign_notice");
+					if (binaryStream != null) {
+						byte[] bytes = new byte[House.NOTICE_LENGTH];
+						int bytesRead = binaryStream.read(bytes);
+						if (bytesRead > 0)
+							house.setSignNotice(bytes);
+					}
+
+					int id = studios ? house.getOwnerId() : address.getId();
+					houses.put(id, house);
 				}
 			}
 		} catch (Exception e) {

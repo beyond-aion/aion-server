@@ -40,9 +40,7 @@ public class _11003MaintainingtheIllusion extends QuestHandler {
 				else
 					return sendQuestStartDialog(env);
 			}
-		}
-
-		else if (qs != null && qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 798942:
 					switch (env.getDialogActionId()) {

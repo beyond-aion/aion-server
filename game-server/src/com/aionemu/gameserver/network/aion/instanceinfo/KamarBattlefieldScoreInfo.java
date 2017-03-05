@@ -14,13 +14,13 @@ public class KamarBattlefieldScoreInfo extends InstanceScoreInfo {
 
 	private final KamarReward kamarReward;
 	private final int type;
-	private final Integer object;
+	private final int objectId;
 	private final InstanceScoreType instanceScoreType;
 
-	public KamarBattlefieldScoreInfo(KamarReward kamarReward, int type, Integer object) {
+	public KamarBattlefieldScoreInfo(KamarReward kamarReward, int type, int objectId) {
 		this.kamarReward = kamarReward;
 		this.type = type;
-		this.object = object;
+		this.objectId = objectId;
 		this.instanceScoreType = kamarReward.getInstanceScoreType();
 	}
 
@@ -31,20 +31,20 @@ public class KamarBattlefieldScoreInfo extends InstanceScoreInfo {
 		KamarPlayerReward kamarPlayerReward = null;
 		switch (type) {
 			case 3:
-				kamarPlayerReward = kamarReward.getPlayerReward(object);
+				kamarPlayerReward = kamarReward.getPlayerReward(objectId);
 				writeD(buf, 10); // buff id
 				writeD(buf, kamarPlayerReward.getRemaningTime()); // bufftime
-				writeD(buf, kamarPlayerReward.getOwner()); // objectId
+				writeD(buf, kamarPlayerReward.getOwnerId()); // objectId
 				writeD(buf, kamarPlayerReward.getRace().equals(Race.ELYOS) ? 0 : 1); // elyos 0 asmodians 1
 				break;
 			case 4:
-				kamarPlayerReward = kamarReward.getPlayerReward(object);
+				kamarPlayerReward = kamarReward.getPlayerReward(objectId);
 				writeD(buf, 10); // buff id
 				writeD(buf, kamarPlayerReward.getRemaningTime()); // bufftime
-				writeD(buf, kamarPlayerReward.getOwner()); // objectId
+				writeD(buf, kamarPlayerReward.getOwnerId()); // objectId
 				break;
 			case 5: // reward
-				kamarPlayerReward = kamarReward.getPlayerReward(object);
+				kamarPlayerReward = kamarReward.getPlayerReward(objectId);
 				writeD(buf, 100); // partitipation
 				writeD(buf, kamarPlayerReward.getBaseReward());
 				writeD(buf, kamarPlayerReward.getBonusReward());
@@ -78,7 +78,7 @@ public class KamarBattlefieldScoreInfo extends InstanceScoreInfo {
 					if (reward != null) {
 						writeD(buf, 10); // buff id
 						writeD(buf, reward.getRemaningTime()); // bufftime
-						writeD(buf, reward.getOwner());
+						writeD(buf, reward.getOwnerId());
 					} else {
 						writeD(buf, 0);
 						writeD(buf, 0);
@@ -90,7 +90,7 @@ public class KamarBattlefieldScoreInfo extends InstanceScoreInfo {
 					if (reward != null) {
 						writeD(buf, 10); // buff id
 						writeD(buf, reward.getRemaningTime()); // bufftime
-						writeD(buf, reward.getOwner());
+						writeD(buf, reward.getOwnerId());
 					} else {
 						writeD(buf, 0);
 						writeD(buf, 0);
@@ -112,9 +112,9 @@ public class KamarBattlefieldScoreInfo extends InstanceScoreInfo {
 				break;
 			case 10:
 				writeC(buf, 0);
-				writeD(buf, kamarReward.getKillsByRace(object == 0 ? Race.ELYOS : Race.ASMODIANS).intValue());
-				writeD(buf, kamarReward.getPointsByRace(object == 0 ? Race.ELYOS : Race.ASMODIANS).intValue());
-				writeD(buf, object); // elyos 0 asmodians 1
+				writeD(buf, kamarReward.getKillsByRace(objectId == 0 ? Race.ELYOS : Race.ASMODIANS).intValue());
+				writeD(buf, kamarReward.getPointsByRace(objectId == 0 ? Race.ELYOS : Race.ASMODIANS).intValue());
+				writeD(buf, objectId); // elyos 0 asmodians 1
 				writeD(buf, 0);
 				break;
 		}

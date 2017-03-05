@@ -59,9 +59,9 @@ public class AutoIronWallFrontInstance extends AutoInstance {
 		} else if (!playersByRace.isEmpty() && playersByRace.get(0).isInAlliance()) {
 			PlayerAllianceService.addPlayer(playersByRace.get(0).getPlayerAlliance(), player);
 		}
-		Integer object = player.getObjectId();
-		if (!instance.isRegistered(object)) {
-			instance.register(object);
+		int objectId = player.getObjectId();
+		if (!instance.isRegistered(objectId)) {
+			instance.register(objectId);
 		}
 	}
 

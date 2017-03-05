@@ -195,7 +195,7 @@ public class InGameShopEn {
 			return;
 		}
 
-		if (!InGameShopConfig.ENABLE_GIFT_OTHER_RACE && !player.isGM())
+		if (!InGameShopConfig.ENABLE_GIFT_OTHER_RACE && !player.isStaff())
 			if (player.getRace() != recipientCommonData.getRace()) {
 				PacketSendUtility.sendPacket(player, new SM_MAIL_SERVICE(MailMessage.MAIL_IS_ONE_RACE_ONLY));
 				return;

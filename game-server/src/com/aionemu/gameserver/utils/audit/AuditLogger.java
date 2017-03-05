@@ -3,10 +3,12 @@ package com.aionemu.gameserver.utils.audit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.aionemu.gameserver.configs.administration.AdminConfig;
 import com.aionemu.gameserver.configs.main.LoggingConfig;
 import com.aionemu.gameserver.configs.main.PunishmentConfig;
-import com.aionemu.gameserver.configs.main.SecurityConfig;
+import com.aionemu.gameserver.model.ChatType;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author MrPoke
@@ -18,7 +20,7 @@ public class AuditLogger {
 
 	/**
 	 * Logs message, if audit log is enabled.<br>
-	 * Sends message to GMs, if audit broadcast is enabled.<br>
+	 * Notifies permitted online staff members.<br>
 	 * Automatically punishes player, if punishments are enabled.
 	 */
 	public static final void info(Player player, String message) {
@@ -30,7 +32,9 @@ public class AuditLogger {
 		if (LoggingConfig.LOG_AUDIT)
 			log.info(message);
 
-		if (SecurityConfig.GM_AUDIT_MESSAGE_BROADCAST)
-			GMService.getInstance().broadcastMessageToGMs(message);
+		for (Player gm : GMService.getInstance().getOnlineStaffMembers()) {
+			if (gm.hasAccess(AdminConfig.AUDIT_INFO))
+				PacketSendUtility.sendMessage(gm, message, ChatType.YELLOW);
+		}
 	}
 }

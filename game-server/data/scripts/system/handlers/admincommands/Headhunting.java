@@ -53,7 +53,7 @@ public class Headhunting extends AdminCommand {
 
 	public Headhunting() {
 		super("headhunting");
-		setParamInfo(
+		setSyntaxInfo(
 			"<analyze> - Analyzes the season.",
 			"<clear> - Clears the analayzed results",
 			"<show> <rewards|results> - Shows the registered rewards or analyzed results",

@@ -362,7 +362,7 @@ public class Npc extends Creature {
 
 	@Override
 	public float getVisibleDistance() {
-		return isFlag() || isRaidMonster() ? Integer.MAX_VALUE : super.getVisibleDistance();
+		return isFlag() || isRaidMonster() ? Float.MAX_VALUE : super.getVisibleDistance();
 	}
 
 	@Override

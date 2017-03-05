@@ -40,10 +40,9 @@ public class SpallerEchtraAI extends AggressiveNpcAI {
 				if (MathUtil.getDistance(getOwner(), npc) <= 2) {
 					TalkEventHandler.onTalk(this, npc);
 					AIActions.applyEffect(this, paralyze, getOwner());
-					getOwner().getEffectController().setAbnormal(4);
 					getOwner().getController().cancelCurrentSkill(null);
 					getOwner().getMoveController().abortMove();
-					getOwner().getEffectController().setAbnormal(AbnormalState.PARALYZE.getId());
+					getOwner().getEffectController().setAbnormal(AbnormalState.PARALYZE);
 					skillTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 						@Override

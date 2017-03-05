@@ -57,9 +57,7 @@ public class SignetBurstEffect extends DamageEffect {
 			if (Rnd.chance() < failChance) {
 				effect.setLaunchSubEffect(false);
 			}
-			if (signetEffect != null) {
-				signetEffect.endEffect();
-			}
+			signetEffect.endEffect();
 		}
 	}
 
@@ -73,7 +71,6 @@ public class SignetBurstEffect extends DamageEffect {
 		}
 	}
 
-	
 	/**
 	 * @return the signetlvl
 	 */
@@ -81,13 +78,11 @@ public class SignetBurstEffect extends DamageEffect {
 		return signetlvl;
 	}
 
-	
 	/**
 	 * @return the signet
 	 */
 	public String getSignet() {
 		return signet;
 	}
-	
-	
+
 }

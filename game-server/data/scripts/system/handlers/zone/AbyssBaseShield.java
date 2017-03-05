@@ -17,7 +17,7 @@ public class AbyssBaseShield implements ZoneHandler {
 	@Override
 	public void onEnterZone(Creature creature, ZoneInstance zone) {
 		Creature actingCreature = creature.getActingCreature();
-		if (actingCreature instanceof Player && !((Player) actingCreature).isGM()) {
+		if (actingCreature instanceof Player && !((Player) actingCreature).isStaff()) {
 			ZoneName currZone = zone.getZoneTemplate().getName();
 			if (currZone == ZoneName.get("ASMODIANS_BASE_400010000")) {
 				if (((Player) actingCreature).getRace() == Race.ELYOS)

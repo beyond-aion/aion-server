@@ -5,7 +5,6 @@ import static com.aionemu.gameserver.model.DialogAction.*;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.Future;
 
 import javax.annotation.Nonnull;
 
@@ -112,10 +111,8 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
 import com.aionemu.gameserver.world.MapRegion;
-import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.WorldType;
 import com.aionemu.gameserver.world.geo.GeoService;
-import com.aionemu.gameserver.world.knownlist.KnownList;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
 import com.aionemu.gameserver.world.zone.ZoneName;
 
@@ -151,13 +148,6 @@ public class PlayerController extends CreatureController<Player> {
 			} else if (creature instanceof Player) {
 				Player player = (Player) creature;
 				PacketSendUtility.sendPacket(getOwner(), new SM_PLAYER_INFO(player, getOwner().isAggroIconTo(player)));
-				Pet pet = player.getPet();
-				if (pet != null) { // pet must spawn after player, otherwise it will not be displayed
-					if (!getOwner().getKnownList().knows(pet)) // update pos + knownlist, since client sends pet position only every 50m
-						World.getInstance().updatePosition(pet, player.getX(), player.getY(), player.getZ(), player.getHeading(), true);
-					else
-						getOwner().getKnownList().addVisualObject(pet);
-				}
 				PacketSendUtility.sendPacket(getOwner(), new SM_MOTION(player.getObjectId(), player.getMotions().getActiveMotions()));
 				if (player.isInPlayerMode(PlayerMode.RIDE))
 					PacketSendUtility.sendPacket(getOwner(), new SM_EMOTION(player, EmotionType.RIDE, 0, player.ride.getNpcId()));
@@ -196,34 +186,12 @@ public class PlayerController extends CreatureController<Player> {
 		}
 	}
 
-	/**
-	 * Removes owner from the visualObjects lists of all known players who can't see him anymore.
-	 */
-	public void onHide() {
-		Pet pet = getOwner().getPet();
-		getOwner().getKnownList().forEachPlayer(other -> {
-			KnownList knownList = other.getKnownList();
-			if (knownList.sees(getOwner()) && !other.canSee(getOwner())) {
-				knownList.delVisualObject(getOwner(), ObjectDeleteAnimation.DELAYED);
-				if (pet != null)
-					knownList.delVisualObject(pet, ObjectDeleteAnimation.NONE);
-			}
-		});
-	}
-
-	/**
-	 * Re-adds owner to the visualObjects lists of all known players.
-	 */
+	@Override
 	public void onHideEnd() {
 		Pet pet = getOwner().getPet();
 		if (pet != null && !MathUtil.isIn3dRange(getOwner(), pet, 3)) // client sends pet position only every 50m...
 			pet.getPosition().setXYZH(getOwner().getX(), getOwner().getY(), getOwner().getZ(), getOwner().getHeading());
-		getOwner().getKnownList().forEachPlayer(other -> {
-			KnownList knownList = other.getKnownList();
-			knownList.addVisualObject(getOwner());
-			if (pet != null)
-				knownList.addVisualObject(pet);
-		});
+		super.onHideEnd();
 	}
 
 	public void updateNearbyQuests() {
@@ -279,7 +247,7 @@ public class PlayerController extends CreatureController<Player> {
 	 */
 	public void onLeaveFlyArea() {
 		Player player = getOwner();
-		if (player.isInFlyingState() && player.getAccessLevel() < AdminConfig.GM_FLIGHT_FREE) {
+		if (player.isInFlyingState() && !player.hasAccess(AdminConfig.FREE_FLIGHT)) {
 			if (player.isInGlidingState()) {
 				player.unsetFlyState(FlyState.FLYING);
 				player.unsetState(CreatureState.FLYING);
@@ -473,7 +441,7 @@ public class PlayerController extends CreatureController<Player> {
 		boolean allowGodstoneActivation) {
 		if (getOwner().getLifeStats().isAlreadyDead())
 			return;
-		
+
 		if (getOwner().isProtectionActive())
 			return;
 
@@ -621,11 +589,6 @@ public class PlayerController extends CreatureController<Player> {
 	}
 
 	@Override
-	public Player getOwner() {
-		return (Player) super.getOwner();
-	}
-
-	@Override
 	public void onDialogSelect(int dialogActionId, int prevDialogId, Player player, int questId, int extendedRewardIndex) {
 		switch (dialogActionId) {
 			case BUY:
@@ -695,15 +658,7 @@ public class PlayerController extends CreatureController<Player> {
 			AttackUtil.cancelCastOn(getOwner());
 			AttackUtil.removeTargetFrom(getOwner());
 			PacketSendUtility.broadcastPacket(getOwner(), new SM_PLAYER_STATE(getOwner()), true);
-			Future<?> task = ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-				@Override
-				public void run() {
-					stopProtectionActiveTask();
-				}
-
-			}, 60000);
-			addTask(TaskId.PROTECTION_ACTIVE, task);
+			addTask(TaskId.PROTECTION_ACTIVE, ThreadPoolManager.getInstance().schedule(() -> stopProtectionActiveTask(), 60000));
 		}
 	}
 

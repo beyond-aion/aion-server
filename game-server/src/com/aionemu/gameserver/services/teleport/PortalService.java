@@ -60,7 +60,7 @@ public class PortalService {
 		int playerSize = portalPath.getPlayerCount();
 		boolean isInstance = portalPath.isInstance();
 
-		if (player.getAccessLevel() < AdminConfig.INSTANCE_REQ) {
+		if (!player.hasAccess(AdminConfig.INSTANCE_ENTER_ALL)) {
 			instanceTitleReq = !player.havePermission(MembershipConfig.INSTANCES_TITLE_REQ);
 			instanceLevelReq = !player.havePermission(MembershipConfig.INSTANCES_LEVEL_REQ);
 			instanceRaceReq = !player.havePermission(MembershipConfig.INSTANCES_RACE_REQ);
@@ -226,7 +226,7 @@ public class PortalService {
 			default:
 				PlayerAlliance allianceGroup = player.getPlayerAlliance();
 				if (allianceGroup != null || !instanceGroupReq) {
-					Integer allianceId = player.getObjectId();
+					int allianceId = player.getObjectId();
 					League league = null;
 					if (allianceGroup != null) {
 						league = allianceGroup.getLeague();

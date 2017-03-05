@@ -12,7 +12,7 @@ public class Remove_skill_delay_all extends ConsoleCommand {
 	public Remove_skill_delay_all() {
 		super("remove_skill_delay_all", "Enables/disables zero cooldown mode for all skills.");
 
-		setParamInfo("<1|0> - Enable or disable skill cooldowns.");
+		setSyntaxInfo("<1|0> - Enable or disable skill cooldowns.");
 	}
 
 	@Override

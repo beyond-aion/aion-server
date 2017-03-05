@@ -30,13 +30,13 @@ public class StaticDoorService {
 	public void openStaticDoor(final Player player, int doorId) {
 		StaticDoor door = player.getPosition().getWorldMapInstance().getDoors().get(doorId);
 		if (door == null) {
-			log.warn("Not spawned door worldId: " + player.getWorldId() + " doorId: " + doorId);
+			log.warn("Door (ID: " + doorId + ") is missing in world " + player.getWorldId());
 			return;
 		}
 		int keyId = door.getObjectTemplate().getKeyId();
 
-		if (player.getAccessLevel() >= AdminConfig.DOORS_OPEN)
-			PacketSendUtility.sendMessage(player, "door id: " + doorId + " - key id: " + keyId);
+		if (player.hasAccess(AdminConfig.INSTANCE_DOOR_INFO))
+			PacketSendUtility.sendMessage(player, "Door ID: " + doorId + ", key ID: " + keyId);
 
 		if (checkStaticDoorKey(player, door, keyId)) {
 			player.getPosition().getWorldMapInstance().getInstanceHandler().onOpenDoor(doorId);
@@ -66,7 +66,7 @@ public class StaticDoorService {
 	}
 
 	public boolean checkStaticDoorKey(Player player, StaticDoor door, int keyId) {
-		if (player.getAccessLevel() >= AdminConfig.DOORS_OPEN)
+		if (player.hasAccess(AdminConfig.INSTANCE_OPEN_DOORS))
 			return true;
 
 		if (keyId == 0)

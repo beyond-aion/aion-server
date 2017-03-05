@@ -23,7 +23,7 @@ public class Dye extends AdminCommand {
 	public Dye() {
 		super("dye", "Dyes a players visible equipment.");
 
-		setParamInfo("<color> - Dyes the selected player in the specified color (can be dye item link/ID, color name or color HEX code). 0 removes all dyeing.");
+		setSyntaxInfo("<color> - Dyes the selected player in the specified color (can be dye item link/ID, color name or color HEX code). 0 removes all dyeing.");
 	}
 
 	@Override

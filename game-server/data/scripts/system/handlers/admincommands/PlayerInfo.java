@@ -25,7 +25,7 @@ public class PlayerInfo extends AdminCommand {
 
 	public PlayerInfo() {
 		super("playerinfo", "Shows information about a player.");
-		setParamInfo("<player name> <loc|item|group|skills|legion|ap|chars|knownlist|visuallist>");
+		setSyntaxInfo("<player name> <loc|item|group|skills|legion|ap|chars|knownlist|visuallist>");
 	}
 
 	@Override

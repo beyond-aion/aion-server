@@ -24,7 +24,7 @@ public class LeagueChangeLeaderEvent extends ChangeLeaderEvent<PlayerAlliance> {
 
 	@Override
 	protected void changeLeaderTo(final Player player) {
-		Integer obj = eventPlayer.getPlayerAlliance().getObjectId();
+		int obj = eventPlayer.getPlayerAlliance().getObjectId();
 		final LeagueMember leagueMember = league.getMember(obj);
 		final int position = leagueMember.getLeaguePosition();
 		leagueMember.setLeaguePosition(0);

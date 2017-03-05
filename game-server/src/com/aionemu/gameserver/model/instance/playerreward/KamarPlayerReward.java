@@ -13,8 +13,8 @@ public class KamarPlayerReward extends InstancePlayerReward {
 	private int kamarBox, bloodMarks, baseReward, bonusReward, gloryPoints;
 	private InstanceBuff boostMorale;
 
-	public KamarPlayerReward(Integer object, Race race) {
-		super(object);
+	public KamarPlayerReward(int objectId, Race race) {
+		super(objectId);
 		this.race = race;
 		boostMorale = new InstanceBuff(10);
 	}

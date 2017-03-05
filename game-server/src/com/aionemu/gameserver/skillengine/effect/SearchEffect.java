@@ -31,7 +31,7 @@ public class SearchEffect extends EffectTemplate {
 		Creature effected = effect.getEffected();
 
 		effected.unsetSeeState(state);
-		effected.getKnownList().updateVisiblePlayers();
+		effected.updateKnownlist();
 
 		PacketSendUtility.broadcastPacketAndReceive(effected, new SM_PLAYER_STATE(effected));
 	}
@@ -41,7 +41,7 @@ public class SearchEffect extends EffectTemplate {
 		Creature effected = effect.getEffected();
 
 		effected.setSeeState(state);
-		effected.getKnownList().updateVisiblePlayers();
+		effected.updateKnownlist();
 
 		PacketSendUtility.broadcastPacketAndReceive(effected, new SM_PLAYER_STATE(effected));
 	}

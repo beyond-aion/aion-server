@@ -215,7 +215,7 @@
 	<monster_hunt id="4108" start_npc_ids="205151"/>
 	<monster_hunt id="4111" start_npc_ids="730103"/>
 	<monster_hunt id="4112" start_npc_ids="205163"/>
-	<monster_hunt id="4120" start_npc_ids="205150" end_npc_ids="204057"/>
+	<monster_hunt id="4120" start_npc_ids="205150" end_npc_ids="205225"/>
 	<monster_hunt id="39001" start_npc_ids="800500"/>
 	<monster_hunt id="39002" start_npc_ids="800500"/>
 	<monster_hunt id="39004" start_npc_ids="800504" end_npc_ids="800500"/>

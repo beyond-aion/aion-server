@@ -60,9 +60,7 @@ public class _1537FishOnTheLine extends QuestHandler {
 						return true;
 					}
 			}
-		}
-
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204588)
 				return sendQuestEndDialog(env);
 		}

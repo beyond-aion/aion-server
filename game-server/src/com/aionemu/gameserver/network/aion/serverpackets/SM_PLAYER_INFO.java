@@ -108,7 +108,7 @@ public class SM_PLAYER_INFO extends AionServerPacket {
 			mask |= item.getEquipmentSlot();
 			// remove sub hand mask bits (sub hand is present on TwoHandeds by default and would produce display bugs)
 			if (ItemSlot.isTwoHandedWeapon(item.getEquipmentSlot()))
-				mask &= ~(ItemSlot.SUB_HAND.getSlotIdMask() | ItemSlot.SUB_OFF_HAND.getSlotIdMask());
+				mask &= ~ItemSlot.SUB_HAND.getSlotIdMask();
 		}
 
 		writeD(mask);

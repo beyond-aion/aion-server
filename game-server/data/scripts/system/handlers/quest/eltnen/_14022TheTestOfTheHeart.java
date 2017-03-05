@@ -78,8 +78,7 @@ public class _14022TheTestOfTheHeart extends QuestHandler {
 			}
 		}
 		if (qs.getStatus() == QuestStatus.REWARD) {
-			if (targetId == 203996) // Kimeia
-			{
+			if (targetId == 203996) { // Kimeia
 				return sendQuestEndDialog(env);
 			}
 		}

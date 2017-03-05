@@ -18,7 +18,6 @@ import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
-import com.aionemu.gameserver.world.WorldMapType;
 
 /**
  * @author Estrayl 14.04.2016
@@ -302,7 +301,7 @@ public class RaksangRuinsInstance extends GeneralInstanceHandler {
 	@Override
 	public void onPlayerLogOut(Player player) {
 		player.getInventory().decreaseByItemId(164000342, 20);
-		TeleportService.moveToInstanceExit(player, WorldMapType.RAKSANG_RUINS.getId(), player.getRace());
+		TeleportService.moveToInstanceExit(player, mapId, player.getRace());
 	}
 
 	@Override

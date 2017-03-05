@@ -555,7 +555,7 @@ public class HousingBidService extends AbstractCronTask {
 
 		HouseBidEntry bidEntry = null;
 		HouseBidEntry playerBid = null;
-		Integer lastPlayer = null;
+		int lastPlayer;
 
 		synchronized (houseBids) {
 			bidEntry = houseBids.remove(house.getObjectId());
@@ -581,7 +581,7 @@ public class HousingBidService extends AbstractCronTask {
 		} else {
 			house.setStatus(noSale ? HouseStatus.NOSALE : HouseStatus.ACTIVE);
 		}
-		if (lastPlayer != null) {
+		if (lastPlayer > 0) {
 			// return bid price only to the last bidder
 			pcd = getPlayerData(lastPlayer);
 			MailFormatter.sendHouseAuctionMail(house, pcd, AuctionResult.CANCELED_BID, System.currentTimeMillis(), playerBid.getBidPrice());

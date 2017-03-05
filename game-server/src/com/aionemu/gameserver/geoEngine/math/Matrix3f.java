@@ -1040,6 +1040,7 @@ public final class Matrix3f implements Cloneable /* Reusable*/ {
      * 
      * @return the string representation of this object.
      */
+    @Override
     public String toString() {
         StringBuffer result = new StringBuffer("Matrix3f\n[\n");
         result.append(" ");
@@ -1075,6 +1076,7 @@ public final class Matrix3f implements Cloneable /* Reusable*/ {
      * @return the hashcode for this instance of Matrix4f.
      * @see java.lang.Object#hashCode()
      */
+    @Override
     public int hashCode() {
         int hash = 37;
         hash = 37 * hash + Float.floatToIntBits(m00);
@@ -1099,8 +1101,9 @@ public final class Matrix3f implements Cloneable /* Reusable*/ {
      *            the object to compare for equality
      * @return true if they are equal
      */
+    @Override
     public boolean equals(Object o) {
-        if (!(o instanceof Matrix3f) || o == null) {
+        if (!(o instanceof Matrix3f)) {
             return false;
         }
 

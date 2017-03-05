@@ -95,7 +95,8 @@ public class _1006Ascension extends QuestHandler {
 								giveQuestItem(env, 182200007, 1);
 							qs.setQuestVar(1);
 							updateQuestStatus(env);
-							return TeleportService.teleportTo(player, 210010000, 657f, 1071f, 99.375f, (byte) 72, TeleportAnimation.FADE_OUT_BEAM);
+							TeleportService.teleportTo(player, 210010000, 657f, 1071f, 99.375f, (byte) 72, TeleportAnimation.FADE_OUT_BEAM);
+							return true;
 						case SETPRO3:
 							WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(310020000);
 							InstanceService.registerPlayerWithInstance(newInstance, player);

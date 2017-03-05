@@ -38,7 +38,7 @@ public class _38006MatriculationDay extends QuestHandler {
 					return sendQuestStartDialog(env);
 				}
 			}
-		} else if (qs != null && qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 799813) {
 				if (dialogActionId == QUEST_SELECT) {
 					return sendQuestDialog(env, 2375);
@@ -46,7 +46,7 @@ public class _38006MatriculationDay extends QuestHandler {
 					return defaultCloseDialog(env, 0, 1, true, true);
 				}
 			}
-		} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 799813) {
 				return sendQuestEndDialog(env);
 			}

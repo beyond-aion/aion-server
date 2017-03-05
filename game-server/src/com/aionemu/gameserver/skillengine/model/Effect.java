@@ -27,6 +27,7 @@ import com.aionemu.gameserver.model.templates.item.ItemTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_PLAYER_STANCE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SKILL_ACTIVATION;
 import com.aionemu.gameserver.skillengine.condition.Conditions;
+import com.aionemu.gameserver.skillengine.effect.AbnormalState;
 import com.aionemu.gameserver.skillengine.effect.EffectTemplate;
 import com.aionemu.gameserver.skillengine.effect.EffectType;
 import com.aionemu.gameserver.skillengine.effect.Effects;
@@ -168,8 +169,8 @@ public class Effect implements StatOwner {
 		return skill;
 	}
 
-	public void setAbnormal(int mask) {
-		abnormals |= mask;
+	public void setAbnormal(AbnormalState state) {
+		abnormals |= state.getId();
 	}
 
 	public int getAbnormals() {

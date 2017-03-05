@@ -14,7 +14,7 @@ public class Lock extends PlayerCommand {
 	public Lock() {
 		super("lock", "Enables/disables blocking logins from other computers.");
 
-		setParamInfo(
+		setSyntaxInfo(
 			"<enable> - Allows login from only this computer.",
 			"<disable> - Allows login from any computer."
 		);

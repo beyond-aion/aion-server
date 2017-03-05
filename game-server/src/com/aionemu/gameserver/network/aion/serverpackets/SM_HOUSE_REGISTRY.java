@@ -43,7 +43,7 @@ public class SM_HOUSE_REGISTRY extends AionServerPacket {
 				else
 					writeD(0);
 
-				writeDyeInfo(obj == null ? null : obj.getColor());
+				writeDyeInfo(obj.getColor());
 				writeD(0); // expiration as for armor ?
 
 				writeC(obj.getObjectTemplate().getTypeId());

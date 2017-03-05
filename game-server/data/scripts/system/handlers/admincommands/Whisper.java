@@ -9,7 +9,7 @@ public class Whisper extends AdminCommand {
 	public Whisper() {
 		super("whisper", "Enables/disables incoming whispers.");
 
-		setParamInfo("<on|off> - Enable or disable whispers from others (GMs can always whisper you).");
+		setSyntaxInfo("<on|off> - Enable or disable whispers from others (GMs can always whisper you).");
 	}
 
 	@Override

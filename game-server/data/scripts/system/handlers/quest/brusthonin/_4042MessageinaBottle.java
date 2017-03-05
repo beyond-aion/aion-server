@@ -74,9 +74,7 @@ public class _4042MessageinaBottle extends QuestHandler {
 						return sendQuestDialog(env, 5);
 					} else
 						return sendQuestStartDialog(env);
-				}
-
-				else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
+				} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
 					return sendQuestEndDialog(env);
 				}
 				return false;

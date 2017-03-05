@@ -10,8 +10,8 @@ public class EngulfedOphidianBridgePlayerReward extends InstancePlayerReward {
 	private Race race;
 	private int ophidianBox, oBOpportunityBundle, baseReward, bonusReward, gloryPoints;
 
-	public EngulfedOphidianBridgePlayerReward(Integer object, Race race) {
-		super(object);
+	public EngulfedOphidianBridgePlayerReward(int objectId, Race race) {
+		super(objectId);
 		this.race = race;
 	}
 

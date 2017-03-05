@@ -38,8 +38,8 @@ public class PvPArenaPlayerReward extends InstancePlayerReward {
 	private boolean isRewarded = false;
 	private InstanceBuff boostMorale;
 
-	public PvPArenaPlayerReward(Integer object, int timeBonus, byte buffId) {
-		super(object);
+	public PvPArenaPlayerReward(int objectId, int timeBonus, byte buffId) {
+		super(objectId);
 		super.addPoints(13000);
 		this.timeBonus = timeBonus;
 		timeBonusModifier = ((float) this.timeBonus / (float) 660000);

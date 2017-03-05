@@ -1099,7 +1099,7 @@ public class QuestEngine implements GameEngine {
 				unobtainableQuests.add(qh.getQuestId());
 			} else if (qt.getNpcFactionId() > 0 && !factionIds.contains(qt.getNpcFactionId())) { // outdated or unimplemented npc faction
 				obsoleteHandlers.append("\n\tQuest ").append(qh.getQuestId()).append(" (npcFactionId=").append(qt.getNpcFactionId()).append(", handler=")
-					.append(qh.getClass().getName()).append(")");;
+					.append(qh.getClass().getName()).append(")");
 				unobtainableQuests.add(qh.getQuestId());
 			}
 		}

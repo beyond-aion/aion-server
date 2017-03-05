@@ -1,6 +1,7 @@
 package quest.heiron;
 
 import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -38,8 +39,7 @@ public class _18600ScoringSomeBadStigma extends QuestHandler {
 		int targetId = env.getTargetId();
 		QuestState qs = player.getQuestStateList().getQuestState(_questId);
 
-		if (targetId == 204500) // Perento
-		{
+		if (targetId == 204500) { // Perento
 			if (qs == null || qs.isStartable()) {
 				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 1011);
@@ -47,8 +47,7 @@ public class _18600ScoringSomeBadStigma extends QuestHandler {
 					return sendQuestStartDialog(env, 182213000, 1);
 				else
 					return sendQuestStartDialog(env, 182213000, 1);
-			}
-			if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
+			} else if (qs.getStatus() == QuestStatus.REWARD) {
 				if (env.getDialogActionId() == USE_OBJECT)
 					return sendQuestDialog(env, 2375);
 				else if (env.getDialogActionId() == SELECT_QUEST_REWARD) {
@@ -58,8 +57,7 @@ public class _18600ScoringSomeBadStigma extends QuestHandler {
 					return sendQuestEndDialog(env);
 			}
 		}
-		if (targetId == 804601) // Koruchinerk
-		{
+		if (targetId == 804601) { // Koruchinerk
 			if (qs != null && qs.getStatus() == QuestStatus.START) {
 				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 1352);
@@ -67,8 +65,7 @@ public class _18600ScoringSomeBadStigma extends QuestHandler {
 					return defaultCloseDialog(env, 0, 1, 0, 0, 182213000, 1); // 1
 			}
 		}
-		if (targetId == 205228) // Herthia
-		{
+		if (targetId == 205228) { // Herthia
 			if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 1) {
 				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 1693);

@@ -44,11 +44,7 @@ public class PlayerRestrictions extends AbstractRestrictions {
 		if (skill == null)
 			return false;
 
-		// dont allow to use skills in Fly Teleport state
-		if (target instanceof Player && ((Player) target).isProtectionActive())
-			return false;
-
-		if (player != target && target instanceof Player) {
+		if (target instanceof Player && !player.equals(target)) {
 			Player tPlayer = (Player) target;
 			if (tPlayer.getRace() != player.getRace()) {
 				if (!tPlayer.isEnemyFrom(player))
@@ -64,10 +60,10 @@ public class PlayerRestrictions extends AbstractRestrictions {
 		if (player.isUsingFlyTeleport() || (target instanceof Player && ((Player) target).isUsingFlyTeleport()))
 			return false;
 
-		if (((Creature) target).getLifeStats().isAboutToDie() && !skill.checkNonTargetAOE())
+		if (((Creature) target).getLifeStats().isAboutToDie() && !skill.isNonTargetAOE())
 			return false;
 
-		if (((Creature) target).getLifeStats().isAlreadyDead() && !skill.getSkillTemplate().hasResurrectEffect() && !skill.checkNonTargetAOE()) {
+		if (((Creature) target).getLifeStats().isAlreadyDead() && !skill.getSkillTemplate().hasResurrectEffect() && !skill.isNonTargetAOE()) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_TARGET_IS_NOT_VALID());
 			return false;
 		}
@@ -438,12 +434,12 @@ public class PlayerRestrictions extends AbstractRestrictions {
 					}
 				}
 				if (!isInFortZone) {
-					PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1300143));
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_CAN_NOT_USE_ITEM_IN_CURRENT_POSITION());
 					return false;
 				}
 			} else if (restriction != null && !player.isInsideItemUseZone(restriction)) {
 				// You cannot use that item here.
-				PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1300143));
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_CAN_NOT_USE_ITEM_IN_CURRENT_POSITION());
 				return false;
 			}
 		}
@@ -460,7 +456,7 @@ public class PlayerRestrictions extends AbstractRestrictions {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_CAN_NOT_EQUIP_ITEM_WHILE_IN_ABNORMAL_STATE());
 			return false;
 		}
-		if (player.getController().hasTask(TaskId.ITEM_USE) && !player.getController().getTask(TaskId.ITEM_USE).isDone()) {
+		if (player.getController().hasScheduledTask(TaskId.ITEM_USE)) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANT_EQUIP_ITEM_IN_ACTION());
 			return false;
 		}
@@ -473,7 +469,7 @@ public class PlayerRestrictions extends AbstractRestrictions {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GLIDE_ONLY_DEVA_CAN());
 			return false;
 		}
-		if (player.getAccessLevel() < AdminConfig.GM_FLIGHT_FREE) {
+		if (!player.hasAccess(AdminConfig.FREE_FLIGHT)) {
 			if (!player.isInsideZoneType(ZoneType.FLY)) {
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_FLYING_FORBIDDEN_HERE());
 				return false;

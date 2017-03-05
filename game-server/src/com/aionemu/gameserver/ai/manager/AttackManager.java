@@ -7,6 +7,7 @@ import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.ai.event.AIEventType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
  * @author ATracer
@@ -88,8 +89,13 @@ public class AttackManager {
 				return;
 			}
 		}
-		if (!(npc.getTarget() instanceof Creature) || !npc.canSee((Creature) npc.getTarget())) {
-			npcAI.onGeneralEvent(AIEventType.TARGET_GIVEUP);
+		if (!npc.canSee(npc.getTarget())) {
+			if (npcAI.setSubStateIfNot(AISubState.TARGET_LOST)) {
+				ThreadPoolManager.getInstance().schedule(() -> {
+					if (npcAI.isInSubState(AISubState.TARGET_LOST) && npc.isSpawned() && !npc.getLifeStats().isAlreadyDead())
+						npcAI.onGeneralEvent(AIEventType.TARGET_GIVEUP);
+				}, 2000);
+			}
 			return;
 		}
 		if (checkGiveupDistance(npcAI)) {

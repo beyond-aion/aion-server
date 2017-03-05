@@ -128,7 +128,8 @@ public class _2008Ascension extends QuestHandler {
 					case SETPRO1:
 						qs.setQuestVar(1);
 						updateQuestStatus(env);
-						return TeleportService.teleportTo(player, 220010000, 585.5074f, 2416.0312f, 278.625f, (byte) 102, TeleportAnimation.FADE_OUT_BEAM);
+						TeleportService.teleportTo(player, 220010000, 585.5074f, 2416.0312f, 278.625f, (byte) 102, TeleportAnimation.FADE_OUT_BEAM);
+						return true;
 					case SETPRO5:
 						if (var == 4) {
 							qs.setQuestVar(99);
@@ -181,7 +182,8 @@ public class _2008Ascension extends QuestHandler {
 								giveQuestItem(env, 182203009, 1);
 							qs.setQuestVar(2);
 							updateQuestStatus(env);
-							return TeleportService.teleportTo(player, 220010000, 940.74475f, 2295.5305f, 265.65674f, (byte) 46, TeleportAnimation.FADE_OUT_BEAM);
+							TeleportService.teleportTo(player, 220010000, 940.74475f, 2295.5305f, 265.65674f, (byte) 46, TeleportAnimation.FADE_OUT_BEAM);
+							return true;
 						}
 						return false;
 				}
@@ -197,7 +199,8 @@ public class _2008Ascension extends QuestHandler {
 								giveQuestItem(env, 182203010, 1);
 							qs.setQuestVar(3);
 							updateQuestStatus(env);
-							return TeleportService.teleportTo(player, 220010000, 1111.5637f, 1719.2745f, 270.114256f, (byte) 114, TeleportAnimation.FADE_OUT_BEAM);
+							TeleportService.teleportTo(player, 220010000, 1111.5637f, 1719.2745f, 270.114256f, (byte) 114, TeleportAnimation.FADE_OUT_BEAM);
+							return true;
 						}
 						return false;
 				}

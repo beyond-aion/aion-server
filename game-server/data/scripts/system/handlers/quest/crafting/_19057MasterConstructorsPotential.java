@@ -65,8 +65,7 @@ public class _19057MasterConstructorsPotential extends QuestHandler {
 							}
 							return false;
 						case SETPRO10:
-							if (kinah >= 167500) // Need check how many kinah decrased
-							{
+							if (kinah >= 167500) { // Need check how many kinah decrased
 								if (!giveQuestItem(env, 152203543, 1))
 									return true;
 								player.getInventory().decreaseKinah(167500);

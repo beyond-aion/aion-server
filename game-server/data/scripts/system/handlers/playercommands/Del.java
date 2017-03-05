@@ -16,7 +16,7 @@ public class Del extends PlayerCommand {
 	public Del() {
 		super("del", "Deletes items from your inventory.");
 
-		setParamInfo("<item link|ID> [count] - Removes item(s) with the specified name/ID (default: 1, optional: number of items to delete).");
+		setSyntaxInfo("<item link|ID> [count] - Removes item(s) with the specified name/ID (default: 1, optional: number of items to delete).");
 	}
 
 	@Override

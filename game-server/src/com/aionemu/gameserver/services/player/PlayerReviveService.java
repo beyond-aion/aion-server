@@ -73,7 +73,7 @@ public class PlayerReviveService {
 
 		boolean soulSickness = true;
 		int rebirthResurrectPercent = player.getRebirthResurrectPercent();
-		if (player.getAccessLevel() >= AdminConfig.ADMIN_AUTO_RES) {
+		if (player.hasAccess(AdminConfig.AUTO_RES)) {
 			rebirthResurrectPercent = 100;
 			soulSickness = false;
 		} else if (rebirthResurrectPercent <= 0) {

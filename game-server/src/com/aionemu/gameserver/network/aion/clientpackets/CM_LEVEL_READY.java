@@ -3,6 +3,7 @@ package com.aionemu.gameserver.network.aion.clientpackets;
 import com.aionemu.gameserver.configs.main.AutoGroupConfig;
 import com.aionemu.gameserver.configs.main.EventsConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
+import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.animations.ArrivalAnimation;
 import com.aionemu.gameserver.model.gameobjects.Pet;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -47,6 +48,9 @@ public class CM_LEVEL_READY extends AionClientPacket {
 	@Override
 	protected void runImpl() {
 		Player activePlayer = getConnection().getActivePlayer();
+
+		if (activePlayer.getController().hasScheduledTask(TaskId.RESPAWN)) // player is about to teleport away
+			return;
 
 		if (activePlayer.getHouseRegistry() != null)
 			sendPacket(new SM_HOUSE_OBJECTS(activePlayer));

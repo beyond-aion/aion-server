@@ -17,12 +17,12 @@ public class SanctuaryEffect extends EffectTemplate {
 
 	@Override
 	public void startEffect(Effect effect) {
-		effect.setAbnormal(AbnormalState.SANCTUARY.getId());
-		effect.getEffected().getEffectController().setAbnormal(AbnormalState.SANCTUARY.getId());
+		effect.setAbnormal(AbnormalState.SANCTUARY);
+		effect.getEffected().getEffectController().setAbnormal(AbnormalState.SANCTUARY);
 	}
 
 	@Override
 	public void endEffect(Effect effect) {
-		effect.getEffected().getEffectController().unsetAbnormal(AbnormalState.SANCTUARY.getId());
+		effect.getEffected().getEffectController().unsetAbnormal(AbnormalState.SANCTUARY);
 	}
 }

@@ -151,7 +151,7 @@ public class _14031AHyperVention extends QuestHandler {
 			}
 
 		}
-		if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
+		if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203700)// Fasimedes
 				switch (dialogActionId) {
 					case USE_OBJECT:

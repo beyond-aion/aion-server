@@ -10,8 +10,8 @@ public class IdgelDomePlayerReward extends InstancePlayerReward {
 	private Race race;
 	private int fragmentedCeramium, idgelDomeBox, baseReward, bonusReward, gloryPoints;
 
-	public IdgelDomePlayerReward(Integer object, Race race) {
-		super(object);
+	public IdgelDomePlayerReward(int objectId, Race race) {
+		super(objectId);
 		this.race = race;
 	}
 

@@ -19,7 +19,7 @@ public class Deletecquest extends ConsoleCommand {
 	public Deletecquest() {
 		super("deletecquest", "Deletes a quest from the players quest list.");
 
-		setParamInfo("<3> <quest> - Deletes the quest from the targets quest list.");
+		setSyntaxInfo("<3> <quest> - Deletes the quest from the targets quest list.");
 	}
 
 	@Override

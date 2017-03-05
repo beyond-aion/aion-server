@@ -35,7 +35,7 @@ public class _28402GroupSavingDalia extends QuestHandler {
 					return sendQuestDialog(env, 4762);
 				else
 					return sendQuestStartDialog(env);
-			} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
+			} else if (qs.getStatus() == QuestStatus.REWARD) {
 				if (env.getDialogActionId() == USE_OBJECT)
 					return sendQuestDialog(env, 10002);
 				else if (env.getDialogActionId() == SELECT_QUEST_REWARD)

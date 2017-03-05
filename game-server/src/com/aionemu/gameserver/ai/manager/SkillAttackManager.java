@@ -44,8 +44,8 @@ public class SkillAttackManager {
 		if (npcAI.getOwner().getObjectTemplate().getAttackRange() == 0) {
 			if (npcAI.getOwner().getTarget() != null
 				&& !MathUtil.isInRange(npcAI.getOwner(), npcAI.getOwner().getTarget(), npcAI.getOwner().getAggroRange())) {
-				npcAI.onGeneralEvent(AIEventType.TARGET_TOOFAR);
 				npcAI.getOwner().getController().abortCast();
+				npcAI.onGeneralEvent(AIEventType.TARGET_TOOFAR);
 				return;
 			}
 		}
@@ -65,8 +65,8 @@ public class SkillAttackManager {
 		Npc owner = npcAI.getOwner();
 		if (owner.getObjectTemplate().getAttackRange() == 0) {
 			if (owner.getTarget() != null && !MathUtil.isInRange(owner, owner.getTarget(), owner.getAggroRange())) {
-				npcAI.onGeneralEvent(AIEventType.TARGET_TOOFAR);
 				owner.getController().abortCast();
+				npcAI.onGeneralEvent(AIEventType.TARGET_TOOFAR);
 				return;
 			}
 		}

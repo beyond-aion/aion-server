@@ -92,7 +92,7 @@ public class CM_CHAT_MESSAGE_PUBLIC extends AionClientPacket {
 					broadcastFromCommander(player);
 				break;
 			default:
-				if (!player.isGM())
+				if (!player.isStaff())
 					return;
 				broadcastToPlayers(player);
 				break;
@@ -102,7 +102,7 @@ public class CM_CHAT_MESSAGE_PUBLIC extends AionClientPacket {
 	private void broadcastFromCommander(final Player player) {
 		final int senderRace = player.getRace().getRaceId();
 		PacketSendUtility.broadcastPacket(player, new SM_MESSAGE(player, message, type), true,
-			p -> senderRace == p.getRace().getRaceId() || player.isGM() || p.isGM());
+			p -> senderRace == p.getRace().getRaceId() || player.isStaff() || p.isStaff());
 	}
 
 	/**
@@ -112,7 +112,7 @@ public class CM_CHAT_MESSAGE_PUBLIC extends AionClientPacket {
 	 */
 	private void broadcastToPlayers(final Player player) {
 		PacketSendUtility.broadcastPacket(player, new SM_MESSAGE(player, message, type), true,
-			p -> !p.getBlockList().contains(player.getObjectId()) || player.isGM() || p.isGM());
+			p -> !p.getBlockList().contains(player.getObjectId()) || player.isStaff() || p.isStaff());
 	}
 
 	/**

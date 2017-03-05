@@ -59,13 +59,13 @@ public class CM_CHAT_MESSAGE_WHISPER extends AionClientPacket {
 
 		if (receiver == null) {
 			sendPacket(SM_SYSTEM_MESSAGE.STR_NO_SUCH_USER(realName));
-		} else if (receiver.isInCustomState(CustomPlayerState.NO_WHISPERS_MODE) && !sender.isGM()) {
+		} else if (receiver.isInCustomState(CustomPlayerState.NO_WHISPERS_MODE) && !sender.isStaff()) {
 			sendPacket(SM_SYSTEM_MESSAGE.STR_WHISPER_REFUSE(receiver.getName(true)));
-		} else if (sender.getLevel() < CustomConfig.LEVEL_TO_WHISPER && !receiver.isGM()) {
+		} else if (sender.getLevel() < CustomConfig.LEVEL_TO_WHISPER && !receiver.isStaff()) {
 			sendPacket(SM_SYSTEM_MESSAGE.STR_CANT_WHISPER_LEVEL(String.valueOf(CustomConfig.LEVEL_TO_WHISPER)));
 		} else if (receiver.getBlockList().contains(sender.getObjectId())) {
 			sendPacket(SM_SYSTEM_MESSAGE.STR_YOU_EXCLUDED(receiver.getName()));
-		} else if (sender.getRace() != receiver.getRace() && !CustomConfig.SPEAKING_BETWEEN_FACTIONS && !sender.isGM() && !receiver.isGM()) {
+		} else if (sender.getRace() != receiver.getRace() && !CustomConfig.SPEAKING_BETWEEN_FACTIONS && !sender.isStaff() && !receiver.isStaff()) {
 			sendPacket(SM_SYSTEM_MESSAGE.STR_MSG_CANT_WHISPER_OTHER_RACE());
 		} else {
 			if (!RestrictionsManager.canChat(sender))

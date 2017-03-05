@@ -58,16 +58,6 @@ public class NpcController extends CreatureController<Npc> {
 	private static final Logger log = LoggerFactory.getLogger(NpcController.class);
 
 	@Override
-	public void notSee(VisibleObject object, ObjectDeleteAnimation animation) {
-		super.notSee(object, animation);
-		if (object instanceof Creature) {
-			Creature creature = (Creature) object;
-			getOwner().getAi().onCreatureEvent(AIEventType.CREATURE_NOT_SEE, creature);
-			getOwner().getAggroList().remove(creature);
-		}
-	}
-
-	@Override
 	public void see(VisibleObject object) {
 		super.see(object);
 		Npc owner = getOwner();
@@ -79,6 +69,15 @@ public class NpcController extends CreatureController<Npc> {
 					DropService.getInstance().see((Player) creature, owner);
 			}
 		}
+	}
+
+	@Override
+	public void notSee(VisibleObject object, ObjectDeleteAnimation animation) {
+		if (object instanceof Creature) {
+			Creature creature = (Creature) object;
+			getOwner().getAi().onCreatureEvent(AIEventType.CREATURE_NOT_SEE, creature);
+		}
+		super.notSee(object, animation);
 	}
 
 	@Override
@@ -232,11 +231,6 @@ public class NpcController extends CreatureController<Npc> {
 					DropRegistrationService.getInstance().registerDrop(getOwner(), player, player.getLevel(), null);
 			}
 		}
-	}
-
-	@Override
-	public Npc getOwner() {
-		return (Npc) super.getOwner();
 	}
 
 	@Override

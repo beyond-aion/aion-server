@@ -2,6 +2,7 @@ package com.aionemu.gameserver.ai.handler;
 
 import com.aionemu.gameserver.ai.AILogger;
 import com.aionemu.gameserver.ai.AIState;
+import com.aionemu.gameserver.ai.AISubState;
 import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.ai.event.AIEventType;
 import com.aionemu.gameserver.ai.manager.AttackManager;
@@ -89,6 +90,8 @@ public class TargetEventHandler {
 		}
 		VisibleObject target = npcAI.getOwner().getTarget();
 		if (target != null) {
+			if (npcAI.getSubState() == AISubState.TARGET_LOST)
+				npcAI.setSubStateIfNot(AISubState.NONE);
 			npcAI.getOwner().getAggroList().stopHating(target);
 		}
 		if (npcAI.isMoveSupported()) {

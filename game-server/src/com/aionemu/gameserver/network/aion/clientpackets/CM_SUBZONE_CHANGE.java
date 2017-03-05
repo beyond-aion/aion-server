@@ -1,6 +1,6 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
-import com.aionemu.gameserver.configs.main.WorldConfig;
+import com.aionemu.gameserver.configs.administration.AdminConfig;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.zone.ZoneClassName;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
@@ -29,7 +29,7 @@ public class CM_SUBZONE_CHANGE extends AionClientPacket {
 	protected void runImpl() {
 		Player player = getConnection().getActivePlayer();
 		player.revalidateZones();
-		if (player.getAccessLevel() >= 3 && WorldConfig.ENABLE_SHOW_ZONEENTER) {
+		if (player.hasAccess(AdminConfig.ZONE_INFO)) {
 			int foundZones = 0;
 			for (ZoneInstance zone : player.findZones()) {
 				if (zone.getZoneTemplate().getZoneType() == ZoneClassName.DUMMY || zone.getZoneTemplate().getZoneType() == ZoneClassName.WEATHER)

@@ -1,11 +1,12 @@
 package ai.siege;
 
+import static com.aionemu.gameserver.model.DialogAction.SETPRO1;
+
 import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.ai.handler.TalkEventHandler;
 import com.aionemu.gameserver.ai.poll.AIQuestion;
-import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
@@ -32,7 +33,8 @@ public class SiegeCannonAI extends NpcAI {
 		if (dialogActionId == SETPRO1 && morphSkill != 0) {
 			TeleportService.teleportTo(player, owner.getWorldId(), owner.getInstanceId(), owner.getX(), owner.getY(), owner.getZ(), owner.getHeading());
 			SkillEngine.getInstance().getSkill(getOwner(), morphSkill >> 8, morphSkill & 0xFF, player).useNoAnimationSkill();
-			player.getController().stopProtectionActiveTask();
+			if (player.isProtectionActive())
+				player.getController().stopProtectionActiveTask();
 			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 0));
 			AIActions.deleteOwner(this);
 		}

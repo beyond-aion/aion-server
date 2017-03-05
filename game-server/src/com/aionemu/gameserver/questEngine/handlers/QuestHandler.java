@@ -117,6 +117,8 @@ public abstract class QuestHandler extends AbstractQuestHandler {
 			case ASK_QUEST_ACCEPT: // show quest accept dialog (coming from pre-conversation)
 				sendDialogPacket(env, DialogPage.ASK_QUEST_ACCEPT_WINDOW.id(), questId);
 				return true;
+			case QUEST_ACCEPT_1:
+				return env.getVisibleObject() instanceof Npc ? sendQuestDialog(env, 1003) : closeDialogWindow(env);
 			case QUEST_REFUSE:
 			case QUEST_REFUSE_SIMPLE:
 			case QUEST_REFUSE_1:

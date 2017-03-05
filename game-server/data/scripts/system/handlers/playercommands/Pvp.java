@@ -12,7 +12,7 @@ public class Pvp extends PlayerCommand {
 	public Pvp() {
 		super("pvp", "Join the custom PvP-Map where you can fight against the opposing faction.");
 
-		setParamInfo("<join | leave | info> - Join the PvP-Map by typing .pvp join.\nYou can leave the PvP-Map by typing .pvp leave.\nType .pvp info to see how many players are on the PvP-Map.");
+		setSyntaxInfo("<join | leave | info> - Join the PvP-Map by typing .pvp join.\nYou can leave the PvP-Map by typing .pvp leave.\nType .pvp info to see how many players are on the PvP-Map.");
 	}
 
 	@Override

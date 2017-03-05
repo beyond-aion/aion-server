@@ -42,8 +42,8 @@ public class CrucibleInstance extends GeneralInstanceHandler {
 		instanceReward.addPlayerReward(new CruciblePlayerReward(player.getObjectId()));
 	}
 
-	protected CruciblePlayerReward getPlayerReward(Integer object) {
-		return (CruciblePlayerReward) instanceReward.getPlayerReward(object);
+	protected CruciblePlayerReward getPlayerReward(int objectId) {
+		return instanceReward.getPlayerReward(objectId);
 	}
 
 	@Override

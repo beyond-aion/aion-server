@@ -72,7 +72,7 @@ public class _2394ADyingWish extends QuestHandler {
 					return defaultCloseDialog(env, 0, 1);
 				}
 			}
-		} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204343) {
 				if (dialogActionId == USE_OBJECT) {
 					return sendQuestDialog(env, 5);

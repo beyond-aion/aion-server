@@ -64,9 +64,9 @@ public class AutoGeneralInstance extends AutoInstance {
 		} else if (!playersByRace.isEmpty() && playersByRace.get(0).isInGroup()) {
 			PlayerGroupService.addPlayer(playersByRace.get(0).getPlayerGroup(), player);
 		}
-		Integer object = player.getObjectId();
-		if (!instance.isRegistered(object)) {
-			instance.register(object);
+		int objectId = player.getObjectId();
+		if (!instance.isRegistered(objectId)) {
+			instance.register(objectId);
 		}
 	}
 

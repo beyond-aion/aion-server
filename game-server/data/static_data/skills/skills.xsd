@@ -239,15 +239,15 @@
 		<xs:attribute name="target_type" type="TargetRangeAttribute" />
 		<xs:attribute name="target_relation" type="TargetRelationAttribute" />
 		<xs:attribute name="first_target_range" type="xs:int" />
-		<xs:attribute name="first_target" type="FirstTargetAttribute" />
-		<xs:attribute name="target_status" type="StatusList" />
+		<xs:attribute name="first_target" type="FirstTargetAttribute" use="required" />
+		<xs:attribute name="target_status" type="AbnormalStateList" />
 		<xs:attribute name="revision_distance" type="xs:int" />
 		<xs:attribute name="effective_range" type="xs:int" />
 		<xs:attribute name="effective_dist" type="xs:int" />
 		<xs:attribute name="effective_angle" type="xs:int" />
 		<xs:attribute name="effective_altitude" type="xs:int" />
 		<xs:attribute default="NONE" name="direction" type="Directions" />
-		<xs:attribute name="target_species" type="TargetSpeciesAttribute" default="ALL" />
+		<xs:attribute name="target_species" type="TargetSpeciesAttribute" />
 		<xs:attribute name="ineffective_range" type="xs:int" />
 	</xs:complexType>
 	<xs:complexType name="Actions">
@@ -1644,7 +1644,6 @@
 	</xs:simpleType>
 	<xs:simpleType name="TargetRangeAttribute">
 		<xs:restriction base="xs:string">
-			<xs:enumeration value="NONE" />
 			<xs:enumeration value="ONLYONE" />
 			<xs:enumeration value="PARTY" />
 			<xs:enumeration value="AREA" />
@@ -1670,8 +1669,6 @@
 	</xs:simpleType>
 	<xs:simpleType name="TargetSpeciesAttribute">
 		<xs:restriction base="xs:string">
-			<xs:enumeration value="NONE" />
-			<xs:enumeration value="ALL" />
 			<xs:enumeration value="PC" />
 			<xs:enumeration value="NPC" />
 		</xs:restriction>
@@ -1743,8 +1740,45 @@
 			<xs:enumeration value="OPPONENT" />
 		</xs:restriction>
 	</xs:simpleType>
-	<xs:simpleType name="StatusList">
-		<xs:list itemType="xs:string" />
+	<xs:simpleType name="AbnormalStateList">
+		<xs:list itemType="AbnormalState" />
+	</xs:simpleType>
+	<xs:simpleType name="AbnormalState">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="BUFF" />
+			<xs:enumeration value="POISON" />
+			<xs:enumeration value="BLEED" />
+			<xs:enumeration value="PARALYZE" />
+			<xs:enumeration value="SLEEP" />
+			<xs:enumeration value="ROOT" />
+			<xs:enumeration value="BLIND" />
+			<xs:enumeration value="CHARM" />
+			<xs:enumeration value="DISEASE" />
+			<xs:enumeration value="SILENCE" />
+			<xs:enumeration value="FEAR" />
+			<xs:enumeration value="CURSE" />
+			<xs:enumeration value="CONFUSE" />
+			<xs:enumeration value="STUN" />
+			<xs:enumeration value="PETRIFICATION" />
+			<xs:enumeration value="STUMBLE" />
+			<xs:enumeration value="STAGGER" />
+			<xs:enumeration value="OPENAERIAL" />
+			<xs:enumeration value="SNARE" />
+			<xs:enumeration value="SLOW" />
+			<xs:enumeration value="SPIN" />
+			<xs:enumeration value="BIND" />
+			<xs:enumeration value="DEFORM" />
+			<xs:enumeration value="PULLED" />
+			<xs:enumeration value="NOFLY" />
+			<xs:enumeration value="KNOCKBACK" />
+			<xs:enumeration value="UNK_2" />
+			<xs:enumeration value="UNK_3" />
+			<xs:enumeration value="UNK_4" />
+			<xs:enumeration value="UNK_5" />
+			<xs:enumeration value="HIDE" />
+			<xs:enumeration value="UNK_6" />
+			<xs:enumeration value="SANCTUARY" />
+		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="SummonOwner">
 		<xs:restriction base="xs:string">

@@ -14,7 +14,7 @@ public class Ahserion extends AdminCommand {
 		super("ahserion", "Starts/stops Ahserions Flight.");
 
 		// @formatter:off
-		setParamInfo(
+		setSyntaxInfo(
 			"<start> - Starts Ahserions Flight.",
 			"<stop> - Stops Ahserions Flight."
 		);

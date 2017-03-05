@@ -11,6 +11,9 @@ import com.aionemu.gameserver.model.gameobjects.Summon;
 import com.aionemu.gameserver.model.gameobjects.Trap;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.gameobjects.state.CreatureVisualState;
+import com.aionemu.gameserver.model.team.TeamMember;
+import com.aionemu.gameserver.model.team.TemporaryPlayerTeam;
 import com.aionemu.gameserver.model.templates.zone.ZoneType;
 import com.aionemu.gameserver.skillengine.model.Skill;
 import com.aionemu.gameserver.utils.MathUtil;
@@ -19,7 +22,7 @@ import com.aionemu.gameserver.world.zone.ZoneInstance;
 
 /**
  * @author ATracer
- * @modified Yeats & Neon
+ * @modified Yeats, Neon
  */
 public class TargetRangeProperty {
 
@@ -31,12 +34,10 @@ public class TargetRangeProperty {
 	 * @return
 	 */
 	public static final boolean set(final Skill skill, Properties properties) {
-
+		Creature skillEffector = skill.getEffector();
 		TargetRangeAttribute value = properties.getTargetType();
 		int distanceToTarget = properties.getTargetDistance();
-		int maxcount = properties.getTargetMaxCount();
-		int effectiveRange = skill.getEffector() instanceof Trap ? skill.getEffector().getGameStats().getAttackRange().getCurrent()
-			: properties.getEffectiveRange();
+		int effectiveRange = skillEffector instanceof Trap ? skillEffector.getGameStats().getAttackRange().getCurrent() : properties.getEffectiveRange();
 		int altitude = properties.getEffectiveAltitude() != 0 ? properties.getEffectiveAltitude() : 1;
 		int ineffectiveRange = properties.getIneffectiveRange();
 
@@ -58,12 +59,11 @@ public class TargetRangeProperty {
 				for (VisibleObject nextCreature : firstTarget.getKnownList().getKnownObjects().values()) {
 					if (!(nextCreature instanceof Creature))
 						continue;
-					if (((Creature) nextCreature).getLifeStats() == null)
-						continue;
-					if (((Creature) nextCreature).getLifeStats().isAlreadyDead())
+					Creature creature = (Creature) nextCreature;
+					if (!checkCommonRequirements(creature, skill))
 						continue;
 
-					// if (nextCreature instanceof Kisk && isInsideDisablePvpZone((Creature) nextCreature))
+					// if (nextCreature instanceof Kisk && isInsideDisablePvpZone(creature)
 					// continue;
 
 					if (Math.abs(firstTarget.getZ() - nextCreature.getZ()) > altitude
@@ -72,24 +72,19 @@ public class TargetRangeProperty {
 					}
 
 					// TODO this is a temporary hack for traps
-					if (skill.getEffector() instanceof Trap && ((Trap) skill.getEffector()).getCreator() == nextCreature)
-						continue;
-
-					// Players in blinking state must not be counted
-					if (skill.getSkillTemplate().getProperties().getTargetRelation() == TargetRelationAttribute.ENEMY && (nextCreature instanceof Player)
-						&& (((Player) nextCreature).isProtectionActive()))
+					if (skillEffector instanceof Trap && ((Trap) skillEffector).getCreator() == nextCreature)
 						continue;
 
 					if (skill.isPointSkill()) {
 						if (MathUtil.isIn3dRange(skill.getX(), skill.getY(), skill.getZ(), nextCreature.getX(), nextCreature.getY(), nextCreature.getZ(),
 							effectiveRange)) {
-							skill.getEffectedList().add((Creature) nextCreature);
+							skill.getEffectedList().add(creature);
 						}
 					} else if (properties.getEffectiveAngle() > 0) {
 						// for target_range_area_type = firestorm
 						if (properties.getEffectiveAngle() < 360) {
 							float angle = properties.getEffectiveAngle() / 2f; // e.g. 60 degrees (always positive) = 30 degrees in positive and negative direction
-							float angleToTarget = PositionUtil.getAngleToTarget(skill.getEffector(), nextCreature);
+							float angleToTarget = PositionUtil.getAngleToTarget(skillEffector, nextCreature);
 							if (angleToTarget > 180) // convert 0 to 360 range => -180 to 180 range (0 is in front of effector)
 								angleToTarget -= 360;
 							if (properties.getDirection() != AreaDirections.BACK) {
@@ -101,20 +96,20 @@ public class TargetRangeProperty {
 									continue;
 							}
 						}
-						if (!MathUtil.isInRange(skill.getEffector(), nextCreature, properties.getEffectiveDist()))
+						if (!MathUtil.isInRange(skillEffector, nextCreature, properties.getEffectiveDist()))
 							continue;
-						if (nextCreature == skill.getEffector()) {
+						if (nextCreature == skillEffector) {
 							continue;
 						}
-						skill.getEffectedList().add((Creature) nextCreature);
+						skill.getEffectedList().add(creature);
 					} else if (properties.getEffectiveDist() > 0) {
 						// Lightning bolt
-						if (MathUtil.isInsideAttackCylinder(skill.getEffector(), nextCreature,
-							(properties.getEffectiveDist() + skill.getEffector().getObjectTemplate().getBoundRadius().getFront()),
-							((effectiveRange / 2f) + skill.getEffector().getObjectTemplate().getBoundRadius().getSide()), properties.getDirection())) {
+						if (MathUtil.isInsideAttackCylinder(skillEffector, nextCreature,
+							(properties.getEffectiveDist() + skillEffector.getObjectTemplate().getBoundRadius().getFront()),
+							((effectiveRange / 2f) + skillEffector.getObjectTemplate().getBoundRadius().getSide()), properties.getDirection())) {
 							if (!skill.shouldAffectTarget(nextCreature))
 								continue;
-							skill.getEffectedList().add((Creature) nextCreature);
+							skill.getEffectedList().add(creature);
 						}
 					} else if (MathUtil.isIn3dRange(firstTarget, nextCreature,
 						effectiveRange + firstTarget.getObjectTemplate().getBoundRadius().getCollision())) {
@@ -124,108 +119,74 @@ public class TargetRangeProperty {
 							continue;
 						if (!skill.shouldAffectTarget(nextCreature))
 							continue;
-						skill.getEffectedList().add((Creature) nextCreature);
+						skill.getEffectedList().add(creature);
 					}
 				}
 
 				break;
 			case PARTY:
-				// fix for Bodyguard(417)
-				if (maxcount == 1) {
-					break;
-				}
-				int partyCount = 0;
-				if (skill.getEffector() instanceof Player) {
-					Player effector = (Player) skill.getEffector();
-					// TODO merge groups ?
-					if (effector.isInAlliance()) {
-						effectedList.clear();
-						for (Player player : effector.getPlayerAllianceGroup().getMembers()) {
-							if (partyCount >= 6 || partyCount >= maxcount)
-								break;
-							if (!player.isOnline())
-								continue;
-							if (MathUtil.isIn3dRange(effector, player, effectiveRange + 1)) {
-								effectedList.add(player);
-								partyCount++;
-							}
-						}
-					} else if (effector.isInGroup()) {
-						effectedList.clear();
-						for (Player member : effector.getPlayerGroup().getMembers()) {
-							if (partyCount >= maxcount)
-								break;
-							// TODO: here value +4 till better move controller developed
-							if (member != null && MathUtil.isIn3dRange(effector, member, effectiveRange + 1)) {
-								effectedList.add(member);
-								partyCount++;
-							}
-						}
-					}
-				}
-				break;
 			case PARTY_WITHPET:
-				if (skill.getEffector() instanceof Player) {
-					final Player effector = (Player) skill.getEffector();
-					if (effector.isInAlliance()) {
+				if (skillEffector instanceof Player) {
+					final Player effector = (Player) skillEffector;
+					TemporaryPlayerTeam<? extends TeamMember<Player>> team;
+					if (value == TargetRangeAttribute.PARTY_WITHPET)
+						team = effector.getCurrentTeam(); // group or whole alliance
+					else
+						team = effector.getCurrentGroup(); // group or alliance group (max 6 targets)
+					if (team != null) {
 						effectedList.clear();
-						// TODO may be alliance group ?
-						for (Player player : effector.getPlayerAlliance().getMembers()) {
-							if (!player.isOnline())
-								continue;
-							if (player.getLifeStats().isAlreadyDead())
-								continue;
-							if (MathUtil.isIn3dRange(effector, player, effectiveRange + 1)) {
-								effectedList.add(player);
-								Summon aMemberSummon = player.getSummon();
-								if (aMemberSummon != null)
-									effectedList.add(aMemberSummon);
-							}
-						}
-					} else if (effector.isInGroup()) {
-						effectedList.clear();
-						for (Player member : effector.getPlayerGroup().getMembers()) {
+						for (Player member : team.getMembers()) {
 							if (!member.isOnline())
 								continue;
-							if (member.getLifeStats().isAlreadyDead())
+							if (!checkCommonRequirements(member, skill))
 								continue;
 							if (MathUtil.isIn3dRange(effector, member, effectiveRange + 1)) {
 								effectedList.add(member);
-								Summon aMemberSummon = member.getSummon();
-								if (aMemberSummon != null)
-									effectedList.add(aMemberSummon);
+								if (value == TargetRangeAttribute.PARTY_WITHPET) {
+									Summon aMemberSummon = member.getSummon();
+									if (aMemberSummon != null)
+										effectedList.add(aMemberSummon);
+								}
 							}
 						}
 					}
 				}
 				break;
 			case POINT:
-				for (VisibleObject nextCreature : skill.getEffector().getKnownList().getKnownObjects().values()) {
+				for (VisibleObject nextCreature : skillEffector.getKnownList().getKnownObjects().values()) {
 					if (!(nextCreature instanceof Creature))
 						continue;
-					if (((Creature) nextCreature).getLifeStats().isAlreadyDead())
+					Creature creature = (Creature) nextCreature;
+					if (!checkCommonRequirements(creature, skill))
 						continue;
 
-					if (nextCreature instanceof Trap && !((Trap) nextCreature).getMaster().isEnemy(skill.getEffector())) {
-						continue;
-					}
-
-					// Players in blinking state must not be counted
-					if (skill.getSkillTemplate().getProperties().getTargetRelation() == TargetRelationAttribute.ENEMY && (nextCreature instanceof Player)
-						&& (((Player) nextCreature).isProtectionActive()))
+					if (nextCreature instanceof Trap && !((Trap) nextCreature).getMaster().isEnemy(skillEffector))
 						continue;
 
 					if (MathUtil.getDistance(skill.getX(), skill.getY(), skill.getZ(), nextCreature.getX(), nextCreature.getY(),
 						nextCreature.getZ()) <= distanceToTarget + 1) {
-						effectedList.add((Creature) nextCreature);
+						effectedList.add(creature);
 					}
 				}
 				break;
-			case NONE:
-				break;
-
-			// TODO other enum values
 		}
+
+		return true;
+	}
+
+	private static final boolean checkCommonRequirements(Creature creature, Skill skill) {
+		if (skill.getSkillTemplate().hasResurrectEffect()) {
+			if (!creature.getLifeStats().isAlreadyDead())
+				return false;
+		} else {
+			if (creature.getLifeStats().isAlreadyDead())
+				return false;
+		}
+
+		// blinking state means protection is active (no interaction with creature is possible)
+		if (creature.isInVisualState(CreatureVisualState.BLINKING))
+			return false;
+
 		return true;
 	}
 

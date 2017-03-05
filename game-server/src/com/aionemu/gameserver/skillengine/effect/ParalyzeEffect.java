@@ -32,13 +32,13 @@ public class ParalyzeEffect extends EffectTemplate {
 		effected.getController().cancelCurrentSkill(effect.getEffector());
 		if (effected instanceof Player)
 			((Player) effected).getFlyController().onStopGliding();
-		effect.setAbnormal(AbnormalState.PARALYZE.getId());
-		effect.getEffected().getEffectController().setAbnormal(AbnormalState.PARALYZE.getId());
+		effect.setAbnormal(AbnormalState.PARALYZE);
+		effect.getEffected().getEffectController().setAbnormal(AbnormalState.PARALYZE);
 
 	}
 
 	@Override
 	public void endEffect(Effect effect) {
-		effect.getEffected().getEffectController().unsetAbnormal(AbnormalState.PARALYZE.getId());
+		effect.getEffected().getEffectController().unsetAbnormal(AbnormalState.PARALYZE);
 	}
 }

@@ -49,8 +49,8 @@ public class SkillTemplate {
 	private String name;
 	@XmlAttribute(required = true)
 	private int nameId;
-	@XmlAttribute
-	private String stack = "NONE";
+	@XmlAttribute(required = true)
+	private String stack;
 	@XmlAttribute(name = "group", required = false)
 	private String group;
 	@XmlAttribute

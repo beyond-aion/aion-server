@@ -52,8 +52,7 @@ public class _4200ASuspiciousCall extends QuestHandler {
 			targetId = ((Npc) env.getVisibleObject()).getNpcId();
 
 		if (qs == null || qs.isStartable()) {
-			if (targetId == 204839) // Uikinerk
-			{
+			if (targetId == 204839) { // Uikinerk
 				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 4762);
 				else
@@ -93,8 +92,7 @@ public class _4200ASuspiciousCall extends QuestHandler {
 						updateQuestStatus(env);
 						return true;
 				}
-			} else if (targetId == 798332 && var == 1) // Haorunerk
-			{
+			} else if (targetId == 798332 && var == 1) { // Haorunerk
 				switch (env.getDialogActionId()) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 1352);
@@ -107,8 +105,7 @@ public class _4200ASuspiciousCall extends QuestHandler {
 						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 						return true;
 				}
-			} else if (targetId == 700522 && var == 2) // Haorunerks Bag, loc: 401.24 503.19 885.76 119
-			{
+			} else if (targetId == 700522 && var == 2) { // Haorunerks Bag, loc: 401.24 503.19 885.76 119
 				ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 					@Override
@@ -117,8 +114,7 @@ public class _4200ASuspiciousCall extends QuestHandler {
 					}
 				}, 3000);
 				return true;
-			} else if (targetId == 279006 && var == 3)// Garkbinerk
-			{
+			} else if (targetId == 279006 && var == 3) { // Garkbinerk
 				switch (env.getDialogActionId()) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 2034);

@@ -40,9 +40,7 @@ public class _30307SoulSummoning extends QuestHandler {
 				else
 					return sendQuestStartDialog(env);
 			}
-		}
-
-		if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 799322:
 					switch (env.getDialogActionId()) {

@@ -33,14 +33,13 @@ public class _1322ALeafFromLodas extends QuestHandler {
 		if (env.getVisibleObject() instanceof Npc)
 			targetId = ((Npc) env.getVisibleObject()).getNpcId();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		if (targetId == 730019) // Lodas
-		{
+		if (targetId == 730019) { // Lodas
 			if (qs == null || qs.isStartable()) {
 				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 1011);
 				else
 					return sendQuestStartDialog(env);
-			} else if (qs != null && qs.getStatus() == QuestStatus.START) {
+			} else if (qs.getStatus() == QuestStatus.START) {
 				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 2375);
 				else if (env.getDialogActionId() == SELECT_QUEST_REWARD) {
@@ -49,13 +48,12 @@ public class _1322ALeafFromLodas extends QuestHandler {
 					return sendQuestEndDialog(env);
 				} else
 					return sendQuestEndDialog(env);
-			} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
+			} else if (qs.getStatus() == QuestStatus.REWARD) {
 				if (env.getDialogActionId() == USE_OBJECT)
 					return sendQuestDialog(env, 2375);
 				return sendQuestEndDialog(env);
 			}
-		} else if (targetId == 730008) // Daminu
-		{
+		} else if (targetId == 730008) { // Daminu
 			if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 0) {
 				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 1352);

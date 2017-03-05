@@ -48,12 +48,12 @@ public class OpenAerialEffect extends EffectTemplate {
 		World.getInstance().updatePosition(effect.getEffected(), effect.getEffected().getX(), effect.getEffected().getY(), effect.getEffected().getZ(),
 			effect.getEffected().getHeading());
 		// effected.getMoveController().abortMove();
-		effected.getEffectController().setAbnormal(AbnormalState.OPENAERIAL.getId());
-		effect.setAbnormal(AbnormalState.OPENAERIAL.getId());
+		effected.getEffectController().setAbnormal(AbnormalState.OPENAERIAL);
+		effect.setAbnormal(AbnormalState.OPENAERIAL);
 	}
 
 	@Override
 	public void endEffect(Effect effect) {
-		effect.getEffected().getEffectController().unsetAbnormal(AbnormalState.OPENAERIAL.getId());
+		effect.getEffected().getEffectController().unsetAbnormal(AbnormalState.OPENAERIAL);
 	}
 }

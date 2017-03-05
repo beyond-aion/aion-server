@@ -9,6 +9,7 @@ import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.ingameshop.InGameShopEn;
 import com.aionemu.gameserver.model.templates.item.ItemTemplate;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_TOLL_INFO;
 import com.aionemu.gameserver.network.loginserver.LoginServer;
 import com.aionemu.gameserver.network.loginserver.serverpackets.SM_ACCOUNT_TOLL_INFO;
@@ -63,10 +64,8 @@ public class Gameshop extends AdminCommand {
 				list = Integer.parseInt(params[8]);
 				titleDescription = Util.convertName(params[9]);
 			} catch (NumberFormatException e) {
-				PacketSendUtility
-					.sendMessage(
-						admin,
-						"<itemId, count, price, category, subCategory, itemType, gift, list, description> values must be int, long, long, byte, byte, byte, byte, int, string, Object... .");
+				PacketSendUtility.sendMessage(admin,
+					"<itemId, count, price, category, subCategory, itemType, gift, list, description> values must be int, long, long, byte, byte, byte, byte, int, string, Object... .");
 				return;
 			}
 
@@ -186,15 +185,12 @@ public class Gameshop extends AdminCommand {
 				}
 
 				VisibleObject target = admin.getTarget();
-				if (target == null) {
-					PacketSendUtility.sendMessage(admin, "You should select a target first!");
+				if (!(target instanceof Player)) {
+					PacketSendUtility.sendPacket(admin, SM_SYSTEM_MESSAGE.STR_INVALID_TARGET());
 					return;
 				}
 
-				if (target instanceof Player) {
-					player = (Player) target;
-				}
-
+				player = (Player) target;
 				if (LoginServer.getInstance().sendPacket(new SM_ACCOUNT_TOLL_INFO(toll, player.getAcountName()))) {
 					player.getClientConnection().getAccount().setToll(toll);
 					PacketSendUtility.sendPacket(player, new SM_TOLL_INFO(toll));
@@ -236,15 +232,12 @@ public class Gameshop extends AdminCommand {
 				}
 
 				VisibleObject target = admin.getTarget();
-				if (target == null) {
-					PacketSendUtility.sendMessage(admin, "You should select a target first!");
+				if (!(target instanceof Player)) {
+					PacketSendUtility.sendPacket(admin, SM_SYSTEM_MESSAGE.STR_INVALID_TARGET());
 					return;
 				}
 
-				if (target instanceof Player) {
-					player = (Player) target;
-				}
-
+				player = (Player) target;
 				PacketSendUtility.sendMessage(admin, "You added " + toll + " tolls to Player: " + player.getName());
 				InGameShopEn.getInstance().addToll(player, toll);
 			}
@@ -255,13 +248,11 @@ public class Gameshop extends AdminCommand {
 
 	@Override
 	public void info(Player player, String message) {
-		PacketSendUtility
-			.sendMessage(
-				player,
-				"No parameters detected please use:\n"
-					+ "//gameshop add <itemId> <count> <price> <category> <subCategory> <itemType> <gift> <list> <title description|empty> <item description|null>\n"
-					+ "//gameshop delete <itemId> <category> <subCategory> <list>\n"
-					+ "//gameshop addranking <itemId> <count> <price> <itemType> <gift> <title description|empty> <item description|null>\n"
-					+ "//gameshop deleteranking <itemId>\n" + "//gameshop settoll <target|player> <toll>\n" + "//gameshop addtoll <target|player> <toll>");
+		PacketSendUtility.sendMessage(player,
+			"No parameters detected please use:\n"
+				+ "//gameshop add <itemId> <count> <price> <category> <subCategory> <itemType> <gift> <list> <title description|empty> <item description|null>\n"
+				+ "//gameshop delete <itemId> <category> <subCategory> <list>\n"
+				+ "//gameshop addranking <itemId> <count> <price> <itemType> <gift> <title description|empty> <item description|null>\n"
+				+ "//gameshop deleteranking <itemId>\n" + "//gameshop settoll <target|player> <toll>\n" + "//gameshop addtoll <target|player> <toll>");
 	}
 }

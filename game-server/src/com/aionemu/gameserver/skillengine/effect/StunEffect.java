@@ -34,12 +34,12 @@ public class StunEffect extends EffectTemplate {
 		effected.getController().cancelCurrentSkill(effect.getEffector());
 		if (effected instanceof Player)
 			((Player) effected).getFlyController().onStopGliding();
-		effect.getEffected().getEffectController().setAbnormal(AbnormalState.STUN.getId());
-		effect.setAbnormal(AbnormalState.STUN.getId());
+		effect.getEffected().getEffectController().setAbnormal(AbnormalState.STUN);
+		effect.setAbnormal(AbnormalState.STUN);
 	}
 
 	@Override
 	public void endEffect(Effect effect) {
-		effect.getEffected().getEffectController().unsetAbnormal(AbnormalState.STUN.getId());
+		effect.getEffected().getEffectController().unsetAbnormal(AbnormalState.STUN);
 	}
 }

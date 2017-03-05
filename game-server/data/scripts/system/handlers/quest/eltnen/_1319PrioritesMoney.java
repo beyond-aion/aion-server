@@ -42,15 +42,13 @@ public class _1319PrioritesMoney extends QuestHandler {
 			targetId = ((Npc) env.getVisibleObject()).getNpcId();
 		final QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs == null || qs.isStartable()) {
-			if (targetId == 203908) // Priorite
-			{
+			if (targetId == 203908) { // Priorite
 				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 1011);
 				else
 					return sendQuestStartDialog(env);
 			}
-		} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) // Reward
-		{
+		} else if (qs.getStatus() == QuestStatus.REWARD) { // Reward
 			if (env.getDialogActionId() == QUEST_SELECT)
 				return sendQuestDialog(env, 4080);
 			else if (env.getDialogActionId() == SELECT_QUEST_REWARD) {
@@ -60,12 +58,9 @@ public class _1319PrioritesMoney extends QuestHandler {
 				return sendQuestEndDialog(env);
 			} else
 				return sendQuestEndDialog(env);
-		}
+		} else if (targetId == 203923) { // Krato
 
-		else if (targetId == 203923) // Krato
-		{
-
-			if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 0) {
+			if (qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 0) {
 				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 1352);
 				else if (env.getDialogActionId() == SETPRO1) {
@@ -77,11 +72,8 @@ public class _1319PrioritesMoney extends QuestHandler {
 					return sendQuestStartDialog(env);
 			}
 
-		}
-
-		else if (targetId == 203910) // Hebestis
-		{
-			if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 1) {
+		} else if (targetId == 203910) { // Hebestis
+			if (qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 1) {
 				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 1693);
 				else if (env.getDialogActionId() == SETPRO2) {
@@ -92,11 +84,8 @@ public class _1319PrioritesMoney extends QuestHandler {
 				} else
 					return sendQuestStartDialog(env);
 			}
-		}
-
-		else if (targetId == 203906) // Benos
-		{
-			if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 2) {
+		} else if (targetId == 203906) { // Benos
+			if (qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 2) {
 				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 2034);
 				else if (env.getDialogActionId() == SETPRO3) {
@@ -107,11 +96,8 @@ public class _1319PrioritesMoney extends QuestHandler {
 				} else
 					return sendQuestStartDialog(env);
 			}
-		}
-
-		else if (targetId == 203915) // Diokles
-		{
-			if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 3) {
+		} else if (targetId == 203915) { // Diokles
+			if (qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 3) {
 				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 2375);
 				else if (env.getDialogActionId() == SETPRO4) {
@@ -122,11 +108,8 @@ public class _1319PrioritesMoney extends QuestHandler {
 				} else
 					return sendQuestStartDialog(env);
 			}
-		}
-
-		else if (targetId == 203907) // Tuskeos
-		{
-			if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 4) {
+		} else if (targetId == 203907) { // Tuskeos
+			if (qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 4) {
 				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 2716);
 				else if (env.getDialogActionId() == SETPRO5) {
@@ -137,11 +120,8 @@ public class _1319PrioritesMoney extends QuestHandler {
 				} else
 					return sendQuestStartDialog(env);
 			}
-		}
-
-		else if (targetId == 798050) // Girrinerk
-		{
-			if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 5) {
+		} else if (targetId == 798050) { // Girrinerk
+			if (qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 5) {
 				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 3057);
 				else if (env.getDialogActionId() == SETPRO6) {
@@ -152,11 +132,8 @@ public class _1319PrioritesMoney extends QuestHandler {
 				} else
 					return sendQuestStartDialog(env);
 			}
-		}
-
-		else if (targetId == 798049) // Shaoranranerk
-		{
-			if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 6) {
+		} else if (targetId == 798049) { // Shaoranranerk
+			if (qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 6) {
 				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 3398);
 				else if (env.getDialogActionId() == SETPRO7) {
@@ -167,11 +144,8 @@ public class _1319PrioritesMoney extends QuestHandler {
 				} else
 					return sendQuestStartDialog(env);
 			}
-		}
-
-		else if (targetId == 205240) // Arnesonerk
-		{
-			if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 7) {
+		} else if (targetId == 205240) { // Arnesonerk
+			if (qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 7) {
 				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 3739);
 				else if (env.getDialogActionId() == SETPRO8 && qs.getStatus() != QuestStatus.COMPLETE) {

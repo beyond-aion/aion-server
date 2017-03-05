@@ -94,8 +94,7 @@ public class _14025CookingUpDisasters extends QuestHandler {
 				}
 			return sendQuestEndDialog(env);
 		} else if (qs.getStatus() == QuestStatus.START) {
-			if (targetId == 203989) // Tumblusen
-			{
+			if (targetId == 203989) { // Tumblusen
 				switch (dialogActionId) {
 					case QUEST_SELECT:
 						if (var == 0)

@@ -27,7 +27,7 @@ public class CrucibleScoreInfo extends InstanceScoreInfo {
 	public void writeMe(ByteBuffer buf) {
 		int playerCount = 0;
 		for (CruciblePlayerReward playerReward : instanceReward.getInstanceRewards()) {
-			writeD(buf, playerReward.getOwner()); // obj
+			writeD(buf, playerReward.getOwnerId()); // obj
 			writeD(buf, playerReward.getPoints()); // points
 			writeD(buf, instanceScoreType.isEndProgress() ? 3 : 1);
 			writeD(buf, playerReward.getInsignia());

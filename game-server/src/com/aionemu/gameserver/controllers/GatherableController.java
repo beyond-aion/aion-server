@@ -247,8 +247,4 @@ public class GatherableController extends VisibleObjectController<Gatherable> {
 			task.abort();
 	}
 
-	@Override
-	public Gatherable getOwner() {
-		return super.getOwner();
-	}
 }

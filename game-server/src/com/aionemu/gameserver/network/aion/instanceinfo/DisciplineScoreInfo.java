@@ -34,7 +34,7 @@ public class DisciplineScoreInfo extends InstanceScoreInfo {
 			PvPArenaPlayerReward playerReward = (PvPArenaPlayerReward) reward;
 			points = playerReward.getPoints();
 			rank = arenaReward.getRank(playerReward.getScorePoints());
-			writeD(buf, playerReward.getOwner()); // obj
+			writeD(buf, playerReward.getOwnerId()); // obj
 			writeD(buf, playerReward.getPvPKills()); // kills
 			writeD(buf, isRewarded ? points + playerReward.getTimeBonus() : points); // points
 			writeD(buf, 0); // unk

@@ -79,14 +79,14 @@ public class AutoHarmonyInstance extends AutoInstance {
 		if (player.isInGroup()) {
 			return;
 		}
-		Integer object = player.getObjectId();
-		List<AGPlayer> group = getGroup(object);
+		int objectId = player.getObjectId();
+		List<AGPlayer> group = getGroup(objectId);
 		if (group != null) {
 			List<Player> _players = getPlayerFromGroup(group);
 			_players.remove(player);
 			if (_players.size() == 1 && !_players.get(0).isInGroup()) {
 				HarmonyArenaReward reward = (HarmonyArenaReward) instance.getInstanceHandler().getInstanceReward();
-				HarmonyGroupReward r = reward.getHarmonyGroupReward(object);
+				HarmonyGroupReward r = reward.getHarmonyGroupReward(objectId);
 				PlayerGroup newGroup = PlayerGroupService.createGroup(_players.get(0), player, TeamType.AUTO_GROUP, r.getId());
 				int groupId = newGroup.getObjectId();
 				if (!instance.isRegistered(groupId)) {
@@ -95,8 +95,8 @@ public class AutoHarmonyInstance extends AutoInstance {
 			} else if (!_players.isEmpty() && _players.get(0).isInGroup()) {
 				PlayerGroupService.addPlayer(_players.get(0).getPlayerGroup(), player);
 			}
-			if (!instance.isRegistered(object)) {
-				instance.register(object);
+			if (!instance.isRegistered(objectId)) {
+				instance.register(objectId);
 			}
 		}
 	}
@@ -131,7 +131,7 @@ public class AutoHarmonyInstance extends AutoInstance {
 		List<Player> _players = new FastTable<>();
 		for (AGPlayer agp : group) {
 			for (Player p : instance.getPlayersInside()) {
-				if (p.getObjectId().equals(agp.getObjectId())) {
+				if (p.getObjectId() == agp.getObjectId()) {
 					_players.add(p);
 					break;
 				}
@@ -160,7 +160,7 @@ public class AutoHarmonyInstance extends AutoInstance {
 		}
 		if (group.size() + searchInstance.getMembers().size() <= 3) {
 			for (Player member : player.getPlayerGroup().getOnlineMembers()) {
-				Integer obj = member.getObjectId();
+				int obj = member.getObjectId();
 				if (searchInstance.getMembers().contains(obj)) {
 					AGPlayer agp = new AGPlayer(member);
 					group.add(agp);
@@ -173,7 +173,7 @@ public class AutoHarmonyInstance extends AutoInstance {
 	}
 
 	private AGQuestion canAddPlayer(List<AGPlayer> group, Player player) {
-		Integer obj = player.getObjectId();
+		int obj = player.getObjectId();
 		AGPlayer agp = new AGPlayer(player);
 		if (group.size() < 3) {
 			if (group.isEmpty()) {

@@ -1,9 +1,12 @@
 package com.aionemu.gameserver.skillengine.properties;
 
-import java.util.SortedMap;
-import java.util.TreeMap;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import com.aionemu.gameserver.model.gameobjects.Creature;
+import com.aionemu.gameserver.model.gameobjects.Summon;
+import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.skillengine.model.Skill;
 import com.aionemu.gameserver.utils.MathUtil;
 
@@ -14,26 +17,29 @@ public class MaxCountProperty {
 
 	public static final boolean set(final Skill skill, Properties properties) {
 		TargetRangeAttribute value = properties.getTargetType();
-		int maxcount = properties.getTargetMaxCount();
+		int maxCount = properties.getTargetMaxCount();
+		if (maxCount == 0 || skill.getEffectedList().size() <= maxCount)
+			return true;
 
 		switch (value) {
 			case AREA:
-				int areaCounter = 0;
-				final Creature firstTarget = skill.getFirstTarget();
-				if (firstTarget == null) {
+			case PARTY:
+			case PARTY_WITHPET:
+				Creature firstTarget = skill.getFirstTarget();
+				if (firstTarget == null)
 					return false;
-				}
-				SortedMap<Double, Creature> sortedMap = new TreeMap<>();
-				for (Creature creature : skill.getEffectedList()) {
-					sortedMap.put(MathUtil.getDistance(firstTarget, creature), creature);
-				}
+
+				// filter out summons (we want nearest masters), then order by distance, limit to max count
+				List<Creature> nearestCreatures = skill.getEffectedList().stream().filter(c -> !(c instanceof Summon))
+					.sorted(Comparator.comparingDouble(c -> MathUtil.getDistance(firstTarget, c))).limit(maxCount).collect(Collectors.toList());
+
+				// rebuild effected list with correct number of creatures and their summons
 				skill.getEffectedList().clear();
-				for (Creature creature : sortedMap.values()) {
-					if (areaCounter >= maxcount && maxcount != 0)
-						break;
-					skill.getEffectedList().add(creature);
-					areaCounter++;
-				}
+				nearestCreatures.forEach(c -> {
+					skill.getEffectedList().add(c);
+					if (value == TargetRangeAttribute.PARTY_WITHPET && c instanceof Player)
+						skill.getEffectedList().add(((Player) c).getSummon());
+				});
 		}
 		return true;
 	}

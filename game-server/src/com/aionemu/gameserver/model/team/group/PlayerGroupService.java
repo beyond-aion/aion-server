@@ -12,9 +12,9 @@ import com.aionemu.commons.callbacks.metadata.GlobalCallback;
 import com.aionemu.gameserver.configs.main.GroupConfig;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.team.TeamType;
+import com.aionemu.gameserver.model.team.common.events.PlayerLeavedEvent.LeaveReson;
 import com.aionemu.gameserver.model.team.common.events.ShowBrandEvent;
 import com.aionemu.gameserver.model.team.common.events.TeamKinahDistributionEvent;
-import com.aionemu.gameserver.model.team.common.events.PlayerLeavedEvent.LeaveReson;
 import com.aionemu.gameserver.model.team.common.legacy.GroupEvent;
 import com.aionemu.gameserver.model.team.common.legacy.LootGroupRules;
 import com.aionemu.gameserver.model.team.group.callback.AddPlayerToGroupCallback;
@@ -231,7 +231,7 @@ public class PlayerGroupService {
 		return "Number of groups: " + groups.size();
 	}
 
-	public static final PlayerGroup searchGroup(Integer playerObjId) {
+	public static final PlayerGroup searchGroup(int playerObjId) {
 		for (PlayerGroup group : groups.values()) {
 			if (group.hasMember(playerObjId)) {
 				return group;

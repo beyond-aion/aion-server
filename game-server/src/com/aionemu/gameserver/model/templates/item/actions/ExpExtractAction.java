@@ -38,8 +38,8 @@ public class ExpExtractAction extends AbstractItemAction {
 
 	@Override
 	public void act(final Player player, final Item parentItem, Item targetItem) {
-		PacketSendUtility.sendPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId().intValue(), parentItem.getObjectId().intValue(), parentItem
-			.getItemTemplate().getTemplateId(), 5000, 0, 0));
+		PacketSendUtility.sendPacket(player,
+			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemTemplate().getTemplateId(), 5000, 0, 0));
 		player.getController().cancelTask(TaskId.ITEM_USE);
 		final ItemUseObserver observer = new ItemUseObserver() {
 
@@ -47,8 +47,8 @@ public class ExpExtractAction extends AbstractItemAction {
 			public void abort() {
 				player.getController().cancelTask(TaskId.ITEM_USE);
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_DECOMPOSE_ITEM_CANCELED(parentItem.getNameId()));
-				PacketSendUtility.sendPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId().intValue(), parentItem.getObjectId().intValue(),
-					parentItem.getItemTemplate().getTemplateId(), 0, 2, 0));
+				PacketSendUtility.sendPacket(player,
+					new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemTemplate().getTemplateId(), 0, 2, 0));
 				player.getObserveController().removeObserver(this);
 			}
 		};
@@ -67,8 +67,8 @@ public class ExpExtractAction extends AbstractItemAction {
 				player.getCommonData().setExp(player.getCommonData().getExp() - toDecrease);
 				ItemService.addItem(player, itemId, 1);
 				player.getInventory().decreaseByItemId(parentItem.getItemId(), 1);
-				PacketSendUtility.sendPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId().intValue(), parentItem.getObjectId().intValue(),
-					parentItem.getItemTemplate().getTemplateId(), 0, 1, 0));
+				PacketSendUtility.sendPacket(player,
+					new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemTemplate().getTemplateId(), 0, 1, 0));
 			}
 		}, 5000));
 		PacketSendUtility.sendPacket(player, new SM_STATUPDATE_EXP(player.getCommonData().getExpShown(), player.getCommonData().getExpRecoverable(),

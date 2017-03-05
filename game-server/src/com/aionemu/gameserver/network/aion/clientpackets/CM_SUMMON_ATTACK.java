@@ -9,6 +9,7 @@ import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
+import com.aionemu.gameserver.world.World;
 
 /**
  * @author ATracer
@@ -55,9 +56,11 @@ public class CM_SUMMON_ATTACK extends AionClientPacket {
 		}
 
 		VisibleObject obj = summon.getKnownList().getObject(targetObjId);
-		if (obj instanceof Creature) {
+		if (obj instanceof Creature)
 			summon.getController().attackTarget((Creature) obj, time, false);
-		} else
+		else if (obj != null)
 			log.warn(player + " tried to use summon attack on a wrong target: " + obj);
+		else
+			log.warn(player + " tried to use summon attack on an unknown target: " + World.getInstance().findVisibleObject(targetObjId));
 	}
 }

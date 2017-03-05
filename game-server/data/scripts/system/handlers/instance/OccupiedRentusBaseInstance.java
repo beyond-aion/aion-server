@@ -60,7 +60,7 @@ public class OccupiedRentusBaseInstance extends GeneralInstanceHandler {
 			case 236300: // Brigade General Vasharti
 				deleteNpc(799669);
 				doors.get(70).setOpen(true);
-				spawn(730401, 193.6f, 436.5f, 262f, (byte) 86);
+				spawn(730401, 193.6f, 436.5f, 262f, (byte) 86); // occupied rentus base exit
 				spawn(833048, 195.48f, 413.87f, 260.97f, (byte) 27); // Rentus Quality Supply Storage Box
 				Npc ariana = (Npc) spawn(799670, 183.736f, 391.392f, 260.571f, (byte) 26);
 				PacketSendUtility.broadcastMessage(ariana, 1500417, 5000);

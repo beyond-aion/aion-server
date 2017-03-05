@@ -50,11 +50,6 @@ public class SummonController extends CreatureController<Summon> {
 		SummonsService.release(getOwner(), unsummonType, isAttacked);
 	}
 
-	@Override
-	public Summon getOwner() {
-		return (Summon) super.getOwner();
-	}
-
 	/**
 	 * Change to rest mode
 	 */

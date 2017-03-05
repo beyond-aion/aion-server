@@ -16,7 +16,7 @@ public class Enemy extends AdminCommand {
 		super("enemy", "Modifies your enmity towards others.");
 
 		// @formatter:off
-		setParamInfo(
+		setSyntaxInfo(
 			"<all> [players|npcs] - Sets your enmity (default: you're enemy of everyone, optional: you're enemy of all players, or all npcs).",
 			"<none> [players|npcs] - Disables your enmity (default: you're enemy of nobody, optional: you're enemy of no player, or no npc).",
 			"<cancel> - Resets your enmity to the default."

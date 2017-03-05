@@ -65,14 +65,14 @@ public class CM_MOVE extends AionClientPacket {
 
 	@Override
 	protected void runImpl() {
-		final Player player = getConnection().getActivePlayer();
-		if (player == null)
-			return;
+		Player player = getConnection().getActivePlayer();
 		if (!player.isSpawned())
 			return;
 		if (player.getLifeStats().isAlreadyDead())
 			return;
-		if (player.getEffectController().isUnderFear() || player.isInCustomState(CustomPlayerState.WATCHING_CUTSCENE)) // client sends crap when watching cutscenes in transform state
+		if (player.getEffectController().isUnderFear())
+			return;
+		if (player.isInCustomState(CustomPlayerState.WATCHING_CUTSCENE)) // client sends crap when watching cutscenes in transform state
 			return;
 
 		float speed = player.getGameStats().getMovementSpeedFloat();
@@ -134,10 +134,13 @@ public class CM_MOVE extends AionClientPacket {
 		if (!AntiHackService.canMove(player, x, y, z, speed, type))
 			return;
 
+		if (player.isProtectionActive() && (player.getX() != x || player.getY() != y || player.getZ() > z + 0.5f))
+			player.getController().stopProtectionActiveTask();
 		World.getInstance().updatePosition(player, x, y, z, heading);
 		m.updateLastMove();
 
-		if ((type & MovementMask.POSITION) == MovementMask.POSITION && (type & MovementMask.MANUAL) == MovementMask.MANUAL || type == MovementMask.IMMEDIATE)
+		if ((type & MovementMask.POSITION) == MovementMask.POSITION && (type & MovementMask.MANUAL) == MovementMask.MANUAL
+			|| type == MovementMask.IMMEDIATE)
 			PacketSendUtility.broadcastToSightedPlayers(player, new SM_MOVE(player));
 
 		if ((type & MovementMask.FALL) == MovementMask.FALL) {

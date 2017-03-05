@@ -16,6 +16,7 @@ import com.aionemu.gameserver.dao.LegionDAO;
 import com.aionemu.gameserver.dao.MailDAO;
 import com.aionemu.gameserver.dao.PlayerDAO;
 import com.aionemu.gameserver.dao.PlayerRegisteredItemsDAO;
+import com.aionemu.gameserver.model.gameobjects.AionObject;
 
 /**
  * This class is responsible for id generation for all Aion-Emu objects.<br>
@@ -154,29 +155,13 @@ public class IDFactory {
 	 *           if id was not taken earlier
 	 */
 	public void releaseId(int id) {
-		try {
-			lock.lock();
-			boolean status = idList.get(id);
-			if (!status) {
-				throw new IDFactoryError("ID " + id + " is not taken, can't release it.");
-			}
-			idList.clear(id);
-			if (id < nextMinId || nextMinId == Integer.MIN_VALUE) {
-				nextMinId = id;
-			}
-		} finally {
-			lock.unlock();
-		}
+		releaseIds(id);
 	}
 
-	public void releaseIds(Collection<Integer> ids) {
-		if (GenericValidator.isBlankOrNull(ids)) {
-			return;
-		}
-
+	public void releaseIds(int... ids) {
 		try {
 			lock.lock();
-			for (Integer id : ids) {
+			for (int id : ids) {
 				boolean status = idList.get(id);
 				if (!status) {
 					throw new IDFactoryError("ID " + id + " is not taken, can't release it.");
@@ -189,6 +174,13 @@ public class IDFactory {
 		} finally {
 			lock.unlock();
 		}
+	}
+
+	public void releaseObjectIds(Collection<? extends AionObject> unusedObjects) {
+		if (GenericValidator.isBlankOrNull(unusedObjects))
+			return;
+
+		releaseIds(unusedObjects.stream().filter(o -> o != null && o.getObjectId() > 0).mapToInt(AionObject::getObjectId).toArray());
 	}
 
 	/**

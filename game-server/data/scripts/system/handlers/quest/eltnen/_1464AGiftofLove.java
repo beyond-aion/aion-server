@@ -42,9 +42,7 @@ public class _1464AGiftofLove extends QuestHandler {
 				} else
 					return sendQuestStartDialog(env);
 			}
-		}
-
-		else if (qs.getStatus() == QuestStatus.START) {
+		} else if (qs.getStatus() == QuestStatus.START) {
 			switch (targetId) {
 				case 204424:
 					switch (env.getDialogActionId()) {

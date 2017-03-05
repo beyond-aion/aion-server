@@ -22,13 +22,13 @@ public class CurseEffect extends BufEffect {
 	@Override
 	public void startEffect(Effect effect) {
 		super.startEffect(effect);
-		effect.setAbnormal(AbnormalState.CURSE.getId());
-		effect.getEffected().getEffectController().setAbnormal(AbnormalState.CURSE.getId());
+		effect.setAbnormal(AbnormalState.CURSE);
+		effect.getEffected().getEffectController().setAbnormal(AbnormalState.CURSE);
 	}
 
 	@Override
 	public void endEffect(Effect effect) {
 		super.endEffect(effect);
-		effect.getEffected().getEffectController().unsetAbnormal(AbnormalState.CURSE.getId());
+		effect.getEffected().getEffectController().unsetAbnormal(AbnormalState.CURSE);
 	}
 }

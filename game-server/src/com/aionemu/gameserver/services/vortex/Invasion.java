@@ -73,7 +73,7 @@ public class Invasion extends DimensionalVortex<VortexLocation> {
 				first = firstOne;
 			}
 
-			if (first.equals(player)) {
+			if (player.equals(first)) {
 				if (isInvader) {
 					invAlliance = PlayerAllianceService.createAlliance(first, player, TeamType.ALLIANCE_OFFENCE);
 				} else {

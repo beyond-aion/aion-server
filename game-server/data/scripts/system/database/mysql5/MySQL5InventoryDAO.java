@@ -27,7 +27,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.items.storage.PlayerStorage;
 import com.aionemu.gameserver.model.items.storage.Storage;
 import com.aionemu.gameserver.model.items.storage.StorageType;
-import com.aionemu.gameserver.services.item.ItemService;
+import com.aionemu.gameserver.utils.idfactory.IDFactory;
 
 import javolution.util.FastTable;
 
@@ -289,9 +289,8 @@ public class MySQL5InventoryDAO extends InventoryDAO {
 			item.setPersistentState(PersistentState.UPDATED);
 		}
 
-		if (!itemsToDelete.isEmpty() && deleteResult) {
-			ItemService.releaseItemIds(itemsToDelete);
-		}
+		if (deleteResult)
+			IDFactory.getInstance().releaseObjectIds(itemsToDelete);
 
 		return deleteResult && insertResult && updateResult;
 	}

@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import org.slf4j.LoggerFactory;
+
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.siege.SiegeNpc;
@@ -23,13 +25,16 @@ public class SiegeCounter {
 	}
 
 	public void addDamage(Creature creature, int damage) {
-
 		SiegeRace siegeRace;
 		if (creature instanceof Player)
 			siegeRace = SiegeRace.getByRace(((Player) creature).getRace());
-		else if (creature instanceof SiegeNpc)
+		else if (creature instanceof SiegeNpc) {
 			siegeRace = ((SiegeNpc) creature).getSiegeRace();
-		else
+			if (siegeRace == null) {
+				LoggerFactory.getLogger(SiegeCounter.class).warn("Missing siegeRace for " + creature);
+				return;
+			}
+		} else
 			return;
 
 		siegeRaceCounters.get(siegeRace).addPoints(creature, damage);

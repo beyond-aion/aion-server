@@ -33,7 +33,7 @@ public class HarmonyScoreInfo extends InstanceScoreInfo {
 				writeD(buf, harmonyArena.getRound());
 				break;
 			case 3:
-				writeD(buf, harmonyGroupReward.getOwner());
+				writeD(buf, harmonyGroupReward.getOwnerId());
 				writeS(buf, harmonyGroupReward.getAGPlayer(owner).getName(), 52); // playerName
 				writeD(buf, harmonyGroupReward.getId()); // groupObj
 				writeD(buf, owner); // memberObj
@@ -105,7 +105,7 @@ public class HarmonyScoreInfo extends InstanceScoreInfo {
 						writeD(buf, 0);
 						writeD(buf, rewardedPlayer.getRemaningTime()); // buffTime
 						writeD(buf, 0);
-						writeC(buf, group.getOwner()); // groupId
+						writeC(buf, group.getOwnerId()); // groupId
 						writeC(buf, i); // memberNr
 						writeH(buf, 0);
 						writeS(buf, p.getName(), 52); // playerName

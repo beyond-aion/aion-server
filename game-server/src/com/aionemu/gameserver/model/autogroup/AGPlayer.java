@@ -9,7 +9,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
  */
 public class AGPlayer {
 
-	private Integer objectId;
+	private int objectId;
 	private Race race;
 	private PlayerClass playerClass;
 	private String name;
@@ -25,7 +25,7 @@ public class AGPlayer {
 		isOnline = true;
 	}
 
-	public Integer getObjectId() {
+	public int getObjectId() {
 		return objectId;
 	}
 

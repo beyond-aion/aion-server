@@ -254,7 +254,7 @@ public class PadmarashkaAI extends AggressiveNpcAI {
 
 	private void putToSleep() {
 		SkillEngine.getInstance().getSkill(getOwner(), 19186, 55, getOwner()).useNoAnimationSkill();
-		this.getEffectController().setAbnormal(AbnormalState.SLEEP.getId());
+		this.getEffectController().setAbnormal(AbnormalState.SLEEP);
 		canThink = false;
 	}
 

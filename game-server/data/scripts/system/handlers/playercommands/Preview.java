@@ -1,6 +1,7 @@
 package playercommands;
 
 import java.awt.Color;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ScheduledFuture;
@@ -12,6 +13,8 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.items.ItemSlot;
 import com.aionemu.gameserver.model.templates.item.ItemTemplate;
 import com.aionemu.gameserver.model.templates.item.enums.EquipType;
+import com.aionemu.gameserver.model.templates.itemset.ItemPart;
+import com.aionemu.gameserver.model.templates.itemset.ItemSetTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_UPDATE_PLAYER_APPEARANCE;
 import com.aionemu.gameserver.utils.ChatUtil;
@@ -20,6 +23,7 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.chathandlers.PlayerCommand;
 
 import javolution.util.FastMap;
+import javolution.util.FastTable;
 
 /**
  * @author Neon
@@ -27,13 +31,18 @@ import javolution.util.FastMap;
 public class Preview extends PlayerCommand {
 
 	private static final Map<Integer, ScheduledFuture<?>> PREVIEW_RESETS = new FastMap<Integer, ScheduledFuture<?>>().shared();
-	private static final byte MAX_PLAYER_PREVIEWS = 40;
 	private static final byte PREVIEW_TIME = 10;
 
 	public Preview() {
 		super("preview", "Previews equipment.");
 
-		setParamInfo("<item> [color] - Previews the specified item on your character (default: standard item color, optional: dye item link/ID, color name or color HEX code).");
+		// @formatter:off
+		setSyntaxInfo(
+			"<item(s)> [color] - Previews the specified item(s) on your character (default: standard item color, optional: dye item, color name or color HEX code).",
+			"Multiple items may be separated with commas, but not with spaces.",
+			"If a single item is given and it's a part of an item set, you will get a preview of the whole item set."
+		);
+		// @formatter:on
 	}
 
 	@Override
@@ -48,45 +57,15 @@ public class Preview extends PlayerCommand {
 			return;
 		}
 
-		if (PREVIEW_RESETS.size() >= MAX_PLAYER_PREVIEWS) {
-			sendInfo(player, "There are currently too many players using this command. Please wait a moment.");
+		List<ItemTemplate> items = new FastTable<>();
+		if (!parseItems(player, params[0], items))
 			return;
-		}
-
-		int itemId = ChatUtil.getItemId(params[0]);
-		if (itemId == 0) {
-			sendInfo(player, "Invalid item.");
-			return;
-		}
-
-		ItemTemplate itemTemplate = DataManager.ITEM_DATA.getItemTemplate(itemId);
-		if (itemTemplate == null) {
-			sendInfo(player, "Unknown item.");
-			return;
-		} else if (itemTemplate.getEquipmentType() == EquipType.NONE) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CHANGE_ITEM_SKIN_PREVIEW_INVALID_COSMETIC());
-			return;
-		} else if (itemTemplate.getRace() == player.getOppositeRace()) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_PREVIEW_INVALID_RACE());
-			return;
-		} else {
-			Gender itemGender = itemTemplate.getUseLimits().getGenderPermitted();
-			if (itemGender != null && itemGender != player.getGender()) {
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_PREVIEW_INVALID_GENDER());
-				return;
-			}
-		}
-
-		if (!ItemSlot.isVisible(itemTemplate.getItemSlot())) {
-			sendInfo(player, "Item is no visible equipment.");
-			return;
-		}
 
 		Integer itemColor = null; // null = default item color
 		String colorText = "default";
 		if (params.length > 1) {
-			if (!itemTemplate.isItemDyePermitted()) {
-				sendInfo(player, "The specified item can not be dyed.");
+			if (!items.stream().anyMatch(ItemTemplate::isItemDyePermitted)) {
+				sendInfo(player, "The specified item" + (items.size() == 1 ? "" : "s") + " can not be dyed.");
 				return;
 			}
 
@@ -122,41 +101,100 @@ public class Preview extends PlayerCommand {
 			}
 		}
 
-		// create fake item for preview (ObjId 0, since it'll not be used anywhere and to avoid allocating new IDFactory IDs)
-		Item previewItem = new Item(0, itemTemplate, 1, true, itemTemplate.getItemSlot());
-		previewItem.setItemColor(itemColor);
+		String itemNames = "";
+		long previewItemsSlotMask = 0;
+		List<Item> previewItems = new FastTable<>();
+		if (items.size() == 1 && items.get(0).isItemSet()) { // preview whole set
+			ItemSetTemplate itemSet = items.get(0).getItemSet();
+			for (ItemPart part : itemSet.getItempart())
+				previewItemsSlotMask |= addFakeItem(previewItems, previewItemsSlotMask, part.getItemId(), itemColor);
+		} else {
+			for (ItemTemplate template : items)
+				previewItemsSlotMask |= addFakeItem(previewItems, previewItemsSlotMask, template.getTemplateId(), itemColor);
+		}
+		for (Item previewItem : previewItems)
+			itemNames += "\n\t" + ChatUtil.item(previewItem.getItemId());
 
+		addOwnEquipment(player, previewItems, previewItemsSlotMask);
+		previewItems.sort(Comparator.comparingLong(Item::getEquipmentSlot)); // order by equipment slot ids (ascending) to avoid display bugs
+		PacketSendUtility.sendPacket(player, new SM_UPDATE_PLAYER_APPEARANCE(player.getObjectId(), previewItems));
 		registerPreviewReset(player, PREVIEW_TIME);
-		PacketSendUtility.sendPacket(player, new SM_UPDATE_PLAYER_APPEARANCE(player.getObjectId(), getPreviewItems(player, previewItem)));
-		sendInfo(player, "Previewing " + ChatUtil.item(itemId) + " for " + PREVIEW_TIME + " seconds (color: " + colorText + ").");
+		sendInfo(player, "Previewing the following items for " + PREVIEW_TIME + " seconds (color: " + colorText + "):" + itemNames);
 	}
 
-	private static List<Item> getPreviewItems(Player player, Item previewItem) {
-		long previewSlot = previewItem.getEquipmentSlot();
-		List<Item> previewItems = player.getEquipment().getEquippedForAppearence();
-
-		if (ItemSlot.isTwoHandedWeapon(previewSlot))
-			// remove shield or sub hand weapons if previewing TwoHanded
-			previewItems.removeIf(item -> item.getEquipmentSlot() == ItemSlot.SUB_HAND.getSlotIdMask());
-		
-		// put item in the new appearance list (at the correct position)
-		for (int i = 0; i < previewItems.size(); i++) {
-			long currentSlot = previewItems.get(i).getEquipmentSlot();
-			if ((currentSlot & previewSlot) != 0) {
-				// replace players current appearance item at that slot
-				previewItems.set(i, previewItem);
-				break;
-			} else if (currentSlot > previewSlot) {
-				// player currently has no item in the corresponding slot, so insert preview item here
-				previewItems.add(i, previewItem);
-				break;
-			} else if (i + 1 == previewItems.size()) {
-				// last entry, add behind
-				previewItems.add(previewItem);
+	private boolean parseItems(Player player, String param, List<ItemTemplate> items) {
+		String[] ids = param.split(",|(?<=[^,])(?=\\[)|(?<=[\\]])(?=[^\\[])"); // split on , and between item tags (square brackets)
+		for (String id : ids) {
+			int itemId = ChatUtil.getItemId(id);
+			if (itemId == 0) {
+				sendInfo(player, "Invalid item specified.");
+				return false;
 			}
-		}
 
-		return previewItems;
+			ItemTemplate itemTemplate = DataManager.ITEM_DATA.getItemTemplate(itemId);
+			if (itemTemplate == null) {
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CHANGE_ITEM_SKIN_NO_TARGET_ITEM());
+				return false;
+			} else if (itemTemplate.getEquipmentType() == EquipType.NONE) {
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CHANGE_ITEM_SKIN_PREVIEW_INVALID_COSMETIC());
+				return false;
+			} else if (itemTemplate.getRace() == player.getOppositeRace()) {
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_PREVIEW_INVALID_RACE());
+				return false;
+			} else {
+				Gender itemGender = itemTemplate.getUseLimits().getGenderPermitted();
+				if (itemGender != null && itemGender != player.getGender()) {
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_PREVIEW_INVALID_GENDER());
+					return false;
+				}
+			}
+
+			if (!ItemSlot.isVisible(itemTemplate.getItemSlot())) {
+				sendInfo(player, "Item is no visible equipment.");
+				return false;
+			}
+
+			items.add(itemTemplate);
+		}
+		return true;
+	}
+
+	/**
+	 * @return Equipment slot mask of the preview item, 0 if it was not added
+	 */
+	private static long addFakeItem(List<Item> items, long previewItemsSlotMask, int itemId, Integer itemColor) {
+		ItemTemplate itemTemplate = DataManager.ITEM_DATA.getItemTemplate(itemId);
+		long itemSlotMask = itemTemplate.getItemSlot();
+		if (!ItemSlot.isVisible(itemSlotMask)) // don't add invisible items (like rings or belts)
+			return 0;
+		long occupiedSlots = previewItemsSlotMask & itemSlotMask;
+		if (occupiedSlots == itemSlotMask) // an item of that kind is already present in the list
+			return 0;
+		if (itemSlotMask == ItemSlot.EARRING_RIGHT_OR_LEFT.getSlotIdMask()) {
+			if (occupiedSlots == 0)
+				itemSlotMask = ItemSlot.EARRINGS_LEFT.getSlotIdMask();
+			else if (occupiedSlots == ItemSlot.EARRINGS_LEFT.getSlotIdMask())
+				itemSlotMask = ItemSlot.EARRINGS_RIGHT.getSlotIdMask();
+		}
+		Item previewItem = new Item(0, itemTemplate, 1, true, itemSlotMask); // ObjId 0 to avoid allocating new IDFactory IDs (it'll not be used anywhere)
+		if (itemTemplate.isItemDyePermitted())
+			previewItem.setItemColor(itemColor);
+		items.add(previewItem);
+		return itemSlotMask;
+	}
+
+	private static void addOwnEquipment(Player player, List<Item> previewItems, long previewItemsSlotMask) {
+		boolean previewTwoHanded = false;
+		for (Item visibleEquipment : player.getEquipment().getEquippedForAppearence()) {
+			if (previewTwoHanded || ItemSlot.isTwoHandedWeapon(visibleEquipment.getEquipmentSlot())) {
+				previewTwoHanded = true;
+				if (visibleEquipment.getEquipmentSlot() == ItemSlot.SUB_HAND.getSlotIdMask())
+					continue; // don't add players shield or sub hand weapon if previewing TwoHanded
+			}
+
+			if ((visibleEquipment.getEquipmentSlot() & previewItemsSlotMask) == 0) // add rest of players equipment
+				previewItems.add(visibleEquipment);
+		}
 	}
 
 	private static void registerPreviewReset(final Player player, int duration) {

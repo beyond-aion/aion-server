@@ -44,7 +44,7 @@ public class CM_FRIEND_ADD extends AionClientPacket {
 			sendPacket(SM_FRIEND_RESPONSE.TARGET_OFFLINE);
 		}	else if (activePlayer.equals(targetPlayer)) {
 			sendPacket(SM_SYSTEM_MESSAGE.STR_BUDDYLIST_BUSY());
-		} else if (CustomConfig.FRIENDLIST_GM_RESTRICT && ((targetPlayer.isGM() && !activePlayer.isGM()) || (activePlayer.isGM() && !targetPlayer.isGM()))) {
+		} else if (CustomConfig.FRIENDLIST_GM_RESTRICT && ((targetPlayer.isStaff() && !activePlayer.isStaff()) || (activePlayer.isStaff() && !targetPlayer.isStaff()))) {
 			sendPacket(SM_SYSTEM_MESSAGE.STR_BUDDY_CANT_ADD_WHEN_HE_IS_ASKED_QUESTION(targetPlayer.getName(true)));
 		} else if (activePlayer.getFriendList().getFriend(targetPlayer.getObjectId()) != null) {
 			sendPacket(SM_FRIEND_RESPONSE.TARGET_ALREADY_FRIEND);

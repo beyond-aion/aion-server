@@ -18,7 +18,7 @@ public class Time extends AdminCommand {
 	public Time() {
 		super("time", "Changes the game time.");
 
-		setParamInfo(
+		setSyntaxInfo(
 			"<dawn|day|dusk|night> - Sets the specified day time.",
 			"<0-23> - Sets the specified hour."
 		);

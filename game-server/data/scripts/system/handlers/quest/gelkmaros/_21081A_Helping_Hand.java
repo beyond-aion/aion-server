@@ -80,8 +80,7 @@ public class _21081A_Helping_Hand extends QuestHandler {
 				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
-			if (targetId == 799202) // Drenia
-			{
+			if (targetId == 799202) { // Drenia
 				switch (env.getDialogActionId()) {
 					case SELECT_QUEST_REWARD:
 						return sendQuestDialog(env, 5);

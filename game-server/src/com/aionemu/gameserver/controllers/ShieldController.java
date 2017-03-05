@@ -22,26 +22,30 @@ public class ShieldController extends VisibleObjectController<Shield> {
 
 	@Override
 	public void see(VisibleObject object) {
-		FortressLocation loc = SiegeService.getInstance().getFortress(getOwner().getId());
-		Player player = (Player) object;
+		if (object instanceof Player) {
+			FortressLocation loc = SiegeService.getInstance().getFortress(getOwner().getId());
+			Player player = (Player) object;
 
-		if (loc.isUnderShield() && loc.getRace() != SiegeRace.getByRace(player.getRace())) {
-			ActionObserver observer = ShieldService.getInstance().createShieldObserver(loc.getLocationId(), player);
-			if (observer != null) {
-				player.getObserveController().addObserver(observer);
-				observed.put(player.getObjectId(), observer);
+			if (loc.isUnderShield() && loc.getRace() != SiegeRace.getByRace(player.getRace())) {
+				ActionObserver observer = ShieldService.getInstance().createShieldObserver(loc.getLocationId(), player);
+				if (observer != null) {
+					player.getObserveController().addObserver(observer);
+					observed.put(player.getObjectId(), observer);
+				}
 			}
 		}
 	}
 
 	@Override
 	public void notSee(VisibleObject object, ObjectDeleteAnimation animation) {
-		FortressLocation loc = SiegeService.getInstance().getFortress(getOwner().getId());
-		Player player = (Player) object;
+		if (object instanceof Player) {
+			FortressLocation loc = SiegeService.getInstance().getFortress(getOwner().getId());
+			Player player = (Player) object;
 
-		if (loc.isUnderShield() && loc.getRace() != SiegeRace.getByRace(player.getRace())) {
-			ActionObserver observer = observed.remove(player.getObjectId());
-			player.getObserveController().removeObserver(observer);
+			if (loc.isUnderShield() && loc.getRace() != SiegeRace.getByRace(player.getRace())) {
+				ActionObserver observer = observed.remove(player.getObjectId());
+				player.getObserveController().removeObserver(observer);
+			}
 		}
 	}
 

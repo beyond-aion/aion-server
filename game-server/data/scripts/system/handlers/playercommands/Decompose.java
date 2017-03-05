@@ -22,7 +22,7 @@ public class Decompose extends PlayerCommand {
 	public Decompose() {
 		super("decompose", "Opens decomposable items.");
 
-		setParamInfo("<item> [count] - Decomposes the specified item (default: all, optional: number of items to decompose).");
+		setSyntaxInfo("<item> [count] - Decomposes the specified item (default: all, optional: number of items to decompose).");
 	}
 
 	@Override

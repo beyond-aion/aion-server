@@ -25,6 +25,6 @@ public class See extends AdminCommand {
 			sendInfo(admin, "You lost vision.");
 		}
 		PacketSendUtility.broadcastPacket(admin, new SM_PLAYER_STATE(admin), true);
-		admin.getKnownList().updateVisiblePlayers();
+		admin.updateKnownlist();
 	}
 }

@@ -22,7 +22,7 @@ public class MoveTo extends AdminCommand {
 	public MoveTo() {
 		super("moveto", "Moves you to any location.");
 
-		setParamInfo(
+		setSyntaxInfo(
 			"<map name|ID> <x> <y> [z] - Moves you to the specified position (map names need underscores instead of spaces).",
 			"<position link> - Moves you to the position of the chat link.",
 			"<player name> - Moves you to the position of the player.",

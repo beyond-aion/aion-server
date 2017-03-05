@@ -46,9 +46,7 @@ public class _4077PorgusRoundup extends QuestHandler {
 			updateQuestStatus(env);
 			NpcActions.delete(npc, true);
 			return true;
-		}
-
-		else if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 1) {
+		} else if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 1) {
 
 			if (MathUtil.getDistance(1356, 1901, 46, npc.getX(), npc.getY(), npc.getZ()) > 10) {
 				return false;
@@ -72,8 +70,7 @@ public class _4077PorgusRoundup extends QuestHandler {
 			targetId = ((Npc) env.getVisibleObject()).getNpcId();
 
 		if (qs == null || qs.isStartable()) {
-			if (targetId == 205158) // Holekk
-			{
+			if (targetId == 205158) { // Holekk
 				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 4762);
 				else

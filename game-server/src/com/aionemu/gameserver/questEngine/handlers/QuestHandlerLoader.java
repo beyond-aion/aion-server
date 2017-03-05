@@ -34,8 +34,7 @@ public class QuestHandlerLoader implements ClassListener {
 			if (ClassUtils.isSubclass(c, QuestHandler.class)) {
 				try {
 					Class<? extends QuestHandler> tmp = (Class<? extends QuestHandler>) c;
-					if (tmp != null)
-						QuestEngine.getInstance().addQuestHandler(tmp.newInstance());
+					QuestEngine.getInstance().addQuestHandler(tmp.newInstance());
 				} catch (Exception e) {
 					throw new RuntimeException("Failed to load quest handler class: " + c.getName(), e);
 				}

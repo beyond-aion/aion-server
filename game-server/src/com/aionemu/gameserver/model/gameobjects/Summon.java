@@ -5,7 +5,6 @@ import java.util.Queue;
 import java.util.concurrent.Future;
 
 import com.aionemu.gameserver.ai.AIEngine;
-import com.aionemu.gameserver.controllers.CreatureController;
 import com.aionemu.gameserver.controllers.SummonController;
 import com.aionemu.gameserver.controllers.attack.AggroList;
 import com.aionemu.gameserver.controllers.attack.PlayerAggroList;
@@ -43,7 +42,7 @@ public class Summon extends Creature {
 	 * @param objectTemplate
 	 * @param time
 	 */
-	public Summon(int objId, CreatureController<? extends Creature> controller, SpawnTemplate spawnTemplate, NpcTemplate objectTemplate, int time) {
+	public Summon(int objId, SummonController controller, SpawnTemplate spawnTemplate, NpcTemplate objectTemplate, int time) {
 		super(objId, controller, spawnTemplate, objectTemplate, new WorldPosition(spawnTemplate.getWorldId()));
 		controller.setOwner(this);
 		String ai = objectTemplate.getAi();
