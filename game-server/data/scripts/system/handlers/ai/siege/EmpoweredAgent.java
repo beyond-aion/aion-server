@@ -81,23 +81,13 @@ public class EmpoweredAgent extends AggressiveNpcAI {
 						break;
 					case 25:
 					case 5:
-						onHealEvent(hpPercentage);
+						SkillEngine.getInstance().getSkill(getOwner(), 21778, 1, getOwner()).useWithoutPropSkill(); // 20% heal
 						break;
 				}
 				percents.remove(percent);
 				break;
 			}
 		}
-	}
-	
-	/**
-	 * Increases the life by 20% if skill wasn't used correctly
-	 * TODO: Remove me if AI can use skills without interruption
-	 * @param hpPercentage
-	 */
-	private void onHealEvent(int hpPercentage) {
-		if (!SkillEngine.getInstance().getSkill(getOwner(), 21778, 1, getOwner()).useSkill())
-			getOwner().getLifeStats().setCurrentHp(hpPercentage + 20);
 	}
 	
 	@Override
