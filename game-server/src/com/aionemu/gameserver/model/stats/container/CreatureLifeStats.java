@@ -212,16 +212,18 @@ public abstract class CreatureLifeStats<T extends Creature> {
 		if (getOwner().getEffectController().isAbnormalSet(AbnormalState.DISEASE))
 			return currentHp;
 
-		int hpIncreased = 0;
+		int hpIncreased;
 		hpLock.lock();
 		try {
 			if (alreadyDead)
 				return 0;
 
 			int newHp = Math.min(currentHp + value, getMaxHp());
-			if (newHp > currentHp) {
-				hpIncreased = newHp - currentHp;
-				currentHp = newHp;
+			hpIncreased = newHp - currentHp;
+			currentHp = newHp;
+			if (hpIncreased < 0 && currentHp <= 0) { // some skills reduce hp via a negative heal (ghost absorption)
+				currentHp = 0;
+				alreadyDead = true;
 			}
 		} finally {
 			hpLock.unlock();
@@ -417,41 +419,28 @@ public abstract class CreatureLifeStats<T extends Creature> {
 	}
 
 	/**
-	 * @param hp
+	 * Sets the current HP without sending packets or notifying observers
 	 */
-	public void setCurrentHp(int hp) {
-		boolean hpNotAtMaxValue = false;
+	public final void setCurrentHp(int hp) {
 		hpLock.lock();
 		try {
-			currentHp = hp;
-
-			if (currentHp > 0)
-				alreadyDead = false;
-
-			if (currentHp < getMaxHp())
-				hpNotAtMaxValue = true;
+			currentHp = Math.max(0, hp);
+			alreadyDead = currentHp == 0;
 		} finally {
 			hpLock.unlock();
 		}
-		if (hpNotAtMaxValue) {
-			onReduceHp(TYPE.REGULAR, 0, 0, LOG.REGULAR);
-		}
 	}
 
-	public int setCurrentMp(int value) {
+	/**
+	 * Sets the current MP without sending packets or notifying observers
+	 */
+	public final void setCurrentMp(int value) {
 		mpLock.lock();
 		try {
-			int newMp = value;
-
-			if (newMp < 0)
-				newMp = 0;
-
-			this.currentMp = newMp;
+			currentMp = Math.max(0, value);
 		} finally {
 			mpLock.unlock();
 		}
-		onReduceMp(TYPE.MP, 0, 0, LOG.REGULAR);
-		return currentMp;
 	}
 
 	/**
@@ -459,7 +448,7 @@ public abstract class CreatureLifeStats<T extends Creature> {
 	 * 
 	 * @param mpPercent
 	 */
-	public void setCurrentMpPercent(int mpPercent) {
+	public final void setCurrentMpPercent(int mpPercent) {
 		mpLock.lock();
 		try {
 			this.currentMp = (int) (mpPercent / 100f * getMaxMp());

@@ -23,6 +23,8 @@ import com.aionemu.gameserver.model.stats.calc.functions.StatFunction;
 import com.aionemu.gameserver.model.stats.calc.functions.StatFunctionProxy;
 import com.aionemu.gameserver.model.templates.itemset.ItemSetTemplate;
 import com.aionemu.gameserver.model.templates.stats.StatsTemplate;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.LOG;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.TYPE;
 
 import javolution.util.FastTable;
 
@@ -387,6 +389,7 @@ public abstract class CreatureGameStats<T extends Creature> {
 			if (oldMaxHp != currentMaxHp) {
 				float percent = 1f * currentMaxHp / oldMaxHp;
 				owner.getLifeStats().setCurrentHp(Math.min(Math.round(owner.getLifeStats().getCurrentHp() * percent), currentMaxHp));
+				owner.getLifeStats().onReduceHp(TYPE.REGULAR, 0, 0, LOG.REGULAR);
 			}
 		}
 	}
@@ -398,6 +401,7 @@ public abstract class CreatureGameStats<T extends Creature> {
 			if (oldMaxMp != currentMaxMp) {
 				float percent = 1f * currentMaxMp / oldMaxMp;
 				owner.getLifeStats().setCurrentMp(Math.min(Math.round(owner.getLifeStats().getCurrentMp() * percent), currentMaxMp));
+				owner.getLifeStats().onReduceMp(TYPE.MP, 0, 0, LOG.REGULAR);
 			}
 		}
 	}
