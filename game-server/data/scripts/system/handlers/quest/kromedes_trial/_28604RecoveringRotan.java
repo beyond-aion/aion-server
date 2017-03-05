@@ -1,18 +1,22 @@
 package quest.kromedes_trial;
 
 import static com.aionemu.gameserver.model.DialogAction.*;
+
+import com.aionemu.gameserver.model.DialogPage;
+import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestActionType;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
+import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
- * @author Rolandas
- * @modified Pad
+ * @author Rolandas, Pad, Neon
  */
 public class _28604RecoveringRotan extends QuestHandler {
 
@@ -29,30 +33,38 @@ public class _28604RecoveringRotan extends QuestHandler {
 	@Override
 	public boolean onDialogEvent(QuestEnv env) {
 		Player player = env.getPlayer();
-		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		if (qs == null || qs.isStartable()) {
-			return QuestService.startQuest(env);
-		}
 
-		if (env.getTargetId() == 700961) {
+		if (env.getTargetId() != 700961)
+			return false;
+		if (player.getRace() != Race.ASMODIANS) // both factions use the same npc for rotan quest (see quest 18604)
+			return false;
+
+		QuestState qs = player.getQuestStateList().getQuestState(questId);
+		if (qs == null) { // in case quest wasn't started by zone enter or player aborted
 			if (env.getDialogActionId() == USE_OBJECT) {
-				if (checkItemExistence(env, 164000141, 1, false)) {
-					env.setQuestId(0);
-					return sendQuestDialog(env, 27);
-				}
-				if (qs.getStatus() == QuestStatus.START) {
+				return sendQuestDialog(env, DialogPage.ASK_QUEST_ACCEPT_WINDOW.id());
+			} else if (env.getDialogActionId() == QUEST_ACCEPT_1) {
+				if (QuestService.startQuest(env))
 					return sendQuestDialog(env, 10002);
-				} else {
-					giveQuestItem(env, 164000141, 1);
-					env.setQuestId(0);
-					return sendQuestDialog(env, 1012);
-				}
-			} else if (env.getDialogActionId() == SELECT_QUEST_REWARD) {
-				return sendQuestDialog(env, 5);
+			} else {
+				return closeDialogWindow(env);
+			}
+		} else if (qs.getStatus() == QuestStatus.START) {
+			if (env.getDialogActionId() == USE_OBJECT) {
+				return sendQuestDialog(env, 10002);
 			} else {
 				changeQuestStep(env, 0, 0, true);
 				return sendQuestEndDialog(env);
 			}
+		} else if (qs.getStatus() == QuestStatus.REWARD) {
+			return sendQuestEndDialog(env);
+		} else if (qs.getStatus() == QuestStatus.COMPLETE) { // handling when quest is already done
+			env.setQuestId(0);
+			if (checkItemExistence(env, 164000141, 1, false)) // player already has rotan summon device
+				return sendQuestDialog(env, DialogPage.NO_RIGHT.id());
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_IDCROMEDE_SKILL_01());
+			giveQuestItem(env, 164000141, 1);
+			return sendQuestDialog(env, 1012);
 		}
 
 		return false;
@@ -69,8 +81,7 @@ public class _28604RecoveringRotan extends QuestHandler {
 		if (zoneName != ZoneName.get("GRAND_CAVERN_300230000"))
 			return false;
 
-		final Player player = env.getPlayer();
-		final QuestState qs = player.getQuestStateList().getQuestState(questId);
+		QuestState qs = env.getPlayer().getQuestStateList().getQuestState(questId);
 
 		if (qs == null || qs.isStartable()) {
 			env.setQuestId(questId);
