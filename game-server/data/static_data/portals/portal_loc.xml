@@ -315,7 +315,7 @@
 	<!-- Asteria Chamber -->
 	<portal_loc world_id="300050000" loc_id="3000500" x="469.343" y="567.713" z="201.732"/>
 	<!-- Crucible Challenge -->
-	<portal_loc world_id="300320000" loc_id="3003200" x="357.10208" y="1662.702" z="95.9803"/>
+	<portal_loc world_id="300320000" loc_id="3003200" x="357.10208" y="1662.702" z="95.9803" h="59"/>
 	<!-- Triniel Arena -->
 	<portal_loc world_id="320090000" loc_id="3200900" x="276" y="293" z="163"/>
 	<!-- Azoturan Fortress -->
