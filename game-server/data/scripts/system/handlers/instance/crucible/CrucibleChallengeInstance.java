@@ -11,6 +11,7 @@ import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.drop.DropItem;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.instance.InstanceScoreType;
 import com.aionemu.gameserver.model.instance.StageType;
@@ -25,6 +26,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.drop.DropRegistrationService;
 import com.aionemu.gameserver.services.instance.InstanceService;
 import com.aionemu.gameserver.services.item.ItemService;
+import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
@@ -86,20 +88,21 @@ public class CrucibleChallengeInstance extends CrucibleInstance {
 
 	@Override
 	public void onDie(final Npc npc) {
+		final int npcId = npc.getNpcId();
 		int points = 0;
-		switch (npc.getNpcId()) {
-			case 217785:
+		switch (npcId) {
 			case 217784:
-				points += 120;
+			case 217785:
+				points = 120;
 				break;
 			case 217786:
 			case 217787:
-				points += 200;
+				points = 200;
 				break;
 			case 217797:
 			case 217798:
 			case 217799:
-				points += 1100;
+				points = 1100;
 				break;
 			case 217788:
 			case 217789:
@@ -107,184 +110,167 @@ public class CrucibleChallengeInstance extends CrucibleInstance {
 			case 217791:
 			case 217792:
 			case 217793:
-				points += 1300;
+				points = 1300;
 				break;
+			case 217843:
 			case 217845:
-				points += 1400;
+				points = 1400;
 				break;
 			case 217783:
-				points += 1600;
+				points = 1600;
 				break;
 			case 217800:
 			case 217801:
-				points += 1650;
+				points = 1650;
 				break;
-			case 217807:
-			case 217808:
-			case 217809:
-			case 217810:
-			case 217811:
-			case 217812:
-			case 217813:
-			case 217814:
-			case 217815:
-			case 217816:
-				points += 2500;
+			case 217807: // ely
+			case 217808: // ely
+			case 217809: // ely
+			case 217810: // ely
+			case 217811: // asmo
+			case 217812: // asmo
+			case 217813: // asmo
+			case 217814: // asmo
+			case 217815: // ely
+			case 217816: // asmo
+				points = 2500;
 				break;
 			case 217847:
-				points += 4600;
+				points = 4600;
 				break;
 			case 217795:
 			case 217794:
-				points += 5000;
+				points = 5000;
 				break;
 			case 217806:
 			case 218562:
 			case 218565:
-				points += 5800;
+				points = 5800;
 				break;
 			case 217819:
-				points += 7200;
+				points = 7200;
 				break;
 		}
 		if (points != 0) {
 			getPlayerReward(instance.getSoloPlayerObj()).addPoints(points);
 			sendPacket(npc.getObjectTemplate().getNameId(), points);
 		}
-		int npcId = 0;
-		switch (npc.getNpcId()) {
-			case 217785:
-			case 217784:
-				npcId = npc.getNpcId();
-				stage1Count++;
-				if (stage1Count == 2) {
+		switch (npcId) {
+			case 217784: // ely
+			case 217785: // asmo
+				if (++stage1Count == 2) {
 					sp(npcId, 342.855f, 1652.6703f, 95.63069f, (byte) 0, 0);
 					sp(npcId, 342.83942f, 1673.2863f, 95.66078f, (byte) 0, 0);
-				}
-				despawnNpc(npc);
-				if (getNpcs(npcId).isEmpty()) {
-					setEvent(StageType.START_STAGE_1_ROUND_2, 2000);
+				} else if (allDeadOrDespawned(npcId) && changeStage(StageType.START_STAGE_1_ROUND_2, 2000)) {
 					sp(217783, 337.82263f, 1662.9073f, 95.27217f, (byte) 0, 4000);
 				}
 				break;
 			case 217783:
-				despawnNpc(npc);
-				setEvent(StageType.PASS_STAGE_1, 0);
-				sp(217758, 347.24026f, 1660.2524f, 95.35922f, (byte) 0, 0);
+				if (changeStage(StageType.PASS_STAGE_1, 0))
+					sp(217758, 347.24026f, 1660.2524f, 95.35922f, (byte) 0, 0);
 				break;
 			case 217843:
 			case 217845:
-				despawnNpc(npc);
-				sp(217848, 1309.2858f, 1732.6802f, 316.0825f, (byte) 0, 1000);
-				sp(217848, 1306.1871f, 1731.7861f, 316.25168f, (byte) 0, 1000);
-				sp(217848, 1308.4879f, 1734.4999f, 316f, (byte) 0, 1000);
-				sp(217848, 1308.67419f, 1736.2063f, 316f, (byte) 0, 1000);
-				sp(217848, 1306.9414f, 1736.5365f, 316f, (byte) 0, 1000);
-				sp(217848, 1305.2534f, 1735.1603f, 315.94586f, (byte) 0, 1000);
-				setEvent(StageType.START_STAGE_3_ROUND_2, 2000);
-				sp(217847, 1307.2786f, 1734.3274f, 316f, (byte) 0, 3000);
-				// to do use skill boss
-				ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-					@Override
-					public void run() {
-						despawnNpcs(getNpcs(217848));
-					}
-
-				}, 3000);
+				if (changeStage(StageType.START_STAGE_3_ROUND_2, 2000)) {
+					sp(217848, 1309.2858f, 1732.6802f, 316.0825f, (byte) 0, 1000);
+					sp(217848, 1306.1871f, 1731.7861f, 316.25168f, (byte) 0, 1000);
+					sp(217848, 1308.4879f, 1734.4999f, 316f, (byte) 0, 1000);
+					sp(217848, 1308.67419f, 1736.2063f, 316f, (byte) 0, 1000);
+					sp(217848, 1306.9414f, 1736.5365f, 316f, (byte) 0, 1000);
+					sp(217848, 1305.2534f, 1735.1603f, 315.94586f, (byte) 0, 1000);
+					sp(217847, 1307.2786f, 1734.3274f, 316f, (byte) 0, 3000);
+					ThreadPoolManager.getInstance().schedule(() -> {
+						Npc fieryGomju = getNpc(217847);
+						if (fieryGomju != null && SkillEngine.getInstance().getSkill(fieryGomju, 19817, 1, fieryGomju).useSkill()) // Brown Bear's Roar
+							ThreadPoolManager.getInstance().schedule(() -> getNpcs(217848).forEach(dracuni -> dracuni.getController().die()), 1000);
+					}, 4000);
+				}
 				break;
 			case 217847:
-				despawnNpc(npc);
 				sp(205676, 1307.6722f, 1732.9865f, 316.07373f, (byte) 6, 0);
 				break;
 			case 217788:
 			case 217789:
 			case 217790:
-				despawnNpc(npc);
-				setEvent(StageType.START_STAGE_4_ROUND_2, 2000);
-				sp(217794, 1271f, 791.5752f, 436.63998f, (byte) 0, 6000);
+				if (changeStage(StageType.START_STAGE_4_ROUND_2, 2000))
+					sp(217794, 1271f, 791.5752f, 436.63998f, (byte) 0, 6000);
 				break;
 			case 217791:
 			case 217792:
 			case 217793:
-				despawnNpc(npc);
-				setEvent(StageType.START_STAGE_4_ROUND_2, 2000);
-				sp(217795, 1258.8425f, 237.91522f, 405.3968f, (byte) 0, 6000);
+				if (changeStage(StageType.START_STAGE_4_ROUND_2, 2000))
+					sp(217795, 1258.8425f, 237.91522f, 405.3968f, (byte) 0, 6000);
 				break;
 			case 217794:
-				despawnNpc(npc);
-				setEvent(StageType.PASS_STAGE_4, 0);
-				sp(217820, 1266.9661f, 791.5348f, 436.64014f, (byte) 0, 4000);
-				setEvent(StageType.START_BONUS_STAGE_4, 4000);
-				break;
 			case 217795:
-				despawnNpc(npc);
-				setEvent(StageType.PASS_STAGE_4, 0);
-				sp(217820, 1251.1598f, 237.97736f, 405.3968f, (byte) 0, 4000);
-				setEvent(StageType.START_BONUS_STAGE_4, 4000);
+				if (stageType != StageType.START_BONUS_STAGE_4) {
+					changeStage(StageType.PASS_STAGE_4, 0);
+					changeStage(StageType.START_BONUS_STAGE_4, 4000);
+					if (npcId == 217794)
+						sp(217820, 1266.9661f, 791.5348f, 436.64014f, (byte) 0, 4000);
+					else
+						sp(217820, 1251.1598f, 237.97736f, 405.3968f, (byte) 0, 4000);
+				}
 				break;
 			case 217786:
 			case 217787:
-				despawnNpc(npc);
-				break;
-			case 217807:
-			case 217808:
-			case 217809:
-			case 217810:
-			case 217811:
-			case 217812:
-			case 217813:
-			case 217814:
-			case 217815:
-			case 217816:
-				despawnNpc(npc);
-				setEvent(StageType.START_STAGE_5_ROUND_2, 2000);
-				switch (Rnd.get(1, 2)) {
-					case 1:
-						npcId = 217806;
-						break;
-					case 2:
-						npcId = 218562;
-						break;
-					case 3:
-						npcId = 218565;
-						break;
+				break; // just despawn (see below switch)
+			case 217807: // ely
+			case 217808: // ely
+			case 217809: // ely
+			case 217810: // ely
+			case 217811: // asmo
+			case 217812: // asmo
+			case 217813: // asmo
+			case 217814: // asmo
+			case 217815: // ely
+			case 217816: // asmo
+				if (changeStage(StageType.START_STAGE_5_ROUND_2, 2000)) {
+					switch (Rnd.get(1, 3)) {
+						case 1:
+							sp(217806, 332.3786f, 349.31204f, 96.090935f, (byte) 0, 4000);
+							break;
+						case 2:
+							sp(218562, 332.3786f, 349.31204f, 96.090935f, (byte) 0, 4000);
+							break;
+						case 3:
+							sp(218565, 332.3786f, 349.31204f, 96.090935f, (byte) 0, 4000);
+							break;
+					}
 				}
-				sp(npcId, 332.3786f, 349.31204f, 96.090935f, (byte) 0, 4000);
 				break;
 			case 217806:
 			case 218562:
 			case 218565:
-				despawnNpc(npc);
-				setEvent(StageType.PASS_STAGE_5, 0);
-				sp(205678, 346.64798f, 349.25586f, 96.090965f, (byte) 0, 0);
+				if (changeStage(StageType.PASS_STAGE_5, 0))
+					sp(205678, 346.64798f, 349.25586f, 96.090965f, (byte) 0, 0);
 				break;
 			case 217819:
-				setEvent(StageType.PASS_STAGE_6, 0);
+				if (changeStage(StageType.PASS_STAGE_6, 0)) {
+					ThreadPoolManager.getInstance().schedule(new Runnable() {
 
-				ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-					@Override
-					public void run() {
-						Player player = null;
-						if (!instance.getPlayersInside().isEmpty()) {
-							player = instance.getPlayersInside().get(0);
-						}
-						despawnNpc(npc);
-						if (player != null) {
-							QuestState qs = player.getQuestStateList().getQuestState(player.getRace() == Race.ASMODIANS ? 28208 : 18208);
-							if (qs != null && qs.getStatus() == QuestStatus.START) {
-								if (qs.getQuestVarById(0) == 1 || qs.getQuestVarById(1) == 4) { // 5 x Vanktrist Spacetwine killed
-									sp(730459, 1765.7104f, 1281.2388f, 389.11743f, (byte) 0, 2000);
-									return;
+						@Override
+						public void run() {
+							Player player = null;
+							if (!instance.getPlayersInside().isEmpty()) {
+								player = instance.getPlayersInside().get(0);
+							}
+							despawnNpc(npc);
+							if (player != null) {
+								QuestState qs = player.getQuestStateList().getQuestState(player.getRace() == Race.ASMODIANS ? 28208 : 18208);
+								if (qs != null && qs.getStatus() == QuestStatus.START) {
+									if (qs.getQuestVarById(0) == 1 || qs.getQuestVarById(1) == 4) { // 5 x Vanktrist Spacetwine killed
+										sp(730459, 1765.7104f, 1281.2388f, 389.11743f, (byte) 0, 2000);
+										return;
+									}
 								}
 							}
+							sp(205679, 1765.522f, 1282.1051f, 389.11743f, (byte) 0, 2000);
 						}
-						sp(205679, 1765.522f, 1282.1051f, 389.11743f, (byte) 0, 2000);
-					}
 
-				}, 4000);
-				break;
+					}, 4000);
+				}
+				return; // return instead of break since despawn is delayed
 			case 217837:
 			case 217838:
 				Player player = npc.getAggroList().getMostPlayerDamage();
@@ -295,17 +281,13 @@ public class CrucibleChallengeInstance extends CrucibleInstance {
 						sp(217820, 1266.9661f, 791.5348f, 436.64014f, (byte) 0, 0);
 					}
 				}
-				despawnNpc(npc);
 				break;
 			case 217800:
 			case 217801:
-				despawnNpc(npc);
-				if (getNpcs(217800).isEmpty() && getNpcs(217801).isEmpty()) {
+				if (allDeadOrDespawned(217800, 217801))
 					startBonusStage2();
-				}
 				break;
 			case 217802:
-				despawnNpc(npc);
 				despawnNpcs(getNpcs(217803));
 				bonusTimer.cancel(false);
 				passStage2();
@@ -313,44 +295,35 @@ public class CrucibleChallengeInstance extends CrucibleInstance {
 			case 217797:
 			case 217798:
 			case 217799:
-				despawnNpc(npc);
-				if (getNpcs(217797).isEmpty() && getNpcs(217798).isEmpty() && getNpcs(217799).isEmpty()) {
+				if (allDeadOrDespawned(217797, 217798, 217799))
 					startBonusStage2();
-				}
 				break;
 			case 217841:
 			case 218561:
-				despawnNpc(npc);
+				final int spawnNpcId;
 				switch (npc.getNpcId()) {
 					case 218561:
-						npcId = 218560;
+						spawnNpcId = 218560;
 						break;
 					case 217841:
-						npcId = 217840;
+						spawnNpcId = 217840;
 						break;
+					default:
+						return;
 				}
-				int rnd = Rnd.get(1, 2);
-				switch (rnd) {
-					case 1:
-						sp(npcId, 1299.7399f, 1733.5763f, 316.6515f, (byte) 0, 0);
-						break;
-					case 2:
-						sp(npcId, 1297.627f, 1729.8733f, 316.875f, (byte) 0, 0);
-						break;
-				}
-				despawnNpc(npc);
+				if (Rnd.nextBoolean())
+					sp(spawnNpcId, 1299.7399f, 1733.5763f, 316.6515f, (byte) 0, 0);
+				else
+					sp(spawnNpcId, 1297.627f, 1729.8733f, 316.875f, (byte) 0, 0);
 				break;
 			case 217803:
-				despawnNpc(npc);
-				dieCount++;
-				if (dieCount == 5) {
-					sendMsg(1401068);
-				}
-				if (bonusTimer.isCancelled() && getNpcs(217803).isEmpty()) {
-					passStage2();
+				if (++dieCount == 5)
+					sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDArena_Solo_SB1_5Dead_BROADCAST());
+				if (bonusTimer.isCancelled() && allDeadOrDespawned(npcId)) {
 					Npc poppy = getNpc(217802);
 					if (poppy != null) {
-						sendMsg(1401072);
+						passStage2();
+						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDArena_Solo_SB1_Succ_BROADCAST());
 						sp(218571, poppy.getX(), poppy.getY(), poppy.getZ(), (byte) 0, 0);
 						poppy.getController().delete();
 					}
@@ -358,19 +331,8 @@ public class CrucibleChallengeInstance extends CrucibleInstance {
 				break;
 			case 217844:
 			case 217842:
-				final int fnpcId = npc.getNpcId();
-				despawnNpc(npc);
-				if (getNpcs(fnpcId).size() == 2) {
-					ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-						@Override
-						public void run() {
-							startStage3Round1_1(fnpcId);
-						}
-
-					}, 5000);
-
-				}
+				if (getNpcs(npcId).size() == 2)
+					ThreadPoolManager.getInstance().schedule(() -> startStage3Round1_1(npcId), 5000);
 				break;
 			case 218185:
 				despawnNpc(getNpc(218190));
@@ -378,7 +340,23 @@ public class CrucibleChallengeInstance extends CrucibleInstance {
 				sp(730460, 1759.2914f, 1786.37f, 389.11713f, (byte) 96, 0);
 				PacketSendUtility.broadcastMessage(npc, 342495);
 				break;
+			default:
+				return; // don't despawn
 		}
+		despawnNpc(npc);
+	}
+
+	private boolean allDeadOrDespawned(int... npcIds) {
+		for (VisibleObject obj : instance) {
+			if (obj instanceof Npc) {
+				Npc npc = (Npc) obj;
+				for (int npcId : npcIds) {
+					if (npc.getNpcId() == npcId && !npc.getLifeStats().isAlreadyDead())
+						return false;
+				}
+			}
+		}
+		return true;
 	}
 
 	private void startStage3Round1_1(int npcId) {
@@ -391,6 +369,8 @@ public class CrucibleChallengeInstance extends CrucibleInstance {
 				bossId = 217843;
 				break;
 		}
+		if (getNpc(bossId) != null)
+			return;
 		sp(bossId, 1287.6239f, 1724.2721f, 317.1485f, (byte) 6, 2000);
 		despawnNpcs(getNpcs(npcId));
 		despawnNpc(getNpc(217840));
@@ -416,30 +396,24 @@ public class CrucibleChallengeInstance extends CrucibleInstance {
 	}
 
 	private void startBonusStage2() {
-		setEvent(StageType.PASS_STAGE_2, 0);
+		if (!changeStage(StageType.PASS_STAGE_2, 0))
+			return;
 
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				setEvent(StageType.START_BONUS_STAGE_2, 1000);
-			}
-
-		}, 2000);
+		ThreadPoolManager.getInstance().schedule(() -> changeStage(StageType.START_BONUS_STAGE_2, 1000), 2000);
 
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 			@Override
 			public void run() {
 				if (!isInstanceDestroyed) {
-					sendMsg(1401067);
+					sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDArena_Solo_SB1_START_BROADCAST());
 					SpawnTemplate template = SpawnEngine.addNewSingleTimeSpawn(mapId, 217802, 1780.5665f, 307.40463f, 469.25f, (byte) 0);
 					template.setWalkerId("3003200001");
 					SpawnEngine.spawnObject(template, instanceId);
 				}
 			}
 
-		}, 8000);
+		}, 6000);
 
 		bonusTimer = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
 
@@ -447,12 +421,11 @@ public class CrucibleChallengeInstance extends CrucibleInstance {
 			public void run() {
 				spawnCount++;
 				spawnBonus2();
-				if (spawnCount == 10) {
+				if (spawnCount == 10)
 					bonusTimer.cancel(false);
-				}
 			}
 
-		}, 12000, 4000);
+		}, 10000, 4000);
 	}
 
 	private void spawnBonus2() {
@@ -499,7 +472,8 @@ public class CrucibleChallengeInstance extends CrucibleInstance {
 	}
 
 	private void passStage2() {
-		sp(205675, 1784.5883f, 306.98645f, 469.25f, (byte) 0, 0);
+		if (getNpc(205675) == null) // record keeper
+			sp(205675, 1784.5883f, 306.98645f, 469.25f, (byte) 0, 0);
 	}
 
 	@Override
@@ -582,7 +556,8 @@ public class CrucibleChallengeInstance extends CrucibleInstance {
 
 	@Override
 	public void onChangeStage(StageType type) {
-		setEvent(type, 2000);
+		if (!changeStage(type, 2000))
+			return;
 		int npcId = 0, barrelId = 0;
 		Player player = null;
 		if (!instance.getPlayersInside().isEmpty()) {
@@ -722,7 +697,7 @@ public class CrucibleChallengeInstance extends CrucibleInstance {
 		}
 	}
 
-	private void sp(final int npcId, final float x, final float y, final float z, final byte h, int time) {
+	private void sp(int npcId, float x, float y, float z, byte h, int time) {
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 			@Override
@@ -735,16 +710,12 @@ public class CrucibleChallengeInstance extends CrucibleInstance {
 		}, time);
 	}
 
-	private void setEvent(StageType type, int time) {
+	private boolean changeStage(StageType type, int time) {
+		if (this.stageType == type)
+			return false;
 		this.stageType = type;
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				sendEventPacket();
-			}
-
-		}, time);
+		ThreadPoolManager.getInstance().schedule(() -> sendEventPacket(), time);
+		return true;
 	}
 
 	@Override
