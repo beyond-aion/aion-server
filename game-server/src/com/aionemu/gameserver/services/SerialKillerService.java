@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.services;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -12,8 +13,8 @@ import com.aionemu.gameserver.model.legionDominion.LegionDominionLocation;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SERIAL_KILLER;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.serialkillers.SerialKiller;
-import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
@@ -30,7 +31,7 @@ public class SerialKillerService {
 
 	private final Map<Integer, SerialKiller> serialKillers = new FastMap<>();
 	private final Map<Integer, Long> cooldowns = new ConcurrentHashMap<>(); //cd for intruder scan
-	private final List<Integer> ldPlayers = new FastTable<>();
+	private final Collection<Integer> ldPlayers = new FastTable<>();
 	private static final Map<Integer, WorldType> handledWorlds = new FastMap<>();
 	private final int refresh = CustomConfig.SERIALKILLER_REFRESH;
 	private final int levelDiff = CustomConfig.SERIALKILLER_LEVEL_DIFF;

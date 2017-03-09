@@ -31,7 +31,7 @@ public class Legion {
 	private int legionRank = 0;
 	private long contributionPoints = 0;
 	private int siegeGloryPoints = 0;
-	private List<Integer> legionMembers = new FastTable<>();
+	private Collection<Integer> legionMembers = new FastTable<>();
 	private int onlineMembersCount = 0;
 	private short deputyPermission = 0x1E0C;
 	private short centurionPermission = 0x1C08;
@@ -115,7 +115,7 @@ public class Legion {
 	/**
 	 * @return the legionMembers
 	 */
-	public List<Integer> getLegionMembers() {
+	public Collection<Integer> getLegionMembers() {
 		return legionMembers;
 	}
 
@@ -151,7 +151,7 @@ public class Legion {
 	 * @param playerObjId
 	 */
 	public void deleteLegionMember(int playerObjId) {
-		legionMembers.remove(new Integer(playerObjId));
+		legionMembers.remove(playerObjId);
 	}
 
 	public int getOnlineMembersCount() {

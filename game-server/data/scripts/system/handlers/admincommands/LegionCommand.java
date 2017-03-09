@@ -1,6 +1,6 @@
 package admincommands;
 
-import java.util.List;
+import java.util.Collection;
 
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.dao.LegionDAO;
@@ -136,7 +136,7 @@ public class LegionCommand extends AdminCommand {
 			message.add("contrib points: " + legion.getContributionPoints());
 			message.add("level: " + legion.getLegionLevel());
 			message.add("id: " + legion.getLegionId());
-			List<Integer> members = legion.getLegionMembers();
+			Collection<Integer> members = legion.getLegionMembers();
 			message.add("members: " + members.size());
 
 			PlayerDAO dao = null;
@@ -222,7 +222,7 @@ public class LegionCommand extends AdminCommand {
 				return;
 			}
 
-			List<Integer> members = legion.getLegionMembers();
+			Collection<Integer> members = legion.getLegionMembers();
 			for (int memberId : members) {
 				Player pl = World.getInstance().findPlayer(memberId);
 				if (pl != null) {

@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.services.panesterra.ahserion;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -28,8 +29,8 @@ import javolution.util.FastTable;
 public class PanesterraMatchmakingService {
 
 	private static final PanesterraMatchmakingService instance = new PanesterraMatchmakingService();
-	private List<Integer> asmodians = new FastTable<>();
-	private List<Integer> elyos = new FastTable<>();
+	private Collection<Integer> asmodians = new FastTable<>();
+	private Collection<Integer> elyos = new FastTable<>();
 	private List<PlayerClass> registeredClasses = new FastTable<>();
 	private Map<PanesterraTeamId, PanesterraTeam> teams;
 	private AtomicBoolean started = new AtomicBoolean(false);
@@ -426,7 +427,7 @@ public class PanesterraMatchmakingService {
 		}
 	}
 	
-	private Player findPlayer(List<Integer> players, int objectId) {
+	private Player findPlayer(Collection<Integer> players, int objectId) {
 		Player player = null;
 		if (objectId == 0 && players != null && !players.isEmpty()) {
 			Iterator<Integer> iter = players.iterator();
