@@ -5,6 +5,8 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ForkJoinTask;
 import java.util.function.Consumer;
 
+import org.slf4j.LoggerFactory;
+
 import com.aionemu.gameserver.ai.event.AIEventType;
 import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.model.gameobjects.Creature;
@@ -27,6 +29,13 @@ public class MoveTaskManager extends AbstractPeriodicTaskManager {
 		public void accept(Creature creature) {
 			if (creature == null) // concurrent iterating over movingCreatures.values() can cause calling this with an already removed entry (which then is null)
 				return;
+			if (!creature.isSpawned()) { // can despawn concurrently, while this thread is already running
+				if (movingCreatures.containsKey(creature.getObjectId())) { // should have been removed via onDespawn (MoveController#abortMove())
+					LoggerFactory.getLogger(MoveTaskManager.class).warn(creature + " was still in moving creatures list but already despawned");
+					removeCreature(creature);
+				}
+				return;
+			}
 			creature.getMoveController().moveToDestination();
 			if (creature.getAi().ask(AIQuestion.DESTINATION_REACHED)) {
 				removeCreature(creature);

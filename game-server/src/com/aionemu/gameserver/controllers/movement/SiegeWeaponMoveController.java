@@ -4,8 +4,8 @@ import com.aionemu.gameserver.ai.AISubState;
 import com.aionemu.gameserver.model.gameobjects.Summon;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_MOVE;
 import com.aionemu.gameserver.taskmanager.tasks.MoveTaskManager;
-import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.world.World;
 
 /**
@@ -16,7 +16,6 @@ public class SiegeWeaponMoveController extends SummonMoveController {
 	private float pointX;
 	private float pointY;
 	private float pointZ;
-	private float offset = 0.1f;
 	public static final float MOVE_CHECK_OFFSET = 0.1f;
 
 	public SiegeWeaponMoveController(Summon owner) {
@@ -35,7 +34,7 @@ public class SiegeWeaponMoveController extends SummonMoveController {
 			updateLastMove();
 			return;
 		} else if (started.compareAndSet(false, true)) {
-			movementMask = -32;
+			movementMask = MovementMask.NPC_STARTMOVE;
 			PacketSendUtility.broadcastPacket(owner, new SM_MOVE(owner));
 		}
 
@@ -44,7 +43,7 @@ public class SiegeWeaponMoveController extends SummonMoveController {
 			pointY = owner.getTarget().getY();
 			pointZ = owner.getTarget().getZ();
 		}
-		moveToLocation(pointX, pointY, pointZ, offset);
+		moveToLocation(pointX, pointY, pointZ);
 		updateLastMove();
 	}
 
@@ -61,7 +60,7 @@ public class SiegeWeaponMoveController extends SummonMoveController {
 	 * @param offset
 	 * @return
 	 */
-	protected void moveToLocation(float targetX, float targetY, float targetZ, float offset) {
+	protected void moveToLocation(float targetX, float targetY, float targetZ) {
 		boolean directionChanged;
 		float ownerX = owner.getX();
 		float ownerY = owner.getY();
