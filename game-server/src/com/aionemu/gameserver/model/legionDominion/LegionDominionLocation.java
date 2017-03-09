@@ -1,8 +1,6 @@
 package com.aionemu.gameserver.model.legionDominion;
 
 import java.sql.Timestamp;
-import java.util.Collections;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -119,10 +117,10 @@ public class LegionDominionLocation {
 	}
 	
 	public List<LegionDominionParticipantInfo> getSortedTop25Participants(LegionDominionParticipantInfo curLegion) {
-		List<LegionDominionParticipantInfo> info = new LinkedList<>();
+		List<LegionDominionParticipantInfo> info = new FastTable<>();
 		info.addAll(participantInfo.values());
 		if (!info.isEmpty()) {
-			Collections.sort(info);
+			info.sort(null);
 			info = info.subList(0, 25 > (info.size()) ? (info.size()) : 25); // = 25 entries
 			if (info.contains(curLegion)) {
 				return info;
@@ -135,10 +133,10 @@ public class LegionDominionLocation {
 	}
 
 	public LegionDominionParticipantInfo getWinner() {
-		List<LegionDominionParticipantInfo> info = new LinkedList<>();
+		List<LegionDominionParticipantInfo> info = new FastTable<>();
 		info.addAll(participantInfo.values());
 		if (!info.isEmpty()) {
-			Collections.sort(info);
+			info.sort(null);
 			if (info.get(0) != null) {
 				return info.get(0);
 			}

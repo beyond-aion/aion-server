@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.dataholders;
 
-import java.util.Collections;
 import java.util.List;
 
 import javax.xml.bind.Unmarshaller;
@@ -29,9 +28,9 @@ public class GatherableData {
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		for (GatherableTemplate gatherable : gatherables) {
 			if (gatherable.getMaterials() != null)
-				Collections.sort(gatherable.getMaterials().getMaterial());
+				gatherable.getMaterials().getMaterial().sort(null);
 			if (gatherable.getExtraMaterials() != null)
-				Collections.sort(gatherable.getExtraMaterials().getMaterial());
+				gatherable.getExtraMaterials().getMaterial().sort(null);
 			gatherableData.put(gatherable.getTemplateId(), gatherable);
 		}
 		gatherables = null;

@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.custom;
 
-import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -56,7 +55,7 @@ public enum GameEventType {
 		}
 
 		priorityRace = player.getRace();
-		Collections.sort(activeEvents);
+		activeEvents.sort(null);
 		return activeEvents.get(activeEvents.size() - 1);
 	}
 

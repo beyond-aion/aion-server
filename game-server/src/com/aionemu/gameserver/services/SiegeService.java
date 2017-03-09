@@ -419,7 +419,7 @@ public class SiegeService {
 			for (Trigger trigger : entry.getValue()) {
 				nextFireDates.add(trigger.getNextFireTime());
 			}
-			Collections.sort(nextFireDates);
+			nextFireDates.sort(null);
 
 			// clear non-required times
 			Date nextSiegeDate = nextFireDates.get(0);

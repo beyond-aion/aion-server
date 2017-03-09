@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.custom.nochsanapvp;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -83,65 +82,66 @@ public class NochsanaEvent extends GameEvent {
 		if (race == defender) {
 			attackerBases.remove(base);
 			defenderBases.add(base);
-
-		} else  {
-		defenderBases.remove(base);
-		attackerBases.add(base);
+		} else {
+			defenderBases.remove(base);
+			attackerBases.add(base);
 		}
-		
-		Collections.sort(attackerBases);
-		Collections.sort(defenderBases);
+
+		attackerBases.sort(null);
+		defenderBases.sort(null);
 	}
+
 	@Override
 	public boolean onReviveEvent(Player player) {
 		applyBuffs(player);
 		return super.onReviveEvent(player);
 	}
-	
+
 	private void applyBuffs(Player player) {
-		if(checkBuffCondition(player)) {
-			for(CustomBase base : bases) {
-				if(base.getOwner() == player.getRace()) {
+		if (checkBuffCondition(player)) {
+			for (CustomBase base : bases) {
+				if (base.getOwner() == player.getRace()) {
 					SkillEngine.getInstance().applyEffectDirectly(base.getBuffId(), player, player, 0);
 				}
 			}
 		}
 	}
-	
+
 	private boolean checkBuffCondition(Player player) {
-		if(player.getRace() != this.defender) {
+		if (player.getRace() != this.defender) {
 			return true;
 		}
-		
+
 		int diff = this.getPlayerByRace(this.defender == Race.ELYOS ? Race.ASMODIANS : Race.ELYOS).size() - this.getPlayerByRace(this.defender).size();
-		
-		if(diff >= 2) {
+
+		if (diff >= 2) {
 			return true;
 		}
-		
+
 		return false;
 	}
 
+	@Override
 	protected void handleGameStart() {
 		bases.add(new CustomBase(10, this, false, defender, 12115));
 		bases.add(new CustomBase(11, this, false, defender, 12116));
 		bases.add(new CustomBase(12, this, false, defender, 0));
 		customBase = new CustomBase(13, this, true, defender, 0);
 		defenderBases.addAll(bases);
-		Collections.sort(defenderBases);
+		defenderBases.sort(null);
 		// Spawn Teleporter
-		//CustomBase base1 = new CustomBase(21, this, false, defender, 0);
-		//CustomBase base2 = new CustomBase(22, this, false, defender, 0);
-		
-		for(Player player : participants) {
+		// CustomBase base1 = new CustomBase(21, this, false, defender, 0);
+		// CustomBase base2 = new CustomBase(22, this, false, defender, 0);
+
+		for (Player player : participants) {
 			this.applyBuffs(player);
 		}
-		
+
 		for (VisibleObject o : spawnControl.values()) {
 			o.getController().delete();
 		}
-		
-		this.sendMajorTimer(20*60);
+
+		this.sendMajorTimer(20 * 60);
 		this.definedEnd = System.currentTimeMillis() + 20 * 60 * 1000;
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
 
@@ -150,19 +150,19 @@ public class NochsanaEvent extends GameEvent {
 				onEventTimeout();
 			}
 		}, 20 * 60 * 1000);
-		
+
 		announceAll("Nochsana is under Siege! Fight!");
-		
+
 	}
-	
+
 	private void sendRemainingMajorTimer() {
 		int time = (int) ((this.definedEnd - System.currentTimeMillis()) / 1000);
 		this.sendMajorTimer(time);
 	}
-	
+
 	private void onEventTimeout() {
 		this.announceAll("The Battle is Over");
-		if(attackerBases.size() >= bases.size() / 2) {
+		if (attackerBases.size() >= bases.size() / 2) {
 			this.announceAll("Attackers are Controlling the half of all Bases. Attackers win.");
 			onEventEnd(this.defender == Race.ELYOS ? Race.ASMODIANS : Race.ELYOS);
 		} else {

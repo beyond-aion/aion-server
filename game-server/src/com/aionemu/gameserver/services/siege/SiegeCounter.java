@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.services.siege;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -70,7 +69,7 @@ public class SiegeCounter {
 	public SiegeRaceCounter getWinnerRaceCounter() {
 		List<SiegeRaceCounter> list = new FastTable<>();
 		list.addAll(siegeRaceCounters.values());
-		Collections.sort(list);
+		list.sort(null);
 		return list.get(0);
 	}
 

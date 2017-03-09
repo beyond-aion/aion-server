@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.model.skill;
 
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -46,7 +45,7 @@ public class NpcSkillList implements SkillList<Npc> {
 					priorities.add(template.getPriority());
 				}
 			}
-			Collections.sort(priorities);
+			priorities.sort(null);
 		}
 	}
 

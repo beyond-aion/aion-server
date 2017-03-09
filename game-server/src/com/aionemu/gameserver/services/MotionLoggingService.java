@@ -7,7 +7,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.TreeMap;
@@ -378,7 +377,7 @@ public class MotionLoggingService {
 						if (entry2.getValue() == null)
 							continue;
 						// sort by skillId
-						Collections.sort(entry2.getValue());
+						entry2.getValue().sort(null);
 						for (SkillTime st : entry2.getValue()) {
 							stmt.setInt(4, st.getSkillId());
 							stmt.setInt(5, st.getAttackSpeed());

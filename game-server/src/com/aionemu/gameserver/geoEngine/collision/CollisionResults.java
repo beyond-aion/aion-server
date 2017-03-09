@@ -33,7 +33,6 @@
 package com.aionemu.gameserver.geoEngine.collision;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
 
 public class CollisionResults implements Iterable<CollisionResult> {
@@ -54,9 +53,10 @@ public class CollisionResults implements Iterable<CollisionResult> {
 		results.clear();
 	}
 
+	@Override
 	public Iterator<CollisionResult> iterator() {
 		if (!sorted) {
-			Collections.sort(results);
+			results.sort(null);
 			sorted = true;
 		}
 
@@ -81,7 +81,7 @@ public class CollisionResults implements Iterable<CollisionResult> {
 			return null;
 
 		if (!sorted) {
-			Collections.sort(results);
+			results.sort(null);
 			sorted = true;
 		}
 
@@ -93,7 +93,7 @@ public class CollisionResults implements Iterable<CollisionResult> {
 			return null;
 
 		if (!sorted) {
-			Collections.sort(results);
+			results.sort(null);
 			sorted = true;
 		}
 
@@ -102,7 +102,7 @@ public class CollisionResults implements Iterable<CollisionResult> {
 
 	public CollisionResult getCollision(int index) {
 		if (!sorted) {
-			Collections.sort(results);
+			results.sort(null);
 			sorted = true;
 		}
 

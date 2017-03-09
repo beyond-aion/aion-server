@@ -1,6 +1,5 @@
 package admincommands;
 
-import java.util.Collections;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
@@ -132,7 +131,7 @@ public class Headhunting extends AdminCommand {
 			results.get(race).putIfAbsent(pc, new FastTable<>());
 			List<Headhunter> hunterz = results.get(race).get(pc);
 			hunterz.add(hunter);
-			Collections.sort(hunterz);
+			hunterz.sort(null);
 		}
 		return true;
 	}

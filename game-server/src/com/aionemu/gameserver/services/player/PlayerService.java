@@ -3,6 +3,8 @@ package com.aionemu.gameserver.services.player;
 import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -85,8 +87,6 @@ import com.aionemu.gameserver.utils.collections.cachemap.CacheMapFactory;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.WorldPosition;
 import com.aionemu.gameserver.world.knownlist.KnownList;
-import com.google.common.collect.Maps;
-import com.google.common.collect.Sets;
 
 /**
  * This class is designed to do all the work related with loading/storing players.<br>
@@ -471,11 +471,11 @@ public class PlayerService {
 			return Collections.emptyMap();
 		}
 
-		final Map<Integer, String> result = Maps.newHashMap();
+		final Map<Integer, String> result = new HashMap<>();
 
 		// Copy ids to separate set
 		// It's dangerous to modify input collection, can have side results
-		final Set<Integer> playerObjIdsCopy = Sets.newHashSet(playerObjIds);
+		final Set<Integer> playerObjIdsCopy = new HashSet<>(playerObjIds);
 
 		// Get names of all online players
 		// Certain names can be changed in runtime
