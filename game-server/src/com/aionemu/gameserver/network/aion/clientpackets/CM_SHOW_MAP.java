@@ -32,6 +32,9 @@ public class CM_SHOW_MAP extends AionClientPacket {
 			case 0:
 				SerialKillerService.getInstance().intruderScan(player);
 				break;
+			case 1:
+				// TODO unk
+				break;
 			default:
 				log.warn(player + " sent unknown show map action type: " + action);
 		}
