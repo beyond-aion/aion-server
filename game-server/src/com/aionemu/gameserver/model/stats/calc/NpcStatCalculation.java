@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.model.stats.calc;
 
+import java.security.InvalidParameterException;
+
 import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.model.templates.npc.NpcRank;
 import com.aionemu.gameserver.model.templates.npc.NpcRating;
@@ -10,32 +12,32 @@ import com.aionemu.gameserver.model.templates.npc.NpcRating;
  */
 public class NpcStatCalculation {
 
-	public static int calculateStat(StatEnum stat, NpcRating rating, NpcRank rank, int level) {
-		float value = getBaseValue(stat);
+	public static int calculateStat(StatEnum stat, NpcRating rating, NpcRank rank, byte level) {
+		float baseValue = getBaseValue(stat, level);
 		float ratingMod = getRatingModifier(stat, rating);
 		float rankMod = getRankModifier(stat, rank);
-		return Math.round(value * level * ratingMod * rankMod);
+		return Math.round(baseValue * ratingMod * rankMod);
 	}
 
-	private static float getBaseValue(StatEnum stat) {
+	private static float getBaseValue(StatEnum stat, byte level) {
 		switch (stat) {
 			case PHYSICAL_ATTACK:
-				return 8f;
+				return level * 8f;
 			case MAGICAL_ATTACK:
 			case PHYSICAL_DEFENSE:
-				return 20f;
+				return level * 20f;
 			case MAGICAL_ACCURACY:
-				return 25f;
-			case MAGICAL_RESIST:
-				return 23f;
+				return level * 25f;
+			case MAGICAL_RESIST: // formula with help of https://www.wolframalpha.com/input/?i=fit+(1,20),(15,270),(30,585),(50,1075),(60,1350),(65,1495)
+				return 0.1f * (float) Math.sqrt(level) + 16.5f * level;
 			case PHYSICAL_ACCURACY:
-				return 37f;
+				return level * 37f;
 			case PARRY:
-				return 40f;
+				return level * 40f;
 			case PHYSICAL_CRITICAL_RESIST:
-				return 2.2f;
+				return level * 2.2f;
 			default:
-				return 0;
+				throw new InvalidParameterException("Stat calculation for " + stat + " is not implemented");
 		}
 	}
 
@@ -112,7 +114,7 @@ public class NpcStatCalculation {
 				}
 				return 1f;
 			default:
-				return 0;
+				throw new InvalidParameterException("Stat calculation for npc rating " + rating + " is not implemented");
 		}
 	}
 
@@ -213,7 +215,7 @@ public class NpcStatCalculation {
 				}
 				return 1f;
 			default:
-				return 0;
+				throw new InvalidParameterException("Stat calculation for npc rank " + rank + " is not implemented");
 		}
 	}
 }

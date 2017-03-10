@@ -54,7 +54,7 @@ public class NpcData {
 			if (npc.getTribe() != TribeClass.PET && npc.getTribe() != TribeClass.PET_DARK) { // summons and siege weapons have fixed stats
 				NpcRating rating = npc.getRating();
 				NpcRank rank = npc.getRank();
-				int level = npc.getLevel();
+				byte level = npc.getLevel();
 				if (npc.getStatsTemplate().getAttack() == 0)
 					npc.getStatsTemplate().setAttack(NpcStatCalculation.calculateStat(StatEnum.PHYSICAL_ATTACK, rating, rank, level));
 				if (npc.getStatsTemplate().getAccuracy() == 0)
