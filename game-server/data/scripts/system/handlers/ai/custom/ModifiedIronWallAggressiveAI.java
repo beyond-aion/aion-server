@@ -139,12 +139,13 @@ public class ModifiedIronWallAggressiveAI extends AggressiveNpcAI {
 				case 235619: // warmage suyaroka
 				case 235620: // chief medic tagnu
 				case 855776: // vision of kaliga
+				case 231196: // roaring kamara
 					stat.setBase(709731);
 					break;
 				case 219167:
 				case 219169:
 				case 219190:
-				case 231196:
+
 					stat.setBaseRate(3.2f);
 					break;
 				case 219218:
