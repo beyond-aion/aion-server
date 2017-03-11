@@ -687,7 +687,7 @@ public class Effect implements StatOwner {
 	/**
 	 * End effect and all effect actions
 	 */
-	public void endEffect(boolean broadcast) {
+	public synchronized void endEffect(boolean broadcast) {
 		if (!hasEnded.compareAndSet(false, true))
 			return;
 		stopTasks();
