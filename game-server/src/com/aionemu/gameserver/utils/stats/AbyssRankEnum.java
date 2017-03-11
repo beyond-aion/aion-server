@@ -2,6 +2,7 @@ package com.aionemu.gameserver.utils.stats;
 
 import javax.xml.bind.annotation.XmlEnum;
 
+import com.aionemu.gameserver.configs.main.RankingConfig;
 import com.aionemu.gameserver.model.DescriptionId;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -22,15 +23,15 @@ public enum AbyssRankEnum {
 	GRADE3_SOLDIER(7, 721, 216, 69700, 0, 1802443, 0, 0),
 	GRADE2_SOLDIER(8, 865, 259, 105600, 0, 1802445, 0, 0),
 	GRADE1_SOLDIER(9, 1038, 311, 150800, 0, 1802447, 0, 0),
-	STAR1_OFFICER(10, 1557, 467, 0, 1000, 1802449, 1244, 20),
-	STAR2_OFFICER(11, 1868, 560, 0, 700, 1802451, 1368, 49),
-	STAR3_OFFICER(12, 2148, 644, 0, 500, 1802453, 1915, 99),
-	STAR4_OFFICER(13, 2470, 741, 0, 300, 1802455, 3064, 197),
-	STAR5_OFFICER(14, 3705, 1482, 0, 100, 1802457, 5210, 296),
-	GENERAL(15, 4075, 1630, 0, 30, 1802459, 8335, 493),
-	GREAT_GENERAL(16, 4482, 1792, 0, 10, 1802461, 10002, 690),
-	COMMANDER(17, 4930, 1972, 0, 3, 1802463, 11503, 789),
-	SUPREME_COMMANDER(18, 5916, 2366, 0, 1, 1802465, 12437, 986);
+	STAR1_OFFICER(10, 1557, 467, 0, 1000, 1802449, 1244, 14),
+	STAR2_OFFICER(11, 1868, 560, 0, 700, 1802451, 1368, 29),
+	STAR3_OFFICER(12, 2148, 644, 0, 500, 1802453, 1915, 57),
+	STAR4_OFFICER(13, 2470, 741, 0, 300, 1802455, 3064, 107),
+	STAR5_OFFICER(14, 3705, 1482, 0, 100, 1802457, 5210, 179),
+	GENERAL(15, 4075, 1630, 0, 30, 1802459, 8335, 357),
+	GREAT_GENERAL(16, 4482, 1792, 0, 10, 1802461, 10002, 464),
+	COMMANDER(17, 4930, 1972, 0, 3, 1802463, 11503, 571),
+	SUPREME_COMMANDER(18, 5916, 2366, 0, 1, 1802465, 12437, 714);
 
 	private int id;
 	private int pointsGained;
@@ -93,7 +94,8 @@ public enum AbyssRankEnum {
 	}
 
 	public int getGpLossPerDay() {
-		return gpLossPerDay;
+		int gpLossCap = RankingConfig.TOP_RANKING_GP_LOSS_CAP;
+		return gpLossCap > -1 && gpLossPerDay > gpLossCap ? gpLossCap : gpLossPerDay;
 	}
 
 	/**

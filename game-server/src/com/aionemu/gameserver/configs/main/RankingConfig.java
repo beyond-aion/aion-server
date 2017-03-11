@@ -13,6 +13,9 @@ public class RankingConfig {
 	@Property(key = "gameserver.topranking.daily.gploss.time", defaultValue = "0 0 12 * * ?")
 	public static String TOP_RANKING_DAILY_GP_LOSS_TIME;
 
+	@Property(key = "gameserver.topranking.gp_loss_cap", defaultValue = "-1")
+	public static int TOP_RANKING_GP_LOSS_CAP;
+
 	@Property(key = "gameserver.topranking.small.cache", defaultValue = "false")
 	public static boolean TOP_RANKING_SMALL_CACHE;
 
