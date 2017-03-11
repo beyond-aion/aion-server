@@ -9,6 +9,8 @@ import java.util.Objects;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
+import javolution.util.FastMap;
+
 import com.aionemu.gameserver.ai.event.AIEventLog;
 import com.aionemu.gameserver.ai.event.AIEventType;
 import com.aionemu.gameserver.ai.event.AIListenable;
@@ -26,8 +28,6 @@ import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.annotations.AnnotatedMethod;
 import com.aionemu.gameserver.world.WorldPosition;
-
-import javolution.util.FastMap;
 
 /**
  * @author ATracer
@@ -518,7 +518,7 @@ public abstract class AbstractAI extends AbstractEventSource<GeneralAIEvent> imp
 	}
 
 	@Override
-	public int modifyOwnerDamage(int damage) {
+	public int modifyOwnerDamage(int damage, Effect effect) {
 		return damage;
 	}
 

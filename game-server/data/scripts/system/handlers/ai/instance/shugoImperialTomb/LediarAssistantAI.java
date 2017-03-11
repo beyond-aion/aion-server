@@ -3,6 +3,7 @@ package ai.instance.shugoImperialTomb;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.manager.EmoteManager;
 import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.skillengine.model.Effect;
 
 import ai.AggressiveNpcAI;
 
@@ -15,7 +16,7 @@ public class LediarAssistantAI extends AggressiveNpcAI {
 	private final static int[] npc_ids = { 831251, 831250, 831305 };
 
 	@Override
-	public int modifyOwnerDamage(int damage) {
+	public int modifyOwnerDamage(int damage, Effect effect) {
 		return 1;
 	}
 

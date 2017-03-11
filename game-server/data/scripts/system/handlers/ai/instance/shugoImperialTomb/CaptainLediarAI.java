@@ -12,6 +12,7 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.templates.walker.WalkerTemplate;
+import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.world.World;
 
 import ai.AggressiveNpcAI;
@@ -76,7 +77,7 @@ public class CaptainLediarAI extends AggressiveNpcAI {
 	}
 
 	@Override
-	public int modifyOwnerDamage(int damage) {
+	public int modifyOwnerDamage(int damage, Effect effect) {
 		return 1;
 	}
 

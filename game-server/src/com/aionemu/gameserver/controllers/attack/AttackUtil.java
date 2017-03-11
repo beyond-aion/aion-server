@@ -4,6 +4,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.function.Consumer;
 
+import javolution.util.FastTable;
+
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.SkillElement;
@@ -36,8 +38,6 @@ import com.aionemu.gameserver.skillengine.model.HitType;
 import com.aionemu.gameserver.skillengine.model.SkillType;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.stats.StatFunctions;
-
-import javolution.util.FastTable;
 
 /**
  * @author ATracer
@@ -469,7 +469,7 @@ public class AttackUtil {
 			damage = effected.getAi().modifyDamage(effector, damage, effect);
 		}
 		if (effector instanceof Npc) {
-			damage = effector.getAi().modifyOwnerDamage(damage);
+			damage = effector.getAi().modifyOwnerDamage(damage, effect);
 		}
 
 		if (shared && !effect.getSkill().getEffectedList().isEmpty())

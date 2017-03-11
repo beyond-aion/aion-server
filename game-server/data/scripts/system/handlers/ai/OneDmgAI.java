@@ -17,7 +17,7 @@ public class OneDmgAI extends AggressiveNpcAI {
 	}
 
 	@Override
-	public int modifyOwnerDamage(int damage) {
+	public int modifyOwnerDamage(int damage, Effect effect) {
 		return 1;
 	}
 

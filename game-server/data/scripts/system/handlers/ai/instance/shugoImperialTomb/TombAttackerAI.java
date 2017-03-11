@@ -6,6 +6,7 @@ import com.aionemu.gameserver.ai.manager.WalkManager;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.templates.walker.WalkerTemplate;
+import com.aionemu.gameserver.skillengine.model.Effect;
 
 import ai.AggressiveNpcAI;
 
@@ -29,7 +30,7 @@ public class TombAttackerAI extends AggressiveNpcAI {
 	}
 
 	@Override
-	public int modifyOwnerDamage(int damage) {
+	public int modifyOwnerDamage(int damage, Effect effect) {
 		return 1;
 	}
 

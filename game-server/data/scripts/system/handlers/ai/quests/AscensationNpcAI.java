@@ -1,6 +1,7 @@
 package ai.quests;
 
 import com.aionemu.gameserver.ai.AIName;
+import com.aionemu.gameserver.skillengine.model.Effect;
 
 import ai.AggressiveNpcAI;
 
@@ -11,7 +12,7 @@ import ai.AggressiveNpcAI;
 public class AscensationNpcAI extends AggressiveNpcAI {
 
 	@Override
-	public int modifyOwnerDamage(int damage) {
+	public int modifyOwnerDamage(int damage, Effect effect) {
 		return 1;
 	}
 
