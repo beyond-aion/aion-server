@@ -216,4 +216,9 @@ public class GeneralInstanceHandler implements InstanceHandler {
 	public boolean canEnter(Player player) {
 		return true;
 	}
+
+	@Override
+	public float getInstanceApMultiplier() {
+		return 1f;
+	}
 }

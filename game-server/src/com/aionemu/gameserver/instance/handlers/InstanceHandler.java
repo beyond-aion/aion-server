@@ -90,4 +90,5 @@ public interface InstanceHandler {
 
 	float getInstanceExpMultiplier();
 
+	float getInstanceApMultiplier();
 }

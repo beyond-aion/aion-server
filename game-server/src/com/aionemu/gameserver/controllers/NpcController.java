@@ -187,6 +187,10 @@ public class NpcController extends CreatureController<Npc> {
 			return;
 		}
 
+		float instanceApMultiplier = 1f;
+		if (getOwner().isInInstance()) {
+			instanceApMultiplier = getOwner().getPosition().getWorldMapInstance().getInstanceHandler().getInstanceApMultiplier();
+		}
 		for (AggroInfo info : finalList) {
 			AionObject attacker = info.getAttacker();
 
@@ -215,6 +219,7 @@ public class NpcController extends CreatureController<Npc> {
 					rewardXp *= percentage;
 					rewardDp *= percentage;
 					rewardAp *= percentage;
+					rewardAp *= instanceApMultiplier;
 
 					QuestEngine.getInstance().onKill(new QuestEnv(getOwner(), player, 0));
 					player.getCommonData().addExp(rewardXp, RewardType.HUNTING, this.getOwner().getObjectTemplate().getNameId());

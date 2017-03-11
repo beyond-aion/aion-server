@@ -2,6 +2,8 @@ package com.aionemu.gameserver.model.team.common.service;
 
 import java.util.List;
 
+import javolution.util.FastTable;
+
 import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.configs.main.GroupConfig;
@@ -17,8 +19,6 @@ import com.aionemu.gameserver.services.drop.DropRegistrationService;
 import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.stats.StatFunctions;
 import com.google.common.base.Predicate;
-
-import javolution.util.FastTable;
 
 /**
  * @author ATracer, nrg
@@ -44,6 +44,11 @@ public class PlayerTeamDistributionService {
 
 		long expReward = StatFunctions.calculateExperienceReward(filteredStats.highestLevel, owner);
 
+		float instanceApMultiplier = 1f;
+		if (owner.isInInstance()) {
+			instanceApMultiplier = owner.getPosition().getWorldMapInstance().getInstanceHandler().getInstanceApMultiplier();
+		}
+
 		for (Player member : filteredStats.players) {
 			// dead players shouldn't receive AP/EP/DP
 			if (member.getLifeStats().isAlreadyDead())
@@ -64,6 +69,7 @@ public class PlayerTeamDistributionService {
 			rewardXp *= damagePercent;
 			rewardDp *= damagePercent;
 			rewardAp *= damagePercent;
+			rewardAp *= instanceApMultiplier;
 
 			member.getCommonData().addExp(rewardXp, RewardType.GROUP_HUNTING, owner.getObjectTemplate().getNameId());
 			member.getCommonData().addDp(rewardDp);
