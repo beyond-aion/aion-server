@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import com.aionemu.gameserver.configs.main.AutoGroupConfig;
 import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.configs.main.MembershipConfig;
+import com.aionemu.gameserver.custom.pvpmap.PvpMapHandler;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.instance.InstanceEngine;
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
@@ -85,7 +86,7 @@ public class InstanceService {
 		InstanceEngine.getInstance().onInstanceCreate(worldMapInstance);
 
 		// finally start the checker
-		if (map.isInstanceType())
+		if (map.isInstanceType() && !(handler instanceof PvpMapHandler))
 			startInstanceChecker(worldMapInstance);
 
 		return worldMapInstance;

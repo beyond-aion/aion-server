@@ -35319,13 +35319,17 @@
         <npc_skill id="17294" lv="56" prob="55"/>
         <npc_skill id="17295" lv="56" prob="5"/>
     </npc_skills>
+	<!-- roaring kamara -->
     <npc_skills npc_ids="231196">
-        <npc_skill id="21146" lv="1" prob="25" max_hp="100"/>
-        <npc_skill id="19555" lv="10" prob="25" max_hp="100"/>
-        <npc_skill id="19562" lv="10" prob="8"/>
-        <npc_skill id="19557" lv="15" prob="8"/>
-        <npc_skill id="19563" lv="25" prob="8"/>
-        <npc_skill id="19558" lv="15" prob="25"/>
+        <npc_skill id="21146" lv="1" prob="60" max_hp="10" cd="300000"/>
+		<npc_skill id="19555" lv="25" prob="70" cd="35000"/>
+		<npc_skill id="19556" lv="35" prob="70" min_hp="0" max_hp="55" cd="45000"/>
+		<npc_skill id="19557" lv="75" prob="70" cd="45000"/>
+		<npc_skill id="19558" lv="15" prob="70" cd="35000"/>
+		<npc_skill id="19560" lv="15" prob="70" cd="35000"/>
+		<npc_skill id="19561" lv="15" prob="70" cd="35000"/>
+		<npc_skill id="19562" lv="15" prob="70" cd="35000"/>
+		<npc_skill id="19563" lv="20" prob="80" min_hp="0" max_hp="40" cd="35000"/>
     </npc_skills>
     <npc_skills npc_ids="231198">
         <npc_skill id="17065" lv="65" prob="79" max_hp="100"/>
@@ -65301,6 +65305,13 @@
 		<npc_skill id="20519" lv="65" prob="100" cd="15000" chain_id="2" next_skill_time="2000"/>
 		<npc_skill id="20515" lv="65" prob="70" cd="15000" next_skill_time="6000"/>
 	</npc_skills>
+	<!-- keymaster chookuri (cleric, normal) -->
+	<npc_skills npc_ids="219218">
+		<npc_skill id="20517" lv="65" prob="90" cd="15000" next_chain_id="1" next_skill_time="2000"/>
+		<npc_skill id="20518" lv="65" prob="100" cd="15000" chain_id="1" next_chain_id="2" next_skill_time="2000"/>
+		<npc_skill id="20519" lv="65" prob="100" cd="15000" chain_id="2" next_skill_time="2000"/>
+		<npc_skill id="20515" lv="65" prob="70" cd="15000" next_skill_time="6000"/>
+	</npc_skills>
 	<!-- Assassin -->
 	<npc_skills npc_ids="218545">
 		<npc_skill id="20522" lv="65" prob="100" cd="20000" next_chain_id="1" next_skill_time="1000"/>
@@ -65321,6 +65332,16 @@
 		<npc_skill id="20527" lv="65" prob="100" cd="20000" next_skill_time="5000"/>
 	</npc_skills>
 	<npc_skills npc_ids="219167">
+		<npc_skill id="20522" lv="65" prob="100" cd="20000" next_chain_id="1" next_skill_time="1000"/>
+		<npc_skill id="20523" lv="65" prob="100" cd="20000" chain_id="1" next_chain_id="2" next_skill_time="1000"/>
+		<npc_skill id="20524" lv="65" prob="100" cd="20000" chain_id="2" next_skill_time="4000"/>
+		<npc_skill id="20525" lv="65" prob="100" cd="20000" next_chain_id="3" next_skill_time="0" />
+		<npc_skill id="20526" lv="65" prob="100" cd="20000" chain_id="3" next_chain_id="4" next_skill_time="0"/>
+		<npc_skill id="20526" lv="65" prob="100" cd="20000" chain_id="4" next_skill_time="4000"/>
+		<npc_skill id="20527" lv="65" prob="100" cd="20000" next_skill_time="5000"/>
+	</npc_skills>
+	<!-- keymaster zumita (assa, elite) -->
+	<npc_skills npc_ids="219192">
 		<npc_skill id="20522" lv="65" prob="100" cd="20000" next_chain_id="1" next_skill_time="1000"/>
 		<npc_skill id="20523" lv="65" prob="100" cd="20000" chain_id="1" next_chain_id="2" next_skill_time="1000"/>
 		<npc_skill id="20524" lv="65" prob="100" cd="20000" chain_id="2" next_skill_time="4000"/>
@@ -65372,6 +65393,14 @@
 		<npc_skill id="20507" lv="65" prob="100" cd="20000" chain_id="2" next_chain_id="3" next_skill_time="0"/>
 		<npc_skill id="20507" lv="65" prob="100" cd="20000" chain_id="3" next_skill_time="6000"/>
 	</npc_skills>
+	<!-- keymaster niksi (fighter, elite) -->
+	<npc_skills npc_ids="219191">
+		<npc_skill id="20504" lv="65" prob="100" cd="20000" next_skill_time="5000"/>
+		<npc_skill id="20505" lv="65" prob="100" cd="20000" next_chain_id="1" next_skill_time="0"/>
+		<npc_skill id="20506" lv="65" prob="100" cd="20000" chain_id="1" next_chain_id="2" next_skill_time="0"/>
+		<npc_skill id="20507" lv="65" prob="100" cd="20000" chain_id="2" next_chain_id="3" next_skill_time="0"/>
+		<npc_skill id="20507" lv="65" prob="100" cd="20000" chain_id="3" next_skill_time="6000"/>
+	</npc_skills>
 	<!-- Mage -->
 	<npc_skills npc_ids="218546">
 		<npc_skill id="20508" lv="65" prob="100" cd="15000" prio="1"/>
@@ -65397,6 +65426,12 @@
 		<npc_skill id="20508" lv="65" prob="100" cd="15000" prio="1"/>
 		<npc_skill id="20511" lv="65" prob="100" cd="15000" prio="1"/>
 		<npc_skill id="20513" lv="65" prob="100" cd="35000" next_skill_time="35000"/>
+	</npc_skills>
+	<!-- keymaster dabra (mage, hero) -->
+	<npc_skills npc_ids="219193">
+		<npc_skill id="20508" lv="60" prob="100" cd="15000" prio="1"/>
+		<npc_skill id="20511" lv="60" prob="100" cd="15000" prio="1"/>
+		<npc_skill id="20513" lv="65" prob="100" cd="50000" next_skill_time="35000"/>
 	</npc_skills>
 	<!-- Assault Leader -->
 	<npc_skills npc_ids="219202">
@@ -65684,7 +65719,7 @@
 	<npc_skills npc_ids="235975">
 		<npc_skill id="21824" lv="3" prob="60" cd="25000" next_chain_id="1" next_skill_time="0" target="ME"/>
 		<npc_skill id="21824" lv="3" prob="100" cd="10000" chain_id="1" next_skill_time="6000" target="ME"/>
-		<npc_skill id="21825" lv="10" prob="60" cd="25000" target="ME"/>
+		<npc_skill id="21825" lv="10" prob="60" cd="25000"/>
 		<npc_skill id="21300" lv="65" prob="60" cd="20000"/>
 		<npc_skill id="21301" lv="65" prob="60" cd="25000" min_hp="0" max_hp="50"/>
 	</npc_skills>

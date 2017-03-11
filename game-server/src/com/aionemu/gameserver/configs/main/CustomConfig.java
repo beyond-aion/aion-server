@@ -256,12 +256,21 @@ public class CustomConfig {
 	@Property(key = "character.deletion.time.minutes", defaultValue = "5")
 	public static int CHARACTER_DELETION_TIME_MINUTES;
 	
-	@Property(key = "gameserver.pvpmap.apmultiplier", defaultValue = "2")
-	public static float PVP_MAP_AP_MULTIPLIER;
-	
 	/**
 	 * Custom Reward Packages
 	 */
 	@Property(key = "gameserver.custom.promotion_kit.enable", defaultValue= "false")
 	public static boolean ENABLE_PROMOTION_KIT;
+
+	@Property(key = "gameserver.pvpmap.apmultiplier", defaultValue = "2")
+	public static float PVP_MAP_AP_MULTIPLIER;
+
+	@Property(key = "gameserver.pvpmap.pve.apmultiplier", defaultValue = "1")
+	public static float PVP_MAP_PVE_AP_MULTIPLIER;
+
+	@Property(key = "gameserver.pvpmap.random_boss.rate", defaultValue = "40")
+	public static int PVP_MAP_RANDOM_BOSS_BASE_RATE;
+
+	@Property(key = "gameserver.pvpmap.random_boss.time", defaultValue = "0 30 14,18,21 ? * *")
+	public static String PVP_MAP_RANDOM_BOSS_SCHEDULE;
 }

@@ -20,6 +20,8 @@ import java.util.zip.Deflater;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
+import javolution.util.FastTable;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -41,6 +43,7 @@ import com.aionemu.gameserver.configs.main.GSConfig;
 import com.aionemu.gameserver.configs.main.GeoDataConfig;
 import com.aionemu.gameserver.configs.main.SiegeConfig;
 import com.aionemu.gameserver.configs.network.NetworkConfig;
+import com.aionemu.gameserver.custom.pvpmap.PvpMapService;
 import com.aionemu.gameserver.dao.PlayerDAO;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.instance.InstanceEngine;
@@ -102,7 +105,6 @@ import com.aionemu.gameserver.world.zone.ZoneService;
 import ch.qos.logback.classic.LoggerContext;
 import ch.qos.logback.classic.joran.JoranConfigurator;
 import ch.qos.logback.core.joran.spi.JoranException;
-import javolution.util.FastTable;
 
 /**
  * <tt>GameServer</tt> is the main class of the application and represents the whole game server.<br>
@@ -311,6 +313,8 @@ public class GameServer {
 		MaintenanceTask.getInstance();
 		ChallengeTaskService.getInstance();
 		GameTimeService.getInstance().startClock();
+
+		PvpMapService.getInstance().init();
 
 		System.gc();
 

@@ -5,8 +5,10 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.aionemu.gameserver.model.ChatType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_MESSAGE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
@@ -23,6 +25,22 @@ public class PvpMapService {
 		return instance;
 	}
 
+	public void init() {
+		handler = getOrCreateNewHandler();
+	}
+
+	public void onLogin(Player player) {
+		if (isActive.get() && player.getLevel() >= 60 && isRandomBossAlive()) {
+			PacketSendUtility.sendPacket(player, new SM_MESSAGE(0, null, "[PvP-Map] A powerful monster appeared.", ChatType.BRIGHT_YELLOW_CENTER));
+		}
+	}
+
+	private boolean isRandomBossAlive() {
+		if (handler != null) {
+			return handler.isRandomBossAlive();
+		}
+		return false;
+	}
 	private void join(Player p) {
 		if (p.getLevel() < 60) {
 			PacketSendUtility.sendMessage(p, "The PvP-Map is for players level 60 and above.");
@@ -57,7 +75,6 @@ public class PvpMapService {
 			if (!handler.leave(p)) {
 				PacketSendUtility.sendMessage(p, "You cannot leave the PvP-Map in your current state.");
 			}
-
 		}
 	}
 

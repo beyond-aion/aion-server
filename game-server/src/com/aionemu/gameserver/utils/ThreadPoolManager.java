@@ -10,6 +10,8 @@ import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
+import javolution.util.FastTable;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,8 +19,6 @@ import com.aionemu.commons.utils.concurrent.AionRejectedExecutionHandler;
 import com.aionemu.commons.utils.concurrent.PriorityThreadFactory;
 import com.aionemu.commons.utils.concurrent.RunnableWrapper;
 import com.aionemu.gameserver.configs.main.ThreadConfig;
-
-import javolution.util.FastTable;
 
 /**
  * @author -Nemesiss-, NB4L1, MrPoke, lord_rex
@@ -80,10 +80,14 @@ public final class ThreadPoolManager {
 		}
 	}
 
-	public final ScheduledFuture<?> schedule(Runnable r, long delay) {
+	public final ScheduledFuture<?> schedule(Runnable r, long delay, TimeUnit unit) {
 		r = new ThreadPoolRunnableWrapper(r);
 		delay = validate(delay);
-		return scheduledPool.schedule(r, delay, TimeUnit.MILLISECONDS);
+		return scheduledPool.schedule(r, delay, unit);
+	}
+
+	public final ScheduledFuture<?> schedule(Runnable r, long delay) {
+		return schedule(r, delay, TimeUnit.MILLISECONDS);
 	}
 
 	public final ScheduledFuture<?> scheduleAtFixedRate(Runnable r, long delay, long period) {
