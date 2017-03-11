@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.function.Consumer;
 
+import javolution.util.FastTable;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,6 +23,7 @@ import com.aionemu.gameserver.configs.main.GSConfig;
 import com.aionemu.gameserver.configs.main.HTMLConfig;
 import com.aionemu.gameserver.configs.main.PeriodicSaveConfig;
 import com.aionemu.gameserver.configs.main.SecurityConfig;
+import com.aionemu.gameserver.custom.pvpmap.PvpMapService;
 import com.aionemu.gameserver.dao.AbyssRankDAO;
 import com.aionemu.gameserver.dao.InventoryDAO;
 import com.aionemu.gameserver.dao.ItemStoneListDAO;
@@ -121,8 +124,8 @@ import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.services.toypet.PetService;
 import com.aionemu.gameserver.services.transfers.PlayerTransferService;
 import com.aionemu.gameserver.taskmanager.tasks.ExpireTimerTask;
-import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.audit.GMService;
 import com.aionemu.gameserver.utils.collections.ListSplitter;
@@ -130,8 +133,6 @@ import com.aionemu.gameserver.utils.rates.Rates;
 import com.aionemu.gameserver.utils.stats.AbyssRankEnum;
 import com.aionemu.gameserver.utils.time.ServerTime;
 import com.aionemu.gameserver.world.World;
-
-import javolution.util.FastTable;
 
 /**
  * @author ATracer
@@ -524,6 +525,8 @@ public final class PlayerEnterWorldService {
 		BonusPackService.getInstance().addPlayerCustomReward(player);
 		FactionPackService.getInstance().addPlayerCustomReward(player);
 		VeteranRewardService.getInstance().tryReward(player);
+
+		PvpMapService.getInstance().onLogin(player);
 	}
 
 	private static boolean validateFortressZone(Player player) {
