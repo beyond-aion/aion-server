@@ -92,14 +92,12 @@ public class FearEffect extends EffectTemplate {
 	public void endEffect(Effect effect) {
 		effect.getEffected().getEffectController().unsetAbnormal(AbnormalState.FEAR);
 
-		// for now we support only players
-		if (GeoDataConfig.FEAR_ENABLE) {
-			effect.getEffected().getMoveController().abortMove();// TODO impl stopMoving?
-		}
-		if (effect.getEffected() instanceof Npc) {
-			((NpcAI) effect.getEffected().getAi()).onCreatureEvent(AIEventType.ATTACK, effect.getEffector());
-		}
+		effect.getEffected().getMoveController().abortMove();
 		PacketSendUtility.broadcastPacketAndReceive(effect.getEffected(), new SM_TARGET_IMMOBILIZE(effect.getEffected()));
+		if (effect.getEffected() instanceof Npc) {
+			((NpcAI) effect.getEffected().getAi()).setStateIfNot(AIState.FIGHT);
+			effect.getEffected().getAi().onGeneralEvent(AIEventType.MOVE_ARRIVED);
+		}
 
 		if (resistchance < 100) {
 			ActionObserver observer = effect.getActionObserver(position);
