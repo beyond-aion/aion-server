@@ -1,11 +1,10 @@
 package com.aionemu.gameserver.model.rift;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.templates.rift.RiftTemplate;
-
-import javolution.util.FastTable;
 
 /**
  * @author Source
@@ -14,7 +13,7 @@ public class RiftLocation {
 
 	private boolean opened;
 	private final RiftTemplate template;
-	private List<Npc> spawned = new FastTable<>();
+	private List<Npc> spawned = new ArrayList<>();
 
 	public RiftLocation(RiftTemplate template) {
 		this.template = template;

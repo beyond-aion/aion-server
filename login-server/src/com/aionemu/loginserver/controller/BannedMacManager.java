@@ -7,8 +7,6 @@ import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.loginserver.dao.BannedMacDAO;
 import com.aionemu.loginserver.model.base.BannedMacEntry;
 
-import javolution.util.FastMap;
-
 /**
  * @author KID
  */
@@ -16,7 +14,7 @@ public class BannedMacManager {
 
 	private static BannedMacManager manager = new BannedMacManager();
 
-	private Map<String, BannedMacEntry> bannedList = new FastMap<>();
+	private Map<String, BannedMacEntry> bannedList;
 
 	public static BannedMacManager getInstance() {
 		return manager;
@@ -24,7 +22,7 @@ public class BannedMacManager {
 
 	private BannedMacDAO dao = DAOManager.getDAO(BannedMacDAO.class);
 
-	public BannedMacManager() {
+	private BannedMacManager() {
 		bannedList = dao.load();
 	}
 

@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import com.aionemu.gameserver.configs.main.SiegeConfig;
@@ -12,8 +13,6 @@ import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 import com.aionemu.gameserver.services.LegionService;
 import com.aionemu.gameserver.services.SiegeService;
-
-import javolution.util.FastMap;
 
 /**
  * @author Sarynth
@@ -34,7 +33,7 @@ public class SM_SIEGE_LOCATION_INFO extends AionServerPacket {
 
 	public SM_SIEGE_LOCATION_INFO(SiegeLocation loc) {
 		this.infoType = 1;
-		locations = new FastMap<>();
+		locations = new HashMap<>();
 		locations.put(loc.getLocationId(), loc);
 	}
 

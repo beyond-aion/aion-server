@@ -1,5 +1,6 @@
 package ai.instance.illuminaryObelisk;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.Future;
@@ -16,7 +17,6 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldPosition;
 
 import ai.AggressiveNpcAI;
-import javolution.util.FastTable;
 
 /**
  * @author M.O.G. Dision
@@ -26,8 +26,8 @@ import javolution.util.FastTable;
 public class DainatoumAI extends AggressiveNpcAI {
 
 	private AtomicBoolean isStarted = new AtomicBoolean(false);
-	private List<VisibleObject> adds = new FastTable<>();
-	protected List<Integer> percents = new FastTable<>();
+	private List<VisibleObject> adds = new ArrayList<>();
+	protected List<Integer> percents = new ArrayList<>();
 	private Future<?> despawnTask;
 	private int progress = 0;
 

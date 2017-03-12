@@ -1,5 +1,6 @@
 package instance;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Future;
 
@@ -26,13 +27,11 @@ import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.services.player.PlayerReviveService;
 import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
-import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.WorldPosition;
-
-import javolution.util.FastTable;
 
 /**
  * @author Yeats
@@ -42,14 +41,14 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 
 	private LegionDominionReward reward;
 	private Long startTime;
-	private final List<Future<?>> tasks = new FastTable<>();
-	private final List<WorldPosition> points = new FastTable<>();
+	private final List<Future<?>> tasks = new ArrayList<>();
+	private final List<WorldPosition> points = new ArrayList<>();
 	private Future<?> timer, failTask;
 	private Race instanceRace;
 	private Legion instanceLegion;
 	private int aethericKills = 0;
-	private final List<Integer> allowedPlayers = new FastTable<>();
-	private final List<Integer> deadPlayers = new FastTable<>();
+	private final List<Integer> allowedPlayers = new ArrayList<>();
+	private final List<Integer> deadPlayers = new ArrayList<>();
 
 	@Override
 	public void onInstanceCreate(WorldMapInstance instance) {

@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.LoggerFactory;
@@ -20,7 +21,6 @@ import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 import com.aionemu.gameserver.world.WorldMapType;
 
 import ch.qos.logback.classic.Logger;
-import javolution.util.FastTable;
 
 /**
  * @author Mrakobes
@@ -28,7 +28,7 @@ import javolution.util.FastTable;
  */
 public class Bk extends AdminCommand {
 
-	List<Bookmark> bookmarks = new FastTable<>();
+	List<Bookmark> bookmarks = new ArrayList<>();
 	private static final Logger log = (Logger) LoggerFactory.getLogger(Bk.class);
 	private String bookmark_name = "";
 

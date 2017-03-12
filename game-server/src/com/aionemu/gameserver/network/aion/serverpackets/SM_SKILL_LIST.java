@@ -1,13 +1,12 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
+import java.util.Arrays;
 import java.util.List;
 
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.skill.PlayerSkillEntry;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
-
-import javolution.util.FastTable;
 
 /**
  * @author MrPoke
@@ -28,7 +27,7 @@ public class SM_SKILL_LIST extends AionServerPacket {
 	}
 
 	public SM_SKILL_LIST(PlayerSkillEntry skill, int messageId) {
-		this.skillList = FastTable.of(skill);
+		this.skillList = Arrays.asList(skill);
 		this.messageId = messageId;
 		this.skillNameId = DataManager.SKILL_DATA.getSkillTemplate(skill.getSkillId()).getNameId();
 		this.skillLvl = String.valueOf(skill.getSkillLevel());

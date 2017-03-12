@@ -1,5 +1,6 @@
 package ai.instance.tiamatStrongHold;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.Future;
@@ -21,7 +22,6 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
 import ai.AggressiveNpcAI;
-import javolution.util.FastTable;
 
 /**
  * @author Cheatkiller
@@ -30,7 +30,7 @@ import javolution.util.FastTable;
 public class BrigadeGeneralTerathAI extends AggressiveNpcAI {
 
 	private AtomicBoolean isHome = new AtomicBoolean(true);
-	private List<Integer> percents = new FastTable<>();
+	private List<Integer> percents = new ArrayList<>();
 	private Future<?> skillTask;
 	private boolean canThink = true;
 	private Npc aethericField;

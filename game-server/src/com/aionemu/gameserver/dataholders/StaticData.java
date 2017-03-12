@@ -20,8 +20,6 @@ import com.aionemu.gameserver.model.templates.mail.Mails;
 @XmlAccessorType(XmlAccessType.NONE)
 public class StaticData {
 
-	private static final Logger log = LoggerFactory.getLogger(StaticData.class);
-
 	@XmlElement(name = "world_maps")
 	public WorldMapsData worldMapsData;
 
@@ -215,10 +213,10 @@ public class StaticData {
 	public InstanceExitData instanceExitData;
 
 	@XmlElement(name = "portal_locs")
-	PortalLocData portalLocData;
+	public PortalLocData portalLocData;
 
 	@XmlElement(name = "portal_templates2")
-	Portal2Data portalTemplate2;
+	public Portal2Data portalTemplate2;
 
 	@XmlElement(name = "house_lands")
 	public HouseData houseData;
@@ -298,6 +296,7 @@ public class StaticData {
 	// JAXB callback
 	@SuppressWarnings("unused")
 	private void afterUnmarshal(Unmarshaller unmarshaller, Object parent) {
+		Logger log = LoggerFactory.getLogger(StaticData.class);
 		log.info("Loaded " + worldMapsData.size() + " maps");
 		log.info("Loaded " + materiaData.size() + " material ids");
 		log.info("Loaded weather for " + mapWeatherData.size() + " maps");

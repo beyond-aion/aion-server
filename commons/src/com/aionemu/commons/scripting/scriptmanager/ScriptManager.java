@@ -1,6 +1,7 @@
 package com.aionemu.commons.scripting.scriptmanager;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
@@ -17,8 +18,6 @@ import com.aionemu.commons.scripting.ScriptContextFactory;
 import com.aionemu.commons.scripting.classlistener.ClassListener;
 import com.aionemu.commons.scripting.impl.javacompiler.ScriptCompilerImpl;
 import com.aionemu.commons.utils.xml.JAXBUtil;
-
-import javolution.util.FastTable;
 
 /**
  * Class that represents managers of script contexts. It loads, reloads and unload script contexts. In the future it may be extended to support
@@ -93,7 +92,7 @@ public class ScriptManager {
 	 */
 	public synchronized void loadDirectory(File directory) throws RuntimeException {
 		Collection<File> libraries = FileUtils.listFiles(directory, new String[] { "jar" }, true);
-		List<File> list = new FastTable<>();
+		List<File> list = new ArrayList<>();
 		list.addAll(libraries);
 		try {
 			loadDirectory(directory, list, DEFAULT_COMPILER_CLASS.getName());

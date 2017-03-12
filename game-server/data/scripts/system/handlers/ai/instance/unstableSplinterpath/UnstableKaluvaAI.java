@@ -96,8 +96,8 @@ public class UnstableKaluvaAI extends AggressiveNpcAI {
 	}
 
 	private int randomEgg() {
-		int[] npcId = { 219971, 219952, 219970, 219969 };
-		return npcId[Rnd.get(0, npcId.length - 1)];
+		int[] npcIds = { 219971, 219952, 219970, 219969 };
+		return Rnd.get(npcIds);
 	}
 
 	@Override

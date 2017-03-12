@@ -6,6 +6,7 @@ import java.sql.Timestamp;
 import java.time.DayOfWeek;
 import java.time.LocalTime;
 import java.time.ZonedDateTime;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
@@ -78,16 +79,14 @@ import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.services.reward.BonusService;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.ChatUtil;
-import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
 import com.aionemu.gameserver.utils.stats.AbyssRankEnum;
 import com.aionemu.gameserver.utils.time.ServerTime;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
-
-import javolution.util.FastTable;
 
 /**
  * @author Mr. Poke
@@ -117,7 +116,7 @@ public final class QuestService {
 			return false; // prevent repeatable reward because of wrong quest handling
 
 		validateAndFixRewardGroup(qs, id);
-		List<QuestItems> questItems = new FastTable<>();
+		List<QuestItems> questItems = new ArrayList<>();
 		if (template.getExtendedRewards() != null && qs.getCompleteCount() == template.getRewardRepeatCount() - 1) { // additional reward for the Xth time
 			questItems.addAll(getRewardItems(env, template, true, null));
 			extendedRewards = template.getExtendedRewards();
@@ -176,7 +175,7 @@ public final class QuestService {
 		Player player = env.getPlayer();
 		int id = env.getQuestId();
 		int dialogActionId = env.getDialogActionId();
-		List<QuestItems> questItems = new FastTable<>();
+		List<QuestItems> questItems = new ArrayList<>();
 		if (extended) {
 			Rewards rewards = template.getExtendedRewards();
 			questItems.addAll(rewards.getRewardItem());
@@ -515,7 +514,7 @@ public final class QuestService {
 			return false;
 
 		if (template.getCombineSkill() != 0) {
-			List<Integer> skills = new FastTable<>(); // skills to check
+			List<Integer> skills = new ArrayList<>(); // skills to check
 			if (template.getCombineSkill() == -1) { // any skill
 				if (template.getNpcFactionId() != 12 && template.getNpcFactionId() != 13) { // exclude essence/aether tapping for crafting dailies
 					skills.add(30002);
@@ -692,7 +691,7 @@ public final class QuestService {
 			toCheck = reward.getCollectItemChecks();
 
 			if (toCheck == null) { // all items are required
-				toCheck = new FastTable<>();
+				toCheck = new ArrayList<>();
 				for (int index = 0; index < collectItems.getCollectItem().size(); index++)
 					toCheck.add(index);
 			} else if (toCheck.contains(-1)) { // no check/remove is required
@@ -791,7 +790,7 @@ public final class QuestService {
 				continue;
 
 			if (players != null && player.isInGroup()) {
-				List<Player> pls = new FastTable<>();
+				List<Player> pls = new ArrayList<>();
 				if (drop.isDropEachMemberGroup()) {
 					for (Player member : players) {
 						if (isQuestDrop(member, drop)) {
@@ -825,7 +824,7 @@ public final class QuestService {
 					pls.clear();
 				}
 			} else if (players != null && player.isInAlliance()) {
-				List<Player> pls = new FastTable<>();
+				List<Player> pls = new ArrayList<>();
 				if (drop.isDropEachMemberAlliance()) {
 					for (Player member : players) {
 						if (isQuestDrop(member, drop)) {
@@ -1042,7 +1041,7 @@ public final class QuestService {
 	}
 
 	public static List<Player> getEachDropMembersGroup(PlayerGroup group, int npcId, int questId) {
-		List<Player> players = new FastTable<>();
+		List<Player> players = new ArrayList<>();
 		for (QuestDrop qd : getQuestDrop(npcId)) {
 			if (qd.isDropEachMemberGroup()) {
 				for (Player player : group.getMembers()) {
@@ -1058,7 +1057,7 @@ public final class QuestService {
 	}
 
 	public static List<Player> getEachDropMembersAlliance(PlayerAlliance alliance, int npcId, int questId) {
-		List<Player> players = new FastTable<>();
+		List<Player> players = new ArrayList<>();
 		for (QuestDrop qd : getQuestDrop(npcId)) {
 			if (qd.isDropEachMemberGroup()) {
 				for (Player player : alliance.getMembers()) {

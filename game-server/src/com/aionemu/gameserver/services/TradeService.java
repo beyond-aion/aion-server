@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.services;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -40,9 +41,6 @@ import com.aionemu.gameserver.services.trade.PricesService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
-
-import javolution.util.FastSet;
-import javolution.util.FastTable;
 
 /**
  * @author ATracer, Rama, Wakizashi, xTz
@@ -218,7 +216,7 @@ public class TradeService {
 
 		Storage inventory = player.getInventory();
 		long kinahReward = 0;
-		List<Item> items = new FastTable<>();
+		List<Item> items = new ArrayList<>();
 		for (TradeItem tradeItem : tradeList.getTradeItems()) {
 			long count = tradeItem.getCount();
 			Item item = inventory.getItemByObjId(tradeItem.getItemId());
@@ -313,7 +311,7 @@ public class TradeService {
 		return true;
 	}
 
-	public static boolean performBuyFromTradeInTrade(Player player, int npcObjectId, int itemId, int count, Set<Integer> tradeInItemObjectIds) {
+	public static boolean performBuyFromTradeInTrade(Player player, int npcObjectId, int itemId, int count, List<Integer> tradeInItemObjectIds) {
 		if (!RestrictionsManager.canTrade(player)) {
 			return false;
 		}
@@ -347,7 +345,7 @@ public class TradeService {
 
 		List<TradeinItem> requiredTradeInItems = itemTemplate.getTradeinList().getTradeinItem();
 
-		Set<Integer> tradeInItemIds = new FastSet<>();
+		Set<Integer> tradeInItemIds = new HashSet<>();
 		for (Integer tradeInItemObjectId : tradeInItemObjectIds) {
 			Item checkItem = player.getInventory().getItemByObjId(tradeInItemObjectId);
 			if (checkItem == null) {

@@ -1,5 +1,6 @@
 package ai.instance.empyreanCrucible;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.Future;
@@ -14,7 +15,6 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldPosition;
 
 import ai.AggressiveNpcAI;
-import javolution.util.FastTable;
 
 /**
  * @author Luzien
@@ -22,7 +22,7 @@ import javolution.util.FastTable;
 @AIName("king_consierd")
 public class KingConsierdAI extends AggressiveNpcAI {
 
-	private List<Integer> percents = new FastTable<>();
+	private List<Integer> percents = new ArrayList<>();
 	private AtomicBoolean isHome = new AtomicBoolean(true);
 	private Future<?> eventTask;
 	private Future<?> skillTask;

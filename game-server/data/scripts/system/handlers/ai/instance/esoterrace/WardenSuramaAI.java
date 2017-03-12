@@ -1,5 +1,6 @@
 package ai.instance.esoterrace;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.function.Consumer;
@@ -14,7 +15,6 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 import ai.AggressiveNpcAI;
-import javolution.util.FastTable;
 
 /**
  * @author xTz
@@ -22,7 +22,7 @@ import javolution.util.FastTable;
 @AIName("wardensurama")
 public class WardenSuramaAI extends AggressiveNpcAI {
 
-	private List<Integer> percents = new FastTable<>();
+	private List<Integer> percents = new ArrayList<>();
 
 	@Override
 	protected void handleSpawned() {

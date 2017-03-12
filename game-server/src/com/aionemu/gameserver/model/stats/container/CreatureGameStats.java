@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.model.stats.container;
 
+import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.Iterator;
 import java.util.List;
@@ -25,8 +26,6 @@ import com.aionemu.gameserver.model.templates.itemset.ItemSetTemplate;
 import com.aionemu.gameserver.model.templates.stats.StatsTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.LOG;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.TYPE;
-
-import javolution.util.FastTable;
 
 /**
  * @author xavier
@@ -342,7 +341,7 @@ public abstract class CreatureGameStats<T extends Creature> {
 		for (IStatFunction func : allStats) {
 			if (func.getPriority() >= Integer.MAX_VALUE - 10) {
 				if (setFuncs == null)
-					setFuncs = new FastTable<>();
+					setFuncs = new ArrayList<>();
 				setFuncs.add(func);
 			} else if (setFuncs != null) {
 				// all StatSetFunctions added

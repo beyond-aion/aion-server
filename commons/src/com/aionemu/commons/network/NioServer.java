@@ -3,6 +3,7 @@ package com.aionemu.commons.network;
 import java.io.IOException;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.ServerSocketChannel;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
@@ -12,8 +13,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.options.Assertion;
-
-import javolution.util.FastTable;
 
 /**
  * NioServer instance that handle connections on specified addresses.
@@ -30,7 +29,7 @@ public class NioServer {
 	/**
 	 * The channels on which we'll accept connections
 	 */
-	private final List<SelectionKey> serverChannelKeys = new FastTable<>();
+	private final List<SelectionKey> serverChannelKeys = new ArrayList<>();
 
 	/**
 	 * Dispatcher that will accept connections

@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.model.templates.quest;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -7,8 +8,6 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import com.aionemu.gameserver.questEngine.QuestEngine;
-
-import javolution.util.FastTable;
 
 /**
  * @author MrPoke
@@ -28,11 +27,11 @@ public class QuestNpc {
 		this.npcId = npcId;
 		this.questRange = questRange;
 		onQuestStart = new HashSet<>(0);
-		onKillEvent = new FastTable<>();
-		onTalkEvent = new FastTable<>();
-		onAttackEvent = new FastTable<>();
-		onAddAggroListEvent = new FastTable<>();
-		onAtDistanceEvent = new FastTable<>();
+		onKillEvent = new ArrayList<>();
+		onTalkEvent = new ArrayList<>();
+		onAttackEvent = new ArrayList<>();
+		onAddAggroListEvent = new ArrayList<>();
+		onAtDistanceEvent = new ArrayList<>();
 	}
 
 	public QuestNpc(int npcId) {
@@ -114,9 +113,9 @@ public class QuestNpc {
 	/**
 	 * @return A set of all quest ids which have been registered from quest handlers for this quest npc
 	 */
-	public Set<Integer> getAllRegisteredQuestIds() {
+	public Set<Integer> findAllRegisteredQuestIds() {
 		Stream<Integer> questIds = Stream.of(onQuestStart, onTalkEvent, onAtDistanceEvent, onAddAggroListEvent, onAttackEvent, onKillEvent)
 			.flatMap(c -> c.stream());
-		return questIds.distinct().collect(Collectors.toSet());
+		return questIds.collect(Collectors.toSet());
 	}
 }

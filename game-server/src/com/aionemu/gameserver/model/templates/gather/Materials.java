@@ -1,12 +1,11 @@
 package com.aionemu.gameserver.model.templates.gather;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
-
-import javolution.util.FastTable;
 
 /**
  * @author ATracer
@@ -22,7 +21,7 @@ public class Materials {
 	 */
 	public List<Material> getMaterial() {
 		if (material == null) {
-			material = new FastTable<>();
+			material = new ArrayList<>();
 		}
 		return this.material;
 	}

@@ -1,5 +1,6 @@
 package instance;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Future;
@@ -16,8 +17,6 @@ import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
-
-import javolution.util.FastTable;
 
 /**
  * After activating the start device one of three game events will be chosen.
@@ -106,7 +105,7 @@ public class DanuarMysticariumInstance extends GeneralInstanceHandler {
 	}
 
 	private void startTasks() {
-		tasks = new FastTable<>();
+		tasks = new ArrayList<>();
 		tasks.add(ThreadPoolManager.getInstance().schedule((Runnable) () -> sendMsg(1402802), 125000));
 		tasks.add(ThreadPoolManager.getInstance().schedule((Runnable) () -> sendMsg(1402803), 155000));
 		tasks.add(ThreadPoolManager.getInstance().schedule((Runnable) () -> sendMsg(1402804), 175000));

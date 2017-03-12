@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.services.panesterra.ahserion;
 
-
 /**
  * @author Yeats
  *

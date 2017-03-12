@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -20,8 +21,6 @@ import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.idfactory.IDFactory;
 import com.aionemu.gameserver.world.World;
-
-import javolution.util.FastTable;
 
 /**
  * Use this service to send raw html to the client.
@@ -149,7 +148,7 @@ public class HTMLService {
 	}
 
 	private static List<SurveyTemplate> getSurveyTemplates(List<SurveyTemplate> surveys, List<Integer> items) {
-		List<SurveyTemplate> templates = new FastTable<>();
+		List<SurveyTemplate> templates = new ArrayList<>();
 		for (SurveyTemplate survey : surveys) {
 			if (items.contains(survey.getItemId())) {
 				templates.add(survey);

@@ -1,10 +1,11 @@
 package ai.instance.beshmundirTemple;
 
+import static com.aionemu.gameserver.model.DialogAction.SETPRO1;
+
 import java.util.function.Consumer;
 
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.NpcAI;
-import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;

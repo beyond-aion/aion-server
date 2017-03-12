@@ -2,9 +2,9 @@ package ai.worlds.inggison;
 
 import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
-import com.aionemu.gameserver.model.ai.Percentage;
-import com.aionemu.gameserver.model.ai.SummonGroup;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.templates.ai.Percentage;
+import com.aionemu.gameserver.model.templates.ai.SummonGroup;
 
 import ai.SummonerAI;
 

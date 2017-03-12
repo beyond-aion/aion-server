@@ -12,7 +12,6 @@ import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.siege.SiegeNpc;
 import com.aionemu.gameserver.utils.PositionUtil;
 
-
 /**
  * @author ATracer
  */

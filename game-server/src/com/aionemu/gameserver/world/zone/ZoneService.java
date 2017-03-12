@@ -45,8 +45,6 @@ import com.aionemu.gameserver.world.zone.handler.ZoneHandlerClassListener;
 import com.aionemu.gameserver.world.zone.handler.ZoneNameAnnotation;
 
 import gnu.trove.map.hash.TIntObjectHashMap;
-import javolution.util.FastMap;
-import javolution.util.FastTable;
 
 /**
  * @author ATracer
@@ -57,7 +55,7 @@ public final class ZoneService implements GameEngine {
 	private static final Logger log = LoggerFactory.getLogger(ZoneService.class);
 	private ScriptManager scriptManager = new ScriptManager();
 	private Map<ZoneName, Class<? extends ZoneHandler>> zoneHandlers = new HashMap<>();
-	private Map<ZoneName, ZoneHandler> collidableHandlers = new FastMap<>();
+	private Map<ZoneName, ZoneHandler> collidableHandlers = new HashMap<>();
 	private TIntObjectHashMap<List<ZoneInfo>> zoneByMapIdMap = DataManager.ZONE_DATA.getZones();
 
 	private ZoneService() {
@@ -227,7 +225,7 @@ public final class ZoneService implements GameEngine {
 	}
 
 	public void saveMaterialZones() {
-		List<ZoneTemplate> templates = new FastTable<>();
+		List<ZoneTemplate> templates = new ArrayList<>();
 		for (WorldMapTemplate map : DataManager.WORLD_MAPS_DATA) {
 			Collection<ZoneInfo> areas = this.zoneByMapIdMap.get(map.getMapId());
 			if (areas == null)

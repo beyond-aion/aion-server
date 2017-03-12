@@ -1,14 +1,12 @@
 package com.aionemu.gameserver.custom.pvpmap;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
-
-import javolution.util.FastMap;
-import javolution.util.FastTable;
 
 import com.aionemu.commons.services.CronService;
 import com.aionemu.commons.utils.Rnd;
@@ -70,19 +68,16 @@ import com.aionemu.gameserver.world.zone.ZoneInstance;
 public class PvpMapHandler extends GeneralInstanceHandler {
 
 	private static final int SHUGO_SPAWN_RATE = 30;
-	private final Map<Integer, WorldPosition> origins = new FastMap<>();
-	private final Map<Integer, Long> joinOrLeaveTime = new FastMap<>();
-	private final List<WorldPosition> respawnLocations = new FastTable<>(),
-			treasurePositions = new FastTable<>(),
-			supplyPositions = new FastTable<>(),
-			keymasterPositions = new FastTable<>();
+	private final Map<Integer, WorldPosition> origins = new HashMap<>();
+	private final Map<Integer, Long> joinOrLeaveTime = new HashMap<>();
+	private final List<WorldPosition> respawnLocations = new ArrayList<>(), treasurePositions = new ArrayList<>(), supplyPositions = new ArrayList<>(),
+		keymasterPositions = new ArrayList<>();
 	private final AtomicBoolean canJoin = new AtomicBoolean();
 	private List<Future<?>> tasks = new ArrayList<>();
 	private Future<?> supplyTask, despawnTask;
 	private boolean randomBossAlive = false;
-	private final int randomBossNpcIds[] = {231196, 233740, 235759, 235765, 235763,
-			235767, 235771, 235619, 235620, 235621, 855822, 855843, 230857, 230858,
-			277224, 855776, 219934, 219933, 235975, 855263, 231304};
+	private final int randomBossNpcIds[] = { 231196, 233740, 235759, 235765, 235763, 235767, 235771, 235619, 235620, 235621, 855822, 855843, 230857,
+		230858, 277224, 855776, 219934, 219933, 235975, 855263, 231304 };
 
 	public PvpMapHandler() {
 		super();
@@ -129,12 +124,12 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 			if (supplyPositions.isEmpty()) {
 				addSupplyPositions();
 			}
-			final WorldPosition pos = getRandomPosition(supplyPositions);
+			final WorldPosition pos = Rnd.get(supplyPositions);
 			supplyPositions.remove(pos);
 			spawn(831980, pos.getX(), pos.getY(), pos.getZ(), pos.getHeading()); // flag
 			sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_GUARDLIGHTHERO_SPAWN_IDLDF5_UNDER_01_WAR(), 0);
 			scheduleSupplyDespawn();
-			ThreadPoolManager.getInstance().schedule((Runnable) () -> {
+			ThreadPoolManager.getInstance().schedule(() -> {
 				spawn(233192, pos.getX(), pos.getY(), pos.getZ(), pos.getHeading()); // chest
 			}, 30000);
 		}
@@ -142,7 +137,7 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 
 	private void spawnKeymasters() {
 		addKeymasterPositions();
-		int npcIds[] = {219218, 219218, 219218, 219191, 219191, 219192, 219192, 219193};
+		int npcIds[] = { 219218, 219218, 219218, 219191, 219191, 219192, 219192, 219193 };
 		for (int id : npcIds) {
 			spawnKeymasterOrTreasureChest(id, true);
 		}
@@ -151,23 +146,22 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 	private void spawnKeymasterOrTreasureChest(int npcId, boolean isKeymaster) {
 		WorldPosition pos;
 		if (isKeymaster) {
-			pos = getRandomPosition(keymasterPositions);
+			pos = Rnd.get(keymasterPositions);
 			keymasterPositions.remove(pos);
 		} else {
-			pos = getRandomPosition(treasurePositions);
+			pos = Rnd.get(treasurePositions);
 			treasurePositions.remove(pos);
 		}
 		spawn(npcId, pos.getX(), pos.getY(), pos.getZ(), pos.getHeading());
 	}
 
 	private void scheduleRespawn(int npcId, int time, final boolean isKeymaster) {
-		tasks.add(ThreadPoolManager.getInstance().schedule((Runnable) () -> spawnKeymasterOrTreasureChest(npcId, isKeymaster), time, TimeUnit.MINUTES));
+		tasks.add(ThreadPoolManager.getInstance().schedule(() -> spawnKeymasterOrTreasureChest(npcId, isKeymaster), time, TimeUnit.MINUTES));
 	}
 
 	private void spawnTreasureChests() {
 		addTreasurePositions();
-		int npcIds[] = {701388, 701388, 701388, 701388, 701388,
-				701389, 701389, 701389, 701390, 701390};
+		int npcIds[] = { 701388, 701388, 701388, 701388, 701388, 701389, 701389, 701389, 701390, 701390 };
 		for (int id : npcIds) {
 			spawnKeymasterOrTreasureChest(id, false);
 		}
@@ -178,7 +172,7 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 			int bonus = World.getInstance().getAllPlayers().size() * 2;
 			bonus = bonus > 30 ? 30 : bonus;
 			if (Rnd.get(1, 100) <= (CustomConfig.PVP_MAP_RANDOM_BOSS_BASE_RATE + bonus)) {
-				int npcId = randomBossNpcIds[Rnd.get(0, randomBossNpcIds.length -1)];
+				int npcId = randomBossNpcIds[Rnd.get(0, randomBossNpcIds.length - 1)];
 				NpcTemplate template = DataManager.NPC_DATA.getNpcTemplate(npcId);
 				SpawnTemplate spawn = SpawnEngine.addNewSingleTimeSpawn(mapId, npcId, 744.337f, 292.986f, 233.697f, (byte) 43);
 				final Npc npc = new Npc(IDFactory.getInstance().nextId(), new NpcController(), spawn, template);
@@ -189,13 +183,13 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 				scheduleRandomBossDespawn(npc);
 				randomBossAlive = true;
 				PacketSendUtility.broadcastToWorld(new SM_MESSAGE(0, null, "[PvP-Map] A powerful monster appeared.", ChatType.BRIGHT_YELLOW_CENTER),
-						p -> p.getLevel() >= 60);
+					p -> p.getLevel() >= 60);
 			}
 		}, CustomConfig.PVP_MAP_RANDOM_BOSS_SCHEDULE);
 	}
 
 	private void scheduleRandomBossDespawn(final Npc npc) {
-		tasks.add(ThreadPoolManager.getInstance().schedule((Runnable) () -> {
+		tasks.add(ThreadPoolManager.getInstance().schedule(() -> {
 			if (npc != null && !npc.getLifeStats().isAboutToDie() && !npc.getLifeStats().isAlreadyDead()) {
 				npc.getController().delete();
 				randomBossAlive = false;
@@ -204,8 +198,9 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 	}
 
 	private void scheduleSupplyDespawn() {
-		despawnTask = ThreadPoolManager.getInstance().schedule(
-			() -> instance.getNpcs().stream().filter(npc -> npc.getNpcId() == 831980 || npc.getNpcId() == 233192).filter(npc -> !npc.isInState(CreatureState.DEAD)).forEach(npc -> npc.getController().delete()), 120000);
+		despawnTask = ThreadPoolManager.getInstance()
+			.schedule(() -> instance.getNpcs().stream().filter(npc -> npc.getNpcId() == 831980 || npc.getNpcId() == 233192)
+				.filter(npc -> !npc.isInState(CreatureState.DEAD)).forEach(npc -> npc.getController().delete()), 120000);
 	}
 
 	public void join(Player p) {
@@ -231,7 +226,7 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 						updateOrigin(p);
 						updateJoinOrLeaveTime(p);
 						InstanceService.registerPlayerWithInstance(instance, p);
-						WorldPosition pos = getRandomPosition(respawnLocations);
+						WorldPosition pos = Rnd.get(respawnLocations);
 						TeleportService.teleportTo(p, pos.getMapId(), instanceId, pos.getX(), pos.getY(), pos.getZ(), pos.getHeading(),
 							TeleportAnimation.BATTLEGROUND);
 					}
@@ -345,16 +340,19 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 				randomBossAlive = false;
 				break;
 			case 219218: // keymaster chookuri
-				keymasterPositions.add(new WorldPosition(mapId, npc.getSpawn().getX(), npc.getSpawn().getY(), npc.getSpawn().getZ(), npc.getSpawn().getHeading()));
+				keymasterPositions
+					.add(new WorldPosition(mapId, npc.getSpawn().getX(), npc.getSpawn().getY(), npc.getSpawn().getZ(), npc.getSpawn().getHeading()));
 				scheduleRespawn(npc.getNpcId(), Rnd.get(10, 15), true);
 				break;
 			case 219191: // keymaster zumita
 			case 219192: // keymaster niksi
-				keymasterPositions.add(new WorldPosition(mapId, npc.getSpawn().getX(), npc.getSpawn().getY(), npc.getSpawn().getZ(), npc.getSpawn().getHeading()));
+				keymasterPositions
+					.add(new WorldPosition(mapId, npc.getSpawn().getX(), npc.getSpawn().getY(), npc.getSpawn().getZ(), npc.getSpawn().getHeading()));
 				scheduleRespawn(npc.getNpcId(), Rnd.get(30, 50), true);
 				break;
 			case 219193: // keymaster dabra
-				keymasterPositions.add(new WorldPosition(mapId, npc.getSpawn().getX(), npc.getSpawn().getY(), npc.getSpawn().getZ(), npc.getSpawn().getHeading()));
+				keymasterPositions
+					.add(new WorldPosition(mapId, npc.getSpawn().getX(), npc.getSpawn().getY(), npc.getSpawn().getZ(), npc.getSpawn().getHeading()));
 				scheduleRespawn(npc.getNpcId(), Rnd.get(110, 180), true);
 				break;
 		}
@@ -364,15 +362,18 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 	public void handleUseItemFinish(Player player, Npc npc) {
 		switch (npc.getNpcId()) {
 			case 701388:
-				treasurePositions.add(new WorldPosition(mapId, npc.getSpawn().getX(), npc.getSpawn().getY(), npc.getSpawn().getZ(), npc.getSpawn().getHeading()));
+				treasurePositions
+					.add(new WorldPosition(mapId, npc.getSpawn().getX(), npc.getSpawn().getY(), npc.getSpawn().getZ(), npc.getSpawn().getHeading()));
 				scheduleRespawn(npc.getNpcId(), Rnd.get(10, 20), false);
 				break;
 			case 701389:
-				treasurePositions.add(new WorldPosition(mapId, npc.getSpawn().getX(), npc.getSpawn().getY(), npc.getSpawn().getZ(), npc.getSpawn().getHeading()));
+				treasurePositions
+					.add(new WorldPosition(mapId, npc.getSpawn().getX(), npc.getSpawn().getY(), npc.getSpawn().getZ(), npc.getSpawn().getHeading()));
 				scheduleRespawn(npc.getNpcId(), Rnd.get(30, 60), false);
 				break;
 			case 701390:
-				treasurePositions.add(new WorldPosition(mapId, npc.getSpawn().getX(), npc.getSpawn().getY(), npc.getSpawn().getZ(), npc.getSpawn().getHeading()));
+				treasurePositions
+					.add(new WorldPosition(mapId, npc.getSpawn().getX(), npc.getSpawn().getY(), npc.getSpawn().getZ(), npc.getSpawn().getHeading()));
 				scheduleRespawn(npc.getNpcId(), Rnd.get(120, 200), false);
 				break;
 		}
@@ -775,10 +776,6 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 		spawnAndSetRespawn(219187, 581.25275f, 333.01978f, 227.84341f, (byte) 7, 295);
 		spawnAndSetRespawn(219187, 438.07648f, 695.8468f, 215.41328f, (byte) 109, 295);
 		spawnAndSetRespawn(219197, 591.01575f, 812.62335f, 186.81348f, (byte) 37, 295);
-	}
-
-	private WorldPosition getRandomPosition(List<WorldPosition> list){
-		return list.get(Rnd.get(0, list.size() - 1));
 	}
 
 	private void addRespawnLocations() {

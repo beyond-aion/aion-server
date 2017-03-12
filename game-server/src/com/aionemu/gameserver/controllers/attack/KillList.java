@@ -1,22 +1,22 @@
 package com.aionemu.gameserver.controllers.attack;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import com.aionemu.gameserver.configs.main.CustomConfig;
-
-import javolution.util.FastMap;
-import javolution.util.FastTable;
 
 /**
  * @author Sarynth
  */
 public class KillList {
 
-	private FastMap<Integer, List<Long>> killList;
+	private Map<Integer, List<Long>> killList;
 
 	public KillList() {
-		killList = new FastMap<>();
+		killList = new HashMap<>();
 	}
 
 	/**
@@ -50,7 +50,7 @@ public class KillList {
 	public void addKillFor(int victimId) {
 		List<Long> killTimes = killList.get(victimId);
 		if (killTimes == null) {
-			killTimes = new FastTable<>();
+			killTimes = new ArrayList<>();
 			killList.put(victimId, killTimes);
 		}
 

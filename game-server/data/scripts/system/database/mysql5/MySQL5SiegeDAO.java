@@ -3,6 +3,7 @@ package mysql5;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -14,8 +15,6 @@ import com.aionemu.gameserver.dao.MySQL5DAOUtils;
 import com.aionemu.gameserver.dao.SiegeDAO;
 import com.aionemu.gameserver.model.siege.SiegeLocation;
 import com.aionemu.gameserver.model.siege.SiegeRace;
-
-import javolution.util.FastTable;
 
 /**
  * @author Sarynth
@@ -31,7 +30,7 @@ public class MySQL5SiegeDAO extends SiegeDAO {
 	@Override
 	public boolean loadSiegeLocations(final Map<Integer, SiegeLocation> locations) {
 		boolean success = true;
-		List<Integer> loaded = new FastTable<>();
+		List<Integer> loaded = new ArrayList<>();
 
 		try {
 			try (Connection con = DatabaseFactory.getConnection();

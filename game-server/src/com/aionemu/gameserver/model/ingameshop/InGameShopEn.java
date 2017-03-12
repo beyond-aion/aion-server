@@ -1,10 +1,12 @@
 package com.aionemu.gameserver.model.ingameshop;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 import java.util.TreeMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -35,9 +37,6 @@ import com.aionemu.gameserver.services.mail.SystemMailService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.World;
 
-import javolution.util.FastMap;
-import javolution.util.FastTable;
-
 /**
  * @author KID, xTz
  */
@@ -50,7 +49,7 @@ public class InGameShopEn {
 		return instance;
 	}
 
-	private FastMap<Byte, List<IGItem>> items;
+	private Map<Byte, List<IGItem>> items;
 	private InGameShopDAO dao;
 	private InGameShopProperty iGProperty;
 	private AtomicInteger lastRequestId = new AtomicInteger(0);
@@ -63,7 +62,6 @@ public class InGameShopEn {
 		}
 		iGProperty = InGameShopProperty.load();
 		dao = DAOManager.getDAO(InGameShopDAO.class);
-		items = new FastMap<>();
 		activeRequests = new ConcurrentHashMap<>();
 		items = dao.loadInGameShopItems();
 		log.info("Loaded with " + items.size() + " items.");
@@ -103,11 +101,11 @@ public class InGameShopEn {
 	}
 
 	@SuppressWarnings("unchecked")
-	public FastTable<Integer> getTopSales(int subCategory, byte category) {
+	public List<Integer> getTopSales(int subCategory, byte category) {
 		byte max = 6;
 		TreeMap<Integer, Integer> map = new TreeMap<Integer, Integer>(new DescFilter());
 		if (!items.containsKey(category)) {
-			return new FastTable<>();
+			return new ArrayList<>();
 		}
 		for (IGItem item : this.items.get(category)) {
 			if (item.getSalesRanking() == 0)
@@ -118,7 +116,7 @@ public class InGameShopEn {
 
 			map.put(item.getSalesRanking(), item.getObjectId());
 		}
-		FastTable<Integer> top = new FastTable<>();
+		List<Integer> top = new ArrayList<>();
 		byte cnt = 0;
 		for (int objId : map.values()) {
 			if (cnt <= max) {

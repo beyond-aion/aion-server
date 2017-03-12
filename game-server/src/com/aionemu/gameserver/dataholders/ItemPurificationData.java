@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.dataholders;
 
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import javax.xml.bind.Unmarshaller;
@@ -15,7 +16,6 @@ import com.aionemu.gameserver.model.templates.item.purification.ItemPurification
 import com.aionemu.gameserver.model.templates.item.purification.PurificationResultItem;
 
 import gnu.trove.map.hash.TIntObjectHashMap;
-import javolution.util.FastMap;
 
 /**
  * @author Ranastic
@@ -30,16 +30,16 @@ public class ItemPurificationData {
 	@XmlElement(name = "item_purification")
 	protected List<ItemPurificationTemplate> ItemPurificationTemplates;
 	private TIntObjectHashMap<ItemPurificationTemplate> itemPurificationSets;
-	private FastMap<Integer, FastMap<Integer, PurificationResultItem>> ResultItemMap;
+	private LinkedHashMap<Integer, LinkedHashMap<Integer, PurificationResultItem>> ResultItemMap;
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		itemPurificationSets = new TIntObjectHashMap<>();
-		ResultItemMap = new FastMap<>();
+		ResultItemMap = new LinkedHashMap<>();
 
 		for (ItemPurificationTemplate set : ItemPurificationTemplates) {
 			itemPurificationSets.put(set.getPurification_base_item_id(), set);
 
-			ResultItemMap.put(set.getPurification_base_item_id(), new FastMap<Integer, PurificationResultItem>());
+			ResultItemMap.put(set.getPurification_base_item_id(), new LinkedHashMap<Integer, PurificationResultItem>());
 
 			if (!set.getPurification_result_item().isEmpty()) {
 				for (PurificationResultItem resultItem : set.getPurification_result_item()) {
@@ -58,7 +58,7 @@ public class ItemPurificationData {
 		return itemPurificationSets.get(itemSetId);
 	}
 
-	public FastMap<Integer, PurificationResultItem> getResultItemMap(int baseItemId) {
+	public LinkedHashMap<Integer, PurificationResultItem> getResultItemMap(int baseItemId) {
 		if (ResultItemMap.containsKey(baseItemId)) {
 			if (!ResultItemMap.get(baseItemId).isEmpty()) {
 				return ResultItemMap.get(baseItemId);

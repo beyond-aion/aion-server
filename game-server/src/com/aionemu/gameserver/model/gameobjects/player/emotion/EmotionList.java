@@ -2,6 +2,7 @@ package com.aionemu.gameserver.model.gameobjects.player.emotion;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import com.aionemu.commons.database.dao.DAOManager;
@@ -11,8 +12,6 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION_LIST;
 import com.aionemu.gameserver.taskmanager.tasks.ExpireTimerTask;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-
-import javolution.util.FastMap;
 
 /**
  * @author MrPoke
@@ -31,7 +30,7 @@ public class EmotionList {
 
 	public void add(int emotionId, int dispearTime, boolean isNew) {
 		if (emotions == null)
-			emotions = new FastMap<>();
+			emotions = new LinkedHashMap<>();
 
 		Emotion emotion = new Emotion(emotionId, dispearTime);
 		emotions.put(emotionId, emotion);

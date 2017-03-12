@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.controllers;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
@@ -21,8 +22,6 @@ import com.aionemu.gameserver.skillengine.effect.AbnormalState;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.Skill;
 
-import javolution.util.FastTable;
-
 /**
  * Notes:<br>
  * 1) There should be locking against onceUsedObservers<br>
@@ -35,7 +34,7 @@ public class ObserveController {
 
 	private ReentrantLock lock = new ReentrantLock();
 	protected Collection<ActionObserver> observers = new CopyOnWriteArrayList<>();
-	protected FastTable<ActionObserver> onceUsedObservers = new FastTable<>();
+	protected List<ActionObserver> onceUsedObservers = new ArrayList<>();
 	protected Collection<AttackCalcObserver> attackCalcObservers = new CopyOnWriteArrayList<>();
 
 	/**
@@ -95,7 +94,7 @@ public class ObserveController {
 		lock.lock();
 		try {
 			if (onceUsedObservers.size() > 0) {
-				tempOnceused = new FastTable<>();
+				tempOnceused = new ArrayList<>();
 				Iterator<ActionObserver> iterator = onceUsedObservers.iterator();
 				while (iterator.hasNext()) {
 					ActionObserver observer = iterator.next();

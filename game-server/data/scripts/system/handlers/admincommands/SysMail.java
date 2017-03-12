@@ -1,5 +1,6 @@
 package admincommands;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -17,8 +18,6 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.Util;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 import com.aionemu.gameserver.world.World;
-
-import javolution.util.FastTable;
 
 /**
  * @author xTz
@@ -174,7 +173,7 @@ public class SysMail extends AdminCommand {
 		if (enclosedText.endsWith("|")) {
 			outText[0] = enclosedText.substring(0, enclosedText.length() - 1);
 		} else {
-			List<String> titleWords = new FastTable<>();
+			List<String> titleWords = new ArrayList<>();
 			titleWords.add(enclosedText);
 			for (; wordCount < words.length; wordCount++) {
 				String word = words[wordCount];

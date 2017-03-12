@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -16,8 +17,6 @@ import com.aionemu.gameserver.taskmanager.fromdb.handler.TaskFromDBHandler;
 import com.aionemu.gameserver.taskmanager.fromdb.handler.TaskFromDBHandlerHolder;
 import com.aionemu.gameserver.taskmanager.fromdb.trigger.TaskFromDBTrigger;
 import com.aionemu.gameserver.taskmanager.fromdb.trigger.TaskFromDBTriggerHolder;
-
-import javolution.util.FastTable;
 
 /**
  * @author nrg
@@ -32,7 +31,7 @@ public class MySQL5TaskFromDBDAO extends TaskFromDBDAO {
 
 	@Override
 	public List<TaskFromDBTrigger> getAllTasks() {
-		final List<TaskFromDBTrigger> result = new FastTable<>();
+		final List<TaskFromDBTrigger> result = new ArrayList<>();
 		try {
 			try (Connection con = DatabaseFactory.getConnection();
 				PreparedStatement stmt = con.prepareStatement(SELECT_ALL_QUERY);

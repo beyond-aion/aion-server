@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.services;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Consumer;
 
 import org.slf4j.Logger;
@@ -13,15 +15,13 @@ import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
-import javolution.util.FastTable;
-
 /**
  * @author xTz
  */
 public class CuringZoneService {
 
-	Logger log = LoggerFactory.getLogger(CuringZoneService.class);
-	private FastTable<CuringObject> curingObjects = new FastTable<>();
+	private static final Logger log = LoggerFactory.getLogger(CuringZoneService.class);
+	private List<CuringObject> curingObjects = new ArrayList<>();
 
 	private CuringZoneService() {
 		for (CuringTemplate t : DataManager.CURING_OBJECTS_DATA.getCuringObject()) {

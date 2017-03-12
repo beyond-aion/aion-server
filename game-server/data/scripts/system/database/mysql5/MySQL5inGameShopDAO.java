@@ -3,7 +3,10 @@ package mysql5;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,9 +15,6 @@ import com.aionemu.commons.database.DatabaseFactory;
 import com.aionemu.gameserver.dao.InGameShopDAO;
 import com.aionemu.gameserver.dao.MySQL5DAOUtils;
 import com.aionemu.gameserver.model.ingameshop.IGItem;
-
-import javolution.util.FastMap;
-import javolution.util.FastTable;
 
 /**
  * @author xTz
@@ -27,8 +27,8 @@ public class MySQL5inGameShopDAO extends InGameShopDAO {
 	public static final String UPDATE_SALES_QUERY = "UPDATE `ingameshop` SET `sales_ranking`=? WHERE `object_id`=?";
 
 	@Override
-	public FastMap<Byte, List<IGItem>> loadInGameShopItems() {
-		FastMap<Byte, List<IGItem>> items = new FastMap<>();
+	public Map<Byte, List<IGItem>> loadInGameShopItems() {
+		Map<Byte, List<IGItem>> items = new HashMap<>();
 		try {
 			try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(SELECT_QUERY)) {
 				try (ResultSet rset = stmt.executeQuery()) {
@@ -48,7 +48,7 @@ public class MySQL5inGameShopDAO extends InGameShopDAO {
 						String titleDescription = rset.getString("title_description");
 						String description = rset.getString("description");
 						if (!items.containsKey(category)) {
-							items.put(category, new FastTable<IGItem>());
+							items.put(category, new ArrayList<IGItem>());
 						}
 						items.get(category).add(
 							new IGItem(objectId, itemId, itemCount, itemPrice, category, subCategory, list, salesRanking, itemType, gift, titleDescription,

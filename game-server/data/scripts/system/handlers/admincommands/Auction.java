@@ -1,5 +1,6 @@
 package admincommands;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.aionemu.commons.utils.Rnd;
@@ -14,8 +15,6 @@ import com.aionemu.gameserver.services.HousingService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 import com.aionemu.gameserver.world.zone.ZoneName;
-
-import javolution.util.FastTable;
 
 /**
  * @author Rolandas
@@ -40,7 +39,7 @@ public class Auction extends AdminCommand {
 				return;
 			}
 			String param = params[1].toUpperCase();
-			List<House> housesToRemove = new FastTable<>();
+			List<House> housesToRemove = new ArrayList<>();
 
 			if ("HOUSE".equals(param.split("_")[0])) {
 				House house = HousingService.getInstance().getHouseByName(params[1].toUpperCase());
@@ -217,7 +216,7 @@ public class Auction extends AdminCommand {
 			}
 
 			int counter = 0;
-			FastTable<House> houses = HousingService.getInstance().getCustomHouses();
+			List<House> houses = HousingService.getInstance().getCustomHouses();
 			while (!houses.isEmpty() && counter < count) {
 				House house = Rnd.get(houses);
 				houses.remove(house);

@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.services;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -17,8 +18,6 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.time.gametime.DayTime;
 import com.aionemu.gameserver.utils.time.gametime.GameTime;
-
-import javolution.util.FastTable;
 
 /**
  * @author ATracer, Kwazar
@@ -137,7 +136,7 @@ public class WeatherService {
 		else
 			rank = 2;
 
-		List<WeatherEntry> chosenWeather = new FastTable<>();
+		List<WeatherEntry> chosenWeather = new ArrayList<>();
 		while (rank >= 0) {
 			for (WeatherEntry entry : weathers) {
 				if (entry.getRank() == -1)

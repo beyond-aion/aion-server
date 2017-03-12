@@ -1,13 +1,12 @@
 package com.aionemu.gameserver.model.templates.globaldrops;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
-
-import javolution.util.FastTable;
 
 /**
  * @author bobobear
@@ -22,7 +21,7 @@ public class GlobalDropNpcGroups {
 
 	public List<GlobalDropNpcGroup> getGlobalDropNpcGroups() {
 		if (gdNpcGroups == null) {
-			gdNpcGroups = new FastTable<>();
+			gdNpcGroups = new ArrayList<>();
 		}
 		return this.gdNpcGroups;
 	}

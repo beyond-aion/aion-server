@@ -1,7 +1,10 @@
 package com.aionemu.gameserver.controllers.effect;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.locks.Lock;
@@ -30,19 +33,16 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
 
-import javolution.util.FastMap;
-import javolution.util.FastTable;
-
 /**
- * @author ATracer modified by Wakizashi, Sippolo, Cheatkiller
+ * @author ATracer
+ * @modified Wakizashi, Sippolo, Cheatkiller, Neon
  */
 public class EffectController {
 
-	private Creature owner;
-
-	protected Map<String, Effect> passiveEffectMap = new FastMap<String, Effect>().shared();
-	protected Map<String, Effect> noshowEffects = new FastMap<String, Effect>().shared();
-	protected Map<String, Effect> abnormalEffectMap = new FastMap<String, Effect>().shared();
+	private final Creature owner;
+	private final Map<String, Effect> passiveEffectMap = Collections.synchronizedMap(new LinkedHashMap<>());
+	private final Map<String, Effect> noshowEffects = Collections.synchronizedMap(new LinkedHashMap<>());
+	private final Map<String, Effect> abnormalEffectMap = Collections.synchronizedMap(new LinkedHashMap<>());
 	private long abnormalMapUpdate;
 
 	private final Lock lock = new ReentrantLock();
@@ -220,7 +220,7 @@ public class EffectController {
 	 * @param effect
 	 * @return
 	 */
-	private Map<String, Effect> getMapForEffect(Effect effect) {
+	protected Map<String, Effect> getMapForEffect(Effect effect) {
 		if (effect.isPassive())
 			return passiveEffectMap;
 
@@ -238,7 +238,7 @@ public class EffectController {
 	 * @param stack
 	 * @return abnormalEffectMap
 	 */
-	public Effect getAnormalEffect(String stack) {
+	public Effect getAbnormalEffect(String stack) {
 		return abnormalEffectMap.get(stack);
 	}
 
@@ -740,7 +740,7 @@ public class EffectController {
 	 * @return copy of anbornals list
 	 */
 	public List<Effect> getAbnormalEffects() {
-		List<Effect> effects = new FastTable<>();
+		List<Effect> effects = new ArrayList<>();
 		Iterator<Effect> iterator = iterator();
 		while (iterator.hasNext()) {
 			Effect effect = iterator.next();

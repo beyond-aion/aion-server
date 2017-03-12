@@ -1,6 +1,7 @@
 package com.aionemu.gameserver.model.templates.event;
 
 import java.time.ZonedDateTime;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.Future;
@@ -41,8 +42,6 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.time.ServerTime;
 import com.aionemu.gameserver.world.World;
-
-import javolution.util.FastTable;
 
 /**
  * @author Rolandas
@@ -111,13 +110,13 @@ public class EventTemplate {
 
 	public List<Integer> getStartableQuests() {
 		if (quests == null)
-			return new FastTable<>();
+			return new ArrayList<>();
 		return quests.getStartableQuests();
 	}
 
 	public List<Integer> getMaintainableQuests() {
 		if (quests == null)
-			return new FastTable<>();
+			return new ArrayList<>();
 		return quests.getMaintainQuests();
 	}
 
@@ -234,7 +233,7 @@ public class EventTemplate {
 
 	public void addSpawnedObject(VisibleObject object) {
 		if (spawnedObjects == null)
-			spawnedObjects = new FastTable<>();
+			spawnedObjects = new ArrayList<>();
 		spawnedObjects.add(object);
 	}
 

@@ -1,6 +1,8 @@
 package com.aionemu.gameserver.services;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -39,14 +41,11 @@ import com.aionemu.gameserver.services.item.ItemPacketService.ItemAddType;
 import com.aionemu.gameserver.services.item.ItemPacketService.ItemUpdateType;
 import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.services.item.ItemService.ItemUpdatePredicate;
-import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
 import com.aionemu.gameserver.utils.stats.StatFunctions;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
-
-import javolution.util.FastMap;
-import javolution.util.FastTable;
 
 /**
  * @author Sarynth
@@ -62,7 +61,7 @@ public class PvpService {
 	private PvpService() {
 		killBounties = DataManager.KILL_BOUNTY_DATA.getKillBounties();
 		headhunters = DAOManager.getDAO(HeadhuntingDAO.class).loadHeadhunters();
-		pvpKillLists = new FastMap<>();
+		pvpKillLists = new LinkedHashMap<>();
 	}
 
 	public static final PvpService getInstance() {
@@ -73,7 +72,7 @@ public class PvpService {
 		for (KillBountyTemplate template : killBounties) {
 			if (template.getBountyType() != type || template.getKillCount() != neededKills)
 				continue;
-			List<BountyTemplate> bounties = new FastTable<>();
+			List<BountyTemplate> bounties = new ArrayList<>();
 			if (type == BountyType.PER_X_KILLS) {
 				bounties.add(Rnd.get(template.getBounties()));
 			} else {
@@ -162,7 +161,7 @@ public class PvpService {
 
 		// Distribute AP to groups and players that had damage.
 		for (AggroInfo aggro : victim.getAggroList().getFinalDamageList(true)) {
-			Collection<Player> teamMembers = new FastTable<>();
+			Collection<Player> teamMembers = new ArrayList<>();
 			AionObject attacker = aggro.getAttacker();
 			if (attacker instanceof Player && ((Player) attacker).getRace() != victim.getRace())
 				teamMembers.add((Player) attacker);
@@ -215,7 +214,7 @@ public class PvpService {
 	}
 
 	private boolean rewardPlayerTeam(Collection<Player> teamMember, Player victim, int totalDamage, AggroInfo info, float apWinMulti) {
-		List<Player> players = new FastTable<>();
+		List<Player> players = new ArrayList<>();
 		int maxRank = 1;
 		int maxLevel = 0;
 
@@ -271,7 +270,7 @@ public class PvpService {
 		if (winner.getRace() == victim.getRace())
 			return;
 
-		List<Player> rewarded = new FastTable<>();
+		List<Player> rewarded = new ArrayList<>();
 		int worldId = victim.getWorldId();
 
 		if (winner.isInGroup()) {

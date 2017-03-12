@@ -2,7 +2,6 @@ package com.aionemu.gameserver.services.base;
 
 import com.aionemu.gameserver.model.base.SiegeBaseLocation;
 
-
 /**
  * @author Estrayl
  * TODO: Implement Anoha/Wealhtheow features!

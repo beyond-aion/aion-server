@@ -2,12 +2,13 @@ package com.aionemu.gameserver.model.gameobjects.player;
 
 import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE.*;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.SortedMap;
 import java.util.TreeMap;
+import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,8 +48,6 @@ import com.aionemu.gameserver.services.item.ItemPacketService.ItemUpdateType;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.stats.AbyssRankEnum;
-
-import javolution.util.FastTable;
 
 /**
  * @author Avol, ATracer, kosyachok
@@ -568,7 +567,7 @@ public class Equipment {
 	 * @return List<Item>
 	 */
 	public List<Item> getEquippedItemsByItemId(int value) {
-		List<Item> equippedItemsById = new FastTable<>();
+		List<Item> equippedItemsById = new ArrayList<>();
 		synchronized (equipment) {
 			for (Item item : equipment.values()) {
 				if (item.getItemTemplate().getTemplateId() == value)
@@ -583,26 +582,19 @@ public class Equipment {
 	 * @return List<Item>
 	 */
 	public List<Item> getEquippedItems() {
-		HashSet<Item> equippedItems = new HashSet<>();
-		equippedItems.addAll(equipment.values());
-
-		return Arrays.asList(equippedItems.toArray(new Item[0]));
+		return equipment.values().stream().collect(Collectors.toList());
 	}
 
 	public List<Integer> getEquippedItemIds() {
-		HashSet<Integer> equippedIds = new HashSet<>();
-		for (Item i : equipment.values()) {
-			equippedIds.add(i.getItemId());
-		}
-		return Arrays.asList(equippedIds.toArray(new Integer[0]));
+		return equipment.values().stream().mapToInt(Item::getItemId).distinct().boxed().collect(Collectors.toList());
 	}
 
 	/**
 	 * @return List<Item>
 	 */
-	public FastTable<Item> getEquippedItemsWithoutStigma() {
-		FastTable<Item> equippedItems = new FastTable<>();
-		List<Item> twoHanded = new FastTable<>();
+	public List<Item> getEquippedItemsWithoutStigma() {
+		List<Item> equippedItems = new ArrayList<>();
+		List<Item> twoHanded = new ArrayList<>();
 		for (Item item : equipment.values()) {
 			if (!ItemSlot.isStigma(item.getEquipmentSlot())) {
 				if (item.getItemTemplate().isTwoHandWeapon()) {
@@ -619,7 +611,7 @@ public class Equipment {
 	}
 
 	public List<Item> getEquippedForAppearence() {
-		List<Item> equippedItems = new FastTable<>();
+		List<Item> equippedItems = new ArrayList<>();
 		for (Item item : equipment.values()) {
 			if (ItemSlot.isVisible(item.getEquipmentSlot()) && !(item.getItemTemplate().isTwoHandWeapon() && equippedItems.contains(item)))
 				equippedItems.add(item);
@@ -632,7 +624,7 @@ public class Equipment {
 	 * @return List<Item>
 	 */
 	public List<Item> getEquippedItemsAllStigma() {
-		List<Item> equippedItems = new FastTable<>();
+		List<Item> equippedItems = new ArrayList<>();
 		for (Item item : equipment.values()) {
 			if (ItemSlot.isStigma(item.getEquipmentSlot())) {
 				equippedItems.add(item);
@@ -645,7 +637,7 @@ public class Equipment {
 	 * @return List<Item>
 	 */
 	public List<Item> getEquippedItemsRegularStigma() {
-		List<Item> equippedItems = new FastTable<>();
+		List<Item> equippedItems = new ArrayList<>();
 		for (Item item : equipment.values()) {
 			if (ItemSlot.isRegularStigma(item.getEquipmentSlot()))
 				equippedItems.add(item);
@@ -657,7 +649,7 @@ public class Equipment {
 	 * @return List<Item>
 	 */
 	public List<Item> getEquippedItemsAdvancedStigma() {
-		List<Item> equippedItems = new FastTable<>();
+		List<Item> equippedItems = new ArrayList<>();
 		for (Item item : equipment.values()) {
 			if (ItemSlot.isAdvancedStigma(item.getEquipmentSlot())) {
 				equippedItems.add(item);
@@ -671,7 +663,7 @@ public class Equipment {
 	 */
 	public int itemSetPartsEquipped(int itemSetTemplateId) {
 		int number = 0;
-		List<Integer> counted = new FastTable<>(); // no double counting for accessory and weapons
+		List<Integer> counted = new ArrayList<>(); // no double counting for accessory and weapons
 
 		for (Item item : equipment.values()) {
 			if ((item.getEquipmentSlot() & ItemSlot.MAIN_OFF_HAND.getSlotIdMask()) != 0
@@ -918,7 +910,7 @@ public class Equipment {
 		Item mainOffHandItem = equipment.get(ItemSlot.MAIN_OFF_HAND.getSlotIdMask());
 		Item subOffHandItem = equipment.get(ItemSlot.SUB_OFF_HAND.getSlotIdMask());
 
-		List<Item> equippedWeapon = new FastTable<>();
+		List<Item> equippedWeapon = new ArrayList<>();
 
 		if (mainHandItem != null)
 			equippedWeapon.add(mainHandItem);

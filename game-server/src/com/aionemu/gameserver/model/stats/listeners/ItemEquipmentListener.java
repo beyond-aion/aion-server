@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.model.stats.listeners;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,8 +32,6 @@ import com.aionemu.gameserver.services.EnchantService;
 import com.aionemu.gameserver.services.SkillLearnService;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-
-import javolution.util.FastTable;
 
 /**
  * @author xavier modified by Wakizashi
@@ -209,7 +208,7 @@ public class ItemEquipmentListener {
 	 * @return
 	 */
 	private static List<StatFunction> wrapModifiers(Item item, List<StatFunction> modifiers) {
-		List<StatFunction> allModifiers = new FastTable<>();
+		List<StatFunction> allModifiers = new ArrayList<>();
 		for (StatFunction modifier : modifiers) {
 			switch (modifier.getName()) {
 				// why they are removed look at DuplicateStatFunction

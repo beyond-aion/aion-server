@@ -930,7 +930,8 @@ public final class Vector3f implements Cloneable/*, Reusable */{
      *            the object to compare for equality
      * @return true if they are equal
      */
-    public boolean equals(Object o) {
+    @Override
+		public boolean equals(Object o) {
         if (!(o instanceof Vector3f)) { return false; }
 
         if (this == o) { return true; }
@@ -948,7 +949,8 @@ public final class Vector3f implements Cloneable/*, Reusable */{
      * the same hash code value.
      * @return the hash code value of this vector.
      */
-    public int hashCode() {
+    @Override
+		public int hashCode() {
         int hash = 37;
         hash += 37 * hash + Float.floatToIntBits(x);
         hash += 37 * hash + Float.floatToIntBits(y);
@@ -964,7 +966,8 @@ public final class Vector3f implements Cloneable/*, Reusable */{
      *
      * @return the string representation of this vector.
      */
-    public String toString() {
+    @Override
+		public String toString() {
         return "(" + x + ", " + y + ", " + z + ")";
     }
 
@@ -1035,43 +1038,5 @@ public final class Vector3f implements Cloneable/*, Reusable */{
                 return;
         }
         throw new IllegalArgumentException("index must be either 0, 1 or 2");
-    }
-
-		/* (non-Javadoc)
-		 * @see javolution.lang.Reusable#reset()
-		 */
-		//@Override
-		public void reset() {
-			x = y = z = 0f;
-		}
-
-    /**
-     * Returns a new, preallocated or {@link #recycle recycled} text builder
-     * (on the stack when executing in a {@link javolution.context.StackContext
-     * StackContext}).
-     *
-     * @return a new, preallocated or recycled text builder instance.
-     */
-    public static Vector3f newInstance() {
-    	//if(GeoDataConfig.GEO_OBJECT_FACTORY_ENABLE) {
-    	//	Vector3f vector3f = (Vector3f) FACTORY.object();
-      //	vector3f.x = vector3f.y = vector3f.z = 0;
-      //    return vector3f;
-    	//}
-    	//else
-    		return new Vector3f();
-    }
-
-    /**
-     * Recycles a text builder {@link #newInstance() instance} immediately
-     * (on the stack when executing in a {@link javolution.context.StackContext
-     * StackContext}).
-     */
-    @SuppressWarnings("unchecked")
-		public static void recycle(Vector3f instance) {
-    	//if(GeoDataConfig.GEO_OBJECT_FACTORY_ENABLE)
-    	//	FACTORY.recycle(instance);
-    	//else
-    		instance = null;
     }
 }

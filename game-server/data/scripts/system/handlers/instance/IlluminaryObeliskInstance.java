@@ -2,6 +2,7 @@ package instance;
 
 import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE.STR_REBIRTH_MASSAGE_ME;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Future;
@@ -30,8 +31,6 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
-import javolution.util.FastTable;
-
 /**
  * @author M.O.G. Dision
  * @reworked Estrayl
@@ -41,7 +40,7 @@ public class IlluminaryObeliskInstance extends GeneralInstanceHandler {
 
 	private AtomicBoolean isRaceSet = new AtomicBoolean(false);
 	public Map<Integer, StaticDoor> doors;
-	private List<Future<?>> spawnTasks = new FastTable<>();
+	private List<Future<?>> spawnTasks = new ArrayList<>();
 	private Future<?> generatorCheckTask;
 	protected Future<?> wipeTask;
 	public boolean isInstanceDestroyed;

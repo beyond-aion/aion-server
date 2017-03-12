@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.model.trade;
 
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -10,9 +12,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.trade.PricesService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
-import javolution.util.FastMap;
-import javolution.util.FastTable;
-
 /**
  * @author ATracer
  * @modified Wakizashi, Neon
@@ -21,13 +20,13 @@ public class TradeList {
 
 	private int sellerObjId;
 
-	private List<TradeItem> tradeItems = new FastTable<>();
+	private List<TradeItem> tradeItems = new ArrayList<>();
 
 	private long requiredKinah;
 
 	private int requiredAp;
 
-	private Map<Integer, Long> requiredItems = new FastMap<>();
+	private Map<Integer, Long> requiredItems = new LinkedHashMap<>();
 
 	public TradeList() {
 

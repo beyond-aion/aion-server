@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.taskmanager.tasks;
 
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -7,14 +8,12 @@ import com.aionemu.gameserver.model.IExpirable;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.taskmanager.AbstractPeriodicTaskManager;
 
-import javolution.util.FastMap;
-
 /**
  * @author Mr. Poke
  */
 public class ExpireTimerTask extends AbstractPeriodicTaskManager {
 
-	private FastMap<IExpirable, Player> expirables = new FastMap<>();
+	private Map<IExpirable, Player> expirables = new HashMap<>();
 
 	/**
 	 * @param period
@@ -24,7 +23,7 @@ public class ExpireTimerTask extends AbstractPeriodicTaskManager {
 	}
 
 	public static ExpireTimerTask getInstance() {
-		return SingletonHolder._instance;
+		return SingletonHolder.instance;
 	}
 
 	public void addTask(IExpirable expirable, Player player) {
@@ -81,6 +80,6 @@ public class ExpireTimerTask extends AbstractPeriodicTaskManager {
 	@SuppressWarnings("synthetic-access")
 	private static class SingletonHolder {
 
-		protected static final ExpireTimerTask _instance = new ExpireTimerTask();
+		protected static final ExpireTimerTask instance = new ExpireTimerTask();
 	}
 }

@@ -1,13 +1,12 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.services.BrokerService;
-
-import javolution.util.FastTable;
 
 /**
  * @author namedrisk
@@ -33,7 +32,7 @@ public class CM_BROKER_SEARCH extends AionClientPacket {
 		this.page = readUH();
 		this.mask = readUH();
 		this.itemCount = readUH();
-		this.itemList = new FastTable<>();
+		this.itemList = new ArrayList<>();
 
 		for (int index = 0; index < this.itemCount; index++)
 			this.itemList.add(readD());

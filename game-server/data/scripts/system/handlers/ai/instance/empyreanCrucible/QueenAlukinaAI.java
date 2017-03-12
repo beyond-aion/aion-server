@@ -1,5 +1,6 @@
 package ai.instance.empyreanCrucible;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.Future;
@@ -11,7 +12,6 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 import ai.AggressiveNpcAI;
-import javolution.util.FastTable;
 
 /**
  * @author Luzien
@@ -19,7 +19,7 @@ import javolution.util.FastTable;
 @AIName("alukina_emp")
 public class QueenAlukinaAI extends AggressiveNpcAI {
 
-	private List<Integer> percents = new FastTable<>();
+	private List<Integer> percents = new ArrayList<>();
 	private Future<?> task;
 
 	@Override

@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -33,8 +34,6 @@ import com.aionemu.gameserver.utils.idfactory.IDFactory;
 import com.aionemu.gameserver.world.World;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
-
-import javolution.util.FastTable;
 
 /**
  * @author Rolandas
@@ -152,7 +151,7 @@ public class MySQL5PlayerRegisteredItemsDAO extends PlayerRegisteredItemsDAO {
 									dec.setRoom(0);
 								List<HouseDecoration> usedForType = usedParts.get(dec.getTemplate().getType());
 								if (usedForType == null) {
-									usedForType = new FastTable<>();
+									usedForType = new ArrayList<>();
 									usedParts.put(dec.getTemplate().getType(), usedForType);
 								}
 								usedForType.add(dec);
@@ -227,8 +226,8 @@ public class MySQL5PlayerRegisteredItemsDAO extends PlayerRegisteredItemsDAO {
 
 	@Override
 	public boolean store(HouseRegistry registry, int playerId) {
-		FastTable<HouseObject<?>> objects = registry.getObjects();
-		FastTable<HouseDecoration> decors = registry.getAllParts();
+		List<HouseObject<?>> objects = registry.getObjects();
+		List<HouseDecoration> decors = registry.getAllParts();
 		Collection<HouseObject<?>> objectsToAdd = Collections2.filter(objects, objectsToAddPredicate);
 		Collection<HouseObject<?>> objectsToUpdate = Collections2.filter(objects, objectsToUpdatePredicate);
 		Collection<HouseObject<?>> objectsToDelete = Collections2.filter(objects, objectsToDeletePredicate);

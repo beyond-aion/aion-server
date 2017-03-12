@@ -1,13 +1,12 @@
 package com.aionemu.gameserver.model.trade;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-
-import javolution.util.FastTable;
 
 /**
  * @author ATracer
@@ -23,7 +22,7 @@ public class Exchange {
 	private long kinahCount;
 
 	private Map<Integer, ExchangeItem> items = new HashMap<>();
-	private List<Item> itemsToUpdate = new FastTable<>();
+	private List<Item> itemsToUpdate = new ArrayList<>();
 
 	public Exchange(Player activeplayer, Player targetPlayer) {
 		super();

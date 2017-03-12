@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.questEngine.handlers.models.xmlQuest.events;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -11,8 +12,6 @@ import javax.xml.bind.annotation.XmlType;
 import com.aionemu.gameserver.questEngine.handlers.models.xmlQuest.conditions.QuestConditions;
 import com.aionemu.gameserver.questEngine.handlers.models.xmlQuest.operations.QuestOperations;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
-
-import javolution.util.FastTable;
 
 /**
  * @author Mr. Poke
@@ -47,7 +46,7 @@ public abstract class QuestEvent {
 	 */
 	public List<Integer> getIds() {
 		if (ids == null) {
-			ids = new FastTable<>();
+			ids = new ArrayList<>();
 		}
 		return this.ids;
 	}

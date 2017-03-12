@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.services;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -28,8 +29,6 @@ import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.services.item.ItemSocketService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
-
-import javolution.util.FastTable;
 
 /**
  * @author ATracer
@@ -350,7 +349,7 @@ public class EnchantService {
 			stats = enchant.get(enchantLevel);
 		else {
 			// maxTemplateLevel - 1 (second to last template entry) = maximum stats
-			stats = FastTable.of(enchant.get(maxTemplateLevel - 1));
+			stats = new ArrayList<>(enchant.get(maxTemplateLevel - 1));
 			// maxTemplateLevel (last template entry) = bonus stats per level above max
 			List<EnchantStat> limitlessBoni = enchant.get(maxTemplateLevel);
 			for (int i = 0; i <= enchantLevel - maxTemplateLevel; i++)
@@ -509,7 +508,7 @@ public class EnchantService {
 	}
 
 	public static int getEquipBuff(Item item) {
-		List<Integer> skillsSet = new FastTable<>();
+		List<Integer> skillsSet = new ArrayList<>();
 		switch (item.getItemTemplate().getExceedEnchantSkill()) {
 			case RANK1_SET1_MAGICAL_GLOVES:
 				skillsSet = (Arrays.asList(13046, 13042, 13055));
@@ -860,7 +859,7 @@ public class EnchantService {
 				skillsSet = (Arrays.asList(13229, 13234, 13238));
 				break;
 		}
-		return skillsSet.get(Rnd.get(0, skillsSet.size() - 1));
+		return Rnd.get(skillsSet);
 	}
 
 	public static void amplifyItem(Player player, int targetItemObjId, int materialId, int toolId) {

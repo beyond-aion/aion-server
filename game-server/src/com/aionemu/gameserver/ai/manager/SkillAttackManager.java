@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.ai.manager;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -27,8 +28,6 @@ import com.aionemu.gameserver.skillengine.properties.TargetRangeAttribute;
 import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.geo.GeoService;
-
-import javolution.util.FastTable;
 
 /**
  * @author ATracer
@@ -108,7 +107,7 @@ public class SkillAttackManager {
 									break;
 								case RANDOM:
 								case RANDOM_EXCEPT_MOST_HATED:
-									List<Creature> knownCreatures = new FastTable<>();
+									List<Creature> knownCreatures = new ArrayList<>();
 									for (VisibleObject obj : owner.getKnownList().getKnownObjects().values()) {
 										if (obj instanceof Creature && !(obj instanceof Summon) && !(obj instanceof SummonedObject)) {
 											Creature target3 = (Creature) obj;
@@ -124,7 +123,7 @@ public class SkillAttackManager {
 										}
 									}
 									if (!knownCreatures.isEmpty()) {
-										Creature target3 = knownCreatures.get(Rnd.get(0, knownCreatures.size() - 1));
+										Creature target3 = Rnd.get(knownCreatures);
 										if (target3 != null) {
 											owner.setTarget(target3);
 										}

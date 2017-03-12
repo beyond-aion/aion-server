@@ -12,6 +12,7 @@ import java.nio.file.Paths;
 import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.TimeZone;
 import java.util.concurrent.CountDownLatch;
@@ -19,8 +20,6 @@ import java.util.concurrent.locks.ReentrantLock;
 import java.util.zip.Deflater;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
-
-import javolution.util.FastTable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -139,7 +138,7 @@ public class GameServer {
 		try {
 			Path logFolder = Paths.get("./log");
 			Path oldLogsFolder = Paths.get(logFolder + "/archived");
-			List<File> files = new FastTable<>();
+			List<File> files = new ArrayList<>();
 			File gsStartTimeFile = new File("./log/[server_start_marker]");
 			long gsStartTime;
 			long[] gsEndTime = { 0 }; // for mutability within a stream (file walker), we need to use an array here
@@ -236,7 +235,7 @@ public class GameServer {
 
 		// This is loading only siege location data, no siege schedule or spawns
 		ConsoleUtil.printSection("Location Data");
-		BaseService.getInstance().initBaseLocations();
+		BaseService.getInstance();
 		SiegeService.getInstance().initSiegeLocations();
 		MonsterRaidService.getInstance().initMonsterRaidLocations();
 		// DAOManager.getDAO(SiegeMercenariesDAO.class).loadActiveMercenaries();

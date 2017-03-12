@@ -1,5 +1,6 @@
 package ai.worlds.heiron;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.Future;
@@ -13,7 +14,6 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
 import ai.AggressiveNpcAI;
-import javolution.util.FastTable;
 
 /**
  * @author Ritsu
@@ -22,7 +22,7 @@ import javolution.util.FastTable;
 @AIName("bollvig")
 public class BollvigAI extends AggressiveNpcAI {
 
-	protected List<Integer> percents = new FastTable<>();
+	protected List<Integer> percents = new ArrayList<>();
 	private Future<?> firstTask;
 	private Future<?> secondTask;
 	private Future<?> thirdTask;

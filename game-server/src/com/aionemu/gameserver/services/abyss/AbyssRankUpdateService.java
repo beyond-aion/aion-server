@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.services.abyss;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
@@ -19,8 +20,6 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.stats.AbyssRankEnum;
 import com.aionemu.gameserver.world.World;
-
-import javolution.util.FastTable;
 
 /**
  * @author ATracer
@@ -105,7 +104,7 @@ public class AbyssRankUpdateService {
 	 */
 	private void updateQuotaRanksForRace(Race race, AbyssRankEnum limitRank, int maxOfflineDays) {
 		Map<Integer, Integer[]> playerGpApMap = DAOManager.getDAO(AbyssRankDAO.class).loadPlayersGpAp(race, limitRank, maxOfflineDays);
-		List<Entry<Integer, Integer[]>> playerGpApEntries = new FastTable<>();
+		List<Entry<Integer, Integer[]>> playerGpApEntries = new ArrayList<>();
 		playerGpApEntries.addAll(playerGpApMap.entrySet());
 		playerGpApEntries.sort(new PlayerGpComparator());
 

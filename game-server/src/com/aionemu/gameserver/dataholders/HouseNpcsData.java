@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.dataholders;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.Unmarshaller;
@@ -14,7 +15,6 @@ import com.aionemu.gameserver.model.templates.spawns.HouseSpawn;
 import com.aionemu.gameserver.model.templates.spawns.HouseSpawns;
 
 import gnu.trove.map.hash.TIntObjectHashMap;
-import javolution.util.FastTable;
 
 /**
  * @author Rolandas
@@ -30,7 +30,7 @@ public class HouseNpcsData {
 
 	public List<HouseSpawns> getHouseSpawns() {
 		if (houseSpawnsData == null) {
-			houseSpawnsData = new FastTable<>();
+			houseSpawnsData = new ArrayList<>();
 		}
 		return this.houseSpawnsData;
 	}

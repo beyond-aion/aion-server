@@ -1,8 +1,11 @@
 package com.aionemu.gameserver.dataholders;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -52,10 +55,6 @@ import com.aionemu.gameserver.model.templates.rewards.CraftItem;
 import com.aionemu.gameserver.model.templates.rewards.CraftRecipe;
 import com.aionemu.gameserver.model.templates.rewards.CraftReward;
 import com.aionemu.gameserver.model.templates.rewards.IdLevelReward;
-
-import javolution.util.FastMap;
-import javolution.util.FastSet;
-import javolution.util.FastTable;
 
 /**
  * @author Rolandas
@@ -192,13 +191,13 @@ public class ItemGroupsData {
 	protected AetherCherryGroup aetherCherries;
 
 	@XmlTransient
-	FastMap<Integer, FastMap<Range<Integer>, List<CraftReward>>> craftMaterialsBySkill = new FastMap<>();
+	Map<Integer, Map<Range<Integer>, List<CraftReward>>> craftMaterialsBySkill = new LinkedHashMap<>();
 	@XmlTransient
-	FastMap<Integer, FastMap<Range<Integer>, List<CraftReward>>> craftShopBySkill = new FastMap<>();
+	Map<Integer, Map<Range<Integer>, List<CraftReward>>> craftShopBySkill = new LinkedHashMap<>();
 	@XmlTransient
-	FastMap<Integer, FastMap<Range<Integer>, List<CraftReward>>> craftBundlesBySkill = new FastMap<>();
+	Map<Integer, Map<Range<Integer>, List<CraftReward>>> craftBundlesBySkill = new LinkedHashMap<>();
 	@XmlTransient
-	FastMap<Integer, FastMap<Range<Integer>, List<CraftReward>>> craftRecipesBySkill = new FastMap<>();
+	Map<Integer, Map<Range<Integer>, List<CraftReward>>> craftRecipesBySkill = new LinkedHashMap<>();
 
 	BonusItemGroup[] craftGroups;
 	BonusItemGroup[] manastoneGroups;
@@ -210,7 +209,7 @@ public class ItemGroupsData {
 	BonusItemGroup[] enchantGroups;
 	BonusItemGroup[] bossGroups;
 
-	FastMap<FoodType, Set<Integer>> petFood = new FastMap<>();
+	Map<FoodType, Set<Integer>> petFood = new LinkedHashMap<>();
 
 	private int count = 0;
 	private int petFoodCount = 0;
@@ -221,28 +220,28 @@ public class ItemGroupsData {
 	 */
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		for (CraftItem item : craftMaterials.getItems())
-			MapCraftReward(craftMaterialsBySkill, item);
+			mapCraftReward(craftMaterialsBySkill, item);
 
 		count += craftMaterials.getItems().size();
 		craftMaterials.getItems().clear();
 		craftMaterials.setDataHolder(craftMaterialsBySkill);
 
 		for (CraftItem item : craftShop.getItems())
-			MapCraftReward(craftShopBySkill, item);
+			mapCraftReward(craftShopBySkill, item);
 
 		count += craftShop.getItems().size();
 		craftShop.getItems().clear();
 		craftShop.setDataHolder(craftShopBySkill);
 
 		for (CraftRecipe recipe : craftBundles.getItems())
-			MapCraftReward(craftBundlesBySkill, recipe);
+			mapCraftReward(craftBundlesBySkill, recipe);
 
 		count += craftBundles.getItems().size();
 		craftBundles.getItems().clear();
 		craftBundles.setDataHolder(craftBundlesBySkill);
 
 		for (CraftRecipe recipe : craftRecipes.getItems())
-			MapCraftReward(craftRecipesBySkill, recipe);
+			mapCraftReward(craftRecipesBySkill, recipe);
 
 		count += craftRecipes.getItems().size();
 		craftRecipes.getItems().clear();
@@ -262,8 +261,7 @@ public class ItemGroupsData {
 			List<ItemRaceEntry> food = getPetFood(foodType);
 			if (food == null)
 				continue;
-			Set<Integer> itemIds = new FastSet<>();
-			itemIds.addAll(food.stream().map(e -> e.getId()).distinct().collect(Collectors.toList()));
+			Set<Integer> itemIds = food.stream().map(ItemRaceEntry::getId).collect(Collectors.toSet());
 			petFood.put(foodType, itemIds);
 			if (foodType != FoodType.EXCLUDES && foodType != FoodType.STINKY)
 				petFoodCount += itemIds.size();
@@ -271,8 +269,8 @@ public class ItemGroupsData {
 		}
 	}
 
-	void MapCraftReward(FastMap<Integer, FastMap<Range<Integer>, List<CraftReward>>> dataHolder, CraftReward reward) {
-		FastMap<Range<Integer>, List<CraftReward>> ranges;
+	void mapCraftReward(Map<Integer, Map<Range<Integer>, List<CraftReward>>> dataHolder, CraftReward reward) {
+		Map<Range<Integer>, List<CraftReward>> ranges;
 		int lowerBound = 0, upperBound = 0;
 
 		if (reward instanceof CraftRecipe) {
@@ -292,7 +290,7 @@ public class ItemGroupsData {
 		if (dataHolder.containsKey(reward.getSkill()))
 			ranges = dataHolder.get(reward.getSkill());
 		else {
-			ranges = new FastMap<>();
+			ranges = new LinkedHashMap<>();
 			dataHolder.put(reward.getSkill(), ranges);
 		}
 
@@ -300,7 +298,7 @@ public class ItemGroupsData {
 		if (ranges.containsKey(range))
 			items = ranges.get(range);
 		else {
-			items = new FastTable<>();
+			items = new ArrayList<>();
 			ranges.put(range, items);
 		}
 		items.add(reward);
@@ -309,7 +307,7 @@ public class ItemGroupsData {
 	public Collection<CraftReward> getCraftMaterials(int skillId) {
 		if (craftMaterialsBySkill.containsKey(skillId))
 			return Collections.emptyList();
-		List<CraftReward> result = new FastTable<>();
+		List<CraftReward> result = new ArrayList<>();
 		for (List<CraftReward> items : craftMaterialsBySkill.get(skillId).values())
 			result.addAll(items);
 		return result;
@@ -322,7 +320,7 @@ public class ItemGroupsData {
 	public Collection<CraftReward> getCraftShopItems(int skillId) {
 		if (craftShopBySkill.containsKey(skillId))
 			return Collections.emptyList();
-		List<CraftReward> result = new FastTable<>();
+		List<CraftReward> result = new ArrayList<>();
 		for (List<CraftReward> items : craftShopBySkill.get(skillId).values())
 			result.addAll(items);
 		return result;
@@ -335,7 +333,7 @@ public class ItemGroupsData {
 	public Collection<CraftReward> getCraftBundles(int skillId) {
 		if (craftBundlesBySkill.containsKey(skillId))
 			return Collections.emptyList();
-		List<CraftReward> result = new FastTable<>();
+		List<CraftReward> result = new ArrayList<>();
 		for (List<CraftReward> items : craftBundlesBySkill.get(skillId).values())
 			result.addAll(items);
 		return result;
@@ -348,7 +346,7 @@ public class ItemGroupsData {
 	public Collection<CraftReward> getCraftRecipes(int skillId) {
 		if (craftRecipesBySkill.containsKey(skillId))
 			return Collections.emptyList();
-		List<CraftReward> result = new FastTable<>();
+		List<CraftReward> result = new ArrayList<>();
 		for (List<CraftReward> items : craftRecipesBySkill.get(skillId).values())
 			result.addAll(items);
 		return result;

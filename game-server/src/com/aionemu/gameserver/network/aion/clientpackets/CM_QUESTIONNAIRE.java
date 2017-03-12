@@ -1,13 +1,12 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.services.HTMLService;
-
-import javolution.util.FastTable;
 
 /**
  * @author xTz
@@ -29,7 +28,7 @@ public class CM_QUESTIONNAIRE extends AionClientPacket {
 	protected void readImpl() {
 		objectId = readD();
 		itemSize = readUH();
-		items = new FastTable<>();
+		items = new ArrayList<>();
 		for (int i = 0; i < itemSize; i++) {
 			itemId = readD();
 			items.add(itemId);

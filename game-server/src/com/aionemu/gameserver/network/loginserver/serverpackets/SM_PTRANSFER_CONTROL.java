@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.network.loginserver.serverpackets;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map.Entry;
@@ -35,8 +36,6 @@ import com.aionemu.gameserver.network.loginserver.LsServerPacket;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.services.transfers.TransferablePlayer;
-
-import javolution.util.FastTable;
 
 /**
  * @author KID
@@ -293,7 +292,7 @@ public class SM_PTRANSFER_CONTROL extends LsServerPacket {
 				PlayerSkillList skillList = this.player.getSkillList();
 
 				// discard stigma skills
-				FastTable<PlayerSkillEntry> skills = new FastTable<>();
+				List<PlayerSkillEntry> skills = new ArrayList<>();
 				for (PlayerSkillEntry sk : skillList.getAllSkills()) {
 					if (!sk.isStigmaSkill()) {
 						skills.add(sk);
@@ -318,7 +317,7 @@ public class SM_PTRANSFER_CONTROL extends LsServerPacket {
 			case QUEST_INFORMATION:
 				writeD(this.taskId);
 				QuestStateList qsl = this.player.getQuestStateList();
-				FastTable<QuestState> quests = new FastTable<>();
+				List<QuestState> quests = new ArrayList<>();
 				for (QuestState qs : qsl.getAllQuestState()) {
 					if (qs == null) {
 						log.warn("there are null quest on player " + this.player.getName() + ". taskId #" + this.taskId + ". transfer skip that");

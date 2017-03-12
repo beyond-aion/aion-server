@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.model.templates.pet;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,8 +10,6 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
 import com.aionemu.gameserver.model.templates.stats.ModifiersTemplate;
-
-import javolution.util.FastTable;
 
 /**
  * @author Rolandas
@@ -79,7 +78,7 @@ public class PetBuff {
 	 */
 	public List<ModifiersTemplate> getModifiers() {
 		if (modifiers == null)
-			modifiers = new FastTable<>();
+			modifiers = new ArrayList<>();
 		return modifiers;
 	}
 }

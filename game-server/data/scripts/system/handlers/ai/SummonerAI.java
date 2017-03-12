@@ -1,5 +1,6 @@
 package ai;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -7,16 +8,14 @@ import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.model.ai.Percentage;
-import com.aionemu.gameserver.model.ai.SummonGroup;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
+import com.aionemu.gameserver.model.templates.ai.Percentage;
+import com.aionemu.gameserver.model.templates.ai.SummonGroup;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.World;
-
-import javolution.util.FastTable;
 
 /**
  * @author xTz
@@ -24,7 +23,7 @@ import javolution.util.FastTable;
 @AIName("summoner")
 public class SummonerAI extends AggressiveNpcAI {
 
-	private final List<Integer> spawnedNpc = new FastTable<>();
+	private final List<Integer> spawnedNpc = new ArrayList<>();
 
 	private List<Percentage> percentage = Collections.emptyList();
 
@@ -63,7 +62,7 @@ public class SummonerAI extends AggressiveNpcAI {
 	@Override
 	protected void handleSpawned() {
 		super.handleSpawned();
-		percentage = FastTable.of(DataManager.AI_DATA.getAiTemplate().get(getNpcId()).getSummons().getPercentage());
+		percentage = new ArrayList<>(DataManager.AI_DATA.getAiTemplate(getNpcId()).getSummons().getPercentage());
 	}
 
 	@Override

@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.model.templates.spawns;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -15,8 +16,6 @@ import com.aionemu.gameserver.model.templates.spawns.panesterra.AhserionsFlightS
 import com.aionemu.gameserver.model.templates.spawns.riftspawns.RiftSpawn;
 import com.aionemu.gameserver.model.templates.spawns.siegespawns.SiegeSpawn;
 import com.aionemu.gameserver.model.templates.spawns.vortexspawns.VortexSpawn;
-
-import javolution.util.FastTable;
 
 /**
  * @author xTz
@@ -57,7 +56,7 @@ public class SpawnMap {
 
 	public List<Spawn> getSpawns() {
 		if (spawns == null) {
-			spawns = new FastTable<>();
+			spawns = new ArrayList<>();
 		}
 		return spawns;
 	}
@@ -72,20 +71,20 @@ public class SpawnMap {
 
 	public List<BaseSpawn> getBaseSpawns() {
 		if (baseSpawns == null) {
-			baseSpawns = new FastTable<>();
+			baseSpawns = new ArrayList<>();
 		}
 		return baseSpawns;
 	}
 
 	public List<MercenarySpawn> getMercenarySpawns() {
 		if (mercenarySpawns == null)
-			mercenarySpawns = new FastTable<>();
+			mercenarySpawns = new ArrayList<>();
 		return mercenarySpawns;
 	}
 
 	public List<AssaultSpawn> getAssaultSpawns() {
 		if (assaultSpawns == null)
-			assaultSpawns = new FastTable<>();
+			assaultSpawns = new ArrayList<>();
 		return assaultSpawns;
 	}
 
@@ -95,7 +94,7 @@ public class SpawnMap {
 
 	public List<RiftSpawn> getRiftSpawns() {
 		if (riftSpawns == null) {
-			riftSpawns = new FastTable<>();
+			riftSpawns = new ArrayList<>();
 		}
 		return riftSpawns;
 	}
@@ -106,7 +105,7 @@ public class SpawnMap {
 
 	public List<SiegeSpawn> getSiegeSpawns() {
 		if (siegeSpawns == null) {
-			siegeSpawns = new FastTable<>();
+			siegeSpawns = new ArrayList<>();
 		}
 		return siegeSpawns;
 	}
@@ -117,7 +116,7 @@ public class SpawnMap {
 
 	public List<VortexSpawn> getVortexSpawns() {
 		if (vortexSpawns == null) {
-			vortexSpawns = new FastTable<>();
+			vortexSpawns = new ArrayList<>();
 		}
 		return vortexSpawns;
 	}
@@ -128,7 +127,7 @@ public class SpawnMap {
 
 	public List<AhserionsFlightSpawn> getAhserionSpawns() {
 		if (ahserionSpawns == null) {
-			ahserionSpawns = new FastTable<>();
+			ahserionSpawns = new ArrayList<>();
 		}
 		return ahserionSpawns;
 	}

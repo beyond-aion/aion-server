@@ -84,6 +84,7 @@ public class BoundingSphere extends BoundingVolume {
 		this.radius = r;
 	}
 
+	@Override
 	public Type getType() {
 		return Type.Sphere;
 	}
@@ -114,6 +115,7 @@ public class BoundingSphere extends BoundingVolume {
 	 * @param points
 	 *          the points to contain.
 	 */
+	@Override
 	public void computeFromPoints(FloatBuffer points) {
 		calcWelzl(points);
 	}
@@ -201,58 +203,50 @@ public class BoundingSphere extends BoundingVolume {
 	 *          A variable simulating pointer arithmatic from C++, and offset in <code>points</code>.
 	 */
 	private void recurseMini(FloatBuffer points, int p, int b, int ap) {
-		Vector3f tempA = Vector3f.newInstance();
-		Vector3f tempB = Vector3f.newInstance();
-		Vector3f tempC = Vector3f.newInstance();
-		Vector3f tempD = Vector3f.newInstance();
+		Vector3f tempA = new Vector3f();
+		Vector3f tempB = new Vector3f();
+		Vector3f tempC = new Vector3f();
+		Vector3f tempD = new Vector3f();
 
-		try {
-			switch (b) {
-				case 0:
-					this.radius = 0;
-					this.center.set(0, 0, 0);
-					break;
-				case 1:
-					this.radius = 1f - RADIUS_EPSILON;
-					BufferUtils.populateFromBuffer(center, points, ap - 1);
-					break;
-				case 2:
-					BufferUtils.populateFromBuffer(tempA, points, ap - 1);
-					BufferUtils.populateFromBuffer(tempB, points, ap - 2);
-					setSphere(tempA, tempB);
-					break;
-				case 3:
-					BufferUtils.populateFromBuffer(tempA, points, ap - 1);
-					BufferUtils.populateFromBuffer(tempB, points, ap - 2);
-					BufferUtils.populateFromBuffer(tempC, points, ap - 3);
-					setSphere(tempA, tempB, tempC);
-					break;
-				case 4:
-					BufferUtils.populateFromBuffer(tempA, points, ap - 1);
-					BufferUtils.populateFromBuffer(tempB, points, ap - 2);
-					BufferUtils.populateFromBuffer(tempC, points, ap - 3);
-					BufferUtils.populateFromBuffer(tempD, points, ap - 4);
-					setSphere(tempA, tempB, tempC, tempD);
-					return;
-			}
-			for (int i = 0; i < p; i++) {
-				BufferUtils.populateFromBuffer(tempA, points, i + ap);
-				if (tempA.distanceSquared(center) - (radius * radius) > RADIUS_EPSILON - 1f) {
-					for (int j = i; j > 0; j--) {
-						BufferUtils.populateFromBuffer(tempB, points, j + ap);
-						BufferUtils.populateFromBuffer(tempC, points, j - 1 + ap);
-						BufferUtils.setInBuffer(tempC, points, j + ap);
-						BufferUtils.setInBuffer(tempB, points, j - 1 + ap);
-					}
-					recurseMini(points, i, b + 1, ap + 1);
-				}
-			}
+		switch (b) {
+			case 0:
+				this.radius = 0;
+				this.center.set(0, 0, 0);
+				break;
+			case 1:
+				this.radius = 1f - RADIUS_EPSILON;
+				BufferUtils.populateFromBuffer(center, points, ap - 1);
+				break;
+			case 2:
+				BufferUtils.populateFromBuffer(tempA, points, ap - 1);
+				BufferUtils.populateFromBuffer(tempB, points, ap - 2);
+				setSphere(tempA, tempB);
+				break;
+			case 3:
+				BufferUtils.populateFromBuffer(tempA, points, ap - 1);
+				BufferUtils.populateFromBuffer(tempB, points, ap - 2);
+				BufferUtils.populateFromBuffer(tempC, points, ap - 3);
+				setSphere(tempA, tempB, tempC);
+				break;
+			case 4:
+				BufferUtils.populateFromBuffer(tempA, points, ap - 1);
+				BufferUtils.populateFromBuffer(tempB, points, ap - 2);
+				BufferUtils.populateFromBuffer(tempC, points, ap - 3);
+				BufferUtils.populateFromBuffer(tempD, points, ap - 4);
+				setSphere(tempA, tempB, tempC, tempD);
+				return;
 		}
-		finally {
-			Vector3f.recycle(tempA);
-			Vector3f.recycle(tempB);
-			Vector3f.recycle(tempC);
-			Vector3f.recycle(tempD);
+		for (int i = 0; i < p; i++) {
+			BufferUtils.populateFromBuffer(tempA, points, i + ap);
+			if (tempA.distanceSquared(center) - (radius * radius) > RADIUS_EPSILON - 1f) {
+				for (int j = i; j > 0; j--) {
+					BufferUtils.populateFromBuffer(tempB, points, j + ap);
+					BufferUtils.populateFromBuffer(tempC, points, j - 1 + ap);
+					BufferUtils.setInBuffer(tempC, points, j + ap);
+					BufferUtils.setInBuffer(tempB, points, j - 1 + ap);
+				}
+				recurseMini(points, i, b + 1, ap + 1);
+			}
 		}
 	}
 
@@ -278,8 +272,7 @@ public class BoundingSphere extends BoundingVolume {
 		if (Denominator == 0) {
 			center.set(0, 0, 0);
 			radius = 0;
-		}
-		else {
+		} else {
 			Vector3f o = a.cross(b).multLocal(c.lengthSquared()).addLocal(c.cross(a).multLocal(b.lengthSquared()))
 				.addLocal(b.cross(c).multLocal(a.lengthSquared())).divideLocal(Denominator);
 
@@ -309,11 +302,9 @@ public class BoundingSphere extends BoundingVolume {
 		if (Denominator == 0) {
 			center.set(0, 0, 0);
 			radius = 0;
-		}
-		else {
+		} else {
 
-			Vector3f o = acrossB.cross(a).multLocal(b.lengthSquared()).addLocal(b.cross(acrossB).multLocal(a.lengthSquared()))
-				.divideLocal(Denominator);
+			Vector3f o = acrossB.cross(a).multLocal(b.lengthSquared()).addLocal(b.cross(acrossB).multLocal(a.lengthSquared())).divideLocal(Denominator);
 			radius = o.length() * RADIUS_EPSILON;
 			O.add(o, center);
 		}
@@ -364,12 +355,12 @@ public class BoundingSphere extends BoundingVolume {
 
 	}
 
+	@Override
 	public BoundingVolume transform(Matrix4f trans, BoundingVolume store) {
 		BoundingSphere sphere;
 		if (store == null || store.getType() != BoundingVolume.Type.Sphere) {
 			sphere = new BoundingSphere(1, new Vector3f(0, 0, 0));
-		}
-		else {
+		} else {
 			sphere = (BoundingSphere) store;
 		}
 
@@ -406,16 +397,15 @@ public class BoundingSphere extends BoundingVolume {
 	 *          the plane to check against.
 	 * @return side
 	 */
+	@Override
 	public Plane.Side whichSide(Plane plane) {
 		float distance = plane.pseudoDistance(center);
 
 		if (distance <= -radius) {
 			return Plane.Side.Negative;
-		}
-		else if (distance >= radius) {
+		} else if (distance >= radius) {
 			return Plane.Side.Positive;
-		}
-		else {
+		} else {
 			return Plane.Side.None;
 		}
 	}
@@ -428,6 +418,7 @@ public class BoundingSphere extends BoundingVolume {
 	 *          the sphere to combine with this sphere.
 	 * @return a new sphere
 	 */
+	@Override
 	public BoundingVolume merge(BoundingVolume volume) {
 		if (volume == null) {
 			return this;
@@ -471,6 +462,7 @@ public class BoundingSphere extends BoundingVolume {
 	 *          the sphere to combine with this sphere.
 	 * @return this
 	 */
+	@Override
 	public BoundingVolume mergeLocal(BoundingVolume volume) {
 		if (volume == null) {
 			return this;
@@ -487,11 +479,10 @@ public class BoundingSphere extends BoundingVolume {
 
 			case AABB: {
 				BoundingBox box = (BoundingBox) volume;
-				Vector3f radVect = Vector3f.newInstance();
+				Vector3f radVect = new Vector3f();
 				radVect.set(box.xExtent, box.yExtent, box.zExtent);
 				Vector3f temp_center = box.center;
 				float len = radVect.length();
-				Vector3f.recycle(radVect);
 				return merge(len, temp_center, this);
 			}
 
@@ -542,7 +533,7 @@ public class BoundingSphere extends BoundingVolume {
 	// }
 
 	private BoundingVolume merge(float temp_radius, Vector3f temp_center, BoundingSphere rVal) {
-		Vector3f vect1 = Vector3f.newInstance();
+		Vector3f vect1 = new Vector3f();
 		Vector3f diff = temp_center.subtract(center, vect1);
 		float lengthSquared = diff.lengthSquared();
 		float radiusDiff = temp_radius - radius;
@@ -551,7 +542,6 @@ public class BoundingSphere extends BoundingVolume {
 
 		if (fRDiffSqr >= lengthSquared) {
 			if (radiusDiff <= 0.0f) {
-				Vector3f.recycle(vect1);
 				return this;
 			}
 
@@ -561,7 +551,6 @@ public class BoundingSphere extends BoundingVolume {
 			}
 			rCenter.set(temp_center);
 			rVal.setRadius(temp_radius);
-			Vector3f.recycle(vect1);
 			return rVal;
 		}
 
@@ -574,13 +563,11 @@ public class BoundingSphere extends BoundingVolume {
 		if (length > RADIUS_EPSILON) {
 			float coeff = (length + radiusDiff) / (2.0f * length);
 			rCenter.set(center.addLocal(diff.multLocal(coeff)));
-		}
-		else {
+		} else {
 			rCenter.set(center);
 		}
 
 		rVal.setRadius(0.5f * (length + radius + temp_radius));
-		Vector3f.recycle(vect1);
 		return rVal;
 	}
 
@@ -591,6 +578,7 @@ public class BoundingSphere extends BoundingVolume {
 	 *          where to store the cloned information. if null or wrong class, a new store is created.
 	 * @return the new BoundingSphere
 	 */
+	@Override
 	public BoundingVolume clone(BoundingVolume store) {
 		if (store != null && store.getType() == Type.Sphere) {
 			BoundingSphere rVal = (BoundingSphere) store;
@@ -617,21 +605,23 @@ public class BoundingSphere extends BoundingVolume {
 		return getClass().getSimpleName() + " [Radius: " + radius + " Center: " + center + "]";
 	}
 
+	@Override
 	public boolean intersects(BoundingVolume bv) {
 		return bv.intersectsSphere(this);
 	}
 
+	@Override
 	public boolean intersectsSphere(BoundingSphere bs) {
 		assert Vector3f.isValidVector(center) && Vector3f.isValidVector(bs.center);
 
-		Vector3f vect1 = Vector3f.newInstance();
+		Vector3f vect1 = new Vector3f();
 		Vector3f diff = center.subtract(bs.center, vect1);
 		float rsum = getRadius() + bs.getRadius();
 		boolean eq = (diff.dot(diff) <= rsum * rsum);
-		Vector3f.recycle(vect1);
 		return eq;
 	}
 
+	@Override
 	public boolean intersectsBoundingBox(BoundingBox bb) {
 		assert Vector3f.isValidVector(center) && Vector3f.isValidVector(bb.center);
 
@@ -646,31 +636,29 @@ public class BoundingSphere extends BoundingVolume {
 	// return obb.intersectsSphere(this);
 	// }
 
+	@Override
 	public boolean intersects(Ray ray) {
 		assert Vector3f.isValidVector(center);
 
-		Vector3f vect1 = Vector3f.newInstance();
+		Vector3f vect1 = new Vector3f();
 		Vector3f diff = vect1.set(ray.getOrigin()).subtractLocal(center);
 		float radiusSquared = getRadius() * getRadius();
 		float a = diff.dot(diff) - radiusSquared;
 		if (a <= 0.0) {
 			// in sphere
-			Vector3f.recycle(vect1);
 			return true;
 		}
 
 		// outside sphere
 		float b = ray.getDirection().dot(diff);
 		if (b >= 0.0) {
-			Vector3f.recycle(vect1);
 			return false;
 		}
-		Vector3f.recycle(vect1);
 		return b * b >= a;
 	}
 
 	public int collideWithRay(Ray ray, CollisionResults results) {
-		Vector3f vect1 = Vector3f.newInstance();
+		Vector3f vect1 = new Vector3f();
 		Vector3f diff = vect1.set(ray.getOrigin()).subtractLocal(center);
 		float a = diff.dot(diff) - (getRadius() * getRadius());
 		float a1, discr, root;
@@ -685,22 +673,18 @@ public class BoundingSphere extends BoundingVolume {
 
 			CollisionResult result = new CollisionResult(point, distance);
 			results.addCollision(result);
-			Vector3f.recycle(vect1);
 			return 1;
 		}
 
 		a1 = ray.direction.dot(diff);
 		if (a1 >= 0.0) {
-			Vector3f.recycle(vect1);
 			return 0;
 		}
 
 		discr = a1 * a1 - a;
 		if (discr < 0.0) {
-			Vector3f.recycle(vect1);
 			return 0;
-		}
-		else if (discr >= FastMath.ZERO_TOLERANCE) {
+		} else if (discr >= FastMath.ZERO_TOLERANCE) {
 			root = FastMath.sqrt(discr);
 			float dist = -a1 - root;
 			Vector3f point = new Vector3f(ray.direction).multLocal(dist).addLocal(ray.origin);
@@ -709,24 +693,21 @@ public class BoundingSphere extends BoundingVolume {
 			dist = -a1 + root;
 			point = new Vector3f(ray.direction).multLocal(dist).addLocal(ray.origin);
 			results.addCollision(new CollisionResult(point, dist));
-			Vector3f.recycle(vect1);
 			return 2;
-		}
-		else {
+		} else {
 			float dist = -a1;
 			Vector3f point = new Vector3f(ray.direction).multLocal(dist).addLocal(ray.origin);
 			results.addCollision(new CollisionResult(point, dist));
-			Vector3f.recycle(vect1);
 			return 1;
 		}
 	}
 
+	@Override
 	public int collideWith(Collidable other, CollisionResults results) {
 		if (other instanceof Ray) {
 			Ray ray = (Ray) other;
 			return collideWithRay(ray, results);
-		}
-		else {
+		} else {
 			throw new UnsupportedCollisionException();
 		}
 	}
@@ -741,6 +722,7 @@ public class BoundingSphere extends BoundingVolume {
 		return center.distanceSquared(point) <= (getRadius() * getRadius());
 	}
 
+	@Override
 	public float distanceToEdge(Vector3f point) {
 		return center.distance(point) - radius;
 	}

@@ -1,5 +1,6 @@
 package ai.instance.infinityShard;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -19,7 +20,6 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 import ai.AggressiveNpcAI;
-import javolution.util.FastTable;
 
 /**
  * @author Cheatkiller
@@ -28,7 +28,7 @@ import javolution.util.FastTable;
 @AIName("hyperion")
 public class HyperionAI extends AggressiveNpcAI {
 
-	private List<Integer> percents = new FastTable<>();
+	private List<Integer> percents = new ArrayList<>();
 	private byte stage = 0;
 
 	@Override

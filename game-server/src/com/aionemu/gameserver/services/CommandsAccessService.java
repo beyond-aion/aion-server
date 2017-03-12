@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -8,8 +9,6 @@ import com.aionemu.gameserver.dao.CommandsAccessDAO;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.ChatProcessor;
-
-import javolution.util.FastTable;
 
 /**
  * @author ViAl
@@ -41,7 +40,7 @@ public class CommandsAccessService {
 			return;
 		}
 		if (!playersAccess.containsKey(playerId)) {
-			playersAccess.put(playerId, new FastTable<String>());
+			playersAccess.put(playerId, new ArrayList<String>());
 		}
 		List<String> commands = playersAccess.get(playerId);
 		commands.add(command);

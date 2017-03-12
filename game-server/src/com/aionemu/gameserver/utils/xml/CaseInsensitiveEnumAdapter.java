@@ -2,20 +2,19 @@ package com.aionemu.gameserver.utils.xml;
 
 import java.lang.annotation.Annotation;
 import java.lang.annotation.AnnotationFormatError;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.xml.bind.annotation.XmlEnumValue;
 import javax.xml.bind.annotation.adapters.XmlAdapter;
-
-import javolution.util.FastMap;
 
 /**
  * @author Rolandas
  */
 public class CaseInsensitiveEnumAdapter<E extends Enum<E>> extends XmlAdapter<String, E> {
 
-	private Map<String, Enum<E>> annotationValueToEnum = new FastMap<>();
-	private Map<Enum<E>, String> enumToAnnotationValue = new FastMap<>();
+	private Map<String, Enum<E>> annotationValueToEnum = new HashMap<>();
+	private Map<Enum<E>, String> enumToAnnotationValue = new HashMap<>();
 
 	public CaseInsensitiveEnumAdapter(Class<E> clazz) {
 		try {

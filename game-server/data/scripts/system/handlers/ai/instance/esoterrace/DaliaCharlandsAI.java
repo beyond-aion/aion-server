@@ -1,5 +1,6 @@
 package ai.instance.esoterrace;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -14,7 +15,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 import ai.AggressiveNpcAI;
-import javolution.util.FastTable;
 
 /**
  * @author xTz
@@ -22,7 +22,7 @@ import javolution.util.FastTable;
 @AIName("dalia_charlands")
 public class DaliaCharlandsAI extends AggressiveNpcAI {
 
-	private List<Integer> percents = new FastTable<>();
+	private List<Integer> percents = new ArrayList<>();
 
 	@Override
 	protected void handleSpawned() {

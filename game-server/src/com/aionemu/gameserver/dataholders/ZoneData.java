@@ -1,6 +1,7 @@
 package com.aionemu.gameserver.dataholders;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -29,7 +30,6 @@ import com.aionemu.gameserver.model.templates.zone.ZoneInfo;
 import com.aionemu.gameserver.model.templates.zone.ZoneTemplate;
 
 import gnu.trove.map.hash.TIntObjectHashMap;
-import javolution.util.FastTable;
 
 /**
  * @author ATracer
@@ -79,7 +79,7 @@ public class ZoneData {
 			if (area != null) {
 				List<ZoneInfo> zones = zoneNameMap.get(zone.getMapid());
 				if (zones == null) {
-					zones = new FastTable<>();
+					zones = new ArrayList<>();
 					zoneNameMap.put(zone.getMapid(), zones);
 				}
 				if (zone.getZoneType() == ZoneClassName.WEATHER) {

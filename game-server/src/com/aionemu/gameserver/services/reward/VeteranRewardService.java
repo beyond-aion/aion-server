@@ -2,6 +2,7 @@ package com.aionemu.gameserver.services.reward;
 
 import java.time.ZonedDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.aionemu.commons.database.dao.DAOManager;
@@ -13,18 +14,16 @@ import com.aionemu.gameserver.model.templates.rewards.RewardItem;
 import com.aionemu.gameserver.services.mail.SystemMailService;
 import com.aionemu.gameserver.utils.time.ServerTime;
 
-import javolution.util.FastTable;
-
 /**
  * @author Neon
  */
 public final class VeteranRewardService {
 
-	private static final List<List<RewardItem>> rewards = new FastTable<>();
+	private static final List<List<RewardItem>> rewards = new ArrayList<>();
 
 	static {
 		for (int i = 0; i < 18; i++)
-			rewards.add(new FastTable<>());
+			rewards.add(new ArrayList<>());
 		// month 1
 		rewards.get(0).add(new RewardItem(169630007, 1)); // [Expand Card] Expand Cube Ticket (lvl 4)
 		rewards.get(0).add(new RewardItem(169620094, 1)); // Crafting Boost Charm III - 100%

@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.services;
 
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -18,9 +20,6 @@ import com.aionemu.gameserver.model.siege.SiegeShield;
 import com.aionemu.gameserver.model.templates.shield.ShieldTemplate;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
 
-import javolution.util.FastMap;
-import javolution.util.FastTable;
-
 /**
  * @author xavier
  * @modified Rolandas
@@ -35,8 +34,8 @@ public class ShieldService {
 		protected static final ShieldService instance = new ShieldService();
 	}
 
-	private final FastMap<Integer, Shield> sphereShields = new FastMap<>();
-	private final FastMap<Integer, List<SiegeShield>> registeredShields = new FastMap<>();
+	private final LinkedHashMap<Integer, Shield> sphereShields = new LinkedHashMap<>();
+	private final LinkedHashMap<Integer, List<SiegeShield>> registeredShields = new LinkedHashMap<>();
 
 	public static final ShieldService getInstance() {
 		return SingletonHolder.instance;
@@ -85,7 +84,7 @@ public class ShieldService {
 	public void registerShield(int worldId, SiegeShield shield) {
 		List<SiegeShield> mapShields = registeredShields.get(worldId);
 		if (mapShields == null) {
-			mapShields = new FastTable<>();
+			mapShields = new ArrayList<>();
 			registeredShields.put(worldId, mapShields);
 		}
 		mapShields.add(shield);
@@ -103,7 +102,7 @@ public class ShieldService {
 			return;
 
 		ZoneInstance zone = location.getZone().get(0);
-		List<SiegeShield> shields = new FastTable<>();
+		List<SiegeShield> shields = new ArrayList<>();
 
 		for (int index = mapShields.size() - 1; index >= 0; index--) {
 			SiegeShield shield = mapShields.get(index);

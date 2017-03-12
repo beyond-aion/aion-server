@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.services;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -18,9 +20,6 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.World;
 
-import javolution.util.FastSet;
-import javolution.util.FastTable;
-
 /**
  * Automatic Announcement System
  * 
@@ -33,11 +32,11 @@ public class AnnouncementService {
 	 */
 	private static final Logger log = LoggerFactory.getLogger(AnnouncementService.class);
 
-	private FastSet<Announcement> announcements = new FastSet<Announcement>().shared();
-	private List<Future<?>> delays = new FastTable<>();
+	private Set<Announcement> announcements = new HashSet<>();
+	private List<Future<?>> delays = new ArrayList<>();
 
 	private AnnouncementService() {
-		this.load();
+		load();
 	}
 
 	public static final AnnouncementService getInstance() {
@@ -49,10 +48,11 @@ public class AnnouncementService {
 	 */
 	public void reload() {
 		// Cancel all tasks
-		if (delays != null && delays.size() > 0)
+		if (!delays.isEmpty()) {
 			for (Future<?> delay : delays)
-				delay.cancel(false);
-
+				delay.cancel(true);
+			delays.clear();
+		}
 		// Clear all announcements
 		announcements.clear();
 
@@ -67,8 +67,10 @@ public class AnnouncementService {
 		announcements.clear();
 		announcements.addAll(getDAO().getAnnouncements());
 
-		for (final Announcement announce : announcements) {
+		for (Announcement announceMent : announcements) {
 			delays.add(ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
+
+				private Announcement announce = announceMent;
 
 				@Override
 				public void run() {
@@ -84,17 +86,17 @@ public class AnnouncementService {
 									new SM_MESSAGE(1, "Announcement", "Announcement: " + announce.getAnnounce(), announce.getChatType()));
 						else if (announce.getFactionEnum() == player.getRace())
 							if (announce.getChatType() == ChatType.SHOUT || announce.getChatType() == ChatType.GROUP_LEADER)
-								PacketSendUtility.sendPacket(player, new SM_MESSAGE(1, (announce.getFaction().equalsIgnoreCase("ELYOS") ? "Elyos" : "Asmodian")
-									+ " Announcement", announce.getAnnounce(), announce.getChatType()));
+								PacketSendUtility.sendPacket(player,
+									new SM_MESSAGE(1, (announce.getFaction().equalsIgnoreCase("ELYOS") ? "Elyos" : "Asmodian") + " Announcement",
+										announce.getAnnounce(), announce.getChatType()));
 							else
-								PacketSendUtility.sendPacket(
-									player,
-									new SM_MESSAGE(1, (announce.getFaction().equalsIgnoreCase("ELYOS") ? "Elyos" : "Asmodian") + " Announcement", (announce
-										.getFaction().equalsIgnoreCase("ELYOS") ? "Elyos" : "Asmodian") + " Announcement: " + announce.getAnnounce(), announce
-										.getChatType()));
+								PacketSendUtility.sendPacket(player,
+									new SM_MESSAGE(1, (announce.getFaction().equalsIgnoreCase("ELYOS") ? "Elyos" : "Asmodian") + " Announcement",
+										(announce.getFaction().equalsIgnoreCase("ELYOS") ? "Elyos" : "Asmodian") + " Announcement: " + announce.getAnnounce(),
+										announce.getChatType()));
 					}
 				}
-			}, announce.getDelay() * 1000, announce.getDelay() * 1000));
+			}, announceMent.getDelay() * 1000, announceMent.getDelay() * 1000));
 		}
 
 		log.info("Loaded " + announcements.size() + " announcements");

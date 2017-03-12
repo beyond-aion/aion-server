@@ -1,7 +1,6 @@
 package com.aionemu.gameserver.model.templates.item;
 
 import java.util.List;
-import java.util.Set;
 
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -13,8 +12,6 @@ import javax.xml.bind.annotation.XmlTransient;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 
-import javolution.util.FastSet;
-
 /**
  * @author ATracer
  * @modified Neon
@@ -23,7 +20,7 @@ import javolution.util.FastSet;
 @XmlRootElement(name = "Stigma")
 public class Stigma {
 
-	@XmlAttribute(name = "gain_skill_group1")
+	@XmlAttribute(name = "gain_skill_group1", required = true)
 	private String gainSkillGroup1;
 
 	@XmlAttribute(name = "gain_skill_group2")
@@ -36,9 +33,10 @@ public class Stigma {
 	private String[] gainSkillGroups;
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
-		Set<String> groups = FastSet.of(gainSkillGroup1, gainSkillGroup2);
-		groups.removeIf(group -> group == null || group.isEmpty());
-		gainSkillGroups = groups.toArray(new String[groups.size()]);
+		if (gainSkillGroup2 == null)
+			gainSkillGroups = new String[] { gainSkillGroup1 };
+		else
+			gainSkillGroups = new String[] { gainSkillGroup1, gainSkillGroup2 };
 	}
 
 	public String[] getGainSkillGroups() {

@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.services.siege;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -43,8 +44,6 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.zone.ZoneName;
-
-import javolution.util.FastTable;
 
 /**
  * @author Estrayl
@@ -118,7 +117,7 @@ public class AgentSiege extends Siege<AgentLocation> {
 
 	protected void sendRewardsToParticipatedPlayers(SiegeRaceCounter damage, boolean isWinner) {
 		Map<Integer, Long> playerAbyssPoints = damage.getPlayerAbyssPoints();
-		List<Integer> topPlayersIds = new FastTable<>();
+		List<Integer> topPlayersIds = new ArrayList<>();
 		topPlayersIds.addAll(playerAbyssPoints.keySet());
 		SiegeResult result = isWinner ? SiegeResult.OCCUPY : SiegeResult.FAIL;
 

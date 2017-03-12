@@ -10,7 +10,6 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 import ai.GeneralNpcAI;
 
-
 /**
  * @author Yeats
  *

@@ -2,6 +2,8 @@ package com.aionemu.gameserver.controllers;
 
 import static com.aionemu.gameserver.model.DialogAction.*;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -116,9 +118,6 @@ import com.aionemu.gameserver.world.geo.GeoService;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
 import com.aionemu.gameserver.world.zone.ZoneName;
 
-import javolution.util.FastMap;
-import javolution.util.FastTable;
-
 /**
  * This class is for controlling players.
  * 
@@ -195,7 +194,7 @@ public class PlayerController extends CreatureController<Player> {
 	}
 
 	public void updateNearbyQuests() {
-		Map<Integer, Integer> nearbyQuestList = new FastMap<>();
+		Map<Integer, Integer> nearbyQuestList = new HashMap<>();
 		for (int questId : getOwner().getPosition().getMapRegion().getParent().getQuestIds()) {
 			if (QuestService.checkStartConditions(getOwner(), questId, false, 2, false, false, false))
 				nearbyQuestList.put(questId, QuestService.getLevelRequirementDiff(questId, getOwner().getCommonData().getLevel()));
@@ -204,7 +203,7 @@ public class PlayerController extends CreatureController<Player> {
 	}
 
 	public void updateRepeatableQuests() {
-		List<Integer> reapeatQuestList = new FastTable<>();
+		List<Integer> reapeatQuestList = new ArrayList<>();
 		for (int questId : getOwner().getPosition().getMapRegion().getParent().getQuestIds()) {
 			QuestTemplate template = DataManager.QUEST_DATA.getQuestById(questId);
 			if (!template.isTimeBased())

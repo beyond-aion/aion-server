@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.model.siege;
 
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -15,8 +16,6 @@ import com.aionemu.gameserver.model.templates.siegelocation.SiegeReward;
 import com.aionemu.gameserver.model.templates.zone.ZoneType;
 import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
-
-import javolution.util.FastMap;
 
 /**
  * @author Source
@@ -37,7 +36,7 @@ public class FortressLocation extends SiegeLocation {
 		siegeRewards = template.getSiegeRewards();
 		siegeLegionRewards = template.getSiegeLegionRewards();
 		siegeMercenaryZones = template.getSiegeMercenaryZones();
-		mercenaries = new FastMap<>();
+		mercenaries = new LinkedHashMap<>();
 	}
 
 	public List<SiegeReward> getReward() {

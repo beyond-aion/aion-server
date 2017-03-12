@@ -3,6 +3,8 @@ package com.aionemu.gameserver.services;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,15 +14,13 @@ import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
-import javolution.util.FastTable;
-
 /**
  * @author KID
  */
 public class AdminService {
 
 	private static final Logger itemLog = LoggerFactory.getLogger("GMITEMRESTRICTION");
-	private FastTable<Integer> list;
+	private List<Integer> list;
 	private static AdminService instance = new AdminService();
 
 	public static AdminService getInstance() {
@@ -28,7 +28,7 @@ public class AdminService {
 	}
 
 	public AdminService() {
-		list = new FastTable<>();
+		list = new ArrayList<>();
 		reload();
 	}
 

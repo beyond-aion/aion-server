@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.services.reward;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
@@ -25,10 +26,8 @@ import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.services.mail.SystemMailService;
 import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.ChatUtil;
-import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-
-import javolution.util.FastTable;
+import com.aionemu.gameserver.utils.PositionUtil;
 
 /**
  * @author KID
@@ -53,7 +52,7 @@ public class WebRewardService {
 		if (list.size() == 0)
 			return;
 
-		List<Integer> rewarded = new FastTable<>();
+		List<Integer> rewarded = new ArrayList<>();
 		for (RewardEntryItem item : list) {
 			try {
 				if (sendRewardItem(player, item) || executeRewardAction(player, item)) {

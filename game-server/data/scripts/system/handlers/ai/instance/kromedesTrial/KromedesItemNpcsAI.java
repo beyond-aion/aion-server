@@ -1,7 +1,8 @@
 package ai.instance.kromedesTrial;
 
+import static com.aionemu.gameserver.model.DialogAction.SELECT1_1;
+
 import com.aionemu.gameserver.ai.AIName;
-import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.DialogPage;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;

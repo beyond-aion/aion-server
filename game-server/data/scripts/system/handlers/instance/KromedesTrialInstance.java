@@ -2,6 +2,7 @@ package instance;
 
 import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE.STR_REBIRTH_MASSAGE_ME;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -19,12 +20,10 @@ import com.aionemu.gameserver.services.player.PlayerReviveService;
 import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
-import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
-
-import javolution.util.FastTable;
 
 /**
  * @author xTz, Gigi
@@ -36,7 +35,7 @@ public class KromedesTrialInstance extends GeneralInstanceHandler {
 	private int skillId;
 	private boolean isPlayerInManor = false;
 	private AtomicBoolean isBossSpawned = new AtomicBoolean();
-	private List<Integer> sentMovies = new FastTable<>();
+	private List<Integer> sentMovies = new ArrayList<>();
 
 	@Override
 	public void onEnterInstance(Player player) {
@@ -169,11 +168,11 @@ public class KromedesTrialInstance extends GeneralInstanceHandler {
 	}
 
 	private void removeInstanceItems(Player player) {
-		List<Integer> items = FastTable.of(185000098, // Temple Vault Door Key
+		int[] items = new int[] { 185000098, // Temple Vault Door Key
 			185000099, // Dungeon Grate Key
 			185000100, // Dungeon Door Key
 			185000109 // Relic Key
-		);
+		};
 		Storage storage = player.getInventory();
 		for (int item : items)
 			storage.decreaseByItemId(item, storage.getItemCountByItemId(item));

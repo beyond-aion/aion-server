@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.services;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,8 +34,6 @@ import com.aionemu.gameserver.taskmanager.tasks.TemporaryTradeTimeTask;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
 import com.aionemu.gameserver.utils.idfactory.IDFactory;
-
-import javolution.util.FastTable;
 
 /**
  * @author ATracer
@@ -262,7 +261,7 @@ public class ExchangeService {
 					return;
 				}
 				if (realItem.getItemCount() == exItem.getItemCount()) {
-					PacketSendUtility.sendPacket(player, new SM_INVENTORY_ADD_ITEM(FastTable.of(realItem), player, ItemPacketService.ItemAddType.PLAYER_EXCHANGE_GET_BACK));
+					PacketSendUtility.sendPacket(player, new SM_INVENTORY_ADD_ITEM(Arrays.asList(realItem), player, ItemPacketService.ItemAddType.PLAYER_EXCHANGE_GET_BACK));
 				} else {
 					PacketSendUtility.sendPacket(player, new SM_INVENTORY_UPDATE_ITEM(player, realItem, ItemPacketService.ItemUpdateType.INC_PLAYER_EXCHANGE_GET_BACK));
 				}

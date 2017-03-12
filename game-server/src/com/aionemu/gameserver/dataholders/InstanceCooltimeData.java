@@ -5,6 +5,7 @@ import java.time.LocalTime;
 import java.time.ZonedDateTime;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -23,8 +24,6 @@ import com.aionemu.gameserver.model.templates.InstanceCooltime;
 import com.aionemu.gameserver.services.instance.InstanceService;
 import com.aionemu.gameserver.utils.time.ServerTime;
 
-import javolution.util.FastMap;
-
 /**
  * @author VladimirZ
  */
@@ -35,8 +34,8 @@ public class InstanceCooltimeData {
 	@XmlElement(name = "instance_cooltime", required = true)
 	protected List<InstanceCooltime> instanceCooltime;
 
-	private FastMap<Integer, InstanceCooltime> instanceCooltimes = new FastMap<>();
-	private HashMap<Integer, Integer> syncIdToMapId = new HashMap<>();
+	private Map<Integer, InstanceCooltime> instanceCooltimes = new LinkedHashMap<>();
+	private Map<Integer, Integer> syncIdToMapId = new HashMap<>();
 
 	/**
 	 * @param u
@@ -51,7 +50,7 @@ public class InstanceCooltimeData {
 	}
 
 	public Map<Integer, InstanceCooltime> getInstanceCooltimes() {
-		return FastMap.of(instanceCooltimes);
+		return new LinkedHashMap<>(instanceCooltimes);
 	}
 
 	public InstanceCooltime getInstanceCooltimeByWorldId(int worldId) {

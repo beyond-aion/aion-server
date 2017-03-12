@@ -1,6 +1,8 @@
 package com.aionemu.gameserver.services.instance.periodic;
 
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.concurrent.Future;
 
 import org.slf4j.Logger;
@@ -13,8 +15,6 @@ import com.aionemu.gameserver.services.AutoGroupService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.World;
-
-import javolution.util.FastTable;
 
 /**
  * @author ViAl
@@ -31,7 +31,7 @@ public abstract class PeriodicInstance {
 	protected long registrationPeriod;
 	// inner variables
 	protected boolean registerAvailable;
-	protected FastTable<Integer> playersWithCooldown;
+	protected List<Integer> playersWithCooldown;
 	protected Future<?> unregisterTask;
 
 	public PeriodicInstance(boolean isEnabled, String startExpression, long regPeriod, byte[] maskIds, byte minLevel, byte maxLevel) {
@@ -42,7 +42,7 @@ public abstract class PeriodicInstance {
 		this.minLevel = minLevel;
 		this.maxLevel = maxLevel;
 		this.registerAvailable = false;
-		this.playersWithCooldown = new FastTable<>();
+		this.playersWithCooldown = new ArrayList<>();
 	}
 
 	public void initIfEnabled() {

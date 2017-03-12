@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.model.templates.pet;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -12,8 +13,6 @@ import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.services.toypet.PetFeedCalculator;
 import com.aionemu.gameserver.services.toypet.PetFeedProgress;
 import com.aionemu.gameserver.services.toypet.PetHungryLevel;
-
-import javolution.util.FastTable;
 
 /**
  * @author Rolandas
@@ -39,7 +38,7 @@ public class PetFlavour {
 
 	public List<PetRewards> getFood() {
 		if (food == null) {
-			food = new FastTable<>();
+			food = new ArrayList<>();
 		}
 		return this.food;
 	}

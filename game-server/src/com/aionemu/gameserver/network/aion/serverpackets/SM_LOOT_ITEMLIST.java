@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 import org.slf4j.LoggerFactory;
@@ -13,19 +15,17 @@ import com.aionemu.gameserver.model.templates.item.enums.ItemGroup;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 
-import javolution.util.FastTable;
-
 /**
  * @author alexa026, Avol, Corrected by Metos modified by ATracer, KID
  */
 public class SM_LOOT_ITEMLIST extends AionServerPacket {
 
 	private int targetObjectId;
-	private FastTable<DropItem> dropItems;
+	private List<DropItem> dropItems;
 
 	public SM_LOOT_ITEMLIST(int targetObjectId, Set<DropItem> setItems, Player player) {
 		this.targetObjectId = targetObjectId;
-		this.dropItems = new FastTable<>();
+		this.dropItems = new ArrayList<>();
 		if (setItems == null) {
 			LoggerFactory.getLogger(SM_LOOT_ITEMLIST.class).warn("null Set<DropItem>, skip");
 			return;

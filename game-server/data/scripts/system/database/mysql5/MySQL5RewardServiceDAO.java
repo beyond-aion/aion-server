@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -14,8 +15,6 @@ import com.aionemu.commons.database.DatabaseFactory;
 import com.aionemu.gameserver.dao.MySQL5DAOUtils;
 import com.aionemu.gameserver.dao.RewardServiceDAO;
 import com.aionemu.gameserver.model.templates.rewards.RewardEntryItem;
-
-import javolution.util.FastTable;
 
 /**
  * @author KID
@@ -34,7 +33,7 @@ public class MySQL5RewardServiceDAO extends RewardServiceDAO {
 
 	@Override
 	public List<RewardEntryItem> loadUnreceived(int playerId) {
-		List<RewardEntryItem> list = new FastTable<>();
+		List<RewardEntryItem> list = new ArrayList<>();
 		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(SELECT_QUERY)) {
 			stmt.setInt(1, playerId);
 			try (ResultSet rset = stmt.executeQuery()) {

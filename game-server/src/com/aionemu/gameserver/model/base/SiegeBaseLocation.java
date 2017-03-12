@@ -2,7 +2,6 @@ package com.aionemu.gameserver.model.base;
 
 import com.aionemu.gameserver.model.templates.base.BaseTemplate;
 
-
 /**
  * @author Estrayl
  *

@@ -1,5 +1,6 @@
 package ai.quests;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.aionemu.gameserver.ai.AIActions;
@@ -17,7 +18,6 @@ import com.aionemu.gameserver.services.drop.DropService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 import ai.ActionItemNpcAI;
-import javolution.util.FastTable;
 
 /**
  * @author xTz
@@ -25,7 +25,7 @@ import javolution.util.FastTable;
 @AIName("quest_use_item")
 public class QuestItemNpcAI extends ActionItemNpcAI {
 
-	private List<Player> registeredPlayers = new FastTable<>();
+	private List<Player> registeredPlayers = new ArrayList<>();
 
 	@Override
 	protected void handleDialogStart(Player player) {

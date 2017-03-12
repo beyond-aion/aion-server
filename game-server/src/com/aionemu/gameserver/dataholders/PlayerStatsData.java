@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.dataholders;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.Unmarshaller;
@@ -14,7 +15,6 @@ import com.aionemu.gameserver.model.templates.stats.CalculatedPlayerStatsTemplat
 import com.aionemu.gameserver.model.templates.stats.PlayerStatsTemplate;
 
 import gnu.trove.map.hash.TIntObjectHashMap;
-import javolution.util.FastTable;
 
 /**
  * Created on: 31.07.2009 14:20:03
@@ -26,7 +26,7 @@ import javolution.util.FastTable;
 public class PlayerStatsData {
 
 	@XmlElement(name = "player_stats", required = true)
-	private List<PlayerStatsType> templatesList = new FastTable<>();
+	private List<PlayerStatsType> templatesList = new ArrayList<>();
 
 	private final TIntObjectHashMap<PlayerStatsTemplate> playerTemplates = new TIntObjectHashMap<>();
 

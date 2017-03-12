@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -22,8 +23,6 @@ import com.aionemu.gameserver.model.skill.PlayerSkillEntry;
 import com.aionemu.gameserver.model.skill.PlayerSkillList;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
-
-import javolution.util.FastTable;
 
 /**
  * @author SoulKeeper
@@ -63,7 +62,7 @@ public class MySQL5PlayerSkillListDAO extends PlayerSkillListDAO {
 
 	@Override
 	public PlayerSkillList loadSkillList(int playerId) {
-		List<PlayerSkillEntry> skills = new FastTable<>();
+		List<PlayerSkillEntry> skills = new ArrayList<>();
 		try {
 			try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(SELECT_QUERY)) {
 				stmt.setInt(1, playerId);

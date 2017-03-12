@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.services.serialkillers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.aionemu.gameserver.dataholders.DataManager;
@@ -11,14 +12,12 @@ import com.aionemu.gameserver.model.stats.calc.functions.StatAddFunction;
 import com.aionemu.gameserver.model.templates.serial_killer.RankPenaltyAttr;
 import com.aionemu.gameserver.model.templates.serial_killer.RankRestriction;
 
-import javolution.util.FastTable;
-
 /**
  * @author Dtem
  */
 public class SerialKillerDebuff implements StatOwner {
 
-	private List<IStatFunction> functions = new FastTable<>();
+	private List<IStatFunction> functions = new ArrayList<>();
 	private RankRestriction rankRestriction;
 
 	public void applyEffect(Player player, String type, Race race, int rank) {

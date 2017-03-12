@@ -1,6 +1,7 @@
 package com.aionemu.gameserver.geoEngine.models;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -20,8 +21,6 @@ import com.aionemu.gameserver.geoEngine.scene.Node;
 import com.aionemu.gameserver.geoEngine.scene.Spatial;
 import com.aionemu.gameserver.geoEngine.scene.mesh.DoorGeometry;
 
-import javolution.util.FastMap;
-
 /**
  * @author Mr. Poke
  */
@@ -31,11 +30,8 @@ public class GeoMap extends Node {
 
 	private short[] terrainData;
 	private List<BoundingBox> tmpBox = new ArrayList<>();
-	private Map<String, DoorGeometry> doors = new FastMap<>();
+	private Map<String, DoorGeometry> doors = new HashMap<>();
 
-	/**
-	 * 
-	 */
 	public GeoMap(String name, int worldSize) {
 		setCollisionFlags((short) (CollisionIntention.ALL.getId() << 8));
 		for (int x = 0; x < worldSize; x += 256) {

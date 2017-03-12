@@ -12,7 +12,6 @@ import javax.xml.bind.annotation.XmlType;
 import com.aionemu.gameserver.geoEngine.bounding.BoundingBox;
 import com.aionemu.gameserver.model.templates.VisibleObjectTemplate;
 
-
 /**
  * @author Wakizashi
  */

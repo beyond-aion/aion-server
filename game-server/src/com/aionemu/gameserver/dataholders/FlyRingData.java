@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.dataholders;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -9,8 +10,6 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import com.aionemu.gameserver.model.templates.flyring.FlyRingTemplate;
-
-import javolution.util.FastTable;
 
 /**
  * @author M@xx
@@ -24,7 +23,7 @@ public class FlyRingData {
 
 	public int size() {
 		if (flyRingTemplates == null) {
-			flyRingTemplates = new FastTable<>();
+			flyRingTemplates = new ArrayList<>();
 			return 0;
 		}
 		return flyRingTemplates.size();
@@ -32,14 +31,14 @@ public class FlyRingData {
 
 	public List<FlyRingTemplate> getFlyRingTemplates() {
 		if (flyRingTemplates == null) {
-			return new FastTable<>();
+			return new ArrayList<>();
 		}
 		return flyRingTemplates;
 	}
 
 	public void addAll(Collection<FlyRingTemplate> templates) {
 		if (flyRingTemplates == null) {
-			flyRingTemplates = new FastTable<>();
+			flyRingTemplates = new ArrayList<>();
 		}
 		flyRingTemplates.addAll(templates);
 	}

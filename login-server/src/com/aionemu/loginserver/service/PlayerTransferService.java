@@ -1,5 +1,7 @@
 package com.aionemu.loginserver.service;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Future;
 
@@ -20,9 +22,6 @@ import com.aionemu.loginserver.service.ptransfer.PlayerTransferStatus;
 import com.aionemu.loginserver.service.ptransfer.PlayerTransferTask;
 import com.aionemu.loginserver.utils.ThreadPoolManager;
 
-import javolution.util.FastMap;
-import javolution.util.FastTable;
-
 /**
  * @author KID
  */
@@ -35,20 +34,14 @@ public class PlayerTransferService {
 		return instance;
 	}
 
-	private Map<Integer, PlayerTransferRequest> transfers = new FastMap<>();
-	private Map<Integer, PlayerTransferTask> tasks = new FastMap<>();
-	private Future<?> veryfyTask;
+	private Map<Integer, PlayerTransferRequest> transfers = new HashMap<>();
+	private Map<Integer, PlayerTransferTask> tasks = new HashMap<>();
+	private Future<?> verifyTask;
 	private PlayerTransferDAO dao;
 
-	public PlayerTransferService() {
-		veryfyTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
-
-			@Override
-			public void run() {
-				verifyNewTasks();
-			}
-		}, 10000, 7 * 60000);
-		this.dao = DAOManager.getDAO(PlayerTransferDAO.class);
+	private PlayerTransferService() {
+		verifyTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> verifyNewTasks(), 10000, 7 * 60000);
+		dao = DAOManager.getDAO(PlayerTransferDAO.class);
 		log.info("PlayerTransferService will be initialized in 10 sec.");
 	}
 
@@ -56,7 +49,7 @@ public class PlayerTransferService {
 	 * first init. getting values from sql
 	 */
 	protected void verifyNewTasks() {
-		FastTable<PlayerTransferTask> tasksNew = this.dao.getNew();
+		List<PlayerTransferTask> tasksNew = dao.getNew();
 		log.info("PlayerTransfer perform task init. " + tasks.size() + " new tasks.");
 		for (PlayerTransferTask task : tasksNew) {
 			GameServerInfo server = GameServerTable.getGameServerInfo(task.sourceServerId);
@@ -83,21 +76,21 @@ public class PlayerTransferService {
 
 			task.status = PlayerTransferTask.STATUS_ACTIVE;
 			tasks.put(task.id, task);
-			this.dao.update(task);
+			dao.update(task);
 			server.getConnection().sendPacket(new SM_PTRANSFER_RESPONSE(PlayerTransferResultStatus.PERFORM_ACTION, task));
 			log.info("performing player transfer #" + task.id);
 		}
 	}
 
 	public void shutdown() {
-		this.veryfyTask.cancel(true);
+		verifyTask.cancel(true);
 	}
 
 	/**
 	 * sended from source server to login with character information
 	 */
 	public void requestTransfer(int taskId, String name, byte[] db) {
-		PlayerTransferTask task = this.tasks.get(taskId);
+		PlayerTransferTask task = tasks.get(taskId);
 		GameServerInfo targetServer = GameServerTable.getGameServerInfo(task.targetServerId);
 		if (targetServer == null || targetServer.getConnection() == null) {
 			log.error("Player transfer requests offline server! #" + task.targetServerId);
@@ -153,21 +146,21 @@ public class PlayerTransferService {
 	 * When source server refuse to do transfer with reason
 	 */
 	public void onTaskStop(int taskId, String reason) {
-		PlayerTransferTask task = this.tasks.remove(taskId);
+		PlayerTransferTask task = tasks.remove(taskId);
 		task.status = PlayerTransferTask.STATUS_ERROR;
 		task.comment = reason;
-		this.dao.update(task);
+		dao.update(task);
 	}
 
 	/**
 	 * response from target server after cloning character
 	 */
 	public void onError(int taskId, String reason) {
-		PlayerTransferRequest request = this.transfers.remove(taskId);
-		PlayerTransferTask task = this.tasks.remove(taskId);
+		PlayerTransferRequest request = transfers.remove(taskId);
+		PlayerTransferTask task = tasks.remove(taskId);
 		task.status = PlayerTransferTask.STATUS_ERROR;
 		task.comment = reason;
-		this.dao.update(task);
+		dao.update(task);
 		GameServerInfo targetServer = GameServerTable.getGameServerInfo(request.targetServerId);
 		if (targetServer == null || targetServer.getConnection() == null) {
 			log.error("Player transfer requests offline server! #" + request.targetServerId);
@@ -186,11 +179,11 @@ public class PlayerTransferService {
 	 * response from target server after cloning character
 	 */
 	public void onOk(int taskId) {
-		PlayerTransferRequest request = this.transfers.remove(taskId);
-		PlayerTransferTask task = this.tasks.remove(taskId);
+		PlayerTransferRequest request = transfers.remove(taskId);
+		PlayerTransferTask task = tasks.remove(taskId);
 		task.status = PlayerTransferTask.STATUS_DONE;
 		task.comment = "task done";
-		this.dao.update(task);
+		dao.update(task);
 		GameServerInfo sourceServer = GameServerTable.getGameServerInfo(request.serverId);
 		if (sourceServer == null || sourceServer.getConnection() == null) {
 			log.error("Player transfer requests offline server! #" + request.serverId);

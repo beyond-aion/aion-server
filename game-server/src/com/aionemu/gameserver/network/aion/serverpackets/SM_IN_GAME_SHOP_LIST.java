@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -10,7 +11,6 @@ import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 
 import gnu.trove.map.hash.TIntObjectHashMap;
-import javolution.util.FastTable;
 
 /**
  * @author xTz, KID
@@ -20,7 +20,7 @@ public class SM_IN_GAME_SHOP_LIST extends AionServerPacket {
 	private Player player;
 	private int nrList;
 	private int salesRanking;
-	private TIntObjectHashMap<FastTable<IGItem>> allItems = new TIntObjectHashMap<>();
+	private TIntObjectHashMap<List<IGItem>> allItems = new TIntObjectHashMap<>();
 
 	public SM_IN_GAME_SHOP_LIST(Player player, int nrList, int salesRanking) {
 		this.player = player;
@@ -48,9 +48,9 @@ public class SM_IN_GAME_SHOP_LIST extends AionServerPacket {
 					tabSize += 9;
 					f++;
 				}
-				FastTable<IGItem> template = allItems.get(f);
+				List<IGItem> template = allItems.get(f);
 				if (template == null) {
-					template = new FastTable<>();
+					template = new ArrayList<>();
 					allItems.put(f, template);
 				}
 				template.add(a);
@@ -66,7 +66,7 @@ public class SM_IN_GAME_SHOP_LIST extends AionServerPacket {
 				for (IGItem item : inAllItems)
 					writeD(item.getObjectId());
 		} else {
-			FastTable<Integer> salesRankingItems = InGameShopEn.getInstance().getTopSales(subCategory, category);
+			List<Integer> salesRankingItems = InGameShopEn.getInstance().getTopSales(subCategory, category);
 			writeD(salesRanking);
 			writeD(nrList);
 			writeD((InGameShopEn.getInstance().getMaxList(subCategory, category) + 1) * 9);

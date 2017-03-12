@@ -1,8 +1,7 @@
 package com.aionemu.gameserver.model.account;
 
+import java.util.ArrayList;
 import java.util.List;
-
-import javolution.util.FastTable;
 
 /**
  * @author ViAl
@@ -12,7 +11,7 @@ public class PassportsList {
 	private final List<Passport> passports;
 
 	public PassportsList() {
-		passports = new FastTable<>();
+		passports = new ArrayList<>();
 	}
 
 	public void addPassport(Passport passport) {

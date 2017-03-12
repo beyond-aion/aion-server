@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.model.stats.calc.functions;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.aionemu.gameserver.model.gameobjects.Item;
@@ -9,14 +10,12 @@ import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.model.templates.item.ItemTemplate;
 import com.aionemu.gameserver.model.templates.stats.PlayerStatsTemplate;
 
-import javolution.util.FastTable;
-
 /**
  * @author ATracer
  */
 public class PlayerStatFunctions {
 
-	private static final List<IStatFunction> FUNCTIONS = new FastTable<>();
+	private static final List<IStatFunction> FUNCTIONS = new ArrayList<>();
 
 	static {
 		FUNCTIONS.add(new PhysicalAttackFunction());
@@ -167,7 +166,7 @@ class DuplicateStatFunction extends StatFunction {
 		if (mainWeapon != null) {
 			StatFunction func1 = null;
 			StatFunction func2 = null;
-			List<StatFunction> functions = new FastTable<>();
+			List<StatFunction> functions = new ArrayList<>();
 			List<StatFunction> functions1 = mainWeapon.getItemTemplate().getModifiers();
 
 			if (functions1 != null) {
@@ -213,7 +212,7 @@ class DuplicateStatFunction extends StatFunction {
 	}
 
 	private List<StatFunction> getFunctions(List<StatFunction> list, Stat2 stat, Item item) {
-		List<StatFunction> functions = new FastTable<>();
+		List<StatFunction> functions = new ArrayList<>();
 		for (StatFunction func : list) {
 			if (func.getName() == getName()) {
 				StatFunctionProxy func2 = new StatFunctionProxy(item, func);

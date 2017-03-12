@@ -1,6 +1,10 @@
 package com.aionemu.gameserver.spawnengine;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -9,16 +13,13 @@ import com.aionemu.gameserver.model.templates.spawns.SpawnGroup;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.model.templates.spawns.TemporarySpawn;
 
-import javolution.util.FastMap;
-import javolution.util.FastTable;
-
 /**
  * @author xTz
  */
 public class TemporarySpawnEngine {
 
-	private static final FastTable<SpawnGroup> temporarySpawns = new FastTable<>();
-	private static final FastMap<SpawnGroup, HashSet<Integer>> tempSpawnInstanceMap = new FastMap<>();
+	private static final List<SpawnGroup> temporarySpawns = new ArrayList<>();
+	private static final Map<SpawnGroup, HashSet<Integer>> tempSpawnInstanceMap = new HashMap<>();
 
 	public static void spawnAll() {
 		spawn(true);

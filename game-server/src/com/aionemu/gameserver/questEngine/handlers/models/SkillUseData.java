@@ -13,11 +13,9 @@ import javax.xml.bind.annotation.XmlType;
 import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.handlers.template.SkillUse;
 
-import javolution.util.FastMap;
-
 /**
  * @author vlog
- * @modified Bobobear, Pad
+ * @modified Bobobear, Pad, Neon
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "SkillUseData", propOrder = { "skills" })
@@ -34,11 +32,7 @@ public class SkillUseData extends XMLQuest {
 
 	@Override
 	public void register(QuestEngine questEngine) {
-		FastMap<List<Integer>, QuestSkillData> questSkills = new FastMap<>();
-		for (QuestSkillData qsd : skills) {
-			questSkills.put(qsd.getSkillIds(), qsd);
-		}
-		questEngine.addQuestHandler(new SkillUse(id, startNpcIds, endNpcIds, questSkills));
+		questEngine.addQuestHandler(new SkillUse(id, startNpcIds, endNpcIds, skills));
 	}
 
 	@Override

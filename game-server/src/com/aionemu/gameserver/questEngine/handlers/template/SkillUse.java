@@ -1,18 +1,18 @@
 package com.aionemu.gameserver.questEngine.handlers.template;
 
+import static com.aionemu.gameserver.model.DialogAction.*;
+
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.handlers.models.QuestSkillData;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-
-import javolution.util.FastMap;
 
 /**
  * @author vlog
@@ -22,9 +22,9 @@ public class SkillUse extends QuestHandler {
 
 	private final Set<Integer> startNpcIds = new HashSet<>();
 	private final Set<Integer> endNpcIds = new HashSet<>();
-	private final FastMap<List<Integer>, QuestSkillData> qsd;
+	private final List<QuestSkillData> qsd;
 
-	public SkillUse(int questId, List<Integer> startNpcIds, List<Integer> endNpcIds, FastMap<List<Integer>, QuestSkillData> qsd) {
+	public SkillUse(int questId, List<Integer> startNpcIds, List<Integer> endNpcIds, List<QuestSkillData> qsd) {
 		super(questId);
 		if (startNpcIds != null)
 			this.startNpcIds.addAll(startNpcIds);
@@ -32,7 +32,7 @@ public class SkillUse extends QuestHandler {
 			this.endNpcIds.addAll(endNpcIds);
 		else
 			this.endNpcIds.addAll(this.startNpcIds);
-		this.qsd = qsd;
+		this.qsd = qsd == null ? Collections.emptyList() : qsd;
 	}
 
 	@Override
@@ -45,8 +45,8 @@ public class SkillUse extends QuestHandler {
 			for (Integer endNpcId : endNpcIds)
 				qe.registerQuestNpc(endNpcId).addOnTalkEvent(questId);
 		}
-		for (List<Integer> skillIds : qsd.keySet()) {
-			for (Integer skillId : skillIds)
+		for (QuestSkillData questSkillData : qsd) {
+			for (Integer skillId : questSkillData.getSkillIds())
 				qe.registerQuestSkill(skillId, questId);
 		}
 	}
@@ -91,7 +91,7 @@ public class SkillUse extends QuestHandler {
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			byte rewardCount = 0;
 			boolean success = false;
-			for (QuestSkillData qd : qsd.values()) {
+			for (QuestSkillData qd : qsd) {
 				if (qd.getSkillIds().contains(skillId)) {
 					int endVar = qd.getEndVar();
 					int varId = qd.getVarNum();

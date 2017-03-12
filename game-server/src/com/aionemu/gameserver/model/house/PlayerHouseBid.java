@@ -5,7 +5,7 @@ import java.sql.Timestamp;
 /**
  * @author Rolandas
  */
-public class PlayerHouseBid implements Comparable<PlayerHouseBid> {
+public class PlayerHouseBid {
 
 	private int playerId;
 	private int houseId;
@@ -33,14 +33,6 @@ public class PlayerHouseBid implements Comparable<PlayerHouseBid> {
 
 	public Timestamp getTime() {
 		return time;
-	}
-
-	/**
-	 * Order by date ascending
-	 */
-	@Override
-	public int compareTo(PlayerHouseBid o) {
-		return (int) (time.getTime() - o.getTime().getTime());
 	}
 
 }

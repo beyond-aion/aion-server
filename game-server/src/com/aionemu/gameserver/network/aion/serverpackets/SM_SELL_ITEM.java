@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.aionemu.gameserver.dataholders.DataManager;
@@ -10,8 +11,6 @@ import com.aionemu.gameserver.model.templates.tradelist.TradeNpcType;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 import com.aionemu.gameserver.services.trade.PricesService;
-
-import javolution.util.FastTable;
 
 /**
  * @author orz, Sarynth
@@ -33,7 +32,7 @@ public class SM_SELL_ITEM extends AionServerPacket {
 		this.buyPriceRate = tradeList != null ? tradeList.getBuyPriceRate() : PricesService.getVendorSellModifier();
 		this.showBuyTab = npc.canSell();
 		this.showSellTab = npc.canBuy() || npc.canPurchase();
-		this.tradeTabs = tradeList != null ? tradeList.getTradeTablist() : new FastTable<>();
+		this.tradeTabs = tradeList != null ? tradeList.getTradeTablist() : new ArrayList<>();
 	}
 
 	@Override

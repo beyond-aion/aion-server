@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.services.toypet;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.TreeSet;
@@ -13,8 +14,6 @@ import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.templates.pet.PetFeedResult;
 import com.aionemu.gameserver.model.templates.pet.PetFlavour;
 import com.aionemu.gameserver.model.templates.pet.PetRewards;
-
-import javolution.util.FastTable;
 
 /**
  * @author Rolandas
@@ -174,7 +173,7 @@ public final class PetFeedCalculator {
 		if (progress.isLovedFeeded()) { // for cash feed
 			if (rewardGroup.getResults().size() == 1)
 				return rewardGroup.getResults().get(0);
-			List<PetFeedResult> validRewards = new FastTable<>();
+			List<PetFeedResult> validRewards = new ArrayList<>();
 			int maxLevel = 0;
 			for (PetFeedResult result : rewardGroup.getResults()) {
 				int resultLevel = DataManager.ITEM_DATA.getItemTemplate(result.getItem()).getLevel();

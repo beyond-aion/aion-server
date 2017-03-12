@@ -1,6 +1,7 @@
 package com.aionemu.gameserver.model.town;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,8 +20,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_TOWNS_LIST;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.World;
-
-import javolution.util.FastTable;
 
 /**
  * @author ViAl
@@ -49,7 +48,7 @@ public class Town {
 		this.levelUpDate = levelUpDate;
 		this.race = race;
 		this.persistentState = PersistentState.UPDATED;
-		this.spawnedNpcs = new FastTable<>();
+		this.spawnedNpcs = new ArrayList<>();
 		spawnNewObjects();
 	}
 

@@ -1,5 +1,6 @@
 package ai.instance.rentusBase;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.Future;
@@ -23,13 +24,12 @@ import com.aionemu.gameserver.model.skill.QueuedNpcSkillEntry;
 import com.aionemu.gameserver.model.templates.npcskill.QueuedNpcSkillTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.skillengine.SkillEngine;
-import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
 import ai.AggressiveNpcAI;
-import javolution.util.FastTable;
 
 /**
  * @author xTz
@@ -37,13 +37,13 @@ import javolution.util.FastTable;
 @AIName("brigade_general_vasharti")
 public class BrigadeGeneralVashartiAI extends AggressiveNpcAI {
 
-	private List<Integer> percents = new FastTable<>();
+	private List<Integer> percents = new ArrayList<>();
 	private AtomicBoolean isHome = new AtomicBoolean(true);
 	private boolean canThink = true;
 	private Future<?> flameBuffTask;
 	private Future<?> flameSmashTask;
-	private List<Point3D> blueFlameSmashs = new FastTable<>();
-	private List<Point3D> redFlameSmashs = new FastTable<>();
+	private List<Point3D> blueFlameSmashs = new ArrayList<>();
+	private List<Point3D> redFlameSmashs = new ArrayList<>();
 	private int flameSmashCount = 1;
 	private AtomicBoolean isInFlameShowerTask = new AtomicBoolean();
 
@@ -260,7 +260,7 @@ public class BrigadeGeneralVashartiAI extends AggressiveNpcAI {
 	}
 
 	private List<Point3D> getRedFlameSmashs(int npcId) {
-		return (npcId == 283008 ? redFlameSmashs : blueFlameSmashs).stream().filter(flameSmash -> !isSpawned(npcId, flameSmash)).collect(Collectors.toCollection(FastTable::new));
+		return (npcId == 283008 ? redFlameSmashs : blueFlameSmashs).stream().filter(flameSmash -> !isSpawned(npcId, flameSmash)).collect(Collectors.toCollection(ArrayList::new));
 	}
 
 	private void deleteNpcs(List<Npc> npcs) {

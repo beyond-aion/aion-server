@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.skillengine.effect;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.Unmarshaller;
@@ -30,8 +31,6 @@ import com.aionemu.gameserver.skillengine.model.HopType;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.skillengine.model.SpellStatus;
 import com.aionemu.gameserver.utils.stats.StatFunctions;
-
-import javolution.util.FastTable;
 
 /**
  * @author ATracer
@@ -366,9 +365,9 @@ public abstract class EffectTemplate {
 
 	private boolean nextEffectCheck(Effect effect, SpellStatus spellStatus, StatEnum statEnum) {
 		EffectTemplate firstEffect = effect.effectInPos(1);
-		if (this.getPosition() > 1) {
+		if (getPosition() > 1) {
 			if (Rnd.chance() < this.getPreEffectProb()) {
-				FastTable<Integer> positions = getPreEffects();
+				List<Integer> positions = getPreEffects();
 				int successCount = 0;
 				for (int pos : positions) {
 					if (effect.isInSuccessEffects(pos)) {
@@ -426,8 +425,8 @@ public abstract class EffectTemplate {
 		return effectConditions != null ? effectConditions.validate(effect) : true;
 	}
 
-	private FastTable<Integer> getPreEffects() {
-		FastTable<Integer> preEffects = new FastTable<>();
+	private List<Integer> getPreEffects() {
+		List<Integer> preEffects = new ArrayList<>();
 
 		if (this.getPreEffect() == null)
 			return preEffects;

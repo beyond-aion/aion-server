@@ -1,5 +1,8 @@
 package com.aionemu.gameserver.controllers;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.RequestResponseHandler;
@@ -20,8 +23,6 @@ import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
 
-import javolution.util.FastMap;
-
 /**
  * @author ATracer, Source
  */
@@ -30,7 +31,7 @@ public class RVController extends NpcController {
 	private boolean isMaster = false;
 	private boolean isVortex = false;
 	private boolean isVolatile = false;
-	protected FastMap<Integer, Player> passedPlayers = new FastMap<>();
+	private final Map<Integer, Player> passedPlayers = new HashMap<>();
 	private SpawnTemplate slaveSpawnTemplate;
 	private Npc slave;
 	private Integer maxEntries;
@@ -236,7 +237,7 @@ public class RVController extends NpcController {
 		return deSpawnedTime - (int) (System.currentTimeMillis() / 1000);
 	}
 
-	public FastMap<Integer, Player> getPassedPlayers() {
+	public Map<Integer, Player> getPassedPlayers() {
 		return passedPlayers;
 	}
 

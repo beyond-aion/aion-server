@@ -1,6 +1,7 @@
 package com.aionemu.gameserver.services;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,8 +38,6 @@ import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.WorldPosition;
-
-import javolution.util.FastTable;
 
 /**
  * @author Rolandas
@@ -129,7 +128,7 @@ public class HousingService {
 
 				List<House> housesForMap = housesByMapId.get(worldId);
 				if (housesForMap == null) {
-					housesForMap = new FastTable<>();
+					housesForMap = new ArrayList<>();
 					housesByMapId.put(worldId, housesForMap);
 				}
 				housesForMap.add(customHouse);
@@ -141,7 +140,7 @@ public class HousingService {
 	}
 
 	public List<House> searchPlayerHouses(int playerObjId) {
-		List<House> houses = new FastTable<>();
+		List<House> houses = new ArrayList<>();
 		synchronized (studios) {
 			if (studios.containsKey(playerObjId)) {
 				houses.add(studios.get(playerObjId));
@@ -171,7 +170,7 @@ public class HousingService {
 	}
 
 	public void resetAppearance(House house) {
-		FastTable<HouseDecoration> customParts = house.getRegistry().getCustomParts();
+		List<HouseDecoration> customParts = house.getRegistry().getCustomParts();
 		for (HouseDecoration deco : customParts) {
 			deco.setPersistentState(PersistentState.DELETED);
 		}
@@ -279,8 +278,8 @@ public class HousingService {
 		controller.spawnObjects();
 	}
 
-	public FastTable<House> getCustomHouses() {
-		FastTable<House> houses = new FastTable<>();
+	public List<House> getCustomHouses() {
+		List<House> houses = new ArrayList<>();
 		for (List<House> mapHouses : housesByMapId.values())
 			houses.addAll(mapHouses);
 		return houses;

@@ -1,5 +1,6 @@
 package ai.instance.raksang;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -14,7 +15,6 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 import ai.AggressiveNpcAI;
-import javolution.util.FastTable;
 
 /**
  * @author xTz
@@ -106,7 +106,7 @@ public class RakshaAI extends AggressiveNpcAI {
 	}
 
 	private List<Player> getLifedPlayers() {
-		List<Player> players = new FastTable<>();
+		List<Player> players = new ArrayList<>();
 		getKnownList().forEachPlayer(player -> {
 			if (!PlayerActions.isAlreadyDead(player)) {
 				players.add(player);

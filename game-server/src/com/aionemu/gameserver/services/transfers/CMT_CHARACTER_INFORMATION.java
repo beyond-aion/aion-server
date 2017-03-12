@@ -1,6 +1,7 @@
 package com.aionemu.gameserver.services.transfers;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -49,8 +50,6 @@ import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.utils.idfactory.IDFactory;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.WorldPosition;
-
-import javolution.util.FastTable;
 
 /**
  * @author KID
@@ -184,7 +183,7 @@ public class CMT_CHARACTER_INFORMATION extends AionClientPacket {
 			int optFusion = readD();
 
 			int charge = readD();
-			FastTable<int[]> manastones = new FastTable<>(), fusions = new FastTable<>();
+			List<int[]> manastones = new ArrayList<>(), fusions = new ArrayList<>();
 			byte len = readC();
 			for (byte b = 0; b < len; b++) {
 				manastones.add(new int[] { readD(), readD() });

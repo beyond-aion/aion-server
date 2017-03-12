@@ -108,7 +108,7 @@ public class PlayerEffectController extends EffectController {
 		}
 
 		Effect effect = new Effect(getOwner(), getOwner(), template, skillLvl, remainingTime);
-		abnormalEffectMap.put(effect.getStack(), effect);
+		getMapForEffect(effect).put(effect.getStack(), effect);
 		effect.addAllEffectToSucess();
 		effect.startEffect(true);
 

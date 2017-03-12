@@ -1,6 +1,8 @@
 package com.aionemu.gameserver.model.gameobjects.player;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -94,9 +96,6 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.rates.Rates;
 import com.aionemu.gameserver.utils.rates.RegularRates;
 import com.aionemu.gameserver.world.WorldPosition;
-
-import javolution.util.FastMap;
-import javolution.util.FastTable;
 
 /**
  * This class is representing Player object, it contains all needed data.
@@ -611,7 +610,7 @@ public class Player extends Creature {
 	 * @return
 	 */
 	public List<Item> getDirtyItemsToUpdate() {
-		List<Item> dirtyItems = new FastTable<>();
+		List<Item> dirtyItems = new ArrayList<>();
 
 		for (StorageType st : StorageType.values()) {
 			IStorage storage = getStorage(st.getId());
@@ -635,8 +634,8 @@ public class Player extends Creature {
 	 * 
 	 * @return
 	 */
-	public FastTable<Item> getAllItems() {
-		FastTable<Item> items = new FastTable<>();
+	public List<Item> getAllItems() {
+		List<Item> items = new ArrayList<>();
 		items.addAll(inventory.getItemsWithKinah());
 		items.addAll(regularWarehouse.getItemsWithKinah());
 		items.addAll(playerAccount.getAccountWarehouse().getItemsWithKinah());
@@ -1740,7 +1739,7 @@ public class Player extends Creature {
 	}
 
 	private PlayerVarsDAO daoVars;
-	private Map<String, Object> vars = new FastMap<>();
+	private Map<String, Object> vars = new LinkedHashMap<>();
 
 	public boolean hasVar(String key) {
 		return vars.containsKey(key);
@@ -1935,7 +1934,7 @@ public class Player extends Creature {
 
 	public void setRideObservers(ActionObserver observer) {
 		if (rideObservers == null)
-			rideObservers = new FastTable<>();
+			rideObservers = new ArrayList<>();
 
 		rideObservers.add(observer);
 	}

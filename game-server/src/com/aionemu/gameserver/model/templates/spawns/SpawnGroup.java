@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.model.templates.spawns;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -20,8 +21,6 @@ import com.aionemu.gameserver.model.vortex.VortexStateType;
 import com.aionemu.gameserver.services.panesterra.ahserion.PanesterraTeamId;
 import com.aionemu.gameserver.spawnengine.SpawnHandlerType;
 
-import javolution.util.FastTable;
-
 /**
  * @author xTz
  * @modified Rolandas
@@ -37,7 +36,7 @@ public class SpawnGroup extends AbstractLockManager {
 	private TemporarySpawn temporarySpawn;
 	private int respawnTime;
 	private SpawnHandlerType handlerType;
-	private List<SpawnTemplate> spots = new FastTable<>();
+	private List<SpawnTemplate> spots = new ArrayList<>();
 	private HashMap<Integer, HashMap<SpawnTemplate, Boolean>> poolUsedTemplates;
 
 	public SpawnGroup(int worldId, Spawn spawn) {
@@ -176,7 +175,7 @@ public class SpawnGroup extends AbstractLockManager {
 
 	public SpawnTemplate getRndTemplate(int instanceId) {
 		final List<SpawnTemplate> allTemplates = spots;
-		List<SpawnTemplate> templates = new FastTable<>();
+		List<SpawnTemplate> templates = new ArrayList<>();
 		super.readLock();
 		try {
 			for (SpawnTemplate template : allTemplates) {
@@ -191,7 +190,7 @@ public class SpawnGroup extends AbstractLockManager {
 		} finally {
 			super.readUnlock();
 		}
-		SpawnTemplate spawnTemplate = templates.get(Rnd.get(0, templates.size() - 1));
+		SpawnTemplate spawnTemplate = Rnd.get(templates);
 		setTemplateUse(instanceId, spawnTemplate, true);
 		return spawnTemplate;
 	}

@@ -19,7 +19,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.StringReader;
 
-
 /**
  * Based on the work of <a href="https://github.com/anjlab/logback-hipchat-appender">Dmitry Gusev</a>
  * 

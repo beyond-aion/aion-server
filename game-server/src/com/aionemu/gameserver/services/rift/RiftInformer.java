@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.services.rift;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -12,8 +13,6 @@ import com.aionemu.gameserver.network.aion.AionServerPacket;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_RIFT_ANNOUNCE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.World;
-
-import javolution.util.FastTable;
 
 /**
  * @author Source
@@ -48,7 +47,7 @@ public class RiftInformer {
 	}
 
 	private static List<AionServerPacket> getPackets(int worldId, int objId) {
-		List<AionServerPacket> packets = new FastTable<>();
+		List<AionServerPacket> packets = new ArrayList<>();
 		if (objId == -1) {
 			for (Npc rift : RiftManager.getSpawnedRifts(worldId)) {
 				RVController controller = (RVController) rift.getController();

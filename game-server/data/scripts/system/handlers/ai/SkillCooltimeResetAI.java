@@ -24,8 +24,8 @@ import com.aionemu.gameserver.skillengine.action.Action;
 import com.aionemu.gameserver.skillengine.action.DpUseAction;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.skillengine.model.TransformType;
-import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.geo.GeoService;
 
@@ -44,8 +44,7 @@ public class SkillCooltimeResetAI extends NpcAI {
 	protected void handleSpawned() {
 		super.handleSpawned();
 		if (PvpMapService.getInstance().isOnPvPMap(getOwner())) {
-			getOwner().getController().addTask(TaskId.DESPAWN,
-				ThreadPoolManager.getInstance().schedule(() -> getOwner().getController().delete(), 30000));
+			getOwner().getController().addTask(TaskId.DESPAWN, ThreadPoolManager.getInstance().schedule(() -> getOwner().getController().delete(), 30000));
 			ThreadPoolManager.getInstance().schedule(() -> {
 				getOwner().getKnownList().forEachPlayer(p -> {
 					if (p.getLifeStats().isAlreadyDead() || !getOwner().canSee(p) || playersInSight.containsKey(p.getObjectId()))
@@ -69,7 +68,7 @@ public class SkillCooltimeResetAI extends NpcAI {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_CANT_CAST_IN_COMBAT_STATE());
 		else if (player.isTransformed() && player.getTransformModel().getType() == TransformType.AVATAR)
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_CAN_NOT_ACT_WHILE_IN_ABNORMAL_STATE());
-		else if (player.getSkillCoolDowns().isEmpty() || checkCooldowns(player))
+		else if (player.getSkillCoolDowns() == null || player.getSkillCoolDowns().isEmpty() || checkCooldowns(player))
 			PacketSendUtility.sendPacket(player, new SM_MESSAGE(getOwner(), "Daeva has no skill cooldowns to reset, yang.", ChatType.NPC));
 		else
 			sendRequest(player);

@@ -27,7 +27,7 @@ public class SM_NEARBY_QUESTS extends AionServerPacket {
 			int questId = nearbyQuest.getKey();
 			if (nearbyQuest.getValue() > 0)
 				questId |= notYetAvailableBit; // for transparent/grey quest marker above npc's head
-			writeD(questId); // quest id max 65535, because of short data type
+			writeD(questId);
 		}
 	}
 }

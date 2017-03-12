@@ -1,6 +1,7 @@
 package com.aionemu.gameserver.services.ban;
 
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -8,8 +9,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.network.chatserver.ChatServer;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
-
-import javolution.util.FastMap;
 
 /**
  * @author ViAl
@@ -20,7 +19,7 @@ public class ChatBanService {
 	/**
 	 * List for player chat bans <player, expiration time>. Resets on server restart.
 	 */
-	private static final Map<Integer, Long> chatBans = new FastMap<Integer, Long>().atomic();
+	private static final Map<Integer, Long> chatBans = new ConcurrentHashMap<>();
 
 	/**
 	 * Bans a player from all chats.

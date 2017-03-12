@@ -1,6 +1,7 @@
 package com.aionemu.gameserver.model.account;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -8,8 +9,6 @@ import java.util.Map;
 
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.items.storage.Storage;
-
-import javolution.util.FastTable;
 
 /**
  * This class represents game account and is holding such informations as:
@@ -211,7 +210,7 @@ public class Account implements Iterable<PlayerAccountData> {
 	}
 
 	public List<PlayerAccountData> getPlayerAccDataList() {
-		return FastTable.of(players.values());
+		return new ArrayList<>(players.values());
 	}
 
 	@Override

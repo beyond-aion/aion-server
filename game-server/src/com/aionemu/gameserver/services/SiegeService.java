@@ -1,8 +1,10 @@
 package com.aionemu.gameserver.services;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -62,9 +64,6 @@ import com.aionemu.gameserver.world.WorldType;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Maps;
 
-import javolution.util.FastMap;
-import javolution.util.FastTable;
-
 /**
  * 3.0 siege update (https://docs.google.com/document/d/1HVOw8-w9AlRp4ci0ei4iAzNaSKzAHj_xORu-qIQJFmc/edit#)
  * 
@@ -96,7 +95,7 @@ public class SiegeService {
 	private SiegeSchedule siegeSchedule;
 
 	// Player list on RVR Event.
-	private List<Player> rvrPlayersOnEvent = new FastTable<>();
+	private List<Player> rvrPlayersOnEvent = new ArrayList<>();
 
 	/**
 	 * Returns the single instance of siege service
@@ -407,7 +406,7 @@ public class SiegeService {
 
 			List<Trigger> storage = siegeIdToStartTriggers.get(fssr.getLocationId());
 			if (storage == null) {
-				storage = new FastTable<>();
+				storage = new ArrayList<>();
 				siegeIdToStartTriggers.put(fssr.getLocationId(), storage);
 			}
 			storage.addAll(CronService.getInstance().getJobTriggers(entry.getValue()));
@@ -415,7 +414,7 @@ public class SiegeService {
 
 		// update each fortress next state
 		for (Map.Entry<Integer, List<Trigger>> entry : siegeIdToStartTriggers.entrySet()) {
-			List<Date> nextFireDates = new FastTable<>();
+			List<Date> nextFireDates = new ArrayList<>();
 			for (Trigger trigger : entry.getValue()) {
 				nextFireDates.add(trigger.getNextFireTime());
 			}
@@ -535,7 +534,7 @@ public class SiegeService {
 	}
 
 	public Map<Integer, SiegeLocation> getSiegeLocations(int worldId) {
-		Map<Integer, SiegeLocation> mapLocations = new FastMap<>();
+		Map<Integer, SiegeLocation> mapLocations = new LinkedHashMap<>();
 		for (SiegeLocation location : getSiegeLocations().values())
 			if (location.getWorldId() == worldId)
 				mapLocations.put(location.getLocationId(), location);
@@ -762,8 +761,8 @@ public class SiegeService {
 
 	public void onEnterSiegeWorld(Player player) {
 		// Second part only for siege world
-		Map<Integer, SiegeLocation> worldLocations = new FastMap<>();
-		Map<Integer, ArtifactLocation> worldArtifacts = new FastMap<>();
+		Map<Integer, SiegeLocation> worldLocations = new LinkedHashMap<>();
+		Map<Integer, ArtifactLocation> worldArtifacts = new LinkedHashMap<>();
 
 		for (SiegeLocation location : getSiegeLocations().values())
 			if (location.getWorldId() == player.getWorldId())
@@ -887,6 +886,6 @@ public class SiegeService {
 
 	// clear RVR event players list
 	public void clearRvrPlayersOnEvent() {
-		rvrPlayersOnEvent = new FastTable<>();
+		rvrPlayersOnEvent = new ArrayList<>();
 	}
 }

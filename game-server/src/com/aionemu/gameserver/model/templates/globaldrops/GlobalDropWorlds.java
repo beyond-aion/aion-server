@@ -1,13 +1,12 @@
 package com.aionemu.gameserver.model.templates.globaldrops;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
-
-import javolution.util.FastTable;
 
 /**
  * @author AionCool
@@ -22,7 +21,7 @@ public class GlobalDropWorlds {
 
 	public List<GlobalDropWorld> getGlobalDropWorlds() {
 		if (gdWorlds == null) {
-			gdWorlds = new FastTable<>();
+			gdWorlds = new ArrayList<>();
 		}
 		return this.gdWorlds;
 	}

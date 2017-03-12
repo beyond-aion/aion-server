@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -10,8 +11,6 @@ import com.aionemu.gameserver.model.team.alliance.PlayerAlliance;
 import com.aionemu.gameserver.model.team.common.legacy.LootGroupRules;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
-
-import javolution.util.FastTable;
 
 /**
  * @author Sarynth, xTz
@@ -27,7 +26,7 @@ public class SM_ALLIANCE_INFO extends AionServerPacket {
 	private final int messageId;
 	private final String message;
 	private boolean isLeague;
-	private final List<AllianceInfo> leagueData = new FastTable<>();
+	private final List<AllianceInfo> leagueData = new ArrayList<>();
 	public static final int VICECAPTAIN_PROMOTE = 1300984;
 	public static final int VICECAPTAIN_DEMOTE = 1300985;
 	public static final int LEAGUE_ALLIANCE_ENTERED = 1400560; // Your alliance has joined %0's Alliance League.

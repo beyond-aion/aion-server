@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -22,8 +23,6 @@ import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.WorldMapInstance;
-
-import javolution.util.FastTable;
 
 /**
  * Packet for telporting by using relationship crystal
@@ -57,7 +56,7 @@ public class CM_HOUSE_TELEPORT extends AionClientPacket {
 		if (actionId == 1) {
 			playerId2 = playerId1;
 		} else if (actionId == 3) {
-			List<Integer> relationIds = new FastTable<>();
+			List<Integer> relationIds = new ArrayList<>();
 			Iterator<Friend> friends = player1.getFriendList().iterator();
 			int address = 0;
 

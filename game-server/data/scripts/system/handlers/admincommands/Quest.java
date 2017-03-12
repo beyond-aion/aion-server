@@ -27,8 +27,6 @@ import com.aionemu.gameserver.utils.Util;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 import com.aionemu.gameserver.world.World;
 
-import javolution.util.FastTable;
-
 /**
  * @author MrPoke
  * @reworked Neon
@@ -309,7 +307,7 @@ public class Quest extends AdminCommand {
 				qs.setQuestVarById(varNum, var);
 		}
 		if (actionType == ActionType.ADD && status == QuestStatus.COMPLETE)
-			PacketSendUtility.sendPacket(target, new SM_QUEST_COMPLETED_LIST(1, FastTable.of(qs)));
+			PacketSendUtility.sendPacket(target, new SM_QUEST_COMPLETED_LIST(1, Arrays.asList(qs)));
 		else
 			PacketSendUtility.sendPacket(target, new SM_QUEST_ACTION(actionType, qs));
 		target.getController().updateNearbyQuests();

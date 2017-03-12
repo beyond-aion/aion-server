@@ -37,7 +37,6 @@ import java.util.logging.Logger;
 
 import com.aionemu.gameserver.geoEngine.utils.BufferUtils;
 
-
 /**
  * <code>Matrix4f</code> defines and maintains a 4x4 matrix in row major order.
  * This matrix is intended for use in a translation and rotational capacity.

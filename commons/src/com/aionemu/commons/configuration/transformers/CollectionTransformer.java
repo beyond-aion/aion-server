@@ -5,7 +5,9 @@ import java.lang.reflect.Modifier;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.lang.reflect.WildcardType;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -16,15 +18,12 @@ import com.aionemu.commons.configuration.Property;
 import com.aionemu.commons.configuration.PropertyTransformer;
 import com.aionemu.commons.configuration.PropertyTransformerFactory;
 
-import javolution.util.FastSet;
-import javolution.util.FastTable;
-
 /**
  * Returns a <code>Collection</code> containing the comma separated items.<br>
  * If the declared class is an interface, the following implementations will be used:
  * <ul>
- * <li>{@link List} as {@link FastTable}</li>
- * <li>{@link Set} as {@link FastSet}</li>
+ * <li>{@link List} as {@link ArrayList}</li>
+ * <li>{@link Set} as {@link HashSet}</li>
  * </ul>
  * <p/>
  * Normal classes will be invoked via the reflective #newInstance() method.
@@ -47,9 +46,9 @@ public class CollectionTransformer extends PropertyTransformer<Collection<?>> {
 			if (type == Collection.class)
 				throw new UnsupportedDataTypeException("Collection type (subclass) must be specified.");
 			else if (type == List.class)
-				collection = new FastTable<>();
+				collection = new ArrayList<>();
 			else if (type == Set.class)
-				collection = new FastSet<>();
+				collection = new HashSet<>();
 			else
 				throw new UnsupportedDataTypeException("No default implementation for " + type + ", non abstract/interface class must be declared.");
 		} else {

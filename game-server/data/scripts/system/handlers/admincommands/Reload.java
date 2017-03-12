@@ -1,6 +1,7 @@
 package admincommands;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -26,8 +27,6 @@ import com.aionemu.gameserver.questEngine.handlers.models.XMLQuest;
 import com.aionemu.gameserver.services.EventService;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 import com.aionemu.gameserver.utils.chathandlers.ChatProcessor;
-
-import javolution.util.FastTable;
 
 /**
  * @author MrPoke
@@ -60,7 +59,7 @@ public class Reload extends AdminCommand {
 			File xml = new File("./data/static_data/quest_data/quest_data.xml");
 			QuestsData data = JAXBUtil.deserialize(xml, QuestsData.class, "./data/static_data/static_data.xsd");
 			DataManager.QUEST_DATA.setQuestsData(data.getQuestsData());
-			List<XMLQuest> templates = new FastTable<>();
+			List<XMLQuest> templates = new ArrayList<>();
 			Collection<File> files = XmlUtil.listFiles("./data/static_data/quest_script_data", true);
 			JAXBUtil.deserialize(files, XMLQuests.class, "./data/static_data/static_data.xsd").forEach(e -> templates.addAll(e.getAllQuests()));
 			DataManager.XML_QUESTS.setData(templates);
@@ -72,7 +71,7 @@ public class Reload extends AdminCommand {
 			DataManager.SKILL_DATA.setSkillTemplates(data.getSkillTemplates());
 			sendInfo(admin, DataManager.SKILL_DATA.size() + " skills loaded.");
 		} else if (params[0].equalsIgnoreCase("npcskills")) {
-			List<NpcSkillTemplates> templates = new FastTable<>();
+			List<NpcSkillTemplates> templates = new ArrayList<>();
 			Collection<File> files = XmlUtil.listFiles("./data/static_data/npc_skills", true);
 			JAXBUtil.deserialize(files, NpcSkillData.class, "./data/static_data/static_data.xsd")
 				.forEach(e -> templates.addAll(e.getAllNpcSkillTemplates()));
@@ -104,7 +103,7 @@ public class Reload extends AdminCommand {
 			InGameShopEn.getInstance().reload();
 			sendInfo(admin, "Gameshop successfully reloaded!");
 		} else if (params[0].equalsIgnoreCase("events")) {
-			List<EventTemplate> templates = new FastTable<>();
+			List<EventTemplate> templates = new ArrayList<>();
 			Collection<File> files = XmlUtil.listFiles("./data/static_data/events/timed_events", true);
 			JAXBUtil.deserialize(files, EventData.class, "./data/static_data/static_data.xsd").forEach(e -> templates.addAll(e.getEvents()));
 			EventService.getInstance().stop();

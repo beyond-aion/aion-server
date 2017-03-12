@@ -1,6 +1,8 @@
 package com.aionemu.gameserver.services;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.locks.Lock;
@@ -23,9 +25,6 @@ import com.aionemu.gameserver.services.rift.RiftManager;
 import com.aionemu.gameserver.services.rift.RiftOpenRunnable;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
 
-import javolution.util.FastMap;
-import javolution.util.FastTable;
-
 /**
  * @author Source
  */
@@ -33,7 +32,7 @@ public class RiftService {
 
 	private RiftSchedule schedule;
 	private Map<Integer, RiftLocation> locations;
-	private Map<Integer, RiftLocation> activeRifts = new FastMap<>();
+	private Map<Integer, RiftLocation> activeRifts = new LinkedHashMap<>();
 	private final Lock closing = new ReentrantLock();
 
 	public void initRiftLocations() {
@@ -131,7 +130,7 @@ public class RiftService {
 			if (!guards && Rnd.chance() < 50)
 				return;
 		}
-		List<RiftLocation> possibleLocs = new FastTable<>();
+		List<RiftLocation> possibleLocs = new ArrayList<>();
 		for (RiftLocation loc : locations.values()) {
 			if (loc.getWorldId() == id) {
 				if (guards) {

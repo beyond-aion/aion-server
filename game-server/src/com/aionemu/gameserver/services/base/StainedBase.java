@@ -4,7 +4,6 @@ import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.model.base.BaseColorType;
 import com.aionemu.gameserver.model.base.StainedBaseLocation;
 
-
 /**
  * @author Estrayl
  *

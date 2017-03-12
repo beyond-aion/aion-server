@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.dataholders;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.Unmarshaller;
@@ -11,8 +12,6 @@ import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
 import com.aionemu.gameserver.model.templates.item.AssemblyItem;
-
-import javolution.util.FastTable;
 
 /**
  * @author xTz
@@ -26,7 +25,7 @@ public class AssemblyItemsData {
 	protected List<AssemblyItem> item;
 
 	@XmlTransient
-	private List<AssemblyItem> items = new FastTable<>();
+	private List<AssemblyItem> items = new ArrayList<>();
 
 	void afterUnmarshal(Unmarshaller unmarshaller, Object parent) {
 		for (AssemblyItem template : item) {

@@ -1,6 +1,7 @@
 package com.aionemu.gameserver.model.gameobjects.player.title;
 
 import java.util.Collection;
+import java.util.LinkedHashMap;
 
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.dao.PlayerTitleListDAO;
@@ -14,18 +15,16 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_TITLE_INFO;
 import com.aionemu.gameserver.taskmanager.tasks.ExpireTimerTask;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
-import javolution.util.FastMap;
-
 /**
  * @author xavier, cura, xTz
  */
 public class TitleList {
 
-	private final FastMap<Integer, Title> titles;
+	private final LinkedHashMap<Integer, Title> titles;
 	private Player owner;
 
 	public TitleList() {
-		this.titles = new FastMap<>();
+		this.titles = new LinkedHashMap<>();
 		this.owner = null;
 	}
 

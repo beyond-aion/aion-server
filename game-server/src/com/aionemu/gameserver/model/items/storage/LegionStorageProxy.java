@@ -10,8 +10,6 @@ import com.aionemu.gameserver.services.item.ItemPacketService.ItemAddType;
 import com.aionemu.gameserver.services.item.ItemPacketService.ItemDeleteType;
 import com.aionemu.gameserver.services.item.ItemPacketService.ItemUpdateType;
 
-import javolution.util.FastTable;
-
 /**
  * @author ATracer
  */
@@ -162,7 +160,7 @@ public class LegionStorageProxy extends Storage {
 	}
 
 	@Override
-	public FastTable<Item> getItemsWithKinah() {
+	public List<Item> getItemsWithKinah() {
 		return storage.getItemsWithKinah();
 	}
 

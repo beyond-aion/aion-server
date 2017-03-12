@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.services.drop;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
@@ -48,8 +49,6 @@ import com.aionemu.gameserver.world.WorldDropType;
 import com.aionemu.gameserver.world.WorldMapType;
 import com.aionemu.gameserver.world.zone.ZoneName;
 
-import javolution.util.FastTable;
-
 /**
  * @author xTz, Aioncool, Bobobear
  * @modified Neon
@@ -92,10 +91,10 @@ public class DropRegistrationService {
 		Integer winnerObj = 0;
 
 		// Distributing drops to players
-		Collection<Player> dropPlayers = new FastTable<>();
-		Collection<Player> winningPlayers = new FastTable<>();
+		Collection<Player> dropPlayers = new ArrayList<>();
+		Collection<Player> winningPlayers = new ArrayList<>();
 		if (player.isInGroup() || player.isInAlliance()) {
-			List<Integer> dropMembers = new FastTable<>();
+			List<Integer> dropMembers = new ArrayList<>();
 			LootGroupRules lootGrouRules = player.getLootGroupRules();
 
 			switch (lootGrouRules.getLootRule()) {
@@ -141,7 +140,7 @@ public class DropRegistrationService {
 			dropNpc.setInRangePlayers(groupMembers);
 			dropNpc.setGroupSize(groupMembers.size());
 		} else {
-			List<Integer> singlePlayer = new FastTable<>();
+			List<Integer> singlePlayer = new ArrayList<>();
 			singlePlayer.add(player.getObjectId());
 			dropPlayers.add(player);
 			dropRegistrationMap.put(npcObjId, new DropNpc(npcObjId));
@@ -583,8 +582,8 @@ public class DropRegistrationService {
 	}
 
 	public List<Integer> getAllowedItems(GlobalRule rule, Npc npc, Player player) {
-		List<Integer> alloweditems = new FastTable<>();
-		List<Integer> droppeditems = new FastTable<>();
+		List<Integer> alloweditems = new ArrayList<>();
+		List<Integer> droppeditems = new ArrayList<>();
 		for (GlobalDropItem globalItem : rule.getGlobalRuleItems().getGlobalDropItems()) {
 			// check for prevent different race drops
 			if (player.getRace() == Race.ASMODIANS && globalItem.getItemTemplate().getRace().equals(Race.ELYOS)

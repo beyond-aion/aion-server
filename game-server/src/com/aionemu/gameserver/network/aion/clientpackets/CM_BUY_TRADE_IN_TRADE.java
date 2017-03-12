@@ -1,13 +1,12 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.services.TradeService;
-
-import javolution.util.FastSet;
 
 /**
  * @author MrPoke
@@ -21,7 +20,7 @@ public class CM_BUY_TRADE_IN_TRADE extends AionClientPacket {
 	private int itemId;
 	private int count;
 	private int tradeInListCount;
-	private Set<Integer> tradeInItemObjIds;
+	private List<Integer> tradeInItemObjIds;
 
 	/**
 	 * @param opcode
@@ -32,7 +31,7 @@ public class CM_BUY_TRADE_IN_TRADE extends AionClientPacket {
 
 	@Override
 	protected void readImpl() {
-		tradeInItemObjIds = new FastSet<>();
+		tradeInItemObjIds = new ArrayList<>();
 		sellerObjId = readD();
 		mask = readC(); // NEW - TODO find out what this is!
 		itemId = readD();

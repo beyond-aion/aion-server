@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.services.findgroup;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.concurrent.ConcurrentHashMap;
@@ -15,8 +16,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_AUTO_GROUP;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_FIND_GROUP;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-
-import javolution.util.FastTable;
 
 /**
  * Find Group Service
@@ -77,7 +76,7 @@ public class FindGroupService {
 				break;
 		}
 
-		Collection<FindGroup> findGroupList = new FastTable<>();
+		Collection<FindGroup> findGroupList = new ArrayList<>();
 		findGroupList.add(findGroup);
 
 		PacketSendUtility.sendPacket(player, new SM_FIND_GROUP(action, ((int) (System.currentTimeMillis() / 1000)), findGroupList));

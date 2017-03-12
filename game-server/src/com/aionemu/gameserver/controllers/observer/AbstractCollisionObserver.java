@@ -9,7 +9,6 @@ import com.aionemu.gameserver.geoEngine.scene.Spatial;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
-
 /**
  * @author MrPoke
  * @moved Rolandas

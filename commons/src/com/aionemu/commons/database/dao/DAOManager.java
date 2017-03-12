@@ -1,8 +1,6 @@
 package com.aionemu.commons.database.dao;
 
-import static com.aionemu.commons.database.DatabaseFactory.getDatabaseMajorVersion;
-import static com.aionemu.commons.database.DatabaseFactory.getDatabaseMinorVersion;
-import static com.aionemu.commons.database.DatabaseFactory.getDatabaseName;
+import static com.aionemu.commons.database.DatabaseFactory.*;
 
 import java.io.FileNotFoundException;
 import java.util.HashMap;

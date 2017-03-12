@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.spawnengine;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,8 +13,6 @@ import org.slf4j.LoggerFactory;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-
-import javolution.util.FastTable;
 
 /**
  * @author Rolandas
@@ -42,7 +41,7 @@ public class InstanceWalkerFormations {
 		String walkerId = npcWalker.getWalkTemplate().getRouteId();
 		List<ClusteredNpc> candidateList = groupedSpawnObjects.get(walkerId);
 		if (candidateList == null) {
-			candidateList = new FastTable<>();
+			candidateList = new ArrayList<>();
 			groupedSpawnObjects.put(walkerId, candidateList);
 		}
 		return candidateList.add(npcWalker);
@@ -76,7 +75,7 @@ public class InstanceWalkerFormations {
 					if (singleNpc.getWalkTemplate().getVersionId() != null) {
 						List<ClusteredNpc> variants = walkerVariants.get(singleNpc.getWalkTemplate().getVersionId());
 						if (variants == null) {
-							variants = new FastTable<>();
+							variants = new ArrayList<>();
 							walkerVariants.put(singleNpc.getWalkTemplate().getVersionId(), variants);
 						}
 						variants.add(singleNpc);
@@ -100,7 +99,7 @@ public class InstanceWalkerFormations {
 				} else {
 					List<WalkerGroup> variants = formationVariants.get(wg.getVersionId());
 					if (variants == null) {
-						variants = new FastTable<>();
+						variants = new ArrayList<>();
 						formationVariants.put(wg.getVersionId(), variants);
 					}
 					variants.add(wg);

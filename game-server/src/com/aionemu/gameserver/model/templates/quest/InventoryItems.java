@@ -1,13 +1,12 @@
 package com.aionemu.gameserver.model.templates.quest;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
-
-import javolution.util.FastTable;
 
 /**
  * @author Rolandas
@@ -35,7 +34,7 @@ public class InventoryItems {
 	 */
 	public List<InventoryItem> getInventoryItem() {
 		if (inventoryItem == null) {
-			inventoryItem = new FastTable<>();
+			inventoryItem = new ArrayList<>();
 		}
 		return this.inventoryItem;
 	}

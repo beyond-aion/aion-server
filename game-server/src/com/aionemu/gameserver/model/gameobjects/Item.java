@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.model.gameobjects;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
@@ -37,8 +38,6 @@ import com.aionemu.gameserver.model.templates.item.bonuses.StatBonusType;
 import com.aionemu.gameserver.model.templates.item.enums.EquipType;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-
-import javolution.util.FastTable;
 
 /**
  * @author ATracer, Wakizashi, xTz
@@ -867,7 +866,7 @@ public class Item extends AionObject implements IExpirable, StatOwner {
 
 	public List<StatFunction> getCurrentModifiers() {
 		if (currentModifiers == null)
-			currentModifiers = new FastTable<>();
+			currentModifiers = new ArrayList<>();
 		return currentModifiers;
 	}
 

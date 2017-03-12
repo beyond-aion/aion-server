@@ -54,8 +54,8 @@ public class BrigadeGeneralChantraAI extends AggressiveNpcAI {
 	}
 
 	private void startTrapEvent() {
-		int[] trapNpc = { 283092, 283094 };// 4.0
-		final int trap = trapNpc[Rnd.get(0, trapNpc.length - 1)];
+		int[] trapNpcs = { 283092, 283094 };// 4.0
+		final int trap = Rnd.get(trapNpcs);
 		if (getPosition().getWorldMapInstance().getNpc(trap) == null) {
 			spawn(trap, 1031.1f, 466.38f, 445.45f, (byte) 0);
 			ThreadPoolManager.getInstance().schedule(new Runnable() {

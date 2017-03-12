@@ -32,8 +32,6 @@
 
 package com.aionemu.gameserver.geoEngine.math;
 
-
-
 /**
  * <code>Triangle</code> defines a object for containing triangle information.
  * The triangle is defined by a collection of three <code>Vector3f</code>

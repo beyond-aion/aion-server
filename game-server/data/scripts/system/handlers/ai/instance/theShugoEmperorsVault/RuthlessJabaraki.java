@@ -8,7 +8,6 @@ import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 
-
 /**
  * @author Yeats
  *
@@ -16,9 +15,8 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 @AIName("ruthless_jabaraki")
 public class RuthlessJabaraki extends IDSweep_Bosses {
 
-	protected List<Integer> percents = new ArrayList<>();
+	private List<Integer> percents = new ArrayList<>();
 	private List<Npc> spawnedAdds = new ArrayList<>();
-	//private Map<Integer, Integer> skills = new FastMap<>();
 	
 	@Override
 	protected void handleAttack(Creature creature) {

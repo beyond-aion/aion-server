@@ -1,4 +1,4 @@
-package com.aionemu.gameserver.model.ai;
+package com.aionemu.gameserver.model.templates.ai;
 
 import java.util.List;
 

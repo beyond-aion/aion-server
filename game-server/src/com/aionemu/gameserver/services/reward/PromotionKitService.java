@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.services.reward;
 
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -7,9 +9,6 @@ import com.aionemu.gameserver.model.gameobjects.LetterType;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.rewards.RewardItem;
 import com.aionemu.gameserver.services.mail.SystemMailService;
-
-import javolution.util.FastMap;
-import javolution.util.FastTable;
 
 /**
  * Created on 29.05.2016
@@ -20,16 +19,16 @@ import javolution.util.FastTable;
 public class PromotionKitService {
 
 	private static final PromotionKitService INSTANCE = new PromotionKitService();
-	private final Map<Integer, List<RewardItem>> itemMap = new FastMap<>();
+	private final Map<Integer, List<RewardItem>> itemMap = new LinkedHashMap<>();
 
 	public static PromotionKitService getInstance() {
 		return INSTANCE;
 	}
 
 	private PromotionKitService() {
-		itemMap.put(1, new FastTable<>());
-		itemMap.put(25, new FastTable<>());
-		itemMap.put(50, new FastTable<>());
+		itemMap.put(1, new ArrayList<>());
+		itemMap.put(25, new ArrayList<>());
+		itemMap.put(50, new ArrayList<>());
 
 		itemMap.get(1).add(new RewardItem(169610056, 1));
 		itemMap.get(25).add(new RewardItem(190100064, 1));

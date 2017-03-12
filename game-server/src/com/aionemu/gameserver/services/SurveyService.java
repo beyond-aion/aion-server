@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.services;
 
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -21,16 +23,13 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.World;
 
-import javolution.util.FastMap;
-import javolution.util.FastTable;
-
 /**
  * @author KID
  */
 public class SurveyService {
 
 	private static final Logger log = LoggerFactory.getLogger(SurveyService.class);
-	private final Map<Integer, SurveyItem> activeItems = new FastMap<>();
+	private final Map<Integer, SurveyItem> activeItems = new LinkedHashMap<>();
 
 	private SurveyService() {
 		ThreadPoolManager.getInstance().scheduleAtFixedRate(new TaskUpdate(), 2000, SecurityConfig.SURVEY_DELAY * 60000);
@@ -80,7 +79,7 @@ public class SurveyService {
 		if (newList.size() == 0)
 			return;
 
-		List<Integer> players = new FastTable<>();
+		List<Integer> players = new ArrayList<>();
 		int cnt = 0;
 		for (SurveyItem survey : newList) {
 			if (activeItems.putIfAbsent(survey.uniqueId, survey) == null) {

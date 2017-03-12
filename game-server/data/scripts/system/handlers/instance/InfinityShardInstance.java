@@ -1,6 +1,5 @@
 package instance;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.Future;
 
@@ -19,7 +18,7 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 public class InfinityShardInstance extends GeneralInstanceHandler {
 
 	private Future<?> ideResonatorTask, instanceFailTask;
-	private List<Integer> resonators = Arrays.asList(231092, 231093, 231094, 231095);
+	private int[] resonators = new int[] { 231092, 231093, 231094, 231095 };
 
 	@Override
 	public void onDie(Npc npc) {
@@ -82,7 +81,7 @@ public class InfinityShardInstance extends GeneralInstanceHandler {
 				cancelIdeResonatorTask();
 				cancelFailTask();
 				despawnAdds();
-				//rewardGP();
+				// rewardGP();
 				break;
 		}
 	}
@@ -162,13 +161,13 @@ public class InfinityShardInstance extends GeneralInstanceHandler {
 	private void spawnResonators() {
 		int delay = 5000;
 		final Npc hyperion = instance.getNpc(231073);
-		for (final Integer npcid : resonators) {
+		for (int npcId : resonators) {
 			ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 				@Override
 				public void run() {
 					if (hyperion != null && !hyperion.getLifeStats().isAlreadyDead())
-						spawnResonator(npcid);
+						spawnResonator(npcId);
 				}
 
 			}, delay);
@@ -198,7 +197,7 @@ public class InfinityShardInstance extends GeneralInstanceHandler {
 	}
 
 	private void despawnAdds() {
-		for (Integer npcid : resonators) {
+		for (int npcid : resonators) {
 			deleteNpcs(instance.getNpcs(npcid));
 		}
 		deleteNpcs(instance.getNpcs(231104));
@@ -218,13 +217,15 @@ public class InfinityShardInstance extends GeneralInstanceHandler {
 		}
 	}
 
-	/*private void rewardGP() {
-		int reward = 600 / instance.getPlayersInside().size();
-		for (Player p : instance.getPlayersInside()) {
-			if (p != null && p.isOnline())
-				GloryPointsService.addGp(p, reward, true);
-		}
-	}*/
+	/*
+	 * private void rewardGP() {
+	 * int reward = 600 / instance.getPlayersInside().size();
+	 * for (Player p : instance.getPlayersInside()) {
+	 * if (p != null && p.isOnline())
+	 * GloryPointsService.addGp(p, reward, true);
+	 * }
+	 * }
+	 */
 
 	private void cancelIdeResonatorTask() {
 		if (ideResonatorTask != null && !ideResonatorTask.isCancelled()) {

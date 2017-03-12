@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.dataholders;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -16,8 +17,6 @@ import com.aionemu.gameserver.model.templates.globaldrops.GlobalRule;
 import com.aionemu.gameserver.model.templates.globaldrops.StringFunction;
 import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
 
-import javolution.util.FastTable;
-
 /**
  * @author AionCool
  * @modified Bobobear, Neon
@@ -30,7 +29,7 @@ public class GlobalDropData {
 	protected List<GlobalRule> globalDropRules;
 
 	public void processRules(Collection<NpcTemplate> npcs) {
-		List<NpcTemplate> npcList = FastTable.of(npcs);
+		List<NpcTemplate> npcList = new ArrayList<>(npcs);
 		for (GlobalRule gr : globalDropRules) {
 			if (gr.getGlobalRuleNpcNames() != null) {
 				List<GlobalDropNpc> allowedNpcs = getAllowedNpcs(gr, npcList);
@@ -44,13 +43,13 @@ public class GlobalDropData {
 	}
 
 	private List<GlobalDropNpc> getAllowedNpcs(GlobalRule rule, List<NpcTemplate> npcs) {
-		List<GlobalDropNpc> allowedNpcs = new FastTable<>();
+		List<GlobalDropNpc> allowedNpcs = new ArrayList<>();
 		if (rule.getGlobalRuleNpcs() != null) {
 			allowedNpcs = rule.getGlobalRuleNpcs().getGlobalDropNpcs();
 		}
 		if (rule.getGlobalRuleNpcNames() != null) {
 			for (GlobalDropNpcName gdNpcName : rule.getGlobalRuleNpcNames().getGlobalDropNpcNames()) {
-				List<NpcTemplate> matchedNpcs = new FastTable<>();
+				List<NpcTemplate> matchedNpcs = new ArrayList<>();
 				if (gdNpcName.getFunction().equals(StringFunction.CONTAINS))
 					matchedNpcs = npcs.stream().filter(npc -> npc.getName().contains(gdNpcName.getValue().toLowerCase())).collect(Collectors.toList());
 				else if (gdNpcName.getFunction().equals(StringFunction.END_WITH))

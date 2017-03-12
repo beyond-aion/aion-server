@@ -1,8 +1,7 @@
 package com.aionemu.chatserver.model;
 
+import java.util.HashMap;
 import java.util.Map;
-
-import javolution.util.FastMap;
 
 /**
  * @author ATracer
@@ -28,7 +27,7 @@ public enum PlayerClass {
 	ARTIST(15),
 	BARD(16, "Бард", "Ozan", "Songweaver", "Bard", "Barde", "Bardo");
 
-	private static Map<String, PlayerClass> classIdentifiers = new FastMap<>();
+	private static Map<String, PlayerClass> classIdentifiers = new HashMap<>();
 
 	private byte classId;
 	private String[] identifiers;

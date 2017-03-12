@@ -1,6 +1,8 @@
 package admincommands;
 
+import java.util.ArrayList;
 import java.util.EnumMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -25,9 +27,6 @@ import com.aionemu.gameserver.services.PvpService;
 import com.aionemu.gameserver.services.mail.SystemMailService;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 
-import javolution.util.FastMap;
-import javolution.util.FastTable;
-
 /**
  * Created on 01.06.2016
  * A command that handles analysis and rewarding for seasonal head hunting events.
@@ -43,7 +42,7 @@ public class Headhunting extends AdminCommand {
 	/**
 	 * Contains the rewards for different rankings (key value).
 	 */
-	private final Map<Integer, List<RewardItem>> rewards = new FastMap<>();
+	private final Map<Integer, List<RewardItem>> rewards = new LinkedHashMap<>();
 
 	/**
 	 * Contains a sorted descending list of {@link Headhunter} by kills per {@link PlayerClass}.
@@ -60,10 +59,10 @@ public class Headhunting extends AdminCommand {
 		);
 
 		/* Initialize seasonal headhunting rewards */
-		rewards.put(1, new FastTable<>());
-		rewards.put(2, new FastTable<>());
-		rewards.put(3, new FastTable<>());
-		rewards.put(4, new FastTable<>()); // equivalent for consolation prize
+		rewards.put(1, new ArrayList<>());
+		rewards.put(2, new ArrayList<>());
+		rewards.put(3, new ArrayList<>());
+		rewards.put(4, new ArrayList<>()); // equivalent for consolation prize
 
 		rewards.get(1).add(new RewardItem(186000242, 50)); // Ceramium Medal
 		rewards.get(1).add(new RewardItem(186000051, 30)); // Major Ancient Crown
@@ -128,7 +127,7 @@ public class Headhunting extends AdminCommand {
 			PlayerCommonData pcd = DAOManager.getDAO(PlayerDAO.class).loadPlayerCommonData(hunter.getHunterId());
 			PlayerClass pc = pcd.getPlayerClass();
 			Race race = pcd.getRace();
-			results.get(race).putIfAbsent(pc, new FastTable<>());
+			results.get(race).putIfAbsent(pc, new ArrayList<>());
 			List<Headhunter> hunterz = results.get(race).get(pc);
 			hunterz.add(hunter);
 			hunterz.sort(null);

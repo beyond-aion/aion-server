@@ -49,8 +49,6 @@ import com.aionemu.gameserver.geoEngine.math.Vector3f;
 import com.aionemu.gameserver.geoEngine.scene.Mesh;
 import com.aionemu.gameserver.geoEngine.utils.BufferUtils;
 
-
-
 //import com.jme.scene.TriMesh;
 
 /**
@@ -94,6 +92,7 @@ public class BoundingBox extends BoundingVolume {
 		setMinMax(min, max);
 	}
 
+	@Override
 	public Type getType() {
 		return Type.AABB;
 	}
@@ -105,6 +104,7 @@ public class BoundingBox extends BoundingVolume {
 	 * @param points
 	 *          the points to contain.
 	 */
+	@Override
 	public void computeFromPoints(FloatBuffer points) {
 		containAABB(points);
 	}
@@ -121,8 +121,8 @@ public class BoundingBox extends BoundingVolume {
 		if (end - start <= 0) {
 			return;
 		}
-		Vector3f min = Vector3f.newInstance();
-		Vector3f max = Vector3f.newInstance();
+		Vector3f min = new Vector3f();
+		Vector3f max = new Vector3f();
 		min.set(new Vector3f(Float.POSITIVE_INFINITY, Float.POSITIVE_INFINITY, Float.POSITIVE_INFINITY));
 		max.set(new Vector3f(Float.NEGATIVE_INFINITY, Float.NEGATIVE_INFINITY, Float.NEGATIVE_INFINITY));
 
@@ -142,16 +142,14 @@ public class BoundingBox extends BoundingVolume {
 		xExtent = max.x - center.x;
 		yExtent = max.y - center.y;
 		zExtent = max.z - center.z;
-		Vector3f.recycle(min);
-		Vector3f.recycle(max);
 	}
 
 	public void computeFromTris(int[] indices, Mesh mesh, int start, int end) {
 		if (end - start <= 0) {
 			return;
 		}
-		Vector3f vect1 = Vector3f.newInstance();
-		Vector3f vect2 = Vector3f.newInstance();
+		Vector3f vect1 = new Vector3f();
+		Vector3f vect2 = new Vector3f();
 		Triangle triangle = new Triangle();
 
 		Vector3f min = vect1.set(Float.POSITIVE_INFINITY, Float.POSITIVE_INFINITY, Float.POSITIVE_INFINITY);
@@ -174,9 +172,6 @@ public class BoundingBox extends BoundingVolume {
 		xExtent = max.x - center.x;
 		yExtent = max.y - center.y;
 		zExtent = max.z - center.z;
-		Vector3f.recycle(vect1);
-		Vector3f.recycle(vect2);
-		triangle = null;
 	}
 
 	public static final void checkMinMax(Vector3f min, Vector3f max, Vector3f point) {
@@ -209,7 +204,7 @@ public class BoundingBox extends BoundingVolume {
 		if (points.remaining() <= 2) // we need at least a 3 float vector
 			return;
 
-		Vector3f vect1 = Vector3f.newInstance();
+		Vector3f vect1 = new Vector3f();
 		BufferUtils.populateFromBuffer(vect1, points, 0);
 		float minX = vect1.x, minY = vect1.y, minZ = vect1.z;
 		float maxX = vect1.x, maxY = vect1.y, maxZ = vect1.z;
@@ -231,7 +226,6 @@ public class BoundingBox extends BoundingVolume {
 			else if (vect1.z > maxZ)
 				maxZ = vect1.z;
 		}
-		Vector3f.recycle(vect1);
 
 		center.set(minX + maxX, minY + maxY, minZ + maxZ);
 		center.multLocal(0.5f);
@@ -241,24 +235,24 @@ public class BoundingBox extends BoundingVolume {
 		zExtent = maxZ - center.z;
 	}
 
+	@Override
 	public BoundingVolume transform(Matrix4f trans, BoundingVolume store) {
 		BoundingBox box;
 		if (store == null || store.getType() != Type.AABB) {
 			box = new BoundingBox();
-		}
-		else {
+		} else {
 			box = (BoundingBox) store;
 		}
 
 		float w = trans.multProj(center, box.center);
 		box.center.divideLocal(w);
 
-		Matrix3f transMatrix = Matrix3f.newInstance();
+		Matrix3f transMatrix = new Matrix3f();
 		trans.toRotationMatrix(transMatrix);
 
 		// Make the rotation matrix all positive to get the maximum x/y/z extent
 		transMatrix.absoluteLocal();
-		Vector3f vect1 = Vector3f.newInstance();
+		Vector3f vect1 = new Vector3f();
 		vect1.set(xExtent, yExtent, zExtent);
 		transMatrix.mult(vect1, vect1);
 
@@ -266,8 +260,6 @@ public class BoundingBox extends BoundingVolume {
 		box.xExtent = FastMath.abs(vect1.getX());
 		box.yExtent = FastMath.abs(vect1.getY());
 		box.zExtent = FastMath.abs(vect1.getZ());
-		Vector3f.recycle(vect1);
-		Matrix3f.recycle(transMatrix);
 
 		return box;
 	}
@@ -279,6 +271,7 @@ public class BoundingBox extends BoundingVolume {
 	 * @param plane
 	 *          the plane to check against.
 	 */
+	@Override
 	public Plane.Side whichSide(Plane plane) {
 		float radius = FastMath.abs(xExtent * plane.getNormal().getX()) + FastMath.abs(yExtent * plane.getNormal().getY())
 			+ FastMath.abs(zExtent * plane.getNormal().getZ());
@@ -288,11 +281,9 @@ public class BoundingBox extends BoundingVolume {
 		// changed to < and > to prevent floating point precision problems
 		if (distance < -radius) {
 			return Plane.Side.Negative;
-		}
-		else if (distance > radius) {
+		} else if (distance > radius) {
 			return Plane.Side.Positive;
-		}
-		else {
+		} else {
 			return Plane.Side.None;
 		}
 	}
@@ -305,6 +296,7 @@ public class BoundingBox extends BoundingVolume {
 	 *          the sphere to combine with this sphere.
 	 * @return the new sphere
 	 */
+	@Override
 	public BoundingVolume merge(BoundingVolume volume) {
 		if (volume == null) {
 			return this;
@@ -335,6 +327,7 @@ public class BoundingBox extends BoundingVolume {
 	 *          the sphere to combine with this sphere.
 	 * @return this
 	 */
+	@Override
 	public BoundingVolume mergeLocal(BoundingVolume volume) {
 		if (volume == null) {
 			return this;
@@ -415,8 +408,8 @@ public class BoundingBox extends BoundingVolume {
 	 * @return the resulting merged box.
 	 */
 	private BoundingBox merge(Vector3f boxCenter, float boxX, float boxY, float boxZ, BoundingBox rVal) {
-		Vector3f vect1 = Vector3f.newInstance();
-		Vector3f vect2 = Vector3f.newInstance();
+		Vector3f vect1 = new Vector3f();
+		Vector3f vect2 = new Vector3f();
 
 		vect1.x = center.x - xExtent;
 		if (vect1.x > boxCenter.x - boxX)
@@ -444,8 +437,6 @@ public class BoundingBox extends BoundingVolume {
 		yExtent = vect2.y - center.y;
 		zExtent = vect2.z - center.z;
 
-		Vector3f.recycle(vect1);
-		Vector3f.recycle(vect2);
 		return rVal;
 	}
 
@@ -456,6 +447,7 @@ public class BoundingBox extends BoundingVolume {
 	 *          where to store the cloned information. if null or wrong class, a new store is created.
 	 * @return the new BoundingBox
 	 */
+	@Override
 	public BoundingBox clone(BoundingVolume store) {
 		if (store != null && store.getType() == Type.AABB) {
 			BoundingBox rVal = (BoundingBox) store;
@@ -479,8 +471,7 @@ public class BoundingBox extends BoundingVolume {
 	 */
 	@Override
 	public String toString() {
-		return getClass().getSimpleName() + " [Center: " + center + "  xExtent: " + xExtent + "  yExtent: " + yExtent + "  zExtent: " + zExtent
-			+ "]";
+		return getClass().getSimpleName() + " [Center: " + center + "  xExtent: " + xExtent + "  yExtent: " + yExtent + "  zExtent: " + zExtent + "]";
 	}
 
 	/**
@@ -488,10 +479,10 @@ public class BoundingBox extends BoundingVolume {
 	 * 
 	 * @see com.jme.bounding.BoundingVolume#intersectsSphere(com.jme.bounding.BoundingSphere)
 	 */
+	@Override
 	public boolean intersectsSphere(BoundingSphere bs) {
-		return ((FastMath.abs(center.x - bs.center.x) < bs.getRadius() + xExtent)
-			&& (FastMath.abs(center.y - bs.center.y) < bs.getRadius() + yExtent) && (FastMath.abs(center.z - bs.center.z) < bs.getRadius()
-			+ zExtent));
+		return ((FastMath.abs(center.x - bs.center.x) < bs.getRadius() + xExtent) && (FastMath.abs(center.y - bs.center.y) < bs.getRadius() + yExtent)
+			&& (FastMath.abs(center.z - bs.center.z) < bs.getRadius() + zExtent));
 	}
 
 	/**
@@ -500,6 +491,7 @@ public class BoundingBox extends BoundingVolume {
 	 * 
 	 * @see com.aionemu.gameserver.geoEngine.bounding.jme.bounding.BoundingVolume#intersects(com.aionemu.gameserver.geoEngine.bounding.jme.bounding.BoundingVolume)
 	 */
+	@Override
 	public boolean intersects(BoundingVolume bv) {
 		return bv.intersectsBoundingBox(this);
 	}
@@ -510,6 +502,7 @@ public class BoundingBox extends BoundingVolume {
 	 * 
 	 * @see com.aionemu.gameserver.geoEngine.bounding.jme.bounding.BoundingVolume#intersectsBoundingBox(com.aionemu.gameserver.geoEngine.bounding.jme.bounding.BoundingBox)
 	 */
+	@Override
 	public boolean intersectsBoundingBox(BoundingBox bb) {
 		assert Vector3f.isValidVector(center) && Vector3f.isValidVector(bb.center);
 
@@ -538,33 +531,27 @@ public class BoundingBox extends BoundingVolume {
 	 * 
 	 * @see com.aionemu.gameserver.geoEngine.bounding.jme.bounding.BoundingVolume#intersects(com.jme.math.Ray)
 	 */
+	@Override
 	public boolean intersects(Ray ray) {
 		// assert Vector3f.isValidVector(center);
 
 		float rhs;
 
-		Vector3f vect1 = Vector3f.newInstance();
-		Vector3f vect2 = Vector3f.newInstance();
+		Vector3f vect1 = new Vector3f();
+		Vector3f vect2 = new Vector3f();
 		Vector3f diff = ray.origin.subtract(getCenter(vect2), vect1);
 
-		final Array3f fWdU = Array3f.newInstance();
-		final Array3f fAWdU = Array3f.newInstance();
-		final Array3f fDdU = Array3f.newInstance();
-		final Array3f fADdU = Array3f.newInstance();
-		final Array3f fAWxDdU = Array3f.newInstance();
+		final Array3f fWdU = new Array3f();
+		final Array3f fAWdU = new Array3f();
+		final Array3f fDdU = new Array3f();
+		final Array3f fADdU = new Array3f();
+		final Array3f fAWxDdU = new Array3f();
 
 		fWdU.a = ray.getDirection().dot(Vector3f.UNIT_X);
 		fAWdU.a = FastMath.abs(fWdU.a);
 		fDdU.a = diff.dot(Vector3f.UNIT_X);
 		fADdU.a = FastMath.abs(fDdU.a);
 		if (fADdU.a > xExtent && fDdU.a * fWdU.a >= 0.0) {
-			Vector3f.recycle(vect1);
-			Vector3f.recycle(vect2);
-			Array3f.recycle(fWdU);
-			Array3f.recycle(fAWdU);
-			Array3f.recycle(fDdU);
-			Array3f.recycle(fADdU);
-			Array3f.recycle(fAWxDdU);
 			return false;
 		}
 
@@ -573,13 +560,6 @@ public class BoundingBox extends BoundingVolume {
 		fDdU.b = diff.dot(Vector3f.UNIT_Y);
 		fADdU.b = FastMath.abs(fDdU.b);
 		if (fADdU.b > yExtent && fDdU.b * fWdU.b >= 0.0) {
-			Vector3f.recycle(vect1);
-			Vector3f.recycle(vect2);
-			Array3f.recycle(fWdU);
-			Array3f.recycle(fAWdU);
-			Array3f.recycle(fDdU);
-			Array3f.recycle(fADdU);
-			Array3f.recycle(fAWxDdU);
 			return false;
 		}
 
@@ -588,13 +568,6 @@ public class BoundingBox extends BoundingVolume {
 		fDdU.c = diff.dot(Vector3f.UNIT_Z);
 		fADdU.c = FastMath.abs(fDdU.c);
 		if (fADdU.c > zExtent && fDdU.c * fWdU.c >= 0.0) {
-			Vector3f.recycle(vect1);
-			Vector3f.recycle(vect2);
-			Array3f.recycle(fWdU);
-			Array3f.recycle(fAWdU);
-			Array3f.recycle(fDdU);
-			Array3f.recycle(fADdU);
-			Array3f.recycle(fAWxDdU);
 			return false;
 		}
 
@@ -603,48 +576,20 @@ public class BoundingBox extends BoundingVolume {
 		fAWxDdU.a = FastMath.abs(wCrossD.dot(Vector3f.UNIT_X));
 		rhs = yExtent * fAWdU.c + zExtent * fAWdU.b;
 		if (fAWxDdU.a > rhs) {
-			Vector3f.recycle(vect1);
-			Vector3f.recycle(vect2);
-			Array3f.recycle(fWdU);
-			Array3f.recycle(fAWdU);
-			Array3f.recycle(fDdU);
-			Array3f.recycle(fADdU);
-			Array3f.recycle(fAWxDdU);
 			return false;
 		}
 
 		fAWxDdU.b = FastMath.abs(wCrossD.dot(Vector3f.UNIT_Y));
 		rhs = xExtent * fAWdU.c + zExtent * fAWdU.a;
 		if (fAWxDdU.b > rhs) {
-			Vector3f.recycle(vect1);
-			Vector3f.recycle(vect2);
-			Array3f.recycle(fWdU);
-			Array3f.recycle(fAWdU);
-			Array3f.recycle(fDdU);
-			Array3f.recycle(fADdU);
-			Array3f.recycle(fAWxDdU);
 			return false;
 		}
 
 		fAWxDdU.c = FastMath.abs(wCrossD.dot(Vector3f.UNIT_Z));
 		rhs = xExtent * fAWdU.b + yExtent * fAWdU.a;
 		if (fAWxDdU.c > rhs) {
-			Vector3f.recycle(vect1);
-			Vector3f.recycle(vect2);
-			Array3f.recycle(fWdU);
-			Array3f.recycle(fAWdU);
-			Array3f.recycle(fDdU);
-			Array3f.recycle(fADdU);
-			Array3f.recycle(fAWxDdU);
 			return false;
 		}
-		Vector3f.recycle(vect1);
-		Vector3f.recycle(vect2);
-		Array3f.recycle(fWdU);
-		Array3f.recycle(fAWdU);
-		Array3f.recycle(fDdU);
-		Array3f.recycle(fADdU);
-		Array3f.recycle(fAWxDdU);
 		return true;
 	}
 
@@ -652,8 +597,8 @@ public class BoundingBox extends BoundingVolume {
 	 * @see com.aionemu.gameserver.geoEngine.bounding.jme.bounding.BoundingVolume#intersectsWhere(com.jme.math.Ray)
 	 */
 	private int collideWithRay(Ray ray, CollisionResults results) {
-		Vector3f diff = Vector3f.newInstance().set(ray.origin).subtractLocal(center);
-		Vector3f direction = Vector3f.newInstance().set(ray.direction);
+		Vector3f diff = new Vector3f().set(ray.origin).subtractLocal(center);
+		Vector3f direction = new Vector3f().set(ray.direction);
 
 		float[] t = { 0f, Float.POSITIVE_INFINITY };
 
@@ -661,8 +606,6 @@ public class BoundingBox extends BoundingVolume {
 		boolean notEntirelyClipped = clip(+direction.x, -diff.x - xExtent, t) && clip(-direction.x, +diff.x - xExtent, t)
 			&& clip(+direction.y, -diff.y - yExtent, t) && clip(-direction.y, +diff.y - yExtent, t) && clip(+direction.z, -diff.z - zExtent, t)
 			&& clip(-direction.z, +diff.z - zExtent, t);
-		Vector3f.recycle(diff);
-		Vector3f.recycle(direction);
 
 		if (notEntirelyClipped && (t[0] != saveT0 || t[1] != saveT1)) {
 			if (t[1] > t[0]) {
@@ -685,12 +628,12 @@ public class BoundingBox extends BoundingVolume {
 		return 0;
 	}
 
+	@Override
 	public int collideWith(Collidable other, CollisionResults results) {
 		if (other instanceof Ray) {
 			Ray ray = (Ray) other;
 			return collideWithRay(ray, results);
-		}
-		else if (other instanceof Triangle) {
+		} else if (other instanceof Triangle) {
 			Triangle t = (Triangle) other;
 			if (intersects(t.get1(), t.get2(), t.get3())) {
 				CollisionResult r = new CollisionResult();
@@ -698,8 +641,7 @@ public class BoundingBox extends BoundingVolume {
 				return 1;
 			}
 			return 0;
-		}
-		else {
+		} else {
 			throw new UnsupportedCollisionException("With: " + other.getClass().getSimpleName());
 		}
 	}
@@ -718,16 +660,15 @@ public class BoundingBox extends BoundingVolume {
 
 	@Override
 	public boolean contains(Vector3f point) {
-		return FastMath.abs(center.x - point.x) < xExtent && FastMath.abs(center.y - point.y) < yExtent
-			&& FastMath.abs(center.z - point.z) < zExtent;
+		return FastMath.abs(center.x - point.x) < xExtent && FastMath.abs(center.y - point.y) < yExtent && FastMath.abs(center.z - point.z) < zExtent;
 	}
 
 	@Override
 	public boolean intersects(Vector3f point) {
-		return FastMath.abs(center.x - point.x) <= xExtent && FastMath.abs(center.y - point.y) <= yExtent
-			&& FastMath.abs(center.z - point.z) <= zExtent;
+		return FastMath.abs(center.x - point.x) <= xExtent && FastMath.abs(center.y - point.y) <= yExtent && FastMath.abs(center.z - point.z) <= zExtent;
 	}
 
+	@Override
 	public float distanceToEdge(Vector3f point) {
 		// compute coordinates of point in box coordinate system
 		Vector3f closest = point.subtract(center);
@@ -740,8 +681,7 @@ public class BoundingBox extends BoundingVolume {
 			delta = closest.x + xExtent;
 			sqrDistance += delta * delta;
 			closest.x = -xExtent;
-		}
-		else if (closest.x > xExtent) {
+		} else if (closest.x > xExtent) {
 			delta = closest.x - xExtent;
 			sqrDistance += delta * delta;
 			closest.x = xExtent;
@@ -751,8 +691,7 @@ public class BoundingBox extends BoundingVolume {
 			delta = closest.y + yExtent;
 			sqrDistance += delta * delta;
 			closest.y = -yExtent;
-		}
-		else if (closest.y > yExtent) {
+		} else if (closest.y > yExtent) {
 			delta = closest.y - yExtent;
 			sqrDistance += delta * delta;
 			closest.y = yExtent;
@@ -762,8 +701,7 @@ public class BoundingBox extends BoundingVolume {
 			delta = closest.z + zExtent;
 			sqrDistance += delta * delta;
 			closest.z = -zExtent;
-		}
-		else if (closest.z > zExtent) {
+		} else if (closest.z > zExtent) {
 			delta = closest.z - zExtent;
 			sqrDistance += delta * delta;
 			closest.z = zExtent;
@@ -793,15 +731,13 @@ public class BoundingBox extends BoundingVolume {
 			if (numer > denom * t[0])
 				t[0] = numer / denom;
 			return true;
-		}
-		else if (denom < 0.0f) {
+		} else if (denom < 0.0f) {
 			if (numer > denom * t[0])
 				return false;
 			if (numer > denom * t[1])
 				t[1] = numer / denom;
 			return true;
-		}
-		else {
+		} else {
 			return numer <= 0.0;
 		}
 	}

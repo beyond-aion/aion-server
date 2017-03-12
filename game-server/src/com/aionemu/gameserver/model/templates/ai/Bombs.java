@@ -1,4 +1,4 @@
-package com.aionemu.gameserver.model.ai;
+package com.aionemu.gameserver.model.templates.ai;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -16,6 +16,6 @@ public class Bombs {
 	private BombTemplate bombTemplate;
 
 	public BombTemplate getBombTemplate() {
-		return this.bombTemplate;
+		return bombTemplate;
 	}
 }

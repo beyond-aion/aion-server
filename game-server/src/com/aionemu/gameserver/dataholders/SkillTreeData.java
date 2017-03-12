@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.dataholders;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.Unmarshaller;
@@ -14,7 +15,6 @@ import com.aionemu.gameserver.skillengine.model.SkillLearnTemplate;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 
 import gnu.trove.map.hash.TIntObjectHashMap;
-import javolution.util.FastTable;
 
 /**
  * @author ATracer
@@ -39,7 +39,7 @@ public class SkillTreeData {
 		int hash = makeHash(template.getClassId().ordinal(), template.getRace().ordinal(), template.getMinLevel());
 		List<SkillLearnTemplate> value = templates.get(hash);
 		if (value == null) {
-			value = new FastTable<>();
+			value = new ArrayList<>();
 			templates.put(hash, value);
 		}
 
@@ -47,7 +47,7 @@ public class SkillTreeData {
 
 		value = templatesById.get(template.getSkillId());
 		if (value == null) {
-			value = new FastTable<>();
+			value = new ArrayList<>();
 			templatesById.put(template.getSkillId(), value);
 		}
 
@@ -70,7 +70,7 @@ public class SkillTreeData {
 	 * @return SkillLearnTemplate[]
 	 */
 	public List<SkillLearnTemplate> getTemplatesFor(PlayerClass playerClass, int level, Race race) {
-		List<SkillLearnTemplate> newSkills = new FastTable<>();
+		List<SkillLearnTemplate> newSkills = new ArrayList<>();
 
 		List<SkillLearnTemplate> classRaceSpecificTemplates = templates.get(makeHash(playerClass.ordinal(), race.ordinal(), level));
 		List<SkillLearnTemplate> classSpecificTemplates = templates.get(makeHash(playerClass.ordinal(), Race.PC_ALL.ordinal(), level));
@@ -99,7 +99,7 @@ public class SkillTreeData {
 	 *         ID, you wouldn't be able to use the lower level versions of a skill.
 	 */
 	public List<SkillLearnTemplate> getSkillsForSkill(int skillId, PlayerClass playerClass, Race race, int playerLevel) {
-		List<SkillLearnTemplate> skillTree = new FastTable<>();
+		List<SkillLearnTemplate> skillTree = new ArrayList<>();
 		for (SkillLearnTemplate learnTemplate : getTemplatesForSkill(getHighestSkill(skillId), playerClass, race)) {
 			createSkillTree(learnTemplate, skillTree);
 			break;
@@ -142,7 +142,7 @@ public class SkillTreeData {
 	 *         probably skill_tree.xml is parsed incorrectly.
 	 */
 	public List<SkillLearnTemplate> getTemplatesForSkill(int skillId, PlayerClass playerClass, Race race) {
-		List<SkillLearnTemplate> searchSkills = new FastTable<>();
+		List<SkillLearnTemplate> searchSkills = new ArrayList<>();
 		List<SkillLearnTemplate> byId = templatesById.get(skillId);
 		if (byId != null) {
 			for (SkillLearnTemplate template : byId)

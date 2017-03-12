@@ -1,6 +1,7 @@
 package com.aionemu.gameserver.model.legionDominion;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -14,8 +15,6 @@ import com.aionemu.gameserver.model.templates.LegionDominionLocationTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_LEGION_DOMINION_RANK;
 import com.aionemu.gameserver.services.LegionService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-
-import javolution.util.FastTable;
 
 /**
  * @author Yeats
@@ -31,7 +30,7 @@ public class LegionDominionLocation {
 	private int legionId;
 	private Timestamp occupiedDate;
 	private Map<Integer, LegionDominionParticipantInfo> participantInfo = new TreeMap<>();
-	private List<Integer> legionsSortedByrank = new FastTable<>();
+	private List<Integer> legionsSortedByrank = new ArrayList<>();
 	
 	public LegionDominionLocation(LegionDominionLocationTemplate temp) {
 		this.id = temp.getId();
@@ -117,7 +116,7 @@ public class LegionDominionLocation {
 	}
 	
 	public List<LegionDominionParticipantInfo> getSortedTop25Participants(LegionDominionParticipantInfo curLegion) {
-		List<LegionDominionParticipantInfo> info = new FastTable<>();
+		List<LegionDominionParticipantInfo> info = new ArrayList<>();
 		info.addAll(participantInfo.values());
 		if (!info.isEmpty()) {
 			info.sort(null);
@@ -133,7 +132,7 @@ public class LegionDominionLocation {
 	}
 
 	public LegionDominionParticipantInfo getWinner() {
-		List<LegionDominionParticipantInfo> info = new FastTable<>();
+		List<LegionDominionParticipantInfo> info = new ArrayList<>();
 		info.addAll(participantInfo.values());
 		if (!info.isEmpty()) {
 			info.sort(null);
@@ -164,6 +163,6 @@ public class LegionDominionLocation {
 
 	public synchronized void reset() {
 		participantInfo = new TreeMap<>();
-		legionsSortedByrank = new FastTable<>();
+		legionsSortedByrank = new ArrayList<>();
 	}
 }

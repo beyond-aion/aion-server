@@ -5,8 +5,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -37,9 +39,6 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.PlayerCommonData;
 import com.aionemu.gameserver.world.World;
 import com.google.common.collect.Maps;
-
-import javolution.util.FastMap;
-import javolution.util.FastTable;
 
 /**
  * @author SoulKeeper, Saelya, cura, KID
@@ -313,7 +312,7 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 
 	@Override
 	public List<Integer> getPlayerOidsOnAccount(final int accountId) {
-		final List<Integer> result = new FastTable<>();
+		final List<Integer> result = new ArrayList<>();
 		boolean success = DB.select("SELECT id FROM players WHERE account_id = ?", new ParamReadStH() {
 
 			@Override
@@ -334,7 +333,7 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 
 	@Override
 	public List<Integer> getPlayerOidsOnAccount(final int accountId, final long exp) {
-		final List<Integer> result = new FastTable<>();
+		final List<Integer> result = new ArrayList<>();
 		boolean success = DB.select("SELECT id FROM players WHERE account_id = ? AND exp <= ?", new ParamReadStH() {
 			
 			@Override
@@ -601,7 +600,7 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 	public Set<Integer> getInactiveAccounts(final int daysOfInactivity) {
 		String SELECT_QUERY = "SELECT account_id FROM players WHERE UNIX_TIMESTAMP(CURDATE())-UNIX_TIMESTAMP(last_online) > ? * 24 * 60 * 60";
 
-		final Map<Integer, Integer> inactiveAccounts = new FastMap<>();
+		final Map<Integer, Integer> inactiveAccounts = new HashMap<>();
 
 		DB.select(SELECT_QUERY, new ParamReadStH() {
 

@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.dataholders;
 
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -15,9 +17,6 @@ import com.aionemu.gameserver.model.enchants.EnchantStat;
 import com.aionemu.gameserver.model.enchants.EnchantTemplateData;
 import com.aionemu.gameserver.model.templates.item.ItemTemplate;
 
-import javolution.util.FastMap;
-import javolution.util.FastTable;
-
 /**
  * @author xTz
  */
@@ -29,16 +28,16 @@ public class EnchantData {
 	private List<EnchantList> enchantList;
 
 	@XmlTransient
-	Map<String, Map<Integer, List<EnchantStat>>> templates = new FastMap<>();
+	Map<String, Map<Integer, List<EnchantStat>>> templates = new LinkedHashMap<>();
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		for (EnchantList enchant : enchantList) {
 			String group = enchant.getItemGroup();
-			Map<Integer, List<EnchantStat>> map = new FastMap<>();
+			Map<Integer, List<EnchantStat>> map = new LinkedHashMap<>();
 			templates.put(group, map);
 			for (EnchantTemplateData data : enchant.getEnchantDatas()) {
 				int level = data.getLevel();
-				List<EnchantStat> stats = new FastTable<>();
+				List<EnchantStat> stats = new ArrayList<>();
 				for (EnchantStat stat : data.getEnchantStats()) {
 					stats.add(stat);
 				}

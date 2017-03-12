@@ -1,5 +1,6 @@
 package ai.instance.tiamatStrongHold;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.Future;
@@ -17,14 +18,13 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_FORCED_MOVE;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.skillengine.model.Skill;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
-import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
 import ai.AggressiveNpcAI;
-import javolution.util.FastTable;
 
 /**
  * @author Cheatkiller
@@ -38,7 +38,7 @@ public class BrigadeGeneralTahabataAI extends AggressiveNpcAI {
 	private Future<?> piercingStrikeTask;
 	private AtomicBoolean isEndFireStorm = new AtomicBoolean(true);
 	private Future<?> fireStormTask;
-	protected List<Integer> percents = new FastTable<>();
+	protected List<Integer> percents = new ArrayList<>();
 
 	@Override
 	protected void handleAttack(Creature creature) {
@@ -108,7 +108,7 @@ public class BrigadeGeneralTahabataAI extends AggressiveNpcAI {
 	}
 
 	private void teleportRandomPlayer() {
-		List<Player> players = new FastTable<>();
+		List<Player> players = new ArrayList<>();
 		getKnownList().forEachPlayer(player -> {
 			if (!PlayerActions.isAlreadyDead(player) && PositionUtil.isInRange(player, getOwner(), 40)) {
 				players.add(player);

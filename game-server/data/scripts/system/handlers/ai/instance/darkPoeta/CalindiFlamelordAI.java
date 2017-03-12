@@ -1,5 +1,6 @@
 package ai.instance.darkPoeta;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -14,7 +15,6 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldPosition;
 
 import ai.AggressiveNpcAI;
-import javolution.util.FastTable;
 
 /**
  * @author Ritsu
@@ -22,7 +22,7 @@ import javolution.util.FastTable;
 @AIName("calindiflamelord")
 public class CalindiFlamelordAI extends AggressiveNpcAI {
 
-	private List<Integer> percents = new FastTable<>();
+	private List<Integer> percents = new ArrayList<>();
 	private AtomicBoolean isStart = new AtomicBoolean(false);
 
 	@Override

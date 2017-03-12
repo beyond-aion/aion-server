@@ -14,7 +14,6 @@ import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.geo.GeoService;
 
-
 /**
  * @author ATracer
  */

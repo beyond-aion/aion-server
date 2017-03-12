@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.skillengine.effect;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -10,8 +11,6 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.stats.calc.functions.IStatFunction;
 import com.aionemu.gameserver.model.stats.calc.functions.StatDualWeaponMasteryFunction;
 import com.aionemu.gameserver.skillengine.model.Effect;
-
-import javolution.util.FastTable;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "WeaponDualEffect")
@@ -26,7 +25,7 @@ public class WeaponDualEffect extends BufEffect {
 			((Player) effect.getEffected()).setDualEffectValue(value);
 
 		List<IStatFunction> modifiers = getModifiers(effect);
-		List<IStatFunction> masteryModifiers = new FastTable<>();
+		List<IStatFunction> masteryModifiers = new ArrayList<>();
 		for (IStatFunction modifier : modifiers) {
 			masteryModifiers.add(new StatDualWeaponMasteryFunction(effect, modifier));
 		}

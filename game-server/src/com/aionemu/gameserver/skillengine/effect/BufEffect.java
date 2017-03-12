@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.skillengine.effect;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -18,8 +19,6 @@ import com.aionemu.gameserver.model.stats.container.CreatureGameStats;
 import com.aionemu.gameserver.skillengine.change.Change;
 import com.aionemu.gameserver.skillengine.condition.Conditions;
 import com.aionemu.gameserver.skillengine.model.Effect;
-
-import javolution.util.FastTable;
 
 /**
  * @author ATracer
@@ -70,7 +69,7 @@ public abstract class BufEffect extends EffectTemplate {
 		int skillId = effect.getSkillId();
 		int skillLvl = effect.getSkillLevel();
 
-		List<IStatFunction> modifiers = new FastTable<>();
+		List<IStatFunction> modifiers = new ArrayList<>();
 
 		if (change == null)
 			return modifiers;

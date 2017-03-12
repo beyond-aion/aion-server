@@ -1,20 +1,19 @@
 package com.aionemu.gameserver.model.gameobjects;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-
-import javolution.util.FastTable;
 
 /**
  * @author Simple
  */
 public class DropNpc {
 
-	private Collection<Integer> allowedList = new FastTable<>();
-	private Collection<Player> inRangePlayers = new FastTable<>();
-	private Collection<Player> playerStatus = new FastTable<>();
+	private Collection<Integer> allowedList = new ArrayList<>();
+	private Collection<Player> inRangePlayers = new ArrayList<>();
+	private Collection<Player> playerStatus = new ArrayList<>();
 	private Player lootingPlayer = null;
 	private int distributionId = 0;
 	private boolean distributionType;

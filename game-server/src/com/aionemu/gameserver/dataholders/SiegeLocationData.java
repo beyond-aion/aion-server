@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.dataholders;
 
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -17,8 +18,6 @@ import com.aionemu.gameserver.model.siege.OutpostLocation;
 import com.aionemu.gameserver.model.siege.SiegeLocation;
 import com.aionemu.gameserver.model.templates.siegelocation.SiegeLocationTemplate;
 
-import javolution.util.FastMap;
-
 /**
  * @author Sarynth, antness
  */
@@ -32,13 +31,13 @@ public class SiegeLocationData {
 	 * Map that contains skillId - SkillTemplate key-value pair
 	 */
 	@XmlTransient
-	private Map<Integer, ArtifactLocation> artifactLocations = new FastMap<>();
+	private Map<Integer, ArtifactLocation> artifactLocations = new LinkedHashMap<>();
 	@XmlTransient
-	private Map<Integer, FortressLocation> fortressLocations = new FastMap<>();
+	private Map<Integer, FortressLocation> fortressLocations = new LinkedHashMap<>();
 	@XmlTransient
-	private Map<Integer, OutpostLocation> outpostLocations = new FastMap<>();
+	private Map<Integer, OutpostLocation> outpostLocations = new LinkedHashMap<>();
 	@XmlTransient
-	private Map<Integer, SiegeLocation> siegeLocations = new FastMap<>();
+	private Map<Integer, SiegeLocation> siegeLocations = new LinkedHashMap<>();
 	@XmlTransient
 	private AgentLocation agentLoc;
 

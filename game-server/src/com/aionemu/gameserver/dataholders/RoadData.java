@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.dataholders;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -9,8 +10,6 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import com.aionemu.gameserver.model.templates.road.RoadTemplate;
-
-import javolution.util.FastTable;
 
 /**
  * @author SheppeR
@@ -24,7 +23,7 @@ public class RoadData {
 
 	public int size() {
 		if (roadTemplates == null) {
-			roadTemplates = new FastTable<>();
+			roadTemplates = new ArrayList<>();
 			return 0;
 		}
 		return roadTemplates.size();
@@ -32,14 +31,14 @@ public class RoadData {
 
 	public List<RoadTemplate> getRoadTemplates() {
 		if (roadTemplates == null) {
-			return new FastTable<>();
+			return new ArrayList<>();
 		}
 		return roadTemplates;
 	}
 
 	public void addAll(Collection<RoadTemplate> templates) {
 		if (roadTemplates == null) {
-			roadTemplates = new FastTable<>();
+			roadTemplates = new ArrayList<>();
 		}
 		roadTemplates.addAll(templates);
 	}

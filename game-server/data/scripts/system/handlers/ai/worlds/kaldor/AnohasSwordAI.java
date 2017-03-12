@@ -1,5 +1,7 @@
 package ai.worlds.kaldor;
 
+import static com.aionemu.gameserver.model.DialogAction.SETPRO1;
+
 import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.NpcAI;
@@ -7,7 +9,6 @@ import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.controllers.NpcController;
 import com.aionemu.gameserver.controllers.observer.ActionObserver;
 import com.aionemu.gameserver.controllers.observer.ObserverType;
-import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.DialogPage;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.Race;

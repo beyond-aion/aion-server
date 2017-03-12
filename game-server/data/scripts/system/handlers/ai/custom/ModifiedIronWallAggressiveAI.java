@@ -1,9 +1,8 @@
 package ai.custom;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import javolution.util.FastTable;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIName;
@@ -32,7 +31,7 @@ import ai.AggressiveNpcAI;
 @AIName("modified_iron_wall_aggressive")
 public class ModifiedIronWallAggressiveAI extends AggressiveNpcAI {
 
-	private List<Integer> percents = new FastTable<>();
+	private List<Integer> percents = new ArrayList<>();
 
 	@Override
 	protected void handleSpawned() {
@@ -180,7 +179,7 @@ public class ModifiedIronWallAggressiveAI extends AggressiveNpcAI {
 			switch (usedSkill.getSkillId()) {
 				case 21165:
 					ThreadPoolManager.getInstance().schedule(() -> {
-						WorldPosition pos = getRandomTarget();
+						WorldPosition pos = getRandomTargetPosition();
 						World.getInstance().updatePosition(getOwner(), pos.getX(), pos.getY(), GeoService.getInstance().getZ(getOwner().getWorldId(), pos.getX(), pos.getY(), pos.getZ(), 0.5f, getOwner().getInstanceId()), pos.getHeading());
 						PacketSendUtility.broadcastPacketAndReceive(getOwner(), new SM_FORCED_MOVE(getOwner(), getOwner()));
 						ThreadPoolManager.getInstance().schedule(() -> getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21171, 1, 100, 0, 6000, true))), 500);
@@ -213,8 +212,8 @@ public class ModifiedIronWallAggressiveAI extends AggressiveNpcAI {
 		}
 	}
 
-	private WorldPosition getRandomTarget() {
-		List<Player> knownPlayers = new FastTable<>();
+	private WorldPosition getRandomTargetPosition() {
+		List<Player> knownPlayers = new ArrayList<>();
 		WorldPosition pos = null;
 		for (Player p : getOwner().getKnownList().getKnownPlayers().values()) {
 				if (p.getLifeStats().isAlreadyDead() || p.getLifeStats().isAboutToDie())
@@ -226,7 +225,7 @@ public class ModifiedIronWallAggressiveAI extends AggressiveNpcAI {
 
 		}
 		if (!knownPlayers.isEmpty()) {
-			pos = knownPlayers.get(Rnd.get(0, knownPlayers.size() - 1)).getPosition();
+			pos = Rnd.get(knownPlayers).getPosition();
 		}
 		return pos;
 	}

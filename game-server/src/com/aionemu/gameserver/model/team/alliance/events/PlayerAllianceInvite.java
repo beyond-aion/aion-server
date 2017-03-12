@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.model.team.alliance.events;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -8,15 +9,13 @@ import com.aionemu.gameserver.model.gameobjects.player.RequestResponseHandler;
 import com.aionemu.gameserver.model.team.TeamType;
 import com.aionemu.gameserver.model.team.alliance.PlayerAlliance;
 import com.aionemu.gameserver.model.team.alliance.PlayerAllianceService;
+import com.aionemu.gameserver.model.team.group.PlayerFilters.ExcludePlayerFilter;
 import com.aionemu.gameserver.model.team.group.PlayerGroup;
 import com.aionemu.gameserver.model.team.group.PlayerGroupService;
-import com.aionemu.gameserver.model.team.group.PlayerFilters.ExcludePlayerFilter;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.restrictions.RestrictionsManager;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.google.common.base.Preconditions;
-
-import javolution.util.FastTable;
 
 /**
  * @author ATracer
@@ -32,7 +31,7 @@ public class PlayerAllianceInvite extends RequestResponseHandler<Player> {
 		if (RestrictionsManager.canInviteToAlliance(inviter, invited)) {
 
 			PlayerAlliance alliance = inviter.getPlayerAlliance();
-			List<Player> playersToAdd = new FastTable<>();
+			List<Player> playersToAdd = new ArrayList<>();
 			collectPlayersToAdd(inviter, invited, playersToAdd, alliance);
 
 			if (alliance == null) {

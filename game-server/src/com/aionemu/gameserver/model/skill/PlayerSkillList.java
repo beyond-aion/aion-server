@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.model.skill;
 
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -9,9 +11,6 @@ import com.aionemu.gameserver.model.gameobjects.PersistentState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.services.SkillLearnService;
 import com.aionemu.gameserver.skillengine.model.SkillLearnTemplate;
-
-import javolution.util.FastMap;
-import javolution.util.FastTable;
 
 /**
  * @author IceReaper, orfeo087, Avol, AEJTester
@@ -23,22 +22,22 @@ public final class PlayerSkillList implements SkillList<Player> {
 	private final List<PlayerSkillEntry> deletedSkills;
 
 	public PlayerSkillList() {
-		this(new FastTable<>());
+		this(new ArrayList<>());
 	}
 
 	public PlayerSkillList(List<PlayerSkillEntry> playerSkills) {
-		this.skills = new FastMap<>();
-		this.deletedSkills = new FastTable<>();
+		this.skills = new LinkedHashMap<>();
+		this.deletedSkills = new ArrayList<>();
 		for (PlayerSkillEntry entry : playerSkills)
 			skills.put(entry.getSkillId(), entry);
 	}
 
 	public List<PlayerSkillEntry> getAllSkills() {
-		return FastTable.of(skills.values());
+		return new ArrayList<>(skills.values());
 	}
 
 	public List<PlayerSkillEntry> getDeletedSkills() {
-		return FastTable.of(deletedSkills);
+		return new ArrayList<>(deletedSkills);
 	}
 
 	public PlayerSkillEntry getSkillEntry(int skillId) {

@@ -1,5 +1,6 @@
 package ai.instance.stonespearReach;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -9,7 +10,6 @@ import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 
 import ai.AggressiveNpcAI;
-import javolution.util.FastTable;
 
 /**
  * @author Yeats
@@ -17,7 +17,7 @@ import javolution.util.FastTable;
 @AIName("aggressive_stonespear")
 public class StonespearAggressiveNpcAI extends AggressiveNpcAI {
 
-	private List<Integer> guardIds = new FastTable<>();
+	private List<Integer> guardIds = new ArrayList<>();
 
 	@Override
 	public void handleSpawned() {

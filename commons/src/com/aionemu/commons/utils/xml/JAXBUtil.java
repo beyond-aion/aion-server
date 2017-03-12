@@ -1,11 +1,14 @@
 package com.aionemu.commons.utils.xml;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
+import java.io.PrintStream;
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -18,11 +21,8 @@ import javax.xml.validation.Schema;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
-import javolution.util.FastTable;
-
 /**
- * @author ?
- * @reworked Neon
+ * @author ?, Neon
  */
 public class JAXBUtil {
 
@@ -142,7 +142,7 @@ public class JAXBUtil {
 	@SuppressWarnings("unchecked")
 	public static <T> List<T> deserialize(Collection<File> files, Class<T> clazz, String schemaFile) {
 		Unmarshaller u = newUnmarshaller(clazz, XmlUtil.getSchema(schemaFile));
-		List<T> objects = new FastTable<>();
+		List<T> objects = new ArrayList<>();
 		for (File file : files) {
 			try {
 				T obj;
@@ -166,8 +166,12 @@ public class JAXBUtil {
 			u.setEventHandler(new XmlValidationHandler());
 			u.setSchema(schema);
 			return u;
-		} catch (Exception e) {
-			throw new RuntimeException("Failed to initialize unmarshaller for class " + clazz.getName(), e);
+		} catch (JAXBException e) {
+			ByteArrayOutputStream os = new ByteArrayOutputStream();
+			try (PrintStream ps = new PrintStream(os)) {
+				e.printStackTrace(ps); // we need to do this, to get detailed information about what caused the issue
+				throw new RuntimeException("Failed to initialize unmarshaller for class " + clazz.getName() + "\n" + os);
+			}
 		}
 	}
 

@@ -1,8 +1,6 @@
 package com.aionemu.commons.utils.xml;
 
-import static org.apache.commons.io.filefilter.FileFilterUtils.and;
-import static org.apache.commons.io.filefilter.FileFilterUtils.makeSVNAware;
-import static org.apache.commons.io.filefilter.FileFilterUtils.suffixFileFilter;
+import static org.apache.commons.io.filefilter.FileFilterUtils.*;
 
 import java.io.File;
 import java.io.Reader;

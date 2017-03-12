@@ -5,7 +5,6 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 
 import ai.GeneralNpcAI;
 
-
 /**
  * @author Estrayl
  */

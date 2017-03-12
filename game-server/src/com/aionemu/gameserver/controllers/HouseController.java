@@ -19,8 +19,8 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_HOUSE_RENDER;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_HOUSE_UPDATE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.teleport.TeleportService;
-import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.World;
 

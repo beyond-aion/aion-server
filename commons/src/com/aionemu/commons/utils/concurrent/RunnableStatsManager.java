@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
@@ -17,8 +18,6 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import javolution.util.FastTable;
 
 /**
  * @author NB4L1
@@ -221,7 +220,7 @@ public final class RunnableStatsManager {
 	}
 
 	public static void dumpClassStats(final SortBy sortBy) {
-		final List<MethodStat> methodStats = new FastTable<>();
+		final List<MethodStat> methodStats = new ArrayList<>();
 
 		synchronized (RunnableStatsManager.class) {
 			for (ClassStat classStat : classStats.values())
@@ -233,7 +232,7 @@ public final class RunnableStatsManager {
 		if (sortBy != null)
 			Collections.sort(methodStats, sortBy.comparator);
 
-		final List<String> lines = new FastTable<>();
+		final List<String> lines = new ArrayList<>();
 
 		lines.add("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>");
 		lines.add("<entries>");

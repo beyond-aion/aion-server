@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.dataholders;
 
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -18,8 +20,6 @@ import com.aionemu.gameserver.model.templates.npcshout.ShoutGroup;
 import com.aionemu.gameserver.model.templates.npcshout.ShoutList;
 
 import gnu.trove.map.hash.TIntObjectHashMap;
-import javolution.util.FastMap;
-import javolution.util.FastTable;
 
 /**
  * <p>
@@ -50,7 +50,7 @@ public class NpcShoutData {
 	protected List<ShoutGroup> shoutGroups;
 
 	@XmlTransient
-	private TIntObjectHashMap<FastMap<Integer, List<NpcShout>>> shoutsByWorldNpcs = new TIntObjectHashMap<>();
+	private TIntObjectHashMap<Map<Integer, List<NpcShout>>> shoutsByWorldNpcs = new TIntObjectHashMap<>();
 
 	@XmlTransient
 	private int count = 0;
@@ -61,16 +61,16 @@ public class NpcShoutData {
 				ShoutList shoutList = group.getShoutNpcs().get(i);
 				int worldId = shoutList.getRestrictWorld();
 
-				FastMap<Integer, List<NpcShout>> worldShouts = shoutsByWorldNpcs.get(worldId);
+				Map<Integer, List<NpcShout>> worldShouts = shoutsByWorldNpcs.get(worldId);
 				if (worldShouts == null) {
-					worldShouts = new FastMap<>();
+					worldShouts = new LinkedHashMap<>();
 					this.shoutsByWorldNpcs.put(worldId, worldShouts);
 				}
 
 				this.count += shoutList.getNpcShouts().size();
 				for (int j = shoutList.getNpcIds().size() - 1; j >= 0; j--) {
 					int npcId = shoutList.getNpcIds().get(j);
-					List<NpcShout> shouts = new FastTable<>();
+					List<NpcShout> shouts = new ArrayList<>();
 					shouts.addAll(shoutList.getNpcShouts());
 					if (worldShouts.get(npcId) == null) {
 						worldShouts.put(npcId, shouts);
@@ -107,7 +107,7 @@ public class NpcShoutData {
 		if (globalShouts == null && worldShouts == null)
 			return null;
 
-		List<NpcShout> npcShouts = new FastTable<>();
+		List<NpcShout> npcShouts = new ArrayList<>();
 		if (globalNpcShouts != null)
 			npcShouts.addAll(globalNpcShouts);
 		if (worldNpcShouts != null)
@@ -120,7 +120,7 @@ public class NpcShoutData {
 		if (shouts == null || type == null)
 			return shouts;
 
-		return shouts.stream().filter(shout -> shout.getWhen() == type).collect(Collectors.toCollection(FastTable::new));
+		return shouts.stream().filter(shout -> shout.getWhen() == type).collect(Collectors.toList());
 	}
 
 	/**

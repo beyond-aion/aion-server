@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.world;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -36,8 +37,6 @@ import com.aionemu.gameserver.world.zone.ZoneName;
 import com.aionemu.gameserver.world.zone.ZoneService;
 
 import gnu.trove.map.hash.TIntObjectHashMap;
-import javolution.util.FastSet;
-import javolution.util.FastTable;
 
 /**
  * World map instance object.
@@ -78,7 +77,7 @@ public abstract class WorldMapInstance implements Iterable<VisibleObject> {
 	 * Id of this instance (channel)
 	 */
 	private int instanceId;
-	private final Set<Integer> questIds = new FastSet<>();
+	private final List<Integer> questIds = new ArrayList<>();
 	private InstanceHandler instanceHandler;
 	private Map<ZoneName, ZoneInstance> zones = new HashMap<>();
 	// TODO: Merge this with owner
@@ -207,7 +206,7 @@ public abstract class WorldMapInstance implements Iterable<VisibleObject> {
 	}
 
 	public List<Player> getPlayersInside() {
-		return FastTable.of(worldMapPlayers.values());
+		return new ArrayList<>(worldMapPlayers.values());
 	}
 
 	/**
@@ -233,7 +232,7 @@ public abstract class WorldMapInstance implements Iterable<VisibleObject> {
 	}
 
 	public List<Npc> getNpcs(int npcId) {
-		List<Npc> npcs = new FastTable<>();
+		List<Npc> npcs = new ArrayList<>();
 		for (VisibleObject v : this) {
 			if (v instanceof Npc && v.getObjectTemplate().getTemplateId() == npcId)
 				npcs.add((Npc) v);
@@ -242,7 +241,7 @@ public abstract class WorldMapInstance implements Iterable<VisibleObject> {
 	}
 
 	public List<Npc> getNpcs() {
-		List<Npc> npcs = new FastTable<>();
+		List<Npc> npcs = new ArrayList<>();
 		for (VisibleObject v : this) {
 			if (v instanceof Npc)
 				npcs.add((Npc) v);
@@ -341,7 +340,7 @@ public abstract class WorldMapInstance implements Iterable<VisibleObject> {
 		return registeredGroup;
 	}
 
-	public Set<Integer> getQuestIds() {
+	public List<Integer> getQuestIds() {
 		return questIds;
 	}
 
@@ -373,7 +372,7 @@ public abstract class WorldMapInstance implements Iterable<VisibleObject> {
 	}
 
 	protected ZoneInstance[] filterZones(int mapId, int regionId, float startX, float startY, float minZ, float maxZ) {
-		List<ZoneInstance> regionZones = new FastTable<>();
+		List<ZoneInstance> regionZones = new ArrayList<>();
 		RegionZone regionZone = new RegionZone(startX, startY, minZ, maxZ);
 
 		for (ZoneInstance zoneInstance : zones.values()) {

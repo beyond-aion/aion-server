@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -15,8 +16,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_UPGRADE_ARCADE;
 import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
-
-import javolution.util.FastTable;
 
 /**
  * @author ginho1
@@ -138,7 +137,7 @@ public class ArcadeUpgradeService {
 			return;
 
 		ArcadeProgress progress = getProgress(player.getObjectId());
-		List<ArcadeTabItemList> rewardList = new FastTable<>();
+		List<ArcadeTabItemList> rewardList = new ArrayList<>();
 
 		final int rewardTab = getRewardTabForLevel(progress.getCurrentLevel());
 		for (ArcadeTab arcadeTab : getTabs()) {
@@ -156,8 +155,7 @@ public class ArcadeUpgradeService {
 		}
 
 		if (rewardList.size() > 0) {
-			int index = Rnd.get(0, rewardList.size() - 1);
-			ArcadeTabItemList item = rewardList.get(index);
+			ArcadeTabItemList item = Rnd.get(rewardList);
 			ItemService.addItem(player, item.getItemId(), progress.isFrenzyActive() ? item.getFrenzyCount() : item.getNormalCount());
 			PacketSendUtility.sendPacket(player, new SM_UPGRADE_ARCADE(6, item));
 			progress.setCurrentLevel(1);

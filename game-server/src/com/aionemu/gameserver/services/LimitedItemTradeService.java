@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.services;
 
+import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.slf4j.Logger;
@@ -13,8 +14,6 @@ import com.aionemu.gameserver.model.limiteditems.LimitedItem;
 import com.aionemu.gameserver.model.limiteditems.LimitedTradeNpc;
 import com.aionemu.gameserver.model.templates.goods.GoodsList;
 import com.aionemu.gameserver.model.templates.tradelist.TradeListTemplate.TradeTab;
-
-import javolution.util.FastTable;
 
 /**
  * @author xTz TYPE_A: BuyLimit == 0 && SellLimit != 0 TYPE_B: BuyLimit != 0 && SellLimit == 0 TYPE_C: BuyLimit != 0 && SellLimit != 0
@@ -34,7 +33,7 @@ public class LimitedItemTradeService {
 					log.warn("No goodslist for tradelist of npc " + npcId);
 					continue;
 				}
-				FastTable<LimitedItem> limitedItems = goodsList.getLimitedItems();
+				List<LimitedItem> limitedItems = goodsList.getLimitedItems();
 				if (limitedItems.isEmpty()) {
 					continue;
 				}

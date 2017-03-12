@@ -2,6 +2,7 @@ package instance;
 
 import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE.STR_REBIRTH_MASSAGE_ME;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Future;
@@ -38,8 +39,6 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.WorldPosition;
 
-import javolution.util.FastTable;
-
 /**
  * @author xTz
  */
@@ -53,8 +52,8 @@ public class KamarBattlefieldInstance extends GeneralInstanceHandler {
 	private Future<?> timeCheckTask;
 	private byte timeInMin = -1;
 	private boolean isInstanceDestroyed = false;
-	private static List<WorldPosition> generalsPos = new FastTable<>();
-	private static List<WorldPosition> garnonPos = new FastTable<>();
+	private static List<WorldPosition> generalsPos = new ArrayList<>();
+	private static List<WorldPosition> garnonPos = new ArrayList<>();
 
 	static {
 		generalsPos.add(new WorldPosition(301120000, 1437.7f, 1368.7f, 600.8967f, (byte) 40));
@@ -132,8 +131,7 @@ public class KamarBattlefieldInstance extends GeneralInstanceHandler {
 	}
 
 	private void startTimeCheck() {
-		int index = Rnd.get(0, garnonPos.size() - 1);
-		WorldPosition pos = garnonPos.get(index);
+		WorldPosition pos = Rnd.get(garnonPos);
 		spawn(801903, pos.getX(), pos.getY(), pos.getZ(), pos.getHeading());
 		timeCheckTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
 
@@ -186,17 +184,17 @@ public class KamarBattlefieldInstance extends GeneralInstanceHandler {
 						sendMsg(1401843);
 						break;
 					case 18:
-						List<WorldPosition> temp = new FastTable<>();
+						List<WorldPosition> temp = new ArrayList<>();
 						temp.addAll(generalsPos);
-						int index = Rnd.get(0, temp.size() - 1);
+						int index = Rnd.get(temp.size());
 						WorldPosition pos = temp.get(index);
 						spawn(232854, pos.getX(), pos.getY(), pos.getZ(), pos.getHeading());
 						temp.remove(index);
-						index = Rnd.get(0, temp.size() - 1);
+						index = Rnd.get(temp.size());
 						pos = temp.get(index);
 						spawn(232853, pos.getX(), pos.getY(), pos.getZ(), pos.getHeading());
 						temp.remove(index);
-						index = Rnd.get(0, temp.size() - 1);
+						index = Rnd.get(temp.size());
 						pos = temp.get(index);
 						spawn(232852, pos.getX(), pos.getY(), pos.getZ(), pos.getHeading());
 						temp.remove(index);
