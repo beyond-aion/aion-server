@@ -168,15 +168,16 @@ public class TeleportService {
 	private static boolean checkKinahForTransportation(TeleportLocation location, Player player) {
 		Storage inventory = player.getInventory();
 
-		// TODO: Price vary depending on the influence ratio
-		int basePrice = (location.getPrice());
-		// TODO check for location.getPricePvp()
-
-		long transportationPrice = PricesService.getPriceForService(basePrice, player.getRace());
+		long transportationPrice;
 
 		// If HiPassEffect is active, then all flight/teleport prices are 1 kinah
-		if (player.getController().isHiPassInEffect())
+		if (player.getEffectController().isHiPassInEffect())
 			transportationPrice = 1;
+		else {
+			int basePrice = location.getPrice();
+			// TODO check for location.getPricePvp()
+			transportationPrice = PricesService.getPriceForService(basePrice, player.getRace());
+		}
 
 		if (!inventory.tryDecreaseKinah(transportationPrice, ItemUpdateType.DEC_KINAH_FLY)) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_NOT_ENOUGH_KINA(transportationPrice));

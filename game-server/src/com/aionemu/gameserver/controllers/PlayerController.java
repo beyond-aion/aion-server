@@ -4,7 +4,6 @@ import static com.aionemu.gameserver.model.DialogAction.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -287,9 +286,9 @@ public class PlayerController extends CreatureController<Player> {
 
 	@Override
 	public void onDie(@Nonnull Creature lastAttacker) {
-		Player player = this.getOwner();
+		Player player = getOwner();
 		player.getController().cancelCurrentSkill(null);
-		player.setRebirthRevive(getOwner().haveSelfRezEffect());
+		player.setRebirthRevive(player.haveSelfRezEffect());
 		Creature master = lastAttacker.getMaster();
 
 		if (DuelService.getInstance().isDueling(player.getObjectId())) {
@@ -339,13 +338,13 @@ public class PlayerController extends CreatureController<Player> {
 			return;
 
 		MapRegion mapRegion = player.getPosition().getMapRegion();
-		if (mapRegion != null && mapRegion.onDie(lastAttacker, getOwner()))
+		if (mapRegion != null && mapRegion.onDie(lastAttacker, player))
 			return;
 
 		doReward();
 
 		if (master instanceof Npc || master.equals(player)) {
-			if (player.getLevel() > 4 && !isNoDeathPenaltyInEffect())
+			if (player.getLevel() > 4 && !player.getEffectController().isNoDeathPenaltyInEffect())
 				player.getCommonData().calculateExpLoss();
 		}
 
@@ -775,66 +774,14 @@ public class PlayerController extends CreatureController<Player> {
 	 * @return true if the player is actively in combat
 	 */
 	public boolean isInCombat() {
-		return (((System.currentTimeMillis() - lastAttackedMillis) <= 10000) || ((System.currentTimeMillis() - lastAttackMillis) <= 10000));
+		return System.currentTimeMillis() - getLastCombatTime() <= 10000;
 	}
 
 	/**
-	 * @return
+	 * @return The last time, when the player attacked someone or got attacked
 	 */
 	public long getLastCombatTime() {
-		if (lastAttackedMillis < lastAttackMillis) {
-			return lastAttackMillis;
-		} else {
-			return lastAttackedMillis;
-		}
-	}
-
-	/**
-	 * Check if NoDeathPenalty is active
-	 * 
-	 * @return boolean
-	 */
-	public boolean isNoDeathPenaltyInEffect() {
-		// Check if NoDeathPenalty is active
-		Iterator<Effect> iterator = getOwner().getEffectController().iterator();
-		while (iterator.hasNext()) {
-			Effect effect = iterator.next();
-			if (effect.isNoDeathPenalty())
-				return true;
-		}
-		return false;
-	}
-
-	/**
-	 * Check if NoResurrectPenalty is active
-	 * 
-	 * @return boolean
-	 */
-	public boolean isNoResurrectPenaltyInEffect() {
-		// Check if NoResurrectPenalty is active
-		Iterator<Effect> iterator = getOwner().getEffectController().iterator();
-		while (iterator.hasNext()) {
-			Effect effect = iterator.next();
-			if (effect.isNoResurrectPenalty())
-				return true;
-		}
-		return false;
-	}
-
-	/**
-	 * Check if HiPass is active
-	 * 
-	 * @return boolean
-	 */
-	public boolean isHiPassInEffect() {
-		// Check if HiPass is active
-		Iterator<Effect> iterator = getOwner().getEffectController().iterator();
-		while (iterator.hasNext()) {
-			Effect effect = iterator.next();
-			if (effect.isHiPass())
-				return true;
-		}
-		return false;
+		return Math.max(lastAttackedMillis, lastAttackMillis);
 	}
 
 }

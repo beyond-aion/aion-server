@@ -1667,7 +1667,7 @@ public class Player extends Creature {
 		List<Effect> effects = getEffectController().getAbnormalEffects();
 		for (Effect effect : effects) {
 			for (EffectTemplate template : effect.getEffectTemplates()) {
-				if (template.getEffectid() == 160 && template instanceof RebirthEffect) {
+				if (template.getEffectId() == 160 && template instanceof RebirthEffect) {
 					RebirthEffect rebirthEffect = (RebirthEffect) template;
 					setRebirthResurrectPercent(rebirthEffect.getResurrectPercent());
 					setRebirthSkill(rebirthEffect.getSkillId());
@@ -1682,7 +1682,7 @@ public class Player extends Creature {
 		List<Effect> effects = getEffectController().getAbnormalEffects();
 		for (Effect effect : effects) {
 			for (EffectTemplate template : effect.getEffectTemplates()) {
-				if (template.getEffectid() == 160 && template instanceof ResurrectBaseEffect) {
+				if (template.getEffectId() == 160 && template instanceof ResurrectBaseEffect) {
 					return true;
 				}
 			}

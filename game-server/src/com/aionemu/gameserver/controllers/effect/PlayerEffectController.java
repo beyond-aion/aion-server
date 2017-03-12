@@ -64,7 +64,6 @@ public class PlayerEffectController extends EffectController {
 		}
 	}
 
-	@Override
 	public void updatePlayerEffectIcons(Effect effect) {
 		int slot = effect != null ? effect.getTargetSlot().getId() : SkillTargetSlot.FULLSLOTS;
 		Collection<Effect> effects = getAbnormalEffectsToShow();
@@ -84,7 +83,6 @@ public class PlayerEffectController extends EffectController {
 				return true;
 			}
 		}
-
 		return false;
 	}
 

@@ -25,7 +25,6 @@ public class CM_TOGGLE_SKILL_DEACTIVATE extends AionClientPacket {
 	@Override
 	protected void runImpl() {
 		Player player = getConnection().getActivePlayer();
-		player.getEffectController().removeNoshowEffect(skillId);
 		player.getEffectController().removeEffect(skillId);
 
 		if (player.getController().getStanceSkillId() == skillId) {

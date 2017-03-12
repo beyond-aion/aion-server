@@ -4,7 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Iterator;
+import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import javax.annotation.Nullable;
 
@@ -19,8 +21,6 @@ import com.aionemu.gameserver.dao.MySQL5DAOUtils;
 import com.aionemu.gameserver.dao.PlayerEffectsDAO;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.skillengine.model.Effect;
-import com.google.common.base.Predicate;
-import com.google.common.collect.Iterators;
 
 /**
  * @author ATracer
@@ -36,7 +36,7 @@ public class MySQL5PlayerEffectsDAO extends PlayerEffectsDAO {
 	private static final Predicate<Effect> insertableEffectsPredicate = new Predicate<Effect>() {
 
 		@Override
-		public boolean apply(@Nullable Effect input) {
+		public boolean test(@Nullable Effect input) {
 			return input != null && input.getRemainingTime() > 28000 && !input.getSkillTemplate().isNoSaveOnLogout();
 		}
 	};
@@ -70,12 +70,11 @@ public class MySQL5PlayerEffectsDAO extends PlayerEffectsDAO {
 	public void storePlayerEffects(final Player player) {
 		deletePlayerEffects(player);
 
-		Iterator<Effect> iterator = player.getEffectController().iterator();
-		iterator = Iterators.filter(iterator, insertableEffectsPredicate);
+		List<Effect> effects = player.getEffectController().getAbnormalEffects();
+		effects = effects.stream().filter(insertableEffectsPredicate).collect(Collectors.toList());
 
-		if (!iterator.hasNext()) {
+		if (effects.isEmpty())
 			return;
-		}
 
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -84,8 +83,7 @@ public class MySQL5PlayerEffectsDAO extends PlayerEffectsDAO {
 			con.setAutoCommit(false);
 			ps = con.prepareStatement(INSERT_QUERY);
 
-			while (iterator.hasNext()) {
-				Effect effect = iterator.next();
+			for (Effect effect : effects) {
 				ps.setInt(1, player.getObjectId());
 				ps.setInt(2, effect.getSkillId());
 				ps.setInt(3, effect.getSkillLevel());

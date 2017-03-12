@@ -148,7 +148,7 @@ public abstract class EffectTemplate {
 	/**
 	 * @return the effectid
 	 */
-	public int getEffectid() {
+	public int getEffectId() {
 		return effectid;
 	}
 
