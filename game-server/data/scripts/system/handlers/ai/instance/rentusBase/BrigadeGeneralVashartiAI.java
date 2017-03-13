@@ -62,18 +62,24 @@ public class BrigadeGeneralVashartiAI extends AggressiveNpcAI {
 		checkPercentage(getLifeStats().getHpPercentage());
 	}
 
-	private synchronized void checkPercentage(int hpPercentage) {
-		percents.stream().filter(percent -> hpPercentage <= percent && !isInFlameShowerTask.get()).forEach(percent -> {
-			percents.remove(percent);
-			cancelFlameBuffEvent();
-			getOwner().getQueuedSkills().clear();
-			getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(20532, 1, 100, 0, 10000, true)));
-		});
+	private void checkPercentage(int hpPercentage) {
+		if (isInFlameShowerTask.get())
+			return;
+		for (int percent : percents) {
+			if (hpPercentage <= percent) {
+				percents.remove(percent);
+				cancelFlameBuffEvent();
+				getOwner().getQueuedSkills().clear();
+				getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(20532, 1, 100, 0, 10000, true)));
+				break;
+			}
+		}
 	}
 
 	@Override
 	public void handleMoveArrived() {
-		if (isInState(AIState.FORCED_WALKING) && isInFlameShowerTask.get() && PositionUtil.getDistance(getOwner().getX(), getOwner().getY(), 188.17f, 414.06f) <= 1f) {
+		if (isInState(AIState.FORCED_WALKING) && isInFlameShowerTask.get()
+			&& PositionUtil.getDistance(getOwner().getX(), getOwner().getY(), 188.17f, 414.06f) <= 1f) {
 			getOwner().getMoveController().abortMove();
 			setStateIfNot(AIState.FIGHT);
 			setSubStateIfNot(AISubState.NONE);
@@ -260,7 +266,8 @@ public class BrigadeGeneralVashartiAI extends AggressiveNpcAI {
 	}
 
 	private List<Point3D> getRedFlameSmashs(int npcId) {
-		return (npcId == 283008 ? redFlameSmashs : blueFlameSmashs).stream().filter(flameSmash -> !isSpawned(npcId, flameSmash)).collect(Collectors.toCollection(ArrayList::new));
+		return (npcId == 283008 ? redFlameSmashs : blueFlameSmashs).stream().filter(flameSmash -> !isSpawned(npcId, flameSmash))
+			.collect(Collectors.toList());
 	}
 
 	private void deleteNpcs(List<Npc> npcs) {
