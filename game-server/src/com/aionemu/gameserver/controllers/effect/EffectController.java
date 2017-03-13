@@ -2,13 +2,12 @@ package com.aionemu.gameserver.controllers.effect;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
+import java.util.concurrent.locks.ReadWriteLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 import java.util.stream.Collectors;
 
 import com.aionemu.gameserver.dataholders.DataManager;
@@ -42,12 +41,12 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 public class EffectController {
 
 	private final Creature owner;
-	private final Map<String, Effect> passiveEffectMap = Collections.synchronizedMap(new LinkedHashMap<>());
-	private final Map<String, Effect> noshowEffects = Collections.synchronizedMap(new LinkedHashMap<>());
-	private final Map<String, Effect> abnormalEffectMap = Collections.synchronizedMap(new LinkedHashMap<>());
+	private final Map<String, Effect> passiveEffectMap = new LinkedHashMap<>();
+	private final Map<String, Effect> noshowEffects = new LinkedHashMap<>();
+	private final Map<String, Effect> abnormalEffectMap = new LinkedHashMap<>();
 	private long abnormalMapUpdate;
 
-	private final Lock lock = new ReentrantLock();
+	protected final ReadWriteLock lock = new ReentrantReadWriteLock();
 
 	protected int abnormals;
 
@@ -85,7 +84,7 @@ public class EffectController {
 	public void addEffect(Effect nextEffect) {
 		Map<String, Effect> mapToUpdate = getMapForEffect(nextEffect);
 
-		lock.lock();
+		lock.writeLock().lock();
 		try {
 			if (nextEffect.isPassive()) {
 				boolean useEffectId = true;
@@ -147,7 +146,7 @@ public class EffectController {
 					|| ((Player) nextEffect.getEffector()).getPlayerClass() == PlayerClass.RIDER)) {
 					mts = 2;
 				}
-				Collection<Effect> filteredMap = nextEffect.getSkillSubType() == SkillSubType.CHANT ? getAuraEffects() : getNoShowToggleEffects();
+				Collection<Effect> filteredMap = nextEffect.getSkillSubType() == SkillSubType.CHANT ? getAuraEffects() : getNoShowToggleEffectsExceptAuras();
 				if (filteredMap.size() >= mts) {
 					Iterator<Effect> iter = filteredMap.iterator();
 					iter.next().endEffect();
@@ -156,7 +155,7 @@ public class EffectController {
 
 			// max 4 chants
 			if (nextEffect.isChant()) {
-				Collection<Effect> chants = getChantEffects();
+				Collection<Effect> chants = abnormalEffectMap.values().stream().filter(e -> e.isChant()).collect(Collectors.toList());
 				if (chants.size() >= 4) {
 					Iterator<Effect> chantIter = chants.iterator();
 					chantIter.next().endEffect();
@@ -170,7 +169,7 @@ public class EffectController {
 				mapToUpdate.put(nextEffect.getStack(), nextEffect);
 			}
 		} finally {
-			lock.unlock();
+			lock.writeLock().unlock();
 		}
 
 		// ? move into lock area
@@ -181,6 +180,9 @@ public class EffectController {
 		}
 	}
 
+	/**
+	 * DON'T call this method anywhere else than addEffect() since it's not no synchronized
+	 */
 	private void endConflictedEffect(Map<String, Effect> mapToUpdate, Effect newEffect) {
 		int conflictId = newEffect.getSkillTemplate().getConflictId();
 		if (conflictId == 0)
@@ -195,6 +197,9 @@ public class EffectController {
 		}
 	}
 
+	/**
+	 * DON'T call this method anywhere else than addEffect() since it's not no synchronized
+	 */
 	private boolean searchConflict(Map<String, Effect> mapToUpdate, Effect nextEffect) {
 		if (checkExtraEffect(mapToUpdate, nextEffect))
 			return false;
@@ -226,6 +231,9 @@ public class EffectController {
 		return false;
 	}
 
+	/**
+	 * DON'T call this method anywhere else than addEffect() since it's not no synchronized
+	 */
 	private boolean checkExtraEffect(Map<String, Effect> mapToUpdate, Effect nextEffect) {
 		for (Iterator<Effect> iter = mapToUpdate.values().iterator(); iter.hasNext();) {
 			Effect effect = iter.next();
@@ -243,10 +251,30 @@ public class EffectController {
 		return false;
 	}
 
+	/**
+	 * DON'T call this method anywhere else than addEffect() since it's not no synchronized
+	 */
+	private List<Effect> getAuraEffects() {
+		return noshowEffects.values().stream().filter(e -> e.getSkillSubType() == SkillSubType.CHANT).collect(Collectors.toList());
+	}
+
+	/**
+	 * DON'T call this method anywhere else than addEffect() since it's not no synchronized
+	 */
+	private List<Effect> getNoShowToggleEffectsExceptAuras() {
+		return noshowEffects.values().stream().filter(e -> e.getSkillSubType() != SkillSubType.CHANT).collect(Collectors.toList());
+	}
+
+	/**
+	 * DON'T call this method anywhere else than addEffect() since it's not no synchronized
+	 */
 	private boolean shouldAddBeforeLastEffect(Effect effect) {
 		return effect.getSkill() != null && System.currentTimeMillis() - abnormalMapUpdate < effect.getSkill().getHitTime();
 	}
 
+	/**
+	 * DON'T call this method anywhere else than addEffect() since it's not no synchronized
+	 */
 	private void addBeforeLastElement(Map<String, Effect> mapToUpdate, Effect newEffect) {
 		Effect lastEffect = null;
 		for (Iterator<Effect> iter = mapToUpdate.values().iterator(); iter.hasNext();) {
@@ -291,11 +319,14 @@ public class EffectController {
 	 * @return
 	 */
 	public boolean hasAbnormalEffect(int skillId) {
-		synchronized (abnormalEffectMap) {
+		lock.readLock().lock();
+		try {
 			for (Effect effect : abnormalEffectMap.values()) {
 				if (effect.getSkillId() == skillId)
 					return true;
 			}
+		} finally {
+			lock.readLock().unlock();
 		}
 		return false;
 	}
@@ -306,13 +337,16 @@ public class EffectController {
 	 * @return boolean
 	 */
 	public boolean isNoDeathPenaltyInEffect() {
-		synchronized (abnormalEffectMap) {
+		lock.readLock().lock();
+		try {
 			for (Effect effect : abnormalEffectMap.values()) {
 				if (effect.isNoDeathPenalty())
 					return true;
 			}
-			return false;
+		} finally {
+			lock.readLock().unlock();
 		}
+		return false;
 	}
 
 	/**
@@ -321,13 +355,16 @@ public class EffectController {
 	 * @return boolean
 	 */
 	public boolean isNoResurrectPenaltyInEffect() {
-		synchronized (abnormalEffectMap) {
+		lock.readLock().lock();
+		try {
 			for (Effect effect : abnormalEffectMap.values()) {
 				if (effect.isNoResurrectPenalty())
 					return true;
 			}
-			return false;
+		} finally {
+			lock.readLock().unlock();
 		}
+		return false;
 	}
 
 	/**
@@ -336,12 +373,15 @@ public class EffectController {
 	 * @return boolean
 	 */
 	public boolean isHiPassInEffect() {
-		synchronized (abnormalEffectMap) {
+		lock.readLock().lock();
+		try {
 			for (Effect effect : abnormalEffectMap.values()) {
 				if (effect.isHiPass())
 					return true;
 			}
 			return false;
+		} finally {
+			lock.readLock().unlock();
 		}
 	}
 
@@ -351,17 +391,19 @@ public class EffectController {
 		PacketSendUtility.broadcastPacket(getOwner(), new SM_ABNORMAL_EFFECT(getOwner(), abnormals, effects, slot));
 	}
 
-	/**
-	 * @param effect
-	 */
-	public void clearEffect(Effect effect, boolean broadCastEffects) {
-		getMapForEffect(effect).remove(effect.getStack());
-		if (broadCastEffects)
-			broadCastEffects(effect);
-	}
-
 	public void clearEffect(Effect effect) {
 		clearEffect(effect, true);
+	}
+
+	public void clearEffect(Effect effect, boolean broadCastEffects) {
+		lock.writeLock().lock();
+		try {
+			getMapForEffect(effect).remove(effect.getStack());
+		} finally {
+			lock.writeLock().unlock();
+		}
+		if (broadCastEffects)
+			broadCastEffects(effect);
 	}
 
 	/**
@@ -371,7 +413,8 @@ public class EffectController {
 	 */
 	public void removeEffect(int skillId) {
 		Map<String, Effect> mapForEffect = getMapForEffect(skillId);
-		synchronized (mapForEffect) {
+		lock.writeLock().lock();
+		try {
 			for (Iterator<Effect> iter = mapForEffect.values().iterator(); iter.hasNext();) {
 				Effect effect = iter.next();
 				if (effect.getSkillId() == skillId) {
@@ -379,11 +422,14 @@ public class EffectController {
 					effect.endEffect();
 				}
 			}
+		} finally {
+			lock.writeLock().unlock();
 		}
 	}
 
 	public void removeHideEffects() {
-		synchronized (abnormalEffectMap) {
+		lock.writeLock().lock();
+		try {
 			for (Iterator<Effect> iter = abnormalEffectMap.values().iterator(); iter.hasNext();) {
 				Effect effect = iter.next();
 				if (effect.isHideEffect() && owner.getVisualState() < 10) {
@@ -391,6 +437,8 @@ public class EffectController {
 					effect.endEffect();
 				}
 			}
+		} finally {
+			lock.writeLock().unlock();
 		}
 	}
 
@@ -398,7 +446,8 @@ public class EffectController {
 	 * Removes Petorderunsummon effects from owner.
 	 */
 	public void removePetOrderUnSummonEffects() {
-		synchronized (abnormalEffectMap) {
+		lock.writeLock().lock();
+		try {
 			for (Iterator<Effect> iter = abnormalEffectMap.values().iterator(); iter.hasNext();) {
 				Effect effect = iter.next();
 				if (effect.isPetOrderUnSummonEffect()) {
@@ -406,6 +455,8 @@ public class EffectController {
 					effect.endEffect();
 				}
 			}
+		} finally {
+			lock.writeLock().unlock();
 		}
 	}
 
@@ -413,7 +464,8 @@ public class EffectController {
 	 * Removes Paralyze effects from owner.
 	 */
 	public void removeParalyzeEffects() {
-		synchronized (abnormalEffectMap) {
+		lock.writeLock().lock();
+		try {
 			for (Iterator<Effect> iter = abnormalEffectMap.values().iterator(); iter.hasNext();) {
 				Effect effect = iter.next();
 				if (effect.isParalyzeEffect()) {
@@ -421,6 +473,8 @@ public class EffectController {
 					effect.endEffect();
 				}
 			}
+		} finally {
+			lock.writeLock().unlock();
 		}
 	}
 
@@ -428,7 +482,8 @@ public class EffectController {
 	 * Removes Stun effects from owner.
 	 */
 	public void removeStunEffects() {
-		synchronized (abnormalEffectMap) {
+		lock.writeLock().lock();
+		try {
 			for (Iterator<Effect> iter = abnormalEffectMap.values().iterator(); iter.hasNext();) {
 				Effect effect = iter.next();
 				if (effect.isStunEffect()) {
@@ -436,6 +491,8 @@ public class EffectController {
 					effect.endEffect();
 				}
 			}
+		} finally {
+			lock.writeLock().unlock();
 		}
 	}
 
@@ -443,7 +500,8 @@ public class EffectController {
 	 * Removes Transform effects from owner. for more info see TransformEffect it doesnt remove Avatar transforms (TODO find out on retail)
 	 */
 	public void removeTransformEffects() {
-		synchronized (abnormalEffectMap) {
+		lock.writeLock().lock();
+		try {
 			for (Iterator<Effect> iter = abnormalEffectMap.values().iterator(); iter.hasNext();) {
 				Effect effect = iter.next();
 				for (EffectTemplate et : effect.getEffectTemplates()) {
@@ -453,6 +511,8 @@ public class EffectController {
 					}
 				}
 			}
+		} finally {
+			lock.writeLock().unlock();
 		}
 	}
 
@@ -465,7 +525,8 @@ public class EffectController {
 
 	public boolean removeByEffectId(int effectId, int dispelLevel, int power) {
 		// abnormalEffectMap
-		synchronized (abnormalEffectMap) {
+		lock.writeLock().lock();
+		try {
 			for (Iterator<Effect> iter = abnormalEffectMap.values().iterator(); iter.hasNext();) {
 				Effect effect = iter.next();
 				if (!effect.containsEffectId(effectId))
@@ -480,9 +541,7 @@ public class EffectController {
 					return true;
 				}
 			}
-		}
-		// noshowEffects
-		synchronized (noshowEffects) {
+			// noshowEffects
 			for (Iterator<Effect> iter = noshowEffects.values().iterator(); iter.hasNext();) {
 				Effect effect = iter.next();
 				if (!effect.containsEffectId(effectId))
@@ -497,13 +556,16 @@ public class EffectController {
 					return true;
 				}
 			}
+		} finally {
+			lock.writeLock().unlock();
 		}
 		return false;
 	}
 
 	public void removeByDispelEffect(EffectType effectType, DispelSlotType dispelSlotType, int count, int dispelLevel, int power) {
 		// abnormalEffectMap
-		synchronized (abnormalEffectMap) {
+		lock.writeLock().lock();
+		try {
 			for (Iterator<Effect> iter = abnormalEffectMap.values().iterator(); iter.hasNext();) {
 				Effect effect = iter.next();
 				// check count
@@ -531,9 +593,7 @@ public class EffectController {
 				// decrease count
 				count--;
 			}
-		}
-		// noshowEffects
-		synchronized (noshowEffects) {
+			// noshowEffects
 			for (Iterator<Effect> iter = noshowEffects.values().iterator(); iter.hasNext();) {
 				Effect effect = iter.next();
 				// check count
@@ -557,11 +617,12 @@ public class EffectController {
 				if (removePower(effect, power)) {
 					iter.remove();
 					effect.endEffect();
-					noshowEffects.remove(effect.getStack());
 				}
 				// decrease count
 				count--;
 			}
+		} finally {
+			lock.writeLock().unlock();
 		}
 	}
 
@@ -575,7 +636,8 @@ public class EffectController {
 	public int calculateNumberOfEffects(int dispelLevel) {
 		int number = 0;
 
-		synchronized (abnormalEffectMap) {
+		lock.readLock().lock();
+		try {
 			for (Effect effect : abnormalEffectMap.values()) {
 				DispelCategoryType dispelCat = effect.getDispelCategory();
 				SkillTargetSlot tragetSlot = effect.getSkillTemplate().getTargetSlot();
@@ -600,6 +662,8 @@ public class EffectController {
 						break;
 				}
 			}
+		} finally {
+			lock.readLock().unlock();
 		}
 
 		return number;
@@ -607,7 +671,8 @@ public class EffectController {
 
 	public void removeEffectByDispelCat(DispelCategoryType dispelCat, SkillTargetSlot targetSlot, int count, int dispelLevel, int power,
 		boolean itemTriggered) {
-		synchronized (abnormalEffectMap) {
+		lock.writeLock().lock();
+		try {
 			for (Iterator<Effect> iter = abnormalEffectMap.values().iterator(); iter.hasNext();) {
 				Effect effect = iter.next();
 				if (count == 0)
@@ -674,11 +739,14 @@ public class EffectController {
 				} else if (owner instanceof Player)
 					PacketSendUtility.sendPacket((Player) owner, SM_SYSTEM_MESSAGE.STR_MSG_NOT_ENOUGH_DISPELLEVEL());
 			}
+		} finally {
+			lock.writeLock().unlock();
 		}
 	}
 
 	private int removeEffectByTargetSlot(int count, SkillTargetSlot targetSlot, int dispelLevel, int power) {
-		synchronized (abnormalEffectMap) {
+		lock.writeLock().lock();
+		try {
 			for (Iterator<Effect> iter = abnormalEffectMap.values().iterator(); iter.hasNext();) {
 				Effect effect = iter.next();
 				SkillTargetSlot ts = effect.getSkillTemplate().getTargetSlot();
@@ -713,6 +781,8 @@ public class EffectController {
 						PacketSendUtility.sendPacket((Player) owner, SM_SYSTEM_MESSAGE.STR_MSG_NOT_ENOUGH_DISPELLEVEL());
 				}
 			}
+		} finally {
+			lock.writeLock().unlock();
 		}
 		return count;
 	}
@@ -755,7 +825,8 @@ public class EffectController {
 	 * @param skillid
 	 */
 	public void removePassiveEffect(int skillid) {
-		synchronized (passiveEffectMap) {
+		lock.writeLock().lock();
+		try {
 			for (Iterator<Effect> iter = passiveEffectMap.values().iterator(); iter.hasNext();) {
 				Effect effect = iter.next();
 				if (effect.getSkillId() == skillid) {
@@ -763,6 +834,8 @@ public class EffectController {
 					effect.endEffect();
 				}
 			}
+		} finally {
+			lock.writeLock().unlock();
 		}
 	}
 
@@ -776,29 +849,29 @@ public class EffectController {
 	public void removeAllEffects(boolean logout) {
 		if (logout) {
 			// remove all effects on logout
-			synchronized (abnormalEffectMap) {
+			lock.writeLock().lock();
+			try {
 				for (Iterator<Effect> iter = abnormalEffectMap.values().iterator(); iter.hasNext();) {
 					Effect effect = iter.next();
 					iter.remove();
 					effect.endEffect(false);
 				}
-			}
-			synchronized (noshowEffects) {
 				for (Iterator<Effect> iter = noshowEffects.values().iterator(); iter.hasNext();) {
 					Effect effect = iter.next();
 					iter.remove();
 					effect.endEffect(false);
 				}
-			}
-			synchronized (passiveEffectMap) {
 				for (Iterator<Effect> iter = passiveEffectMap.values().iterator(); iter.hasNext();) {
 					Effect effect = iter.next();
 					iter.remove();
 					effect.endEffect(false);
 				}
+			} finally {
+				lock.writeLock().unlock();
 			}
 		} else {
-			synchronized (abnormalEffectMap) {
+			lock.writeLock().lock();
+			try {
 				for (Iterator<Effect> iter = abnormalEffectMap.values().iterator(); iter.hasNext();) {
 					Effect effect = iter.next();
 					if (!effect.getSkillTemplate().isNoRemoveAtDie() && !effect.isXpBoost()) {
@@ -806,13 +879,13 @@ public class EffectController {
 						effect.endEffect(false);
 					}
 				}
-			}
-			synchronized (noshowEffects) {
 				for (Iterator<Effect> iter = noshowEffects.values().iterator(); iter.hasNext();) {
 					Effect effect = iter.next();
 					iter.remove();
 					effect.endEffect(false);
 				}
+			} finally {
+				lock.writeLock().unlock();
 			}
 			broadCastEffects(null);
 		}
@@ -823,11 +896,14 @@ public class EffectController {
 	 */
 	public boolean isPresentBySkillId(int skillId) {
 		Map<String, Effect> effects = getMapForEffect(skillId);
-		synchronized (effects) {
+		lock.readLock().lock();
+		try {
 			for (Effect effect : effects.values()) {
 				if (effect.getSkillId() == skillId)
 					return true;
 			}
+		} finally {
+			lock.readLock().unlock();
 		}
 		return false;
 	}
@@ -843,8 +919,11 @@ public class EffectController {
 	 * @return copy of abnormals list
 	 */
 	public List<Effect> getAbnormalEffects() {
-		synchronized (abnormalEffectMap) {
+		lock.readLock().lock();
+		try {
 			return new ArrayList<>(abnormalEffectMap.values());
+		} finally {
+			lock.readLock().unlock();
 		}
 	}
 
@@ -852,8 +931,11 @@ public class EffectController {
 	 * @return list of effects to display as top icons
 	 */
 	public List<Effect> getAbnormalEffectsToTargetSlot(final int slot) {
-		synchronized (abnormalEffectMap) {
+		lock.readLock().lock();
+		try {
 			return abnormalEffectMap.values().stream().filter(e -> e.getTargetSlot().getId() == slot).collect(Collectors.toList());
+		} finally {
+			lock.readLock().unlock();
 		}
 	}
 
@@ -861,32 +943,12 @@ public class EffectController {
 	 * @return list of effects to display as top icons
 	 */
 	public List<Effect> getAbnormalEffectsToShow() {
-		synchronized (abnormalEffectMap) {
+		lock.readLock().lock();
+		try {
 			return abnormalEffectMap.values().stream().filter(e -> e.getSkillTemplate().getTargetSlot() != SkillTargetSlot.NOSHOW)
 				.collect(Collectors.toList());
-		}
-	}
-
-	public List<Effect> getChantEffects() {
-		synchronized (abnormalEffectMap) {
-			return abnormalEffectMap.values().stream().filter(e -> e.isChant()).collect(Collectors.toList());
-		}
-	}
-
-	public List<Effect> getAuraEffects() {
-		synchronized (noshowEffects) {
-			return noshowEffects.values().stream().filter(e -> e.getSkillSubType() == SkillSubType.CHANT).collect(Collectors.toList());
-		}
-	}
-
-	/**
-	 * returns toggle noshow effects that are not auras
-	 * 
-	 * @return
-	 */
-	public List<Effect> getNoShowToggleEffects() {
-		synchronized (noshowEffects) {
-			return noshowEffects.values().stream().filter(e -> e.getSkillSubType() != SkillSubType.CHANT).collect(Collectors.toList());
+		} finally {
+			lock.readLock().unlock();
 		}
 	}
 
@@ -906,13 +968,16 @@ public class EffectController {
 
 	public void unsetAbnormal(AbnormalState state) {
 		int count = 0;
-		synchronized (abnormalEffectMap) {
+		lock.readLock().lock();
+		try {
 			for (Effect effect : abnormalEffectMap.values()) {
 				if ((effect.getAbnormals() & state.getId()) == state.getId()) {
 					if (++count == 2)
 						return;
 				}
 			}
+		} finally {
+			lock.readLock().unlock();
 		}
 		abnormals &= ~state.getId();
 	}
@@ -982,8 +1047,7 @@ public class EffectController {
 		// archer buffs
 		int count = 0;
 		Effect toRemove = null;
-		for (Iterator<Effect> iter = effects.iterator(); iter.hasNext();) {
-			Effect eff = iter.next();
+		for (Effect eff : effects) {
 			switch (eff.getSkillTemplate().getCooldownId()) {
 				case 2020: // Dodging
 				case 2022: // Focused Shots
@@ -996,10 +1060,8 @@ public class EffectController {
 						toRemove = eff;
 						continue;
 					}
-					if (count >= 2 && cdId >= 2020 && cdId <= 2030) {
-						iter.remove();
+					if (count >= 2 && cdId >= 2020 && cdId <= 2030)
 						toRemove.endEffect();
-					}
 					break;
 			}
 		}

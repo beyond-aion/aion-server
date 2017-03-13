@@ -106,7 +106,12 @@ public class PlayerEffectController extends EffectController {
 		}
 
 		Effect effect = new Effect(getOwner(), getOwner(), template, skillLvl, remainingTime);
-		getMapForEffect(effect).put(effect.getStack(), effect);
+		lock.writeLock().lock();
+		try {
+			getMapForEffect(effect).put(effect.getStack(), effect);
+		} finally {
+			lock.writeLock().unlock();
+		}
 		effect.addAllEffectToSucess();
 		effect.startEffect(true);
 

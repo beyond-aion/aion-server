@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.TreeSet;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Future;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.controllers.attack.AttackStatus;
@@ -84,7 +85,7 @@ public class Effect implements StatOwner {
 	private boolean launchSubEffect = true;
 	private Effect subEffect;
 
-	private boolean hasEnded;
+	private AtomicBoolean hasEnded = new AtomicBoolean();
 	private boolean isCancelOnDmg;
 	private boolean subEffectAbortedBySubConditions;
 
@@ -684,10 +685,9 @@ public class Effect implements StatOwner {
 	/**
 	 * End effect and all effect actions
 	 */
-	public synchronized void endEffect(boolean broadcast) {
-		if (hasEnded)
+	public void endEffect(boolean broadcast) {
+		if (!hasEnded.compareAndSet(false, true))
 			return;
-		hasEnded = true;
 		stopTasks();
 
 		for (EffectTemplate template : successEffects.values()) {
