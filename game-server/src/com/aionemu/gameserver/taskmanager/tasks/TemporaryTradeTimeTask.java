@@ -2,6 +2,7 @@ package com.aionemu.gameserver.taskmanager.tasks;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 import com.aionemu.gameserver.model.gameobjects.Item;
@@ -69,7 +70,8 @@ public class TemporaryTradeTimeTask extends AbstractPeriodicTaskManager {
 	public void run() {
 		writeLock();
 		try {
-			for (Map.Entry<Item, Collection<Integer>> entry : items.entrySet()) {
+			for (Iterator<Map.Entry<Item, Collection<Integer>>> iter = items.entrySet().iterator(); iter.hasNext();) {
+				Map.Entry<Item, Collection<Integer>> entry = iter.next();
 				Item item = entry.getKey();
 				int time = (item.getTemporaryExchangeTime() - (int) (System.currentTimeMillis() / 1000));
 				if (time == 60) {
@@ -85,7 +87,7 @@ public class TemporaryTradeTimeTask extends AbstractPeriodicTaskManager {
 							PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_EXCHANGE_TIME_OVER(item.getNameId()));
 					}
 					item.setTemporaryExchangeTime(0);
-					items.remove(item);
+					iter.remove();
 					itemById.remove(item.getObjectId());
 				}
 			}
