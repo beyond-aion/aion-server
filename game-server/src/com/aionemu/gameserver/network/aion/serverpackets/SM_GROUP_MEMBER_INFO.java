@@ -1,6 +1,6 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
-import java.util.Collection;
+import java.util.List;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.PlayerCommonData;
@@ -22,12 +22,22 @@ public class SM_GROUP_MEMBER_INFO extends AionServerPacket {
 	private Player player;
 	private GroupEvent event;
 	private int slot;
+	private List<Effect> abnormalEffects;
 
 	public SM_GROUP_MEMBER_INFO(PlayerGroup group, Player player, GroupEvent event, int slot) {
 		this.groupId = group.getTeamId();
 		this.player = player;
 		this.event = event;
 		this.slot = slot;
+		switch (event) {
+			case ENTER:
+			case UPDATE:
+				abnormalEffects = player.getEffectController().getAbnormalEffectsToShow();
+				break;
+			case UPDATE_EFFECTS:
+				abnormalEffects = player.getEffectController().getAbnormalEffectsToTargetSlot(slot);
+				break;
+		}
 	}
 
 	public SM_GROUP_MEMBER_INFO(PlayerGroup group, Player player, GroupEvent event) {
@@ -90,9 +100,8 @@ public class SM_GROUP_MEMBER_INFO extends AionServerPacket {
 				writeD(0x00); // unk
 				writeD(0x00); // unk
 				writeC(slot);
-				Collection<Effect> _abnormalEffects = player.getEffectController().getAbnormalEffectsToTargetSlot(slot);
-				writeH(_abnormalEffects.size()); // Abnormal effects
-				for (Effect effect : _abnormalEffects) {
+				writeH(abnormalEffects.size()); // Abnormal effects of slot type
+				for (Effect effect : abnormalEffects) {
 					writeD(effect.getEffectorId()); // casterid
 					writeH(effect.getSkillId()); // spellid
 					writeC(effect.getSkillLevel()); // spell level
@@ -107,12 +116,12 @@ public class SM_GROUP_MEMBER_INFO extends AionServerPacket {
 						writeD(0x00);
 				}
 				break;
-			default:
+			case ENTER:
+			case UPDATE:
 				writeS(pcd.getName()); // name
 				writeD(0x00); // unk
 				writeD(0x00); // unk
 				writeC(SkillTargetSlot.FULLSLOTS);
-				Collection<Effect> abnormalEffects = player.getEffectController().getAbnormalEffectsToShow();
 				writeH(abnormalEffects.size()); // Abnormal effects
 				for (Effect effect : abnormalEffects) {
 					writeD(effect.getEffectorId()); // casterid

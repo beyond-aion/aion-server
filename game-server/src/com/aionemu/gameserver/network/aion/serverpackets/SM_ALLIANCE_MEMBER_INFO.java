@@ -1,6 +1,6 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
-import java.util.Collection;
+import java.util.List;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.PlayerCommonData;
@@ -23,6 +23,7 @@ public class SM_ALLIANCE_MEMBER_INFO extends AionServerPacket {
 	private final int allianceId;
 	private final int objectId;
 	private final int slot;
+	private List<Effect> abnormalEffects;
 
 	public SM_ALLIANCE_MEMBER_INFO(PlayerAllianceMember member, PlayerAllianceEvent event, int slot) {
 		this.player = member.getObject();
@@ -30,6 +31,21 @@ public class SM_ALLIANCE_MEMBER_INFO extends AionServerPacket {
 		this.allianceId = member.getAllianceId();
 		this.objectId = member.getObjectId();
 		this.slot = slot;
+		switch (event) {
+			case JOIN:
+			case ENTER:
+			case ENTER_OFFLINE:
+			case UPDATE:
+			case RECONNECT:
+			case APPOINT_VICE_CAPTAIN: // Unused maybe...
+			case DEMOTE_VICE_CAPTAIN:
+			case APPOINT_CAPTAIN:
+				abnormalEffects = player.getEffectController().getAbnormalEffectsToShow();
+				break;
+			case UPDATE_EFFECTS:
+				abnormalEffects = player.getEffectController().getAbnormalEffectsToTargetSlot(slot);
+				break;
+		}
 	}
 
 	public SM_ALLIANCE_MEMBER_INFO(PlayerAllianceMember member, PlayerAllianceEvent event) {
@@ -91,9 +107,8 @@ public class SM_ALLIANCE_MEMBER_INFO extends AionServerPacket {
 				writeD(0x00); // unk
 				writeD(0x00); // unk
 				writeC(slot);
-				Collection<Effect> _abnormalEffects = player.getEffectController().getAbnormalEffectsToTargetSlot(slot);
-				writeH(_abnormalEffects.size()); // Abnormal effects
-				for (Effect effect : _abnormalEffects) {
+				writeH(abnormalEffects.size()); // Abnormal effects
+				for (Effect effect : abnormalEffects) {
 					writeD(effect.getEffectorId()); // casterid
 					writeH(effect.getSkillId()); // spellid
 					writeC(effect.getSkillLevel()); // spell level
@@ -123,7 +138,6 @@ public class SM_ALLIANCE_MEMBER_INFO extends AionServerPacket {
 				writeD(0x00); // unk
 				if (player.isOnline()) {
 					writeC(SkillTargetSlot.FULLSLOTS);
-					Collection<Effect> abnormalEffects = player.getEffectController().getAbnormalEffectsToShow();
 					writeH(abnormalEffects.size()); // Abnormal effects
 					for (Effect effect : abnormalEffects) {
 						writeD(effect.getEffectorId()); // casterid
