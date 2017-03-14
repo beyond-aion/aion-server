@@ -731,9 +731,11 @@ public class PlayerController extends CreatureController<Player> {
 	}
 
 	public void stopStance() {
-		getOwner().getEffectController().removeEffect(stance);
+		if (stance != 0) {
+			getOwner().getEffectController().removeEffect(stance);
+			stance = 0;
+		}
 		PacketSendUtility.sendPacket(getOwner(), new SM_PLAYER_STANCE(getOwner(), 0));
-		stance = 0;
 	}
 
 	public int getStanceSkillId() {

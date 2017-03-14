@@ -44,14 +44,6 @@ public class IDFactory {
 	 */
 	private volatile int nextMinId = 1;
 
-	/**
-	 * Returns next free id.
-	 *
-	 * @return next free id
-	 * @throws IDFactoryError
-	 *           if there is no free id's
-	 */
-
 	private IDFactory() {
 		idList = new BitSet();
 		lock = new ReentrantLock();
@@ -72,6 +64,13 @@ public class IDFactory {
 		return SingletonHolder.instance;
 	}
 
+	/**
+	 * Returns next free id.
+	 *
+	 * @return next free id
+	 * @throws IDFactoryError
+	 *           if there is no free id's
+	 */
 	public int nextId() {
 		try {
 			lock.lock();
