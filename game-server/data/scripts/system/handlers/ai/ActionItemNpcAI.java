@@ -81,9 +81,9 @@ public class ActionItemNpcAI extends NpcAI {
 	@Override
 	protected void handleDied() {
 		super.handleDied();
-		Iterator<ItemUseObserver> iter = observers.iterator();
-		while (iter.hasNext()) {
+		for (Iterator<ItemUseObserver> iter = observers.iterator(); iter.hasNext();) {
 			ItemUseObserver observer = iter.next();
+			iter.remove();
 			observer.abort();
 		}
 	}
