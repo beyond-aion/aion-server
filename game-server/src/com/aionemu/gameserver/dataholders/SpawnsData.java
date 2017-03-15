@@ -4,7 +4,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.util.AbstractMap.SimpleEntry;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -55,8 +57,6 @@ import com.aionemu.gameserver.world.WorldPosition;
 import com.aionemu.gameserver.world.WorldType;
 
 import gnu.trove.map.hash.TIntObjectHashMap;
-import javolution.util.FastMap;
-import javolution.util.FastTable;
 
 /**
  * @author xTz
@@ -90,11 +90,11 @@ public class SpawnsData {
 		for (SpawnMap map : templates) {
 			Map<Integer, SimpleEntry<SpawnGroup, Spawn>> mapSpawns = allSpawnMaps.get(map.getMapId());
 			if (mapSpawns == null) {
-				mapSpawns = new FastMap<>();
+				mapSpawns = new LinkedHashMap<>();
 				allSpawnMaps.put(map.getMapId(), mapSpawns);
 			}
 
-			List<Integer> customs = new FastTable<>();
+			List<Integer> customs = new ArrayList<>();
 			for (Spawn spawn : map.getSpawns()) {
 				if (spawn.isCustom()) {
 					if (mapSpawns.containsKey(spawn.getNpcId()))
@@ -108,7 +108,7 @@ public class SpawnsData {
 			for (BaseSpawn baseSpawn : map.getBaseSpawns()) {
 				int baseId = baseSpawn.getId();
 				if (!baseSpawnMaps.containsKey(baseId)) {
-					baseSpawnMaps.put(baseId, new FastTable<SpawnGroup>());
+					baseSpawnMaps.put(baseId, new ArrayList<SpawnGroup>());
 				}
 				for (BaseSpawn.SimpleRaceTemplate simpleRace : baseSpawn.getBaseRaceTemplates()) {
 					for (Spawn spawn : simpleRace.getSpawns()) {
@@ -121,7 +121,7 @@ public class SpawnsData {
 			for (RiftSpawn rift : map.getRiftSpawns()) {
 				int id = rift.getId();
 				if (!riftSpawnMaps.containsKey(id)) {
-					riftSpawnMaps.put(id, new FastTable<SpawnGroup>());
+					riftSpawnMaps.put(id, new ArrayList<SpawnGroup>());
 				}
 				for (Spawn spawn : rift.getSpawns()) {
 					SpawnGroup spawnGroup = new SpawnGroup(map.getMapId(), spawn, id);
@@ -132,7 +132,7 @@ public class SpawnsData {
 			for (SiegeSpawn SiegeSpawn : map.getSiegeSpawns()) {
 				int siegeId = SiegeSpawn.getSiegeId();
 				if (!siegeSpawnMaps.containsKey(siegeId)) {
-					siegeSpawnMaps.put(siegeId, new FastTable<SpawnGroup>());
+					siegeSpawnMaps.put(siegeId, new ArrayList<SpawnGroup>());
 				}
 				for (SiegeSpawn.SiegeRaceTemplate race : SiegeSpawn.getSiegeRaceTemplates()) {
 					for (SiegeSpawn.SiegeRaceTemplate.SiegeModTemplate mod : race.getSiegeModTemplates()) {
@@ -150,7 +150,7 @@ public class SpawnsData {
 			for (VortexSpawn VortexSpawn : map.getVortexSpawns()) {
 				int id = VortexSpawn.getId();
 				if (!vortexSpawnMaps.containsKey(id)) {
-					vortexSpawnMaps.put(id, new FastTable<SpawnGroup>());
+					vortexSpawnMaps.put(id, new ArrayList<SpawnGroup>());
 				}
 				for (VortexSpawn.VortexStateTemplate type : VortexSpawn.getSiegeModTemplates()) {
 					if (type == null || type.getSpawns() == null) {
@@ -187,7 +187,7 @@ public class SpawnsData {
 			for (AhserionsFlightSpawn ahserionSpawn : map.getAhserionSpawns()) {
 				int teamId = ahserionSpawn.getTeam().getId();
 				if (!ahserionSpawnMaps.containsKey(teamId)) {
-					ahserionSpawnMaps.put(teamId, new FastTable<SpawnGroup>());
+					ahserionSpawnMaps.put(teamId, new ArrayList<SpawnGroup>());
 				}
 
 				for (AhserionsFlightSpawn.AhserionStageSpawnTemplate stageTemplate : ahserionSpawn.getStageSpawnTemplate()) {
@@ -202,8 +202,9 @@ public class SpawnsData {
 			}
 		}
 		allNpcIds = allSpawnMaps.valueCollection().stream().flatMap(spawn -> spawn.keySet().stream()).collect(Collectors.toSet());
-		allNpcIds.addAll(baseSpawnMaps.valueCollection().stream().flatMap(group -> group.stream().map(s -> s.getNpcId())).distinct().collect(Collectors.toList()));
-		allNpcIds.addAll(siegeSpawnMaps.valueCollection().stream().flatMap(group -> group.stream().map(s -> s.getNpcId())).distinct().collect(Collectors.toList()));
+		allNpcIds.addAll(baseSpawnMaps.valueCollection().stream().flatMap(group -> group.stream().map(SpawnGroup::getNpcId)).collect(Collectors.toSet()));
+		allNpcIds
+			.addAll(siegeSpawnMaps.valueCollection().stream().flatMap(group -> group.stream().map(SpawnGroup::getNpcId)).collect(Collectors.toSet()));
 	}
 
 	public void clearTemplates() {
@@ -338,7 +339,7 @@ public class SpawnsData {
 
 		SpawnMap map = null;
 		if (data.templates == null) {
-			data.templates = new FastTable<>();
+			data.templates = new ArrayList<>();
 			map = new SpawnMap(spawn.getWorldId());
 			data.templates.add(map);
 		} else {
@@ -496,7 +497,7 @@ public class SpawnsData {
 	 */
 	public void addNewSpawnMap(SpawnMap spawnMap) {
 		if (templates == null)
-			templates = new FastTable<>();
+			templates = new ArrayList<>();
 		templates.add(spawnMap);
 	}
 

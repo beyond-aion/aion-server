@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.model.templates.itemgroups;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -8,8 +9,6 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
 import com.aionemu.gameserver.model.templates.rewards.CraftItem;
-
-import javolution.util.FastTable;
 
 /**
  * @author Rolandas
@@ -56,7 +55,7 @@ public class CraftItemGroup extends CraftGroup {
 	 */
 	public List<CraftItem> getItems() {
 		if (items == null) {
-			items = new FastTable<>();
+			items = new ArrayList<>();
 		}
 		return this.items;
 	}

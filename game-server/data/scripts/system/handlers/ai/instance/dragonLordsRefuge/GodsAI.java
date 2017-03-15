@@ -1,5 +1,6 @@
 package ai.instance.dragonLordsRefuge;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -14,7 +15,6 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 import ai.AggressiveNpcAI;
-import javolution.util.FastTable;
 
 /**
  * @author Bobobear
@@ -22,7 +22,7 @@ import javolution.util.FastTable;
 @AIName("gods")
 public class GodsAI extends AggressiveNpcAI {
 
-	private List<Integer> percents = new FastTable<>();
+	private List<Integer> percents = new ArrayList<>();
 	Npc tiamat;
 
 	@Override

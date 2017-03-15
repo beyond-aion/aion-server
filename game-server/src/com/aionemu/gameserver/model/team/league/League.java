@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.model.team.league;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
@@ -17,8 +18,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SHOW_BRAND;
 import com.aionemu.gameserver.utils.idfactory.IDFactory;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
-
-import javolution.util.FastTable;
 
 /**
  * @author ATracer
@@ -101,7 +100,7 @@ public class League extends GeneralTeam<PlayerAlliance, LeagueMember> {
 	 * @return sorted alliances by position
 	 */
 	public Collection<LeagueMember> getSortedMembers() {
-		List<LeagueMember> memberList = new FastTable<>();
+		List<LeagueMember> memberList = new ArrayList<>();
 		memberList.addAll(members.values());
 		memberList.sort(MEMBER_COMPARATOR);
 		return memberList;
@@ -184,7 +183,7 @@ public class League extends GeneralTeam<PlayerAlliance, LeagueMember> {
 	}
 
 	public Collection<Player> getCaptains() {
-		List<Player> captains = new FastTable<>();
+		List<Player> captains = new ArrayList<>();
 		for (LeagueMember member : getSortedMembers()) {
 			Player leader = member.getObject().getLeaderObject();
 			if (!captains.contains(leader)) {

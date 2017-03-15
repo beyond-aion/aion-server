@@ -1,12 +1,13 @@
 package com.aionemu.gameserver.questEngine.handlers.template;
 
+import static com.aionemu.gameserver.model.DialogAction.QUEST_SELECT;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import com.aionemu.gameserver.dataholders.DataManager;
-import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.handlers.models.Monster;

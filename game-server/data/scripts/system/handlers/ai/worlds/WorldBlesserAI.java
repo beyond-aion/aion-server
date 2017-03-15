@@ -1,7 +1,8 @@
 package ai.worlds;
 
-import com.aionemu.gameserver.ai.AIName;
 import static com.aionemu.gameserver.model.DialogAction.*;
+
+import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.questEngine.QuestEngine;

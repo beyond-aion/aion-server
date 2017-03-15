@@ -3,6 +3,7 @@ package com.aionemu.gameserver.services;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.ZonedDateTime;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.function.Consumer;
@@ -27,8 +28,6 @@ import com.aionemu.gameserver.services.item.ItemService.ItemUpdatePredicate;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.time.ServerTime;
 import com.aionemu.gameserver.world.World;
-
-import javolution.util.FastTable;
 
 /**
  * @author ViAl
@@ -68,7 +67,7 @@ public class AtreianPassportService {
 	}
 
 	public void takeReward(Player player, List<Integer> timestamps, List<Integer> passportIds) {
-		List<Passport> toRemove = new FastTable<>();
+		List<Passport> toRemove = new ArrayList<>();
 		PassportsList ppl = player.getPlayerAccount().getPassportsList();
 		for (int i = 0; i < passportIds.size(); i++) {
 			int passId = passportIds.get(i);
@@ -168,7 +167,7 @@ public class AtreianPassportService {
 		if (pl.size() <= 50)
 			return;
 
-		List<Passport> toRemove = new FastTable<>();
+		List<Passport> toRemove = new ArrayList<>();
 
 		int realSize = 0;
 		for (int i = pl.size() - 1; i >= 0; i--) {

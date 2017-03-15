@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.model.templates.item.actions;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -7,8 +8,6 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElements;
 import javax.xml.bind.annotation.XmlType;
-
-import javolution.util.FastTable;
 
 /**
  * @author ATracer
@@ -42,13 +41,13 @@ public class ItemActions {
 	 */
 	public List<AbstractItemAction> getItemActions() {
 		if (itemActions == null) {
-			itemActions = new FastTable<>();
+			itemActions = new ArrayList<>();
 		}
 		return this.itemActions;
 	}
 
 	public List<ToyPetSpawnAction> getToyPetSpawnActions() {
-		List<ToyPetSpawnAction> result = new FastTable<>();
+		List<ToyPetSpawnAction> result = new ArrayList<>();
 		if (itemActions == null)
 			return result;
 

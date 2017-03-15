@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.dataholders;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.Unmarshaller;
@@ -13,7 +14,6 @@ import com.aionemu.gameserver.model.templates.item.ExtractedItemsCollection;
 import com.aionemu.gameserver.model.templates.item.ResultedItem;
 
 import gnu.trove.map.hash.TIntObjectHashMap;
-import javolution.util.FastTable;
 
 /**
  * @author antness
@@ -43,7 +43,7 @@ public class DecomposableItemsData {
 
 	public List<ResultedItem> getSelectableItems(int itemId) {
 		if (selectableDecomposables.contains(itemId)) {
-			List<ResultedItem> result = new FastTable<>();
+			List<ResultedItem> result = new ArrayList<>();
 			result.addAll(selectableDecomposables.get(itemId));
 			return result;
 		} else

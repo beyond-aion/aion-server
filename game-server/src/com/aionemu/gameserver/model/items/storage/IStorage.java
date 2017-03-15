@@ -11,8 +11,6 @@ import com.aionemu.gameserver.services.item.ItemPacketService.ItemAddType;
 import com.aionemu.gameserver.services.item.ItemPacketService.ItemDeleteType;
 import com.aionemu.gameserver.services.item.ItemPacketService.ItemUpdateType;
 
-import javolution.util.FastTable;
-
 /**
  * Public interface for Storage, later will rename probably
  * 
@@ -168,7 +166,7 @@ public interface IStorage {
 	/**
 	 * @return
 	 */
-	FastTable<Item> getItemsWithKinah();
+	List<Item> getItemsWithKinah();
 
 	/**
 	 * @return

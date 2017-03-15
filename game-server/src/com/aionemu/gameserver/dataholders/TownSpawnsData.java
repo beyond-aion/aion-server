@@ -15,7 +15,6 @@ import com.aionemu.gameserver.model.templates.towns.TownSpawn;
 import com.aionemu.gameserver.model.templates.towns.TownSpawnMap;
 
 import gnu.trove.map.hash.TIntObjectHashMap;
-import javolution.util.FastSet;
 
 /**
  * @author ViAl
@@ -27,19 +26,12 @@ public class TownSpawnsData {
 	private List<TownSpawnMap> spawnMap;
 
 	private TIntObjectHashMap<TownSpawnMap> spawnMapsData = new TIntObjectHashMap<>();
-	private Set<Integer> allNpcIds = new FastSet<>();
+	private Set<Integer> allNpcIds;
 
-	/**
-	 * @param u
-	 * @param parent
-	 */
 	void afterUnmarshal(Unmarshaller u, Object parent) {
-		spawnMapsData.clear();
-		allNpcIds.clear();
-
 		for (TownSpawnMap map : spawnMap) {
 			Stream<Spawn> spawns = map.getTownSpawns().stream().flatMap(ts -> ts.getTownLevels().stream().flatMap(tl -> tl.getSpawns().stream()));
-			allNpcIds.addAll(spawns.map(spawn -> spawn.getNpcId()).distinct().collect(Collectors.toList()));
+			allNpcIds = spawns.map(Spawn::getNpcId).collect(Collectors.toSet());
 			spawnMapsData.put(map.getMapId(), map);
 		}
 		spawnMap.clear();

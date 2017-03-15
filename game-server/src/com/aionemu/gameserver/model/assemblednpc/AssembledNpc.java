@@ -1,24 +1,25 @@
 package com.aionemu.gameserver.model.assemblednpc;
 
-import javolution.util.FastTable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author xTz
  */
 public class AssembledNpc {
 
-	private FastTable<AssembledNpcPart> assembledPatrs = new FastTable<>();
+	private List<AssembledNpcPart> assembledPatrs = new ArrayList<>();
 	private long spawnTime = System.currentTimeMillis();
 	private int routeId;
 	private int mapId;
 
-	public AssembledNpc(int routeId, int mapId, int liveTime, FastTable<AssembledNpcPart> assembledPatrs) {
+	public AssembledNpc(int routeId, int mapId, int liveTime, List<AssembledNpcPart> assembledPatrs) {
 		this.assembledPatrs = assembledPatrs;
 		this.routeId = routeId;
 		this.mapId = mapId;
 	}
 
-	public FastTable<AssembledNpcPart> getAssembledParts() {
+	public List<AssembledNpcPart> getAssembledParts() {
 		return assembledPatrs;
 	}
 

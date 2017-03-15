@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.skillengine.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -48,13 +49,11 @@ import com.aionemu.gameserver.skillengine.properties.FirstTargetAttribute;
 import com.aionemu.gameserver.skillengine.properties.Properties;
 import com.aionemu.gameserver.skillengine.properties.Properties.CastState;
 import com.aionemu.gameserver.skillengine.properties.TargetRangeAttribute;
-import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
 import com.aionemu.gameserver.world.geo.GeoService;
-
-import javolution.util.FastTable;
 
 /**
  * @author ATracer Modified by Wakzashi
@@ -109,7 +108,7 @@ public class Skill {
 	private String chainCategory = null;
 	private int chainUsageDuration = 0;
 	private volatile boolean isMultiCast = false;
-	private final List<ChargedSkill> chargeSkillList = new FastTable<>();
+	private final List<ChargedSkill> chargeSkillList = new ArrayList<>();
 	private float[] chargeTimes;
 	private final boolean isPenaltySkill;
 
@@ -146,7 +145,7 @@ public class Skill {
 	 */
 	public Skill(SkillTemplate skillTemplate, Creature effector, int skillLvl, Creature firstTarget, ItemTemplate itemTemplate,
 		boolean isPenaltySkill) {
-		this.effectedList = new FastTable<>();
+		this.effectedList = new ArrayList<>();
 		this.conditionChangeListener = new StartMovingListener();
 		this.dieObserver = new DieObserver(this);
 		this.firstTarget = firstTarget;
@@ -686,7 +685,7 @@ public class Skill {
 		int resistCount = 0;
 		boolean blockedChain = false;
 		boolean blockedStance = false;
-		final List<Effect> effects = new FastTable<>();
+		final List<Effect> effects = new ArrayList<>();
 		if (skillTemplate.getEffects() != null) {
 			boolean blockAOESpread = false;
 			for (Creature effected : effectedList) {

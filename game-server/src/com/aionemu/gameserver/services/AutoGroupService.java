@@ -1,8 +1,11 @@
 package com.aionemu.gameserver.services;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
@@ -37,8 +40,6 @@ import com.aionemu.gameserver.world.WorldMap;
 import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.WorldMapInstanceFactory;
 
-import javolution.util.FastTable;
-
 /**
  * @author xTz
  */
@@ -46,7 +47,7 @@ public class AutoGroupService {
 
 	private ConcurrentHashMap<Integer, LookingForParty> searchers = new ConcurrentHashMap<>();
 	private ConcurrentHashMap<Integer, AutoInstance> autoInstances = new ConcurrentHashMap<>();
-	private Collection<Integer> penaltys = new FastTable<Integer>().shared();
+	private List<Integer> penalties = Collections.synchronizedList(new ArrayList<>());
 	private Lock lock = new ReentrantLock();
 
 	private AutoGroupService() {
@@ -62,7 +63,7 @@ public class AutoGroupService {
 		}
 		int obj = player.getObjectId();
 		LookingForParty lfp = searchers.get(obj);
-		if (penaltys.contains(obj)) {
+		if (penalties.contains(obj)) {
 			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1400181, agt.getInstanceMapId()));
 			return;
 		}
@@ -522,19 +523,10 @@ public class AutoGroupService {
 	}
 
 	private void startPenalty(final Integer obj) {
-		if (penaltys.contains(obj)) {
-			penaltys.remove(obj);
-		}
-		penaltys.add(obj);
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				if (penaltys.contains(obj)) {
-					penaltys.remove(obj);
-				}
-			}
-		}, 10000);
+		if (penalties.contains(obj))
+			return;
+		penalties.add(obj);
+		ThreadPoolManager.getInstance().schedule(() -> penalties.remove(obj), 10000);
 	}
 
 	public void unRegisterInstance(byte instanceMaskId) {

@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.dataholders;
 
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -12,8 +13,6 @@ import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
 import com.aionemu.gameserver.model.templates.pet.PetBuff;
-
-import javolution.util.FastMap;
 
 /**
  * @author Rolandas
@@ -46,7 +45,7 @@ public class PetBuffsData {
 	protected List<PetBuff> buffs;
 
 	@XmlTransient
-	private Map<Integer, PetBuff> petBuffsById = new FastMap<>();
+	private Map<Integer, PetBuff> petBuffsById = new LinkedHashMap<>();
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		if (buffs == null)

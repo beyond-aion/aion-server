@@ -15,7 +15,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  * @author KID
  * @modified Neon
  */
-public abstract class ChatCommand implements Comparable<ChatCommand> {
+public abstract class ChatCommand {
 
 	private static final Logger log = LoggerFactory.getLogger(ChatCommand.class);
 	private final String prefix;
@@ -204,10 +204,5 @@ public abstract class ChatCommand implements Comparable<ChatCommand> {
 	// only for backwards compatibility TODO: remove when all commands are updated
 	protected void info(Player player, String message) {
 		sendInfo(player, new String[] { message });
-	}
-
-	@Override
-	public int compareTo(ChatCommand cmd) {
-		return getAliasWithPrefix().compareToIgnoreCase(cmd.getAliasWithPrefix());
 	}
 }

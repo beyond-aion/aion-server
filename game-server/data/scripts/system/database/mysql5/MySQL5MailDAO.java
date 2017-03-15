@@ -5,7 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -29,9 +31,6 @@ import com.aionemu.gameserver.model.gameobjects.player.PlayerCommonData;
 import com.aionemu.gameserver.model.items.storage.StorageType;
 import com.aionemu.gameserver.services.item.ItemService;
 
-import javolution.util.FastMap;
-import javolution.util.FastTable;
-
 /**
  * @author kosyachok
  */
@@ -42,7 +41,7 @@ public class MySQL5MailDAO extends MailDAO {
 	@Override
 	public Mailbox loadPlayerMailbox(Player player) {
 		final Mailbox mailbox = new Mailbox(player);
-		Map<Letter, Integer> letters = new FastMap<>();
+		Map<Letter, Integer> letters = new HashMap<>();
 		List<Item> mailboxItems = null;
 
 		DB.select("SELECT * FROM mail WHERE mail_recipient_id = ?", new ParamReadStH() {
@@ -76,7 +75,7 @@ public class MySQL5MailDAO extends MailDAO {
 			int attachedItemObjId = e.getValue();
 
 			if (attachedItemObjId > 0) {
-				if (mailboxItems == null) { // late initialization to minimize DB io
+				if (mailboxItems == null) { // lazy initialization to minimize DB io
 					mailboxItems = loadMailboxItems(player.getObjectId());
 					ItemService.loadItemStones(mailboxItems);
 				}
@@ -112,7 +111,7 @@ public class MySQL5MailDAO extends MailDAO {
 	}
 
 	private List<Item> loadMailboxItems(final int playerId) {
-		final List<Item> mailboxItems = new FastTable<>();
+		final List<Item> mailboxItems = new ArrayList<>();
 
 		DB.select("SELECT * FROM inventory WHERE `item_owner` = ? AND `item_location` = 127", new ParamReadStH() {
 

@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.model.templates.event;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -8,8 +9,6 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
 import com.aionemu.gameserver.model.templates.globaldrops.GlobalRule;
-
-import javolution.util.FastTable;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "EventDrops")
@@ -23,7 +22,7 @@ public class EventDrops {
 	 */
 	public List<GlobalRule> getAllRules() {
 		if (globalDropRules == null) {
-			globalDropRules = new FastTable<>();
+			globalDropRules = new ArrayList<>();
 		}
 		return this.globalDropRules;
 	}

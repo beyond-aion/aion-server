@@ -3,6 +3,7 @@ package mysql5;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.Map;
 
 import com.aionemu.commons.database.DB;
@@ -11,8 +12,6 @@ import com.aionemu.commons.database.ParamReadStH;
 import com.aionemu.gameserver.dao.MySQL5DAOUtils;
 import com.aionemu.gameserver.dao.PlayerVarsDAO;
 
-import javolution.util.FastMap;
-
 /**
  * @author KID
  */
@@ -20,7 +19,7 @@ public class MySQL5PlayerVarsDAO extends PlayerVarsDAO {
 
 	@Override
 	public Map<String, Object> load(final int playerId) {
-		final Map<String, Object> map = new FastMap<>();
+		final Map<String, Object> map = new HashMap<>();
 		DB.select("SELECT param,value FROM player_vars WHERE player_id=?", new ParamReadStH() {
 
 			@Override

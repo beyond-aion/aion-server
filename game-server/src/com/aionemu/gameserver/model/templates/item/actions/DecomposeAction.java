@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.model.templates.item.actions;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -36,8 +37,6 @@ import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.services.item.ItemService.ItemUpdatePredicate;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
-
-import javolution.util.FastTable;
 
 /**
  * @author oslo(a00441234)
@@ -373,7 +372,7 @@ public class DecomposeAction extends AbstractItemAction {
 			return null;
 		}
 		int playerLevel = player.getLevel();
-		Collection<ExtractedItemsCollection> result = new FastTable<>();
+		Collection<ExtractedItemsCollection> result = new ArrayList<>();
 		for (ExtractedItemsCollection collection : itemsCollections) {
 			if (collection.getMinLevel() > playerLevel || collection.getMaxLevel() < playerLevel) {
 				continue;

@@ -1266,39 +1266,4 @@ public final class Matrix3f implements Cloneable /* Reusable*/ {
             throw new AssertionError(); // can not happen
         }
     }
-
-		/* (non-Javadoc)
-		 * @see javolution.lang.Reusable#reset()
-		 */
-		//@Override
-		public void reset() {
-			loadIdentity();
-		}
-		
-    /**
-     * Returns a new, preallocated or {@link #recycle recycled} text builder
-     * (on the stack when executing in a {@link javolution.context.StackContext
-     * StackContext}).
-     *
-     * @return a new, preallocated or recycled text builder instance.
-     */
-    public static Matrix3f newInstance() {
-    //	if(GeoDataConfig.GEO_OBJECT_FACTORY_ENABLE)
-    //		return (Matrix3f) FACTORY.object();
-    //	else
-    		return new Matrix3f();
-    }
-
-    /**
-     * Recycles a text builder {@link #newInstance() instance} immediately
-     * (on the stack when executing in a {@link javolution.context.StackContext
-     * StackContext}).
-     */
-    @SuppressWarnings("unchecked")
-		public static void recycle(Matrix3f instance) {
-    	//if(GeoDataConfig.GEO_OBJECT_FACTORY_ENABLE)
-    		//FACTORY.recycle(instance);
-    	//else
-    		instance = null;
-    }
 }

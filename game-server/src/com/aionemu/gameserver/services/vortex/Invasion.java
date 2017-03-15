@@ -1,5 +1,8 @@
 package com.aionemu.gameserver.services.vortex;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 import com.aionemu.gameserver.model.gameobjects.Kisk;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.RequestResponseHandler;
@@ -14,16 +17,14 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
-import javolution.util.FastMap;
-
 /**
  * @author Source
  */
 public class Invasion extends DimensionalVortex<VortexLocation> {
 
-	PlayerAlliance invAlliance, defAlliance;
-	protected FastMap<Integer, Player> invaders = new FastMap<>();
-	protected FastMap<Integer, Player> defenders = new FastMap<>();
+	private final Map<Integer, Player> invaders = new LinkedHashMap<>();
+	private final Map<Integer, Player> defenders = new LinkedHashMap<>();
+	private PlayerAlliance invAlliance, defAlliance;
 
 	public Invasion(VortexLocation vortex) {
 		super(vortex);
@@ -56,7 +57,7 @@ public class Invasion extends DimensionalVortex<VortexLocation> {
 
 	@Override
 	public void addPlayer(Player player, boolean isInvader) {
-		FastMap<Integer, Player> list = isInvader ? invaders : defenders;
+		Map<Integer, Player> list = isInvader ? invaders : defenders;
 		PlayerAlliance alliance = isInvader ? invAlliance : defAlliance;
 
 		if (alliance != null && alliance.size() > 0) {
@@ -88,7 +89,7 @@ public class Invasion extends DimensionalVortex<VortexLocation> {
 
 	@Override
 	public void kickPlayer(Player player, boolean isInvader) {
-		FastMap<Integer, Player> list = isInvader ? invaders : defenders;
+		Map<Integer, Player> list = isInvader ? invaders : defenders;
 		PlayerAlliance alliance = isInvader ? invAlliance : defAlliance;
 
 		list.remove(player.getObjectId());
@@ -166,12 +167,12 @@ public class Invasion extends DimensionalVortex<VortexLocation> {
 	}
 
 	@Override
-	public FastMap<Integer, Player> getInvaders() {
+	public Map<Integer, Player> getInvaders() {
 		return invaders;
 	}
 
 	@Override
-	public FastMap<Integer, Player> getDefenders() {
+	public Map<Integer, Player> getDefenders() {
 		return defenders;
 	}
 

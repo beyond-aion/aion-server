@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.model.templates.quest;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -7,8 +8,6 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
-
-import javolution.util.FastTable;
 
 /**
  * @author Rolandas
@@ -59,7 +58,7 @@ public class QuestKill {
 	 */
 	public List<Integer> getNpcIds() {
 		if (npcIdSet == null)
-			npcIdSet = new FastTable<>();
+			npcIdSet = new ArrayList<>();
 		if (npcIds != null) {
 			npcIdSet.addAll(npcIds);
 			npcIds.clear();

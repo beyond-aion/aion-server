@@ -1,7 +1,6 @@
 package com.aionemu.gameserver.services.item;
 
-import static com.aionemu.gameserver.services.item.ItemPacketService.sendItemDeletePacket;
-import static com.aionemu.gameserver.services.item.ItemPacketService.sendStorageUpdatePacket;
+import static com.aionemu.gameserver.services.item.ItemPacketService.*;
 
 import java.util.List;
 

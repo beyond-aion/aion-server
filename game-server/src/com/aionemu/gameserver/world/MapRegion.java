@@ -1,7 +1,8 @@
 package com.aionemu.gameserver.world;
 
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -28,9 +29,6 @@ import com.aionemu.gameserver.model.templates.zone.ZoneClassName;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
 import com.aionemu.gameserver.world.zone.ZoneName;
-
-import javolution.util.FastMap;
-import javolution.util.FastTable;
 
 /**
  * Just some part of map.
@@ -147,9 +145,7 @@ public class MapRegion {
 			if (object instanceof Player) {
 				checkActiveness(playerCount.incrementAndGet() > 0);
 			} else if (DeveloperConfig.SPAWN_CHECK) {
-				Iterator<TreeSet<ZoneInstance>> zoneIter = zoneMap.values().iterator();
-				while (zoneIter.hasNext()) {
-					TreeSet<ZoneInstance> zones = zoneIter.next();
+				for (TreeSet<ZoneInstance> zones : zoneMap.values()) {
 					for (ZoneInstance zone : zones) {
 						if (!zone.isInsideCordinate(object.getX(), object.getY(), object.getZ()))
 							continue;
@@ -202,7 +198,7 @@ public class MapRegion {
 			@Override
 			public void run() {
 				log.debug("Deactivating inactive regions around region {} on map {} [{}]", regionId, getParent().getMapId(), getParent().getInstanceId());
-				List<Creature> walkers = new FastTable<>();
+				List<Creature> walkers = new ArrayList<>();
 				for (MapRegion neighbor : getNeighbours()) {
 					if (!neighbor.isNeighboursActive() && neighbor.deactivate()) {
 						for (VisibleObject o : neighbor.getObjects().values()) {
@@ -297,7 +293,7 @@ public class MapRegion {
 	}
 
 	public List<ZoneInstance> findZones(Creature creature) {
-		List<ZoneInstance> z = new FastTable<>();
+		List<ZoneInstance> z = new ArrayList<>();
 		for (Entry<Integer, TreeSet<ZoneInstance>> e : zoneMap.entrySet()) {
 			TreeSet<ZoneInstance> zones = e.getValue();
 			for (ZoneInstance zone : zones) {
@@ -368,7 +364,7 @@ public class MapRegion {
 	}
 
 	private void createZoneMap(ZoneInstance[] zones) {
-		zoneMap = new FastMap<>();
+		zoneMap = new LinkedHashMap<>();
 		for (ZoneInstance zone : zones) {
 			int category = -1;
 			if (zone.getZoneTemplate().getPriority() != 0) {

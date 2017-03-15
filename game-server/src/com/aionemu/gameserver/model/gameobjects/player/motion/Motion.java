@@ -1,18 +1,17 @@
 package com.aionemu.gameserver.model.gameobjects.player.motion;
 
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import com.aionemu.gameserver.model.IExpirable;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-
-import javolution.util.FastMap;
 
 /**
  * @author MrPoke
  */
 public class Motion implements IExpirable {
 
-	static final Map<Integer, Integer> motionType = new FastMap<>();
+	static final Map<Integer, Integer> motionType = new LinkedHashMap<>();
 
 	static {
 		motionType.put(1, 1);

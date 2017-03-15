@@ -237,7 +237,7 @@ public class NpcSkillTemplateEntry extends NpcSkillEntry {
 						SignetBurstEffect signetEffect = (SignetBurstEffect) effectTemp;
 						String signet = signetEffect.getSignet();
 						Creature target = (Creature) curTarget;
-						Effect signetEffectOnTarget = target.getEffectController().getAnormalEffect(signet);
+						Effect signetEffectOnTarget = target.getEffectController().getAbnormalEffect(signet);
 						if (signetEffectOnTarget != null && signetEffectOnTarget.getSkillLevel() > signetLvl) {
 							return true;
 						}

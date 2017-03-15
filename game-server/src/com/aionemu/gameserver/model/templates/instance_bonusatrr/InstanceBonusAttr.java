@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.model.templates.instance_bonusatrr;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -7,8 +8,6 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
-
-import javolution.util.FastTable;
 
 /**
  * @author xTz
@@ -38,7 +37,7 @@ public class InstanceBonusAttr {
 	 */
 	public List<InstancePenaltyAttr> getPenaltyAttr() {
 		if (penaltyAttr == null) {
-			penaltyAttr = new FastTable<>();
+			penaltyAttr = new ArrayList<>();
 		}
 		return this.penaltyAttr;
 	}

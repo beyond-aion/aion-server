@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.model.instance;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Future;
 
@@ -14,15 +15,13 @@ import com.aionemu.gameserver.model.templates.instance_bonusatrr.InstancePenalty
 import com.aionemu.gameserver.skillengine.change.Func;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
-import javolution.util.FastTable;
-
 /**
  * @author xTz
  */
 public class InstanceBuff implements StatOwner {
 
 	private Future<?> task;
-	private List<IStatFunction> functions = new FastTable<>();
+	private List<IStatFunction> functions = new ArrayList<>();
 	private InstanceBonusAttr instanceBonusAttr;
 	private long startTime;
 

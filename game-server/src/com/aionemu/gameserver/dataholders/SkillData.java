@@ -1,5 +1,8 @@
 package com.aionemu.gameserver.dataholders;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -18,9 +21,6 @@ import com.aionemu.gameserver.skillengine.model.MotionTime;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 
 import gnu.trove.map.hash.TIntObjectHashMap;
-import javolution.util.FastMap;
-import javolution.util.FastSet;
-import javolution.util.FastTable;
 
 /**
  * @author ATracer
@@ -40,10 +40,10 @@ public class SkillData {
 	private TIntObjectHashMap<SkillTemplate> skillData = new TIntObjectHashMap<>();
 
 	@XmlTransient
-	private Map<String, List<SkillTemplate>> skillTemplatesByGroup = new FastMap<>();
+	private Map<String, List<SkillTemplate>> skillTemplatesByGroup = new LinkedHashMap<>();
 
 	@XmlTransient
-	private Map<String, List<SkillTemplate>> skillTemplatesByStack = new FastMap<>();
+	private Map<String, List<SkillTemplate>> skillTemplatesByStack = new LinkedHashMap<>();
 
 	/**
 	 * Map that contains cooldownId - skillId List
@@ -61,17 +61,17 @@ public class SkillData {
 			int cooldownId = skillTemplate.getCooldownId();
 			skillData.put(skillId, skillTemplate);
 			if (!cooldownGroups.containsKey(cooldownId))
-				cooldownGroups.put(cooldownId, new FastTable<>());
+				cooldownGroups.put(cooldownId, new ArrayList<>());
 			cooldownGroups.get(cooldownId).add(skillId);
 
 			if (skillTemplate.getGroup() != null) {
 				if (!skillTemplatesByGroup.containsKey(skillTemplate.getGroup()))
-					skillTemplatesByGroup.put(skillTemplate.getGroup(), new FastTable<>());
+					skillTemplatesByGroup.put(skillTemplate.getGroup(), new ArrayList<>());
 				skillTemplatesByGroup.get(skillTemplate.getGroup()).add(skillTemplate);
 			}
 			if (skillTemplate.getStack() != null) {
 				if (!skillTemplatesByStack.containsKey(skillTemplate.getGroup()))
-					skillTemplatesByStack.put(skillTemplate.getGroup(), new FastTable<>());
+					skillTemplatesByStack.put(skillTemplate.getGroup(), new ArrayList<>());
 				skillTemplatesByStack.get(skillTemplate.getGroup()).add(skillTemplate);
 			}
 		}
@@ -140,7 +140,7 @@ public class SkillData {
 		StringBuilder names = new StringBuilder();
 		StringBuilder missing = new StringBuilder();
 		StringBuilder empty = new StringBuilder();
-		Set<String> motionNames = new FastSet<>();
+		Set<String> motionNames = new HashSet<>();
 		for (SkillTemplate t : skillTemplates) {
 			Motion m = t.getMotion();
 			if (m != null) {

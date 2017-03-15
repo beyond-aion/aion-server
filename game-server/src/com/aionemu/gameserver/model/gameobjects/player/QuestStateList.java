@@ -1,6 +1,8 @@
 package com.aionemu.gameserver.model.gameobjects.player;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.SortedMap;
@@ -16,9 +18,6 @@ import com.aionemu.gameserver.model.templates.quest.QuestCategory;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
-import javolution.util.FastSet;
-import javolution.util.FastTable;
-
 /**
  * @author MrPoke, vlog, Neon
  */
@@ -26,7 +25,7 @@ public class QuestStateList {
 
 	private static final Logger log = LoggerFactory.getLogger(QuestStateList.class);
 	private SortedMap<Integer, QuestState> quests = new TreeMap<>();
-	private Set<Integer> deletedQuests = new FastSet<>();
+	private Set<Integer> deletedQuests = new HashSet<>();
 
 	/**
 	 * Creates an empty quests list
@@ -93,7 +92,7 @@ public class QuestStateList {
 	 * @return All normal (light blue) quests, that are currently active.
 	 */
 	public List<QuestState> getNormalQuests() {
-		List<QuestState> questList = new FastTable<>();
+		List<QuestState> questList = new ArrayList<>();
 		for (QuestState qs : getAllQuestState()) {
 			QuestCategory qc = DataManager.QUEST_DATA.getQuestById(qs.getQuestId()).getCategory();
 			QuestStatus s = qs.getStatus();

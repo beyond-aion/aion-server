@@ -37,7 +37,7 @@ public class CarveSignetEffect extends DamageEffect {
 		if (Rnd.chance() >= prob)
 			return;
 
-		Effect placedSignet = effect.getEffected().getEffectController().getAnormalEffect(signet);
+		Effect placedSignet = effect.getEffected().getEffectController().getAbnormalEffect(signet);
 
 		if (placedSignet != null)
 			placedSignet.endEffect();
@@ -52,7 +52,7 @@ public class CarveSignetEffect extends DamageEffect {
 	public void calculate(Effect effect) {
 		if (!super.calculate(effect, null, null))
 			return;
-		Effect placedSignet = effect.getEffected().getEffectController().getAnormalEffect(signet);
+		Effect placedSignet = effect.getEffected().getEffectController().getAbnormalEffect(signet);
 		nextSignetLevel = signetlvlstart > 0 ? signetlvlstart : 1;
 		effect.setCarvedSignet(nextSignetLevel);
 		if (placedSignet != null) {

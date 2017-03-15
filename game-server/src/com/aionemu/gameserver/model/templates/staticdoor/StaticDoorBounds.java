@@ -9,7 +9,6 @@ import javax.xml.bind.annotation.XmlType;
 import com.aionemu.gameserver.geoEngine.bounding.BoundingBox;
 import com.aionemu.gameserver.geoEngine.math.Vector3f;
 
-
 /**
  * @author Rolandas
  */

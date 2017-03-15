@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.dataholders;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.Unmarshaller;
@@ -12,8 +13,6 @@ import javax.xml.bind.annotation.XmlType;
 
 import com.aionemu.gameserver.model.templates.curingzones.CuringTemplate;
 
-import javolution.util.FastTable;
-
 /**
  * @author xTz
  */
@@ -25,7 +24,7 @@ public class CuringObjectsData {
 	@XmlElement(name = "curing_object")
 	protected List<CuringTemplate> curingObject;
 	@XmlTransient
-	private List<CuringTemplate> curingObjects = new FastTable<>();
+	private List<CuringTemplate> curingObjects = new ArrayList<>();
 
 	void afterUnmarshal(Unmarshaller unmarshaller, Object parent) {
 		for (CuringTemplate template : curingObject) {

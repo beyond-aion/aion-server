@@ -1,7 +1,8 @@
 package quest.gelkmaros;
 
-import com.aionemu.commons.utils.Rnd;
 import static com.aionemu.gameserver.model.DialogAction.*;
+
+import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.model.actions.NpcActions;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -55,8 +56,8 @@ public class _21105CoweringRefugee extends QuestHandler {
 				}
 			} else if (targetId == 700812) {
 				Npc npc = (Npc) env.getVisibleObject();
-				int npcId[] = { 799366, 216086 };
-				QuestService.addNewSpawn(npc.getWorldId(), npc.getInstanceId(), npcId[Rnd.get(0, npcId.length - 1)], npc.getX(), npc.getY(), npc.getZ(),
+				int npcIds[] = { 799366, 216086 };
+				QuestService.addNewSpawn(npc.getWorldId(), npc.getInstanceId(), Rnd.get(npcIds), npc.getX(), npc.getY(), npc.getZ(),
 					(byte) 0);
 				NpcActions.delete(npc, true);
 				return true;

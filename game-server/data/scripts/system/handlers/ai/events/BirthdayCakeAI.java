@@ -1,6 +1,6 @@
 package ai.events;
 
-import static com.aionemu.gameserver.model.DialogAction.*;
+import static com.aionemu.gameserver.model.DialogAction.SETPRO1;
 
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.model.gameobjects.player.Player;

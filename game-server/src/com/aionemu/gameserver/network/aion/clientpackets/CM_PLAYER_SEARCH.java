@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -12,8 +13,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_PLAYER_SEARCH;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.utils.Util;
 import com.aionemu.gameserver.world.World;
-
-import javolution.util.FastTable;
 
 /**
  * Received when a player searches using the social search panel
@@ -54,7 +53,7 @@ public class CM_PLAYER_SEARCH extends AionClientPacket {
 		Player activePlayer = getConnection().getActivePlayer();
 
 		Iterator<Player> it = World.getInstance().getPlayersIterator();
-		List<Player> matches = new FastTable<>();
+		List<Player> matches = new ArrayList<>();
 
 		if (activePlayer.getLevel() < CustomConfig.LEVEL_TO_SEARCH) {
 			sendPacket(SM_SYSTEM_MESSAGE.STR_CANT_WHO_LEVEL(CustomConfig.LEVEL_TO_SEARCH));

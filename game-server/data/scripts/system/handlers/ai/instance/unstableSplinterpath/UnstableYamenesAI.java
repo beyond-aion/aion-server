@@ -1,5 +1,6 @@
 package ai.instance.unstableSplinterpath;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.Future;
@@ -15,7 +16,6 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
 import ai.AggressiveNpcAI;
-import javolution.util.FastTable;
 
 /**
  * @author Ritsu, Luzien
@@ -25,7 +25,7 @@ import javolution.util.FastTable;
 public class UnstableYamenesAI extends AggressiveNpcAI {
 
 	private boolean top;
-	private List<Integer> percents = new FastTable<>();
+	private List<Integer> percents = new ArrayList<>();
 	private Future<?> portalTask = null;
 	private AtomicBoolean isStart = new AtomicBoolean(false);
 

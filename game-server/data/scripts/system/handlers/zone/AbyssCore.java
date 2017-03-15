@@ -1,6 +1,8 @@
 package zone;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import com.aionemu.gameserver.controllers.observer.CollisionDieActor;
 import com.aionemu.gameserver.geoEngine.GeoWorldLoader;
@@ -13,9 +15,6 @@ import com.aionemu.gameserver.world.zone.ZoneInstance;
 import com.aionemu.gameserver.world.zone.handler.ZoneHandler;
 import com.aionemu.gameserver.world.zone.handler.ZoneNameAnnotation;
 
-import javolution.util.FastMap;
-
-
 /**
  * @author MrPoke
  * @modified Neon
@@ -23,8 +22,7 @@ import javolution.util.FastMap;
 @ZoneNameAnnotation("CORE_400010000")
 public class AbyssCore implements ZoneHandler {
 
-	FastMap<Integer, CollisionDieActor> observed = new FastMap<>();
-
+	private Map<Integer, CollisionDieActor> observed = new HashMap<>();
 	private Node geometry;
 
 	public AbyssCore() {

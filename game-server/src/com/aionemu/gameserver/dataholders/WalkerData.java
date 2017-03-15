@@ -1,7 +1,9 @@
 package com.aionemu.gameserver.dataholders;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -21,9 +23,6 @@ import org.slf4j.LoggerFactory;
 import com.aionemu.commons.utils.xml.XmlUtil;
 import com.aionemu.gameserver.model.templates.walker.WalkerTemplate;
 
-import javolution.util.FastMap;
-import javolution.util.FastTable;
-
 /**
  * @author KKnD, Rolandas
  */
@@ -37,7 +36,7 @@ public class WalkerData {
 	private List<WalkerTemplate> walkerlist;
 
 	@XmlTransient
-	private Map<String, WalkerTemplate> walkerlistData = new FastMap<>();
+	private Map<String, WalkerTemplate> walkerlistData = new LinkedHashMap<>();
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		for (WalkerTemplate route : walkerlist) {
@@ -58,7 +57,7 @@ public class WalkerData {
 
 	public void addTemplate(WalkerTemplate newTemplate) {
 		if (walkerlist == null)
-			walkerlist = new FastTable<>();
+			walkerlist = new ArrayList<>();
 		walkerlist.add(newTemplate);
 	}
 

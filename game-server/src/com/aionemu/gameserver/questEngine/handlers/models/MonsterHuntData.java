@@ -1,8 +1,8 @@
 package com.aionemu.gameserver.questEngine.handlers.models;
 
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -17,8 +17,6 @@ import com.aionemu.gameserver.model.templates.QuestTemplate;
 import com.aionemu.gameserver.model.templates.quest.QuestKill;
 import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.handlers.template.MonsterHunt;
-
-import javolution.util.FastMap;
 
 /**
  * @author MrPoke
@@ -61,10 +59,11 @@ public class MonsterHuntData extends XMLQuest {
 
 	@Override
 	public void register(QuestEngine questEngine) {
-		Map<Monster, Set<Integer>> monsters = new FastMap<>();
+		List<Monster> monsters;
 		QuestTemplate questTemplate = DataManager.QUEST_DATA.getQuestById(id);
 
 		if (questTemplate.getQuestKill() != null && questTemplate.getQuestKill().size() > 0) {
+			monsters = new ArrayList<>();
 			for (QuestKill qk : questTemplate.getQuestKill()) {
 				Monster m = new Monster();
 				if (qk.getKillCount() > 0)
@@ -77,8 +76,10 @@ public class MonsterHuntData extends XMLQuest {
 					m.setStep(qk.getQuestStep());
 				if (qk.getSequenceNumber() > 0)
 					m.setVar(qk.getSequenceNumber());
-				monsters.put(m, new HashSet<>(m.getNpcIds()));
+				monsters.add(m);
 			}
+		} else {
+			monsters = Collections.emptyList();
 		}
 
 		questEngine.addQuestHandler(new MonsterHunt(id, startNpcIds, endNpcIds, monsters, startDialogId, endDialogId, aggroNpcIds, invasionWorld,

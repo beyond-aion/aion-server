@@ -2,6 +2,7 @@ package instance.abyss;
 
 import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE.STR_MSG_INSTANCE_START_IDABRE;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -18,8 +19,6 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.WorldPosition;
-
-import javolution.util.FastTable;
 
 /**
  * A basic handler for all versions of the siege-keep instances in the inner upper abyss. <br>
@@ -45,7 +44,7 @@ public abstract class AbstractInnerUpperAbyssInstance extends GeneralInstanceHan
 	 * Currently it is only a safety mechanism due to players can jump through doors.
 	 * So it can be removed if this issue will be fixed in future.
 	 */
-	private List<WorldPosition> chestLocations = new FastTable<>();
+	private List<WorldPosition> chestLocations = new ArrayList<>();
 
 	/**
 	 * For final fight trigger

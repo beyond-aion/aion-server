@@ -1,9 +1,11 @@
 package ai.instance.theShugoEmperorsVault;
 
+import static com.aionemu.gameserver.model.DialogAction.SETPRO1;
+
+import java.util.HashMap;
 import java.util.Map;
 
 import com.aionemu.gameserver.ai.AIName;
-import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
@@ -11,8 +13,6 @@ import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 import ai.GeneralNpcAI;
-import javolution.util.FastMap;
-
 
 /**
  * @author Yeats
@@ -22,7 +22,7 @@ import javolution.util.FastMap;
 public class VaultKeeper extends GeneralNpcAI {
 	
 	private int room = 0;
-	private Map<Integer, Integer> playerAndRoom = new FastMap<>();
+	private Map<Integer, Integer> playerAndRoom = new HashMap<>();
 	
 	@Override
 	public boolean onDialogSelect(Player player, int dialogActionId, int questId, int extendedRewardIndex) {

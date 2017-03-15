@@ -12,7 +12,6 @@ import com.aionemu.gameserver.model.summons.UnsummonType;
 import com.aionemu.gameserver.services.summons.SummonsService;
 import com.aionemu.gameserver.skillengine.model.Effect;
 
-
 /**
  * @author Bobobear
  */

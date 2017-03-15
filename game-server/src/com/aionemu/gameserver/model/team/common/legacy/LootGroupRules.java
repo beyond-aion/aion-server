@@ -1,6 +1,8 @@
 package com.aionemu.gameserver.model.team.common.legacy;
 
 import java.util.Collection;
+import java.util.Deque;
+import java.util.concurrent.ConcurrentLinkedDeque;
 
 import com.aionemu.gameserver.model.actions.PlayerMode;
 import com.aionemu.gameserver.model.drop.DropItem;
@@ -9,8 +11,6 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.item.ItemQuality;
 import com.aionemu.gameserver.services.drop.DropDistributionService;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
-
-import javolution.util.FastTable;
 
 /**
  * @author ATracer, xTz
@@ -27,7 +27,7 @@ public class LootGroupRules {
 	private final int mythic_item_above;
 	private int nrMisc;
 	private int nrRoundRobin;
-	private final FastTable<DropItem> itemsToBeDistributed = new FastTable<>();
+	private final Deque<DropItem> itemsToBeDistributed = new ConcurrentLinkedDeque<>();
 
 	public LootGroupRules() {
 		lootRule = LootRuleType.ROUNDROBIN;
@@ -211,7 +211,7 @@ public class LootGroupRules {
 		itemsToBeDistributed.remove(dropItem);
 	}
 
-	public FastTable<DropItem> getItemsToBeDistributed() {
+	public Deque<DropItem> getItemsToBeDistributed() {
 		return itemsToBeDistributed;
 	}
 

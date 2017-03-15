@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.model.enchants;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.aionemu.gameserver.model.gameobjects.Item;
@@ -10,14 +11,12 @@ import com.aionemu.gameserver.model.stats.calc.functions.StatAddFunction;
 import com.aionemu.gameserver.model.stats.container.PlumStatEnum;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
 
-import javolution.util.FastTable;
-
 /**
  * @author xTz
  */
 public class TemperingEffect implements StatOwner {
 
-	private List<IStatFunction> functions = new FastTable<>();
+	private List<IStatFunction> functions = new ArrayList<>();
 
 	/**
 	 * @TODO Rework Bad code. For plums

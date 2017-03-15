@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.services.base;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -23,8 +24,6 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.World;
 
-import javolution.util.FastTable;
-
 /**
  * @author Source
  * @reworked Estrayl
@@ -33,7 +32,7 @@ public abstract class Base<T extends BaseLocation> {
 
 	private final T bLoc;
 	private final int id;
-	private List<Npc> assaulter = new FastTable<>();
+	private List<Npc> assaulter = new ArrayList<>();
 	private Future<?> assaultTask, assaultDespawnTask, bossSpawnTask, enhancedSpawnTask, outriderSpawnTask;
 	private AtomicBoolean isStarted = new AtomicBoolean();
 	private AtomicBoolean isFinished = new AtomicBoolean();
@@ -145,7 +144,7 @@ public abstract class Base<T extends BaseLocation> {
 	}
 
 	private Race chooseAssaultRace() {
-		List<Race> coll = new FastTable<>();
+		List<Race> coll = new ArrayList<>();
 		coll.add(Race.ASMODIANS);
 		coll.add(Race.ELYOS);
 		coll.add(Race.NPC);

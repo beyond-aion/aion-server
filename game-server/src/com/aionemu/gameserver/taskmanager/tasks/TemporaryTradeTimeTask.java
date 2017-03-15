@@ -1,6 +1,8 @@
 package com.aionemu.gameserver.taskmanager.tasks;
 
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 import com.aionemu.gameserver.model.gameobjects.Item;
@@ -10,15 +12,13 @@ import com.aionemu.gameserver.taskmanager.AbstractPeriodicTaskManager;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.World;
 
-import javolution.util.FastMap;
-
 /**
  * @author Mr. Poke
  */
 public class TemporaryTradeTimeTask extends AbstractPeriodicTaskManager {
 
-	private final FastMap<Item, Collection<Integer>> items = new FastMap<>();
-	private final FastMap<Integer, Item> itemById = new FastMap<>();
+	private final Map<Item, Collection<Integer>> items = new HashMap<>();
+	private final Map<Integer, Item> itemById = new HashMap<>();
 
 	/**
 	 * @param period
@@ -70,7 +70,8 @@ public class TemporaryTradeTimeTask extends AbstractPeriodicTaskManager {
 	public void run() {
 		writeLock();
 		try {
-			for (Map.Entry<Item, Collection<Integer>> entry : items.entrySet()) {
+			for (Iterator<Map.Entry<Item, Collection<Integer>>> iter = items.entrySet().iterator(); iter.hasNext();) {
+				Map.Entry<Item, Collection<Integer>> entry = iter.next();
 				Item item = entry.getKey();
 				int time = (item.getTemporaryExchangeTime() - (int) (System.currentTimeMillis() / 1000));
 				if (time == 60) {
@@ -86,7 +87,7 @@ public class TemporaryTradeTimeTask extends AbstractPeriodicTaskManager {
 							PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_EXCHANGE_TIME_OVER(item.getNameId()));
 					}
 					item.setTemporaryExchangeTime(0);
-					items.remove(item);
+					iter.remove();
 					itemById.remove(item.getObjectId());
 				}
 			}

@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.services;
 
+import java.util.List;
 import java.util.concurrent.Future;
 
 import org.slf4j.Logger;
@@ -12,8 +13,6 @@ import com.aionemu.gameserver.dao.ItemStoneListDAO;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.team.legion.Legion;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
-
-import javolution.util.FastTable;
 
 /**
  * @author ATracer
@@ -43,7 +42,7 @@ public class PeriodicSaveService {
 			long startTime = System.currentTimeMillis();
 			int legionWhUpdated = 0;
 			for (Legion legion : LegionService.getInstance().getCachedLegions()) {
-				FastTable<Item> allItems = legion.getLegionWarehouse().getItemsWithKinah();
+				List<Item> allItems = legion.getLegionWarehouse().getItemsWithKinah();
 				allItems.addAll(legion.getLegionWarehouse().getDeletedItems());
 				try {
 					// 1. save items first

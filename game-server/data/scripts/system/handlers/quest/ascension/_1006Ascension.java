@@ -2,6 +2,7 @@ package quest.ascension;
 
 import static com.aionemu.gameserver.model.DialogAction.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.aionemu.gameserver.configs.main.CustomConfig;
@@ -30,8 +31,6 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.zone.ZoneName;
-
-import javolution.util.FastTable;
 
 /**
  * Talk with Pernos (790001). Go to the island at the center of Cliona Lake (CLIONA_LAKE_210010000) and fill up the bottle Pernos gave you
@@ -172,7 +171,7 @@ public class _1006Ascension extends QuestHandler {
 									public void run() {
 										qs.setQuestVar(51);
 										updateQuestStatus(env);
-										List<Npc> mobs = new FastTable<>();
+										List<Npc> mobs = new ArrayList<>();
 										mobs.add((Npc) QuestService.spawnQuestNpc(310020000, instanceId, 211042, 224.073f, 239.1f, 206.7f, (byte) 0));
 										mobs.add((Npc) QuestService.spawnQuestNpc(310020000, instanceId, 211042, 233.5f, 241.04f, 206.365f, (byte) 0));
 										mobs.add((Npc) QuestService.spawnQuestNpc(310020000, instanceId, 211042, 229.6f, 265.7f, 205.7f, (byte) 0));

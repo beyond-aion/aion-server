@@ -1,5 +1,6 @@
 package com.aionemu.loginserver.utils;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.Future;
@@ -15,8 +16,6 @@ import org.slf4j.LoggerFactory;
 import com.aionemu.commons.utils.concurrent.AionRejectedExecutionHandler;
 import com.aionemu.commons.utils.concurrent.RunnableWrapper;
 import com.aionemu.commons.utils.concurrent.ScheduledFutureWrapper;
-
-import javolution.util.FastTable;
 
 /**
  * @author -Nemesiss-, NB4L1, MrPoke, lord_rex
@@ -200,7 +199,7 @@ public final class ThreadPoolManager {
 	}
 
 	public List<String> getStats() {
-		List<String> list = new FastTable<>();
+		List<String> list = new ArrayList<>();
 
 		list.add("");
 		list.add("Scheduled pool:");

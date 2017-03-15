@@ -1,20 +1,20 @@
 package com.aionemu.loginserver.utils;
 
-import com.aionemu.loginserver.configs.Config;
+import java.util.HashMap;
+import java.util.Map;
 
-import javolution.util.FastMap;
+import com.aionemu.loginserver.configs.Config;
 
 /**
  * @author Mr. Poke
  */
 public class BruteForceProtector {
 
-	private FastMap<String, FailedLoginInfo> failedConnections = new FastMap<>();
+	private Map<String, FailedLoginInfo> failedConnections = new HashMap<>();
 
 	class FailedLoginInfo {
 
 		private int count;
-
 		private long time;
 
 		/**
@@ -22,7 +22,6 @@ public class BruteForceProtector {
 		 * @param time
 		 */
 		public FailedLoginInfo(int count, long time) {
-			super();
 			this.count = count;
 			this.time = time;
 		}

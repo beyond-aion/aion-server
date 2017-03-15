@@ -2,6 +2,7 @@ package com.aionemu.gameserver.model.house;
 
 import java.io.ByteArrayOutputStream;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.HashMap;
@@ -52,8 +53,6 @@ import com.aionemu.gameserver.world.WorldPosition;
 import com.aionemu.gameserver.world.knownlist.PlayerAwareKnownList;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
 import com.aionemu.gameserver.world.zone.ZoneService;
-
-import javolution.util.FastTable;
 
 /**
  * @author Rolandas
@@ -191,7 +190,7 @@ public class House extends VisibleObject {
 		int creatorId = getAddress().getId();
 		String masterName = StringUtils.EMPTY;
 		if (playerObjectId != 0) {
-			List<Integer> players = new FastTable<>();
+			List<Integer> players = new ArrayList<>();
 			players.add(playerObjectId);
 			Map<Integer, String> playerNames = DAOManager.getDAO(PlayerDAO.class).getPlayerNames(players);
 			if (playerNames.containsKey(playerObjectId)) {

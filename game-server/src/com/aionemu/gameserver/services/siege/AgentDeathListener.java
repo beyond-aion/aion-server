@@ -5,7 +5,6 @@ import com.aionemu.gameserver.ai.eventcallback.OnDieEventListener;
 import com.aionemu.gameserver.model.siege.SiegeRace;
 import com.aionemu.gameserver.services.SiegeService;
 
-
 /**
  * @author Estrayl
  *

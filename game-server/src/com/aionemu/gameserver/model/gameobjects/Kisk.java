@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.model.gameobjects;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Consumer;
@@ -17,9 +19,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.SerialKillerService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.World;
-
-import javolution.util.FastSet;
-import javolution.util.FastTable;
 
 /**
  * @author Sarynth, nrg
@@ -52,7 +51,7 @@ public class Kisk extends SummonedObject<Player> {
 		if (this.kiskStatsTemplate == null)
 			this.kiskStatsTemplate = new KiskStatsTemplate();
 
-		this.kiskMemberIds = new FastSet<>();
+		this.kiskMemberIds = new HashSet<>();
 		this.remainingResurrections = this.kiskStatsTemplate.getMaxResurrects();
 		this.kiskSpawnTime = System.currentTimeMillis() / 1000;
 		this.ownerLegion = owner.getLegion();
@@ -69,7 +68,7 @@ public class Kisk extends SummonedObject<Player> {
 	 */
 	@Override
 	public boolean isEnemyFrom(Player player) {
-		return !player.getRace().equals(this.ownerRace) && isInsidePvPZone() && player.isInsidePvPZone();
+		return !player.getRace().equals(ownerRace) && isInsidePvPZone() && player.isInsidePvPZone();
 	}
 
 	@Override
@@ -93,13 +92,13 @@ public class Kisk extends SummonedObject<Player> {
 	 * @return useMask
 	 */
 	public int getUseMask() {
-		return this.kiskStatsTemplate.getUseMask();
+		return kiskStatsTemplate.getUseMask();
 	}
 
 	public List<Player> getCurrentMemberList() {
-		List<Player> currentMemberList = new FastTable<>();
+		List<Player> currentMemberList = new ArrayList<>();
 
-		for (int memberId : this.kiskMemberIds) {
+		for (int memberId : kiskMemberIds) {
 			Player member = World.getInstance().findPlayer(memberId);
 			if (member != null)
 				currentMemberList.add(member);
@@ -112,32 +111,32 @@ public class Kisk extends SummonedObject<Player> {
 	 * @return
 	 */
 	public int getCurrentMemberCount() {
-		return this.kiskMemberIds.size();
+		return kiskMemberIds.size();
 	}
 
 	public Set<Integer> getCurrentMemberIds() {
-		return this.kiskMemberIds;
+		return kiskMemberIds;
 	}
 
 	/**
 	 * @return
 	 */
 	public int getMaxMembers() {
-		return this.kiskStatsTemplate.getMaxMembers();
+		return kiskStatsTemplate.getMaxMembers();
 	}
 
 	/**
 	 * @return
 	 */
 	public int getRemainingResurrects() {
-		return this.remainingResurrections;
+		return remainingResurrections;
 	}
 
 	/**
 	 * @return
 	 */
 	public int getMaxRessurects() {
-		return this.kiskStatsTemplate.getMaxResurrects();
+		return kiskStatsTemplate.getMaxResurrects();
 	}
 
 	/**
@@ -156,10 +155,10 @@ public class Kisk extends SummonedObject<Player> {
 	public boolean canBind(Player player) {
 		if (!player.equals(getCreator())) {
 			// Check if they fit the usemask
-			switch (this.getUseMask()) {
+			switch (getUseMask()) {
 				case 0:
 				case 1: // Race
-					if (this.ownerRace != player.getRace())
+					if (ownerRace != player.getRace())
 						return false;
 					break;
 
@@ -190,7 +189,7 @@ public class Kisk extends SummonedObject<Player> {
 			return false;
 		}
 
-		if (this.getCurrentMemberCount() >= getMaxMembers())
+		if (getCurrentMemberCount() >= getMaxMembers())
 			return false;
 
 		return true;
@@ -201,7 +200,7 @@ public class Kisk extends SummonedObject<Player> {
 	 */
 	public synchronized void addPlayer(Player player) {
 		if (kiskMemberIds.add(player.getObjectId())) {
-			this.broadcastKiskUpdate();
+			broadcastKiskUpdate();
 		} else {
 			PacketSendUtility.sendPacket(player, new SM_KISK_UPDATE(this));
 		}
@@ -214,7 +213,7 @@ public class Kisk extends SummonedObject<Player> {
 	public synchronized void removePlayer(Player player) {
 		player.setKisk(null);
 		if (kiskMemberIds.remove(player.getObjectId()))
-			this.broadcastKiskUpdate();
+			broadcastKiskUpdate();
 	}
 
 	/**
@@ -222,8 +221,8 @@ public class Kisk extends SummonedObject<Player> {
 	 */
 	private void broadcastKiskUpdate() {
 		// on all members, but not the ones in knownlist, they will receive the update in the next step
-		for (Player member : this.getCurrentMemberList()) {
-			if (!this.getKnownList().knows(member))
+		for (Player member : getCurrentMemberList()) {
+			if (!getKnownList().knows(member))
 				PacketSendUtility.sendPacket(member, new SM_KISK_UPDATE(this));
 		}
 
@@ -244,7 +243,7 @@ public class Kisk extends SummonedObject<Player> {
 	 * @param message
 	 */
 	public void broadcastPacket(SM_SYSTEM_MESSAGE message) {
-		for (Player member : this.getCurrentMemberList()) {
+		for (Player member : getCurrentMemberList()) {
 			if (member != null)
 				PacketSendUtility.sendPacket(member, message);
 		}
@@ -257,17 +256,17 @@ public class Kisk extends SummonedObject<Player> {
 		remainingResurrections--;
 		broadcastKiskUpdate();
 		if (remainingResurrections <= 0)
-			this.getController().delete();
+			getController().delete();
 	}
 
 	/**
 	 * @return ownerRace
 	 */
 	public Race getOwnerRace() {
-		return this.ownerRace;
+		return ownerRace;
 	}
 
 	public boolean isActive() {
-		return !this.getLifeStats().isAlreadyDead() && this.getRemainingResurrects() > 0;
+		return !getLifeStats().isAlreadyDead() && getRemainingResurrects() > 0;
 	}
 }

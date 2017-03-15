@@ -205,7 +205,7 @@ public class PlayerReviveService {
 				}
 			}
 		});
-		boolean isNoResurrectPenalty = player.getController().isNoResurrectPenaltyInEffect();
+		boolean isNoResurrectPenalty = player.getEffectController().isNoResurrectPenaltyInEffect();
 		player.setPlayerResActivate(false);
 		player.getLifeStats().setCurrentHpPercent(isNoResurrectPenalty ? 100 : hpPercent);
 		player.getLifeStats().setCurrentMpPercent(isNoResurrectPenalty ? 100 : mpPercent);

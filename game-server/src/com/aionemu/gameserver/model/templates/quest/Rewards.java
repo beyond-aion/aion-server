@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.model.templates.quest;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -7,8 +8,6 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
-
-import javolution.util.FastTable;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Rewards", propOrder = { "selectableRewardItem", "rewardItem" })
@@ -56,7 +55,7 @@ public class Rewards {
 	 */
 	public List<QuestItems> getSelectableRewardItem() {
 		if (selectableRewardItem == null) {
-			selectableRewardItem = new FastTable<>();
+			selectableRewardItem = new ArrayList<>();
 		}
 		return this.selectableRewardItem;
 	}
@@ -77,7 +76,7 @@ public class Rewards {
 	 */
 	public List<QuestItems> getRewardItem() {
 		if (rewardItem == null) {
-			rewardItem = new FastTable<>();
+			rewardItem = new ArrayList<>();
 		}
 		return this.rewardItem;
 	}
@@ -156,7 +155,7 @@ public class Rewards {
 
 	public List<Integer> getInventoryItemChecks() {
 		if (icheck == null)
-			icheck = new FastTable<>();
+			icheck = new ArrayList<>();
 		return this.icheck;
 	}
 

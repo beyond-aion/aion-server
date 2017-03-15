@@ -1,8 +1,6 @@
 package com.aionemu.gameserver.questEngine.handlers.template;
 
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 import com.aionemu.gameserver.configs.main.GroupConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
@@ -30,7 +28,7 @@ public class MentorMonsterHunt extends MonsterHunt {
 	 * @param endNpc
 	 * @param monsters
 	 */
-	public MentorMonsterHunt(int questId, List<Integer> startNpcIds, List<Integer> endNpcIds, Map<Monster, Set<Integer>> monsters,
+	public MentorMonsterHunt(int questId, List<Integer> startNpcIds, List<Integer> endNpcIds, List<Monster> monsters,
 		int menteMinLevel, int menteMaxLevel, boolean reward, boolean rewardNextStep) {
 		super(questId, startNpcIds, endNpcIds, monsters, 0, 0, null, 0, null, 0, reward, rewardNextStep);
 		this.menteMinLevel = menteMinLevel;

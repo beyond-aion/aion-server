@@ -32,13 +32,11 @@
 
 package com.aionemu.gameserver.geoEngine.bounding;
 
-import static java.lang.Math.max;
-import static java.lang.Math.min;
+import static java.lang.Math.*;
 
 import com.aionemu.gameserver.geoEngine.math.FastMath;
 import com.aionemu.gameserver.geoEngine.math.Plane;
 import com.aionemu.gameserver.geoEngine.math.Vector3f;
-
 
 /**
  * This class includes some utility methods for computing intersection

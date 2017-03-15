@@ -1,24 +1,24 @@
 package com.aionemu.gameserver.model.limiteditems;
 
-import javolution.util.FastTable;
+import java.util.List;
 
 /**
  * @author xTz
  */
 public class LimitedTradeNpc {
 
-	private FastTable<LimitedItem> limitedItems;
+	private List<LimitedItem> limitedItems;
 
-	public LimitedTradeNpc(FastTable<LimitedItem> limitedItems) {
+	public LimitedTradeNpc(List<LimitedItem> limitedItems) {
 		this.limitedItems = limitedItems;
 
 	}
 
-	public void putLimitedItems(FastTable<LimitedItem> limitedItems) {
+	public void putLimitedItems(List<LimitedItem> limitedItems) {
 		this.limitedItems.addAll(limitedItems);
 	}
 
-	public FastTable<LimitedItem> getLimitedItems() {
+	public List<LimitedItem> getLimitedItems() {
 		return limitedItems;
 	}
 }

@@ -77,7 +77,7 @@ public class BindPointTeleportService {
 
 	private static long computePrice(Player player, HotspotTemplate hotspot, long kinah) {
 		long price = kinah > hotspot.getPrice() ? kinah : hotspot.getPrice();
-		if (player.getController().isHiPassInEffect() || price < 1)
+		if (player.getEffectController().isHiPassInEffect() || price < 1)
 			price = 1;
 		return price;
 	}

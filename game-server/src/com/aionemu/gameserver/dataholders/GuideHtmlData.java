@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.dataholders;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.Unmarshaller;
@@ -13,7 +14,6 @@ import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.templates.Guides.GuideTemplate;
 
 import gnu.trove.map.hash.TIntObjectHashMap;
-import javolution.util.FastTable;
 
 /**
  * @author xTz
@@ -43,7 +43,7 @@ public class GuideHtmlData {
 		int hash = makeHash(classId, race.ordinal(), template.getLevel());
 		List<GuideTemplate> value = templates.get(hash);
 		if (value == null) {
-			value = new FastTable<>();
+			value = new ArrayList<>();
 			templates.put(hash, value);
 		}
 		value.add(template);
@@ -69,7 +69,7 @@ public class GuideHtmlData {
 	}
 
 	public GuideTemplate[] getTemplatesFor(PlayerClass playerClass, Race race, int level) {
-		List<GuideTemplate> guideTemplate = new FastTable<>();
+		List<GuideTemplate> guideTemplate = new ArrayList<>();
 
 		List<GuideTemplate> classRaceSpecificTemplates = templates.get(makeHash(playerClass.ordinal(), race.ordinal(), level));
 		List<GuideTemplate> classSpecificTemplates = templates.get(makeHash(playerClass.ordinal(), Race.PC_ALL.ordinal(), level));

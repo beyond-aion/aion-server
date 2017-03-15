@@ -4,8 +4,11 @@ import java.sql.Timestamp;
 import java.text.ParseException;
 import java.time.Duration;
 import java.time.ZonedDateTime;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -49,9 +52,6 @@ import com.aionemu.gameserver.utils.time.ServerTime;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.WorldMapType;
 
-import javolution.util.FastMap;
-import javolution.util.FastTable;
-
 /**
  * @author Rolandas
  */
@@ -60,17 +60,17 @@ public class HousingBidService extends AbstractCronTask {
 	private static final Logger log = LoggerFactory.getLogger("HOUSE_AUCTION_LOG");
 	private static final String registerEndExpression = HousingConfig.HOUSE_REGISTER_END;
 	private static CronExpression registerDateExpr;
-	private static final FastMap<Integer, HouseBidEntry> houseBids;
-	private static final FastMap<Integer, HouseBidEntry> playerBids;
-	private static final FastMap<Integer, HouseBidEntry> bidsByIndex;
+	private static final LinkedHashMap<Integer, HouseBidEntry> houseBids;
+	private static final LinkedHashMap<Integer, HouseBidEntry> playerBids;
+	private static final LinkedHashMap<Integer, HouseBidEntry> bidsByIndex;
 	private static int timeProlonged = 0;
 	private static boolean isDataLoaded = false;
 	private static HousingBidService instance;
 
 	static {
-		houseBids = new FastMap<>();
-		playerBids = new FastMap<>();
-		bidsByIndex = new FastMap<>();
+		houseBids = new LinkedHashMap<>();
+		playerBids = new LinkedHashMap<>();
+		bidsByIndex = new LinkedHashMap<>();
 		try {
 			instance = new HousingBidService(HousingConfig.HOUSE_AUCTION_TIME);
 		} catch (ParseException pe) {
@@ -180,11 +180,11 @@ public class HousingBidService extends AbstractCronTask {
 	private void loadBidData() {
 		Set<PlayerHouseBid> playerBidData = DAOManager.getDAO(HouseBidsDAO.class).loadBids();
 
-		FastTable<PlayerHouseBid> sortedBids = new FastTable<>();
+		List<PlayerHouseBid> sortedBids = new ArrayList<>();
 		sortedBids.addAll(playerBidData);
-		sortedBids.sort();
+		sortedBids.sort(Comparator.comparing(PlayerHouseBid::getTime)); // order ascending by date
 
-		FastMap<Integer, House> housesById = new FastMap<>();
+		Map<Integer, House> housesById = new HashMap<>();
 		for (House house : HousingService.getInstance().getCustomHouses()) {
 			housesById.put(house.getObjectId(), house);
 		}
@@ -388,7 +388,7 @@ public class HousingBidService extends AbstractCronTask {
 			}
 		}
 
-		List<HouseBidEntry> copy = new FastTable<>();
+		List<HouseBidEntry> copy = new ArrayList<>();
 		copy.addAll(houseBids.values());
 
 		houseBids.clear();
@@ -756,7 +756,7 @@ public class HousingBidService extends AbstractCronTask {
 
 	public List<HouseBidEntry> getHouseBidEntries(Race playerRace) {
 		synchronized (houseBids) {
-			List<HouseBidEntry> bids = new FastTable<>();
+			List<HouseBidEntry> bids = new ArrayList<>();
 			for (HouseBidEntry bid : houseBids.values()) {
 				HousingLand land = DataManager.HOUSE_DATA.getLand(bid.getLandId());
 				boolean isEly = DataManager.NPC_DATA.getNpcTemplate(land.getManagerNpcId()).getTribe() == TribeClass.GENERAL;

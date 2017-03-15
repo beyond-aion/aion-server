@@ -3,6 +3,7 @@ package mysql5;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,8 +14,6 @@ import org.slf4j.LoggerFactory;
 import com.aionemu.commons.database.DatabaseFactory;
 import com.aionemu.gameserver.dao.CommandsAccessDAO;
 import com.aionemu.gameserver.dao.MySQL5DAOUtils;
-
-import javolution.util.FastTable;
 
 /**
  * @author ViAl
@@ -43,7 +42,7 @@ public class MySQL5CommandsAccessDAO extends CommandsAccessDAO {
 				int playerId = rset.getInt("player_id");
 				String command = rset.getString("command");
 				if (!accesses.containsKey(playerId)) {
-					accesses.put(playerId, new FastTable<String>());
+					accesses.put(playerId, new ArrayList<String>());
 				}
 				accesses.get(playerId).add(command);
 			}

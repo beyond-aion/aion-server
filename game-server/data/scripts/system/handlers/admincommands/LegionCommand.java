@@ -1,6 +1,8 @@
 package admincommands;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.dao.LegionDAO;
@@ -21,8 +23,6 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.Util;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 import com.aionemu.gameserver.world.World;
-
-import javolution.util.FastTable;
 
 /**
  * @author KID
@@ -131,7 +131,7 @@ public class LegionCommand extends AdminCommand {
 			if (legion == null)
 				return;
 
-			FastTable<String> message = new FastTable<>(), online = new FastTable<>(), offline = new FastTable<>();
+			List<String> message = new ArrayList<>(), online = new ArrayList<>(), offline = new ArrayList<>();
 			message.add("name: " + legion.getLegionName());
 			message.add("contrib points: " + legion.getContributionPoints());
 			message.add("level: " + legion.getLegionLevel());

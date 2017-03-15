@@ -1,10 +1,11 @@
 package quest.pangaea;
 
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;

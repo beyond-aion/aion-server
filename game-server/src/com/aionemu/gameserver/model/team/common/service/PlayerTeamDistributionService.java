@@ -1,8 +1,7 @@
 package com.aionemu.gameserver.model.team.common.service;
 
+import java.util.ArrayList;
 import java.util.List;
-
-import javolution.util.FastTable;
 
 import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.configs.main.CustomConfig;
@@ -96,7 +95,7 @@ public class PlayerTeamDistributionService {
 
 	private static class PlayerTeamRewardStats implements Predicate<Player> {
 
-		final List<Player> players = new FastTable<>();
+		final List<Player> players = new ArrayList<>();
 		int partyLvlSum = 0;
 		int highestLevel = 0;
 		int mentorCount = 0;

@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -15,7 +16,6 @@ import com.aionemu.gameserver.dao.PortalCooldownsDAO;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.PortalCooldown;
 
-import javolution.util.FastMap;
 
 public class MySQL5PortalCooldownsDAO extends PortalCooldownsDAO {
 
@@ -27,7 +27,7 @@ public class MySQL5PortalCooldownsDAO extends PortalCooldownsDAO {
 
 	@Override
 	public void loadPortalCooldowns(final Player player) {
-		FastMap<Integer, PortalCooldown> portalCoolDowns = new FastMap<>();
+		Map<Integer, PortalCooldown> portalCoolDowns = new HashMap<>();
 		try {
 			try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(SELECT_QUERY)) {
 				stmt.setInt(1, player.getObjectId());

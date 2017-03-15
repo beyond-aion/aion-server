@@ -2,7 +2,9 @@ package com.aionemu.gameserver.utils.chathandlers;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Collection;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.CountDownLatch;
@@ -22,9 +24,6 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
-import javolution.util.FastMap;
-import javolution.util.FastTable;
-
 /**
  * @author KID
  * @modified Rolandas, Neon
@@ -33,8 +32,8 @@ public class ChatProcessor implements GameEngine {
 
 	private static final Logger log = LoggerFactory.getLogger(ChatProcessor.class);
 	private ScriptManager scriptManager = new ScriptManager();
-	private Map<String, ChatCommand> commandHandlers = new FastMap<>();
-	private Map<String, Byte> accessLevel = new FastMap<>();
+	private Map<String, ChatCommand> commandHandlers = new HashMap<>();
+	private Map<String, Byte> accessLevel = new HashMap<>();
 
 	private ChatProcessor() {
 	}
@@ -98,8 +97,8 @@ public class ChatProcessor implements GameEngine {
 	}
 
 	public void reload() {
-		Map<String, Byte> backupAccessLevels = FastMap.of(accessLevel);
-		Map<String, ChatCommand> backupCommands = FastMap.of(commandHandlers);
+		Map<String, Byte> backupAccessLevels = new HashMap<>(accessLevel);
+		Map<String, ChatCommand> backupCommands = new HashMap<>(commandHandlers);
 		shutdown();
 
 		try {
@@ -186,8 +185,8 @@ public class ChatProcessor implements GameEngine {
 		return commandHandlers.get(alias);
 	}
 
-	public Collection<ChatCommand> getCommandList() {
-		return FastTable.of(commandHandlers.values());
+	public List<ChatCommand> getCommandList() {
+		return new ArrayList<>(commandHandlers.values());
 	}
 
 	public boolean isCommandAllowed(Player executor, String alias) {

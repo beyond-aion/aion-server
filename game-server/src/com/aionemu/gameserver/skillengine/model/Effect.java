@@ -86,9 +86,7 @@ public class Effect implements StatOwner {
 	private Effect subEffect;
 
 	private AtomicBoolean hasEnded = new AtomicBoolean();
-
 	private boolean isCancelOnDmg;
-
 	private boolean subEffectAbortedBySubConditions;
 
 	/**
@@ -509,7 +507,7 @@ public class Effect implements StatOwner {
 	 */
 	public boolean containsEffectId(int effectId) {
 		for (EffectTemplate template : successEffects.values()) {
-			if (template.getEffectid() == effectId)
+			if (template.getEffectId() == effectId)
 				return true;
 		}
 		return false;
@@ -687,7 +685,7 @@ public class Effect implements StatOwner {
 	/**
 	 * End effect and all effect actions
 	 */
-	public synchronized void endEffect(boolean broadcast) {
+	public void endEffect(boolean broadcast) {
 		if (!hasEnded.compareAndSet(false, true))
 			return;
 		stopTasks();

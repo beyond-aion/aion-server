@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.skillengine.effect.modifier;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -7,8 +8,6 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElements;
 import javax.xml.bind.annotation.XmlType;
-
-import javolution.util.FastTable;
 
 /**
  * @author ATracer
@@ -31,7 +30,7 @@ public class ActionModifiers {
 	 */
 	public List<ActionModifier> getActionModifiers() {
 		if (actionModifiers == null) {
-			actionModifiers = new FastTable<>();
+			actionModifiers = new ArrayList<>();
 		}
 		return this.actionModifiers;
 	}

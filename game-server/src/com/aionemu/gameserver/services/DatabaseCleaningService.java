@@ -1,6 +1,7 @@
 package com.aionemu.gameserver.services;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -18,8 +19,6 @@ import com.aionemu.gameserver.dataholders.PlayerExperienceTable;
 import com.aionemu.gameserver.services.player.PlayerService;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
-import javolution.util.FastTable;
-
 /**
  * Offers the functionality to delete all data about inactive players
  *
@@ -30,7 +29,7 @@ public class DatabaseCleaningService {
 
 	private static Logger log = LoggerFactory.getLogger(DatabaseCleaningService.class);
 	private static DatabaseCleaningService instance = new DatabaseCleaningService();
-	private List<Worker> workers = new FastTable<>();
+	private List<Worker> workers = new ArrayList<>();
 
 	/**
 	 * Private constructor to avoid external access and ensure singleton
@@ -116,7 +115,7 @@ public class DatabaseCleaningService {
 
 	private class Worker {
 
-		private List<Integer> ids = new FastTable<>();
+		private List<Integer> ids = new ArrayList<>();
 		private int deletedChars = 0;
 		private int affectedAccounts = 0;
 

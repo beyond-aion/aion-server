@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.services.siege;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -40,8 +41,6 @@ import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.World;
-
-import javolution.util.FastTable;
 
 /**
  * Object that controls siege of certain fortress. Siege object is not reusable. New siege = new instance.
@@ -359,7 +358,7 @@ public class FortressSiege extends Siege<FortressLocation> {
 	protected void sendRewardsToParticipatedPlayers(SiegeRaceCounter damage, boolean isWinner) {
 		try {
 			Map<Integer, Long> playerAbyssPoints = damage.getPlayerAbyssPoints();
-			List<Integer> topPlayersIds = new FastTable<>();
+			List<Integer> topPlayersIds = new ArrayList<>();
 			topPlayersIds.addAll(playerAbyssPoints.keySet());
 			SiegeResult result;
 			if (isBossKilled())

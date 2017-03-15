@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.model.templates.itemgroups;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -8,8 +9,6 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
 import com.aionemu.gameserver.model.templates.rewards.IdLevelReward;
-
-import javolution.util.FastTable;
 
 /**
  * @author Rolandas
@@ -57,7 +56,7 @@ public class FoodGroup extends BonusItemGroup {
 	 */
 	public List<IdLevelReward> getItems() {
 		if (items == null) {
-			items = new FastTable<>();
+			items = new ArrayList<>();
 		}
 		return this.items;
 	}

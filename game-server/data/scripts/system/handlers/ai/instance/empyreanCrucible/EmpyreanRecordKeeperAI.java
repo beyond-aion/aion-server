@@ -1,10 +1,11 @@
 package ai.instance.empyreanCrucible;
 
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.instance.handlers.InstanceHandler;
-import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.instance.StageType;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;

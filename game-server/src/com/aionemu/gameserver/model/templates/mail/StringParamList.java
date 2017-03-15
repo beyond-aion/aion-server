@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.model.templates.mail;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -7,8 +8,6 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlType;
-
-import javolution.util.FastTable;
 
 /**
  * @author Rolandas
@@ -22,7 +21,7 @@ public class StringParamList {
 
 	public List<StringParamList.Param> getParam() {
 		if (param == null)
-			param = new FastTable<>();
+			param = new ArrayList<>();
 		return this.param;
 	}
 

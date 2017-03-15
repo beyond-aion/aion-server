@@ -1,5 +1,7 @@
 package admincommands;
 
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -22,9 +24,6 @@ import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 import com.aionemu.gameserver.world.WorldPosition;
-
-import javolution.util.FastMap;
-import javolution.util.FastTable;
 
 /**
  * @author Rolandas
@@ -112,7 +111,7 @@ public class FixPath extends AdminCommand {
 			TeleportService.teleportTo(admin, new WorldPosition(worldId, start.getX(), start.getY(), start.getZ() + zOff, admin.getHeading()));
 			float zDelta = getZ(admin) - start.getZ() + zOff;
 
-			Map<Integer, Float> corrections = new FastMap<>();
+			Map<Integer, Float> corrections = new LinkedHashMap<>();
 			try {
 				int lastStep = template.isReversed() ? (template.getRouteSteps().size() + 2) / 2 : template.getRouteSteps().size();
 				for (RouteStep step : template.getRouteSteps()) {
@@ -130,7 +129,7 @@ public class FixPath extends AdminCommand {
 
 				WalkerData data = new WalkerData();
 				WalkerTemplate newTemplate = new WalkerTemplate(template.getRouteId());
-				List<RouteStep> newSteps = new FastTable<>();
+				List<RouteStep> newSteps = new ArrayList<>();
 
 				for (Entry<Integer, Float> e : corrections.entrySet()) {
 					RouteStep oldStep = template.getRouteStep(e.getKey());

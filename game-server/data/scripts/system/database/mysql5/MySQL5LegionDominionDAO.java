@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -19,8 +20,6 @@ import com.aionemu.gameserver.dao.LegionDominionDAO;
 import com.aionemu.gameserver.dao.MySQL5DAOUtils;
 import com.aionemu.gameserver.model.legionDominion.LegionDominionLocation;
 import com.aionemu.gameserver.model.legionDominion.LegionDominionParticipantInfo;
-
-import javolution.util.FastTable;
 
 /**
  * @author Yeats
@@ -40,7 +39,7 @@ public class MySQL5LegionDominionDAO extends LegionDominionDAO {
 	@Override
 	public boolean loadLegionDominionLocations(Map<Integer, LegionDominionLocation> locations) {
 		boolean success = true;
-		List<Integer> loaded = new FastTable<>();
+		List<Integer> loaded = new ArrayList<>();
 		Connection con = null;
 		PreparedStatement stmt = null;
 		try {

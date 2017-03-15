@@ -1,6 +1,8 @@
 package com.aionemu.gameserver.services;
 
 import java.time.ZonedDateTime;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.Future;
 
@@ -20,7 +22,6 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.time.ServerTime;
 
 import gnu.trove.map.hash.TIntObjectHashMap;
-import javolution.util.FastTable;
 
 /**
  * @author Rolandas
@@ -30,7 +31,7 @@ public class EventService {
 
 	private final int CHECK_TIME_PERIOD = 1000 * 60 * 5;
 	private Future<?> checkTask = null;
-	private List<EventTemplate> enabledEvents = new FastTable<>();
+	private List<EventTemplate> enabledEvents = new ArrayList<>();
 	TIntObjectHashMap<List<EventTemplate>> eventsForStartQuest = new TIntObjectHashMap<>();
 	TIntObjectHashMap<List<EventTemplate>> eventsForMaintainQuest = new TIntObjectHashMap<>();
 
@@ -56,8 +57,8 @@ public class EventService {
 		if (!EventsConfig.ENABLE_EVENT_SERVICE)
 			return;
 
-		List<Integer> activeStartQuests = new FastTable<>();
-		List<Integer> activeMaintainQuests = new FastTable<>();
+		List<Integer> activeStartQuests = new ArrayList<>();
+		List<Integer> activeMaintainQuests = new ArrayList<>();
 		TIntObjectHashMap<List<EventTemplate>> map1;
 		TIntObjectHashMap<List<EventTemplate>> map2;
 
@@ -129,10 +130,10 @@ public class EventService {
 	}
 
 	private void checkEvents() {
-		List<EventTemplate> newEnabledEvents = new FastTable<>();
+		List<EventTemplate> newEnabledEvents = new ArrayList<>();
 		List<String> availableEventNames = DataManager.EVENT_DATA.getEventNames();
 		List<String> enabledEventNames = EventsConfig.ENABLED_EVENTS.equals("*") ? availableEventNames
-			: FastTable.of(EventsConfig.ENABLED_EVENTS.split("\\s*,\\s*"));
+			: Arrays.asList(EventsConfig.ENABLED_EVENTS.split("\\s*,\\s*"));
 
 		synchronized (enabledEvents) {
 			for (EventTemplate et : enabledEvents) {
@@ -161,12 +162,12 @@ public class EventService {
 		for (EventTemplate et : enabledEvents) {
 			for (int qId : et.getStartableQuests()) {
 				if (!eventsForStartQuest.containsKey(qId))
-					eventsForStartQuest.put(qId, new FastTable<EventTemplate>());
+					eventsForStartQuest.put(qId, new ArrayList<EventTemplate>());
 				eventsForStartQuest.get(qId).add(et);
 			}
 			for (int qId : et.getMaintainableQuests()) {
 				if (!eventsForMaintainQuest.containsKey(qId))
-					eventsForMaintainQuest.put(qId, new FastTable<EventTemplate>());
+					eventsForMaintainQuest.put(qId, new ArrayList<EventTemplate>());
 				eventsForMaintainQuest.get(qId).add(et);
 			}
 		}

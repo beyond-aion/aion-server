@@ -1,16 +1,18 @@
 package com.aionemu.gameserver.model.gameobjects.player;
 
 import java.util.LinkedHashMap;
+import java.util.Map;
 
 import com.aionemu.gameserver.model.trade.TradePSItem;
 
 /**
- * @author Xav Modified by Simple
+ * @author Xav
+ * @modified Simple
  */
 public class PrivateStore {
 
-	private Player owner;
-	private LinkedHashMap<Integer, TradePSItem> items;
+	private final Player owner;
+	private Map<Integer, TradePSItem> items;
 	private String storeMessage;
 
 	/**
@@ -35,9 +37,9 @@ public class PrivateStore {
 	/**
 	 * This method will return the items being sold
 	 * 
-	 * @return LinkedHashMap<Integer, TradePSItem>
+	 * @return Map<Integer, TradePSItem>
 	 */
-	public LinkedHashMap<Integer, TradePSItem> getSoldItems() {
+	public Map<Integer, TradePSItem> getSoldItems() {
 		return items;
 	}
 
@@ -58,7 +60,7 @@ public class PrivateStore {
 	 */
 	public void removeItem(int itemObjId) {
 		if (items.containsKey(itemObjId)) {
-			LinkedHashMap<Integer, TradePSItem> newItems = new LinkedHashMap<>();
+			Map<Integer, TradePSItem> newItems = new LinkedHashMap<>();
 			for (int itemObjIds : items.keySet()) {
 				if (itemObjId != itemObjIds)
 					newItems.put(itemObjIds, items.get(itemObjIds));

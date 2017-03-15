@@ -1,9 +1,10 @@
 package quest.morheim;
 
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.ai.event.AIEventType;
 import com.aionemu.gameserver.ai.manager.WalkManager;
-import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Item;

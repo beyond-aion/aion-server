@@ -4,14 +4,12 @@ package com.aionemu.gameserver.utils.annotations;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-
-import javolution.util.FastTable;
 
 /**
  * The standard implementation for the annotated class.
@@ -119,9 +117,9 @@ class AnnotatedClassImpl implements AnnotatedClass {
 
 	private Map<Method, AnnotatedMethod> getMethodMapCalculated() {
 		// Preserve order of addition to map
-		HashMap<Method, AnnotatedMethod> result = new LinkedHashMap<>();
+		Map<Method, AnnotatedMethod> result = new HashMap<>();
 
-		List<Method> methods = new FastTable<>();
+		List<Method> methods = new ArrayList<>();
 		getAllMethods(getTheClass(), methods);
 		for (Method method : methods) {
 			if (method.getAnnotations().length == 0)
@@ -163,7 +161,7 @@ class AnnotatedClassImpl implements AnnotatedClass {
 
 	private AnnotatedMethod[] getAnnotatedMethodsCalculated() {
 		final Collection<AnnotatedMethod> values = getMethodMap().values();
-		return values.toArray(new AnnotatedMethod[0]);
+		return values.toArray(new AnnotatedMethod[values.size()]);
 	}
 
 	@Override

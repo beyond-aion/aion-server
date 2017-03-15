@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.dataholders;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -9,8 +10,6 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import com.aionemu.gameserver.model.templates.shield.ShieldTemplate;
-
-import javolution.util.FastTable;
 
 /**
  * @author Wakizashi
@@ -24,7 +23,7 @@ public class ShieldData {
 
 	public int size() {
 		if (shieldTemplates == null) {
-			shieldTemplates = new FastTable<>();
+			shieldTemplates = new ArrayList<>();
 			return 0;
 		}
 		return shieldTemplates.size();
@@ -32,14 +31,14 @@ public class ShieldData {
 
 	public List<ShieldTemplate> getShieldTemplates() {
 		if (shieldTemplates == null) {
-			return new FastTable<>();
+			return new ArrayList<>();
 		}
 		return shieldTemplates;
 	}
 
 	public void addAll(Collection<ShieldTemplate> templates) {
 		if (shieldTemplates == null) {
-			shieldTemplates = new FastTable<>();
+			shieldTemplates = new ArrayList<>();
 		}
 		shieldTemplates.addAll(templates);
 	}

@@ -109,8 +109,8 @@ public class MonsterRaid {
 	}
 
 	private void spawnBoss() {
-		SpawnTemplate temp = SpawnEngine.addNewSingleTimeSpawn(mrl.getWorldId(), mrl.getNpcIds().get(Rnd.get(0, mrl.getNpcIds().size() - 1)), mrl.getX(),
-			mrl.getY(), mrl.getZ(), mrl.getH());
+		SpawnTemplate temp = SpawnEngine.addNewSingleTimeSpawn(mrl.getWorldId(), Rnd.get(mrl.getNpcIds()), mrl.getX(), mrl.getY(), mrl.getZ(),
+			mrl.getH());
 		initBoss((Npc) SpawnEngine.spawnObject(temp, 1));
 	}
 

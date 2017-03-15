@@ -1,6 +1,8 @@
 package com.aionemu.gameserver.services;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -19,9 +21,6 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
 
-import javolution.util.FastMap;
-import javolution.util.FastTable;
-
 /**
  * @author Source
  * @modified Dtem, ginho
@@ -29,10 +28,10 @@ import javolution.util.FastTable;
  */
 public class SerialKillerService {
 
-	private final Map<Integer, SerialKiller> serialKillers = new FastMap<>();
+	private final Map<Integer, SerialKiller> serialKillers = new LinkedHashMap<>();
 	private final Map<Integer, Long> cooldowns = new ConcurrentHashMap<>(); //cd for intruder scan
-	private final Collection<Integer> ldPlayers = new FastTable<>();
-	private static final Map<Integer, WorldType> handledWorlds = new FastMap<>();
+	private final Collection<Integer> ldPlayers = new ArrayList<>();
+	private static final Map<Integer, WorldType> handledWorlds = new LinkedHashMap<>();
 	private final int refresh = CustomConfig.SERIALKILLER_REFRESH;
 	private final int levelDiff = CustomConfig.SERIALKILLER_LEVEL_DIFF;
 
@@ -98,7 +97,7 @@ public class SerialKillerService {
 	}
 
 	public List<Player> getWorldKillers(Player player) {
-		List<Player> killers = new FastTable<>();
+		List<Player> killers = new ArrayList<>();
 		for (SerialKiller sk : serialKillers.values()) {
 			int rank = player.getSKInfo().getLDRank() > player.getSKInfo().getRank() ?  player.getSKInfo().getLDRank() : player.getSKInfo().getRank();
 			//ok this should never happen but anyways.

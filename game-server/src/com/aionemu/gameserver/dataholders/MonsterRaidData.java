@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.dataholders;
 
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import javax.xml.bind.Unmarshaller;
@@ -12,8 +13,6 @@ import javax.xml.bind.annotation.XmlTransient;
 import com.aionemu.gameserver.model.templates.monsterraid.MonsterRaidLocation;
 import com.aionemu.gameserver.model.templates.monsterraid.MonsterRaidTemplate;
 
-import javolution.util.FastMap;
-
 /**
  * @author Alcapwnd
  * @modified Whoop
@@ -25,7 +24,7 @@ public class MonsterRaidData {
 	@XmlElement(name = "raid_location")
 	private List<MonsterRaidTemplate> monsterRaidTemplates;
 	@XmlTransient
-	private FastMap<Integer, MonsterRaidLocation> monsterRaid = new FastMap<>();
+	private LinkedHashMap<Integer, MonsterRaidLocation> monsterRaid = new LinkedHashMap<>();
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		for (MonsterRaidTemplate template : monsterRaidTemplates)
@@ -36,7 +35,7 @@ public class MonsterRaidData {
 		return monsterRaid.size();
 	}
 
-	public FastMap<Integer, MonsterRaidLocation> getRaidLocations() {
+	public LinkedHashMap<Integer, MonsterRaidLocation> getRaidLocations() {
 		return monsterRaid;
 	}
 }

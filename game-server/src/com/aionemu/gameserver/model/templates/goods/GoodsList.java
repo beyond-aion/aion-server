@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.model.templates.goods;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.Unmarshaller;
@@ -10,8 +11,6 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
 import com.aionemu.gameserver.model.limiteditems.LimitedItem;
-
-import javolution.util.FastTable;
 
 /**
  * @author ATracer
@@ -36,7 +35,7 @@ public class GoodsList {
 	private List<Integer> itemIdList;
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
-		itemIdList = new FastTable<>();
+		itemIdList = new ArrayList<>();
 		if (items == null)
 			return;
 
@@ -48,8 +47,8 @@ public class GoodsList {
 	/**
 	 * return the limitedItems.
 	 */
-	public FastTable<LimitedItem> getLimitedItems() {
-		FastTable<LimitedItem> limitedItems = new FastTable<>();
+	public List<LimitedItem> getLimitedItems() {
+		List<LimitedItem> limitedItems = new ArrayList<>();
 		if (items != null) {
 			for (Item item : items) {
 				if (item.getBuyLimit() != null && item.getSellLimit() != null) {

@@ -2,6 +2,7 @@ package com.aionemu.gameserver.services;
 
 import java.nio.ByteBuffer;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
 
@@ -63,8 +64,6 @@ import com.aionemu.gameserver.utils.idfactory.IDFactory;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.container.LegionContainer;
 import com.aionemu.gameserver.world.container.LegionMemberContainer;
-
-import javolution.util.FastTable;
 
 /**
  * This class is designed to do all the work related with loading/storing legions and their members.
@@ -367,7 +366,7 @@ public class LegionService {
 
 	public List<Integer> getMembersByRank(int legionId, LegionRank rank) {
 		Legion legion = LegionService.getInstance().getLegion(legionId);
-		List<Integer> members = new FastTable<>();
+		List<Integer> members = new ArrayList<>();
 		for (int memberObjId : legion.getLegionMembers()) {
 			LegionMember legionMember = LegionService.getInstance().getLegionMember(memberObjId);
 			if (legionMember.getRank() == rank)
@@ -911,7 +910,7 @@ public class LegionService {
 	 * @param legion
 	 */
 	public List<LegionMemberEx> loadLegionMemberExList(Legion legion, Integer objExcluded) {
-		List<LegionMemberEx> legionMembers = new FastTable<>();
+		List<LegionMemberEx> legionMembers = new ArrayList<>();
 		for (Integer memberObjId : legion.getLegionMembers()) {
 			LegionMemberEx legionMemberEx;
 			if (objExcluded != null && objExcluded.equals(memberObjId)) {
@@ -980,7 +979,7 @@ public class LegionService {
 		if (legion == null)
 			return;
 
-		FastTable<Item> allItems = legion.getLegionWarehouse().getItemsWithKinah();
+		List<Item> allItems = legion.getLegionWarehouse().getItemsWithKinah();
 		allItems.addAll(legion.getLegionWarehouse().getDeletedItems());
 		try {
 			/**

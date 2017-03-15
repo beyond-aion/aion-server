@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.services.base;
 
-
 /**
  * @author Estrayl
  *

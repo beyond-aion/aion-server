@@ -1,6 +1,11 @@
 package com.aionemu.gameserver.dataholders;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.xml.bind.Unmarshaller;
@@ -13,10 +18,6 @@ import javax.xml.bind.annotation.XmlType;
 
 import com.aionemu.gameserver.model.templates.event.EventTemplate;
 
-import javolution.util.FastMap;
-import javolution.util.FastSet;
-import javolution.util.FastTable;
-
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "EventData")
 @XmlRootElement(name = "timed_events")
@@ -26,10 +27,10 @@ public class EventData {
 	protected List<EventTemplate> events;
 
 	@XmlTransient
-	private FastMap<String, EventTemplate> allEvents = new FastMap<>();
+	private Map<String, EventTemplate> allEvents = new HashMap<>();
 
 	@XmlTransient
-	private Set<Integer> allNpcIds = new FastSet<>();
+	private Set<Integer> allNpcIds = new HashSet<>();
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		if (events == null)
@@ -52,21 +53,11 @@ public class EventData {
 	}
 
 	public List<String> getEventNames() {
-		List<String> result = new FastTable<>();
-		synchronized (allEvents) {
-			result.addAll(allEvents.keySet());
-		}
-
-		return result;
+		return new ArrayList<>(allEvents.keySet());
 	}
 
 	public List<EventTemplate> getEvents() {
-		List<EventTemplate> result = new FastTable<>();
-		synchronized (allEvents) {
-			result.addAll(allEvents.values());
-		}
-
-		return result;
+		return new ArrayList<>(allEvents.values());
 	}
 
 	public EventTemplate getEvent(String name) {
@@ -77,7 +68,7 @@ public class EventData {
 		for (EventTemplate et : allEvents.values())
 			et.stop();
 
-		this.events = events == null ? new FastTable<>() : events;
+		this.events = events == null ? Collections.emptyList() : events;
 		afterUnmarshal(null, null);
 	}
 

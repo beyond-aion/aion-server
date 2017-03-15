@@ -1,8 +1,9 @@
 package ai.instance.eternalBastion;
 
+import static com.aionemu.gameserver.model.DialogAction.SETPRO1;
+
 import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
-import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.TribeClass;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;

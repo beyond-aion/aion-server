@@ -21,8 +21,6 @@ import com.aionemu.gameserver.services.item.ItemPacketService.ItemDeleteType;
 import com.aionemu.gameserver.services.item.ItemPacketService.ItemUpdateType;
 import com.aionemu.gameserver.services.item.ItemService;
 
-import javolution.util.FastTable;
-
 /**
  * @author KID, ATracer
  */
@@ -258,7 +256,7 @@ public abstract class Storage implements IStorage {
 	}
 
 	boolean decreaseByItemId(int itemId, long count, QuestStatus questStatus, Player actor) {
-		FastTable<Item> items = itemStorage.getItemsById(itemId);
+		List<Item> items = itemStorage.getItemsById(itemId);
 		if (items.size() == 0)
 			return false;
 
@@ -298,8 +296,8 @@ public abstract class Storage implements IStorage {
 	}
 
 	@Override
-	public FastTable<Item> getItemsWithKinah() {
-		FastTable<Item> items = this.itemStorage.getItems();
+	public List<Item> getItemsWithKinah() {
+		List<Item> items = this.itemStorage.getItems();
 		if (this.kinahItem != null) {
 			items.add(this.kinahItem);
 		}
@@ -328,7 +326,7 @@ public abstract class Storage implements IStorage {
 
 	@Override
 	public long getItemCountByItemId(int itemId) {
-		FastTable<Item> temp = this.itemStorage.getItemsById(itemId);
+		List<Item> temp = this.itemStorage.getItemsById(itemId);
 		if (temp.size() == 0)
 			return 0;
 

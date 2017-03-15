@@ -1,5 +1,6 @@
 package ai.siege;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -25,8 +26,6 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldPosition;
 
 import ai.AggressiveNpcAI;
-import javolution.util.FastTable;
-
 
 /**
  * @author Estrayl
@@ -34,8 +33,8 @@ import javolution.util.FastTable;
 @AIName("empowered_agent")
 public class EmpoweredAgent extends AggressiveNpcAI {
 	
-	private final List<Integer> guardIds = new FastTable<>();
-	private final List<Integer> percents = new FastTable<>();
+	private final List<Integer> guardIds = new ArrayList<>();
+	private final List<Integer> percents = new ArrayList<>();
 	private boolean canThink = true;
 	
 	@Override

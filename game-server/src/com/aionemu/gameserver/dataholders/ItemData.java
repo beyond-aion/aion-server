@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.dataholders;
 
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -16,8 +18,6 @@ import com.aionemu.gameserver.model.templates.item.enums.ItemGroup;
 import com.aionemu.gameserver.model.templates.restriction.ItemCleanupTemplate;
 
 import gnu.trove.map.hash.TIntObjectHashMap;
-import javolution.util.FastMap;
-import javolution.util.FastTable;
 
 /**
  * @author Luno
@@ -33,13 +33,13 @@ public class ItemData {
 	private TIntObjectHashMap<ItemTemplate> items;
 
 	@XmlTransient
-	Map<Integer, List<ItemTemplate>> manastones = new FastMap<>();
+	Map<Integer, List<ItemTemplate>> manastones = new LinkedHashMap<>();
 	@XmlTransient
-	Map<Integer, List<ItemTemplate>> eventManastones = new FastMap<>();
+	Map<Integer, List<ItemTemplate>> eventManastones = new LinkedHashMap<>();
 	@XmlTransient
-	Map<Integer, List<ItemTemplate>> stampManastones = new FastMap<>();
+	Map<Integer, List<ItemTemplate>> stampManastones = new LinkedHashMap<>();
 	@XmlTransient
-	Map<Integer, List<ItemTemplate>> specialManastones = new FastMap<>();
+	Map<Integer, List<ItemTemplate>> specialManastones = new LinkedHashMap<>();
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		items = new TIntObjectHashMap<>();
@@ -48,13 +48,13 @@ public class ItemData {
 			if (it.getItemGroup().equals(ItemGroup.MANASTONE)) {
 				int level = it.getLevel();
 				if (!manastones.containsKey(level)) {
-					manastones.put(level, new FastTable<>());
+					manastones.put(level, new ArrayList<>());
 				}
 				if (!eventManastones.containsKey(level)) {
-					eventManastones.put(level, new FastTable<>());
+					eventManastones.put(level, new ArrayList<>());
 				}
 				if (!stampManastones.containsKey(level)) {
-					stampManastones.put(level, new FastTable<>());
+					stampManastones.put(level, new ArrayList<>());
 				}
 				if (it.getName().toLowerCase().startsWith("[stamp]"))
 					stampManastones.get(level).add(it);
@@ -65,7 +65,7 @@ public class ItemData {
 			} else if (it.getItemGroup().equals(ItemGroup.SPECIAL_MANASTONE)) {
 				int level = it.getLevel();
 				if (!specialManastones.containsKey(level))
-					specialManastones.put(level, new FastTable<>());
+					specialManastones.put(level, new ArrayList<>());
 
 				if (!it.getName().toLowerCase().startsWith("[stamp]"))
 					specialManastones.get(level).add(it);

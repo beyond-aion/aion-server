@@ -1,16 +1,17 @@
 package com.aionemu.gameserver.model.instance.instancereward;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.aionemu.gameserver.model.instance.InstanceScoreType;
 import com.aionemu.gameserver.model.instance.playerreward.InstancePlayerReward;
-
-import javolution.util.FastTable;
 
 /**
  * @author xTz
  */
 public class InstanceReward<T extends InstancePlayerReward> {
 
-	protected FastTable<T> instanceRewards = new FastTable<>();
+	protected List<T> instanceRewards = new ArrayList<>();
 	private InstanceScoreType instanceScoreType = InstanceScoreType.START_PROGRESS;
 	protected Integer mapId;
 	protected int instanceId;
@@ -20,7 +21,7 @@ public class InstanceReward<T extends InstancePlayerReward> {
 		this.instanceId = instanceId;
 	}
 
-	public FastTable<T> getInstanceRewards() {
+	public List<T> getInstanceRewards() {
 		return instanceRewards;
 	}
 

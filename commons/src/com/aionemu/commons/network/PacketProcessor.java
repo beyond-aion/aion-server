@@ -1,5 +1,6 @@
 package com.aionemu.commons.network;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
@@ -13,8 +14,6 @@ import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.network.packet.BaseClientPacket;
 import com.google.common.base.Preconditions;
-
-import javolution.util.FastTable;
 
 /**
  * Packet Processor responsible for executing packets in correct order with respecting rules: - 1 packet / client at one time. - execute packets in
@@ -59,7 +58,7 @@ public class PacketProcessor<T extends AConnection<?>> {
 	/**
 	 * Working threads.
 	 */
-	private final List<Thread> threads = new FastTable<>();
+	private final List<Thread> threads = new ArrayList<>();
 
 	/**
 	 * minimum number of working Threads

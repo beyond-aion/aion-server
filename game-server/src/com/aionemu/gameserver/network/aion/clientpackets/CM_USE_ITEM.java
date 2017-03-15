@@ -2,6 +2,7 @@ package com.aionemu.gameserver.network.aion.clientpackets;
 
 import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.aionemu.gameserver.model.Race;
@@ -19,8 +20,6 @@ import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.restrictions.RestrictionsManager;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-
-import javolution.util.FastTable;
 
 /**
  * @author Avol
@@ -134,7 +133,7 @@ public class CM_USE_ITEM extends AionClientPacket {
 		// for multi-return scrolls
 		item.setIndexReturn(indexReturn);
 
-		List<AbstractItemAction> actions = new FastTable<>();
+		List<AbstractItemAction> actions = new ArrayList<>();
 		for (AbstractItemAction itemAction : itemActions.getItemActions()) {
 			// check if the item can be used before placing it on the cooldown list.
 			if (targetHouseObject != null && itemAction instanceof IHouseObjectDyeAction) {

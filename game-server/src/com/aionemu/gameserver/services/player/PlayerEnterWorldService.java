@@ -1,11 +1,10 @@
 package com.aionemu.gameserver.services.player;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.function.Consumer;
-
-import javolution.util.FastTable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -569,13 +568,12 @@ public final class PlayerEnterWorldService {
 	 * @param client
 	 * @param player
 	 */
-	// TODO! this method code is really odd [Nemesiss]
 	private static void sendItemInfos(AionConnection client, Player player) {
 		player.setCubeLimit();
 		player.setWarehouseLimit();
 		// items
 		Storage inventory = player.getInventory();
-		List<Item> allItems = new FastTable<>();
+		List<Item> allItems = new ArrayList<>();
 		if (inventory.getKinah() == 0) {
 			inventory.increaseKinah(0); // create an empty object with value 0
 		}
@@ -587,7 +585,7 @@ public final class PlayerEnterWorldService {
 		while (splitter.hasMore()) {
 			client.sendPacket(new SM_INVENTORY_INFO(splitter.isFirst(), splitter.getNext(), player));
 		}
-		client.sendPacket(new SM_INVENTORY_INFO(false, new FastTable<>(), player));
+		client.sendPacket(new SM_INVENTORY_INFO(false, new ArrayList<>(), player));
 	}
 
 	private static void sendWarehouseItemInfos(AionConnection client, Player player) {

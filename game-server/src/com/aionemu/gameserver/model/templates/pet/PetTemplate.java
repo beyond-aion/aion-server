@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.model.templates.pet;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -10,8 +11,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 import com.aionemu.gameserver.model.templates.stats.PetStatsTemplate;
-
-import javolution.util.FastTable;
 
 /**
  * @author IlBuono
@@ -57,7 +56,7 @@ public class PetTemplate {
 		if (hasPlayerFuncs == null) {
 			hasPlayerFuncs = false;
 			if (petFunctions == null) {
-				List<PetFunction> result = new FastTable<>();
+				List<PetFunction> result = new ArrayList<>();
 				result.add(PetFunction.CreateEmpty());
 				petFunctions = result;
 			} else {

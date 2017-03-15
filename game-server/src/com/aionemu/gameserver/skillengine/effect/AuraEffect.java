@@ -1,7 +1,5 @@
 package com.aionemu.gameserver.skillengine.effect;
 
-import java.util.Collection;
-
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -13,8 +11,8 @@ import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_MANTRA_EFFECT;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
-import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
 
@@ -27,16 +25,16 @@ public class AuraEffect extends EffectTemplate {
 
 	@XmlAttribute
 	protected int distance;
+	@XmlAttribute(name = "distance_z")
+	protected int distanceZ;
 	@XmlAttribute(name = "skill_id")
 	protected int skillId;
-
-	// TODO distancez
 
 	@Override
 	public void applyEffect(Effect effect) {
 		final Player effector = (Player) effect.getEffector();
-		if (effector.getEffectController().isNoshowPresentBySkillId(effect.getSkillId())) {
-			AuditLogger.info(effector, "Player might be abusing CM_CASTSPELL mantra effect Player kicked skill id: " + effect.getSkillId());
+		if (effector.getEffectController().isPresentBySkillId(effect.getSkillId())) {
+			AuditLogger.info(effector, "might be abusing CM_CASTSPELL mantra effect Player kicked skill id: " + effect.getSkillId());
 			effector.getClientConnection().close();
 			return;
 		}
@@ -44,22 +42,22 @@ public class AuraEffect extends EffectTemplate {
 	}
 
 	@Override
-	public void onPeriodicAction(final Effect effect) {
-		final Player effector = (Player) effect.getEffector();
+	public void onPeriodicAction(Effect effect) {
+		Player effector = (Player) effect.getEffector();
 		if (!effector.isOnline()) { // task check
 			return;
 		}
-		if (effector.isInGroup() || effector.isInAlliance()) {
-			Collection<Player> onlinePlayers = effector.isInGroup() ? effector.getPlayerGroup().getOnlineMembers() : effector.getPlayerAllianceGroup()
-				.getOnlineMembers();
-			final int actualRange = (int) (distance * effector.getGameStats().getStat(StatEnum.BOOST_MANTRA_RANGE, 100).getCurrent() / 100f);
-			for (Player player : onlinePlayers) {
-				if (PositionUtil.isInRange(effector, player, actualRange)) {
-					applyAuraTo(player, effect);
+		if (effector.isInTeam()) {
+			int rangeBoost = effector.getGameStats().getStat(StatEnum.BOOST_MANTRA_RANGE, 100).getCurrent();
+			float rangeZ = distanceZ * rangeBoost / 100f;
+			float range = distance * rangeBoost / 100f;
+			for (Player player : effector.getCurrentGroup().getOnlineMembers()) {
+				if (effector.equals(player) || Math.abs(effector.getZ() - player.getZ()) <= rangeZ && PositionUtil.isInRange(effector, player, range)) {
+					applyAuraTo(player);
 				}
 			}
 		} else {
-			applyAuraTo(effector, effect);
+			applyAuraTo(effector);
 		}
 		PacketSendUtility.broadcastPacket(effector, new SM_MANTRA_EFFECT(effector, skillId));
 	}
@@ -67,7 +65,7 @@ public class AuraEffect extends EffectTemplate {
 	/**
 	 * @param effector
 	 */
-	private void applyAuraTo(Player effected, Effect effect) {
+	private void applyAuraTo(Player effected) {
 		SkillTemplate template = DataManager.SKILL_DATA.getSkillTemplate(skillId);
 		Effect e = new Effect(effected, effected, template, template.getLvl(), 0);
 		e.initialize();
@@ -75,7 +73,7 @@ public class AuraEffect extends EffectTemplate {
 	}
 
 	@Override
-	public void startEffect(final Effect effect) {
+	public void startEffect(Effect effect) {
 		effect.setPeriodicTask(ThreadPoolManager.getInstance().scheduleAtFixedRate(new AuraTask(effect), 0, 6500), position);
 	}
 

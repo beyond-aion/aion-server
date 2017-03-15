@@ -1,5 +1,7 @@
 package ai.instance.tallocsHollow;
 
+import static com.aionemu.gameserver.model.DialogAction.MAKE_MERCENARY;
+
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.aionemu.gameserver.ai.AIName;
@@ -7,7 +9,6 @@ import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.controllers.SummonController;
 import com.aionemu.gameserver.controllers.effect.EffectController;
 import com.aionemu.gameserver.model.CreatureType;
-import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.Summon;
 import com.aionemu.gameserver.model.gameobjects.player.Player;

@@ -1,11 +1,11 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
+import java.util.ArrayList;
+
 import com.aionemu.gameserver.model.gameobjects.HouseObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
-
-import javolution.util.FastTable;
 
 /**
  * @author Rolandas
@@ -20,7 +20,7 @@ public class SM_HOUSE_OBJECTS extends AionServerPacket {
 
 	@Override
 	protected void writeImpl(AionConnection con) {
-		FastTable<HouseObject<?>> objects = player.getHouseRegistry().getSpawnedObjects();
+		ArrayList<HouseObject<?>> objects = player.getHouseRegistry().getSpawnedObjects();
 		writeH(objects.size());
 		for (HouseObject<?> obj : objects) {
 			writeD(obj.getObjectTemplate().getTemplateId());

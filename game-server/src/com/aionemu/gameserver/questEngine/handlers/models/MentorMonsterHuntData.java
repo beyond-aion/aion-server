@@ -1,8 +1,8 @@
 package com.aionemu.gameserver.questEngine.handlers.models;
 
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -15,8 +15,6 @@ import com.aionemu.gameserver.model.templates.quest.QuestKill;
 import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.handlers.template.MentorMonsterHunt;
 
-import javolution.util.FastMap;
-
 /**
  * @author MrPoke
  * @reworked Bobobear
@@ -28,7 +26,7 @@ public class MentorMonsterHuntData extends MonsterHuntData {
 
 	@XmlAttribute(name = "min_mente_level")
 	protected int minMenteLevel = 1;
-	
+
 	@XmlAttribute(name = "max_mente_level")
 	protected int maxMenteLevel = 99;
 
@@ -42,10 +40,11 @@ public class MentorMonsterHuntData extends MonsterHuntData {
 
 	@Override
 	public void register(QuestEngine questEngine) {
-		Map<Monster, Set<Integer>> monsterNpcs = new FastMap<>();
+		List<Monster> monsters;
 		QuestTemplate questTemplate = DataManager.QUEST_DATA.getQuestById(id);
 
 		if (questTemplate.getQuestKill() != null && questTemplate.getQuestKill().size() > 0) {
+			monsters = new ArrayList<>();
 			for (QuestKill qk : questTemplate.getQuestKill()) {
 				Monster m = new Monster();
 				if (qk.getKillCount() > 0)
@@ -58,10 +57,12 @@ public class MentorMonsterHuntData extends MonsterHuntData {
 					m.setStep(qk.getQuestStep());
 				if (qk.getSequenceNumber() > 0)
 					m.setVar(qk.getSequenceNumber());
-				monsterNpcs.put(m, new HashSet<>(m.getNpcIds()));
+				monsters.add(m);
 			}
+		} else {
+			monsters = Collections.emptyList();
 		}
-		
-		questEngine.addQuestHandler(new MentorMonsterHunt(id, startNpcIds, endNpcIds, monsterNpcs, minMenteLevel, maxMenteLevel, reward, rewardNextStep));
+
+		questEngine.addQuestHandler(new MentorMonsterHunt(id, startNpcIds, endNpcIds, monsters, minMenteLevel, maxMenteLevel, reward, rewardNextStep));
 	}
 }

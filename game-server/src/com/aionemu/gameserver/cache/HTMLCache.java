@@ -9,7 +9,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 
 import org.apache.commons.io.IOUtils;
@@ -17,9 +20,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.configs.main.HTMLConfig;
-
-import javolution.util.FastMap;
-import javolution.util.FastTable;
 
 /**
  * @authors Layane, nbali, savormix, hex1r0, lord_rex
@@ -47,7 +47,7 @@ public final class HTMLCache {
 		return SingletonHolder.INSTANCE;
 	}
 
-	private FastMap<String, String> cache = new FastMap<>();
+	private Map<String, String> cache = new HashMap<>();
 
 	private int loadedFiles;
 	private int size;
@@ -79,7 +79,7 @@ public final class HTMLCache {
 			try {
 				ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream(getCacheFile())));
 
-				cache = (FastMap<String, String>) ois.readObject();
+				cache = (Map<String, String>) ois.readObject();
 
 				for (String html : cache.values()) {
 					loadedFiles++;
@@ -149,7 +149,7 @@ public final class HTMLCache {
 		// TODO: is there any other tag that should be replaced?
 		final String[] tagsToCompact = { "html", "title", "body", "br", "br1", "p", "table", "tr", "td" };
 
-		final List<String> list = new FastTable<>();
+		final List<String> list = new ArrayList<>();
 
 		for (String tag : tagsToCompact) {
 			list.add("<" + tag + ">");
@@ -158,7 +158,7 @@ public final class HTMLCache {
 			list.add("<" + tag + " />");
 		}
 
-		final List<String> list2 = new FastTable<>();
+		final List<String> list2 = new ArrayList<>();
 
 		for (String tag : list) {
 			list2.add(tag);

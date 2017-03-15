@@ -1,8 +1,7 @@
 package com.aionemu.gameserver.model;
 
+import java.util.HashMap;
 import java.util.Map;
-
-import javolution.util.FastMap;
 
 /**
  * Chat types that are supported by Aion.
@@ -48,9 +47,9 @@ public enum ChatType {
 	YELLOW_CENTER(35, true), // Periodic Announcement(Yellow && Box on screen center)
 	BRIGHT_YELLOW_CENTER(36, true); // System Notice (Light Yellow && Box on screen center)
 
-	private static Map<Byte, ChatType> chatTypes = new FastMap<Byte, ChatType>().shared();
-	private byte id;
-	private boolean sysMsg;
+	private static final Map<Byte, ChatType> chatTypes = new HashMap<>();
+	private final byte id;
+	private final boolean sysMsg;
 
 	static {
 		for (ChatType ct : values())

@@ -1,5 +1,6 @@
 package ai.instance.RukibukiCircusTroupe;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.Future;
@@ -10,7 +11,6 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 import ai.AggressiveNpcAI;
-import javolution.util.FastTable;
 
 /**
  * @author Ritsu
@@ -20,7 +20,7 @@ public class NightmareLordHeiramuneAI extends AggressiveNpcAI {
 
 	private AtomicBoolean isHome = new AtomicBoolean(true);
 	private Future<?> spawnTask;
-	protected List<Integer> percents = new FastTable<>();
+	protected List<Integer> percents = new ArrayList<>();
 
 	@Override
 	protected void handleSpawned() {

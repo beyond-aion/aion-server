@@ -9,8 +9,6 @@ import java.util.Objects;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-import javolution.util.FastMap;
-
 import com.aionemu.gameserver.ai.event.AIEventLog;
 import com.aionemu.gameserver.ai.event.AIEventType;
 import com.aionemu.gameserver.ai.event.AIListenable;
@@ -311,7 +309,7 @@ public abstract class AbstractAI extends AbstractEventSource<GeneralAIEvent> imp
 		if (annotation instanceof AIListenable) {
 			AIListenable listenable = (AIListenable) annotation;
 			if (listenableMethodsByClass == null)
-				listenableMethodsByClass = new FastMap<>();
+				listenableMethodsByClass = new HashMap<>();
 			Map<AIEventType, Method> listenableMethods = listenableMethodsByClass.get(getClass());
 			if (listenableMethods == null) {
 				// won't be called again because is cached by the AnnotationManager

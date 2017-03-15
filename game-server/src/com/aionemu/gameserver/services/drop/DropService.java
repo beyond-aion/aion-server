@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.services.drop;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -40,12 +41,10 @@ import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.services.item.ItemService.ItemUpdatePredicate;
 import com.aionemu.gameserver.taskmanager.tasks.TemporaryTradeTimeTask;
 import com.aionemu.gameserver.utils.ChatUtil;
-import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.World;
-
-import javolution.util.FastTable;
 
 /**
  * @author ATracer, xTz
@@ -345,7 +344,7 @@ public class DropService {
 		// Kinah is distributed to all group/alliance members nearby.
 		if (itemId == 182400001) {
 			if (player.isInTeam()) {
-				List<Player> entitledPlayers = new FastTable<>();
+				List<Player> entitledPlayers = new ArrayList<>();
 				for (Player member : player.getCurrentTeam().getMembers()) {
 					if (member != null && member.isOnline() && !member.getLifeStats().isAlreadyDead() && !member.isMentor()
 						&& PositionUtil.isInRange(member, player, GroupConfig.GROUP_MAX_DISTANCE))

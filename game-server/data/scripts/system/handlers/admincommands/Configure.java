@@ -2,6 +2,7 @@ package admincommands;
 
 import java.lang.reflect.Field;
 import java.util.Arrays;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -42,9 +43,6 @@ import com.aionemu.gameserver.configs.network.NetworkConfig;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 
-import javolution.util.FastMap;
-import javolution.util.FastTable;
-
 /**
  * @author ATracer
  * @modified Rolandas
@@ -52,10 +50,10 @@ import javolution.util.FastTable;
  */
 public class Configure extends AdminCommand {
 
-	private static final Map<String, Class<?>> configs = new FastMap<>();
+	private static final Map<String, Class<?>> configs = new LinkedHashMap<>();
 
 	static {
-		List<Class<?>> classes = FastTable.of(AIConfig.class, AdminConfig.class, AutoGroupConfig.class, CacheConfig.class, CraftConfig.class,
+		List<Class<?>> classes = Arrays.asList(AIConfig.class, AdminConfig.class, AutoGroupConfig.class, CacheConfig.class, CraftConfig.class,
 			CustomConfig.class, DeveloperConfig.class, DropConfig.class, EnchantsConfig.class, EventsConfig.class, FallDamageConfig.class, GSConfig.class,
 			GeoDataConfig.class, GroupConfig.class, HTMLConfig.class, HousingConfig.class, InGameShopConfig.class, LegionConfig.class, LoggingConfig.class,
 			MembershipConfig.class, NameConfig.class, NetworkConfig.class, PeriodicSaveConfig.class, PricesConfig.class, PunishmentConfig.class,

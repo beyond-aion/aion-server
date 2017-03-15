@@ -1,6 +1,7 @@
 package com.aionemu.gameserver.services.mail;
 
 import java.sql.Timestamp;
+import java.util.Arrays;
 import java.util.Calendar;
 
 import org.slf4j.Logger;
@@ -37,8 +38,6 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
 import com.aionemu.gameserver.utils.idfactory.IDFactory;
 import com.aionemu.gameserver.world.World;
-
-import javolution.util.FastTable;
 
 /**
  * @author kosyachok
@@ -209,7 +208,7 @@ public class MailService {
 				return;
 			}
 			// save item stones too.
-			DAOManager.getDAO(ItemStoneListDAO.class).save(FastTable.of(attachedItem));
+			DAOManager.getDAO(ItemStoneListDAO.class).save(Arrays.asList(attachedItem));
 		}
 		// save letter
 		if (!DAOManager.getDAO(MailDAO.class).storeLetter(time, newLetter))

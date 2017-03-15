@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.function.Predicate;
@@ -28,8 +29,6 @@ import com.aionemu.gameserver.model.items.storage.PlayerStorage;
 import com.aionemu.gameserver.model.items.storage.Storage;
 import com.aionemu.gameserver.model.items.storage.StorageType;
 import com.aionemu.gameserver.utils.idfactory.IDFactory;
-
-import javolution.util.FastTable;
 
 /**
  * @author ATracer
@@ -99,7 +98,7 @@ public class MySQL5InventoryDAO extends InventoryDAO {
 
 	@Override
 	public List<Item> loadStorageDirect(int ownerId, StorageType storageType) {
-		List<Item> list = new FastTable<>();
+		List<Item> list = new ArrayList<>();
 		final int storage = storageType.getId();
 		try {
 			try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(SELECT_QUERY2)) {
@@ -142,7 +141,7 @@ public class MySQL5InventoryDAO extends InventoryDAO {
 
 	@Override
 	public List<Item> loadEquipment(int playerId) {
-		final List<Item> items = new FastTable<>();
+		final List<Item> items = new ArrayList<>();
 		final int storage = 0;
 		final int equipped = 1;
 

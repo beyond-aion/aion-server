@@ -1,9 +1,11 @@
 package playercommands;
 
 import java.awt.Color;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ScheduledFuture;
 
 import com.aionemu.gameserver.dataholders.DataManager;
@@ -22,15 +24,12 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.chathandlers.PlayerCommand;
 
-import javolution.util.FastMap;
-import javolution.util.FastTable;
-
 /**
  * @author Neon
  */
 public class Preview extends PlayerCommand {
 
-	private static final Map<Integer, ScheduledFuture<?>> PREVIEW_RESETS = new FastMap<Integer, ScheduledFuture<?>>().shared();
+	private static final Map<Integer, ScheduledFuture<?>> PREVIEW_RESETS = new ConcurrentHashMap<Integer, ScheduledFuture<?>>();
 	private static final byte PREVIEW_TIME = 10;
 
 	public Preview() {
@@ -57,7 +56,7 @@ public class Preview extends PlayerCommand {
 			return;
 		}
 
-		List<ItemTemplate> items = new FastTable<>();
+		List<ItemTemplate> items = new ArrayList<>();
 		if (!parseItems(player, params[0], items))
 			return;
 
@@ -103,7 +102,7 @@ public class Preview extends PlayerCommand {
 
 		String itemNames = "";
 		long previewItemsSlotMask = 0;
-		List<Item> previewItems = new FastTable<>();
+		List<Item> previewItems = new ArrayList<>();
 		if (items.size() == 1 && items.get(0).isItemSet()) { // preview whole set
 			ItemSetTemplate itemSet = items.get(0).getItemSet();
 			for (ItemPart part : itemSet.getItempart())

@@ -1,20 +1,19 @@
 package com.aionemu.gameserver.taskmanager;
 
+import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import com.aionemu.commons.utils.concurrent.RunnableStatsManager;
-
-import javolution.util.FastSet;
 
 /**
  * @author NB4L1
  */
 public abstract class AbstractIterativePeriodicTaskManager<T> extends AbstractPeriodicTaskManager {
 
-	private final Set<T> startList = new FastSet<>();
-	private final Set<T> stopList = new FastSet<>();
-
-	private final FastSet<T> activeTasks = new FastSet<>();
+	private final Set<T> startList = new HashSet<>();
+	private final Set<T> stopList = new HashSet<>();
+	private final Set<T> activeTasks = new LinkedHashSet<>();
 
 	protected AbstractIterativePeriodicTaskManager(int period) {
 		super(period);

@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.model.templates.spawns;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -8,8 +9,6 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-
-import javolution.util.FastTable;
 
 /**
  * @author Rolandas
@@ -28,7 +27,7 @@ public class HouseSpawns implements Comparable<HouseSpawns> {
 
 	public List<HouseSpawn> getSpawns() {
 		if (spawns == null) {
-			spawns = new FastTable<>();
+			spawns = new ArrayList<>();
 		}
 		return this.spawns;
 	}

@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.model.gameobjects.player;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
@@ -13,8 +14,6 @@ import com.aionemu.gameserver.model.gameobjects.LetterType;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_MAIL_SERVICE;
 import com.aionemu.gameserver.services.mail.MailService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-
-import javolution.util.FastTable;
 
 /**
  * @author kosyachok
@@ -80,7 +79,7 @@ public class Mailbox {
 	 * @return new list of letters
 	 */
 	public List<Letter> getNewSystemLetters(String substring) {
-		List<Letter> letters = new FastTable<>();
+		List<Letter> letters = new ArrayList<>();
 		if (substring.startsWith("%") || substring.startsWith("$$")) {
 			for (Letter letter : mails.values()) {
 				if (!letter.isUnread() || letter.getSenderName() == null || !letter.getSenderName().startsWith(substring))

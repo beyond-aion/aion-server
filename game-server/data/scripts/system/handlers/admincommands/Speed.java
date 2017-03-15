@@ -1,6 +1,7 @@
 package admincommands;
 
 import java.security.InvalidParameterException;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -10,8 +11,6 @@ import com.aionemu.gameserver.model.stats.calc.functions.IStatFunction;
 import com.aionemu.gameserver.model.stats.calc.functions.StatFunction;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
-
-import javolution.util.FastTable;
 
 /**
  * @author ATracer
@@ -49,7 +48,7 @@ public class Speed extends AdminCommand implements StatOwner {
 			return;
 		}
 
-		List<IStatFunction> functions = new FastTable<>();
+		List<IStatFunction> functions = new ArrayList<>();
 		functions.add(new SpeedFunction(StatEnum.SPEED, parameter));
 		functions.add(new SpeedFunction(StatEnum.FLY_SPEED, parameter));
 		admin.getGameStats().addEffect(this, functions);

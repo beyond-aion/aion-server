@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.model.instance.instancereward;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.IntSummaryStatistics;
@@ -23,15 +24,13 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_INSTANCE_SCORE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
-import javolution.util.FastTable;
-
 /**
  * @author xTz
  */
 public class PvPArenaReward extends InstanceReward<PvPArenaPlayerReward> {
 
 	private Map<Integer, Boolean> positions = new HashMap<>();
-	private FastTable<Integer> zones = new FastTable<>();
+	private List<Integer> zones = new ArrayList<>();
 	private int round = 1;
 	private Integer zone;
 	private int bonusTime;
@@ -91,7 +90,7 @@ public class PvPArenaReward extends InstanceReward<PvPArenaPlayerReward> {
 	}
 
 	private List<Integer> getFreePositions() {
-		List<Integer> p = new FastTable<>();
+		List<Integer> p = new ArrayList<>();
 		for (Integer key : positions.keySet()) {
 			if (!positions.get(key)) {
 				p.add(key);

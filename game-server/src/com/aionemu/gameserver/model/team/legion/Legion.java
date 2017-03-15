@@ -1,6 +1,7 @@
 package com.aionemu.gameserver.model.team.legion;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
@@ -17,8 +18,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_ICON_INFO;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.World;
 
-import javolution.util.FastTable;
-
 /**
  * @author Simple
  */
@@ -31,7 +30,7 @@ public class Legion {
 	private int legionRank = 0;
 	private long contributionPoints = 0;
 	private int siegeGloryPoints = 0;
-	private Collection<Integer> legionMembers = new FastTable<>();
+	private Collection<Integer> legionMembers = new ArrayList<>();
 	private int onlineMembersCount = 0;
 	private short deputyPermission = 0x1E0C;
 	private short centurionPermission = 0x1C08;
@@ -123,7 +122,7 @@ public class Legion {
 	 * @return the online legionMembers
 	 */
 	public List<Player> getOnlineLegionMembers() {
-		List<Player> onlineLegionMembers = new FastTable<>();
+		List<Player> onlineLegionMembers = new ArrayList<>();
 		for (int legionMemberObjId : legionMembers) {
 			Player onlineLegionMember = World.getInstance().findPlayer(legionMemberObjId);
 			if (onlineLegionMember != null)

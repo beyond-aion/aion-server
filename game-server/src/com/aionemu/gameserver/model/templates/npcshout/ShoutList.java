@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.model.templates.npcshout;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -7,8 +8,6 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
-
-import javolution.util.FastTable;
 
 /**
  * @author Rolandas
@@ -63,7 +62,7 @@ public class ShoutList {
 	 */
 	public List<NpcShout> getNpcShouts() {
 		if (npcShouts == null) {
-			npcShouts = new FastTable<>();
+			npcShouts = new ArrayList<>();
 		}
 		return this.npcShouts;
 	}
@@ -84,7 +83,7 @@ public class ShoutList {
 	 */
 	public List<Integer> getNpcIds() {
 		if (npcIds == null) {
-			npcIds = new FastTable<>();
+			npcIds = new ArrayList<>();
 		}
 		return this.npcIds;
 	}

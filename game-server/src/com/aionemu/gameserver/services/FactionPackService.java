@@ -3,6 +3,8 @@ package com.aionemu.gameserver.services;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.Month;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.dao.FactionPackDAO;
@@ -14,8 +16,6 @@ import com.aionemu.gameserver.model.templates.item.ItemTemplate;
 import com.aionemu.gameserver.model.templates.rewards.RewardItem;
 import com.aionemu.gameserver.services.mail.SystemMailService;
 import com.aionemu.gameserver.utils.time.ServerTime;
-
-import javolution.util.FastTable;
 
 /**
  * @author Estrayl
@@ -29,7 +29,7 @@ public class FactionPackService {
 	private final LocalDateTime asmodianMinCreationTime = LocalDateTime.of(2016, Month.JANUARY, 17, 2, 0, 0);
 	private final LocalDateTime asmodianMaxCreationTime = LocalDateTime.of(2016, Month.JULY, 1, 0, 0, 0);
 	private final FactionPackDAO dao = DAOManager.getDAO(FactionPackDAO.class);
-	private final FastTable<RewardItem> rewards = new FastTable<>();
+	private final List<RewardItem> rewards = new ArrayList<>();
 
 	public static FactionPackService getInstance() {
 		return INSTANCE;

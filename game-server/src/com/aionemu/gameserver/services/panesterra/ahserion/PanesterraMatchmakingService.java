@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.services.panesterra.ahserion;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -20,8 +21,6 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.World;
 
-import javolution.util.FastTable;
-
 /**
  * @author Yeats
  *
@@ -29,9 +28,9 @@ import javolution.util.FastTable;
 public class PanesterraMatchmakingService {
 
 	private static final PanesterraMatchmakingService instance = new PanesterraMatchmakingService();
-	private Collection<Integer> asmodians = new FastTable<>();
-	private Collection<Integer> elyos = new FastTable<>();
-	private List<PlayerClass> registeredClasses = new FastTable<>();
+	private Collection<Integer> asmodians = new ArrayList<>();
+	private Collection<Integer> elyos = new ArrayList<>();
+	private List<PlayerClass> registeredClasses = new ArrayList<>();
 	private Map<PanesterraTeamId, PanesterraTeam> teams;
 	private AtomicBoolean started = new AtomicBoolean(false);
 	private AtomicBoolean isFinished = new AtomicBoolean(false);
@@ -44,13 +43,13 @@ public class PanesterraMatchmakingService {
 	public void onStart() {
 		if (!started.get() && !isFinished.get()) {
 			if (asmodians == null) {
-				asmodians = new FastTable<>();
+				asmodians = new ArrayList<>();
 			}
 			if (elyos == null) {
-				elyos = new FastTable<>();
+				elyos = new ArrayList<>();
 			}
 			if (registeredClasses == null) {
-				registeredClasses = new FastTable<>();
+				registeredClasses = new ArrayList<>();
 			}
 			started.set(true);
 			spawnPortals();

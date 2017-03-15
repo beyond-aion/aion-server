@@ -32,9 +32,9 @@
 
 package com.aionemu.gameserver.geoEngine.collision.bih;
 
-import static java.lang.Math.max;
-import static java.lang.Math.min;
+import static java.lang.Math.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.aionemu.gameserver.geoEngine.bounding.BoundingBox;
@@ -45,8 +45,6 @@ import com.aionemu.gameserver.geoEngine.math.Matrix4f;
 import com.aionemu.gameserver.geoEngine.math.Ray;
 import com.aionemu.gameserver.geoEngine.math.Triangle;
 import com.aionemu.gameserver.geoEngine.math.Vector3f;
-
-import javolution.util.FastTable;
 
 /**
  * Bounding Interval Hierarchy. Based on: Instant Ray Tracing: The Bounding Interval Hierarchy By Carsten Wächter and
@@ -122,7 +120,7 @@ public final class BIHNode {
 
 	public final int intersectWhere(Collidable col, BoundingBox box, Matrix4f worldMatrix, BIHTree tree, CollisionResults results) {
 
-		List<BIHStackData> stack = new FastTable<>();
+		List<BIHStackData> stack = new ArrayList<>();
 
 		float[] minExts = { box.getCenter().x - box.getXExtent(), box.getCenter().y - box.getYExtent(), box.getCenter().z - box.getZExtent() };
 
@@ -188,7 +186,7 @@ public final class BIHNode {
 
 		int cols = 0;
 
-		List<BIHStackData> stack = new FastTable<>();
+		List<BIHStackData> stack = new ArrayList<>();
 		stack.clear();
 		stack.add(new BIHStackData(this, 0, 0));
 		while (stack.size() > 0) {
@@ -231,7 +229,7 @@ public final class BIHNode {
 
 	public final int intersectWhere(Ray r, Matrix4f worldMatrix, BIHTree tree, float sceneMin, float sceneMax, CollisionResults results) {
 
-		List<BIHStackData> stack = new FastTable<>();
+		List<BIHStackData> stack = new ArrayList<>();
 
 		// float tHit = Float.POSITIVE_INFINITY;
 

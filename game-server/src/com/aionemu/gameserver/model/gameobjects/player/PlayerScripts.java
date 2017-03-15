@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.model.gameobjects.player;
 
+import java.util.LinkedHashMap;
 import java.util.Set;
 
 import org.slf4j.Logger;
@@ -9,8 +10,6 @@ import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.dao.HouseScriptsDAO;
 import com.aionemu.gameserver.model.house.PlayerScript;
 import com.aionemu.gameserver.utils.xml.CompressUtil;
-
-import javolution.util.FastMap;
 
 /**
  * @author Rolandas
@@ -22,11 +21,11 @@ public class PlayerScripts {
 	private static final byte SCRIPT_LIMIT = 8; // max number of active scripts a player can have
 
 	private final int houseObjId;
-	private final FastMap<Integer, PlayerScript> scripts;
+	private final LinkedHashMap<Integer, PlayerScript> scripts;
 
 	public PlayerScripts(int houseId) {
 		this.houseObjId = houseId;
-		this.scripts = new FastMap<>();
+		this.scripts = new LinkedHashMap<>();
 	}
 
 	public boolean set(int id, byte[] compressedXML, int uncompressedSize) {

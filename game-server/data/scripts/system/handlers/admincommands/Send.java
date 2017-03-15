@@ -1,6 +1,7 @@
 package admincommands;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -18,8 +19,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_CUSTOM_PACKET.Packet
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
-
-import javolution.util.FastTable;
 
 /**
  * This admin command is used for sending custom packets from server to client.
@@ -129,7 +128,7 @@ public class Send extends AdminCommand {
 	private static class Packet {
 
 		@XmlElement(name = "part")
-		private Collection<Part> parts = new FastTable<>();
+		private Collection<Part> parts = new ArrayList<>();
 
 		@XmlAttribute(name = "opcode")
 		private String opcode = "-1";

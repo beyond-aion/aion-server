@@ -1,5 +1,6 @@
 package admincommands;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.aionemu.gameserver.configs.main.DropConfig;
@@ -26,8 +27,6 @@ import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 import com.aionemu.gameserver.utils.stats.DropRewardEnum;
 import com.aionemu.gameserver.world.WorldDropType;
 import com.aionemu.gameserver.world.WorldMapType;
-
-import javolution.util.FastTable;
 
 // TODO delete this crap, rework that fucking so called "drop system" and create a command that doesn't utilize a shit-ton of code duplication
 /**
@@ -261,7 +260,7 @@ public class DropInfo extends AdminCommand {
 	}
 
 	private List<Integer> getAllowedItems(GlobalRule rule, Npc npc) {
-		List<Integer> alloweditems = new FastTable<>();
+		List<Integer> alloweditems = new ArrayList<>();
 		for (GlobalDropItem globalItem : rule.getGlobalRuleItems().getGlobalDropItems()) {
 			int diff = npc.getLevel() - globalItem.getItemTemplate().getLevel();
 			if (diff >= rule.getMinDiff() && diff <= rule.getMaxDiff()) {

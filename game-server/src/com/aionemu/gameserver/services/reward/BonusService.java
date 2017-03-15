@@ -26,8 +26,6 @@ import com.aionemu.gameserver.model.templates.rewards.BonusType;
 import com.aionemu.gameserver.model.templates.rewards.CraftItem;
 import com.aionemu.gameserver.model.templates.rewards.FullRewardItem;
 
-import javolution.util.FastTable;
-
 /**
  * @author Rolandas
  * @modified Pad
@@ -142,7 +140,7 @@ public class BonusService {
 				break;
 			allRewards = group.getRewards(questTemplate.getCombineSkill(), questTemplate.getCombineSkillPoint());
 			if (allRewards.length == 0) {
-				List<BonusItemGroup> temp = new FastTable<>();
+				List<BonusItemGroup> temp = new ArrayList<>();
 				Collections.addAll(temp, groups);
 				temp.remove(group);
 				group = null;
@@ -153,7 +151,7 @@ public class BonusService {
 		if (group == null || allRewards == null)
 			return null;
 
-		List<ItemRaceEntry> finalList = new FastTable<>();
+		List<ItemRaceEntry> finalList = new ArrayList<>();
 		for (ItemRaceEntry allReward : allRewards) {
 			ItemRaceEntry r = allReward;
 			ItemTemplate template = DataManager.ITEM_DATA.getItemTemplate(r.getId());
@@ -241,7 +239,7 @@ public class BonusService {
 	private QuestItems getManastoneBonus(Player player, QuestBonuses bonus) {
 		ManastoneGroup group = (ManastoneGroup) getRandomGroup(BonusType.MANASTONE);
 		ItemRaceEntry[] allRewards = group.getRewards();
-		List<ItemRaceEntry> finalList = new FastTable<>();
+		List<ItemRaceEntry> finalList = new ArrayList<>();
 
 		for (ItemRaceEntry r : allRewards) {
 			ItemTemplate template = DataManager.ITEM_DATA.getItemTemplate(r.getId());
@@ -262,7 +260,7 @@ public class BonusService {
 	private QuestItems getMedicineBonus(Player player, QuestBonuses bonus) {
 		MedicineGroup group = (MedicineGroup) getRandomGroup(BonusType.MEDICINE);
 		ItemRaceEntry[] allRewards = group.getRewards();
-		List<ItemRaceEntry> finalList = new FastTable<>();
+		List<ItemRaceEntry> finalList = new ArrayList<>();
 
 		for (ItemRaceEntry r : allRewards) {
 			ItemTemplate template = DataManager.ITEM_DATA.getItemTemplate(r.getId());

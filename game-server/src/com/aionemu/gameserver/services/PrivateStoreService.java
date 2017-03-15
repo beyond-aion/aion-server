@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -20,8 +21,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
-
-import javolution.util.FastTable;
 
 /**
  * @author Simple
@@ -187,7 +186,7 @@ public class PrivateStoreService {
 		Collection<TradePSItem> storeList = seller.getStore().getSoldItems().values();
 		// we need index based access since tradeList holds index values (this will work since underlying LinkedHashMap preserves insertion order)
 		TradePSItem[] storeItems = storeList.toArray(new TradePSItem[storeList.size()]);
-		List<TradePSItem> boughtItems = new FastTable<>();
+		List<TradePSItem> boughtItems = new ArrayList<>();
 
 		for (TradeItem tradeItem : tradeList.getTradeItems()) {
 			if (tradeItem.getItemId() >= 0 && tradeItem.getItemId() < storeItems.length) { // itemId is index! blame the one who implemented this

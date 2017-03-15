@@ -2,6 +2,7 @@ package quest.ascension;
 
 import static com.aionemu.gameserver.model.DialogAction.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.aionemu.gameserver.configs.main.CustomConfig;
@@ -28,8 +29,6 @@ import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
-
-import javolution.util.FastTable;
 
 /**
  * @author MrPoke
@@ -238,7 +237,7 @@ public class _2008Ascension extends QuestHandler {
 								public void run() {
 									qs.setQuestVar(51);
 									updateQuestStatus(env);
-									List<Npc> mobs = new FastTable<>();
+									List<Npc> mobs = new ArrayList<>();
 									mobs.add((Npc) QuestService.spawnQuestNpc(320020000, instanceId, 205040, 294f, 277f, 207f, (byte) 0));
 									mobs.add((Npc) QuestService.spawnQuestNpc(320020000, instanceId, 205040, 305f, 279f, 206.5f, (byte) 0));
 									mobs.add((Npc) QuestService.spawnQuestNpc(320020000, instanceId, 205040, 298f, 253f, 205.7f, (byte) 0));

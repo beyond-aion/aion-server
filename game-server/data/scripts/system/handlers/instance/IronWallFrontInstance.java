@@ -2,6 +2,7 @@ package instance;
 
 import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE.STR_REBIRTH_MASSAGE_ME;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Future;
@@ -37,8 +38,6 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.WorldPosition;
 
-import javolution.util.FastTable;
-
 /**
  * @author Tibald
  */
@@ -50,8 +49,8 @@ public class IronWallFrontInstance extends GeneralInstanceHandler {
 	private long instanceTime;
 	private Future<?> instanceTask;
 	private boolean isInstanceDestroyed = false;
-	private static List<WorldPosition> generalsPos = new FastTable<>();
-	private static List<WorldPosition> garnonPos = new FastTable<>();
+	private static List<WorldPosition> generalsPos = new ArrayList<>();
+	private static List<WorldPosition> garnonPos = new ArrayList<>();
 
 	static {
 		generalsPos.add(new WorldPosition(301120000, 1437.7f, 1368.7f, 600.8967f, (byte) 40));

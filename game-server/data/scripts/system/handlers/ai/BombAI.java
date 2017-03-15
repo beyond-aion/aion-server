@@ -4,7 +4,7 @@ import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.model.ai.BombTemplate;
+import com.aionemu.gameserver.model.templates.ai.BombTemplate;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
@@ -17,7 +17,7 @@ public class BombAI extends AggressiveNpcAI {
 
 	@Override
 	protected void handleSpawned() {
-		template = DataManager.AI_DATA.getAiTemplate().get(getNpcId()).getBombs().getBombTemplate();
+		template = DataManager.AI_DATA.getAiTemplate(getNpcId()).getBombs().getBombTemplate();
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 			@Override

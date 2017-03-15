@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.model.templates.world;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -7,8 +8,6 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
-
-import javolution.util.FastTable;
 
 /**
  * @author Rolandas
@@ -62,7 +61,7 @@ public class WeatherTable {
 	}
 
 	public List<WeatherEntry> getWeathersForZone(int zoneId) {
-		List<WeatherEntry> result = new FastTable<>();
+		List<WeatherEntry> result = new ArrayList<>();
 		for (WeatherEntry entry : getZoneData()) {
 			if (entry.getZoneId() == zoneId)
 				result.add(entry);

@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.model.instance.instancereward;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -12,14 +13,12 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_INSTANCE_SCORE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
-import javolution.util.FastTable;
-
 /**
  * @author xTz
  */
 public class HarmonyArenaReward extends PvPArenaReward {
 
-	private FastTable<HarmonyGroupReward> groups = new FastTable<>();
+	private List<HarmonyGroupReward> groups = new ArrayList<>();
 
 	public HarmonyArenaReward(Integer mapId, int instanceId, WorldMapInstance instance) {
 		super(mapId, instanceId, instance);
@@ -36,7 +35,7 @@ public class HarmonyArenaReward extends PvPArenaReward {
 	}
 
 	public List<HarmonyGroupReward> getHarmonyGroupInside() {
-		List<HarmonyGroupReward> harmonyGroups = new FastTable<>();
+		List<HarmonyGroupReward> harmonyGroups = new ArrayList<>();
 		for (HarmonyGroupReward group : groups) {
 			for (AGPlayer agp : group.getAGPlayers()) {
 				if (agp.isInInstance()) {
@@ -48,8 +47,8 @@ public class HarmonyArenaReward extends PvPArenaReward {
 		return harmonyGroups;
 	}
 
-	public FastTable<Player> getPlayersInside(HarmonyGroupReward group) {
-		FastTable<Player> players = new FastTable<>();
+	public List<Player> getPlayersInside(HarmonyGroupReward group) {
+		List<Player> players = new ArrayList<>();
 		for (Player playerInside : instance.getPlayersInside()) {
 			if (group.containPlayer(playerInside.getObjectId())) {
 				players.add(playerInside);
@@ -62,7 +61,7 @@ public class HarmonyArenaReward extends PvPArenaReward {
 		groups.add(reward);
 	}
 
-	public FastTable<HarmonyGroupReward> getGroups() {
+	public List<HarmonyGroupReward> getGroups() {
 		return groups;
 	}
 

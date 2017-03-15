@@ -6,7 +6,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.TreeMap;
@@ -31,9 +33,6 @@ import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.skillengine.model.Times;
 import com.aionemu.gameserver.skillengine.model.WeaponTypeWrapper;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-
-import javolution.util.FastMap;
-import javolution.util.FastTable;
 
 /**
  * @author kecimis
@@ -204,7 +203,7 @@ public class MotionLoggingService {
 							break;
 					}
 				}
-				List<WeaponTime> weaponTimes = new FastTable<>();
+				List<WeaponTime> weaponTimes = new ArrayList<>();
 				weaponTimes.add(weaponTimeAm);
 				weaponTimes.add(weaponTimeAf);
 				weaponTimes.add(weaponTimeEm);
@@ -215,7 +214,7 @@ public class MotionLoggingService {
 		}
 
 		for (Entry<String, List<WeaponTime>> entry : results.entrySet()) {
-			List<WeaponTypeWrapper> listofWeapons = new FastTable<>();
+			List<WeaponTypeWrapper> listofWeapons = new ArrayList<>();
 			// ordering BOOK_2H BOW DAGGER_1H MACE_1H ORB_2H POLEARM_2H STAFF_2H SWORD_1H SWORD_2H dualwield GUN_1H GUN_1H
 			// dualwield TOOLHOE_1H TOOLHOE_1H dualwield TOOLPICK_2H TOOLROD_2H CANNON_2H HARP_2H GUN_2H KEYBLADE_2H
 			// KEYHAMMER_2H
@@ -485,9 +484,9 @@ public class MotionLoggingService {
 
 	private class MotionLog {
 
-		private FastMap<WeaponTypeWrapper, List<SkillTime>> motionsForWeapons = new FastMap<>();
+		private LinkedHashMap<WeaponTypeWrapper, List<SkillTime>> motionsForWeapons = new LinkedHashMap<>();
 
-		public FastMap<WeaponTypeWrapper, List<SkillTime>> getMotionLog() {
+		public LinkedHashMap<WeaponTypeWrapper, List<SkillTime>> getMotionLog() {
 			return this.motionsForWeapons;
 		}
 
@@ -498,7 +497,7 @@ public class MotionLoggingService {
 					return true;
 				}
 			} else {
-				List<SkillTime> list = new FastTable<>();
+				List<SkillTime> list = new ArrayList<>();
 				list.add(skillTime);
 				motionsForWeapons.put(weapon, list);
 				return true;
@@ -647,7 +646,7 @@ public class MotionLoggingService {
 			if (values.containsKey(weapon))
 				values.get(weapon).add(value);
 			else {
-				List<Integer> list = new FastTable<>();
+				List<Integer> list = new ArrayList<>();
 				list.add(value);
 				values.put(weapon, list);
 			}

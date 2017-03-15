@@ -1,5 +1,7 @@
 package ai.instance.sauroBase;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import com.aionemu.gameserver.ai.AIName;
@@ -9,7 +11,6 @@ import com.aionemu.gameserver.model.templates.npcskill.QueuedNpcSkillTemplate;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 import ai.AggressiveNpcAI;
-import javolution.util.FastTable;
 
 /**
  * @author Estrayl
@@ -17,7 +18,7 @@ import javolution.util.FastTable;
 @AIName("brigade_general_sheba")
 public class BrigadeGeneralShebaAI extends AggressiveNpcAI {
 
-	private List<Integer> percents = FastTable.of(25, 10);
+	private List<Integer> percents = new ArrayList<>(Arrays.asList(25, 10));
 
 	@Override
 	protected void handleAttack(Creature creature) {
@@ -63,6 +64,6 @@ public class BrigadeGeneralShebaAI extends AggressiveNpcAI {
 	@Override
 	protected void handleBackHome() {
 		super.handleBackHome();
-		percents = FastTable.of(25, 10);
+		percents = new ArrayList<>(Arrays.asList(25, 10));
 	}
 }

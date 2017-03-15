@@ -1,6 +1,6 @@
 package com.aionemu.gameserver.model.gameobjects.player;
 
-import javolution.util.FastMap;
+import java.util.LinkedHashMap;
 
 /**
  * @author Rolandas
@@ -8,7 +8,7 @@ import javolution.util.FastMap;
  */
 public class HouseObjectCooldownList {
 
-	private FastMap<Integer, Long> houseObjectCooldowns;
+	private LinkedHashMap<Integer, Long> houseObjectCooldowns;
 
 	public HouseObjectCooldownList() {
 	}
@@ -31,13 +31,13 @@ public class HouseObjectCooldownList {
 		return houseObjectCooldowns.get(objectId);
 	}
 
-	public FastMap<Integer, Long> getHouseObjectCooldowns() {
+	public LinkedHashMap<Integer, Long> getHouseObjectCooldowns() {
 		return houseObjectCooldowns;
 	}
 
 	public void setHouseObjectCooldown(int objectId, long reuseTime) {
 		if (houseObjectCooldowns == null)
-			houseObjectCooldowns = new FastMap<>();
+			houseObjectCooldowns = new LinkedHashMap<>();
 
 		if (reuseTime > 0)
 			houseObjectCooldowns.put(objectId, reuseTime);

@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.services;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -12,14 +14,13 @@ import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.base.BaseLocation;
 import com.aionemu.gameserver.model.base.SiegeBaseLocation;
 import com.aionemu.gameserver.model.base.StainedBaseLocation;
+import com.aionemu.gameserver.model.templates.base.BaseTemplate;
 import com.aionemu.gameserver.services.base.Base;
 import com.aionemu.gameserver.services.base.BaseException;
 import com.aionemu.gameserver.services.base.CasualBase;
 import com.aionemu.gameserver.services.base.SiegeBase;
 import com.aionemu.gameserver.services.base.StainedBase;
 import com.aionemu.gameserver.spawnengine.SpawnHandlerType;
-
-import javolution.util.FastTable;
 
 /**
  * @author Source
@@ -30,20 +31,38 @@ public class BaseService {
 	private final static Logger log = LoggerFactory.getLogger(BaseService.class);
 	private final static BaseService instance = new BaseService();
 	private final Map<Integer, Base<?>> activeBases = new ConcurrentHashMap<>();
-	private Map<Integer, BaseLocation> allBases = new ConcurrentHashMap<>();
-	private Map<Integer, BaseLocation> casualBases;
-	private Map<Integer, SiegeBaseLocation> siegeBases;
-	private Map<Integer, StainedBaseLocation> stainedBases;
+	private final Map<Integer, BaseLocation> allBases = new HashMap<>();
+	private final Map<Integer, BaseLocation> casualBases = new HashMap<>();
+	private final Map<Integer, SiegeBaseLocation> siegeBases = new HashMap<>();
+	private final Map<Integer, StainedBaseLocation> stainedBases = new HashMap<>();
 
 	/**
 	 * Initializes all base locations
 	 */
-	public final void initBaseLocations() {
+	private BaseService() {
 		log.info("Initializing bases...");
-		casualBases = DataManager.BASE_DATA.getCasualBaseLocations();
-		siegeBases = DataManager.BASE_DATA.getSiegeBaseLocations();
-		stainedBases = DataManager.BASE_DATA.getStainedBaseLocations();
-		allBases = DataManager.BASE_DATA.getAllBaseLocations();
+
+		for (BaseTemplate template : DataManager.BASE_DATA.getAllBaseTemplates()) {
+			switch (template.getType()) {
+				case CASUAL:
+					BaseLocation b = new BaseLocation(template);
+					casualBases.put(template.getId(), b);
+					allBases.put(template.getId(), b);
+					break;
+				case SIEGE:
+					SiegeBaseLocation s = new SiegeBaseLocation(template);
+					siegeBases.put(template.getId(), s);
+					allBases.put(template.getId(), s);
+					break;
+				case STAINED:
+					StainedBaseLocation st = new StainedBaseLocation(template);
+					stainedBases.put(template.getId(), st);
+					allBases.put(template.getId(), st);
+					break;
+				default:
+					throw new UnsupportedOperationException("Unhandled base type " + template.getType() + ", couldn't initialize BaseService");
+			}
+		}
 	}
 
 	/**
@@ -115,7 +134,7 @@ public class BaseService {
 	}
 
 	private final void handleStainedFeatures(StainedBase target) {
-		List<StainedBase> spec = new FastTable<>();
+		List<StainedBase> spec = new ArrayList<>();
 		for (Base<?> possibleSBase : activeBases.values()) {
 			if (possibleSBase instanceof StainedBase) {
 				StainedBase sb = (StainedBase) possibleSBase;

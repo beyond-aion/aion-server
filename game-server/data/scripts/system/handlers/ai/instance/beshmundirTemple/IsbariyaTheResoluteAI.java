@@ -1,5 +1,6 @@
 package ai.instance.beshmundirTemple;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -15,12 +16,11 @@ import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
-import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 import ai.AggressiveNpcAI;
-import javolution.util.FastTable;
 
 /**
  * @author Luzien
@@ -30,7 +30,7 @@ public class IsbariyaTheResoluteAI extends AggressiveNpcAI {
 
 	private int stage = 0;
 	private AtomicBoolean isStart = new AtomicBoolean(false);
-	private List<Point3D> soulLocations = new FastTable<>();
+	private List<Point3D> soulLocations = new ArrayList<>();
 	private Future<?> basicSkillTask;
 	private Future<?> spawnTask;
 
@@ -154,7 +154,7 @@ public class IsbariyaTheResoluteAI extends AggressiveNpcAI {
 	}
 
 	private void spawnSouls() {
-		List<Point3D> points = new FastTable<>();
+		List<Point3D> points = new ArrayList<>();
 		points.addAll(soulLocations);
 		int count = Rnd.get(3, 6);
 		for (int i = 0; i < count; i++) {
@@ -166,7 +166,7 @@ public class IsbariyaTheResoluteAI extends AggressiveNpcAI {
 	}
 
 	private Player getTargetPlayer() {
-		List<Player> players = new FastTable<>();
+		List<Player> players = new ArrayList<>();
 		getKnownList().forEachPlayer(player -> {
 			if (!PlayerActions.isAlreadyDead(player) && PositionUtil.isInRange(player, getOwner(), 40) && player != getTarget()) {
 				players.add(player);

@@ -1,7 +1,8 @@
 package quest.event_quests;
 
-import com.aionemu.gameserver.dataholders.DataManager;
 import static com.aionemu.gameserver.model.DialogAction.*;
+
+import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.actions.NpcActions;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;

@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
+import java.util.Arrays;
 import java.util.Collection;
 
 import com.aionemu.gameserver.dataholders.DataManager;
@@ -8,8 +9,6 @@ import com.aionemu.gameserver.model.gameobjects.player.PortalCooldown;
 import com.aionemu.gameserver.model.templates.InstanceCooltime;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
-
-import javolution.util.FastTable;
 
 /**
  * @author nrg
@@ -22,7 +21,7 @@ public class SM_INSTANCE_INFO extends AionServerPacket {
 	private Integer[] instanceIds; // list of instances for which the data should be updated
 
 	public SM_INSTANCE_INFO(byte updateType, Player player, Integer... instanceId) {
-		this(updateType, FastTable.of(player), instanceId);
+		this(updateType, Arrays.asList(player), instanceId);
 	}
 
 	public SM_INSTANCE_INFO(byte updateType, Collection<Player> players, Integer... instanceId) {

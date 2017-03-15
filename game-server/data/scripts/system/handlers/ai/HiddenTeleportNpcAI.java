@@ -1,9 +1,10 @@
 package ai;
 
+import static com.aionemu.gameserver.model.DialogAction.SETPRO1;
+
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.dataholders.DataManager;
-import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.actions.PlayerMode;
 import com.aionemu.gameserver.model.gameobjects.player.Player;

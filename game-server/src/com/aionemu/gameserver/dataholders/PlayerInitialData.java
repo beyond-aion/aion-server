@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.dataholders;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -16,7 +17,6 @@ import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.templates.item.ItemTemplate;
 
 import gnu.trove.map.hash.THashMap;
-import javolution.util.FastTable;
 
 /**
  * This table contains all nesessary data for new players. <br/>
@@ -29,7 +29,7 @@ import javolution.util.FastTable;
 public class PlayerInitialData {
 
 	@XmlElement(name = "player_data")
-	private List<PlayerCreationData> dataList = new FastTable<>();
+	private List<PlayerCreationData> dataList = new ArrayList<>();
 
 	@XmlElement(name = "elyos_spawn_location", required = true)
 	private LocationData elyosSpawnLocation;
@@ -91,7 +91,7 @@ public class PlayerInitialData {
 		static class ItemsType {
 
 			@XmlElement(name = "item")
-			public List<ItemType> items = new FastTable<>();
+			public List<ItemType> items = new ArrayList<>();
 		}
 
 		public static class ItemType {

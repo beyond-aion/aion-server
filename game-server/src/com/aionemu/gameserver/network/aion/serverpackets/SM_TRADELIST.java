@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.aionemu.gameserver.dataholders.DataManager;
@@ -14,8 +15,6 @@ import com.aionemu.gameserver.model.templates.tradelist.TradeNpcType;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 import com.aionemu.gameserver.services.LimitedItemTradeService;
-
-import javolution.util.FastTable;
 
 /**
  * @author alexa026, ATracer, Sarynth, xTz
@@ -41,8 +40,8 @@ public class SM_TRADELIST extends AionServerPacket {
 		this.buyPriceModifier = buyPriceModifier;
 		this.showBuyTab = npc.canSell();
 		this.showSellTab = npc.canBuy();
-		this.tradeTablist = new FastTable<>();
-		this.limitedItems = new FastTable<>();
+		this.tradeTablist = new ArrayList<>();
+		this.limitedItems = new ArrayList<>();
 
 		for (TradeTab tab : tlist.getTradeTablist()) {
 			GoodsList goodsList = DataManager.GOODSLIST_DATA.getGoodsListById(tab.getId());

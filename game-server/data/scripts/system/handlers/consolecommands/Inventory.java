@@ -22,7 +22,7 @@ public class Inventory extends ConsoleCommand {
 			target.setWarehouseLimit();
 			// items
 			Storage inventory = target.getInventory();
-			List<Item> allItems = new FastTable<>();
+			List<Item> allItems = new ArrayList<>();
 			if (inventory.getKinah() == 0) {
 				inventory.increaseKinah(0); // create an empty object with value 0
 			}
@@ -34,7 +34,7 @@ public class Inventory extends ConsoleCommand {
 			while (splitter.hasMore()) {
 				PacketSendUtility.sendPacket(player, new SM_GM_SHOW_PLAYER_SKILLS(splitter.isFirst(), splitter.getNext(), target));
 			}
-			PacketSendUtility.sendPacket(player, new SM_GM_SHOW_PLAYER_SKILLS(false, new FastTable<>(), target));
+			PacketSendUtility.sendPacket(player, new SM_GM_SHOW_PLAYER_SKILLS(false, new ArrayList<>(), target));
 		}
 		*/
 	}

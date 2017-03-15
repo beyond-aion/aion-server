@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.ai.handler;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.aionemu.commons.utils.Rnd;
@@ -13,8 +14,6 @@ import com.aionemu.gameserver.model.templates.npcshout.NpcShout;
 import com.aionemu.gameserver.model.templates.npcshout.ShoutEventType;
 import com.aionemu.gameserver.model.templates.walker.WalkerTemplate;
 import com.aionemu.gameserver.services.NpcShoutsService;
-
-import javolution.util.FastTable;
 
 /**
  * @author Rolandas
@@ -141,8 +140,8 @@ public final class ShoutEventHandler {
 		if (shouts == null || shouts.isEmpty())
 			return;
 
-		List<NpcShout> validShouts = new FastTable<>();
-		List<NpcShout> nonNumberedShouts = new FastTable<>();
+		List<NpcShout> validShouts = new ArrayList<>();
+		List<NpcShout> nonNumberedShouts = new ArrayList<>();
 		for (NpcShout shout : shouts) {
 			if (shout.getSkillNo() == 0)
 				nonNumberedShouts.add(shout);

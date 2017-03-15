@@ -1,13 +1,12 @@
 package com.aionemu.chatserver.model;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import com.aionemu.chatserver.model.channel.Channel;
 import com.aionemu.chatserver.network.netty.handler.ClientChannelHandler;
-
-import javolution.util.FastMap;
-import javolution.util.FastTable;
 
 /**
  * @author ATracer
@@ -29,8 +28,8 @@ public class ChatClient {
 	 * Map with all connected channels<br>
 	 * Support for 2 channels of ChannelType.JOB, since starting classes join both main class channels
 	 */
-	private Map<ChannelType, List<Channel>> channels = new FastMap<>();
-	private Map<ChannelType, Long> lastMessageTime = new FastMap<>();
+	private Map<ChannelType, List<Channel>> channels = new HashMap<>();
+	private Map<ChannelType, Long> lastMessageTime = new HashMap<>();
 
 	public ChatClient(int clientId, byte[] token, String accName, String nick, Race race, byte accessLevel) {
 		this.clientId = clientId;
@@ -92,13 +91,13 @@ public class ChatClient {
 
 	public void addChannel(Channel channel) {
 		List<Channel> channelsOfType = channels.get(channel.getChannelType());
-		if (channelsOfType == null)
-			channels.put(channel.getChannelType(), FastTable.of(channel));
-		else {
-			if (channel.getChannelType() != ChannelType.JOB || channelsOfType.size() == 2)
-				channelsOfType.clear();
-			channelsOfType.add(channel);
+		if (channelsOfType == null) {
+			channelsOfType = new ArrayList<>();
+			channels.put(channel.getChannelType(), channelsOfType);
+		} else if (channel.getChannelType() != ChannelType.JOB || channelsOfType.size() == 2) {
+			channelsOfType.clear();
 		}
+		channelsOfType.add(channel);
 	}
 
 	public boolean removeChannel(Channel channel) {

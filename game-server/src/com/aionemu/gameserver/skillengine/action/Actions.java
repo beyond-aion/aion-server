@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.skillengine.action;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -7,8 +8,6 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElements;
 import javax.xml.bind.annotation.XmlType;
-
-import javolution.util.FastTable;
 
 /**
  * @author ATracer
@@ -37,7 +36,7 @@ public class Actions {
 	 */
 	public List<Action> getActions() {
 		if (actions == null) {
-			actions = new FastTable<>();
+			actions = new ArrayList<>();
 		}
 		return this.actions;
 	}

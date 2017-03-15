@@ -264,11 +264,10 @@ public final class BufferUtils {
      *            to normalize
      */
     public static void normalizeVector3(FloatBuffer buf, int index) {
-        Vector3f tempVec3 = Vector3f.newInstance();
+        Vector3f tempVec3 = new Vector3f();
         populateFromBuffer(tempVec3, buf, index);
         tempVec3.normalizeLocal();
         setInBuffer(tempVec3, buf, index);
-        Vector3f.recycle(tempVec3);
     }
 
     /**
@@ -283,11 +282,10 @@ public final class BufferUtils {
      *            to add to
      */
     public static void addInBuffer(Vector3f toAdd, FloatBuffer buf, int index) {
-        Vector3f tempVec3 = Vector3f.newInstance();
+        Vector3f tempVec3 = new Vector3f();
         populateFromBuffer(tempVec3, buf, index);
         tempVec3.addLocal(toAdd);
         setInBuffer(tempVec3, buf, index);
-        Vector3f.recycle(tempVec3);
     }
 
     /**
@@ -302,11 +300,10 @@ public final class BufferUtils {
      *            to multiply
      */
     public static void multInBuffer(Vector3f toMult, FloatBuffer buf, int index) {
-        Vector3f tempVec3 = Vector3f.newInstance();
+        Vector3f tempVec3 = new Vector3f();
         populateFromBuffer(tempVec3, buf, index);
         tempVec3.multLocal(toMult);
         setInBuffer(tempVec3, buf, index);
-        Vector3f.recycle(tempVec3);
     }
 
     /**
@@ -323,10 +320,9 @@ public final class BufferUtils {
      * @return
      */
     public static boolean equals(Vector3f check, FloatBuffer buf, int index) {
-        Vector3f tempVec3 = Vector3f.newInstance();
+        Vector3f tempVec3 = new Vector3f();
         populateFromBuffer(tempVec3, buf, index);
         boolean eq = tempVec3.equals(check);
-        Vector3f.recycle(tempVec3);
         return eq;
     }
 

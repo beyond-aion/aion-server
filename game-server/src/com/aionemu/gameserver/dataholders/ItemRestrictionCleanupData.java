@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.dataholders;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -8,8 +9,6 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import com.aionemu.gameserver.model.templates.restriction.ItemCleanupTemplate;
-
-import javolution.util.FastTable;
 
 /**
  * @author KID
@@ -26,6 +25,6 @@ public class ItemRestrictionCleanupData {
 	}
 
 	public List<ItemCleanupTemplate> getList() {
-		return bplist == null ? new FastTable<>() : bplist;
+		return bplist == null ? new ArrayList<>() : bplist;
 	}
 }

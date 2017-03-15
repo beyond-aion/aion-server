@@ -1,6 +1,8 @@
 package com.aionemu.loginserver.utils;
 
 import java.sql.Timestamp;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,8 +10,6 @@ import org.slf4j.LoggerFactory;
 import com.aionemu.loginserver.configs.Config;
 import com.aionemu.loginserver.controller.BannedIpController;
 import com.aionemu.loginserver.network.aion.clientpackets.CM_LOGIN;
-
-import javolution.util.FastMap;
 
 /**
  * @author Mr. Poke
@@ -21,8 +21,8 @@ public class FloodProtector {
 	 */
 	private static final Logger log = LoggerFactory.getLogger(CM_LOGIN.class);
 
-	private FastMap<String, Long> flood = new FastMap<>();
-	private FastMap<String, Long> ban = new FastMap<>();
+	private Map<String, Long> flood = new HashMap<>();
+	private Map<String, Long> ban = new HashMap<>();
 
 	public static final FloodProtector getInstance() {
 		return SingletonHolder.instance;

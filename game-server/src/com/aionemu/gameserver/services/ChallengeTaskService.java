@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -30,8 +31,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.mail.SystemMailService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.World;
-
-import javolution.util.FastTable;
 
 /**
  * @author ViAl
@@ -83,7 +82,7 @@ public class ChallengeTaskService {
 		else
 			taskMap = cityTasks;
 		int playerTownId = TownService.getInstance().getTownResidence(player);
-		List<ChallengeTask> availableTasks = new FastTable<>();
+		List<ChallengeTask> availableTasks = new ArrayList<>();
 		if (!taskMap.containsKey(ownerId)) {
 			Map<Integer, ChallengeTask> tasks = DAOManager.getDAO(ChallengeTasksDAO.class).load(ownerId, challengeType);
 			taskMap.put(ownerId, tasks);
@@ -215,7 +214,7 @@ public class ChallengeTaskService {
 					if (member != null) {
 						int score = member.getLegionMember().getChallengeScore();
 						if (winnersByPoints.get(score) == null)
-							winnersByPoints.put(score, new FastTable<Integer>());
+							winnersByPoints.put(score, new ArrayList<Integer>());
 						winnersByPoints.get(score).add(member.getObjectId());
 						member.getLegionMember().setChallengeScore(0);
 						continue;
@@ -223,7 +222,7 @@ public class ChallengeTaskService {
 						LegionMember legionMember = DAOManager.getDAO(LegionMemberDAO.class).loadLegionMember(memberObjId);
 						int score = legionMember.getChallengeScore();
 						if (winnersByPoints.get(score) == null)
-							winnersByPoints.put(score, new FastTable<Integer>());
+							winnersByPoints.put(score, new ArrayList<Integer>());
 						winnersByPoints.get(score).add(legionMember.getObjectId());
 						legionMember.setChallengeScore(0);
 						DAOManager.getDAO(LegionMemberDAO.class).storeLegionMember(memberObjId, legionMember);

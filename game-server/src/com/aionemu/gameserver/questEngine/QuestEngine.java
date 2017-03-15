@@ -1,7 +1,10 @@
 package com.aionemu.gameserver.questEngine;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.EnumMap;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -48,8 +51,8 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
-import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.collections.ListSplitter;
 import com.aionemu.gameserver.utils.stats.AbyssRankEnum;
@@ -57,11 +60,9 @@ import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.zone.ZoneName;
 
 import gnu.trove.list.array.TIntArrayList;
+import gnu.trove.map.hash.TIntIntHashMap;
 import gnu.trove.map.hash.TIntObjectHashMap;
 import gnu.trove.procedure.TIntProcedure;
-import javolution.util.FastMap;
-import javolution.util.FastSet;
-import javolution.util.FastTable;
 
 /**
  * @author MrPoke, Hilgert
@@ -72,36 +73,36 @@ public class QuestEngine implements GameEngine {
 	private static final Logger log = LoggerFactory.getLogger(QuestEngine.class);
 	private ScriptManager scriptManager = new ScriptManager();
 	private Future<?> messageTask;
-	private Map<Integer, QuestHandler> questHandlers = new FastMap<>();
+	private TIntObjectHashMap<QuestHandler> questHandlers = new TIntObjectHashMap<>();
 	private TIntObjectHashMap<QuestNpc> questNpcs = new TIntObjectHashMap<>();
 	private TIntObjectHashMap<TIntArrayList> questItemRelated = new TIntObjectHashMap<>();
 	private TIntArrayList questHouseItems = new TIntArrayList();
 	private TIntObjectHashMap<TIntArrayList> questItems = new TIntObjectHashMap<>();
 	private TIntArrayList questOnCompleted = new TIntArrayList();
-	private Map<Race, TIntArrayList> questOnLevelUp = new FastMap<>();
+	private Map<Race, TIntArrayList> questOnLevelUp = new EnumMap<>(Race.class);
 	private TIntArrayList questOnDie = new TIntArrayList();
 	private TIntArrayList questOnLogOut = new TIntArrayList();
 	private TIntArrayList questOnEnterWorld = new TIntArrayList();
-	private Map<ZoneName, TIntArrayList> questOnEnterZone = new FastMap<>();
-	private Map<ZoneName, TIntArrayList> questOnLeaveZone = new FastMap<>();
-	private Map<String, TIntArrayList> questOnPassFlyingRings = new FastMap<>();
+	private Map<ZoneName, TIntArrayList> questOnEnterZone = new HashMap<>();
+	private Map<ZoneName, TIntArrayList> questOnLeaveZone = new HashMap<>();
+	private Map<String, TIntArrayList> questOnPassFlyingRings = new HashMap<>();
 	private TIntObjectHashMap<TIntArrayList> questOnMovieEnd = new TIntObjectHashMap<>();
-	private List<Integer> questOnTimerEnd = new FastTable<>();
-	private List<Integer> onInvisibleTimerEnd = new FastTable<>();
-	private Map<AbyssRankEnum, TIntArrayList> questOnKillRanked = new FastMap<>();
-	private Map<Integer, TIntArrayList> questOnKillInWorld = new FastMap<>();
+	private List<Integer> questOnTimerEnd = new ArrayList<>();
+	private List<Integer> onInvisibleTimerEnd = new ArrayList<>();
+	private Map<AbyssRankEnum, TIntArrayList> questOnKillRanked = new EnumMap<>(AbyssRankEnum.class);
+	private TIntObjectHashMap<TIntArrayList> questOnKillInWorld = new TIntObjectHashMap<>();
 	private TIntObjectHashMap<TIntArrayList> questOnUseSkill = new TIntObjectHashMap<>();
-	private Map<Integer, Integer> questOnFailCraft = new FastMap<>();
-	private Map<Integer, Set<Integer>> questOnEquipItem = new FastMap<>();
+	private TIntIntHashMap questOnFailCraft = new TIntIntHashMap();
+	private TIntObjectHashMap<Set<Integer>> questOnEquipItem = new TIntObjectHashMap<>();
 	private TIntObjectHashMap<TIntArrayList> questCanAct = new TIntObjectHashMap<>();
-	private List<Integer> questOnDredgionReward = new FastTable<>();
-	private Map<BonusType, TIntArrayList> questOnBonusApply = new FastMap<>();
+	private List<Integer> questOnDredgionReward = new ArrayList<>();
+	private Map<BonusType, TIntArrayList> questOnBonusApply = new EnumMap<>(BonusType.class);
 	private TIntArrayList questUpdateItems = new TIntArrayList();
 	private TIntArrayList reachTarget = new TIntArrayList();
 	private TIntArrayList lostTarget = new TIntArrayList();
 	private TIntArrayList questOnEnterWindStream = new TIntArrayList();
 	private TIntArrayList questRideAction = new TIntArrayList();
-	private Map<String, TIntArrayList> questOnKillInZone = new FastMap<>();
+	private Map<String, TIntArrayList> questOnKillInZone = new HashMap<>();
 
 	private QuestEngine() {
 	}
@@ -1085,14 +1086,14 @@ public class QuestEngine implements GameEngine {
 
 	private void analyzeQuestHandlers() {
 		log.info("Analyzing quest handlers...");
-		Set<Integer> unobtainableQuests = new FastSet<>();
-		Set<Integer> factionIds = new FastSet<>();
+		Set<Integer> unobtainableQuests = new HashSet<>();
+		Set<Integer> factionIds = new HashSet<>();
 		for (NpcFactionTemplate nft : DataManager.NPC_FACTIONS_DATA.getNpcFactionsData()) {
 			if (nft.getNpcIds() == null || nft.getNpcIds().stream().anyMatch(npcId -> existsSpawnData(npcId)))
 				factionIds.add(nft.getId());
 		}
 		StringBuilder obsoleteHandlers = new StringBuilder();
-		for (QuestHandler qh : questHandlers.values()) {
+		for (QuestHandler qh : questHandlers.valueCollection()) {
 			QuestTemplate qt = DataManager.QUEST_DATA.getQuestById(qh.getQuestId());
 			if (qt.getMinlevelPermitted() == 99) {
 				obsoleteHandlers.append("\n\tQuest ").append(qh.getQuestId()).append(" (minLvl=99, handler=").append(qh.getClass().getName()).append(")");
@@ -1106,7 +1107,7 @@ public class QuestEngine implements GameEngine {
 		StringBuilder missingSpawns = new StringBuilder();
 		for (int npcId : questNpcs.keys()) {
 			if (!existsSpawnData(npcId)) { // if the npc doesn't appear in any spawn template (world, instance, base, siege, temporary, event, ...)
-				Set<Integer> questIds = getQuestNpc(npcId).getAllRegisteredQuestIds();
+				Set<Integer> questIds = getQuestNpc(npcId).findAllRegisteredQuestIds();
 				if (questIds.stream().allMatch(id -> unobtainableQuests.contains(id) || existsSpawnDataForAnyAlternativeNpc(id, npcId)))
 					continue; // don't log unobtainable quests or if alternative npcs appear in spawn data (many quests support outdated + current npcs)
 				missingSpawns.append("\n\tNpc ").append(npcId).append(" (quests: ").append(StringUtils.join(questIds, ", ")).append(")");

@@ -3,7 +3,6 @@ package com.aionemu.gameserver.services.base;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.model.base.BaseLocation;
 
-
 /**
  * @author Estrayl
  *

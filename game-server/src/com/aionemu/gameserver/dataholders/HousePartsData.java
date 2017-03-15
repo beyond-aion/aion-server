@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.dataholders;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -15,8 +16,6 @@ import javax.xml.bind.annotation.XmlType;
 
 import com.aionemu.gameserver.model.templates.housing.Building;
 import com.aionemu.gameserver.model.templates.housing.HousePart;
-
-import javolution.util.FastTable;
 
 /**
  * @author Rolandas
@@ -46,7 +45,7 @@ public class HousePartsData {
 				String tag = iterator.next();
 				List<HousePart> parts = partsByTags.get(tag);
 				if (parts == null) {
-					parts = new FastTable<>();
+					parts = new ArrayList<>();
 					partsByTags.put(tag, parts);
 				}
 				parts.add(part);

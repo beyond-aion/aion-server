@@ -64,7 +64,6 @@ public class PlayerEffectController extends EffectController {
 		}
 	}
 
-	@Override
 	public void updatePlayerEffectIcons(Effect effect) {
 		int slot = effect != null ? effect.getTargetSlot().getId() : SkillTargetSlot.FULLSLOTS;
 		Collection<Effect> effects = getAbnormalEffectsToShow();
@@ -84,7 +83,6 @@ public class PlayerEffectController extends EffectController {
 				return true;
 			}
 		}
-
 		return false;
 	}
 
@@ -108,7 +106,12 @@ public class PlayerEffectController extends EffectController {
 		}
 
 		Effect effect = new Effect(getOwner(), getOwner(), template, skillLvl, remainingTime);
-		abnormalEffectMap.put(effect.getStack(), effect);
+		lock.writeLock().lock();
+		try {
+			getMapForEffect(effect).put(effect.getStack(), effect);
+		} finally {
+			lock.writeLock().unlock();
+		}
 		effect.addAllEffectToSucess();
 		effect.startEffect(true);
 

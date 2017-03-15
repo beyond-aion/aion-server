@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.services.siege;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -23,8 +25,6 @@ import com.aionemu.gameserver.services.SiegeService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.idfactory.IDFactory;
 import com.aionemu.gameserver.world.World;
-
-import javolution.util.FastTable;
 
 /**
  * @author synchro2
@@ -127,7 +127,7 @@ public class BalaurAssaultService {
 
 	public void spawnDredgion(int spawnId) {
 		AssembledNpcTemplate template = DataManager.ASSEMBLED_NPC_DATA.getAssembledNpcTemplate(spawnId);
-		FastTable<AssembledNpcPart> assembledParts = new FastTable<>();
+		List<AssembledNpcPart> assembledParts = new ArrayList<>();
 		for (AssembledNpcTemplate.AssembledNpcPartTemplate npcPart : template.getAssembledNpcPartTemplates())
 			assembledParts.add(new AssembledNpcPart(IDFactory.getInstance().nextId(), npcPart));
 

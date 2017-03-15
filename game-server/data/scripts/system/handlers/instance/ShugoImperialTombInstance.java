@@ -1,5 +1,6 @@
 package instance;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -24,8 +25,6 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
-import javolution.util.FastTable;
-
 /**
  * @author Ritsu TODO: Rework of spawn scheduler; Better synchronization!!!
  */
@@ -36,7 +35,7 @@ public class ShugoImperialTombInstance extends GeneralInstanceHandler {
 	private AtomicInteger stage = new AtomicInteger();
 	private AtomicInteger destroyedTowers = new AtomicInteger();
 	private AtomicBoolean isCancelled = new AtomicBoolean();
-	private List<Npc> npcs = new FastTable<>();
+	private List<Npc> npcs = new ArrayList<>();
 	protected boolean isInstanceDestroyed = false;
 	private Future<?> cancelSpawnTask;
 	private Future<?> cancelMessageTask;

@@ -1,8 +1,9 @@
 package quest.event_quests;
 
+import static com.aionemu.gameserver.model.DialogAction.*;
+
 import java.util.List;
 
-import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.quest.QuestItems;
 import com.aionemu.gameserver.model.templates.rewards.BonusType;

@@ -1,5 +1,6 @@
 package ai.instance.empyreanCrucible;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -15,7 +16,6 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldPosition;
 
 import ai.AggressiveNpcAI;
-import javolution.util.FastTable;
 
 /**
  * @author Luzien
@@ -23,7 +23,7 @@ import javolution.util.FastTable;
 @AIName("mage_preceptor")
 public class MagePreceptorAI extends AggressiveNpcAI {
 
-	private List<Integer> percents = new FastTable<>();
+	private List<Integer> percents = new ArrayList<>();
 
 	@Override
 	public void handleSpawned() {
@@ -112,7 +112,7 @@ public class MagePreceptorAI extends AggressiveNpcAI {
 	}
 
 	private Player getTargetPlayer() {
-		List<Player> players = new FastTable<>();
+		List<Player> players = new ArrayList<>();
 		getKnownList().forEachPlayer(player -> {
 			if (!PlayerActions.isAlreadyDead(player) && PositionUtil.isInRange(player, getOwner(), 37)) {
 				players.add(player);

@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.taskmanager.tasks;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -17,8 +18,6 @@ import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.world.WorldMapTemplate;
 import com.aionemu.gameserver.taskmanager.AbstractFIFOPeriodicTaskManager;
-
-import javolution.util.FastTable;
 
 /**
  * @author ATracer
@@ -71,7 +70,7 @@ public class MovementNotifyTask extends AbstractFIFOPeriodicTaskManager<Creature
 	}
 
 	public String[] dumpBroadcastStats() {
-		List<String> lines = new FastTable<>();
+		List<String> lines = new ArrayList<>();
 		lines.add("------- Movement broadcast counts -------");
 		for (Entry<Integer, int[]> entry : moveBroadcastCounts.entrySet()) {
 			lines.add("WorldId=" + entry.getKey() + ": " + entry.getValue()[0] + " (NpcId " + entry.getValue()[1] + ")");

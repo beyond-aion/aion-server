@@ -1,12 +1,13 @@
 package com.aionemu.gameserver.model.gameobjects.player;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.dao.PortalCooldownsDAO;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_INSTANCE_INFO;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-
-import javolution.util.FastMap;
 
 /**
  * @author ATracer
@@ -14,7 +15,7 @@ import javolution.util.FastMap;
 public class PortalCooldownList {
 
 	private Player owner;
-	private FastMap<Integer, PortalCooldown> portalCooldowns;
+	private Map<Integer, PortalCooldown> portalCooldowns;
 
 	/**
 	 * @param owner
@@ -68,11 +69,11 @@ public class PortalCooldownList {
 		return portalCooldowns == null ? null : portalCooldowns.get(worldId);
 	}
 
-	public FastMap<Integer, PortalCooldown> getPortalCoolDowns() {
+	public Map<Integer, PortalCooldown> getPortalCoolDowns() {
 		return portalCooldowns;
 	}
 
-	public void setPortalCoolDowns(FastMap<Integer, PortalCooldown> portalCoolDowns) {
+	public void setPortalCoolDowns(Map<Integer, PortalCooldown> portalCoolDowns) {
 		this.portalCooldowns = portalCoolDowns;
 	}
 
@@ -82,7 +83,7 @@ public class PortalCooldownList {
 	 */
 	public void addPortalCooldown(int worldId, long useDelay) {
 		if (portalCooldowns == null)
-			portalCooldowns = new FastMap<>();
+			portalCooldowns = new HashMap<>();
 
 		PortalCooldown portalCooldown = portalCooldowns.get(worldId);
 		if (portalCooldown == null)

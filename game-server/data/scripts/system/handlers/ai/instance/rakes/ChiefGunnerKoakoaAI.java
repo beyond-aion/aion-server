@@ -2,7 +2,7 @@ package ai.instance.rakes;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIName;
-import com.aionemu.gameserver.model.ai.Percentage;
+import com.aionemu.gameserver.model.templates.ai.Percentage;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 import ai.SummonerAI;

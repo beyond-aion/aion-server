@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -31,8 +32,6 @@ import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
-
-import javolution.util.FastTable;
 
 /**
  * @author ATracer
@@ -144,7 +143,7 @@ public class StigmaService {
 	}
 
 	public static void removeLinkedStigmaSkills(Player player) {
-		List<PlayerSkillEntry> linkedStigmaSkill = new FastTable<>();
+		List<PlayerSkillEntry> linkedStigmaSkill = new ArrayList<>();
 		while (true) { // remove all linked stigma skills (can be more than one if stigma auto learning is enabled)
 			String stack = null;
 			linkedStigmaSkill.clear();

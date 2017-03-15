@@ -1,6 +1,8 @@
 package com.aionemu.gameserver.world.zone.handler;
 
 import java.lang.annotation.IncompleteAnnotationException;
+import java.util.HashMap;
+import java.util.Map;
 
 import com.aionemu.gameserver.controllers.observer.AbstractQuestZoneObserver;
 import com.aionemu.gameserver.dataholders.DataManager;
@@ -9,15 +11,13 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.zone.ZoneTemplate;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
 
-import javolution.util.FastMap;
-
 /**
  * @author Rolandas
  */
 public abstract class QuestZoneHandler extends GeneralZoneHandler {
 
-	FastMap<Integer, AbstractQuestZoneObserver> observed = new FastMap<>();
-	protected int questId;
+	protected final Map<Integer, AbstractQuestZoneObserver> observed = new HashMap<>();
+	protected final int questId;
 
 	public QuestZoneHandler() {
 		ZoneNameAnnotation annotation = getClass().getAnnotation(ZoneNameAnnotation.class);

@@ -1,7 +1,9 @@
 package playercommands;
 
 import java.awt.Color;
-import java.util.Collection;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.utils.ChatUtil;
@@ -9,8 +11,6 @@ import com.aionemu.gameserver.utils.chathandlers.ChatCommand;
 import com.aionemu.gameserver.utils.chathandlers.ChatProcessor;
 import com.aionemu.gameserver.utils.chathandlers.ConsoleCommand;
 import com.aionemu.gameserver.utils.chathandlers.PlayerCommand;
-
-import javolution.util.FastTable;
 
 /**
  * @author Neon
@@ -23,9 +23,10 @@ public class Help extends PlayerCommand {
 
 	@Override
 	public void execute(Player player, String... params) {
-		Collection<ChatCommand> allowedCommands = getAllowedCommands(player);
+		List<ChatCommand> allowedCommands = findAllowedCommands(player);
 
 		if (!allowedCommands.isEmpty() && !(allowedCommands.size() == 1 && allowedCommands.contains(this))) {
+			allowedCommands.sort(Comparator.comparing(cmd -> cmd.getAliasWithPrefix().toLowerCase()));
 			StringBuilder sb = new StringBuilder("List of available commands (" + allowedCommands.size() + "):");
 			for (ChatCommand cmd : allowedCommands) {
 				String desc = cmd.getDescription().isEmpty() ? "No description available." : cmd.getDescription();
@@ -39,9 +40,9 @@ public class Help extends PlayerCommand {
 		}
 	}
 
-	private Collection<ChatCommand> getAllowedCommands(Player player) {
+	private List<ChatCommand> findAllowedCommands(Player player) {
 		ChatProcessor cp = ChatProcessor.getInstance();
-		Collection<ChatCommand> cmds = new FastTable<ChatCommand>().sorted();
+		List<ChatCommand> cmds = new ArrayList<>();
 
 		for (ChatCommand cmd : cp.getCommandList()) {
 			if (cp.isCommandAllowed(player, cmd) && !(cmd instanceof ConsoleCommand))

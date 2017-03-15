@@ -1,5 +1,8 @@
 package ai.instance.illuminaryObelisk;
 
+import static com.aionemu.gameserver.model.DialogAction.SETPRO1;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -7,7 +10,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.ai.manager.WalkManager;
 import com.aionemu.gameserver.controllers.observer.ItemUseObserver;
-import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Creature;
@@ -22,7 +24,6 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 import ai.GeneralNpcAI;
-import javolution.util.FastTable;
 
 /**
  * @author Estrayl
@@ -30,9 +31,9 @@ import javolution.util.FastTable;
 public abstract class ShieldGeneratorAI extends GeneralNpcAI {
 
 	private AtomicBoolean isUnderCharge = new AtomicBoolean();
-	private List<Future<?>> spawnTasks = new FastTable<>();
-	private List<Npc> assaulter = new FastTable<>();
-	protected List<Npc> support = new FastTable<>();
+	private List<Future<?>> spawnTasks = new ArrayList<>();
+	private List<Npc> assaulter = new ArrayList<>();
+	protected List<Npc> support = new ArrayList<>();
 	protected int chargeCount = 0;
 	private int attackCount = 14;
 

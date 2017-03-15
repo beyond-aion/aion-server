@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.skillengine.effect;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,8 +10,6 @@ import javax.xml.bind.annotation.XmlType;
 import com.aionemu.gameserver.model.stats.calc.functions.IStatFunction;
 import com.aionemu.gameserver.model.stats.calc.functions.StatShieldMasteryFunction;
 import com.aionemu.gameserver.skillengine.model.Effect;
-
-import javolution.util.FastTable;
 
 /**
  * @author VladimirZ
@@ -23,7 +22,7 @@ public class ShieldMasteryEffect extends BufEffect {
 	public void startEffect(Effect effect) {
 
 		List<IStatFunction> modifiers = getModifiers(effect);
-		List<IStatFunction> masteryModifiers = new FastTable<>();
+		List<IStatFunction> masteryModifiers = new ArrayList<>();
 		for (IStatFunction modifier : modifiers) {
 			masteryModifiers.add(new StatShieldMasteryFunction(modifier.getName(), modifier.getValue(), modifier.isBonus()));
 		}

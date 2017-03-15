@@ -6,6 +6,7 @@ import java.nio.channels.SelectionKey;
 import java.nio.channels.SocketChannel;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,8 +33,6 @@ import com.aionemu.gameserver.network.loginserver.serverpackets.SM_LS_CONTROL;
 import com.aionemu.gameserver.services.AccountService;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.World;
-
-import javolution.util.FastMap;
 
 /**
  * Utility class for connecting GameServer to LoginServer.
@@ -255,7 +254,7 @@ public class LoginServer {
 	}
 
 	public void sendLoggedInAccounts() {
-		sendPacket(new SM_ACCOUNT_LIST(FastMap.of(loggedInAccounts)));
+		sendPacket(new SM_ACCOUNT_LIST(loggedInAccounts.values().stream().collect(Collectors.toList())));
 	}
 
 	public void sendLsControlPacket(String accountName, String playerName, String adminName, int param, int type) {

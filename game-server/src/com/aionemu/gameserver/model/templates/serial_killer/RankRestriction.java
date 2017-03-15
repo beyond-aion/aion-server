@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.model.templates.serial_killer;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,8 +10,6 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
 import com.aionemu.gameserver.model.Race;
-
-import javolution.util.FastTable;
 
 /**
  * @author Dtem
@@ -64,7 +63,7 @@ public class RankRestriction {
 
 	public List<RankPenaltyAttr> getPenaltyAttr() {
 		if (penaltyAttr == null)
-			penaltyAttr = new FastTable<>();
+			penaltyAttr = new ArrayList<>();
 		return this.penaltyAttr;
 	}
 

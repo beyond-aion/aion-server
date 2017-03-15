@@ -1,7 +1,9 @@
 package com.aionemu.gameserver.services.craft;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -21,9 +23,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.item.ItemPacketService.ItemUpdateType;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
-import javolution.util.FastMap;
-import javolution.util.FastTable;
-
 /**
  * @author MrPoke, sphinx
  * @modified Imaginary, Pad
@@ -33,9 +32,9 @@ public class CraftSkillUpdateService {
 
 	private static final Logger log = LoggerFactory.getLogger(CraftSkillUpdateService.class);
 
-	private static final Map<Integer, CraftLearnTemplate> npcBySkill = new FastMap<>();
-	private static final Map<Integer, Integer> cost = new FastMap<>();
-	private static final List<Integer> craftingSkillIds = new FastTable<>();
+	private static final Map<Integer, CraftLearnTemplate> npcBySkill = new LinkedHashMap<>();
+	private static final Map<Integer, Integer> cost = new LinkedHashMap<>();
+	private static final List<Integer> craftingSkillIds = new ArrayList<>();
 
 	public static final CraftSkillUpdateService getInstance() {
 		return SingletonHolder.instance;

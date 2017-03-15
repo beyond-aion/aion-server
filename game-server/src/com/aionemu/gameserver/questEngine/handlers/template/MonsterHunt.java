@@ -4,7 +4,6 @@ import static com.aionemu.gameserver.model.DialogAction.*;
 
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import org.slf4j.Logger;
@@ -39,7 +38,7 @@ public class MonsterHunt extends QuestHandler {
 
 	private final Set<Integer> startNpcIds = new HashSet<>();
 	private final Set<Integer> endNpcIds = new HashSet<>();
-	private final Map<Monster, Set<Integer>> monsters;
+	private final List<Monster> monsters;
 	private final int startDialogId;
 	private final int endDialogId;
 	private final Set<Integer> aggroNpcIds = new HashSet<>();
@@ -51,7 +50,7 @@ public class MonsterHunt extends QuestHandler {
 	private final boolean rewardNextStep;
 	private final boolean isDataDriven;
 
-	public MonsterHunt(int questId, List<Integer> startNpcIds, List<Integer> endNpcIds, Map<Monster, Set<Integer>> monsters, int startDialogId,
+	public MonsterHunt(int questId, List<Integer> startNpcIds, List<Integer> endNpcIds, List<Monster> monsters, int startDialogId,
 		int endDialogId, List<Integer> aggroNpcIds, int invasionWorld, String startZone, int startDistanceNpcId, boolean reward, boolean rewardNextStep) {
 		super(questId);
 		if (startNpcIds != null)
@@ -85,8 +84,8 @@ public class MonsterHunt extends QuestHandler {
 			qe.registerQuestNpc(startNpcId).addOnTalkEvent(questId);
 		}
 
-		for (Set<Integer> monsterIds : monsters.values()) {
-			for (Integer monsterId : monsterIds)
+		for (Monster monster : monsters) {
+			for (Integer monsterId : monster.getNpcIds())
 				qe.registerQuestNpc(monsterId).addOnKillEvent(questId);
 		}
 
@@ -132,7 +131,7 @@ public class MonsterHunt extends QuestHandler {
 				if (dialogActionId == QUEST_SELECT) {
 					return sendQuestDialog(env, endDialogId != 0 ? endDialogId : 1352);
 				} else if (dialogActionId == SELECT_QUEST_REWARD) {
-					for (Monster mi : monsters.keySet()) {
+					for (Monster mi : monsters) {
 						int endVar = mi.getEndVar();
 						int varId = mi.getVar();
 						int total = 0;
@@ -184,7 +183,7 @@ public class MonsterHunt extends QuestHandler {
 			int curStep = qs.getQuestVarById(0);
 			int lastStep = 0;
 
-			for (Monster m : monsters.keySet()) {
+			for (Monster m : monsters) {
 				lastStep = Math.max(lastStep, m.getStep());
 				if (isDataDriven && m.getStep() != curStep) // Check only for current step for new style quests
 					continue;

@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.dataholders;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.Unmarshaller;
@@ -14,7 +15,6 @@ import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.services.QuestService;
 
 import gnu.trove.map.hash.TIntObjectHashMap;
-import javolution.util.FastTable;
 
 /**
  * @author MrPoke
@@ -37,7 +37,7 @@ public class QuestsData {
 			if (npcFactionId == 0 || quest.isTimeBased())
 				continue;
 			if (!sortedByFactionId.containsKey(npcFactionId)) {
-				List<QuestTemplate> factionQuests = new FastTable<>();
+				List<QuestTemplate> factionQuests = new ArrayList<>();
 				factionQuests.add(quest);
 				sortedByFactionId.put(npcFactionId, factionQuests);
 			} else {
@@ -52,7 +52,7 @@ public class QuestsData {
 
 	public List<QuestTemplate> getQuestsByNpcFaction(int npcFactionId, Player player) {
 		List<QuestTemplate> factionQuests = sortedByFactionId.get(npcFactionId);
-		List<QuestTemplate> quests = new FastTable<>();
+		List<QuestTemplate> quests = new ArrayList<>();
 		for (QuestTemplate questTemplate : factionQuests) {
 			if (!QuestEngine.getInstance().isHaveHandler(questTemplate.getId()))
 				continue;

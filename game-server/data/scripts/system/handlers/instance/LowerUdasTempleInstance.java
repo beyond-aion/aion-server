@@ -1,5 +1,6 @@
 package instance;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -13,8 +14,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.WorldPosition;
-
-import javolution.util.FastTable;
 
 /**
  * @author xTz, Luzien
@@ -43,7 +42,7 @@ public class LowerUdasTempleInstance extends GeneralInstanceHandler {
 		new WorldPosition(300160000, 752.0531f, 889.8899f, 154.0f, (byte) 0), new WorldPosition(300160000, 750.2841f, 877.8855f, 154.0f, (byte) 0),
 		new WorldPosition(300160000, 749.3269f, 895.6159f, 154.0f, (byte) 0) };
 
-	private List<Npc> traps = new FastTable<>();
+	private List<Npc> traps = new ArrayList<>();
 	private AtomicBoolean wasSpawned = new AtomicBoolean();
 
 	@Override

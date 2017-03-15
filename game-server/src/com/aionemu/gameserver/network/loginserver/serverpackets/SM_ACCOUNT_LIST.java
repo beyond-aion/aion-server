@@ -1,6 +1,6 @@
 package com.aionemu.gameserver.network.loginserver.serverpackets;
 
-import java.util.Map;
+import java.util.List;
 
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.loginserver.LoginServerConnection;
@@ -17,12 +17,12 @@ public class SM_ACCOUNT_LIST extends LsServerPacket {
 	/**
 	 * Map with loaded accounts
 	 */
-	private final Map<Integer, AionConnection> accounts;
+	private final List<AionConnection> accounts;
 
 	/**
 	 * constructs new server packet with specified opcode.
 	 */
-	public SM_ACCOUNT_LIST(Map<Integer, AionConnection> accounts) {
+	public SM_ACCOUNT_LIST(List<AionConnection> accounts) {
 		super(0x04);
 		this.accounts = accounts;
 	}
@@ -30,7 +30,7 @@ public class SM_ACCOUNT_LIST extends LsServerPacket {
 	@Override
 	protected void writeImpl(LoginServerConnection con) {
 		writeD(accounts.size());
-		for (AionConnection ac : accounts.values())
+		for (AionConnection ac : accounts)
 			writeD(ac.getAccount().getId());
 	}
 }

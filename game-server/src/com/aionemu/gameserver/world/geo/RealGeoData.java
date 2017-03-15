@@ -2,6 +2,7 @@ package com.aionemu.gameserver.world.geo;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -18,7 +19,6 @@ import com.aionemu.gameserver.geoEngine.scene.Spatial;
 import com.aionemu.gameserver.model.templates.world.WorldMapTemplate;
 
 import gnu.trove.map.hash.TIntObjectHashMap;
-import javolution.util.FastSet;
 
 /**
  * @author ATracer
@@ -41,7 +41,7 @@ public class RealGeoData implements GeoData {
 	protected void loadWorldMaps(Map<String, Spatial> models) {
 		log.info("Loading geo maps..");
 		ConsoleUtil.initAndPrintProgressBar(DataManager.WORLD_MAPS_DATA.size());
-		Set<String> missingMeshes = new FastSet<>();
+		Set<String> missingMeshes = new HashSet<>();
 		List<String> missingDoors = new ArrayList<>();
 		List<Integer> missingGeos = new ArrayList<>();
 

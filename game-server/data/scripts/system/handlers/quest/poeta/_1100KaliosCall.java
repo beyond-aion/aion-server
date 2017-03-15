@@ -1,6 +1,7 @@
 package quest.poeta;
 
-import static com.aionemu.gameserver.model.DialogAction.*;
+import static com.aionemu.gameserver.model.DialogAction.QUEST_SELECT;
+
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;

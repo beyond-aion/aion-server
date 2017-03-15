@@ -1,8 +1,7 @@
 package com.aionemu.chatserver.model;
 
+import java.util.HashMap;
 import java.util.Map;
-
-import javolution.util.FastMap;
 
 /**
  * @author ATracer
@@ -16,7 +15,7 @@ public enum ChannelType {
 	JOB("job"),
 	LANG("User");
 
-	private static final Map<String, ChannelType> channelByIdentifier = new FastMap<>();
+	private static final Map<String, ChannelType> channelByIdentifier = new HashMap<>();
 
 	private final String identifier;
 

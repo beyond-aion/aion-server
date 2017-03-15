@@ -1,5 +1,6 @@
 package ai.instance.darkPoeta;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -10,7 +11,6 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.skillengine.model.Effect;
 
 import ai.AggressiveNpcAI;
-import javolution.util.FastTable;
 
 /**
  * @author Ritsu
@@ -19,7 +19,7 @@ import javolution.util.FastTable;
 @AIName("balaurbarricade")
 public class BalaurBarricadeAI extends AggressiveNpcAI {
 
-	protected List<Integer> percents = new FastTable<>();
+	protected List<Integer> percents = new ArrayList<>();
 
 	@Override
 	public int modifyDamage(Creature attacker, int damage, Effect effect) {

@@ -1,6 +1,7 @@
 package com.aionemu.gameserver.services;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
@@ -37,8 +38,6 @@ import com.aionemu.gameserver.taskmanager.AbstractFIFOPeriodicTaskManager;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.World;
-
-import javolution.util.FastTable;
 
 /**
  * @author kosyachok
@@ -136,7 +135,7 @@ public class BrokerService {
 		getPlayerCache(player).setBrokerStartPageCache(startPage);
 
 		if (itemList != null) {
-			List<BrokerItem> itemsFound = new FastTable<>();
+			List<BrokerItem> itemsFound = new ArrayList<>();
 			for (BrokerItem item : searchItems) {
 				if (itemList.contains(item.getItemId()))
 					itemsFound.add(item);
@@ -237,7 +236,7 @@ public class BrokerService {
 	 * @return
 	 */
 	private BrokerItem[] getItemsByMask(Player player, int clientMask, boolean cached) {
-		List<BrokerItem> searchItems = new FastTable<>();
+		List<BrokerItem> searchItems = new ArrayList<>();
 
 		BrokerItemMask brokerMask = BrokerItemMask.getBrokerMaskById(clientMask);
 
@@ -291,7 +290,7 @@ public class BrokerService {
 	 * @return
 	 */
 	private BrokerItem[] getRequestedPage(BrokerItem[] brokerItems, int startPage) {
-		List<BrokerItem> page = new FastTable<>();
+		List<BrokerItem> page = new ArrayList<>();
 		int startingElement = startPage * 9;
 
 		for (int i = startingElement, limit = 0; i < brokerItems.length && limit < 45; i++, limit++) {
@@ -577,7 +576,7 @@ public class BrokerService {
 	public void showRegisteredItems(Player player) {
 		Map<Integer, BrokerItem> brokerItems = getRaceBrokerItems(player.getRace());
 
-		List<BrokerItem> registeredItems = new FastTable<>();
+		List<BrokerItem> registeredItems = new ArrayList<>();
 		int playerId = player.getObjectId();
 
 		for (BrokerItem item : brokerItems.values()) {
@@ -636,7 +635,7 @@ public class BrokerService {
 	public void showSettledItems(Player player) {
 		Map<Integer, BrokerItem> brokerSettledItems = getRaceBrokerSettledItems(player.getRace());
 
-		List<BrokerItem> settledItems = new FastTable<>();
+		List<BrokerItem> settledItems = new ArrayList<>();
 
 		int playerId = player.getObjectId();
 		long totalKinah = 0;
@@ -689,7 +688,7 @@ public class BrokerService {
 	public void settleAccount(Player player) {
 		Race playerRace = player.getRace();
 		Map<Integer, BrokerItem> brokerSettledItems = getRaceBrokerSettledItems(playerRace);
-		List<BrokerItem> collectedItems = new FastTable<>();
+		List<BrokerItem> collectedItems = new ArrayList<>();
 		int playerId = player.getObjectId();
 		long kinahCollect = 0;
 		boolean itemsLeft = false;

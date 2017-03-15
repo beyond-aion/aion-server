@@ -1,13 +1,12 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import com.aionemu.gameserver.model.siege.ArtifactLocation;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 import com.aionemu.gameserver.services.SiegeService;
-
-import javolution.util.FastTable;
 
 public class SM_ABYSS_ARTIFACT_INFO3 extends AionServerPacket {
 
@@ -18,7 +17,7 @@ public class SM_ABYSS_ARTIFACT_INFO3 extends AionServerPacket {
 	}
 
 	public SM_ABYSS_ARTIFACT_INFO3(int loc) {
-		locations = new FastTable<>();
+		locations = new ArrayList<>();
 		locations.add(SiegeService.getInstance().getArtifact(loc));
 	}
 

@@ -6,8 +6,6 @@ import java.util.Map;
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.loginserver.dao.BannedHddDAO;
 
-import javolution.util.FastMap;
-
 /**
  * @author ViAl
  */
@@ -16,13 +14,13 @@ public class BannedHDDController {
 	private static BannedHDDController instance = new BannedHDDController();
 	private BannedHddDAO dao = DAOManager.getDAO(BannedHddDAO.class);
 
-	private Map<String, Timestamp> bannedList = new FastMap<>();
+	private Map<String, Timestamp> bannedList;
 
 	public static BannedHDDController getInstance() {
 		return instance;
 	}
 
-	public BannedHDDController() {
+	private BannedHDDController() {
 		bannedList = dao.load();
 	}
 
@@ -35,12 +33,12 @@ public class BannedHDDController {
 
 	public void ban(String serial, long time) {
 		Timestamp banTime = new Timestamp(time);
-		this.bannedList.put(serial, banTime);
-		this.dao.update(serial, banTime);
+		bannedList.put(serial, banTime);
+		dao.update(serial, banTime);
 	}
 
 	public final Map<String, Timestamp> getMap() {
-		return this.bannedList;
+		return bannedList;
 	}
 
 }

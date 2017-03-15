@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.model.templates;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -27,8 +28,6 @@ import com.aionemu.gameserver.model.templates.quest.QuestTarget;
 import com.aionemu.gameserver.model.templates.quest.QuestWorkItems;
 import com.aionemu.gameserver.model.templates.quest.Rewards;
 import com.aionemu.gameserver.model.templates.quest.XMLStartCondition;
-
-import javolution.util.FastTable;
 
 /**
  * @author MrPoke
@@ -138,23 +137,23 @@ public class QuestTemplate {
 	private boolean dataDriven = false;
 
 	public QuestTemplate() {
-		rewards = new FastTable<>();
-		bonus = new FastTable<>();
-		questDrop = new FastTable<>();
-		questKill = new FastTable<>();
-		startConds = new FastTable<>();
-		classPermitted = new FastTable<>();
-		fighterSelectableReward = new FastTable<>();
-		knightSelectableReward = new FastTable<>();
-		rangerSelectableReward = new FastTable<>();
-		assassinSelectableReward = new FastTable<>();
-		wizardSelectableReward = new FastTable<>();
-		elementalistSelectableReward = new FastTable<>();
-		priestSelectableReward = new FastTable<>();
-		chanterSelectableReward = new FastTable<>();
-		gunnerSelectableReward = new FastTable<>();
-		bardSelectableReward = new FastTable<>();
-		riderSelectableReward = new FastTable<>();
+		rewards = new ArrayList<>();
+		bonus = new ArrayList<>();
+		questDrop = new ArrayList<>();
+		questKill = new ArrayList<>();
+		startConds = new ArrayList<>();
+		classPermitted = new ArrayList<>();
+		fighterSelectableReward = new ArrayList<>();
+		knightSelectableReward = new ArrayList<>();
+		rangerSelectableReward = new ArrayList<>();
+		assassinSelectableReward = new ArrayList<>();
+		wizardSelectableReward = new ArrayList<>();
+		elementalistSelectableReward = new ArrayList<>();
+		priestSelectableReward = new ArrayList<>();
+		chanterSelectableReward = new ArrayList<>();
+		gunnerSelectableReward = new ArrayList<>();
+		bardSelectableReward = new ArrayList<>();
+		riderSelectableReward = new ArrayList<>();
 	}
 
 	/**

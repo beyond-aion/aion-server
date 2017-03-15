@@ -1,5 +1,6 @@
 package ai.instance.darkPoeta;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.Future;
@@ -12,7 +13,6 @@ import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 import ai.AggressiveNpcAI;
-import javolution.util.FastTable;
 
 /**
  * @author Ritsu
@@ -21,7 +21,7 @@ import javolution.util.FastTable;
 @AIName("tahabatapyrelord")
 public class TahabataPyrelordAI extends AggressiveNpcAI {
 
-	protected List<Integer> percents = new FastTable<>();
+	protected List<Integer> percents = new ArrayList<>();
 	private boolean lock1 = false;
 	private boolean lock2 = false;
 	private Future<?> useSkillTask;

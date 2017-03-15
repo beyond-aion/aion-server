@@ -1,13 +1,12 @@
 package com.aionemu.gameserver.model.drop;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.world.World;
-
-import javolution.util.FastTable;
 
 /**
  * @author ATracer
@@ -28,7 +27,7 @@ public class DropItem {
 
 	public DropItem(Drop dropTemplate) {
 		this.dropTemplate = dropTemplate;
-		this.playerObjIds = new FastTable<>();
+		this.playerObjIds = new ArrayList<>();
 		if (DataManager.ITEM_DATA.getItemTemplate(dropTemplate.getItemId()).getOptionSlotBonus() != 0)
 			optionalSocket = -1;
 	}

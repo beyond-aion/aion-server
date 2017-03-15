@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.services.panesterra.ahserion;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -13,8 +14,6 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.WorldPosition;
 
-import javolution.util.FastTable;
-
 /**
  * @author Yeats
  * @modified Estrayl
@@ -22,7 +21,7 @@ import javolution.util.FastTable;
 public abstract class PanesterraTeam {
 
 	protected PanesterraTeamId teamId;
-	protected List<Integer> members = new FastTable<>();
+	protected List<Integer> members = new ArrayList<>();
 	protected WorldPosition startPosition;
 	protected AtomicBoolean isEliminated = new AtomicBoolean(false);
 
