@@ -65,7 +65,7 @@ public class BrigadeGeneralVashartiAI extends AggressiveNpcAI {
 	private void checkPercentage(int hpPercentage) {
 		if (isInFlameShowerTask.get())
 			return;
-		for (int percent : percents) {
+		for (Integer percent : percents) {
 			if (hpPercentage <= percent) {
 				percents.remove(percent);
 				cancelFlameBuffEvent();
