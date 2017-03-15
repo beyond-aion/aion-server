@@ -114,4 +114,9 @@ public class SummonedObject<T extends VisibleObject> extends Npc {
 		return creator instanceof Creature ? ((Creature) creator).getRace() : super.getRace();
 	}
 
+	@Override
+	public boolean isPvpTarget(Creature creature) {
+		return (getActingCreature() instanceof Player) && (creature.getActingCreature() instanceof Player);
+	}
+
 }
