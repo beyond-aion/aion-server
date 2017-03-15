@@ -3,12 +3,12 @@ package com.aionemu.gameserver.model.gameobjects.player;
 import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.SortedMap;
 import java.util.TreeMap;
-import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -582,11 +582,18 @@ public class Equipment {
 	 * @return List<Item>
 	 */
 	public List<Item> getEquippedItems() {
-		return equipment.values().stream().collect(Collectors.toList());
+		HashSet<Item> equippedItems = new HashSet<>();
+		equippedItems.addAll(equipment.values());
+
+		return Arrays.asList(equippedItems.toArray(new Item[0]));
 	}
 
 	public List<Integer> getEquippedItemIds() {
-		return equipment.values().stream().mapToInt(Item::getItemId).distinct().boxed().collect(Collectors.toList());
+		HashSet<Integer> equippedIds = new HashSet<>();
+		for (Item i : equipment.values())
+			equippedIds.add(i.getItemId());
+
+		return Arrays.asList(equippedIds.toArray(new Integer[0]));
 	}
 
 	/**
