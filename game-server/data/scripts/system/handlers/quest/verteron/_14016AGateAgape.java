@@ -136,6 +136,7 @@ public class _14016AGateAgape extends QuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			if (movieId == 153) {
+				qs.setRewardGroup(0);
 				changeQuestStep(env, 2, 2, true); // reward
 				TeleportService.teleportTo(env.getPlayer(), 210030000, 2683.2085f, 1068.8977f, 199.375f);
 				return true;

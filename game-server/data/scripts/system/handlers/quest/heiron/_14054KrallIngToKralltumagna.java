@@ -92,6 +92,7 @@ public class _14054KrallIngToKralltumagna extends QuestHandler {
 						case SETPRO4:
 							return defaultCloseDialog(env, 2, 3); // 3
 						case SETPRO6:
+							qs.setRewardGroup(0); // both available groups are the same
 							return defaultCloseDialog(env, 4, 5, true, false); // 3
 					}
 					break;

@@ -87,8 +87,9 @@ public class _14053DangerCubed extends QuestHandler {
 				case CHECK_USER_HAS_QUEST_ITEM:
 					if (QuestService.collectItemCheck(env, true)) {
 						qs.setStatus(QuestStatus.REWARD);
+						qs.setRewardGroup(0);
 						updateQuestStatus(env);
-						return sendQuestDialog(env, 5);
+						return sendQuestEndDialog(env);
 					} else
 						return sendQuestDialog(env, 10001);
 				case SETPRO1:
