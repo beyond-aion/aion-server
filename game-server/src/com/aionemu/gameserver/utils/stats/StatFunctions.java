@@ -21,7 +21,6 @@ import com.aionemu.gameserver.model.gameobjects.Trap;
 import com.aionemu.gameserver.model.gameobjects.player.Equipment;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.RewardType;
-import com.aionemu.gameserver.model.gameobjects.siege.SiegeNpc;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.model.siege.Influence;
 import com.aionemu.gameserver.model.stats.calc.AdditionStat;
@@ -125,15 +124,16 @@ public class StatFunctions {
 	 * @return AP reward
 	 */
 	public static int calculatePvEApGained(Player player, Creature target) {
-		float apPercentage = target instanceof SiegeNpc ? 100f : APRewardEnum.apReward(player.getAbyssRank().getRank().getId());
-		boolean lvlDiff = player.getCommonData().getLevel() - target.getLevel() > 10;
-		float apNpcRate = ApNpcRating(((Npc) target).getObjectTemplate().getRating());
+		if (player.getCommonData().getLevel() - target.getLevel() > 10)
+			return 1;
+
+		float apNpcRate = getApNpcRating(((Npc) target).getObjectTemplate().getRating());
 
 		// TODO: findout why they give 1/4 AP base(normal NpcRate) (5 AP retail)
 		if (target.getName().equals("flame hoverstone"))
 			apNpcRate = 0.5f;
 
-		return (int) (lvlDiff ? 1 : RewardType.AP_NPC.calcReward(player, (int) Math.floor(15 * apPercentage * apNpcRate / 100)));
+		return (int) RewardType.AP_NPC.calcReward(player, (int) Math.floor(15 * apNpcRate));
 	}
 
 	/**
@@ -612,7 +612,7 @@ public class StatFunctions {
 	 * @param npcRating
 	 * @return Ap Rating
 	 */
-	public static int ApNpcRating(NpcRating npcRating) {
+	public static int getApNpcRating(NpcRating npcRating) {
 		int multipler;
 		switch (npcRating) {
 			case JUNK:
