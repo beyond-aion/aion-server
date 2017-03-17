@@ -4,6 +4,7 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.Summon;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.team.TemporaryPlayerTeam;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.skillengine.model.DispelCategoryType;
 import com.aionemu.gameserver.skillengine.model.Skill;
@@ -85,16 +86,17 @@ public class FirstTargetProperty {
 						}
 					}
 				}
-				
+
 				if (relation == TargetRelationAttribute.MYPARTY) {
 					Creature effected = skill.getFirstTarget();
 					boolean myParty = false;
-					for (Player member : ((Player) skill.getEffector()).getCurrentTeam().getMembers()) {
-						if (member.equals(skill.getEffector()))
-							continue;
-						if (member.equals(effected)) {
-							myParty = true;
-							break;
+					TemporaryPlayerTeam<?> team = ((Player) skill.getEffector()).getCurrentTeam();
+					if (team != null) {
+						for (Player member : team.getMembers()) {
+							if (member.equals(effected) && !member.equals(skill.getEffector())) {
+								myParty = true;
+								break;
+							}
 						}
 					}
 					if (!myParty) {
