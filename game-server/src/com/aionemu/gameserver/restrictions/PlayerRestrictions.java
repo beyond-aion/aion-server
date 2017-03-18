@@ -354,7 +354,7 @@ public class PlayerRestrictions extends AbstractRestrictions {
 		if (player == null || !player.isOnline())
 			return false;
 
-		// TODO retail message to requestor and player
+		// TODO retail message to requester and player
 		if (player.isTrading())
 			return false;
 

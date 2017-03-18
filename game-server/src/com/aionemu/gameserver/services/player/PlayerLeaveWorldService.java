@@ -156,7 +156,7 @@ public class PlayerLeaveWorldService {
 
 		ExpireTimerTask.getInstance().removePlayer(player);
 		if (player.getCraftingTask() != null)
-			player.getCraftingTask().stop(true);
+			player.getCraftingTask().stop();
 		player.getEquipment().setOwner(null);
 		player.getInventory().setOwner(null);
 		player.getWarehouse().setOwner(null);

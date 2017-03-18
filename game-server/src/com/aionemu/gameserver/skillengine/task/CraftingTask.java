@@ -28,13 +28,13 @@ public class CraftingTask extends AbstractCraftTask {
 	private int executionSpeed;
 
 	/**
-	 * @param requestor
+	 * @param requester
 	 * @param responder
 	 * @param successValue
 	 * @param failureValue
 	 */
-	public CraftingTask(Player requestor, StaticObject responder, RecipeTemplate recipeTemplate, int skillLvlDiff, int bonus) {
-		super(requestor, responder, skillLvlDiff);
+	public CraftingTask(Player requester, StaticObject responder, RecipeTemplate recipeTemplate, int skillLvlDiff, int bonus) {
+		super(requester, responder, skillLvlDiff);
 		this.recipeTemplate = recipeTemplate;
 		this.maxCritCount = recipeTemplate.getComboProductSize();
 		this.bonus = bonus;
@@ -43,9 +43,9 @@ public class CraftingTask extends AbstractCraftTask {
 
 	@Override
 	protected void onFailureFinish() {
-		PacketSendUtility.sendPacket(requestor,
+		PacketSendUtility.sendPacket(requester,
 			new SM_CRAFT_UPDATE(recipeTemplate.getSkillId(), itemTemplate, currentSuccessValue, currentFailureValue, 6, 0, 0));
-		PacketSendUtility.broadcastPacket(requestor, new SM_CRAFT_ANIMATION(requestor.getObjectId(), responder.getObjectId(), 0, 3), true);
+		PacketSendUtility.broadcastPacket(requester, new SM_CRAFT_ANIMATION(requester.getObjectId(), responder.getObjectId(), 0, 3), true);
 	}
 
 	@Override
@@ -54,10 +54,10 @@ public class CraftingTask extends AbstractCraftTask {
 			onInteractionStart();
 			return false;
 		} else {
-			PacketSendUtility.sendPacket(requestor,
+			PacketSendUtility.sendPacket(requester,
 				new SM_CRAFT_UPDATE(recipeTemplate.getSkillId(), itemTemplate, currentSuccessValue, currentFailureValue, 5, 0, 0));
-			PacketSendUtility.broadcastPacket(requestor, new SM_CRAFT_ANIMATION(requestor.getObjectId(), responder.getObjectId(), 0, 2), true);
-			CraftService.finishCrafting(requestor, recipeTemplate, critCount, bonus);
+			PacketSendUtility.broadcastPacket(requester, new SM_CRAFT_ANIMATION(requester.getObjectId(), responder.getObjectId(), 0, 2), true);
+			CraftService.finishCrafting(requester, recipeTemplate, critCount, bonus);
 			return true;
 		}
 	}
@@ -70,8 +70,8 @@ public class CraftingTask extends AbstractCraftTask {
 			return false;
 
 		// first crit uses base rate, subsequent crits use combo rate
-		int chance = critCount == 0 ? requestor.getRates().getCraftCritRate() : requestor.getRates().getComboCritRate();
-		House house = requestor.getActiveHouse();
+		int chance = critCount == 0 ? requester.getRates().getCraftCritRate() : requester.getRates().getComboCritRate();
+		House house = requester.getActiveHouse();
 		if (house != null)
 			switch (house.getHouseType()) {
 				case ESTATE:
@@ -90,20 +90,20 @@ public class CraftingTask extends AbstractCraftTask {
 
 	@Override
 	protected void sendInteractionUpdate() {
-		PacketSendUtility.sendPacket(requestor, new SM_CRAFT_UPDATE(recipeTemplate.getSkillId(), itemTemplate, currentSuccessValue, currentFailureValue,
+		PacketSendUtility.sendPacket(requester, new SM_CRAFT_UPDATE(recipeTemplate.getSkillId(), itemTemplate, currentSuccessValue, currentFailureValue,
 			craftType.getProgressId(), executionSpeed, showBarDelay));
 	}
 
 	@Override
 	protected void onInteractionAbort() {
-		PacketSendUtility.sendPacket(requestor, new SM_CRAFT_UPDATE(recipeTemplate.getSkillId(), itemTemplate, 0, 0, 4, 0, 0));
-		PacketSendUtility.broadcastPacket(requestor, new SM_CRAFT_ANIMATION(requestor.getObjectId(), responder.getObjectId(), 0, 2), true);
-		requestor.setCraftingTask(null);
+		PacketSendUtility.sendPacket(requester, new SM_CRAFT_UPDATE(recipeTemplate.getSkillId(), itemTemplate, 0, 0, 4, 0, 0));
+		PacketSendUtility.broadcastPacket(requester, new SM_CRAFT_ANIMATION(requester.getObjectId(), responder.getObjectId(), 0, 2), true);
+		requester.setCraftingTask(null);
 	}
 
 	@Override
 	protected void onInteractionFinish() {
-		requestor.setCraftingTask(null);
+		requester.setCraftingTask(null);
 	}
 
 	@Override
@@ -111,13 +111,13 @@ public class CraftingTask extends AbstractCraftTask {
 		currentSuccessValue = 0;
 		currentFailureValue = 0;
 
-		PacketSendUtility.sendPacket(requestor,
+		PacketSendUtility.sendPacket(requester,
 			new SM_CRAFT_UPDATE(recipeTemplate.getSkillId(), itemTemplate, fullBarValue, fullBarValue, critCount == 0 ? 0 : 3, 0, 0));
-		PacketSendUtility.sendPacket(requestor, new SM_CRAFT_UPDATE(recipeTemplate.getSkillId(), itemTemplate, 0, 0, 1, 0, 0));
-		PacketSendUtility.broadcastPacket(requestor,
-			new SM_CRAFT_ANIMATION(requestor.getObjectId(), responder.getObjectId(), recipeTemplate.getSkillId(), 0), true);
-		PacketSendUtility.broadcastPacket(requestor,
-			new SM_CRAFT_ANIMATION(requestor.getObjectId(), responder.getObjectId(), recipeTemplate.getSkillId(), 1), true);
+		PacketSendUtility.sendPacket(requester, new SM_CRAFT_UPDATE(recipeTemplate.getSkillId(), itemTemplate, 0, 0, 1, 0, 0));
+		PacketSendUtility.broadcastPacket(requester,
+			new SM_CRAFT_ANIMATION(requester.getObjectId(), responder.getObjectId(), recipeTemplate.getSkillId(), 0), true);
+		PacketSendUtility.broadcastPacket(requester,
+			new SM_CRAFT_ANIMATION(requester.getObjectId(), responder.getObjectId(), recipeTemplate.getSkillId(), 1), true);
 	}
 
 	@Override

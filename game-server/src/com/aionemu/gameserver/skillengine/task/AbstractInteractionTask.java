@@ -15,18 +15,17 @@ public abstract class AbstractInteractionTask {
 	protected int interval = 2500;
 	protected int delay = 1000;
 
-	protected Player requestor;
-	protected VisibleObject responder;
+	protected final Player requester;
+	protected final VisibleObject responder;
 
 	/**
-	 * @param requestor
+	 * @param requester
 	 * @param responder
 	 */
-	public AbstractInteractionTask(Player requestor, VisibleObject responder) {
-		// super();
-		this.requestor = requestor;
+	public AbstractInteractionTask(Player requester, VisibleObject responder) {
+		this.requester = requester;
 		if (responder == null)
-			this.responder = requestor;
+			this.responder = requester;
 		else
 			this.responder = responder;
 	}
@@ -63,12 +62,9 @@ public abstract class AbstractInteractionTask {
 
 			@Override
 			public void run() {
-				if (!validateParticipants())
-					stop(true);
-
-				boolean stopTask = onInteraction();
+				boolean stopTask = !requester.isOnline() || onInteraction();
 				if (stopTask)
-					stop(false);
+					stop();
 			}
 
 		}, delay, interval);
@@ -77,9 +73,8 @@ public abstract class AbstractInteractionTask {
 	/**
 	 * Stop current interaction
 	 */
-	public void stop(boolean participantNull) {
-		if (!participantNull)
-			onInteractionFinish();
+	public void stop() {
+		onInteractionFinish();
 
 		if (task != null && !task.isCancelled()) {
 			task.cancel(false);
@@ -92,7 +87,7 @@ public abstract class AbstractInteractionTask {
 	 */
 	public void abort() {
 		onInteractionAbort();
-		stop(false);
+		stop();
 	}
 
 	/**
@@ -100,13 +95,6 @@ public abstract class AbstractInteractionTask {
 	 */
 	public boolean isInProgress() {
 		return task != null && !task.isCancelled();
-	}
-
-	/**
-	 * @return true or false
-	 */
-	public boolean validateParticipants() {
-		return requestor != null;
 	}
 
 	public void setInterval(int interval) {

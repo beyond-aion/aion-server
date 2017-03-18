@@ -142,10 +142,4 @@ public class ActionObserver {
 	 */
 	public void hpChanged(int value) {
 	}
-
-	/**
-	 * @param creature - the effected Creature
-	 */
-	public void calculateGodstoneChance(Creature creature) {
-	}
 }

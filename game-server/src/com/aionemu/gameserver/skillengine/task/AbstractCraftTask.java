@@ -31,13 +31,13 @@ public abstract class AbstractCraftTask extends AbstractInteractionTask {
 	}
 	
 	/**
-	 * @param requestor
+	 * @param requester
 	 * @param responder
 	 * @param successValue
 	 * @param failureValue
 	 */
-	public AbstractCraftTask(Player requestor, VisibleObject responder, int skillLvlDiff) {
-		super(requestor, responder);
+	public AbstractCraftTask(Player requester, VisibleObject responder, int skillLvlDiff) {
+		super(requester, responder);
 		this.skillLvlDiff = skillLvlDiff;
 	}
 

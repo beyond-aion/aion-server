@@ -22,8 +22,8 @@ public class GatheringTask extends AbstractCraftTask {
 	private int showBarDelay;
 	private int executionSpeed;
 
-	public GatheringTask(Player requestor, Gatherable gatherable, Material material, int skillLvlDiff) {
-		super(requestor, gatherable, skillLvlDiff);
+	public GatheringTask(Player requester, Gatherable gatherable, Material material, int skillLvlDiff) {
+		super(requester, gatherable, skillLvlDiff);
 		this.template = gatherable.getObjectTemplate();
 		this.material = material;
 		this.delay = Rnd.get(200, 600);
@@ -33,8 +33,8 @@ public class GatheringTask extends AbstractCraftTask {
 
 	@Override
 	protected void onInteractionAbort() {
-		PacketSendUtility.broadcastPacket(requestor, new SM_GATHER_ANIMATION(requestor.getObjectId(), responder.getObjectId(), template.getHarvestSkill(), 4));
-		PacketSendUtility.sendPacket(requestor, new SM_GATHER_UPDATE(template, material, 0, 0, 5, 0, 0));
+		PacketSendUtility.broadcastPacket(requester, new SM_GATHER_ANIMATION(requester.getObjectId(), responder.getObjectId(), template.getHarvestSkill(), 4));
+		PacketSendUtility.sendPacket(requester, new SM_GATHER_UPDATE(template, material, 0, 0, 5, 0, 0));
 	}
 
 	@Override
@@ -44,36 +44,36 @@ public class GatheringTask extends AbstractCraftTask {
 
 	@Override
 	protected void onInteractionStart() {
-		PacketSendUtility.sendPacket(requestor, new SM_GATHER_UPDATE(template, material, fullBarValue, fullBarValue, 0, 0, 0));
-		PacketSendUtility.sendPacket(requestor, new SM_GATHER_UPDATE(template, material, 0, 0, 1, 0, 0));
+		PacketSendUtility.sendPacket(requester, new SM_GATHER_UPDATE(template, material, fullBarValue, fullBarValue, 0, 0, 0));
+		PacketSendUtility.sendPacket(requester, new SM_GATHER_UPDATE(template, material, 0, 0, 1, 0, 0));
 		// TODO: missing packet for initial failure/success
-		PacketSendUtility.broadcastPacket(requestor, new SM_GATHER_ANIMATION(requestor.getObjectId(), responder.getObjectId(), template.getHarvestSkill(), 0), true);
-		PacketSendUtility.broadcastPacket(requestor, new SM_GATHER_ANIMATION(requestor.getObjectId(), responder.getObjectId(), template.getHarvestSkill(), 1), true);
+		PacketSendUtility.broadcastPacket(requester, new SM_GATHER_ANIMATION(requester.getObjectId(), responder.getObjectId(), template.getHarvestSkill(), 0), true);
+		PacketSendUtility.broadcastPacket(requester, new SM_GATHER_ANIMATION(requester.getObjectId(), responder.getObjectId(), template.getHarvestSkill(), 1), true);
 	}
 
 	@Override
 	protected void sendInteractionUpdate() {
-		PacketSendUtility.sendPacket(requestor, new SM_GATHER_UPDATE(template, material, currentSuccessValue, currentFailureValue, craftType.getProgressId(), executionSpeed, showBarDelay));
+		PacketSendUtility.sendPacket(requester, new SM_GATHER_UPDATE(template, material, currentSuccessValue, currentFailureValue, craftType.getProgressId(), executionSpeed, showBarDelay));
 	}
 
 	@Override
 	protected void onFailureFinish() {
-		PacketSendUtility.sendPacket(requestor, new SM_GATHER_UPDATE(template, material, currentSuccessValue, currentFailureValue, 1, 0, 0));
-		PacketSendUtility.sendPacket(requestor, new SM_GATHER_UPDATE(template, material, currentSuccessValue, currentFailureValue, 7, 0, 0));
-		PacketSendUtility.broadcastPacket(requestor, new SM_GATHER_ANIMATION(requestor.getObjectId(), responder.getObjectId(), template.getHarvestSkill(), 3), true);
+		PacketSendUtility.sendPacket(requester, new SM_GATHER_UPDATE(template, material, currentSuccessValue, currentFailureValue, 1, 0, 0));
+		PacketSendUtility.sendPacket(requester, new SM_GATHER_UPDATE(template, material, currentSuccessValue, currentFailureValue, 7, 0, 0));
+		PacketSendUtility.broadcastPacket(requester, new SM_GATHER_ANIMATION(requester.getObjectId(), responder.getObjectId(), template.getHarvestSkill(), 3), true);
 	}
 
 	@Override
 	protected boolean onSuccessFinish() {
-		PacketSendUtility.broadcastPacket(requestor, new SM_GATHER_ANIMATION(requestor.getObjectId(), responder.getObjectId(), template.getHarvestSkill(), 2), true);
-		PacketSendUtility.sendPacket(requestor, new SM_GATHER_UPDATE(template, material, currentSuccessValue, currentFailureValue, 6, 0, 0));
+		PacketSendUtility.broadcastPacket(requester, new SM_GATHER_ANIMATION(requester.getObjectId(), responder.getObjectId(), template.getHarvestSkill(), 2), true);
+		PacketSendUtility.sendPacket(requester, new SM_GATHER_UPDATE(template, material, currentSuccessValue, currentFailureValue, 6, 0, 0));
 		if (template.getEraseValue() > 0)
-			requestor.getInventory().decreaseByItemId(template.getRequiredItemId(), template.getEraseValue());
-		ItemService.addItem(requestor, material.getItemId(), requestor.getRates().getGatheringCountRate());
-		if (requestor.isInInstance()) {
-			requestor.getPosition().getWorldMapInstance().getInstanceHandler().onGather(requestor, (Gatherable) responder);
+			requester.getInventory().decreaseByItemId(template.getRequiredItemId(), template.getEraseValue());
+		ItemService.addItem(requester, material.getItemId(), requester.getRates().getGatheringCountRate());
+		if (requester.isInInstance()) {
+			requester.getPosition().getWorldMapInstance().getInstanceHandler().onGather(requester, (Gatherable) responder);
 		}
-		((Gatherable) responder).getController().rewardPlayer(requestor);
+		((Gatherable) responder).getController().rewardPlayer(requester);
 		return true;
 	}
 
