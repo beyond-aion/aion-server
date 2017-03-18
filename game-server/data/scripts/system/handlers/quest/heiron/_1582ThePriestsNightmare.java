@@ -70,30 +70,30 @@ public class _1582ThePriestsNightmare extends QuestHandler {
 							return false;
 						}
 						case SETPRO2: {
-							if (qs.getQuestVarById(0) == 1) {
-								qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
-								updateQuestStatus(env);
-								return sendQuestDialog(env, 10);
-							}
+							if (qs.getQuestVarById(0) == 1)
+								return defaultCloseDialog(env, 1, 2);
 						}
 					}
 					return false;
 				case 204573:
 					switch (env.getDialogActionId()) {
-						case QUEST_SELECT: {
+						case QUEST_SELECT:
 							if (qs.getQuestVarById(0) == 2) {
 								return sendQuestDialog(env, 1693);
 							}
 							return false;
-						}
-						case SETPRO3: {
+						case SETPRO3:
 							if (qs.getQuestVarById(0) == 2) {
-								qs.setQuestVar(2);
-								qs.setStatus(QuestStatus.REWARD);
-								updateQuestStatus(env);
-								return sendQuestDialog(env, 10);
+								qs.setRewardGroup(0); // reward green resurrection stone
+								return defaultCloseDialog(env, 2, 2, true, false);
 							}
-						}
+							return false;
+						case SETPRO4:
+							if (qs.getQuestVarById(0) == 2) {
+								qs.setRewardGroup(1); // reward white resurrection stone
+								return defaultCloseDialog(env, 2, 2, true, false);
+							}
+							return false;
 					}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
