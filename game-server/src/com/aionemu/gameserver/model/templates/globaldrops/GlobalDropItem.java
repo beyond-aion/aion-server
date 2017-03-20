@@ -18,13 +18,19 @@ import com.aionemu.gameserver.model.templates.item.ItemTemplate;
 public class GlobalDropItem {
 
 	@XmlAttribute(name = "id", required = true)
-	protected int itemId;
+	private int itemId;
+	@XmlAttribute(name = "chance")
+	private float chance;
 
 	@XmlTransient
 	private ItemTemplate template;
 
 	public int getId() {
 		return itemId;
+	}
+	
+	public float getChance() {
+		return chance;
 	}
 
 	public ItemTemplate getItemTemplate() {

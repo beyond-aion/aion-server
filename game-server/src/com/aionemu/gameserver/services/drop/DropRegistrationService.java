@@ -3,6 +3,7 @@ package com.aionemu.gameserver.services.drop;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -244,13 +245,10 @@ public class DropRegistrationService {
 							continue;
 						if (!checkGlobalRuleNpcGroups(rule, npc)) // drop group from npc_templates
 							continue;
-						// not used anymore, converted into Ids during Load Static Data
-						// if (!checkGlobalRuleNpcNames (rule, npc))
-						// continue;
 						if (checkGlobalRuleExcludedNpcs(rule, npc))
 							continue;
 						List<Integer> alloweditems = getAllowedItems(rule, npc, player);
-						if (alloweditems.size() == 0)
+						if (alloweditems.isEmpty())
 							continue;
 
 						if (rule.getMemberLimit() > 1 && (player.isInGroup() || player.isInAlliance() || player.isInLeague())) {
@@ -447,163 +445,128 @@ public class DropRegistrationService {
 
 	public boolean checkGlobalRuleMaps(GlobalRule rule, Npc npc) {
 		if (rule.getGlobalRuleMaps() != null) {
-			boolean stepCheck = false;
-			for (GlobalDropMap gdMap : rule.getGlobalRuleMaps().getGlobalDropMaps()) {
-				if (gdMap.getMapId() == npc.getPosition().getMapId()) {
-					stepCheck = true;
-					break;
-				}
-			}
-			return stepCheck;
+			for (GlobalDropMap gdMap : rule.getGlobalRuleMaps().getGlobalDropMaps())
+				if (gdMap.getMapId() == npc.getPosition().getMapId())
+					return true;
+			return false;
 		}
 		return true;
 	}
 
 	public boolean checkGlobalRuleWorlds(GlobalRule rule, Npc npc) {
 		if (rule.getGlobalRuleWorlds() != null) {
-			boolean stepCheck = false;
-			for (GlobalDropWorld gdWorld : rule.getGlobalRuleWorlds().getGlobalDropWorlds()) {
-				if (gdWorld.getWorldDropType().equals(npc.getWorldDropType())) {
-					stepCheck = true;
-					break;
-				}
-			}
-			return stepCheck;
+			for (GlobalDropWorld gdWorld : rule.getGlobalRuleWorlds().getGlobalDropWorlds())
+				if (gdWorld.getWorldDropType().equals(npc.getWorldDropType()))
+					return true;
+			return false;
 		}
 		return true;
 	}
 
 	public boolean checkGlobalRuleRatings(GlobalRule rule, Npc npc) {
 		if (rule.getGlobalRuleRatings() != null) {
-			boolean stepCheck = false;
-			for (GlobalDropRating gdRating : rule.getGlobalRuleRatings().getGlobalDropRatings()) {
-				if (gdRating.getRating().equals(npc.getRating())) {
-					stepCheck = true;
-					break;
-				}
-			}
-			return stepCheck;
+			for (GlobalDropRating gdRating : rule.getGlobalRuleRatings().getGlobalDropRatings())
+				if (gdRating.getRating().equals(npc.getRating()))
+					return true;
+			return false;
 		}
 		return true;
 	}
 
 	public boolean checkGlobalRuleRaces(GlobalRule rule, Npc npc) {
 		if (rule.getGlobalRuleRaces() != null) {
-			boolean stepCheck = false;
-			for (GlobalDropRace gdRace : rule.getGlobalRuleRaces().getGlobalDropRaces()) {
-				if (gdRace.getRace().equals(npc.getRace())) {
-					stepCheck = true;
-					break;
-				}
-			}
-			return stepCheck;
+			for (GlobalDropRace gdRace : rule.getGlobalRuleRaces().getGlobalDropRaces())
+				if (gdRace.getRace().equals(npc.getRace()))
+					return true;
+			return false;
 		}
 		return true;
 	}
 
 	public boolean checkGlobalRuleTribes(GlobalRule rule, Npc npc) {
 		if (rule.getGlobalRuleTribes() != null) {
-			boolean stepCheck = false;
-			for (GlobalDropTribe gdTribe : rule.getGlobalRuleTribes().getGlobalDropTribes()) {
-				if (gdTribe.getTribe().equals(npc.getTribe())) {
-					stepCheck = true;
-					break;
-				}
-			}
-			return stepCheck;
+			for (GlobalDropTribe gdTribe : rule.getGlobalRuleTribes().getGlobalDropTribes())
+				if (gdTribe.getTribe().equals(npc.getTribe()))
+					return true;
+			return false;
 		}
 		return true;
 	}
 
 	public boolean checkGlobalRuleZones(GlobalRule rule, Npc npc) {
 		if (rule.getGlobalRuleZones() != null) {
-			boolean stepCheck = false;
-			for (GlobalDropZone gdZone : rule.getGlobalRuleZones().getGlobalDropZones()) {
-				if (npc.isInsideZone(ZoneName.get(gdZone.getZone()))) {
-					stepCheck = true;
-					break;
-				}
-			}
-			return stepCheck;
+			for (GlobalDropZone gdZone : rule.getGlobalRuleZones().getGlobalDropZones())
+				if (npc.isInsideZone(ZoneName.get(gdZone.getZone())))
+					return true;
+			return false;
 		}
 		return true;
 	}
 
 	public boolean checkGlobalRuleNpcs(GlobalRule rule, Npc npc) {
 		if (rule.getGlobalRuleNpcs() != null) {
-			boolean stepCheck = false;
-			for (GlobalDropNpc gdNpc : rule.getGlobalRuleNpcs().getGlobalDropNpcs()) {
-				if (gdNpc.getNpcId() == npc.getNpcId()) {
-					stepCheck = true;
-					break;
-				}
-			}
-			return stepCheck;
+			for (GlobalDropNpc gdNpc : rule.getGlobalRuleNpcs().getGlobalDropNpcs())
+				if (gdNpc.getNpcId() == npc.getNpcId())
+					return true;
+			return false;
 		}
 		return true;
 	}
 
 	public boolean checkGlobalRuleNpcGroups(GlobalRule rule, Npc npc) {
 		if (rule.getGlobalRuleNpcGroups() != null) {
-			boolean stepCheck = false;
-			for (GlobalDropNpcGroup gdGroup : rule.getGlobalRuleNpcGroups().getGlobalDropNpcGroups()) {
-				if (gdGroup.getGroup().equals(npc.getGroupDrop())) {
-					stepCheck = true;
-					break;
-				}
-			}
-			return stepCheck;
+			for (GlobalDropNpcGroup gdGroup : rule.getGlobalRuleNpcGroups().getGlobalDropNpcGroups())
+				if (gdGroup.getGroup().equals(npc.getGroupDrop()))
+					return true;
+			return false;
 		}
 		return true;
 	}
 
-	// not used anymore, converted into npc Ids during Load Static Data
-	/**
-	 * private boolean checkGlobalRuleNpcNames (GlobalRule rule, Npc npc) { if (rule.getGlobalRuleNpcNames() != null) { boolean stepCheck= false; for
-	 * (GlobalDropNpcName gdNpcName : rule.getGlobalRuleNpcNames().getGlobalDropNpcNames()) { if
-	 * (gdNpcName.getFunction().equals(StringFunction.CONTAINS) && npc.getName().toLowerCase().contains(gdNpcName.getValue().toLowerCase())) stepCheck =
-	 * true; if (gdNpcName.getFunction().equals(StringFunction.END_WITH) && npc.getName().toLowerCase().endsWith(gdNpcName.getValue().toLowerCase()))
-	 * stepCheck = true; if (gdNpcName.getFunction().equals(StringFunction.START_WITH) &&
-	 * npc.getName().toLowerCase().startsWith(gdNpcName.getValue().toLowerCase())) stepCheck = true; if
-	 * (gdNpcName.getFunction().equals(StringFunction.EQUALS) && npc.getName().toLowerCase().equals(gdNpcName.getValue().toLowerCase())) stepCheck =
-	 * true; } return stepCheck; } return true; }
-	 **/
 	public boolean checkGlobalRuleExcludedNpcs(GlobalRule rule, Npc npc) {
-		boolean stepCheck = false;
-		if (rule.getGlobalRuleExcludedNpcs() != null) {
-			for (GlobalDropExcludedNpc gdExcludedNpc : rule.getGlobalRuleExcludedNpcs().getGlobalDropExcludedNpcs()) {
-				if (gdExcludedNpc.getNpcId() == npc.getNpcId()) {
-					stepCheck = true;
-					break;
-				}
-			}
-		}
-		return stepCheck;
+		if (rule.getGlobalRuleExcludedNpcs() != null)
+			for (GlobalDropExcludedNpc gdExcludedNpc : rule.getGlobalRuleExcludedNpcs().getGlobalDropExcludedNpcs())
+				if (gdExcludedNpc.getNpcId() == npc.getNpcId())
+					return true;
+		return false;
 	}
 
 	public List<Integer> getAllowedItems(GlobalRule rule, Npc npc, Player player) {
-		List<Integer> alloweditems = new ArrayList<>();
-		List<Integer> droppeditems = new ArrayList<>();
+		List<GlobalDropItem> tempItems = new ArrayList<>();
+		List<Integer> allowedItems = new ArrayList<>();
 		for (GlobalDropItem globalItem : rule.getGlobalRuleItems().getGlobalDropItems()) {
-			// check for prevent different race drops
 			if (player.getRace() == Race.ASMODIANS && globalItem.getItemTemplate().getRace().equals(Race.ELYOS)
 				|| player.getRace() == Race.ELYOS && globalItem.getItemTemplate().getRace().equals(Race.ASMODIANS)) {
 				continue;
 			}
 			int diff = npc.getLevel() - globalItem.getItemTemplate().getLevel();
-			if (diff >= rule.getMinDiff() && diff <= rule.getMaxDiff()) {
-				alloweditems.add(globalItem.getId());
+			if (diff >= rule.getMinDiff() && diff <= rule.getMaxDiff())
+				tempItems.add(globalItem);
+		}
+		if (tempItems.size() >= 1) {
+			for (int i = 0; i < rule.getMaxDropRule(); i++) { // TODO: Evaluate if necessary
+				float maxSum = calculateChanceSum(tempItems);
+				float sum = 0f;
+				float rnd = Rnd.get(0, (int) (maxSum + 1) * 1000) / 1000f;
+				for (Iterator<GlobalDropItem> iter = tempItems.iterator(); iter.hasNext();) {
+					GlobalDropItem item = iter.next();
+					sum += item.getChance();
+					if (rnd < sum) {
+						allowedItems.add(item.getId());
+						iter.remove();
+						break;
+					}
+				}
 			}
 		}
-		if (alloweditems.size() >= 1) {
-			for (int i = 0; i < rule.getMaxDropRule(); i++) {
-				int rndIndex = Rnd.get(alloweditems.size());
-				droppeditems.add(alloweditems.remove(rndIndex));
-				if (alloweditems.size() == 0)
-					break;
-			}
-		}
-		return droppeditems;
+		return allowedItems;
+	}
+
+	private float calculateChanceSum(List<GlobalDropItem> items) {
+		float sum = 0f;
+		for (GlobalDropItem item : items)
+			sum += item.getChance();
+		return sum;
 	}
 
 	public long getItemCount(int itemId, GlobalRule rule, Npc npc) {
