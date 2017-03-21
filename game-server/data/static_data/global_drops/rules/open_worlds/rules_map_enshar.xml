@@ -43,14 +43,17 @@
 			<gd_item id="102100748" name="Sunayaka's Cipher-Blade" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Enchantment Stone" base_chance="100" fixed_chance="true">
+	<gd_rule rule_name="Named Enchantment Stone" base_chance="100" max_drop_rule="3" fixed_chance="true">
 		<gd_maps>
 			<gd_map map_id="220080000" name="Enshar" />
 		</gd_maps>
 		<gd_npcs>
 			<gd_npc npc_id="220020" name="Berserker Sunayaka" />
+			<gd_npc npc_id="220019" name="Tatar's Blaze" />
 		</gd_npcs>
 		<gd_items>
+			<gd_item id="166000195" name="Epsilon Enchantment Stone" />
+			<gd_item id="166000195" name="Epsilon Enchantment Stone" />
 			<gd_item id="166000195" name="Epsilon Enchantment Stone" />
 		</gd_items>
 	</gd_rule>
@@ -138,194 +141,8 @@
 			<gd_item id="115001407" name="Tatar's Flawless Scale Shield" />
 		</gd_items>
 	</gd_rule>
-	<!-- Others -->
-	<gd_rule rule_name="Named Fabled Weapon" base_chance="100" fixed_chance="true">
-		<gd_maps>
-			<gd_map map_id="220080000" name="Enshar" />
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="219926" name="Rootage Rotron" />
-			<gd_npc npc_id="219927" name="Chromascale Dreadclaw" />
-			<gd_npc npc_id="219928" name="Seabrine Jotun" />
-			<gd_npc npc_id="219929" name="Tidalsail Spirit" />
-			<gd_npc npc_id="219930" name="Infernomane Vortile" />
-			<gd_npc npc_id="219931" name="Usurper Demaluk" />
-			<gd_npc npc_id="219932" name="Deputy Brigade General Amar" />
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="100001790" name="Sealed Earth Sword" />
-			<gd_item id="100101380" name="Sealed Earth Mace" />
-			<gd_item id="100201555" name="Sealed Earth Dagger" />
-			<gd_item id="100501348" name="Sealed Earth Orb" />
-			<gd_item id="100601465" name="Sealed Earch Spellbook" />
-			<gd_item id="100901417" name="Sealed Earth Greatsword" />
-			<gd_item id="101301306" name="Sealed Earth Polearm" />
-			<gd_item id="101501395" name="Sealed Earth Staff" />
-			<gd_item id="101701401" name="Sealed Earth Bow" />
-			<gd_item id="101801259" name="Sealed Earth Pistol" />
-			<gd_item id="101901166" name="Sealed Earch Aethercannon" />
-			<gd_item id="102001285" name="Sealed Earth Harp" />
-			<gd_item id="102101102" name="Sealed Earth Cipher-Blade" />
-			<gd_item id="115001859" name="Shield of Sealed Earth" />
-		</gd_items>
-	</gd_rule>
-	<gd_rule rule_name="Named Power Shards" base_chance="100" min_count="500" max_count="500" fixed_chance="true">
-		<gd_maps>
-			<gd_map map_id="220080000" name="Enshar" />
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="219926" name="Rootage Rotron" />
-			<gd_npc npc_id="219927" name="Chromascale Dreadclaw" />
-			<gd_npc npc_id="219928" name="Seabrine Jotun" />
-			<gd_npc npc_id="219929" name="Tidalsail Spirit" />
-			<gd_npc npc_id="219930" name="Infernomane Vortile" />
-			<gd_npc npc_id="219931" name="Usurper Demaluk" />
-			<gd_npc npc_id="219932" name="Deputy Brigade General Amar" />
-			<gd_npc npc_id="219933" name="Arcticore Aizenka" />
-			<gd_npc npc_id="219853" name="Roughneck Trico" />
-			<gd_npc npc_id="219854" name="Large Seasprite" />
-			<gd_npc npc_id="219855" name="Swollen Yellowthorn Spinefish" />
-			<gd_npc npc_id="219856" name="Erratic Highland Spirit" />
-			<gd_npc npc_id="219857" name="Monstrous Klaw" />
-			<gd_npc npc_id="219858" name="Wandering Lunashin Ettin" />
-			<gd_npc npc_id="219859" name="Lunarhulk Sheluk" />
-			<gd_npc npc_id="219860" name="Coralscale Nagarant" />
-			<gd_npc npc_id="219861" name="Spotted Vortile" />
-			<gd_npc npc_id="219862" name="Wayfarsand Ksellid" />
-			<gd_npc npc_id="219863" name="Causticgasp Seagric" />
-			<gd_npc npc_id="219864" name="Rotmane Dreadclaw" />
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="169000009" name="Premium Power Shard" />
-			<gd_item id="169000010" name="Superior Power Shard" />
-		</gd_items>
-	</gd_rule>
-	<gd_rule rule_name="Named Idian Pouch" base_chance="100" fixed_chance="true">
-		<gd_maps>
-			<gd_map map_id="220080000" name="Enshar" />
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="219853" name="Roughneck Trico" />
-			<gd_npc npc_id="219854" name="Large Seasprite" />
-			<gd_npc npc_id="219855" name="Swollen Yellowthorn Spinefish" />
-			<gd_npc npc_id="219856" name="Erratic Highland Spirit" />
-			<gd_npc npc_id="219857" name="Monstrous Klaw" />
-			<gd_npc npc_id="219858" name="Wandering Lunashin Ettin" />
-			<gd_npc npc_id="219859" name="Lunarhulk Sheluk" />
-			<gd_npc npc_id="219860" name="Coralscale Nagarant" />
-			<gd_npc npc_id="219861" name="Spotted Vortile" />
-			<gd_npc npc_id="219862" name="Wayfarsand Ksellid" />
-			<gd_npc npc_id="219863" name="Causticgasp Seagric" />
-			<gd_npc npc_id="219864" name="Rotmane Dreadclaw" />
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="188053746" name="Faded Middle Grade Idian Bundle" />
-			<gd_item id="188053747" name="Faded High Grade Idian Bundle" />
-		</gd_items>
-	</gd_rule>
-	<gd_rule rule_name="Named Idian Pouch" base_chance="100" fixed_chance="true">
-		<gd_maps>
-			<gd_map map_id="220080000" name="Enshar" />
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="219926" name="Rootage Rotron" />
-			<gd_npc npc_id="219927" name="Chromascale Dreadclaw" />
-			<gd_npc npc_id="219928" name="Seabrine Jotun" />
-			<gd_npc npc_id="219929" name="Tidalsail Spirit" />
-			<gd_npc npc_id="219930" name="Infernomane Vortile" />
-			<gd_npc npc_id="219931" name="Usurper Demaluk" />
-			<gd_npc npc_id="219932" name="Deputy Brigade General Amar" />
-			<gd_npc npc_id="219933" name="Arcticore Aizenka" />
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="188053747" name="Faded Middle Grade Idian Bundle" />
-			<gd_item id="188053748" name="Elegant High Grade Idian Bundle" />
-		</gd_items>
-	</gd_rule>
-	<gd_rule rule_name="Named Idian Pouch" base_chance="100" min_count="1" max_count="3" fixed_chance="true">
-		<gd_maps>
-			<gd_map map_id="220080000" name="Enshar" />
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="219934" name="Prectaz" />
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="188053748" name="Elegant High Grade Idian Bundle" />
-		</gd_items>
-	</gd_rule>
-	<gd_rule rule_name="Named Manastone Bundle" base_chance="80" fixed_chance="true">
-		<gd_maps>
-			<gd_map map_id="220080000" name="Enshar" />
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="219853" name="Roughneck Trico" />
-			<gd_npc npc_id="219854" name="Large Seasprite" />
-			<gd_npc npc_id="219855" name="Swollen Yellowthorn Spinefish" />
-			<gd_npc npc_id="219856" name="Erratic Highland Spirit" />
-			<gd_npc npc_id="219857" name="Monstrous Klaw" />
-			<gd_npc npc_id="219858" name="Wandering Lunashin Ettin" />
-			<gd_npc npc_id="219859" name="Lunarhulk Sheluk" />
-			<gd_npc npc_id="219860" name="Coralscale Nagarant" />
-			<gd_npc npc_id="219861" name="Spotted Vortile" />
-			<gd_npc npc_id="219862" name="Wayfarsand Ksellid" />
-			<gd_npc npc_id="219863" name="Causticgasp Seagric" />
-			<gd_npc npc_id="219864" name="Rotmane Dreadclaw" />
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="188053742" name="Faded Middle Grade Manastone Bundle" />
-			<gd_item id="188053743" name="Faded High Grade Manastone Bundle" />
-		</gd_items>
-	</gd_rule>
-	<gd_rule rule_name="Named Manastone Pouch" base_chance="80" fixed_chance="true">
-		<gd_maps>
-			<gd_map map_id="220080000" name="Enshar" />
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="219926" name="Rootage Rotron" />
-			<gd_npc npc_id="219927" name="Chromascale Dreadclaw" />
-			<gd_npc npc_id="219928" name="Seabrine Jotun" />
-			<gd_npc npc_id="219929" name="Tidalsail Spirit" />
-			<gd_npc npc_id="219930" name="Infernomane Vortile" />
-			<gd_npc npc_id="219931" name="Usurper Demaluk" />
-			<gd_npc npc_id="219932" name="Deputy Brigade General Amar" />
-			<gd_npc npc_id="219933" name="Arcticore Aizenka" />
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="188053743" name="Faded High Grade Manastone Bundle" />
-			<gd_item id="188053744" name="Elegant Middle Grade Composite Manastone Bundle" />
-		</gd_items>
-	</gd_rule>
-	<gd_rule rule_name="Named Manastone Pouch" base_chance="100" min_count="1" max_count="3" fixed_chance="true">
-		<gd_maps>
-			<gd_map map_id="220080000" name="Enshar" />
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="219934" name="Prectaz" />
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="188053744" name="Elegant High Grade Composite Manastone Bundle" />
-		</gd_items>
-	</gd_rule>
-	<gd_rule rule_name="Named Enchantment Stone Bundle" base_chance="60" min_count="1" max_count="3">
-		<gd_maps>
-			<gd_map map_id="220080000" name="Enshar" />
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="219926" name="Rootage Rotron" />
-			<gd_npc npc_id="219927" name="Chromascale Dreadclaw" />
-			<gd_npc npc_id="219928" name="Seabrine Jotun" />
-			<gd_npc npc_id="219929" name="Tidalsail Spirit" />
-			<gd_npc npc_id="219930" name="Infernomane Vortile" />
-			<gd_npc npc_id="219931" name="Usurper Demaluk" />
-			<gd_npc npc_id="219932" name="Deputy Brigade General Amar" />
-			<gd_npc npc_id="219933" name="Arcticore Aizenka" />
-			<gd_npc npc_id="219934" name="Prectaz" />
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="188053749" name="Heavy Enchantment Stone Bundle" />
-		</gd_items>
-	</gd_rule>
-	<gd_rule rule_name="Named Hairpin" base_chance="70" fixed_chance="true">
+	<!-- Arcticore Aizenka -->
+	<gd_rule rule_name="Named Mythic Hairpin" base_chance="70" fixed_chance="true">
 		<gd_maps>
 			<gd_map map_id="220080000" name="Enshar" />
 		</gd_maps>
@@ -333,13 +150,51 @@
 			<gd_npc npc_id="219933" name="Arcticore Aizenka" />
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="125004237" name="Wave Song Plate Helmet" />
-			<gd_item id="125004238" name="Wave Song Chain Helm" />
-			<gd_item id="125004239" name="Wave Song Leather Hat" />
-			<gd_item id="125004240" name="Wave Song Cloth Bandana" />
-			<gd_item id="125004300" name="Deep Sea Feast Hairpin" />
+			<gd_item id="125004301" name="Wave Song Hairpin" />
 		</gd_items>
 	</gd_rule>
+	<gd_rule rule_name="Named Eternal Weapon" base_chance="100" fixed_chance="true">
+		<gd_maps>
+			<gd_map map_id="220080000" name="Enshar" />
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="219933" name="Arcticore Aizenka" />
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="100001808" name="Vivifying Sword" />
+			<gd_item id="100101397" name="Vivifying Mace" />
+			<gd_item id="100201569" name="Vivifying Dagger" />
+			<gd_item id="100501361" name="Vivifying Orb" />
+			<gd_item id="100601478" name="Vivifying Spellbook" />
+			<gd_item id="100901430" name="Vivifying Greatsword" />
+			<gd_item id="101301321" name="Vivifying Polearm" />
+			<gd_item id="101501413" name="Vivifying Staff" />
+			<gd_item id="101701414" name="Vivifying Bow" />
+			<gd_item id="101801271" name="Vivifying Pistol" />
+			<gd_item id="101901177" name="Vivifying Aethercannon" />
+			<gd_item id="102001298" name="Vivifying Harp" />
+			<gd_item id="102101115" name="Vivifying Cipher-Blade" />
+			<gd_item id="115001860" name="Shield of Reviving Earth" />
+			<gd_item id="115001861" name="Scale Shield of Reviving Earth" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Enchantment Stone Bundle" base_chance="100" max_drop_rule="6" fixed_chance="true">
+		<gd_maps>
+			<gd_map map_id="220080000" name="Enshar" />
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="219933" name="Arcticore Aizenka" />
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="166000194" name="Delta Enchantment Stone" />
+			<gd_item id="166000194" name="Delta Enchantment Stone" />
+			<gd_item id="166000194" name="Delta Enchantment Stone" />
+			<gd_item id="166000195" name="Epsilon Enchantment Stone" />
+			<gd_item id="166000195" name="Epsilon Enchantment Stone" />
+			<gd_item id="166000195" name="Epsilon Enchantment Stone" />
+		</gd_items>
+	</gd_rule>
+	<!-- Prectaz -->
 	<gd_rule rule_name="Named Mythic Weapon" base_chance="60" fixed_chance="true">
 		<gd_maps>
 			<gd_map map_id="220080000" name="Enshar" />
@@ -363,7 +218,19 @@
 			<gd_item id="102101114" name="Sea Feast Cipher-Blade" />
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Eternal Armor" base_chance="60" fixed_chance="true">
+	<gd_rule rule_name="Named Mythic Shield" base_chance="60" fixed_chance="true">
+		<gd_maps>
+			<gd_map map_id="220080000" name="Enshar" />
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="219934" name="Prectaz" />
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="115001864" name="Shining Ice Crystal Shield" />
+			<gd_item id="115001865" name="Shihing Ice Crystal Scale Shield" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Eternal Armor" base_chance="100" fixed_chance="true">
 		<gd_maps>
 			<gd_map map_id="220080000" name="Enshar" />
 		</gd_maps>
@@ -391,6 +258,337 @@
 			<gd_item id="114301890" name="Sea Feast Boots" />
 			<gd_item id="114501802" name="Sea Feast Brogans" />
 			<gd_item id="114601628" name="Sea Feast Plate Boots" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Enchantment Stone" base_chance="100" max_drop_rule="10" fixed_chance="true">
+		<gd_maps>
+			<gd_map map_id="220080000" name="Enshar" />
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="219934" name="Prectaz" />
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="166000194" name="Delta Enchantment Stone" />
+			<gd_item id="166000194" name="Delta Enchantment Stone" />
+			<gd_item id="166000194" name="Delta Enchantment Stone" />
+			<gd_item id="166000194" name="Delta Enchantment Stone" />
+			<gd_item id="166000194" name="Delta Enchantment Stone" />
+			<gd_item id="166000194" name="Delta Enchantment Stone" />
+			<gd_item id="166000195" name="Epsilon Enchantment Stone" />
+			<gd_item id="166000195" name="Epsilon Enchantment Stone" />
+			<gd_item id="166000195" name="Epsilon Enchantment Stone" />
+			<gd_item id="166000195" name="Epsilon Enchantment Stone" />
+		</gd_items>
+	</gd_rule>
+	<!-- Rootage Rotron -->
+	<gd_rule rule_name="Named Fabled Weapon" base_chance="100" fixed_chance="true">
+		<gd_maps>
+			<gd_map map_id="220080000" name="Enshar" />
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="219926" name="Rootage Rotron" />
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="100001790" name="Sealed Earth Sword" />
+			<gd_item id="100501348" name="Sealed Earth Orb" />
+		</gd_items>
+	</gd_rule>
+	<!-- Chromascale Dreadclaw -->
+	<gd_rule rule_name="Named Fabled Weapon" base_chance="100" fixed_chance="true">
+		<gd_maps>
+			<gd_map map_id="220080000" name="Enshar" />
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="219927" name="Chromascale Dreadclaw" />
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="100101380" name="Sealed Earth Mace" />
+			<gd_item id="100601465" name="Sealed Earch Spellbook" />
+		</gd_items>
+	</gd_rule>
+	<!-- Usurper Demaluk -->
+	<gd_rule rule_name="Named Fabled Weapon" base_chance="100" fixed_chance="true">
+		<gd_maps>
+			<gd_map map_id="220080000" name="Enshar" />
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="219931" name="Usurper Demaluk" />
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="100201555" name="Sealed Earth Dagger" />
+			<gd_item id="101701401" name="Sealed Earth Bow" />
+		</gd_items>
+	</gd_rule>
+	<!-- Seabrine Jotun -->
+	<gd_rule rule_name="Named Fabled Weapon" base_chance="100" fixed_chance="true">
+		<gd_maps>
+			<gd_map map_id="220080000" name="Enshar" />
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="219928" name="Seabrine Jotun" />
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="101301306" name="Sealed Earth Polearm" />
+			<gd_item id="101801259" name="Sealed Earth Pistol" />
+		</gd_items>
+	</gd_rule>
+	<!-- Tidalsail Spirit -->
+	<gd_rule rule_name="Named Fabled Weapon" base_chance="100" fixed_chance="true">
+		<gd_maps>
+			<gd_map map_id="220080000" name="Enshar" />
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="219929" name="Tidalsail Spirit" />
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="100901417" name="Sealed Earth Greatsword" />
+			<gd_item id="101901166" name="Sealed Earch Aethercannon" />
+		</gd_items>
+	</gd_rule>
+	<!-- Deputy Brigade General Amar -->
+	<gd_rule rule_name="Named Fabled Weapon" base_chance="100" fixed_chance="true">
+		<gd_maps>
+			<gd_map map_id="220080000" name="Enshar" />
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="219932" name="Deputy Brigade General Amar" />
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="101501395" name="Sealed Earth Staff" />
+			<gd_item id="102001285" name="Sealed Earth Harp" />
+		</gd_items>
+	</gd_rule>
+	<!-- Infernomane Vortile" -->
+	<gd_rule rule_name="Named Fabled Weapon" base_chance="100" fixed_chance="true">
+		<gd_maps>
+			<gd_map map_id="220080000" name="Enshar" />
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="219930" name="Infernomane Vortile" />
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="102101102" name="Sealed Earth Cipher-Blade" />
+			<gd_item id="115001859" name="Shield of Sealed Earth" />
+		</gd_items>
+	</gd_rule>
+	<!-- Others -->
+	<gd_rule rule_name="Named Eternal Armor" base_chance="70" fixed_chance="true">
+		<gd_maps>
+			<gd_map map_id="220080000" name="Enshar" />
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="219928" name="Seabrine Jotun" />
+			<gd_npc npc_id="219931" name="Usurper Demaluk" />
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="110101870" name="Wave Song Jacket" />
+			<gd_item id="110301862" name="Wave Song Jerkin" />
+			<gd_item id="110551189" name="Wave Song Hauberk" />
+			<gd_item id="110601657" name="Wave Song Breastplate" />
+		</gd_items>
+	</gd_rule> 
+	<gd_rule rule_name="Named Eternal Gloves" base_chance="70" fixed_chance="true">
+		<gd_maps>
+			<gd_map map_id="220080000" name="Enshar" />
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="219926" name="Rootage Rotron" />
+			<gd_npc npc_id="219928" name="Seabrine Jotun" />
+			<gd_npc npc_id="219930" name="Infernomane Vortile" />
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="111101685" name="Wave Song Gloves" />
+			<gd_item id="111301800" name="Wave Song Vambraces" />
+			<gd_item id="111501748" name="Wave Song Handguards" />
+			<gd_item id="111601620" name="Wave Song Gauntlets" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Eternal Shoulders" base_chance="70" fixed_chance="true">
+		<gd_maps>
+			<gd_map map_id="220080000" name="Enshar" />
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="219927" name="Chromascale Dreadclaw" />
+			<gd_npc npc_id="219930" name="Infernomane Vortile" />
+			<gd_npc npc_id="219931" name="Usurper Demaluk" />
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="112101634" name="Wave Song Pauldrons" />
+			<gd_item id="112301739" name="Wave Song Shoulderguards" />
+			<gd_item id="112501687" name="Wave Song Spaulders" />
+			<gd_item id="112601602" name="Wave Song Shoulderplates" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Eternal Pants" base_chance="70" fixed_chance="true">
+		<gd_maps>
+			<gd_map map_id="220080000" name="Enshar" />
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="219927" name="Chromascale Dreadclaw" />
+			<gd_npc npc_id="219929" name="Tidalsail Spirit" />
+			<gd_npc npc_id="219932" name="Deputy Brigade General Amar" />
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="113101696" name="Wave Song Leggings" />
+			<gd_item id="113301831" name="Wave Song Legguards" />
+			<gd_item id="113501766" name="Wave Song Chausses" />
+			<gd_item id="113601603" name="Wave Song Greaves" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Eternal Boots" base_chance="70" fixed_chance="true">
+		<gd_maps>
+			<gd_map map_id="220080000" name="Enshar" />
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="219926" name="Rootage Rotron" />
+			<gd_npc npc_id="219929" name="Tidalsail Spirit" />
+			<gd_npc npc_id="219932" name="Deputy Brigade General Amar" />
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="114101730" name="Wave Song Shoes" />
+			<gd_item id="114301868" name="Wave Song Boots" />
+			<gd_item id="114501776" name="Wave Song Brogans" />
+			<gd_item id="114601610" name="Wave Song Plate Boots" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Power Shards" base_chance="100" min_count="500" max_count="500" fixed_chance="true">
+		<gd_maps>
+			<gd_map map_id="220080000" name="Enshar" />
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="219853" name="Roughneck Trico" />
+			<gd_npc npc_id="219854" name="Large Seasprite" />
+			<gd_npc npc_id="219855" name="Swollen Yellowthorn Spinefish" />
+			<gd_npc npc_id="219856" name="Erratic Highland Spirit" />
+			<gd_npc npc_id="219857" name="Monstrous Klaw" />
+			<gd_npc npc_id="219858" name="Wandering Lunashin Ettin" />
+			<gd_npc npc_id="219859" name="Lunarhulk Sheluk" />
+			<gd_npc npc_id="219860" name="Coralscale Nagarant" />
+			<gd_npc npc_id="219861" name="Spotted Vortile" />
+			<gd_npc npc_id="219862" name="Wayfarsand Ksellid" />
+			<gd_npc npc_id="219863" name="Causticgasp Seagric" />
+			<gd_npc npc_id="219864" name="Rotmane Dreadclaw" />
+			<gd_npc npc_id="219926" name="Rootage Rotron" />
+			<gd_npc npc_id="219927" name="Chromascale Dreadclaw" />
+			<gd_npc npc_id="219928" name="Seabrine Jotun" />
+			<gd_npc npc_id="219929" name="Tidalsail Spirit" />
+			<gd_npc npc_id="219930" name="Infernomane Vortile" />
+			<gd_npc npc_id="219931" name="Usurper Demaluk" />
+			<gd_npc npc_id="219932" name="Deputy Brigade General Amar" />
+			<gd_npc npc_id="219933" name="Arcticore Aizenka" />
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="169000009" name="Premium Power Shard" />
+			<gd_item id="169000010" name="Superior Power Shard" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Idian Pouch" base_chance="100" fixed_chance="true">
+		<gd_maps>
+			<gd_map map_id="220080000" name="Enshar" />
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="219853" name="Roughneck Trico" />
+			<gd_npc npc_id="219854" name="Large Seasprite" />
+			<gd_npc npc_id="219855" name="Swollen Yellowthorn Spinefish" />
+			<gd_npc npc_id="219856" name="Erratic Highland Spirit" />
+			<gd_npc npc_id="219857" name="Monstrous Klaw" />
+			<gd_npc npc_id="219859" name="Lunarhulk Sheluk" />
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="188053746" name="Faded Middle Grade Idian Bundle" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Idian Pouch" base_chance="100" fixed_chance="true">
+		<gd_maps>
+			<gd_map map_id="220080000" name="Enshar" />
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="219858" name="Wandering Lunashin Ettin" />
+			<gd_npc npc_id="219860" name="Coralscale Nagarant" />
+			<gd_npc npc_id="219861" name="Spotted Vortile" />
+			<gd_npc npc_id="219862" name="Wayfarsand Ksellid" />
+			<gd_npc npc_id="219863" name="Causticgasp Seagric" />
+			<gd_npc npc_id="219864" name="Rotmane Dreadclaw" />
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="188053747" name="Faded High Grade Idian Bundle" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Idian Pouch" base_chance="100" max_drop_rule="2" fixed_chance="true">
+		<gd_maps>
+			<gd_map map_id="220080000" name="Enshar" />
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="219933" name="Arcticore Aizenka" />
+			<gd_npc npc_id="219934" name="Prectaz" />
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="188053748" name="Elegant High Grade Idian Bundle" />
+			<gd_item id="188053748" name="Elegant High Grade Idian Bundle" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Manastone Bundle" base_chance="100" fixed_chance="true">
+		<gd_maps>
+			<gd_map map_id="220080000" name="Enshar" />
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="219853" name="Roughneck Trico" />
+			<gd_npc npc_id="219854" name="Large Seasprite" />
+			<gd_npc npc_id="219855" name="Swollen Yellowthorn Spinefish" />
+			<gd_npc npc_id="219856" name="Erratic Highland Spirit" />
+			<gd_npc npc_id="219857" name="Monstrous Klaw" />
+			<gd_npc npc_id="219859" name="Lunarhulk Sheluk" />
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="188053742" name="Faded Middle Grade Manastone Bundle" chance="80" />
+			<gd_item id="188053904" name="Faded Middle Grade Composite Manastone Bundle" chance="20" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Manastone Bundle" base_chance="100" fixed_chance="true">
+		<gd_maps>
+			<gd_map map_id="220080000" name="Enshar" />
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="219858" name="Wandering Lunashin Ettin" />
+			<gd_npc npc_id="219860" name="Coralscale Nagarant" />
+			<gd_npc npc_id="219861" name="Spotted Vortile" />
+			<gd_npc npc_id="219862" name="Wayfarsand Ksellid" />
+			<gd_npc npc_id="219863" name="Causticgasp Seagric" />
+			<gd_npc npc_id="219864" name="Rotmane Dreadclaw" />
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="188053743" name="Faded High Grade Manastone Bundle" chance="80" />
+			<gd_item id="188053905" name="Faded High Grade Composite Manastone Bundle" chance="20" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Composite Manastone Bundle" base_chance="100" fixed_chance="true">
+		<gd_maps>
+			<gd_map map_id="220080000" name="Enshar" />
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="219926" name="Rootage Rotron" />
+			<gd_npc npc_id="219927" name="Chromascale Dreadclaw" />
+			<gd_npc npc_id="219928" name="Seabrine Jotun" />
+			<gd_npc npc_id="219929" name="Tidalsail Spirit" />
+			<gd_npc npc_id="219930" name="Infernomane Vortile" />
+			<gd_npc npc_id="219931" name="Usurper Demaluk" />
+			<gd_npc npc_id="219932" name="Deputy Brigade General Amar" />
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="188053744" name="Elegant Middle Grade Composite Manastone Bundle" />
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Manastone Pouch" base_chance="100" max_drop_rule="3" fixed_chance="true">
+		<gd_maps>
+			<gd_map map_id="220080000" name="Enshar" />
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="219934" name="Prectaz" />
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="188053744" name="Elegant High Grade Composite Manastone Bundle" />
+			<gd_item id="188053744" name="Elegant High Grade Composite Manastone Bundle" />
+			<gd_item id="188053744" name="Elegant High Grade Composite Manastone Bundle" />
 		</gd_items>
 	</gd_rule>
 </global_rules>
