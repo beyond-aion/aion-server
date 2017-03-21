@@ -239,7 +239,7 @@ public class ItemTemplate extends VisibleObjectTemplate {
 		return itemGroup.getEquipType();
 	}
 
-	public int getPrice() {
+	public long getPrice() {
 		return price;
 	}
 
