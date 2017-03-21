@@ -35,6 +35,7 @@ public class LinkgateFoundryInstance extends GeneralInstanceHandler {
 	public void onDie(Npc npc) {
 		Player player = npc.getAggroList().getMostPlayerDamage();
 		switch (npc.getNpcId()) {
+			case 233898:
 			case 234990:
 			case 234991:
 				spawn(player.getRace() == Race.ELYOS ? 702338 : 702389, 246.74345f, 258.35843f, 312.32327f, (byte) 10);
