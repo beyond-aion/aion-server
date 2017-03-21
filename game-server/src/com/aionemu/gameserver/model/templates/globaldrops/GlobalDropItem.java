@@ -20,7 +20,7 @@ public class GlobalDropItem {
 	@XmlAttribute(name = "id", required = true)
 	private int itemId;
 	@XmlAttribute(name = "chance")
-	private float chance;
+	private float chance = 100f;
 
 	@XmlTransient
 	private ItemTemplate template;

@@ -547,7 +547,7 @@ public class DropRegistrationService {
 			for (int i = 0; i < rule.getMaxDropRule(); i++) { // TODO: Evaluate if necessary
 				float maxSum = calculateChanceSum(tempItems);
 				float sum = 0f;
-				float rnd = Rnd.get(0, (int) (maxSum + 1) * 1000) / 1000f;
+				float rnd = Rnd.get((int) maxSum * 1000 - 1) / 1000f;
 				for (Iterator<GlobalDropItem> iter = tempItems.iterator(); iter.hasNext();) {
 					GlobalDropItem item = iter.next();
 					sum += item.getChance();
