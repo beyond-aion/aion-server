@@ -102,6 +102,14 @@ public class PlayerLeaveWorldService {
 			player.setPrisonTimer(prisonTimer);
 			log.debug("Update prison timer to " + prisonTimer / 1000 + " seconds !");
 		}
+		if (player.getLifeStats().isAlreadyDead()) {
+			if (player.isInInstance() || player.getPanesterraTeam() != null)
+				PlayerReviveService.instanceRevive(player);
+			else
+				PlayerReviveService.bindRevive(player);
+		} else if (DuelService.getInstance().isDueling(player.getObjectId())) {
+			DuelService.getInstance().loseDuel(player);
+		}
 		// store current effects
 		DAOManager.getDAO(PlayerEffectsDAO.class).storePlayerEffects(player);
 		DAOManager.getDAO(PlayerCooldownsDAO.class).storePlayerCooldowns(player);
@@ -116,14 +124,6 @@ public class PlayerLeaveWorldService {
 		player.getEffectController().removeAllEffects(true);
 		player.getLifeStats().cancelAllTasks();
 
-		if (player.getLifeStats().isAlreadyDead()) {
-			if (player.isInInstance() || player.getPanesterraTeam() != null)
-				PlayerReviveService.instanceRevive(player);
-			else
-				PlayerReviveService.bindRevive(player);
-		} else if (DuelService.getInstance().isDueling(player.getObjectId())) {
-			DuelService.getInstance().loseDuel(player);
-		}
 		Summon summon = player.getSummon();
 		if (summon != null) {
 			SummonsService.doMode(SummonMode.RELEASE, summon, UnsummonType.LOGOUT);
