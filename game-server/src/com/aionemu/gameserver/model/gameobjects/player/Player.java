@@ -100,17 +100,14 @@ import com.aionemu.gameserver.world.WorldPosition;
 /**
  * This class is representing Player object, it contains all needed data.
  * 
- * @author -Nemesiss-
- * @author SoulKeeper
- * @author alexa026
- * @author cura
+ * @author -Nemesiss-, SoulKeeper, alexa026, cura
  */
 public class Player extends Creature {
 
-	public RideInfo ride;
-	public InRoll inRoll;
+	public volatile RideInfo ride;
+	public volatile InRoll inRoll;
+	public volatile WindstreamPath windstreamPath;
 	public InGameShop inGameShop;
-	public WindstreamPath windstreamPath;
 	private PlayerAppearance playerAppearance;
 	private PlayerCommonData playerCommonData;
 	private Account playerAccount;

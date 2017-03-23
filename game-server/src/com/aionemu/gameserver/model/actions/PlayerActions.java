@@ -44,10 +44,9 @@ public class PlayerActions extends CreatureActions {
 	public static boolean unsetPlayerMode(Player player, PlayerMode mode) {
 		switch (mode) {
 			case RIDE:
-				RideInfo ride = player.ride;
-				if (ride == null) {
+				if (player.ride == null)
 					return false;
-				}
+				player.ride = null;
 				// check for sprinting when forcefully dismounting player
 				if (player.isInSprintMode()) {
 					if (!player.isInFlyingState())// if player is flying while dismounting, do not start restore task
@@ -57,7 +56,6 @@ public class PlayerActions extends CreatureActions {
 				player.unsetState(CreatureState.RESTING);
 				player.unsetState(CreatureState.FLOATING_CORPSE);
 				player.setState(CreatureState.ACTIVE);
-				player.ride = null;
 				PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.START_EMOTE2, 0, 0), true);
 				PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.RIDE_END), true);
 
@@ -70,15 +68,13 @@ public class PlayerActions extends CreatureActions {
 				player.getRideObservers().clear();
 				return true;
 			case IN_ROLL:
-				if (player.inRoll == null) {
+				if (player.inRoll == null)
 					return false;
-				}
 				player.inRoll = null;
 				return true;
 			case WINDSTREAM:
-				if (player.windstreamPath == null) {
+				if (player.windstreamPath == null)
 					return false;
-				}
 				player.windstreamPath = null;
 				return true;
 			default:

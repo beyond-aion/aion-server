@@ -121,7 +121,7 @@ public class RideAction extends AbstractItemAction {
 
 			@Override
 			public void attacked(Creature creature, int skillId) {
-				if (Rnd.get(1000) < 200)// 20% from client action file
+				if (Rnd.chance() < 20)// 20% from client action file
 					player.unsetPlayerMode(PlayerMode.RIDE);
 			}
 		};
@@ -132,7 +132,7 @@ public class RideAction extends AbstractItemAction {
 
 			@Override
 			public void dotattacked(Creature creature, Effect dotEffect) {
-				if (Rnd.get(1000) < 200)// 20% from client action file
+				if (Rnd.chance() < 20)// 20% from client action file
 					player.unsetPlayerMode(PlayerMode.RIDE);
 			}
 		};
