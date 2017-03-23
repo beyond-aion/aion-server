@@ -545,13 +545,13 @@ public class DropRegistrationService {
 		}
 		if (tempItems.size() >= 1) {
 			for (int i = 0; i < rule.getMaxDropRule(); i++) { // TODO: Evaluate if necessary
-				float maxSum = calculateChanceSum(tempItems);
-				float sum = 0f;
-				float rnd = Rnd.get((int) maxSum * 1000 - 1) / 1000f;
+				float sumOfChances = calculateSumOfChances(tempItems);
+				float currentSum = 0f;
+				float rnd = Rnd.get((int) (sumOfChances * 1000)) / 1000f;
 				for (Iterator<GlobalDropItem> iter = tempItems.iterator(); iter.hasNext();) {
 					GlobalDropItem item = iter.next();
-					sum += item.getChance();
-					if (rnd < sum) {
+					currentSum += item.getChance();
+					if (rnd < currentSum) {
 						allowedItems.add(item.getId());
 						iter.remove();
 						break;
@@ -562,7 +562,7 @@ public class DropRegistrationService {
 		return allowedItems;
 	}
 
-	private float calculateChanceSum(List<GlobalDropItem> items) {
+	private float calculateSumOfChances(List<GlobalDropItem> items) {
 		float sum = 0f;
 		for (GlobalDropItem item : items)
 			sum += item.getChance();

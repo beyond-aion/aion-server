@@ -391,7 +391,7 @@ public class DecomposeAction extends AbstractItemAction {
 		}
 		float sumOfChances = calcSumOfChances(itemsCollections);
 		float currentSum = 0f;
-		float rnd = (float) Rnd.get(0, (int) (sumOfChances - 1) * 1000) / 1000;
+		float rnd = Rnd.get((int) (sumOfChances * 1000)) / 1000f;
 		ExtractedItemsCollection selectedCollection = null;
 		for (ExtractedItemsCollection collection : itemsCollections) {
 			currentSum += collection.getChance();
