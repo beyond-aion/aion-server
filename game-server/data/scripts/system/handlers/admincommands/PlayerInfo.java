@@ -15,7 +15,6 @@ import com.aionemu.gameserver.utils.ChatUtil;
 import com.aionemu.gameserver.utils.Util;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 import com.aionemu.gameserver.world.World;
-import com.google.common.base.Predicate;
 
 /**
  * @author lyahim
@@ -90,14 +89,7 @@ public class PlayerInfo extends AdminCommand {
 				sendInfo(admin, "-group info: no group");
 			else {
 				strbld.append(group.getLeader().getName() + "\n\tMembers:\n");
-				group.applyOnMembers(new Predicate<Player>() {
-
-					@Override
-					public boolean apply(Player player) {
-						strbld.append("\t\t" + player.getName() + "\n");
-						return true;
-					}
-				});
+				group.forEach(player -> strbld.append("\t\t" + player.getName() + "\n"));
 				sendInfo(admin, strbld.toString());
 			}
 		} else if (params[1].equals("skills")) {

@@ -1,42 +1,32 @@
 package com.aionemu.commons.network.util;
 
 import java.util.ArrayList;
-import java.util.Collection;
-
-import org.testng.annotations.Test;
-
-import com.google.common.base.Function;
-import com.google.common.base.Predicate;
-import com.google.common.collect.Collections2;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * This test is for checking print of deadlock report. Should not be executed during unit test phase
  * 
- * @author ATracer
+ * @author ATracer, Neon
  */
 public class DeadlockTest {
 
-	private final Object lock1 = new Object();
-	private final Object lock2 = new Object();
+	private static final Object lock1 = new Object();
+	private static final Object lock2 = new Object();
 
-	@Test(enabled = false)
-	public void testCommon() {
+	public static void main(String... args) {
 		DeadLockDetector dd = new DeadLockDetector(2, DeadLockDetector.NOTHING);
 		dd.start();
 		createDeadlock();
 	}
 
 	/**
-	 * This "smart" logic is for generating long stacktrace
+	 * This complex logic is just to generate a longer stacktrace
 	 */
-	private void createDeadlock() {
-		final Collection<String> coll = new ArrayList<>();
-		coll.add("1");
+	private static void createDeadlock() {
+		List<String> coll = new ArrayList<>(Arrays.asList("1"));
 		synchronized (lock1) {
-			Collection<Integer> filtered = Collections2.filter(Collections2.transform(coll, new Function<String, Integer>() {
-
-				@Override
-				public Integer apply(String input) {
+			coll.stream().mapToInt(Integer::valueOf).forEach(intValue -> {
 
 					new Thread(new Runnable() {
 
@@ -59,16 +49,7 @@ public class DeadlockTest {
 					synchronized (lock2) {
 						System.out.println("This will not be printed");
 					}
-					return Integer.valueOf(input);
-				}
-			}), new Predicate<Integer>() {
-
-				@Override
-				public boolean apply(Integer input) {
-					return true;
-				}
 			});
-			System.out.println(filtered.size());
 		}
 	}
 }

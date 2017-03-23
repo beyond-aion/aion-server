@@ -12,12 +12,11 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_ALLIANCE_MEMBER_INFO
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SHOW_BRAND;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-import com.google.common.base.Predicate;
 
 /**
  * @author ATracer
  */
-public class PlayerEnteredEvent implements Predicate<PlayerAllianceMember>, TeamEvent {
+public class PlayerEnteredEvent implements TeamEvent {
 
 	private final PlayerAlliance alliance;
 	private final Player invited;
@@ -46,29 +45,20 @@ public class PlayerEnteredEvent implements Predicate<PlayerAllianceMember>, Team
 		PacketSendUtility.sendPacket(invited, new SM_SHOW_BRAND(0, 0, alliance.isInLeague()));
 		PacketSendUtility.sendPacket(invited, SM_SYSTEM_MESSAGE.STR_FORCE_ENTERED_FORCE());
 		PacketSendUtility.sendPacket(invited, new SM_ALLIANCE_MEMBER_INFO(invitedMember, PlayerAllianceEvent.JOIN));
-		PacketSendUtility.broadcastPacketTeam(invited, new SM_ABYSS_RANK_UPDATE(1, invited), true, false);
-
-		alliance.apply(this);
+		alliance.forEachTeamMember(member -> {
+			Player player = member.getObject();
+			if (!invited.equals(player)) {
+				PacketSendUtility.sendPacket(player, new SM_ALLIANCE_MEMBER_INFO(invitedMember, PlayerAllianceEvent.JOIN));
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_FORCE_HE_ENTERED_FORCE(invited.getName()));
+				PacketSendUtility.sendPacket(player, new SM_ALLIANCE_INFO(alliance));
+				PacketSendUtility.sendPacket(player, new SM_SHOW_BRAND(0, 0, alliance.isInLeague()));
+				PacketSendUtility.sendPacket(invited, new SM_ALLIANCE_MEMBER_INFO(member, PlayerAllianceEvent.ENTER));
+			}
+		});
+		PacketSendUtility.broadcastPacket(invited, new SM_ABYSS_RANK_UPDATE(1, invited), true);
 
 		if (alliance.isInLeague()) {
 			alliance.getLeague().broadcast();
 		}
 	}
-
-	@Override
-	public boolean apply(PlayerAllianceMember member) {
-		Player player = member.getObject();
-		if (!invited.equals(player)) {
-			PacketSendUtility.sendPacket(player, new SM_ALLIANCE_MEMBER_INFO(invitedMember, PlayerAllianceEvent.JOIN));
-			if (player.getKnownList().knows(invited)) {
-				PacketSendUtility.sendPacket(player, new SM_ABYSS_RANK_UPDATE(1, invited));
-			}
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_FORCE_HE_ENTERED_FORCE(invited.getName()));
-			PacketSendUtility.sendPacket(player, new SM_ALLIANCE_INFO(alliance));
-			PacketSendUtility.sendPacket(player, new SM_SHOW_BRAND(0, 0, alliance.isInLeague()));
-			PacketSendUtility.sendPacket(invited, new SM_ALLIANCE_MEMBER_INFO(member, PlayerAllianceEvent.ENTER));
-		}
-		return true;
-	}
-
 }

@@ -50,14 +50,7 @@ public class PlayerLimitService {
 	}
 
 	public void scheduleUpdate() {
-		CronService.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				sellLimit.clear();
-			}
-
-		}, CustomConfig.LIMITS_UPDATE, true);
+		CronService.getInstance().schedule(() -> sellLimit.clear(), CustomConfig.LIMITS_UPDATE, true);
 	}
 
 	public static PlayerLimitService getInstance() {

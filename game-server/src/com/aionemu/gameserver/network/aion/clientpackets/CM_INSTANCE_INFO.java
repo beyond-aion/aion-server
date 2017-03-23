@@ -1,11 +1,11 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.team.group.PlayerFilters.ExcludePlayerFilter;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_INSTANCE_INFO;
 import com.aionemu.gameserver.utils.collections.ListSplitter;
+import com.aionemu.gameserver.utils.collections.Predicates;
 
 /**
  * @author nrg
@@ -31,7 +31,7 @@ public class CM_INSTANCE_INFO extends AionClientPacket {
 		Player firstObject = player.isInTeam() ? player.getCurrentTeam().getLeaderObject() : player; // always the team leader
 		sendPacket(new SM_INSTANCE_INFO(updateType, firstObject));
 		if (updateType == 1 && player.isInTeam()) {
-			ListSplitter<Player> splitter = new ListSplitter<>(player.getCurrentTeam().filterMembers(new ExcludePlayerFilter(firstObject)), 3, false);
+			ListSplitter<Player> splitter = new ListSplitter<>(player.getCurrentTeam().filterMembers(Predicates.Players.allExcept(firstObject)), 3, false);
 			while (splitter.hasMore())
 				sendPacket(new SM_INSTANCE_INFO((byte) 2, splitter.getNext())); // send info for max 3 members at once
 		}

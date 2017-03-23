@@ -38,7 +38,20 @@ public class PlayerGroupLeavedEvent extends PlayerLeavedEvent<PlayerGroupMember,
 			team.onEvent(new PlayerGroupStopMentoringEvent(team, leavedPlayer));
 		}
 
-		team.apply(this);
+		team.forEach(member -> {
+			PacketSendUtility.sendPacket(member, new SM_GROUP_MEMBER_INFO(team, leavedPlayer, GroupEvent.LEAVE));
+
+			switch (reason) {
+				case LEAVE:
+				case DISBAND:
+					PacketSendUtility.sendPacket(member, SM_SYSTEM_MESSAGE.STR_PARTY_HE_LEAVE_PARTY(leavedPlayer.getName()));
+					break;
+				case BAN:
+					// TODO find out empty strings (Retail has +2 empty strings
+					PacketSendUtility.sendPacket(member, SM_SYSTEM_MESSAGE.STR_PARTY_HE_IS_BANISHED(leavedPlayer.getName()));
+					break;
+			}
+		});
 
 		PacketSendUtility.sendPacket(leavedPlayer, new SM_LEAVE_GROUP_MEMBER());
 		switch (reason) {
@@ -73,25 +86,6 @@ public class PlayerGroupLeavedEvent extends PlayerLeavedEvent<PlayerGroupMember,
 				}
 			}, 10000);
 		}
-	}
-
-	@Override
-	public boolean apply(PlayerGroupMember member) {
-		Player player = member.getObject();
-		PacketSendUtility.sendPacket(player, new SM_GROUP_MEMBER_INFO(team, leavedPlayer, GroupEvent.LEAVE));
-
-		switch (reason) {
-			case LEAVE:
-			case DISBAND:
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_PARTY_HE_LEAVE_PARTY(leavedPlayer.getName()));
-				break;
-			case BAN:
-				// TODO find out empty strings (Retail has +2 empty strings
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_PARTY_HE_IS_BANISHED(leavedPlayer.getName()));
-				break;
-		}
-
-		return true;
 	}
 
 }

@@ -110,32 +110,6 @@ public class PacketSendUtility {
 	}
 
 	/**
-	 * Broadcasts a packet to all players, that the given player knows and are in/not in his team.
-	 *
-	 * @param player
-	 * @param packet
-	 *          ServerPacket that will be broadcast
-	 * @param toSelf
-	 *          true if packet should also be sent to this player
-	 * @param toTeam
-	 *          true if packet should be sent to this player team or all others w/o team members
-	 */
-	public static void broadcastPacketTeam(Player player, AionServerPacket packet, boolean toSelf, boolean toTeam) {
-		if (toSelf)
-			sendPacket(player, packet);
-
-		player.getKnownList().forEachPlayer(p -> {
-			if (toTeam) {
-				if (p.isInTeam() && p.getCurrentTeamId() == player.getCurrentTeamId()) {
-					sendPacket(p, packet);
-				}
-			} else if (!p.isInTeam() || p.getCurrentTeamId() != player.getCurrentTeamId()) {
-				sendPacket(p, packet);
-			}
-		});
-	}
-
-	/**
 	 * Broadcasts a packet to all players, that the given object knows and the object itself, if it's a player.
 	 *
 	 * @param visibleObject

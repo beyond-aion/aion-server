@@ -8,6 +8,8 @@ import java.sql.Timestamp;
 import java.sql.Types;
 import java.util.Collection;
 import java.util.Set;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import javax.annotation.Nullable;
 
@@ -23,8 +25,6 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.QuestStateList;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.google.common.base.Predicate;
-import com.google.common.collect.Collections2;
 
 /**
  * @author MrPoke
@@ -41,7 +41,7 @@ public class MySQL5PlayerQuestListDAO extends PlayerQuestListDAO {
 	private static final Predicate<QuestState> questsToAddPredicate = new Predicate<QuestState>() {
 
 		@Override
-		public boolean apply(@Nullable QuestState input) {
+		public boolean test(@Nullable QuestState input) {
 			return input != null && PersistentState.NEW == input.getPersistentState();
 		}
 	};
@@ -49,7 +49,7 @@ public class MySQL5PlayerQuestListDAO extends PlayerQuestListDAO {
 	private static final Predicate<QuestState> questsToUpdatePredicate = new Predicate<QuestState>() {
 
 		@Override
-		public boolean apply(@Nullable QuestState input) {
+		public boolean test(@Nullable QuestState input) {
 			return input != null && PersistentState.UPDATE_REQUIRED == input.getPersistentState();
 		}
 	};
@@ -57,7 +57,7 @@ public class MySQL5PlayerQuestListDAO extends PlayerQuestListDAO {
 	private static final Predicate<QuestState> questsToDeletePredicate = new Predicate<QuestState>() {
 
 		@Override
-		public boolean apply(@Nullable QuestState input) {
+		public boolean test(@Nullable QuestState input) {
 			return input != null && PersistentState.DELETED == input.getPersistentState();
 		}
 	};
@@ -113,7 +113,7 @@ public class MySQL5PlayerQuestListDAO extends PlayerQuestListDAO {
 	}
 
 	private void addQuests(Connection con, int playerId, Collection<QuestState> states) {
-		states = Collections2.filter(states, questsToAddPredicate);
+		states = states.stream().filter(questsToAddPredicate).collect(Collectors.toList());
 
 		if (GenericValidator.isBlankOrNull(states))
 			return;
@@ -140,7 +140,7 @@ public class MySQL5PlayerQuestListDAO extends PlayerQuestListDAO {
 	}
 
 	private void updateQuests(Connection con, int playerId, Collection<QuestState> states) {
-		states = Collections2.filter(states, questsToUpdatePredicate);
+		states = states.stream().filter(questsToUpdatePredicate).collect(Collectors.toList());
 
 		if (GenericValidator.isBlankOrNull(states))
 			return;
@@ -167,7 +167,7 @@ public class MySQL5PlayerQuestListDAO extends PlayerQuestListDAO {
 	}
 
 	private void deleteQuest(Connection con, int playerId, Collection<QuestState> states, Set<Integer> questIds) {
-		states = Collections2.filter(states, questsToDeletePredicate);
+		states = states.stream().filter(questsToDeletePredicate).collect(Collectors.toList());
 
 		if (GenericValidator.isBlankOrNull(states) && questIds.isEmpty())
 			return;

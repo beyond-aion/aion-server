@@ -66,7 +66,7 @@ public class TargetRelationProperty {
 								}
 							} else if (sourcePlayer.isInGroup() && targetPlayer.isInGroup()) {
 								if (!sourcePlayer.isEnemy(targetPlayer)
-									&& sourcePlayer.getPlayerGroup().getTeamId().equals(targetPlayer.getPlayerGroup().getTeamId())) {
+									&& sourcePlayer.getPlayerGroup().getTeamId() == targetPlayer.getPlayerGroup().getTeamId()) {
 									continue;
 								}
 							} else if (targetPlayer.equals(sourcePlayer)) {

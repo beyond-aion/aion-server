@@ -1,15 +1,13 @@
 package com.aionemu.gameserver.model.team.league.events;
 
-import com.aionemu.gameserver.model.team.TeamEvent;
+import com.aionemu.gameserver.model.team.common.events.AlwaysTrueTeamEvent;
 import com.aionemu.gameserver.model.team.league.League;
-import com.aionemu.gameserver.model.team.league.LeagueMember;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SHOW_BRAND;
-import com.google.common.base.Predicate;
 
 /**
  * @author Tibald
  */
-public class LeagueShowBrandEvent implements Predicate<LeagueMember>, TeamEvent {
+public class LeagueShowBrandEvent extends AlwaysTrueTeamEvent {
 
 	private final League league;
 	private final int targetObjId;
@@ -23,18 +21,7 @@ public class LeagueShowBrandEvent implements Predicate<LeagueMember>, TeamEvent 
 
 	@Override
 	public void handleEvent() {
-		league.apply(this);
-	}
-
-	@Override
-	public boolean apply(LeagueMember alliance) {
-		alliance.getObject().sendPacket(new SM_SHOW_BRAND(brandId, targetObjId, true));
-		return true;
-	}
-
-	@Override
-	public boolean checkCondition() {
-		return true;
+		league.forEach(alliance -> alliance.sendPackets(new SM_SHOW_BRAND(brandId, targetObjId, true)));
 	}
 
 }

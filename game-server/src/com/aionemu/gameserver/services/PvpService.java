@@ -26,8 +26,8 @@ import com.aionemu.gameserver.model.gameobjects.PersistentState;
 import com.aionemu.gameserver.model.gameobjects.player.AbyssRank;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.RewardType;
+import com.aionemu.gameserver.model.team.TemporaryPlayerTeam;
 import com.aionemu.gameserver.model.team.alliance.PlayerAlliance;
-import com.aionemu.gameserver.model.team.group.PlayerFilters;
 import com.aionemu.gameserver.model.team.group.PlayerGroup;
 import com.aionemu.gameserver.model.templates.bounty.BountyTemplate;
 import com.aionemu.gameserver.model.templates.bounty.BountyType;
@@ -44,6 +44,7 @@ import com.aionemu.gameserver.services.item.ItemService.ItemUpdatePredicate;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
+import com.aionemu.gameserver.utils.collections.Predicates;
 import com.aionemu.gameserver.utils.stats.StatFunctions;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
 
@@ -80,8 +81,8 @@ public class PvpService {
 					bounties.add(bounty);
 			}
 			for (BountyTemplate bounty : bounties)
-				ItemService.addItem(player, bounty.getItemId(), bounty.getCount(), true, new ItemUpdatePredicate(ItemAddType.ITEM_COLLECT,
-					ItemUpdateType.INC_CASH_ITEM));
+				ItemService.addItem(player, bounty.getItemId(), bounty.getCount(), true,
+					new ItemUpdatePredicate(ItemAddType.ITEM_COLLECT, ItemUpdateType.INC_CASH_ITEM));
 		}
 	}
 
@@ -106,13 +107,9 @@ public class PvpService {
 
 		if (totalDamage == 0 || winner == null) {
 			PacketSendUtility.sendPacket(victim, SM_SYSTEM_MESSAGE.STR_MSG_COMBAT_MY_DEATH());
-			if (victim.isInGroup()) {
-				victim.getPlayerGroup().sendPacket(SM_SYSTEM_MESSAGE.STR_MSG_COMBAT_FRIENDLY_DEATH(victim.getName()),
-					new PlayerFilters.ExcludePlayerFilter(victim));
-			} else if (victim.isInAlliance()) {
-				victim.getPlayerAlliance().sendPacket(SM_SYSTEM_MESSAGE.STR_MSG_COMBAT_FRIENDLY_DEATH(victim.getName()),
-					new PlayerFilters.ExcludePlayerFilter(victim));
-			}
+			TemporaryPlayerTeam<?> team = victim.getCurrentTeam();
+			if (team != null)
+				team.sendPacket(Predicates.Players.allExcept(victim), SM_SYSTEM_MESSAGE.STR_MSG_COMBAT_FRIENDLY_DEATH(victim.getName()));
 			announceDeath(victim);
 			return;
 		}
@@ -147,8 +144,8 @@ public class PvpService {
 			String mac2 = victim.getClientConnection().getMacAddress();
 			if (mac1 != null && mac2 != null) {
 				if (ip1.equalsIgnoreCase(ip2) && mac1.equalsIgnoreCase(mac2)) {
-					AuditLogger.info(winner, "Possible Power Leveling : " + winner.getName() + " with " + victim.getName() + "; same ip=" + ip1 + " and mac="
-						+ mac1 + ".");
+					AuditLogger.info(winner,
+						"Possible Power Leveling : " + winner.getName() + " with " + victim.getName() + "; same ip=" + ip1 + " and mac=" + mac1 + ".");
 				} else if (mac1.equalsIgnoreCase(mac2)) {
 					AuditLogger.info(winner, "Possible Power Leveling : " + winner.getName() + " with " + victim.getName() + "; same mac=" + mac1 + ".");
 				}
@@ -254,8 +251,8 @@ public class PvpService {
 				if (xpRewardPerMember > 0)
 					memberXpGain = Math.round(xpRewardPerMember * member.getRates().getXpPlayerGainRate());
 				if (dpRewardPerMember > 0)
-					memberDpGain = Math.round(StatFunctions.adjustPvpDpGained(dpRewardPerMember, victim.getLevel(), member.getLevel())
-						* member.getRates().getDpPlayerRate());
+					memberDpGain = Math
+						.round(StatFunctions.adjustPvpDpGained(dpRewardPerMember, victim.getLevel(), member.getLevel()) * member.getRates().getDpPlayerRate());
 
 			}
 			AbyssPointsService.addAp(member, victim, memberApGain);

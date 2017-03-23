@@ -121,7 +121,7 @@ public class CM_CHAT_MESSAGE_PUBLIC extends AionClientPacket {
 	 * @param player
 	 */
 	private void broadcastToGroupMembers(final Player player) {
-		player.getCurrentGroup().sendPacket(new SM_MESSAGE(player, message, type));
+		player.getCurrentGroup().sendPackets(new SM_MESSAGE(player, message, type));
 	}
 
 	/**
@@ -130,7 +130,7 @@ public class CM_CHAT_MESSAGE_PUBLIC extends AionClientPacket {
 	 * @param player
 	 */
 	private void broadcastToAllianceMembers(final Player player) {
-		player.getPlayerAlliance().sendPacket(new SM_MESSAGE(player, message, type));
+		player.getPlayerAlliance().sendPackets(new SM_MESSAGE(player, message, type));
 	}
 
 	/**
@@ -139,7 +139,7 @@ public class CM_CHAT_MESSAGE_PUBLIC extends AionClientPacket {
 	 * @param player
 	 */
 	private void broadcastToLeagueMembers(final Player player) {
-		player.getPlayerAlliance().getLeague().sendPacket(new SM_MESSAGE(player, message, type));
+		player.getPlayerAlliance().getLeague().sendPackets(new SM_MESSAGE(player, message, type));
 	}
 
 	/**

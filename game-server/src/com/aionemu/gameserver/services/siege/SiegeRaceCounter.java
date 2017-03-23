@@ -1,10 +1,11 @@
 package com.aionemu.gameserver.services.siege;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
-import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
@@ -15,7 +16,6 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.siege.SiegeRace;
 import com.aionemu.gameserver.model.team.legion.Legion;
 import com.aionemu.gameserver.world.World;
-import com.google.common.collect.Lists;
 
 /**
  * A class that contains all the counters for the siege. One SiegeCounter per race should be used.
@@ -112,8 +112,8 @@ public class SiegeRaceCounter implements Comparable<SiegeRaceCounter> {
 			return Collections.emptyMap();
 		}
 
-		LinkedList<Map.Entry<K, AtomicLong>> tempList = Lists.newLinkedList(unorderedMap.entrySet());
-		Collections.sort(tempList, new Comparator<Map.Entry<K, AtomicLong>>() {
+		List<Map.Entry<K, AtomicLong>> tempList = new ArrayList<>(unorderedMap.entrySet());
+		tempList.sort(new Comparator<Map.Entry<K, AtomicLong>>() {
 
 			@Override
 			public int compare(Map.Entry<K, AtomicLong> o1, Map.Entry<K, AtomicLong> o2) {

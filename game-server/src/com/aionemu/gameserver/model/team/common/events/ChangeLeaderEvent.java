@@ -26,13 +26,14 @@ public abstract class ChangeLeaderEvent<T extends TemporaryPlayerTeam<?>> extend
 		return eventPlayer == null || eventPlayer.isOnline();
 	}
 
-	@Override
-	public boolean apply(Player player) {
-		if (!player.equals(team.getLeader().getObject()) && player.isOnline()) {
-			changeLeaderTo(player);
-			return false;
-		}
-		return true;
+	protected final void changeLeaderToNextAvailablePlayer() {
+		team.applyOnMembers(member -> {
+			if (member.isOnline() && !member.equals(team.getLeader().getObject())) {
+				changeLeaderTo(member);
+				return false;
+			}
+			return true;
+		});
 	}
 
 	/**

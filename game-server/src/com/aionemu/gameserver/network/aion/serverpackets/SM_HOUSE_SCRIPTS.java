@@ -1,13 +1,13 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
-import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import com.aionemu.gameserver.model.gameobjects.player.PlayerScripts;
 import com.aionemu.gameserver.model.house.PlayerScript;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
-import com.google.common.primitives.Ints;
 
 /**
  * @author Rolandas
@@ -30,7 +30,7 @@ public class SM_HOUSE_SCRIPTS extends AionServerPacket {
 	public SM_HOUSE_SCRIPTS(int address, PlayerScripts scripts, int... scriptIds) {
 		this.address = address;
 		this.scripts = scripts;
-		this.scriptIds = scriptIds.length > 0 ? new HashSet<>(Ints.asList(scriptIds)) : scripts.getIds();
+		this.scriptIds = scriptIds.length > 0 ? IntStream.of(scriptIds).boxed().collect(Collectors.toSet()) : scripts.getIds();
 	}
 
 	@Override

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
+import java.util.function.Predicate;
 
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -11,13 +12,11 @@ import com.aionemu.gameserver.model.team.GeneralTeam;
 import com.aionemu.gameserver.model.team.alliance.PlayerAlliance;
 import com.aionemu.gameserver.model.team.alliance.PlayerAllianceMember;
 import com.aionemu.gameserver.model.team.common.legacy.LootGroupRules;
-import com.aionemu.gameserver.model.team.group.PlayerFilters;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ALLIANCE_INFO;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SHOW_BRAND;
+import com.aionemu.gameserver.utils.collections.Predicates;
 import com.aionemu.gameserver.utils.idfactory.IDFactory;
-import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
 
 /**
  * @author ATracer
@@ -37,7 +36,7 @@ public class League extends GeneralTeam<PlayerAlliance, LeagueMember> {
 	}
 
 	@Override
-	public Collection<PlayerAlliance> getOnlineMembers() {
+	public List<PlayerAlliance> getOnlineMembers() {
 		return getMembers();
 	}
 
@@ -54,18 +53,17 @@ public class League extends GeneralTeam<PlayerAlliance, LeagueMember> {
 	}
 
 	@Override
-	public void sendPacket(AionServerPacket packet) {
+	public void sendPackets(AionServerPacket... packets) {
 		for (PlayerAlliance alliance : getMembers()) {
-			alliance.sendPacket(packet);
+			alliance.sendPackets(packets);
 		}
 	}
 
 	@Override
-	public void sendPacket(AionServerPacket packet, Predicate<PlayerAlliance> predicate) {
+	public void sendPacket(Predicate<PlayerAlliance> predicate, AionServerPacket... packets) {
 		for (PlayerAlliance alliance : getMembers()) {
-			if (predicate.apply(alliance)) {
-				alliance.sendPacket(packet, Predicates.<Player> alwaysTrue());
-			}
+			if (predicate.test(alliance))
+				alliance.sendPackets(packets);
 		}
 	}
 
@@ -160,12 +158,11 @@ public class League extends GeneralTeam<PlayerAlliance, LeagueMember> {
 			for (LeagueMember memberAlliance : members.values()) {
 				PlayerAlliance targetAlliance = memberAlliance.getObject();
 				if (!targetAlliance.equals(skippedAlliance)) {
-					Predicate<Player> predicate = Predicates.<Player> alwaysTrue();
+					Predicate<Player> predicate = Predicates.alwaysTrue();
 					if (skippedPlayer != null) {
-						predicate = new PlayerFilters.ExcludePlayerFilter(skippedPlayer);
+						predicate = Predicates.Players.allExcept(skippedPlayer);
 					}
-					targetAlliance.sendPacket(new SM_ALLIANCE_INFO(targetAlliance, skippedAlliance), predicate);
-					targetAlliance.sendPacket(new SM_SHOW_BRAND(0, 0, true), predicate);
+					targetAlliance.sendPacket(predicate, new SM_ALLIANCE_INFO(targetAlliance, skippedAlliance), new SM_SHOW_BRAND(0, 0, true));
 				}
 			}
 		} finally {

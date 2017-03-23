@@ -13,12 +13,11 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_ALLIANCE_MEMBER_INFO
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SHOW_BRAND;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-import com.google.common.base.Predicate;
 
 /**
  * @author ATracer
  */
-public class PlayerDisconnectedEvent implements TeamEvent, Predicate<PlayerAllianceMember> {
+public class PlayerDisconnectedEvent implements TeamEvent {
 
 	private final PlayerAlliance alliance;
 	private final Player disconnected;
@@ -47,25 +46,20 @@ public class PlayerDisconnectedEvent implements TeamEvent, Predicate<PlayerAllia
 			alliance.onEvent(new ChangeAllianceLeaderEvent(alliance));
 		}
 
-		alliance.apply(this);
+		alliance.forEach(member -> {
+			if (!disconnected.equals(member)) {
+				PacketSendUtility.sendPacket(member, SM_SYSTEM_MESSAGE.STR_FORCE_HE_BECOME_OFFLINE(disconnected.getName()));
+				PacketSendUtility.sendPacket(member, new SM_ALLIANCE_MEMBER_INFO(disconnectedMember, PlayerAllianceEvent.DISCONNECTED));
+				PacketSendUtility.sendPacket(member, new SM_ALLIANCE_INFO(alliance));
+				PacketSendUtility.sendPacket(member, new SM_SHOW_BRAND(0, 0, alliance.isInLeague()));
+			}
+		});
 
 		if (alliance.onlineMembers() <= 1) {
 			PlayerAllianceService.disband(alliance, false);
 		} else if (alliance.isInLeague()) {
 			alliance.getLeague().broadcast(disconnected);
 		}
-	}
-
-	@Override
-	public boolean apply(PlayerAllianceMember member) {
-		Player player = member.getObject();
-		if (!disconnected.equals(player)) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_FORCE_HE_BECOME_OFFLINE(disconnected.getName()));
-			PacketSendUtility.sendPacket(player, new SM_ALLIANCE_MEMBER_INFO(disconnectedMember, PlayerAllianceEvent.DISCONNECTED));
-			PacketSendUtility.sendPacket(player, new SM_ALLIANCE_INFO(alliance));
-			PacketSendUtility.sendPacket(player, new SM_SHOW_BRAND(0, 0, alliance.isInLeague()));
-		}
-		return true;
 	}
 
 }

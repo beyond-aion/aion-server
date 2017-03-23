@@ -9,12 +9,12 @@ import com.aionemu.gameserver.model.gameobjects.player.RequestResponseHandler;
 import com.aionemu.gameserver.model.team.TeamType;
 import com.aionemu.gameserver.model.team.alliance.PlayerAlliance;
 import com.aionemu.gameserver.model.team.alliance.PlayerAllianceService;
-import com.aionemu.gameserver.model.team.group.PlayerFilters.ExcludePlayerFilter;
 import com.aionemu.gameserver.model.team.group.PlayerGroup;
 import com.aionemu.gameserver.model.team.group.PlayerGroupService;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.restrictions.RestrictionsManager;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.collections.Predicates;
 import com.google.common.base.Preconditions;
 
 /**
@@ -50,7 +50,7 @@ public class PlayerAllianceInvite extends RequestResponseHandler<Player> {
 		if (inviter.isInGroup()) {
 			Preconditions.checkState(alliance == null, "If requester is in group - alliance should be null");
 			PlayerGroup group = inviter.getPlayerGroup();
-			playersToAdd.addAll(group.filterMembers(new ExcludePlayerFilter(inviter)));
+			playersToAdd.addAll(group.filterMembers(Predicates.Players.allExcept(inviter)));
 
 			Iterator<Player> pIter = group.getMembers().iterator();
 			while (pIter.hasNext()) {

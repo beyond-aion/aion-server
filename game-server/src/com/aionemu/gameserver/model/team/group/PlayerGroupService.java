@@ -38,7 +38,6 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.TimeUtil;
 import com.aionemu.gameserver.utils.idfactory.IDFactory;
 import com.google.common.base.Preconditions;
-import com.google.common.base.Predicate;
 
 /**
  * @author ATracer
@@ -240,26 +239,18 @@ public class PlayerGroupService {
 		return null;
 	}
 
-	public static class OfflinePlayerChecker implements Runnable, Predicate<PlayerGroupMember> {
-
-		private PlayerGroup currentGroup;
+	public static class OfflinePlayerChecker implements Runnable {
 
 		@Override
 		public void run() {
 			for (PlayerGroup group : groups.values()) {
-				currentGroup = group;
-				group.apply(this);
+				group.forEachTeamMember(member -> {
+					if (!member.isOnline() && TimeUtil.isExpired(member.getLastOnlineTime() + GroupConfig.GROUP_REMOVE_TIME * 1000)) {
+						// TODO LEAVE_TIMEOUT type
+						group.onEvent(new PlayerGroupLeavedEvent(group, member.getObject()));
+					}
+				});
 			}
-			currentGroup = null;
-		}
-
-		@Override
-		public boolean apply(PlayerGroupMember member) {
-			if (!member.isOnline() && TimeUtil.isExpired(member.getLastOnlineTime() + GroupConfig.GROUP_REMOVE_TIME * 1000)) {
-				// TODO LEAVE_TIMEOUT type
-				currentGroup.onEvent(new PlayerGroupLeavedEvent(currentGroup, member.getObject()));
-			}
-			return true;
 		}
 	}
 

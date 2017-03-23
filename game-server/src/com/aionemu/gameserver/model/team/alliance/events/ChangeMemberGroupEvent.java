@@ -10,12 +10,11 @@ import com.aionemu.gameserver.model.team.common.legacy.PlayerAllianceEvent;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ALLIANCE_MEMBER_INFO;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.google.common.base.Preconditions;
-import com.google.common.base.Predicate;
 
 /**
  * @author ATracer
  */
-public class ChangeMemberGroupEvent extends AlwaysTrueTeamEvent implements Predicate<PlayerAllianceMember> {
+public class ChangeMemberGroupEvent extends AlwaysTrueTeamEvent {
 
 	private final PlayerAlliance alliance;
 	private final int firstMemberId;
@@ -43,16 +42,11 @@ public class ChangeMemberGroupEvent extends AlwaysTrueTeamEvent implements Predi
 		} else {
 			moveMemberToGroup(firstMember, allianceGroupId);
 		}
-		alliance.apply(this);
-	}
-
-	@Override
-	public boolean apply(PlayerAllianceMember member) {
-		PacketSendUtility.sendPacket(member.getObject(), new SM_ALLIANCE_MEMBER_INFO(firstMember, PlayerAllianceEvent.MEMBER_GROUP_CHANGE));
-		if (secondMember != null) {
-			PacketSendUtility.sendPacket(member.getObject(), new SM_ALLIANCE_MEMBER_INFO(secondMember, PlayerAllianceEvent.MEMBER_GROUP_CHANGE));
-		}
-		return true;
+		alliance.forEach(member -> {
+			PacketSendUtility.sendPacket(member, new SM_ALLIANCE_MEMBER_INFO(firstMember, PlayerAllianceEvent.MEMBER_GROUP_CHANGE));
+			if (secondMember != null)
+				PacketSendUtility.sendPacket(member, new SM_ALLIANCE_MEMBER_INFO(secondMember, PlayerAllianceEvent.MEMBER_GROUP_CHANGE));
+		});
 	}
 
 	private void swapMembersInGroup(PlayerAllianceMember firstMember, PlayerAllianceMember secondMember) {

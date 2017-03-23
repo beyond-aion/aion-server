@@ -1,5 +1,6 @@
 package com.aionemu.commons.callbacks.util;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -11,7 +12,6 @@ import com.aionemu.commons.callbacks.Callback;
 import com.aionemu.commons.callbacks.CallbackResult;
 import com.aionemu.commons.callbacks.EnhancedObject;
 import com.aionemu.commons.utils.GenericValidator;
-import com.google.common.collect.Maps;
 
 /**
  * Class that implements helper methods for callbacks.<br>
@@ -50,7 +50,7 @@ public class ObjectCallbackHelper {
 
 			Map<Class<? extends Callback>, List<Callback>> cbMap = object.getCallbacks();
 			if (cbMap == null) {
-				cbMap = Maps.newHashMap();
+				cbMap = new HashMap<>();
 				object.setCallbacks(cbMap);
 			}
 

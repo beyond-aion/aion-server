@@ -5,8 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import javax.annotation.Nullable;
 
@@ -14,15 +15,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.database.DatabaseFactory;
-import com.aionemu.commons.utils.GenericValidator;
 import com.aionemu.gameserver.dao.MySQL5DAOUtils;
 import com.aionemu.gameserver.dao.PlayerSkillListDAO;
 import com.aionemu.gameserver.model.gameobjects.PersistentState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.skill.PlayerSkillEntry;
 import com.aionemu.gameserver.model.skill.PlayerSkillList;
-import com.google.common.base.Predicate;
-import com.google.common.collect.Collections2;
 
 /**
  * @author SoulKeeper
@@ -39,7 +37,7 @@ public class MySQL5PlayerSkillListDAO extends PlayerSkillListDAO {
 	private static final Predicate<PlayerSkillEntry> skillsToInsertPredicate = new Predicate<PlayerSkillEntry>() {
 
 		@Override
-		public boolean apply(@Nullable PlayerSkillEntry input) {
+		public boolean test(@Nullable PlayerSkillEntry input) {
 			return input != null && PersistentState.NEW == input.getPersistentState();
 		}
 	};
@@ -47,7 +45,7 @@ public class MySQL5PlayerSkillListDAO extends PlayerSkillListDAO {
 	private static final Predicate<PlayerSkillEntry> skillsToUpdatePredicate = new Predicate<PlayerSkillEntry>() {
 
 		@Override
-		public boolean apply(@Nullable PlayerSkillEntry input) {
+		public boolean test(@Nullable PlayerSkillEntry input) {
 			return input != null && PersistentState.UPDATE_REQUIRED == input.getPersistentState();
 		}
 	};
@@ -55,7 +53,7 @@ public class MySQL5PlayerSkillListDAO extends PlayerSkillListDAO {
 	private static final Predicate<PlayerSkillEntry> skillsToDeletePredicate = new Predicate<PlayerSkillEntry>() {
 
 		@Override
-		public boolean apply(@Nullable PlayerSkillEntry input) {
+		public boolean test(@Nullable PlayerSkillEntry input) {
 			return input != null && PersistentState.DELETED == input.getPersistentState();
 		}
 	};
@@ -113,17 +111,15 @@ public class MySQL5PlayerSkillListDAO extends PlayerSkillListDAO {
 	}
 
 	private void addSkills(Connection con, Player player, List<PlayerSkillEntry> skills) {
-
-		Collection<PlayerSkillEntry> skillsToInsert = Collections2.filter(skills, skillsToInsertPredicate);
-		if (GenericValidator.isBlankOrNull(skillsToInsert)) {
+		skills = skills.stream().filter(skillsToInsertPredicate).collect(Collectors.toList());
+		if (skills.isEmpty())
 			return;
-		}
 
 		PreparedStatement ps = null;
 		try {
 			ps = con.prepareStatement(INSERT_QUERY);
 
-			for (PlayerSkillEntry skill : skillsToInsert) {
+			for (PlayerSkillEntry skill : skills) {
 				ps.setInt(1, player.getObjectId());
 				ps.setInt(2, skill.getSkillId());
 				ps.setInt(3, skill.getSkillLevel());
@@ -140,17 +136,15 @@ public class MySQL5PlayerSkillListDAO extends PlayerSkillListDAO {
 	}
 
 	private void updateSkills(Connection con, Player player, List<PlayerSkillEntry> skills) {
-
-		Collection<PlayerSkillEntry> skillsToUpdate = Collections2.filter(skills, skillsToUpdatePredicate);
-		if (GenericValidator.isBlankOrNull(skillsToUpdate)) {
+		skills = skills.stream().filter(skillsToUpdatePredicate).collect(Collectors.toList());
+		if (skills.isEmpty())
 			return;
-		}
 
 		PreparedStatement ps = null;
 		try {
 			ps = con.prepareStatement(UPDATE_QUERY);
 
-			for (PlayerSkillEntry skill : skillsToUpdate) {
+			for (PlayerSkillEntry skill : skills) {
 				ps.setInt(1, skill.getSkillLevel());
 				ps.setInt(2, player.getObjectId());
 				ps.setInt(3, skill.getSkillId());
@@ -167,17 +161,15 @@ public class MySQL5PlayerSkillListDAO extends PlayerSkillListDAO {
 	}
 
 	private void deleteSkills(Connection con, Player player, List<PlayerSkillEntry> skills) {
-
-		Collection<PlayerSkillEntry> skillsToDelete = Collections2.filter(skills, skillsToDeletePredicate);
-		if (GenericValidator.isBlankOrNull(skillsToDelete)) {
+		skills = skills.stream().filter(skillsToDeletePredicate).collect(Collectors.toList());
+		if (skills.isEmpty())
 			return;
-		}
 
 		PreparedStatement ps = null;
 		try {
 			ps = con.prepareStatement(DELETE_QUERY);
 
-			for (PlayerSkillEntry skill : skillsToDelete) {
+			for (PlayerSkillEntry skill : skills) {
 				ps.setInt(1, player.getObjectId());
 				ps.setInt(2, skill.getSkillId());
 				ps.addBatch();

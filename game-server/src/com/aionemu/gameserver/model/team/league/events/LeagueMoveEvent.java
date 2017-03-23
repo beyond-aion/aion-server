@@ -1,19 +1,16 @@
 package com.aionemu.gameserver.model.team.league.events;
 
-import com.aionemu.gameserver.model.team.TeamEvent;
-import com.aionemu.gameserver.model.team.alliance.PlayerAlliance;
 import com.aionemu.gameserver.model.team.common.events.AlwaysTrueTeamEvent;
 import com.aionemu.gameserver.model.team.league.League;
 import com.aionemu.gameserver.model.team.league.LeagueMember;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ALLIANCE_INFO;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SHOW_BRAND;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
-import com.google.common.base.Predicate;
 
 /**
  * @author Source
  */
-public class LeagueMoveEvent extends AlwaysTrueTeamEvent implements Predicate<LeagueMember>, TeamEvent {
+public class LeagueMoveEvent extends AlwaysTrueTeamEvent {
 
 	private final League league;
 	private final int selectedAllianceId;
@@ -39,27 +36,22 @@ public class LeagueMoveEvent extends AlwaysTrueTeamEvent implements Predicate<Le
 		target.setLeaguePosition(selectedCurrentPosition);
 		selectedName = selected.getObject().getLeaderObject().getName();
 		targetName = target.getObject().getLeaderObject().getName();
-		league.apply(this);
-	}
+		league.forEach(alliance -> {
+			alliance.sendPackets(new SM_ALLIANCE_INFO(alliance));
+			alliance.sendPackets(new SM_SHOW_BRAND(0, 0, true));
 
-	@Override
-	public boolean apply(LeagueMember member) {
-		PlayerAlliance alliance = member.getObject();
-		alliance.sendPacket(new SM_ALLIANCE_INFO(alliance));
-		alliance.sendPacket(new SM_SHOW_BRAND(0, 0, true));
+			if (alliance.getObjectId() == selectedAllianceId) {
+				alliance.sendPackets(SM_SYSTEM_MESSAGE.STR_UNION_CHANGE_FORCE_NUMBER_ME(targetCurrentPosition));
+			} else {
+				alliance.sendPackets(SM_SYSTEM_MESSAGE.STR_UNION_CHANGE_FORCE_NUMBER_HIM(selectedName, targetCurrentPosition));
+			}
 
-		if (member.getObjectId() == selectedAllianceId) {
-			alliance.sendPacket(SM_SYSTEM_MESSAGE.STR_UNION_CHANGE_FORCE_NUMBER_ME(targetCurrentPosition));
-		} else {
-			alliance.sendPacket(SM_SYSTEM_MESSAGE.STR_UNION_CHANGE_FORCE_NUMBER_HIM(selectedName, targetCurrentPosition));
-		}
-
-		if (member.getObjectId() == targetAllianceId) {
-			alliance.sendPacket(SM_SYSTEM_MESSAGE.STR_UNION_CHANGE_FORCE_NUMBER_ME(selectedCurrentPosition));
-		} else {
-			alliance.sendPacket(SM_SYSTEM_MESSAGE.STR_UNION_CHANGE_FORCE_NUMBER_HIM(targetName, selectedCurrentPosition));
-		}
-		return true;
+			if (alliance.getObjectId() == targetAllianceId) {
+				alliance.sendPackets(SM_SYSTEM_MESSAGE.STR_UNION_CHANGE_FORCE_NUMBER_ME(selectedCurrentPosition));
+			} else {
+				alliance.sendPackets(SM_SYSTEM_MESSAGE.STR_UNION_CHANGE_FORCE_NUMBER_HIM(targetName, selectedCurrentPosition));
+			}
+		});
 	}
 
 }

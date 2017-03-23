@@ -1,21 +1,21 @@
 package com.aionemu.gameserver.model.team;
 
-import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.model.gameobjects.AionObject;
-import com.google.common.base.Function;
 import com.google.common.base.Preconditions;
-import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
-import com.google.common.collect.Collections2;
 
 /**
  * @author ATracer
@@ -26,8 +26,6 @@ public abstract class GeneralTeam<M extends AionObject, TM extends TeamMember<M>
 	protected final Map<Integer, TM> members = new ConcurrentHashMap<>();
 	protected final Lock teamLock = new ReentrantLock();
 	private TM leader;
-
-	private final MemberTransformFunction<TM, M> TRANSFORM_FUNCTION = new MemberTransformFunction<>();
 
 	public GeneralTeam(int objId) {
 		super(objId);
@@ -77,16 +75,14 @@ public abstract class GeneralTeam<M extends AionObject, TM extends TeamMember<M>
 	}
 
 	/**
-	 * Apply some predicate on all group members<br>
+	 * Apply some function on all team members<br>
 	 * Should be used only to change state of the group or its members
 	 */
-	public void apply(Predicate<TM> predicate) {
+	public void forEachTeamMember(Consumer<TM> consumer) {
 		lock();
 		try {
 			for (TM member : members.values()) {
-				if (!predicate.apply(member)) {
-					return;
-				}
+				consumer.accept(member);
 			}
 		} finally {
 			unlock();
@@ -94,14 +90,28 @@ public abstract class GeneralTeam<M extends AionObject, TM extends TeamMember<M>
 	}
 
 	/**
-	 * Apply some predicate on all group member's objects<br>
+	 * Apply some function on all team member's objects<br>
 	 * Should be used only to change state of the group or its members
 	 */
-	public void applyOnMembers(Predicate<M> predicate) {
+	public void forEach(Consumer<M> consumer) {
+		lock();
+		try {
+			for (TM member : members.values())
+				consumer.accept(member.getObject());
+		} finally {
+			unlock();
+		}
+	}
+
+	/**
+	 * Apply some function on all team member's objects, until the function returns false<br>
+	 * Should be used only to change state of the group or its members
+	 */
+	public void applyOnMembers(Function<M, Boolean> function) {
 		lock();
 		try {
 			for (TM member : members.values()) {
-				if (!predicate.apply(member.getObject())) {
+				if (!function.apply(member.getObject())) {
 					return;
 				}
 			}
@@ -111,18 +121,18 @@ public abstract class GeneralTeam<M extends AionObject, TM extends TeamMember<M>
 	}
 
 	@Override
-	public Collection<TM> filter(Predicate<TM> predicate) {
-		return Collections2.filter(members.values(), predicate);
+	public List<TM> filter(Predicate<TM> predicate) {
+		return members.values().stream().filter(predicate).collect(Collectors.toList());
 	}
 
 	@Override
-	public Collection<M> filterMembers(Predicate<M> predicate) {
-		return Collections2.filter(Collections2.transform(members.values(), TRANSFORM_FUNCTION), predicate);
+	public List<M> filterMembers(Predicate<M> predicate) {
+		return members.values().stream().map(tm -> tm.getObject()).filter(predicate).collect(Collectors.toList());
 	}
 
 	@Override
-	public Collection<M> getMembers() {
-		return filterMembers(Predicates.<M> alwaysTrue());
+	public List<M> getMembers() {
+		return members.values().stream().map(tm -> tm.getObject()).collect(Collectors.toList());
 	}
 
 	@Override
@@ -131,7 +141,7 @@ public abstract class GeneralTeam<M extends AionObject, TM extends TeamMember<M>
 	}
 
 	@Override
-	public final Integer getTeamId() {
+	public final int getTeamId() {
 		return getObjectId();
 	}
 
@@ -170,15 +180,6 @@ public abstract class GeneralTeam<M extends AionObject, TM extends TeamMember<M>
 
 	protected final void unlock() {
 		teamLock.unlock();
-	}
-
-	private static final class MemberTransformFunction<TM extends TeamMember<M>, M> implements Function<TM, M> {
-
-		@Override
-		public M apply(TM member) {
-			return member.getObject();
-		}
-
 	}
 
 }

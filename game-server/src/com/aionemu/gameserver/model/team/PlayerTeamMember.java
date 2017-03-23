@@ -16,7 +16,7 @@ public class PlayerTeamMember implements TeamMember<Player> {
 	}
 
 	@Override
-	public Integer getObjectId() {
+	public int getObjectId() {
 		return player.getObjectId();
 	}
 

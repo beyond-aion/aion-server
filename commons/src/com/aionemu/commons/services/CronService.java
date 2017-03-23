@@ -2,6 +2,8 @@ package com.aionemu.commons.services;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -25,8 +27,6 @@ import org.slf4j.LoggerFactory;
 import com.aionemu.commons.services.cron.CronServiceException;
 import com.aionemu.commons.services.cron.RunnableRunner;
 import com.aionemu.commons.utils.GenericValidator;
-import com.google.common.collect.Maps;
-import com.google.common.collect.Sets;
 
 /**
  * @author SoulKeeper
@@ -170,7 +170,7 @@ public final class CronService {
 				return Collections.emptySet();
 			}
 
-			Set<JobDetail> result = Sets.newHashSetWithExpectedSize(keys.size());
+			Set<JobDetail> result = new HashSet<>(keys.size());
 			for (JobKey jk : keys) {
 				result.add(scheduler.getJobDetail(jk));
 			}
@@ -187,7 +187,7 @@ public final class CronService {
 			return Collections.emptyMap();
 		}
 
-		Map<Runnable, JobDetail> result = Maps.newHashMap();
+		Map<Runnable, JobDetail> result = new HashMap<>();
 		for (JobDetail jd : jobDetails) {
 			if (GenericValidator.isBlankOrNull(jd.getJobDataMap())) {
 				continue;

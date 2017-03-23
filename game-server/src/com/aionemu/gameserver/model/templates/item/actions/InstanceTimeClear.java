@@ -92,7 +92,7 @@ public class InstanceTimeClear extends AbstractItemAction {
 						player.getPortalCooldownList().removePortalCooldown(mapid);
 
 					if (player.isInTeam())
-						player.getCurrentTeam().sendPacket(new SM_INSTANCE_INFO((byte) 2, player, mapid));
+						player.getCurrentTeam().sendPackets(new SM_INSTANCE_INFO((byte) 2, player, mapid));
 					else
 						PacketSendUtility.sendPacket(player, new SM_INSTANCE_INFO((byte) 2, player, mapid));
 				}

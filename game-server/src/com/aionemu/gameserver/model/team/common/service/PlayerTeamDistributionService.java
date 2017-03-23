@@ -2,6 +2,7 @@ package com.aionemu.gameserver.model.team.common.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.configs.main.CustomConfig;
@@ -17,7 +18,6 @@ import com.aionemu.gameserver.services.abyss.AbyssPointsService;
 import com.aionemu.gameserver.services.drop.DropRegistrationService;
 import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.stats.StatFunctions;
-import com.google.common.base.Predicate;
 
 /**
  * @author ATracer, nrg
@@ -34,7 +34,7 @@ public class PlayerTeamDistributionService {
 
 		// Find team's members and determine highest level
 		PlayerTeamRewardStats filteredStats = new PlayerTeamRewardStats(owner);
-		team.applyOnMembers(filteredStats);
+		team.forEach(filteredStats);
 
 		// All non-mentors are not nearby or dead
 		if (filteredStats.players.isEmpty() || !filteredStats.hasLivingPlayer) {
@@ -93,7 +93,7 @@ public class PlayerTeamDistributionService {
 		}
 	}
 
-	private static class PlayerTeamRewardStats implements Predicate<Player> {
+	private static class PlayerTeamRewardStats implements Consumer<Player> {
 
 		final List<Player> players = new ArrayList<>();
 		int partyLvlSum = 0;
@@ -107,24 +107,22 @@ public class PlayerTeamDistributionService {
 		}
 
 		@Override
-		public boolean apply(Player member) {
+		public void accept(Player member) {
 			if (member.isOnline() && PositionUtil.isInRange(member, owner, GroupConfig.GROUP_MAX_DISTANCE)) {
 				QuestEngine.getInstance().onKill(new QuestEnv(owner, member, 0));
 
 				if (member.isMentor()) {
 					mentorCount++;
-					return true;
+				} else {
+					if (!hasLivingPlayer && !member.getLifeStats().isAlreadyDead())
+						hasLivingPlayer = true;
+
+					players.add(member);
+					partyLvlSum += member.getLevel();
+					if (member.getLevel() > highestLevel)
+						highestLevel = member.getLevel();
 				}
-
-				if (!hasLivingPlayer && !member.getLifeStats().isAlreadyDead())
-					hasLivingPlayer = true;
-
-				players.add(member);
-				partyLvlSum += member.getLevel();
-				if (member.getLevel() > highestLevel)
-					highestLevel = member.getLevel();
 			}
-			return true;
 		}
 	}
 }

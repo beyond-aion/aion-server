@@ -8,7 +8,6 @@ import com.aionemu.gameserver.model.team.league.LeagueMember;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ALLIANCE_INFO;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-import com.google.common.base.Predicate;
 
 /**
  * @author xTz
@@ -30,33 +29,17 @@ public class LeagueChangeLeaderEvent extends ChangeLeaderEvent<PlayerAlliance> {
 		leagueMember.setLeaguePosition(0);
 		league.changeLeader(leagueMember);
 		league.getMember(team.getObjectId()).setLeaguePosition(position);
-		league.apply(new Predicate<LeagueMember>() {
+		league.forEach(alliance -> alliance.forEach(member -> {
+			PacketSendUtility.sendPacket(member, new SM_ALLIANCE_INFO(member.getPlayerAlliance()));
+			if (team.equals(leagueMember.getObject())) {
+				PacketSendUtility.sendPacket(member, SM_SYSTEM_MESSAGE.STR_UNION_CHANGE_FORCE_NUMBER_ME(position));
 
-			@Override
-			public boolean apply(final LeagueMember leagueMember) {
-				leagueMember.getObject().applyOnMembers(new Predicate<Player>() {
-
-					@Override
-					public boolean apply(Player member) {
-						PacketSendUtility.sendPacket(member, new SM_ALLIANCE_INFO(member.getPlayerAlliance()));
-						if (team.equals(leagueMember.getObject())) {
-							PacketSendUtility.sendPacket(member, SM_SYSTEM_MESSAGE.STR_UNION_CHANGE_FORCE_NUMBER_ME(position));
-
-						}
-						PacketSendUtility.sendPacket(member,
-							SM_SYSTEM_MESSAGE.STR_UNION_CHANGE_FORCE_NUMBER_HIM(player.getName(), leagueMember.getLeaguePosition()));
-						if (team.getLeaderObject().equals(member)) {
-							PacketSendUtility.sendPacket(member, SM_SYSTEM_MESSAGE.STR_UNION_CHANGE_LEADER(player.getName(), player.getName()));
-						}
-
-						return true;
-					}
-
-				});
-				return true;
 			}
-
-		});
+			PacketSendUtility.sendPacket(member, SM_SYSTEM_MESSAGE.STR_UNION_CHANGE_FORCE_NUMBER_HIM(player.getName(), leagueMember.getLeaguePosition()));
+			if (team.getLeaderObject().equals(member)) {
+				PacketSendUtility.sendPacket(member, SM_SYSTEM_MESSAGE.STR_UNION_CHANGE_LEADER(player.getName(), player.getName()));
+			}
+		}));
 	}
 
 	@Override

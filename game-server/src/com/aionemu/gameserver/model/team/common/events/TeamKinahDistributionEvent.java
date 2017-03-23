@@ -36,22 +36,18 @@ public class TeamKinahDistributionEvent<T extends TemporaryPlayerTeam<? extends 
 		if (teamSize <= amount) {
 			rewardPerPlayer = amount / teamSize;
 			if (eventPlayer.getInventory().tryDecreaseKinah(amount)) {
-				team.applyOnMembers(this);
+				team.forEach(member -> {
+					if (member.isOnline()) {
+						member.getInventory().increaseKinah(rewardPerPlayer);
+						if (member.equals(eventPlayer)) {
+							PacketSendUtility.sendPacket(member, new SM_SYSTEM_MESSAGE(1390247, amount, teamSize, rewardPerPlayer));
+						} else {
+							PacketSendUtility.sendPacket(member, new SM_SYSTEM_MESSAGE(1390248, eventPlayer.getName(), amount, teamSize, rewardPerPlayer));
+						}
+					}
+				});
 			}
 		}
-	}
-
-	@Override
-	public boolean apply(Player member) {
-		if (member.isOnline()) {
-			member.getInventory().increaseKinah(rewardPerPlayer);
-			if (member.equals(eventPlayer)) {
-				PacketSendUtility.sendPacket(member, new SM_SYSTEM_MESSAGE(1390247, amount, teamSize, rewardPerPlayer));
-			} else {
-				PacketSendUtility.sendPacket(member, new SM_SYSTEM_MESSAGE(1390248, eventPlayer.getName(), amount, teamSize, rewardPerPlayer));
-			}
-		}
-		return true;
 	}
 
 }

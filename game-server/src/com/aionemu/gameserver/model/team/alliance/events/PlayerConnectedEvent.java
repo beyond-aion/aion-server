@@ -9,12 +9,11 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_ALLIANCE_INFO;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ALLIANCE_MEMBER_INFO;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SHOW_BRAND;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-import com.google.common.base.Predicate;
 
 /**
  * @author ATracer
  */
-public class PlayerConnectedEvent extends AlwaysTrueTeamEvent implements Predicate<PlayerAllianceMember> {
+public class PlayerConnectedEvent extends AlwaysTrueTeamEvent {
 
 	private final PlayerAlliance alliance;
 	private final Player connected;
@@ -35,17 +34,13 @@ public class PlayerConnectedEvent extends AlwaysTrueTeamEvent implements Predica
 		PacketSendUtility.sendPacket(connected, new SM_ALLIANCE_MEMBER_INFO(connectedMember, PlayerAllianceEvent.RECONNECT));
 		PacketSendUtility.sendPacket(connected, new SM_SHOW_BRAND(0, 0));
 
-		alliance.apply(this);
-	}
-
-	@Override
-	public boolean apply(PlayerAllianceMember member) {
-		Player player = member.getObject();
-		if (!connected.equals(player)) {
-			PacketSendUtility.sendPacket(player, new SM_ALLIANCE_MEMBER_INFO(connectedMember, PlayerAllianceEvent.RECONNECT));
-			PacketSendUtility.sendPacket(connected, new SM_ALLIANCE_MEMBER_INFO(member, PlayerAllianceEvent.RECONNECT));
-		}
-		return true;
+		alliance.forEachTeamMember(member -> {
+			Player player = member.getObject();
+			if (!connected.equals(player)) {
+				PacketSendUtility.sendPacket(player, new SM_ALLIANCE_MEMBER_INFO(connectedMember, PlayerAllianceEvent.RECONNECT));
+				PacketSendUtility.sendPacket(connected, new SM_ALLIANCE_MEMBER_INFO(member, PlayerAllianceEvent.RECONNECT));
+			}
+		});
 	}
 
 }

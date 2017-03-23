@@ -8,12 +8,11 @@ import com.aionemu.gameserver.model.team.group.PlayerGroupService;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_GROUP_MEMBER_INFO;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-import com.google.common.base.Predicate;
 
 /**
  * @author ATracer
  */
-public class PlayerDisconnectedEvent implements Predicate<Player>, TeamEvent {
+public class PlayerDisconnectedEvent implements TeamEvent {
 
 	private final PlayerGroup group;
 	private final Player player;
@@ -39,19 +38,15 @@ public class PlayerDisconnectedEvent implements Predicate<Player>, TeamEvent {
 			if (player.equals(group.getLeader().getObject())) {
 				group.onEvent(new ChangeGroupLeaderEvent(group));
 			}
-			group.applyOnMembers(this);
+			group.forEach(member -> {
+				if (!member.equals(player)) {
+					PacketSendUtility.sendPacket(member, SM_SYSTEM_MESSAGE.STR_PARTY_HE_BECOME_OFFLINE(player.getName()));
+					PacketSendUtility.sendPacket(member, new SM_GROUP_MEMBER_INFO(group, player, GroupEvent.DISCONNECTED));
+					// disconnect other group members on logout? check
+					PacketSendUtility.sendPacket(player, new SM_GROUP_MEMBER_INFO(group, member, GroupEvent.DISCONNECTED));
+				}
+			});
 		}
-	}
-
-	@Override
-	public boolean apply(Player member) {
-		if (!member.equals(player)) {
-			PacketSendUtility.sendPacket(member, SM_SYSTEM_MESSAGE.STR_PARTY_HE_BECOME_OFFLINE(player.getName()));
-			PacketSendUtility.sendPacket(member, new SM_GROUP_MEMBER_INFO(group, player, GroupEvent.DISCONNECTED));
-			// disconnect other group members on logout? check
-			PacketSendUtility.sendPacket(player, new SM_GROUP_MEMBER_INFO(group, member, GroupEvent.DISCONNECTED));
-		}
-		return true;
 	}
 
 }

@@ -43,7 +43,6 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.TimeUtil;
 import com.google.common.base.Preconditions;
-import com.google.common.base.Predicate;
 
 /**
  * @author ATracer
@@ -284,7 +283,7 @@ public class PlayerAllianceService {
 		return "Number of alliances: " + alliances.size();
 	}
 
-	public static class OfflinePlayerAllianceChecker implements Runnable, Predicate<PlayerAllianceMember> {
+	public static class OfflinePlayerAllianceChecker implements Runnable {
 
 		private PlayerAlliance currentAlliance;
 
@@ -292,21 +291,17 @@ public class PlayerAllianceService {
 		public void run() {
 			for (PlayerAlliance alliance : alliances.values()) {
 				currentAlliance = alliance;
-				alliance.apply(this);
+				alliance.forEachTeamMember(member -> {
+					int kickDelay = currentAlliance.getTeamType().isAutoTeam() ? 60 : GroupConfig.ALLIANCE_REMOVE_TIME;
+					if (!member.isOnline() && TimeUtil.isExpired(member.getLastOnlineTime() + kickDelay * 1000)) {
+						if (currentAlliance.getTeamType().isOffence()) {
+							VortexService.getInstance().removeInvaderPlayer(member.getObject());
+						}
+						currentAlliance.onEvent(new PlayerAllianceLeavedEvent(currentAlliance, member.getObject(), LeaveReson.LEAVE_TIMEOUT));
+					}
+				});
 			}
 			currentAlliance = null;
-		}
-
-		@Override
-		public boolean apply(PlayerAllianceMember member) {
-			int kickDelay = currentAlliance.getTeamType().isAutoTeam() ? 60 : GroupConfig.ALLIANCE_REMOVE_TIME;
-			if (!member.isOnline() && TimeUtil.isExpired(member.getLastOnlineTime() + kickDelay * 1000)) {
-				if (currentAlliance.getTeamType().isOffence()) {
-					VortexService.getInstance().removeInvaderPlayer(member.getObject());
-				}
-				currentAlliance.onEvent(new PlayerAllianceLeavedEvent(currentAlliance, member.getObject(), LeaveReson.LEAVE_TIMEOUT));
-			}
-			return true;
 		}
 
 	}

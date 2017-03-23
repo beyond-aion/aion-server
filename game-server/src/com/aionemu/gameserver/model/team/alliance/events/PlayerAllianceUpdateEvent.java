@@ -6,13 +6,12 @@ import com.aionemu.gameserver.model.team.alliance.PlayerAllianceMember;
 import com.aionemu.gameserver.model.team.common.events.AlwaysTrueTeamEvent;
 import com.aionemu.gameserver.model.team.common.legacy.PlayerAllianceEvent;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ALLIANCE_MEMBER_INFO;
-import com.aionemu.gameserver.utils.PacketSendUtility;
-import com.google.common.base.Predicate;
+import com.aionemu.gameserver.utils.collections.Predicates;
 
 /**
  * @author ATracer
  */
-public class PlayerAllianceUpdateEvent extends AlwaysTrueTeamEvent implements Predicate<PlayerAllianceMember> {
+public class PlayerAllianceUpdateEvent extends AlwaysTrueTeamEvent {
 
 	private final PlayerAlliance alliance;
 	private final Player player;
@@ -38,7 +37,7 @@ public class PlayerAllianceUpdateEvent extends AlwaysTrueTeamEvent implements Pr
 			case MOVEMENT:
 			case UPDATE:
 			case UPDATE_EFFECTS:
-				alliance.apply(this);
+				alliance.sendPacket(Predicates.Players.allExcept(player), new SM_ALLIANCE_MEMBER_INFO(updateMember, allianceEvent, slot));
 				break;
 			default:
 				// Unsupported
@@ -47,10 +46,4 @@ public class PlayerAllianceUpdateEvent extends AlwaysTrueTeamEvent implements Pr
 
 	}
 
-	@Override
-	public boolean apply(PlayerAllianceMember member) {
-		if (!member.getObject().equals(player))
-			PacketSendUtility.sendPacket(member.getObject(), new SM_ALLIANCE_MEMBER_INFO(updateMember, allianceEvent, slot));
-		return true;
-	}
 }

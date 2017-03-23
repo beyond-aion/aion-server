@@ -38,7 +38,6 @@ import com.aionemu.gameserver.model.gameobjects.player.Mailbox;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.PlayerCommonData;
 import com.aionemu.gameserver.world.World;
-import com.google.common.collect.Maps;
 
 /**
  * @author SoulKeeper, Saelya, cura, KID
@@ -72,7 +71,7 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 			return Collections.emptyMap();
 		}
 
-		Map<Integer, String> result = Maps.newHashMap();
+		Map<Integer, String> result = new HashMap<>();
 
 		String sql = "SELECT id, `name` FROM players WHERE id IN(%s)";
 		sql = String.format(sql, StringUtils.join(playerObjectIds, ", "));

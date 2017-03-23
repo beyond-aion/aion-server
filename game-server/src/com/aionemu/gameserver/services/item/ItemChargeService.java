@@ -2,6 +2,7 @@ package com.aionemu.gameserver.services.item;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.stream.Collectors;
 
 import com.aionemu.gameserver.model.DescriptionId;
 import com.aionemu.gameserver.model.gameobjects.Item;
@@ -16,8 +17,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.abyss.AbyssPointsService;
 import com.aionemu.gameserver.services.item.ItemPacketService.ItemUpdateType;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-import com.google.common.base.Predicate;
-import com.google.common.collect.Collections2;
 
 /**
  * @author ATracer
@@ -31,15 +30,8 @@ public class ItemChargeService {
 		if (selectedItem != null) {
 			return Collections.singletonList(selectedItem);
 		}
-		return Collections2.filter(player.getEquipment().getEquippedItems(), new Predicate<Item>() {
-
-			@Override
-			public boolean apply(Item item) {
-				return item.getAvailableChargeLevel(player) != 0 && item.getImprovement() != null && item.getImprovement().getChargeWay() == chargeWay
-					&& item.getChargePoints() < ChargeInfo.LEVEL2;
-			}
-
-		});
+		return player.getEquipment().getEquippedItems().stream().filter(item -> item.getAvailableChargeLevel(player) != 0 && item.getImprovement() != null
+			&& item.getImprovement().getChargeWay() == chargeWay && item.getChargePoints() < ChargeInfo.LEVEL2).collect(Collectors.toList());
 	}
 
 	public static void startChargingEquippedItems(final Player player, int senderObj, final int chargeWay) {

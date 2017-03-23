@@ -6,12 +6,11 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.team.TeamEvent;
 import com.aionemu.gameserver.model.team.TeamMember;
 import com.aionemu.gameserver.model.team.TemporaryPlayerTeam;
-import com.google.common.base.Predicate;
 
 /**
  * @author ATracer
  */
-public abstract class PlayerLeavedEvent<TM extends TeamMember<Player>, T extends TemporaryPlayerTeam<TM>> implements Predicate<TM>, TeamEvent {
+public abstract class PlayerLeavedEvent<TM extends TeamMember<Player>, T extends TemporaryPlayerTeam<TM>> implements TeamEvent {
 
 	public static enum LeaveReson {
 		BAN,

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -400,7 +401,7 @@ public class SiegeService {
 		});
 
 		// Create map FortressId-To-AllTriggers
-		Map<Integer, List<Trigger>> siegeIdToStartTriggers = Maps.newHashMap();
+		Map<Integer, List<Trigger>> siegeIdToStartTriggers = new HashMap<>();
 		for (Map.Entry<Runnable, JobDetail> entry : siegeStartRunables.entrySet()) {
 			SiegeStartRunnable fssr = (SiegeStartRunnable) entry.getKey();
 

@@ -17479,14 +17479,14 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * You distributed %num0 Kinah to %num1 people, giving each %num2 Kinah.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_SPLIT_ME_TO_B(int num0, int num1, int num2) {
+	public static final SM_SYSTEM_MESSAGE STR_MSG_SPLIT_ME_TO_B(long num0, int num1, long num2) {
 		return new SM_SYSTEM_MESSAGE(1390247, num0, num1, num2);
 	}
 
 	/**
 	 * %0 distributed %num1 Kinah among %num2 people, giving %num3 Kinah each.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_SPLIT_B_TO_ME(String value0, int num1, int num2, int num3) {
+	public static final SM_SYSTEM_MESSAGE STR_MSG_SPLIT_B_TO_ME(String value0, long num1, int num2, long num3) {
 		return new SM_SYSTEM_MESSAGE(1390248, value0, num1, num2, num3);
 	}
 
@@ -21804,13 +21804,6 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_UNION_CHANGE_LEADER_TIMEOUT(String value0) {
 		return new SM_SYSTEM_MESSAGE(1400588, value0);
-	}
-
-	/**
-	 * %0 was automatically entrusted with the league leader authority.
-	 */
-	public static final SM_SYSTEM_MESSAGE STR_UNION_CHANGE_LEADER_TIMEOUT(String value0, String value1, String value2) {
-		return new SM_SYSTEM_MESSAGE(1400588, value0, value1, value1);
 	}
 
 	/**

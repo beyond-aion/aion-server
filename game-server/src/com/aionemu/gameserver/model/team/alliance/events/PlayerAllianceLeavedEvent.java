@@ -54,7 +54,24 @@ public class PlayerAllianceLeavedEvent extends PlayerLeavedEvent<PlayerAllianceM
 		team.removeMember(leavedPlayer.getObjectId());
 		team.getViceCaptainIds().remove(leavedPlayer.getObjectId());
 
-		team.apply(this);
+		team.forEach(player -> {
+			switch (reason) {
+				case BAN:
+				case LEAVE:
+					PacketSendUtility.sendPacket(player, new SM_ALLIANCE_MEMBER_INFO(leavedTeamMember, PlayerAllianceEvent.LEAVE)); // LEAVE/BANNED have same id
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_FORCE_LEAVE_HIM(leavedPlayer.getName()));
+					PacketSendUtility.sendPacket(player, new SM_ALLIANCE_INFO(team));
+					PacketSendUtility.sendPacket(player, new SM_SHOW_BRAND(0, 0, team.isInLeague()));
+					break;
+				case LEAVE_TIMEOUT:
+					PacketSendUtility.sendPacket(player, new SM_ALLIANCE_MEMBER_INFO(leavedTeamMember, PlayerAllianceEvent.LEAVE_TIMEOUT));
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_PARTY_ALLIANCE_HE_LEAVED_PARTY_OFFLINE_TIMEOUT(leavedPlayer.getName()));
+					break;
+				case DISBAND:
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_PARTY_ALLIANCE_DISPERSED());
+					break;
+			}
+		});
 		switch (reason) {
 			case BAN:
 			case LEAVE:
@@ -94,29 +111,6 @@ public class PlayerAllianceLeavedEvent extends PlayerLeavedEvent<PlayerAllianceM
 
 			}, 10000);
 		}
-	}
-
-	@Override
-	public boolean apply(PlayerAllianceMember member) {
-		Player player = member.getObject();
-		switch (reason) {
-			case BAN:
-			case LEAVE:
-				PacketSendUtility.sendPacket(player, new SM_ALLIANCE_MEMBER_INFO(leavedTeamMember, PlayerAllianceEvent.LEAVE)); // LEAVE & BANNED have same id
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_FORCE_LEAVE_HIM(leavedPlayer.getName()));
-				PacketSendUtility.sendPacket(player, new SM_ALLIANCE_INFO(team));
-				PacketSendUtility.sendPacket(player, new SM_SHOW_BRAND(0, 0, team.isInLeague()));
-				break;
-			case LEAVE_TIMEOUT:
-				PacketSendUtility.sendPacket(player, new SM_ALLIANCE_MEMBER_INFO(leavedTeamMember, PlayerAllianceEvent.LEAVE_TIMEOUT));
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_PARTY_ALLIANCE_HE_LEAVED_PARTY_OFFLINE_TIMEOUT(leavedPlayer.getName()));
-				break;
-			case DISBAND:
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_PARTY_ALLIANCE_DISPERSED());
-				break;
-		}
-
-		return true;
 	}
 
 }

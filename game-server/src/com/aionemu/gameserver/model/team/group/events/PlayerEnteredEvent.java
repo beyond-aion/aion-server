@@ -10,12 +10,11 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_GROUP_INFO;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_GROUP_MEMBER_INFO;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-import com.google.common.base.Predicate;
 
 /**
  * @author ATracer
  */
-public class PlayerEnteredEvent implements Predicate<Player>, TeamEvent {
+public class PlayerEnteredEvent implements TeamEvent {
 
 	private final PlayerGroup group;
 	private final Player enteredPlayer;
@@ -39,23 +38,15 @@ public class PlayerEnteredEvent implements Predicate<Player>, TeamEvent {
 		PacketSendUtility.sendPacket(enteredPlayer, new SM_GROUP_INFO(group));
 		PacketSendUtility.sendPacket(enteredPlayer, SM_SYSTEM_MESSAGE.STR_PARTY_ENTERED_PARTY());
 		PacketSendUtility.sendPacket(enteredPlayer, new SM_GROUP_MEMBER_INFO(group, enteredPlayer, GroupEvent.JOIN));
-		PacketSendUtility.broadcastPacketTeam(enteredPlayer, new SM_ABYSS_RANK_UPDATE(1, enteredPlayer), true, false);
-		group.applyOnMembers(this);
-	}
-
-	@Override
-	public boolean apply(Player player) {
-		if (!player.equals(enteredPlayer)) {
-			// TODO probably here JOIN event
-			PacketSendUtility.sendPacket(player, new SM_GROUP_MEMBER_INFO(group, enteredPlayer, GroupEvent.ENTER));
-			if (player.getKnownList().knows(enteredPlayer)) {
-				PacketSendUtility.sendPacket(player, new SM_ABYSS_RANK_UPDATE(1, enteredPlayer));
+		group.forEach(member -> {
+			if (!member.equals(enteredPlayer)) {
+				// TODO probably here JOIN event
+				PacketSendUtility.sendPacket(member, new SM_GROUP_MEMBER_INFO(group, enteredPlayer, GroupEvent.ENTER));
+				PacketSendUtility.sendPacket(member, SM_SYSTEM_MESSAGE.STR_PARTY_HE_ENTERED_PARTY(enteredPlayer.getName()));
+				PacketSendUtility.sendPacket(enteredPlayer, new SM_GROUP_MEMBER_INFO(group, member, GroupEvent.ENTER));
 			}
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_PARTY_HE_ENTERED_PARTY(enteredPlayer.getName()));
-
-			PacketSendUtility.sendPacket(enteredPlayer, new SM_GROUP_MEMBER_INFO(group, player, GroupEvent.ENTER));
-		}
-		return true;
+		});
+		PacketSendUtility.broadcastPacket(enteredPlayer, new SM_ABYSS_RANK_UPDATE(1, enteredPlayer), true);
 	}
 
 }

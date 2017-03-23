@@ -1,23 +1,23 @@
 package com.aionemu.gameserver.model.team.league.events;
 
+import java.util.function.Consumer;
+
 import org.apache.commons.lang3.StringUtils;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.team.alliance.PlayerAlliance;
 import com.aionemu.gameserver.model.team.common.events.AlwaysTrueTeamEvent;
 import com.aionemu.gameserver.model.team.league.League;
-import com.aionemu.gameserver.model.team.league.LeagueMember;
 import com.aionemu.gameserver.model.team.league.LeagueService;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ALLIANCE_INFO;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SHOW_BRAND;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-import com.google.common.base.Predicate;
 
 /**
  * @author ATracer
  */
-public class LeagueLeftEvent extends AlwaysTrueTeamEvent implements Predicate<LeagueMember> {
+public class LeagueLeftEvent extends AlwaysTrueTeamEvent implements Consumer<PlayerAlliance> {
 
 	private final League league;
 	private final PlayerAlliance alliance;
@@ -45,27 +45,27 @@ public class LeagueLeftEvent extends AlwaysTrueTeamEvent implements Predicate<Le
 	public void handleEvent() {
 		league.removeMember(alliance.getTeamId());
 		Player newLeader = league.reorganize();
-		league.apply(this);
+		league.forEach(this);
 
 		if (newLeader != null) {
-			league.sendPacket(SM_SYSTEM_MESSAGE.STR_UNION_CHANGE_LEADER_TIMEOUT(newLeader.getName(), StringUtils.EMPTY, StringUtils.EMPTY));
+			league.sendPackets(SM_SYSTEM_MESSAGE.STR_UNION_CHANGE_LEADER_TIMEOUT(newLeader.getName()));
 		}
 
 		switch (reason) {
 			case LEAVE:
-				alliance.sendPacket(new SM_ALLIANCE_INFO(alliance, SM_ALLIANCE_INFO.LEAGUE_LEFT_ME, alliance.getLeaderObject().getName()));
-				alliance.sendPacket(new SM_SHOW_BRAND(0, 0, alliance.isInLeague()));
+				alliance.sendPackets(new SM_ALLIANCE_INFO(alliance, SM_ALLIANCE_INFO.LEAGUE_LEFT_ME, alliance.getLeaderObject().getName()));
+				alliance.sendPackets(new SM_SHOW_BRAND(0, 0, alliance.isInLeague()));
 				checkDisband();
 				break;
 			case EXPEL:
 				// TODO getCaptainName in team
-				alliance.sendPacket(new SM_ALLIANCE_INFO(alliance, SM_ALLIANCE_INFO.LEAGUE_EXPELLED, league.getLeaderObject().getLeader().getName()));
-				alliance.sendPacket(new SM_SHOW_BRAND(0, 0, alliance.isInLeague()));
+				alliance.sendPackets(new SM_ALLIANCE_INFO(alliance, SM_ALLIANCE_INFO.LEAGUE_EXPELLED, league.getLeaderObject().getLeader().getName()));
+				alliance.sendPackets(new SM_SHOW_BRAND(0, 0, alliance.isInLeague()));
 				checkDisband();
 				break;
 			case DISBAND:
-				alliance.sendPacket(new SM_ALLIANCE_INFO(alliance, SM_ALLIANCE_INFO.LEAGUE_DISPERSED, StringUtils.EMPTY));
-				alliance.sendPacket(new SM_SHOW_BRAND(0, 0, alliance.isInLeague()));
+				alliance.sendPackets(new SM_ALLIANCE_INFO(alliance, SM_ALLIANCE_INFO.LEAGUE_DISPERSED, StringUtils.EMPTY));
+				alliance.sendPackets(new SM_SHOW_BRAND(0, 0, alliance.isInLeague()));
 				break;
 		}
 	}
@@ -77,30 +77,21 @@ public class LeagueLeftEvent extends AlwaysTrueTeamEvent implements Predicate<Le
 	}
 
 	@Override
-	public boolean apply(LeagueMember member) {
-		final PlayerAlliance leagueAlliance = member.getObject();
-		leagueAlliance.applyOnMembers(new Predicate<Player>() {
-
-			@Override
-			public boolean apply(Player member) {
-				switch (reason) {
-					case LEAVE:
-						PacketSendUtility.sendPacket(member, new SM_ALLIANCE_INFO(leagueAlliance, SM_ALLIANCE_INFO.LEAGUE_LEFT_HIM, alliance.getLeader()
-							.getName()));
-						PacketSendUtility.sendPacket(member, new SM_SHOW_BRAND(0, 0, leagueAlliance.isInLeague()));
-						break;
-					case EXPEL:
-						// TODO may be EXPEL message only to leader
-						PacketSendUtility.sendPacket(member, new SM_ALLIANCE_INFO(leagueAlliance, SM_ALLIANCE_INFO.LEAGUE_EXPEL, alliance.getLeader().getName()));
-						PacketSendUtility.sendPacket(member, new SM_SHOW_BRAND(0, 0, leagueAlliance.isInLeague()));
-						break;
-				}
-				return true;
+	public void accept(PlayerAlliance leagueAlliance) {
+		leagueAlliance.forEach(member -> {
+			switch (reason) {
+				case LEAVE:
+					PacketSendUtility.sendPacket(member,
+						new SM_ALLIANCE_INFO(leagueAlliance, SM_ALLIANCE_INFO.LEAGUE_LEFT_HIM, alliance.getLeader().getName()));
+					PacketSendUtility.sendPacket(member, new SM_SHOW_BRAND(0, 0, leagueAlliance.isInLeague()));
+					break;
+				case EXPEL:
+					// TODO may be EXPEL message only to leader
+					PacketSendUtility.sendPacket(member, new SM_ALLIANCE_INFO(leagueAlliance, SM_ALLIANCE_INFO.LEAGUE_EXPEL, alliance.getLeader().getName()));
+					PacketSendUtility.sendPacket(member, new SM_SHOW_BRAND(0, 0, leagueAlliance.isInLeague()));
+					break;
 			}
-
 		});
-
-		return true;
 	}
 
 }

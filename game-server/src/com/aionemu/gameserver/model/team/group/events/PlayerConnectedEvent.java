@@ -11,12 +11,11 @@ import com.aionemu.gameserver.model.team.group.PlayerGroupMember;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_GROUP_INFO;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_GROUP_MEMBER_INFO;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-import com.google.common.base.Predicate;
 
 /**
  * @author ATracer
  */
-public class PlayerConnectedEvent extends AlwaysTrueTeamEvent implements Predicate<Player> {
+public class PlayerConnectedEvent extends AlwaysTrueTeamEvent {
 
 	private static final Logger log = LoggerFactory.getLogger(PlayerConnectedEvent.class);
 	private final PlayerGroup group;
@@ -37,15 +36,12 @@ public class PlayerConnectedEvent extends AlwaysTrueTeamEvent implements Predica
 		}
 		PacketSendUtility.sendPacket(player, new SM_GROUP_INFO(group));
 		PacketSendUtility.sendPacket(player, new SM_GROUP_MEMBER_INFO(group, player, GroupEvent.JOIN));
-		group.applyOnMembers(this);
+		group.forEach(member -> {
+			if (!player.equals(member)) {
+				PacketSendUtility.sendPacket(member, new SM_GROUP_MEMBER_INFO(group, player, GroupEvent.ENTER));
+				PacketSendUtility.sendPacket(player, new SM_GROUP_MEMBER_INFO(group, member, GroupEvent.ENTER));
+			}
+		});
 	}
 
-	@Override
-	public boolean apply(Player member) {
-		if (!player.equals(member)) {
-			PacketSendUtility.sendPacket(member, new SM_GROUP_MEMBER_INFO(group, player, GroupEvent.ENTER));
-			PacketSendUtility.sendPacket(player, new SM_GROUP_MEMBER_INFO(group, member, GroupEvent.ENTER));
-		}
-		return true;
-	}
 }

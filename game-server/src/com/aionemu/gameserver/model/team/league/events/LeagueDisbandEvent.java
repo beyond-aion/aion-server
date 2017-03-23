@@ -1,15 +1,13 @@
 package com.aionemu.gameserver.model.team.league.events;
 
-import com.aionemu.gameserver.model.team.alliance.PlayerAlliance;
 import com.aionemu.gameserver.model.team.common.events.AlwaysTrueTeamEvent;
 import com.aionemu.gameserver.model.team.league.League;
 import com.aionemu.gameserver.model.team.league.events.LeagueLeftEvent.LeaveReson;
-import com.google.common.base.Predicate;
 
 /**
  * @author ATracer
  */
-public class LeagueDisbandEvent extends AlwaysTrueTeamEvent implements Predicate<PlayerAlliance> {
+public class LeagueDisbandEvent extends AlwaysTrueTeamEvent {
 
 	private final League league;
 
@@ -19,13 +17,7 @@ public class LeagueDisbandEvent extends AlwaysTrueTeamEvent implements Predicate
 
 	@Override
 	public void handleEvent() {
-		league.applyOnMembers(this);
-	}
-
-	@Override
-	public boolean apply(PlayerAlliance alliance) {
-		league.onEvent(new LeagueLeftEvent(league, alliance, LeaveReson.DISBAND));
-		return true;
+		league.forEach(alliance -> league.onEvent(new LeagueLeftEvent(league, alliance, LeaveReson.DISBAND)));
 	}
 
 }

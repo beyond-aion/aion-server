@@ -1,24 +1,22 @@
 package com.aionemu.gameserver.model.team.league.events;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.team.TeamEvent;
 import com.aionemu.gameserver.model.team.alliance.PlayerAlliance;
 import com.aionemu.gameserver.model.team.common.events.AlwaysTrueTeamEvent;
 import com.aionemu.gameserver.model.team.league.League;
 import com.aionemu.gameserver.model.team.league.LeagueMember;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-import com.google.common.base.Predicate;
 
 /**
  * @author Source
  */
-public class LeagueKinahDistributionEvent extends AlwaysTrueTeamEvent implements Predicate<LeagueMember>, TeamEvent {
+public class LeagueKinahDistributionEvent extends AlwaysTrueTeamEvent {
 
 	private final long amount;
 	private final Player eventPlayer;
 	private long rewardPerPlayer;
-	private long membersOnline;
+	private int membersOnline;
 
 	public LeagueKinahDistributionEvent(Player player, long amount) {
 		eventPlayer = player;
@@ -40,31 +38,21 @@ public class LeagueKinahDistributionEvent extends AlwaysTrueTeamEvent implements
 		if (membersOnline <= amount) {
 			rewardPerPlayer = amount / membersOnline;
 			if (eventPlayer.getInventory().tryDecreaseKinah(amount)) {
-				league.apply(this);
+				league.forEach(alliance -> {
+					alliance.forEach(member -> {
+						if (member.isOnline()) {
+							member.getInventory().increaseKinah(rewardPerPlayer);
+							if (member.equals(eventPlayer)) {
+								PacketSendUtility.sendPacket(member, SM_SYSTEM_MESSAGE.STR_MSG_SPLIT_ME_TO_B(amount, membersOnline, rewardPerPlayer));
+							} else {
+								PacketSendUtility.sendPacket(member,
+									SM_SYSTEM_MESSAGE.STR_MSG_SPLIT_B_TO_ME(eventPlayer.getName(), amount, membersOnline, rewardPerPlayer));
+							}
+						}
+					});
+				});
 			}
 		}
-	}
-
-	@Override
-	public boolean apply(LeagueMember member) {
-		PlayerAlliance alliance = member.getObject();
-		alliance.applyOnMembers(new Predicate<Player>() {
-
-			@Override
-			public boolean apply(Player member) {
-				if (member.isOnline()) {
-					member.getInventory().increaseKinah(rewardPerPlayer);
-					if (member.equals(eventPlayer)) {
-						PacketSendUtility.sendPacket(member, new SM_SYSTEM_MESSAGE(1390247, amount, membersOnline, rewardPerPlayer));
-					} else {
-						PacketSendUtility.sendPacket(member, new SM_SYSTEM_MESSAGE(1390248, eventPlayer.getName(), amount, membersOnline, rewardPerPlayer));
-					}
-				}
-				return true;
-			}
-
-		});
-		return true;
 	}
 
 }

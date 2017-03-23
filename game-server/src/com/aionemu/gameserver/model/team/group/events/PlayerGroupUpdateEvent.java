@@ -5,13 +5,12 @@ import com.aionemu.gameserver.model.team.common.events.AlwaysTrueTeamEvent;
 import com.aionemu.gameserver.model.team.common.legacy.GroupEvent;
 import com.aionemu.gameserver.model.team.group.PlayerGroup;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_GROUP_MEMBER_INFO;
-import com.aionemu.gameserver.utils.PacketSendUtility;
-import com.google.common.base.Predicate;
+import com.aionemu.gameserver.utils.collections.Predicates;
 
 /**
  * @author ATracer
  */
-public class PlayerGroupUpdateEvent extends AlwaysTrueTeamEvent implements Predicate<Player> {
+public class PlayerGroupUpdateEvent extends AlwaysTrueTeamEvent {
 
 	private final PlayerGroup group;
 	private final Player player;
@@ -31,15 +30,7 @@ public class PlayerGroupUpdateEvent extends AlwaysTrueTeamEvent implements Predi
 
 	@Override
 	public void handleEvent() {
-		group.applyOnMembers(this);
-	}
-
-	@Override
-	public boolean apply(Player member) {
-		if (!player.equals(member)) {
-			PacketSendUtility.sendPacket(member, new SM_GROUP_MEMBER_INFO(group, player, groupEvent, slot));
-		}
-		return true;
+		group.sendPacket(Predicates.Players.allExcept(player), new SM_GROUP_MEMBER_INFO(group, player, groupEvent, slot));
 	}
 
 }

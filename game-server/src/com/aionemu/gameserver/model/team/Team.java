@@ -1,17 +1,17 @@
 package com.aionemu.gameserver.model.team;
 
-import java.util.Collection;
+import java.util.List;
+import java.util.function.Predicate;
 
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
-import com.google.common.base.Predicate;
 
 /**
  * @author ATracer
  */
 public interface Team<M, TM extends TeamMember<M>> {
 
-	Integer getTeamId();
+	int getTeamId();
 
 	TM getMember(int objectId);
 
@@ -23,19 +23,19 @@ public interface Team<M, TM extends TeamMember<M>> {
 
 	void removeMember(int objectId);
 
-	Collection<M> getMembers();
+	List<M> getMembers();
 
-	Collection<M> getOnlineMembers();
+	List<M> getOnlineMembers();
 
 	void onEvent(TeamEvent event);
 
-	Collection<TM> filter(Predicate<TM> predicate);
+	List<TM> filter(Predicate<TM> predicate);
 
-	Collection<M> filterMembers(Predicate<M> predicate);
+	List<M> filterMembers(Predicate<M> predicate);
 
-	void sendPacket(AionServerPacket packet);
+	void sendPackets(AionServerPacket... packets);
 
-	void sendPacket(AionServerPacket packet, Predicate<M> predicate);
+	void sendPacket(Predicate<M> predicate, AionServerPacket... packets);
 
 	int onlineMembers();
 

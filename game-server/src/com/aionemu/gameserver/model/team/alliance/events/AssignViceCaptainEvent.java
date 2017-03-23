@@ -17,7 +17,6 @@ public class AssignViceCaptainEvent extends AbstractTeamPlayerEvent<PlayerAllian
 		PROMOTE,
 		DEMOTE_CAPTAIN_TO_VICECAPTAIN,
 		DEMOTE
-
 	}
 
 	private final AssignType assignType;
@@ -52,26 +51,23 @@ public class AssignViceCaptainEvent extends AbstractTeamPlayerEvent<PlayerAllian
 				break;
 		}
 
-		team.applyOnMembers(this);
+		team.forEach(member -> {
+			int messageId = 0;
+			switch (assignType) {
+				case PROMOTE:
+					messageId = SM_ALLIANCE_INFO.VICECAPTAIN_PROMOTE;
+					break;
+				case DEMOTE:
+					messageId = SM_ALLIANCE_INFO.VICECAPTAIN_DEMOTE;
+					break;
+			}
+			// TODO check whether same is sent to eventPlayer
+			PacketSendUtility.sendPacket(member, new SM_ALLIANCE_INFO(team, messageId, eventPlayer.getName()));
+		});
+
 		if (team.isInLeague()) {
 			team.getLeague().broadcast();
 		}
-	}
-
-	@Override
-	public boolean apply(Player player) {
-		int messageId = 0;
-		switch (assignType) {
-			case PROMOTE:
-				messageId = SM_ALLIANCE_INFO.VICECAPTAIN_PROMOTE;
-				break;
-			case DEMOTE:
-				messageId = SM_ALLIANCE_INFO.VICECAPTAIN_DEMOTE;
-				break;
-		}
-		// TODO check whether same is sent to eventPlayer
-		PacketSendUtility.sendPacket(player, new SM_ALLIANCE_INFO(team, messageId, eventPlayer.getName()));
-		return true;
 	}
 
 }

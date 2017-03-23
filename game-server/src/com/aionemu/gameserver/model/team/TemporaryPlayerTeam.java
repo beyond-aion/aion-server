@@ -1,18 +1,17 @@
 package com.aionemu.gameserver.model.team;
 
-import java.util.Collection;
+import java.util.List;
+import java.util.function.Predicate;
 
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.team.common.legacy.LootGroupRules;
 import com.aionemu.gameserver.model.team.common.legacy.LootRuleType;
-import com.aionemu.gameserver.model.team.group.PlayerFilters;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_PET;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
+import com.aionemu.gameserver.utils.collections.Predicates;
 
 /**
  * @author ATracer
@@ -41,13 +40,18 @@ public abstract class TemporaryPlayerTeam<TM extends TeamMember<Player>> extends
 	}
 
 	@Override
-	public void sendPacket(AionServerPacket packet) {
-		applyOnMembers(new TeamMessageSender(packet, Predicates.<Player> alwaysTrue()));
+	public void sendPackets(AionServerPacket... packets) {
+		sendPacket(Predicates.alwaysTrue(), packets);
 	}
 
 	@Override
-	public void sendPacket(AionServerPacket packet, Predicate<Player> predicate) {
-		applyOnMembers(new TeamMessageSender(packet, predicate));
+	public void sendPacket(Predicate<Player> predicate, AionServerPacket... packets) {
+		forEach(player -> {
+			if (predicate.test(player)) {
+				for (AionServerPacket packet : packets)
+					PacketSendUtility.sendPacket(player, packet);
+			}
+		});
 	}
 
 	@Override
@@ -56,8 +60,8 @@ public abstract class TemporaryPlayerTeam<TM extends TeamMember<Player>> extends
 	}
 
 	@Override
-	public final Collection<Player> getOnlineMembers() {
-		return filterMembers(PlayerFilters.ONLINE);
+	public final List<Player> getOnlineMembers() {
+		return filterMembers(Predicates.Players.ONLINE);
 	}
 
 	protected final void initializeTeam(TM leader) {
@@ -71,46 +75,7 @@ public abstract class TemporaryPlayerTeam<TM extends TeamMember<Player>> extends
 	public void setLootGroupRules(LootGroupRules lootGroupRules) {
 		this.lootGroupRules = lootGroupRules;
 		if (lootGroupRules != null && lootGroupRules.getLootRule() == LootRuleType.FREEFORALL) {
-			applyOnMembers(new TeamPacketGroupSender(PlayerFilters.HAS_LOOT_PET, SM_SYSTEM_MESSAGE.STR_MSG_LOOTING_PET_MESSAGE03(), new SM_PET(13, false)));
-		}
-	}
-
-	public static final class TeamPacketGroupSender implements Predicate<Player> {
-
-		private final AionServerPacket[] packets;
-		private final Predicate<Player> predicate;
-
-		public TeamPacketGroupSender(Predicate<Player> predicate, AionServerPacket... packets) {
-			this.packets = packets;
-			this.predicate = predicate;
-		}
-
-		@Override
-		public boolean apply(Player player) {
-			if (predicate.apply(player)) {
-				for (AionServerPacket packet : packets)
-					PacketSendUtility.sendPacket(player, packet);
-			}
-			return true;
-		}
-	}
-
-	public static final class TeamMessageSender implements Predicate<Player> {
-
-		private final AionServerPacket packet;
-		private final Predicate<Player> predicate;
-
-		public TeamMessageSender(AionServerPacket packet, Predicate<Player> predicate) {
-			this.packet = packet;
-			this.predicate = predicate;
-		}
-
-		@Override
-		public boolean apply(Player player) {
-			if (predicate.apply(player)) {
-				PacketSendUtility.sendPacket(player, packet);
-			}
-			return true;
+			sendPacket(Predicates.Players.WITH_LOOT_PET, SM_SYSTEM_MESSAGE.STR_MSG_LOOTING_PET_MESSAGE03(), new SM_PET(13, false));
 		}
 	}
 

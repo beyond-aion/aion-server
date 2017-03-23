@@ -17,7 +17,7 @@ public class LeagueMember implements TeamMember<PlayerAlliance> {
 	}
 
 	@Override
-	public Integer getObjectId() {
+	public int getObjectId() {
 		return alliance.getObjectId();
 	}
 

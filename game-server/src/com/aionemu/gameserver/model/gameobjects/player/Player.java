@@ -1079,7 +1079,7 @@ public class Player extends Creature {
 
 	public boolean isInSameTeam(Player player) {
 		if (isInGroup() && player.isInGroup()) {
-			return getPlayerGroup().getTeamId().equals(player.getPlayerGroup().getTeamId());
+			return getPlayerGroup().getTeamId() == player.getPlayerGroup().getTeamId();
 		} else if (isInAlliance() && player.isInAlliance()) {
 			return getPlayerAlliance().equals(player.getPlayerAlliance());
 		} else if (isInLeague() && player.isInLeague()) {
