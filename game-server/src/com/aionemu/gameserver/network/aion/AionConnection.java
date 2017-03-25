@@ -43,8 +43,8 @@ public class AionConnection extends AConnection<AionServerPacket> {
 	 */
 	private static final Logger log = LoggerFactory.getLogger(AionConnection.class);
 
-	private static final PacketProcessor<AionConnection> packetProcessor = new PacketProcessor<>(
-		NetworkConfig.PACKET_PROCESSOR_MIN_THREADS, NetworkConfig.PACKET_PROCESSOR_MAX_THREADS, NetworkConfig.PACKET_PROCESSOR_THREAD_SPAWN_THRESHOLD,
+	private static final PacketProcessor<AionConnection> packetProcessor = new PacketProcessor<>(NetworkConfig.PACKET_PROCESSOR_MIN_THREADS,
+		NetworkConfig.PACKET_PROCESSOR_MAX_THREADS, NetworkConfig.PACKET_PROCESSOR_THREAD_SPAWN_THRESHOLD,
 		NetworkConfig.PACKET_PROCESSOR_THREAD_KILL_THRESHOLD, new ExecuteWrapper());
 
 	/**
@@ -258,8 +258,7 @@ public class AionConnection extends AConnection<AionServerPacket> {
 			msg += " [Player: " + player.getName() + "]";
 			// force stop movement of player
 			player.getMoveController().abortMove();
-
-			ThreadPoolManager.getInstance().schedule(() -> PlayerLeaveWorldService.leaveWorld(player), 10 * 1000); // prevent ctrl+alt+del / close window exploit
+			PlayerLeaveWorldService.leaveWorldDelayed(player, 10 * 1000); // delayed to prevent ctrl+alt+del / close window exploit
 		}
 
 		if (!msg.isEmpty())

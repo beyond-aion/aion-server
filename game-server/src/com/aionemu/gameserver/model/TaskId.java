@@ -5,11 +5,11 @@ package com.aionemu.gameserver.model;
  */
 public enum TaskId {
 	DECAY,
-	RESPAWN,
+	RESPAWN, // npc respawn task / player teleport task after leave animation
 	PRISON,
 	PROTECTION_ACTIVE,
 	DROWN,
-	DESPAWN,
+	DESPAWN, // npc despawn task / player leaveWorld task after dc/sendlog error
 	/**
 	 * Quest task with timer
 	 */

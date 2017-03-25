@@ -31,7 +31,7 @@ public abstract class PlayerInfo extends AionServerPacket {
 		CharacterBanInfo cbi = accPlData.getCharBanInfo();
 		boolean isBanned = (cbi != null && cbi.getEnd() > System.currentTimeMillis() / 1000);
 
-		List<Item> itemList = new ArrayList<>();
+		List<Item> itemList = new ArrayList<>(16);
 		for (Item item : accPlData.getEquipment()) {
 			if (itemList.size() == 16)
 				break;

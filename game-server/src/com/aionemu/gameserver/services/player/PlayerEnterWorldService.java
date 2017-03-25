@@ -144,7 +144,7 @@ public final class PlayerEnterWorldService {
 	private static final String versionInfo = "Server Revision: " + gsVer.getRevision() + ", built on " + ServerTime.parse(gsVer.getDate());
 	private static final ConcurrentLinkedQueue<Integer> enteringWorld = new ConcurrentLinkedQueue<>();
 
-	public static final void enterWorld(final AionConnection client, int objectId) {
+	public static void enterWorld(final AionConnection client, int objectId) {
 		Account account = client.getAccount();
 		PlayerAccountData playerAccData = account.getPlayerAccountData(objectId);
 		if (playerAccData == null) {
@@ -160,9 +160,15 @@ public final class PlayerEnterWorldService {
 			return;
 		}
 
-		if (World.getInstance().findPlayer(objectId) != null) {
-			log.warn("Player enterWorld fail: Duplicate character obj ID {} found in world.", objectId);
-			client.sendPacket(new SM_ENTER_WORLD_CHECK(Msg.CONNECTION_ERROR));
+		Player playerInWorld = World.getInstance().findPlayer(objectId);
+		if (playerInWorld != null) {
+			if (playerInWorld.getController().hasTask(TaskId.DESPAWN)) { // character will soon leave the world (due to previous client crash)
+				// for now we close the connection to force a reload of pcd since it's not up to date yet (player will be saved on leaveWorld)
+				client.close(new SM_ENTER_WORLD_CHECK(Msg.CHAR_ALREADY_ONLINE));
+			} else {
+				log.warn("Player enterWorld fail: Duplicate character obj ID {} found in world.", objectId);
+				client.sendPacket(new SM_ENTER_WORLD_CHECK(Msg.CONNECTION_ERROR));
+			}
 			return;
 		}
 
@@ -269,7 +275,7 @@ public final class PlayerEnterWorldService {
 		}
 	}
 
-	private static final void enterWorld(AionConnection client, Player player) {
+	private static void enterWorld(AionConnection client, Player player) {
 		Account account = player.getPlayerAccount();
 		PlayerCommonData pcd = player.getCommonData();
 

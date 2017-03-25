@@ -1,6 +1,7 @@
 package com.aionemu.gameserver.services.player;
 
 import java.sql.Timestamp;
+import java.util.concurrent.Future;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,6 +17,7 @@ import com.aionemu.gameserver.dao.PlayerEffectsDAO;
 import com.aionemu.gameserver.dao.PlayerLifeStatsDAO;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.dataholders.PlayerInitialData.LocationData;
+import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Summon;
 import com.aionemu.gameserver.model.gameobjects.player.BindPointPosition;
 import com.aionemu.gameserver.model.gameobjects.player.FriendList;
@@ -44,6 +46,7 @@ import com.aionemu.gameserver.services.instance.InstanceService;
 import com.aionemu.gameserver.services.summons.SummonsService;
 import com.aionemu.gameserver.services.toypet.PetSpawnService;
 import com.aionemu.gameserver.taskmanager.tasks.ExpireTimerTask;
+import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.audit.GMService;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.WorldPosition;
@@ -57,13 +60,24 @@ public class PlayerLeaveWorldService {
 	private static final Logger log = LoggerFactory.getLogger(PlayerLeaveWorldService.class);
 
 	/**
-	 * This method is called when player leaves the game, which includes just two cases: either player goes back to char selection screen or it's
-	 * leaving the game [closing client].<br>
+	 * This method is called when a player loses client connection, e.g. when killing the process, or due to bad network connectivity.<br>
 	 * <br>
-	 * <b><font color='red'>NOTICE:</font> This method is called only from {@link AionConnection} and {@link CM_QUIT} and must not be called from
-	 * anywhere else</b>
+	 * <b><font color='red'>NOTICE:</font> This method must only be called from {@link AionConnection#onDisconnect()} and not from anywhere else</b>
+	 * 
+	 * @see #leaveWorld(Player)
 	 */
-	public static final void leaveWorld(Player player) {
+	public static void leaveWorldDelayed(Player player, int delayInMillis) {
+		Future<?> leaveWorldTask = ThreadPoolManager.getInstance().schedule(() -> leaveWorld(player), delayInMillis);
+		player.getController().addTask(TaskId.DESPAWN, leaveWorldTask);
+	}
+
+	/**
+	 * This method saves a player and removes him from the world. It is called when a player leaves the game, which includes just two cases: either
+	 * he goes back to char selection screen or is leaving the game (closing client).<br>
+	 * <br>
+	 * <b><font color='red'>NOTICE:</font> This method is called only from {@link CM_QUIT} and must not be called from anywhere else</b>
+	 */
+	public static void leaveWorld(Player player) {
 		WorldPosition pos = player.getPosition();
 		if (pos == null || pos.getMapRegion() == null) { // ensure safe logout
 			log.warn(player + " had invalid position: " + pos + " so he was reset to bind point");
