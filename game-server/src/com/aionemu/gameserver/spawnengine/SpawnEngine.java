@@ -91,10 +91,7 @@ public class SpawnEngine {
 	 */
 	public static SiegeSpawnTemplate addNewSiegeSpawn(int worldId, int npcId, int siegeId, SiegeRace race, SiegeModType mod, float x, float y, float z,
 		byte heading) {
-		SiegeSpawnTemplate spawnTemplate = new SiegeSpawnTemplate(new SpawnGroup(worldId, npcId), x, y, z, heading, 0, null, 0, 0);
-		spawnTemplate.setSiegeId(siegeId);
-		spawnTemplate.setSiegeRace(race);
-		spawnTemplate.setSiegeModType(mod);
+		SiegeSpawnTemplate spawnTemplate = new SiegeSpawnTemplate(siegeId, race, mod, new SpawnGroup(worldId, npcId), x, y, z, heading, 0, null, 0, 0);
 		return spawnTemplate;
 	}
 

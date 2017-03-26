@@ -184,7 +184,7 @@ public abstract class Siege<SL extends SiegeLocation> {
 		SiegeService.getInstance().spawnNpcs(locationId, race, type);
 	}
 
-	protected void deSpawnNpcs(int locationId) {
+	protected void despawnNpcs(int locationId) {
 		SiegeService.getInstance().deSpawnNpcs(locationId);
 	}
 

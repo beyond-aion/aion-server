@@ -2,7 +2,6 @@ package com.aionemu.gameserver.model.templates.spawns.siegespawns;
 
 import com.aionemu.gameserver.model.siege.SiegeModType;
 import com.aionemu.gameserver.model.siege.SiegeRace;
-import com.aionemu.gameserver.model.siege.SiegeSpawnType;
 import com.aionemu.gameserver.model.templates.spawns.SpawnGroup;
 import com.aionemu.gameserver.model.templates.spawns.SpawnSpotTemplate;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
@@ -12,17 +11,23 @@ import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
  */
 public class SiegeSpawnTemplate extends SpawnTemplate {
 
-	private int siegeId;
-	private SiegeRace siegeRace;
-	private SiegeSpawnType siegeSpawnType;
-	private SiegeModType siegeModType;
+	private final int siegeId;
+	private final SiegeRace siegeRace;
+	private final SiegeModType siegeModType;
 
-	public SiegeSpawnTemplate(SpawnGroup spawnGroup, SpawnSpotTemplate spot) {
+	public SiegeSpawnTemplate(int siegeId, SiegeRace siegeRace, SiegeModType siegeModType, SpawnGroup spawnGroup, SpawnSpotTemplate spot) {
 		super(spawnGroup, spot);
+		this.siegeId = siegeId;
+		this.siegeRace = siegeRace;
+		this.siegeModType = siegeModType;
 	}
 
-	public SiegeSpawnTemplate(SpawnGroup spawnGroup, float x, float y, float z, byte heading, int randWalk, String walkerId, int staticId, int fly) {
+	public SiegeSpawnTemplate(int siegeId, SiegeRace siegeRace, SiegeModType siegeModType, SpawnGroup spawnGroup, float x, float y, float z,
+		byte heading, int randWalk, String walkerId, int staticId, int fly) {
 		super(spawnGroup, x, y, z, heading, randWalk, walkerId, staticId, fly);
+		this.siegeId = siegeId;
+		this.siegeRace = siegeRace;
+		this.siegeModType = siegeModType;
 	}
 
 	public int getSiegeId() {
@@ -33,39 +38,7 @@ public class SiegeSpawnTemplate extends SpawnTemplate {
 		return siegeRace;
 	}
 
-	public SiegeSpawnType getSiegeSpawnType() {
-		return siegeSpawnType;
-	}
-
 	public SiegeModType getSiegeModType() {
 		return siegeModType;
-	}
-
-	public void setSiegeId(int siegeId) {
-		this.siegeId = siegeId;
-	}
-
-	public void setSiegeRace(SiegeRace siegeRace) {
-		this.siegeRace = siegeRace;
-	}
-
-	public void setSiegeSpawnType(SiegeSpawnType siegeSpawnType) {
-		this.siegeSpawnType = siegeSpawnType;
-	}
-
-	public void setSiegeModType(SiegeModType siegeModType) {
-		this.siegeModType = siegeModType;
-	}
-
-	public final boolean isPeace() {
-		return siegeModType.equals(SiegeModType.PEACE);
-	}
-
-	public final boolean isSiege() {
-		return siegeModType.equals(SiegeModType.SIEGE);
-	}
-
-	public final boolean isAssault() {
-		return siegeModType.equals(SiegeModType.ASSAULT);
 	}
 }

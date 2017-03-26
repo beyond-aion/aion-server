@@ -171,7 +171,7 @@ public class AgentSiege extends Siege<AgentLocation> {
 		for (SpawnGroup group : siegeSpawns) {
 			for (SpawnTemplate template : group.getSpawnTemplates()) {
 				SiegeSpawnTemplate siegetemplate = (SiegeSpawnTemplate) template;
-				if (siegetemplate.getSiegeRace().equals(SiegeRace.BALAUR) && siegetemplate.getSiegeModType().equals(SiegeModType.SIEGE)) {
+				if (siegetemplate.getSiegeRace() == SiegeRace.BALAUR && siegetemplate.getSiegeModType() == SiegeModType.SIEGE) {
 					SiegeNpc npc = (SiegeNpc) SpawnEngine.spawnObject(siegetemplate, 1);
 					if (npc.getSpawn().getHandlerType() == SpawnHandlerType.BOSS)
 						initNpc(npc);

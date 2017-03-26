@@ -38,7 +38,7 @@ public class SiegeSpawn {
 
 		@XmlElement(name = "siege_mod")
 		private List<SiegeModTemplate> SiegeModTemplates;
-		@XmlAttribute(name = "race")
+		@XmlAttribute(name = "race", required = true)
 		private SiegeRace race;
 
 		public SiegeRace getSiegeRace() {

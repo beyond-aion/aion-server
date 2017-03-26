@@ -5,6 +5,7 @@ import com.aionemu.commons.callbacks.CallbackResult;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.siege.SiegeNpc;
+import com.aionemu.gameserver.model.siege.SiegeModType;
 
 /**
  * @author Rolandas
@@ -27,7 +28,7 @@ public abstract class AddAPGlobalCallback implements Callback {
 		if (creature instanceof Player) {
 			onAbyssPointsAdded(player, abyssPoints);
 		} else if (creature instanceof SiegeNpc) {
-			if (!((SiegeNpc) creature).getSpawn().isPeace())
+			if (((SiegeNpc) creature).getSpawn().getSiegeModType() != SiegeModType.PEACE)
 				onAbyssPointsAdded(player, abyssPoints);
 		}
 

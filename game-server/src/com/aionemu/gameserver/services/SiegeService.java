@@ -635,7 +635,7 @@ public class SiegeService {
 		for (SpawnGroup group : siegeSpawns) {
 			for (SpawnTemplate template : group.getSpawnTemplates()) {
 				SiegeSpawnTemplate siegetemplate = (SiegeSpawnTemplate) template;
-				if (siegetemplate.getSiegeRace().equals(race) && siegetemplate.getSiegeModType().equals(type)) {
+				if (siegetemplate.getSiegeRace() == race && siegetemplate.getSiegeModType() == type) {
 					SpawnEngine.spawnObject(siegetemplate, 1);
 				}
 			}

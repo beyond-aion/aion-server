@@ -86,10 +86,7 @@ public class SpawnGroup extends AbstractLockManager {
 		this.worldId = worldId;
 		initializing(spawn);
 		for (SpawnSpotTemplate template : spawn.getSpawnSpotTemplates()) {
-			SiegeSpawnTemplate spawnTemplate = new SiegeSpawnTemplate(this, template);
-			spawnTemplate.setSiegeId(siegeId);
-			spawnTemplate.setSiegeRace(race);
-			spawnTemplate.setSiegeModType(mod);
+			SiegeSpawnTemplate spawnTemplate = new SiegeSpawnTemplate(siegeId, race, mod, this, template);
 			spots.add(spawnTemplate);
 		}
 	}

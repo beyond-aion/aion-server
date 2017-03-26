@@ -39,17 +39,6 @@ public enum SiegeRace {
 		}
 	}
 
-	public static SiegeRace getOppositeRace(SiegeRace race) {
-		switch (race) {
-			case ASMODIANS:
-				return SiegeRace.ELYOS;
-			case ELYOS:
-				return SiegeRace.ASMODIANS;
-			default:
-				return null;
-		}
-	}
-
 	/**
 	 * @return the descriptionId
 	 */

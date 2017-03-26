@@ -78,14 +78,17 @@ public class FortressSiege extends Siege<FortressLocation> {
 		GlobalCallbackHelper.addCallback(addAPListener);
 
 		// Remove all and spawn siege NPCs
-		deSpawnNpcs(getSiegeLocationId());
+		despawnNpcs(getSiegeLocationId());
 		spawnNpcs(getSiegeLocationId(), getSiegeLocation().getRace(), SiegeModType.SIEGE);
 		initSiegeBoss();
 		this.oldLegionId = getSiegeLocation().getLegionId();
-		if (getSiegeLocation().getRace().equals(SiegeRace.BALAUR)) {
+		if (getSiegeLocation().getRace() == SiegeRace.BALAUR) {
 			initMercenaryZones();
-			if (getBoss().getLevel() == 65)
-				ThreadPoolManager.getInstance().schedule(() -> scheduleFactionTroopAssault(), Rnd.get(600, 1800) * 1000); // Faction Balance NPCs
+		} else {
+			if (getBoss().getLevel() == 65) {
+				SiegeRace oppositeRace = getSiegeLocation().getRace() == SiegeRace.ELYOS ? SiegeRace.ASMODIANS : SiegeRace.ELYOS;
+				ThreadPoolManager.getInstance().schedule(() -> spawnFactionTroopAssault(oppositeRace), Rnd.get(600, 1800) * 1000); // Faction Balance NPCs
+			}
 		}
 		// Check for Balaur Assault
 		if (SiegeConfig.BALAUR_AUTO_ASSAULT)
@@ -93,15 +96,13 @@ public class FortressSiege extends Siege<FortressLocation> {
 	}
 
 	/**
-	 * Handles an additional assault of race-specific troops, which were requested
-	 * by players to ensure their glory point rewards.
+	 * Handles an additional assault of race-specific troops (asmo/ely only), to ensure players glory point rewards
 	 */
-	private final void scheduleFactionTroopAssault() {
+	private final void spawnFactionTroopAssault(SiegeRace race) {
 		if (!getSiegeLocation().isVulnerable())
 			return;
 
 		final int worldId = getSiegeLocation().getWorldId();
-		final SiegeRace oppositeRace = SiegeRace.getOppositeRace(getSiegeLocation().getRace());
 		for (SiegeNpc sn : World.getInstance().getLocalSiegeNpcs(getSiegeLocationId())) {
 			if (sn.getAbyssNpcType() == AbyssNpcType.ARTIFACT || Rnd.chance() < 35)
 				continue;
@@ -109,9 +110,8 @@ public class FortressSiege extends Siege<FortressLocation> {
 			for (int i = 0; i < amount; i++) {
 				float x1 = (float) (sn.getX() + Math.cos(Math.PI * Rnd.get()) * Rnd.get(1, 3));
 				float y1 = (float) (sn.getY() + Math.sin(Math.PI * Rnd.get()) * Rnd.get(1, 3));
-				SpawnTemplate temp = SpawnEngine.addNewSiegeSpawn(worldId,
-					oppositeRace == SiegeRace.ELYOS ? Rnd.get(252408, 252412) : Rnd.get(252413, 252417), getSiegeLocationId(), oppositeRace,
-					SiegeModType.ASSAULT, x1, y1, sn.getZ(), (byte) 0);
+				SpawnTemplate temp = SpawnEngine.addNewSiegeSpawn(worldId, race == SiegeRace.ELYOS ? Rnd.get(252408, 252412) : Rnd.get(252413, 252417),
+					getSiegeLocationId(), race, SiegeModType.ASSAULT, x1, y1, sn.getZ(), (byte) 0);
 				SpawnEngine.spawnObject(temp, 1);
 			}
 		}

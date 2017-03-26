@@ -45,7 +45,7 @@ public class ArtifactSiege extends Siege<ArtifactLocation> {
 		unregisterSiegeBossListeners();
 
 		// despawn npcs
-		deSpawnNpcs(getSiegeLocationId());
+		despawnNpcs(getSiegeLocationId());
 
 		// for artifact should be always true
 		if (isBossKilled())
