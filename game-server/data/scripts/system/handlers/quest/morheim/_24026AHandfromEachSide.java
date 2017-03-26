@@ -118,6 +118,7 @@ public class _24026AHandfromEachSide extends QuestHandler {
 							return defaultCloseDialog(env, 2, 3); // 3
 						case SETPRO4:
 							if (var == 4) {
+								qs.setRewardGroup(0); // set default reward group to suppress warnings (both possible reward groups are identical)
 								defaultCloseDialog(env, 4, 4, true, false); // reward
 								TeleportService.teleportTo(player, 220020000, 3030.8676f, 875.6538f, 363.2065f, (byte) 73, TeleportAnimation.FADE_OUT_BEAM);
 								return true;

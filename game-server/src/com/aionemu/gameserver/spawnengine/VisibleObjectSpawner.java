@@ -407,7 +407,7 @@ public class VisibleObjectSpawner {
 		int instanceId = player.getInstanceId();
 		SpawnTemplate spawn = SpawnEngine.createSpawnTemplate(worldId, petId, x, y, z, heading);
 		SpawnEngine.bringIntoWorld(pet, spawn, instanceId);
-		player.setToyPet(pet);
+		player.setPet(pet);
 		return pet;
 	}
 

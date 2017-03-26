@@ -154,7 +154,7 @@ public class Player extends Creature {
 	private int flightDistance;
 	private Summon summon;
 	private SummonedObject<?> summonedObj;
-	private Pet toyPet;
+	private Pet pet;
 	private Kisk kisk;
 	private boolean isResByPlayer = false;
 	private int resurrectionSkill = 0;
@@ -336,19 +336,12 @@ public class Player extends Creature {
 		this.skillList = skillList;
 	}
 
-	/**
-	 * @return the toyPet
-	 */
 	public Pet getPet() {
-		return toyPet;
+		return pet;
 	}
 
-	/**
-	 * @param toyPet
-	 *          the toyPet to set
-	 */
-	public void setToyPet(Pet toyPet) {
-		this.toyPet = toyPet;
+	public void setPet(Pet pet) {
+		this.pet = pet;
 	}
 
 	/**

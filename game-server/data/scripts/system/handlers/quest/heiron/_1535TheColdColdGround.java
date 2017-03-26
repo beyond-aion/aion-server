@@ -4,15 +4,13 @@ import static com.aionemu.gameserver.model.DialogAction.*;
 
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
- * @author Rolandas
+ * @author Rolandas, Neon
  */
 public class _1535TheColdColdGround extends QuestHandler {
 
@@ -55,66 +53,35 @@ public class _1535TheColdColdGround extends QuestHandler {
 			boolean karnifSkins = player.getInventory().getItemCountByItemId(182201820) > 0;
 
 			switch (env.getDialogActionId()) {
-				case USE_OBJECT:
 				case QUEST_SELECT:
-					if (abexSkins || worgSkins || karnifSkins)
-						return sendQuestDialog(env, 1352);
-					return false;
+					return sendQuestDialog(env, 1352);
 				case SETPRO1:
-					if (abexSkins) {
-						qs.setQuestVarById(0, 1);
+					if (abexSkins && removeQuestItem(env, 182201818, 5)) {
+						qs.setRewardGroup(0);
 						qs.setStatus(QuestStatus.REWARD);
 						updateQuestStatus(env);
 						return sendQuestDialog(env, 5);
 					}
-					break;
+					return sendQuestDialog(env, 1693);
 				case SETPRO2:
-					if (worgSkins) {
-						qs.setQuestVarById(0, 2);
+					if (worgSkins && removeQuestItem(env, 182201819, 3)) {
+						qs.setRewardGroup(1);
 						qs.setStatus(QuestStatus.REWARD);
 						updateQuestStatus(env);
 						return sendQuestDialog(env, 6);
 					}
-					break;
+					return sendQuestDialog(env, 1693);
 				case SETPRO3:
-					if (karnifSkins) {
-						qs.setQuestVarById(0, 3);
+					if (karnifSkins && removeQuestItem(env, 182201820, 1)) {
+						qs.setRewardGroup(2);
 						qs.setStatus(QuestStatus.REWARD);
 						updateQuestStatus(env);
 						return sendQuestDialog(env, 7);
 					}
-					break;
+					return sendQuestDialog(env, 1693);
 			}
-			return sendQuestDialog(env, 1693);
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
-			int var = qs.getQuestVarById(0);
-			if (var == 1) {
-				removeQuestItem(env, 182201818, 5);
-				return sendQuestEndDialog(env);
-			} else if (var == 2) {
-				// add Greater Mana Potion x 5
-				if (!giveQuestItem(env, 162000010, 5)) {
-					// check later
-					qs.setStatus(QuestStatus.START);
-					updateQuestStatus(env);
-				} else {
-					removeQuestItem(env, 182201819, 3);
-				}
-				sendQuestEndDialog(env);
-				return true;
-			} else if (var == 3) {
-				// add Greater Life Serum x 5
-				if (!giveQuestItem(env, 162000015, 5)) {
-					// check later
-					qs.setStatus(QuestStatus.START);
-					updateQuestStatus(env);
-				} else {
-					removeQuestItem(env, 182201820, 1);
-				}
-				sendQuestEndDialog(env);
-				return true;
-			}
-			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
+			return sendQuestEndDialog(env);
 		}
 		return false;
 	}
