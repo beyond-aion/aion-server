@@ -1,8 +1,9 @@
 package com.aionemu.gameserver.model.items.storage;
 
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
 import com.aionemu.gameserver.model.gameobjects.Item;
@@ -14,7 +15,7 @@ public class ItemStorage {
 
 	public static final long FIRST_AVAILABLE_SLOT = 65535L;
 
-	private LinkedHashMap<Integer, Item> items;
+	private Map<Integer, Item> items;
 	private int limit;
 	private int specialLimit;
 	private final StorageType storageType;
@@ -23,17 +24,15 @@ public class ItemStorage {
 		this.limit = storageType.getLimit();
 		this.specialLimit = storageType.getSpecialLimit();
 		this.storageType = storageType;
-		this.items = new LinkedHashMap<>();
+		this.items = new ConcurrentHashMap<>();
 	}
 
 	public List<Item> getItems() {
-		List<Item> temp = new ArrayList<>();
-		temp.addAll(items.values());
-		return temp;
+		return new ArrayList<>(items.values());
 	}
 
 	public int getLimit() {
-		return this.limit;
+		return limit;
 	}
 
 	public boolean setLimit(int limit) {
@@ -69,11 +68,11 @@ public class ItemStorage {
 	}
 
 	public Item getItemByObjId(int itemObjId) {
-		return this.items.get(itemObjId);
+		return items.get(itemObjId);
 	}
 
 	public long getSlotIdByItemId(int itemId) {
-		for (Item item : this.items.values()) {
+		for (Item item : items.values()) {
 			if (item.getItemTemplate().getTemplateId() == itemId) {
 				return item.getEquipmentSlot();
 			}
@@ -100,27 +99,19 @@ public class ItemStorage {
 	}
 
 	public long getSlotIdByObjId(int objId) {
-		Item item = this.getItemByObjId(objId);
+		Item item = getItemByObjId(objId);
 		if (item != null)
 			return item.getEquipmentSlot();
 		else
 			return -1;
 	}
 
-	public long getNextAvailableSlot() {
-		return FIRST_AVAILABLE_SLOT;
-	}
-
 	public boolean putItem(Item item) {
-		if (this.items.containsKey(item.getObjectId()))
-			return false;
-
-		this.items.put(item.getObjectId(), item);
-		return true;
+		return items.putIfAbsent(item.getObjectId(), item) == null;
 	}
 
 	public Item removeItem(int objId) {
-		return this.items.remove(objId);
+		return items.remove(objId);
 	}
 
 	public boolean isFull() {
@@ -148,7 +139,7 @@ public class ItemStorage {
 	}
 
 	public int size() {
-		return this.items.size();
+		return items.size();
 	}
 
 }
