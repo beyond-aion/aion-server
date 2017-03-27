@@ -308,7 +308,7 @@ public class MySQL5LegionDAO extends LegionDAO {
 	}
 
 	private boolean validEmblem(final LegionEmblem legionEmblem) {
-		return (legionEmblem.getEmblemType().toString().equals("CUSTOM") && legionEmblem.getCustomEmblemData() == null) ? false : true;
+		return legionEmblem.getEmblemType() != LegionEmblemType.CUSTOM || legionEmblem.getCustomEmblemData() != null;
 	}
 
 	/**

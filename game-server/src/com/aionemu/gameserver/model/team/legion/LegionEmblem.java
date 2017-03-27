@@ -52,7 +52,7 @@ public class LegionEmblem {
 		this.color_b = (byte) color_b;
 		this.emblemType = emblemType;
 		this.customEmblemData = emblem_data;
-		if (this.emblemType.equals(LegionEmblemType.CUSTOM) && customEmblemData == null)
+		if (this.emblemType == LegionEmblemType.CUSTOM && customEmblemData == null)
 			this.emblemType = LegionEmblemType.DEFAULT;
 
 		setPersistentState(PersistentState.UPDATE_REQUIRED);

@@ -1069,7 +1069,7 @@ public class LegionService {
 	 * @param legionName
 	 */
 	public void sendEmblemData(Player player, LegionEmblem legionEmblem, int legionId, String legionName) {
-		int dataLength = legionEmblem.getCustomEmblemData().length;
+		int dataLength = legionEmblem.getCustomEmblemData() == null ? 0 : legionEmblem.getCustomEmblemData().length;
 		PacketSendUtility.sendPacket(player, new SM_LEGION_SEND_EMBLEM(legionId, legionEmblem, dataLength, legionName));
 		if (dataLength > 0) {
 			ByteBuffer buf = ByteBuffer.allocate(dataLength);
