@@ -33,15 +33,14 @@ import org.xml.sax.InputSource;
  */
 public abstract class XmlUtil {
 
-	private static DocumentBuilderFactory dbf;
-	private static TransformerFactory tf;
+	private static volatile DocumentBuilderFactory dbf;
+	private static volatile TransformerFactory tf;
 
 	public static Document getDocument(String xmlSource) {
 		try {
-			if (dbf == null) {
+			if (dbf == null)
 				dbf = DocumentBuilderFactory.newInstance();
-				dbf.setNamespaceAware(true);
-			}
+			dbf.setNamespaceAware(true);
 			Reader stream = new StringReader(xmlSource);
 			DocumentBuilder db = dbf.newDocumentBuilder();
 			return db.parse(new InputSource(stream));

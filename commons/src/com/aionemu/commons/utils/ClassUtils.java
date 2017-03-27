@@ -2,6 +2,7 @@ package com.aionemu.commons.utils;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Collections;
 import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.Set;
@@ -118,11 +119,14 @@ public class ClassUtils {
 	 * @return The classes
 	 */
 	public static Set<String> getClassNamesFromPackage(File directory, String packageName, boolean recursive) {
-		Set<String> classes = new HashSet<>();
-		if (!directory.exists()) {
-			return classes;
-		}
+		if (!directory.exists())
+			return Collections.emptySet();
+
 		File[] files = directory.listFiles();
+		if (files == null || files.length == 0)
+			return Collections.emptySet();
+
+		Set<String> classes = new HashSet<>();
 		for (File file : files) {
 			if (file.isDirectory()) {
 

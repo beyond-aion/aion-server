@@ -9,7 +9,7 @@ class ConsoleProgressBar {
 
 	private volatile int position;
 	private volatile int currentProgress;
-	private double maxProgress; // double for division purposes
+	private float maxProgress; // float for division purposes
 
 	/**
 	 * Prevent instantiation
@@ -43,10 +43,10 @@ class ConsoleProgressBar {
 		if (maxProgress <= 0)
 			return;
 
-		double pos = ((++currentProgress / maxProgress) * (maxProgress < MAX_POSITION ? maxProgress : MAX_POSITION));
+		float pos = ((++currentProgress / maxProgress) * (maxProgress < MAX_POSITION ? maxProgress : MAX_POSITION));
 
 		if (position < pos || currentProgress == maxProgress) {
-			for (; position < pos; position++)
+			while (position++ < pos)
 				System.out.print("#");
 			if (currentProgress == maxProgress)
 				System.out.println("] 100%");
