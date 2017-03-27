@@ -727,11 +727,10 @@ public class Effect implements StatOwner {
 
 		if (periodicTasks != null) {
 			for (int i = 0; i < periodicTasks.length; i++) {
-				if (periodicTasks[i] != null) {
+				if (periodicTasks[i] != null)
 					periodicTasks[i].cancel(false);
-					periodicTasks[i] = null;
-				}
 			}
+			periodicTasks = null;
 		}
 
 		stopPeriodicActions();

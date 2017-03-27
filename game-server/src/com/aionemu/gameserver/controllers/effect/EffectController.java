@@ -398,7 +398,8 @@ public class EffectController {
 	public void clearEffect(Effect effect, boolean broadCastEffects) {
 		lock.writeLock().lock();
 		try {
-			getMapForEffect(effect).remove(effect.getStack());
+			if (!getMapForEffect(effect).remove(effect.getStack(), effect))
+				return; // effect in map was already replaced by a newer one (e.g. when toggling many auras), so there's no need to re-broadcast
 		} finally {
 			lock.writeLock().unlock();
 		}
