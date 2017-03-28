@@ -13,9 +13,12 @@ import com.aionemu.commons.callbacks.files.TestCallbackIntObject;
 import com.aionemu.commons.callbacks.files.TestGlobalCallbacksCaller;
 import com.aionemu.commons.callbacks.util.GlobalCallbackHelper;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 /**
  * @author Rolandas
  */
+@SuppressFBWarnings({ "BC_IMPOSSIBLE_INSTANCEOF", "BC_IMPOSSIBLE_CAST" })
 public class CallbacksTest {
 
 	@Test
@@ -101,7 +104,7 @@ public class CallbacksTest {
 	}
 
 	@Test
-	public void testGlobalMehtodCallback() {
+	public void testGlobalMethodCallback() {
 		assertEquals(TestGlobalCallbacksCaller.getInstance().sayHello("Hello"), "Hello");
 
 		Callback<?> cb = new AbstractCallback() {
@@ -124,7 +127,7 @@ public class CallbacksTest {
 	}
 
 	@Test
-	public void testGlobalMehtodTwoCallback() {
+	public void testGlobalMethodTwoCallback() {
 		assertEquals(TestGlobalCallbacksCaller.getInstance().sayHello("Hello"), "Hello");
 
 		Callback<?> cb1 = new AbstractCallback() {
@@ -202,9 +205,9 @@ public class CallbacksTest {
 
 		obj.getValue();
 
-		assertEquals(shouldBeTrue.get(), true);
-		assertEquals(shouldNotBeTrue.get(), false);
-		assertEquals(eo.getCallbacks(), null);
+		assertTrue(shouldBeTrue.get());
+		assertFalse(shouldNotBeTrue.get());
+		assertNull(eo.getCallbacks());
 	}
 
 	@Test
@@ -232,7 +235,7 @@ public class CallbacksTest {
 		GlobalCallbackHelper.addCallback(cb);
 		TestGlobalCallbacksCaller.getInstance().sayHello("Hello");
 
-		assertEquals(shouldBeTrue.get(), true);
-		assertEquals(shouldNotBeTrue.get(), false);
+		assertTrue(shouldBeTrue.get());
+		assertFalse(shouldNotBeTrue.get());
 	}
 }

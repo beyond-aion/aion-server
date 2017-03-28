@@ -94,12 +94,12 @@ public class GlobalCallbackEnhancer extends CallbackClassFileTransformer {
 	}
 
 	/**
-	 * Code that is added in the begining of the method
+	 * Code that is added in the beginning of the method
 	 * 
 	 * @param method
 	 *          method that should be edited
 	 * @param paramLength
-	 *          Lenght of methods parameters
+	 *          Length of methods parameters
 	 * @param listenerFieldName
 	 *          Listener class that is used for method
 	 * @return code that will be inserted before method
@@ -149,7 +149,7 @@ public class GlobalCallbackEnhancer extends CallbackClassFileTransformer {
 		} else if (returnType.equals(CtClass.charType)) {
 			sb.append("return 'a'");
 		} else if (returnType.equals(CtClass.byteType) || returnType.equals(CtClass.shortType) || returnType.equals(CtClass.intType)
-			|| returnType.equals(CtClass.floatType) || returnType.equals(CtClass.longType) || returnType.equals(CtClass.longType)) {
+			|| returnType.equals(CtClass.floatType) || returnType.equals(CtClass.longType) || returnType.equals(CtClass.doubleType)) {
 			sb.append("return 0");
 		}
 		sb.append(";}}");
@@ -162,7 +162,7 @@ public class GlobalCallbackEnhancer extends CallbackClassFileTransformer {
 	 * @param method
 	 *          method to edit
 	 * @param paramLength
-	 *          lenght of method paramenters
+	 *          lengt of method parameters
 	 * @param listenerFieldName
 	 *          method listener
 	 * @return actual code that should be inserted

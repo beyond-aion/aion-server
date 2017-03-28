@@ -1,30 +1,35 @@
 package com.aionemu.commons.services;
 
+import static org.junit.Assert.*;
+
 import java.lang.reflect.Constructor;
 import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Test;
 import org.quartz.JobDetail;
 import org.quartz.Trigger;
-import org.testng.Assert;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
+import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.services.cron.CurrentThreadRunnableRunner;
+
+import ch.qos.logback.classic.Level;
+import ch.qos.logback.classic.Logger;
 
 /**
  * @author SoulKeeper
  */
-@Test(singleThreaded = false)
-public class CronServiceTest extends Assert {
+public class CronServiceTest {
 
-	private CronService cronService;
+	private static CronService cronService;
 
 	@BeforeClass
-	public void init() throws Exception {
+	public static void init() throws Exception {
+		((Logger) LoggerFactory.getLogger("org.quartz")).setLevel(Level.OFF);
 		Constructor<CronService> constructor = CronService.class.getDeclaredConstructor();
 		constructor.setAccessible(true);
 		cronService = constructor.newInstance();
@@ -33,7 +38,6 @@ public class CronServiceTest extends Assert {
 
 	@Test
 	public void testCronTriggerExecutionTime() throws Exception {
-
 		AtomicInteger ref = new AtomicInteger();
 		Runnable test = newIncrementingRunnable(ref);
 
@@ -42,8 +46,7 @@ public class CronServiceTest extends Assert {
 
 		cronService.schedule(test, "0/2 * * * * ?");
 		sleep(5);
-		int count = ref.intValue();
-		assertEquals(count, 3);
+		assertEquals(ref.intValue(), 3);
 	}
 
 	@Test
@@ -103,13 +106,12 @@ public class CronServiceTest extends Assert {
 			}
 		};
 
-		cronService.schedule(r, "0/2 * * * * ?");
+		cronService.schedule(r, "/1 * * * * ?");
 		r = null;
-		sleep(5);
-		for (int i = 0; i < 100; i++) {
-			System.gc();
-		}
-		assertEquals(collected.get(), true);
+		sleep(1);
+		System.gc();
+		sleep(1);
+		assertTrue(collected.get());
 	}
 
 	@Test
@@ -122,7 +124,7 @@ public class CronServiceTest extends Assert {
 	}
 
 	@AfterClass
-	public void shutdown() {
+	public static void shutdown() {
 		cronService.shutdown();
 	}
 
@@ -142,8 +144,7 @@ public class CronServiceTest extends Assert {
 		};
 	}
 
-	@Test(enabled = false)
-	public static void sleep(int seconds) {
+	private static void sleep(int seconds) {
 		try {
 			Thread.sleep(seconds * 1000);
 		} catch (InterruptedException e) {

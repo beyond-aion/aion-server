@@ -1,29 +1,35 @@
 package com.aionemu.commons.scripting.scriptmanager;
 
+import static org.junit.Assert.*;
+
 import java.io.File;
 import java.lang.reflect.Constructor;
 
-import org.testng.Assert;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.scripting.classlistener.OnClassLoadUnloadListener;
 import com.aionemu.commons.scripting.scriptmanager.listener.ScheduledTaskClassListenerTestAdapter;
 import com.aionemu.commons.services.CronService;
 import com.aionemu.commons.services.cron.CurrentThreadRunnableRunner;
 
-public class ScriptManagerTest extends Assert {
+import ch.qos.logback.classic.Level;
+import ch.qos.logback.classic.Logger;
+
+public class ScriptManagerTest {
 
 	public static final String SYSTEM_PROPERTY_KEY_CLASS_LOADED = "ScriptManagerClassLoaded";
 	public static final String SYSTEM_PROPERTY_KEY_CLASS_UNLOADED = "ScriptManagerClassUnloaded";
 
 	private static final String FILE_TEST_DATA_DIR = "./testdata/scripts/scriptManagerTest";
 
-	private CronService cronService;
+	private static CronService cronService;
 
 	@BeforeClass
-	public void initCronService() throws Exception {
+	public static void initCronService() throws Exception {
+		((Logger) LoggerFactory.getLogger("org.quartz")).setLevel(Level.OFF);
 		Constructor<CronService> constructor = CronService.class.getDeclaredConstructor();
 		constructor.setAccessible(true);
 		cronService = constructor.newInstance();
@@ -35,10 +41,10 @@ public class ScriptManagerTest extends Assert {
 		ScriptManager sm = new ScriptManager();
 		sm.setGlobalClassListener(new OnClassLoadUnloadListener());
 		sm.loadDirectory(new File(FILE_TEST_DATA_DIR));
-		assertEquals(System.getProperties().containsKey(SYSTEM_PROPERTY_KEY_CLASS_LOADED), true);
+		assertTrue(System.getProperties().containsKey(SYSTEM_PROPERTY_KEY_CLASS_LOADED));
 
 		sm.shutdown();
-		assertEquals(System.getProperties().containsKey(SYSTEM_PROPERTY_KEY_CLASS_UNLOADED), true);
+		assertTrue(System.getProperties().containsKey(SYSTEM_PROPERTY_KEY_CLASS_UNLOADED));
 	}
 
 	@Test
@@ -52,7 +58,7 @@ public class ScriptManagerTest extends Assert {
 	}
 
 	@AfterClass
-	public void afterTest() throws Exception {
+	public static void afterTest() throws Exception {
 		cronService.shutdown();
 	}
 }

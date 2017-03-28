@@ -104,8 +104,7 @@ public class AbyssRankUpdateService {
 	 */
 	private void updateQuotaRanksForRace(Race race, AbyssRankEnum limitRank, int maxOfflineDays) {
 		Map<Integer, Integer[]> playerGpApMap = DAOManager.getDAO(AbyssRankDAO.class).loadPlayersGpAp(race, limitRank, maxOfflineDays);
-		List<Entry<Integer, Integer[]>> playerGpApEntries = new ArrayList<>();
-		playerGpApEntries.addAll(playerGpApMap.entrySet());
+		List<Entry<Integer, Integer[]>> playerGpApEntries = new ArrayList<>(playerGpApMap.entrySet());
 		playerGpApEntries.sort(new PlayerGpComparator());
 
 		// calculate and set new GP ranks
