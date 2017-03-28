@@ -11,6 +11,7 @@ import com.aionemu.gameserver.model.summons.SkillOrder;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
+import com.aionemu.gameserver.utils.audit.AuditLogger;
 
 /**
  * @author ATracer, KID
@@ -44,11 +45,11 @@ public class CM_SUMMON_CASTSPELL extends AionClientPacket {
 
 		final Summon summon = player.getSummon();
 		if (summon == null) {
-			log.warn(player + " tried to cast a summon spell without a summon");
+			AuditLogger.info(player, "tried to cast a summon spell without a summon");
 			return;
 		}
 		if (summon.getObjectId() != summonObjId) {
-			log.warn(player + " tried to cast a summon spell from a different summon instance");
+			AuditLogger.info(player, "tried to cast a summon spell from a different summon instance");
 			return;
 		}
 
@@ -64,7 +65,7 @@ public class CM_SUMMON_CASTSPELL extends AionClientPacket {
 
 		if (target != null) {
 			final SkillOrder order = summon.retrieveNextSkillOrder();
-			if (order != null && order.getTarget() == target) {
+			if (order != null && order.getTarget().equals(target)) {
 				if (order.getSkillId() != skillId || order.getSkillLevel() != skillLvl)
 					log.warn(player + " used summon order with a different skill: skillId {}->{}; skillLvl {}->{}.", skillId,
 						order.getSkillId(), skillLvl, order.getSkillLevel());

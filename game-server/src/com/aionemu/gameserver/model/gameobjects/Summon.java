@@ -1,6 +1,7 @@
 package com.aionemu.gameserver.model.gameobjects;
 
 import java.util.LinkedList;
+import java.util.Objects;
 import java.util.Queue;
 import java.util.concurrent.Future;
 
@@ -252,10 +253,8 @@ public class Summon extends Creature {
 
 	@Override
 	public void setTarget(VisibleObject target) {
-		if (!(target instanceof Creature))
-			return;
 		SkillOrder order = skillOrders.peek();
-		if (order != null && order.getTarget() != target) {
+		if (order != null && !Objects.equals(target, order.getTarget())) {
 			skillOrders.clear();
 		}
 		super.setTarget(target);
