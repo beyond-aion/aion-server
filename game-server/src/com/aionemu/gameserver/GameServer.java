@@ -308,7 +308,7 @@ public class GameServer {
 		PlayerTransferService.getInstance();
 
 		ConsoleUtil.printSection("Housing");
-		HousingBidService.getInstance().start();
+		HousingBidService.getInstance();
 		MaintenanceTask.getInstance();
 		ChallengeTaskService.getInstance();
 		GameTimeService.getInstance().startClock();

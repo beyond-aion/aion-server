@@ -58,19 +58,14 @@ import com.aionemu.gameserver.world.WorldMapType;
 public class HousingBidService extends AbstractCronTask {
 
 	private static final Logger log = LoggerFactory.getLogger("HOUSE_AUCTION_LOG");
-	private static final String registerEndExpression = HousingConfig.HOUSE_REGISTER_END;
-	private static CronExpression registerDateExpr;
-	private static final LinkedHashMap<Integer, HouseBidEntry> houseBids;
-	private static final LinkedHashMap<Integer, HouseBidEntry> playerBids;
-	private static final LinkedHashMap<Integer, HouseBidEntry> bidsByIndex;
-	private static int timeProlonged = 0;
-	private static boolean isDataLoaded = false;
 	private static HousingBidService instance;
+	private final LinkedHashMap<Integer, HouseBidEntry> houseBids = new LinkedHashMap<>();
+	private final LinkedHashMap<Integer, HouseBidEntry> playerBids = new LinkedHashMap<>();
+	private final LinkedHashMap<Integer, HouseBidEntry> bidsByIndex = new LinkedHashMap<>();
+	private int timeProlonged = 0;
+	private CronExpression registerDateExpr;
 
 	static {
-		houseBids = new LinkedHashMap<>();
-		playerBids = new LinkedHashMap<>();
-		bidsByIndex = new LinkedHashMap<>();
 		try {
 			instance = new HousingBidService(HousingConfig.HOUSE_AUCTION_TIME);
 		} catch (ParseException pe) {
@@ -79,6 +74,7 @@ public class HousingBidService extends AbstractCronTask {
 
 	private HousingBidService(String auctionTime) throws ParseException {
 		super(auctionTime);
+		registerDateExpr = new CronExpression(HousingConfig.HOUSE_REGISTER_END);
 	}
 
 	public static final HousingBidService getInstance() {
@@ -101,30 +97,21 @@ public class HousingBidService extends AbstractCronTask {
 	}
 
 	@Override
-	protected void postInit() {
-		try {
-			registerDateExpr = new CronExpression(registerEndExpression);
-		} catch (ParseException e) {
-		}
-
-		ServerVariablesDAO dao = DAOManager.getDAO(ServerVariablesDAO.class);
-		timeProlonged = dao.load("auctionProlonged");
-	}
-
-	private HousingBidService() throws ParseException {
-		super(HousingConfig.HOUSE_AUCTION_TIME);
-	}
-
-	public void start() {
+	protected void preInit() {
 		log.info("Loading house bids...");
+	}
+
+	@Override
+	protected void postInit() {
 		loadBidData();
 		if (HousingConfig.FILL_HOUSE_BIDS_AUTO) {
 			log.info("HousingBidService: auction auto filling enabled.");
 			int added = fillBidData();
 			log.info("HousingBidService: added " + added + " new house auctions.");
 		}
+		ServerVariablesDAO dao = DAOManager.getDAO(ServerVariablesDAO.class);
+		timeProlonged = dao.load("auctionProlonged");
 		log.info("HousingBidService loaded. Minutes till start: " + getMinutesTillAuction());
-		isDataLoaded = true;
 	}
 
 	private int fillBidData() {
@@ -235,14 +222,6 @@ public class HousingBidService extends AbstractCronTask {
 	protected void executeTask() {
 		if (!HousingConfig.ENABLE_HOUSE_AUCTIONS)
 			return;
-
-		while (!isDataLoaded) {
-			try {
-				Thread.sleep(500);
-			} catch (InterruptedException e) {
-				return;
-			}
-		}
 
 		Map<HouseBidEntry, Integer> winners = new HashMap<>();
 		Map<HouseBidEntry, Integer> successSell = new HashMap<>();
@@ -364,8 +343,8 @@ public class HousingBidService extends AbstractCronTask {
 					if (sellerPcd.isOnline()) {
 						if (activatedHouse != null) {
 							sellerPcd.getPlayer().resetHouses();
-							PacketSendUtility.sendPacket(sellerPcd.getPlayer(), new SM_HOUSE_ACQUIRE(sellerPcd.getPlayerObjId(), activatedHouse.getAddress()
-								.getId(), true));
+							PacketSendUtility.sendPacket(sellerPcd.getPlayer(),
+								new SM_HOUSE_ACQUIRE(sellerPcd.getPlayerObjId(), activatedHouse.getAddress().getId(), true));
 							sellerPcd.getPlayer().setHouseRegistry(activatedHouse.getRegistry());
 							PacketSendUtility.sendPacket(sellerPcd.getPlayer(), new SM_HOUSE_OWNER_INFO(sellerPcd.getPlayer()));
 						}
