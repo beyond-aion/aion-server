@@ -47,7 +47,7 @@ public class PortalService {
 
 		PortalLoc loc = DataManager.PORTAL_LOC_DATA.getPortalLoc(portalPath.getLocId());
 		if (loc == null) {
-			log.warn("No portal loc for locId" + portalPath.getLocId());
+			log.warn("No portal loc for locId " + portalPath.getLocId());
 			return;
 		}
 

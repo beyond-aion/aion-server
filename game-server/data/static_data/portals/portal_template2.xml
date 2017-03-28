@@ -2048,40 +2048,40 @@
 	</portal_dialog>
 	<!-- Enshar -->
 	<portal_dialog npc_id="805184">
-		<portal_path dialog="104" loc_id="21007032" />
+		<portal_path dialog="104" loc_id="22008032" />
 	</portal_dialog>
 	<portal_dialog npc_id="805182">
-		<portal_path dialog="104" loc_id="21007032" />
+		<portal_path dialog="104" loc_id="22008032" />
 	</portal_dialog>
 	<portal_dialog npc_id="805185">
-		<portal_path dialog="104" loc_id="21007031" />
+		<portal_path dialog="104" loc_id="22008031" />
 	</portal_dialog>
 	<portal_dialog npc_id="805183">
-		<portal_path dialog="104" loc_id="21007031" />
+		<portal_path dialog="104" loc_id="22008031" />
 	</portal_dialog>
 	<portal_dialog npc_id="805180">
-		<portal_path dialog="104" loc_id="21007022" />
+		<portal_path dialog="104" loc_id="22008022" />
 	</portal_dialog>
 	<portal_dialog npc_id="805178">
-		<portal_path dialog="104" loc_id="21007022" />
+		<portal_path dialog="104" loc_id="22008022" />
 	</portal_dialog>
 	<portal_dialog npc_id="805179">
-		<portal_path dialog="104" loc_id="21007021" />
+		<portal_path dialog="104" loc_id="22008021" />
 	</portal_dialog>
 	<portal_dialog npc_id="805181">
-		<portal_path dialog="104" loc_id="21007021" />
+		<portal_path dialog="104" loc_id="22008021" />
 	</portal_dialog>
 	<portal_dialog npc_id="805176">
-		<portal_path dialog="104" loc_id="21007012" />
+		<portal_path dialog="104" loc_id="22008012" />
 	</portal_dialog>
 	<portal_dialog npc_id="805174">
-		<portal_path dialog="104" loc_id="21007012" />
+		<portal_path dialog="104" loc_id="22008012" />
 	</portal_dialog>
 	<portal_dialog npc_id="805175">
-		<portal_path dialog="104" loc_id="21007011" />
+		<portal_path dialog="104" loc_id="22008011" />
 	</portal_dialog>
 	<portal_dialog npc_id="805177">
-		<portal_path dialog="104" loc_id="21007011" />
+		<portal_path dialog="104" loc_id="22008011" />
 	</portal_dialog>
 	<!-- Enshar to Abyss -->
 	<portal_dialog npc_id="805259">
