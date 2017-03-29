@@ -24,9 +24,7 @@ import com.aionemu.gameserver.world.World;
 public class SummonerAI extends AggressiveNpcAI {
 
 	private final List<Integer> spawnedNpc = new ArrayList<>();
-
 	private List<Percentage> percentage = Collections.emptyList();
-
 	private int spawnedPercent = 0;
 
 	@Override
@@ -38,24 +36,14 @@ public class SummonerAI extends AggressiveNpcAI {
 	@Override
 	protected void handleDespawned() {
 		super.handleDespawned();
-
-		synchronized (spawnedNpc) {
-			removeHelpersSpawn();
-			spawnedNpc.clear();
-		}
-
+		removeHelpersSpawns();
 		percentage.clear();
 	}
 
 	@Override
 	protected void handleBackHome() {
 		super.handleBackHome();
-
-		synchronized (spawnedNpc) {
-			removeHelpersSpawn();
-			spawnedNpc.clear();
-		}
-
+		removeHelpersSpawns();
 		spawnedPercent = 0;
 	}
 
@@ -68,17 +56,19 @@ public class SummonerAI extends AggressiveNpcAI {
 	@Override
 	protected void handleDied() {
 		super.handleDied();
-		removeHelpersSpawn();
-		spawnedNpc.clear();
+		removeHelpersSpawns();
 		percentage.clear();
 	}
 
-	private void removeHelpersSpawn() {
-		for (Integer object : spawnedNpc) {
-			VisibleObject npc = World.getInstance().findVisibleObject(object);
-			if (npc != null && npc.isSpawned()) {
-				npc.getController().delete();
+	private void removeHelpersSpawns() {
+		synchronized (spawnedNpc) {
+			for (Integer object : spawnedNpc) {
+				VisibleObject npc = World.getInstance().findVisibleObject(object);
+				if (npc != null && npc.isSpawned()) {
+					npc.getController().delete();
+				}
 			}
+			spawnedNpc.clear();
 		}
 	}
 
@@ -148,8 +138,8 @@ public class SummonerAI extends AggressiveNpcAI {
 		float direction = Rnd.get(0, 199) / 100f;
 		float x = (float) (Math.cos(Math.PI * direction) * distance);
 		float y = (float) (Math.sin(Math.PI * direction) * distance);
-		return SpawnEngine.addNewSingleTimeSpawn(getPosition().getMapId(), npcId, getPosition().getX() + x, getPosition().getY() + y, getPosition()
-			.getZ(), getPosition().getHeading());
+		return SpawnEngine.addNewSingleTimeSpawn(getPosition().getMapId(), npcId, getPosition().getX() + x, getPosition().getY() + y,
+			getPosition().getZ(), getPosition().getHeading());
 	}
 
 	protected boolean checkBeforeSpawn() {
