@@ -1,28 +1,22 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Summon;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
-import com.aionemu.gameserver.world.World;
+import com.aionemu.gameserver.utils.audit.AuditLogger;
 
 /**
  * @author ATracer
  */
 public class CM_SUMMON_ATTACK extends AionClientPacket {
 
-	private static final Logger log = LoggerFactory.getLogger(CM_SUMMON_ATTACK.class);
-
 	private int summonObjId;
 	private int targetObjId;
 	@SuppressWarnings("unused")
 	private byte unk1;
-
 	private int time;
 	@SuppressWarnings("unused")
 	private byte unk3;
@@ -45,22 +39,18 @@ public class CM_SUMMON_ATTACK extends AionClientPacket {
 		Player player = getConnection().getActivePlayer();
 
 		Summon summon = player.getSummon();
-		if (summon == null) {
-			log.warn(player + " tried to use summon attack without an active summon");
+		if (summon == null) // commonly due to lags when the pet dies
 			return;
-		}
 
 		if (summon.getObjectId() != summonObjId) {
-			log.warn(player + " tried to use summon attack from a different summon instance");
+			AuditLogger.info(player, "tried to use summon attack from a different summon instance");
 			return;
 		}
 
-		VisibleObject obj = summon.getKnownList().getObject(targetObjId);
+		VisibleObject obj = summon.getKnownList().getObject(targetObjId); // may be null due to lags during movement
 		if (obj instanceof Creature)
 			summon.getController().attackTarget((Creature) obj, time, false);
-		else if (obj != null)
-			log.warn(player + " tried to use summon attack on a wrong target: " + obj);
-		else
-			log.warn(player + " tried to use summon attack on an unknown target: " + World.getInstance().findVisibleObject(targetObjId));
+		else if (obj != null) // not a creature (attack should be client restricted)
+			AuditLogger.info(player, "tried to use summon attack on a wrong target: " + obj);
 	}
 }

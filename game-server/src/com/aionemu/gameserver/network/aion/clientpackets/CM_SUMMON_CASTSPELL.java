@@ -44,34 +44,34 @@ public class CM_SUMMON_CASTSPELL extends AionClientPacket {
 		Player player = getConnection().getActivePlayer();
 
 		final Summon summon = player.getSummon();
-		if (summon == null) {
-			AuditLogger.info(player, "tried to cast a summon spell without a summon");
+		if (summon == null) // commonly due to lags when the pet dies
 			return;
-		}
+
 		if (summon.getObjectId() != summonObjId) {
 			AuditLogger.info(player, "tried to cast a summon spell from a different summon instance");
 			return;
 		}
 
-		Creature target = null;
+		Creature target;
 		if (targetObjId != summon.getObjectId()) {
 			VisibleObject obj = summon.getKnownList().getObject(targetObjId);
 			if (obj instanceof Creature) {
 				target = (Creature) obj;
+			} else { // null or not a creature (attack should be client restricted)
+				if (obj != null) // may be null due to lags while the target runs out of sight
+					AuditLogger.info(player, "tried to cast a summon spell on a wrong target: " + obj);
+				return;
 			}
 		} else {
 			target = summon;
 		}
 
-		if (target != null) {
-			final SkillOrder order = summon.retrieveNextSkillOrder();
-			if (order != null && order.getTarget().equals(target)) {
-				if (order.getSkillId() != skillId || order.getSkillLevel() != skillLvl)
-					log.warn(player + " used summon order with a different skill: skillId {}->{}; skillLvl {}->{}.", skillId,
-						order.getSkillId(), skillLvl, order.getSkillLevel());
-				ThreadPoolManager.getInstance().execute(() -> summon.getController().useSkill(order));
-			}
-		} else
-			log.warn(player + " tried to cast a summon spell on a wrong target: " + summon.getKnownList().getObject(targetObjId));
+		final SkillOrder order = summon.retrieveNextSkillOrder();
+		if (order != null && order.getTarget().equals(target)) {
+			if (order.getSkillId() != skillId || order.getSkillLevel() != skillLvl)
+				log.warn(player + " used summon order with a different skill: skillId {}->{}; skillLvl {}->{}.", skillId, order.getSkillId(), skillLvl,
+					order.getSkillLevel());
+			ThreadPoolManager.getInstance().execute(() -> summon.getController().useSkill(order));
+		}
 	}
 }
