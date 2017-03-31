@@ -1631,7 +1631,6 @@
 	</xs:simpleType>
 	<xs:simpleType name="FirstTargetAttribute">
 		<xs:restriction base="xs:string">
-			<xs:enumeration value="NONE" />
 			<xs:enumeration value="TARGETORME" />
 			<xs:enumeration value="ME" />
 			<xs:enumeration value="MYPET" />

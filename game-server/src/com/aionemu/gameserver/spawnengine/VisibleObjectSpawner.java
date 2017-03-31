@@ -34,6 +34,7 @@ import com.aionemu.gameserver.model.gameobjects.siege.SiegeNpc;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.model.house.House;
 import com.aionemu.gameserver.model.rift.RiftLocation;
+import com.aionemu.gameserver.model.skill.NpcSkillEntry;
 import com.aionemu.gameserver.model.templates.VisibleObjectTemplate;
 import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
 import com.aionemu.gameserver.model.templates.pet.PetTemplate;
@@ -308,11 +309,14 @@ public class VisibleObjectSpawner {
 		servant.setNpcObjectType(objectType);
 		servant.setUpStats();
 		SpawnEngine.bringIntoWorld(servant, spawn, instanceIndex);
-		if (servant.getSkillList() != null && !servant.getSkillList().getNpcSkills().isEmpty()) {
-			SkillTemplate st = DataManager.SKILL_DATA.getSkillTemplate(servant.getSkillList().getRandomSkill().getSkillId());
-			if (st.getStartconditions() != null && st.getHpCondition() != null) {
-				int hp = (st.getHpCondition().getHpValue() * 3);
-				servant.getLifeStats().setCurrentHp(hp);
+		if (servant.getSkillList() != null) {
+			NpcSkillEntry skill = servant.getSkillList().getRandomSkill();
+			if (skill != null) {
+				SkillTemplate st = DataManager.SKILL_DATA.getSkillTemplate(skill.getSkillId());
+				if (st.getStartconditions() != null && st.getHpCondition() != null) {
+					int hp = (st.getHpCondition().getHpValue() * 3);
+					servant.getLifeStats().setCurrentHp(hp);
+				}
 			}
 		}
 		return servant;

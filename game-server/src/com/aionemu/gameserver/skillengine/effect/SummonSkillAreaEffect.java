@@ -6,6 +6,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 
+import com.aionemu.gameserver.ai.event.AIEventType;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.NpcObjectType;
@@ -22,9 +23,6 @@ public class SummonSkillAreaEffect extends SummonServantEffect {
 
 	@Override
 	public void applyEffect(Effect effect) {
-		// should only be set if player has no target to avoid errors
-		if (effect.getEffector().getTarget() == null)
-			effect.getEffector().setTarget(effect.getEffector());
 		float x = effect.getX();
 		float y = effect.getY();
 		float z = effect.getZ();
@@ -50,6 +48,8 @@ public class SummonSkillAreaEffect extends SummonServantEffect {
 				break;
 		}
 		final Servant servant = spawnServant(effect, useTime, NpcObjectType.SKILLAREA, x, y, z);
+		if (effect.getEffected() != null) // point skill without any initial target (we cannot trigger handleAttack with a null target)
+			servant.getAi().onCreatureEvent(AIEventType.ATTACK, effect.getEffected());
 
 		int delay = 3000;
 		String group = effect.getSkillTemplate().getGroup();
