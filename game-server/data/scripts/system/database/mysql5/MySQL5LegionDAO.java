@@ -76,10 +76,10 @@ public class MySQL5LegionDAO extends LegionDAO {
 
 			@Override
 			public void handleInsertUpdate(PreparedStatement preparedStatement) throws SQLException {
-				log.debug("[DAO: MySQL5LegionDAO] saving new legion: " + legion.getLegionId() + " " + legion.getLegionName());
+				log.debug("[DAO: MySQL5LegionDAO] saving new legion: " + legion.getLegionId() + " " + legion.getName());
 
 				preparedStatement.setInt(1, legion.getLegionId());
-				preparedStatement.setString(2, legion.getLegionName());
+				preparedStatement.setString(2, legion.getName());
 				preparedStatement.execute();
 			}
 		});
@@ -92,9 +92,9 @@ public class MySQL5LegionDAO extends LegionDAO {
 
 			@Override
 			public void handleInsertUpdate(PreparedStatement stmt) throws SQLException {
-				log.debug("[DAO: MySQL5LegionDAO] storing player " + legion.getLegionId() + " " + legion.getLegionName());
+				log.debug("[DAO: MySQL5LegionDAO] storing player " + legion.getLegionId() + " " + legion.getName());
 
-				stmt.setString(1, legion.getLegionName());
+				stmt.setString(1, legion.getName());
 				stmt.setInt(2, legion.getLegionLevel());
 				stmt.setLong(3, legion.getContributionPoints());
 				stmt.setInt(4, legion.getDeputyPermission());
@@ -114,7 +114,7 @@ public class MySQL5LegionDAO extends LegionDAO {
 
 	@Override
 	public Legion loadLegion(final String legionName) {
-		final Legion legion = new Legion();
+		final Legion[] legion = new Legion[1];
 
 		boolean success = DB.select(SELECT_LEGION_QUERY2, new ParamReadStH() {
 
@@ -125,32 +125,31 @@ public class MySQL5LegionDAO extends LegionDAO {
 
 			@Override
 			public void handleRead(ResultSet resultSet) throws SQLException {
-				while (resultSet.next()) {
-					legion.setLegionName(legionName);
-					legion.setLegionId(resultSet.getInt("id"));
-					legion.setLegionLevel(resultSet.getInt("level"));
-					legion.addContributionPoints(resultSet.getLong("contribution_points"));
-					legion.setSiegeGloryPoints(resultSet.getInt("siege_glory_points"));
+				if (resultSet.next()) {
+					legion[0] = new Legion(resultSet.getInt("id"), resultSet.getString("name"));
+					legion[0].setLegionLevel(resultSet.getInt("level"));
+					legion[0].addContributionPoints(resultSet.getLong("contribution_points"));
+					legion[0].setSiegeGloryPoints(resultSet.getInt("siege_glory_points"));
 
-					legion.setLegionPermissions(resultSet.getShort("deputy_permission"), resultSet.getShort("centurion_permission"),
+					legion[0].setLegionPermissions(resultSet.getShort("deputy_permission"), resultSet.getShort("centurion_permission"),
 						resultSet.getShort("legionary_permission"), resultSet.getShort("volunteer_permission"));
 
-					legion.setDisbandTime(resultSet.getInt("disband_time"));
-					legion.setOccupiedLegionDominion(resultSet.getInt("occupied_legion_dominion"));
-					legion.setLastLegionDominion(resultSet.getInt("last_legion_dominion"));
-					legion.setCurrentLegionDominion(resultSet.getInt("current_legion_dominion"));
+					legion[0].setDisbandTime(resultSet.getInt("disband_time"));
+					legion[0].setOccupiedLegionDominion(resultSet.getInt("occupied_legion_dominion"));
+					legion[0].setLastLegionDominion(resultSet.getInt("last_legion_dominion"));
+					legion[0].setCurrentLegionDominion(resultSet.getInt("current_legion_dominion"));
 				}
 			}
 		});
 
-		log.debug("[MySQL5LegionDAO] Loaded " + legion.getLegionId() + " legion.");
+		log.debug("[MySQL5LegionDAO] Loaded " + legion[0].getLegionId() + " legion.");
 
-		return (success && legion.getLegionId() != 0) ? legion : null;
+		return success ? legion[0] : null;
 	}
 
 	@Override
 	public Legion loadLegion(final int legionId) {
-		final Legion legion = new Legion();
+		final Legion[] legion = new Legion[1];
 
 		boolean success = DB.select(SELECT_LEGION_QUERY1, new ParamReadStH() {
 
@@ -161,27 +160,26 @@ public class MySQL5LegionDAO extends LegionDAO {
 
 			@Override
 			public void handleRead(ResultSet resultSet) throws SQLException {
-				while (resultSet.next()) {
-					legion.setLegionId(legionId);
-					legion.setLegionName(resultSet.getString("name"));
-					legion.setLegionLevel(resultSet.getInt("level"));
-					legion.addContributionPoints(resultSet.getLong("contribution_points"));
-					legion.setSiegeGloryPoints(resultSet.getInt("siege_glory_points"));
+				if (resultSet.next()) {
+					legion[0] = new Legion(legionId, resultSet.getString("name"));
+					legion[0].setLegionLevel(resultSet.getInt("level"));
+					legion[0].addContributionPoints(resultSet.getLong("contribution_points"));
+					legion[0].setSiegeGloryPoints(resultSet.getInt("siege_glory_points"));
 
-					legion.setLegionPermissions(resultSet.getShort("deputy_permission"), resultSet.getShort("centurion_permission"),
+					legion[0].setLegionPermissions(resultSet.getShort("deputy_permission"), resultSet.getShort("centurion_permission"),
 						resultSet.getShort("legionary_permission"), resultSet.getShort("volunteer_permission"));
 
-					legion.setDisbandTime(resultSet.getInt("disband_time"));
-					legion.setOccupiedLegionDominion(resultSet.getInt("occupied_legion_dominion"));
-					legion.setLastLegionDominion(resultSet.getInt("last_legion_dominion"));
-					legion.setCurrentLegionDominion(resultSet.getInt("current_legion_dominion"));
+					legion[0].setDisbandTime(resultSet.getInt("disband_time"));
+					legion[0].setOccupiedLegionDominion(resultSet.getInt("occupied_legion_dominion"));
+					legion[0].setLastLegionDominion(resultSet.getInt("last_legion_dominion"));
+					legion[0].setCurrentLegionDominion(resultSet.getInt("current_legion_dominion"));
 				}
 			}
 		});
 
-		log.debug("[MySQL5LegionDAO] Loaded " + legion.getLegionId() + " legion.");
+		log.debug("[MySQL5LegionDAO] Loaded " + legion[0].getLegionId() + " legion.");
 
-		return (success && !legion.getLegionName().equals("")) ? legion : null;
+		return success ? legion[0] : null;
 	}
 
 	@Override

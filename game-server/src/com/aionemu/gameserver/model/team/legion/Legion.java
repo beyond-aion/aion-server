@@ -13,6 +13,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
 
 import com.aionemu.gameserver.configs.main.LegionConfig;
+import com.aionemu.gameserver.model.gameobjects.AionObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ICON_INFO;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -21,10 +22,8 @@ import com.aionemu.gameserver.world.World;
 /**
  * @author Simple
  */
-public class Legion {
+public class Legion extends AionObject {
 
-	/** Legion Information **/
-	private int legionId = 0;
 	private String legionName = "";
 	private int legionLevel = 1;
 	private int legionRank = 0;
@@ -46,61 +45,28 @@ public class Legion {
 	private int currentLegionDominion = 0;
 	private int lastLegionDominion = 0;
 
-	/**
-	 * Only called when a legion is created!
-	 *
-	 * @param legionId
-	 * @param legionName
-	 */
 	public Legion(int legionId, String legionName) {
-		this();
-		this.legionId = legionId;
+		super(legionId);
 		this.legionName = legionName;
-	}
-
-	/**
-	 * Only called when a legion is loaded!
-	 */
-	public Legion() {
 		this.legionWarehouse = new LegionWarehouse(this);
-		this.legionHistory = new TreeSet<>(new Comparator<LegionHistory>() {
-
-			@Override
-			public int compare(LegionHistory o1, LegionHistory o2) {
-				return o1.getTime().getTime() < o2.getTime().getTime() ? 1 : -1;
-			}
-
-		});
+		this.legionHistory = new TreeSet<>(Comparator.comparing(LegionHistory::getTime).reversed());
 	}
 
-	/**
-	 * @param legionId
-	 *          the legionId to set
-	 */
-	public void setLegionId(int legionId) {
-		this.legionId = legionId;
-	}
-
-	/**
-	 * @return the legionId
-	 */
 	public int getLegionId() {
-		return legionId;
+		return getObjectId();
+	}
+
+	@Override
+	public String getName() {
+		return legionName;
 	}
 
 	/**
 	 * @param legionName
 	 *          the legionName to set
 	 */
-	public void setLegionName(String legionName) {
+	public void setName(String legionName) {
 		this.legionName = legionName;
-	}
-
-	/**
-	 * @return the legionName
-	 */
-	public String getLegionName() {
-		return legionName;
 	}
 
 	/**
@@ -561,22 +527,6 @@ public class Legion {
 		return hasBonus.get();
 	}
 
-	@Override
-	public boolean equals(Object o) {
-		if (this == o)
-			return true;
-		if (o == null || getClass() != o.getClass())
-			return false;
-
-		Legion legion = (Legion) o;
-		return legionId == legion.legionId;
-	}
-
-	@Override
-	public int hashCode() {
-		return legionId;
-	}
-
 	public int getOccupiedLegionDominion() {
 		return occupiedLegionDominion;
 	}
@@ -600,4 +550,5 @@ public class Legion {
 	public void setLastLegionDominion(int lastLegionDominion) {
 		this.lastLegionDominion = lastLegionDominion;
 	}
+
 }

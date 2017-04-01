@@ -92,7 +92,7 @@ public class SM_PLAYER_INFO extends AionServerPacket {
 			writeC(player.getLegion().getLegionEmblem().getColor_r());
 			writeC(player.getLegion().getLegionEmblem().getColor_g());
 			writeC(player.getLegion().getLegionEmblem().getColor_b());
-			writeS(player.getLegion().getLegionName());
+			writeS(player.getLegion().getName());
 		} else {
 			writeB(new byte[12]);
 		}

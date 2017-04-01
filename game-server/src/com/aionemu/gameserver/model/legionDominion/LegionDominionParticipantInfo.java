@@ -105,7 +105,7 @@ public class LegionDominionParticipantInfo implements Comparable<LegionDominionP
 	public String getLegionName() {
 		Legion legion = LegionService.getInstance().getLegion(legionId);
 		if (legion != null)
-			return legion.getLegionName();
+			return legion.getName();
 		return "NOT AVAILABLE";
 	}
 }

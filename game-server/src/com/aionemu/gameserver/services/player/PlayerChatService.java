@@ -73,7 +73,7 @@ public class PlayerChatService {
 				log.info(String.format("[%s] <%d> - [%s]: %s", type.toString(), sender.getCurrentTeamId(), sender.getName(), message));
 				break;
 			case LEGION:
-				log.info(String.format("[%s] <%s> - [%s]: %s", type.toString(), sender.getLegion().getLegionName(), sender.getName(), message));
+				log.info(String.format("[%s] <%s> - [%s]: %s", type.toString(), sender.getLegion().getName(), sender.getName(), message));
 				break;
 			case NORMAL:
 			case SHOUT:

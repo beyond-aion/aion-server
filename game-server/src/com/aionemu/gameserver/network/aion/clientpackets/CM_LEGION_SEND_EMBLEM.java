@@ -26,6 +26,6 @@ public class CM_LEGION_SEND_EMBLEM extends AionClientPacket {
 	protected void runImpl() {
 		Legion legion = LegionService.getInstance().getLegion(legionId);
 		if (legion != null)
-			LegionService.getInstance().sendEmblemData(getConnection().getActivePlayer(), legion.getLegionEmblem(), legionId, legion.getLegionName());
+			LegionService.getInstance().sendEmblemData(getConnection().getActivePlayer(), legion.getLegionEmblem(), legionId, legion.getName());
 	}
 }

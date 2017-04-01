@@ -26,7 +26,7 @@ public class SM_LEGION_INFO extends AionServerPacket {
 
 	@Override
 	protected void writeImpl(AionConnection con) {
-		writeS(legion.getLegionName());
+		writeS(legion.getName());
 		writeC(legion.getLegionLevel());
 		writeD(legion.getLegionRank());
 		writeH(legion.getDeputyPermission());

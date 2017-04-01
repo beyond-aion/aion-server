@@ -52,7 +52,7 @@ public class LegionCommand extends AdminCommand {
 				return;
 
 			service.disbandLegion(legion);
-			PacketSendUtility.sendMessage(player, "legion " + legion.getLegionName() + " was disbanded.");
+			PacketSendUtility.sendMessage(player, "legion " + legion.getName() + " was disbanded.");
 		} else if (params[0].equalsIgnoreCase("setlevel")) {
 			if (!verifyLength(player, 3, params)) // legion setlevel NAME level
 				return;
@@ -77,7 +77,7 @@ public class LegionCommand extends AdminCommand {
 
 			int old = legion.getLegionLevel();
 			service.changeLevel(legion, level, true);
-			PacketSendUtility.sendMessage(player, "legion " + legion.getLegionName() + " has raised from " + old + " to " + level + " level.");
+			PacketSendUtility.sendMessage(player, "legion " + legion.getName() + " has raised from " + old + " to " + level + " level.");
 		} else if (params[0].equalsIgnoreCase("setpoints")) {
 			if (!verifyLength(player, 3, params)) // legion setpoints NAME points
 				return;
@@ -99,7 +99,7 @@ public class LegionCommand extends AdminCommand {
 
 			long old = legion.getContributionPoints();
 			service.setContributionPoints(legion, points, true);
-			PacketSendUtility.sendMessage(player, "legion " + legion.getLegionName() + " has raised from " + old + " to " + points
+			PacketSendUtility.sendMessage(player, "legion " + legion.getName() + " has raised from " + old + " to " + points
 				+ " contributiong points.");
 		} else if (params[0].equalsIgnoreCase("setname")) {
 			if (!verifyLength(player, 3, params)) // legion setname NAME NEWNAME
@@ -113,13 +113,13 @@ public class LegionCommand extends AdminCommand {
 				PacketSendUtility.sendMessage(player, params[2] + " is incorrect for legion name!");
 				return;
 			}
-			String old = legion.getLegionName();
-			legion.setLegionName(params[2]);
+			String old = legion.getName();
+			legion.setName(params[2]);
 			DAOManager.getDAO(LegionDAO.class).storeLegion(legion);
 			PacketSendUtility.broadcastToLegion(legion, new SM_LEGION_INFO(legion));
 			for (Player legionMember : legion.getOnlineLegionMembers()) {
 				PacketSendUtility.broadcastPacket(legionMember,
-					new SM_LEGION_UPDATE_TITLE(legionMember.getObjectId(), legion.getLegionId(), legion.getLegionName(), legionMember.getLegionMember().getRank()
+					new SM_LEGION_UPDATE_TITLE(legionMember.getObjectId(), legion.getLegionId(), legion.getName(), legionMember.getLegionMember().getRank()
 						.getRankId()), true);
 			}
 			PacketSendUtility.sendMessage(player, "legion " + old + " has changed name from " + old + " to " + params[2] + ".");
@@ -132,7 +132,7 @@ public class LegionCommand extends AdminCommand {
 				return;
 
 			List<String> message = new ArrayList<>(), online = new ArrayList<>(), offline = new ArrayList<>();
-			message.add("name: " + legion.getLegionName());
+			message.add("name: " + legion.getName());
 			message.add("contrib points: " + legion.getContributionPoints());
 			message.add("level: " + legion.getLegionLevel());
 			message.add("id: " + legion.getLegionId());
@@ -194,14 +194,14 @@ public class LegionCommand extends AdminCommand {
 			}
 
 			if (target.isLegionMember()) {
-				PacketSendUtility.sendMessage(player, "player " + target.getName() + " is a already member of " + target.getLegion().getLegionName() + "!");
+				PacketSendUtility.sendMessage(player, "player " + target.getName() + " is a already member of " + target.getLegion().getName() + "!");
 				return;
 			}
 
 			if (service.directAddPlayer(legion, target)) {
-				PacketSendUtility.sendMessage(player, "player " + target.getName() + " was added to " + legion.getLegionName());
+				PacketSendUtility.sendMessage(player, "player " + target.getName() + " was added to " + legion.getName());
 			} else {
-				PacketSendUtility.sendMessage(player, "probably legion " + legion.getLegionName() + " is full");
+				PacketSendUtility.sendMessage(player, "probably legion " + legion.getName() + " is full");
 			}
 		} else if (params[0].equalsIgnoreCase("bg")) {
 			if (!verifyLength(player, 3, params)) // legion bg NAME PLAYER
@@ -218,7 +218,7 @@ public class LegionCommand extends AdminCommand {
 			}
 
 			if (!legion.isMember(target.getObjectId())) {
-				PacketSendUtility.sendMessage(player, "player " + target.getName() + " is not a member of " + legion.getLegionName() + ", invite them!");
+				PacketSendUtility.sendMessage(player, "player " + target.getName() + " is not a member of " + legion.getName() + ", invite them!");
 				return;
 			}
 

@@ -333,7 +333,7 @@ public class SiegeService {
 		// Store old owner for msg
 		final int oldOwnerRaceId = loc.getRace().getRaceId();
 		final int legionId = loc.getLegionId();
-		final String legionName = legionId != 0 ? LegionService.getInstance().getLegion(legionId).getLegionName() : "";
+		final String legionName = legionId != 0 ? LegionService.getInstance().getLegion(legionId).getName() : "";
 		final DescriptionId nameId = new DescriptionId(loc.getTemplate().getNameId());
 
 		// Reset owner
@@ -687,7 +687,7 @@ public class SiegeService {
 	public void broadcastUpdate(SiegeLocation loc, DescriptionId nameId) {
 		SM_SIEGE_LOCATION_INFO pkt = new SM_SIEGE_LOCATION_INFO(loc);
 		SM_SYSTEM_MESSAGE info = loc.getLegionId() == 0 ? new SM_SYSTEM_MESSAGE(1301039, loc.getRace().getDescriptionId(), nameId)
-			: new SM_SYSTEM_MESSAGE(1301038, LegionService.getInstance().getLegion(loc.getLegionId()).getLegionName(), nameId);
+			: new SM_SYSTEM_MESSAGE(1301038, LegionService.getInstance().getLegion(loc.getLegionId()).getName(), nameId);
 		broadcast(pkt, info, loc.getRace());
 	}
 

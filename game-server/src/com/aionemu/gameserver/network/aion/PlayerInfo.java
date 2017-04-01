@@ -113,7 +113,7 @@ public abstract class PlayerInfo extends AionServerPacket {
 		writeH(0); // unk 2.5
 		writeD(pcd.getTitleId());
 		writeD(accPlData.isLegionMember() ? accPlData.getLegion().getLegionId() : 0);
-		writeS(accPlData.isLegionMember() ? accPlData.getLegion().getLegionName() : "", 82);
+		writeS(accPlData.isLegionMember() ? accPlData.getLegion().getName() : "", 82);
 		writeH(accPlData.isLegionMember() ? 1 : 0);
 		writeD(pcd.getLastOnline() != null ? (int) (pcd.getLastOnline().getTime() / 1000) : 0);// last online
 		for (int i = 0; i < 16; i++) { // 16 items is always expected by the client...

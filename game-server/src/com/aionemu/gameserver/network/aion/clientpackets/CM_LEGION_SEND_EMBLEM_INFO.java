@@ -31,6 +31,6 @@ public class CM_LEGION_SEND_EMBLEM_INFO extends AionClientPacket {
 
 		Legion legion = LegionService.getInstance().getLegion(legionId);
 		if (legion != null)
-			sendPacket(new SM_LEGION_SEND_EMBLEM(legionId, legion.getLegionEmblem(), 0, legion.getLegionName())); // send only info without following EMBLEM_DATA packets
+			sendPacket(new SM_LEGION_SEND_EMBLEM(legionId, legion.getLegionEmblem(), 0, legion.getName())); // send only info without following EMBLEM_DATA packets
 	}
 }

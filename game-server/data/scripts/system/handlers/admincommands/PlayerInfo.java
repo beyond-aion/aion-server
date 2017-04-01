@@ -108,7 +108,7 @@ public class PlayerInfo extends AdminCommand {
 				StringBuilder strbld = new StringBuilder();
 				List<LegionMemberEx> legionmemblist = LegionService.getInstance().loadLegionMemberExList(legion, null);
 				Iterator<LegionMemberEx> it = legionmemblist.iterator();
-				strbld.append("-legion info:\n\tname: " + legion.getLegionName() + ", level: " + legion.getLegionLevel() + "\n\tmembers(online):\n");
+				strbld.append("-legion info:\n\tname: " + legion.getName() + ", level: " + legion.getLegionLevel() + "\n\tmembers(online):\n");
 				while (it.hasNext()) {
 					LegionMemberEx act = it.next();
 					strbld.append("\t\t" + act.getName() + "(" + ((act.isOnline() == true) ? "online" : "offline") + ")" + act.getRank().toString() + "\n");

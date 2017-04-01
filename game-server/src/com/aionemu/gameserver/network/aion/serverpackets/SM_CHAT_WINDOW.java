@@ -94,7 +94,7 @@ public class SM_CHAT_WINDOW extends AionServerPacket {
 		} else {
 			writeC(1);
 			writeS(target.getName(true));
-			writeS(target.getLegion() != null ? target.getLegion().getLegionName() : "");
+			writeS(target.getLegion() != null ? target.getLegion().getName() : "");
 			writeC(target.getLevel());
 			writeH(target.getPlayerClass().getClassId());
 			writeS(target.getCommonData().getNote());

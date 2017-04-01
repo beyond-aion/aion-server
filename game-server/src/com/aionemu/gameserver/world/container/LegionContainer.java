@@ -29,12 +29,12 @@ public class LegionContainer implements Iterable<Legion> {
 	 * @param legion
 	 */
 	public void add(Legion legion) {
-		if (legion == null || legion.getLegionName() == null)
+		if (legion == null || legion.getName() == null)
 			return;
 
 		if (legionsById.put(legion.getLegionId(), legion) != null)
 			throw new DuplicateAionObjectException();
-		if (legionsByName.put(legion.getLegionName().toLowerCase(), legion) != null)
+		if (legionsByName.put(legion.getName().toLowerCase(), legion) != null)
 			throw new DuplicateAionObjectException();
 	}
 
@@ -45,7 +45,7 @@ public class LegionContainer implements Iterable<Legion> {
 	 */
 	public void remove(Legion legion) {
 		legionsById.remove(legion.getLegionId());
-		legionsByName.remove(legion.getLegionName().toLowerCase());
+		legionsByName.remove(legion.getName().toLowerCase());
 	}
 
 	/**

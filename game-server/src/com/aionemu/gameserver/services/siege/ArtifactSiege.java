@@ -86,7 +86,7 @@ public class ArtifactSiege extends Siege<ArtifactLocation> {
 				Integer wPlayerId = wRaceCounter.getPlayerDamageCounter().keySet().iterator().next();
 				wPlayerName = PlayerService.getPlayerName(wPlayerId);
 			}
-			final String winnerName = wLegion != null ? wLegion.getLegionName() : wPlayerName;
+			final String winnerName = wLegion != null ? wLegion.getName() : wPlayerName;
 
 			// prepare packets, we can use single packet instance
 			final AionServerPacket wRacePacket = new SM_SYSTEM_MESSAGE(1320002, wRace.getRaceDescriptionId(), winnerName,

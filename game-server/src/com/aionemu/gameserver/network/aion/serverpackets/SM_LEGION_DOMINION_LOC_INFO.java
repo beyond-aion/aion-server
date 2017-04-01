@@ -22,7 +22,7 @@ public class SM_LEGION_DOMINION_LOC_INFO extends AionServerPacket {
 			LegionEmblem emblem = new LegionEmblem();
 			if (legionId != 0 && LegionService.getInstance().getLegion(legionId) != null) {
 				emblem = LegionService.getInstance().getLegion(legionId).getLegionEmblem();
-				name = LegionService.getInstance().getLegion(legionId).getLegionName();
+				name = LegionService.getInstance().getLegion(legionId).getName();
 			}
 			writeD(loc.getLocationId());
 			writeD(legionId);

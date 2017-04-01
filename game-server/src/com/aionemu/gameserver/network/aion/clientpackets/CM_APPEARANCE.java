@@ -114,7 +114,7 @@ public class CM_APPEARANCE extends AionClientPacket {
 	private void tryChangeLegionName(Player player, String newName, int itemObjId) {
 		if (!player.isLegionMember() || !player.getLegionMember().isBrigadeGeneral())
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_EDIT_GUILD_NAME_ERROR_ONLY_MASTER_CAN_CHANGE_NAME());
-		else if (player.getLegion().getLegionName().equals(newName))
+		else if (player.getLegion().getName().equals(newName))
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_EDIT_GUILD_NAME_ERROR_SAME_YOUR_NAME());
 		else if (!NameRestrictionService.isValidLegionName(newName) || NameRestrictionService.isForbidden(newName))
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_EDIT_GUILD_NAME_ERROR_WRONG_INPUT());
@@ -126,12 +126,12 @@ public class CM_APPEARANCE extends AionClientPacket {
 		else {
 			Legion legion = player.getLegion();
 
-			legion.setLegionName(newName);
+			legion.setName(newName);
 			DAOManager.getDAO(LegionDAO.class).storeLegion(legion);
 
 			PacketSendUtility.broadcastToLegion(legion, new SM_LEGION_INFO(legion));
 			for (Player member : legion.getOnlineLegionMembers()) {
-				PacketSendUtility.broadcastPacket(member, new SM_LEGION_UPDATE_TITLE(member.getObjectId(), legion.getLegionId(), legion.getLegionName(),
+				PacketSendUtility.broadcastPacket(member, new SM_LEGION_UPDATE_TITLE(member.getObjectId(), legion.getLegionId(), legion.getName(),
 					member.getLegionMember().getRank().getRankId()), true);
 			}
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_EDIT_GUILD_NAME_SUCCESS(newName));

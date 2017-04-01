@@ -244,7 +244,7 @@ public class LegionService {
 	}
 
 	/**
-	 * Returns the legion with given legionId (if such legion exists)
+	 * Returns the legion with given name
 	 *
 	 * @param legionName
 	 *          Legion Name
@@ -518,7 +518,7 @@ public class LegionService {
 			/**
 			 * Send required packets
 			 */
-			PacketSendUtility.sendPacket(activePlayer, SM_SYSTEM_MESSAGE.STR_GUILD_CREATED(legion.getLegionName()));
+			PacketSendUtility.sendPacket(activePlayer, SM_SYSTEM_MESSAGE.STR_GUILD_CREATED(legion.getName()));
 		}
 	}
 
@@ -591,7 +591,7 @@ public class LegionService {
 
 				// Send question packet to buddy
 				PacketSendUtility.sendPacket(targetPlayer, new SM_QUESTION_WINDOW(SM_QUESTION_WINDOW.STR_GUILD_INVITE_DO_YOU_ACCEPT_INVITATION, 0, 0,
-					legion.getLegionName(), legion.getLegionLevel() + "", activePlayer.getName()));
+					legion.getName(), legion.getLegionLevel() + "", activePlayer.getName()));
 			}
 		}
 	}
@@ -838,7 +838,7 @@ public class LegionService {
 	private void updateAfterDisbandLegion(Legion legion) {
 		for (Player onlineLegionMember : legion.getOnlineLegionMembers()) {
 			PacketSendUtility.broadcastPacket(onlineLegionMember, new SM_LEGION_UPDATE_TITLE(onlineLegionMember.getObjectId(), 0, "", 0), true);
-			PacketSendUtility.sendPacket(onlineLegionMember, new SM_LEGION_LEAVE_MEMBER(1300302, 0, legion.getLegionName()));
+			PacketSendUtility.sendPacket(onlineLegionMember, new SM_LEGION_LEAVE_MEMBER(1300302, 0, legion.getName()));
 			onlineLegionMember.resetLegionMember();
 		}
 	}
@@ -854,7 +854,7 @@ public class LegionService {
 		for (Player onlineLegionMember : legion.getOnlineLegionMembers()) {
 			PacketSendUtility.broadcastPacket(onlineLegionMember, new SM_LEGION_UPDATE_EMBLEM(legion.getLegionId(), legionEmblem), true);
 			if (legionEmblem.getEmblemType() == LegionEmblemType.CUSTOM)
-				sendEmblemData(onlineLegionMember, legionEmblem, legion.getLegionId(), legion.getLegionName());
+				sendEmblemData(onlineLegionMember, legionEmblem, legion.getLegionId(), legion.getName());
 		}
 	}
 
@@ -1222,7 +1222,7 @@ public class LegionService {
 
 		// Update legion member's appearance in game
 		PacketSendUtility.broadcastPacket(player,
-			new SM_LEGION_UPDATE_TITLE(player.getObjectId(), legion.getLegionId(), legion.getLegionName(), player.getLegionMember().getRank().getRankId()),
+			new SM_LEGION_UPDATE_TITLE(player.getObjectId(), legion.getLegionId(), legion.getName(), player.getLegionMember().getRank().getRankId()),
 			true);
 		legion.addBonus();
 	}
@@ -1309,7 +1309,7 @@ public class LegionService {
 					if (removeLegionMember(charName, true, activePlayer.getName())) {
 						// send packet to members?
 						if (targetPlayer != null) {
-							PacketSendUtility.sendPacket(targetPlayer, new SM_LEGION_LEAVE_MEMBER(1300246, 0, legion.getLegionName()));
+							PacketSendUtility.sendPacket(targetPlayer, new SM_LEGION_LEAVE_MEMBER(1300246, 0, legion.getName()));
 							targetPlayer.resetLegionMember();
 							if (legion.hasBonus()) {
 								PacketSendUtility.sendPacket(activePlayer, new SM_ICON_INFO(1, false));
@@ -1384,7 +1384,7 @@ public class LegionService {
 				if (legionRestrictions.canLeave(activePlayer)) {
 					if (removeLegionMember(activePlayer.getName(), false, "")) {
 						Legion legion = activePlayer.getLegion();
-						PacketSendUtility.sendPacket(activePlayer, new SM_LEGION_LEAVE_MEMBER(1300241, 0, legion.getLegionName()));
+						PacketSendUtility.sendPacket(activePlayer, new SM_LEGION_LEAVE_MEMBER(1300241, 0, legion.getName()));
 						activePlayer.resetLegionMember();
 						if (legion.hasBonus()) {
 							PacketSendUtility.sendPacket(activePlayer, new SM_ICON_INFO(1, false));
@@ -1404,7 +1404,7 @@ public class LegionService {
 	public boolean removePlayerFromLegionAsItself(Player player) {
 		if (removeLegionMember(player.getName(), false, "")) {
 			Legion legion = player.getLegion();
-			PacketSendUtility.sendPacket(player, new SM_LEGION_LEAVE_MEMBER(1300241, 0, legion.getLegionName()));
+			PacketSendUtility.sendPacket(player, new SM_LEGION_LEAVE_MEMBER(1300241, 0, legion.getName()));
 			player.resetLegionMember();
 			if (legion.hasBonus()) {
 				PacketSendUtility.sendPacket(player, new SM_ICON_INFO(1, false));
