@@ -99,7 +99,7 @@ public class World {
 			return;
 		}
 		if (allObjects.put(object.getObjectId(), object) != null)
-			throw new DuplicateAionObjectException();
+			throw new DuplicateAionObjectException(object, allObjects.get(object.getObjectId()));
 
 		if (object instanceof Npc) {
 			if (object instanceof SiegeNpc) {

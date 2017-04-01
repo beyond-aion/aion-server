@@ -1,5 +1,8 @@
 package com.aionemu.gameserver.world.exceptions;
 
+import com.aionemu.gameserver.model.gameobjects.AionObject;
+import com.aionemu.gameserver.model.gameobjects.player.Player;
+
 /**
  * This Exception will be thrown when some AionObject will be stored more then one time. This Exception indicating serious error.
  * 
@@ -10,41 +13,21 @@ public class DuplicateAionObjectException extends RuntimeException {
 	private static final long serialVersionUID = -2031489557355197834L;
 
 	/**
-	 * Constructs an <code>DuplicateAionObjectException</code> with no detail message.
+	 * Constructs an <code>DuplicateAionObjectException</code> for the given objects
 	 */
-	public DuplicateAionObjectException() {
-		super();
+	public DuplicateAionObjectException(AionObject object, AionObject presentObject) {
+		super(createMessage(object, presentObject));
 	}
 
-	/**
-	 * Constructs an <code>DuplicateAionObjectException</code> with the specified detail message.
-	 * 
-	 * @param s
-	 *          the detail message.
-	 */
-	public DuplicateAionObjectException(String s) {
-		super(s);
-	}
-
-	/**
-	 * Creates new error
-	 * 
-	 * @param message
-	 *          exception description
-	 * @param cause
-	 *          reason of this exception
-	 */
-	public DuplicateAionObjectException(String message, Throwable cause) {
-		super(message, cause);
-	}
-
-	/**
-	 * Creates new error
-	 * 
-	 * @param cause
-	 *          reason of this exception
-	 */
-	public DuplicateAionObjectException(Throwable cause) {
-		super(cause);
+	private static String createMessage(AionObject object, AionObject presentObject) {
+		StringBuilder sb = new StringBuilder("Duplicate object: ");
+		sb.append(object);
+		if (object instanceof Player)
+			sb.append(' ').append(((Player) object).getPosition());
+		sb.append(", already present object: ");
+		sb.append(presentObject);
+		if (presentObject instanceof Player)
+			sb.append(' ').append(((Player) presentObject).getPosition());
+		return sb.toString();
 	}
 }

@@ -32,9 +32,9 @@ public class PlayerContainer implements Iterable<Player> {
 	 */
 	public void add(Player player) {
 		if (playersById.put(player.getObjectId(), player) != null)
-			throw new DuplicateAionObjectException();
+			throw new DuplicateAionObjectException(player, playersById.get(player.getObjectId()));
 		if (playersByName.put(player.getName(), player) != null)
-			throw new DuplicateAionObjectException();
+			throw new DuplicateAionObjectException(player, playersByName.get(player.getObjectId()));
 	}
 
 	/**

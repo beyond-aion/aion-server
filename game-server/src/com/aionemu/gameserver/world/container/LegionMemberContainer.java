@@ -7,7 +7,6 @@ import com.aionemu.gameserver.dao.LegionMemberDAO;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.team.legion.LegionMember;
 import com.aionemu.gameserver.model.team.legion.LegionMemberEx;
-import com.aionemu.gameserver.world.exceptions.DuplicateAionObjectException;
 
 /**
  * Container for storing Legion members by Id and name.
@@ -47,7 +46,7 @@ public class LegionMemberContainer {
 	 */
 	public void addMemberEx(LegionMemberEx legionMember) {
 		if (legionMemberExById.containsKey(legionMember.getObjectId()) || legionMemberExByName.containsKey(legionMember.getName()))
-			throw new DuplicateAionObjectException();
+			throw new IllegalStateException(legionMember.getName() + " is already cached");
 		legionMemberExById.put(legionMember.getObjectId(), legionMember);
 		legionMemberExByName.put(legionMember.getName(), legionMember);
 	}

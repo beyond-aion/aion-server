@@ -540,9 +540,4 @@ public class House extends VisibleObject {
 		}
 		return saleOptions.getGoldPrice();
 	}
-
-	@Override
-	public String toString() {
-		return name;
-	}
 }

@@ -33,9 +33,9 @@ public class LegionContainer implements Iterable<Legion> {
 			return;
 
 		if (legionsById.put(legion.getLegionId(), legion) != null)
-			throw new DuplicateAionObjectException();
+			throw new DuplicateAionObjectException(legion, legionsById.get(legion.getLegionId()));
 		if (legionsByName.put(legion.getName().toLowerCase(), legion) != null)
-			throw new DuplicateAionObjectException();
+			throw new DuplicateAionObjectException(legion, legionsByName.get(legion.getName().toLowerCase()));
 	}
 
 	/**
