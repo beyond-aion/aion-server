@@ -39,7 +39,6 @@ public class CM_CHAT_MESSAGE_WHISPER extends AionClientPacket {
 	 */
 	public CM_CHAT_MESSAGE_WHISPER(int opcode, State state, State... restStates) {
 		super(opcode, state, restStates);
-
 	}
 
 	/**

@@ -27,10 +27,8 @@ import com.aionemu.gameserver.model.templates.housing.Building;
 import com.aionemu.gameserver.model.templates.housing.BuildingType;
 import com.aionemu.gameserver.model.templates.housing.HouseAddress;
 import com.aionemu.gameserver.model.templates.housing.HousingLand;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_FRIEND_LIST;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_HOUSE_ACQUIRE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_HOUSE_OWNER_INFO;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_MARK_FRIENDLIST;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -319,8 +317,5 @@ public class HousingService {
 		player.setHouseOwnerState(buildingState);
 
 		PacketSendUtility.sendPacket(player, new SM_HOUSE_OWNER_INFO(player));
-		if (!player.getFriendList().getIsFriendListSent())
-			PacketSendUtility.sendPacket(player, new SM_FRIEND_LIST());
-		PacketSendUtility.sendPacket(player, new SM_MARK_FRIENDLIST());
 	}
 }

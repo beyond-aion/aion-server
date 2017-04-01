@@ -84,7 +84,7 @@ public class SocialService {
 	 */
 	public static boolean setFriendMemo(Player player, Friend target, String memo) {
 		if (!target.getFriendMemo().equals(memo)) {
-			if (DAOManager.getDAO(FriendListDAO.class).setFriendMemo(player.getObjectId(), target.getOid(), memo)) {
+			if (DAOManager.getDAO(FriendListDAO.class).setFriendMemo(player.getObjectId(), target.getObjectId(), memo)) {
 				target.setFriendMemo(memo);
 				PacketSendUtility.sendPacket(player, new SM_FRIEND_LIST());
 				return true;
@@ -123,7 +123,7 @@ public class SocialService {
 	 * @return True on success
 	 */
 	public static boolean deleteFriend(Player deleter, Friend friend) {
-		int friendObjId = friend.getOid();
+		int friendObjId = friend.getObjectId();
 		if (DAOManager.getDAO(FriendListDAO.class).delFriends(deleter.getObjectId(), friendObjId)) {
 			// Try to get the target player from the cache
 			Player friendPlayer = PlayerService.getCachedPlayer(friendObjId);

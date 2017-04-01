@@ -19,11 +19,11 @@ public class SM_FRIEND_LIST extends AionServerPacket {
 	protected void writeImpl(AionConnection con) {
 		FriendList list = con.getActivePlayer().getFriendList();
 
-		writeH((0 - list.getSize()));
+		writeH(-list.getSize());
 		writeC(0);// unk
 
 		for (Friend friend : list) {
-			writeD(friend.getOid());
+			writeD(friend.getObjectId());
 			writeS(friend.getName());
 			writeD(friend.getLevel());
 			writeD(friend.getPlayerClass().getClassId());
@@ -33,9 +33,9 @@ public class SM_FRIEND_LIST extends AionServerPacket {
 			writeS(friend.getNote()); // Friend note
 			writeC(friend.getStatus().getId());
 
-			int address = HousingService.getInstance().getPlayerAddress(friend.getOid());
+			int address = HousingService.getInstance().getPlayerAddress(friend.getObjectId());
 			if (address > 0) {
-				House house = HousingService.getInstance().getPlayerStudio(friend.getOid());
+				House house = HousingService.getInstance().getPlayerStudio(friend.getObjectId());
 				if (house == null) {
 					house = HousingService.getInstance().getHouseByAddress(address);
 					writeD(house.getAddress().getId());

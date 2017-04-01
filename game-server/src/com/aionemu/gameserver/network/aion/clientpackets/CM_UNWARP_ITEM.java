@@ -34,7 +34,7 @@ public class CM_UNWARP_ITEM extends AionClientPacket {
 		Item item = player.getInventory().getItemByObjId(objectId);
 		if (item != null) {
 			if (item.getPackCount() > 0) {
-				getConnection().sendPacket(new SM_UNWARP_ITEM(objectId, item.getPackCount()));
+				sendPacket(new SM_UNWARP_ITEM(objectId, item.getPackCount()));
 				item.setPackCount(item.getPackCount() * -1);
 				item.setPersistentState(PersistentState.UPDATE_REQUIRED);
 				PacketSendUtility.sendPacket(player, new SM_INVENTORY_UPDATE_ITEM(player, item));

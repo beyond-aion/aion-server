@@ -468,7 +468,7 @@ public class PlayerCommonData extends VisibleObjectTemplate {
 	}
 
 	/**
-	 * Gets the cooresponding Player for this common data. Returns null if the player is not online
+	 * Gets the corresponding Player for this common data. Returns null if the player is not online
 	 * 
 	 * @return Player or null
 	 */

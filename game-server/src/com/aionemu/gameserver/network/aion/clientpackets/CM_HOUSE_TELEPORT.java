@@ -61,7 +61,7 @@ public class CM_HOUSE_TELEPORT extends AionClientPacket {
 			int address = 0;
 
 			while (friends.hasNext()) {
-				int friendId = friends.next().getOid();
+				int friendId = friends.next().getObjectId();
 				address = HousingService.getInstance().getPlayerAddress(friendId);
 				if (address != 0) {
 					house = HousingService.getInstance().getPlayerStudio(friendId);

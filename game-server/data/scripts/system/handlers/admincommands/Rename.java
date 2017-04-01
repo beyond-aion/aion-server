@@ -1,7 +1,5 @@
 package admincommands;
 
-import java.util.Iterator;
-
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.dao.OldNamesDAO;
@@ -19,6 +17,7 @@ import com.aionemu.gameserver.services.player.PlayerService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.Util;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
+import com.aionemu.gameserver.world.World;
 
 /**
  * @author xTz
@@ -32,8 +31,8 @@ public class Rename extends AdminCommand {
 	@Override
 	public void execute(Player admin, String... params) {
 		if (params.length < 1 || params.length > 2) {
-			PacketSendUtility.sendMessage(admin, "No parameters detected.\n" + "Please use //rename <Player name> <rename>\n"
-				+ "or use //rename [target] <rename>");
+			PacketSendUtility.sendMessage(admin,
+				"No parameters detected.\n" + "Please use //rename <Player name> <rename>\n" + "or use //rename [target] <rename>");
 			return;
 		}
 
@@ -110,13 +109,10 @@ public class Rename extends AdminCommand {
 	}
 
 	public void sendPacket(Player admin, Player player, String rename, String recipient) {
-		Iterator<Friend> knownFriends = player.getFriendList().iterator();
-
-		while (knownFriends.hasNext()) {
-			Friend nextObject = knownFriends.next();
-			if (nextObject.getPlayer() != null && nextObject.getPlayer().isOnline()) {
-				PacketSendUtility.sendPacket(nextObject.getPlayer(), new SM_PLAYER_INFO(player));
-			}
+		for (Friend friend : player.getFriendList()) {
+			Player friendPlayer = World.getInstance().findPlayer(friend.getObjectId());
+			if (friendPlayer != null)
+				PacketSendUtility.sendPacket(friendPlayer, new SM_PLAYER_INFO(player));
 		}
 
 		if (player.isLegionMember()) {
@@ -128,7 +124,7 @@ public class Rename extends AdminCommand {
 
 	@Override
 	public void info(Player player, String message) {
-		PacketSendUtility.sendMessage(player, "No parameters detected.\n" + "Please use //rename <Player name> <rename>\n"
-			+ "or use //rename [target] <rename>");
+		PacketSendUtility.sendMessage(player,
+			"No parameters detected.\n" + "Please use //rename <Player name> <rename>\n" + "or use //rename [target] <rename>");
 	}
 }

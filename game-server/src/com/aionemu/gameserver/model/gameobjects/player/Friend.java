@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import com.aionemu.gameserver.model.Gender;
 import com.aionemu.gameserver.model.PlayerClass;
 import com.aionemu.gameserver.model.gameobjects.player.FriendList.Status;
+import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.WorldPosition;
 
 /**
@@ -28,11 +29,12 @@ public class Friend {
 	 * @return Friend's status
 	 */
 	public Status getStatus() {
-		// second check is temporary
-		if (pcd.getPlayer() == null || !pcd.isOnline()) {
+		if (!pcd.isOnline())
 			return FriendList.Status.OFFLINE;
-		}
-		return pcd.getPlayer().getFriendList().getStatus();
+		Player player = World.getInstance().findPlayer(getObjectId());
+		if (player == null)
+			return FriendList.Status.OFFLINE;
+		return player.getFriendList().getStatus();
 	}
 
 	public void setPCD(PlayerCommonData pcd) {
@@ -75,28 +77,17 @@ public class Friend {
 	}
 
 	/**
-	 * Gets the last time this player was online as a unix timestamp<br />
-	 * Returns 0 if the player is online now
-	 * 
-	 * @return Unix timestamp the player was last online
+	 * @return Unix timestamp the player was last online. Returns 0 if the player is online now.
 	 */
 	public int getLastOnlineTime() {
-		if (pcd.getLastOnline() == null || isOnline())
+		if (pcd.getLastOnline() == null || World.getInstance().isInWorld(getObjectId()))
 			return 0;
 
 		return (int) (pcd.getLastOnline().getTime() / 1000); // Convert to int, unix time format (ms -> seconds)
 	}
 
-	public int getOid() {
+	public int getObjectId() {
 		return pcd.getPlayerObjId();
-	}
-
-	public Player getPlayer() {
-		return pcd.getPlayer();
-	}
-
-	public boolean isOnline() {
-		return pcd.isOnline();
 	}
 
 	public synchronized String getFriendMemo() {

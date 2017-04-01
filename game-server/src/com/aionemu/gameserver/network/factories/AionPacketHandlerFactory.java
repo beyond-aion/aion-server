@@ -119,6 +119,7 @@ public class AionPacketHandlerFactory {
 		addPacket(new CM_ITEM_REMODEL(0x13D, State.IN_GAME));
 		addPacket(new CM_L2AUTH_LOGIN_CHECK(0x178, State.CONNECTED));
 		addPacket(new CM_LEGION(0x0F0, State.IN_GAME));
+		addPacket(new CM_LEGION_DOMINION_REQUEST_RANKING(0x0E0, State.IN_GAME));
 		addPacket(new CM_LEGION_MODIFY_EMBLEM(0x11E, State.IN_GAME));
 		addPacket(new CM_LEGION_SEND_EMBLEM(0x0F2, State.IN_GAME));
 		addPacket(new CM_LEGION_SEND_EMBLEM_INFO(0x0D3, State.IN_GAME));
@@ -203,7 +204,6 @@ public class AionPacketHandlerFactory {
 		addPacket(new CM_VERSION_CHECK(0x0C3, State.CONNECTED));
 		addPacket(new CM_VIEW_PLAYER_DETAILS(0x107, State.IN_GAME));
 		addPacket(new CM_WINDSTREAM(0x2E9, State.IN_GAME));
-		addPacket(new CM_LEGION_DOMINION_REQUEST_RANKING(0x0E0, State.IN_GAME));
 
 		// addPacket(new CM_UNK(0x0A9, State.IN_GAME));
 		// addPacket(new CM_UNK(0x181, State.IN_GAME));

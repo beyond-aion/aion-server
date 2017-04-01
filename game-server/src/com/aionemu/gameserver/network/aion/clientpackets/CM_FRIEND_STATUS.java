@@ -8,7 +8,6 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_FRIEND_STATUS;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * Packet received when a user changes his buddylist status
@@ -39,6 +38,6 @@ public class CM_FRIEND_STATUS extends AionClientPacket {
 			statusEnum = Status.ONLINE;
 		}
 		activePlayer.getFriendList().setStatus(statusEnum, activePlayer.getCommonData());
-		PacketSendUtility.sendPacket(activePlayer, new SM_FRIEND_STATUS(status));
+		sendPacket(new SM_FRIEND_STATUS(status));
 	}
 }

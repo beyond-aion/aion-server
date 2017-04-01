@@ -2,16 +2,15 @@ package com.aionemu.gameserver.model.gameobjects.player;
 
 import java.util.Collection;
 import java.util.Iterator;
-import java.util.Queue;
-import java.util.concurrent.ConcurrentLinkedQueue;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.configs.main.MembershipConfig;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_FRIEND_NOTIFY;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_FRIEND_UPDATE;
+import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.world.World;
 
 /**
  * Represents a player's Friend list
@@ -20,23 +19,9 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_FRIEND_UPDATE;
  */
 public class FriendList implements Iterable<Friend> {
 
-	private static final Logger log = LoggerFactory.getLogger(FriendList.class);
+	private final Map<Integer, Friend> friends = new ConcurrentHashMap<>();
+	private final Player player;
 	private Status status = Status.OFFLINE;
-	private volatile byte friendListSent = 0;
-
-	private final Queue<Friend> friends;
-
-	private Player player;
-
-	/**
-	 * Constructs an empty friend list for the given player
-	 * 
-	 * @param player
-	 *          Player who has this friendlist
-	 */
-	public FriendList(Player player) {
-		this(player, new ConcurrentLinkedQueue<Friend>());
-	}
 
 	/**
 	 * Constructs a friend list for the given player, with the given friends
@@ -46,8 +31,9 @@ public class FriendList implements Iterable<Friend> {
 	 * @param friends
 	 *          Friends on the list
 	 */
-	public FriendList(Player owner, Collection<Friend> newFriends) {
-		this.friends = new ConcurrentLinkedQueue<>(newFriends);
+	public FriendList(Player owner, Collection<Friend> friends) {
+		for (Friend friend : friends)
+			this.friends.put(friend.getObjectId(), friend);
 		this.player = owner;
 	}
 
@@ -60,11 +46,7 @@ public class FriendList implements Iterable<Friend> {
 	 * @return Friend
 	 */
 	public Friend getFriend(int objId) {
-		for (Friend friend : friends) {
-			if (friend.getOid() == objId)
-				return friend;
-		}
-		return null;
+		return friends.get(objId);
 	}
 
 	/**
@@ -83,7 +65,7 @@ public class FriendList implements Iterable<Friend> {
 	 * @param friend
 	 */
 	public void addFriend(Friend friend) {
-		friends.add(friend);
+		friends.put(friend.getObjectId(), friend);
 	}
 
 	/**
@@ -94,7 +76,7 @@ public class FriendList implements Iterable<Friend> {
 	 * @return Friend matching name
 	 */
 	public Friend getFriend(String name) {
-		for (Friend friend : friends)
+		for (Friend friend : friends.values())
 			if (friend.getName().equalsIgnoreCase(name))
 				return friend;
 		return null;
@@ -111,10 +93,7 @@ public class FriendList implements Iterable<Friend> {
 	 * @param friend
 	 */
 	public void delFriend(int friendOid) {
-		Iterator<Friend> it = iterator();
-		while (it.hasNext())
-			if (it.next().getOid() == friendOid)
-				it.remove();
+		friends.remove(friendOid);
 	}
 
 	public boolean isFull() {
@@ -144,28 +123,20 @@ public class FriendList implements Iterable<Friend> {
 		Status previousStatus = this.status;
 		this.status = status;
 
-		for (Friend friend : friends) // For all my friends
-		{
-			if (friend.isOnline()) // If the player is online
-			{
-				Player friendPlayer = friend.getPlayer();
-				if (friendPlayer == null)
-					continue;
+		for (Friend friend : friends.values()) {
+			Player friendPlayer = World.getInstance().findPlayer(friend.getObjectId());
+			if (friendPlayer == null)
+				continue;
 
-				if (friendPlayer.getClientConnection() == null) {
-					log.warn("[AT] friendlist connection is null");
-					continue;
-				}
-				friendPlayer.getFriendList().getFriend(pcd.getPlayerObjId()).setPCD(pcd);
-				friendPlayer.getClientConnection().sendPacket(new SM_FRIEND_UPDATE(player.getObjectId()));
+			friendPlayer.getFriendList().getFriend(pcd.getPlayerObjId()).setPCD(pcd);
+			PacketSendUtility.sendPacket(friendPlayer, new SM_FRIEND_UPDATE(player.getObjectId()));
 
-				if (previousStatus == Status.OFFLINE) {
-					// Show LOGIN message
-					friendPlayer.getClientConnection().sendPacket(new SM_FRIEND_NOTIFY(SM_FRIEND_NOTIFY.LOGIN, player.getName()));
-				} else if (status == Status.OFFLINE) {
-					// Show LOGOUT message
-					friendPlayer.getClientConnection().sendPacket(new SM_FRIEND_NOTIFY(SM_FRIEND_NOTIFY.LOGOUT, player.getName()));
-				}
+			if (previousStatus == Status.OFFLINE) {
+				// Show LOGIN message
+				PacketSendUtility.sendPacket(friendPlayer, new SM_FRIEND_NOTIFY(SM_FRIEND_NOTIFY.LOGIN, player.getName()));
+			} else if (status == Status.OFFLINE) {
+				// Show LOGOUT message
+				PacketSendUtility.sendPacket(friendPlayer, new SM_FRIEND_NOTIFY(SM_FRIEND_NOTIFY.LOGOUT, player.getName()));
 			}
 		}
 
@@ -173,15 +144,7 @@ public class FriendList implements Iterable<Friend> {
 
 	@Override
 	public Iterator<Friend> iterator() {
-		return friends.iterator();
-	}
-
-	public boolean getIsFriendListSent() {
-		return friendListSent == 1;
-	}
-
-	public void setIsFriendListSent(boolean value) {
-		this.friendListSent = (byte) (value ? 1 : 0);
+		return friends.values().iterator();
 	}
 
 	public enum Status {

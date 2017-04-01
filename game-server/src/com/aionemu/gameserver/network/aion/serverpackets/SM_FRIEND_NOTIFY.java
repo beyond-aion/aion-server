@@ -13,17 +13,17 @@ public class SM_FRIEND_NOTIFY extends AionServerPacket {
 	/**
 	 * Buddy has logged in (Or become visible)
 	 */
-	public static final int LOGIN = 0;
+	public static final byte LOGIN = 0;
 	/**
 	 * Buddy has logged out (Or become invisible)
 	 */
-	public static final int LOGOUT = 1;
+	public static final byte LOGOUT = 1;
 	/**
 	 * Buddy has deleted you
 	 */
-	public static final int DELETED = 2;
+	public static final byte DELETED = 2;
 
-	private final int code;
+	private final byte code;
 	private final String name;
 
 	/**
@@ -34,7 +34,7 @@ public class SM_FRIEND_NOTIFY extends AionServerPacket {
 	 * @param name
 	 *          Name of friend
 	 */
-	public SM_FRIEND_NOTIFY(int code, String name) {
+	public SM_FRIEND_NOTIFY(byte code, String name) {
 		this.code = code;
 		this.name = name;
 	}
