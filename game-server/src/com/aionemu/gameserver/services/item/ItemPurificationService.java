@@ -102,17 +102,9 @@ public class ItemPurificationService {
 		newItem.setItemCreator(sourceItem.getItemCreator());
 		newItem.setEnchantLevel(sourceItem.getEnchantLevel() - 5);
 		newItem.setEnchantBonus(sourceItem.getEnchantBonus());
-
-		if (sourceItem.isAmplified()) {
-			if (newItem.getEnchantLevel() < newItem.getMaxEnchantLevel()) {
-				newItem.setAmplified(false);
-			} else {
-				newItem.setAmplified(true);
-				if (newItem.getEnchantLevel() < 20)
-					newItem.setBuffSkill(0);
-				else
-					newItem.setBuffSkill(sourceItem.getBuffSkill());
-			}
+		newItem.setAmplified(sourceItem.isAmplified() && newItem.getEnchantLevel() >= newItem.getMaxEnchantLevel());
+		if (newItem.isAmplified() && newItem.getEnchantLevel() >= 20) {
+			newItem.setBuffSkill(sourceItem.getBuffSkill());
 		}
 		if (sourceItem.hasFusionedItem()) {
 			newItem.setFusionedItem(sourceItem.getFusionedItemTemplate());
@@ -137,10 +129,9 @@ public class ItemPurificationService {
 			newItem.setRandomStats(new RandomStats(newItem.getItemTemplate().getRandomBonusId(), newItem.getBonusNumber()));
 			newItem.setTuneCount(1);
 		}
-		newItem.setIdianStone(null);
 		newItem.setItemColor(sourceItem.getItemColor());
 		newItem.setRndBonus();
-		newItem.setItemSkinTemplate(null);
+		player.getInventory().add(newItem);
 	}
 
 }
