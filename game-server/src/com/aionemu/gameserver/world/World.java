@@ -430,8 +430,7 @@ public class World {
 			MapRegion oldMapRegion = position.getMapRegion();
 			position.setIsSpawned(false);
 			if (oldMapRegion != null) { // can be null if an instance gets deleted?
-				if (oldMapRegion.getParent() != null)
-					oldMapRegion.getParent().removeObject(object);
+				oldMapRegion.getParent().removeObject(object);
 				oldMapRegion.remove(object);
 				if (object instanceof Creature)
 					oldMapRegion.revalidateZones((Creature) object);
