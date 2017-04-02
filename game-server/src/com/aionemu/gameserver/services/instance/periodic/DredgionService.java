@@ -1,7 +1,5 @@
 package com.aionemu.gameserver.services.instance.periodic;
 
-import java.util.Iterator;
-
 import com.aionemu.gameserver.configs.main.AutoGroupConfig;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_AUTO_GROUP;
@@ -25,16 +23,14 @@ public class DredgionService extends PeriodicInstance {
 	public void startRegistration() {
 		this.registerAvailable = true;
 		startUnregisterTask();
-		Iterator<Player> iter = World.getInstance().getPlayersIterator();
-		while (iter.hasNext()) {
-			Player player = iter.next();
+		World.getInstance().forEachPlayer(player -> {
 			if (player.getLevel() > minLevel && player.getLevel() <= maxLevel) {
 				for (byte maskId : this.maskIds) {
 					PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(maskId, SM_AUTO_GROUP.wnd_EntryIcon, getInstanceMaskId(player) != maskId));
 					onSendEntry(player, maskId);
 				}
 			}
-		}
+		});
 	}
 
 	@Override

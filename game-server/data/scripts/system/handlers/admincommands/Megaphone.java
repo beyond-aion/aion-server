@@ -1,12 +1,9 @@
 package admincommands;
 
-import java.util.Iterator;
-
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_MEGAPHONE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
-import com.aionemu.gameserver.world.World;
 
 /**
  * @author ginho1
@@ -34,10 +31,7 @@ public class Megaphone extends AdminCommand {
 		// Add the last without the end space
 		message += params[params.length - 1];
 
-		Iterator<Player> iter = World.getInstance().getPlayersIterator();
-		while (iter.hasNext()) {
-			PacketSendUtility.sendPacket(iter.next(), new SM_MEGAPHONE(player.getName(), message, 188910000));
-		}
+		PacketSendUtility.broadcastToWorld(new SM_MEGAPHONE(player.getName(), message, 188910000));
 	}
 
 	@Override

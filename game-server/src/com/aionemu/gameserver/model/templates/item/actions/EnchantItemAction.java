@@ -1,7 +1,5 @@
 package com.aionemu.gameserver.model.templates.item.actions;
 
-import java.util.Iterator;
-
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -136,9 +134,7 @@ public class EnchantItemAction extends AbstractItemAction {
 					.getItemTemplate().getTemplateId(), 0, isSuccess ? 1 : 2, 0));
 				if (CustomConfig.ENABLE_ENCHANT_ANNOUNCE) {
 					if (stoneType && (targetItem.getEnchantLevel() == 15 || targetItem.getEnchantLevel() == 20) && isSuccess) {
-						Iterator<Player> iter = World.getInstance().getPlayersIterator();
-						while (iter.hasNext()) {
-							Player player2 = iter.next();
+						World.getInstance().forEachPlayer(player2 -> {
 							if (player2.getRace() == player.getRace()) {
 								if (targetItem.getEnchantLevel() == 15) {
 									PacketSendUtility.sendPacket(player2,
@@ -148,7 +144,7 @@ public class EnchantItemAction extends AbstractItemAction {
 										SM_SYSTEM_MESSAGE.STR_MSG_ENCHANT_ITEM_SUCCEEDED_20(player.getName(), targetItem.getItemTemplate().getNameId()));
 								}
 							}
-						}
+						});
 					}
 				}
 			}

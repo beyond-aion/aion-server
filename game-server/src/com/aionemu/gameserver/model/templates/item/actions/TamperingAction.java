@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.model.templates.item.actions;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -26,7 +25,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_ITEM_USAGE_ANIMATION
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
-import com.aionemu.gameserver.world.World;
+import com.aionemu.gameserver.utils.collections.Predicates;
 
 /**
  * @author Rolandas
@@ -74,13 +73,14 @@ public class TamperingAction extends AbstractItemAction {
 
 				if (player.getInventory().getItemByObjId(targetItem.getObjectId()) == null && !targetItem.isEquipped()) {
 					PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1300452));
-					PacketSendUtility.broadcastPacketAndReceive(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parntObjectId, parentItemId, 0, 2, 0));
+					PacketSendUtility.broadcastPacketAndReceive(player,
+						new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parntObjectId, parentItemId, 0, 2, 0));
 					return;
 				}
 
 				if (!player.getInventory().decreaseByObjectId(parntObjectId, 1)) {
-					PacketSendUtility
-						.broadcastPacketAndReceive(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parntObjectId, parentItemId, 0, 2, 0));
+					PacketSendUtility.broadcastPacketAndReceive(player,
+						new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parntObjectId, parentItemId, 0, 2, 0));
 					return;
 				}
 
@@ -95,7 +95,7 @@ public class TamperingAction extends AbstractItemAction {
 					if (Rnd.chance() < temperingChance) {
 						targetItem.setTempering(targetItem.getTempering() + 1);
 						if (targetItem.getTempering() > 4 && targetItem.getItemTemplate().getItemGroup() == ItemGroup.PLUME) {
-							//Random chance to get 4-7 ATK/20-32 MBoost
+							// Random chance to get 4-7 ATK/20-32 MBoost
 							if (targetItem.getItemTemplate().getTemperingName().equals("TSHIRT_PHYSICAL")) {
 								targetItem.setRndPlumeBonusValue(targetItem.getRndPlumeBonusValue() + Rnd.get(0, 3));
 							} else {
@@ -111,20 +111,15 @@ public class TamperingAction extends AbstractItemAction {
 									targetItem.setTemperingEffect(new TemperingEffect(player, tempering.get(targetItem.getTempering())));
 							}
 						}
-						PacketSendUtility
-							.sendPacket(player, new SM_SYSTEM_MESSAGE(1402148, new DescriptionId(targetItem.getNameId()), targetItem.getTempering()));
-						PacketSendUtility.broadcastPacketAndReceive(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parntObjectId, parentItemId, 0, 1,
-							0));
+						PacketSendUtility.sendPacket(player,
+							new SM_SYSTEM_MESSAGE(1402148, new DescriptionId(targetItem.getNameId()), targetItem.getTempering()));
+						PacketSendUtility.broadcastPacketAndReceive(player,
+							new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parntObjectId, parentItemId, 0, 1, 0));
 
 						if (CustomConfig.ENABLE_ENCHANT_ANNOUNCE && targetItem.getTempering() == 10) {
-							Iterator<Player> iter = World.getInstance().getPlayersIterator();
-							while (iter.hasNext()) {
-								Player player2 = iter.next();
-								if (player2.getRace() == player.getRace()) {
-									PacketSendUtility.sendPacket(player2,
-										SM_SYSTEM_MESSAGE.STR_MSG_ITEM_AUTHORIZE_SUCCEEDED_MAX(player.getName(), targetItem.getItemTemplate().getNameId()));
-								}
-							}
+							PacketSendUtility.broadcastToWorld(
+								SM_SYSTEM_MESSAGE.STR_MSG_ITEM_AUTHORIZE_SUCCEEDED_MAX(player.getName(), targetItem.getItemTemplate().getNameId()),
+								Predicates.Players.sameRace(player));
 						}
 
 						if (LoggingConfig.LOG_TAMPERING)
@@ -134,16 +129,16 @@ public class TamperingAction extends AbstractItemAction {
 						targetItem.setTempering(0);
 						if (targetItem.getItemTemplate().getItemGroup() == ItemGroup.PLUME) {
 							PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1402447, new DescriptionId(targetItem.getNameId())));
-							PacketSendUtility.broadcastPacketAndReceive(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parntObjectId, parentItemId, 0,
-								2, 0));
+							PacketSendUtility.broadcastPacketAndReceive(player,
+								new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parntObjectId, parentItemId, 0, 2, 0));
 							if (targetItem.isEquipped())
 								player.getEquipment().decreaseEquippedItemCount(targetItem.getObjectId(), 1);
 							else
 								player.getInventory().decreaseByObjectId(targetItem.getObjectId(), 1);
 						} else {
 							PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1402149, new DescriptionId(targetItem.getNameId())));
-							PacketSendUtility.broadcastPacketAndReceive(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parntObjectId, parentItemId, 0,
-								2, 0));
+							PacketSendUtility.broadcastPacketAndReceive(player,
+								new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parntObjectId, parentItemId, 0, 2, 0));
 						}
 
 						if (LoggingConfig.LOG_TAMPERING)

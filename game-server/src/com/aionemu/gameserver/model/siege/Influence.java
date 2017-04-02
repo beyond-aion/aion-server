@@ -1,13 +1,7 @@
 package com.aionemu.gameserver.model.siege;
 
-import java.util.Iterator;
-
 import com.aionemu.gameserver.model.Race;
-import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_INFLUENCE_RATIO;
 import com.aionemu.gameserver.services.SiegeService;
-import com.aionemu.gameserver.utils.PacketSendUtility;
-import com.aionemu.gameserver.world.World;
 
 /**
  * Calculates only fortresses (artifacts arent included for Influence) with their template Values
@@ -141,21 +135,6 @@ public class Influence {
 		global_e = (abyss_e + inggison_e + gelkmaros_e + kaldor_e) / 100f;
 		global_a = (abyss_a + inggison_a + gelkmaros_a + kaldor_a) / 100f;
 		global_b = (abyss_b + inggison_b + gelkmaros_b + kaldor_b) / 100f;
-	}
-
-	/**
-	 * Broadcast packet with influence update to all players. - Responsible for the message "The Divine Fortress is now vulnerable."
-	 */
-	@SuppressWarnings("unused")
-	private void broadcastInfluencePacket() {
-		SM_INFLUENCE_RATIO pkt = new SM_INFLUENCE_RATIO();
-
-		Player player;
-		Iterator<Player> iter = World.getInstance().getPlayersIterator();
-		while (iter.hasNext()) {
-			player = iter.next();
-			PacketSendUtility.sendPacket(player, pkt);
-		}
 	}
 
 	public float getGlobalElyosInfluence() {

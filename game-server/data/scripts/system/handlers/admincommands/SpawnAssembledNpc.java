@@ -1,7 +1,6 @@
 package admincommands;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import com.aionemu.gameserver.dataholders.DataManager;
@@ -13,7 +12,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_NPC_ASSEMBLER;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 import com.aionemu.gameserver.utils.idfactory.IDFactory;
-import com.aionemu.gameserver.world.World;
 
 /**
  * @author xTz
@@ -48,12 +46,7 @@ public class SpawnAssembledNpc extends AdminCommand {
 			assembledParts.add(new AssembledNpcPart(IDFactory.getInstance().nextId(), npcPart));
 		}
 		AssembledNpc npc = new AssembledNpc(template.getRouteId(), template.getMapId(), template.getLiveTime(), assembledParts);
-		Iterator<Player> iter = World.getInstance().getPlayersIterator();
-		Player findedPlayer = null;
-		while (iter.hasNext()) {
-			findedPlayer = iter.next();
-			PacketSendUtility.sendPacket(findedPlayer, new SM_NPC_ASSEMBLER(npc));
-		}
+		PacketSendUtility.broadcastToWorld(new SM_NPC_ASSEMBLER(npc));
 	}
 
 	@Override

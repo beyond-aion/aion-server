@@ -31,6 +31,9 @@ public class Predicates {
 		public static final Predicate<Player> WITH_LOOT_PET = player -> player.getPet() != null
 			&& player.getPet().getPetTemplate().getPetFunction(PetFunctionType.LOOT) != null;
 
+		public static final Predicate<Player> sameRace(Player p) {
+			return player -> p.getRace() == player.getRace();
+		}
 		public static final Predicate<Player> allExcept(Player skipped) {
 			return player -> !player.equals(skipped);
 		}

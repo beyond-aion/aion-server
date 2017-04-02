@@ -1,7 +1,6 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import com.aionemu.gameserver.configs.main.CustomConfig;
@@ -52,37 +51,38 @@ public class CM_PLAYER_SEARCH extends AionClientPacket {
 	protected void runImpl() {
 		Player activePlayer = getConnection().getActivePlayer();
 
-		Iterator<Player> it = World.getInstance().getPlayersIterator();
-		List<Player> matches = new ArrayList<>();
-
 		if (activePlayer.getLevel() < CustomConfig.LEVEL_TO_SEARCH) {
 			sendPacket(SM_SYSTEM_MESSAGE.STR_CANT_WHO_LEVEL(CustomConfig.LEVEL_TO_SEARCH));
 			return;
 		}
 
-		while (it.hasNext() && matches.size() < MAX_RESULTS) {
-			Player player = it.next();
-			if (player.getRace() != activePlayer.getRace() && !CustomConfig.FACTIONS_SEARCH_MODE)
+		List<Player> matches = new ArrayList<>();
+		for (Player player : World.getInstance().getAllPlayers()) {
+			if (!activePlayer.isStaff()) { // staff can find all players
+				if (player.getRace() != activePlayer.getRace() && !CustomConfig.FACTIONS_SEARCH_MODE)
+					continue;
+				if (player.getFriendList().getStatus() == Status.OFFLINE)
+					continue;
+				if (player.isStaff() && !CustomConfig.SEARCH_GM_LIST)
+					continue;
+			}
+			if (lfgOnly == 1 && !player.isLookingForGroup())
 				continue;
-			else if (!player.getCommonData().isOnline() || player.getFriendList().getStatus() == Status.OFFLINE)
+			if (!name.isEmpty() && !player.getName().toLowerCase().contains(name.toLowerCase()))
 				continue;
-			else if (!player.isSpawned())
+			if (minLevel != 0xFF && player.getLevel() < minLevel)
 				continue;
-			else if (player.isStaff() && !CustomConfig.SEARCH_GM_LIST)
+			if (maxLevel != 0xFF && player.getLevel() > maxLevel)
 				continue;
-			else if (lfgOnly == 1 && !player.isLookingForGroup())
+			if (classMask > 0 && (player.getPlayerClass().getMask() & classMask) == 0)
 				continue;
-			else if (!name.isEmpty() && !player.getName().toLowerCase().contains(name.toLowerCase()))
+			if (region > 0 && player.getWorldId() != region)
 				continue;
-			else if (minLevel != 0xFF && player.getLevel() < minLevel)
-				continue;
-			else if (maxLevel != 0xFF && player.getLevel() > maxLevel)
-				continue;
-			else if (classMask > 0 && (player.getPlayerClass().getMask() & classMask) == 0)
-				continue;
-			else if (region > 0 && player.getWorldId() != region)
-				continue;
+
 			matches.add(player);
+
+			if (matches.size() == MAX_RESULTS)
+				break;
 		}
 
 		sendPacket(new SM_PLAYER_SEARCH(matches));

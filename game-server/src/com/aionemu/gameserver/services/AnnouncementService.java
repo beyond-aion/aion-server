@@ -2,7 +2,6 @@ package com.aionemu.gameserver.services;
 
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.Future;
@@ -14,7 +13,6 @@ import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.dao.AnnouncementsDAO;
 import com.aionemu.gameserver.model.Announcement;
 import com.aionemu.gameserver.model.ChatType;
-import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_MESSAGE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
@@ -74,10 +72,7 @@ public class AnnouncementService {
 
 				@Override
 				public void run() {
-					final Iterator<Player> iter = World.getInstance().getPlayersIterator();
-					while (iter.hasNext()) {
-						Player player = iter.next();
-
+					World.getInstance().forEachPlayer(player -> {
 						if (announce.getFaction().equalsIgnoreCase("ALL"))
 							if (announce.getChatType() == ChatType.SHOUT || announce.getChatType() == ChatType.GROUP_LEADER)
 								PacketSendUtility.sendPacket(player, new SM_MESSAGE(1, "Announcement", announce.getAnnounce(), announce.getChatType()));
@@ -94,7 +89,7 @@ public class AnnouncementService {
 									new SM_MESSAGE(1, (announce.getFaction().equalsIgnoreCase("ELYOS") ? "Elyos" : "Asmodian") + " Announcement",
 										(announce.getFaction().equalsIgnoreCase("ELYOS") ? "Elyos" : "Asmodian") + " Announcement: " + announce.getAnnounce(),
 										announce.getChatType()));
-					}
+					});
 				}
 			}, announceMent.getDelay() * 1000, announceMent.getDelay() * 1000));
 		}

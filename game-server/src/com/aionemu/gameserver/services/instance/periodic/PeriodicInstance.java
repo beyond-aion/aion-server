@@ -1,7 +1,6 @@
 package com.aionemu.gameserver.services.instance.periodic;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.Future;
 
@@ -65,16 +64,14 @@ public abstract class PeriodicInstance {
 	public void startRegistration() {
 		this.registerAvailable = true;
 		startUnregisterTask();
-		Iterator<Player> iter = World.getInstance().getPlayersIterator();
-		while (iter.hasNext()) {
-			Player player = iter.next();
+		World.getInstance().forEachPlayer(player -> {
 			if (player.getLevel() > minLevel && player.getLevel() <= maxLevel) {
 				for (byte maskId : this.maskIds) {
 					PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(maskId, SM_AUTO_GROUP.wnd_EntryIcon));
 					onSendEntry(player, maskId);
 				}
 			}
-		}
+		});
 	}
 
 	protected void onSendEntry(Player player, byte maskId) {
@@ -85,14 +82,12 @@ public abstract class PeriodicInstance {
 		playersWithCooldown.clear();
 		for (byte maskId : this.maskIds)
 			AutoGroupService.getInstance().unRegisterInstance(maskId);
-		Iterator<Player> iter = World.getInstance().getPlayersIterator();
-		while (iter.hasNext()) {
-			Player player = iter.next();
+		World.getInstance().forEachPlayer(player -> {
 			if (player.getLevel() > minLevel && player.getLevel() <= maxLevel) {
 				for (byte maskId : this.maskIds)
 					PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(maskId, SM_AUTO_GROUP.wnd_EntryIcon, true));
 			}
-		}
+		});
 		if (this.unregisterTask != null) {
 			this.unregisterTask.cancel(false);
 			this.unregisterTask = null;

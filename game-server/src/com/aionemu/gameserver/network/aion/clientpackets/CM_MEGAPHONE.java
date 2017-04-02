@@ -3,7 +3,6 @@ package com.aionemu.gameserver.network.aion.clientpackets;
 import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE.*;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import com.aionemu.gameserver.model.Race;
@@ -15,7 +14,6 @@ import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_MEGAPHONE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-import com.aionemu.gameserver.world.World;
 
 /**
  * @author Artur, ginho1
@@ -104,9 +102,6 @@ public class CM_MEGAPHONE extends AionClientPacket {
 			itemAction.act(player, item, null);
 		}
 
-		Iterator<Player> iter = World.getInstance().getPlayersIterator();
-		while (iter.hasNext()) {
-			PacketSendUtility.sendPacket(iter.next(), new SM_MEGAPHONE(player.getName(), message, item.getItemId()));
-		}
+		PacketSendUtility.broadcastToWorld(new SM_MEGAPHONE(player.getName(), message, item.getItemId()));
 	}
 }
