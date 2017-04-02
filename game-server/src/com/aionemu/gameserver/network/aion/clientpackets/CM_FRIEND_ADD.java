@@ -40,7 +40,7 @@ public class CM_FRIEND_ADD extends AionClientPacket {
 		final Player activePlayer = getConnection().getActivePlayer();
 		final Player targetPlayer = World.getInstance().findPlayer(Util.convertName(targetName));
 		
-		if (targetPlayer == null || !targetPlayer.getCommonData().isOnline()) {
+		if (targetPlayer == null || !targetPlayer.isOnline()) {
 			sendPacket(SM_FRIEND_RESPONSE.TARGET_OFFLINE);
 		}	else if (activePlayer.equals(targetPlayer)) {
 			sendPacket(SM_SYSTEM_MESSAGE.STR_BUDDYLIST_BUSY());

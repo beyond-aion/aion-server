@@ -489,7 +489,7 @@ public class Equipment {
 	 * @return
 	 */
 	public boolean checkAvailableEquipSkills(int[] requiredSkills) {
-		if (!owner.getCommonData().isOnline() && owner.getSkillList().size() <= 10) // exclusion for 4.8 skill update
+		if (!owner.isOnline() && owner.getSkillList().size() <= 10) // exclusion for 4.8 skill update
 			return true;
 
 		if (requiredSkills.length == 0) // if no skills required - validate as true

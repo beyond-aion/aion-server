@@ -554,7 +554,7 @@ public class LegionService {
 
 				@Override
 				public void acceptRequest(Player requester, Player responder) {
-					if (!responder.getCommonData().isOnline()) {
+					if (!responder.isOnline()) {
 						PacketSendUtility.sendPacket(requester, SM_SYSTEM_MESSAGE.STR_NO_SUCH_USER(responder.getName()));
 					} else {
 						int playerObjId = responder.getObjectId();
@@ -636,7 +636,7 @@ public class LegionService {
 
 				@Override
 				public void acceptRequest(Player requester, Player responder) {
-					if (!responder.getCommonData().isOnline()) {
+					if (!responder.isOnline()) {
 						PacketSendUtility.sendPacket(requester, SM_SYSTEM_MESSAGE.STR_GUILD_CHANGE_MASTER_NO_SUCH_USER());
 					} else if (!legionRestrictions.canAppointBrigadeGeneral(requester, responder)) {
 						AuditLogger.info(requester, "Legion 2 BG hack.");

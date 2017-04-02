@@ -78,13 +78,16 @@ public class PlayerLeaveWorldService {
 	 * <b><font color='red'>NOTICE:</font> This method is called only from {@link CM_QUIT} and must not be called from anywhere else</b>
 	 */
 	public static void leaveWorld(Player player) {
+		AionConnection con = player.getClientConnection();
+		player.setClientConnection(null); // this sets the player semi-offline, PacketSendUtility will not send packets anymore
+
 		WorldPosition pos = player.getPosition();
 		if (pos == null || pos.getMapRegion() == null) { // ensure safe logout
 			log.warn(player + " had invalid position: " + pos + " so he was reset to bind point");
 			BindPointPosition bp = player.getBindPoint();
 			if (bp != null)
 				pos = World.getInstance().createPosition(bp.getMapId(), bp.getX(), bp.getY(), bp.getZ(), bp.getHeading(), 1);
-			if (pos == null) {
+			else {
 				LocationData ld = DataManager.PLAYER_INITIAL_DATA.getSpawnLocation(player.getRace());
 				pos = World.getInstance().createPosition(ld.getMapId(), ld.getX(), ld.getY(), ld.getZ(), ld.getHeading(), 1);
 			}
@@ -176,10 +179,6 @@ public class PlayerLeaveWorldService {
 		player.getWarehouse().setOwner(null);
 		player.getPlayerAccount().getAccountWarehouse().setOwner(null);
 
-		AionConnection con = player.getClientConnection();
-		if (con != null) {
-			player.setClientConnection(null);
-			con.setActivePlayer(null);
-		}
+		con.setActivePlayer(null);
 	}
 }

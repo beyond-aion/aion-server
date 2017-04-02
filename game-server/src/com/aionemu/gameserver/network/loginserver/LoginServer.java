@@ -205,7 +205,7 @@ public class LoginServer {
 			if (pcd.isInEditMode())
 				pcd.setInEditMode(false);
 			if (pcd.isOnline()) {
-				Player player = World.getInstance().findPlayer(accountData.getPlayerCommonData().getPlayerObjId());
+				Player player = World.getInstance().findPlayer(pcd.getPlayerObjId());
 				if (player != null && player.getClientConnection() != null) {
 					player.getClientConnection().close(SM_SYSTEM_MESSAGE.STR_KICK_ANOTHER_USER_TRY_LOGIN()); // kick
 				}
