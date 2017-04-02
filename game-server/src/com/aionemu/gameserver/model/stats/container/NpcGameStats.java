@@ -3,17 +3,12 @@ package com.aionemu.gameserver.model.stats.container;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AILogger;
 import com.aionemu.gameserver.ai.AISubState;
-import com.aionemu.gameserver.configs.main.SiegeConfig;
 import com.aionemu.gameserver.model.EmotionType;
-import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.model.skill.NpcSkillEntry;
 import com.aionemu.gameserver.model.stats.calc.Stat2;
-import com.aionemu.gameserver.model.templates.npc.AbyssNpcType;
-import com.aionemu.gameserver.model.templates.npc.NpcRating;
-import com.aionemu.gameserver.model.templates.spawns.siegespawns.SiegeSpawnTemplate;
 import com.aionemu.gameserver.model.templates.stats.StatsTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -69,17 +64,6 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
 		Stat2 s = super.getStat(statEnum, stat);
 		owner.getAi().modifyOwnerStat(s);
 		return s;
-	}
-
-	@Override
-	public Stat2 getMaxHp() {
-		Stat2 stat = super.getMaxHp();
-		if (owner.getSpawn() instanceof SiegeSpawnTemplate
-			&& owner.getRating() == NpcRating.LEGENDARY
-			&& (owner.getObjectTemplate().getAbyssNpcType() == AbyssNpcType.BOSS || owner.getObjectTemplate().getAbyssNpcType() == AbyssNpcType.GUARD
-				|| owner.getRace() == Race.GHENCHMAN_LIGHT || owner.getRace() == Race.GHENCHMAN_DARK))
-			stat.setBaseRate(SiegeConfig.SIEGE_HEALTH_MULTIPLIER);
-		return stat;
 	}
 
 	@Override
