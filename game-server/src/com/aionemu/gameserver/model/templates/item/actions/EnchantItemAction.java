@@ -18,7 +18,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.EnchantService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
-import com.aionemu.gameserver.world.World;
+import com.aionemu.gameserver.utils.collections.Predicates;
 
 /**
  * @author Nemiroff, Wakizashi, vlog
@@ -54,16 +54,16 @@ public class EnchantItemAction extends AbstractItemAction {
 		}
 		if (parentItem.getItemTemplate().getItemGroup() == ItemGroup.ENCHANTMENT) {
 			if (targetItem.getItemTemplate().getMaxEnchantLevel() == 0 && !targetItem.getItemTemplate().canExceedEnchant()) {
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GIVE_ITEM_OPTION_IT_CAN_NOT_BE_GIVEN_OPTION(new DescriptionId(targetItem
-					.getItemTemplate().getNameId()), parentItem.getItemTemplate().getNameId()));
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GIVE_ITEM_OPTION_IT_CAN_NOT_BE_GIVEN_OPTION(
+					new DescriptionId(targetItem.getItemTemplate().getNameId()), parentItem.getItemTemplate().getNameId()));
 				return false;
 			} else if (!targetItem.isAmplified() && targetItem.getEnchantLevel() >= targetItem.getMaxEnchantLevel()) {
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GIVE_ITEM_OPTION_IT_CAN_NOT_BE_GIVEN_OPTION_MORE_TIME(new DescriptionId(targetItem
-					.getItemTemplate().getNameId()), parentItem.getItemTemplate().getNameId()));
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GIVE_ITEM_OPTION_IT_CAN_NOT_BE_GIVEN_OPTION_MORE_TIME(
+					new DescriptionId(targetItem.getItemTemplate().getNameId()), parentItem.getItemTemplate().getNameId()));
 				return false;
 			} else if (targetItem.getEnchantLevel() >= 255) {
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GIVE_ITEM_OPTION_IT_CAN_NOT_BE_GIVEN_OPTION_MORE_TIME(new DescriptionId(targetItem
-					.getItemTemplate().getNameId()), parentItem.getItemTemplate().getNameId()));
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GIVE_ITEM_OPTION_IT_CAN_NOT_BE_GIVEN_OPTION_MORE_TIME(
+					new DescriptionId(targetItem.getItemTemplate().getNameId()), parentItem.getItemTemplate().getNameId()));
 				return false;
 			} else if (targetItem.isAmplified() && parentItem.getItemId() != 166020000 && parentItem.getItemId() != 166020003) { // only omega enchantment stone
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_EXCEED_CANNOT_02(new DescriptionId(parentItem.getItemTemplate().getNameId())));
@@ -106,9 +106,8 @@ public class EnchantItemAction extends AbstractItemAction {
 		final int currentEnchant = targetItem.getEnchantLevel();
 		final boolean isSuccess = isSuccess(player, parentItem, targetItem, supplementItem, targetWeapon);
 		// Item template
-		PacketSendUtility.broadcastPacketAndReceive(player,
-			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), targetItem.getObjectId(), parentItem.getObjectId(), parentItem.getItemTemplate()
-				.getTemplateId(), stoneType ? 5000 : 2000, 0, 0, 1, 0, 0));
+		PacketSendUtility.broadcastPacketAndReceive(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), targetItem.getObjectId(),
+			parentItem.getObjectId(), parentItem.getItemTemplate().getTemplateId(), stoneType ? 5000 : 2000, 0, 0, 1, 0, 0));
 
 		player.getController().addTask(TaskId.ITEM_USE, ThreadPoolManager.getInstance().schedule(new Runnable() {
 
@@ -118,8 +117,8 @@ public class EnchantItemAction extends AbstractItemAction {
 
 				if (player.getInventory().getItemByObjId(targetItem.getObjectId()) == null && !targetItem.isEquipped()) {
 					PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1300452));
-					PacketSendUtility.broadcastPacketAndReceive(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem
-						.getItemTemplate().getTemplateId(), 0, 2, 0));
+					PacketSendUtility.broadcastPacketAndReceive(player,
+						new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemTemplate().getTemplateId(), 0, 2, 0));
 					return;
 				}
 
@@ -130,21 +129,16 @@ public class EnchantItemAction extends AbstractItemAction {
 				else
 					EnchantService.socketManastoneAct(player, parentItem, targetItem, supplementItem, targetWeapon, isSuccess);
 
-				PacketSendUtility.broadcastPacketAndReceive(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem
-					.getItemTemplate().getTemplateId(), 0, isSuccess ? 1 : 2, 0));
+				PacketSendUtility.broadcastPacketAndReceive(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(),
+					parentItem.getItemTemplate().getTemplateId(), 0, isSuccess ? 1 : 2, 0));
 				if (CustomConfig.ENABLE_ENCHANT_ANNOUNCE) {
-					if (stoneType && (targetItem.getEnchantLevel() == 15 || targetItem.getEnchantLevel() == 20) && isSuccess) {
-						World.getInstance().forEachPlayer(player2 -> {
-							if (player2.getRace() == player.getRace()) {
-								if (targetItem.getEnchantLevel() == 15) {
-									PacketSendUtility.sendPacket(player2,
-										SM_SYSTEM_MESSAGE.STR_MSG_ENCHANT_ITEM_SUCCEEDED_15(player.getName(), targetItem.getItemTemplate().getNameId()));
-								} else if (targetItem.getEnchantLevel() == 20) {
-									PacketSendUtility.sendPacket(player2,
-										SM_SYSTEM_MESSAGE.STR_MSG_ENCHANT_ITEM_SUCCEEDED_20(player.getName(), targetItem.getItemTemplate().getNameId()));
-								}
-							}
-						});
+					if (stoneType && isSuccess && (targetItem.getEnchantLevel() == 15 || targetItem.getEnchantLevel() == 20)) {
+						SM_SYSTEM_MESSAGE packet;
+						if (targetItem.getEnchantLevel() == 15)
+							packet = SM_SYSTEM_MESSAGE.STR_MSG_ENCHANT_ITEM_SUCCEEDED_15(player.getName(), targetItem.getItemTemplate().getNameId());
+						else
+							packet = SM_SYSTEM_MESSAGE.STR_MSG_ENCHANT_ITEM_SUCCEEDED_20(player.getName(), targetItem.getItemTemplate().getNameId());
+						PacketSendUtility.broadcastToWorld(packet, Predicates.Players.sameRace(player));
 					}
 				}
 			}

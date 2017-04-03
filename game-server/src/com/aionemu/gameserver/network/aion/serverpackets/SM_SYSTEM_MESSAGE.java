@@ -25734,7 +25734,7 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	}
 
 	/**
-	 * You successfully enchanted %0 by +%num1.
+	 * Enchantment of %0 to +%num1 was successful.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_ENCHANT_ITEM_SUCCEED_NEW(DescriptionId descriptionId, int value0) {
 		return new SM_SYSTEM_MESSAGE(1401681, descriptionId, value0);

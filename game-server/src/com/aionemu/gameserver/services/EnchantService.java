@@ -290,7 +290,6 @@ public class EnchantService {
 		if (targetItem.isAmplified())
 			maxEnchant = 255;
 
-		// Temp fix for not increasing over max; see TODO above
 		targetItem.setEnchantLevel(Math.min(currentEnchant, maxEnchant));
 		int enchantLevel = targetItem.getEnchantLevel();
 
@@ -318,7 +317,8 @@ public class EnchantService {
 		ItemPacketService.updateItemAfterInfoChange(player, targetItem, ItemUpdateType.STATS_CHANGE);
 
 		if (result)
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_ENCHANT_ITEM_SUCCEED_NEW(new DescriptionId(targetItem.getNameId()), addLevel));
+			PacketSendUtility.sendPacket(player,
+				SM_SYSTEM_MESSAGE.STR_MSG_ENCHANT_ITEM_SUCCEED_NEW(new DescriptionId(targetItem.getNameId()), enchantLevel));
 		else {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ENCHANT_ITEM_FAILED(new DescriptionId(targetItem.getNameId())));
 			if (targetItem.getItemTemplate().getEnchantType() > 0) {
