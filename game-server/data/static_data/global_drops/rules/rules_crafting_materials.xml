@@ -149,6 +149,7 @@
 		<gd_maps>
 			<gd_map map_id="210090000" name="Idian Depths Light" />
 			<gd_map map_id="220100000" name="Idian Depths Dark" />
+			<gd_map map_id="600100000" name="Levinshor" />
 		</gd_maps>
 		<gd_ratings>
 			<gd_rating rating="NORMAL" />
