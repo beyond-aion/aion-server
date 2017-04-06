@@ -145,8 +145,8 @@ public class NpcController extends CreatureController<Npc> {
 
 		if (shouldDecay) {
 			RespawnService.scheduleDecayTask(owner);
-			if (lastAttacker instanceof Player && shouldLoot) { // pet loot
-				Player player = (Player) lastAttacker;
+			if (lastAttacker.getActingCreature() instanceof Player && shouldLoot) { // pet loot
+				Player player = (Player) lastAttacker.getActingCreature();
 				int npcObjId = owner.getObjectId();
 				if (player.getPet() != null && player.getPet().getPetTemplate().getPetFunction(PetFunctionType.LOOT) != null
 					&& player.getPet().getCommonData().isLooting()) {
