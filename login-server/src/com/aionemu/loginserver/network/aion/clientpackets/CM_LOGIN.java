@@ -98,6 +98,7 @@ public class CM_LOGIN extends AionClientPacket {
 	}
 
 	@Override
+	@SuppressWarnings("fallthrough")
 	protected void runImpl() {
 		if (getConnection().getSessionId() != sessionId) {
 			sendPacket(new SM_LOGIN_FAIL(AionAuthResponse.STR_L2AUTH_S_SYSTEM_ERROR));
@@ -147,10 +148,8 @@ public class CM_LOGIN extends AionClientPacket {
 						break;
 					}
 				}
-				client.sendPacket(new SM_LOGIN_FAIL(response));
-				break;
 			default:
-				client.close(new SM_LOGIN_FAIL(response));
+				client.sendPacket(new SM_LOGIN_FAIL(response));
 				break;
 		}
 	}
