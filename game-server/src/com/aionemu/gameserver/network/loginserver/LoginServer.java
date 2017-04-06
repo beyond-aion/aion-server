@@ -134,8 +134,8 @@ public class LoginServer {
 	 * @param accountId
 	 */
 	public void aionClientDisconnected(int accountId) {
-		if (loginRequests.remove(accountId) == null && loggedInAccounts.remove(accountId) == null)
-			return;
+		loginRequests.remove(accountId);
+		loggedInAccounts.remove(accountId);
 		sendPacket(new SM_ACCOUNT_DISCONNECTED(accountId));
 	}
 
@@ -181,38 +181,26 @@ public class LoginServer {
 			client.close(new SM_L2AUTH_LOGIN_CHECK(false, accountName)); // LS sends no accName when result is false
 		else {
 			Account account = AccountService.getAccount(accountId, accountName, creationDate, accountTime, accessLevel, membership, toll, allowedHddSerial);
-			if (validateAccount(account)) {
-				client.setAccount(account);
-				client.setState(AionConnection.State.AUTHED);
-				loggedInAccounts.put(accountId, client);
-				loginRequests.remove(accountId);
-				log.info("Account authed: [Account ID: " + accountId + " Name: " + accountName + "]");
-				client.sendPacket(new SM_L2AUTH_LOGIN_CHECK(true, accountName));
-			} else {
-				log.warn("Illegal account auth detected: [Account ID: " + accountId + " Name: " + accountName + "]");
-				client.close(new SM_L2AUTH_LOGIN_CHECK(false, accountName));
-			}
+			kickOnlineCharacters(account);
+			client.setAccount(account);
+			client.setState(AionConnection.State.AUTHED);
+			loggedInAccounts.put(accountId, client);
+			loginRequests.remove(accountId);
+			log.info("Account authed: [Account ID: " + accountId + " Name: " + accountName + "]");
+			client.sendPacket(new SM_L2AUTH_LOGIN_CHECK(true, accountName));
 		}
 	}
 
-	/**
-	 * @param account
-	 * @return
-	 */
-	private boolean validateAccount(Account account) {
+	private void kickOnlineCharacters(Account account) {
 		for (PlayerAccountData accountData : account) {
 			PlayerCommonData pcd = accountData.getPlayerCommonData();
-			if (pcd.isInEditMode())
-				pcd.setInEditMode(false);
 			if (pcd.isOnline()) {
 				Player player = World.getInstance().findPlayer(pcd.getPlayerObjId());
 				if (player != null && player.getClientConnection() != null) {
 					player.getClientConnection().close(SM_SYSTEM_MESSAGE.STR_KICK_ANOTHER_USER_TRY_LOGIN()); // kick
 				}
-				return false;
 			}
 		}
-		return true;
 	}
 
 	/**

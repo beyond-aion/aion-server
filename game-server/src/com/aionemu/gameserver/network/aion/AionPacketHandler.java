@@ -57,7 +57,7 @@ public class AionPacketHandler {
 		res.setBuffer(buf);
 		res.setConnection(con);
 
-		if (con.getState().equals(State.IN_GAME) && con.getActivePlayer().getPlayerAccount().getMembership() == 10) {
+		if (con.getState().equals(State.IN_GAME) && con.getActivePlayer().getAccount().getMembership() == 10) {
 			PacketSendUtility.sendMessage(con.getActivePlayer(), "0x" + Integer.toHexString(res.getOpcode()).toUpperCase() + " : " + res.getPacketName());
 		}
 		return res;

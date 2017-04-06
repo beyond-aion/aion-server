@@ -610,7 +610,7 @@ public class PlayerController extends CreatureController<Player> {
 		int minNewLevel = oldLevel < newLevel ? oldLevel + 1 : oldLevel - 1; // for skill learning and other stuff that only wants the new level(s)
 
 		if (GSConfig.ENABLE_RATIO_LIMITATION
-			&& (player.getPlayerAccount().getNumberOf(player.getRace()) == 1 || player.getPlayerAccount().getMaxPlayerLevel() == newLevel)) {
+			&& (player.getAccount().getNumberOf(player.getRace()) == 1 || player.getAccount().getMaxPlayerLevel() == newLevel)) {
 			if (oldLevel < GSConfig.RATIO_MIN_REQUIRED_LEVEL && newLevel >= GSConfig.RATIO_MIN_REQUIRED_LEVEL)
 				GameServer.updateRatio(player.getRace(), 1);
 			else if (oldLevel >= GSConfig.RATIO_MIN_REQUIRED_LEVEL && newLevel < GSConfig.RATIO_MIN_REQUIRED_LEVEL)

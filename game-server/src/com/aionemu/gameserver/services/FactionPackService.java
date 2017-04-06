@@ -59,13 +59,13 @@ public class FactionPackService {
 	}
 
 	private void sendRewards(Player player, LocalDateTime minCreationTime, LocalDateTime maxCreationTime) {
-		Timestamp playerCreationDate = player.getPlayerAccount().getPlayerAccountData(player.getObjectId()).getCreationDate();
+		Timestamp playerCreationDate = player.getAccount().getPlayerAccountData(player.getObjectId()).getCreationDate();
 		LocalDateTime creationTime = ServerTime.atDate(playerCreationDate).toLocalDateTime();
 		if (creationTime.isBefore(minCreationTime))
 			return;
 		if (creationTime.isAfter(maxCreationTime))
 			return;
-		int accountId = player.getPlayerAccount().getId();
+		int accountId = player.getAccount().getId();
 		if (dao.loadReceivingPlayer(accountId) > 0)
 			return;
 		if (!dao.storeReceivingPlayer(accountId, player.getObjectId()))

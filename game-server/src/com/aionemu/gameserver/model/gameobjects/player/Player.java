@@ -1313,7 +1313,7 @@ public class Player extends Creature {
 		this.postman = postman;
 	}
 
-	public Account getPlayerAccount() {
+	public Account getAccount() {
 		return playerAccount;
 	}
 

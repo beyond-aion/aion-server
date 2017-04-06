@@ -100,6 +100,11 @@ public abstract class PlayerDAO implements IDFactoryAwareDAO {
 	public abstract void storeLastOnlineTime(final int objectId, final Timestamp lastOnline);
 
 	/**
+	 * @return True if the player is marked as online in DB, false otherwise or if player wasn't found.
+	 */
+	public abstract boolean isOnline(int playerId);
+
+	/**
 	 * Store online or offline player status
 	 *
 	 * @param player

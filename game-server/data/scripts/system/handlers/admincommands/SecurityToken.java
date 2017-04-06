@@ -31,8 +31,8 @@ public class SecurityToken extends AdminCommand {
 				return;
 			}
 
-			if (!"".equals(receiver.getPlayerAccount().getSecurityToken())) {
-				PacketSendUtility.sendMessage(player, "The Security Token of this player is: " + receiver.getPlayerAccount().getSecurityToken());
+			if (!"".equals(receiver.getAccount().getSecurityToken())) {
+				PacketSendUtility.sendMessage(player, "The Security Token of this player is: " + receiver.getAccount().getSecurityToken());
 			} else {
 				PacketSendUtility.sendMessage(player, "This player haven't an Security Token!");
 			}
@@ -45,7 +45,7 @@ public class SecurityToken extends AdminCommand {
 				return;
 			}
 
-			SecurityTokenService.getInstance().generateToken(receiver.getPlayerAccount(), receiver.getClientConnection());
+			SecurityTokenService.getInstance().generateToken(receiver.getAccount(), receiver.getClientConnection());
 		}
 
 	}

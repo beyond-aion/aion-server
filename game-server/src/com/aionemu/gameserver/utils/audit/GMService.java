@@ -86,7 +86,7 @@ public class GMService {
 	public boolean isAnnounceable(Player player) {
 		return player.isOnline() && player.isStaff() && !player.isInCustomState(CustomPlayerState.NO_WHISPERS_MODE)
 			&& player.getFriendList().getStatus() != Status.OFFLINE
-			&& (AdminConfig.ANNOUNCE_LEVELS.contains(String.valueOf(player.getPlayerAccount().getAccessLevel()))
+			&& (AdminConfig.ANNOUNCE_LEVELS.contains(String.valueOf(player.getAccount().getAccessLevel()))
 				|| AdminConfig.ANNOUNCE_LEVELS.contains("*"));
 	}
 

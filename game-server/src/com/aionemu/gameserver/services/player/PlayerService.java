@@ -152,7 +152,7 @@ public class PlayerService {
 		DAOManager.getDAO(PortalCooldownsDAO.class).storePortalCooldowns(player);
 		DAOManager.getDAO(CraftCooldownsDAO.class).storeCraftCooldowns(player);
 		DAOManager.getDAO(PlayerNpcFactionsDAO.class).storeNpcFactions(player);
-		DAOManager.getDAO(AccountPassportsDAO.class).storePassport(player.getPlayerAccount());
+		DAOManager.getDAO(AccountPassportsDAO.class).storePassport(player.getAccount());
 		if (EventsConfig.ENABLE_HEADHUNTING)
 			DAOManager.getDAO(HeadhuntingDAO.class).storeHeadhunter(player.getObjectId());
 	}
@@ -195,7 +195,7 @@ public class PlayerService {
 		DAOManager.getDAO(AbyssRankDAO.class).loadAbyssRank(player);
 		DAOManager.getDAO(PlayerNpcFactionsDAO.class).loadNpcFactions(player);
 		DAOManager.getDAO(MotionDAO.class).loadMotionList(player);
-		DAOManager.getDAO(AccountPassportsDAO.class).loadPassport(player.getPlayerAccount());
+		DAOManager.getDAO(AccountPassportsDAO.class).loadPassport(player.getAccount());
 		player.setVars(DAOManager.getDAO(PlayerVarsDAO.class).load(player.getObjectId()));
 		player.setEffectController(new PlayerEffectController(player));
 		player.setFlyController(new FlyController(player));

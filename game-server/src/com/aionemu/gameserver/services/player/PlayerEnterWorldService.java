@@ -92,6 +92,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_UI_SETTINGS;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_UNK_3_5_1;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_WAREHOUSE_INFO;
 import com.aionemu.gameserver.questEngine.QuestEngine;
+import com.aionemu.gameserver.services.AccountService;
 import com.aionemu.gameserver.services.AtreianPassportService;
 import com.aionemu.gameserver.services.AutoGroupService;
 import com.aionemu.gameserver.services.BonusPackService;
@@ -160,15 +161,21 @@ public final class PlayerEnterWorldService {
 			return;
 		}
 
-		Player playerInWorld = World.getInstance().findPlayer(objectId);
-		if (playerInWorld != null) {
-			if (playerInWorld.getController().hasTask(TaskId.DESPAWN)) { // character will soon leave the world (due to previous client crash)
-				// for now we close the connection to force a reload of pcd since it's not up to date yet (player will be saved on leaveWorld)
-				client.close(new SM_ENTER_WORLD_CHECK(Msg.CHAR_ALREADY_ONLINE));
-			} else {
-				log.warn("Player enterWorld fail: Duplicate character obj ID {} found in world.", objectId);
-				client.sendPacket(new SM_ENTER_WORLD_CHECK(Msg.CONNECTION_ERROR));
+		if (pcd.isOnline()) { // character should soon leave the world (due to previous client crash)
+			if (DAOManager.getDAO(PlayerDAO.class).isOnline(objectId)) {
+				client.sendPacket(new SM_ENTER_WORLD_CHECK(Msg.REENTRY_TIME));
+				return;
+			} else { // reload pcd, appearance, acc warehouse, ... since char was saved after acc logged in (delayed kick)
+				playerAccData = AccountService.loadPlayerAccountData(objectId);
+				pcd = playerAccData.getPlayerCommonData();
+				account.addPlayerAccountData(playerAccData);
+				account.setAccountWarehouse(AccountService.loadAccountWarehouse(account));
 			}
+		}
+
+		if (World.getInstance().isInWorld(objectId)) {
+			log.warn("Player enterWorld fail: Duplicate character obj ID {} found in world.", objectId);
+			client.sendPacket(new SM_ENTER_WORLD_CHECK(Msg.CONNECTION_ERROR));
 			return;
 		}
 
@@ -230,8 +237,8 @@ public final class PlayerEnterWorldService {
 					sb.append(sameIp ? "IP " + pIp : "");
 					sb.append(sameMac ? " / MAC " + pMac : "");
 					sb.append(sameHdd ? " / HDD " + pHdd : "");
-					log.info("[Multiclient] Player {} (account {}) and player {} (account {}) share the same {}", player.getName(), account.getName(),
-						visitor.getName(), vCon.getAccount().getName(), sb);
+					log.info("[Multiclient] Player {} (account {}) and player {} (account {}) share the same {}", player, player.getAccount(), visitor,
+						visitor.getAccount(), sb);
 
 					if (SecurityConfig.KICK_DUALBOXING && sameIp && (sameHdd || sameMac)) {
 						log.info("[Multiclient] Kicked player " + visitor.getName());
@@ -246,41 +253,30 @@ public final class PlayerEnterWorldService {
 		}
 
 		if (!enteringWorld.contains(objectId) && enteringWorld.add(objectId)) {
-			if (!client.setActivePlayer(player)) { // set active player as soon as possible, so the reentry from edit mode doesn't throw NPEs
-				log.warn("Player enterWorld fail: couldn't set active player for obj ID {}, Player: {}", objectId, player);
-				enteringWorld.remove(objectId);
+			try {
+				enterWorld(client, player);
+			} catch (Throwable ex) {
+				player.getController().delete();
+				pcd.setOnline(false);
+				DAOManager.getDAO(PlayerDAO.class).onlinePlayer(player, false);
+				player.setClientConnection(null);
+				client.setActivePlayer(null);
 				client.sendPacket(new SM_ENTER_WORLD_CHECK(Msg.CONNECTION_ERROR));
-				return;
+				log.error("Error during enter world of " + player, ex);
+			} finally {
+				enteringWorld.remove(objectId);
 			}
-
-			ThreadPoolManager.getInstance().execute(new Runnable() {
-
-				@Override
-				public void run() {
-					try {
-						enterWorld(client, player);
-					} catch (Throwable ex) {
-						player.getController().delete();
-						pcd.setOnline(false);
-						DAOManager.getDAO(PlayerDAO.class).onlinePlayer(player, false);
-						player.setClientConnection(null);
-						client.setActivePlayer(null);
-						client.sendPacket(new SM_ENTER_WORLD_CHECK(Msg.CONNECTION_ERROR));
-						log.error("Error during enter world " + objectId, ex);
-					} finally {
-						enteringWorld.remove(objectId);
-					}
-				}
-			});
 		}
 	}
 
 	private static void enterWorld(AionConnection client, Player player) {
-		Account account = player.getPlayerAccount();
+		Account account = player.getAccount();
 		PlayerCommonData pcd = player.getCommonData();
 
 		client.resetPingFailCount(); // client sometimes falls below 5 minutes between pings (after changing characters ?)
 		player.setClientConnection(client);
+		if (!client.setActivePlayer(player))
+			throw new IllegalStateException("Couldn't set active player");
 		pcd.setOnline(true);
 		player.getFriendList().setStatus(Status.ONLINE, pcd);
 		DAOManager.getDAO(PlayerDAO.class).onlinePlayer(player, true);

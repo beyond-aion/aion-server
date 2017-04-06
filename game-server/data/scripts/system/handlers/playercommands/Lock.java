@@ -33,12 +33,12 @@ public class Lock extends PlayerCommand {
 				sendInfo(player, "Couldn't lock your account. Please re-log and try again.");
 				return;
 			}
-			player.getPlayerAccount().setAllowedHddSerial(hddSerial);
-			LoginServer.getInstance().sendPacket(new SM_CHANGE_ALLOWED_HDD_SERIAL(player.getPlayerAccount()));
+			player.getAccount().setAllowedHddSerial(hddSerial);
+			LoginServer.getInstance().sendPacket(new SM_CHANGE_ALLOWED_HDD_SERIAL(player.getAccount()));
 			sendInfo(player, "Your account is now locked. You will not be able to login from any other computer from now on.");
 		} else if ("disable".equalsIgnoreCase(params[0])) {
-			player.getPlayerAccount().setAllowedHddSerial(null);
-			LoginServer.getInstance().sendPacket(new SM_CHANGE_ALLOWED_HDD_SERIAL(player.getPlayerAccount()));
+			player.getAccount().setAllowedHddSerial(null);
+			LoginServer.getInstance().sendPacket(new SM_CHANGE_ALLOWED_HDD_SERIAL(player.getAccount()));
 			sendInfo(player, "Your account is unlocked. You can login from any computer again.");
 		} else {
 			sendInfo(player, "Invalid parameter.");

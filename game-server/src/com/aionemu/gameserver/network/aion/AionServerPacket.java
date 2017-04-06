@@ -50,7 +50,7 @@ public abstract class AionServerPacket extends BaseServerPacket {
 	 * @param buf
 	 */
 	public final void write(AionConnection con, ByteBuffer buffer) {
-		if (con.getState().equals(AionConnection.State.IN_GAME) && con.getActivePlayer().getPlayerAccount().getMembership() == 10) {
+		if (con.getState().equals(AionConnection.State.IN_GAME) && con.getActivePlayer().getAccount().getMembership() == 10) {
 			if (!this.getPacketName().equals("SM_MESSAGE")) {
 				PacketSendUtility.sendMessage(con.getActivePlayer(),
 					"0x" + Integer.toHexString(this.getOpcode()).toUpperCase() + " : " + this.getPacketName());

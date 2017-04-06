@@ -110,8 +110,8 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 	public void storePlayer(final Player player) {
 		try {
 			try (Connection con = DatabaseFactory.getConnection();
-				PreparedStatement stmt = con
-					.prepareStatement("UPDATE players SET name=?, exp=?, recoverexp=?, x=?, y=?, z=?, heading=?, world_id=?, gender=?, race=?, player_class=?, quest_expands=?, npc_expands=?, item_expands=?, wh_npc_expands=?, wh_bonus_expands=?, note=?, title_id=?, bonus_title_id=?, dp=?, soul_sickness=?, mailbox_letters=?, reposte_energy=?, mentor_flag_time=?, world_owner=? WHERE id=?")) {
+				PreparedStatement stmt = con.prepareStatement(
+					"UPDATE players SET name=?, exp=?, recoverexp=?, x=?, y=?, z=?, heading=?, world_id=?, gender=?, race=?, player_class=?, quest_expands=?, npc_expands=?, item_expands=?, wh_npc_expands=?, wh_bonus_expands=?, note=?, title_id=?, bonus_title_id=?, dp=?, soul_sickness=?, mailbox_letters=?, reposte_energy=?, mentor_flag_time=?, world_owner=? WHERE id=?")) {
 				log.debug("[DAO: MySQL5PlayerDAO] storing player " + player.getObjectId() + " " + player.getName());
 				PlayerCommonData pcd = player.getCommonData();
 				stmt.setString(1, player.getName());
@@ -160,8 +160,8 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 	public boolean saveNewPlayer(final Player player, final int accountId, final String accountName) {
 		try {
 			try (Connection con = DatabaseFactory.getConnection();
-				PreparedStatement stmt = con
-					.prepareStatement("INSERT INTO players(id, `name`, account_id, account_name, x, y, z, heading, world_id, gender, race, player_class , quest_expands, npc_expands, item_expands, wh_npc_expands, wh_bonus_expands, online) "
+				PreparedStatement stmt = con.prepareStatement(
+					"INSERT INTO players(id, `name`, account_id, account_name, x, y, z, heading, world_id, gender, race, player_class , quest_expands, npc_expands, item_expands, wh_npc_expands, wh_bonus_expands, online) "
 						+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0)")) {
 				log.debug("[DAO: MySQL5PlayerDAO] saving new player: " + player.getObjectId() + " " + player.getName());
 
@@ -260,6 +260,7 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 						cd.setBonusTitleId(resultSet.getInt("bonus_title_id"));
 						cd.setWhNpcExpands(resultSet.getInt("wh_npc_expands"));
 						cd.setWhBonusExpands(resultSet.getInt("wh_bonus_expands"));
+						cd.setOnline(resultSet.getBoolean("online"));
 						cd.setMailboxLetters(resultSet.getInt("mailbox_letters"));
 						cd.setDp(resultSet.getInt("dp"));
 						cd.setDeathCount(resultSet.getInt("soul_sickness"));
@@ -334,21 +335,21 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 	public List<Integer> getPlayerOidsOnAccount(final int accountId, final long exp) {
 		final List<Integer> result = new ArrayList<>();
 		boolean success = DB.select("SELECT id FROM players WHERE account_id = ? AND exp <= ?", new ParamReadStH() {
-			
+
 			@Override
 			public void handleRead(ResultSet resultSet) throws SQLException {
 				while (resultSet.next()) {
 					result.add(resultSet.getInt("id"));
 				}
 			}
-			
+
 			@Override
 			public void setParams(PreparedStatement preparedStatement) throws SQLException {
 				preparedStatement.setInt(1, accountId);
 				preparedStatement.setLong(2, exp);
 			}
 		});
-		
+
 		return success ? result : null;
 	}
 
@@ -432,6 +433,19 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 		}
 
 		return new int[0];
+	}
+
+	@Override
+	public boolean isOnline(int playerId) {
+		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement("SELECT online FROM players WHERE id=?")) {
+			stmt.setInt(1, playerId);
+			ResultSet rs = stmt.executeQuery();
+			if (rs.next())
+				return rs.getBoolean("online");
+		} catch (SQLException e) {
+			log.error("Can't get online state of player " + playerId, e);
+		}
+		return false;
 	}
 
 	@Override
@@ -561,8 +575,8 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 		int cnt = 0;
 		try {
 			try (Connection con = DatabaseFactory.getConnection();
-				PreparedStatement stmt = con
-					.prepareStatement("SELECT COUNT(*) AS cnt FROM `players` WHERE `account_id` = ? AND (players.deletion_date IS NULL || players.deletion_date > CURRENT_TIMESTAMP)")) {
+				PreparedStatement stmt = con.prepareStatement(
+					"SELECT COUNT(*) AS cnt FROM `players` WHERE `account_id` = ? AND (players.deletion_date IS NULL || players.deletion_date > CURRENT_TIMESTAMP)")) {
 				stmt.setInt(1, accountId);
 				try (ResultSet rs = stmt.executeQuery()) {
 					rs.next();
@@ -653,7 +667,8 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 	@Override
 	public int getOldCharacterLevel(int playerObjectId) {
 		int oldLevel = 0;
-		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement("SELECT old_level FROM players WHERE id=?")) {
+		try (Connection con = DatabaseFactory.getConnection();
+			PreparedStatement stmt = con.prepareStatement("SELECT old_level FROM players WHERE id=?")) {
 			stmt.setInt(1, playerObjectId);
 			try (ResultSet rs = stmt.executeQuery()) {
 				rs.next();
@@ -667,7 +682,8 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 
 	@Override
 	public void storeOldCharacterLevel(int playerObjectId, int level) {
-		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement("UPDATE players SET old_level=? WHERE id=?")) {
+		try (Connection con = DatabaseFactory.getConnection();
+			PreparedStatement stmt = con.prepareStatement("UPDATE players SET old_level=? WHERE id=?")) {
 			stmt.setInt(1, level);
 			stmt.setInt(2, playerObjectId);
 			stmt.execute();

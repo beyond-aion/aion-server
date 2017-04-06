@@ -24,10 +24,10 @@ public class PlayerLimitService {
 		if (!CustomConfig.LIMITS_ENABLED || itemPrice == 0)
 			return itemCount;
 
-		int accountId = player.getPlayerAccount().getId();
+		int accountId = player.getAccount().getId();
 		Long limit = sellLimit.get(accountId);
 		if (limit == null) {
-			limit = (long) (SellLimit.getSellLimit(player.getPlayerAccount().getMaxPlayerLevel()) * player.getRates().getSellLimitRate());
+			limit = (long) (SellLimit.getSellLimit(player.getAccount().getMaxPlayerLevel()) * player.getRates().getSellLimitRate());
 			sellLimit.putIfAbsent(accountId, limit);
 		}
 

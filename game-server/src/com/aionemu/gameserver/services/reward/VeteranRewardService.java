@@ -151,7 +151,7 @@ public final class VeteranRewardService {
 		if (player.getLevel() != 65)
 			return;
 
-		Account playerAcc = player.getPlayerAccount();
+		Account playerAcc = player.getAccount();
 		ZonedDateTime now = ServerTime.now();
 		ZonedDateTime charCreationTime = ServerTime.atDate(playerAcc.getPlayerAccountData(player.getObjectId()).getCreationDate());
 		if (ChronoUnit.MONTHS.between(charCreationTime, now) < 1) // return if char is younger than a month

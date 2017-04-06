@@ -34,7 +34,7 @@ public class MySQL5StarterPackDAO extends StarterPackDAO {
 
 			@Override
 			public void setParams(PreparedStatement stmt) throws SQLException {
-				stmt.setInt(1, player.getPlayerAccount().getId());
+				stmt.setInt(1, player.getAccount().getId());
 			}
 
 			@Override

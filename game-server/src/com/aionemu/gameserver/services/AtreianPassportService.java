@@ -53,10 +53,10 @@ public class AtreianPassportService {
 					@Override
 					public void accept(Player p) {
 						if (p.getCommonData() != null) {
-							p.getPlayerAccount().setLastStamp(null);
+							p.getAccount().setLastStamp(null);
 
 							if (calendar.get(Calendar.DAY_OF_MONTH) == 1)
-								p.getPlayerAccount().setPassportStamps(0);
+								p.getAccount().setPassportStamps(0);
 
 							onLogin(p);
 						}
@@ -68,7 +68,7 @@ public class AtreianPassportService {
 
 	public void takeReward(Player player, List<Integer> timestamps, List<Integer> passportIds) {
 		List<Passport> toRemove = new ArrayList<>();
-		PassportsList ppl = player.getPlayerAccount().getPassportsList();
+		PassportsList ppl = player.getAccount().getPassportsList();
 		for (int i = 0; i < passportIds.size(); i++) {
 			int passId = passportIds.get(i);
 			int time = timestamps.get(i);
@@ -96,14 +96,14 @@ public class AtreianPassportService {
 			toRemove.add(passport);
 		}
 		if (!toRemove.isEmpty()) {
-			DAOManager.getDAO(AccountPassportsDAO.class).storePassportList(player.getPlayerAccount().getId(), toRemove);
+			DAOManager.getDAO(AccountPassportsDAO.class).storePassportList(player.getAccount().getId(), toRemove);
 			toRemove.clear();
 		}
 		onLogin(player);
 	}
 
 	public void onLogin(Player player) {
-		Account pa = player.getPlayerAccount();
+		Account pa = player.getAccount();
 		ZonedDateTime now = ServerTime.now();
 		boolean doReward = checkOnlineDate(pa) && pa.getPassportStamps() < 28;
 
@@ -149,7 +149,7 @@ public class AtreianPassportService {
 	}
 
 	private void sendPassport(Player player) {
-		Account pa = player.getPlayerAccount();
+		Account pa = player.getAccount();
 		// player creation date in the servers time zone (transforming the timestamp directly would instead apply the system time zone)
 		LocalDate playerCreationDate = ServerTime.atDate(pa.getPlayerAccountData(player.getObjectId()).getCreationDate()).toLocalDate();
 		PacketSendUtility.sendPacket(player, new SM_ATREIAN_PASSPORT(pa.getPassportsList(), pa.getPassportStamps(), playerCreationDate));
@@ -163,7 +163,7 @@ public class AtreianPassportService {
 	 * Maximum 50 Passports are saved
 	 */
 	private void checkPassportLimit(Player player) {
-		List<Passport> pl = player.getPlayerAccount().getPassportsList().getAllPassports();
+		List<Passport> pl = player.getAccount().getPassportsList().getAllPassports();
 		if (pl.size() <= 50)
 			return;
 
@@ -181,7 +181,7 @@ public class AtreianPassportService {
 		}
 		if (!toRemove.isEmpty()) {
 			pl.removeAll(toRemove);
-			DAOManager.getDAO(AccountPassportsDAO.class).storePassportList(player.getPlayerAccount().getId(), toRemove);
+			DAOManager.getDAO(AccountPassportsDAO.class).storePassportList(player.getAccount().getId(), toRemove);
 			toRemove.clear();
 		}
 

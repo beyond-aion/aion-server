@@ -234,8 +234,8 @@ public class SM_PLAYER_INFO extends AionServerPacket {
 		writeC(player.isMentor() ? 1 : 0);
 		writeD(player.getHouseOwnerId()); // 3.0
 
-		if (player.getPlayerAccount().getMembership() > 0)
-			writeD(0x03 + player.getPlayerAccount().getMembership());// 1 = normal, 2 = new player(ascension boost), 3 = returning player, 4 = vip 1
+		if (player.getAccount().getMembership() > 0)
+			writeD(0x03 + player.getAccount().getMembership());// 1 = normal, 2 = new player(ascension boost), 3 = returning player, 4 = vip 1
 		else
 			writeD(0x01);
 		writeD(0x01); // unk 4.7

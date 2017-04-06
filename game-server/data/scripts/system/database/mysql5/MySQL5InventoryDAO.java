@@ -227,7 +227,7 @@ public class MySQL5InventoryDAO extends InventoryDAO {
 	@Override
 	public boolean store(Player player) {
 		int playerId = player.getObjectId();
-		Integer accountId = player.getPlayerAccount() != null ? player.getPlayerAccount().getId() : null;
+		Integer accountId = player.getAccount() != null ? player.getAccount().getId() : null;
 		Integer legionId = player.getLegion() != null ? player.getLegion().getLegionId() : null;
 
 		List<Item> allPlayerItems = player.getDirtyItemsToUpdate();
@@ -237,7 +237,7 @@ public class MySQL5InventoryDAO extends InventoryDAO {
 	@Override
 	public boolean store(Item item, Player player) {
 		int playerId = player.getObjectId();
-		int accountId = player.getPlayerAccount().getId();
+		int accountId = player.getAccount().getId();
 		Integer legionId = player.getLegion() != null ? player.getLegion().getLegionId() : null;
 
 		return store(item, playerId, accountId, legionId);

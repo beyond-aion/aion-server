@@ -142,17 +142,17 @@ public class PlayerLeaveWorldService {
 		player.getLifeStats().cancelAllTasks();
 
 		Summon summon = player.getSummon();
-		if (summon != null) {
+		if (summon != null)
 			SummonsService.doMode(SummonMode.RELEASE, summon, UnsummonType.LOGOUT);
-		}
 		PetSpawnService.dismissPet(player);
-
 		if (player.getPostman() != null)
 			player.getPostman().getController().delete();
-		player.setPostman(null);
 
 		PunishmentService.stopPrisonTask(player, true);
 		PunishmentService.stopGatherableTask(player, true);
+		ExpireTimerTask.getInstance().removePlayer(player);
+		if (player.getCraftingTask() != null)
+			player.getCraftingTask().stop();
 
 		if (player.isLegionMember())
 			LegionService.getInstance().onLogout(player);
@@ -163,21 +163,18 @@ public class PlayerLeaveWorldService {
 		player.getCommonData().setOnline(false);
 		player.getCommonData().setLastOnline(lastOnline);
 
-		DAOManager.getDAO(PlayerDAO.class).onlinePlayer(player, false);
-		DAOManager.getDAO(PlayerDAO.class).storeLastOnlineTime(player.getObjectId(), lastOnline);
-		DAOManager.getDAO(PlayerDAO.class).storeOldCharacterLevel(player.getObjectId(), player.getLevel());
-
 		ChatServer.getInstance().sendPlayerLogout(player);
 
 		PlayerService.storePlayer(player);
 
-		ExpireTimerTask.getInstance().removePlayer(player);
-		if (player.getCraftingTask() != null)
-			player.getCraftingTask().stop();
 		player.getEquipment().setOwner(null);
 		player.getInventory().setOwner(null);
 		player.getWarehouse().setOwner(null);
-		player.getPlayerAccount().getAccountWarehouse().setOwner(null);
+		player.getAccount().getAccountWarehouse().setOwner(null);
+
+		DAOManager.getDAO(PlayerDAO.class).storeOldCharacterLevel(player.getObjectId(), player.getLevel());
+		DAOManager.getDAO(PlayerDAO.class).storeLastOnlineTime(player.getObjectId(), lastOnline);
+		DAOManager.getDAO(PlayerDAO.class).onlinePlayer(player, false); // marks that player was fully saved and may enter world again
 
 		con.setActivePlayer(null);
 	}

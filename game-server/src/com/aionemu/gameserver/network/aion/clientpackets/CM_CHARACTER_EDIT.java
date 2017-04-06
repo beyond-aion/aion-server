@@ -1,33 +1,29 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
-import com.aionemu.commons.database.dao.DAOManager;
-import com.aionemu.gameserver.dao.PlayerAppearanceDAO;
-import com.aionemu.gameserver.dao.PlayerDAO;
+import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE.STR_EDIT_CHAR_GENDER_CANT_NO_ITEM;
+
 import com.aionemu.gameserver.model.Gender;
-import com.aionemu.gameserver.model.account.Account;
+import com.aionemu.gameserver.model.account.PlayerAccountData;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.PlayerAppearance;
-import com.aionemu.gameserver.model.gameobjects.player.PlayerCommonData;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_PLAYER_INFO;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.player.PlayerEnterWorldService;
-import com.aionemu.gameserver.services.player.PlayerService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
- * In this packets aion client is requesting edit of character.
+ * In this packet Aion client is requesting edit of character.
  * 
- * @author IlBuono
+ * @author IlBuono, Neon
  */
 public class CM_CHARACTER_EDIT extends AionClientPacket {
 
 	private int objectId;
-
-	private boolean gender_change;
-
-	private boolean check_ticket = true;
+	private int genderId;
+	private PlayerAppearance newAppearance;
 
 	/**
 	 * Constructs new instance of <tt>CM_CREATE_CHARACTER </tt> packet
@@ -40,156 +36,120 @@ public class CM_CHARACTER_EDIT extends AionClientPacket {
 
 	@Override
 	protected void readImpl() {
-		AionConnection client = getConnection();
-		Account account = client.getAccount();
 		objectId = readD();
-		readB(52);
-		if (account.getPlayerAccountData(objectId) == null) {
+		readB(52); // name
+		PlayerAccountData playerAccData = getConnection().getAccount().getPlayerAccountData(objectId);
+		if (playerAccData == null)
 			return;
-		}
-		Player player = PlayerService.getPlayer(objectId, account);
-		if (player == null) {
+		if (!playerAccData.getPlayerCommonData().isInEditMode())
 			return;
-		}
 
-		PlayerCommonData playerCommonData = player.getCommonData();
-		PlayerAppearance playerAppearance = player.getPlayerAppearance();
-		// Before modify appearance, we do a check of ticket
-		int gender = readD();
-		gender_change = playerCommonData.getGender().getGenderId() == gender ? false : true;
-		if (!gender_change) {
-			if (player.getInventory().getItemCountByItemId(169650000) == 0 && player.getInventory().getItemCountByItemId(169650001) == 0
-				&& player.getInventory().getItemCountByItemId(169650002) == 0 && player.getInventory().getItemCountByItemId(169650003) == 0
-				&& player.getInventory().getItemCountByItemId(169650004) == 0 && player.getInventory().getItemCountByItemId(169650005) == 0
-				&& player.getInventory().getItemCountByItemId(169650006) == 0 && player.getInventory().getItemCountByItemId(169650007) == 0) {
-				check_ticket = false;
-				return;
-			}
-		} else {
-			if (player.getInventory().getItemCountByItemId(169660000) == 0 && player.getInventory().getItemCountByItemId(169660001) == 0
-				&& player.getInventory().getItemCountByItemId(169660002) == 0 && player.getInventory().getItemCountByItemId(169660003) == 0) {
-				check_ticket = false;
-				return;
-			}
-		}
-		playerCommonData.setGender(gender == 0 ? Gender.MALE : Gender.FEMALE);
+		newAppearance = new PlayerAppearance();
+		genderId = readD();
 		readD(); // race
 		readD(); // player class
 
-		playerAppearance.setVoice(readD());
-		playerAppearance.setSkinRGB(readD());
-		playerAppearance.setHairRGB(readD());
-		playerAppearance.setEyeRGB(readD());
-		playerAppearance.setLipRGB(readD());
-		playerAppearance.setFace(readUC());
-		playerAppearance.setHair(readUC());
-		playerAppearance.setDeco(readUC());
-		playerAppearance.setTattoo(readUC());
-		playerAppearance.setFaceContour(readUC());
-		playerAppearance.setExpression(readUC());
+		newAppearance.setVoice(readD());
+		newAppearance.setSkinRGB(readD());
+		newAppearance.setHairRGB(readD());
+		newAppearance.setEyeRGB(readD());
+		newAppearance.setLipRGB(readD());
+		newAppearance.setFace(readUC());
+		newAppearance.setHair(readUC());
+		newAppearance.setDeco(readUC());
+		newAppearance.setTattoo(readUC());
+		newAppearance.setFaceContour(readUC());
+		newAppearance.setExpression(readUC());
 		readC(); // always 4 o0 // 5 in 1.5.x
-		playerAppearance.setJawLine(readUC());
-		playerAppearance.setForehead(readUC());
+		newAppearance.setJawLine(readUC());
+		newAppearance.setForehead(readUC());
 
-		playerAppearance.setEyeHeight(readUC());
-		playerAppearance.setEyeSpace(readUC());
-		playerAppearance.setEyeWidth(readUC());
-		playerAppearance.setEyeSize(readUC());
-		playerAppearance.setEyeShape(readUC());
-		playerAppearance.setEyeAngle(readUC());
+		newAppearance.setEyeHeight(readUC());
+		newAppearance.setEyeSpace(readUC());
+		newAppearance.setEyeWidth(readUC());
+		newAppearance.setEyeSize(readUC());
+		newAppearance.setEyeShape(readUC());
+		newAppearance.setEyeAngle(readUC());
 
-		playerAppearance.setBrowHeight(readUC());
-		playerAppearance.setBrowAngle(readUC());
-		playerAppearance.setBrowShape(readUC());
+		newAppearance.setBrowHeight(readUC());
+		newAppearance.setBrowAngle(readUC());
+		newAppearance.setBrowShape(readUC());
 
-		playerAppearance.setNose(readUC());
-		playerAppearance.setNoseBridge(readUC());
-		playerAppearance.setNoseWidth(readUC());
-		playerAppearance.setNoseTip(readUC());
+		newAppearance.setNose(readUC());
+		newAppearance.setNoseBridge(readUC());
+		newAppearance.setNoseWidth(readUC());
+		newAppearance.setNoseTip(readUC());
 
-		playerAppearance.setCheek(readUC());
-		playerAppearance.setLipHeight(readUC());
-		playerAppearance.setMouthSize(readUC());
-		playerAppearance.setLipSize(readUC());
-		playerAppearance.setSmile(readUC());
-		playerAppearance.setLipShape(readUC());
-		playerAppearance.setJawHeigh(readUC());
-		playerAppearance.setChinJut(readUC());
-		playerAppearance.setEarShape(readUC());
-		playerAppearance.setHeadSize(readUC());
+		newAppearance.setCheek(readUC());
+		newAppearance.setLipHeight(readUC());
+		newAppearance.setMouthSize(readUC());
+		newAppearance.setLipSize(readUC());
+		newAppearance.setSmile(readUC());
+		newAppearance.setLipShape(readUC());
+		newAppearance.setJawHeigh(readUC());
+		newAppearance.setChinJut(readUC());
+		newAppearance.setEarShape(readUC());
+		newAppearance.setHeadSize(readUC());
 
-		playerAppearance.setNeck(readUC());
-		playerAppearance.setNeckLength(readUC());
+		newAppearance.setNeck(readUC());
+		newAppearance.setNeckLength(readUC());
 
-		playerAppearance.setShoulderSize(readUC());
+		newAppearance.setShoulderSize(readUC());
 
-		playerAppearance.setTorso(readUC());
-		playerAppearance.setChest(readUC()); // only woman
-		playerAppearance.setWaist(readUC());
-		playerAppearance.setHips(readUC());
+		newAppearance.setTorso(readUC());
+		newAppearance.setChest(readUC()); // only woman
+		newAppearance.setWaist(readUC());
+		newAppearance.setHips(readUC());
 
-		playerAppearance.setArmThickness(readUC());
+		newAppearance.setArmThickness(readUC());
 
-		playerAppearance.setHandSize(readUC());
-		playerAppearance.setLegThicnkess(readUC());
+		newAppearance.setHandSize(readUC());
+		newAppearance.setLegThicnkess(readUC());
 
-		playerAppearance.setFootSize(readUC());
-		playerAppearance.setFacialRate(readUC());
+		newAppearance.setFootSize(readUC());
+		newAppearance.setFacialRate(readUC());
 
 		readC(); // always 0
-		playerAppearance.setArmLength(readUC());
-		playerAppearance.setLegLength(readUC()); // wrong??
-		playerAppearance.setShoulders(readUC()); // 1.5.x May be ShoulderSize
-		playerAppearance.setFaceShape(readUC());
+		newAppearance.setArmLength(readUC());
+		newAppearance.setLegLength(readUC()); // wrong??
+		newAppearance.setShoulders(readUC()); // 1.5.x May be ShoulderSize
+		newAppearance.setFaceShape(readUC());
 		readC();
 		readC();
 		readC();
-		playerAppearance.setHeight(readF());
+		newAppearance.setHeight(readF());
 	}
 
 	@Override
 	protected void runImpl() {
 		AionConnection client = getConnection();
+		int[] appearanceTickets = { 169650000, 169650001, 169650002, 169650003, 169650004, 169650005, 169650006, 169650007, 169650008 };
+		int[] genderTickets = { 169660000, 169660001, 169660002, 169660003, 169660004 };
 		PlayerEnterWorldService.enterWorld(client, objectId);
 		Player player = client.getActivePlayer();
-		if (!check_ticket) {
-			if (!gender_change)
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_EDIT_CHAR_ALL_CANT_NO_ITEM());
-			else
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_EDIT_CHAR_GENDER_CANT_NO_ITEM());
-		} else {
-			// Remove ticket and save appearance
-			if (!gender_change) {
-				if (player.getInventory().getItemCountByItemId(169650000) > 0) { // Plastic Surgery Ticket
-					player.getInventory().decreaseByItemId(169650000, 1);
-				} else if (player.getInventory().getItemCountByItemId(169650001) > 0) { // [Event] Plastic Surgery Ticket
-					player.getInventory().decreaseByItemId(169650001, 1);
-				} else if (player.getInventory().getItemCountByItemId(169650002) > 0) { // [Special] Plastic Surgery Ticket
-					player.getInventory().decreaseByItemId(169650002, 1);
-				} else if (player.getInventory().getItemCountByItemId(169650003) > 0) { // [Special] Plastic Surgery Ticket
-					player.getInventory().decreaseByItemId(169650003, 1);
-				} else if (player.getInventory().getItemCountByItemId(169650004) > 0) { // Plastic Surgery Ticket (60 mins)
-					player.getInventory().decreaseByItemId(169650004, 1);
-				} else if (player.getInventory().getItemCountByItemId(169650005) > 0) { // Plastic Surgery Ticket (60 mins)
-					player.getInventory().decreaseByItemId(169650005, 1);
-				} else if (player.getInventory().getItemCountByItemId(169650006) > 0) { // [Event] Plastic Surgery Ticket
-					player.getInventory().decreaseByItemId(169650006, 1);
-				} else if (player.getInventory().getItemCountByItemId(169650007) > 0) { // [Event] Plastic Surgery Ticket
-					player.getInventory().decreaseByItemId(169650007, 1);
-				}
-			} else {
-				if (player.getInventory().getItemCountByItemId(169660000) > 0) { // Gender Switch Ticket
-					player.getInventory().decreaseByItemId(169660000, 1);
-				} else if (player.getInventory().getItemCountByItemId(169660001) > 0) { // [Event] Gender Switch Ticket
-					player.getInventory().decreaseByItemId(169660001, 1);
-				} else if (player.getInventory().getItemCountByItemId(169660002) > 0) { // Gender Switch Ticket (60 min)
-					player.getInventory().decreaseByItemId(169660002, 1);
-				} else if (player.getInventory().getItemCountByItemId(169660003) > 0) { // [Event] Gender Switch Ticket
-					player.getInventory().decreaseByItemId(169660003, 1);
-				}
-				DAOManager.getDAO(PlayerDAO.class).storePlayer(player); // save new gender
+
+		boolean isGenderSwitch = player.getGender().getGenderId() != genderId;
+		int[] ticketIds = isGenderSwitch ? genderTickets : appearanceTickets;
+		SM_SYSTEM_MESSAGE errorMsg = isGenderSwitch ? STR_EDIT_CHAR_GENDER_CANT_NO_ITEM() : STR_EDIT_CHAR_GENDER_CANT_NO_ITEM();
+
+		for (int ticketId : ticketIds) {
+			if (player.getInventory().decreaseByItemId(ticketId, 1)) {
+				errorMsg = null;
+				break;
 			}
-			DAOManager.getDAO(PlayerAppearanceDAO.class).store(player); // save new appearance
 		}
+		if (errorMsg != null) {
+			PacketSendUtility.sendPacket(player, errorMsg);
+			return;
+		}
+
+		if (isGenderSwitch)
+			player.getCommonData().setGender(genderId == 0 ? Gender.MALE : Gender.FEMALE);
+		player.setPlayerAppearance(newAppearance);
+
+		// broadcast new appearance (no need to save it, will be saved periodically and on logout)
+		player.clearKnownlist();
+		PacketSendUtility.sendPacket(player, new SM_PLAYER_INFO(player));
+		player.updateKnownlist();
 	}
 }

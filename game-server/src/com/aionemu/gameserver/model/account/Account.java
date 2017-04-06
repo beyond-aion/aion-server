@@ -169,7 +169,10 @@ public class Account implements Iterable<PlayerAccountData> {
 	 * @param accPlData
 	 */
 	public void addPlayerAccountData(PlayerAccountData accPlData) {
-		players.put(accPlData.getPlayerCommonData().getPlayerObjId(), accPlData);
+		PlayerAccountData oldData = players.put(accPlData.getPlayerCommonData().getPlayerObjId(), accPlData);
+		if (oldData != null) {
+			decrementCountOf(oldData.getPlayerCommonData().getRace());
+		}
 		switch (accPlData.getPlayerCommonData().getRace()) {
 			case ASMODIANS:
 				numberOfAsmos++;

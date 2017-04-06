@@ -985,7 +985,7 @@ public class LegionService {
 			/**
 			 * 1. save items first
 			 */
-			DAOManager.getDAO(InventoryDAO.class).store(allItems, player.getObjectId(), player.getPlayerAccount().getId(), legion.getLegionId());
+			DAOManager.getDAO(InventoryDAO.class).store(allItems, player.getObjectId(), player.getAccount().getId(), legion.getLegionId());
 
 			/**
 			 * 2. save item stones

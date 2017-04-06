@@ -49,7 +49,7 @@ public class BonusPackService {
 		if (player.getCommonData().getMailboxLetters() + rewards.size() > 100)
 			return;
 
-		int accountId = player.getPlayerAccount().getId();
+		int accountId = player.getAccount().getId();
 		if (dao.loadReceivingPlayer(accountId) > 0)
 			return;
 
