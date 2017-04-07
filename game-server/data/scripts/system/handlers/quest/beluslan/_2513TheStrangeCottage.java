@@ -4,12 +4,10 @@ import static com.aionemu.gameserver.model.DialogAction.*;
 
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author Ritsu
@@ -55,10 +53,10 @@ public class _2513TheStrangeCottage extends QuestHandler {
 						return false;
 					case SETPRO1:
 						if (var == 0) {
+							qs.setRewardGroup(0);
 							qs.setStatus(QuestStatus.REWARD);
 							updateQuestStatus(env);
-							PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
-							return true;
+							return closeDialogWindow(env);
 						}
 				}
 			}
@@ -71,10 +69,10 @@ public class _2513TheStrangeCottage extends QuestHandler {
 						return false;
 					case SETPRO2:
 						if (var == 0) {
+							qs.setRewardGroup(1);
 							qs.setStatus(QuestStatus.REWARD);
 							updateQuestStatus(env);
-							PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
-							return true;
+							return closeDialogWindow(env);
 						}
 				}
 			}
@@ -87,10 +85,10 @@ public class _2513TheStrangeCottage extends QuestHandler {
 						return false;
 					case SETPRO3:
 						if (var == 0) {
+							qs.setRewardGroup(2);
 							qs.setStatus(QuestStatus.REWARD);
 							updateQuestStatus(env);
-							PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
-							return true;
+							return closeDialogWindow(env);
 						}
 				}
 			}
@@ -99,8 +97,6 @@ public class _2513TheStrangeCottage extends QuestHandler {
 				switch (dialogActionId) {
 					case USE_OBJECT:
 						return sendQuestDialog(env, 10002);
-					case SELECT_QUEST_REWARD:
-						return sendQuestDialog(env, 5);
 					default:
 						return sendQuestEndDialog(env);
 				}
