@@ -1,6 +1,7 @@
 package com.aionemu.gameserver.model.templates.spawns;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -48,6 +49,7 @@ public class SpawnMap {
 
 	public SpawnMap(int mapId) {
 		this.mapId = mapId;
+		this.spawns = new ArrayList<>();
 	}
 
 	public int getMapId() {
@@ -55,81 +57,35 @@ public class SpawnMap {
 	}
 
 	public List<Spawn> getSpawns() {
-		if (spawns == null) {
-			spawns = new ArrayList<>();
-		}
-		return spawns;
-	}
-
-	public void addSpawns(Spawn spawns) {
-		getSpawns().add(spawns);
-	}
-
-	public void removeSpawns(Spawn spawns) {
-		getSpawns().remove(spawns);
+		return spawns == null ? Collections.emptyList() : spawns;
 	}
 
 	public List<BaseSpawn> getBaseSpawns() {
-		if (baseSpawns == null) {
-			baseSpawns = new ArrayList<>();
-		}
-		return baseSpawns;
+		return baseSpawns == null ? Collections.emptyList() : baseSpawns;
 	}
 
 	public List<MercenarySpawn> getMercenarySpawns() {
-		if (mercenarySpawns == null)
-			mercenarySpawns = new ArrayList<>();
-		return mercenarySpawns;
+		return mercenarySpawns == null ? Collections.emptyList() : mercenarySpawns;
 	}
 
 	public List<AssaultSpawn> getAssaultSpawns() {
-		if (assaultSpawns == null)
-			assaultSpawns = new ArrayList<>();
-		return assaultSpawns;
-	}
-
-	public void addBaseSpawns(BaseSpawn spawns) {
-		getBaseSpawns().add(spawns);
+		return assaultSpawns == null ? Collections.emptyList() : assaultSpawns;
 	}
 
 	public List<RiftSpawn> getRiftSpawns() {
-		if (riftSpawns == null) {
-			riftSpawns = new ArrayList<>();
-		}
-		return riftSpawns;
-	}
-
-	public void addRiftSpawns(RiftSpawn spawns) {
-		getRiftSpawns().add(spawns);
+		return riftSpawns == null ? Collections.emptyList() : riftSpawns;
 	}
 
 	public List<SiegeSpawn> getSiegeSpawns() {
-		if (siegeSpawns == null) {
-			siegeSpawns = new ArrayList<>();
-		}
-		return siegeSpawns;
-	}
-
-	public void addSiegeSpawns(SiegeSpawn spawns) {
-		getSiegeSpawns().add(spawns);
+		return siegeSpawns == null ? Collections.emptyList() : siegeSpawns;
 	}
 
 	public List<VortexSpawn> getVortexSpawns() {
-		if (vortexSpawns == null) {
-			vortexSpawns = new ArrayList<>();
-		}
-		return vortexSpawns;
-	}
-
-	public void addVortexSpawns(VortexSpawn spawns) {
-		getVortexSpawns().add(spawns);
+		return vortexSpawns == null ? Collections.emptyList() : vortexSpawns;
 	}
 
 	public List<AhserionsFlightSpawn> getAhserionSpawns() {
-		if (ahserionSpawns == null) {
-			ahserionSpawns = new ArrayList<>();
-		}
-		return ahserionSpawns;
+		return ahserionSpawns == null ? Collections.emptyList() : ahserionSpawns;
 	}
 
 }

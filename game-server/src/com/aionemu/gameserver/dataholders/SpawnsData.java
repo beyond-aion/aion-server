@@ -347,7 +347,7 @@ public class SpawnsData {
 		}
 
 		if (addGroup)
-			map.addSpawns(oldGroup);
+			map.getSpawns().add(oldGroup);
 
 		xml.getParentFile().mkdir();
 		try (FileOutputStream fos = new FileOutputStream(xml)) {
