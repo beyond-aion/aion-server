@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<spawns xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<spawns xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../spawns.xsd">
 	<spawn_map map_id="300420000">
 		<!-- Acid Sprayer -->
 		<spawn npc_id="207047" respawn_time="30">
@@ -289,11 +289,6 @@
 			<spot x="1877.920" y="1763.200" z="300.420" h="75"/>
 			<spot x="1889.190" y="1738.575" z="300.425" h="65"/>
 		</spawn>
-		<!-- Flame Thrower -->
-		<spawn npc_id="701189" respawn_time="105">
-			<spot x="1796.958" y="1727.212" z="300.418" h="5"/>
-			<spot x="1807.450" y="1702.280" z="300.426" h="15"/>
-		</spawn>
 		<!-- Lava Floor -->
 		<spawn npc_id="701179" respawn_time="30" difficult_id="1">
 			<spot x="628.601" y="1775.815" z="145.500"/>
@@ -388,10 +383,6 @@
 		</spawn>
 		<!-- Pale Carmina -->
 		<spawn npc_id="218716" respawn_time="105" difficult_id="3">
-			<spot x="1927.183" y="869.697" z="231.432" h="30"/>
-		</spawn>
-		<!-- Pale Carmina -->
-		<spawn npc_id="218703" respawn_time="105">
 			<spot x="1927.183" y="869.697" z="231.432" h="30"/>
 		</spawn>
 		<!-- Plaza Flame Thrower -->

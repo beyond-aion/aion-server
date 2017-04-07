@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<spawns>
+<spawns xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../spawns.xsd">
 	<spawn_map map_id="300280000">
-		<!--  -->
+		<!-- IDYun_Dispel_Area_Polymorph_NoShowNpc -->
 		<spawn npc_id="282950">
 			<spot x="543.4936" y="580.2133" z="151.1486" />
 		</spawn>
-		<!--  -->
+		<!-- BIDYun_Check_Race -->
 		<spawn npc_id="855952">
 			<spot x="555.3721" y="589.1785" z="154.2752" />
 		</spawn>
-		<!--  -->
+		<!-- BIDYun_User_Check -->
 		<spawn npc_id="856056">
 			<spot x="466.6582" y="456.1814" z="151.25" />
 		</spawn>
@@ -35,10 +35,6 @@
 		<!-- Ariana's Jewelry Box -->
 		<spawn npc_id="218572">
 			<spot x="227.9529" y="318.037" z="253.0552" h="100" />
-		</spawn>
-		<!-- BIDYun_User_Check -->
-		<spawn npc_id="856056">
-			<spot x="463.38464" y="454.4389" z="159.927"/>
 		</spawn>
 		<!-- Brigade General Vasharti -->
 		<spawn npc_id="217313">

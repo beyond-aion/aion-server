@@ -869,7 +869,7 @@
 		</spawn>
 		<!-- Menomes -->
 		<spawn npc_id="203791" respawn_time="295">
-			<spot x="1892.31" y="1568.50" z="590.122" h="60"/>
+			<spot x="1892.2449" y="1569.3918" z="590.1221" h="60"/>
 		</spawn>
 		<!-- Menon -->
 		<spawn npc_id="203848" respawn_time="295">
@@ -894,10 +894,6 @@
 		<!-- Mino -->
 		<spawn npc_id="203856" respawn_time="295">
 			<spot x="1806.23" y="2119.59" z="529.084" h="75"/>
-		</spawn>
-		<!-- Miragent's Holy Templar -->
-		<spawn npc_id="203713" respawn_time="295">
-			<spot x="1856.12" y="1514.86" z="805.518"/>
 		</spawn>
 		<!-- Miragent's Holy Templar -->
 		<spawn npc_id="203712" respawn_time="295">
@@ -1088,10 +1084,6 @@
 		<!-- Toinon -->
 		<spawn npc_id="206334" respawn_time="295">
 			<spot x="1892.2487" y="1567.5554" z="590.1221" h="60"/>
-		</spawn>
-		<!-- Menomes -->
-		<spawn npc_id="203791" respawn_time="295">
-			<spot x="1892.2449" y="1569.3918" z="590.1221" h="60"/>
 		</spawn>
 		<!-- Pulo -->
 		<spawn npc_id="203733" respawn_time="295">

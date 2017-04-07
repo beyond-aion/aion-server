@@ -3940,13 +3940,13 @@
 		</spawn>
 		<!-- Igraine -->
 		<spawn npc_id="204347" respawn_time="295">
-			<temporary_spawn spawn_time="4.*.*" despawn_time="21.*.*"/>
-			<spot x="2522.29" y="1703.93" z="92.0406" h="50"/>
-		</spawn>
-		<!-- Igraine -->
-		<spawn npc_id="204347" respawn_time="295">
-			<temporary_spawn spawn_time="22.*.*" despawn_time="5.*.*"/>
-			<spot x="2479.46" y="1801.02" z="95.6547" h="75"/>
+			<temporary_spawn/>
+			<spot x="2522.29" y="1703.93" z="92.0406" h="50">
+				<temporary_spawn spawn_time="5.*.*" despawn_time="21.*.*"/>
+			</spot>
+			<spot x="2479.46" y="1801.02" z="95.6547" h="75">
+				<temporary_spawn spawn_time="21.*.*" despawn_time="5.*.*"/>
+			</spot>
 		</spawn>
 		<!-- Ilaina Aetherleech -->
 		<spawn npc_id="212827" respawn_time="3600" pool="1">
@@ -6013,8 +6013,10 @@
 		<!-- Pretor Guard -->
 		<spawn npc_id="212969" respawn_time="295">
 			<spot x="2624.27" y="2512.45" z="142.592" h="19"/>
+			<spot x="2624.91" y="2503.7" z="142.59232" h="20"/>
 			<spot x="2630.24" y="2513.29" z="142.592" h="113"/>
 			<spot x="2659.56" y="2518.17" z="142.592" h="115"/>
+			<spot x="2662.47" y="2513.58" z="142.59232" h="54"/>
 			<spot x="2663.88" y="2500.95" z="144.189" h="110"/>
 			<spot x="2664.77" y="2519.16" z="142.592" h="30"/>
 			<spot x="2694.06" y="2597.95" z="158.37437" h="114" walker_id="7CC94453D58CE931813E4DA9E79991050A1BFD35"/>
@@ -6024,11 +6026,6 @@
 			<spot x="2760.33" y="2620.46" z="162.073" h="77"/>
 			<spot x="2769.58" y="2601.96" z="162.75" h="93"/>
 			<spot x="2771.63" y="2584.82" z="161.972" h="114"/>
-		</spawn>
-		<!-- Pretor Guard -->
-		<spawn npc_id="212969" respawn_time="295">
-			<spot x="2624.91" y="2503.7" z="142.59232" h="20"/>
-			<spot x="2662.47" y="2513.58" z="142.59232" h="54"/>
 		</spawn>
 		<!-- Protector Einbil -->
 		<spawn npc_id="204434" respawn_time="295">
@@ -8553,13 +8550,13 @@
 		</spawn>
 		<!-- Virashak -->
 		<spawn npc_id="204348" respawn_time="295">
-			<temporary_spawn spawn_time="4.*.*" despawn_time="21.*.*"/>
-			<spot x="2493" y="1713" z="96" h="73"/>
-		</spawn>
-		<!-- Virashak -->
-		<spawn npc_id="204348" respawn_time="295">
-			<temporary_spawn spawn_time="22.*.*" despawn_time="5.*.*"/>
-			<spot x="2488.72" y="1795.96" z="96" h="112"/>
+			<temporary_spawn/>
+			<spot x="2493" y="1713" z="90.1875" h="73">
+				<temporary_spawn spawn_time="5.*.*" despawn_time="21.*.*"/>
+			</spot>
+			<spot x="2488.72" y="1795.96" z="95.2742" h="112">
+				<temporary_spawn spawn_time="21.*.*" despawn_time="5.*.*"/>
+			</spot>
 		</spawn>
 		<!-- Visionmaster Omutata -->
 		<spawn npc_id="212880" respawn_time="295">

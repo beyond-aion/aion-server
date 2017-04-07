@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<spawns xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<spawns xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../spawns.xsd">
 	<spawn_map map_id="300170000">
 		<!-- Laksyaka Legatus -->
 		<spawn npc_id="216184" difficult_id="2">
@@ -41,35 +41,6 @@
 			<spot x="1384.78" y="303.703" z="246.724"/>
 			<spot x="1478.82" y="1375.23" z="300.33"/>
 			<spot x="1479.17" y="419.136" z="240.234" h="90"/>
-		</spawn>
-		<!-- Laksyaka Sniper -->
-		<spawn npc_id="216268" difficult_id="1">
-			<spot x="1191.8" y="331.98" z="242.85822" walker_id="D56B175A49D36AD4821D137B7AF4E4BD927DE116"/>
-			<spot x="1209.97" y="319.65" z="243.46355" walker_id="21DED590CA485ABADFB254C2940E6279B2F1C999"/>
-			<spot x="1210.16" y="399.07" z="240.14963" walker_id="32F9CB9DF890575FB9BE2E94F7FAA2F5B991096C"/>
-			<spot x="1264.14" y="294.09" z="246.73996" walker_id="E6CB4D107D4B824651F1B4C04F9F1AA28664BA00"/>
-			<spot x="1324.36" y="264.44" z="246.72415" walker_id="EDA8FBFB20B7322D971840BD15CD89104ED531AA" walker_index="1"/>
-			<spot x="1389.43" y="311.74" z="246.72415" walker_id="CF4AC0AF997F6B6AB6ACEBAC12238FD59F1DB2FF"/>
-			<spot x="1434.8" y="429.03" z="240.23418" walker_id="DE6E7298EB24E3B85F9AA1A339BE6876AA439168" walker_index="1"/>
-			<spot x="1440.45" y="336.76" z="243.53496" walker_id="D3290CE6E4A6ECBE85ABA8C6E6BE999936E4EFE8"/>
-			<spot x="1472.97" y="369.46" z="240.18518" h="90" walker_id="1ABFB93C18D8DDFB44F9274E431A601B186D9D76"/>
-		</spawn>
-		<!-- Laksyaka Sniper -->
-		<spawn npc_id="216187" difficult_id="2">
-			<spot x="1191.8" y="331.98" z="242.85822" walker_id="D56B175A49D36AD4821D137B7AF4E4BD927DE116"/>
-			<spot x="1209.97" y="319.65" z="243.46355" walker_id="21DED590CA485ABADFB254C2940E6279B2F1C999"/>
-			<spot x="1210.16" y="399.07" z="240.14963" walker_id="32F9CB9DF890575FB9BE2E94F7FAA2F5B991096C"/>
-			<spot x="1264.14" y="294.09" z="246.73996" walker_id="E6CB4D107D4B824651F1B4C04F9F1AA28664BA00"/>
-			<spot x="1324.36" y="264.44" z="246.72415" walker_id="EDA8FBFB20B7322D971840BD15CD89104ED531AA" walker_index="1"/>
-			<spot x="1389.43" y="311.74" z="246.72415" walker_id="CF4AC0AF997F6B6AB6ACEBAC12238FD59F1DB2FF"/>
-			<spot x="1434.8" y="429.03" z="240.23418" walker_id="DE6E7298EB24E3B85F9AA1A339BE6876AA439168" walker_index="1"/>
-			<spot x="1440.45" y="336.76" z="243.53496" walker_id="D3290CE6E4A6ECBE85ABA8C6E6BE999936E4EFE8"/>
-			<spot x="1446.66" y="355.48" z="243.53496" h="30" walker_id="0017DC670E410D8B2E962BDC55FB425E995C2B37"/>
-			<spot x="1472.97" y="369.46" z="240.18518" h="90" walker_id="1ABFB93C18D8DDFB44F9274E431A601B186D9D76"/>
-			<spot x="1497.98" y="1553.25" z="328.26303" walker_id="C66AE594DF79131BC045A4D3AA84C5FAE738CA3E"/>
-			<spot x="1514.55" y="1476.23" z="304.75302" h="77" walker_id="37230B9BD1594C2B9DCDD49189DE626BE3C76866"/>
-			<spot x="1594.63" y="1482.0" z="328.26303" walker_id="94EFF47704D099F8FF24422FD375C216C6C30DB4"/>
-			<spot x="1627.02" y="1430.3" z="304.33463" walker_id="DCE3AB85552F7BBAB855918FEC4B9113ECE5C8EA"/>
 		</spawn>
 		<!-- Calike -->
 		<spawn npc_id="799521">
@@ -320,8 +291,7 @@
 		<!-- Asmodian Soulranger -->
 		<spawn npc_id="216212">
 			<spot x="781.337" y="271.483" z="221.821"/>
-			<spot x="790.757" y="267.384" z="222.588"/>
-			<spot x="790.75732" y="267.38367" z="223.65325" random_walk="9"/>
+			<spot x="790.75732" y="267.38367" z="222.588" random_walk="9"/>
 			<spot x="793.005" y="459.788" z="221.742"/>
 			<spot x="951.464" y="490.469" z="224.462"/>
 		</spawn>
@@ -755,13 +725,6 @@
 			<spot x="1102.5391" y="21.058804" z="234.10826" h="30"/>
 		</spawn>
 		<!-- Burial Chamber of the Hero -->
-		<spawn npc_id="216233" difficult_id="2">
-			<spot x="1214.92" y="506.924" z="246.231"/>
-			<spot x="1215.17" y="536.924" z="246.231"/>
-			<spot x="1215.29" y="596.953" z="246.231"/>
-			<spot x="1215.41" y="626.668" z="246.717"/>
-		</spawn>
-		<!-- Burial Chamber of the Hero -->
 		<spawn npc_id="281392" difficult_id="1">
 			<spot x="1214.92" y="506.924" z="246.231"/>
 			<spot x="1215.17" y="536.924" z="246.231"/>
@@ -875,32 +838,6 @@
 			<spot x="1151.797" y="134.0117" z="226.0683" static_id="538"/>
 			<spot x="1034.753" y="130.5495" z="234.2692" static_id="451"/>
 			<spot x="1167.747" y="84.28814" z="227.8879" static_id="537"/>
-		</spawn>
-		<!-- Asmodian Soulmedic -->
-		<spawn npc_id="216213">
-			<spot x="777.574" y="270.933" z="221.501"/>
-			<spot x="796.485" y="469.257" z="220.982"/>
-			<spot x="916.427" y="476.936" z="226.556"/>
-		</spawn>
-		<!-- Asmodian Soulranger -->
-		<spawn npc_id="216212">
-			<spot x="781.337" y="271.483" z="221.821"/>
-			<spot x="790.757" y="267.384" z="222.588"/>
-			<spot x="793.005" y="459.788" z="221.742"/>
-			<spot x="951.464" y="490.469" z="224.462"/>
-		</spawn>
-		<!-- Asmodian Soulspell -->
-		<spawn npc_id="216211">
-			<spot x="806.876" y="472.326" z="221.595"/>
-			<spot x="931.683" y="468.915" z="224.343"/>
-			<spot x="954.686" y="444.773" z="220.794"/>
-		</spawn>
-		<!-- Asmodian Soulsword -->
-		<spawn npc_id="216210">
-			<spot x="793.566" y="261.632" z="223.08"/>
-			<spot x="795.007" y="306.216" z="220.483"/>
-			<spot x="934.73" y="475.015" z="224.155"/>
-			<spot x="939.781" y="469.39" z="223.403"/>
 		</spawn>
 		<!-- Elyos Spiritblade -->
 		<spawn npc_id="216206">

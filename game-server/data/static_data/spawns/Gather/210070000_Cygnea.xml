@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<spawns>
+<spawns xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../spawns.xsd">
     <spawn_map map_id="210070000">
 		<!-- Lupide -->
         <spawn npc_id="400019" respawn_time="230">

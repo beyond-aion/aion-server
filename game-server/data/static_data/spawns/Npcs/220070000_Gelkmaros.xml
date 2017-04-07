@@ -1183,14 +1183,11 @@
 		<!-- Defender Elite -->
 		<spawn npc_id="209350" respawn_time="295">
 			<spot x="2518.87" y="2139.95" z="464.844" h="78"/>
+			<spot x="982.886" y="2574.99" z="241.827" h="114" static_id="246"/>
 		</spawn>
 		<!-- Defender Elite -->
 		<spawn npc_id="209344" respawn_time="295">
 			<spot x="853.142" y="1747.89" z="352.942" h="74"/>
-		</spawn>
-		<!-- Defender Elite -->
-		<spawn npc_id="209350" respawn_time="295">
-			<spot x="982.886" y="2574.99" z="241.827" h="114" static_id="246"/>
 		</spawn>
 		<!-- Defender Lieutenant -->
 		<spawn npc_id="209254" respawn_time="295">
@@ -1382,9 +1379,6 @@
 		<!-- Detachment Centurion -->
 		<spawn npc_id="209305" respawn_time="295">
 			<spot x="564.171" y="1215.88" z="295.25"/>
-		</spawn>
-		<!-- Detachment Centurion -->
-		<spawn npc_id="209249" respawn_time="295">
 			<spot x="991.815" y="2572.85" z="241.053" h="89" static_id="246"/>
 		</spawn>
 		<!-- Detachment Commander -->
@@ -1415,6 +1409,7 @@
 			<spot x="1960.71" y="2817.53" z="534.838"/>
 			<spot x="1962.94" y="2805.57" z="534.838" h="3"/>
 			<spot x="2185.14" y="2634.4" z="459.471" h="38"/>
+			<spot x="991.906" y="2570.64" z="240.915" h="91" static_id="246"/>
 		</spawn>
 		<!-- Detachment Commander -->
 		<spawn npc_id="209238" respawn_time="295">
@@ -1445,14 +1440,6 @@
 		<!-- Detachment Commander -->
 		<spawn npc_id="209327" respawn_time="295">
 			<spot x="569.453" y="1214.7" z="295.25"/>
-		</spawn>
-		<!-- Detachment Commander -->
-		<spawn npc_id="209228" respawn_time="295">
-			<spot x="991.906" y="2570.64" z="240.915" h="91" static_id="246"/>
-		</spawn>
-		<!-- Detachment Commander -->
-		<spawn npc_id="209248" respawn_time="295">
-			<spot x="989.671" y="2570.48" z="240.926" h="91" static_id="246"/>
 		</spawn>
 		<!-- Detachment Elite -->
 		<spawn npc_id="209308" respawn_time="295">

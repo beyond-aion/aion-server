@@ -16,7 +16,7 @@
 		<xs:all>
 			<xs:element minOccurs="0" maxOccurs="1" name="event_drops" type="EventDrops" />
 			<xs:element minOccurs="0" name="quests" type="EventQuestList" />
-			<xs:element minOccurs="0" maxOccurs="1" name="spawns" type="SpawnsData2" />
+			<xs:element minOccurs="0" maxOccurs="1" name="spawns" type="SpawnsData" />
 			<xs:element minOccurs="0" maxOccurs="1" name="inventory_drop" type="InventoryDrop" />
 			<xs:element minOccurs="0" maxOccurs="1" name="surveys" type="SurveyList" />
 		</xs:all>

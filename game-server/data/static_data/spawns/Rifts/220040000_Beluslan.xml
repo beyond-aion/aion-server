@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<spawns>
+<spawns xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../spawns.xsd">
 	<spawn_map map_id="220040000">
 		<!-- Rift -->
 		<spawn npc_id="700137" handler="RIFT">

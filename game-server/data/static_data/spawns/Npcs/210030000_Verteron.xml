@@ -2511,10 +2511,6 @@
 			<spot x="1708.76" y="1489.18" z="121.668" h="58"/>
 			<spot x="1721.3444" y="1490.4065" z="121.938" h="55"/>
 		</spawn>
-		<!-- Tamed Griffon -->
-		<spawn npc_id="203365" respawn_time="295">
-			<spot x="1281.6" y="2168.1" z="151.125" h="23"/>
-		</spawn>
 		<!-- Tenos -->
 		<spawn npc_id="205294" respawn_time="295">
 			<spot x="1659.97" y="1470.83" z="120.98054" h="4" walker_id="DE4007DD86D53461BF0FFCBDFD2DF82AFF21EDD8" walker_index="4"/>

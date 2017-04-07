@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <!-- Dragon Lords Refugee 3.5 -->
-<spawns>
+<spawns xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../spawns.xsd">
 	<spawn_map map_id="300520000">
 		<!-- calindi flamelord -->
 		<spawn npc_id="219359">

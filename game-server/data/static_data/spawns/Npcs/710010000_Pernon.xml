@@ -1265,10 +1265,6 @@
 		<spawn npc_id="830389" respawn_time="295">
 			<spot x="1191.7881" y="2776.3777" z="236.9259" h="105"/>
 		</spawn>
-		<!-- Henkin -->
-		<spawn npc_id="830389" respawn_time="295">
-			<spot x="1191.7881" y="2776.3777" z="236.375" h="105"/>
-		</spawn>
 		<!-- Herinin -->
 		<spawn npc_id="830761" respawn_time="295">
 			<spot x="1163.8079" y="366.79837" z="69.971176" h="73"/>

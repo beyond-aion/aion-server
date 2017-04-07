@@ -581,13 +581,13 @@
 		</spawn>
 		<!-- Boburunerk -->
 		<spawn npc_id="798217" respawn_time="295">
-			<temporary_spawn spawn_time="22.*.*" despawn_time="5.*.*"/>
-			<spot x="539.436" y="2162.26" z="48.3942" h="113"/>
-		</spawn>
-		<!-- Boburunerk -->
-		<spawn npc_id="798217" respawn_time="295">
-			<temporary_spawn spawn_time="4.*.*" despawn_time="21.*.*"/>
-			<spot x="2684" y="1067.77" z="97" h="7"/>
+			<temporary_spawn/>
+			<spot x="539.436" y="2162.26" z="48.3942" h="113">
+				<temporary_spawn spawn_time="22.*.*" despawn_time="5.*.*"/>
+			</spot>
+			<spot x="2684" y="1067.77" z="97" h="7">
+				<temporary_spawn spawn_time="4.*.*" despawn_time="21.*.*"/>
+			</spot>
 		</spawn>
 		<!-- Bored Ramnodase -->
 		<spawn npc_id="213899" respawn_time="1800" pool="1">
@@ -7330,14 +7330,6 @@
 			<temporary_spawn spawn_time="4.*.*" despawn_time="21.*.*"/>
 			<spot x="1531.68" y="279.733" z="102.517" h="102"/>
 		</spawn>
-		<!-- Paixandius -->
-		<spawn npc_id="802166" respawn_time="295">
-            <spot x="2211.792" y="2263.166" z="46.375" h="113"/>
-        </spawn>
-        <!-- Prascilla -->
-        <spawn npc_id="802167" respawn_time="295">
-            <spot x="2211.4436" y="2255.4497" z="46.319168" h="5"/>
-        </spawn>
 		<!-- Tersilla -->
 		<spawn npc_id="802168" respawn_time="295">
             <spot x="546.0432" y="1193.584" z="90.323" h="21"/>

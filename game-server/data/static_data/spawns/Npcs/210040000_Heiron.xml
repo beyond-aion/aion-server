@@ -2383,6 +2383,15 @@
 		<spawn npc_id="212139" respawn_time="295">
 			<spot x="1504.76" y="351.32" z="105.055" h="85"/>
 			<spot x="1517.63" y="353.942" z="106.052" h="68"/>
+			<spot x="1549.73" y="378.53" z="107.375" h="64" walker_id="61AE880542B07944B10520384B31874E618E59B4"/>
+		</spawn>
+		<!-- Giant Rakeclaw Frillneck  -->
+		<spawn npc_id="212140" respawn_time="295">
+			<spot x="1549.73" y="378.53" z="107.375" h="64" walker_id="61AE880542B07944B10520384B31874E618E59B4"/>
+		</spawn>
+		<!-- Giant Rakeclaw Frillneck  -->
+		<spawn npc_id="212141" respawn_time="295">
+			<spot x="1549.73" y="378.53" z="107.375" h="64" walker_id="61AE880542B07944B10520384B31874E618E59B4"/>
 		</spawn>
 		<!-- Gladiator Spirit -->
 		<spawn npc_id="211979" respawn_time="295">
@@ -4826,18 +4835,6 @@
 		<spawn npc_id="212138" respawn_time="295">
 			<spot x="1461.55" y="372.3" z="108.78436" h="116" walker_id="A43F18FAB2F912110638A4F4B1FF5252A687B213" walker_index="2"/>
 		</spawn>
-		<!-- Giant Rakeclaw Frillneck  -->
-		<spawn npc_id="212139" respawn_time="295">
-			<spot x="1549.73" y="378.53" z="107.375" h="64" walker_id="61AE880542B07944B10520384B31874E618E59B4"/>
-		</spawn>
-		<!-- Giant Rakeclaw Frillneck  -->
-		<spawn npc_id="212140" respawn_time="295">
-			<spot x="1549.73" y="378.53" z="107.375" h="64" walker_id="61AE880542B07944B10520384B31874E618E59B4"/>
-		</spawn>
-		<!-- Giant Rakeclaw Frillneck  -->
-		<spawn npc_id="212141" respawn_time="295">
-			<spot x="1549.73" y="378.53" z="107.375" h="64" walker_id="61AE880542B07944B10520384B31874E618E59B4"/>
-		</spawn>
 		<!-- Klaw Warden -->
 		<spawn npc_id="211148" respawn_time="295">
 			<spot x="1050.75" y="288.544" z="106.919" h="50"/>
@@ -4897,7 +4894,7 @@
 		</spawn>
 		<!-- Kurochinerk -->
 		<spawn npc_id="804601" respawn_time="295">
-			<spot x="2433.3" y="396.8" z="412.44" h="110"/>
+			<spot x="2433.3" y="396.8" z="412.44" h="16"/>
 		</spawn>
 		<!-- Lab Chief Eirin -->
 		<spawn npc_id="214101" respawn_time="3600">
@@ -5184,10 +5181,6 @@
 		<!-- Maximus -->
 		<spawn npc_id="204535" respawn_time="295">
 			<spot x="1652.78" y="2693.07" z="117" h="10"/>
-		</spawn>
-		<!-- Maximus -->
-		<spawn npc_id="204535" respawn_time="295">
-			<spot x="1652.77620" y="2693.06520" z="117.00000" h="10"/>
 		</spawn>
 		<!-- Medeus the Vile -->
 		<spawn npc_id="211265" respawn_time="1440">
@@ -6946,11 +6939,6 @@
 			<spot x="370.44" y="486.98" z="134.09125" h="21" walker_id="F250A884FEAC2B85931A2B88E204B9A5599BD751"/>
 			<spot x="386.88" y="588.76" z="133.875" h="8" walker_id="DC0F2A3CB08090EC5BFE18C385F823884B3CFDEB"/>
 		</spawn>
-		<!-- Synthesis Researcher -->
-		<spawn npc_id="211912" respawn_time="295">
-			<spot x="370.44" y="486.98" z="134.09125" h="21" walker_id="F250A884FEAC2B85931A2B88E204B9A5599BD751"/>
-			<spot x="386.88" y="588.76" z="133.875" h="8" walker_id="DC0F2A3CB08090EC5BFE18C385F823884B3CFDEB"/>
-		</spawn>
 		<!-- Skanas -->
 		<spawn npc_id="204594" respawn_time="295">
 			<spot x="1694.47" y="2661.35" z="114.104" h="8"/>
@@ -7414,13 +7402,13 @@
 		</spawn>
 		<!-- Tabrinerk -->
 		<spawn npc_id="798097" respawn_time="295">
-			<temporary_spawn spawn_time="21.*.*" despawn_time="4.*.*"/>
-			<spot x="2360.38" y="2256.56" z="142.39" h="25"/>
-		</spawn>
-		<!-- Tabrinerk -->
-		<spawn npc_id="798097" respawn_time="295">
-			<temporary_spawn spawn_time="5.*.*" despawn_time="22.*.*"/>
-			<spot x="2658.74000" y="1825.85000" z="142.87000" h="20"/>
+			<temporary_spawn/>
+			<spot x="2360.38" y="2256.56" z="142.39" h="25">
+				<temporary_spawn spawn_time="21.*.*" despawn_time="4.*.*"/>
+			</spot>
+			<spot x="2658.74000" y="1825.85000" z="142.87000" h="20">
+				<temporary_spawn spawn_time="5.*.*" despawn_time="22.*.*"/>
+			</spot>
 		</spawn>
 		<!-- Takun the Terrible -->
 		<spawn npc_id="211900" respawn_time="14400">
@@ -8040,10 +8028,6 @@
 			<spot x="1720.73" y="1053.25" z="169.259" h="87" random_walk="8"/>
 			<spot x="1726.2" y="1067.38" z="167.262" h="9"/>
 			<spot x="1734.65" y="1037.28" z="169.374" h="83" random_walk="8"/>
-		</spawn>
-		<!-- Kurochinerk -->
-		<spawn npc_id="804601" respawn_time="295">
-			<spot x="2433.342" y="396.7922" z="412.4353" h="16"/>
 		</spawn>
 		<!-- Twisting Windwisp -->
 		<spawn npc_id="211172" respawn_time="295">

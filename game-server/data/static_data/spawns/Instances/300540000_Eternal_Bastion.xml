@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <!-- Eternal Bastion 4.0 -->
-<spawns>
+<spawns xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../spawns.xsd">
 	<spawn_map map_id="300540000">
 		<!-- Blessed Totem added in 4.5 to many instances 271 340 335 338
 		<spawn npc_id="831990">

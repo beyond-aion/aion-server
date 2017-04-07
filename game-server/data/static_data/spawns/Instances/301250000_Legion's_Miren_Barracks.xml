@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<spawns xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<spawns xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../spawns.xsd">
 	<spawn_map map_id="301250000">
-		<!-- Miren Chamber Artifact -->
-		<spawn npc_id="215415">
-			<spot x="528.15" y="775.56" z="199.6" h="35"/>
-		</spawn>
 		<!-- Huge Abyss Statue -->
 		<spawn npc_id="235538">
 			<spot x="546" y="365" z="180.7989" h="90" />

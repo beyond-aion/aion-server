@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<spawns xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<spawns xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../spawns.xsd">
 	<spawn_map map_id="320080000">
 		<!-- Artifact of Sealing -->
 		<spawn npc_id="700514">
@@ -729,17 +729,14 @@
 			<spot x="382.35" y="676.15" z="483.02045" h="58" walker_id="E8EDA4215975ADAA82CB96D16E41D3BF2D5D5F80"/>
 		</spawn>
 		<!-- Trained Monitor -->
-		<spawn npc_id="213397">
-			<spot x="353.038" y="534.821" z="511.695" h="99"/>
-			<spot x="369.712" y="515.946" z="511.452" h="55"/>
-			<spot x="395.322" y="509.37" z="514.072" h="3"/>
-		</spawn>
-		<!-- Trained Monitor -->
 		<spawn npc_id="213396">
 			<spot x="369.43" y="463.66" z="508.86856" h="86" walker_id="B8EF516B695C83449676F9807429D2DC8AC566D6"/>
 		</spawn>
 		<!-- Trained Monitor -->
 		<spawn npc_id="213397">
+			<spot x="353.038" y="534.821" z="511.695" h="99"/>
+			<spot x="369.712" y="515.946" z="511.452" h="55"/>
+			<spot x="395.322" y="509.37" z="514.072" h="3"/>
 			<spot x="332.05" y="542.31" z="509.71417" h="110" walker_id="503D0D542E1640E0BE7265A3CB0232A1828646B1"/>
 			<spot x="333.46" y="422.29" z="515.45135" h="52" walker_id="70113D0D6D55B22177F886066BF30A5E9053C0C3"/>
 		</spawn>

@@ -1,13 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <xs:schema version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-	<xs:include schemaLocation="../global_types.xsd"/>
-	<xs:include schemaLocation="../import.xsd"/>
-	<xs:element name="spawns" type="SpawnsData2"/>
+	<xs:include schemaLocation="../global_types.xsd" />
+	<xs:include schemaLocation="../import.xsd" />
+	<xs:element name="spawns" type="SpawnsData" />
 
-	<xs:complexType name="SpawnsData2">
+	<xs:complexType name="SpawnsData">
 		<xs:sequence>
-			<xs:element ref="import" minOccurs="0" maxOccurs="unbounded"/>
-			<xs:element name="spawn_map" type="SpawnMap" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="import" minOccurs="0" maxOccurs="unbounded" />
+			<xs:element name="spawn_map" type="SpawnMap" minOccurs="0" maxOccurs="unbounded">
+				<xs:unique name="unique-npc-id"><!-- a spawn entry must be unique per npc_id (see SpawnData#afterUnmarshal) -->
+					<!-- entry with same npc_id may appear twice if one has custom="true" -->
+					<xs:selector xpath="spawn" />
+					<xs:field xpath="@npc_id" />
+					<xs:field xpath="@custom" />
+				</xs:unique>
+			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="SpawnMap">
@@ -23,7 +30,7 @@
 		</xs:sequence>
 		<xs:attribute name="map_id" type="xs:int"/>
 	</xs:complexType>
-	<xs:complexType name="BaseSpawn">		
+	<xs:complexType name="BaseSpawn">
 		<xs:sequence>
 			<xs:element name="simple_race" type="SimpleRaceTemplate" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>

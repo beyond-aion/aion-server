@@ -1993,9 +1993,7 @@
 		</spawn>
 		<!-- Bloodlock's Minion -->
 		<spawn npc_id="213688" respawn_time="300">
-		</spawn>
-		<!-- Bloodlock's Minion -->
-		<spawn npc_id="213688" respawn_time="300">
+			<spot x="1490.4" y="2488.2" z="642.225" h="31"/>
 		</spawn>
 		<!-- Blue Jaw Monitor -->
 		<spawn npc_id="213009" respawn_time="295">
@@ -6899,9 +6897,6 @@
 			<spot x="861.672" y="1072.42" z="229.73"/>
 			<spot x="906.123" y="1204.87" z="211.07" h="55"/>
 			<spot x="1010.75" y="1206.63" z="228.57" h="2"/>
-		</spawn>
-		<!-- Silver Granker -->
-		<spawn npc_id="213032" respawn_time="295">
 			<spot x="266.36" y="1138.51" z="271.34314" h="40" walker_id="9CBAC844E9548046C621F9BA5191526B6C36E43A"/>
 			<spot x="297.56" y="868.1" z="279.625" h="88" walker_id="531402064CF26C16E17DB0BEB144E128346E726A"/>
 		</spawn>

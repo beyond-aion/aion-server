@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<spawns xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<spawns xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../spawns.xsd">
 	<spawn_map map_id="320030000">
 		<!-- Dimension Exit -->
 		<spawn npc_id="700184">
@@ -16,6 +16,8 @@
 		<!-- Draconute Vaegir -->
 		<spawn npc_id="211625">
 			<spot x="255.727" y="219.688" z="210.810" h="96"/>
+			<spot x="258.055" y="241.453" z="219.08" h="94"/>
+			<spot x="264.054" y="215.517" z="210.201" h="95"/>
 			<spot x="265.284" y="237.529" z="216.132" h="95"/>
 		</spawn>
 		<!-- Crusader -->
@@ -25,15 +27,6 @@
 			<spot x="264.419" y="214.003" z="209.866" h="95"/>
 			<spot x="266.793" y="226.609" z="212.419" h="95"/>
 			<spot x="281.505" y="222.336" z="206.370" h="30" walker_id="320030000211624B"/>
-		</spawn>
-		<!-- Dimension Exit -->
-		<spawn npc_id="700184">
-			<spot x="275.738" y="162.703" z="205.332" static_id="17"/>
-		</spawn>
-		<!-- Draconute Vaegir -->
-		<spawn npc_id="211625">
-			<spot x="258.055" y="241.453" z="219.08" h="94"/>
-			<spot x="264.054" y="215.517" z="210.201" h="95"/>
 		</spawn>
 	</spawn_map>
 </spawns>

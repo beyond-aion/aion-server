@@ -2309,10 +2309,6 @@
 		<spawn npc_id="830645" respawn_time="295">
 			<spot x="2492.5127" y="1628.9154" z="180.75" h="107"/>
 		</spawn>
-		<!-- Raknus -->
-		<spawn npc_id="830645" respawn_time="295">
-			<spot x="2492.5127" y="1628.9154" z="180.8200" h="106"/>
-		</spawn>
 		<!-- Ralfus -->
 		<spawn npc_id="830681" respawn_time="295">
 			<spot x="362.1262" y="1458.5081" z="85.5000"/>
