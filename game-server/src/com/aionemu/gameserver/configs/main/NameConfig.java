@@ -18,7 +18,7 @@ public class NameConfig {
 	/**
 	 * Character name pattern (checked when character is being created or renamed)
 	 */
-	@Property(key = "gameserver.name.characterpattern", defaultValue = "[a-zA-Z]{2,16}")
+	@Property(key = "gameserver.name.character_pattern", defaultValue = "[a-zA-Z]{2,16}")
 	public static Pattern CHAR_NAME_PATTERN;
 
 	/**
@@ -28,16 +28,16 @@ public class NameConfig {
 	public static Pattern PET_NAME_PATTERN;
 
 	/**
-	 * Forbidden word sequences.<br>
-	 * Filters charname, miol, legion, chat
+	 * Forbidden word sequences (Regex pattern).<br>
+	 * Filters names.
 	 */
-	@Property(key = "gameserver.name.forbidden.sequences", defaultValue = "")
-	public static String NAME_SEQUENCE_FORBIDDEN;
+	@Property(key = "gameserver.name.forbidden_sequences_pattern")
+	public static Pattern FORBIDDEN_SEQUENCE_PATTERN;
 
 	/**
-	 * Forbidden names.<br>
-	 * Filters charname, miol, legion, chat
+	 * Forbidden words.<br>
+	 * Filters names & chat.
 	 */
-	@Property(key = "gameserver.name.forbidden.client", defaultValue = "")
-	public static String NAME_FORBIDDEN_CLIENT;
+	@Property(key = "gameserver.name.forbidden_words")
+	public static String[] FORBIDDEN_WORDS;
 }

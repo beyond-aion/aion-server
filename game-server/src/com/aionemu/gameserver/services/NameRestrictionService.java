@@ -11,9 +11,6 @@ import com.aionemu.gameserver.configs.main.NameConfig;
  */
 public class NameRestrictionService {
 
-	private static String[] forbiddenSequences = NameConfig.NAME_SEQUENCE_FORBIDDEN.toLowerCase().replaceAll(",+ +,+|,,+", ",").split(",");
-	private static String[] forbiddenByClient = NameConfig.NAME_FORBIDDEN_CLIENT.replaceAll(",+ +,+|,,+", ",").split(",");
-
 	public static boolean isValidName(String name) {
 		return NameConfig.CHAR_NAME_PATTERN.matcher(name).matches();
 	}
@@ -32,21 +29,25 @@ public class NameRestrictionService {
 	 * @param string
 	 * @return true if name is forbidden
 	 */
-	public static boolean isForbidden(String string) {
-		return isForbiddenByClient(string) || containsForbiddenSequence(string);
+	public static boolean isForbidden(String name) {
+		return containsForbiddenSequence(name) || isForbiddenWord(name);
 	}
 
 	/**
-	 * Checks if a name is forbidden (contains string sequences from config)
-	 * 
-	 * @param string
-	 * @return True if name is forbidden.
+	 * @return True if name contains a forbidden sequence.
 	 */
-	private static boolean isForbiddenByClient(String string) {
-		if (forbiddenByClient[0].isEmpty())
+	private static boolean containsForbiddenSequence(String name) {
+		if (NameConfig.FORBIDDEN_SEQUENCE_PATTERN == null)
 			return false;
 
-		for (String s : forbiddenByClient) {
+		return NameConfig.FORBIDDEN_SEQUENCE_PATTERN.matcher(name).find();
+	}
+
+	/**
+	 * @return True if the string is a forbidden word.
+	 */
+	public static boolean isForbiddenWord(String string) {
+		for (String s : NameConfig.FORBIDDEN_WORDS) {
 			if (string.equalsIgnoreCase(s))
 				return true;
 		}
@@ -54,32 +55,11 @@ public class NameRestrictionService {
 	}
 
 	/**
-	 * Checks if a part of a string contains a forbidden sequence.
-	 * 
-	 * @param string
-	 * @return True if string contains forbidden sequence.
-	 */
-	private static boolean containsForbiddenSequence(String string) {
-		if (forbiddenSequences[0].isEmpty())
-			return false;
-
-		string = string.toLowerCase();
-		for (String s : forbiddenSequences) {
-			if (string.contains(s))
-				return true;
-		}
-		return false;
-	}
-
-	/**
-	 * Filters chat messages.
-	 * 
-	 * @param message
-	 * @return
+	 * @return The filtered chat message (forbidden words are replaced by *'s)
 	 */
 	public static String filterMessage(String message) {
 		for (String word : message.split(" ")) {
-			if (isForbidden(word))
+			if (isForbiddenWord(word))
 				message = message.replace(word, StringUtils.repeat("*", word.length()));
 		}
 		return message;
