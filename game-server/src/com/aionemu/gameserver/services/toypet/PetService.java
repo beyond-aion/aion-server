@@ -34,6 +34,7 @@ import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
+import com.aionemu.gameserver.utils.Util;
 import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
@@ -51,6 +52,7 @@ public class PetService {
 	}
 
 	public void renamePet(Player player, String name) {
+		name = Util.convertName(name);
 		Pet pet = player.getPet();
 		if (pet != null) {
 			pet.getCommonData().setName(name);

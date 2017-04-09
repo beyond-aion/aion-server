@@ -11,6 +11,7 @@ import com.aionemu.gameserver.model.templates.item.ItemTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_PET;
 import com.aionemu.gameserver.taskmanager.tasks.ExpireTimerTask;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.Util;
 
 /**
  * @author ATracer
@@ -54,6 +55,7 @@ public class PetAdoptionService {
 	 * @param decorationId
 	 */
 	public static void addPet(Player player, int petId, String name, int decorationId, int expireTime) {
+		name = Util.convertName(name);
 		PetCommonData petCommonData = player.getPetList().addPet(player, petId, decorationId, name, expireTime);
 		if (petCommonData != null) {
 			PacketSendUtility.sendPacket(player, new SM_PET(PetAction.ADOPT, petCommonData));
