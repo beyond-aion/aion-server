@@ -396,10 +396,15 @@ public class EffectController {
 	}
 
 	public void clearEffect(Effect effect, boolean broadCastEffects) {
+		Map<String, Effect> effectMap = getMapForEffect(effect);
 		lock.writeLock().lock();
 		try {
-			if (!getMapForEffect(effect).remove(effect.getStack(), effect))
-				return; // effect in map was already replaced by a newer one (e.g. when toggling many auras), so there's no need to re-broadcast
+			Effect oldEffect = effectMap.get(effect.getStack());
+			if (oldEffect != null) {
+				if (!oldEffect.equals(effect))
+					return; // effect in map was already replaced by a newer one (e.g. when toggling many auras), so there's no need to re-broadcast
+				effectMap.remove(effect.getStack());
+			}
 		} finally {
 			lock.writeLock().unlock();
 		}
@@ -789,7 +794,8 @@ public class EffectController {
 	}
 
 	public void dispelBuffCounterAtkEffect(int count, int dispelLevel, int power) {
-		if (removeEffectByTargetSlot(count, SkillTargetSlot.BUFF, dispelLevel, power) > 0)
+		count = removeEffectByTargetSlot(count, SkillTargetSlot.BUFF, dispelLevel, power);
+		if (count > 0)
 			removeEffectByTargetSlot(count, SkillTargetSlot.DEBUFF, dispelLevel, power);
 	}
 
