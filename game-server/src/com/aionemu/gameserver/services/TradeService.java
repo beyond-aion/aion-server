@@ -113,23 +113,20 @@ public class TradeService {
 
 		// 2. check required AP + select required items
 		if (!tradeList.calculateAbyssRewardBuyList(player, apSellModifier)) {
-			// You do not have enough Abyss Points.
-			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1300927));
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_NOT_ENOUGH_ABYSSPOINT());
 			return false;
 		}
 
 		// 3. check exploit
 		if (tradeList.getRequiredAp() < 0) {
 			AuditLogger.info(player, "Posible client hack. tradeList.getRequiredAp() < 0");
-			// You do not have enough Abyss Points.
-			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1300927));
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_NOT_ENOUGH_ABYSSPOINT());
 			return false;
 		}
 
 		// 4. check free slots
 		if (freeSlots < tradeList.size()) {
-			// You cannot trade as your inventory is full.
-			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1300762));
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_FULL_INVENTORY());
 			return false;
 		}
 
