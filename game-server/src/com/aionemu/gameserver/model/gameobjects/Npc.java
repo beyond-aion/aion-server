@@ -180,12 +180,10 @@ public class Npc extends Creature {
 	}
 
 	/**
-	 * Check whether npc located near initial spawn location
-	 * 
-	 * @return true or false
+	 * @return True if the npc is within 1m of it's spawn location
 	 */
 	public boolean isAtSpawnLocation() {
-		return getDistanceToSpawnLocation() < 3;
+		return PositionUtil.isInRange(this, getSpawn().getX(), getSpawn().getY(), getSpawn().getZ(), 1);
 	}
 
 	@Override

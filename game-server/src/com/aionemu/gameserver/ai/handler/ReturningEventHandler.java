@@ -2,10 +2,10 @@ package com.aionemu.gameserver.ai.handler;
 
 import com.aionemu.gameserver.ai.AILogger;
 import com.aionemu.gameserver.ai.AIState;
+import com.aionemu.gameserver.ai.AISubState;
 import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.ai.manager.EmoteManager;
 import com.aionemu.gameserver.ai.manager.WalkManager;
-import com.aionemu.gameserver.configs.main.AIConfig;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.geometry.Point3D;
 import com.aionemu.gameserver.model.skill.NpcSkillEntry;
@@ -24,17 +24,16 @@ public class ReturningEventHandler {
 			AILogger.info(npcAI, "onNotAtHome");
 		}
 		if (npcAI.setStateIfNot(AIState.RETURNING)) {
+			npcAI.setSubStateIfNot(AISubState.NONE);
 			if (npcAI.isLogging()) {
 				AILogger.info(npcAI, "returning and restoring");
 			}
-			EmoteManager.emoteStartReturning(npcAI.getOwner());
 			Npc npc = npcAI.getOwner();
-			if (AIConfig.ACTIVE_NPC_MOVEMENT && npc.isPathWalker()) {
-				WalkManager.startWalking(npcAI);
-			} else {
-				Point3D prevStep = npc.getMoveController().recallPreviousStep();
-				npc.getMoveController().moveToPoint(prevStep.getX(), prevStep.getY(), prevStep.getZ());
-			}
+			EmoteManager.emoteStartReturning(npc);
+			if (npc.isPathWalker() && WalkManager.startWalking(npcAI))
+				return;
+			Point3D prevStep = npc.getMoveController().recallPreviousStep();
+			npc.getMoveController().moveToPoint(prevStep.getX(), prevStep.getY(), prevStep.getZ());
 		}
 	}
 
@@ -47,6 +46,7 @@ public class ReturningEventHandler {
 		}
 		npcAI.getOwner().getMoveController().clearBackSteps();
 		if (npcAI.setStateIfNot(AIState.IDLE)) {
+			npcAI.setSubStateIfNot(AISubState.NONE);
 			EmoteManager.emoteStartIdling(npcAI.getOwner());
 			npcAI.think();
 			Npc npc = npcAI.getOwner();

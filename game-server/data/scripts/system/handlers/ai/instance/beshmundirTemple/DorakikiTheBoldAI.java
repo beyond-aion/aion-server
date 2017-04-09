@@ -1,7 +1,6 @@
 package ai.instance.beshmundirTemple;
 
 import com.aionemu.gameserver.ai.AIName;
-import com.aionemu.gameserver.ai.handler.AttackEventHandler;
 
 import ai.AggressiveNpcAI;
 
@@ -13,7 +12,7 @@ public class DorakikiTheBoldAI extends AggressiveNpcAI {
 
 	@Override
 	protected void handleAttackComplete() {
-		AttackEventHandler.onAttackComplete(this);
+		super.handleAttackComplete();
 		if (getEffectController().hasAbnormalEffect(18901)) {
 			getEffectController().removeEffect(18901);
 		}

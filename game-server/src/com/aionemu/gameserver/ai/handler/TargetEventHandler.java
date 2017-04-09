@@ -34,11 +34,12 @@ public class TargetEventHandler {
 				break;
 			case RETURNING:
 				npcAI.getOwner().getMoveController().abortMove();
-				npcAI.getOwner().getMoveController().recallPreviousStep();
 				if (npcAI.getOwner().isAtSpawnLocation())
 					npcAI.onGeneralEvent(AIEventType.BACK_HOME);
-				else
+				else {
+					npcAI.setStateIfNot(AIState.IDLE);
 					npcAI.onGeneralEvent(AIEventType.NOT_AT_HOME);
+				}
 				break;
 			case FOLLOWING:
 				npcAI.getOwner().getMoveController().abortMove();
