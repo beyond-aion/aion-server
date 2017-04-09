@@ -36,7 +36,9 @@ public class PromotionKitService {
 		itemMap.get(25).add(new RewardItem(162000039, 25));
 		itemMap.get(25).add(new RewardItem(162002018, 25));
 		itemMap.get(50).add(new RewardItem(187060075, 1));
-		itemMap.get(50).add(new RewardItem(188053289, 1));
+		itemMap.get(50).add(new RewardItem(121000815, 1));
+		itemMap.get(50).add(new RewardItem(120000901, 1));
+		itemMap.get(50).add(new RewardItem(122001038, 1));
 		itemMap.get(50).add(new RewardItem(161001001, 5));
 		itemMap.get(50).add(new RewardItem(188053526, 5));
 	}
