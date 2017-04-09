@@ -1980,35 +1980,35 @@
 			<spot x="1834.256" y="1774.81" z="305.35638" h="45" />
 		</spawn>
 		<!-- Vocolith -->
-		<spawn npc_id="804573" respawn_time="21600">
+		<spawn npc_id="804573" respawn_time="3600">
 			<spot x="155.23886" y="896.09412" z="241.9881" static_id="13" />
 		</spawn>
 		<!-- Vocolith -->
-		<spawn npc_id="804574" respawn_time="21600">
+		<spawn npc_id="804574" respawn_time="3600">
 			<spot x="238.54105" y="1581.0961" z="227.77995" static_id="20" />
 		</spawn>
 		<!-- Vocolith -->
-		<spawn npc_id="804575" respawn_time="21600">
+		<spawn npc_id="804575" respawn_time="3600">
 			<spot x="605.8056" y="1462.2771" z="276.86615" h="105" static_id="23" />
 		</spawn>
 		<!-- Vocolith -->
-		<spawn npc_id="804579" respawn_time="21600">
+		<spawn npc_id="804579" respawn_time="3600">
 			<spot x="1106.4246" y="1231.3024" z="308.5724" h="75" static_id="60" />
 		</spawn>
 		<!-- Vocolith -->
-		<spawn npc_id="804580" respawn_time="21600">
+		<spawn npc_id="804580" respawn_time="3600">
 			<spot x="1663.5723" y="612.97003" z="227.10474" h="75" static_id="24" />
 		</spawn>
 		<!-- Vocolith -->
-		<spawn npc_id="804581" respawn_time="21600">
+		<spawn npc_id="804581" respawn_time="3600">
 			<spot x="1491.7522" y="312.94736" z="253.56389" h="66" static_id="47" />
 		</spawn>
 		<!-- Vocolith -->
-		<spawn npc_id="804582" respawn_time="21600">
+		<spawn npc_id="804582" respawn_time="3600">
 			<spot x="1211.6776" y="583.93884" z="277.96094" h="105" static_id="48" />
 		</spawn>
 		<!-- Vocolith -->
-		<spawn npc_id="804583" respawn_time="21600">
+		<spawn npc_id="804583" respawn_time="3600">
 			<spot x="894.83118" y="838.97162" z="313.66245" h="21" static_id="53" />
 		</spawn>
 		<!-- Waterlogged Gnarl -->
