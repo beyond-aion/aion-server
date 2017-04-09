@@ -307,9 +307,6 @@
 			<spot x="2594.7" y="391.621" z="214.563" h="25"/>
 			<spot x="2614.35" y="396.527" z="213.375" h="62"/>
 		</spawn>
-		<!-- Armored Tayga -->
-		<spawn npc_id="212723" respawn_time="295">
-		</spawn>
 		<!-- Arnkell -->
 		<spawn npc_id="204321" respawn_time="295">
 			<spot x="289.877" y="2446.589" z="455.052" h="81"/>
@@ -1295,9 +1292,6 @@
 			<spot x="2634.08" y="733.111" z="252.646" h="47"/>
 			<spot x="2650.55" y="726.141" z="254.775" h="51"/>
 			<spot x="2696.28" y="368.05" z="222.36" h="103"/>
-		</spawn>
-		<!-- Brutal Mist Mane Dark Mage -->
-		<spawn npc_id="212735" respawn_time="300">
 		</spawn>
 		<!-- Brutal Mist Mane Grappler -->
 		<spawn npc_id="212738" respawn_time="300">
@@ -2321,9 +2315,6 @@
 			<spot x="2888.04" y="2824.48" z="200.3125" h="80" walker_id="3D0D3DCC2D88A339AF798E7DAD624F14986F2E76"/>
 			<spot x="2888.05" y="2767.28" z="203.128" h="3"/>
 			<spot x="2897.19" y="2944.19" z="174.875" h="36"/>
-		</spawn>
-		<!-- Citadel Vaegir -->
-		<spawn npc_id="212891" respawn_time="300">
 		</spawn>
 		<!-- Citadel Warlock -->
 		<spawn npc_id="212921" respawn_time="300">

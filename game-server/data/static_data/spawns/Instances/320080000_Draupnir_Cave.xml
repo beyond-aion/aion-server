@@ -605,6 +605,7 @@
 		</spawn>
 		<!-- Dew Spirit -->
 		<spawn npc_id="213599">
+			<spot x="494.71" y="542.61" z="442.41483" h="56" walker_id="15F97CB66A73C9892C36D628FF8B97FA90D4E42B"/>
 			<spot x="467.63" y="640.2" z="445.62357" h="9" walker_id="84E030F1314F1E83A3FD397080A539EFC6B9BF63"/>
 		</spawn>
 		<!-- Dragonpriest Tairgus -->
@@ -621,6 +622,7 @@
 		</spawn>
 		<!-- Fetid Earth Spirit -->
 		<spawn npc_id="213602">
+			<spot x="527.8" y="575.2" z="443.2979" h="35" walker_id="F5FA13EA54B638B16670E79501E4D44C34901A77"/>
 		</spawn>
 		<!-- Greatscholar Jaadis -->
 		<spawn npc_id="213775">
@@ -662,6 +664,7 @@
 		</spawn>
 		<!-- Lichen Spirit -->
 		<spawn npc_id="213601">
+			<spot x="527.8" y="575.2" z="443.2979" h="35" walker_id="F5FA13EA54B638B16670E79501E4D44C34901A77"/>
 			<spot x="467.63" y="640.2" z="445.62357" h="9" walker_id="84E030F1314F1E83A3FD397080A539EFC6B9BF63"/>
 		</spawn>
 		<!-- Lucky Golden Saam -->
@@ -681,6 +684,7 @@
 		</spawn>
 		<!-- Murk Spirit -->
 		<spawn npc_id="213600">
+			<spot x="494.71" y="542.61" z="442.41483" h="56" walker_id="15F97CB66A73C9892C36D628FF8B97FA90D4E42B"/>
 		</spawn>
 		<!-- Protector Rakkan -->
 		<spawn npc_id="213771">
