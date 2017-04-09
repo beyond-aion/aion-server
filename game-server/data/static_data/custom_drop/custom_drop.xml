@@ -3561,11 +3561,11 @@
 			<drop item_id="125002031" name="Gentlewoman's Tiara" chance="30" />
 		</drop_group>
 	</npc_drop>
-	<!-- Tiamarantas Eye -->
+	<!-- PvPvE Map -->
 	<!-- Rare Chest -->
 	<npc_drop npc_id="701388">
 		<drop_group race="PC_ALL" name="Named Medal">
-			<drop item_id="186000096" name="Platinum Medal" min_amount="1" max_amount="2" chance="10" />
+			<drop item_id="186000147" name="Mithril Medal" min_amount="1" max_amount="2" chance="10" />
 		</drop_group>
 		<drop_group race="PC_ALL" name="Named AP Safe">
 			<drop item_id="186000059" name="Major Ancient Seal" chance="100" />
@@ -3593,7 +3593,7 @@
 	<!-- Unique Chest -->
 	<npc_drop npc_id="701389">
 		<drop_group race="PC_ALL" name="Named Medal">
-			<drop item_id="186000096" name="Platinum Medal" min_amount="1" max_amount="3" chance="50" />
+			<drop item_id="186000147" name="Mithril Medal" min_amount="1" max_amount="3" chance="50" />
 		</drop_group>
 		<drop_group race="PC_ALL" name="Named AP Safe">
 			<drop item_id="186000055" name="Major Ancient Goblet" min_amount="3" max_amount="3" chance="100" />
@@ -3621,7 +3621,7 @@
 	<!-- Legend Chest -->
 	<npc_drop npc_id="701390">
 		<drop_group race="PC_ALL" name="Named Medal">
-			<drop item_id="186000096" name="Platinum Medal" min_amount="2" max_amount="4" chance="100" />
+			<drop item_id="186000147" name="Mithril Medal" min_amount="2" max_amount="4" chance="100" />
 		</drop_group>
 		<drop_group race="PC_ALL" name="Named Enchantment Stone">
 			<drop item_id="166000195" name="Epsilon Enchantment Stone" chance="100" />
