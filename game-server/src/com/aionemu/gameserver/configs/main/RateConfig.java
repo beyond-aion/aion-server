@@ -205,6 +205,9 @@ public class RateConfig {
 	@Property(key = "gameserver.rate.dredgion", defaultValue = "1.6")
 	public static float DREDGION_REWARD_RATE;
 
+	@Property(key = "gameserver.rate.pvparena.courage_insignia", defaultValue = "1")
+	public static float PVP_ARENA_COURAGE_INSIGNIA_RATE;
+
 	@Property(key = "gameserver.rate.regular.pvparena.discipline", defaultValue = "1")
 	public static float PVP_ARENA_DISCIPLINE_REWARD_RATE;
 
