@@ -422,12 +422,14 @@ public class PvPArenaInstance extends GeneralInstanceHandler {
 			PvPArenaPlayerReward reward = getPlayerReward(player.getObjectId());
 			if (!reward.isRewarded()) {
 				reward.setRewarded();
+				reward.setBasicCourage(Math.round(reward.getBasicCourage() * RateConfig.PVP_ARENA_COURAGE_INSIGNIA_RATE));
+				reward.setRankingCourage(Math.round(reward.getRankingCourage() * RateConfig.PVP_ARENA_COURAGE_INSIGNIA_RATE));
+				reward.setScoreCourage(Math.round(reward.getScoreCourage() * RateConfig.PVP_ARENA_COURAGE_INSIGNIA_RATE));
 				AbyssPointsService.addAp(player, reward.getBasicAP() + reward.getRankingAP() + reward.getScoreAP());
 				int gpToAdd = reward.getBasicGP() + reward.getRankingGP() + reward.getScoreGP();
 				if (gpToAdd > 0)
 					GloryPointsService.addGp(player, gpToAdd, false); // already added arena rates
-				int courage = (int) ((reward.getBasicCourage() + reward.getRankingCourage() + reward.getScoreCourage())
-					* RateConfig.PVP_ARENA_COURAGE_INSIGNIA_RATE);
+				int courage = reward.getBasicCourage() + reward.getRankingCourage() + reward.getScoreCourage();
 				if (courage != 0) {
 					ItemService.addItem(player, 186000137, courage);
 				}
