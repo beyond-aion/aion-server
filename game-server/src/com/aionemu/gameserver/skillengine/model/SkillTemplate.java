@@ -391,6 +391,10 @@ public class SkillTemplate {
 		return getEffects() != null && getEffects().isEffectTypePresent(EffectType.EVADE);
 	}
 
+	public boolean hasPulledEffect() {
+		return getEffects() != null && getEffects().isEffectTypePresent(EffectType.PULLED);
+	}
+
 	public boolean hasRecallInstant() {
 		return getEffects() != null && getEffects().isEffectTypePresent(EffectType.RECALLINSTANT);
 	}

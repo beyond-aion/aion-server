@@ -652,7 +652,7 @@ public abstract class EffectTemplate {
 	}
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
-		String effectName = this.getClass().getName().replaceAll("com.aionemu.gameserver.skillengine.effect.", "").replaceAll("Effect", "").toUpperCase();
+		String effectName = getClass().getSimpleName().replaceAll("Effect", "").toUpperCase();
 		try {
 			effectType = EffectType.valueOf(effectName);
 		} catch (Exception e) {

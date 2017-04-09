@@ -1,7 +1,9 @@
 package com.aionemu.gameserver.skillengine.effect;
 
 import java.util.ArrayList;
+import java.util.EnumSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -121,7 +123,7 @@ public class Effects {
 	protected List<EffectTemplate> effects;
 
 	@XmlTransient
-	protected List<EffectType> effectTypes;
+	protected Set<EffectType> effectTypes;
 
 	/**
 	 * Gets the value of the effects property.
@@ -142,15 +144,15 @@ public class Effects {
 		return this.effects;
 	}
 
-	public List<EffectType> getEffectTypes() {
-		return this.effectTypes;
+	public Set<EffectType> getEffectTypes() {
+		return effectTypes;
 	}
 
 	public void addEffectType(EffectType effectType) {
 		if (effectTypes == null)
-			effectTypes = new ArrayList<>();
-
-		this.effectTypes.add(effectType);
+			effectTypes = EnumSet.of(effectType);
+		else
+			effectTypes.add(effectType);
 	}
 
 	public boolean isEffectTypePresent(EffectType effectType) {
@@ -178,13 +180,13 @@ public class Effects {
 	 * @return
 	 */
 	public boolean isDamageEffect() {
-		if (this.isEffectTypePresent(EffectType.BACKDASH) || this.isEffectTypePresent(EffectType.CARVESIGNET)
-			|| this.isEffectTypePresent(EffectType.DASH) || this.isEffectTypePresent(EffectType.DEATHBLOW)
-			|| this.isEffectTypePresent(EffectType.DELAYEDSPELLATTACKINSTANT) || this.isEffectTypePresent(EffectType.DISPELBUFFCOUNTERATK)
-			|| this.isEffectTypePresent(EffectType.MOVEBEHIND) || this.isEffectTypePresent(EffectType.NOREDUCESPELLATKINSTANT)
-			|| this.isEffectTypePresent(EffectType.PROCATKINSTANT) || this.isEffectTypePresent(EffectType.SIGNETBURST)
-			|| this.isEffectTypePresent(EffectType.SKILLATKDRAININSTANT) || this.isEffectTypePresent(EffectType.SKILLATTACKINSTANT)
-			|| this.isEffectTypePresent(EffectType.SPELLATKDRAININSTANT) || this.isEffectTypePresent(EffectType.SPELLATTACKINSTANT))
+		if (this.isEffectTypePresent(EffectType.BACKDASH) || this.isEffectTypePresent(EffectType.CARVESIGNET) || this.isEffectTypePresent(EffectType.DASH)
+			|| this.isEffectTypePresent(EffectType.DEATHBLOW) || this.isEffectTypePresent(EffectType.DELAYEDSPELLATTACKINSTANT)
+			|| this.isEffectTypePresent(EffectType.DISPELBUFFCOUNTERATK) || this.isEffectTypePresent(EffectType.MOVEBEHIND)
+			|| this.isEffectTypePresent(EffectType.NOREDUCESPELLATKINSTANT) || this.isEffectTypePresent(EffectType.PROCATKINSTANT)
+			|| this.isEffectTypePresent(EffectType.SIGNETBURST) || this.isEffectTypePresent(EffectType.SKILLATKDRAININSTANT)
+			|| this.isEffectTypePresent(EffectType.SKILLATTACKINSTANT) || this.isEffectTypePresent(EffectType.SPELLATKDRAININSTANT)
+			|| this.isEffectTypePresent(EffectType.SPELLATTACKINSTANT))
 			return true;
 		else
 			return false;
