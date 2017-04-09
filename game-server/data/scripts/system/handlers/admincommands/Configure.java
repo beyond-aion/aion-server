@@ -8,6 +8,9 @@ import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.aionemu.commons.configuration.PropertyTransformer;
+import com.aionemu.commons.configuration.PropertyTransformerFactory;
+import com.aionemu.commons.configuration.TransformationException;
 import com.aionemu.gameserver.configs.administration.AdminConfig;
 import com.aionemu.gameserver.configs.administration.DeveloperConfig;
 import com.aionemu.gameserver.configs.main.AIConfig;
@@ -115,29 +118,11 @@ public class Configure extends AdminCommand {
 				if (params.length > 2) {
 					String newValue = StringUtils.join(params, " ", 2, params.length);
 					Class<?> classType = property.getType();
+					PropertyTransformer<?> pt = PropertyTransformerFactory.getTransformer(classType);
 					try {
-						if (classType == String.class)
-							property.set(null, newValue);
-						else if (classType == boolean.class || classType == Boolean.class)
-							property.set(null, Boolean.parseBoolean(newValue));
-						else if (classType == byte.class || classType == Byte.class)
-							property.set(null, Byte.parseByte(newValue));
-						else if (classType == short.class || classType == Short.class)
-							property.set(null, Short.parseShort(newValue));
-						else if (classType == int.class || classType == Integer.class)
-							property.set(null, Integer.parseInt(newValue));
-						else if (classType == long.class || classType == Long.class)
-							property.set(null, Long.parseLong(newValue));
-						else if (classType == float.class || classType == Float.class)
-							property.set(null, Float.parseFloat(newValue));
-						else if (classType == double.class || classType == Double.class)
-							property.set(null, Double.parseDouble(newValue));
-						else {
-							sendInfo(admin, "The value cannot be changed via command. Please modify the corresponding *.properties file and reload the config.");
-							return;
-						}
-					} catch (Exception e) {
-						sendInfo(admin, "The new value could not be set (data type: " + classType.getSimpleName() + ").");
+						property.set(null, pt.transform(newValue, property));
+					} catch (TransformationException e) {
+						sendInfo(admin, "The new value could not be set: " + e.getCause().getMessage());
 						return;
 					}
 					sendInfo(admin, "The value of " + cls.getSimpleName() + "." + fieldName + " has been changed from " + value + " to " + property.get(null));
