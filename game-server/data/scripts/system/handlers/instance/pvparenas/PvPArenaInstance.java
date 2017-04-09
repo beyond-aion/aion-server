@@ -5,6 +5,7 @@ import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAG
 import java.util.function.Consumer;
 
 import com.aionemu.commons.utils.Rnd;
+import com.aionemu.gameserver.configs.main.RateConfig;
 import com.aionemu.gameserver.controllers.attack.AggroInfo;
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
 import com.aionemu.gameserver.model.DescriptionId;
@@ -425,7 +426,8 @@ public class PvPArenaInstance extends GeneralInstanceHandler {
 				int gpToAdd = reward.getBasicGP() + reward.getRankingGP() + reward.getScoreGP();
 				if (gpToAdd > 0)
 					GloryPointsService.addGp(player, gpToAdd, false); // already added arena rates
-				int courage = reward.getBasicCourage() + reward.getRankingCourage() + reward.getScoreCourage();
+				int courage = (int) ((reward.getBasicCourage() + reward.getRankingCourage() + reward.getScoreCourage())
+					* RateConfig.PVP_ARENA_COURAGE_INSIGNIA_RATE);
 				if (courage != 0) {
 					ItemService.addItem(player, 186000137, courage);
 				}
