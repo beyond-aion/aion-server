@@ -123,6 +123,9 @@ public class TargetRangeProperty {
 				break;
 			case PARTY:
 			case PARTY_WITHPET:
+				// if only firsttarget will be affected (e.g. Bodyguard), we don't need to evaluate the whole group
+				if (properties.getTargetMaxCount() == 1 && properties.getFirstTarget() != FirstTargetAttribute.POINT)
+					break;
 				if (skillEffector instanceof Player) {
 					final Player effector = (Player) skillEffector;
 					TemporaryPlayerTeam<? extends TeamMember<Player>> team;
