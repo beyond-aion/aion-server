@@ -64,7 +64,7 @@
 				</gd_npcs>
 				<gd_items>
 					<gd_item id="186000101" name="Radiant Token" />
-					<gd_item id="186000115" name="Circle Token" />
+					<gd_item id="186000102" name="Fortuneers Token" />
 				</gd_items>
 			</gd_rule>
 			<gd_rule rule_name="Vocolith Specials: Medals (Asmodians)" base_chance="100" min_count="3" max_count="5" fixed_chance="true" member_limit="6" restriction_race="ASMODIANS">

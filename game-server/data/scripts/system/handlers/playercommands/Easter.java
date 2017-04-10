@@ -21,7 +21,7 @@ public class Easter extends PlayerCommand {
 
 	private static final Logger log = LoggerFactory.getLogger(Easter.class);
 	private static int neededItem = 186000175;
-	private static int[][] rewards = { { 25, 185000216 }, { 30, 186000101 }, { 30, 186000115 }, { 50, 186000236 }, { 150, 188053295 },
+	private static int[][] rewards = { { 25, 185000216 }, { 30, 186000101 }, { 30, 186000102 }, { 50, 186000236 }, { 150, 188053295 },
 		{ 250, 188053702 }, { 500, 188053005 } };
 
 	public Easter() {
@@ -59,7 +59,7 @@ public class Easter extends PlayerCommand {
 					count = 5;
 					itemId = player.getRace() == Race.ASMODIANS ? itemId = 186000104 : itemId;
 					break;
-				case 186000115: // Circle Token
+				case 186000102: // Circle Token
 					count = 5;
 					itemId = player.getRace() == Race.ASMODIANS ? itemId = 186000105 : itemId;
 					break;
