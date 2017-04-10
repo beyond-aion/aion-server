@@ -59,177 +59,179 @@
 		<xs:attribute name="no_save_on_logout" type="xs:boolean" />
 	</xs:complexType>
 	<xs:complexType name="Effects">
-		<xs:sequence minOccurs="0" maxOccurs="unbounded">
-			<xs:element name="root" type="RootEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="stun" type="StunEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="sleep" type="SleepEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="snare" type="SnareEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="absolutesnare" type="AbsoluteSnareEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="slow" type="SlowEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="absoluteslow" type="AbsoluteSlowEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="poison" type="PoisonEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="bleed" type="BleedEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="stumble" type="StumbleEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="spin" type="SpinEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="stagger" type="StaggerEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="openaerial" type="OpenAerialEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="closeaerial" type="CloseAerialEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="bind" type="BindEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="shield" type="ShieldEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="dispel" type="DispelEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="statup" type="StatupEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="statboost" type="StatboostEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="weaponstatboost" type="WeaponStatboostEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="wpnmastery" type="WeaponMasteryEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="statdown" type="StatdownEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="spellatk" type="SpellAttackEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="deform" type="DeformEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="shapechange" type="ShapeChangeEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="polymorph" type="PolymorphEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="hide" type="HideEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="search" type="SearchEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="healinstant" type="HealInstantEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="mphealinstant" type="MPHealInstantEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="dphealinstant" type="DPHealInstantEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="fphealinstant" type="FPHealInstantEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="skillatk" type="SkillAttackInstantEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="spellatkinstant" type="SpellAttackInstantEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="dash" type="DashEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="backdash" type="BackDashEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="delaydamage" type="DelayedSpellAttackInstantEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="return" type="ReturnEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="prochealinstant" type="ProcHealInstantEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="procmphealinstant" type="ProcMPHealInstantEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="procdphealinstant" type="ProcDPHealInstantEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="procfphealinstant" type="ProcFPHealInstantEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="carvesignet" type="CarveSignetEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="signet" type="SignetEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="signetburst" type="SignetBurstEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="silence" type="SilenceEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="curse" type="CurseEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="blind" type="BlindEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="disease" type="DiseaseEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="boosthate" type="BoostHateEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="hostileup" type="HostileUpEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="paralyze" type="ParalyzeEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="confuse" type="ConfuseEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="alwaysresist" type="AlwaysResistEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="alwaysblock" type="AlwaysBlockEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="alwaysparry" type="AlwaysParryEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="alwaysdodge" type="AlwaysDodgeEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="dispeldebuffphysical" type="DispelDebuffPhysicalEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="dispeldebuff" type="DispelDebuffEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="switchhpmp" type="SwitchHpMpEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="aura" type="AuraEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="summon" type="SummonEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="fear" type="FearEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="resurrect" type="ResurrectEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="dispeldebuffmental" type="DispelDebuffMentalEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="reflector" type="ReflectorEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="returnpoint" type="ReturnPointEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="provoker" type="ProvokerEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="spellatkdraininstant" type="SpellAtkDrainInstantEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="onetimeboostskillattack" type="OneTimeBoostSkillAttackEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="onetimeboostskillcritical" type="OneTimeBoostSkillCriticalEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="armormastery" type="ArmorMasteryEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="weaponstatup" type="WeaponStatupEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="boostskillcastingtime" type="BoostSkillCastingTimeEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="summontrap" type="SummonTrapEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="summongroupgate" type="SummonGroupGateEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="summonservant" type="SummonServantEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="skillatkdraininstant" type="SkillAtkDrainInstantEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="petorderuseultraskill" type="PetOrderUseUltraSkillEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="boostheal" type="BoostHealEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="dispelbuff" type="DispelBuffEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="procatk_instant" type="ProcAtkInstantEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="skilllauncher" type="SkillLauncherEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="pulled" type="PulledEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="movebehind" type="MoveBehindEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="rebirth" type="RebirthEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="boostskillcost" type="BoostSkillCostEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="protect" type="ProtectEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="resurrectbase" type="ResurrectBaseEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="magiccounteratk" type="MagicCounterAtkEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="recallinstant" type="RecallInstantEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="randommoveloc" type="RandomMoveLocEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="summonhoming" type="SummonHomingEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="dispelbuffcounteratk" type="DispelBuffCounterAtkEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="xpboost" type="XPBoostEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="fpatkinstant" type="FpAttackInstantEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="fpatk" type="FpAttackEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="onetimeboostheal" type="OneTimeBoostHealEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="deboostheal" type="DeboostHealEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="summonskillarea" type="SummonSkillAreaEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="resurrectpos" type="ResurrectPositionalEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="nofly" type="NoFlyEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="nofpconsum" type="NoFPConsumEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="healcastoronatk" type="HealCastorOnAttackedEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="wpndual" type="WeaponDualEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="invulnerablewing" type="InvulnerableWingEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="shieldmastery" type="ShieldMasteryEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="simpleroot" type="SimpleRootEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="dptransfer" type="DPTransferEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="mpattack" type="MpAttackEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="boostdroprate" type="BoostDropRateEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="spellatkdrain" type="SpellAtkDrainEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="extendedaurarange" type="ExtendAuraRangeEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="changehateonattacked" type="ChangeHateOnAttackedEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="healcastorontargetdead" type="HealCastorOnTargetDeadEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="noreducespellatk" type="NoReduceSpellATKInstantEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="mpattackinstant" type="MpAttackInstantEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="condskilllauncher" type="CondSkillLauncherEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="fall" type="FallEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="evade" type="EvadeEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="buffbind" type="BuffBindEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="buffsilence" type="BuffSilenceEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="buffsleep" type="BuffSleepEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="buffstun" type="BuffStunEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="heal" type="HealEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="mpheal" type="MPHealEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="fpheal" type="FPHealEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="dpheal" type="DPHealEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="summontotem" type="SummonTotemEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="boostspellattack" type="BoostSpellAttackEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="switchhostile" type="SwitchHostileEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="noresurrectpenalty" type="NoResurrectPenaltyEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="hipass" type="HiPassEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="nodeathpenalty" type="NoDeathPenaltyEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="caseheal" type="CaseHealEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="procvphealinstant" type="ProcVPHealInstantEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="summonhousegate" type="SummonHouseGateEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="summonbindinggroupgate" type="SummonBindingGroupGateEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="convertheal" type="ConvertHealEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="sanctuary" type="SanctuaryEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="subtypeextendduration" type="SubTypeExtendDurationEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="subtypeboostresist" type="SubTypeBoostResistEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="dispelnpcbuff" type="DispelNpcBuffEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="dispelnpcdebuff" type="DispelNpcDebuffEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="deathblow" type="DeathBlowEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="delayedskill" type="DelayedSkillEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="delayedfpatk_instant" type="DelayedFpAtkInstantEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="drboost" type="DRBoostEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="apboost" type="APBoostEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="skillxpboost" type="SkillXPBoostEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="summonfunctionalnpc" type="SummonFunctionalNpcEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="targetteleport" type="TargetTeleportEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="flyoff" type="FlyOffEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="escape" type="EscapeEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="skillcooltimereset" type="SkillCooltimeResetEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="riderobot" type="RideRobotEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="absstatbuff" type="AbsoluteStatToPCBuff" minOccurs="0" maxOccurs="1" />
-			<xs:element name="absstatdebuff" type="AbsoluteStatToPCDebuff" minOccurs="0" maxOccurs="1" />
-			<xs:element name="mpshield" type="MPShieldEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="petrification" type="PetrificationEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="absexppointhealinstant" type="AbsoluteEXPPointHealInstantEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="limitedreduceDamage" type="LimitedReduceDamageEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="activateenslave" type="ActivateEnslaveEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="petorderunsummon" type="PetOrderUnSummonEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="supportevent" type="SupportEventEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="targetchange" type="TargetChangeEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="dummy" type="DummyEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="alwayshit" type="AlwaysHitEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="alwaysnoresist" type="AlwaysNoResistEffect" minOccurs="0" maxOccurs="1" />
-			<xs:element name="utility" type="UtilityEffect" minOccurs="0" maxOccurs="1" />
+		<xs:sequence minOccurs="1" maxOccurs="unbounded">
+			<xs:choice>
+				<xs:element name="root" type="RootEffect" />
+				<xs:element name="stun" type="StunEffect" />
+				<xs:element name="sleep" type="SleepEffect" />
+				<xs:element name="snare" type="SnareEffect" />
+				<xs:element name="absolutesnare" type="AbsoluteSnareEffect" />
+				<xs:element name="slow" type="SlowEffect" />
+				<xs:element name="absoluteslow" type="AbsoluteSlowEffect" />
+				<xs:element name="poison" type="PoisonEffect" />
+				<xs:element name="bleed" type="BleedEffect" />
+				<xs:element name="stumble" type="StumbleEffect" />
+				<xs:element name="spin" type="SpinEffect" />
+				<xs:element name="stagger" type="StaggerEffect" />
+				<xs:element name="openaerial" type="OpenAerialEffect" />
+				<xs:element name="closeaerial" type="CloseAerialEffect" />
+				<xs:element name="bind" type="BindEffect" />
+				<xs:element name="shield" type="ShieldEffect" />
+				<xs:element name="dispel" type="DispelEffect" />
+				<xs:element name="statup" type="StatupEffect" />
+				<xs:element name="statboost" type="StatboostEffect" />
+				<xs:element name="weaponstatboost" type="WeaponStatboostEffect" />
+				<xs:element name="wpnmastery" type="WeaponMasteryEffect" />
+				<xs:element name="statdown" type="StatdownEffect" />
+				<xs:element name="spellatk" type="SpellAttackEffect" />
+				<xs:element name="deform" type="DeformEffect" />
+				<xs:element name="shapechange" type="ShapeChangeEffect" />
+				<xs:element name="polymorph" type="PolymorphEffect" />
+				<xs:element name="hide" type="HideEffect" />
+				<xs:element name="search" type="SearchEffect" />
+				<xs:element name="healinstant" type="HealInstantEffect" />
+				<xs:element name="mphealinstant" type="MPHealInstantEffect" />
+				<xs:element name="dphealinstant" type="DPHealInstantEffect" />
+				<xs:element name="fphealinstant" type="FPHealInstantEffect" />
+				<xs:element name="skillatk" type="SkillAttackInstantEffect" />
+				<xs:element name="spellatkinstant" type="SpellAttackInstantEffect" />
+				<xs:element name="dash" type="DashEffect" />
+				<xs:element name="backdash" type="BackDashEffect" />
+				<xs:element name="delaydamage" type="DelayedSpellAttackInstantEffect" />
+				<xs:element name="return" type="ReturnEffect" />
+				<xs:element name="prochealinstant" type="ProcHealInstantEffect" />
+				<xs:element name="procmphealinstant" type="ProcMPHealInstantEffect" />
+				<xs:element name="procdphealinstant" type="ProcDPHealInstantEffect" />
+				<xs:element name="procfphealinstant" type="ProcFPHealInstantEffect" />
+				<xs:element name="carvesignet" type="CarveSignetEffect" />
+				<xs:element name="signet" type="SignetEffect" />
+				<xs:element name="signetburst" type="SignetBurstEffect" />
+				<xs:element name="silence" type="SilenceEffect" />
+				<xs:element name="curse" type="CurseEffect" />
+				<xs:element name="blind" type="BlindEffect" />
+				<xs:element name="disease" type="DiseaseEffect" />
+				<xs:element name="boosthate" type="BoostHateEffect" />
+				<xs:element name="hostileup" type="HostileUpEffect" />
+				<xs:element name="paralyze" type="ParalyzeEffect" />
+				<xs:element name="confuse" type="ConfuseEffect" />
+				<xs:element name="alwaysresist" type="AlwaysResistEffect" />
+				<xs:element name="alwaysblock" type="AlwaysBlockEffect" />
+				<xs:element name="alwaysparry" type="AlwaysParryEffect" />
+				<xs:element name="alwaysdodge" type="AlwaysDodgeEffect" />
+				<xs:element name="dispeldebuffphysical" type="DispelDebuffPhysicalEffect" />
+				<xs:element name="dispeldebuff" type="DispelDebuffEffect" />
+				<xs:element name="switchhpmp" type="SwitchHpMpEffect" />
+				<xs:element name="aura" type="AuraEffect" />
+				<xs:element name="summon" type="SummonEffect" />
+				<xs:element name="fear" type="FearEffect" />
+				<xs:element name="resurrect" type="ResurrectEffect" />
+				<xs:element name="dispeldebuffmental" type="DispelDebuffMentalEffect" />
+				<xs:element name="reflector" type="ReflectorEffect" />
+				<xs:element name="returnpoint" type="ReturnPointEffect" />
+				<xs:element name="provoker" type="ProvokerEffect" />
+				<xs:element name="spellatkdraininstant" type="SpellAtkDrainInstantEffect" />
+				<xs:element name="onetimeboostskillattack" type="OneTimeBoostSkillAttackEffect" />
+				<xs:element name="onetimeboostskillcritical" type="OneTimeBoostSkillCriticalEffect" />
+				<xs:element name="armormastery" type="ArmorMasteryEffect" />
+				<xs:element name="weaponstatup" type="WeaponStatupEffect" />
+				<xs:element name="boostskillcastingtime" type="BoostSkillCastingTimeEffect" />
+				<xs:element name="summontrap" type="SummonTrapEffect" />
+				<xs:element name="summongroupgate" type="SummonGroupGateEffect" />
+				<xs:element name="summonservant" type="SummonServantEffect" />
+				<xs:element name="skillatkdraininstant" type="SkillAtkDrainInstantEffect" />
+				<xs:element name="petorderuseultraskill" type="PetOrderUseUltraSkillEffect" />
+				<xs:element name="boostheal" type="BoostHealEffect" />
+				<xs:element name="dispelbuff" type="DispelBuffEffect" />
+				<xs:element name="procatk_instant" type="ProcAtkInstantEffect" />
+				<xs:element name="skilllauncher" type="SkillLauncherEffect" />
+				<xs:element name="pulled" type="PulledEffect" />
+				<xs:element name="movebehind" type="MoveBehindEffect" />
+				<xs:element name="rebirth" type="RebirthEffect" />
+				<xs:element name="boostskillcost" type="BoostSkillCostEffect" />
+				<xs:element name="protect" type="ProtectEffect" />
+				<xs:element name="resurrectbase" type="ResurrectBaseEffect" />
+				<xs:element name="magiccounteratk" type="MagicCounterAtkEffect" />
+				<xs:element name="recallinstant" type="RecallInstantEffect" />
+				<xs:element name="randommoveloc" type="RandomMoveLocEffect" />
+				<xs:element name="summonhoming" type="SummonHomingEffect" />
+				<xs:element name="dispelbuffcounteratk" type="DispelBuffCounterAtkEffect" />
+				<xs:element name="xpboost" type="XPBoostEffect" />
+				<xs:element name="fpatkinstant" type="FpAttackInstantEffect" />
+				<xs:element name="fpatk" type="FpAttackEffect" />
+				<xs:element name="onetimeboostheal" type="OneTimeBoostHealEffect" />
+				<xs:element name="deboostheal" type="DeboostHealEffect" />
+				<xs:element name="summonskillarea" type="SummonSkillAreaEffect" />
+				<xs:element name="resurrectpos" type="ResurrectPositionalEffect" />
+				<xs:element name="nofly" type="NoFlyEffect" />
+				<xs:element name="nofpconsum" type="NoFPConsumEffect" />
+				<xs:element name="healcastoronatk" type="HealCastorOnAttackedEffect" />
+				<xs:element name="wpndual" type="WeaponDualEffect" />
+				<xs:element name="invulnerablewing" type="InvulnerableWingEffect" />
+				<xs:element name="shieldmastery" type="ShieldMasteryEffect" />
+				<xs:element name="simpleroot" type="SimpleRootEffect" />
+				<xs:element name="dptransfer" type="DPTransferEffect" />
+				<xs:element name="mpattack" type="MpAttackEffect" />
+				<xs:element name="boostdroprate" type="BoostDropRateEffect" />
+				<xs:element name="spellatkdrain" type="SpellAtkDrainEffect" />
+				<xs:element name="extendedaurarange" type="ExtendAuraRangeEffect" />
+				<xs:element name="changehateonattacked" type="ChangeHateOnAttackedEffect" />
+				<xs:element name="healcastorontargetdead" type="HealCastorOnTargetDeadEffect" />
+				<xs:element name="noreducespellatk" type="NoReduceSpellATKInstantEffect" />
+				<xs:element name="mpattackinstant" type="MpAttackInstantEffect" />
+				<xs:element name="condskilllauncher" type="CondSkillLauncherEffect" />
+				<xs:element name="fall" type="FallEffect" />
+				<xs:element name="evade" type="EvadeEffect" />
+				<xs:element name="buffbind" type="BuffBindEffect" />
+				<xs:element name="buffsilence" type="BuffSilenceEffect" />
+				<xs:element name="buffsleep" type="BuffSleepEffect" />
+				<xs:element name="buffstun" type="BuffStunEffect" />
+				<xs:element name="heal" type="HealEffect" />
+				<xs:element name="mpheal" type="MPHealEffect" />
+				<xs:element name="fpheal" type="FPHealEffect" />
+				<xs:element name="dpheal" type="DPHealEffect" />
+				<xs:element name="summontotem" type="SummonTotemEffect" />
+				<xs:element name="boostspellattack" type="BoostSpellAttackEffect" />
+				<xs:element name="switchhostile" type="SwitchHostileEffect" />
+				<xs:element name="noresurrectpenalty" type="NoResurrectPenaltyEffect" />
+				<xs:element name="hipass" type="HiPassEffect" />
+				<xs:element name="nodeathpenalty" type="NoDeathPenaltyEffect" />
+				<xs:element name="caseheal" type="CaseHealEffect" />
+				<xs:element name="procvphealinstant" type="ProcVPHealInstantEffect" />
+				<xs:element name="summonhousegate" type="SummonHouseGateEffect" />
+				<xs:element name="summonbindinggroupgate" type="SummonBindingGroupGateEffect" />
+				<xs:element name="convertheal" type="ConvertHealEffect" />
+				<xs:element name="sanctuary" type="SanctuaryEffect" />
+				<xs:element name="subtypeextendduration" type="SubTypeExtendDurationEffect" />
+				<xs:element name="subtypeboostresist" type="SubTypeBoostResistEffect" />
+				<xs:element name="dispelnpcbuff" type="DispelNpcBuffEffect" />
+				<xs:element name="dispelnpcdebuff" type="DispelNpcDebuffEffect" />
+				<xs:element name="deathblow" type="DeathBlowEffect" />
+				<xs:element name="delayedskill" type="DelayedSkillEffect" />
+				<xs:element name="delayedfpatk_instant" type="DelayedFpAtkInstantEffect" />
+				<xs:element name="drboost" type="DRBoostEffect" />
+				<xs:element name="apboost" type="APBoostEffect" />
+				<xs:element name="skillxpboost" type="SkillXPBoostEffect" />
+				<xs:element name="summonfunctionalnpc" type="SummonFunctionalNpcEffect" />
+				<xs:element name="targetteleport" type="TargetTeleportEffect" />
+				<xs:element name="flyoff" type="FlyOffEffect" />
+				<xs:element name="escape" type="EscapeEffect" />
+				<xs:element name="skillcooltimereset" type="SkillCooltimeResetEffect" />
+				<xs:element name="riderobot" type="RideRobotEffect" />
+				<xs:element name="absstatbuff" type="AbsoluteStatToPCBuff" />
+				<xs:element name="absstatdebuff" type="AbsoluteStatToPCDebuff" />
+				<xs:element name="mpshield" type="MPShieldEffect" />
+				<xs:element name="petrification" type="PetrificationEffect" />
+				<xs:element name="absexppointhealinstant" type="AbsoluteEXPPointHealInstantEffect" />
+				<xs:element name="limitedreduceDamage" type="LimitedReduceDamageEffect" />
+				<xs:element name="activateenslave" type="ActivateEnslaveEffect" />
+				<xs:element name="petorderunsummon" type="PetOrderUnSummonEffect" />
+				<xs:element name="supportevent" type="SupportEventEffect" />
+				<xs:element name="targetchange" type="TargetChangeEffect" />
+				<xs:element name="dummy" type="DummyEffect" />
+				<xs:element name="alwayshit" type="AlwaysHitEffect" />
+				<xs:element name="alwaysnoresist" type="AlwaysNoResistEffect" />
+				<xs:element name="utility" type="UtilityEffect" />
+			</xs:choice>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="Properties">

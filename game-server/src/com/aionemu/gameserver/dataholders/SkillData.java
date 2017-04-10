@@ -1,6 +1,7 @@
 package com.aionemu.gameserver.dataholders;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -51,7 +52,7 @@ public class SkillData {
 	@XmlTransient
 	private TIntObjectHashMap<List<Integer>> cooldownGroups = new TIntObjectHashMap<>();
 
-	void afterUnmarshal(Unmarshaller u, Object parent) {
+	protected void afterUnmarshal(Unmarshaller u, Object parent) {
 		skillData.clear();
 		skillTemplatesByGroup.clear();
 		skillTemplatesByStack.clear();
@@ -75,6 +76,7 @@ public class SkillData {
 				skillTemplatesByStack.get(skillTemplate.getGroup()).add(skillTemplate);
 			}
 		}
+		skillTemplates = null;
 	}
 
 	/**
@@ -113,17 +115,8 @@ public class SkillData {
 	/**
 	 * @return the skillTemplates
 	 */
-	public List<SkillTemplate> getSkillTemplates() {
-		return skillTemplates;
-	}
-
-	/**
-	 * @param skillTemplates
-	 *          the skillTemplates to set
-	 */
-	public void setSkillTemplates(List<SkillTemplate> skillTemplates) {
-		this.skillTemplates = skillTemplates;
-		afterUnmarshal(null, null);
+	public Collection<SkillTemplate> getSkillTemplates() {
+		return skillData.valueCollection();
 	}
 
 	/**
@@ -141,7 +134,7 @@ public class SkillData {
 		StringBuilder missing = new StringBuilder();
 		StringBuilder empty = new StringBuilder();
 		Set<String> motionNames = new HashSet<>();
-		for (SkillTemplate t : skillTemplates) {
+		for (SkillTemplate t : getSkillTemplates()) {
 			Motion m = t.getMotion();
 			if (m != null) {
 				if (m.getName() == null && !m.isInstantSkill()) {// TODO initialize a default motion? some skills have explicit motion speeds but no motion name o.O
