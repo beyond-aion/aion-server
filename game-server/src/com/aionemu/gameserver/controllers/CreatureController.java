@@ -45,6 +45,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SKILL_CANCEL;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.item.ItemPacketService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
+import com.aionemu.gameserver.skillengine.effect.EffectType;
 import com.aionemu.gameserver.skillengine.model.ChargeSkill;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.Skill;
@@ -247,7 +248,7 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 			SkillTemplate skillTemplate = DataManager.SKILL_DATA.getSkillTemplate(skillId);
 			if (skillTemplate.getType() == SkillType.MAGICAL) // magical skills do not stun
 				return;
-			if (skillTemplate.hasPulledEffect()) // pull does not trigger stumble
+			if (skillTemplate.hasAnyEffect(true, EffectType.PULLED)) // pull does not trigger stumble
 				return;
 		}
 

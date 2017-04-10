@@ -530,106 +530,82 @@ public class EffectController {
 	}
 
 	public boolean removeByEffectId(int effectId, int dispelLevel, int power) {
-		// abnormalEffectMap
 		lock.writeLock().lock();
 		try {
-			for (Iterator<Effect> iter = abnormalEffectMap.values().iterator(); iter.hasNext();) {
-				Effect effect = iter.next();
-				if (!effect.containsEffectId(effectId))
-					continue;
-				// check dispel level
-				if (effect.getReqDispelLevel() > dispelLevel)
-					continue;
-
-				if (removePower(effect, power)) {
-					iter.remove();
-					effect.endEffect();
-					return true;
-				}
-			}
-			// noshowEffects
-			for (Iterator<Effect> iter = noshowEffects.values().iterator(); iter.hasNext();) {
-				Effect effect = iter.next();
-				if (!effect.containsEffectId(effectId))
-					continue;
-				// check dispel level
-				if (effect.getReqDispelLevel() > dispelLevel)
-					continue;
-
-				if (removePower(effect, power)) {
-					iter.remove();
-					effect.endEffect();
-					return true;
-				}
-			}
+			if (removeByEffectId(abnormalEffectMap, effectId, dispelLevel, power))
+				return true;
+			return removeByEffectId(noshowEffects, effectId, dispelLevel, power);
 		} finally {
 			lock.writeLock().unlock();
+		}
+	}
+
+	/**
+	 * internal helper method, NOT synchronized
+	 */
+	private boolean removeByEffectId(Map<String, Effect> effectMap, int effectId, int dispelLevel, int power) {
+		for (Iterator<Effect> iter = effectMap.values().iterator(); iter.hasNext();) {
+			Effect effect = iter.next();
+			if (!effect.containsEffectId(effectId))
+				continue;
+			// check dispel level
+			if (effect.getReqDispelLevel() > dispelLevel)
+				continue;
+
+			if (removePower(effect, power)) {
+				iter.remove();
+				effect.endEffect();
+				return true;
+			}
 		}
 		return false;
 	}
 
 	public void removeByDispelEffect(EffectType effectType, DispelSlotType dispelSlotType, int count, int dispelLevel, int power) {
-		// abnormalEffectMap
 		lock.writeLock().lock();
 		try {
-			for (Iterator<Effect> iter = abnormalEffectMap.values().iterator(); iter.hasNext();) {
-				Effect effect = iter.next();
-				// check count
-				if (count == 0)
-					break;
-				if (effectType != null) {
-					if (!effect.getSkillTemplate().getEffects().isEffectTypePresent(effectType))
-						continue;
-					if (effectType.equals(EffectType.STUN) && effect.getSkillId() == 11904) { // avatar skill irremovable by Remove Shock TODO: logic
-						continue;
-					}
-				}
-				if (dispelSlotType != null) {
-					if (effect.getTargetSlot() != SkillTargetSlot.of(dispelSlotType))
-						continue;
-				}
-				// check dispel level
-				if (effect.getReqDispelLevel() > dispelLevel)
-					continue;
-
-				if (removePower(effect, power)) {
-					iter.remove();
-					effect.endEffect();
-				}
-				// decrease count
-				count--;
-			}
-			// noshowEffects
-			for (Iterator<Effect> iter = noshowEffects.values().iterator(); iter.hasNext();) {
-				Effect effect = iter.next();
-				// check count
-				if (count == 0)
-					break;
-				if (effectType != null) {
-					if (!effect.getSkillTemplate().getEffects().isEffectTypePresent(effectType))
-						continue;
-					if (effectType.equals(EffectType.STUN) && effect.getSkillId() == 11904) { // avatar skill irremovable by Remove Shock TODO: logic
-						continue;
-					}
-				}
-				if (dispelSlotType != null) {
-					if (effect.getTargetSlot() != SkillTargetSlot.of(dispelSlotType))
-						continue;
-				}
-				// check dispel level
-				if (effect.getReqDispelLevel() > dispelLevel)
-					continue;
-
-				if (removePower(effect, power)) {
-					iter.remove();
-					effect.endEffect();
-				}
-				// decrease count
-				count--;
-			}
+			count = removeByDispelEffect(abnormalEffectMap, effectType, dispelSlotType, count, dispelLevel, power);
+			if (count > 0)
+				removeByDispelEffect(noshowEffects, effectType, dispelSlotType, count, dispelLevel, power);
 		} finally {
 			lock.writeLock().unlock();
 		}
+	}
+
+	/**
+	 * internal helper method, NOT synchronized
+	 */
+	private int removeByDispelEffect(Map<String, Effect> effectMap, EffectType effectType, DispelSlotType dispelSlotType, int count, int dispelLevel,
+		int power) {
+		for (Iterator<Effect> iter = effectMap.values().iterator(); iter.hasNext();) {
+			// check count
+			if (count == 0)
+				break;
+
+			Effect effect = iter.next();
+			if (effectType != null) {
+				if (!effect.getSkillTemplate().hasAnyEffect(effectType))
+					continue;
+				if (effectType.equals(EffectType.STUN) && effect.getSkillId() == 11904) { // avatar skill irremovable by Remove Shock TODO: logic
+					continue;
+				}
+			}
+			if (dispelSlotType != null) {
+				if (effect.getTargetSlot() != SkillTargetSlot.of(dispelSlotType))
+					continue;
+			}
+			// check dispel level
+			if (effect.getReqDispelLevel() > dispelLevel)
+				continue;
+
+			if (removePower(effect, power)) {
+				iter.remove();
+				effect.endEffect();
+			}
+			// decrease count
+			count--;
+		}
+		return count;
 	}
 
 	/**

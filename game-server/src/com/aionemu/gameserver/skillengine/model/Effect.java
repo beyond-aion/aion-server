@@ -30,7 +30,6 @@ import com.aionemu.gameserver.skillengine.condition.Conditions;
 import com.aionemu.gameserver.skillengine.effect.AbnormalState;
 import com.aionemu.gameserver.skillengine.effect.EffectTemplate;
 import com.aionemu.gameserver.skillengine.effect.EffectType;
-import com.aionemu.gameserver.skillengine.effect.Effects;
 import com.aionemu.gameserver.skillengine.model.EffectReserved.ResourceType;
 import com.aionemu.gameserver.skillengine.periodicaction.PeriodicAction;
 import com.aionemu.gameserver.skillengine.periodicaction.PeriodicActions;
@@ -251,11 +250,6 @@ public class Effect implements StatOwner {
 
 	public List<EffectTemplate> getEffectTemplates() {
 		return skillTemplate.getEffects().getEffects();
-	}
-
-	public boolean isMphealInstant() {
-		Effects effects = skillTemplate.getEffects();
-		return effects != null && effects.isMpHealInstant();
 	}
 
 	public boolean isToggle() {
@@ -1156,55 +1150,60 @@ public class Effect implements StatOwner {
 	 * functions that check for given effecttype
 	 */
 	public boolean isHideEffect() {
-		return getSkillTemplate().getEffects() != null && getSkillTemplate().getEffects().isEffectTypePresent(EffectType.HIDE);
+		return getSkillTemplate().hasAnyEffect(EffectType.HIDE);
 	}
 
 	public boolean isParalyzeEffect() {
-		return getSkillTemplate().getEffects() != null && getSkillTemplate().getEffects().isEffectTypePresent(EffectType.PARALYZE);
+		return getSkillTemplate().hasAnyEffect(EffectType.PARALYZE);
 	}
 
 	public boolean isStunEffect() {
-		return getSkillTemplate().getEffects() != null && getSkillTemplate().getEffects().isEffectTypePresent(EffectType.STUN);
+		return getSkillTemplate().hasAnyEffect(EffectType.STUN);
 	}
 
 	public boolean isSanctuaryEffect() {
-		return getSkillTemplate().getEffects() != null && getSkillTemplate().getEffects().isEffectTypePresent(EffectType.SANCTUARY);
+		return getSkillTemplate().hasAnyEffect(EffectType.SANCTUARY);
 	}
 
 	public boolean isDamageEffect() {
-		return getSkillTemplate().getEffects() != null && getSkillTemplate().getEffects().isDamageEffect();
+		return getSkillTemplate().hasAnyEffect(EffectType.BACKDASH, EffectType.CARVESIGNET, EffectType.DASH, EffectType.DEATHBLOW,
+			EffectType.DELAYEDSPELLATTACKINSTANT, EffectType.DISPELBUFFCOUNTERATK, EffectType.MOVEBEHIND, EffectType.NOREDUCESPELLATKINSTANT,
+			EffectType.PROCATKINSTANT, EffectType.SIGNETBURST, EffectType.SKILLATKDRAININSTANT, EffectType.SKILLATTACKINSTANT,
+			EffectType.SPELLATKDRAININSTANT, EffectType.SPELLATTACKINSTANT);
 	}
 
 	public boolean isXpBoost() {
-		return getSkillTemplate().getEffects() != null && getSkillTemplate().getEffects().isEffectTypePresent(EffectType.XPBOOST);
+		return getSkillTemplate().hasAnyEffect(EffectType.XPBOOST);
 	}
 
 	public boolean isNoDeathPenalty() {
-		return getSkillTemplate().getEffects() != null && getSkillTemplate().getEffects().isEffectTypePresent(EffectType.NODEATHPENALTY);
+		return getSkillTemplate().hasAnyEffect(EffectType.NODEATHPENALTY);
 	}
 
 	public boolean isNoResurrectPenalty() {
-		return getSkillTemplate().getEffects() != null && getSkillTemplate().getEffects().isEffectTypePresent(EffectType.NORESURRECTPENALTY);
+		return getSkillTemplate().hasAnyEffect(EffectType.NORESURRECTPENALTY);
 	}
 
 	public boolean isHiPass() {
-		return getSkillTemplate().getEffects() != null && getSkillTemplate().getEffects().isEffectTypePresent(EffectType.HIPASS);
+		return getSkillTemplate().hasAnyEffect(EffectType.HIPASS);
 	}
 
 	public boolean isDelayedDamage() {
-		return getSkillTemplate().getEffects() != null && getSkillTemplate().getEffects().isEffectTypePresent(EffectType.DELAYEDSPELLATTACKINSTANT);
+		return getSkillTemplate().hasAnyEffect(EffectType.DELAYEDSPELLATTACKINSTANT);
 	}
 
 	public boolean isPetOrder() {
-		return getSkillTemplate().getEffects() != null && getSkillTemplate().getEffects().isEffectTypePresent(EffectType.PETORDERUSEULTRASKILL);
+		return getSkillTemplate().hasAnyEffect(EffectType.PETORDERUSEULTRASKILL);
 	}
 
 	public boolean isSummoning() {
-		return getSkillTemplate().getEffects() != null && getSkillTemplate().getEffects().isSummoning();
+		return getSkillTemplate().hasAnyEffect(EffectType.SUMMON, EffectType.SUMMONBINDINGGROUPGATE, EffectType.SUMMONFUNCTIONALNPC,
+			EffectType.SUMMONGROUPGATE, EffectType.SUMMONHOMING, EffectType.SUMMONHOUSEGATE, EffectType.SUMMONSERVANT, EffectType.SUMMONSKILLAREA,
+			EffectType.SUMMONTOTEM, EffectType.SUMMONTRAP);
 	}
 
 	public boolean isPetOrderUnSummonEffect() {
-		return getSkillTemplate().getEffects() != null && getSkillTemplate().getEffects().isEffectTypePresent(EffectType.PETORDERUNSUMMON);
+		return getSkillTemplate().hasAnyEffect(EffectType.PETORDERUNSUMMON);
 	}
 
 	/**

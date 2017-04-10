@@ -10,6 +10,7 @@ import javax.xml.bind.annotation.XmlType;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.controllers.attack.AttackStatus;
+import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.skillengine.action.Actions;
 import com.aionemu.gameserver.skillengine.condition.ChainCondition;
 import com.aionemu.gameserver.skillengine.condition.Condition;
@@ -379,24 +380,39 @@ public class SkillTemplate {
 		return stance;
 	}
 
-	public boolean hasResurrectEffect() {
-		return getEffects() != null && getEffects().isResurrect();
+	public boolean hasAnyEffect(EffectType... effectTypes) {
+		return hasAnyEffect(false, effectTypes);
 	}
 
-	public boolean hasItemHealFpEffect() {
-		return getEffects() != null && getEffects().isEffectTypePresent(EffectType.PROCFPHEALINSTANT);
+	public boolean hasAnyEffect(boolean checkSubEffects, EffectType... effectTypes) {
+		if (effects == null)
+			return false;
+		if (effects.hasAnyEffectType(effectTypes))
+			return true;
+		if (checkSubEffects) {
+			for (EffectTemplate et : effects.getEffects()) {
+				if (et.getSubEffect() != null) {
+					if (DataManager.SKILL_DATA.getSkillTemplate(et.getSubEffect().getSkillId()).hasAnyEffect(effectTypes)) // should we check recursively?
+						return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * @return resurrectbase is excluded because of different behavior
+	 */
+	public boolean hasResurrectEffect() {
+		return hasAnyEffect(EffectType.RESURRECT, EffectType.RESURRECTPOSITIONAL);
 	}
 
 	public boolean hasEvadeEffect() {
-		return getEffects() != null && getEffects().isEffectTypePresent(EffectType.EVADE);
-	}
-
-	public boolean hasPulledEffect() {
-		return getEffects() != null && getEffects().isEffectTypePresent(EffectType.PULLED);
+		return hasAnyEffect(EffectType.EVADE);
 	}
 
 	public boolean hasRecallInstant() {
-		return getEffects() != null && getEffects().isEffectTypePresent(EffectType.RECALLINSTANT);
+		return hasAnyEffect(EffectType.RECALLINSTANT);
 	}
 
 	public int getCooldownId() {

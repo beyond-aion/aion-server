@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.skillengine.effect;
 
-import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.Set;
@@ -125,87 +124,21 @@ public class Effects {
 	@XmlTransient
 	protected Set<EffectType> effectTypes;
 
-	/**
-	 * Gets the value of the effects property.
-	 * <p>
-	 * This accessor method returns a reference to the live list, not a snapshot. Therefore any modification you make to the returned list will be
-	 * present inside the JAXB object. This is why there is not a <CODE>set</CODE> method for the effect property.
-	 * <p>
-	 * For example, to add a new item, do as follows:
-	 * 
-	 * <pre>
-	 * getEffects().add(newItem);
-	 * </pre>
-	 */
+	protected void afterUnmarshal(Unmarshaller u, Object parent) {
+		effectTypes = EnumSet.noneOf(EffectType.class);
+		for (EffectTemplate et : effects)
+			effectTypes.add(et.getEffectType());
+	}
+
 	public List<EffectTemplate> getEffects() {
-		if (effects == null) {
-			effects = new ArrayList<>();
+		return effects;
+	}
+
+	public boolean hasAnyEffectType(EffectType... types) {
+		for (EffectType effectType : types) {
+			if (effectTypes.contains(effectType))
+				return true;
 		}
-		return this.effects;
-	}
-
-	public Set<EffectType> getEffectTypes() {
-		return effectTypes;
-	}
-
-	public void addEffectType(EffectType effectType) {
-		if (effectTypes == null)
-			effectTypes = EnumSet.of(effectType);
-		else
-			effectTypes.add(effectType);
-	}
-
-	public boolean isEffectTypePresent(EffectType effectType) {
-		if (effectTypes == null)
-			return false;
-
-		return effectTypes.contains(effectType);
-	}
-
-	/**
-	 * @return resurrectbase is excluded because of different behaviour
-	 */
-	public boolean isResurrect() {
-		return (this.isEffectTypePresent(EffectType.RESURRECT) || this.isEffectTypePresent(EffectType.RESURRECTPOSITIONAL));
-	}
-
-	public boolean isMpHealInstant() {
-		return this.isEffectTypePresent(EffectType.MPHEALINSTANT);
-	}
-
-	/**
-	 * includes: BackDash CarveSignet Dash DeathBlow DelayedSpellAtkInstant DispelBuffCounterAtk MoveBehind NoReduceSpellAtkInstant ProcAtkInstant
-	 * SignetBurst SkillAtkDrainInstant SkillAtkInstant SpellAtkDrainInstant SpellAttackInstant
-	 * 
-	 * @return
-	 */
-	public boolean isDamageEffect() {
-		if (this.isEffectTypePresent(EffectType.BACKDASH) || this.isEffectTypePresent(EffectType.CARVESIGNET) || this.isEffectTypePresent(EffectType.DASH)
-			|| this.isEffectTypePresent(EffectType.DEATHBLOW) || this.isEffectTypePresent(EffectType.DELAYEDSPELLATTACKINSTANT)
-			|| this.isEffectTypePresent(EffectType.DISPELBUFFCOUNTERATK) || this.isEffectTypePresent(EffectType.MOVEBEHIND)
-			|| this.isEffectTypePresent(EffectType.NOREDUCESPELLATKINSTANT) || this.isEffectTypePresent(EffectType.PROCATKINSTANT)
-			|| this.isEffectTypePresent(EffectType.SIGNETBURST) || this.isEffectTypePresent(EffectType.SKILLATKDRAININSTANT)
-			|| this.isEffectTypePresent(EffectType.SKILLATTACKINSTANT) || this.isEffectTypePresent(EffectType.SPELLATKDRAININSTANT)
-			|| this.isEffectTypePresent(EffectType.SPELLATTACKINSTANT))
-			return true;
-		else
-			return false;
-	}
-
-	public boolean isSummoning() {
-		if (this.isEffectTypePresent(EffectType.SUMMON) || this.isEffectTypePresent(EffectType.SUMMONBINDINGGROUPGATE)
-			|| this.isEffectTypePresent(EffectType.SUMMONFUNCTIONALNPC) || this.isEffectTypePresent(EffectType.SUMMONGROUPGATE)
-			|| this.isEffectTypePresent(EffectType.SUMMONHOMING) || this.isEffectTypePresent(EffectType.SUMMONHOUSEGATE)
-			|| this.isEffectTypePresent(EffectType.SUMMONSERVANT) || this.isEffectTypePresent(EffectType.SUMMONSKILLAREA)
-			|| this.isEffectTypePresent(EffectType.SUMMONTOTEM) || this.isEffectTypePresent(EffectType.SUMMONTRAP))
-			return true;
-		else
-			return false;
-	}
-
-	void afterUnmarshal(Unmarshaller u, Object parent) {
-		for (EffectTemplate et : this.getEffects()) {
-			this.addEffectType(et.getEffectType());
-		}
+		return false;
 	}
 }
