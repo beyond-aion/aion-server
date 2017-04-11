@@ -11,31 +11,25 @@ import com.aionemu.gameserver.network.aion.AionServerPacket;
  */
 public class SM_LEGION_UPDATE_MEMBER extends AionServerPacket {
 
-	private static final byte OFFLINE = 0x00;
-	private static final byte ONLINE = 0x01;
 	private Player player;
 	private LegionMemberEx LM;
 	private int msgId;
 	private String text;
-	private byte isOnline;
 
 	public SM_LEGION_UPDATE_MEMBER(Player player, int msgId, String text) {
 		this.player = player;
 		this.msgId = msgId;
 		this.text = text;
-		this.isOnline = player.isOnline() ? ONLINE : OFFLINE;
 	}
 
 	public SM_LEGION_UPDATE_MEMBER(LegionMemberEx LM, int msgId, String text) {
 		this.LM = LM;
 		this.msgId = msgId;
 		this.text = text;
-		this.isOnline = LM.isOnline() ? ONLINE : OFFLINE;
 	}
 
 	public SM_LEGION_UPDATE_MEMBER(Player player) {
 		this.player = player;
-		this.isOnline = OFFLINE;
 	}
 
 	@Override
@@ -46,8 +40,8 @@ public class SM_LEGION_UPDATE_MEMBER extends AionServerPacket {
 			writeC(player.getCommonData().getPlayerClass().getClassId());
 			writeC(player.getLevel());
 			writeD(player.getPosition().getMapId());
-			writeC(isOnline);
-			writeD(player.isOnline() ? 0 : (int) (player.getCommonData().getLastOnline().getTime() / 1000));
+			writeC(player.isOnline() ? 1 : 0);
+			writeD(player.isOnline() ? 0 : player.getCommonData().getLastOnlineEpochSeconds());
 			writeD(NetworkConfig.GAMESERVER_ID); // TODO: add to account model?
 			writeD(msgId);
 			writeS(text);
@@ -57,8 +51,8 @@ public class SM_LEGION_UPDATE_MEMBER extends AionServerPacket {
 			writeC(LM.getPlayerClass().getClassId());
 			writeC(LM.getLevel());
 			writeD(LM.getWorldId());
-			writeC(isOnline);
-			writeD(LM.isOnline() ? 0 : LM.getLastOnline());
+			writeC(LM.isOnline() ? 1 : 0);
+			writeD(LM.isOnline() ? 0 : LM.getLastOnlineEpochSeconds());
 			writeD(NetworkConfig.GAMESERVER_ID); // TODO: add to account model?
 			writeD(msgId);
 			writeS(text);

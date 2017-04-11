@@ -417,8 +417,18 @@ public class PlayerCommonData extends VisibleObjectTemplate {
 		return position;
 	}
 
+	/**
+	 * @return Timestamp the player was last online. May be null
+	 */
 	public Timestamp getLastOnline() {
 		return lastOnline;
+	}
+
+	/**
+	 * @return Unix timestamp the player was last online (measured in seconds since 1970-01-01T00:00:00Z). 0 if he was never online before.
+	 */
+	public int getLastOnlineEpochSeconds() {
+		return lastOnline == null ? 0 : (int) (lastOnline.getTime() / 1000);
 	}
 
 	public void setLastOnline(Timestamp timestamp) {

@@ -38,7 +38,7 @@ public class SM_GM_SHOW_LEGION_MEMBERLIST extends AionServerPacket {
 			writeC(legionMember.isOnline() ? 1 : 0);
 			writeS(legionMember.getSelfIntro());
 			writeS(legionMember.getNickname());
-			writeD(legionMember.getLastOnline());
+			writeD(legionMember.isOnline() ? 0 : legionMember.getLastOnlineEpochSeconds());
 
 			int address = HousingService.getInstance().getPlayerAddress(legionMember.getObjectId());
 			if (address > 0) {

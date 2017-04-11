@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.model.gameobjects.player.Friend;
+import com.aionemu.gameserver.model.gameobjects.player.FriendList.Status;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 
@@ -35,7 +36,7 @@ public class SM_FRIEND_UPDATE extends AionServerPacket {
 			writeD(f.getPlayerClass().getClassId());
 			writeC(f.getGender().getGenderId());
 			writeD(f.getMapId());
-			writeD(f.getLastOnlineTime()); // Date friend was last online as a Unix timestamp.
+			writeD(f.getStatus() == Status.ONLINE ? 0 : f.getLastOnlineEpochSeconds());
 			writeS(f.getNote());
 			writeC(f.getStatus().getId());
 		}
