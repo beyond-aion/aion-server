@@ -110,7 +110,7 @@
 					<gd_item id="188053702" name="Vasharti's Equipment Box" />
 				</gd_items>
 			</gd_rule>
-			<gd_rule rule_name="Vocolith Specials: Mythic Chests" base_chance="10" fixed_chance="true" max_drop_rule="2">
+			<gd_rule rule_name="Vocolith Specials: Mythic Chests" base_chance="100" fixed_chance="true" max_drop_rule="2">
 				<gd_maps>
 					<gd_map map_id="600100000" name="Levinshor" />
 				</gd_maps>

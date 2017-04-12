@@ -29,7 +29,7 @@ public class Easter extends PlayerCommand {
 
 		setSyntaxInfo("Type in .easter <id> to get your reward:", "[1] - (" + rewards[0][0] + " eggs) " + ChatUtil.item(rewards[0][1]),
 			"[2] - (" + rewards[1][0] + " eggs) " + " 5x " + ChatUtil.item(rewards[1][1]) + " or 5x " + ChatUtil.item(rewards[1][1] + 3),
-			"[3] - (" + rewards[2][0] + " eggs) " + " 5x " + ChatUtil.item(rewards[2][1]) + " or 5x " + ChatUtil.item(rewards[2][1] - 10),
+			"[3] - (" + rewards[2][0] + " eggs) " + " 5x " + ChatUtil.item(rewards[2][1]) + " or 5x " + ChatUtil.item(rewards[2][1] + 3),
 			"[4] - (" + rewards[3][0] + " eggs) " + " 50x " + ChatUtil.item(rewards[3][1]),
 			"[5] - (" + rewards[4][0] + " eggs) " + ChatUtil.item(rewards[4][1]), "[6] - (" + rewards[5][0] + " eggs) " + ChatUtil.item(rewards[5][1]),
 			"[7] - (" + rewards[6][0] + " eggs) " + ChatUtil.item(rewards[6][1]));
