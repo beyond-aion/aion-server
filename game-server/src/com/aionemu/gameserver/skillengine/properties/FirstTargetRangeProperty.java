@@ -30,28 +30,24 @@ public class FirstTargetRangeProperty {
 		if (firstTarget == null)
 			return false;
 
-		if (firstTarget.equals(effector)) {
+		if (firstTarget.equals(effector))
 			return true;
-		}
 
-		if (castState != CastState.CAST_START && !(effector instanceof Player)) { // NPCs don't cancel skills once started, could be abused -> no range or geo to check
+		if (castState != CastState.CAST_START && !(effector instanceof Player)) // NPCs don't cancel skills once started, could be abused -> no range or geo to check
 			return true;
-		}
 
 		// on end cast check add revision distance value
 		if (castState == CastState.CAST_END)
 			firstTargetRange += properties.getRevisionDistance();
 
 		// Add Weapon Range to distance
-		if (properties.isAddWeaponRange()) {
+		if (properties.isAddWeaponRange())
 			firstTargetRange += skill.getEffector().getGameStats().getAttackRange().getCurrent() / 1000f;
-		}
 
-		if (!PositionUtil.isInAttackRange(effector, firstTarget, firstTargetRange + 2)
-			&& !firstTarget.getEffectController().isInAnyAbnormalState(AbnormalState.CANT_MOVE_STATE)) {
-			if (effector instanceof Player) {
+		if (!firstTarget.getEffectController().isInAnyAbnormalState(AbnormalState.CANT_MOVE_STATE)
+			&& !PositionUtil.isInAttackRange(effector, firstTarget, firstTargetRange)) {
+			if (effector instanceof Player)
 				PacketSendUtility.sendPacket((Player) effector, SM_SYSTEM_MESSAGE.STR_ATTACK_TOO_FAR_FROM_TARGET());
-			}
 			return false;
 		}
 

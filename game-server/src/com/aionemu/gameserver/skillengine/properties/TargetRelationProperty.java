@@ -59,19 +59,11 @@ public class TargetRelationProperty {
 							} else {
 								sourcePlayer = (Player) source;
 							}
-
-							if (sourcePlayer.isInAlliance() && targetPlayer.isInAlliance()) {
-								if (!sourcePlayer.isEnemy(targetPlayer) && sourcePlayer.getPlayerAlliance().equals(targetPlayer.getPlayerAlliance())) {
-									continue;
-								}
-							} else if (sourcePlayer.isInGroup() && targetPlayer.isInGroup()) {
-								if (!sourcePlayer.isEnemy(targetPlayer)
-									&& sourcePlayer.getPlayerGroup().getTeamId() == targetPlayer.getPlayerGroup().getTeamId()) {
-									continue;
-								}
-							} else if (targetPlayer.equals(sourcePlayer)) {
+							if (targetPlayer.equals(sourcePlayer))
 								continue;
-							}
+							int teamId = sourcePlayer.getCurrentTeamId();
+							if (teamId > 0 && teamId == targetPlayer.getCurrentTeamId() && !sourcePlayer.isEnemy(targetPlayer))
+								continue;
 						}
 					}
 					iter.remove();

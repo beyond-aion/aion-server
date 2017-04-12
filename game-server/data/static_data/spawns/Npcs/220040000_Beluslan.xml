@@ -1356,9 +1356,6 @@
 			<spot x="2159.38" y="2628.58" z="617.848" h="54"/>
 		</spawn>
 		<!-- Bakarma Petmaster -->
-		<spawn npc_id="218957" respawn_time="300">
-		</spawn>
-		<!-- Bakarma Petmaster -->
 		<spawn npc_id="218958" respawn_time="300">
 			<spot x="1988.6" y="2321.69" z="574.0206" h="36"/>
 		</spawn>
@@ -4310,9 +4307,6 @@
 			<spot x="1964.48" y="590.05" z="357.03" h="61" walker_id="046CD911E395FC709A86A19C75FD36EBE1376DD8"/>
 		</spawn>
 		<!-- Iceghost Warrior -->
-		<spawn npc_id="213085" respawn_time="295">
-		</spawn>
-		<!-- Iceghost Warrior -->
 		<spawn npc_id="213084" respawn_time="295">
 			<spot x="1813.04" y="297.772" z="340.774" h="68"/>
 			<spot x="1819.53" y="313.031" z="340.816" h="88"/>
@@ -5023,9 +5017,6 @@
 			<spot x="1690.82" y="1370.56" z="323.875" h="53"/>
 			<spot x="1694.09" y="1411.19" z="324.336" h="31"/>
 		</spawn>
-		<!-- Mine Drudge -->
-		<spawn npc_id="213264" respawn_time="300">
-		</spawn>
 		<!-- Mine Escort -->
 		<spawn npc_id="213283" respawn_time="300">
 			<spot x="1503.81" y="1530.64" z="320.29" h="2"/>
@@ -5243,9 +5234,6 @@
 			<spot x="1601.92" y="1376.46" z="316.216" h="85"/>
 			<spot x="1618" y="1525.67" z="324.207" h="90"/>
 			<spot x="1688.23" y="1317.28" z="326.339" h="87"/>
-		</spawn>
-		<!-- Mine Peon -->
-		<spawn npc_id="213279" respawn_time="295">
 		</spawn>
 		<!-- Mine Peon -->
 		<spawn npc_id="213278" respawn_time="295">
@@ -8466,9 +8454,6 @@
 			<spot x="2951.42" y="2626.5" z="682.125" h="79"/>
 			<spot x="2952.83" y="2615.55" z="682.125" h="5"/>
 			<spot x="2954.32" y="2614.92" z="682.125" h="63"/>
-		</spawn>
-		<!-- Watcher Drake -->
-		<spawn npc_id="218945" respawn_time="300">
 		</spawn>
 		<!-- Watcher Drake -->
 		<spawn npc_id="218946" respawn_time="300">

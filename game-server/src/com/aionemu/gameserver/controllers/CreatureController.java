@@ -45,6 +45,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SKILL_CANCEL;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.item.ItemPacketService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
+import com.aionemu.gameserver.skillengine.effect.EffectType;
 import com.aionemu.gameserver.skillengine.model.ChargeSkill;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.Skill;
@@ -240,6 +241,17 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 	}
 
 	private void applyEffectOnCritical(Player attacker, int skillId) {
+		if (getOwner().getEffectController().isUnderShield())
+			return;
+
+		if (skillId != 0) {
+			SkillTemplate skillTemplate = DataManager.SKILL_DATA.getSkillTemplate(skillId);
+			if (skillTemplate.getType() == SkillType.MAGICAL) // magical skills do not stun
+				return;
+			if (skillTemplate.hasAnyEffect(true, EffectType.PULLED)) // pull does not trigger stumble
+				return;
+		}
+
 		int id = 0;
 		ItemGroup mainHandWeaponType = attacker.getEquipment().getMainHandWeaponType();
 		if (mainHandWeaponType != null) {
@@ -255,13 +267,6 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 		}
 
 		if (id == 0)
-			return;
-
-		if (getOwner().getEffectController().isUnderShield())
-			return;
-
-		// magical skills do not stun
-		if (skillId != 0 && DataManager.SKILL_DATA.getSkillTemplate(skillId).getType() == SkillType.MAGICAL)
 			return;
 
 		SkillTemplate template = DataManager.SKILL_DATA.getSkillTemplate(id);

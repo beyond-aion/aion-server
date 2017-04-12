@@ -94,7 +94,7 @@ public abstract class EffectTemplate {
 	protected int delta;
 
 	@XmlTransient
-	protected EffectType effectType = null;
+	protected EffectType effectType;
 
 	/**
 	 * @return the value
@@ -651,8 +651,8 @@ public abstract class EffectTemplate {
 		return toReturn;
 	}
 
-	void afterUnmarshal(Unmarshaller u, Object parent) {
-		String effectName = this.getClass().getName().replaceAll("com.aionemu.gameserver.skillengine.effect.", "").replaceAll("Effect", "").toUpperCase();
+	protected void afterUnmarshal(Unmarshaller u, Object parent) {
+		String effectName = getClass().getSimpleName().replaceAll("Effect", "").toUpperCase();
 		try {
 			effectType = EffectType.valueOf(effectName);
 		} catch (Exception e) {

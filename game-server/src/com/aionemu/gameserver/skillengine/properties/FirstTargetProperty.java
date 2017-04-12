@@ -103,8 +103,6 @@ public class FirstTargetProperty {
 						PacketSendUtility.sendPacket((Player) skill.getEffector(), SM_SYSTEM_MESSAGE.STR_SKILL_TARGET_IS_NOT_VALID());
 						return false;
 					}
-
-					skill.setFirstTargetRangeCheck(false);
 				}
 
 				if (relation != TargetRelationAttribute.ENEMY && !isTargetAllowed(skill)) {

@@ -67,8 +67,7 @@ public class Reload extends AdminCommand {
 			sendInfo(admin, DataManager.QUEST_DATA.size() + " quest templates loaded (" + QuestEngine.getInstance().getQuestHandlerCount() + " handlers).");
 		} else if (params[0].equalsIgnoreCase("skills")) {
 			File xml = new File("./data/static_data/skills/skill_templates.xml");
-			SkillData data = JAXBUtil.deserialize(xml, SkillData.class, "./data/static_data/static_data.xsd");
-			DataManager.SKILL_DATA.setSkillTemplates(data.getSkillTemplates());
+			DataManager.SKILL_DATA = JAXBUtil.deserialize(xml, SkillData.class, "./data/static_data/static_data.xsd");
 			sendInfo(admin, DataManager.SKILL_DATA.size() + " skills loaded.");
 		} else if (params[0].equalsIgnoreCase("npcskills")) {
 			List<NpcSkillTemplates> templates = new ArrayList<>();

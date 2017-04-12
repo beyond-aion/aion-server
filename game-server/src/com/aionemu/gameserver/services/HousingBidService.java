@@ -104,17 +104,13 @@ public class HousingBidService extends AbstractCronTask {
 	@Override
 	protected void postInit() {
 		loadBidData();
-		if (HousingConfig.FILL_HOUSE_BIDS_AUTO) {
-			log.info("HousingBidService: auction auto filling enabled.");
-			int added = fillBidData();
-			log.info("HousingBidService: added " + added + " new house auctions.");
-		}
 		ServerVariablesDAO dao = DAOManager.getDAO(ServerVariablesDAO.class);
 		timeProlonged = dao.load("auctionProlonged");
 		log.info("HousingBidService loaded. Minutes till start: " + getMinutesTillAuction());
 	}
 
-	private int fillBidData() {
+	public void fillBidData() {
+		log.info("HousingBidService: auction auto filling enabled.");
 		int count = 0;
 		List<House> houses = HousingService.getInstance().getCustomHouses();
 		while (!houses.isEmpty()) {
@@ -127,7 +123,7 @@ public class HousingBidService extends AbstractCronTask {
 			if (addHouseToAuction(house, house.getDefaultAuctionPrice()))
 				count++;
 		}
-		return count;
+		log.info("HousingBidService: added " + count + " new house auctions.");
 	}
 
 	private boolean checkAutoFillingLimits(Race race, HouseType type) {

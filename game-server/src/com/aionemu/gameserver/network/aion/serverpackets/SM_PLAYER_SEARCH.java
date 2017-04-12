@@ -2,6 +2,7 @@ package com.aionemu.gameserver.network.aion.serverpackets;
 
 import java.util.List;
 
+import com.aionemu.gameserver.model.gameobjects.player.DeniedStatus;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
@@ -37,8 +38,8 @@ public class SM_PLAYER_SEARCH extends AionServerPacket {
 			writeC(player.getPlayerClass().getClassId());
 			writeC(player.getGender().getGenderId());
 			writeC(player.getLevel());
-			writeC(player.isInTeam() ? 3 : player.isLookingForGroup() ? 2 : 0);
-			writeS(player.getName(), 56);
+			writeC(player.getPlayerSettings().isInDeniedStatus(DeniedStatus.GROUP) ? 1 : player.isInTeam() ? 3 : player.isLookingForGroup() ? 2 : 0);
+			writeS(player.getName(true), 56);
 		}
 	}
 }

@@ -28,6 +28,7 @@
 		<!-- Special Lab Security Guard -->
 		<spawn npc_id="212171">
 			<spot x="334.012" y="219.472" z="144.15" h="39"/>
+			<spot x="315.78" y="230.19" z="144.14403" h="2" walker_id="4730AA2DDAE9042F39FD053CB2BEC2E2694BAA37"/>
 		</spawn>
 		<!-- Research Center Exit -->
 		<spawn npc_id="700229">
@@ -220,6 +221,7 @@
 		</spawn>
 		<!-- Special Lab Fighter -->
 		<spawn npc_id="212170">
+			<spot x="315.78" y="230.19" z="144.14403" h="2" walker_id="4730AA2DDAE9042F39FD053CB2BEC2E2694BAA37"/>
 		</spawn>
 		<!-- Aetherogenetics Lab Exit -->
 		<spawn npc_id="730035">

@@ -1,7 +1,5 @@
 package com.aionemu.gameserver.model.skill;
 
-import java.util.Iterator;
-
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.PlayerClass;
@@ -18,7 +16,6 @@ import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.services.TribeRelationService;
 import com.aionemu.gameserver.skillengine.effect.AbnormalState;
 import com.aionemu.gameserver.skillengine.effect.EffectTemplate;
-import com.aionemu.gameserver.skillengine.effect.EffectType;
 import com.aionemu.gameserver.skillengine.effect.SignetBurstEffect;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
@@ -119,10 +116,9 @@ public class NpcSkillTemplateEntry extends NpcSkillEntry {
 						if (target.getLifeStats().isAlreadyDead() || target.getLifeStats().isAboutToDie())
 							continue;
 						if (creature.canSee(target) && target.getEffectController().hasAbnormalEffect(condTemp.getSkillId())
-								&& PositionUtil.isInRange(creature, target, condTemp.getRange())
-								&& GeoService.getInstance().canSee(creature, target)) {
-								creature.setTarget(target);
-								return true;
+							&& PositionUtil.isInRange(creature, target, condTemp.getRange()) && GeoService.getInstance().canSee(creature, target)) {
+							creature.setTarget(target);
+							return true;
 						}
 					}
 				}
@@ -134,11 +130,10 @@ public class NpcSkillTemplateEntry extends NpcSkillEntry {
 						if (target.getLifeStats().isAlreadyDead() || target.getLifeStats().isAboutToDie())
 							continue;
 						if ((TribeRelationService.isSupport(creature, target) || TribeRelationService.isFriend(creature, target))
-								&& target.getLifeStats().getHpPercentage() <= condTemp.getHpBelow() && creature.canSee(target)
-								&& PositionUtil.isInRange(creature, target, condTemp.getRange())
-								&& GeoService.getInstance().canSee(creature, target)) {
-								creature.setTarget(target);
-								return true;
+							&& target.getLifeStats().getHpPercentage() <= condTemp.getHpBelow() && creature.canSee(target)
+							&& PositionUtil.isInRange(creature, target, condTemp.getRange()) && GeoService.getInstance().canSee(creature, target)) {
+							creature.setTarget(target);
+							return true;
 						}
 					}
 				}
@@ -213,15 +208,9 @@ public class NpcSkillTemplateEntry extends NpcSkillEntry {
 			case TARGET_HAS_CARVED_SIGNET_LEVEL_V:
 				return hasCarvedSignet(curTarget, template.getSkillTemplate(), 4);
 			case NPC_IS_ALIVE:
-				Iterator<VisibleObject> iter = creature.getKnownList().getKnownObjects().values().iterator();
-				while (iter.hasNext()) {
-					VisibleObject next = iter.next();
-					if (next instanceof Npc){
-						if (((Npc) next).getNpcId() == condTemp.getNpcId()) {
-							return !((Npc) next).getLifeStats().isAlreadyDead();
-						}
-					}
-				}
+				VisibleObject npc = creature.getKnownList().findObject(condTemp.getNpcId());
+				if (npc instanceof Npc)
+					return !((Npc) npc).getLifeStats().isAlreadyDead();
 				return false;
 			default:
 				return true;
@@ -229,18 +218,16 @@ public class NpcSkillTemplateEntry extends NpcSkillEntry {
 	}
 
 	private boolean hasCarvedSignet(VisibleObject curTarget, SkillTemplate skillTemp, int signetLvl) {
-		if (curTarget instanceof Creature
-				&& !((Creature) curTarget).getLifeStats().isAlreadyDead() && !((Creature) curTarget).getLifeStats().isAboutToDie()) {
-			if (skillTemp != null && skillTemp.getEffects().getEffectTypes().contains(EffectType.SIGNETBURST)) {
-				for (EffectTemplate effectTemp : skillTemp.getEffects().getEffects()) {
-					if (effectTemp instanceof SignetBurstEffect) {
-						SignetBurstEffect signetEffect = (SignetBurstEffect) effectTemp;
-						String signet = signetEffect.getSignet();
-						Creature target = (Creature) curTarget;
-						Effect signetEffectOnTarget = target.getEffectController().getAbnormalEffect(signet);
-						if (signetEffectOnTarget != null && signetEffectOnTarget.getSkillLevel() > signetLvl) {
-							return true;
-						}
+		if (skillTemp != null && curTarget instanceof Creature && !((Creature) curTarget).getLifeStats().isAlreadyDead()
+			&& !((Creature) curTarget).getLifeStats().isAboutToDie()) {
+			for (EffectTemplate effectTemp : skillTemp.getEffects().getEffects()) {
+				if (effectTemp instanceof SignetBurstEffect) {
+					SignetBurstEffect signetEffect = (SignetBurstEffect) effectTemp;
+					String signet = signetEffect.getSignet();
+					Creature target = (Creature) curTarget;
+					Effect signetEffectOnTarget = target.getEffectController().getAbnormalEffect(signet);
+					if (signetEffectOnTarget != null && signetEffectOnTarget.getSkillLevel() > signetLvl) {
+						return true;
 					}
 				}
 			}
@@ -273,6 +260,7 @@ public class NpcSkillTemplateEntry extends NpcSkillEntry {
 			case SPAWN_NPC:
 				if (condTemp.getDelay() > 0) {
 					ThreadPoolManager.getInstance().schedule(new Runnable() {
+
 						@Override
 						public void run() {
 							if (npc == null || npc.getLifeStats().isAlreadyDead() || npc.getLifeStats().isAboutToDie()) {
@@ -283,14 +271,15 @@ public class NpcSkillTemplateEntry extends NpcSkillEntry {
 								float x1 = 0;
 								float y1 = 0;
 								if (condTemp.getMinDistance() > 0) {
-									float direction = condTemp.isRandomDirection() ? Rnd.get(0, 199)/100f : condTemp.getDirection() / 100f;
+									float direction = condTemp.isRandomDirection() ? Rnd.get(0, 199) / 100f : condTemp.getDirection() / 100f;
 									double radian = Math.toRadians(PositionUtil.convertHeadingToAngle(npc.getHeading()));
-									float distance = condTemp.getMaxDistance() > 0 ? Rnd.get(condTemp.getMinDistance(), condTemp.getMaxDistance()) : condTemp.getMinDistance();
+									float distance = condTemp.getMaxDistance() > 0 ? Rnd.get(condTemp.getMinDistance(), condTemp.getMaxDistance())
+										: condTemp.getMinDistance();
 									x1 = (float) (Math.cos(Math.PI * direction + radian) * distance);
 									y1 = (float) (Math.sin(Math.PI * direction + radian) * distance);
 								}
-								SpawnTemplate template = SpawnEngine.addNewSingleTimeSpawn(npc.getWorldId(), condTemp.getNpcId(),
-									npc.getX() + x1, npc.getY() + y1, npc.getZ(), npc.getHeading());
+								SpawnTemplate template = SpawnEngine.addNewSingleTimeSpawn(npc.getWorldId(), condTemp.getNpcId(), npc.getX() + x1, npc.getY() + y1,
+									npc.getZ(), npc.getHeading());
 								if (template != null) {
 									template.setCreatorId(npc.getObjectId());
 									SpawnEngine.spawnObject(template, npc.getInstanceId());
@@ -309,14 +298,15 @@ public class NpcSkillTemplateEntry extends NpcSkillEntry {
 						float x1 = 0;
 						float y1 = 0;
 						if (condTemp.getMinDistance() > 0) {
-							float direction = condTemp.isRandomDirection() ? Rnd.get(0, 199)/100f : condTemp.getDirection() / 100f;
+							float direction = condTemp.isRandomDirection() ? Rnd.get(0, 199) / 100f : condTemp.getDirection() / 100f;
 							double radian = Math.toRadians(PositionUtil.convertHeadingToAngle(npc.getHeading()));
-							float distance = condTemp.getMaxDistance() > 0 ? Rnd.get(condTemp.getMinDistance(), condTemp.getMaxDistance()) : condTemp.getMinDistance();
+							float distance = condTemp.getMaxDistance() > 0 ? Rnd.get(condTemp.getMinDistance(), condTemp.getMaxDistance())
+								: condTemp.getMinDistance();
 							x1 = (float) (Math.cos(Math.PI * direction + radian) * distance);
 							y1 = (float) (Math.sin(Math.PI * direction + radian) * distance);
 						}
-						SpawnTemplate template = SpawnEngine.addNewSingleTimeSpawn(npc.getWorldId(), condTemp.getNpcId(),
-							npc.getX() + x1, npc.getY() + y1, npc.getZ(), npc.getHeading());
+						SpawnTemplate template = SpawnEngine.addNewSingleTimeSpawn(npc.getWorldId(), condTemp.getNpcId(), npc.getX() + x1, npc.getY() + y1,
+							npc.getZ(), npc.getHeading());
 						if (template != null) {
 							template.setCreatorId(npc.getObjectId());
 							SpawnEngine.spawnObject(template, npc.getInstanceId());
@@ -328,7 +318,7 @@ public class NpcSkillTemplateEntry extends NpcSkillEntry {
 				break;
 		}
 	}
-	
+
 	@Override
 	public NpcSkillConditionTemplate getConditionTemplate() {
 		return template.getConditionTemplate();
@@ -346,26 +336,27 @@ public class NpcSkillTemplateEntry extends NpcSkillEntry {
 	public int getNextSkillTime() {
 		return template.getNextSkillTime();
 	}
-	
+
 	@Override
 	public boolean hasChain() {
 		return template.getNextChainId() > 0;
 	}
-	
+
 	@Override
 	public int getNextChainId() {
 		return template.getNextChainId();
 	}
-	
+
 	@Override
 	public int getChainId() {
 		return template.getChainId();
 	}
-	
+
+	@Override
 	public NpcSkillTemplate getTemplate() {
 		return template;
 	}
-	
+
 	@Override
 	public boolean canUseNextChain(Npc owner) {
 		if (owner != null && (System.currentTimeMillis() - owner.getGameStats().getLastSkillTime()) > template.getMaxChainTime())

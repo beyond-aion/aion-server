@@ -37,7 +37,6 @@ public class TargetRangeProperty {
 		TargetRangeAttribute value = properties.getTargetType();
 		int distanceToTarget = properties.getTargetDistance();
 		int effectiveRange = skillEffector instanceof Trap ? skillEffector.getGameStats().getAttackRange().getCurrent() : properties.getEffectiveRange();
-		int altitude = properties.getEffectiveAltitude() != 0 ? properties.getEffectiveAltitude() : 1;
 		int ineffectiveRange = properties.getIneffectiveRange();
 
 		final List<Creature> effectedList = skill.getEffectedList();
@@ -46,6 +45,7 @@ public class TargetRangeProperty {
 			case ONLYONE:
 				break;
 			case AREA:
+				int altitude = properties.getEffectiveAltitude() != 0 ? properties.getEffectiveAltitude() : 1;
 				final Creature firstTarget = skill.getFirstTarget();
 
 				if (firstTarget == null) {
@@ -80,6 +80,8 @@ public class TargetRangeProperty {
 							skill.getEffectedList().add(creature);
 						}
 					} else if (properties.getEffectiveAngle() > 0) {
+						if (nextCreature.equals(skillEffector))
+							continue;
 						// for target_range_area_type = firestorm
 						if (properties.getEffectiveAngle() < 360) {
 							float angle = properties.getEffectiveAngle() / 2f; // e.g. 60 degrees (always positive) = 30 degrees in positive and negative direction
@@ -98,9 +100,6 @@ public class TargetRangeProperty {
 						}
 						if (!PositionUtil.isInRange(skillEffector, nextCreature, properties.getEffectiveDist()))
 							continue;
-						if (nextCreature == skillEffector) {
-							continue;
-						}
 						skill.getEffectedList().add(creature);
 					} else if (properties.getEffectiveDist() > 0) {
 						// Lightning bolt
@@ -111,11 +110,9 @@ public class TargetRangeProperty {
 								continue;
 							skill.getEffectedList().add(creature);
 						}
-					} else if (PositionUtil.isInRange(firstTarget, nextCreature,
-						effectiveRange + firstTarget.getObjectTemplate().getBoundRadius().getCollision())) {
+					} else if (PositionUtil.isInRange(firstTarget, nextCreature, effectiveRange, false)) {
 						// for target_range_area_type = fireball
-						if (ineffectiveRange > 0
-							&& PositionUtil.isInRange(firstTarget, nextCreature, ineffectiveRange + firstTarget.getObjectTemplate().getBoundRadius().getCollision()))
+						if (ineffectiveRange > 0 && PositionUtil.isInRange(firstTarget, nextCreature, ineffectiveRange, false))
 							continue;
 						if (!skill.shouldAffectTarget(nextCreature))
 							continue;
@@ -126,13 +123,17 @@ public class TargetRangeProperty {
 				break;
 			case PARTY:
 			case PARTY_WITHPET:
+				// if only firsttarget will be affected (e.g. Bodyguard), we don't need to evaluate the whole group
+				if (properties.getTargetMaxCount() == 1 && properties.getFirstTarget() != FirstTargetAttribute.POINT)
+					break;
 				if (skillEffector instanceof Player) {
 					final Player effector = (Player) skillEffector;
 					TemporaryPlayerTeam<? extends TeamMember<Player>> team;
-					if (value == TargetRangeAttribute.PARTY_WITHPET)
+					if (value == TargetRangeAttribute.PARTY_WITHPET) {
 						team = effector.getCurrentTeam(); // group or whole alliance
-					else
+					} else {
 						team = effector.getCurrentGroup(); // group or alliance group (max 6 targets)
+					}
 					if (team != null) {
 						effectedList.clear();
 						for (Player member : team.getMembers()) {
@@ -140,7 +141,7 @@ public class TargetRangeProperty {
 								continue;
 							if (!checkCommonRequirements(member, skill))
 								continue;
-							if (PositionUtil.isInRange(effector, member, effectiveRange + 1)) {
+							if (PositionUtil.isInRange(effector, member, effectiveRange, false)) {
 								effectedList.add(member);
 								if (value == TargetRangeAttribute.PARTY_WITHPET) {
 									Summon aMemberSummon = member.getSummon();
@@ -163,10 +164,8 @@ public class TargetRangeProperty {
 					if (nextCreature instanceof Trap && !((Trap) nextCreature).getMaster().isEnemy(skillEffector))
 						continue;
 
-					if (PositionUtil.getDistance(skill.getX(), skill.getY(), skill.getZ(), nextCreature.getX(), nextCreature.getY(),
-						nextCreature.getZ()) <= distanceToTarget + 1) {
+					if (PositionUtil.isInRange(nextCreature, skill.getX(), skill.getY(), skill.getZ(), distanceToTarget + 1))
 						effectedList.add(creature);
-					}
 				}
 				break;
 		}
