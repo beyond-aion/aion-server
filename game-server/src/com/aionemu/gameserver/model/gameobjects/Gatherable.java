@@ -17,13 +17,8 @@ public class Gatherable extends VisibleObject {
 	}
 
 	@Override
-	public String getName() {
-		return objectTemplate.getName();
-	}
-
-	@Override
 	public GatherableTemplate getObjectTemplate() {
-		return (GatherableTemplate) objectTemplate;
+		return (GatherableTemplate) super.getObjectTemplate();
 	}
 
 	@Override

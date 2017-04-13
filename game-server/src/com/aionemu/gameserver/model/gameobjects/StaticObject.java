@@ -14,9 +14,4 @@ public class StaticObject extends VisibleObject {
 		super(objectId, controller, spawnTemplate, objectTemplate, new WorldPosition(spawnTemplate.getWorldId()));
 		controller.setOwner(this);
 	}
-
-	@Override
-	public String getName() {
-		return objectTemplate.getName();
-	}
 }

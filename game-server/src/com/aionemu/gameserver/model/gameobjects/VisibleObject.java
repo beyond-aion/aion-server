@@ -21,7 +21,7 @@ import com.aionemu.gameserver.world.knownlist.KnownList;
  */
 public abstract class VisibleObject extends AionObject {
 
-	protected VisibleObjectTemplate objectTemplate;
+	private final VisibleObjectTemplate objectTemplate;
 
 	/**
 	 * Constructor.
@@ -62,6 +62,11 @@ public abstract class VisibleObject extends AionObject {
 	 * Spawn template of this visibleObject. .
 	 */
 	private SpawnTemplate spawn;
+
+	@Override
+	public String getName() {
+		return objectTemplate.getName();
+	}
 
 	public int getInstanceId() {
 		return getPosition().getInstanceId();
@@ -233,14 +238,6 @@ public abstract class VisibleObject extends AionObject {
 	 */
 	public VisibleObjectTemplate getObjectTemplate() {
 		return objectTemplate;
-	}
-
-	/**
-	 * @param objectTemplate
-	 *          the objectTemplate to set
-	 */
-	public void setObjectTemplate(VisibleObjectTemplate objectTemplate) {
-		this.objectTemplate = objectTemplate;
 	}
 
 	/**

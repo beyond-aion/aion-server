@@ -105,7 +105,7 @@ public class SummonedObject<T extends VisibleObject> extends Npc {
 	@Override
 	public TribeClass getTribe() {
 		if (getMaster() == null)
-			return ((NpcTemplate) objectTemplate).getTribe();
+			return getObjectTemplate().getTribe();
 		return getMaster().getTribe();
 	}
 
