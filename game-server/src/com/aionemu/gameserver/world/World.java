@@ -277,7 +277,8 @@ public class World {
 
 		MapRegion newRegion = oldRegion.getParent().getRegion(newX, newY, newZ);
 		if (newRegion == null) {
-			log.warn("New MapRegion doesn't exist for coordinates: Map {}, X {}, Y {}, Z {}", object.getWorldId(), newX, newY, newZ, new Throwable());
+			log.warn("New MapRegion for {} doesn't exist at coordinates: Map {}, X {}, Y {}, Z {}", object, object.getWorldId(), newX, newY, newZ,
+				new Throwable());
 			if (object instanceof Creature)
 				((Creature) object).getMoveController().abortMove();
 			if (object instanceof Player) {
