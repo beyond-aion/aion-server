@@ -162,7 +162,7 @@ public class Npc extends Creature {
 		if (transformTribe != null) {
 			return transformTribe;
 		}
-		return this.getObjectTemplate().getTribe();
+		return getObjectTemplate().getTribe();
 	}
 
 	@Override

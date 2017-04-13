@@ -1,7 +1,5 @@
 package com.aionemu.gameserver.model.gameobjects;
 
-import org.apache.commons.lang3.StringUtils;
-
 import com.aionemu.gameserver.controllers.NpcController;
 import com.aionemu.gameserver.model.CreatureType;
 import com.aionemu.gameserver.model.Race;
@@ -60,7 +58,7 @@ public class SummonedObject<T extends VisibleObject> extends Npc {
 
 	@Override
 	public String getMasterName() {
-		return creator != null ? creator.getName() : StringUtils.EMPTY;
+		return creator != null ? creator.getName() : super.getMasterName();
 	}
 
 	@Override
@@ -76,7 +74,7 @@ public class SummonedObject<T extends VisibleObject> extends Npc {
 	}
 
 	@Override
-	public Creature getMaster() {
+	public final Creature getMaster() {
 		if (creator instanceof Creature)
 			return (Creature) getCreator();
 		return this;
@@ -89,24 +87,30 @@ public class SummonedObject<T extends VisibleObject> extends Npc {
 
 	@Override
 	public boolean isEnemy(Creature creature) {
-		return getMaster() != null ? getMaster().isEnemy(creature) : false;
+		if (creator instanceof Creature)
+			return ((Creature) creator).isEnemyFrom(creature);
+		return super.isEnemyFrom(creature);
 	}
 
 	@Override
 	public boolean isEnemyFrom(Npc npc) {
-		return getMaster() != null ? getMaster().isEnemyFrom(npc) : false;
+		if (creator instanceof Creature)
+			return ((Creature) creator).isEnemyFrom(npc);
+		return super.isEnemyFrom(npc);
 	}
 
 	@Override
 	public boolean isEnemyFrom(Player player) {
-		return getMaster() != null ? getMaster().isEnemyFrom(player) : false;
+		if (creator instanceof Creature)
+			return ((Creature) creator).isEnemyFrom(player);
+		return super.isEnemyFrom(player);
 	}
 
 	@Override
 	public TribeClass getTribe() {
-		if (getMaster() == null)
-			return getObjectTemplate().getTribe();
-		return getMaster().getTribe();
+		if (creator instanceof Creature)
+			return ((Creature) creator).getTribe();
+		return super.getTribe();
 	}
 
 	@Override

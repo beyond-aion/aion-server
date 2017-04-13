@@ -2,6 +2,7 @@ package com.aionemu.gameserver.model.gameobjects;
 
 import com.aionemu.gameserver.controllers.NpcController;
 import com.aionemu.gameserver.model.CreatureType;
+import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.house.House;
 import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
@@ -30,14 +31,23 @@ public class SummonedHouseNpc extends SummonedObject<House> {
 	}
 
 	@Override
-	public CreatureType getType(Creature creature) {
-		return CreatureType.FRIEND;
+	public boolean isEnemy(Creature creature) {
+		return false;
 	}
 
 	@Override
-	public Creature getMaster() {
-		// Not interesting, player may be offline
-		return null;
+	public boolean isEnemyFrom(Npc npc) {
+		return false;
+	}
+
+	@Override
+	public boolean isEnemyFrom(Player player) {
+		return false;
+	}
+
+	@Override
+	public CreatureType getType(Creature creature) {
+		return CreatureType.FRIEND;
 	}
 
 }

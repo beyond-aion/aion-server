@@ -1,21 +1,22 @@
 package com.aionemu.gameserver.model.gameobjects;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.function.Consumer;
+import java.util.concurrent.ConcurrentHashMap;
+
+import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.controllers.NpcController;
 import com.aionemu.gameserver.model.CreatureType;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.team.legion.Legion;
 import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.model.templates.stats.KiskStatsTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_KISK_UPDATE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
+import com.aionemu.gameserver.services.LegionService;
 import com.aionemu.gameserver.services.SerialKillerService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.World;
@@ -25,7 +26,8 @@ import com.aionemu.gameserver.world.World;
  */
 public class Kisk extends SummonedObject<Player> {
 
-	private final Legion ownerLegion;
+	private final int creatorId;
+	private final int legionId;
 	private final Race ownerRace;
 
 	private KiskStatsTemplate kiskStatsTemplate;
@@ -51,11 +53,17 @@ public class Kisk extends SummonedObject<Player> {
 		if (this.kiskStatsTemplate == null)
 			this.kiskStatsTemplate = new KiskStatsTemplate();
 
-		this.kiskMemberIds = new HashSet<>();
+		this.kiskMemberIds = ConcurrentHashMap.newKeySet();
 		this.remainingResurrections = this.kiskStatsTemplate.getMaxResurrects();
 		this.kiskSpawnTime = System.currentTimeMillis() / 1000;
-		this.ownerLegion = owner.getLegion();
+		this.creatorId = owner.getObjectId();
+		this.legionId = owner.getLegion() == null ? 0 : owner.getLegion().getLegionId();
 		this.ownerRace = owner.getRace();
+	}
+
+	@Override
+	public int getCreatorId() {
+		return creatorId;
 	}
 
 	@Override
@@ -107,9 +115,6 @@ public class Kisk extends SummonedObject<Player> {
 		return currentMemberList;
 	}
 
-	/**
-	 * @return
-	 */
 	public int getCurrentMemberCount() {
 		return kiskMemberIds.size();
 	}
@@ -118,30 +123,18 @@ public class Kisk extends SummonedObject<Player> {
 		return kiskMemberIds;
 	}
 
-	/**
-	 * @return
-	 */
 	public int getMaxMembers() {
 		return kiskStatsTemplate.getMaxMembers();
 	}
 
-	/**
-	 * @return
-	 */
 	public int getRemainingResurrects() {
 		return remainingResurrections;
 	}
 
-	/**
-	 * @return
-	 */
 	public int getMaxRessurects() {
 		return kiskStatsTemplate.getMaxResurrects();
 	}
 
-	/**
-	 * @return
-	 */
 	public int getRemainingLifetime() {
 		long timeElapsed = (System.currentTimeMillis() / 1000) - kiskSpawnTime;
 		int timeRemaining = (int) (KISK_LIFETIME_IN_SEC - timeElapsed);
@@ -149,56 +142,51 @@ public class Kisk extends SummonedObject<Player> {
 	}
 
 	/**
-	 * @param player
-	 * @return
+	 * @return True if the player may bind to this kisk
 	 */
 	public boolean canBind(Player player) {
-		if (!player.equals(getCreator())) {
-			// Check if they fit the usemask
-			switch (getUseMask()) {
-				case 0:
-				case 1: // Race
-					if (ownerRace != player.getRace())
-						return false;
-					break;
-
-				case 2: // Legion
-					if (ownerLegion == null || !ownerLegion.isMember(player.getObjectId()))
-						return false;
-					break;
-				case 3: // Solo
-					return false; // Already Checked Name
-
-				case 4: // Group (PlayerGroup or PlayerAllianceGroup)
-					if (!player.isInTeam() || !player.getCurrentGroup().hasMember(getCreatorId()))
-						return false;
-					break;
-				case 5: // Alliance
-					if (!player.isInTeam() || (player.isInAlliance() && !player.getPlayerAlliance().hasMember(getCreatorId()))
-						|| (player.isInGroup() && !player.getPlayerGroup().hasMember(getCreatorId())))
-						return false;
-					break;
-
-				default:
-					return false;
-			}
-		}
-
-		if (SerialKillerService.getInstance().isRestrictDynamicBindstone(player)) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_REGISTER_BINDSTONE_NOT_BINDSTONE());
-			return false;
-		}
-
 		if (getCurrentMemberCount() >= getMaxMembers())
 			return false;
 
-		return true;
+		return isUseAllowed(player);
+	}
+
+	private boolean isUseAllowed(Player player) {
+		if (SerialKillerService.getInstance().isRestrictDynamicBindstone(player))
+			return false;
+
+		switch (getUseMask()) {
+			case 0: // Test item (no restrictions)
+				return true;
+			case 1: // Race
+				if (ownerRace == player.getRace())
+					return true;
+				break;
+			case 2: // Legion
+				if (player.getObjectId() == getCreatorId() || legionId != 0 && LegionService.getInstance().getLegion(legionId).isMember(player.getObjectId()))
+					return true;
+				break;
+			case 3: // Solo
+				return player.getObjectId() == getCreatorId();
+			case 4: // Group (PlayerGroup or PlayerAllianceGroup)
+				if (player.getObjectId() == getCreatorId() || player.isInTeam() && player.getCurrentGroup().hasMember(getCreatorId()))
+					return true;
+				break;
+			case 5: // Alliance (PlayerGroup or PlayerAlliance)
+				if (player.getObjectId() == getCreatorId() || player.isInTeam() && player.getCurrentTeam().hasMember(getCreatorId()))
+					return true;
+				break;
+			default:
+				LoggerFactory.getLogger(Kisk.class).warn("Unhandled UseMask " + getUseMask() + " for Kisk " + getNpcId());
+		}
+
+		return false;
 	}
 
 	/**
 	 * @param player
 	 */
-	public synchronized void addPlayer(Player player) {
+	public void addPlayer(Player player) {
 		if (kiskMemberIds.add(player.getObjectId())) {
 			broadcastKiskUpdate();
 		} else {
@@ -210,7 +198,7 @@ public class Kisk extends SummonedObject<Player> {
 	/**
 	 * @param player
 	 */
-	public synchronized void removePlayer(Player player) {
+	public void removePlayer(Player player) {
 		player.setKisk(null);
 		if (kiskMemberIds.remove(player.getObjectId()))
 			broadcastKiskUpdate();
@@ -226,17 +214,8 @@ public class Kisk extends SummonedObject<Player> {
 				PacketSendUtility.sendPacket(member, new SM_KISK_UPDATE(this));
 		}
 
-		final Kisk kisk = this;
 		// all players having the same race in knownlist
-		getKnownList().forEachPlayer(new Consumer<Player>() {
-
-			@Override
-			public void accept(Player object) {
-				// Logic to prevent enemy race from knowing kisk information.
-				if (object.getRace() == ownerRace)
-					PacketSendUtility.sendPacket(object, new SM_KISK_UPDATE(kisk));
-			}
-		});
+		PacketSendUtility.broadcastPacket(this, new SM_KISK_UPDATE(this), player -> player.getRace() == ownerRace);
 	}
 
 	/**
@@ -244,8 +223,7 @@ public class Kisk extends SummonedObject<Player> {
 	 */
 	public void broadcastPacket(SM_SYSTEM_MESSAGE message) {
 		for (Player member : getCurrentMemberList()) {
-			if (member != null)
-				PacketSendUtility.sendPacket(member, message);
+			PacketSendUtility.sendPacket(member, message);
 		}
 	}
 
