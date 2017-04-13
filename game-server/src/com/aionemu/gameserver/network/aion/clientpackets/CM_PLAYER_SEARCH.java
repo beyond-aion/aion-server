@@ -78,6 +78,8 @@ public class CM_PLAYER_SEARCH extends AionClientPacket {
 				continue;
 			if (region > 0 && player.getWorldId() != region)
 				continue;
+			if (player.equals(activePlayer))
+				continue;
 
 			matches.add(player);
 
