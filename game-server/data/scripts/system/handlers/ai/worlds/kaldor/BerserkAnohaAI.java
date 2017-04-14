@@ -64,7 +64,7 @@ public class BerserkAnohaAI extends AggressiveNpcAI {
 		spawn(occupier == SiegeRace.ASMODIANS ? 804594 : 804595, 785.4833f, 458.4128f, 143.7177f, (byte) 30); // Commander Anoha
 		// Legion Rewards
 		int legionId = SiegeService.getInstance().getFortress(7011).getLegionId();
-		int brigadeId = LegionService.getInstance().getLegionBGeneral(legionId);
+		int brigadeId = LegionService.getInstance().getBrigadeGeneralOfLegion(legionId);
 		PlayerCommonData pcd = DAOManager.getDAO(PlayerDAO.class).loadPlayerCommonData(brigadeId);
 		// TODO: Refactore this!
 		sendMail(pcd, 188053308, 20); // Illusion Godstone Bundle

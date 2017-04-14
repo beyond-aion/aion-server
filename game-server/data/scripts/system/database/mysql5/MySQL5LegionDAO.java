@@ -388,8 +388,9 @@ public class MySQL5LegionDAO extends LegionDAO {
 			@Override
 			public void handleRead(ResultSet resultSet) throws SQLException {
 				while (resultSet.next()) {
-					legionEmblem.setEmblem(resultSet.getByte("emblem_id"), resultSet.getByte("color_a"), resultSet.getByte("color_r"), resultSet.getByte("color_g"),
-						resultSet.getByte("color_b"), LegionEmblemType.valueOf(resultSet.getString("emblem_type")), resultSet.getBytes("emblem_data"));
+					legionEmblem.setEmblem(resultSet.getByte("emblem_id"), resultSet.getByte("color_a"), resultSet.getByte("color_r"),
+						resultSet.getByte("color_g"), resultSet.getByte("color_b"), LegionEmblemType.valueOf(resultSet.getString("emblem_type")),
+						resultSet.getBytes("emblem_data"));
 				}
 			}
 		});
@@ -441,7 +442,7 @@ public class MySQL5LegionDAO extends LegionDAO {
 					int isAmplified = rset.getInt("is_amplified");
 					int buffSkill = rset.getInt("buff_skill");
 					int rndPlumeBonusValue = rset.getInt("rnd_plume_bonus");
-					
+
 					Item item = new Item(itemUniqueId, itemId, itemCount, itemColor, colorExpireTime, itemCreator, expireTime, activationCount, isEquiped == 1,
 						false, slot, storage, enchant, enchantBonus, itemSkin, fusionedItem, optionalSocket, optionalFusionSocket, charge, randomBonus, rndCount,
 						tempering, packCount, isAmplified == 1, buffSkill, rndPlumeBonusValue);
@@ -468,8 +469,8 @@ public class MySQL5LegionDAO extends LegionDAO {
 			@Override
 			public void handleRead(ResultSet resultSet) throws SQLException {
 				while (resultSet.next()) {
-					history.add(new LegionHistory(LegionHistoryType.valueOf(resultSet.getString("history_type")), resultSet.getString("name"), resultSet
-						.getTimestamp("date"), resultSet.getInt("tab_id"), resultSet.getString("description")));
+					history.add(new LegionHistory(LegionHistoryType.valueOf(resultSet.getString("history_type")), resultSet.getString("name"),
+						resultSet.getTimestamp("date"), resultSet.getInt("tab_id"), resultSet.getString("description")));
 				}
 			}
 		});

@@ -351,24 +351,16 @@ public class LegionService {
 	 * @param legionId
 	 * @return LegionMember (Brigade General)
 	 */
-	public int getLegionBGeneral(int legionId) {
-		Legion legion = LegionService.getInstance().getLegion(legionId);
-		int legionBG = 0;
-
-		for (int memberObjId : legion.getLegionMembers()) {
-			LegionMember legionMember = LegionService.getInstance().getLegionMember(memberObjId);
-			if (legionMember.getRank() == LegionRank.BRIGADE_GENERAL)
-				legionBG = memberObjId;
-		}
-
-		return legionBG;
+	public int getBrigadeGeneralOfLegion(int legionId) {
+		Legion legion = getLegion(legionId);
+		return legion == null ? 0 : legion.getBrigadeGeneral();
 	}
 
 	public List<Integer> getMembersByRank(int legionId, LegionRank rank) {
-		Legion legion = LegionService.getInstance().getLegion(legionId);
+		Legion legion = getLegion(legionId);
 		List<Integer> members = new ArrayList<>();
 		for (int memberObjId : legion.getLegionMembers()) {
-			LegionMember legionMember = LegionService.getInstance().getLegionMember(memberObjId);
+			LegionMember legionMember = getLegionMember(memberObjId);
 			if (legionMember.getRank() == rank)
 				members.add(memberObjId);
 		}
@@ -1158,11 +1150,19 @@ public class LegionService {
 		addHistory(legion, text, legionHistoryType, 0, StringUtils.EMPTY);
 	}
 
+	public void addRewardHistory(Legion legion, long kinahAmount, LegionHistoryType lht, int fortressId) {
+		addHistory(legion, String.valueOf(kinahAmount), lht, 1, String.valueOf(fortressId));
+	}
+
 	/**
 	 * This method will add a new history for a legion
 	 *
 	 * @param legion
+	 * @param text
+	 *          - in case of reward: kinah amount
 	 * @param legionHistory
+	 * @param description
+	 *          - in case of reward: fortress id
 	 */
 	public void addHistory(Legion legion, String text, LegionHistoryType legionHistoryType, int tabId, String description) {
 		LegionHistory legionHistory = new LegionHistory(legionHistoryType, text, new Timestamp(System.currentTimeMillis()), tabId, description);
@@ -1222,8 +1222,7 @@ public class LegionService {
 
 		// Update legion member's appearance in game
 		PacketSendUtility.broadcastPacket(player,
-			new SM_LEGION_UPDATE_TITLE(player.getObjectId(), legion.getLegionId(), legion.getName(), player.getLegionMember().getRank().getRankId()),
-			true);
+			new SM_LEGION_UPDATE_TITLE(player.getObjectId(), legion.getLegionId(), legion.getName(), player.getLegionMember().getRank().getRankId()), true);
 		legion.addBonus();
 	}
 
@@ -1993,7 +1992,9 @@ public class LegionService {
 		if (LegionDominionService.getInstance().join(legion.getLegionId(), locId)) {
 			legion.setCurrentLegionDominion(locId);
 			storeLegion(legion);
-			PacketSendUtility.broadcastToLegion(legion, new SM_SYSTEM_MESSAGE(1402902, LegionDominionService.getInstance().getNameDesc(locId))); //applied for stonespear
+			PacketSendUtility.broadcastToLegion(legion, new SM_SYSTEM_MESSAGE(1402902, LegionDominionService.getInstance().getNameDesc(locId))); // applied
+																																																																						// for
+																																																																						// stonespear
 			PacketSendUtility.broadcastToLegion(legion, new SM_LEGION_INFO(legion));
 		}
 	}

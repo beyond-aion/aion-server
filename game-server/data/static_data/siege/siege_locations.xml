@@ -94,6 +94,7 @@
 		<siege_reward top="22" itemid="186000242" m_count="3" gp_win="250" gp_defeat="125"/>
 		<siege_reward top="50" itemid="186000242" m_count="2" gp_win="200" gp_defeat="100"/>
 		<siege_reward top="200" itemid="186000242" m_count="1" gp_win="100" gp_defeat="50"/>
+		<legion_reward itemid="182400001" m_count="100000" />
 		<legion_reward itemid="186000242" m_count="1"/>
 		<legion_reward itemid="188052117" m_count="1"/>
 		<legion_reward itemid="122001663" m_count="1"/>
@@ -133,6 +134,7 @@
 		<siege_reward top="20" itemid="186000030" m_count="3"/>
 		<siege_reward top="30" itemid="186000030" m_count="2"/>
 		<siege_reward top="40" itemid="186000031" m_count="3"/>
+		<legion_reward itemid="182400001" m_count="100000" />
 		<legion_reward itemid="186000096" m_count="3"/>
 		<legion_reward itemid="186000030" m_count="20"/>
 		<legion_reward itemid="186000031" m_count="60"/>
@@ -145,6 +147,7 @@
 		<siege_reward top="20" itemid="186000030" m_count="3"/>
 		<siege_reward top="30" itemid="186000030" m_count="2"/>
 		<siege_reward top="40" itemid="186000031" m_count="3"/>
+		<legion_reward itemid="182400001" m_count="100000" />
 		<legion_reward itemid="186000096" m_count="3"/>
 		<legion_reward itemid="186000030" m_count="20"/>
 		<legion_reward itemid="186000031" m_count="60"/>
@@ -166,6 +169,7 @@
 		<siege_reward top="20" itemid="186000030" m_count="3"/>
 		<siege_reward top="30" itemid="186000030" m_count="2"/>
 		<siege_reward top="40" itemid="186000031" m_count="3"/>
+		<legion_reward itemid="182400001" m_count="100000" />
 		<legion_reward itemid="186000096" m_count="3"/>
 		<legion_reward itemid="186000030" m_count="20"/>
 		<legion_reward itemid="186000031" m_count="60"/>
@@ -193,6 +197,7 @@
 		<siege_reward top="30" itemid="186000030" m_count="3"/>
 		<siege_reward top="45" itemid="186000030" m_count="2"/>
 		<siege_reward top="60" itemid="186000031" m_count="3"/>
+		<legion_reward itemid="182400001" m_count="100000" />
 		<legion_reward itemid="186000096" m_count="3"/>
 		<legion_reward itemid="186000030" m_count="50"/>
 		<legion_reward itemid="186000031" m_count="70"/>
@@ -217,6 +222,7 @@
 		<siege_reward top="22" itemid="186000242" m_count="2" gp_win="200" gp_defeat="100"/>
 		<siege_reward top="50" itemid="186000242" m_count="1" gp_win="150" gp_defeat="75"/>
 		<siege_reward top="200" itemid="186000147" m_count="1" gp_win="100" gp_defeat="50"/>
+		<legion_reward itemid="182400001" m_count="100000" />
 		<legion_reward itemid="188052762" m_count="1"/>
 		<legion_reward itemid="188052114" m_count="1"/>
 		<legion_reward itemid="122001629" m_count="1"/>
@@ -239,6 +245,7 @@
 		<siege_reward top="22" itemid="186000242" m_count="2" gp_win="200" gp_defeat="100"/>
 		<siege_reward top="50" itemid="186000242" m_count="1" gp_win="150" gp_defeat="75"/>
 		<siege_reward top="200" itemid="186000147" m_count="1" gp_win="100" gp_defeat="50"/>
+		<legion_reward itemid="182400001" m_count="100000" />
 		<legion_reward itemid="188052763" m_count="1"/>
 		<legion_reward itemid="188052115" m_count="1"/>
 		<legion_reward itemid="122001630" m_count="1"/>
@@ -258,6 +265,7 @@
 		<siege_reward top="22" itemid="186000242" m_count="2" gp_win="200" gp_defeat="100"/>
 		<siege_reward top="50" itemid="186000242" m_count="1" gp_win="150" gp_defeat="75"/>
 		<siege_reward top="200" itemid="186000147" m_count="1" gp_win="100" gp_defeat="50"/>
+		<legion_reward itemid="182400001" m_count="100000" />
 		<legion_reward itemid="188052764" m_count="1"/>
 		<legion_reward itemid="188052116" m_count="1"/>
 		<legion_reward itemid="122001631" m_count="1"/>
@@ -276,6 +284,7 @@
 		<siege_reward top="30" itemid="186000030" m_count="3"/>
 		<siege_reward top="45" itemid="186000030" m_count="2"/>
 		<siege_reward top="60" itemid="186000031" m_count="3"/>
+		<legion_reward itemid="182400001" m_count="100000" />
 		<legion_reward itemid="186000096" m_count="3"/>
 		<legion_reward itemid="186000030" m_count="50"/>
 		<legion_reward itemid="186000031" m_count="70"/>
@@ -306,6 +315,7 @@
 		<siege_reward top="22" itemid="188053164" m_count="1" gp_win="175" gp_defeat="90"/>
 		<siege_reward top="33" itemid="188053165" m_count="1" gp_win="150" gp_defeat="75"/>
 		<siege_reward top="200" itemid="188053166" m_count="1" gp_win="100" gp_defeat="50"/>
+		<legion_reward itemid="182400001" m_count="100000" />
 		<legion_reward itemid="186000242" m_count="1"/>
 		<legion_reward itemid="188052119" m_count="1"/>
 		<legion_reward itemid="188053136" m_count="1"/>
@@ -329,6 +339,7 @@
 		<siege_reward top="22" itemid="188053160" m_count="1" gp_win="175" gp_defeat="90"/>
 		<siege_reward top="33" itemid="188053161" m_count="1" gp_win="150" gp_defeat="75"/>
 		<siege_reward top="200" itemid="188053162" m_count="1" gp_win="100" gp_defeat="50"/>
+		<legion_reward itemid="182400001" m_count="100000" />
 		<legion_reward itemid="186000242" m_count="1"/>
 		<legion_reward itemid="188052118" m_count="1"/>
 		<legion_reward itemid="188053136" m_count="1"/>
@@ -353,6 +364,7 @@
 		<siege_reward top="22" itemid="188053172" m_count="1" gp_win="175" gp_defeat="90"/>
 		<siege_reward top="33" itemid="188053173" m_count="1" gp_win="150" gp_defeat="75"/>
 		<siege_reward top="200" itemid="188053174" m_count="1" gp_win="100" gp_defeat="50"/>
+		<legion_reward itemid="182400001" m_count="100000" />
 		<legion_reward itemid="186000242" m_count="1"/>
 		<legion_reward itemid="188052121" m_count="1"/>
 		<legion_reward itemid="188053136" m_count="1"/>
@@ -376,6 +388,7 @@
 		<siege_reward top="22" itemid="188053168" m_count="1" gp_win="175" gp_defeat="90"/>
 		<siege_reward top="33" itemid="188053169" m_count="1" gp_win="150" gp_defeat="75"/>
 		<siege_reward top="200" itemid="188053170" m_count="1" gp_win="100" gp_defeat="50"/>
+		<legion_reward itemid="182400001" m_count="100000" />
 		<legion_reward itemid="186000242" m_count="1"/>
 		<legion_reward itemid="188052120" m_count="1"/>
 		<legion_reward itemid="188053136" m_count="1"/>
@@ -400,6 +413,7 @@
 		<siege_reward top="30" itemid="188053141" m_count="1" gp_win="300" gp_defeat="150"/>
 		<siege_reward top="60" itemid="188053142" m_count="1" gp_win="250" gp_defeat="100"/>
 		<siege_reward top="200" itemid="188053143" m_count="1" gp_win="200" gp_defeat="50"/>
+		<legion_reward itemid="182400001" m_count="100000" />
 		<legion_reward itemid="186000242" m_count="4"/>
 		<legion_reward itemid="182215545" m_count="1"/>
 		<legion_reward itemid="185000215" m_count="1"/>
@@ -440,6 +454,7 @@
 		<siege_reward top="20" itemid="186000096" m_count="1"/>
 		<siege_reward top="30" itemid="186000096" m_count="1"/>
 		<siege_reward top="40" itemid="186000096" m_count="1"/>
+		<legion_reward itemid="182400001" m_count="100000" />
 		<legion_reward itemid="188052121" m_count="1"/>
 		<legion_reward itemid="186000096" m_count="50"/>
 	</siege_location>
@@ -449,6 +464,7 @@
 		<siege_reward top="20" itemid="186000096" m_count="1"/>
 		<siege_reward top="30" itemid="186000096" m_count="1"/>
 		<siege_reward top="40" itemid="186000096" m_count="1"/>
+		<legion_reward itemid="182400001" m_count="100000" />
 		<legion_reward itemid="188052121" m_count="1"/>
 		<legion_reward itemid="186000096" m_count="50"/>
 	</siege_location>
@@ -458,6 +474,7 @@
 		<siege_reward top="20" itemid="186000096" m_count="1"/>
 		<siege_reward top="30" itemid="186000096" m_count="1"/>
 		<siege_reward top="40" itemid="186000096" m_count="1"/>
+		<legion_reward itemid="182400001" m_count="100000" />
 		<legion_reward itemid="188052121" m_count="1"/>
 		<legion_reward itemid="186000096" m_count="50"/>
 	</siege_location>
@@ -467,6 +484,7 @@
 		<siege_reward top="20" itemid="186000096" m_count="1"/>
 		<siege_reward top="30" itemid="186000096" m_count="1"/>
 		<siege_reward top="40" itemid="186000096" m_count="1"/>
+		<legion_reward itemid="182400001" m_count="100000" />
 		<legion_reward itemid="188052121" m_count="1"/>
 		<legion_reward itemid="186000096" m_count="50"/>
 	</siege_location>

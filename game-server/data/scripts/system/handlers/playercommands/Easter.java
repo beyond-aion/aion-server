@@ -21,7 +21,7 @@ public class Easter extends PlayerCommand {
 
 	private static final Logger log = LoggerFactory.getLogger(Easter.class);
 	private static int neededItem = 186000175;
-	private static int[][] rewards = { { 25, 185000216 }, { 30, 186000101 }, { 30, 186000115 }, { 50, 186000236 }, { 150, 188053295 },
+	private static int[][] rewards = { { 25, 185000216 }, { 30, 186000101 }, { 30, 186000102 }, { 50, 186000236 }, { 150, 188053295 },
 		{ 250, 188053702 }, { 500, 188053005 } };
 
 	public Easter() {
@@ -29,7 +29,7 @@ public class Easter extends PlayerCommand {
 
 		setSyntaxInfo("Type in .easter <id> to get your reward:", "[1] - (" + rewards[0][0] + " eggs) " + ChatUtil.item(rewards[0][1]),
 			"[2] - (" + rewards[1][0] + " eggs) " + " 5x " + ChatUtil.item(rewards[1][1]) + " or 5x " + ChatUtil.item(rewards[1][1] + 3),
-			"[3] - (" + rewards[2][0] + " eggs) " + " 5x " + ChatUtil.item(rewards[2][1]) + " or 5x " + ChatUtil.item(rewards[2][1] - 10),
+			"[3] - (" + rewards[2][0] + " eggs) " + " 5x " + ChatUtil.item(rewards[2][1]) + " or 5x " + ChatUtil.item(rewards[2][1] + 3),
 			"[4] - (" + rewards[3][0] + " eggs) " + " 50x " + ChatUtil.item(rewards[3][1]),
 			"[5] - (" + rewards[4][0] + " eggs) " + ChatUtil.item(rewards[4][1]), "[6] - (" + rewards[5][0] + " eggs) " + ChatUtil.item(rewards[5][1]),
 			"[7] - (" + rewards[6][0] + " eggs) " + ChatUtil.item(rewards[6][1]));
@@ -59,7 +59,7 @@ public class Easter extends PlayerCommand {
 					count = 5;
 					itemId = player.getRace() == Race.ASMODIANS ? itemId = 186000104 : itemId;
 					break;
-				case 186000115: // Circle Token
+				case 186000102: // Circle Token
 					count = 5;
 					itemId = player.getRace() == Race.ASMODIANS ? itemId = 186000105 : itemId;
 					break;

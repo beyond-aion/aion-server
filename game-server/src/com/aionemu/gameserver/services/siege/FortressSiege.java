@@ -23,6 +23,7 @@ import com.aionemu.gameserver.model.siege.FortressLocation;
 import com.aionemu.gameserver.model.siege.SiegeModType;
 import com.aionemu.gameserver.model.siege.SiegeRace;
 import com.aionemu.gameserver.model.team.legion.Legion;
+import com.aionemu.gameserver.model.team.legion.LegionHistoryType;
 import com.aionemu.gameserver.model.team.legion.LegionRank;
 import com.aionemu.gameserver.model.templates.npc.AbyssNpcType;
 import com.aionemu.gameserver.model.templates.siegelocation.SiegeLegionReward;
@@ -183,7 +184,6 @@ public class FortressSiege extends Siege<FortressLocation> {
 
 		// Update data in the DB
 		DAOManager.getDAO(SiegeDAO.class).updateSiegeLocation(getSiegeLocation());
-
 		if (isBossKilled()) {
 			getSiegeLocation().forEachPlayer(p -> {
 				if (SiegeRace.getByRace(p.getRace()) == getSiegeLocation().getRace())
@@ -205,8 +205,8 @@ public class FortressSiege extends Siege<FortressLocation> {
 		// reset occupy count
 		getSiegeLocation().setOccupiedCount(winnerRace == SiegeRace.BALAUR ? 0 : 1);
 
-		if (this.oldLegionId != 0 && getSiegeLocation().hasValidGpRewards()) { // make sure holding GP are deducted on Capture
-			int oldLegionGeneral = LegionService.getInstance().getLegionBGeneral(this.oldLegionId);
+		if (oldLegionId != 0 && getSiegeLocation().hasValidGpRewards()) { // make sure holding GP are deducted on Capture
+			int oldLegionGeneral = LegionService.getInstance().getBrigadeGeneralOfLegion(oldLegionId);
 			if (oldLegionGeneral != 0) {
 				GloryPointsService.decreaseGp(oldLegionGeneral, 1000);
 				LegionService.getInstance().getLegion(oldLegionId).decreaseSiegeGloryPoints(1000);
@@ -289,29 +289,34 @@ public class FortressSiege extends Siege<FortressLocation> {
 	protected void giveRewardsToLegion() {
 		try {
 			// Legion with id 0 = not exists?
-			if (getSiegeLocation().getLegionId() == 0) {
+			int legionId = getSiegeLocation().getLegionId();
+			if (legionId == 0) {
 				if (LoggingConfig.LOG_SIEGE)
-					log.info("[SIEGE] > [FORTRESS:" + getSiegeLocationId() + "] [RACE: " + getSiegeLocation().getRace() + "] [LEGION :"
-						+ getSiegeLocation().getLegionId() + "] Legion Reward not sending because fortress not owned by any legion.");
+					log.info("[SIEGE] > [FORTRESS:" + getSiegeLocationId() + "] [RACE: " + getSiegeLocation().getRace() + "] [LEGION :" + legionId
+						+ "] Legion Reward not sending because fortress not owned by any legion.");
 				return;
 			}
-
 			List<SiegeLegionReward> legionRewards = getSiegeLocation().getLegionReward();
-			int legionBGeneral = LegionService.getInstance().getLegionBGeneral(getSiegeLocation().getLegionId());
-			if (legionBGeneral != 0) {
-				PlayerCommonData BGeneral = DAOManager.getDAO(PlayerDAO.class).loadPlayerCommonData(legionBGeneral);
-				if (LoggingConfig.LOG_SIEGE) {
-					log.info("[SIEGE] > [FORTRESS:" + getSiegeLocationId() + "] [RACE: " + getSiegeLocation().getRace()
-						+ "] Legion Reward in process... LegionId:" + getSiegeLocation().getLegionId() + " General Name:" + BGeneral.getName());
-				}
-				if (legionRewards != null) {
-					for (SiegeLegionReward medalsType : legionRewards) {
+			if (legionRewards != null) {
+				Legion legion = LegionService.getInstance().getLegion(legionId);
+
+				int bgId = legion.getBrigadeGeneral();
+				if (bgId != 0) {
+					PlayerCommonData brigadeGeneral = DAOManager.getDAO(PlayerDAO.class).loadPlayerCommonData(bgId);
+					for (SiegeLegionReward legionReward : legionRewards) {
 						if (LoggingConfig.LOG_SIEGE) {
-							log.info("[SIEGE] > [Legion Reward to: " + BGeneral.getName() + "] ITEM RETURN " + medalsType.getItemId() + " ITEM COUNT "
-								+ medalsType.getCount());
+							log.info("[SIEGE] > [Legion Reward to: " + brigadeGeneral.getName() + "] ITEM RETURN " + legionReward.getItemId() + " ITEM COUNT "
+								+ legionReward.getCount());
 						}
-						MailFormatter.sendAbyssRewardMail(getSiegeLocation(), BGeneral, AbyssSiegeLevel.NONE, SiegeResult.PROTECT, System.currentTimeMillis(),
-							medalsType.getItemId(), medalsType.getCount(), 0);
+						if (legionReward.getItemId() == 182400001) { // handles kinah rewards
+							int kinahAmount = isBossKilled() ? legionReward.getCount() : Math.round(legionReward.getCount() * 0.7f);
+							legion.getLegionWarehouse().increaseKinah(kinahAmount);
+							LegionService.getInstance().addRewardHistory(legion, kinahAmount,
+								isBossKilled() ? LegionHistoryType.OCCUPATION : LegionHistoryType.DEFENSE, getSiegeLocationId());
+							continue;
+						}
+						MailFormatter.sendAbyssRewardMail(getSiegeLocation(), brigadeGeneral, AbyssSiegeLevel.NONE, SiegeResult.PROTECT,
+							System.currentTimeMillis(), legionReward.getItemId(), legionReward.getCount(), 0);
 					}
 				}
 			}
@@ -325,7 +330,7 @@ public class FortressSiege extends Siege<FortressLocation> {
 			int winnerLegionId = getSiegeLocation().getLegionId();
 			if (winnerLegionId == 0)
 				return;
-			int legionBGeneral = LegionService.getInstance().getLegionBGeneral(winnerLegionId);
+			int legionBGeneral = LegionService.getInstance().getBrigadeGeneralOfLegion(winnerLegionId);
 
 			boolean defenceSuccessful = winnerLegionId == this.oldLegionId;
 			if (defenceSuccessful) {

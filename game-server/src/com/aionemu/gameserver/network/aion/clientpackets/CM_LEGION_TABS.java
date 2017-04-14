@@ -37,33 +37,23 @@ public class CM_LEGION_TABS extends AionClientPacket {
 		Player activePlayer = getConnection().getActivePlayer();
 
 		if (activePlayer.getLegion() != null) {
-
-			/**
-			 * Max page is 16 for legion history
-			 */
+			// page amount is limited to 16
 			if (page > 16)
 				return;
 
 			switch (tab) {
-			/**
-			 * History Tab
-			 */
+				case 1: // Reward tab
+					if (!activePlayer.getLegionMember().isBrigadeGeneral())
+						break;
+					//$FALL-THROUGH$
 				case 0: // legion history
 				case 2: // legion WH history
 					Collection<LegionHistory> history = activePlayer.getLegion().getLegionHistoryByTabId(tab);
-					/**
-					 * If history size is less than page*8 return
-					 */
+					// If history size is lesser than page*8 return
 					if (history.size() < page * 8)
 						return;
 					if (!history.isEmpty())
 						PacketSendUtility.sendPacket(activePlayer, new SM_LEGION_TABS(history, page, tab));
-					break;
-				/**
-				 * Reward Tab
-				 */
-				case 1:
-					// TODO Reward Tab Page
 					break;
 			}
 		} else
