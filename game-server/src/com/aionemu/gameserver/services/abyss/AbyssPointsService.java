@@ -24,7 +24,7 @@ public class AbyssPointsService {
 	@GlobalCallback(AddAPGlobalCallback.class)
 	public static void addAp(Player player, VisibleObject obj, int value) {
 		if (value > 30000) {
-			log.warn("WARN BIG COUNT AP: " + value + " name: " + obj.getName() + " obj: " + obj.getObjectId() + " player: " + player.getObjectId());
+			log.warn("WARN BIG COUNT AP: " + value + " for " + player + " from " + obj);
 		}
 		addAp(player, value);
 	}
@@ -37,8 +37,7 @@ public class AbyssPointsService {
 		if (value > 0)
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_COMBAT_MY_ABYSS_POINT_GAIN(value));
 		else
-			// You used %num0 Abyss Points.
-			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1300965, value * -1));
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_USE_ABYSSPOINT(value * -1));
 
 		// Set the new AP value
 		setAp(player, value);
