@@ -5,10 +5,13 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
+import org.slf4j.LoggerFactory;
+
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SUMMON_USESKILL;
 import com.aionemu.gameserver.skillengine.model.Effect;
+import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
@@ -35,7 +38,14 @@ public class PetOrderUseUltraSkillEffect extends EffectTemplate {
 		int orderSkillId = effect.getSkillId();
 
 		int petUseSkillId = DataManager.PET_SKILL_DATA.getPetOrderSkill(orderSkillId, npcId);
-		int skillLvl = DataManager.SKILL_DATA.getSkillTemplate(petUseSkillId).getLvl();
+		SkillTemplate skillTemplate = DataManager.SKILL_DATA.getSkillTemplate(petUseSkillId);
+		if (skillTemplate == null) {
+			LoggerFactory.getLogger(PetOrderUseUltraSkillEffect.class)
+				.warn("Couldn't find summon skill template for ID {} (summon order skill ID {})", petUseSkillId, orderSkillId);
+			return;
+		}
+
+		int skillLvl = skillTemplate.getLvl();
 		int targetId = effect.getEffected().getObjectId();
 
 		effector.getSummon().addSkillOrder(petUseSkillId, skillLvl, release, effect.getEffected());

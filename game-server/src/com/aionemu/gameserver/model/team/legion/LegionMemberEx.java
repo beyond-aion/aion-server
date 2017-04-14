@@ -2,9 +2,6 @@ package com.aionemu.gameserver.model.team.legion;
 
 import java.sql.Timestamp;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.PlayerClass;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -14,12 +11,10 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
  */
 public class LegionMemberEx extends LegionMember {
 
-	private static Logger log = LoggerFactory.getLogger(LegionMemberEx.class);
-
 	private String name;
 	private PlayerClass playerClass;
 	private int level;
-	private Timestamp lastOnline;
+	private int lastOnlineEpochSeconds;
 	private int worldId;
 	private boolean online = false;
 
@@ -33,7 +28,7 @@ public class LegionMemberEx extends LegionMember {
 		this.name = player.getName();
 		this.playerClass = player.getPlayerClass();
 		this.level = player.getLevel();
-		this.lastOnline = player.getCommonData().getLastOnline();
+		this.lastOnlineEpochSeconds = player.getCommonData().getLastOnlineEpochSeconds();
 		this.worldId = player.getPosition().getMapId();
 		this.online = online;
 	}
@@ -69,14 +64,12 @@ public class LegionMemberEx extends LegionMember {
 		this.playerClass = playerClass;
 	}
 
-	public int getLastOnline() {
-		if (lastOnline == null || isOnline())
-			return 0;
-		return (int) (lastOnline.getTime() / 1000);
+	public int getLastOnlineEpochSeconds() {
+		return lastOnlineEpochSeconds;
 	}
 
 	public void setLastOnline(Timestamp timestamp) {
-		lastOnline = timestamp;
+		lastOnlineEpochSeconds = timestamp == null ? 0 : (int) (timestamp.getTime() / 1000);
 	}
 
 	public int getLevel() {
@@ -110,39 +103,4 @@ public class LegionMemberEx extends LegionMember {
 		return online;
 	}
 
-	public boolean sameObjectId(int objectId) {
-		return getObjectId() == objectId;
-	}
-
-	/**
-	 * Checks if a LegionMemberEx is valid or not
-	 * 
-	 * @return true if LegionMemberEx is valid
-	 */
-	public boolean isValidLegionMemberEx() {
-		if (getObjectId() < 1) {
-			log.error("[LegionMemberEx] Player Object ID is empty.");
-		} else if (getName() == null) {
-			log.error("[LegionMemberEx] Player Name is empty." + getObjectId());
-		} else if (getPlayerClass() == null) {
-			log.error("[LegionMemberEx] Player Class is empty." + getObjectId());
-		} else if (getLevel() < 1) {
-			log.error("[LegionMemberEx] Player Level is empty." + getObjectId());
-		} else if (getLastOnline() == 0) {
-			log.error("[LegionMemberEx] Last Online is empty." + getObjectId());
-		} else if (getWorldId() < 1) {
-			log.error("[LegionMemberEx] World Id is empty." + getObjectId());
-		} else if (getLegion() == null) {
-			log.error("[LegionMemberEx] Legion is empty." + getObjectId());
-		} else if (getRank() == null) {
-			log.error("[LegionMemberEx] Rank is empty." + getObjectId());
-		} else if (getNickname() == null) {
-			log.error("[LegionMemberEx] Nickname is empty." + getObjectId());
-		} else if (getSelfIntro() == null) {
-			log.error("[LegionMemberEx] Self Intro is empty." + getObjectId());
-		} else {
-			return true;
-		}
-		return false;
-	}
 }

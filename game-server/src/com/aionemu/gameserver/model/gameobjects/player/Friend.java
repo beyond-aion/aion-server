@@ -76,14 +76,8 @@ public class Friend {
 		return position.getMapId();
 	}
 
-	/**
-	 * @return Unix timestamp the player was last online. Returns 0 if the player is online now.
-	 */
-	public int getLastOnlineTime() {
-		if (pcd.getLastOnline() == null || World.getInstance().isInWorld(getObjectId()))
-			return 0;
-
-		return (int) (pcd.getLastOnline().getTime() / 1000); // Convert to int, unix time format (ms -> seconds)
+	public int getLastOnlineEpochSeconds() {
+		return pcd.getLastOnlineEpochSeconds();
 	}
 
 	public int getObjectId() {

@@ -1083,11 +1083,17 @@ public class Player extends Creature {
 
 	@Override
 	public boolean canSee(VisibleObject object) {
-		if (object instanceof Player && isInSameTeam((Player) object))
-			return true;
 		if (object instanceof Pet && !equals(((Pet) object).getMaster()) && !getKnownList().sees(((Pet) object).getMaster()))
 			return false; // pet spawn packet must be sent after owner's
-		return super.canSee(object);
+
+		if (super.canSee(object))
+			return true;
+		if (object instanceof Player && isInSameTeam((Player) object))
+			return true;
+		if (object instanceof Kisk && ((Kisk) object).getOwnerRace() == getRace()) // invisible kisks can be seen from players of the same race
+			return true;
+
+		return false;
 	}
 
 	@Override

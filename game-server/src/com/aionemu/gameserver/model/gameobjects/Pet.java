@@ -36,16 +36,11 @@ public class Pet extends VisibleObject {
 	}
 
 	public int getPetId() {
-		return objectTemplate.getTemplateId();
-	}
-
-	@Override
-	public String getName() {
-		return objectTemplate.getName();
+		return getObjectTemplate().getTemplateId();
 	}
 
 	public final PetCommonData getCommonData() {
-		return (PetCommonData) objectTemplate;
+		return (PetCommonData) super.getObjectTemplate();
 	}
 
 	public final MoveController getMoveController() {

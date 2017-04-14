@@ -2,6 +2,7 @@ package com.aionemu.gameserver.network.aion.serverpackets;
 
 import com.aionemu.gameserver.model.gameobjects.player.Friend;
 import com.aionemu.gameserver.model.gameobjects.player.FriendList;
+import com.aionemu.gameserver.model.gameobjects.player.FriendList.Status;
 import com.aionemu.gameserver.model.house.House;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
@@ -29,7 +30,7 @@ public class SM_FRIEND_LIST extends AionServerPacket {
 			writeD(friend.getPlayerClass().getClassId());
 			writeC(friend.getGender().getGenderId());
 			writeD(friend.getMapId());
-			writeD(friend.getLastOnlineTime()); // Date friend was last online as a Unix timestamp.
+			writeD(friend.getStatus() == Status.ONLINE ? 0 : friend.getLastOnlineEpochSeconds());
 			writeS(friend.getNote()); // Friend note
 			writeC(friend.getStatus().getId());
 

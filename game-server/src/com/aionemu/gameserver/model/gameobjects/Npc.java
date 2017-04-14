@@ -84,12 +84,7 @@ public class Npc extends Creature {
 
 	@Override
 	public NpcTemplate getObjectTemplate() {
-		return (NpcTemplate) objectTemplate;
-	}
-
-	@Override
-	public String getName() {
-		return getObjectTemplate().getName();
+		return (NpcTemplate) super.getObjectTemplate();
 	}
 
 	public int getNpcId() {
@@ -167,7 +162,7 @@ public class Npc extends Creature {
 		if (transformTribe != null) {
 			return transformTribe;
 		}
-		return this.getObjectTemplate().getTribe();
+		return getObjectTemplate().getTribe();
 	}
 
 	@Override

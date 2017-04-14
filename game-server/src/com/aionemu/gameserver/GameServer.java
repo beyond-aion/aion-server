@@ -40,7 +40,6 @@ import com.aionemu.gameserver.configs.main.CleaningConfig;
 import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.configs.main.GSConfig;
 import com.aionemu.gameserver.configs.main.GeoDataConfig;
-import com.aionemu.gameserver.configs.main.HousingConfig;
 import com.aionemu.gameserver.configs.main.SiegeConfig;
 import com.aionemu.gameserver.configs.network.NetworkConfig;
 import com.aionemu.gameserver.custom.pvpmap.PvpMapService;
@@ -309,9 +308,7 @@ public class GameServer {
 		PlayerTransferService.getInstance();
 
 		ConsoleUtil.printSection("Housing");
-		HousingBidService.getInstance();
-		if (HousingConfig.FILL_HOUSE_BIDS_AUTO)
-			HousingBidService.getInstance().fillBidData();
+		HousingBidService.getInstance().start();
 		MaintenanceTask.getInstance();
 		ChallengeTaskService.getInstance();
 		GameTimeService.getInstance().startClock();

@@ -14,7 +14,6 @@ import com.aionemu.gameserver.services.HousingService;
  */
 public class SM_LEGION_MEMBERLIST extends AionServerPacket {
 
-	private static final int OFFLINE = 0x00, ONLINE = 0x01;
 	private boolean isFirst, isSplit;
 	private List<LegionMemberEx> legionMembers;
 
@@ -42,10 +41,10 @@ public class SM_LEGION_MEMBERLIST extends AionServerPacket {
 			writeD(legionMember.getLevel());
 			writeC(legionMember.getRank().getRankId());
 			writeD(legionMember.getWorldId());
-			writeC(legionMember.isOnline() ? ONLINE : OFFLINE);
+			writeC(legionMember.isOnline() ? 1 : 0);
 			writeS(legionMember.getSelfIntro());
 			writeS(legionMember.getNickname());
-			writeD(legionMember.getLastOnline());
+			writeD(legionMember.isOnline() ? 0 : legionMember.getLastOnlineEpochSeconds());
 
 			int address = HousingService.getInstance().getPlayerAddress(legionMember.getObjectId());
 			if (address > 0) {

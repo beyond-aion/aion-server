@@ -122,7 +122,7 @@ public abstract class Siege<SL extends SiegeLocation> {
 			return;
 
 		// Actually we don't care if damage was done from summon.
-		// We should threat all the damage like it was done from the owner
+		// We should treat all the damage like it was done from the owner
 		attacker = attacker.getMaster();
 		getSiegeCounter().addDamage(attacker, damage);
 	}

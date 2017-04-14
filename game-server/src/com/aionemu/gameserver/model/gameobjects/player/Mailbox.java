@@ -81,10 +81,11 @@ public class Mailbox {
 	public List<Letter> getNewSystemLetters(String substring) {
 		List<Letter> letters = new ArrayList<>();
 		if (substring.startsWith("%") || substring.startsWith("$$")) {
+			long lastOnlineMillis = owner.getCommonData().getLastOnline() == null ? 0 : owner.getCommonData().getLastOnline().getTime();
 			for (Letter letter : mails.values()) {
 				if (!letter.isUnread() || letter.getSenderName() == null || !letter.getSenderName().startsWith(substring))
 					continue;
-				if (owner.getCommonData().getLastOnline().getTime() > letter.getTimeStamp().getTime())
+				if (lastOnlineMillis > letter.getTimeStamp().getTime())
 					continue;
 				letters.add(letter);
 			}

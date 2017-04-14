@@ -5,7 +5,6 @@ import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.IExpirable;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.house.House;
-import com.aionemu.gameserver.model.templates.housing.AbstractHouseObject;
 import com.aionemu.gameserver.model.templates.housing.HouseType;
 import com.aionemu.gameserver.model.templates.housing.HousingCategory;
 import com.aionemu.gameserver.model.templates.housing.LimitType;
@@ -128,14 +127,9 @@ public abstract class HouseObject<T extends PlaceableHouseObject> extends Visibl
 	}
 
 	@Override
-	public String getName() {
-		return String.valueOf(objectTemplate.getNameId());
-	}
-
-	@Override
 	@SuppressWarnings("unchecked")
 	public T getObjectTemplate() {
-		return (T) objectTemplate;
+		return (T) super.getObjectTemplate();
 	}
 
 	@Override
@@ -204,15 +198,15 @@ public abstract class HouseObject<T extends PlaceableHouseObject> extends Visibl
 	}
 
 	public PlaceLocation getPlaceLocation() {
-		return ((PlaceableHouseObject) objectTemplate).getLocation();
+		return getObjectTemplate().getLocation();
 	}
 
 	public PlaceArea getPlaceArea() {
-		return ((PlaceableHouseObject) objectTemplate).getArea();
+		return getObjectTemplate().getArea();
 	}
 
 	public int getPlacementLimit(boolean trial) {
-		LimitType limitType = ((PlaceableHouseObject) objectTemplate).getPlacementLimit();
+		LimitType limitType = getObjectTemplate().getPlacementLimit();
 		HouseType size = HouseType.fromValue(ownerHouse.getBuilding().getSize());
 		if (trial)
 			return limitType.getTrialObjectPlaceLimit(size);
@@ -220,15 +214,15 @@ public abstract class HouseObject<T extends PlaceableHouseObject> extends Visibl
 	}
 
 	public ItemQuality getQuality() {
-		return ((AbstractHouseObject) objectTemplate).getQuality();
+		return getObjectTemplate().getQuality();
 	}
 
 	public float getTalkingDistance() {
-		return ((AbstractHouseObject) objectTemplate).getTalkingDistance();
+		return getObjectTemplate().getTalkingDistance();
 	}
 
 	public HousingCategory getCategory() {
-		return ((AbstractHouseObject) objectTemplate).getCategory();
+		return getObjectTemplate().getCategory();
 	}
 
 	public House getOwnerHouse() {

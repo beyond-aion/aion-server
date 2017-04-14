@@ -59,10 +59,11 @@ public class HousingBidService extends AbstractCronTask {
 
 	private static final Logger log = LoggerFactory.getLogger("HOUSE_AUCTION_LOG");
 	private static HousingBidService instance;
-	private final LinkedHashMap<Integer, HouseBidEntry> houseBids = new LinkedHashMap<>();
-	private final LinkedHashMap<Integer, HouseBidEntry> playerBids = new LinkedHashMap<>();
-	private final LinkedHashMap<Integer, HouseBidEntry> bidsByIndex = new LinkedHashMap<>();
+	private final Map<Integer, HouseBidEntry> houseBids = new LinkedHashMap<>();
+	private final Map<Integer, HouseBidEntry> playerBids = new LinkedHashMap<>();
+	private final Map<Integer, HouseBidEntry> bidsByIndex = new HashMap<>();
 	private int timeProlonged = 0;
+	private volatile boolean isDataLoaded;
 	private CronExpression registerDateExpr;
 
 	static {
@@ -74,7 +75,6 @@ public class HousingBidService extends AbstractCronTask {
 
 	private HousingBidService(String auctionTime) throws ParseException {
 		super(auctionTime);
-		registerDateExpr = new CronExpression(HousingConfig.HOUSE_REGISTER_END);
 	}
 
 	public static final HousingBidService getInstance() {
@@ -97,20 +97,28 @@ public class HousingBidService extends AbstractCronTask {
 	}
 
 	@Override
-	protected void preInit() {
-		log.info("Loading house bids...");
-	}
-
-	@Override
 	protected void postInit() {
-		loadBidData();
-		ServerVariablesDAO dao = DAOManager.getDAO(ServerVariablesDAO.class);
-		timeProlonged = dao.load("auctionProlonged");
-		log.info("HousingBidService loaded. Minutes till start: " + getMinutesTillAuction());
+		try {
+			registerDateExpr = new CronExpression(HousingConfig.HOUSE_REGISTER_END);
+		} catch (ParseException e) {
+		}
+
+		timeProlonged = DAOManager.getDAO(ServerVariablesDAO.class).load("auctionProlonged");
 	}
 
-	public void fillBidData() {
-		log.info("HousingBidService: auction auto filling enabled.");
+	public void start() {
+		log.info("Loading house bids...");
+		loadBidData();
+		if (HousingConfig.FILL_HOUSE_BIDS_AUTO) {
+			log.info("HousingBidService: auction auto filling enabled.");
+			int added = fillBidData();
+			log.info("HousingBidService: added " + added + " new house auctions.");
+		}
+		log.info("HousingBidService loaded. Minutes till start: " + getMinutesTillAuction());
+		isDataLoaded = true;
+	}
+
+	private int fillBidData() {
 		int count = 0;
 		List<House> houses = HousingService.getInstance().getCustomHouses();
 		while (!houses.isEmpty()) {
@@ -123,7 +131,7 @@ public class HousingBidService extends AbstractCronTask {
 			if (addHouseToAuction(house, house.getDefaultAuctionPrice()))
 				count++;
 		}
-		log.info("HousingBidService: added " + count + " new house auctions.");
+		return count;
 	}
 
 	private boolean checkAutoFillingLimits(Race race, HouseType type) {
@@ -218,6 +226,14 @@ public class HousingBidService extends AbstractCronTask {
 	protected void executeTask() {
 		if (!HousingConfig.ENABLE_HOUSE_AUCTIONS)
 			return;
+
+		while (!isDataLoaded) {
+			try {
+				Thread.sleep(500);
+			} catch (InterruptedException e) {
+				return;
+			}
+		}
 
 		Map<HouseBidEntry, Integer> winners = new HashMap<>();
 		Map<HouseBidEntry, Integer> successSell = new HashMap<>();
@@ -791,4 +807,4 @@ public class HousingBidService extends AbstractCronTask {
 	public static boolean canBidHouse(Player player, int mapId, int landId) {
 		return player.getLevel() >= getMinBidLevel(player, mapId, landId);
 	}
-};
+}

@@ -8,10 +8,6 @@ import com.aionemu.gameserver.services.RespawnService;
  */
 public class VisibleObjectActions {
 
-	public static String getName(VisibleObject obj) {
-		return obj.getName();
-	}
-
 	/**
 	 * Despawns the object from the world (without scheduling respawn).
 	 * 

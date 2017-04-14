@@ -284,4 +284,14 @@
 		<routestep step="19" x="602.26" y="462.26" z="189.473" />
 		<routestep step="20" x="602.28" y="465.77" z="189.473" />
 	</walker_template>
+	<walker_template route_id="948DCAEBE757974DF4A07BF31FC6F0EDC025E3E0" pool="1">
+		<routestep step="1" x="526.1" y="222.72" z="164.00676" />
+		<routestep step="2" x="530.72" y="222.81" z="164.00676" />
+		<routestep step="3" x="525.45" y="222.81" z="164.00676" />
+		<routestep step="4" x="511.18" y="222.84" z="164.00676" />
+		<routestep step="5" x="493.31" y="222.66" z="164.00676" />
+		<routestep step="6" x="503.76" y="222.6" z="164.00676" />
+		<routestep step="7" x="515.84" y="222.69" z="164.00676" />
+		<routestep step="8" x="524.82" y="222.68" z="164.00676" />
+	</walker_template>
 </npc_walker>

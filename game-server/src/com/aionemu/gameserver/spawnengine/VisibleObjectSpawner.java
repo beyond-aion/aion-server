@@ -249,8 +249,8 @@ public class VisibleObjectSpawner {
 	public static Kisk spawnKisk(SpawnTemplate spawn, int instanceIndex, Player creator) {
 		NpcTemplate template = DataManager.NPC_DATA.getNpcTemplate(spawn.getNpcId());
 		Kisk kisk = new Kisk(IDFactory.getInstance().nextId(), new NpcController(), spawn, template, creator);
+		kisk.setMasterName(creator.getName());
 		kisk.setKnownlist(new PlayerAwareKnownList(kisk));
-		kisk.setCreator(creator);
 		kisk.setEffectController(new EffectController(kisk));
 		SpawnEngine.bringIntoWorld(kisk, spawn, instanceIndex);
 		return kisk;

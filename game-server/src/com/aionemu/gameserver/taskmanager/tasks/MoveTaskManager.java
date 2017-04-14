@@ -27,13 +27,11 @@ public class MoveTaskManager extends AbstractPeriodicTaskManager {
 
 		@Override
 		public void accept(Creature creature) {
-			if (creature == null) // concurrent iterating over movingCreatures.values() can cause calling this with an already removed entry (which then is null)
+			if (creature == null) // concurrent iterating over movingCreatures can cause calling this with an already removed entry (which then is null)
 				return;
 			if (!creature.isSpawned()) { // can despawn concurrently, while this thread is already running
-				if (movingCreatures.containsKey(creature.getObjectId())) { // should have been removed via onDespawn (MoveController#abortMove())
+				if (removeCreature(creature)) // should have been removed via onDespawn (MoveController#abortMove())
 					LoggerFactory.getLogger(MoveTaskManager.class).warn(creature + " was still in moving creatures list but already despawned");
-					removeCreature(creature);
-				}
 				return;
 			}
 			creature.getMoveController().moveToDestination();
@@ -56,8 +54,8 @@ public class MoveTaskManager extends AbstractPeriodicTaskManager {
 		movingCreatures.putIfAbsent(creature.getObjectId(), creature);
 	}
 
-	public void removeCreature(Creature creature) {
-		movingCreatures.remove(creature.getObjectId());
+	public boolean removeCreature(Creature creature) {
+		return movingCreatures.remove(creature.getObjectId()) != null;
 	}
 
 	@Override

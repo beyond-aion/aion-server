@@ -103,11 +103,6 @@ public class Summon extends Creature {
 		this.master = master;
 	}
 
-	@Override
-	public String getName() {
-		return objectTemplate.getName();
-	}
-
 	/**
 	 * @return the level
 	 */
@@ -182,7 +177,7 @@ public class Summon extends Creature {
 	@Override
 	public TribeClass getTribe() {
 		if (master == null)
-			return ((NpcTemplate) objectTemplate).getTribe();
+			return getObjectTemplate().getTribe();
 		return master.getTribe();
 	}
 
