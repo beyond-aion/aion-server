@@ -349,7 +349,7 @@ public class SiegeService {
 		}
 
 		if (legionId != 0 && loc.hasValidGpRewards()) { // make sure holding GP are deducted on Capture
-			int oldLegionGeneral = LegionService.getInstance().getLegionBGeneral(legionId);
+			int oldLegionGeneral = LegionService.getInstance().getBrigadeGeneralOfLegion(legionId);
 			if (oldLegionGeneral != 0) {
 				GloryPointsService.decreaseGp(oldLegionGeneral, 1000);
 				LegionService.getInstance().getLegion(legionId).decreaseSiegeGloryPoints(1000);

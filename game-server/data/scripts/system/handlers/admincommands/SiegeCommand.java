@@ -171,7 +171,7 @@ public class SiegeCommand extends AdminCommand {
 			}
 
 			if (legion != null) {
-				int legionBGeneral = LegionService.getInstance().getLegionBGeneral(legion.getLegionId());
+				int legionBGeneral = LegionService.getInstance().getBrigadeGeneralOfLegion(legion.getLegionId());
 				if (legionBGeneral != 0) {
 					PlayerCommonData BGeneral = DAOManager.getDAO(PlayerDAO.class).loadPlayerCommonData(legionBGeneral);
 					sr = SiegeRace.getByRace(BGeneral.getRace());

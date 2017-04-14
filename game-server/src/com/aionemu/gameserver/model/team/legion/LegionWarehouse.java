@@ -8,6 +8,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.item.ItemPacketService.ItemAddType;
 import com.aionemu.gameserver.services.item.ItemPacketService.ItemDeleteType;
 import com.aionemu.gameserver.services.item.ItemPacketService.ItemUpdateType;
+import com.aionemu.gameserver.world.World;
 
 /**
  * @author Simple
@@ -15,7 +16,7 @@ import com.aionemu.gameserver.services.item.ItemPacketService.ItemUpdateType;
 public class LegionWarehouse extends Storage {
 
 	private Legion legion;
-	private int curentWhUser;
+	private int currentWhUser;
 
 	public LegionWarehouse(Legion legion) {
 		super(StorageType.LEGION_WAREHOUSE);
@@ -31,9 +32,15 @@ public class LegionWarehouse extends Storage {
 		this.legion = legion;
 	}
 
+	/**
+	 * Used to add kinah due successful sieges. StorageProxy should be normally used to act with.
+	 */
 	@Override
 	public void increaseKinah(long amount) {
-		throw new UnsupportedOperationException("LWH should be used behind proxy");
+		if (currentWhUser != 0)
+			World.getInstance().findPlayer(currentWhUser).getStorage(StorageType.LEGION_WAREHOUSE.getId()).increaseKinah(amount);
+		else
+			getKinahItem().increaseItemCount(amount);
 	}
 
 	@Override
@@ -141,12 +148,12 @@ public class LegionWarehouse extends Storage {
 		throw new UnsupportedOperationException("LWH doesnt have owner");
 	}
 
-	public void setWhUser(int curentWhUser) {
-		this.curentWhUser = curentWhUser;
+	public void setWhUser(int currentWhUser) {
+		this.currentWhUser = currentWhUser;
 	}
 
 	public int getWhUser() {
-		return curentWhUser;
+		return currentWhUser;
 	}
 
 }

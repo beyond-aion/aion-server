@@ -30,13 +30,11 @@ public class SM_LEGION_TABS extends AionServerPacket {
 	@Override
 	protected void writeImpl(AionConnection con) {
 		int size = legionHistory.size();
-		/**
-		 * If history size is less than page*8 return
-		 */
+		// if history size is less than page*8 return
 		if (size < (page * 8))
 			return;
 
-		// TODO: Formula's could use a refactor
+		// TODO: Formula's could use a refactore
 		int hisSize = size - (page * 8);
 		if (size > (page + 1) * 8)
 			hisSize = 8;
@@ -49,7 +47,7 @@ public class SM_LEGION_TABS extends AionServerPacket {
 		for (LegionHistory history : legionHistory) {
 			if (i >= (page * 8) && i <= (8 + (page * 8))) {
 				writeD((int) (history.getTime().getTime() / 1000));
-				writeC(history.getLegionHistoryType().getHistoryId());
+				writeC(history.getLegionHistoryType().getId());
 				writeC(0); // unk
 				writeS(history.getName(), 64);
 				writeH(0); // separator
