@@ -25,14 +25,6 @@
 			<spot x="220.814" y="323.291" z="141.892" h="93"/>
 			<spot x="233.462" y="312.915" z="141.892" h="80"/>
 		</spawn>
-		<!-- Brainwashed Fighter -->
-		<spawn npc_id="282041">
-			<spot x="216.336" y="311.913" z="141.892"/>
-		</spawn>
-		<!-- Brainwashed MuMu Fighter -->
-		<spawn npc_id="282042">
-			<spot x="217.963" y="313.74" z="141.892"/>
-		</spawn>
 		<!-- Brainwashed MuMu Worker -->
 		<spawn npc_id="217067">
 			<spot x="215.002" y="313.186" z="141.892" h="100"/>
