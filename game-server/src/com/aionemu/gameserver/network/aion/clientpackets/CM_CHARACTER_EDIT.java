@@ -146,8 +146,9 @@ public class CM_CHARACTER_EDIT extends AionClientPacket {
 		if (isGenderSwitch)
 			player.getCommonData().setGender(genderId == 0 ? Gender.MALE : Gender.FEMALE);
 		player.setPlayerAppearance(newAppearance);
+		DAOManager.getDAO(PlayerAppearanceDAO.class).store(player); // save new appearance
 
-		// broadcast new appearance (no need to save it, will be saved periodically and on logout)
+		// broadcast new appearance (no need to save gender here, will be saved periodically and on logout)
 		player.clearKnownlist();
 		PacketSendUtility.sendPacket(player, new SM_PLAYER_INFO(player));
 		player.updateKnownlist();
