@@ -136,7 +136,7 @@ public class LegionDominionLocation {
 		info.addAll(participantInfo.values());
 		if (!info.isEmpty()) {
 			info.sort(null);
-			if (info.get(0) != null) {
+			if (info.get(0) != null && info.get(0).getPoints() > 0) {
 				return info.get(0);
 			}
 		}
