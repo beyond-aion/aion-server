@@ -23,8 +23,8 @@ public class ConvertHealEffect extends ShieldEffect {
 		int valueWithDelta = value + delta * skillLvl;
 		int hitValueWithDelta = hitvalue + hitdelta * skillLvl;
 
-		AttackShieldObserver asObserver = new AttackShieldObserver(hitValueWithDelta, valueWithDelta, percent, hitPercent, effect, hitType,
-			this.getType(), this.hitTypeProb, 0, 0, type, 0, 0);
+		AttackShieldObserver asObserver = new AttackShieldObserver(hitValueWithDelta, valueWithDelta, percent, hitPercent, effect, hitType, getType(),
+			hitTypeProb, 0, 0, type, 0);
 
 		effect.getEffected().getObserveController().addAttackCalcObserver(asObserver);
 		effect.setAttackShieldObserver(asObserver, position);

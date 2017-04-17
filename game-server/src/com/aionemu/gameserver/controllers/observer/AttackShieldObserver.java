@@ -25,7 +25,8 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.PositionUtil;
 
 /**
- * @author ATracer modified by Sippolo, kecimis, Luzien
+ * @author ATracer
+ * @modified Sippolo, kecimis, Luzien, Neon
  */
 public class AttackShieldObserver extends AttackCalcObserver {
 
@@ -36,48 +37,36 @@ public class AttackShieldObserver extends AttackCalcObserver {
 	private Effect effect;
 	private HitType hitType;
 	private ShieldType shieldType;
-	private int probability = 100;
-	private int minradius = 0;
-	private int maxradius = 100;
-	private HealType healType = null;
-	private int effectorDamage;
+	private int probability;
+	private int minRadius;
+	private int maxRadius;
+	private HealType healType;
 	private int mpValue;
 
 	private boolean totalHitPercentSet = false;
 
-	/**
-	 * @param percent
-	 * @param value
-	 * @param status
-	 */
 	public AttackShieldObserver(int hit, int totalHit, boolean percent, Effect effect, HitType type, ShieldType shieldType, int probability) {
-		this(hit, totalHit, percent, false, effect, type, shieldType, probability, 0, 100, null, 0, 0);
+		this(hit, totalHit, percent, false, effect, type, shieldType, probability, 0, 100, null, 0);
 	}
 
 	public AttackShieldObserver(int hit, int totalHit, boolean percent, Effect effect, HitType type, ShieldType shieldType, int probability,
 		int mpValue) {
-		this(hit, totalHit, percent, false, effect, type, shieldType, probability, 0, 100, null, 0, mpValue);
-	}
-
-	public AttackShieldObserver(int hit, int effectorDamage, int totalHit, boolean percent, Effect effect, HitType type, ShieldType shieldType,
-		int probability) {
-		this(hit, totalHit, percent, false, effect, type, shieldType, probability, 0, 100, null, effectorDamage, 0);
+		this(hit, totalHit, percent, false, effect, type, shieldType, probability, 0, 100, null, mpValue);
 	}
 
 	public AttackShieldObserver(int hit, int totalHit, boolean hitPercent, boolean totalHitPercent, Effect effect, HitType type, ShieldType shieldType,
-		int probability, int minradius, int maxradius, HealType healType, int effectorDamage, int mpValue) {
+		int probability, int minRadius, int maxRadius, HealType healType, int mpValue) {
 		this.hit = hit;
-		this.totalHit = totalHit;// total absorbed dmg for shield, percentage for reflector
+		this.totalHit = totalHit; // total absorbed dmg for shield, percentage for reflector, received dmg percentage for protect
 		this.effect = effect;
 		this.hitPercent = hitPercent;
 		this.totalHitPercent = totalHitPercent;
 		this.hitType = type;
 		this.shieldType = shieldType;
 		this.probability = probability;
-		this.minradius = minradius;// only for reflector
-		this.maxradius = maxradius;// only for reflector
-		this.healType = healType;// only for convertheal
-		this.effectorDamage = effectorDamage;// only for protect
+		this.minRadius = minRadius; // only for reflector
+		this.maxRadius = maxRadius; // for reflector / protect
+		this.healType = healType; // only for convertheal
 		this.mpValue = mpValue;
 	}
 
@@ -130,15 +119,12 @@ public class AttackShieldObserver extends AttackCalcObserver {
 					effect.endEffect();
 					return;
 				}
-			}
-			// shield type 1, reflected damage
-			else if (shieldType == ShieldType.REFLECTOR) {
-				// totalHit is radius
-				if (minradius != 0) {
-					if (PositionUtil.isInRange(attacker, effect.getEffected(), minradius))
+			} else if (shieldType == ShieldType.REFLECTOR) { // shield type 1, reflected damage
+				if (minRadius != 0) {
+					if (PositionUtil.isInRange(attacker, effect.getEffected(), minRadius))
 						continue;
 				}
-				if (PositionUtil.isInRange(attacker, effect.getEffected(), maxradius)) {
+				if (PositionUtil.isInRange(attacker, effect.getEffected(), maxRadius)) {
 					int reflectedHit = attackResult.getDamage();
 					if (hit > 0 || totalHit > 0) {
 						int reflectedDamage = attackResult.getDamage() * totalHit / 100;
@@ -158,10 +144,7 @@ public class AttackShieldObserver extends AttackCalcObserver {
 							SM_SYSTEM_MESSAGE.STR_SKILL_PROC_EFFECT_OCCURRED(effect.getSkillTemplate().getNameId()));
 				}
 				break;
-			}
-			// shield type 8, protect effect (ex. skillId: 417 Bodyguard I)
-			else if (shieldType == ShieldType.PROTECT) {
-				// totalHit is radius
+			} else if (shieldType == ShieldType.PROTECT) { // shield type 8, protect effect (ex. skillId: 417 Bodyguard I)
 				if (effect.getEffector() == null || effect.getEffector().getLifeStats().isAlreadyDead()) {
 					effect.endEffect();
 					break;
@@ -172,15 +155,16 @@ public class AttackShieldObserver extends AttackCalcObserver {
 					break;
 				}
 
-				if (PositionUtil.isInRange(effect.getEffector(), effect.getEffected(), totalHit)) {
+				if (PositionUtil.isInRange(effect.getEffector(), effect.getEffected(), maxRadius)) {
 					int damageProtected = 0;
 					int effectorDamage = 0;
 
 					if (hitPercent) {
-						damageProtected = ((int) (attackResult.getDamage() * hit * 0.01));
-						if (this.effectorDamage == 0)
-							this.effectorDamage = 100;
-						effectorDamage = ((int) (attackResult.getDamage() * this.effectorDamage * 0.01));
+						damageProtected = (int) (attackResult.getDamage() * hit * 0.01);
+						if (totalHit > 0) // reduce the effectively received damage (totalHit = percent of received dmg)
+							effectorDamage = attackResult.getDamage() * totalHit / 100;
+						else
+							effectorDamage = attackResult.getDamage();
 					} else
 						damageProtected = hit;
 					int finalDamage = attackResult.getDamage() - damageProtected;
@@ -195,9 +179,7 @@ public class AttackShieldObserver extends AttackCalcObserver {
 					if (!isPunchShield(attackerEffect))
 						attackResult.setLaunchSubEffect(false);
 				}
-			}
-			// shield type 0, convertHeal
-			else if (shieldType == ShieldType.CONVERT) {
+			} else if (shieldType == ShieldType.CONVERT) { // shield type 0, convertHeal
 				int damage = attackResult.getDamage();
 
 				int absorbedDamage = damage;
