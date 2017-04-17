@@ -9,19 +9,16 @@ import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.Summon;
-import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.summons.SummonMode;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.LOG;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.TYPE;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.skillengine.effect.EffectTemplate;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.HealType;
 import com.aionemu.gameserver.skillengine.model.HitType;
 import com.aionemu.gameserver.skillengine.model.ShieldType;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.PositionUtil;
 
 /**
@@ -30,18 +27,18 @@ import com.aionemu.gameserver.utils.PositionUtil;
  */
 public class AttackShieldObserver extends AttackCalcObserver {
 
-	private int hit;
+	private final Effect effect;
+	private final HitType hitType;
+	private final ShieldType shieldType;
+	private final int hit;
+	private final boolean hitPercent;
 	private int totalHit;
-	private boolean hitPercent;
 	private boolean totalHitPercent;
-	private Effect effect;
-	private HitType hitType;
-	private ShieldType shieldType;
-	private int probability;
-	private int minRadius;
-	private int maxRadius;
-	private HealType healType;
-	private int mpValue;
+	private final int probability;
+	private final int minRadius;
+	private final int maxRadius;
+	private final HealType healType;
+	private final int mpValue;
 
 	private boolean totalHitPercentSet = false;
 
@@ -78,12 +75,19 @@ public class AttackShieldObserver extends AttackCalcObserver {
 				continue;
 
 			// Handle Hit Types for Shields
-			if (this.hitType != HitType.EVERYHIT) {
-				if ((attackResult.getDamageType() != null) && (attackResult.getDamageType() != this.hitType))
-					continue;
+			switch (hitType) {
+				case EVERYHIT:
+					break;
+				case SKILL:
+					if (attackerEffect == null)
+						continue;
+					break;
+				default:
+					if (attackResult.getDamageType() != null && hitType != attackResult.getDamageType())
+						continue;
 			}
 
-			if (Rnd.chance() >= probability)
+			if (probability < 100 && Rnd.chance() >= probability)
 				continue;
 
 			// shield type 2 or 16, normal shield, MP
@@ -119,7 +123,7 @@ public class AttackShieldObserver extends AttackCalcObserver {
 					effect.endEffect();
 					return;
 				}
-			} else if (shieldType == ShieldType.REFLECTOR) { // shield type 1, reflected damage
+			} else if (shieldType == ShieldType.REFLECTOR || shieldType == ShieldType.SKILL_REFLECTOR) { // shield type 1, reflected damage
 				if (minRadius != 0) {
 					if (PositionUtil.isInRange(attacker, effect.getEffected(), minRadius))
 						continue;
@@ -136,12 +140,14 @@ public class AttackShieldObserver extends AttackCalcObserver {
 					}
 					attackResult.setReflectedDamage(reflectedHit);
 					attackResult.setReflectedSkillId(effect.getSkillId());
-					// apply reflect damage
-					attacker.getController().onAttack(effect.getEffected(), 0, TYPE.REGULAR, reflectedHit, false, LOG.REGULAR, null, false);
 
-					if (effect.getEffected() instanceof Player)
-						PacketSendUtility.sendPacket((Player) effect.getEffected(),
-							SM_SYSTEM_MESSAGE.STR_SKILL_PROC_EFFECT_OCCURRED(effect.getSkillTemplate().getNameId()));
+					if (shieldType == ShieldType.SKILL_REFLECTOR) { // whole skill reflections are applied implicitly, see Effect#getEffected()
+						attackerEffect.setIsForcedEffect(true); // make sure it hits the effector (no checks needed at this point)
+						effect.endEffect(); // one skill reflection ends the shield effect
+						return;
+					} else { // apply reflect damage
+						attacker.getController().onAttack(effect.getEffected(), 0, TYPE.REGULAR, reflectedHit, false, LOG.REGULAR, null, false);
+					}
 				}
 				break;
 			} else if (shieldType == ShieldType.PROTECT) { // shield type 8, protect effect (ex. skillId: 417 Bodyguard I)
@@ -234,4 +240,9 @@ public class AttackShieldObserver extends AttackCalcObserver {
 		}
 		return false;
 	}
+
+	public ShieldType getShieldType() {
+		return shieldType;
+	}
+
 }

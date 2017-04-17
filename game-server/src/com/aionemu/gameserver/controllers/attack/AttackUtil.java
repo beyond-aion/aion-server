@@ -484,13 +484,6 @@ public class AttackUtil {
 		calculateEffectResult(effect, effected, damage, status, ht, ignoreShield, position, send);
 	}
 
-	/**
-	 * @param effect
-	 * @param effected
-	 * @param damage
-	 * @param status
-	 * @param hitType
-	 */
 	private static void calculateEffectResult(Effect effect, Creature effected, int damage, AttackStatus status, HitType hitType, boolean ignoreShield,
 		int position, boolean send) {
 		AttackResult attackResult = new AttackResult(damage, status, hitType);

@@ -54,7 +54,6 @@ public class Effect implements StatOwner {
 	private Future<?> endTask = null;
 	private Future<?>[] periodicTasks = null;
 	private Future<?> periodicActionsTask = null;
-	private boolean isSubEffect = false;
 
 	private int effectedHp = -1;
 
@@ -214,8 +213,18 @@ public class Effect implements StatOwner {
 		this.duration = newDuration;
 	}
 
-	public Creature getEffected() {
+	/**
+	 * @return The effected from effect constructor, can differ from getEffected if effect got reflected via shield observer.
+	 */
+	public Creature getOriginalEffected() {
 		return effected;
+	}
+
+	/**
+	 * @return The creature which receives the damage/skill results. It will be the effector if {@link #isReflected()} returns true.
+	 */
+	public Creature getEffected() {
+		return isReflected() ? effector : effected;
 	}
 
 	public Creature getEffector() {
@@ -334,6 +343,7 @@ public class Effect implements StatOwner {
 		if (this.getSkill() != null && this.getSkill().isInstantSkill())
 			instantSkill = true;
 		if (er.getType() == ResourceType.HP && er.getValue() != 0 && !overTimeEffect && !instantSkill) {
+			Creature effected = getEffected();
 			int value = (er.isDamage() ? -er.getValue() : er.getValue());
 			value += effected.getLifeStats().getCurrentHp();
 			if (value <= 0) {
@@ -390,6 +400,13 @@ public class Effect implements StatOwner {
 	 */
 	public void setShieldDefense(int shieldDefense) {
 		this.shieldDefense = shieldDefense;
+	}
+
+	/**
+	 * @return True if the whole effect is reflected (through shield observer)
+	 */
+	public boolean isReflected() {
+		return (shieldDefense & ShieldType.SKILL_REFLECTOR.getId()) != 0;
 	}
 
 	/**
@@ -602,6 +619,7 @@ public class Effect implements StatOwner {
 		 * broadcast final hate to all visible objects
 		 */
 		// TODO hostile_type?
+		Creature effected = getEffected();
 		if (effectHate != 0 && tauntHate >= 0) { // dont add hate if taunt hate is < 0!
 			if (effected instanceof Npc && !isDelayedDamage() && !isPetOrder() && !isSummoning())
 				effected.getAggroList().addHate(effector, 1);
@@ -697,6 +715,7 @@ public class Effect implements StatOwner {
 			}
 		}
 
+		Creature effected = getEffected();
 		// TODO better way to finish
 		if (getSkillTemplate().getTargetSlot() == SkillTargetSlot.SPEC2) {
 			effected.getLifeStats().increaseHp((int) (effected.getLifeStats().getMaxHp() * 0.2f));
@@ -767,9 +786,12 @@ public class Effect implements StatOwner {
 	 * Try to add this effect to effected controller
 	 */
 	public void addToEffectedController() {
-		if (!addedToController && effected.getLifeStats() != null && !effected.getLifeStats().isAlreadyDead()) {
-			effected.getEffectController().addEffect(this);
-			addedToController = true;
+		if (!addedToController) {
+			Creature effected = getEffected();
+			if (effected.getLifeStats() != null && !effected.getLifeStats().isAlreadyDead()) {
+				effected.getEffectController().addEffect(this);
+				addedToController = true;
+			}
 		}
 	}
 
@@ -896,7 +918,7 @@ public class Effect implements StatOwner {
 		}
 
 		// adjust with pvp duration
-		if (effected instanceof Player && skillTemplate.getPvpDuration() != 0)
+		if (skillTemplate.getPvpDuration() != 0 && getEffected() instanceof Player)
 			duration = duration * skillTemplate.getPvpDuration() / 100;
 
 		if (duration > 86400000)
@@ -1004,6 +1026,7 @@ public class Effect implements StatOwner {
 	private void checkUseEquipmentConditions() {
 		// If skill has use equipment conditions, observe for unequip event and remove effect if event occurs
 		if (getSkillTemplate().getUseEquipmentconditions() != null && !getSkillTemplate().getUseEquipmentconditions().getConditions().isEmpty()) {
+			Creature effected = getEffected();
 			ActionObserver observer = new ActionObserver(ObserverType.UNEQUIP) {
 
 				@Override
@@ -1023,6 +1046,7 @@ public class Effect implements StatOwner {
 	 */
 	private void checkCancelOnDmg() {
 		if (isCancelOnDmg()) {
+			Creature effected = getEffected();
 			effected.getObserveController().attach(new ActionObserver(ObserverType.ATTACKED) {
 
 				@Override
@@ -1234,14 +1258,6 @@ public class Effect implements StatOwner {
 	 */
 	public boolean isEndedByTime() {
 		return endedByTime;
-	}
-
-	public boolean isSubEffect() {
-		return isSubEffect;
-	}
-
-	public void setSubEffect(boolean isSubEffect) {
-		this.isSubEffect = isSubEffect;
 	}
 
 	public int getMpAbsorbed() {

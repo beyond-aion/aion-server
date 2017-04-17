@@ -543,6 +543,7 @@
 	<xs:complexType name="ReflectorEffect">
 		<xs:complexContent>
 			<xs:extension base="ShieldEffect">
+				<xs:attribute name="reflectType" type="xs:int" />
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
