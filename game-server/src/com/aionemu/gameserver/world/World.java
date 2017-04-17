@@ -364,12 +364,14 @@ public class World {
 	 */
 	public WorldPosition createPosition(int mapId, float x, float y, float z, byte heading, int instanceId) {
 		WorldMap map = getWorldMap(mapId);
-		if (map == null || map.getWorldMapInstanceById(instanceId) == null)
-			return null;
+		if (map == null)
+			throw new NullPointerException("Failed to create position (invalid mapId: " + mapId + ")");
+		if (map.getWorldMapInstanceById(instanceId) == null)
+			throw new NullPointerException("Failed to create position (invalid instanceId " + instanceId + " for mapId " + mapId + ")");
 		MapRegion mr = map.getWorldMapInstanceById(instanceId).getRegion(x, y, z);
 		if (mr == null)
-			log.warn("MapRegion should not be null (mapId=" + mapId + ", x=" + x + ", y=" + y + ", z=" + z + ", instanceId=" + instanceId + ")",
-				new NullPointerException()); // don't actually throw the exception (we only want to print the stack trace)
+			throw new NullPointerException(
+				"Failed to create position (invalid coords: x=" + x + ", y=" + y + ", z=" + z + " for mapId " + mapId + " in instanceId " + instanceId + ")");
 		return new WorldPosition(mapId, x, y, z, heading, mr);
 	}
 

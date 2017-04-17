@@ -26,6 +26,7 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 @InstanceID(300610000)
 public class RaksangRuinsInstance extends GeneralInstanceHandler {
 
+	private volatile boolean isInstanceDestroyed;
 	private Map<Integer, StaticDoor> doors;
 	private AtomicBoolean isEventStarted = new AtomicBoolean();
 	private Future<?> spawnTask;
@@ -53,8 +54,8 @@ public class RaksangRuinsInstance extends GeneralInstanceHandler {
 			case 236013: // Withering Husk
 			case 236014: // Ragelich Adept
 				if (++waveKills >= 31) {
-						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_TAMES_SOLO_A_END());
-						isDoorAccessible = true;
+					sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_TAMES_SOLO_A_END());
+					isDoorAccessible = true;
 				}
 				break;
 			case 236074:
@@ -142,13 +143,18 @@ public class RaksangRuinsInstance extends GeneralInstanceHandler {
 	 * Used for way A (Terror's Vault & Cuttling Grounds).
 	 */
 	private void delaySpawn(int npcId, int delay) {
-		ThreadPoolManager.getInstance().schedule(() -> spawn(npcId, 621.50f, 198.54f, 924.838f, (byte) 42), delay);
+		ThreadPoolManager.getInstance().schedule(() -> {
+			if (!isInstanceDestroyed)
+				spawn(npcId, 621.50f, 198.54f, 924.838f, (byte) 42);
+		}, delay);
 	}
 
-	private void delaySpawn(byte step , int delay) {
+	private void delaySpawn(byte step, int delay) {
 		spawnTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
-			if (++spawns >= 8)
-				spawnTask.cancel(true);
+			if (++spawns > 8 || isInstanceDestroyed) {
+				spawnTask.cancel(false);
+				return;
+			}
 			switch (step) {
 				case 1:
 					switch (spawns) {
@@ -309,4 +315,11 @@ public class RaksangRuinsInstance extends GeneralInstanceHandler {
 		player.getInventory().decreaseByItemId(164000342, 20);
 		super.onLeaveInstance(player);
 	}
+
+	@Override
+	public void onInstanceDestroy() {
+		isInstanceDestroyed = true;
+		spawnTask.cancel(true);
+	}
+
 }
