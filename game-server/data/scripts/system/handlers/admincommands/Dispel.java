@@ -11,7 +11,7 @@ import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 public class Dispel extends AdminCommand {
 
 	public Dispel() {
-		super("dispel");
+		super("dispel", "Dispels all (de)buffs");
 	}
 
 	@Override
@@ -27,12 +27,8 @@ public class Dispel extends AdminCommand {
 		if (creature instanceof Player) {
 			target = (Player) creature;
 			target.getEffectController().removeAllEffects();
+			target.getEffectController().updatePlayerEffectIcons(null);
 			PacketSendUtility.sendMessage(admin, creature.getName() + " had all buff effects dispelled !");
 		}
-	}
-
-	@Override
-	public void info(Player player, String message) {
-		// TODO Auto-generated method stub
 	}
 }
