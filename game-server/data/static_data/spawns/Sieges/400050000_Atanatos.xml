@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<spawns>
+	<spawn_map map_id="400050000">
+		<siege_spawn siege_id="10311">
+			<siege_race race="ASMODIANS">
+				<siege_mod mod="PEACE">
+				</siege_mod>
+				<siege_mod mod="SIEGE">
+				</siege_mod>
+			</siege_race>
+			<siege_race race="BALAUR">
+				<siege_mod mod="PEACE">
+				</siege_mod>
+				<siege_mod mod="SIEGE">
+				</siege_mod>
+			</siege_race>
+			<siege_race race="ELYOS">
+				<siege_mod mod="PEACE">
+					<!-- Atanatos Abyss Equipment Merchant -->
+					<spawn npc_id="804161" respawn_time="295">
+						<spot x="1030.2015" y="1048.0337" z="1531.4342" h="85" />
+					</spawn>
+					<!-- Atanatos Augmenter -->
+					<spawn npc_id="804168" respawn_time="295">
+						<spot x="1006.808" y="1006.6061" z="1531.4342" h="15" />
+					</spawn>
+					<!-- Atanatos Combat Crafting Merchant -->
+					<spawn npc_id="804163" respawn_time="295">
+						<spot x="1045.1748" y="1037.3763" z="1531.4342" h="75" />
+					</spawn>
+					<!-- Atanatos Conditioning Officer -->
+					<spawn npc_id="804167" respawn_time="295">
+						<spot x="1010.8833" y="1003.1198" z="1531.4342" h="15" />
+					</spawn>
+					<!-- Atanatos Consumables Distributor -->
+					<spawn npc_id="804158" respawn_time="295">
+						<spot x="1002.387" y="1037.0469" z="1531.4342" h="110" />
+					</spawn>
+					<!-- Atanatos Field Crafting Merchant -->
+					<spawn npc_id="804162" respawn_time="295">
+						<spot x="1037.1108" y="1044.2911" z="1531.4342" h="75" />
+					</spawn>
+					<!-- Atanatos General Goods Merchant -->
+					<spawn npc_id="804165" respawn_time="295">
+						<spot x="1040.5275" y="1007.3849" z="1531.4342" h="42" />
+					</spawn>
+					<!-- Atanatos Relics Supervisor -->
+					<spawn npc_id="804160" respawn_time="295">
+						<spot x="1017.621" y="1047.897" z="1531.4342" h="90" />
+					</spawn>
+					<!-- Atanatos Soul Healer -->
+					<spawn npc_id="804478" respawn_time="295">
+						<spot x="1010.5079" y="1044.7275" z="1531.4342" h="110" />
+					</spawn>
+					<!-- Atanatos Stigma Master -->
+					<spawn npc_id="804166" respawn_time="295">
+						<spot x="1035.6296" y="1003.5079" z="1530.0438" h="40" />
+					</spawn>
+					<!-- Atanatos Warehouse Manager -->
+					<spawn npc_id="804169" respawn_time="295">
+						<spot x="1003.2158" y="1010.6955" z="1531.4342" h="15"/>
+					</spawn>
+					<!--- Chamber Gateway -->
+					<spawn npc_id="880114" respawn_time="295">
+						<spot x="1082.943" y="1024" z="1530.7206" static_id="49" />
+					</spawn>
+					<!--- Chamber Gateway -->
+					<spawn npc_id="880118" respawn_time="295">
+						<spot x="965.26349" y="1024" z="1530.7227" static_id="51" h="60" />
+					</spawn>
+					<!--- Chamber Gateway -->
+					<spawn npc_id="277546" respawn_time="295">
+						<spot x="1055.835" y="1024" z="1530.5889" static_id="890" h="60" />
+					</spawn>
+					<!--- Chamber Gateway -->
+					<spawn npc_id="277570" respawn_time="295">
+						<spot x="993.92242" y="1024" z="1530.5785" static_id="62" />
+					</spawn>
+					<!-- Siegebreak Defender (Male WA) -->
+					<spawn npc_id="880912" respawn_time="295">
+						<spot x="1149.1859" y="890.2167" z="1528.9133" h="105" />
+						<spot x="1157.5002" y="898.2101" z="1528.8938" h="105" />
+						<spot x="1019.1533" y="903.1292" z="1530.1044" h="90" />
+						<spot x="1028.6747" y="903.4538" z="1530.1044" h="90" />
+						<spot x="1029.5679" y="894.2151" z="1530.1044" h="90" />
+						<spot x="1018.5045" y="894.2126" z="1530.1044" h="90" />
+						<spot x="899.1603" y="891.8093" z="1528.8955" h="75" />
+						<spot x="891.9902" y="898.7578" z="1528.8813" h="75" />
+						<spot x="904.0376" y="1019.2557"  z="1530.0897" h="60" />
+						<spot x="903.8778" y="1028.6539" z="1530.0897" h="60" />
+						<spot x="893.8809" y="1028.5251" z="1530.0897" h="60" />
+						<spot x="893.9204" y="1019.3165" z="1530.0897" h="60" />
+						<spot x="892.4090" y="1148.3590" z="1528.8584" h="45" />
+						<spot x="899.1368" y="1154.8590" z="1528.8722" h="45" />
+						<spot x="1019.1205" y="1144.2642" z="1530.1044" h="30" />
+						<spot x="1029.0098" y="1144.2578" z="1530.1044" h="30" />
+						<spot x="1029.2521" y="1154.4746" z="1530.1044" h="30" />
+						<spot x="1018.8341" y="1154.5646" z="1530.1044" h="30" />
+						<spot x="1149.8639" y="1156.1969" z="1528.8717" h="15" />
+						<spot x="1156.2589" y="1150.1270" z="1528.8513" h="15" />
+						<spot x="1143.6477" y="1028.9040" z="1530.0897" />
+						<spot x="1143.5961" y="1019.3841" z="1530.0897" />
+						<spot x="1155.3143" y="1028.7269" z="1530.0897" />
+						<spot x="1155.3401" y="1019.5530" z="1530.0897" />
+					</spawn>
+					<!-- Siegebreak Infantry (Female WA) -->
+					<spawn npc_id="880913" respawn_time="295">
+						<spot x="1135.2565" y="900.70886" z="1529.712" h="105" />
+						<spot x="1147.3019" y="913.058" z="1529.7122" h="105" />
+						<spot x="901.4989" y="913.5512" z="1529.7119" h="75" />
+						<spot x="913.8870" y="901.4189" z="1529.7120" h="75" />
+						<spot x="913.2981" y="1146.9801" z="1529.7160" h="45" />
+						<spot x="900.8482" y="1134.7965" z="1529.7160" h="45" />
+						<spot x="1146.8822" y="1134.6920" z="1529.7119" h="15" />
+						<spot x="1134.6588" y="1146.7592" z="1529.7119" h="15" />
+					</spawn>
+					<!-- Siegebreak Backstabber (Male AS) -->
+					<spawn npc_id="880914" respawn_time="295">
+						<spot x="1109.7301" y="938.7211" z="1530.2781" h="105" />
+						<spot x="937.8251" y="937.7532" z="1530.2844" h="75" />
+						<spot x="938.1009" y="1110.3134" z="1530.2804" h="45" />
+						<spot x="1110.3999" y="1110.0641" z="1530.2928" h="15" />
+					</spawn>
+					<!-- Siegebreak Wingblade (Female AS)
+					<spawn npc_id="880915" respawn_time="295">
+					</spawn> -->
+					<!-- Siegebreak Ranger (Male RA) -->
+					<spawn npc_id="880916" respawn_time="295">
+						<spot x="937.1463" y="936.9845" z="1549.5201" h="75" />
+						<spot x="901.2977" y="995.2921" z="1549.5201" h="60" />
+						<spot x="900.9280" y="1051.8453" z="1549.5201" h="60" />
+						<spot x="937.3121" y="1111.1864" z="1549.5201" h="45" />
+						<spot x="1110.8324" y="1110.5225" z="1549.5201" h="15" />
+						<spot x="1146.7461" y="1051.4290" z="1549.5201" />
+						<spot x="1146.6890" y="996.0541" z="1549.5201" />
+						<spot x="1110.9795" y="937.3698" z="1549.5201" h="105" />
+					</spawn>
+					<!-- Siegebreak Reserve (Female GU) -->
+					<spawn npc_id="880917" respawn_time="295">
+						<spot x="950.7575" y="939.1316" z="1551.9769" h="75" />
+						<spot x="937.3281" y="952.6996" z="1551.9769" h="75" />
+						<spot x="921.5267" y="968.4460" z="1551.9769" h="75" />
+						<spot x="912.5914" y="986.6119" z="1551.9769" h="60" />
+						<spot x="912.3992" y="1060.0059" z="1551.9769" h="60" />
+						<spot x="921.9083" y="1079.5782" z="1551.9769" h="45" />
+						<spot x="937.8126" y="1095.4128" z="1551.9769" h="45" />
+						<spot x="952.8790" y="1110.4575" z="1551.9769" h="45" />
+						<spot x="968.4009" y="1126.0505" z="1551.9769" h="45" />
+						<spot x="991.0156" y="1136.0901" z="1551.9988" h="30" />
+						<spot x="1097.2577" y="1108.4589" z="1551.9769" h="15" />
+						<spot x="1111.3081" y="1094.4227" z="1551.9769" h="15" />
+						<spot x="1125.8903" y="1079.8430" z="1551.9769" h="15" />
+						<spot x="1135.4303" y="1060.4392" z="1551.9769" />
+						<spot x="1135.4794" y="987.1580" z="1551.9769" />
+						<spot x="1125.9008" y="968.0660" z="1551.9769" h="105" />
+						<spot x="1110.9380" y="953.1134" z="1551.9769" h="105" />
+						<spot x="1095.2894" y="937.6560" z="1551.9769" h="105" />
+						<spot x="1079.5427" y="921.9225" z="1551.9769" h="105" />
+						<spot x="1054.6750" y="911.6903" z="1552.0907" h="90" />
+					</spawn>
+					<!-- Siegebreak Mender (Female PR) -->
+					<spawn npc_id="880918" respawn_time="295">
+						<spot x="1023.9147" y="903.1785" z="1530.1044" h="90" />
+						<spot x="903.8467" y="1024.0511" z="1530.1086" h="60" />
+						<spot x="1024.0118" y="1144.1707" z="1530.1044" h="30" />
+						<spot x="1143.5646" y="1024.1948" z="1530.1086" />
+					</spawn>
+					<!-- Siegebreak Battlesage (Male WI)
+					<spawn npc_id="880919" respawn_time="295">
+					</spawn>  -->
+					<!-- Siegebreak Warlock (Male EL) -->
+					<spawn npc_id="880920" respawn_time="295">
+						<spot x="1141.1921" y="906.8690" z="1529.7122" h="105" />
+						<spot x="1023.8714" y="898.5602" z="1530.1044" h="90" />
+						<spot x="907.7903" y="907.4752" z="1529.7119" h="75" />
+						<spot x="898.9819" y="1024.1799" z="1530.1086" h="60" />
+						<spot x="907.1545" y="1140.8745" z="1529.7160" h="45" />
+						<spot x="1024.1923" y="1149.6912" z="1530.1044" h="30" />
+						<spot x="1140.7394" y="1140.7122" z="1529.7119" h="15" />
+						<spot x="1149.1985" y="1024.0457" z="1530.1086" />
+						<spot x="996.8389" y="1021.3524" z="1571.6133" />
+						<spot x="1050.0662" y="1026.4243" z="1571.6130" h="60" />
+					</spawn>
+				</siege_mod>
+				<siege_mod mod="SIEGE">
+					<!-- Exterior Gate -->
+					<spawn npc_id="277538" respawn_time="3600">
+						<spot x="1134.8783" y="912.99518" z="1530.2316" static_id="72" h="105" />
+						<spot x="1134.7111" y="1134.6522" z="1530.2413" static_id="69" h="15" />
+						<spot x="913.56342" y="1134.343" z="1530.2722" static_id="385" h="45" />
+						<spot x="913.6413" y="913.37018" z="1530.2527" static_id="63" h="75" />
+						<spot x="1024" y="913.62415" z="1530.673" static_id="28" h="90" />
+						<spot x="913.25" y="1024" z="1530.6768" static_id="254" h="60" />
+						<spot x="1024" y="1134.3986" z="1530.6421" static_id="39" h="30" />
+						<spot x="1136.02" y="1024" z="1530.7115" static_id="61" />
+					</spawn>
+					<!--- Guardian General Threshold-->
+					<spawn npc_id="277574">
+						<spot x="1079.37" y="1024" z="1552" static_id="1070" />
+						<spot x="967.23999" y="1024" z="1552" static_id="1069" h="60" />
+					</spawn>
+				</siege_mod>
+			</siege_race>
+		</siege_spawn>
+	</spawn_map>
+</spawns>

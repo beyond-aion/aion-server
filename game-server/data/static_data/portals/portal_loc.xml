@@ -260,6 +260,10 @@
 	<portal_loc world_id="400050000" loc_id="4000505" x="1429.6361" y="618.5615" z="1482.2649" h="45"/> <!-- Back Door -->
 	<portal_loc world_id="400050000" loc_id="4000506" x="1429.7289" y="1429.9015" z="1482.2649" h="75"/> <!-- Back Door -->
 	<portal_loc world_id="400050000" loc_id="4000507" x="617.0529" y="617.28925" z="1482.2656" h="14"/> <!-- Back Door -->
+	<portal_loc world_id="400050000" loc_id="4000508" x="1087.8162" y="1024" z="1530.1122"/> <!-- Southern Outer Chamber Gateway -->
+	<portal_loc world_id="400050000" loc_id="4000509" x="1051.8195" y="1024" z="1530.0402" h="60"/> <!-- Southern Inner Chamber Gateway -->
+	<portal_loc world_id="400050000" loc_id="4000510" x="960.6486" y="1024" z="1530.1122" h="60"/> <!-- Northern Outer Chamber Gateway -->
+	<portal_loc world_id="400050000" loc_id="4000511" x="997.9323" y="1024" z="1530.0415"/> <!-- Northern Inner Chamber Gateway -->
 	<!-- Panesterra [Fortress 10411] -->
 	<portal_loc world_id="400060000" loc_id="4000600" x="595.80225" y="1452.4548" z="1484.5125" h="44"/> <!-- Front Door -->
 	<portal_loc world_id="400060000" loc_id="4000601" x="1452.1455" y="595.4663" z="1484.5125" h="106"/> <!-- Front Door -->

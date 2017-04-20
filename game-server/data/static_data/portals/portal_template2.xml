@@ -1299,6 +1299,21 @@
 	<portal_use npc_id="731636">
 		<portal_path loc_id="2201001" />
 	</portal_use>
+	
+	<!-- Panesterra -->
+	<!-- Atanatos -->
+	<portal_use npc_id="277546">
+		<portal_path loc_id="4000508" />
+	</portal_use>
+	<portal_use npc_id="880114">
+		<portal_path loc_id="4000509" />
+	</portal_use>
+	<portal_use npc_id="277570">
+		<portal_path loc_id="4000510" />
+	</portal_use>
+	<portal_use npc_id="880118">
+		<portal_path loc_id="4000511" />
+	</portal_use>
 	<!-- ############### PORTAL USE END ############### -->
 
 	<!-- ############### PORTAL DIALOG ############### -->

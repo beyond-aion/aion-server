@@ -156,116 +156,6 @@
 			<spot x="1431.5046" y="1251.2432" z="1496.3721"/>
 			<spot x="1434.7545" y="1224.1244" z="1496.3721"/>
 		</spawn>
-		<!-- Ahserion Siegebreak Ambusher -->
-		<spawn npc_id="880923" respawn_time="295">
-			<spot x="891.13501" y="1078.7991" z="1532.9285" h="15"/>
-			<spot x="894.03998" y="970.04742" z="1532.9285" h="105"/>
-			<spot x="943.17334" y="976.72583" z="1532.9285" h="45"/>
-			<spot x="947.23926" y="1077.6372" z="1532.9285" h="75"/>
-			<spot x="968.86359" y="951.81226" z="1532.9285" h="105"/>
-			<spot x="969.71893" y="1156.1034" z="1532.9285" h="75"/>
-			<spot x="970.2428" y="893.82709" z="1532.9285" h="45"/>
-			<spot x="977.367" y="1109.2029" z="1532.9285" h="15"/>
-			<spot x="1071.048" y="940.11499" z="1532.9285" h="75"/>
-			<spot x="1078.6892" y="891.5993" z="1532.9285" h="15"/>
-			<spot x="1079.677" y="1095.9705" z="1532.9285" h="45"/>
-			<spot x="1079.9783" y="1158.8706" z="1532.9285" h="50"/>
-			<spot x="1098.224" y="967.61322" z="1532.9285" h="15"/>
-			<spot x="1104.9625" y="1072.158" z="1532.9285" h="105"/>
-			<spot x="1156.9337" y="1078.8929" z="1532.9285" h="45"/>
-			<spot x="1158.0133" y="968.63293" z="1532.9285" h="75"/>
-		</spawn>
-		<!-- Ahserion Siegebreak Contender -->
-		<spawn npc_id="880922" respawn_time="295">
-			<spot x="890.92102" y="900.1333" z="1532.9285" h="75"/>
-			<spot x="898.82904" y="1157.3698" z="1532.9285" h="45"/>
-			<spot x="899.42157" y="1017.579" z="1532.9285" h="60"/>
-			<spot x="954.33698" y="1032.303" z="1554.6571" h="60"/>
-			<spot x="955.633" y="1014.8448" z="1532.9285" h="60"/>
-			<spot x="1009.6232" y="920.78796" z="1577.144" h="60"/>
-			<spot x="1015.1666" y="1098.934" z="1532.9285" h="30"/>
-			<spot x="1016.3292" y="1149.097" z="1532.9285" h="30"/>
-			<spot x="1019.0124" y="1091.6447" z="1554.6571" h="30"/>
-			<spot x="1023.6255" y="956.22302" z="1577.144" h="90"/>
-			<spot x="1024.328" y="1088.4746" z="1577.144" h="30"/>
-			<spot x="1028.1888" y="899.97784" z="1532.9285" h="90"/>
-			<spot x="1029.1547" y="957.49884" z="1554.6571" h="90"/>
-			<spot x="1032.7511" y="950.41309" z="1532.9285" h="90"/>
-			<spot x="1037.2939" y="1126.6307" z="1577.144"/>
-			<spot x="1093.8204" y="1033.1919" z="1532.9285"/>
-			<spot x="1095.0442" y="1015.9321" z="1554.6571"/>
-			<spot x="1149.1527" y="890.48389" z="1532.9285" h="105"/>
-			<spot x="1152.2827" y="1030.1919" z="1532.9285"/>
-			<spot x="1155.8899" y="1149.0931" z="1532.9285" h="15"/>
-		</spawn>
-		<!-- Ahserion Siegebreak Guard -->
-		<spawn npc_id="880921" respawn_time="295">
-			<spot x="889.25897" y="1148.1821" z="1532.9285" h="45"/>
-			<spot x="899.73987" y="1029.6986" z="1532.9285" h="60"/>
-			<spot x="901.22235" y="889.34076" z="1532.9285" h="75"/>
-			<spot x="953.66583" y="1016.4946" z="1554.6571" h="60"/>
-			<spot x="1018.021" y="899.99878" z="1532.9285" h="90"/>
-			<spot x="1019.3093" y="957.76379" z="1554.6571" h="90"/>
-			<spot x="1028.8578" y="1091.2811" z="1554.6571" h="30"/>
-			<spot x="1030.4576" y="1149.66" z="1532.9285" h="30"/>
-			<spot x="1095.4478" y="1031.7405" z="1554.6571"/>
-			<spot x="1146.5461" y="1158.9073" z="1532.9285" h="15"/>
-			<spot x="1152.0264" y="1016.1904" z="1532.9285"/>
-			<spot x="1157.5948" y="898.85645" z="1532.9285" h="105"/>
-		</spawn>
-		<!-- Ahserion Siegebreak Marksman -->
-		<spawn npc_id="880925" respawn_time="295">
-			<spot x="907.25574" y="1071.8035" z="1554.7803" h="60"/>
-			<spot x="908.77295" y="976.21686" z="1554.7803" h="60"/>
-			<spot x="940.22845" y="1099.0834" z="1554.7803" h="45"/>
-			<spot x="940.62933" y="947.94928" z="1554.7803" h="75"/>
-			<spot x="1100.0507" y="941.14838" z="1554.7803" h="105"/>
-			<spot x="1109.0806" y="1097.7432" z="1554.7803" h="15"/>
-			<spot x="1139.9519" y="1071.9585" z="1554.7803"/>
-			<spot x="1140.2433" y="975.96057" z="1554.7803"/>
-		</spawn>
-		<!-- Ahserion Siegebreak Medic -->
-		<spawn npc_id="880927" respawn_time="295">
-			<spot x="958.33649" y="1024.3623" z="1554.6571" h="60"/>
-			<spot x="1090.2129" y="1024.0217" z="1554.6571"/>
-		</spawn>
-		<!-- Ahserion Siegebreak Reserve -->
-		<spawn npc_id="880926" respawn_time="295">
-			<spot x="903.26917" y="1051.5347" z="1554.7803" h="60"/>
-			<spot x="903.51404" y="995.69098" z="1554.7803" h="60"/>
-			<spot x="924.38708" y="964.39691" z="1554.7803" h="75"/>
-			<spot x="925.77838" y="1084.6741" z="1554.7803" h="45"/>
-			<spot x="948.71417" y="939.8443" z="1554.7803" h="75"/>
-			<spot x="950.20215" y="1108.9906" z="1554.7803" h="45"/>
-			<spot x="956.17505" y="1033.975" z="1532.9285" h="60"/>
-			<spot x="1014.8421" y="950.54224" z="1532.9285" h="90"/>
-			<spot x="1032.9623" y="1098.5261" z="1532.9285" h="30"/>
-			<spot x="1083.5365" y="924.80298" z="1554.7803" h="105"/>
-			<spot x="1092.9299" y="1014.2986" z="1532.9285"/>
-			<spot x="1099.4166" y="1107.8163" z="1554.7803" h="15"/>
-			<spot x="1109.9015" y="950.70258" z="1554.7803" h="105"/>
-			<spot x="1122.8977" y="1083.995" z="1554.7803" h="15"/>
-			<spot x="1144.6423" y="1051.2089" z="1554.7803"/>
-			<spot x="1144.6781" y="996.49518" z="1554.7803"/>
-		</spawn>
-		<!-- Ahserion Siegebreak Scalemage -->
-		<spawn npc_id="880928" respawn_time="295">
-			<spot x="890.27521" y="1023.3295" z="1532.9285" h="60"/>
-			<spot x="949.35663" y="1024.5842" z="1554.6571" h="60"/>
-			<spot x="1023.3621" y="889.72168" z="1532.9285" h="90"/>
-			<spot x="1023.652" y="1159.0784" z="1532.9285" h="30"/>
-			<spot x="1023.8497" y="1099.1584" z="1554.6571" h="30"/>
-			<spot x="1024.7886" y="949.82477" z="1554.6571" h="90"/>
-			<spot x="1100.1173" y="1023.7998" z="1554.6571"/>
-			<spot x="1162.4293" y="1023.7904" z="1532.9285"/>
-		</spawn>
-		<!-- Ahserion Siegemake Ambusher -->
-		<spawn npc_id="880851" respawn_time="295">
-			<spot x="937.11578" y="1109.6667" z="1531.1395" h="45"/>
-			<spot x="937.46814" y="937.99908" z="1531.1395" h="75"/>
-			<spot x="1109.8575" y="938.88751" z="1531.1395" h="105"/>
-			<spot x="1110.3319" y="1109.864" z="1531.1395" h="15"/>
-		</spawn>
 		<!-- Ahserion Siegemake Antiaircraft Gun -->
 		<spawn npc_id="881492" respawn_time="295">
 			<spot x="835.66107" y="912.01953" z="1539.6495" h="45"/>
@@ -361,61 +251,6 @@
 		<!-- Ahserion Siegemake Antiaircraft Gun -->
 		<spawn npc_id="881515" respawn_time="295">
 			<spot x="1187.0045" y="586.88916" z="1513.0367" h="60"/>
-		</spawn>
-		<!-- Ahserion Siegemake Contender -->
-		<spawn npc_id="880850" respawn_time="295">
-			<spot x="891.91656" y="899.71844" z="1531.1395" h="75"/>
-			<spot x="898.96405" y="1156.9646" z="1531.1395" h="45"/>
-			<spot x="899.42157" y="1017.579" z="1531.1395" h="60"/>
-			<spot x="955.633" y="1014.7707" z="1531.1395" h="60"/>
-			<spot x="1014.7479" y="920.29572" z="1575.3551" h="60"/>
-			<spot x="1016.6568" y="1096.5847" z="1531.1395" h="30"/>
-			<spot x="1018.1837" y="1148.3363" z="1531.1395" h="30"/>
-			<spot x="1023.7397" y="957.56476" z="1575.3551" h="90"/>
-			<spot x="1024.1798" y="1088.2988" z="1575.3551" h="30"/>
-			<spot x="1029.2208" y="899.42596" z="1531.1395" h="90"/>
-			<spot x="1031.1187" y="953.20673" z="1531.1395" h="90"/>
-			<spot x="1035.8463" y="1126.8473" z="1575.3551"/>
-			<spot x="1093.8204" y="1033.1919" z="1531.1395"/>
-			<spot x="1149.1027" y="890.32245" z="1531.1395" h="105"/>
-			<spot x="1150.1208" y="1031.1318" z="1531.1395"/>
-			<spot x="1155.5583" y="1149.5352" z="1531.1395" h="15"/>
-		</spawn>
-		<!-- Ahserion Siegemake Guard -->
-		<spawn npc_id="880849" respawn_time="295">
-			<spot x="890.20416" y="1148.5873" z="1531.1395" h="45"/>
-			<spot x="899.73987" y="1029.6986" z="1531.1395" h="60"/>
-			<spot x="900.14386" y="890.5022" z="1531.1395" h="75"/>
-			<spot x="1019.053" y="899.67578" z="1531.1395" h="90"/>
-			<spot x="1029.365" y="1148.323" z="1531.1395" h="30"/>
-			<spot x="1147.7064" y="1158.2444" z="1531.1395" h="15"/>
-			<spot x="1149.8645" y="1017.1304" z="1531.1395"/>
-			<spot x="1157.3759" y="898.37616" z="1531.1395" h="105"/>
-		</spawn>
-		<!-- Ahserion Siegemake Marksman -->
-		<spawn npc_id="880853" respawn_time="295">
-			<spot x="903.2168" y="1051.5085" z="1552.9913" h="60"/>
-			<spot x="903.49988" y="995.40863" z="1552.9913" h="60"/>
-			<spot x="937.84833" y="938.12769" z="1552.9913" h="75"/>
-			<spot x="939.02679" y="1109.598" z="1552.9913" h="45"/>
-			<spot x="1109.0706" y="938.93848" z="1552.9913" h="105"/>
-			<spot x="1109.084" y="1109.1278" z="1552.9913" h="15"/>
-			<spot x="1144.6224" y="1051.42" z="1552.9913"/>
-			<spot x="1144.714" y="996.3031" z="1552.9913"/>
-		</spawn>
-		<!-- Ahserion Siegemake Reserve -->
-		<spawn npc_id="880854" respawn_time="295">
-			<spot x="956.17505" y="1033.7942" z="1531.1395" h="60"/>
-			<spot x="1016.9191" y="953.44977" z="1531.1395" h="90"/>
-			<spot x="1031.1748" y="1096.6477" z="1531.1395" h="30"/>
-			<spot x="1092.9299" y="1014.8177" z="1531.1395"/>
-		</spawn>
-		<!-- Ahserion Siegemake Scalemage -->
-		<spawn npc_id="880856" respawn_time="295">
-			<spot x="959.92969" y="1024.3358" z="1552.8682" h="60"/>
-			<spot x="1023.8497" y="1089.2183" z="1552.8682" h="30"/>
-			<spot x="1024.7886" y="958.89618" z="1552.8682" h="90"/>
-			<spot x="1086.9388" y="1024.4" z="1552.8682"/>
 		</spawn>
 		<!-- Aldrich -->
 		<spawn npc_id="802661" respawn_time="295">
@@ -601,26 +436,6 @@
 		<spawn npc_id="804395" respawn_time="295">
 			<spot x="1864.4572" y="212.54231" z="1491.8877" h="75"/>
 		</spawn>
-		<!-- Atanatos Abyss Equipment Merchant -->
-		<spawn npc_id="804161" respawn_time="295">
-			<spot x="1030.2015" y="1048.0337" z="1531.4342" h="100"/>
-		</spawn>
-		<!-- Atanatos Augmenter -->
-		<spawn npc_id="804168" respawn_time="295">
-			<spot x="1006.808" y="1006.6061" z="1531.4342" h="15"/>
-		</spawn>
-		<!-- Atanatos Combat Crafting Merchant -->
-		<spawn npc_id="804163" respawn_time="295">
-			<spot x="1045.1748" y="1037.3763" z="1531.4342" h="75"/>
-		</spawn>
-		<!-- Atanatos Conditioning Officer -->
-		<spawn npc_id="804167" respawn_time="295">
-			<spot x="1010.8833" y="1003.1198" z="1531.4342" h="15"/>
-		</spawn>
-		<!-- Atanatos Consumables Distributor -->
-		<spawn npc_id="804158" respawn_time="295">
-			<spot x="1002.387" y="1037.0469" z="1531.4342" h="110"/>
-		</spawn>
 		<!-- Atanatos Escort -->
 		<spawn npc_id="802546" respawn_time="295">
 			<spot x="590.75879" y="600.95343" z="1485.2001"/>
@@ -636,34 +451,6 @@
 		<!-- Atanatos Escort -->
 		<spawn npc_id="804088" respawn_time="295">
 			<spot x="1447.5608" y="590.85645" z="1485.2001"/>
-		</spawn>
-		<!-- Atanatos Escort -->
-		<spawn npc_id="804691" respawn_time="295">
-			<spot x="1017.639" y="1047.4797" z="1532.4768" h="100"/>
-		</spawn>
-		<!-- Atanatos Field Crafting Merchant -->
-		<spawn npc_id="804162" respawn_time="295">
-			<spot x="1037.1108" y="1044.2911" z="1531.4342" h="75"/>
-		</spawn>
-		<!-- Atanatos General Goods Merchant -->
-		<spawn npc_id="804165" respawn_time="295">
-			<spot x="1040.5275" y="1007.3849" z="1531.4342" h="42"/>
-		</spawn>
-		<!-- Atanatos Relics Supervisor -->
-		<spawn npc_id="804160" respawn_time="295">
-			<spot x="1017.621" y="1047.897" z="1531.4342" h="90"/>
-		</spawn>
-		<!-- Atanatos Soul Healer -->
-		<spawn npc_id="804478" respawn_time="295">
-			<spot x="1010.5079" y="1044.7275" z="1531.4342" h="110"/>
-		</spawn>
-		<!-- Atanatos Soul Healer -->
-		<spawn npc_id="804644" respawn_time="295">
-			<spot x="1010.5397" y="1044.6825" z="1532.4768" h="108"/>
-		</spawn>
-		<!-- Atanatos Warehouse Manager -->
-		<spawn npc_id="804169" respawn_time="295">
-			<spot x="1003.2158" y="1010.6955" z="1531.4342" h="15"/>
 		</spawn>
 		<!-- Atangal Aegis -->
 		<spawn npc_id="880775" respawn_time="295">
@@ -887,10 +674,6 @@
 		<spawn npc_id="803639" respawn_time="295">
 			<spot x="1236.9581" y="626.56226" z="1497.8834" h="5"/>
 		</spawn>
-		<!-- Enraged Guardian General -->
-		<spawn npc_id="277444" respawn_time="295">
-			<spot x="1023.8105" y="1023.8806" z="1555.7548"/>
-		</spawn>
 		<!-- Faction Balance NPC -->
 		<spawn npc_id="702327" respawn_time="295">
 			<spot x="824.34521" y="824.00226" z="1522.6908"/>
@@ -1043,17 +826,6 @@
 		<!-- Heteron -->
 		<spawn npc_id="804483" respawn_time="295">
 			<spot x="1047.2913" y="1029.8602" z="1531.4342" h="75"/>
-		</spawn>
-		<!-- Incindiary Drone -->
-		<spawn npc_id="702312" respawn_time="295">
-			<spot x="924.5592" y="1037.3209" z="1531.8478"/>
-			<spot x="937.05243" y="1024.0745" z="1554.4656"/>
-			<spot x="1009.68" y="925.91711" z="1531.8478"/>
-			<spot x="1023.8007" y="940.86725" z="1554.4656"/>
-			<spot x="1023.9368" y="1113.0295" z="1554.4656"/>
-			<spot x="1037.9766" y="1122.7384" z="1531.8478"/>
-			<spot x="1109.3497" y="1024.0475" z="1554.4656"/>
-			<spot x="1123.9314" y="1011.9" z="1531.8478"/>
 		</spawn>
 		<!-- Landleap Snuffler -->
 		<spawn npc_id="881036" respawn_time="295">
@@ -1502,6 +1274,167 @@
 			<spot x="1907.1237" y="1669.9635" z="1494.011"/>
 			<spot x="1949.5713" y="1515.1021" z="1469.9783"/>
 			<spot x="1977.8195" y="1511.9998" z="1469.9783"/>
+		</spawn>
+		
+		<!-- Move to siege spawns, when WalkerFormations are working for them -->
+		<!-- Siegebreak Infantry (Female WA) -->
+		<spawn npc_id="880913" respawn_time="295">
+			<spot x="1115.2736" y="918.4791" z="1530.0533" walker_id="10X11_outer_sw_to_w" />
+			<spot x="1115.2736" y="918.4791" z="1530.0533" walker_id="10X11_outer_sw_to_w" />
+			<spot x="1115.2736" y="918.4791" z="1530.0533" walker_id="10X11_outer_sw_to_w" />
+			<spot x="1046.4891" y="897.3760" z="1530.0533" walker_id="10X11_outer_w_to_sw" />
+			<spot x="1046.4891" y="897.3760" z="1530.0533" walker_id="10X11_outer_w_to_sw" />
+			<spot x="1046.4891" y="897.3760" z="1530.0533" walker_id="10X11_outer_w_to_sw" />
+			<spot x="933.0430" y="914.4155" z="1530.0533" walker_id="10X11_outer_nw_to_w" />
+			<spot x="933.0430" y="914.4155" z="1530.0533" walker_id="10X11_outer_nw_to_w" />
+			<spot x="933.0430" y="914.4155" z="1530.0533" walker_id="10X11_outer_nw_to_w" />
+			<spot x="999.9440" y="897.8226" z="1530.0533" walker_id="10X11_outer_w_to_nw" />
+			<spot x="999.9440" y="897.8226" z="1530.0533" walker_id="10X11_outer_w_to_nw" />
+			<spot x="999.9440" y="897.8226" z="1530.0533" walker_id="10X11_outer_w_to_nw" />
+			<spot x="917.3648" y="930.4061" z="1530.0533" walker_id="10X11_outer_nw_to_n" />
+			<spot x="917.3648" y="930.4061" z="1530.0533" walker_id="10X11_outer_nw_to_n" />
+			<spot x="917.3648" y="930.4061" z="1530.0533" walker_id="10X11_outer_nw_to_n" />
+			<spot x="898.1856" y="1007.9999" z="1530.0533" walker_id="10X11_outer_n_to_nw" />
+			<spot x="898.1856" y="1007.9999" z="1530.0533" walker_id="10X11_outer_n_to_nw" />
+			<spot x="898.1856" y="1007.9999" z="1530.0533" walker_id="10X11_outer_n_to_nw" />
+			<spot x="917.6498" y="1118.4469" z="1530.0533" walker_id="10X11_outer_ne_to_n" />
+			<spot x="917.6498" y="1118.4469" z="1530.0533" walker_id="10X11_outer_ne_to_n" />
+			<spot x="917.6498" y="1118.4469" z="1530.0533" walker_id="10X11_outer_ne_to_n" />
+			<spot x="898.17206" y="1043.1403" z="1530.0533" walker_id="10X11_outer_n_to_ne" />
+			<spot x="898.17206" y="1043.1403" z="1530.0533" walker_id="10X11_outer_n_to_ne" />
+			<spot x="898.17206" y="1043.1403" z="1530.0533" walker_id="10X11_outer_n_to_ne" />
+			<spot x="930.2841" y="1130.7922" z="1530.0533" walker_id="10X11_outer_ne_to_e" />
+			<spot x="930.2841" y="1130.7922" z="1530.0533" walker_id="10X11_outer_ne_to_e" />
+			<spot x="930.2841" y="1130.7922" z="1530.0533" walker_id="10X11_outer_ne_to_e" />
+			<spot x="1001.03973" y="1149.9111" z="1530.0533" walker_id="10X11_outer_e_to_ne" />
+			<spot x="1001.03973" y="1149.9111" z="1530.0533" walker_id="10X11_outer_e_to_ne" />
+			<spot x="1001.03973" y="1149.9111" z="1530.0533" walker_id="10X11_outer_e_to_ne" />
+			<spot x="1115.1144" y="1133.7657" z="1530.0533" walker_id="10X11_outer_se_to_e" />
+			<spot x="1115.1144" y="1133.7657" z="1530.0533" walker_id="10X11_outer_se_to_e" />
+			<spot x="1115.1144" y="1133.7657" z="1530.0533" walker_id="10X11_outer_se_to_e" />
+			<spot x="1047.967" y="1149.6648" z="1530.0533" walker_id="10X11_outer_e_to_se" />
+			<spot x="1047.967" y="1149.6648" z="1530.0533" walker_id="10X11_outer_e_to_se" />
+			<spot x="1047.967" y="1149.6648" z="1530.0533" walker_id="10X11_outer_e_to_se" />
+			<spot x="1130.8099" y="1117.7079" z="1530.0533" walker_id="10X11_outer_se_to_s" />
+			<spot x="1130.8099" y="1117.7079" z="1530.0533" walker_id="10X11_outer_se_to_s" />
+			<spot x="1130.8099" y="1117.7079" z="1530.0533" walker_id="10X11_outer_se_to_s" />
+			<spot x="1150.0151" y="1039.998" z="1530.0533" walker_id="10X11_outer_s_to_se" />
+			<spot x="1150.0151" y="1039.998" z="1530.0533" walker_id="10X11_outer_s_to_se" />
+			<spot x="1150.0151" y="1039.998" z="1530.0533" walker_id="10X11_outer_s_to_se" />
+			<spot x="1130.3008" y="929.4051" z="1530.0533" walker_id="10X11_outer_sw_to_s" />
+			<spot x="1130.3008" y="929.4051" z="1530.0533" walker_id="10X11_outer_sw_to_s" />
+			<spot x="1130.3008" y="929.4051" z="1530.0533" walker_id="10X11_outer_sw_to_s" />
+			<spot x="1149.7227" y="1007.81366" z="1530.0533" walker_id="10X11_outer_s_to_sw" />
+			<spot x="1149.7227" y="1007.81366" z="1530.0533" walker_id="10X11_outer_s_to_sw" />
+			<spot x="1149.7227" y="1007.81366" z="1530.0533" walker_id="10X11_outer_s_to_sw" />
+			<spot x="1023.4181" y="968.9875" z="1573.3844" walker_id="10X11_western_connecting_tunnel" />
+			<spot x="1023.4181" y="968.9875" z="1573.3844" walker_id="10X11_western_connecting_tunnel" />
+			<spot x="1024.177" y="1078.2911" z="1573.3844" walker_id="10X11_eastern_connecting_tunnel" />
+			<spot x="1024.177" y="1078.2911" z="1573.3844" walker_id="10X11_eastern_connecting_tunnel" />
+			<spot x="1012.8212" y="983.449" z="1571.4751" walker_id="10X11_throne_room_western_balustrade" />
+			<spot x="1012.8212" y="983.449" z="1571.4751" walker_id="10X11_throne_room_western_balustrade" />
+			<spot x="1033.8466" y="1064.3892" z="1571.4751" walker_id="10X11_throne_room_eastern_balustrade" />
+			<spot x="1033.8466" y="1064.3892" z="1571.4751" walker_id="10X11_throne_room_eastern_balustrade" />
+			<spot x="998.1915" y="1019.18176" z="1552.5522" walker_id="10X11_throne_room_circle" />
+			<spot x="998.1915" y="1019.18176" z="1552.5522" walker_id="10X11_throne_room_circle" />
+		</spawn>
+		<!-- Siegebreak Backstabber (Male AS) -->
+		<spawn npc_id="880914" respawn_time="295">
+			<spot x="1023.4181" y="968.9875" z="1573.3844" walker_id="10X11_western_connecting_tunnel" walker_index="1" />
+			<spot x="1024.177" y="1078.2911" z="1573.3844" walker_id="10X11_eastern_connecting_tunnel" walker_index="1" />
+			<spot x="1012.8212" y="983.449" z="1571.4751" walker_id="10X11_throne_room_western_balustrade" walker_index="1" />
+			<spot x="1033.8466" y="1064.3892" z="1571.4751" walker_id="10X11_throne_room_eastern_balustrade" walker_index="1" />
+		</spawn>
+		<!-- Siegebreak Wingblade (Female AS) -->
+		<spawn npc_id="880915" respawn_time="295">
+			<spot x="1115.2736" y="918.4791" z="1530.0533" walker_id="10X11_outer_sw_to_w" />
+			<spot x="1115.2736" y="918.4791" z="1530.0533" walker_id="10X11_outer_sw_to_w" />
+			<spot x="1115.2736" y="918.4791" z="1530.0533" walker_id="10X11_outer_sw_to_w" />
+			<spot x="1046.4891" y="897.3760" z="1530.0533" walker_id="10X11_outer_w_to_sw" />
+			<spot x="1046.4891" y="897.3760" z="1530.0533" walker_id="10X11_outer_w_to_sw" />
+			<spot x="1046.4891" y="897.3760" z="1530.0533" walker_id="10X11_outer_w_to_sw" />
+			<spot x="933.0430" y="914.4155" z="1530.0533" walker_id="10X11_outer_nw_to_w" />
+			<spot x="933.0430" y="914.4155" z="1530.0533" walker_id="10X11_outer_nw_to_w" />
+			<spot x="933.0430" y="914.4155" z="1530.0533" walker_id="10X11_outer_nw_to_w" />
+			<spot x="999.9440" y="897.8226" z="1530.0533" walker_id="10X11_outer_w_to_nw" />
+			<spot x="999.9440" y="897.8226" z="1530.0533" walker_id="10X11_outer_w_to_nw" />
+			<spot x="999.9440" y="897.8226" z="1530.0533" walker_id="10X11_outer_w_to_nw" />
+			<spot x="917.3648" y="930.4061" z="1530.0533" walker_id="10X11_outer_nw_to_n" />
+			<spot x="917.3648" y="930.4061" z="1530.0533" walker_id="10X11_outer_nw_to_n" />
+			<spot x="917.3648" y="930.4061" z="1530.0533" walker_id="10X11_outer_nw_to_n" />
+			<spot x="898.1856" y="1007.9999" z="1530.0533" walker_id="10X11_outer_n_to_nw" />
+			<spot x="898.1856" y="1007.9999" z="1530.0533" walker_id="10X11_outer_n_to_nw" />
+			<spot x="898.1856" y="1007.9999" z="1530.0533" walker_id="10X11_outer_n_to_nw" />
+			<spot x="917.6498" y="1118.4469" z="1530.0533" walker_id="10X11_outer_ne_to_n" />
+			<spot x="917.6498" y="1118.4469" z="1530.0533" walker_id="10X11_outer_ne_to_n" />
+			<spot x="917.6498" y="1118.4469" z="1530.0533" walker_id="10X11_outer_ne_to_n" />
+			<spot x="898.17206" y="1043.1403" z="1530.0533" walker_id="10X11_outer_n_to_ne" />
+			<spot x="898.17206" y="1043.1403" z="1530.0533" walker_id="10X11_outer_n_to_ne" />
+			<spot x="898.17206" y="1043.1403" z="1530.0533" walker_id="10X11_outer_n_to_ne" />
+			<spot x="930.2841" y="1130.7922" z="1530.0533" walker_id="10X11_outer_ne_to_e" />
+			<spot x="930.2841" y="1130.7922" z="1530.0533" walker_id="10X11_outer_ne_to_e" />
+			<spot x="930.2841" y="1130.7922" z="1530.0533" walker_id="10X11_outer_ne_to_e" />
+			<spot x="1001.03973" y="1149.9111" z="1530.0533" walker_id="10X11_outer_e_to_ne" />
+			<spot x="1001.03973" y="1149.9111" z="1530.0533" walker_id="10X11_outer_e_to_ne" />
+			<spot x="1001.03973" y="1149.9111" z="1530.0533" walker_id="10X11_outer_e_to_ne" />
+			<spot x="1115.1144" y="1133.7657" z="1530.0533" walker_id="10X11_outer_se_to_e" />
+			<spot x="1115.1144" y="1133.7657" z="1530.0533" walker_id="10X11_outer_se_to_e" />
+			<spot x="1115.1144" y="1133.7657" z="1530.0533" walker_id="10X11_outer_se_to_e" />
+			<spot x="1047.967" y="1149.6648" z="1530.0533" walker_id="10X11_outer_e_to_se" />
+			<spot x="1047.967" y="1149.6648" z="1530.0533" walker_id="10X11_outer_e_to_se" />
+			<spot x="1047.967" y="1149.6648" z="1530.0533" walker_id="10X11_outer_e_to_se" />
+			<spot x="1130.8099" y="1117.7079" z="1530.0533" walker_id="10X11_outer_se_to_s" />
+			<spot x="1130.8099" y="1117.7079" z="1530.0533" walker_id="10X11_outer_se_to_s" />
+			<spot x="1130.8099" y="1117.7079" z="1530.0533" walker_id="10X11_outer_se_to_s" />
+			<spot x="1150.0151" y="1039.998" z="1530.0533" walker_id="10X11_outer_s_to_se" />
+			<spot x="1150.0151" y="1039.998" z="1530.0533" walker_id="10X11_outer_s_to_se" />
+			<spot x="1150.0151" y="1039.998" z="1530.0533" walker_id="10X11_outer_s_to_se" />
+			<spot x="1130.3008" y="929.4051" z="1530.0533" walker_id="10X11_outer_sw_to_s" />
+			<spot x="1130.3008" y="929.4051" z="1530.0533" walker_id="10X11_outer_sw_to_s" />
+			<spot x="1130.3008" y="929.4051" z="1530.0533" walker_id="10X11_outer_sw_to_s" />
+			<spot x="1149.7227" y="1007.81366" z="1530.0533" walker_id="10X11_outer_s_to_sw" />
+			<spot x="1149.7227" y="1007.81366" z="1530.0533" walker_id="10X11_outer_s_to_sw" />
+			<spot x="1149.7227" y="1007.81366" z="1530.0533" walker_id="10X11_outer_s_to_sw" />
+			<spot x="957.3826" y="941.76526" z="1552.0713" walker_id="10X11_outer_upper_nw_to_n" />
+			<spot x="957.3826" y="941.76526" z="1552.0713" walker_id="10X11_outer_upper_nw_to_n" />
+			<spot x="918.9458" y="1045.7766" z="1552.0298" walker_id="10X11_outer_upper_n_to_ne" />
+			<spot x="918.9458" y="1045.7766" z="1552.0298" walker_id="10X11_outer_upper_n_to_ne" />
+			<spot x="949.9818" y="1098.7278" z="1552.0298" walker_id="10X11_outer_upper_ne_to_e" />
+			<spot x="949.9818" y="1098.7278" z="1552.0298" walker_id="10X11_outer_upper_ne_to_e" />
+			<spot x="1088.8839" y="1107.739" z="1552.0713" walker_id="10X11_outer_upper_se_to_s" />
+			<spot x="1088.8839" y="1107.739" z="1552.0713" walker_id="10X11_outer_upper_se_to_s" />
+			<spot x="1128.6261" y="1002.676" z="1552.0298" walker_id="10X11_outer_upper_s_to_sw" />
+			<spot x="1128.6261" y="1002.676" z="1552.0298" walker_id="10X11_outer_upper_s_to_sw" />
+			<spot x="1098.6702" y="950.7006" z="1552.0298" walker_id="10X11_outer_upper_sw_to_w" />
+			<spot x="1098.6702" y="950.7006" z="1552.0298" walker_id="10X11_outer_upper_sw_to_w" />
+			<spot x="998.1915" y="1019.18176" z="1552.5522" walker_id="10X11_throne_room_circle" />
+			<spot x="998.1915" y="1019.18176" z="1552.5522" walker_id="10X11_throne_room_circle" />
+		</spawn>
+		<!-- Siegebreak Reserve (Female GU) -->
+		<spawn npc_id="880917" respawn_time="295">
+			<spot x="1115.2736" y="918.4791" z="1530.0533" walker_id="10X11_outer_sw_to_w" walker_index="1" />
+			<spot x="1046.4891" y="897.3760" z="1530.0533" walker_id="10X11_outer_w_to_sw" walker_index="1" />
+			<spot x="933.0430" y="914.4155" z="1530.0533" walker_id="10X11_outer_nw_to_w" walker_index="1" />
+			<spot x="999.9440" y="897.8226" z="1530.0533" walker_id="10X11_outer_w_to_nw" walker_index="1" />
+			<spot x="917.3648" y="930.4061" z="1530.0533" walker_id="10X11_outer_nw_to_n" walker_index="1" />
+			<spot x="898.1856" y="1007.9999" z="1530.0533" walker_id="10X11_outer_n_to_nw" walker_index="1" />
+			<spot x="917.6498" y="1118.4469" z="1530.0533" walker_id="10X11_outer_ne_to_n" walker_index="1" />
+			<spot x="898.17206" y="1043.1403" z="1530.0533" walker_id="10X11_outer_n_to_ne" walker_index="1" />
+			<spot x="930.2841" y="1130.7922" z="1530.0533" walker_id="10X11_outer_ne_to_e" walker_index="1" />
+			<spot x="1001.03973" y="1149.9111" z="1530.0533" walker_id="10X11_outer_e_to_ne" walker_index="1" />
+			<spot x="1115.1144" y="1133.7657" z="1530.0533" walker_id="10X11_outer_se_to_e" walker_index="1" />
+			<spot x="1047.967" y="1149.6648" z="1530.0533" walker_id="10X11_outer_e_to_se" walker_index="1" />
+			<spot x="1130.8099" y="1117.7079" z="1530.0533" walker_id="10X11_outer_se_to_s" walker_index="1" />
+			<spot x="1150.0151" y="1039.998" z="1530.0533" walker_id="10X11_outer_s_to_se" walker_index="1" />
+			<spot x="1130.3008" y="929.4051" z="1530.0533" walker_id="10X11_outer_sw_to_s" walker_index="1" />
+			<spot x="1149.7227" y="1007.81366" z="1530.0533" walker_id="10X11_outer_s_to_sw" walker_index="1" />
+			<spot x="957.3826" y="941.76526" z="1552.0713" walker_id="10X11_outer_upper_nw_to_n" walker_index="1" />
+			<spot x="918.9458" y="1045.7766" z="1552.0298" walker_id="10X11_outer_upper_n_to_ne" walker_index="1" />
+			<spot x="949.9818" y="1098.7278" z="1552.0298" walker_id="10X11_outer_upper_ne_to_e" walker_index="1" />
+			<spot x="1088.8839" y="1107.739" z="1552.0713" walker_id="10X11_outer_upper_se_to_s" walker_index="1" />
+			<spot x="1128.6261" y="1002.676" z="1552.0298" walker_id="10X11_outer_upper_s_to_sw" walker_index="1" />
+			<spot x="1098.6702" y="950.7006" z="1552.0298" walker_id="10X11_outer_upper_sw_to_w" walker_index="1" />
+			<spot x="998.1915" y="1019.18176" z="1552.5522" walker_id="10X11_throne_room_circle" walker_index="1" />
 		</spawn>
 	</spawn_map>
 </spawns>
