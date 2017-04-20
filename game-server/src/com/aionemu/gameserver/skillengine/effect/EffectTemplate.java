@@ -1,6 +1,7 @@
 package com.aionemu.gameserver.skillengine.effect;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.xml.bind.Unmarshaller;
@@ -15,6 +16,7 @@ import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.poll.AIQuestion;
+import com.aionemu.gameserver.controllers.attack.AttackResult;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.SkillElement;
 import com.aionemu.gameserver.model.gameobjects.Creature;
@@ -28,6 +30,7 @@ import com.aionemu.gameserver.skillengine.effect.modifier.ActionModifiers;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.HitType;
 import com.aionemu.gameserver.skillengine.model.HopType;
+import com.aionemu.gameserver.skillengine.model.ShieldType;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.skillengine.model.SpellStatus;
 import com.aionemu.gameserver.utils.stats.StatFunctions;
@@ -68,9 +71,9 @@ public abstract class EffectTemplate {
 	@XmlAttribute(name = "hoptype")
 	protected HopType hopType;
 	@XmlAttribute(name = "hopa")
-	protected int hopA; // effects the agro-value (hate)
+	protected int hopA; // effects the aggro-value (hate)
 	@XmlAttribute(name = "hopb")
-	protected int hopB; // effects the agro-value (hate)
+	protected int hopB; // effects the aggro-value (hate)
 	@XmlAttribute(name = "noresist")
 	protected boolean noResist;
 	@XmlAttribute(name = "accmod1")
@@ -455,7 +458,14 @@ public abstract class EffectTemplate {
 	};
 
 	public void calculateDamage(Effect effect) {
-
+		// evaluate skill reflect for non-dmg skills
+		AttackResult attackResult = new AttackResult(0, effect.getAttackStatus(), hitType);
+		effect.getEffected().getObserveController().checkShieldStatus(Collections.singletonList(attackResult), effect, effect.getEffector(),
+			ShieldType.SKILL_REFLECTOR);
+		if (attackResult.getShieldType() != 0) {
+			effect.setShieldDefense(effect.getShieldDefense() | attackResult.getShieldType());
+			effect.setReflectedSkillId(attackResult.getReflectedSkillId());
+		}
 	};
 
 	/**
@@ -485,9 +495,10 @@ public abstract class EffectTemplate {
 		int level = 1;
 		if (subEffect.isAddEffect())
 			level = effect.getSignetBurstedCount();
-		Effect newEffect = new Effect(effect.getEffector(), effect.getEffected(), template, level, 0);
+		Effect newEffect = new Effect(effect.getEffector(), effect.getOriginalEffected(), template, level, 0);
+		newEffect.setShieldDefense(effect.getShieldDefense());
+		newEffect.setIsForcedEffect(effect.getIsForcedEffect());
 		newEffect.setAccModBoost(effect.getAccModBoost());
-		newEffect.setSubEffect(true);
 		newEffect.initialize();
 		if (newEffect.getSpellStatus() != SpellStatus.DODGE && newEffect.getSpellStatus() != SpellStatus.RESIST)
 			effect.setSpellStatus(newEffect.getSpellStatus());

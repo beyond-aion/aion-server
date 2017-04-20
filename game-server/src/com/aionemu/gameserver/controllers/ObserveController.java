@@ -12,6 +12,7 @@ import com.aionemu.gameserver.controllers.attack.AttackResult;
 import com.aionemu.gameserver.controllers.attack.AttackStatus;
 import com.aionemu.gameserver.controllers.observer.ActionObserver;
 import com.aionemu.gameserver.controllers.observer.AttackCalcObserver;
+import com.aionemu.gameserver.controllers.observer.AttackShieldObserver;
 import com.aionemu.gameserver.controllers.observer.AttackerCriticalStatus;
 import com.aionemu.gameserver.controllers.observer.ObserverType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
@@ -20,6 +21,7 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.skillengine.effect.AbnormalState;
 import com.aionemu.gameserver.skillengine.model.Effect;
+import com.aionemu.gameserver.skillengine.model.ShieldType;
 import com.aionemu.gameserver.skillengine.model.Skill;
 
 /**
@@ -327,14 +329,15 @@ public class ObserveController {
 		return new AttackerCriticalStatus(false);
 	}
 
-	/**
-	 * @param attackList
-	 * @param effect
-	 */
 	public void checkShieldStatus(List<AttackResult> attackList, Effect effect, Creature attacker) {
+		checkShieldStatus(attackList, effect, attacker, null);
+	}
+
+	public void checkShieldStatus(List<AttackResult> attackList, Effect effect, Creature attacker, ShieldType shieldType) {
 		if (attackCalcObservers.size() > 0) {
 			for (AttackCalcObserver observer : attackCalcObservers) {
-				observer.checkShield(attackList, effect, attacker);
+				if (shieldType == null || observer instanceof AttackShieldObserver && ((AttackShieldObserver) observer).getShieldType() == shieldType)
+					observer.checkShield(attackList, effect, attacker);
 			}
 		}
 	}

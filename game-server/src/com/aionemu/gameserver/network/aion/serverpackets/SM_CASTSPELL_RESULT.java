@@ -116,12 +116,12 @@ public class SM_CASTSPELL_RESULT extends AionServerPacket {
 
 		writeH(effects.size());
 		for (Effect effect : effects) {
-			Creature effected = effect.getEffected();
+			Creature effected = effect.getOriginalEffected();
 
 			if (effected != null) {
 				writeD(effected.getObjectId());
 				writeC(effect.getEffectResult().getId());// 0 - NORMAL, 1 - ABSORBED, 2 - CONFLICT, 3 - DODGE, 4 - RESIST
-				writeC((effect.getEffectedHp() == -1 ? effected.getLifeStats().getHpPercentage() : effect.getEffectedHp())); // target %hp
+				writeC(effect.getEffectedHp() == -1 ? effected.getLifeStats().getHpPercentage() : effect.getEffectedHp()); // target %hp
 			} else { // point point skills
 				writeD(0);
 				writeC(0);

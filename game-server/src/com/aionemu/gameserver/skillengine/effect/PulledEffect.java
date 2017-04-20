@@ -37,7 +37,7 @@ public class PulledEffect extends EffectTemplate {
 			return;
 
 		effect.setSkillMoveType(SkillMoveType.PULL);
-		final Creature effector = effect.getEffector();
+		final Creature effector = effect.isReflected() ? effect.getOriginalEffected() : effect.getEffector();
 		// Target must be pulled just one meter away from effector, not IN place of effector
 		double radian = Math.toRadians(PositionUtil.convertHeadingToAngle(effector.getHeading()));
 		float z = effector.getZ();
@@ -48,14 +48,16 @@ public class PulledEffect extends EffectTemplate {
 
 	@Override
 	public void startEffect(Effect effect) {
-		final Creature effected = effect.getEffected();
-		effected.getController().cancelCurrentSkill(effect.getEffector());
-		if (effected instanceof Player)
-			((Player) effected).getFlyController().onStopGliding();
-		// effected.getMoveController().abortMove();
+		Creature effected = effect.getEffected();
+		if (!effect.isReflected()) {
+			effected.getController().cancelCurrentSkill(effect.getEffector());
+			if (effected instanceof Player)
+				((Player) effected).getFlyController().onStopGliding();
+		}
 		World.getInstance().updatePosition(effected, effect.getTargetX(), effect.getTargetY(), effect.getTargetZ(), effected.getHeading());
-		PacketSendUtility.broadcastPacketAndReceive(effected, new SM_FORCED_MOVE(effect.getEffector(), effected.getObjectId(), effect.getTargetX(),
-			effect.getTargetY(), effect.getTargetZ()));
+		PacketSendUtility.broadcastPacketAndReceive(effected,
+			new SM_FORCED_MOVE(effect.isReflected() ? effect.getOriginalEffected() : effect.getEffector(), effected.getObjectId(), effect.getTargetX(),
+				effect.getTargetY(), effect.getTargetZ()));
 		effect.getEffected().getEffectController().setAbnormal(AbnormalState.PULLED);
 		effect.setAbnormal(AbnormalState.PULLED);
 	}

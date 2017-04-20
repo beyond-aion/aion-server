@@ -56,7 +56,7 @@ public class FearEffect extends EffectTemplate {
 
 	@Override
 	public void startEffect(final Effect effect) {
-		final Creature effector = effect.getEffector();
+		final Creature effector = effect.isReflected() ? effect.getOriginalEffected() : effect.getEffector();
 		final Creature effected = effect.getEffected();
 		effected.getController().cancelCurrentSkill(effector);
 		effect.setAbnormal(AbnormalState.FEAR);

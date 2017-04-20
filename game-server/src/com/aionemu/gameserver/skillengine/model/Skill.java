@@ -848,13 +848,9 @@ public class Skill {
 			}
 			switch (targetType) {
 				case 0: // PlayerObjectId as Target
-					PacketSendUtility.broadcastPacketAndReceive(effector, new SM_CASTSPELL_RESULT(this, effects, serverTime, chainSuccess, dashStatus), et);
-					break;
-
 				case 3: // Target not in sight?
 					PacketSendUtility.broadcastPacketAndReceive(effector, new SM_CASTSPELL_RESULT(this, effects, serverTime, chainSuccess, dashStatus), et);
 					break;
-
 				case 1: // XYZ as Target
 					PacketSendUtility.broadcastPacketAndReceive(effector,
 						new SM_CASTSPELL_RESULT(this, effects, serverTime, chainSuccess, dashStatus, targetType), et);
