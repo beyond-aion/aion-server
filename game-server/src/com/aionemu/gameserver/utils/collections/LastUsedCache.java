@@ -1,36 +1,34 @@
 package com.aionemu.gameserver.utils.collections;
 
-import java.io.Serializable;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author Rolandas
  */
-@SuppressWarnings({ "unchecked", "rawtypes" })
-public class LastUsedCache<K extends Comparable, V> implements ICache<K, V>, Serializable {
+@SuppressWarnings("rawtypes")
+public class LastUsedCache<K extends Comparable, V> implements ICache<K, V> {
 
-	private static final long serialVersionUID = 3674312987828041877L;
-	Map<K, Item> map = new ConcurrentHashMap<>();
-	Item startItem = new Item();
-	Item endItem = new Item();
-	int maxSize;
+	private final Map<K, Item> map = new ConcurrentHashMap<>();
+	private final Item startItem = new Item();
+	private final Item endItem = new Item();
+	private final int maxSize;
 	private final Object syncRoot = new Object();
 
-	static class Item {
+	private class Item {
 
-		public Item(Comparable k, Object v) {
+		private Item(K k, V v) {
 			key = k;
 			value = v;
 		}
 
-		public Item() {
+		private Item() {
 		}
 
-		public Comparable key;
-		public Object value;
-		public Item previous;
-		public Item next;
+		private K key;
+		private V value;
+		private Item previous;
+		private Item next;
 	}
 
 	void removeItem(Item item) {
@@ -74,7 +72,7 @@ public class LastUsedCache<K extends Comparable, V> implements ICache<K, V>, Ser
 		synchronized (syncRoot) {
 			Item cur = startItem.next;
 			while (cur != endItem) {
-				p[count] = new CachePair(cur.key, cur.value);
+				p[count] = new CachePair<>(cur.key, cur.value);
 				count++;
 				cur = cur.next;
 			}
@@ -96,7 +94,7 @@ public class LastUsedCache<K extends Comparable, V> implements ICache<K, V>, Ser
 
 		if (cur != startItem.next)
 			moveToHead(cur);
-		return (V) cur.value;
+		return cur.value;
 	}
 
 	/**
