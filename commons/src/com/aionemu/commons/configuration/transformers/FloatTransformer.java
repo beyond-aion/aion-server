@@ -4,7 +4,6 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Type;
 
 import com.aionemu.commons.configuration.PropertyTransformer;
-import com.aionemu.commons.configuration.TransformationException;
 
 /**
  * Transforms string that represents float in decimal format
@@ -26,7 +25,7 @@ public class FloatTransformer extends PropertyTransformer<Float> {
 	 * @param field
 	 *          value will be assigned to this field
 	 * @return Float that represents value
-	 * @throws TransformationException
+	 * @throws Exception
 	 *           if something went wrong
 	 */
 	@Override

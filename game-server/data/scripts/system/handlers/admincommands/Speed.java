@@ -1,6 +1,5 @@
 package admincommands;
 
-import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,10 +34,10 @@ public class Speed extends AdminCommand implements StatOwner {
 		try {
 			parameter = Float.parseFloat(params[0]);
 			if (parameter < 0 || parameter > 100) {
-				throw new InvalidParameterException("Speed must be between 0 and 100.");
+				throw new IllegalArgumentException("Speed must be between 0 and 100.");
 			}
-		} catch (NumberFormatException | InvalidParameterException e) {
-			sendInfo(admin, e instanceof InvalidParameterException ? e.getMessage() : null);
+		} catch (IllegalArgumentException e) {
+			sendInfo(admin, e.getClass() == IllegalArgumentException.class ? e.getMessage() : null); // default info for NumberFormatException
 			return;
 		}
 

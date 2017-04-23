@@ -4,7 +4,6 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Type;
 
 import com.aionemu.commons.configuration.PropertyTransformer;
-import com.aionemu.commons.configuration.TransformationException;
 
 /**
  * Transforms String to Byte. String can be in decimal or hex format.
@@ -26,7 +25,7 @@ public class ByteTransformer extends PropertyTransformer<Byte> {
 	 * @param field
 	 *          value will be assigned to this field
 	 * @return Byte object that represents value
-	 * @throws TransformationException
+	 * @throws Exception
 	 *           if something went wrong
 	 */
 	@Override

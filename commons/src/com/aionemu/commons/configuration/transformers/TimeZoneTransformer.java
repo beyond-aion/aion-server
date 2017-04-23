@@ -6,7 +6,6 @@ import java.util.TimeZone;
 
 import com.aionemu.commons.configuration.Property;
 import com.aionemu.commons.configuration.PropertyTransformer;
-import com.aionemu.commons.configuration.TransformationException;
 
 /**
  * @author Neon
@@ -26,7 +25,7 @@ public class TimeZoneTransformer extends PropertyTransformer<TimeZone> {
 	 * @param field
 	 *          value will be assigned to this field
 	 * @return TimeZone object that represents transformed value (default or empty value returns the system default TimeZone)
-	 * @throws TransformationException
+	 * @throws Exception
 	 *           if input string was invalid
 	 */
 	@Override

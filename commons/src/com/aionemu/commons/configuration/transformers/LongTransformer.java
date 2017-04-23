@@ -4,7 +4,6 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Type;
 
 import com.aionemu.commons.configuration.PropertyTransformer;
-import com.aionemu.commons.configuration.TransformationException;
 
 /**
  * Transforms value that represents long to long. Value can be in decimal or hex format.
@@ -24,7 +23,7 @@ public class LongTransformer extends PropertyTransformer<Long> {
 	 * @param field
 	 *          value will be assigned to this field
 	 * @return Long that represents value
-	 * @throws TransformationException
+	 * @throws Exception
 	 *           if something went wrong
 	 */
 	@Override

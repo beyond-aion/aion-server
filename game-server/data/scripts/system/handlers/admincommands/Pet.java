@@ -1,7 +1,6 @@
 package admincommands;
 
 import java.awt.Color;
-import java.security.InvalidParameterException;
 import java.util.Iterator;
 
 import org.apache.commons.lang3.StringUtils;
@@ -55,8 +54,8 @@ public class Pet extends AdminCommand {
 			try {
 				petId = Integer.parseInt(params[1]);
 				if (DataManager.PET_DATA.getPetTemplate(petId) == null)
-					throw new InvalidParameterException();
-			} catch (ArrayIndexOutOfBoundsException | NumberFormatException | InvalidParameterException e) {
+					throw new IllegalArgumentException();
+			} catch (ArrayIndexOutOfBoundsException | IllegalArgumentException e) {
 				sendInfo(admin, e instanceof ArrayIndexOutOfBoundsException ? "You must specify the pet ID." : "Pet ID is invalid.");
 				return;
 			}

@@ -1,7 +1,5 @@
 package com.aionemu.gameserver.utils.time.gametime;
 
-import java.security.InvalidParameterException;
-
 import com.aionemu.gameserver.services.WeatherService;
 import com.aionemu.gameserver.spawnengine.TemporarySpawnEngine;
 
@@ -60,7 +58,7 @@ public class GameTime implements Cloneable {
 	 */
 	public GameTime(int time) {
 		if (time < 0)
-			throw new InvalidParameterException("Time must be >= 0");
+			throw new IllegalArgumentException("Time must be >= 0");
 		gameTime = time;
 		dayTime = calculateDayTime();
 	}

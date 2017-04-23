@@ -1,7 +1,5 @@
 package admincommands;
 
-import java.security.InvalidParameterException;
-
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_GAME_TIME;
 import com.aionemu.gameserver.services.GameTimeService;
@@ -44,9 +42,9 @@ public class Time extends AdminCommand {
 			try {
 				hour = Integer.parseInt(params[0]);
 				if (hour < 0 || hour > 23)
-					throw new InvalidParameterException("A day has only 24 hours!\nMin value: 0 - Max value: 23");
-			} catch (NumberFormatException | InvalidParameterException e) {
-				sendInfo(admin, e instanceof InvalidParameterException ? e.getMessage() : null);
+					throw new IllegalArgumentException("A day has only 24 hours!\nMin value: 0 - Max value: 23");
+			} catch (IllegalArgumentException e) {
+				sendInfo(admin, e.getClass() == IllegalArgumentException.class ? e.getMessage() : null); // default info for NumberFormatException
 				return;
 			}
 		}
