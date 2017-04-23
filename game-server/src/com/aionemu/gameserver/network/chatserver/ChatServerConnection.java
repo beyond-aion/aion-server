@@ -101,8 +101,7 @@ public class ChatServerConnection extends AConnection<CsServerPacket> {
 
 	@Override
 	protected final void onServerClose() {
-		// TODO send close packet to chat server
-		close(/* packet */);
+		ChatServer.getInstance().disconnect();
 	}
 
 	/**

@@ -91,7 +91,6 @@ import com.aionemu.gameserver.services.player.PlayerLimitService;
 import com.aionemu.gameserver.services.transfers.PlayerTransferService;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.spawnengine.TemporarySpawnEngine;
-import com.aionemu.gameserver.taskmanager.fromdb.TaskFromDBManager;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.chathandlers.ChatProcessor;
 import com.aionemu.gameserver.utils.cron.ThreadPoolManagerRunnableRunner;
@@ -117,6 +116,8 @@ public class GameServer {
 	private static final Logger log = LoggerFactory.getLogger(GameServer.class);
 
 	public static final int START_TIME_SECONDS = (int) (ManagementFactory.getRuntimeMXBean().getStartTime() / 1000);
+
+	private static NioServer nioServer;
 
 	// TODO remove all this shit
 	private static int ELYOS_COUNT = 0;
@@ -295,7 +296,6 @@ public class GameServer {
 		HTMLCache.getInstance();
 		AbyssRankingCache.getInstance();
 		AbyssRankUpdateService.getInstance().scheduleUpdate();
-		TaskFromDBManager.getInstance();
 		ConsoleUtil.printSection("Periodic Instances");
 		PeriodicInstanceManager.getInstance();
 		EventService.getInstance();
@@ -321,7 +321,7 @@ public class GameServer {
 		VersionInfoUtil.printAllInfo(GameServer.class);
 		SystemInfoUtil.printAllInfo();
 
-		NioServer nioServer = initNioServer();
+		nioServer = initNioServer();
 		Runtime.getRuntime().addShutdownHook(ShutdownHook.getInstance());
 		log.info("Game Server started in " + (System.currentTimeMillis() - start) / 1000 + " seconds.");
 
@@ -334,8 +334,8 @@ public class GameServer {
 	 * Starts servers for connection with aion client and login\chat server.
 	 */
 	private static NioServer initNioServer() {
-		NioServer nioServer = new NioServer(NetworkConfig.NIO_READ_WRITE_THREADS, new ServerCfg(NetworkConfig.CLIENT_SOCKET_ADDRESS, "Aion Connections",
-			new GameConnectionFactoryImpl()));
+		NioServer nioServer = new NioServer(NetworkConfig.NIO_READ_WRITE_THREADS,
+			new ServerCfg(NetworkConfig.CLIENT_SOCKET_ADDRESS, "Aion Connections", new GameConnectionFactoryImpl()));
 		nioServer.connect();
 		return nioServer;
 	}
@@ -387,6 +387,13 @@ public class GameServer {
 		try {
 			progressLatch.await();
 		} catch (InterruptedException e) {
+		}
+	}
+
+	public static void shutdownNioServer() {
+		if (nioServer != null) {
+			nioServer.shutdown();
+			nioServer = null;
 		}
 	}
 

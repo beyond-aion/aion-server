@@ -168,8 +168,8 @@ public class NioServer {
 		// notify connections about server close (they should close themselves)
 		activeConnections.forEach(con -> con.onServerClose());
 
-		// wait max 5s for connections to close, else force close
-		long timeout = System.currentTimeMillis() + 5000;
+		// wait max 10s for connections to close, else force close and wait another 5s
+		long timeout = System.currentTimeMillis() + 10000;
 		while (isAnyConnectionClosePending(activeConnections)) {
 			if (System.currentTimeMillis() > timeout) {
 				activeConnections.removeIf(con -> con.isClosed());
