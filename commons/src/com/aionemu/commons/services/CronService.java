@@ -1,5 +1,6 @@
 package com.aionemu.commons.services;
 
+import java.text.ParseException;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -10,6 +11,7 @@ import java.util.Properties;
 import java.util.Set;
 import java.util.TimeZone;
 
+import org.quartz.CronExpression;
 import org.quartz.CronScheduleBuilder;
 import org.quartz.CronTrigger;
 import org.quartz.JobBuilder;
@@ -30,56 +32,35 @@ import com.aionemu.commons.utils.GenericValidator;
 
 /**
  * @author SoulKeeper
+ * @modified Neon
  */
 public final class CronService {
 
 	private static final Logger log = LoggerFactory.getLogger(CronService.class);
 
-	/**
-	 * We really should use some dependency injection (Spring?)<br>
-	 * Current code is bloated, should be much cleaner
-	 */
 	private static CronService instance;
-	private static TimeZone timeZone;
 
-	private Scheduler scheduler;
-
-	private Class<? extends RunnableRunner> runnableRunner;
+	private final TimeZone timeZone;
+	private final Scheduler scheduler;
+	private final Class<? extends RunnableRunner> runnableRunner;
 
 	public static CronService getInstance() {
 		return instance;
 	}
 
-	public static synchronized void initSingleton(Class<? extends RunnableRunner> runableRunner, TimeZone defaultTimeZone) {
+	public static synchronized void initSingleton(Class<? extends RunnableRunner> runnableRunner, TimeZone timeZone) {
 		if (instance != null) {
 			throw new CronServiceException("CronService is already initialized");
 		}
 
-		CronService cs = new CronService();
-		cs.init(runableRunner);
-		instance = cs;
-		timeZone = defaultTimeZone;
+		instance = new CronService(runnableRunner, timeZone);
 	}
 
 	/**
-	 * Empty private constructor to prevent instantiation.<br>
+	 * Private constructor to prevent instantiation.<br>
 	 * Can be instantiated using reflection (for tests), but no real use for application please!
 	 */
-	private CronService() {
-	}
-
-	public synchronized void init(Class<? extends RunnableRunner> runnableRunner) {
-
-		if (scheduler != null) {
-			return;
-		}
-
-		if (runnableRunner == null) {
-			throw new CronServiceException("RunnableRunner class must be defined");
-		}
-
-		this.runnableRunner = runnableRunner;
-
+	private CronService(Class<? extends RunnableRunner> runnableRunner, TimeZone timeZone) {
 		Properties properties = new Properties();
 		properties.setProperty("org.quartz.threadPool.threadCount", "1");
 
@@ -89,23 +70,17 @@ public final class CronService {
 		} catch (SchedulerException e) {
 			throw new CronServiceException("Failed to initialize CronService", e);
 		}
+		if (runnableRunner == null) {
+			throw new CronServiceException("RunnableRunner class must be defined");
+		}
+
+		this.runnableRunner = runnableRunner;
+		this.timeZone = timeZone;
 	}
 
 	public void shutdown() {
-
-		Scheduler localScheduler;
-		synchronized (this) {
-			if (scheduler == null) {
-				return;
-			}
-
-			localScheduler = scheduler;
-			scheduler = null;
-			runnableRunner = null;
-		}
-
 		try {
-			localScheduler.shutdown(false);
+			scheduler.shutdown(false);
 		} catch (SchedulerException e) {
 			log.error("Failed to shutdown CronService correctly", e);
 		}
@@ -116,6 +91,22 @@ public final class CronService {
 	}
 
 	public void schedule(Runnable r, String cronExpression, boolean longRunning) {
+		try {
+			schedule(r, new CronExpression(cronExpression), longRunning);
+		} catch (ParseException e) {
+			throw new RuntimeException("CronExpression \"" + cronExpression + "\" is invalid.", e);
+		}
+	}
+
+	public void schedule(Runnable r, CronExpression cronExpression) {
+		schedule(r, cronExpression, false);
+	}
+
+	public void schedule(Runnable r, CronExpression cronExpression, boolean longRunning) {
+		schedule(r, runnableRunner, cronExpression, longRunning);
+	}
+
+	public void schedule(Runnable r, Class<? extends RunnableRunner> runnableRunner, CronExpression cronExpression, boolean longRunning) {
 		try {
 			JobDataMap jdm = new JobDataMap();
 			jdm.put(RunnableRunner.KEY_RUNNABLE_OBJECT, r);
@@ -142,7 +133,6 @@ public final class CronService {
 	}
 
 	public void cancel(JobDetail jd) {
-
 		if (jd == null) {
 			return;
 		}

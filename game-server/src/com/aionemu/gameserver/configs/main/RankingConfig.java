@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.configs.main;
 
+import org.quartz.CronExpression;
+
 import com.aionemu.commons.configuration.Property;
 
 /**
@@ -7,11 +9,11 @@ import com.aionemu.commons.configuration.Property;
  */
 public class RankingConfig {
 
-	@Property(key = "gameserver.topranking.updaterule", defaultValue = "0 0 0 * * ?")
-	public static String TOP_RANKING_UPDATE_RULE;
+	@Property(key = "gameserver.topranking.updaterule", defaultValue = "0 0 0 ? * *")
+	public static CronExpression TOP_RANKING_UPDATE_RULE;
 
-	@Property(key = "gameserver.topranking.daily.gploss.time", defaultValue = "0 0 12 * * ?")
-	public static String TOP_RANKING_DAILY_GP_LOSS_TIME;
+	@Property(key = "gameserver.topranking.daily.gploss.time", defaultValue = "0 0 12 ? * *")
+	public static CronExpression TOP_RANKING_DAILY_GP_LOSS_TIME;
 
 	@Property(key = "gameserver.topranking.gp_loss_cap", defaultValue = "-1")
 	public static int TOP_RANKING_GP_LOSS_CAP;

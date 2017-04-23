@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Future;
 
+import org.quartz.CronExpression;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,14 +27,14 @@ public abstract class PeriodicInstance {
 	protected byte[] maskIds;
 	protected byte minLevel = 45;
 	protected byte maxLevel = 66;
-	protected String startExpression;
+	protected CronExpression startExpression;
 	protected long registrationPeriod;
 	// inner variables
 	protected boolean registerAvailable;
 	protected List<Integer> playersWithCooldown;
 	protected Future<?> unregisterTask;
 
-	public PeriodicInstance(boolean isEnabled, String startExpression, long regPeriod, byte[] maskIds, byte minLevel, byte maxLevel) {
+	public PeriodicInstance(boolean isEnabled, CronExpression startExpression, long regPeriod, byte[] maskIds, byte minLevel, byte maxLevel) {
 		this.isEnabled = isEnabled;
 		this.startExpression = startExpression;
 		this.registrationPeriod = regPeriod;
@@ -45,19 +46,10 @@ public abstract class PeriodicInstance {
 	}
 
 	public void initIfEnabled() {
-		if (this.isEnabled) {
-			String[] times = this.startExpression.split("\\|");
-			for (String cron : times) {
-				CronService.getInstance().schedule(new Runnable() {
-
-					@Override
-					public void run() {
-						startRegistration();
-					}
-				}, cron);
-				log.info("Scheduled " + this.getClass().getSimpleName() + ": based on cron expression: " + cron + " Duration: " + this.registrationPeriod
-					+ " in minutes");
-			}
+		if (isEnabled) {
+			CronService.getInstance().schedule(() -> startRegistration(), startExpression);
+			log.info("Scheduled " + this.getClass().getSimpleName() + ": based on cron expression: " + startExpression + " Duration: " + registrationPeriod
+				+ " in minutes");
 		}
 	}
 

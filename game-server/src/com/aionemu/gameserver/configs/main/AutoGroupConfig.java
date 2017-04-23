@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.configs.main;
 
+import org.quartz.CronExpression;
+
 import com.aionemu.commons.configuration.Property;
 
 /**
@@ -20,7 +22,7 @@ public class AutoGroupConfig {
 	public static long DREDGION_TIMER;
 
 	@Property(key = "gameserver.dredgion.time", defaultValue = "0 0 0,12,20 ? * *")
-	public static String DREDGION_TIMES;
+	public static CronExpression DREDGION_TIMES;
 
 	@Property(key = "gameserver.kamar.timer", defaultValue = "120")
 	public static long KAMAR_TIMER;
@@ -29,7 +31,7 @@ public class AutoGroupConfig {
 	public static boolean KAMAR_ENABLE;
 
 	@Property(key = "gameserver.kamar.time", defaultValue = "0 0 0,20 ? * MON,WED,SAT")
-	public static String KAMAR_TIMES;
+	public static CronExpression KAMAR_TIMES;
 
 	@Property(key = "gameserver.engulfed_ob.timer", defaultValue = "120")
 	public static long ENGULFED_OB_TIMER;
@@ -38,7 +40,7 @@ public class AutoGroupConfig {
 	public static boolean ENGULFED_OB_ENABLE;
 
 	@Property(key = "gameserver.engulfed_ob.time", defaultValue = "0 0 12,19 ? * *")
-	public static String ENGULFED_OB_TIMES;
+	public static CronExpression ENGULFED_OB_TIMES;
 
 	@Property(key = "gameserver.iron_wall_front.timer", defaultValue = "120")
 	public static long IRON_WALL_FRONT_TIMER;
@@ -47,7 +49,7 @@ public class AutoGroupConfig {
 	public static boolean IRON_WALL_FRONT_ENABLE;
 
 	@Property(key = "gameserver.iron_wall_front.time", defaultValue = "0 0 0,12 ? * SUN")
-	public static String IRON_WALL_FRONT_TIMES;
+	public static CronExpression IRON_WALL_FRONT_TIMES;
 
 	@Property(key = "gameserver.idgel_dome.timer", defaultValue = "60")
 	public static long IDGEL_DOME_TIMER;
@@ -55,6 +57,6 @@ public class AutoGroupConfig {
 	@Property(key = "gameserver.idgel_dome.enable", defaultValue = "true")
 	public static boolean IDGEL_DOME_ENABLE;
 
-	@Property(key = "gameserver.idgel_dome.time", defaultValue = "0 0 23 1/1 * ? *")
-	public static String IDGEL_DOME_TIMES;
+	@Property(key = "gameserver.idgel_dome.time", defaultValue = "0 0 23 ? * *")
+	public static CronExpression IDGEL_DOME_TIMES;
 }

@@ -11,7 +11,6 @@ import java.util.function.Consumer;
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.commons.services.CronService;
 import com.aionemu.gameserver.dao.AccountPassportsDAO;
-import com.aionemu.gameserver.dataholders.AtreianPassportData;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.account.Account;
 import com.aionemu.gameserver.model.account.Passport;
@@ -34,8 +33,6 @@ import com.aionemu.gameserver.world.World;
  * @reworked Luzien
  */
 public class AtreianPassportService {
-
-	private static final AtreianPassportData DATA = DataManager.ATREIAN_PASSPORT_DATA;
 
 	private AtreianPassportService() {
 		CronService.getInstance().schedule(new Runnable() {
@@ -87,7 +84,7 @@ public class AtreianPassportService {
 				break;
 			}
 
-			AtreianPassport atp = DATA.getAtreianPassportId(passId);
+			AtreianPassport atp = DataManager.ATREIAN_PASSPORT_DATA.getAtreianPassportId(passId);
 			ItemService.addItem(player, atp.getRewardItem(), atp.getRewardItemNum(), true, new ItemUpdatePredicate(ItemAddType.ITEM_COLLECT,
 				ItemUpdateType.INC_PASSPORT_ADD));
 			passport.setRewarded(true);
@@ -107,7 +104,7 @@ public class AtreianPassportService {
 		ZonedDateTime now = ServerTime.now();
 		boolean doReward = checkOnlineDate(pa) && pa.getPassportStamps() < 28;
 
-		for (AtreianPassport atp : DATA.getAll().values()) {
+		for (AtreianPassport atp : DataManager.ATREIAN_PASSPORT_DATA.getAll().values()) {
 			if (atp.getPeriodStart().isBefore(now) && atp.getPeriodEnd().isAfter(now)) {
 				switch (atp.getAttendType()) {
 					case DAILY:

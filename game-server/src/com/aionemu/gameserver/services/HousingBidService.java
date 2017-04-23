@@ -1,7 +1,6 @@
 package com.aionemu.gameserver.services;
 
 import java.sql.Timestamp;
-import java.text.ParseException;
 import java.time.Duration;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
@@ -14,7 +13,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import org.quartz.CronExpression;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -58,23 +56,16 @@ import com.aionemu.gameserver.world.WorldMapType;
 public class HousingBidService extends AbstractCronTask {
 
 	private static final Logger log = LoggerFactory.getLogger("HOUSE_AUCTION_LOG");
-	private static HousingBidService instance;
+	private static final HousingBidService instance = new HousingBidService();
+
 	private final Map<Integer, HouseBidEntry> houseBids = new LinkedHashMap<>();
 	private final Map<Integer, HouseBidEntry> playerBids = new LinkedHashMap<>();
 	private final Map<Integer, HouseBidEntry> bidsByIndex = new HashMap<>();
 	private int timeProlonged = 0;
 	private volatile boolean isDataLoaded;
-	private CronExpression registerDateExpr;
 
-	static {
-		try {
-			instance = new HousingBidService(HousingConfig.HOUSE_AUCTION_TIME);
-		} catch (ParseException pe) {
-		}
-	}
-
-	private HousingBidService(String auctionTime) throws ParseException {
-		super(auctionTime);
+	private HousingBidService() {
+		super(HousingConfig.HOUSE_AUCTION_TIME);
 	}
 
 	public static final HousingBidService getInstance() {
@@ -98,11 +89,6 @@ public class HousingBidService extends AbstractCronTask {
 
 	@Override
 	protected void postInit() {
-		try {
-			registerDateExpr = new CronExpression(HousingConfig.HOUSE_REGISTER_END);
-		} catch (ParseException e) {
-		}
-
 		timeProlonged = DAOManager.getDAO(ServerVariablesDAO.class).load("auctionProlonged");
 	}
 
@@ -445,7 +431,7 @@ public class HousingBidService extends AbstractCronTask {
 
 	public boolean isRegisteringAllowed() {
 		ZonedDateTime now = ServerTime.now();
-		ZonedDateTime registerEnd = ServerTime.atDate(registerDateExpr.getNextValidTimeAfter(new Date()));
+		ZonedDateTime registerEnd = ServerTime.atDate(HousingConfig.HOUSE_REGISTER_END.getNextValidTimeAfter(new Date()));
 		ZonedDateTime auctionEnd = ServerTime.ofEpochSecond(getRunTime() + timeProlonged * 60);
 		if (now.getDayOfWeek() == registerEnd.getDayOfWeek() && now.getHour() >= registerEnd.getHour()
 			|| (now.getDayOfWeek() == auctionEnd.getDayOfWeek() && now.getHour() <= auctionEnd.getHour())) {
