@@ -27,7 +27,6 @@ public class Dispel extends AdminCommand {
 		if (creature instanceof Player) {
 			target = (Player) creature;
 			target.getEffectController().removeAllEffects();
-			target.getEffectController().updatePlayerEffectIcons(null);
 			PacketSendUtility.sendMessage(admin, creature.getName() + " had all buff effects dispelled !");
 		}
 	}
