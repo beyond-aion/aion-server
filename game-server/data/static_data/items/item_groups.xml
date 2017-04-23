@@ -4512,22 +4512,22 @@
 		<item id="182202156" level="1" count="1" chance="2" race="ELYOS"/>
 		<item id="182205668" level="1" count="1" chance="2" race="ASMODIANS"/>
 		<item id="182005205" level="1" count="1" chance="57"/>
-		<item id="182005206" level="2" count="1" chance="81.8"/>
-		<item id="186000096" level="2" count="1" chance="8.5"/>
-		<item id="186000096" level="2" count="2" chance="1.0"/>
-		<item id="186000147" level="2" count="1" chance="8.1"/>
-		<item id="186000147" level="2" count="2" chance="0.6"/>
+		<item id="182005206" level="2" count="1" chance="67"/>
+		<item id="186000096" level="2" count="1" chance="13.5"/>
+		<item id="186000096" level="2" count="2" chance="6.5"/>
+		<item id="186000147" level="2" count="1" chance="10"/>
+		<item id="186000147" level="2" count="2" chance="3"/>
+		<item id="182005206" level="3" count="1" chance="67"/>
 		<item id="186000096" level="3" count="1" chance="8.5"/>
-		<item id="186000096" level="3" count="2" chance="1.0"/>
-		<item id="182005206" level="3" count="1" chance="89.3"/>
-		<item id="186000147" level="3" count="1" chance="8.4"/>
-		<item id="186000147" level="3" count="2" chance="1.7"/>
-		<item id="186000147" level="3" count="3" chance="0.5"/>
+		<item id="186000096" level="3" count="2" chance="1.5"/>
+		<item id="186000147" level="3" count="1" chance="13"/>
+		<item id="186000147" level="3" count="2" chance="9"/>
+		<item id="186000147" level="3" count="3" chance="0.9"/>
 		<item id="186000147" level="3" count="4" chance="0.1"/>
-		<item id="182005206" level="4" count="1" chance="89.3"/>
-		<item id="186000147" level="4" count="1" chance="8.4"/>
-		<item id="186000147" level="4" count="2" chance="1.7"/>
-		<item id="186000147" level="4" count="3" chance="0.5"/>
+		<item id="182005206" level="4" count="1" chance="67"/>
+		<item id="186000147" level="4" count="1" chance="22"/>
+		<item id="186000147" level="4" count="2" chance="10"/>
+		<item id="186000147" level="4" count="3" chance="0.9"/>
 		<item id="186000147" level="4" count="4" chance="0.1"/>
 		<item id="182005206" level="5" count="1" chance="67"/>
 		<item id="186000242" level="5" count="1" chance="12.3"/>
