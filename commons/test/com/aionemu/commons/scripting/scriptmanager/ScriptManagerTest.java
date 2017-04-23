@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import java.io.File;
 import java.lang.reflect.Constructor;
+import java.util.TimeZone;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -30,10 +31,9 @@ public class ScriptManagerTest {
 	@BeforeClass
 	public static void initCronService() throws Exception {
 		((Logger) LoggerFactory.getLogger("org.quartz")).setLevel(Level.OFF);
-		Constructor<CronService> constructor = CronService.class.getDeclaredConstructor();
+		Constructor<CronService> constructor = CronService.class.getDeclaredConstructor(new Class[] { Class.class, TimeZone.class });
 		constructor.setAccessible(true);
-		cronService = constructor.newInstance();
-		cronService.init(CurrentThreadRunnableRunner.class);
+		cronService = constructor.newInstance(CurrentThreadRunnableRunner.class, null);
 	}
 
 	@Test

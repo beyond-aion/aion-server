@@ -1,7 +1,5 @@
 package com.aionemu.gameserver.model.stats.calc;
 
-import java.security.InvalidParameterException;
-
 import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.model.templates.npc.NpcRank;
 import com.aionemu.gameserver.model.templates.npc.NpcRating;
@@ -37,7 +35,7 @@ public class NpcStatCalculation {
 			case PHYSICAL_CRITICAL_RESIST:
 				return level * 2.2f;
 			default:
-				throw new InvalidParameterException("Stat calculation for " + stat + " is not implemented");
+				throw new IllegalArgumentException("Stat calculation for " + stat + " is not implemented");
 		}
 	}
 
@@ -114,7 +112,7 @@ public class NpcStatCalculation {
 				}
 				return 1f;
 			default:
-				throw new InvalidParameterException("Stat calculation for npc rating " + rating + " is not implemented");
+				throw new IllegalArgumentException("Stat calculation for npc rating " + rating + " is not implemented");
 		}
 	}
 
@@ -215,7 +213,7 @@ public class NpcStatCalculation {
 				}
 				return 1f;
 			default:
-				throw new InvalidParameterException("Stat calculation for npc rank " + rank + " is not implemented");
+				throw new IllegalArgumentException("Stat calculation for npc rank " + rank + " is not implemented");
 		}
 	}
 }

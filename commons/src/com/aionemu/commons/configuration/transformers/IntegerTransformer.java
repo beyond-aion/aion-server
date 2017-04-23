@@ -4,7 +4,6 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Type;
 
 import com.aionemu.commons.configuration.PropertyTransformer;
-import com.aionemu.commons.configuration.TransformationException;
 
 /**
  * Transforms string to integer. Integer can be represented both as decimal or hex value.
@@ -26,7 +25,7 @@ public class IntegerTransformer extends PropertyTransformer<Integer> {
 	 * @param field
 	 *          value will be assigned to this field
 	 * @return Integer object that represents value
-	 * @throws TransformationException
+	 * @throws Exception
 	 *           if something went wrong
 	 */
 	@Override

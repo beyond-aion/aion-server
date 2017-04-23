@@ -6,7 +6,6 @@ import java.util.regex.Pattern;
 
 import com.aionemu.commons.configuration.Property;
 import com.aionemu.commons.configuration.PropertyTransformer;
-import com.aionemu.commons.configuration.TransformationException;
 
 /**
  * Automatic pattern transformer for RegExp resolving
@@ -28,7 +27,7 @@ public class PatternTransformer extends PropertyTransformer<Pattern> {
 	 * @param field
 	 *          value will be assigned to this field
 	 * @return Pattern Object
-	 * @throws TransformationException
+	 * @throws Exception
 	 *           if pattern is not valid
 	 */
 	@Override

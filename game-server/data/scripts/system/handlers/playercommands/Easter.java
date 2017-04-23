@@ -1,7 +1,5 @@
 package playercommands;
 
-import java.security.InvalidParameterException;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -45,11 +43,11 @@ public class Easter extends PlayerCommand {
 		try {
 			int rewardIndex = Integer.parseInt(params[0]) - 1;
 			if (rewardIndex < 0 || rewardIndex >= rewards.length)
-				throw new InvalidParameterException(null); // sends the list
+				throw new IllegalArgumentException(); // sends the list
 
 			int cost = rewards[rewardIndex][0];
 			if (player.getInventory().getItemCountByItemId(neededItem) < cost || !player.getInventory().decreaseByItemId(neededItem, cost))
-				throw new InvalidParameterException("You need " + cost + " " + ChatUtil.item(neededItem) + " for this.");
+				throw new IllegalArgumentException("You need " + cost + " " + ChatUtil.item(neededItem) + " for this.");
 
 			int count = 1;
 			int itemId = rewards[rewardIndex][1];
@@ -72,8 +70,8 @@ public class Easter extends PlayerCommand {
 				new ItemUpdatePredicate(ItemAddType.DECOMPOSABLE, ItemUpdateType.INC_CASH_ITEM));
 			if (notAddedCount > 0)
 				log.warn("[Easter Event] " + notAddedCount + "/" + count + " of " + itemId + " could not be added.");
-		} catch (NumberFormatException | InvalidParameterException e) {
-			sendInfo(player, e instanceof InvalidParameterException ? e.getMessage() : "Invalid prize.");
+		} catch (IllegalArgumentException e) {
+			sendInfo(player, e.getClass() == IllegalArgumentException.class ? e.getMessage() : "Invalid prize."); // default info for NumberFormatException
 		}
 	}
 }

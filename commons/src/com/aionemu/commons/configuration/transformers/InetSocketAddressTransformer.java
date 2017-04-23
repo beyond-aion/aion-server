@@ -4,10 +4,8 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Type;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
-import java.security.InvalidParameterException;
 
 import com.aionemu.commons.configuration.PropertyTransformer;
-import com.aionemu.commons.configuration.TransformationException;
 
 /**
  * Transforms string to InetSocketAddress. InetSocketAddress can be represented in following ways:
@@ -33,14 +31,14 @@ public class InetSocketAddressTransformer extends PropertyTransformer<InetSocket
 	 * @param field
 	 *          value will be assigned to this field
 	 * @return InetSocketAddress that represents value
-	 * @throws TransformationException
+	 * @throws Exception
 	 *           if something went wrong
 	 */
 	@Override
 	protected InetSocketAddress parseObject(String value, Field field, Type... genericTypeArgs) throws Exception {
 		String[] parts = value.split(":", 2);
 		if (parts.length != 2)
-			throw new InvalidParameterException("InetSocketAdress must be specified in the following format: \"adress:port\" or \"*:port\"");
+			throw new IllegalArgumentException("InetSocketAdress must be specified in the following format: \"adress:port\" or \"*:port\"");
 		int port = Integer.parseInt(parts[1]);
 		if ("*".equals(parts[0])) {
 			return new InetSocketAddress(port);

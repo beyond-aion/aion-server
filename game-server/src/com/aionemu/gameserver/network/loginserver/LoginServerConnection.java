@@ -116,8 +116,7 @@ public class LoginServerConnection extends AConnection<LsServerPacket> {
 
 	@Override
 	protected final void onServerClose() {
-		// TODO mb some packet should be send to loginserver before closing?
-		close(/* packet */);
+		LoginServer.getInstance().disconnect();
 	}
 
 	/**

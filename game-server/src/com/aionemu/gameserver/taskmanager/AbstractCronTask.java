@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.taskmanager;
 
-import java.text.ParseException;
 import java.util.Date;
 
 import org.quartz.CronExpression;
@@ -15,8 +14,7 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
  */
 public abstract class AbstractCronTask implements Runnable {
 
-	private String cronExpressionString;
-	private CronExpression runExpression;
+	private final CronExpression cronExpression;
 	private int runTime;
 	private long period;
 
@@ -45,8 +43,8 @@ public abstract class AbstractCronTask implements Runnable {
 	protected void postInit() {
 	}
 
-	public final String getCronExpressionString() {
-		return cronExpressionString;
+	public final CronExpression getCronExpression() {
+		return cronExpression;
 	}
 
 	/**
@@ -80,19 +78,17 @@ public abstract class AbstractCronTask implements Runnable {
 	protected void postRun() {
 	}
 
-	public AbstractCronTask(String cronExpression) throws ParseException {
+	public AbstractCronTask(CronExpression cronExpression) {
 		if (cronExpression == null)
 			throw new NullPointerException("cronExpressionString");
-
-		cronExpressionString = cronExpression;
 
 		ServerVariablesDAO dao = DAOManager.getDAO(ServerVariablesDAO.class);
 		runTime = dao.load(getServerTimeVariable());
 
 		preInit();
-		runExpression = new CronExpression(cronExpressionString);
-		Date nextDate = runExpression.getTimeAfter(new Date());
-		Date nextAfterDate = runExpression.getTimeAfter(nextDate);
+		this.cronExpression = cronExpression;
+		Date nextDate = cronExpression.getTimeAfter(new Date());
+		Date nextAfterDate = cronExpression.getTimeAfter(nextDate);
 		period = nextAfterDate.getTime() - nextDate.getTime();
 		postInit();
 
@@ -107,11 +103,11 @@ public abstract class AbstractCronTask implements Runnable {
 	}
 
 	private void scheduleNextRun() {
-		CronService.getInstance().schedule(this, cronExpressionString, true);
+		CronService.getInstance().schedule(this, cronExpression, true);
 	}
 
 	private void saveNextRunTime() {
-		Date nextDate = runExpression.getTimeAfter(new Date());
+		Date nextDate = cronExpression.getTimeAfter(new Date());
 		ServerVariablesDAO dao = DAOManager.getDAO(ServerVariablesDAO.class);
 		runTime = (int) (nextDate.getTime() / 1000);
 		dao.store(getServerTimeVariable(), runTime);

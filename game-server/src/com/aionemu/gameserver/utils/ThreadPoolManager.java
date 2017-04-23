@@ -164,7 +164,6 @@ public final class ThreadPoolManager {
 		log.info("\t... " + getTaskCount(instantPool) + " instant tasks left.");
 		log.info("\t... " + getTaskCount(longRunningPool) + " long running tasks left.");
 		log.info("\t... " + (workStealingPool.getQueuedTaskCount() + workStealingPool.getQueuedSubmissionCount()) + " forking tasks left.");
-		workStealingPool.shutdownNow();
 	}
 
 	private int getTaskCount(ThreadPoolExecutor tp) {

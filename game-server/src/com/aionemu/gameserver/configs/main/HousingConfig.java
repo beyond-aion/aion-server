@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.configs.main;
 
+import org.quartz.CronExpression;
+
 import com.aionemu.commons.configuration.Property;
 
 /**
@@ -20,13 +22,13 @@ public class HousingConfig {
 	public static boolean ENABLE_HOUSE_PAY;
 
 	@Property(key = "gameserver.housing.auction.time", defaultValue = "0 5 12 ? * SUN")
-	public static String HOUSE_AUCTION_TIME;
+	public static CronExpression HOUSE_AUCTION_TIME;
 
 	@Property(key = "gameserver.housing.auction.registerend", defaultValue = "0 0 0 ? * SAT")
-	public static String HOUSE_REGISTER_END;
+	public static CronExpression HOUSE_REGISTER_END;
 
 	@Property(key = "gameserver.housing.maintain.time", defaultValue = "0 0 0 ? * MON")
-	public static String HOUSE_MAINTENANCE_TIME;
+	public static CronExpression HOUSE_MAINTENANCE_TIME;
 
 	/** Auction default bid prices **/
 	@Property(key = "gameserver.housing.auction.default_bid.house", defaultValue = "12000000")

@@ -3,7 +3,6 @@ package com.aionemu.commons.configuration.transformers;
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.lang.reflect.Type;
-import java.security.InvalidParameterException;
 
 import com.aionemu.commons.configuration.Property;
 import com.aionemu.commons.configuration.PropertyTransformer;
@@ -23,7 +22,7 @@ public class ArrayTransformer extends PropertyTransformer<Object[]> {
 	protected Object[] parseObject(String value, Field field, Type... genericTypeArgs) throws Exception {
 		Class<?> type = field.getType().getComponentType();
 		if (type.isArray())
-			throw new InvalidParameterException("Multidimensional arrays are not implemented.");
+			throw new IllegalArgumentException("Multidimensional arrays are not implemented.");
 
 		if (value.isEmpty() || value.equals(Property.DEFAULT_VALUE))
 			return (Object[]) Array.newInstance(type, 0); // return empty

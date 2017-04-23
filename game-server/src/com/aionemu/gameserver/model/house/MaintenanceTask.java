@@ -1,7 +1,6 @@
 package com.aionemu.gameserver.model.house;
 
 import java.sql.Timestamp;
-import java.text.ParseException;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Date;
@@ -31,25 +30,16 @@ import com.aionemu.gameserver.world.World;
 public class MaintenanceTask extends AbstractCronTask {
 
 	private static final Logger log = LoggerFactory.getLogger(MaintenanceTask.class);
+	private static final MaintenanceTask instance = new MaintenanceTask();
 
-	private static final List<House> maintainedHouses;
-
-	private static MaintenanceTask instance;
-
-	static {
-		maintainedHouses = new ArrayList<>();
-		try {
-			instance = new MaintenanceTask(HousingConfig.HOUSE_MAINTENANCE_TIME);
-		} catch (ParseException pe) {
-		}
-	}
+	private final List<House> maintainedHouses = new ArrayList<>();
 
 	public static final MaintenanceTask getInstance() {
 		return instance;
 	}
 
-	private MaintenanceTask(String maintainTime) throws ParseException {
-		super(maintainTime);
+	private MaintenanceTask() {
+		super(HousingConfig.HOUSE_MAINTENANCE_TIME);
 	}
 
 	@Override

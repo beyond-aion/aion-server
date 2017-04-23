@@ -32,13 +32,14 @@ public class PlayerEffectController extends EffectController {
 		if (checkDuelCondition(effect) && !effect.getIsForcedEffect())
 			return;
 		super.addEffect(effect);
-		updatePlayerIconsAndGroup(effect, true);
+		updatePlayerIconsAndGroup(effect);
 	}
 
 	@Override
 	public void clearEffect(Effect effect, boolean broadcast) {
 		super.clearEffect(effect, broadcast);
-		updatePlayerIconsAndGroup(effect, broadcast);
+		if (broadcast)
+			updatePlayerIconsAndGroup(effect);
 	}
 
 	@Override
@@ -46,20 +47,23 @@ public class PlayerEffectController extends EffectController {
 		return (Player) super.getOwner();
 	}
 
-	/**
-	 * @param effect
-	 */
-	private void updatePlayerIconsAndGroup(Effect effect, boolean broadcast) {
-		if (!effect.isPassive() && broadcast) {
+	@Override
+	public void removeAllEffects(boolean logout) {
+		super.removeAllEffects(logout);
+		if (!logout)
+			updatePlayerIconsAndGroup(null);
+	}
+
+	private void updatePlayerIconsAndGroup(Effect effect) {
+		if (effect == null || !effect.isPassive()) {
 			updatePlayerEffectIcons(effect);
+			int slot = effect == null ? SkillTargetSlot.FULLSLOTS : effect.getTargetSlot().getId();
 			if (getOwner().isInGroup()) {
 				PlayerGroupService.updateGroup(getOwner(), GroupEvent.MOVEMENT);
-				PlayerGroupService.updateGroupEffects(getOwner(), effect.getTargetSlot().getId());
-				PlayerGroupService.updateGroup(getOwner(), GroupEvent.MOVEMENT);
+				PlayerGroupService.updateGroupEffects(getOwner(), slot);
 			} else if (getOwner().isInAlliance()) {
 				PlayerAllianceService.updateAlliance(getOwner(), PlayerAllianceEvent.MOVEMENT);
-				PlayerAllianceService.updateAllianceEffects(getOwner(), effect.getTargetSlot().getId());
-				PlayerAllianceService.updateAlliance(getOwner(), PlayerAllianceEvent.MOVEMENT);
+				PlayerAllianceService.updateAllianceEffects(getOwner(), slot);
 			}
 		}
 	}

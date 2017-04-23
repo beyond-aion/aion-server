@@ -4,7 +4,6 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Type;
 
 import com.aionemu.commons.configuration.PropertyTransformer;
-import com.aionemu.commons.configuration.TransformationException;
 
 /**
  * This class is here just for writing less "ifs" in the code. Does nothing
@@ -26,8 +25,6 @@ public class StringTransformer extends PropertyTransformer<String> {
 	 * @param field
 	 *          value will be assigned to this field
 	 * @return return value object
-	 * @throws TransformationException
-	 *           never thrown
 	 */
 	@Override
 	protected String parseObject(String value, Field field, Type... genericTypeArgs) {

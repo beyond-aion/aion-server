@@ -7,12 +7,15 @@ import java.util.Collection;
 import java.util.TimeZone;
 import java.util.regex.Pattern;
 
+import org.quartz.CronExpression;
+
 import com.aionemu.commons.configuration.transformers.ArrayTransformer;
 import com.aionemu.commons.configuration.transformers.BooleanTransformer;
 import com.aionemu.commons.configuration.transformers.ByteTransformer;
 import com.aionemu.commons.configuration.transformers.CharTransformer;
 import com.aionemu.commons.configuration.transformers.ClassTransformer;
 import com.aionemu.commons.configuration.transformers.CollectionTransformer;
+import com.aionemu.commons.configuration.transformers.CronExpressionTransformer;
 import com.aionemu.commons.configuration.transformers.DoubleTransformer;
 import com.aionemu.commons.configuration.transformers.EnumTransformer;
 import com.aionemu.commons.configuration.transformers.FileTransformer;
@@ -79,6 +82,8 @@ public class PropertyTransformerFactory {
 			return TimeZoneTransformer.SHARED_INSTANCE;
 		else if (ClassUtils.isSubclass(clazzToTransform, ZoneId.class))
 			return ZoneIdTransformer.SHARED_INSTANCE;
+		else if (clazzToTransform == CronExpression.class)
+			return CronExpressionTransformer.SHARED_INSTANCE;
 		return null;
 	}
 }

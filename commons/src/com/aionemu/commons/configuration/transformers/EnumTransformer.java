@@ -5,7 +5,6 @@ import java.lang.reflect.Type;
 
 import com.aionemu.commons.configuration.Property;
 import com.aionemu.commons.configuration.PropertyTransformer;
-import com.aionemu.commons.configuration.TransformationException;
 
 /**
  * Transforms enum string representation to enum. String must match case definition of enum, for instance:
@@ -36,7 +35,7 @@ public class EnumTransformer extends PropertyTransformer<Enum<?>> {
 	 * @param field
 	 *          value will be assigned to this field
 	 * @return Enum object representing the value
-	 * @throws TransformationException
+	 * @throws Exception
 	 *           if something went wrong
 	 */
 	@Override

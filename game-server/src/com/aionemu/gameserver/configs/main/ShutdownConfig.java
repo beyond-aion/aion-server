@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.configs.main;
 
+import org.quartz.CronExpression;
+
 import com.aionemu.commons.configuration.Property;
 
 /**
@@ -8,21 +10,15 @@ import com.aionemu.commons.configuration.Property;
 public class ShutdownConfig {
 
 	/**
-	 * Shutdown Hook Mode.
-	 */
-	@Property(key = "gameserver.shutdown.mode", defaultValue = "1")
-	public static int HOOK_MODE;
-
-	/**
-	 * Shutdown Hook delay.
+	 * Shutdown Hook delay in seconds.
 	 */
 	@Property(key = "gameserver.shutdown.delay", defaultValue = "120")
-	public static int HOOK_DELAY;
+	public static int DELAY;
 
 	/**
-	 * Shutdown announce interval.
+	 * Shutdown restart schedule.
 	 */
-	@Property(key = "gameserver.shutdown.interval", defaultValue = "5")
-	public static int ANNOUNCE_INTERVAL;
+	@Property(key = "gameserver.shutdown.restart_schedule")
+	public static CronExpression RESTART_SCHEDULE;
 
 }

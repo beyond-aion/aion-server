@@ -37,7 +37,7 @@ public class WorldPosition {
 	/**
 	 * indicating if object is spawned or not.
 	 */
-	private boolean isSpawned = false;
+	private volatile boolean isSpawned = false;
 
 	public WorldPosition(int mapId) {
 		this.mapId = mapId;

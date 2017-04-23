@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.configs.main;
 
+import org.quartz.CronExpression;
+
 import com.aionemu.commons.configuration.Property;
 
 /**
@@ -24,12 +26,12 @@ public class SiegeConfig {
 	 * Siege Race Protector spawn schedule
 	 */
 	@Property(key = "gameserver.siege.protector.time", defaultValue = "0 0 21 ? * *")
-	public static String RACE_PROTECTOR_SPAWN_SCHEDULE;
+	public static CronExpression RACE_PROTECTOR_SPAWN_SCHEDULE;
 	/**
 	 * Berserker Sunayaka spawn time
 	 */
 	@Property(key = "gameserver.moltenus.time", defaultValue = "0 0 22 ? * SUN")
-	public static String MOLTENUS_SPAWN_SCHEDULE;
+	public static CronExpression MOLTENUS_SPAWN_SCHEDULE;
 	/**
 	 * Legendary npc's health multiplier
 	 */

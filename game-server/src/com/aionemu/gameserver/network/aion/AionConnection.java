@@ -18,6 +18,7 @@ import com.aionemu.commons.network.Dispatcher;
 import com.aionemu.commons.network.PacketProcessor;
 import com.aionemu.commons.utils.concurrent.ExecuteWrapper;
 import com.aionemu.commons.utils.concurrent.RunnableStatsManager;
+import com.aionemu.gameserver.GameServer;
 import com.aionemu.gameserver.configs.main.SecurityConfig;
 import com.aionemu.gameserver.configs.network.NetworkConfig;
 import com.aionemu.gameserver.model.account.Account;
@@ -246,6 +247,11 @@ public class AionConnection extends AConnection<AionServerPacket> {
 	@Override
 	protected final void onDisconnect() {
 		pingChecker.stop();
+		if (GameServer.isShuttingDown()) { // client crashing during countdown
+			safeLogout(getActivePlayer()); // instant synchronized leaveWorld to ensure completion before onServerClose
+			return;
+		}
+
 		String msg = "";
 		if (getAccount() != null) {
 			int id = getAccount().getId();
@@ -267,8 +273,23 @@ public class AionConnection extends AConnection<AionServerPacket> {
 
 	@Override
 	protected final void onServerClose() {
-		// TODO mb some packet should be send to client before closing?
-		close(/* packet */);
+		close();
+		safeLogout(getActivePlayer());
+	}
+
+	private void safeLogout(Player player) {
+		if (player == null)
+			return;
+
+		synchronized (player) {
+			if (!player.equals(getActivePlayer())) // player was already saved
+				return;
+			try {
+				PlayerLeaveWorldService.leaveWorld(player);
+			} catch (Exception e) {
+				log.error("Error saving " + player, e);
+			}
+		}
 	}
 
 	/**

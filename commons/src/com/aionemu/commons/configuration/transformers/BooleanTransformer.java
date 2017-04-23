@@ -2,10 +2,8 @@ package com.aionemu.commons.configuration.transformers;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Type;
-import java.security.InvalidParameterException;
 
 import com.aionemu.commons.configuration.PropertyTransformer;
-import com.aionemu.commons.configuration.TransformationException;
 
 /**
  * This class implements basic boolean transformer.
@@ -30,7 +28,7 @@ public class BooleanTransformer extends PropertyTransformer<Boolean> {
 	 * @param field
 	 *          value will be assigned to this field
 	 * @return Boolean object that represents transformed value
-	 * @throws TransformationException
+	 * @throws Exception
 	 *           if something goes wrong
 	 */
 	@Override
@@ -41,7 +39,7 @@ public class BooleanTransformer extends PropertyTransformer<Boolean> {
 		} else if ("false".equalsIgnoreCase(value) || "0".equals(value)) {
 			return false;
 		} else {
-			throw new InvalidParameterException("Value is no boolean expression.");
+			throw new IllegalArgumentException("Value is no boolean expression.");
 		}
 	}
 }

@@ -4,7 +4,6 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Type;
 
 import com.aionemu.commons.configuration.PropertyTransformer;
-import com.aionemu.commons.configuration.TransformationException;
 
 /**
  * Transforms string that represents short to the short value. Short value can be represented as decimal or hex
@@ -26,7 +25,7 @@ public class ShortTransformer extends PropertyTransformer<Short> {
 	 * @param field
 	 *          value will be assigned to this field
 	 * @return Short object that represents value
-	 * @throws TransformationException
+	 * @throws Exception
 	 *           if something went wrong
 	 */
 	@Override

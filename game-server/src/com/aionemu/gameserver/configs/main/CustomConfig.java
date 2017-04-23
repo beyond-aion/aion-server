@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.configs.main;
 
+import org.quartz.CronExpression;
+
 import com.aionemu.commons.configuration.Property;
 
 public class CustomConfig {
@@ -203,9 +205,9 @@ public class CustomConfig {
 	@Property(key = "gameserver.vortex.enable", defaultValue = "true")
 	public static boolean VORTEX_ENABLED;
 	@Property(key = "gameserver.vortex.brusthonin.schedule", defaultValue = "0 0 16 ? * SAT")
-	public static String VORTEX_BRUSTHONIN_SCHEDULE;
+	public static CronExpression VORTEX_BRUSTHONIN_SCHEDULE;
 	@Property(key = "gameserver.vortex.theobomos.schedule", defaultValue = "0 0 16 ? * SUN")
-	public static String VORTEX_THEOBOMOS_SCHEDULE;
+	public static CronExpression VORTEX_THEOBOMOS_SCHEDULE;
 	@Property(key = "gameserver.vortex.duration", defaultValue = "1")
 	public static int VORTEX_DURATION;
 
@@ -235,8 +237,8 @@ public class CustomConfig {
 	@Property(key = "gameserver.limits.enable_dynamic_cap", defaultValue = "false")
 	public static boolean LIMITS_ENABLE_DYNAMIC_CAP;
 
-	@Property(key = "gameserver.limits.update", defaultValue = "0 0 0 * * ?")
-	public static String LIMITS_UPDATE;
+	@Property(key = "gameserver.limits.update", defaultValue = "0 0 0 ? * *")
+	public static CronExpression LIMITS_UPDATE;
 
 	@Property(key = "gameserver.abyssxform.afterlogout", defaultValue = "false")
 	public static boolean ABYSSXFORM_LOGOUT;
@@ -272,5 +274,5 @@ public class CustomConfig {
 	public static int PVP_MAP_RANDOM_BOSS_BASE_RATE;
 
 	@Property(key = "gameserver.pvpmap.random_boss.time", defaultValue = "0 30 14,18,21 ? * *")
-	public static String PVP_MAP_RANDOM_BOSS_SCHEDULE;
+	public static CronExpression PVP_MAP_RANDOM_BOSS_SCHEDULE;
 }
