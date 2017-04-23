@@ -90,8 +90,10 @@ public class CM_FIND_GROUP extends AionClientPacket {
 				break;
 			case 0x0A: // New 4.0 Group Recruitment
 				break;
+			case 0x0D: // auto refresh results or something (sent periodically every 50s after a search has been triggered)
+				break;
 			default:
-				log.error("Unknown find group packet? 0x" + Integer.toHexString(action).toUpperCase());
+				log.warn("Unknown find group packet? 0x" + Integer.toHexString(action).toUpperCase());
 				break;
 		}
 	}
