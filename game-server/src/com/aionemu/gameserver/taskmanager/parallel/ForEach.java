@@ -5,10 +5,10 @@ import java.util.concurrent.CountedCompleter;
 import java.util.concurrent.ForkJoinTask;
 import java.util.function.Consumer;
 
-import javax.annotation.Nullable;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 /**
  * @author Rolandas
@@ -32,7 +32,7 @@ public final class ForEach<E> extends CountedCompleter<E> {
 		if (list.size() > 0) {
 			@SuppressWarnings("unchecked")
 			E[] objects = list.toArray((E[]) new Object[list.size()]);
-			return new ForEach<>(null, operation, 0, objects.length, objects);
+			return newTask(operation, objects);
 		}
 		return null;
 	}
@@ -40,9 +40,11 @@ public final class ForEach<E> extends CountedCompleter<E> {
 	/**
 	 * See {@link #newTask(Collection, Consumer) newTask(Collection&lt;E&gt; list, Consumer&lt;E&gt; operation)}
 	 */
-	@SafeVarargs
+	@SuppressWarnings("unchecked")
+	@SuppressFBWarnings(value = "NP_NULL_PARAM_DEREF_NONVIRTUAL",
+		justification = "FindBugs somehow thinks CountedCompleter would't accept a null rootTask")
 	public static <E> ForkJoinTask<E> newTask(Consumer<E> operation, E... list) {
-		if (list != null && list.length > 0) {
+		if (list.length > 0) {
 			return new ForEach<>(null, operation, 0, list.length, list);
 		}
 		return null;
@@ -52,7 +54,7 @@ public final class ForEach<E> extends CountedCompleter<E> {
 	final Consumer<E> operation;
 	final int lo, hi;
 
-	private ForEach(@Nullable CountedCompleter<E> rootTask, Consumer<E> operation, int lo, int hi, E[] list) {
+	private ForEach(CountedCompleter<E> rootTask, Consumer<E> operation, int lo, int hi, E[] list) {
 		super(rootTask);
 		this.list = list;
 		this.operation = operation;

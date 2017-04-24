@@ -33,6 +33,7 @@ public class CM_LEGION_TABS extends AionClientPacket {
 	}
 
 	@Override
+	@SuppressWarnings("fallthrough")
 	protected void runImpl() {
 		Player activePlayer = getConnection().getActivePlayer();
 
@@ -45,7 +46,6 @@ public class CM_LEGION_TABS extends AionClientPacket {
 				case 1: // Reward tab
 					if (!activePlayer.getLegionMember().isBrigadeGeneral())
 						break;
-					//$FALL-THROUGH$
 				case 0: // legion history
 				case 2: // legion WH history
 					Collection<LegionHistory> history = activePlayer.getLegion().getLegionHistoryByTabId(tab);
