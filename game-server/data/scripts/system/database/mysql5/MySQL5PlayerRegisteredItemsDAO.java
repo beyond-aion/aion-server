@@ -12,8 +12,6 @@ import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-import javax.annotation.Nullable;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -56,7 +54,7 @@ public class MySQL5PlayerRegisteredItemsDAO extends PlayerRegisteredItemsDAO {
 	private static final Predicate<HouseObject<?>> objectsToAddPredicate = new Predicate<HouseObject<?>>() {
 
 		@Override
-		public boolean test(@Nullable HouseObject<?> input) {
+		public boolean test(HouseObject<?> input) {
 			return input != null && (input.getPersistentState() == PersistentState.NEW);
 		}
 	};
@@ -64,7 +62,7 @@ public class MySQL5PlayerRegisteredItemsDAO extends PlayerRegisteredItemsDAO {
 	private static final Predicate<HouseObject<?>> objectsToUpdatePredicate = new Predicate<HouseObject<?>>() {
 
 		@Override
-		public boolean test(@Nullable HouseObject<?> input) {
+		public boolean test(HouseObject<?> input) {
 			return input != null && (input.getPersistentState() == PersistentState.UPDATE_REQUIRED);
 		}
 	};
@@ -72,7 +70,7 @@ public class MySQL5PlayerRegisteredItemsDAO extends PlayerRegisteredItemsDAO {
 	private static final Predicate<HouseObject<?>> objectsToDeletePredicate = new Predicate<HouseObject<?>>() {
 
 		@Override
-		public boolean test(@Nullable HouseObject<?> input) {
+		public boolean test(HouseObject<?> input) {
 			return input != null && PersistentState.DELETED == input.getPersistentState();
 		}
 	};
@@ -80,7 +78,7 @@ public class MySQL5PlayerRegisteredItemsDAO extends PlayerRegisteredItemsDAO {
 	private static final Predicate<HouseDecoration> partsToAddPredicate = new Predicate<HouseDecoration>() {
 
 		@Override
-		public boolean test(@Nullable HouseDecoration input) {
+		public boolean test(HouseDecoration input) {
 			return input != null && (input.getPersistentState() == PersistentState.NEW);
 		}
 	};
@@ -88,7 +86,7 @@ public class MySQL5PlayerRegisteredItemsDAO extends PlayerRegisteredItemsDAO {
 	private static final Predicate<HouseDecoration> partsToUpdatePredicate = new Predicate<HouseDecoration>() {
 
 		@Override
-		public boolean test(@Nullable HouseDecoration input) {
+		public boolean test(HouseDecoration input) {
 			return input != null && (input.getPersistentState() == PersistentState.UPDATE_REQUIRED);
 		}
 	};
@@ -96,7 +94,7 @@ public class MySQL5PlayerRegisteredItemsDAO extends PlayerRegisteredItemsDAO {
 	private static final Predicate<HouseDecoration> partsToDeletePredicate = new Predicate<HouseDecoration>() {
 
 		@Override
-		public boolean test(@Nullable HouseDecoration input) {
+		public boolean test(HouseDecoration input) {
 			return input != null && PersistentState.DELETED == input.getPersistentState();
 		}
 	};

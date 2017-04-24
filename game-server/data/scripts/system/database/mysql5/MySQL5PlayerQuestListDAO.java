@@ -11,8 +11,6 @@ import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-import javax.annotation.Nullable;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -41,7 +39,7 @@ public class MySQL5PlayerQuestListDAO extends PlayerQuestListDAO {
 	private static final Predicate<QuestState> questsToAddPredicate = new Predicate<QuestState>() {
 
 		@Override
-		public boolean test(@Nullable QuestState input) {
+		public boolean test(QuestState input) {
 			return input != null && PersistentState.NEW == input.getPersistentState();
 		}
 	};
@@ -49,7 +47,7 @@ public class MySQL5PlayerQuestListDAO extends PlayerQuestListDAO {
 	private static final Predicate<QuestState> questsToUpdatePredicate = new Predicate<QuestState>() {
 
 		@Override
-		public boolean test(@Nullable QuestState input) {
+		public boolean test(QuestState input) {
 			return input != null && PersistentState.UPDATE_REQUIRED == input.getPersistentState();
 		}
 	};
@@ -57,7 +55,7 @@ public class MySQL5PlayerQuestListDAO extends PlayerQuestListDAO {
 	private static final Predicate<QuestState> questsToDeletePredicate = new Predicate<QuestState>() {
 
 		@Override
-		public boolean test(@Nullable QuestState input) {
+		public boolean test(QuestState input) {
 			return input != null && PersistentState.DELETED == input.getPersistentState();
 		}
 	};

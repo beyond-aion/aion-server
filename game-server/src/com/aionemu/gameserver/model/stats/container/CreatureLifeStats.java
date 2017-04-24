@@ -5,8 +5,6 @@ import java.util.concurrent.Future;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-import javax.annotation.Nonnull;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -123,7 +121,7 @@ public abstract class CreatureLifeStats<T extends Creature> {
 	 *          - attacking creature or self
 	 * @return The HP that this creature has left. If 0, the creature died.
 	 */
-	public int reduceHp(TYPE type, int value, int skillId, LOG log, @Nonnull Creature attacker) {
+	public int reduceHp(TYPE type, int value, int skillId, LOG log, Creature attacker) {
 		Objects.requireNonNull(attacker, "attacker");
 
 		if (getOwner().isInvulnerable())

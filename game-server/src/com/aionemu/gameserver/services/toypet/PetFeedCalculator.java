@@ -5,8 +5,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.TreeSet;
 
-import javax.annotation.Nonnull;
-
 import org.apache.commons.lang3.ArrayUtils;
 
 import com.aionemu.commons.utils.Rnd;
@@ -120,7 +118,7 @@ public final class PetFeedCalculator {
 		return points;
 	}
 
-	public static void updatePetFeedProgress(@Nonnull PetFeedProgress progress, int itemLevel, int maxFeedCount) {
+	public static void updatePetFeedProgress(PetFeedProgress progress, int itemLevel, int maxFeedCount) {
 		PetHungryLevel currHungryLevel = progress.getHungryLevel();
 		if (progress.isLovedFeeded()) { // loved food
 			if (progress.getLovedFoodRemaining() == 0)

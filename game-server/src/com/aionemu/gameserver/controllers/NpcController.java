@@ -3,8 +3,6 @@ package com.aionemu.gameserver.controllers;
 import java.util.Collection;
 import java.util.Set;
 
-import javax.annotation.Nonnull;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -118,7 +116,7 @@ public class NpcController extends CreatureController<Npc> {
 	}
 
 	@Override
-	public void onDie(@Nonnull Creature lastAttacker) {
+	public void onDie(Creature lastAttacker) {
 		Npc owner = getOwner();
 		if (owner.getSpawn().hasPool())
 			owner.getSpawn().setUse(owner.getInstanceId(), false);

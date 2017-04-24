@@ -9,8 +9,6 @@ import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-import javax.annotation.Nullable;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -37,7 +35,7 @@ public class MySQL5PlayerSkillListDAO extends PlayerSkillListDAO {
 	private static final Predicate<PlayerSkillEntry> skillsToInsertPredicate = new Predicate<PlayerSkillEntry>() {
 
 		@Override
-		public boolean test(@Nullable PlayerSkillEntry input) {
+		public boolean test(PlayerSkillEntry input) {
 			return input != null && PersistentState.NEW == input.getPersistentState();
 		}
 	};
@@ -45,7 +43,7 @@ public class MySQL5PlayerSkillListDAO extends PlayerSkillListDAO {
 	private static final Predicate<PlayerSkillEntry> skillsToUpdatePredicate = new Predicate<PlayerSkillEntry>() {
 
 		@Override
-		public boolean test(@Nullable PlayerSkillEntry input) {
+		public boolean test(PlayerSkillEntry input) {
 			return input != null && PersistentState.UPDATE_REQUIRED == input.getPersistentState();
 		}
 	};
@@ -53,7 +51,7 @@ public class MySQL5PlayerSkillListDAO extends PlayerSkillListDAO {
 	private static final Predicate<PlayerSkillEntry> skillsToDeletePredicate = new Predicate<PlayerSkillEntry>() {
 
 		@Override
-		public boolean test(@Nullable PlayerSkillEntry input) {
+		public boolean test(PlayerSkillEntry input) {
 			return input != null && PersistentState.DELETED == input.getPersistentState();
 		}
 	};

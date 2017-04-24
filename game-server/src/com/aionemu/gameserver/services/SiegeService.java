@@ -11,8 +11,6 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Consumer;
 
-import javax.annotation.Nullable;
-
 import org.quartz.JobDetail;
 import org.quartz.Trigger;
 import org.slf4j.Logger;
@@ -62,7 +60,6 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.WorldType;
-import com.google.common.base.Predicate;
 import com.google.common.collect.Maps;
 
 /**
@@ -391,14 +388,7 @@ public class SiegeService {
 
 		// filter fortress siege start runnables
 		Map<Runnable, JobDetail> siegeStartRunables = CronService.getInstance().getRunnables();
-		siegeStartRunables = Maps.filterKeys(siegeStartRunables, new Predicate<Runnable>() {
-
-			@Override
-			public boolean apply(@Nullable Runnable runnable) {
-				return runnable instanceof SiegeStartRunnable;
-			}
-
-		});
+		siegeStartRunables = Maps.filterKeys(siegeStartRunables, runnable -> runnable instanceof SiegeStartRunnable);
 
 		// Create map FortressId-To-AllTriggers
 		Map<Integer, List<Trigger>> siegeIdToStartTriggers = new HashMap<>();
@@ -505,25 +495,11 @@ public class SiegeService {
 	}
 
 	public Map<Integer, ArtifactLocation> getStandaloneArtifacts() {
-		return Maps.filterValues(artifacts, new Predicate<ArtifactLocation>() {
-
-			@Override
-			public boolean apply(@Nullable ArtifactLocation input) {
-				return input != null && input.isStandAlone();
-			}
-
-		});
+		return Maps.filterValues(artifacts, loc -> loc != null && loc.isStandAlone());
 	}
 
 	public Map<Integer, ArtifactLocation> getFortressArtifacts() {
-		return Maps.filterValues(artifacts, new Predicate<ArtifactLocation>() {
-
-			@Override
-			public boolean apply(@Nullable ArtifactLocation input) {
-				return input != null && input.getOwningFortress() != null;
-			}
-
-		});
+		return Maps.filterValues(artifacts, loc -> loc != null && loc.getOwningFortress() != null);
 	}
 
 	public Map<Integer, SiegeLocation> getSiegeLocations() {

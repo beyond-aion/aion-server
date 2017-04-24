@@ -12,8 +12,6 @@ import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-import javax.annotation.Nullable;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -45,7 +43,7 @@ public class MySQL5ItemStoneListDAO extends ItemStoneListDAO {
 	private static final Predicate<ItemStone> itemStoneAddPredicate = new Predicate<ItemStone>() {
 
 		@Override
-		public boolean test(@Nullable ItemStone itemStone) {
+		public boolean test(ItemStone itemStone) {
 			return itemStone != null && PersistentState.NEW == itemStone.getPersistentState();
 		}
 
@@ -53,7 +51,7 @@ public class MySQL5ItemStoneListDAO extends ItemStoneListDAO {
 	private static final Predicate<ItemStone> itemStoneDeletedPredicate = new Predicate<ItemStone>() {
 
 		@Override
-		public boolean test(@Nullable ItemStone itemStone) {
+		public boolean test(ItemStone itemStone) {
 			return itemStone != null && PersistentState.DELETED == itemStone.getPersistentState();
 		}
 
@@ -61,7 +59,7 @@ public class MySQL5ItemStoneListDAO extends ItemStoneListDAO {
 	private static final Predicate<ItemStone> itemStoneUpdatePredicate = new Predicate<ItemStone>() {
 
 		@Override
-		public boolean test(@Nullable ItemStone itemStone) {
+		public boolean test(ItemStone itemStone) {
 			return itemStone != null && PersistentState.UPDATE_REQUIRED == itemStone.getPersistentState();
 		}
 

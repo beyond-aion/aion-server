@@ -12,8 +12,6 @@ import java.util.Set;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Future;
 
-import javax.annotation.Nonnull;
-
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -950,7 +948,7 @@ public class QuestEngine implements GameEngine {
 		return false;
 	}
 
-	private void registerCanAct(int questId, @Nonnull NpcTemplate template) {
+	private void registerCanAct(int questId, NpcTemplate template) {
 		if (!questCanAct.containsKey(template.getTemplateId())) {
 			TIntArrayList questNpcs = new TIntArrayList();
 			questNpcs.add(questId);

@@ -7,8 +7,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import javax.annotation.Nonnull;
-
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.configs.administration.AdminConfig;
 import com.aionemu.gameserver.configs.main.SecurityConfig;
@@ -228,8 +226,7 @@ public class Player extends Creature {
 	/*------ Panesterra ------*/
 	private PanesterraTeam panesterraTeam = null;
 
-	public Player(@Nonnull PlayerController controller, @Nonnull PlayerCommonData plCommonData, @Nonnull PlayerAppearance appereance,
-		@Nonnull Account account) {
+	public Player(PlayerController controller, PlayerCommonData plCommonData, PlayerAppearance appereance, Account account) {
 		super(plCommonData.getPlayerObjId(), controller, null, plCommonData, plCommonData.getPosition());
 		this.daoVars = DAOManager.getDAO(PlayerVarsDAO.class);
 		this.playerCommonData = plCommonData;

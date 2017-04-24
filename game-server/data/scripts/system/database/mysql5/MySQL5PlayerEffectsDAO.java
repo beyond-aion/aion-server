@@ -8,8 +8,6 @@ import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-import javax.annotation.Nullable;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -36,7 +34,7 @@ public class MySQL5PlayerEffectsDAO extends PlayerEffectsDAO {
 	private static final Predicate<Effect> insertableEffectsPredicate = new Predicate<Effect>() {
 
 		@Override
-		public boolean test(@Nullable Effect input) {
+		public boolean test(Effect input) {
 			return input != null && input.getRemainingTime() > 28000 && !input.getSkillTemplate().isNoSaveOnLogout();
 		}
 	};

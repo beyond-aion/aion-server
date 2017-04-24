@@ -7,8 +7,6 @@ import java.sql.SQLException;
 import java.util.Iterator;
 import java.util.Map;
 
-import javax.annotation.Nullable;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -37,7 +35,7 @@ public class MySQL5ItemCooldownsDAO extends ItemCooldownsDAO {
 	private static final Predicate<ItemCooldown> itemCooldownPredicate = new Predicate<ItemCooldown>() {
 
 		@Override
-		public boolean apply(@Nullable ItemCooldown input) {
+		public boolean apply(ItemCooldown input) {
 			return input != null && input.getReuseTime() - System.currentTimeMillis() > 30000;
 		}
 	};

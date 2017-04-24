@@ -11,8 +11,6 @@ import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-import javax.annotation.Nullable;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -49,7 +47,7 @@ public class MySQL5InventoryDAO extends InventoryDAO {
 	private static final Predicate<Item> itemsToInsertPredicate = new Predicate<Item>() {
 
 		@Override
-		public boolean test(@Nullable Item input) {
+		public boolean test(Item input) {
 			return input != null && PersistentState.NEW == input.getPersistentState();
 		}
 	};
@@ -57,7 +55,7 @@ public class MySQL5InventoryDAO extends InventoryDAO {
 	private static final Predicate<Item> itemsToUpdatePredicate = new Predicate<Item>() {
 
 		@Override
-		public boolean test(@Nullable Item input) {
+		public boolean test(Item input) {
 			return input != null && PersistentState.UPDATE_REQUIRED == input.getPersistentState();
 		}
 	};
@@ -65,7 +63,7 @@ public class MySQL5InventoryDAO extends InventoryDAO {
 	private static final Predicate<Item> itemsToDeletePredicate = new Predicate<Item>() {
 
 		@Override
-		public boolean test(@Nullable Item input) {
+		public boolean test(Item input) {
 			return input != null && PersistentState.DELETED == input.getPersistentState();
 		}
 	};

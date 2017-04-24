@@ -7,8 +7,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.annotation.Nonnull;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -285,7 +283,7 @@ public class PlayerController extends CreatureController<Player> {
 	}
 
 	@Override
-	public void onDie(@Nonnull Creature lastAttacker) {
+	public void onDie(Creature lastAttacker) {
 		Player player = getOwner();
 		player.getController().cancelCurrentSkill(null);
 		player.setRebirthRevive(player.haveSelfRezEffect());
@@ -357,7 +355,7 @@ public class PlayerController extends CreatureController<Player> {
 		sendDieFromCreature(getOwner(), true);
 	}
 
-	private void sendDieFromCreature(@Nonnull Creature lastAttacker, boolean showPacket) {
+	private void sendDieFromCreature(Creature lastAttacker, boolean showPacket) {
 		Player player = getOwner();
 		if (player.getPanesterraTeam() != null && player.getWorldId() == 400030000) {
 			PacketSendUtility.sendPacket(player, new SM_DIE(player.canUseRebirthRevive(), player.haveSelfRezItem(), 0, 6));

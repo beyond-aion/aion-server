@@ -5,8 +5,6 @@ import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Future;
 
-import javax.annotation.Nonnull;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -160,7 +158,7 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 	 * 
 	 * @param lastAttacker
 	 */
-	public void onDie(@Nonnull Creature lastAttacker) {
+	public void onDie(Creature lastAttacker) {
 		getOwner().getMoveController().abortMove();
 		getOwner().setCasting(null);
 		getOwner().getEffectController().removeAllEffects();

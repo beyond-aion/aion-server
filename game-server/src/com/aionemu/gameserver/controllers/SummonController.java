@@ -1,7 +1,5 @@
 package com.aionemu.gameserver.controllers;
 
-import javax.annotation.Nonnull;
-
 import com.aionemu.gameserver.controllers.attack.AttackStatus;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.animations.ObjectDeleteAnimation;
@@ -112,7 +110,7 @@ public class SummonController extends CreatureController<Summon> {
 	}
 
 	@Override
-	public void onDie(@Nonnull Creature lastAttacker) {
+	public void onDie(Creature lastAttacker) {
 		super.onDie(lastAttacker);
 		Summon owner = getOwner();
 		Player master = getOwner().getMaster();

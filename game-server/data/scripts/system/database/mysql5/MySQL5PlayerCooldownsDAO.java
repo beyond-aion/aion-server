@@ -10,8 +10,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Map;
 
-import javax.annotation.Nullable;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -36,7 +34,7 @@ public class MySQL5PlayerCooldownsDAO extends PlayerCooldownsDAO {
 	private static final Predicate<Long> cooldownPredicate = new Predicate<Long>() {
 
 		@Override
-		public boolean apply(@Nullable Long input) {
+		public boolean apply(Long input) {
 			return input != null && input - System.currentTimeMillis() > 28000;
 		}
 	};

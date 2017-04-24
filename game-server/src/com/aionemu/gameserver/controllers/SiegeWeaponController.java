@@ -1,7 +1,5 @@
 package com.aionemu.gameserver.controllers;
 
-import javax.annotation.Nonnull;
-
 import com.aionemu.gameserver.ai.event.AIEventType;
 import com.aionemu.gameserver.ai.follow.FollowStartService;
 import com.aionemu.gameserver.dataholders.DataManager;
@@ -65,7 +63,7 @@ public class SiegeWeaponController extends SummonController {
 	}
 
 	@Override
-	public void onDie(@Nonnull Creature lastAttacker) {
+	public void onDie(Creature lastAttacker) {
 		getMaster().getController().cancelTask(TaskId.SUMMON_FOLLOW);
 		super.onDie(lastAttacker);
 	}
