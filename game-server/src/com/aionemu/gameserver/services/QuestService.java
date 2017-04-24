@@ -10,7 +10,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.Future;
 import java.util.stream.Collectors;
@@ -85,8 +87,6 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
 import com.aionemu.gameserver.utils.stats.AbyssRankEnum;
 import com.aionemu.gameserver.utils.time.ServerTime;
-import com.google.common.collect.ArrayListMultimap;
-import com.google.common.collect.Multimap;
 
 /**
  * @author Mr. Poke
@@ -95,7 +95,7 @@ import com.google.common.collect.Multimap;
 public final class QuestService {
 
 	private static final Logger log = LoggerFactory.getLogger(QuestService.class);
-	private static Multimap<Integer, QuestDrop> questDrop = ArrayListMultimap.create();
+	private static Map<Integer, List<QuestDrop>> questDrop = new HashMap<>();
 
 	/**
 	 * Finishes the quest and rewards the player.
@@ -1019,18 +1019,16 @@ public final class QuestService {
 	}
 
 	public static Collection<QuestDrop> getQuestDrop(int npcId) {
-		if (questDrop.containsKey(npcId)) {
-			return questDrop.get(npcId);
-		}
-		return Collections.<QuestDrop> emptyList();
+		return questDrop.getOrDefault(npcId, Collections.emptyList());
 	}
 
 	public static void addQuestDrop(int npcId, QuestDrop drop) {
-		if (!questDrop.containsKey(npcId)) {
-			questDrop.put(npcId, drop);
-		} else {
-			questDrop.get(npcId).add(drop);
+		List<QuestDrop> drops = questDrop.get(npcId);
+		if (drops == null) {
+			drops = new ArrayList<>();
+			questDrop.put(npcId, drops);
 		}
+		drops.add(drop);
 	}
 
 	/**
