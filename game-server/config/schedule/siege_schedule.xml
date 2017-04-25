@@ -2,7 +2,7 @@
 <siege_schedule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="siege_schedule.xsd">
 	<!-- Divine Fortress -->
 	<fortress id="1011">
-		<siegeTime>0 0 20 ? * SAT</siegeTime>
+		<siegeTime>0 0 20 ? * FRI</siegeTime>
 	</fortress>
 	<!-- Siel's Western Fortress -->
 	<fortress id="1131">
@@ -22,15 +22,15 @@
 	</fortress>
 	<!-- Krotan Refuge -->
 	<fortress id="1221">
-		<siegeTime>0 0 20 ? * MON,THU</siegeTime>
+		<siegeTime>0 0 21 ? * MON,THU</siegeTime>
 	</fortress>
 	<!-- Kysis Fortress -->
 	<fortress id="1231">
-		<siegeTime>0 0 20 ? * MON,THU</siegeTime>
+		<siegeTime>0 0 21 ? * MON,THU</siegeTime>
 	</fortress>
 	<!-- Miren Fortress -->
 	<fortress id="1241">
-		<siegeTime>0 0 20 ? * MON,THU</siegeTime>
+		<siegeTime>0 0 21 ? * MON,THU</siegeTime>
 	</fortress>
 	<!-- Asteria Fortress -->
 	<fortress id="1251">
@@ -38,30 +38,26 @@
 	</fortress>
 	<!-- Temple of Scales -->
 	<fortress id="2011">
-		<siegeTime>0 0 18 ? * MON,SAT</siegeTime>
-		<siegeTime>0 0 20 ? * WED</siegeTime>
+		<siegeTime>0 0 19 ? * MON,WED,SAT</siegeTime>
 	</fortress>
 	<!-- Altar of Avarice -->
 	<fortress id="2021">
-		<siegeTime>0 0 18 ? * MON,SAT</siegeTime>
-		<siegeTime>0 0 20 ? * WED</siegeTime>
+		<siegeTime>0 0 19 ? * MON,WED,SAT</siegeTime>
 	</fortress>
 	<!-- Vorgaltem Citadel -->
 	<fortress id="3011">
-		<siegeTime>0 0 18 ? * THU,SAT</siegeTime>
-		<siegeTime>0 0 20 ? * WED</siegeTime>
+		<siegeTime>0 0 19 ? * MON,WED,SAT</siegeTime>
 	</fortress>
 	<!-- Crimson Temple -->
 	<fortress id="3021">
-		<siegeTime>0 0 18 ? * THU,SAT</siegeTime>
-		<siegeTime>0 0 20 ? * WED</siegeTime>
+		<siegeTime>0 0 19 ? * MON,WED,SAT</siegeTime>
 	</fortress>
 	<!-- Wealhtheow Keep -->
 	<fortress id="7011">
-		<siegeTime>0 0 20 ? * SUN</siegeTime>
+		<siegeTime>0 0 21 ? * SUN</siegeTime>
 	</fortress>
 	<agent_fight id="8011">
-		<siegeTime>0 50 19 ? * TUE</siegeTime>
+		<siegeTime>0 50 20 ? * TUE</siegeTime>
 	</agent_fight>
 	<!--
 	<fortress id="10111">
