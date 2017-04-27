@@ -30,7 +30,7 @@ public class StaticDoorService {
 	public void openStaticDoor(final Player player, int doorId) {
 		StaticDoor door = player.getPosition().getWorldMapInstance().getDoors().get(doorId);
 		if (door == null) {
-			log.warn("Door (ID: " + doorId + ") is missing in world " + player.getWorldId());
+			log.warn("Door (ID: " + doorId + ") is missing near " + player.getPosition());
 			return;
 		}
 		int keyId = door.getObjectTemplate().getKeyId();
