@@ -61,6 +61,6 @@ public abstract class AionObject {
 
 	@Override
 	public String toString() {
-		return getClass().getSimpleName() + "[name=" + getName() + ", objectId=" + objectId + "]";
+		return getClass().getSimpleName() + " [name=" + getName() + ", objectId=" + objectId + "]";
 	}
 }

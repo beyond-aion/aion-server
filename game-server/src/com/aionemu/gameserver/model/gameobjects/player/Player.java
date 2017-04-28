@@ -1085,10 +1085,15 @@ public class Player extends Creature {
 
 		if (super.canSee(object))
 			return true;
-		if (object instanceof Player && isInSameTeam((Player) object))
-			return true;
-		if (object instanceof Kisk && ((Kisk) object).getOwnerRace() == getRace()) // invisible kisks can be seen from players of the same race
-			return true;
+
+		if (object instanceof Creature) {
+			if (object instanceof Player && isInSameTeam((Player) object))
+				return true;
+			if (((Creature) object).getMaster() instanceof Player && isInSameTeam((Player) ((Creature) object).getMaster())) // traps
+				return true;
+			if (object instanceof Kisk && ((Kisk) object).getOwnerRace() == getRace()) // invisible kisks can be seen from players of the same race
+				return true;
+		}
 
 		return false;
 	}
