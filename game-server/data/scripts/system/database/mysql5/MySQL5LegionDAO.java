@@ -142,8 +142,6 @@ public class MySQL5LegionDAO extends LegionDAO {
 			}
 		});
 
-		log.debug("[MySQL5LegionDAO] Loaded " + legion[0].getLegionId() + " legion.");
-
 		return success ? legion[0] : null;
 	}
 
@@ -176,8 +174,6 @@ public class MySQL5LegionDAO extends LegionDAO {
 				}
 			}
 		});
-
-		log.debug("[MySQL5LegionDAO] Loaded " + legion[0].getLegionId() + " legion.");
 
 		return success ? legion[0] : null;
 	}
