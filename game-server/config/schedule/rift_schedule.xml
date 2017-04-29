@@ -11,13 +11,13 @@
 	<!-- Inggison -->
 	<rift id="210050000">
 		<open schedule="0 0 * ? * *"/>
-		<open schedule="0 0 17 ? * FRI,MON" spawn="true"/>
+		<open schedule="0 0 18 ? * FRI,MON" spawn="true"/>
 		<open schedule="0 0 0 ? * THU,SUN" spawn="true"/>
 	</rift>
 	<!-- Cygnea -->
 	<rift id="210070000">
 		<open schedule="0 0 * ? * *"/>
-		<open schedule="0 0 19 ? * MON,WED,SAT" spawn="true"/>
+		<open schedule="0 0 20 ? * MON,WED,SAT" spawn="true"/>
 		<open schedule="0 0 15 ? * SUN" spawn="true"/>
 	</rift>
 	
@@ -32,13 +32,13 @@
 	<!-- Gelkmaros -->
 	<rift id="220070000">
 		<open schedule="0 0 * ? * *"/>
-		<open schedule="0 0 17 ? * SUN,THU" spawn="true"/>
+		<open schedule="0 0 18 ? * SUN,THU" spawn="true"/>
 		<open schedule="0 0 0 ? * WED,SAT" spawn="true"/>
 	</rift>
 	<!-- Enshar -->
 	<rift id="220080000">
 		<open schedule="0 0 * ? * *"/>
-		<open schedule="0 0 19 ? * TUE,THU,SUN" spawn="true"/>
+		<open schedule="0 0 20 ? * TUE,THU,SUN" spawn="true"/>
 		<open schedule="0 0 15 ? * SAT" spawn="true"/>
 	</rift>
 </rift_schedule>
