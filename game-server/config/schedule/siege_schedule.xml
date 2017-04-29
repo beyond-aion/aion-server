@@ -2,7 +2,7 @@
 <siege_schedule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="siege_schedule.xsd">
 	<!-- Divine Fortress -->
 	<fortress id="1011">
-		<siegeTime>0 0 20 ? * FRI</siegeTime>
+		<siegeTime>0 0 21 ? * FRI</siegeTime>
 	</fortress>
 	<!-- Siel's Western Fortress -->
 	<fortress id="1131">
@@ -22,15 +22,15 @@
 	</fortress>
 	<!-- Krotan Refuge -->
 	<fortress id="1221">
-		<siegeTime>0 0 21 ? * MON,THU</siegeTime>
+		<siegeTime>0 0 21 ? * MON,THU,SAT</siegeTime>
 	</fortress>
 	<!-- Kysis Fortress -->
 	<fortress id="1231">
-		<siegeTime>0 0 21 ? * MON,THU</siegeTime>
+		<siegeTime>0 0 21 ? * MON,THU,SAT</siegeTime>
 	</fortress>
 	<!-- Miren Fortress -->
 	<fortress id="1241">
-		<siegeTime>0 0 21 ? * MON,THU</siegeTime>
+		<siegeTime>0 0 21 ? * MON,THU,SAT</siegeTime>
 	</fortress>
 	<!-- Asteria Fortress -->
 	<fortress id="1251">
