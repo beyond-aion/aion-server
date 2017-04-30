@@ -15,48 +15,48 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class PurificationResultItem {
 
 	@XmlAttribute(name = "item_id")
-	private int item_id;
+	private int itemId;
 	@XmlAttribute(name = "check_enchant_count")
-	private int check_enchant_count;
+	private int checkEnchantCount;
 	@XmlElement(name = "required_materials")
-	private RequiredMaterials required_materials;
+	private RequiredMaterials requiredMaterials;
 	@XmlElement(name = "kinah_needed")
-	private NeedKinah kinah_needed;
+	private NeedKinah requiredKinah;
 	@XmlElement(name = "abyss_point_needed")
-	private NeedAbyssPoint abyss_point_needed;
+	private NeedAbyssPoint requiredAbyssPoints;
 
 	/**
-	 * @return the check_enchant_count
+	 * @return the checkEnchantCount
 	 */
-	public int getCheck_enchant_count() {
-		return check_enchant_count;
+	public int getCheckEnchantCount() {
+		return checkEnchantCount;
 	}
 
 	/**
-	 * @return the item_id
+	 * @return the itemId
 	 */
-	public int getItem_id() {
-		return item_id;
+	public int getItemId() {
+		return itemId;
 	}
 
 	/**
-	 * @return the required_materials
+	 * @return the requiredMaterials
 	 */
-	public RequiredMaterials getUpgrade_materials() {
-		return required_materials;
+	public RequiredMaterials getRequiredMaterials() {
+		return requiredMaterials;
 	}
 
 	/**
-	 * @return the abyss_point_needed
+	 * @return the requiredAbyssPoints
 	 */
-	public NeedAbyssPoint getNeed_abyss_point() {
-		return abyss_point_needed;
+	public NeedAbyssPoint getRequiredAbyssPoints() {
+		return requiredAbyssPoints;
 	}
 
 	/**
-	 * @return the kinah_needed
+	 * @return the requiredKinah
 	 */
-	public NeedKinah getNeed_kinah() {
-		return kinah_needed;
+	public NeedKinah getRequiredKinah() {
+		return requiredKinah;
 	}
 }

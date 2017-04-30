@@ -11,7 +11,7 @@
 
     <xs:complexType name="ItemPurification">
         <xs:sequence>
-            <xs:element name="purification_result_item" type="PurificationResultItem" minOccurs="0" maxOccurs="2"/>
+            <xs:element name="purification_result_item" type="PurificationResultItem" minOccurs="1" maxOccurs="2"/>
         </xs:sequence>
         <xs:attribute name="base_item" type="xs:int" use="required"/>
     </xs:complexType>

@@ -15,13 +15,13 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class RequiredMaterials {
 
-	@XmlElement(required = true)
-	protected List<SubMaterialItem> sub_material_item;
+	@XmlElement(name = "sub_material_item", required = true)
+	protected List<SubMaterialItem> subMaterialItems;
 
 	/**
 	 * @return the subMaterialItem
 	 */
-	public List<SubMaterialItem> getSubMaterialItem() {
-		return sub_material_item;
+	public List<SubMaterialItem> getSubMaterialItems() {
+		return subMaterialItems;
 	}
 }

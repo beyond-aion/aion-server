@@ -34,35 +34,33 @@ public class ItemPurificationService {
 		}
 
 		Map<Integer, PurificationResultItem> resultItemMap = DataManager.ITEM_PURIFICATION_DATA.getResultItemMap(baseItem.getItemId());
-
-		if (!resultItemMap.containsKey(resultItemId)) {
+		PurificationResultItem resultItem = resultItemMap.get(resultItemId);
+		if (resultItem == null) {
 			AuditLogger.info(player, resultItemId + " item's baseItem and resultItem is not matched (possible client modify)");
 			return false;
 		}
 
-		PurificationResultItem resultItem = resultItemMap.get(resultItemId);
-
-		if (baseItem.getEnchantLevel() < resultItem.getCheck_enchant_count()) {
+		if (baseItem.getEnchantLevel() < resultItem.getCheckEnchantCount()) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REGISTER_ITEM_MSG_UPGRADE_CANNOT(new DescriptionId(baseItem.getNameId())));
 			return false;
 		}
 
-		for (SubMaterialItem sub : resultItem.getUpgrade_materials().getSubMaterialItem()) {
+		for (SubMaterialItem sub : resultItem.getRequiredMaterials().getSubMaterialItems()) {
 			if (player.getInventory().getItemCountByItemId(sub.getId()) < sub.getCount()) {
-				// sub Metarial is not enough
+				// sub material is not enough
 				return false;
 			}
 		}
 
-		if (resultItem.getNeed_abyss_point() != null) {
-			if (player.getAbyssRank().getAp() < resultItem.getNeed_abyss_point().getCount()) {
+		if (resultItem.getRequiredAbyssPoints() != null) {
+			if (player.getAbyssRank().getAp() < resultItem.getRequiredAbyssPoints().getCount()) {
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REGISTER_ITEM_MSG_UPGRADE_CANNOT_NEED_AP());
 				return false;
 			}
 		}
 
-		if (resultItem.getNeed_kinah() != null) {
-			if (player.getInventory().getKinah() < resultItem.getNeed_kinah().getCount()) {
+		if (resultItem.getRequiredKinah() != null) {
+			if (player.getInventory().getKinah() < resultItem.getRequiredKinah().getCount()) {
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REGISTER_ITEM_MSG_UPGRADE_CANNOT_NEED_QINA());
 				return false;
 			}
@@ -78,18 +76,18 @@ public class ItemPurificationService {
 
 		PurificationResultItem resultItem = resultItemMap.get(resultItemId);
 
-		for (SubMaterialItem item : resultItem.getUpgrade_materials().getSubMaterialItem()) {
+		for (SubMaterialItem item : resultItem.getRequiredMaterials().getSubMaterialItems()) {
 			if (!player.getInventory().decreaseByItemId(item.getId(), item.getCount())) {
 				AuditLogger.info(player, "try item upgrade without sub material");
 				return false;
 			}
 		}
 
-		if (resultItem.getNeed_abyss_point() != null)
-			AbyssPointsService.setAp(player, -resultItem.getNeed_abyss_point().getCount());
+		if (resultItem.getRequiredAbyssPoints() != null)
+			AbyssPointsService.setAp(player, -resultItem.getRequiredAbyssPoints().getCount());
 
-		if (resultItem.getNeed_kinah() != null)
-			player.getInventory().decreaseKinah(-resultItem.getNeed_kinah().getCount());
+		if (resultItem.getRequiredKinah() != null)
+			player.getInventory().decreaseKinah(-resultItem.getRequiredKinah().getCount());
 
 		player.getInventory().decreaseByObjectId(baseItem.getObjectId(), 1);
 

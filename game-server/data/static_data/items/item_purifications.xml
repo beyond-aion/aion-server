@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<item_purifications>
+<item_purifications xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="item_purifications.xsd">
 	<item_purification base_item="100201319">
 		<purification_result_item item_id="100201416" enchant_count="10">
 			<required_materials>

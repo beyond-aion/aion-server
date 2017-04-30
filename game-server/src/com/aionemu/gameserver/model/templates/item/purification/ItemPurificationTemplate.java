@@ -2,10 +2,10 @@ package com.aionemu.gameserver.model.templates.item.purification;
 
 import java.util.List;
 
-import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import com.aionemu.gameserver.model.stats.calc.StatOwner;
@@ -18,28 +18,16 @@ import com.aionemu.gameserver.model.stats.calc.StatOwner;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class ItemPurificationTemplate implements StatOwner {
 
-	protected List<PurificationResultItem> purification_result_item;
+	@XmlElement(name = "purification_result_item", required = true)
+	private List<PurificationResultItem> purificationResultItems;
 	@XmlAttribute(name = "base_item")
-	private int purification_base_item_id;
+	private int baseItemId;
 
-	/**
-	 * @param u
-	 * @param parent
-	 */
-	void afterUnmarshal(Unmarshaller u, Object parent) {
+	public List<PurificationResultItem> getPurificationResultItems() {
+		return purificationResultItems;
 	}
 
-	/**
-	 * @return the purification_result_item
-	 */
-	public List<PurificationResultItem> getPurification_result_item() {
-		return purification_result_item;
-	}
-
-	/**
-	 * @return the purification_base_item_id
-	 */
-	public int getPurification_base_item_id() {
-		return purification_base_item_id;
+	public int getBaseItemId() {
+		return baseItemId;
 	}
 }

@@ -1,16 +1,15 @@
 package com.aionemu.gameserver.dataholders;
 
-import java.util.LinkedHashMap;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import javax.xml.bind.annotation.XmlTransient;
 
 import com.aionemu.gameserver.model.templates.item.purification.ItemPurificationTemplate;
 import com.aionemu.gameserver.model.templates.item.purification.PurificationResultItem;
@@ -25,29 +24,25 @@ import gnu.trove.map.hash.TIntObjectHashMap;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class ItemPurificationData {
 
-	@SuppressWarnings("unused")
-	private static final Logger log = LoggerFactory.getLogger(ItemPurificationData.class);
 	@XmlElement(name = "item_purification")
-	protected List<ItemPurificationTemplate> ItemPurificationTemplates;
+	protected List<ItemPurificationTemplate> itemPurificationTemplates;
+	@XmlTransient
 	private TIntObjectHashMap<ItemPurificationTemplate> itemPurificationSets;
-	private LinkedHashMap<Integer, LinkedHashMap<Integer, PurificationResultItem>> ResultItemMap;
+	@XmlTransient
+	private Map<Integer, Map<Integer, PurificationResultItem>> possibleResultItems;
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		itemPurificationSets = new TIntObjectHashMap<>();
-		ResultItemMap = new LinkedHashMap<>();
+		possibleResultItems = new HashMap<>();
 
-		for (ItemPurificationTemplate set : ItemPurificationTemplates) {
-			itemPurificationSets.put(set.getPurification_base_item_id(), set);
+		for (ItemPurificationTemplate purificationTemplate : itemPurificationTemplates) {
+			itemPurificationSets.put(purificationTemplate.getBaseItemId(), purificationTemplate);
 
-			ResultItemMap.put(set.getPurification_base_item_id(), new LinkedHashMap<Integer, PurificationResultItem>());
-
-			if (!set.getPurification_result_item().isEmpty()) {
-				for (PurificationResultItem resultItem : set.getPurification_result_item()) {
-					ResultItemMap.get(set.getPurification_base_item_id()).put(resultItem.getItem_id(), resultItem);
-				}
-			}
+			possibleResultItems.put(purificationTemplate.getBaseItemId(), new HashMap<>());
+			for (PurificationResultItem resultItem : purificationTemplate.getPurificationResultItems())
+				possibleResultItems.get(purificationTemplate.getBaseItemId()).put(resultItem.getItemId(), resultItem);
 		}
-		ItemPurificationTemplates = null;
+		itemPurificationTemplates = null;
 	}
 
 	/**
@@ -58,16 +53,8 @@ public class ItemPurificationData {
 		return itemPurificationSets.get(itemSetId);
 	}
 
-	public LinkedHashMap<Integer, PurificationResultItem> getResultItemMap(int baseItemId) {
-		if (ResultItemMap.containsKey(baseItemId)) {
-			if (!ResultItemMap.get(baseItemId).isEmpty()) {
-				return ResultItemMap.get(baseItemId);
-			} else {
-				return null;
-			}
-		} else {
-			return null;
-		}
+	public Map<Integer, PurificationResultItem> getResultItemMap(int baseItemId) {
+		return possibleResultItems.get(baseItemId);
 	}
 
 	/**
