@@ -12,8 +12,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
-import javax.activation.UnsupportedDataTypeException;
-
 import com.aionemu.commons.configuration.Property;
 import com.aionemu.commons.configuration.PropertyTransformer;
 import com.aionemu.commons.configuration.PropertyTransformerFactory;
@@ -32,37 +30,37 @@ import com.aionemu.commons.configuration.PropertyTransformerFactory;
  * 
  * @author Neon
  */
-public class CollectionTransformer extends PropertyTransformer<Collection<?>> {
+public class CollectionTransformer extends CommaSeparatedValueTransformer<Collection<?>> {
 
 	public static final CollectionTransformer SHARED_INSTANCE = new CollectionTransformer();
 
 	@SuppressWarnings("unchecked")
 	@Override
-	protected Collection<?> parseObject(String value, Field field, Type... genericTypeArgs) throws Exception {
+	protected Collection<?> parseObject(List<String> values, Field field, Type... genericTypeArgs) throws Exception {
 		Class<?> type = field.getType();
 
 		Collection<Object> collection;
 		if (type.isInterface() || Modifier.isAbstract(type.getModifiers())) {
 			if (type == Collection.class)
-				throw new UnsupportedDataTypeException("Collection type (subclass) must be specified.");
+				throw new UnsupportedOperationException("Collection type (subclass) must be specified.");
 			else if (type == List.class)
 				collection = new ArrayList<>();
 			else if (type == Set.class)
 				collection = new HashSet<>();
 			else
-				throw new UnsupportedDataTypeException("No default implementation for " + type + ", non abstract/interface class must be declared.");
+				throw new UnsupportedOperationException("No default implementation for " + type + ", non abstract/interface class must be declared.");
 		} else {
 			collection = (Collection<Object>) type.newInstance();
 		}
 
-		if (value.isEmpty() || value.equals(Property.DEFAULT_VALUE))
+		if (values.isEmpty() || values.get(0).equals(Property.DEFAULT_VALUE))
 			return collection; // return empty
 
 		Type genericType;
 		if (genericTypeArgs.length > 0) // <..., ..., ...>
 			genericType = genericTypeArgs[0]; // <...>
 		else
-			throw new UnsupportedDataTypeException("Raw collections are not supported.");
+			throw new UnsupportedOperationException("Raw collections are not supported.");
 
 		Type[] innerGenericType = {};
 		if (genericType instanceof WildcardType) // <... extends Object>
@@ -73,15 +71,15 @@ public class CollectionTransformer extends PropertyTransformer<Collection<?>> {
 		}
 
 		if (!(genericType instanceof Class))
-			throw new UnsupportedDataTypeException("<" + genericType.getTypeName() + "> must be a valid class.");
+			throw new UnsupportedOperationException("<" + genericType.getTypeName() + "> must be a valid class.");
 
 		PropertyTransformer<?> pt = PropertyTransformerFactory.getTransformer((Class<?>) genericType);
 
 		Objects.requireNonNull(pt, "Property transformer for " + genericType + " is not implemented.");
 		if (pt instanceof CollectionTransformer)
-			throw new UnsupportedDataTypeException("Nested collections are not implemented."); // needs class argument in transform()
+			throw new UnsupportedOperationException("Nested collections are not implemented."); // needs class argument in transform()
 
-		for (String val : value.split(" *, *"))
+		for (String val : values)
 			collection.add(pt.transform(val, field, innerGenericType));
 
 		return collection;

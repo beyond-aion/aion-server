@@ -3,6 +3,7 @@ package com.aionemu.commons.configuration.transformers;
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.lang.reflect.Type;
+import java.util.List;
 
 import com.aionemu.commons.configuration.Property;
 import com.aionemu.commons.configuration.PropertyTransformer;
@@ -14,24 +15,23 @@ import com.aionemu.commons.configuration.PropertyTransformerFactory;
  * 
  * @author Neon
  */
-public class ArrayTransformer extends PropertyTransformer<Object[]> {
+public class ArrayTransformer extends CommaSeparatedValueTransformer<Object[]> {
 
 	public static final ArrayTransformer SHARED_INSTANCE = new ArrayTransformer();
 
 	@Override
-	protected Object[] parseObject(String value, Field field, Type... genericTypeArgs) throws Exception {
+	protected Object[] parseObject(List<String> values, Field field, Type... genericTypeArgs) throws Exception {
 		Class<?> type = field.getType().getComponentType();
 		if (type.isArray())
-			throw new IllegalArgumentException("Multidimensional arrays are not implemented.");
+			throw new UnsupportedOperationException("Multidimensional arrays are not implemented.");
 
-		if (value.isEmpty() || value.equals(Property.DEFAULT_VALUE))
+		if (values.isEmpty() || values.get(0).equals(Property.DEFAULT_VALUE))
 			return (Object[]) Array.newInstance(type, 0); // return empty
 
 		PropertyTransformer<?> pt = PropertyTransformerFactory.getTransformer(type);
-		String[] rawValues = value.split(" *, *");
-		Object[] array = (Object[]) Array.newInstance(type, rawValues.length);
-		for (int i = 0; i < rawValues.length; i++)
-			array[i] = pt.transform(rawValues[i], field);
+		Object[] array = (Object[]) Array.newInstance(type, values.size());
+		for (int i = 0; i < values.size(); i++)
+			array[i] = pt.transform(values.get(i), field);
 
 		return array;
 	}
