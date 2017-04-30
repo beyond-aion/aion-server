@@ -28,6 +28,6 @@ public class CM_CHECK_PAK extends AionClientPacket {
 	protected void runImpl() {
 		Player player = getConnection().getActivePlayer();
 		if (!pakStatus.endsWith("[1:OK]") && !pakStatus.contains("File not found"))
-			AuditLogger.info(player, "Player using modified data pak: " + pakStatus);
+			AuditLogger.log(player, "using modified data pak: " + pakStatus);
 	}
 }

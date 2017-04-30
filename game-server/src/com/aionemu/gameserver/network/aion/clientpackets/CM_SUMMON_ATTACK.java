@@ -43,7 +43,7 @@ public class CM_SUMMON_ATTACK extends AionClientPacket {
 			return;
 
 		if (summon.getObjectId() != summonObjId) {
-			AuditLogger.info(player, "tried to use summon attack from a different summon instance");
+			AuditLogger.log(player, "tried to use summon attack from a different summon instance");
 			return;
 		}
 
@@ -51,6 +51,6 @@ public class CM_SUMMON_ATTACK extends AionClientPacket {
 		if (obj instanceof Creature)
 			summon.getController().attackTarget((Creature) obj, time, false);
 		else if (obj != null) // not a creature (attack should be client restricted)
-			AuditLogger.info(player, "tried to use summon attack on a wrong target: " + obj);
+			AuditLogger.log(player, "tried to use summon attack on a wrong target: " + obj);
 	}
 }

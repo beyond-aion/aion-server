@@ -311,7 +311,7 @@ public class ExchangeService {
 
 		if (!removeItemsFromInventory(activePlayer, exchange1) || !removeItemsFromInventory(currentPartner, exchange2)) {
 			cleanUpExchanges(true, activePlayer, currentPartner);
-			AuditLogger.info(activePlayer, "Exchange kinah exploit partner: " + currentPartner.getName());
+			AuditLogger.log(activePlayer, "tried to exploit kinah exchange with partner: " + currentPartner);
 			return;
 		}
 
@@ -358,7 +358,7 @@ public class ExchangeService {
 			Item item = exchangeItem.getItem();
 			Item itemInInventory = inventory.getItemByObjId(exchangeItem.getItemObjId());
 			if (itemInInventory == null) {
-				AuditLogger.info(player, "Try to trade unexisting item.");
+				AuditLogger.log(player, "tried to trade not existing item");
 				return false;
 			}
 

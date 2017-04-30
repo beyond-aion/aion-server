@@ -31,7 +31,7 @@ public class CM_HOUSE_KICK extends AionClientPacket {
 
 		House house = player.getActiveHouse();
 		if (house == null) {
-			AuditLogger.info(player, "Trying to kick players from house, but haven't own house");
+			AuditLogger.log(player, "tried to kick players from house without owning one");
 			return;
 		}
 		if (option == 1)

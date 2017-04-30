@@ -44,8 +44,8 @@ public class PlayerReviveService {
 	}
 
 	public static final void skillRevive(Player player) {
-		if (!(player.getResStatus())) {
-			cancelRes(player);
+		if (!player.getResStatus()) {
+			AuditLogger.log(player, "possibly tried to use a selfres hack");
 			return;
 		}
 		revive(player, 10, 10, true, player.getResurrectionSkill());
@@ -229,7 +229,7 @@ public class PlayerReviveService {
 	public static final void itemSelfRevive(Player player) {
 		Item item = player.getSelfRezStone();
 		if (item == null) {
-			cancelRes(player);
+			AuditLogger.log(player, "tried to use selfres without having the required selfres stone");
 			return;
 		}
 
@@ -241,7 +241,8 @@ public class PlayerReviveService {
 		PacketSendUtility.broadcastPacket(player,
 			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), item.getObjectId(), item.getItemTemplate().getTemplateId()), true);
 		if (!player.getInventory().decreaseByObjectId(item.getObjectId(), 1)) {
-			cancelRes(player);
+			AuditLogger.log(player, "tried to use selfres without having the required selfres stone");
+			player.getController().sendDie();
 			return;
 		}
 		// Tombstone Self-Rez retail verified 15%
@@ -262,8 +263,4 @@ public class PlayerReviveService {
 
 	}
 
-	private static final void cancelRes(Player player) {
-		AuditLogger.info(player, "Possible selfres hack.");
-		player.getController().sendDie();
-	}
 }

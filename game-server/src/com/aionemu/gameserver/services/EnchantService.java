@@ -51,7 +51,7 @@ public class EnchantService {
 		ItemTemplate itemTemplate = targetItem.getItemTemplate();
 
 		if (!itemTemplate.isArmor() && !itemTemplate.isWeapon()) {
-			AuditLogger.info(player, "Player try to break down incompatible item type.");
+			AuditLogger.log(player, "tried to break down incompatible item type");
 			return false;
 		}
 
@@ -103,7 +103,7 @@ public class EnchantService {
 			if (inventory.decreaseByObjectId(parentItem.getObjectId(), 1))
 				ItemService.addItem(player, stoneId, itemTemplate.isWeapon() ? Rnd.get(2, 5) : Rnd.get(1, 3));
 		} else
-			AuditLogger.info(player, "Possible break item hack, do not remove item.");
+			AuditLogger.log(player, "possibly used break item hack");
 		return true;
 	}
 
@@ -254,7 +254,7 @@ public class EnchantService {
 		}
 
 		if (!player.getInventory().decreaseByObjectId(parentItem.getObjectId(), 1)) {
-			AuditLogger.info(player, "Possible enchant hack, do not remove enchant stone.");
+			AuditLogger.log(player, "possibly used enchant hack");
 			return;
 		}
 		// Decrease required supplements
@@ -403,14 +403,14 @@ public class EnchantService {
 		if (targetWeapon == 1) {
 			// Find all free slots in the primary weapon
 			if (stoneCount >= targetItem.getSockets(false)) {
-				AuditLogger.info(player, "Manastone socket overload");
+				AuditLogger.log(player, "Manastone socket overload");
 				return false;
 			}
 		}
 		// Fusioned weapon. Secondary weapon slots.
 		else if (!targetItem.hasFusionedItem() || stoneCount >= targetItem.getSockets(true)) {
 			// Find all free slots in the secondary weapon
-			AuditLogger.info(player, "Manastone socket overload");
+			AuditLogger.log(player, "Manastone socket overload");
 			return false;
 		}
 

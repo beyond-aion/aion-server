@@ -43,7 +43,7 @@ public class CM_REGISTER_BROKER_ITEM extends AionClientPacket {
 		VisibleObject broker = player.getTarget();
 		if (!(broker instanceof Npc) || broker.getObjectId() != brokerObjId
 			|| !((Npc) broker).getObjectTemplate().supportsAction(DialogAction.OPEN_VENDOR)) {
-			AuditLogger.info(player, "Possibly modified packet to register broker item with no broker in target.");
+			AuditLogger.log(player, "possibly modified packet to register broker item with no broker in target");
 			return;
 		}
 

@@ -76,12 +76,11 @@ public class RepurchaseService {
 					ItemService.addItem(player, repurchaseItem);
 					removeRepurchaseItem(player, repurchaseItem);
 				} else {
-					AuditLogger.info(player, "Player try repurchase item: " + repurchaseItem.getItemId() + " count: " + repurchaseItem.getItemCount()
+					AuditLogger.log(player, "tried to repurchase item " + repurchaseItem.getItemId() + ", count: " + repurchaseItem.getItemCount()
 						+ " whithout kinah");
 				}
 			} else {
-				AuditLogger.info(player,
-					"Player might be abusing CM_BUY_ITEM try dupe item: " + repurchaseItem.getItemId() + " count: " + repurchaseItem.getItemCount());
+				AuditLogger.log(player, "might be abusing CM_BUY_ITEM to dupe item " + repurchaseItem.getItemId() + ", count: " + repurchaseItem.getItemCount());
 			}
 		}
 	}

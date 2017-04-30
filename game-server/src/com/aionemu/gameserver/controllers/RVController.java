@@ -165,7 +165,7 @@ public class RVController extends NpcController {
 		}
 
 		if (player.getLevel() > getMaxLevel() || player.getLevel() < getMinLevel()) {
-			AuditLogger.info(player, "Level restriction hack detected.");
+			AuditLogger.log(player, "tried to use rift outside level restriction");
 			return false;
 		}
 

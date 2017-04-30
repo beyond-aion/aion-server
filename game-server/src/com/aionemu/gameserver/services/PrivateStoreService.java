@@ -125,7 +125,7 @@ public class PrivateStoreService {
 			price += boughtItem.getPrice() * boughtItem.getCount();
 
 		if (price < 0) { // Kinah dupe
-			AuditLogger.info(buyer, "[Private Store] Tried to buy item with negative kinah price.");
+			AuditLogger.log(buyer, "tried to buy item with negative kinah price from private store");
 			return;
 		}
 
@@ -137,7 +137,7 @@ public class PrivateStoreService {
 			if (item != null) {
 				// Fix "Private store stackable items dupe" by Asanka
 				if (item.getItemCount() < boughtItem.getCount()) {
-					AuditLogger.info(buyer, "[Private Store] Tried to buy more than player has in stack.");
+					AuditLogger.log(buyer, "tried to buy more than players private store item stack count");
 					return;
 				}
 

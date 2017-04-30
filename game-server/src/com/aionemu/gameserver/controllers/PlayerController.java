@@ -252,7 +252,7 @@ public class PlayerController extends CreatureController<Player> {
 			} else {
 				player.getFlyController().endFly(true);
 				if (player.isSpawned()) // not spawned means leaving by teleporter
-					AuditLogger.info(player, "left fly zone in fly state");
+					AuditLogger.log(player, "left fly zone in fly state");
 			}
 		}
 	}
@@ -694,12 +694,12 @@ public class PlayerController extends CreatureController<Player> {
 				FlyPathEntry path = player.getCurrentFlyPath();
 
 				if (player.getWorldId() != path.getEndWorldId()) {
-					AuditLogger.info(player, "Player tried to use flyPath #" + path.getId() + " from not native start world " + player.getWorldId()
-						+ ". expected " + path.getEndWorldId());
+					AuditLogger.log(player, "tried to use flyPath #" + path.getId() + " from not native start world " + player.getWorldId()
+						+ " (expected " + path.getEndWorldId() + ")");
 				}
 
 				if (diff < path.getTimeInMs()) {
-					AuditLogger.info(player, "Player " + player.getName() + " used flypath bug " + diff + " instead of " + path.getTimeInMs());
+					AuditLogger.log(player, "ended fly path too early: Fly duration " + diff + "ms instead of " + path.getTimeInMs() + "ms");
 					/*
 					 * todo if works teleport player to start_* xyz, or even ban
 					 */

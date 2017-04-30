@@ -34,8 +34,7 @@ public class AuraEffect extends EffectTemplate {
 	public void applyEffect(Effect effect) {
 		final Player effector = (Player) effect.getEffector();
 		if (effector.getEffectController().isPresentBySkillId(effect.getSkillId())) {
-			AuditLogger.info(effector, "might be abusing CM_CASTSPELL mantra effect Player kicked skill id: " + effect.getSkillId());
-			effector.getClientConnection().close();
+			AuditLogger.log(effector, "might be abusing CM_CASTSPELL mantra effect, skill id: " + effect.getSkillId());
 			return;
 		}
 		effect.addToEffectedController();

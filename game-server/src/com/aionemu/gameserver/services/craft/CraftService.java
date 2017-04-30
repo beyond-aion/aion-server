@@ -154,7 +154,7 @@ public class CraftService {
 		// morphing dont need static object/npc to use
 		if ((skillId != 40009)) {
 			if (target == null || !(target instanceof StaticObject)) {
-				AuditLogger.info(player, "Tried to craft with incorrect target.");
+				AuditLogger.log(player, "tried to craft with incorrect target");
 				return false;
 			} else if (!PositionUtil.isInRange(player, target, 5, false)) {
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_COMBINE_TOO_FAR_FROM_TOOL(target.getObjectTemplate().getNameId()));
@@ -163,7 +163,7 @@ public class CraftService {
 		}
 
 		if (recipeTemplate.getDp() != null && (player.getCommonData().getDp() < recipeTemplate.getDp())) {
-			AuditLogger.info(player, " try craft without required DP count.");
+			AuditLogger.log(player, "tried to craft without required DP count");
 			return false;
 		}
 
@@ -183,7 +183,7 @@ public class CraftService {
 		}
 
 		if (recipeTemplate.getCraftDelayId() != null && !player.getCraftCooldownList().isCanCraft(recipeTemplate.getCraftDelayId())) {
-			AuditLogger.info(player, "Tried to craft before cooldown expired.");
+			AuditLogger.log(player, "tried to craft before cooldown expired");
 			return false;
 		}
 

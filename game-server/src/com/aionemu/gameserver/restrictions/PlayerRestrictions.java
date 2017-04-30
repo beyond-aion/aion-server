@@ -143,7 +143,7 @@ public class PlayerRestrictions extends AbstractRestrictions {
 			if (player.getTransformModel().getType() == TransformType.FORM1) {
 				SkillPanel panel = DataManager.PANEL_SKILL_DATA.getSkillPanel(player.getTransformModel().getPanelId());
 				if (panel == null || !panel.isSkillPresent(skill.getSkillId())) {
-					AuditLogger.info(player, "Trying to use non panel skill while transformed in TransformType.FORM1. Player: " + player.getName());
+					AuditLogger.log(player, "tried to use non panel skill while transformed in TransformType.FORM1");
 					return false;
 				}
 			}

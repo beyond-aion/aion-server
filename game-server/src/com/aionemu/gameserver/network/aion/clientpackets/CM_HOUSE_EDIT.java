@@ -143,7 +143,7 @@ public class CM_HOUSE_EDIT extends AionClientPacket {
 		} else if (action == 16) {
 			House house = player.getHouseRegistry().getOwner();
 			if (!removeRenovationCoupon(player, house)) {
-				AuditLogger.info(player, "Try house renovation without coupon");
+				AuditLogger.log(player, "attempted house renovation without coupon");
 				return;
 			}
 			HousingService.getInstance().switchHouseBuilding(house, buildingId);

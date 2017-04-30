@@ -8,6 +8,7 @@ import com.aionemu.gameserver.configs.main.LoggingConfig;
 import com.aionemu.gameserver.configs.main.PunishmentConfig;
 import com.aionemu.gameserver.model.ChatType;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.utils.ChatUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
@@ -23,18 +24,16 @@ public class AuditLogger {
 	 * Notifies permitted online staff members.<br>
 	 * Automatically punishes player, if punishments are enabled.
 	 */
-	public static final void info(Player player, String message) {
+	public static final void log(Player player, String message) {
 		if (PunishmentConfig.PUNISHMENT_ENABLE)
-			AutoBan.punishment(player, message);
-
-		message = player + " " + message;
+			AutoBan.punishment(player);
 
 		if (LoggingConfig.LOG_AUDIT)
-			log.info(message);
+			log.info(player + " " + message);
 
 		for (Player gm : GMService.getInstance().getOnlineStaffMembers()) {
 			if (gm.hasAccess(AdminConfig.AUDIT_INFO))
-				PacketSendUtility.sendMessage(gm, message, ChatType.YELLOW);
+				PacketSendUtility.sendMessage(gm, ChatUtil.name(player) + " " + message, ChatType.YELLOW);
 		}
 	}
 }

@@ -119,7 +119,7 @@ public class TradeService {
 
 		// 3. check exploit
 		if (tradeList.getRequiredAp() < 0) {
-			AuditLogger.info(player, "Posible client hack. tradeList.getRequiredAp() < 0");
+			AuditLogger.log(player, "possibly used packet hack: tradeList.getRequiredAp() < 0");
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_NOT_ENOUGH_ABYSSPOINT());
 			return false;
 		}
@@ -150,7 +150,7 @@ public class TradeService {
 		Map<Integer, Long> requiredItems = tradeList.getRequiredItems();
 		for (Integer itemId : requiredItems.keySet()) {
 			if (!player.getInventory().decreaseByItemId(itemId, requiredItems.get(itemId))) {
-				AuditLogger.info(player, "Possible hack. Not removed items on buy in abyss shop.");
+				AuditLogger.log(player, "tried to sell item " + itemId + " for AP, which could not be removed");
 				return false;
 			}
 		}
@@ -194,7 +194,6 @@ public class TradeService {
 
 		for (TradeItem tradeItem : tradeList.getTradeItems()) {
 			if (tradeItem.getCount() < 1) {
-				AuditLogger.info(player, "BUY packet hack item count < 1!");
 				return false;
 			}
 			if (!allowedItems.contains(tradeItem.getItemId()))
@@ -250,7 +249,7 @@ public class TradeService {
 			long realReward = sellReward * count;
 			Item repurchaseItem = null;
 			if (item.getItemCount() - count < 0) {
-				AuditLogger.info(player, "Trade exploit, sell item count big");
+				AuditLogger.log(player, "tried to sell more items to npc than he has");
 				return false;
 			} else if (item.getItemCount() - count == 0) {
 				inventory.delete(item); // need to be here to avoid exploit by sending packet with many items with same unique ids
@@ -346,14 +345,14 @@ public class TradeService {
 		for (Integer tradeInItemObjectId : tradeInItemObjectIds) {
 			Item checkItem = player.getInventory().getItemByObjId(tradeInItemObjectId);
 			if (checkItem == null) {
-				AuditLogger.info(player, "TradeIn packet hack. Player does not have the item which the client sent to the server.");
+				AuditLogger.log(player, "possibly used TradeIn packet hack: Player does not have the item which the client sent to the server.");
 				return false;
 			}
 			tradeInItemIds.add(checkItem.getItemId());
 		}
 
 		if (tradeInItemIds.size() != requiredTradeInItems.size()) {
-			AuditLogger.info(player, "TradeIn packet hack. The tradein list count differs from the servers templates.");
+			AuditLogger.log(player, "possibly used TradeIn packet hack: The tradein list count differs from the servers templates.");
 			return false;
 		}
 
@@ -366,7 +365,7 @@ public class TradeService {
 				}
 			}
 			if (!validated) {
-				AuditLogger.info(player, "TradeIn packet hack. Did not receive all required tradein items (expected " + requiredTradeInItem.getId() + ").");
+				AuditLogger.log(player, "possibly used TradeIn packet hack: Did not receive all required tradein items (expected " + requiredTradeInItem.getId() + ").");
 				return false;
 			}
 		}

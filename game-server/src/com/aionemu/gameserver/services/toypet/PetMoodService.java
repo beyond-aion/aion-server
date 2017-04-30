@@ -41,7 +41,7 @@ public class PetMoodService {
 		}
 
 		if (pet.getCommonData().getGiftRemainingTime() > 0) {
-			AuditLogger.info(pet.getMaster(), "Trying to get gift during CD for pet " + pet.getPetId());
+			AuditLogger.log(pet.getMaster(), "tried to get gift of pet " + pet.getPetId() + " during CD");
 			return;
 		}
 

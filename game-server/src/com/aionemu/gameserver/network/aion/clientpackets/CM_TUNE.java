@@ -66,7 +66,7 @@ public class CM_TUNE extends AionClientPacket {
 		final ItemTemplate template = item.getItemTemplate();
 
 		if (item.isIdentified()) {
-			AuditLogger.info(player, "tried to tune item without scroll");
+			AuditLogger.log(player, "tried to tune item without scroll");
 			return;
 		}
 

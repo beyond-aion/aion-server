@@ -121,21 +121,21 @@ public class TeleportService {
 			if (SecurityConfig.ENABLE_FLYPATH_VALIDATOR) {
 				FlyPathEntry flypath = DataManager.FLY_PATH.getPathTemplate((short) location.getLocId());
 				if (flypath == null) {
-					AuditLogger.info(player, "Try to use null flyPath #" + location.getLocId());
+					AuditLogger.log(player, "tried to use invalid flyPath #" + location.getLocId());
 					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_MOVE_TO_AIRPORT_NO_ROUTE());
 					return;
 				}
 
 				double dist = PositionUtil.getDistance(player, flypath.getStartX(), flypath.getStartY(), flypath.getStartZ());
 				if (dist > 7) {
-					AuditLogger.info(player, "Try to use flyPath #" + location.getLocId() + " but hes too far " + dist);
+					AuditLogger.log(player, "tried to use flyPath #" + location.getLocId() + " but he's too far " + dist);
 					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_MOVE_TO_AIRPORT_NO_ROUTE());
 					return;
 				}
 
 				if (player.getWorldId() != flypath.getStartWorldId()) {
-					AuditLogger.info(player, "Try to use flyPath #" + location.getLocId() + " from not native start world " + player.getWorldId()
-						+ ". expected " + flypath.getStartWorldId());
+					AuditLogger.log(player, "tried to use flyPath #" + location.getLocId() + " from invalid start world " + player.getWorldId()
+						+ ", expected " + flypath.getStartWorldId());
 					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_MOVE_TO_AIRPORT_NO_ROUTE());
 					return;
 				}

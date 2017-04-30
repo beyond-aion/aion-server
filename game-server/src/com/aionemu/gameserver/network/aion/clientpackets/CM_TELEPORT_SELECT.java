@@ -47,8 +47,7 @@ public class CM_TELEPORT_SELECT extends AionClientPacket {
 
 		AionObject obj = player.getKnownList().getObject(targetObjId);
 		if (!(obj instanceof Npc)) {
-			AuditLogger.info(player,
-				"Tried to teleport via " + (obj == null ? "unknown npc" : obj.getClass().getSimpleName()) + " object id: " + targetObjId);
+			AuditLogger.log(player, "tried to teleport via " + (obj == null ? "unknown npc" : obj));
 			return;
 		}
 
@@ -63,6 +62,6 @@ public class CM_TELEPORT_SELECT extends AionClientPacket {
 			TeleportService.teleport(teleport, locId, player, npc,
 				npc.getName().toLowerCase().contains("statue") ? TeleportAnimation.JUMP_IN_STATUE : TeleportAnimation.JUMP_IN);
 		else
-			AuditLogger.info(player, "Tried to teleport via npc " + npcId + " but he has no teleporter template.");
+			AuditLogger.log(player, "tried to teleport via npc " + npcId + " but he has no teleporter template");
 	}
 }

@@ -36,7 +36,7 @@ public class BindPointTeleportService {
 	public static void teleport(Player player, int locId, long kinah) {
 		HotspotTemplate hotspot = DataManager.HOTSPOT_DATA.getHotspotTemplateById(locId);
 		if (hotspot == null) {
-			AuditLogger.info(player, "Try to use null Hotspot #" + locId);
+			AuditLogger.log(player, "Tried to use invalid hotspot teleport to locId " + locId);
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_MOVE_TO_AIRPORT_NO_ROUTE());
 			return;
 		}
@@ -84,13 +84,13 @@ public class BindPointTeleportService {
 
 	private static boolean checkRequirements(Player player, HotspotTemplate hotspot, long price) {
 		if (player.getWorldId() != hotspot.getWorldId()) {
-			AuditLogger.info(player, "Try to use Hotspot #" + hotspot.getId() + " from not native start world " + player.getWorldId() + ". expected "
+			AuditLogger.log(player, "tried to use hotspot teleport " + hotspot.getId() + " from invalid start world " + player.getWorldId() + ", expected "
 				+ hotspot.getWorldId());
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_MOVE_TO_AIRPORT_NO_ROUTE());
 			return false;
 		}
 		if (!(player.getRace() == Race.PC_ALL) && player.getRace() != hotspot.getRace()) {
-			AuditLogger.info(player, "Try to use Hotspot #" + hotspot.getId() + " from race " + player.getRace() + ". expected " + hotspot.getRace());
+			AuditLogger.log(player, "tried to use hotspot teleport " + hotspot.getId() + " for invalid race " + player.getRace() + ", expected " + hotspot.getRace());
 			return false;
 		}
 		if (player.getInventory().getKinah() < price) {

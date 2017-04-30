@@ -265,7 +265,7 @@ public class World {
 			if (object instanceof Player) {
 				Player player = (Player) object;
 				if (!player.isStaff()) {
-					AuditLogger.info(player, "is outside valid regions: " + position);
+					AuditLogger.log(player, "is outside valid regions: " + position);
 					// he will be sent to bind point in PlayerLeaveWorldService
 					player.getClientConnection().close(SM_SYSTEM_MESSAGE.STR_KICK_CHARACTER());
 				}

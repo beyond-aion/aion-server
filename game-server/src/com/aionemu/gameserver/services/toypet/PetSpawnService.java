@@ -44,7 +44,7 @@ public class PetSpawnService {
 
 		Pet pet = VisibleObjectSpawner.spawnPet(player, petId);
 		if (pet == null) {
-			AuditLogger.info(player, "tried to spawn pet with id " + petId);
+			AuditLogger.log(player, "tried to spawn invalid pet with id " + petId);
 			return;
 		}
 		if (System.currentTimeMillis() - pet.getCommonData().getDespawnTime().getTime() > 10 * 60 * 1000) // reset mood if pet was despawned for > 10 minutes

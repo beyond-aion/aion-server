@@ -445,7 +445,7 @@ public final class QuestService {
 		if (template.getNpcFactionId() != 0) {
 			NpcFaction faction = player.getNpcFactions().getFactionById(template.getNpcFactionId());
 			if (!faction.isActive() || faction.getQuestId() != id) {
-				AuditLogger.info(player, "Possible packet hack to start npc faction quest");
+				AuditLogger.log(player, "possibly used packet hack to start npc faction quest");
 				return false;
 			}
 		}

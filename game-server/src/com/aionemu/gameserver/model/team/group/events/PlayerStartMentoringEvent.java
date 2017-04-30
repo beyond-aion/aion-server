@@ -29,7 +29,7 @@ public class PlayerStartMentoringEvent extends AlwaysTrueTeamEvent implements Co
 	@Override
 	public void handleEvent() {
 		if (group.filterMembers(Predicates.Players.canBeMentoredBy(player)).isEmpty()) {
-			AuditLogger.info(player, "sent fake start mentoring packet");
+			AuditLogger.log(player, "sent fake start mentoring packet");
 			return;
 		}
 		player.setMentor(true);

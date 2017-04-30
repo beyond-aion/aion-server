@@ -65,11 +65,11 @@ public class StigmaService {
 			if (!replace) {
 				// check the number of stigma wearing
 				if (ItemSlot.isRegularStigma(slot) && getPossibleStigmaCount(player) <= player.getEquipment().getEquippedItemsRegularStigma().size()) {
-					AuditLogger.info(player, "Possible client hack stigma count big :O");
+					AuditLogger.log(player, "tried to equip stigma, exceeding the socket limit");
 					return false;
 				} else if (ItemSlot.isAdvancedStigma(slot)
 					&& getPossibleAdvancedStigmaCount(player) <= player.getEquipment().getEquippedItemsAdvancedStigma().size()) {
-					AuditLogger.info(player, "Possible client hack advanced stigma count big :O");
+					AuditLogger.log(player, "tried to equip advanced stigma, exceeding the socket limit");
 					return false;
 				}
 			}
@@ -117,13 +117,13 @@ public class StigmaService {
 
 			if (!isPossibleEquippedStigma(player, item)) {
 				player.getEquipment().unEquipItem(item.getObjectId(), false);
-				AuditLogger.info(player, "Unequipped stigma: " + item.getItemId() + ", possible client hack (stigma count big)");
+				AuditLogger.log(player, "had more equipped stigmas on login than allowed");
 				continue;
 			}
 
 			if (!item.getItemTemplate().isClassSpecific(player.getPlayerClass())) {
 				player.getEquipment().unEquipItem(item.getObjectId(), false);
-				AuditLogger.info(player, "Unequipped stigma: " + item.getItemId() + ", possible client hack (not valid for class)");
+				AuditLogger.log(player, "had an equipped stigma on login which was not for his class");
 				continue;
 			}
 
@@ -131,7 +131,7 @@ public class StigmaService {
 			for (Item checkStigma : player.getEquipment().getEquippedItemsAllStigma()) {
 				if (checkStigma.getEquipmentSlot() == item.getEquipmentSlot() && checkStigma.getItemId() != item.getItemId()) {
 					player.getEquipment().unEquipItem(item.getObjectId(), false);
-					AuditLogger.info(player, "Unequipped stigma: " + item.getItemId() + ", double stigma in the same slot");
+					AuditLogger.log(player, "had two stigmas equipped in the same slot on login");
 					continue mainLoop;
 				}
 			}

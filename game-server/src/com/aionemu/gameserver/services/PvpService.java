@@ -144,10 +144,9 @@ public class PvpService {
 			String mac2 = victim.getClientConnection().getMacAddress();
 			if (mac1 != null && mac2 != null) {
 				if (ip1.equalsIgnoreCase(ip2) && mac1.equalsIgnoreCase(mac2)) {
-					AuditLogger.info(winner,
-						"Possible Power Leveling : " + winner.getName() + " with " + victim.getName() + "; same ip=" + ip1 + " and mac=" + mac1 + ".");
+					AuditLogger.log(winner, "possibly practicing AP sharing with " + victim + " same ip=" + ip1 + " and mac=" + mac1 + ".");
 				} else if (mac1.equalsIgnoreCase(mac2)) {
-					AuditLogger.info(winner, "Possible Power Leveling : " + winner.getName() + " with " + victim.getName() + "; same mac=" + mac1 + ".");
+					AuditLogger.log(winner, "possibly practicing AP sharing with " + victim + " same mac=" + mac1 + ".");
 				}
 			}
 		}

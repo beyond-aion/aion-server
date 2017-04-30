@@ -34,7 +34,7 @@ public class AntiHackService {
 			if (!player.canPerformMove() && !player.getEffectController().isAbnormalSet(AbnormalState.PULLED)
 				&& (type & MovementMask.GLIDE) != MovementMask.GLIDE) {
 				if (player.abnormalHackCounter > SecurityConfig.ABNORMAL_COUNTER) {
-					punish(player, x, y, type, forcedMove, "Detected illegal Action (Anti-Abnormal Hack)");
+					punish(player, x, y, type, forcedMove, "possibly performed illegal move action (Anti-Abnormal Hack)");
 					return false;
 				} else
 					player.abnormalHackCounter++;
@@ -57,8 +57,8 @@ public class AntiHackService {
 							player.speedHackCounter--;
 
 						if (player.speedHackCounter > SecurityConfig.SPEEDHACK_COUNTER) {
-							return punish(player, x, y, type, forcedMove, "Detected illegal action (Speed Hack)" + " SHC:" + player.speedHackCounter + " S:" + speed
-								+ " V:" + Math.rint(1000.0 * vector2D) / 1000.0 + " type:" + type);
+							return punish(player, x, y, type, forcedMove, "possibly used speed hack - SHC:" + player.speedHackCounter + " S:"
+								+ speed + " V:" + Math.rint(1000.0 * vector2D) / 1000.0 + " type:" + type);
 						}
 					}
 				} else if ((type & MovementMask.ABSOLUTE) == MovementMask.ABSOLUTE && (type & MovementMask.GLIDE) != MovementMask.GLIDE) {
@@ -88,7 +88,7 @@ public class AntiHackService {
 
 					if (SecurityConfig.PUNISH > 0 && player.speedHackCounter > SecurityConfig.SPEEDHACK_COUNTER + 5) {
 						return punish(player, x, y, type, forcedMove,
-							"Detected illegal action (Speed Hack)" + " SHC:" + player.speedHackCounter + " SMS:"
+							"possibly used speed hack - SHC:" + player.speedHackCounter + " SMS:"
 								+ Math.rint(100.0 * (timeDiff * (speed + 0.25) * 0.001)) / 100.0 + " TDF:" + timeDiff + " VTD:"
 								+ Math.rint(1000.0 * (timeDiff * (speed + 0.85) * 0.001)) / 1000.0 + " VS:" + Math.rint(100.0 * vector) / 100.0 + " type:" + type);
 					} else if (player.speedHackCounter > SecurityConfig.SPEEDHACK_COUNTER) {
@@ -105,7 +105,7 @@ public class AntiHackService {
 
 				if (SecurityConfig.PUNISH > 0 && player.speedHackCounter > SecurityConfig.SPEEDHACK_COUNTER + 5) {
 					return punish(player, x, y, type, forcedMove,
-						"Detected illegal action (Speed Hack)" + " SHC:" + player.speedHackCounter + " TD:" + Math.rint(1000.0 * timeDiff) / 1000.0 + " VTD:"
+						"possibly used speed hack - SHC:" + player.speedHackCounter + " TD:" + Math.rint(1000.0 * timeDiff) / 1000.0 + " VTD:"
 							+ Math.rint(1000.0 * (timeDiff * speed * 0.00075)) / 1000.0 + " VS:" + Math.rint(100.0 * vector) / 100.0 + " type:" + type);
 				} else if (player.speedHackCounter > SecurityConfig.SPEEDHACK_COUNTER + 2) {
 					moveBack(player, x, y, type, forcedMove);
@@ -124,7 +124,7 @@ public class AntiHackService {
 			double delta = PositionUtil.getDistance(x, y, player.getX(), player.getY()) / speed;
 			if (speed > 5.0 && delta > 5.0 && (type & MovementMask.GLIDE) != MovementMask.GLIDE) {
 				return punish(player, x, y, type, new SM_MOVE(player),
-					"Detected illegal action (Teleportation) S:" + speed + " D:" + Math.rint(1000.0 * delta) / 1000.0 + " type:" + type);
+					"possibly used teleport hack - S:" + speed + " D:" + Math.rint(1000.0 * delta) / 1000.0 + " type:" + type);
 			}
 		}
 
@@ -132,23 +132,20 @@ public class AntiHackService {
 	}
 
 	protected static boolean punish(Player player, float x, float y, byte type, AionServerPacket pkt, String message) {
+		AuditLogger.log(player, message);
 		switch (SecurityConfig.PUNISH) {
 			case 1:
-				AuditLogger.info(player, message);
 				moveBack(player, x, y, type, pkt);
 				return false;
 			case 2:
-				AuditLogger.info(player, message);
 				moveBack(player, x, y, type, pkt);
 				if (player.speedHackCounter > SecurityConfig.SPEEDHACK_COUNTER * 3 || player.abnormalHackCounter > SecurityConfig.ABNORMAL_COUNTER * 3)
 					player.getClientConnection().close(new SM_QUIT_RESPONSE());
 				return false;
 			case 3:
-				AuditLogger.info(player, message);
 				player.getClientConnection().close(new SM_QUIT_RESPONSE());
 				return false;
 			default:
-				AuditLogger.info(player, message);
 				return true;
 		}
 	}

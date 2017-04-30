@@ -75,7 +75,7 @@ public class CM_TARGET_SELECT extends AionClientPacket {
 				player.setTarget(obj);
 
 			if (!player.equals(obj) && !player.canSee(obj))
-				AuditLogger.info(player, "possibly using radar hack: targeting invisible " + obj);
+				AuditLogger.log(player, "possibly used radar hack: targeting invisible " + obj);
 		} else
 			player.setTarget(null);
 

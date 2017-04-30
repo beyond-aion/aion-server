@@ -45,7 +45,7 @@ public class ChestAI extends ActionItemNpcAI {
 	protected void handleUseItemFinish(Player player) {
 		if (analyzeOpening(player)) {
 			if (getOwner().isInState(CreatureState.DEAD)) {
-				AuditLogger.info(player, "Attempted multiple Chest looting!");
+				AuditLogger.log(player, "attempted multiple chest looting!");
 				return;
 			}
 

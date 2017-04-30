@@ -295,7 +295,7 @@ public class ItemSocketService {
 	public static void socketGodstone(Player player, Item weapon, int stoneId) {
 		if (!weapon.canSocketGodstone()) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GIVE_ITEM_PROC_NOT_PROC_GIVABLE_ITEM(new DescriptionId(weapon.getNameId())));
-			AuditLogger.info(player, "tried to insert godstone in not compatible item " + weapon.getItemId());
+			AuditLogger.log(player, "tried to insert godstone in not compatible item " + weapon.getItemId());
 			return;
 		}
 

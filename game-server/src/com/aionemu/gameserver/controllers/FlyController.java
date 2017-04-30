@@ -66,7 +66,7 @@ public class FlyController {
 			return false;
 		if (!ignoreFlightCooldown) {
 			if (player.getFlyReuseTime() > System.currentTimeMillis()) {
-				AuditLogger.info(player, "No Flight Cooldown Hack. Reuse time: " + ((player.getFlyReuseTime() - System.currentTimeMillis()) / 1000));
+				AuditLogger.log(player, "possibly using fly cooldown hack. Left cooldown time: " + ((player.getFlyReuseTime() - System.currentTimeMillis()) / 1000) + "s");
 				return false;
 			}
 			player.setFlyReuseTime(System.currentTimeMillis() + FLY_REUSE_TIME - 100);

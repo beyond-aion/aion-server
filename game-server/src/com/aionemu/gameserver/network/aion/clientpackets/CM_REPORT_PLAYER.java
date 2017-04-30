@@ -32,7 +32,7 @@ public class CM_REPORT_PLAYER extends AionClientPacket {
 	@Override
 	protected void runImpl() {
 		Player p = getConnection().getActivePlayer();
-		AuditLogger.info(p, "Reports the player: " + player);
+		AuditLogger.log(p, "reported player " + player);
 	}
 
 }

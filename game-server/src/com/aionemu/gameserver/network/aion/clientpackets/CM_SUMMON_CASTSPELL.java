@@ -48,7 +48,7 @@ public class CM_SUMMON_CASTSPELL extends AionClientPacket {
 			return;
 
 		if (summon.getObjectId() != summonObjId) {
-			AuditLogger.info(player, "tried to cast a summon spell from a different summon instance");
+			AuditLogger.log(player, "tried to cast a summon spell from a different summon instance");
 			return;
 		}
 
@@ -59,7 +59,7 @@ public class CM_SUMMON_CASTSPELL extends AionClientPacket {
 				target = (Creature) obj;
 			} else { // null or not a creature (attack should be client restricted)
 				if (obj != null) // may be null due to lags while the target runs out of sight
-					AuditLogger.info(player, "tried to cast a summon spell on a wrong target: " + obj);
+					AuditLogger.log(player, "tried to cast a summon spell on a wrong target: " + obj);
 				return;
 			}
 		} else {

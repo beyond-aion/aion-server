@@ -12,13 +12,11 @@ import com.aionemu.gameserver.services.PunishmentService;
  */
 public class AutoBan {
 
-	protected static void punishment(Player player, String message) {
-
-		String reason = "AUTO " + message;
-		String address = player.getClientConnection().getMacAddress();
+	// TODO merge with AntiHackService punishment system / rework
+	protected static void punishment(Player player) {
+		String reason = "You have been punished due to illegal actions";
 		String accountIp = player.getClientConnection().getIP();
 		int accountId = player.getClientConnection().getAccount().getId();
-		int playerId = player.getObjectId();
 		int time = PunishmentConfig.PUNISHMENT_TIME;
 		int minInDay = 1440;
 		int dayCount = (int) (Math.floor(time / minInDay));
@@ -28,7 +26,7 @@ public class AutoBan {
 				player.getClientConnection().close(new SM_QUIT_RESPONSE());
 				break;
 			case 2:
-				PunishmentService.banChar(playerId, dayCount, reason);
+				PunishmentService.banChar(player.getObjectId(), dayCount, reason);
 				break;
 			case 3:
 				LoginServer.getInstance().sendBanPacket((byte) 1, accountId, accountIp, time, 0);
@@ -38,7 +36,7 @@ public class AutoBan {
 				break;
 			case 5:
 				player.getClientConnection().close();
-				BannedMacManager.getInstance().banAddress(address, System.currentTimeMillis() + time * 60000, reason);
+				BannedMacManager.getInstance().banAddress(player.getClientConnection().getMacAddress(), System.currentTimeMillis() + time * 60000, reason);
 				break;
 		}
 	}

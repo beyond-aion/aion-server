@@ -631,7 +631,7 @@ public class LegionService {
 					if (!responder.isOnline()) {
 						PacketSendUtility.sendPacket(requester, SM_SYSTEM_MESSAGE.STR_GUILD_CHANGE_MASTER_NO_SUCH_USER());
 					} else if (!legionRestrictions.canAppointBrigadeGeneral(requester, responder)) {
-						AuditLogger.info(requester, "Legion 2 BG hack.");
+						AuditLogger.log(requester, "possibly tried to exploit legion leadership transfer");
 					} else {
 						LegionMember legionMember = responder.getLegionMember();
 						if (legionMember.getRank().getRankId() > LegionRank.BRIGADE_GENERAL.getRankId()) { // Demote Brigade General to Centurion

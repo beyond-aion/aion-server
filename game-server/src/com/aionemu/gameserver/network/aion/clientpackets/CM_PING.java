@@ -35,11 +35,11 @@ public class CM_PING extends AionClientPacket {
 			if (pingInterval + 5000 < CLIENT_PING_INTERVAL) { // client timer cheat
 				if (getConnection().increaseAndGetPingFailCount() == 3) { // allow 2 detections in a row, before taking actions
 					if (SecurityConfig.PINGCHECK_KICK) {
-						AuditLogger.info(player,
+						AuditLogger.log(player,
 							"Possible time/speed hack (client ping interval: " + pingInterval + "/" + CLIENT_PING_INTERVAL + "), kicking player");
 						getConnection().close();
 					} else {
-						AuditLogger.info(player, "Possible time/speed hack (client ping interval: " + pingInterval + "/" + CLIENT_PING_INTERVAL + ")");
+						AuditLogger.log(player, "Possible time/speed hack (client ping interval: " + pingInterval + "/" + CLIENT_PING_INTERVAL + ")");
 						getConnection().resetPingFailCount();
 					}
 				}

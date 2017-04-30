@@ -57,7 +57,7 @@ public class NightmareCrateAI extends ActionItemNpcAI {
 
 	private void analyzeOpening(Player player) {
 		if (getOwner().isInState(CreatureState.DEAD)) {
-			AuditLogger.info(player, "Attempted multiple Chest looting!");
+			AuditLogger.log(player, "attempted multiple chest looting!");
 			return;
 		}
 

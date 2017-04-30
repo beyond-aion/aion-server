@@ -436,7 +436,7 @@ public class Skill {
 			if (motion.getName() == null)
 				return true; // can't check animations without motion name (warning is sent on server startup, see DataManager.SKILL_DATA.validateMotions())
 			if (hitTime == 0) {
-				AuditLogger.info(player, "modified non-instant skill to hit instantly (skill id: " + getSkillId() + ")");
+				AuditLogger.log(player, "modified non-instant skill to hit instantly (skill id: " + getSkillId() + ")");
 				return false;
 			}
 		}
@@ -488,14 +488,13 @@ public class Skill {
 		} else {
 			if (clientTime < finalTime) {
 				// check for no animation Hacks
-				AuditLogger.info(player,
-					"Modified skill time for client skill: " + getSkillId() + "\t(clientTime < finalTime: " + clientTime + "/" + finalTime + ")");
+				AuditLogger.log(player,
+					"modified skill time for client skill: " + getSkillId() + " (clientTime < finalTime: " + clientTime + "/" + finalTime + ")");
 				if (SecurityConfig.NO_ANIMATION) {
 					// check if values are too low and disable skill usage / kick player
 					if (clientTime < 0 || (clientTime / serverTime) < SecurityConfig.NO_ANIMATION_VALUE) {
 						if (SecurityConfig.NO_ANIMATION_KICK) {
 							player.getClientConnection().close(new SM_QUIT_RESPONSE());
-							AuditLogger.info(player, "Kicking player for No Ani: " + player.getName());
 						}
 						return false;
 					}

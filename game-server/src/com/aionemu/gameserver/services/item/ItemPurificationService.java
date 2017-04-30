@@ -36,7 +36,7 @@ public class ItemPurificationService {
 		Map<Integer, PurificationResultItem> resultItemMap = DataManager.ITEM_PURIFICATION_DATA.getResultItemMap(baseItem.getItemId());
 		PurificationResultItem resultItem = resultItemMap.get(resultItemId);
 		if (resultItem == null) {
-			AuditLogger.info(player, resultItemId + " item's baseItem and resultItem is not matched (possible client modify)");
+			AuditLogger.log(player, "tried to upgrade baseItem " + baseItem.getItemId() + " to invalid resultItem " + resultItemId);
 			return false;
 		}
 
@@ -78,7 +78,7 @@ public class ItemPurificationService {
 
 		for (SubMaterialItem item : resultItem.getRequiredMaterials().getSubMaterialItems()) {
 			if (!player.getInventory().decreaseByItemId(item.getId(), item.getCount())) {
-				AuditLogger.info(player, "try item upgrade without sub material");
+				AuditLogger.log(player, "tried item upgrade without sub material");
 				return false;
 			}
 		}

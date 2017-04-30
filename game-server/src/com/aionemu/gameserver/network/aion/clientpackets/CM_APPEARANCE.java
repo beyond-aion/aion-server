@@ -83,7 +83,7 @@ public class CM_APPEARANCE extends AionClientPacket {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_EDIT_CHAR_NAME_ALREADY_EXIST());
 		else if ((player.getInventory().getItemByObjId(itemObjId).getItemId() != 169670000 && player.getInventory().getItemByObjId(itemObjId).getItemId() != 169670001)
 			|| !player.getInventory().decreaseByObjectId(itemObjId, 1))
-			AuditLogger.info(player, "Tried to rename himself without coupon.");
+			AuditLogger.log(player, "tried to rename himself without coupon");
 		else {
 			String oldName = player.getName();
 			if (!CustomConfig.OLD_NAMES_COUPON_DISABLED)
@@ -122,7 +122,7 @@ public class CM_APPEARANCE extends AionClientPacket {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_EDIT_GUILD_NAME_ALREADY_EXIST());
 		else if ((player.getInventory().getItemByObjId(itemObjId).getItemId() != 169680000 && player.getInventory().getItemByObjId(itemObjId).getItemId() != 169680001)
 			|| !player.getInventory().decreaseByObjectId(itemObjId, 1))
-			AuditLogger.info(player, "Tried to rename legion without coupon.");
+			AuditLogger.log(player, "Tried to rename legion without coupon.");
 		else {
 			Legion legion = player.getLegion();
 

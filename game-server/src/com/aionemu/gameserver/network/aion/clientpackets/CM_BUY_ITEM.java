@@ -50,7 +50,7 @@ public class CM_BUY_ITEM extends AionClientPacket {
 
 		if (amount < 0 || amount > 36) {
 			isAudit = true;
-			AuditLogger.info(player, "Player might be abusing CM_BUY_ITEM amount: " + amount);
+			AuditLogger.log(player, "might be abusing CM_BUY_ITEM amount: " + amount);
 			return;
 		}
 		if (tradeActionId == 2) {
@@ -66,7 +66,7 @@ public class CM_BUY_ITEM extends AionClientPacket {
 			// prevent exploit packets
 			if (count < 0 || (itemId <= 0 && tradeActionId != 0) || count > 20000) {
 				isAudit = true;
-				AuditLogger.info(player, "Player might be abusing CM_BUY_ITEM item: " + itemId + " count: " + count);
+				AuditLogger.log(player, "might be abusing CM_BUY_ITEM item: " + itemId + " count: " + count);
 				break;
 			}
 
@@ -106,7 +106,7 @@ public class CM_BUY_ITEM extends AionClientPacket {
 			Npc npc = (Npc) target;
 			TradeListTemplate tradeTemplate = null;
 			if (DialogService.isSubDialogRestricted(player, npc)) {
-				AuditLogger.info(player, "Tried to buy item without right.");
+				AuditLogger.log(player, "might be abusing CM_BUY_ITEM: no right trading with " + npc);
 				return;
 			}
 			switch (tradeActionId) {

@@ -309,8 +309,7 @@ public class MailService {
 				long attachedKinahCount = letter.getAttachedKinah();
 				letter.removeAttachedKinah();
 				if (!DAOManager.getDAO(MailDAO.class).storeLetter(letter.getTimeStamp(), letter)) {
-					AuditLogger.info(player, "Possible player try use kinah mail exploit. Location: " + player.getWorldId() + ", kinah count: "
-						+ attachedKinahCount);
+					AuditLogger.log(player, "tried to use kinah mail exploit. Location: " + player.getPosition() + ", kinah count: " + attachedKinahCount);
 					return;
 				}
 				player.getInventory().increaseKinah(attachedKinahCount);
