@@ -23,20 +23,20 @@ public abstract class PeriodicInstance {
 
 	protected static final Logger log = LoggerFactory.getLogger(PeriodicInstance.class);
 	// required properties
-	protected boolean isEnabled;
-	protected byte[] maskIds;
-	protected byte minLevel = 45;
-	protected byte maxLevel = 66;
-	protected CronExpression startExpression;
-	protected long registrationPeriod;
+	private final CronExpression[] startExpressions;
+	private final boolean isEnabled;
+	protected final byte[] maskIds;
+	protected final byte minLevel;
+	protected final byte maxLevel;
+	protected final long registrationPeriod;
 	// inner variables
 	protected boolean registerAvailable;
-	protected List<Integer> playersWithCooldown;
-	protected Future<?> unregisterTask;
+	private final List<Integer> playersWithCooldown;
+	private Future<?> unregisterTask;
 
-	public PeriodicInstance(boolean isEnabled, CronExpression startExpression, long regPeriod, byte[] maskIds, byte minLevel, byte maxLevel) {
+	public PeriodicInstance(boolean isEnabled, CronExpression[] startExpressions, long regPeriod, byte[] maskIds, byte minLevel, byte maxLevel) {
 		this.isEnabled = isEnabled;
-		this.startExpression = startExpression;
+		this.startExpressions = startExpressions;
 		this.registrationPeriod = regPeriod;
 		this.maskIds = maskIds;
 		this.minLevel = minLevel;
@@ -47,14 +47,16 @@ public abstract class PeriodicInstance {
 
 	public void initIfEnabled() {
 		if (isEnabled) {
-			CronService.getInstance().schedule(() -> startRegistration(), startExpression);
-			log.info("Scheduled " + this.getClass().getSimpleName() + ": based on cron expression: " + startExpression + " Duration: " + registrationPeriod
-				+ " in minutes");
+			for (CronExpression startExpression : startExpressions) {
+				CronService.getInstance().schedule(() -> startRegistration(), startExpression);
+				log.info("Scheduled " + getClass().getSimpleName() + ": based on cron expression: " + startExpression + " Duration: "
+					+ registrationPeriod + " in minutes");
+			}
 		}
 	}
 
 	public void startRegistration() {
-		this.registerAvailable = true;
+		registerAvailable = true;
 		startUnregisterTask();
 		World.getInstance().forEachPlayer(player -> {
 			if (player.getLevel() > minLevel && player.getLevel() <= maxLevel) {
@@ -80,9 +82,9 @@ public abstract class PeriodicInstance {
 					PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(maskId, SM_AUTO_GROUP.wnd_EntryIcon, true));
 			}
 		});
-		if (this.unregisterTask != null) {
-			this.unregisterTask.cancel(false);
-			this.unregisterTask = null;
+		if (unregisterTask != null) {
+			unregisterTask.cancel(false);
+			unregisterTask = null;
 		}
 	}
 
@@ -95,16 +97,16 @@ public abstract class PeriodicInstance {
 	}
 
 	public void addCooldown(Player player) {
-		this.playersWithCooldown.add(player.getObjectId());
+		playersWithCooldown.add(player.getObjectId());
 	}
 
 	public boolean hasCooldown(Player player) {
-		return this.playersWithCooldown.contains(player.getObjectId());
+		return playersWithCooldown.contains(player.getObjectId());
 	}
 
 	public void showWindow(Player player) {
-		if (!this.playersWithCooldown.contains(player.getObjectId())) {
-			for (byte maskId : this.maskIds)
+		if (!playersWithCooldown.contains(player.getObjectId())) {
+			for (byte maskId : maskIds)
 				PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(maskId));
 		}
 	}
@@ -122,13 +124,7 @@ public abstract class PeriodicInstance {
 	}
 
 	protected void startUnregisterTask() {
-		this.unregisterTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				stopRegistration();
-			}
-		}, this.registrationPeriod * 60 * 1000);
+		unregisterTask = ThreadPoolManager.getInstance().schedule(() -> stopRegistration(), registrationPeriod * 60 * 1000);
 	}
 
 }

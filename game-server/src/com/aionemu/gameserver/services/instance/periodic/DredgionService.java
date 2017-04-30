@@ -71,7 +71,7 @@ public class DredgionService extends PeriodicInstance {
 		if (maskId == 0) {
 			return;
 		}
-		if (!this.playersWithCooldown.contains(player.getObjectId())) {
+		if (!hasCooldown(player)) {
 			PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(maskId));
 		}
 	}
