@@ -885,7 +885,7 @@
 			<spot x="2887.11" y="2248" z="596.141" h="97"/>
 		</spawn>
 		<!-- Bakarma Assailant -->
-		<spawn npc_id="213636" respawn_time="300">
+		<spawn npc_id="235398" respawn_time="300">
 			<spot x="1656.83" y="2170.21" z="595.104" h="53"/>
 			<spot x="1657.93" y="2172.84" z="595.835" h="59"/>
 			<spot x="1686.79" y="2118.14" z="580.196" h="43"/>
@@ -906,7 +906,7 @@
 			<spot x="1918.99" y="1916.71" z="596.779" h="102"/>
 		</spawn>
 		<!-- Bakarma Bloodmaster -->
-		<spawn npc_id="213672" respawn_time="300">
+		<spawn npc_id="235428" respawn_time="300">
 			<spot x="1418.73" y="2551.98" z="649.365" h="54"/>
 			<spot x="1419.31" y="2314.65" z="643.541" h="62"/>
 			<spot x="1446.87" y="2473.38" z="652.744" h="23"/>
@@ -991,7 +991,7 @@
 			<spot x="2335.32" y="2413.34" z="579.2525" h="75"/>
 		</spawn>
 		<!-- Bakarma Curselock -->
-		<spawn npc_id="213684" respawn_time="300">
+		<spawn npc_id="235440" respawn_time="300">
 			<spot x="1413.08" y="2372.89" z="639.921" h="23"/>
 			<spot x="1418.06" y="2404.08" z="641.878" h="38"/>
 			<spot x="1437.96" y="2333.79" z="641.339" h="73"/>
@@ -1004,7 +1004,7 @@
 			<spot x="1535.7" y="2446.87" z="650.195" h="70"/>
 		</spawn>
 		<!-- Bakarma Duelist -->
-		<spawn npc_id="213667" respawn_time="300">
+		<spawn npc_id="235423" respawn_time="300">
 			<spot x="1428.25" y="2359.34" z="637.5" h="99"/>
 			<spot x="1448.92" y="1940.26" z="594.21" h="84"/>
 			<spot x="1495.12" y="2362.93" z="635.154" h="51"/>
@@ -1044,7 +1044,7 @@
 			<spot x="2073.08" y="2708.27" z="621.60126" h="27"/>
 		</spawn>
 		<!-- Bakarma Fearbringer -->
-		<spawn npc_id="213632" respawn_time="300">
+		<spawn npc_id="235395" respawn_time="300">
 			<spot x="1449.66" y="2034.94" z="614.875" h="28"/>
 			<spot x="1485" y="1996.39" z="617.962" h="115"/>
 			<spot x="1548.94" y="2079.77" z="590.332" h="21"/>
@@ -1066,11 +1066,11 @@
 			<spot x="1911.8" y="1941.73" z="594.715" h="1"/>
 		</spawn>
 		<!-- Bakarma Fearbringer -->
-		<spawn npc_id="213633" respawn_time="300">
+		<spawn npc_id="235394" respawn_time="300">
 			<spot x="1540.65" y="2019.09" z="594.3212" h="16"/>
 		</spawn>
-		<!-- Bakarma Fighter -->
-		<spawn npc_id="213303" respawn_time="300">
+		<!-- Bakarma Special Fencer -->
+		<spawn npc_id="218959" respawn_time="300">
 			<spot x="1867.72" y="2518.02" z="596.074" h="119"/>
 			<spot x="1964.2" y="2358.7" z="591.426" h="100"/>
 			<spot x="2030.95" y="2312.7" z="577.789" h="99"/>
@@ -1078,7 +1078,7 @@
 			<spot x="2093.07" y="2327.4" z="584.433" h="13"/>
 		</spawn>
 		<!-- Bakarma Fleshmender -->
-		<spawn npc_id="213676" respawn_time="300">
+		<spawn npc_id="235432" respawn_time="300">
 			<spot x="1397.62" y="2242.26" z="600.278" h="12"/>
 			<spot x="1444.15" y="2544.78" z="650.115" h="83"/>
 			<spot x="1474.53" y="2214.11" z="617.455" h="88"/>
@@ -1104,7 +1104,7 @@
 			<spot x="1815.29" y="2265.7" z="627.295" h="13"/>
 		</spawn>
 		<!-- Bakarma Guard -->
-		<spawn npc_id="213652" respawn_time="300">
+		<spawn npc_id="235408" respawn_time="300">
 			<spot x="1524.52" y="2296.61" z="647.204" h="17"/>
 			<spot x="1566.94" y="1950.32" z="576.585" h="27"/>
 			<spot x="1570.17" y="2177.12" z="646.631" h="82"/>
@@ -1141,7 +1141,7 @@
 			<spot x="1951.62" y="2066.17" z="592.715" h="48"/>
 		</spawn>
 		<!-- Bakarma Healer -->
-		<spawn npc_id="213659" respawn_time="300">
+		<spawn npc_id="235415" respawn_time="300">
 			<spot x="1511.44" y="1975.09" z="583.593" h="63"/>
 			<spot x="1556.87" y="1991.6" z="581.354" h="16"/>
 			<spot x="1602.77" y="1936.33" z="580.193" h="45"/>
@@ -1170,11 +1170,11 @@
 			<spot x="1948.6" y="2043.82" z="590.052" h="102"/>
 		</spawn>
 		<!-- Bakarma Healer -->
-		<spawn npc_id="213660" respawn_time="300">
+		<spawn npc_id="235416" respawn_time="300">
 			<spot x="1811.66" y="1922.64" z="578.4575" h="58" walker_id="F39FA74EEE6E85EE22E84A8A75444C76FBFFA998"/>
 		</spawn>
 		<!-- Bakarma Honorblade -->
-		<spawn npc_id="213702" respawn_time="300">
+		<spawn npc_id="218955" respawn_time="300">
 			<spot x="1881.15" y="2505.1" z="596.14" h="49"/>
 			<spot x="1889.5" y="2559.32" z="598.685" h="70"/>
 			<spot x="1906.38" y="2672.89" z="616.872" h="30"/>
@@ -1291,7 +1291,7 @@
 			<spot x="2162.37" y="2555.36" z="602.987" h="40"/>
 		</spawn>
 		<!-- Bakarma Outrider -->
-		<spawn npc_id="213640" respawn_time="300">
+		<spawn npc_id="235402" respawn_time="300">
 			<spot x="1654.24" y="1847.64" z="605.064" h="28"/>
 			<spot x="1720.82" y="1905.33" z="591" h="113"/>
 			<spot x="1732.78" y="1865.66" z="594.445" h="86"/>
@@ -1333,7 +1333,7 @@
 			<spot x="2119.09" y="2584.62" z="605.288" h="15"/>
 		</spawn>
 		<!-- Bakarma Petmaster -->
-		<spawn npc_id="213704" respawn_time="300">
+		<spawn npc_id="218957" respawn_time="300">
 			<spot x="1891.45" y="2584.44" z="599.373" h="118"/>
 			<spot x="1922.63" y="2412.37" z="581.845" h="95"/>
 			<spot x="1926.23" y="2535.79" z="594.114" h="6"/>
@@ -1430,7 +1430,7 @@
 			<spot x="2079.94" y="2493.23" z="606.102" h="23"/>
 		</spawn>
 		<!-- Bakarma Serpentguard -->
-		<spawn npc_id="213663" respawn_time="300">
+		<spawn npc_id="235421" respawn_time="300">
 			<spot x="1396.75" y="2239.18" z="600.053" h="88"/>
 			<spot x="1420.26" y="2295.61" z="642.693" h="68"/>
 			<spot x="1473.14" y="2211.47" z="617.748" h="37"/>
@@ -1455,7 +1455,7 @@
 			<spot x="1820.73" y="2198.89" z="620.351" h="20"/>
 		</spawn>
 		<!-- Bakarma Serpentguard -->
-		<spawn npc_id="213664" respawn_time="300">
+		<spawn npc_id="235420" respawn_time="300">
 			<spot x="1408.87" y="2384.79" z="642.5062" h="100"/>
 			<spot x="1442.37" y="2288.44" z="642.12" h="52"/>
 			<spot x="1445.29" y="2356.82" z="637.4487"/>
@@ -1536,7 +1536,7 @@
 			<spot x="1973.53" y="2070.63" z="596.546" h="10"/>
 		</spawn>
 		<!-- Bakarma Striker -->
-		<spawn npc_id="213669" respawn_time="300">
+		<spawn npc_id="235425" respawn_time="300">
 			<spot x="1434.24" y="2538.2" z="649.59753" h="101" walker_id="5B8C9BF00D82BE985806C22AEACD6C3F898D547D"/>
 			<spot x="1459.96" y="2567.19" z="648.005" h="63"/>
 			<spot x="1462.94" y="2241.34" z="622.7663" walker_id="7E777762EAE1C908D2E166E2088DB0724DB2E815"/>
@@ -1609,7 +1609,7 @@
 			<spot x="2102.32" y="2714.19" z="621.5" h="58"/>
 		</spawn>
 		<!-- Bakarma Tamer -->
-		<spawn npc_id="213648" respawn_time="300">
+		<spawn npc_id="235404" respawn_time="300">
 			<spot x="1427.61" y="2028.88" z="611.274" h="11"/>
 			<spot x="1443.07" y="2069.49" z="613.848" h="98"/>
 			<spot x="1448.53" y="2037.51" z="614.875" h="1"/>
@@ -1630,7 +1630,7 @@
 			<spot x="1919.58" y="2073.12" z="588.709" h="81"/>
 		</spawn>
 		<!-- Bakarma Tamer -->
-		<spawn npc_id="213649" respawn_time="300">
+		<spawn npc_id="235405" respawn_time="300">
 			<spot x="1553.2" y="1984.8" z="581.425" h="33"/>
 			<spot x="1591.88" y="2025.33" z="581.5075" h="9"/>
 			<spot x="1607.23" y="2132.99" z="588.85876" h="32" walker_id="4A87D6C03563EE7EE40BD65C733EEC392E092771"/>
@@ -1659,7 +1659,7 @@
 			<spot x="1892.5" y="2220.49" z="650.688" h="49"/>
 		</spawn>
 		<!-- Bakarma Tyrant -->
-		<spawn npc_id="213670" respawn_time="300">
+		<spawn npc_id="235426" respawn_time="300">
 			<spot x="1416.19" y="2406.15" z="642.586" h="75"/>
 			<spot x="1440.05" y="2333.71" z="640.661" h="78"/>
 			<spot x="1447.74" y="2543.53" z="649.862" h="44"/>
@@ -1721,8 +1721,8 @@
 			<spot x="2034.35" y="2187.31" z="580.28" h="86"/>
 			<spot x="2058.36" y="2141.3" z="581.972" h="101" random_walk="6"/>
 		</spawn>
-		<!-- The 47th Draconute Elite Infantryman -->
-		<spawn npc_id="213627" respawn_time="300">
+		<!-- Bakarma Warmonger -->
+		<spawn npc_id="235387" respawn_time="300">
 			<spot x="1637.33" y="1998.58" z="582.619" h="87"/>
 			<spot x="1662.17" y="1965.76" z="584.864" h="24"/>
 			<spot x="1674.41" y="1964.8" z="584.724" h="97"/>
@@ -1738,7 +1738,7 @@
 			<spot x="1961.73" y="2074.31" z="594.005" h="68"/>
 		</spawn>
 		<!-- Bakarma Warmonger -->
-		<spawn npc_id="213625" respawn_time="300">
+		<spawn npc_id="235386" respawn_time="300">
 			<spot x="1652.92" y="2067.88" z="578.7425" h="109"/>
 			<spot x="1703.44" y="1870.32" z="593.31573" h="52"/>
 			<spot x="1749.62" y="1901.84" z="588.10126" h="54"/>
@@ -1748,7 +1748,7 @@
 			<spot x="1929.15" y="1934.17" z="597.4494" h="49"/>
 		</spawn>
 		<!-- Bakarma Willwarper -->
-		<spawn npc_id="213679" respawn_time="300">
+		<spawn npc_id="235435" respawn_time="300">
 			<spot x="1419.8" y="2214.33" z="600.313" h="65"/>
 			<spot x="1453.18" y="1977.17" z="611.397" h="102"/>
 			<spot x="1453.96" y="2240.12" z="624.41" h="86"/>
@@ -1775,7 +1775,7 @@
 			<spot x="1807.32" y="2240.99" z="617.545" h="115"/>
 		</spawn>
 		<!-- Bakarma Windblade -->
-		<spawn npc_id="213638" respawn_time="300">
+		<spawn npc_id="235400" respawn_time="300">
 			<spot x="1447.82" y="2071.48" z="613.815" h="17"/>
 			<spot x="1510" y="2113.63" z="597.25" h="90"/>
 			<spot x="1545.48" y="2055.59" z="591.997" h="21"/>
@@ -1810,7 +1810,7 @@
 			<spot x="1948.96" y="1930.06" z="600.386" h="49"/>
 		</spawn>
 		<!-- Bakarma Worldbender -->
-		<spawn npc_id="213686" respawn_time="300">
+		<spawn npc_id="235442" respawn_time="300">
 			<spot x="1440.28" y="2438.05" z="658.486" h="86"/>
 			<spot x="1444.87" y="2468.31" z="653.061" h="113"/>
 			<spot x="1459.8" y="2513.65" z="649.346" h="58"/>
