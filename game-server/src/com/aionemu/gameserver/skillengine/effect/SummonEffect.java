@@ -32,14 +32,14 @@ public class SummonEffect extends EffectTemplate {
 	public void applyEffect(Effect effect) {
 		Player effected = (Player) effect.getEffected();
 		SummonsService.createSummon(effected, npcId, effect.getSkillId(), effect.getSkillLevel(), time);
-		if ((time > 0) && (effect.getEffected() instanceof Player)) {
+		if (time > 0 && effect.getEffected() instanceof Player) {
 			final Player effector = (Player) effect.getEffected();
 			final Summon summon = effector.getSummon();
 			Future<?> task = ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 				@Override
 				public void run() {
-					if ((summon != null) && (summon.isSpawned())) {
+					if (summon != null && summon.isSpawned()) {
 						SummonsService.doMode(SummonMode.RELEASE, summon, UnsummonType.UNSPECIFIED);
 					}
 				}

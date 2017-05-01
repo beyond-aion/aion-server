@@ -38,27 +38,14 @@ public class SummonTotemEffect extends SummonServantEffect {
 				z = effector.getZ();
 			}
 		}
-		switch (effect.getSkillId()) {
-			//this needs to be tested tho! Taunting Spirit should stay 20s but the client says only 15s
-			case 3906:
-			case 3907:
-			case 3908:
-			case 3909:
-			case 3910:
-			case 3911:
-				time = 20;
-				break;
-			//same here Battle Banner 7s -> 15s
-			case 657:
-			case 658:
-			case 659:
-			case 660:
-			case 661:
-			case 662:
-				time = 15;
-				break;
+		int spawnDuration = time;
+		String group = effect.getSkillTemplate().getGroup();
+		if (group != null && group.equals("PR_PROVOKESERVENT")) {
+			spawnDuration = 20; // Taunting Spirit should stay 20s but the client says only 15s
+		} else if (group != null && group.equals("FI_WARFLAG")) {
+			spawnDuration = 15; // same here Battle Banner 7s -> 15s
 		}
-		spawnServant(effect, time, NpcObjectType.TOTEM, x, y, z);
+		spawnServant(effect, spawnDuration, NpcObjectType.TOTEM, x, y, z);
 	}
 
 }

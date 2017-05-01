@@ -37,7 +37,7 @@ public class SummonServantEffect extends SummonEffect {
 		servant.getAi().onCreatureEvent(AIEventType.ATTACK, effect.getEffected());
 	}
 
-	protected Servant spawnServant(Effect effect, int time, NpcObjectType npcObjectType, float x, float y, float z) {
+	protected Servant spawnServant(Effect effect, int spawnDuration, NpcObjectType npcObjectType, float x, float y, float z) {
 		Creature effector = effect.getEffector();
 		if (effect.getEffected() == null && effect.getSkillTemplate().getProperties().getFirstTarget() != FirstTargetAttribute.POINT)
 			throw new IllegalArgumentException("Servant " + npcId + "cannot be spawned by " + effector + " (target: null)");
@@ -45,7 +45,7 @@ public class SummonServantEffect extends SummonEffect {
 		SpawnTemplate spawn = SpawnEngine.addNewSingleTimeSpawn(effector.getWorldId(), npcId, x, y, z, effector.getHeading());
 		final Servant servant = VisibleObjectSpawner.spawnServant(spawn, effector.getInstanceId(), effector, effect.getSkillLevel(), npcObjectType);
 
-		Future<?> task = ThreadPoolManager.getInstance().schedule(() -> servant.getController().delete(), (time + 5) * 1000);
+		Future<?> task = ThreadPoolManager.getInstance().schedule(() -> servant.getController().delete(), spawnDuration * 1000);
 		servant.getController().addTask(TaskId.DESPAWN, task);
 		return servant;
 	}

@@ -32,32 +32,20 @@ public class SummonSkillAreaEffect extends SummonServantEffect {
 			y = effected.getY();
 			z = effected.getZ();
 		}
-		// fix for summon whirlwind
-		// TODO revisit later and find better fix - kecimis
-		int useTime = time;
-		switch (effect.getSkillId()) {
-			case 2291:
-			case 2292:
-			case 2293:
-			case 2294:
-				useTime = 7;
-				break;
-			case 2711:
-			case 2712:
-				useTime = 10;
-				break;
+
+		int tickDelay = 3000;
+		int spawnDuration = time;
+
+		String group = effect.getSkillTemplate().getGroup();
+		if (group != null && group.equals("KN_THREATENINGWAVE")) {
+			spawnDuration = 15; // client files say 11s but description 15s
+			tickDelay = 2000;
+		} else if (group != null && group.equals("WI_SUMMONTORNADO")) {
+			tickDelay = 1000;
 		}
-		final Servant servant = spawnServant(effect, useTime, NpcObjectType.SKILLAREA, x, y, z);
+		Servant servant = spawnServant(effect, spawnDuration, NpcObjectType.SKILLAREA, x, y, z);
 		if (effect.getEffected() != null) // point skill without any initial target (we cannot trigger handleAttack with a null target)
 			servant.getAi().onCreatureEvent(AIEventType.ATTACK, effect.getEffected());
-
-		int delay = 3000;
-		String group = effect.getSkillTemplate().getGroup();
-
-		if (group != null && group.equalsIgnoreCase("KN_THREATENINGWAVE"))
-			delay = 2000;
-		else if (group != null && group.equalsIgnoreCase("WI_SUMMONTORNADO"))
-			delay = 1000;
 
 		Future<?> task = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
 
@@ -68,7 +56,7 @@ public class SummonSkillAreaEffect extends SummonServantEffect {
 				servant.getController().useSkill(servant.getSkillList().getSkillOnPosition(skillPos).getSkillId());
 				skillPos++;
 			}
-		}, 0, delay);
+		}, 0, tickDelay);
 		servant.getController().addTask(TaskId.SKILL_USE, task);
 	}
 }
