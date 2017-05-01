@@ -418,8 +418,11 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 	 * @param task
 	 */
 	public void addTask(TaskId taskId, Future<?> task) {
-		cancelTask(taskId);
-		tasks.put(taskId.ordinal(), task);
+		tasks.compute(taskId.ordinal(), (k, oldTask) -> {
+			if (oldTask != null)
+				oldTask.cancel(false);
+			return task;
+		});
 	}
 
 	/**
