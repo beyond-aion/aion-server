@@ -38,7 +38,9 @@ import com.aionemu.gameserver.world.WorldMapType;
 public class DropInfo extends AdminCommand {
 
 	public DropInfo() {
-		super("dropinfo");
+		super("dropinfo", "Shows drop information of your target.");
+
+		setSyntaxInfo("[all] - Lists drops of the selected npc (default: only drops for your level range, optional: all possible drops).");
 	}
 
 	@Override
@@ -46,10 +48,11 @@ public class DropInfo extends AdminCommand {
 		VisibleObject visibleObject = player.getTarget();
 
 		if (!(visibleObject instanceof Npc)) {
-			sendInfo(player, "You should target some NPC first !");
+			sendInfo(player);
 			return;
 		}
 
+		boolean showAll = params.length > 0 && params[0].equals("all");
 		Npc currentNpc = (Npc) visibleObject;
 		NpcDrop npcDrop = DataManager.CUSTOM_NPC_DROP.getNpcDrop(currentNpc.getNpcId());
 
@@ -138,7 +141,7 @@ public class DropInfo extends AdminCommand {
 
 						if (!DropConfig.DISABLE_REDUCTION && ((isNpcChest && currentNpc.getLevel() != 1 || !isNpcChest))
 							&& !DropConfig.NO_REDUCTION_MAPS.contains(currentNpc.getWorldId())) {
-							if ((player.getLevel() - currentNpc.getLevel()) >= 10 && !rule.getNoReduction())
+							if (!showAll && (player.getLevel() - currentNpc.getLevel()) >= 10 && !rule.getNoReduction())
 								continue;
 						}
 						if (!drs.checkRestrictionRace(rule, player))
@@ -218,7 +221,7 @@ public class DropInfo extends AdminCommand {
 
 				if (!DropConfig.DISABLE_REDUCTION && ((isNpcChest && currentNpc.getLevel() != 1 || !isNpcChest))
 					&& !DropConfig.NO_REDUCTION_MAPS.contains(currentNpc.getWorldId())) {
-					if ((player.getLevel() - currentNpc.getLevel()) >= 10 && !rule.getNoReduction())
+					if (!showAll && (player.getLevel() - currentNpc.getLevel()) >= 10 && !rule.getNoReduction())
 						continue;
 				}
 				if (!drs.checkRestrictionRace(rule, player))
@@ -256,7 +259,7 @@ public class DropInfo extends AdminCommand {
 				}
 			}
 		}
-		sendInfo(player, count + " drops available for the selected NPC");
+		sendInfo(player, count + " drops available for the selected NPC " + (showAll ? "" : " on your level"));
 	}
 
 	private List<Integer> getAllowedItems(GlobalRule rule, Npc npc) {
