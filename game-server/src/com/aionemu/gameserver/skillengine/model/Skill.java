@@ -210,10 +210,12 @@ public class Skill {
 			effectedList.removeIf(effected -> !RestrictionsManager.canAffectBySkill(player, effected, this));
 		}
 
-		if (targetType == 0 && effectedList.isEmpty() && !isNonTargetAOE()) {
-			if (effector instanceof Player)
-				PacketSendUtility.sendPacket((Player) effector, SM_SYSTEM_MESSAGE.STR_SKILL_TARGET_IS_NOT_VALID());
-			return false;
+		if (targetType == 0 && effectedList.isEmpty()) { // target selected but no target will be hit
+			if (targetRangeAttribute != TargetRangeAttribute.AREA) { // don't restrict AoE activation
+				if (effector instanceof Player)
+					PacketSendUtility.sendPacket((Player) effector, SM_SYSTEM_MESSAGE.STR_SKILL_TARGET_IS_NOT_VALID());
+				return false;
+			}
 		}
 
 		return true;
