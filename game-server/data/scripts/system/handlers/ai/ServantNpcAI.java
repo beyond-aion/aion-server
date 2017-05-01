@@ -85,7 +85,6 @@ public class ServantNpcAI extends GeneralNpcAI {
 					cancelTask();
 				} else {
 					SkillEngine.getInstance().getSkill(getOwner(), skillId, skillLevel, getOwner().getTarget()).useSkill();
-					//getOwner().getController().useSkill(skillId, skillLevel);
 				}
 			}
 		}, startDelay, duration);
