@@ -149,7 +149,7 @@ public class UnstableSplinterpathInstance extends GeneralInstanceHandler {
 
 	@Override
 	public boolean onDie(final Player player, Creature lastAttacker) {
-		PacketSendUtility.sendPacket(player, new SM_DIE(player.haveSelfRezEffect(), player.haveSelfRezItem(), 0, 8));
+		PacketSendUtility.sendPacket(player, new SM_DIE(player, 8));
 		return true;
 	}
 

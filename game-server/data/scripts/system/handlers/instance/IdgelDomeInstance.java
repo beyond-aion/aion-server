@@ -283,7 +283,7 @@ public class IdgelDomeInstance extends GeneralInstanceHandler {
 	@Override
 	public boolean onDie(Player player, Creature lastAttacker) {
 		sendPacket(new SM_INSTANCE_SCORE(new IdgelDomeScoreInfo(idgelDomeReward, 3, player.getObjectId()), idgelDomeReward, getTime()));
-		PacketSendUtility.sendPacket(player, new SM_DIE(player.haveSelfRezEffect(), false, 0, 8));
+		PacketSendUtility.sendPacket(player, new SM_DIE(player.canUseRebirthRevive(), false, 0, 8));
 		if (lastAttacker instanceof Player) {
 			if (lastAttacker.getRace() != player.getRace()) {
 				int killPoints = 200;

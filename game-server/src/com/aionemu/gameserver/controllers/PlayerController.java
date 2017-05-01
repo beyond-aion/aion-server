@@ -96,6 +96,8 @@ import com.aionemu.gameserver.services.reward.PromotionKitService;
 import com.aionemu.gameserver.services.summons.SummonsService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.skillengine.effect.AbnormalState;
+import com.aionemu.gameserver.skillengine.effect.EffectTemplate;
+import com.aionemu.gameserver.skillengine.effect.RebirthEffect;
 import com.aionemu.gameserver.skillengine.model.DispelCategoryType;
 import com.aionemu.gameserver.skillengine.model.DispelSlotType;
 import com.aionemu.gameserver.skillengine.model.Effect;
@@ -286,7 +288,7 @@ public class PlayerController extends CreatureController<Player> {
 	public void onDie(Creature lastAttacker) {
 		Player player = getOwner();
 		player.getController().cancelCurrentSkill(null);
-		player.setRebirthRevive(player.haveSelfRezEffect());
+		setRebirthReviveInfo();
 		Creature master = lastAttacker.getMaster();
 
 		if (DuelService.getInstance().isDueling(player.getObjectId())) {
@@ -346,26 +348,40 @@ public class PlayerController extends CreatureController<Player> {
 				player.getCommonData().calculateExpLoss();
 		}
 
-		sendDieFromCreature(lastAttacker, !player.hasResurrectBase());
+		sendDieFromCreature(lastAttacker);
 
 		QuestEngine.getInstance().onDie(new QuestEnv(null, player, 0));
 	}
 
-	public void sendDie() {
-		sendDieFromCreature(getOwner(), true);
+	private void setRebirthReviveInfo() {
+		Player player = getOwner();
+		// Store the effect info.
+		List<Effect> effects = player.getEffectController().getAbnormalEffects();
+		for (Effect effect : effects) {
+			for (EffectTemplate template : effect.getEffectTemplates()) {
+				if (template.getEffectId() == 160 && template instanceof RebirthEffect) {
+					player.setRebirthEffect((RebirthEffect) template);
+					return;
+				}
+			}
+		}
+		player.setRebirthEffect(null);
 	}
 
-	private void sendDieFromCreature(Creature lastAttacker, boolean showPacket) {
+	public void sendDie() {
+		sendDieFromCreature(getOwner());
+	}
+
+	private void sendDieFromCreature(Creature lastAttacker) {
 		Player player = getOwner();
 		if (player.getPanesterraTeam() != null && player.getWorldId() == 400030000) {
-			PacketSendUtility.sendPacket(player, new SM_DIE(player.canUseRebirthRevive(), player.haveSelfRezItem(), 0, 6));
-		} else if (showPacket) {
-			int kiskTimeRemaining = (player.getKisk() != null ? player.getKisk().getRemainingLifetime() : 0);
-			if (player.getSKInfo().getRank() > 1)
-				kiskTimeRemaining = 0;
-			PacketSendUtility.sendPacket(player,
-				new SM_DIE(player.canUseRebirthRevive(), player.haveSelfRezItem(), kiskTimeRemaining, 0, isInvader(player)));
+			PacketSendUtility.sendPacket(player, new SM_DIE(player, 6));
+			return;
 		}
+		int kiskTimeRemaining = (player.getKisk() != null ? player.getKisk().getRemainingLifetime() : 0);
+		if (player.getSKInfo().getRank() > 1)
+			kiskTimeRemaining = 0;
+		PacketSendUtility.sendPacket(player, new SM_DIE(player.canUseRebirthRevive(), player.haveSelfRezItem(), kiskTimeRemaining, 0, isInvader(player)));
 	}
 
 	private boolean isInvader(Player player) {
@@ -694,8 +710,8 @@ public class PlayerController extends CreatureController<Player> {
 				FlyPathEntry path = player.getCurrentFlyPath();
 
 				if (player.getWorldId() != path.getEndWorldId()) {
-					AuditLogger.log(player, "tried to use flyPath #" + path.getId() + " from not native start world " + player.getWorldId()
-						+ " (expected " + path.getEndWorldId() + ")");
+					AuditLogger.log(player, "tried to use flyPath #" + path.getId() + " from not native start world " + player.getWorldId() + " (expected "
+						+ path.getEndWorldId() + ")");
 				}
 
 				if (diff < path.getTimeInMs()) {

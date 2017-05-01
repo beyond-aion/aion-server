@@ -83,11 +83,8 @@ import com.aionemu.gameserver.services.panesterra.ahserion.PanesterraTeam;
 import com.aionemu.gameserver.services.serialkillers.SerialKiller;
 import com.aionemu.gameserver.skillengine.condition.ChainCondition;
 import com.aionemu.gameserver.skillengine.effect.AbnormalState;
-import com.aionemu.gameserver.skillengine.effect.EffectTemplate;
 import com.aionemu.gameserver.skillengine.effect.RebirthEffect;
-import com.aionemu.gameserver.skillengine.effect.ResurrectBaseEffect;
 import com.aionemu.gameserver.skillengine.model.ChainSkills;
-import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.skillengine.task.CraftingTask;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -185,9 +182,6 @@ public class Player extends Creature {
 	private String captchaWord;
 	private byte[] captchaImage;
 
-	private int rebirthResurrectPercent = 1;
-	private int rebirthSkill = 0;
-
 	/**
 	 * Connection of this Player.
 	 */
@@ -206,7 +200,7 @@ public class Player extends Creature {
 	private int floodMsgCount = 0;
 
 	private int lootingNpcOid;
-	private boolean rebirthRevive;
+	private RebirthEffect rebirthEffect;
 
 	// Needed to remove supplements queue
 	private int subtractedSupplementsCount;
@@ -1485,22 +1479,6 @@ public class Player extends Creature {
 		this.emotions = emotions;
 	}
 
-	public int getRebirthResurrectPercent() {
-		return rebirthResurrectPercent;
-	}
-
-	public void setRebirthResurrectPercent(int rebirthResurrectPercent) {
-		this.rebirthResurrectPercent = rebirthResurrectPercent;
-	}
-
-	public int getRebirthSkill() {
-		return rebirthSkill;
-	}
-
-	public void setRebirthSkill(int rebirthSkill) {
-		this.rebirthSkill = rebirthSkill;
-	}
-
 	public BindPointPosition getBindPoint() {
 		return bindPoint;
 	}
@@ -1652,42 +1630,6 @@ public class Player extends Creature {
 		return (getSelfRezStone() != null);
 	}
 
-	/**
-	 * Rebirth Effect is id 160.
-	 * 
-	 * @return
-	 */
-	public boolean haveSelfRezEffect() {
-		if (hasAccess(AdminConfig.AUTO_RES))
-			return true;
-
-		// Store the effect info.
-		List<Effect> effects = getEffectController().getAbnormalEffects();
-		for (Effect effect : effects) {
-			for (EffectTemplate template : effect.getEffectTemplates()) {
-				if (template.getEffectId() == 160 && template instanceof RebirthEffect) {
-					RebirthEffect rebirthEffect = (RebirthEffect) template;
-					setRebirthResurrectPercent(rebirthEffect.getResurrectPercent());
-					setRebirthSkill(rebirthEffect.getSkillId());
-					return true;
-				}
-			}
-		}
-		return false;
-	}
-
-	public boolean hasResurrectBase() {
-		List<Effect> effects = getEffectController().getAbnormalEffects();
-		for (Effect effect : effects) {
-			for (EffectTemplate template : effect.getEffectTemplates()) {
-				if (template.getEffectId() == 160 && template instanceof ResurrectBaseEffect) {
-					return true;
-				}
-			}
-		}
-		return false;
-	}
-
 	public void unsetResPosState() {
 		if (isInResPostState()) {
 			setResPosState(false);
@@ -1793,12 +1735,16 @@ public class Player extends Creature {
 		return floodMsgCount;
 	}
 
-	public void setRebirthRevive(boolean result) {
-		rebirthRevive = result;
+	public void setRebirthEffect(RebirthEffect rebirthEffect) {
+		this.rebirthEffect = rebirthEffect;
+	}
+
+	public RebirthEffect getRebirthEffect() {
+		return rebirthEffect;
 	}
 
 	public boolean canUseRebirthRevive() {
-		return rebirthRevive;
+		return rebirthEffect != null || hasAccess(AdminConfig.AUTO_RES);
 	}
 
 	/**

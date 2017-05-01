@@ -165,7 +165,7 @@ public class DredgionInstance2 extends GeneralInstanceHandler {
 
 	@Override
 	public boolean onDie(Player player, Creature lastAttacker) {
-		PacketSendUtility.sendPacket(player, new SM_DIE(player.haveSelfRezEffect(), false, 0, 8));
+		PacketSendUtility.sendPacket(player, new SM_DIE(player.canUseRebirthRevive(), false, 0, 8));
 		int points = 60;
 		if (lastAttacker instanceof Player) {
 			if (lastAttacker.getRace() != player.getRace()) {

@@ -459,7 +459,7 @@ public class KamarBattlefieldInstance extends GeneralInstanceHandler {
 		ownerReward.endBoostMoraleEffect(player);
 		ownerReward.applyBoostMoraleEffect(player);
 		sendPacket(new SM_INSTANCE_SCORE(new KamarBattlefieldScoreInfo(kamarReward, 4, player.getObjectId()), kamarReward, getTime()));
-		PacketSendUtility.sendPacket(player, new SM_DIE(player.haveSelfRezEffect(), false, 0, 8));
+		PacketSendUtility.sendPacket(player, new SM_DIE(player.canUseRebirthRevive(), false, 0, 8));
 		if (lastAttacker instanceof Player) {
 			if (lastAttacker.getRace() != player.getRace()) {
 				updatePoints(150, lastAttacker.getRace(), true, 0, (Player) lastAttacker);

@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
+import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 
@@ -14,6 +15,10 @@ public class SM_DIE extends AionServerPacket {
 	private int remainingKiskTime;
 	private int type;
 	private boolean invasion;
+
+	public SM_DIE(Player player, int type) {
+		this(player.canUseRebirthRevive(), player.haveSelfRezItem(), 0, type, false);
+	}
 
 	public SM_DIE(boolean hasRebirth, boolean hasItem, int remainingKiskTime, int type) {
 		this(hasRebirth, hasItem, remainingKiskTime, type, false);

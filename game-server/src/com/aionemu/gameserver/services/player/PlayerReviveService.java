@@ -72,16 +72,21 @@ public class PlayerReviveService {
 		}
 
 		boolean soulSickness = true;
-		int rebirthResurrectPercent = player.getRebirthResurrectPercent();
+		int rebirthResurrectPercent, rebirthSkillId;
 		if (player.hasAccess(AdminConfig.AUTO_RES)) {
+			rebirthSkillId = 0;
 			rebirthResurrectPercent = 100;
 			soulSickness = false;
-		} else if (rebirthResurrectPercent <= 0) {
-			LoggerFactory.getLogger(PlayerReviveService.class).warn("Rebirth effect missing percent.");
-			rebirthResurrectPercent = 5;
+		} else {
+			rebirthSkillId = player.getRebirthEffect().getSkillId();
+			rebirthResurrectPercent = player.getRebirthEffect().getResurrectPercent();
+			if (rebirthResurrectPercent <= 0) {
+				LoggerFactory.getLogger(PlayerReviveService.class).warn("Rebirth effect missing percent.");
+				rebirthResurrectPercent = 5;
+			}
 		}
 
-		revive(player, rebirthResurrectPercent, rebirthResurrectPercent, soulSickness, player.getRebirthSkill());
+		revive(player, rebirthResurrectPercent, rebirthResurrectPercent, soulSickness, rebirthSkillId);
 		PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.RESURRECT), true);
 		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REBIRTH_MASSAGE_ME());
 		// if player was flying before res, start flying
