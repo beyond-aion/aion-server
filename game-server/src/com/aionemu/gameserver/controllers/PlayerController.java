@@ -417,10 +417,11 @@ public class PlayerController extends CreatureController<Player> {
 		if (!RestrictionsManager.canAttack(getOwner(), target))
 			return;
 
-		// Normal attack is already limited client side (ex. Press C and attacker approaches target)
-		// but need a check server side too also for Z axis issue
-		if (!PositionUtil.isInAttackRange(getOwner(), target, getOwner().getGameStats().getAttackRange().getCurrent() / 1000f + 1))
+		// client handles most distance checks beforehand, but for some cases we need to check it also
+		if (!PositionUtil.isInAttackRange(getOwner(), target, getOwner().getGameStats().getAttackRange().getCurrent() / 1000f + 1)) {
+			PacketSendUtility.sendPacket(getOwner(), SM_SYSTEM_MESSAGE.STR_ATTACK_TOO_FAR_FROM_TARGET());
 			return;
+		}
 
 		if (!GeoService.getInstance().canSee(getOwner(), target)) {
 			PacketSendUtility.sendPacket(getOwner(), SM_SYSTEM_MESSAGE.STR_ATTACK_OBSTACLE_EXIST());

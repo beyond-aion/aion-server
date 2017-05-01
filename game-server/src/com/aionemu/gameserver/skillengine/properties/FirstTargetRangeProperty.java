@@ -47,7 +47,7 @@ public class FirstTargetRangeProperty {
 		if (!firstTarget.getEffectController().isInAnyAbnormalState(AbnormalState.CANT_MOVE_STATE)
 			&& !PositionUtil.isInAttackRange(effector, firstTarget, firstTargetRange)) {
 			if (effector instanceof Player)
-				PacketSendUtility.sendPacket((Player) effector, SM_SYSTEM_MESSAGE.STR_ATTACK_TOO_FAR_FROM_TARGET());
+				PacketSendUtility.sendPacket((Player) effector, SM_SYSTEM_MESSAGE.STR_SKILL_NOT_ENOUGH_DISTANCE());
 			return false;
 		}
 

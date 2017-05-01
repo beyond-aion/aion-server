@@ -11022,10 +11022,6 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 		return new SM_SYSTEM_MESSAGE(1300456, descriptionId);
 	}
 
-	public static final SM_SYSTEM_MESSAGE STR_MSG_ENCHANT_TYPE1_ENCHANT_FAIL(DescriptionId descriptionId) {
-		return new SM_SYSTEM_MESSAGE(1402674, descriptionId);
-	}
-
 	/**
 	 * You have cancelled the enchanting of %0.
 	 */
@@ -15693,10 +15689,6 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_COMBAT_MY_ABYSS_POINT_GAIN(int num0) {
 		return new SM_SYSTEM_MESSAGE(1320000, num0);
-	}
-
-	public static AionServerPacket STR_MSG_GLORY_POINT_GAIN(int additionalGp) {
-		return new SM_SYSTEM_MESSAGE(1402081, additionalGp);
 	}
 
 	/**
@@ -20719,20 +20711,6 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_ENCHANT_ITEM_SUCCEEDED_15(String playerName, int nameId) {
 		return new SM_SYSTEM_MESSAGE(1400435, playerName, new DescriptionId(nameId));
-	}
-
-	/**
-	 * %0 has succeeded in enchanting %1 to Level 20.
-	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_ENCHANT_ITEM_SUCCEEDED_20(String playerName, int nameId) {
-		return new SM_SYSTEM_MESSAGE(1402285, playerName, new DescriptionId(nameId));
-	}
-
-	/**
-	 * %0 has succeeded in tempering %1 to level %2.
-	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_ITEM_AUTHORIZE_SUCCEEDED_MAX(String playerName, int nameId) {
-		return new SM_SYSTEM_MESSAGE(1402154, playerName, new DescriptionId(nameId), 10);
 	}
 
 	/**
@@ -25846,10 +25824,24 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	}
 
 	/**
+	 * You received %num0 Glory Points.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_GLORY_POINT_GAIN(int additionalGp) {
+		return new SM_SYSTEM_MESSAGE(1402081, additionalGp);
+	}
+
+	/**
 	 * According to your current rank, you will lose a certain amount of Glory Points each day.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_GLORY_POINT_LOSE_COMMON() {
 		return new SM_SYSTEM_MESSAGE(1402082);
+	}
+
+	/**
+	 * %0 has succeeded in tempering %1 to level %2.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_ITEM_AUTHORIZE_SUCCEEDED_MAX(String playerName, int nameId) {
+		return new SM_SYSTEM_MESSAGE(1402154, playerName, new DescriptionId(nameId), 10);
 	}
 
 	/**
@@ -25920,6 +25912,13 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_GAB1_SUB_ALARM_06() {
 		return new SM_SYSTEM_MESSAGE(1402257);
+	}
+
+	/**
+	 * %0 has succeeded in enchanting %1 to Level 20.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_ENCHANT_ITEM_SUCCEEDED_20(String playerName, int nameId) {
+		return new SM_SYSTEM_MESSAGE(1402285, playerName, new DescriptionId(nameId));
 	}
 
 	/**
@@ -26455,6 +26454,13 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	}
 
 	/**
+	 * The boost for %0 failed. The item was destroyed.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_ENCHANT_TYPE1_ENCHANT_FAIL(DescriptionId descriptionId) {
+		return new SM_SYSTEM_MESSAGE(1402674, descriptionId);
+	}
+
+	/**
 	 * The Lava Protector and Heatvent Protector are sharing the Fount.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_IDSEAL_TWIN_01() {
@@ -26879,6 +26885,13 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_STIGMA_DELETE_HIDDEN_SKILL(int value0, int value1) {
 		return new SM_SYSTEM_MESSAGE(1402895, new DescriptionId(value0), value1);
+	}
+
+	/**
+	 * You are too far from the target to use that skill.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_SKILL_NOT_ENOUGH_DISTANCE() {
+		return new SM_SYSTEM_MESSAGE(1402920);
 	}
 
 	/**
