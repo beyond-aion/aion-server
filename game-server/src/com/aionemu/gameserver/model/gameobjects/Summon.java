@@ -232,10 +232,6 @@ public class Summon extends Creature {
 		this.summonedBySkillId = summonedBySkillId;
 	}
 
-	public Future<?> getReleaseTask() {
-		return releaseTask;
-	}
-
 	public void setReleaseTask(Future<?> task) {
 		releaseTask = task;
 	}

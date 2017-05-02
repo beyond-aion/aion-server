@@ -3,6 +3,7 @@ package com.aionemu.gameserver.spawnengine;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.aionemu.gameserver.ai.event.AIEventType;
 import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.configs.main.SiegeConfig;
 import com.aionemu.gameserver.controllers.GatherableController;
@@ -383,6 +384,8 @@ public class VisibleObjectSpawner {
 		summon.setSummonedBySkillId(skillId);
 
 		SpawnEngine.bringIntoWorld(summon, spawn, instanceId);
+		if (isSiegeWeapon)
+			summon.getAi().onGeneralEvent(AIEventType.SPAWNED);
 		return summon;
 	}
 

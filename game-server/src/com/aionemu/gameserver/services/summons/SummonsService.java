@@ -1,7 +1,7 @@
 package com.aionemu.gameserver.services.summons;
 
-import com.aionemu.gameserver.ai.event.AIEventType;
-import com.aionemu.gameserver.controllers.SummonController;
+import java.util.concurrent.Future;
+
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Summon;
@@ -27,19 +27,17 @@ public class SummonsService {
 	/**
 	 * create summon
 	 */
-	public static final void createSummon(Player master, int npcId, int skillId, int skillLevel, int time) {
+	public static final Summon createSummon(Player master, int npcId, int skillId, int skillLevel, int time) {
 		if (master.getSummon() != null) {
-			PacketSendUtility.sendPacket(master, new SM_SYSTEM_MESSAGE(1300072));
-			return;
+			PacketSendUtility.sendPacket(master, SM_SYSTEM_MESSAGE.STR_SKILL_SUMMON_ALREADY_HAVE_A_FOLLOWER());
+			return null;
 		}
 		Summon summon = VisibleObjectSpawner.spawnSummon(master, npcId, skillId, time);
-		if (summon.getAi().getName().equals("siege_weapon")) {
-			summon.getAi().onGeneralEvent(AIEventType.SPAWNED);
-		}
 		master.setSummon(summon);
 		PacketSendUtility.sendPacket(master, new SM_SUMMON_PANEL(summon));
 		PacketSendUtility.broadcastPacket(summon, new SM_EMOTION(summon, EmotionType.START_EMOTE2));
 		PacketSendUtility.broadcastPacket(summon, new SM_SUMMON_UPDATE(summon));
+		return summon;
 	}
 
 	/**
@@ -65,7 +63,9 @@ public class SummonsService {
 				break;
 		}
 		summon.getObserveController().notifySummonReleaseObservers();
-		summon.setReleaseTask(ThreadPoolManager.getInstance().schedule(new ReleaseSummonTask(summon, unsummonType, isAttacked), 5000));
+		Future<?> releaseTask = ThreadPoolManager.getInstance().schedule(new ReleaseSummonTask(summon, unsummonType, isAttacked), 5000);
+		if (unsummonType == UnsummonType.COMMAND) // make it cancelable if triggered manually
+			summon.setReleaseTask(releaseTask);
 	}
 
 	public static class ReleaseSummonTask implements Runnable {
@@ -91,7 +91,8 @@ public class SummonsService {
 
 			owner.getController().delete();
 			owner.setMaster(null);
-			master.setSummon(null);
+			if (owner.equals(master.getSummon()))
+				master.setSummon(null);
 
 			switch (unsummonType) {
 				case COMMAND:
@@ -176,33 +177,28 @@ public class SummonsService {
 	}
 
 	public static final void doMode(SummonMode summonMode, Summon summon, int targetObjId, UnsummonType unsummonType) {
-		if (summon.getLifeStats().isAlreadyDead()) {
+		if (summon.getLifeStats().isAlreadyDead())
 			return;
-		}
-		if (unsummonType != null && unsummonType.equals(UnsummonType.COMMAND) && !summonMode.equals(SummonMode.RELEASE)) {
+
+		if (summon.getMaster() == null)
+			return;
+
+		if (unsummonType == UnsummonType.COMMAND && summonMode != SummonMode.RELEASE)
 			summon.cancelReleaseTask();
-		}
-		SummonController summonController = summon.getController();
-		if (summonController == null) {
-			return;
-		}
-		if (summon.getMaster() == null) {
-			summon.getController().delete();
-			return;
-		}
+
 		switch (summonMode) {
 			case REST:
-				summonController.restMode();
+				summon.getController().restMode();
 				break;
 			case ATTACK:
-				summonController.attackMode(targetObjId);
+				summon.getController().attackMode(targetObjId);
 				break;
 			case GUARD:
-				summonController.guardMode();
+				summon.getController().guardMode();
 				break;
 			case RELEASE:
 				if (unsummonType != null) {
-					summonController.release(unsummonType);
+					summon.getController().release(unsummonType);
 				}
 				break;
 			case UNK:
