@@ -477,14 +477,14 @@
 	<monster_hunt id="21297" start_npc_ids="799340" start_dialog_id="4762"/>
 	<monster_hunt id="21299" start_npc_ids="799340" start_dialog_id="4762"/>
 	<monster_hunt id="21301" start_npc_ids="799340" start_dialog_id="4762"/>
-	<monster_hunt id="21311" start_npc_ids="799354"/>
-	<monster_hunt id="21312" start_npc_ids="799354"/>
-	<monster_hunt id="21313" start_npc_ids="799360"/>
-	<monster_hunt id="21314" start_npc_ids="799360"/>
-	<monster_hunt id="21315" start_npc_ids="799327"/>
-	<monster_hunt id="21316" start_npc_ids="799327"/>
-	<monster_hunt id="21317" start_npc_ids="799328"/>
-	<monster_hunt id="21318" start_npc_ids="799328"/>
+	<monster_hunt id="21311" start_npc_ids="799354" end_reward="true"/>
+	<monster_hunt id="21312" start_npc_ids="799354" end_reward="true"/>
+	<monster_hunt id="21313" start_npc_ids="799360" end_reward="true"/>
+	<monster_hunt id="21314" start_npc_ids="799360" end_reward="true"/>
+	<monster_hunt id="21315" start_npc_ids="799327" end_reward="true"/>
+	<monster_hunt id="21316" start_npc_ids="799327" end_reward="true"/>
+	<monster_hunt id="21317" start_npc_ids="799328" end_reward="true"/>
+	<monster_hunt id="21318" start_npc_ids="799328" end_reward="true"/>
 	<monster_hunt id="21456" start_npc_ids="799247"/>
 	<monster_hunt id="21459" start_npc_ids="799250"/>
 	
