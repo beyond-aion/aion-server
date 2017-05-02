@@ -445,7 +445,8 @@ public class LegionService {
 			return this.allCachedLegionMembers.getMemberEx(playerName);
 		else {
 			LegionMemberEx legionMember = DAOManager.getDAO(LegionMemberDAO.class).loadLegionMemberEx(playerName);
-			addCachedLegionMemberEx(legionMember);
+			if (legionMember != null)
+				addCachedLegionMemberEx(legionMember);
 			return legionMember;
 		}
 	}
@@ -1565,26 +1566,20 @@ public class LegionService {
 			 * Get LegionMemberEx from cache or database if offline
 			 */
 			LegionMemberEx legionMember = getLegionMemberEx(charName);
-			if (legionMember == null) {
-				log.error("Char name does not exist in legion member table: " + charName);
-				return false;
-			}
-
-			// TODO: Can not kick during a war!!
-			// STR_GUILD_BANISH_DONT_HAVE_RIGHT_TO_BANISH
 			Legion legion = activePlayer.getLegion();
 
-			if (activePlayer.getObjectId() == legionMember.getObjectId()) {
+			// TODO: Can not kick during a war!! SM_SYSTEM_MESSAGE.STR_GUILD_BANISH_CANT_BAN_MEMBER_WHILE_WAR()
+			if (legionMember == null || !legion.isMember(legionMember.getObjectId())) {
+				PacketSendUtility.sendPacket(activePlayer, SM_SYSTEM_MESSAGE.STR_GUILD_BANISH_HE_IS_NOT_MY_GUILD_MEMBER(charName));
+				return false;
+			} else if (activePlayer.getObjectId() == legionMember.getObjectId()) {
 				PacketSendUtility.sendPacket(activePlayer, SM_SYSTEM_MESSAGE.STR_GUILD_BANISH_CANT_BANISH_SELF());
 				return false;
 			} else if (legionMember.isBrigadeGeneral()) {
 				PacketSendUtility.sendPacket(activePlayer, SM_SYSTEM_MESSAGE.STR_GUILD_BANISH_CAN_BANISH_MASTER());
 				return false;
-			} else if (legionMember.getRank() == activePlayer.getLegionMember().getRank()) {
-				PacketSendUtility.sendPacket(activePlayer, SM_SYSTEM_MESSAGE.STR_GUILD_BANISH_DONT_HAVE_RIGHT_TO_BANISH());
-				return false;
-			} else if (!legion.isMember(legionMember.getObjectId())) {
-				PacketSendUtility.sendPacket(activePlayer, SM_SYSTEM_MESSAGE.STR_GUILD_BANISH_DONT_HAVE_RIGHT_TO_BANISH());
+			} else if (legionMember.getRank().getRankId() <= activePlayer.getLegionMember().getRank().getRankId()) {
+				PacketSendUtility.sendPacket(activePlayer, SM_SYSTEM_MESSAGE.STR_GUILD_BANISH_CAN_NOT_BANISH_SAME_MEMBER_RANK());
 				return false;
 			} else if (!activePlayer.getLegionMember().hasRights(LegionPermissionsMask.KICK)) {
 				PacketSendUtility.sendPacket(activePlayer, SM_SYSTEM_MESSAGE.STR_GUILD_BANISH_DONT_HAVE_RIGHT_TO_BANISH());
