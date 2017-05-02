@@ -21,7 +21,6 @@ public class CM_SUMMON_EMOTION extends AionClientPacket {
 
 	@SuppressWarnings("unused")
 	private int objId;
-
 	private int emotionTypeId;
 
 	public CM_SUMMON_EMOTION(int opcode, State state, State... restStates) {
@@ -36,19 +35,12 @@ public class CM_SUMMON_EMOTION extends AionClientPacket {
 
 	@Override
 	protected void runImpl() {
-
 		Player player = getConnection().getActivePlayer();
 		EmotionType emotionType = EmotionType.getEmotionTypeById(emotionTypeId);
 
-		// Unknown Summon Emotion Type
-		if (emotionType == EmotionType.UNK)
-			log.error("Unknown emotion type? 0x" + Integer.toHexString(emotionTypeId).toUpperCase());
-
 		Summon summon = player.getSummon();
-		if (summon == null) {
-			log.warn("summon emotion without active summon on " + player.getName() + ".");
+		if (summon == null) // commonly due to lags when the pet dies
 			return;
-		}
 
 		switch (emotionType) {
 			case FLY:
@@ -68,6 +60,8 @@ public class CM_SUMMON_EMOTION extends AionClientPacket {
 				summon.unsetState(CreatureState.WEAPON_EQUIPPED);
 				PacketSendUtility.broadcastPacket(summon, new SM_EMOTION(summon, emotionType));
 				break;
+			case UNK:
+				log.warn("Unknown emotion type? 0x" + Integer.toHexString(emotionTypeId).toUpperCase() + " from " + player);
 		}
 	}
 }
