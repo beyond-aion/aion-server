@@ -319,7 +319,8 @@ public class RaksangRuinsInstance extends GeneralInstanceHandler {
 	@Override
 	public void onInstanceDestroy() {
 		isInstanceDestroyed = true;
-		spawnTask.cancel(true);
+		if (spawnTask != null)
+			spawnTask.cancel(true);
 	}
 
 }
