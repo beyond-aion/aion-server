@@ -31,6 +31,7 @@ import com.aionemu.gameserver.services.SiegeService;
 import com.aionemu.gameserver.services.instance.InstanceService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.WorldMapInstance;
+import com.aionemu.gameserver.world.WorldMapType;
 
 /**
  * @author ATracer, xTz
@@ -115,7 +116,8 @@ public class PortalService {
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANNOT_MAKE_INSTANCE_COOL_TIME());
 				return;
 			}
-		} else if (instance.isRegistered(player.getObjectId()) && (player.getWorldId() != loc.getWorldId() || player.getInstanceId() != instance.getInstanceId())) {
+		} else if (instance.isRegistered(player.getObjectId())
+			&& (player.getWorldId() != loc.getWorldId() || player.getInstanceId() != instance.getInstanceId())) {
 			reenter = true;
 		}
 
@@ -400,7 +402,8 @@ public class PortalService {
 		WorldMapInstance instance = null;
 
 		if (isInstance) {
-			instance = InstanceService.getNextAvailableInstance(loc.getWorldId(), requester.getObjectId(), (byte) 0);
+			boolean isPersonal = WorldMapType.getWorld(loc.getWorldId()).isPersonal();
+			instance = InstanceService.getNextAvailableInstance(loc.getWorldId(), isPersonal ? requester.getObjectId() : 0, (byte) 0);
 			InstanceService.registerPlayerWithInstance(instance, requester);
 			transfer(requester, loc, instance, reenter);
 		} else {
