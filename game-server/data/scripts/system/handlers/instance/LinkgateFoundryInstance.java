@@ -25,10 +25,14 @@ public class LinkgateFoundryInstance extends GeneralInstanceHandler {
 	private Future<?> timeCheckTask;
 	private byte timeInMin = -1;
 	private byte secretLabEntranceCount = 0;
+	private boolean isAgentSpawned = false;
 
 	@Override
 	public void onEnterInstance(Player player) {
-		spawn(player.getRace() == Race.ELYOS ? 206361 : 206362, 348.00464f, 252.13882f, 311.36136f, (byte) 10);
+		if (!isAgentSpawned) {
+			isAgentSpawned = true;
+			spawn(player.getRace() == Race.ELYOS ? 206361 : 206362, 348.00464f, 252.13882f, 311.36136f, (byte) 10);
+		}
 	}
 
 	@Override
