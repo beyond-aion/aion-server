@@ -318,9 +318,6 @@ public class InstanceService {
 
 		@Override
 		public void run() {
-			int instanceId = worldMapInstance.getInstanceId();
-			int worldId = worldMapInstance.getMapId();
-			WorldMap map = World.getInstance().getWorldMap(worldId);
 			PlayerGroup registeredGroup = worldMapInstance.getRegisteredGroup();
 			if (registeredGroup == null) {
 				for (Player player : worldMapInstance.getPlayersInside()) {
@@ -331,11 +328,9 @@ public class InstanceService {
 				}
 
 				if (canDestroySoloInstance() || worldMapInstance.isPersonal()) {
-					map.removeWorldMapInstance(instanceId);
 					destroyInstance(worldMapInstance);
 				}
 			} else if (registeredGroup.size() == 0) {
-				map.removeWorldMapInstance(instanceId);
 				destroyInstance(worldMapInstance);
 			}
 		}
