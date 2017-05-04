@@ -40,6 +40,8 @@ public class PlayerAllianceLeavedEvent extends PlayerLeavedEvent<PlayerAllianceM
 		Player leader = team.getLeaderObject();
 		Objects.requireNonNull(leader, "Alliance leader should not be null");
 
+		team.getViceCaptainIds().remove(leavedPlayer.getObjectId());
+
 		if (!reason.equals(PlayerLeavedEvent.LeaveReson.DISBAND)) {
 			// here we already must have a leader of the team
 			if (leavedPlayer.equals(leader)) {
@@ -52,7 +54,6 @@ public class PlayerAllianceLeavedEvent extends PlayerLeavedEvent<PlayerAllianceM
 		}
 
 		team.removeMember(leavedPlayer.getObjectId());
-		team.getViceCaptainIds().remove(leavedPlayer.getObjectId());
 
 		team.forEach(player -> {
 			switch (reason) {
