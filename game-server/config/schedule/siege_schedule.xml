@@ -46,11 +46,11 @@
 	</fortress>
 	<!-- Vorgaltem Citadel -->
 	<fortress id="3011">
-		<siegeTime>0 0 19 ? * MON,WED,SAT</siegeTime>
+		<siegeTime>0 0 19 ? * WED,THU,SAT</siegeTime>
 	</fortress>
 	<!-- Crimson Temple -->
 	<fortress id="3021">
-		<siegeTime>0 0 19 ? * MON,WED,SAT</siegeTime>
+		<siegeTime>0 0 19 ? * WED,THU,SAT</siegeTime>
 	</fortress>
 	<!-- Wealhtheow Keep -->
 	<fortress id="7011">
