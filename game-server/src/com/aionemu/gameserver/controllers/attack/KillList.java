@@ -33,11 +33,13 @@ public class KillList {
 		long now = System.currentTimeMillis();
 		int killCount = 0;
 
-		for (Iterator<Long> i = killTimes.iterator(); i.hasNext();) {
-			if (now - i.next().longValue() > CustomConfig.PVP_DAY_DURATION) {
-				i.remove();
-			} else {
-				killCount++;
+		synchronized (killTimes) {
+			for (Iterator<Long> i = killTimes.iterator(); i.hasNext();) {
+				if (now - i.next().longValue() > CustomConfig.PVP_DAY_DURATION) {
+					i.remove();
+				} else {
+					killCount++;
+				}
 			}
 		}
 
@@ -54,7 +56,9 @@ public class KillList {
 			killList.put(victimId, killTimes);
 		}
 
-		killTimes.add(System.currentTimeMillis());
+		synchronized (killTimes) {
+			killTimes.add(System.currentTimeMillis());
+		}
 	}
 
 }
