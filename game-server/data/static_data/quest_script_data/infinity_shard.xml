@@ -8,6 +8,6 @@
 	-->
 	
 	<!-- COLLECTING QUESTS -->
-	<item_collecting id="16930" start_npc_ids="801541"/>
-	<item_collecting id="26930" start_npc_ids="801545"/>
+	<item_collecting id="16930" start_npc_ids="801541" end_npc_ids="804626"/>
+	<item_collecting id="26930" start_npc_ids="801545" end_npc_ids="804627"/>
 </quest_scripts>
