@@ -1959,6 +1959,7 @@
 		<portal_path dialog="10000" loc_id="2100500" race="ELYOS">
 			<portal_req min_level="50" kinah_req="9800">
 				<quest_req quest_id="10001" />
+				<quest_req quest_id="10031" quest_step="3" />
 			</portal_req>
 		</portal_path>
 	</portal_dialog>
@@ -1967,6 +1968,7 @@
 		<portal_path dialog="10000" loc_id="2200700" race="ASMODIANS">
 			<portal_req min_level="50" kinah_req="9800">
 				<quest_req quest_id="20001" />
+				<quest_req quest_id="20031" quest_step="3" />
 			</portal_req>
 		</portal_path>
 	</portal_dialog>
@@ -1975,6 +1977,7 @@
 		<portal_path dialog="10000" loc_id="2100500" race="ELYOS">
 			<portal_req min_level="50" kinah_req="9300">
 				<quest_req quest_id="10001" />
+				<quest_req quest_id="10031" quest_step="3" />
 			</portal_req>
 		</portal_path>
 	</portal_dialog>
@@ -1983,6 +1986,7 @@
 		<portal_path dialog="10000" loc_id="2200700" race="ASMODIANS">
 			<portal_req min_level="50" kinah_req="9300">
 				<quest_req quest_id="20001" />
+				<quest_req quest_id="20031" quest_step="3" />
 			</portal_req>
 		</portal_path>
 	</portal_dialog>
