@@ -5,6 +5,7 @@ import java.util.Queue;
 
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.team.legion.LegionWarehouse;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.item.ItemPacketService.ItemAddType;
 import com.aionemu.gameserver.services.item.ItemPacketService.ItemDeleteType;
@@ -18,7 +19,7 @@ public class LegionStorageProxy extends Storage {
 	private final Player actor;
 	private final Storage storage;
 
-	public LegionStorageProxy(Storage storage, Player actor) {
+	public LegionStorageProxy(LegionWarehouse storage, Player actor) {
 		super(storage.getStorageType(), false);
 		this.actor = actor;
 		this.storage = storage;

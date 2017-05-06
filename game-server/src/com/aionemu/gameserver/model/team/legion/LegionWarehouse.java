@@ -2,6 +2,7 @@ package com.aionemu.gameserver.model.team.legion;
 
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.items.storage.LegionStorageProxy;
 import com.aionemu.gameserver.model.items.storage.Storage;
 import com.aionemu.gameserver.model.items.storage.StorageType;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -33,14 +34,12 @@ public class LegionWarehouse extends Storage {
 	}
 
 	/**
-	 * Used to add kinah due successful sieges. StorageProxy should be normally used to act with.
+	 * Used to add kinah from successful sieges. StorageProxy should be normally used to act with.
 	 */
 	@Override
 	public void increaseKinah(long amount) {
-		if (currentWhUser != 0)
-			World.getInstance().findPlayer(currentWhUser).getStorage(StorageType.LEGION_WAREHOUSE.getId()).increaseKinah(amount);
-		else
-			getKinahItem().increaseItemCount(amount);
+		Player player = currentWhUser == 0 ? null : World.getInstance().findPlayer(currentWhUser);
+		new LegionStorageProxy(this, player).increaseKinah(amount);
 	}
 
 	@Override

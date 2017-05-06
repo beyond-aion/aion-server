@@ -118,7 +118,8 @@ public abstract class Storage implements IStorage {
 	 */
 	long increaseItemCount(Item item, long count, ItemUpdateType updateType, Player actor) {
 		long leftCount = item.increaseItemCount(count);
-		ItemPacketService.sendItemPacket(actor, storageType, item, updateType);
+		if (actor != null)
+			ItemPacketService.sendItemPacket(actor, storageType, item, updateType);
 		setPersistentState(PersistentState.UPDATE_REQUIRED);
 		return leftCount;
 	}
@@ -182,9 +183,11 @@ public abstract class Storage implements IStorage {
 		}
 		item.setItemLocation(storageType.getId());
 		setPersistentState(PersistentState.UPDATE_REQUIRED);
-		ItemPacketService.sendStorageUpdatePacket(actor, storageType, item, addType);
-		if (storageType == StorageType.CUBE)
-			QuestEngine.getInstance().onItemGet(actor, item.getItemId());
+		if (actor != null) {
+			ItemPacketService.sendStorageUpdatePacket(actor, storageType, item, addType);
+			if (storageType == StorageType.CUBE)
+				QuestEngine.getInstance().onItemGet(actor, item.getItemId());
+		}
 		return item;
 	}
 
