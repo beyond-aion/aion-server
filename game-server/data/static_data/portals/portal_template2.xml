@@ -2055,7 +2055,7 @@
 	</portal_dialog>
 	<!-- Cygnea to Abyss -->
 	<portal_dialog npc_id="805260">
-		<portal_path dialog="104" loc_id="4000117" race="ELYOS">
+		<portal_path dialog="104" loc_id="4000100" race="ELYOS">
 			<portal_req min_level="55" kinah_req="36000">
 				<quest_req quest_id="1044" err_quest="27" />
 			</portal_req>
@@ -2100,9 +2100,9 @@
 	</portal_dialog>
 	<!-- Enshar to Abyss -->
 	<portal_dialog npc_id="805259">
-		<portal_path dialog="104" loc_id="4000118" race="ASMODIANS">
+		<portal_path dialog="104" loc_id="4000101" race="ASMODIANS">
 			<portal_req min_level="55" kinah_req="36000">
-				<quest_req quest_id="1044" err_quest="27" />
+				<quest_req quest_id="2042" err_quest="27" />
 			</portal_req>
 		</portal_path>
 	</portal_dialog>
