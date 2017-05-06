@@ -772,7 +772,7 @@ public class PlayerController extends CreatureController<Player> {
 					return;
 			}
 
-		if (!player.havePermission(MembershipConfig.DISABLE_SOULSICKNESS)) {
+		if (!player.hasPermission(MembershipConfig.DISABLE_SOULSICKNESS)) {
 			int deathCount = player.getCommonData().getDeathCount();
 			if (deathCount < 10) {
 				deathCount++;

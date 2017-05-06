@@ -88,9 +88,6 @@ public class SecurityConfig {
 	@Property(key = "gameserver.security.survey.delay.minute", defaultValue = "20")
 	public static int SURVEY_DELAY;
 
-	@Property(key = "gameserver.security.instance.keycheck", defaultValue = "false")
-	public static boolean INSTANCE_KEYCHECK;
-
 	@Property(key = "gameserver.security.check.dualboxing", defaultValue = "false")
 	public static boolean DUALBOXING;
 

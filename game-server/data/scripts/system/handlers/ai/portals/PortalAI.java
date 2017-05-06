@@ -6,7 +6,6 @@ import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.portal.PortalPath;
-import com.aionemu.gameserver.model.templates.portal.PortalUse;
 import com.aionemu.gameserver.model.templates.teleport.TeleportLocation;
 import com.aionemu.gameserver.model.templates.teleport.TeleporterTemplate;
 import com.aionemu.gameserver.questEngine.QuestEngine;
@@ -23,7 +22,6 @@ import ai.ActionItemNpcAI;
 public class PortalAI extends ActionItemNpcAI {
 
 	protected TeleporterTemplate teleportTemplate;
-	protected PortalUse portalUse;
 
 	@Override
 	public boolean onDialogSelect(Player player, int dialogActionId, int questId, int extendedRewardIndex) {
@@ -34,7 +32,6 @@ public class PortalAI extends ActionItemNpcAI {
 	protected void handleSpawned() {
 		super.handleSpawned();
 		teleportTemplate = DataManager.TELEPORTER_DATA.getTeleporterTemplateByNpcId(getNpcId());
-		portalUse = DataManager.PORTAL2_DATA.getPortalUse(getNpcId());
 	}
 
 	@Override
@@ -45,11 +42,9 @@ public class PortalAI extends ActionItemNpcAI {
 
 	@Override
 	protected void handleUseItemFinish(Player player) {
-		if (portalUse != null) {
-			PortalPath portalPath = portalUse.getPortalPath(player.getRace());
-			if (portalPath != null) {
-				PortalService.port(portalPath, player, getObjectId());
-			}
+		PortalPath portalPath = DataManager.PORTAL2_DATA.getPortalUsePath(getNpcId(), player);
+		if (portalPath != null) {
+			PortalService.port(portalPath, player, getOwner());
 		} else if (teleportTemplate != null) {
 			TeleportLocation loc = teleportTemplate.getTeleLocIdData().getTelelocations().get(0);
 			if (loc != null) {

@@ -23,12 +23,12 @@ public class SealedDanuarMysticariumPortals extends PortalDialogAI {
 	@Override
 	public boolean onDialogSelect(Player player, int dialogActionId, int questId, int extendedRewardIndex) {
 		if (getNpcId() == 730721 || getNpcId() == 730722) {
-			PortalPath portalPath = DataManager.PORTAL2_DATA.getPortalDialog(getNpcId(), dialogActionId, player.getRace());
+			PortalPath portalPath = DataManager.PORTAL2_DATA.getPortalDialogPath(getNpcId(), dialogActionId, player);
 			WorldMapInstance instance = InstanceService.getRegisteredInstance(300480000, player.getObjectId());
 			if (instance == null) {
 				if (!player.getPortalCooldownList().isPortalUseDisabled(300480000)) {
 					if (player.getInventory().decreaseByItemId(185000223, 1)) {
-						PortalService.port(portalPath, player, getObjectId());
+						PortalService.port(portalPath, player, getOwner());
 						return true;
 					} else {
 						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_INSTANCE_CANT_ENTER_WITHOUT_ITEM());
@@ -41,7 +41,7 @@ public class SealedDanuarMysticariumPortals extends PortalDialogAI {
 					return true;
 				}
 			} else {
-				PortalService.port(portalPath, player, getObjectId());
+				PortalService.port(portalPath, player, getOwner());
 				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 0));
 				return true;
 			}

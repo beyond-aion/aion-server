@@ -387,7 +387,7 @@ public class InstanceService {
 	}
 
 	public static int getInstanceRate(Player player, int mapId) {
-		int instanceCooldownRate = player.havePermission(MembershipConfig.INSTANCES_COOLDOWN) && !instanceCoolDownFilter.contains(mapId) ? CustomConfig.INSTANCES_RATE
+		int instanceCooldownRate = player.hasPermission(MembershipConfig.INSTANCES_COOLDOWN) && !instanceCoolDownFilter.contains(mapId) ? CustomConfig.INSTANCES_RATE
 			: 1;
 		if (instanceCoolDownFilter.contains(mapId)) {
 			instanceCooldownRate = 1;

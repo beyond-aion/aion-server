@@ -26,23 +26,24 @@ import gnu.trove.map.hash.TIntObjectHashMap;
 public class TeleporterData {
 
 	@XmlElement(name = "teleporter_template")
-	private List<TeleporterTemplate> tlist;
+	private List<TeleporterTemplate> templates;
 
 	/** A map containing all trade list templates */
-	private TIntObjectHashMap<TeleporterTemplate> npctlistData = new TIntObjectHashMap<>();
+	private TIntObjectHashMap<TeleporterTemplate> teleporterTemplates = new TIntObjectHashMap<>();
 
-	void afterUnmarshal(Unmarshaller u, Object parent) {
-		for (TeleporterTemplate template : tlist) {
-			npctlistData.put(template.getTeleportId(), template);
+	protected void afterUnmarshal(Unmarshaller u, Object parent) {
+		for (TeleporterTemplate template : templates) {
+			teleporterTemplates.put(template.getTeleportId(), template);
 		}
+		templates = null;
 	}
 
 	public int size() {
-		return npctlistData.size();
+		return teleporterTemplates.size();
 	}
 
 	public TeleporterTemplate getTeleporterTemplateByNpcId(int npcId) {
-		for (TeleporterTemplate template : npctlistData.valueCollection()) {
+		for (TeleporterTemplate template : teleporterTemplates.valueCollection()) {
 			if (template.containNpc(npcId)) {
 				return template;
 			}
@@ -51,6 +52,6 @@ public class TeleporterData {
 	}
 
 	public TeleporterTemplate getTeleporterTemplateByTeleportId(int teleportId) {
-		return npctlistData.get(teleportId);
+		return teleporterTemplates.get(teleportId);
 	}
 }

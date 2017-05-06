@@ -97,7 +97,7 @@ public class FriendList implements Iterable<Friend> {
 	}
 
 	public boolean isFull() {
-		int MAX_FRIENDS = player.havePermission(MembershipConfig.ADVANCED_FRIENDLIST_ENABLE) ? MembershipConfig.ADVANCED_FRIENDLIST_SIZE
+		int MAX_FRIENDS = player.hasPermission(MembershipConfig.ADVANCED_FRIENDLIST_ENABLE) ? MembershipConfig.ADVANCED_FRIENDLIST_SIZE
 			: CustomConfig.FRIENDLIST_SIZE;
 		return getSize() >= MAX_FRIENDS;
 	}

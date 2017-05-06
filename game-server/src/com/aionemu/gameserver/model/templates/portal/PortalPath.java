@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.model.templates.portal;
 
+import java.util.List;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -15,28 +17,36 @@ import com.aionemu.gameserver.model.Race;
 @XmlType(name = "PortalPath")
 public class PortalPath {
 
-	@XmlElement(name = "portal_req")
-	protected PortalReq portalReq;
 	@XmlAttribute(name = "dialog")
-	protected int dialog;
+	private int dialog;
 	@XmlAttribute(name = "loc_id")
-	protected int locId;
+	private int locId;
 	@XmlAttribute(name = "player_count")
-	protected int playerCount = 1;
+	private int playerCount = 1;
 	@XmlAttribute(name = "instance")
-	protected boolean instance;
+	private boolean instance;
 	@XmlAttribute(name = "siege_id")
-	protected int siegeId;
+	private int siegeId;
 	@XmlAttribute(name = "race")
-	protected Race race = Race.PC_ALL;
-	@XmlAttribute(name = "err_group")
-	protected int errGroup;
+	private Race race = Race.PC_ALL;
+	@XmlAttribute(name = "min_level")
+	private int minLevel;
+	@XmlAttribute(name = "max_level")
+	private int maxLevel;
 	@XmlAttribute(name = "min_rank")
-	protected int minRank;
-
-	public PortalReq getPortalReq() {
-		return portalReq;
-	}
+	private int minRank;
+	@XmlAttribute(name = "kinah")
+	private int kinah;
+	@XmlAttribute(name = "title_id")
+	private int titleId;
+	@XmlAttribute(name = "err_group")
+	private int errGroup;
+	@XmlAttribute(name = "err_level")
+	private int errLevel;
+	@XmlElement(name = "quest_req")
+	private List<QuestReq> questReq;
+	@XmlElement(name = "item_req")
+	private List<ItemReq> itemReq;
 
 	public int getDialog() {
 		return dialog;
@@ -62,11 +72,40 @@ public class PortalPath {
 		return race;
 	}
 
-	public int getErrGroup() {
-		return errGroup;
+	public int getMinLevel() {
+		return minLevel;
+	}
+
+	public int getMaxLevel() {
+		return maxLevel;
 	}
 
 	public int getMinRank() {
 		return minRank;
 	}
+
+	public int getKinah() {
+		return kinah;
+	}
+
+	public int getTitleId() {
+		return titleId;
+	}
+
+	public int getErrGroup() {
+		return errGroup;
+	}
+
+	public int getErrLevel() {
+		return errLevel;
+	}
+
+	public List<QuestReq> getQuestReq() {
+		return questReq;
+	}
+
+	public List<ItemReq> getItemReq() {
+		return itemReq;
+	}
+
 }

@@ -97,7 +97,7 @@ public class StigmaService {
 	 * @param player
 	 */
 	public static void onPlayerLogin(Player player) {
-		if (player.havePermission(MembershipConfig.STIGMA_AUTOLEARN)) {
+		if (player.hasPermission(MembershipConfig.STIGMA_AUTOLEARN)) {
 			for (int level = 20; level <= player.getLevel(); level++) {
 				for (SkillLearnTemplate template : DataManager.SKILL_TREE_DATA.getTemplatesFor(player.getPlayerClass(), level, player.getRace())) {
 					if (template.isStigma())
@@ -281,7 +281,7 @@ public class StigmaService {
 	 * @return
 	 */
 	private static int getPossibleStigmaCount(Player player) {
-		if (player.havePermission(MembershipConfig.STIGMA_SLOT_QUEST))
+		if (player.hasPermission(MembershipConfig.STIGMA_SLOT_QUEST))
 			return 3;
 		int playerLevel = player.getLevel();
 		boolean isCompleteQuest = isCompleteQuest(player);
@@ -323,7 +323,7 @@ public class StigmaService {
 	 * @return
 	 */
 	private static int getPossibleAdvancedStigmaCount(Player player) {
-		if (player.havePermission(MembershipConfig.STIGMA_SLOT_QUEST))
+		if (player.hasPermission(MembershipConfig.STIGMA_SLOT_QUEST))
 			return 3;
 		int playerLevel = player.getLevel();
 		boolean isCompleteQuest = isCompleteQuest(player);

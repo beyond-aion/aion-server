@@ -6,7 +6,6 @@ import java.util.List;
 
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.model.DialogPage;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.autogroup.AutoGroupType;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -79,13 +78,9 @@ public class PortalDialogAI extends PortalAI {
 				}
 		}
 		if (questId == 0) {
-			PortalPath portalPath = DataManager.PORTAL2_DATA.getPortalDialog(getNpcId(), dialogActionId, player.getRace());
-			if (portalPath != null) {
-				if (portalPath.getMinRank() > player.getAbyssRank().getRank().getId()) {
-					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), DialogPage.NO_RIGHT.id(), questId));
-				} else
-					PortalService.port(portalPath, player, getObjectId());
-			}
+			PortalPath portalPath = DataManager.PORTAL2_DATA.getPortalDialogPath(getNpcId(), dialogActionId, player);
+			if (portalPath != null)
+				PortalService.port(portalPath, player, getOwner());
 			return true;
 		}
 		return false;

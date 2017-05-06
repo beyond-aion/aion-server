@@ -12,36 +12,22 @@ import javax.xml.bind.annotation.XmlType;
  * @author xTz
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "PortalDialog", propOrder = { "portalPath" })
+@XmlType(name = "PortalDialog")
 public class PortalDialog {
 
 	@XmlElement(name = "portal_path")
-	protected List<PortalPath> portalPath;
+	private List<PortalPath> portalPaths;
 	@XmlAttribute(name = "npc_id")
-	protected int npcId;
-	@XmlAttribute(name = "siege_id")
-	protected int siegeId;
+	private int npcId;
 	@XmlAttribute(name = "teleport_dialog_id")
-	protected int teleportDialogId = 1011;
+	private int teleportDialogId = 1011;
 
-	public List<PortalPath> getPortalPath() {
-		return portalPath;
+	public List<PortalPath> getPortalPaths() {
+		return portalPaths;
 	}
 
 	public int getNpcId() {
 		return npcId;
-	}
-
-	public void setNpcId(int value) {
-		this.npcId = value;
-	}
-
-	public int getSiegeId() {
-		return siegeId;
-	}
-
-	public void setSiegeId(int value) {
-		this.siegeId = value;
 	}
 
 	public int getTeleportDialogId() {

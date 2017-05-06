@@ -1460,7 +1460,7 @@ public class Player extends Creature {
 		return getEffectController().isAbnormalSet(AbnormalState.NOFLY);
 	}
 
-	public boolean havePermission(byte perm) {
+	public boolean hasPermission(byte perm) {
 		return playerAccount.getMembership() >= perm;
 	}
 

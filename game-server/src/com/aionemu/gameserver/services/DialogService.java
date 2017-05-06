@@ -350,15 +350,17 @@ public class DialogService {
 					if (QuestEngine.getInstance().onDialog(env)) { // remove this shit after assigning AI portal_dialog
 						return;
 					}
-					TeleporterTemplate template = DataManager.TELEPORTER_DATA.getTeleporterTemplateByNpcId(npc.getNpcId());
-					PortalPath portalPath = DataManager.PORTAL2_DATA.getPortalDialog(npc.getNpcId(), dialogActionId, player.getRace());
+					PortalPath portalPath = DataManager.PORTAL2_DATA.getPortalDialogPath(npc.getNpcId(), dialogActionId, player);
 					if (portalPath != null) {
-						PortalService.port(portalPath, player, targetObjectId);
-					} else if (template != null) {
-						TeleportLocation loc = template.getTeleLocIdData().getTelelocations().get(0);
-						if (loc != null)
-							TeleportService.teleport(template, loc.getLocId(), player, npc,
-								npc.getAi().getName().equals("general") ? TeleportAnimation.JUMP_IN : TeleportAnimation.FADE_OUT_BEAM);
+						PortalService.port(portalPath, player, npc);
+					} else {
+						TeleporterTemplate template = DataManager.TELEPORTER_DATA.getTeleporterTemplateByNpcId(npc.getNpcId());
+						if (template != null) {
+							TeleportLocation loc = template.getTeleLocIdData().getTelelocations().get(0);
+							if (loc != null)
+								TeleportService.teleport(template, loc.getLocId(), player, npc,
+									npc.getAi().getName().equals("general") ? TeleportAnimation.JUMP_IN : TeleportAnimation.FADE_OUT_BEAM);
+						}
 					}
 					break;
 				default:

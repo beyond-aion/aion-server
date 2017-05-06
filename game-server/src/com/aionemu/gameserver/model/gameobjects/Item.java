@@ -585,7 +585,7 @@ public class Item extends AionObject implements IExpirable, StatOwner {
 	}
 
 	private boolean isSoulBound(Player player) {
-		if (player.havePermission(MembershipConfig.DISABLE_SOULBIND)) {
+		if (player.hasPermission(MembershipConfig.DISABLE_SOULBIND)) {
 			return false;
 		} else
 			return isSoulBound;
@@ -663,19 +663,19 @@ public class Item extends AionObject implements IExpirable, StatOwner {
 	 */
 	private int checkConfig(Player player, int mask) {
 		int newMask = mask;
-		if (player.havePermission(MembershipConfig.STORE_WH_ALL)) {
+		if (player.hasPermission(MembershipConfig.STORE_WH_ALL)) {
 			newMask = newMask | ItemMask.STORABLE_IN_WH;
 		}
-		if (player.havePermission(MembershipConfig.STORE_AWH_ALL)) {
+		if (player.hasPermission(MembershipConfig.STORE_AWH_ALL)) {
 			newMask = newMask | ItemMask.STORABLE_IN_AWH;
 		}
-		if (player.havePermission(MembershipConfig.STORE_LWH_ALL)) {
+		if (player.hasPermission(MembershipConfig.STORE_LWH_ALL)) {
 			newMask = newMask | ItemMask.STORABLE_IN_LWH;
 		}
-		if (player.havePermission(MembershipConfig.TRADE_ALL)) {
+		if (player.hasPermission(MembershipConfig.TRADE_ALL)) {
 			newMask = newMask | ItemMask.TRADEABLE;
 		}
-		if (player.havePermission(MembershipConfig.REMODEL_ALL)) {
+		if (player.hasPermission(MembershipConfig.REMODEL_ALL)) {
 			newMask = newMask | ItemMask.REMODELABLE;
 		}
 

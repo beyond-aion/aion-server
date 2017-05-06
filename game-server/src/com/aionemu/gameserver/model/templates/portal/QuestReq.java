@@ -16,8 +16,6 @@ public class QuestReq {
 	protected int questId;
 	@XmlAttribute(name = "quest_step")
 	protected int questStep;
-	@XmlAttribute(name = "err_quest")
-	protected int errQuest;
 
 	public int getQuestId() {
 		return questId;
@@ -33,10 +31,6 @@ public class QuestReq {
 
 	public void setQuestStep(int value) {
 		this.questStep = value;
-	}
-
-	public int getErrQuest() {
-		return errQuest;
 	}
 
 }

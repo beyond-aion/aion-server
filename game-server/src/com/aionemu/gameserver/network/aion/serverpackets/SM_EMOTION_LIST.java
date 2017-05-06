@@ -23,7 +23,7 @@ public class SM_EMOTION_LIST extends AionServerPacket {
 	@Override
 	protected void writeImpl(AionConnection con) {
 		writeC(action);
-		if (con.getActivePlayer().havePermission(MembershipConfig.EMOTIONS_ALL)) {
+		if (con.getActivePlayer().hasPermission(MembershipConfig.EMOTIONS_ALL)) {
 			writeH(86);
 			for (int i = 0; i < 86; i++) {
 				writeD(64 + i);

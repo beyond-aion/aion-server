@@ -13,10 +13,12 @@ import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
 import com.aionemu.gameserver.model.Race;
+import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.portal.PortalDialog;
 import com.aionemu.gameserver.model.templates.portal.PortalPath;
 import com.aionemu.gameserver.model.templates.portal.PortalScroll;
 import com.aionemu.gameserver.model.templates.portal.PortalUse;
+import com.aionemu.gameserver.services.teleport.PortalService;
 
 import gnu.trove.map.hash.TIntObjectHashMap;
 
@@ -42,21 +44,24 @@ public class Portal2Data {
 	@XmlTransient
 	private Map<String, PortalScroll> portalScrolls = new HashMap<>();
 
-	void afterUnmarshal(Unmarshaller unmarshaller, Object parent) {
+	protected void afterUnmarshal(Unmarshaller unmarshaller, Object parent) {
 		if (portalUse != null) {
 			for (PortalUse portal : portalUse) {
 				portalUses.put(portal.getNpcId(), portal);
 			}
+			portalUse = null;
 		}
 		if (portalDialog != null) {
 			for (PortalDialog portal : portalDialog) {
 				portalDialogs.put(portal.getNpcId(), portal);
 			}
+			portalDialog = null;
 		}
 		if (portalScroll != null) {
 			for (PortalScroll portal : portalScroll) {
 				portalScrolls.put(portal.getName(), portal);
 			}
+			portalScroll = null;
 		}
 	}
 
@@ -64,24 +69,50 @@ public class Portal2Data {
 		return portalScrolls.size() + portalDialogs.size() + portalUses.size();
 	}
 
-	public PortalPath getPortalDialog(int npcId, int dialogActionId, Race race) {
+	/**
+	 * Tries to find the portal for the players race, but can return the path of the opposite race if there is no matching one.<br>
+	 * With this you're able to send an invalid race error to the player (see {@link PortalService#port(PortalPath, Player, int)}).
+	 * 
+	 * @return PortalPath for the specified dialog action ID.
+	 */
+	public PortalPath getPortalDialogPath(int npcId, int dialogActionId, Player player) {
 		PortalDialog portal = portalDialogs.get(npcId);
 		if (portal != null) {
-			for (PortalPath path : portal.getPortalPath()) {
-				if (path.getDialog() == dialogActionId && (race.equals(path.getRace()) || path.getRace().equals(Race.PC_ALL))) {
-					return path;
+			PortalPath matchingPortalPath = null;
+			for (PortalPath path : portal.getPortalPaths()) {
+				if (path.getDialog() == dialogActionId) {
+					if (path.getRace() == player.getRace() || path.getRace() == Race.PC_ALL)
+						return path;
+					matchingPortalPath = path;
 				}
 			}
+			return matchingPortalPath; // return any matched path to send invalid race error afterwards
+		}
+		return null;
+	}
+
+	/**
+	 * Tries to find the portal for the players race, but can return the path of the opposite race if there is no matching one.<br>
+	 * With this you're able to send an invalid race error to the player (see {@link PortalService#port(PortalPath, Player, int)}).
+	 * 
+	 * @return PortalPath for the specified dialog action ID.
+	 */
+	public PortalPath getPortalUsePath(int npcId, Player player) {
+		PortalUse portal = portalUses.get(npcId);
+		if (portal != null) {
+			PortalPath matchingPortalPath = null;
+			for (PortalPath path : portal.getPortalPaths()) {
+				if (player.getRace() == path.getRace() || path.getRace() == Race.PC_ALL)
+					return path;
+				matchingPortalPath = path;
+			}
+			return matchingPortalPath; // return any matched path to send invalid race error afterwards
 		}
 		return null;
 	}
 
 	public boolean isPortalNpc(int npcId) {
 		return portalUses.get(npcId) != null || portalDialogs.get(npcId) != null;
-	}
-
-	public PortalUse getPortalUse(int npcId) {
-		return portalUses.get(npcId);
 	}
 
 	public PortalScroll getPortalScroll(String name) {

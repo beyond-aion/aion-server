@@ -11,7 +11,6 @@ import com.aionemu.gameserver.model.autogroup.AutoGroupType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.portal.PortalPath;
-import com.aionemu.gameserver.model.templates.portal.PortalUse;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_FIND_GROUP;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUESTION_WINDOW;
@@ -96,13 +95,10 @@ public class BeshmundirsWalkAI extends ActionItemNpcAI {
 		return false;
 	}
 
-	private void moveToInstance(Player player, byte dificult) {
-		PortalUse portalUse = DataManager.PORTAL2_DATA.getPortalUse(getNpcId());
-		if (portalUse != null) {
-			PortalPath portalPath = portalUse.getPortalPath(player.getRace());
-			if (portalPath != null) {
-				PortalService.port(portalPath, player, getObjectId(), dificult);
-			}
+	private void moveToInstance(Player player, byte difficult) {
+		PortalPath portalPath = DataManager.PORTAL2_DATA.getPortalUsePath(getNpcId(), player);
+		if (portalPath != null) {
+			PortalService.port(portalPath, player, getOwner(), difficult);
 		}
 	}
 

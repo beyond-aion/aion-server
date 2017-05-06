@@ -56,7 +56,7 @@ public class EmotionList {
 	}
 
 	public boolean canUse(int emotionId) {
-		return emotionId < 64 || (emotions != null && emotions.containsKey(emotionId)) || owner.havePermission(MembershipConfig.EMOTIONS_ALL);
+		return emotionId < 64 || (emotions != null && emotions.containsKey(emotionId)) || owner.hasPermission(MembershipConfig.EMOTIONS_ALL);
 	}
 
 	public Collection<Emotion> getEmotions() {

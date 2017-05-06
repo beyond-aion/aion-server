@@ -25,7 +25,7 @@ public abstract class PlayerCommand extends ChatCommand {
 
 	@Override
 	public boolean validateAccess(Player player) {
-		return player.havePermission(getLevel()) || CommandsAccessService.getInstance().hasAccess(player.getObjectId(), getAlias());
+		return player.hasPermission(getLevel()) || CommandsAccessService.getInstance().hasAccess(player.getObjectId(), getAlias());
 	}
 
 	@Override

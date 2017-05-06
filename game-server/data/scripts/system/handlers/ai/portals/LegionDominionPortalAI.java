@@ -45,7 +45,7 @@ public class LegionDominionPortalAI extends PortalDialogAI {
 		}
 
 		if (player.isInAlliance() && !player.isInLeague()) {
-			PortalPath portalPath = DataManager.PORTAL2_DATA.getPortalDialog(getNpcId(), dialogActionId, player.getRace());
+			PortalPath portalPath = DataManager.PORTAL2_DATA.getPortalDialogPath(getNpcId(), dialogActionId, player);
 			WorldMapInstance instance = InstanceService.getRegisteredInstance(301500000, player.getPlayerAlliance().getObjectId());
 			if (portalPath == null) {
 				PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1401106));
@@ -59,7 +59,7 @@ public class LegionDominionPortalAI extends PortalDialogAI {
 				// only alliance leader can open this instance
 				if (player.getPlayerAlliance().isSomeCaptain(player)) {
 					if (player.getInventory().decreaseByItemId(185000230, 1)) {
-						PortalService.port(portalPath, player, getObjectId());
+						PortalService.port(portalPath, player, getOwner());
 						return true;
 					} else {
 						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_INSTANCE_CANT_ENTER_WITHOUT_ITEM());
@@ -78,7 +78,7 @@ public class LegionDominionPortalAI extends PortalDialogAI {
 				InstanceHandler handler = instance.getInstanceHandler();
 
 				if (handler != null && handler.canEnter(player)) {
-					PortalService.port(portalPath, player, getObjectId());
+					PortalService.port(portalPath, player, getOwner());
 				} else {
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 0, questId));
 					return true;
@@ -87,7 +87,7 @@ public class LegionDominionPortalAI extends PortalDialogAI {
 				InstanceHandler handler = instance.getInstanceHandler();
 
 				if (handler != null && handler.canEnter(player)) {
-					PortalService.port(portalPath, player, getObjectId());
+					PortalService.port(portalPath, player, getOwner());
 				} else {
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 0, questId));
 					return true;

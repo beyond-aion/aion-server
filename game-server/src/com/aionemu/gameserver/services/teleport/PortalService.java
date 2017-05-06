@@ -7,10 +7,11 @@ import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.configs.administration.AdminConfig;
 import com.aionemu.gameserver.configs.main.MembershipConfig;
-import com.aionemu.gameserver.configs.main.SecurityConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
+import com.aionemu.gameserver.model.DialogPage;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.items.storage.Storage;
 import com.aionemu.gameserver.model.siege.FortressLocation;
@@ -21,7 +22,6 @@ import com.aionemu.gameserver.model.templates.InstanceCooltime;
 import com.aionemu.gameserver.model.templates.portal.ItemReq;
 import com.aionemu.gameserver.model.templates.portal.PortalLoc;
 import com.aionemu.gameserver.model.templates.portal.PortalPath;
-import com.aionemu.gameserver.model.templates.portal.PortalReq;
 import com.aionemu.gameserver.model.templates.portal.QuestReq;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
@@ -40,52 +40,41 @@ public class PortalService {
 
 	private static Logger log = LoggerFactory.getLogger(PortalService.class);
 
-	public static void port(final PortalPath portalPath, final Player player, int npcObjectId) {
-		port(portalPath, player, npcObjectId, (byte) 0);
+	public static void port(PortalPath portalPath, Player player, Npc npc) {
+		port(portalPath, player, npc, (byte) 0);
 	}
 
-	public static void port(final PortalPath portalPath, final Player player, int npcObjectId, byte difficult) {
-
+	public static void port(PortalPath portalPath, Player player, Npc npc, byte difficult) {
 		PortalLoc loc = DataManager.PORTAL_LOC_DATA.getPortalLoc(portalPath.getLocId());
 		if (loc == null) {
 			log.warn("No portal loc for locId " + portalPath.getLocId());
 			return;
 		}
 
-		boolean instanceTitleReq = false;
-		boolean instanceLevelReq = false;
-		boolean instanceRaceReq = false;
-		boolean instanceQuestReq = false;
-		boolean instanceGroupReq = false;
+		boolean instanceGroupReq = true;
 		int mapId = loc.getWorldId();
 		int playerSize = portalPath.getPlayerCount();
 		boolean isInstance = portalPath.isInstance();
 
 		if (!player.hasAccess(AdminConfig.INSTANCE_ENTER_ALL)) {
-			instanceTitleReq = !player.havePermission(MembershipConfig.INSTANCES_TITLE_REQ);
-			instanceLevelReq = !player.havePermission(MembershipConfig.INSTANCES_LEVEL_REQ);
-			instanceRaceReq = !player.havePermission(MembershipConfig.INSTANCES_RACE_REQ);
-			instanceQuestReq = !player.havePermission(MembershipConfig.INSTANCES_QUEST_REQ);
 			if (playerSize > 1)
-				instanceGroupReq = !player.havePermission(MembershipConfig.INSTANCES_GROUP_REQ);
-		}
+				instanceGroupReq = !player.hasPermission(MembershipConfig.INSTANCES_GROUP_REQ);
 
-		if (instanceRaceReq && !checkRace(player, portalPath.getRace())) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MOVE_PORTAL_ERROR_INVALID_RACE());
-			return;
-		}
-		if (instanceGroupReq && !checkPlayerSize(player, portalPath, npcObjectId)) {
-			return;
-		}
-		int siegeId = portalPath.getSiegeId();
-		if (instanceRaceReq && siegeId != 0) {
-			if (!checkSiegeId(player, siegeId)) {
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MOVE_PORTAL_ERROR_INVALID_RACE());
+			if (!checkMentor(player, mapId))
+				return;
+			if (!checkRace(player, npc, portalPath))
+				return;
+			if (!checkRank(player, npc, portalPath))
+				return;
+			if (!checkTitle(player, npc, portalPath))
+				return;
+			if (!checkQuests(player, npc, portalPath))
+				return;
+			if (instanceGroupReq && !checkPlayerSize(player, npc, portalPath)) {
 				return;
 			}
 		}
 
-		boolean reenter = false;
 		WorldMapInstance instance = null;
 		switch (playerSize) {
 			case 0:
@@ -111,39 +100,22 @@ public class PortalService {
 				break;
 		}
 
+		boolean reenter = false;
 		if (instance == null || !instance.isRegistered(player.getObjectId())) {
 			if (player.getPortalCooldownList().isPortalUseDisabled(mapId)) {
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANNOT_MAKE_INSTANCE_COOL_TIME());
 				return;
 			}
-		} else if (instance.isRegistered(player.getObjectId())
-			&& (player.getWorldId() != loc.getWorldId() || player.getInstanceId() != instance.getInstanceId())) {
+		} else if (player.getWorldId() != mapId || player.getInstanceId() != instance.getInstanceId()) {
 			reenter = true;
 		}
 
 		if (!reenter) {
-			PortalReq portalReq = portalPath.getPortalReq();
-			if (portalReq != null) {
-				if (instanceLevelReq && !checkEnterLevel(player, mapId, portalReq, npcObjectId)) {
-					return;
-				}
-				if (instanceQuestReq && !checkQuestsReq(player, npcObjectId, portalReq.getQuestReq())) {
-					return;
-				}
-				int titleId = portalReq.getTitleId();
-				if (instanceTitleReq && titleId != 0) {
-					if (!checkTitle(player, titleId)) {
-						PacketSendUtility.sendMessage(player, "You must have correct title.");
-						return;
-					}
-				}
-				if (!checkKinah(player, portalReq.getKinahReq())) {
-					return;
-				}
-				if (SecurityConfig.INSTANCE_KEYCHECK && !checkItemReq(player, portalReq.getItemReq())) {
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_INSTANCE_CANT_ENTER_WITHOUT_ITEM());
-					return;
-				}
+			if (!checkEnterLevel(player, npc, portalPath)) {
+				return;
+			}
+			if (!checkAndRemoveRequiredItems(player, npc, portalPath)) {
+				return;
 			}
 			if (mapId == player.getWorldId()) { // teleport within this instance
 				TeleportService.teleportTo(player, mapId, player.getInstanceId(), loc.getX(), loc.getY(), loc.getZ(), loc.getH());
@@ -284,19 +256,7 @@ public class PortalService {
 		}
 	}
 
-	private static boolean checkKinah(Player player, int kinah) {
-		Storage inventory = player.getInventory();
-		if (!inventory.tryDecreaseKinah(kinah)) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_NOT_ENOUGH_KINA(kinah));
-			return false;
-		}
-		return true;
-	}
-
-	private static boolean checkEnterLevel(Player player, int mapId, PortalReq portalReq, int npcObjectId) {
-		int enterMinLvl = portalReq.getMinLevel();
-		int enterMaxLvl = portalReq.getMaxLevel();
-		int lvl = player.getLevel();
+	private static boolean checkMentor(Player player, int mapId) {
 		InstanceCooltime instancecooltime = DataManager.INSTANCE_COOLTIME_DATA.getInstanceCooltimeByWorldId(mapId);
 		if (instancecooltime != null && player.isMentor()) {
 			if (!instancecooltime.getCanEnterMentor()) {
@@ -304,10 +264,18 @@ public class PortalService {
 				return false;
 			}
 		}
-		if (lvl > enterMaxLvl || lvl < enterMinLvl) {
-			int errDialog = portalReq.getErrLevel();
-			if (errDialog != 0) {
-				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(npcObjectId, errDialog));
+		return true;
+	}
+
+	private static boolean checkEnterLevel(Player player, Npc npc, PortalPath portalPath) {
+		if (player.hasPermission(MembershipConfig.INSTANCES_LEVEL_REQ))
+			return true;
+		int enterMinLvl = portalPath.getMinLevel();
+		int enterMaxLvl = portalPath.getMaxLevel();
+		int lvl = player.getLevel();
+		if (lvl < enterMinLvl || enterMaxLvl > 0 && lvl > enterMaxLvl) {
+			if (portalPath.getErrLevel() != 0) {
+				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(npc.getObjectId(), portalPath.getErrLevel()));
 			} else {
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANT_INSTANCE_ENTER_LEVEL());
 			}
@@ -316,34 +284,20 @@ public class PortalService {
 		return true;
 	}
 
-	private static boolean checkPlayerSize(Player player, PortalPath portalPath, int npcObjectId) {
-		int playerSize = portalPath.getPlayerCount();
-		if (playerSize == 6 || playerSize == 3) { // group
-			if (!player.isInGroup()) {
-				int errDialog = portalPath.getErrGroup();
-				if (errDialog != 0) {
-					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(npcObjectId, errDialog));
-				} else {
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_ENTER_ONLY_PARTY_DON());
-				}
-				return false;
+	private static boolean checkRace(Player player, Npc npc, PortalPath portalPath) {
+		if (player.hasPermission(MembershipConfig.INSTANCES_RACE_REQ))
+			return true;
+		int siegeId = portalPath.getSiegeId();
+		Race portalRace = portalPath.getRace();
+		if (portalRace != Race.PC_ALL && player.getRace() != portalRace || siegeId != 0 && !checkSiegeId(player, siegeId)) {
+			if (npc.getObjectTemplate().isDialogNpc()) {
+				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(npc.getObjectId(), DialogPage.NO_RIGHT.id()));
+			} else {
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MOVE_PORTAL_ERROR_INVALID_RACE());
 			}
-		} else if (playerSize > 6 && playerSize <= 24) { // alliance
-			if (!player.isInAlliance()) {
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_ENTER_ONLY_FORCE_DON());
-				return false;
-			}
-		} else if (playerSize > 24) { // league
-			if (!player.isInLeague()) {
-				PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1401251));
-				return false;
-			}
+			return false;
 		}
 		return true;
-	}
-
-	private static boolean checkRace(Player player, Race portalRace) {
-		return player.getRace().equals(portalRace) || portalRace.equals(Race.PC_ALL);
 	}
 
 	private static boolean checkSiegeId(Player player, int sigeId) {
@@ -356,45 +310,95 @@ public class PortalService {
 		return true;
 	}
 
-	private static boolean checkTitle(Player player, int titleId) {
-		return player.getCommonData().getTitleId() == titleId;
+	private static boolean checkRank(Player player, Npc npc, PortalPath portalPath) {
+		if (player.getAbyssRank().getRank().getId() < portalPath.getMinRank()) {
+			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(npc.getObjectId(), DialogPage.NO_RIGHT.id()));
+			return false;
+		}
+		return true;
 	}
 
-	private static boolean checkQuestsReq(Player player, int npcObjectId, List<QuestReq> questReq) {
+	private static boolean checkPlayerSize(Player player, Npc npc, PortalPath portalPath) {
+		int playerSize = portalPath.getPlayerCount();
+		if (playerSize == 6 || playerSize == 3) { // group
+			if (!player.isInGroup()) {
+				if (portalPath.getErrGroup() != 0) {
+					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(npc.getObjectId(), portalPath.getErrGroup()));
+				} else {
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_ENTER_ONLY_PARTY_DON());
+				}
+				return false;
+			}
+		} else if (playerSize > 6 && playerSize <= 24) { // alliance
+			if (!player.isInAlliance()) {
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_ENTER_ONLY_FORCE_DON());
+				return false;
+			}
+		} else if (playerSize > 24) { // league
+			if (!player.isInLeague()) {
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_ENTER_ONLY_UNION_DON());
+				return false;
+			}
+		}
+		return true;
+	}
+
+	private static boolean checkTitle(Player player, Npc npc, PortalPath portalPath) {
+		if (player.hasPermission(MembershipConfig.INSTANCES_TITLE_REQ))
+			return true;
+		int titleId = portalPath.getTitleId();
+		if (titleId != 0 && player.getCommonData().getTitleId() != titleId) {
+			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(npc.getObjectId(), DialogPage.NO_RIGHT.id()));
+			return false;
+		}
+		return true;
+	}
+
+	private static boolean checkQuests(Player player, Npc npc, PortalPath portalPath) {
+		if (player.hasPermission(MembershipConfig.INSTANCES_QUEST_REQ))
+			return true;
+		List<QuestReq> questReq = portalPath.getQuestReq();
 		if (questReq != null) {
-			int errDialog = 0;
 			for (QuestReq quest : questReq) {
 				int questId = quest.getQuestId();
 				int questStep = quest.getQuestStep();
 				final QuestState qs = player.getQuestStateList().getQuestState(questId);
 				if (qs != null && (qs.getStatus() == QuestStatus.COMPLETE || (questStep > 0 && qs.getQuestVarById(0) >= questStep))) {
 					return true; // one requirement matched
-				} else {
-					errDialog = quest.getErrQuest();
 				}
 			}
-			if (errDialog != 0) {
-				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(npcObjectId, errDialog));
-			} else {
-				PacketSendUtility.sendMessage(player, "You must complete the entrance quest.");
-			}
+			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(npc.getObjectId(), DialogPage.NO_RIGHT.id()));
 			return false;
 		}
 		return true;
 	}
 
-	private static boolean checkItemReq(Player player, List<ItemReq> itemReq) {
-		if (itemReq != null) {
-			Storage inventory = player.getInventory();
-			for (ItemReq item : itemReq) {
+	private static boolean checkAndRemoveRequiredItems(Player player, Npc npc, PortalPath portalPath) {
+		Storage inventory = player.getInventory();
+		if (inventory.getKinah() < portalPath.getKinah()) {
+			if (npc.getObjectTemplate().isDialogNpc()) {
+				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(npc.getObjectId(), DialogPage.NO_RIGHT.id()));
+			} else {
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_NOT_ENOUGH_KINA(portalPath.getKinah()));
+			}
+			return false;
+		}
+		if (portalPath.getItemReq() != null) {
+			for (ItemReq item : portalPath.getItemReq()) {
 				if (inventory.getItemCountByItemId(item.getItemId()) < item.getItemCount()) {
+					if (npc.getObjectTemplate().isDialogNpc())
+						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(npc.getObjectId(), DialogPage.NO_RIGHT.id()));
+					else
+						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_INSTANCE_CANT_ENTER_WITHOUT_ITEM());
 					return false;
 				}
 			}
-			for (ItemReq item : itemReq) {
+			for (ItemReq item : portalPath.getItemReq())
 				inventory.decreaseByItemId(item.getItemId(), item.getItemCount());
-			}
 		}
+		if (portalPath.getKinah() > 0)
+			inventory.decreaseKinah(portalPath.getKinah());
+
 		return true;
 	}
 

@@ -5,6 +5,7 @@ import java.util.List;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.PlayerClass;
+import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.team.TeamType;
 import com.aionemu.gameserver.model.team.group.PlayerGroup;
@@ -74,8 +75,8 @@ public class AutoGeneralInstance extends AutoInstance {
 	public void onPressEnter(Player player) {
 		super.onPressEnter(player);
 		int worldId = instance.getMapId();
-		PortalPath portal = DataManager.PORTAL2_DATA.getPortalDialog(worldId, DialogAction.SETPRO1, player.getRace());
-		if (portal == null) {
+		PortalPath portal = DataManager.PORTAL2_DATA.getPortalDialogPath(worldId, DialogAction.SETPRO1, player);
+		if (portal == null || portal.getRace() != player.getRace() && portal.getRace() != Race.PC_ALL) {
 			return;
 		}
 		PortalLoc loc = DataManager.PORTAL_LOC_DATA.getPortalLoc(portal.getLocId());

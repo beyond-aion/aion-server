@@ -452,7 +452,7 @@ public final class QuestService {
 		if (!checkStartConditions(player, id, warn))
 			return false;
 
-		if (!template.isNoCount() && !checkQuestListSize(qsl) && !player.havePermission(MembershipConfig.QUEST_LIMIT_DISABLED)) {
+		if (!template.isNoCount() && !checkQuestListSize(qsl) && !player.hasPermission(MembershipConfig.QUEST_LIMIT_DISABLED)) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_MAX_NORMAL());
 			return false;
 		}

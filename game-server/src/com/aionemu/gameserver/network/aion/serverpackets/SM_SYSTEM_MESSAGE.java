@@ -11989,13 +11989,6 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	}
 
 	/**
-	 * You must have %0 to do this.
-	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_QUEST_COMPLETE_ERROR_QUEST_ITEM_RETRY(DescriptionId descriptionId) {
-		return new SM_SYSTEM_MESSAGE(1401066, descriptionId);
-	}
-
-	/**
 	 * You must be a member of the %0 NPC Legion to receive this quest.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_QUEST_ACQUIRE_ERROR_NPC_GUILD(String value0) {
@@ -24998,6 +24991,20 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	}
 
 	/**
+	 * Quest declined.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_QUEST_ACQUIRE_ERROR_CANCLE() {
+		return new SM_SYSTEM_MESSAGE(1401065);
+	}
+
+	/**
+	 * You must have %0 to do this.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_QUEST_COMPLETE_ERROR_QUEST_ITEM_RETRY(DescriptionId descriptionId) {
+		return new SM_SYSTEM_MESSAGE(1401066, descriptionId);
+	}
+
+	/**
 	 * Poppy is running from the Dukaki Cooks. Eliminate them and help Poppy to reach the refuge.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_IDArena_Solo_SB1_START_BROADCAST() {
@@ -25266,6 +25273,13 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_CANNOT_USE_ALREADY_HAVE_REWARD_ITEM(int rewardNameId, int objectNameId) {
 		return new SM_SYSTEM_MESSAGE(1401396, new DescriptionId(rewardNameId), calculateNameId(objectNameId));
+	}
+
+	/**
+	 * This area is only accessible to Leagues.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_ENTER_ONLY_UNION_DON() {
+		return new SM_SYSTEM_MESSAGE(1401251);
 	}
 
 	/**
