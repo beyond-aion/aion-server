@@ -319,7 +319,7 @@
 		</spawn>
 		<!-- Beshmundir Temple Exit -->
 		<spawn npc_id="730285">
-			<spot x="1476.91" y="226.821" z="252.219" h="30" static_id="476"/>
+			<spot x="1476.91" y="226.821" z="243.52429" h="30" static_id="476"/>
 		</spawn>
 		<!-- Bhemah -->
 		<spawn npc_id="799505">
