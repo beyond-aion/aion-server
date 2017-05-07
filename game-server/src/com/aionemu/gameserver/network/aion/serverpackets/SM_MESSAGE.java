@@ -141,8 +141,11 @@ public class SM_MESSAGE extends AionServerPacket {
 
 	@Override
 	protected void writeImpl(AionConnection con) {
+		Player activePlayer = con.getActivePlayer();
+		if (activePlayer == null)
+			return;
 		writeC(chatType.getId());
-		writeC(con.getActivePlayer().isStaff() ? 0 : senderRace);
+		writeC(activePlayer.isStaff() ? 0 : senderRace);
 		writeD(senderObjectId);
 		writeS(senderName);
 		writeS(message);

@@ -59,7 +59,7 @@ public class BrokerService {
 		return SingletonHolder.instance;
 	}
 
-	public BrokerService() {
+	private BrokerService() {
 		initBrokerService();
 
 		saveManager = new BrokerPeriodicTaskManager(DELAY_BROKER_SAVE);

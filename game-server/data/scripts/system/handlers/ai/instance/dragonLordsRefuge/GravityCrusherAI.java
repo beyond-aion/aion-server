@@ -71,6 +71,8 @@ public class GravityCrusherAI extends AggressiveNpcAI {
 	@Override
 	public void handleMoveArrived() {
 		super.handleMoveArrived();
+		if (skillTask != null)
+			return;
 		skillTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
 
 			@Override
