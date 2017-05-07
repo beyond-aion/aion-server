@@ -641,19 +641,19 @@
 	<!-- TELEPORTER ELYOS ABYSS -->
 	<!-- Verteron To Abyss -->
 	<portal_use npc_id="730059">
-		<portal_path loc_id="4000103" race="ELYOS" min_level="25">
+		<portal_path loc_id="4000103" race="ELYOS">
 			<quest_req quest_id="1044" />
 		</portal_path>
 	</portal_use>
 	<!-- Eltnen To Abyss -->
 	<portal_use npc_id="730060">
-		<portal_path loc_id="4000104" race="ELYOS" min_level="25">
+		<portal_path loc_id="4000104" race="ELYOS">
 			<quest_req quest_id="1044" />
 		</portal_path>
 	</portal_use>
 	<!-- Heiron To Abyss -->
 	<portal_use npc_id="730061">
-		<portal_path loc_id="4000105" race="ELYOS" min_level="25">
+		<portal_path loc_id="4000105" race="ELYOS">
 			<quest_req quest_id="1044" />
 		</portal_path>
 	</portal_use>
@@ -668,19 +668,19 @@
 	<!-- TELEPORTER ASMODIANS ABYSS -->
 	<!-- Morheim To Abyss -->
 	<portal_use npc_id="730063">
-		<portal_path loc_id="4000106" race="ASMODIANS" min_level="25">
+		<portal_path loc_id="4000106" race="ASMODIANS">
 			<quest_req quest_id="2042" />
 		</portal_path>
 	</portal_use>
 	<!-- Beluslan To Abyss -->
 	<portal_use npc_id="730064">
-		<portal_path loc_id="4000107" race="ASMODIANS" min_level="25">
+		<portal_path loc_id="4000107" race="ASMODIANS">
 			<quest_req quest_id="2042" />
 		</portal_path>
 	</portal_use>
 	<!-- Altgard To Abyss -->
 	<portal_use npc_id="730062">
-		<portal_path loc_id="4000108" race="ASMODIANS" min_level="25">
+		<portal_path loc_id="4000108" race="ASMODIANS">
 			<quest_req quest_id="2042" />
 		</portal_path>
 	</portal_use>
@@ -1650,11 +1650,17 @@
 	</portal_dialog>
 	<!-- Kaisinel Academy to Inggison -->
 	<portal_dialog npc_id="730425">
-		<portal_path dialog="10000" loc_id="2100500" race="ELYOS" min_level="50" kinah="9300" />
+		<portal_path dialog="10000" loc_id="2100500" race="ELYOS" kinah="9300">
+			<quest_req quest_id="10001" />
+			<quest_req quest_id="10031" quest_step="3" />
+		</portal_path>
 	</portal_dialog>
 	<!-- Marchutan Priory to Gelkmaros -->
 	<portal_dialog npc_id="730428">
-		<portal_path dialog="10000" loc_id="2200700" race="ASMODIANS" min_level="50" kinah="9300" />
+		<portal_path dialog="10000" loc_id="2200700" race="ASMODIANS" kinah="9300">
+			<quest_req quest_id="20001" />
+			<quest_req quest_id="20031" quest_step="3" />
+		</portal_path>
 	</portal_dialog>
 	<!-- Cygnea -->
 	<portal_dialog npc_id="805170">
@@ -1695,7 +1701,7 @@
 	</portal_dialog>
 	<!-- Cygnea to Abyss -->
 	<portal_dialog npc_id="805260">
-		<portal_path dialog="104" loc_id="4000100" race="ELYOS" min_level="55" kinah="36000" err_level="27">
+		<portal_path dialog="104" loc_id="4000100" race="ELYOS" kinah="36000">
 			<quest_req quest_id="1044" />
 		</portal_path>
 	</portal_dialog>
