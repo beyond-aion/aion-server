@@ -510,9 +510,11 @@ public class GoTo extends AdminCommand {
 		/**
 		 * 3.5
 		 */
+		else if (destination.equalsIgnoreCase("Tiamat Stronghold") || destination.equalsIgnoreCase("Tiamats Festung")
+			|| destination.equalsIgnoreCase("TF"))
+			goTo(player, 300510000, 1581, 1068, 492);
 		else if (destination.equalsIgnoreCase("Dragon Lords Refuge") || destination.equalsIgnoreCase("Tiamats Unterschlupf"))
 			goTo(player, 300520000, 506, 516, 242);
-
 		else if (destination.equalsIgnoreCase("Throne of Blood") || destination.equalsIgnoreCase("Tiamat")
 						|| destination.equalsIgnoreCase("Blutthron") || destination.equalsIgnoreCase("tu"))
 			goTo(player, 300520000, 495, 528, 417);
