@@ -13,6 +13,7 @@ import java.util.concurrent.atomic.AtomicReference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.aionemu.commons.configs.CommonsConfig;
 import com.aionemu.commons.network.AConnection;
 import com.aionemu.commons.network.Dispatcher;
 import com.aionemu.commons.network.PacketProcessor;
@@ -237,16 +238,15 @@ public class AionConnection extends AConnection<AionServerPacket> {
 		synchronized (guard) {
 			if (sendMsgQueue.isEmpty())
 				return false;
-			long begin = System.nanoTime();
 			AionServerPacket packet = sendMsgQueue.removeFirst();
-			try {
-				sendPacketInfo(packet);
-				packet.write(this, data);
-				return true;
-			} finally {
-				RunnableStatsManager.handleStats(packet.getClass(), "runImpl()", System.nanoTime() - begin);
+			sendPacketInfo(packet);
+			long begin = System.nanoTime();
+			packet.write(this, data);
+			if (CommonsConfig.RUNNABLESTATS_ENABLE) {
+				long duration = System.nanoTime() - begin;
+				RunnableStatsManager.handleStats(packet.getClass(), "runImpl()", duration);
 			}
-
+			return true;
 		}
 	}
 

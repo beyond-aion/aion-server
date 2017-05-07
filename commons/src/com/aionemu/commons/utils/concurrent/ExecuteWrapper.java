@@ -22,22 +22,19 @@ public class ExecuteWrapper implements Executor {
 	}
 
 	public static void execute(Runnable runnable, long maximumRuntimeInMillisecWithoutWarning) {
-		long begin = System.nanoTime();
-
 		try {
+			long begin = System.nanoTime();
 			runnable.run();
-		} catch (Throwable t) {
-			log.error("Exception in a Runnable execution:", t);
-		} finally {
 			long runtimeInNanosec = System.nanoTime() - begin;
-			Class<? extends Runnable> clazz = runnable.getClass();
 
 			if (CommonsConfig.RUNNABLESTATS_ENABLE)
-				RunnableStatsManager.handleStats(clazz, runtimeInNanosec);
+				RunnableStatsManager.handleStats(runnable.getClass(), runtimeInNanosec);
 
 			long runtimeInMillisec = TimeUnit.NANOSECONDS.toMillis(runtimeInNanosec);
 			if (runtimeInMillisec > maximumRuntimeInMillisecWithoutWarning && ManagementFactory.getRuntimeMXBean().getUptime() > 60000)
-				log.warn(clazz + " - execution time: " + runtimeInMillisec + "ms");
+				log.warn(runnable.getClass().getSimpleName() + " - execution time: " + runtimeInMillisec + "ms");
+		} catch (Throwable t) {
+			log.error("Exception in a Runnable execution:", t);
 		}
 	}
 }

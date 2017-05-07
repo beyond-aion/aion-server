@@ -22,7 +22,6 @@ import org.slf4j.LoggerFactory;
 /**
  * @author NB4L1
  */
-@SuppressWarnings("unchecked")
 public final class RunnableStatsManager {
 
 	private static final Logger log = LoggerFactory.getLogger(RunnableStatsManager.class);
@@ -149,7 +148,7 @@ public final class RunnableStatsManager {
 		private final Comparator<MethodStat> comparator = new Comparator<MethodStat>() {
 
 			@Override
-			@SuppressWarnings("rawtypes")
+			@SuppressWarnings({ "rawtypes", "unchecked" })
 			public int compare(MethodStat o1, MethodStat o2) {
 				final Comparable c1 = getComparableValueOf(o1);
 				final Comparable c2 = getComparableValueOf(o2);

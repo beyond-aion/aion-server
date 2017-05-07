@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import com.aionemu.commons.configs.CommonsConfig;
 import com.aionemu.commons.utils.concurrent.RunnableStatsManager;
 
 /**
@@ -67,14 +68,15 @@ public abstract class AbstractIterativePeriodicTaskManager<T> extends AbstractPe
 		}
 
 		for (T task : activeTasks) {
-			final long begin = System.nanoTime();
-
 			try {
+				long begin = System.nanoTime();
 				callTask(task);
-			} catch (RuntimeException e) {
-				log.warn("", e);
-			} finally {
-				RunnableStatsManager.handleStats(task.getClass(), getCalledMethodName(), System.nanoTime() - begin);
+				if (CommonsConfig.RUNNABLESTATS_ENABLE) {
+					long duration = System.nanoTime() - begin;
+					RunnableStatsManager.handleStats(task.getClass(), getCalledMethodName(), duration);
+				}
+			} catch (Exception e) {
+				log.error("Exception in " + getClass().getSimpleName() + " processing " + task, e);
 			}
 		}
 	}

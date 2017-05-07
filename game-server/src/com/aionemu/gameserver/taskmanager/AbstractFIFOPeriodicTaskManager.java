@@ -1,7 +1,9 @@
 package com.aionemu.gameserver.taskmanager;
 
+import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
+import com.aionemu.commons.configs.CommonsConfig;
 import com.aionemu.commons.utils.concurrent.RunnableStatsManager;
 
 /**
@@ -10,7 +12,7 @@ import com.aionemu.commons.utils.concurrent.RunnableStatsManager;
  */
 public abstract class AbstractFIFOPeriodicTaskManager<T> extends AbstractPeriodicTaskManager {
 
-	private final ConcurrentLinkedQueue<T> tasks = new ConcurrentLinkedQueue<>();
+	private final Queue<T> tasks = new ConcurrentLinkedQueue<>();
 	private int counter = 0;
 
 	public AbstractFIFOPeriodicTaskManager(int period) {
@@ -29,20 +31,21 @@ public abstract class AbstractFIFOPeriodicTaskManager<T> extends AbstractPeriodi
 			if (task == null) // no tasks left
 				break;
 
-			final long begin = System.nanoTime();
-
 			try {
+				long begin = System.nanoTime();
 				callTask(task);
-			} catch (RuntimeException e) {
-				log.warn("Exception in " + getClass().getSimpleName(), e);
-			} finally {
-				RunnableStatsManager.handleStats(task.getClass(), getCalledMethodName(), System.nanoTime() - begin);
+				if (CommonsConfig.RUNNABLESTATS_ENABLE) {
+					long duration = System.nanoTime() - begin;
+					RunnableStatsManager.handleStats(task.getClass(), getCalledMethodName(), duration);
+				}
+			} catch (Exception e) {
+				log.error("Exception in " + getClass().getSimpleName() + " processing " + task, e);
 			}
 		}
 		if (tasks.size() <= processedTasks)
 			counter = 0;
 		else if (++counter == 5) // log error if the pending task queue size increased 5 times in a row
-			log.error("Tasks for " + getClass().getSimpleName() + " are added faster than they can be executed.");
+			log.warn("Tasks for " + getClass().getSimpleName() + " are added faster than they can be executed.");
 	}
 
 	protected abstract void callTask(T task);
