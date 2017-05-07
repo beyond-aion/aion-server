@@ -4025,7 +4025,8 @@
 	</npc_drop>
 	<npc_drop npc_id="702701">
 		<drop_group race="PC_ALL" name="Key">
-			<drop item_id="185000226" name="Hidden Prison Key" chance="20" />
+			<drop item_id="185000225" name="Shabby Prison Key" chance="20" />
+			<drop item_id="185000226" name="Hidden Prison Key" chance="10" />
 		</drop_group>
 		<drop_group race="PC_ALL" name="Ancient Relic">
 			<drop item_id="186000064" name="Greater Ancient Icon" chance="5" />
