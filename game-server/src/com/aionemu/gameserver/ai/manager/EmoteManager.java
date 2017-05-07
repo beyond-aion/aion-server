@@ -3,6 +3,7 @@ package com.aionemu.gameserver.ai.manager;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
@@ -19,8 +20,7 @@ public class EmoteManager {
 	 * 
 	 * @param owner
 	 */
-	public static final void emoteStartAttacking(Npc owner) {
-		Creature target = (Creature) owner.getTarget();
+	public static final void emoteStartAttacking(Npc owner, Creature target) {
 		owner.unsetState(CreatureState.WALK_MODE);
 		if (!owner.isInState(CreatureState.WEAPON_EQUIPPED)) {
 			owner.setState(CreatureState.WEAPON_EQUIPPED);
@@ -36,8 +36,9 @@ public class EmoteManager {
 	 */
 	public static final void emoteStopAttacking(Npc owner) {
 		owner.unsetState(CreatureState.WEAPON_EQUIPPED);
-		if (owner.getTarget() != null && owner.getTarget() instanceof Player) {
-			PacketSendUtility.sendPacket((Player) owner.getTarget(), SM_SYSTEM_MESSAGE.STR_UI_COMBAT_NPC_RETURN(owner.getObjectTemplate().getNameId()));
+		VisibleObject target = owner.getTarget();
+		if (target instanceof Player) {
+			PacketSendUtility.sendPacket((Player) target, SM_SYSTEM_MESSAGE.STR_UI_COMBAT_NPC_RETURN(owner.getObjectTemplate().getNameId()));
 		}
 	}
 
