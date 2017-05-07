@@ -601,6 +601,10 @@
 		<spawn npc_id="830475" respawn_time="295">
 			<spot x="745.01868" y="2756.2495" z="218.76218" h="73"/>
 		</spawn>
+		<!-- Briganta -->
+		<spawn npc_id="206343" respawn_time="295">
+			<spot x="936.92847" y="1578.7817" z="101.530815" h="86"/>
+		</spawn>
 		<!-- Brightleaf Village Gardener -->
 		<spawn npc_id="831297" respawn_time="295">
 			<spot x="356.8039" y="1805.3701" z="137.3750" h="30"/>
