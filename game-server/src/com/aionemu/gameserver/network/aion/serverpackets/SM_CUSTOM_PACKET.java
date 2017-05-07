@@ -125,8 +125,7 @@ public class SM_CUSTOM_PACKET extends AionServerPacket {
 	private List<PacketElement> elements = new ArrayList<>();
 
 	public SM_CUSTOM_PACKET(int opcode) {
-		super();
-		setOpcode(opcode);
+		super(opcode);
 	}
 
 	/**

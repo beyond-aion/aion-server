@@ -46,7 +46,7 @@ public class CsPacketHandler {
 				pm = new HashMap<>();
 				packetPrototypes.put(state, pm);
 			}
-			pm.put(packetPrototype.getOpcode(), packetPrototype);
+			pm.put(packetPrototype.getOpCode(), packetPrototype);
 		}
 	}
 
@@ -84,6 +84,6 @@ public class CsPacketHandler {
 	 * @param id
 	 */
 	private void unknownPacket(State state, int id) {
-		log.warn(String.format("Unknown packet recived from Chat Server: 0x%02X state=%s", id, state.toString()));
+		log.warn(String.format("Unknown packet received from Chat Server: 0x%02X state=%s", id, state.toString()));
 	}
 }

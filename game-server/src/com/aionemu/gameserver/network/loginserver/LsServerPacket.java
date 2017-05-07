@@ -30,7 +30,7 @@ public abstract class LsServerPacket extends BaseServerPacket {
 	public final void write(LoginServerConnection con, ByteBuffer buffer) {
 		setBuf(buffer);
 		buf.putShort((short) 0);
-		buf.put((byte) this.getOpcode());
+		buf.put((byte) this.getOpCode());
 		writeImpl(con);
 		buf.flip();
 		buf.putShort((short) buf.limit());

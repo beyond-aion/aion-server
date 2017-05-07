@@ -29,7 +29,7 @@ public abstract class AionServerPacket extends BaseServerPacket {
 	 */
 	public final void write(LoginConnection con) {
 		buf.putShort((short) 0);
-		buf.put((byte) getOpcode());
+		buf.put((byte) getOpCode());
 		writeImpl(con);
 		buf.flip();
 		buf.putShort((short) 0);

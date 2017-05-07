@@ -16,17 +16,20 @@ import org.slf4j.LoggerFactory;
 import com.aionemu.commons.network.AConnection;
 import com.aionemu.commons.network.Dispatcher;
 import com.aionemu.commons.network.PacketProcessor;
+import com.aionemu.commons.network.packet.BasePacket;
 import com.aionemu.commons.utils.concurrent.ExecuteWrapper;
 import com.aionemu.commons.utils.concurrent.RunnableStatsManager;
 import com.aionemu.gameserver.GameServer;
 import com.aionemu.gameserver.configs.main.SecurityConfig;
 import com.aionemu.gameserver.configs.network.NetworkConfig;
+import com.aionemu.gameserver.model.ChatType;
 import com.aionemu.gameserver.model.account.Account;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.Crypt;
 import com.aionemu.gameserver.network.PacketFloodFilter;
 import com.aionemu.gameserver.network.aion.clientpackets.CM_PING;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_KEY;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_MESSAGE;
 import com.aionemu.gameserver.network.factories.AionPacketHandlerFactory;
 import com.aionemu.gameserver.network.loginserver.LoginServer;
 import com.aionemu.gameserver.services.player.PlayerLeaveWorldService;
@@ -191,7 +194,7 @@ public class AionConnection extends AConnection<AionServerPacket> {
 		 */
 		if (pck != null) {
 			if (SecurityConfig.PFF_ENABLE) {
-				int opcode = pck.getOpcode();
+				int opcode = pck.getOpCode();
 				if (pff.length > opcode) {
 					if (pff[opcode] > 0) {
 						long last = this.pffRequests[opcode];
@@ -214,8 +217,10 @@ public class AionConnection extends AConnection<AionServerPacket> {
 				}
 			}
 
-			if (pck.read())
+			if (pck.read()) {
+				sendPacketInfo(pck);
 				packetProcessor.executePacket(pck);
+			}
 		}
 
 		return true;
@@ -230,11 +235,12 @@ public class AionConnection extends AConnection<AionServerPacket> {
 	@Override
 	protected final boolean writeData(ByteBuffer data) {
 		synchronized (guard) {
-			final long begin = System.nanoTime();
 			if (sendMsgQueue.isEmpty())
 				return false;
+			long begin = System.nanoTime();
 			AionServerPacket packet = sendMsgQueue.removeFirst();
 			try {
+				sendPacketInfo(packet);
 				packet.write(this, data);
 				return true;
 			} finally {
@@ -244,11 +250,17 @@ public class AionConnection extends AConnection<AionServerPacket> {
 		}
 	}
 
+	private void sendPacketInfo(BasePacket packet) {
+		if (getState() == State.IN_GAME && getAccount().getMembership() == 10 && packet.getClass() != SM_MESSAGE.class) {
+			sendPacket(new SM_MESSAGE(0, null, packet.toFormattedPacketNameString(), ChatType.BRIGHT_YELLOW));
+		}
+	}
+
 	@Override
 	protected final void onDisconnect() {
 		pingChecker.stop();
 		if (GameServer.isShuttingDown()) { // client crashing during countdown
-			safeLogout(getActivePlayer()); // instant synchronized leaveWorld to ensure completion before onServerClose
+			safeLogout(); // instant synchronized leaveWorld to ensure completion before onServerClose
 			return;
 		}
 
@@ -274,15 +286,13 @@ public class AionConnection extends AConnection<AionServerPacket> {
 	@Override
 	protected final void onServerClose() {
 		close();
-		safeLogout(getActivePlayer());
+		safeLogout();
 	}
 
-	private void safeLogout(Player player) {
-		if (player == null)
-			return;
-
-		synchronized (player) {
-			if (!player.equals(getActivePlayer())) // player was already saved
+	private void safeLogout() {
+		synchronized (this) {
+			Player player = getActivePlayer();
+			if (player == null) // player was already saved
 				return;
 			try {
 				PlayerLeaveWorldService.leaveWorld(player);

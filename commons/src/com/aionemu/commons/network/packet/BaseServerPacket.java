@@ -15,21 +15,21 @@ public abstract class BaseServerPacket extends BasePacket {
 	public ByteBuffer buf;
 
 	/**
-	 * Constructs a new server packet with specified id.
-	 * 
-	 * @param opcode
-	 *          packet opcode.
-	 */
-	protected BaseServerPacket(int opcode) {
-		super(PacketType.SERVER, opcode);
-	}
-
-	/**
 	 * Constructs a new server packet.<br>
 	 * If this constructor was used, then {@link #setOpcode(int)} must be called
 	 */
 	protected BaseServerPacket() {
-		super(PacketType.SERVER);
+		super();
+	}
+
+	/**
+	 * Constructs a new server packet with specified id.
+	 * 
+	 * @param opCode
+	 *          packet opcode.
+	 */
+	protected BaseServerPacket(int opCode) {
+		super(opCode);
 	}
 
 	/**

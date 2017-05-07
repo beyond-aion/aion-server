@@ -28,7 +28,7 @@ public abstract class CsServerPacket extends BaseServerPacket {
 	public final void write(ChatServerConnection con, ByteBuffer buffer) {
 		setBuf(buffer);
 		buf.putShort((short) 0);
-		buf.put((byte) getOpcode());
+		buf.put((byte) getOpCode());
 		writeImpl(con);
 		buf.flip();
 		buf.putShort((short) buf.limit());

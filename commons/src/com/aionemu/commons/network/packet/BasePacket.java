@@ -10,73 +10,38 @@ package com.aionemu.commons.network.packet;
 public abstract class BasePacket {
 
 	/**
-	 * Default packet string representation pattern.
+	 * Packet opCode field
+	 */
+	private int opCode;
+
+	/**
+	 * Constructs a new packet.<br>
+	 * If this constructor is used, then setOpcode() must be used just after it.
+	 */
+	protected BasePacket() {
+	}
+
+	/**
+	 * Constructs a new packet with specified id.
 	 * 
-	 * @see java.util.Formatter
-	 * @see String#format(String, Object[])
-	 */
-	public static final String TYPE_PATTERN = "[%s] 0x%02X %s";
-
-	/**
-	 * Packet type field.
-	 */
-	private final PacketType packetType;
-
-	/**
-	 * Packet opcode field
-	 */
-	private int opcode;
-
-	/**
-	 * Constructs a new packet with specified type and id.
-	 * 
-	 * @param packetType
-	 *          Type of packet
-	 * @param opcode
+	 * @param opCode
 	 *          Id of packet
 	 */
-	protected BasePacket(PacketType packetType, int opcode) {
-		this.packetType = packetType;
-		this.opcode = opcode;
+	protected BasePacket(int opCode) {
+		this.opCode = opCode;
 	}
 
 	/**
-	 * Constructs a new packet with given type.<br>
-	 * If this constructor is used, then setOpcode() must be used just after it.
-	 * 
-	 * @param packetType
-	 */
-	protected BasePacket(PacketType packetType) {
-		this.packetType = packetType;
-	}
-
-	/**
-	 * Sets opcode of this packet.<br>
-	 * <font color='red'>NOTICE: </font> Use only if BasePacket(PacketType) constructor was use
-	 * 
-	 * @param opcode
-	 */
-	protected void setOpcode(int opcode) {
-		this.opcode = opcode;
-	}
-
-	/**
-	 * Returns packet opcode.
+	 * Returns packet opCode.
 	 * 
 	 * @return packet id
 	 */
-	public final int getOpcode() {
-		return opcode;
+	public final int getOpCode() {
+		return opCode;
 	}
 
-	/**
-	 * Returns packet type.
-	 * 
-	 * @return type of this packet.
-	 * @see com.aionemu.commons.network.packet.BasePacket.PacketType
-	 */
-	public final PacketType getPacketType() {
-		return packetType;
+	protected final void setOpCode(int opCode) {
+		this.opCode = opCode;
 	}
 
 	/**
@@ -88,45 +53,15 @@ public abstract class BasePacket {
 	 * @see Class#getSimpleName()
 	 */
 	public String getPacketName() {
-		return this.getClass().getSimpleName();
+		return getClass().getSimpleName();
+	}
+
+	public String toFormattedPacketNameString() {
+		return String.format("[0x%02X] %s", getOpCode(), getPacketName());
 	}
 
 	/**
-	 * Enumeration of packet types.
-	 */
-	public static enum PacketType {
-		/** Server packet */
-		SERVER("S"),
-
-		/** Client packet */
-		CLIENT("C");
-
-		/**
-		 * String representing packet type.
-		 */
-		private final String name;
-
-		/**
-		 * Constructor.
-		 * 
-		 * @param name
-		 */
-		private PacketType(String name) {
-			this.name = name;
-		}
-
-		/**
-		 * Returns packet type name.
-		 * 
-		 * @return packet type name.
-		 */
-		public String getName() {
-			return name;
-		}
-	}
-
-	/**
-	 * Returns string representation of this packet based on packet type, opcode and name.
+	 * Returns string representation of this packet based on packet type, opCode and name.
 	 * 
 	 * @return packet type string
 	 * @see #TYPE_PATTERN
@@ -135,6 +70,6 @@ public abstract class BasePacket {
 	 */
 	@Override
 	public String toString() {
-		return String.format(TYPE_PATTERN, getPacketType().getName(), getOpcode(), getPacketName());
+		return toFormattedPacketNameString();
 	}
 }

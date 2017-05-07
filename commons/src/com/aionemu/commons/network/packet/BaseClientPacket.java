@@ -30,6 +30,16 @@ public abstract class BaseClientPacket<T extends AConnection<?>> extends BasePac
 	private ByteBuffer buf;
 
 	/**
+	 * Constructs a new client packet with specified id. ByteBuffer must be later set with setBuffer method.
+	 * 
+	 * @param opcode
+	 *          packet opcode.
+	 */
+	public BaseClientPacket(int opcode) {
+		this(null, opcode);
+	}
+
+	/**
 	 * Constructs a new client packet with specified id and data buffer.
 	 * 
 	 * @param buf
@@ -38,18 +48,8 @@ public abstract class BaseClientPacket<T extends AConnection<?>> extends BasePac
 	 *          packet opcode.
 	 */
 	public BaseClientPacket(ByteBuffer buf, int opcode) {
-		this(opcode);
+		super(opcode);
 		this.buf = buf;
-	}
-
-	/**
-	 * Constructs a new client packet with specified id. ByteBuffer must be later set with setBuffer method.
-	 * 
-	 * @param opcode
-	 *          packet opcode.
-	 */
-	public BaseClientPacket(int opcode) {
-		super(PacketType.CLIENT, opcode);
 	}
 
 	/**

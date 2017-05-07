@@ -43,7 +43,7 @@ public class LsPacketHandler {
 				pm = new HashMap<>();
 				packetPrototypes.put(state, pm);
 			}
-			pm.put(packetPrototype.getOpcode(), packetPrototype);
+			pm.put(packetPrototype.getOpCode(), packetPrototype);
 		}
 	}
 

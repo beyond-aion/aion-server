@@ -5,7 +5,6 @@ import java.nio.ByteBuffer;
 import com.aionemu.commons.network.packet.BaseServerPacket;
 import com.aionemu.gameserver.network.Crypt;
 import com.aionemu.gameserver.utils.ChatUtil;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * Base class for every GS -> Aion Server Packet.
@@ -19,28 +18,28 @@ public abstract class AionServerPacket extends BaseServerPacket {
 	 */
 	protected AionServerPacket() {
 		super();
-		setOpcode(ServerPacketsOpcodes.getOpcode(getClass()));
+		setOpCode(ServerPacketsOpcodes.getOpcode(getClass()));
+	}
+
+	protected AionServerPacket(int opCode) {
+		super(opCode);
 	}
 
 	/**
-	 * Write packet opcodec and two additional bytes
+	 * Write packet opCode and two additional bytes
 	 * 
 	 * @param buf
 	 * @param value
 	 */
-	private final void writeOP(int value) {
+	private final void writeOP() {
 		/** obfuscate packet id */
-		int op = Crypt.encodeOpcodec(value);
+		int op = Crypt.encodeOpcodec(getOpCode());
 		buf.putShort((short) (op));
 		/** put static server packet code */
 		buf.put(Crypt.staticServerPacketCode);
 
 		/** for checksum? */
 		buf.putShort((short) (~op));
-	}
-
-	public final void write(AionConnection con) {
-		write(con, buf);
 	}
 
 	/**
@@ -50,16 +49,9 @@ public abstract class AionServerPacket extends BaseServerPacket {
 	 * @param buf
 	 */
 	public final void write(AionConnection con, ByteBuffer buffer) {
-		if (con.getState().equals(AionConnection.State.IN_GAME) && con.getActivePlayer().getAccount().getMembership() == 10) {
-			if (!this.getPacketName().equals("SM_MESSAGE")) {
-				PacketSendUtility.sendMessage(con.getActivePlayer(),
-					"0x" + Integer.toHexString(this.getOpcode()).toUpperCase() + " : " + this.getPacketName());
-			}
-		}
-
-		this.setBuf(buffer);
+		setBuf(buffer);
 		buf.putShort((short) 0);
-		writeOP(getOpcode());
+		writeOP();
 		writeImpl(con);
 		buf.flip();
 		buf.putShort((short) buf.limit());
