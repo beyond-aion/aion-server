@@ -204,6 +204,7 @@ public class MonsterHunt extends QuestHandler {
 							updateQuestStatus(env);
 							return true;
 						} else {
+							int tmpTotal = total;
 							for (int varsUsed = m.getVar(); varsUsed < varId; varsUsed++) {
 								int value = total & 0x3F;
 								total >>= 6;
@@ -211,7 +212,7 @@ public class MonsterHunt extends QuestHandler {
 							}
 							updateQuestStatus(env);
 							if (!isDataDriven) { // Old quest style
-								if (total <= m.getEndVar() && (reward || rewardNextStep)) {
+								if (tmpTotal == m.getEndVar() && reward || rewardNextStep) {
 									if (rewardNextStep)
 										qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
 									qs.setStatus(QuestStatus.REWARD);
