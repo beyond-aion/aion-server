@@ -46,11 +46,6 @@ public class ChangeAllianceLeaderEvent extends ChangeLeaderEvent<PlayerAlliance>
 		} else {
 			changeLeaderTo(eventPlayer);
 		}
-		if (checkLeaderChanged(oldLeader)) {
-			if (team.isInLeague()) {
-				team.getLeague().broadcast(team);
-			}
-		}
 		if (eventPlayer != null) {
 			PlayerAllianceService.changeViceCaptain(oldLeader, AssignType.DEMOTE_CAPTAIN_TO_VICECAPTAIN);
 		}

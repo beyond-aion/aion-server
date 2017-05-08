@@ -26,7 +26,7 @@ public class PlayerAlliance extends TemporaryPlayerTeam<PlayerAllianceMember> {
 	public PlayerAlliance(PlayerAllianceMember leader, TeamType type) {
 		super(IDFactory.getInstance().nextId());
 		this.type = type;
-		initializeTeam(leader);
+		setLeader(leader);
 		for (int groupId = 1000; groupId <= 1003; groupId++) {
 			groups.put(groupId, new PlayerAllianceGroup(this, groupId));
 		}
@@ -46,8 +46,8 @@ public class PlayerAlliance extends TemporaryPlayerTeam<PlayerAllianceMember> {
 	}
 
 	@Override
-	public boolean isFull() {
-		return size() == 24;
+	public int getMaxMemberCount() {
+		return 24;
 	}
 
 	@Override

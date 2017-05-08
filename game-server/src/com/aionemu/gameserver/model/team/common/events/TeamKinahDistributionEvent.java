@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.model.team.common.events;
 
+import java.util.List;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.team.TeamMember;
 import com.aionemu.gameserver.model.team.TemporaryPlayerTeam;
@@ -12,8 +14,6 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 public class TeamKinahDistributionEvent<T extends TemporaryPlayerTeam<? extends TeamMember<Player>>> extends AbstractTeamPlayerEvent<T> {
 
 	private final long amount;
-	private long rewardPerPlayer;
-	private long teamSize;
 
 	public TeamKinahDistributionEvent(T team, Player distributor, long amount) {
 		super(team, distributor);
@@ -28,24 +28,23 @@ public class TeamKinahDistributionEvent<T extends TemporaryPlayerTeam<? extends 
 	@Override
 	public void handleEvent() {
 		if (eventPlayer.getInventory().getKinah() < amount) {
-			// TODO retail message ?
+			PacketSendUtility.sendPacket(eventPlayer, SM_SYSTEM_MESSAGE.STR_NOT_ENOUGH_MONEY());
 			return;
 		}
 
-		teamSize = team.onlineMembers();
-		if (teamSize <= amount) {
-			rewardPerPlayer = amount / teamSize;
+		List<Player> onlineMembers = team.getOnlineMembers();
+		if (onlineMembers.size() > 1 && amount >= onlineMembers.size()) {
+			long rewardPerPlayer = amount / onlineMembers.size();
 			if (eventPlayer.getInventory().tryDecreaseKinah(amount)) {
-				team.forEach(member -> {
-					if (member.isOnline()) {
-						member.getInventory().increaseKinah(rewardPerPlayer);
-						if (member.equals(eventPlayer)) {
-							PacketSendUtility.sendPacket(member, new SM_SYSTEM_MESSAGE(1390247, amount, teamSize, rewardPerPlayer));
-						} else {
-							PacketSendUtility.sendPacket(member, new SM_SYSTEM_MESSAGE(1390248, eventPlayer.getName(), amount, teamSize, rewardPerPlayer));
-						}
+				for (Player member : onlineMembers) {
+					member.getInventory().increaseKinah(rewardPerPlayer);
+					if (member.equals(eventPlayer)) {
+						PacketSendUtility.sendPacket(member, SM_SYSTEM_MESSAGE.STR_MSG_SPLIT_ME_TO_B(amount, onlineMembers.size(), rewardPerPlayer));
+					} else {
+						PacketSendUtility.sendPacket(member,
+							SM_SYSTEM_MESSAGE.STR_MSG_SPLIT_B_TO_ME(eventPlayer.getName(), amount, onlineMembers.size(), rewardPerPlayer));
 					}
-				});
+				}
 			}
 		}
 	}

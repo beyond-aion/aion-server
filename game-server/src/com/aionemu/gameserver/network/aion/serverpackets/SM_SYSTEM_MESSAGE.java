@@ -17966,22 +17966,22 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * You have exited the Instanced Zone. This zone will be reset in %0 minutes.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_LEAVE_INSTANCE(String value0) {
-		return new SM_SYSTEM_MESSAGE(1400044, value0);
+	public static final SM_SYSTEM_MESSAGE STR_MSG_LEAVE_INSTANCE(int num0) {
+		return new SM_SYSTEM_MESSAGE(1400044, num0);
 	}
 
 	/**
 	 * You have exited the Instanced Zone. This zone will be reset in %0 minutes.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_LEAVE_INSTANCE_PARTY(String value0) {
-		return new SM_SYSTEM_MESSAGE(1400045, value0);
+	public static final SM_SYSTEM_MESSAGE STR_MSG_LEAVE_INSTANCE_PARTY(int num0) {
+		return new SM_SYSTEM_MESSAGE(1400045, num0);
 	}
 
 	/**
 	 * You have exited the Instanced Zone. This zone will be reset in %0 minutes.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_LEAVE_INSTANCE_FORCE(String value0) {
-		return new SM_SYSTEM_MESSAGE(1400046, value0);
+	public static final SM_SYSTEM_MESSAGE STR_MSG_LEAVE_INSTANCE_FORCE(int num0) {
+		return new SM_SYSTEM_MESSAGE(1400046, num0);
 	}
 
 	/**

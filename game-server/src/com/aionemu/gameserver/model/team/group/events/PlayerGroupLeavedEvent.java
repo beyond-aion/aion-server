@@ -23,11 +23,11 @@ public class PlayerGroupLeavedEvent extends PlayerLeavedEvent<PlayerGroupMember,
 		super(alliance, player);
 	}
 
-	public PlayerGroupLeavedEvent(PlayerGroup team, Player player, PlayerLeavedEvent.LeaveReson reason, String banPersonName) {
+	public PlayerGroupLeavedEvent(PlayerGroup team, Player player, LeaveReson reason, String banPersonName) {
 		super(team, player, reason, banPersonName);
 	}
 
-	public PlayerGroupLeavedEvent(PlayerGroup alliance, Player player, PlayerLeavedEvent.LeaveReson reason) {
+	public PlayerGroupLeavedEvent(PlayerGroup alliance, Player player, LeaveReson reason) {
 		super(alliance, player, reason);
 	}
 
@@ -44,22 +44,24 @@ public class PlayerGroupLeavedEvent extends PlayerLeavedEvent<PlayerGroupMember,
 
 			switch (reason) {
 				case LEAVE:
-				case DISBAND:
 					PacketSendUtility.sendPacket(member, SM_SYSTEM_MESSAGE.STR_PARTY_HE_LEAVE_PARTY(leavedPlayer.getName()));
 					break;
+				case LEAVE_TIMEOUT:
+					PacketSendUtility.sendPacket(member, SM_SYSTEM_MESSAGE.STR_PARTY_HE_BECOME_OFFLINE_TIMEOUT(leavedPlayer.getName()));
+					break;
 				case BAN:
-					// TODO find out empty strings (Retail has +2 empty strings
 					PacketSendUtility.sendPacket(member, SM_SYSTEM_MESSAGE.STR_PARTY_HE_IS_BANISHED(leavedPlayer.getName()));
+					break;
+				case DISBAND:
+					PacketSendUtility.sendPacket(member, SM_SYSTEM_MESSAGE.STR_PARTY_IS_DISPERSED());
 					break;
 			}
 		});
 
-		PacketSendUtility.sendPacket(leavedPlayer, new SM_LEAVE_GROUP_MEMBER());
 		switch (reason) {
 			case BAN:
 			case LEAVE:
-				// PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_PARTY_SECEDE()); // client side?
-				if (team.size() <= 1) {
+				if (team.shouldDisband()) {
 					PlayerGroupService.disband(team);
 				} else {
 					if (leavedPlayer.equals(team.getLeader().getObject())) {
@@ -70,22 +72,31 @@ public class PlayerGroupLeavedEvent extends PlayerLeavedEvent<PlayerGroupMember,
 					PacketSendUtility.sendPacket(leavedPlayer, SM_SYSTEM_MESSAGE.STR_PARTY_YOU_ARE_BANISHED());
 				}
 				break;
+			case LEAVE_TIMEOUT:
+				if (team.shouldDisband()) {
+					PlayerGroupService.disband(team);
+				}
+				break;
 			case DISBAND:
 				PacketSendUtility.sendPacket(leavedPlayer, SM_SYSTEM_MESSAGE.STR_PARTY_IS_DISPERSED());
 				break;
 		}
 
-		if (leavedPlayer.isInInstance()) {
-			leavedPlayer.getController().addTask(TaskId.DESPAWN, ThreadPoolManager.getInstance().schedule(new Runnable() {
+		if (leavedPlayer.isOnline()) {
+			PacketSendUtility.sendPacket(leavedPlayer, new SM_LEAVE_GROUP_MEMBER());
+			if (team.equals(leavedPlayer.getPosition().getWorldMapInstance().getRegisteredTeam())) {
+				PacketSendUtility.sendPacket(leavedPlayer, SM_SYSTEM_MESSAGE.STR_MSG_LEAVE_INSTANCE_NOT_PARTY());
+				leavedPlayer.getController().addTask(TaskId.DESPAWN, ThreadPoolManager.getInstance().schedule(new Runnable() {
 
-				@Override
-				public void run() {
-					if (leavedPlayer.getCurrentTeamId() != team.getObjectId()) {
-						if (leavedPlayer.getPosition().getWorldMapInstance().getRegisteredTeam() != null)
-							InstanceService.moveToExitPoint(leavedPlayer);
+					@Override
+					public void run() {
+						if (leavedPlayer.getCurrentTeamId() != team.getObjectId()) {
+							if (leavedPlayer.getPosition().getWorldMapInstance().getRegisteredTeam() != null)
+								InstanceService.moveToExitPoint(leavedPlayer);
+						}
 					}
-				}
-			}, 30000));
+				}, 30000));
+			}
 		}
 	}
 

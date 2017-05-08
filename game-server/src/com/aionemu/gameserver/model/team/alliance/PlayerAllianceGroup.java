@@ -28,8 +28,8 @@ public class PlayerAllianceGroup extends TemporaryPlayerTeam<PlayerAllianceMembe
 	}
 
 	@Override
-	public boolean isFull() {
-		return size() == 6;
+	public int getMaxMemberCount() {
+		return 6;
 	}
 
 	@Override

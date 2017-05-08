@@ -42,7 +42,6 @@ import com.aionemu.gameserver.services.VortexService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.TimeUtil;
-import com.google.common.base.Preconditions;
 
 /**
  * @author ATracer
@@ -72,8 +71,8 @@ public class PlayerAllianceService {
 
 			PlayerAllianceInvite invite = new PlayerAllianceInvite(inviter);
 			if (invited.getResponseRequester().putRequest(SM_QUESTION_WINDOW.STR_PARTY_ALLIANCE_DO_YOU_ACCEPT_HIS_INVITATION, invite)) {
-				PacketSendUtility.sendPacket(invited, new SM_QUESTION_WINDOW(SM_QUESTION_WINDOW.STR_PARTY_ALLIANCE_DO_YOU_ACCEPT_HIS_INVITATION, 0, 0,
-					inviter.getName()));
+				PacketSendUtility.sendPacket(invited,
+					new SM_QUESTION_WINDOW(SM_QUESTION_WINDOW.STR_PARTY_ALLIANCE_DO_YOU_ACCEPT_HIS_INVITATION, 0, 0, inviter.getName()));
 			}
 		}
 	}
@@ -177,18 +176,17 @@ public class PlayerAllianceService {
 		Objects.requireNonNull(banGiver, "Bangiver player should not be null");
 		PlayerAlliance alliance = banGiver.getPlayerAlliance();
 		if (alliance != null) {
-			if (!alliance.isLeader(banGiver)) {
+			if (banGiver.equals(bannedPlayer))
+				PacketSendUtility.sendPacket(banGiver, SM_SYSTEM_MESSAGE.STR_FORCE_CANT_BAN_SELF());
+			else if (!alliance.isLeader(banGiver))
 				PacketSendUtility.sendPacket(banGiver, SM_SYSTEM_MESSAGE.STR_FORCE_ONLY_LEADER_CAN_BANISH());
-				return;
-			}
-			if (alliance.getTeamType().isDefence()) {
-				VortexService.getInstance().removeDefenderPlayer(bannedPlayer);
-			}
-			PlayerAllianceMember bannedMember = alliance.getMember(bannedPlayer.getObjectId());
-			if (bannedMember != null) {
-				alliance.onEvent(new PlayerAllianceLeavedEvent(alliance, bannedMember.getObject(), LeaveReson.BAN, banGiver.getName()));
-			} else {
-				log.warn("TEAM: banning player not in alliance {}", alliance.onlineMembers());
+			else {
+				if (alliance.getTeamType().isDefence())
+					VortexService.getInstance().removeDefenderPlayer(bannedPlayer);
+				if (alliance.hasMember(bannedPlayer.getObjectId()))
+					alliance.onEvent(new PlayerAllianceLeavedEvent(alliance, bannedPlayer, LeaveReson.BAN, banGiver.getName()));
+				else
+					log.warn("TEAM: banning {} not in alliance {}", bannedPlayer, alliance.getMembers());
 			}
 		}
 	}
@@ -198,7 +196,6 @@ public class PlayerAllianceService {
 	 */
 	@GlobalCallback(PlayerAllianceDisbandCallback.class)
 	public static void disband(PlayerAlliance alliance, boolean onBefore) {
-		Preconditions.checkState(alliance.onlineMembers() <= 1, "Can't disband alliance with more than one online member");
 		alliance.onEvent(new AllianceDisbandEvent(alliance));
 		alliances.remove(alliance.getTeamId());
 	}
@@ -285,23 +282,19 @@ public class PlayerAllianceService {
 
 	public static class OfflinePlayerAllianceChecker implements Runnable {
 
-		private PlayerAlliance currentAlliance;
-
 		@Override
 		public void run() {
 			for (PlayerAlliance alliance : alliances.values()) {
-				currentAlliance = alliance;
 				alliance.forEachTeamMember(member -> {
-					int kickDelay = currentAlliance.getTeamType().isAutoTeam() ? 60 : GroupConfig.ALLIANCE_REMOVE_TIME;
+					int kickDelay = alliance.getTeamType().isAutoTeam() ? 60 : GroupConfig.ALLIANCE_REMOVE_TIME;
 					if (!member.isOnline() && TimeUtil.isExpired(member.getLastOnlineTime() + kickDelay * 1000)) {
-						if (currentAlliance.getTeamType().isOffence()) {
+						if (alliance.getTeamType().isOffence()) {
 							VortexService.getInstance().removeInvaderPlayer(member.getObject());
 						}
-						currentAlliance.onEvent(new PlayerAllianceLeavedEvent(currentAlliance, member.getObject(), LeaveReson.LEAVE_TIMEOUT));
+						alliance.onEvent(new PlayerAllianceLeavedEvent(alliance, member.getObject(), LeaveReson.LEAVE_TIMEOUT));
 					}
 				});
 			}
-			currentAlliance = null;
 		}
 
 	}

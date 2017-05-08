@@ -5,7 +5,6 @@ package com.aionemu.gameserver.model.team.common.legacy;
  */
 public enum PlayerAllianceEvent {
 	LEAVE(0),
-	LEAVE_TIMEOUT(0),
 	BANNED(0),
 
 	MOVEMENT(1),

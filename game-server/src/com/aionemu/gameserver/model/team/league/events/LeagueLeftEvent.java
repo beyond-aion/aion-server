@@ -24,11 +24,9 @@ public class LeagueLeftEvent extends AlwaysTrueTeamEvent implements Consumer<Pla
 	private final LeaveReson reason;
 
 	public static enum LeaveReson {
-
 		LEAVE,
 		EXPEL,
 		DISBAND;
-
 	}
 
 	public LeagueLeftEvent(League league, PlayerAlliance alliance) {
@@ -71,7 +69,7 @@ public class LeagueLeftEvent extends AlwaysTrueTeamEvent implements Consumer<Pla
 	}
 
 	private void checkDisband() {
-		if (league.onlineMembers() <= 1) {
+		if (league.shouldDisband()) {
 			LeagueService.disband(league);
 		}
 	}

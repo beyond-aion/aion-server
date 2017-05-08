@@ -14,13 +14,16 @@ import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.AionObject;
+import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.network.aion.AionServerPacket;
 import com.google.common.base.Preconditions;
 
 /**
  * @author ATracer
  */
-public abstract class GeneralTeam<M extends AionObject, TM extends TeamMember<M>> extends AionObject implements Team<M, TM> {
+public abstract class GeneralTeam<M extends AionObject, TM extends TeamMember<M>> extends AionObject {
 
 	private final static Logger log = LoggerFactory.getLogger(GeneralTeam.class);
 	protected final Map<Integer, TM> members = new ConcurrentHashMap<>();
@@ -31,8 +34,7 @@ public abstract class GeneralTeam<M extends AionObject, TM extends TeamMember<M>
 		super(objId);
 	}
 
-	@Override
-	public void onEvent(TeamEvent event) {
+	public final void onEvent(TeamEvent event) {
 		lock();
 		try {
 			if (event.checkCondition()) {
@@ -45,31 +47,26 @@ public abstract class GeneralTeam<M extends AionObject, TM extends TeamMember<M>
 		}
 	}
 
-	@Override
-	public TM getMember(int objectId) {
+	public final TM getMember(int objectId) {
 		return members.get(objectId);
 	}
 
-	@Override
-	public boolean hasMember(int objectId) {
+	public final boolean hasMember(int objectId) {
 		return members.get(objectId) != null;
 	}
 
-	@Override
 	public void addMember(TM member) {
 		Objects.requireNonNull(member, "Team member should be not null");
 		Preconditions.checkState(members.get(member.getObjectId()) == null, "Team member is already added");
 		members.put(member.getObjectId(), member);
 	}
 
-	@Override
 	public void removeMember(TM member) {
 		Objects.requireNonNull(member, "Team member should be not null");
 		Preconditions.checkState(members.get(member.getObjectId()) != null, "Team member is already removed");
 		members.remove(member.getObjectId());
 	}
 
-	@Override
 	public final void removeMember(int objectId) {
 		removeMember(members.get(objectId));
 	}
@@ -120,34 +117,41 @@ public abstract class GeneralTeam<M extends AionObject, TM extends TeamMember<M>
 		}
 	}
 
-	@Override
 	public List<TM> filter(Predicate<TM> predicate) {
 		return members.values().stream().filter(predicate).collect(Collectors.toList());
 	}
 
-	@Override
 	public List<M> filterMembers(Predicate<M> predicate) {
 		return members.values().stream().map(tm -> tm.getObject()).filter(predicate).collect(Collectors.toList());
 	}
 
-	@Override
 	public List<M> getMembers() {
 		return members.values().stream().map(tm -> tm.getObject()).collect(Collectors.toList());
 	}
 
-	@Override
 	public int size() {
 		return members.size();
 	}
 
-	@Override
+	public final boolean isDisbanded() {
+		return size() == 0;
+	}
+
+	public final boolean shouldDisband() {
+		return size() == 1; // teams always contain at least two members
+	}
+
+	public final boolean isFull() {
+		return size() == getMaxMemberCount();
+	}
+
 	public final int getTeamId() {
 		return getObjectId();
 	}
 
 	@Override
 	public String getName() {
-		return GeneralTeam.class.getName();
+		return "Leader: " + leader.getObject();
 	}
 
 	public final TM getLeader() {
@@ -165,6 +169,8 @@ public abstract class GeneralTeam<M extends AionObject, TM extends TeamMember<M>
 	public final void changeLeader(TM member) {
 		Objects.requireNonNull(leader, "Leader should already be set");
 		Objects.requireNonNull(member, "New leader should not be null");
+		if (leader.equals(member))
+			throw new IllegalArgumentException(member + " is already the team leader");
 		this.leader = member;
 	}
 
@@ -181,5 +187,15 @@ public abstract class GeneralTeam<M extends AionObject, TM extends TeamMember<M>
 	protected final void unlock() {
 		teamLock.unlock();
 	}
+
+	public abstract Race getRace();
+
+	public abstract int getMaxMemberCount();
+
+	public abstract List<Player> getOnlineMembers();
+
+	public abstract void sendPackets(AionServerPacket... packets);
+
+	public abstract void sendPacket(Predicate<M> predicate, AionServerPacket... packets);
 
 }

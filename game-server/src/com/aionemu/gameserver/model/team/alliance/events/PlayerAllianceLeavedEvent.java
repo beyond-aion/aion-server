@@ -42,53 +42,51 @@ public class PlayerAllianceLeavedEvent extends PlayerLeavedEvent<PlayerAllianceM
 
 		team.getViceCaptainIds().remove(leavedPlayer.getObjectId());
 
-		if (!reason.equals(PlayerLeavedEvent.LeaveReson.DISBAND)) {
-			// here we already must have a leader of the team
-			if (leavedPlayer.equals(leader)) {
-				team.onEvent(new ChangeAllianceLeaderEvent(team));
-			}
-		}
-
-		if (leavedPlayer.isOnline()) {
-			PacketSendUtility.sendPacket(leavedPlayer, new SM_LEAVE_GROUP_MEMBER());
-		}
+		if (reason != LeaveReson.DISBAND && leavedPlayer.equals(leader)) // here we already must have a leader of the team
+			team.onEvent(new ChangeAllianceLeaderEvent(team));
 
 		team.removeMember(leavedPlayer.getObjectId());
 
+		SM_SYSTEM_MESSAGE leaveMsg;
+		switch (reason) {
+			case LEAVE:
+				leaveMsg = SM_SYSTEM_MESSAGE.STR_FORCE_LEAVE_HIM(leavedPlayer.getName());
+				break;
+			case LEAVE_TIMEOUT:
+				leaveMsg = SM_SYSTEM_MESSAGE.STR_PARTY_ALLIANCE_HE_LEAVED_PARTY_OFFLINE_TIMEOUT(leavedPlayer.getName());
+				break;
+			case BAN:
+				leaveMsg = SM_SYSTEM_MESSAGE.STR_FORCE_BAN_HIM(banPersonName, leavedPlayer.getName());
+				break;
+			case DISBAND:
+			default:
+				leaveMsg = SM_SYSTEM_MESSAGE.STR_PARTY_ALLIANCE_DISPERSED();
+				break;
+		}
 		team.forEach(player -> {
-			switch (reason) {
-				case BAN:
-				case LEAVE:
-					PacketSendUtility.sendPacket(player, new SM_ALLIANCE_MEMBER_INFO(leavedTeamMember, PlayerAllianceEvent.LEAVE)); // LEAVE/BANNED have same id
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_FORCE_LEAVE_HIM(leavedPlayer.getName()));
-					PacketSendUtility.sendPacket(player, new SM_ALLIANCE_INFO(team));
-					PacketSendUtility.sendPacket(player, new SM_SHOW_BRAND(0, 0, team.isInLeague()));
-					break;
-				case LEAVE_TIMEOUT:
-					PacketSendUtility.sendPacket(player, new SM_ALLIANCE_MEMBER_INFO(leavedTeamMember, PlayerAllianceEvent.LEAVE_TIMEOUT));
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_PARTY_ALLIANCE_HE_LEAVED_PARTY_OFFLINE_TIMEOUT(leavedPlayer.getName()));
-					break;
-				case DISBAND:
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_PARTY_ALLIANCE_DISPERSED());
-					break;
+			PacketSendUtility.sendPacket(player, leaveMsg);
+			if (reason != LeaveReson.DISBAND) {
+				PacketSendUtility.sendPacket(player, new SM_ALLIANCE_MEMBER_INFO(leavedTeamMember, PlayerAllianceEvent.LEAVE));
+				PacketSendUtility.sendPacket(player, new SM_ALLIANCE_INFO(team));
+				PacketSendUtility.sendPacket(player, new SM_SHOW_BRAND(0, 0, team.isInLeague()));
 			}
 		});
 		switch (reason) {
 			case BAN:
 			case LEAVE:
 				if (team.isInLeague()) {
-					// broadcast to all in league (some alliance has -1 member count)
-					team.getLeague().broadcast();
+					// update general alliance info for all other alliances in league
+					team.getLeague().broadcast(team);
 				}
-				if (team.size() <= 1) {
+				if (team.shouldDisband()) {
 					PlayerAllianceService.disband(team, true);
 				}
-				if (reason == PlayerLeavedEvent.LeaveReson.BAN) {
+				if (reason == LeaveReson.BAN) {
 					PacketSendUtility.sendPacket(leavedPlayer, SM_SYSTEM_MESSAGE.STR_FORCE_BAN_ME(banPersonName));
 				}
 				break;
 			case LEAVE_TIMEOUT:
-				if (team.size() <= 1) {
+				if (team.shouldDisband()) {
 					PlayerAllianceService.disband(team, true);
 				}
 				break;
@@ -97,18 +95,22 @@ public class PlayerAllianceLeavedEvent extends PlayerLeavedEvent<PlayerAllianceM
 				break;
 		}
 
-		if (leavedPlayer.isInInstance()) {
-			leavedPlayer.getController().addTask(TaskId.DESPAWN, ThreadPoolManager.getInstance().schedule(new Runnable() {
+		if (leavedPlayer.isOnline()) {
+			PacketSendUtility.sendPacket(leavedPlayer, new SM_LEAVE_GROUP_MEMBER());
+			if (team.equals(leavedPlayer.getPosition().getWorldMapInstance().getRegisteredTeam())) {
+				PacketSendUtility.sendPacket(leavedPlayer, SM_SYSTEM_MESSAGE.STR_MSG_LEAVE_INSTANCE_NOT_PARTY());
+				leavedPlayer.getController().addTask(TaskId.DESPAWN, ThreadPoolManager.getInstance().schedule(new Runnable() {
 
-				@Override
-				public void run() {
-					if (leavedPlayer.getCurrentTeamId() != team.getObjectId()) {
-						if (leavedPlayer.getPosition().getWorldMapInstance().getRegisteredTeam() != null)
-							InstanceService.moveToExitPoint(leavedPlayer);
+					@Override
+					public void run() {
+						if (leavedPlayer.getCurrentTeamId() != team.getObjectId()) {
+							if (leavedPlayer.getPosition().getWorldMapInstance().getRegisteredTeam() != null)
+								InstanceService.moveToExitPoint(leavedPlayer);
+						}
 					}
-				}
 
-			}, 30000));
+				}, 30000));
+			}
 		}
 	}
 

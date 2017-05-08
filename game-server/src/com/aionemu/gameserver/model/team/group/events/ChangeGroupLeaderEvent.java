@@ -22,13 +22,11 @@ public class ChangeGroupLeaderEvent extends ChangeLeaderEvent<PlayerGroup> {
 
 	@Override
 	public void handleEvent() {
-		Player oldLeader = team.getLeaderObject();
 		if (eventPlayer == null) {
 			changeLeaderToNextAvailablePlayer();
 		} else {
 			changeLeaderTo(eventPlayer);
 		}
-		checkLeaderChanged(oldLeader);
 	}
 
 	@Override

@@ -32,12 +32,12 @@ import com.aionemu.gameserver.model.team.group.events.PlayerGroupStopMentoringEv
 import com.aionemu.gameserver.model.team.group.events.PlayerGroupUpdateEvent;
 import com.aionemu.gameserver.model.team.group.events.PlayerStartMentoringEvent;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUESTION_WINDOW;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.restrictions.RestrictionsManager;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.TimeUtil;
 import com.aionemu.gameserver.utils.idfactory.IDFactory;
-import com.google.common.base.Preconditions;
 
 /**
  * @author ATracer
@@ -156,11 +156,12 @@ public class PlayerGroupService {
 		Objects.requireNonNull(banGiver, "Bangiver player should not be null");
 		PlayerGroup group = banGiver.getPlayerGroup();
 		if (group != null) {
-			if (group.hasMember(bannedPlayer.getObjectId())) {
+			if (banGiver.equals(bannedPlayer))
+				PacketSendUtility.sendPacket(banGiver, SM_SYSTEM_MESSAGE.STR_PARTY_CANT_BAN_SELF());
+			else if (group.hasMember(bannedPlayer.getObjectId()))
 				group.onEvent(new PlayerGroupLeavedEvent(group, bannedPlayer, LeaveReson.BAN, banGiver.getName()));
-			} else {
-				log.warn("TEAM: banning player not in group {}", group.onlineMembers());
-			}
+			else
+				log.warn("TEAM: banning {} not in group {}", bannedPlayer, group.getMembers());
 		}
 	}
 
@@ -169,7 +170,6 @@ public class PlayerGroupService {
 	 */
 	@GlobalCallback(PlayerGroupDisbandCallback.class)
 	public static void disband(PlayerGroup group) {
-		Preconditions.checkState(group.onlineMembers() <= 1, "Can't disband group with more than one online member");
 		groups.remove(group.getTeamId());
 		group.onEvent(new GroupDisbandEvent(group));
 	}
@@ -246,8 +246,7 @@ public class PlayerGroupService {
 			for (PlayerGroup group : groups.values()) {
 				group.forEachTeamMember(member -> {
 					if (!member.isOnline() && TimeUtil.isExpired(member.getLastOnlineTime() + GroupConfig.GROUP_REMOVE_TIME * 1000)) {
-						// TODO LEAVE_TIMEOUT type
-						group.onEvent(new PlayerGroupLeavedEvent(group, member.getObject()));
+						group.onEvent(new PlayerGroupLeavedEvent(group, member.getObject(), LeaveReson.LEAVE_TIMEOUT));
 					}
 				});
 			}

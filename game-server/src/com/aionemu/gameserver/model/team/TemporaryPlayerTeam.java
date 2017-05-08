@@ -55,17 +55,8 @@ public abstract class TemporaryPlayerTeam<TM extends TeamMember<Player>> extends
 	}
 
 	@Override
-	public final int onlineMembers() {
-		return getOnlineMembers().size();
-	}
-
-	@Override
 	public final List<Player> getOnlineMembers() {
 		return filterMembers(Predicates.Players.ONLINE);
-	}
-
-	protected final void initializeTeam(TM leader) {
-		setLeader(leader);
 	}
 
 	public final LootGroupRules getLootGroupRules() {

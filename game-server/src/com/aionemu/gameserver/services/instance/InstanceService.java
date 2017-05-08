@@ -44,7 +44,7 @@ public class InstanceService {
 	private static final Logger log = LoggerFactory.getLogger(InstanceService.class);
 	private static final List<Integer> instanceAggro = new ArrayList<>();
 	private static final List<Integer> instanceCoolDownFilter = new ArrayList<>();
-	private static final int INSTANCE_DESTROY_DELAY = 10 * 60 * 1000; // 10 minutes
+	public static final int INSTANCE_DESTROY_DELAY = 10 * 60 * 1000; // 10 minutes
 
 	public static void load() {
 		for (String s : CustomConfig.INSTANCES_MOB_AGGRO.split(",")) {
@@ -121,7 +121,7 @@ public class InstanceService {
 		for (VisibleObject obj : instance) {
 			if (obj instanceof Player) {
 				Player player = (Player) obj;
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_LEAVE_INSTANCE_NOT_PARTY());
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_LEAVE_INSTANCE_FORCE(0));
 				moveToExitPoint((Player) obj);
 			} else {
 				obj.getController().delete();
@@ -292,7 +292,7 @@ public class InstanceService {
 
 		private boolean isRegisteredTeamDisbanded() {
 			GeneralTeam<?, ?> registeredGroup = worldMapInstance.getRegisteredTeam();
-			if (registeredGroup != null && registeredGroup.size() == 0) {
+			if (registeredGroup != null && registeredGroup.isDisbanded()) {
 				return true;
 			}
 			return false;
@@ -329,8 +329,17 @@ public class InstanceService {
 
 	public static void onLeaveInstance(Player player) {
 		WorldMapInstance registeredInstance = getRegisteredInstance(player.getWorldId(), getLastRegisteredId(player));
-		if (registeredInstance != null) // don't access instance via player.getPosition, since he maybe isn't registered with it anymore (login after dc)
+		if (registeredInstance != null) { // don't get instance via player.getPosition since he maybe isn't registered with it anymore (login after dc)
 			registeredInstance.getInstanceHandler().onLeaveInstance(player);
+			if (!registeredInstance.isPersonal()) {
+				if (registeredInstance.getPlayerMaxSize() == 1) // solo instance
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_LEAVE_INSTANCE(InstanceService.INSTANCE_DESTROY_DELAY / 60000));
+				else if (registeredInstance.getRegisteredTeam() != null && registeredInstance.getRegisteredTeam().getMembers().isEmpty())
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_LEAVE_INSTANCE_PARTY(0));
+				else if (registeredInstance.getPlayersInside().size() <= 1)
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_LEAVE_INSTANCE_PARTY(InstanceService.INSTANCE_DESTROY_DELAY / 60000));
+			}
+		}
 		for (Item item : player.getInventory().getItems()) {
 			if (item.getItemTemplate().getOwnershipWorld() == player.getWorldId())
 				player.getInventory().decreaseByObjectId(item.getObjectId(), item.getItemCount());

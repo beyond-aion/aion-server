@@ -55,7 +55,7 @@ public class PlayerDisconnectedEvent implements TeamEvent {
 			}
 		});
 
-		if (alliance.onlineMembers() < 1) {
+		if (alliance.getOnlineMembers().isEmpty()) {
 			PlayerAllianceService.disband(alliance, false);
 		} else if (alliance.isInLeague()) {
 			alliance.getLeague().broadcast(disconnected);

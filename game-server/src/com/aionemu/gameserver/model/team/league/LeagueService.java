@@ -153,7 +153,6 @@ public class LeagueService {
 	 * Disband league after minimum of members has been reached
 	 */
 	public static void disband(League league) {
-		Preconditions.checkState(league.onlineMembers() <= 1, "Can't disband league with more than one online member");
 		league.onEvent(new LeagueDisbandEvent(league));
 		leagues.remove(league.getTeamId());
 	}

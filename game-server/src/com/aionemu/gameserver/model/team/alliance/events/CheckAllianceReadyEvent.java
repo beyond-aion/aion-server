@@ -30,7 +30,7 @@ public class CheckAllianceReadyEvent extends AlwaysTrueTeamEvent {
 				readyStatus = 0;
 				break;
 			case ALLIANCE_CHECKREADY_START:
-				readyStatus = alliance.onlineMembers() - 1;
+				readyStatus = alliance.getOnlineMembers().size() - 1;
 				break;
 			case ALLIANCE_CHECKREADY_AUTOCANCEL:
 				readyStatus = 0;

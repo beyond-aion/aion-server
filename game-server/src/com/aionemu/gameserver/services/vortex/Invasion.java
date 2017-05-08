@@ -60,7 +60,7 @@ public class Invasion extends DimensionalVortex<VortexLocation> {
 		Map<Integer, Player> list = isInvader ? invaders : defenders;
 		PlayerAlliance alliance = isInvader ? invAlliance : defAlliance;
 
-		if (alliance != null && alliance.size() > 0) {
+		if (alliance != null && !alliance.isDisbanded()) {
 			PlayerAllianceService.addPlayer(alliance, player);
 		} else if (!list.isEmpty()) {
 			Player first = null;
@@ -99,7 +99,7 @@ public class Invasion extends DimensionalVortex<VortexLocation> {
 				PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(isInvader ? 1401452 : 1401476));
 			}
 			PlayerAllianceService.removePlayer(player);
-			if (alliance.size() == 0) {
+			if (alliance.isDisbanded()) {
 				if (isInvader) {
 					invAlliance = null;
 				} else {

@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -24,20 +25,15 @@ import com.aionemu.gameserver.utils.idfactory.IDFactory;
 public class League extends GeneralTeam<PlayerAlliance, LeagueMember> {
 
 	private LootGroupRules lootGroupRules = new LootGroupRules();
-	private static final LeagueMemberComparator MEMBER_COMPARATOR = new LeagueMemberComparator();
 
 	public League(LeagueMember leader) {
 		super(IDFactory.getInstance().nextId());
-		initializeTeam(leader);
-	}
-
-	protected final void initializeTeam(LeagueMember leader) {
 		setLeader(leader);
 	}
 
 	@Override
-	public List<PlayerAlliance> getOnlineMembers() {
-		return getMembers();
+	public List<Player> getOnlineMembers() {
+		return getMembers().stream().flatMap(alliance -> alliance.getOnlineMembers().stream()).collect(Collectors.toList());
 	}
 
 	@Override
@@ -50,6 +46,11 @@ public class League extends GeneralTeam<PlayerAlliance, LeagueMember> {
 	public void removeMember(LeagueMember member) {
 		super.removeMember(member);
 		member.getObject().setLeague(null);
+	}
+
+	@Override
+	public int getMaxMemberCount() {
+		return 8;
 	}
 
 	@Override
@@ -68,22 +69,12 @@ public class League extends GeneralTeam<PlayerAlliance, LeagueMember> {
 	}
 
 	@Override
-	public int onlineMembers() {
-		return getMembers().size();
-	}
-
-	@Override
 	public Race getRace() {
 		return getLeaderObject().getRace();
 	}
 
 	public Player getCaptain() {
 		return getLeaderObject().getLeaderObject();
-	}
-
-	@Override
-	public boolean isFull() {
-		return size() == 8;
 	}
 
 	public LootGroupRules getLootGroupRules() {
@@ -100,7 +91,7 @@ public class League extends GeneralTeam<PlayerAlliance, LeagueMember> {
 	public Collection<LeagueMember> getSortedMembers() {
 		List<LeagueMember> memberList = new ArrayList<>();
 		memberList.addAll(members.values());
-		memberList.sort(MEMBER_COMPARATOR);
+		memberList.sort(Comparator.comparing(LeagueMember::getLeaguePosition));
 		return memberList;
 	}
 
@@ -168,15 +159,6 @@ public class League extends GeneralTeam<PlayerAlliance, LeagueMember> {
 		} finally {
 			unlock();
 		}
-	}
-
-	static class LeagueMemberComparator implements Comparator<LeagueMember> {
-
-		@Override
-		public int compare(LeagueMember o1, LeagueMember o2) {
-			return o1.getLeaguePosition() > o2.getLeaguePosition() ? 1 : -1;
-		}
-
 	}
 
 	public Collection<Player> getCaptains() {

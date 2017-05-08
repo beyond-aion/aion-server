@@ -15,7 +15,7 @@ public class PlayerGroup extends TemporaryPlayerTeam<PlayerGroupMember> {
 		super(id);
 		this.playerGroupStats = new PlayerGroupStats(this);
 		this.type = type;
-		initializeTeam(leader);
+		setLeader(leader);
 	}
 
 	@Override
@@ -33,8 +33,8 @@ public class PlayerGroup extends TemporaryPlayerTeam<PlayerGroupMember> {
 	}
 
 	@Override
-	public boolean isFull() {
-		return size() == 6;
+	public int getMaxMemberCount() {
+		return 6;
 	}
 
 	@Override
