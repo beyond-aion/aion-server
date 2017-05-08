@@ -52,8 +52,8 @@ public class PlayerAlliance extends TemporaryPlayerTeam<PlayerAllianceMember> {
 
 	@Override
 	public int getMinExpPlayerLevel() {
-		int minLvl = 0;
-		for (Player member : this.getMembers()) {
+		int minLvl = 99;
+		for (Player member : getMembers()) {
 			if (member.getLevel() < minLvl) {
 				minLvl = member.getLevel();
 			}
@@ -63,8 +63,8 @@ public class PlayerAlliance extends TemporaryPlayerTeam<PlayerAllianceMember> {
 
 	@Override
 	public int getMaxExpPlayerLevel() {
-		int maxLvl = 0;
-		for (Player member : this.getMembers()) {
+		int maxLvl = 1;
+		for (Player member : getMembers()) {
 			if (member.getLevel() > maxLvl) {
 				maxLvl = member.getLevel();
 			}

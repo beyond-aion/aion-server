@@ -2,8 +2,6 @@ package com.aionemu.gameserver.model.gameobjects;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.team.TemporaryPlayerTeam;
-import com.aionemu.gameserver.model.team.alliance.PlayerAlliance;
-import com.aionemu.gameserver.model.team.group.PlayerGroup;
 
 /**
  * Find Group
@@ -56,49 +54,24 @@ public class FindGroup {
 	public int getClassId() {
 		if (object instanceof Player)
 			return ((Player) (object)).getPlayerClass().getClassId();
-		else if (object instanceof PlayerAlliance)
-			((PlayerAlliance) (object)).getLeaderObject().getCommonData().getPlayerClass();
-		else if (object instanceof PlayerGroup) {
-			((PlayerGroup) object).getLeaderObject().getPlayerClass();
-		}
+		else if (object instanceof TemporaryPlayerTeam)
+			return ((TemporaryPlayerTeam<?>) object).getLeaderObject().getPlayerClass().getClassId();
 		return 0;
 	}
 
 	public int getMinLevel() {
 		if (object instanceof Player)
 			return ((Player) (object)).getLevel();
-		else if (object instanceof PlayerAlliance) {
-			int minLvl = 99;
-			for (Player member : ((PlayerAlliance) (object)).getMembers()) {
-				int memberLvl = member.getCommonData().getLevel();
-				if (memberLvl < minLvl)
-					minLvl = memberLvl;
-			}
-			return minLvl;
-		} else if (object instanceof PlayerGroup) {
-			return ((PlayerGroup) object).getMinExpPlayerLevel();
-		} else if (object instanceof TemporaryPlayerTeam) {
+		else if (object instanceof TemporaryPlayerTeam)
 			return ((TemporaryPlayerTeam<?>) object).getMinExpPlayerLevel();
-		}
 		return 1;
 	}
 
 	public int getMaxLevel() {
 		if (object instanceof Player)
 			return ((Player) (object)).getLevel();
-		else if (object instanceof PlayerAlliance) {
-			int maxLvl = 1;
-			for (Player member : ((PlayerAlliance) (object)).getMembers()) {
-				int memberLvl = member.getCommonData().getLevel();
-				if (memberLvl > maxLvl)
-					maxLvl = memberLvl;
-			}
-			return maxLvl;
-		} else if (object instanceof PlayerGroup) {
-			return ((PlayerGroup) object).getMaxExpPlayerLevel();
-		} else if (object instanceof TemporaryPlayerTeam) {
+		else if (object instanceof TemporaryPlayerTeam)
 			return ((TemporaryPlayerTeam<?>) object).getMaxExpPlayerLevel();
-		}
 		return 1;
 	}
 
@@ -113,24 +86,14 @@ public class FindGroup {
 	 * @return the name
 	 */
 	public String getName() {
-		if (object instanceof Player)
-			return ((Player) object).getName();
-		else if (object instanceof PlayerAlliance)
-			return ((PlayerAlliance) object).getLeaderObject().getCommonData().getName();
-		else if (object instanceof PlayerGroup) {
-			return ((PlayerGroup) object).getLeaderObject().getName();
-		}
-		return "";
+		if (object instanceof TemporaryPlayerTeam)
+			return ((TemporaryPlayerTeam<?>) object).getLeaderObject().getName();
+		return object.getName();
 	}
 
 	public int getSize() {
-		if (object instanceof Player)
-			return 1;
-		else if (object instanceof PlayerAlliance)
-			return ((PlayerAlliance) object).size();
-		else if (object instanceof PlayerGroup) {
-			return ((PlayerGroup) object).size();
-		}
+		if (object instanceof TemporaryPlayerTeam)
+			return ((TemporaryPlayerTeam<?>) object).size();
 		return 1;
 	}
 
