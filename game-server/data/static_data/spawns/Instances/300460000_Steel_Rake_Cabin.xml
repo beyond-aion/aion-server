@@ -130,10 +130,10 @@
 		</spawn>
 		<!-- Kobold Worker -->
 		<spawn npc_id="219038">
-			<spot x="459.62" y="561.43" z="951.7026" h="65" walker_id="0A30BAEDA5CFA1EADD42AB201AE59050EFCFDEB5"/>
-			<spot x="499.39" y="523.41" z="951.719" h="72" walker_id="6B424ED6498D542BE23B32E892AC2A1471953CBC"/>
-			<spot x="480.21" y="542.62" z="951.7027" walker_id="E78417B1B96D208F4FEFE3B589944A64ED2741CA"/>
-			<spot x="505.56" y="489.74" z="951.704" walker_id="818EC28B9586892B438F4762384D035F2EBF254E"/>
+			<spot x="459.62" y="561.43" z="951.7026" h="65"/>
+			<spot x="499.39" y="523.41" z="951.719" h="72"/>
+			<spot x="480.21" y="542.62" z="951.7027"/>
+			<spot x="505.56" y="489.74" z="951.704"/>
 		</spawn>
 		<!-- Old Book -->
 		<spawn npc_id="730195">
@@ -150,7 +150,7 @@
 		<!-- Petrahulk Sentinel -->
 		<spawn npc_id="219024">
 			<spot x="565.419" y="501.469" z="951.703" h="45"/>
-			<spot x="579.22" y="558.69" z="944.69" h="91" walker_id="E9DB7092EB06E4DB5FCA6EDC214189A31B0F888C"/>
+			<spot x="579.22" y="558.69" z="944.69" h="91"/>
 			<spot x="579.438" y="513.444" z="944.671" h="30"/>
 			<spot x="608.111" y="496.120" z="942.240"/>
 			<spot x="611.039" y="505.001" z="935.673" h="90"/>
@@ -183,12 +183,12 @@
 		<!-- Skurv Warrior -->
 		<spawn npc_id="219015">
 			<spot x="312.71" y="506.2" z="949.7203" h="60" walker_id="4A6804490830146F0442B73E4A42A551D66EFD57"/>
-			<spot x="332.07" y="609.13" z="949.7481" h="5" walker_id="9BE31BD0550D054B5EFCF83EC5CCD3E938ECF9F4"/>
-			<spot x="337.04" y="513.59" z="949.7315" h="84" walker_id="B9B99A4CBDA5B4C8A7B574C0EDB598CCA13E180B"/>
-			<spot x="375.27" y="519.11" z="944.77" h="91" walker_id="638493DD70B57EEE81D9D38170B64FE6F3C0BCDC"/>
+			<spot x="332.07" y="609.13" z="949.7481" h="5"/>
+			<spot x="337.04" y="513.59" z="949.7315" h="84"/>
+			<spot x="375.27" y="519.11" z="944.77" h="91"/>
 			<spot x="382.689" y="599.308" z="946.096" h="93"/>
 			<spot x="384.256" y="599.246" z="946.096" h="83"/>
-			<spot x="474.05" y="509.53" z="951.7001" h="92" walker_id="3FA47A8AFD891C4BE44C0273F2E09DA6A3E148E8"/>
+			<spot x="474.05" y="509.53" z="951.7001" h="92"/>
 		</spawn>
 		<!-- Sommelikinerk -->
 		<spawn npc_id="798375">
@@ -243,7 +243,7 @@
 		</spawn>
 		<!-- Steel Rake Deck Hand -->
 		<spawn npc_id="218964">
-			<spot x="384.75" y="616.8" z="948.10394" h="61" walker_id="B09C9A595473F62454914ADA941CE0DFB45FD387"/>
+			<spot x="384.75" y="616.8" z="948.10394" h="61"/>
 			<spot x="458.536" y="578.219" z="958.078"/>
 			<spot x="460.42" y="515.32" z="958.70844" h="30" walker_id="BC8FB5E18247A116D0114E3DD4C6C866DA2B725E"/>
 		</spawn>
@@ -310,7 +310,7 @@
 		<!-- Steel Rake Healer -->
 		<spawn npc_id="219011">
 			<spot x="512.180" y="527.350" z="952.439" h="11"/>
-			<spot x="672.62" y="498.44" z="942.37616" h="30" walker_id="9CA40D10BA17E8F7C32D96CD9C8128A38B700C7E"/>
+			<spot x="672.62" y="498.44" z="942.37616" h="30"/>
 		</spawn>
 		<!-- Steel Rake Healer -->
 		<spawn npc_id="219004">
@@ -377,10 +377,10 @@
 		</spawn>
 		<!-- Steel Rake Watcher -->
 		<spawn npc_id="218972">
-			<spot x="366.27" y="476.42" z="946.77" h="80" walker_id="8516EA9568A3FF901EFF47F4B2F1EF181FF3A499"/>
+			<spot x="366.27" y="476.42" z="946.77" h="80"/>
 			<spot x="513.44" y="463.13" z="951.67816" h="64" walker_id="095CCE9E57820FA6F08E593B1972358FD03CF649"/>
-			<spot x="557.12" y="510.92" z="951.70294" h="91" walker_id="7156E7537EA4BD60B9E7BDB96353C9B573C78DDD"/>
-			<spot x="640.15" y="500.15" z="942.24" h="39" walker_id="5B37E5589E1B5FE3CA859C539075E4F29BCED413"/>
+			<spot x="557.12" y="510.92" z="951.70294" h="91"/>
+			<spot x="640.15" y="500.15" z="942.24" h="39"/>
 			<spot x="642.140" y="478.870" z="936.034" h="45"/>
 			<spot x="697.079" y="542.160" z="942.374" h="60"/>
 		</spawn>
