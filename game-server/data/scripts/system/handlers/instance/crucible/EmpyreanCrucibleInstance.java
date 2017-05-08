@@ -1455,7 +1455,7 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 				break;
 			case 217753: // skillbooks
 				if (Rnd.chance() < 51) {
-					Race race = instance.getRegisteredGroup().getRace();
+					Race race = instance.getRegisteredTeam().getRace();
 					switch (Rnd.get(1, 4)) {
 						case 1:
 							itemId = 169500935;

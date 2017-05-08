@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.model.team.group.events;
 
+import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.team.common.events.PlayerLeavedEvent;
 import com.aionemu.gameserver.model.team.common.legacy.GroupEvent;
@@ -75,16 +76,16 @@ public class PlayerGroupLeavedEvent extends PlayerLeavedEvent<PlayerGroupMember,
 		}
 
 		if (leavedPlayer.isInInstance()) {
-			ThreadPoolManager.getInstance().schedule(new Runnable() {
+			leavedPlayer.getController().addTask(TaskId.DESPAWN, ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 				@Override
 				public void run() {
-					if (!leavedPlayer.isInGroup()) {
-						if (leavedPlayer.getPosition().getWorldMapInstance().getRegisteredGroup() != null)
+					if (leavedPlayer.getCurrentTeamId() != team.getObjectId()) {
+						if (leavedPlayer.getPosition().getWorldMapInstance().getRegisteredTeam() != null)
 							InstanceService.moveToExitPoint(leavedPlayer);
 					}
 				}
-			}, 10000);
+			}, 30000));
 		}
 	}
 

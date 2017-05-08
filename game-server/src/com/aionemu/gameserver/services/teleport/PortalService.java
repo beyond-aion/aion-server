@@ -15,9 +15,9 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.items.storage.Storage;
 import com.aionemu.gameserver.model.siege.FortressLocation;
+import com.aionemu.gameserver.model.team.GeneralTeam;
 import com.aionemu.gameserver.model.team.alliance.PlayerAlliance;
 import com.aionemu.gameserver.model.team.group.PlayerGroup;
-import com.aionemu.gameserver.model.team.league.League;
 import com.aionemu.gameserver.model.templates.InstanceCooltime;
 import com.aionemu.gameserver.model.templates.portal.ItemReq;
 import com.aionemu.gameserver.model.templates.portal.PortalLoc;
@@ -150,7 +150,7 @@ public class PortalService {
 
 					// No solo instance found
 					if (instance == null && isInstance)
-						instance = registerGroup(group, mapId, playerSize, difficult);
+						instance = registerTeam(group, mapId, playerSize, difficult);
 				}
 
 				// if already registered - just teleport
@@ -182,11 +182,11 @@ public class PortalService {
 
 						// No solo instance found
 						if (instance == null)
-							instance = registerGroup(group, mapId, playerSize, difficult);
+							instance = registerTeam(group, mapId, playerSize, difficult);
 					}
 					// No instance and default requirement on = Group on
 					else if (instance == null && instanceGroupReq) {
-						instance = registerGroup(group, mapId, playerSize, difficult);
+						instance = registerTeam(group, mapId, playerSize, difficult);
 					}
 					// No instance, default requirement off, no group = Register new instance with player ID
 					else if (instance == null && !instanceGroupReq && group == null) {
@@ -200,53 +200,17 @@ public class PortalService {
 			default:
 				PlayerAlliance allianceGroup = player.getPlayerAlliance();
 				if (allianceGroup != null || !instanceGroupReq) {
-					int allianceId = player.getObjectId();
-					League league = null;
-					if (allianceGroup != null) {
-						league = allianceGroup.getLeague();
-						if (player.isInLeague()) {
-							allianceId = league.getObjectId();
-						} else {
-							allianceId = allianceGroup.getObjectId();
-							instance = InstanceService.getRegisteredInstance(mapId, allianceId);
-						}
-					} else {
-						instance = InstanceService.getRegisteredInstance(mapId, allianceId);
-					}
+					GeneralTeam<?, ?> team = allianceGroup;
+					if (allianceGroup != null && allianceGroup.getLeague() != null)
+						team = allianceGroup.getLeague();
+					int teamId = team == null ? player.getObjectId() : team.getObjectId();
+					instance = InstanceService.getRegisteredInstance(mapId, teamId);
 
-					if (instance == null && allianceGroup != null && !instanceGroupReq) {
-						if (league != null) {
-							for (PlayerAlliance alliance : allianceGroup.getLeague().getMembers()) {
-								for (Player member : alliance.getMembers()) {
-									instance = InstanceService.getRegisteredInstance(mapId, member.getObjectId());
-									if (instance != null) {
-										break;
-									}
-								}
-							}
-						} else {
-							for (Player member : allianceGroup.getMembers()) {
-								instance = InstanceService.getRegisteredInstance(mapId, member.getObjectId());
-								if (instance != null) {
-									break;
-								}
-							}
-						}
-						if (instance == null) {
-							if (league != null) {
-								instance = registerLeague(league, mapId, playerSize, difficult);
-							} else {
-								instance = registerAlliance(allianceGroup, mapId, playerSize, difficult);
-							}
-						}
-					} else if (instance == null && instanceGroupReq) {
-						if (league != null) {
-							instance = registerLeague(league, mapId, playerSize, difficult);
-						} else {
-							instance = registerAlliance(allianceGroup, mapId, playerSize, difficult);
-						}
-					} else if (instance == null && !instanceGroupReq && allianceGroup == null) {
-						instance = InstanceService.getNextAvailableInstance(mapId, difficult);
+					if (instance == null) {
+						if (team != null)
+							instance = registerTeam(team, mapId, playerSize, difficult);
+						else
+							instance = InstanceService.getNextAvailableInstance(mapId, difficult);
 					}
 					if (instance != null && instance.getPlayersInside().size() < playerSize) {
 						transfer(player, loc, instance, reenter);
@@ -415,21 +379,9 @@ public class PortalService {
 		}
 	}
 
-	private static WorldMapInstance registerGroup(PlayerGroup group, int mapId, int playerSize, byte difficult) {
+	private static WorldMapInstance registerTeam(GeneralTeam<?, ?> team, int mapId, int playerSize, byte difficult) {
 		WorldMapInstance instance = InstanceService.getNextAvailableInstance(mapId, difficult);
-		InstanceService.registerGroupWithInstance(instance, group, playerSize);
-		return instance;
-	}
-
-	private static WorldMapInstance registerAlliance(PlayerAlliance group, int mapId, int playerSize, byte difficult) {
-		WorldMapInstance instance = InstanceService.getNextAvailableInstance(mapId, difficult);
-		InstanceService.registerAllianceWithInstance(instance, group, playerSize);
-		return instance;
-	}
-
-	private static WorldMapInstance registerLeague(League group, int mapId, int playerSize, byte difficult) {
-		WorldMapInstance instance = InstanceService.getNextAvailableInstance(mapId, difficult);
-		InstanceService.registerLeagueWithInstance(instance, group, playerSize);
+		InstanceService.registerTeamWithInstance(instance, team, playerSize);
 		return instance;
 	}
 

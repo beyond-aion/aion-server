@@ -18,9 +18,7 @@ import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.items.storage.Storage;
-import com.aionemu.gameserver.model.team.alliance.PlayerAlliance;
-import com.aionemu.gameserver.model.team.group.PlayerGroup;
-import com.aionemu.gameserver.model.team.league.League;
+import com.aionemu.gameserver.model.team.GeneralTeam;
 import com.aionemu.gameserver.model.templates.world.WorldMapTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.AutoGroupService;
@@ -46,7 +44,7 @@ public class InstanceService {
 	private static final Logger log = LoggerFactory.getLogger(InstanceService.class);
 	private static final List<Integer> instanceAggro = new ArrayList<>();
 	private static final List<Integer> instanceCoolDownFilter = new ArrayList<>();
-	private static final int SOLO_INSTANCES_DESTROY_DELAY = 10 * 60 * 1000; // 10 minutes
+	private static final int INSTANCE_DESTROY_DELAY = 10 * 60 * 1000; // 10 minutes
 
 	public static void load() {
 		for (String s : CustomConfig.INSTANCES_MOB_AGGRO.split(",")) {
@@ -148,28 +146,8 @@ public class InstanceService {
 		instance.setSoloPlayerObjId(obj);
 	}
 
-	/**
-	 * @param instance
-	 * @param group
-	 */
-	public static void registerGroupWithInstance(WorldMapInstance instance, PlayerGroup group, int playerSize) {
-		instance.registerGroup(group, playerSize);
-	}
-
-	/**
-	 * @param instance
-	 * @param group
-	 */
-	public static void registerAllianceWithInstance(WorldMapInstance instance, PlayerAlliance group, int playerSize) {
-		instance.registerGroup(group, playerSize);
-	}
-
-	/**
-	 * @param instance
-	 * @param leaguee
-	 */
-	public static void registerLeagueWithInstance(WorldMapInstance instance, League group, int playerSize) {
-		instance.registerGroup(group, playerSize);
+	public static void registerTeamWithInstance(WorldMapInstance instance, GeneralTeam<?, ?> team, int playerSize) {
+		instance.registerTeam(team, playerSize);
 	}
 
 	/**
@@ -291,48 +269,45 @@ public class InstanceService {
 	 * @param worldMapInstance
 	 */
 	private static void startInstanceChecker(WorldMapInstance worldMapInstance) {
-
-		int delay = 150000; // 2.5 minutes
 		int period = 60000; // 1 minute
 		worldMapInstance
-			.setEmptyInstanceTask(ThreadPoolManager.getInstance().scheduleAtFixedRate(new EmptyInstanceCheckerTask(worldMapInstance), delay, period));
+			.setEmptyInstanceTask(ThreadPoolManager.getInstance().scheduleAtFixedRate(new EmptyInstanceCheckerTask(worldMapInstance), 0, period));
 	}
 
 	private static class EmptyInstanceCheckerTask implements Runnable {
 
-		private WorldMapInstance worldMapInstance;
-		private long soloInstanceDestroyTime;
+		private final WorldMapInstance worldMapInstance;
+		private long instanceDestroyTime;
 
 		private EmptyInstanceCheckerTask(WorldMapInstance worldMapInstance) {
 			this.worldMapInstance = worldMapInstance;
-			this.soloInstanceDestroyTime = System.currentTimeMillis() + SOLO_INSTANCES_DESTROY_DELAY;
+			this.instanceDestroyTime = System.currentTimeMillis() + INSTANCE_DESTROY_DELAY;
 		}
 
-		private boolean canDestroySoloInstance() {
-			return System.currentTimeMillis() > this.soloInstanceDestroyTime;
+		private boolean canDestroyInstance() {
+			if (!worldMapInstance.getPlayersInside().isEmpty())
+				return false;
+			return worldMapInstance.isPersonal() || isRegisteredTeamDisbanded() || System.currentTimeMillis() > instanceDestroyTime - 1000;
 		}
 
-		private void updateSoloInstanceDestroyTime() {
-			this.soloInstanceDestroyTime = System.currentTimeMillis() + SOLO_INSTANCES_DESTROY_DELAY;
+		private boolean isRegisteredTeamDisbanded() {
+			GeneralTeam<?, ?> registeredGroup = worldMapInstance.getRegisteredTeam();
+			if (registeredGroup != null && registeredGroup.size() == 0) {
+				return true;
+			}
+			return false;
+		}
+
+		private void updateInstanceDestroyTime() {
+			instanceDestroyTime = System.currentTimeMillis() + INSTANCE_DESTROY_DELAY;
 		}
 
 		@Override
 		public void run() {
-			PlayerGroup registeredGroup = worldMapInstance.getRegisteredGroup();
-			if (registeredGroup == null) {
-				for (Player player : worldMapInstance.getPlayersInside()) {
-					if (player.isOnline()) {
-						updateSoloInstanceDestroyTime();
-						return;
-					}
-				}
-
-				if (canDestroySoloInstance() || worldMapInstance.isPersonal()) {
-					destroyInstance(worldMapInstance);
-				}
-			} else if (registeredGroup.size() == 0) {
+			if (canDestroyInstance())
 				destroyInstance(worldMapInstance);
-			}
+			else
+				updateInstanceDestroyTime();
 		}
 
 	}
@@ -387,8 +362,8 @@ public class InstanceService {
 	}
 
 	public static int getInstanceRate(Player player, int mapId) {
-		int instanceCooldownRate = player.hasPermission(MembershipConfig.INSTANCES_COOLDOWN) && !instanceCoolDownFilter.contains(mapId) ? CustomConfig.INSTANCES_RATE
-			: 1;
+		int instanceCooldownRate = player.hasPermission(MembershipConfig.INSTANCES_COOLDOWN) && !instanceCoolDownFilter.contains(mapId)
+			? CustomConfig.INSTANCES_RATE : 1;
 		if (instanceCoolDownFilter.contains(mapId)) {
 			instanceCooldownRate = 1;
 		}

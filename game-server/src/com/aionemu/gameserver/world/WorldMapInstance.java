@@ -21,9 +21,7 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.StaticDoor;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.team.alliance.PlayerAlliance;
-import com.aionemu.gameserver.model.team.group.PlayerGroup;
-import com.aionemu.gameserver.model.team.league.League;
+import com.aionemu.gameserver.model.team.GeneralTeam;
 import com.aionemu.gameserver.model.templates.quest.QuestNpc;
 import com.aionemu.gameserver.model.templates.world.WorldMapTemplate;
 import com.aionemu.gameserver.model.templates.zone.ZoneClassName;
@@ -70,7 +68,7 @@ public abstract class WorldMapInstance implements Iterable<VisibleObject> {
 	 */
 	private final Map<Integer, Player> worldMapPlayers = new ConcurrentHashMap<>();
 	private final Set<Integer> registeredObjects = Collections.newSetFromMap(new ConcurrentHashMap<Integer, Boolean>());
-	private PlayerGroup registeredGroup = null;
+	private GeneralTeam<?, ?> registeredTeam = null;
 	private Future<?> emptyInstanceTask = null;
 	private Future<?> updateNearbyQuestsTask = null;
 	/**
@@ -82,8 +80,6 @@ public abstract class WorldMapInstance implements Iterable<VisibleObject> {
 	private Map<ZoneName, ZoneInstance> zones = new HashMap<>();
 	// TODO: Merge this with owner
 	private int soloPlayer;
-	private PlayerAlliance registredAlliance;
-	private League registredLeague;
 	private float[] startPos;
 	private int playerSize;
 
@@ -281,30 +277,12 @@ public abstract class WorldMapInstance implements Iterable<VisibleObject> {
 		return getInstanceId() > twinCount;
 	}
 
-	public void registerGroup(PlayerGroup group, int playerSize) {
-		registeredGroup = group;
-		register(group.getTeamId());
+	public void registerTeam(GeneralTeam<?, ?> team, int playerSize) {
+		if (registeredTeam != null)
+			throw new IllegalStateException("A team for instance " + instanceId + " of map " + getMapId() + " is already registered");
+		registeredTeam = team;
+		register(team.getTeamId());
 		this.playerSize = playerSize;
-	}
-
-	public void registerGroup(PlayerAlliance group, int playerSize) {
-		registredAlliance = group;
-		register(group.getObjectId());
-		this.playerSize = playerSize;
-	}
-
-	public void registerGroup(League group, int playerSize) {
-		registredLeague = group;
-		register(group.getObjectId());
-		this.playerSize = playerSize;
-	}
-
-	public PlayerAlliance getRegistredAlliance() {
-		return registredAlliance;
-	}
-
-	public League getRegistredLeague() {
-		return registredLeague;
 	}
 
 	/**
@@ -334,10 +312,10 @@ public abstract class WorldMapInstance implements Iterable<VisibleObject> {
 	}
 
 	/**
-	 * @return the registeredGroup
+	 * @return the registeredTeam
 	 */
-	public PlayerGroup getRegisteredGroup() {
-		return registeredGroup;
+	public GeneralTeam<?, ?> getRegisteredTeam() {
+		return registeredTeam;
 	}
 
 	public List<Integer> getQuestIds() {

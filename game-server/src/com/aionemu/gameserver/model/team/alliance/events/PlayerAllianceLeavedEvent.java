@@ -2,6 +2,7 @@ package com.aionemu.gameserver.model.team.alliance.events;
 
 import java.util.Objects;
 
+import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.team.alliance.PlayerAlliance;
 import com.aionemu.gameserver.model.team.alliance.PlayerAllianceMember;
@@ -16,7 +17,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.instance.InstanceService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
-import com.aionemu.gameserver.world.WorldMapInstance;
 
 /**
  * @author ATracer
@@ -98,19 +98,17 @@ public class PlayerAllianceLeavedEvent extends PlayerLeavedEvent<PlayerAllianceM
 		}
 
 		if (leavedPlayer.isInInstance()) {
-			ThreadPoolManager.getInstance().schedule(new Runnable() {
+			leavedPlayer.getController().addTask(TaskId.DESPAWN, ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 				@Override
 				public void run() {
-					if (!leavedPlayer.isInAlliance()) {
-						WorldMapInstance instance = leavedPlayer.getPosition().getWorldMapInstance();
-						if (instance.getRegistredAlliance() != null || instance.getRegistredLeague() != null) {
+					if (leavedPlayer.getCurrentTeamId() != team.getObjectId()) {
+						if (leavedPlayer.getPosition().getWorldMapInstance().getRegisteredTeam() != null)
 							InstanceService.moveToExitPoint(leavedPlayer);
-						}
 					}
 				}
 
-			}, 10000);
+			}, 30000));
 		}
 	}
 

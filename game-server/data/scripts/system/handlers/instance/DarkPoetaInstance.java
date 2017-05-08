@@ -15,7 +15,7 @@ import com.aionemu.gameserver.model.gameobjects.StaticDoor;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.instance.InstanceScoreType;
 import com.aionemu.gameserver.model.instance.instancereward.DarkPoetaReward;
-import com.aionemu.gameserver.model.team.group.PlayerGroup;
+import com.aionemu.gameserver.model.team.TemporaryPlayerTeam;
 import com.aionemu.gameserver.network.aion.instanceinfo.DarkPoetaScoreInfo;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_INSTANCE_SCORE;
@@ -23,6 +23,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
+import com.aionemu.gameserver.utils.stats.AbyssRankEnum;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
 /**
@@ -249,9 +250,9 @@ public class DarkPoetaInstance extends GeneralInstanceHandler {
 				pointsReward = 954;
 				break;
 		}
-		PlayerGroup group = instance.getRegisteredGroup();
-		if (group != null) {
-			if (group.getLeaderObject().getAbyssRank().getRank().getId() >= 10)
+		TemporaryPlayerTeam<?> team = (TemporaryPlayerTeam<?>) instance.getRegisteredTeam();
+		if (team != null) {
+			if (team.getLeaderObject().getAbyssRank().getRank().getId() >= AbyssRankEnum.STAR1_OFFICER.getId())
 				pointsReward = Math.round(pointsReward * 1.1f);
 		}
 		return pointsReward;
