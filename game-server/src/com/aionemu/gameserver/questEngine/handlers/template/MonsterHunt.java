@@ -212,7 +212,7 @@ public class MonsterHunt extends QuestHandler {
 							}
 							updateQuestStatus(env);
 							if (!isDataDriven) { // Old quest style
-								if (tmpTotal == m.getEndVar() && reward || rewardNextStep) {
+								if (tmpTotal == m.getEndVar() && (reward || rewardNextStep)) {
 									if (rewardNextStep)
 										qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
 									qs.setStatus(QuestStatus.REWARD);
