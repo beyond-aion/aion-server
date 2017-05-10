@@ -45,7 +45,7 @@ public class PlayerReviveService {
 
 	public static final void skillRevive(Player player) {
 		if (!player.getResStatus()) {
-			AuditLogger.log(player, "possibly tried to use a selfres hack");
+			AuditLogger.log(player, "possibly tried to use a selfres hack (accepted missing res by another player)");
 			return;
 		}
 		revive(player, 10, 10, true, player.getResurrectionSkill());
@@ -68,6 +68,7 @@ public class PlayerReviveService {
 
 	public static final void rebirthRevive(Player player) {
 		if (!player.canUseRebirthRevive()) {
+			AuditLogger.log(player, "possibly tried to use a selfres hack (no rebirth effect present)");
 			return;
 		}
 
