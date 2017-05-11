@@ -23,9 +23,9 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 @AIName("useitem")
 public class ActionItemNpcAI extends NpcAI {
 
-	protected int startBarAnimation = 1;
-	protected int cancelBarAnimation = 2;
-	private List<ItemUseObserver> observers = new ArrayList<>();
+	protected final int startBarAnimation = 1;
+	protected final int cancelBarAnimation = 2;
+	private final List<ItemUseObserver> observers = new ArrayList<>();
 
 	@Override
 	protected void handleDialogStart(Player player) {
@@ -33,8 +33,8 @@ public class ActionItemNpcAI extends NpcAI {
 	}
 
 	protected void handleUseItemStart(final Player player) {
-		final int delay = getTalkDelay();
-		if (delay > 1) {
+		final int talkDelayInMs = getTalkDelayInMs();
+		if (talkDelayInMs > 0) {
 			final ItemUseObserver observer = new ItemUseObserver() {
 
 				@Override
@@ -42,28 +42,34 @@ public class ActionItemNpcAI extends NpcAI {
 					player.getController().cancelTask(TaskId.ACTION_ITEM_NPC);
 					PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.END_QUESTLOOT, 0, getObjectId()), true);
 					PacketSendUtility.sendPacket(player, new SM_USE_OBJECT(player.getObjectId(), getObjectId(), 0, cancelBarAnimation));
-					observers.remove(this);
+					synchronized (observers) {
+						observers.remove(this);
+					}
 					player.getObserveController().removeObserver(this);
 				}
 
 			};
 
 			player.getObserveController().addObserver(observer);
-			observers.add(observer);
-			PacketSendUtility.sendPacket(player, new SM_USE_OBJECT(player.getObjectId(), getObjectId(), getTalkDelay(), startBarAnimation));
+			synchronized (observers) {
+				observers.add(observer);
+			}
+			PacketSendUtility.sendPacket(player, new SM_USE_OBJECT(player.getObjectId(), getObjectId(), talkDelayInMs, startBarAnimation));
 			PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.START_QUESTLOOT, 0, getObjectId()), true);
 			player.getController().addTask(TaskId.ACTION_ITEM_NPC, ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 				@Override
 				public void run() {
 					PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.END_QUESTLOOT, 0, getObjectId()), true);
-					PacketSendUtility.sendPacket(player, new SM_USE_OBJECT(player.getObjectId(), getObjectId(), getTalkDelay(), cancelBarAnimation));
+					PacketSendUtility.sendPacket(player, new SM_USE_OBJECT(player.getObjectId(), getObjectId(), talkDelayInMs, cancelBarAnimation));
 					player.getObserveController().removeObserver(observer);
-					observers.remove(observer);
+					synchronized (observers) {
+						observers.remove(observer);
+					}
 					handleUseItemFinish(player);
 				}
 
-			}, delay));
+			}, talkDelayInMs));
 		} else {
 			handleUseItemFinish(player);
 		}
@@ -74,17 +80,19 @@ public class ActionItemNpcAI extends NpcAI {
 			AIActions.handleUseItemFinish(this, player);
 	}
 
-	protected int getTalkDelay() {
+	protected int getTalkDelayInMs() {
 		return getObjectTemplate().getTalkDelay() * 1000;
 	}
 
 	@Override
 	protected void handleDied() {
 		super.handleDied();
-		for (Iterator<ItemUseObserver> iter = observers.iterator(); iter.hasNext();) {
-			ItemUseObserver observer = iter.next();
-			iter.remove();
-			observer.abort();
+		synchronized (observers) {
+			for (Iterator<ItemUseObserver> iter = observers.iterator(); iter.hasNext();) {
+				ItemUseObserver observer = iter.next();
+				iter.remove();
+				observer.abort();
+			}
 		}
 	}
 

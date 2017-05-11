@@ -44,7 +44,7 @@ public class PortalDialogAI extends PortalAI {
 
 	@Override
 	protected void handleDialogStart(Player player) {
-		if (getTalkDelay() == 0) {
+		if (getTalkDelayInMs() == 0) {
 			checkDialog(player);
 		} else {
 			super.handleDialogStart(player);
