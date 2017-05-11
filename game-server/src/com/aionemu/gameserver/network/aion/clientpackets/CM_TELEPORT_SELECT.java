@@ -13,6 +13,7 @@ import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
+import com.aionemu.gameserver.world.World;
 
 /**
  * @author ATracer, orz, KID
@@ -22,12 +23,12 @@ public class CM_TELEPORT_SELECT extends AionClientPacket {
 	/**
 	 * NPC object ID
 	 */
-	public int targetObjId;
+	private int targetObjId;
 
 	/**
 	 * Destination of teleport
 	 */
-	public int locId;
+	private int locId;
 
 	public CM_TELEPORT_SELECT(int opcode, State state, State... restStates) {
 		super(opcode, state, restStates);
@@ -47,7 +48,10 @@ public class CM_TELEPORT_SELECT extends AionClientPacket {
 
 		AionObject obj = player.getKnownList().getObject(targetObjId);
 		if (!(obj instanceof Npc)) {
-			AuditLogger.log(player, "tried to teleport via " + (obj == null ? "unknown npc" : obj));
+			if (obj == null)
+				obj = World.getInstance().findVisibleObject(targetObjId);
+			AuditLogger.log(player, "tried to teleport to locId " + locId + " via " + (obj == null ? "unknown npc (objId " + targetObjId + ")" : obj)
+				+ " at " + player.getPosition());
 			return;
 		}
 

@@ -248,7 +248,6 @@
 			<xs:element name="move_casting" type="PlayerMovedCondition" minOccurs="0" maxOccurs="1"/>
 			<xs:element name="ride_robot" type="RideRobotCondition" minOccurs="0" maxOccurs="1"/>
 			<xs:element name="race" type="RaceCondition" minOccurs="0" maxOccurs="1"/>
-			<xs:element name="arrowcheck" type="ArrowCheckCondition" minOccurs="0" maxOccurs="1"/>
 			<xs:element name="abnormal" type="AbnormalStateCondition" minOccurs="0" maxOccurs="1"/>
 			<xs:element name="onfly" type="OnFlyCondition" minOccurs="0" maxOccurs="1"/>
 			<xs:element name="noflying" type="NoFlyingCondition" minOccurs="0" maxOccurs="1"/>
@@ -318,11 +317,6 @@
 			<xs:extension base="Condition">
 				<xs:attribute name="value" type="TargetAttribute" use="required"/>
 			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
-	<xs:complexType name="ArrowCheckCondition">
-		<xs:complexContent>
-			<xs:extension base="Condition"/>
 		</xs:complexContent>
 	</xs:complexType>
 	<xs:complexType name="OnFlyCondition">
