@@ -3000,6 +3000,14 @@
 		<spawn npc_id="804728" respawn_time="295">
 			<spot x="2725.02002" y="1412.31006" z="341.51077" h="113"/>
 		</spawn>
+		<!-- Enshar Aetheric Field Stone -->
+        <spawn npc_id="702753" respawn_time="295">
+            <spot x="939.97821" y="2588.7583" z="264.55969" static_id="247"/>
+            <spot x="1363.8551" y="2591.4673" z="265.56705" static_id="258"/>
+            <spot x="1617.5366" y="2342.9067" z="297.54898" static_id="265"/>
+            <spot x="1159.7938" y="2477.8315" z="277.20605" static_id="281"/>
+            <spot x="1177.3862" y="2687.8784" z="263.20251" static_id="283"/>
+        </spawn>
 		<!-- erratic highland spirit -->
 		<spawn npc_id="219856" respawn_time="895">
 			<spot x="1881.18994" y="1906.72998" z="378.72311"/>
