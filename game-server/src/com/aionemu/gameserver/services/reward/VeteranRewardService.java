@@ -22,7 +22,7 @@ public final class VeteranRewardService {
 	private static final List<List<RewardItem>> rewards = new ArrayList<>();
 
 	static {
-		for (int i = 0; i < 18; i++)
+		for (int i = 0; i < 36; i++)
 			rewards.add(new ArrayList<>());
 		// month 1
 		rewards.get(0).add(new RewardItem(169630007, 1)); // [Expand Card] Expand Cube Ticket (lvl 4)
