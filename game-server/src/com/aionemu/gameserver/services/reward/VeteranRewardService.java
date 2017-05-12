@@ -22,7 +22,7 @@ public final class VeteranRewardService {
 	private static final List<List<RewardItem>> rewards = new ArrayList<>();
 
 	static {
-		for (int i = 0; i < 18; i++)
+		for (int i = 0; i < 36; i++)
 			rewards.add(new ArrayList<>());
 		// month 1
 		rewards.get(0).add(new RewardItem(169630007, 1)); // [Expand Card] Expand Cube Ticket (lvl 4)
@@ -135,6 +135,122 @@ public final class VeteranRewardService {
 		rewards.get(17).add(new RewardItem(168310018, 1)); // Major Blessed Augment: Level 2
 		rewards.get(17).add(new RewardItem(166020003, 5)); // [Event] Omega Enchantment Stone
 		rewards.get(17).add(new RewardItem(162000107, 50)); // Saam King's Herbs
+		
+		// month 19
+		rewards.get(18).add(new RewardItem(125050026, 1)); // Elcoro Hat
+		rewards.get(18).add(new RewardItem(186000077, 1)); // Hot Heart of Magic
+		rewards.get(18).add(new RewardItem(186000247, 5)); // Major Danuar Relic
+		rewards.get(18).add(new RewardItem(161001001, 5)); // Revival Stone
+		
+		// month 20
+		rewards.get(19).add(new RewardItem(186000242, 15)); // Ceramium Medal
+		rewards.get(19).add(new RewardItem(166030007, 5)); // [Event] Tempering Solution
+		rewards.get(19).add(new RewardItem(188052719, 5)); // [Event] Dye Bundle
+		rewards.get(19).add(new RewardItem(162000137, 25)); // Sublime Life Serum
+		rewards.get(19).add(new RewardItem(162000139, 25)); // Sublime Mana Serum
+		
+		// month 21
+		rewards.get(20).add(new RewardItem(169630007, 1)); // [Expand Card] Expand Cube Ticket (lvl 4)
+		rewards.get(20).add(new RewardItem(169600039, 1)); // [Emotion Card] Chew Bubblegum
+		rewards.get(20).add(new RewardItem(186000238, 150)); // Conqueror's Herb
+		rewards.get(20).add(new RewardItem(162000107, 50)); // Saam King's Herb
+		
+		// month 22
+		rewards.get(21).add(new RewardItem(169640006, 1)); // [Expand Card] Expand Warehouse Ticket (lvl 4)
+		rewards.get(21).add(new RewardItem(152012593, 3)); // Valor's Heart
+		rewards.get(21).add(new RewardItem(152012587, 3)); // Wind Eternity
+		rewards.get(21).add(new RewardItem(166020003, 5)); // [Event] Omega Enchantment Stone
+		rewards.get(21).add(new RewardItem(164002284, 25)); // [Event] Ornate Firecrackers
+	
+		// month 23
+		rewards.get(22).add(new RewardItem(188508017, 1)); // [Motion Card] Stormbringer
+		rewards.get(22).add(new RewardItem(188053609, 3)); // [Event] Level 60 Composite Manastone Bundle
+		rewards.get(22).add(new RewardItem(166200009, 3)); // Mythic Weapon Tuning Scroll
+		rewards.get(22).add(new RewardItem(166200010, 3)); // Mythic Armor Tuning Scroll
+		
+		// month 24
+		rewards.get(23).add(new RewardItem(169650007, 1)); // [Event] Plastic Surgery Ticket
+		rewards.get(23).add(new RewardItem(186000242, 15)); // Ceramium Medal
+		rewards.get(23).add(new RewardItem(152012586, 2)); // Wind Breath
+		rewards.get(23).add(new RewardItem(152012581, 2)); // Fire Breath
+		rewards.get(23).add(new RewardItem(186000238, 150)); // Conqueror's Mark
+		
+		// month 25
+		rewards.get(24).add(new RewardItem(169630007, 1)); // [Expand Card] Expand Cube Ticket (lvl 4)
+		rewards.get(24).add(new RewardItem(166030007, 5)); // [Event] Tempering Solution
+		rewards.get(24).add(new RewardItem(169620072, 3)); // AP Boost Charm II - 30%
+		rewards.get(24).add(new RewardItem(162000107, 50)); // Saam King's Herb
+		
+		// month 26
+		rewards.get(25).add(new RewardItem(169640006, 1)); // [Expand Card] Expand Warehouse Ticket (lvl 4)
+		rewards.get(25).add(new RewardItem(152012593, 3)); // Valor's Heart
+		rewards.get(25).add(new RewardItem(152012590, 3)); // Wind Origin
+		rewards.get(25).add(new RewardItem(161001001, 5)); // Revival Stone
+		rewards.get(25).add(new RewardItem(166000195, 10)); // Epsilon Enchantment Stone
+		
+		// month 27
+		rewards.get(26).add(new RewardItem(188500014, 1)); // [Motion Card] The Dragon's Set
+		rewards.get(26).add(new RewardItem(186000247, 5)); // Major Danuar Relic
+		rewards.get(26).add(new RewardItem(164002116, 25)); // [Event] Rx: Accelerox
+		rewards.get(26).add(new RewardItem(164002117, 25)); // [Event] Rx: Blitzopan
+		rewards.get(26).add(new RewardItem(164002118, 25)); // [Event] Rx: Castafodin
+		
+		// month 28
+		rewards.get(27).add(new RewardItem(110900731, 1)); // Cogwheel Couture
+		rewards.get(27).add(new RewardItem(166020003, 5)); // [Event] Omega Enchantment Stone
+		rewards.get(27).add(new RewardItem(152012586, 2)); // Wind Breath
+		rewards.get(27).add(new RewardItem(152012581, 2)); // Fire Breath
+		
+		// month 29
+		rewards.get(28).add(new RewardItem(169600186, 1)); // [Emotion Card] Sing "Good Day"
+		rewards.get(28).add(new RewardItem(166200009, 3)); // Mythic Weapon Tuning Scroll
+		rewards.get(28).add(new RewardItem(166200010, 3)); // Mythic Armor Tuning Scroll
+		rewards.get(28).add(new RewardItem(162000107, 50)); // Saam King's Herb
+		
+		// month 30
+		rewards.get(29).add(new RewardItem(169610137, 1)); // [Title Card] Aion's Chosen
+		rewards.get(29).add(new RewardItem(188053526, 5)); // [Event] Aion's Steel Form Candy Box
+		rewards.get(29).add(new RewardItem(162000137, 25)); // Sublime Life Serum
+		rewards.get(29).add(new RewardItem(162000139, 25)); // Sublime Mana Serum
+		
+		// month 31
+		rewards.get(30).add(new RewardItem(166030007, 3)); // [Event] Tempering Solution
+		rewards.get(30).add(new RewardItem(166000195, 10)); // Epsilon Enchantment Stone
+		rewards.get(30).add(new RewardItem(164002116, 25)); // [Event] Rx: Accelerox
+		rewards.get(30).add(new RewardItem(164002117, 25)); // [Event] Rx: Blitzopan
+		rewards.get(30).add(new RewardItem(164002118, 25)); // [Event] Rx: Castafodin
+		
+		// month 32
+		rewards.get(31).add(new RewardItem(169600086, 1)); // [Emotion Card] 'Shut Up' Dance
+		rewards.get(31).add(new RewardItem(186000242, 15)); // Ceramium Medal
+		rewards.get(31).add(new RewardItem(188053609, 3)); // [Event] Level 60 Composite Manastone Bundle
+		rewards.get(31).add(new RewardItem(186000247, 5)); // Major Danuar Relic
+		rewards.get(31).add(new RewardItem(188052761, 5)); // [Event] Bonus Entry Scroll Bundle
+		
+		// month 33
+		rewards.get(32).add(new RewardItem(187060178, 1)); // Aether Glider
+		rewards.get(32).add(new RewardItem(188053295, 1)); // Empyrean Plume Chest
+		rewards.get(32).add(new RewardItem(162000107, 50)); // Saam King's Herb
+		rewards.get(32).add(new RewardItem(161001001, 5)); // Revival Stone
+		
+		// month 34
+		rewards.get(33).add(new RewardItem(168310018, 1)); // Major Blessed Augment: Level 2
+		rewards.get(33).add(new RewardItem(188052638, 1)); // [Event] Fabled Godstone Bundle
+		rewards.get(33).add(new RewardItem(188052719, 5)); // [Event] Dye Bundle
+		rewards.get(33).add(new RewardItem(164002284, 25)); // [Event] Ornate Firecrackers
+		
+		// month 35
+		rewards.get(34).add(new RewardItem(169600102, 1)); // [Emotion Card] Floor Sweep
+		rewards.get(34).add(new RewardItem(188053526, 5)); // [Event] Aion's Steel Form Candy Box
+		rewards.get(34).add(new RewardItem(164002272, 25)); // [Event] Enduring Greater Raging Wind Scroll
+		rewards.get(34).add(new RewardItem(162000141, 25)); // Sublime Wind Serum
+		rewards.get(34).add(new RewardItem(186000238, 150)); // Conqueror's Mark
+		
+		// month 36
+		rewards.get(35).add(new RewardItem(190100042, 1)); // Legion Pagati
+		rewards.get(35).add(new RewardItem(166030007, 3)); // [Event] Tempering Solution
+		rewards.get(35).add(new RewardItem(166020003, 5)); // [Event] Omega Enchantment Stone
+		rewards.get(35).add(new RewardItem(169620072, 3)); // AP Boost Charm II - 30%
 	}
 
 	/**
