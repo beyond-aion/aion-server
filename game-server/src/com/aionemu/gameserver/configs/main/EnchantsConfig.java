@@ -16,8 +16,11 @@ public class EnchantsConfig {
 	@Property(key = "gameserver.enchant.manastones.chance", defaultValue = "75")
 	public static float MANA_STONE_CHANCE;
 
-	@Property(key = "gameserver.enchant.amplified.chance", defaultValue = "40")
-	public static short AMPLIFIED_ENCHANT_CHANCE;
+	@Property(key = "gameserver.enchant.enchantment_stone.base_chance", defaultValue = "65")
+	public static float ENCHANTMENT_STONE_BASE_CHANCE;
+
+	@Property(key = "gameserver.enchant.enchantment_stone.amplified_chance", defaultValue = "50")
+	public static float ENCHANTMENT_STONE_AMPLIFIED_CHANCE;
 
 	@Property(key = "gameserver.manastone.clean", defaultValue = "false")
 	public static boolean CLEAN_STONE;

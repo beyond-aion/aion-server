@@ -12,7 +12,7 @@ import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.DescriptionId;
 import com.aionemu.gameserver.model.enchants.EnchantEffect;
 import com.aionemu.gameserver.model.enchants.EnchantStat;
-import com.aionemu.gameserver.model.enchants.EnchantStone;
+import com.aionemu.gameserver.model.enchants.EnchantmentStone;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.PersistentState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -44,60 +44,35 @@ public class EnchantService {
 	 */
 	public static boolean breakItem(Player player, Item targetItem, Item parentItem) {
 		Storage inventory = player.getInventory();
-
 		if (inventory.getItemByObjId(targetItem.getObjectId()) == null || inventory.getItemByObjId(parentItem.getObjectId()) == null)
 			return false;
 
 		ItemTemplate itemTemplate = targetItem.getItemTemplate();
-
 		if (!itemTemplate.isArmor() && !itemTemplate.isWeapon()) {
 			AuditLogger.log(player, "tried to break down incompatible item type");
 			return false;
 		}
 
-		float qualityMod;
-		switch (itemTemplate.getItemQuality()) {
-			case COMMON:
-				qualityMod = 0.25f;
-				break;
-			case RARE:
-				qualityMod = 0.4f;
-				break;
-			case LEGEND:
-				qualityMod = 0.55f;
-				break;
-			case UNIQUE:
-				qualityMod = 0.7f;
-				break;
-			case EPIC:
-				qualityMod = 0.85f;
-				break;
-			case MYTHIC:
-				qualityMod = 1.0f;
-				break;
-			default:
-				qualityMod = 0.1f;
-				break;
-		}
+		int effectiveLevel = calculateEffectiveLevel(itemTemplate.getItemQuality(), itemTemplate.getLevel());
+		if (effectiveLevel == 0)
+			throw new IllegalArgumentException("Invalid item quality for breaking item " + itemTemplate.getItemQuality());
 
-		float typeMod = itemTemplate.isWeapon() ? 0.6f : 0.4f;
-		int itemLevel = itemTemplate.getLevel();
-
-		int averageLevel = (int) (itemLevel * 1.4f * (typeMod + qualityMod));
-
-		int finalLevel = Rnd.get(averageLevel - 10, averageLevel + 10);
-
-		int stoneId = 166000191; // Alpha
+		int rndEffectiveLevel = effectiveLevel + Rnd.get(0, 10);
+		if (itemTemplate.isWeapon())
+			rndEffectiveLevel += 5;
 
 		// Omega Stones are limited to Drops
-		if (finalLevel > EnchantStone.BETA.getMinLevel())
-			stoneId += 1;
-		if (finalLevel > EnchantStone.GAMMA.getMinLevel())
-			stoneId += 1;
-		if (finalLevel > EnchantStone.DELTA.getMinLevel())
-			stoneId += 1;
-		if (finalLevel > EnchantStone.EPSILON.getMinLevel())
-			stoneId += 1;
+		int stoneId;
+		if (rndEffectiveLevel >= calculateEffectiveLevel(EnchantmentStone.EPSILON))
+			stoneId = 166000195;
+		else if (rndEffectiveLevel >= calculateEffectiveLevel(EnchantmentStone.DELTA))
+			stoneId = 166000194;
+		else if (rndEffectiveLevel >= calculateEffectiveLevel(EnchantmentStone.GAMMA))
+			stoneId = 166000193;
+		else if (rndEffectiveLevel >= calculateEffectiveLevel(EnchantmentStone.BETA))
+			stoneId = 166000192;
+		else
+			stoneId = 166000191; // Alpha
 
 		if (inventory.delete(targetItem) != null) {
 			if (inventory.decreaseByObjectId(parentItem.getObjectId(), 1))
@@ -105,6 +80,28 @@ public class EnchantService {
 		} else
 			AuditLogger.log(player, "possibly used break item hack");
 		return true;
+	}
+
+	private static int calculateEffectiveLevel(EnchantmentStone enchantmentStone) {
+		return calculateEffectiveLevel(enchantmentStone.getBaseQuality(), enchantmentStone.getBaseLevel());
+	}
+
+	private static int calculateEffectiveLevel(ItemQuality itemQuality, int itemLevel) {
+		switch (itemQuality) {
+			case COMMON: // same as rare, since there's no EnchantmentStone enum having COMMON as a base
+			case RARE:
+				return itemLevel + 5;
+			case LEGEND:
+				return itemLevel + 10;
+			case UNIQUE:
+				return itemLevel + 15;
+			case EPIC:
+				return itemLevel + 20;
+			case MYTHIC:
+				return itemLevel + 25;
+			default:
+				return 0;
+		}
 	}
 
 	/**
@@ -120,73 +117,24 @@ public class EnchantService {
 	public static boolean enchantItem(Player player, Item parentItem, Item targetItem, Item supplementItem) {
 		float successChance;
 
-		if (targetItem.isAmplified()) {
-			successChance = EnchantsConfig.AMPLIFIED_ENCHANT_CHANCE;
-		} else {
-			ItemTemplate enchantStone = parentItem.getItemTemplate();
-			int enchantStoneLevel;
+		if (targetItem.isAmplified())
+			successChance = EnchantsConfig.ENCHANTMENT_STONE_AMPLIFIED_CHANCE;
+		else {
+			successChance = EnchantsConfig.ENCHANTMENT_STONE_BASE_CHANCE;
 
-			// new with 4.7.5
-			switch (parentItem.getItemId()) {
-				case 166000191:
-					enchantStoneLevel = EnchantStone.ALPHA.getBaseEnchantStoneLevel();
-					break;
-				case 166000192:
-					enchantStoneLevel = EnchantStone.BETA.getBaseEnchantStoneLevel();
-					break;
-				case 166000193:
-					enchantStoneLevel = EnchantStone.GAMMA.getBaseEnchantStoneLevel();
-					break;
-				case 166000194:
-					enchantStoneLevel = EnchantStone.DELTA.getBaseEnchantStoneLevel();
-					break;
-				case 166000195:
-					enchantStoneLevel = EnchantStone.EPSILON.getBaseEnchantStoneLevel();
-					break;
-				case 166020000:
-				case 166020003:
-					enchantStoneLevel = EnchantStone.OMEGA.getBaseEnchantStoneLevel();
-					break;
-				default: // old enchantment stones (1-190)
-					enchantStoneLevel = enchantStone.getLevel();
-					if (enchantStoneLevel > 100)
-						enchantStoneLevel = 100 + (enchantStoneLevel - 100) / 2;
-					break;
-			}
+			EnchantmentStone enchantmentStone = EnchantmentStone.getByItemId(parentItem.getItemId());
+			int itemLevel = targetItem.getItemTemplate().getLevel();
+			if (itemLevel < EnchantmentStone.ALPHA.getBaseLevel()) // ensure low lvl items don't get too high success chances
+				itemLevel = EnchantmentStone.ALPHA.getBaseLevel();
+			int stoneToItemLevelDiff = enchantmentStone.getBaseLevel() - itemLevel;
+			int stoneToItemQualityDiff = enchantmentStone.getBaseQuality().getQualityId() - targetItem.getItemTemplate().getItemQuality().getQualityId();
 
-			switch (targetItem.getItemTemplate().getItemQuality()) {
-				case JUNK:
-				case COMMON:
-					successChance = 50.0f;
-					break;
-				case RARE:
-					successChance = 45.0f;
-					break;
-				case LEGEND:
-					successChance = 35.0f;
-					break;
-				case UNIQUE:
-					successChance = 30.0f;
-					break;
-				case EPIC:
-					successChance = 25.0f;
-					break;
-				case MYTHIC:
-				default:
-					successChance = 12.5f;
-					break;
-			}
-
-			int targetItemLevel = targetItem.getItemTemplate().getLevel();
-			int nextEnchantitemLevel = targetItem.getEnchantLevel() + 1;
-
-			// level difference modifier
-			int levelDiff = enchantStoneLevel - targetItemLevel;
+			successChance += stoneToItemLevelDiff; // absolutely increase/reduce chance by 1% for every level difference
+			successChance += stoneToItemQualityDiff * 5; // absolutely increase/reduce chance by 5% for each quality difference
 
 			// Retail Tests: constant rates for 0 -> 10 and 11 -> 15
-			successChance += levelDiff;
-			if (nextEnchantitemLevel > 10)
-				successChance *= 0.8f;
+			if (targetItem.getEnchantLevel() >= 10)
+				successChance *= 0.85f;
 
 			// Retail Tests: 80% = Success Cap for Enchanting without Supplements
 			if (successChance >= 80)
@@ -207,13 +155,12 @@ public class EnchantService {
 					addSuccessRate = action.getChance() * EnchantsConfig.SUPPLEMENTS_MODIFIER;
 				}
 
-				action = enchantStone.getActions().getEnchantAction();
+				action = parentItem.getItemTemplate().getActions().getEnchantAction();
 				if (action != null)
 					supplementUseCount = action.getCount();
 
-				// Beginning from the level 11 of the enchantment of the item,
-				// There will be 2 times more supplements required
-				if (nextEnchantitemLevel > 10)
+				// Beginning from enchanting to +11, there are 2 times more supplements required
+				if (targetItem.getEnchantLevel() >= 10)
 					supplementUseCount = supplementUseCount * 2;
 
 				// Check the required amount of the supplements
