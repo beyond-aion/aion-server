@@ -137,7 +137,6 @@ public class _1922DeliveronYourPromises extends QuestHandler {
 					defaultOnKillEvent(env, mobs, 9, 10, 4); // 4: 10
 					QuestService.questTimerEnd(env);
 					playQuestMovie(env, 166);
-					TeleportService.teleportTo(player, 110010000, 1466.036f, 1337.2749f, 566.41583f, (byte) 86);
 					return true;
 				}
 			}
@@ -194,6 +193,9 @@ public class _1922DeliveronYourPromises extends QuestHandler {
 				return true;
 			} else if (movieId == 165) {
 				QuestService.questTimerStart(env, 240);
+				return true;
+			} else if (movieId == 166) {
+				TeleportService.teleportTo(player, 110010000, 1466.036f, 1337.2749f, 566.41583f, (byte) 86);
 				return true;
 			}
 		}
