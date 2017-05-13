@@ -427,7 +427,7 @@
 			<gd_item id="115000726" name="Skinripper's Shield"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Shield (Rare)" base_chance="30">
+	<gd_rule rule_name="Named Shield (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="210040000" name="Heiron"/>
 		</gd_maps>
@@ -624,7 +624,7 @@
 			<gd_item id="110600725" name="Indratu Legionary's Breastplate"/>
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="20">
+	<gd_rule rule_name="Named Armor (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="210040000" name="Heiron"/>
 		</gd_maps>
@@ -634,6 +634,8 @@
 		<gd_items>
 			<gd_item id="114100746" name="Geschphalt's Shoes"/>
 			<gd_item id="114500725" name="Geschphalt's Brogans"/>
+			<gd_item id="114300759" name="Geschphalt's Boots"/>
+			<gd_item id="114600685" name="Geschphalt's Sabatons"/>
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Legend)" base_chance="5">

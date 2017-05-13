@@ -18,6 +18,19 @@
 			</percentage>
 		</summons>
 	</ai>
+	<!-- Pitiless Graveknight -->
+	<ai npcId="212346">
+		<summons>
+			<percentage percent="75">
+				<!-- Geschphalt's Minion -->
+				<summonGroup npcId="280814" count="1" distance="3"/>
+			</percentage>
+			<percentage percent="30">
+				<!-- Geschphalt's Minion -->
+				<summonGroup npcId="280814" count="1" distance="3"/>
+			</percentage>
+		</summons>
+	</ai>
 	<!-- Lich Curser -->
 	<ai npcId="214439">
 		<summons>
@@ -45,6 +58,7 @@
 			</percentage>
 		</summons>
 	</ai>
+	<!-- Raging Kraterr -->
 	<ai npcId="211715">
 		<summons>
 			<percentage percent="90" skillId="18389">
@@ -59,6 +73,7 @@
 			<percentage percent="25" skillId="18390"/>
 		</summons>
 	</ai>
+	<!-- Spirit King Agro -->
 	<ai npcId="211908">
 		<summons>
 			<percentage percent="75">
