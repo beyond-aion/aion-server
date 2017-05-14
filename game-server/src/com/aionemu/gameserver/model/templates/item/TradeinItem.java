@@ -24,4 +24,10 @@ public class TradeinItem {
 	public long getPrice() {
 		return price;
 	}
+
+	@Override
+	public String toString() {
+		return "TradeinItem [id=" + id + ", price=" + price + "]";
+	}
+
 }

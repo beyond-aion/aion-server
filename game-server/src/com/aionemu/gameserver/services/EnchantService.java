@@ -33,7 +33,7 @@ import com.aionemu.gameserver.utils.audit.AuditLogger;
 /**
  * @author ATracer
  * @modified Wakizashi, Source, vlog
- * @reworked Whoop
+ * @reworked Neon
  */
 public class EnchantService {
 

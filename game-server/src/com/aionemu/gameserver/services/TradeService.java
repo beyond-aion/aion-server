@@ -345,14 +345,16 @@ public class TradeService {
 		for (Integer tradeInItemObjectId : tradeInItemObjectIds) {
 			Item checkItem = player.getInventory().getItemByObjId(tradeInItemObjectId);
 			if (checkItem == null) {
-				AuditLogger.log(player, "possibly used TradeIn packet hack: Player does not have the item which the client sent to the server.");
+				AuditLogger.log(player,
+					"possibly used TradeIn packet hack on " + npc + ": Player does not have the submitted item with object ID " + tradeInItemObjectId);
 				return false;
 			}
 			tradeInItemIds.add(checkItem.getItemId());
 		}
 
 		if (tradeInItemIds.size() != requiredTradeInItems.size()) {
-			AuditLogger.log(player, "possibly used TradeIn packet hack: The tradein list count differs from the servers templates.");
+			AuditLogger.log(player, "possibly used TradeIn packet hack on " + npc
+				+ ": The tradein list count differs from the servers templates.\nRequired: " + requiredTradeInItems + "\nSubmitted:" + tradeInItemIds);
 			return false;
 		}
 
@@ -365,7 +367,8 @@ public class TradeService {
 				}
 			}
 			if (!validated) {
-				AuditLogger.log(player, "possibly used TradeIn packet hack: Did not receive all required tradein items (expected " + requiredTradeInItem.getId() + ").");
+				AuditLogger.log(player,
+					"possibly used TradeIn packet hack on " + npc + ": Did not receive all required items (expected " + requiredTradeInItem.getId() + ").");
 				return false;
 			}
 		}
