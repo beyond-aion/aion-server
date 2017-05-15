@@ -15,23 +15,23 @@ import com.aionemu.commons.configuration.PropertyTransformerFactory;
  * 
  * @author Neon
  */
-public class ArrayTransformer extends CommaSeparatedValueTransformer<Object[]> {
+public class ArrayTransformer extends CommaSeparatedValueTransformer<Object> {
 
 	public static final ArrayTransformer SHARED_INSTANCE = new ArrayTransformer();
 
 	@Override
-	protected Object[] parseObject(List<String> values, Field field, Type... genericTypeArgs) throws Exception {
+	protected Object parseObject(List<String> values, Field field, Type... genericTypeArgs) throws Exception {
 		Class<?> type = field.getType().getComponentType();
 		if (type.isArray())
 			throw new UnsupportedOperationException("Multidimensional arrays are not implemented.");
 
 		if (values.isEmpty() || values.get(0).equals(Property.DEFAULT_VALUE))
-			return (Object[]) Array.newInstance(type, 0); // return empty
+			return Array.newInstance(type, 0); // return empty
 
 		PropertyTransformer<?> pt = PropertyTransformerFactory.getTransformer(type);
-		Object[] array = (Object[]) Array.newInstance(type, values.size());
+		Object array = Array.newInstance(type, values.size());
 		for (int i = 0; i < values.size(); i++)
-			array[i] = pt.transform(values.get(i), field);
+			Array.set(array, i, pt.transform(values.get(i), field));
 
 		return array;
 	}

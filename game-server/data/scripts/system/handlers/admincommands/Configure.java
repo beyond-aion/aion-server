@@ -1,5 +1,6 @@
 package admincommands;
 
+import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
@@ -36,7 +37,7 @@ import com.aionemu.gameserver.configs.main.PeriodicSaveConfig;
 import com.aionemu.gameserver.configs.main.PricesConfig;
 import com.aionemu.gameserver.configs.main.PunishmentConfig;
 import com.aionemu.gameserver.configs.main.RankingConfig;
-import com.aionemu.gameserver.configs.main.RateConfig;
+import com.aionemu.gameserver.configs.main.RatesConfig;
 import com.aionemu.gameserver.configs.main.SecurityConfig;
 import com.aionemu.gameserver.configs.main.ShutdownConfig;
 import com.aionemu.gameserver.configs.main.SiegeConfig;
@@ -60,7 +61,7 @@ public class Configure extends AdminCommand {
 			CustomConfig.class, DeveloperConfig.class, DropConfig.class, EnchantsConfig.class, EventsConfig.class, FallDamageConfig.class, GSConfig.class,
 			GeoDataConfig.class, GroupConfig.class, HTMLConfig.class, HousingConfig.class, InGameShopConfig.class, LegionConfig.class, LoggingConfig.class,
 			MembershipConfig.class, NameConfig.class, NetworkConfig.class, PeriodicSaveConfig.class, PricesConfig.class, PunishmentConfig.class,
-			RankingConfig.class, RateConfig.class, SecurityConfig.class, ShutdownConfig.class, SiegeConfig.class, ThreadConfig.class, WorldConfig.class);
+			RankingConfig.class, RatesConfig.class, SecurityConfig.class, ShutdownConfig.class, SiegeConfig.class, ThreadConfig.class, WorldConfig.class);
 
 		for (Class<?> cls : classes)
 			configs.put(cls.getSimpleName().toLowerCase().replace("config", ""), cls);
@@ -102,8 +103,16 @@ public class Configure extends AdminCommand {
 				for (Field field : cls.getDeclaredFields()) {
 					try {
 						Object value = field.get(null);
-						if (value != null && value.getClass().isArray())
-							value = Arrays.toString((Object[]) value);
+						if (value != null && value.getClass().isArray()) {
+							if (value.getClass().getComponentType().isPrimitive()) {
+								int length = Array.getLength(value);
+								Object[] objArr = new Object[length];
+								for (int i = 0; i < length; i++)
+									objArr[i] = Array.get(value, i);
+								value = Arrays.toString(objArr);
+							} else
+								value = Arrays.toString((Object[]) value);
+						}
 						sb.append("\n\t").append(field.getName()).append("\t=\t").append(value);
 					} catch (IllegalArgumentException | IllegalAccessException e) { // skip this property
 					}
