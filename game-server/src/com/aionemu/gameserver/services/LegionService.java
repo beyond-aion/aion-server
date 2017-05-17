@@ -647,7 +647,7 @@ public class LegionService {
 							// transfer gp to new Brigade General
 							int gpToTransfer = requester.getLegion().getSiegeGloryPoints();
 							GloryPointsService.decreaseGp(requester.getObjectId(), gpToTransfer);
-							GloryPointsService.increaseGp(responder.getObjectId(), gpToTransfer, false);
+							GloryPointsService.addGp(responder, gpToTransfer, false);
 						}
 					}
 				}

@@ -1,13 +1,14 @@
 package com.aionemu.gameserver.services.abyss;
 
 import com.aionemu.commons.database.dao.DAOManager;
+import com.aionemu.gameserver.configs.main.RatesConfig;
 import com.aionemu.gameserver.dao.AbyssRankDAO;
 import com.aionemu.gameserver.model.gameobjects.player.AbyssRank;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.gameobjects.player.Rates;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ABYSS_RANK;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-import com.aionemu.gameserver.utils.rates.Rates;
 import com.aionemu.gameserver.world.World;
 
 /**
@@ -25,7 +26,7 @@ public class GloryPointsService {
 			addGp(onlinePlayer, additionalGp, addRates);
 		} else {
 			if (addRates) { // TODO: different memberships
-				additionalGp *= Rates.getRatesFor((byte) 0).getGpPlayerGainRate();
+				additionalGp *= RatesConfig.GP_RATES[0];
 			}
 			DAOManager.getDAO(AbyssRankDAO.class).increaseGp(playerObjId, additionalGp);
 		}
@@ -48,8 +49,8 @@ public class GloryPointsService {
 		if (player == null)
 			return;
 		AbyssRank rank = player.getAbyssRank();
-		if (addRates && additionalGp > 0)
-			additionalGp *= player.getRates().getGpPlayerGainRate();
+		if (addRates)
+			additionalGp = (int) Rates.GP.calcResult(player, additionalGp);
 		rank.addGp(additionalGp);
 		if (additionalGp > 0)
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_GLORY_POINT_GAIN(additionalGp));

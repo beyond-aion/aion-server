@@ -20,6 +20,7 @@ import com.aionemu.gameserver.configs.main.CraftConfig;
 import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.configs.main.GSConfig;
 import com.aionemu.gameserver.configs.main.HTMLConfig;
+import com.aionemu.gameserver.configs.main.MembershipConfig;
 import com.aionemu.gameserver.configs.main.PeriodicSaveConfig;
 import com.aionemu.gameserver.configs.main.SecurityConfig;
 import com.aionemu.gameserver.custom.pvpmap.PvpMapService;
@@ -129,7 +130,6 @@ import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.audit.GMService;
 import com.aionemu.gameserver.utils.collections.ListSplitter;
-import com.aionemu.gameserver.utils.rates.Rates;
 import com.aionemu.gameserver.utils.stats.AbyssRankEnum;
 import com.aionemu.gameserver.utils.time.ServerTime;
 import com.aionemu.gameserver.world.World;
@@ -405,17 +405,8 @@ public final class PlayerEnterWorldService {
 		if (GSConfig.SERVER_MOTD_DISPLAY_REV && !versionInfo.isEmpty())
 			PacketSendUtility.sendMessage(player, versionInfo, ChatType.WHITE);
 
-		player.setRates(Rates.getRatesFor(account.getMembership()));
-		if (CustomConfig.PREMIUM_NOTIFY && account.getMembership() > 0) {
-			String accountType = "";
-			switch (account.getMembership()) {
-				case 1:
-					accountType = "premium";
-					break;
-				case 2:
-					accountType = "VIP";
-					break;
-			}
+		if (account.getMembership() > 0 && account.getMembership() <= MembershipConfig.MEMBERSHIP_TYPES.length) {
+			String accountType = MembershipConfig.MEMBERSHIP_TYPES[account.getMembership() - 1];
 			client.sendPacket(new SM_MESSAGE(0, null, "Your account is " + accountType, ChatType.GOLDEN_YELLOW));
 		}
 

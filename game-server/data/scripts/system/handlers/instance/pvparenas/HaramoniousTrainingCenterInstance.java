@@ -255,7 +255,7 @@ public class HaramoniousTrainingCenterInstance extends HarmonyArenaInstance {
 			}
 			group.addPoints(100);
 			sendSystemMsg(player, npc, 250);
-			instanceReward.sendPacket(10, player.getObjectId());
+			instanceReward.sendPacket(10, player);
 		}
 	}
 

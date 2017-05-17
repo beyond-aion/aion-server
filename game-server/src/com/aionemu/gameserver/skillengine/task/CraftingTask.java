@@ -2,9 +2,11 @@ package com.aionemu.gameserver.skillengine.task;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.configs.main.CraftConfig;
+import com.aionemu.gameserver.configs.main.RatesConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.StaticObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.gameobjects.player.Rates;
 import com.aionemu.gameserver.model.house.House;
 import com.aionemu.gameserver.model.templates.item.ItemTemplate;
 import com.aionemu.gameserver.model.templates.recipe.RecipeTemplate;
@@ -70,7 +72,11 @@ public class CraftingTask extends AbstractCraftTask {
 			return false;
 
 		// first crit uses base rate, subsequent crits use combo rate
-		int chance = critCount == 0 ? requester.getRates().getCraftCritRate() : requester.getRates().getComboCritRate();
+		float chance;
+		if (critCount == 0)
+			chance = Rates.get(requester, RatesConfig.CRAFT_CRIT_CHANCES);
+		else
+			chance = Rates.get(requester, RatesConfig.CRAFT_COMBO_CHANCES);
 		House house = requester.getActiveHouse();
 		if (house != null)
 			switch (house.getHouseType()) {

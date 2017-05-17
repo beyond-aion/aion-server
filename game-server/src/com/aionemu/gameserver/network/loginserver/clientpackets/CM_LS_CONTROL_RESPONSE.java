@@ -5,7 +5,6 @@ import com.aionemu.gameserver.network.loginserver.LoginServer;
 import com.aionemu.gameserver.network.loginserver.LsClientPacket;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.Util;
-import com.aionemu.gameserver.utils.rates.Rates;
 import com.aionemu.gameserver.world.World;
 
 /**
@@ -57,13 +56,11 @@ public class CM_LS_CONTROL_RESPONSE extends LsClientPacket {
 				if (!result) {
 					if (admin != null)
 						PacketSendUtility.sendMessage(admin, playerName + " has been promoted membership with level " + param);
-					if (player != null) {
-						player.setRates(Rates.getRatesFor(param));
-						PacketSendUtility.sendMessage(player, "You have been promoted membership with level " + param + " by " + adminName);
-					}
+					if (player != null)
+						PacketSendUtility.sendMessage(player, "You have been promoted to membership with level " + param + " by " + adminName);
 				} else {
 					if (admin != null)
-						PacketSendUtility.sendMessage(admin, " Abnormal, the operation failed! ");
+						PacketSendUtility.sendMessage(admin, "The operation failed!");
 				}
 				break;
 		}

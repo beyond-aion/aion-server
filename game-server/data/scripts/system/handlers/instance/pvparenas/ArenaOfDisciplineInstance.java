@@ -1,7 +1,9 @@
 package instance.pvparenas;
 
+import com.aionemu.gameserver.configs.main.RatesConfig;
 import com.aionemu.gameserver.instance.handlers.InstanceID;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.gameobjects.player.Rates;
 import com.aionemu.gameserver.model.instance.playerreward.InstancePlayerReward;
 import com.aionemu.gameserver.model.instance.playerreward.PvPArenaPlayerReward;
 
@@ -26,7 +28,7 @@ public class ArenaOfDisciplineInstance extends DisciplineTrainingGroundsInstance
 				float playerRate = 1;
 				Player player = instance.getPlayer(playerReward.getOwnerId());
 				if (player != null) {
-					playerRate = player.getRates().getDisciplineRewardRate();
+					playerRate = Rates.get(player, RatesConfig.PVP_ARENA_DISCIPLINE_REWARD_RATES);
 				}
 				int score = reward.getScorePoints();
 				float scoreRate = ((float) score / (float) totalPoints);
@@ -66,11 +68,10 @@ public class ArenaOfDisciplineInstance extends DisciplineTrainingGroundsInstance
 					rankingCoI = rank == 0 ? 59 : 23;
 				}
 				rankingCoI *= percent;
-				rankingCoI *= playerRate;
 				int scoreCoI = (int) (totalCourage * scoreRate);
-				reward.setBasicCourage(basicCoI);
-				reward.setRankingCourage(rankingCoI);
-				reward.setScoreCourage(scoreCoI);
+				reward.setBasicCourage((int) Rates.ARENA_COURAGE_INSIGNIA_COUNT.calcResult(player, basicCoI));
+				reward.setRankingCourage((int) Rates.ARENA_COURAGE_INSIGNIA_COUNT.calcResult(player, rankingCoI));
+				reward.setScoreCourage((int) Rates.ARENA_COURAGE_INSIGNIA_COUNT.calcResult(player, scoreCoI));
 				if (instanceReward.canRewardOpportunityToken(reward)) {
 					reward.setOpportunity(4);
 				}

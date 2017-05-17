@@ -14,7 +14,6 @@ import org.apache.commons.lang3.mutable.MutableInt;
 import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.ai.manager.WalkManager;
 import com.aionemu.gameserver.configs.main.GroupConfig;
-import com.aionemu.gameserver.configs.main.RateConfig;
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
 import com.aionemu.gameserver.model.DescriptionId;
 import com.aionemu.gameserver.model.Race;
@@ -23,6 +22,7 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.StaticDoor;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.gameobjects.player.Rates;
 import com.aionemu.gameserver.model.instance.InstanceScoreType;
 import com.aionemu.gameserver.model.instance.instancereward.DredgionReward;
 import com.aionemu.gameserver.model.instance.instancereward.InstanceReward;
@@ -127,7 +127,7 @@ public class DredgionInstance2 extends GeneralInstanceHandler {
 	public void doReward() {
 		for (Player player : instance.getPlayersInside()) {
 			InstancePlayerReward playerReward = getPlayerReward(player);
-			float abyssPoint = playerReward.getPoints(); // to do finde on what depend this modifier
+			int abyssPoint = playerReward.getPoints(); // to do find out on what depend this modifier
 			if (player.getRace().equals(dredgionReward.getWinningRace())) {
 				abyssPoint += dredgionReward.getWinnerPoints();
 				ItemService.addItem(player, 186000242, 1); // Ceramium Medal
@@ -135,7 +135,7 @@ public class DredgionInstance2 extends GeneralInstanceHandler {
 				abyssPoint += dredgionReward.getLooserPoints();
 				ItemService.addItem(player, 186000147, 1); // Mithril Medal
 			}
-			AbyssPointsService.addAp(player, (int) (abyssPoint * RateConfig.DREDGION_REWARD_RATE));
+			AbyssPointsService.addAp(player, (int) Rates.AP_DREDGION.calcResult(player, abyssPoint));
 			QuestEnv env = new QuestEnv(null, player, 0);
 			QuestEngine.getInstance().onDredgionReward(env);
 		}

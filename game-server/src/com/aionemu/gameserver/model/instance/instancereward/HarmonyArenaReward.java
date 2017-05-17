@@ -65,10 +65,10 @@ public class HarmonyArenaReward extends PvPArenaReward {
 		return groups;
 	}
 
-	public void sendPacket(final int type, final Integer objectId) {
-		instance.forEachPlayer((Player player) -> {
+	public void sendPacket(int type, Player owner) {
+		instance.forEachPlayer(player -> {
 			PacketSendUtility.sendPacket(player,
-				new SM_INSTANCE_SCORE(new HarmonyScoreInfo(HarmonyArenaReward.this, type, objectId == null ? player.getObjectId() : objectId),
+				new SM_INSTANCE_SCORE(new HarmonyScoreInfo(HarmonyArenaReward.this, type, owner == null ? player : owner),
 					getInstanceReward(), getTime()));
 		});
 	}

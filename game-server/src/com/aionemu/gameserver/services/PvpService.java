@@ -25,7 +25,7 @@ import com.aionemu.gameserver.model.gameobjects.AionObject;
 import com.aionemu.gameserver.model.gameobjects.PersistentState;
 import com.aionemu.gameserver.model.gameobjects.player.AbyssRank;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.gameobjects.player.RewardType;
+import com.aionemu.gameserver.model.gameobjects.player.Rates;
 import com.aionemu.gameserver.model.team.TemporaryPlayerTeam;
 import com.aionemu.gameserver.model.team.alliance.PlayerAlliance;
 import com.aionemu.gameserver.model.team.group.PlayerGroup;
@@ -239,25 +239,26 @@ public class PvpService {
 			int memberApGain = 1;
 			int memberXpGain = 1;
 			int memberDpGain = 1;
-			if (this.getKillsFor(member.getObjectId(), victim.getObjectId()) < CustomConfig.MAX_DAILY_PVP_KILLS) {
+			if (getKillsFor(member.getObjectId(), victim.getObjectId()) < CustomConfig.MAX_DAILY_PVP_KILLS) {
 				if (apRewardPerMember > 0) {
 					try {
-						memberApGain = Math.toIntExact(RewardType.AP_PLAYER.calcReward(member, apRewardPerMember));
+						memberApGain = Math.toIntExact(Rates.AP_PVP.calcResult(member, apRewardPerMember));
 					} catch (ArithmeticException ae) {
 						log.error("Attempt to add a massive amount of ap to player " + member.getName() + " that overflows Integer.MAX_VALUE!");
 					}
 				}
 				if (xpRewardPerMember > 0)
-					memberXpGain = Math.round(xpRewardPerMember * member.getRates().getXpPlayerGainRate());
-				if (dpRewardPerMember > 0)
-					memberDpGain = Math
-						.round(StatFunctions.adjustPvpDpGained(dpRewardPerMember, victim.getLevel(), member.getLevel()) * member.getRates().getDpPlayerRate());
+					memberXpGain = xpRewardPerMember; // rates are applied in addExp()
+				if (dpRewardPerMember > 0) {
+					memberDpGain = StatFunctions.adjustPvpDpGained(dpRewardPerMember, victim.getLevel(), member.getLevel());
+					memberDpGain = (int) Rates.DP_PVP.calcResult(member, memberDpGain);
+				}
 
 			}
 			AbyssPointsService.addAp(member, victim, memberApGain);
-			member.getCommonData().addExp(memberXpGain, RewardType.PVP_KILL, victim.getName());
+			member.getCommonData().addExp(memberXpGain, Rates.XP_PVP, victim.getName());
 			member.getCommonData().addDp(memberDpGain);
-			this.addKillFor(member.getObjectId(), victim.getObjectId());
+			addKillFor(member.getObjectId(), victim.getObjectId());
 		}
 		return true;
 	}

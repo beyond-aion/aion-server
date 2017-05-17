@@ -3,7 +3,7 @@ package com.aionemu.gameserver.model.templates.challenge;
 import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlType;
 
-@XmlType(name = "RewardType")
+@XmlType(name = "Rates")
 @XmlEnum
 public enum RewardType {
 	NONE,

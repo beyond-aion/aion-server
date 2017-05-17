@@ -1,7 +1,9 @@
 package instance.pvparenas;
 
+import com.aionemu.gameserver.configs.main.RatesConfig;
 import com.aionemu.gameserver.instance.handlers.InstanceID;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.gameobjects.player.Rates;
 import com.aionemu.gameserver.model.instance.playerreward.InstancePlayerReward;
 import com.aionemu.gameserver.model.instance.playerreward.PvPArenaPlayerReward;
 import com.aionemu.gameserver.world.WorldMapInstance;
@@ -41,7 +43,7 @@ public class ArenaOfGloryInstance extends PvPArenaInstance {
 				float playerRate = 1;
 				Player player = instance.getPlayer(playerReward.getOwnerId());
 				if (player != null) {
-					playerRate = player.getRates().getGloryRewardRate();
+					playerRate = Rates.get(player, RatesConfig.PVP_ARENA_GLORY_REWARD_RATES);
 				}
 				int score = reward.getScorePoints();
 				float scoreRate = ((float) score / (float) totalPoints);

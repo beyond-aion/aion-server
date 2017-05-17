@@ -7,7 +7,7 @@ import java.util.Map;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.configs.administration.AdminConfig;
-import com.aionemu.gameserver.configs.main.EnchantsConfig;
+import com.aionemu.gameserver.configs.main.RatesConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.DescriptionId;
 import com.aionemu.gameserver.model.enchants.EnchantEffect;
@@ -16,6 +16,7 @@ import com.aionemu.gameserver.model.enchants.EnchantmentStone;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.PersistentState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.gameobjects.player.Rates;
 import com.aionemu.gameserver.model.items.ManaStone;
 import com.aionemu.gameserver.model.items.storage.Storage;
 import com.aionemu.gameserver.model.stats.listeners.ItemEquipmentListener;
@@ -118,9 +119,9 @@ public class EnchantService {
 		float successChance;
 
 		if (targetItem.isAmplified())
-			successChance = EnchantsConfig.ENCHANTMENT_STONE_AMPLIFIED_CHANCE;
+			successChance = Rates.get(player, RatesConfig.ENCHANTMENT_STONE_AMPLIFIED_CHANCES);
 		else {
-			successChance = EnchantsConfig.ENCHANTMENT_STONE_BASE_CHANCE;
+			successChance = Rates.get(player, RatesConfig.ENCHANTMENT_STONE_BASE_CHANCES);
 
 			EnchantmentStone enchantmentStone = EnchantmentStone.getByItemId(parentItem.getItemId());
 			int itemLevel = targetItem.getItemTemplate().getLevel();
@@ -146,13 +147,13 @@ public class EnchantService {
 				int supplementUseCount = 1;
 				// Additional success rate for the supplement
 				ItemTemplate supplementTemplate = supplementItem.getItemTemplate();
-				float addSuccessRate = 0f;
 
 				EnchantItemAction action = supplementTemplate.getActions().getEnchantAction();
 				if (action != null) {
 					if (action.isManastoneOnly())
 						return false;
-					addSuccessRate = action.getChance() * EnchantsConfig.SUPPLEMENTS_MODIFIER;
+					// Add success rate of the supplement to the overall chance
+					successChance += action.getChance();
 				}
 
 				action = parentItem.getItemTemplate().getActions().getEnchantAction();
@@ -166,9 +167,6 @@ public class EnchantService {
 				// Check the required amount of the supplements
 				if (player.getInventory().getItemCountByItemId(supplementTemplate.getTemplateId()) < supplementUseCount)
 					return false;
-
-				// Add success rate of the supplement to the overall chance
-				successChance += addSuccessRate;
 
 				// Put supplements to wait for update
 				player.subtractSupplements(supplementUseCount, supplementTemplate.getTemplateId());
@@ -362,7 +360,7 @@ public class EnchantService {
 		}
 
 		// Start value of success
-		float successChance = EnchantsConfig.MANA_STONE_CHANCE;
+		float successChance = Rates.get(player, RatesConfig.MANASTONE_CHANCES);
 
 		if (parentItem.getItemTemplate().getItemQuality().getQualityId() >= ItemQuality.RARE.getQualityId())
 			successChance *= 0.8f;
@@ -388,7 +386,6 @@ public class EnchantService {
 
 			// Additional success rate for the supplement
 			ItemTemplate supplementTemplate = supplementItem.getItemTemplate();
-			float addSuccessRate = 0f;
 
 			boolean isManastoneOnly = false;
 			EnchantItemAction action = manastoneTemplate.getActions().getEnchantAction();
@@ -397,7 +394,8 @@ public class EnchantService {
 
 			action = supplementTemplate.getActions().getEnchantAction();
 			if (action != null) {
-				addSuccessRate = action.getChance() * EnchantsConfig.SUPPLEMENTS_MODIFIER;
+				// Add successRate
+				successChance += action.getChance();
 				isManastoneOnly = action.isManastoneOnly();
 			}
 
@@ -408,9 +406,6 @@ public class EnchantService {
 
 			if (player.getInventory().getItemCountByItemId(supplementTemplate.getTemplateId()) < supplementUseCount)
 				return false;
-
-			// Add successRate
-			successChance += addSuccessRate;
 
 			// Put up supplements to wait for update
 			player.subtractSupplements(supplementUseCount, supplementTemplate.getTemplateId());

@@ -37,7 +37,7 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.QuestStateList;
-import com.aionemu.gameserver.model.gameobjects.player.RewardType;
+import com.aionemu.gameserver.model.gameobjects.player.Rates;
 import com.aionemu.gameserver.model.gameobjects.player.npcFaction.NpcFaction;
 import com.aionemu.gameserver.model.items.ItemId;
 import com.aionemu.gameserver.model.skill.PlayerSkillEntry;
@@ -251,10 +251,10 @@ public final class QuestService {
 	private static void giveReward(QuestEnv env, Rewards rewards) {
 		Player player = env.getPlayer();
 		if (rewards.getGold() != null)
-			player.getInventory().increaseKinah((long) (player.getRates().getQuestKinahRate() * rewards.getGold()), ItemUpdateType.INC_KINAH_QUEST);
+			player.getInventory().increaseKinah(Rates.QUEST_KINAH.calcResult(player, rewards.getGold()), ItemUpdateType.INC_KINAH_QUEST);
 		if (rewards.getExp() != null) {
 			NpcTemplate npcTemplate = DataManager.NPC_DATA.getNpcTemplate(env.getTargetId());
-			player.getCommonData().addExp(rewards.getExp(), RewardType.QUEST, npcTemplate != null ? npcTemplate.getNameId() : 0);
+			player.getCommonData().addExp(rewards.getExp(), Rates.XP_QUEST, npcTemplate != null ? npcTemplate.getNameId() : 0);
 		}
 		if (rewards.getTitle() != null)
 			player.getTitleList().addTitle(rewards.getTitle(), true, 0);
@@ -262,7 +262,7 @@ public final class QuestService {
 			int ap = rewards.getAp();
 			if (DataManager.QUEST_DATA.getQuestById(env.getQuestId()).getCategory() != QuestCategory.NON_COUNT) // don't multiply with quest rates for relic
 																																																					// exchanges
-				ap *= player.getRates().getQuestApRate();
+				ap = (int) Rates.AP_QUEST.calcResult(player, ap);
 			AbyssPointsService.addAp(player, ap);
 		}
 		if (rewards.getDp() != null)

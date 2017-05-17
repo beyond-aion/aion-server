@@ -4,6 +4,7 @@ import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.configs.main.CraftConfig;
 import com.aionemu.gameserver.model.gameobjects.Gatherable;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.gameobjects.player.Rates;
 import com.aionemu.gameserver.model.templates.gather.GatherableTemplate;
 import com.aionemu.gameserver.model.templates.gather.Material;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_GATHER_ANIMATION;
@@ -69,7 +70,7 @@ public class GatheringTask extends AbstractCraftTask {
 		PacketSendUtility.sendPacket(requester, new SM_GATHER_UPDATE(template, material, currentSuccessValue, currentFailureValue, 6, 0, 0));
 		if (template.getEraseValue() > 0)
 			requester.getInventory().decreaseByItemId(template.getRequiredItemId(), template.getEraseValue());
-		ItemService.addItem(requester, material.getItemId(), requester.getRates().getGatheringCountRate());
+		ItemService.addItem(requester, material.getItemId(), Rates.GATHERING_COUNT.calcResult(requester, 1));
 		if (requester.isInInstance()) {
 			requester.getPosition().getWorldMapInstance().getInstanceHandler().onGather(requester, (Gatherable) responder);
 		}

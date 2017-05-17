@@ -4,6 +4,9 @@ import com.aionemu.commons.configuration.Property;
 
 public class MembershipConfig {
 
+	@Property(key = "gameserver.membership.types", defaultValue = "Premium")
+	public static String[] MEMBERSHIP_TYPES;
+
 	@Property(key = "gameserver.instances.title.requirement", defaultValue = "10")
 	public static byte INSTANCES_TITLE_REQ;
 

@@ -17,7 +17,6 @@ import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.database.DatabaseFactory;
 import com.aionemu.commons.utils.GenericValidator;
-import com.aionemu.gameserver.configs.main.EnchantsConfig;
 import com.aionemu.gameserver.dao.ItemStoneListDAO;
 import com.aionemu.gameserver.dao.MySQL5DAOUtils;
 import com.aionemu.gameserver.dataholders.DataManager;
@@ -82,18 +81,14 @@ public class MySQL5ItemStoneListDAO extends ItemStoneListDAO {
 						switch (stoneType) {
 							case 0:
 								if (item.getSockets(false) <= item.getItemStonesSize()) {
-									log.warn("Manastone slots overloaded. ObjectId: " + item.getObjectId());
-									if (EnchantsConfig.CLEAN_STONE) {
-										deleteItemStone(con, item.getObjectId(), slot, stoneType);
-									}
+									log.warn("Deleting manastone " + itemId + " due to slot overload from " + item);
+									deleteItemStone(con, item.getObjectId(), slot, stoneType);
 									continue;
 								}
 								if (DataManager.ITEM_DATA.getItemTemplate(itemId).getItemGroup() == ItemGroup.SPECIAL_MANASTONE
 									&& slot >= item.getItemTemplate().getSpecialSlots()) {
-									log.warn("Special Manastone in normal slot. ObjectId: " + item.getObjectId());
-									if (EnchantsConfig.CLEAN_STONE) {
-										deleteItemStone(con, item.getObjectId(), slot, stoneType);
-									}
+									log.warn("Deleting special manastone " + itemId + " from normal slot of " + item);
+									deleteItemStone(con, item.getObjectId(), slot, stoneType);
 									continue;
 								}
 								item.getItemStones().add(new ManaStone(item.getObjectId(), itemId, slot, PersistentState.UPDATED));
@@ -103,18 +98,14 @@ public class MySQL5ItemStoneListDAO extends ItemStoneListDAO {
 								break;
 							case 2:
 								if (item.getSockets(true) <= item.getFusionStonesSize()) {
-									log.warn("Manastone slots overloaded. ObjectId: " + item.getObjectId());
-									if (EnchantsConfig.CLEAN_STONE) {
-										deleteItemStone(con, item.getObjectId(), slot, stoneType);
-									}
+									log.warn("Deleting manastone " + itemId + " due to slot overload from fusioned item of " + item);
+									deleteItemStone(con, item.getObjectId(), slot, stoneType);
 									continue;
 								}
 								if (DataManager.ITEM_DATA.getItemTemplate(itemId).getItemGroup() == ItemGroup.SPECIAL_MANASTONE
 									&& slot >= item.getFusionedItemTemplate().getSpecialSlots()) {
-									log.warn("Special Manastone in normal slot. ObjectId: " + item.getObjectId());
-									if (EnchantsConfig.CLEAN_STONE) {
-										deleteItemStone(con, item.getObjectId(), slot, stoneType);
-									}
+									log.warn("Deleting special manastone " + itemId + " from normal slot of fusioned item of " + item);
+									deleteItemStone(con, item.getObjectId(), slot, stoneType);
 									continue;
 								}
 								item.getFusionStones().add(new ManaStone(item.getObjectId(), itemId, slot, PersistentState.UPDATED));

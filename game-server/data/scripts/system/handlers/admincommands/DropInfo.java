@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.aionemu.gameserver.configs.main.DropConfig;
 import com.aionemu.gameserver.configs.main.EventsConfig;
+import com.aionemu.gameserver.configs.main.RatesConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.drop.Drop;
 import com.aionemu.gameserver.model.drop.DropGroup;
@@ -12,6 +13,7 @@ import com.aionemu.gameserver.model.drop.NpcDrop;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.gameobjects.player.Rates;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.model.templates.event.EventTemplate;
 import com.aionemu.gameserver.model.templates.globaldrops.GlobalDropItem;
@@ -82,7 +84,7 @@ public class DropInfo extends AdminCommand {
 
 		boostDropRate += player.getGameStats().getStat(StatEnum.BOOST_DROP_RATE, 100).getCurrent() / 100f - 1;
 
-		float dropRate = player.getRates().getDropRate() * boostDropRate * dropChance / 100F;
+		float dropRate = Rates.get(player, RatesConfig.DROP_RATES) * boostDropRate * dropChance / 100F;
 
 		int count = 0;
 		sendInfo(player, "\n[Drop info for " + currentNpc.getName() + "]");

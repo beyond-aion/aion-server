@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.configs.main.FallDamageConfig;
-import com.aionemu.gameserver.configs.main.RateConfig;
+import com.aionemu.gameserver.configs.main.RatesConfig;
 import com.aionemu.gameserver.controllers.attack.AttackStatus;
 import com.aionemu.gameserver.controllers.observer.AttackerCriticalStatus;
 import com.aionemu.gameserver.model.SkillElement;
@@ -20,7 +20,7 @@ import com.aionemu.gameserver.model.gameobjects.Summon;
 import com.aionemu.gameserver.model.gameobjects.Trap;
 import com.aionemu.gameserver.model.gameobjects.player.Equipment;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.gameobjects.player.RewardType;
+import com.aionemu.gameserver.model.gameobjects.player.Rates;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.model.siege.Influence;
 import com.aionemu.gameserver.model.stats.calc.AdditionStat;
@@ -59,7 +59,7 @@ public class StatFunctions {
 		float mapMulti = instance.getInstanceHandler().getInstanceExpMultiplier(); // map modifier to approach retail exp values
 		if (instance.getParent().isInstanceType() && instance.getPlayerMaxSize() >= 2 && instance.getPlayerMaxSize() <= 6) {
 			mapMulti *= instance.getPlayerMaxSize(); // on retail you get mob EP * max instance member count (only for group instances)
-			mapMulti /= RateConfig.XP_RATE; // custom: divide by regular xp rates, so they will not affect the rewarded XP
+			mapMulti /= RatesConfig.XP_SOLO_RATES[0]; // custom: divide by regular xp rates, so they will not affect the rewarded XP
 		}
 		int xpPercentage = XPRewardEnum.xpRewardFrom(target.getLevel() - maxLevelInRange);
 		long rewardXP = Math.round(baseXP * mapMulti * (xpPercentage / 100f));
@@ -112,10 +112,8 @@ public class StatFunctions {
 		// look at:
 		// http://www.aionsource.com/forum/mechanic-analysis/42597-character-stats-xp-dp-origin-gerbator-team-july-2009-a.html
 		int baseDP = targetLevel * calculateRatingMultipler(npcRating);
-
 		int xpPercentage = XPRewardEnum.xpRewardFrom(targetLevel - playerLevel);
-		float rate = player.getRates().getDpNpcRate();
-		return (int) Math.floor(baseDP * xpPercentage * rate / 100);
+		return (int) Rates.DP_PVE.calcResult(player, (int) Math.floor(baseDP * xpPercentage / 100f));
 	}
 
 	/**
@@ -129,11 +127,11 @@ public class StatFunctions {
 
 		float apNpcRate = getApNpcRating(((Npc) target).getObjectTemplate().getRating());
 
-		// TODO: findout why they give 1/4 AP base(normal NpcRate) (5 AP retail)
+		// TODO: find out why they give 1/4 AP base(normal NpcRate) (5 AP retail)
 		if (target.getName().equals("flame hoverstone"))
 			apNpcRate = 0.5f;
 
-		return (int) RewardType.AP_NPC.calcReward(player, (int) Math.floor(15 * apNpcRate));
+		return (int) Rates.AP_PVE.calcResult(player, (int) Math.floor(15 * apNpcRate));
 	}
 
 	/**
@@ -142,24 +140,19 @@ public class StatFunctions {
 	 * @return Points Lost in PvP Death
 	 */
 	public static int calculatePvPApLost(Player defeated, Player winner) {
-		int pointsLost = Math.round(defeated.getAbyssRank().getRank().getPointsLost() * defeated.getRates().getApPlayerLossRate());
+		int pointsLost = defeated.getAbyssRank().getRank().getPointsLost();
 
 		// Level penalty calculation
 		int difference = winner.getLevel() - defeated.getLevel();
 
-		if (difference > 4) {
+		if (difference >= 5)
 			pointsLost = Math.round(pointsLost * 0.1f);
-		} else {
-			switch (difference) {
-				case 3:
-					pointsLost = Math.round(pointsLost * 0.85f);
-					break;
-				case 4:
-					pointsLost = Math.round(pointsLost * 0.65f);
-					break;
-			}
-		}
-		return pointsLost;
+		else if (difference == 4)
+			pointsLost = Math.round(pointsLost * 0.65f);
+		else if (difference == 3)
+			pointsLost = Math.round(pointsLost * 0.85f);
+
+		return (int) Rates.AP_PVP_LOST.calcResult(defeated, pointsLost);
 	}
 
 	/**

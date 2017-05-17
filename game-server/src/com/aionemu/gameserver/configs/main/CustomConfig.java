@@ -13,12 +13,6 @@ public class CustomConfig {
 	public static boolean CHALLENGE_TASKS_ENABLED;
 
 	/**
-	 * Show premium account details on login
-	 */
-	@Property(key = "gameserver.premium.notify", defaultValue = "false")
-	public static boolean PREMIUM_NOTIFY;
-
-	/**
 	 * Enable announce when a player succes enchant item 15
 	 */
 	@Property(key = "gameserver.enchant.announce.enable", defaultValue = "true")

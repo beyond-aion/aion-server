@@ -88,8 +88,6 @@ import com.aionemu.gameserver.skillengine.model.ChainSkills;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.skillengine.task.CraftingTask;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-import com.aionemu.gameserver.utils.rates.Rates;
-import com.aionemu.gameserver.utils.rates.RegularRates;
 import com.aionemu.gameserver.world.WorldPosition;
 
 /**
@@ -137,7 +135,6 @@ public class Player extends Creature {
 
 	private AbyssRank abyssRank;
 	private NpcFactions npcFactions;
-	private Rates rates;
 
 	private int flyState = 0;
 	private boolean isTrading;
@@ -747,23 +744,6 @@ public class Player extends Creature {
 	 */
 	public String getAcountName() {
 		return playerAccount.getName();
-	}
-
-	/**
-	 * @return the rates
-	 */
-	public Rates getRates() {
-		if (rates == null)
-			rates = new RegularRates();
-		return rates;
-	}
-
-	/**
-	 * @param rates
-	 *          the rates to set
-	 */
-	public void setRates(Rates rates) {
-		this.rates = rates;
 	}
 
 	public int getWarehouseSize() {

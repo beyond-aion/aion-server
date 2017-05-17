@@ -5,7 +5,6 @@ import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAG
 import java.util.function.Consumer;
 
 import com.aionemu.commons.utils.Rnd;
-import com.aionemu.gameserver.configs.main.RateConfig;
 import com.aionemu.gameserver.controllers.attack.AggroInfo;
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
 import com.aionemu.gameserver.model.DescriptionId;
@@ -422,9 +421,6 @@ public class PvPArenaInstance extends GeneralInstanceHandler {
 			PvPArenaPlayerReward reward = getPlayerReward(player.getObjectId());
 			if (!reward.isRewarded()) {
 				reward.setRewarded();
-				reward.setBasicCourage(Math.round(reward.getBasicCourage() * RateConfig.PVP_ARENA_COURAGE_INSIGNIA_RATE));
-				reward.setRankingCourage(Math.round(reward.getRankingCourage() * RateConfig.PVP_ARENA_COURAGE_INSIGNIA_RATE));
-				reward.setScoreCourage(Math.round(reward.getScoreCourage() * RateConfig.PVP_ARENA_COURAGE_INSIGNIA_RATE));
 				AbyssPointsService.addAp(player, reward.getBasicAP() + reward.getRankingAP() + reward.getScoreAP());
 				int gpToAdd = reward.getBasicGP() + reward.getRankingGP() + reward.getScoreGP();
 				if (gpToAdd > 0)

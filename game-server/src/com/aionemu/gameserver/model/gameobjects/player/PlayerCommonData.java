@@ -144,8 +144,8 @@ public class PlayerCommonData extends VisibleObjectTemplate {
 			this.expRecoverable = Math.round(getExpNeed() * 0.25);
 		}
 		if (this.getPlayer() != null)
-			PacketSendUtility.sendPacket(getPlayer(), new SM_STATUPDATE_EXP(getExpShown(), getExpRecoverable(), getExpNeed(),
-				this.getCurrentReposeEnergy(), this.getMaxReposeEnergy()));
+			PacketSendUtility.sendPacket(getPlayer(),
+				new SM_STATUPDATE_EXP(getExpShown(), getExpRecoverable(), getExpNeed(), this.getCurrentReposeEnergy(), this.getMaxReposeEnergy()));
 	}
 
 	public void setRecoverableExp(long expRecoverable) {
@@ -162,27 +162,20 @@ public class PlayerCommonData extends VisibleObjectTemplate {
 		return this.expRecoverable;
 	}
 
-	/**
-	 * @param value
-	 */
-	public void addExp(long value, int npcNameId) {
-		this.addExp(value, null, npcNameId, "");
+	public void addExp(long value, Rates rates) {
+		addExp(value, rates, 0, "");
 	}
 
-	public void addExp(long value, RewardType rewardType) {
-		this.addExp(value, rewardType, 0, "");
+	public void addExp(long value, Rates rates, int npcNameId) {
+		addExp(value, rates, npcNameId, "");
 	}
 
-	public void addExp(long value, RewardType rewardType, int npcNameId) {
-		this.addExp(value, rewardType, npcNameId, "");
+	public void addExp(long value, Rates rates, String name) {
+		addExp(value, rates, 0, name);
 	}
 
-	public void addExp(long value, RewardType rewardType, String name) {
-		this.addExp(value, rewardType, 0, name);
-	}
-
-	public void addExp(long value, RewardType rewardType, int npcNameId, String name) {
-		if (this.noExp)
+	private void addExp(long value, Rates rates, int npcNameId, String name) {
+		if (noExp)
 			return;
 
 		long reward = value;
@@ -192,8 +185,8 @@ public class PlayerCommonData extends VisibleObjectTemplate {
 		if (player != null && player.getWorldId() == 301160000) // nightmare circus
 			return;
 
-		if (player != null && rewardType != null)
-			reward = rewardType.calcReward(player, value);
+		if (player != null)
+			reward = rates.calcResult(player, value);
 
 		if (reward > 0) {
 			if (getCurrentReposeEnergy() > 0) {
@@ -202,8 +195,8 @@ public class PlayerCommonData extends VisibleObjectTemplate {
 				repose = (long) ((allowedExp / 100f) * 40); // 40% bonus for the amount of used repose energy
 			}
 
-			if (this.isReadyForSalvationPoints() && this.getCurrentSalvationPercent() > 0) {
-				salvation = (long) ((reward / 100f) * this.getCurrentSalvationPercent());
+			if (isReadyForSalvationPoints() && getCurrentSalvationPercent() > 0) {
+				salvation = (long) ((reward / 100f) * getCurrentSalvationPercent());
 				// TODO! remove salvation points?
 			}
 
@@ -212,63 +205,61 @@ public class PlayerCommonData extends VisibleObjectTemplate {
 
 		setExp(exp + reward);
 		if (player != null) {
-			if (rewardType != null) {
-				switch (rewardType) {
-					case GROUP_HUNTING:
-					case HUNTING:
-					case QUEST:
-						if (npcNameId == 0) // Exeption quest w/o reward npc
-							// You have gained %num1 XP.
-							PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GET_EXP2(reward));
-						else if (repose > 0 && salvation > 0)
-							// You have gained %num1 XP from %0 (Energy of Repose %num2, Energy of Salvation %num3).
-							PacketSendUtility.sendPacket(player,
-								SM_SYSTEM_MESSAGE.STR_GET_EXP_VITAL_MAKEUP_BONUS_DESC(new DescriptionId(npcNameId * 2 + 1), reward, repose, salvation));
-						else if (repose > 0 && salvation == 0)
-							// You have gained %num1 XP from %0 (Energy of Repose %num2).
-							PacketSendUtility.sendPacket(player,
-								SM_SYSTEM_MESSAGE.STR_GET_EXP_VITAL_BONUS_DESC(new DescriptionId(npcNameId * 2 + 1), reward, repose));
-						else if (repose == 0 && salvation > 0)
-							// You have gained %num1 XP from %0 (Energy of Salvation %num2).
-							PacketSendUtility.sendPacket(player,
-								SM_SYSTEM_MESSAGE.STR_GET_EXP_MAKEUP_BONUS_DESC(new DescriptionId(npcNameId * 2 + 1), reward, salvation));
-						else
-							// You have gained %num1 XP from %0.
-							PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GET_EXP_DESC(new DescriptionId(npcNameId * 2 + 1), reward));
-						break;
-					case PVP_KILL:
-						if (repose > 0 && salvation > 0)
-							// You have gained %num1 XP from %0 (Energy of Repose %num2, Energy of Salvation %num3).
-							PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GET_EXP_VITAL_MAKEUP_BONUS(name, reward, repose, salvation));
-						else if (repose > 0 && salvation == 0)
-							// You have gained %num1 XP from %0 (Energy of Repose %num2).
-							PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GET_EXP_VITAL_BONUS(name, reward, repose));
-						else if (repose == 0 && salvation > 0)
-							// You have gained %num1 XP from %0 (Energy of Salvation %num2).
-							PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GET_EXP_MAKEUP_BONUS(name, reward, salvation));
-						else
-							// You have gained %num1 XP from %0.
-							PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GET_EXP(name, reward));
-						break;
-					case CRAFTING:
-					case GATHERING:
-						if (repose > 0 && salvation > 0)
-							// You have gained %num1 XP(Energy of Repose %num2, Energy of Salvation %num3).
-							PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GET_EXP2_VITAL_MAKEUP_BONUS(reward, repose, salvation));
-						else if (repose > 0 && salvation == 0)
-							// You have gained %num1 XP(Energy of Repose %num2).
-							PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GET_EXP2_VITAL_BONUS(reward, repose));
-						else if (repose == 0 && salvation > 0)
-							// You have gained %num1 XP(Energy of Salvation %num2).
-							PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GET_EXP2_MAKEUP_BONUS(reward, salvation));
-						else
-							// You have gained %num1 XP.
-							PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GET_EXP2(reward));
-						break;
-				}
-				if (getLevel() == 9 && exp >= DataManager.PLAYER_EXPERIENCE_TABLE.getStartExpForLevel(10))
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_LEVEL_LIMIT_QUEST_NOT_FINISHED1());
+			switch (rates) {
+				case XP_GROUP_HUNTING:
+				case XP_HUNTING:
+				case XP_QUEST:
+					if (npcNameId == 0) // Exception: quest w/o reward npc
+						// You have gained %num1 XP.
+						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GET_EXP2(reward));
+					else if (repose > 0 && salvation > 0)
+						// You have gained %num1 XP from %0 (Energy of Repose %num2, Energy of Salvation %num3).
+						PacketSendUtility.sendPacket(player,
+							SM_SYSTEM_MESSAGE.STR_GET_EXP_VITAL_MAKEUP_BONUS_DESC(new DescriptionId(npcNameId * 2 + 1), reward, repose, salvation));
+					else if (repose > 0 && salvation == 0)
+						// You have gained %num1 XP from %0 (Energy of Repose %num2).
+						PacketSendUtility.sendPacket(player,
+							SM_SYSTEM_MESSAGE.STR_GET_EXP_VITAL_BONUS_DESC(new DescriptionId(npcNameId * 2 + 1), reward, repose));
+					else if (repose == 0 && salvation > 0)
+						// You have gained %num1 XP from %0 (Energy of Salvation %num2).
+						PacketSendUtility.sendPacket(player,
+							SM_SYSTEM_MESSAGE.STR_GET_EXP_MAKEUP_BONUS_DESC(new DescriptionId(npcNameId * 2 + 1), reward, salvation));
+					else
+						// You have gained %num1 XP from %0.
+						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GET_EXP_DESC(new DescriptionId(npcNameId * 2 + 1), reward));
+					break;
+				case XP_PVP:
+					if (repose > 0 && salvation > 0)
+						// You have gained %num1 XP from %0 (Energy of Repose %num2, Energy of Salvation %num3).
+						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GET_EXP_VITAL_MAKEUP_BONUS(name, reward, repose, salvation));
+					else if (repose > 0 && salvation == 0)
+						// You have gained %num1 XP from %0 (Energy of Repose %num2).
+						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GET_EXP_VITAL_BONUS(name, reward, repose));
+					else if (repose == 0 && salvation > 0)
+						// You have gained %num1 XP from %0 (Energy of Salvation %num2).
+						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GET_EXP_MAKEUP_BONUS(name, reward, salvation));
+					else
+						// You have gained %num1 XP from %0.
+						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GET_EXP(name, reward));
+					break;
+				case XP_CRAFTING:
+				case XP_GATHERING:
+					if (repose > 0 && salvation > 0)
+						// You have gained %num1 XP(Energy of Repose %num2, Energy of Salvation %num3).
+						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GET_EXP2_VITAL_MAKEUP_BONUS(reward, repose, salvation));
+					else if (repose > 0 && salvation == 0)
+						// You have gained %num1 XP(Energy of Repose %num2).
+						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GET_EXP2_VITAL_BONUS(reward, repose));
+					else if (repose == 0 && salvation > 0)
+						// You have gained %num1 XP(Energy of Salvation %num2).
+						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GET_EXP2_MAKEUP_BONUS(reward, salvation));
+					else
+						// You have gained %num1 XP.
+						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GET_EXP2(reward));
+					break;
 			}
+			if (getLevel() == 9 && exp >= DataManager.PLAYER_EXPERIENCE_TABLE.getStartExpForLevel(10))
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_LEVEL_LIMIT_QUEST_NOT_FINISHED1());
 		}
 	}
 
@@ -336,8 +327,8 @@ public class PlayerCommonData extends VisibleObjectTemplate {
 			Player player = getPlayer();
 			if (player != null) {
 				player.getController().onLevelChange(oldLevel, level);
-				PacketSendUtility.sendPacket(player, new SM_STATUPDATE_EXP(getExpShown(), getExpRecoverable(), getExpNeed(), getCurrentReposeEnergy(),
-					getMaxReposeEnergy()));
+				PacketSendUtility.sendPacket(player,
+					new SM_STATUPDATE_EXP(getExpShown(), getExpRecoverable(), getExpNeed(), getCurrentReposeEnergy(), getMaxReposeEnergy()));
 			}
 		}
 	}

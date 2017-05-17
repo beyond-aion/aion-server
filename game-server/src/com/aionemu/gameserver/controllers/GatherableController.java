@@ -13,7 +13,7 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Gatherable;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.gameobjects.player.RewardType;
+import com.aionemu.gameserver.model.gameobjects.player.Rates;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.model.templates.gather.GatherableTemplate;
 import com.aionemu.gameserver.model.templates.gather.Material;
@@ -223,14 +223,14 @@ public class GatherableController extends VisibleObjectController<Gatherable> {
 			int xpReward = (int) ((0.0031 * (skillLvl + 5.3) * (skillLvl + 1592.8) + 60));
 
 			int skillId = getOwner().getObjectTemplate().getHarvestSkill();
-			int gainedGatherXp = (int) RewardType.GATHERING.calcReward(player, xpReward);
+			int gainedGatherXp = (int) Rates.XP_GATHERING.calcResult(player, xpReward);
 			float statRate = player.getGameStats().getStat(StatEnum.getModifier(skillId), 100).getCurrent() / 100f;
 			if (statRate > 0)
 				gainedGatherXp *= statRate;
 
 			if (player.getSkillList().addSkillXp(player, skillId, gainedGatherXp, skillLvl)) {
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_EXTRACT_GATHERING_SUCCESS_GETEXP());
-				player.getCommonData().addExp(xpReward, RewardType.GATHERING);
+				player.getCommonData().addExp(xpReward, Rates.XP_GATHERING);
 			} else
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE
 					.STR_MSG_DONT_GET_PRODUCTION_EXP(DataManager.SKILL_DATA.getSkillTemplate(getOwner().getObjectTemplate().getHarvestSkill()).getNameId()));

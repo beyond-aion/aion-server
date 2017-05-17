@@ -8,8 +8,8 @@ import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.configs.main.CustomConfig;
-import com.aionemu.gameserver.configs.main.EnchantsConfig;
 import com.aionemu.gameserver.configs.main.LoggingConfig;
+import com.aionemu.gameserver.configs.main.RatesConfig;
 import com.aionemu.gameserver.controllers.observer.ItemUseObserver;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.DescriptionId;
@@ -19,6 +19,7 @@ import com.aionemu.gameserver.model.enchants.TemperingStat;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.PersistentState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.gameobjects.player.Rates;
 import com.aionemu.gameserver.model.templates.item.enums.ItemGroup;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_INVENTORY_UPDATE_ITEM;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ITEM_USAGE_ANIMATION;
@@ -38,10 +39,6 @@ public class TamperingAction extends AbstractItemAction {
 	public boolean canAct(Player player, Item parentItem, Item targetItem) {
 		int maxTemp = targetItem.getItemTemplate().getMaxTampering();
 		if (!(maxTemp > 0) || targetItem.getTempering() >= maxTemp) {
-			return false;
-		}
-		if (EnchantsConfig.MAX_TAMPERING_LEVEL > 0 && targetItem.getTempering() >= EnchantsConfig.MAX_TAMPERING_LEVEL) {
-			PacketSendUtility.sendMessage(player, "You've reached max tampering level:" + EnchantsConfig.MAX_TAMPERING_LEVEL);
 			return false;
 		}
 		return true;
@@ -91,7 +88,7 @@ public class TamperingAction extends AbstractItemAction {
 						targetItem.setTemperingEffect(null);
 					}
 
-					double temperingChance = calculateChance(targetItem);
+					float temperingChance = calculateChance(player, targetItem);
 					if (Rnd.chance() < temperingChance) {
 						targetItem.setTempering(targetItem.getTempering() + 1);
 						if (targetItem.getTempering() > 4 && targetItem.getItemTemplate().getItemGroup() == ItemGroup.PLUME) {
@@ -160,15 +157,11 @@ public class TamperingAction extends AbstractItemAction {
 		}, 5000));
 	}
 
-	private double calculateChance(Item target) {
-		double chance = EnchantsConfig.TEMPERING_CHANCE;
-		double curTemp = target.getTempering();
-		if (target.getItemTemplate().getItemGroup().equals(ItemGroup.PLUME)) {
-			if (curTemp < 8)
-				chance = 100 - (curTemp * 10);
-			else
-				chance = 25;
+	private float calculateChance(Player player, Item target) {
+		if (target.getItemTemplate().getItemGroup() == ItemGroup.PLUME) {
+			float curTemp = target.getTempering();
+			return Math.max(25, 100 - (curTemp * 10));
 		}
-		return chance;
+		return Rates.get(player, RatesConfig.TEMPERING_CHANCES);
 	}
 }

@@ -330,24 +330,23 @@ public class FortressSiege extends Siege<FortressLocation> {
 			int winnerLegionId = getSiegeLocation().getLegionId();
 			if (winnerLegionId == 0)
 				return;
-			int legionBGeneral = LegionService.getInstance().getBrigadeGeneralOfLegion(winnerLegionId);
 
-			boolean defenceSuccessful = winnerLegionId == this.oldLegionId;
-			if (defenceSuccessful) {
-				if (legionBGeneral != 0) {
-					List<Integer> deputies = LegionService.getInstance().getMembersByRank(winnerLegionId, LegionRank.DEPUTY);
-					int gpReward = Math.round(500 / (float) (1 + deputies.size()));
-					GloryPointsService.increaseGp(legionBGeneral, gpReward);
-					for (int playerObjId : deputies) {
-						GloryPointsService.increaseGp(playerObjId, gpReward);
-					}
+			int legionBGeneral = LegionService.getInstance().getBrigadeGeneralOfLegion(winnerLegionId);
+			if (legionBGeneral == 0)
+				return;
+
+			boolean defenseSuccessful = winnerLegionId == oldLegionId;
+			if (defenseSuccessful) {
+				List<Integer> deputies = LegionService.getInstance().getMembersByRank(winnerLegionId, LegionRank.DEPUTY);
+				int gpReward = Math.round(500 / (float) (1 + deputies.size()));
+				GloryPointsService.increaseGp(legionBGeneral, gpReward);
+				for (int playerObjId : deputies) {
+					GloryPointsService.increaseGp(playerObjId, gpReward);
 				}
 			} else {
-				if (legionBGeneral != 0) {
-					GloryPointsService.increaseGp(legionBGeneral, 1000, false);
-					Legion legion = LegionService.getInstance().getLegion(winnerLegionId);
-					legion.increaseSiegeGloryPoints(1000);
-				}
+				GloryPointsService.increaseGp(legionBGeneral, 1000, false);
+				Legion legion = LegionService.getInstance().getLegion(winnerLegionId);
+				legion.increaseSiegeGloryPoints(1000);
 			}
 		} catch (Exception e) {
 			log.error("Error while calculating glory points reward for fortress siege.", e);

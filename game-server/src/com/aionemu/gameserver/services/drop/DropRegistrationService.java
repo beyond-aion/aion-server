@@ -13,6 +13,7 @@ import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.event.AIEventType;
 import com.aionemu.gameserver.configs.main.DropConfig;
 import com.aionemu.gameserver.configs.main.EventsConfig;
+import com.aionemu.gameserver.configs.main.RatesConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.drop.Drop;
@@ -21,6 +22,7 @@ import com.aionemu.gameserver.model.drop.NpcDrop;
 import com.aionemu.gameserver.model.gameobjects.DropNpc;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.gameobjects.player.Rates;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.model.team.common.legacy.LootGroupRules;
 import com.aionemu.gameserver.model.templates.event.EventTemplate;
@@ -166,7 +168,7 @@ public class DropRegistrationService {
 		// can be exploited on duel with Spiritmaster Erosion skill
 		boostDropRate += genesis.getGameStats().getStat(StatEnum.BOOST_DROP_RATE, 100).getCurrent() / 100f - 1;
 
-		float dropRate = genesis.getRates().getDropRate() * boostDropRate * dropChance / 100F;
+		float dropRate = Rates.get(genesis, RatesConfig.DROP_RATES) * boostDropRate * dropChance / 100F;
 
 		if (npcDrop != null) {
 			index = npcDrop.dropCalculator(droppedItems, index, dropRate, genesis.getRace(), groupMembers);

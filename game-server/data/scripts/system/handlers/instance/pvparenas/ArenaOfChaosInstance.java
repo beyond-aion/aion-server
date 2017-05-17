@@ -1,7 +1,9 @@
 package instance.pvparenas;
 
+import com.aionemu.gameserver.configs.main.RatesConfig;
 import com.aionemu.gameserver.instance.handlers.InstanceID;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.gameobjects.player.Rates;
 import com.aionemu.gameserver.model.instance.playerreward.InstancePlayerReward;
 import com.aionemu.gameserver.model.instance.playerreward.PvPArenaPlayerReward;
 
@@ -33,7 +35,7 @@ public class ArenaOfChaosInstance extends ChaosTrainingGroundsInstance {
 				float playerRate = 1;
 				Player player = instance.getPlayer(playerReward.getOwnerId());
 				if (player != null) {
-					playerRate = player.getRates().getChaosRewardRate();
+					playerRate = Rates.get(player, RatesConfig.PVP_ARENA_CHAOS_REWARD_RATES);
 				}
 				int score = reward.getScorePoints();
 				float scoreRate = ((float) score / (float) totalPoints);
@@ -71,11 +73,10 @@ public class ArenaOfChaosInstance extends ChaosTrainingGroundsInstance {
 					rankingCoI = rankingCoI - rankingCoI * generalRate;
 				}
 				rankingCoI *= percent;
-				rankingCoI *= playerRate;
 				int scoreCoI = (int) (totalScoreCourage * scoreRate);
-				reward.setBasicCourage(basicCoI);
-				reward.setRankingCourage((int) rankingCoI);
-				reward.setScoreCourage(scoreCoI);
+				reward.setBasicCourage((int) Rates.ARENA_COURAGE_INSIGNIA_COUNT.calcResult(player, basicCoI));
+				reward.setRankingCourage((int) Rates.ARENA_COURAGE_INSIGNIA_COUNT.calcResult(player, (long) rankingCoI));
+				reward.setScoreCourage((int) Rates.ARENA_COURAGE_INSIGNIA_COUNT.calcResult(player, scoreCoI));
 				if (instanceReward.canRewardOpportunityToken(reward)) {
 					reward.setOpportunity(4);
 				}

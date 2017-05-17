@@ -59,7 +59,7 @@ public class ArenaOfHarmonyInstance extends HaramoniousTrainingCenterInstance {
 			group.setBasicAP(basicAP);
 			group.setRankingAP(rankingAP);
 			group.setScoreAP(scoreAP);
-			group.setBasicCourage(basicCoI);
+			group.setBasicCourage(basicCoI); // player based custom rates apply later, since these are group rewards
 			group.setRankingCourage(rankingCoI);
 			group.setScoreCourage(scoreCoI);
 			group.setBasicGP(basicGP);

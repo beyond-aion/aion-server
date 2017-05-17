@@ -20,7 +20,6 @@ import com.aionemu.gameserver.configs.main.CacheConfig;
 import com.aionemu.gameserver.configs.main.CraftConfig;
 import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.configs.main.DropConfig;
-import com.aionemu.gameserver.configs.main.EnchantsConfig;
 import com.aionemu.gameserver.configs.main.EventsConfig;
 import com.aionemu.gameserver.configs.main.FallDamageConfig;
 import com.aionemu.gameserver.configs.main.GSConfig;
@@ -58,7 +57,7 @@ public class Configure extends AdminCommand {
 
 	static {
 		List<Class<?>> classes = Arrays.asList(AIConfig.class, AdminConfig.class, AutoGroupConfig.class, CacheConfig.class, CraftConfig.class,
-			CustomConfig.class, DeveloperConfig.class, DropConfig.class, EnchantsConfig.class, EventsConfig.class, FallDamageConfig.class, GSConfig.class,
+			CustomConfig.class, DeveloperConfig.class, DropConfig.class, EventsConfig.class, FallDamageConfig.class, GSConfig.class,
 			GeoDataConfig.class, GroupConfig.class, HTMLConfig.class, HousingConfig.class, InGameShopConfig.class, LegionConfig.class, LoggingConfig.class,
 			MembershipConfig.class, NameConfig.class, NetworkConfig.class, PeriodicSaveConfig.class, PricesConfig.class, PunishmentConfig.class,
 			RankingConfig.class, RatesConfig.class, SecurityConfig.class, ShutdownConfig.class, SiegeConfig.class, ThreadConfig.class, WorldConfig.class);

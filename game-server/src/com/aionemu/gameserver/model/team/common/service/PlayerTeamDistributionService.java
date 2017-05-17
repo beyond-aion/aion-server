@@ -10,7 +10,7 @@ import com.aionemu.gameserver.configs.main.GroupConfig;
 import com.aionemu.gameserver.model.gameobjects.AionObject;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.gameobjects.player.RewardType;
+import com.aionemu.gameserver.model.gameobjects.player.Rates;
 import com.aionemu.gameserver.model.team.TemporaryPlayerTeam;
 import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -70,7 +70,7 @@ public class PlayerTeamDistributionService {
 			rewardAp *= damagePercent;
 			rewardAp *= instanceApMultiplier;
 
-			member.getCommonData().addExp(rewardXp, RewardType.GROUP_HUNTING, owner.getObjectTemplate().getNameId());
+			member.getCommonData().addExp(rewardXp, Rates.XP_GROUP_HUNTING, owner.getObjectTemplate().getNameId());
 			member.getCommonData().addDp(rewardDp);
 			if (owner.getAi().ask(AIQuestion.SHOULD_REWARD_AP) && !(filteredStats.mentorCount > 0 && CustomConfig.MENTOR_GROUP_AP)) {
 				rewardAp *= StatFunctions.calculatePvEApGained(member, owner);
