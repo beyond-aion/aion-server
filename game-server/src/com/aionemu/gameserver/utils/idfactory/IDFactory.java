@@ -21,7 +21,7 @@ import com.aionemu.gameserver.model.gameobjects.AionObject;
 /**
  * This class is responsible for id generation for all Aion-Emu objects.<br>
  * This class is Thread-Safe.<br>
- * This class is designed to be very strict with id usage. Any illegal operation will throw {@link IDFactoryError}
+ * This class is designed to be very strict with id usage. Any illegal ID acquiring operation will throw {@link IDFactoryError}
  *
  * @author SoulKeeper
  */
@@ -150,36 +150,45 @@ public class IDFactory {
 	 *
 	 * @param id
 	 *          id to release
-	 * @throws IDFactoryError
-	 *           if id was not taken earlier
 	 */
 	public void releaseId(int id) {
-		releaseIds(id);
-	}
-
-	public void releaseIds(int... ids) {
 		try {
 			lock.lock();
-			for (int id : ids) {
-				boolean status = idList.get(id);
-				if (!status) {
-					throw new IDFactoryError("ID " + id + " is not taken, can't release it.");
-				}
-				idList.clear(id);
-				if (id < nextMinId || nextMinId == Integer.MIN_VALUE) {
-					nextMinId = id;
-				}
-			}
+			if (!release(id))
+				log.warn("Couldn't release ID " + id + " because it wasn't taken", new IllegalArgumentException()); // print stack
 		} finally {
 			lock.unlock();
 		}
+	}
+
+	/**
+	 * Internal helper method without synchronization
+	 * 
+	 * @return True if the ID could be released, false if it was not taken
+	 */
+	private boolean release(int id) {
+		boolean status = idList.get(id);
+		if (!status)
+			return false;
+		idList.clear(id);
+		if (id < nextMinId || nextMinId == Integer.MIN_VALUE)
+			nextMinId = id;
+		return true;
 	}
 
 	public void releaseObjectIds(Collection<? extends AionObject> unusedObjects) {
 		if (GenericValidator.isBlankOrNull(unusedObjects))
 			return;
 
-		releaseIds(unusedObjects.stream().filter(o -> o != null && o.getObjectId() > 0).mapToInt(AionObject::getObjectId).toArray());
+		try {
+			lock.lock();
+			for (AionObject obj : unusedObjects) {
+				if (!release(obj.getObjectId()))
+					log.warn("Couldn't release object ID of " + obj + " (ID wasn't taken)", new IllegalArgumentException()); // print object and stack
+			}
+		} finally {
+			lock.unlock();
+		}
 	}
 
 	/**
