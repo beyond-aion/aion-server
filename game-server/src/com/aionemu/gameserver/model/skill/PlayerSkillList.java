@@ -1,7 +1,7 @@
 package com.aionemu.gameserver.model.skill;
 
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -26,7 +26,7 @@ public final class PlayerSkillList implements SkillList<Player> {
 	}
 
 	public PlayerSkillList(List<PlayerSkillEntry> playerSkills) {
-		this.skills = new LinkedHashMap<>();
+		this.skills = new HashMap<>();
 		this.deletedSkills = new ArrayList<>();
 		for (PlayerSkillEntry entry : playerSkills)
 			skills.put(entry.getSkillId(), entry);

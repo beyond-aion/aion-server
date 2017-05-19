@@ -228,7 +228,7 @@ public class SkillAttackManager {
 	private static boolean isReady(Npc owner, NpcSkillEntry entry) {
 		if (entry.isReady(owner.getLifeStats().getHpPercentage(), System.currentTimeMillis() - owner.getGameStats().getFightStartingTime())) {
 			if (entry.conditionReady(owner)) {
-				SkillTemplate template = entry.getSkillTemplate();
+				SkillTemplate template = DataManager.SKILL_DATA.getSkillTemplate(entry.getSkillId());
 				if ((template.getType() == SkillType.MAGICAL && owner.getEffectController().isAbnormalSet(AbnormalState.SILENCE))
 					|| (template.getType() == SkillType.PHYSICAL && owner.getEffectController().isAbnormalSet(AbnormalState.BIND))
 					|| (owner.getEffectController().isInAnyAbnormalState(AbnormalState.CANT_ATTACK_STATE))
@@ -243,7 +243,7 @@ public class SkillAttackManager {
 	}
 
 	private static boolean targetTooFar(Npc owner, NpcSkillEntry entry) {
-		SkillTemplate template = entry.getSkillTemplate();
+		SkillTemplate template = DataManager.SKILL_DATA.getSkillTemplate(entry.getSkillId());
 		Properties prop = template.getProperties();
 		if (prop.getFirstTarget() != FirstTargetAttribute.ME && entry.getTemplate().getTarget() != NpcSkillTargetAttribute.NONE
 			&& entry.getTemplate().getTarget() != NpcSkillTargetAttribute.MOST_HATED) {

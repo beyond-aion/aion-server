@@ -149,9 +149,10 @@ public class StigmaService {
 			linkedStigmaSkill.clear();
 			for (PlayerSkillEntry skill : player.getSkillList().getAllSkills()) {
 				if (skill.isLinkedStigmaSkill()) {
+					SkillTemplate skillTemplate = DataManager.SKILL_DATA.getSkillTemplate(skill.getSkillId());
 					if (stack == null)
-						stack = skill.getSkillTemplate().getStack();
-					if (skill.getSkillTemplate().getStack().equalsIgnoreCase(stack))
+						stack = skillTemplate.getStack();
+					if (skillTemplate.getStack().equalsIgnoreCase(stack))
 						linkedStigmaSkill.add(skill);
 					if (stack.equalsIgnoreCase("NONE"))
 						break;

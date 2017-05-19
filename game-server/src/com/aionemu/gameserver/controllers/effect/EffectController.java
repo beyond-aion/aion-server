@@ -105,6 +105,7 @@ public class EffectController {
 
 				if (useEffectId) {
 					// idea here is that effects with same effectId shouldn't stack effect with higher basic lvl takes priority
+					mainLoop:
 					for (Iterator<Effect> iter = mapToUpdate.values().iterator(); iter.hasNext();) {
 						Effect effect = iter.next();
 						if (effect.getTargetSlot() == nextEffect.getTargetSlot()) {
@@ -120,6 +121,7 @@ public class EffectController {
 										else {
 											iter.remove();
 											effect.endEffect();
+											break mainLoop;
 										}
 									}
 								}

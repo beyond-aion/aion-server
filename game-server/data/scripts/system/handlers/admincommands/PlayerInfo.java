@@ -3,6 +3,7 @@ package admincommands;
 import java.util.Iterator;
 import java.util.List;
 
+import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.account.PlayerAccountData;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -95,7 +96,7 @@ public class PlayerInfo extends AdminCommand {
 		} else if (params[1].equals("skills")) {
 			StringBuilder strbld = new StringBuilder("-list of skills:\n");
 			for (PlayerSkillEntry skill : target.getSkillList().getAllSkills())
-				strbld.append("\tlevel " + skill.getSkillLevel() + " of " + skill.getSkillName() + "\n");
+				strbld.append("\tlevel " + skill.getSkillLevel() + " of " + DataManager.SKILL_DATA.getSkillTemplate(skill.getSkillId()).getName() + "\n");
 			sendInfo(admin, strbld.toString());
 		} else if (params[1].equals("loc")) {
 			String chatLink = ChatUtil.position(target.getName(), target.getPosition());
