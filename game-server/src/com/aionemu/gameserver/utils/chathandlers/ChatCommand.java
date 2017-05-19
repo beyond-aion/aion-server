@@ -100,8 +100,11 @@ public abstract class ChatCommand {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Syntax:");
 		if (lines.length > 0) {
+			boolean containsSquareBrackets = false;
 			for (String info : lines) {
 				if (StringUtils.startsWithAny(info, " ", "<", "[")) {
+					if (!containsSquareBrackets && info.indexOf("[") > -1)
+						containsSquareBrackets = true;
 					sb.append("\n\t").append(ChatUtil.color(getAliasWithPrefix(), Color.WHITE)).append(' ');
 					String[] split = info.split(" - ", 2);
 					if (split.length == 2) {
@@ -115,7 +118,7 @@ public abstract class ChatCommand {
 					sb.append("\n").append(info);
 				}
 			}
-			if (sb.indexOf("[") > -1)
+			if (containsSquareBrackets)
 				sb.append("\nNote: Parameters enclosed in square brackets are optional.");
 		} else {
 			sb.append("\n\tNo syntax info available.");
