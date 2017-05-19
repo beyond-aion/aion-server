@@ -90,7 +90,7 @@ public class DropInfo extends AdminCommand {
 		sendInfo(player, "\n[Drop info for " + currentNpc.getName() + "]");
 		if (npcDrop != null) {
 			for (DropGroup dropGroup : npcDrop.getDropGroup()) {
-				sendInfo(player, "DropGroup: " + dropGroup.getGroupName() + " MaxDropGroup: " + dropGroup.getMaxItems());
+				sendInfo(player, "DropGroup: " + dropGroup.getName() + " MaxDropGroup: " + dropGroup.getMaxItems());
 				for (Drop drop : dropGroup.getDrop()) {
 					sendInfo(player, "[item:" + drop.getItemId() + "]" + "	Rate: " + drop.getChance());
 					count++;

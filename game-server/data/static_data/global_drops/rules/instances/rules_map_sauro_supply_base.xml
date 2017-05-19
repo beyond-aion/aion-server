@@ -3,658 +3,658 @@
 	<!-- Multiple Monster Drops -->
 	<gd_rule rule_name="Named Manastone Bundle" base_chance="100">
 		<gd_maps>
-			<gd_map map_id="301130000" name="Sauro_Supply_Base" />
+			<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="230846" name="Sauro Base Grave Robber" />
-			<gd_npc npc_id="230858" name="Brigade General Sheba" />
-			<gd_npc npc_id="233255" name="Gatekeeper Stranir" />
-			<gd_npc npc_id="233256" name="Darkblade Ovanuka" />
-			<gd_npc npc_id="233257" name="Archmagus Sayahum" />
-			<gd_npc npc_id="233258" name="Derakanak the Reaver" />
+			<gd_npc npc_id="230846" /><!-- Sauro Base Grave Robber -->
+			<gd_npc npc_id="230858" /><!-- Brigade General Sheba -->
+			<gd_npc npc_id="233255" /><!-- Gatekeeper Stranir -->
+			<gd_npc npc_id="233256" /><!-- Darkblade Ovanuka -->
+			<gd_npc npc_id="233257" /><!-- Archmagus Sayahum -->
+			<gd_npc npc_id="233258" /><!-- Derakanak the Reaver -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="188052577" name="Veteran's Composite Manastone Bundle" />
+			<gd_item id="188052577" /><!-- Veteran's Composite Manastone Bundle -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Mark" base_chance="100" member_limit="6" min_count="60" max_count="90">
 		<gd_maps>
-			<gd_map map_id="301130000" name="Sauro_Supply_Base" />
+			<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="230857" name="Guard Captain Ahuradim" />
-			<gd_npc npc_id="230858" name="Brigade General Sheba" />
+			<gd_npc npc_id="230857" /><!-- Guard Captain Ahuradim -->
+			<gd_npc npc_id="230858" /><!-- Brigade General Sheba -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="186000238" name="Conqueror's Mark" />
+			<gd_item id="186000238" /><!-- Conqueror's Mark -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Coin" base_chance="100" min_count="5" max_count="10">
 		<gd_maps>
-			<gd_map map_id="301130000" name="Sauro_Supply_Base" />
+			<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="230849" name="Guard Captain Rohuka" />
-			<gd_npc npc_id="230850" name="Researcher Teselik" />
-			<gd_npc npc_id="230851" name="Chief Gunner Kurmata" />
-			<gd_npc npc_id="230853" name="Chief of Staff Moriata" />
-			<gd_npc npc_id="233316" name="Commander Ranodim" />
+			<gd_npc npc_id="230849" /><!-- Guard Captain Rohuka -->
+			<gd_npc npc_id="230850" /><!-- Researcher Teselik -->
+			<gd_npc npc_id="230851" /><!-- Chief Gunner Kurmata -->
+			<gd_npc npc_id="230853" /><!-- Chief of Staff Moriata -->
+			<gd_npc npc_id="233316" /><!-- Commander Ranodim -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="186000237" name="Ancient Coin" />
+			<gd_item id="186000237" /><!-- Ancient Coin -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Coin" base_chance="100" min_count="10" max_count="15">
 		<gd_maps>
-			<gd_map map_id="301130000" name="Sauro_Supply_Base" />
+			<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="230857" name="Guard Captain Ahuradim" />
-			<gd_npc npc_id="230858" name="Brigade General Sheba" />
+			<gd_npc npc_id="230857" /><!-- Guard Captain Ahuradim -->
+			<gd_npc npc_id="230858" /><!-- Brigade General Sheba -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="186000237" name="Ancient Coin" />
+			<gd_item id="186000237" /><!-- Ancient Coin -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Material" base_chance="100">
 		<gd_maps>
-			<gd_map map_id="301130000" name="Sauro_Supply_Base" />
+			<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="230857" name="Guard Captain Ahuradim" />
-			<gd_npc npc_id="230858" name="Brigade General Sheba" />
+			<gd_npc npc_id="230857" /><!-- Guard Captain Ahuradim -->
+			<gd_npc npc_id="230858" /><!-- Brigade General Sheba -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="169405253" name="Weapon Shard" />
-			<gd_item id="188052575" name="Veteran's Crafting Bundle" />
+			<gd_item id="169405253" /><!-- Weapon Shard -->
+			<gd_item id="188052575" /><!-- Veteran's Crafting Bundle -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Weapon (Unique)" base_chance="20">
 		<gd_maps>
-			<gd_map map_id="301130000" name="Sauro_Supply_Base" />
+			<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="230849" name="Guard Captain Rohuka" />
-			<gd_npc npc_id="230851" name="Chief Gunner Kurmata" />
-			<gd_npc npc_id="233258" name="Derakanak the Reaver" />
+			<gd_npc npc_id="230849" /><!-- Guard Captain Rohuka -->
+			<gd_npc npc_id="230851" /><!-- Chief Gunner Kurmata -->
+			<gd_npc npc_id="233258" /><!-- Derakanak the Reaver -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="100001578" name="Sauro Guard's Sword" />
-			<gd_item id="100101214" name="Sauro Guard's Mace" />
-			<gd_item id="100201386" name="Sauro Guard's Dagger" />
-			<gd_item id="100501206" name="Sauro Guard's Orb" />
-			<gd_item id="100601298" name="Sauro Guard's Spellbook" />
-			<gd_item id="100901228" name="Sauro Guard's Greatsword" />
-			<gd_item id="101301154" name="Sauro Guard's Polearm" />
-			<gd_item id="101501240" name="Sauro Guard's Staff" />
-			<gd_item id="101701257" name="Sauro Guard's Bow" />
-			<gd_item id="101801063" name="Sauro Guard's Pistol" />
-			<gd_item id="101901013" name="Sauro Guard's Aethercannon" />
-			<gd_item id="102001087" name="Sauro Guard's Harp" />
-			<gd_item id="102100840" name="Sauro Guard's Cipher-Blade" />
+			<gd_item id="100001578" /><!-- Sauro Guard's Sword -->
+			<gd_item id="100101214" /><!-- Sauro Guard's Mace -->
+			<gd_item id="100201386" /><!-- Sauro Guard's Dagger -->
+			<gd_item id="100501206" /><!-- Sauro Guard's Orb -->
+			<gd_item id="100601298" /><!-- Sauro Guard's Spellbook -->
+			<gd_item id="100901228" /><!-- Sauro Guard's Greatsword -->
+			<gd_item id="101301154" /><!-- Sauro Guard's Polearm -->
+			<gd_item id="101501240" /><!-- Sauro Guard's Staff -->
+			<gd_item id="101701257" /><!-- Sauro Guard's Bow -->
+			<gd_item id="101801063" /><!-- Sauro Guard's Pistol -->
+			<gd_item id="101901013" /><!-- Sauro Guard's Aethercannon -->
+			<gd_item id="102001087" /><!-- Sauro Guard's Harp -->
+			<gd_item id="102100840" /><!-- Sauro Guard's Cipher-Blade -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Shield (Unique)" base_chance="20">
 		<gd_maps>
-			<gd_map map_id="301130000" name="Sauro_Supply_Base" />
+			<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="230849" name="Guard Captain Rohuka" />
-			<gd_npc npc_id="230851" name="Chief Gunner Kurmata" />
-			<gd_npc npc_id="233256" name="Darkblade Ovanuka" />
-			<gd_npc npc_id="233257" name="Archmagus Sayahum" />
-			<gd_npc npc_id="233258" name="Derakanak the Reaver" />
-			<gd_npc npc_id="233316" name="Commander Ranodim" />
+			<gd_npc npc_id="230849" /><!-- Guard Captain Rohuka -->
+			<gd_npc npc_id="230851" /><!-- Chief Gunner Kurmata -->
+			<gd_npc npc_id="233256" /><!-- Darkblade Ovanuka -->
+			<gd_npc npc_id="233257" /><!-- Archmagus Sayahum -->
+			<gd_npc npc_id="233258" /><!-- Derakanak the Reaver -->
+			<gd_npc npc_id="233316" /><!-- Commander Ranodim -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="115001622" name="Sauro Guard's Shield" />
+			<gd_item id="115001622" /><!-- Sauro Guard's Shield -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Unique)" base_chance="20">
 		<gd_maps>
-			<gd_map map_id="301130000" name="Sauro_Supply_Base" />
+			<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="230851" name="Chief Gunner Kurmata" />
-			<gd_npc npc_id="230853" name="Chief of Staff Moriata" />
-			<gd_npc npc_id="233255" name="Gatekeeper Stranir" />
-			<gd_npc npc_id="233256" name="Darkblade Ovanuka" />
-			<gd_npc npc_id="233257" name="Archmagus Sayahum" />
-			<gd_npc npc_id="233258" name="Derakanak the Reaver" />
-			<gd_npc npc_id="233316" name="Commander Ranodim" />
+			<gd_npc npc_id="230851" /><!-- Chief Gunner Kurmata -->
+			<gd_npc npc_id="230853" /><!-- Chief of Staff Moriata -->
+			<gd_npc npc_id="233255" /><!-- Gatekeeper Stranir -->
+			<gd_npc npc_id="233256" /><!-- Darkblade Ovanuka -->
+			<gd_npc npc_id="233257" /><!-- Archmagus Sayahum -->
+			<gd_npc npc_id="233258" /><!-- Derakanak the Reaver -->
+			<gd_npc npc_id="233316" /><!-- Commander Ranodim -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="110101673" name="Sauro Guard's Tunic" />
-			<gd_item id="110301681" name="Sauro Guard's Jerkin" />
-			<gd_item id="110501511" name="Sauro Guard's Hauberk" />
-			<gd_item id="110601485" name="Sauro Guard's Breastplate" />
-			<gd_item id="111101505" name="Sauro Guard's Gloves" />
-			<gd_item id="111301619" name="Sauro Guard's Vambrace" />
-			<gd_item id="111501466" name="Sauro Guard's Handguards" />
-			<gd_item id="111601448" name="Sauro Guard's Gauntlets" />
-			<gd_item id="112101458" name="Sauro Guard's Pauldrons" />
-			<gd_item id="112301558" name="Sauro Guard's Shoulderguards" />
-			<gd_item id="112501408" name="Sauro Guard's Spaulders" />
-			<gd_item id="112601429" name="Sauro Guard's Shoulderplates" />
-			<gd_item id="113101520" name="Sauro Guard's Leggings" />
-			<gd_item id="113301650" name="Sauro Guard's Breeches" />
-			<gd_item id="113501484" name="Sauro Guard's Chausses" />
-			<gd_item id="113601431" name="Sauro Guard's Greaves" />
-			<gd_item id="114101552" name="Sauro Guard's Shoes" />
-			<gd_item id="114301687" name="Sauro Guard's Boots" />
-			<gd_item id="114501493" name="Sauro Guard's Brogans" />
-			<gd_item id="114601436" name="Sauro Guard's Sabatons" />
+			<gd_item id="110101673" /><!-- Sauro Guard's Tunic -->
+			<gd_item id="110301681" /><!-- Sauro Guard's Jerkin -->
+			<gd_item id="110501511" /><!-- Sauro Guard's Hauberk -->
+			<gd_item id="110601485" /><!-- Sauro Guard's Breastplate -->
+			<gd_item id="111101505" /><!-- Sauro Guard's Gloves -->
+			<gd_item id="111301619" /><!-- Sauro Guard's Vambrace -->
+			<gd_item id="111501466" /><!-- Sauro Guard's Handguards -->
+			<gd_item id="111601448" /><!-- Sauro Guard's Gauntlets -->
+			<gd_item id="112101458" /><!-- Sauro Guard's Pauldrons -->
+			<gd_item id="112301558" /><!-- Sauro Guard's Shoulderguards -->
+			<gd_item id="112501408" /><!-- Sauro Guard's Spaulders -->
+			<gd_item id="112601429" /><!-- Sauro Guard's Shoulderplates -->
+			<gd_item id="113101520" /><!-- Sauro Guard's Leggings -->
+			<gd_item id="113301650" /><!-- Sauro Guard's Breeches -->
+			<gd_item id="113501484" /><!-- Sauro Guard's Chausses -->
+			<gd_item id="113601431" /><!-- Sauro Guard's Greaves -->
+			<gd_item id="114101552" /><!-- Sauro Guard's Shoes -->
+			<gd_item id="114301687" /><!-- Sauro Guard's Boots -->
+			<gd_item id="114501493" /><!-- Sauro Guard's Brogans -->
+			<gd_item id="114601436" /><!-- Sauro Guard's Sabatons -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Accessory (Unique)" base_chance="20">
 		<gd_maps>
-			<gd_map map_id="301130000" name="Sauro_Supply_Base" />
+			<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="230850" name="Researcher Teselik" />
-			<gd_npc npc_id="233255" name="Gatekeeper Stranir" />
-			<gd_npc npc_id="233256" name="Darkblade Ovanuka" />
-			<gd_npc npc_id="233257" name="Archmagus Sayahum" />
-			<gd_npc npc_id="233316" name="Commander Ranodim" />
+			<gd_npc npc_id="230850" /><!-- Researcher Teselik -->
+			<gd_npc npc_id="233255" /><!-- Gatekeeper Stranir -->
+			<gd_npc npc_id="233256" /><!-- Darkblade Ovanuka -->
+			<gd_npc npc_id="233257" /><!-- Archmagus Sayahum -->
+			<gd_npc npc_id="233316" /><!-- Commander Ranodim -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="120001465" name="Sauro Guard's Corundum Earrings" />
-			<gd_item id="120001466" name="Sauro Guard's Turquoise Earrings" />
-			<gd_item id="121001339" name="Sauro Guard's Corundum Necklace" />
-			<gd_item id="121001340" name="Sauro Guard's Turquoise Necklace" />
-			<gd_item id="122001608" name="Sauro Guard's Corundum Ring" />
-			<gd_item id="122001609" name="Sauro Guard's Turquoise Ring" />
-			<gd_item id="123001388" name="Sauro Guard's Leather Belt" />
-			<gd_item id="123001389" name="Sauro Guard's Sash" />
+			<gd_item id="120001465" /><!-- Sauro Guard's Corundum Earrings -->
+			<gd_item id="120001466" /><!-- Sauro Guard's Turquoise Earrings -->
+			<gd_item id="121001339" /><!-- Sauro Guard's Corundum Necklace -->
+			<gd_item id="121001340" /><!-- Sauro Guard's Turquoise Necklace -->
+			<gd_item id="122001608" /><!-- Sauro Guard's Corundum Ring -->
+			<gd_item id="122001609" /><!-- Sauro Guard's Turquoise Ring -->
+			<gd_item id="123001388" /><!-- Sauro Guard's Leather Belt -->
+			<gd_item id="123001389" /><!-- Sauro Guard's Sash -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Head (Unique)" base_chance="10">
 		<gd_maps>
-			<gd_map map_id="301130000" name="Sauro_Supply_Base" />
+			<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="230850" name="Researcher Teselik" />
-			<gd_npc npc_id="233255" name="Gatekeeper Stranir" />
-			<gd_npc npc_id="233256" name="Darkblade Ovanuka" />
-			<gd_npc npc_id="233257" name="Archmagus Sayahum" />
-			<gd_npc npc_id="233316" name="Commander Ranodim" />
+			<gd_npc npc_id="230850" /><!-- Researcher Teselik -->
+			<gd_npc npc_id="233255" /><!-- Gatekeeper Stranir -->
+			<gd_npc npc_id="233256" /><!-- Darkblade Ovanuka -->
+			<gd_npc npc_id="233257" /><!-- Archmagus Sayahum -->
+			<gd_npc npc_id="233316" /><!-- Commander Ranodim -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="125003683" name="Sauro Guard's Headband" />
-			<gd_item id="125003688" name="Sauro Guard's Hat" />
-			<gd_item id="125003693" name="Sauro Guard's Chain Hood" />
-			<gd_item id="125003698" name="Sauro Guard's Helm" />
+			<gd_item id="125003683" /><!-- Sauro Guard's Headband -->
+			<gd_item id="125003688" /><!-- Sauro Guard's Hat -->
+			<gd_item id="125003693" /><!-- Sauro Guard's Chain Hood -->
+			<gd_item id="125003698" /><!-- Sauro Guard's Helm -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Weapon (Epic)" base_chance="6">
 		<gd_maps>
-			<gd_map map_id="301130000" name="Sauro_Supply_Base" />
+			<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="230857" name="Guard Captain Ahuradim" />
-			<gd_npc npc_id="233256" name="Darkblade Ovanuka" />
-			<gd_npc npc_id="233257" name="Archmagus Sayahum" />
-			<gd_npc npc_id="233258" name="Derakanak the Reaver" />
+			<gd_npc npc_id="230857" /><!-- Guard Captain Ahuradim -->
+			<gd_npc npc_id="233256" /><!-- Darkblade Ovanuka -->
+			<gd_npc npc_id="233257" /><!-- Archmagus Sayahum -->
+			<gd_npc npc_id="233258" /><!-- Derakanak the Reaver -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="100001579" name="Sauren Sword" />
-			<gd_item id="100101215" name="Sauren Mace" />
-			<gd_item id="100201387" name="Sauren Dagger" />
-			<gd_item id="100501207" name="Sauren Orb" />
-			<gd_item id="100601299" name="Sauren Spellbook" />
-			<gd_item id="100901229" name="Sauren Greatsword" />
-			<gd_item id="101301155" name="Sauren Polearm" />
-			<gd_item id="101501241" name="Sauren Staff" />
-			<gd_item id="101701258" name="Sauren Bow" />
-			<gd_item id="101801064" name="Sauren Pistol" />
-			<gd_item id="101901014" name="Sauren Aethercannon" />
-			<gd_item id="102001088" name="Sauren Harp" />
-			<gd_item id="102100841" name="Sauren Cipher-Blade" />
+			<gd_item id="100001579" /><!-- Sauren Sword -->
+			<gd_item id="100101215" /><!-- Sauren Mace -->
+			<gd_item id="100201387" /><!-- Sauren Dagger -->
+			<gd_item id="100501207" /><!-- Sauren Orb -->
+			<gd_item id="100601299" /><!-- Sauren Spellbook -->
+			<gd_item id="100901229" /><!-- Sauren Greatsword -->
+			<gd_item id="101301155" /><!-- Sauren Polearm -->
+			<gd_item id="101501241" /><!-- Sauren Staff -->
+			<gd_item id="101701258" /><!-- Sauren Bow -->
+			<gd_item id="101801064" /><!-- Sauren Pistol -->
+			<gd_item id="101901014" /><!-- Sauren Aethercannon -->
+			<gd_item id="102001088" /><!-- Sauren Harp -->
+			<gd_item id="102100841" /><!-- Sauren Cipher-Blade -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Shield (Epic)" base_chance="6">
 		<gd_maps>
-			<gd_map map_id="301130000" name="Sauro_Supply_Base" />
+			<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="230857" name="Guard Captain Ahuradim" />
-			<gd_npc npc_id="233256" name="Darkblade Ovanuka" />
-			<gd_npc npc_id="233257" name="Archmagus Sayahum" />
-			<gd_npc npc_id="233258" name="Derakanak the Reaver" />
+			<gd_npc npc_id="230857" /><!-- Guard Captain Ahuradim -->
+			<gd_npc npc_id="233256" /><!-- Darkblade Ovanuka -->
+			<gd_npc npc_id="233257" /><!-- Archmagus Sayahum -->
+			<gd_npc npc_id="233258" /><!-- Derakanak the Reaver -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="115001620" name="Sauren Shield" />
-			<gd_item id="115001621" name="Sauren Scale Shield" />
+			<gd_item id="115001620" /><!-- Sauren Shield -->
+			<gd_item id="115001621" /><!-- Sauren Scale Shield -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Epic)" base_chance="9">
 		<gd_maps>
-			<gd_map map_id="301130000" name="Sauro_Supply_Base" />
+			<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="230849" name="Guard Captain Rohuka" />
-			<gd_npc npc_id="230853" name="Chief of Staff Moriata" />
-			<gd_npc npc_id="230857" name="Guard Captain Ahuradim" />
-			<gd_npc npc_id="233255" name="Gatekeeper Stranir" />
-			<gd_npc npc_id="233256" name="Darkblade Ovanuka" />
-			<gd_npc npc_id="233257" name="Archmagus Sayahum" />
-			<gd_npc npc_id="233258" name="Derakanak the Reaver" />
+			<gd_npc npc_id="230849" /><!-- Guard Captain Rohuka -->
+			<gd_npc npc_id="230853" /><!-- Chief of Staff Moriata -->
+			<gd_npc npc_id="230857" /><!-- Guard Captain Ahuradim -->
+			<gd_npc npc_id="233255" /><!-- Gatekeeper Stranir -->
+			<gd_npc npc_id="233256" /><!-- Darkblade Ovanuka -->
+			<gd_npc npc_id="233257" /><!-- Archmagus Sayahum -->
+			<gd_npc npc_id="233258" /><!-- Derakanak the Reaver -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="110101671" name="Sauren Tunic" />
-			<gd_item id="110101672" name="Sauren Tunic" />
-			<gd_item id="110301679" name="Sauren Jerkin" />
-			<gd_item id="110301680" name="Sauren Jerkin" />
-			<gd_item id="110501509" name="Sauren Hauberk" />
-			<gd_item id="110501510" name="Sauren Magic Hauberk" />
-			<gd_item id="110601483" name="Sauren Breastplate" />
-			<gd_item id="110601484" name="Sauren Breastplate" />
-			<gd_item id="111101503" name="Sauren Gloves" />
-			<gd_item id="111101504" name="Sauren Gloves" />
-			<gd_item id="111301617" name="Sauren Vambrace" />
-			<gd_item id="111301618" name="Sauren Vambrace" />
-			<gd_item id="111501464" name="Sauren Handguards" />
-			<gd_item id="111501465" name="Sauren Magic Handguards" />
-			<gd_item id="111601446" name="Sauren Gauntlets" />
-			<gd_item id="111601447" name="Sauren Gauntlets" />
-			<gd_item id="112101456" name="Sauren Pauldrons" />
-			<gd_item id="112101457" name="Sauren Pauldrons" />
-			<gd_item id="112301556" name="Sauren Shoulderguards" />
-			<gd_item id="112301557" name="Sauren Shoulderguards" />
-			<gd_item id="112501406" name="Sauren Spaulders" />
-			<gd_item id="112501407" name="Sauren Spaulders" />
-			<gd_item id="112601427" name="Sauren Shoulderplates" />
-			<gd_item id="112601428" name="Sauren Shoulderplates" />
-			<gd_item id="113101518" name="Sauren Leggings" />
-			<gd_item id="113101519" name="Sauren Leggings" />
-			<gd_item id="113301648" name="Sauren Breeches" />
-			<gd_item id="113301649" name="Sauren Breeches" />
-			<gd_item id="113501482" name="Sauren Chausses" />
-			<gd_item id="113501483" name="Sauren Chausses" />
-			<gd_item id="113601429" name="Sauren Greaves" />
-			<gd_item id="113601430" name="Sauren Greaves" />
-			<gd_item id="114101550" name="Sauren Shoes" />
-			<gd_item id="114101551" name="Sauren Shoes" />
-			<gd_item id="114301685" name="Sauren Boots" />
-			<gd_item id="114301686" name="Sauren Boots" />
-			<gd_item id="114501491" name="Sauren Brogans" />
-			<gd_item id="114501492" name="Sauren Magic Brogans" />
-			<gd_item id="114601434" name="Sauren Sabatons" />
-			<gd_item id="114601435" name="Sauren Sabatons" />
+			<gd_item id="110101671" /><!-- Sauren Tunic -->
+			<gd_item id="110101672" /><!-- Sauren Tunic -->
+			<gd_item id="110301679" /><!-- Sauren Jerkin -->
+			<gd_item id="110301680" /><!-- Sauren Jerkin -->
+			<gd_item id="110501509" /><!-- Sauren Hauberk -->
+			<gd_item id="110501510" /><!-- Sauren Magic Hauberk -->
+			<gd_item id="110601483" /><!-- Sauren Breastplate -->
+			<gd_item id="110601484" /><!-- Sauren Breastplate -->
+			<gd_item id="111101503" /><!-- Sauren Gloves -->
+			<gd_item id="111101504" /><!-- Sauren Gloves -->
+			<gd_item id="111301617" /><!-- Sauren Vambrace -->
+			<gd_item id="111301618" /><!-- Sauren Vambrace -->
+			<gd_item id="111501464" /><!-- Sauren Handguards -->
+			<gd_item id="111501465" /><!-- Sauren Magic Handguards -->
+			<gd_item id="111601446" /><!-- Sauren Gauntlets -->
+			<gd_item id="111601447" /><!-- Sauren Gauntlets -->
+			<gd_item id="112101456" /><!-- Sauren Pauldrons -->
+			<gd_item id="112101457" /><!-- Sauren Pauldrons -->
+			<gd_item id="112301556" /><!-- Sauren Shoulderguards -->
+			<gd_item id="112301557" /><!-- Sauren Shoulderguards -->
+			<gd_item id="112501406" /><!-- Sauren Spaulders -->
+			<gd_item id="112501407" /><!-- Sauren Spaulders -->
+			<gd_item id="112601427" /><!-- Sauren Shoulderplates -->
+			<gd_item id="112601428" /><!-- Sauren Shoulderplates -->
+			<gd_item id="113101518" /><!-- Sauren Leggings -->
+			<gd_item id="113101519" /><!-- Sauren Leggings -->
+			<gd_item id="113301648" /><!-- Sauren Breeches -->
+			<gd_item id="113301649" /><!-- Sauren Breeches -->
+			<gd_item id="113501482" /><!-- Sauren Chausses -->
+			<gd_item id="113501483" /><!-- Sauren Chausses -->
+			<gd_item id="113601429" /><!-- Sauren Greaves -->
+			<gd_item id="113601430" /><!-- Sauren Greaves -->
+			<gd_item id="114101550" /><!-- Sauren Shoes -->
+			<gd_item id="114101551" /><!-- Sauren Shoes -->
+			<gd_item id="114301685" /><!-- Sauren Boots -->
+			<gd_item id="114301686" /><!-- Sauren Boots -->
+			<gd_item id="114501491" /><!-- Sauren Brogans -->
+			<gd_item id="114501492" /><!-- Sauren Magic Brogans -->
+			<gd_item id="114601434" /><!-- Sauren Sabatons -->
+			<gd_item id="114601435" /><!-- Sauren Sabatons -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Accessory (Epic)" base_chance="6">
 		<gd_maps>
-			<gd_map map_id="301130000" name="Sauro_Supply_Base" />
+			<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="230850" name="Researcher Teselik" />
-			<gd_npc npc_id="233255" name="Gatekeeper Stranir" />
-			<gd_npc npc_id="233316" name="Commander Ranodim" />
+			<gd_npc npc_id="230850" /><!-- Researcher Teselik -->
+			<gd_npc npc_id="233255" /><!-- Gatekeeper Stranir -->
+			<gd_npc npc_id="233316" /><!-- Commander Ranodim -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="120001467" name="Sauren Corundum Earrings" />
-			<gd_item id="120001468" name="Sauren Turquoise Earrings" />
-			<gd_item id="121001341" name="Sauren Corundum Necklace" />
-			<gd_item id="121001342" name="Sauren Turquoise Necklace" />
-			<gd_item id="122001610" name="Sauren Corundum Ring" />
-			<gd_item id="122001611" name="Sauren Turquoise Ring" />
-			<gd_item id="123001390" name="Sauren Leather Belt" />
-			<gd_item id="123001391" name="Sauren Sash" />
+			<gd_item id="120001467" /><!-- Sauren Corundum Earrings -->
+			<gd_item id="120001468" /><!-- Sauren Turquoise Earrings -->
+			<gd_item id="121001341" /><!-- Sauren Corundum Necklace -->
+			<gd_item id="121001342" /><!-- Sauren Turquoise Necklace -->
+			<gd_item id="122001610" /><!-- Sauren Corundum Ring -->
+			<gd_item id="122001611" /><!-- Sauren Turquoise Ring -->
+			<gd_item id="123001390" /><!-- Sauren Leather Belt -->
+			<gd_item id="123001391" /><!-- Sauren Sash -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Head (Epic)" base_chance="6">
 		<gd_maps>
-			<gd_map map_id="301130000" name="Sauro_Supply_Base" />
+			<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="230850" name="Researcher Teselik" />
-			<gd_npc npc_id="233255" name="Gatekeeper Stranir" />
-			<gd_npc npc_id="233316" name="Commander Ranodim" />
+			<gd_npc npc_id="230850" /><!-- Researcher Teselik -->
+			<gd_npc npc_id="233255" /><!-- Gatekeeper Stranir -->
+			<gd_npc npc_id="233316" /><!-- Commander Ranodim -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="125003681" name="Sauren Headband" />
-			<gd_item id="125003682" name="Sauren Headband" />
-			<gd_item id="125003686" name="Sauren Hat" />
-			<gd_item id="125003687" name="Sauren Hat" />
-			<gd_item id="125003691" name="Sauren Chain Hood" />
-			<gd_item id="125003692" name="Sauren Chain Hood" />
-			<gd_item id="125003696" name="Sauren Helm" />
-			<gd_item id="125003697" name="Sauren Helm" />
+			<gd_item id="125003681" /><!-- Sauren Headband -->
+			<gd_item id="125003682" /><!-- Sauren Headband -->
+			<gd_item id="125003686" /><!-- Sauren Hat -->
+			<gd_item id="125003687" /><!-- Sauren Hat -->
+			<gd_item id="125003691" /><!-- Sauren Chain Hood -->
+			<gd_item id="125003692" /><!-- Sauren Chain Hood -->
+			<gd_item id="125003696" /><!-- Sauren Helm -->
+			<gd_item id="125003697" /><!-- Sauren Helm -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Mythic)" base_chance="9">
 		<gd_maps>
-			<gd_map map_id="301130000" name="Sauro_Supply_Base" />
+			<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="230857" name="Guard Captain Ahuradim" />
-			<gd_npc npc_id="230858" name="Brigade General Sheba" />
+			<gd_npc npc_id="230857" /><!-- Guard Captain Ahuradim -->
+			<gd_npc npc_id="230858" /><!-- Brigade General Sheba -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="110101669" name="Sauro Commander's Tunic" />
-			<gd_item id="110101670" name="Sauro Commander's Tunic" />
-			<gd_item id="110301677" name="Sauro Commander's Jerkin" />
-			<gd_item id="110301678" name="Sauro Commander's Jerkin" />
-			<gd_item id="110501507" name="Sauro Commander's Hauberk" />
-			<gd_item id="110501508" name="Sauro Commander's Magic Hauberk" />
-			<gd_item id="110601481" name="Sauro Commander's Breastplate" />
-			<gd_item id="110601482" name="Sauro Commander's Breastplate" />
-			<gd_item id="111101501" name="Sauro Commander's Gloves" />
-			<gd_item id="111101502" name="Sauro Commander's Gloves" />
-			<gd_item id="111301615" name="Sauro Commander's Vambrace" />
-			<gd_item id="111301616" name="Sauro Commander's Vambrace" />
-			<gd_item id="111501462" name="Sauro Commander's Handguards" />
-			<gd_item id="111501463" name="Sauro Commander's Magic Handguards" />
-			<gd_item id="111601444" name="Sauro Commander's Gauntlets" />
-			<gd_item id="111601445" name="Sauro Commander's Gauntlets" />
-			<gd_item id="112101454" name="Sauro Commander's Pauldrons" />
-			<gd_item id="112101455" name="Sauro Commander's Pauldrons" />
-			<gd_item id="112301554" name="Sauro Commander's Shoulderguards" />
-			<gd_item id="112301555" name="Sauro Commander's Shoulderguards" />
-			<gd_item id="112501404" name="Sauro Commander's Spaulders" />
-			<gd_item id="112501405" name="Sauro Commander's Spaulders" />
-			<gd_item id="112601425" name="Sauro Commander's Shoulderplates" />
-			<gd_item id="112601426" name="Sauro Commander's Shoulderplates" />
-			<gd_item id="113101516" name="Sauro Commander's Leggings" />
-			<gd_item id="113101517" name="Sauro Commander's Leggings" />
-			<gd_item id="113301646" name="Sauro Commander's Breeches" />
-			<gd_item id="113301647" name="Sauro Commander's Breeches" />
-			<gd_item id="113501480" name="Sauro Commander's Chausses" />
-			<gd_item id="113501481" name="Sauro Commander's Chausses" />
-			<gd_item id="113601427" name="Sauro Commander's Greaves" />
-			<gd_item id="113601428" name="Sauro Commander's Greaves" />
-			<gd_item id="114101548" name="Sauro Commander's Shoes" />
-			<gd_item id="114101549" name="Sauro Commander's Shoes" />
-			<gd_item id="114301683" name="Sauro Commander's Boots" />
-			<gd_item id="114301684" name="Sauro Commander's Boots" />
-			<gd_item id="114501489" name="Sauro Commander's Brogans" />
-			<gd_item id="114501490" name="Sauro Commander's Magic Brogans" />
-			<gd_item id="114601432" name="Sauro Commander's Sabatons" />
-			<gd_item id="114601433" name="Sauro Commander's Sabatons" />
+			<gd_item id="110101669" /><!-- Sauro Commander's Tunic -->
+			<gd_item id="110101670" /><!-- Sauro Commander's Tunic -->
+			<gd_item id="110301677" /><!-- Sauro Commander's Jerkin -->
+			<gd_item id="110301678" /><!-- Sauro Commander's Jerkin -->
+			<gd_item id="110501507" /><!-- Sauro Commander's Hauberk -->
+			<gd_item id="110501508" /><!-- Sauro Commander's Magic Hauberk -->
+			<gd_item id="110601481" /><!-- Sauro Commander's Breastplate -->
+			<gd_item id="110601482" /><!-- Sauro Commander's Breastplate -->
+			<gd_item id="111101501" /><!-- Sauro Commander's Gloves -->
+			<gd_item id="111101502" /><!-- Sauro Commander's Gloves -->
+			<gd_item id="111301615" /><!-- Sauro Commander's Vambrace -->
+			<gd_item id="111301616" /><!-- Sauro Commander's Vambrace -->
+			<gd_item id="111501462" /><!-- Sauro Commander's Handguards -->
+			<gd_item id="111501463" /><!-- Sauro Commander's Magic Handguards -->
+			<gd_item id="111601444" /><!-- Sauro Commander's Gauntlets -->
+			<gd_item id="111601445" /><!-- Sauro Commander's Gauntlets -->
+			<gd_item id="112101454" /><!-- Sauro Commander's Pauldrons -->
+			<gd_item id="112101455" /><!-- Sauro Commander's Pauldrons -->
+			<gd_item id="112301554" /><!-- Sauro Commander's Shoulderguards -->
+			<gd_item id="112301555" /><!-- Sauro Commander's Shoulderguards -->
+			<gd_item id="112501404" /><!-- Sauro Commander's Spaulders -->
+			<gd_item id="112501405" /><!-- Sauro Commander's Spaulders -->
+			<gd_item id="112601425" /><!-- Sauro Commander's Shoulderplates -->
+			<gd_item id="112601426" /><!-- Sauro Commander's Shoulderplates -->
+			<gd_item id="113101516" /><!-- Sauro Commander's Leggings -->
+			<gd_item id="113101517" /><!-- Sauro Commander's Leggings -->
+			<gd_item id="113301646" /><!-- Sauro Commander's Breeches -->
+			<gd_item id="113301647" /><!-- Sauro Commander's Breeches -->
+			<gd_item id="113501480" /><!-- Sauro Commander's Chausses -->
+			<gd_item id="113501481" /><!-- Sauro Commander's Chausses -->
+			<gd_item id="113601427" /><!-- Sauro Commander's Greaves -->
+			<gd_item id="113601428" /><!-- Sauro Commander's Greaves -->
+			<gd_item id="114101548" /><!-- Sauro Commander's Shoes -->
+			<gd_item id="114101549" /><!-- Sauro Commander's Shoes -->
+			<gd_item id="114301683" /><!-- Sauro Commander's Boots -->
+			<gd_item id="114301684" /><!-- Sauro Commander's Boots -->
+			<gd_item id="114501489" /><!-- Sauro Commander's Brogans -->
+			<gd_item id="114501490" /><!-- Sauro Commander's Magic Brogans -->
+			<gd_item id="114601432" /><!-- Sauro Commander's Sabatons -->
+			<gd_item id="114601433" /><!-- Sauro Commander's Sabatons -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Accessory (Mythic)" base_chance="6">
 		<gd_maps>
-			<gd_map map_id="301130000" name="Sauro_Supply_Base" />
+			<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="230857" name="Guard Captain Ahuradim" />
-			<gd_npc npc_id="230858" name="Brigade General Sheba" />
-			<gd_npc npc_id="233255" name="Gatekeeper Stranir" />
-			<gd_npc npc_id="233256" name="Darkblade Ovanuka" />
-			<gd_npc npc_id="233257" name="Archmagus Sayahum" />
-			<gd_npc npc_id="233258" name="Derakanak the Reaver" />
+			<gd_npc npc_id="230857" /><!-- Guard Captain Ahuradim -->
+			<gd_npc npc_id="230858" /><!-- Brigade General Sheba -->
+			<gd_npc npc_id="233255" /><!-- Gatekeeper Stranir -->
+			<gd_npc npc_id="233256" /><!-- Darkblade Ovanuka -->
+			<gd_npc npc_id="233257" /><!-- Archmagus Sayahum -->
+			<gd_npc npc_id="233258" /><!-- Derakanak the Reaver -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="120001469" name="Sauro Commander's Corundum Earrings" />
-			<gd_item id="120001470" name="Sauro Commander's Turquoise Earrings" />
-			<gd_item id="121001343" name="Sauro Commander's Corundum Necklace" />
-			<gd_item id="121001344" name="Sauro Commander's Turquoise Necklace" />
-			<gd_item id="122001612" name="Sauro Commander's Corundum Ring" />
-			<gd_item id="122001613" name="Sauro Commander's Turquoise Ring" />
-			<gd_item id="123001392" name="Sauro Commander's Leather Belt" />
-			<gd_item id="123001393" name="Sauro Commander's Sash" />
+			<gd_item id="120001469" /><!-- Sauro Commander's Corundum Earrings -->
+			<gd_item id="120001470" /><!-- Sauro Commander's Turquoise Earrings -->
+			<gd_item id="121001343" /><!-- Sauro Commander's Corundum Necklace -->
+			<gd_item id="121001344" /><!-- Sauro Commander's Turquoise Necklace -->
+			<gd_item id="122001612" /><!-- Sauro Commander's Corundum Ring -->
+			<gd_item id="122001613" /><!-- Sauro Commander's Turquoise Ring -->
+			<gd_item id="123001392" /><!-- Sauro Commander's Leather Belt -->
+			<gd_item id="123001393" /><!-- Sauro Commander's Sash -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Head (Mythic)" base_chance="3">
 		<gd_maps>
-			<gd_map map_id="301130000" name="Sauro_Supply_Base" />
+			<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="230857" name="Guard Captain Ahuradim" />
-			<gd_npc npc_id="230858" name="Brigade General Sheba" />
-			<gd_npc npc_id="233255" name="Gatekeeper Stranir" />
-			<gd_npc npc_id="233256" name="Darkblade Ovanuka" />
-			<gd_npc npc_id="233257" name="Archmagus Sayahum" />
-			<gd_npc npc_id="233258" name="Derakanak the Reaver" />
+			<gd_npc npc_id="230857" /><!-- Guard Captain Ahuradim -->
+			<gd_npc npc_id="230858" /><!-- Brigade General Sheba -->
+			<gd_npc npc_id="233255" /><!-- Gatekeeper Stranir -->
+			<gd_npc npc_id="233256" /><!-- Darkblade Ovanuka -->
+			<gd_npc npc_id="233257" /><!-- Archmagus Sayahum -->
+			<gd_npc npc_id="233258" /><!-- Derakanak the Reaver -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="125003679" name="Sauro Commander's Headband" />
-			<gd_item id="125003684" name="Sauro Commander's Hat" />
-			<gd_item id="125003689" name="Sauro Commander's Chain Hood" />
-			<gd_item id="125003694" name="Sauro Commander's Helm" />
+			<gd_item id="125003679" /><!-- Sauro Commander's Headband -->
+			<gd_item id="125003684" /><!-- Sauro Commander's Hat -->
+			<gd_item id="125003689" /><!-- Sauro Commander's Chain Hood -->
+			<gd_item id="125003694" /><!-- Sauro Commander's Helm -->
 		</gd_items>
 	</gd_rule>
 	<!-- Single Monster Drops -->
 	<gd_rule rule_name="Named Key" base_chance="100" no_reduction="true">
 		<gd_maps>
-			<gd_map map_id="301130000" name="Sauro_Supply_Base" />
+			<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="230849" name="Guard Captain Rohuka" />
+			<gd_npc npc_id="230849" /><!-- Guard Captain Rohuka -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="185000175" name="The 1st Lounge Key" />
+			<gd_item id="185000175" /><!-- The 1st Lounge Key -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Key" base_chance="100" no_reduction="true">
 		<gd_maps>
-			<gd_map map_id="301130000" name="Sauro_Supply_Base" />
+			<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="233316" name="Commander Ranodim" />
+			<gd_npc npc_id="233316" /><!-- Commander Ranodim -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="185000176" name="Red Storeroom Key" />
+			<gd_item id="185000176" /><!-- Red Storeroom Key -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Key" base_chance="100" no_reduction="true">
 		<gd_maps>
-			<gd_map map_id="301130000" name="Sauro_Supply_Base" />
+			<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="230853" name="Chief of Staff Moriata" />
+			<gd_npc npc_id="230853" /><!-- Chief of Staff Moriata -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="185000177" name="Blue Storeroom Key" />
+			<gd_item id="185000177" /><!-- Blue Storeroom Key -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Key" base_chance="100" no_reduction="true">
 		<gd_maps>
-			<gd_map map_id="301130000" name="Sauro_Supply_Base" />
+			<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="230850" name="Researcher Teselik" />
+			<gd_npc npc_id="230850" /><!-- Researcher Teselik -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="185000178" name="Green Storeroom Key" />
+			<gd_item id="185000178" /><!-- Green Storeroom Key -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Key" base_chance="100" no_reduction="true">
 		<gd_maps>
-			<gd_map map_id="301130000" name="Sauro_Supply_Base" />
+			<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="230847" name="Mystery Box Key" />
+			<gd_npc npc_id="230847" /><!-- Mystery Box Key -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="185000179" name="Danuar Omphanium Key" />
+			<gd_item id="185000179" /><!-- Danuar Omphanium Key -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Key" base_chance="100" no_reduction="true">
 		<gd_maps>
-			<gd_map map_id="301130000" name="Sauro_Supply_Base" />
+			<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="230851" name="Chief Gunner Kurmata" />
+			<gd_npc npc_id="230851" /><!-- Chief Gunner Kurmata -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="185000180" name="The 2nd Lounge Key" />
+			<gd_item id="185000180" /><!-- The 2nd Lounge Key -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Weapon (Legend)" base_chance="15">
 		<gd_maps>
-			<gd_map map_id="301130000" name="Sauro_Supply_Base" />
+			<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="230846" name="Sauro Base Grave Robber" />
+			<gd_npc npc_id="230846" /><!-- Sauro Base Grave Robber -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="100001581" name="Danuar Sword Skin" />
-			<gd_item id="100101219" name="Danuar Mace Skin" />
-			<gd_item id="100201389" name="Danuar Dagger Skin" />
-			<gd_item id="100501209" name="Danuar Orb Skin" />
-			<gd_item id="100601301" name="Danuar Spellbook Skin" />
-			<gd_item id="100901231" name="Danuar Greatsword Skin" />
-			<gd_item id="101301157" name="Danuar Polearm Skin" />
-			<gd_item id="101501245" name="Danuar Staff Skin" />
-			<gd_item id="101701260" name="Danuar Bow Skin" />
-			<gd_item id="101801066" name="Danuar Pistol Skin" />
-			<gd_item id="101801072" name="Deceptive Bouquet Pistol" />
-			<gd_item id="101901017" name="Danuar Aethercannon Skin" />
-			<gd_item id="102001091" name="Danuar Harp Skin" />
-			<gd_item id="102001097" name="Black Melody Harp" />
-			<gd_item id="102100843" name="Danuar Cipher-Blade Skin" />
+			<gd_item id="100001581" /><!-- Danuar Sword Skin -->
+			<gd_item id="100101219" /><!-- Danuar Mace Skin -->
+			<gd_item id="100201389" /><!-- Danuar Dagger Skin -->
+			<gd_item id="100501209" /><!-- Danuar Orb Skin -->
+			<gd_item id="100601301" /><!-- Danuar Spellbook Skin -->
+			<gd_item id="100901231" /><!-- Danuar Greatsword Skin -->
+			<gd_item id="101301157" /><!-- Danuar Polearm Skin -->
+			<gd_item id="101501245" /><!-- Danuar Staff Skin -->
+			<gd_item id="101701260" /><!-- Danuar Bow Skin -->
+			<gd_item id="101801066" /><!-- Danuar Pistol Skin -->
+			<gd_item id="101801072" /><!-- Deceptive Bouquet Pistol -->
+			<gd_item id="101901017" /><!-- Danuar Aethercannon Skin -->
+			<gd_item id="102001091" /><!-- Danuar Harp Skin -->
+			<gd_item id="102001097" /><!-- Black Melody Harp -->
+			<gd_item id="102100843" /><!-- Danuar Cipher-Blade Skin -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Accessory (Legend)" base_chance="15">
 		<gd_maps>
-			<gd_map map_id="301130000" name="Sauro_Supply_Base" />
+			<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="230846" name="Sauro Base Grave Robber" />
+			<gd_npc npc_id="230846" /><!-- Sauro Base Grave Robber -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="125003724" name="Danuar Headband Skin" />
-			<gd_item id="125003725" name="Danuar Hat Skin" />
-			<gd_item id="125003726" name="Danuar Chain Hood Skin" />
-			<gd_item id="125003727" name="Danuar Helm Skin" />
+			<gd_item id="125003724" /><!-- Danuar Headband Skin -->
+			<gd_item id="125003725" /><!-- Danuar Hat Skin -->
+			<gd_item id="125003726" /><!-- Danuar Chain Hood Skin -->
+			<gd_item id="125003727" /><!-- Danuar Helm Skin -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Weapon (Epic)" base_chance="15">
 		<gd_maps>
-			<gd_map map_id="301130000" name="Sauro_Supply_Base" />
+			<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="230858" name="Brigade General Sheba" />
+			<gd_npc npc_id="230858" /><!-- Brigade General Sheba -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="100001579" name="Sauren Sword" />
-			<gd_item id="100101215" name="Sauren Mace" />
-			<gd_item id="100201387" name="Sauren Dagger" />
-			<gd_item id="100501207" name="Sauren Orb" />
-			<gd_item id="100601299" name="Sauren Spellbook" />
-			<gd_item id="100901229" name="Sauren Greatsword" />
-			<gd_item id="101301155" name="Sauren Polearm" />
-			<gd_item id="101501241" name="Sauren Staff" />
-			<gd_item id="101701258" name="Sauren Bow" />
-			<gd_item id="101801064" name="Sauren Pistol" />
-			<gd_item id="101901014" name="Sauren Aethercannon" />
-			<gd_item id="102001088" name="Sauren Harp" />
-			<gd_item id="102100841" name="Sauren Cipher-Blade" />
+			<gd_item id="100001579" /><!-- Sauren Sword -->
+			<gd_item id="100101215" /><!-- Sauren Mace -->
+			<gd_item id="100201387" /><!-- Sauren Dagger -->
+			<gd_item id="100501207" /><!-- Sauren Orb -->
+			<gd_item id="100601299" /><!-- Sauren Spellbook -->
+			<gd_item id="100901229" /><!-- Sauren Greatsword -->
+			<gd_item id="101301155" /><!-- Sauren Polearm -->
+			<gd_item id="101501241" /><!-- Sauren Staff -->
+			<gd_item id="101701258" /><!-- Sauren Bow -->
+			<gd_item id="101801064" /><!-- Sauren Pistol -->
+			<gd_item id="101901014" /><!-- Sauren Aethercannon -->
+			<gd_item id="102001088" /><!-- Sauren Harp -->
+			<gd_item id="102100841" /><!-- Sauren Cipher-Blade -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Shield (Epic)" base_chance="15">
 		<gd_maps>
-			<gd_map map_id="301130000" name="Sauro_Supply_Base" />
+			<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="230858" name="Brigade General Sheba" />
+			<gd_npc npc_id="230858" /><!-- Brigade General Sheba -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="115001620" name="Sauren Shield" />
-			<gd_item id="115001621" name="Sauren Scale Shield" />
+			<gd_item id="115001620" /><!-- Sauren Shield -->
+			<gd_item id="115001621" /><!-- Sauren Scale Shield -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Epic)" base_chance="20">
 		<gd_maps>
-			<gd_map map_id="301130000" name="Sauro_Supply_Base" />
+			<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="230858" name="Brigade General Sheba" />
+			<gd_npc npc_id="230858" /><!-- Brigade General Sheba -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="110101671" name="Sauren Tunic" />
-			<gd_item id="110101672" name="Sauren Tunic" />
-			<gd_item id="110301679" name="Sauren Jerkin" />
-			<gd_item id="110301680" name="Sauren Jerkin" />
-			<gd_item id="110501509" name="Sauren Hauberk" />
-			<gd_item id="110501510" name="Sauren Magic Hauberk" />
-			<gd_item id="110601483" name="Sauren Breastplate" />
-			<gd_item id="110601484" name="Sauren Breastplate" />
-			<gd_item id="111101503" name="Sauren Gloves" />
-			<gd_item id="111101504" name="Sauren Gloves" />
-			<gd_item id="111301617" name="Sauren Vambrace" />
-			<gd_item id="111301618" name="Sauren Vambrace" />
-			<gd_item id="111501464" name="Sauren Handguards" />
-			<gd_item id="111501465" name="Sauren Magic Handguards" />
-			<gd_item id="111601446" name="Sauren Gauntlets" />
-			<gd_item id="111601447" name="Sauren Gauntlets" />
-			<gd_item id="112101456" name="Sauren Pauldrons" />
-			<gd_item id="112101457" name="Sauren Pauldrons" />
-			<gd_item id="112301556" name="Sauren Shoulderguards" />
-			<gd_item id="112301557" name="Sauren Shoulderguards" />
-			<gd_item id="112501406" name="Sauren Spaulders" />
-			<gd_item id="112501407" name="Sauren Spaulders" />
-			<gd_item id="112601427" name="Sauren Shoulderplates" />
-			<gd_item id="112601428" name="Sauren Shoulderplates" />
-			<gd_item id="113101518" name="Sauren Leggings" />
-			<gd_item id="113101519" name="Sauren Leggings" />
-			<gd_item id="113301648" name="Sauren Breeches" />
-			<gd_item id="113301649" name="Sauren Breeches" />
-			<gd_item id="113501482" name="Sauren Chausses" />
-			<gd_item id="113501483" name="Sauren Chausses" />
-			<gd_item id="113601429" name="Sauren Greaves" />
-			<gd_item id="113601430" name="Sauren Greaves" />
-			<gd_item id="114101550" name="Sauren Shoes" />
-			<gd_item id="114101551" name="Sauren Shoes" />
-			<gd_item id="114301685" name="Sauren Boots" />
-			<gd_item id="114301686" name="Sauren Boots" />
-			<gd_item id="114501491" name="Sauren Brogans" />
-			<gd_item id="114501492" name="Sauren Magic Brogans" />
-			<gd_item id="114601434" name="Sauren Sabatons" />
-			<gd_item id="114601435" name="Sauren Sabatons" />
+			<gd_item id="110101671" /><!-- Sauren Tunic -->
+			<gd_item id="110101672" /><!-- Sauren Tunic -->
+			<gd_item id="110301679" /><!-- Sauren Jerkin -->
+			<gd_item id="110301680" /><!-- Sauren Jerkin -->
+			<gd_item id="110501509" /><!-- Sauren Hauberk -->
+			<gd_item id="110501510" /><!-- Sauren Magic Hauberk -->
+			<gd_item id="110601483" /><!-- Sauren Breastplate -->
+			<gd_item id="110601484" /><!-- Sauren Breastplate -->
+			<gd_item id="111101503" /><!-- Sauren Gloves -->
+			<gd_item id="111101504" /><!-- Sauren Gloves -->
+			<gd_item id="111301617" /><!-- Sauren Vambrace -->
+			<gd_item id="111301618" /><!-- Sauren Vambrace -->
+			<gd_item id="111501464" /><!-- Sauren Handguards -->
+			<gd_item id="111501465" /><!-- Sauren Magic Handguards -->
+			<gd_item id="111601446" /><!-- Sauren Gauntlets -->
+			<gd_item id="111601447" /><!-- Sauren Gauntlets -->
+			<gd_item id="112101456" /><!-- Sauren Pauldrons -->
+			<gd_item id="112101457" /><!-- Sauren Pauldrons -->
+			<gd_item id="112301556" /><!-- Sauren Shoulderguards -->
+			<gd_item id="112301557" /><!-- Sauren Shoulderguards -->
+			<gd_item id="112501406" /><!-- Sauren Spaulders -->
+			<gd_item id="112501407" /><!-- Sauren Spaulders -->
+			<gd_item id="112601427" /><!-- Sauren Shoulderplates -->
+			<gd_item id="112601428" /><!-- Sauren Shoulderplates -->
+			<gd_item id="113101518" /><!-- Sauren Leggings -->
+			<gd_item id="113101519" /><!-- Sauren Leggings -->
+			<gd_item id="113301648" /><!-- Sauren Breeches -->
+			<gd_item id="113301649" /><!-- Sauren Breeches -->
+			<gd_item id="113501482" /><!-- Sauren Chausses -->
+			<gd_item id="113501483" /><!-- Sauren Chausses -->
+			<gd_item id="113601429" /><!-- Sauren Greaves -->
+			<gd_item id="113601430" /><!-- Sauren Greaves -->
+			<gd_item id="114101550" /><!-- Sauren Shoes -->
+			<gd_item id="114101551" /><!-- Sauren Shoes -->
+			<gd_item id="114301685" /><!-- Sauren Boots -->
+			<gd_item id="114301686" /><!-- Sauren Boots -->
+			<gd_item id="114501491" /><!-- Sauren Brogans -->
+			<gd_item id="114501492" /><!-- Sauren Magic Brogans -->
+			<gd_item id="114601434" /><!-- Sauren Sabatons -->
+			<gd_item id="114601435" /><!-- Sauren Sabatons -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Weapon (Mythic)" base_chance="4">
 		<gd_maps>
-			<gd_map map_id="301130000" name="Sauro_Supply_Base" />
+			<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="230857" name="Guard Captain Ahuradim" />
+			<gd_npc npc_id="230857" /><!-- Guard Captain Ahuradim -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="100001580" name="Sauro Commander's Sword" />
-			<gd_item id="100101218" name="Sauro Commander's Warhammer" />
-			<gd_item id="100201388" name="Sauro Commander's Dagger" />
-			<gd_item id="100501208" name="Sauro Commander's Orb" />
-			<gd_item id="100601300" name="Sauro Commander's Spellbook" />
-			<gd_item id="100901230" name="Sauro Commander's Greatsword" />
-			<gd_item id="101301156" name="Sauro Commander's Polearm" />
-			<gd_item id="101501243" name="Sauro Commander's Staff" />
-			<gd_item id="101701259" name="Sauro Commander's Bow" />
-			<gd_item id="101801065" name="Sauro Commander's Pistol" />
-			<gd_item id="101901015" name="Sauro Commander's Aethercannon" />
-			<gd_item id="102001089" name="Sauro Commander's Harp" />
-			<gd_item id="102100842" name="Sauro Commander's Cipher-Blade" />
-			<gd_item id="115001623" name="Sauro Commander's Shield" />
-			<gd_item id="115001624" name="Sauro Commander's Scale Shield" />
+			<gd_item id="100001580" /><!-- Sauro Commander's Sword -->
+			<gd_item id="100101218" /><!-- Sauro Commander's Warhammer -->
+			<gd_item id="100201388" /><!-- Sauro Commander's Dagger -->
+			<gd_item id="100501208" /><!-- Sauro Commander's Orb -->
+			<gd_item id="100601300" /><!-- Sauro Commander's Spellbook -->
+			<gd_item id="100901230" /><!-- Sauro Commander's Greatsword -->
+			<gd_item id="101301156" /><!-- Sauro Commander's Polearm -->
+			<gd_item id="101501243" /><!-- Sauro Commander's Staff -->
+			<gd_item id="101701259" /><!-- Sauro Commander's Bow -->
+			<gd_item id="101801065" /><!-- Sauro Commander's Pistol -->
+			<gd_item id="101901015" /><!-- Sauro Commander's Aethercannon -->
+			<gd_item id="102001089" /><!-- Sauro Commander's Harp -->
+			<gd_item id="102100842" /><!-- Sauro Commander's Cipher-Blade -->
+			<gd_item id="115001623" /><!-- Sauro Commander's Shield -->
+			<gd_item id="115001624" /><!-- Sauro Commander's Scale Shield -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Weapon (Mythic)" base_chance="5">
 		<gd_maps>
-			<gd_map map_id="301130000" name="Sauro_Supply_Base" />
+			<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="230858" name="Brigade General Sheba" />
+			<gd_npc npc_id="230858" /><!-- Brigade General Sheba -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="100001580" name="Sauro Commander's Sword" />
-			<gd_item id="100101218" name="Sauro Commander's Warhammer" />
-			<gd_item id="100201388" name="Sauro Commander's Dagger" />
-			<gd_item id="100501208" name="Sauro Commander's Orb" />
-			<gd_item id="100601300" name="Sauro Commander's Spellbook" />
-			<gd_item id="100901230" name="Sauro Commander's Greatsword" />
-			<gd_item id="101301156" name="Sauro Commander's Polearm" />
-			<gd_item id="101501243" name="Sauro Commander's Staff" />
-			<gd_item id="101701259" name="Sauro Commander's Bow" />
-			<gd_item id="101801065" name="Sauro Commander's Pistol" />
-			<gd_item id="101901015" name="Sauro Commander's Aethercannon" />
-			<gd_item id="102001089" name="Sauro Commander's Harp" />
-			<gd_item id="102100842" name="Sauro Commander's Cipher-Blade" />
-			<gd_item id="115001623" name="Sauro Commander's Shield" />
-			<gd_item id="115001624" name="Sauro Commander's Scale Shield" />
+			<gd_item id="100001580" /><!-- Sauro Commander's Sword -->
+			<gd_item id="100101218" /><!-- Sauro Commander's Warhammer -->
+			<gd_item id="100201388" /><!-- Sauro Commander's Dagger -->
+			<gd_item id="100501208" /><!-- Sauro Commander's Orb -->
+			<gd_item id="100601300" /><!-- Sauro Commander's Spellbook -->
+			<gd_item id="100901230" /><!-- Sauro Commander's Greatsword -->
+			<gd_item id="101301156" /><!-- Sauro Commander's Polearm -->
+			<gd_item id="101501243" /><!-- Sauro Commander's Staff -->
+			<gd_item id="101701259" /><!-- Sauro Commander's Bow -->
+			<gd_item id="101801065" /><!-- Sauro Commander's Pistol -->
+			<gd_item id="101901015" /><!-- Sauro Commander's Aethercannon -->
+			<gd_item id="102001089" /><!-- Sauro Commander's Harp -->
+			<gd_item id="102100842" /><!-- Sauro Commander's Cipher-Blade -->
+			<gd_item id="115001623" /><!-- Sauro Commander's Shield -->
+			<gd_item id="115001624" /><!-- Sauro Commander's Scale Shield -->
 		</gd_items>
 	</gd_rule>
 </global_rules>

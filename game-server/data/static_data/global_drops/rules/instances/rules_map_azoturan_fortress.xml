@@ -3,134 +3,134 @@
 	<!-- Single Monster Drops -->
 	<gd_rule rule_name="Named Weapon (Legend)" base_chance="35">
 		<gd_maps>
-			<gd_map map_id="310100000" name="Azoturan_Fortress" />
+			<gd_map map_id="310100000" /><!-- Azoturan_Fortress -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="214599" name="Icaronix the Betrayer" />
-			<gd_npc npc_id="233877" name="Betrayer Icaronix" /> <!-- quest mob -->
+			<gd_npc npc_id="214599" /><!-- Icaronix the Betrayer -->
+			<gd_npc npc_id="233877" /> <!-- quest mob --><!-- Betrayer Icaronix -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="101500826" name="Experimental Staff" />
-			<gd_item id="101700843" name="Experimental Longbow" />
-			<gd_item id="100500821" name="Experimental Jewel" />
-			<gd_item id="100600876" name="Experimental Tome" />
-			<gd_item id="101300770" name="Experimental Spear" />
-			<gd_item id="101900703" name="Test Subject's Aethercannon" />
-			<gd_item id="100900798" name="Experimental Greatsword" />
-			<gd_item id="102000737" name="Test Subject's Harp" />
+			<gd_item id="101500826" /><!-- Experimental Staff -->
+			<gd_item id="101700843" /><!-- Experimental Longbow -->
+			<gd_item id="100500821" /><!-- Experimental Jewel -->
+			<gd_item id="100600876" /><!-- Experimental Tome -->
+			<gd_item id="101300770" /><!-- Experimental Spear -->
+			<gd_item id="101900703" /><!-- Test Subject's Aethercannon -->
+			<gd_item id="100900798" /><!-- Experimental Greatsword -->
+			<gd_item id="102000737" /><!-- Test Subject's Harp -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Accessory (Rare)" base_chance="25">
 		<gd_maps>
-			<gd_map map_id="310100000" name="Azoturan_Fortress" />
+			<gd_map map_id="310100000" /><!-- Azoturan_Fortress -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="214800" name="RM-13B" />
+			<gd_npc npc_id="214800" /><!-- RM-13B -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="120000904" name="Azoturan Researcher's Diamond Earrings" />
-			<gd_item id="120000905" name="Azoturan Researcher's Sapphire Earrings" />
+			<gd_item id="120000904" /><!-- Azoturan Researcher's Diamond Earrings -->
+			<gd_item id="120000905" /><!-- Azoturan Researcher's Sapphire Earrings -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Belt (Rare)" base_chance="25">
 		<gd_maps>
-			<gd_map map_id="310100000" name="Azoturan_Fortress" />
+			<gd_map map_id="310100000" /><!-- Azoturan_Fortress -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="214800" name="RM-13B" />
+			<gd_npc npc_id="214800" /><!-- RM-13B -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="123000931" name="Azoturan Researcher's Leather Belt" />
-			<gd_item id="123000932" name="Azoturan Researcher's Sash" />
+			<gd_item id="123000931" /><!-- Azoturan Researcher's Leather Belt -->
+			<gd_item id="123000932" /><!-- Azoturan Researcher's Sash -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Legend)" base_chance="30">
 		<gd_maps>
-			<gd_map map_id="310100000" name="Azoturan_Fortress" />
+			<gd_map map_id="310100000" /><!-- Azoturan_Fortress -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="214800" name="RM-13B" />
+			<gd_npc npc_id="214800" /><!-- RM-13B -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="112100826" name="Azoturan Elite's Pauldrons" />
-			<gd_item id="112300820" name="Azoturan Elite's Shoulderguards" />
-			<gd_item id="112500811" name="Azoturan Elite's Spaulders" />
-			<gd_item id="112600822" name="Azoturan Elite's Shoulderplates" />
+			<gd_item id="112100826" /><!-- Azoturan Elite's Pauldrons -->
+			<gd_item id="112300820" /><!-- Azoturan Elite's Shoulderguards -->
+			<gd_item id="112500811" /><!-- Azoturan Elite's Spaulders -->
+			<gd_item id="112600822" /><!-- Azoturan Elite's Shoulderplates -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Accessory (Rare)" base_chance="25">
 		<gd_maps>
-			<gd_map map_id="310100000" name="Azoturan_Fortress" />
+			<gd_map map_id="310100000" /><!-- Azoturan_Fortress -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="214801" name="Lab Director Elizer" />
+			<gd_npc npc_id="214801" /><!-- Lab Director Elizer -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="121000822" name="Azoturan Researcher's Diamond Necklace" />
-			<gd_item id="121000823" name="Azoturan Researcher's Sapphire Necklace" />
+			<gd_item id="121000822" /><!-- Azoturan Researcher's Diamond Necklace -->
+			<gd_item id="121000823" /><!-- Azoturan Researcher's Sapphire Necklace -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Legend)" base_chance="25">
 		<gd_maps>
-			<gd_map map_id="310100000" name="Azoturan_Fortress" />
+			<gd_map map_id="310100000" /><!-- Azoturan_Fortress -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="214801" name="Lab Director Elizer" />
+			<gd_npc npc_id="214801" /><!-- Lab Director Elizer -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="114100904" name="Azoturan Elite's Shoes" />
-			<gd_item id="114300929" name="Azoturan Elite's Boots" />
-			<gd_item id="114500872" name="Azoturan Elite's Brogans" />
-			<gd_item id="114600831" name="Azoturan Elite's Sabatons" />
+			<gd_item id="114100904" /><!-- Azoturan Elite's Shoes -->
+			<gd_item id="114300929" /><!-- Azoturan Elite's Boots -->
+			<gd_item id="114500872" /><!-- Azoturan Elite's Brogans -->
+			<gd_item id="114600831" /><!-- Azoturan Elite's Sabatons -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Accessory (Unique)" base_chance="10">
 		<gd_maps>
-			<gd_map map_id="310100000" name="Azoturan_Fortress" />
+			<gd_map map_id="310100000" /><!-- Azoturan_Fortress -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="214801" name="Lab Director Elizer" />
+			<gd_npc npc_id="214801" /><!-- Lab Director Elizer -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="122001041" name="Elizer's Diamond Ring" />
-			<gd_item id="122001042" name="Elizer's Sapphire Ring" />
+			<gd_item id="122001041" /><!-- Elizer's Diamond Ring -->
+			<gd_item id="122001042" /><!-- Elizer's Sapphire Ring -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Accessory (Rare)" base_chance="15">
 		<gd_maps>
-			<gd_map map_id="310100000" name="Azoturan_Fortress" />
+			<gd_map map_id="310100000" /><!-- Azoturan_Fortress -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="214802" name="RM-56c" />
+			<gd_npc npc_id="214802" /><!-- RM-56c -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="125001970" name="Azoturan Researcher's Eyepatch" />
+			<gd_item id="125001970" /><!-- Azoturan Researcher's Eyepatch -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Legend)" base_chance="25">
 		<gd_maps>
-			<gd_map map_id="310100000" name="Azoturan_Fortress" />
+			<gd_map map_id="310100000" /><!-- Azoturan_Fortress -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="214802" name="RM-56c" />
+			<gd_npc npc_id="214802" /><!-- RM-56c -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="111100869" name="Azoturan Elite's Gloves" />
-			<gd_item id="111300870" name="Azoturan Elite's Vambrace" />
-			<gd_item id="111500860" name="Azoturan Elite's Handguards" />
-			<gd_item id="111600848" name="Azoturan Elite's Gauntlets" />
+			<gd_item id="111100869" /><!-- Azoturan Elite's Gloves -->
+			<gd_item id="111300870" /><!-- Azoturan Elite's Vambrace -->
+			<gd_item id="111500860" /><!-- Azoturan Elite's Handguards -->
+			<gd_item id="111600848" /><!-- Azoturan Elite's Gauntlets -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Shield (Unique)" base_chance="10">
 		<gd_maps>
-			<gd_map map_id="310100000" name="Azoturan_Fortress" />
+			<gd_map map_id="310100000" /><!-- Azoturan_Fortress -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="214802" name="RM-56c" />
+			<gd_npc npc_id="214802" /><!-- RM-56c -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="115000861" name="RM-56A" />
-			<gd_item id="115000862" name="RM-56B" />
+			<gd_item id="115000861" /><!-- RM-56A -->
+			<gd_item id="115000862" /><!-- RM-56B -->
 		</gd_items>
 	</gd_rule>
 </global_rules>

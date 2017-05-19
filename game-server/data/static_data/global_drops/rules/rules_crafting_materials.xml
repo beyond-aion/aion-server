@@ -10,7 +10,7 @@
 		</gd_npc_groups>
 		<gd_items>
 			<!-- Level 20 -->
-			<gd_item id="152016001" name="Sparkie Essence" />
+			<gd_item id="152016001" /><!-- Sparkie Essence -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Candy Essence" base_chance="4" min_diff="-9">
@@ -19,7 +19,7 @@
 		</gd_npc_groups>
 		<gd_items>
 			<!-- Level 20 -->
-			<gd_item id="152016002" name="Pluma Essence" />
+			<gd_item id="152016002" /><!-- Pluma Essence -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Candy Essence" base_chance="4" min_diff="-9">
@@ -28,7 +28,7 @@
 		</gd_npc_groups>
 		<gd_items>
 			<!-- Level 30 -->
-			<gd_item id="152016003" name="Oculazen Essence" />
+			<gd_item id="152016003" /><!-- Oculazen Essence -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Candy Essence" base_chance="4" min_diff="-9">
@@ -38,7 +38,7 @@
 		</gd_npc_groups>
 		<gd_items>
 			<!-- Level 30 -->
-			<gd_item id="152016004" name="Oculazen Essence" />
+			<gd_item id="152016004" /><!-- Oculazen Essence -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Candy Essence" base_chance="4" min_diff="-9">
@@ -47,7 +47,7 @@
 		</gd_npc_groups>
 		<gd_items>
 			<!-- Level 30 -->
-			<gd_item id="152016005" name="Wasteland Drakie Essence" />
+			<gd_item id="152016005" /><!-- Wasteland Drakie Essence -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Candy Essence" base_chance="4" min_diff="-9">
@@ -56,7 +56,7 @@
 		</gd_npc_groups>
 		<gd_items>
 			<!-- Level 40 -->
-			<gd_item id="152016006" name="Griffo Essence" />
+			<gd_item id="152016006" /><!-- Griffo Essence -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Candy Essence" base_chance="4" min_diff="-9">
@@ -68,7 +68,7 @@
 		</gd_npc_groups>
 		<gd_items>
 			<!-- Level 40 -->
-			<gd_item id="152016007" name="Agrint Essence" />
+			<gd_item id="152016007" /><!-- Agrint Essence -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Candy Essence" base_chance="4" min_diff="-9">
@@ -80,7 +80,7 @@
 		</gd_npc_names>
 		<gd_items>
 			<!-- Level 40 -->
-			<gd_item id="152016008" name="Malek Drake Essence" />
+			<gd_item id="152016008" /><!-- Malek Drake Essence -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Candy Essence" base_chance="4" min_diff="-9">
@@ -89,7 +89,7 @@
 		</gd_npc_groups>
 		<gd_items>
 			<!-- Level 40 -->
-			<gd_item id="152016009" name="Frozen Agrint Essence" />
+			<gd_item id="152016009" /><!-- Frozen Agrint Essence -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Candy Essence" base_chance="4" min_diff="-9">
@@ -101,7 +101,7 @@
 		</gd_npc_names>
 		<gd_items>
 			<!-- Level 40 -->
-			<gd_item id="152016010" name="Kobold Essence" />
+			<gd_item id="152016010" /><!-- Kobold Essence -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Candy Essence" base_chance="4" min_diff="-9">
@@ -110,7 +110,7 @@
 		</gd_npc_groups>
 		<gd_items>
 			<!-- Level 40 -->
-			<gd_item id="152016011" name="Krall Essence" />
+			<gd_item id="152016011" /><!-- Krall Essence -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Candy Essence" base_chance="4" min_diff="-9">
@@ -119,7 +119,7 @@
 		</gd_npc_groups>
 		<gd_items>
 			<!-- Level 50 -->
-			<gd_item id="152016012" name="Anubite Essence" />
+			<gd_item id="152016012" /><!-- Anubite Essence -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Candy Essence" base_chance="4" min_diff="-9">
@@ -128,7 +128,7 @@
 		</gd_npc_groups>
 		<gd_items>
 			<!-- Level 50 -->
-			<gd_item id="152016013" name="Unfest Essence" />
+			<gd_item id="152016013" /><!-- Unfest Essence -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Candy Essence" base_chance="4" min_diff="-5">
@@ -140,16 +140,16 @@
 		</gd_npc_names>
 		<gd_items>
 			<!-- Level 55 -->
-			<gd_item id="152016014" name="Essence of Poco Mookie" /><!-- Elyos -->
-			<gd_item id="152016015" name="Essence of Poco Mookie" /><!-- Asmodian -->
+			<gd_item id="152016014" /><!-- Elyos --><!-- Essence of Poco Mookie -->
+			<gd_item id="152016015" /><!-- Asmodian --><!-- Essence of Poco Mookie -->
 		</gd_items>
 	</gd_rule>
 	<!-- Enigmatic Ore -->
 	<gd_rule rule_name="Enigmatic Ore" base_chance="2" min_diff="0" max_diff="4">
 		<gd_maps>
-			<gd_map map_id="210090000" name="Idian Depths Light" />
-			<gd_map map_id="220100000" name="Idian Depths Dark" />
-			<gd_map map_id="600100000" name="Levinshor" />
+			<gd_map map_id="210090000" /><!-- Idian Depths Light -->
+			<gd_map map_id="220100000" /><!-- Idian Depths Dark -->
+			<gd_map map_id="600100000" /><!-- Levinshor -->
 		</gd_maps>
 		<gd_ratings>
 			<gd_rating rating="NORMAL" />
@@ -158,7 +158,7 @@
 			<gd_rating rating="LEGENDARY" />
 		</gd_ratings>
 		<gd_items>
-			<gd_item id="152012579" name="Enigmatic Ore" />
+			<gd_item id="152012579" /><!-- Enigmatic Ore -->
 		</gd_items>
 	</gd_rule>
 	<!-- Rawhide -->
@@ -183,15 +183,15 @@
 		</gd_races>
 		<gd_items>
 			<!-- Level 10 -->
-			<gd_item id="152010310" name="Thin Rawhide" />
+			<gd_item id="152010310" /><!-- Thin Rawhide -->
 			<!-- Level 20 -->
-			<gd_item id="152010311" name="Thick Rawhide" />
+			<gd_item id="152010311" /><!-- Thick Rawhide -->
 			<!-- Level 30 -->
-			<gd_item id="152010312" name="Strong Rawhide" />
+			<gd_item id="152010312" /><!-- Strong Rawhide -->
 			<!-- Level 40 -->
-			<gd_item id="152010313" name="Tough Rawhide" />
+			<gd_item id="152010313" /><!-- Tough Rawhide -->
 			<!-- Level 50 -->
-			<gd_item id="152010318" name="Firm Rawhide" />
+			<gd_item id="152010318" /><!-- Firm Rawhide -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Rawhide (Common)" base_chance="25" min_diff="0" max_diff="4">
@@ -215,7 +215,7 @@
 		</gd_races>
 		<gd_items>
 			<!-- Level 61 -->
-			<gd_item id="152010322" name="Sublime Rawhide" />
+			<gd_item id="152010322" /><!-- Sublime Rawhide -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Rawhide (Rare)" base_chance="15" min_diff="0" max_diff="4">
@@ -239,7 +239,7 @@
 		</gd_races>
 		<gd_items>
 			<!-- Level 61 -->
-			<gd_item id="152010323" name="Buttery Rawhide" />
+			<gd_item id="152010323" /><!-- Buttery Rawhide -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Rawhide (Legend)" base_chance="5" min_diff="0" max_diff="4">
@@ -263,7 +263,7 @@
 		</gd_races>
 		<gd_items>
 			<!-- Level 61 -->
-			<gd_item id="152010324" name="Splendiferous Rawhide" />
+			<gd_item id="152010324" /><!-- Splendiferous Rawhide -->
 		</gd_items>
 	</gd_rule>
 	<!-- Elemental Stones -->
@@ -290,15 +290,15 @@
 		</gd_races>
 		<gd_items>
 			<!-- Level 10 -->
-			<gd_item id="152010314" name="Lesser Elemental Stone" />
+			<gd_item id="152010314" /><!-- Lesser Elemental Stone -->
 			<!-- Level 20 -->
-			<gd_item id="152010315" name="Elemental Stone" />
+			<gd_item id="152010315" /><!-- Elemental Stone -->
 			<!-- Level 30 -->
-			<gd_item id="152010316" name="Greater Elemental Stone" />
+			<gd_item id="152010316" /><!-- Greater Elemental Stone -->
 			<!-- Level 40 -->
-			<gd_item id="152010317" name="Major Elemental Stone" />
+			<gd_item id="152010317" /><!-- Major Elemental Stone -->
 			<!-- Level 50 -->
-			<gd_item id="152010319" name="Fine Elemental Stone" />
+			<gd_item id="152010319" /><!-- Fine Elemental Stone -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Elemental Stones (Common)" base_chance="27.5" min_diff="-1" max_diff="4">
@@ -324,7 +324,7 @@
 		</gd_races>
 		<gd_items>
 			<!-- Level 61 -->
-			<gd_item id="152010325" name="Wispy Elemental Stone" />
+			<gd_item id="152010325" /><!-- Wispy Elemental Stone -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Elemental Stones (Rare)" base_chance="16.5" min_diff="-1" max_diff="4">
@@ -335,7 +335,7 @@
 		</gd_ratings>
 		<gd_items>
 			<!-- Level 61 -->
-			<gd_item id="152010326" name="Sublime Wispy Elemental Stone" />
+			<gd_item id="152010326" /><!-- Sublime Wispy Elemental Stone -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Elemental Stones (Legend)" base_chance="5.5" min_diff="-1" max_diff="4">
@@ -361,7 +361,7 @@
 		</gd_races>
 		<gd_items>
 			<!-- Level 61 -->
-			<gd_item id="152010327" name="Resplendent Wispy Elemental Stone" />
+			<gd_item id="152010327" /><!-- Resplendent Wispy Elemental Stone -->
 		</gd_items>
 	</gd_rule>
 	<!-- Flux -->
@@ -372,45 +372,45 @@
 		</gd_ratings>
 		<gd_items>
 			<!-- Level 15 -->
-			<gd_item id="152011001" name="Minor Weapon Flux" />
-			<gd_item id="152011021" name="Minor Armor Flux" />
-			<gd_item id="152011041" name="Minor Accessory Flux" />
+			<gd_item id="152011001" /><!-- Minor Weapon Flux -->
+			<gd_item id="152011021" /><!-- Minor Armor Flux -->
+			<gd_item id="152011041" /><!-- Minor Accessory Flux -->
 			<!-- Level 20 -->
-			<gd_item id="152011002" name="Lesser Weapon Flux" />
-			<gd_item id="152011022" name="Lesser Armor Flux" />
-			<gd_item id="152011042" name="Lesser Accessory Flux" />
+			<gd_item id="152011002" /><!-- Lesser Weapon Flux -->
+			<gd_item id="152011022" /><!-- Lesser Armor Flux -->
+			<gd_item id="152011042" /><!-- Lesser Accessory Flux -->
 			<!-- Level 25 -->
-			<gd_item id="152011003" name="Weapon Flux" />
-			<gd_item id="152011023" name="Armor Flux" />
-			<gd_item id="152011043" name="Accessory Flux" />
+			<gd_item id="152011003" /><!-- Weapon Flux -->
+			<gd_item id="152011023" /><!-- Armor Flux -->
+			<gd_item id="152011043" /><!-- Accessory Flux -->
 			<!-- Level 30 -->
-			<gd_item id="152011004" name="Greater Weapon Flux" />
-			<gd_item id="152011024" name="Greater Armor Flux" />
-			<gd_item id="152011044" name="Greater Accessory Flux" />
+			<gd_item id="152011004" /><!-- Greater Weapon Flux -->
+			<gd_item id="152011024" /><!-- Greater Armor Flux -->
+			<gd_item id="152011044" /><!-- Greater Accessory Flux -->
 			<!-- Level 35 -->
-			<gd_item id="152011005" name="Major Weapon Flux" />
-			<gd_item id="152011025" name="Major Armor Flux" />
-			<gd_item id="152011045" name="Major Accessory Flux" />
+			<gd_item id="152011005" /><!-- Major Weapon Flux -->
+			<gd_item id="152011025" /><!-- Major Armor Flux -->
+			<gd_item id="152011045" /><!-- Major Accessory Flux -->
 			<!-- Level 40 -->
-			<gd_item id="152011006" name="Fine Weapon Flux" />
-			<gd_item id="152011026" name="Fine Armor Flux" />
-			<gd_item id="152011046" name="Fine Accessory Flux" />
+			<gd_item id="152011006" /><!-- Fine Weapon Flux -->
+			<gd_item id="152011026" /><!-- Fine Armor Flux -->
+			<gd_item id="152011046" /><!-- Fine Accessory Flux -->
 			<!-- Level 45 -->
-			<gd_item id="152011007" name="Superb Weapon Flux" />
-			<gd_item id="152011027" name="Superb Armor Flux" />
-			<gd_item id="152011047" name="Superb Accessory Flux" />
+			<gd_item id="152011007" /><!-- Superb Weapon Flux -->
+			<gd_item id="152011027" /><!-- Superb Armor Flux -->
+			<gd_item id="152011047" /><!-- Superb Accessory Flux -->
 			<!-- Level 50 -->
-			<gd_item id="152011008" name="Premium Weapon Flux" />
-			<gd_item id="152011028" name="Premium Armor Flux" />
-			<gd_item id="152011048" name="Premium Accessory Flux" />
+			<gd_item id="152011008" /><!-- Premium Weapon Flux -->
+			<gd_item id="152011028" /><!-- Premium Armor Flux -->
+			<gd_item id="152011048" /><!-- Premium Accessory Flux -->
 			<!-- Level 55 -->
-			<gd_item id="152011065" name="Special Greater Weapon Flux" />
-			<gd_item id="152011070" name="Special Greater Armor Flux" />
-			<gd_item id="152011075" name="Special Greater Accessory Flux" />
+			<gd_item id="152011065" /><!-- Special Greater Weapon Flux -->
+			<gd_item id="152011070" /><!-- Special Greater Armor Flux -->
+			<gd_item id="152011075" /><!-- Special Greater Accessory Flux -->
 			<!-- Level 58 -->
-			<gd_item id="152011080" name="Finest Weapon Flux" />
-			<gd_item id="152011084" name="Finest Armor Flux" />
-			<gd_item id="152011088" name="Finest Accessory Flux" />
+			<gd_item id="152011080" /><!-- Finest Weapon Flux -->
+			<gd_item id="152011084" /><!-- Finest Armor Flux -->
+			<gd_item id="152011088" /><!-- Finest Accessory Flux -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Flux (Common)" base_chance="15" min_diff="0" max_diff="4">
@@ -420,9 +420,9 @@
 		</gd_ratings>
 		<gd_items>
 			<!-- Level 61 -->
-			<gd_item id="152011100" name="Lesser Mystic Weapon Flux" />
-			<gd_item id="152011103" name="Lesser Mystic Armor Flux" />
-			<gd_item id="152011106" name="Lesser Mystic Accessory Flux" />
+			<gd_item id="152011100" /><!-- Lesser Mystic Weapon Flux -->
+			<gd_item id="152011103" /><!-- Lesser Mystic Armor Flux -->
+			<gd_item id="152011106" /><!-- Lesser Mystic Accessory Flux -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Flux (Rare)" base_chance="7.5" min_diff="-2" max_diff="2">
@@ -433,37 +433,37 @@
 		</gd_ratings>
 		<gd_items>
 			<!-- Level 25 -->
-			<gd_item id="152011009" name="Worthy Weapon Flux" />
-			<gd_item id="152011029" name="Worthy Armor Flux" />
-			<gd_item id="152011049" name="Worthy Accessory Flux" />
+			<gd_item id="152011009" /><!-- Worthy Weapon Flux -->
+			<gd_item id="152011029" /><!-- Worthy Armor Flux -->
+			<gd_item id="152011049" /><!-- Worthy Accessory Flux -->
 			<!-- Level 30 -->
-			<gd_item id="152011010" name="Worthy Greater Weapon Flux" />
-			<gd_item id="152011030" name="Worthy Greater Armor Flux" />
-			<gd_item id="152011050" name="Worthy Greater Accessory Flux" />
+			<gd_item id="152011010" /><!-- Worthy Greater Weapon Flux -->
+			<gd_item id="152011030" /><!-- Worthy Greater Armor Flux -->
+			<gd_item id="152011050" /><!-- Worthy Greater Accessory Flux -->
 			<!-- Level 35 -->
-			<gd_item id="152011011" name="Worthy Major Weapon Flux" />
-			<gd_item id="152011031" name="Worthy Major Armor Flux" />
-			<gd_item id="152011051" name="Worthy Major Accessory Flux" />
+			<gd_item id="152011011" /><!-- Worthy Major Weapon Flux -->
+			<gd_item id="152011031" /><!-- Worthy Major Armor Flux -->
+			<gd_item id="152011051" /><!-- Worthy Major Accessory Flux -->
 			<!-- Level 40 -->
-			<gd_item id="152011012" name="Worthy Fine Weapon Flux" />
-			<gd_item id="152011032" name="Worthy Fine Armor Flux" />
-			<gd_item id="152011052" name="Worthy Fine Accessory Flux" />
+			<gd_item id="152011012" /><!-- Worthy Fine Weapon Flux -->
+			<gd_item id="152011032" /><!-- Worthy Fine Armor Flux -->
+			<gd_item id="152011052" /><!-- Worthy Fine Accessory Flux -->
 			<!-- Level 45 -->
-			<gd_item id="152011013" name="Worthy Superb Weapon Flux" />
-			<gd_item id="152011033" name="Worthy Superb Armor Flux" />
-			<gd_item id="152011053" name="Worthy Superb Accessory Flux" />
+			<gd_item id="152011013" /><!-- Worthy Superb Weapon Flux -->
+			<gd_item id="152011033" /><!-- Worthy Superb Armor Flux -->
+			<gd_item id="152011053" /><!-- Worthy Superb Accessory Flux -->
 			<!-- Level 50 -->
-			<gd_item id="152011014" name="Worthy Premium Weapon Flux" />
-			<gd_item id="152011034" name="Worthy Premium Armor Flux" />
-			<gd_item id="152011054" name="Worthy Premium Accessory Flux" />
+			<gd_item id="152011014" /><!-- Worthy Premium Weapon Flux -->
+			<gd_item id="152011034" /><!-- Worthy Premium Armor Flux -->
+			<gd_item id="152011054" /><!-- Worthy Premium Accessory Flux -->
 			<!-- Level 55 -->
-			<gd_item id="152011066" name="Worthy Special Greater Weapon Flux" />
-			<gd_item id="152011071" name="Worthy Special Greater Armor Flux" />
-			<gd_item id="152011076" name="Worthy Special Greater Accessory Flux" />
+			<gd_item id="152011066" /><!-- Worthy Special Greater Weapon Flux -->
+			<gd_item id="152011071" /><!-- Worthy Special Greater Armor Flux -->
+			<gd_item id="152011076" /><!-- Worthy Special Greater Accessory Flux -->
 			<!-- Level 58 -->
-			<gd_item id="152011081" name="Worthy Finest Weapon Flux" />
-			<gd_item id="152011085" name="Worthy Finest Armor Flux" />
-			<gd_item id="152011089" name="Worthy Finest Accessory Flux" />
+			<gd_item id="152011081" /><!-- Worthy Finest Weapon Flux -->
+			<gd_item id="152011085" /><!-- Worthy Finest Armor Flux -->
+			<gd_item id="152011089" /><!-- Worthy Finest Accessory Flux -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Flux (Rare)" base_chance="7.5" min_diff="0" max_diff="4">
@@ -474,9 +474,9 @@
 		</gd_ratings>
 		<gd_items>
 			<!-- Level 61 -->
-			<gd_item id="152011101" name="Mystic Weapon Flux" />
-			<gd_item id="152011104" name="Mystic Armor Flux" />
-			<gd_item id="152011107" name="Mystic Accessory Flux" />
+			<gd_item id="152011101" /><!-- Mystic Weapon Flux -->
+			<gd_item id="152011104" /><!-- Mystic Armor Flux -->
+			<gd_item id="152011107" /><!-- Mystic Accessory Flux -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Flux (Legend)" base_chance="3.75" min_diff="-2" max_diff="2">
@@ -488,29 +488,29 @@
 		</gd_ratings>
 		<gd_items>
 			<!-- Level 35 -->
-			<gd_item id="152011015" name="Expert Major Weapon Flux" />
-			<gd_item id="152011035" name="Expert Major Armor Flux" />
-			<gd_item id="152011055" name="Expert Major Accessory Flux" />
+			<gd_item id="152011015" /><!-- Expert Major Weapon Flux -->
+			<gd_item id="152011035" /><!-- Expert Major Armor Flux -->
+			<gd_item id="152011055" /><!-- Expert Major Accessory Flux -->
 			<!-- Level 40 -->
-			<gd_item id="152011016" name="Expert Fine Weapon Flux" />
-			<gd_item id="152011036" name="Expert Fine Armor Flux" />
-			<gd_item id="152011056" name="Expert Fine Accessory Flux" />
+			<gd_item id="152011016" /><!-- Expert Fine Weapon Flux -->
+			<gd_item id="152011036" /><!-- Expert Fine Armor Flux -->
+			<gd_item id="152011056" /><!-- Expert Fine Accessory Flux -->
 			<!-- Level 45 -->
-			<gd_item id="152011017" name="Expert Superb Weapon Flux" />
-			<gd_item id="152011037" name="Expert Superb Armor Flux" />
-			<gd_item id="152011057" name="Expert Superb Accessory Flux" />
+			<gd_item id="152011017" /><!-- Expert Superb Weapon Flux -->
+			<gd_item id="152011037" /><!-- Expert Superb Armor Flux -->
+			<gd_item id="152011057" /><!-- Expert Superb Accessory Flux -->
 			<!-- Level 50 -->
-			<gd_item id="152011018" name="Expert Premium Weapon Flux" />
-			<gd_item id="152011038" name="Expert Premium Armor Flux" />
-			<gd_item id="152011058" name="Expert Premium Accessory Flux" />
+			<gd_item id="152011018" /><!-- Expert Premium Weapon Flux -->
+			<gd_item id="152011038" /><!-- Expert Premium Armor Flux -->
+			<gd_item id="152011058" /><!-- Expert Premium Accessory Flux -->
 			<!-- Level 55 -->
-			<gd_item id="152011067" name="Expert Special Greater Weapon Flux" />
-			<gd_item id="152011072" name="Expert Special Greater Armor Flux" />
-			<gd_item id="152011077" name="Expert Special Greater Accessory Flux" />
+			<gd_item id="152011067" /><!-- Expert Special Greater Weapon Flux -->
+			<gd_item id="152011072" /><!-- Expert Special Greater Armor Flux -->
+			<gd_item id="152011077" /><!-- Expert Special Greater Accessory Flux -->
 			<!-- Level 58 -->
-			<gd_item id="152011082" name="Expert Finest Weapon Flux" />
-			<gd_item id="152011086" name="Expert Finest Armor Flux" />
-			<gd_item id="152011090" name="Expert Finest Accessory Flux" />
+			<gd_item id="152011082" /><!-- Expert Finest Weapon Flux -->
+			<gd_item id="152011086" /><!-- Expert Finest Armor Flux -->
+			<gd_item id="152011090" /><!-- Expert Finest Accessory Flux -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Flux (Legend)" base_chance="3.75" min_diff="0" max_diff="4">
@@ -522,9 +522,9 @@
 		</gd_ratings>
 		<gd_items>
 			<!-- Level 61 -->
-			<gd_item id="152011102" name="Greater Mystic Weapon Flux" />
-			<gd_item id="152011105" name="Greater Mystic Armor Flux" />
-			<gd_item id="152011108" name="Greater Mystic Accessory Flux" />
+			<gd_item id="152011102" /><!-- Greater Mystic Weapon Flux -->
+			<gd_item id="152011105" /><!-- Greater Mystic Armor Flux -->
+			<gd_item id="152011108" /><!-- Greater Mystic Accessory Flux -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Flux (Unique)" base_chance="1.5" min_diff="-2" max_diff="2">
@@ -535,21 +535,21 @@
 		</gd_ratings>
 		<gd_items>
 			<!-- Level 45 -->
-			<gd_item id="152011059" name="Master Superb Weapon Flux" />
-			<gd_item id="152011061" name="Master Superb Armor Flux" />
-			<gd_item id="152011063" name="Master Superb Accessory Flux" />
+			<gd_item id="152011059" /><!-- Master Superb Weapon Flux -->
+			<gd_item id="152011061" /><!-- Master Superb Armor Flux -->
+			<gd_item id="152011063" /><!-- Master Superb Accessory Flux -->
 			<!-- Level 50 -->
-			<gd_item id="152011060" name="Master Premium Weapon Flux" />
-			<gd_item id="152011062" name="Master Premium Armor Flux" />
-			<gd_item id="152011064" name="Master Premium Accessory Flux" />
+			<gd_item id="152011060" /><!-- Master Premium Weapon Flux -->
+			<gd_item id="152011062" /><!-- Master Premium Armor Flux -->
+			<gd_item id="152011064" /><!-- Master Premium Accessory Flux -->
 			<!-- Level 55 -->
-			<gd_item id="152011068" name="Master Special Greater Weapon Flux" />
-			<gd_item id="152011073" name="Master Special Greater Armor Flux" />
-			<gd_item id="152011078" name="Master Special Greater Accessory Flux" />
+			<gd_item id="152011068" /><!-- Master Special Greater Weapon Flux -->
+			<gd_item id="152011073" /><!-- Master Special Greater Armor Flux -->
+			<gd_item id="152011078" /><!-- Master Special Greater Accessory Flux -->
 			<!-- Level 58 -->
-			<gd_item id="152011083" name="Master Finest Weapon Flux" />
-			<gd_item id="152011087" name="Master Finest Armor Flux" />
-			<gd_item id="152011091" name="Master Finest Accessory Flux" />
+			<gd_item id="152011083" /><!-- Master Finest Weapon Flux -->
+			<gd_item id="152011087" /><!-- Master Finest Armor Flux -->
+			<gd_item id="152011091" /><!-- Master Finest Accessory Flux -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Construction Flux" base_chance="2.5" min_diff="-8" max_diff="32">
@@ -559,15 +559,15 @@
 		</gd_ratings>
 		<gd_items>
 			<!-- Level 18 -->
-			<gd_item id="152011092" name="Minor Construction Flux" />
+			<gd_item id="152011092" /><!-- Minor Construction Flux -->
 			<!-- Level 21 -->
-			<gd_item id="152011093" name="Lesser Construction Flux" />
+			<gd_item id="152011093" /><!-- Lesser Construction Flux -->
 			<!-- Level 25 -->
-			<gd_item id="152011094" name="Construction Flux" />
+			<gd_item id="152011094" /><!-- Construction Flux -->
 			<!-- Level 33 -->
-			<gd_item id="152011095" name="Major Construction Flux" />
+			<gd_item id="152011095" /><!-- Major Construction Flux -->
 			<!-- Level 42 -->
-			<gd_item id="152011096" name="Finest Construction Flux" />
+			<gd_item id="152011096" /><!-- Finest Construction Flux -->
 		</gd_items>
 	</gd_rule>
 	<!-- Balic Hearts -->
@@ -579,9 +579,9 @@
 		</gd_races>
 		<gd_items>
 			<!-- Level 50 -->
-			<gd_item id="186000033" name="Hot Balaur Heart" />
+			<gd_item id="186000033" /><!-- Hot Balaur Heart -->
 			<!-- Level 60 -->
-			<gd_item id="186000097" name="Burning Balaur Heart" />
+			<gd_item id="186000097" /><!-- Burning Balaur Heart -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Balaur Heart" base_chance="8" min_diff="0" max_diff="4">
@@ -592,7 +592,7 @@
 		</gd_races>
 		<gd_items>
 			<!-- Level 61 -->
-			<gd_item id="186000235" name="Divine Balaur Heart" />
+			<gd_item id="186000235" /><!-- Divine Balaur Heart -->
 		</gd_items>
 	</gd_rule>
 	<!-- Balic Souls -->
@@ -604,9 +604,9 @@
 		</gd_races>
 		<gd_items>
 			<!-- Level 61 -->
-			<gd_item id="152013037" name="Mortal Wrath" />
-			<gd_item id="152013040" name="Mortal Envy" />
-			<gd_item id="152013043" name="Mortal Pride" />
+			<gd_item id="152013037" /><!-- Mortal Wrath -->
+			<gd_item id="152013040" /><!-- Mortal Envy -->
+			<gd_item id="152013043" /><!-- Mortal Pride -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Balaur Souls (Rare)" base_chance="9" min_diff="-5" max_diff="4">
@@ -617,17 +617,17 @@
 		</gd_races>
 		<gd_items>
 			<!-- Level 30 -->
-			<gd_item id="152013001" name="Vicious Mind of Wrath" />
-			<gd_item id="152013007" name="Vicious Terrifying Mind" />
-			<gd_item id="152013013" name="Vicious Mind of Pleasure" />
+			<gd_item id="152013001" /><!-- Vicious Mind of Wrath -->
+			<gd_item id="152013007" /><!-- Vicious Terrifying Mind -->
+			<gd_item id="152013013" /><!-- Vicious Mind of Pleasure -->
 			<!-- Level 40 -->
-			<gd_item id="152013002" name="Wrathful Will" />
-			<gd_item id="152013008" name="Terrifying Will" />
-			<gd_item id="152013014" name="Violent Will" />
+			<gd_item id="152013002" /><!-- Wrathful Will -->
+			<gd_item id="152013008" /><!-- Terrifying Will -->
+			<gd_item id="152013014" /><!-- Violent Will -->
 			<!-- Level 50 -->
-			<gd_item id="152013003" name="Wrathful Ego" />
-			<gd_item id="152013009" name="Terrifying Ego" />
-			<gd_item id="152013015" name="Violent Ego" />
+			<gd_item id="152013003" /><!-- Wrathful Ego -->
+			<gd_item id="152013009" /><!-- Terrifying Ego -->
+			<gd_item id="152013015" /><!-- Violent Ego -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Balaur Souls (Rare)" base_chance="9" min_diff="-2" max_diff="2">
@@ -638,9 +638,9 @@
 		</gd_races>
 		<gd_items>
 			<!-- Level 55 -->
-			<gd_item id="152013019" name="Execration of Wrath" />
-			<gd_item id="152013022" name="Execration of Terror" />
-			<gd_item id="152013025" name="Execration of Pleasure" />
+			<gd_item id="152013019" /><!-- Execration of Wrath -->
+			<gd_item id="152013022" /><!-- Execration of Terror -->
+			<gd_item id="152013025" /><!-- Execration of Pleasure -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Balaur Souls (Rare)" base_chance="9" min_diff="-2" max_diff="0">
@@ -651,9 +651,9 @@
 		</gd_races>
 		<gd_items>
 			<!-- Level 60 -->
-			<gd_item id="152013028" name="Urge of Wrath" />
-			<gd_item id="152013031" name="Urge of Terror" />
-			<gd_item id="152013034" name="Urge of Pleasure" />
+			<gd_item id="152013028" /><!-- Urge of Wrath -->
+			<gd_item id="152013031" /><!-- Urge of Terror -->
+			<gd_item id="152013034" /><!-- Urge of Pleasure -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Balaur Souls (Rare)" base_chance="4.5" min_diff="0" max_diff="4">
@@ -664,9 +664,9 @@
 		</gd_races>
 		<gd_items>
 			<!-- Level 61 -->
-			<gd_item id="152013038" name="Deadly Wrath" />
-			<gd_item id="152013041" name="Deadly Envy" />
-			<gd_item id="152013044" name="Deadly Pride" />
+			<gd_item id="152013038" /><!-- Deadly Wrath -->
+			<gd_item id="152013041" /><!-- Deadly Envy -->
+			<gd_item id="152013044" /><!-- Deadly Pride -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Balaur Souls (Legend)" base_chance="4.5" min_diff="-5" max_diff="4">
@@ -677,18 +677,18 @@
 		</gd_races>
 		<gd_items>
 			<!-- Level 30 // no related recipes implemented
-				<gd_item id="152013004" name="Maddened Wrathful Mind" />
-				<gd_item id="152013010" name="Berserk Vicious Terrifying Mind" />
-				<gd_item id="152013016" name="Fatal Vicious Mind of Pleasure" />
+				<gd_item id="152013004" /><!- Maddened Wrathful Mind ->
+				<gd_item id="152013010" /><!- Berserk Vicious Terrifying Mind ->
+				<gd_item id="152013016" /><!- Fatal Vicious Mind of Pleasure ->
 			-->
 			<!-- Level 40 -->
-			<gd_item id="152013005" name="Maddened Wrathful Will" />
-			<gd_item id="152013011" name="Berserk Terrifying Will" />
-			<gd_item id="152013017" name="Fatal Violent Will" />
+			<gd_item id="152013005" /><!-- Maddened Wrathful Will -->
+			<gd_item id="152013011" /><!-- Berserk Terrifying Will -->
+			<gd_item id="152013017" /><!-- Fatal Violent Will -->
 			<!-- Level 50 -->
-			<gd_item id="152013006" name="Maddened Wrathful Ego" />
-			<gd_item id="152013012" name="Berserk Terrifying Ego" />
-			<gd_item id="152013018" name="Fatal Violent Ego" />
+			<gd_item id="152013006" /><!-- Maddened Wrathful Ego -->
+			<gd_item id="152013012" /><!-- Berserk Terrifying Ego -->
+			<gd_item id="152013018" /><!-- Fatal Violent Ego -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Balaur Souls (Legend)" base_chance="4.5" min_diff="-2" max_diff="2">
@@ -699,9 +699,9 @@
 		</gd_races>
 		<gd_items>
 			<!-- Level 55 -->
-			<gd_item id="152013020" name="Maddened Execration of Wrath" />
-			<gd_item id="152013023" name="Berserk Execration of Terror" />
-			<gd_item id="152013026" name="Fatal Execration of Pleasure" />
+			<gd_item id="152013020" /><!-- Maddened Execration of Wrath -->
+			<gd_item id="152013023" /><!-- Berserk Execration of Terror -->
+			<gd_item id="152013026" /><!-- Fatal Execration of Pleasure -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Balaur Souls (Legend)" base_chance="4.5" min_diff="-2" max_diff="0">
@@ -712,9 +712,9 @@
 		</gd_races>
 		<gd_items>
 			<!-- Level 60 -->
-			<gd_item id="152013029" name="Maddened Urge of Wrath" />
-			<gd_item id="152013032" name="Berserk Urge of Terror" />
-			<gd_item id="152013035" name="Fatal Urge of Pleasure" />
+			<gd_item id="152013029" /><!-- Maddened Urge of Wrath -->
+			<gd_item id="152013032" /><!-- Berserk Urge of Terror -->
+			<gd_item id="152013035" /><!-- Fatal Urge of Pleasure -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Balaur Souls (Legend)" base_chance="3.75" min_diff="0" max_diff="4">
@@ -725,9 +725,9 @@
 		</gd_races>
 		<gd_items>
 			<!-- Level 61 -->
-			<gd_item id="152013039" name="Malicious Wrath" />
-			<gd_item id="152013042" name="Malicious Envy" />
-			<gd_item id="152013045" name="Malicious Pride" />
+			<gd_item id="152013039" /><!-- Malicious Wrath -->
+			<gd_item id="152013042" /><!-- Malicious Envy -->
+			<gd_item id="152013045" /><!-- Malicious Pride -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Balaur Souls (Unique)" base_chance="2.25" min_diff="-2" max_diff="2">
@@ -738,9 +738,9 @@
 		</gd_races>
 		<gd_items>
 			<!-- Level 55 -->
-			<gd_item id="152013021" name="Clouded Execration of Wrath" />
-			<gd_item id="152013024" name="Furious Execration of Terror" />
-			<gd_item id="152013027" name="Inescapable Execration of Pleasure" />
+			<gd_item id="152013021" /><!-- Clouded Execration of Wrath -->
+			<gd_item id="152013024" /><!-- Furious Execration of Terror -->
+			<gd_item id="152013027" /><!-- Inescapable Execration of Pleasure -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Balaur Souls (Unique)" base_chance="2.25" min_diff="-2" max_diff="0">
@@ -751,9 +751,9 @@
 		</gd_races>
 		<gd_items>
 			<!-- Level 60 -->
-			<gd_item id="152013030" name="Clouded Urge of Wrath" />
-			<gd_item id="152013033" name="Furious Urge of Terror" />
-			<gd_item id="152013036" name="Inescapable Urge of Pleasure" />
+			<gd_item id="152013030" /><!-- Clouded Urge of Wrath -->
+			<gd_item id="152013033" /><!-- Furious Urge of Terror -->
+			<gd_item id="152013036" /><!-- Inescapable Urge of Pleasure -->
 		</gd_items>
 	</gd_rule>
 	<!-- Balic Horns & Scales -->
@@ -765,17 +765,17 @@
 		</gd_races>
 		<gd_items>
 			<!-- Level 30 -->
-			<gd_item id="152014001" name="Thick Balaur Horn" />
-			<gd_item id="152014002" name="Thick Balaur Scale" />
+			<gd_item id="152014001" /><!-- Thick Balaur Horn -->
+			<gd_item id="152014002" /><!-- Thick Balaur Scale -->
 			<!-- Level 40 -->
-			<gd_item id="152014006" name="Hard Balaur Horn" />
-			<gd_item id="152014007" name="Hard Balaur Scale" />
+			<gd_item id="152014006" /><!-- Hard Balaur Horn -->
+			<gd_item id="152014007" /><!-- Hard Balaur Scale -->
 			<!-- Level 50 -->
-			<gd_item id="152014011" name="Solid Balaur Horn" />
-			<gd_item id="152014012" name="Solid Balaur Scale" />
+			<gd_item id="152014011" /><!-- Solid Balaur Horn -->
+			<gd_item id="152014012" /><!-- Solid Balaur Scale -->
 			<!-- Level 60 -->
-			<gd_item id="152014016" name="Firm Balaur Horn" />
-			<gd_item id="152014017" name="Firm Balaur Scale" />
+			<gd_item id="152014016" /><!-- Firm Balaur Horn -->
+			<gd_item id="152014017" /><!-- Firm Balaur Scale -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Balaur Horns + Scales" base_chance="12.5" min_diff="0" max_diff="4">
@@ -786,8 +786,8 @@
 		</gd_races>
 		<gd_items>
 			<!-- Level 61 -->
-			<gd_item id="152014021" name="Gleaming Balaur Horn" />
-			<gd_item id="152014022" name="Gleaming Balaur Scale" />
+			<gd_item id="152014021" /><!-- Gleaming Balaur Horn -->
+			<gd_item id="152014022" /><!-- Gleaming Balaur Scale -->
 		</gd_items>
 	</gd_rule>
 	<!-- Balic Skin & Meat -->
@@ -799,17 +799,17 @@
 		</gd_races>
 		<gd_items>
 			<!-- Level 30 -->
-			<gd_item id="152014003" name="Thick Balaur Skin" />
-			<gd_item id="152014005" name="Tough Balaur Meat" />
+			<gd_item id="152014003" /><!-- Thick Balaur Skin -->
+			<gd_item id="152014005" /><!-- Tough Balaur Meat -->
 			<!-- Level 40 -->
-			<gd_item id="152014008" name="Hard Balaur Skin" />
-			<gd_item id="152014010" name="Tender Balaur Meat" />
+			<gd_item id="152014008" /><!-- Hard Balaur Skin -->
+			<gd_item id="152014010" /><!-- Tender Balaur Meat -->
 			<!-- Level 50 -->
-			<gd_item id="152014013" name="Solid Balaur Skin" />
-			<gd_item id="152014015" name="Fresh Balaur Meat" />
+			<gd_item id="152014013" /><!-- Solid Balaur Skin -->
+			<gd_item id="152014015" /><!-- Fresh Balaur Meat -->
 			<!-- Level 60 -->
-			<gd_item id="152014018" name="Firm Balaur Skin" />
-			<gd_item id="152014020" name="Lustrous Balaur Meat" />
+			<gd_item id="152014018" /><!-- Firm Balaur Skin -->
+			<gd_item id="152014020" /><!-- Lustrous Balaur Meat -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Balaur Flesh" base_chance="12.5" min_diff="0" max_diff="4">
@@ -820,8 +820,8 @@
 		</gd_races>
 		<gd_items>
 			<!-- Level 61 -->
-			<gd_item id="152014023" name="Gleaming Balaur Skin" />
-			<gd_item id="152014025" name="Gleaming Balaur Meat" />
+			<gd_item id="152014023" /><!-- Gleaming Balaur Skin -->
+			<gd_item id="152014025" /><!-- Gleaming Balaur Meat -->
 		</gd_items>
 	</gd_rule>
 	<!-- Balic Blood -->
@@ -833,13 +833,13 @@
 		</gd_races>
 		<gd_items>
 			<!-- Level 30 -->
-			<gd_item id="152014004" name="Cold Balaur Blood Stain" />
+			<gd_item id="152014004" /><!-- Cold Balaur Blood Stain -->
 			<!-- Level 40 -->
-			<gd_item id="152014009" name="Hot Balaur Blood Stain" />
+			<gd_item id="152014009" /><!-- Hot Balaur Blood Stain -->
 			<!-- Level 50 -->
-			<gd_item id="152014014" name="Boiling Balaur Blood Stain" />
+			<gd_item id="152014014" /><!-- Boiling Balaur Blood Stain -->
 			<!-- Level 60 -->
-			<gd_item id="152014019" name="Burning Balaur Blood Stain" />
+			<gd_item id="152014019" /><!-- Burning Balaur Blood Stain -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Balaur Blood" base_chance="12.5" min_diff="0" max_diff="4">
@@ -850,7 +850,7 @@
 		</gd_races>
 		<gd_items>
 			<!-- Level 61 -->
-			<gd_item id="152014024" name="Gleaming Balaur Blood" />
+			<gd_item id="152014024" /><!-- Gleaming Balaur Blood -->
 		</gd_items>
 	</gd_rule>
 	<!-- Elyos Spirit -->
@@ -863,7 +863,7 @@
 		</gd_npc_groups>
 		<gd_items>
 			<!-- Level 17 -->
-			<gd_item id="152012001" name="Ectoplasm Fragment" />
+			<gd_item id="152012001" /><!-- Ectoplasm Fragment -->
 		</gd_items>
 	</gd_rule>
 	<!-- Wriggot -->
@@ -876,7 +876,7 @@
 		</gd_npc_groups>
 		<gd_items>
 			<!-- Level 18 -->
-			<gd_item id="152012002" name="Wriggot Scale" />
+			<gd_item id="152012002" /><!-- Wriggot Scale -->
 		</gd_items>
 	</gd_rule>
 	<!-- Manduri -->
@@ -889,7 +889,7 @@
 		</gd_npc_groups>
 		<gd_items>
 			<!-- Level 22 -->
-			<gd_item id="152012003" name="Manduri Fur Ball" />
+			<gd_item id="152012003" /><!-- Manduri Fur Ball -->
 		</gd_items>
 	</gd_rule>
 	<!-- Monitor -->
@@ -902,7 +902,7 @@
 		</gd_npc_groups>
 		<gd_items>
 			<!-- Level 23 -->
-			<gd_item id="152012004" name="Monitor Back Skin" />
+			<gd_item id="152012004" /><!-- Monitor Back Skin -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Monitor Meat" base_chance="20" min_diff="-2" max_diff="2">
@@ -914,7 +914,7 @@
 		</gd_npc_groups>
 		<gd_items>
 			<!-- Level 40 -->
-			<gd_item id="152015504" name="Raw Monitor Meat" />
+			<gd_item id="152015504" /><!-- Raw Monitor Meat -->
 		</gd_items>
 	</gd_rule>
 	<!-- Spiner -->
@@ -927,7 +927,7 @@
 		</gd_npc_groups>
 		<gd_items>
 			<!-- Level 26 -->
-			<gd_item id="152012005" name="Spiner Red Carapace" />
+			<gd_item id="152012005" /><!-- Spiner Red Carapace -->
 		</gd_items>
 	</gd_rule>
 	<!-- Caryatid -->
@@ -940,7 +940,7 @@
 		</gd_npc_groups>
 		<gd_items>
 			<!-- Level 26 -->
-			<gd_item id="152012006" name="Ancient Caryatid Fragment" />
+			<gd_item id="152012006" /><!-- Ancient Caryatid Fragment -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Desert Caryatid Fragment" base_chance="20" min_diff="-2" max_diff="2">
@@ -952,7 +952,7 @@
 		</gd_npc_groups>
 		<gd_items>
 			<!-- Level 26 -->
-			<gd_item id="152012509" name="Desert Caryatid Fragment" />
+			<gd_item id="152012509" /><!-- Desert Caryatid Fragment -->
 		</gd_items>
 	</gd_rule>
 	<!-- Basilisk -->
@@ -965,7 +965,7 @@
 		</gd_npc_groups>
 		<gd_items>
 			<!-- Level 27 -->
-			<gd_item id="152012007" name="Basilisk Backbone" />
+			<gd_item id="152012007" /><!-- Basilisk Backbone -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Basilisk Meat" base_chance="2" min_diff="-2" max_diff="2">
@@ -977,7 +977,7 @@
 		</gd_npc_groups>
 		<gd_items>
 			<!-- Level 50 -->
-			<gd_item id="152015009" name="Raw Basilisk Meat" />
+			<gd_item id="152015009" /><!-- Raw Basilisk Meat -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Basilisk Back Skin" base_chance="5" min_diff="-2" max_diff="2">
@@ -989,7 +989,7 @@
 		</gd_npc_groups>
 		<gd_items>
 			<!-- Level 26 -->
-			<gd_item id="152012507" name="Basilisk Back Skin" />
+			<gd_item id="152012507" /><!-- Basilisk Back Skin -->
 		</gd_items>
 	</gd_rule>
 	<!-- Wind Spirit -->
@@ -1004,7 +1004,7 @@
 		</gd_npc_groups>
 		<gd_items>
 			<!-- Level 30 -->
-			<gd_item id="152012009" name="Wind Spirit Mane" />
+			<gd_item id="152012009" /><!-- Wind Spirit Mane -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Gust Crystal" base_chance="24" min_diff="-2" max_diff="2">
@@ -1018,20 +1018,20 @@
 		</gd_npc_groups>
 		<gd_items>
 			<!-- Level 50 -->
-			<gd_item id="152012042" name="Gust Crystal" />
+			<gd_item id="152012042" /><!-- Gust Crystal -->
 		</gd_items>
 	</gd_rule>
 	<!-- Gargoyle -->
 	<gd_rule rule_name="Eracus Gargoyle Fragment" base_chance="6" min_diff="-2" max_diff="2">
 		<gd_maps>
-			<gd_map map_id="210020000" name="Eltnen" />
+			<gd_map map_id="210020000" /><!-- Eltnen -->
 		</gd_maps>
 		<gd_npc_groups>
 			<gd_npc_group group="GARGOYLE" />
 		</gd_npc_groups>
 		<gd_items>
 			<!-- Level 32 -->
-			<gd_item id="152012010" name="Eracus Gargoyle Fragment" />
+			<gd_item id="152012010" /><!-- Eracus Gargoyle Fragment -->
 		</gd_items>
 	</gd_rule>
 	<!-- Temptress -->
@@ -1044,7 +1044,7 @@
 		</gd_npc_groups>
 		<gd_items>
 			<!-- Level 32 -->
-			<gd_item id="152012011" name="Seduction Blood" />
+			<gd_item id="152012011" /><!-- Seduction Blood -->
 		</gd_items>
 	</gd_rule>
 	<!-- Virago -->
@@ -1057,7 +1057,7 @@
 		</gd_npc_groups>
 		<gd_items>
 			<!-- Level 34 -->
-			<gd_item id="152012012" name="Virago Feather" />
+			<gd_item id="152012012" /><!-- Virago Feather -->
 		</gd_items>
 	</gd_rule>
 	<!-- Keraton -->
@@ -1070,7 +1070,7 @@
 		</gd_npc_groups>
 		<gd_items>
 			<!-- Level 34 -->
-			<gd_item id="152012013" name="Horn of Keraton" />
+			<gd_item id="152012013" /><!-- Horn of Keraton -->
 		</gd_items>
 	</gd_rule>
 	<!-- Agrint -->
@@ -1083,7 +1083,7 @@
 		</gd_npc_groups>
 		<gd_items>
 			<!-- Level 34 -->
-			<gd_item id="152012014" name="Agrint Branch" />
+			<gd_item id="152012014" /><!-- Agrint Branch -->
 		</gd_items>
 	</gd_rule>
 	<!-- Troll -->
@@ -1096,7 +1096,7 @@
 		</gd_npc_groups>
 		<gd_items>
 			<!-- Level 36 -->
-			<gd_item id="152012015" name="Troll Blood" />
+			<gd_item id="152012015" /><!-- Troll Blood -->
 		</gd_items>
 	</gd_rule>
 	<!-- Kerubian / Kerubiel -->
@@ -1110,7 +1110,7 @@
 		</gd_npc_groups>
 		<gd_items>
 			<!-- Level 36 -->
-			<gd_item id="152012016" name="Kerubian Big Horn" />
+			<gd_item id="152012016" /><!-- Kerubian Big Horn -->
 		</gd_items>
 	</gd_rule>
 	<!-- Adult/Giant Mamut -->
@@ -1123,7 +1123,7 @@
 		</gd_npc_groups>
 		<gd_items>
 			<!-- Level 37 -->
-			<gd_item id="152012017" name="Huge Tusk" />
+			<gd_item id="152012017" /><!-- Huge Tusk -->
 		</gd_items>
 	</gd_rule>
 	<!-- Frillneck -->
@@ -1136,7 +1136,7 @@
 		</gd_npc_groups>
 		<gd_items>
 			<!-- Level 40 -->
-			<gd_item id="152012019" name="Huge Frillneck Claw" />
+			<gd_item id="152012019" /><!-- Huge Frillneck Claw -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Raw Frillneck Meat" base_chance="10" min_diff="-15" max_diff="-10">
@@ -1148,7 +1148,7 @@
 		</gd_npc_groups>
 		<gd_items>
 			<!-- Level 50 -->
-			<gd_item id="152015007" name="Raw Frillneck Meat" />
+			<gd_item id="152015007" /><!-- Raw Frillneck Meat -->
 		</gd_items>
 	</gd_rule>
 	<!-- Spirit -->
@@ -1164,7 +1164,7 @@
 		</gd_npc_groups>
 		<gd_items>
 			<!-- Level 41 -->
-			<gd_item id="152012020" name="Vengeful Spirit Shard" />
+			<gd_item id="152012020" /><!-- Vengeful Spirit Shard -->
 		</gd_items>
 	</gd_rule>
 	<!-- Krall -->
@@ -1179,7 +1179,7 @@
 		</gd_npc_groups>
 		<gd_items>
 			<!-- Level 42 -->
-			<gd_item id="152012021" name="Boiling Turquoise Blood" />
+			<gd_item id="152012021" /><!-- Boiling Turquoise Blood -->
 		</gd_items>
 	</gd_rule>
 	<!-- Windwisp -->
@@ -1192,7 +1192,7 @@
 		</gd_npc_groups>
 		<gd_items>
 			<!-- Level 44 -->
-			<gd_item id="152012022" name="Hazy Fluid" />
+			<gd_item id="152012022" /><!-- Hazy Fluid -->
 		</gd_items>
 	</gd_rule>
 	<!-- Griffon -->
@@ -1205,7 +1205,7 @@
 		</gd_npc_groups>
 		<gd_items>
 			<!-- Level 46 -->
-			<gd_item id="152012036" name="Griffon Plume" />
+			<gd_item id="152012036" /><!-- Griffon Plume -->
 		</gd_items>
 	</gd_rule>
 	<!-- Petrahulk -->
@@ -1218,7 +1218,7 @@
 		</gd_npc_groups>
 		<gd_items>
 			<!-- Level 49 -->
-			<gd_item id="152012037" name="Stone Fist Petrahulk Fragment" />
+			<gd_item id="152012037" /><!-- Stone Fist Petrahulk Fragment -->
 		</gd_items>
 	</gd_rule>
 	<!-- Gryphu -->
@@ -1231,7 +1231,7 @@
 		</gd_npc_groups>
 		<gd_items>
 			<!-- Level 47 -->
-			<gd_item id="152012038" name="Gryphu Feather" />
+			<gd_item id="152012038" /><!-- Gryphu Feather -->
 		</gd_items>
 	</gd_rule>
 	<!-- Dionae -->
@@ -1244,7 +1244,7 @@
 		</gd_npc_groups>
 		<gd_items>
 			<!-- Level 47 -->
-			<gd_item id="152012041" name="Dionae Vine" />
+			<gd_item id="152012041" /><!-- Dionae Vine -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Dionae Stem" base_chance="2" min_diff="-2" max_diff="2">
@@ -1256,7 +1256,7 @@
 		</gd_npc_groups>
 		<gd_items>
 			<!-- Level 47 -->
-			<gd_item id="152012545" name="Dionae Stem" />
+			<gd_item id="152012545" /><!-- Dionae Stem -->
 		</gd_items>
 	</gd_rule>
 	<!-- Nagolem -->
@@ -1270,7 +1270,7 @@
 		</gd_npc_groups>
 		<gd_items>
 			<!-- Level 49 -->
-			<gd_item id="152012043" name="Nagolem Core" />
+			<gd_item id="152012043" /><!-- Nagolem Core -->
 		</gd_items>
 	</gd_rule>
 	<!-- Pluma -->
@@ -1283,7 +1283,7 @@
 		</gd_npc_groups>
 		<gd_items>
 			<!-- Level 30 -->
-			<gd_item id="152015001" name="Raw Pluma Meat" />
+			<gd_item id="152015001" /><!-- Raw Pluma Meat -->
 		</gd_items>
 	</gd_rule>
 	<!-- Kurin -->
@@ -1296,7 +1296,7 @@
 		</gd_npc_groups>
 		<gd_items>
 			<!-- Level 30 -->
-			<gd_item id="152015002" name="Raw Kurin Meat" />
+			<gd_item id="152015002" /><!-- Raw Kurin Meat -->
 		</gd_items>
 	</gd_rule>
 	<!-- Crestlich -->
@@ -1309,7 +1309,7 @@
 		</gd_npc_groups>
 		<gd_items>
 			<!-- Level 30 -->
-			<gd_item id="152015003" name="Crestlich Breast Meat" />
+			<gd_item id="152015003" /><!-- Crestlich Breast Meat -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Crestlich Meat" base_chance="27" min_diff="-2" max_diff="2">
@@ -1321,7 +1321,7 @@
 		</gd_npc_groups>
 		<gd_items>
 			<!-- Level 40 -->
-			<gd_item id="152015505" name="Raw Crestlich Meat" />
+			<gd_item id="152015505" /><!-- Raw Crestlich Meat -->
 		</gd_items>
 	</gd_rule>
 	<!-- Rynoce -->
@@ -1334,7 +1334,7 @@
 		</gd_npc_groups>
 		<gd_items>
 			<!-- Level 40 -->
-			<gd_item id="152015004" name="Raw Rynoce Meat" />
+			<gd_item id="152015004" /><!-- Raw Rynoce Meat -->
 		</gd_items>
 	</gd_rule>
 	<!-- Klaw -->
@@ -1348,7 +1348,7 @@
 		</gd_npc_groups>
 		<gd_items>
 			<!-- Level 40 -->
-			<gd_item id="152015006" name="Raw Klaw Meat" />
+			<gd_item id="152015006" /><!-- Raw Klaw Meat -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Gigantic Klaw Carapace" base_chance="2" min_diff="-2" max_diff="2">
@@ -1361,7 +1361,7 @@
 		</gd_npc_groups>
 		<gd_items>
 			<!-- Level 39 -->
-			<gd_item id="152012018" name="Gigantic Klaw Carapace" />
+			<gd_item id="152012018" /><!-- Gigantic Klaw Carapace -->
 		</gd_items>
 	</gd_rule>
 	<!-- Cellatu -->
@@ -1374,7 +1374,7 @@
 		</gd_npc_groups>
 		<gd_items>
 			<!-- Level 50 -->
-			<gd_item id="152015011" name="Cellatu Meat" />
+			<gd_item id="152015011" /><!-- Cellatu Meat -->
 		</gd_items>
 	</gd_rule>
 	<!-- Calydon -->
@@ -1387,7 +1387,7 @@
 		</gd_npc_groups>
 		<gd_items>
 			<!-- Level 50 -->
-			<gd_item id="152015012" name="Calydon Meat" />
+			<gd_item id="152015012" /><!-- Calydon Meat -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Calydon Molar" base_chance="24" min_diff="-2" max_diff="2">
@@ -1402,7 +1402,7 @@
 		</gd_npc_groups>
 		<gd_items>
 			<!-- Level 47 -->
-			<gd_item id="152012040" name="Calydon Molar" />
+			<gd_item id="152012040" /><!-- Calydon Molar -->
 		</gd_items>
 	</gd_rule>
 	<!-- Moonflower -->
@@ -1415,7 +1415,7 @@
 		</gd_npc_groups>
 		<gd_items>
 			<!-- Level 50 -->
-			<gd_item id="152015010" name="Moonflower Fruit" />
+			<gd_item id="152015010" /><!-- Moonflower Fruit -->
 		</gd_items>
 	</gd_rule>
 	<!-- Specter -->
@@ -1428,7 +1428,7 @@
 		</gd_npc_groups>
 		<gd_items>
 			<!-- Level 45 -->
-			<gd_item id="152012024" name="Bone with Specter Magic" />
+			<gd_item id="152012024" /><!-- Bone with Specter Magic -->
 		</gd_items>
 	</gd_rule>
 	<!-- Hornskull -->
@@ -1441,7 +1441,7 @@
 		</gd_npc_groups>
 		<gd_items>
 			<!-- Level 47 -->
-			<gd_item id="152012039" name="Hornskull Scale" />
+			<gd_item id="152012039" /><!-- Hornskull Scale -->
 		</gd_items>
 	</gd_rule>
 	<!-- Mosbear -->
@@ -1455,7 +1455,7 @@
 		</gd_npc_groups>
 		<gd_items>
 			<!-- Level 16 -->
-			<gd_item id="152012501" name="Mosbear Skin" />
+			<gd_item id="152012501" /><!-- Mosbear Skin -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Mosbear Skin" base_chance="10" min_diff="-2" max_diff="2">
@@ -1467,7 +1467,7 @@
 		</gd_npc_groups>
 		<gd_items>
 			<!-- Level 33 -->
-			<gd_item id="152012516" name="Snowy Mosbear Skin" />
+			<gd_item id="152012516" /><!-- Snowy Mosbear Skin -->
 		</gd_items>
 	</gd_rule>
 	<!-- Drake -->
@@ -1480,7 +1480,7 @@
 		</gd_npc_groups>
 		<gd_items>
 			<!-- Level 34 -->
-			<gd_item id="152012517" name="Malek Drake Claw" />
+			<gd_item id="152012517" /><!-- Malek Drake Claw -->
 		</gd_items>
 	</gd_rule>
 	<!-- Granker -->
@@ -1493,7 +1493,7 @@
 		</gd_npc_groups>
 		<gd_items>
 			<!-- Level 34 -->
-			<gd_item id="152012518" name="Noble Granker Horn" />
+			<gd_item id="152012518" /><!-- Noble Granker Horn -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Granker Meat" base_chance="20" min_diff="-2" max_diff="2">
@@ -1505,7 +1505,7 @@
 		</gd_npc_groups>
 		<gd_items>
 			<!-- Level 40 -->
-			<gd_item id="152015506" name="Raw Granker Meat" />
+			<gd_item id="152015506" /><!-- Raw Granker Meat -->
 		</gd_items>
 	</gd_rule>
 	<!-- Frightcorn -->
@@ -1518,7 +1518,7 @@
 		</gd_npc_groups>
 		<gd_items>
 			<!-- Level 10 -->
-			<gd_item id="164000036" name="Frightcorn's Memory" />
+			<gd_item id="164000036" /><!-- Frightcorn's Memory -->
 		</gd_items>
 	</gd_rule>
 	<!-- Cellatu -->
@@ -1531,7 +1531,7 @@
 		</gd_npc_groups>
 		<gd_items>
 			<!-- Level 47 -->
-			<gd_item id="152012542" name="Cellatu Heart" />
+			<gd_item id="152012542" /><!-- Cellatu Heart -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Trico Horn" base_chance="10" min_diff="-2" max_diff="0">
@@ -1544,7 +1544,7 @@
 		</gd_npc_groups>
 		<gd_items>
 			<!-- Level 50 -->
-			<gd_item id="152012546" name="Trico Horn" />
+			<gd_item id="152012546" /><!-- Trico Horn -->
 		</gd_items>
 	</gd_rule>
 	<!-- Rotron -->
@@ -1557,7 +1557,7 @@
 		</gd_npc_groups>
 		<gd_items>
 			<!-- Level 50 -->
-			<gd_item id="152015512" name="Wild Ginseng" />
+			<gd_item id="152015512" /><!-- Wild Ginseng -->
 		</gd_items>
 	</gd_rule>
 	<!-- Ettin -->
@@ -1570,7 +1570,7 @@
 		</gd_npc_groups>
 		<gd_items>
 			<!-- Level 22 -->
-			<gd_item id="152012504" name="Ettin Skin" />
+			<gd_item id="152012504" /><!-- Ettin Skin -->
 		</gd_items>
 	</gd_rule>
 	<!-- Sulfur Slime -->
@@ -1579,13 +1579,13 @@
 			<gd_world wd_type="ASMODAE" />
 		</gd_worlds>
 		<gd_npcs>
-			<gd_npc npc_id="212456" name="Sulfur Slime" />
-			<gd_npc npc_id="212457" name="Sulfur Slime" />
-			<gd_npc npc_id="212660" name="Gigantic Sulfur Slime" />
+			<gd_npc npc_id="212456" /><!-- Sulfur Slime -->
+			<gd_npc npc_id="212457" /><!-- Sulfur Slime -->
+			<gd_npc npc_id="212660" /><!-- Gigantic Sulfur Slime -->
 		</gd_npcs>
 		<gd_items>
 			<!-- Level 27 -->
-			<gd_item id="152012510" name="Sulfur Slime Core" />
+			<gd_item id="152012510" /><!-- Sulfur Slime Core -->
 		</gd_items>
 	</gd_rule>
 	<!-- Arkanis Gargoyle -->
@@ -1594,13 +1594,13 @@
 			<gd_world wd_type="ASMODAE" />
 		</gd_worlds>
 		<gd_npcs>
-			<gd_npc npc_id="212676" name="Arkanis Gargoyle" />
-			<gd_npc npc_id="212677" name="Arkanis Gargoyle" />
-			<gd_npc npc_id="212701" name="Old Arkanis Gargoyle" />
+			<gd_npc npc_id="212676" /><!-- Arkanis Gargoyle -->
+			<gd_npc npc_id="212677" /><!-- Arkanis Gargoyle -->
+			<gd_npc npc_id="212701" /><!-- Old Arkanis Gargoyle -->
 		</gd_npcs>
 		<gd_items>
 			<!-- Level 30 -->
-			<gd_item id="152012514" name="Stone Arkanis Gargoyle Fragment" />
+			<gd_item id="152012514" /><!-- Stone Arkanis Gargoyle Fragment -->
 		</gd_items>
 	</gd_rule>
 	<!-- Fungy -->
@@ -1613,7 +1613,7 @@
 		</gd_npc_groups>
 		<gd_items>
 			<!-- Level 30 -->
-			<gd_item id="152015502" name="Fungen Cap" />
+			<gd_item id="152015502" /><!-- Fungen Cap -->
 		</gd_items>
 	</gd_rule>
 	<!-- Ksellid -->
@@ -1626,7 +1626,7 @@
 		</gd_npc_groups>
 		<gd_items>
 			<!-- Level 30 -->
-			<gd_item id="152015503" name="Raw Ksellid Meat" />
+			<gd_item id="152015503" /><!-- Raw Ksellid Meat -->
 		</gd_items>
 	</gd_rule>
 	<!-- Hornskull -->
@@ -1639,7 +1639,7 @@
 		</gd_npc_groups>
 		<gd_items>
 			<!-- Level 46 -->
-			<gd_item id="152012544" name="Hornskull Back Scale" />
+			<gd_item id="152012544" /><!-- Hornskull Back Scale -->
 		</gd_items>
 	</gd_rule>
 	<!-- Fresh Meat -->
@@ -1663,7 +1663,7 @@
 		</gd_npc_groups>
 		<gd_items>
 			<!-- Level 61 -->
-			<gd_item id="152015017" name="Fresh Marbled Meat" />
+			<gd_item id="152015017" /><!-- Fresh Marbled Meat -->
 		</gd_items>
 	</gd_rule>
 	<!-- Ceramium Fragment -->
@@ -1672,7 +1672,7 @@
 			<gd_world wd_type="BALAUREA_HIGH" />
 		</gd_worlds>
 		<gd_items>
-			<gd_item id="152012578" name="Ceramium Fragment" />
+			<gd_item id="152012578" /><!-- Ceramium Fragment -->
 		</gd_items>
 	</gd_rule>
 </global_rules>

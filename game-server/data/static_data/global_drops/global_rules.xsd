@@ -49,7 +49,6 @@
 
 	<xs:complexType name="GlobalDropItem">
 		<xs:attribute type="xs:int" name="id" use="required" />
-		<xs:attribute type="xs:string" name="name" use="optional" />
 		<xs:attribute type="xs:int" name="chance" default="100" />
 	</xs:complexType>
 
@@ -91,7 +90,6 @@
 
 	<xs:complexType name="GlobalDropMap">
 		<xs:attribute type="xs:int" name="map_id" use="required" />
-		<xs:attribute type="xs:string" name="name" use="required" />
 	</xs:complexType>
 
 	<xs:complexType name="GlobalDropTribes">
@@ -112,7 +110,6 @@
 
 	<xs:complexType name="GlobalDropNpc">
 		<xs:attribute type="xs:int" name="npc_id" use="required" />
-		<xs:attribute type="xs:string" name="name" use="required" />
 	</xs:complexType>
 
 	<xs:complexType name="GlobalDropNpcNames">
@@ -144,7 +141,6 @@
 
 	<xs:complexType name="GlobalDropExcludedNpc">
 		<xs:attribute type="xs:int" name="npc_id" use="required" />
-		<xs:attribute type="xs:string" name="name" use="required" />
 	</xs:complexType>
 
 	<xs:complexType name="GlobalDropZones">

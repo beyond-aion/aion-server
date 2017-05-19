@@ -4,133 +4,133 @@
 		<event_drops>
 			<gd_rule rule_name="Easter Eggs" base_chance="100" fixed_chance="true">
 				<gd_maps>
-					<gd_map map_id="600100000" name="Levinshor" />
+					<gd_map map_id="600100000" /><!-- Levinshor -->
 				</gd_maps>
 				<gd_npcs>
-					<gd_npc npc_id="235346" name="Tomul Brawler"/>
-					<gd_npc npc_id="235347" name="Tomul Cutthroat"/>
-					<gd_npc npc_id="235348" name="Tomul Shaman"/>
-					<gd_npc npc_id="235349" name="Tomul Aquamancer"/>
-					<gd_npc npc_id="235350" name="Denku Feralclaw"/>
-					<gd_npc npc_id="235351" name="Denku Fang"/>
-					<gd_npc npc_id="235352" name="Denku Restorer"/>
-					<gd_npc npc_id="235353" name="Denku Feralmage"/>
-					<gd_npc npc_id="235354" name="Tomul Brawler"/>
-					<gd_npc npc_id="235355" name="Tomul Cutthroat"/>
-					<gd_npc npc_id="235356" name="Tomul Shaman"/>
-					<gd_npc npc_id="235357" name="Tomul Aquamancer"/>
-					<gd_npc npc_id="235358" name="Denku Feralclaw"/>
-					<gd_npc npc_id="235359" name="Denku Fang"/>
-					<gd_npc npc_id="235360" name="Denku Restorer"/>
-					<gd_npc npc_id="235361" name="Denku Feralmage"/>
-					<gd_npc npc_id="235362" name="Tomul Brawler"/>
-					<gd_npc npc_id="235363" name="Tomul Cutthroat"/>
-					<gd_npc npc_id="235364" name="Tomul Shaman"/>
-					<gd_npc npc_id="235365" name="Tomul Aquamancer"/>
-					<gd_npc npc_id="235366" name="Denku Feralclaw"/>
-					<gd_npc npc_id="235367" name="Denku Fang"/>
-					<gd_npc npc_id="235368" name="Denku Restorer"/>
-					<gd_npc npc_id="235369" name="Denku Feralmage"/>
-					<gd_npc npc_id="235370" name="Tomul Brawler"/>
-					<gd_npc npc_id="235371" name="Tomul Cutthroat"/>
-					<gd_npc npc_id="235372" name="Tomul Shaman"/>
-					<gd_npc npc_id="235373" name="Tomul Aquamancer"/>
-					<gd_npc npc_id="235374" name="Denku Feralclaw"/>
-					<gd_npc npc_id="235375" name="Denku Fang"/>
-					<gd_npc npc_id="235376" name="Denku Restorer"/>
-					<gd_npc npc_id="235377" name="Denku Feralmage"/>
-					<gd_npc npc_id="235378" name="Tomul Brawler"/>
-					<gd_npc npc_id="235379" name="Tomul Cutthroat"/>
-					<gd_npc npc_id="235380" name="Tomul Shaman"/>
-					<gd_npc npc_id="235381" name="Tomul Aquamancer"/>
-					<gd_npc npc_id="235382" name="Denku Feralclaw"/>
-					<gd_npc npc_id="235383" name="Denku Fang"/>
-					<gd_npc npc_id="235384" name="Denku Restorer"/>
-					<gd_npc npc_id="235385" name="Denku Feralmage"/>
+					<gd_npc npc_id="235346"/><!-- Tomul Brawler -->
+					<gd_npc npc_id="235347"/><!-- Tomul Cutthroat -->
+					<gd_npc npc_id="235348"/><!-- Tomul Shaman -->
+					<gd_npc npc_id="235349"/><!-- Tomul Aquamancer -->
+					<gd_npc npc_id="235350"/><!-- Denku Feralclaw -->
+					<gd_npc npc_id="235351"/><!-- Denku Fang -->
+					<gd_npc npc_id="235352"/><!-- Denku Restorer -->
+					<gd_npc npc_id="235353"/><!-- Denku Feralmage -->
+					<gd_npc npc_id="235354"/><!-- Tomul Brawler -->
+					<gd_npc npc_id="235355"/><!-- Tomul Cutthroat -->
+					<gd_npc npc_id="235356"/><!-- Tomul Shaman -->
+					<gd_npc npc_id="235357"/><!-- Tomul Aquamancer -->
+					<gd_npc npc_id="235358"/><!-- Denku Feralclaw -->
+					<gd_npc npc_id="235359"/><!-- Denku Fang -->
+					<gd_npc npc_id="235360"/><!-- Denku Restorer -->
+					<gd_npc npc_id="235361"/><!-- Denku Feralmage -->
+					<gd_npc npc_id="235362"/><!-- Tomul Brawler -->
+					<gd_npc npc_id="235363"/><!-- Tomul Cutthroat -->
+					<gd_npc npc_id="235364"/><!-- Tomul Shaman -->
+					<gd_npc npc_id="235365"/><!-- Tomul Aquamancer -->
+					<gd_npc npc_id="235366"/><!-- Denku Feralclaw -->
+					<gd_npc npc_id="235367"/><!-- Denku Fang -->
+					<gd_npc npc_id="235368"/><!-- Denku Restorer -->
+					<gd_npc npc_id="235369"/><!-- Denku Feralmage -->
+					<gd_npc npc_id="235370"/><!-- Tomul Brawler -->
+					<gd_npc npc_id="235371"/><!-- Tomul Cutthroat -->
+					<gd_npc npc_id="235372"/><!-- Tomul Shaman -->
+					<gd_npc npc_id="235373"/><!-- Tomul Aquamancer -->
+					<gd_npc npc_id="235374"/><!-- Denku Feralclaw -->
+					<gd_npc npc_id="235375"/><!-- Denku Fang -->
+					<gd_npc npc_id="235376"/><!-- Denku Restorer -->
+					<gd_npc npc_id="235377"/><!-- Denku Feralmage -->
+					<gd_npc npc_id="235378"/><!-- Tomul Brawler -->
+					<gd_npc npc_id="235379"/><!-- Tomul Cutthroat -->
+					<gd_npc npc_id="235380"/><!-- Tomul Shaman -->
+					<gd_npc npc_id="235381"/><!-- Tomul Aquamancer -->
+					<gd_npc npc_id="235382"/><!-- Denku Feralclaw -->
+					<gd_npc npc_id="235383"/><!-- Denku Fang -->
+					<gd_npc npc_id="235384"/><!-- Denku Restorer -->
+					<gd_npc npc_id="235385"/><!-- Denku Feralmage -->
 				</gd_npcs>
 				<gd_items>
-					<gd_item id="186000175" name="[Event] Mottled Egg" />
+					<gd_item id="186000175" /><!-- [Event] Mottled Egg -->
 				</gd_items>
 			</gd_rule>
 			<gd_rule rule_name="Vocolith Specials: Medals (Elyos)" base_chance="100" min_count="3" max_count="5" fixed_chance="true" member_limit="6" restriction_race="ELYOS">
 				<gd_maps>
-					<gd_map map_id="600100000" name="Levinshor" />
+					<gd_map map_id="600100000" /><!-- Levinshor -->
 				</gd_maps>
 				<gd_npcs>
-					<gd_npc npc_id="235217" name="Lava Arm Cruego" />
-					<gd_npc npc_id="235218" name="Cruel Lamia" />
-					<gd_npc npc_id="235219" name="Destroyer Feld" />
-					<gd_npc npc_id="235220" name="Ruthless Tyrannica" />
+					<gd_npc npc_id="235217" /><!-- Lava Arm Cruego -->
+					<gd_npc npc_id="235218" /><!-- Cruel Lamia -->
+					<gd_npc npc_id="235219" /><!-- Destroyer Feld -->
+					<gd_npc npc_id="235220" /><!-- Ruthless Tyrannica -->
 				</gd_npcs>
 				<gd_items>
-					<gd_item id="186000101" name="Radiant Token" />
-					<gd_item id="186000102" name="Fortuneers Token" />
+					<gd_item id="186000101" /><!-- Radiant Token -->
+					<gd_item id="186000102" /><!-- Fortuneers Token -->
 				</gd_items>
 			</gd_rule>
 			<gd_rule rule_name="Vocolith Specials: Medals (Asmodians)" base_chance="100" min_count="3" max_count="5" fixed_chance="true" member_limit="6" restriction_race="ASMODIANS">
 				<gd_maps>
-					<gd_map map_id="600100000" name="Levinshor" />
+					<gd_map map_id="600100000" /><!-- Levinshor -->
 				</gd_maps>
 				<gd_npcs>
-					<gd_npc npc_id="235217" name="Lava Arm Cruego" />
-					<gd_npc npc_id="235218" name="Cruel Lamia" />
-					<gd_npc npc_id="235219" name="Destroyer Feld" />
-					<gd_npc npc_id="235220" name="Ruthless Tyrannica" />
+					<gd_npc npc_id="235217" /><!-- Lava Arm Cruego -->
+					<gd_npc npc_id="235218" /><!-- Cruel Lamia -->
+					<gd_npc npc_id="235219" /><!-- Destroyer Feld -->
+					<gd_npc npc_id="235220" /><!-- Ruthless Tyrannica -->
 				</gd_npcs>
 				<gd_items>
-					<gd_item id="186000104" name="Crusader Token" />
-					<gd_item id="186000105" name="Daemon Token" />
+					<gd_item id="186000104" /><!-- Crusader Token -->
+					<gd_item id="186000105" /><!-- Daemon Token -->
 				</gd_items>
 			</gd_rule>
 			<gd_rule rule_name="Vocolith Specials: Blood Marks" base_chance="80" min_count="20" fixed_chance="true" member_limit="6">
 				<gd_maps>
-					<gd_map map_id="600100000" name="Levinshor" />
+					<gd_map map_id="600100000" /><!-- Levinshor -->
 				</gd_maps>
 				<gd_npcs>
-					<gd_npc npc_id="235217" name="Lava Arm Cruego" />
-					<gd_npc npc_id="235218" name="Cruel Lamia" />
-					<gd_npc npc_id="235219" name="Destroyer Feld" />
-					<gd_npc npc_id="235220" name="Ruthless Tyrannica" />
+					<gd_npc npc_id="235217" /><!-- Lava Arm Cruego -->
+					<gd_npc npc_id="235218" /><!-- Cruel Lamia -->
+					<gd_npc npc_id="235219" /><!-- Destroyer Feld -->
+					<gd_npc npc_id="235220" /><!-- Ruthless Tyrannica -->
 				</gd_npcs>
 				<gd_items>
-					<gd_item id="186000236" name="Blood Mark" />
+					<gd_item id="186000236" /><!-- Blood Mark -->
 				</gd_items>
 			</gd_rule>
 			<gd_rule rule_name="Vocolith Specials: Vasharti Equipment Chest" base_chance="25" fixed_chance="true" member_limit="6">
 				<gd_maps>
-					<gd_map map_id="600100000" name="Levinshor" />
+					<gd_map map_id="600100000" /><!-- Levinshor -->
 				</gd_maps>
 				<gd_npcs>
-					<gd_npc npc_id="235217" name="Lava Arm Cruego" />
-					<gd_npc npc_id="235218" name="Cruel Lamia" />
-					<gd_npc npc_id="235219" name="Destroyer Feld" />
-					<gd_npc npc_id="235220" name="Ruthless Tyrannica" />
+					<gd_npc npc_id="235217" /><!-- Lava Arm Cruego -->
+					<gd_npc npc_id="235218" /><!-- Cruel Lamia -->
+					<gd_npc npc_id="235219" /><!-- Destroyer Feld -->
+					<gd_npc npc_id="235220" /><!-- Ruthless Tyrannica -->
 				</gd_npcs>
 				<gd_items>
-					<gd_item id="188053702" name="Vasharti's Equipment Box" />
+					<gd_item id="188053702" /><!-- Vasharti's Equipment Box -->
 				</gd_items>
 			</gd_rule>
 			<gd_rule rule_name="Vocolith Specials: Mythic Chests" base_chance="10" fixed_chance="true" max_drop_rule="2">
 				<gd_maps>
-					<gd_map map_id="600100000" name="Levinshor" />
+					<gd_map map_id="600100000" /><!-- Levinshor -->
 				</gd_maps>
 				<gd_npcs>
-					<gd_npc npc_id="235217" name="Lava Arm Cruego" />
-					<gd_npc npc_id="235218" name="Cruel Lamia" />
-					<gd_npc npc_id="235219" name="Destroyer Feld" />
-					<gd_npc npc_id="235220" name="Ruthless Tyrannica" />
+					<gd_npc npc_id="235217" /><!-- Lava Arm Cruego -->
+					<gd_npc npc_id="235218" /><!-- Cruel Lamia -->
+					<gd_npc npc_id="235219" /><!-- Destroyer Feld -->
+					<gd_npc npc_id="235220" /><!-- Ruthless Tyrannica -->
 				</gd_npcs>
 				<gd_items>
-					<gd_item id="188053006" name="[Event] Hyperion's Mythic Armor Chest" />
-					<gd_item id="188053006" name="[Event] Hyperion's Mythic Armor Chest" />
-					<gd_item id="188053007" name="[Event] Hyperion's Mythic Weapon Chest" />
-					<gd_item id="188053007" name="[Event] Hyperion's Mythic Weapon Chest" />
-					<gd_item id="188053005" name="[Event] Hyperion's Wing Chest" />
-					<gd_item id="188053704" name="Vasharti Brigade General's Weapon Box" />
-					<gd_item id="188053704" name="Vasharti Brigade General's Weapon Box" />
-					<gd_item id="188053705" name="Vasharti Brigade General's Armor Box" />
-					<gd_item id="188053705" name="Vasharti Brigade General's Armor Box" />
-					<gd_item id="187000155" name="Brigade General Vasharti's Wings" />
+					<gd_item id="188053006" /><!-- [Event] Hyperion's Mythic Armor Chest -->
+					<gd_item id="188053006" /><!-- [Event] Hyperion's Mythic Armor Chest -->
+					<gd_item id="188053007" /><!-- [Event] Hyperion's Mythic Weapon Chest -->
+					<gd_item id="188053007" /><!-- [Event] Hyperion's Mythic Weapon Chest -->
+					<gd_item id="188053005" /><!-- [Event] Hyperion's Wing Chest -->
+					<gd_item id="188053704" /><!-- Vasharti Brigade General's Weapon Box -->
+					<gd_item id="188053704" /><!-- Vasharti Brigade General's Weapon Box -->
+					<gd_item id="188053705" /><!-- Vasharti Brigade General's Armor Box -->
+					<gd_item id="188053705" /><!-- Vasharti Brigade General's Armor Box -->
+					<gd_item id="187000155" /><!-- Brigade General Vasharti's Wings -->
 				</gd_items>
 			</gd_rule>
 		</event_drops>

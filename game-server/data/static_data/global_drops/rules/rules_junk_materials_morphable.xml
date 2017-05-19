@@ -3,18 +3,18 @@
 	<!-- Idian Depths, Levinshor, Kaldor, Enshar, Cygnea drops -->
 	<gd_rule rule_name="Morphable Insect Parts" base_chance="25" min_diff="-4" max_diff="5">
 		<gd_items>
-			<gd_item id="182007000" name="Pitted Carapace" />
-			<gd_item id="182007018" name="Bumpy Carapace" />
-			<gd_item id="182007036" name="Intact Rare Carapace" />
-			<!-- <gd_item id="186000261" name="Ruined Rare Carapace"/> -->
-			<gd_item id="186000279" name="Worn Rare Carapace" />
-			<gd_item id="186000297" name="Flawless Rare Carapace" />
-			<gd_item id="182007009" name="Pitted Feeler" />
-			<gd_item id="182007027" name="Jagged Feeler" />
-			<gd_item id="182007045" name="Intact Rare Feeler" />
-			<!-- <gd_item id="186000270" name="Ruined Rare Insect Leg"/> -->
-			<gd_item id="186000288" name="Worn Rare Insect Leg" />
-			<gd_item id="186000306" name="Flawless Rare Insect Leg" />
+			<gd_item id="182007000" /><!-- Pitted Carapace -->
+			<gd_item id="182007018" /><!-- Bumpy Carapace -->
+			<gd_item id="182007036" /><!-- Intact Rare Carapace -->
+			<!-- <gd_item id="186000261"/> --><!-- Ruined Rare Carapace -->
+			<gd_item id="186000279" /><!-- Worn Rare Carapace -->
+			<gd_item id="186000297" /><!-- Flawless Rare Carapace -->
+			<gd_item id="182007009" /><!-- Pitted Feeler -->
+			<gd_item id="182007027" /><!-- Jagged Feeler -->
+			<gd_item id="182007045" /><!-- Intact Rare Feeler -->
+			<!-- <gd_item id="186000270"/> --><!-- Ruined Rare Insect Leg -->
+			<gd_item id="186000288" /><!-- Worn Rare Insect Leg -->
+			<gd_item id="186000306" /><!-- Flawless Rare Insect Leg -->
 		</gd_items>
 		<gd_npc_groups>
 			<gd_npc_group group="CRITON" />
@@ -32,18 +32,18 @@
 	</gd_rule>
 	<gd_rule rule_name="Morphable Beast Parts" base_chance="25" min_diff="-4" max_diff="5">
 		<gd_items>
-			<gd_item id="182007001" name="Splintered Talon" />
-			<gd_item id="182007019" name="Fractured Talon" />
-			<gd_item id="182007037" name="Intact Talon" />
-			<!-- <gd_item id="186000262" name="Ruined Beast Claw"/> -->
-			<gd_item id="186000280" name="Worn Beast Claw" />
-			<gd_item id="186000298" name="Flawless Beast Claw" />
-			<gd_item id="182007010" name="Splintered Marrowbone" />
-			<gd_item id="182007028" name="Fractured Marrowbone" />
-			<gd_item id="182007046" name="Intact Marrowbone" />
-			<!-- <gd_item id="186000271" name="Ruined Beast Bone" /> -->
-			<gd_item id="186000289" name="Worn Beast Bone" />
-			<gd_item id="186000307" name="Flawless Beast Bone" />
+			<gd_item id="182007001" /><!-- Splintered Talon -->
+			<gd_item id="182007019" /><!-- Fractured Talon -->
+			<gd_item id="182007037" /><!-- Intact Talon -->
+			<!-- <gd_item id="186000262"/> --><!-- Ruined Beast Claw -->
+			<gd_item id="186000280" /><!-- Worn Beast Claw -->
+			<gd_item id="186000298" /><!-- Flawless Beast Claw -->
+			<gd_item id="182007010" /><!-- Splintered Marrowbone -->
+			<gd_item id="182007028" /><!-- Fractured Marrowbone -->
+			<gd_item id="182007046" /><!-- Intact Marrowbone -->
+			<!-- <gd_item id="186000271" /> --><!-- Ruined Beast Bone -->
+			<gd_item id="186000289" /><!-- Worn Beast Bone -->
+			<gd_item id="186000307" /><!-- Flawless Beast Bone -->
 		</gd_items>
 		<gd_npc_groups>
 			<gd_npc_group group="BIGHORNDEER" />
@@ -70,18 +70,18 @@
 	</gd_rule>
 	<gd_rule rule_name="Morphable Minerals" base_chance="25" min_diff="-4" max_diff="5">
 		<gd_items>
-			<gd_item id="182007002" name="Pitted Ore" />
-			<gd_item id="182007020" name="Jagged Ore" />
-			<gd_item id="182007038" name="Intact Rare Ore" />
-			<!-- <gd_item id="186000263" name="Ruined Rare Ore"/> -->
-			<gd_item id="186000281" name="Worn Rare Ore" />
-			<gd_item id="186000299" name="Flawless Rare Ore" />
-			<gd_item id="182007011" name="Inactive Metal Powder" />
-			<gd_item id="182007029" name="Barren Metal Powder" />
-			<gd_item id="182007047" name="Intact Metal Powder" />
-			<!-- <gd_item id="186000272" name="Ruined Metal Powder"/> -->
-			<gd_item id="186000290" name="Worn Metal Powder" />
-			<gd_item id="186000308" name="Flawless Metal Powder" />
+			<gd_item id="182007002" /><!-- Pitted Ore -->
+			<gd_item id="182007020" /><!-- Jagged Ore -->
+			<gd_item id="182007038" /><!-- Intact Rare Ore -->
+			<!-- <gd_item id="186000263"/> --><!-- Ruined Rare Ore -->
+			<gd_item id="186000281" /><!-- Worn Rare Ore -->
+			<gd_item id="186000299" /><!-- Flawless Rare Ore -->
+			<gd_item id="182007011" /><!-- Inactive Metal Powder -->
+			<gd_item id="182007029" /><!-- Barren Metal Powder -->
+			<gd_item id="182007047" /><!-- Intact Metal Powder -->
+			<!-- <gd_item id="186000272"/> --><!-- Ruined Metal Powder -->
+			<gd_item id="186000290" /><!-- Worn Metal Powder -->
+			<gd_item id="186000308" /><!-- Flawless Metal Powder -->
 		</gd_items>
 		<gd_npc_groups>
 			<gd_npc_group group="ANCIENTARM" />
@@ -100,18 +100,18 @@
 	</gd_rule>
 	<gd_rule rule_name="Morphable Crystals" base_chance="25" min_diff="-4" max_diff="5">
 		<gd_items>
-			<gd_item id="182007003" name="Pitted Idium Crystal" />
-			<gd_item id="182007021" name="Jagged Idium Crystal" />
-			<gd_item id="182007039" name="Intact Idium Crystal" />
-			<!-- <gd_item id="186000264" name="Ruined Idium Crystal"/> -->
-			<gd_item id="186000282" name="Worn Idium Crystal" />
-			<gd_item id="186000300" name="Flawless Idium Crystal" />
-			<gd_item id="182007012" name="Clouded Crystal" />
-			<gd_item id="182007030" name="Hazy Crystal" />
-			<gd_item id="182007048" name="Intact Opaque Crystal" />
-			<!-- <gd_item id="186000273" name="Ruined Hazy Crystal"/> -->
-			<gd_item id="186000291" name="Worn Hazy Crystal" />
-			<gd_item id="186000309" name="Flawless Hazy Crystal" />
+			<gd_item id="182007003" /><!-- Pitted Idium Crystal -->
+			<gd_item id="182007021" /><!-- Jagged Idium Crystal -->
+			<gd_item id="182007039" /><!-- Intact Idium Crystal -->
+			<!-- <gd_item id="186000264"/> --><!-- Ruined Idium Crystal -->
+			<gd_item id="186000282" /><!-- Worn Idium Crystal -->
+			<gd_item id="186000300" /><!-- Flawless Idium Crystal -->
+			<gd_item id="182007012" /><!-- Clouded Crystal -->
+			<gd_item id="182007030" /><!-- Hazy Crystal -->
+			<gd_item id="182007048" /><!-- Intact Opaque Crystal -->
+			<!-- <gd_item id="186000273"/> --><!-- Ruined Hazy Crystal -->
+			<gd_item id="186000291" /><!-- Worn Hazy Crystal -->
+			<gd_item id="186000309" /><!-- Flawless Hazy Crystal -->
 		</gd_items>
 		<gd_npc_groups>
 			<gd_npc_group group="COMAD" />
@@ -134,18 +134,18 @@
 	</gd_rule>
 	<gd_rule rule_name="Morphable Elim Essences" base_chance="25" min_diff="-4" max_diff="5">
 		<gd_items>
-			<gd_item id="182007004" name="Chunky Elim Sap" />
-			<gd_item id="182007022" name="Lumpy Elim Sap" />
-			<gd_item id="182007040" name="Intact Elim Sap" />
-			<!-- <gd_item id="186000265" name="Ruined Ancient Elim Sap" /> -->
-			<gd_item id="186000283" name="Worn Ancient Elim Sap" />
-			<gd_item id="186000301" name="Flawless Ancient Elim Sap" />
-			<gd_item id="182007013" name="Molding Elim Essence" />
-			<gd_item id="182007031" name="Decayed Elim Essence" />
-			<gd_item id="182007049" name="Intact Elim Essence" />
-			<!-- <gd_item id="186000274" name="Ruined Ancient Elim Essence" /> -->
-			<gd_item id="186000292" name="Worn Ancient Elim Essence" />
-			<gd_item id="186000310" name="Flawless Ancient Elim Essence" />
+			<gd_item id="182007004" /><!-- Chunky Elim Sap -->
+			<gd_item id="182007022" /><!-- Lumpy Elim Sap -->
+			<gd_item id="182007040" /><!-- Intact Elim Sap -->
+			<!-- <gd_item id="186000265" /> --><!-- Ruined Ancient Elim Sap -->
+			<gd_item id="186000283" /><!-- Worn Ancient Elim Sap -->
+			<gd_item id="186000301" /><!-- Flawless Ancient Elim Sap -->
+			<gd_item id="182007013" /><!-- Molding Elim Essence -->
+			<gd_item id="182007031" /><!-- Decayed Elim Essence -->
+			<gd_item id="182007049" /><!-- Intact Elim Essence -->
+			<!-- <gd_item id="186000274" /> --><!-- Ruined Ancient Elim Essence -->
+			<gd_item id="186000292" /><!-- Worn Ancient Elim Essence -->
+			<gd_item id="186000310" /><!-- Flawless Ancient Elim Essence -->
 		</gd_items>
 		<gd_npc_groups>
 			<gd_npc_group group="CORN" />
@@ -166,18 +166,18 @@
 	</gd_rule>
 	<gd_rule rule_name="Morphable Danuar Pieces" base_chance="25" min_diff="-4" max_diff="5">
 		<gd_items>
-			<gd_item id="182007005" name="Pitted Accessory Bits" />
-			<gd_item id="182007023" name="Jagged Accessory Bits" />
-			<gd_item id="182007041" name="Intact  Accessory Bits" />
-			<!-- <gd_item id="186000266" name="Ruined Danuar Accessory Piece" /> -->
-			<gd_item id="186000284" name="Worn Danuar Accessory Piece" />
-			<gd_item id="186000302" name="Flawless Danuar Accessory Piece" />
-			<gd_item id="182007014" name="Pitted Relic Bits" />
-			<gd_item id="182007032" name="Jagged Relic Bits" />
-			<gd_item id="182007050" name="Intact Relic Bits" />
-			<!-- <gd_item id="186000275" name="Ruined Danuar Relic Piece" /> -->
-			<gd_item id="186000293" name="Worn Danuar Relic Piece" />
-			<gd_item id="186000311" name="Flawless Danuar Relic Piece" />
+			<gd_item id="182007005" /><!-- Pitted Accessory Bits -->
+			<gd_item id="182007023" /><!-- Jagged Accessory Bits -->
+			<gd_item id="182007041" /><!-- Intact  Accessory Bits -->
+			<!-- <gd_item id="186000266" /> --><!-- Ruined Danuar Accessory Piece -->
+			<gd_item id="186000284" /><!-- Worn Danuar Accessory Piece -->
+			<gd_item id="186000302" /><!-- Flawless Danuar Accessory Piece -->
+			<gd_item id="182007014" /><!-- Pitted Relic Bits -->
+			<gd_item id="182007032" /><!-- Jagged Relic Bits -->
+			<gd_item id="182007050" /><!-- Intact Relic Bits -->
+			<!-- <gd_item id="186000275" /> --><!-- Ruined Danuar Relic Piece -->
+			<gd_item id="186000293" /><!-- Worn Danuar Relic Piece -->
+			<gd_item id="186000311" /><!-- Flawless Danuar Relic Piece -->
 		</gd_items>
 		<gd_races>
 			<gd_race race="DEMIHUMANOID" />
@@ -191,18 +191,18 @@
 	</gd_rule>
 	<gd_rule rule_name="Morphable Spirit Essences" base_chance="25" min_diff="-4" max_diff="5">
 		<gd_items>
-			<gd_item id="182007006" name="Damaged Spirit Fragment" />
-			<gd_item id="182007024" name="Rough Spirit Fragment" />
-			<gd_item id="182007042" name="Intact Spirit Fragment" />
-			<!-- <gd_item id="186000267" name="Ruined Spirit Fragment" /> -->
-			<gd_item id="186000285" name="Worn Spirit Fragment" />
-			<gd_item id="186000303" name="Flawless Spirit Fragment" />
-			<gd_item id="182007015" name="Damaged Spirit Essence" />
-			<gd_item id="182007033" name="Rough Spirit Essence" />
-			<gd_item id="182007051" name="Intact Spirit Essence" />
-			<!-- <gd_item id="186000276" name="Spirited Ruined Essence" /> -->
-			<gd_item id="186000294" name="Worn Spirited Essence" />
-			<gd_item id="186000312" name="Flawless Spirited Essence" />
+			<gd_item id="182007006" /><!-- Damaged Spirit Fragment -->
+			<gd_item id="182007024" /><!-- Rough Spirit Fragment -->
+			<gd_item id="182007042" /><!-- Intact Spirit Fragment -->
+			<!-- <gd_item id="186000267" /> --><!-- Ruined Spirit Fragment -->
+			<gd_item id="186000285" /><!-- Worn Spirit Fragment -->
+			<gd_item id="186000303" /><!-- Flawless Spirit Fragment -->
+			<gd_item id="182007015" /><!-- Damaged Spirit Essence -->
+			<gd_item id="182007033" /><!-- Rough Spirit Essence -->
+			<gd_item id="182007051" /><!-- Intact Spirit Essence -->
+			<!-- <gd_item id="186000276" /> --><!-- Spirited Ruined Essence -->
+			<gd_item id="186000294" /><!-- Worn Spirited Essence -->
+			<gd_item id="186000312" /><!-- Flawless Spirited Essence -->
 		</gd_items>
 		<gd_npc_names>
 			<gd_npc_name function="CONTAINS" value="spirit" />
@@ -218,18 +218,18 @@
 	</gd_rule>
 	<gd_rule rule_name="Morphable Old Manastones" base_chance="25" min_diff="-4" max_diff="5">
 		<gd_items>
-			<gd_item id="182007007" name="Old Used Manastone" />
-			<gd_item id="182007025" name="Jagged Old Manastone" />
-			<gd_item id="182007043" name="Intact Ancient Manastone" />
-			<!-- <gd_item id="186000268" name="Ruined Ancient Manastone Piece" /> -->
-			<gd_item id="186000286" name="Worn Ancient Manastone Piece" />
-			<gd_item id="186000304" name="Flawless Ancient Manastone Piece" />
-			<gd_item id="182007016" name="Ancient Used Manastone" />
-			<gd_item id="182007034" name="Anient Old Manastone" />
-			<gd_item id="182007052" name="Intact Ancient Manastone" />
-			<!-- <gd_item id="186000277" name="Ruined Ancient Manastone Fragment" /> -->
-			<gd_item id="186000295" name="Worn Ancient Manastone Fragment" />
-			<gd_item id="186000313" name="Flawless Ancient Manastone Fragment" />
+			<gd_item id="182007007" /><!-- Old Used Manastone -->
+			<gd_item id="182007025" /><!-- Jagged Old Manastone -->
+			<gd_item id="182007043" /><!-- Intact Ancient Manastone -->
+			<!-- <gd_item id="186000268" /> --><!-- Ruined Ancient Manastone Piece -->
+			<gd_item id="186000286" /><!-- Worn Ancient Manastone Piece -->
+			<gd_item id="186000304" /><!-- Flawless Ancient Manastone Piece -->
+			<gd_item id="182007016" /><!-- Ancient Used Manastone -->
+			<gd_item id="182007034" /><!-- Anient Old Manastone -->
+			<gd_item id="182007052" /><!-- Intact Ancient Manastone -->
+			<!-- <gd_item id="186000277" /> --><!-- Ruined Ancient Manastone Fragment -->
+			<gd_item id="186000295" /><!-- Worn Ancient Manastone Fragment -->
+			<gd_item id="186000313" /><!-- Flawless Ancient Manastone Fragment -->
 		</gd_items>
 		<gd_npc_groups>
 			<gd_npc_group group="CHERUBIM4" />
@@ -263,18 +263,18 @@
 	</gd_rule>
 	<gd_rule rule_name="Morphable Skin" base_chance="25" min_diff="-4" max_diff="5">
 		<gd_items>
-			<gd_item id="182007008" name="Pitted Scale" />
-			<gd_item id="182007026" name="Jagged Scale" />
-			<gd_item id="182007044" name="Intact Rare Scale" />
-			<!-- <gd_item id="186000269" name="Ruined Rare Serpent Scale" /> -->
-			<gd_item id="186000287" name="Worn Rare Serpent Scale" />
-			<gd_item id="186000305" name="Flawless Rare Serpent Scale" />
-			<gd_item id="182007017" name="Ruptured Membrane" />
-			<gd_item id="182007035" name="Holey Membrane" />
-			<gd_item id="182007053" name="Intact Rare Membrane" />
-			<!-- <gd_item id="186000278" name="Ruined Rare Serpent Membrane" /> -->
-			<gd_item id="186000296" name="Worn Rare Serpent Membrane" />
-			<gd_item id="186000314" name="Flawless Rare Serpent Membrane" />
+			<gd_item id="182007008" /><!-- Pitted Scale -->
+			<gd_item id="182007026" /><!-- Jagged Scale -->
+			<gd_item id="182007044" /><!-- Intact Rare Scale -->
+			<!-- <gd_item id="186000269" /> --><!-- Ruined Rare Serpent Scale -->
+			<gd_item id="186000287" /><!-- Worn Rare Serpent Scale -->
+			<gd_item id="186000305" /><!-- Flawless Rare Serpent Scale -->
+			<gd_item id="182007017" /><!-- Ruptured Membrane -->
+			<gd_item id="182007035" /><!-- Holey Membrane -->
+			<gd_item id="182007053" /><!-- Intact Rare Membrane -->
+			<!-- <gd_item id="186000278" /> --><!-- Ruined Rare Serpent Membrane -->
+			<gd_item id="186000296" /><!-- Worn Rare Serpent Membrane -->
+			<gd_item id="186000314" /><!-- Flawless Rare Serpent Membrane -->
 		</gd_items>
 		<gd_npc_groups>
 			<gd_npc_group group="CELLATU" />

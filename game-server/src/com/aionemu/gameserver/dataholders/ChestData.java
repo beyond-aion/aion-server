@@ -10,7 +10,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import com.aionemu.gameserver.model.templates.chest.ChestTemplate;
 
-import gnu.trove.map.hash.THashMap;
 import gnu.trove.map.hash.TIntObjectHashMap;
 
 /**
@@ -25,7 +24,6 @@ public class ChestData {
 
 	/** A map containing all npc templates */
 	private TIntObjectHashMap<ChestTemplate> chestData = new TIntObjectHashMap<>();
-	private THashMap<String, ChestTemplate> namedChests = new THashMap<>();
 
 	/**
 	 * Initializes all maps for subsequent use - Don't nullify initial chest list as it will be used during reload
@@ -35,12 +33,9 @@ public class ChestData {
 	 */
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		chestData.clear();
-		namedChests.clear();
 
 		for (ChestTemplate chest : chests) {
 			chestData.put(chest.getNpcId(), chest);
-			if (chest.getName() != null && !chest.getName().isEmpty())
-				namedChests.put(chest.getName(), chest);
 		}
 	}
 

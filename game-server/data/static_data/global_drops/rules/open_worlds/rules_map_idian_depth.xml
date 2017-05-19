@@ -3,8 +3,8 @@
 	<!-- Ancient Coins -->
 	<gd_rule rule_name="Ancient Coins" min_count="1" max_count="10" base_chance="3" min_diff="-5" max_diff="5" fixed_chance="true">
 		<gd_maps>
-			<gd_map map_id="210090000" name="Idian Depths Light" />
-			<gd_map map_id="220100000" name="Idian Depths Dark" />
+			<gd_map map_id="210090000" /><!-- Idian Depths Light -->
+			<gd_map map_id="220100000" /><!-- Idian Depths Dark -->
 		</gd_maps>
 		<gd_ratings>
 			<gd_rating rating="NORMAL" />
@@ -14,14 +14,14 @@
 		</gd_ratings>
 		<gd_items>
 			<!-- Level 65 -->
-			<gd_item id="186000237" name="Ancient Coin" />
+			<gd_item id="186000237" /><!-- Ancient Coin -->
 		</gd_items>
 	</gd_rule>
 	<!-- Superior Power Shards -->
 	<gd_rule rule_name="Superior Power Shards (Stack)" min_count="200" max_count="400" base_chance="0.5" min_diff="-5" max_diff="5">
 		<gd_maps>
-			<gd_map map_id="210090000" name="Idian Depths Light" />
-			<gd_map map_id="220100000" name="Idian Depths Dark" />
+			<gd_map map_id="210090000" /><!-- Idian Depths Light -->
+			<gd_map map_id="220100000" /><!-- Idian Depths Dark -->
 		</gd_maps>
 		<gd_ratings>
 			<gd_rating rating="NORMAL" />
@@ -29,14 +29,14 @@
 			<gd_rating rating="HERO" />
 		</gd_ratings>
 		<gd_items>
-			<gd_item id="169000010" name="Superior Power Shard" />
+			<gd_item id="169000010" /><!-- Superior Power Shard -->
 		</gd_items>
 	</gd_rule>
 	<!-- Ancient Manastones -->
 	<gd_rule rule_name="Ancient Manastones (Rare)" base_chance="4" min_diff="-9" max_diff="0">
 		<gd_maps>
-			<gd_map map_id="210090000" name="Idian Depths Light" />
-			<gd_map map_id="220100000" name="Idian Depths Dark" />
+			<gd_map map_id="210090000" /><!-- Idian Depths Light -->
+			<gd_map map_id="220100000" /><!-- Idian Depths Dark -->
 		</gd_maps>
 		<gd_ratings>
 			<gd_rating rating="NORMAL" />
@@ -46,27 +46,27 @@
 		</gd_ratings>
 		<gd_items>
 			<!-- Level 70 -->
-			<gd_item id="167020041" name="Ancient Manastone: Accuracy +29" />
-			<gd_item id="167020042" name="Ancient Manastone: Evasion +19" />
-			<gd_item id="167020043" name="Ancient Manastone: Parry +29" />
-			<gd_item id="167020044" name="Ancient Manastone: Block +29" />
-			<gd_item id="167020045" name="Ancient Manastone: Crit Strike +18" />
-			<gd_item id="167020046" name="Ancient Manastone: Physical Critical Resistance +20" />
-			<gd_item id="167020047" name="Ancient Manastone: Crit Spell +6" />
-			<gd_item id="167020048" name="Ancient Manastone: Magical Critical Resistance +7" />
-			<gd_item id="167020049" name="Ancient Manastone: Physical Defense +60" />
-			<gd_item id="167020050" name="Ancient Manastone: Resist Magic +17" />
-			<gd_item id="167020051" name="Ancient Manastone: Attack +5" />
-			<gd_item id="167020052" name="Ancient Manastone: Magical Accuracy +16" />
-			<gd_item id="167020053" name="Ancient Manastone: Magic Boost +28" />
-			<gd_item id="167020054" name="Ancient Manastone: Magic Suppression +30" />
-			<gd_item id="167020055" name="Ancient Manastone: Healing Boost +4" />
+			<gd_item id="167020041" /><!-- Ancient Manastone: Accuracy +29 -->
+			<gd_item id="167020042" /><!-- Ancient Manastone: Evasion +19 -->
+			<gd_item id="167020043" /><!-- Ancient Manastone: Parry +29 -->
+			<gd_item id="167020044" /><!-- Ancient Manastone: Block +29 -->
+			<gd_item id="167020045" /><!-- Ancient Manastone: Crit Strike +18 -->
+			<gd_item id="167020046" /><!-- Ancient Manastone: Physical Critical Resistance +20 -->
+			<gd_item id="167020047" /><!-- Ancient Manastone: Crit Spell +6 -->
+			<gd_item id="167020048" /><!-- Ancient Manastone: Magical Critical Resistance +7 -->
+			<gd_item id="167020049" /><!-- Ancient Manastone: Physical Defense +60 -->
+			<gd_item id="167020050" /><!-- Ancient Manastone: Resist Magic +17 -->
+			<gd_item id="167020051" /><!-- Ancient Manastone: Attack +5 -->
+			<gd_item id="167020052" /><!-- Ancient Manastone: Magical Accuracy +16 -->
+			<gd_item id="167020053" /><!-- Ancient Manastone: Magic Boost +28 -->
+			<gd_item id="167020054" /><!-- Ancient Manastone: Magic Suppression +30 -->
+			<gd_item id="167020055" /><!-- Ancient Manastone: Healing Boost +4 -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Ancient Manastones (Legend)" base_chance="2" min_diff="-9" max_diff="0">
 		<gd_maps>
-			<gd_map map_id="210090000" name="Idian Depths Light" />
-			<gd_map map_id="220100000" name="Idian Depths Dark" />
+			<gd_map map_id="210090000" /><!-- Idian Depths Light -->
+			<gd_map map_id="220100000" /><!-- Idian Depths Dark -->
 		</gd_maps>
 		<gd_ratings>
 			<gd_rating rating="NORMAL" />
@@ -76,29 +76,29 @@
 		</gd_ratings>
 		<gd_items>
 			<!-- Level 70 -->
-			<gd_item id="167020024" name="Ancient Manastone: HP +105" />
-			<gd_item id="167020025" name="Ancient Manastone: MP +120" />
-			<gd_item id="167020026" name="Ancient Manastone: Accuracy +31" />
-			<gd_item id="167020027" name="Ancient Manastone: Evasion +21" />
-			<gd_item id="167020028" name="Ancient Manastone: Parry +31" />
-			<gd_item id="167020029" name="Ancient Manastone: Block +31" />
-			<gd_item id="167020030" name="Ancient Manastone: Crit Strike +20" />
-			<gd_item id="167020031" name="Ancient Manastone: Strike Resist +21" />
-			<gd_item id="167020032" name="Ancient Manastone: Crit Spell +7" />
-			<gd_item id="167020033" name="Ancient Manastone: Magical Critical Resistance +8" />
-			<gd_item id="167020034" name="Ancient Manastone: Physical Defense +70" />
-			<gd_item id="167020035" name="Ancient Manastone: Resist Magic +19" />
-			<gd_item id="167020036" name="Ancient Manastone: Attack +6" />
-			<gd_item id="167020037" name="Ancient Manastone: Magical Accuracy +18" />
-			<gd_item id="167020038" name="Ancient Manastone: Magic Boost +30" />
-			<gd_item id="167020039" name="Ancient Manastone: Magic Suppression +40" />
-			<gd_item id="167020040" name="Ancient Manastone: Healing Boost +5" />
+			<gd_item id="167020024" /><!-- Ancient Manastone: HP +105 -->
+			<gd_item id="167020025" /><!-- Ancient Manastone: MP +120 -->
+			<gd_item id="167020026" /><!-- Ancient Manastone: Accuracy +31 -->
+			<gd_item id="167020027" /><!-- Ancient Manastone: Evasion +21 -->
+			<gd_item id="167020028" /><!-- Ancient Manastone: Parry +31 -->
+			<gd_item id="167020029" /><!-- Ancient Manastone: Block +31 -->
+			<gd_item id="167020030" /><!-- Ancient Manastone: Crit Strike +20 -->
+			<gd_item id="167020031" /><!-- Ancient Manastone: Strike Resist +21 -->
+			<gd_item id="167020032" /><!-- Ancient Manastone: Crit Spell +7 -->
+			<gd_item id="167020033" /><!-- Ancient Manastone: Magical Critical Resistance +8 -->
+			<gd_item id="167020034" /><!-- Ancient Manastone: Physical Defense +70 -->
+			<gd_item id="167020035" /><!-- Ancient Manastone: Resist Magic +19 -->
+			<gd_item id="167020036" /><!-- Ancient Manastone: Attack +6 -->
+			<gd_item id="167020037" /><!-- Ancient Manastone: Magical Accuracy +18 -->
+			<gd_item id="167020038" /><!-- Ancient Manastone: Magic Boost +30 -->
+			<gd_item id="167020039" /><!-- Ancient Manastone: Magic Suppression +40 -->
+			<gd_item id="167020040" /><!-- Ancient Manastone: Healing Boost +5 -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Ancient Manastones (Unique)" base_chance="1" min_diff="-9" max_diff="0">
 		<gd_maps>
-			<gd_map map_id="210090000" name="Idian Depths Light" />
-			<gd_map map_id="220100000" name="Idian Depths Dark" />
+			<gd_map map_id="210090000" /><!-- Idian Depths Light -->
+			<gd_map map_id="220100000" /><!-- Idian Depths Dark -->
 		</gd_maps>
 		<gd_ratings>
 			<gd_rating rating="NORMAL" />
@@ -108,22 +108,22 @@
 		</gd_ratings>
 		<gd_items>
 			<!-- Level 70 -->
-			<gd_item id="167020056" name="Ancient Manastone: Accuracy +33" />
-			<gd_item id="167020057" name="Ancient Manastone: Evasion +23" />
-			<gd_item id="167020058" name="Ancient Manastone: Parry +33" />
-			<gd_item id="167020059" name="Ancient Manastone: Block +33" />
-			<gd_item id="167020060" name="Ancient Manastone: Physical Critical Resistance +22" />
-			<gd_item id="167020061" name="Ancient Manastone: Magical Critical Resistance +9" />
-			<gd_item id="167020062" name="Ancient Manastone: Physical Defense +80" />
-			<gd_item id="167020063" name="Ancient Manastone: Attack +7" />
-			<gd_item id="167020064" name="Ancient Manastone: Magical Accuracy +20" />
-			<gd_item id="167020065" name="Ancient Manastone: Magic Boost +32" />
+			<gd_item id="167020056" /><!-- Ancient Manastone: Accuracy +33 -->
+			<gd_item id="167020057" /><!-- Ancient Manastone: Evasion +23 -->
+			<gd_item id="167020058" /><!-- Ancient Manastone: Parry +33 -->
+			<gd_item id="167020059" /><!-- Ancient Manastone: Block +33 -->
+			<gd_item id="167020060" /><!-- Ancient Manastone: Physical Critical Resistance +22 -->
+			<gd_item id="167020061" /><!-- Ancient Manastone: Magical Critical Resistance +9 -->
+			<gd_item id="167020062" /><!-- Ancient Manastone: Physical Defense +80 -->
+			<gd_item id="167020063" /><!-- Ancient Manastone: Attack +7 -->
+			<gd_item id="167020064" /><!-- Ancient Manastone: Magical Accuracy +20 -->
+			<gd_item id="167020065" /><!-- Ancient Manastone: Magic Boost +32 -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Enchantment Stone" base_chance="1">
 		<gd_maps>
-			<gd_map map_id="210090000" name="Idian Depths Light" />
-			<gd_map map_id="220100000" name="Idian Depths Dark" />
+			<gd_map map_id="210090000" /><!-- Idian Depths Light -->
+			<gd_map map_id="220100000" /><!-- Idian Depths Dark -->
 		</gd_maps>
 		<gd_ratings>
 			<gd_rating rating="NORMAL" />
@@ -132,14 +132,14 @@
 			<gd_rating rating="LEGENDARY" />
 		</gd_ratings>
 		<gd_items>
-			<gd_item id="166000194" name="Delta Enchantment Stone" />
-			<gd_item id="166000195" name="Epsilon Enchantment Stone" />
+			<gd_item id="166000194" /><!-- Delta Enchantment Stone -->
+			<gd_item id="166000195" /><!-- Epsilon Enchantment Stone -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Glittering Shell" base_chance="0.03">
 		<gd_maps>
-			<gd_map map_id="210090000" name="Idian Depths Light" />
-			<gd_map map_id="220100000" name="Idian Depths Dark" />
+			<gd_map map_id="210090000" /><!-- Idian Depths Light -->
+			<gd_map map_id="220100000" /><!-- Idian Depths Dark -->
 		</gd_maps>
 		<gd_ratings>
 			<gd_rating rating="NORMAL" />
@@ -148,7 +148,7 @@
 			<gd_rating rating="LEGENDARY" />
 		</gd_ratings>
 		<gd_items>
-			<gd_item id="186000402" name="Glittering Shell" />
+			<gd_item id="186000402" /><!-- Glittering Shell -->
 		</gd_items>
 	</gd_rule>
 </global_rules>

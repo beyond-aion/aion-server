@@ -3,78 +3,78 @@
 	<!-- Reviver Nasto -->
 	<gd_rule rule_name="Named Coins" base_chance="100" min_count="15" max_count="45" fixed_chance="true">
 		<gd_maps>
-			<gd_map map_id="300610000" name="Raksang_Ruins" />
+			<gd_map map_id="300610000" /><!-- Raksang_Ruins -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="236306" name="Reviver Nasto" />
+			<gd_npc npc_id="236306" /><!-- Reviver Nasto -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="186000237" name="Ancient Coin" />
+			<gd_item id="186000237" /><!-- Ancient Coin -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Weapon Box" base_chance="40" fixed_chance="true">
 		<gd_maps>
-			<gd_map map_id="300610000" name="Raksang_Ruins" />
+			<gd_map map_id="300610000" /><!-- Raksang_Ruins -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="236306" name="Reviver Nasto" />
+			<gd_npc npc_id="236306" /><!-- Reviver Nasto -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="188053678" name="Nasto's Unique Weapon Box" />
+			<gd_item id="188053678" /><!-- Nasto's Unique Weapon Box -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor Box" base_chance="100" fixed_chance="true">
 		<gd_maps>
-			<gd_map map_id="300610000" name="Raksang_Ruins" />
+			<gd_map map_id="300610000" /><!-- Raksang_Ruins -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="236303" name="Drill Instructor Diplito" />
-			<gd_npc npc_id="236304" name="Drill Instructor Pratica" />
-			<gd_npc npc_id="236305" name="Drill Instructor Exico" />
+			<gd_npc npc_id="236303" /><!-- Drill Instructor Diplito -->
+			<gd_npc npc_id="236304" /><!-- Drill Instructor Pratica -->
+			<gd_npc npc_id="236305" /><!-- Drill Instructor Exico -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="188053681" name="Nasto's Unique Pauldrons Box" />
-			<gd_item id="188053682" name="Nasto's Unique Gloves Box" />
-			<gd_item id="188053683" name="Nasto's Unique Shoes Box" />
+			<gd_item id="188053681" /><!-- Nasto's Unique Pauldrons Box -->
+			<gd_item id="188053682" /><!-- Nasto's Unique Gloves Box -->
+			<gd_item id="188053683" /><!-- Nasto's Unique Shoes Box -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor Box" base_chance="70" fixed_chance="true">
 		<gd_maps>
-			<gd_map map_id="300610000" name="Raksang_Ruins" />
+			<gd_map map_id="300610000" /><!-- Raksang_Ruins -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="236306" name="Reviver Nasto" />
+			<gd_npc npc_id="236306" /><!-- Reviver Nasto -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="188053679" name="Nasto's Unique Jacket Box" />
-			<gd_item id="188053680" name="Nasto's Unique Pants Box" />
+			<gd_item id="188053679" /><!-- Nasto's Unique Jacket Box -->
+			<gd_item id="188053680" /><!-- Nasto's Unique Pants Box -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Accessory Box" base_chance="40" fixed_chance="true">
 		<gd_maps>
-			<gd_map map_id="300610000" name="Raksang_Ruins" />
+			<gd_map map_id="300610000" /><!-- Raksang_Ruins -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="236306" name="Reviver Nasto" />
+			<gd_npc npc_id="236306" /><!-- Reviver Nasto -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="188053684" name="Nasto's Hero Accessory Box" />
+			<gd_item id="188053684" /><!-- Nasto's Hero Accessory Box -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Head" base_chance="70" fixed_chance="true">
 		<gd_maps>
-			<gd_map map_id="300610000" name="Raksang_Ruins" />
+			<gd_map map_id="300610000" /><!-- Raksang_Ruins -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="236306" name="Reviver Nasto" />
+			<gd_npc npc_id="236306" /><!-- Reviver Nasto -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="125004215" name="Nasto Legionnaire's Cloth Bandana" />
-			<gd_item id="125004216" name="Nasto Legionnaire's Leather Hat" />
-			<gd_item id="125004217" name="Nasto Legionnaire's Chain Helm" />
-			<gd_item id="125004218" name="Nasto Legionnaire's Plate Helmet" />
-			<gd_item id="125004219" name="Nasto Legionnaire's Leather Helmet" />
-			<gd_item id="125004220" name="Nasto Legionnaire's Chain Combat Helmet" />
+			<gd_item id="125004215" /><!-- Nasto Legionnaire's Cloth Bandana -->
+			<gd_item id="125004216" /><!-- Nasto Legionnaire's Leather Hat -->
+			<gd_item id="125004217" /><!-- Nasto Legionnaire's Chain Helm -->
+			<gd_item id="125004218" /><!-- Nasto Legionnaire's Plate Helmet -->
+			<gd_item id="125004219" /><!-- Nasto Legionnaire's Leather Helmet -->
+			<gd_item id="125004220" /><!-- Nasto Legionnaire's Chain Combat Helmet -->
 		</gd_items>
 	</gd_rule>
 </global_rules>

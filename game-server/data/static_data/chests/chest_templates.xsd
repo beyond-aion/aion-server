@@ -14,7 +14,6 @@
 		<xs:sequence>
 			<xs:element name="keyitem" type="KeyItem" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
-		<xs:attribute name="name" type="xs:string"/>
 		<xs:attribute name="npcid" type="xs:int"/>
 	</xs:complexType>
 	<xs:complexType name="KeyItem">

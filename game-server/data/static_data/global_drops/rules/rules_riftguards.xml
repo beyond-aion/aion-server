@@ -2,153 +2,153 @@
 <global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../global_rules.xsd">
 	<gd_rule rule_name="RIFT_GUARD_MAJOR_AP_POTION" base_chance="40" fixed_chance="true">
 		<gd_npcs>
-			<gd_npc npc_id="209518" name="Eltnen Sentinel" />
-			<gd_npc npc_id="209519" name="Heiron Protector" />
-			<gd_npc npc_id="209520" name="Inggison Sentinel" />
-			<gd_npc npc_id="209521" name="Morheim Protector" />
-			<gd_npc npc_id="209522" name="Beluslan Protector" />
-			<gd_npc npc_id="209523" name="Gelkmaros Protector" />
-			<gd_npc npc_id="209524" name="Eltnen Elite Templar" />
-			<gd_npc npc_id="209525" name="Eltnen Elite Gladiator" />
-			<gd_npc npc_id="209526" name="Eltnen Elite Ranger" />
-			<gd_npc npc_id="209527" name="Eltnen Elite Sorcerer" />
-			<gd_npc npc_id="209528" name="Eltnen Elite Cleric" />
-			<gd_npc npc_id="209529" name="Heiron Elite Templar" />
-			<gd_npc npc_id="209530" name="Heiron Elite Gladiator" />
-			<gd_npc npc_id="209531" name="Heiron Elite Marksman" />
-			<gd_npc npc_id="209532" name="Heiron Elite Sorcerer" />
-			<gd_npc npc_id="209533" name="Heiron Elite Cleric" />
-			<gd_npc npc_id="209534" name="Inggison Elite Templar" />
-			<gd_npc npc_id="209535" name="Inggison Elite Gladiator" />
-			<gd_npc npc_id="209536" name="Inggison Elite Ranger" />
-			<gd_npc npc_id="209537" name="Inggison Elite Sorcerer" />
-			<gd_npc npc_id="209538" name="Inggison Elite Cleric" />
-			<gd_npc npc_id="209539" name="Morheim Elite Templar" />
-			<gd_npc npc_id="209540" name="Morheim Elite Gladiator" />
-			<gd_npc npc_id="209541" name="Morheim Elite Ranger" />
-			<gd_npc npc_id="209542" name="Morheim Elite Sorcerer" />
-			<gd_npc npc_id="209543" name="Morheim Elite Cleric" />
-			<gd_npc npc_id="209544" name="Beluslan Elite Templar" />
-			<gd_npc npc_id="209545" name="Beluslan Elite Gladiator" />
-			<gd_npc npc_id="209546" name="Beluslan Elite Ranger" />
-			<gd_npc npc_id="209547" name="Beluslan Elite Sorcerer" />
-			<gd_npc npc_id="209548" name="Beluslan Elite Cleric" />
-			<gd_npc npc_id="209549" name="Gelkmaros Elite Templar" />
-			<gd_npc npc_id="209550" name="Gelkmaros Elite Gladiator" />
-			<gd_npc npc_id="209551" name="Gelkmaros Elite Ranger" />
-			<gd_npc npc_id="209552" name="Gelkmaros Elite Sorcerer" />
-			<gd_npc npc_id="209553" name="Gelkmaros Elite Cleric" />
+			<gd_npc npc_id="209518" /><!-- Eltnen Sentinel -->
+			<gd_npc npc_id="209519" /><!-- Heiron Protector -->
+			<gd_npc npc_id="209520" /><!-- Inggison Sentinel -->
+			<gd_npc npc_id="209521" /><!-- Morheim Protector -->
+			<gd_npc npc_id="209522" /><!-- Beluslan Protector -->
+			<gd_npc npc_id="209523" /><!-- Gelkmaros Protector -->
+			<gd_npc npc_id="209524" /><!-- Eltnen Elite Templar -->
+			<gd_npc npc_id="209525" /><!-- Eltnen Elite Gladiator -->
+			<gd_npc npc_id="209526" /><!-- Eltnen Elite Ranger -->
+			<gd_npc npc_id="209527" /><!-- Eltnen Elite Sorcerer -->
+			<gd_npc npc_id="209528" /><!-- Eltnen Elite Cleric -->
+			<gd_npc npc_id="209529" /><!-- Heiron Elite Templar -->
+			<gd_npc npc_id="209530" /><!-- Heiron Elite Gladiator -->
+			<gd_npc npc_id="209531" /><!-- Heiron Elite Marksman -->
+			<gd_npc npc_id="209532" /><!-- Heiron Elite Sorcerer -->
+			<gd_npc npc_id="209533" /><!-- Heiron Elite Cleric -->
+			<gd_npc npc_id="209534" /><!-- Inggison Elite Templar -->
+			<gd_npc npc_id="209535" /><!-- Inggison Elite Gladiator -->
+			<gd_npc npc_id="209536" /><!-- Inggison Elite Ranger -->
+			<gd_npc npc_id="209537" /><!-- Inggison Elite Sorcerer -->
+			<gd_npc npc_id="209538" /><!-- Inggison Elite Cleric -->
+			<gd_npc npc_id="209539" /><!-- Morheim Elite Templar -->
+			<gd_npc npc_id="209540" /><!-- Morheim Elite Gladiator -->
+			<gd_npc npc_id="209541" /><!-- Morheim Elite Ranger -->
+			<gd_npc npc_id="209542" /><!-- Morheim Elite Sorcerer -->
+			<gd_npc npc_id="209543" /><!-- Morheim Elite Cleric -->
+			<gd_npc npc_id="209544" /><!-- Beluslan Elite Templar -->
+			<gd_npc npc_id="209545" /><!-- Beluslan Elite Gladiator -->
+			<gd_npc npc_id="209546" /><!-- Beluslan Elite Ranger -->
+			<gd_npc npc_id="209547" /><!-- Beluslan Elite Sorcerer -->
+			<gd_npc npc_id="209548" /><!-- Beluslan Elite Cleric -->
+			<gd_npc npc_id="209549" /><!-- Gelkmaros Elite Templar -->
+			<gd_npc npc_id="209550" /><!-- Gelkmaros Elite Gladiator -->
+			<gd_npc npc_id="209551" /><!-- Gelkmaros Elite Ranger -->
+			<gd_npc npc_id="209552" /><!-- Gelkmaros Elite Sorcerer -->
+			<gd_npc npc_id="209553" /><!-- Gelkmaros Elite Cleric -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="162000069" name="Major Divine Life Serum" />
-			<gd_item id="162000070" name="Major Divine Mana Serum" />
+			<gd_item id="162000069" /><!-- Major Divine Life Serum -->
+			<gd_item id="162000070" /><!-- Major Divine Mana Serum -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="RIFT_GUARD_RELICS" base_chance="40" fixed_chance="true">
 		<gd_npcs>
-			<gd_npc npc_id="209518" name="Eltnen Sentinel" />
-			<gd_npc npc_id="209519" name="Heiron Protector" />
-			<gd_npc npc_id="209520" name="Inggison Sentinel" />
-			<gd_npc npc_id="209521" name="Morheim Protector" />
-			<gd_npc npc_id="209522" name="Beluslan Protector" />
-			<gd_npc npc_id="209523" name="Gelkmaros Protector" />
-			<gd_npc npc_id="209524" name="Eltnen Elite Templar" />
-			<gd_npc npc_id="209525" name="Eltnen Elite Gladiator" />
-			<gd_npc npc_id="209526" name="Eltnen Elite Ranger" />
-			<gd_npc npc_id="209527" name="Eltnen Elite Sorcerer" />
-			<gd_npc npc_id="209528" name="Eltnen Elite Cleric" />
-			<gd_npc npc_id="209529" name="Heiron Elite Templar" />
-			<gd_npc npc_id="209530" name="Heiron Elite Gladiator" />
-			<gd_npc npc_id="209531" name="Heiron Elite Marksman" />
-			<gd_npc npc_id="209532" name="Heiron Elite Sorcerer" />
-			<gd_npc npc_id="209533" name="Heiron Elite Cleric" />
-			<gd_npc npc_id="209534" name="Inggison Elite Templar" />
-			<gd_npc npc_id="209535" name="Inggison Elite Gladiator" />
-			<gd_npc npc_id="209536" name="Inggison Elite Ranger" />
-			<gd_npc npc_id="209537" name="Inggison Elite Sorcerer" />
-			<gd_npc npc_id="209538" name="Inggison Elite Cleric" />
-			<gd_npc npc_id="209539" name="Morheim Elite Templar" />
-			<gd_npc npc_id="209540" name="Morheim Elite Gladiator" />
-			<gd_npc npc_id="209541" name="Morheim Elite Ranger" />
-			<gd_npc npc_id="209542" name="Morheim Elite Sorcerer" />
-			<gd_npc npc_id="209543" name="Morheim Elite Cleric" />
-			<gd_npc npc_id="209544" name="Beluslan Elite Templar" />
-			<gd_npc npc_id="209545" name="Beluslan Elite Gladiator" />
-			<gd_npc npc_id="209546" name="Beluslan Elite Ranger" />
-			<gd_npc npc_id="209547" name="Beluslan Elite Sorcerer" />
-			<gd_npc npc_id="209548" name="Beluslan Elite Cleric" />
-			<gd_npc npc_id="209549" name="Gelkmaros Elite Templar" />
-			<gd_npc npc_id="209550" name="Gelkmaros Elite Gladiator" />
-			<gd_npc npc_id="209551" name="Gelkmaros Elite Ranger" />
-			<gd_npc npc_id="209552" name="Gelkmaros Elite Sorcerer" />
-			<gd_npc npc_id="209553" name="Gelkmaros Elite Cleric" />
+			<gd_npc npc_id="209518" /><!-- Eltnen Sentinel -->
+			<gd_npc npc_id="209519" /><!-- Heiron Protector -->
+			<gd_npc npc_id="209520" /><!-- Inggison Sentinel -->
+			<gd_npc npc_id="209521" /><!-- Morheim Protector -->
+			<gd_npc npc_id="209522" /><!-- Beluslan Protector -->
+			<gd_npc npc_id="209523" /><!-- Gelkmaros Protector -->
+			<gd_npc npc_id="209524" /><!-- Eltnen Elite Templar -->
+			<gd_npc npc_id="209525" /><!-- Eltnen Elite Gladiator -->
+			<gd_npc npc_id="209526" /><!-- Eltnen Elite Ranger -->
+			<gd_npc npc_id="209527" /><!-- Eltnen Elite Sorcerer -->
+			<gd_npc npc_id="209528" /><!-- Eltnen Elite Cleric -->
+			<gd_npc npc_id="209529" /><!-- Heiron Elite Templar -->
+			<gd_npc npc_id="209530" /><!-- Heiron Elite Gladiator -->
+			<gd_npc npc_id="209531" /><!-- Heiron Elite Marksman -->
+			<gd_npc npc_id="209532" /><!-- Heiron Elite Sorcerer -->
+			<gd_npc npc_id="209533" /><!-- Heiron Elite Cleric -->
+			<gd_npc npc_id="209534" /><!-- Inggison Elite Templar -->
+			<gd_npc npc_id="209535" /><!-- Inggison Elite Gladiator -->
+			<gd_npc npc_id="209536" /><!-- Inggison Elite Ranger -->
+			<gd_npc npc_id="209537" /><!-- Inggison Elite Sorcerer -->
+			<gd_npc npc_id="209538" /><!-- Inggison Elite Cleric -->
+			<gd_npc npc_id="209539" /><!-- Morheim Elite Templar -->
+			<gd_npc npc_id="209540" /><!-- Morheim Elite Gladiator -->
+			<gd_npc npc_id="209541" /><!-- Morheim Elite Ranger -->
+			<gd_npc npc_id="209542" /><!-- Morheim Elite Sorcerer -->
+			<gd_npc npc_id="209543" /><!-- Morheim Elite Cleric -->
+			<gd_npc npc_id="209544" /><!-- Beluslan Elite Templar -->
+			<gd_npc npc_id="209545" /><!-- Beluslan Elite Gladiator -->
+			<gd_npc npc_id="209546" /><!-- Beluslan Elite Ranger -->
+			<gd_npc npc_id="209547" /><!-- Beluslan Elite Sorcerer -->
+			<gd_npc npc_id="209548" /><!-- Beluslan Elite Cleric -->
+			<gd_npc npc_id="209549" /><!-- Gelkmaros Elite Templar -->
+			<gd_npc npc_id="209550" /><!-- Gelkmaros Elite Gladiator -->
+			<gd_npc npc_id="209551" /><!-- Gelkmaros Elite Ranger -->
+			<gd_npc npc_id="209552" /><!-- Gelkmaros Elite Sorcerer -->
+			<gd_npc npc_id="209553" /><!-- Gelkmaros Elite Cleric -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="186000051" name="Major Ancient Crown" />
-			<gd_item id="186000052" name="Greater Ancient Crown" />
+			<gd_item id="186000051" /><!-- Major Ancient Crown -->
+			<gd_item id="186000052" /><!-- Greater Ancient Crown -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="RIFT_GUARD_MEDAL" base_chance="35" fixed_chance="true">
 		<gd_npcs>
-			<gd_npc npc_id="209518" name="Eltnen Sentinel" />
-			<gd_npc npc_id="209519" name="Heiron Protector" />
-			<gd_npc npc_id="209520" name="Inggison Sentinel" />
-			<gd_npc npc_id="209521" name="Morheim Protector" />
-			<gd_npc npc_id="209522" name="Beluslan Protector" />
-			<gd_npc npc_id="209523" name="Gelkmaros Protector" />
-			<gd_npc npc_id="209524" name="Eltnen Elite Templar" />
-			<gd_npc npc_id="209525" name="Eltnen Elite Gladiator" />
-			<gd_npc npc_id="209526" name="Eltnen Elite Ranger" />
-			<gd_npc npc_id="209527" name="Eltnen Elite Sorcerer" />
-			<gd_npc npc_id="209528" name="Eltnen Elite Cleric" />
-			<gd_npc npc_id="209529" name="Heiron Elite Templar" />
-			<gd_npc npc_id="209530" name="Heiron Elite Gladiator" />
-			<gd_npc npc_id="209531" name="Heiron Elite Marksman" />
-			<gd_npc npc_id="209532" name="Heiron Elite Sorcerer" />
-			<gd_npc npc_id="209533" name="Heiron Elite Cleric" />
-			<gd_npc npc_id="209534" name="Inggison Elite Templar" />
-			<gd_npc npc_id="209535" name="Inggison Elite Gladiator" />
-			<gd_npc npc_id="209536" name="Inggison Elite Ranger" />
-			<gd_npc npc_id="209537" name="Inggison Elite Sorcerer" />
-			<gd_npc npc_id="209538" name="Inggison Elite Cleric" />
-			<gd_npc npc_id="209539" name="Morheim Elite Templar" />
-			<gd_npc npc_id="209540" name="Morheim Elite Gladiator" />
-			<gd_npc npc_id="209541" name="Morheim Elite Ranger" />
-			<gd_npc npc_id="209542" name="Morheim Elite Sorcerer" />
-			<gd_npc npc_id="209543" name="Morheim Elite Cleric" />
-			<gd_npc npc_id="209544" name="Beluslan Elite Templar" />
-			<gd_npc npc_id="209545" name="Beluslan Elite Gladiator" />
-			<gd_npc npc_id="209546" name="Beluslan Elite Ranger" />
-			<gd_npc npc_id="209547" name="Beluslan Elite Sorcerer" />
-			<gd_npc npc_id="209548" name="Beluslan Elite Cleric" />
-			<gd_npc npc_id="209549" name="Gelkmaros Elite Templar" />
-			<gd_npc npc_id="209550" name="Gelkmaros Elite Gladiator" />
-			<gd_npc npc_id="209551" name="Gelkmaros Elite Ranger" />
-			<gd_npc npc_id="209552" name="Gelkmaros Elite Sorcerer" />
-			<gd_npc npc_id="209553" name="Gelkmaros Elite Cleric" />
+			<gd_npc npc_id="209518" /><!-- Eltnen Sentinel -->
+			<gd_npc npc_id="209519" /><!-- Heiron Protector -->
+			<gd_npc npc_id="209520" /><!-- Inggison Sentinel -->
+			<gd_npc npc_id="209521" /><!-- Morheim Protector -->
+			<gd_npc npc_id="209522" /><!-- Beluslan Protector -->
+			<gd_npc npc_id="209523" /><!-- Gelkmaros Protector -->
+			<gd_npc npc_id="209524" /><!-- Eltnen Elite Templar -->
+			<gd_npc npc_id="209525" /><!-- Eltnen Elite Gladiator -->
+			<gd_npc npc_id="209526" /><!-- Eltnen Elite Ranger -->
+			<gd_npc npc_id="209527" /><!-- Eltnen Elite Sorcerer -->
+			<gd_npc npc_id="209528" /><!-- Eltnen Elite Cleric -->
+			<gd_npc npc_id="209529" /><!-- Heiron Elite Templar -->
+			<gd_npc npc_id="209530" /><!-- Heiron Elite Gladiator -->
+			<gd_npc npc_id="209531" /><!-- Heiron Elite Marksman -->
+			<gd_npc npc_id="209532" /><!-- Heiron Elite Sorcerer -->
+			<gd_npc npc_id="209533" /><!-- Heiron Elite Cleric -->
+			<gd_npc npc_id="209534" /><!-- Inggison Elite Templar -->
+			<gd_npc npc_id="209535" /><!-- Inggison Elite Gladiator -->
+			<gd_npc npc_id="209536" /><!-- Inggison Elite Ranger -->
+			<gd_npc npc_id="209537" /><!-- Inggison Elite Sorcerer -->
+			<gd_npc npc_id="209538" /><!-- Inggison Elite Cleric -->
+			<gd_npc npc_id="209539" /><!-- Morheim Elite Templar -->
+			<gd_npc npc_id="209540" /><!-- Morheim Elite Gladiator -->
+			<gd_npc npc_id="209541" /><!-- Morheim Elite Ranger -->
+			<gd_npc npc_id="209542" /><!-- Morheim Elite Sorcerer -->
+			<gd_npc npc_id="209543" /><!-- Morheim Elite Cleric -->
+			<gd_npc npc_id="209544" /><!-- Beluslan Elite Templar -->
+			<gd_npc npc_id="209545" /><!-- Beluslan Elite Gladiator -->
+			<gd_npc npc_id="209546" /><!-- Beluslan Elite Ranger -->
+			<gd_npc npc_id="209547" /><!-- Beluslan Elite Sorcerer -->
+			<gd_npc npc_id="209548" /><!-- Beluslan Elite Cleric -->
+			<gd_npc npc_id="209549" /><!-- Gelkmaros Elite Templar -->
+			<gd_npc npc_id="209550" /><!-- Gelkmaros Elite Gladiator -->
+			<gd_npc npc_id="209551" /><!-- Gelkmaros Elite Ranger -->
+			<gd_npc npc_id="209552" /><!-- Gelkmaros Elite Sorcerer -->
+			<gd_npc npc_id="209553" /><!-- Gelkmaros Elite Cleric -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="186000147" name="Mithril Medal" />
+			<gd_item id="186000147" /><!-- Mithril Medal -->
 		</gd_items>
 	</gd_rule>
 
 	<gd_rule rule_name="Named Volatile Bundle" base_chance="100" fixed_chance="true" member_limit="6">
 		<gd_npcs>
-			<gd_npc npc_id="235830" name="Mutated Gatorback Skilex" />
-			<gd_npc npc_id="235832" name="Aggressive Coral Corask " />
-			<gd_npc npc_id="235918" name="Frostshard Kirrin" />
-			<gd_npc npc_id="235916" name="Freezing Petrahulk" />
-			<gd_npc npc_id="235912" name="Stygian Mist Warrior" />
-			<gd_npc npc_id="235914" name="Stygian Mist Protector" />
-			<gd_npc npc_id="219699" name="Flameskin Cellatu" />
-			<gd_npc npc_id="219700" name="Frenzied Skyray" />
-			<gd_npc npc_id="219776" name="Awoken Jotun Worker" />
-			<gd_npc npc_id="219777" name="Awoken Jotun Craftsman" />
-			<gd_npc npc_id="219787" name="Frenzied Darksea Spiner" />
-			<gd_npc npc_id="219788" name="Primeval Sea Giant" />
+			<gd_npc npc_id="235830" /><!-- Mutated Gatorback Skilex -->
+			<gd_npc npc_id="235832" /><!-- Aggressive Coral Corask  -->
+			<gd_npc npc_id="235918" /><!-- Frostshard Kirrin -->
+			<gd_npc npc_id="235916" /><!-- Freezing Petrahulk -->
+			<gd_npc npc_id="235912" /><!-- Stygian Mist Warrior -->
+			<gd_npc npc_id="235914" /><!-- Stygian Mist Protector -->
+			<gd_npc npc_id="219699" /><!-- Flameskin Cellatu -->
+			<gd_npc npc_id="219700" /><!-- Frenzied Skyray -->
+			<gd_npc npc_id="219776" /><!-- Awoken Jotun Worker -->
+			<gd_npc npc_id="219777" /><!-- Awoken Jotun Craftsman -->
+			<gd_npc npc_id="219787" /><!-- Frenzied Darksea Spiner -->
+			<gd_npc npc_id="219788" /><!-- Primeval Sea Giant -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="188053716" name="Volatile Rift Loot Bundle" />
+			<gd_item id="188053716" /><!-- Volatile Rift Loot Bundle -->
 		</gd_items>
 	</gd_rule>
 </global_rules>

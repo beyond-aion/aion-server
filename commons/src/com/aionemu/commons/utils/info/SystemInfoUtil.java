@@ -26,7 +26,7 @@ public class SystemInfoUtil {
 		double free = Runtime.getRuntime().freeMemory() / mbDivisor; // the unused memory in the allocation pool
 		double used = allocated - free; // really used memory
 		double totalFree = max - used; // non-used + non-allocated memory
-		DecimalFormat mbFmt = new DecimalFormat("#,##0 'MB'");
+		DecimalFormat mbFmt = new DecimalFormat("#,##0 'MiB'");
 		DecimalFormat percentFmt = new DecimalFormat(" (0.#%)");
 
 		return new String[] {

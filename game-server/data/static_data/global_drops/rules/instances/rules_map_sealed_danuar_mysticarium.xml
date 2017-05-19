@@ -3,41 +3,41 @@
 	<!-- Game01 Test Subject Drops -->
 	<gd_rule rule_name="Game01 Ancient Relic" base_chance="100">
 		<gd_maps>
-			<gd_map map_id="300480000" name="Sealed_Danuar_Mysticarium" />
+			<gd_map map_id="300480000" /><!-- Sealed_Danuar_Mysticarium -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="219963" name="test subject 48012-c" />
-			<gd_npc npc_id="219964" name="test subject 48013-c" />
-			<gd_npc npc_id="219965" name="test subject 48015-c" />
+			<gd_npc npc_id="219963" /><!-- test subject 48012-c -->
+			<gd_npc npc_id="219964" /><!-- test subject 48013-c -->
+			<gd_npc npc_id="219965" /><!-- test subject 48015-c -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="186000065" name="Ancient Icon" />
-			<gd_item id="186000064" name="Greater Ancient Icon" />
-			<gd_item id="186000061" name="Ancient Seal" />
-			<gd_item id="186000060" name="Greater Ancient Seal" />
+			<gd_item id="186000065" /><!-- Ancient Icon -->
+			<gd_item id="186000064" /><!-- Greater Ancient Icon -->
+			<gd_item id="186000061" /><!-- Ancient Seal -->
+			<gd_item id="186000060" /><!-- Greater Ancient Seal -->
 		</gd_items>
 	</gd_rule>
 	<!-- Game01 Boss Drops -->
 	<gd_rule rule_name="Game01 Boss Ancient Relic" base_chance="100">
 		<gd_maps>
-			<gd_map map_id="300480000" name="Sealed_Danuar_Mysticarium" />
+			<gd_map map_id="300480000" /><!-- Sealed_Danuar_Mysticarium -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="219969" name="test subject 48039-a" />
+			<gd_npc npc_id="219969" /><!-- test subject 48039-a -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="186000059" name="Major Ancient Seal" />
+			<gd_item id="186000059" /><!-- Major Ancient Seal -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Game01 Boss Bundle" base_chance="100" min_count="5" max_count="5">
 		<gd_maps>
-			<gd_map map_id="300480000" name="Sealed_Danuar_Mysticarium" />
+			<gd_map map_id="300480000" /><!-- Sealed_Danuar_Mysticarium -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="219969" name="test subject 48039-a" />
+			<gd_npc npc_id="219969" /><!-- test subject 48039-a -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="188053793" name="Rare Manastone of Aetheric Field Bundle" />
+			<gd_item id="188053793" /><!-- Rare Manastone of Aetheric Field Bundle -->
 		</gd_items>
 	</gd_rule>
 </global_rules>

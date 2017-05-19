@@ -3,186 +3,186 @@
 	<!-- Vasharti -->
 	<gd_rule rule_name="Conqueror's Mark" base_chance="100" member_limit="6" min_count="60" max_count="90">
 		<gd_maps>
-			<gd_map map_id="300620000" name="Occupied_Rentus_Base" />
+			<gd_map map_id="300620000" /><!-- Occupied_Rentus_Base -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="236300" name="Brigade General Vasharti" />
+			<gd_npc npc_id="236300" /><!-- Brigade General Vasharti -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="186000238" name="Conqueror's Mark" />
+			<gd_item id="186000238" /><!-- Conqueror's Mark -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Epic)" base_chance="35">
 		<gd_maps>
-			<gd_map map_id="300280000" name="Rentus_Base" />
+			<gd_map map_id="300280000" /><!-- Rentus_Base -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="236302" name="Archmagus Upadi" />
+			<gd_npc npc_id="236302" /><!-- Archmagus Upadi -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="110101877" name="Vasharti Legionnaire's Jacket" />
-			<gd_item id="110301869" name="Vasharti Legionnaire's Jerkin" />
-			<gd_item id="110301870" name="Vasharti Legionnaire's Magic Jerkin" />
-			<gd_item id="110551198" name="Vasharti Legionnaire's Hauberk" />
-			<gd_item id="110551199" name="Vasharti Legionnaire's Magic Hauberk" />
-			<gd_item id="110601664" name="Vasharti Legionnaire's Breastplate" />
+			<gd_item id="110101877" /><!-- Vasharti Legionnaire's Jacket -->
+			<gd_item id="110301869" /><!-- Vasharti Legionnaire's Jerkin -->
+			<gd_item id="110301870" /><!-- Vasharti Legionnaire's Magic Jerkin -->
+			<gd_item id="110551198" /><!-- Vasharti Legionnaire's Hauberk -->
+			<gd_item id="110551199" /><!-- Vasharti Legionnaire's Magic Hauberk -->
+			<gd_item id="110601664" /><!-- Vasharti Legionnaire's Breastplate -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Epic)" base_chance="35">
 		<gd_maps>
-			<gd_map map_id="300280000" name="Rentus_Base" />
+			<gd_map map_id="300280000" /><!-- Rentus_Base -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="236301" name="Ambusher Kiriana" />
+			<gd_npc npc_id="236301" /><!-- Ambusher Kiriana -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="111101692" name="Vasharti Legionnaire's Gloves" />
-			<gd_item id="111301807" name="Vasharti Legionnaire's Vambraces" />
-			<gd_item id="111301808" name="Vasharti Legionnaire's Magic Vambraces" />
-			<gd_item id="111501757" name="Vasharti Legionnaire's Handguards" />
-			<gd_item id="111501758" name="Vasharti Legionnaire's Magic Handguards" />
-			<gd_item id="111601627" name="Vasharti Legionnaire's Gauntlets" />
+			<gd_item id="111101692" /><!-- Vasharti Legionnaire's Gloves -->
+			<gd_item id="111301807" /><!-- Vasharti Legionnaire's Vambraces -->
+			<gd_item id="111301808" /><!-- Vasharti Legionnaire's Magic Vambraces -->
+			<gd_item id="111501757" /><!-- Vasharti Legionnaire's Handguards -->
+			<gd_item id="111501758" /><!-- Vasharti Legionnaire's Magic Handguards -->
+			<gd_item id="111601627" /><!-- Vasharti Legionnaire's Gauntlets -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Epic)" base_chance="35">
 		<gd_maps>
-			<gd_map map_id="300280000" name="Rentus_Base" />
+			<gd_map map_id="300280000" /><!-- Rentus_Base -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="236299" name="Umatha the Crazed" />
+			<gd_npc npc_id="236299" /><!-- Umatha the Crazed -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="112101641" name="Vasharti Legionnaire's Pauldrons" />
-			<gd_item id="112301746" name="Vasharti Legionnaire's Shoulderguards" />
-			<gd_item id="112301747" name="Vasharti Legionnaire's Magic Shouldguards" />
-			<gd_item id="112501696" name="Vasharti Legionnaire's Spaulders" />
-			<gd_item id="112501697" name="Vasharti Legionnaire's Magic Spaulders" />
-			<gd_item id="112601609" name="Vasharti Legionnaire's Shoulderplates" />
+			<gd_item id="112101641" /><!-- Vasharti Legionnaire's Pauldrons -->
+			<gd_item id="112301746" /><!-- Vasharti Legionnaire's Shoulderguards -->
+			<gd_item id="112301747" /><!-- Vasharti Legionnaire's Magic Shouldguards -->
+			<gd_item id="112501696" /><!-- Vasharti Legionnaire's Spaulders -->
+			<gd_item id="112501697" /><!-- Vasharti Legionnaire's Magic Spaulders -->
+			<gd_item id="112601609" /><!-- Vasharti Legionnaire's Shoulderplates -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Epic)" base_chance="35">
 		<gd_maps>
-			<gd_map map_id="300280000" name="Rentus_Base" />
+			<gd_map map_id="300280000" /><!-- Rentus_Base -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="217309" name="Captain Xasta" />
-			<gd_npc npc_id="217310" name="Captain Xasta" />
+			<gd_npc npc_id="217309" /><!-- Captain Xasta -->
+			<gd_npc npc_id="217310" /><!-- Captain Xasta -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="114101737" name="Vasharti Legionnaire's Shoes" />
-			<gd_item id="114301875" name="Vasharti Legionnaire's Boots" />
-			<gd_item id="114301876" name="Vasharti Legionnaire's Magic Boots" />
-			<gd_item id="114501785" name="Vasharti Legionnaire's Brogans" />
-			<gd_item id="114501786" name="Vasharti Legionnaire's Magic Brogans" />
-			<gd_item id="114601617" name="Vasharti Legionnaire's Sabatons" />
+			<gd_item id="114101737" /><!-- Vasharti Legionnaire's Shoes -->
+			<gd_item id="114301875" /><!-- Vasharti Legionnaire's Boots -->
+			<gd_item id="114301876" /><!-- Vasharti Legionnaire's Magic Boots -->
+			<gd_item id="114501785" /><!-- Vasharti Legionnaire's Brogans -->
+			<gd_item id="114501786" /><!-- Vasharti Legionnaire's Magic Brogans -->
+			<gd_item id="114601617" /><!-- Vasharti Legionnaire's Sabatons -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Shield (Epic)" base_chance="25">
 		<gd_maps>
-			<gd_map map_id="300280000" name="Rentus_Base" />
+			<gd_map map_id="300280000" /><!-- Rentus_Base -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="236296" name="Captain Xasta" />
-			<gd_npc npc_id="236297" name="Captain Xasta" />
+			<gd_npc npc_id="236296" /><!-- Captain Xasta -->
+			<gd_npc npc_id="236297" /><!-- Captain Xasta -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="115001825" name="Vasharti Legionnaire's Shield" />
-			<gd_item id="115001826" name="Vasharti Legionnaire's Scale Shield" />
+			<gd_item id="115001825" /><!-- Vasharti Legionnaire's Shield -->
+			<gd_item id="115001826" /><!-- Vasharti Legionnaire's Scale Shield -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Equipment Box" base_chance="100" member_limit="6">
 		<gd_maps>
-			<gd_map map_id="300620000" name="Occupied_Rentus_Base" />
+			<gd_map map_id="300620000" /><!-- Occupied_Rentus_Base -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="236300" name="Brigade General Vasharti" />
+			<gd_npc npc_id="236300" /><!-- Brigade General Vasharti -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="188053702" name="Vasharti's Equipment Box" />
+			<gd_item id="188053702" /><!-- Vasharti's Equipment Box -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Supply Box" base_chance="100" member_limit="6">
 		<gd_maps>
-			<gd_map map_id="300620000" name="Occupied_Rentus_Base" />
+			<gd_map map_id="300620000" /><!-- Occupied_Rentus_Base -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="236300" name="Brigade General Vasharti" />
+			<gd_npc npc_id="236300" /><!-- Brigade General Vasharti -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="188053706" name="Rentus Base Supplies" />
+			<gd_item id="188053706" /><!-- Rentus Base Supplies -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Stigma Bundle" base_chance="40">
 		<gd_maps>
-			<gd_map map_id="300620000" name="Occupied_Rentus_Base" />
+			<gd_map map_id="300620000" /><!-- Occupied_Rentus_Base -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="236300" name="Brigade General Vasharti" />
+			<gd_npc npc_id="236300" /><!-- Brigade General Vasharti -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="188053783" name="Stigma Sack" />
+			<gd_item id="188053783" /><!-- Stigma Sack -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Souvenir (Unique)" base_chance="20">
 		<gd_maps>
-			<gd_map map_id="300280000" name="Rentus_Base" />
+			<gd_map map_id="300280000" /><!-- Rentus_Base -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="236300" name="Brigade General Vasharti" />
+			<gd_npc npc_id="236300" /><!-- Brigade General Vasharti -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="170030052" name="[Souvenir] Vasharti's Gloves Wall Decoration" />
+			<gd_item id="170030052" /><!-- [Souvenir] Vasharti's Gloves Wall Decoration -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Wings" base_chance="2.5">
 		<gd_maps>
-			<gd_map map_id="300620000" name="Occupied_Rentus_Base" />
+			<gd_map map_id="300620000" /><!-- Occupied_Rentus_Base -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="236300" name="Brigade General Vasharti" />
+			<gd_npc npc_id="236300" /><!-- Brigade General Vasharti -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="187000155" name="Brigade General Vasharti's Wings" />
+			<gd_item id="187000155" /><!-- Brigade General Vasharti's Wings -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Mount (Epic)" base_chance="2.5">
 		<gd_maps>
-			<gd_map map_id="300280000" name="Rentus_Base" />
+			<gd_map map_id="300280000" /><!-- Rentus_Base -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="236300" name="Brigade General Vasharti" />
+			<gd_npc npc_id="236300" /><!-- Brigade General Vasharti -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="190100004" name="Pagati Veyron" />
+			<gd_item id="190100004" /><!-- Pagati Veyron -->
 		</gd_items>
 	</gd_rule>
 	<!-- Common -->
 	<gd_rule rule_name="Named Blood Mark Bundle" base_chance="80" member_limit="6">
 		<gd_maps>
-			<gd_map map_id="300620000" name="Occupied_Rentus_Base" />
+			<gd_map map_id="300620000" /><!-- Occupied_Rentus_Base -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="236302" name="Archmagus Upadi" />
-			<gd_npc npc_id="236301" name="Ambusher Kiriana" />
-			<gd_npc npc_id="236299" name="Umatha the Crazed" />
-			<gd_npc npc_id="236296" name="Captain Xasta" />
-			<gd_npc npc_id="236297" name="Captain Xasta" />
-			<gd_npc npc_id="236705" name="Kuhara's Treasure Box" />
+			<gd_npc npc_id="236302" /><!-- Archmagus Upadi -->
+			<gd_npc npc_id="236301" /><!-- Ambusher Kiriana -->
+			<gd_npc npc_id="236299" /><!-- Umatha the Crazed -->
+			<gd_npc npc_id="236296" /><!-- Captain Xasta -->
+			<gd_npc npc_id="236297" /><!-- Captain Xasta -->
+			<gd_npc npc_id="236705" /><!-- Kuhara's Treasure Box -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="188053712" name="Blood Mark Bundle" />
-			<gd_item id="188053713" name="Blood Mark Bundle" />
+			<gd_item id="188053712" /><!-- Blood Mark Bundle -->
+			<gd_item id="188053713" /><!-- Blood Mark Bundle -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Key" base_chance="100">
 		<gd_maps>
-			<gd_map map_id="300620000" name="Occupied_Rentus_Base" />
+			<gd_map map_id="300620000" /><!-- Occupied_Rentus_Base -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="236297" name="Captain Xasta" />
+			<gd_npc npc_id="236297" /><!-- Captain Xasta -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="185000229" name="Rentus Supplies Storage Box Key" />
+			<gd_item id="185000229" /><!-- Rentus Supplies Storage Box Key -->
 		</gd_items>
 	</gd_rule>
 </global_rules>

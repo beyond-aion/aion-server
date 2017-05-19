@@ -15,16 +15,8 @@ public class PetFeedResult {
 	@XmlAttribute(required = true)
 	protected int item;
 
-	@XmlAttribute
-	protected String name;
-
 	public int getItem() {
 		return item;
-	}
-
-	@Override
-	public String toString() {
-		return name + " (" + item + ")";
 	}
 
 }

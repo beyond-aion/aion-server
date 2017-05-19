@@ -59,13 +59,13 @@ public class Sys extends AdminCommand {
 			} else if (params[1].equals("gc")) {
 				long time = System.currentTimeMillis();
 				PacketSendUtility.sendMessage(player,
-					"RAM Used (Before): " + ((Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / 1048576));
+					"RAM Used (Before): " + ((Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / 1048576) + " MiB");
 				System.gc();
 				PacketSendUtility.sendMessage(player,
-					"RAM Used (After): " + ((Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / 1048576));
+					"RAM Used (After): " + ((Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / 1048576) + " MiB");
 				System.runFinalization();
 				PacketSendUtility.sendMessage(player,
-					"RAM Used (Final): " + ((Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / 1048576));
+					"RAM Used (Final): " + ((Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / 1048576) + " MiB");
 				PacketSendUtility.sendMessage(player,
 					"Garbage Collection and Finalization finished in " + ((System.currentTimeMillis() - time) / 1000) + " second(s)");
 			} else {
@@ -91,6 +91,8 @@ public class Sys extends AdminCommand {
 			} catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
 				PacketSendUtility.sendMessage(player, "Numbers only!");
 			}
+		} else {
+			sendInfo(player);
 		}
 	}
 

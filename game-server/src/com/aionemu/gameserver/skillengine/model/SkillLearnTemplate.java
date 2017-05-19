@@ -23,8 +23,6 @@ public class SkillLearnTemplate {
 	private int skillId;
 	@XmlAttribute(name = "skillLearn", required = false)
 	private Integer skillLearn;
-	@XmlAttribute(name = "name", required = true)
-	private String name;
 	@XmlAttribute(name = "race", required = true)
 	private Race race;
 	@XmlAttribute(name = "minLevel", required = true)
@@ -60,13 +58,6 @@ public class SkillLearnTemplate {
 	 */
 	public String getStack() {
 		return DataManager.SKILL_DATA.getSkillTemplate(skillId).getStack();
-	}
-
-	/**
-	 * @return the name
-	 */
-	public String getName() {
-		return name;
 	}
 
 	/**

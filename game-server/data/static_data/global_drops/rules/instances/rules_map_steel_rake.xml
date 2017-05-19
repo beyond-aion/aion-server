@@ -3,426 +3,426 @@
 	<!-- Multiple Monster Drops -->
 	<gd_rule rule_name="Named Armor (Rare)" base_chance="30">
 		<gd_maps>
-			<gd_map map_id="300100000" name="Steel_Rake" />
+			<gd_map map_id="300100000" /><!-- Steel_Rake -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="215064" name="Collector Memekin" />
-			<gd_npc npc_id="215065" name="Discerner Werikiki" />
+			<gd_npc npc_id="215064" /><!-- Collector Memekin -->
+			<gd_npc npc_id="215065" /><!-- Discerner Werikiki -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="112100829" name="Shulack Sailor's Pauldrons" />
-			<gd_item id="114300932" name="Shulack Sailor's Boots" />
+			<gd_item id="112100829" /><!-- Shulack Sailor's Pauldrons -->
+			<gd_item id="114300932" /><!-- Shulack Sailor's Boots -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Shield (Legend)" base_chance="15">
 		<gd_maps>
-			<gd_map map_id="300100000" name="Steel_Rake" />
+			<gd_map map_id="300100000" /><!-- Steel_Rake -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="215074" name="Special Delivery" />
-			<gd_npc npc_id="215075" name="Special Delivery" />
-			<gd_npc npc_id="215076" name="Special Delivery" />
-			<gd_npc npc_id="215077" name="Special Delivery" />
-			<gd_npc npc_id="215054" name="Special Delivery" />
-			<gd_npc npc_id="215055" name="Special Delivery" />
+			<gd_npc npc_id="215074" /><!-- Special Delivery -->
+			<gd_npc npc_id="215075" /><!-- Special Delivery -->
+			<gd_npc npc_id="215076" /><!-- Special Delivery -->
+			<gd_npc npc_id="215077" /><!-- Special Delivery -->
+			<gd_npc npc_id="215054" /><!-- Special Delivery -->
+			<gd_npc npc_id="215055" /><!-- Special Delivery -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="115000870" name="Grengamam's Scale Shield" />
-			<gd_item id="115000871" name="Grengamam's Shield" />
+			<gd_item id="115000870" /><!-- Grengamam's Scale Shield -->
+			<gd_item id="115000871" /><!-- Grengamam's Shield -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Accessory (Legend)" base_chance="15">
 		<gd_maps>
-			<gd_map map_id="300100000" name="Steel_Rake" />
+			<gd_map map_id="300100000" /><!-- Steel_Rake -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="215074" name="Special Delivery" />
-			<gd_npc npc_id="215075" name="Special Delivery" />
-			<gd_npc npc_id="215076" name="Special Delivery" />
-			<gd_npc npc_id="215077" name="Special Delivery" />
-			<gd_npc npc_id="215054" name="Special Delivery" />
-			<gd_npc npc_id="215055" name="Special Delivery" />
+			<gd_npc npc_id="215074" /><!-- Special Delivery -->
+			<gd_npc npc_id="215075" /><!-- Special Delivery -->
+			<gd_npc npc_id="215076" /><!-- Special Delivery -->
+			<gd_npc npc_id="215077" /><!-- Special Delivery -->
+			<gd_npc npc_id="215054" /><!-- Special Delivery -->
+			<gd_npc npc_id="215055" /><!-- Special Delivery -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="122001043" name="Grengamam's Diamond Ring" />
-			<gd_item id="122001044" name="Grengamam's Sapphire Ring" />
+			<gd_item id="122001043" /><!-- Grengamam's Diamond Ring -->
+			<gd_item id="122001044" /><!-- Grengamam's Sapphire Ring -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Accessory (Unique)" base_chance="5">
 		<gd_maps>
-			<gd_map map_id="300100000" name="Steel_Rake" />
+			<gd_map map_id="300100000" /><!-- Steel_Rake -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="215074" name="Special Delivery" />
-			<gd_npc npc_id="215075" name="Special Delivery" />
-			<gd_npc npc_id="215076" name="Special Delivery" />
-			<gd_npc npc_id="215077" name="Special Delivery" />
-			<gd_npc npc_id="215054" name="Special Delivery" />
-			<gd_npc npc_id="215055" name="Special Delivery" />
+			<gd_npc npc_id="215074" /><!-- Special Delivery -->
+			<gd_npc npc_id="215075" /><!-- Special Delivery -->
+			<gd_npc npc_id="215076" /><!-- Special Delivery -->
+			<gd_npc npc_id="215077" /><!-- Special Delivery -->
+			<gd_npc npc_id="215054" /><!-- Special Delivery -->
+			<gd_npc npc_id="215055" /><!-- Special Delivery -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="121000828" name="Grengamam's Diamond Necklace" />
-			<gd_item id="121000829" name="Grengamam's Sapphire Necklace" />
+			<gd_item id="121000828" /><!-- Grengamam's Diamond Necklace -->
+			<gd_item id="121000829" /><!-- Grengamam's Sapphire Necklace -->
 		</gd_items>
 	</gd_rule>
 	<!-- Single Monster Drops -->
 	<gd_rule rule_name="Named Weapon Box (Unique)" base_chance="20" member_limit="6">
 		<gd_maps>
-			<gd_map map_id="300100000" name="Steel_Rake" />
+			<gd_map map_id="300100000" /><!-- Steel_Rake -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="215081" name="Brass-Eye Grogget" />
+			<gd_npc npc_id="215081" /><!-- Brass-Eye Grogget -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="188051416" name="Grogget's Fabled Weapon Chest" />
+			<gd_item id="188051416" /><!-- Grogget's Fabled Weapon Chest -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Weapon (Rare)" base_chance="10">
 		<gd_maps>
-			<gd_map map_id="300100000" name="Steel_Rake" />
+			<gd_map map_id="300100000" /><!-- Steel_Rake -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="215080" name="Engineer Lahulahu" />
+			<gd_npc npc_id="215080" /><!-- Engineer Lahulahu -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="100200740" name="Lahulahu's Pincers" />
+			<gd_item id="100200740" /><!-- Lahulahu's Pincers -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Shield (Legend)" base_chance="30">
 		<gd_maps>
-			<gd_map map_id="300100000" name="Steel_Rake" />
+			<gd_map map_id="300100000" /><!-- Steel_Rake -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="215068" name="Hook the One-Armed" />
+			<gd_npc npc_id="215068" /><!-- Hook the One-Armed -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="115000500" name="Oblate Shield" />
+			<gd_item id="115000500" /><!-- Oblate Shield -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor Box (Unique)" base_chance="25" member_limit="6">
 		<gd_maps>
-			<gd_map map_id="300100000" name="Steel_Rake" />
+			<gd_map map_id="300100000" /><!-- Steel_Rake -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="215070" name="Chief Gunner Koakoa" />
+			<gd_npc npc_id="215070" /><!-- Chief Gunner Koakoa -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="188051413" name="Koakoa's Fabled Pants Chest" />
+			<gd_item id="188051413" /><!-- Koakoa's Fabled Pants Chest -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Rare)" base_chance="20">
 		<gd_maps>
-			<gd_map map_id="300100000" name="Steel_Rake" />
+			<gd_map map_id="300100000" /><!-- Steel_Rake -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="215056" name="Warden Tantaka" />
+			<gd_npc npc_id="215056" /><!-- Warden Tantaka -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="112500814" name="Shulack Sailor's Spaulders" />
-			<gd_item id="114600834" name="Shulack Sailor's Sabatons" />
+			<gd_item id="112500814" /><!-- Shulack Sailor's Spaulders -->
+			<gd_item id="114600834" /><!-- Shulack Sailor's Sabatons -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Rare)" base_chance="50">
 		<gd_maps>
-			<gd_map map_id="300100000" name="Steel_Rake" />
+			<gd_map map_id="300100000" /><!-- Steel_Rake -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="215066" name="Technician Binukin" />
+			<gd_npc npc_id="215066" /><!-- Technician Binukin -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="114100907" name="Shulack Sailor's Shoes" />
-			<gd_item id="112300823" name="Shulack Sailor's Shoulderguards" />
+			<gd_item id="114100907" /><!-- Shulack Sailor's Shoes -->
+			<gd_item id="112300823" /><!-- Shulack Sailor's Shoulderguards -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Rare)" base_chance="50">
 		<gd_maps>
-			<gd_map map_id="300100000" name="Steel_Rake" />
+			<gd_map map_id="300100000" /><!-- Steel_Rake -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="215071" name="Whistler Gududom" />
+			<gd_npc npc_id="215071" /><!-- Whistler Gududom -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="111300873" name="Shulack Sailor's Vambrace" />
-			<gd_item id="111600851" name="Shulack Sailor's Gauntlets" />
+			<gd_item id="111300873" /><!-- Shulack Sailor's Vambrace -->
+			<gd_item id="111600851" /><!-- Shulack Sailor's Gauntlets -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Rare)" base_chance="35">
 		<gd_maps>
-			<gd_map map_id="300100000" name="Steel_Rake" />
+			<gd_map map_id="300100000" /><!-- Steel_Rake -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="215080" name="Engineer Lahulahu" />
+			<gd_npc npc_id="215080" /><!-- Engineer Lahulahu -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="110100977" name="Shulack Sailor's Tunic" />
-			<gd_item id="110300922" name="Shulack Sailor's Jerkin" />
-			<gd_item id="110500890" name="Shulack Sailor's Hauberk" />
-			<gd_item id="110600874" name="Shulack Sailor's Breastplate" />
+			<gd_item id="110100977" /><!-- Shulack Sailor's Tunic -->
+			<gd_item id="110300922" /><!-- Shulack Sailor's Jerkin -->
+			<gd_item id="110500890" /><!-- Shulack Sailor's Hauberk -->
+			<gd_item id="110600874" /><!-- Shulack Sailor's Breastplate -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Legend)" base_chance="15">
 		<gd_maps>
-			<gd_map map_id="300100000" name="Steel_Rake" />
+			<gd_map map_id="300100000" /><!-- Steel_Rake -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="215071" name="Whistler Gududom" />
+			<gd_npc npc_id="215071" /><!-- Whistler Gududom -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="114300931" name="Shulack Pirate's Boots" />
-			<gd_item id="114600833" name="Shulack Pirate's Sabatons" />
+			<gd_item id="114300931" /><!-- Shulack Pirate's Boots -->
+			<gd_item id="114600833" /><!-- Shulack Pirate's Sabatons -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Legend)" base_chance="10">
 		<gd_maps>
-			<gd_map map_id="300100000" name="Steel_Rake" />
+			<gd_map map_id="300100000" /><!-- Steel_Rake -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="215080" name="Engineer Lahulahu" />
+			<gd_npc npc_id="215080" /><!-- Engineer Lahulahu -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="113100880" name="Shulack Pirate's Leggings" />
-			<gd_item id="113300897" name="Shulack Pirate's Breeches" />
-			<gd_item id="113500863" name="Shulack Pirate's Chausses" />
-			<gd_item id="113600838" name="Shulack Pirate's Greaves" />
+			<gd_item id="113100880" /><!-- Shulack Pirate's Leggings -->
+			<gd_item id="113300897" /><!-- Shulack Pirate's Breeches -->
+			<gd_item id="113500863" /><!-- Shulack Pirate's Chausses -->
+			<gd_item id="113600838" /><!-- Shulack Pirate's Greaves -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Unique)" base_chance="15">
 		<gd_maps>
-			<gd_map map_id="300100000" name="Steel_Rake" />
+			<gd_map map_id="300100000" /><!-- Steel_Rake -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="215080" name="Engineer Lahulahu" />
+			<gd_npc npc_id="215080" /><!-- Engineer Lahulahu -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="110100974" name="Steel Beard Pirate's Tunic" />
-			<gd_item id="110300919" name="Steel Beard Pirate's Jerkin" />
-			<gd_item id="110301590" name="Steel Beard Pirate's Magic Jerkin" />
-			<gd_item id="110500887" name="Steel Beard Pirate's Hauberk" />
-			<gd_item id="110551012" name="Steel Beard Pirate's Magic Hauberk" />
-			<gd_item id="110600871" name="Steel Beard Pirate's Breastplate" />
+			<gd_item id="110100974" /><!-- Steel Beard Pirate's Tunic -->
+			<gd_item id="110300919" /><!-- Steel Beard Pirate's Jerkin -->
+			<gd_item id="110301590" /><!-- Steel Beard Pirate's Magic Jerkin -->
+			<gd_item id="110500887" /><!-- Steel Beard Pirate's Hauberk -->
+			<gd_item id="110551012" /><!-- Steel Beard Pirate's Magic Hauberk -->
+			<gd_item id="110600871" /><!-- Steel Beard Pirate's Breastplate -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Accessory (Rare)" base_chance="50">
 		<gd_maps>
-			<gd_map map_id="300100000" name="Steel_Rake" />
+			<gd_map map_id="300100000" /><!-- Steel_Rake -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="215073" name="Freed Genie" />
+			<gd_npc npc_id="215073" /><!-- Freed Genie -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="122001045" name="Genie's Ring" />
+			<gd_item id="122001045" /><!-- Genie's Ring -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Accessory (Rare)" base_chance="50">
 		<gd_maps>
-			<gd_map map_id="300100000" name="Steel_Rake" />
+			<gd_map map_id="300100000" /><!-- Steel_Rake -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="215070" name="Chief Gunner Koakoa" />
+			<gd_npc npc_id="215070" /><!-- Chief Gunner Koakoa -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="121000826" name="Koakoa's Diamond Necklace" />
-			<gd_item id="121000827" name="Koakoa's Sapphire Necklace" />
+			<gd_item id="121000826" /><!-- Koakoa's Diamond Necklace -->
+			<gd_item id="121000827" /><!-- Koakoa's Sapphire Necklace -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Accessory (Rare)" base_chance="50">
 		<gd_maps>
-			<gd_map map_id="300100000" name="Steel_Rake" />
+			<gd_map map_id="300100000" /><!-- Steel_Rake -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="215069" name="Chief Mate Menekiki" />
+			<gd_npc npc_id="215069" /><!-- Chief Mate Menekiki -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="120000908" name="Menekiki's Diamond Earrings" />
-			<gd_item id="120000909" name="Menekiki's Sapphire Earrings" />
+			<gd_item id="120000908" /><!-- Menekiki's Diamond Earrings -->
+			<gd_item id="120000909" /><!-- Menekiki's Sapphire Earrings -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Accessory (Legend)" base_chance="30">
 		<gd_maps>
-			<gd_map map_id="300100000" name="Steel_Rake" />
+			<gd_map map_id="300100000" /><!-- Steel_Rake -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="215073" name="Freed Genie" />
+			<gd_npc npc_id="215073" /><!-- Freed Genie -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="123000938" name="Genie's Belt" />
+			<gd_item id="123000938" /><!-- Genie's Belt -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Headband (Rare)" base_chance="35">
 		<gd_maps>
-			<gd_map map_id="300100000" name="Steel_Rake" />
+			<gd_map map_id="300100000" /><!-- Steel_Rake -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="215081" name="Brass-Eye Grogget" />
+			<gd_npc npc_id="215081" /><!-- Brass-Eye Grogget -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="125002030" name="Grogget's Hat" />
-			<gd_item id="125002014" name="Grogget's Headband" />
-			<gd_item id="125002017" name="Grogget's Helm" />
+			<gd_item id="125002030" /><!-- Grogget's Hat -->
+			<gd_item id="125002014" /><!-- Grogget's Headband -->
+			<gd_item id="125002017" /><!-- Grogget's Helm -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Headband (Legend)" base_chance="30">
 		<gd_maps>
-			<gd_map map_id="300100000" name="Steel_Rake" />
+			<gd_map map_id="300100000" /><!-- Steel_Rake -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="215069" name="Chief Mate Menekiki" />
+			<gd_npc npc_id="215069" /><!-- Chief Mate Menekiki -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="125001979" name="Menekiki's Headband" />
-			<gd_item id="125001980" name="Menekiki's Hat" />
-			<gd_item id="125001981" name="Menekiki's Chain Helm" />
-			<gd_item id="125001982" name="Menekiki's Helm" />
+			<gd_item id="125001979" /><!-- Menekiki's Headband -->
+			<gd_item id="125001980" /><!-- Menekiki's Hat -->
+			<gd_item id="125001981" /><!-- Menekiki's Chain Helm -->
+			<gd_item id="125001982" /><!-- Menekiki's Helm -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Souvenir" base_chance="100" no_reduction="true">
 		<gd_maps>
-			<gd_map map_id="300100000" name="Steel_Rake" />
+			<gd_map map_id="300100000" /><!-- Steel_Rake -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="215081" name="Brass-Eye Grogget" />
+			<gd_npc npc_id="215081" /><!-- Brass-Eye Grogget -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="170170030" name="[Souvenir] Steel Rake Statue" />
+			<gd_item id="170170030" /><!-- [Souvenir] Steel Rake Statue -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Key" base_chance="100" no_reduction="true">
 		<gd_maps>
-			<gd_map map_id="300100000" name="Steel_Rake" />
+			<gd_map map_id="300100000" /><!-- Steel_Rake -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="215056" name="Warden Tantaka" />
+			<gd_npc npc_id="215056" /><!-- Warden Tantaka -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="185000049" name="Engine Room Key" />
+			<gd_item id="185000049" /><!-- Engine Room Key -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Key" base_chance="100" no_reduction="true">
 		<gd_maps>
-			<gd_map map_id="300100000" name="Steel_Rake" />
+			<gd_map map_id="300100000" /><!-- Steel_Rake -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="215058" name="Timid Alakin" />
+			<gd_npc npc_id="215058" /><!-- Timid Alakin -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="185000055" name="The Brig Key" />
-			<gd_item id="185000079" name="The Brig Key" />
+			<gd_item id="185000055" /><!-- The Brig Key -->
+			<gd_item id="185000079" /><!-- The Brig Key -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Key" base_chance="100" no_reduction="true">
 		<gd_maps>
-			<gd_map map_id="300100000" name="Steel_Rake" />
+			<gd_map map_id="300100000" /><!-- Steel_Rake -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="215064" name="Collector Memekin" />
+			<gd_npc npc_id="215064" /><!-- Collector Memekin -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="185000046" name="Grogget's Safe Key" />
-			<gd_item id="185000077" name="Grogget's Safe Key" />
+			<gd_item id="185000046" /><!-- Grogget's Safe Key -->
+			<gd_item id="185000077" /><!-- Grogget's Safe Key -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Key" base_chance="100" no_reduction="true">
 		<gd_maps>
-			<gd_map map_id="300100000" name="Steel_Rake" />
+			<gd_map map_id="300100000" /><!-- Steel_Rake -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="215065" name="Discerner Werikiki" />
+			<gd_npc npc_id="215065" /><!-- Discerner Werikiki -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="185000046" name="Grogget's Safe Key" />
-			<gd_item id="185000047" name="Right Eye Key" />
-			<gd_item id="185000077" name="Grogget's Safe Key" />
-			<gd_item id="185000078" name="Right Eye Key" />
+			<gd_item id="185000046" /><!-- Grogget's Safe Key -->
+			<gd_item id="185000047" /><!-- Right Eye Key -->
+			<gd_item id="185000077" /><!-- Grogget's Safe Key -->
+			<gd_item id="185000078" /><!-- Right Eye Key -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Key" base_chance="100" no_reduction="true">
 		<gd_maps>
-			<gd_map map_id="300100000" name="Steel_Rake" />
+			<gd_map map_id="300100000" /><!-- Steel_Rake -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="215066" name="Technician Binukin" />
+			<gd_npc npc_id="215066" /><!-- Technician Binukin -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="185000050" name="Generator Room Key" />
-			<gd_item id="185000080" name="Generator Room Key" />
+			<gd_item id="185000050" /><!-- Generator Room Key -->
+			<gd_item id="185000080" /><!-- Generator Room Key -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Key" base_chance="100" no_reduction="true">
 		<gd_maps>
-			<gd_map map_id="300100000" name="Steel_Rake" />
+			<gd_map map_id="300100000" /><!-- Steel_Rake -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="215067" name="Largimark the Smoker" />
+			<gd_npc npc_id="215067" /><!-- Largimark the Smoker -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="185000052" name="Largimark's Flint" />
+			<gd_item id="185000052" /><!-- Largimark's Flint -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Key" base_chance="100" no_reduction="true">
 		<gd_maps>
-			<gd_map map_id="300100000" name="Steel_Rake" />
+			<gd_map map_id="300100000" /><!-- Steel_Rake -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="215080" name="Engineer Lahulahu" />
+			<gd_npc npc_id="215080" /><!-- Engineer Lahulahu -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="185000051" name="Anchor Point Key" />
+			<gd_item id="185000051" /><!-- Anchor Point Key -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Key" base_chance="100" no_reduction="true">
 		<gd_maps>
-			<gd_map map_id="300100000" name="Steel_Rake" />
+			<gd_map map_id="300100000" /><!-- Steel_Rake -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="215401" name="Sturdy Bubukin" />
+			<gd_npc npc_id="215401" /><!-- Sturdy Bubukin -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="185000048" name="Menagerie Key" />
+			<gd_item id="185000048" /><!-- Menagerie Key -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Key" base_chance="100" no_reduction="true">
 		<gd_maps>
-			<gd_map map_id="300100000" name="Steel_Rake" />
+			<gd_map map_id="300100000" /><!-- Steel_Rake -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="215411" name="Zerkin the One-eyed" />
+			<gd_npc npc_id="215411" /><!-- Zerkin the One-eyed -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="185000073" name="Large Gun Deck Key" />
-			<gd_item id="185000081" name="Large Gun Deck Key" />
+			<gd_item id="185000073" /><!-- Large Gun Deck Key -->
+			<gd_item id="185000081" /><!-- Large Gun Deck Key -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Key" base_chance="100" no_reduction="true">
 		<gd_maps>
-			<gd_map map_id="300100000" name="Steel_Rake" />
+			<gd_map map_id="300100000" /><!-- Steel_Rake -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="219026" name="Sweeper Nunukin" />
+			<gd_npc npc_id="219026" /><!-- Sweeper Nunukin -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="185000042" name="Sailor Waiting Room Key" />
+			<gd_item id="185000042" /><!-- Sailor Waiting Room Key -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Key" base_chance="100" no_reduction="true">
 		<gd_maps>
-			<gd_map map_id="300100000" name="Steel_Rake" />
+			<gd_map map_id="300100000" /><!-- Steel_Rake -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="215070" name="Chief Gunner Koakoa" />
+			<gd_npc npc_id="215070" /><!-- Chief Gunner Koakoa -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="185000074" name="Gun Repair Deck Key" />
+			<gd_item id="185000074" /><!-- Gun Repair Deck Key -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Key" base_chance="100" no_reduction="true">
 		<gd_maps>
-			<gd_map map_id="300100000" name="Steel_Rake" />
+			<gd_map map_id="300100000" /><!-- Steel_Rake -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="215069" name="Chief Mate Menekiki" />
+			<gd_npc npc_id="215069" /><!-- Chief Mate Menekiki -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="185000053" name="Weapon Military Supply Base Key" />
+			<gd_item id="185000053" /><!-- Weapon Military Supply Base Key -->
 		</gd_items>
 	</gd_rule>
 </global_rules>

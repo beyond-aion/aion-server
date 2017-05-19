@@ -29,6 +29,7 @@ public class TeleLocationData {
 		for (TelelocationTemplate loc : tlist) {
 			loctlistData.put(loc.getLocId(), loc);
 		}
+		tlist = null;
 	}
 
 	public int size() {

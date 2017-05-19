@@ -18,12 +18,11 @@
 			<xs:element name="drop" type="Drop" minOccurs="1" maxOccurs="unbounded" />
 		</xs:sequence>
 		<xs:attribute name="race" type="xs:string" />
-		<xs:attribute name="name" type="xs:string" use="required" />
+		<xs:attribute name="name" type="xs:string" />
 		<xs:attribute name="max_items" type="xs:int" use="optional" default="1" />
 	</xs:complexType>
 	<xs:complexType name="Drop">
 		<xs:attribute name="item_id" type="xs:int" />
-		<xs:attribute name="name" type="xs:string" />
 		<xs:attribute name="min_amount" type="xs:int" use="optional" default="1" />
 		<xs:attribute name="max_amount" type="xs:int" use="optional" default="1" />
 		<xs:attribute name="chance" type="xs:float" />

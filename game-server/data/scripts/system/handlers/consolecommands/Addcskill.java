@@ -3,14 +3,11 @@ package consolecommands;
 import java.io.File;
 import java.util.List;
 
-import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlID;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
 
 import com.aionemu.commons.utils.xml.JAXBUtil;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
@@ -55,7 +52,7 @@ public class Addcskill extends ConsoleCommand {
 		SkillTemplate skillTemplate = data.getSkillTemplate(skillName);
 
 		if (skillTemplate != null)
-			skillId = skillTemplate.getTemplateId();
+			skillId = skillTemplate.getSkillId();
 
 		if (skillId > 0) {
 			player.getSkillList().addSkill(player, skillId, 1);
@@ -68,13 +65,12 @@ public class Addcskill extends ConsoleCommand {
 		PacketSendUtility.sendMessage(admin, "syntax ///addcskill <skill name>");
 	}
 
-	@XmlAccessorType(XmlAccessType.NONE)
-	@XmlType(namespace = "", name = "SkillTemplate")
+	@XmlRootElement(name = "skill")
+	@XmlAccessorType(XmlAccessType.FIELD)
 	private static class SkillTemplate {
 
 		@XmlAttribute(name = "id", required = true)
-		@XmlID
-		private String id;
+		private int skillId;
 
 		@XmlAttribute(name = "name")
 		private String name;
@@ -83,19 +79,8 @@ public class Addcskill extends ConsoleCommand {
 			return name;
 		}
 
-		public int getTemplateId() {
+		public int getSkillId() {
 			return skillId;
-		}
-
-		private int skillId;
-
-		public void setSkillId(int skillId) {
-			this.skillId = skillId;
-		}
-
-		@SuppressWarnings("unused")
-		void afterUnmarshal(Unmarshaller u, Object parent) {
-			setSkillId(Integer.parseInt(id));
 		}
 
 	}

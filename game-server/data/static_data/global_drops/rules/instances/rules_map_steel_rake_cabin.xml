@@ -3,255 +3,255 @@
 	<!-- Multiple Monster Drops -->
 	<gd_rule rule_name="Named Key" base_chance="100" no_reduction="true">
 		<gd_maps>
-			<gd_map map_id="300460000" name="Steel_Rake_Cabin" />
+			<gd_map map_id="300460000" /><!-- Steel_Rake_Cabin -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="219028" name="Collector Memekin" />
-			<gd_npc npc_id="219029" name="Discerner Werikiki" />
+			<gd_npc npc_id="219028" /><!-- Collector Memekin -->
+			<gd_npc npc_id="219029" /><!-- Discerner Werikiki -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="185000077" name="Grogget's Safe Key" />
+			<gd_item id="185000077" /><!-- Grogget's Safe Key -->
 		</gd_items>
 	</gd_rule>
 	<!-- Single Monster Drops -->
 	<gd_rule rule_name="Named Box (Unique)" base_chance="25">
 		<gd_maps>
-			<gd_map map_id="300460000" name="Steel_Rake_Cabin" />
+			<gd_map map_id="300460000" /><!-- Steel_Rake_Cabin -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="219033" name="Golden Eye Mantutu" />
+			<gd_npc npc_id="219033" /><!-- Golden Eye Mantutu -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="188051414" name="Mantutu's Fabled Shoe Chest" />
+			<gd_item id="188051414" /><!-- Mantutu's Fabled Shoe Chest -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Rare)" base_chance="35">
 		<gd_maps>
-			<gd_map map_id="300460000" name="Steel_Rake_Cabin" />
+			<gd_map map_id="300460000" /><!-- Steel_Rake_Cabin -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="219027" name="Bhagwaninerk" />
+			<gd_npc npc_id="219027" /><!-- Bhagwaninerk -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="111100872" name="Shulack Sailor's Gloves" />
-			<gd_item id="111300873" name="Shulack Sailor's Vambrace" />
-			<gd_item id="111500863" name="Shulack Sailor's Handguards" />
-			<gd_item id="111600851" name="Shulack Sailor's Gauntlets" />
+			<gd_item id="111100872" /><!-- Shulack Sailor's Gloves -->
+			<gd_item id="111300873" /><!-- Shulack Sailor's Vambrace -->
+			<gd_item id="111500863" /><!-- Shulack Sailor's Handguards -->
+			<gd_item id="111600851" /><!-- Shulack Sailor's Gauntlets -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Rare)" base_chance="35">
 		<gd_maps>
-			<gd_map map_id="300460000" name="Steel_Rake_Cabin" />
+			<gd_map map_id="300460000" /><!-- Steel_Rake_Cabin -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="219028" name="Collector Memekin" />
+			<gd_npc npc_id="219028" /><!-- Collector Memekin -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="112100829" name="Shulack Sailor's Pauldrons" />
-			<gd_item id="112300823" name="Shulack Sailor's Shoulderguards" />
-			<gd_item id="112500814" name="Shulack Sailor's Spaulders" />
-			<gd_item id="112600825" name="Shulack Sailor's Shoulderplates" />
+			<gd_item id="112100829" /><!-- Shulack Sailor's Pauldrons -->
+			<gd_item id="112300823" /><!-- Shulack Sailor's Shoulderguards -->
+			<gd_item id="112500814" /><!-- Shulack Sailor's Spaulders -->
+			<gd_item id="112600825" /><!-- Shulack Sailor's Shoulderplates -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Rare)" base_chance="35">
 		<gd_maps>
-			<gd_map map_id="300460000" name="Steel_Rake_Cabin" />
+			<gd_map map_id="300460000" /><!-- Steel_Rake_Cabin -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="219029" name="Discerner Werikiki" />
+			<gd_npc npc_id="219029" /><!-- Discerner Werikiki -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="114100907" name="Shulack Sailor's Shoes" />
-			<gd_item id="114300932" name="Shulack Sailor's Boots" />
-			<gd_item id="114500875" name="Shulack Sailor's Brogans" />
-			<gd_item id="114600834" name="Shulack Sailor's Sabatons" />
+			<gd_item id="114100907" /><!-- Shulack Sailor's Shoes -->
+			<gd_item id="114300932" /><!-- Shulack Sailor's Boots -->
+			<gd_item id="114500875" /><!-- Shulack Sailor's Brogans -->
+			<gd_item id="114600834" /><!-- Shulack Sailor's Sabatons -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Rare)" base_chance="35">
 		<gd_maps>
-			<gd_map map_id="300460000" name="Steel_Rake_Cabin" />
+			<gd_map map_id="300460000" /><!-- Steel_Rake_Cabin -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="219030" name="Whistler Gududom" />
+			<gd_npc npc_id="219030" /><!-- Whistler Gududom -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="110100977" name="Shulack Sailor's Tunic" />
-			<gd_item id="110300922" name="Shulack Sailor's Jerkin" />
-			<gd_item id="110500890" name="Shulack Sailor's Hauberk" />
-			<gd_item id="110600874" name="Shulack Sailor's Breastplate" />
+			<gd_item id="110100977" /><!-- Shulack Sailor's Tunic -->
+			<gd_item id="110300922" /><!-- Shulack Sailor's Jerkin -->
+			<gd_item id="110500890" /><!-- Shulack Sailor's Hauberk -->
+			<gd_item id="110600874" /><!-- Shulack Sailor's Breastplate -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Rare)" base_chance="45">
 		<gd_maps>
-			<gd_map map_id="300460000" name="Steel_Rake_Cabin" />
+			<gd_map map_id="300460000" /><!-- Steel_Rake_Cabin -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="219033" name="Golden Eye Mantutu" />
+			<gd_npc npc_id="219033" /><!-- Golden Eye Mantutu -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="113100881" name="Shulack Sailor's Leggings" />
-			<gd_item id="113300898" name="Shulack Sailor's Breeches" />
-			<gd_item id="113500864" name="Shulack Sailor's Chausses" />
-			<gd_item id="113600839" name="Shulack Sailor's Greaves" />
+			<gd_item id="113100881" /><!-- Shulack Sailor's Leggings -->
+			<gd_item id="113300898" /><!-- Shulack Sailor's Breeches -->
+			<gd_item id="113500864" /><!-- Shulack Sailor's Chausses -->
+			<gd_item id="113600839" /><!-- Shulack Sailor's Greaves -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Legend)" base_chance="25">
 		<gd_maps>
-			<gd_map map_id="300460000" name="Steel_Rake_Cabin" />
+			<gd_map map_id="300460000" /><!-- Steel_Rake_Cabin -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="219027" name="Bhagwaninerk" />
+			<gd_npc npc_id="219027" /><!-- Bhagwaninerk -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="112100828" name="Shulack Pirate's Pauldrons" />
-			<gd_item id="112300822" name="Shulack Pirate's Shoulderguards" />
-			<gd_item id="112500813" name="Shulack Pirate's Spaulders" />
-			<gd_item id="112600824" name="Shulack Pirate's Shoulderplates" />
+			<gd_item id="112100828" /><!-- Shulack Pirate's Pauldrons -->
+			<gd_item id="112300822" /><!-- Shulack Pirate's Shoulderguards -->
+			<gd_item id="112500813" /><!-- Shulack Pirate's Spaulders -->
+			<gd_item id="112600824" /><!-- Shulack Pirate's Shoulderplates -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Legend)" base_chance="25">
 		<gd_maps>
-			<gd_map map_id="300460000" name="Steel_Rake_Cabin" />
+			<gd_map map_id="300460000" /><!-- Steel_Rake_Cabin -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="219028" name="Collector Memekin" />
+			<gd_npc npc_id="219028" /><!-- Collector Memekin -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="111100871" name="Shulack Pirate's Gloves" />
-			<gd_item id="111300872" name="Shulack Pirate's Vambrace" />
-			<gd_item id="111500862" name="Shulack Pirate's Handguards" />
-			<gd_item id="111600850" name="Shulack Pirate's Gauntlets" />
+			<gd_item id="111100871" /><!-- Shulack Pirate's Gloves -->
+			<gd_item id="111300872" /><!-- Shulack Pirate's Vambrace -->
+			<gd_item id="111500862" /><!-- Shulack Pirate's Handguards -->
+			<gd_item id="111600850" /><!-- Shulack Pirate's Gauntlets -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Legend)" base_chance="25">
 		<gd_maps>
-			<gd_map map_id="300460000" name="Steel_Rake_Cabin" />
+			<gd_map map_id="300460000" /><!-- Steel_Rake_Cabin -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="219029" name="Discerner Werikiki" />
+			<gd_npc npc_id="219029" /><!-- Discerner Werikiki -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="113100880" name="Shulack Pirate's Leggings" />
-			<gd_item id="113300897" name="Shulack Pirate's Breeches" />
-			<gd_item id="113500863" name="Shulack Pirate's Chausses" />
-			<gd_item id="113600838" name="Shulack Pirate's Greaves" />
+			<gd_item id="113100880" /><!-- Shulack Pirate's Leggings -->
+			<gd_item id="113300897" /><!-- Shulack Pirate's Breeches -->
+			<gd_item id="113500863" /><!-- Shulack Pirate's Chausses -->
+			<gd_item id="113600838" /><!-- Shulack Pirate's Greaves -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Legend)" base_chance="25">
 		<gd_maps>
-			<gd_map map_id="300460000" name="Steel_Rake_Cabin" />
+			<gd_map map_id="300460000" /><!-- Steel_Rake_Cabin -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="219030" name="Whistler Gududom" />
+			<gd_npc npc_id="219030" /><!-- Whistler Gududom -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="114100906" name="Shulack Pirate's Shoes" />
-			<gd_item id="114300931" name="Shulack Pirate's Boots" />
-			<gd_item id="114500874" name="Shulack Pirate's Brogans" />
-			<gd_item id="114600833" name="Shulack Pirate's Sabatons" />
+			<gd_item id="114100906" /><!-- Shulack Pirate's Shoes -->
+			<gd_item id="114300931" /><!-- Shulack Pirate's Boots -->
+			<gd_item id="114500874" /><!-- Shulack Pirate's Brogans -->
+			<gd_item id="114600833" /><!-- Shulack Pirate's Sabatons -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Legend)" base_chance="30">
 		<gd_maps>
-			<gd_map map_id="300460000" name="Steel_Rake_Cabin" />
+			<gd_map map_id="300460000" /><!-- Steel_Rake_Cabin -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="219033" name="Golden Eye Mantutu" />
+			<gd_npc npc_id="219033" /><!-- Golden Eye Mantutu -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="110100976" name="Shulack Pirate's Tunic" />
-			<gd_item id="110300921" name="Shulack Pirate's Jerkin" />
-			<gd_item id="110500889" name="Shulack Pirate's Hauberk" />
-			<gd_item id="110600873" name="Shulack Pirate's Breastplate" />
+			<gd_item id="110100976" /><!-- Shulack Pirate's Tunic -->
+			<gd_item id="110300921" /><!-- Shulack Pirate's Jerkin -->
+			<gd_item id="110500889" /><!-- Shulack Pirate's Hauberk -->
+			<gd_item id="110600873" /><!-- Shulack Pirate's Breastplate -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Accessory (Rare)" base_chance="50">
 		<gd_maps>
-			<gd_map map_id="300460000" name="Steel_Rake_Cabin" />
+			<gd_map map_id="300460000" /><!-- Steel_Rake_Cabin -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="219032" name="Madame Bovariki" />
+			<gd_npc npc_id="219032" /><!-- Madame Bovariki -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="122001046" name="Bovariki's Ring" />
+			<gd_item id="122001046" /><!-- Bovariki's Ring -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Accessory (Legend)" base_chance="30">
 		<gd_maps>
-			<gd_map map_id="300460000" name="Steel_Rake_Cabin" />
+			<gd_map map_id="300460000" /><!-- Steel_Rake_Cabin -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="219032" name="Madame Bovariki" />
+			<gd_npc npc_id="219032" /><!-- Madame Bovariki -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="123000937" name="Bovariki's Belt" />
+			<gd_item id="123000937" /><!-- Bovariki's Belt -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Accessory (Unique)" base_chance="30">
 		<gd_maps>
-			<gd_map map_id="300460000" name="Steel_Rake_Cabin" />
+			<gd_map map_id="300460000" /><!-- Steel_Rake_Cabin -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="215489" name="Treasure Box" />
+			<gd_npc npc_id="215489" /><!-- Treasure Box -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="120000910" name="Steel Beard Pirate's Diamond Earrings" />
-			<gd_item id="120000911" name="Steel Beard Pirate's Sapphire Earrings" />
+			<gd_item id="120000910" /><!-- Steel Beard Pirate's Diamond Earrings -->
+			<gd_item id="120000911" /><!-- Steel Beard Pirate's Sapphire Earrings -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Key (Rare)" base_chance="20" no_reduction="true">
 		<gd_maps>
-			<gd_map map_id="300460000" name="Steel_Rake_Cabin" />
+			<gd_map map_id="300460000" /><!-- Steel_Rake_Cabin -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="219032" name="Madame Bovariki" />
+			<gd_npc npc_id="219032" /><!-- Madame Bovariki -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="185000044" name="Tavern Key 2nd Floor" />
+			<gd_item id="185000044" /><!-- Tavern Key 2nd Floor -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Key" base_chance="100" no_reduction="true">
 		<gd_maps>
-			<gd_map map_id="300460000" name="Steel_Rake_Cabin" />
+			<gd_map map_id="300460000" /><!-- Steel_Rake_Cabin -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="219025" name="Kedomke the Drinker" />
+			<gd_npc npc_id="219025" /><!-- Kedomke the Drinker -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="185000054" name="Mercenary Quarters Key" />
+			<gd_item id="185000054" /><!-- Mercenary Quarters Key -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Key" base_chance="100" no_reduction="true">
 		<gd_maps>
-			<gd_map map_id="300460000" name="Steel_Rake_Cabin" />
+			<gd_map map_id="300460000" /><!-- Steel_Rake_Cabin -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="219026" name="Sweeper Nunukin" />
+			<gd_npc npc_id="219026" /><!-- Sweeper Nunukin -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="185000042" name="Sailor Waiting Room Key" />
+			<gd_item id="185000042" /><!-- Sailor Waiting Room Key -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Key" base_chance="100" no_reduction="true">
 		<gd_maps>
-			<gd_map map_id="300460000" name="Steel_Rake_Cabin" />
+			<gd_map map_id="300460000" /><!-- Steel_Rake_Cabin -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="219027" name="Bhagwaninerk" />
+			<gd_npc npc_id="219027" /><!-- Bhagwaninerk -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="185000043" name="Starboard Deck Key" />
+			<gd_item id="185000043" /><!-- Starboard Deck Key -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Key" base_chance="100" no_reduction="true">
 		<gd_maps>
-			<gd_map map_id="300460000" name="Steel_Rake_Cabin" />
+			<gd_map map_id="300460000" /><!-- Steel_Rake_Cabin -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="219032" name="Madame Bovariki" />
+			<gd_npc npc_id="219032" /><!-- Madame Bovariki -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="185000045" name="Loot Depository Key" />
+			<gd_item id="185000045" /><!-- Loot Depository Key -->
 		</gd_items>
 	</gd_rule>
 </global_rules>

@@ -2,147 +2,147 @@
 <global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../global_rules.xsd">
 	<gd_rule rule_name="Named Key" base_chance="100" no_reduction="true">
 		<gd_maps>
-			<gd_map map_id="300280000" name="Rentus_Base" />
+			<gd_map map_id="300280000" /><!-- Rentus_Base -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="217310" name="Captain Xasta" />
+			<gd_npc npc_id="217310" /><!-- Captain Xasta -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="185000228" name="Rentus Supplies Storage Box Key" />
+			<gd_item id="185000228" /><!-- Rentus Supplies Storage Box Key -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Epic)" base_chance="35">
 		<gd_maps>
-			<gd_map map_id="300280000" name="Rentus_Base" />
+			<gd_map map_id="300280000" /><!-- Rentus_Base -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="217317" name="Archmagus Upadi" />
+			<gd_npc npc_id="217317" /><!-- Archmagus Upadi -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="110101867" name="Jacket of Rentus Recovery Squad" />
-			<gd_item id="110301857" name="Jerkin of Rentus Recovery Squad" />
-			<gd_item id="110301858" name="Leather Breastplate of Rentus Recovery Squad" />
-			<gd_item id="110551184" name="Hauberk of Rentus Recovery Squad" />
-			<gd_item id="110551185" name="Chain Breastplate of Rentus Recovery Squad" />
-			<gd_item id="110601654" name="Breastplate of Rentus Recovery Squad" />
+			<gd_item id="110101867" /><!-- Jacket of Rentus Recovery Squad -->
+			<gd_item id="110301857" /><!-- Jerkin of Rentus Recovery Squad -->
+			<gd_item id="110301858" /><!-- Leather Breastplate of Rentus Recovery Squad -->
+			<gd_item id="110551184" /><!-- Hauberk of Rentus Recovery Squad -->
+			<gd_item id="110551185" /><!-- Chain Breastplate of Rentus Recovery Squad -->
+			<gd_item id="110601654" /><!-- Breastplate of Rentus Recovery Squad -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Epic)" base_chance="35">
 		<gd_maps>
-			<gd_map map_id="300280000" name="Rentus_Base" />
+			<gd_map map_id="300280000" /><!-- Rentus_Base -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="217316" name="Ambusher Kiriana" />
+			<gd_npc npc_id="217316" /><!-- Ambusher Kiriana -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="111101682" name="Gloves of Rentus Recovery Squad" />
-			<gd_item id="111301795" name="Vambraces of Rentus Recovery Squad" />
-			<gd_item id="111301796" name="Leather Protective Gloves of Rentus Recovery Squad" />
-			<gd_item id="111501743" name="Handguards of Rentus Recovery Squad" />
-			<gd_item id="111501744" name="Chain Combat Gloves of Rentus Recovery Squad" />
-			<gd_item id="111601617" name="Gauntlets of Rentus Recovery Squad" />
+			<gd_item id="111101682" /><!-- Gloves of Rentus Recovery Squad -->
+			<gd_item id="111301795" /><!-- Vambraces of Rentus Recovery Squad -->
+			<gd_item id="111301796" /><!-- Leather Protective Gloves of Rentus Recovery Squad -->
+			<gd_item id="111501743" /><!-- Handguards of Rentus Recovery Squad -->
+			<gd_item id="111501744" /><!-- Chain Combat Gloves of Rentus Recovery Squad -->
+			<gd_item id="111601617" /><!-- Gauntlets of Rentus Recovery Squad -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Epic)" base_chance="35">
 		<gd_maps>
-			<gd_map map_id="300280000" name="Rentus_Base" />
+			<gd_map map_id="300280000" /><!-- Rentus_Base -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="217315" name="Umatha the Crazed" />
+			<gd_npc npc_id="217315" /><!-- Umatha the Crazed -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="112101631" name="Cloth Shoulder Guards of Rentus Recovery Squad" />
-			<gd_item id="112301734" name="Shoulderguards of Rentus Recovery Squad" />
-			<gd_item id="112301735" name="Leather Pauldrons of Rentus Recovery Squad" />
-			<gd_item id="112501682" name="Spaulders of Rentus Recovery Squad" />
-			<gd_item id="112501683" name="Chain Spaulders of Rentus Recovery Squad" />
-			<gd_item id="112601599" name="Shoulderplates of Rentus Recovery Squad" />
+			<gd_item id="112101631" /><!-- Cloth Shoulder Guards of Rentus Recovery Squad -->
+			<gd_item id="112301734" /><!-- Shoulderguards of Rentus Recovery Squad -->
+			<gd_item id="112301735" /><!-- Leather Pauldrons of Rentus Recovery Squad -->
+			<gd_item id="112501682" /><!-- Spaulders of Rentus Recovery Squad -->
+			<gd_item id="112501683" /><!-- Chain Spaulders of Rentus Recovery Squad -->
+			<gd_item id="112601599" /><!-- Shoulderplates of Rentus Recovery Squad -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Epic)" base_chance="35">
 		<gd_maps>
-			<gd_map map_id="300280000" name="Rentus_Base" />
+			<gd_map map_id="300280000" /><!-- Rentus_Base -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="217309" name="Captain Xasta" />
-			<gd_npc npc_id="217310" name="Captain Xasta" />
+			<gd_npc npc_id="217309" /><!-- Captain Xasta -->
+			<gd_npc npc_id="217310" /><!-- Captain Xasta -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="114101727" name="Shoes of Rentus Recovery Squad" />
-			<gd_item id="114301863" name="Boots of Rentus Recovery Squad" />
-			<gd_item id="114301864" name="Leather Combat Boots of Rentus Recovery Squad" />
-			<gd_item id="114501771" name="Brogans of Rentus Recovery Squad" />
-			<gd_item id="114501772" name="Chain Combat Boots of Rentus Recovery Squad" />
-			<gd_item id="114601607" name="Plate Boots of Rentus Recovery Squad" />
+			<gd_item id="114101727" /><!-- Shoes of Rentus Recovery Squad -->
+			<gd_item id="114301863" /><!-- Boots of Rentus Recovery Squad -->
+			<gd_item id="114301864" /><!-- Leather Combat Boots of Rentus Recovery Squad -->
+			<gd_item id="114501771" /><!-- Brogans of Rentus Recovery Squad -->
+			<gd_item id="114501772" /><!-- Chain Combat Boots of Rentus Recovery Squad -->
+			<gd_item id="114601607" /><!-- Plate Boots of Rentus Recovery Squad -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Shield (Epic)" base_chance="25">
 		<gd_maps>
-			<gd_map map_id="300280000" name="Rentus_Base" />
+			<gd_map map_id="300280000" /><!-- Rentus_Base -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="217309" name="Captain Xasta" />
-			<gd_npc npc_id="217310" name="Captain Xasta" />
+			<gd_npc npc_id="217309" /><!-- Captain Xasta -->
+			<gd_npc npc_id="217310" /><!-- Captain Xasta -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="115001812" name="Shield of Rentus Recovery Squad" />
-			<gd_item id="115001813" name="Scale Shield of Rentus Recovery Squad" />
+			<gd_item id="115001812" /><!-- Shield of Rentus Recovery Squad -->
+			<gd_item id="115001813" /><!-- Scale Shield of Rentus Recovery Squad -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Weapon (Epic)" base_chance="25">
 		<gd_maps>
-			<gd_map map_id="300280000" name="Rentus_Base" />
+			<gd_map map_id="300280000" /><!-- Rentus_Base -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="217313" name="Brigade General Vasharti" />
+			<gd_npc npc_id="217313" /><!-- Brigade General Vasharti -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="100001262" name="Vasharti's Sword" />
-			<gd_item id="101701008" name="Vasharti's Longbow" />
-			<gd_item id="101500991" name="Vasharti's Staff" />
-			<gd_item id="101300928" name="Vasharti's Spear" />
-			<gd_item id="100900965" name="Vasharti's Greatsword" />
-			<gd_item id="100601037" name="Vasharti's Tome" />
-			<gd_item id="100500983" name="Vasharti's Jewel" />
-			<gd_item id="100201121" name="Vasharti's Dagger" />
-			<gd_item id="100100963" name="Vasharti's Warhammer" />
-			<gd_item id="101800855" name="Vasharti's Pistol" />
-			<gd_item id="101900853" name="Vasharti's Aethercannon" />
-			<gd_item id="102000887" name="Vasharti's Harp" />
-			<gd_item id="102100747" name="Vasharti's Cipher-Blade" />
+			<gd_item id="100001262" /><!-- Vasharti's Sword -->
+			<gd_item id="101701008" /><!-- Vasharti's Longbow -->
+			<gd_item id="101500991" /><!-- Vasharti's Staff -->
+			<gd_item id="101300928" /><!-- Vasharti's Spear -->
+			<gd_item id="100900965" /><!-- Vasharti's Greatsword -->
+			<gd_item id="100601037" /><!-- Vasharti's Tome -->
+			<gd_item id="100500983" /><!-- Vasharti's Jewel -->
+			<gd_item id="100201121" /><!-- Vasharti's Dagger -->
+			<gd_item id="100100963" /><!-- Vasharti's Warhammer -->
+			<gd_item id="101800855" /><!-- Vasharti's Pistol -->
+			<gd_item id="101900853" /><!-- Vasharti's Aethercannon -->
+			<gd_item id="102000887" /><!-- Vasharti's Harp -->
+			<gd_item id="102100747" /><!-- Vasharti's Cipher-Blade -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Souvenir (Unique)" base_chance="20">
 		<gd_maps>
-			<gd_map map_id="300280000" name="Rentus_Base" />
+			<gd_map map_id="300280000" /><!-- Rentus_Base -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="217313" name="Brigade General Vasharti" />
+			<gd_npc npc_id="217313" /><!-- Brigade General Vasharti -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="170030052" name="[Souvenir] Vasharti's Gloves Wall Decoration" />
+			<gd_item id="170030052" /><!-- [Souvenir] Vasharti's Gloves Wall Decoration -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Wings (Epic)" base_chance="5">
 		<gd_maps>
-			<gd_map map_id="300280000" name="Rentus_Base" />
+			<gd_map map_id="300280000" /><!-- Rentus_Base -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="217313" name="Brigade General Vasharti" />
+			<gd_npc npc_id="217313" /><!-- Brigade General Vasharti -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="187000158" name="Wing Feather of Rentus Recovery Squad" />
+			<gd_item id="187000158" /><!-- Wing Feather of Rentus Recovery Squad -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Mount (Epic)" base_chance="2.5">
 		<gd_maps>
-			<gd_map map_id="300280000" name="Rentus_Base" />
+			<gd_map map_id="300280000" /><!-- Rentus_Base -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="217313" name="Brigade General Vasharti" />
+			<gd_npc npc_id="217313" /><!-- Brigade General Vasharti -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="190100004" name="Pagati Veyron" />
+			<gd_item id="190100004" /><!-- Pagati Veyron -->
 		</gd_items>
 	</gd_rule>
 </global_rules>

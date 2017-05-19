@@ -17,8 +17,6 @@ public class ChestTemplate {
 
 	@XmlAttribute(name = "npcid")
 	protected int npcId;
-	@XmlAttribute(name = "name")
-	protected String name;
 	@XmlElement(name = "keyitem")
 	protected List<KeyItem> keyItem;
 
@@ -27,13 +25,6 @@ public class ChestTemplate {
 	 */
 	public int getNpcId() {
 		return npcId;
-	}
-
-	/**
-	 * @return the name
-	 */
-	public String getName() {
-		return name;
 	}
 
 	/**

@@ -20,11 +20,6 @@ public class TelelocationTemplate {
 
 	@XmlAttribute(name = "mapid", required = true)
 	private int mapid = 0;
-	/**
-	 * location name.
-	 */
-	@XmlAttribute(name = "name", required = true)
-	private String name = "";
 
 	@XmlAttribute(name = "name_id", required = true)
 	private int nameId;
@@ -47,10 +42,6 @@ public class TelelocationTemplate {
 
 	public int getMapId() {
 		return mapid;
-	}
-
-	public String getName() {
-		return name;
 	}
 
 	public int getNameId() {

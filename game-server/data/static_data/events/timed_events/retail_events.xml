@@ -15,7 +15,7 @@
 					<gd_rating rating="LEGENDARY" />
 				</gd_ratings>
 				<gd_items>
-					<gd_item id="188053101" name="Mysterious Reward Box" />
+					<gd_item id="188053101" /><!-- Mysterious Reward Box -->
 				</gd_items>
 			</gd_rule>
 		</event_drops>
@@ -49,11 +49,11 @@
 					<gd_rating rating="LEGENDARY" />
 				</gd_ratings>
 				<gd_items>
-					<gd_item id="186000148" name="[Event] White Ribbon" />
-					<gd_item id="186000149" name="[Event] Smooth Petal" />
-					<gd_item id="186000150" name="[Event] Comet Powder" />
-					<gd_item id="186000151" name="[Event] Dried Sweet Dado" />
-					<gd_item id="186000152" name="[Event] Silver Lump" />
+					<gd_item id="186000148" /><!-- [Event] White Ribbon -->
+					<gd_item id="186000149" /><!-- [Event] Smooth Petal -->
+					<gd_item id="186000150" /><!-- [Event] Comet Powder -->
+					<gd_item id="186000151" /><!-- [Event] Dried Sweet Dado -->
+					<gd_item id="186000152" /><!-- [Event] Silver Lump -->
 				</gd_items>
 			</gd_rule>
 		</event_drops>
@@ -119,7 +119,7 @@
 					<gd_rating rating="LEGENDARY" />
 				</gd_ratings>
 				<gd_items>
-					<gd_item id="186000152" name="[Event] Silver Lump" />
+					<gd_item id="186000152" /><!-- [Event] Silver Lump -->
 				</gd_items>
 			</gd_rule>
 		</event_drops>
@@ -736,13 +736,13 @@
 		<event_drops>
 			<gd_rule rule_name="Ascension Energy" base_chance="50" fixed_chance="true">
 				<gd_items>
-					<gd_item id="186000127" name="Ascension Energy" />
+					<gd_item id="186000127" /><!-- Ascension Energy -->
 				</gd_items>
 				<gd_maps>
-					<gd_map map_id="210070000" name="Cygnea" />
-					<gd_map map_id="220080000" name="Enshar" />
-					<gd_map map_id="600090000" name="Kaldor" />
-					<gd_map map_id="600100000" name="Levinshor" />
+					<gd_map map_id="210070000" /><!-- Cygnea -->
+					<gd_map map_id="220080000" /><!-- Enshar -->
+					<gd_map map_id="600090000" /><!-- Kaldor -->
+					<gd_map map_id="600100000" /><!-- Levinshor -->
 				</gd_maps>
 				<gd_ratings>
 					<gd_rating rating="NORMAL" />
@@ -756,40 +756,40 @@
 		<event_drops>
 			<gd_rule rule_name="Crab Fest Event Drop" base_chance="100" min_diff="0" max_diff="70" no_reduction="true">
 				<gd_npcs>
-					<gd_npc name="Scuttling Potcrab" npc_id="217717" />
-					<gd_npc name="Scuttling Potcrab" npc_id="217718" />
-					<gd_npc name="Chittering Potcrab" npc_id="217719" />
-					<gd_npc name="Chittering Potcrab" npc_id="217720" />
-					<gd_npc name="Dawn Frost Potcrab" npc_id="217721" />
-					<gd_npc name="Dawn Frost Potcrab" npc_id="217722" />
-					<gd_npc name="Snowflower Potcrab" npc_id="217723" />
-					<gd_npc name="Snowflower Potcrab" npc_id="217724" />
+					<gd_npc npc_id="217717" /><!-- Scuttling Potcrab -->
+					<gd_npc npc_id="217718" /><!-- Scuttling Potcrab -->
+					<gd_npc npc_id="217719" /><!-- Chittering Potcrab -->
+					<gd_npc npc_id="217720" /><!-- Chittering Potcrab -->
+					<gd_npc npc_id="217721" /><!-- Dawn Frost Potcrab -->
+					<gd_npc npc_id="217722" /><!-- Dawn Frost Potcrab -->
+					<gd_npc npc_id="217723" /><!-- Snowflower Potcrab -->
+					<gd_npc npc_id="217724" /><!-- Snowflower Potcrab -->
 				</gd_npcs>
 				<gd_items>
-					<gd_item id="160010154" name="[Event] Stunned Potcrab" />
+					<gd_item id="160010154" /><!-- [Event] Stunned Potcrab -->
 				</gd_items>
 			</gd_rule>
 			<gd_rule rule_name="Crab Fest Event Drop" base_chance="100" min_diff="0" max_diff="70" no_reduction="true">
 				<gd_npcs>
-					<gd_npc name="Scuttling Starcrab" npc_id="217725" />
-					<gd_npc name="Scuttling Starcrab" npc_id="217726" />
-					<gd_npc name="Chittering Starcrab" npc_id="217727" />
-					<gd_npc name="Chittering Starcrab" npc_id="217728" />
-					<gd_npc name="Dawn Frost Starcrab" npc_id="217729" />
-					<gd_npc name="Dawn Frost Starcrab" npc_id="217730" />
-					<gd_npc name="Snowflower Starcrab" npc_id="217731" />
-					<gd_npc name="Snowflower Starcrab" npc_id="217732" />
+					<gd_npc npc_id="217725" /><!-- Scuttling Starcrab -->
+					<gd_npc npc_id="217726" /><!-- Scuttling Starcrab -->
+					<gd_npc npc_id="217727" /><!-- Chittering Starcrab -->
+					<gd_npc npc_id="217728" /><!-- Chittering Starcrab -->
+					<gd_npc npc_id="217729" /><!-- Dawn Frost Starcrab -->
+					<gd_npc npc_id="217730" /><!-- Dawn Frost Starcrab -->
+					<gd_npc npc_id="217731" /><!-- Snowflower Starcrab -->
+					<gd_npc npc_id="217732" /><!-- Snowflower Starcrab -->
 				</gd_npcs>
 				<gd_items>
-					<gd_item id="160010155" name="[Event] Stunned Starcrab" />
+					<gd_item id="160010155" /><!-- [Event] Stunned Starcrab -->
 				</gd_items>
 			</gd_rule>
 			<gd_rule rule_name="Crab Fest Event Drop" base_chance="2" no_reduction="true">
 				<gd_npcs>
-					<gd_npc npc_id="217733" name="Epiclone" />
+					<gd_npc npc_id="217733" /><!-- Epiclone -->
 				</gd_npcs>
 				<gd_items>
-					<gd_item id="188051340" name="[Event] Aion's Star" />
+					<gd_item id="188051340" /><!-- [Event] Aion's Star -->
 				</gd_items>
 			</gd_rule>
 		</event_drops>
@@ -1269,50 +1269,50 @@
 		<event_drops>
 			<gd_rule rule_name="Celebrate Solorius Event Drop" base_chance="100" no_reduction="true">
 				<gd_npcs>
-					<gd_npc name="Red Nosed Granker King" npc_id="219292" />
-					<gd_npc name="Granker King's Second" npc_id="219293" />
-					<gd_npc name="Red Nosed Granker King" npc_id="219294" />
-					<gd_npc name="Granker King's Second" npc_id="219295" />
+					<gd_npc npc_id="219292" /><!-- Red Nosed Granker King -->
+					<gd_npc npc_id="219293" /><!-- Granker King's Second -->
+					<gd_npc npc_id="219294" /><!-- Red Nosed Granker King -->
+					<gd_npc npc_id="219295" /><!-- Granker King's Second -->
 				</gd_npcs>
 				<gd_items>
-					<gd_item id="160010203" name="[Event] Red Nose Granker Horn" />
+					<gd_item id="160010203" /><!-- [Event] Red Nose Granker Horn -->
 				</gd_items>
 			</gd_rule>
 			<gd_rule rule_name="Celebrate Solorius Event Drop" base_chance="50" fixed_chance="true" no_reduction="true" member_limit="24">
 				<gd_npcs>
-					<gd_npc name="Red Nosed Granker King" npc_id="219292" />
-					<gd_npc name="Red Nosed Granker King" npc_id="219294" />
+					<gd_npc npc_id="219292" /><!-- Red Nosed Granker King -->
+					<gd_npc npc_id="219294" /><!-- Red Nosed Granker King -->
 				</gd_npcs>
 				<gd_items>
-					<gd_item id="188051731" name="[Event] Lenatinerk's Lost Gift Box" />
-					<gd_item id="188052132" name="[Event] Granker's Gratitude Box" />
+					<gd_item id="188051731" /><!-- [Event] Lenatinerk's Lost Gift Box -->
+					<gd_item id="188052132" /><!-- [Event] Granker's Gratitude Box -->
 				</gd_items>
 			</gd_rule>
 			<gd_rule rule_name="Celebrate Solorius Event Drop" base_chance="100" no_reduction="true">
 				<gd_npcs>
-					<gd_npc name="Red Nosed Granker King" npc_id="219292" />
-					<gd_npc name="Red Nosed Granker King" npc_id="219294" />
+					<gd_npc npc_id="219292" /><!-- Red Nosed Granker King -->
+					<gd_npc npc_id="219294" /><!-- Red Nosed Granker King -->
 				</gd_npcs>
 				<gd_items>
-					<gd_item id="171110045" name="Solorius Wallpaper" />
+					<gd_item id="171110045" /><!-- Solorius Wallpaper -->
 				</gd_items>
 			</gd_rule>
 			<gd_rule rule_name="Celebrate Solorius Event Drop" base_chance="100" no_reduction="true" restriction_race="ELYOS">
 				<gd_npcs>
-					<gd_npc name="Red Nosed Granker King" npc_id="219292" />
+					<gd_npc npc_id="219292" /><!-- Red Nosed Granker King -->
 				</gd_npcs>
 				<gd_items>
-					<gd_item id="170110012" name="Solorius Tree" />
-					<gd_item id="170170086" name="Desktop Solorius Tree" />
+					<gd_item id="170110012" /><!-- Solorius Tree -->
+					<gd_item id="170170086" /><!-- Desktop Solorius Tree -->
 				</gd_items>
 			</gd_rule>
 			<gd_rule rule_name="Celebrate Solorius Event Drop" base_chance="100" no_reduction="true" restriction_race="ASMODIANS">
 				<gd_npcs>
-					<gd_npc name="Red Nosed Granker King" npc_id="219294" />
+					<gd_npc npc_id="219294" /><!-- Red Nosed Granker King -->
 				</gd_npcs>
 				<gd_items>
-					<gd_item id="170115012" name="Solorius Tree" />
-					<gd_item id="170175063" name="Desktop Solorius Tree" />
+					<gd_item id="170115012" /><!-- Solorius Tree -->
+					<gd_item id="170175063" /><!-- Desktop Solorius Tree -->
 				</gd_items>
 			</gd_rule>
 		</event_drops>
@@ -1486,7 +1486,7 @@
 					<gd_rating rating="LEGENDARY" />
 				</gd_ratings>
 				<gd_items>
-					<gd_item id="188051115" name="[Event] New Year Lunch Box" />
+					<gd_item id="188051115" /><!-- [Event] New Year Lunch Box -->
 				</gd_items>
 			</gd_rule>
 		</event_drops>
@@ -1514,32 +1514,32 @@
 		<event_drops>
 			<gd_rule rule_name="Event Potion" base_chance="50" min_diff="-29">
 				<gd_items>
-					<gd_item id="162001009" name="[Event] Pumpkin Lollipop" />
+					<gd_item id="162001009" /><!-- [Event] Pumpkin Lollipop -->
 				</gd_items>
 			</gd_rule>
 			<gd_rule rule_name="Event Scroll" base_chance="33" no_reduction="true">
 				<gd_npcs>
-					<gd_npc npc_id="217161" name="Shulack Sugarcrook" />
+					<gd_npc npc_id="217161" /><!-- Shulack Sugarcrook -->
 				</gd_npcs>
 				<gd_items>
-					<gd_item id="164002037" name="[Event] Castings" />
+					<gd_item id="164002037" /><!-- [Event] Castings -->
 				</gd_items>
 			</gd_rule>
 			<gd_rule rule_name="Event Food" base_chance="80" no_reduction="true">
 				<gd_npcs>
-					<gd_npc npc_id="217161" name="Shulack Sugarcrook" />
+					<gd_npc npc_id="217161" /><!-- Shulack Sugarcrook -->
 				</gd_npcs>
 				<gd_items>
-					<gd_item id="160010147" name="[Event] Creamy Pumpkin Ale" />
-					<gd_item id="160010148" name="[Event] Dry Pumpkin Ale" />
+					<gd_item id="160010147" /><!-- [Event] Creamy Pumpkin Ale -->
+					<gd_item id="160010148" /><!-- [Event] Dry Pumpkin Ale -->
 				</gd_items>
 			</gd_rule>
 			<gd_rule rule_name="Event Bundle" base_chance="50" no_reduction="true">
 				<gd_npcs>
-					<gd_npc npc_id="217161" name="Shulack Sugarcrook" />
+					<gd_npc npc_id="217161" /><!-- Shulack Sugarcrook -->
 				</gd_npcs>
 				<gd_items>
-					<gd_item id="188051337" name="[Event] Sugarcrook's Pack" />
+					<gd_item id="188051337" /><!-- [Event] Sugarcrook's Pack -->
 				</gd_items>
 			</gd_rule>
 		</event_drops>
@@ -2022,7 +2022,7 @@
 					<gd_rating rating="LEGENDARY" />
 				</gd_ratings>
 				<gd_items>
-					<gd_item id="188051331" name="[Event] Grazing Chest" />
+					<gd_item id="188051331" /><!-- [Event] Grazing Chest -->
 				</gd_items>
 			</gd_rule>
 			<gd_rule rule_name="Daru Days Event Drop" min_count="1" base_chance="5" min_diff="-30" max_diff="70">
@@ -2033,8 +2033,8 @@
 					<gd_rating rating="LEGENDARY" />
 				</gd_ratings>
 				<gd_items>
-					<gd_item id="160005028" name="[Event] Carrot Juice" />
-					<gd_item id="162001011" name="[Event] Hay Cracker" />
+					<gd_item id="160005028" /><!-- [Event] Carrot Juice -->
+					<gd_item id="162001011" /><!-- [Event] Hay Cracker -->
 				</gd_items>
 			</gd_rule>
 		</event_drops>
@@ -2351,34 +2351,34 @@
 		<event_drops>
 			<gd_rule rule_name="Growth Event Drop Elyos" min_count="1" base_chance="10" min_diff="-10" max_diff="70" restriction_race="ELYOS">
 				<gd_items>
-					<gd_item id="182215196" name="Fiery Heart" />
+					<gd_item id="182215196" /><!-- Fiery Heart -->
 				</gd_items>
 				<gd_npcs>
-					<gd_npc npc_id="212839" name="Blue Crystal Molgat" />
-					<gd_npc npc_id="212840" name="Lava Gatneri" />
-					<gd_npc npc_id="212841" name="Flame Branch Flavi" />
-					<gd_npc npc_id="212842" name="Black Smoke Asparn" />
-					<gd_npc npc_id="212843" name="Tough Sipus" />
-					<gd_npc npc_id="212844" name="Silver Blade Rotan" />
-					<gd_npc npc_id="212845" name="Broken Wing Kutisen" />
-					<gd_npc npc_id="212846" name="Kromede The Corrupt" />
-					<gd_npc npc_id="214621" name="Vile Judge Kromede" />
+					<gd_npc npc_id="212839" /><!-- Blue Crystal Molgat -->
+					<gd_npc npc_id="212840" /><!-- Lava Gatneri -->
+					<gd_npc npc_id="212841" /><!-- Flame Branch Flavi -->
+					<gd_npc npc_id="212842" /><!-- Black Smoke Asparn -->
+					<gd_npc npc_id="212843" /><!-- Tough Sipus -->
+					<gd_npc npc_id="212844" /><!-- Silver Blade Rotan -->
+					<gd_npc npc_id="212845" /><!-- Broken Wing Kutisen -->
+					<gd_npc npc_id="212846" /><!-- Kromede The Corrupt -->
+					<gd_npc npc_id="214621" /><!-- Vile Judge Kromede -->
 				</gd_npcs>
 			</gd_rule>
 			<gd_rule rule_name="Growth Event Drop Asmodians" min_count="1" base_chance="10" min_diff="-10" max_diff="70" restriction_race="ASMODIANS">
 				<gd_items>
-					<gd_item id="182215197" name="Fiery Heart" />
+					<gd_item id="182215197" /><!-- Fiery Heart -->
 				</gd_items>
 				<gd_npcs>
-					<gd_npc npc_id="212839" name="Blue Crystal Molgat" />
-					<gd_npc npc_id="212840" name="Lava Gatneri" />
-					<gd_npc npc_id="212841" name="Flame Branch Flavi" />
-					<gd_npc npc_id="212842" name="Black Smoke Asparn" />
-					<gd_npc npc_id="212843" name="Tough Sipus" />
-					<gd_npc npc_id="212844" name="Silver Blade Rotan" />
-					<gd_npc npc_id="212845" name="Broken Wing Kutisen" />
-					<gd_npc npc_id="212846" name="Kromede The Corrupt" />
-					<gd_npc npc_id="214621" name="Vile Judge Kromede" />
+					<gd_npc npc_id="212839" /><!-- Blue Crystal Molgat -->
+					<gd_npc npc_id="212840" /><!-- Lava Gatneri -->
+					<gd_npc npc_id="212841" /><!-- Flame Branch Flavi -->
+					<gd_npc npc_id="212842" /><!-- Black Smoke Asparn -->
+					<gd_npc npc_id="212843" /><!-- Tough Sipus -->
+					<gd_npc npc_id="212844" /><!-- Silver Blade Rotan -->
+					<gd_npc npc_id="212845" /><!-- Broken Wing Kutisen -->
+					<gd_npc npc_id="212846" /><!-- Kromede The Corrupt -->
+					<gd_npc npc_id="214621" /><!-- Vile Judge Kromede -->
 				</gd_npcs>
 			</gd_rule>
 		</event_drops>
@@ -3231,7 +3231,7 @@
 					<gd_rating rating="LEGENDARY" />
 				</gd_ratings>
 				<gd_items>
-					<gd_item id="188052627" name="[Event] Bag of Ice" />
+					<gd_item id="188052627" /><!-- [Event] Bag of Ice -->
 				</gd_items>
 			</gd_rule>
 		</event_drops>
@@ -3359,8 +3359,8 @@
 					<gd_rating rating="LEGENDARY" />
 				</gd_ratings>
 				<gd_items>
-					<gd_item id="188052641" name="[Event] Alchemist's Pouch" />
-					<gd_item id="188052678" name="[Event] Alchemist's Pouch" />
+					<gd_item id="188052641" /><!-- [Event] Alchemist's Pouch -->
+					<gd_item id="188052678" /><!-- [Event] Alchemist's Pouch -->
 				</gd_items>
 			</gd_rule>
 		</event_drops>
@@ -3501,9 +3501,9 @@
 					<gd_rating rating="LEGENDARY" />
 				</gd_ratings>
 				<gd_items>
-					<gd_item id="188100091" name="[Event] Signet Piece: A" />
-					<gd_item id="188100092" name="[Event] Signet Piece: I" />
-					<gd_item id="188100093" name="[Event] Signet Piece: O" />
+					<gd_item id="188100091" /><!-- [Event] Signet Piece: A -->
+					<gd_item id="188100092" /><!-- [Event] Signet Piece: I -->
+					<gd_item id="188100093" /><!-- [Event] Signet Piece: O -->
 				</gd_items>
 				<gd_worlds>
 					<gd_world wd_type="ABYSS_INSTANCE" />
@@ -3518,7 +3518,7 @@
 					<gd_rating rating="LEGENDARY" />
 				</gd_ratings>
 				<gd_items>
-					<gd_item id="188100094" name="[Event] Signet Piece: N" />
+					<gd_item id="188100094" /><!-- [Event] Signet Piece: N -->
 				</gd_items>
 				<gd_worlds>
 					<gd_world wd_type="ABYSS_INSTANCE" />
@@ -3540,13 +3540,13 @@
 					<gd_rating rating="LEGENDARY" />
 				</gd_ratings>
 				<gd_items>
-					<gd_item id="188052977" name="The Stolen Letter Card A" />
-					<gd_item id="188052978" name="The Stolen Letter Card I" />
-					<gd_item id="188052979" name="The Stolen Letter Card O" />
-					<gd_item id="188052980" name="The Stolen Letter Card B" />
-					<gd_item id="188052981" name="The Stolen Letter Card S" />
-					<gd_item id="188052982" name="The Stolen Letter Card D" />
-					<gd_item id="188052983" name="The Stolen Letter Card E" />
+					<gd_item id="188052977" /><!-- The Stolen Letter Card A -->
+					<gd_item id="188052978" /><!-- The Stolen Letter Card I -->
+					<gd_item id="188052979" /><!-- The Stolen Letter Card O -->
+					<gd_item id="188052980" /><!-- The Stolen Letter Card B -->
+					<gd_item id="188052981" /><!-- The Stolen Letter Card S -->
+					<gd_item id="188052982" /><!-- The Stolen Letter Card D -->
+					<gd_item id="188052983" /><!-- The Stolen Letter Card E -->
 				</gd_items>
 				<gd_worlds>
 					<gd_world wd_type="ABYSS_INSTANCE" />
@@ -3564,9 +3564,9 @@
 					<gd_rating rating="LEGENDARY" />
 				</gd_ratings>
 				<gd_items>
-					<gd_item id="182007144" name="The Stolen Letter Card N" />
-					<gd_item id="182007145" name="The Stolen Letter Card Y" />
-					<gd_item id="182007146" name="The Stolen Letter Card V" />
+					<gd_item id="182007144" /><!-- The Stolen Letter Card N -->
+					<gd_item id="182007145" /><!-- The Stolen Letter Card Y -->
+					<gd_item id="182007146" /><!-- The Stolen Letter Card V -->
 				</gd_items>
 				<gd_worlds>
 					<gd_world wd_type="ABYSS_INSTANCE" />
@@ -3679,68 +3679,68 @@
 		<event_drops>
 			<gd_rule rule_name="Boiling Point Event Drop 1" min_count="1" base_chance="10" min_diff="-10" max_diff="70" member_limit="12">
 				<gd_items>
-					<gd_item id="186000387" name="[Event] Rice Cake" />
+					<gd_item id="186000387" /><!-- [Event] Rice Cake -->
 				</gd_items>
 				<gd_npcs>
-					<gd_npc npc_id="217206" name="Warden Surama" />
-					<gd_npc npc_id="215795" name="Debilkarim The Maker" />
-					<gd_npc npc_id="214669" name="Unstable Triroan" />
-					<gd_npc npc_id="214904" name="Brigade General Anuhart" />
-					<gd_npc npc_id="231050" name="Vera" />
-					<gd_npc npc_id="230740" name="Accountant Kanerunerk" />
-					<gd_npc npc_id="701795" name="Treasure Box (Danuar Reliquary)" />
-					<gd_npc npc_id="233383" name="Chief Medic Tagnu" />
-					<gd_npc npc_id="231073" name="Hyperion" />
-					<gd_npc npc_id="219299" name="Muzzled Punisher" />
-					<gd_npc npc_id="219300" name="Punisher Unleashed" />
-					<gd_npc npc_id="230858" name="Brigade General Sheba" />
-					<gd_npc npc_id="230857" name="Guard Captain Ahuradim" />
-					<gd_npc npc_id="215783" name="Nexus" />
-					<gd_npc npc_id="216183" name="Stormwing" />
-					<gd_npc npc_id="217313" name="Brigade General Vasharti" />
-					<gd_npc npc_id="701541" name="Tahabata's Treasure Chest (Tiamat Stronghold)" />
-					<gd_npc npc_id="230737" name="Maintenance Chief Notakiki" />
-					<gd_npc npc_id="230743" name="Captain Rumakiki" />
-					<gd_npc npc_id="217647" name="Raksha Boilheart" />
-					<gd_npc npc_id="217475" name="Raksha" />
-					<gd_npc npc_id="700938" name="Abyssal Treasure Box (Abyssal Splinter)" />
-					<gd_npc npc_id="701542" name="Tiamat's Huge Treasure Crate (Dragon Lord's Refuge)" />
-					<gd_npc npc_id="233740" name="Test instrument Dainatum" />
-					<gd_npc npc_id="230092" name="Enraged Barukan" />
-					<gd_npc npc_id="230093" name="Furious Barukan" />
+					<gd_npc npc_id="217206" /><!-- Warden Surama -->
+					<gd_npc npc_id="215795" /><!-- Debilkarim The Maker -->
+					<gd_npc npc_id="214669" /><!-- Unstable Triroan -->
+					<gd_npc npc_id="214904" /><!-- Brigade General Anuhart -->
+					<gd_npc npc_id="231050" /><!-- Vera -->
+					<gd_npc npc_id="230740" /><!-- Accountant Kanerunerk -->
+					<gd_npc npc_id="701795" /><!-- Treasure Box (Danuar Reliquary) -->
+					<gd_npc npc_id="233383" /><!-- Chief Medic Tagnu -->
+					<gd_npc npc_id="231073" /><!-- Hyperion -->
+					<gd_npc npc_id="219299" /><!-- Muzzled Punisher -->
+					<gd_npc npc_id="219300" /><!-- Punisher Unleashed -->
+					<gd_npc npc_id="230858" /><!-- Brigade General Sheba -->
+					<gd_npc npc_id="230857" /><!-- Guard Captain Ahuradim -->
+					<gd_npc npc_id="215783" /><!-- Nexus -->
+					<gd_npc npc_id="216183" /><!-- Stormwing -->
+					<gd_npc npc_id="217313" /><!-- Brigade General Vasharti -->
+					<gd_npc npc_id="701541" /><!-- Tahabata's Treasure Chest (Tiamat Stronghold) -->
+					<gd_npc npc_id="230737" /><!-- Maintenance Chief Notakiki -->
+					<gd_npc npc_id="230743" /><!-- Captain Rumakiki -->
+					<gd_npc npc_id="217647" /><!-- Raksha Boilheart -->
+					<gd_npc npc_id="217475" /><!-- Raksha -->
+					<gd_npc npc_id="700938" /><!-- Abyssal Treasure Box (Abyssal Splinter) -->
+					<gd_npc npc_id="701542" /><!-- Tiamat's Huge Treasure Crate (Dragon Lord's Refuge) -->
+					<gd_npc npc_id="233740" /><!-- Test instrument Dainatum -->
+					<gd_npc npc_id="230092" /><!-- Enraged Barukan -->
+					<gd_npc npc_id="230093" /><!-- Furious Barukan -->
 				</gd_npcs>
 			</gd_rule>
 			<gd_rule rule_name="Boiling Point Event Drop 2" min_count="1" base_chance="50" min_diff="-10" max_diff="70" member_limit="12">
 				<gd_items>
-					<gd_item id="186000388" name="[Event] Beef Bone Broth" />
+					<gd_item id="186000388" /><!-- [Event] Beef Bone Broth -->
 				</gd_items>
 				<gd_npcs>
-					<gd_npc npc_id="217206" name="Warden Surama" />
-					<gd_npc npc_id="215795" name="Debilkarim The Maker" />
-					<gd_npc npc_id="214669" name="Unstable Triroan" />
-					<gd_npc npc_id="214904" name="Brigade General Anuhart" />
-					<gd_npc npc_id="231050" name="Vera" />
-					<gd_npc npc_id="230740" name="Accountant Kanerunerk" />
-					<gd_npc npc_id="701795" name="Treasure Box (Danuar Reliquary)" />
-					<gd_npc npc_id="233383" name="Chief Medic Tagnu" />
-					<gd_npc npc_id="231073" name="Hyperion" />
-					<gd_npc npc_id="219299" name="Muzzled Punisher" />
-					<gd_npc npc_id="219300" name="Punisher Unleashed" />
-					<gd_npc npc_id="230858" name="Brigade General Sheba" />
-					<gd_npc npc_id="230857" name="Guard Captain Ahuradim" />
-					<gd_npc npc_id="215783" name="Nexus" />
-					<gd_npc npc_id="216183" name="Stormwing" />
-					<gd_npc npc_id="217313" name="Brigade General Vasharti" />
-					<gd_npc npc_id="701541" name="Tahabata's Treasure Chest (Tiamat Stronghold)" />
-					<gd_npc npc_id="230737" name="Maintenance Chief Notakiki" />
-					<gd_npc npc_id="230743" name="Captain Rumakiki" />
-					<gd_npc npc_id="217647" name="Raksha Boilheart" />
-					<gd_npc npc_id="217475" name="Raksha" />
-					<gd_npc npc_id="700938" name="Abyssal Treasure Box (Abyssal Splinter)" />
-					<gd_npc npc_id="701542" name="Tiamat's Huge Treasure Crate (Dragon Lord's Refuge)" />
-					<gd_npc npc_id="233740" name="Test instrument Dainatum" />
-					<gd_npc npc_id="230092" name="Enraged Barukan" />
-					<gd_npc npc_id="230093" name="Furious Barukan" />
+					<gd_npc npc_id="217206" /><!-- Warden Surama -->
+					<gd_npc npc_id="215795" /><!-- Debilkarim The Maker -->
+					<gd_npc npc_id="214669" /><!-- Unstable Triroan -->
+					<gd_npc npc_id="214904" /><!-- Brigade General Anuhart -->
+					<gd_npc npc_id="231050" /><!-- Vera -->
+					<gd_npc npc_id="230740" /><!-- Accountant Kanerunerk -->
+					<gd_npc npc_id="701795" /><!-- Treasure Box (Danuar Reliquary) -->
+					<gd_npc npc_id="233383" /><!-- Chief Medic Tagnu -->
+					<gd_npc npc_id="231073" /><!-- Hyperion -->
+					<gd_npc npc_id="219299" /><!-- Muzzled Punisher -->
+					<gd_npc npc_id="219300" /><!-- Punisher Unleashed -->
+					<gd_npc npc_id="230858" /><!-- Brigade General Sheba -->
+					<gd_npc npc_id="230857" /><!-- Guard Captain Ahuradim -->
+					<gd_npc npc_id="215783" /><!-- Nexus -->
+					<gd_npc npc_id="216183" /><!-- Stormwing -->
+					<gd_npc npc_id="217313" /><!-- Brigade General Vasharti -->
+					<gd_npc npc_id="701541" /><!-- Tahabata's Treasure Chest (Tiamat Stronghold) -->
+					<gd_npc npc_id="230737" /><!-- Maintenance Chief Notakiki -->
+					<gd_npc npc_id="230743" /><!-- Captain Rumakiki -->
+					<gd_npc npc_id="217647" /><!-- Raksha Boilheart -->
+					<gd_npc npc_id="217475" /><!-- Raksha -->
+					<gd_npc npc_id="700938" /><!-- Abyssal Treasure Box (Abyssal Splinter) -->
+					<gd_npc npc_id="701542" /><!-- Tiamat's Huge Treasure Crate (Dragon Lord's Refuge) -->
+					<gd_npc npc_id="233740" /><!-- Test instrument Dainatum -->
+					<gd_npc npc_id="230092" /><!-- Enraged Barukan -->
+					<gd_npc npc_id="230093" /><!-- Furious Barukan -->
 				</gd_npcs>
 			</gd_rule>
 		</event_drops>
@@ -3829,13 +3829,13 @@
 		<event_drops>
 			<gd_rule rule_name="Snowball (Single)" base_chance="10" fixed_chance="true">
 				<gd_items>
-					<gd_item id="188052986" name="+1 Snowball" />
+					<gd_item id="188052986" /><!-- +1 Snowball -->
 				</gd_items>
 				<gd_maps>
-					<gd_map map_id="210070000" name="Cygnea" />
-					<gd_map map_id="220080000" name="Enshar" />
-					<gd_map map_id="600090000" name="Kaldor" />
-					<gd_map map_id="600100000" name="Levinshor" />
+					<gd_map map_id="210070000" /><!-- Cygnea -->
+					<gd_map map_id="220080000" /><!-- Enshar -->
+					<gd_map map_id="600090000" /><!-- Kaldor -->
+					<gd_map map_id="600100000" /><!-- Levinshor -->
 				</gd_maps>
 				<gd_ratings>
 					<gd_rating rating="NORMAL" />
@@ -3845,48 +3845,48 @@
 			</gd_rule>
 			<gd_rule rule_name="Snowball (Shared)" base_chance="100" member_limit="12">
 				<gd_items>
-					<gd_item id="188052986" name="+1 Snowball" />
+					<gd_item id="188052986" /><!-- +1 Snowball -->
 				</gd_items>
 				<gd_maps>
-					<gd_map map_id="300240000" name="Aturam_Sky_Fortress" />
-					<gd_map map_id="300280000" name="Rentus_Base" />
-					<gd_map map_id="300510000" name="Tiamat_Stronghold" />
-					<gd_map map_id="300520000" name="Dragon_Lords_Refuge" />
-					<gd_map map_id="300590000" name="Ophidan_Bridge" />
-					<gd_map map_id="300610000" name="Raksang_Ruins" />
-					<gd_map map_id="300620000" name="Occupied_Rentus_Base" />
-					<!-- <gd_map map_id="300630000" name="Anguished_Dragon_Lords_Refuge" /> -->
-					<gd_map map_id="300800000" name="Infinity_Shard" />
-					<gd_map map_id="301110000" name="Danuar_Reliquary" />
-					<gd_map map_id="301130000" name="Sauro_Supply_Base" />
-					<!-- <gd_map map_id="301140000" name="Seized_Danuar_Sanctuary" /> -->
-					<gd_map map_id="301230000" name="Illuminary_Obelisk" />
-					<gd_map map_id="301270000" name="Linkgate_Foundry" />
-					<!-- <gd_map map_id="301360000" name="Infernal_Danuar_Reliquary" /> -->
-					<gd_map map_id="301370000" name="Infernal_Illuminary_Obelisk" />
-					<gd_map map_id="301380000" name="Danuar_Sanctuary" />
-					<!-- <gd_map map_id="301390000" name="Drakenspire_Depths" /> -->
+					<gd_map map_id="300240000" /><!-- Aturam_Sky_Fortress -->
+					<gd_map map_id="300280000" /><!-- Rentus_Base -->
+					<gd_map map_id="300510000" /><!-- Tiamat_Stronghold -->
+					<gd_map map_id="300520000" /><!-- Dragon_Lords_Refuge -->
+					<gd_map map_id="300590000" /><!-- Ophidan_Bridge -->
+					<gd_map map_id="300610000" /><!-- Raksang_Ruins -->
+					<gd_map map_id="300620000" /><!-- Occupied_Rentus_Base -->
+					<!-- <gd_map map_id="300630000" /> --><!-- Anguished_Dragon_Lords_Refuge -->
+					<gd_map map_id="300800000" /><!-- Infinity_Shard -->
+					<gd_map map_id="301110000" /><!-- Danuar_Reliquary -->
+					<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
+					<!-- <gd_map map_id="301140000" /> --><!-- Seized_Danuar_Sanctuary -->
+					<gd_map map_id="301230000" /><!-- Illuminary_Obelisk -->
+					<gd_map map_id="301270000" /><!-- Linkgate_Foundry -->
+					<!-- <gd_map map_id="301360000" /> --><!-- Infernal_Danuar_Reliquary -->
+					<gd_map map_id="301370000" /><!-- Infernal_Illuminary_Obelisk -->
+					<gd_map map_id="301380000" /><!-- Danuar_Sanctuary -->
+					<!-- <gd_map map_id="301390000" /> --><!-- Drakenspire_Depths -->
 				</gd_maps>
 				<gd_npcs>
-					<gd_npc npc_id="217376" name="Ahunatal Shadowslip" />
-					<gd_npc npc_id="217313" name="Brigade General Vasharti" />
-					<gd_npc npc_id="701541" name="Tahabata's Treasure Chest" />
-					<gd_npc npc_id="701542" name="Tiamat's Huge Treasure Crate (Dragon Lord's Refuge)" />
-					<gd_npc npc_id="231050" name="Vera" />
-					<gd_npc npc_id="236306" name="Reviver Nasto" />
-					<gd_npc npc_id="236300" name="Brigade General Vasharti" />
+					<gd_npc npc_id="217376" /><!-- Ahunatal Shadowslip -->
+					<gd_npc npc_id="217313" /><!-- Brigade General Vasharti -->
+					<gd_npc npc_id="701541" /><!-- Tahabata's Treasure Chest -->
+					<gd_npc npc_id="701542" /><!-- Tiamat's Huge Treasure Crate (Dragon Lord's Refuge) -->
+					<gd_npc npc_id="231050" /><!-- Vera -->
+					<gd_npc npc_id="236306" /><!-- Reviver Nasto -->
+					<gd_npc npc_id="236300" /><!-- Brigade General Vasharti -->
 					<!-- Tiamat Lv65 236277 -->
-					<gd_npc npc_id="231073" name="Hyperion" />
-					<gd_npc npc_id="701795" name="Treasure Box (Danuar Reliquary)" />
-					<gd_npc npc_id="230853" name="Chief of Staff Moriata" />
+					<gd_npc npc_id="231073" /><!-- Hyperion -->
+					<gd_npc npc_id="701795" /><!-- Treasure Box (Danuar Reliquary) -->
+					<gd_npc npc_id="230853" /><!-- Chief of Staff Moriata -->
 					<!-- -->
-					<gd_npc npc_id="233740" name="Test Weapon Dynatoum" />
-					<gd_npc npc_id="234990" name="Wounded Belsagos" />
-					<gd_npc npc_id="233898" name="Volatile Belsagos" />
-					<gd_npc npc_id="234991" name="Furious Belsagos" />
+					<gd_npc npc_id="233740" /><!-- Test Weapon Dynatoum -->
+					<gd_npc npc_id="234990" /><!-- Wounded Belsagos -->
+					<gd_npc npc_id="233898" /><!-- Volatile Belsagos -->
+					<gd_npc npc_id="234991" /><!-- Furious Belsagos -->
 					<!-- Lunatic Queen Modor -->
-					<gd_npc npc_id="284858" name="Boss" />
-					<gd_npc npc_id="233383" name="Chief Medic Tagnu" />
+					<gd_npc npc_id="284858" /><!-- Boss -->
+					<gd_npc npc_id="233383" /><!-- Chief Medic Tagnu -->
 					<!-- Beritra -->
 				</gd_npcs>
 			</gd_rule>
@@ -4054,96 +4054,96 @@
 			<!-- Green Garrisons -->
 			<gd_rule rule_name="Symphony of Legend - The First Movement" base_chance="40" fixed_chance="true">
 				<gd_maps>
-					<gd_map map_id="600100000" name="Levinshor"/>
+					<gd_map map_id="600100000"/><!-- Levinshor -->
 				</gd_maps>
 				<gd_npcs>
-					<gd_npc npc_id="235370" name="Tomul Brawler"/>
-					<gd_npc npc_id="235371" name="Tomul Cutthroat"/>
-					<gd_npc npc_id="235372" name="Tomul Shaman"/>
-					<gd_npc npc_id="235373" name="Tomul Aquamancer"/>
-					<gd_npc npc_id="235374" name="Denku Feralclaw"/>
-					<gd_npc npc_id="235375" name="Denku Fang"/>
-					<gd_npc npc_id="235376" name="Denku Restorer"/>
-					<gd_npc npc_id="235377" name="Denku Feralmage"/>
+					<gd_npc npc_id="235370"/><!-- Tomul Brawler -->
+					<gd_npc npc_id="235371"/><!-- Tomul Cutthroat -->
+					<gd_npc npc_id="235372"/><!-- Tomul Shaman -->
+					<gd_npc npc_id="235373"/><!-- Tomul Aquamancer -->
+					<gd_npc npc_id="235374"/><!-- Denku Feralclaw -->
+					<gd_npc npc_id="235375"/><!-- Denku Fang -->
+					<gd_npc npc_id="235376"/><!-- Denku Restorer -->
+					<gd_npc npc_id="235377"/><!-- Denku Feralmage -->
 				</gd_npcs>
 				<gd_items>
-					<gd_item id="188100252" name="Symphony of Legend - The First Movement"/>
+					<gd_item id="188100252"/><!-- Symphony of Legend - The First Movement -->
 				</gd_items>
 			</gd_rule>
 			<!-- Blue Garrions -->
 			<gd_rule rule_name="Symphony of Legend - The Second Movement" base_chance="40" fixed_chance="true">
 				<gd_maps>
-					<gd_map map_id="600100000" name="Levinshor"/>
+					<gd_map map_id="600100000"/><!-- Levinshor -->
 				</gd_maps>
 				<gd_npcs>
-					<gd_npc npc_id="235346" name="Tomul Brawler"/>
-					<gd_npc npc_id="235347" name="Tomul Cutthroat"/>
-					<gd_npc npc_id="235348" name="Tomul Shaman"/>
-					<gd_npc npc_id="235349" name="Tomul Aquamancer"/>
-					<gd_npc npc_id="235350" name="Denku Feralclaw"/>
-					<gd_npc npc_id="235351" name="Denku Fang"/>
-					<gd_npc npc_id="235352" name="Denku Restorer"/>
-					<gd_npc npc_id="235353" name="Denku Feralmage"/>
+					<gd_npc npc_id="235346"/><!-- Tomul Brawler -->
+					<gd_npc npc_id="235347"/><!-- Tomul Cutthroat -->
+					<gd_npc npc_id="235348"/><!-- Tomul Shaman -->
+					<gd_npc npc_id="235349"/><!-- Tomul Aquamancer -->
+					<gd_npc npc_id="235350"/><!-- Denku Feralclaw -->
+					<gd_npc npc_id="235351"/><!-- Denku Fang -->
+					<gd_npc npc_id="235352"/><!-- Denku Restorer -->
+					<gd_npc npc_id="235353"/><!-- Denku Feralmage -->
 				</gd_npcs>
 				<gd_items>
-					<gd_item id="188100253" name="Symphony of Legend - The Second Movement"/>
+					<gd_item id="188100253"/><!-- Symphony of Legend - The Second Movement -->
 				</gd_items>
 			</gd_rule>
 			<!-- Yellow Garrions -->
 			<gd_rule rule_name="Symphony of Legend - The Third Movement" base_chance="40" fixed_chance="true">
 				<gd_maps>
-					<gd_map map_id="600100000" name="Levinshor"/>
+					<gd_map map_id="600100000"/><!-- Levinshor -->
 				</gd_maps>
 				<gd_npcs>
-					<gd_npc npc_id="235354" name="Tomul Brawler"/>
-					<gd_npc npc_id="235355" name="Tomul Cutthroat"/>
-					<gd_npc npc_id="235356" name="Tomul Shaman"/>
-					<gd_npc npc_id="235357" name="Tomul Aquamancer"/>
-					<gd_npc npc_id="235358" name="Denku Feralclaw"/>
-					<gd_npc npc_id="235359" name="Denku Fang"/>
-					<gd_npc npc_id="235360" name="Denku Restorer"/>
-					<gd_npc npc_id="235361" name="Denku Feralmage"/>
+					<gd_npc npc_id="235354"/><!-- Tomul Brawler -->
+					<gd_npc npc_id="235355"/><!-- Tomul Cutthroat -->
+					<gd_npc npc_id="235356"/><!-- Tomul Shaman -->
+					<gd_npc npc_id="235357"/><!-- Tomul Aquamancer -->
+					<gd_npc npc_id="235358"/><!-- Denku Feralclaw -->
+					<gd_npc npc_id="235359"/><!-- Denku Fang -->
+					<gd_npc npc_id="235360"/><!-- Denku Restorer -->
+					<gd_npc npc_id="235361"/><!-- Denku Feralmage -->
 				</gd_npcs>
 				<gd_items>
-					<gd_item id="188100254" name="Symphony of Legend - The Third Movement"/>
+					<gd_item id="188100254"/><!-- Symphony of Legend - The Third Movement -->
 				</gd_items>
 			</gd_rule>
 			<!-- Red Garrions -->
 			<gd_rule rule_name="Symphony of Legend - The Fourth Movement" base_chance="40" fixed_chance="true">
 				<gd_maps>
-					<gd_map map_id="600100000" name="Levinshor"/>
+					<gd_map map_id="600100000"/><!-- Levinshor -->
 				</gd_maps>
 				<gd_npcs>
-					<gd_npc npc_id="235362" name="Tomul Brawler"/>
-					<gd_npc npc_id="235363" name="Tomul Cutthroat"/>
-					<gd_npc npc_id="235364" name="Tomul Shaman"/>
-					<gd_npc npc_id="235365" name="Tomul Aquamancer"/>
-					<gd_npc npc_id="235366" name="Denku Feralclaw"/>
-					<gd_npc npc_id="235367" name="Denku Fang"/>
-					<gd_npc npc_id="235368" name="Denku Restorer"/>
-					<gd_npc npc_id="235369" name="Denku Feralmage"/>
+					<gd_npc npc_id="235362"/><!-- Tomul Brawler -->
+					<gd_npc npc_id="235363"/><!-- Tomul Cutthroat -->
+					<gd_npc npc_id="235364"/><!-- Tomul Shaman -->
+					<gd_npc npc_id="235365"/><!-- Tomul Aquamancer -->
+					<gd_npc npc_id="235366"/><!-- Denku Feralclaw -->
+					<gd_npc npc_id="235367"/><!-- Denku Fang -->
+					<gd_npc npc_id="235368"/><!-- Denku Restorer -->
+					<gd_npc npc_id="235369"/><!-- Denku Feralmage -->
 				</gd_npcs>
 				<gd_items>
-					<gd_item id="188100255" name="Symphony of Legend - The Fourth Movement"/>
+					<gd_item id="188100255"/><!-- Symphony of Legend - The Fourth Movement -->
 				</gd_items>
 			</gd_rule>
 			<!-- Central Garrions -->
 			<gd_rule rule_name="Symphony of Legend - Epilogue" base_chance="40" fixed_chance="true">
 				<gd_maps>
-					<gd_map map_id="600100000" name="Levinshor"/>
+					<gd_map map_id="600100000"/><!-- Levinshor -->
 				</gd_maps>
 				<gd_npcs>
-					<gd_npc npc_id="235378" name="Tomul Brawler"/>
-					<gd_npc npc_id="235379" name="Tomul Cutthroat"/>
-					<gd_npc npc_id="235380" name="Tomul Shaman"/>
-					<gd_npc npc_id="235381" name="Tomul Aquamancer"/>
-					<gd_npc npc_id="235382" name="Denku Feralclaw"/>
-					<gd_npc npc_id="235383" name="Denku Fang"/>
-					<gd_npc npc_id="235384" name="Denku Restorer"/>
-					<gd_npc npc_id="235385" name="Denku Feralmage"/>
+					<gd_npc npc_id="235378"/><!-- Tomul Brawler -->
+					<gd_npc npc_id="235379"/><!-- Tomul Cutthroat -->
+					<gd_npc npc_id="235380"/><!-- Tomul Shaman -->
+					<gd_npc npc_id="235381"/><!-- Tomul Aquamancer -->
+					<gd_npc npc_id="235382"/><!-- Denku Feralclaw -->
+					<gd_npc npc_id="235383"/><!-- Denku Fang -->
+					<gd_npc npc_id="235384"/><!-- Denku Restorer -->
+					<gd_npc npc_id="235385"/><!-- Denku Feralmage -->
 				</gd_npcs>
 				<gd_items>
-					<gd_item id="188100256" name="Symphony of Legend - Epilogue"/>
+					<gd_item id="188100256"/><!-- Symphony of Legend - Epilogue -->
 				</gd_items>
 			</gd_rule>
 		</event_drops>

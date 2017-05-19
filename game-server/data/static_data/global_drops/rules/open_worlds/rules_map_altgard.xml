@@ -3,7 +3,7 @@
 	<!-- Zone Drops -->
 	<gd_rule rule_name="Mau Armor (Rare)" base_chance="1">
 		<gd_maps>
-			<gd_map map_id="220030000" name="Altgard" />
+			<gd_map map_id="220030000" /><!-- Altgard -->
 		</gd_maps>
 		<gd_zones>
 			<gd_zone zone="BLACK_CLAW_VILLAGE_220030000" />
@@ -15,420 +15,420 @@
 		</gd_npc_groups>
 		<gd_items>
 			<!-- Level 18 -->
-			<gd_item id="110100468" name="Mau Shaman's Tunic" />
-			<gd_item id="111100399" name="Mau Shaman's Gloves" />
-			<gd_item id="112100365" name="Mau Shaman's Pauldrons" />
-			<gd_item id="113100399" name="Mau Shaman's Leggings" />
-			<gd_item id="114100415" name="Mau Shaman's Shoes" />
-			<gd_item id="125001191" name="Mau Shaman's Headband" />
-			<gd_item id="110300430" name="Mau Sentinel's Jerkin" />
-			<gd_item id="111300400" name="Mau Sentinel's Vambrace" />
-			<gd_item id="112300365" name="Mau Sentinel's Shoulderguards" />
-			<gd_item id="113300415" name="Mau Sentinel's Breeches" />
-			<gd_item id="114300429" name="Mau Sentinel's Boots" />
-			<gd_item id="125001192" name="Mau Sentinel's Hat" />
-			<gd_item id="110500457" name="Mau Healer's Hauberk" />
-			<gd_item id="111500439" name="Mau Healer's Handguards" />
-			<gd_item id="112500404" name="Mau Healer's Spaulders" />
-			<gd_item id="113500438" name="Mau Healer's Chausses" />
-			<gd_item id="114500446" name="Mau Healer's Brogans" />
-			<gd_item id="125001193" name="Mau Healer's Chain Helm" />
-			<gd_item id="110600454" name="Mau Warrior's Breastplate" />
-			<gd_item id="111600427" name="Mau Warrior's Gauntlets" />
-			<gd_item id="112600409" name="Mau Warrior's Shoulderplates" />
-			<gd_item id="113600422" name="Mau Warrior's Greaves" />
-			<gd_item id="114600415" name="Mau Warrior's Sabatons" />
-			<gd_item id="125001194" name="Mau Warrior's Helm" />
+			<gd_item id="110100468" /><!-- Mau Shaman's Tunic -->
+			<gd_item id="111100399" /><!-- Mau Shaman's Gloves -->
+			<gd_item id="112100365" /><!-- Mau Shaman's Pauldrons -->
+			<gd_item id="113100399" /><!-- Mau Shaman's Leggings -->
+			<gd_item id="114100415" /><!-- Mau Shaman's Shoes -->
+			<gd_item id="125001191" /><!-- Mau Shaman's Headband -->
+			<gd_item id="110300430" /><!-- Mau Sentinel's Jerkin -->
+			<gd_item id="111300400" /><!-- Mau Sentinel's Vambrace -->
+			<gd_item id="112300365" /><!-- Mau Sentinel's Shoulderguards -->
+			<gd_item id="113300415" /><!-- Mau Sentinel's Breeches -->
+			<gd_item id="114300429" /><!-- Mau Sentinel's Boots -->
+			<gd_item id="125001192" /><!-- Mau Sentinel's Hat -->
+			<gd_item id="110500457" /><!-- Mau Healer's Hauberk -->
+			<gd_item id="111500439" /><!-- Mau Healer's Handguards -->
+			<gd_item id="112500404" /><!-- Mau Healer's Spaulders -->
+			<gd_item id="113500438" /><!-- Mau Healer's Chausses -->
+			<gd_item id="114500446" /><!-- Mau Healer's Brogans -->
+			<gd_item id="125001193" /><!-- Mau Healer's Chain Helm -->
+			<gd_item id="110600454" /><!-- Mau Warrior's Breastplate -->
+			<gd_item id="111600427" /><!-- Mau Warrior's Gauntlets -->
+			<gd_item id="112600409" /><!-- Mau Warrior's Shoulderplates -->
+			<gd_item id="113600422" /><!-- Mau Warrior's Greaves -->
+			<gd_item id="114600415" /><!-- Mau Warrior's Sabatons -->
+			<gd_item id="125001194" /><!-- Mau Warrior's Helm -->
 		</gd_items>
 	</gd_rule>
 	<!-- Map Drops -->
 	<gd_rule rule_name="Malodor Thorn" base_chance="40">
 		<gd_maps>
-			<gd_map map_id="220030000" name="Altgard" />
+			<gd_map map_id="220030000" /><!-- Altgard -->
 		</gd_maps>
 		<gd_npc_groups>
 			<gd_npc_group group="RAFFLESIA" />
 		</gd_npc_groups>
 		<gd_items>
-			<gd_item id="186000014" name="Malodor Thorn" />
+			<gd_item id="186000014" /><!-- Malodor Thorn -->
 		</gd_items>
 	</gd_rule>
 	<!-- Multiple Monster Drops -->
 	<gd_rule rule_name="Named Quest-Start Item" base_chance="3">
 		<gd_maps>
-			<gd_map map_id="220030000" name="Altgard" />
+			<gd_map map_id="220030000" /><!-- Altgard -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="210467" name="MuMu Farmer" />
-			<gd_npc npc_id="210468" name="MuMu Farmer" />
-			<gd_npc npc_id="210469" name="MuMu Farmer" />
+			<gd_npc npc_id="210467" /><!-- MuMu Farmer -->
+			<gd_npc npc_id="210468" /><!-- MuMu Farmer -->
+			<gd_npc npc_id="210469" /><!-- MuMu Farmer -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="182203210" name="quest_2216a" />
+			<gd_item id="182203210" /><!-- quest_2216a -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Accessory (Legend)" base_chance="25">
 		<gd_maps>
-			<gd_map map_id="220030000" name="Altgard" />
+			<gd_map map_id="220030000" /><!-- Altgard -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="210548" name="Chieftain Kumbaron" />
-			<gd_npc npc_id="210606" name="The Peltclaimer" />
-			<gd_npc npc_id="210607" name="Jahama the Ruthless" />
-			<gd_npc npc_id="210630" name="Scowl" />
+			<gd_npc npc_id="210548" /><!-- Chieftain Kumbaron -->
+			<gd_npc npc_id="210606" /><!-- The Peltclaimer -->
+			<gd_npc npc_id="210607" /><!-- Jahama the Ruthless -->
+			<gd_npc npc_id="210630" /><!-- Scowl -->
 		</gd_npcs>
 		<gd_items>
 			<!-- Level 20 -->
-			<gd_item id="122000599" name="Black Claw Seal" />
-			<gd_item id="123000890" name="Belt of the Black Claw Tribe" />
+			<gd_item id="122000599" /><!-- Black Claw Seal -->
+			<gd_item id="123000890" /><!-- Belt of the Black Claw Tribe -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Ring" base_chance="100">
 		<gd_maps>
-			<gd_map map_id="220030000" name="Altgard" />
+			<gd_map map_id="220030000" /><!-- Altgard -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="210599" name="MuMu Lu" />
-			<gd_npc npc_id="210622" name="MuMu Zen" />
+			<gd_npc npc_id="210599" /><!-- MuMu Lu -->
+			<gd_npc npc_id="210622" /><!-- MuMu Zen -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="122000039" name="Passion Ring" />
+			<gd_item id="122000039" /><!-- Passion Ring -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Ring" base_chance="100">
 		<gd_maps>
-			<gd_map map_id="220030000" name="Altgard" />
+			<gd_map map_id="220030000" /><!-- Altgard -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="210620" name="MuMu Ring" />
-			<gd_npc npc_id="210623" name="MuMu Ang" />
+			<gd_npc npc_id="210620" /><!-- MuMu Ring -->
+			<gd_npc npc_id="210623" /><!-- MuMu Ang -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="122000040" name="Jealousy Ring" />
+			<gd_item id="122000040" /><!-- Jealousy Ring -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Ring" base_chance="100">
 		<gd_maps>
-			<gd_map map_id="220030000" name="Altgard" />
+			<gd_map map_id="220030000" /><!-- Altgard -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="210621" name="MuMu Zoo" />
-			<gd_npc npc_id="210624" name="MuMu Di" />
+			<gd_npc npc_id="210621" /><!-- MuMu Zoo -->
+			<gd_npc npc_id="210624" /><!-- MuMu Di -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="122000041" name="Love Ring" />
+			<gd_item id="122000041" /><!-- Love Ring -->
 		</gd_items>
 	</gd_rule>
 	<!-- Single Monster Drops -->
 	<gd_rule rule_name="Named Weapon (Rare)" base_chance="50">
 		<gd_maps>
-			<gd_map map_id="220030000" name="Altgard" />
+			<gd_map map_id="220030000" /><!-- Altgard -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="210431" name="Commander Mohen" />
+			<gd_npc npc_id="210431" /><!-- Commander Mohen -->
 		</gd_npcs>
 		<gd_items>
 			<!-- Level 13 -->
-			<gd_item id="100900184" name="Mohen's Greatsword" />
-			<gd_item id="100500192" name="Mohen's Jewel" />
-			<gd_item id="101700204" name="Mohen's Longbow" />
-			<gd_item id="101300183" name="Mohen's Spear" />
-			<gd_item id="101500192" name="Mohen's Staff" />
-			<gd_item id="101900278" name="Mohen's Aethercannon" />
+			<gd_item id="100900184" /><!-- Mohen's Greatsword -->
+			<gd_item id="100500192" /><!-- Mohen's Jewel -->
+			<gd_item id="101700204" /><!-- Mohen's Longbow -->
+			<gd_item id="101300183" /><!-- Mohen's Spear -->
+			<gd_item id="101500192" /><!-- Mohen's Staff -->
+			<gd_item id="101900278" /><!-- Mohen's Aethercannon -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Accessory (Rare)" base_chance="50">
 		<gd_maps>
-			<gd_map map_id="220030000" name="Altgard" />
+			<gd_map map_id="220030000" /><!-- Altgard -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="210431" name="Commander Mohen" />
+			<gd_npc npc_id="210431" /><!-- Commander Mohen -->
 		</gd_npcs>
 		<gd_items>
 			<!-- Level 13 -->
-			<gd_item id="123000618" name="Mohen's Belt" />
+			<gd_item id="123000618" /><!-- Mohen's Belt -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Weapon (Rare)" base_chance="50">
 		<gd_maps>
-			<gd_map map_id="220030000" name="Altgard" />
+			<gd_map map_id="220030000" /><!-- Altgard -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="210548" name="Chieftain Kumbaron" />
+			<gd_npc npc_id="210548" /><!-- Chieftain Kumbaron -->
 		</gd_npcs>
 		<gd_items>
 			<!-- Level 20 -->
-			<gd_item id="100200287" name="Black Claw Chieftain's Dagger" />
-			<gd_item id="100900186" name="Black Claw Chieftain's Greatsword" />
-			<gd_item id="100500194" name="Black Claw Chieftain's Jewel" />
-			<gd_item id="101700206" name="Black Claw Chieftain's Longbow" />
-			<gd_item id="101300185" name="Black Claw Chieftain's Spear" />
-			<gd_item id="101500194" name="Black Claw Chieftain's Staff" />
-			<gd_item id="100000266" name="Black Claw Chieftain's Sword" />
-			<gd_item id="100600209" name="Black Claw Chieftain's Tome" />
-			<gd_item id="100100180" name="Black Claw Chieftain's Warhammer" />
-			<gd_item id="101800278" name="Black Claw Chieftain's Pistol" />
-			<gd_item id="101900280" name="Black Claw Chieftain's Aethercannon" />
-			<gd_item id="102000291" name="Black Claw Chieftain's Harp" />
-			<gd_item id="102100262" name="Black Claw Chieftain's Cipher-Blade" />
+			<gd_item id="100200287" /><!-- Black Claw Chieftain's Dagger -->
+			<gd_item id="100900186" /><!-- Black Claw Chieftain's Greatsword -->
+			<gd_item id="100500194" /><!-- Black Claw Chieftain's Jewel -->
+			<gd_item id="101700206" /><!-- Black Claw Chieftain's Longbow -->
+			<gd_item id="101300185" /><!-- Black Claw Chieftain's Spear -->
+			<gd_item id="101500194" /><!-- Black Claw Chieftain's Staff -->
+			<gd_item id="100000266" /><!-- Black Claw Chieftain's Sword -->
+			<gd_item id="100600209" /><!-- Black Claw Chieftain's Tome -->
+			<gd_item id="100100180" /><!-- Black Claw Chieftain's Warhammer -->
+			<gd_item id="101800278" /><!-- Black Claw Chieftain's Pistol -->
+			<gd_item id="101900280" /><!-- Black Claw Chieftain's Aethercannon -->
+			<gd_item id="102000291" /><!-- Black Claw Chieftain's Harp -->
+			<gd_item id="102100262" /><!-- Black Claw Chieftain's Cipher-Blade -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Headgear (Rare)" base_chance="50">
 		<gd_maps>
-			<gd_map map_id="220030000" name="Altgard" />
+			<gd_map map_id="220030000" /><!-- Altgard -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="210548" name="Chieftain Kumbaron" />
+			<gd_npc npc_id="210548" /><!-- Chieftain Kumbaron -->
 		</gd_npcs>
 		<gd_items>
 			<!-- Level 18 -->
-			<gd_item id="125001191" name="Mau Shaman's Headband" />
-			<gd_item id="125001192" name="Mau Sentinel's Hat" />
-			<gd_item id="125001193" name="Mau Healer's Chain Helm" />
-			<gd_item id="125001194" name="Mau Warrior's Helm" />
+			<gd_item id="125001191" /><!-- Mau Shaman's Headband -->
+			<gd_item id="125001192" /><!-- Mau Sentinel's Hat -->
+			<gd_item id="125001193" /><!-- Mau Healer's Chain Helm -->
+			<gd_item id="125001194" /><!-- Mau Warrior's Helm -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Headgear (Legend)" base_chance="20">
 		<gd_maps>
-			<gd_map map_id="220030000" name="Altgard" />
+			<gd_map map_id="220030000" /><!-- Altgard -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="210548" name="Chieftain Kumbaron" />
+			<gd_npc npc_id="210548" /><!-- Chieftain Kumbaron -->
 		</gd_npcs>
 		<gd_items>
 			<!-- Level 20 -->
-			<gd_item id="125001886" name="Kumbaron's Mask" />
+			<gd_item id="125001886" /><!-- Kumbaron's Mask -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Weapon (Rare)" base_chance="50">
 		<gd_maps>
-			<gd_map map_id="220030000" name="Altgard" />
+			<gd_map map_id="220030000" /><!-- Altgard -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="210603" name="Numurru Quickfist" />
+			<gd_npc npc_id="210603" /><!-- Numurru Quickfist -->
 		</gd_npcs>
 		<gd_items>
 			<!-- Level 17 -->
-			<gd_item id="100000265" name="Numurru's Sword" />
-			<gd_item id="100500193" name="Numurru's Jewel" />
+			<gd_item id="100000265" /><!-- Numurru's Sword -->
+			<gd_item id="100500193" /><!-- Numurru's Jewel -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Rare)" base_chance="50">
 		<gd_maps>
-			<gd_map map_id="220030000" name="Altgard" />
+			<gd_map map_id="220030000" /><!-- Altgard -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="210603" name="Numurru Quickfist" />
+			<gd_npc npc_id="210603" /><!-- Numurru Quickfist -->
 		</gd_npcs>
 		<gd_items>
 			<!-- Level 18 -->
-			<gd_item id="114100415" name="Mau Shaman's Shoes" />
-			<gd_item id="114300429" name="Mau Sentinel's Boots" />
-			<gd_item id="114500446" name="Mau Healer's Brogans" />
-			<gd_item id="114600415" name="Mau Warrior's Sabatons" />
+			<gd_item id="114100415" /><!-- Mau Shaman's Shoes -->
+			<gd_item id="114300429" /><!-- Mau Sentinel's Boots -->
+			<gd_item id="114500446" /><!-- Mau Healer's Brogans -->
+			<gd_item id="114600415" /><!-- Mau Warrior's Sabatons -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Weapon (Rare)" base_chance="50">
 		<gd_maps>
-			<gd_map map_id="220030000" name="Altgard" />
+			<gd_map map_id="220030000" /><!-- Altgard -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="210605" name="Fourpoints" />
+			<gd_npc npc_id="210605" /><!-- Fourpoints -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="100200286" name="Fourpoints' Dagger" />
-			<gd_item id="101500193" name="Fourpoints' Staff" />
-			<gd_item id="101800277" name="Fourpoints' Pistol" />
+			<gd_item id="100200286" /><!-- Fourpoints' Dagger -->
+			<gd_item id="101500193" /><!-- Fourpoints' Staff -->
+			<gd_item id="101800277" /><!-- Fourpoints' Pistol -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Rare)" base_chance="50">
 		<gd_maps>
-			<gd_map map_id="220030000" name="Altgard" />
+			<gd_map map_id="220030000" /><!-- Altgard -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="210605" name="Fourpoints" />
+			<gd_npc npc_id="210605" /><!-- Fourpoints -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="111100399" name="Mau Shaman's Gloves" />
-			<gd_item id="111300400" name="Mau Sentinel's Vambrace" />
-			<gd_item id="111500439" name="Mau Healer's Handguards" />
-			<gd_item id="111600427" name="Mau Warrior's Gauntlets" />
+			<gd_item id="111100399" /><!-- Mau Shaman's Gloves -->
+			<gd_item id="111300400" /><!-- Mau Sentinel's Vambrace -->
+			<gd_item id="111500439" /><!-- Mau Healer's Handguards -->
+			<gd_item id="111600427" /><!-- Mau Warrior's Gauntlets -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Weapon (Rare)" base_chance="50">
 		<gd_maps>
-			<gd_map map_id="220030000" name="Altgard" />
+			<gd_map map_id="220030000" /><!-- Altgard -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="210607" name="Jahama the Ruthless" />
+			<gd_npc npc_id="210607" /><!-- Jahama the Ruthless -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="101700205" name="Jahama's Longbow" />
-			<gd_item id="101300184" name="Jahama's Spear" />
-			<gd_item id="100600208" name="Jahama's Tome" />
-			<gd_item id="101900279" name="Jahama's Aethercannon" />
-			<gd_item id="102000290" name="Jahama's Harp" />
+			<gd_item id="101700205" /><!-- Jahama's Longbow -->
+			<gd_item id="101300184" /><!-- Jahama's Spear -->
+			<gd_item id="100600208" /><!-- Jahama's Tome -->
+			<gd_item id="101900279" /><!-- Jahama's Aethercannon -->
+			<gd_item id="102000290" /><!-- Jahama's Harp -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Rare)" base_chance="50">
 		<gd_maps>
-			<gd_map map_id="220030000" name="Altgard" />
+			<gd_map map_id="220030000" /><!-- Altgard -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="210607" name="Jahama the Ruthless" />
+			<gd_npc npc_id="210607" /><!-- Jahama the Ruthless -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="112100365" name="Mau Shaman's Pauldrons" />
-			<gd_item id="112300365" name="Mau Sentinel's Shoulderguards" />
-			<gd_item id="112500404" name="Mau Healer's Spaulders" />
-			<gd_item id="112600409" name="Mau Warrior's Shoulderplates" />
+			<gd_item id="112100365" /><!-- Mau Shaman's Pauldrons -->
+			<gd_item id="112300365" /><!-- Mau Sentinel's Shoulderguards -->
+			<gd_item id="112500404" /><!-- Mau Healer's Spaulders -->
+			<gd_item id="112600409" /><!-- Mau Warrior's Shoulderplates -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Weapon (Rare)" base_chance="50">
 		<gd_maps>
-			<gd_map map_id="220030000" name="Altgard" />
+			<gd_map map_id="220030000" /><!-- Altgard -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="210630" name="Scowl" />
+			<gd_npc npc_id="210630" /><!-- Scowl -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="100900185" name="Scowl's Greatsword" />
-			<gd_item id="100100179" name="Scowl's Warhammer" />
+			<gd_item id="100900185" /><!-- Scowl's Greatsword -->
+			<gd_item id="100100179" /><!-- Scowl's Warhammer -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Rare)" base_chance="50">
 		<gd_maps>
-			<gd_map map_id="220030000" name="Altgard" />
+			<gd_map map_id="220030000" /><!-- Altgard -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="210630" name="Scowl" />
+			<gd_npc npc_id="210630" /><!-- Scowl -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="113100399" name="Mau Shaman's Leggings" />
-			<gd_item id="113300415" name="Mau Sentinel's Breeches" />
-			<gd_item id="113500438" name="Mau Healer's Chausses" />
-			<gd_item id="113600422" name="Mau Warrior's Greaves" />
+			<gd_item id="113100399" /><!-- Mau Shaman's Leggings -->
+			<gd_item id="113300415" /><!-- Mau Sentinel's Breeches -->
+			<gd_item id="113500438" /><!-- Mau Healer's Chausses -->
+			<gd_item id="113600422" /><!-- Mau Warrior's Greaves -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Weapon (Legend)" base_chance="35">
 		<gd_maps>
-			<gd_map map_id="220030000" name="Altgard" />
+			<gd_map map_id="220030000" /><!-- Altgard -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="210619" name="Karat Ikid" />
+			<gd_npc npc_id="210619" /><!-- Karat Ikid -->
 		</gd_npcs>
 		<gd_items>
 			<!-- Level 18 -->
-			<gd_item id="100900187" name="Karat Ikid's Greatsword" />
+			<gd_item id="100900187" /><!-- Karat Ikid's Greatsword -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Shield (Rare)" base_chance="50">
 		<gd_maps>
-			<gd_map map_id="220030000" name="Altgard" />
+			<gd_map map_id="220030000" /><!-- Altgard -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="210617" name="Stoneskin Stoffu" />
+			<gd_npc npc_id="210617" /><!-- Stoneskin Stoffu -->
 		</gd_npcs>
 		<gd_items>
 			<!-- Level 18 -->
-			<gd_item id="115000478" name="Stoffu's Shield" />
+			<gd_item id="115000478" /><!-- Stoffu's Shield -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Accessory (Rare)" base_chance="50">
 		<gd_maps>
-			<gd_map map_id="220030000" name="Altgard" />
+			<gd_map map_id="220030000" /><!-- Altgard -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="210617" name="Stoneskin Stoffu" />
+			<gd_npc npc_id="210617" /><!-- Stoneskin Stoffu -->
 		</gd_npcs>
 		<gd_items>
 			<!-- Level 18 -->
-			<gd_item id="121000493" name="Stoffu's Heart" />
+			<gd_item id="121000493" /><!-- Stoffu's Heart -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Rare)" base_chance="50">
 		<gd_maps>
-			<gd_map map_id="220030000" name="Altgard" />
+			<gd_map map_id="220030000" /><!-- Altgard -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="210606" name="The Peltclaimer" />
+			<gd_npc npc_id="210606" /><!-- The Peltclaimer -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="110100468" name="Mau Shaman's Tunic" />
-			<gd_item id="110300430" name="Mau Sentinel's Jerkin" />
-			<gd_item id="110500457" name="Mau Healer's Hauberk" />
-			<gd_item id="110600454" name="Mau Warrior's Breastplate" />
+			<gd_item id="110100468" /><!-- Mau Shaman's Tunic -->
+			<gd_item id="110300430" /><!-- Mau Sentinel's Jerkin -->
+			<gd_item id="110500457" /><!-- Mau Healer's Hauberk -->
+			<gd_item id="110600454" /><!-- Mau Warrior's Breastplate -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Accessory (Rare)" base_chance="50">
 		<gd_maps>
-			<gd_map map_id="220030000" name="Altgard" />
+			<gd_map map_id="220030000" /><!-- Altgard -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="210606" name="The Peltclaimer" />
+			<gd_npc npc_id="210606" /><!-- The Peltclaimer -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="120000554" name="Peltclaimer's Earrings" />
+			<gd_item id="120000554" /><!-- Peltclaimer's Earrings -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Legend)" base_chance="35">
 		<gd_maps>
-			<gd_map map_id="220030000" name="Altgard" />
+			<gd_map map_id="220030000" /><!-- Altgard -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="210616" name="Bluewing" />
+			<gd_npc npc_id="210616" /><!-- Bluewing -->
 		</gd_npcs>
 		<gd_items>
 			<!-- Level 19 -->
-			<gd_item id="110500458" name="Bluewing's Hauberk" />
+			<gd_item id="110500458" /><!-- Bluewing's Hauberk -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Legend)" base_chance="35">
 		<gd_maps>
-			<gd_map map_id="220030000" name="Altgard" />
+			<gd_map map_id="220030000" /><!-- Altgard -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="210625" name="Depthcharge" />
+			<gd_npc npc_id="210625" /><!-- Depthcharge -->
 		</gd_npcs>
 		<gd_items>
 			<!-- Level 20 -->
-			<gd_item id="111300401" name="Starraea's Vambrace" />
+			<gd_item id="111300401" /><!-- Starraea's Vambrace -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Legend)" base_chance="35">
 		<gd_maps>
-			<gd_map map_id="220030000" name="Altgard" />
+			<gd_map map_id="220030000" /><!-- Altgard -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="210626" name="Silverback Haku" />
+			<gd_npc npc_id="210626" /><!-- Silverback Haku -->
 		</gd_npcs>
 		<gd_items>
 			<!-- Level 17 -->
-			<gd_item id="114100416" name="Haku's Shoes" />
+			<gd_item id="114100416" /><!-- Haku's Shoes -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Headgear (Rare)" base_chance="50">
 		<gd_maps>
-			<gd_map map_id="220030000" name="Altgard" />
+			<gd_map map_id="220030000" /><!-- Altgard -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="210598" name="Chieftain Manumumu" />
+			<gd_npc npc_id="210598" /><!-- Chieftain Manumumu -->
 		</gd_npcs>
 		<gd_items>
 			<!-- Level 17 -->
-			<gd_item id="125001190" name="Manumumu's Glasses" />
+			<gd_item id="125001190" /><!-- Manumumu's Glasses -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Accessory (Rare)" base_chance="50">
 		<gd_maps>
-			<gd_map map_id="220030000" name="Altgard" />
+			<gd_map map_id="220030000" /><!-- Altgard -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="210598" name="Chieftain Manumumu" />
+			<gd_npc npc_id="210598" /><!-- Chieftain Manumumu -->
 		</gd_npcs>
 		<gd_items>
 			<!-- Level 17 -->
-			<gd_item id="122000598" name="Manumumu's Wedding Ring" />
+			<gd_item id="122000598" /><!-- Manumumu's Wedding Ring -->
 		</gd_items>
 	</gd_rule>
 </global_rules>

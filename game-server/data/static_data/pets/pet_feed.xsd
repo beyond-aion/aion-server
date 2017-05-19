@@ -29,7 +29,6 @@
     
   <xs:complexType name="PetFeedResult">
     <xs:attribute name="item" type="xs:int" use="required"/>
-    <xs:attribute name="name" type="xs:string"/>
   </xs:complexType>
   
   <xs:simpleType name="FoodType">

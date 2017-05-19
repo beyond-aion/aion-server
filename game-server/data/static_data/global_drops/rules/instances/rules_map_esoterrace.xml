@@ -3,134 +3,134 @@
 	<!-- Map Drops -->
 	<gd_rule rule_name="Instance Bundle" base_chance="3">
 		<gd_maps>
-			<gd_map map_id="300250000" name="Esoterrace" />
+			<gd_map map_id="300250000" /><!-- Esoterrace -->
 		</gd_maps>
 		<gd_items>
-			<gd_item id="188052209" name="Adventurer's Fine Consumables Bundle" />
+			<gd_item id="188052209" /><!-- Adventurer's Fine Consumables Bundle -->
 		</gd_items>
 	</gd_rule>
 	<!-- Multiple Monster Drops -->
 	<gd_rule rule_name="Named Shield (Legend)" base_chance="15">
 		<gd_maps>
-			<gd_map map_id="300250000" name="Esoterrace" />
+			<gd_map map_id="300250000" /><!-- Esoterrace -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="217205" name="Kexkra Prototype" />
-			<gd_npc npc_id="217206" name="Warden Surama" />
+			<gd_npc npc_id="217205" /><!-- Kexkra Prototype -->
+			<gd_npc npc_id="217206" /><!-- Warden Surama -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="115001212" name="Esoterrace Legionary's Steel Shield" />
-			<gd_item id="115001216" name="Esoterrace Legionary's Shield" />
+			<gd_item id="115001212" /><!-- Esoterrace Legionary's Steel Shield -->
+			<gd_item id="115001216" /><!-- Esoterrace Legionary's Shield -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Legend)" base_chance="15">
 		<gd_maps>
-			<gd_map map_id="300250000" name="Esoterrace" />
+			<gd_map map_id="300250000" /><!-- Esoterrace -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="217205" name="Kexkra Prototype" />
-			<gd_npc npc_id="217206" name="Warden Surama" />
+			<gd_npc npc_id="217205" /><!-- Kexkra Prototype -->
+			<gd_npc npc_id="217206" /><!-- Warden Surama -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="110101277" name="Esoterrace Legionary's Tunic" />
-			<gd_item id="110301204" name="Esoterrace Legionary's Jerkin" />
-			<gd_item id="110501178" name="Esoterrace Legionary's Hauberk" />
-			<gd_item id="110601151" name="Esoterrace Legionary's Breastplate" />
+			<gd_item id="110101277" /><!-- Esoterrace Legionary's Tunic -->
+			<gd_item id="110301204" /><!-- Esoterrace Legionary's Jerkin -->
+			<gd_item id="110501178" /><!-- Esoterrace Legionary's Hauberk -->
+			<gd_item id="110601151" /><!-- Esoterrace Legionary's Breastplate -->
 		</gd_items>
 	</gd_rule>
 	<!-- Single Monster Drops -->
 	<gd_rule rule_name="Named Armor (Legend)" base_chance="15">
 		<gd_maps>
-			<gd_map map_id="300250000" name="Esoterrace" />
+			<gd_map map_id="300250000" /><!-- Esoterrace -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="217195" name="Captain Murugan" />
+			<gd_npc npc_id="217195" /><!-- Captain Murugan -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="111101152" name="Esoterrace Legionary's Gloves" />
-			<gd_item id="111301149" name="Esoterrace Legionary's Vambrace" />
-			<gd_item id="111501139" name="Esoterrace Legionary's Handguards" />
-			<gd_item id="111601122" name="Esoterrace Legionary's Gauntlets" />
-			<gd_item id="112101112" name="Esoterrace Legionary's Pauldrons" />
-			<gd_item id="112301095" name="Esoterrace Legionary's Shoulderguards" />
-			<gd_item id="112501088" name="Esoterrace Legionary's Spaulders" />
-			<gd_item id="112601100" name="Esoterrace Legionary's Shoulderplates" />
+			<gd_item id="111101152" /><!-- Esoterrace Legionary's Gloves -->
+			<gd_item id="111301149" /><!-- Esoterrace Legionary's Vambrace -->
+			<gd_item id="111501139" /><!-- Esoterrace Legionary's Handguards -->
+			<gd_item id="111601122" /><!-- Esoterrace Legionary's Gauntlets -->
+			<gd_item id="112101112" /><!-- Esoterrace Legionary's Pauldrons -->
+			<gd_item id="112301095" /><!-- Esoterrace Legionary's Shoulderguards -->
+			<gd_item id="112501088" /><!-- Esoterrace Legionary's Spaulders -->
+			<gd_item id="112601100" /><!-- Esoterrace Legionary's Shoulderplates -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Shield (Unique)" base_chance="5">
 		<gd_maps>
-			<gd_map map_id="300250000" name="Esoterrace" />
+			<gd_map map_id="300250000" /><!-- Esoterrace -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="217206" name="Warden Surama" />
+			<gd_npc npc_id="217206" /><!-- Warden Surama -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="115001211" name="Surama's Steel Shield" />
-			<gd_item id="115001215" name="Surama's Shield" />
+			<gd_item id="115001211" /><!-- Surama's Steel Shield -->
+			<gd_item id="115001215" /><!-- Surama's Shield -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Unique)" base_chance="10">
 		<gd_maps>
-			<gd_map map_id="300250000" name="Esoterrace" />
+			<gd_map map_id="300250000" /><!-- Esoterrace -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="217206" name="Warden Surama" />
+			<gd_npc npc_id="217206" /><!-- Warden Surama -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="114101197" name="Surama's Shoes" />
-			<gd_item id="114301203" name="Surama's Boots" />
-			<gd_item id="114501157" name="Surama's Brogans" />
-			<gd_item id="114601103" name="Surama's Sabatons" />
-			<gd_item id="113101170" name="Surama's Leggings" />
-			<gd_item id="113301172" name="Surama's Breeches" />
-			<gd_item id="113501153" name="Surama's Chausses" />
-			<gd_item id="113601110" name="Surama's Greaves" />
-			<gd_item id="111101151" name="Surama's Gloves" />
-			<gd_item id="111301146" name="Surama's Vambrace" />
-			<gd_item id="111501136" name="Surama's Handguards" />
-			<gd_item id="111601119" name="Surama's Gauntlets" />
-			<gd_item id="112101109" name="Surama's Pauldrons" />
-			<gd_item id="112301092" name="Surama's Shoulderguards" />
-			<gd_item id="112501085" name="Surama's Spaulders" />
-			<gd_item id="112601097" name="Surama's Shoulderplates" />
-			<gd_item id="110101276" name="Surama's Tunic" />
-			<gd_item id="110301203" name="Surama's Jerkin" />
-			<gd_item id="110501177" name="Surama's Hauberk" />
-			<gd_item id="110601150" name="Surama's Breastplate" />
+			<gd_item id="114101197" /><!-- Surama's Shoes -->
+			<gd_item id="114301203" /><!-- Surama's Boots -->
+			<gd_item id="114501157" /><!-- Surama's Brogans -->
+			<gd_item id="114601103" /><!-- Surama's Sabatons -->
+			<gd_item id="113101170" /><!-- Surama's Leggings -->
+			<gd_item id="113301172" /><!-- Surama's Breeches -->
+			<gd_item id="113501153" /><!-- Surama's Chausses -->
+			<gd_item id="113601110" /><!-- Surama's Greaves -->
+			<gd_item id="111101151" /><!-- Surama's Gloves -->
+			<gd_item id="111301146" /><!-- Surama's Vambrace -->
+			<gd_item id="111501136" /><!-- Surama's Handguards -->
+			<gd_item id="111601119" /><!-- Surama's Gauntlets -->
+			<gd_item id="112101109" /><!-- Surama's Pauldrons -->
+			<gd_item id="112301092" /><!-- Surama's Shoulderguards -->
+			<gd_item id="112501085" /><!-- Surama's Spaulders -->
+			<gd_item id="112601097" /><!-- Surama's Shoulderplates -->
+			<gd_item id="110101276" /><!-- Surama's Tunic -->
+			<gd_item id="110301203" /><!-- Surama's Jerkin -->
+			<gd_item id="110501177" /><!-- Surama's Hauberk -->
+			<gd_item id="110601150" /><!-- Surama's Breastplate -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Weapon (Unique)" base_chance="5">
 		<gd_maps>
-			<gd_map map_id="300250000" name="Esoterrace" />
+			<gd_map map_id="300250000" /><!-- Esoterrace -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="217206" name="Warden Surama" />
+			<gd_npc npc_id="217206" /><!-- Warden Surama -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="100001134" name="Surama's Sword" />
-			<gd_item id="100100873" name="Surama's Mace" />
-			<gd_item id="100201002" name="Surama's Dagger" />
-			<gd_item id="100500885" name="Surama's Orb" />
-			<gd_item id="100600943" name="Surama's Spellbook" />
-			<gd_item id="100900868" name="Surama's Greatsword" />
-			<gd_item id="101300835" name="Surama's Polearm" />
-			<gd_item id="101500894" name="Surama's Staff" />
-			<gd_item id="101700909" name="Surama's Bow" />
-			<gd_item id="101800732" name="Surama's Pistol" />
-			<gd_item id="101900738" name="Surama's Aethercannon" />
-			<gd_item id="102000772" name="Surama's Harp" />
-			<gd_item id="102100644" name="Surama's Cipher-Blade" />
+			<gd_item id="100001134" /><!-- Surama's Sword -->
+			<gd_item id="100100873" /><!-- Surama's Mace -->
+			<gd_item id="100201002" /><!-- Surama's Dagger -->
+			<gd_item id="100500885" /><!-- Surama's Orb -->
+			<gd_item id="100600943" /><!-- Surama's Spellbook -->
+			<gd_item id="100900868" /><!-- Surama's Greatsword -->
+			<gd_item id="101300835" /><!-- Surama's Polearm -->
+			<gd_item id="101500894" /><!-- Surama's Staff -->
+			<gd_item id="101700909" /><!-- Surama's Bow -->
+			<gd_item id="101800732" /><!-- Surama's Pistol -->
+			<gd_item id="101900738" /><!-- Surama's Aethercannon -->
+			<gd_item id="102000772" /><!-- Surama's Harp -->
+			<gd_item id="102100644" /><!-- Surama's Cipher-Blade -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Dalia Key" base_chance="100" member_limit="6">
 		<gd_maps>
-			<gd_map map_id="300250000" name="Esoterrace" />
+			<gd_map map_id="300250000" /><!-- Esoterrace -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="217185" name="Dalia Charlands" />
+			<gd_npc npc_id="217185" /><!-- Dalia Charlands -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="185000111" name="Dalia Key" />
+			<gd_item id="185000111" /><!-- Dalia Key -->
 		</gd_items>
 	</gd_rule>
 </global_rules>

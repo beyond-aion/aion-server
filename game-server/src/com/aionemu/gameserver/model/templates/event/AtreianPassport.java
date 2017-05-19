@@ -21,8 +21,6 @@ public class AtreianPassport {
 
 	@XmlAttribute(name = "id", required = true)
 	private int id;
-	@XmlAttribute(name = "name")
-	private String name = "";
 	@XmlAttribute(name = "active", required = true)
 	private int active;
 	@XmlAttribute(name = "period_start", required = true)
@@ -50,10 +48,6 @@ public class AtreianPassport {
 
 	public int getActive() {
 		return active;
-	}
-
-	public String getName() {
-		return name;
 	}
 
 	public ZonedDateTime getPeriodStart() {

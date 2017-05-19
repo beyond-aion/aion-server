@@ -3,718 +3,718 @@
 	<!-- Multiple Monster Drops -->
 	<gd_rule rule_name="Named Accessory (Legend)" base_chance="100">
 		<gd_maps>
-			<gd_map map_id="300170000" name="Beshmundir_Temple" />
+			<gd_map map_id="300170000" /><!-- Beshmundir_Temple -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="216157" name="Captain Lakhara" />
-			<gd_npc npc_id="216238" name="Captain Lakhara" />
+			<gd_npc npc_id="216157" /><!-- Captain Lakhara -->
+			<gd_npc npc_id="216238" /><!-- Captain Lakhara -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="122001163" name="Lakhara's Ring" />
+			<gd_item id="122001163" /><!-- Lakhara's Ring -->
 		</gd_items>
 	</gd_rule>
 	<!-- Single Monster Drops -->
 	<gd_rule rule_name="Named Armor (Unique)" base_chance="5">
 		<gd_maps>
-			<gd_map map_id="300170000" name="Beshmundir_Temple" />
+			<gd_map map_id="300170000" /><!-- Beshmundir_Temple -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="216238" name="Captain Lakhara" />
+			<gd_npc npc_id="216238" /><!-- Captain Lakhara -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="113101404" name="Beshmundir Songweaver Leggings" />
-			<gd_item id="111300967" name="Beshmundir Assassin Vambrace" />
-			<gd_item id="114500965" name="Beshmundir Cleric Brogans" />
-			<gd_item id="114501591" name="Beshmundir Aethertech Magic Brogans" />
-			<gd_item id="112600920" name="Beshmundir Gladiator Shoulderplates" />
+			<gd_item id="113101404" /><!-- Beshmundir Songweaver Leggings -->
+			<gd_item id="111300967" /><!-- Beshmundir Assassin Vambrace -->
+			<gd_item id="114500965" /><!-- Beshmundir Cleric Brogans -->
+			<gd_item id="114501591" /><!-- Beshmundir Aethertech Magic Brogans -->
+			<gd_item id="112600920" /><!-- Beshmundir Gladiator Shoulderplates -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Unique)" base_chance="20">
 		<gd_maps>
-			<gd_map map_id="300170000" name="Beshmundir_Temple" />
+			<gd_map map_id="300170000" /><!-- Beshmundir_Temple -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="216157" name="Captain Lakhara" />
+			<gd_npc npc_id="216157" /><!-- Captain Lakhara -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="113101404" name="Beshmundir Songweaver Leggings" />
-			<gd_item id="111300967" name="Beshmundir Assassin Vambrace" />
-			<gd_item id="114500965" name="Beshmundir Cleric Brogans" />
-			<gd_item id="114501591" name="Beshmundir Aethertech Magic Brogans" />
-			<gd_item id="112600920" name="Beshmundir Gladiator Shoulderplates" />
+			<gd_item id="113101404" /><!-- Beshmundir Songweaver Leggings -->
+			<gd_item id="111300967" /><!-- Beshmundir Assassin Vambrace -->
+			<gd_item id="114500965" /><!-- Beshmundir Cleric Brogans -->
+			<gd_item id="114501591" /><!-- Beshmundir Aethertech Magic Brogans -->
+			<gd_item id="112600920" /><!-- Beshmundir Gladiator Shoulderplates -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Legend)" base_chance="50">
 		<gd_maps>
-			<gd_map map_id="300170000" name="Beshmundir_Temple" />
+			<gd_map map_id="300170000" /><!-- Beshmundir_Temple -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="216158" name="Ahbana the Wicked" />
+			<gd_npc npc_id="216158" /><!-- Ahbana the Wicked -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="114301158" name="Beshmundir Boots" />
-			<gd_item id="114301021" name="Underground Temple Boots" />
-			<gd_item id="114601062" name="Beshmundir Sabatons" />
-			<gd_item id="114600923" name="Underground Temple Sabatons" />
+			<gd_item id="114301158" /><!-- Beshmundir Boots -->
+			<gd_item id="114301021" /><!-- Underground Temple Boots -->
+			<gd_item id="114601062" /><!-- Beshmundir Sabatons -->
+			<gd_item id="114600923" /><!-- Underground Temple Sabatons -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Unique)" base_chance="20">
 		<gd_maps>
-			<gd_map map_id="300170000" name="Beshmundir_Temple" />
+			<gd_map map_id="300170000" /><!-- Beshmundir_Temple -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="216158" name="Ahbana the Wicked" />
+			<gd_npc npc_id="216158" /><!-- Ahbana the Wicked -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="112100921" name="Beshmundir Spiritmaster Pauldrons" />
-			<gd_item id="111300968" name="Beshmundir Ranger Vambrace" />
-			<gd_item id="114301441" name="Beshmundir Gunslinger Boots" />
-			<gd_item id="113500958" name="Beshmundir Cleric Chausses" />
-			<gd_item id="113501582" name="Beshmundir Aethertech Magic Chausses" />
+			<gd_item id="112100921" /><!-- Beshmundir Spiritmaster Pauldrons -->
+			<gd_item id="111300968" /><!-- Beshmundir Ranger Vambrace -->
+			<gd_item id="114301441" /><!-- Beshmundir Gunslinger Boots -->
+			<gd_item id="113500958" /><!-- Beshmundir Cleric Chausses -->
+			<gd_item id="113501582" /><!-- Beshmundir Aethertech Magic Chausses -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Epic)" base_chance="20">
 		<gd_maps>
-			<gd_map map_id="300170000" name="Beshmundir_Temple" />
+			<gd_map map_id="300170000" /><!-- Beshmundir_Temple -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="216158" name="Ahbana the Wicked" />
+			<gd_npc npc_id="216158" /><!-- Ahbana the Wicked -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="114101003" name="Stormwing's Shoes" />
-			<gd_item id="114301024" name="Stormwing's Boots" />
-			<gd_item id="114301588" name="Stormwing's Magic Boots" />
-			<gd_item id="114500967" name="Stormwing's Brogans" />
-			<gd_item id="114501590" name="Stormwing's Magic Brogans" />
-			<gd_item id="114600926" name="Stormwing's Sabatons" />
+			<gd_item id="114101003" /><!-- Stormwing's Shoes -->
+			<gd_item id="114301024" /><!-- Stormwing's Boots -->
+			<gd_item id="114301588" /><!-- Stormwing's Magic Boots -->
+			<gd_item id="114500967" /><!-- Stormwing's Brogans -->
+			<gd_item id="114501590" /><!-- Stormwing's Magic Brogans -->
+			<gd_item id="114600926" /><!-- Stormwing's Sabatons -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Accessory (Legend)" base_chance="100">
 		<gd_maps>
-			<gd_map map_id="300170000" name="Beshmundir_Temple" />
+			<gd_map map_id="300170000" /><!-- Beshmundir_Temple -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="216160" name="Manadar" />
+			<gd_npc npc_id="216160" /><!-- Manadar -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="120001040" name="Manadar's Earrings" />
+			<gd_item id="120001040" /><!-- Manadar's Earrings -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Unique)" base_chance="20">
 		<gd_maps>
-			<gd_map map_id="300170000" name="Beshmundir_Temple" />
+			<gd_map map_id="300170000" /><!-- Beshmundir_Temple -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="216160" name="Manadar" />
+			<gd_npc npc_id="216160" /><!-- Manadar -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="113100975" name="Beshmundir Sorcerer Leggings" />
-			<gd_item id="114301023" name="Beshmundir Ranger Boots" />
-			<gd_item id="112301324" name="Beshmundir Gunslinger Shoulderguards" />
-			<gd_item id="111500953" name="Beshmundir Cleric Handguards" />
-			<gd_item id="111501564" name="Beshmundir Aethertech Magic Handguards" />
+			<gd_item id="113100975" /><!-- Beshmundir Sorcerer Leggings -->
+			<gd_item id="114301023" /><!-- Beshmundir Ranger Boots -->
+			<gd_item id="112301324" /><!-- Beshmundir Gunslinger Shoulderguards -->
+			<gd_item id="111500953" /><!-- Beshmundir Cleric Handguards -->
+			<gd_item id="111501564" /><!-- Beshmundir Aethertech Magic Handguards -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Accessory (Legend)" base_chance="100">
 		<gd_maps>
-			<gd_map map_id="300170000" name="Beshmundir_Temple" />
+			<gd_map map_id="300170000" /><!-- Beshmundir_Temple -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="216161" name="Vehala the Cursed" />
+			<gd_npc npc_id="216161" /><!-- Vehala the Cursed -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="122001162" name="Vehalla's Ring" />
+			<gd_item id="122001162" /><!-- Vehalla's Ring -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Unique)" base_chance="20">
 		<gd_maps>
-			<gd_map map_id="300170000" name="Beshmundir_Temple" />
+			<gd_map map_id="300170000" /><!-- Beshmundir_Temple -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="216161" name="Vehala the Cursed" />
+			<gd_npc npc_id="216161" /><!-- Vehala the Cursed -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="114101001" name="Beshmundir Sorcerer Shoes" />
-			<gd_item id="113301551" name="Beshmundir Gunslinger Magic Breeches" />
-			<gd_item id="112500905" name="Beshmundir Cleric Spaulders" />
-			<gd_item id="112501506" name="Beshmundir Aethertech Magic Spaulders" />
-			<gd_item id="111600946" name="Beshmundir Templar Gauntlets" />
+			<gd_item id="114101001" /><!-- Beshmundir Sorcerer Shoes -->
+			<gd_item id="113301551" /><!-- Beshmundir Gunslinger Magic Breeches -->
+			<gd_item id="112500905" /><!-- Beshmundir Cleric Spaulders -->
+			<gd_item id="112501506" /><!-- Beshmundir Aethertech Magic Spaulders -->
+			<gd_item id="111600946" /><!-- Beshmundir Templar Gauntlets -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Accessory (Legend)" base_chance="100">
 		<gd_maps>
-			<gd_map map_id="300170000" name="Beshmundir_Temple" />
+			<gd_map map_id="300170000" /><!-- Beshmundir_Temple -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="216163" name="The Plaguebearer" />
+			<gd_npc npc_id="216163" /><!-- The Plaguebearer -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="120001039" name="Plaguebearer's Earrings" />
+			<gd_item id="120001039" /><!-- Plaguebearer's Earrings -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Unique)" base_chance="20">
 		<gd_maps>
-			<gd_map map_id="300170000" name="Beshmundir_Temple" />
+			<gd_map map_id="300170000" /><!-- Beshmundir_Temple -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="216163" name="The Plaguebearer" />
+			<gd_npc npc_id="216163" /><!-- The Plaguebearer -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="112100920" name="Beshmundir Sorcerer Pauldrons" />
-			<gd_item id="114500966" name="Beshmundir Chanter Brogans" />
-			<gd_item id="113600929" name="Beshmundir Gladiator Greaves" />
+			<gd_item id="112100920" /><!-- Beshmundir Sorcerer Pauldrons -->
+			<gd_item id="114500966" /><!-- Beshmundir Chanter Brogans -->
+			<gd_item id="113600929" /><!-- Beshmundir Gladiator Greaves -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Legend)" base_chance="50">
 		<gd_maps>
-			<gd_map map_id="300170000" name="Beshmundir_Temple" />
+			<gd_map map_id="300170000" /><!-- Beshmundir_Temple -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="216165" name="The Great Virhana" />
+			<gd_npc npc_id="216165" /><!-- The Great Virhana -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="112101067" name="Beshmundir Pauldrons" />
-			<gd_item id="112100919" name="Underground Temple Pauldrons" />
-			<gd_item id="112501043" name="Beshmundir Spaulders" />
-			<gd_item id="112500904" name="Underground Temple Spaulders" />
+			<gd_item id="112101067" /><!-- Beshmundir Pauldrons -->
+			<gd_item id="112100919" /><!-- Underground Temple Pauldrons -->
+			<gd_item id="112501043" /><!-- Beshmundir Spaulders -->
+			<gd_item id="112500904" /><!-- Underground Temple Spaulders -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Unique)" base_chance="20">
 		<gd_maps>
-			<gd_map map_id="300170000" name="Beshmundir_Temple" />
+			<gd_map map_id="300170000" /><!-- Beshmundir_Temple -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="216165" name="The Great Virhana" />
+			<gd_npc npc_id="216165" /><!-- The Great Virhana -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="111100963" name="Beshmundir Spiritmaster Gloves" />
-			<gd_item id="112300918" name="Beshmundir Assassin Shoulderguards" />
-			<gd_item id="112301464" name="Beshmundir Gunslinger Magic Shoulderguards" />
-			<gd_item id="113600929" name="Beshmundir Gladiator Greaves" />
-			<gd_item id="114600925" name="Beshmundir Templar Sabatons" />
+			<gd_item id="111100963" /><!-- Beshmundir Spiritmaster Gloves -->
+			<gd_item id="112300918" /><!-- Beshmundir Assassin Shoulderguards -->
+			<gd_item id="112301464" /><!-- Beshmundir Gunslinger Magic Shoulderguards -->
+			<gd_item id="113600929" /><!-- Beshmundir Gladiator Greaves -->
+			<gd_item id="114600925" /><!-- Beshmundir Templar Sabatons -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Weapon (Unique)" base_chance="10">
 		<gd_maps>
-			<gd_map map_id="300170000" name="Beshmundir_Temple" />
+			<gd_map map_id="300170000" /><!-- Beshmundir_Temple -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="216165" name="The Great Virhana" />
+			<gd_npc npc_id="216165" /><!-- The Great Virhana -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="100001006" name="Virhana's Sword" />
-			<gd_item id="100200900" name="Virhana's Dagger" />
-			<gd_item id="101800868" name="Virhana's Pistol" />
-			<gd_item id="102100757" name="Virhana's Cipher-Blade" />
+			<gd_item id="100001006" /><!-- Virhana's Sword -->
+			<gd_item id="100200900" /><!-- Virhana's Dagger -->
+			<gd_item id="101800868" /><!-- Virhana's Pistol -->
+			<gd_item id="102100757" /><!-- Virhana's Cipher-Blade -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Legend)" base_chance="50">
 		<gd_maps>
-			<gd_map map_id="300170000" name="Beshmundir_Temple" />
+			<gd_map map_id="300170000" /><!-- Beshmundir_Temple -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="216166" name="Shadowshift" />
+			<gd_npc npc_id="216166" /><!-- Shadowshift -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="114101150" name="Beshmundir Shoes" />
-			<gd_item id="114101000" name="Underground Temple Shoes" />
-			<gd_item id="114501108" name="Beshmundir Brogans" />
-			<gd_item id="114500964" name="Underground Temple Brogans" />
+			<gd_item id="114101150" /><!-- Beshmundir Shoes -->
+			<gd_item id="114101000" /><!-- Underground Temple Shoes -->
+			<gd_item id="114501108" /><!-- Beshmundir Brogans -->
+			<gd_item id="114500964" /><!-- Underground Temple Brogans -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Unique)" base_chance="20">
 		<gd_maps>
-			<gd_map map_id="300170000" name="Beshmundir_Temple" />
+			<gd_map map_id="300170000" /><!-- Beshmundir_Temple -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="216166" name="Shadowshift" />
+			<gd_npc npc_id="216166" /><!-- Shadowshift -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="111100962" name="Beshmundir Sorcerer Gloves" />
-			<gd_item id="114101435" name="Beshmundir Songweaver Shoes" />
-			<gd_item id="112300919" name="Beshmundir Ranger Shoulderguards" />
-			<gd_item id="113301403" name="Beshmundir Gunslinger Breeches" />
-			<gd_item id="113600930" name="Beshmundir Templar Greaves" />
+			<gd_item id="111100962" /><!-- Beshmundir Sorcerer Gloves -->
+			<gd_item id="114101435" /><!-- Beshmundir Songweaver Shoes -->
+			<gd_item id="112300919" /><!-- Beshmundir Ranger Shoulderguards -->
+			<gd_item id="113301403" /><!-- Beshmundir Gunslinger Breeches -->
+			<gd_item id="113600930" /><!-- Beshmundir Templar Greaves -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Key" base_chance="100" no_reduction="true">
 		<gd_maps>
-			<gd_map map_id="300170000" name="Beshmundir_Temple" />
+			<gd_map map_id="300170000" /><!-- Beshmundir_Temple -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="216167" name="Taros Lifebane" />
-			<gd_npc npc_id="216248" name="Taros Lifebane" />
+			<gd_npc npc_id="216167" /><!-- Taros Lifebane -->
+			<gd_npc npc_id="216248" /><!-- Taros Lifebane -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="185000092" name="Temple of Eternity Key" />
+			<gd_item id="185000092" /><!-- Temple of Eternity Key -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Legend)" base_chance="50">
 		<gd_maps>
-			<gd_map map_id="300170000" name="Beshmundir_Temple" />
+			<gd_map map_id="300170000" /><!-- Beshmundir_Temple -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="216167" name="Taros Lifebane" />
-			<gd_npc npc_id="216248" name="Taros Lifebane" />
+			<gd_npc npc_id="216167" /><!-- Taros Lifebane -->
+			<gd_npc npc_id="216248" /><!-- Taros Lifebane -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="111301106" name="Beshmundir Vambrace" />
-			<gd_item id="111300966" name="Underground Temple Vambrace" />
-			<gd_item id="111601082" name="Beshmundir Gauntlets" />
-			<gd_item id="111600944" name="Underground Temple Gauntlets" />
+			<gd_item id="111301106" /><!-- Beshmundir Vambrace -->
+			<gd_item id="111300966" /><!-- Underground Temple Vambrace -->
+			<gd_item id="111601082" /><!-- Beshmundir Gauntlets -->
+			<gd_item id="111600944" /><!-- Underground Temple Gauntlets -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Unique)" base_chance="20">
 		<gd_maps>
-			<gd_map map_id="300170000" name="Beshmundir_Temple" />
+			<gd_map map_id="300170000" /><!-- Beshmundir_Temple -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="216167" name="Taros Lifebane" />
-			<gd_npc npc_id="216248" name="Taros Lifebane" />
+			<gd_npc npc_id="216167" /><!-- Taros Lifebane -->
+			<gd_npc npc_id="216248" /><!-- Taros Lifebane -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="114101002" name="Beshmundir Spiritmaster Shoes" />
-			<gd_item id="113300988" name="Beshmundir Assassin Breeches" />
-			<gd_item id="111301380" name="Beshmundir Gunslinger Vambrace" />
-			<gd_item id="114301589" name="Beshmundir Gunslinger Magic Boots" />
-			<gd_item id="112500906" name="Beshmundir Chanter Spaulders" />
+			<gd_item id="114101002" /><!-- Beshmundir Spiritmaster Shoes -->
+			<gd_item id="113300988" /><!-- Beshmundir Assassin Breeches -->
+			<gd_item id="111301380" /><!-- Beshmundir Gunslinger Vambrace -->
+			<gd_item id="114301589" /><!-- Beshmundir Gunslinger Magic Boots -->
+			<gd_item id="112500906" /><!-- Beshmundir Chanter Spaulders -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Accessory (Legend)" base_chance="100">
 		<gd_maps>
-			<gd_map map_id="300170000" name="Beshmundir_Temple" />
+			<gd_map map_id="300170000" /><!-- Beshmundir_Temple -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="216168" name="Flarestorm" />
+			<gd_npc npc_id="216168" /><!-- Flarestorm -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="123001032" name="Flarestorm's Leather Belt" />
-			<gd_item id="123001033" name="Flarestorm's Sash" />
+			<gd_item id="123001032" /><!-- Flarestorm's Leather Belt -->
+			<gd_item id="123001033" /><!-- Flarestorm's Sash -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Accessory (Unique)" base_chance="25">
 		<gd_maps>
-			<gd_map map_id="300170000" name="Beshmundir_Temple" />
+			<gd_map map_id="300170000" /><!-- Beshmundir_Temple -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="216168" name="Flarestorm" />
+			<gd_npc npc_id="216168" /><!-- Flarestorm -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="125002275" name="Beshmundir Templar Hairpin" />
-			<gd_item id="125002274" name="Beshmundir Gladiator Hairpin" />
-			<gd_item id="125002273" name="Beshmundir Chanter Hairpin" />
-			<gd_item id="125002272" name="Beshmundir Cleric Hairpin" />
-			<gd_item id="125002271" name="Beshmundir Ranger Hairpin" />
-			<gd_item id="125002270" name="Beshmundir Assassin Hairpin" />
-			<gd_item id="125002269" name="Beshmundir Spiritmaster Hairpin" />
-			<gd_item id="125002268" name="Beshmundir Sorcerer Hairpin" />
-			<gd_item id="125003314" name="Beshmundir Gunslinger Hairpin" />
-			<gd_item id="125003315" name="Beshmundir Songweaver Hairpin" />
-			<gd_item id="125003835" name="Beshmundir Aethertech Hairpin" />
+			<gd_item id="125002275" /><!-- Beshmundir Templar Hairpin -->
+			<gd_item id="125002274" /><!-- Beshmundir Gladiator Hairpin -->
+			<gd_item id="125002273" /><!-- Beshmundir Chanter Hairpin -->
+			<gd_item id="125002272" /><!-- Beshmundir Cleric Hairpin -->
+			<gd_item id="125002271" /><!-- Beshmundir Ranger Hairpin -->
+			<gd_item id="125002270" /><!-- Beshmundir Assassin Hairpin -->
+			<gd_item id="125002269" /><!-- Beshmundir Spiritmaster Hairpin -->
+			<gd_item id="125002268" /><!-- Beshmundir Sorcerer Hairpin -->
+			<gd_item id="125003314" /><!-- Beshmundir Gunslinger Hairpin -->
+			<gd_item id="125003315" /><!-- Beshmundir Songweaver Hairpin -->
+			<gd_item id="125003835" /><!-- Beshmundir Aethertech Hairpin -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Weapon (Epic)" base_chance="20">
 		<gd_maps>
-			<gd_map map_id="300170000" name="Beshmundir_Temple" />
+			<gd_map map_id="300170000" /><!-- Beshmundir_Temple -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="216168" name="Flarestorm" />
+			<gd_npc npc_id="216168" /><!-- Flarestorm -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="100200954" name="Flarestorm's Dagger" />
-			<gd_item id="100001081" name="Flarestorm's Sword" />
-			<gd_item id="101800869" name="Flarestorm's Pistol" />
-			<gd_item id="102100758" name="Flarestorm's Cipher-Blade" />
+			<gd_item id="100200954" /><!-- Flarestorm's Dagger -->
+			<gd_item id="100001081" /><!-- Flarestorm's Sword -->
+			<gd_item id="101800869" /><!-- Flarestorm's Pistol -->
+			<gd_item id="102100758" /><!-- Flarestorm's Cipher-Blade -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Shield (Epic)" base_chance="20">
 		<gd_maps>
-			<gd_map map_id="300170000" name="Beshmundir_Temple" />
+			<gd_map map_id="300170000" /><!-- Beshmundir_Temple -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="216168" name="Flarestorm" />
+			<gd_npc npc_id="216168" /><!-- Flarestorm -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="115000966" name="Stormwing's Shield" />
-			<gd_item id="115000967" name="Stormwing Scale Shield" />
+			<gd_item id="115000966" /><!-- Stormwing's Shield -->
+			<gd_item id="115000967" /><!-- Stormwing Scale Shield -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Key" base_chance="100" no_reduction="true">
 		<gd_maps>
-			<gd_map map_id="300170000" name="Beshmundir_Temple" />
+			<gd_map map_id="300170000" /><!-- Beshmundir_Temple -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="216169" name="Dorakiki the Bold" />
-			<gd_npc npc_id="216250" name="Dorakiki the Bold" />
+			<gd_npc npc_id="216169" /><!-- Dorakiki the Bold -->
+			<gd_npc npc_id="216250" /><!-- Dorakiki the Bold -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="185000091" name="Incinerator Key" />
+			<gd_item id="185000091" /><!-- Incinerator Key -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Legend)" base_chance="50">
 		<gd_maps>
-			<gd_map map_id="300170000" name="Beshmundir_Temple" />
+			<gd_map map_id="300170000" /><!-- Beshmundir_Temple -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="216169" name="Dorakiki the Bold" />
-			<gd_npc npc_id="216250" name="Dorakiki the Bold" />
+			<gd_npc npc_id="216169" /><!-- Dorakiki the Bold -->
+			<gd_npc npc_id="216250" /><!-- Dorakiki the Bold -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="113101121" name="Beshmundir Leggings" />
-			<gd_item id="113100974" name="Underground Temple Leggings" />
-			<gd_item id="113301124" name="Beshmundir Breeches" />
-			<gd_item id="113300987" name="Underground Temple Breeches" />
-			<gd_item id="113501101" name="Beshmundir Chausses" />
-			<gd_item id="113500957" name="Underground Temple Chausses" />
-			<gd_item id="113601066" name="Beshmundir Greaves" />
-			<gd_item id="113600928" name="Underground Temple Greaves" />
+			<gd_item id="113101121" /><!-- Beshmundir Leggings -->
+			<gd_item id="113100974" /><!-- Underground Temple Leggings -->
+			<gd_item id="113301124" /><!-- Beshmundir Breeches -->
+			<gd_item id="113300987" /><!-- Underground Temple Breeches -->
+			<gd_item id="113501101" /><!-- Beshmundir Chausses -->
+			<gd_item id="113500957" /><!-- Underground Temple Chausses -->
+			<gd_item id="113601066" /><!-- Beshmundir Greaves -->
+			<gd_item id="113600928" /><!-- Underground Temple Greaves -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Unique)" base_chance="20">
 		<gd_maps>
-			<gd_map map_id="300170000" name="Beshmundir_Temple" />
+			<gd_map map_id="300170000" /><!-- Beshmundir_Temple -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="216169" name="Dorakiki the Bold" />
-			<gd_npc npc_id="216250" name="Dorakiki the Bold" />
+			<gd_npc npc_id="216169" /><!-- Dorakiki the Bold -->
+			<gd_npc npc_id="216250" /><!-- Dorakiki the Bold -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="113100976" name="Beshmundir Spiritmaster Leggings" />
-			<gd_item id="112101342" name="Beshmundir Songweaver Pauldrons" />
-			<gd_item id="114500966" name="Beshmundir Chanter Brogans" />
-			<gd_item id="111600945" name="Beshmundir Gladiator Gauntlets" />
+			<gd_item id="113100976" /><!-- Beshmundir Spiritmaster Leggings -->
+			<gd_item id="112101342" /><!-- Beshmundir Songweaver Pauldrons -->
+			<gd_item id="114500966" /><!-- Beshmundir Chanter Brogans -->
+			<gd_item id="111600945" /><!-- Beshmundir Gladiator Gauntlets -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Epic)" base_chance="20">
 		<gd_maps>
-			<gd_map map_id="300170000" name="Beshmundir_Temple" />
+			<gd_map map_id="300170000" /><!-- Beshmundir_Temple -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="216250" name="Dorakiki the Bold" />
+			<gd_npc npc_id="216250" /><!-- Dorakiki the Bold -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="112100922" name="Stormwing's Pauldrons" />
-			<gd_item id="112300920" name="Stormwing's Shoulderguards" />
-			<gd_item id="112301463" name="Stormwing's Magic Shoulderguards" />
-			<gd_item id="112500907" name="Stormwing's Spaulders" />
-			<gd_item id="112501505" name="Stormwing's Magic Spaulders" />
-			<gd_item id="112600922" name="Stormwing's Shoulderplates" />
+			<gd_item id="112100922" /><!-- Stormwing's Pauldrons -->
+			<gd_item id="112300920" /><!-- Stormwing's Shoulderguards -->
+			<gd_item id="112301463" /><!-- Stormwing's Magic Shoulderguards -->
+			<gd_item id="112500907" /><!-- Stormwing's Spaulders -->
+			<gd_item id="112501505" /><!-- Stormwing's Magic Spaulders -->
+			<gd_item id="112600922" /><!-- Stormwing's Shoulderplates -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Key" base_chance="100" no_reduction="true">
 		<gd_maps>
-			<gd_map map_id="300170000" name="Beshmundir_Temple" />
+			<gd_map map_id="300170000" /><!-- Beshmundir_Temple -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="216170" name="Gatekeeper Darfall" />
+			<gd_npc npc_id="216170" /><!-- Gatekeeper Darfall -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="185000093" name="Meditation Chamber Key" />
+			<gd_item id="185000093" /><!-- Meditation Chamber Key -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Key" base_chance="100" no_reduction="true">
 		<gd_maps>
-			<gd_map map_id="300170000" name="Beshmundir_Temple" />
+			<gd_map map_id="300170000" /><!-- Beshmundir_Temple -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="216171" name="Gatekeeper Kutarrun" />
+			<gd_npc npc_id="216171" /><!-- Gatekeeper Kutarrun -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="185000094" name="Contemplation Chamber Key" />
+			<gd_item id="185000094" /><!-- Contemplation Chamber Key -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Key" base_chance="100" no_reduction="true">
 		<gd_maps>
-			<gd_map map_id="300170000" name="Beshmundir_Temple" />
+			<gd_map map_id="300170000" /><!-- Beshmundir_Temple -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="216172" name="Gatekeeper Samarrn" />
+			<gd_npc npc_id="216172" /><!-- Gatekeeper Samarrn -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="185000095" name="Supplication Chamber Key" />
+			<gd_item id="185000095" /><!-- Supplication Chamber Key -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Key" base_chance="100" no_reduction="true">
 		<gd_maps>
-			<gd_map map_id="300170000" name="Beshmundir_Temple" />
+			<gd_map map_id="300170000" /><!-- Beshmundir_Temple -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="216173" name="Gatekeeper Rhapsharr" />
+			<gd_npc npc_id="216173" /><!-- Gatekeeper Rhapsharr -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="185000096" name="Petition Chamber Key" />
+			<gd_item id="185000096" /><!-- Petition Chamber Key -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Legend)" base_chance="50">
 		<gd_maps>
-			<gd_map map_id="300170000" name="Beshmundir_Temple" />
+			<gd_map map_id="300170000" /><!-- Beshmundir_Temple -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="216182" name="Isbariya the Resolute" />
-			<gd_npc npc_id="216263" name="Isbariya the Resolute" />
+			<gd_npc npc_id="216182" /><!-- Isbariya the Resolute -->
+			<gd_npc npc_id="216263" /><!-- Isbariya the Resolute -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="125002264" name="Underground Temple Headband" />
-			<gd_item id="125002265" name="Underground Temple Hat" />
-			<gd_item id="125002266" name="Underground Temple Chain Hood" />
-			<gd_item id="125002267" name="Underground Temple Helm" />
+			<gd_item id="125002264" /><!-- Underground Temple Headband -->
+			<gd_item id="125002265" /><!-- Underground Temple Hat -->
+			<gd_item id="125002266" /><!-- Underground Temple Chain Hood -->
+			<gd_item id="125002267" /><!-- Underground Temple Helm -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Souvenir" base_chance="10" no_reduction="true">
 		<gd_maps>
-			<gd_map map_id="300170000" name="Beshmundir_Temple" />
+			<gd_map map_id="300170000" /><!-- Beshmundir_Temple -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="216182" name="Isbariya the Resolute" />
-			<gd_npc npc_id="216263" name="Isbariya the Resolute" />
+			<gd_npc npc_id="216182" /><!-- Isbariya the Resolute -->
+			<gd_npc npc_id="216263" /><!-- Isbariya the Resolute -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="170195083" name="[Souvenir] Coffin Accessory of Beshmundir" />
+			<gd_item id="170195083" /><!-- [Souvenir] Coffin Accessory of Beshmundir -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Unique)" base_chance="20">
 		<gd_maps>
-			<gd_map map_id="300170000" name="Beshmundir_Temple" />
+			<gd_map map_id="300170000" /><!-- Beshmundir_Temple -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="216182" name="Isbariya the Resolute" />
-			<gd_npc npc_id="216263" name="Isbariya the Resolute" />
+			<gd_npc npc_id="216182" /><!-- Isbariya the Resolute -->
+			<gd_npc npc_id="216263" /><!-- Isbariya the Resolute -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="110101069" name="Beshmundir Sorcerer Tunic" />
-			<gd_item id="110101070" name="Beshmundir Spiritmaster Tunic" />
-			<gd_item id="110101542" name="Beshmundir Songweaver Tunic" />
-			<gd_item id="110301018" name="Beshmundir Assassin Jerkin" />
-			<gd_item id="110301019" name="Beshmundir Ranger Jerkin" />
-			<gd_item id="110301585" name="Beshmundir Gunslinger Magic Jerkin" />
-			<gd_item id="110500986" name="Beshmundir Cleric Hauberk" />
-			<gd_item id="110500987" name="Beshmundir Chanter Hauberk" />
-			<gd_item id="110551006" name="Beshmundir Aethertech Magic Hauberk" />
-			<gd_item id="110600966" name="Beshmundir Gladiator Breastplate" />
-			<gd_item id="110600967" name="Beshmundir Templar Breastplate" />
+			<gd_item id="110101069" /><!-- Beshmundir Sorcerer Tunic -->
+			<gd_item id="110101070" /><!-- Beshmundir Spiritmaster Tunic -->
+			<gd_item id="110101542" /><!-- Beshmundir Songweaver Tunic -->
+			<gd_item id="110301018" /><!-- Beshmundir Assassin Jerkin -->
+			<gd_item id="110301019" /><!-- Beshmundir Ranger Jerkin -->
+			<gd_item id="110301585" /><!-- Beshmundir Gunslinger Magic Jerkin -->
+			<gd_item id="110500986" /><!-- Beshmundir Cleric Hauberk -->
+			<gd_item id="110500987" /><!-- Beshmundir Chanter Hauberk -->
+			<gd_item id="110551006" /><!-- Beshmundir Aethertech Magic Hauberk -->
+			<gd_item id="110600966" /><!-- Beshmundir Gladiator Breastplate -->
+			<gd_item id="110600967" /><!-- Beshmundir Templar Breastplate -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Shield (Unique)" base_chance="10">
 		<gd_maps>
-			<gd_map map_id="300170000" name="Beshmundir_Temple" />
+			<gd_map map_id="300170000" /><!-- Beshmundir_Temple -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="216182" name="Isbariya the Resolute" />
-			<gd_npc npc_id="216263" name="Isbariya the Resolute" />
+			<gd_npc npc_id="216182" /><!-- Isbariya the Resolute -->
+			<gd_npc npc_id="216263" /><!-- Isbariya the Resolute -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="115000964" name="Beshmundir Scale Shield" />
-			<gd_item id="115000965" name="Beshmundir Shield" />
+			<gd_item id="115000964" /><!-- Beshmundir Scale Shield -->
+			<gd_item id="115000965" /><!-- Beshmundir Shield -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Epic)" base_chance="20">
 		<gd_maps>
-			<gd_map map_id="300170000" name="Beshmundir_Temple" />
+			<gd_map map_id="300170000" /><!-- Beshmundir_Temple -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="216263" name="Isbariya the Resolute" />
+			<gd_npc npc_id="216263" /><!-- Isbariya the Resolute -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="113100977" name="Stormwing's Leggings" />
-			<gd_item id="113300990" name="Stormwing's Breeches" />
-			<gd_item id="113301550" name="Stormwing's Magic Breeches" />
-			<gd_item id="113500960" name="Stormwing's Chausses" />
-			<gd_item id="113501581" name="Stormwing's Magic Chausses" />
-			<gd_item id="113600931" name="Stormwing's Greaves" />
+			<gd_item id="113100977" /><!-- Stormwing's Leggings -->
+			<gd_item id="113300990" /><!-- Stormwing's Breeches -->
+			<gd_item id="113301550" /><!-- Stormwing's Magic Breeches -->
+			<gd_item id="113500960" /><!-- Stormwing's Chausses -->
+			<gd_item id="113501581" /><!-- Stormwing's Magic Chausses -->
+			<gd_item id="113600931" /><!-- Stormwing's Greaves -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Legend)" base_chance="30">
 		<gd_maps>
-			<gd_map map_id="300170000" name="Beshmundir_Temple" />
+			<gd_map map_id="300170000" /><!-- Beshmundir_Temple -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="216183" name="Stormwing" />
+			<gd_npc npc_id="216183" /><!-- Stormwing -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="110101219" name="Beshmundir Tunic" />
-			<gd_item id="110101068" name="Underground Temple Tunic" />
-			<gd_item id="110301152" name="Beshmundir Jerkin" />
-			<gd_item id="110301017" name="Underground Temple Jerkin" />
-			<gd_item id="110501124" name="Beshmundir Hauberk" />
-			<gd_item id="110500985" name="Underground Temple Hauberk" />
-			<gd_item id="110601106" name="Beshmundir Breastplate" />
-			<gd_item id="110600965" name="Underground Temple Breastplate" />
+			<gd_item id="110101219" /><!-- Beshmundir Tunic -->
+			<gd_item id="110101068" /><!-- Underground Temple Tunic -->
+			<gd_item id="110301152" /><!-- Beshmundir Jerkin -->
+			<gd_item id="110301017" /><!-- Underground Temple Jerkin -->
+			<gd_item id="110501124" /><!-- Beshmundir Hauberk -->
+			<gd_item id="110500985" /><!-- Underground Temple Hauberk -->
+			<gd_item id="110601106" /><!-- Beshmundir Breastplate -->
+			<gd_item id="110600965" /><!-- Underground Temple Breastplate -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Accessory (Legend)" base_chance="40">
 		<gd_maps>
-			<gd_map map_id="300170000" name="Beshmundir_Temple" />
+			<gd_map map_id="300170000" /><!-- Beshmundir_Temple -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="216183" name="Stormwing" />
+			<gd_npc npc_id="216183" /><!-- Stormwing -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="121000942" name="Vorpal Corundum Necklace" />
-			<gd_item id="121000941" name="Vorpal Corundum Necklace" />
+			<gd_item id="121000942" /><!-- Vorpal Corundum Necklace -->
+			<gd_item id="121000941" /><!-- Vorpal Corundum Necklace -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Accessory (Unique)" base_chance="20">
 		<gd_maps>
-			<gd_map map_id="300170000" name="Beshmundir_Temple" />
+			<gd_map map_id="300170000" /><!-- Beshmundir_Temple -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="216183" name="Stormwing" />
+			<gd_npc npc_id="216183" /><!-- Stormwing -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="120001025" name="Vorpal Turquoise Earrings" />
+			<gd_item id="120001025" /><!-- Vorpal Turquoise Earrings -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Wings" base_chance="5" no_reduction="true">
 		<gd_maps>
-			<gd_map map_id="300170000" name="Beshmundir_Temple" />
+			<gd_map map_id="300170000" /><!-- Beshmundir_Temple -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="216183" name="Stormwing" />
+			<gd_npc npc_id="216183" /><!-- Stormwing -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="187000018" name="Storm Wings" />
+			<gd_item id="187000018" /><!-- Storm Wings -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Souvenir" base_chance="5" no_reduction="true">
 		<gd_maps>
-			<gd_map map_id="300170000" name="Beshmundir_Temple" />
+			<gd_map map_id="300170000" /><!-- Beshmundir_Temple -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="216183" name="Stormwing" />
+			<gd_npc npc_id="216183" /><!-- Stormwing -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="170030043" name="[Souvenir] Stormwing Wall-mount Trophy" />
+			<gd_item id="170030043" /><!-- [Souvenir] Stormwing Wall-mount Trophy -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Material" base_chance="100" member_limit="6">
 		<gd_maps>
-			<gd_map map_id="300170000" name="Beshmundir_Temple" />
+			<gd_map map_id="300170000" /><!-- Beshmundir_Temple -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="216183" name="Stormwing" />
+			<gd_npc npc_id="216183" /><!-- Stormwing -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="186000099" name="Vorpal Essence" />
+			<gd_item id="186000099" /><!-- Vorpal Essence -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Weapon (Unique)" base_chance="10">
 		<gd_maps>
-			<gd_map map_id="300170000" name="Beshmundir_Temple" />
+			<gd_map map_id="300170000" /><!-- Beshmundir_Temple -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="216183" name="Stormwing" />
+			<gd_npc npc_id="216183" /><!-- Stormwing -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="101700856" name="Vorpal Longbow" />
-			<gd_item id="101700721" name="Vorpal Longbow" />
-			<gd_item id="100001007" name="Vorpal Sword" />
-			<gd_item id="100200806" name="Vorpal Dagger" />
-			<gd_item id="100100675" name="Vorpal Warhammer" />
-			<gd_item id="100000892" name="Azure Vorpal Scale Sword" />
-			<gd_item id="101500840" name="Vorpal Staff" />
-			<gd_item id="101500697" name="Vorpal Staff" />
-			<gd_item id="101300783" name="Vorpal Spear" />
-			<gd_item id="101300654" name="Vorpal Spear" />
-			<gd_item id="100900814" name="Vorpal Greatsword" />
-			<gd_item id="100900683" name="Vorpal Greatsword" />
-			<gd_item id="100500834" name="Vorpal Jewel" />
-			<gd_item id="100500697" name="Vorpal Jewel" />
-			<gd_item id="100600889" name="Vorpal Tome" />
-			<gd_item id="100600754" name="Vorpal Tome" />
-			<gd_item id="101800866" name="Vorpal Pistol" />
-			<gd_item id="101900626" name="Vorpal Aethercannon" />
-			<gd_item id="101900713" name="Vorpal Aethercannon" />
-			<gd_item id="102000661" name="Vorpal Harp" />
-			<gd_item id="102000747" name="Vorpal Harp" />
-			<gd_item id="102100755" name="Vorpal Cipher-Blade" />
+			<gd_item id="101700856" /><!-- Vorpal Longbow -->
+			<gd_item id="101700721" /><!-- Vorpal Longbow -->
+			<gd_item id="100001007" /><!-- Vorpal Sword -->
+			<gd_item id="100200806" /><!-- Vorpal Dagger -->
+			<gd_item id="100100675" /><!-- Vorpal Warhammer -->
+			<gd_item id="100000892" /><!-- Azure Vorpal Scale Sword -->
+			<gd_item id="101500840" /><!-- Vorpal Staff -->
+			<gd_item id="101500697" /><!-- Vorpal Staff -->
+			<gd_item id="101300783" /><!-- Vorpal Spear -->
+			<gd_item id="101300654" /><!-- Vorpal Spear -->
+			<gd_item id="100900814" /><!-- Vorpal Greatsword -->
+			<gd_item id="100900683" /><!-- Vorpal Greatsword -->
+			<gd_item id="100500834" /><!-- Vorpal Jewel -->
+			<gd_item id="100500697" /><!-- Vorpal Jewel -->
+			<gd_item id="100600889" /><!-- Vorpal Tome -->
+			<gd_item id="100600754" /><!-- Vorpal Tome -->
+			<gd_item id="101800866" /><!-- Vorpal Pistol -->
+			<gd_item id="101900626" /><!-- Vorpal Aethercannon -->
+			<gd_item id="101900713" /><!-- Vorpal Aethercannon -->
+			<gd_item id="102000661" /><!-- Vorpal Harp -->
+			<gd_item id="102000747" /><!-- Vorpal Harp -->
+			<gd_item id="102100755" /><!-- Vorpal Cipher-Blade -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Epic)" base_chance="20">
 		<gd_maps>
-			<gd_map map_id="300170000" name="Beshmundir_Temple" />
+			<gd_map map_id="300170000" /><!-- Beshmundir_Temple -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="216183" name="Stormwing" />
+			<gd_npc npc_id="216183" /><!-- Stormwing -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="110101071" name="Stormwing's Tunic" />
-			<gd_item id="110301020" name="Stormwing's Jerkin" />
-			<gd_item id="110301584" name="Stormwing's Magic Jerkin" />
-			<gd_item id="110500988" name="Stormwing's Hauberk" />
-			<gd_item id="110551005" name="Stormwing's Magic Hauberk" />
-			<gd_item id="110600968" name="Stormwing's Breastplate" />
+			<gd_item id="110101071" /><!-- Stormwing's Tunic -->
+			<gd_item id="110301020" /><!-- Stormwing's Jerkin -->
+			<gd_item id="110301584" /><!-- Stormwing's Magic Jerkin -->
+			<gd_item id="110500988" /><!-- Stormwing's Hauberk -->
+			<gd_item id="110551005" /><!-- Stormwing's Magic Hauberk -->
+			<gd_item id="110600968" /><!-- Stormwing's Breastplate -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Legend)" base_chance="30">
 		<gd_maps>
-			<gd_map map_id="300170000" name="Beshmundir_Temple" />
+			<gd_map map_id="300170000" /><!-- Beshmundir_Temple -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="216245" name="Macunbello" />
+			<gd_npc npc_id="216245" /><!-- Macunbello -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="112301053" name="Beshmundir Shoulderguards" />
-			<gd_item id="112300917" name="Underground Temple Shoulderguards" />
-			<gd_item id="112601057" name="Beshmundir Shoulderplates" />
-			<gd_item id="112600919" name="Underground Temple Shoulderplates" />
+			<gd_item id="112301053" /><!-- Beshmundir Shoulderguards -->
+			<gd_item id="112300917" /><!-- Underground Temple Shoulderguards -->
+			<gd_item id="112601057" /><!-- Beshmundir Shoulderplates -->
+			<gd_item id="112600919" /><!-- Underground Temple Shoulderplates -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Unique)" base_chance="10">
 		<gd_maps>
-			<gd_map map_id="300170000" name="Beshmundir_Temple" />
+			<gd_map map_id="300170000" /><!-- Beshmundir_Temple -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="216245" name="Macunbello" />
+			<gd_npc npc_id="216245" /><!-- Macunbello -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="112100920" name="Beshmundir Sorcerer Pauldrons" />
-			<gd_item id="111101388" name="Beshmundir Songweaver Gloves" />
-			<gd_item id="113300989" name="Beshmundir Ranger Breeches" />
-			<gd_item id="111500954" name="Beshmundir Chanter Handguards" />
-			<gd_item id="114600924" name="Beshmundir Gladiator Sabatons" />
+			<gd_item id="112100920" /><!-- Beshmundir Sorcerer Pauldrons -->
+			<gd_item id="111101388" /><!-- Beshmundir Songweaver Gloves -->
+			<gd_item id="113300989" /><!-- Beshmundir Ranger Breeches -->
+			<gd_item id="111500954" /><!-- Beshmundir Chanter Handguards -->
+			<gd_item id="114600924" /><!-- Beshmundir Gladiator Sabatons -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Epic)" base_chance="20">
 		<gd_maps>
-			<gd_map map_id="300170000" name="Beshmundir_Temple" />
+			<gd_map map_id="300170000" /><!-- Beshmundir_Temple -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="216245" name="Macunbello" />
+			<gd_npc npc_id="216245" /><!-- Macunbello -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="111100964" name="Stormwing's Gloves" />
-			<gd_item id="111300969" name="Stormwing's Vambrace" />
-			<gd_item id="111301522" name="Stormwing's Magic Vambrace" />
-			<gd_item id="111500955" name="Stormwing's Handguards" />
-			<gd_item id="111501563" name="Stormwing's Magic Handguards" />
-			<gd_item id="111600947" name="Stormwing's Gauntlets" />
+			<gd_item id="111100964" /><!-- Stormwing's Gloves -->
+			<gd_item id="111300969" /><!-- Stormwing's Vambrace -->
+			<gd_item id="111301522" /><!-- Stormwing's Magic Vambrace -->
+			<gd_item id="111500955" /><!-- Stormwing's Handguards -->
+			<gd_item id="111501563" /><!-- Stormwing's Magic Handguards -->
+			<gd_item id="111600947" /><!-- Stormwing's Gauntlets -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Legend)" base_chance="30">
 		<gd_maps>
-			<gd_map map_id="300170000" name="Beshmundir_Temple" />
+			<gd_map map_id="300170000" /><!-- Beshmundir_Temple -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="216525" name="Thurzon the Undying" />
+			<gd_npc npc_id="216525" /><!-- Thurzon the Undying -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="111101109" name="Beshmundir Gloves" />
-			<gd_item id="111100961" name="Underground Temple Gloves" />
-			<gd_item id="111501092" name="Beshmundir Handguards" />
-			<gd_item id="111500952" name="Underground Temple Handguards" />
+			<gd_item id="111101109" /><!-- Beshmundir Gloves -->
+			<gd_item id="111100961" /><!-- Underground Temple Gloves -->
+			<gd_item id="111501092" /><!-- Beshmundir Handguards -->
+			<gd_item id="111500952" /><!-- Underground Temple Handguards -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Unique)" base_chance="10">
 		<gd_maps>
-			<gd_map map_id="300170000" name="Beshmundir_Temple" />
+			<gd_map map_id="300170000" /><!-- Beshmundir_Temple -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="216525" name="Thurzon the Undying" />
+			<gd_npc npc_id="216525" /><!-- Thurzon the Undying -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="114301022" name="Beshmundir Assassin Boots" />
-			<gd_item id="113500959" name="Beshmundir Chanter Chausses" />
-			<gd_item id="112600921" name="Beshmundir Templar Shoulderplates" />
+			<gd_item id="114301022" /><!-- Beshmundir Assassin Boots -->
+			<gd_item id="113500959" /><!-- Beshmundir Chanter Chausses -->
+			<gd_item id="112600921" /><!-- Beshmundir Templar Shoulderplates -->
 		</gd_items>
 	</gd_rule>
 </global_rules>

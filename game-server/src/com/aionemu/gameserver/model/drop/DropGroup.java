@@ -28,7 +28,7 @@ public class DropGroup implements DropCalculator {
 	@XmlAttribute(name = "race")
 	protected Race race = Race.PC_ALL;
 	@XmlAttribute(name = "name")
-	protected String groupName;
+	protected String name;
 	@XmlAttribute(name = "max_items")
 	protected int maxItems = 1;
 
@@ -47,8 +47,8 @@ public class DropGroup implements DropCalculator {
 		return maxItems;
 	}
 
-	public String getGroupName() {
-		return groupName;
+	public String getName() {
+		return name;
 	}
 
 	@Override

@@ -3,171 +3,171 @@
 	<!-- Multiple Monster Drops -->
 	<gd_rule rule_name="Named Mount" base_chance="5">
 		<gd_maps>
-			<gd_map map_id="710010000" name="Pernon"/>
+			<gd_map map_id="710010000"/><!-- Pernon -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="218862" name="Spring Agrint"/>
-			<gd_npc npc_id="218863" name="Summer Agrint"/>
-			<gd_npc npc_id="218864" name="Autumn Agrint"/>
-			<gd_npc npc_id="218865" name="Winter Agrint"/>
+			<gd_npc npc_id="218862"/><!-- Spring Agrint -->
+			<gd_npc npc_id="218863"/><!-- Summer Agrint -->
+			<gd_npc npc_id="218864"/><!-- Autumn Agrint -->
+			<gd_npc npc_id="218865"/><!-- Winter Agrint -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="190100012" name="Waveform Surfrider"/>
+			<gd_item id="190100012"/><!-- Waveform Surfrider -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Bundle" base_chance="100" max_count="2">
 		<gd_maps>
-			<gd_map map_id="710010000" name="Pernon"/>
+			<gd_map map_id="710010000"/><!-- Pernon -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="218862" name="Spring Agrint"/>
-			<gd_npc npc_id="218863" name="Summer Agrint"/>
-			<gd_npc npc_id="218864" name="Autumn Agrint"/>
-			<gd_npc npc_id="218865" name="Winter Agrint"/>
+			<gd_npc npc_id="218862"/><!-- Spring Agrint -->
+			<gd_npc npc_id="218863"/><!-- Summer Agrint -->
+			<gd_npc npc_id="218864"/><!-- Autumn Agrint -->
+			<gd_npc npc_id="218865"/><!-- Winter Agrint -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="188051564" name="Housing Accessory Bundle"/>
+			<gd_item id="188051564"/><!-- Housing Accessory Bundle -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Season Light" base_chance="100" member_limit="6">
 		<gd_maps>
-			<gd_map map_id="710010000" name="Pernon"/>
+			<gd_map map_id="710010000"/><!-- Pernon -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="218862" name="Spring Agrint"/>
-			<gd_npc npc_id="218863" name="Summer Agrint"/>
-			<gd_npc npc_id="218864" name="Autumn Agrint"/>
-			<gd_npc npc_id="218865" name="Winter Agrint"/>
+			<gd_npc npc_id="218862"/><!-- Spring Agrint -->
+			<gd_npc npc_id="218863"/><!-- Summer Agrint -->
+			<gd_npc npc_id="218864"/><!-- Autumn Agrint -->
+			<gd_npc npc_id="218865"/><!-- Winter Agrint -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="182006984" name="Season's Light"/>
+			<gd_item id="182006984"/><!-- Season's Light -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Aether Gem" base_chance="80">
 		<gd_maps>
-			<gd_map map_id="710010000" name="Pernon"/>
+			<gd_map map_id="710010000"/><!-- Pernon -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="218866" name="Vernal Umbronite"/>
-			<gd_npc npc_id="218867" name="Sprout Umbronite"/>
-			<gd_npc npc_id="218868" name="Sweltering Umbronite"/>
-			<gd_npc npc_id="218869" name="Rain Umbronite"/>
-			<gd_npc npc_id="218870" name="Maple Umbronite"/>
-			<gd_npc npc_id="218871" name="Dusk Umbronite"/>
-			<gd_npc npc_id="218872" name="Ice Umbronite"/>
-			<gd_npc npc_id="218873" name="Snowflower Umbronite"/>
+			<gd_npc npc_id="218866"/><!-- Vernal Umbronite -->
+			<gd_npc npc_id="218867"/><!-- Sprout Umbronite -->
+			<gd_npc npc_id="218868"/><!-- Sweltering Umbronite -->
+			<gd_npc npc_id="218869"/><!-- Rain Umbronite -->
+			<gd_npc npc_id="218870"/><!-- Maple Umbronite -->
+			<gd_npc npc_id="218871"/><!-- Dusk Umbronite -->
+			<gd_npc npc_id="218872"/><!-- Ice Umbronite -->
+			<gd_npc npc_id="218873"/><!-- Snowflower Umbronite -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="182006851" name="Broken Aether Gem"/>
-			<gd_item id="182006852" name="Rough Aether Gem"/>
-			<gd_item id="182006853" name="Hard Aether Gem"/>
+			<gd_item id="182006851"/><!-- Broken Aether Gem -->
+			<gd_item id="182006852"/><!-- Rough Aether Gem -->
+			<gd_item id="182006853"/><!-- Hard Aether Gem -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Fertile Soil" base_chance="100">
 		<gd_maps>
-			<gd_map map_id="710010000" name="Pernon"/>
+			<gd_map map_id="710010000"/><!-- Pernon -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="218866" name="Vernal Umbronite"/>
-			<gd_npc npc_id="218867" name="Sprout Umbronite"/>
-			<gd_npc npc_id="218868" name="Sweltering Umbronite"/>
-			<gd_npc npc_id="218869" name="Rain Umbronite"/>
-			<gd_npc npc_id="218870" name="Maple Umbronite"/>
-			<gd_npc npc_id="218871" name="Dusk Umbronite"/>
-			<gd_npc npc_id="218872" name="Ice Umbronite"/>
-			<gd_npc npc_id="218873" name="Snowflower Umbronite"/>
+			<gd_npc npc_id="218866"/><!-- Vernal Umbronite -->
+			<gd_npc npc_id="218867"/><!-- Sprout Umbronite -->
+			<gd_npc npc_id="218868"/><!-- Sweltering Umbronite -->
+			<gd_npc npc_id="218869"/><!-- Rain Umbronite -->
+			<gd_npc npc_id="218870"/><!-- Maple Umbronite -->
+			<gd_npc npc_id="218871"/><!-- Dusk Umbronite -->
+			<gd_npc npc_id="218872"/><!-- Ice Umbronite -->
+			<gd_npc npc_id="218873"/><!-- Snowflower Umbronite -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="182006981" name="Divine Fertile Soil"/>
+			<gd_item id="182006981"/><!-- Divine Fertile Soil -->
 		</gd_items>
 	</gd_rule>
 	<!-- Single Monster Drops -->
 	<gd_rule rule_name="Named Season Crystal" base_chance="100" max_count="3">
 		<gd_maps>
-			<gd_map map_id="710010000" name="Pernon"/>
+			<gd_map map_id="710010000"/><!-- Pernon -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="218862" name="Spring Agrint"/>
+			<gd_npc npc_id="218862"/><!-- Spring Agrint -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="182006839" name="Spring Crystal"/>
+			<gd_item id="182006839"/><!-- Spring Crystal -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Season Crystal" base_chance="100" max_count="3">
 		<gd_maps>
-			<gd_map map_id="710010000" name="Pernon"/>
+			<gd_map map_id="710010000"/><!-- Pernon -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="218863" name="Summer Agrint"/>
+			<gd_npc npc_id="218863"/><!-- Summer Agrint -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="182006840" name="Summer Crystal"/>
+			<gd_item id="182006840"/><!-- Summer Crystal -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Season Crystal" base_chance="100" max_count="3">
 		<gd_maps>
-			<gd_map map_id="710010000" name="Pernon"/>
+			<gd_map map_id="710010000"/><!-- Pernon -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="218864" name="Autumn Agrint"/>
+			<gd_npc npc_id="218864"/><!-- Autumn Agrint -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="182006841" name="Fall Crystal"/>
+			<gd_item id="182006841"/><!-- Fall Crystal -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Season Crystal" base_chance="100" max_count="3">
 		<gd_maps>
-			<gd_map map_id="710010000" name="Pernon"/>
+			<gd_map map_id="710010000"/><!-- Pernon -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="218865" name="Winter Agrint"/>
+			<gd_npc npc_id="218865"/><!-- Winter Agrint -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="182006842" name="Winter Crystal"/>
+			<gd_item id="182006842"/><!-- Winter Crystal -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Season Leaf" base_chance="100" member_limit="6">
 		<gd_maps>
-			<gd_map map_id="710010000" name="Pernon"/>
+			<gd_map map_id="710010000"/><!-- Pernon -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="218862" name="Spring Agrint"/>
+			<gd_npc npc_id="218862"/><!-- Spring Agrint -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="182006843" name="Spring Leaf"/>
+			<gd_item id="182006843"/><!-- Spring Leaf -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Season Leaf" base_chance="100" member_limit="6">
 		<gd_maps>
-			<gd_map map_id="710010000" name="Pernon"/>
+			<gd_map map_id="710010000"/><!-- Pernon -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="218863" name="Summer Agrint"/>
+			<gd_npc npc_id="218863"/><!-- Summer Agrint -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="182006844" name="Summer Leaf"/>
+			<gd_item id="182006844"/><!-- Summer Leaf -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Season Leaf" base_chance="100" member_limit="6">
 		<gd_maps>
-			<gd_map map_id="710010000" name="Pernon"/>
+			<gd_map map_id="710010000"/><!-- Pernon -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="218864" name="Autumn Agrint"/>
+			<gd_npc npc_id="218864"/><!-- Autumn Agrint -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="182006845" name="Autumn Leaf"/>
+			<gd_item id="182006845"/><!-- Autumn Leaf -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Season Leaf" base_chance="100" member_limit="6">
 		<gd_maps>
-			<gd_map map_id="710010000" name="Pernon"/>
+			<gd_map map_id="710010000"/><!-- Pernon -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="218865" name="Winter Agrint"/>
+			<gd_npc npc_id="218865"/><!-- Winter Agrint -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="182006846" name="Winter Leaf"/>
+			<gd_item id="182006846"/><!-- Winter Leaf -->
 		</gd_items>
 	</gd_rule>
 </global_rules>
