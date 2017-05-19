@@ -114,7 +114,7 @@ public class CronJobService {
 						asmodianSpawn = SpawnEngine.addNewSingleTimeSpawn(600090000, 731632, 415.01f, 564.42f, 142.0f, (byte) 100);
 						break;
 					default: // Enshar
-						asmodianSpawn = SpawnEngine.addNewSingleTimeSpawn(600090000, 731632, 233.39f, 1137.03f, 225.875f, (byte) 105);
+						asmodianSpawn = SpawnEngine.addNewSingleTimeSpawn(220080000, 731632, 233.39f, 1137.03f, 225.875f, (byte) 105);
 						break;
 				}
 				elyosUndergroundEntrance = (Npc) SpawnEngine.spawnObject(elyosSpawn, 1);
