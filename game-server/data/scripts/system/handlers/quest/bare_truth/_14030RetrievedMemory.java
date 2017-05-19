@@ -16,6 +16,7 @@ import com.aionemu.gameserver.services.instance.InstanceService;
 import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.WorldMapInstance;
+import com.aionemu.gameserver.world.WorldMapType;
 
 /**
  * @author Artur
@@ -86,9 +87,9 @@ public class _14030RetrievedMemory extends QuestHandler {
 					break;
 				case 700551: // Fissure of Destiny
 					if (dialogActionId == USE_OBJECT && var == 4) {
-						WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(310120000);
+						WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(WorldMapType.IDAB_PRO_L3.getId());
 						InstanceService.registerPlayerWithInstance(newInstance, player);
-						TeleportService.teleportTo(player, 310120000, newInstance.getInstanceId(), 52, 174, 229);
+						TeleportService.teleportTo(player, WorldMapType.IDAB_PRO_L3.getId(), newInstance.getInstanceId(), 52, 174, 229);
 						return true;
 					}
 					break;
@@ -149,7 +150,7 @@ public class _14030RetrievedMemory extends QuestHandler {
 					return defaultOnKillEvent(env, 214578, 2, 3); // 3
 				}
 				if (var == 54) {
-					QuestService.addNewSpawn(310120000, player.getInstanceId(), 215400, 240f, 257f, 208.53946f, (byte) 68);
+					QuestService.addNewSpawn(WorldMapType.IDAB_PRO_L3.getId(), player.getInstanceId(), 215400, 240f, 257f, 208.53946f, (byte) 68);
 				}
 				return defaultOnKillEvent(env, npcIds, 2, 55); // 2 - 55
 			} else if (var == 55) {
@@ -161,7 +162,7 @@ public class _14030RetrievedMemory extends QuestHandler {
 
 	@Override
 	public boolean onEnterWorldEvent(QuestEnv env) {
-		if (env.getPlayer().getWorldId() != 310120000) {
+		if (env.getPlayer().getWorldId() != WorldMapType.IDAB_PRO_L3.getId()) {
 			QuestState qs = env.getPlayer().getQuestStateList().getQuestState(questId);
 
 			if (qs != null && qs.getStatus() == QuestStatus.START) {
