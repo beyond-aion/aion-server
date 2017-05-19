@@ -4,7 +4,6 @@ import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.skill.PlayerSkillEntry;
 import com.aionemu.gameserver.model.templates.item.ItemTemplate;
 import com.aionemu.gameserver.skillengine.model.ActivationAttribute;
 import com.aionemu.gameserver.skillengine.model.ChargeSkill;
@@ -130,24 +129,21 @@ public class SkillEngine {
 	 *          => 0 takes duration from skill_templates, >0 forced duration
 	 */
 	public void applyEffectDirectly(int skillId, Creature effector, Creature effected, int duration) {
-		SkillTemplate st = DataManager.SKILL_DATA.getSkillTemplate(skillId);
-		if (st == null)
+		SkillTemplate skillTemplate = DataManager.SKILL_DATA.getSkillTemplate(skillId);
+		if (skillTemplate == null)
 			return;
-
-		final Effect ef = new Effect(effector, effected, st, st.getLvl(), duration);
-		ef.setIsForcedEffect(true);
-		ef.initialize();
-		if (duration > 0)
-			ef.setForcedDuration(true);
-		ef.applyEffect();
+		applyEffectDirectly(skillTemplate, skillTemplate.getLvl(), effector, effected, duration);
 	}
 
 	public void applyEffectDirectly(int skillId, int lvl, Creature effector, Creature effected, int duration) {
-		SkillTemplate st = DataManager.SKILL_DATA.getSkillTemplate(skillId);
-		if (st == null)
+		SkillTemplate skillTemplate = DataManager.SKILL_DATA.getSkillTemplate(skillId);
+		if (skillTemplate == null)
 			return;
+		applyEffectDirectly(skillTemplate, lvl, effector, effected, duration);
+	}
 
-		final Effect ef = new Effect(effector, effected, st, lvl, duration);
+	public void applyEffectDirectly(SkillTemplate skillTemplate, int lvl, Creature effector, Creature effected, int duration) {
+		final Effect ef = new Effect(effector, effected, skillTemplate, lvl, duration);
 		ef.setIsForcedEffect(true);
 		ef.initialize();
 		if (duration > 0)
@@ -172,9 +168,4 @@ public class SkillEngine {
 		ef.applyEffect();
 	}
 
-	public void activatePassiveSkills(Player player) {
-		for (PlayerSkillEntry skillEntry : player.getSkillList().getAllSkills())
-			if (DataManager.SKILL_DATA.getSkillTemplate(skillEntry.getSkillId()).isPassive())
-				applyEffectDirectly(skillEntry.getSkillId(), skillEntry.getSkillLevel(), player, player, 0);
-	}
 }

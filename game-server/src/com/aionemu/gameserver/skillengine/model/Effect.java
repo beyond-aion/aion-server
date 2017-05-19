@@ -627,7 +627,7 @@ public class Effect implements StatOwner {
 			effector.getController().broadcastHate(effectHate);
 		}
 
-		if (skillTemplate.getEffects() == null || effected != null && !effected.isSpawned())
+		if (skillTemplate.getEffects() == null)
 			return;
 
 		for (EffectTemplate template : successEffects.values()) {

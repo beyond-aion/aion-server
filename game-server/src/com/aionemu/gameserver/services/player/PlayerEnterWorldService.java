@@ -124,6 +124,8 @@ import com.aionemu.gameserver.services.teleport.BindPointTeleportService;
 import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.services.toypet.PetService;
 import com.aionemu.gameserver.services.transfers.PlayerTransferService;
+import com.aionemu.gameserver.skillengine.SkillEngine;
+import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.taskmanager.tasks.ExpireTimerTask;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.PositionUtil;
@@ -274,6 +276,7 @@ public final class PlayerEnterWorldService {
 		PlayerCommonData pcd = player.getCommonData();
 
 		client.resetPingFailCount(); // client sometimes falls below 5 minutes between pings (after changing characters ?)
+		activatePassiveSkillEffects(player); // before setClientConnection to avoid packet spam
 		player.setClientConnection(client);
 		if (!client.setActivePlayer(player))
 			throw new IllegalStateException("Couldn't set active player");
@@ -519,6 +522,14 @@ public final class PlayerEnterWorldService {
 		VeteranRewardService.getInstance().tryReward(player);
 
 		PvpMapService.getInstance().onLogin(player);
+	}
+
+	private static void activatePassiveSkillEffects(Player player) {
+		for (PlayerSkillEntry skillEntry : player.getSkillList().getAllSkills()) {
+			SkillTemplate skillTemplate = DataManager.SKILL_DATA.getSkillTemplate(skillEntry.getSkillId());
+			if (skillTemplate.isPassive())
+				SkillEngine.getInstance().applyEffectDirectly(skillTemplate, skillEntry.getSkillLevel(), player, player, 0);
+		}
 	}
 
 	private static boolean validateFortressZone(Player player) {

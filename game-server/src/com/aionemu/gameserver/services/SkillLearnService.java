@@ -21,7 +21,7 @@ public class SkillLearnService {
 		PlayerSkillEntry skill = player.getSkillList().getSkillEntry(skillId);
 		if (player.isSpawned())
 			sendPacket(player, skill, isNew);
-		if (DataManager.SKILL_DATA.getSkillTemplate(skillId).isPassive() && player.getEffectController() != null)
+		if (DataManager.SKILL_DATA.getSkillTemplate(skillId).isPassive())
 			SkillEngine.getInstance().applyEffectDirectly(skillId, skillLevel, player, player, 0);
 		if (skill.isProfessionSkill() && (skill.getSkillLevel() == 399 || skill.getSkillLevel() == 499))
 			player.getController().updateNearbyQuests();
