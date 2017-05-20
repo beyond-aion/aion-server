@@ -271,7 +271,7 @@ public class InstanceService {
 	private static void startInstanceChecker(WorldMapInstance worldMapInstance) {
 		int period = 60000; // 1 minute
 		worldMapInstance
-			.setEmptyInstanceTask(ThreadPoolManager.getInstance().scheduleAtFixedRate(new EmptyInstanceCheckerTask(worldMapInstance), 0, period));
+			.setEmptyInstanceTask(ThreadPoolManager.getInstance().scheduleAtFixedRate(new EmptyInstanceCheckerTask(worldMapInstance), period, period));
 	}
 
 	private static class EmptyInstanceCheckerTask implements Runnable {
@@ -291,8 +291,8 @@ public class InstanceService {
 		}
 
 		private boolean isRegisteredTeamDisbanded() {
-			GeneralTeam<?, ?> registeredGroup = worldMapInstance.getRegisteredTeam();
-			if (registeredGroup != null && registeredGroup.isDisbanded()) {
+			GeneralTeam<?, ?> registeredTeam = worldMapInstance.getRegisteredTeam();
+			if (registeredTeam != null && registeredTeam.isDisbanded()) {
 				return true;
 			}
 			return false;
