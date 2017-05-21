@@ -25,11 +25,10 @@ public class ArenaOfDisciplineInstance extends DisciplineTrainingGroundsInstance
 		for (InstancePlayerReward playerReward : instanceReward.getInstanceRewards()) {
 			PvPArenaPlayerReward reward = (PvPArenaPlayerReward) playerReward;
 			if (!reward.isRewarded()) {
-				float playerRate = 1;
 				Player player = instance.getPlayer(playerReward.getOwnerId());
-				if (player != null) {
-					playerRate = Rates.get(player, RatesConfig.PVP_ARENA_DISCIPLINE_REWARD_RATES);
-				}
+				if (player == null) // player left
+					continue;
+				float playerRate = Rates.get(player, RatesConfig.PVP_ARENA_DISCIPLINE_REWARD_RATES);
 				int score = reward.getScorePoints();
 				float scoreRate = ((float) score / (float) totalPoints);
 				int rank = instanceReward.getRank(score);

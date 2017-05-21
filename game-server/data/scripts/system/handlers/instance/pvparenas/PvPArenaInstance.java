@@ -2,8 +2,6 @@ package instance.pvparenas;
 
 import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE.STR_REBIRTH_MASSAGE_ME;
 
-import java.util.function.Consumer;
-
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.controllers.attack.AggroInfo;
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
@@ -138,7 +136,7 @@ public class PvPArenaInstance extends GeneralInstanceHandler {
 	@Override
 	public void onEnterInstance(Player player) {
 		int objectId = player.getObjectId();
-		if (!containPlayer(objectId)) {
+		if (!instanceReward.containsPlayer(objectId)) {
 			instanceReward.regPlayerReward(objectId);
 			getPlayerReward(objectId).applyBoostMoraleEffect(player);
 			instanceReward.setRndPosition(objectId);
@@ -148,15 +146,8 @@ public class PvPArenaInstance extends GeneralInstanceHandler {
 		sendPacket();
 	}
 
-	private void sendPacket(final AionServerPacket packet) {
-		instance.forEachPlayer(new Consumer<Player>() {
-
-			@Override
-			public void accept(Player player) {
-				PacketSendUtility.sendPacket(player, packet);
-			}
-
-		});
+	private void sendPacket(AionServerPacket packet) {
+		instance.forEachPlayer(player -> PacketSendUtility.sendPacket(player, packet));
 	}
 
 	private void spawnRndRelics(int time) {
@@ -346,10 +337,6 @@ public class PvPArenaInstance extends GeneralInstanceHandler {
 				door.setOpen(true);
 			}
 		}
-	}
-
-	private boolean containPlayer(int objectId) {
-		return instanceReward.containsPlayer(objectId);
 	}
 
 	protected PvPArenaPlayerReward getPlayerReward(int objectId) {
