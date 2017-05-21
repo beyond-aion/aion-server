@@ -73,21 +73,22 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 	@Override
 	public void onEnterInstance(Player player) {
 		boolean isNew = !instanceReward.containsPlayer(player.getObjectId());
-		super.onEnterInstance(player);
-		if (isNew && stage > 0) {
-			moveToReadyRoom(player); // send player to team and wait for end of the stage
-			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1400963));
-		}
-		CruciblePlayerReward playerReward = getPlayerReward(player.getObjectId());
-		if (playerReward.isPlayerLeave()) {
-			onExitInstance(player);
-			return;
-		} else if (playerReward.isRewarded()) {
-			doReward(player);
+		super.onEnterInstance(player); // creates player reward
+		if (stage > 0) {
+			CruciblePlayerReward playerReward = getPlayerReward(player.getObjectId());
+			if (isNew) {
+				moveToReadyRoom(player); // send player to team and wait for end of the stage
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_ENTERED_BIRTHAREA_IDARENA());
+			} else if (playerReward.isPlayerLeave()) {
+				onExitInstance(player);
+				return;
+			} else if (playerReward.isRewarded()) {
+				doReward(player);
+				return;
+			}
 		}
 		PacketSendUtility.sendPacket(player, new SM_INSTANCE_SCORE(new CrucibleScoreInfo(instanceReward), instanceReward));
 		PacketSendUtility.sendPacket(player, new SM_INSTANCE_STAGE_INFO(2, stageType.getId(), stageType.getType()));
-
 	}
 
 	private void sendPacket(int points, int nameId) {
