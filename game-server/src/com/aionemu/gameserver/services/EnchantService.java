@@ -135,7 +135,7 @@ public class EnchantService {
 
 			// Retail Tests: constant rates for 0 -> 10 and 11 -> 15
 			if (targetItem.getEnchantLevel() >= 10)
-				successChance *= 0.85f;
+				successChance *= 0.9f;
 
 			// Retail Tests: 80% = Success Cap for Enchanting without Supplements
 			if (successChance >= 80)
