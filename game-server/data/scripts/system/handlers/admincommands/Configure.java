@@ -101,17 +101,7 @@ public class Configure extends AdminCommand {
 				StringBuilder sb = new StringBuilder("List of available properties for ").append(cls.getSimpleName()).append(":");
 				for (Field field : cls.getDeclaredFields()) {
 					try {
-						Object value = field.get(null);
-						if (value != null && value.getClass().isArray()) {
-							if (value.getClass().getComponentType().isPrimitive()) {
-								int length = Array.getLength(value);
-								Object[] objArr = new Object[length];
-								for (int i = 0; i < length; i++)
-									objArr[i] = Array.get(value, i);
-								value = Arrays.toString(objArr);
-							} else
-								value = Arrays.toString((Object[]) value);
-						}
+						String value = getFieldValue(field);
 						sb.append("\n\t").append(field.getName()).append("\t=\t").append(value);
 					} catch (IllegalArgumentException | IllegalAccessException e) { // skip this property
 					}
@@ -122,7 +112,7 @@ public class Configure extends AdminCommand {
 			String fieldName = params[1].toUpperCase();
 			try {
 				Field property = cls.getDeclaredField(fieldName);
-				Object value = property.get(null);
+				String value = getFieldValue(property);
 				if (params.length > 2) {
 					String newValue = StringUtils.join(params, " ", 2, params.length);
 					Class<?> classType = property.getType();
@@ -133,7 +123,8 @@ public class Configure extends AdminCommand {
 						sendInfo(admin, "The new value could not be set: " + e.getCause().getMessage());
 						return;
 					}
-					sendInfo(admin, "The value of " + cls.getSimpleName() + "." + fieldName + " has been changed from " + value + " to " + property.get(null));
+					sendInfo(admin,
+						"The value of " + cls.getSimpleName() + "." + fieldName + " has been changed from " + value + " to " + getFieldValue(property));
 				} else {
 					sendInfo(admin, "The current value of " + cls.getSimpleName() + "." + fieldName + " is " + value);
 				}
@@ -143,5 +134,20 @@ public class Configure extends AdminCommand {
 				sendInfo(admin, "Could not access " + cls.getSimpleName() + "." + fieldName);
 			}
 		}
+	}
+
+	private String getFieldValue(Field field) throws IllegalArgumentException, IllegalAccessException {
+		Object value = field.get(null);
+		if (value != null && value.getClass().isArray()) {
+			if (value.getClass().getComponentType().isPrimitive()) {
+				int length = Array.getLength(value);
+				Object[] objArr = new Object[length];
+				for (int i = 0; i < length; i++)
+					objArr[i] = Array.get(value, i);
+				value = Arrays.toString(objArr);
+			} else
+				value = Arrays.toString((Object[]) value);
+		}
+		return String.valueOf(value);
 	}
 }
