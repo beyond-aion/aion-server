@@ -28,7 +28,7 @@ public class DredgionReward extends InstanceReward<DredgionPlayerReward> {
 	private Point3D asmodiansStartPosition;
 	private Point3D elyosStartPosition;
 
-	public DredgionReward(Integer mapId, int instanceId) {
+	public DredgionReward(int mapId, int instanceId) {
 		super(mapId, instanceId);
 		winnerPoints = mapId == 300110000 ? 3000 : 4500;
 		looserPoints = mapId == 300110000 ? 1500 : 2500;

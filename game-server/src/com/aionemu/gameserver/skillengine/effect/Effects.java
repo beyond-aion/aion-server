@@ -124,7 +124,7 @@ public class Effects {
 	@XmlTransient
 	protected Set<EffectType> effectTypes;
 
-	protected void afterUnmarshal(Unmarshaller u, Object parent) {
+	void afterUnmarshal(Unmarshaller u, Object parent) {
 		effectTypes = EnumSet.noneOf(EffectType.class);
 		for (EffectTemplate et : effects)
 			effectTypes.add(et.getEffectType());

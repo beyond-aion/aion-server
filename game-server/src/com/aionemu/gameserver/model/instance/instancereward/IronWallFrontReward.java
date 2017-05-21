@@ -28,7 +28,7 @@ public class IronWallFrontReward extends InstanceReward<IronWallFrontPlayerRewar
 		positions[3] = new float[] { 1446.6449f, 1232.9314f, 585.0623f };
 	}
 
-	public IronWallFrontReward(Integer mapId, int instanceId) {
+	public IronWallFrontReward(int mapId, int instanceId) {
 		super(mapId, instanceId);
 		elyosPosition = Rnd.get(2);
 	}
@@ -36,7 +36,7 @@ public class IronWallFrontReward extends InstanceReward<IronWallFrontPlayerRewar
 	public IronWallFrontPlayerReward[] getPlayersByRace(Race race) {
 		int index = 0;
 		IronWallFrontPlayerReward[] players = new IronWallFrontPlayerReward[12];
-		for (IronWallFrontPlayerReward reward : instanceRewards) {
+		for (IronWallFrontPlayerReward reward : getInstanceRewards()) {
 			if (reward.getRace().equals(race)) {
 				players[index] = reward;
 				index++;

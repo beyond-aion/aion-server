@@ -29,7 +29,7 @@ public class KamarReward extends InstanceReward<KamarPlayerReward> {
 		positions[3] = new float[] { 1446.6449f, 1232.9314f, 585.0623f };
 	}
 
-	public KamarReward(Integer mapId, int instanceId) {
+	public KamarReward(int mapId, int instanceId) {
 		super(mapId, instanceId);
 		elyosPosition = Rnd.get(2);
 
@@ -38,7 +38,7 @@ public class KamarReward extends InstanceReward<KamarPlayerReward> {
 	public KamarPlayerReward[] getPlayersByRace(Race race) {
 		int index = 0;
 		KamarPlayerReward[] players = new KamarPlayerReward[24];
-		for (KamarPlayerReward reward : instanceRewards) {
+		for (KamarPlayerReward reward : getInstanceRewards()) {
 			if (reward.getRace().equals(race)) {
 				players[index] = reward;
 				index++;

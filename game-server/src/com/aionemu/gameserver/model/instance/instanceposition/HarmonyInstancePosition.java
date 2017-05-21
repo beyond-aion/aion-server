@@ -5,7 +5,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 /**
  * @author xTz
  */
-public class HarmonyInstancePosition extends GenerealInstancePosition {
+public class HarmonyInstancePosition extends GeneralInstancePosition {
 
 	@Override
 	public void port(Player player, int zone, int position) {

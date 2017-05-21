@@ -44,7 +44,7 @@ public class Portal2Data {
 	@XmlTransient
 	private Map<String, PortalScroll> portalScrolls = new HashMap<>();
 
-	protected void afterUnmarshal(Unmarshaller unmarshaller, Object parent) {
+	void afterUnmarshal(Unmarshaller unmarshaller, Object parent) {
 		if (portalUse != null) {
 			for (PortalUse portal : portalUse) {
 				portalUses.put(portal.getNpcId(), portal);

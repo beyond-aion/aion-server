@@ -82,10 +82,6 @@ public class SpawnsData {
 	private TIntObjectHashMap<List<SpawnGroup>> ahserionSpawnMaps = new TIntObjectHashMap<>(); // ahserions flight
 	private Set<Integer> allNpcIds;
 
-	/**
-	 * @param u
-	 * @param parent
-	 */
 	public void afterUnmarshal(Unmarshaller u, Object parent) {
 		for (SpawnMap map : templates) {
 			Map<Integer, SimpleEntry<SpawnGroup, Spawn>> mapSpawns = allSpawnMaps.get(map.getMapId());
@@ -322,10 +318,10 @@ public class SpawnsData {
 					break;
 				} else
 					return false; // nothing to change
-			} else if (changeX && s.getY() == spot.getY() && s.getZ() == spot.getZ() && s.getHeading() == spot.getHeading() || changeY
-				&& s.getX() == spot.getX() && s.getZ() == spot.getZ() && s.getHeading() == spot.getHeading() || changeZ && s.getX() == spot.getX()
-				&& s.getY() == spot.getY() && s.getHeading() == spot.getHeading() || changeH && s.getX() == spot.getX() && s.getY() == spot.getY()
-				&& s.getZ() == spot.getZ()) {
+			} else if (changeX && s.getY() == spot.getY() && s.getZ() == spot.getZ() && s.getHeading() == spot.getHeading()
+				|| changeY && s.getX() == spot.getX() && s.getZ() == spot.getZ() && s.getHeading() == spot.getHeading()
+				|| changeZ && s.getX() == spot.getX() && s.getY() == spot.getY() && s.getHeading() == spot.getHeading()
+				|| changeH && s.getX() == spot.getX() && s.getY() == spot.getY() && s.getZ() == spot.getZ()) {
 				oldSpot = s;
 				break;
 			}
@@ -387,6 +383,7 @@ public class SpawnsData {
 	 * first search: current map
 	 * second search: all maps of players race
 	 * third search: all other maps
+	 * 
 	 * @param player
 	 * @param npcId
 	 * @param worldId
@@ -394,13 +391,13 @@ public class SpawnsData {
 	 */
 	public SpawnSearchResult getNearestSpawnByNpcId(Player player, int npcId, int worldId) {
 		Spawn spawns = getSpawnsForNpc(worldId, npcId);
-		if (spawns == null) { //-> there are no spawns for this npcId on the current map
-			//search all maps of players race
+		if (spawns == null) { // -> there are no spawns for this npcId on the current map
+			// search all maps of players race
 			for (WorldMapTemplate template : DataManager.WORLD_MAPS_DATA) {
 				if (template.getMapId() == worldId)
 					continue;
-				if ((template.getWorldType() == WorldType.ELYSEA && player.getRace() == Race.ELYOS) ||
-						(template.getWorldType() == WorldType.ASMODAE && player.getRace() == Race.ASMODIANS)) {
+				if ((template.getWorldType() == WorldType.ELYSEA && player.getRace() == Race.ELYOS)
+					|| (template.getWorldType() == WorldType.ASMODAE && player.getRace() == Race.ASMODIANS)) {
 					spawns = getSpawnsForNpc(template.getMapId(), npcId);
 					if (spawns != null) {
 						worldId = template.getMapId();
@@ -409,12 +406,12 @@ public class SpawnsData {
 				}
 			}
 
-			//-> there are no spawns for this npcId on all maps of players race
-			//search all other maps
+			// -> there are no spawns for this npcId on all maps of players race
+			// search all other maps
 			if (spawns == null) {
 				for (WorldMapTemplate template : DataManager.WORLD_MAPS_DATA) {
-					if ((template.getMapId() == worldId) || (template.getWorldType() == WorldType.ELYSEA && player.getRace() == Race.ELYOS) ||
-							(template.getWorldType() == WorldType.ASMODAE && player.getRace() == Race.ASMODIANS)) {
+					if ((template.getMapId() == worldId) || (template.getWorldType() == WorldType.ELYSEA && player.getRace() == Race.ELYOS)
+						|| (template.getWorldType() == WorldType.ASMODAE && player.getRace() == Race.ASMODIANS)) {
 						continue;
 					}
 					spawns = getSpawnsForNpc(template.getMapId(), npcId);
@@ -446,11 +443,13 @@ public class SpawnsData {
 		for (SpawnSpotTemplate template : spawnSpots) {
 			if (temp == null) {
 				temp = template;
-				distance = (float) PositionUtil.getDistance(position.getX(), position.getY(), position.getZ(), template.getX(), template.getY(), template.getZ());
+				distance = (float) PositionUtil.getDistance(position.getX(), position.getY(), position.getZ(), template.getX(), template.getY(),
+					template.getZ());
 				if (distance <= 1f)
 					break;
 			} else {
-				float dist = (float) PositionUtil.getDistance(position.getX(), position.getY(), position.getZ(), template.getX(), template.getY(), template.getZ());
+				float dist = (float) PositionUtil.getDistance(position.getX(), position.getY(), position.getZ(), template.getX(), template.getY(),
+					template.getZ());
 				if (dist < distance) {
 					distance = dist;
 					temp = template;
@@ -485,7 +484,7 @@ public class SpawnsData {
 			if (spawns == null)
 				return null;
 		}
-		List <SpawnSpotTemplate> spawnSpots = spawns.getSpawnSpotTemplates();
+		List<SpawnSpotTemplate> spawnSpots = spawns.getSpawnSpotTemplates();
 		return spawnSpots.isEmpty() ? null : new SpawnSearchResult(worldId, spawnSpots.get(0));
 	}
 

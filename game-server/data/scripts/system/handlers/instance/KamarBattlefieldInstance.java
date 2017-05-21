@@ -75,7 +75,7 @@ public class KamarBattlefieldInstance extends GeneralInstanceHandler {
 	}
 
 	private boolean containPlayer(int objectId) {
-		return kamarReward.containPlayer(objectId);
+		return kamarReward.containsPlayer(objectId);
 	}
 
 	@Override

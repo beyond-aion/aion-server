@@ -349,7 +349,7 @@ public class PvPArenaInstance extends GeneralInstanceHandler {
 	}
 
 	private boolean containPlayer(int objectId) {
-		return instanceReward.containPlayer(objectId);
+		return instanceReward.containsPlayer(objectId);
 	}
 
 	protected PvPArenaPlayerReward getPlayerReward(int objectId) {

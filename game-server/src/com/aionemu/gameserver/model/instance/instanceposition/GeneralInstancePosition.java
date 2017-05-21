@@ -6,20 +6,15 @@ import com.aionemu.gameserver.services.teleport.TeleportService;
 /**
  * @author xTz
  */
-public class GenerealInstancePosition implements InstancePositionHandler {
+public abstract class GeneralInstancePosition implements InstancePositionHandler {
 
 	protected int mapId;
 	protected int instanceId;
 
 	@Override
-	public void initsialize(Integer mapId, int instanceId) {
+	public final void initialize(int mapId, int instanceId) {
 		this.mapId = mapId;
 		this.instanceId = instanceId;
-	}
-
-	@Override
-	public void port(Player player, int zone, int position) {
-		throw new UnsupportedOperationException("Not supported yet.");
 	}
 
 	protected void teleport(Player player, float x, float y, float z, byte h) {

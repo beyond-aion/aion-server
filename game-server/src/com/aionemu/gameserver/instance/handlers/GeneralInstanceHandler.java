@@ -25,7 +25,7 @@ public class GeneralInstanceHandler implements InstanceHandler {
 	protected final long creationTime;
 	protected WorldMapInstance instance;
 	protected int instanceId;
-	protected Integer mapId;
+	protected int mapId;
 
 	public GeneralInstanceHandler() {
 		creationTime = System.currentTimeMillis();

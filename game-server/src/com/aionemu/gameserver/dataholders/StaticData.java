@@ -293,9 +293,7 @@ public class StaticData {
 	@XmlElement(name = "legion_dominion_template")
 	public LegionDominionData legionDominionData;
 
-	// JAXB callback
-	@SuppressWarnings("unused")
-	private void afterUnmarshal(Unmarshaller unmarshaller, Object parent) {
+	void afterUnmarshal(Unmarshaller unmarshaller, Object parent) {
 		Logger log = LoggerFactory.getLogger(StaticData.class);
 		log.info("Loaded " + worldMapsData.size() + " maps");
 		log.info("Loaded " + materiaData.size() + " material ids");

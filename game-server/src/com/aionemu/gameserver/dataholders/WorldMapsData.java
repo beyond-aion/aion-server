@@ -28,7 +28,7 @@ public class WorldMapsData implements Iterable<WorldMapTemplate> {
 
 	protected TIntObjectHashMap<WorldMapTemplate> worldIdMap = new TIntObjectHashMap<>();
 
-	protected void afterUnmarshal(Unmarshaller u, Object parent) {
+	void afterUnmarshal(Unmarshaller u, Object parent) {
 		for (WorldMapTemplate map : worldMaps) {
 			worldIdMap.put(map.getMapId(), map);
 		}

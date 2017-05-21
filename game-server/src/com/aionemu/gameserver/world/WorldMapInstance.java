@@ -100,7 +100,7 @@ public abstract class WorldMapInstance implements Iterable<VisibleObject> {
 	 * 
 	 * @return world map id
 	 */
-	public Integer getMapId() {
+	public int getMapId() {
 		return getParent().getMapId();
 	}
 

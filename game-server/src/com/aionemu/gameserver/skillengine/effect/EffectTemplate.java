@@ -662,7 +662,7 @@ public abstract class EffectTemplate {
 		return toReturn;
 	}
 
-	protected void afterUnmarshal(Unmarshaller u, Object parent) {
+	void afterUnmarshal(Unmarshaller u, Object parent) {
 		String effectName = getClass().getSimpleName().replaceAll("Effect", "").toUpperCase();
 		try {
 			effectType = EffectType.valueOf(effectName);

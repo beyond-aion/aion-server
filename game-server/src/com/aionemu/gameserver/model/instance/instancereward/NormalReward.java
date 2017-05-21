@@ -20,7 +20,7 @@ public class NormalReward extends InstanceReward<InstancePlayerReward> {
 	private int rewardItem3Count;
 	private int rewardItem4Count;
 
-	public NormalReward(Integer mapId, int instanceId) {
+	public NormalReward(int mapId, int instanceId) {
 		super(mapId, instanceId);
 	}
 

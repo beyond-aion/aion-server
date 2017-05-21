@@ -55,7 +55,7 @@ public class EngulfedOphidianBridgeInstance extends GeneralInstanceHandler {
 	}
 
 	private boolean containPlayer(int objectId) {
-		return engulfedOBReward.containPlayer(objectId);
+		return engulfedOBReward.containsPlayer(objectId);
 	}
 
 	@Override

@@ -51,7 +51,7 @@ public class XMLQuests {
 	@XmlTransient
 	private TIntObjectHashMap<XMLQuest> questsById = new TIntObjectHashMap<>();
 
-	protected void afterUnmarshal(Unmarshaller u, Object parent) {
+	void afterUnmarshal(Unmarshaller u, Object parent) {
 		if (data != null) {
 			questsById.clear();
 			data.forEach(quest -> questsById.put(quest.getId(), quest));

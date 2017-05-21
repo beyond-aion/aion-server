@@ -56,7 +56,7 @@ public class IdgelDomeInstance extends GeneralInstanceHandler {
 	}
 
 	private boolean containPlayer(int objectId) {
-		return idgelDomeReward.containPlayer(objectId);
+		return idgelDomeReward.containsPlayer(objectId);
 	}
 
 	@Override

@@ -39,12 +39,12 @@ public class SkillUseAction extends AbstractItemAction {
 	protected int level;
 
 	@XmlAttribute(required = false)
-	private Integer mapid;
+	private int mapid;
 
 	/**
 	 * Gets the value of the skillid property.
 	 */
-	public int getSkillid() {
+	public int getSkillId() {
 		return skillid;
 	}
 
@@ -102,9 +102,7 @@ public class SkillUseAction extends AbstractItemAction {
 		}
 	}
 
-	public int getMapid() {
-		if (mapid == null)
-			return 0;
+	public int getMapId() {
 		return mapid;
 	}
 
