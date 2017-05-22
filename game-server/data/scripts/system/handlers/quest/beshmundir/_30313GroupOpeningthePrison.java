@@ -11,7 +11,6 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 /**
  * @author Gigi
  */
-
 public class _30313GroupOpeningthePrison extends QuestHandler {
 
 	public _30313GroupOpeningthePrison() {

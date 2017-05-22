@@ -16,7 +16,6 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 /**
  * @author Artur
  */
-
 public class _80149EventWarpedRiftSecuring extends QuestHandler {
 
 	public _80149EventWarpedRiftSecuring() {

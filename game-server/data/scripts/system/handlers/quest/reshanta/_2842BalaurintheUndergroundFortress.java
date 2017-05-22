@@ -12,7 +12,6 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 /**
  * @author Hilgert, modified Bobobear
  */
-
 public class _2842BalaurintheUndergroundFortress extends QuestHandler {
 
 	public _2842BalaurintheUndergroundFortress() {

@@ -21,7 +21,6 @@ import com.aionemu.gameserver.world.zone.ZoneName;
 /**
  * @author Artur
  */
-
 public class _14031AHyperVention extends QuestHandler {
 
 	public _14031AHyperVention() {

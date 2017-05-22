@@ -11,7 +11,6 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 /**
  * @author Pad
  */
-
 public class _16985ChirTreasureRobbers extends QuestHandler {
 
 	private static final int[] npcIds = { 804864, 804862 };

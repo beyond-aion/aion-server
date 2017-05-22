@@ -15,7 +15,6 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 /**
  * @author Balthazar
  */
-
 public class _3031Pirates extends QuestHandler {
 
 	public _3031Pirates() {

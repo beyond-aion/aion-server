@@ -27,7 +27,6 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  * @author MrPoke, sphinx
  * @modified Imaginary, Pad
  */
-
 public class CraftSkillUpdateService {
 
 	private static final Logger log = LoggerFactory.getLogger(CraftSkillUpdateService.class);

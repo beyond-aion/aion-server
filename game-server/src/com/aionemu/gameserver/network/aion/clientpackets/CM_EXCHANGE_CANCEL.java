@@ -8,7 +8,6 @@ import com.aionemu.gameserver.services.ExchangeService;
 /**
  * @author -Avol-
  */
-
 public class CM_EXCHANGE_CANCEL extends AionClientPacket {
 
 	public CM_EXCHANGE_CANCEL(int opcode, State state, State... restStates) {

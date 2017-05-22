@@ -20,7 +20,6 @@ import com.aionemu.gameserver.utils.chathandlers.ConsoleCommand;
 /**
  * @author ginho1
  */
-
 public class Addquest extends ConsoleCommand {
 
 	public Addquest() {

@@ -13,7 +13,6 @@ import com.aionemu.gameserver.utils.PositionUtil;
 /**
  * @author Balthazar
  */
-
 public class _1604ToCatchASpy extends QuestHandler {
 
 	public _1604ToCatchASpy() {

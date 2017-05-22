@@ -14,7 +14,6 @@ import com.aionemu.gameserver.world.World;
 /**
  * @author ginho1
  */
-
 public class Clearusercoolt extends ConsoleCommand {
 
 	public Clearusercoolt() {

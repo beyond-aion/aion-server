@@ -21,7 +21,6 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 /**
  * @author kecimis
  */
-
 public class _4200ASuspiciousCall extends QuestHandler {
 
 	private final static int[] npc_ids = { 204839, 798332, 700522, 279006, 204286 };

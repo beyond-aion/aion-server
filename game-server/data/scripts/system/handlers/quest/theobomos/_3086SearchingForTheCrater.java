@@ -12,7 +12,6 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 /**
  * @author Balthazar
  */
-
 public class _3086SearchingForTheCrater extends QuestHandler {
 
 	public _3086SearchingForTheCrater() {

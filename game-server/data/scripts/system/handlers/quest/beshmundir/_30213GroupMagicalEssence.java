@@ -11,7 +11,6 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 /**
  * @author Gigi
  */
-
 public class _30213GroupMagicalEssence extends QuestHandler {
 
 	public _30213GroupMagicalEssence() {

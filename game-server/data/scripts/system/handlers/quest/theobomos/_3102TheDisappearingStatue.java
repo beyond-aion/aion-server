@@ -14,7 +14,6 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 /**
  * @author Balthazar
  */
-
 public class _3102TheDisappearingStatue extends QuestHandler {
 
 	public _3102TheDisappearingStatue() {

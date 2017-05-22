@@ -348,20 +348,18 @@ public abstract class QuestHandler extends AbstractQuestHandler {
 	public void changeQuestStep(QuestEnv env, int step, int nextStep, boolean reward, int varNum) {
 		QuestState qs = env.getPlayer().getQuestStateList().getQuestState(questId);
 		if (qs != null && (varNum == -1 ? qs.getQuestVars().getQuestVars() == step : qs.getQuestVarById(varNum) == step)) {
-			if (reward) { // ignore nextStep
-				qs.setStatus(QuestStatus.REWARD);
-			} else { // quest can be rolled back if nextStep < step
-				if (nextStep != step) {
-					if (step > nextStep && qs.getStatus() == QuestStatus.START)
-						PacketSendUtility.sendPacket(env.getPlayer(),
-							SM_SYSTEM_MESSAGE.STR_QUEST_SYSTEMMSG_GIVEUP(DataManager.QUEST_DATA.getQuestById(questId).getNameId()));
-					if (varNum == -1)
-						qs.setQuestVar(nextStep);
-					else
-						qs.setQuestVarById(varNum, nextStep);
-				}
+			if (nextStep != step) { // quest can be rolled back if nextStep < step
+				if (step > nextStep && qs.getStatus() == QuestStatus.START)
+					PacketSendUtility.sendPacket(env.getPlayer(),
+						SM_SYSTEM_MESSAGE.STR_QUEST_SYSTEMMSG_GIVEUP(DataManager.QUEST_DATA.getQuestById(questId).getNameId()));
+				if (varNum == -1)
+					qs.setQuestVar(nextStep);
+				else
+					qs.setQuestVarById(varNum, nextStep);
 			}
 			if (reward || nextStep != step) {
+				if (reward)
+					qs.setStatus(QuestStatus.REWARD);
 				updateQuestStatus(env);
 			}
 		}

@@ -11,7 +11,6 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 /**
  * @author Hilgert
  */
-
 public class _2843OperationAnnihilate extends QuestHandler {
 
 	public _2843OperationAnnihilate() {

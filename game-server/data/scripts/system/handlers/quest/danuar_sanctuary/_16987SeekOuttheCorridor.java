@@ -12,7 +12,6 @@ import com.aionemu.gameserver.world.zone.ZoneName;
 /**
  * @author Pad
  */
-
 public class _16987SeekOuttheCorridor extends QuestHandler {
 
 	private static final int npcId = 804865;

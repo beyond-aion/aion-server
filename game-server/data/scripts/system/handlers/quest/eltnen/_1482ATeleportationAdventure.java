@@ -15,7 +15,6 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 /**
  * @author Balthazar
  */
-
 public class _1482ATeleportationAdventure extends QuestHandler {
 
 	public _1482ATeleportationAdventure() {

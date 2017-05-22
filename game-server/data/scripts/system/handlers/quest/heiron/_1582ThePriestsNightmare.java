@@ -12,7 +12,6 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 /**
  * @author Balthazar
  */
-
 public class _1582ThePriestsNightmare extends QuestHandler {
 
 	public _1582ThePriestsNightmare() {

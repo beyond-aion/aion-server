@@ -11,7 +11,6 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 /**
  * @author Balthazar
  */
-
 public class _1692ADayOlderAndDeeperInDebt extends QuestHandler {
 
 	public _1692ADayOlderAndDeeperInDebt() {

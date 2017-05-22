@@ -26,7 +26,6 @@ import com.aionemu.gameserver.world.WorldPosition;
 /**
  * @author Woge
  */
-
 public class NochsanaEvent extends GameEvent {
 
 	private List<CustomBase> bases = new LinkedList<>();

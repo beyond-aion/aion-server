@@ -13,7 +13,6 @@ import com.aionemu.gameserver.services.QuestService;
  * @author Balthazar
  * @modified Pad
  */
-
 public class _1467TheFourLeaders extends QuestHandler {
 
 	private static final int npcId = 204045;

@@ -16,7 +16,6 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  * @author Balthazar
  * @reworked vlog
  */
-
 public class _1687TheTigrakiAgreement extends QuestHandler {
 
 	public _1687TheTigrakiAgreement() {
