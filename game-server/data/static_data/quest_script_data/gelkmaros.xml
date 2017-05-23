@@ -302,18 +302,19 @@
 	<report_to id="21293" start_npc_ids="799225" end_npc_ids="799444"/>
 	<report_to id="30101" start_npc_ids="799226" end_npc_ids="799333"/>
 	<report_to id="30112" start_npc_ids="799279" end_npc_ids="799337"/>
-	<report_to id="30115" start_npc_ids="799336"/>
-	<report_to id="30117" start_npc_ids="799336"/>
-	<report_to id="30119" start_npc_ids="799336"/>
-	<report_to id="30121" start_npc_ids="799336"/>
-	<report_to id="30123" start_npc_ids="799336"/>
-	<report_to id="30125" start_npc_ids="799336"/>
-	<report_to id="30127" start_npc_ids="799336"/>
-	<report_to id="30129" start_npc_ids="799336"/>
-	<report_to id="30131" start_npc_ids="799336"/>
-	<report_to id="30134" start_npc_ids="799336"/>
-	<report_to id="30136" start_npc_ids="799336"/>
-	<report_to id="30138" start_npc_ids="799336"/>
+	<report_to id="30115" start_npc_ids="799202" end_npc_ids="799336"/>
+	<report_to id="30117" start_npc_ids="799202" end_npc_ids="799336"/>
+	<report_to id="30119" start_npc_ids="799202" end_npc_ids="799336"/>
+	<report_to id="30121" start_npc_ids="799202" end_npc_ids="799336"/>
+	<report_to id="30123" start_npc_ids="799202" end_npc_ids="799336"/>
+	<report_to id="30125" start_npc_ids="799202" end_npc_ids="799336"/>
+	<report_to id="30127" start_npc_ids="799202" end_npc_ids="799336"/>
+	<report_to id="30129" start_npc_ids="799202" end_npc_ids="799336"/>
+	<report_to id="30131" start_npc_ids="799202" end_npc_ids="799336"/>
+	<report_to id="30134" start_npc_ids="799202" end_npc_ids="799336"/>
+	<report_to id="30136" start_npc_ids="799202" end_npc_ids="799336"/>
+	<report_to id="30138" start_npc_ids="799202" end_npc_ids="799336"/>
+	<report_to id="30140" start_npc_ids="799202" end_npc_ids="799336"/>
 	<report_to_many id="21110" start_npc_ids="799271">
 		<npc_infos npc_ids="799263"/>
 		<npc_infos npc_ids="799289"/>
@@ -405,6 +406,7 @@
 	<item_collecting id="30135" start_npc_ids="799336"/>
 	<item_collecting id="30137" start_npc_ids="799336"/>
 	<item_collecting id="30139" start_npc_ids="799336"/>
+	<item_collecting id="30141" start_npc_ids="799336"/>
 	<item_collecting id="48502" start_npc_ids="799424"/>
 	<item_collecting id="48503" start_npc_ids="799425"/>
 	<item_collecting id="48505" start_npc_ids="799424"/>
