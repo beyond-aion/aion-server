@@ -226,5 +226,5 @@
 	<monster_hunt id="2281" start_npc_ids="203558"/>
 	<monster_hunt id="2282" start_npc_ids="203557"/>
 	<monster_hunt id="2293" start_npc_ids="203659"/>
-	<monster_hunt id="24230" start_npc_ids="832821"/>
+	<monster_hunt id="24230" start_npc_ids="832821" end_reward="true"/>
 </quest_scripts>
