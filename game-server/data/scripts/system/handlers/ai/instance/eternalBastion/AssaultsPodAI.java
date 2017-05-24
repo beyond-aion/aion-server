@@ -190,7 +190,7 @@ public class AssaultsPodAI extends NpcAI {
 		float direction = Rnd.get(0, 199) / 100f;
 		float x1 = (float) (Math.cos(Math.PI * direction) * 5);
 		float y1 = (float) (Math.sin(Math.PI * direction) * 5);
-		return SpawnEngine.addNewSingleTimeSpawn(getPosition().getMapId(), npcId, getPosition().getX() + x1, getPosition().getY() + y1, getPosition()
+		return SpawnEngine.newSingleTimeSpawn(getPosition().getMapId(), npcId, getPosition().getX() + x1, getPosition().getY() + y1, getPosition()
 			.getZ(), getPosition().getHeading());
 	}
 

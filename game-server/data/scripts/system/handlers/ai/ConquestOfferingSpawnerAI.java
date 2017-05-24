@@ -103,8 +103,8 @@ public class ConquestOfferingSpawnerAI extends NpcAI {
 		}
 
 		if (npcId != 0) {
-			SpawnTemplate template = SpawnEngine.addNewSingleTimeSpawn(getOwner().getWorldId(), npcId, getOwner().getX(), getOwner().getY(), getOwner().getZ(), getOwner().getHeading());
-			template.setCreatorId(getObjectId());
+			SpawnTemplate template = SpawnEngine.newSingleTimeSpawn(getOwner().getWorldId(), npcId, getOwner().getX(), getOwner().getY(), getOwner().getZ(),
+				getOwner().getHeading(), getObjectId());
 			SpawnEngine.spawnObject(template, getOwner().getInstanceId());
 		}
 	}

@@ -104,7 +104,7 @@ public class CalindiFlamelordAI extends AggressiveNpcAI {
 		int range = Rnd.get(5, 20);
 		float x1 = (float) (Math.cos(Math.PI * direction) * range);
 		float y1 = (float) (Math.sin(Math.PI * direction) * range);
-		return SpawnEngine.addNewSingleTimeSpawn(getPosition().getMapId(), 283132, getPosition().getX() + x1, getPosition().getY() + y1, getPosition()
+		return SpawnEngine.newSingleTimeSpawn(getPosition().getMapId(), 283132, getPosition().getX() + x1, getPosition().getY() + y1, getPosition()
 			.getZ(), getPosition().getHeading());
 	}
 

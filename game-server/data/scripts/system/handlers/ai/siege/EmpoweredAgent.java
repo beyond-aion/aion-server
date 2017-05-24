@@ -166,7 +166,7 @@ public class EmpoweredAgent extends AggressiveNpcAI {
 		for (int i = 0; i < guardAmount; i++) {
 			Point3D pos = getRndPos();
 			//TODO: change to dynamic siegeID
-			SiegeSpawnTemplate template = SpawnEngine.addNewSiegeSpawn(worldId, Rnd.get(guardIds), 8011, SiegeRace.BALAUR, SiegeModType.SIEGE,
+			SiegeSpawnTemplate template = SpawnEngine.newSiegeSpawn(worldId, Rnd.get(guardIds), 8011, SiegeRace.BALAUR, SiegeModType.SIEGE,
 				pos.getX(), pos.getY(), pos.getZ(), (byte) 0);
 			SpawnEngine.spawnObject(template, 1);
 		}

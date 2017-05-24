@@ -54,7 +54,7 @@ public class MercenaryLocation {
 		List<VisibleObject> mercs = new ArrayList<>();
 		for (Spawn spawn : spawns.getSpawns()) {
 			for (SpawnSpotTemplate sst : spawn.getSpawnSpotTemplates()) {
-				SpawnTemplate spawnTemplate = SpawnEngine.addNewSiegeSpawn(spawns.getWorldId(), spawn.getNpcId(), siegeId, SiegeRace.getByRace(race),
+				SpawnTemplate spawnTemplate = SpawnEngine.newSiegeSpawn(spawns.getWorldId(), spawn.getNpcId(), siegeId, SiegeRace.getByRace(race),
 					SiegeModType.SIEGE, sst.getX(), sst.getY(), sst.getZ(), sst.getHeading());
 				spawnTemplate.setStaticId(sst.getStaticId());
 				VisibleObject newMerc = SpawnEngine.spawnObject(spawnTemplate, 1);

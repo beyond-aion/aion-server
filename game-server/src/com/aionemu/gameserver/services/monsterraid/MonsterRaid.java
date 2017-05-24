@@ -109,18 +109,18 @@ public class MonsterRaid {
 	}
 
 	private void spawnBoss() {
-		SpawnTemplate temp = SpawnEngine.addNewSingleTimeSpawn(mrl.getWorldId(), Rnd.get(mrl.getNpcIds()), mrl.getX(), mrl.getY(), mrl.getZ(),
+		SpawnTemplate temp = SpawnEngine.newSingleTimeSpawn(mrl.getWorldId(), Rnd.get(mrl.getNpcIds()), mrl.getX(), mrl.getY(), mrl.getZ(),
 			mrl.getH());
 		initBoss((Npc) SpawnEngine.spawnObject(temp, 1));
 	}
 
 	private void spawnFlag() {
-		SpawnTemplate temp = SpawnEngine.addNewSingleTimeSpawn(mrl.getWorldId(), 832819, mrl.getX(), mrl.getY(), mrl.getZ(), mrl.getH());
+		SpawnTemplate temp = SpawnEngine.newSingleTimeSpawn(mrl.getWorldId(), 832819, mrl.getX(), mrl.getY(), mrl.getZ(), mrl.getH());
 		initFlag((Npc) SpawnEngine.spawnObject(temp, 1));
 	}
 
 	private void spawnVortex() {
-		SpawnTemplate temp = SpawnEngine.addNewSingleTimeSpawn(mrl.getWorldId(), 702550, mrl.getX(), mrl.getY(), mrl.getZ() + 40f, mrl.getH());
+		SpawnTemplate temp = SpawnEngine.newSingleTimeSpawn(mrl.getWorldId(), 702550, mrl.getX(), mrl.getY(), mrl.getZ() + 40f, mrl.getH());
 		initVortex((Npc) SpawnEngine.spawnObject(temp, 1));
 	}
 

@@ -59,7 +59,7 @@ public class Wish extends ConsoleCommand {
 
 			if (npcTemplate != null) {
 				int npcId = npcTemplate.getTemplateId();
-				SpawnTemplate spawn = SpawnEngine.addNewSpawn(admin.getWorldId(), npcId, admin.getX(), admin.getY(), admin.getZ(), admin.getHeading(), 0);
+				SpawnTemplate spawn = SpawnEngine.newSpawn(admin.getWorldId(), npcId, admin.getX(), admin.getY(), admin.getZ(), admin.getHeading(), 0);
 				if (spawn == null) {
 					sendInfo(admin, "There is no template with id " + npcId);
 					return;

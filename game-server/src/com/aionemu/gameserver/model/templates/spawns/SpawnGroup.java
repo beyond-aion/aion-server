@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.taskmanager.AbstractLockManager;
@@ -27,8 +26,6 @@ import com.aionemu.gameserver.spawnengine.SpawnHandlerType;
  */
 public class SpawnGroup extends AbstractLockManager {
 
-	private static final Logger log = LoggerFactory.getLogger(SpawnGroup.class);
-
 	private int worldId;
 	private int npcId;
 	private int pool;
@@ -38,6 +35,12 @@ public class SpawnGroup extends AbstractLockManager {
 	private SpawnHandlerType handlerType;
 	private List<SpawnTemplate> spots = new ArrayList<>();
 	private HashMap<Integer, HashMap<SpawnTemplate, Boolean>> poolUsedTemplates;
+
+	public SpawnGroup(int worldId, int npcId, int respawnTime) {
+		this.worldId = worldId;
+		this.npcId = npcId;
+		this.respawnTime = respawnTime;
+	}
 
 	public SpawnGroup(int worldId, Spawn spawn) {
 		this.worldId = worldId;
@@ -116,11 +119,6 @@ public class SpawnGroup extends AbstractLockManager {
 			poolUsedTemplates = new HashMap<>();
 	}
 
-	public SpawnGroup(int worldId, int npcId) {
-		this.worldId = worldId;
-		this.npcId = npcId;
-	}
-
 	public List<SpawnTemplate> getSpawnTemplates() {
 		return spots;
 	}
@@ -158,10 +156,6 @@ public class SpawnGroup extends AbstractLockManager {
 		return respawnTime;
 	}
 
-	public void setRespawnTime(int respawnTime) {
-		this.respawnTime = respawnTime;
-	}
-
 	public boolean isTemporarySpawn() {
 		return temporarySpawn != null;
 	}
@@ -180,12 +174,12 @@ public class SpawnGroup extends AbstractLockManager {
 					templates.add(template);
 				}
 			}
-			if (templates.size() == 0) {
-				log.warn("Pool size more then spots, npcId: " + npcId + ", worldId: " + worldId);
-				return null;
-			}
 		} finally {
 			super.readUnlock();
+		}
+		if (templates.isEmpty()) {
+			LoggerFactory.getLogger(SpawnGroup.class).warn("All spots are used, could not get random spot for npcId: " + npcId + ", worldId: " + worldId);
+			return null;
 		}
 		SpawnTemplate spawnTemplate = Rnd.get(templates);
 		setTemplateUse(instanceId, spawnTemplate, true);

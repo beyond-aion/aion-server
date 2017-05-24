@@ -128,12 +128,12 @@ public class Collide extends AdminCommand {
 			PacketSendUtility.sendMessage(admin, "Below actual Z!");
 		} else {
 			if (closest != null) {
-				SpawnTemplate spawn = SpawnEngine.addNewSpawn(admin.getWorldId(), 200000, closest.getContactPoint().x, closest.getContactPoint().y,
+				SpawnTemplate spawn = SpawnEngine.newSpawn(admin.getWorldId(), 200000, closest.getContactPoint().x, closest.getContactPoint().y,
 					closest.getContactPoint().z, (byte) 0, 0);
 				SpawnEngine.spawnObject(spawn, admin.getInstanceId());
 			}
 			if (closestOpposite != null) {
-				SpawnTemplate spawn = SpawnEngine.addNewSpawn(admin.getWorldId(), 200000, closestOpposite.getContactPoint().x,
+				SpawnTemplate spawn = SpawnEngine.newSpawn(admin.getWorldId(), 200000, closestOpposite.getContactPoint().x,
 					closestOpposite.getContactPoint().y, closestOpposite.getContactPoint().z, (byte) 0, 0);
 				SpawnEngine.spawnObject(spawn, admin.getInstanceId());
 			}

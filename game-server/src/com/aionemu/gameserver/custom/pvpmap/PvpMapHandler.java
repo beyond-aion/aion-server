@@ -174,7 +174,7 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 			if (Rnd.get(1, 100) <= (CustomConfig.PVP_MAP_RANDOM_BOSS_BASE_RATE + bonus)) {
 				int npcId = randomBossNpcIds[Rnd.get(0, randomBossNpcIds.length - 1)];
 				NpcTemplate template = DataManager.NPC_DATA.getNpcTemplate(npcId);
-				SpawnTemplate spawn = SpawnEngine.addNewSingleTimeSpawn(mapId, npcId, 744.337f, 292.986f, 233.697f, (byte) 43);
+				SpawnTemplate spawn = SpawnEngine.newSingleTimeSpawn(mapId, npcId, 744.337f, 292.986f, 233.697f, (byte) 43);
 				final Npc npc = new Npc(IDFactory.getInstance().nextId(), new NpcController(), spawn, template);
 				AIEngine.getInstance().setupAI("modified_iron_wall_aggressive", npc);
 				npc.setKnownlist(new NpcKnownList(npc));

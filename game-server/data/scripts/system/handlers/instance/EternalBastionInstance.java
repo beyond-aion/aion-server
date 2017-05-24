@@ -660,7 +660,7 @@ public class EternalBastionInstance extends GeneralInstanceHandler {
 		float direction = Rnd.get(0, 199) / 100f;
 		float x1 = (float) (Math.cos(Math.PI * direction) * 5);
 		float y1 = (float) (Math.sin(Math.PI * direction) * 5);
-		return SpawnEngine.addNewSingleTimeSpawn(instance.getMapId(), npcId, npc.getPosition().getX() + x1, npc.getPosition().getY() + y1, npc
+		return SpawnEngine.newSingleTimeSpawn(instance.getMapId(), npcId, npc.getPosition().getX() + x1, npc.getPosition().getY() + y1, npc
 			.getPosition().getZ(), npc.getPosition().getHeading());
 	}
 

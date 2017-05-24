@@ -80,18 +80,18 @@ public class GeneralInstanceHandler implements InstanceHandler {
 	}
 
 	protected VisibleObject spawn(int npcId, float x, float y, float z, byte heading) {
-		SpawnTemplate template = SpawnEngine.addNewSingleTimeSpawn(mapId, npcId, x, y, z, heading);
+		SpawnTemplate template = SpawnEngine.newSingleTimeSpawn(mapId, npcId, x, y, z, heading);
 		return SpawnEngine.spawnObject(template, instanceId);
 	}
 
 	protected VisibleObject spawn(int npcId, float x, float y, float z, byte heading, int staticId) {
-		SpawnTemplate template = SpawnEngine.addNewSingleTimeSpawn(mapId, npcId, x, y, z, heading);
+		SpawnTemplate template = SpawnEngine.newSingleTimeSpawn(mapId, npcId, x, y, z, heading);
 		template.setStaticId(staticId);
 		return SpawnEngine.spawnObject(template, instanceId);
 	}
 
 	protected VisibleObject spawnAndSetRespawn(int npcId, float x, float y, float z, byte heading, int respawnTime) {
-		SpawnTemplate template = SpawnEngine.addNewSpawn(mapId, npcId, x, y, z, heading, respawnTime);
+		SpawnTemplate template = SpawnEngine.newSpawn(mapId, npcId, x, y, z, heading, respawnTime);
 		return SpawnEngine.spawnObject(template, instanceId);
 	}
 

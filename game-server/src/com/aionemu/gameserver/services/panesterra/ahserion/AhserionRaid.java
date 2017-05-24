@@ -87,19 +87,19 @@ public class AhserionRaid {
 
 		// spawn white flags for not existing teams
 		if (!teams.containsKey(PanesterraTeamId.GAB1_SUB_DEST_69)) {
-			SpawnTemplate template = SpawnEngine.addNewSingleTimeSpawn(400030000, 804106, 282.73f, 289.1f, 687.38f, (byte) 1);
+			SpawnTemplate template = SpawnEngine.newSingleTimeSpawn(400030000, 804106, 282.73f, 289.1f, 687.38f, (byte) 1);
 			SpawnEngine.spawnObject(template, 1);
 		}
 		if (!teams.containsKey(PanesterraTeamId.GAB1_SUB_DEST_70)) {
-			SpawnTemplate template = SpawnEngine.addNewSingleTimeSpawn(400030000, 804108, 282.49f, 739.62f, 689.66f, (byte) 1);
+			SpawnTemplate template = SpawnEngine.newSingleTimeSpawn(400030000, 804108, 282.49f, 739.62f, 689.66f, (byte) 1);
 			SpawnEngine.spawnObject(template, 1);
 		}
 		if (!teams.containsKey(PanesterraTeamId.GAB1_SUB_DEST_71)) {
-			SpawnTemplate template = SpawnEngine.addNewSingleTimeSpawn(400030000, 804110, 734.06f, 740.75f, 681.16f, (byte) 1);
+			SpawnTemplate template = SpawnEngine.newSingleTimeSpawn(400030000, 804110, 734.06f, 740.75f, 681.16f, (byte) 1);
 			SpawnEngine.spawnObject(template, 1);
 		}
 		if (!teams.containsKey(PanesterraTeamId.GAB1_SUB_DEST_72)) {
-			SpawnTemplate template = SpawnEngine.addNewSingleTimeSpawn(400030000, 804112, 738.58f, 286.02f, 680.71f, (byte) 1);
+			SpawnTemplate template = SpawnEngine.newSingleTimeSpawn(400030000, 804112, 738.58f, 286.02f, 680.71f, (byte) 1);
 			SpawnEngine.spawnObject(template, 1);
 		}
 	}
@@ -274,19 +274,19 @@ public class AhserionRaid {
 		switch (npcId) {
 			case 297306:
 				eliminated = PanesterraTeamId.GAB1_SUB_DEST_69;
-				template = SpawnEngine.addNewSingleTimeSpawn(400030000, 804106, 282.73f, 289.1f, 687.38f, (byte) 1);
+				template = SpawnEngine.newSingleTimeSpawn(400030000, 804106, 282.73f, 289.1f, 687.38f, (byte) 1);
 				break;
 			case 297307:
 				eliminated = PanesterraTeamId.GAB1_SUB_DEST_70;
-				template = SpawnEngine.addNewSingleTimeSpawn(400030000, 804108, 282.49f, 739.62f, 689.66f, (byte) 1);
+				template = SpawnEngine.newSingleTimeSpawn(400030000, 804108, 282.49f, 739.62f, 689.66f, (byte) 1);
 				break;
 			case 297308:
 				eliminated = PanesterraTeamId.GAB1_SUB_DEST_71;
-				template = SpawnEngine.addNewSingleTimeSpawn(400030000, 804110, 734.06f, 740.75f, 681.16f, (byte) 1);
+				template = SpawnEngine.newSingleTimeSpawn(400030000, 804110, 734.06f, 740.75f, 681.16f, (byte) 1);
 				break;
 			case 297309:
 				eliminated = PanesterraTeamId.GAB1_SUB_DEST_72;
-				template = SpawnEngine.addNewSingleTimeSpawn(400030000, 804112, 738.58f, 286.02f, 680.71f, (byte) 1);
+				template = SpawnEngine.newSingleTimeSpawn(400030000, 804112, 738.58f, 286.02f, 680.71f, (byte) 1);
 				break;
 		}
 		PanesterraTeam eliminatedTeam = null;

@@ -42,7 +42,7 @@ public class SummonServantEffect extends SummonEffect {
 		if (effect.getEffected() == null && effect.getSkillTemplate().getProperties().getFirstTarget() != FirstTargetAttribute.POINT)
 			throw new IllegalArgumentException("Servant " + npcId + "cannot be spawned by " + effector + " (target: null)");
 
-		SpawnTemplate spawn = SpawnEngine.addNewSingleTimeSpawn(effector.getWorldId(), npcId, x, y, z, effector.getHeading());
+		SpawnTemplate spawn = SpawnEngine.newSingleTimeSpawn(effector.getWorldId(), npcId, x, y, z, effector.getHeading());
 		final Servant servant = VisibleObjectSpawner.spawnServant(spawn, effector.getInstanceId(), effector, effect.getSkillLevel(), npcObjectType);
 
 		Future<?> task = ThreadPoolManager.getInstance().schedule(() -> servant.getController().delete(), spawnDuration * 1000);

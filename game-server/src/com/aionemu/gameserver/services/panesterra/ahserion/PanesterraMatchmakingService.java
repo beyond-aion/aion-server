@@ -84,8 +84,8 @@ public class PanesterraMatchmakingService {
 	}
 	
 	private void spawnPortals() {
-		SpawnTemplate asmo = SpawnEngine.addNewSingleTimeSpawn(120080000, 802219, 400.772f, 231.517f, 93.113f, (byte) 30);
-		SpawnTemplate ely = SpawnEngine.addNewSingleTimeSpawn(110070000, 802219, 485.692f, 401.079f, 127.789f, (byte) 0);
+		SpawnTemplate asmo = SpawnEngine.newSingleTimeSpawn(120080000, 802219, 400.772f, 231.517f, 93.113f, (byte) 30);
+		SpawnTemplate ely = SpawnEngine.newSingleTimeSpawn(110070000, 802219, 485.692f, 401.079f, 127.789f, (byte) 0);
 		SpawnEngine.spawnObject(asmo, 1);
 		SpawnEngine.spawnObject(ely, 1);
 	}

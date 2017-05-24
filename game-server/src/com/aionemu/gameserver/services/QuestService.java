@@ -750,13 +750,13 @@ public final class QuestService {
 	}
 
 	public static VisibleObject spawnQuestNpc(int worldId, int instanceId, int templateId, float x, float y, float z, byte heading, int staticId) {
-		SpawnTemplate template = SpawnEngine.addNewSingleTimeSpawn(worldId, templateId, x, y, z, heading);
+		SpawnTemplate template = SpawnEngine.newSingleTimeSpawn(worldId, templateId, x, y, z, heading);
 		template.setStaticId(staticId);
 		return SpawnEngine.spawnObject(template, instanceId);
 	}
 
 	public static VisibleObject spawnQuestNpc(int worldId, int instanceId, int templateId, float x, float y, float z, byte heading) {
-		SpawnTemplate template = SpawnEngine.addNewSingleTimeSpawn(worldId, templateId, x, y, z, heading);
+		SpawnTemplate template = SpawnEngine.newSingleTimeSpawn(worldId, templateId, x, y, z, heading);
 		return SpawnEngine.spawnObject(template, instanceId);
 	}
 

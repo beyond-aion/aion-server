@@ -505,7 +505,7 @@ public abstract class AbstractAI extends AbstractEventSource<GeneralAIEvent> imp
 	}
 
 	protected VisibleObject spawn(int worldId, int npcId, float x, float y, float z, byte heading, int staticId, int instanceId) {
-		SpawnTemplate template = SpawnEngine.addNewSingleTimeSpawn(worldId, npcId, x, y, z, heading);
+		SpawnTemplate template = SpawnEngine.newSingleTimeSpawn(worldId, npcId, x, y, z, heading);
 		template.setStaticId(staticId);
 		return SpawnEngine.spawnObject(template, instanceId);
 	}

@@ -278,14 +278,9 @@ public class NpcSkillTemplateEntry extends NpcSkillEntry {
 									x1 = (float) (Math.cos(Math.PI * direction + radian) * distance);
 									y1 = (float) (Math.sin(Math.PI * direction + radian) * distance);
 								}
-								SpawnTemplate template = SpawnEngine.addNewSingleTimeSpawn(npc.getWorldId(), condTemp.getNpcId(), npc.getX() + x1, npc.getY() + y1,
-									npc.getZ(), npc.getHeading());
-								if (template != null) {
-									template.setCreatorId(npc.getObjectId());
-									SpawnEngine.spawnObject(template, npc.getInstanceId());
-								} else {
-									break;
-								}
+								SpawnTemplate template = SpawnEngine.newSingleTimeSpawn(npc.getWorldId(), condTemp.getNpcId(), npc.getX() + x1, npc.getY() + y1,
+									npc.getZ(), npc.getHeading(), npc.getObjectId());
+								SpawnEngine.spawnObject(template, npc.getInstanceId());
 							}
 						}
 					}, condTemp.getDelay());
@@ -305,14 +300,9 @@ public class NpcSkillTemplateEntry extends NpcSkillEntry {
 							x1 = (float) (Math.cos(Math.PI * direction + radian) * distance);
 							y1 = (float) (Math.sin(Math.PI * direction + radian) * distance);
 						}
-						SpawnTemplate template = SpawnEngine.addNewSingleTimeSpawn(npc.getWorldId(), condTemp.getNpcId(), npc.getX() + x1, npc.getY() + y1,
-							npc.getZ(), npc.getHeading());
-						if (template != null) {
-							template.setCreatorId(npc.getObjectId());
-							SpawnEngine.spawnObject(template, npc.getInstanceId());
-						} else {
-							break;
-						}
+						SpawnTemplate template = SpawnEngine.newSingleTimeSpawn(npc.getWorldId(), condTemp.getNpcId(), npc.getX() + x1, npc.getY() + y1,
+							npc.getZ(), npc.getHeading(), npc.getObjectId());
+						SpawnEngine.spawnObject(template, npc.getInstanceId());
 					}
 				}
 				break;

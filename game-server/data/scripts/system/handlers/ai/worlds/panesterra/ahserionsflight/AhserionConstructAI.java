@@ -305,7 +305,7 @@ public class AhserionConstructAI extends NpcAI {
 	}
 
 	private void spawnNpc(int npcId) {
-		SpawnTemplate template = SpawnEngine.addNewSingleTimeSpawn(400030000, npcId, getOwner().getX(), getOwner().getY(), getOwner().getZ(),
+		SpawnTemplate template = SpawnEngine.newSingleTimeSpawn(400030000, npcId, getOwner().getX(), getOwner().getY(), getOwner().getZ(),
 			getOwner().getHeading());
 		flag = (Npc) SpawnEngine.spawnObject(template, 1);
 	}

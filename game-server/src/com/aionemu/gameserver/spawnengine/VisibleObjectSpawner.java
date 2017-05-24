@@ -79,7 +79,6 @@ public class VisibleObjectSpawner {
 		}
 		Npc npc = new Npc(IDFactory.getInstance().nextId(), new NpcController(), spawn, npcTemplate);
 		npc.setCreatorId(spawn.getCreatorId());
-		npc.setMasterName(spawn.getMasterName());
 		npc.setKnownlist(new NpcKnownList(npc));
 		npc.setEffectController(new EffectController(npc));
 
@@ -267,7 +266,7 @@ public class VisibleObjectSpawner {
 		double radian = Math.toRadians(PositionUtil.convertHeadingToAngle(owner.getHeading()));
 		Vector3f pos = GeoService.getInstance().getClosestCollision(owner, owner.getX() + (float) (Math.cos(radian) * 7),
 			owner.getY() + (float) (Math.sin(radian) * 7), owner.getZ(), false, CollisionIntention.PHYSICAL.getId());
-		SpawnTemplate spawn = SpawnEngine.addNewSingleTimeSpawn(owner.getWorldId(), npcId, pos.getX(), pos.getY(), pos.getZ(), (byte) 0);
+		SpawnTemplate spawn = SpawnEngine.newSingleTimeSpawn(owner.getWorldId(), npcId, pos.getX(), pos.getY(), pos.getZ(), (byte) 0);
 		final Npc postman = new Npc(IDFactory.getInstance().nextId(), new NpcController(), spawn, template);
 		postman.setCreatorId(owner.getObjectId());
 		postman.setMasterName(owner.getName());
@@ -283,7 +282,7 @@ public class VisibleObjectSpawner {
 		double radian = Math.toRadians(PositionUtil.convertHeadingToAngle(owner.getHeading()));
 		Vector3f pos = GeoService.getInstance().getClosestCollision(owner, owner.getX() + (float) (Math.cos(radian) * 1),
 			owner.getY() + (float) (Math.sin(radian) * 1), owner.getZ(), false, CollisionIntention.PHYSICAL.getId());
-		SpawnTemplate spawn = SpawnEngine.addNewSingleTimeSpawn(owner.getWorldId(), npcId, pos.getX(), pos.getY(), pos.getZ(), (byte) 0);
+		SpawnTemplate spawn = SpawnEngine.newSingleTimeSpawn(owner.getWorldId(), npcId, pos.getX(), pos.getY(), pos.getZ(), (byte) 0);
 		final Npc functionalNpc = new Npc(IDFactory.getInstance().nextId(), new NpcController(), spawn, template);
 		functionalNpc.setKnownlist(new PlayerAwareKnownList(functionalNpc));
 		functionalNpc.setEffectController(new EffectController(functionalNpc));
@@ -371,7 +370,7 @@ public class VisibleObjectSpawner {
 		int worldId = creator.getWorldId();
 		int instanceId = creator.getInstanceId();
 
-		SpawnTemplate spawn = SpawnEngine.createSpawnTemplate(worldId, npcId, x, y, z, heading);
+		SpawnTemplate spawn = SpawnEngine.newSingleTimeSpawn(worldId, npcId, x, y, z, heading);
 		NpcTemplate npcTemplate = DataManager.NPC_DATA.getNpcTemplate(npcId);
 
 		boolean isSiegeWeapon = npcTemplate.getAi().equals("siege_weapon");
@@ -412,7 +411,7 @@ public class VisibleObjectSpawner {
 		byte heading = player.getHeading();
 		int worldId = player.getWorldId();
 		int instanceId = player.getInstanceId();
-		SpawnTemplate spawn = SpawnEngine.createSpawnTemplate(worldId, petId, x, y, z, heading);
+		SpawnTemplate spawn = SpawnEngine.newSingleTimeSpawn(worldId, petId, x, y, z, heading);
 		SpawnEngine.bringIntoWorld(pet, spawn, instanceId);
 		player.setPet(pet);
 		return pet;

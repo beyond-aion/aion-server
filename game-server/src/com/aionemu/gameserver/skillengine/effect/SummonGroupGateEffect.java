@@ -34,7 +34,7 @@ public class SummonGroupGateEffect extends SummonEffect {
 		int worldId = effector.getWorldId();
 		int instanceId = effector.getInstanceId();
 
-		SpawnTemplate spawn = SpawnEngine.addNewSingleTimeSpawn(worldId, npcId, x, y, z, heading);
+		SpawnTemplate spawn = SpawnEngine.newSingleTimeSpawn(worldId, npcId, x, y, z, heading);
 		final GroupGate groupgate = VisibleObjectSpawner.spawnGroupGate(spawn, instanceId, effector);
 
 		Future<?> task = ThreadPoolManager.getInstance().schedule(new Runnable() {

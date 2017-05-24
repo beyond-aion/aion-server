@@ -125,7 +125,7 @@ public class WatchmanHokuruki extends IDSweep_Bosses {
 	  int range = Rnd.get(3, 5);
 	  float x1 = (float) (Math.cos(Math.PI * direction) * range);
 	  float y1 = (float) (Math.sin(Math.PI * direction) * range);
-	  return SpawnEngine.addNewSingleTimeSpawn(getPosition().getMapId(), npcId, getPosition().getX() + x1, getPosition().getY()
+	  return SpawnEngine.newSingleTimeSpawn(getPosition().getMapId(), npcId, getPosition().getX() + x1, getPosition().getY()
 			  + y1, getPosition().getZ(), getPosition().getHeading());
    }
 
