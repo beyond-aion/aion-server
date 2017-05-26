@@ -56,7 +56,7 @@ public class HarmonyArenaInstance extends GeneralInstanceHandler {
 	@Override
 	public void onEnterInstance(final Player player) {
 		int objectId = player.getObjectId();
-		if (!instanceReward.containPlayer(objectId)) {
+		if (!instanceReward.containsPlayer(objectId)) {
 			instanceReward.regPlayerReward(objectId);
 			instanceReward.getPlayerReward(objectId).applyBoostMoraleEffect(player);
 			instanceReward.setRndPosition(objectId);

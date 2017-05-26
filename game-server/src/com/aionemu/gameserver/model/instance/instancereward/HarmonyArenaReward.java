@@ -20,7 +20,7 @@ public class HarmonyArenaReward extends PvPArenaReward {
 
 	private List<HarmonyGroupReward> groups = new ArrayList<>();
 
-	public HarmonyArenaReward(Integer mapId, int instanceId, WorldMapInstance instance) {
+	public HarmonyArenaReward(int mapId, int instanceId, WorldMapInstance instance) {
 		super(mapId, instanceId, instance);
 	}
 
@@ -66,16 +66,16 @@ public class HarmonyArenaReward extends PvPArenaReward {
 	}
 
 	public void sendPacket(int type, Player owner) {
+		int time = getTime();
 		instance.forEachPlayer(player -> {
-			PacketSendUtility.sendPacket(player,
-				new SM_INSTANCE_SCORE(new HarmonyScoreInfo(HarmonyArenaReward.this, type, owner == null ? player : owner),
-					getInstanceReward(), getTime()));
+			PacketSendUtility.sendPacket(player, new SM_INSTANCE_SCORE(new HarmonyScoreInfo(this, type, owner == null ? player : owner), this, time));
 		});
 	}
 
 	@Override
 	public int getRank(int points) {
-		List<HarmonyGroupReward> sortedByPoints = groups.stream().sorted((r1, r2) -> Integer.compare(r2.getPoints(), r1.getPoints())).collect(Collectors.toList());
+		List<HarmonyGroupReward> sortedByPoints = groups.stream().sorted((r1, r2) -> Integer.compare(r2.getPoints(), r1.getPoints()))
+			.collect(Collectors.toList());
 		int rank = -1;
 		for (HarmonyGroupReward reward : sortedByPoints) {
 			if (reward.getPoints() >= points) {

@@ -42,7 +42,7 @@ public class SummonHomingEffect extends SummonEffect {
 		int instanceId = effector.getInstanceId();
 
 		for (int i = 0; i < npcCount; i++) {
-			SpawnTemplate spawn = SpawnEngine.addNewSingleTimeSpawn(worldId, npcId, x, y, z, heading);
+			SpawnTemplate spawn = SpawnEngine.newSingleTimeSpawn(worldId, npcId, x, y, z, heading);
 			final Homing homing = VisibleObjectSpawner.spawnHoming(spawn, instanceId, effector, attackCount, effect.getSkillId());
 
 			if (attackCount > 0) {

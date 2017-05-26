@@ -12,7 +12,6 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 /**
  * @author Balthazar
  */
-
 public class _3326TheShugoMenace extends QuestHandler {
 
 	public _3326TheShugoMenace() {

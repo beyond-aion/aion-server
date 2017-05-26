@@ -44,7 +44,7 @@ public class ArtifactAssault extends Assault<ArtifactSiege> {
 		float x1 = (float) (boss.getX() + Math.cos(Math.PI * Rnd.get()));
 		float y1 = (float) (boss.getY() + Math.sin(Math.PI * Rnd.get()));
 
-		SpawnTemplate spawnTemplate = SpawnEngine.addNewSiegeSpawn(worldId, getAssaulterIdByBossLvl(), locationId, SiegeRace.BALAUR,
+		SpawnTemplate spawnTemplate = SpawnEngine.newSiegeSpawn(worldId, getAssaulterIdByBossLvl(), locationId, SiegeRace.BALAUR,
 			SiegeModType.ASSAULT, x1, y1, boss.getZ(), (byte) 0);
 		Npc assaulter = (Npc) SpawnEngine.spawnObject(spawnTemplate, 1);
 		assaulter.getAggroList().addHate(boss, 1000);

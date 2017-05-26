@@ -44,6 +44,7 @@ import com.aionemu.gameserver.utils.ChatUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
+import com.aionemu.gameserver.utils.audit.AuditLogger;
 import com.aionemu.gameserver.world.World;
 
 /**
@@ -346,9 +347,15 @@ public class DropService {
 			if (player.isInTeam()) {
 				List<Player> entitledPlayers = new ArrayList<>();
 				for (Player member : player.getCurrentTeam().getMembers()) {
-					if (member != null && member.isOnline() && !member.getLifeStats().isAlreadyDead() && !member.isMentor()
+					if (member.isOnline() && !member.getLifeStats().isAlreadyDead() && !member.isMentor()
 						&& PositionUtil.isInRange(member, player, GroupConfig.GROUP_MAX_DISTANCE))
 						entitledPlayers.add(member);
+				}
+				if (entitledPlayers.isEmpty()) {
+					VisibleObject npc = World.getInstance().findVisibleObject(npcObjectId);
+					AuditLogger.log(player, "tried to loot kinah for team from " + npc + " but he is not allowed to (mentor=" + player.isMentor() + ", dead="
+						+ player.getLifeStats().isAlreadyDead() + ")");
+					return;
 				}
 				long remainder = remainingCount % entitledPlayers.size();
 				long kinahForEach = (remainingCount - remainder) / entitledPlayers.size();

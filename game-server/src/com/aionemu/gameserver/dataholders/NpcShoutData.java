@@ -55,7 +55,7 @@ public class NpcShoutData {
 	@XmlTransient
 	private int count = 0;
 
-	public void afterUnmarshal(Unmarshaller u, Object parent) {
+	void afterUnmarshal(Unmarshaller u, Object parent) {
 		for (ShoutGroup group : shoutGroups) {
 			for (int i = group.getShoutNpcs().size() - 1; i >= 0; i--) {
 				ShoutList shoutList = group.getShoutNpcs().get(i);

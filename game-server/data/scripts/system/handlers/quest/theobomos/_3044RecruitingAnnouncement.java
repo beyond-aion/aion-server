@@ -15,7 +15,6 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 /**
  * @author Balthazar
  */
-
 public class _3044RecruitingAnnouncement extends QuestHandler {
 
 	public _3044RecruitingAnnouncement() {

@@ -45,6 +45,12 @@ public class RatesConfig {
 	@Property(key = "gameserver.rates.xp.pvp", defaultValue = "1.0, 2.0")
 	public static float[] XP_PVP_RATES;
 
+	@Property(key = "gameserver.rates.skill_xp.gathering", defaultValue = "1.0, 2.0")
+	public static float[] SKILL_XP_GATHERING_RATES;
+
+	@Property(key = "gameserver.rates.skill_xp.crafting", defaultValue = "1.0, 2.0")
+	public static float[] SKILL_XP_CRAFTING_RATES;
+
 	@Property(key = "gameserver.rates.ap.pvp.gain", defaultValue = "1.0, 2.0")
 	public static float[] AP_PVP_RATES;
 

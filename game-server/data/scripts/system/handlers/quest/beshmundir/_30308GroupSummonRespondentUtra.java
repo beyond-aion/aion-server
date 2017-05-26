@@ -18,7 +18,6 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 /**
  * @author Gigi
  */
-
 public class _30308GroupSummonRespondentUtra extends QuestHandler {
 
 	public _30308GroupSummonRespondentUtra() {

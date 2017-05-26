@@ -15,7 +15,6 @@ import com.aionemu.gameserver.services.QuestService;
  * @author Majka, Bobobear
  * @modified Pad
  */
-
 public class ReportOnLevelUp extends QuestHandler {
 
 	private final Set<Integer> endNpcIds = new HashSet<>();

@@ -331,7 +331,10 @@ public class PortalService {
 					return true; // one requirement matched
 				}
 			}
-			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(npc.getObjectId(), DialogPage.NO_RIGHT.id()));
+			if (npc.getObjectTemplate().isDialogNpc())
+				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(npc.getObjectId(), DialogPage.NO_RIGHT.id()));
+			else
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_CAN_NOT_USE_GROUPGATE_NO_RIGHT()); // seems there's no default msg
 			return false;
 		}
 		return true;
@@ -340,11 +343,10 @@ public class PortalService {
 	private static boolean checkAndRemoveRequiredItems(Player player, Npc npc, PortalPath portalPath) {
 		Storage inventory = player.getInventory();
 		if (inventory.getKinah() < portalPath.getKinah()) {
-			if (npc.getObjectTemplate().isDialogNpc()) {
+			if (npc.getObjectTemplate().isDialogNpc())
 				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(npc.getObjectId(), DialogPage.NO_RIGHT.id()));
-			} else {
+			else
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_NOT_ENOUGH_KINA(portalPath.getKinah()));
-			}
 			return false;
 		}
 		if (portalPath.getItemReq() != null) {

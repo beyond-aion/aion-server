@@ -53,7 +53,7 @@ public class ZoneData {
 	@XmlTransient
 	private int count;
 
-	protected void afterUnmarshal(Unmarshaller u, Object parent) {
+	void afterUnmarshal(Unmarshaller u, Object parent) {
 		int lastMapId = 0;
 		int weatherZoneId = 1;
 		for (ZoneTemplate zone : zoneList) {

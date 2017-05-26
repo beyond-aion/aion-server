@@ -14,12 +14,7 @@ public enum Rates {
 
 		@Override
 		public long calcResult(Player player, long xp) {
-			float statRate = player.getGameStats().getStat(StatEnum.BOOST_HUNTING_XP_RATE, 100).getCurrent() / 100f;
-			float legionOnlineBonus = 1f;
-			if (player.isLegionMember() && player.getLegion().hasBonus()) {
-				legionOnlineBonus = 1.1f;
-			}
-			return (long) Math.min(xp * get(player, RatesConfig.XP_SOLO_RATES) * statRate * legionOnlineBonus,
+			return (long) Math.min(xp * calcXpRate(player, RatesConfig.XP_SOLO_RATES, StatEnum.BOOST_HUNTING_XP_RATE),
 				player.getCommonData().getExpNeed() * 0.2f);
 		}
 	},
@@ -27,12 +22,7 @@ public enum Rates {
 
 		@Override
 		public long calcResult(Player player, long xp) {
-			float statRate = player.getGameStats().getStat(StatEnum.BOOST_GROUP_HUNTING_XP_RATE, 100).getCurrent() / 100f;
-			float legionOnlineBonus = 1f;
-			if (player.isLegionMember() && player.getLegion().hasBonus()) {
-				legionOnlineBonus = 1.1f;
-			}
-			return (long) Math.min(xp * get(player, RatesConfig.XP_GROUP_RATES) * statRate * legionOnlineBonus,
+			return (long) Math.min(xp * calcXpRate(player, RatesConfig.XP_GROUP_RATES, StatEnum.BOOST_GROUP_HUNTING_XP_RATE),
 				player.getCommonData().getExpNeed() * 0.2f);
 		}
 	},
@@ -40,32 +30,21 @@ public enum Rates {
 
 		@Override
 		public long calcResult(Player player, long xp) {
-			float statRate = player.getGameStats().getStat(StatEnum.BOOST_QUEST_XP_RATE, 100).getCurrent() / 100f;
-			return (long) (xp * get(player, RatesConfig.XP_QUEST_RATES) * statRate);
+			return (long) (xp * calcXpRate(player, RatesConfig.XP_QUEST_RATES, StatEnum.BOOST_QUEST_XP_RATE));
 		}
 	},
 	XP_GATHERING {
 
 		@Override
 		public long calcResult(Player player, long xp) {
-			float statRate = player.getGameStats().getStat(StatEnum.BOOST_GATHERING_XP_RATE, 100).getCurrent() / 100f;
-			float legionOnlineBonus = 1f;
-			if (player.isLegionMember() && player.getLegion().hasBonus()) {
-				legionOnlineBonus = 1.1f;
-			}
-			return (long) (xp * get(player, RatesConfig.XP_GATHERING_RATES) * statRate * legionOnlineBonus);
+			return (long) (xp * calcXpRate(player, RatesConfig.XP_GATHERING_RATES, StatEnum.BOOST_GATHERING_XP_RATE));
 		}
 	},
 	XP_CRAFTING {
 
 		@Override
 		public long calcResult(Player player, long xp) {
-			float statRate = player.getGameStats().getStat(StatEnum.BOOST_CRAFTING_XP_RATE, 100).getCurrent() / 100f;
-			float legionOnlineBonus = 1f;
-			if (player.isLegionMember() && player.getLegion().hasBonus()) {
-				legionOnlineBonus = 1.1f;
-			}
-			return (long) (xp * get(player, RatesConfig.XP_CRAFTING_RATES) * statRate * legionOnlineBonus);
+			return (long) (xp * calcXpRate(player, RatesConfig.XP_CRAFTING_RATES, StatEnum.BOOST_CRAFTING_XP_RATE));
 		}
 	},
 	XP_PVP {
@@ -73,6 +52,20 @@ public enum Rates {
 		@Override
 		public long calcResult(Player player, long xp) {
 			return (long) (xp * get(player, RatesConfig.XP_PVP_RATES));
+		}
+	},
+	SKILL_XP_GATHERING {
+
+		@Override
+		public long calcResult(Player player, long skillXp) {
+			return (long) (skillXp * get(player, RatesConfig.SKILL_XP_GATHERING_RATES));
+		}
+	},
+	SKILL_XP_CRAFTING {
+
+		@Override
+		public long calcResult(Player player, long skillXp) {
+			return (long) (skillXp * get(player, RatesConfig.SKILL_XP_CRAFTING_RATES));
 		}
 	},
 	AP_PVP {
@@ -174,5 +167,13 @@ public enum Rates {
 		}
 		int membershipLevel = player.getAccount().getMembership();
 		return membershipRates[Math.min(membershipRates.length - 1, membershipLevel)];
+	}
+
+	private static float calcXpRate(Player player, float[] membershipRates, StatEnum boostRate) {
+		float endRate = get(player, membershipRates);
+		endRate *= player.getGameStats().getStat(boostRate, 100).getCurrent() / 100f;
+		if (player.isLegionMember() && player.getLegion().hasBonus())
+			endRate *= 1.1f;
+		return endRate;
 	}
 }

@@ -66,8 +66,6 @@ public class CM_MOVE extends AionClientPacket {
 	@Override
 	protected void runImpl() {
 		Player player = getConnection().getActivePlayer();
-		if (!player.isSpawned())
-			return;
 		if (player.getLifeStats().isAlreadyDead())
 			return;
 		if (player.getEffectController().isUnderFear())
@@ -134,6 +132,8 @@ public class CM_MOVE extends AionClientPacket {
 		if (!AntiHackService.canMove(player, x, y, z, speed, type))
 			return;
 
+		if (!player.isSpawned()) // should be checked as late as possible, to prevent false warnings from World.updatePosition
+			return;
 		if (player.isProtectionActive() && (player.getX() != x || player.getY() != y || player.getZ() > z + 0.5f))
 			player.getController().stopProtectionActiveTask();
 		World.getInstance().updatePosition(player, x, y, z, heading);

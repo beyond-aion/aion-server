@@ -27,7 +27,8 @@ import com.aionemu.gameserver.world.World;
 /**
  * This class is responsible for NPCs spawn management. Current implementation is temporal and will be replaced in the future.
  * 
- * @author Luno modified by ATracer, Source, Wakizashi, xTz, nrg
+ * @author Luno
+ * @modified ATracer, Source, Wakizashi, xTz, nrg
  */
 public class SpawnEngine {
 
@@ -67,54 +68,6 @@ public class SpawnEngine {
 	}
 
 	/**
-	 * @param worldId
-	 * @param npcId
-	 * @param x
-	 * @param y
-	 * @param z
-	 * @param heading
-	 * @return
-	 */
-	static SpawnTemplate createSpawnTemplate(int worldId, int npcId, float x, float y, float z, byte heading) {
-		return new SpawnTemplate(new SpawnGroup(worldId, npcId), x, y, z, heading, 0, null, 0, 0);
-	}
-
-	static SpawnTemplate createSpawnTemplate(int worldId, int npcId, float x, float y, float z, byte heading, int creatorId, String masterName) {
-		SpawnTemplate template = createSpawnTemplate(worldId, npcId, x, y, z, heading);
-		template.setCreatorId(creatorId);
-		template.setMasterName(masterName);
-		return template;
-	}
-
-	/**
-	 * Should be used when you need to add a siegespawn through code and not from static_data spawns (e.g. CustomBalaurAssault)
-	 */
-	public static SiegeSpawnTemplate addNewSiegeSpawn(int worldId, int npcId, int siegeId, SiegeRace race, SiegeModType mod, float x, float y, float z,
-		byte heading) {
-		SiegeSpawnTemplate spawnTemplate = new SiegeSpawnTemplate(siegeId, race, mod, new SpawnGroup(worldId, npcId), x, y, z, heading, 0, null, 0, 0);
-		return spawnTemplate;
-	}
-
-	/**
-	 * Should be used when need to define whether spawn will be deleted after death Using this method spawns will not be saved with //save_spawn command
-	 * 
-	 * @param worldId
-	 * @param npcId
-	 * @param x
-	 * @param y
-	 * @param z
-	 * @param heading
-	 * @param respawnTime
-	 * @param permanent
-	 * @return SpawnTemplate
-	 */
-	public static SpawnTemplate addNewSpawn(int worldId, int npcId, float x, float y, float z, byte heading, int respawnTime) {
-		SpawnTemplate spawnTemplate = createSpawnTemplate(worldId, npcId, x, y, z, heading);
-		spawnTemplate.setRespawnTime(respawnTime);
-		return spawnTemplate;
-	}
-
-	/**
 	 * Create non-permanent spawn template with no respawn
 	 * 
 	 * @param worldId
@@ -125,15 +78,29 @@ public class SpawnEngine {
 	 * @param heading
 	 * @return
 	 */
-	public static SpawnTemplate addNewSingleTimeSpawn(int worldId, int npcId, float x, float y, float z, byte heading) {
-		return addNewSpawn(worldId, npcId, x, y, z, heading, 0);
+	public static SpawnTemplate newSingleTimeSpawn(int worldId, int npcId, float x, float y, float z, byte heading) {
+		return newSpawn(worldId, npcId, x, y, z, heading, 0, 0);
 	}
 
-	public static SpawnTemplate addNewSingleTimeSpawn(int worldId, int npcId, float x, float y, float z, byte heading, int creatorId, String masterName) {
-		SpawnTemplate template = addNewSpawn(worldId, npcId, x, y, z, heading, 0);
-		template.setCreatorId(creatorId);
-		template.setMasterName(masterName);
-		return template;
+	public static SpawnTemplate newSingleTimeSpawn(int worldId, int npcId, float x, float y, float z, byte heading, int creatorId) {
+		return newSpawn(worldId, npcId, x, y, z, heading, 0, creatorId);
+	}
+
+	public static SpawnTemplate newSpawn(int worldId, int npcId, float x, float y, float z, byte heading, int respawnTime) {
+		return newSpawn(worldId, npcId, x, y, z, heading, respawnTime, 0);
+	}
+
+	private static SpawnTemplate newSpawn(int worldId, int npcId, float x, float y, float z, byte heading, int respawnTime, int creatorId) {
+		return new SpawnTemplate(new SpawnGroup(worldId, npcId, respawnTime), x, y, z, heading, 0, null, 0, 0, creatorId);
+	}
+
+	/**
+	 * Should be used when you need to add a siegespawn through code and not from static_data spawns (e.g. CustomBalaurAssault)
+	 */
+	public static SiegeSpawnTemplate newSiegeSpawn(int worldId, int npcId, int siegeId, SiegeRace race, SiegeModType mod, float x, float y, float z,
+		byte heading) {
+		SiegeSpawnTemplate spawnTemplate = new SiegeSpawnTemplate(siegeId, race, mod, new SpawnGroup(worldId, npcId, 0), x, y, z, heading, 0, null, 0, 0);
+		return spawnTemplate;
 	}
 
 	static void bringIntoWorld(VisibleObject visibleObject, SpawnTemplate spawn, int instanceIndex) {
@@ -259,7 +226,7 @@ public class SpawnEngine {
 
 	private static boolean checkPool(SpawnGroup spawn) {
 		if (spawn.getSpawnTemplates().size() < spawn.getPool()) {
-			log.warn("Pool size more then spots, npcId: " + spawn.getNpcId() + ", worldId: " + spawn.getWorldId());
+			log.warn("Pool size is greater than spots, npcId: " + spawn.getNpcId() + ", worldId: " + spawn.getWorldId());
 			return false;
 		}
 		return true;

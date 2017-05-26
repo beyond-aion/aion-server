@@ -14,7 +14,6 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 /**
  * @author Balthazar
  */
-
 public class _3006TheShugoFugitive extends QuestHandler {
 
 	public _3006TheShugoFugitive() {

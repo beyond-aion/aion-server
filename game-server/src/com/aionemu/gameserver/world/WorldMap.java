@@ -55,7 +55,7 @@ public class WorldMap {
 		return worldMapTemplate.getWorldDropType();
 	}
 
-	public Integer getMapId() {
+	public int getMapId() {
 		return worldMapTemplate.getMapId();
 	}
 

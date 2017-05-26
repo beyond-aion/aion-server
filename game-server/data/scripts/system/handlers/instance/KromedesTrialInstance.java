@@ -147,7 +147,7 @@ public class KromedesTrialInstance extends GeneralInstanceHandler {
 				Npc kaliga = instance.getNpc(217006);
 				if (kaliga != null && !kaliga.getLifeStats().isAlreadyDead()) {
 					SpawnTemplate npcST = npc.getSpawn();
-					SpawnTemplate newST = SpawnEngine.addNewSingleTimeSpawn(npcST.getWorldId(), npc.getNpcId(), npcST.getX(), npcST.getY(), npcST.getZ(),
+					SpawnTemplate newST = SpawnEngine.newSingleTimeSpawn(npcST.getWorldId(), npc.getNpcId(), npcST.getX(), npcST.getY(), npcST.getZ(),
 						npcST.getHeading());
 					newST.setStaticId(npcST.getStaticId());
 					SpawnEngine.spawnObject(newST, instanceId);

@@ -13,7 +13,6 @@ import com.aionemu.gameserver.services.QuestService;
 /**
  * @author Gigi
  */
-
 public class _30227GroupToLiberateSouls extends QuestHandler {
 
 	public _30227GroupToLiberateSouls() {

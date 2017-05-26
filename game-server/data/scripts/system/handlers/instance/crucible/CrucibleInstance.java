@@ -27,7 +27,7 @@ public class CrucibleInstance extends GeneralInstanceHandler {
 
 	@Override
 	public void onEnterInstance(Player player) {
-		if (!instanceReward.containPlayer(player.getObjectId())) {
+		if (!instanceReward.containsPlayer(player.getObjectId())) {
 			addPlayerReward(player);
 		}
 	}

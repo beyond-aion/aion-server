@@ -25,14 +25,14 @@ public class IdgelDomeReward extends InstanceReward<IdgelDomePlayerReward> {
 		positions[0] = new float[] { 269.76874f, 348.35953f, 79.44365f, 105 }; // elyos
 	}
 
-	public IdgelDomeReward(Integer mapId, int instanceId) {
+	public IdgelDomeReward(int mapId, int instanceId) {
 		super(mapId, instanceId);
 	}
 
 	public IdgelDomePlayerReward[] getPlayersByRace(Race race) {
 		int index = 0;
 		IdgelDomePlayerReward[] players = new IdgelDomePlayerReward[12];
-		for (IdgelDomePlayerReward reward : instanceRewards) {
+		for (IdgelDomePlayerReward reward : getInstanceRewards()) {
 			if (reward.getRace().equals(race)) {
 				players[index] = reward;
 				index++;

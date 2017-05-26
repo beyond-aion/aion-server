@@ -26,7 +26,7 @@ public class WalkerVersionsData {
 	@XmlTransient
 	private Map<String, String> walkParents = new HashMap<>();
 
-	protected void afterUnmarshal(Unmarshaller u, Object parent) {
+	void afterUnmarshal(Unmarshaller u, Object parent) {
 		for (RouteParent group : routeGroups) {
 			for (RouteVersion version : group.getRouteVersion())
 				walkParents.put(version.getId(), group.getId());

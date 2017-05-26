@@ -178,7 +178,8 @@ public class _24030ShowdownWithDestiny extends QuestHandler {
 			if (qs != null && qs.getStatus() == QuestStatus.START) {
 				int var = qs.getQuestVarById(0);
 				if (var == 6 || var == 7) {
-					changeQuestStep(env, var, 5);
+					qs.setQuestVar(5);
+					updateQuestStatus(env);
 					return true;
 				}
 			}

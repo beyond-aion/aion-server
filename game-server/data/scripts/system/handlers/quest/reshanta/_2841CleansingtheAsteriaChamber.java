@@ -12,7 +12,6 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 /**
  * @author Hilgert, modified Bobobear
  */
-
 public class _2841CleansingtheAsteriaChamber extends QuestHandler {
 
 	public _2841CleansingtheAsteriaChamber() {

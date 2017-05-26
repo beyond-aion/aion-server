@@ -13,7 +13,6 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  * @author Balthazar
  * @modified Pad
  */
-
 public class _3096ExamineTheExtractionDevices extends QuestHandler {
 
 	public _3096ExamineTheExtractionDevices() {

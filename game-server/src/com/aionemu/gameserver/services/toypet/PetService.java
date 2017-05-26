@@ -204,7 +204,7 @@ public class PetService {
 					PacketSendUtility.broadcastPacket(player,
 						new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), player.getObjectId(), useItem.getObjectId(), useItem.getItemId(), 0, 1, 1, 1, 0, 15360),
 						true);
-					SkillEngine.getInstance().applyEffectDirectly(((SkillUseAction) itemAction).getSkillid(), ((SkillUseAction) itemAction).getLevel(), player,
+					SkillEngine.getInstance().applyEffectDirectly(((SkillUseAction) itemAction).getSkillId(), ((SkillUseAction) itemAction).getLevel(), player,
 						player, 0);
 					player.addItemCoolDown(limit.getDelayId(), System.currentTimeMillis() + player.getItemCooldown(useItem.getItemTemplate()),
 						player.getItemCooldown(useItem.getItemTemplate()) / 1000);

@@ -39,11 +39,7 @@ public class BoundRadius {
 		calculateCollision(front, side);
 	}
 
-	/**
-	 * @param u
-	 * @param parent
-	 */
-	protected void afterUnmarshal(Unmarshaller u, Object parent) {
+	void afterUnmarshal(Unmarshaller u, Object parent) {
 		calculateCollision(front, side);
 	}
 

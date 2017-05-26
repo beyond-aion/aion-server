@@ -22,13 +22,14 @@ public class CM_USE_CHARGE_SKILL extends AionClientPacket {
 			return;
 		}
 		long time = System.currentTimeMillis() - chargeCastingSkill.getCastStartTime();
-		int i = 0;
-		for(; i < chargeCastingSkill.getChargeTimes().length; i++) {
-			if (time < chargeCastingSkill.getChargeTimes()[i])
+		int index = 0;
+		for (float chargeTime : chargeCastingSkill.getChargeTimes()) {
+			if (time < chargeTime)
 				break;
-			time -= chargeCastingSkill.getChargeTimes()[i];
+			time -= chargeTime;
+			index++;
 		}
-		player.getController().useChargeSkill(chargeCastingSkill.getChargeSkillList().get(i).getId(), chargeCastingSkill.getSkillLevel(),
+		player.getController().useChargeSkill(chargeCastingSkill.getChargeSkillList().get(index).getId(), chargeCastingSkill.getSkillLevel(),
 			chargeCastingSkill.getHitTime(), chargeCastingSkill.getFirstTarget());
 		chargeCastingSkill.cancelCast();
 		chargeCastingSkill.getChargeSkillList().clear();

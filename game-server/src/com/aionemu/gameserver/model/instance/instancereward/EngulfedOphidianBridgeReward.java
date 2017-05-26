@@ -26,7 +26,7 @@ public class EngulfedOphidianBridgeReward extends InstanceReward<EngulfedOphidia
 		positions[0] = new float[] { 762.01733f, 582.25903f, 578.2209f, 86 }; // elyos
 	}
 
-	public EngulfedOphidianBridgeReward(Integer mapId, int instanceId) {
+	public EngulfedOphidianBridgeReward(int mapId, int instanceId) {
 		super(mapId, instanceId);
 		racePosition = Rnd.get(2);
 	}
@@ -34,7 +34,7 @@ public class EngulfedOphidianBridgeReward extends InstanceReward<EngulfedOphidia
 	public EngulfedOphidianBridgePlayerReward[] getPlayersByRace(Race race) {
 		int index = 0;
 		EngulfedOphidianBridgePlayerReward[] players = new EngulfedOphidianBridgePlayerReward[12];
-		for (EngulfedOphidianBridgePlayerReward reward : instanceRewards) {
+		for (EngulfedOphidianBridgePlayerReward reward : getInstanceRewards()) {
 			if (reward.getRace().equals(race)) {
 				players[index] = reward;
 				index++;

@@ -52,7 +52,7 @@ public class SkillData {
 	@XmlTransient
 	private TIntObjectHashMap<List<Integer>> cooldownGroups = new TIntObjectHashMap<>();
 
-	protected void afterUnmarshal(Unmarshaller u, Object parent) {
+	void afterUnmarshal(Unmarshaller u, Object parent) {
 		skillData.clear();
 		skillTemplatesByGroup.clear();
 		skillTemplatesByStack.clear();

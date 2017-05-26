@@ -104,7 +104,7 @@ public class FortressAssault extends Assault<FortressSiege> {
 		float x1 = (float) (x + Math.cos(Math.PI * Rnd.get()) * Rnd.get(1, 3));
 		float y1 = (float) (y + Math.sin(Math.PI * Rnd.get()) * Rnd.get(1, 3));
 
-		SpawnTemplate spawnTemplate = SpawnEngine.addNewSiegeSpawn(mapId, npcId, locId, SiegeRace.BALAUR, SiegeModType.ASSAULT, x1, y1, z, heading);
+		SpawnTemplate spawnTemplate = SpawnEngine.newSiegeSpawn(mapId, npcId, locId, SiegeRace.BALAUR, SiegeModType.ASSAULT, x1, y1, z, heading);
 		Npc invader = (Npc) SpawnEngine.spawnObject(spawnTemplate, 1);
 		if (aType != AssaultType.TELEPORT)
 			invader.getAggroList().addHate(boss, 100000);

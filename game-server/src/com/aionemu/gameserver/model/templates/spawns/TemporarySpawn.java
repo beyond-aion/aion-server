@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.model.templates.spawns;
 
+import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -16,89 +17,118 @@ import com.aionemu.gameserver.utils.time.gametime.GameTime;
 public class TemporarySpawn {
 
 	@XmlAttribute(name = "spawn_time")
-	private String spawnTime; // *.*.* hour.day.month (* == all)
+	private String spawnTime; // *.*.* hour.day.month (* = all, /n = every nth hour/day/month starting from 0)
 
 	@XmlAttribute(name = "despawn_time")
-	private String despawnTime; // *.*.* hour.day.month (* == all)
+	private String despawnTime; // *.*.* hour.day.month (* = all, /n = every nth hour/day/month starting from 0)
 
-	public Integer getSpawnHour() {
-		return getTime(spawnTime, 0);
+	private Integer spawnHour;
+	private Integer spawnDay;
+	private Integer spawnMonth;
+	private Integer despawnHour;
+	private Integer despawnDay;
+	private Integer despawnMonth;
+
+	void afterUnmarshal(Unmarshaller u, Object parent) {
+		if (spawnTime != null) {
+			spawnHour = parseTime(spawnTime, 0);
+			spawnDay = parseTime(spawnTime, 1);
+			spawnMonth = parseTime(spawnTime, 2);
+			spawnTime = null;
+		}
+		if (despawnTime != null) {
+			despawnHour = parseTime(despawnTime, 0);
+			despawnDay = parseTime(despawnTime, 1);
+			despawnMonth = parseTime(despawnTime, 2);
+			despawnTime = null;
+		}
 	}
 
-	public Integer getSpawnDay() {
-		return getTime(spawnTime, 1);
-	}
-
-	public Integer getSpawnMonth() {
-		return getTime(spawnTime, 2);
-	}
-
-	public Integer getDespawnHour() {
-		return getTime(despawnTime, 0);
-	}
-
-	public Integer getDespawnDay() {
-		return getTime(despawnTime, 1);
-	}
-
-	public Integer getDespawnMonth() {
-		return getTime(despawnTime, 2);
-	}
-
-	private Integer getTime(String time, int type) {
+	private Integer parseTime(String time, int type) {
 		String result = time.split("\\.")[type];
-		return result.equals("*") ? null : Integer.parseInt(result);
+		if (result.equals("*"))
+			return null;
+		if (result.startsWith("/"))
+			result = "-" + result.substring(1); // parse negative for later expression handling (/2 means every 2 hours)
+		return Integer.parseInt(result);
 	}
 
 	private boolean isTime(Integer hour, Integer day, Integer month) {
 		GameTime gameTime = GameTimeService.getInstance().getGameTime();
-		if (hour != null && hour != gameTime.getHour())
-			return false;
-		if (day != null && day != gameTime.getDay())
-			return false;
-		if (month != null && month != gameTime.getMonth())
-			return false;
+		if (hour != null) {
+			int gameTimeHour = gameTime.getHour();
+			if (hour >= 0 && gameTimeHour != hour || hour < 0 && gameTimeHour % hour != 0)
+				return false;
+		}
+		if (day != null) {
+			int gameTimeDay = gameTime.getDay();
+			if (day >= 0 && gameTimeDay != day || day < 0 && gameTimeDay % day != 0)
+				return false;
+		}
+		if (month != null) {
+			int gameTimeMonth = gameTime.getMonth();
+			if (month >= 0 && gameTimeMonth != month || month < 0 && gameTimeMonth % month != 0)
+				return false;
+		}
 		return true;
 	}
 
 	public boolean canSpawn() {
-		return isTime(getSpawnHour(), getSpawnDay(), getSpawnMonth());
+		return isTime(spawnHour, spawnDay, spawnMonth);
 	}
 
 	public boolean canDespawn() {
-		return isTime(getDespawnHour(), getDespawnDay(), getDespawnMonth());
+		return isTime(despawnHour, despawnDay, despawnMonth);
 	}
 
 	public boolean isInSpawnTime() {
 		GameTime gameTime = GameTimeService.getInstance().getGameTime();
 
-		Integer spawnMonth = getSpawnMonth();
-		if (spawnMonth != null && !checkDate(gameTime.getMonth(), spawnMonth, getDespawnMonth()))
+		if (spawnMonth != null && !checkDate(gameTime.getMonth(), spawnMonth, despawnMonth))
 			return false;
 
-		Integer spawnDay = getSpawnDay();
-		if (spawnDay != null && !checkDate(gameTime.getDay(), spawnDay, getDespawnDay()))
+		if (spawnDay != null && !checkDate(gameTime.getDay(), spawnDay, despawnDay))
 			return false;
 
-		if (spawnMonth == null && spawnDay == null && !checkHour(gameTime.getHour(), getSpawnHour(), getDespawnHour()))
+		if (spawnMonth == null && spawnDay == null && !checkHour(gameTime.getHour(), spawnHour, despawnHour))
 			return false;
 
 		return true;
 	}
 
-	private boolean checkDate(int currentDate, int spawnDate, int despawnDate) {
+	private boolean checkDate(int currentDate, int spawnDate, Integer despawnDate) {
+		if (despawnDate != null && despawnDate < 0) // check "every nth month/day" expression
+			return checkWithDespawnExpression(currentDate, spawnDate, -despawnDate);
+
+		if (spawnDate < 0)
+			spawnDate = -spawnDate; // make the expression a positive spawn time, works just fine
+		if (despawnDate == null) // any date
+			return currentDate >= spawnDate;
 		if (spawnDate <= despawnDate)
 			return currentDate >= spawnDate && currentDate <= despawnDate;
 		else
 			return currentDate >= spawnDate || currentDate <= despawnDate;
 	}
 
-	private boolean checkHour(int currentHour, int spawnHour, int despawnHour) {
+	private boolean checkHour(int currentHour, int spawnHour, Integer despawnHour) {
+		if (despawnHour != null && despawnHour < 0) // check "every nth month/day" expression
+			return checkWithDespawnExpression(currentHour, spawnHour, -despawnHour);
+
+		if (spawnHour < 0)
+			spawnHour = -spawnHour; // make the expression a positive spawn time, works just fine
+		if (despawnHour == null) // any hour
+			return currentHour >= spawnHour;
 		if (spawnHour < despawnHour)
 			return currentHour >= spawnHour && currentHour < despawnHour;
-		else if (spawnHour > despawnHour)
+		if (spawnHour > despawnHour)
 			return currentHour >= spawnHour || currentHour < despawnHour;
 		return true;
 	}
 
+	private boolean checkWithDespawnExpression(int currentDate, int spawnTimeOrExpression, int despawnExpression) {
+		// proper handling would be really complex, so for now some spawn/despawn combinations don't spawn directly on server start
+		if (spawnTimeOrExpression < 0) // change expression to time
+			spawnTimeOrExpression = -spawnTimeOrExpression;
+		return currentDate >= spawnTimeOrExpression && spawnTimeOrExpression == despawnExpression;
+	}
 }

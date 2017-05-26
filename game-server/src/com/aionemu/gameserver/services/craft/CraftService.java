@@ -76,7 +76,7 @@ public class CraftService {
 		}
 
 		int skillId = recipetemplate.getSkillId();
-		int gainedCraftXp = (int) Rates.XP_CRAFTING.calcResult(player, xpReward);
+		int gainedCraftXp = (int) Rates.SKILL_XP_CRAFTING.calcResult(player, xpReward);
 		float statRate = player.getGameStats().getStat(StatEnum.getModifier(skillId), 100).getCurrent() / 100f;
 		if (statRate > 0)
 			gainedCraftXp *= statRate;

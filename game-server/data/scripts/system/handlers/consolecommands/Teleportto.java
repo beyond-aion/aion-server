@@ -13,7 +13,6 @@ import com.aionemu.gameserver.world.WorldMapType;
 /**
  * @author ginho1
  */
-
 public class Teleportto extends ConsoleCommand {
 
 	public Teleportto() {

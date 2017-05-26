@@ -14,6 +14,7 @@ import com.aionemu.gameserver.model.gameobjects.PersistentState;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.spawns.Spawn;
+import com.aionemu.gameserver.model.templates.spawns.SpawnGroup;
 import com.aionemu.gameserver.model.templates.spawns.SpawnSpotTemplate;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_TOWNS_LIST;
@@ -120,14 +121,12 @@ public class Town {
 	}
 
 	private void spawnNewObjects() {
-		List<Spawn> newSpawns = DataManager.TOWN_SPAWNS_DATA.getSpawns(this.id, this.level);
-		int worldId = DataManager.TOWN_SPAWNS_DATA.getWorldIdForTown(this.id);
+		List<Spawn> newSpawns = DataManager.TOWN_SPAWNS_DATA.getSpawns(id, level);
+		int worldId = DataManager.TOWN_SPAWNS_DATA.getWorldIdForTown(id);
 		for (Spawn spawn : newSpawns) {
+			SpawnGroup spawnGroup = new SpawnGroup(worldId, spawn);
 			for (SpawnSpotTemplate sst : spawn.getSpawnSpotTemplates()) {
-				SpawnTemplate spawnTemplate = SpawnEngine.addNewSpawn(worldId, spawn.getNpcId(), sst.getX(), sst.getY(), sst.getZ(), sst.getHeading(),
-					spawn.getRespawnTime());
-				spawnTemplate.setStaticId(sst.getStaticId());
-				VisibleObject object = SpawnEngine.spawnObject(spawnTemplate, 1);
+				VisibleObject object = SpawnEngine.spawnObject(new SpawnTemplate(spawnGroup, sst), 1);
 				if (object instanceof Npc) {
 					((Npc) object).setTownId(this.id);
 					spawnedNpcs.add((Npc) object);

@@ -15,7 +15,6 @@ import com.aionemu.gameserver.dao.OldNamesDAO;
 /**
  * @author synchro2
  */
-
 public class MySQL5OldNamesDAO extends OldNamesDAO {
 
 	private static final Logger log = LoggerFactory.getLogger(MySQL5OldNamesDAO.class);

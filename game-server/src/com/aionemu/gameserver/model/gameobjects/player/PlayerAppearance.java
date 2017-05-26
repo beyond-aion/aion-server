@@ -3,7 +3,6 @@ package com.aionemu.gameserver.model.gameobjects.player;
 /**
  * @author SoulKeeper, srx47, alexa026
  */
-
 public class PlayerAppearance implements Cloneable {
 
 	/**

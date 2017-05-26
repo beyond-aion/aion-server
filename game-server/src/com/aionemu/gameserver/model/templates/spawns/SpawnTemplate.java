@@ -1,7 +1,5 @@
 package com.aionemu.gameserver.model.templates.spawns;
 
-import org.apache.commons.lang3.StringUtils;
-
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.templates.event.EventTemplate;
 import com.aionemu.gameserver.spawnengine.SpawnHandlerType;
@@ -27,7 +25,6 @@ public class SpawnTemplate {
 	private SpawnModel model;
 	private int state;
 	private int creatorId;
-	private String masterName = StringUtils.EMPTY;
 	private TemporarySpawn temporarySpawn;
 	private VisibleObject visibleObject;
 
@@ -49,6 +46,11 @@ public class SpawnTemplate {
 	}
 
 	public SpawnTemplate(SpawnGroup spawnGroup, float x, float y, float z, byte heading, int randWalk, String walkerId, int staticId, int fly) {
+		this(spawnGroup, x, y, z, heading, randWalk, walkerId, staticId, fly, 0);
+	}
+
+	public SpawnTemplate(SpawnGroup spawnGroup, float x, float y, float z, byte heading, int randWalk, String walkerId, int staticId, int fly,
+		int creatorId) {
 		this.spawnGroup = spawnGroup;
 		this.x = x;
 		this.y = y;
@@ -58,6 +60,7 @@ public class SpawnTemplate {
 		this.walkerId = walkerId;
 		this.staticId = staticId;
 		this.fly = fly;
+		this.creatorId = creatorId;
 		addTemplate();
 	}
 
@@ -129,11 +132,6 @@ public class SpawnTemplate {
 		return spawnGroup.getRespawnTime();
 	}
 
-	// FIXME: cross-WorldInstace modification!!!
-	public void setRespawnTime(int respawnTime) {
-		spawnGroup.setRespawnTime(respawnTime);
-	}
-
 	public void setUse(int instanceId, boolean isUsed) {
 		spawnGroup.setTemplateUse(instanceId, this, isUsed);
 	}
@@ -200,29 +198,6 @@ public class SpawnTemplate {
 	 */
 	public int getCreatorId() {
 		return creatorId;
-	}
-
-	/**
-	 * @param creatorId
-	 *          the creatorId to set
-	 */
-	public void setCreatorId(int creatorId) {
-		this.creatorId = creatorId;
-	}
-
-	/**
-	 * @return the masterName
-	 */
-	public String getMasterName() {
-		return masterName;
-	}
-
-	/**
-	 * @param masterName
-	 *          the masterName to set
-	 */
-	public void setMasterName(String masterName) {
-		this.masterName = masterName;
 	}
 
 	public VisibleObject getVisibleObject() {

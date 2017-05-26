@@ -11,12 +11,12 @@ import com.aionemu.gameserver.model.instance.playerreward.InstancePlayerReward;
  */
 public class InstanceReward<T extends InstancePlayerReward> {
 
-	protected List<T> instanceRewards = new ArrayList<>();
+	protected final int mapId;
+	protected final int instanceId;
+	private final List<T> instanceRewards = new ArrayList<>();
 	private InstanceScoreType instanceScoreType = InstanceScoreType.START_PROGRESS;
-	protected Integer mapId;
-	protected int instanceId;
 
-	public InstanceReward(Integer mapId, int instanceId) {
+	public InstanceReward(int mapId, int instanceId) {
 		this.mapId = mapId;
 		this.instanceId = instanceId;
 	}
@@ -25,19 +25,12 @@ public class InstanceReward<T extends InstancePlayerReward> {
 		return instanceRewards;
 	}
 
-	public boolean containPlayer(int objectId) {
-		for (InstancePlayerReward instanceReward : instanceRewards) {
-			if (instanceReward.getOwnerId() == objectId) {
-				return true;
-			}
-		}
-		return false;
+	public boolean containsPlayer(int objectId) {
+		return getPlayerReward(objectId) != null;
 	}
 
 	public void removePlayerReward(T reward) {
-		if (instanceRewards.contains(reward)) {
-			instanceRewards.remove(reward);
-		}
+		instanceRewards.remove(reward);
 	}
 
 	public T getPlayerReward(int objectId) {
@@ -61,7 +54,7 @@ public class InstanceReward<T extends InstancePlayerReward> {
 		return instanceScoreType;
 	}
 
-	public Integer getMapId() {
+	public int getMapId() {
 		return mapId;
 	}
 
@@ -89,7 +82,4 @@ public class InstanceReward<T extends InstancePlayerReward> {
 		instanceRewards.clear();
 	}
 
-	protected InstanceReward<?> getInstanceReward() {
-		return this;
-	}
 }

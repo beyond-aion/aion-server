@@ -15,7 +15,6 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 /**
  * @author Balthazar
  */
-
 public class _3056InSearchOfZirius extends QuestHandler {
 
 	public _3056InSearchOfZirius() {

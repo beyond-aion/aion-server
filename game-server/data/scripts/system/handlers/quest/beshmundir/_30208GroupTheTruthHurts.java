@@ -18,7 +18,6 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 /**
  * @author Gigi
  */
-
 public class _30208GroupTheTruthHurts extends QuestHandler {
 
 	public _30208GroupTheTruthHurts() {

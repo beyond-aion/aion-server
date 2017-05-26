@@ -72,7 +72,7 @@ public class IronWallFrontInstance extends GeneralInstanceHandler {
 	}
 
 	private boolean containPlayer(int objectId) {
-		return ironWallFrontReward.containPlayer(objectId);
+		return ironWallFrontReward.containsPlayer(objectId);
 	}
 
 	@Override

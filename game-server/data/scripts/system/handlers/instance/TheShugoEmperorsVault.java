@@ -509,7 +509,7 @@ public class TheShugoEmperorsVault extends GeneralInstanceHandler {
 	}
 	
 	private void respawn(int mapId, int npcId, float x, float y, float z, byte heading, int respawnTime) {
-		SpawnTemplate template = SpawnEngine.addNewSpawn(mapId, npcId, x, y, z, heading, respawnTime);
+		SpawnTemplate template = SpawnEngine.newSpawn(mapId, npcId, x, y, z, heading, respawnTime);
 		SpawnEngine.spawnObject(template, instanceId);
 	}
 	

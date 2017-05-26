@@ -14,7 +14,6 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 /**
  * @author Balthazar
  */
-
 public class _1648UndeadWarAlert extends QuestHandler {
 
 	public _1648UndeadWarAlert() {

@@ -1189,7 +1189,7 @@
 		</spawn>
 		<!-- Nagrinerk -->
 		<spawn npc_id="804831" respawn_time="295" pool="1">
-			<temporary_spawn spawn_time="*.*.*" despawn_time="*.*.*" />
+			<temporary_spawn spawn_time="/3.*.*" despawn_time="/3.*.*" />
 			<spot x="393.0" y="976.6" z="249.1001" h="88" />
 			<spot x="402.9" y="1223.5" z="269.1338" h="117" />
 			<spot x="513.9" y="1564.0" z="236.15625" h="41" />

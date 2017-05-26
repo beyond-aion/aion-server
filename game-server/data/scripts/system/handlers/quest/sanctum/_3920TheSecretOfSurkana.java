@@ -13,7 +13,6 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  * 
  * @author Bobobear
  */
-
 public class _3920TheSecretOfSurkana extends QuestHandler {
 
 	public _3920TheSecretOfSurkana() {

@@ -11,7 +11,6 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 /**
  * @author Enomine modified by Artur
  */
-
 public class _80320ForTheAsmodians extends QuestHandler {
 
 	private final static int[] npc_ids = { 831427 };

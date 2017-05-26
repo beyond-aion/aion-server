@@ -31,7 +31,7 @@ public class TeleporterData {
 	/** A map containing all trade list templates */
 	private TIntObjectHashMap<TeleporterTemplate> teleporterTemplates = new TIntObjectHashMap<>();
 
-	protected void afterUnmarshal(Unmarshaller u, Object parent) {
+	void afterUnmarshal(Unmarshaller u, Object parent) {
 		for (TeleporterTemplate template : templates) {
 			teleporterTemplates.put(template.getTeleportId(), template);
 		}

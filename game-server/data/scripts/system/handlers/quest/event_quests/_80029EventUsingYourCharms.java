@@ -11,7 +11,6 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 /**
  * @author Rolandas
  */
-
 public class _80029EventUsingYourCharms extends QuestHandler {
 
 	public _80029EventUsingYourCharms() {

@@ -23,56 +23,56 @@ import com.aionemu.gameserver.world.zone.ZoneAttributes;
 public class WorldMapTemplate {
 
 	@XmlAttribute(name = "name")
-	protected String name = "";
+	private String name = "";
 
 	@XmlAttribute(name = "cName")
-	protected String cName = "";
+	private String cName = "";
 
 	@XmlAttribute(name = "id", required = true)
-	protected Integer mapId;
+	private int mapId;
 
 	@XmlAttribute(name = "twin_count")
-	protected int twinCount;
+	private int twinCount;
 
 	@XmlAttribute(name = "beginner_twin_count")
-	protected int beginnerTwinCount;
+	private int beginnerTwinCount;
 
 	@XmlAttribute(name = "max_user")
-	protected int maxUser;
+	private int maxUser;
 
 	@XmlAttribute(name = "prison")
-	protected boolean prison = false;
+	private boolean prison = false;
 
 	@XmlAttribute(name = "instance")
-	protected boolean instance = false;
+	private boolean instance = false;
 
 	@XmlAttribute(name = "death_level", required = true)
-	protected int deathlevel = 0;
+	private int deathlevel = 0;
 
 	@XmlAttribute(name = "water_level", required = true)
 	// TODO: Move to Zone
-	protected int waterlevel = 16;
+	private int waterlevel = 16;
 
 	@XmlAttribute(name = "world_type")
-	protected WorldType worldType = WorldType.NONE;
+	private WorldType worldType = WorldType.NONE;
 
 	@XmlAttribute(name = "world_size")
-	protected int worldSize;
+	private int worldSize;
 
 	@XmlAttribute(name = "drop_type")
-	protected WorldDropType dropWorldType = WorldDropType.NONE;
+	private WorldDropType dropWorldType = WorldDropType.NONE;
 
 	@XmlElement(name = "ai_info")
-	protected AiInfo aiInfo = AiInfo.DEFAULT;
+	private AiInfo aiInfo = AiInfo.DEFAULT;
 
 	@XmlAttribute(name = "except_buff")
-	protected boolean exceptBuff = false;
+	private boolean exceptBuff = false;
 
 	@XmlAttribute(name = "flags")
-	protected List<ZoneAttributes> flagValues;
+	private List<ZoneAttributes> flagValues;
 
 	@XmlTransient
-	protected int flags;
+	private int flags;
 
 	public String getName() {
 		return name;
@@ -82,7 +82,7 @@ public class WorldMapTemplate {
 		return cName;
 	}
 
-	public Integer getMapId() {
+	public int getMapId() {
 		return mapId;
 	}
 
@@ -178,7 +178,7 @@ public class WorldMapTemplate {
 		return flags;
 	}
 
-	protected void afterUnmarshal(Unmarshaller u, Object parent) {
+	void afterUnmarshal(Unmarshaller u, Object parent) {
 		flags = ZoneAttributes.fromList(flagValues);
 	}
 

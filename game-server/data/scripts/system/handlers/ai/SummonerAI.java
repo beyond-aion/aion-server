@@ -124,7 +124,7 @@ public class SummonerAI extends AggressiveNpcAI {
 				if (summonGroup.getDistance() != 0) {
 					summon = rndSpawnInRange(summonGroup.getNpcId(), summonGroup.getDistance());
 				} else {
-					summon = SpawnEngine.addNewSingleTimeSpawn(getPosition().getMapId(), summonGroup.getNpcId(), summonGroup.getX(), summonGroup.getY(),
+					summon = SpawnEngine.newSingleTimeSpawn(getPosition().getMapId(), summonGroup.getNpcId(), summonGroup.getX(), summonGroup.getY(),
 						summonGroup.getZ(), summonGroup.getH());
 				}
 				VisibleObject npc = SpawnEngine.spawnObject(summon, getPosition().getInstanceId());
@@ -138,7 +138,7 @@ public class SummonerAI extends AggressiveNpcAI {
 		float direction = Rnd.get(0, 199) / 100f;
 		float x = (float) (Math.cos(Math.PI * direction) * distance);
 		float y = (float) (Math.sin(Math.PI * direction) * distance);
-		return SpawnEngine.addNewSingleTimeSpawn(getPosition().getMapId(), npcId, getPosition().getX() + x, getPosition().getY() + y,
+		return SpawnEngine.newSingleTimeSpawn(getPosition().getMapId(), npcId, getPosition().getX() + x, getPosition().getY() + y,
 			getPosition().getZ(), getPosition().getHeading());
 	}
 

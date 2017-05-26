@@ -12,7 +12,7 @@ public class DarkPoetaReward extends InstanceReward<InstancePlayerReward> {
 	private int rank = 7;
 	private int collections;
 
-	public DarkPoetaReward(Integer mapId, int instanceId) {
+	public DarkPoetaReward(int mapId, int instanceId) {
 		super(mapId, instanceId);
 	}
 

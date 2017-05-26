@@ -16,7 +16,6 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  * @author Balthazar
  * @reworked vlog
  */
-
 public class _3050RescuingRuria extends QuestHandler {
 
 	public _3050RescuingRuria() {

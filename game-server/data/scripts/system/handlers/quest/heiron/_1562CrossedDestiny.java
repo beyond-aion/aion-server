@@ -16,7 +16,6 @@ import com.aionemu.gameserver.services.QuestService;
  * @author Balthazar
  * @reworked vlog
  */
-
 public class _1562CrossedDestiny extends QuestHandler {
 
 	public _1562CrossedDestiny() {

@@ -12,7 +12,6 @@ import com.aionemu.gameserver.services.QuestService;
 /**
  * @author Rolandas
  */
-
 public class _80000JoyfulDaevasDay extends QuestHandler {
 
 	public _80000JoyfulDaevasDay() {

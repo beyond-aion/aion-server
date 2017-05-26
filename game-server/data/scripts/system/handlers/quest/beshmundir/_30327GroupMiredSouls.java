@@ -13,7 +13,6 @@ import com.aionemu.gameserver.services.QuestService;
 /**
  * @author Gigi
  */
-
 public class _30327GroupMiredSouls extends QuestHandler {
 
 	public _30327GroupMiredSouls() {

@@ -53,7 +53,7 @@ public class ConquestOfferingAggressiveAI extends AggressiveNpcAI {
 		}
 
 		if (npcId != 0) {
-			SpawnTemplate template = SpawnEngine.addNewSingleTimeSpawn(getOwner().getWorldId(), npcId, getOwner().getX() + 0.3f, getOwner().getY() + 0.3f, getOwner().getZ() + 0.2f, getOwner().getHeading());
+			SpawnTemplate template = SpawnEngine.newSingleTimeSpawn(getOwner().getWorldId(), npcId, getOwner().getX() + 0.3f, getOwner().getY() + 0.3f, getOwner().getZ() + 0.2f, getOwner().getHeading());
 			SpawnEngine.spawnObject(template, getOwner().getInstanceId());
 		}
 	}

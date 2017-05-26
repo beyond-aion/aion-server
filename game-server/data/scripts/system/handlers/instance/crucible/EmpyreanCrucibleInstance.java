@@ -37,7 +37,7 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 public class EmpyreanCrucibleInstance extends CrucibleInstance {
 
 	private List<Npc> npcs = new ArrayList<>();
-	private List<EmpyreanStage> emperyanStage = new ArrayList<>();
+	private List<EmpyreanStage> empyreanStage = new ArrayList<>();
 	private byte stage;
 	private boolean isDoneStage4 = false;
 	private boolean isDoneStage6Round2 = false;
@@ -72,25 +72,26 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 
 	@Override
 	public void onEnterInstance(Player player) {
-		boolean isNew = !instanceReward.containPlayer(player.getObjectId());
-		super.onEnterInstance(player);
-		if (isNew && stage > 0) {
-			moveToReadyRoom(player); // send player to team and wait for end of the stage
-			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1400963));
-		}
-		CruciblePlayerReward playerReward = getPlayerReward(player.getObjectId());
-		if (playerReward.isPlayerLeave()) {
-			onExitInstance(player);
-			return;
-		} else if (playerReward.isRewarded()) {
-			doReward(player);
+		boolean isNew = !instanceReward.containsPlayer(player.getObjectId());
+		super.onEnterInstance(player); // creates player reward
+		if (stage > 0) {
+			CruciblePlayerReward playerReward = getPlayerReward(player.getObjectId());
+			if (isNew) {
+				moveToReadyRoom(player); // send player to team and wait for end of the stage
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_ENTERED_BIRTHAREA_IDARENA());
+			} else if (playerReward.isPlayerLeave()) {
+				onExitInstance(player);
+				return;
+			} else if (playerReward.isRewarded()) {
+				doReward(player);
+				return;
+			}
 		}
 		PacketSendUtility.sendPacket(player, new SM_INSTANCE_SCORE(new CrucibleScoreInfo(instanceReward), instanceReward));
 		PacketSendUtility.sendPacket(player, new SM_INSTANCE_STAGE_INFO(2, stageType.getId(), stageType.getType()));
-
 	}
 
-	private void sendPacket(final int points, final int nameId) {
+	private void sendPacket(int points, int nameId) {
 		instance.forEachPlayer(new Consumer<Player>() {
 
 			@Override
@@ -98,7 +99,7 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 				if (player.isOnline()) {
 					CruciblePlayerReward playerReward = getPlayerReward(player.getObjectId());
 					if (nameId != 0) {
-						PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1400237, new DescriptionId(nameId * 2 + 1), points));
+						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_GET_SCORE(new DescriptionId(nameId * 2 + 1), points));
 					}
 					if (!playerReward.isRewarded()) {
 						playerReward.addPoints(points);
@@ -584,7 +585,7 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 									round.add(sp(217557, 357.24625f, 338.30093f, 96.09104f, (byte) 65));
 									round.add(sp(217558, 357.20663f, 359.28714f, 96.091064f, (byte) 75));
 									round.add(sp(217561, 365.109f, 349.1218f, 96.09114f, (byte) 60));
-									emperyanStage.add(new EmpyreanStage(round));
+									empyreanStage.add(new EmpyreanStage(round));
 								}
 
 							}, 47000);
@@ -954,7 +955,7 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 	private void startStage4Round4_1() {
 		List<Npc> round = new ArrayList<>();
 		round.add(sp(217508, 334.06754f, 339.84393f, 96.09091f, (byte) 0));
-		emperyanStage.add(new EmpyreanStage(round));
+		empyreanStage.add(new EmpyreanStage(round));
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 			@Override
@@ -962,7 +963,7 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 				List<Npc> round1 = new ArrayList<>();
 				round1.add(sp(217506, 342.12405f, 364.4922f, 96.09093f, (byte) 0));
 				round1.add(sp(217507, 344.4953f, 365.14444f, 96.09092f, (byte) 0));
-				emperyanStage.add(new EmpyreanStage(round1));
+				empyreanStage.add(new EmpyreanStage(round1));
 			}
 
 		}, 5000);
@@ -980,7 +981,7 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 				List<Npc> round = new ArrayList<>();
 				round.add(sp(217566, 362.87164f, 357.87164f, 96.091125f, (byte) 73));
 				round.add(sp(217563, 359.1135f, 359.6953f, 96.091125f, (byte) 80));
-				emperyanStage.add(new EmpyreanStage(round));
+				empyreanStage.add(new EmpyreanStage(round));
 			}
 
 		}, 43000);
@@ -1025,15 +1026,15 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 			TeleportService.teleportTo(player, mapId, player.getInstanceId(), 381.41684f, 346.78162f, 96.74763f, (byte) 43);
 		}
 
-		PacketSendUtility.sendPacket(player, new SM_INSTANCE_SCORE(new CrucibleScoreInfo(instanceReward, InstanceScoreType.END_PROGRESS), instanceReward,
-			InstanceScoreType.END_PROGRESS));
+		PacketSendUtility.sendPacket(player,
+			new SM_INSTANCE_SCORE(new CrucibleScoreInfo(instanceReward, InstanceScoreType.END_PROGRESS), instanceReward, InstanceScoreType.END_PROGRESS));
 	}
 
 	@Override
 	public void onInstanceDestroy() {
 		super.onInstanceDestroy();
 		npcs.clear();
-		emperyanStage.clear();
+		empyreanStage.clear();
 	}
 
 	@Override
@@ -1074,7 +1075,7 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 	}
 
 	private EmpyreanStage getEmpyreanStage(Npc npc) {
-		for (EmpyreanStage es : emperyanStage) {
+		for (EmpyreanStage es : empyreanStage) {
 			if (es.stageNpcs.contains(npc)) {
 				return es;
 			}

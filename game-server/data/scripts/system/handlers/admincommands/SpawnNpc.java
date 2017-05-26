@@ -44,7 +44,7 @@ public class SpawnNpc extends AdminCommand {
 			return;
 		}
 
-		SpawnTemplate st = SpawnEngine.addNewSpawn(admin.getWorldId(), npcId, admin.getX(), admin.getY(), admin.getZ(), admin.getHeading(), respawnTime);
+		SpawnTemplate st = SpawnEngine.newSpawn(admin.getWorldId(), npcId, admin.getX(), admin.getY(), admin.getZ(), admin.getHeading(), respawnTime);
 		st.setStaticId(staticId);
 		VisibleObject visibleObject = SpawnEngine.spawnObject(st, admin.getInstanceId());
 		String objectName = visibleObject.getObjectTemplate().getName();

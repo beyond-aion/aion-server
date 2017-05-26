@@ -104,7 +104,7 @@ public class ToyPetSpawnAction extends AbstractItemAction {
 				byte heading = (byte) ((player.getHeading() + 60) % 120);
 				int worldId = player.getWorldId();
 				int instanceId = player.getInstanceId();
-				SpawnTemplate spawn = SpawnEngine.addNewSingleTimeSpawn(worldId, npcid, x, y, z, heading);
+				SpawnTemplate spawn = SpawnEngine.newSingleTimeSpawn(worldId, npcid, x, y, z, heading);
 
 				final Kisk kisk = VisibleObjectSpawner.spawnKisk(spawn, instanceId, player);
 				final int objOwnerId = player.getObjectId();

@@ -11,7 +11,6 @@ import com.aionemu.gameserver.utils.chathandlers.ConsoleCommand;
 /**
  * @author ginho1
  */
-
 public class Delete_items extends ConsoleCommand {
 
 	public Delete_items() {

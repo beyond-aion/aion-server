@@ -14,7 +14,6 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 /**
  * @author dta3000
  */
-
 public class _11008LetterOfEncouragement extends QuestHandler {
 
 	public _11008LetterOfEncouragement() {

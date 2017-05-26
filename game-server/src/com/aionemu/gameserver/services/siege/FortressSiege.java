@@ -111,7 +111,7 @@ public class FortressSiege extends Siege<FortressLocation> {
 			for (int i = 0; i < amount; i++) {
 				float x1 = (float) (sn.getX() + Math.cos(Math.PI * Rnd.get()) * Rnd.get(1, 3));
 				float y1 = (float) (sn.getY() + Math.sin(Math.PI * Rnd.get()) * Rnd.get(1, 3));
-				SpawnTemplate temp = SpawnEngine.addNewSiegeSpawn(worldId, race == SiegeRace.ELYOS ? Rnd.get(252408, 252412) : Rnd.get(252413, 252417),
+				SpawnTemplate temp = SpawnEngine.newSiegeSpawn(worldId, race == SiegeRace.ELYOS ? Rnd.get(252408, 252412) : Rnd.get(252413, 252417),
 					getSiegeLocationId(), race, SiegeModType.ASSAULT, x1, y1, sn.getZ(), (byte) 0);
 				SpawnEngine.spawnObject(temp, 1);
 			}

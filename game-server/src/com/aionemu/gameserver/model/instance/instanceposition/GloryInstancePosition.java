@@ -5,7 +5,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 /**
  * @author xTz
  */
-public class GloryInstancePosition extends GenerealInstancePosition {
+public class GloryInstancePosition extends GeneralInstancePosition {
 
 	@Override
 	public void port(Player player, int zone, int position) {

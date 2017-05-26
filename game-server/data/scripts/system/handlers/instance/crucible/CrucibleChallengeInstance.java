@@ -407,7 +407,7 @@ public class CrucibleChallengeInstance extends CrucibleInstance {
 			public void run() {
 				if (!isInstanceDestroyed) {
 					sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDArena_Solo_SB1_START_BROADCAST());
-					SpawnTemplate template = SpawnEngine.addNewSingleTimeSpawn(mapId, 217802, 1780.5665f, 307.40463f, 469.25f, (byte) 0);
+					SpawnTemplate template = SpawnEngine.newSingleTimeSpawn(mapId, 217802, 1780.5665f, 307.40463f, 469.25f, (byte) 0);
 					template.setWalkerId("3003200001");
 					SpawnEngine.spawnObject(template, instanceId);
 				}

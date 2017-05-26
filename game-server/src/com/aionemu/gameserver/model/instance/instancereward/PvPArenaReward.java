@@ -12,7 +12,7 @@ import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.instance.instanceposition.ChaosInstancePosition;
 import com.aionemu.gameserver.model.instance.instanceposition.DisciplineInstancePosition;
-import com.aionemu.gameserver.model.instance.instanceposition.GenerealInstancePosition;
+import com.aionemu.gameserver.model.instance.instanceposition.GeneralInstancePosition;
 import com.aionemu.gameserver.model.instance.instanceposition.GloryInstancePosition;
 import com.aionemu.gameserver.model.instance.instanceposition.HarmonyInstancePosition;
 import com.aionemu.gameserver.model.instance.playerreward.PvPArenaPlayerReward;
@@ -38,9 +38,9 @@ public class PvPArenaReward extends InstanceReward<PvPArenaPlayerReward> {
 	private long instanceTime;
 	private final byte buffId;
 	protected WorldMapInstance instance;
-	private GenerealInstancePosition instancePosition;
+	private GeneralInstancePosition instancePosition;
 
-	public PvPArenaReward(Integer mapId, int instanceId, WorldMapInstance instance) {
+	public PvPArenaReward(int mapId, int instanceId, WorldMapInstance instance) {
 		super(mapId, instanceId);
 		this.instance = instance;
 		boolean isSolo = isSoloArena();
@@ -65,7 +65,7 @@ public class PvPArenaReward extends InstanceReward<PvPArenaPlayerReward> {
 			positionSize = 12;
 			instancePosition = new ChaosInstancePosition();
 		}
-		instancePosition.initsialize(mapId, instanceId);
+		instancePosition.initialize(mapId, instanceId);
 		for (int i = 1; i <= positionSize; i++) {
 			positions.put(i, Boolean.FALSE);
 		}
@@ -123,7 +123,7 @@ public class PvPArenaReward extends InstanceReward<PvPArenaPlayerReward> {
 	}
 
 	public void regPlayerReward(int objectId) {
-		if (!containPlayer(objectId)) {
+		if (!containsPlayer(objectId)) {
 			addPlayerReward(new PvPArenaPlayerReward(objectId, bonusTime, buffId));
 		}
 	}
@@ -227,8 +227,9 @@ public class PvPArenaReward extends InstanceReward<PvPArenaPlayerReward> {
 	}
 
 	public void sendPacket() {
-		instance.forEachPlayer((Player player) -> {
-			PacketSendUtility.sendPacket(player, new SM_INSTANCE_SCORE(getInstanceScoreInfo(player.getObjectId()), getInstanceReward(), getTime()));
+		int time = getTime();
+		instance.forEachPlayer(player -> {
+			PacketSendUtility.sendPacket(player, new SM_INSTANCE_SCORE(getInstanceScoreInfo(player.getObjectId()), this, time));
 		});
 	}
 

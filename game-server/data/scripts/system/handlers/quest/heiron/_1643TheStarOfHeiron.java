@@ -16,7 +16,6 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 /**
  * @author Balthazar
  */
-
 public class _1643TheStarOfHeiron extends QuestHandler {
 
 	public _1643TheStarOfHeiron() {

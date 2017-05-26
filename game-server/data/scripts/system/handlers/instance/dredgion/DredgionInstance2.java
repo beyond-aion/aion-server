@@ -75,7 +75,7 @@ public class DredgionInstance2 extends GeneralInstanceHandler {
 	}
 
 	private boolean containPlayer(int objectId) {
-		return dredgionReward.containPlayer(objectId);
+		return dredgionReward.containsPlayer(objectId);
 	}
 
 	protected void startInstanceTask() {

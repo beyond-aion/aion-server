@@ -47,7 +47,7 @@
 			<spot x="346.237" y="356.817" z="378.701" static_id="23"/>
 		</spawn>
 		<!-- Nochsana General -->
-		<spawn npc_id="290161">
+		<spawn npc_id="256693">
 			<spot x="331.097" y="269.36" z="384.553" h="25"/>
 		</spawn>
 		<!-- Nochsana Guard -->
