@@ -830,7 +830,7 @@ public class Effect implements StatOwner {
 	 * @return actionObserver for this effect template
 	 */
 	public ActionObserver getActionObserver(int i) {
-		return actionObserver[i - 1];
+		return actionObserver == null ? null : actionObserver[i - 1];
 	}
 
 	/**
