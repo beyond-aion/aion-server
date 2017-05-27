@@ -78,6 +78,8 @@ public class RaksangRuinsInstance extends GeneralInstanceHandler {
 			case 236097:
 				switch (++waveKills) {
 					case 28:
+						spawnTask.cancel(false);
+						spawnTask = null;
 						spawns = 0;
 						doors.get(107).setOpen(true);
 						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_TAMES_SOLO_B_END());
@@ -274,21 +276,21 @@ public class RaksangRuinsInstance extends GeneralInstanceHandler {
 		if (detected instanceof Player) {
 			switch (detector.getNpcId()) {
 				case 206197:
-					if (isEventStarted.compareAndSet(false, true)) {
+					if (spawnTask == null && isEventStarted.compareAndSet(false, true)) {
 						detector.getController().delete();
 						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_TAMES_SOLO_A_START());
 						delaySpawn((byte) 3, 20000);
 					}
 					break;
 				case 206198:
-					if (isEventStarted.compareAndSet(false, true)) {
+					if (spawnTask == null && isEventStarted.compareAndSet(false, true)) {
 						detector.getController().delete();
 						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_TAMES_SOLO_B_START());
 						delaySpawn((byte) 1, 10000);
 					}
 					break;
 				case 206199:
-					if (isEventStarted.compareAndSet(true, false)) {
+					if (spawnTask == null && isEventStarted.compareAndSet(true, false)) {
 						detector.getController().delete();
 						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_TAMES_SOLO_B_START());
 						delaySpawn((byte) 2, 10000);
