@@ -128,7 +128,7 @@ public class ConquestOfferingSpawnerAI extends NpcAI {
 			if (respawnTask != null && !respawnTask.isCancelled() && !respawnTask.isDone()) {
 				return;
 			}
-			respawnTask = ThreadPoolManager.getInstance().schedule((Runnable) () -> spawnRandomNpc(), (600000 + (Rnd.get(0, 2) * 300000))); // 10min + random 0 to 10min
+			respawnTask = ThreadPoolManager.getInstance().schedule(() -> spawnRandomNpc(), (600000 + (Rnd.get(0, 2) * 300000))); // 10min + random 0 to 10min
 		}
 	}
 

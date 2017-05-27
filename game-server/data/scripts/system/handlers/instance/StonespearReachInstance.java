@@ -61,7 +61,7 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 		addWorldPoints();
 		if (timer == null) {
 			startTime = System.currentTimeMillis();
-			timer = ThreadPoolManager.getInstance().schedule((Runnable) () -> {
+			timer = ThreadPoolManager.getInstance().schedule(() -> {
 				startTime = System.currentTimeMillis();
 				reward.setInstanceScoreType(InstanceScoreType.START_PROGRESS);
 				sendPacket(0, 0);
@@ -289,7 +289,7 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 	}
 
 	private void startStage1_2() { // minute 1 - 2
-		tasks.add(ThreadPoolManager.getInstance().schedule((Runnable) () -> {
+		tasks.add(ThreadPoolManager.getInstance().schedule(() -> {
 			int npcId = 855765 + Rnd.get(0, 8);
 			rndSpawnTask(50, npcId, 3, 8, 16);
 			rndSpawnTask(2000, npcId, 3, 7, 18);
@@ -305,7 +305,7 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 	}
 
 	private void startStage1_3() { // minute 2 - 3
-		tasks.add(ThreadPoolManager.getInstance().schedule((Runnable) () -> {
+		tasks.add(ThreadPoolManager.getInstance().schedule(() -> {
 			int npcId = 855765 + Rnd.get(0, 8);
 			// 2k points
 			SpawnEngine.spawnObject(SpawnEngine.newSingleTimeSpawn(mapId, 855764, 230.8977f, 285.5198f, 96.42f, (byte) 80), instanceId);
@@ -327,7 +327,7 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 	}
 
 	private void startStage1_4() { // minute 3 - 5
-		tasks.add(ThreadPoolManager.getInstance().schedule((Runnable) () -> {
+		tasks.add(ThreadPoolManager.getInstance().schedule(() -> {
 			// 12k points + 3k points
 			SpawnEngine.spawnObject(SpawnEngine.newSingleTimeSpawn(mapId, 855776, 231.14f, 264.399f, 96.5f, (byte) 10), instanceId); // kaliga 855776
 			rndSpawnTask(35000, 856303, 2, 22, 23);
@@ -336,7 +336,7 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 	}
 
 	private void startStage2_1() { // minute 5 - 6
-		tasks.add(ThreadPoolManager.getInstance().schedule((Runnable) () -> {
+		tasks.add(ThreadPoolManager.getInstance().schedule(() -> {
 			spawnGuardianStone((instanceRace == Race.ELYOS ? true : false), 2);
 			int npcId = 855765 + Rnd.get(0, 8);
 			int npcId2 = 855788 + Rnd.get(0, 8);
@@ -362,7 +362,7 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 	}
 
 	private void startStage2_2() { // minute 6 - 7
-		tasks.add(ThreadPoolManager.getInstance().schedule((Runnable) () -> {
+		tasks.add(ThreadPoolManager.getInstance().schedule(() -> {
 			int npcId = 855765 + Rnd.get(0, 8);
 			int npcId2 = 855788 + Rnd.get(0, 8);
 			// 2,2k points + 1,4k points = 3,6k points
@@ -377,7 +377,7 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 	}
 
 	private void startStage2_3() { // minute 7 - 8
-		tasks.add(ThreadPoolManager.getInstance().schedule((Runnable) () -> {
+		tasks.add(ThreadPoolManager.getInstance().schedule(() -> {
 			int npcId = 855765 + Rnd.get(0, 8);
 			int npcId2 = 855788 + Rnd.get(0, 8);
 			// 4k points
@@ -400,7 +400,7 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 	}
 
 	private void startStage2_4() { // minute 8 - 10
-		tasks.add(ThreadPoolManager.getInstance().schedule((Runnable) () -> {
+		tasks.add(ThreadPoolManager.getInstance().schedule(() -> {
 			// 21k
 			SpawnEngine.spawnObject(SpawnEngine.newSingleTimeSpawn(mapId, 855799, 231.14f, 264.399f, 96.5f, (byte) 10), instanceId); // lanmark
 			// 3k
@@ -411,7 +411,7 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 	}
 
 	private void startStage3_1() { // minute 10 - 11
-		tasks.add(ThreadPoolManager.getInstance().schedule((Runnable) () -> {
+		tasks.add(ThreadPoolManager.getInstance().schedule(() -> {
 			spawnGuardianStone((instanceRace == Race.ELYOS ? true : false), 3);
 			int npcId = 855765 + Rnd.get(0, 8);
 			int npcId2 = 855788 + Rnd.get(0, 8);
@@ -435,7 +435,7 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 	}
 
 	private void startStage3_2() { // minute 11 - 12
-		tasks.add(ThreadPoolManager.getInstance().schedule((Runnable) () -> {
+		tasks.add(ThreadPoolManager.getInstance().schedule(() -> {
 			int npcId = 855765 + Rnd.get(0, 8);
 			int npcId2 = 855811 + Rnd.get(0, 8);
 			// 4,2k points + 3,8k = 8k
@@ -454,7 +454,7 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 	}
 
 	private void startStage3_3() { // minute 12 - 13
-		tasks.add(ThreadPoolManager.getInstance().schedule((Runnable) () -> {
+		tasks.add(ThreadPoolManager.getInstance().schedule(() -> {
 			int npcId = 855765 + Rnd.get(0, 8);
 			// 6k points
 			SpawnEngine.spawnObject(SpawnEngine.newSingleTimeSpawn(mapId, 855810, 230.8977f, 285.5198f, 96.42f, (byte) 80), instanceId);
@@ -473,7 +473,7 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 	}
 
 	private void startStage3_4() { // minute 13 - 14
-		tasks.add(ThreadPoolManager.getInstance().schedule((Runnable) () -> {
+		tasks.add(ThreadPoolManager.getInstance().schedule(() -> {
 			int npcId = 855765 + Rnd.get(0, 8);
 			// 3k + 2k + 1,5k = 6,5k
 			rndSpawnTask(500, 855813, 10, 7, 10);
@@ -488,7 +488,7 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 	}
 
 	private void startStage3_5() { // minute 14 - 16
-		tasks.add(ThreadPoolManager.getInstance().schedule((Runnable) () -> {
+		tasks.add(ThreadPoolManager.getInstance().schedule(() -> {
 			// 30k points
 			SpawnEngine.spawnObject(SpawnEngine.newSingleTimeSpawn(mapId, 855822, 231.14f, 264.399f, 96.5f, (byte) 10), instanceId); // stormwing
 
@@ -500,7 +500,7 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 	}
 
 	private void startStage4_1() { // minute 16 - 17
-		tasks.add(ThreadPoolManager.getInstance().schedule((Runnable) () -> {
+		tasks.add(ThreadPoolManager.getInstance().schedule(() -> {
 			spawnGuardianStone((instanceRace == Race.ELYOS ? true : false), 4);
 			int npcId = 855765 + Rnd.get(0, 8);
 			int npcId2 = 855788 + Rnd.get(0, 8);
@@ -519,7 +519,7 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 	}
 
 	private void startStage4_2() { // minute 17 - 18
-		tasks.add(ThreadPoolManager.getInstance().schedule((Runnable) () -> {
+		tasks.add(ThreadPoolManager.getInstance().schedule(() -> {
 			// 1k + 2k + 6k = 9k
 			rndSpawnTask(500, 855765, 10, 9, 13);
 			rndSpawnTask(2000, 855788, 10, 9, 13);
@@ -543,7 +543,7 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 	}
 
 	private void startStage4_3() { // minute 18 - 19
-		tasks.add(ThreadPoolManager.getInstance().schedule((Runnable) () -> {
+		tasks.add(ThreadPoolManager.getInstance().schedule(() -> {
 			// 1,5k + 1k + 9,6k = 12,1k
 			rndSpawnTask(500, 855765, 15, 9, 13);
 			rndSpawnTask(2000, 855788, 5, 9, 13);
@@ -583,7 +583,7 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 	}
 
 	private void startStage4_4() { // minute 19 - 20
-		tasks.add(ThreadPoolManager.getInstance().schedule((Runnable) () -> {
+		tasks.add(ThreadPoolManager.getInstance().schedule(() -> {
 			// 12k points + 8k points = 20k points
 			// 2k + 6,4k + 6,4k = 14,8k
 			int npcId = 855788 + Rnd.get(0, 8);
@@ -616,7 +616,7 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 	}
 
 	private void startStage4_5() { // minute 20 - 21
-		tasks.add(ThreadPoolManager.getInstance().schedule((Runnable) () -> {
+		tasks.add(ThreadPoolManager.getInstance().schedule(() -> {
 			int npcId = 855765 + Rnd.get(0, 8);
 			int npcId2 = 855788 + Rnd.get(0, 8);
 			// 8k
@@ -650,7 +650,7 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 	}
 
 	private void startFailTask() {
-		failTask = ThreadPoolManager.getInstance().schedule((Runnable) () -> checkRank(reward.getPoints(), false), 1800000); // 30min
+		failTask = ThreadPoolManager.getInstance().schedule(() -> checkRank(reward.getPoints(), false), 1800000); // 30min
 	}
 
 	private void addPoints(Npc npc, int points) {
@@ -684,7 +684,7 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 		if (!reward.isStartProgress()) {
 			return;
 		}
-		tasks.add(ThreadPoolManager.getInstance().schedule((Runnable) () -> {
+		tasks.add(ThreadPoolManager.getInstance().schedule(() -> {
 			if (reward.isStartProgress()) {
 				spawn(npcId, index);
 			}
@@ -720,7 +720,7 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 		if (!reward.isStartProgress()) {
 			return;
 		}
-		tasks.add(ThreadPoolManager.getInstance().schedule((Runnable) () -> {
+		tasks.add(ThreadPoolManager.getInstance().schedule(() -> {
 			if (reward.isStartProgress()) {
 				rndSpawnInRange(npcId, amount, minRange, maxRange);
 			}

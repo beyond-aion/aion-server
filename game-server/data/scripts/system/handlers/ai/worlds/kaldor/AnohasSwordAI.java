@@ -71,7 +71,7 @@ public class AnohasSwordAI extends NpcAI {
 			PacketSendUtility.broadcastPacket(sword, new SM_EMOTION(sword, EmotionType.DIE));
 		}, 10 * 1000, 10 * 1000)); // disable despawn, repeat special die animation instead until anoha spawns
 		VisibleObject flag = spawn(702618, 791.38214f, 488.93655f, 143.47617f, (byte) 30); // map icon
-		ThreadPoolManager.getInstance().schedule((Runnable) () -> {
+		ThreadPoolManager.getInstance().schedule(() -> {
 			Npc berserkAnoha = (Npc) spawn(855263, 791.38214f, 488.93655f, 143.47517f, (byte) 30); // Berserk Anoha
 			berserkAnoha.getObserveController().addObserver(new ActionObserver(ObserverType.DEATH) {
 

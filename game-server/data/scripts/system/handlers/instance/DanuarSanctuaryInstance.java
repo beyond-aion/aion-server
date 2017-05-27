@@ -70,7 +70,7 @@ public class DanuarSanctuaryInstance extends GeneralInstanceHandler {
 					Npc target = instance.getNpc(730866);
 					SkillEngine.getInstance().getSkill(npc, 20385, 1, target).useWithoutPropSkill();
 					if (target != null) {
-						ThreadPoolManager.getInstance().schedule((Runnable) () -> target.getController().onDie(target), 5700);
+						ThreadPoolManager.getInstance().schedule(() -> target.getController().onDie(target), 5700);
 					}
 				}
 				break;

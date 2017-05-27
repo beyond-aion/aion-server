@@ -843,7 +843,7 @@ public class Skill {
 	 * Schedule actions/effects of skill (channeled skills)
 	 */
 	private void schedule(int delay) {
-		ThreadPoolManager.getInstance().schedule((Runnable) () -> {
+		ThreadPoolManager.getInstance().schedule(() -> {
 			if (!isCancelled && skillMethod == SkillMethod.CHARGE) {
 				cancelCast();
 				effector.setCasting(null);

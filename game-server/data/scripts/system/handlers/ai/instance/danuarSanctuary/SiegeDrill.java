@@ -74,7 +74,7 @@ public class SiegeDrill extends NpcAI {
 			player.getObserveController().attach(observer);
 			PacketSendUtility.sendPacket(player, new SM_USE_OBJECT(player.getObjectId(), getObjectId(), getTalkDelay(), startBarAnimation));
 			PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.START_QUESTLOOT, 0, getObjectId()), true);
-			player.getController().addTask(TaskId.ACTION_ITEM_NPC, ThreadPoolManager.getInstance().schedule((Runnable) () -> {
+			player.getController().addTask(TaskId.ACTION_ITEM_NPC, ThreadPoolManager.getInstance().schedule(() -> {
 				PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.END_QUESTLOOT, 0, getObjectId()), true);
 				PacketSendUtility.sendPacket(player, new SM_USE_OBJECT(player.getObjectId(), getObjectId(), getTalkDelay(), cancelBarAnimation));
 				player.getObserveController().removeObserver(observer);
@@ -95,7 +95,7 @@ public class SiegeDrill extends NpcAI {
 			WalkManager.startWalking(this);
 			getOwner().setState(CreatureState.ACTIVE, true);
 			PacketSendUtility.broadcastPacket(getOwner(), new SM_EMOTION(getOwner(), EmotionType.START_EMOTE2, 0, getObjectId()));
-			ThreadPoolManager.getInstance().schedule((Runnable) () -> {
+			ThreadPoolManager.getInstance().schedule(() -> {
 				Npc npc = getPosition().getWorldMapInstance().getNpc(233189);
 				if (npc != null) {
 					getOwner().getSpawn().setWalkerId(null);
@@ -103,7 +103,7 @@ public class SiegeDrill extends NpcAI {
 					getOwner().setTarget(npc);
 
 					SkillEngine.getInstance().getSkill(getOwner(), 20778, 65, npc).useSkill();
-					ThreadPoolManager.getInstance().schedule((Runnable) () -> AIActions.deleteOwner(SiegeDrill.this), 5000);
+					ThreadPoolManager.getInstance().schedule(() -> AIActions.deleteOwner(SiegeDrill.this), 5000);
 				}
 			}, 4800);
 		}

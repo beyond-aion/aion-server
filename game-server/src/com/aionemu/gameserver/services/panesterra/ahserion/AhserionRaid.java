@@ -161,7 +161,7 @@ public class AhserionRaid {
 	}
 
 	private void scheduleObservation() {
-		observeTask = ThreadPoolManager.getInstance().scheduleAtFixedRate((Runnable) () -> {
+		observeTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
 			for (Player player : World.getInstance().getWorldMap(400030000).getMainWorldMapInstance().getPlayersInside()) {
 				if (!player.isStaff()) {
 					if (player.getPanesterraTeam() == null || player.getPanesterraTeam().isEliminated()) {
