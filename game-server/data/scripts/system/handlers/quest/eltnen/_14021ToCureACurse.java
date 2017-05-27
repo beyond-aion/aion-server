@@ -94,7 +94,7 @@ public class _14021ToCureACurse extends QuestHandler {
 								return sendQuestDialog(env, 2376);
 							return false;
 						case SETPRO5:
-							return defaultCloseDialog(env, 9, 10, true, false); // reward
+							return defaultCloseDialog(env, 9, 9, true, false); // reward
 					}
 
 			}

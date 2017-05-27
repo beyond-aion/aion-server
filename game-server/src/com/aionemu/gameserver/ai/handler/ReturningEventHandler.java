@@ -10,6 +10,7 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.geometry.Point3D;
 import com.aionemu.gameserver.model.skill.NpcSkillEntry;
 import com.aionemu.gameserver.skillengine.SkillEngine;
+import com.aionemu.gameserver.skillengine.model.DispelSlotType;
 
 /**
  * @author ATracer
@@ -47,6 +48,7 @@ public class ReturningEventHandler {
 		npcAI.getOwner().getMoveController().clearBackSteps();
 		if (npcAI.setStateIfNot(AIState.IDLE)) {
 			npcAI.setSubStateIfNot(AISubState.NONE);
+			npcAI.getOwner().getEffectController().removeByDispelSlotType(DispelSlotType.BUFF);
 			EmoteManager.emoteStartIdling(npcAI.getOwner());
 			npcAI.think();
 			Npc npc = npcAI.getOwner();

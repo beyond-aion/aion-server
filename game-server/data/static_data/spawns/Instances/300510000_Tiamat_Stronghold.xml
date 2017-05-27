@@ -69,7 +69,7 @@
 		</spawn>
 		<!-- Traitor Kumbanda -->
 		<spawn npc_id="219355">
-			<spot x="867.24609" y="1319.7948" z="399.26215" h="61"/>
+			<spot x="867.24609" y="1319.7948" z="394.5337" h="61"/>
 		</spawn>
 		<!-- Brigade General Terath -->
 		<spawn npc_id="219354">
@@ -262,7 +262,7 @@
 		</spawn>
 		<!-- Frightening Vhasha -->
 		<spawn npc_id="800368">
-			<spot x="721.68878" y="1319.3937" z="401"/>
+			<spot x="721.68878" y="1319.3937" z="398.856"/>
 		</spawn>
 		<!-- Garnon -->
 		<spawn npc_id="800348">

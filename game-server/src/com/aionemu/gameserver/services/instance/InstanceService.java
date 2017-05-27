@@ -285,17 +285,16 @@ public class InstanceService {
 		}
 
 		private boolean canDestroyInstance() {
-			if (!worldMapInstance.getPlayersInside().isEmpty())
+			if (!worldMapInstance.getPlayersInside().isEmpty()) {
+				updateInstanceDestroyTime();
 				return false;
+			}
 			return worldMapInstance.isPersonal() || isRegisteredTeamDisbanded() || System.currentTimeMillis() > instanceDestroyTime - 1000;
 		}
 
 		private boolean isRegisteredTeamDisbanded() {
 			GeneralTeam<?, ?> registeredTeam = worldMapInstance.getRegisteredTeam();
-			if (registeredTeam != null && registeredTeam.isDisbanded()) {
-				return true;
-			}
-			return false;
+			return registeredTeam != null && registeredTeam.isDisbanded();
 		}
 
 		private void updateInstanceDestroyTime() {
@@ -306,8 +305,6 @@ public class InstanceService {
 		public void run() {
 			if (canDestroyInstance())
 				destroyInstance(worldMapInstance);
-			else
-				updateInstanceDestroyTime();
 		}
 
 	}
