@@ -262,7 +262,7 @@
 		</spawn>
 		<!-- Frightening Vhasha -->
 		<spawn npc_id="800368">
-			<spot x="721.68878" y="1319.3937" z="401"/>
+			<spot x="721.68878" y="1319.3937" z="398.856"/>
 		</spawn>
 		<!-- Garnon -->
 		<spawn npc_id="800348">
