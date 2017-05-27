@@ -45,6 +45,7 @@ import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.skillengine.action.Action;
 import com.aionemu.gameserver.skillengine.action.Actions;
 import com.aionemu.gameserver.skillengine.condition.Conditions;
+import com.aionemu.gameserver.skillengine.condition.SkillChargeCondition;
 import com.aionemu.gameserver.skillengine.properties.FirstTargetAttribute;
 import com.aionemu.gameserver.skillengine.properties.Properties;
 import com.aionemu.gameserver.skillengine.properties.Properties.CastState;
@@ -56,59 +57,47 @@ import com.aionemu.gameserver.utils.audit.AuditLogger;
 import com.aionemu.gameserver.world.geo.GeoService;
 
 /**
- * @author ATracer Modified by Wakzashi
+ * @author ATracer
+ * @modified Wakizashi, Neon
  */
 public class Skill {
 
-	private SkillMethod skillMethod = SkillMethod.CAST;
+	private static final Logger log = LoggerFactory.getLogger(Skill.class);
 
 	private final List<Creature> effectedList;
-
 	private Creature firstTarget;
-
 	protected final Creature effector;
 	private final int skillLevel;
-
+	private final SkillMethod skillMethod;
 	protected final StartMovingListener conditionChangeListener;
 	private final DieObserver dieObserver;
-
 	private final SkillTemplate skillTemplate;
-
 	private boolean firstTargetRangeCheck = true;
-
 	private final ItemTemplate itemTemplate;
 	private int itemObjectId = 0;
-
 	private int targetType;
-
 	private boolean chainSuccess = true;
-
 	private boolean isCancelled = false;
 	private boolean blockedPenaltySkill = false;
-
 	private float x;
 	private float y;
 	private float z;
 	private byte h;
-
 	private int boostSkillCost;
-
 	private FirstTargetAttribute firstTargetAttribute;
 	private TargetRangeAttribute targetRangeAttribute;
-
 	/**
 	 * Duration that depends on BOOST_CASTING_TIME
 	 */
+	private int baseDuration;
 	private int duration;
 	private int hitTime;// from CM_CASTSPELL
 	private int serverTime;// time when effect is applied
 	private long castStartTime;
 	private boolean instantSkill = false;
-
 	private String chainCategory = null;
 	private int chainUsageDuration = 0;
 	private volatile boolean isMultiCast = false;
-	private final List<ChargedSkill> chargeSkillList = new ArrayList<>();
 	private float[] chargeTimes;
 	private final boolean isPenaltySkill;
 
@@ -119,8 +108,6 @@ public class Skill {
 		PROVOKED,
 		CHARGE
 	}
-
-	private final Logger log = LoggerFactory.getLogger(Skill.class);
 
 	/**
 	 * Each skill is a separate object upon invocation Skill level will be populated from player SkillList
@@ -152,6 +139,7 @@ public class Skill {
 		this.skillLevel = skillLvl;
 		this.skillTemplate = skillTemplate;
 		this.effector = effector;
+		this.baseDuration = skillTemplate.getDuration();
 		this.duration = skillTemplate.getDuration();
 		this.itemTemplate = itemTemplate;
 		this.isPenaltySkill = isPenaltySkill;
@@ -164,6 +152,8 @@ public class Skill {
 			skillMethod = SkillMethod.PROVOKED;
 		else if (skillTemplate.isCharge())
 			skillMethod = SkillMethod.CHARGE;
+		else
+			skillMethod = SkillMethod.CAST;
 	}
 
 	/**
@@ -288,8 +278,8 @@ public class Skill {
 				lastSkill.fireOnStartCastEvents(npc);
 			}
 		}
-		if (this.duration > 0) {
-			schedule(this.duration);
+		if (duration > 0) {
+			schedule(duration);
 		} else {
 			endCast();
 		}
@@ -321,28 +311,26 @@ public class Skill {
 			duration = 0;
 			return;
 		}
-		if (isCastTimeFixed()) {
-			if (skillMethod != SkillMethod.CHARGE) // base durations of charge skills are set via setDuration
-				duration = skillTemplate.getDuration();
+
+		if (skillMethod == SkillMethod.CHARGE) {
+			SkillChargeCondition chargeCondition = skillTemplate.getSkillChargeCondition();
+			if (chargeCondition != null) {
+				int maxCastTime = 0;
+				ChargeSkillEntry skillCharge = DataManager.SKILL_CHARGE_DATA.getChargedSkillEntry(chargeCondition.getValue());
+				for (ChargedSkill chargedSkill : skillCharge.getSkills())
+					maxCastTime += chargedSkill.getTime();
+				duration = baseDuration = maxCastTime;
+			}
+		}
+
+		if (isCastTimeFixed())
 			return;
-		}
 
-		// Skills that are not affected by boost casting time
-		if (skillMethod != SkillMethod.CHARGE) {
-			duration = 0;
-		}
 		int boostValue;
-		int oldDuration = duration;
-
 		boolean noBaseDurationCap = false;
 		if (skillTemplate.getType() == SkillType.MAGICAL || skillMethod == SkillMethod.CHARGE) {
-			if (skillMethod != SkillMethod.CHARGE) {
-				duration = effector.getGameStats().getPositiveReverseStat(StatEnum.BOOST_CASTING_TIME, skillTemplate.getDuration());
-				boostValue = effector.getGameStats().getPositiveReverseStat(StatEnum.BOOST_CASTING_TIME_SKILL, skillTemplate.getDuration());
-			} else {
-				duration = effector.getGameStats().getPositiveReverseStat(StatEnum.BOOST_CASTING_TIME, duration);
-				boostValue = effector.getGameStats().getPositiveReverseStat(StatEnum.BOOST_CASTING_TIME_SKILL, oldDuration);
-			}
+			duration = effector.getGameStats().getPositiveReverseStat(StatEnum.BOOST_CASTING_TIME, baseDuration);
+			boostValue = effector.getGameStats().getPositiveReverseStat(StatEnum.BOOST_CASTING_TIME_SKILL, baseDuration);
 			switch (skillTemplate.getSubType()) {
 				case SUMMON:
 					boostValue = effector.getGameStats().getPositiveReverseStat(StatEnum.BOOST_CASTING_TIME_SUMMON, boostValue);
@@ -370,21 +358,13 @@ public class Skill {
 					boostValue = effector.getGameStats().getPositiveReverseStat(StatEnum.BOOST_CASTING_TIME_ATTACK, boostValue);
 					break;
 			}
-			if (skillMethod != SkillMethod.CHARGE) {
-				duration -= skillTemplate.getDuration() - boostValue;
-			} else {
-				duration -= oldDuration - boostValue;
-			}
-		} else
-			duration = skillTemplate.getDuration();
+			duration -= baseDuration - boostValue;
+		}
 
 		// 70% of base skill duration cap
 		// No cast speed cap for skill Summoning Alacrity I(skillId: 1778) and Nimble Fingers I(skillId: 2386)
 		if (!noBaseDurationCap) {
-			int baseDurationCap = Math.round(skillTemplate.getDuration() * 0.3f);
-			if (skillMethod == SkillMethod.CHARGE) {
-				baseDurationCap = Math.round(oldDuration * 0.3f);
-			}
+			int baseDurationCap = Math.round(baseDuration * 0.3f);
 			if (duration < baseDurationCap) {
 				duration = baseDurationCap;
 			}
@@ -516,21 +496,21 @@ public class Skill {
 		if (penaltySkill == 0)
 			return;
 
-		SkillTemplate _penaltyTemplate = DataManager.SKILL_DATA.getSkillTemplate(penaltySkill);
-		String stack = _penaltyTemplate.getStack();
-		if (stack != null && ((stack.equals("BA_N_SONGOFWARMTH_ADDEFFECT") || stack.equals("BA_N_SONGOFWIND_ADDEFFECT")))) {
+		SkillTemplate penaltyTemplate = DataManager.SKILL_DATA.getSkillTemplate(penaltySkill);
+		String stack = penaltyTemplate.getStack();
+		if (stack != null && (stack.equals("BA_N_SONGOFWARMTH_ADDEFFECT") || stack.equals("BA_N_SONGOFWIND_ADDEFFECT"))) {
 			SkillEngine.getInstance().applyEffectDirectly(penaltySkill, effector, effector, 0);
 			if (effector instanceof Player) {
 				int count = 1;
 				if (((Player) effector).isInTeam()) {
 					for (Player p : ((Player) effector).getCurrentTeam().getMembers()) {
-						if (count >= _penaltyTemplate.getProperties().getTargetMaxCount()) {
+						if (count >= penaltyTemplate.getProperties().getTargetMaxCount()) {
 							break;
 						}
 						if (p == null || !p.isOnline() || effector.equals(p) || p.getLifeStats().isAlreadyDead()) {
 							continue;
 						}
-						if (PositionUtil.isInRange(effector, p, _penaltyTemplate.getProperties().getEffectiveRange())) {
+						if (PositionUtil.isInRange(effector, p, penaltyTemplate.getProperties().getEffectiveRange())) {
 							SkillEngine.getInstance().applyEffectDirectly(penaltySkill, effector, p, 0);
 							count++;
 						}
@@ -548,33 +528,22 @@ public class Skill {
 	private void startCast() {
 		int targetObjId = firstTarget != null ? firstTarget.getObjectId() : 0;
 		boolean needsCast = itemTemplate != null && itemTemplate.isCombatActivated();
-		float castSpeed;
+		float castSpeed = baseDuration != 0 ? (float) duration / baseDuration
+			: effector.getGameStats().getReverseStat(StatEnum.BOOST_CASTING_TIME, 1000).getCurrent() / 1000f;
 		if (skillMethod == SkillMethod.CHARGE) {
-			castSpeed = (effector.getGameStats().getReverseStat(StatEnum.BOOST_CASTING_TIME, 1000).getCurrent() / 1000f);
-			int time = 0;
-			if (skillTemplate.getSkillChargeCondition() != null) {
-				ChargeSkillEntry skillCharge = DataManager.SKILL_CHARGE_DATA.getChargedSkillEntry(skillTemplate.getSkillChargeCondition().getValue());
-				if (skillCharge != null) {
-					for (ChargedSkill skill : skillCharge.getSkills()) {
-						time += skill.getTime();
-					}
-				}
-				if (time != 0) {
-					castSpeed = (float) duration / time;
-				}
+			SkillChargeCondition chargeCondition = skillTemplate.getSkillChargeCondition();
+			if (chargeCondition != null) {
+				ChargeSkillEntry skillCharge = DataManager.SKILL_CHARGE_DATA.getChargedSkillEntry(chargeCondition.getValue());
+				chargeTimes = new float[skillCharge.getSkills().size()];
+				for (int i = 0; i < skillCharge.getSkills().size(); i++)
+					chargeTimes[i] = skillCharge.getSkills().get(i).getTime() * castSpeed;
 			}
-			for (int i = 0; i < chargeTimes.length; i++) {
-				chargeTimes[i] = (chargeTimes[i] * castSpeed);
-			}
-		} else {
-			castSpeed = skillTemplate.getDuration() != 0 ? (float) duration / skillTemplate.getDuration()
-				: effector.getGameStats().getReverseStat(StatEnum.BOOST_CASTING_TIME, 1000).getCurrent() / 1000f;
 		}
 		if (skillMethod == SkillMethod.CAST || skillMethod == SkillMethod.CHARGE || needsCast) {
 			switch (targetType) {
 				case 0: // PlayerObjectId as Target
 					PacketSendUtility.broadcastPacketAndReceive(effector,
-						new SM_CASTSPELL(effector, skillTemplate.getSkillId(), skillLevel, targetType, targetObjId, this.duration, castSpeed));
+						new SM_CASTSPELL(effector, skillTemplate.getSkillId(), skillLevel, targetType, targetObjId, duration, castSpeed));
 					if (effector instanceof Npc) {
 						ShoutEventHandler.onCast((NpcAI) effector.getAi(), firstTarget);
 					}
@@ -582,17 +551,17 @@ public class Skill {
 
 				case 3: // Target not in sight?
 					PacketSendUtility.broadcastPacketAndReceive(effector,
-						new SM_CASTSPELL(effector, skillTemplate.getSkillId(), skillLevel, targetType, targetObjId, this.duration, castSpeed));
+						new SM_CASTSPELL(effector, skillTemplate.getSkillId(), skillLevel, targetType, targetObjId, duration, castSpeed));
 					break;
 
 				case 1: // XYZ as Target
 					PacketSendUtility.broadcastPacketAndReceive(effector,
-						new SM_CASTSPELL(effector, skillTemplate.getSkillId(), skillLevel, targetType, x, y, z, this.duration, castSpeed));
+						new SM_CASTSPELL(effector, skillTemplate.getSkillId(), skillLevel, targetType, x, y, z, duration, castSpeed));
 					break;
 			}
 		} else if (skillMethod == SkillMethod.ITEM && duration > 0) {
-			PacketSendUtility.broadcastPacketAndReceive(effector, new SM_ITEM_USAGE_ANIMATION(effector.getObjectId(), firstTarget.getObjectId(),
-				(this.itemObjectId == 0 ? 0 : this.itemObjectId), itemTemplate.getTemplateId(), this.duration, 0, 0));
+			PacketSendUtility.broadcastPacketAndReceive(effector,
+				new SM_ITEM_USAGE_ANIMATION(effector.getObjectId(), firstTarget.getObjectId(), itemObjectId, itemTemplate.getTemplateId(), duration, 0, 0));
 		}
 
 		if (firstTarget != null && !firstTarget.equals(effector) && !skillTemplate.hasResurrectEffect() && (duration > 0)
@@ -1097,10 +1066,6 @@ public class Skill {
 		this.h = h;
 	}
 
-	public void setDuration(int t) {
-		this.duration = t;
-	}
-
 	public float getX() {
 		return x;
 	}
@@ -1247,14 +1212,6 @@ public class Skill {
 
 	public long getCastStartTime() {
 		return castStartTime;
-	}
-
-	public List<ChargedSkill> getChargeSkillList() {
-		return chargeSkillList;
-	}
-
-	public void setChargeTimes(float[] chargeTimes) {
-		this.chargeTimes = chargeTimes;
 	}
 
 	public float[] getChargeTimes() {
