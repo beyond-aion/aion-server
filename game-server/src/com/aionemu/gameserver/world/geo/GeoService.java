@@ -78,9 +78,9 @@ public class GeoService {
 		return GeoDataConfig.GEO_DOORS_ENABLE ? geoData.getMap(worldId).getDoorName(worldId, meshFile, x, y, z) : null;
 	}
 
-	public CollisionResults getCollisions(VisibleObject object, float x, float y, float z, boolean changeDirection, byte intentions) {
-		return geoData.getMap(object.getWorldId()).getCollisions(object.getX(), object.getY(), object.getZ(), x, y, z, changeDirection, false,
-			object.getInstanceId(), intentions);
+	public CollisionResults getCollisions(VisibleObject object, float x, float y, float z, byte intentions) {
+		return geoData.getMap(object.getWorldId()).getCollisions(object.getX(), object.getY(), object.getZ(), x, y, z, object.getInstanceId(),
+			intentions);
 	}
 
 	/**

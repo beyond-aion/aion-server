@@ -107,19 +107,17 @@ public class GeoMap extends Node {
 		CollisionResults results = new CollisionResults(CollisionIntention.PHYSICAL.getId(), false, 1);
 		Vector3f pos = new Vector3f(x, y, 4000);
 		Vector3f dir = new Vector3f(x, y, 0);
-		Float limit = pos.distance(dir);
 		dir.subtractLocal(pos).normalizeLocal();
 		Ray r = new Ray(pos, dir);
-		r.setLimit(limit);
+		r.setLimit(4000);
 		collideWith(r, results);
 		Vector3f terrain = null;
-		if (terrainData.length == 1) {
+		if (terrainData.length == 1)
 			terrain = new Vector3f(x, y, terrainData[0] / 32f);
-		}
 		else
-			terrain = terraionCollision(x, y, r);
-		if (terrain != null) {
-			CollisionResult result = new CollisionResult(terrain, Math.max(0, Math.max(4000 - terrain.z, terrain.z)));
+			terrain = terrainCollision(x, y, r);
+		if (terrain != null && terrain.z <= 4000) {
+			CollisionResult result = new CollisionResult(terrain, 4000 - terrain.z);
 			results.addCollision(result);
 		}
 		if (results.size() == 0) {
@@ -132,17 +130,15 @@ public class GeoMap extends Node {
 		CollisionResults results = new CollisionResults(CollisionIntention.PHYSICAL.getId(), false, instanceId);
 		Vector3f pos = new Vector3f(x, y, z + 2);
 		Vector3f dir = new Vector3f(x, y, z - 100);
-		Float limit = pos.distance(dir);
 		dir.subtractLocal(pos).normalizeLocal();
 		Ray r = new Ray(pos, dir);
-		r.setLimit(limit);
+		r.setLimit(102);
 		collideWith(r, results);
 		Vector3f terrain = null;
 		if (terrainData.length == 1) {
 			if (terrainData[0] != 0)
 				terrain = new Vector3f(x, y, terrainData[0] / 32f);
-		}
-		else
+		} else
 			terrain = terraionCollision(x, y, r);
 		if (terrain != null && terrain.z > 0 && terrain.z < z + 2) {
 			CollisionResult result = new CollisionResult(terrain, Math.abs(z - terrain.z + 2));
@@ -164,22 +160,7 @@ public class GeoMap extends Node {
 		}
 		Vector3f start = new Vector3f(x, y, z);
 		Vector3f end = new Vector3f(targetX, targetY, targetZ);
-		Vector3f pos = new Vector3f(x, y, z + 1);
-		Vector3f dir = new Vector3f(targetX, targetY, targetZ + 1);
-
-		CollisionResults results = new CollisionResults(intentions, false, instanceId);
-
-		Float limit = pos.distance(dir);
-		dir.subtractLocal(pos).normalizeLocal();
-		Ray r = new Ray(pos, dir);
-		r.setLimit(limit);
-		Vector3f terrain = calculateTerrainCollision(start.x, start.y, end.x, end.y, r);
-		if (terrain != null) {
-			CollisionResult result = new CollisionResult(terrain, terrain.distance(pos));
-			results.addCollision(result);
-		}
-
-		collideWith(r, results);
+		CollisionResults results = getCollisions(x, y, z + 1, targetX, targetY, targetZ + 1, instanceId, intentions);
 
 		float geoZ = 0;
 		if (results.size() == 0) {
@@ -200,8 +181,7 @@ public class GeoMap extends Node {
 		float distance = results.getClosestCollision().getDistance();
 		if (distance < 1)
 			return start;
-		// -1m
-		contactPoint = contactPoint.subtract(dir);
+		contactPoint.z -= 1; // -1m (offset from getCollisions call)
 		if (!fly && changeDirection) {
 			if (zChecked1 > 0 && contactPoint.x == x && contactPoint.y == y && contactPoint.z == zChecked1)
 				contactPoint.z = z;
@@ -216,17 +196,13 @@ public class GeoMap extends Node {
 		return contactPoint;
 	}
 	
-	public CollisionResults getCollisions(float x, float y, float z, float targetX, float targetY, float targetZ, boolean changeDirection,
-		boolean fly, int instanceId, byte intentions) {
-		if (!fly && changeDirection) {
-			z = getZ(x, y, z, instanceId);
-		}
-		Vector3f pos = new Vector3f(x, y, z + 1);
-		Vector3f dir = new Vector3f(targetX, targetY, targetZ + 1);
+	public CollisionResults getCollisions(float x, float y, float z, float targetX, float targetY, float targetZ, int instanceId, byte intentions) {
+		Vector3f pos = new Vector3f(x, y, z);
+		Vector3f dir = new Vector3f(targetX, targetY, targetZ);
 
 		CollisionResults results = new CollisionResults(intentions, false, instanceId);
 
-		Float limit = pos.distance(dir);
+		float limit = pos.distance(dir);
 		dir.subtractLocal(pos).normalizeLocal();
 		Ray r = new Ray(pos, dir);
 		r.setLimit(limit);
@@ -241,7 +217,6 @@ public class GeoMap extends Node {
 	}
 
 	private Vector3f calculateTerrainCollision(float x, float y, float targetX, float targetY, Ray ray) {
-
 		float x2 = targetX - x;
 		float y2 = targetY - y;
 		int intD = (int) Math.abs(ray.getLimit());
@@ -249,14 +224,14 @@ public class GeoMap extends Node {
 		for (float s = 0; s < intD; s += 2) {
 			float tempX = x + (x2 * s / ray.getLimit());
 			float tempY = y + (y2 * s / ray.getLimit());
-			Vector3f result = terraionCollision(tempX, tempY, ray);
+			Vector3f result = terrainCollision(tempX, tempY, ray);
 			if (result != null)
 				return result;
 		}
 		return null;
 	}
 
-	private Vector3f terraionCollision(float x, float y, Ray ray) {
+	private Vector3f terrainCollision(float x, float y, Ray ray) {
 		y /= 2f;
 		x /= 2f;
 		int xInt = (int) x;
@@ -319,7 +294,7 @@ public class GeoMap extends Node {
 		for (float s = 2; s < intD; s += 2) {
 			float tempX = targetX + (x2 * s / distance);
 			float tempY = targetY + (y2 * s / distance);
-			Vector3f result = terraionCollision(tempX, tempY, r);
+			Vector3f result = terrainCollision(tempX, tempY, r);
 			if (result != null)
 				return false;
 		}
