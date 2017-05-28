@@ -139,7 +139,7 @@ public class GeoMap extends Node {
 			if (terrainData[0] != 0)
 				terrain = new Vector3f(x, y, terrainData[0] / 32f);
 		} else
-			terrain = terraionCollision(x, y, r);
+			terrain = terrainCollision(x, y, r);
 		if (terrain != null && terrain.z > 0 && terrain.z < z + 2) {
 			CollisionResult result = new CollisionResult(terrain, Math.abs(z - terrain.z + 2));
 			results.addCollision(result);
