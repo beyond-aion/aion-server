@@ -6,7 +6,6 @@ import org.slf4j.LoggerFactory;
 import com.aionemu.gameserver.configs.main.GeoDataConfig;
 import com.aionemu.gameserver.geoEngine.collision.CollisionResults;
 import com.aionemu.gameserver.geoEngine.math.Vector3f;
-import com.aionemu.gameserver.geoEngine.models.GeoMap;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.siege.SiegeNpc;
@@ -44,34 +43,32 @@ public class GeoService {
 	}
 
 	/**
-	 * @param object
-	 * @return
+	 * @return The surface Z coordinate at the objects position, nearest to the given zMax value at the given position or {@link Float#NaN} if not found
+	 *         / less than zMin.
 	 */
-	public float getZ(VisibleObject object) {
-		return geoData.getMap(object.getWorldId()).getZ(object.getX(), object.getY(), object.getZ(), object.getInstanceId());
+	public float getZ(VisibleObject object, float zMax, float zMin) {
+		return getZ(object.getWorldId(), object.getX(), object.getY(), zMax, zMin, object.getInstanceId());
 	}
 
 	/**
-	 * @param worldId
-	 * @param x
-	 * @param y
-	 * @param z
-	 * @param defaultUp
-	 * @return
-	 */
-	public float getZ(int worldId, float x, float y, float z, float defaultUp, int instanceId) {
-		GeoMap map = geoData.getMap(worldId);
-		return map.getZ(x, y, map instanceof DummyGeoMap ? z + defaultUp : z, instanceId);
-	}
-
-	/**
-	 * @param worldId
-	 * @param x
-	 * @param y
-	 * @return
+	 * @return The highest found surface Z coordinate at the given position or {@link Float#NaN} if not found.
 	 */
 	public float getZ(int worldId, float x, float y) {
 		return geoData.getMap(worldId).getZ(x, y);
+	}
+
+	/**
+	 * @return The surface Z coordinate nearest to the given Z value at the given position or {@link Float#NaN} if not found.
+	 */
+	public float getZ(int worldId, float x, float y, float z, int instanceId) {
+		return geoData.getMap(worldId).getZ(x, y, z, instanceId);
+	}
+
+	/**
+	 * @return The surface Z coordinate nearest to the given zMax value at the given position or {@link Float#NaN} if not found / less than zMin.
+	 */
+	public float getZ(int worldId, float x, float y, float zMax, float zMin, int instanceId) {
+		return geoData.getMap(worldId).getZ(x, y, zMax, zMin, instanceId);
 	}
 
 	public String getDoorName(int worldId, String meshFile, float x, float y, float z) {
@@ -100,10 +97,10 @@ public class GeoService {
 		if (limit <= 0)
 			return true;
 
-		//a great fix (Copyright (c) (R) Yeats (TM) 2015-2016) @NA Dev Yeats
+		// a great fix (Copyright (c) (R) Yeats (TM) 2015-2016) @NA Dev Yeats
 		if (object.getWorldId() == 301500000) {
-			return (PositionUtil.getDistance(231.14f, 264.399f, object.getX(), object.getY()) < 26.7f &&
-					PositionUtil.getDistance(231.14f, 264.399f, target.getX(), target.getY()) < 26.7f);
+			return (PositionUtil.getDistance(231.14f, 264.399f, object.getX(), object.getY()) < 26.7f
+				&& PositionUtil.getDistance(231.14f, 264.399f, target.getX(), target.getY()) < 26.7f);
 		}
 
 		return geoData.getMap(object.getWorldId()).canSee(object.getX(), object.getY(),

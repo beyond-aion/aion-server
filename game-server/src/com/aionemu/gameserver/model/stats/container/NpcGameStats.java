@@ -233,7 +233,7 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
 		PacketSendUtility.broadcastPacket(owner, new SM_EMOTION(owner, EmotionType.START_EMOTE2, 0, 0));
 	}
 
-	public final long getLastGeoZUpdate() {
+	public final long getNextGeoZUpdate() {
 		return lastGeoZUpdate;
 	}
 

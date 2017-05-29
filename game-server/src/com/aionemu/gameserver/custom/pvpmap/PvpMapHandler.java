@@ -109,7 +109,9 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 			double radian = Math.toRadians(PositionUtil.convertHeadingToAngle(player.getHeading()));
 			float x = player.getX() + (float) (Math.cos(radian) * 2);
 			float y = player.getY() + (float) (Math.sin(radian) * 2);
-			float z = GeoService.getInstance().getZ(player.getWorldId(), x, y, player.getZ(), 0.5f, instanceId);
+			float z = GeoService.getInstance().getZ(player.getWorldId(), x, y, player.getZ(), instanceId);
+			if (Float.isNaN(z))
+				z = player.getZ() + 0.5f;
 			spawn(833543, x, y, z, PositionUtil.getHeadingTowards(x, y, player.getX(), player.getY()));
 		}
 	}

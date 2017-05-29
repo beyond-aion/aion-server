@@ -180,7 +180,9 @@ public class ModifiedIronWallAggressiveAI extends AggressiveNpcAI {
 				case 21165:
 					ThreadPoolManager.getInstance().schedule(() -> {
 						WorldPosition pos = getRandomTargetPosition();
-						World.getInstance().updatePosition(getOwner(), pos.getX(), pos.getY(), GeoService.getInstance().getZ(getOwner().getWorldId(), pos.getX(), pos.getY(), pos.getZ(), 0.5f, getOwner().getInstanceId()), pos.getHeading());
+						if (pos == null)
+							return;
+						World.getInstance().updatePosition(getOwner(), pos.getX(), pos.getY(), pos.getZ(), pos.getHeading());
 						PacketSendUtility.broadcastPacketAndReceive(getOwner(), new SM_FORCED_MOVE(getOwner(), getOwner()));
 						ThreadPoolManager.getInstance().schedule(() -> getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21171, 1, 100, 0, 6000, true))), 500);
 					}, 500);

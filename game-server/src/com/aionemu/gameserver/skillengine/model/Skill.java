@@ -1173,8 +1173,8 @@ public class Skill {
 		// If creature is at least 2 meters above the terrain, ground skill cannot be applied
 		if (GeoDataConfig.GEO_ENABLE) {
 			if (isGroundSkill()) {
-				float zOffset = object.getZ() - GeoService.getInstance().getZ(object);
-				if (zOffset > 1.0f || zOffset < -2.0f)
+				float geoZ = GeoService.getInstance().getZ(object, object.getZ() + 2, object.getZ() - 100);
+				if (!Float.isNaN(geoZ) && object.getZ() - geoZ > 2f)
 					return false;
 			}
 			return GeoService.getInstance().canSee(getFirstTarget(), object);
