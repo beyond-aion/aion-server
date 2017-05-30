@@ -545,6 +545,8 @@ public abstract class QuestHandler extends AbstractQuestHandler {
 			if (sameNpc) {
 				return sendQuestEndDialog(env);
 			}
+			if (env.getVisibleObject() instanceof Npc)
+				((Npc) env.getVisibleObject()).getAi().onCreatureEvent(AIEventType.DIALOG_FINISH, env.getPlayer());
 			return closeDialogWindow(env);
 		}
 		return false;
