@@ -31,7 +31,7 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
 	private int cachedState;
 	private AISubState cachedSubState;
 	private Stat2 cachedSpeedStat;
-	private long lastGeoZUpdate;
+	private long nextGeoZUpdate;
 	private long lastChangeTarget = 0;
 
 	public NpcGameStats(Npc owner) {
@@ -234,15 +234,15 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
 	}
 
 	public final long getNextGeoZUpdate() {
-		return lastGeoZUpdate;
+		return nextGeoZUpdate;
 	}
 
 	/**
-	 * @param lastGeoZUpdate
-	 *          the lastGeoZUpdate to set
+	 * @param nextGeoZUpdate
+	 *          the nextGeoZUpdate to set
 	 */
-	public void setLastGeoZUpdate(long lastGeoZUpdate) {
-		this.lastGeoZUpdate = lastGeoZUpdate;
+	public void setNextGeoZUpdate(long nextGeoZUpdate) {
+		this.nextGeoZUpdate = nextGeoZUpdate;
 	}
 
 	public void resetFightStats() {

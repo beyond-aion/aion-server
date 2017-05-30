@@ -176,7 +176,6 @@ public class NpcMoveController extends CreatureMoveController<Npc> {
 	}
 
 	/**
-	 * @param npc
 	 * @param creature
 	 * @return
 	 */
@@ -272,7 +271,7 @@ public class NpcMoveController extends CreatureMoveController<Npc> {
 					newZ = geoZ;
 				}
 			}
-			owner.getGameStats().setLastGeoZUpdate(System.currentTimeMillis() + 1000);
+			owner.getGameStats().setNextGeoZUpdate(System.currentTimeMillis() + 1000);
 		}
 		if (owner.getAi().isLogging()) {
 			AILogger.moveinfo(owner, "newX=" + newX + " newY=" + newY + " newZ=" + newZ + " mask=" + movementMask);
