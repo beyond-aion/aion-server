@@ -111,13 +111,6 @@ public class GeoMap extends Node {
 	}
 
 	/**
-	 * @return The Z coordinate nearest to the given Z value at the given position or {@link Float#NaN} if not found.
-	 */
-	public float getZ(float x, float y, float z, int instanceId) {
-		return getZ(x, y, z + 2, z - 100, instanceId);
-	}
-
-	/**
 	 * @return The surface Z coordinate nearest to the given zMax value at the given position or {@link Float#NaN} if not found / less than zMin.
 	 */
 	public float getZ(float x, float y, float zMax, float zMin, int instanceId) {
@@ -144,50 +137,30 @@ public class GeoMap extends Node {
 		return results.getClosestCollision().getContactPoint().z;
 	}
 
-	public Vector3f getClosestCollision(float x, float y, float z, float targetX, float targetY, float targetZ, boolean changeDirection, boolean fly,
-		int instanceId, byte intentions) {
-		float zChecked1 = 0;
-		float zChecked2 = 0;
-		if (!fly && changeDirection) {
-			zChecked1 = z;
-			z = getZ(x, y, z, instanceId);
+	public Vector3f getClosestCollision(float x, float y, float z, float targetX, float targetY, float targetZ, boolean atNearGroundZ, int instanceId,
+		byte intentions) {
+		CollisionResult result = getCollisions(x, y, z + 1, targetX, targetY, targetZ + 1, instanceId, intentions).getClosestCollision();
+		if (result == null) {
+			Vector3f end = new Vector3f(targetX, targetY, targetZ);
+			if (atNearGroundZ)
+				findAndSetGroundZNearPoint(end, instanceId);
+			return end;
 		}
-		Vector3f start = new Vector3f(x, y, z);
-		Vector3f end = new Vector3f(targetX, targetY, targetZ);
-		CollisionResults results = getCollisions(x, y, z + 1, targetX, targetY, targetZ + 1, instanceId, intentions);
 
-		float geoZ = 0;
-		if (results.size() == 0) {
-			if (fly)
-				return end;
-			if (zChecked1 > 0 && targetX == x && targetY == y && targetZ == zChecked1)
-				geoZ = z;
-			else {
-				zChecked2 = targetZ;
-				geoZ = getZ(targetX, targetY, targetZ, instanceId);
-			}
-			if (Math.abs(geoZ - targetZ) < start.distance(end)) {
-				return end.setZ(geoZ);
-			}
-			return start;
-		}
-		Vector3f contactPoint = results.getClosestCollision().getContactPoint();
-		float distance = results.getClosestCollision().getDistance();
-		if (distance < 1)
-			return start;
+		if (result.getDistance() < 1)
+			return new Vector3f(x, y, z);
+		Vector3f contactPoint = result.getContactPoint();
 		contactPoint.z -= 1; // -1m (offset from getCollisions call)
-		if (!fly && changeDirection) {
-			if (zChecked1 > 0 && contactPoint.x == x && contactPoint.y == y && contactPoint.z == zChecked1)
-				contactPoint.z = z;
-			else if (zChecked2 > 0 && contactPoint.x == targetX && contactPoint.y == targetY && contactPoint.z == zChecked2)
-				contactPoint.z = geoZ;
-			else
-				contactPoint.z = getZ(contactPoint.x, contactPoint.y, contactPoint.z, instanceId);
-		}
-		if (!fly && Math.abs(start.z - contactPoint.z) > distance)
-			return start;
+		if (atNearGroundZ)
+			findAndSetGroundZNearPoint(contactPoint, instanceId);
 
 		return contactPoint;
+	}
+
+	private void findAndSetGroundZNearPoint(Vector3f point, int instanceId) {
+		float geoZ = getZ(point.x, point.y, point.z + 2, point.z - 2, instanceId);
+		if (!Float.isNaN(geoZ))
+			point.setZ(geoZ);
 	}
 
 	public CollisionResults getCollisions(float x, float y, float z, float targetX, float targetY, float targetZ, int instanceId, byte intentions) {
@@ -294,8 +267,7 @@ public class GeoMap extends Node {
 			if (result != null)
 				return false;
 		}
-		CollisionResults results = new CollisionResults((byte) (CollisionIntention.PHYSICAL.getId() | CollisionIntention.DOOR.getId()), false,
-			instanceId);
+		CollisionResults results = new CollisionResults(CollisionIntention.DEFAULT_COLLISIONS.getId(), false, instanceId);
 		int collisions = this.collideWith(r, results);
 		return (results.size() == 0 && collisions == 0);
 	}

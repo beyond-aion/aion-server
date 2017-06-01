@@ -4,7 +4,6 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 
-import com.aionemu.gameserver.geoEngine.collision.CollisionIntention;
 import com.aionemu.gameserver.geoEngine.math.Vector3f;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.skillengine.model.DashStatus;
@@ -30,17 +29,7 @@ public class MoveBehindEffect extends DamageEffect {
 		double radian = Math.toRadians(PositionUtil.convertHeadingToAngle(effected.getHeading()));
 		float x1 = (float) (Math.cos(Math.PI + radian) * 1.3F);
 		float y1 = (float) (Math.sin(Math.PI + radian) * 1.3F);
-		float z;
-		if (effector.isInFlyingState())
-			z = effected.getZ();
-		else {
-			z = GeoService.getInstance().getZ(effected.getWorldId(), effected.getX() + x1, effected.getY() + y1, effected.getZ(), effected.getInstanceId());
-			if (Float.isNaN(z))
-				z = effected.getZ() + 0.5f;
-		}
-		byte intentions = (byte) (CollisionIntention.PHYSICAL.getId() | CollisionIntention.DOOR.getId());
-		Vector3f closestCollision = GeoService.getInstance().getClosestCollision(effector, effected.getX() + x1, effected.getY() + y1, z, false,
-			intentions);
+		Vector3f closestCollision = GeoService.getInstance().getClosestCollision(effector, effected.getX() + x1, effected.getY() + y1, effected.getZ());
 		World.getInstance().updatePosition(effector, closestCollision.getX(), closestCollision.getY(), closestCollision.getZ(), effected.getHeading());
 		// set target position for SM_CASTSPELL_RESULT
 		effect.getSkill().setTargetPosition(closestCollision.getX(), closestCollision.getY(), closestCollision.getZ(), effected.getHeading());

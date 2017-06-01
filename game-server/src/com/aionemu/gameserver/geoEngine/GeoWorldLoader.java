@@ -280,7 +280,7 @@ public class GeoWorldLoader {
 			Box boxMesh = new Box(boundingBox.getMin(new Vector3f()), boundingBox.getMax(new Vector3f()));
 			geom.setMesh(boxMesh);
 			// Assign flags if they are missing in geo (geo bugs)
-			geom.setCollisionFlags((short) ((CollisionIntention.DOOR.getId() | CollisionIntention.PHYSICAL.getId()) << 8));
+			geom.setCollisionFlags((short) (CollisionIntention.DEFAULT_COLLISIONS.getId() << 8));
 			break;
 		}
 

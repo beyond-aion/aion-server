@@ -14,7 +14,6 @@ import com.aionemu.gameserver.ai.event.AIEventType;
 import com.aionemu.gameserver.configs.main.GeoDataConfig;
 import com.aionemu.gameserver.controllers.observer.ActionObserver;
 import com.aionemu.gameserver.controllers.observer.ObserverType;
-import com.aionemu.gameserver.geoEngine.collision.CollisionIntention;
 import com.aionemu.gameserver.geoEngine.math.Vector3f;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -129,8 +128,7 @@ public class FearEffect extends EffectTemplate {
 				float maxDistance = effected.getGameStats().getMovementSpeedFloat();
 				float x1 = (float) (Math.cos(radian) * maxDistance);
 				float y1 = (float) (Math.sin(radian) * maxDistance);
-				byte intentions = (byte) (CollisionIntention.PHYSICAL.getId() | CollisionIntention.DOOR.getId());
-				Vector3f closestCollision = GeoService.getInstance().getClosestCollision(effected, x + x1, y + y1, effected.getZ(), true, intentions);
+				Vector3f closestCollision = GeoService.getInstance().getClosestCollision(effected, x + x1, y + y1, effected.getZ());
 				if (effected.isFlying()) {
 					closestCollision.setZ(effected.getZ());
 				}

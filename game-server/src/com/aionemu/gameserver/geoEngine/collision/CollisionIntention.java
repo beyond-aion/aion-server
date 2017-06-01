@@ -1,6 +1,7 @@
 package com.aionemu.gameserver.geoEngine.collision;
 
 import java.util.EnumSet;
+import java.util.Set;
 
 /**
  * @author Rolandas
@@ -14,6 +15,7 @@ public enum CollisionIntention {
 	DOOR(1 << 4), // Doors which have a state opened/closed
 	EVENT(1 << 5), // Appear on event only
 	MOVEABLE(1 << 6), // Ships, shugo boxes
+	DEFAULT_COLLISIONS(PHYSICAL.getId() | DOOR.getId()),
 	// This is used for nodes only, means they allow to enumerate their child geometries
 	// Nodes which do not specify it won't let their children enumerated for collisions,
 	// to speed up processing
@@ -29,7 +31,7 @@ public enum CollisionIntention {
 		return id;
 	}
 
-	public static EnumSet<CollisionIntention> getFlagsFormValue(int value) {
+	public static Set<CollisionIntention> getFlagsFromValue(int value) {
 		EnumSet<CollisionIntention> result = EnumSet.noneOf(CollisionIntention.class);
 		for (CollisionIntention m : CollisionIntention.values()) {
 			if ((value & m.getId()) == m.getId()) {

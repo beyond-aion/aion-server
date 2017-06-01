@@ -189,7 +189,7 @@ public class ChatUtil {
 
 		float geoZ;
 		if (z > 0)
-			geoZ = GeoService.getInstance().getZ(mapId, x, y, z, 1); // search relative to input z (max diff = z +2/-100)
+			geoZ = GeoService.getInstance().getZ(mapId, x, y, z, 1); // search relative to input z (max diff = z ±2)
 		else
 			geoZ = GeoService.getInstance().getZ(mapId, x, y);
 

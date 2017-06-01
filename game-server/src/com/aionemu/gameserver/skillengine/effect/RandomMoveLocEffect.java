@@ -5,7 +5,6 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
-import com.aionemu.gameserver.geoEngine.collision.CollisionIntention;
 import com.aionemu.gameserver.geoEngine.math.Vector3f;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.skillengine.model.DashStatus;
@@ -51,13 +50,8 @@ public class RandomMoveLocEffect extends EffectTemplate {
 			double radian = Math.toRadians(PositionUtil.convertHeadingToAngle(effector.getHeading()));
 			float x1 = (float) (Math.cos(Math.PI * direction + radian) * distance);
 			float y1 = (float) (Math.sin(Math.PI * direction + radian) * distance);
-			float targetZ = GeoService.getInstance().getZ(effector.getWorldId(), effector.getX() + x1, effector.getY() + y1, effector.getZ() + 1.5f,
-				effector.getInstanceId());
-			if (Float.isNaN(targetZ))
-				targetZ = effector.getZ() + 1.5f;
-			byte intentions = (byte) (CollisionIntention.PHYSICAL.getId() | CollisionIntention.DOOR.getId());
-			Vector3f closestCollision = GeoService.getInstance().getClosestCollision(effector, effector.getX() + x1, effector.getY() + y1, targetZ, false,
-				intentions);
+			Vector3f closestCollision = GeoService.getInstance().getClosestCollision(effector, effector.getX() + x1, effector.getY() + y1,
+				effector.getZ() + 1f);
 			effect.getSkill().setTargetPosition(closestCollision.getX(), closestCollision.getY(), closestCollision.getZ(), effector.getHeading());
 		} else
 			effect.getSkill().setTargetPosition(effector.getX(), effector.getY(), effector.getZ(), effector.getHeading());

@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.configs.main.GeoDataConfig;
+import com.aionemu.gameserver.geoEngine.collision.CollisionIntention;
 import com.aionemu.gameserver.geoEngine.collision.CollisionResults;
 import com.aionemu.gameserver.geoEngine.math.Vector3f;
 import com.aionemu.gameserver.model.gameobjects.Creature;
@@ -61,7 +62,7 @@ public class GeoService {
 	 * @return The surface Z coordinate nearest to the given Z value at the given position or {@link Float#NaN} if not found.
 	 */
 	public float getZ(int worldId, float x, float y, float z, int instanceId) {
-		return geoData.getMap(worldId).getZ(x, y, z, instanceId);
+		return getZ(worldId, x, y, z + 2, z - 2, instanceId);
 	}
 
 	/**
@@ -112,9 +113,13 @@ public class GeoService {
 		return geoData.getMap(worldId).canSee(x, y, z + 1, x1, y1, z1 + 1, limit, instanceId);
 	}
 
-	public Vector3f getClosestCollision(Creature object, float x, float y, float z, boolean changeDirection, byte intentions) {
-		return geoData.getMap(object.getWorldId()).getClosestCollision(object.getX(), object.getY(), object.getZ(), x, y, z, changeDirection,
-			object.isInFlyingState(), object.getInstanceId(), intentions);
+	public Vector3f getClosestCollision(Creature object, float x, float y, float z) {
+		return getClosestCollision(object, x, y, z, true, CollisionIntention.DEFAULT_COLLISIONS.getId());
+	}
+
+	public Vector3f getClosestCollision(Creature object, float x, float y, float z, boolean atNearGroundZ, byte intentions) {
+		return geoData.getMap(object.getWorldId()).getClosestCollision(object.getX(), object.getY(), object.getZ(), x, y, z, atNearGroundZ,
+			object.getInstanceId(), intentions);
 	}
 
 	public GeoType getConfiguredGeoType() {

@@ -13,7 +13,6 @@ import com.aionemu.gameserver.controllers.SiegeWeaponController;
 import com.aionemu.gameserver.controllers.SummonController;
 import com.aionemu.gameserver.controllers.effect.EffectController;
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.geoEngine.collision.CollisionIntention;
 import com.aionemu.gameserver.geoEngine.math.Vector3f;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.Creature;
@@ -265,7 +264,7 @@ public class VisibleObjectSpawner {
 		NpcTemplate template = DataManager.NPC_DATA.getNpcTemplate(npcId);
 		double radian = Math.toRadians(PositionUtil.convertHeadingToAngle(owner.getHeading()));
 		Vector3f pos = GeoService.getInstance().getClosestCollision(owner, owner.getX() + (float) (Math.cos(radian) * 7),
-			owner.getY() + (float) (Math.sin(radian) * 7), owner.getZ(), false, CollisionIntention.PHYSICAL.getId());
+			owner.getY() + (float) (Math.sin(radian) * 7), owner.getZ());
 		SpawnTemplate spawn = SpawnEngine.newSingleTimeSpawn(owner.getWorldId(), npcId, pos.getX(), pos.getY(), pos.getZ(), (byte) 0);
 		final Npc postman = new Npc(IDFactory.getInstance().nextId(), new NpcController(), spawn, template);
 		postman.setCreatorId(owner.getObjectId());
@@ -281,7 +280,7 @@ public class VisibleObjectSpawner {
 		NpcTemplate template = DataManager.NPC_DATA.getNpcTemplate(npcId);
 		double radian = Math.toRadians(PositionUtil.convertHeadingToAngle(owner.getHeading()));
 		Vector3f pos = GeoService.getInstance().getClosestCollision(owner, owner.getX() + (float) (Math.cos(radian) * 1),
-			owner.getY() + (float) (Math.sin(radian) * 1), owner.getZ(), false, CollisionIntention.PHYSICAL.getId());
+			owner.getY() + (float) (Math.sin(radian) * 1), owner.getZ());
 		SpawnTemplate spawn = SpawnEngine.newSingleTimeSpawn(owner.getWorldId(), npcId, pos.getX(), pos.getY(), pos.getZ(), (byte) 0);
 		final Npc functionalNpc = new Npc(IDFactory.getInstance().nextId(), new NpcController(), spawn, template);
 		functionalNpc.setKnownlist(new PlayerAwareKnownList(functionalNpc));

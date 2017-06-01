@@ -184,7 +184,7 @@ public class NpcMoveController extends CreatureMoveController<Npc> {
 		if (GeoDataConfig.GEO_NPC_MOVE && creature.isInFlyingState() && !owner.isInFlyingState()) {
 			if (owner.getGameStats().checkGeoNeedUpdate()) {
 				float lowestZ = Math.min(creature.getZ(), owner.getZ());
-				float geoZ = GeoService.getInstance().getZ(creature, creature.getZ() + 2, lowestZ - 2);
+				float geoZ = GeoService.getInstance().getZ(creature, creature.getZ() + 2, lowestZ - 5);
 				if (!Float.isNaN(geoZ))
 					cachedTargetZ = geoZ;
 				else

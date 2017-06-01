@@ -4,7 +4,6 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 
-import com.aionemu.gameserver.geoEngine.collision.CollisionIntention;
 import com.aionemu.gameserver.geoEngine.math.Vector3f;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -32,19 +31,8 @@ public class StumbleEffect extends EffectTemplate {
 		double radian = Math.toRadians(PositionUtil.convertHeadingToAngle(effector.getHeading()));
 		float x1 = (float) (Math.cos(radian) * 1.5f);
 		float y1 = (float) (Math.sin(radian) * 1.5f);
-		float z = effected.getZ();
-		byte intentions = (byte) (CollisionIntention.PHYSICAL.getId() | CollisionIntention.DOOR.getId());
-		Vector3f closestCollision = GeoService.getInstance().getClosestCollision(effected, effected.getX() + x1, effected.getY() + y1, z,
-			false, intentions);
-		float zAfterColl = closestCollision.z;
-		x1 = closestCollision.x;
-		y1 = closestCollision.y;
-		if (Math.abs(z - zAfterColl) > 0.1f && !effected.getMoveController().isJumping()) {
-			x1 = effected.getX();
-			y1 = effected.getY();
-			zAfterColl = z;
-		}
-		effect.setTargetLoc(x1, y1, zAfterColl);
+		Vector3f closestCollision = GeoService.getInstance().getClosestCollision(effected, effected.getX() + x1, effected.getY() + y1, effected.getZ());
+		effect.setTargetLoc(closestCollision.getX(), closestCollision.getY(), closestCollision.getZ());
 		effect.addToEffectedController();
 	}
 
@@ -58,8 +46,8 @@ public class StumbleEffect extends EffectTemplate {
 		effected.getEffectController().removeStunEffects();
 		// effected.getMoveController().abortMove();
 		World.getInstance().updatePosition(effected, effect.getTargetX(), effect.getTargetY(), effect.getTargetZ(), effected.getHeading());
-		PacketSendUtility.broadcastPacketAndReceive(effect.getEffected(), new SM_FORCED_MOVE(effect.getEffector(), effect.getEffected().getObjectId(),
-			effect.getTargetX(), effect.getTargetY(), effect.getTargetZ()));
+		PacketSendUtility.broadcastPacketAndReceive(effect.getEffected(),
+			new SM_FORCED_MOVE(effect.getEffector(), effect.getEffected().getObjectId(), effect.getTargetX(), effect.getTargetY(), effect.getTargetZ()));
 		effect.getEffected().getEffectController().setAbnormal(AbnormalState.STUMBLE);
 		effect.setAbnormal(AbnormalState.STUMBLE);
 	}
