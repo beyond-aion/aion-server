@@ -1173,7 +1173,7 @@
 					</spawn>
 					<!-- Hrimfaxi -->
 					<spawn npc_id="799328" respawn_time="295">
-						<spot x="1854.463" y="1127" z="324.1364"/>
+						<spot x="1857.1221" y="1126.03" z="324.1364" h="101"/>
 					</spawn>
 					<!-- Hroth -->
 					<spawn npc_id="832246" respawn_time="295">
@@ -1256,7 +1256,7 @@
 					</spawn>
 					<!-- Hrimfaxi -->
 					<spawn npc_id="799328">
-						<spot x="1854.463" y="1127" z="324.1364"/>
+						<spot x="1857.1221" y="1126.03" z="324.1364" h="101"/>
 					</spawn>
 					<!-- Naregin -->
 					<spawn npc_id="832071">
