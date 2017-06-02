@@ -151,7 +151,7 @@ public class EnragedQueenModorAI extends AggressiveNpcAI {
 
 	private void startIceTask() {
 		cancelSkillTask();
-		skillTask = ThreadPoolManager.getInstance().scheduleAtFixedRate((Runnable) () -> {
+		skillTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
 			getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21179, 1, 100, true)));
 		}, 12000, 20000);
 	}

@@ -15,7 +15,7 @@ public class ChargeSkill extends Skill {
 	}
 
 	@Override
-	public void calculateSkillDuration() {
+	public void calculateAndSetCastDuration() {
 
 	}
 

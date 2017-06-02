@@ -37,7 +37,7 @@ public class ConquestOfferingBuffNpcAI extends ActionItemNpcAI {
 	}
 
 	private void startDespawnTask() {
-		despawnTask = ThreadPoolManager.getInstance().schedule((Runnable) () -> {
+		despawnTask = ThreadPoolManager.getInstance().schedule(() -> {
 			if (getOwner() != null)
 				getOwner().getController().delete();
 		}, 65000);

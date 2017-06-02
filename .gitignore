@@ -2,6 +2,7 @@ commons/target/
 chat-server/log/
 chat-server/target/
 game-server/cache/
+game-server/config/mygs.properties
 game-server/log/
 game-server/target/
 login-server/log/

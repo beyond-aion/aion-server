@@ -187,10 +187,14 @@ public class ChatUtil {
 			}
 		}
 
+		float geoZ;
 		if (z > 0)
-			z = GeoService.getInstance().getZ(mapId, x, y, z, 0, 0); // search relative to input z (max diff = z +2/-100)
+			geoZ = GeoService.getInstance().getZ(mapId, x, y, z, 1); // search relative to input z (max diff = z +2/-100)
 		else
-			z = GeoService.getInstance().getZ(mapId, x, y);
+			geoZ = GeoService.getInstance().getZ(mapId, x, y);
+
+		if (!Float.isNaN(geoZ))
+			z = geoZ;
 
 		return World.getInstance().createPosition(mapId, x, y, z, (byte) 0, 0);
 	}

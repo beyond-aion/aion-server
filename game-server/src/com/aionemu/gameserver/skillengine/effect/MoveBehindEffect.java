@@ -30,7 +30,14 @@ public class MoveBehindEffect extends DamageEffect {
 		double radian = Math.toRadians(PositionUtil.convertHeadingToAngle(effected.getHeading()));
 		float x1 = (float) (Math.cos(Math.PI + radian) * 1.3F);
 		float y1 = (float) (Math.sin(Math.PI + radian) * 1.3F);
-		float z = effector.isInFlyingState() ? effected.getZ() : GeoService.getInstance().getZ(effected.getWorldId(), effected.getX() + x1, effected.getY() + y1, effected.getZ(), 0.5f, effected.getInstanceId());
+		float z;
+		if (effector.isInFlyingState())
+			z = effected.getZ();
+		else {
+			z = GeoService.getInstance().getZ(effected.getWorldId(), effected.getX() + x1, effected.getY() + y1, effected.getZ(), effected.getInstanceId());
+			if (Float.isNaN(z))
+				z = effected.getZ() + 0.5f;
+		}
 		byte intentions = (byte) (CollisionIntention.PHYSICAL.getId() | CollisionIntention.DOOR.getId());
 		Vector3f closestCollision = GeoService.getInstance().getClosestCollision(effector, effected.getX() + x1, effected.getY() + y1, z, false,
 			intentions);

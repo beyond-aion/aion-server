@@ -13,6 +13,7 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.services.DialogService;
 import com.aionemu.gameserver.services.TownService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
  * @author ATracer
@@ -72,9 +73,15 @@ public class TalkEventHandler {
 	public static void onFinishTalk(NpcAI npcAI, Creature creature) {
 		Npc owner = npcAI.getOwner();
 		if (owner.isTargeting(creature.getObjectId())) {
-			if (npcAI.getState() != AIState.FOLLOWING)
+			if (npcAI.getState() == AIState.FOLLOWING) {
+				npcAI.think();
+			} else {
 				owner.setTarget(null);
-			npcAI.think();
+				ThreadPoolManager.getInstance().schedule(() -> {
+					if (npcAI.getOwner().getTarget() == null)
+						npcAI.think();
+				}, 750);
+			}
 		}
 	}
 

@@ -106,10 +106,10 @@ public class DanuarMysticariumInstance extends GeneralInstanceHandler {
 
 	private void startTasks() {
 		tasks = new ArrayList<>();
-		tasks.add(ThreadPoolManager.getInstance().schedule((Runnable) () -> sendMsg(1402802), 125000));
-		tasks.add(ThreadPoolManager.getInstance().schedule((Runnable) () -> sendMsg(1402803), 155000));
-		tasks.add(ThreadPoolManager.getInstance().schedule((Runnable) () -> sendMsg(1402804), 175000));
-		tasks.add(ThreadPoolManager.getInstance().schedule((Runnable) () -> {
+		tasks.add(ThreadPoolManager.getInstance().schedule(() -> sendMsg(1402802), 125000));
+		tasks.add(ThreadPoolManager.getInstance().schedule(() -> sendMsg(1402803), 155000));
+		tasks.add(ThreadPoolManager.getInstance().schedule(() -> sendMsg(1402804), 175000));
+		tasks.add(ThreadPoolManager.getInstance().schedule(() -> {
 			instance.getNpcs().stream().filter(npc -> npc != null && (npc.getNpcId() == 219958 || npc.getNpcId() == 219959 ||
 					npc.getNpcId() == 702700 || npc.getNpcId() == 702701)).forEach(npc -> npc.getController().delete());
 			spawn(702715, 169.366f, 208.93f, 188.02f, (byte) 0);

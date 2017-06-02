@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import com.aionemu.commons.utils.Rnd;
+import com.aionemu.gameserver.configs.main.MembershipConfig;
 import com.aionemu.gameserver.configs.main.SecurityConfig;
 import com.aionemu.gameserver.controllers.observer.ActionObserver;
 import com.aionemu.gameserver.controllers.observer.ObserverType;
@@ -51,7 +52,7 @@ public class GatherableController extends VisibleObjectController<Gatherable> {
 			}
 		}
 
-		if (player.isInPlayerMode(PlayerMode.RIDE)) {
+		if (player.isInPlayerMode(PlayerMode.RIDE) && !player.hasPermission(MembershipConfig.GATHERING_ALLOW_ON_MOUNT)) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_GATHER_RESTRICTION_RIDE());
 			return;
 		}

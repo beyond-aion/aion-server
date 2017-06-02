@@ -62,6 +62,7 @@ public class _24051InvesetigatetheDisappearance extends QuestHandler {
 					case SETPRO1:
 						return defaultCloseDialog(env, 0, 1); // 1
 					case SETPRO4:
+						removeQuestItem(env, 182215375, 1);
 						return defaultCloseDialog(env, 3, 4); // 4
 				}
 			} else if (targetId == 204749) { // Paeru
@@ -107,11 +108,8 @@ public class _24051InvesetigatetheDisappearance extends QuestHandler {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
-			int var = qs.getQuestVarById(0);
-			if (var == 2) {
-				// TODO: readable text dialog
-				return HandlerResult.fromBoolean(useQuestItem(env, item, 2, 3, false)); // 3
-			}
+			changeQuestStep(env, 2, 3);
+			return HandlerResult.SUCCESS; // 3
 		}
 		return HandlerResult.FAILED;
 	}

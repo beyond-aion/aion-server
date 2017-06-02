@@ -159,11 +159,11 @@ public class NpcMoveController extends CreatureMoveController<Npc> {
 				if (!(target instanceof Creature)) {
 					return;
 				}
-				if (PositionUtil.getDistance(target, pointX, pointY, pointZ) > MOVE_CHECK_OFFSET) {
+				if (!PositionUtil.isInRange(target, pointX, pointY, pointZ, MOVE_CHECK_OFFSET)) {
 					Creature creature = (Creature) target;
 					pointX = target.getX();
 					pointY = target.getY();
-					pointZ = getTargetZ(owner, creature);
+					pointZ = getTargetZ(creature);
 				}
 				moveToLocation(pointX, pointY, pointZ);
 				break;
@@ -176,15 +176,19 @@ public class NpcMoveController extends CreatureMoveController<Npc> {
 	}
 
 	/**
-	 * @param npc
 	 * @param creature
 	 * @return
 	 */
-	private float getTargetZ(Npc npc, Creature creature) {
+	private float getTargetZ(Creature creature) {
 		float targetZ = creature.getZ();
-		if (GeoDataConfig.GEO_NPC_MOVE && creature.isInFlyingState() && !npc.isInFlyingState()) {
-			if (npc.getGameStats().checkGeoNeedUpdate()) {
-				cachedTargetZ = GeoService.getInstance().getZ(creature);
+		if (GeoDataConfig.GEO_NPC_MOVE && creature.isInFlyingState() && !owner.isInFlyingState()) {
+			if (owner.getGameStats().checkGeoNeedUpdate()) {
+				float lowestZ = Math.min(creature.getZ(), owner.getZ());
+				float geoZ = GeoService.getInstance().getZ(creature, creature.getZ() + 2, lowestZ - 2);
+				if (!Float.isNaN(geoZ))
+					cachedTargetZ = geoZ;
+				else
+					cachedTargetZ = lowestZ;
 			}
 			targetZ = cachedTargetZ;
 		}
@@ -256,15 +260,18 @@ public class NpcMoveController extends CreatureMoveController<Npc> {
 		float newY = (targetDestY - ownerY) * distFraction + ownerY;
 		float newZ = (targetDestZ - ownerZ) * distFraction + ownerZ;
 		if (GeoDataConfig.GEO_NPC_MOVE && GeoDataConfig.GEO_ENABLE && owner.getAi().getSubState() != AISubState.WALK_PATH
-			&& owner.getAi().getState() != AIState.RETURNING && owner.getGameStats().getLastGeoZUpdate() < System.currentTimeMillis()) {
+			&& owner.getAi().getState() != AIState.RETURNING && owner.getGameStats().getNextGeoZUpdate() < System.currentTimeMillis()) {
 			// fix Z if npc doesn't move to spawn point
 			if (owner.getSpawn().getX() != targetDestX || owner.getSpawn().getY() != targetDestY || owner.getSpawn().getZ() != targetDestZ) {
-				float geoZ = GeoService.getInstance().getZ(owner.getWorldId(), newX, newY, newZ, 0, owner.getInstanceId());
-				if (Math.abs(newZ - geoZ) > 1)
-					directionChanged = true;
-				newZ = geoZ;
+				float geoZ = GeoService.getInstance().getZ(owner.getWorldId(), newX, newY, newZ + 2, Math.min(newZ, ownerZ) - 2,
+					owner.getInstanceId());
+				if (!Float.isNaN(geoZ)) {
+					if (Math.abs(newZ - geoZ) > 1)
+						directionChanged = true;
+					newZ = geoZ;
+				}
 			}
-			owner.getGameStats().setLastGeoZUpdate(System.currentTimeMillis() + 1000);
+			owner.getGameStats().setNextGeoZUpdate(System.currentTimeMillis() + 1000);
 		}
 		if (owner.getAi().isLogging()) {
 			AILogger.moveinfo(owner, "newX=" + newX + " newY=" + newY + " newZ=" + newZ + " mask=" + movementMask);

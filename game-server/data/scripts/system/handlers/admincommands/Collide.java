@@ -54,7 +54,7 @@ public class Collide extends AdminCommand {
 			PacketSendUtility.sendMessage(admin, "From target direction:");
 		PacketSendUtility.sendMessage(admin, "Target: X=" + x + "; Y=" + y + "; Z=" + z);
 
-		CollisionResults results = GeoService.getInstance().getCollisions(target, targetX, targetY, targetZ, false, intentions);
+		CollisionResults results = GeoService.getInstance().getCollisions(target, targetX, targetY, targetZ, intentions);
 		CollisionResult closest = results.getClosestCollision();
 
 		if (results.size() == 0) {
@@ -93,7 +93,7 @@ public class Collide extends AdminCommand {
 			PacketSendUtility.sendMessage(admin, "Admin: X=" + admin.getX() + "; Y=" + admin.getY() + "; Z=" + admin.getZ());
 
 			results = GeoService.getInstance().getCollisions(admin, target.getX(), target.getY(),
-				target.getZ() + target.getObjectTemplate().getBoundRadius().getUpper() / 2, false, intentions);
+				target.getZ() + target.getObjectTemplate().getBoundRadius().getUpper() / 2, intentions);
 			closestOpposite = results.getClosestCollision();
 
 			if (results.size() == 0) {

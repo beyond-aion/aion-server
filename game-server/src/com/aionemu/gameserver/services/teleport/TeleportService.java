@@ -338,7 +338,9 @@ public class TeleportService {
 			double radian = Math.toRadians(PositionUtil.convertHeadingToAngle(spot.getHeading()));
 			x += Math.cos(radian) * (1f + npcTemplate.getBoundRadius().getFront());
 			y += Math.sin(radian) * (1f + npcTemplate.getBoundRadius().getFront());
-			z = GeoService.getInstance().getZ(searchResult.getWorldId(), x, y, spot.getZ(), 0.5f, 1);
+			z = GeoService.getInstance().getZ(searchResult.getWorldId(), x, y, spot.getZ(), 1);
+			if (Float.isNaN(z))
+				z = spot.getZ() + 0.5f;
 		}
 
 		if (player.getWorldId() != searchResult.getWorldId()) {

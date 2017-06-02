@@ -7,6 +7,9 @@ public class MembershipConfig {
 	@Property(key = "gameserver.membership.types", defaultValue = "Premium")
 	public static String[] MEMBERSHIP_TYPES;
 
+	@Property(key = "gameserver.membership.gathering.allow_on_mount", defaultValue = "10")
+	public static byte GATHERING_ALLOW_ON_MOUNT;
+
 	@Property(key = "gameserver.instances.title.requirement", defaultValue = "10")
 	public static byte INSTANCES_TITLE_REQ;
 
@@ -61,12 +64,6 @@ public class MembershipConfig {
 	@Property(key = "gameserver.character.additional.enable", defaultValue = "10")
 	public static byte CHARACTER_ADDITIONAL_ENABLE;
 
-	@Property(key = "gameserver.advanced.friendlist.enable", defaultValue = "10")
-	public static byte ADVANCED_FRIENDLIST_ENABLE;
-
 	@Property(key = "gameserver.character.additional.count", defaultValue = "8")
 	public static byte CHARACTER_ADDITIONAL_COUNT;
-
-	@Property(key = "gameserver.advanced.friendlist.size", defaultValue = "90")
-	public static int ADVANCED_FRIENDLIST_SIZE;
 }

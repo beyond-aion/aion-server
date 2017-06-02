@@ -48,7 +48,9 @@ public class RedNosedGrankerKingAI extends OneDmgAI {
 		WorldPosition p = getPosition();
 		float x = p.getX() + (float) (Math.cos(directionRadian) * distance);
 		float y = p.getY() + (float) (Math.sin(directionRadian) * distance);
-		float z = GeoService.getInstance().getZ(p.getMapId(), x, y, p.getZ(), 0, p.getInstanceId());
+		float z = GeoService.getInstance().getZ(p.getMapId(), x, y, p.getZ(), p.getInstanceId());
+		if (Float.isNaN(z))
+			z = p.getZ() + 0.5f;
 		return (Npc) spawn(npcId, x, y, z, (byte) Rnd.get(120));
 	}
 

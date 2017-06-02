@@ -6,7 +6,6 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import com.aionemu.gameserver.configs.main.CustomConfig;
-import com.aionemu.gameserver.configs.main.MembershipConfig;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_FRIEND_NOTIFY;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_FRIEND_UPDATE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -97,9 +96,7 @@ public class FriendList implements Iterable<Friend> {
 	}
 
 	public boolean isFull() {
-		int MAX_FRIENDS = player.hasPermission(MembershipConfig.ADVANCED_FRIENDLIST_ENABLE) ? MembershipConfig.ADVANCED_FRIENDLIST_SIZE
-			: CustomConfig.FRIENDLIST_SIZE;
-		return getSize() >= MAX_FRIENDS;
+		return getSize() >= CustomConfig.FRIENDLIST_SIZE;
 	}
 
 	/**
