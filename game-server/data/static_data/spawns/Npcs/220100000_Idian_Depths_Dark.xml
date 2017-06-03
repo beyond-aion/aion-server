@@ -1070,5 +1070,33 @@
 		<spawn npc_id="730826" respawn_time="295">
 			<spot x="824.9318" y="297.4168" z="518.3914" h="73" static_id="571"/>
 		</spawn>
+		<!-- Blackened Grave -->
+		<spawn npc_id="231002" respawn_time="12390">
+			<spot x="386.84775" y="892.8634" z="559.375" h="61"/>
+		</spawn>
+		<!-- Bloodcrazed Grigol -->
+		<spawn npc_id="231000" respawn_time="12390">
+			<spot x="1155.4711" y="304.087" z="560.589" h="60"/>
+		</spawn>
+		<!-- Captain Rata -->
+		<spawn npc_id="230995" respawn_time="12390">
+			<spot x="1269.3951" y="767.5218" z="563.34973" h="60"/>
+		</spawn>
+		<!-- Roaring Kamara -->
+		<spawn npc_id="231196" respawn_time="12390">
+			<spot x="1272.7653" y="1353.5145" z="539.45105" h="86"/>
+		</spawn>
+		<!-- Promion the Undying -->
+		<spawn npc_id="230999" respawn_time="12390">
+			<spot x="737.13336" y="1112.9" z="517.78217" h="60"/>
+		</spawn>
+		<!-- Queen Serusia -->
+		<spawn npc_id="231003" respawn_time="12390">
+			<spot x="528.7135" y="612.96954" z="559.68176" h="90"/>
+		</spawn>
+		<!-- Slavir the Ancient -->
+		<spawn npc_id="230998" respawn_time="12390">
+			<spot x="870.9132" y="1041.5397" z="543.44257" random_walk="5"/>
+		</spawn>
 	</spawn_map>
 </spawns>
