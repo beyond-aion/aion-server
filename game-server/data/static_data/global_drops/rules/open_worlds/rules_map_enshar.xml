@@ -381,10 +381,10 @@
 			<gd_npc npc_id="219931" /><!-- Usurper Demaluk -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="110101870" /><!-- Wave Song Jacket -->
-			<gd_item id="110301862" /><!-- Wave Song Jerkin -->
-			<gd_item id="110551189" /><!-- Wave Song Hauberk -->
-			<gd_item id="110601657" /><!-- Wave Song Breastplate -->
+			<gd_item id="110101891" /><!-- Sea Feast Jacket -->
+			<gd_item id="110301884" /><!-- Sea Feast Jerkin -->
+			<gd_item id="110551215" /><!-- Sea Feast Hauberk -->
+			<gd_item id="110601675" /><!-- Sea Feast Breastplate -->
 		</gd_items>
 	</gd_rule> 
 	<gd_rule rule_name="Named Eternal Gloves" base_chance="70" fixed_chance="true">
@@ -397,10 +397,10 @@
 			<gd_npc npc_id="219930" /><!-- Infernomane Vortile -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="111101685" /><!-- Wave Song Gloves -->
-			<gd_item id="111301800" /><!-- Wave Song Vambraces -->
-			<gd_item id="111501748" /><!-- Wave Song Handguards -->
-			<gd_item id="111601620" /><!-- Wave Song Gauntlets -->
+			<gd_item id="111101706" /><!-- Sea Feast Gloves -->
+			<gd_item id="111301822" /><!-- Sea Feast Vambraces -->
+			<gd_item id="111501774" /><!-- Sea Feast Handguards -->
+			<gd_item id="111601638" /><!-- Sea Feast Gauntlets -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Eternal Shoulders" base_chance="70" fixed_chance="true">
@@ -413,10 +413,10 @@
 			<gd_npc npc_id="219931" /><!-- Usurper Demaluk -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="112101634" /><!-- Wave Song Pauldrons -->
-			<gd_item id="112301739" /><!-- Wave Song Shoulderguards -->
-			<gd_item id="112501687" /><!-- Wave Song Spaulders -->
-			<gd_item id="112601602" /><!-- Wave Song Shoulderplates -->
+			<gd_item id="112101655" /><!-- Sea Feast Pauldrons -->
+			<gd_item id="112301761" /><!-- Sea Feast Shoulderguards -->
+			<gd_item id="112501713" /><!-- Sea Feast Spaulders -->
+			<gd_item id="112601620" /><!-- Sea Feast Shoulderplates -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Eternal Pants" base_chance="70" fixed_chance="true">
@@ -429,10 +429,10 @@
 			<gd_npc npc_id="219932" /><!-- Deputy Brigade General Amar -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="113101696" /><!-- Wave Song Leggings -->
-			<gd_item id="113301831" /><!-- Wave Song Legguards -->
-			<gd_item id="113501766" /><!-- Wave Song Chausses -->
-			<gd_item id="113601603" /><!-- Wave Song Greaves -->
+			<gd_item id="113101717" /><!-- Sea Feast Leggings -->
+			<gd_item id="113301853" /><!-- Sea Feast Legguards -->
+			<gd_item id="113501792" /><!-- Sea Feast Chausses -->
+			<gd_item id="113601621" /><!-- Sea Feast Greaves -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Eternal Boots" base_chance="70" fixed_chance="true">
@@ -445,10 +445,10 @@
 			<gd_npc npc_id="219932" /><!-- Deputy Brigade General Amar -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="114101730" /><!-- Wave Song Shoes -->
-			<gd_item id="114301868" /><!-- Wave Song Boots -->
-			<gd_item id="114501776" /><!-- Wave Song Brogans -->
-			<gd_item id="114601610" /><!-- Wave Song Plate Boots -->
+			<gd_item id="114101751" /><!-- Sea Feast Shoes -->
+			<gd_item id="114301890" /><!-- Sea Feast Boots -->
+			<gd_item id="114501802" /><!-- Sea Feast Brogans -->
+			<gd_item id="114601628" /><!-- Sea Feast Plate Boots -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Power Shards" base_chance="100" min_count="500" max_count="500" fixed_chance="true">

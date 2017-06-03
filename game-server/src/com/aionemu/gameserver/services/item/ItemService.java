@@ -137,8 +137,11 @@ public class ItemService {
 		}
 		if (sourceItem.getGodStone() != null)
 			newItem.addGodStone(sourceItem.getGodStone().getItemId(), sourceItem.getGodStone().getActivatedCount());
-		if (sourceItem.getEnchantLevel() > 0)
+		if (sourceItem.getEnchantLevel() > 0) {
 			newItem.setEnchantLevel(sourceItem.getEnchantLevel());
+			newItem.setAmplified(sourceItem.isAmplified());
+			newItem.setBuffSkill(sourceItem.getBuffSkill());
+		}
 		if (sourceItem.getTempering() > 0)
 			newItem.setTempering(sourceItem.getTempering());
 		if (sourceItem.isSoulBound())
