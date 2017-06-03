@@ -16,9 +16,11 @@ import com.aionemu.commons.utils.xml.JAXBUtil;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.templates.item.enums.EquipType;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.AdminService;
+import com.aionemu.gameserver.services.EnchantService;
 import com.aionemu.gameserver.services.item.ItemFactory;
 import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
@@ -110,7 +112,18 @@ public class Wish extends ConsoleCommand {
 
 					if (newItem == null)
 						return;
-					newItem.setEnchantLevel(enchant);
+					if (enchant > 255)
+						enchant = 255;
+					if (newItem.getItemTemplate().getEquipmentType() != EquipType.PLUME) {
+						newItem.setEnchantLevel(enchant);
+						if (enchant > newItem.getItemTemplate().getMaxEnchantLevel()) {
+							newItem.setAmplified(true);
+							if (enchant >= 20)
+								newItem.setBuffSkill(EnchantService.getEquipBuff(newItem));
+						}
+					} else {
+						newItem.setTempering(enchant);
+					}
 					addedCount = addCount - ItemService.addItem(target, newItem);
 				} else {
 					addedCount = addCount - ItemService.addItem(target, itemId, addCount, true);
