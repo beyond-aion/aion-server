@@ -1,5 +1,338 @@
 <?xml version="1.0" encoding="utf-8"?>
 <global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../global_rules.xsd">
+	<gd_rule rule_name="Named Ancient Coin" min_count="3" max_count="10" base_chance="100">
+		<gd_maps>
+			<gd_map map_id="210090000" /><!-- Idian Depths Light -->
+			<gd_map map_id="220100000" /><!-- Idian Depths Dark -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="230995" /> <!-- Captain Rata -->
+			<gd_npc npc_id="230998" /> <!-- Slavir the Ancient -->
+			<gd_npc npc_id="230999" /> <!-- Promion the Undying -->
+			<gd_npc npc_id="231000" /> <!-- Bloodcrazed Grigol -->
+			<gd_npc npc_id="284262" /> <!-- Executioner Penemon-->
+			<gd_npc npc_id="231003" /> <!-- Queen Serusia -->
+			<gd_npc npc_id="231196" /> <!-- Roaring Kamara -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="186000237" /> <!-- Ancient Coin" -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Crafting Material" base_chance="8">
+		<gd_maps>
+			<gd_map map_id="210090000" /><!-- Idian Depths Light -->
+			<gd_map map_id="220100000" /><!-- Idian Depths Dark -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="230995" /> <!-- Captain Rata -->
+			<gd_npc npc_id="230998" /> <!-- Slavir the Ancient -->
+			<gd_npc npc_id="230999" /> <!-- Promion the Undying -->
+			<gd_npc npc_id="231000" /> <!-- Bloodcrazed Grigol -->
+			<gd_npc npc_id="284262" /> <!-- Executioner Penemon-->
+			<gd_npc npc_id="231003" /> <!-- Queen Serusia -->
+			<gd_npc npc_id="231196" /> <!-- Roaring Kamara -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="152012580" /> <!-- Fire Mote -->
+			<gd_item id="152012581" /> <!-- Fire Breath -->
+			<gd_item id="152012582" /> <!-- Fire Fragment -->
+			<gd_item id="152012583" /> <!-- Fire Source -->
+			<gd_item id="152012584" /> <!-- Water Source -->
+			<gd_item id="152012585" /> <!-- Wind Mote -->
+			<gd_item id="152012586" /> <!-- Wind Breath -->
+			<gd_item id="152012588" /> <!-- Wind Fragment -->
+			<gd_item id="152012589" /> <!-- Wind Source -->
+			<gd_item id="152012590" /> <!-- Wind Origin -->
+			<gd_item id="152012591" /> <!-- Water Fragment -->
+			<gd_item id="152012593" /> <!-- Valor's Heart -->
+		</gd_items>
+	</gd_rule>
+	<!-- Rata -->
+	<gd_rule rule_name="Named Epic Weapon" base_chance="7.5">
+		<gd_maps>
+			<gd_map map_id="210090000" /><!-- Idian Depths Light -->
+			<gd_map map_id="220100000" /><!-- Idian Depths Dark -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="230995" /> <!-- Captain Rata -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="101701254" /> <!-- Rata's Bow -->
+			<gd_item id="100901223" /> <!-- Rata's Greatsword -->
+			<gd_item id="100501203" /> <!-- Rata's Orb -->
+			<gd_item id="101501235" /> <!-- Rata's Staff -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Unique Armor" base_chance="30">
+		<gd_maps>
+			<gd_map map_id="210090000" /><!-- Idian Depths Light -->
+			<gd_map map_id="220100000" /><!-- Idian Depths Dark -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="230995" /> <!-- Captain Rata -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="112101447" /> <!-- Rata's Pauldrons -->
+			<gd_item id="112301544" /> <!-- Rata's Shoulderguards -->
+			<gd_item id="112501400" /> <!-- Rata's Spaulder -->
+			<gd_item id="112601421" /> <!-- Rata's Shoulderplates -->
+			<gd_item id="113101507" /> <!-- Rata's Leggings -->
+			<gd_item id="113301634" /> <!-- Rata's Breeches -->
+			<gd_item id="113501476" /> <!-- Rata's Chausses -->
+			<gd_item id="113601423" /> <!-- Rata's Greaves -->
+		</gd_items>
+	</gd_rule>
+	<!-- Slavir -->
+	<gd_rule rule_name="Named Epic Shield" base_chance="7.5">
+		<gd_maps>
+			<gd_map map_id="210090000" /><!-- Idian Depths Light -->
+			<gd_map map_id="220100000" /><!-- Idian Depths Dark -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="230998" /> <!-- Slavir the Ancient -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="115001615" /> <!-- Enraged Slavir's Protective Shield -->
+			<gd_item id="115001617" /> <!-- Enraged Slavir's Magic Shield -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Unique Shield" base_chance="30">
+		<gd_maps>
+			<gd_map map_id="210090000" /><!-- Idian Depths Light -->
+			<gd_map map_id="220100000" /><!-- Idian Depths Dark -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="230998" /> <!-- Slavir the Ancient -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="115001614" /> <!-- Slavir's Protective Shield -->
+			<gd_item id="115001616" /> <!-- Slavir's Magic Shield -->
+		</gd_items>
+	</gd_rule>
+	<!-- Promion -->
+	<gd_rule rule_name="Named Epic Armor" base_chance="7.5">
+		<gd_maps>
+			<gd_map map_id="210090000" /><!-- Idian Depths Light -->
+			<gd_map map_id="220100000" /><!-- Idian Depths Dark -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="230999" /> <!-- Promion the Undying -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="100501202" /> <!-- Promion's Orb -->
+			<gd_item id="100901222" /> <!-- Promion's Greatsword -->
+			<gd_item id="101501234" /> <!-- Promion's Staff -->
+			<gd_item id="101701253" /> <!-- Promion's Bow -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Unique Weapon" base_chance="30">
+		<gd_maps>
+			<gd_map map_id="210090000" /><!-- Idian Depths Light -->
+			<gd_map map_id="220100000" /><!-- Idian Depths Dark -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="230999" /> <!-- Promion the Undying -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="112101448" /> <!-- Promion's Pauldrons -->
+			<gd_item id="112301545" /> <!-- Promion's Shoulderguards -->
+			<gd_item id="112501401" /> <!-- Promion's Spaulders -->
+			<gd_item id="112601422" /> <!-- Promion's Shoulderplates -->
+			<gd_item id="113101508" /> <!-- Promion's Leggings -->
+			<gd_item id="113301635" /> <!-- Promion's Breeches -->
+			<gd_item id="113501477" /> <!-- Promion's Chausses -->
+			<gd_item id="113601424" /> <!-- Promion's Greaves -->
+		</gd_items>
+	</gd_rule>
+	<!-- Grigol -->
+	<gd_rule rule_name="Named Epic Weapon" base_chance="7.5">
+		<gd_maps>
+			<gd_map map_id="210090000" /><!-- Idian Depths Light -->
+			<gd_map map_id="220100000" /><!-- Idian Depths Dark -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="231000" /> <!-- Bloodcrazed Grigol -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="100101208" /> <!-- Grigol's Mace -->
+			<gd_item id="100201381" /> <!-- Grigol's Dagger -->
+			<gd_item id="100601295" /> <!-- Grigol's Spellbook -->
+			<gd_item id="101801052" /> <!-- Grigol's Pistol -->
+			<gd_item id="102100838" /> <!-- Grigol's Cipher-Blade -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Unique Armor" base_chance="30">
+		<gd_maps>
+			<gd_map map_id="210090000" /><!-- Idian Depths Light -->
+			<gd_map map_id="220100000" /><!-- Idian Depths Dark -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="231000" /> <!-- Bloodcrazed Grigol -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="110101656" /> <!-- Grigol's Tunic -->
+			<gd_item id="110301665" /> <!-- Grigol's Jerkin -->
+			<gd_item id="110501503" /> <!-- Grigol's Hauberk -->
+			<gd_item id="110601477" /> <!-- Grigol's Breastplate -->
+			<gd_item id="111101494" /> <!-- Grigol's Gloves -->
+			<gd_item id="111301605" /> <!-- Grigol's Vambrace -->
+			<gd_item id="111501458" /> <!-- Grigol's Handguards -->
+			<gd_item id="111601440" /> <!-- Grigol's Gauntlets -->
+		</gd_items>
+	</gd_rule>
+	<!-- Serusia -->
+	<gd_rule rule_name="Named Epic Armor" base_chance="7.5">
+		<gd_maps>
+			<gd_map map_id="210090000" /><!-- Idian Depths Light -->
+			<gd_map map_id="220100000" /><!-- Idian Depths Dark -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="231003" /> <!-- Queen Serusia -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="114101542" /> <!-- Serusia's Shoes -->
+			<gd_item id="114301672" /> <!-- Serusia's Boots -->
+			<gd_item id="114501484" /> <!-- Serusia's Brogans -->
+			<gd_item id="114601429" /> <!-- Serusia's Sabatons -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Epic Head" base_chance="7.5">
+		<gd_maps>
+			<gd_map map_id="210090000" /><!-- Idian Depths Light -->
+			<gd_map map_id="220100000" /><!-- Idian Depths Dark -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="231003" /> <!-- Queen Serusia -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="125003653" /> <!-- Serusia's Headband -->
+			<gd_item id="125003655" /> <!-- Serusia's Hat -->
+			<gd_item id="125003657" /> <!-- Serusia's Chain Hood -->
+			<gd_item id="125003659" /> <!-- Serusia's Helm -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Unique Weapon" base_chance="30">
+		<gd_maps>
+			<gd_map map_id="210090000" /><!-- Idian Depths Light -->
+			<gd_map map_id="220100000" /><!-- Idian Depths Dark -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="231003" /> <!-- Queen Serusia -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="100001569" /> <!-- Serusia's Sword -->
+			<gd_item id="101301148" /> <!-- Serusia's Polearm -->
+			<gd_item id="101901001" /> <!-- Serusia's Aethercannon -->
+			<gd_item id="102001074" /> <!-- Serusia's Harp -->
+		</gd_items>
+	</gd_rule>
+	<!-- Kamara -->
+	<gd_rule rule_name="Named Epic Weapon" base_chance="7.5">
+		<gd_maps>
+			<gd_map map_id="210090000" /><!-- Idian Depths Light -->
+			<gd_map map_id="220100000" /><!-- Idian Depths Dark -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="231196" /> <!-- Roaring Kamara -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="100001570" /> <!-- Kamara's Sword -->
+			<gd_item id="101301149" /> <!-- Kamara's Polearm -->
+			<gd_item id="101901002" /> <!-- Kamara's Aethercannon -->
+			<gd_item id="102001075" /> <!-- Kamara's Harp -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Unique Armor" base_chance="30">
+		<gd_maps>
+			<gd_map map_id="210090000" /><!-- Idian Depths Light -->
+			<gd_map map_id="220100000" /><!-- Idian Depths Dark -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="231196" /> <!-- Roaring Kamara -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="114101541" /> <!-- Kamara's Shoes -->
+			<gd_item id="114301671" /> <!-- Kamara's Boots -->
+			<gd_item id="114501483" /> <!-- Kamara's Brogans -->
+			<gd_item id="114601428" /> <!-- Kamara's Sabatons -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Unique Head" base_chance="30">
+		<gd_maps>
+			<gd_map map_id="210090000" /><!-- Idian Depths Light -->
+			<gd_map map_id="220100000" /><!-- Idian Depths Dark -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="231196" /> <!-- Roaring Kamara -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="125003652" /> <!-- Kamara's Headband -->
+			<gd_item id="125003654" /> <!-- Kamara's Hat -->
+			<gd_item id="125003656" /> <!-- Kamara's Chain Hood -->
+			<gd_item id="125003658" /> <!-- Kamara's Helm -->
+		</gd_items>
+	</gd_rule>
+	<!-- Penemon -->
+	<gd_rule rule_name="Named Epic Armor" base_chance="7.5">
+		<gd_maps>
+			<gd_map map_id="210090000" /><!-- Idian Depths Light -->
+			<gd_map map_id="220100000" /><!-- Idian Depths Dark -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="284262" /> <!-- Executioner Penemon-->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="110101657" /> <!-- Penemon's Tunic -->
+			<gd_item id="110301666" /> <!-- Penemon's Jerkin -->
+			<gd_item id="110501504" /> <!-- Penemon's Hauberk -->
+			<gd_item id="110601478" /> <!-- Penemon's Breastplate -->
+			<gd_item id="111101495" /> <!-- Penemon's Gloves -->
+			<gd_item id="111301606" /> <!-- Penemon's Vambrace -->
+			<gd_item id="111501459" /> <!-- Penemon's Handguards -->
+			<gd_item id="111601441" /> <!-- Penemon's Gauntlets -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Epic Shield" base_chance="7.5">
+		<gd_maps>
+			<gd_map map_id="210090000" /><!-- Idian Depths Light -->
+			<gd_map map_id="220100000" /><!-- Idian Depths Dark -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="284262" /> <!-- Executioner Penemon-->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="115001645" /> <!-- Penemon's Magic Shield -->
+			<gd_item id="115001647" /> <!-- Enraged Penemon's Magic Shield -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Unique Shield" base_chance="30">
+		<gd_maps>
+			<gd_map map_id="210090000" /><!-- Idian Depths Light -->
+			<gd_map map_id="220100000" /><!-- Idian Depths Dark -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="284262" /> <!-- Executioner Penemon-->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="115001644" /> <!-- Penemon's Shield -->
+			<gd_item id="115001646" /> <!-- Enraged Penemon's Shield -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Unique Head" base_chance="30">
+		<gd_maps>
+			<gd_map map_id="210090000" /><!-- Idian Depths Light -->
+			<gd_map map_id="220100000" /><!-- Idian Depths Dark -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="284262" /> <!-- Executioner Penemon-->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="125003652" /> <!-- Penemon's Headband -->
+			<gd_item id="125003654" /> <!-- Penemon's Hat -->
+			<gd_item id="125003656" /> <!-- Penemon's Chain Hood -->
+			<gd_item id="125003658" /> <!-- Penemon's Helm -->
+		</gd_items>
+	</gd_rule>
 	<!-- Ancient Coins -->
 	<gd_rule rule_name="Ancient Coins" min_count="1" max_count="10" base_chance="3" min_diff="-5" max_diff="5" fixed_chance="true">
 		<gd_maps>
