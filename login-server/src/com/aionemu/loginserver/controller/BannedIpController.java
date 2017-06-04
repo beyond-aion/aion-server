@@ -93,14 +93,7 @@ public class BannedIpController {
 		BannedIP ipBan = new BannedIP();
 		ipBan.setMask(ip);
 		ipBan.setTimeEnd(expireTime);
-		banList.add(ipBan);
-		try {
-			getDAO().insert(ipBan);
-			return true;
-		} catch (Exception e) {
-			log.warn("Ip " + ip + " is already banned.");
-			return false;
-		}
+		return banList.add(ipBan) && getDAO().insert(ipBan);
 	}
 
 	/**

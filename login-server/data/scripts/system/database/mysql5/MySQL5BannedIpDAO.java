@@ -10,7 +10,6 @@ import java.util.Set;
 
 import com.aionemu.commons.database.DB;
 import com.aionemu.commons.database.IUStH;
-import com.aionemu.commons.database.ParamReadStH;
 import com.aionemu.commons.database.ReadStH;
 import com.aionemu.loginserver.dao.BannedIpDAO;
 import com.aionemu.loginserver.model.BannedIP;
@@ -54,26 +53,7 @@ public class MySQL5BannedIpDAO extends BannedIpDAO {
 			}
 		});
 
-		if (!insert)
-			return false;
-
-		final BannedIP result = new BannedIP();
-		DB.select("SELECT * FROM banned_ip WHERE mask = ?", new ParamReadStH() {
-
-			@Override
-			public void setParams(PreparedStatement preparedStatement) throws SQLException {
-				preparedStatement.setString(1, bannedIP.getMask());
-			}
-
-			@Override
-			public void handleRead(ResultSet resultSet) throws SQLException {
-				resultSet.next(); // mask is unique, only one result allowed
-				result.setId(resultSet.getInt("id"));
-				result.setMask(resultSet.getString("mask"));
-				result.setTimeEnd(resultSet.getTimestamp("time_end"));
-			}
-		});
-		return true;
+		return insert;
 	}
 
 	@Override

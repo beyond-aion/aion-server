@@ -140,10 +140,10 @@ public class CM_LOGIN extends AionClientPacket {
 			case STR_L2AUTH_S_INCORRECT_PWD:
 				if (Config.ENABLE_BRUTEFORCE_PROTECTION) {
 					String ip = client.getIP();
-					if ((!ip.equals("127.0.0.1")) && BruteForceProtector.getInstance().addFailedConnect(ip)) {
+					if (!ip.equals("127.0.0.1") && BruteForceProtector.getInstance().addFailedConnect(ip)) {
 						Timestamp newTime = new Timestamp(System.currentTimeMillis() + Config.WRONG_LOGIN_BAN_TIME * 60000);
 						BannedIpController.banIp(ip, newTime);
-						log.debug(userName + " on " + ip + " banned for " + Config.WRONG_LOGIN_BAN_TIME + " min. bruteforce");
+						log.info(userName + " on " + ip + " banned for " + Config.WRONG_LOGIN_BAN_TIME + " min. bruteforce");
 						client.close(new SM_LOGIN_FAIL(AionAuthResponse.STR_L2AUTH_S_BLOCKED_IP));
 						break;
 					}
