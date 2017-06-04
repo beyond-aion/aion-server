@@ -18,6 +18,35 @@
 			<gd_item id="186000237" /> <!-- Ancient Coin" -->
 		</gd_items>
 	</gd_rule>
+	<gd_rule rule_name="Named Crafting Material" base_chance="8">
+		<gd_maps>
+			<gd_map map_id="210090000" /><!-- Idian Depths Light -->
+			<gd_map map_id="220100000" /><!-- Idian Depths Dark -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="230995" /> <!-- Captain Rata -->
+			<gd_npc npc_id="230998" /> <!-- Slavir the Ancient -->
+			<gd_npc npc_id="230999" /> <!-- Promion the Undying -->
+			<gd_npc npc_id="231000" /> <!-- Bloodcrazed Grigol -->
+			<gd_npc npc_id="284262" /> <!-- Executioner Penemon-->
+			<gd_npc npc_id="231003" /> <!-- Queen Serusia -->
+			<gd_npc npc_id="231196" /> <!-- Roaring Kamara -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="152012580" /> <!-- Fire Mote -->
+			<gd_item id="152012581" /> <!-- Fire Breath -->
+			<gd_item id="152012582" /> <!-- Fire Fragment -->
+			<gd_item id="152012583" /> <!-- Fire Source -->
+			<gd_item id="152012584" /> <!-- Water Source -->
+			<gd_item id="152012585" /> <!-- Wind Mote -->
+			<gd_item id="152012586" /> <!-- Wind Breath -->
+			<gd_item id="152012588" /> <!-- Wind Fragment -->
+			<gd_item id="152012589" /> <!-- Wind Source -->
+			<gd_item id="152012590" /> <!-- Wind Origin -->
+			<gd_item id="152012591" /> <!-- Water Fragment -->
+			<gd_item id="152012593" /> <!-- Valor's Heart -->
+		</gd_items>
+	</gd_rule>
 	<!-- Rata -->
 	<gd_rule rule_name="Named Epic Weapon" base_chance="7.5">
 		<gd_maps>
@@ -28,10 +57,10 @@
 			<gd_npc npc_id="230995" /> <!-- Captain Rata -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="101701254" /> <!-- Rata's Bow" -->
-			<gd_item id="100901223" /> <!-- Rata's Greatsword" -->
-			<gd_item id="100501203" /> <!-- Rata's Orb" -->
-			<gd_item id="101501235" /> <!-- Rata's Staff" -->
+			<gd_item id="101701254" /> <!-- Rata's Bow -->
+			<gd_item id="100901223" /> <!-- Rata's Greatsword -->
+			<gd_item id="100501203" /> <!-- Rata's Orb -->
+			<gd_item id="101501235" /> <!-- Rata's Staff -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Unique Armor" base_chance="30">
