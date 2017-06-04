@@ -101,7 +101,7 @@ public class StigmaService {
 			for (int level = 20; level <= player.getLevel(); level++) {
 				for (SkillLearnTemplate template : DataManager.SKILL_TREE_DATA.getTemplatesFor(player.getPlayerClass(), level, player.getRace())) {
 					if (template.isStigma())
-						player.getSkillList().addTemporarySkill(player, template.getSkillId(), template.getSkillLevel());
+						SkillLearnService.learnTemporarySkill(player, template.getSkillId(), template.getSkillLevel());
 				}
 			}
 			return;
@@ -183,7 +183,7 @@ public class StigmaService {
 			int linkedStigmaSkillLevel = stigmas.stream().min((i1, i2) -> i1.getEnchantLevel() - i2.getEnchantLevel()).get().getEnchantLevel() + 1;
 			for (SkillLearnTemplate skill : DataManager.SKILL_TREE_DATA.getSkillsForSkill(skillId, player.getPlayerClass(), player.getRace(),
 				player.getLevel()))
-				player.getSkillList().addTemporarySkill(player, skill.getSkillId(), linkedStigmaSkillLevel);
+				SkillLearnService.learnTemporarySkill(player, skill.getSkillId(), linkedStigmaSkillLevel);
 		}
 	}
 
@@ -452,7 +452,7 @@ public class StigmaService {
 			for (SkillTemplate st : DataManager.SKILL_DATA.getSkillTemplatesByGroup(skillGroup))
 				for (SkillLearnTemplate skill : DataManager.SKILL_TREE_DATA.getTemplatesForSkill(st.getSkillId(), player.getPlayerClass(), player.getRace()))
 					if (player.getLevel() >= skill.getMinLevel())
-						player.getSkillList().addTemporarySkill(player, skill.getSkillId(), stigmaLevel + 1);
+						SkillLearnService.learnTemporarySkill(player, skill.getSkillId(), stigmaLevel + 1);
 	}
 
 	public static void removeStigmaSkills(Player player, Stigma stigma, int stigmaLevel, boolean onUnequip) {
