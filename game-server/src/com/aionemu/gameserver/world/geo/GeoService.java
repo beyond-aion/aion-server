@@ -10,7 +10,6 @@ import com.aionemu.gameserver.geoEngine.math.Vector3f;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.siege.SiegeNpc;
-import com.aionemu.gameserver.utils.PositionUtil;
 
 /**
  * @author ATracer
@@ -94,23 +93,12 @@ public class GeoService {
 		if (target instanceof SiegeNpc && ((SiegeNpc) target).getObjectTemplate().getAi().equals("fortressgate"))
 			return true;
 
-		float limit = (float) (PositionUtil.getDistance(object, target) - target.getObjectTemplate().getBoundRadius().getCollision());
-		if (limit <= 0)
-			return true;
-
-		// a great fix (Copyright (c) (R) Yeats (TM) 2015-2016) @NA Dev Yeats
-		if (object.getWorldId() == 301500000) {
-			return (PositionUtil.getDistance(231.14f, 264.399f, object.getX(), object.getY()) < 26.7f
-				&& PositionUtil.getDistance(231.14f, 264.399f, target.getX(), target.getY()) < 26.7f);
-		}
-
-		return geoData.getMap(object.getWorldId()).canSee(object.getX(), object.getY(),
-			object.getZ() + object.getObjectTemplate().getBoundRadius().getUpper() * 0.95f, target.getX(), target.getY(),
-			target.getZ() + target.getObjectTemplate().getBoundRadius().getUpper() * 0.75f, limit, object.getInstanceId());
+		return canSee(object.getWorldId(), object.getX(), object.getY(), object.getZ(), target.getX(), target.getY(), target.getZ(),
+			object.getInstanceId());
 	}
 
-	public boolean canSee(int worldId, float x, float y, float z, float x1, float y1, float z1, float limit, int instanceId) {
-		return geoData.getMap(worldId).canSee(x, y, z + 1, x1, y1, z1 + 1, limit, instanceId);
+	public boolean canSee(int worldId, float x, float y, float z, float x1, float y1, float z1, int instanceId) {
+		return geoData.getMap(worldId).canSee(x, y, z + 1, x1, y1, z1 + 1, instanceId);
 	}
 
 	public Vector3f getClosestCollision(Creature object, float x, float y, float z) {

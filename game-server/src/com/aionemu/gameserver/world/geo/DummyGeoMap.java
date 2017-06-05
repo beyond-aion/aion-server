@@ -24,7 +24,7 @@ public class DummyGeoMap extends GeoMap {
 	}
 
 	@Override
-	public final boolean canSee(float x, float y, float z, float targetX, float targetY, float targetZ, float limit, int instanceId) {
+	public final boolean canSee(float x, float y, float z, float targetX, float targetY, float targetZ, int instanceId) {
 		return true;
 	}
 
