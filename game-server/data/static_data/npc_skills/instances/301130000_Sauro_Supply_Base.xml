@@ -36,9 +36,7 @@
 		</npc_skill>
         <npc_skill id="17359" lv="56" prob="38"/>
 		<npc_skill id="17360" lv="56" prob="25"/>
-        <npc_skill id="17361" lv="56" prob="20" cd="30000">
-			<cond cond_type="HELP_SELF" hp_below="85" range="15"/>
-		</npc_skill>
+		<npc_skill id="17361" lv="56" prob="20" cd="30000" max_hp="85"/>
 		<npc_skill id="17366" lv="56" prob="13" cd="30000">
 			<cond cond_type="HELP_FRIEND" hp_below="30" range="20"/>
 		</npc_skill>
