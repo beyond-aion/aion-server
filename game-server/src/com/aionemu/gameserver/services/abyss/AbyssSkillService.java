@@ -32,7 +32,7 @@ public class AbyssSkillService {
 		// add new skills
 		if (abyssRank.getRank().getId() >= AbyssRankEnum.STAR5_OFFICER.getId()) {
 			for (int skillId : AbyssSkills.getSkills(player.getRace(), rankEnum)) {
-				player.getSkillList().addTemporarySkill(player, skillId, 1);
+				SkillLearnService.learnTemporarySkill(player, skillId, 1);
 			}
 		}
 	}

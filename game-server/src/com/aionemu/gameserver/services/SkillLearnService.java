@@ -67,6 +67,10 @@ public class SkillLearnService {
 			removeSkill(player, 30001);
 		}
 	}
+	
+	public static void learnTemporarySkill(Player player, int skillId, int skillLevel) {
+		player.getSkillList().addTemporarySkill(player, skillId, skillLevel);
+	}
 
 	/**
 	 * Adds auto-learned skills to the player, according to the specified level, class and race.

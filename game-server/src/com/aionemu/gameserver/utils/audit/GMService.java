@@ -18,6 +18,7 @@ import com.aionemu.gameserver.model.gameobjects.state.CreatureSeeState;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureVisualState;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_PLAYER_STATE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
+import com.aionemu.gameserver.services.SkillLearnService;
 import com.aionemu.gameserver.skillengine.effect.AbnormalState;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.utils.ChatUtil;
@@ -86,8 +87,7 @@ public class GMService {
 	public boolean isAnnounceable(Player player) {
 		return player.isOnline() && player.isStaff() && !player.isInCustomState(CustomPlayerState.NO_WHISPERS_MODE)
 			&& player.getFriendList().getStatus() != Status.OFFLINE
-			&& (AdminConfig.ANNOUNCE_LEVELS.contains(String.valueOf(player.getAccount().getAccessLevel()))
-				|| AdminConfig.ANNOUNCE_LEVELS.contains("*"));
+			&& (AdminConfig.ANNOUNCE_LEVELS.contains(String.valueOf(player.getAccount().getAccessLevel())) || AdminConfig.ANNOUNCE_LEVELS.contains("*"));
 	}
 
 	private void broadcastConnectionStatus(Player gm, boolean connected) {
@@ -134,7 +134,7 @@ public class GMService {
 				continue;
 			if (player.getRace() == Race.ELYOS && t.getStack().contains("_DARK"))
 				continue;
-			player.getSkillList().addTemporarySkill(player, t.getSkillId(), t.getLvl());
+			SkillLearnService.learnTemporarySkill(player, t.getSkillId(), t.getLvl());
 		}
 	}
 

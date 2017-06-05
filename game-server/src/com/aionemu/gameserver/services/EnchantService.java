@@ -245,10 +245,16 @@ public class EnchantService {
 
 		if (enchantLevel >= 20) {
 			int buffId = getEquipBuff(targetItem);
-			targetItem.setBuffSkill(buffId);
+			int oldBuffId = targetItem.getBuffSkill();
+			if (buffId != oldBuffId) {
+				targetItem.setBuffSkill(buffId);
+				if (targetItem.isEquipped()) {
+					if (oldBuffId != 0)
+						SkillLearnService.removeSkill(player, oldBuffId);
+					SkillLearnService.learnTemporarySkill(player, buffId, 1);
+				}
+			}
 			// targetItem.setPackCount(targetItem.getPackCount() + 1);
-			if (targetItem.isEquipped())
-				player.getSkillList().addSkill(player, buffId, 1);
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_EXCEED_SKILL_ENCHANT(new DescriptionId(targetItem.getNameId()), enchantLevel,
 				new DescriptionId(DataManager.SKILL_DATA.getSkillTemplate(buffId).getNameId())));
 		}
@@ -453,40 +459,40 @@ public class EnchantService {
 		List<Integer> skillsSet = new ArrayList<>();
 		switch (item.getItemTemplate().getExceedEnchantSkill()) {
 			case RANK1_SET1_MAGICAL_GLOVES:
-				skillsSet = (Arrays.asList(13046, 13042, 13055));
+				skillsSet = (Arrays.asList(13042, 13046, 13055));
 				break;
 			case RANK1_SET1_MAGICAL_PANTS:
-				skillsSet = (Arrays.asList(13075, 13078, 13071));
+				skillsSet = (Arrays.asList(13071, 13075, 13078));
 				break;
 			case RANK1_SET1_MAGICAL_SHOES:
-				skillsSet = (Arrays.asList(13121, 13108, 13118));
+				skillsSet = (Arrays.asList(13108, 13118, 13121));
 				break;
 			case RANK1_SET1_MAGICAL_SHOULDER:
-				skillsSet = (Arrays.asList(13104, 13098, 13097));
+				skillsSet = (Arrays.asList(13104, 13097, 13098));
 				break;
 			case RANK1_SET1_MAGICAL_TORSO:
-				skillsSet = (Arrays.asList(13144, 13128, 13132));
+				skillsSet = (Arrays.asList(13128, 13132, 13144));
 				break;
 			case RANK1_SET1_MAGICAL_WEAPON:
-				skillsSet = (Arrays.asList(13012, 13027, 13011));
+				skillsSet = (Arrays.asList(13011, 13012, 13027));
 				break;
 			case RANK1_SET1_PHYSICAL_GLOVES:
-				skillsSet = (Arrays.asList(13046, 13042, 13055));
+				skillsSet = (Arrays.asList(13042, 13046, 13055));
 				break;
 			case RANK1_SET1_PHYSICAL_PANTS:
-				skillsSet = (Arrays.asList(13075, 13078, 13071));
+				skillsSet = (Arrays.asList(13071, 13075, 13078));
 				break;
 			case RANK1_SET1_PHYSICAL_SHOES:
-				skillsSet = (Arrays.asList(13121, 13108, 13118));
+				skillsSet = (Arrays.asList(13108, 13118, 13121));
 				break;
 			case RANK1_SET1_PHYSICAL_SHOULDER:
-				skillsSet = (Arrays.asList(13104, 13098, 13097));
+				skillsSet = (Arrays.asList(13104, 13097, 13098));
 				break;
 			case RANK1_SET1_PHYSICAL_TORSO:
-				skillsSet = (Arrays.asList(13144, 13128, 13132));
+				skillsSet = (Arrays.asList(13128, 13132, 13144));
 				break;
 			case RANK1_SET1_PHYSICAL_WEAPON:
-				skillsSet = (Arrays.asList(13012, 13027, 13011));
+				skillsSet = (Arrays.asList(13011, 13012, 13027));
 				break;
 			case RANK1_SET2_MAGICAL_GLOVES:
 				skillsSet = (Arrays.asList(13046, 13058, 13056));
@@ -498,7 +504,7 @@ public class EnchantService {
 				skillsSet = (Arrays.asList(13121, 13114, 13119));
 				break;
 			case RANK1_SET2_MAGICAL_SHOULDER:
-				skillsSet = (Arrays.asList(13104, 13094, 13102));
+				skillsSet = (Arrays.asList(13104, 13094, 13192));
 				break;
 			case RANK1_SET2_MAGICAL_TORSO:
 				skillsSet = (Arrays.asList(13144, 13135, 13133));
@@ -516,10 +522,10 @@ public class EnchantService {
 				skillsSet = (Arrays.asList(13121, 13114, 13119));
 				break;
 			case RANK1_SET2_PHYSICAL_SHOULDER:
-				skillsSet = (Arrays.asList(13104, 13094, 13102));
+				skillsSet = (Arrays.asList(13104, 13094, 13192));
 				break;
 			case RANK1_SET2_PHYSICAL_TORSO:
-				skillsSet = (Arrays.asList(13144, 13215, 13133));
+				skillsSet = (Arrays.asList(13144, 13135, 13133));
 				break;
 			case RANK1_SET2_PHYSICAL_WEAPON:
 				skillsSet = (Arrays.asList(13029, 13006, 13023));
@@ -540,7 +546,7 @@ public class EnchantService {
 				skillsSet = (Arrays.asList(13125, 13122, 13120));
 				break;
 			case RANK2_SET1_MAGICAL_SHOULDER:
-				skillsSet = (Arrays.asList(13088, 13105, 13103));
+				skillsSet = (Arrays.asList(13088, 13105, 13193));
 				break;
 			case RANK2_SET1_MAGICAL_TORSO:
 				skillsSet = (Arrays.asList(13139, 13145, 13134));
@@ -558,7 +564,7 @@ public class EnchantService {
 				skillsSet = (Arrays.asList(13125, 13122, 13120));
 				break;
 			case RANK2_SET1_PHYSICAL_SHOULDER:
-				skillsSet = (Arrays.asList(13091, 13105, 13103));
+				skillsSet = (Arrays.asList(13091, 13105, 13193));
 				break;
 			case RANK2_SET1_PHYSICAL_TORSO:
 				skillsSet = (Arrays.asList(13139, 13145, 13134));
@@ -573,7 +579,7 @@ public class EnchantService {
 				skillsSet = (Arrays.asList(13072, 13078, 13065));
 				break;
 			case RANK2_SET2_PHYSICAL_SHOES:
-				skillsSet = (Arrays.asList(13125, 13109, 13114));
+				skillsSet = (Arrays.asList(13125, 13109, 13115));
 				break;
 			case RANK2_SET2_PHYSICAL_SHOULDER:
 				skillsSet = (Arrays.asList(13091, 13099, 13095));
@@ -582,7 +588,7 @@ public class EnchantService {
 				skillsSet = (Arrays.asList(13139, 13129, 13136));
 				break;
 			case RANK2_SET2_PHYSICAL_WEAPON:
-				skillsSet = (Arrays.asList(13010, 13032, 13006));
+				skillsSet = (Arrays.asList(13010, 13032, 13007));
 				break;
 			case RANK2_SET1_PHYSICAL_WEAPON:
 				skillsSet = (Arrays.asList(13008, 13010, 13024));
@@ -624,7 +630,7 @@ public class EnchantService {
 				skillsSet = (Arrays.asList(13084, 13092, 13096));
 				break;
 			case RANK3_SET1_PHYSICAL_TORSO:
-				skillsSet = (Arrays.asList(13142, 13220, 13137));
+				skillsSet = (Arrays.asList(13142, 13140, 13137));
 				break;
 			case RANK3_SET1_PHYSICAL_WEAPON:
 				skillsSet = (Arrays.asList(13036, 13020, 13009));
@@ -636,7 +642,7 @@ public class EnchantService {
 				skillsSet = (Arrays.asList(13080, 13076, 13079));
 				break;
 			case RANK3_SET2_MAGICAL_SHOES:
-				skillsSet = (Arrays.asList(13112, 13121, 13110));
+				skillsSet = (Arrays.asList(13112, 13123, 13110));
 				break;
 			case RANK3_SET2_MAGICAL_SHOULDER:
 				skillsSet = (Arrays.asList(13082, 13106, 13100));
@@ -654,7 +660,7 @@ public class EnchantService {
 				skillsSet = (Arrays.asList(13080, 13076, 13079));
 				break;
 			case RANK3_SET2_PHYSICAL_SHOES:
-				skillsSet = (Arrays.asList(13112, 13121, 13108));
+				skillsSet = (Arrays.asList(13112, 13123, 13110));
 				break;
 			case RANK3_SET2_PHYSICAL_SHOULDER:
 				skillsSet = (Arrays.asList(13084, 13106, 13100));
@@ -672,10 +678,10 @@ public class EnchantService {
 				skillsSet = (Arrays.asList(13020, 13014, 13033));
 				break;
 			case RANK2_SET2_MAGICAL_GLOVES:
-				skillsSet = (Arrays.asList(13050, 13152, 13059));
+				skillsSet = (Arrays.asList(13050, 13043, 13059));
 				break;
 			case RANK2_SET2_MAGICAL_PANTS:
-				skillsSet = (Arrays.asList(13073, 13078, 13062));
+				skillsSet = (Arrays.asList(13072, 13078, 13062));
 				break;
 			case RANK2_SET2_MAGICAL_SHOES:
 				skillsSet = (Arrays.asList(13125, 13109, 13115));
@@ -684,10 +690,10 @@ public class EnchantService {
 				skillsSet = (Arrays.asList(13088, 13099, 13095));
 				break;
 			case RANK2_SET2_MAGICAL_TORSO:
-				skillsSet = (Arrays.asList(13140, 13129, 13136));
+				skillsSet = (Arrays.asList(13139, 13129, 13136));
 				break;
 			case RANK4_SET1_MAGICAL_GLOVES:
-				skillsSet = (Arrays.asList(13053, 13039, 13042));
+				skillsSet = (Arrays.asList(13053, 13039, 13045));
 				break;
 			case RANK4_SET1_MAGICAL_PANTS:
 				skillsSet = (Arrays.asList(13077, 13081, 13079));
@@ -696,7 +702,7 @@ public class EnchantService {
 				skillsSet = (Arrays.asList(13117, 13113, 13111));
 				break;
 			case RANK4_SET1_MAGICAL_SHOULDER:
-				skillsSet = (Arrays.asList(13086, 13083, 13098));
+				skillsSet = (Arrays.asList(13086, 13083, 13101));
 				break;
 			case RANK4_SET1_MAGICAL_TORSO:
 				skillsSet = (Arrays.asList(13138, 13143, 13131));
@@ -714,7 +720,7 @@ public class EnchantService {
 				skillsSet = (Arrays.asList(13117, 13113, 13111));
 				break;
 			case RANK4_SET1_PHYSICAL_SHOULDER:
-				skillsSet = (Arrays.asList(13087, 13085, 13098));
+				skillsSet = (Arrays.asList(13087, 13085, 13101));
 				break;
 			case RANK4_SET1_PHYSICAL_TORSO:
 				skillsSet = (Arrays.asList(13138, 13143, 13131));
@@ -795,10 +801,10 @@ public class EnchantService {
 				skillsSet = (Arrays.asList(13245, 13244, 13266));
 				break;
 			case RANK5_SET1_MAGICAL_WEAPON:
-				skillsSet = (Arrays.asList(13228, 13234, 13238));
+				skillsSet = (Arrays.asList(13228, 13234, 13231));
 				break;
 			case RANK5_SET1_PHYSICAL_WEAPON:
-				skillsSet = (Arrays.asList(13229, 13234, 13238));
+				skillsSet = (Arrays.asList(13229, 13234, 13231));
 				break;
 		}
 		return Rnd.get(skillsSet);

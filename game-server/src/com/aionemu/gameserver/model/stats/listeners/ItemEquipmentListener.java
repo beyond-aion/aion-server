@@ -63,7 +63,7 @@ public class ItemEquipmentListener {
 		}
 		if (item.getBuffSkill() != 0) {
 			SkillTemplate buffSkill = DataManager.SKILL_DATA.getSkillTemplate(item.getBuffSkill());
-			owner.getSkillList().addSkill(owner, item.getBuffSkill(), 1);
+			SkillLearnService.learnTemporarySkill(owner, item.getBuffSkill(), 1);
 			HashMap<Integer, Long> coolDowns = new HashMap<>();
 			long currTime = System.currentTimeMillis();
 			long oldCooldown = owner.getSkillCoolDown(buffSkill.getCooldownId());
@@ -132,13 +132,11 @@ public class ItemEquipmentListener {
 			item.getConditioningInfo().setPlayer(null);
 		}
 		IdianStone idianStone = item.getIdianStone();
-		if (idianStone != null) {
+		if (idianStone != null)
 			idianStone.onUnEquip(owner);
-		}
 		RandomStats randomStats = item.getRandomStats();
-		if (randomStats != null) {
+		if (randomStats != null)
 			randomStats.onUnEquip(owner);
-		}
 		if (item.getEnchantEffect() != null) {
 			item.getEnchantEffect().endEffect(owner);
 			item.setEnchantEffect(null);
@@ -147,9 +145,8 @@ public class ItemEquipmentListener {
 			item.getTemperingEffect().endEffect(owner);
 			item.setTemperingEffect(null);
 		}
-		if (item.getBuffSkill() != 0) {
+		if (item.getBuffSkill() != 0)
 			SkillLearnService.removeSkill(owner, item.getBuffSkill());
-		}
 	}
 
 	/**
