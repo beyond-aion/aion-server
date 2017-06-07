@@ -2,6 +2,7 @@ package quest.pandaemonium;
 
 import static com.aionemu.gameserver.model.DialogAction.*;
 
+import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
@@ -11,7 +12,6 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapType;
 
 /**
@@ -33,7 +33,7 @@ public class _2938SecretLibraryAccess extends QuestHandler {
 		}
 	}
 
-	private boolean AreAltgardQuestsFinished(Player player) {
+	private boolean areAltgardQuestsFinished(Player player) {
 		int id = player.getQuestStateList().getQuestState(2200) != null ? 2022 : 24016; // 2022 Old path, 24016 New path
 		QuestState qs = player.getQuestStateList().getQuestState(id);// last quest in Altgard state
 		return qs != null && qs.getStatus() == QuestStatus.COMPLETE;
@@ -65,18 +65,13 @@ public class _2938SecretLibraryAccess extends QuestHandler {
 					return sendQuestEndDialog(env);
 				}
 			} else if (qs.getStatus() == QuestStatus.COMPLETE) {
-				ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-					@Override
-					public void run() {
-						TeleportService.teleportTo(player, WorldMapType.PANDAEMONIUM.getId(), 1403.2f, 1063.7f, 206.0f, (byte) 195);
-					}
-				}, 3000);
+				TeleportService.teleportTo(player, WorldMapType.PANDAEMONIUM.getId(), 1403.2f, 1063.7f, 206.0f, (byte) 89, TeleportAnimation.FADE_OUT_BEAM);
+				return true;
 			}
 		} else if (targetId == 203557) {
 			if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 0) {
 				if (env.getDialogActionId() == QUEST_SELECT) {
-					if (AreAltgardQuestsFinished(player)) {
+					if (areAltgardQuestsFinished(player)) {
 						return sendQuestDialog(env, 1011);
 					} else
 						return sendQuestDialog(env, 1097);
