@@ -1,6 +1,7 @@
 package instance;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -337,7 +338,7 @@ public class RukibukiCircusTroupeInstance extends GeneralInstanceHandler {
 		if (!isInstanceDestroyed) {
 			return instance.getNpcs(npcId);
 		}
-		return null;
+		return Collections.emptyList();
 	}
 
 	@Override

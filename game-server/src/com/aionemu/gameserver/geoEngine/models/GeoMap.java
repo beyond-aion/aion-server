@@ -226,50 +226,43 @@ public class GeoMap extends Node {
 		if (p2 >= 0 && p3 >= 0) {
 			Vector3f result = new Vector3f();
 			if (p1 >= 0) {
-				Triangle tringle1 = new Triangle(new Vector3f(xInt * 2, yInt * 2, p1), new Vector3f(xInt * 2, (yInt + 1) * 2, p2),
+				Triangle triangle1 = new Triangle(new Vector3f(xInt * 2, yInt * 2, p1), new Vector3f(xInt * 2, (yInt + 1) * 2, p2),
 					new Vector3f((xInt + 1) * 2, yInt * 2, p3));
-				if (ray.intersectWhere(tringle1, result))
+				if (ray.intersectWhere(triangle1, result))
 					return result;
 			}
 			if (p4 >= 0) {
-				Triangle tringle2 = new Triangle(new Vector3f((xInt + 1) * 2, (yInt + 1) * 2, p4), new Vector3f(xInt * 2, (yInt + 1) * 2, p2),
+				Triangle triangle2 = new Triangle(new Vector3f((xInt + 1) * 2, (yInt + 1) * 2, p4), new Vector3f(xInt * 2, (yInt + 1) * 2, p2),
 					new Vector3f((xInt + 1) * 2, yInt * 2, p3));
-				if (ray.intersectWhere(tringle2, result))
+				if (ray.intersectWhere(triangle2, result))
 					return result;
 			}
 		}
 		return null;
 	}
 
-	public boolean canSee(float x, float y, float z, float targetX, float targetY, float targetZ, float limit, int instanceId) {
-		targetZ += 1;
-		z += 1;
-		// Another fix can see in instances
-		// if (getZ(targetX, targetY) > targetZ)
-		// return false;
-
-		float x2 = x - targetX;
-		float y2 = y - targetY;
-		float distance = (float) Math.sqrt(x2 * x2 + y2 * y2);
-		if (distance > 80f)
-			return false;
-		int intD = (int) Math.abs(distance);
-
+	public boolean canSee(float x, float y, float z, float targetX, float targetY, float targetZ, int instanceId) {
 		Vector3f pos = new Vector3f(x, y, z);
 		Vector3f dir = new Vector3f(targetX, targetY, targetZ);
+		float distance = pos.distance(dir);
+		if (distance > 80f)
+			return false;
 		dir.subtractLocal(pos).normalizeLocal();
 		Ray r = new Ray(pos, dir);
-		r.setLimit(limit);
-		for (float s = 2; s < intD; s += 2) {
-			float tempX = targetX + (x2 * s / distance);
-			float tempY = targetY + (y2 * s / distance);
+		r.setLimit(distance);
+		float x2 = x - targetX;
+		float y2 = y - targetY;
+		float distance2d = (float) Math.sqrt(x2 * x2 + y2 * y2);
+		for (float s = 2; s < distance2d; s += 2) {
+			float tempX = targetX + (x2 * s / distance2d);
+			float tempY = targetY + (y2 * s / distance2d);
 			Vector3f result = terrainCollision(tempX, tempY, r);
 			if (result != null)
 				return false;
 		}
-		CollisionResults results = new CollisionResults(CollisionIntention.DEFAULT_COLLISIONS.getId(), false, instanceId);
-		int collisions = this.collideWith(r, results);
-		return (results.size() == 0 && collisions == 0);
+		CollisionResults results = new CollisionResults(CollisionIntention.DEFAULT_COLLISIONS.getId(), true, instanceId);
+		int collisions = collideWith(r, results);
+		return results.size() == 0 && collisions == 0;
 	}
 
 	@Override

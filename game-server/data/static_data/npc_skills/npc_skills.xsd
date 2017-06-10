@@ -65,7 +65,6 @@
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="NONE" />
 			<xs:enumeration value="HELP_FRIEND" />
-			<xs:enumeration value="HELP_SELF" />
 			<xs:enumeration value="TARGET_IS_IN_ANY_STUN" />
 			<xs:enumeration value="TARGET_IS_IN_STUMBLE" />
 			<xs:enumeration value="TARGET_IS_STUNNED" />

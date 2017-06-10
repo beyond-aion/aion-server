@@ -1,5 +1,6 @@
 package instance;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -73,7 +74,7 @@ public class TheHexwayInstance extends GeneralInstanceHandler {
 		if (!isInstanceDestroyed) {
 			return instance.getNpcs(npcId);
 		}
-		return null;
+		return Collections.emptyList();
 	}
 
 	private void despawnNpcs(List<Npc> npcs) {

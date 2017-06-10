@@ -2,6 +2,7 @@ package instance.abyss;
 
 import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE.STR_MSG_INSTANCE_START_IDABRE;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -84,7 +85,7 @@ public class RoahInstance extends GeneralInstanceHandler {
 		if (!isInstanceDestroyed) {
 			return instance.getNpcs(npcId);
 		}
-		return null;
+		return Collections.emptyList();
 	}
 
 	private void despawnNpcs(List<Npc> npcs) {

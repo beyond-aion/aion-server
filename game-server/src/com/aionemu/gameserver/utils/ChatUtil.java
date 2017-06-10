@@ -11,7 +11,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 
 import com.aionemu.gameserver.configs.administration.AdminConfig;
-import com.aionemu.gameserver.configs.main.GeoDataConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -172,26 +171,27 @@ public class ChatUtil {
 		if (WorldMapType.getWorld(mapId) == null)
 			return null;
 
-		if (layer > 0 && z <= 0 && mapId == 400010000) { // abyss
-			switch (layer) {
-				case 1: // lower
-					z = 1700;
-					break;
-				case 2: // core
-					z = 2350;
-					break;
-				case 3: // upper
-					if (!GeoDataConfig.GEO_ENABLE) // only with deactivated geo, since z collisions are checked from top to bottom anyways
-						z = 2900;
-					break;
-			}
-		}
-
 		float geoZ;
 		if (z > 0)
 			geoZ = GeoService.getInstance().getZ(mapId, x, y, z, 1); // search relative to input z (max diff = z ±2)
-		else
-			geoZ = GeoService.getInstance().getZ(mapId, x, y);
+		else {
+			if (layer > 0 && z <= 0 && mapId == 400010000) { // abyss
+				switch (layer) {
+					case 1: // lower
+						z = 1700;
+						break;
+					case 2: // core
+						z = 2350;
+						break;
+					case 3: // upper
+						z = 2950;
+						break;
+				}
+				geoZ = GeoService.getInstance().getZ(mapId, x, y, z, z - 250, 1);
+			} else {
+				geoZ = GeoService.getInstance().getZ(mapId, x, y);
+			}
+		}
 
 		if (!Float.isNaN(geoZ))
 			z = geoZ;

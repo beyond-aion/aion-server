@@ -228,7 +228,6 @@ public final class BIHNode {
 	}
 
 	public final int intersectWhere(Ray r, Matrix4f worldMatrix, BIHTree tree, float sceneMin, float sceneMax, CollisionResults results) {
-
 		List<BIHStackData> stack = new ArrayList<>();
 
 		// float tHit = Float.POSITIVE_INFINITY;
@@ -327,16 +326,15 @@ public final class BIHNode {
 					CollisionResult cr = new CollisionResult(contactPoint, worldSpaceDist);
 					cr.setContactNormal(contactNormal);
 					results.addCollision(cr);
-					if (results.isOnlyFirst())
-						return 1;
 					cols++;
+					if (results.isOnlyFirst())
+						break stackloop;
 				}
 			}
 		}
 
 		r.setOrigin(o);
 		r.setDirection(d);
-		stack.clear();
 		return cols;
 	}
 
