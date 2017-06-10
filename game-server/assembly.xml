@@ -11,6 +11,9 @@
 				<include>config/**/*</include>
 				<include>data/**/*</include>
 			</includes>
+			<excludes>
+				<exclude>config/mygs.properties</exclude>
+			</excludes>
 		</fileSet>
 		<fileSet>
 			<filtered>true</filtered>
