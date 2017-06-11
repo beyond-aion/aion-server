@@ -34,6 +34,11 @@ public class RaksangRuinsInstance extends GeneralInstanceHandler {
 	private byte way, waveKills, spawns;
 
 	@Override
+	public float getInstanceExpMultiplier() {
+		return 1.8f;
+	}
+
+	@Override
 	public void onInstanceCreate(WorldMapInstance wmi) {
 		super.onInstanceCreate(wmi);
 		doors = wmi.getDoors();
