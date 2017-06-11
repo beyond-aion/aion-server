@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.dataholders;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -346,18 +347,21 @@ public class SpawnsData {
 			map.getSpawns().add(oldGroup);
 
 		xml.getParentFile().mkdir();
-		try (FileOutputStream fos = new FileOutputStream(xml)) {
+		try (ByteArrayOutputStream os = new ByteArrayOutputStream()) {
 			Marshaller marshaller = jc.createMarshaller();
 			marshaller.setSchema(schema);
 			marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-			marshaller.marshal(data, fos);
-			DataManager.SPAWNS_DATA.templates = data.templates;
-			DataManager.SPAWNS_DATA.afterUnmarshal(null, null);
-			DataManager.SPAWNS_DATA.clearTemplates();
+			marshaller.marshal(data, os);
+			try (FileOutputStream fos = new FileOutputStream(xml)) { // only overwrite xml if marshalling was successful (= no exception)
+				fos.write(os.toByteArray());
+			}
 		} catch (Exception e) {
 			log.error("Could not save XML file!", e);
 			return false;
 		}
+		DataManager.SPAWNS_DATA.templates = data.templates;
+		DataManager.SPAWNS_DATA.afterUnmarshal(null, null);
+		DataManager.SPAWNS_DATA.clearTemplates();
 		return true;
 	}
 

@@ -8,6 +8,8 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
+import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 
 /**
@@ -24,18 +26,18 @@ public class Delete extends AdminCommand {
 	public void execute(Player admin, String... params) {
 		VisibleObject target = admin.getTarget();
 		if (!(target instanceof Npc) && !(target instanceof Gatherable)) {
-			sendInfo(admin, "You need to target an Npc or Gatherable type.");
+			PacketSendUtility.sendPacket(admin, SM_SYSTEM_MESSAGE.STR_INVALID_TARGET());
 			return;
 		}
 
 		SpawnTemplate spawn = target.getSpawn();
 		if (spawn.hasPool()) {
-			sendInfo(admin, "Can't delete pooled spawn template");
+			sendInfo(admin, "Can't delete pooled spawn template.");
 			return;
 		}
 
 		if (!spawn.getClass().equals(SpawnTemplate.class)) {
-			sendInfo(admin, "Can't delete special spawns (spawn type: " + spawn.getClass().getSimpleName().replace("Template", "") + ")");
+			sendInfo(admin, "Can't delete special spawns (spawn type: " + spawn.getClass().getSimpleName().replace("Template", "") + ").");
 			return;
 		}
 
