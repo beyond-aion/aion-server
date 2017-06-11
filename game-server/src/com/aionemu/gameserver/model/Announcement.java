@@ -7,31 +7,11 @@ package com.aionemu.gameserver.model;
  */
 public class Announcement {
 
-	private int id;
-	private String faction;
-	private String announce;
-	private String chatType;
-	private int delay;
-
-	/**
-	 * Constructor without the ID of announcement
-	 * 
-	 * @param announce
-	 * @param faction
-	 * @param chatType
-	 * @param delay
-	 */
-	public Announcement(String announce, String faction, String chatType, int delay) {
-		this.announce = announce;
-
-		// Checking the right syntax
-		if (!faction.equalsIgnoreCase("ELYOS") && !faction.equalsIgnoreCase("ASMODIANS"))
-			faction = "ALL";
-
-		this.faction = faction;
-		this.chatType = chatType;
-		this.delay = delay;
-	}
+	private final int id;
+	private final Race faction;
+	private final String announce;
+	private final String chatType;
+	private final int delay;
 
 	/**
 	 * Constructor with the ID of announcement
@@ -45,26 +25,26 @@ public class Announcement {
 	public Announcement(int id, String announce, String faction, String chatType, int delay) {
 		this.id = id;
 		this.announce = announce;
-
-		// Checking the right syntax
-		if (!faction.equalsIgnoreCase("ELYOS") && !faction.equalsIgnoreCase("ASMODIANS"))
-			faction = "ALL";
-
-		this.faction = faction;
+		this.faction = getFactionEnum(faction);
 		this.chatType = chatType;
 		this.delay = delay;
 	}
 
+	private Race getFactionEnum(String faction) {
+		if (faction.equalsIgnoreCase("ELYOS"))
+			return Race.ELYOS;
+		else if (faction.equalsIgnoreCase("ASMODIANS"))
+			return Race.ASMODIANS;
+		return null;
+	}
+
 	/**
-	 * Return the id of the announcement In case of the id doesn't exist, return -1
+	 * Return the id of the announcement
 	 * 
 	 * @return int - Announcement's id
 	 */
 	public int getId() {
-		if (id != 0)
-			return id;
-		else
-			return -1;
+		return id;
 	}
 
 	/**
@@ -77,26 +57,12 @@ public class Announcement {
 	}
 
 	/**
-	 * Return the announcement's faction in string mode : - ELYOS - ASMODIANS - ALL
+	 * Return the announcement's faction (ELYOS or ASMODIANS, null if unrestricted)
 	 * 
-	 * @return String - Announcement's faction
+	 * @return Announcement's faction
 	 */
-	public String getFaction() {
+	public Race getFaction() {
 		return faction;
-	}
-
-	/**
-	 * Return the announcement's faction in Race enum mode : - Race.ELYOS - Race.ASMODIANS
-	 * 
-	 * @return Race - Announcement's faction
-	 */
-	public Race getFactionEnum() {
-		if (faction.equalsIgnoreCase("ELYOS"))
-			return Race.ELYOS;
-		else if (faction.equalsIgnoreCase("ASMODIANS"))
-			return Race.ASMODIANS;
-
-		return null;
 	}
 
 	/**

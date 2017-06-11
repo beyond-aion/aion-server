@@ -1,22 +1,20 @@
 package com.aionemu.gameserver.services;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.Collection;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Future;
 
-import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.dao.AnnouncementsDAO;
 import com.aionemu.gameserver.model.Announcement;
 import com.aionemu.gameserver.model.ChatType;
+import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_MESSAGE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
-import com.aionemu.gameserver.world.World;
 
 /**
  * Automatic Announcement System
@@ -25,19 +23,14 @@ import com.aionemu.gameserver.world.World;
  */
 public class AnnouncementService {
 
-	/**
-	 * Logger for this class.
-	 */
-	private static final Logger log = LoggerFactory.getLogger(AnnouncementService.class);
-
-	private Set<Announcement> announcements = new HashSet<>();
-	private List<Future<?>> delays = new ArrayList<>();
+	private final Map<Integer, Future<?>> delays = new ConcurrentHashMap<>();
+	private final Map<Integer, Announcement> announcements = new ConcurrentHashMap<>();
 
 	private AnnouncementService() {
-		load();
+		reload();
 	}
 
-	public static final AnnouncementService getInstance() {
+	public static AnnouncementService getInstance() {
 		return SingletonHolder.instance;
 	}
 
@@ -46,76 +39,53 @@ public class AnnouncementService {
 	 */
 	public void reload() {
 		// Cancel all tasks
-		if (!delays.isEmpty()) {
-			for (Future<?> delay : delays)
-				delay.cancel(true);
-			delays.clear();
-		}
-		// Clear all announcements
+		for (Future<?> delay : delays.values())
+			delay.cancel(true);
+		delays.clear();
 		announcements.clear();
 
 		// And load again all announcements
-		load();
+		for (Announcement announcement : DAOManager.getDAO(AnnouncementsDAO.class).loadAnnouncements())
+			schedule(announcement);
+
+		LoggerFactory.getLogger(AnnouncementService.class).info("Loaded " + announcements.size() + " announcements");
 	}
 
-	/**
-	 * Load the announcements system
-	 */
-	private void load() {
-		announcements.clear();
-		announcements.addAll(getDAO().getAnnouncements());
+	private void schedule(Announcement announce) {
+		announcements.put(announce.getId(), announce);
+		delays.put(announce.getId(), ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
 
-		for (Announcement announceMent : announcements) {
-			delays.add(ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
-
-				private Announcement announce = announceMent;
-
-				@Override
-				public void run() {
-					World.getInstance().forEachPlayer(player -> {
-						if (announce.getFaction().equalsIgnoreCase("ALL"))
-							if (announce.getChatType() == ChatType.SHOUT || announce.getChatType() == ChatType.GROUP_LEADER)
-								PacketSendUtility.sendPacket(player, new SM_MESSAGE(1, "Announcement", announce.getAnnounce(), announce.getChatType()));
-							else
-								PacketSendUtility.sendPacket(player,
-									new SM_MESSAGE(1, "Announcement", "Announcement: " + announce.getAnnounce(), announce.getChatType()));
-						else if (announce.getFactionEnum() == player.getRace())
-							if (announce.getChatType() == ChatType.SHOUT || announce.getChatType() == ChatType.GROUP_LEADER)
-								PacketSendUtility.sendPacket(player,
-									new SM_MESSAGE(1, (announce.getFaction().equalsIgnoreCase("ELYOS") ? "Elyos" : "Asmodian") + " Announcement",
-										announce.getAnnounce(), announce.getChatType()));
-							else
-								PacketSendUtility.sendPacket(player,
-									new SM_MESSAGE(1, (announce.getFaction().equalsIgnoreCase("ELYOS") ? "Elyos" : "Asmodian") + " Announcement",
-										(announce.getFaction().equalsIgnoreCase("ELYOS") ? "Elyos" : "Asmodian") + " Announcement: " + announce.getAnnounce(),
-										announce.getChatType()));
-					});
-				}
-			}, announceMent.getDelay() * 1000, announceMent.getDelay() * 1000));
-		}
-
-		log.info("Loaded " + announcements.size() + " announcements");
+			@Override
+			public void run() {
+				String sender = announce.getFaction() == null ? "" : announce.getFaction() == Race.ELYOS ? "Elyos " : "Asmodian ";
+				sender += "Announcement";
+				String msg = announce.getChatType() == ChatType.SHOUT || announce.getChatType() == ChatType.GROUP_LEADER ? "" : sender + ": ";
+				msg += announce.getAnnounce();
+				SM_MESSAGE message = new SM_MESSAGE(1, sender, msg, announce.getChatType());
+				PacketSendUtility.broadcastToWorld(message, player -> player.getOppositeRace() != announce.getFaction());
+			}
+		}, announce.getDelay() * 1000, announce.getDelay() * 1000));
 	}
 
-	public void addAnnouncement(Announcement announce) {
-		getDAO().addAnnouncement(announce);
+	public boolean addAnnouncement(String message, String faction, String chatType, int delay) {
+		int id = DAOManager.getDAO(AnnouncementsDAO.class).addAnnouncement(message, faction, chatType, delay);
+		if (id == -1)
+			return false;
+		schedule(new Announcement(id, message, faction, chatType, delay));
+		return true;
 	}
 
-	public boolean delAnnouncement(final int idAnnounce) {
-		return getDAO().delAnnouncement(idAnnounce);
+	public boolean delAnnouncement(int id) {
+		if (announcements.remove(id) == null || !DAOManager.getDAO(AnnouncementsDAO.class).delAnnouncement(id))
+			return false;
+		Future<?> delay = delays.remove(id);
+		if (delay != null)
+			delay.cancel(false);
+		return true;
 	}
 
-	public Set<Announcement> getAnnouncements() {
-		return getDAO().getAnnouncements();
-	}
-
-	/**
-	 * Retuns {@link com.aionemu.loginserver.dao.AnnouncementDAO} , just a shortcut
-	 * 
-	 * @return {@link com.aionemu.loginserver.dao.AnnouncementDAO}
-	 */
-	private AnnouncementsDAO getDAO() {
-		return DAOManager.getDAO(AnnouncementsDAO.class);
+	public Collection<Announcement> getAnnouncements() {
+		return announcements.values();
 	}
 
 	@SuppressWarnings("synthetic-access")

@@ -1,12 +1,18 @@
 package mysql5;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashSet;
-import java.util.Set;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.commons.lang3.StringEscapeUtils;
+import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.database.DB;
+import com.aionemu.commons.database.DatabaseFactory;
 import com.aionemu.commons.database.IUStH;
 import com.aionemu.commons.database.ReadStH;
 import com.aionemu.gameserver.dao.AnnouncementsDAO;
@@ -19,42 +25,56 @@ import com.aionemu.gameserver.model.Announcement;
 public class MySQL5Announcements extends AnnouncementsDAO {
 
 	@Override
-	public Set<Announcement> getAnnouncements() {
-		final Set<Announcement> result = new HashSet<>();
+	public List<Announcement> loadAnnouncements() {
+		final List<Announcement> result = new ArrayList<>();
 		DB.select("SELECT * FROM announcements ORDER BY id", new ReadStH() {
 
 			@Override
 			public void handleRead(ResultSet resultSet) throws SQLException {
-				while (resultSet.next())
-					result.add(new Announcement(resultSet.getInt("id"), resultSet.getString("announce"), resultSet.getString("faction"), resultSet
-						.getString("type"), resultSet.getInt("delay")));
+				while (resultSet.next()) {
+					result.add(getAnnouncement(resultSet));
+				}
 			}
 		});
 		return result;
 	}
 
-	@Override
-	public void addAnnouncement(final Announcement announce) {
-		DB.insertUpdate("INSERT INTO announcements (announce, faction, type, delay) VALUES (?, ?, ?, ?)", new IUStH() {
-
-			@Override
-			public void handleInsertUpdate(PreparedStatement preparedStatement) throws SQLException {
-				preparedStatement.setString(1, announce.getAnnounce());
-				preparedStatement.setString(2, announce.getFaction());
-				preparedStatement.setString(3, announce.getType());
-				preparedStatement.setInt(4, announce.getDelay());
-				preparedStatement.execute();
-			}
-		});
+	private Announcement getAnnouncement(ResultSet resultSet) throws SQLException {
+		int id = resultSet.getInt("id");
+		String message = StringEscapeUtils.unescapeJava(resultSet.getString("announce"));
+		String faction = resultSet.getString("faction");
+		String chatType = resultSet.getString("type");
+		int delay = resultSet.getInt("delay");
+		return new Announcement(id, message, faction, chatType, delay);
 	}
 
 	@Override
-	public boolean delAnnouncement(final int idAnnounce) {
+	public int addAnnouncement(String message, String faction, String chatType, int delay) {
+		try (Connection con = DatabaseFactory.getConnection();
+			PreparedStatement stmt = con.prepareStatement("INSERT INTO announcements (announce, faction, type, delay) VALUES (?, ?, ?, ?)",
+				Statement.RETURN_GENERATED_KEYS)) {
+			stmt.setString(1, message);
+			stmt.setString(2, faction);
+			stmt.setString(3, chatType);
+			stmt.setInt(4, delay);
+			stmt.execute();
+			try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
+				generatedKeys.next();
+				return generatedKeys.getInt(1);
+			}
+		} catch (SQLException e) {
+			LoggerFactory.getLogger(MySQL5Announcements.class).error("", e);
+			return -1;
+		}
+	}
+
+	@Override
+	public boolean delAnnouncement(int id) {
 		return DB.insertUpdate("DELETE FROM announcements WHERE id = ?", new IUStH() {
 
 			@Override
 			public void handleInsertUpdate(PreparedStatement preparedStatement) throws SQLException {
-				preparedStatement.setInt(1, idAnnounce);
+				preparedStatement.setInt(1, id);
 				preparedStatement.execute();
 			}
 		});
