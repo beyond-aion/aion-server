@@ -19,7 +19,7 @@ run_cs() {
   # activate job control in this script
   set -m
   # run server as a background job to instantly write PID file
-  java $@ -Xms128m -Xmx128m -XX:+TieredCompilation -XX:+UseNUMA -server -ea -cp "libs/*" com.aionemu.chatserver.ChatServer &
+  java $@ -Xms128m -Xmx128m -XX:+UseNUMA -ea -cp "libs/*" com.aionemu.chatserver.ChatServer &
   echo $! > chatserver.pid
   # put job in foreground again (wait for LS termination) and return exit code
   fg %+

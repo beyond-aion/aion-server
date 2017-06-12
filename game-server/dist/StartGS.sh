@@ -19,7 +19,7 @@ run_gs() {
   # activate job control in this script
   set -m
   # run server as a background job to instantly write PID file
-  java  $@ -Xms512m -Xmx2560m -XX:+TieredCompilation -XX:+UseNUMA -server -ea -javaagent:libs/${javaagentlib} -cp "libs/*" com.aionemu.gameserver.GameServer &
+  java  $@ -Xms512m -Xmx2560m -XX:+UseNUMA -ea -javaagent:libs/${javaagentlib} -cp "libs/*" com.aionemu.gameserver.GameServer &
   echo $! > gameserver.pid
   # put job in foreground again (wait for LS termination) and return exit code
   fg %+
