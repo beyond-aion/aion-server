@@ -1,8 +1,8 @@
 #!/bin/bash
 #=====================================================================================
-# Usage:        StartCS.sh [-noloop]
-# Parameters:   -noloop
-#                   disables restart loop service (server restart command won't work)
+# Usage:        StartCS.sh [jvmArgs]
+# Parameters:   jvmArgs
+#                   additional arguments to the JVM process starting the server
 # Description:  Starts CS.
 #=====================================================================================
 
@@ -19,7 +19,7 @@ run_cs() {
   # activate job control in this script
   set -m
   # run server as a background job to instantly write PID file
-  java -Xms128m -Xmx128m -XX:+TieredCompilation -XX:+UseNUMA -server -ea -cp "libs/*" com.aionemu.chatserver.ChatServer &
+  java $@ -Xms128m -Xmx128m -XX:+TieredCompilation -XX:+UseNUMA -server -ea -cp "libs/*" com.aionemu.chatserver.ChatServer &
   echo $! > chatserver.pid
   # put job in foreground again (wait for LS termination) and return exit code
   fg %+
@@ -29,7 +29,7 @@ run_cs() {
 loop() {
   echo "ChatServer restart loop is active."
   while true; do
-    run_cs
+    run_cs $@
     err=$?
     case ${err} in
       0) # CS exit code: shutdown
@@ -61,8 +61,4 @@ loop() {
 }
 
 cd `dirname $(readlink -f $0)`
-if [ $# -gt 0 ] && [ $1 = "-noloop" ]; then
-  run_cs
-else
-  loop
-fi
+loop $@
