@@ -3,11 +3,11 @@ package admincommands;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+import com.aionemu.commons.utils.ExitCode;
 import com.aionemu.commons.utils.info.SystemInfoUtil;
 import com.aionemu.commons.utils.info.VersionInfoUtil;
 import com.aionemu.gameserver.GameServer;
 import com.aionemu.gameserver.ShutdownHook;
-import com.aionemu.gameserver.ShutdownHook.ShutdownMode;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
@@ -80,14 +80,14 @@ public class Sys extends AdminCommand {
 		} else if (params[0].equals("shutdown")) {
 			try {
 				int val = Integer.parseInt(params[1]);
-				ShutdownHook.getInstance().shutdown(val, ShutdownMode.SHUTDOWN);
+				ShutdownHook.getInstance().shutdown(val, ExitCode.CODE_NORMAL);
 			} catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
 				PacketSendUtility.sendMessage(player, "Numbers only!");
 			}
 		} else if (params[0].equals("restart")) {
 			try {
 				int val = Integer.parseInt(params[1]);
-				ShutdownHook.getInstance().shutdown(val, ShutdownMode.RESTART);
+				ShutdownHook.getInstance().shutdown(val, ExitCode.CODE_RESTART);
 			} catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
 				PacketSendUtility.sendMessage(player, "Numbers only!");
 			}
