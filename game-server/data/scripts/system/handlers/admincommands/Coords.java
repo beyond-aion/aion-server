@@ -12,7 +12,7 @@ import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 public class Coords extends AdminCommand {
 
 	public Coords() {
-		super("coords");
+		super("coords", "Shows the targets current coordinates.");
 	}
 
 	@Override

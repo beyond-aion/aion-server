@@ -1,6 +1,6 @@
 package com.aionemu.gameserver.dao;
 
-import java.util.Set;
+import java.util.List;
 
 import com.aionemu.commons.database.dao.DAO;
 import com.aionemu.gameserver.model.Announcement;
@@ -12,11 +12,14 @@ import com.aionemu.gameserver.model.Announcement;
  */
 public abstract class AnnouncementsDAO implements DAO {
 
-	public abstract Set<Announcement> getAnnouncements();
+	public abstract List<Announcement> loadAnnouncements();
 
-	public abstract void addAnnouncement(final Announcement announce);
+	/**
+	 * @return The DB ID of the added announcement or -1 on error.
+	 */
+	public abstract int addAnnouncement(String message, String faction, String chatType, int delay);
 
-	public abstract boolean delAnnouncement(final int idAnnounce);
+	public abstract boolean delAnnouncement(int id);
 
 	/**
 	 * Returns class name that will be uses as unique identifier for all DAO classes

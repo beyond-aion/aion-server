@@ -8,7 +8,6 @@ import javax.xml.bind.annotation.XmlEnum;
  * 
  * @author SoulKeeper
  */
-
 @XmlEnum
 public enum Race {
 	/**
@@ -102,11 +101,11 @@ public enum Race {
 	}
 
 	public boolean isAsmoOrEly() {
-		return raceId < 2;
+		return this == ELYOS || this == ASMODIANS;
 	}
 
 	public boolean isPlayerRace() {
-		return isAsmoOrEly() || raceId == 27;
+		return isAsmoOrEly() || this == PC_ALL;
 	}
 
 	public DescriptionId getRaceDescriptionId() {

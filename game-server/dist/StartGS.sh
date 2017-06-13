@@ -1,8 +1,8 @@
 #!/bin/bash
 #=====================================================================================
-# Usage:        StartGS.sh [-noloop]
-# Parameters:   -noloop
-#                   disables restart loop service (server restart command won't work)
+# Usage:        StartGS.sh [jvmArgs]
+# Parameters:   jvmArgs
+#                   additional arguments to the JVM process starting the server
 # Description:  Starts GS.
 #=====================================================================================
 
@@ -19,7 +19,7 @@ run_gs() {
   # activate job control in this script
   set -m
   # run server as a background job to instantly write PID file
-  java  -Xms512m -Xmx2560m -XX:+TieredCompilation -XX:+UseNUMA -server -ea -javaagent:libs/${javaagentlib} -cp "libs/*" com.aionemu.gameserver.GameServer &
+  java  $@ -Xms512m -Xmx2560m -XX:+UseNUMA -ea -javaagent:libs/${javaagentlib} -cp "libs/*" com.aionemu.gameserver.GameServer &
   echo $! > gameserver.pid
   # put job in foreground again (wait for LS termination) and return exit code
   fg %+
@@ -29,7 +29,7 @@ run_gs() {
 loop() {
   echo "GameServer restart loop is active."
   while true; do
-    run_gs
+    run_gs $@
     err=$?
     case ${err} in
       0) # GS exit code: shutdown
@@ -61,8 +61,4 @@ loop() {
 }
 
 cd `dirname $(readlink -f $0)`
-if [ $# -gt 0 ] && [ $1 = "-noloop" ]; then
-  run_gs
-else
-  loop
-fi
+loop $@

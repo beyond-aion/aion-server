@@ -11,6 +11,9 @@
 				<include>config/**/*</include>
 				<include>data/**/*</include>
 			</includes>
+			<excludes>
+				<exclude>config/myls.properties</exclude>
+			</excludes>
 		</fileSet>
 		<fileSet>
 			<directory>dist</directory>

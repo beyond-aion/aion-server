@@ -158,13 +158,11 @@ public class _2900NoEscapingDestiny extends QuestHandler {
 							return false;
 						case SELECT7_1:
 							if (var == 96) {
-								if (!player.getInventory().isFull()) {
-									if (giveQuestItem(env, getStoneId(player), 1) && !isStigmaEquipped(env)) {
-										changeQuestStep(env, 96, 99); // 99
-										return sendQuestDialog(env, 3058);
-									} else {
-										return closeDialogWindow(env);
-									}
+								if (giveQuestItem(env, getStoneId(player), 1) && !isStigmaEquipped(env)) {
+									changeQuestStep(env, 96, 99); // 99
+									return sendQuestDialog(env, 3058);
+								} else {
+									return closeDialogWindow(env);
 								}
 							}
 							return false;

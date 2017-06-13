@@ -1,8 +1,8 @@
 #!/bin/bash
 #=====================================================================================
-# Usage:        StartLS.sh [-noloop]
-# Parameters:   -noloop
-#                   disables restart loop service (server restart command won't work)
+# Usage:        StartLS.sh [jvmArgs]
+# Parameters:   jvmArgs
+#                   additional arguments to the JVM process starting the server
 # Description:  Starts LS.
 #=====================================================================================
 
@@ -19,7 +19,7 @@ run_ls() {
   # activate job control in this script
   set -m
   # run server as a background job to instantly write PID file
-  java -Xms32m -Xmx32m -XX:+TieredCompilation -XX:+UseNUMA -server -ea -cp "libs/*" com.aionemu.loginserver.LoginServer &
+  java $@ -Xms32m -Xmx32m -XX:+UseNUMA -ea -cp "libs/*" com.aionemu.loginserver.LoginServer &
   echo $! > loginserver.pid
   # put job in foreground again (wait for LS termination) and return exit code
   fg %+
@@ -29,7 +29,7 @@ run_ls() {
 loop() {
   echo "LoginServer restart loop is active."
   while true; do
-    run_ls
+    run_ls $@
     err=$?
     case ${err} in
       0) # LS exit code: shutdown
@@ -61,8 +61,4 @@ loop() {
 }
 
 cd `dirname $(readlink -f $0)`
-if [ $# -gt 0 ] && [ $1 = "-noloop" ]; then
-  run_ls
-else
-  loop
-fi
+loop $@
