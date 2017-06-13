@@ -1,17 +1,17 @@
 package instance;
 
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
 import com.aionemu.gameserver.instance.handlers.InstanceID;
 import com.aionemu.gameserver.model.DescriptionId;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Gatherable;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.gameobjects.StaticDoor;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.instance.InstanceScoreType;
 import com.aionemu.gameserver.model.instance.instancereward.DarkPoetaReward;
@@ -28,15 +28,16 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 
 /**
  * @author Hilgert, xTz, Tiger, Ritsu
+ * @reworked Estrayl 12.06.2017
  */
 @InstanceID(300040000)
 public class DarkPoetaInstance extends GeneralInstanceHandler {
 
-	private Map<Integer, StaticDoor> doors;
-	private final AtomicInteger specNpcKilled = new AtomicInteger();
+	private final List<Integer> excludedNpcs = new ArrayList<>();
+	private final AtomicInteger killedGenerators = new AtomicInteger();
+	private DarkPoetaReward instanceReward;
 	private Future<?> instanceTimer;
 	private long startTime;
-	private DarkPoetaReward instanceReward;
 	private boolean isInstanceDestroyed;
 
 	@Override
@@ -46,66 +47,50 @@ public class DarkPoetaInstance extends GeneralInstanceHandler {
 			return;
 
 		int npcId = npc.getNpcId();
-		switch (npcId) {
-			case 700443:
-			case 700444:
-			case 700442:
-			case 700446:
-			case 700447:
-			case 700445:
-			case 700440:
-			case 700441:
-			case 700439:
-				toScheduleMarbataController(npcId);
-				return;
-		}
-
 		int points = calculatePointsReward(npc);
-		if (instanceReward.getInstanceScoreType().isStartProgress()) {
+		if (instanceReward.getInstanceScoreType().isStartProgress() && !excludedNpcs.contains(npcId)) {
 			instanceReward.addNpcKill();
 			instanceReward.addPoints(points);
 			sendPacket(npc.getObjectTemplate().getNameId(), points);
 		}
 		switch (npcId) {
-			case 214896:
-			case 214895:
-			case 214897:
-				int killedCount = specNpcKilled.incrementAndGet();
-				if (killedCount == 3) {
+			case 214895: // Main Power Generator
+			case 214896: // Auxiliary Power Generator
+			case 214897: // Emergency Generator
+				if (killedGenerators.incrementAndGet() == 3)
 					spawn(214904, 275.34537f, 323.02072f, 130.9302f, (byte) 52);
-				}
 				break;
-			case 214904:
+			case 214904: // Brigade General Anuhart
 				instanceReward.setInstanceScoreType(InstanceScoreType.END_PROGRESS);
 				instanceReward.setRank(checkRank(instanceReward.getPoints()));
-				sendPacket(npc.getObjectTemplate().getNameId(), points);
 				break;
-			case 215280:
-			case 215281:
-			case 215282:
-			case 215283:
-			case 215284:
-				spawn(730211, 1171.9467f, 1223.2805f, 145.43983f, (byte) 16);
+			case 215280: // Tahabata Pyrelord
+			case 215281: // Calindi Flamelord
+			case 215282: // Vanuka Infernus
+			case 215283: // Asaratu Bloodshade
+			case 215284: // Chramati Firetail
+				spawn(730211, 1171.9467f, 1223.2805f, 145.43983f, (byte) 16); // Exit
 				break;
 		}
 	}
 
 	private int getTime() {
-		long result = System.currentTimeMillis() - startTime;
-		if (result < 120000) {
-			return (int) (120000 - result);
-		} else if (result < 14520000) {
-			return (int) (14400000 - (result - 120000));
+		int current = (int) (System.currentTimeMillis() - startTime);
+		switch (instanceReward.getInstanceScoreType()) {
+			case PREPARING:
+				return 120000 - current;
+			case START_PROGRESS:
+				return 14400000 - current;
+			default:
+				return 0;
 		}
-		return 0;
 	}
 
-	private void sendPacket(final int nameId, final int point) {
-		instance.forEachPlayer((Player player) -> {
-			if (nameId != 0) {
-				PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1400237, new DescriptionId(nameId * 2 + 1), point));
-			}
-			PacketSendUtility.sendPacket(player, new SM_INSTANCE_SCORE(new DarkPoetaScoreInfo(instanceReward), instanceReward, getTime()));
+	private void sendPacket(int nameId, int points) {
+		instance.forEachPlayer(p -> {
+			if (nameId != 0)
+				PacketSendUtility.sendPacket(p, new SM_SYSTEM_MESSAGE(1400237, new DescriptionId(nameId * 2 + 1), points));
+			PacketSendUtility.sendPacket(p, new SM_INSTANCE_SCORE(new DarkPoetaScoreInfo(instanceReward), instanceReward, getTime()));
 		});
 	}
 
@@ -128,21 +113,17 @@ public class DarkPoetaInstance extends GeneralInstanceHandler {
 			spawn(215284, 1189f, 1244f, 141f, (byte) 76);
 			rank = 5;
 		} else {
-			rank = 8;
+			return rank = 8;
 		}
-		spawn(700478, 298.24423f, 316.21954f, 133.29759f, (byte) 56);
-		deletePortal();
-
+		schedulePortalDespawn((Npc) spawn(700478, 298.24423f, 316.21954f, 133.29759f, (byte) 56));
 		return rank;
 	}
 
-	private void deletePortal() {
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				if (!isInstanceDestroyed && getNpc(700478) != null)
-					getNpc(700478).getController().delete();
+	private void schedulePortalDespawn(Npc portal) {
+		ThreadPoolManager.getInstance().schedule(() -> {
+			if (!isInstanceDestroyed) {
+				if (portal != null)
+					portal.getController().delete();
 			}
 		}, 300000);
 	}
@@ -157,7 +138,6 @@ public class DarkPoetaInstance extends GeneralInstanceHandler {
 					case 21:
 						pointsReward = 786;
 						break;
-
 					default:
 						pointsReward = 300;
 				}
@@ -183,16 +163,17 @@ public class DarkPoetaInstance extends GeneralInstanceHandler {
 						pointsReward = 30;
 						break;
 					default:
-						pointsReward = 11;
+						if (npc.getNpcId() != 281178)
+							pointsReward = 11;
 						break;
 				}
 		}
 
 		// Special npcs
-		switch (npc.getObjectTemplate().getTemplateId()) {
-		// Drana
+		switch (npc.getNpcId()) {
+			// Drana
 			case 700520:
-				pointsReward = 48;
+				pointsReward = 52;
 				break;
 			// Walls
 			case 700518:
@@ -205,15 +186,22 @@ public class DarkPoetaInstance extends GeneralInstanceHandler {
 				break;
 			// Named1
 			case 214841:
+				pointsReward = -209;
+				break;
+			case 281116:
+				pointsReward = 1241;
+				break;
 			case 215431:
-				pointsReward = 162;
+				pointsReward = 208;
 				break;
 			// Named2
-			case 214842:
 			case 215429:
 			case 215430:
+				pointsReward = 190;
+				break;
+			case 214842:
 			case 215432:
-				pointsReward = 186;
+				pointsReward = 357;
 				break;
 			// Named3
 			case 214871:
@@ -225,13 +213,15 @@ public class DarkPoetaInstance extends GeneralInstanceHandler {
 			case 214849:
 			case 214850:
 			case 214851:
-				pointsReward = 318;
+				pointsReward = 319;
 				break;
 			// Generators
 			case 214895:
 			case 214896:
+				pointsReward = 377;
+				break;
 			case 214897:
-				pointsReward = 372;
+				pointsReward = 330;
 				break;
 			// Atmach
 			case 214843:
@@ -244,7 +234,7 @@ public class DarkPoetaInstance extends GeneralInstanceHandler {
 			case 215387:
 			case 215388:
 			case 215389:
-				pointsReward = 786;
+				pointsReward = 789;
 				break;
 			case 214904:
 				pointsReward = 954;
@@ -258,22 +248,26 @@ public class DarkPoetaInstance extends GeneralInstanceHandler {
 		return pointsReward;
 	}
 
+	private void onStart(boolean manually) {
+		instanceReward.setInstanceScoreType(InstanceScoreType.START_PROGRESS);
+		startTime = System.currentTimeMillis();
+		sendPacket(0, 0);
+		if (!manually)
+			instance.getDoors().values().stream().forEach(d -> d.setOpen(true));
+	}
+
 	@Override
 	public void onEnterInstance(final Player player) {
-		if (instanceTimer == null) {
-			startTime = System.currentTimeMillis();
-			instanceTimer = ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-				@Override
-				public void run() {
-					instanceReward.setInstanceScoreType(InstanceScoreType.START_PROGRESS);
-					sendPacket(0, 0);
-					openDoors();
-				}
-
-			}, 121000);
-		}
 		sendPacket(0, 0);
+	}
+
+	@Override
+	public void onOpenDoor(int doorId) {
+		if (doorId == 33) {
+			if (instanceTimer != null && !instanceTimer.isCancelled())
+				instanceTimer.cancel(true);
+			onStart(true);
+		}
 	}
 
 	@Override
@@ -282,42 +276,16 @@ public class DarkPoetaInstance extends GeneralInstanceHandler {
 			instanceTimer.cancel(false);
 		}
 		isInstanceDestroyed = true;
-		doors.clear();
 	}
 
 	@Override
 	public void onInstanceCreate(WorldMapInstance instance) {
 		super.onInstanceCreate(instance);
+		excludedNpcs.addAll(Arrays.asList(700439, 700440, 700441, 700442, 700443, 700444, 700445, 700446, 700447, 281178));
 		instanceReward = new DarkPoetaReward(mapId, instanceId);
 		instanceReward.setInstanceScoreType(InstanceScoreType.PREPARING);
-		doors = instance.getDoors();
-
-		// spawn Anuhart Scalewatch Captain(pool=1)
-		switch (Rnd.get(1, 2)) {
-			case 1:
-				spawn(215429, 565.488f, 256.224f, 108.999f, (byte) 52);
-				break;
-			case 2:
-				spawn(215429, 660.261f, 224.124f, 103.751f, (byte) 20);
-				break;
-		}
-
-		// spawn Anuhart Drakeblade Captain (pool=1)
-		switch (Rnd.get(1, 2)) {
-			case 1:
-				spawn(215430, 610.018f, 213.538f, 103.249f, (byte) 108);
-				break;
-			case 2:
-				spawn(215430, 470.792f, 378.285f, 118.125f, (byte) 117);
-				break;
-		}
-
-	}
-
-	private void openDoors() {
-		for (StaticDoor door : doors.values())
-			if (door != null)
-				door.setOpen(true);
+		startTime = System.currentTimeMillis();
+		instanceTimer = ThreadPoolManager.getInstance().schedule(() -> onStart(false), 121000);
 	}
 
 	@Override
@@ -332,69 +300,10 @@ public class DarkPoetaInstance extends GeneralInstanceHandler {
 		return true;
 	}
 
-	private void toScheduleMarbataController(final int npcId) {
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				Npc boss = null;
-				switch (npcId) {
-					case 700443:
-					case 700444:
-					case 700442:
-						boss = getNpc(214850);
-						break;
-					case 700446:
-					case 700447:
-					case 700445:
-						boss = getNpc(214851);
-						break;
-					case 700440:
-					case 700441:
-					case 700439:
-						boss = getNpc(214849);
-				}
-				if (!isInstanceDestroyed && boss != null && !boss.getLifeStats().isAlreadyDead()) {
-					switch (npcId) {
-						case 700443:
-							spawn(npcId, 676.257019f, 319.649994f, 99.375000f, (byte) 4);
-							break;
-						case 700444:
-							spawn(npcId, 655.851013f, 292.710999f, 99.375000f, (byte) 90);
-							break;
-						case 700442:
-							spawn(npcId, 636.117981f, 325.536987f, 99.375000f, (byte) 49);
-							break;
-						case 700446:
-							spawn(npcId, 598.706000f, 345.978000f, 99.375000f, (byte) 98);
-							break;
-						case 700447:
-							spawn(npcId, 567.775024f, 366.207001f, 99.375000f, (byte) 59);
-							break;
-						case 700445:
-							spawn(npcId, 605.625000f, 380.479004f, 99.375000f, (byte) 14);
-							break;
-						case 700440:
-							spawn(npcId, 681.851013f, 408.625000f, 100.472000f, (byte) 13);
-							break;
-						case 700441:
-							spawn(npcId, 646.549988f, 406.088013f, 99.375000f, (byte) 49);
-							break;
-						case 700439:
-							spawn(npcId, 665.37400f, 372.75100f, 99.375000f, (byte) 90);
-							break;
-					}
-				}
-			}
-
-		}, 28000);
-	}
-
 	@Override
 	public void onExitInstance(Player player) {
-		if (instanceReward.getInstanceScoreType().isEndProgress()) {
+		if (instanceReward.getInstanceScoreType().isEndProgress())
 			TeleportService.moveToInstanceExit(player, mapId, player.getRace());
-		}
 	}
 
 }

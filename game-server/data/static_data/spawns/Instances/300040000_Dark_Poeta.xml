@@ -175,6 +175,11 @@
 			<spot x="707.967" y="292.264" z="105.084" h="116"/>
 			<spot x="733.222" y="502.318" z="111.597" h="64"/>
 		</spawn>
+		<!-- Anuhart Drakeblade Captain -->
+		<spawn npc_id="215430" pool="1">
+			<spot x="610.018" y="213.538" z="103.249" h="108" />
+			<spot x="470.792" y="378.285" z="118.125" h="117" />
+		</spawn>
 		<!-- Anuhart Fighter -->
 		<spawn npc_id="214832">
 			<spot x="818.656" y="541.634" z="119.023" h="97"/>
@@ -425,6 +430,11 @@
 			<spot x="1198.1" y="392.75" z="136.34062" h="91" walker_id="DC5252530A08BB82B81234783EE75B44BCD3C29E"/>
 			<spot x="1239.44" y="350.21" z="145.43" h="45" walker_id="07C8862AC3539A529B540DCA26EEB96AE7D629B8"/>
 		</spawn>
+		<!-- Anuhart Scalewatch Captain -->
+		<spawn npc_id="215429" pool="1">
+			<spot x="565.488" y="256.224" z="108.999" h="52" />
+			<spot x="660.261" y="224.124" z="103.751" h="20" />
+		</spawn>
 		<!-- Anuhart Scalepriest -->
 		<spawn npc_id="214839">
 			<spot x="806.99" y="483.43" z="107.33812" h="85" walker_id="EF5DFE039FDB09CD8E7596D3F1F02B3F61809BFD"/>
@@ -598,10 +608,16 @@
 			<spot x="254.914" y="334.669" z="121.821" h="24"/>
 		</spawn>
 		<!-- Balaur Barricade -->
+		<spawn npc_id="700517">
+			<spot x="285.589" y="998.224" z="112.278" h="36" static_id="57" />
+		</spawn>
+		<!-- Balaur Barricade -->
+		<spawn npc_id="700556">
+			<spot x="309.505" y="983.875" z="111.148" h="55" static_id="55" />
+		</spawn>
+		<!-- Balaur Barricade -->
 		<spawn npc_id="700558">
-			<spot x="206.28" y="845.205" z="100.5" h="58" static_id="59"/>
-			<spot x="285.589" y="998.224" z="112.278" h="36" static_id="57"/>
-			<spot x="309.505" y="983.875" z="111.148" h="55" static_id="55"/>
+			<spot x="206.28" y="845.205" z="100.5" h="58" static_id="59" />
 		</spawn>
 		<!-- Balaur Operation Order -->
 		<spawn npc_id="730192">
@@ -671,18 +687,6 @@
 		<spawn npc_id="281347">
 			<spot x="228.541" y="427.384" z="103.806" h="62"/>
 		</spawn>
-		<!-- ControllerA -->
-		<spawn npc_id="700448">
-			<spot x="589.82" y="359.276" z="99.375" h="115"/>
-			<spot x="655.465" y="308.194" z="99.375" h="13"/>
-			<spot x="665.392" y="389.715" z="99.375" h="40"/>
-		</spawn>
-		<!-- ControllerB -->
-		<spawn npc_id="700449">
-			<spot x="590.557" y="370.859" z="99.375" h="87"/>
-			<spot x="656.203" y="319.777" z="99.375" h="12"/>
-			<spot x="666.13" y="401.298" z="99.375" h="56"/>
-		</spawn>
 		<!-- Drana -->
 		<spawn npc_id="700520">
 			<spot x="203.613" y="1122.72" z="155.923" h="34"/>
@@ -708,7 +712,7 @@
 			<spot x="402.924" y="1311.22" z="161.25" h="56"/>
 		</spawn>
 		<!-- Drana Lump -->
-		<spawn npc_id="281178">
+		<spawn npc_id="281178" respawn_time="60">
 			<spot x="249.02" y="1310.59" z="149.31" h="32"/>
 			<spot x="261.423" y="1413.46" z="155.787" h="55"/>
 			<spot x="267.671" y="1162.31" z="147.946" h="102"/>
@@ -734,30 +738,6 @@
 		<spawn npc_id="214895">
 			<spot x="231.455" y="308.222" z="120.634" h="62"/>
 		</spawn>
-		<!-- Marabata Attack Booster -->
-		<spawn npc_id="700439">
-			<spot x="665.374" y="372.751" z="99.375" h="90"/>
-		</spawn>
-		<!-- Marabata Attack Booster -->
-		<spawn npc_id="700442">
-			<spot x="636.118" y="325.537" z="99.375" h="49"/>
-		</spawn>
-		<!-- Marabata Attack Booster -->
-		<spawn npc_id="700445">
-			<spot x="605.625" y="380.479" z="99.375" h="14"/>
-		</spawn>
-		<!-- Marabata Defense Booster -->
-		<spawn npc_id="700440">
-			<spot x="681.851" y="408.625" z="100.472" h="13"/>
-		</spawn>
-		<!-- Marabata Defense Booster -->
-		<spawn npc_id="700443">
-			<spot x="676.257" y="319.65" z="99.375" h="4"/>
-		</spawn>
-		<!-- Marabata Defense Booster -->
-		<spawn npc_id="700446">
-			<spot x="598.706" y="345.978" z="99.375" h="98"/>
-		</spawn>
 		<!-- Marabata of Aether -->
 		<spawn npc_id="214850">
 			<spot x="655.029" y="314.399" z="99.375" h="27"/>
@@ -769,18 +749,6 @@
 		<!-- Marabata of Strength -->
 		<spawn npc_id="214849">
 			<spot x="665.385" y="394.82" z="99.3013" h="30"/>
-		</spawn>
-		<!-- Marabata Property Controller -->
-		<spawn npc_id="700441">
-			<spot x="646.55" y="406.088" z="99.375" h="49"/>
-		</spawn>
-		<!-- Marabata Property Controller -->
-		<spawn npc_id="700444">
-			<spot x="655.851" y="292.711" z="99.375" h="90"/>
-		</spawn>
-		<!-- Marabata Property Controller -->
-		<spawn npc_id="700447">
-			<spot x="567.775" y="366.207" z="99.375" h="59"/>
 		</spawn>
 		<!-- Mutated Fungie -->
 		<spawn npc_id="214885">
@@ -1075,7 +1043,7 @@
 		</spawn>
 		<!-- Wounded Scar -->
 		<spawn npc_id="214871">
-			<spot x="679.61" y="1193.51" z="143.42218" h="14" walker_id="9C671D72B623B88FDFAFF9E2AF491976B84AE720"/>
+			<spot x="679.61" y="1193.51" z="143.42218" h="14" />
 		</spawn>
 	</spawn_map>
 </spawns>

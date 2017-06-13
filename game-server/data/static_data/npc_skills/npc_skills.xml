@@ -20860,24 +20860,22 @@
         <npc_skill id="17528" lv="41" prob="25"/>
     </npc_skills>
     <npc_skills npc_ids="214849">
-        <npc_skill id="16684" lv="41" prob="15"/>
-        <npc_skill id="18112" lv="41" prob="15" min_hp="0" max_hp="80"/>
-        <npc_skill id="18110" lv="41" prob="0"/>
-        <npc_skill id="18556" lv="41" prob="0"/>
+        <npc_skill id="16684" lv="1" prob="100" cd="5000"/>
+        <npc_skill id="18112" lv="1" prob="100" cd="8000"/>
+        <npc_skill id="18113" lv="1" prob="100" cd="12000" />
+		  <npc_skill id="18576" lv="1" prob="100" cd="20000" />
     </npc_skills>
     <npc_skills npc_ids="214850">
-        <npc_skill id="16684" lv="41" prob="15"/>
-        <npc_skill id="18112" lv="1" prob="15" min_hp="0" max_hp="80"/>
-        <npc_skill id="18110" lv="41" prob="0"/>
-        <npc_skill id="18113" lv="41" prob="25"/>
-        <npc_skill id="18556" lv="41" prob="0"/>
+        <npc_skill id="16684" lv="1" prob="100" cd="5000"/>
+        <npc_skill id="18112" lv="1" prob="100" cd="8000"/>
+        <npc_skill id="18113" lv="1" prob="100" cd="12000" />
+		  <npc_skill id="18576" lv="1" prob="100" cd="20000" />
     </npc_skills>
     <npc_skills npc_ids="214851">
-        <npc_skill id="16684" lv="41" prob="15"/>
-        <npc_skill id="18114" lv="41" prob="15" min_hp="0" max_hp="80"/>
-        <npc_skill id="18576" lv="41" prob="25"/>
-        <npc_skill id="18110" lv="41" prob="0"/>
-        <npc_skill id="18556" lv="41" prob="0"/>
+        <npc_skill id="16684" lv="1" prob="100" cd="5000"/>
+        <npc_skill id="18112" lv="1" prob="100" cd="8000"/>
+        <npc_skill id="18113" lv="1" prob="100" cd="12000" />
+		  <npc_skill id="18576" lv="1" prob="100" cd="20000" />
     </npc_skills>
     <npc_skills npc_ids="214852">
         <npc_skill id="16602" lv="41" prob="25"/>
@@ -20974,6 +20972,10 @@
         <npc_skill id="16935" lv="41" prob="25"/>
     </npc_skills>
     <npc_skills npc_ids="214864">
+		  <npc_skill id="16822" lv="1" prob="100" is_post_spawn="true" />
+		  <npc_skill id="18529" lv="1" prob="100" max_hp="40" prio="1" next_chain_id="1" next_skill_time="7000" cd="30000"/>
+		  <npc_skill id="17736" lv="1" prob="0" chain_id="1" next_chain_id="2" next_skill_time="8000" />
+		  <npc_skill id="18531" lv="1" prob="0" chain_id="2" />
         <npc_skill id="16391" lv="41" prob="25"/>
         <npc_skill id="16457" lv="41" prob="25"/>
         <npc_skill id="16524" lv="41" prob="25"/>
@@ -21029,9 +21031,6 @@
     <npc_skills npc_ids="214870">
         <npc_skill id="16689" lv="41" prob="25"/>
     </npc_skills>
-    <npc_skills npc_ids="214871">
-        <npc_skill id="18532" lv="41" prob="25"/>
-    </npc_skills>
     <npc_skills npc_ids="214872">
         <npc_skill id="16519" lv="41" prob="25"/>
         <npc_skill id="16608" lv="41" prob="25"/>
@@ -21080,13 +21079,6 @@
         <npc_skill id="16532" lv="41" prob="25"/>
         <npc_skill id="17467" lv="41" prob="25"/>
         <npc_skill id="18155" lv="41" prob="25"/>
-    </npc_skills>
-    <npc_skills npc_ids="214880">
-        <npc_skill id="18534" lv="41" prob="10"/>
-        <npc_skill id="18535" lv="41" prob="25"/>
-        <npc_skill id="18573" lv="41" prob="25"/>
-        <npc_skill id="18574" lv="41" prob="10"/>
-        <npc_skill id="18575" lv="41" prob="25"/>
     </npc_skills>
     <npc_skills npc_ids="214881">
         <npc_skill id="16519" lv="41" prob="25"/>
@@ -21202,11 +21194,17 @@
         <npc_skill id="16673" lv="41" prob="25"/>
         <npc_skill id="17468" lv="41" prob="25"/>
         <npc_skill id="18168" lv="41" prob="25"/>
-        <npc_skill id="18170" lv="41" prob="25"/>
+        <npc_skill id="18170" lv="41" prob="100" prio="1" max_hp="25" cd="180000"/>
         <npc_skill id="18171" lv="41" prob="25"/>
         <npc_skill id="18227" lv="41" prob="25"/>
         <npc_skill id="18228" lv="41" prob="25"/>
-        <npc_skill id="18238" lv="41" prob="25"/>
+		  <npc_skill id="18238" lv="41" prob="100" prio="2" min_hp="60" max_hp="80" next_chain_id="1" next_skill_time="0" cd="120000">
+		    <cond cond_type="SPAWN_NPC" npc_id="281245" min_amount="4" min_distance="2" max_distance="5" random_direction="true" />
+		  </npc_skill>
+        <npc_skill id="18238" lv="41" prob="100" prio="3" max_hp="30" next_chain_id="1" next_skill_time="0" cd="40000">
+		    <cond cond_type="SPAWN_NPC" npc_id="281245" min_amount="2" min_distance="2" max_distance="5" random_direction="true" />
+		  </npc_skill>
+		  <npc_skill id="18215" lv="1" prob="0" chain_id="1" />
     </npc_skills>
     <npc_skills npc_ids="214905">
         <npc_skill id="16457" lv="34" prob="25"/>
@@ -23752,8 +23750,28 @@
     </npc_skills>
     <npc_skills npc_ids="215280">
         <npc_skill id="18225" lv="41" prob="40"/>
+		  <npc_skill id="18217" lv="50" prob="100" min_time="20000" min_hp="80" prio="1" next_chain_id="1" next_skill_time="5000" cd="30000" />
+		  <npc_skill id="18229" lv="50" prob="0" chain_id="1" next_chain_id="2" next_skill_time="4000" />
+		  <npc_skill id="18225" lv="50" prob="0" chain_id="2" />
+		  
+		  
+		  <npc_skill id="18232" lv="50" prob="100" min_time="20000" min_hp="60" max_hp="80" prio="2" next_chain_id="3" next_skill_time="5000" cd="30000" />
+		  <npc_skill id="18225" lv="50" prob="0" chain_id="3" next_chain_id="4" next_skill_time="4000" />
+		  <npc_skill id="18231" lv="50" prob="0" chain_id="4" />
+		  
+		  <npc_skill id="18236" lv="50" prob="100" min_time="20000" min_hp="30" max_hp="60" prio="3" next_chain_id="5" next_skill_time="5000" cd="30000" />
+		  <npc_skill id="18232" lv="50" prob="0" chain_id="5" next_chain_id="6" next_skill_time="4000" />
+		  <npc_skill id="18225" lv="50" prob="0" chain_id="6" />
+		  
+		  <npc_skill id="18239" lv="50" prob="100" min_time="20000" max_hp="30" prio="4" next_chain_id="7" next_skill_time="4000" cd="60000" />
+		  <npc_skill id="18243" lv="50" prob="0" chain_id="7" next_chain_id="8" next_skill_time="3000" />
+		  <npc_skill id="18243" lv="50" prob="0" chain_id="8" next_chain_id="9" next_skill_time="9000" />
+		  <npc_skill id="18232" lv="50" prob="0" chain_id="9" next_chain_id="10" next_skill_time="10500" />
+		  <npc_skill id="18241" lv="50" prob="0" chain_id="10"/>
     </npc_skills>
     <npc_skills npc_ids="215281">
+		  <npc_skill id="18233" lv="50" prob="100" min_hp="30" max_hp="60" cd="600000"/>
+		  <npc_skill id="18233" lv="50" prob="100" max_hp="30" cd="600000"/>
         <npc_skill id="18218" lv="41" prob="40"/>
         <npc_skill id="18226" lv="41" prob="40"/>
         <npc_skill id="18230" lv="41" prob="40"/>
@@ -24497,21 +24515,13 @@
         <npc_skill id="18120" lv="41" prob="25"/>
         <npc_skill id="18562" lv="41" prob="25"/>
     </npc_skills>
-    <npc_skills npc_ids="215388">
-        <npc_skill id="18534" lv="41" prob="25"/>
-        <npc_skill id="18535" lv="41" prob="25"/>
-        <npc_skill id="18536" lv="41" prob="25"/>
-        <npc_skill id="18573" lv="41" prob="25"/>
-        <npc_skill id="18574" lv="41" prob="25"/>
-        <npc_skill id="18575" lv="41" prob="25"/>
-    </npc_skills>
-    <npc_skills npc_ids="215389">
-        <npc_skill id="18534" lv="41" prob="25"/>
-        <npc_skill id="18535" lv="41" prob="25"/>
-        <npc_skill id="18536" lv="41" prob="25"/>
-        <npc_skill id="18573" lv="41" prob="25"/>
-        <npc_skill id="18574" lv="41" prob="25"/>
-        <npc_skill id="18575" lv="41" prob="25"/>
+    <npc_skills npc_ids="214880 215388 215389">
+        <npc_skill id="18534" lv="41" prob="100" next_chain_id="1" next_skill_time="3000" cd="20000" />
+        <npc_skill id="18535" lv="41" prob="35"/>
+        <npc_skill id="18536" lv="41" prob="35"/>
+        <npc_skill id="18573" lv="41" prob="35"/>
+        <npc_skill id="18574" lv="41" prob="0" chain_id="1" />
+        <npc_skill id="18575" lv="41" prob="35"/>
     </npc_skills>
     <npc_skills npc_ids="215390">
         <npc_skill id="16543" lv="41" prob="25"/>
@@ -60538,7 +60548,7 @@
         <npc_skill id="16862" lv="36" prob="25"/>
     </npc_skills>
     <npc_skills npc_ids="281258">
-        <npc_skill id="18219" lv="41" prob="25"/>
+        <npc_skill id="18219" lv="1" prob="100" is_post_spawn="true"/>
     </npc_skills>
     <npc_skills npc_ids="281259">
         <npc_skill id="16608" lv="41" prob="25"/>
@@ -60632,33 +60642,8 @@
         <npc_skill id="18587" lv="41" prob="25"/>
         <npc_skill id="18588" lv="41" prob="25"/>
     </npc_skills>
-    <npc_skills npc_ids="281347">
-        <npc_skill id="18523" lv="41" prob="25"/>
-        <npc_skill id="18526" lv="41" prob="25"/>
-        <npc_skill id="18527" lv="41" prob="25"/>
-        <npc_skill id="18528" lv="41" prob="25"/>
-        <npc_skill id="18571" lv="41" prob="25"/>
-    </npc_skills>
-    <npc_skills npc_ids="281348">
-        <npc_skill id="18523" lv="41" prob="25"/>
-        <npc_skill id="18526" lv="41" prob="25"/>
-        <npc_skill id="18527" lv="41" prob="25"/>
-        <npc_skill id="18528" lv="41" prob="25"/>
-        <npc_skill id="18571" lv="41" prob="25"/>
-    </npc_skills>
-    <npc_skills npc_ids="281349">
-        <npc_skill id="18523" lv="41" prob="25"/>
-        <npc_skill id="18526" lv="41" prob="25"/>
-        <npc_skill id="18527" lv="41" prob="25"/>
-        <npc_skill id="18528" lv="41" prob="25"/>
-        <npc_skill id="18571" lv="41" prob="25"/>
-    </npc_skills>
-    <npc_skills npc_ids="281350">
-        <npc_skill id="18523" lv="41" prob="25"/>
-        <npc_skill id="18526" lv="41" prob="25"/>
-        <npc_skill id="18527" lv="41" prob="25"/>
-        <npc_skill id="18528" lv="41" prob="25"/>
-        <npc_skill id="18571" lv="41" prob="25"/>
+    <npc_skills npc_ids="281347 281348 281349 281350">
+        <npc_skill id="18523" lv="1" prob="100" cd="10000"/>
     </npc_skills>
     <npc_skills npc_ids="281352">
         <npc_skill id="17140" lv="31" prob="25"/>

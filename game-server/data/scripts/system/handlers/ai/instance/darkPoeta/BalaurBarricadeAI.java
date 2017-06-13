@@ -4,27 +4,19 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.model.gameobjects.Creature;
-import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.skillengine.model.Effect;
 
-import ai.AggressiveNpcAI;
+import ai.OneDmgNoActionAI;
 
 /**
  * @author Ritsu
+ * @modified Estrayl 12.06.2017
  */
-
 @AIName("balaurbarricade")
-public class BalaurBarricadeAI extends AggressiveNpcAI {
+public class BalaurBarricadeAI extends OneDmgNoActionAI {
 
 	protected List<Integer> percents = new ArrayList<>();
-
-	@Override
-	public int modifyDamage(Creature attacker, int damage, Effect effect) {
-		return 1;
-	}
 
 	@Override
 	protected void handleAttack(Creature creature) {
@@ -37,58 +29,49 @@ public class BalaurBarricadeAI extends AggressiveNpcAI {
 			if (hpPercentage <= percent) {
 				percents.remove(percent);
 				switch (percent) {
-					case 60:
+					case 50:
+						spawnProtectors(true);
+						break;
 					case 10:
-						sp();
+						spawnProtectors(false);
 						break;
 				}
-
 				break;
 			}
 		}
 	}
-
-	private void sp() {
-		Npc npc = getOwner();
-		float direction = Rnd.get(0, 199) / 100f;
-		int distance = Rnd.get(1, 4);
-		float x1 = (float) (Math.cos(Math.PI * direction) * distance);
-		float y1 = (float) (Math.sin(Math.PI * direction) * distance);
-		if (npc.getNpcId() == 700517 || npc.getNpcId() == 700556) {
-			spawn(215262, npc.getX() + x1, npc.getY() + y1, npc.getZ(), (byte) 0);
-			spawn(215262, npc.getX() + y1, npc.getY() + x1, npc.getZ(), (byte) 0);
-		} else if (npc.getNpcId() == 700558) {
-			spawn(215262, npc.getX() + x1, npc.getY() + y1, npc.getZ(), (byte) 0);
-			spawn(214883, npc.getX() + y1, npc.getY() + x1, npc.getZ(), (byte) 0);
+	
+	private void spawnProtectors(boolean isFirstSpawn) {
+		switch (getNpcId()) {
+			case 700517:
+				spawn(isFirstSpawn ? 215262 : 214883, 282.2922f, 1003.0374f, 113.1999f, (byte) 25);
+				spawn(isFirstSpawn ? 215262 : 215263, 289.5031f, 1000.1637f, 112.9796f, (byte) 25);
+				break;
+			case 700556:
+				spawn(isFirstSpawn ? 215262 : 214883, 315.8379f, 982.8948f, 111.0691f, (byte) 17);
+				spawn(isFirstSpawn ? 215262 : 215263, 309.0993f, 989.5142f, 112.6760f, (byte) 17);
+				break;
+			case 700558:
+				spawn(isFirstSpawn ? 215262 : 214883, 199.7505f, 843.6876f, 100.6562f, (byte) 59);
+				spawn(isFirstSpawn ? 215262 : 215263, 201.9819f, 853.4918f, 101.0603f, (byte) 59);
+				break;
 		}
-	}
+	}	
 
 	private void addPercent() {
 		percents.clear();
-		Collections.addAll(percents, new Integer[] { 60, 10 });
+		Collections.addAll(percents, new Integer[] { 50, 10 });
 	}
 
 	@Override
 	protected void handleSpawned() {
 		addPercent();
-		super.handleDespawned();
+		super.handleSpawned();
 	}
 
 	@Override
 	protected void handleBackHome() {
 		addPercent();
 		super.handleBackHome();
-	}
-
-	@Override
-	protected void handleDespawned() {
-		percents.clear();
-		super.handleDespawned();
-	}
-
-	@Override
-	protected void handleDied() {
-		percents.clear();
-		super.handleDied();
 	}
 }
