@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.world.geo;
 
+import com.aionemu.gameserver.geoEngine.collision.CollisionIntention;
 import com.aionemu.gameserver.geoEngine.math.Vector3f;
 import com.aionemu.gameserver.geoEngine.models.GeoMap;
 import com.aionemu.gameserver.geoEngine.scene.Spatial;
@@ -31,6 +32,8 @@ public class DummyGeoMap extends GeoMap {
 	@Override
 	public Vector3f getClosestCollision(float x, float y, float z, float targetX, float targetY, float targetZ, boolean atNearGroundZ, int instanceId,
 		byte intentions) {
+		if ((intentions & CollisionIntention.WALK.getId()) == 0) // if it's no npc walk, add 1m as defaultUp offset to not fall through the map on hills
+			targetZ += 0.5f;
 		return new Vector3f(targetX, targetY, targetZ);
 	}
 
