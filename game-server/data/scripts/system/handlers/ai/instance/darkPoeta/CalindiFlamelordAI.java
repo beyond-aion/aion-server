@@ -1,15 +1,13 @@
 package ai.instance.darkPoeta;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.Future;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIName;
-import com.aionemu.gameserver.ai.manager.EmoteManager;
-import com.aionemu.gameserver.model.gameobjects.Creature;
-import com.aionemu.gameserver.skillengine.SkillEngine;
+import com.aionemu.gameserver.model.skill.NpcSkillEntry;
+import com.aionemu.gameserver.model.skill.QueuedNpcSkillEntry;
+import com.aionemu.gameserver.model.templates.npcskill.QueuedNpcSkillTemplate;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldPosition;
@@ -18,120 +16,61 @@ import ai.AggressiveNpcAI;
 
 /**
  * @author Ritsu
+ * @reworked Estrayl 12.06.2017
  */
-@AIName("calindiflamelord")
+@AIName("calindi_flamelord")
 public class CalindiFlamelordAI extends AggressiveNpcAI {
 
-	private List<Integer> percents = new ArrayList<>();
-	private AtomicBoolean isStart = new AtomicBoolean(false);
+	private Future<?> wipeTask;
 
 	@Override
 	protected void handleSpawned() {
-		addPercent();
 		super.handleSpawned();
+		scheduleWipe();
 	}
 
-	@Override
-	protected void handleAttack(Creature creature) {
-		super.handleAttack(creature);
-		checkPercentage(getLifeStats().getHpPercentage());
-		if (isStart.compareAndSet(false, true)) {
-			checkTimer();
-		}
-
+	private void rndSpawnInRange() {
+		float direction = Rnd.get(0, 199) / 100f;
+		int distance = Rnd.get(0, 2);
+		float x1 = (float) (Math.cos(Math.PI * direction) * distance);
+		float y1 = (float) (Math.sin(Math.PI * direction) * distance);
+		WorldPosition p = getPosition();
+		spawn(281268, p.getX() + x1, p.getY() + y1, p.getZ(), p.getHeading());
 	}
 
-	private synchronized void checkPercentage(int hpPercentage) {
-		for (Integer percent : percents) {
-			if (hpPercentage <= percent) {
-				percents.remove(percent);
-				if (percent == 60) {
-					EmoteManager.emoteStopAttacking(getOwner());
-					SkillEngine.getInstance().getSkill(getOwner(), 18233, 50, getOwner()).useSkill();
-					ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-						@Override
-						public void run() {
-							sp(281267);
-						}
-					}, 3000);
-				} else {
-					EmoteManager.emoteStopAttacking(getOwner());
-					SkillEngine.getInstance().getSkill(getOwner(), 18233, 50, getOwner()).useSkill();
-					ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-						@Override
-						public void run() {
-							sp(281268);
-							sp(281268);
-						}
-					}, 3000);
-				}
-				break;
-			}
-		}
-	}
-
-	private void sp(int npcId) {
-		if (npcId == 281267) {
-			spawn(npcId, 1191.2714f, 1220.5795f, 144.2901f, (byte) 36);
-			spawn(npcId, 1188.3695f, 1257.1322f, 139.66028f, (byte) 80);
-			spawn(npcId, 1177.1423f, 1253.9136f, 140.58705f, (byte) 97);
-			spawn(npcId, 1163.5889f, 1231.9149f, 145.40042f, (byte) 118);
-		} else {
-			float direction = Rnd.get(0, 199) / 100f;
-			int distance = Rnd.get(0, 2);
-			float x1 = (float) (Math.cos(Math.PI * direction) * distance);
-			float y1 = (float) (Math.sin(Math.PI * direction) * distance);
-			WorldPosition p = getPosition();
-			spawn(npcId, p.getX() + x1, p.getY() + y1, p.getZ(), p.getHeading());
-		}
-	}
-
-	private void checkTimer() {
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				if (!isAlreadyDead()) {
-					EmoteManager.emoteStopAttacking(getOwner());
-					PacketSendUtility.broadcastToMap(getOwner(), 1400259);
-					SkillEngine.getInstance().getSkill(getOwner(), 19679, 50, getTarget()).useSkill();
-					ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-						@Override
-						public void run() {
-							if (!isAlreadyDead()) {
-								getOwner().getController().delete();
-								PacketSendUtility.broadcastToMap(getOwner(), 1400260);
-							}
-						}
-					}, 2000);
-				}
-			}
+	private void scheduleWipe() {
+		PacketSendUtility.broadcastToMap(getOwner(), SM_SYSTEM_MESSAGE.STR_MSG_INSTANCE_A_RANK_BATTLE_TIME());
+		wipeTask = ThreadPoolManager.getInstance().schedule(() -> {
+			if (!getLifeStats().isAlreadyDead())
+				getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(19679, 50, 100, 0, 3000, true)));
 		}, 600000);
 	}
 
-	private void addPercent() {
-		percents.clear();
-		Collections.addAll(percents, new Integer[] { 60, 30 });
-	}
-
 	@Override
-	protected void handleBackHome() {
-		addPercent();
-		super.handleBackHome();
-	}
-
-	@Override
-	protected void handleDespawned() {
-		percents.clear();
-		super.handleDespawned();
+	public void onEndUseSkill(NpcSkillEntry usedSkill) {
+		switch (usedSkill.getSkillId()) {
+			case 18233:
+				if (getLifeStats().getHpPercentage() >= 30 && getLifeStats().getHpPercentage() <= 60) {
+					spawn(281267, 1191.2714f, 1220.5795f, 144.2901f, (byte) 36);
+					spawn(281267, 1188.3695f, 1257.1322f, 139.66028f, (byte) 80);
+					spawn(281267, 1177.1423f, 1253.9136f, 140.58705f, (byte) 97);
+					spawn(281267, 1163.5889f, 1231.9149f, 145.40042f, (byte) 118);
+				} else {
+					rndSpawnInRange();
+					rndSpawnInRange();
+				}
+				break;
+			case 19679: // You are unworthy.
+				PacketSendUtility.broadcastToMap(getOwner(), SM_SYSTEM_MESSAGE.STR_MSG_INSTANCE_A_RANK_BATTLE_END());
+				getOwner().getController().onDelete();
+				break;
+		}
 	}
 
 	@Override
 	protected void handleDied() {
-		percents.clear();
+		if (wipeTask != null && !wipeTask.isCancelled())
+			wipeTask.cancel(true);
 		super.handleDied();
 	}
 }

@@ -1,278 +1,76 @@
 package ai.instance.darkPoeta;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 import java.util.concurrent.Future;
 
 import com.aionemu.gameserver.ai.AIName;
-import com.aionemu.gameserver.ai.manager.EmoteManager;
-import com.aionemu.gameserver.model.gameobjects.Creature;
-import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.skillengine.SkillEngine;
+import com.aionemu.gameserver.model.skill.NpcSkillEntry;
+import com.aionemu.gameserver.model.skill.QueuedNpcSkillEntry;
+import com.aionemu.gameserver.model.templates.npcskill.QueuedNpcSkillTemplate;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
+import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 import ai.AggressiveNpcAI;
 
 /**
  * @author Ritsu
+ * @reworked Estrayl 13.06.2017
  */
-
-@AIName("tahabatapyrelord")
+@AIName("tahabata_pyrelord")
 public class TahabataPyrelordAI extends AggressiveNpcAI {
 
-	protected List<Integer> percents = new ArrayList<>();
-	private boolean lock1 = false;
-	private boolean lock2 = false;
-	private Future<?> useSkillTask;
-	private Future<?> firstTask;
-	private Future<?> secondTask;
-	private Future<?> thirdTask;
-	private Future<?> lastTask;
+	private Future<?> wipeTask;
 
 	@Override
 	protected void handleSpawned() {
-		addPercent();
-		lock2 = false;
 		super.handleSpawned();
+		scheduleWipe();
+	}
+
+	private void scheduleWipe() {
+		PacketSendUtility.broadcastToMap(getOwner(), SM_SYSTEM_MESSAGE.STR_MSG_INSTANCE_S_RANK_BATTLE_TIME());
+		wipeTask = ThreadPoolManager.getInstance().schedule(() -> {
+			if (!getLifeStats().isAlreadyDead())
+				getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(19679, 50, 100, 0, 3000, true)));
+		}, 300000);
 	}
 
 	@Override
-	protected void handleAttack(Creature creature) {
-		super.handleAttack(creature);
-		checkPercentage(getLifeStats().getHpPercentage());
-	}
-
-	private synchronized void checkPercentage(int hpPercentage) {
-		for (Integer percent : percents) {
-			if (hpPercentage <= percent) {
-				percents.remove(percent);
-				switch (percent) {
-					case 100:
-						useFirstSkillTree();
-						break;
-					case 80:
-					case 60:
-						cancelTask();
-						firstSkill();
-						break;
-					case 30:
-						cancelTask();
-						lock1 = false;
-						useLastSkillTree();
-						break;
-				}
+	public void onEndUseSkill(NpcSkillEntry usedSkill) {
+		switch (usedSkill.getSkillId()) {
+			case 19679: // You are unworthy.
+				PacketSendUtility.broadcastToMap(getOwner(), SM_SYSTEM_MESSAGE.STR_MSG_INSTANCE_S_RANK_BATTLE_END());
+				getOwner().getController().onDelete();
 				break;
-			}
-		}
-	}
-
-	private void useFirstSkillTree() {
-		useSkillTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				firstSkill();
-			}
-		}, 20000);
-	}
-
-	private void firstSkill() {
-		if (!lock2) {
-			int hpPercent = getLifeStats().getHpPercentage();
-			if (hpPercent > 80) {
-				EmoteManager.emoteStopAttacking(getOwner());
-				useSkill(18217);// Strike Down with Anger
-			} else if (80 >= hpPercent && hpPercent > 60) {
-				EmoteManager.emoteStopAttacking(getOwner());
-				useSkill(18232);// Explosion of Wrath
-			} else if (60 >= hpPercent && hpPercent > 30) {
-				EmoteManager.emoteStopAttacking(getOwner());
-				useSkill(18236);// Eruption of Power
-				sp(281258);// Faithful Subordinate(stone gargoyle)
-			}
-			skillTwo();
-		}
-	}
-
-	private void skillTwo() {
-		if (!lock2)
-			firstTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-				@Override
-				public void run() {
-					int hpPercent = getLifeStats().getHpPercentage();
-					if (hpPercent > 80) {
-						EmoteManager.emoteStopAttacking(getOwner());
-						useSkill(18229);// Dragon's Fireball
-					} else if (80 >= hpPercent && hpPercent > 60) {
-						EmoteManager.emoteStopAttacking(getOwner());
-						useSkill(18225);// Dragon Flame
-					} else if (60 >= hpPercent && hpPercent > 30) {
-						EmoteManager.emoteStopAttacking(getOwner());
-						useSkill(18232);// Explosion of Wrath
-					}
-					skillThree();
-				}
-			}, 5000);
-	}
-
-	private void skillThree() {
-		if (!lock2)
-			secondTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-				@Override
-				public void run() {
-					int hpPercent = getLifeStats().getHpPercentage();
-					if (hpPercent > 80 || (60 >= hpPercent && hpPercent > 30)) {
-						EmoteManager.emoteStopAttacking(getOwner());
-						useSkill(18225);// Dragon Flame
-					} else if (80 >= hpPercent && hpPercent > 60) {
-						EmoteManager.emoteStopAttacking(getOwner());
-						useSkill(18231);// Mighty Thrust
-					}
-					thirdTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-						@Override
-						public void run() {
-							firstSkill();
-						}
-					}, 31000);
-				}
-			}, 4000);
-	}
-
-	private void useLastSkillTree() {
-		if (!lock2) {
-			EmoteManager.emoteStopAttacking(getOwner());
-			getOwner().clearAttackedCount();
-			useSkill(18239);// Soul Petrify
-			firstTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-				@Override
-				public void run() {
-					EmoteManager.emoteStopAttacking(getOwner());
-					useSkill(18243);// Destroy Frozen Soul
-					lastTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-						@Override
-						public void run() {
-							useSkill(18243);// Destroy Frozen Soul
-							lastSkillTree2();
-						}
-					}, 3000);
-				}
-			}, 4000);
-		}
-	}
-
-	private void lastSkillTree2() {
-		if (!lock2) {
-			secondTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-				@Override
-				public void run() {
-					useSkill(18232);// Explosion of Wrath
-					if (!lock1) {
-						EmoteManager.emoteStopAttacking(getOwner());
-						lock1 = true;
-						lastSkillTree2();
-					}
-				}
-			}, 10000);
-			if (lock1) {
-				thirdTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-					@Override
-					public void run() {
-						EmoteManager.emoteStopAttacking(getOwner());
-						useSkill(18241);// Powerful Flame
-						sp(281259);// Faithful Subordinate(Dragon)
-						lastTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-							@Override
-							public void run() {
-								lock1 = false;
-								useLastSkillTree();// new skilltree repeat
-							}
-						}, 27000);
-					}
-				}, 13000);
-			}
+			case 18236:
+				spawn(281258, 1191.2714f, 1220.5795f, 144.2901f, (byte) 36);
+				spawn(281258, 1188.3695f, 1257.1322f, 139.66028f, (byte) 80);
+				spawn(281258, 1177.1423f, 1253.9136f, 140.58705f, (byte) 97);
+				spawn(281258, 1163.5889f, 1231.9149f, 145.40042f, (byte) 118);
+				break;
+			case 18241:
+				spawn(281259, 1182.0021f, 1244.0125f, 142.67587f, (byte) 88);
+				spawn(281259, 1192.3885f, 1236.5231f, 142.50638f, (byte) 68);
+				spawn(281259, 1185.647f, 1227.2747f, 144.2261f, (byte) 32);
+				spawn(281259, 1172.3302f, 1232.5709f, 144.70761f, (byte) 12);
+				break;
 		}
 	}
 
 	private void cancelTask() {
-		if (useSkillTask != null && !useSkillTask.isDone())
-			useSkillTask.cancel(true);
-		else if (firstTask != null && !firstTask.isDone())
-			firstTask.cancel(true);
-		else if (secondTask != null && !secondTask.isDone())
-			secondTask.cancel(true);
-		else if (thirdTask != null && !thirdTask.isDone())
-			thirdTask.cancel(true);
-		else if (lastTask != null && !lastTask.isDone())
-			lastTask.cancel(true);
-	}
-
-	private void sp(int npcId) {
-		if (!lock2) {
-			if (npcId == 281258) {
-				spawn(npcId, 1191.2714f, 1220.5795f, 144.2901f, (byte) 36);
-				spawn(npcId, 1188.3695f, 1257.1322f, 139.66028f, (byte) 80);
-				spawn(npcId, 1177.1423f, 1253.9136f, 140.58705f, (byte) 97);
-				spawn(npcId, 1163.5889f, 1231.9149f, 145.40042f, (byte) 118);
-			} else {
-				spawn(npcId, 1182.0021f, 1244.0125f, 142.67587f, (byte) 88);
-				spawn(npcId, 1192.3885f, 1236.5231f, 142.50638f, (byte) 68);
-				spawn(npcId, 1185.647f, 1227.2747f, 144.2261f, (byte) 32);
-				spawn(npcId, 1172.3302f, 1232.5709f, 144.70761f, (byte) 12);
-			}
-		}
-	}
-
-	private void useSkill(int skillId) {
-		SkillEngine.getInstance().getSkill(getOwner(), skillId, 50, getTarget()).useSkill();
-	}
-
-	private void addPercent() {
-		percents.clear();
-		Collections.addAll(percents, new Integer[] { 100, 80, 60, 30 });
-	}
-
-	private void despawn(int npcId) {
-		for (Npc npc : getPosition().getWorldMapInstance().getNpcs(npcId)) {
-			npc.getController().delete();
-		}
-	}
-
-	@Override
-	protected void handleBackHome() {
-		addPercent();
-		cancelTask();
-		lock2 = false;
-		despawn(281258);
-		despawn(281259);
-		super.handleBackHome();
-	}
-
-	@Override
-	protected void handleDespawned() {
-		percents.clear();
-		cancelTask();
-		despawn(281258);
-		despawn(281259);
-		lock2 = true;
-		super.handleDespawned();
+		if (wipeTask != null && !wipeTask.isCancelled())
+			wipeTask.cancel(true);
 	}
 
 	@Override
 	protected void handleDied() {
-		percents.clear();
 		cancelTask();
-		despawn(281258);
-		despawn(281259);
-		lock2 = true;
 		super.handleDied();
+	}
+
+	@Override
+	protected void handleDespawned() {
+		super.handleDespawned();
+		cancelTask();
 	}
 }
