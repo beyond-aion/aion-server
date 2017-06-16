@@ -63,6 +63,7 @@ public class DarkPoetaInstance extends GeneralInstanceHandler {
 			case 214904: // Brigade General Anuhart
 				instanceReward.setInstanceScoreType(InstanceScoreType.END_PROGRESS);
 				instanceReward.setRank(checkRank(instanceReward.getPoints()));
+				sendPacket(0, 0);
 				break;
 			case 215280: // Tahabata Pyrelord
 			case 215281: // Calindi Flamelord
@@ -80,6 +81,7 @@ public class DarkPoetaInstance extends GeneralInstanceHandler {
 			case PREPARING:
 				return 120000 - current;
 			case START_PROGRESS:
+			case END_PROGRESS:
 				return 14400000 - current;
 			default:
 				return 0;
@@ -125,7 +127,7 @@ public class DarkPoetaInstance extends GeneralInstanceHandler {
 				if (portal != null)
 					portal.getController().delete();
 			}
-		}, 300000);
+		}, 180000);
 	}
 
 	private int calculatePointsReward(Npc npc) {
@@ -176,7 +178,9 @@ public class DarkPoetaInstance extends GeneralInstanceHandler {
 				pointsReward = 52;
 				break;
 			// Walls
+			case 700517:
 			case 700518:
+			case 700556:
 			case 700558:
 				pointsReward = 156;
 				break;

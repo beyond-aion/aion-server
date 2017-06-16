@@ -759,6 +759,7 @@
 	<!-- Balic Horns & Scales -->
 	<gd_rule rule_name="Balaur Horns + Scales" base_chance="12.5" min_diff="-9" max_diff="0">
 		<gd_races>
+			<gd_race race="DRAGON" />
 			<gd_race race="DRAKAN" />
 			<gd_race race="NAGA" />
 			<gd_race race="LIZARDMAN" />
