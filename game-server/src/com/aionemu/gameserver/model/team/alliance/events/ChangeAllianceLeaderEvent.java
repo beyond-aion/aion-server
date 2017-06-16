@@ -1,7 +1,5 @@
 package com.aionemu.gameserver.model.team.alliance.events;
 
-import java.util.Collection;
-
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.team.alliance.PlayerAlliance;
 import com.aionemu.gameserver.model.team.alliance.PlayerAllianceMember;
@@ -29,24 +27,18 @@ public class ChangeAllianceLeaderEvent extends ChangeLeaderEvent<PlayerAlliance>
 
 	@Override
 	public void handleEvent() {
-		Player oldLeader = team.getLeaderObject();
 		if (eventPlayer == null) {
-			Collection<Integer> viceCaptainIds = team.getViceCaptainIds();
-			for (Integer viceCaptainId : viceCaptainIds) {
+			for (Integer viceCaptainId : team.getViceCaptainIds()) {
 				PlayerAllianceMember viceCaptain = team.getMember(viceCaptainId);
 				if (viceCaptain.isOnline()) {
 					changeLeaderTo(viceCaptain.getObject());
-					viceCaptainIds.remove(viceCaptainId);
-					break;
+					return;
 				}
 			}
-			if (team.isLeader(oldLeader)) {
-				changeLeaderToNextAvailablePlayer();
-			}
+			changeLeaderToNextAvailablePlayer();
 		} else {
+			Player oldLeader = team.getLeaderObject();
 			changeLeaderTo(eventPlayer);
-		}
-		if (eventPlayer != null) {
 			PlayerAllianceService.changeViceCaptain(oldLeader, AssignType.DEMOTE_CAPTAIN_TO_VICECAPTAIN);
 		}
 	}
@@ -55,6 +47,7 @@ public class ChangeAllianceLeaderEvent extends ChangeLeaderEvent<PlayerAlliance>
 	protected void changeLeaderTo(final Player player) {
 		final boolean inLeague = team.isInLeague();
 		team.changeLeader(team.getMember(player.getObjectId()));
+		team.getViceCaptainIds().remove(player.getObjectId());
 		if (inLeague) {
 			team.getLeague().broadcast();
 		}

@@ -63,8 +63,7 @@ public abstract class GeneralTeam<M extends AionObject, TM extends TeamMember<M>
 
 	public void removeMember(TM member) {
 		Objects.requireNonNull(member, "Team member should be not null");
-		Preconditions.checkState(members.get(member.getObjectId()) != null, "Team member is already removed");
-		members.remove(member.getObjectId());
+		Preconditions.checkState(members.remove(member.getObjectId()) != null, "Team member is already removed");
 	}
 
 	public final void removeMember(int objectId) {
