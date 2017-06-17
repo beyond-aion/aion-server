@@ -305,7 +305,7 @@
 					</spawn>
 					<!-- Stallari -->
 					<spawn npc_id="257605">
-						<spot x="1196.241" y="787.5281" z="313.0133" h="30"/>
+						<spot x="1196.241" y="787.5281" z="314.0141" h="30"/>
 					</spawn>
 				</siege_mod>
 			</siege_race>
@@ -464,7 +464,7 @@
 					</spawn>
 					<!-- Stallari -->
 					<spawn npc_id="257610">
-						<spot x="1196.241" y="787.5281" z="313.0133" h="30"/>
+						<spot x="1196.241" y="787.5281" z="314.0141" h="30"/>
 					</spawn>
 					<!-- Linar -->
 					<spawn npc_id="799362" respawn_time="295">
@@ -755,7 +755,7 @@
 					</spawn>
 					<!-- Dux -->
 					<spawn npc_id="257600">
-						<spot x="1196.241" y="787.5281" z="313.0133" h="30"/>
+						<spot x="1196.241" y="787.5281" z="314.0141" h="30"/>
 					</spawn>
 				</siege_mod>
 			</siege_race>
