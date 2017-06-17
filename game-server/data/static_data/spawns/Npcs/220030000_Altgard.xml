@@ -1013,13 +1013,12 @@
 		</spawn>
 		<!-- Disguised Germir -->
 		<spawn npc_id="798040" respawn_time="295">
-			<temporary_spawn spawn_time="4.*.*" despawn_time="21.*.*"/>
 			<spot x="2330" y="791" z="323" h="120"/>
 		</spawn>
 		<!-- Disguised Germir -->
 		<spawn npc_id="798041" respawn_time="295">
 			<temporary_spawn spawn_time="4.*.*" despawn_time="21.*.*"/>
-			<spot x="2588" y="953" z="307" h="45"/>
+			<spot x="2588" y="953" z="306" h="45"/>
 		</spawn>
 		<!-- Donabe -->
 		<spawn npc_id="203579" respawn_time="295">

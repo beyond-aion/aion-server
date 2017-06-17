@@ -147,8 +147,6 @@ public class GeoMap extends Node {
 			return end;
 		}
 
-		if (result.getDistance() < 1)
-			return new Vector3f(x, y, z);
 		Vector3f contactPoint = result.getContactPoint();
 		contactPoint.z -= 1; // -1m (offset from getCollisions call)
 		if (atNearGroundZ)
@@ -158,7 +156,7 @@ public class GeoMap extends Node {
 	}
 
 	private void findAndSetGroundZNearPoint(Vector3f point, int instanceId) {
-		float geoZ = getZ(point.x, point.y, point.z + 2, point.z - 2, instanceId);
+		float geoZ = getZ(point.x, point.y, point.z + 1, point.z - 2, instanceId);
 		if (!Float.isNaN(geoZ))
 			point.setZ(geoZ);
 	}

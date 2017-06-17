@@ -8,7 +8,6 @@ import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.services.QuestService;
 
 /**
  * @author Cheatkiller
@@ -51,13 +50,7 @@ public class _2284EscapingAsmodae extends QuestHandler {
 				if (dialogActionId == QUEST_SELECT) {
 					return sendQuestDialog(env, 1352);
 				} else if (dialogActionId == SETPRO2) {
-					if (env.getVisibleObject() instanceof Npc) {
-						targetId = ((Npc) env.getVisibleObject()).getNpcId();
-						Npc npc = (Npc) env.getVisibleObject();
-						npc.getController().delete();
-						QuestService.addNewSpawn(npc.getWorldId(), npc.getInstanceId(), 798041, 2553.9f, 916.9f, 311.8f, (byte) 82);
-						return defaultCloseDialog(env, 0, 1);
-					}
+					return defaultCloseDialog(env, 0, 1);
 				}
 			} else if (targetId == 798041) {
 				if (dialogActionId == QUEST_SELECT) {

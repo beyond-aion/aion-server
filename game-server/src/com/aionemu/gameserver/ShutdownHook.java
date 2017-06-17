@@ -1,5 +1,6 @@
 package com.aionemu.gameserver;
 
+import java.security.Permission;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.slf4j.Logger;
@@ -21,22 +22,22 @@ import com.aionemu.gameserver.world.World;
 import ch.qos.logback.classic.LoggerContext;
 
 /**
- * @author lord_rex
- * @modified Neon
+ * @author lord_rex, Neon
  */
 public class ShutdownHook extends Thread {
 
 	private static final Logger log = LoggerFactory.getLogger(ShutdownHook.class);
-
-	static final AtomicBoolean isRunning = new AtomicBoolean();
+	private final AtomicBoolean isRunning = new AtomicBoolean();
+	private int exitCode = ExitCode.CODE_ERROR;
 
 	public static ShutdownHook getInstance() {
 		return SingletonHolder.INSTANCE;
 	}
 
 	private ShutdownHook() {
+		System.setSecurityManager(new ExitMonitorSecurityManager()); // detects the exitCode when exit is triggered externally
 		if (ShutdownConfig.RESTART_SCHEDULE != null) {
-			CronService.getInstance().schedule(() -> shutdown(ShutdownMode.RESTART), CurrentThreadRunnableRunner.class, ShutdownConfig.RESTART_SCHEDULE,
+			CronService.getInstance().schedule(() -> System.exit(ExitCode.CODE_RESTART), CurrentThreadRunnableRunner.class, ShutdownConfig.RESTART_SCHEDULE,
 				false); // CurrentThreadRunnableRunner, otherwise ThreadPoolManager.getInstance().shutdown() will try to wait for this cron task
 			log.info("Scheduled automatic server restart based on cron expression: {}", ShutdownConfig.RESTART_SCHEDULE);
 		}
@@ -44,39 +45,22 @@ public class ShutdownHook extends Thread {
 
 	@Override
 	public void run() {
-		shutdown(ShutdownMode.SHUTDOWN);
+		// this method is run when System.exit is triggered, or via other external events like console CTRL+C
+		shutdown(ShutdownConfig.DELAY, exitCode);
 	}
 
-	public static enum ShutdownMode {
-		SHUTDOWN("shutting down"),
-		RESTART("restarting");
-
-		private final String text;
-
-		private ShutdownMode(String text) {
-			this.text = text;
-		}
-
-		public String getText() {
-			return text;
-		}
-	}
-
-	public void shutdown(ShutdownMode mode) {
-		shutdown(ShutdownConfig.DELAY, mode);
-	}
-
-	public void shutdown(int duration, ShutdownMode mode) {
+	public void shutdown(int duration, int exitCode) {
 		// set shutdown status, return if already running
 		if (!isRunning.compareAndSet(false, true))
 			return;
 
+		String shutdownMsg = exitCode == ExitCode.CODE_RESTART ? "restarting" : "shutting down";
 		for (int remainingSeconds = duration, interval = 0; remainingSeconds > 0; remainingSeconds -= interval) {
 			try {
 				if (World.getInstance().getAllPlayers().isEmpty())
 					break; // fast exit
 
-				log.info("Runtime is " + mode.getText() + " in " + remainingSeconds + " seconds.");
+				log.info("Runtime is " + shutdownMsg + " in " + remainingSeconds + " seconds.");
 				PacketSendUtility.broadcastToWorld(SM_SYSTEM_MESSAGE.STR_SERVER_SHUTDOWN(remainingSeconds));
 
 				interval = nextInterval(remainingSeconds, 5, 30);
@@ -100,12 +84,11 @@ public class ShutdownHook extends Thread {
 		// ThreadPoolManager shutdown
 		ThreadPoolManager.getInstance().shutdown();
 
-		log.info("Runtime is " + mode.getText() + " now...");
+		log.info("Runtime is " + shutdownMsg + " now...");
 		// shut down logger factory to flush all pending log messages
 		((LoggerContext) LoggerFactory.getILoggerFactory()).stop();
 
-		// Do system exit.
-		Runtime.getRuntime().halt(mode == ShutdownMode.RESTART ? ExitCode.CODE_RESTART : ExitCode.CODE_NORMAL);
+		Runtime.getRuntime().halt(exitCode);
 	}
 
 	/**
@@ -123,6 +106,27 @@ public class ShutdownHook extends Thread {
 		int interval = remainingSeconds / 2;
 		interval = interval / 5 * 5; // ensure a "clean" interval (dividable by 5, like 5, 10, 15s and so on)
 		return Math.min(maxInterval, Math.max(minInterval, interval));
+	}
+
+	protected boolean isRunning() {
+		return isRunning.get();
+	}
+
+	private class ExitMonitorSecurityManager extends SecurityManager {
+
+		@Override
+		public void checkPermission(Permission perm) {
+		}
+
+		@Override
+		public void checkPermission(Permission perm, Object context) {
+		}
+
+		@Override
+		public void checkExit(int status) {
+			// retrieve the external exit code
+			exitCode = status;
+		}
 	}
 
 	private static final class SingletonHolder {

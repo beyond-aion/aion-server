@@ -2,6 +2,7 @@ package quest.pandaemonium;
 
 import static com.aionemu.gameserver.model.DialogAction.*;
 
+import com.aionemu.gameserver.model.DialogPage;
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -136,15 +137,10 @@ public class _2900NoEscapingDestiny extends QuestHandler {
 					break;
 				case 204264: // Skuld 2
 					switch (dialogActionId) {
-						case USE_OBJECT:
-							if (var == 99 && !isStigmaEquipped(env)) {
-								return sendQuestDialog(env, 3057);
-							}
-							return false;
 						case QUEST_SELECT:
 							if (var == 95) {
 								return sendQuestDialog(env, 2716);
-							} else if (var == 96) {
+							} else if (var == 96 || var == 99) {
 								return sendQuestDialog(env, 3057);
 							} else if (var == 97) {
 								return sendQuestDialog(env, 3398);
@@ -157,18 +153,12 @@ public class _2900NoEscapingDestiny extends QuestHandler {
 							}
 							return false;
 						case SELECT7_1:
-							if (var == 96) {
-								if (giveQuestItem(env, getStoneId(player), 1) && !isStigmaEquipped(env)) {
-									changeQuestStep(env, 96, 99); // 99
-									return sendQuestDialog(env, 3058);
-								} else {
-									return closeDialogWindow(env);
-								}
-							}
-							return false;
+							if (giveQuestItem(env, getStoneId(player), 1))
+								changeQuestStep(env, 96, 99); // 99
+							return sendQuestDialog(env, 3058);
 						case SETPRO7:
 							if (var == 99) {
-								PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 1));
+								PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), DialogPage.STIGMA.id()));
 								return true;
 							}
 							return false;
@@ -256,7 +246,7 @@ public class _2900NoEscapingDestiny extends QuestHandler {
 
 	private int getStoneId(Player player) {
 		// TODO: find out the correct stigma ids for each class on official servers
-		switch (player.getCommonData().getPlayerClass()) {
+		switch (player.getPlayerClass()) {
 			case CHANTER:
 			case CLERIC:
 			case BARD:
@@ -273,26 +263,17 @@ public class _2900NoEscapingDestiny extends QuestHandler {
 			case SPIRIT_MASTER:
 				return 140000004; // Hydro Eruption II
 			default:
-				return 0;
+				throw new UnsupportedOperationException("Unhandled player class " + player.getPlayerClass());
 		}
 	}
 
 	private void removeStigma(QuestEnv env) {
 		Player player = env.getPlayer();
-		for (Item item : player.getEquipment().getEquippedItemsByItemId(getStoneId(player))) {
+		int stigmaId = getStoneId(player);
+		for (Item item : player.getEquipment().getEquippedItemsByItemId(stigmaId)) {
 			player.getEquipment().unEquipItem(item.getObjectId());
 		}
-		removeQuestItem(env, getStoneId(player), 1);
-	}
-
-	private boolean isStigmaEquipped(QuestEnv env) {
-		Player player = env.getPlayer();
-		for (Item i : player.getEquipment().getEquippedItemsAllStigma()) {
-			if (i.getItemId() == getStoneId(player)) {
-				return true;
-			}
-		}
-		return false;
+		removeQuestItem(env, stigmaId, 1);
 	}
 
 	@Override

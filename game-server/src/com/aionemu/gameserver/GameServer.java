@@ -398,7 +398,7 @@ public class GameServer {
 	}
 
 	public static boolean isShuttingDown() {
-		return ShutdownHook.isRunning.get();
+		return ShutdownHook.getInstance().isRunning();
 	}
 
 	public static void updateRatio(Race race, int i) {
