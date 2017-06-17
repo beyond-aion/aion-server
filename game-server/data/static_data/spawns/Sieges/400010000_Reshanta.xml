@@ -1130,7 +1130,7 @@
 					</spawn>
 					<!-- Field Generator -->
 					<spawn npc_id="260207">
-						<spot x="211.066" y="1935.782" z="2322.0728"/>
+						<spot x="2118.947" y="1932.175" z="2322.326" h="30"/>
 					</spawn>
 					<!-- Fortress Gate -->
 					<spawn npc_id="275027" respawn_time="295">
