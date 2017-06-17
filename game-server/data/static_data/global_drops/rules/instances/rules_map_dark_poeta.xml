@@ -15,100 +15,38 @@
 			<gd_item id="164000096" /><!-- Drana Bomb -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Shield (Legend)" base_chance="30">
-		<gd_maps>
-			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="215280" /><!-- Tahabata Pyrelord -->
-			<gd_npc npc_id="215281" /><!-- Calindi Flamelord -->
-			<gd_npc npc_id="215282" /><!-- Vanuka Infernus -->
-			<gd_npc npc_id="215283" /><!-- Asaratu Bloodshade -->
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="115000896" /><!-- Dragon Flame Shield -->
-			<gd_item id="115000897" /><!-- Dragon Flame Scale Shield -->
-		</gd_items>
-	</gd_rule>
 	<gd_rule rule_name="Named Headband (Legend)" base_chance="60">
 		<gd_maps>
 			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="215280" /><!-- Tahabata Pyrelord -->
-			<gd_npc npc_id="215281" /><!-- Calindi Flamelord -->
-			<gd_npc npc_id="215282" /><!-- Vanuka Infernus -->
+			<gd_npc npc_id="214895" /><!-- Main Power Generator -->
 			<gd_npc npc_id="215283" /><!-- Asaratu Bloodshade -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="125002026" /><!-- Dragon Flame Headband -->
-			<gd_item id="125002027" /><!-- Dragon Flame Hat -->
-			<gd_item id="125002028" /><!-- Dragon Flame Chain Helm -->
-			<gd_item id="125002029" /><!-- Dragon Flame Helm -->
+			<gd_item id="188053294" /><!-- Dragon Flame Helmet Box -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Unique)" base_chance="10">
+	<gd_rule rule_name="Named Shield (Legend)" base_chance="30">
 		<gd_maps>
 			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="215281" /><!-- Calindi Flamelord -->
-			<gd_npc npc_id="215282" /><!-- Vanuka Infernus -->
+			<gd_npc npc_id="214894" /><!-- Telepathy Controller -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="100500601" /><!-- Anuhart Elite's Jewel -->
-			<gd_item id="100900590" /><!-- Anuhart Elite's Greatsword -->
-			<gd_item id="100200701" /><!-- Anuhart Elite's Dirk -->
-			<gd_item id="100000767" /><!-- Anuhart Elite's Azure Scale Sword -->
-			<gd_item id="100100580" /><!-- Anuhart Elite's Warhammer -->
-			<gd_item id="100600635" /><!-- Anuhart Elite's Tome -->
-			<gd_item id="101500604" /><!-- Anuhart Elite's Staff -->
-			<gd_item id="101300563" /><!-- Anuhart Elite's Spear -->
-			<gd_item id="101700619" /><!-- Anuhart Elite's Longbow -->
-			<gd_item id="100000766" /><!-- Anuhart Elite's Reversed-Scale Sword -->
-			<gd_item id="101800862" /><!-- Anuhart Elite's Pistol -->
-			<gd_item id="101800863" /><!-- Anuhart Elite's Pistol -->
-			<gd_item id="101900570" /><!-- Anuhart Elite's Aethercannon -->
-			<gd_item id="102000600" /><!-- Anuhart Elite's Harp -->
-			<gd_item id="102100765" /><!-- Anuhart Elite's Cipher-Blade -->
+			<gd_item id="188053293" /><!-- Dragon Flame Shield Box -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Candy" base_chance="10">
+	<gd_rule rule_name="Named Accessory (Unique)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="214880" /><!-- Spaller Echtra -->
-			<gd_npc npc_id="215388" /><!-- Spaller Rakanatra -->
-			<gd_npc npc_id="215389" /><!-- Spaller Dhatra -->
+			<gd_npc npc_id="237002" /><!-- Main Power Generator -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="160001277" /><!-- Wasteland Drakie Candy -->
-		</gd_items>
-	</gd_rule>
-	<!-- Single Monster Drops -->
-	<gd_rule rule_name="Named Armor (Legend)" base_chance="35">
-		<gd_maps>
-			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="214843" /><!-- Spiritmaster Atmach -->
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="113300892" /><!-- Anuhart Legionary's Breeches -->
-			<gd_item id="113500858" /><!-- Anuhart Legionary's Chausses -->
-		</gd_items>
-	</gd_rule>
-	<gd_rule rule_name="Named Shield (Unique)" base_chance="10">
-		<gd_maps>
-			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="214843" /><!-- Spiritmaster Atmach -->
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="115000858" /><!-- Anuhart Elite's Scale Shield -->
-			<gd_item id="115000859" /><!-- Anuhart Elite's Shield -->
+			<gd_item id="188053289" /><!-- Fabled Dragon Flame Necklace Box -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Accessory (Unique)" base_chance="15">
@@ -122,104 +60,6 @@
 			<gd_item id="120000903" /><!-- Atmach's Earrings -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Legend)" base_chance="20">
-		<gd_maps>
-			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="214849" /><!-- Marabata of Strength -->
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="111100865" /><!-- Anuhart Legionary's Gloves -->
-			<gd_item id="111300866" /><!-- Anuhart Legionary's Vambrace -->
-			<gd_item id="111500856" /><!-- Anuhart Legionary's Handguards -->
-			<gd_item id="111600844" /><!-- Anuhart Legionary's Gauntlets -->
-		</gd_items>
-	</gd_rule>
-	<gd_rule rule_name="Named Armor (Unique)" base_chance="15">
-		<gd_maps>
-			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="214849" /><!-- Marabata of Strength -->
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="114100902" /><!-- Anuhart Spiritmaster's Shoes -->
-			<gd_item id="114101436" /><!-- Anuhart Songweaver's Shoes -->
-			<gd_item id="112300817" /><!-- Anuhart Assassin's Shoulderguards -->
-			<gd_item id="111500857" /><!-- Anuhart Cleric's Handguards -->
-			<gd_item id="111501568" /><!-- Anuhart Aethertech's Magic Handguards -->
-		</gd_items>
-	</gd_rule>
-	<gd_rule rule_name="Named Armor (Legend)" base_chance="20">
-		<gd_maps>
-			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="214850" /><!-- Marabata of Aether -->
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="114100900" /><!-- Anuhart Legionary's Shoes -->
-			<gd_item id="114300925" /><!-- Anuhart Legionary's Boots -->
-			<gd_item id="114500868" /><!-- Anuhart Legionary's Brogans -->
-			<gd_item id="114600827" /><!-- Anuhart Legionary's Sabatons -->
-		</gd_items>
-	</gd_rule>
-	<gd_rule rule_name="Named Armor (Unique)" base_chance="15">
-		<gd_maps>
-			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="214850" /><!-- Marabata of Aether -->
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="112100823" /><!-- Anuhart Sorcerer's Pauldrons -->
-			<gd_item id="111500858" /><!-- Anuhart Chanter's Handguards -->
-			<gd_item id="114600828" /><!-- Anuhart Gladiator's Sabatons -->
-		</gd_items>
-	</gd_rule>
-	<gd_rule rule_name="Named Armor (Legend)" base_chance="20">
-		<gd_maps>
-			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="214851" /><!-- Marabata of Poisoning -->
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="112100822" /><!-- Anuhart Legionary's Pauldrons -->
-			<gd_item id="112300816" /><!-- Anuhart Legionary's Shoulderguards -->
-			<gd_item id="112500807" /><!-- Anuhart Legionary's Spaulders -->
-			<gd_item id="112600818" /><!-- Anuhart Legionary's Shoulderplates -->
-		</gd_items>
-	</gd_rule>
-	<gd_rule rule_name="Named Armor (Unique)" base_chance="15">
-		<gd_maps>
-			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="214851" /><!-- Marabata of Poisoning -->
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="111300868" /><!-- Anuhart Ranger's Vambrace -->
-			<gd_item id="111301526" /><!-- Anuhart Gunslinger's Magic Vambrace -->
-			<gd_item id="114600829" /><!-- Anuhart Templar's Sabatons -->
-		</gd_items>
-	</gd_rule>
-	<gd_rule rule_name="Named Armor (Unique)" base_chance="15">
-		<gd_maps>
-			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="214864" /><!-- Noah's Furious Shade -->
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="112300818" /><!-- Anuhart Ranger's Shoulderguards -->
-			<gd_item id="112301467" /><!-- Anuhart Gunslinger's Magic Shoulderguards -->
-			<gd_item id="114500869" /><!-- Anuhart Cleric's Brogans -->
-			<gd_item id="114501595" /><!-- Anuhart Aethertech's Magic Brogans -->
-			<gd_item id="113600835" /><!-- Anuhart Templar's Greaves -->
-		</gd_items>
-	</gd_rule>
 	<gd_rule rule_name="Named Accessory (Legend)" base_chance="15">
 		<gd_maps>
 			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
@@ -231,33 +71,37 @@
 			<gd_item id="122001039" /><!-- Noah's Tears -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Legend)" base_chance="20">
+	<gd_rule rule_name="Named Accessory (Legend)" base_chance="30">
 		<gd_maps>
 			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="214880" /><!-- Spaller Echtra -->
+			<gd_npc npc_id="215389" /><!-- Spaller Dhatra -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="111100865" /><!-- Anuhart Legionary's Gloves -->
-			<gd_item id="111300866" /><!-- Anuhart Legionary's Vambrace -->
-			<gd_item id="111600844" /><!-- Anuhart Legionary's Gauntlets -->
-			<gd_item id="111500856" /><!-- Anuhart Legionary's Handguards -->
+			<gd_item id="188053292" /><!-- Dhatra's Earrings Box -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Unique)" base_chance="15">
+	<gd_rule rule_name="Named Accessory (Unique)" base_chance="15">
 		<gd_maps>
 			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="214880" /><!-- Spaller Echtra -->
+			<gd_npc npc_id="214851" /><!-- Marabata of Poisoning -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="111100867" /><!-- Anuhart Spiritmaster's Gloves -->
-			<gd_item id="111101389" /><!-- Anuhart Songweaver's Gloves -->
-			<gd_item id="113500859" /><!-- Anuhart Cleric's Chausses -->
-			<gd_item id="113501586" /><!-- Anuhart Aethertech's Magic Chausses -->
-			<gd_item id="112600820" /><!-- Anuhart Templar's Shoulderplates -->
+			<gd_item id="188053286" /><!-- Marabata's Fabled Ring Box -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Unique)" base_chance="25">
+		<gd_maps>
+			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214894" /><!-- Telepathy Controller -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="188053288" /><!-- Anuhart's Fabled Belt Box-->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Accessory (Legend)" base_chance="30">
@@ -283,185 +127,18 @@
 			<gd_item id="120000902" /><!-- Earrings of Ascending -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Legend)" base_chance="25">
-		<gd_maps>
-			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="214894" /><!-- Telepathy Controller -->
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="113100875" /><!-- Anuhart Legionary's Leggings -->
-			<gd_item id="113600833" /><!-- Anuhart Legionary's Greaves -->
-		</gd_items>
-	</gd_rule>
-	<gd_rule rule_name="Junk" base_chance="10">
-		<gd_maps>
-			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="214894" /><!-- Telepathy Controller -->
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="152012804" /><!-- Noble Drazma -->
-			<gd_item id="182005431" /><!-- Noble Surkana Fragment -->
-		</gd_items>
-	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Unique)" base_chance="5">
-		<gd_maps>
-			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="214894" /><!-- Telepathy Controller -->
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="100200700" /><!-- Anuhart Elite's Dagger -->
-		</gd_items>
-	</gd_rule>
-	<gd_rule rule_name="Named Armor (Legend)" base_chance="20">
-		<gd_maps>
-			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="214895" /><!-- Main Power Generator -->
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="111100865" /><!-- Anuhart Legionary's Gloves -->
-			<gd_item id="111300866" /><!-- Anuhart Legionary's Vambrace -->
-			<gd_item id="111500856" /><!-- Anuhart Legionary's Handguards -->
-			<gd_item id="111600844" /><!-- Anuhart Legionary's Gauntlets -->
-		</gd_items>
-	</gd_rule>
-	<gd_rule rule_name="Named Armor (Unique)" base_chance="15">
-		<gd_maps>
-			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="214895" /><!-- Main Power Generator -->
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="113300894" /><!-- Anuhart Ranger's Breeches -->
-			<gd_item id="113301554" /><!-- Anuhart Gunslinger's Magic Breeches -->
-			<gd_item id="114500870" /><!-- Anuhart Chanter's Brogans -->
-			<gd_item id="111600846" /><!-- Anuhart Templar's Gauntlets -->
-		</gd_items>
-	</gd_rule>
-	<gd_rule rule_name="Named Armor (Legend)" base_chance="20">
-		<gd_maps>
-			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="214896" /><!-- Auxiliary Power Generator -->
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="114100900" /><!-- Anuhart Legionary's Shoes -->
-			<gd_item id="114300925" /><!-- Anuhart Legionary's Boots -->
-			<gd_item id="114500868" /><!-- Anuhart Legionary's Brogans -->
-			<gd_item id="114600827" /><!-- Anuhart Legionary's Sabatons -->
-		</gd_items>
-	</gd_rule>
-	<gd_rule rule_name="Named Armor (Unique)" base_chance="15">
-		<gd_maps>
-			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="214896" /><!-- Auxiliary Power Generator -->
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="112100824" /><!-- Anuhart Spiritmaster's Pauldrons -->
-			<gd_item id="112101343" /><!-- Anuhart Songweaver's Pauldrons -->
-			<gd_item id="111300867" /><!-- Anuhart Assassin's Vambrace -->
-			<gd_item id="113500860" /><!-- Anuhart Chanter's Chausses -->
-		</gd_items>
-	</gd_rule>
-	<gd_rule rule_name="Named Armor (Legend)" base_chance="20">
-		<gd_maps>
-			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="214897" /><!-- Emergency Generator -->
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="112100822" /><!-- Anuhart Legionary's Pauldrons -->
-			<gd_item id="112300816" /><!-- Anuhart Legionary's Shoulderguards -->
-			<gd_item id="112500807" /><!-- Anuhart Legionary's Spaulders -->
-			<gd_item id="112600818" /><!-- Anuhart Legionary's Shoulderplates -->
-		</gd_items>
-	</gd_rule>
-	<gd_rule rule_name="Named Armor (Unique)" base_chance="15">
-		<gd_maps>
-			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="214897" /><!-- Emergency Generator -->
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="113100877" /><!-- Anuhart Spiritmaster's Leggings -->
-			<gd_item id="113101405" /><!-- Anuhart Songweaver's Leggings -->
-			<gd_item id="112500808" /><!-- Anuhart Cleric's Spaulders -->
-			<gd_item id="112501510" /><!-- Anuhart Aethertech's Magic Spaulders -->
-			<gd_item id="111600845" /><!-- Anuhart Gladiator's Gauntlets -->
-		</gd_items>
-	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Legend)" base_chance="30">
-		<gd_maps>
-			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="214904" /><!-- Brigade General Anuhart -->
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="120000926" /><!-- Anuhart's Diamond Earrings -->
-			<gd_item id="120000927" /><!-- Anuhart's Sapphire Earrings -->
-		</gd_items>
-	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Unique)" base_chance="25">
-		<gd_maps>
-			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="214904" /><!-- Brigade General Anuhart -->
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="123000929" /><!-- Brigade General Anuhart's Leather Belt -->
-			<gd_item id="123000930" /><!-- Brigade General Anuhart's Sash -->
-		</gd_items>
-	</gd_rule>
+	
 	<gd_rule rule_name="Named Armor (Legend)" base_chance="30">
 		<gd_maps>
 			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="214904" /><!-- Brigade General Anuhart -->
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="110100971" /><!-- Anuhart Legionary's Tunic -->
-			<gd_item id="110300916" /><!-- Anuhart Legionary's Jerkin -->
-			<gd_item id="110500884" /><!-- Anuhart Legionary's Hauberk -->
-			<gd_item id="110600868" /><!-- Anuhart Legionary's Breastplate -->
-		</gd_items>
-	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Unique)" base_chance="10">
-		<gd_maps>
-			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="214904" /><!-- Brigade General Anuhart -->
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="100000765" /><!-- Anuhart Elite's Scale Sword -->
-		</gd_items>
-	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Unique)" base_chance="50">
-		<gd_maps>
-			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
-		</gd_maps>
-		<gd_npcs>
+			<gd_npc npc_id="214843" /><!-- Spiritmaster Atmach -->
 			<gd_npc npc_id="215280" /><!-- Tahabata Pyrelord -->
+			<gd_npc npc_id="215281" /><!-- Calindi Flamelord -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="121000820" /><!-- Dragon Flame Diamond Necklace -->
-			<gd_item id="121000821" /><!-- Dragon Flame Sapphire Necklace -->
+			<gd_item id="188053284" /><!-- Anuhart's Chest Box-->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Unique)" base_chance="30">
@@ -470,44 +147,131 @@
 		</gd_maps>
 		<gd_npcs>
 			<gd_npc npc_id="215280" /><!-- Tahabata Pyrelord -->
+			<gd_npc npc_id="215281" /><!-- Calindi Flamelord -->
+			<gd_npc npc_id="215282" /><!-- Vanuka Infernus -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="110100973" /><!-- Anuhart Spiritmaster's Tunic -->
-			<gd_item id="110101543" /><!-- Anuhart Songweaver's Tunic -->
-			<gd_item id="110100972" /><!-- Anuhart Sorcerer's Tunic -->
-			<gd_item id="110300917" /><!-- Anuhart Assassin's Jerkin -->
-			<gd_item id="110300918" /><!-- Anuhart Ranger's Jerkin -->
-			<gd_item id="110301588" /><!-- Anuhart Gunslinger's Magic Jerkin -->
-			<gd_item id="110500885" /><!-- Anuhart Cleric's Hauberk -->
-			<gd_item id="110500886" /><!-- Anuhart Chanter's Hauberk -->
-			<gd_item id="110551010" /><!-- Anuhart Aethertech's Magic Hauberk -->
-			<gd_item id="110600869" /><!-- Anuhart Gladiator's Breastplate -->
-			<gd_item id="110600870" /><!-- Anuhart Templar's Breastplate -->
+			<gd_item id="188053279" /><!-- Anuhart's Fabled Chest Box -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Unique)" base_chance="15">
+	<gd_rule rule_name="Named Armor (Legend)" base_chance="35">
+		<gd_maps>
+			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214896" /><!-- Auxiliary Power Generator -->
+			<gd_npc npc_id="214897" /><!-- Emergency Generator -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="188053281" /><!-- Anuhart's Pants Box -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Unique)" base_chance="35">
+		<gd_maps>
+			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214896" /><!-- Auxiliary Power Generator -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="188053276" /><!-- Anuhart's Fabled Pants Box -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Legend)" base_chance="20">
+		<gd_maps>
+			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214849" /><!-- Marabata of Strength-->
+			<gd_npc npc_id="214850" /><!-- Marabata of Aether -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="188053285" /><!-- Anuhart's Shoulders Box -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Unique)" base_chance="15">
+		<gd_maps>
+			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214850" /><!-- Marabata of Aether -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="188053280" /><!-- Anuhart's Fabled Shoulders Box -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Legend)" base_chance="20">
+		<gd_maps>
+			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214864" /><!-- Noah's Furious Shade -->
+			<gd_npc npc_id="215387" /><!-- Spectral Elim Elder -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="188053283" /><!-- Anuhart's Gloves Box -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Unique)" base_chance="15">
+		<gd_maps>
+			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214851" /><!-- Marabata of Poisoning -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="188053278" /><!-- Anuhart's Fabled Gloves Box -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Legend)" base_chance="20">
+		<gd_maps>
+			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214850" /><!-- Marabata of Aether -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="188053282" /><!-- Anuhart's Shoes Box -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Unique)" base_chance="15">
+		<gd_maps>
+			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214849" /><!-- Marabata of Strength -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="188053277" /><!-- Anuhart's Fabled Shoes Box -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Weapon (Unique)" base_chance="10">
 		<gd_maps>
 			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
 		</gd_maps>
 		<gd_npcs>
 			<gd_npc npc_id="215280" /><!-- Tahabata Pyrelord -->
+			<gd_npc npc_id="215281" /><!-- Calindi Flamelord -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="100500601" /><!-- Anuhart Elite's Jewel -->
-			<gd_item id="100900590" /><!-- Anuhart Elite's Greatsword -->
-			<gd_item id="100200701" /><!-- Anuhart Elite's Dirk -->
-			<gd_item id="100000767" /><!-- Anuhart Elite's Azure Scale Sword -->
-			<gd_item id="100100580" /><!-- Anuhart Elite's Warhammer -->
-			<gd_item id="100600635" /><!-- Anuhart Elite's Tome -->
-			<gd_item id="101500604" /><!-- Anuhart Elite's Staff -->
-			<gd_item id="101300563" /><!-- Anuhart Elite's Spear -->
-			<gd_item id="101700619" /><!-- Anuhart Elite's Longbow -->
-			<gd_item id="100000766" /><!-- Anuhart Elite's Reversed-Scale Sword -->
+			<gd_item id="188054068" /><!-- Anuhart's Fabled Weapon Box -->
+		</gd_items>
+	</gd_rule>
+	
+	
+	<gd_rule rule_name="Named Weapon (Unique)" base_chance="5">
+		<gd_maps>
+			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214904" /><!-- Brigade General Anuhart -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="100200700" /><!-- Anuhart Elite's Dagger -->
+			<gd_item id="100000765" /><!-- Anuhart Elite's Scale Sword -->
 			<gd_item id="101800862" /><!-- Anuhart Elite's Pistol -->
-			<gd_item id="101800863" /><!-- Anuhart Elite's Pistol -->
-			<gd_item id="101900570" /><!-- Anuhart Elite's Aethercannon -->
-			<gd_item id="102000600" /><!-- Anuhart Elite's Harp -->
-			<gd_item id="102100765" /><!-- Anuhart Elite's Cipher-Blade -->
+			<gd_item id="115000858" /><!-- Anuhart Elite's Scale Shield -->
+			<gd_item id="115000859" /><!-- Anuhart Elite's Shield -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Weapon (Epic)" base_chance="10">
@@ -555,102 +319,6 @@
 			<gd_item id="170030042" /><!-- [Souvenir] Tahabata Wall-mount Trophy -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Unique)" base_chance="25">
-		<gd_maps>
-			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="215281" /><!-- Calindi Flamelord -->
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="121000820" /><!-- Dragon Flame Diamond Necklace -->
-			<gd_item id="121000821" /><!-- Dragon Flame Sapphire Necklace -->
-		</gd_items>
-	</gd_rule>
-	<gd_rule rule_name="Named Armor (Unique)" base_chance="15">
-		<gd_maps>
-			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="215281" /><!-- Calindi Flamelord -->
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="110100973" /><!-- Anuhart Spiritmaster's Tunic -->
-			<gd_item id="110100972" /><!-- Anuhart Sorcerer's Tunic -->
-			<gd_item id="110300917" /><!-- Anuhart Assassin's Jerkin -->
-			<gd_item id="110300918" /><!-- Anuhart Ranger's Jerkin -->
-			<gd_item id="110301588" /><!-- Anuhart Gunslinger's Magic Jerkin -->
-			<gd_item id="110500885" /><!-- Anuhart Cleric's Hauberk -->
-			<gd_item id="110500886" /><!-- Anuhart Chanter's Hauberk -->
-			<gd_item id="110551010" /><!-- Anuhart Aethertech's Magic Hauberk -->
-			<gd_item id="110600869" /><!-- Anuhart Gladiator's Breastplate -->
-			<gd_item id="110600870" /><!-- Anuhart Templar's Breastplate -->
-		</gd_items>
-	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Unique)" base_chance="20">
-		<gd_maps>
-			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="215282" /><!-- Vanuka Infernus -->
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="121000820" /><!-- Dragon Flame Diamond Necklace -->
-			<gd_item id="121000821" /><!-- Dragon Flame Sapphire Necklace -->
-		</gd_items>
-	</gd_rule>
-	<gd_rule rule_name="Named Armor (Unique)" base_chance="10">
-		<gd_maps>
-			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="215282" /><!-- Vanuka Infernus -->
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="110100973" /><!-- Anuhart Spiritmaster's Tunic -->
-			<gd_item id="110100972" /><!-- Anuhart Sorcerer's Tunic -->
-			<gd_item id="110300917" /><!-- Anuhart Assassin's Jerkin -->
-			<gd_item id="110300918" /><!-- Anuhart Ranger's Jerkin -->
-			<gd_item id="110301588" /><!-- Anuhart Gunslinger's Magic Jerkin -->
-			<gd_item id="110500885" /><!-- Anuhart Cleric's Hauberk -->
-			<gd_item id="110500886" /><!-- Anuhart Chanter's Hauberk -->
-			<gd_item id="110551010" /><!-- Anuhart Aethertech's Magic Hauberk -->
-			<gd_item id="110600869" /><!-- Anuhart Gladiator's Breastplate -->
-			<gd_item id="110600870" /><!-- Anuhart Templar's Breastplate -->
-		</gd_items>
-	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Unique)" base_chance="30">
-		<gd_maps>
-			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="215283" /><!-- Asaratu Bloodshade -->
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="121000820" /><!-- Dragon Flame Diamond Necklace -->
-			<gd_item id="121000821" /><!-- Dragon Flame Sapphire Necklace -->
-		</gd_items>
-	</gd_rule>
-	<gd_rule rule_name="Named Armor (Unique)" base_chance="25">
-		<gd_maps>
-			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="215283" /><!-- Asaratu Bloodshade -->
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="110100973" /><!-- Anuhart Spiritmaster's Tunic -->
-			<gd_item id="110100972" /><!-- Anuhart Sorcerer's Tunic -->
-			<gd_item id="110300917" /><!-- Anuhart Assassin's Jerkin -->
-			<gd_item id="110300918" /><!-- Anuhart Ranger's Jerkin -->
-			<gd_item id="110301588" /><!-- Anuhart Gunslinger's Magic Jerkin -->
-			<gd_item id="110500885" /><!-- Anuhart Cleric's Hauberk -->
-			<gd_item id="110500886" /><!-- Anuhart Chanter's Hauberk -->
-			<gd_item id="110551010" /><!-- Anuhart Aethertech's Magic Hauberk -->
-			<gd_item id="110600869" /><!-- Anuhart Gladiator's Breastplate -->
-			<gd_item id="110600870" /><!-- Anuhart Templar's Breastplate -->
-		</gd_items>
-	</gd_rule>
 	<gd_rule rule_name="Named Armor (Rare)" base_chance="100">
 		<gd_maps>
 			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
@@ -692,83 +360,16 @@
 			<gd_item id="170195082" /><!-- [Souvenir] Shugo with a Pearl Earring -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Unique)" base_chance="15">
+	<gd_rule rule_name="Junk" base_chance="10">
 		<gd_maps>
 			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="215387" /><!-- Spectral Elim Elder -->
+			<gd_npc npc_id="214894" /><!-- Telepathy Controller -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="114100901" /><!-- Anuhart Sorcerer's Shoes -->
-			<gd_item id="113300893" /><!-- Anuhart Assassin's Breeches -->
-			<gd_item id="112600819" /><!-- Anuhart Gladiator's Shoulderplates -->
-		</gd_items>
-	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Unique)" base_chance="15">
-		<gd_maps>
-			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="215387" /><!-- Spectral Elim Elder -->
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="122001040" /><!-- Elder's Tears -->
-		</gd_items>
-	</gd_rule>
-	<gd_rule rule_name="Named Armor (Legend)" base_chance="20">
-		<gd_maps>
-			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="215388" /><!-- Spaller Rakanatra -->
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="114100900" /><!-- Anuhart Legionary's Shoes -->
-			<gd_item id="114300925" /><!-- Anuhart Legionary's Boots -->
-			<gd_item id="114500868" /><!-- Anuhart Legionary's Brogans -->
-			<gd_item id="114600827" /><!-- Anuhart Legionary's Sabatons -->
-		</gd_items>
-	</gd_rule>
-	<gd_rule rule_name="Named Armor (Unique)" base_chance="15">
-		<gd_maps>
-			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="215388" /><!-- Spaller Rakanatra -->
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="111100866" /><!-- Anuhart Sorcerer's Gloves -->
-			<gd_item id="114300926" /><!-- Anuhart Assassin's Boots -->
-			<gd_item id="113600834" /><!-- Anuhart Gladiator's Greaves -->
-		</gd_items>
-	</gd_rule>
-	<gd_rule rule_name="Named Armor (Legend)" base_chance="20">
-		<gd_maps>
-			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="215389" /><!-- Spaller Dhatra -->
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="112100822" /><!-- Anuhart Legionary's Pauldrons -->
-			<gd_item id="112300816" /><!-- Anuhart Legionary's Shoulderguards -->
-			<gd_item id="112500807" /><!-- Anuhart Legionary's Spaulders -->
-			<gd_item id="112600818" /><!-- Anuhart Legionary's Shoulderplates -->
-		</gd_items>
-	</gd_rule>
-	<gd_rule rule_name="Named Armor (Unique)" base_chance="15">
-		<gd_maps>
-			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="215389" /><!-- Spaller Dhatra -->
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="113100876" /><!-- Anuhart Sorcerer's Leggings -->
-			<gd_item id="114300927" /><!-- Anuhart Ranger's Boots -->
-			<gd_item id="114301592" /><!-- Anuhart Gunslinger's Magic Boots -->
-			<gd_item id="112500809" /><!-- Anuhart Chanter's Spaulders -->
+			<gd_item id="152012804" /><!-- Noble Drazma -->
+			<gd_item id="182005431" /><!-- Noble Surkana Fragment -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Concentrated Drana" base_chance="25">
@@ -781,6 +382,19 @@
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="152012805" /><!-- Concentrated Drana -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Candy" base_chance="10">
+		<gd_maps>
+			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214880" /><!-- Spaller Echtra -->
+			<gd_npc npc_id="215388" /><!-- Spaller Rakanatra -->
+			<gd_npc npc_id="215389" /><!-- Spaller Dhatra -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="160001277" /><!-- Wasteland Drakie Candy -->
 		</gd_items>
 	</gd_rule>
 </global_rules>
