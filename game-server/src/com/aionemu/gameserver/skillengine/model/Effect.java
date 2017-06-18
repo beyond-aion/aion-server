@@ -644,36 +644,40 @@ public class Effect implements StatOwner {
 	 * effect
 	 */
 	public void startEffect(boolean restored) {
-		if (successEffects.isEmpty())
-			return;
+		synchronized (this) {
+			if (hasEnded.get()) // multiple concurrent skill casts can end each others effects by conflict
+				return;
+			if (successEffects.isEmpty())
+				return;
 
-		schedulePeriodicActions();
+			schedulePeriodicActions();
 
-		for (EffectTemplate template : successEffects.values()) {
-			template.startEffect(this);
-			checkUseEquipmentConditions();
-			checkCancelOnDmg();
-		}
-
-		if (isToggle() && effector instanceof Player) {
-			activateToggleSkill();
-		}
-		if (!restored && !forcedDuration)
-			duration = getEffectsDuration();
-		if (isToggle())
-			duration = skillTemplate.getToggleTimer();
-		if (duration == 0)
-			return;
-		endTime = System.currentTimeMillis() + duration;
-
-		endTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				endedByTime = true;
-				endEffect(true);
+			for (EffectTemplate template : successEffects.values()) {
+				template.startEffect(this);
+				checkUseEquipmentConditions();
+				checkCancelOnDmg();
 			}
-		}, duration);
+
+			if (isToggle() && effector instanceof Player) {
+				activateToggleSkill();
+			}
+			if (!restored && !forcedDuration)
+				duration = getEffectsDuration();
+			if (isToggle())
+				duration = skillTemplate.getToggleTimer();
+			if (duration == 0)
+				return;
+			endTime = System.currentTimeMillis() + duration;
+
+			endTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
+
+				@Override
+				public void run() {
+					endedByTime = true;
+					endEffect(true);
+				}
+			}, duration);
+		}
 	}
 
 	/**
@@ -698,13 +702,13 @@ public class Effect implements StatOwner {
 	 * End effect and all effect actions
 	 */
 	public void endEffect(boolean broadcast) {
-		if (!hasEnded.compareAndSet(false, true))
-			return;
+		synchronized (this) { // wait for startEffect before ending
+			if (!hasEnded.compareAndSet(false, true))
+				return;
+		}
 		stopTasks();
 
-		for (EffectTemplate template : successEffects.values()) {
-			template.endEffect(this);
-		}
+		endEffects();
 
 		// if effect is a stance, remove stance from player
 		if (effector instanceof Player) {
@@ -1074,9 +1078,14 @@ public class Effect implements StatOwner {
 	}
 
 	public void endEffects() {
+		boolean hasStatModifiers = false;
 		for (EffectTemplate template : successEffects.values()) {
 			template.endEffect(this);
+			if (!hasStatModifiers && template.getChange() != null && !template.getChange().isEmpty())
+				hasStatModifiers = true;
 		}
+		if (hasStatModifiers)
+			getEffected().getGameStats().endEffect(this);
 	}
 
 	private int initializePower() {
@@ -1253,9 +1262,6 @@ public class Effect implements StatOwner {
 		this.effectResult = effectResult;
 	}
 
-	/**
-	 * @return the endedByTime
-	 */
 	public boolean isEndedByTime() {
 		return endedByTime;
 	}

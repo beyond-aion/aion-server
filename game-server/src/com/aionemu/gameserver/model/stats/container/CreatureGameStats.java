@@ -78,19 +78,15 @@ public abstract class CreatureGameStats<T extends Creature> {
 		lock.writeLock().lock();
 		try {
 			for (IStatFunction function : functions) {
-				if (!stats.containsKey(function.getName()))
-					stats.put(function.getName(), new TreeSet<IStatFunction>());
-				IStatFunction func = function;
-				if (function instanceof StatFunction) {
-					func = new StatFunctionProxy(statOwner, function);
+				TreeSet<IStatFunction> statFunctions = stats.get(function.getName());
+				if (statFunctions == null) {
+					statFunctions = new TreeSet<>();
+					stats.put(function.getName(), statFunctions);
 				}
-				// If already contains old stat, it won't add anyway, so next check will be false positive
-				// Useless Warning!!!
-				/*
-				 * TreeSet<IStatFunction> mods = getStatsByStatEnum(function.getName()); if (mods.contains(func)) { log.warn("Effect " + statOwner +
-				 * " already active" + func); }
-				 */
-				addFunction(function.getName(), func);
+				IStatFunction func = function;
+				if (function instanceof StatFunction)
+					func = new StatFunctionProxy(statOwner, function);
+				statFunctions.add(func);
 			}
 		} finally {
 			lock.writeLock().unlock();
@@ -153,38 +149,27 @@ public abstract class CreatureGameStats<T extends Creature> {
 	}
 
 	public Stat2 getStat(StatEnum statEnum, Stat2 stat) {
-		lock.readLock().lock();
-		try {
-			TreeSet<IStatFunction> functions = getStatsByStatEnum(statEnum);
-			if (functions == null) {
-				return stat;
-			}
+		TreeSet<IStatFunction> functions = getStatsByStatEnum(statEnum);
+		if (functions != null) {
 			for (IStatFunction func : functions) {
 				if (func.validate(stat)) {
 					func.apply(stat);
 				}
 			}
 			StatCapUtil.calculateBaseValue(stat, owner.isPlayer());
-			return stat;
-		} finally {
-			lock.readLock().unlock();
 		}
+		return stat;
 	}
 
 	public Stat2 getItemStatBoost(StatEnum statEnum, Stat2 stat) {
-		lock.readLock().lock();
-		try {
-			TreeSet<IStatFunction> functions = getStatsByStatEnum(statEnum);
-			if (functions == null || functions.isEmpty())
-				return stat;
+		TreeSet<IStatFunction> functions = getStatsByStatEnum(statEnum);
+		if (functions != null) {
 			for (IStatFunction func : functions) {
 				if (func.isBonus() && func.validate(stat) && (func.getOwner() instanceof Item || func.getOwner() instanceof ManaStone
 					|| func.getOwner() instanceof ItemSetTemplate || func.getOwner() instanceof RandomBonusEffect)) {
 					func.apply(stat);
 				}
 			}
-		} finally {
-			lock.readLock().unlock();
 		}
 		return stat;
 	}
@@ -333,36 +318,31 @@ public abstract class CreatureGameStats<T extends Creature> {
 	}
 
 	public TreeSet<IStatFunction> getStatsByStatEnum(StatEnum stat) {
-		TreeSet<IStatFunction> allStats = stats.get(stat);
-		if (allStats == null)
-			return null;
-		TreeSet<IStatFunction> tmp = new TreeSet<>();
-		List<IStatFunction> setFuncs = null;
-		for (IStatFunction func : allStats) {
-			if (func.getPriority() >= Integer.MAX_VALUE - 10) {
-				if (setFuncs == null)
-					setFuncs = new ArrayList<>();
-				setFuncs.add(func);
-			} else if (setFuncs != null) {
-				// all StatSetFunctions added
-				break;
+		lock.readLock().lock();
+		try {
+			TreeSet<IStatFunction> allStats = stats.get(stat);
+			if (allStats == null)
+				return null;
+			List<IStatFunction> setFuncs = null;
+			for (IStatFunction func : allStats) {
+				if (func.getPriority() >= Integer.MAX_VALUE - 10) {
+					if (setFuncs == null)
+						setFuncs = new ArrayList<>();
+					setFuncs.add(func);
+				} else if (setFuncs != null) {
+					// all StatSetFunctions added
+					break;
+				}
 			}
+			if (setFuncs == null)
+				return new TreeSet<>(allStats);
+			else
+				return new TreeSet<>(setFuncs);
+		} finally {
+			lock.readLock().unlock();
 		}
-		if (setFuncs == null)
-			tmp.addAll(allStats);
-		else
-			tmp.addAll(setFuncs);
-		return tmp;
 	}
 
-	private void addFunction(StatEnum stat, IStatFunction function) {
-		TreeSet<IStatFunction> allStats = stats.get(stat);
-		allStats.add(function);
-	}
-
-	/**
-	 * @return
-	 */
 	public boolean checkGeoNeedUpdate() {
 		long currentTime = System.currentTimeMillis();
 		if (currentTime - lastGeoUpdate > 600) {
