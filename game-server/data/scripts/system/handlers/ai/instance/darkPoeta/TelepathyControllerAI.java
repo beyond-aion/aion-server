@@ -6,6 +6,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.model.gameobjects.Creature;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 import ai.AggressiveNpcAI;
@@ -20,12 +21,12 @@ public class TelepathyControllerAI extends AggressiveNpcAI {
 	private Future<?> spawnTask;
 	private AtomicBoolean isAggred = new AtomicBoolean();
 
-	private void spawnHelper() {
+	private Npc spawnHelper() {
 		int distance = Rnd.get(7, 10);
 		float direction = Rnd.get(200) / 100f;
 		float xOff = (float) (Math.cos(Math.PI * direction) * distance);
 		float yOff = (float) (Math.sin(Math.PI * direction) * distance);
-		spawn(Rnd.get(2) == 0 ? 281150 : 281334, getPosition().getX() + xOff, getPosition().getY() + yOff, getPosition().getZ(), (byte) 0);
+		return (Npc) spawn(Rnd.get(2) == 0 ? 281150 : 281334, getPosition().getX() + xOff, getPosition().getY() + yOff, getPosition().getZ(), (byte) 0);
 	}
 
 	@Override
@@ -33,9 +34,11 @@ public class TelepathyControllerAI extends AggressiveNpcAI {
 		super.handleAttack(creature);
 		if (isAggred.compareAndSet(false, true)) {
 			spawnTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
-				if (!getLifeStats().isAlreadyDead())
-					spawnHelper();
-			}, 20000, 20000);
+				if (!getLifeStats().isAlreadyDead()) {
+					Npc spawn = spawnHelper();
+					spawn.getKnownList().forEachPlayer(p -> spawn.getAggroList().addHate(p, 10));
+				}
+			}, 60000, 60000);
 		}
 	}
 

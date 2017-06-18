@@ -28772,7 +28772,12 @@
 			<item id="122001060" /><!-- Sapphire Ring of Telepathy Controller -->
 		</items>
 	</decomposable>
-	<decomposable item_id="188053288" /><!-- Anuhart's Fabled Belt Box -->
+	<decomposable item_id="188053288" selectable="true"><!-- Anuhart's Fabled Belt Box -->
+		<items>
+			<item id="123000929" /><!-- Brigade General Anuhart's Leather Belt -->
+			<item id="123000930" /><!-- Brigade General Anuhart's Sash -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188053289" selectable="true"><!-- Fabled Dragon Flame Necklace Box -->
 		<items>
 			<item id="121000820" /><!-- Dragon Flame Diamond Necklace -->

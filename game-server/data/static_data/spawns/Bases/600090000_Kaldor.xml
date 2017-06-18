@@ -59,11 +59,11 @@
 				<spawn npc_id="234087" handler="SENTINEL" respawn_time="295">
 					<spot x="643.17633" y="1330.32739" z="150.35156" h="60"/>
 				</spawn>
-				<!-- Stonereach Lightbringer(LDF5_Fortress_v01_Tank_Light) -->
+				<!-- Stonereach Lightbringer(LDF5_Fortress_v01_Tank_Light)
 				<spawn npc_id="234533" handler="SENTINEL" respawn_time="295">
 					<spot x="608.01819" y="1336.20947" z="150.32417"/>
 					<spot x="648.74310" y="1335.78113" z="150.48610" h="60"/>
-				</spawn>
+				</spawn> -->
 				<!-- Broken Lightbringer(LDF5_Fortress_v01_Tank_Fake_Light) -->
 				<spawn npc_id="234535" handler="SENTINEL" respawn_time="295">
 					<spot x="648.09583" y="1352.22839" z="150.49156" h="60"/>
@@ -151,11 +151,11 @@
 				<spawn npc_id="234088" handler="SENTINEL" respawn_time="295">
 					<spot x="643.17633" y="1330.32739" z="150.35156" h="60"/>
 				</spawn>
-				<!-- Stonereach Shadecaster(LDF5_Fortress_v01_Tank_Dark) -->
+				<!-- Stonereach Shadecaster(LDF5_Fortress_v01_Tank_Dark)
 				<spawn npc_id="234534" handler="SENTINEL" respawn_time="295">
 					<spot x="608.01819" y="1336.20947" z="150.32417"/>
 					<spot x="648.74310" y="1335.78113" z="150.48610" h="60"/>
-				</spawn>
+				</spawn> -->
 				<!-- Broken Shadecaster(LDF5_Fortress_v01_Tank_Fake_Dark) -->
 				<spawn npc_id="234536" handler="SENTINEL" respawn_time="295">
 					<spot x="648.09583" y="1352.22839" z="150.49156" h="60"/>
@@ -332,11 +332,11 @@
 				<spawn npc_id="234137" handler="SENTINEL" respawn_time="295">
 					<spot x="1302.57776" y="1210.03113" z="188.12500" h="90"/>
 				</spawn>
-				<!-- Flamecrest Lightbringer(LDF5_Fortress_v02_Tank_Light) -->
+				<!-- Flamecrest Lightbringer(LDF5_Fortress_v02_Tank_Light)
 				<spawn npc_id="234537" handler="SENTINEL" respawn_time="295">
 					<spot x="936.31970" y="1204.13147" z="143.70866" h="46"/>
 					<spot x="905.93884" y="1230.74719" z="143.61853" h="106"/>
-				</spawn>
+				</spawn> -->
 				<!-- Broken Lightbringer(LDF5_Fortress_v02_Tank_Fake_Light) -->
 				<spawn npc_id="234539" handler="SENTINEL" respawn_time="295">
 					<spot x="946.33105" y="1217.36353" z="143.78592" h="46"/>
@@ -428,11 +428,11 @@
 				<spawn npc_id="234138" handler="SENTINEL" respawn_time="295">
 					<spot x="1302.57776" y="1210.03113" z="188.12500" h="90"/>
 				</spawn>
-				<!-- Flamecrest Shadecaster(LDF5_Fortress_v02_Tank_Dark) -->
+				<!-- Flamecrest Shadecaster(LDF5_Fortress_v02_Tank_Dark)
 				<spawn npc_id="234538" handler="SENTINEL" respawn_time="295">
 					<spot x="936.31970" y="1204.13147" z="143.70866" h="46"/>
 					<spot x="905.93884" y="1230.74719" z="143.61853" h="106"/>
-				</spawn>
+				</spawn> -->
 				<!-- Broken Shadecaster(LDF5_Fortress_v02_Tank_Fake_Dark) -->
 				<spawn npc_id="234540" handler="SENTINEL" respawn_time="295">
 					<spot x="946.33105" y="1217.36353" z="143.78592" h="46"/>
