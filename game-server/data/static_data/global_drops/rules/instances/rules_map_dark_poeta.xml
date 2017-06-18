@@ -127,8 +127,7 @@
 			<gd_item id="120000902" /><!-- Earrings of Ascending -->
 		</gd_items>
 	</gd_rule>
-	
-	<gd_rule rule_name="Named Armor (Legend)" base_chance="30">
+	<gd_rule rule_name="Named Armor (Legend)" base_chance="40">
 		<gd_maps>
 			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
 		</gd_maps>
@@ -141,7 +140,7 @@
 			<gd_item id="188053284" /><!-- Anuhart's Chest Box-->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Unique)" base_chance="30">
+	<gd_rule rule_name="Named Armor (Unique)" base_chance="20">
 		<gd_maps>
 			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
 		</gd_maps>
@@ -154,7 +153,7 @@
 			<gd_item id="188053279" /><!-- Anuhart's Fabled Chest Box -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Legend)" base_chance="35">
+	<gd_rule rule_name="Named Armor (Legend)" base_chance="40">
 		<gd_maps>
 			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
 		</gd_maps>
@@ -166,7 +165,7 @@
 			<gd_item id="188053281" /><!-- Anuhart's Pants Box -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Unique)" base_chance="35">
+	<gd_rule rule_name="Named Armor (Unique)" base_chance="20">
 		<gd_maps>
 			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
 		</gd_maps>
@@ -177,7 +176,7 @@
 			<gd_item id="188053276" /><!-- Anuhart's Fabled Pants Box -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Legend)" base_chance="20">
+	<gd_rule rule_name="Named Armor (Legend)" base_chance="40">
 		<gd_maps>
 			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
 		</gd_maps>
@@ -189,7 +188,7 @@
 			<gd_item id="188053285" /><!-- Anuhart's Shoulders Box -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Unique)" base_chance="15">
+	<gd_rule rule_name="Named Armor (Unique)" base_chance="20">
 		<gd_maps>
 			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
 		</gd_maps>
@@ -200,7 +199,7 @@
 			<gd_item id="188053280" /><!-- Anuhart's Fabled Shoulders Box -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Legend)" base_chance="20">
+	<gd_rule rule_name="Named Armor (Legend)" base_chance="40">
 		<gd_maps>
 			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
 		</gd_maps>
@@ -212,40 +211,41 @@
 			<gd_item id="188053283" /><!-- Anuhart's Gloves Box -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Unique)" base_chance="15">
+	<gd_rule rule_name="Named Armor (Unique)" base_chance="20">
 		<gd_maps>
 			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="214851" /><!-- Marabata of Poisoning -->
+			<gd_npc npc_id="215387" /><!-- Spectral Elim Elder -->
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="188053278" /><!-- Anuhart's Fabled Gloves Box -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Legend)" base_chance="20">
+	<gd_rule rule_name="Named Armor (Legend)" base_chance="40">
 		<gd_maps>
 			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="214850" /><!-- Marabata of Aether -->
+			<gd_npc npc_id="214880" /><!-- Spaller Echtra -->
+			<gd_npc npc_id="215388" /><!-- Spaller Rakanatra -->
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="188053282" /><!-- Anuhart's Shoes Box -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Unique)" base_chance="15">
+	<gd_rule rule_name="Named Armor (Unique)" base_chance="20">
 		<gd_maps>
 			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="214849" /><!-- Marabata of Strength -->
+			<gd_npc npc_id="215388" /><!-- Spaller Rakanatra -->
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="188053277" /><!-- Anuhart's Fabled Shoes Box -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Unique)" base_chance="10">
+	<gd_rule rule_name="Named Weapon (Unique)" base_chance="20">
 		<gd_maps>
 			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
 		</gd_maps>
@@ -257,8 +257,6 @@
 			<gd_item id="188054068" /><!-- Anuhart's Fabled Weapon Box -->
 		</gd_items>
 	</gd_rule>
-	
-	
 	<gd_rule rule_name="Named Weapon (Unique)" base_chance="5">
 		<gd_maps>
 			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
