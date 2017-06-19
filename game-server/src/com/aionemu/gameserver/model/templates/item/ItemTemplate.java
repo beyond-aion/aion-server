@@ -185,7 +185,7 @@ public class ItemTemplate extends VisibleObjectTemplate {
 	}
 
 	public long getItemSlot() {
-		return itemGroup.getSlots();
+		return itemGroup.getValidEquipmentSlots();
 	}
 
 	/**
