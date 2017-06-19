@@ -93,12 +93,22 @@ public class GeoService {
 		if (target instanceof SiegeNpc && ((SiegeNpc) target).getObjectTemplate().getAi().equals("fortressgate"))
 			return true;
 
-		return canSee(object.getWorldId(), object.getX(), object.getY(), object.getZ(), target.getX(), target.getY(), target.getZ(),
+		float objectSeeCheckZ = object.getZ() + getSeeCheckOffset(object);
+		float targetSeeCheckZ = target.getZ() + getSeeCheckOffset(target);
+
+		return canSee(object.getWorldId(), object.getX(), object.getY(), objectSeeCheckZ, target.getX(), target.getY(), targetSeeCheckZ,
 			object.getInstanceId());
 	}
 
 	public boolean canSee(int worldId, float x, float y, float z, float x1, float y1, float z1, int instanceId) {
-		return geoData.getMap(worldId).canSee(x, y, z + 1, x1, y1, z1 + 1, instanceId);
+		return geoData.getMap(worldId).canSee(x, y, z, x1, y1, z1, instanceId);
+	}
+
+	private float getSeeCheckOffset(VisibleObject object) {
+		float height = object.getObjectTemplate().getBoundRadius().getUpper();
+		if (height > 2.5f)
+			return height / 2;
+		return 1.25f;
 	}
 
 	public Vector3f getClosestCollision(Creature object, float x, float y, float z) {
