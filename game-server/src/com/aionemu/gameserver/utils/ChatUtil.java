@@ -160,6 +160,10 @@ public class ChatUtil {
 			return null;
 
 		int mapId = NumberUtils.toInt(posStr[0]);
+		int instanceId = mapId % 10000;
+		if (instanceId > 0)
+			mapId -= instanceId;
+		instanceId += 1; // client counts instanceIds starting at 0, but on server side it starts at 1 (TODO change server side)
 		float x = NumberUtils.toFloat(posStr[1]);
 		float y = NumberUtils.toFloat(posStr[2]);
 		float z = posStr.length > 3 ? NumberUtils.toFloat(posStr[3]) : 0;
@@ -171,9 +175,12 @@ public class ChatUtil {
 		if (WorldMapType.getWorld(mapId) == null)
 			return null;
 
+		if (instanceId > 1 && !World.getInstance().getWorldMap(mapId).getAvailableInstanceIds().contains(instanceId))
+			instanceId = 1;
+
 		float geoZ;
 		if (z > 0)
-			geoZ = GeoService.getInstance().getZ(mapId, x, y, z, 1); // search relative to input z (max diff = z ±2)
+			geoZ = GeoService.getInstance().getZ(mapId, x, y, z, instanceId); // search relative to input z (max diff = z ±2)
 		else {
 			if (layer > 0 && z <= 0 && mapId == 400010000) { // abyss
 				switch (layer) {
@@ -187,7 +194,7 @@ public class ChatUtil {
 						z = 2950;
 						break;
 				}
-				geoZ = GeoService.getInstance().getZ(mapId, x, y, z, z - 250, 1);
+				geoZ = GeoService.getInstance().getZ(mapId, x, y, z, z - 250, instanceId);
 			} else {
 				geoZ = GeoService.getInstance().getZ(mapId, x, y);
 			}
@@ -196,7 +203,7 @@ public class ChatUtil {
 		if (!Float.isNaN(geoZ))
 			z = geoZ;
 
-		return World.getInstance().createPosition(mapId, x, y, z, (byte) 0, 0);
+		return World.getInstance().createPosition(mapId, x, y, z, (byte) 0, instanceId);
 	}
 
 	public static String item(int itemId) {
