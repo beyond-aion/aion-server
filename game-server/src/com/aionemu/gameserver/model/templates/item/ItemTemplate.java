@@ -121,8 +121,6 @@ public class ItemTemplate extends VisibleObjectTemplate {
 	private String temperingName;
 	@XmlAttribute(name = "enchant_name")
 	private String enchantName;
-	@XmlAttribute(name = "subtype_prefix")
-	private String subtypePrefix;
 	@XmlAttribute(name = "activate_count")
 	private int activationCount;
 	@XmlAttribute(name = "activate_combat")
@@ -579,7 +577,7 @@ public class ItemTemplate extends VisibleObjectTemplate {
 	}
 
 	public int[] getRequiredSkills() {
-		return itemGroup.getRequiredSkills(subtypePrefix);
+		return itemGroup.getRequiredSkills();
 	}
 
 	public String getTemperingName() {
@@ -588,10 +586,6 @@ public class ItemTemplate extends VisibleObjectTemplate {
 
 	public String getEnchantName() {
 		return enchantName;
-	}
-
-	public String getSubtypePrefix() {
-		return subtypePrefix;
 	}
 
 	public boolean canExceedEnchant() {

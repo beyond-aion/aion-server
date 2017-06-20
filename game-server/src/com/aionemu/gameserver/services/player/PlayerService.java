@@ -210,7 +210,6 @@ public class PlayerService {
 
 		Equipment equipment = DAOManager.getDAO(InventoryDAO.class).loadEquipment(player);
 		ItemService.loadItemStones(equipment.getEquippedItemsWithoutStigma());
-		equipment.setOwner(player);
 		player.setEquipment(equipment);
 
 		for (int petBagId = StorageType.PET_BAG_MIN; petBagId <= StorageType.PET_BAG_MAX; petBagId++) {

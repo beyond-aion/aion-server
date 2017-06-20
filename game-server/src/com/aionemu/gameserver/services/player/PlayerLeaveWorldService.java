@@ -167,7 +167,6 @@ public class PlayerLeaveWorldService {
 
 		PlayerService.storePlayer(player);
 
-		player.getEquipment().setOwner(null);
 		player.getInventory().setOwner(null);
 		player.getWarehouse().setOwner(null);
 		player.getAccount().getAccountWarehouse().setOwner(null);

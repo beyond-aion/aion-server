@@ -144,7 +144,6 @@
 		<xs:attribute name="cName" type="xs:string"/>
 		<xs:attribute name="tempering_name" type="xs:string"/>
 		<xs:attribute name="enchant_name" type="xs:string" />
-		<xs:attribute name="subtype_prefix" type="xs:string" />
 		<xs:attribute name="multi_return" type="xs:string"/>
 		<xs:attribute name="can_exceed_enchant" type="xs:boolean" use="optional"/>
 		<xs:attribute name="exceed_enchant_skill" type="ExceedEnchantSkillSet" use="optional"/>

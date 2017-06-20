@@ -149,7 +149,7 @@ public enum ItemGroup {
 		return armorType;
 	}
 
-	public int[] getRequiredSkills(String subtypePrefix) {
+	public int[] getRequiredSkills() {
 		return requiredSkill;
 	}
 
