@@ -38,7 +38,6 @@ import com.aionemu.gameserver.world.geo.GeoService;
 public class NpcMoveController extends CreatureMoveController<Npc> {
 
 	private static final Logger log = LoggerFactory.getLogger(NpcMoveController.class);
-	private static final float MOVE_CHECK_OFFSET = 0.1f;
 	private static final float MOVE_OFFSET = 0.05f;
 
 	private Destination destination = Destination.TARGET_OBJECT;
@@ -369,7 +368,7 @@ public class NpcMoveController extends CreatureMoveController<Npc> {
 	}
 
 	public boolean isReachedPoint() {
-		return PositionUtil.getDistance(owner.getX(), owner.getY(), owner.getZ(), pointX, pointY, pointZ) < MOVE_OFFSET;
+		return PositionUtil.isInRange(owner.getX(), owner.getY(), owner.getZ(), pointX, pointY, pointZ, MOVE_OFFSET);
 	}
 
 	public boolean isNextRouteStepChosen() {

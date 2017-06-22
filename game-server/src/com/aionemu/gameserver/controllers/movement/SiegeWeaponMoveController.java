@@ -17,7 +17,6 @@ public class SiegeWeaponMoveController extends SummonMoveController {
 	private float pointX;
 	private float pointY;
 	private float pointZ;
-	public static final float MOVE_CHECK_OFFSET = 0.1f;
 
 	public SiegeWeaponMoveController(Summon owner) {
 		super(owner);
@@ -53,6 +52,12 @@ public class SiegeWeaponMoveController extends SummonMoveController {
 	public void moveToTargetObject() {
 		updateLastMove();
 		MoveTaskManager.getInstance().addCreature(owner);
+	}
+
+	@Override
+	public void abortMove() {
+		super.abortMove();
+		MoveTaskManager.getInstance().removeCreature(owner);
 	}
 
 	/**
