@@ -921,8 +921,8 @@ public class Effect implements StatOwner {
 				break;
 		}
 
-		// adjust with pvp duration
-		if (skillTemplate.getPvpDuration() != 0 && getEffected() instanceof Player)
+		// adjust with pvp duration (not sure why some self target skills have pvp duration o.O idk how to handle that)
+		if (skillTemplate.getPvpDuration() != 0 && !getEffector().equals(getEffected()) && getEffected() instanceof Player)
 			duration = duration * skillTemplate.getPvpDuration() / 100;
 
 		if (duration > 86400000)
