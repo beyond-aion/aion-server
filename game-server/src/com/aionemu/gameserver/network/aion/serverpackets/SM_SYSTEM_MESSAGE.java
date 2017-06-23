@@ -25852,6 +25852,34 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	}
 
 	/**
+	 * The Test Weapon Dynatoum's bomb timer has begun its countdown.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDF5_U3_BOSS_TIMER_01() {
+		return new SM_SYSTEM_MESSAGE(1402143);
+	}
+
+	/**
+	 * Test Weapon Dynatoum will go off in 5 minutes.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDF5_U3_BOSS_TIMER_02() {
+		return new SM_SYSTEM_MESSAGE(1402144);
+	}
+
+	/**
+	 * Test Weapon Dynatoum will go off in 1 minute.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDF5_U3_BOSS_TIMER_03() {
+		return new SM_SYSTEM_MESSAGE(1402145);
+	}
+
+	/**
+	 * Test Weapon Dynatoum has detonated.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDF5_U3_BOSS_TIMER_04() {
+		return new SM_SYSTEM_MESSAGE(1402146);
+	}
+
+	/**
 	 * %0 has succeeded in tempering %1 to level %2.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_ITEM_AUTHORIZE_SUCCEEDED_MAX(String playerName, int nameId) {
@@ -26019,6 +26047,34 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_SVS_DIRECT_PORTAL_OPEN_NOTICE() {
 		return new SM_SYSTEM_MESSAGE(1402418);
+	}
+
+	/**
+	 * The Remodeled Dynatoum bomb has begun counting down.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDF5_U3_HARD_BOSS_TIMER_01() {
+		return new SM_SYSTEM_MESSAGE(1402425);
+	}
+
+	/**
+	 * The Remodeled Dynatoum will explode in 5 minutes.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDF5_U3_HARD_BOSS_TIMER_02() {
+		return new SM_SYSTEM_MESSAGE(1402426);
+	}
+
+	/**
+	 * The Remodeled Dynatoum will explode in 1 minute.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDF5_U3_HARD_BOSS_TIMER_03() {
+		return new SM_SYSTEM_MESSAGE(1402427);
+	}
+
+	/**
+	 * The Remodeled Dynatoum is going to explode.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDF5_U3_HARD_BOSS_TIMER_04() {
+		return new SM_SYSTEM_MESSAGE(1402428);
 	}
 
 	/**

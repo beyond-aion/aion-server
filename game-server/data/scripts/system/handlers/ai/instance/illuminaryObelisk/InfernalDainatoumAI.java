@@ -3,6 +3,9 @@ package ai.instance.illuminaryObelisk;
 import java.util.Collections;
 
 import com.aionemu.gameserver.ai.AIName;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
+import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
  * @author Estrayl
@@ -38,6 +41,30 @@ public class InfernalDainatoumAI extends DainatoumAI {
 				break;
 			}
 		}
+	}
+
+	@Override
+	protected void scheduleDespawn() {
+		despawnTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
+			if (!isAlreadyDead()) {
+				switch (progress) {
+					case 0:
+						PacketSendUtility.broadcastToMap(getOwner(), SM_SYSTEM_MESSAGE.STR_MSG_IDF5_U3_HARD_BOSS_TIMER_01());
+						break;
+					case 1:
+						PacketSendUtility.broadcastToMap(getOwner(), SM_SYSTEM_MESSAGE.STR_MSG_IDF5_U3_HARD_BOSS_TIMER_02());
+						break;
+					case 4:
+						PacketSendUtility.broadcastToMap(getOwner(), SM_SYSTEM_MESSAGE.STR_MSG_IDF5_U3_HARD_BOSS_TIMER_03());
+						break;
+					case 5:
+						PacketSendUtility.broadcastToMap(getOwner(), SM_SYSTEM_MESSAGE.STR_MSG_IDF5_U3_HARD_BOSS_TIMER_04());
+						onDespawn();
+						break;
+				}
+				progress++;
+			}
+		}, 1000, 60000);
 	}
 
 	@Override

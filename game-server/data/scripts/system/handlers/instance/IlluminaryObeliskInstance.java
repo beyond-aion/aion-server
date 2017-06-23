@@ -274,7 +274,7 @@ public class IlluminaryObeliskInstance extends GeneralInstanceHandler {
 				break;
 			case 702009:
 				TeleportService.teleportTo(player, mapId, instanceId, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading(), TeleportAnimation.FADE_OUT_BEAM);
-				SkillEngine.getInstance().applyEffectDirectly(21511, player, player, 0);
+				SkillEngine.getInstance().applyEffectDirectly(21511, npc, player, 0);
 				npc.getController().delete();
 				break;
 			case 730905:

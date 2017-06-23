@@ -11,6 +11,7 @@ import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
@@ -25,11 +26,11 @@ import ai.AggressiveNpcAI;
 @AIName("dainatum")
 public class DainatoumAI extends AggressiveNpcAI {
 
-	private AtomicBoolean isStarted = new AtomicBoolean(false);
+	private AtomicBoolean isStarted = new AtomicBoolean();
 	private List<VisibleObject> adds = new ArrayList<>();
 	protected List<Integer> percents = new ArrayList<>();
-	private Future<?> despawnTask;
-	private int progress = 0;
+	protected Future<?> despawnTask;
+	protected int progress = 0;
 
 	@Override
 	protected void handleSpawned() {
@@ -74,34 +75,30 @@ public class DainatoumAI extends AggressiveNpcAI {
 			portal.getController().delete();
 	}
 
-	private void scheduleDespawn() {
-		despawnTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
-
-			@Override
-			public void run() {
-				if (!isAlreadyDead()) {
-					switch (progress) {
-						case 0:
-							PacketSendUtility.broadcastToMap(getOwner(), 1402143);
-							break;
-						case 1:
-							PacketSendUtility.broadcastToMap(getOwner(), 1402144);
-							break;
-						case 4:
-							PacketSendUtility.broadcastToMap(getOwner(), 1402145);
-							break;
-						case 5:
-							PacketSendUtility.broadcastToMap(getOwner(), 1402146);
-							onDespawn();
-							break;
-					}
-					progress++;
+	protected void scheduleDespawn() {
+		despawnTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
+			if (!isAlreadyDead()) {
+				switch (progress) {
+					case 0:
+						PacketSendUtility.broadcastToMap(getOwner(), SM_SYSTEM_MESSAGE.STR_MSG_IDF5_U3_BOSS_TIMER_01());
+						break;
+					case 6:
+						PacketSendUtility.broadcastToMap(getOwner(), SM_SYSTEM_MESSAGE.STR_MSG_IDF5_U3_BOSS_TIMER_02());
+						break;
+					case 9:
+						PacketSendUtility.broadcastToMap(getOwner(), SM_SYSTEM_MESSAGE.STR_MSG_IDF5_U3_BOSS_TIMER_03());
+						break;
+					case 10:
+						PacketSendUtility.broadcastToMap(getOwner(), SM_SYSTEM_MESSAGE.STR_MSG_IDF5_U3_BOSS_TIMER_04());
+						onDespawn();
+						break;
 				}
+				progress++;
 			}
 		}, 1000, 60000);
 	}
-	
-	private void onDespawn() {
+
+	protected void onDespawn() {
 		if (getOwner() != null && getOwner().getLifeStats().isAlreadyDead())
 			SkillEngine.getInstance().getSkill(getOwner(), 21534, 1, getOwner()).useSkill();
 		getOwner().getController().delete();
@@ -165,7 +162,7 @@ public class DainatoumAI extends AggressiveNpcAI {
 	protected void handleBackHome() {
 		cancelDespawnTask();
 		deleteAdds();
-		PacketSendUtility.broadcastToMap(getOwner(), 1402146);
+		PacketSendUtility.broadcastToMap(getOwner(), SM_SYSTEM_MESSAGE.STR_MSG_IDF5_U3_BOSS_TIMER_04());
 		super.handleBackHome();
 		getOwner().getController().delete(); // No Full Reset needed.
 	}
