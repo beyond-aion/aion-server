@@ -451,6 +451,7 @@
 			<gd_map map_id="300160000" /><!-- Lower_Udas_Temple -->
 			<gd_map map_id="300170000" /><!-- Beshmundir_Temple -->
 			<gd_map map_id="300280000" /><!-- Rentus_Base -->
+			<gd_map map_id="300620000" /><!-- Occupied Rentus Base -->
 			<gd_map map_id="300510000" /><!-- Tiamat_Stronghold -->
 			<gd_map map_id="300520000" /><!-- Dragon_Lords_Refuge -->
 			<gd_map map_id="300590000" /><!-- Ophidan_Bridge -->
@@ -519,14 +520,15 @@
 			<gd_npc npc_id="216249" /><!-- Flarestorm -->
 			<gd_npc npc_id="216168" /><!-- Flarestorm -->
 			<!-- Rentus Base -->
-			<gd_npc npc_id="217312" /><!-- Pagati Tamer Nishaka -->
-			<gd_npc npc_id="217315" /><!-- Umatha the Crazed -->
-			<gd_npc npc_id="217307" /><!-- Zantaraz -->
 			<gd_npc npc_id="217308" /><!-- Tarotran -->
 			<gd_npc npc_id="217316" /><!-- Ambusher Kiriana -->
 			<gd_npc npc_id="217309" /><!-- Captain Xasta -->
 			<gd_npc npc_id="217311" /><!-- Kuhara the Volatile -->
 			<gd_npc npc_id="217317" /><!-- Archmagus Upadi -->
+			<!-- Occupied Rentus Base -->
+			<gd_npc npc_id="236301" /><!-- Ambusher Kiriana -->
+			<gd_npc npc_id="236302" /><!-- Archmagus Upadi -->
+			<gd_npc npc_id="236297" /><!-- Captain Xasta -->
 			<!-- Tiamat Stronghold -->
 			<gd_npc npc_id="219352" /><!-- Invincible Shabokan -->
 			<gd_npc npc_id="219353" /><!-- Brigade General Chantra -->
@@ -564,6 +566,7 @@
 			<gd_map map_id="300170000" /><!-- Beshmundir_Temple -->
 			<gd_map map_id="320150000" /><!-- Padmarashkas_Cave -->
 			<gd_map map_id="300280000" /><!-- Rentus_Base -->
+			<gd_map map_id="300620000" /><!-- Occupied Rentus Base -->
 			<gd_map map_id="300510000" /><!-- Tiamat_Stronghold -->
 			<gd_map map_id="301140000" /><!-- Danuar_Sanctuary -->
 			<gd_map map_id="300590000" /><!-- Ophidan_Bridge -->
@@ -595,6 +598,8 @@
 			<gd_npc npc_id="218756" /><!-- Padmarashka -->
 			<!-- Rentus Base -->
 			<gd_npc npc_id="218614" /><!-- Brigade General Vasharti -->
+			<!-- Occupied Rentus Base -->
+			<gd_npc npc_id="236300" /><!-- Brigade General Vasharti -->
 			<!-- Tiamat Stronghold -->
 			<gd_npc npc_id="219358" /><!-- Brigade General Tahabata -->
 			<!-- Danuar Sanctuary -->
@@ -692,6 +697,7 @@
 			<gd_map map_id="320080000" /><!-- Draupnir_Cave -->
 			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
 			<gd_map map_id="300280000" /><!-- Rentus_Base -->
+			<gd_map map_id="300620000" /><!-- Occupied Rentus Base -->
 			<gd_map map_id="301230000" /><!-- Illuminary_Obelisk -->
 			<gd_map map_id="320130000" /><!-- Adma_Stronghold -->
 			<gd_map map_id="300170000" /><!-- Beshmundir_Temple -->
@@ -707,6 +713,8 @@
 			<gd_npc npc_id="217166" /><!-- Tahabata Pyrelord -->
 			<!-- Rentus Base -->
 			<gd_npc npc_id="218614" /><!-- Brigade General Vasharti -->
+			<!-- Occupied Rentus Base -->
+			<gd_npc npc_id="236300" /><!-- Brigade General Vasharti -->
 			<!-- Illuminary Obelisk -->
 			<gd_npc npc_id="233740" /><!-- Test Weapon Dynatoum -->
 			<!-- Adma Stronghold -->
@@ -780,6 +788,7 @@
 			<gd_map map_id="320150000" /><!-- Padmarashkas_Cave -->
 			<gd_map map_id="300510000" /><!-- Tiamat_Stronghold -->
 			<gd_map map_id="300280000" /><!-- Rentus_Base -->
+			<gd_map map_id="300620000" /><!-- Occupied Rentus Base -->
 			<gd_map map_id="300590000" /><!-- Ophidan_Bridge -->
 			<gd_map map_id="301230000" /><!-- Illuminary_Obelisk -->
 			<gd_map map_id="301140000" /><!-- Danuar_Sanctuary -->
@@ -805,6 +814,8 @@
 			<gd_npc npc_id="219358" /><!-- Brigade General Tahabata -->
 			<!-- Rentus Base -->
 			<gd_npc npc_id="218614" /><!-- Brigade General Vasharti -->
+			<!-- Occupied Rentus Base -->
+			<gd_npc npc_id="236300" /><!-- Brigade General Vasharti -->
 			<!-- Ophidan Bridge -->
 			<gd_npc npc_id="235768" /><!-- Spirited Velkur -->
 			<gd_npc npc_id="235771" /><!-- Velkur Aetherknife -->
