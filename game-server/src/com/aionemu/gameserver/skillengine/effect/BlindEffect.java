@@ -8,6 +8,7 @@ import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.controllers.attack.AttackStatus;
 import com.aionemu.gameserver.controllers.observer.AttackCalcObserver;
 import com.aionemu.gameserver.controllers.observer.AttackStatusObserver;
+import com.aionemu.gameserver.model.gameobjects.state.CreatureVisualState;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.skillengine.model.Effect;
 
@@ -20,7 +21,8 @@ public class BlindEffect extends EffectTemplate {
 
 	@Override
 	public void applyEffect(Effect effect) {
-		effect.getEffected().getEffectController().removeHideEffects();
+		if (effect.getEffected().getVisualState() < CreatureVisualState.HIDE10.getId())
+			effect.getEffected().getEffectController().removeHideEffects();
 		effect.addToEffectedController();
 	}
 

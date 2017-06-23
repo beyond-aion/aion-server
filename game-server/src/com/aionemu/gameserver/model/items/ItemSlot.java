@@ -133,8 +133,6 @@ public enum ItemSlot {
 			if (!itemSlot.isCombo() && (slotIdMask & itemSlot.slotIdMask) == itemSlot.slotIdMask)
 				slots.add(itemSlot);
 		}
-		if (slots.size() == 0)
-			throw new IllegalArgumentException("Invalid provided slotIdMask " + slotIdMask);
 		return slots.toArray(new ItemSlot[slots.size()]);
 	}
 

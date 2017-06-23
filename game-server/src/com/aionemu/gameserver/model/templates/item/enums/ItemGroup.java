@@ -3,6 +3,8 @@ package com.aionemu.gameserver.model.templates.item.enums;
 import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlType;
 
+import com.aionemu.gameserver.model.items.ItemSlot;
+
 /**
  * @author xTz
  */
@@ -10,76 +12,75 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum ItemGroup {
 	NONE,
-	NOWEAPON(3, ItemSubType.TWO_HAND),
-	SWORD(3, ItemSubType.ONE_HAND, new int[] { 37, 44 }),
-	GREATSWORD(3, ItemSubType.TWO_HAND, new int[] { 51 }),
+	NOWEAPON(ItemSlot.MAIN_OR_SUB.getSlotIdMask(), ItemSubType.TWO_HAND),
+	SWORD(ItemSlot.MAIN_OR_SUB.getSlotIdMask(), ItemSubType.ONE_HAND, new int[] { 37, 44 }),
+	GREATSWORD(ItemSlot.MAIN_OR_SUB.getSlotIdMask(), ItemSubType.TWO_HAND, new int[] { 51 }),
 	EXTRACT_SWORD(0, ItemSubType.NONE),
-	DAGGER(3, ItemSubType.ONE_HAND, new int[] { 66, 45 }),
-	MACE(3, ItemSubType.ONE_HAND, new int[] { 39, 46 }),
-	ORB(3, ItemSubType.TWO_HAND, new int[] { 111 }),
-	SPELLBOOK(3, ItemSubType.TWO_HAND, new int[] { 100 }),
-	POLEARM(3, ItemSubType.TWO_HAND, new int[] { 52 }),
-	STAFF(3, ItemSubType.TWO_HAND, new int[] { 89 }),
-	BOW(3, ItemSubType.TWO_HAND, new int[] { 53 }),
-	HARP(3, ItemSubType.TWO_HAND, new int[] { 124, 114 }),
-	GUN(3, ItemSubType.ONE_HAND, new int[] { 117, 112 }),
-	CANNON(3, ItemSubType.TWO_HAND, new int[] { 113 }),
-	KEYBLADE(3, ItemSubType.TWO_HAND, new int[] { 112, 115 }),
-	SHIELD(1 << 1, ItemSubType.SHIELD, new int[] { 43, 50 }),
+	DAGGER(ItemSlot.MAIN_OR_SUB.getSlotIdMask(), ItemSubType.ONE_HAND, new int[] { 66, 45 }),
+	MACE(ItemSlot.MAIN_OR_SUB.getSlotIdMask(), ItemSubType.ONE_HAND, new int[] { 39, 46 }),
+	ORB(ItemSlot.MAIN_OR_SUB.getSlotIdMask(), ItemSubType.TWO_HAND, new int[] { 111 }),
+	SPELLBOOK(ItemSlot.MAIN_OR_SUB.getSlotIdMask(), ItemSubType.TWO_HAND, new int[] { 100 }),
+	POLEARM(ItemSlot.MAIN_OR_SUB.getSlotIdMask(), ItemSubType.TWO_HAND, new int[] { 52 }),
+	STAFF(ItemSlot.MAIN_OR_SUB.getSlotIdMask(), ItemSubType.TWO_HAND, new int[] { 89 }),
+	BOW(ItemSlot.MAIN_OR_SUB.getSlotIdMask(), ItemSubType.TWO_HAND, new int[] { 53 }),
+	HARP(ItemSlot.MAIN_OR_SUB.getSlotIdMask(), ItemSubType.TWO_HAND, new int[] { 124, 114 }),
+	GUN(ItemSlot.MAIN_OR_SUB.getSlotIdMask(), ItemSubType.ONE_HAND, new int[] { 117, 112 }),
+	CANNON(ItemSlot.MAIN_OR_SUB.getSlotIdMask(), ItemSubType.TWO_HAND, new int[] { 113 }),
+	KEYBLADE(ItemSlot.MAIN_OR_SUB.getSlotIdMask(), ItemSubType.TWO_HAND, new int[] { 112, 115 }),
+	SHIELD(ItemSlot.SUB_HAND.getSlotIdMask(), ItemSubType.SHIELD, new int[] { 43, 50 }),
 	
-	TORSO(1 << 3, ItemSubType.ALL_ARMOR, new int[] { 103, 106 }),
-	GLOVE(1 << 4, ItemSubType.ALL_ARMOR, new int[] { 103, 106 }),
-	SHOULDER(1 << 11, ItemSubType.ALL_ARMOR, new int[] { 103, 106 }),
-	PANTS(1 << 12, ItemSubType.ALL_ARMOR, new int[] { 103, 106 }),
-	SHOES(1 << 5, ItemSubType.ALL_ARMOR, new int[] { 103, 106 }),
-	RB_TORSO(1 << 3, ItemSubType.ROBE, new int[] { 103, 106 }),
-	RB_GLOVE(1 << 4, ItemSubType.ROBE, new int[] { 103, 106 }),
-	RB_SHOULDER(1 << 11, ItemSubType.ROBE, new int[] { 103, 106 }),
-	RB_PANTS(1 << 12, ItemSubType.ROBE, new int[] { 103, 106 }),
-	RB_SHOES(1 << 5, ItemSubType.ROBE, new int[] { 103, 106 }),
-	CL_TORSO(1 << 3, ItemSubType.CLOTHES, new int[] { 40 }),
-	CL_GLOVE(1 << 4, ItemSubType.CLOTHES, new int[] { 40 }),
-	CL_SHOULDER(1 << 11, ItemSubType.CLOTHES, new int[] { 40 }),
-	CL_PANTS(1 << 12, ItemSubType.CLOTHES, new int[] { 40 }),
-	CL_SHOES(1 << 5, ItemSubType.CLOTHES, new int[] { 40 }),
-	LT_TORSO(1 << 3, ItemSubType.LEATHER, new int[] { 41, 48 }),
-	LT_GLOVE(1 << 4, ItemSubType.LEATHER, new int[] { 41, 48 }),
-	LT_SHOULDER(1 << 11, ItemSubType.LEATHER, new int[] { 41, 48 }),
-	LT_PANTS(1 << 12, ItemSubType.LEATHER, new int[] { 41, 48 }),
-	LT_SHOES(1 << 5, ItemSubType.LEATHER, new int[] { 41, 48 }),
-	CH_TORSO(1 << 3, ItemSubType.CHAIN, new int[] { 42, 49 }),
-	CH_GLOVE(1 << 4, ItemSubType.CHAIN, new int[] { 42, 49 }),
-	CH_SHOULDER(1 << 11, ItemSubType.CHAIN, new int[] { 42, 49 }),
-	CH_PANTS(1 << 12, ItemSubType.CHAIN, new int[] { 42, 49 }),
-	CH_SHOES(1 << 5, ItemSubType.CHAIN, new int[] { 42, 49 }),
-	PL_TORSO(1 << 3, ItemSubType.PLATE, new int[] { 54 }),
-	PL_GLOVE(1 << 4, ItemSubType.PLATE, new int[] { 54 }),
-	PL_SHOULDER(1 << 11, ItemSubType.PLATE, new int[] { 54 }),
-	PL_PANTS(1 << 12, ItemSubType.PLATE, new int[] { 54 }),
-	PL_SHOES(1 << 5, ItemSubType.PLATE, new int[] { 54 }),
+	TORSO(ItemSlot.TORSO.getSlotIdMask(), ItemSubType.ALL_ARMOR, new int[] { 103, 106 }),
+	GLOVE(ItemSlot.GLOVES.getSlotIdMask(), ItemSubType.ALL_ARMOR, new int[] { 103, 106 }),
+	SHOULDER(ItemSlot.SHOULDER.getSlotIdMask(), ItemSubType.ALL_ARMOR, new int[] { 103, 106 }),
+	PANTS(ItemSlot.PANTS.getSlotIdMask(), ItemSubType.ALL_ARMOR, new int[] { 103, 106 }),
+	SHOES(ItemSlot.BOOTS.getSlotIdMask(), ItemSubType.ALL_ARMOR, new int[] { 103, 106 }),
+	RB_TORSO(ItemSlot.TORSO.getSlotIdMask(), ItemSubType.ROBE, new int[] { 103, 106 }),
+	RB_GLOVE(ItemSlot.GLOVES.getSlotIdMask(), ItemSubType.ROBE, new int[] { 103, 106 }),
+	RB_SHOULDER(ItemSlot.SHOULDER.getSlotIdMask(), ItemSubType.ROBE, new int[] { 103, 106 }),
+	RB_PANTS(ItemSlot.PANTS.getSlotIdMask(), ItemSubType.ROBE, new int[] { 103, 106 }),
+	RB_SHOES(ItemSlot.BOOTS.getSlotIdMask(), ItemSubType.ROBE, new int[] { 103, 106 }),
+	CL_TORSO(ItemSlot.TORSO.getSlotIdMask(), ItemSubType.CLOTHES, new int[] { 40 }),
+	CL_GLOVE(ItemSlot.GLOVES.getSlotIdMask(), ItemSubType.CLOTHES, new int[] { 40 }),
+	CL_SHOULDER(ItemSlot.SHOULDER.getSlotIdMask(), ItemSubType.CLOTHES, new int[] { 40 }),
+	CL_PANTS(ItemSlot.PANTS.getSlotIdMask(), ItemSubType.CLOTHES, new int[] { 40 }),
+	CL_SHOES(ItemSlot.BOOTS.getSlotIdMask(), ItemSubType.CLOTHES, new int[] { 40 }),
+	LT_TORSO(ItemSlot.TORSO.getSlotIdMask(), ItemSubType.LEATHER, new int[] { 41, 48 }),
+	LT_GLOVE(ItemSlot.GLOVES.getSlotIdMask(), ItemSubType.LEATHER, new int[] { 41, 48 }),
+	LT_SHOULDER(ItemSlot.SHOULDER.getSlotIdMask(), ItemSubType.LEATHER, new int[] { 41, 48 }),
+	LT_PANTS(ItemSlot.PANTS.getSlotIdMask(), ItemSubType.LEATHER, new int[] { 41, 48 }),
+	LT_SHOES(ItemSlot.BOOTS.getSlotIdMask(), ItemSubType.LEATHER, new int[] { 41, 48 }),
+	CH_TORSO(ItemSlot.TORSO.getSlotIdMask(), ItemSubType.CHAIN, new int[] { 42, 49 }),
+	CH_GLOVE(ItemSlot.GLOVES.getSlotIdMask(), ItemSubType.CHAIN, new int[] { 42, 49 }),
+	CH_SHOULDER(ItemSlot.SHOULDER.getSlotIdMask(), ItemSubType.CHAIN, new int[] { 42, 49 }),
+	CH_PANTS(ItemSlot.PANTS.getSlotIdMask(), ItemSubType.CHAIN, new int[] { 42, 49 }),
+	CH_SHOES(ItemSlot.BOOTS.getSlotIdMask(), ItemSubType.CHAIN, new int[] { 42, 49 }),
+	PL_TORSO(ItemSlot.TORSO.getSlotIdMask(), ItemSubType.PLATE, new int[] { 54 }),
+	PL_GLOVE(ItemSlot.GLOVES.getSlotIdMask(), ItemSubType.PLATE, new int[] { 54 }),
+	PL_SHOULDER(ItemSlot.SHOULDER.getSlotIdMask(), ItemSubType.PLATE, new int[] { 54 }),
+	PL_PANTS(ItemSlot.PANTS.getSlotIdMask(), ItemSubType.PLATE, new int[] { 54 }),
+	PL_SHOES(ItemSlot.BOOTS.getSlotIdMask(), ItemSubType.PLATE, new int[] { 54 }),
 	
-	EARRING(192, ArmorType.ACCESSORY),
-	RING(768, ArmorType.ACCESSORY),
-	NECKLACE(1 << 10, ArmorType.ACCESSORY),
-	BELT(1 << 16, ArmorType.ACCESSORY),
-	WING(1 << 15, ItemSubType.WING),
-	PLUME(1 << 19, ItemSubType.PLUME),
+	EARRING(ItemSlot.EARRINGS_LEFT.getSlotIdMask() | ItemSlot.EARRINGS_RIGHT.getSlotIdMask(), ArmorType.ACCESSORY),
+	RING(ItemSlot.RING_LEFT.getSlotIdMask() | ItemSlot.RING_RIGHT.getSlotIdMask(), ArmorType.ACCESSORY),
+	NECKLACE(ItemSlot.NECKLACE.getSlotIdMask(), ArmorType.ACCESSORY),
+	BELT(ItemSlot.WAIST.getSlotIdMask(), ArmorType.ACCESSORY),
+	WING(ItemSlot.WINGS.getSlotIdMask(), ItemSubType.WING),
+	PLUME(ItemSlot.PLUME.getSlotIdMask(), ItemSubType.PLUME),
 
-	HEAD(1 << 2, ArmorType.ACCESSORY),
-	LT_HEADS(1 << 2, ItemSubType.LEATHER),
-	CL_HEADS(1 << 2, ItemSubType.CLOTHES),
-	CL_MULTISLOT(10, ItemSubType.CLOTHES),
-	CL_SHIELD(1 << 1, ArmorType.ACCESSORY),
+	HEAD(ItemSlot.HELMET.getSlotIdMask(), ArmorType.ACCESSORY),
+	LT_HEADS(ItemSlot.HELMET.getSlotIdMask(), ItemSubType.LEATHER),
+	CL_HEADS(ItemSlot.HELMET.getSlotIdMask(), ItemSubType.CLOTHES),
+	CL_MULTISLOT(ItemSlot.TORSO.getSlotIdMask() | ItemSlot.PANTS.getSlotIdMask(), ItemSubType.CLOTHES),
+	CL_SHIELD(ItemSlot.SUB_HAND.getSlotIdMask(), ArmorType.ACCESSORY),
 	
-	POWER_SHARDS(24576, ArmorType.ACCESSORY),
-	TGFSL_ROBE(10, ItemSubType.ROBE),
-	STIGMA((long) 7E003F << 30, ItemSubType.STIGMA),
+	POWER_SHARDS(ItemSlot.POWER_SHARD_RIGHT.getSlotIdMask() | ItemSlot.POWER_SHARD_LEFT.getSlotIdMask(), ArmorType.ACCESSORY),
+	STIGMA(ItemSlot.ALL_STIGMA.getSlotIdMask(), ItemSubType.STIGMA),
 	// other
 	ARROW(0, ItemSubType.ARROW),
-	NPC_MACE(1, ItemSubType.ONE_HAND), // keep it above TOOLHOES, for search picking it up
-	TOOLRODS(3, ItemSubType.TWO_HAND),
-	TOOLHOES(1, ItemSubType.ONE_HAND),
-	TOOLPICKS(3, ItemSubType.TWO_HAND),
+	NPC_MACE(ItemSlot.MAIN_HAND.getSlotIdMask(), ItemSubType.ONE_HAND), // keep it above TOOLHOES, for search picking it up
+	TOOLRODS(ItemSlot.MAIN_OR_SUB.getSlotIdMask(), ItemSubType.TWO_HAND),
+	TOOLHOES(ItemSlot.MAIN_HAND.getSlotIdMask(), ItemSubType.ONE_HAND),
+	TOOLPICKS(ItemSlot.MAIN_OR_SUB.getSlotIdMask(), ItemSubType.TWO_HAND),
 	// non equip
 	MANASTONE,
 	SPECIAL_MANASTONE,
@@ -105,7 +106,7 @@ public enum ItemGroup {
 	GODSTONE,
 	STIGMA_SHARD;
 
-	private final long slot;
+	private final long validEquipmentSlots;
 	private final ItemSubType itemSubType;
 	private final ArmorType armorType;
 	private final int[] requiredSkill;
@@ -114,30 +115,30 @@ public enum ItemGroup {
 		this(0, ItemSubType.NONE, new int[] {});
 	}
 
-	private ItemGroup(long slot, ArmorType armorType) {
-		this(slot, armorType, new int[] {});
+	private ItemGroup(long validEquipmentSlots, ArmorType armorType) {
+		this(validEquipmentSlots, armorType, new int[] {});
 	}
 
-	private ItemGroup(long slot, ItemSubType itemSubType) {
-		this(slot, itemSubType, new int[] {});
+	private ItemGroup(long validEquipmentSlots, ItemSubType itemSubType) {
+		this(validEquipmentSlots, itemSubType, new int[] {});
 	}
 
-	private ItemGroup(long slot, ItemSubType itemSubType, int[] requiredSkill) {
-		this.slot = slot;
+	private ItemGroup(long validEquipmentSlots, ItemSubType itemSubType, int[] requiredSkill) {
+		this.validEquipmentSlots = validEquipmentSlots;
 		this.itemSubType = itemSubType;
 		this.armorType = null;
 		this.requiredSkill = requiredSkill;
 	}
 
-	private ItemGroup(long slot, ArmorType armorType, int[] requiredSkill) {
-		this.slot = slot;
+	private ItemGroup(long validEquipmentSlots, ArmorType armorType, int[] requiredSkill) {
+		this.validEquipmentSlots = validEquipmentSlots;
 		this.itemSubType = ItemSubType.NONE;
 		this.armorType = armorType;
 		this.requiredSkill = requiredSkill;
 	}
 
-	public long getSlots() {
-		return slot;
+	public long getValidEquipmentSlots() {
+		return validEquipmentSlots;
 	}
 
 	public ItemSubType getItemSubType() {
@@ -148,7 +149,7 @@ public enum ItemGroup {
 		return armorType;
 	}
 
-	public int[] getRequiredSkills(String subtypePrefix) {
+	public int[] getRequiredSkills() {
 		return requiredSkill;
 	}
 

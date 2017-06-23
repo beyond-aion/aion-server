@@ -313,6 +313,8 @@ public final class DB {
 	 *          statement to close
 	 */
 	public static void close(PreparedStatement statement) {
+		if (statement == null) // e.g. null from failed DB.prepareStatement call
+			return;
 		try {
 			if (statement.isClosed()) {
 				// noinspection ThrowableInstanceNeverThrown

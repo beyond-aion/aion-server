@@ -17,7 +17,6 @@ public class PlayerConnectedEvent extends AlwaysTrueTeamEvent {
 
 	private final PlayerAlliance alliance;
 	private final Player connected;
-	private PlayerAllianceMember connectedMember;
 
 	public PlayerConnectedEvent(PlayerAlliance alliance, Player player) {
 		this.alliance = alliance;
@@ -27,7 +26,7 @@ public class PlayerConnectedEvent extends AlwaysTrueTeamEvent {
 	@Override
 	public void handleEvent() {
 		alliance.removeMember(connected.getObjectId());
-		connectedMember = new PlayerAllianceMember(connected);
+		PlayerAllianceMember connectedMember = new PlayerAllianceMember(connected);
 		alliance.addMember(connectedMember);
 
 		PacketSendUtility.sendPacket(connected, new SM_ALLIANCE_INFO(alliance));

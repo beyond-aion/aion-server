@@ -66,7 +66,7 @@ public class ItemInfoBlob extends PacketWriteHelper {
 		if (item.hasFusionedItem() || itemTemplate.isTwoHandWeapon())
 			blob.addBlobEntry(ItemBlobType.COMPOSITE_ITEM);
 
-		if (itemTemplate.getItemGroup().getSlots() != 0) {
+		if (itemTemplate.getItemGroup().getValidEquipmentSlots() != 0) {
 			// EQUIPPED SLOT
 			blob.addBlobEntry(ItemBlobType.EQUIPPED_SLOT);
 

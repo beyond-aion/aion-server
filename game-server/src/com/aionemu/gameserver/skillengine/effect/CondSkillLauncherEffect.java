@@ -33,7 +33,6 @@ public class CondSkillLauncherEffect extends EffectTemplate {
 
 	@Override
 	public void endEffect(Effect effect) {
-		effect.getEffected().getGameStats().endEffect(effect);
 		ActionObserver observer = effect.getActionObserver(position);
 		effect.getEffected().getObserveController().removeObserver(observer);
 	}

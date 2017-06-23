@@ -36,15 +36,6 @@ public abstract class BufEffect extends EffectTemplate {
 	}
 
 	/**
-	 * Will be called from effect controller when effect ends
-	 */
-	@Override
-	public void endEffect(Effect effect) {
-		Creature effected = effect.getEffected();
-		effected.getGameStats().endEffect(effect);
-	}
-
-	/**
 	 * Will be called from effect controller when effect starts
 	 */
 	@Override

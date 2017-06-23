@@ -2,6 +2,7 @@ package com.aionemu.gameserver.controllers.movement;
 
 import com.aionemu.gameserver.ai.AISubState;
 import com.aionemu.gameserver.model.gameobjects.Summon;
+import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_MOVE;
 import com.aionemu.gameserver.taskmanager.tasks.MoveTaskManager;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -16,7 +17,6 @@ public class SiegeWeaponMoveController extends SummonMoveController {
 	private float pointX;
 	private float pointY;
 	private float pointZ;
-	public static final float MOVE_CHECK_OFFSET = 0.1f;
 
 	public SiegeWeaponMoveController(Summon owner) {
 		super(owner);
@@ -38,10 +38,11 @@ public class SiegeWeaponMoveController extends SummonMoveController {
 			PacketSendUtility.broadcastPacket(owner, new SM_MOVE(owner));
 		}
 
-		if (PositionUtil.getDistance(owner.getTarget(), pointX, pointY, pointZ) > MOVE_CHECK_OFFSET) {
-			pointX = owner.getTarget().getX();
-			pointY = owner.getTarget().getY();
-			pointZ = owner.getTarget().getZ();
+		VisibleObject target = owner.getTarget();
+		if (target != null) { // update target position, in case target moved
+			pointX = target.getX();
+			pointY = target.getY();
+			pointZ = target.getZ();
 		}
 		moveToLocation(pointX, pointY, pointZ);
 		updateLastMove();
@@ -51,6 +52,12 @@ public class SiegeWeaponMoveController extends SummonMoveController {
 	public void moveToTargetObject() {
 		updateLastMove();
 		MoveTaskManager.getInstance().addCreature(owner);
+	}
+
+	@Override
+	public void abortMove() {
+		super.abortMove();
+		MoveTaskManager.getInstance().removeCreature(owner);
 	}
 
 	/**

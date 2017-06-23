@@ -87,7 +87,7 @@ public class ItemRemodelService {
 		ItemGroup keep = keepItem.getItemTemplate().getItemGroup();
 		ItemGroup extract = extractItem.getItemSkinTemplate().getItemGroup();
 		if ((keep != extract && !(extract.getItemSubType().equals(ItemSubType.CLOTHES) || extract.getItemSubType() == ItemSubType.ALL_ARMOR
-			&& keep.getSlots() == extract.getSlots()))
+			&& keep.getValidEquipmentSlots() == extract.getValidEquipmentSlots()))
 			|| keep.getItemSubType().equals(ItemSubType.CLOTHES)) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CHANGE_ITEM_SKIN_NOT_COMPATIBLE(new DescriptionId(keepItem.getItemTemplate()
 				.getNameId()), new DescriptionId(extractItem.getItemSkinTemplate().getNameId())));
