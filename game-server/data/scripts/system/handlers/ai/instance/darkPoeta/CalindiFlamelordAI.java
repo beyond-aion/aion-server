@@ -3,6 +3,7 @@ package ai.instance.darkPoeta;
 import java.util.concurrent.Future;
 
 import com.aionemu.commons.utils.Rnd;
+import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.model.skill.NpcSkillEntry;
 import com.aionemu.gameserver.model.skill.QueuedNpcSkillEntry;
@@ -62,7 +63,7 @@ public class CalindiFlamelordAI extends AggressiveNpcAI {
 				break;
 			case 19679: // You are unworthy.
 				PacketSendUtility.broadcastToMap(getOwner(), SM_SYSTEM_MESSAGE.STR_MSG_INSTANCE_A_RANK_BATTLE_END());
-				getOwner().getController().onDelete();
+				AIActions.deleteOwner(this);
 				break;
 		}
 	}

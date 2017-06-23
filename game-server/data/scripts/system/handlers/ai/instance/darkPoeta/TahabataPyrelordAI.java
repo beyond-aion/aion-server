@@ -2,6 +2,7 @@ package ai.instance.darkPoeta;
 
 import java.util.concurrent.Future;
 
+import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.model.skill.NpcSkillEntry;
 import com.aionemu.gameserver.model.skill.QueuedNpcSkillEntry;
@@ -40,7 +41,7 @@ public class TahabataPyrelordAI extends AggressiveNpcAI {
 		switch (usedSkill.getSkillId()) {
 			case 19679: // You are unworthy.
 				PacketSendUtility.broadcastToMap(getOwner(), SM_SYSTEM_MESSAGE.STR_MSG_INSTANCE_S_RANK_BATTLE_END());
-				getOwner().getController().onDelete();
+				AIActions.deleteOwner(this);
 				break;
 			case 18236:
 				spawn(281258, 1191.2714f, 1220.5795f, 144.2901f, (byte) 36);

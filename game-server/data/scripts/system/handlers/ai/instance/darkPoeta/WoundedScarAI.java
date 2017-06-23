@@ -47,7 +47,7 @@ public class WoundedScarAI extends GeneralNpcAI {
 		if (getOwner().getMoveController().isStop() && isDestinationReached.compareAndSet(false, true)) {
 			WorldPosition p = getPosition();
 			spawn(281116, p.getX(), p.getY(), p.getZ(), p.getHeading());
-			getOwner().getController().onDelete();
+			AIActions.deleteOwner(this);
 			return;
 		}
 		switch (getMoveController().getCurrentPoint()) {
