@@ -28,6 +28,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_PLAYER_STANCE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SKILL_ACTIVATION;
 import com.aionemu.gameserver.skillengine.condition.Conditions;
 import com.aionemu.gameserver.skillengine.effect.AbnormalState;
+import com.aionemu.gameserver.skillengine.effect.AbstractAbsoluteStatEffect;
 import com.aionemu.gameserver.skillengine.effect.EffectTemplate;
 import com.aionemu.gameserver.skillengine.effect.EffectType;
 import com.aionemu.gameserver.skillengine.model.EffectReserved.ResourceType;
@@ -1081,7 +1082,7 @@ public class Effect implements StatOwner {
 		boolean hasStatModifiers = false;
 		for (EffectTemplate template : successEffects.values()) {
 			template.endEffect(this);
-			if (!hasStatModifiers && template.getChange() != null && !template.getChange().isEmpty())
+			if (!hasStatModifiers && (template.getChange() != null && !template.getChange().isEmpty() || template instanceof AbstractAbsoluteStatEffect))
 				hasStatModifiers = true;
 		}
 		if (hasStatModifiers)
