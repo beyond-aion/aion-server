@@ -226,7 +226,7 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 
 		getOwner().incrementAttackedCount();
 
-		if (attacker instanceof Player) {
+		if (!getOwner().getLifeStats().isAlreadyDead() && attacker instanceof Player) {
 			Player player = (Player) attacker;
 			if (status == AttackStatus.CRITICAL && Rnd.chance() < 10)
 				applyEffectOnCritical(player, skillId);
