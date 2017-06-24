@@ -24,12 +24,12 @@ public class PopuchinAI extends AggressiveNpcAI {
 	private Future<?> bombTask;
 
 	private void startBombTask() {
-		if (!isAlreadyDead() && !isHome) {
+		if (!isDead() && !isHome) {
 			bombTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 				@Override
 				public void run() {
-					if (!isAlreadyDead() && !isHome) {
+					if (!isDead() && !isHome) {
 						VisibleObject target = getTarget();
 						if (target instanceof Player) {
 							SkillEngine.getInstance().getSkill(getOwner(), 19413, 49, target).useNoAnimationSkill();
@@ -38,13 +38,13 @@ public class PopuchinAI extends AggressiveNpcAI {
 
 							@Override
 							public void run() {
-								if (!isAlreadyDead() && !isHome) {
+								if (!isDead() && !isHome) {
 									SkillEngine.getInstance().getSkill(getOwner(), 19412, 49, getOwner()).useNoAnimationSkill();
 									ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 										@Override
 										public void run() {
-											if (!isAlreadyDead() && !isHome && getOwner().isSpawned()) {
+											if (!isDead() && !isHome && getOwner().isSpawned()) {
 												if (getLifeStats().getHpPercentage() > 50) {
 													WorldPosition p = getPosition();
 													if (p != null && p.getWorldMapInstance() != null) {
@@ -103,7 +103,7 @@ public class PopuchinAI extends AggressiveNpcAI {
 
 			@Override
 			public void run() {
-				if (!isAlreadyDead() && !isHome) {
+				if (!isDead() && !isHome) {
 					for (int i = 0; i < 10; i++) {
 						rndSpawnInRange(217375, Rnd.get(1, 12));
 					}

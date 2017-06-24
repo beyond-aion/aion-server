@@ -23,7 +23,7 @@ public class MarabataAI extends AggressiveNpcAI {
 		super.handleAttack(creature);
 		if (isStarted.compareAndSet(false, true)) {
 			boosterLifeCheckTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
-				if (getLifeStats().isAlreadyDead())
+				if (isDead())
 					return;
 				switch (getNpcId()) {
 					case 214849:

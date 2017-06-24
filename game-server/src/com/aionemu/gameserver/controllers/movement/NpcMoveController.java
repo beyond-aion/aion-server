@@ -13,7 +13,6 @@ import com.aionemu.gameserver.ai.handler.TargetEventHandler;
 import com.aionemu.gameserver.ai.manager.WalkManager;
 import com.aionemu.gameserver.configs.main.GeoDataConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.model.actions.NpcActions;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
@@ -128,7 +127,7 @@ public class NpcMoveController extends CreatureMoveController<Npc> {
 		if (owner.getAi().isLogging()) {
 			AILogger.moveinfo(owner, "moveToDestination destination: " + destination);
 		}
-		if (NpcActions.isAlreadyDead(owner)) {
+		if (owner.isDead()) {
 			abortMove();
 			return;
 		}

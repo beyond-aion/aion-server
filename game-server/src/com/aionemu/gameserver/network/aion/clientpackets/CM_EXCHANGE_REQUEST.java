@@ -44,7 +44,7 @@ public class CM_EXCHANGE_REQUEST extends AionClientPacket {
 			return;
 		}
 
-		if (activePlayer.getLifeStats().isAlreadyDead() || targetPlayer.getLifeStats().isAlreadyDead()) {
+		if (activePlayer.isDead() || targetPlayer.isDead()) {
 			log.warn("CM_EXCHANGE_REQUEST dead players target from {} to {}", activePlayer.getObjectId(), targetObjectId);
 			return;
 		}

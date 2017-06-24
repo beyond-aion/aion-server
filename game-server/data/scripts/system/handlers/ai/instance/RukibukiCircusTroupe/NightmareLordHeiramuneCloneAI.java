@@ -5,7 +5,6 @@ import java.util.concurrent.Future;
 import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.model.TaskId;
-import com.aionemu.gameserver.model.actions.NpcActions;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
@@ -30,7 +29,7 @@ public class NightmareLordHeiramuneCloneAI extends AggressiveNpcAI {
 			@Override
 			public void run() {
 				Npc boss = getPosition().getWorldMapInstance().getNpc(233467);
-				if (boss != null && !NpcActions.isAlreadyDead(boss)) {
+				if (boss != null && !boss.isDead()) {
 					SkillEngine.getInstance().getSkill(getOwner(), 21342, 1, boss).useSkill();
 				} else
 					AIActions.deleteOwner(NightmareLordHeiramuneCloneAI.this);

@@ -43,7 +43,7 @@ public class KiskAI extends NpcAI {
 	@Override
 	protected void handleDespawned() {
 		KiskService.getInstance().removeKisk(getOwner());
-		if (!isAlreadyDead())
+		if (!isDead())
 			getOwner().broadcastPacket(STR_BINDSTONE_IS_REMOVED());
 
 		super.handleDespawned();

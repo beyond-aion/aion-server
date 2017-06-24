@@ -25,7 +25,7 @@ public class DancingFlameAI extends GeneralNpcAI {
 
 			@Override
 			public void run() {
-				if (isAlreadyDead()) {
+				if (isDead()) {
 					cancelTask();
 				} else {
 					if (isPlayerInRange()) {
@@ -87,7 +87,7 @@ public class DancingFlameAI extends GeneralNpcAI {
 	}
 
 	private void despawn() {
-		if (!isAlreadyDead()) {
+		if (!isDead()) {
 			AIActions.deleteOwner(this);
 		}
 	}

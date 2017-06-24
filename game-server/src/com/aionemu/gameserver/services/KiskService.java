@@ -42,7 +42,7 @@ public class KiskService {
 		for (Player member : kisk.getCurrentMemberList()) {
 			member.setKisk(null);
 			PacketSendUtility.sendPacket(member, new SM_BIND_POINT_INFO(0, 0f, 0f, 0f, member));
-			if (member.getLifeStats().isAlreadyDead())
+			if (member.isDead())
 				member.getController().sendDie();
 		}
 	}

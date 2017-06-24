@@ -59,7 +59,7 @@ public class CronJobService {
 
 					@Override
 					public void run() {
-						if (moltenus != null && !moltenus.getLifeStats().isAlreadyDead()) {
+						if (moltenus != null && !moltenus.isDead()) {
 							moltenus.getController().delete();
 							moltenus = null;
 						}

@@ -50,7 +50,7 @@ public class PlayerTeamDistributionService {
 
 		for (Player member : filteredStats.players) {
 			// dead players shouldn't receive AP/EP/DP
-			if (member.getLifeStats().isAlreadyDead())
+			if (member.isDead())
 				continue;
 
 			// Reward init
@@ -114,7 +114,7 @@ public class PlayerTeamDistributionService {
 				if (member.isMentor()) {
 					mentorCount++;
 				} else {
-					if (!hasLivingPlayer && !member.getLifeStats().isAlreadyDead())
+					if (!hasLivingPlayer && !member.isDead())
 						hasLivingPlayer = true;
 
 					players.add(member);

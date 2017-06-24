@@ -6,7 +6,6 @@ import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.controllers.attack.AggroInfo;
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
 import com.aionemu.gameserver.model.DescriptionId;
-import com.aionemu.gameserver.model.actions.PlayerActions;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.StaticDoor;
@@ -403,7 +402,7 @@ public class PvPArenaInstance extends GeneralInstanceHandler {
 
 	protected void reward() {
 		for (Player player : instance.getPlayersInside()) {
-			if (PlayerActions.isAlreadyDead(player))
+			if (player.isDead())
 				PlayerReviveService.duelRevive(player);
 			PvPArenaPlayerReward reward = getPlayerReward(player.getObjectId());
 			if (!reward.isRewarded()) {

@@ -63,7 +63,7 @@ public class NpcController extends CreatureController<Npc> {
 			Creature creature = (Creature) object;
 			owner.getAi().onCreatureEvent(AIEventType.CREATURE_SEE, creature);
 			if (creature instanceof Player) {
-				if (owner.getLifeStats().isAlreadyDead())
+				if (owner.isDead())
 					DropService.getInstance().see((Player) creature, owner);
 			}
 		}
@@ -207,7 +207,7 @@ public class NpcController extends CreatureController<Npc> {
 				PlayerTeamDistributionService.doReward(((Player) attacker).getPlayerGroup(), percentage, getOwner(), winner);
 			} else if (attacker instanceof Player) {
 				Player player = (Player) attacker;
-				if (!player.getLifeStats().isAlreadyDead()) {
+				if (!player.isDead()) {
 					// Reward init
 					long rewardXp = StatFunctions.calculateExperienceReward(player.getLevel(), getOwner());
 					int rewardDp = StatFunctions.calculateDPReward(player, getOwner());
@@ -279,7 +279,7 @@ public class NpcController extends CreatureController<Npc> {
 	@Override
 	public void onAttack(Creature attacker, int skillId, TYPE type, int damage, boolean notifyAttack, LOG logId, AttackStatus attackStatus,
 		boolean allowGodstoneActivation) {
-		if (getOwner().getLifeStats().isAlreadyDead())
+		if (getOwner().isDead())
 			return;
 		final Creature actingCreature;
 

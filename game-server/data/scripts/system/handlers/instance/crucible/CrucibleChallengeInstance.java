@@ -351,7 +351,7 @@ public class CrucibleChallengeInstance extends CrucibleInstance {
 			if (obj instanceof Npc) {
 				Npc npc = (Npc) obj;
 				for (int npcId : npcIds) {
-					if (npc.getNpcId() == npcId && !npc.getLifeStats().isAlreadyDead())
+					if (npc.getNpcId() == npcId && !npc.isDead())
 						return false;
 				}
 			}

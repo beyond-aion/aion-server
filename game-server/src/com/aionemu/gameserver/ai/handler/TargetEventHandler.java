@@ -98,7 +98,7 @@ public class TargetEventHandler {
 		if (npcAI.isMoveSupported()) {
 			npcAI.getOwner().getMoveController().abortMove();
 		}
-		if (!npcAI.isAlreadyDead())
+		if (!npcAI.isDead())
 			npcAI.think();
 	}
 

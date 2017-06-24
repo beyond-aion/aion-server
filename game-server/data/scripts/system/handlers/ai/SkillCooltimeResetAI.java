@@ -47,7 +47,7 @@ public class SkillCooltimeResetAI extends NpcAI {
 			getOwner().getController().addTask(TaskId.DESPAWN, ThreadPoolManager.getInstance().schedule(() -> getOwner().getController().delete(), 30000));
 			ThreadPoolManager.getInstance().schedule(() -> {
 				getOwner().getKnownList().forEachPlayer(p -> {
-					if (p.getLifeStats().isAlreadyDead() || !getOwner().canSee(p) || playersInSight.containsKey(p.getObjectId()))
+					if (p.isDead() || !getOwner().canSee(p) || playersInSight.containsKey(p.getObjectId()))
 						return;
 					if (PositionUtil.isInRange(getOwner(), p, 8) && GeoService.getInstance().canSee(getOwner(), p)) {
 						playersInSight.put(p.getObjectId(), System.currentTimeMillis());
@@ -62,7 +62,7 @@ public class SkillCooltimeResetAI extends NpcAI {
 	@Override
 	protected void handleDialogStart(Player player) {
 		playersInSight.values().removeIf(time -> System.currentTimeMillis() > time + 300000); // remove players if they are already 5 mins+ in the map
-		if (player.getLifeStats().isAboutToDie() || player.getLifeStats().isAlreadyDead())
+		if (player.getLifeStats().isAboutToDie() || player.isDead())
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_USE_IN_DEAD_STATE());
 		else if (!PvpMapService.getInstance().isOnPvPMap(player) && player.getController().isInCombat())
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_CANT_CAST_IN_COMBAT_STATE());
@@ -79,7 +79,7 @@ public class SkillCooltimeResetAI extends NpcAI {
 		if (!(creature instanceof Player))
 			return;
 
-		if (creature.getLifeStats().isAlreadyDead())
+		if (creature.isDead())
 			return;
 
 		if (!getOwner().canSee(creature))
@@ -119,7 +119,7 @@ public class SkillCooltimeResetAI extends NpcAI {
 					PacketSendUtility.sendPacket(responder, SM_SYSTEM_MESSAGE.STR_WAREHOUSE_TOO_FAR_FROM_NPC());
 				else if (responder.getInventory().getKinah() < price)
 					PacketSendUtility.sendPacket(responder, SM_SYSTEM_MESSAGE.STR_MSG_NOT_ENOUGH_KINA(price));
-				else if (player.getLifeStats().isAboutToDie() || player.getLifeStats().isAlreadyDead())
+				else if (player.getLifeStats().isAboutToDie() || player.isDead())
 					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_USE_IN_DEAD_STATE());
 				else if (player.getController().isInCombat())
 					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_CANT_CAST_IN_COMBAT_STATE());

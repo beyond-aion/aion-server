@@ -18,7 +18,7 @@ public class ThinkEventHandler {
 	 * @param npcAI
 	 */
 	public static void onThink(NpcAI npcAI) {
-		if (npcAI.isAlreadyDead()) {
+		if (npcAI.isDead()) {
 			AILogger.info(npcAI, "can't think in dead state");
 			return;
 		}
@@ -79,7 +79,7 @@ public class ThinkEventHandler {
 	public static void thinkAttack(NpcAI npcAI) {
 		Npc npc = npcAI.getOwner();
 		Creature mostHated = npc.getAggroList().getMostHated();
-		if (mostHated != null && !mostHated.getLifeStats().isAlreadyDead()) {
+		if (mostHated != null && !mostHated.isDead()) {
 			npcAI.onCreatureEvent(AIEventType.TARGET_CHANGED, mostHated);
 		} else {
 			npc.getQueuedSkills().clear();

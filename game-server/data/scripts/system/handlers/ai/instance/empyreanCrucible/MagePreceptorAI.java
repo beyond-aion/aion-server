@@ -6,7 +6,6 @@ import java.util.List;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIName;
-import com.aionemu.gameserver.model.actions.PlayerActions;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -71,7 +70,7 @@ public class MagePreceptorAI extends AggressiveNpcAI {
 
 					@Override
 					public void run() {
-						if (!isAlreadyDead()) {
+						if (!isDead()) {
 							SkillEngine.getInstance().getSkill(getOwner(), 19609, 10, getOwner()).useNoAnimationSkill();
 							ThreadPoolManager.getInstance().schedule(new Runnable() {
 
@@ -103,7 +102,7 @@ public class MagePreceptorAI extends AggressiveNpcAI {
 
 			@Override
 			public void run() {
-				if (!isAlreadyDead()) {
+				if (!isDead()) {
 					SkillEngine.getInstance().getSkill(getOwner(), 19605, 10, getTargetPlayer()).useNoAnimationSkill();
 
 				}
@@ -114,7 +113,7 @@ public class MagePreceptorAI extends AggressiveNpcAI {
 	private Player getTargetPlayer() {
 		List<Player> players = new ArrayList<>();
 		getKnownList().forEachPlayer(player -> {
-			if (!PlayerActions.isAlreadyDead(player) && PositionUtil.isInRange(player, getOwner(), 37)) {
+			if (!player.isDead() && PositionUtil.isInRange(player, getOwner(), 37)) {
 				players.add(player);
 			}
 		});

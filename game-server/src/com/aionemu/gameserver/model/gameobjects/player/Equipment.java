@@ -20,7 +20,6 @@ import com.aionemu.gameserver.model.DescriptionId;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.TaskId;
-import com.aionemu.gameserver.model.actions.PlayerActions;
 import com.aionemu.gameserver.model.actions.PlayerMode;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.PersistentState;
@@ -848,7 +847,7 @@ public class Equipment {
 	private boolean soulBindItem(final Player player, final Item item, final long slot) {
 		if (player.getInventory().getItemByObjId(item.getObjectId()) == null || player.isInState(CreatureState.GLIDING))
 			return false;
-		if (PlayerActions.isAlreadyDead(player)) {
+		if (player.isDead()) {
 			PacketSendUtility.sendPacket(player, STR_SOUL_BOUND_INVALID_STANCE(2800119));
 			return false;
 		} else if (player.isInPlayerMode(PlayerMode.RIDE)) {

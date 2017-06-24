@@ -15,9 +15,9 @@ public class SealGuardianAI extends AggressiveNpcAI {
 	@Override
 	protected void handleDied() {
 		Player killer = getAggroList().getMostPlayerDamage();
-		if (killer.getLifeStats().isAlreadyDead())
+		if (killer.isDead())
 			killer = getAggroList().getList().stream()
-				.filter(aggroInfo -> aggroInfo.getAttacker() instanceof Player && !((Player) aggroInfo.getAttacker()).getLifeStats().isAlreadyDead())
+				.filter(aggroInfo -> aggroInfo.getAttacker() instanceof Player && !((Player) aggroInfo.getAttacker()).isDead())
 				.findFirst().map(aggroInfo -> (Player) aggroInfo.getAttacker()).orElseGet(null);
 		if (killer != null)
 			SkillEngine.getInstance().applyEffect(21625, getOwner(), killer);

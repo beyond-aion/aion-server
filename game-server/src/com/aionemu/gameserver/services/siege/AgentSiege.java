@@ -184,7 +184,7 @@ public class AgentSiege extends Siege<AgentLocation> {
 	public void onDespawn() {
 		Collection<SiegeNpc> npcs = World.getInstance().getLocalSiegeNpcs(getSiegeLocationId());
 		for (SiegeNpc npc : npcs) {
-			if (npc != null && !npc.getLifeStats().isAlreadyDead())
+			if (npc != null && !npc.isDead())
 				npc.getController().delete();
 		}
 	}

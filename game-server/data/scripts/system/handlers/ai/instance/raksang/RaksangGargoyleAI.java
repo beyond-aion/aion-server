@@ -21,7 +21,7 @@ public class RaksangGargoyleAI extends AggressiveNpcAI {
 
 			@Override
 			public void run() {
-				if (!isAlreadyDead()) {
+				if (!isDead()) {
 					SkillEngine.getInstance().getSkill(getOwner(), 19126, 46, getOwner()).useNoAnimationSkill();
 				}
 			}

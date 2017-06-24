@@ -230,7 +230,7 @@ public class TeleportService {
 			World.getInstance().setPosition(player.getPet(), pos.getMapId(), pos.getInstanceId(), pos.getX(), pos.getY(), pos.getZ(), pos.getHeading());
 			World.getInstance().setPosition(player, pos.getMapId(), pos.getInstanceId(), pos.getX(), pos.getY(), pos.getZ(), pos.getHeading());
 			spawnOnSameMap(player);
-		} else if (player.getLifeStats().isAlreadyDead()) {
+		} else if (player.isDead()) {
 			teleportDeadTo(player, pos.getMapId(), pos.getInstanceId(), pos.getX(), pos.getY(), pos.getZ(), pos.getHeading());
 		} else {
 			teleportTo(player, pos.getMapId(), pos.getInstanceId(), pos.getX(), pos.getY(), pos.getZ(), pos.getHeading(), TeleportAnimation.NONE);
@@ -275,7 +275,7 @@ public class TeleportService {
 
 	public static void teleportTo(final Player player, final int worldId, final int instanceId, final float x, final float y, final float z,
 		final byte heading, TeleportAnimation animation) {
-		if (player.getLifeStats().isAlreadyDead()) {
+		if (player.isDead()) {
 			PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.RESURRECT), true);
 			PlayerReviveService.revive(player, 20, 20, true, 0);
 		} else if (DuelService.getInstance().isDueling(player.getObjectId())) {
@@ -540,7 +540,7 @@ public class TeleportService {
 				return;
 
 			if (animation != TeleportAnimation.NONE) { // this is a delayed teleport (triggered after animation end)
-				if (player.getLifeStats().isAlreadyDead()) {
+				if (player.isDead()) {
 					PacketSendUtility.sendPacket(player, new SM_PLAYER_INFO(player));
 					World.getInstance().spawn(player);
 					return;

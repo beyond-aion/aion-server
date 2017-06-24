@@ -45,7 +45,7 @@ public class CaptainLediarAI extends AggressiveNpcAI {
 	}
 
 	private void spawnHelpers() {
-		if (!isAlreadyDead()) {
+		if (!isDead()) {
 			int count = 4;
 			int npcId = 219509;
 			for (int i = 0; i < count; i++) {
@@ -112,7 +112,7 @@ public class CaptainLediarAI extends AggressiveNpcAI {
 		EmoteManager.emoteStopAttacking(getOwner());
 		for (int npc_id : npc_ids) {
 			Npc tower = getOwner().getPosition().getWorldMapInstance().getNpc(npc_id);
-			if (tower != null && !tower.getLifeStats().isAlreadyDead()) {
+			if (tower != null && !tower.isDead()) {
 				switch (npc_id) {
 					case 831251:
 					case 831250:

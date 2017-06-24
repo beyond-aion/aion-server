@@ -39,19 +39,19 @@ public class ExplosionShadowsAI extends AggressiveNpcAI {
 	}
 
 	private void doSchedule() {
-		if (!isAlreadyDead()) {
+		if (!isDead()) {
 			ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 				@Override
 				public void run() {
-					if (!isAlreadyDead()) {
+					if (!isDead()) {
 						SkillEngine.getInstance().getSkill(getOwner(), 19425, 49, getOwner()).useNoAnimationSkill();
 
 						ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 							@Override
 							public void run() {
-								if (!isAlreadyDead()) {
+								if (!isDead()) {
 									check();
 								}
 							}
@@ -79,7 +79,7 @@ public class ExplosionShadowsAI extends AggressiveNpcAI {
 
 						@Override
 						public void run() {
-							if (npc != null && !npc.getLifeStats().isAlreadyDead()) {
+							if (npc != null && !npc.isDead()) {
 								npc.getController().delete();
 							}
 						}

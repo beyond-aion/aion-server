@@ -41,7 +41,7 @@ public class SpectralWarriorAI extends AggressiveNpcAI {
 
 	private void resurrectAllies() {
 		getKnownList().forEachNpc(npc -> {
-			if (NpcActions.isAlreadyDead(npc))
+			if (npc.isDead())
 				return;
 
 			switch (npc.getNpcId()) {

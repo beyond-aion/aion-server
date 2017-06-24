@@ -6,7 +6,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIName;
-import com.aionemu.gameserver.model.actions.PlayerActions;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -93,7 +92,7 @@ public class PriestPreceptorAI extends AggressiveNpcAI {
 	private Player getTargetPlayer() {
 		List<Player> players = new ArrayList<>();
 		getKnownList().forEachPlayer(player -> {
-			if (!PlayerActions.isAlreadyDead(player) && PositionUtil.isInRange(player, getOwner(), 25)) {
+			if (!player.isDead() && PositionUtil.isInRange(player, getOwner(), 25)) {
 				players.add(player);
 			}
 		});

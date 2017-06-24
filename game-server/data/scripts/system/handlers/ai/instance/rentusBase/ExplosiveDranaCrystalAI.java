@@ -35,7 +35,7 @@ public class ExplosiveDranaCrystalAI extends ActionItemNpcAI {
 		if (isUsed.compareAndSet(false, true)) {
 			WorldPosition p = getPosition();
 			Npc boss = p.getWorldMapInstance().getNpc(217308);
-			if (boss != null && !NpcActions.isAlreadyDead(boss)) {
+			if (boss != null && !boss.isDead()) {
 				EffectController ef = boss.getEffectController();
 				if (ef.hasAbnormalEffect(19370)) {
 					ef.removeEffect(19370);
@@ -65,7 +65,7 @@ public class ExplosiveDranaCrystalAI extends ActionItemNpcAI {
 
 			@Override
 			public void run() {
-				if (!isAlreadyDead()) {
+				if (!isDead()) {
 					AIActions.deleteOwner(ExplosiveDranaCrystalAI.this);
 				}
 			}

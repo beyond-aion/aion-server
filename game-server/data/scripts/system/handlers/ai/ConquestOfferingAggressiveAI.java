@@ -35,7 +35,7 @@ public class ConquestOfferingAggressiveAI extends AggressiveNpcAI {
 	@Override
 	public void handleDied() {
 		super.handleDied();
-		if (spawner != null && !spawner.getLifeStats().isAlreadyDead()) {
+		if (spawner != null && !spawner.isDead()) {
 			spawner.getAi().onCustomEvent(1); // notify spawner that npc died
 			spawnRandomNpc();
 		}

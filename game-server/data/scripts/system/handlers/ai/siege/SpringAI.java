@@ -32,11 +32,11 @@ public class SpringAI extends NpcAI {
 	}
 
 	private void checkForHeal() {
-		if (!isAlreadyDead() && getPosition().isSpawned()) {
+		if (!isDead() && getPosition().isSpawned()) {
 			for (VisibleObject object : getKnownList().getKnownObjects().values()) {
 				Creature creature = (Creature) object;
 				CreatureLifeStats<?> lifeStats = creature.getLifeStats();
-				if (isInRange(creature, 10) && !creature.getEffectController().hasAbnormalEffect(19116) && !lifeStats.isAlreadyDead()
+				if (isInRange(creature, 10) && !creature.getEffectController().hasAbnormalEffect(19116) && !lifeStats.isDead()
 					&& (lifeStats.getCurrentHp() < lifeStats.getMaxHp()))
 					if (creature instanceof SiegeNpc) {
 						SiegeNpc npc = (SiegeNpc) creature;

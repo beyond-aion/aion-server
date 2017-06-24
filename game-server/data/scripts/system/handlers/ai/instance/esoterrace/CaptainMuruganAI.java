@@ -40,7 +40,7 @@ public class CaptainMuruganAI extends AggressiveNpcAI {
 
 			@Override
 			public void run() {
-				if (isAlreadyDead()) {
+				if (isDead()) {
 					cancelTask();
 				} else {
 					PacketSendUtility.broadcastMessage(getOwner(), 1500194);
@@ -50,7 +50,7 @@ public class CaptainMuruganAI extends AggressiveNpcAI {
 
 							@Override
 							public void run() {
-								if (!isAlreadyDead()) {
+								if (!isDead()) {
 									PacketSendUtility.broadcastMessage(getOwner(), 1500193);
 									VisibleObject target = getTarget();
 									if (target instanceof Player) {
@@ -60,7 +60,7 @@ public class CaptainMuruganAI extends AggressiveNpcAI {
 
 										@Override
 										public void run() {
-											if (!isAlreadyDead()) {
+											if (!isDead()) {
 												VisibleObject target = getTarget();
 												if (target instanceof Player) {
 													SkillEngine.getInstance().getSkill(getOwner(), 19324, 10, target).useNoAnimationSkill();

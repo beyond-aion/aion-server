@@ -140,7 +140,7 @@ public class EmpoweredAgent extends AggressiveNpcAI {
 	private void onReactiveThinking() {
 		canThink = true;
 		Creature creature = getAggroList().getMostHated();
-		if (creature == null || creature.getLifeStats().isAlreadyDead() || !getOwner().canSee(creature)) {
+		if (creature == null || creature.isDead() || !getOwner().canSee(creature)) {
 			setStateIfNot(AIState.FIGHT);
 			think();
 		} else {

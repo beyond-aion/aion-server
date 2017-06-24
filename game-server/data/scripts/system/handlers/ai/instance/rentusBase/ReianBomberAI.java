@@ -58,7 +58,7 @@ public class ReianBomberAI extends GeneralNpcAI {
 
 			@Override
 			public void run() {
-				if (!isAlreadyDead()) {
+				if (!isDead()) {
 					setSubStateIfNot(AISubState.WALK_RANDOM);
 					setStateIfNot(AIState.WALKING);
 					switch (position) {

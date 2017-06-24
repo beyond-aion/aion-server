@@ -42,7 +42,7 @@ public class DredgionCommanderAI extends SiegeNpcAI {
 					if (getTarget() instanceof Npc) {
 						Npc target = (Npc) getTarget();
 						Race race = target.getRace();
-						if ((race.equals(Race.GCHIEF_DARK) || race.equals(Race.GCHIEF_LIGHT)) && !target.getLifeStats().isAlreadyDead()) {
+						if ((race.equals(Race.GCHIEF_DARK) || race.equals(Race.GCHIEF_LIGHT)) && !target.isDead()) {
 							AIActions.useSkill(DredgionCommanderAI.this, getSkill());
 							getAggroList().addHate(target, 10000);
 						}

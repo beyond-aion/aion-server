@@ -64,18 +64,18 @@ public class AshunatalShadowslipAI extends AggressiveNpcAI {
 	}
 
 	private void doSchedule() {
-		if (!isAlreadyDead()) {
+		if (!isDead()) {
 			ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 				@Override
 				public void run() {
-					if (!isAlreadyDead()) {
+					if (!isDead()) {
 						SkillEngine.getInstance().getSkill(getOwner(), 19417, 49, getOwner()).useNoAnimationSkill();
 						ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 							@Override
 							public void run() {
-								if (!isAlreadyDead()) {
+								if (!isDead()) {
 									WorldPosition p = getPosition();
 									spawn(219186, p.getX(), p.getY(), p.getZ(), p.getHeading());
 									canThink = false;
@@ -88,7 +88,7 @@ public class AshunatalShadowslipAI extends AggressiveNpcAI {
 
 										@Override
 										public void run() {
-											if (!isAlreadyDead()) {
+											if (!isDead()) {
 												despawn();
 											}
 										}

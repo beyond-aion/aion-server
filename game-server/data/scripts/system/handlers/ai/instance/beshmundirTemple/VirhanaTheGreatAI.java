@@ -32,7 +32,7 @@ public class VirhanaTheGreatAI extends AggressiveNpcAI {
 	}
 
 	private void scheduleRage() {
-		if (isAlreadyDead() || !isStart) {
+		if (isDead() || !isStart) {
 			return;
 		}
 		AIActions.useSkill(this, 19121);
@@ -48,7 +48,7 @@ public class VirhanaTheGreatAI extends AggressiveNpcAI {
 	}
 
 	private void startRage() {
-		if (isAlreadyDead() || !isStart) {
+		if (isDead() || !isStart) {
 			return;
 		}
 		if (count < 12) {

@@ -88,7 +88,7 @@ public class PadmarashkaAI extends AggressiveNpcAI {
 
 	private void scheduleSpawnEntrance() {
 		int delay = 60000;
-		if (isAlreadyDead() || !isStart)
+		if (isDead() || !isStart)
 			return;
 		else {
 			getOwner().clearAttackedCount();
@@ -117,7 +117,7 @@ public class PadmarashkaAI extends AggressiveNpcAI {
 
 	private void stage1() {
 		int delay = 60000;
-		if (isAlreadyDead() || !isStart)
+		if (isDead() || !isStart)
 			return;
 		else {
 			SkillEngine.getInstance().getSkill(getOwner(), 19177, 55, getOwner()).useNoAnimationSkill();
@@ -165,7 +165,7 @@ public class PadmarashkaAI extends AggressiveNpcAI {
 
 	private void stage2() {
 		int delay = 120000;
-		if (isAlreadyDead() || !isStart)
+		if (isDead() || !isStart)
 			return;
 		else {
 			PacketSendUtility.broadcastToMap(getOwner(), 1401214); // Huge egg is revealed
@@ -211,7 +211,7 @@ public class PadmarashkaAI extends AggressiveNpcAI {
 	}
 
 	private void scheduleDelayStage2(int delay) {
-		if (!isStart && !isAlreadyDead())
+		if (!isStart && !isDead())
 			return;
 		else {
 			ThreadPoolManager.getInstance().schedule(new Runnable() {
@@ -225,7 +225,7 @@ public class PadmarashkaAI extends AggressiveNpcAI {
 	}
 
 	private void scheduleDelayStage1(int delay) {
-		if (!isStart && !isAlreadyDead())
+		if (!isStart && !isDead())
 			return;
 		else {
 			ThreadPoolManager.getInstance().schedule(new Runnable() {
@@ -239,7 +239,7 @@ public class PadmarashkaAI extends AggressiveNpcAI {
 	}
 
 	private void scheduleDelayEntrance(int delay) {
-		if (!isStart && !isAlreadyDead())
+		if (!isStart && !isDead())
 			return;
 		else {
 			ThreadPoolManager.getInstance().schedule(new Runnable() {

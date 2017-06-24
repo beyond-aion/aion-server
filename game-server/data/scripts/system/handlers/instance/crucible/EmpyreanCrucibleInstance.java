@@ -840,7 +840,7 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 			case 217596:
 			case 217597:
 				Npc counterpart = getNpc(npc.getNpcId() == 217596 ? 217597 : 217596);
-				if (counterpart != null && !NpcActions.isAlreadyDead(counterpart)) {
+				if (counterpart != null && !counterpart.isDead()) {
 					SkillEngine.getInstance().getSkill(counterpart, 19624, 10, counterpart).useNoAnimationSkill();
 				}
 				despawnNpc(npc);

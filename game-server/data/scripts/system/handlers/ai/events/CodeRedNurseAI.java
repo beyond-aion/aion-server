@@ -93,7 +93,7 @@ public class CodeRedNurseAI extends GeneralNpcAI {
 			case 831442: {// Rordah (MON-THU)
 				if (currentDay >= 1 && currentDay <= 4)
 					super.handleSpawned();
-				else if (!isAlreadyDead())
+				else if (!isDead())
 					getOwner().getController().delete();
 				break;
 			}
@@ -103,7 +103,7 @@ public class CodeRedNurseAI extends GeneralNpcAI {
 			case 831524: { // Deshna (FRI-SAT)
 				if (currentDay >= 5 && currentDay <= 7)
 					super.handleSpawned();
-				else if (!isAlreadyDead())
+				else if (!isDead())
 					getOwner().getController().delete();
 				break;
 			}

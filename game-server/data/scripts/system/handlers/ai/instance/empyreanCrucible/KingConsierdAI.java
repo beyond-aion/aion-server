@@ -97,7 +97,7 @@ public class KingConsierdAI extends AggressiveNpcAI {
 
 			@Override
 			public void run() {
-				if (isAlreadyDead()) {
+				if (isDead()) {
 					cancelTasks();
 				} else {
 					SkillEngine.getInstance().getSkill(getOwner(), 17951, 29, getTarget()).useNoAnimationSkill();

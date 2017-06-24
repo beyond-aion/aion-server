@@ -65,7 +65,7 @@ public class CreatureEventHandler {
 		if (ai.isInState(AIState.RETURNING))
 			return;
 
-		if (creature.getLifeStats().isAlreadyDead())
+		if (creature.isDead())
 			return;
 
 		if (creature.isInVisualState(CreatureVisualState.BLINKING))

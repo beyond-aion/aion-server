@@ -108,7 +108,7 @@ public class SummonsService {
 					// TODO temp till found on retail
 					if (target instanceof Creature) {
 						final Creature lastAttacker = (Creature) target;
-						if (!master.getLifeStats().isAlreadyDead() && !lastAttacker.getLifeStats().isAlreadyDead() && isAttacked) {
+						if (!master.isDead() && !lastAttacker.isDead() && isAttacked) {
 							ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 								@Override
@@ -177,7 +177,7 @@ public class SummonsService {
 	}
 
 	public static final void doMode(SummonMode summonMode, Summon summon, int targetObjId, UnsummonType unsummonType) {
-		if (summon.getLifeStats().isAlreadyDead())
+		if (summon.isDead())
 			return;
 
 		if (summon.getMaster() == null)

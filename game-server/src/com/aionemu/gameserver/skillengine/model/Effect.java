@@ -632,7 +632,7 @@ public class Effect implements StatOwner {
 			return;
 
 		for (EffectTemplate template : successEffects.values()) {
-			if (effected != null && effected.getLifeStats().isAlreadyDead() && !skillTemplate.hasResurrectEffect()) {
+			if (effected != null && effected.isDead() && !skillTemplate.hasResurrectEffect()) {
 				break;
 			}
 			template.applyEffect(this);
@@ -793,7 +793,7 @@ public class Effect implements StatOwner {
 	public void addToEffectedController() {
 		if (!addedToController) {
 			Creature effected = getEffected();
-			if (effected.getLifeStats() != null && !effected.getLifeStats().isAlreadyDead()) {
+			if (effected.getLifeStats() != null && !effected.isDead()) {
 				effected.getEffectController().addEffect(this);
 				addedToController = true;
 			}

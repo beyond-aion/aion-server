@@ -9,7 +9,6 @@ import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.model.CreatureType;
-import com.aionemu.gameserver.model.actions.PlayerActions;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -49,7 +48,7 @@ public class BrigadeGeneralLaksyakaAI extends AggressiveNpcAI {
 
 			@Override
 			public void run() {
-				if (isAlreadyDead())
+				if (isDead())
 					cancelTask();
 				else {
 					startSkeletonEvent();
@@ -68,7 +67,7 @@ public class BrigadeGeneralLaksyakaAI extends AggressiveNpcAI {
 		Npc tiamatEye = getPosition().getWorldMapInstance().getNpc(283089);// 4.0
 		List<Player> players = new ArrayList<>();
 		getKnownList().forEachPlayer(player -> {
-			if (!PlayerActions.isAlreadyDead(player) && PositionUtil.isInRange(player, tiamatEye, 40)) {
+			if (!player.isDead() && PositionUtil.isInRange(player, tiamatEye, 40)) {
 				players.add(player);
 			}
 		});

@@ -49,7 +49,7 @@ public class YamenesAI extends AggressiveNpcAI {
 
 			@Override
 			public void run() {
-				if (!isAlreadyDead()) {
+				if (!isDead()) {
 					EmoteManager.emoteStopAttacking(getOwner());
 					SkillEngine.getInstance().getSkill(getOwner(), 19098, 55, getOwner()).useSkill();
 				}
@@ -60,7 +60,7 @@ public class YamenesAI extends AggressiveNpcAI {
 
 			@Override
 			public void run() {
-				if (isAlreadyDead()) {
+				if (isDead()) {
 					cancelTask();
 				} else {
 					spawnPortal();

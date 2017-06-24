@@ -4,7 +4,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
-import com.aionemu.gameserver.model.actions.NpcActions;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -37,8 +36,8 @@ public class RakshaSealingWallAI extends GeneralNpcAI {
 					Npc flamelord = instance.getNpc(217451);
 					Npc sealguard = instance.getNpc(217456);
 					int bossId;
-					if ((sharik == null || NpcActions.isAlreadyDead(sharik)) && (flamelord == null || NpcActions.isAlreadyDead(flamelord))
-						&& (sealguard == null || NpcActions.isAlreadyDead(sealguard))) {
+					if ((sharik == null || sharik.isDead()) && (flamelord == null || flamelord.isDead())
+						&& (sealguard == null || sealguard.isDead())) {
 						bossId = 217475;
 					} else {
 						bossId = 217647;

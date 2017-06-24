@@ -31,7 +31,7 @@ public class KaluvaSpawnAI extends NpcAI {
 
 	private void checkKaluva() {
 		Npc kaluva = getPosition().getWorldMapInstance().getNpc(216950);
-		if (kaluva != null && !kaluva.getLifeStats().isAlreadyDead()) {
+		if (kaluva != null && !kaluva.isDead()) {
 			kaluva.getEffectController().removeEffect(19152);
 		}
 		AIActions.deleteOwner(this);
@@ -42,7 +42,7 @@ public class KaluvaSpawnAI extends NpcAI {
 
 			@Override
 			public void run() {
-				if (!isAlreadyDead()) {
+				if (!isDead()) {
 					hatchAdds();
 					checkKaluva();
 				}

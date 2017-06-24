@@ -134,7 +134,7 @@ public class KromedesTrialInstance extends GeneralInstanceHandler {
 
 	private void removeKaligaBuff(int skillId) {
 		Npc kaliga = instance.getNpc(217006);
-		if (kaliga != null && !kaliga.getLifeStats().isAlreadyDead()) {
+		if (kaliga != null && !kaliga.isDead()) {
 			kaliga.getEffectController().removeEffect(skillId);
 		}
 	}
@@ -145,7 +145,7 @@ public class KromedesTrialInstance extends GeneralInstanceHandler {
 			@Override
 			public void run() {
 				Npc kaliga = instance.getNpc(217006);
-				if (kaliga != null && !kaliga.getLifeStats().isAlreadyDead()) {
+				if (kaliga != null && !kaliga.isDead()) {
 					SpawnTemplate npcST = npc.getSpawn();
 					SpawnTemplate newST = SpawnEngine.newSingleTimeSpawn(npcST.getWorldId(), npc.getNpcId(), npcST.getX(), npcST.getY(), npcST.getZ(),
 						npcST.getHeading());
@@ -157,7 +157,7 @@ public class KromedesTrialInstance extends GeneralInstanceHandler {
 	}
 
 	private boolean isDead(Npc npc) {
-		return npc == null || npc.getLifeStats().isAlreadyDead();
+		return npc == null || npc.isDead();
 	}
 
 	private void sendMovie(Player player, int movieId) {

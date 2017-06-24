@@ -61,7 +61,7 @@ public class HarlequinLordReshkaAI extends AggressiveNpcAI {
 
 			@Override
 			public void run() {
-				if (!isAlreadyDead()) {
+				if (!isDead()) {
 					spawn(831349, 507.42712f, 570.53394f, 199.50775f, (byte) 30);
 					spawn(831349, 507.6568f, 560.18787f, 199.50775f, (byte) 30);
 					spawn(831349, 512.9201f, 552.13983f, 199.50775f, (byte) 30);
@@ -85,7 +85,7 @@ public class HarlequinLordReshkaAI extends AggressiveNpcAI {
 
 			@Override
 			public void run() {
-				if (!isAlreadyDead()) {
+				if (!isDead()) {
 					AIActions.useSkill(HarlequinLordReshkaAI.this, 21477);
 					PacketSendUtility.broadcastMessage(getOwner(), 1501146);
 				}
@@ -96,7 +96,7 @@ public class HarlequinLordReshkaAI extends AggressiveNpcAI {
 
 			@Override
 			public void run() {
-				if (!isAlreadyDead()) {
+				if (!isDead()) {
 					AIActions.useSkill(HarlequinLordReshkaAI.this, 21477);
 					PacketSendUtility.broadcastMessage(getOwner(), 1501147);
 				}

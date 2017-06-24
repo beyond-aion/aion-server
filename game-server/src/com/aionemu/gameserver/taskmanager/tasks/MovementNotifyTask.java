@@ -49,7 +49,7 @@ public class MovementNotifyTask extends AbstractFIFOPeriodicTaskManager<Creature
 
 	@Override
 	protected void callTask(Creature creature) {
-		if (creature.getLifeStats().isAlreadyDead())
+		if (creature.isDead())
 			return;
 
 		// In Reshanta:
@@ -89,7 +89,7 @@ public class MovementNotifyTask extends AbstractFIFOPeriodicTaskManager<Creature
 		@Override
 		public void accept(Npc object, VisibleObject owner) {
 
-			if (object.getAi().getState() == AIState.DIED || object.getLifeStats().isAlreadyDead()) {
+			if (object.getAi().getState() == AIState.DIED || object.isDead()) {
 				if (object.getAi().isLogging()) {
 					AILogger.moveinfo(object, "WARN: NPC died but still in knownlist");
 				}

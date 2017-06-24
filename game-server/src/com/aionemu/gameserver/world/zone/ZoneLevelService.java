@@ -21,7 +21,7 @@ public class ZoneLevelService {
 		World world = World.getInstance();
 		float z = player.getZ();
 
-		if (player.getLifeStats().isAlreadyDead())
+		if (player.isDead())
 			return;
 
 		if (z < world.getWorldMap(player.getWorldId()).getDeathLevel()) {

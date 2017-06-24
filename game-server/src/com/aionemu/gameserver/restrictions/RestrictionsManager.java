@@ -279,7 +279,7 @@ public final class RestrictionsManager {
 				return false;
 		}
 
-		if (player.getLifeStats().isAlreadyDead())
+		if (player.isDead())
 			return false;
 
 		return true;

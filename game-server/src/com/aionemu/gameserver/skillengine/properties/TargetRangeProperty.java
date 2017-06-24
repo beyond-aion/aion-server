@@ -175,10 +175,10 @@ public class TargetRangeProperty {
 
 	private static final boolean checkCommonRequirements(Creature creature, Skill skill) {
 		if (skill.getSkillTemplate().hasResurrectEffect()) {
-			if (!creature.getLifeStats().isAlreadyDead())
+			if (!creature.isDead())
 				return false;
 		} else {
-			if (creature.getLifeStats().isAlreadyDead())
+			if (creature.isDead())
 				return false;
 		}
 

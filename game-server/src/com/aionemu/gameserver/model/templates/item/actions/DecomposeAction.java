@@ -94,7 +94,7 @@ public class DecomposeAction extends AbstractItemAction {
 
 	@Override
 	public boolean canAct(Player player, Item parentItem, Item targetItem) {
-		if (player.getLifeStats().isAlreadyDead() || !player.isSpawned())
+		if (player.isDead() || !player.isSpawned())
 			return false;
 		List<ExtractedItemsCollection> itemsCollections = null;
 		itemsCollections = DataManager.DECOMPOSABLE_ITEMS_DATA.getInfoByItemId(parentItem.getItemId());

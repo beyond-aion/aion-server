@@ -507,7 +507,7 @@ public class Skill {
 						if (count >= penaltyTemplate.getProperties().getTargetMaxCount()) {
 							break;
 						}
-						if (p == null || !p.isOnline() || effector.equals(p) || p.getLifeStats().isAlreadyDead()) {
+						if (p == null || !p.isOnline() || effector.equals(p) || p.isDead()) {
 							continue;
 						}
 						if (PositionUtil.isInRange(effector, p, penaltyTemplate.getProperties().getEffectiveRange())) {

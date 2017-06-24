@@ -7,7 +7,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIName;
-import com.aionemu.gameserver.model.actions.PlayerActions;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.skillengine.SkillEngine;
@@ -80,7 +79,7 @@ public class RM1337AI extends AggressiveNpcAI {
 
 			@Override
 			public void run() {
-				if (isAlreadyDead()) {
+				if (isDead()) {
 					cancelTask();
 				} else {
 					if (getOwner().getCastingSkill() != null)
@@ -97,7 +96,7 @@ public class RM1337AI extends AggressiveNpcAI {
 
 									@Override
 									public void run() {
-										if (!isAlreadyDead()) {
+										if (!isDead()) {
 											SkillEngine.getInstance().getSkill(getOwner(), 19553, 10, target).useNoAnimationSkill();
 										}
 									}
@@ -115,7 +114,7 @@ public class RM1337AI extends AggressiveNpcAI {
 
 			@Override
 			public void run() {
-				if (isAlreadyDead()) {
+				if (isDead()) {
 					cancelTask();
 				} else {
 					getOwner().getController().cancelCurrentSkill(null);
@@ -132,7 +131,7 @@ public class RM1337AI extends AggressiveNpcAI {
 
 			@Override
 			public void run() {
-				if (!isAlreadyDead()) {
+				if (!isDead()) {
 					int count = Rnd.get(8, 12);
 					for (int i = 0; i < count; i++) {
 						rndSpawn(282373);
@@ -146,7 +145,7 @@ public class RM1337AI extends AggressiveNpcAI {
 	private Player getTargetPlayer() {
 		List<Player> players = new ArrayList<>();
 		getKnownList().forEachPlayer(player -> {
-			if (!PlayerActions.isAlreadyDead(player) && PositionUtil.isInRange(player, getOwner(), 37)) {
+			if (!player.isDead() && PositionUtil.isInRange(player, getOwner(), 37)) {
 				players.add(player);
 			}
 		});

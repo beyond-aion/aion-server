@@ -85,7 +85,7 @@ public class AttackManager {
 		// switch target if there is more hated creature
 		if (npc.getGameStats().getLastChangeTargetTimeDelta() > 5) {
 			Creature mostHated = npc.getAggroList().getMostHated();
-			if (mostHated != null && !mostHated.getLifeStats().isAlreadyDead() && !npc.isTargeting(mostHated.getObjectId())) {
+			if (mostHated != null && !mostHated.isDead() && !npc.isTargeting(mostHated.getObjectId())) {
 				if (npcAI.isLogging()) {
 					AILogger.info(npcAI, "AttackManager: switching target during chase");
 				}
@@ -96,7 +96,7 @@ public class AttackManager {
 		if (!npc.canSee(npc.getTarget())) {
 			if (npcAI.setSubStateIfNot(AISubState.TARGET_LOST)) {
 				ThreadPoolManager.getInstance().schedule(() -> {
-					if (npcAI.isInSubState(AISubState.TARGET_LOST) && npc.isSpawned() && !npc.getLifeStats().isAlreadyDead())
+					if (npcAI.isInSubState(AISubState.TARGET_LOST) && npc.isSpawned() && !npc.isDead())
 						npcAI.onGeneralEvent(AIEventType.TARGET_GIVEUP);
 				}, 2000);
 			}

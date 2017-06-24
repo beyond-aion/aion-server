@@ -85,7 +85,7 @@ public class HealCastorOnTargetDeadEffect extends EffectTemplate {
 	public void endEffect(Effect effect) {
 		super.endEffect(effect);
 		ActionObserver observer = effect.getActionObserver(position);
-		if ((!effect.getEffected().getLifeStats().isAlreadyDead()) && (observer != null))
+		if ((!effect.getEffected().isDead()) && (observer != null))
 			effect.getEffected().getObserveController().removeObserver(observer);
 	}
 }

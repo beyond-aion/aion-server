@@ -36,7 +36,7 @@ public class EbonsoulAI extends AggressiveNpcAI {
 
 			@Override
 			public void run() {
-				if (isAlreadyDead())
+				if (isDead())
 					cancelTask();
 				else {
 					SkillEngine.getInstance().getSkill(getOwner(), 19159, 55, getOwner()).useNoAnimationSkill();

@@ -3,7 +3,6 @@ package ai.instance.beshmundirTemple;
 import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.AIState;
-import com.aionemu.gameserver.model.actions.NpcActions;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.skillengine.SkillEngine;
@@ -24,7 +23,7 @@ public class SacrificialSoulAI extends GeneralNpcAI {
 		AIActions.useSkill(this, 18901);
 		this.setStateIfNot(AIState.FOLLOWING);
 		boss = getPosition().getWorldMapInstance().getNpc(216263);
-		if (boss != null && !NpcActions.isAlreadyDead(boss)) {
+		if (boss != null && !boss.isDead()) {
 			AIActions.targetCreature(this, boss);
 			getMoveController().moveToTargetObject();
 		}
@@ -41,7 +40,7 @@ public class SacrificialSoulAI extends GeneralNpcAI {
 
 	@Override
 	protected void handleMoveArrived() {
-		if (boss != null && !NpcActions.isAlreadyDead(boss)) {
+		if (boss != null && !boss.isDead()) {
 			SkillEngine.getInstance().getSkill(getOwner(), 18960, 55, boss).useNoAnimationSkill();
 			AIActions.deleteOwner(this);
 		}

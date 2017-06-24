@@ -16,7 +16,7 @@ public class CloneOfBarrierAI extends AggressiveNpcAI {
 	@Override
 	protected void handleDied() {
 		VisibleObject object = getKnownList().findObject(216516); // Omega
-		if (object instanceof Npc && !((Npc) object).getLifeStats().isAlreadyDead() && isInRange(object, 5))
+		if (object instanceof Npc && !((Npc) object).isDead() && isInRange(object, 5))
 			((Npc) object).getEffectController().removeEffect(18671);
 		super.handleDied();
 	}

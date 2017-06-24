@@ -77,7 +77,7 @@ public class CM_CASTSPELL extends AionClientPacket {
 	protected void runImpl() {
 		Player player = getConnection().getActivePlayer();
 
-		if (player.getLifeStats().isAlreadyDead()) {
+		if (player.isDead()) {
 			PacketSendUtility.sendPacket(player, STR_SKILL_CANT_CAST(1400059));
 			return;
 		}

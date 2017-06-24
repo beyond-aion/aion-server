@@ -36,7 +36,7 @@ public class ScaldingExecutorAI extends AggressiveNpcAI {
 	protected void handleMoveArrived() {
 		super.handleMoveArrived();
 		if (isDestroyed.compareAndSet(false, true)) {
-			if (!isAlreadyDead()) {
+			if (!isDead()) {
 				getMoveController().abortMove();
 				VisibleObject target = getTarget();
 				if (target instanceof Npc) {
@@ -47,7 +47,7 @@ public class ScaldingExecutorAI extends AggressiveNpcAI {
 
 						@Override
 						public void run() {
-							if (!isAlreadyDead()) {
+							if (!isDead()) {
 								switch (targetId) {
 									case 701062:
 										spawn(282455, 783.102f, 958.593f, 792.070f, (byte) 96);

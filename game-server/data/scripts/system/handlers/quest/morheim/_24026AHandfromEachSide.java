@@ -216,7 +216,7 @@ public class _24026AHandfromEachSide extends QuestHandler {
 
 	private boolean kargateIsAlive(QuestEnv env) {
 		Npc kargate = env.getPlayer().getPosition().getWorldMapInstance().getNpc(204432);
-		return (kargate != null && !kargate.getLifeStats().isAlreadyDead());
+		return (kargate != null && !kargate.isDead());
 	}
 
 	private void deleteBalaur(QuestEnv env) {

@@ -30,7 +30,7 @@ public class LediarAssistantAI extends AggressiveNpcAI {
 		EmoteManager.emoteStopAttacking(getOwner());
 		for (int npc_id : npc_ids) {
 			Npc tower = getOwner().getPosition().getWorldMapInstance().getNpc(npc_id);
-			if (tower != null && !tower.getLifeStats().isAlreadyDead()) {
+			if (tower != null && !tower.isDead()) {
 				switch (npc_id) {
 					case 831305:
 					case 831250:

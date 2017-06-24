@@ -70,7 +70,7 @@ public class SkillAttackManager {
 			}
 		}
 		Creature target;
-		if (owner.getTarget() instanceof Creature && !(target = (Creature) owner.getTarget()).getLifeStats().isAlreadyDead()) {
+		if (owner.getTarget() instanceof Creature && !(target = (Creature) owner.getTarget()).isDead()) {
 			final int skillId = npcAI.getSkillId();
 			final int skillLevel = npcAI.getSkillLevel();
 
@@ -99,7 +99,7 @@ public class SkillAttackManager {
 									break;
 								case MOST_HATED:
 									Creature target2 = owner.getAggroList().getMostHated();
-									if (target2 != null && !target2.getLifeStats().isAlreadyDead()) {
+									if (target2 != null && !target2.isDead()) {
 										if (!target.equals(target2)) {
 											owner.setTarget(target2);
 										}
@@ -111,7 +111,7 @@ public class SkillAttackManager {
 									for (VisibleObject obj : owner.getKnownList().getKnownObjects().values()) {
 										if (obj instanceof Creature && !(obj instanceof Summon) && !(obj instanceof SummonedObject)) {
 											Creature target3 = (Creature) obj;
-											if (target3.getLifeStats().isAlreadyDead() || target3.getLifeStats().isAboutToDie())
+											if (target3.isDead() || target3.getLifeStats().isAboutToDie())
 												continue;
 											if (temp.getTarget() == NpcSkillTargetAttribute.RANDOM_EXCEPT_MOST_HATED && owner.getAggroList().getMostHated().equals(target3))
 												continue;
@@ -249,7 +249,7 @@ public class SkillAttackManager {
 			&& entry.getTemplate().getTarget() != NpcSkillTargetAttribute.MOST_HATED) {
 			if (owner.getTarget() instanceof Creature) {
 				Creature target = (Creature) owner.getTarget();
-				if (target.getLifeStats().isAlreadyDead() || !owner.canSee(target)) {
+				if (target.isDead() || !owner.canSee(target)) {
 					return true;
 				}
 				if (prop.getTargetType() != TargetRangeAttribute.AREA) {

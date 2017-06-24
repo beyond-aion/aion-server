@@ -73,7 +73,7 @@ public class GatesSummonedAI extends GeneralNpcAI {
 			@Override
 			public void run() {
 				Npc boss = getPosition().getWorldMapInstance().getNpc(216960);
-				if (isAlreadyDead() && getOwner() == null)
+				if (isDead() && getOwner() == null)
 					cancelEventTask();
 				else {
 					if (Rnd.get(0, 1) == 0)

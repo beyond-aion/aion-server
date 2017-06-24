@@ -218,7 +218,7 @@ public class ModifiedIronWallAggressiveAI extends AggressiveNpcAI {
 		List<Player> knownPlayers = new ArrayList<>();
 		WorldPosition pos = null;
 		for (Player p : getOwner().getKnownList().getKnownPlayers().values()) {
-				if (p.getLifeStats().isAlreadyDead() || p.getLifeStats().isAboutToDie())
+				if (p.isDead() || p.getLifeStats().isAboutToDie())
 					continue;
 				if (getOwner().canSee(p) && PositionUtil.isInRange(getOwner(), p, 26)
 						&& GeoService.getInstance().canSee(getOwner(), p)) {

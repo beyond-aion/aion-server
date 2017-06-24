@@ -183,7 +183,7 @@ public class AggroList extends AbstractEventSource<AddDamageEvent> {
 			// aggroList will never contain anything but creatures
 			Creature attacker = (Creature) ai.getAttacker();
 
-			if (attacker.getLifeStats().isAlreadyDead())
+			if (attacker.isDead())
 				ai.setHate(0);
 
 			if (ai.getHate() > maxHate) {
@@ -200,7 +200,7 @@ public class AggroList extends AbstractEventSource<AddDamageEvent> {
 	 * @return
 	 */
 	public boolean isMostHated(Creature creature) {
-		if (creature == null || creature.getLifeStats().isAlreadyDead())
+		if (creature == null || creature.isDead())
 			return false;
 
 		Creature mostHated = getMostHated();

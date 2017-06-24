@@ -347,14 +347,14 @@ public class DropService {
 			if (player.isInTeam()) {
 				List<Player> entitledPlayers = new ArrayList<>();
 				for (Player member : player.getCurrentTeam().getMembers()) {
-					if (member.isOnline() && !member.getLifeStats().isAlreadyDead() && !member.isMentor()
+					if (member.isOnline() && !member.isDead() && !member.isMentor()
 						&& PositionUtil.isInRange(member, player, GroupConfig.GROUP_MAX_DISTANCE))
 						entitledPlayers.add(member);
 				}
 				if (entitledPlayers.isEmpty()) {
 					VisibleObject npc = World.getInstance().findVisibleObject(npcObjectId);
 					AuditLogger.log(player, "tried to loot kinah for team from " + npc + " but he is not allowed to (mentor=" + player.isMentor() + ", dead="
-						+ player.getLifeStats().isAlreadyDead() + ")");
+						+ player.isDead() + ")");
 					return;
 				}
 				long remainder = remainingCount % entitledPlayers.size();

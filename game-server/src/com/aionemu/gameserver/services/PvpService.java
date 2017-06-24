@@ -215,7 +215,7 @@ public class PvpService {
 		int maxLevel = 0;
 
 		for (Player member : teamMember) {
-			if (!member.isOnline() || member.getLifeStats().isAlreadyDead() || !PositionUtil.isInRange(member, victim, GroupConfig.GROUP_MAX_DISTANCE))
+			if (!member.isOnline() || member.isDead() || !PositionUtil.isInRange(member, victim, GroupConfig.GROUP_MAX_DISTANCE))
 				continue;
 			players.add(member);
 			if (member.getLevel() > maxLevel)
@@ -279,7 +279,7 @@ public class PvpService {
 
 		List<ZoneInstance> zones = victim.findZones();
 		for (Player p : rewarded) {
-			if (!PositionUtil.isInRange(p, victim, GroupConfig.GROUP_MAX_DISTANCE) || p.getLifeStats().isAlreadyDead())
+			if (!PositionUtil.isInRange(p, victim, GroupConfig.GROUP_MAX_DISTANCE) || p.isDead())
 				continue;
 
 			for (ZoneInstance zone : zones) {

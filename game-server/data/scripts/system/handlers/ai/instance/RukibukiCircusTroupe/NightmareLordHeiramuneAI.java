@@ -61,7 +61,7 @@ public class NightmareLordHeiramuneAI extends AggressiveNpcAI {
 
 			@Override
 			public void run() {
-				if (isAlreadyDead())
+				if (isDead())
 					cancelTask();
 				else {
 					spawnHelpers();

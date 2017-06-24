@@ -38,7 +38,7 @@ public class CM_DUEL_REQUEST extends AionClientPacket {
 		Player activePlayer = getConnection().getActivePlayer();
 		VisibleObject target = activePlayer.getKnownList().getObject(objectId);
 
-		if (activePlayer.getLifeStats().isAlreadyDead())
+		if (activePlayer.isDead())
 			return;
 
 		if (activePlayer.isInInstance() && !CustomConfig.INSTANCE_DUEL_ENABLE)
@@ -64,7 +64,7 @@ public class CM_DUEL_REQUEST extends AionClientPacket {
 				sendPacket(SM_SYSTEM_MESSAGE.STR_MSG_REJECTED_DUEL(targetPlayer.getName()));
 				return;
 			}
-			if (targetPlayer.getLifeStats().isAlreadyDead()) {
+			if (targetPlayer.isDead()) {
 				sendPacket(SM_SYSTEM_MESSAGE.STR_DUEL_PARTNER_INVALID(target.getName()));
 				return;
 			}

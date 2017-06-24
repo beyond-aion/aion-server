@@ -63,13 +63,13 @@ public class PlayerRestrictions extends AbstractRestrictions {
 		if (((Creature) target).getLifeStats().isAboutToDie() && !skill.isNonTargetAOE())
 			return false;
 
-		if (((Creature) target).getLifeStats().isAlreadyDead() && !skill.getSkillTemplate().hasResurrectEffect() && !skill.isNonTargetAOE()) {
+		if (((Creature) target).isDead() && !skill.getSkillTemplate().hasResurrectEffect() && !skill.isNonTargetAOE()) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_TARGET_IS_NOT_VALID());
 			return false;
 		}
 
 		// cant resurrect non players and non dead
-		if (skill.getSkillTemplate().hasResurrectEffect() && (!(target instanceof Player) || !((Creature) target).getLifeStats().isAlreadyDead()))
+		if (skill.getSkillTemplate().hasResurrectEffect() && (!(target instanceof Player) || !((Creature) target).isDead()))
 			return false;
 
 		if (!skill.getSkillTemplate().hasEvadeEffect()) {
@@ -106,7 +106,7 @@ public class PlayerRestrictions extends AbstractRestrictions {
 		SkillTemplate template = skill.getSkillTemplate();
 
 		// TODO check if its ok
-		if (!checkFly(player, target) || player.getLifeStats().isAboutToDie() || player.getLifeStats().isAlreadyDead()) {
+		if (!checkFly(player, target) || player.getLifeStats().isAboutToDie() || player.isDead()) {
 			return false;
 		}
 		// check if is casting to avoid multicast exploit
@@ -168,7 +168,7 @@ public class PlayerRestrictions extends AbstractRestrictions {
 				return false;
 			}
 			Player targetPlayer = (Player) target;
-			if (!targetPlayer.getLifeStats().isAlreadyDead()) {
+			if (!targetPlayer.isDead()) {
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_TARGET_IS_NOT_VALID());
 				return false;
 			}
@@ -210,10 +210,10 @@ public class PlayerRestrictions extends AbstractRestrictions {
 		} else if (target.equals(player)) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_PARTY_CAN_NOT_INVITE_SELF());
 			return false;
-		} else if (target.getLifeStats().isAlreadyDead()) {
+		} else if (target.isDead()) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_UI_PARTY_DEAD());
 			return false;
-		} else if (player.getLifeStats().isAlreadyDead()) {
+		} else if (player.isDead()) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_PARTY_CANT_INVITE_WHEN_DEAD());
 			return false;
 		} else if (player.isInGroup() && target.isInGroup() && player.getPlayerGroup().getTeamId() == target.getPlayerGroup().getTeamId()) {
@@ -297,12 +297,12 @@ public class PlayerRestrictions extends AbstractRestrictions {
 			return false;
 		}
 
-		if (target.getLifeStats().isAlreadyDead()) {
+		if (target.isDead()) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_UI_PARTY_DEAD());
 			return false;
 		}
 
-		if (player.getLifeStats().isAlreadyDead()) {
+		if (player.isDead()) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_FORCE_CANT_INVITE_WHEN_DEAD());
 			return false;
 		}
@@ -321,7 +321,7 @@ public class PlayerRestrictions extends AbstractRestrictions {
 	@Override
 	public boolean canAttack(Player player, VisibleObject target) {
 		if (!player.isSpawned() || target == null || !checkFly(player, target) || player.getLifeStats().isAboutToDie()
-			|| player.getLifeStats().isAlreadyDead())
+			|| player.isDead())
 			return false;
 
 		if (!player.canAttack()) {
@@ -336,7 +336,7 @@ public class PlayerRestrictions extends AbstractRestrictions {
 
 		Creature creature = (Creature) target;
 
-		if (creature.getLifeStats().isAlreadyDead() || creature.getLifeStats().isAboutToDie()) {
+		if (creature.isDead() || creature.getLifeStats().isAboutToDie()) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_INVALID_TARGET());
 			return false;
 		}
@@ -398,7 +398,7 @@ public class PlayerRestrictions extends AbstractRestrictions {
 		if (player == null || !player.isOnline())
 			return false;
 
-		if (player.getLifeStats().isAboutToDie() || player.getLifeStats().isAlreadyDead())
+		if (player.getLifeStats().isAboutToDie() || player.isDead())
 			return false;
 
 		if (player.getEffectController().isInAnyAbnormalState(AbnormalState.CANT_ATTACK_STATE)) {
@@ -533,7 +533,7 @@ public class PlayerRestrictions extends AbstractRestrictions {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_PERSONAL_SHOP_DISABLED_IN_HIDDEN_MODE());
 			return false;
 		}
-		if (player.getLifeStats().isAlreadyDead())
+		if (player.isDead())
 			return false;
 		if (player.isInState(CreatureState.RESTING))
 			return false;

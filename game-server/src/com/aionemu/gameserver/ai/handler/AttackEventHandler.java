@@ -24,7 +24,7 @@ public class AttackEventHandler {
 		if (npcAI.isLogging()) {
 			AILogger.info(npcAI, "onAttack");
 		}
-		if (creature == null || creature.getLifeStats().isAlreadyDead()) {
+		if (creature == null || creature.isDead()) {
 			return;
 		}
 		// TODO lock or better switch

@@ -70,7 +70,7 @@ public class LifeStatsRestoreService {
 
 		@Override
 		public void run() {
-			if (lifeStats.isAlreadyDead() || lifeStats.isFullyRestoredHp() || !lifeStats.getOwner().isInWorld() || lifeStats.getOwner().getAi().getState() == AIState.FIGHT) {
+			if (lifeStats.isDead() || lifeStats.isFullyRestoredHp() || !lifeStats.getOwner().isInWorld() || lifeStats.getOwner().getAi().getState() == AIState.FIGHT) {
 				lifeStats.cancelRestoreTask();
 				lifeStats = null;
 			} else {
@@ -89,7 +89,7 @@ public class LifeStatsRestoreService {
 
 		@Override
 		public void run() {
-			if (lifeStats.isAlreadyDead() || lifeStats.isFullyRestoredHpMp() || !lifeStats.getOwner().isInWorld()) {
+			if (lifeStats.isDead() || lifeStats.isFullyRestoredHpMp() || !lifeStats.getOwner().isInWorld()) {
 				lifeStats.cancelRestoreTask();
 				lifeStats = null;
 			} else {
@@ -111,7 +111,7 @@ public class LifeStatsRestoreService {
 
 		@Override
 		public void run() {
-			if (lifeStats.isAlreadyDead() || !lifeStats.getOwner().isSpawned()) {
+			if (lifeStats.isDead() || !lifeStats.getOwner().isSpawned()) {
 				lifeStats.cancelFpReduce();
 				lifeStats = null;
 				return;
@@ -145,7 +145,7 @@ public class LifeStatsRestoreService {
 
 		@Override
 		public void run() {
-			if (lifeStats.isAlreadyDead() || lifeStats.isFlyTimeFullyRestored()) {
+			if (lifeStats.isDead() || lifeStats.isFlyTimeFullyRestored()) {
 				lifeStats.cancelFpRestore();
 				lifeStats = null;
 			} else {

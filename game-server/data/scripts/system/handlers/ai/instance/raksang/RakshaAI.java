@@ -7,7 +7,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIName;
-import com.aionemu.gameserver.model.actions.PlayerActions;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.skillengine.SkillEngine;
@@ -62,7 +61,7 @@ public class RakshaAI extends AggressiveNpcAI {
 
 			@Override
 			public void run() {
-				if (isAlreadyDead()) {
+				if (isDead()) {
 					cancelPhaseTask();
 				} else {
 					SkillEngine.getInstance().getSkill(getOwner(), 19938, 46, getOwner()).useNoAnimationSkill();
@@ -95,7 +94,7 @@ public class RakshaAI extends AggressiveNpcAI {
 
 				@Override
 				public void run() {
-					if (!isAlreadyDead()) {
+					if (!isDead()) {
 						spawn(282325, x, y, z, (byte) 0);
 					}
 				}
@@ -108,7 +107,7 @@ public class RakshaAI extends AggressiveNpcAI {
 	private List<Player> getLifedPlayers() {
 		List<Player> players = new ArrayList<>();
 		getKnownList().forEachPlayer(player -> {
-			if (!PlayerActions.isAlreadyDead(player)) {
+			if (!player.isDead()) {
 				players.add(player);
 			}
 		});

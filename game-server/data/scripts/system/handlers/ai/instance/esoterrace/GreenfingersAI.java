@@ -68,7 +68,7 @@ public class GreenfingersAI extends AggressiveNpcAI {
 
 			@Override
 			public void run() {
-				if (!isAlreadyDead()) {
+				if (!isDead()) {
 					AIActions.deleteOwner(GreenfingersAI.this);
 				}
 			}

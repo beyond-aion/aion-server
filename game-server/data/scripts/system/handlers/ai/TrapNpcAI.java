@@ -40,7 +40,7 @@ public class TrapNpcAI extends NpcAI {
 			return;
 		}
 
-		if (!creature.getLifeStats().isAlreadyDead() && !creature.isInVisualState(CreatureVisualState.BLINKING)
+		if (!creature.isDead() && !creature.isInVisualState(CreatureVisualState.BLINKING)
 			&& isInRange(creature, getOwner().getGameStats().getAttackRange().getCurrent())) {
 
 			Creature creator = (Creature) getCreator();

@@ -191,7 +191,7 @@ public class BollvigAI extends AggressiveNpcAI {
 
 	private boolean checkNpc() {
 		WorldMapInstance map = getPosition().getWorldMapInstance();
-		if (map.getNpc(204655) == null && (map.getNpc(212314) == null || map.getNpc(212314).getLifeStats().isAlreadyDead()))
+		if (map.getNpc(204655) == null && (map.getNpc(212314) == null || map.getNpc(212314).isDead()))
 			return true;
 
 		return false;

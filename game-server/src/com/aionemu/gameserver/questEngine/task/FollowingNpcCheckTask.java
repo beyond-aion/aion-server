@@ -31,7 +31,7 @@ public class FollowingNpcCheckTask implements Runnable {
 	public void run() {
 		final Player player = env.getPlayer();
 		Npc npc = (Npc) destinationChecker.getFollower();
-		if (player.getLifeStats().isAlreadyDead() || npc.getLifeStats().isAlreadyDead()) {
+		if (player.isDead() || npc.isDead()) {
 			onFail(env);
 		}
 		if (!PositionUtil.isInRange(player, npc, 50)) {

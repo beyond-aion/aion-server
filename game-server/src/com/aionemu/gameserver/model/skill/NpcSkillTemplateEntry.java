@@ -98,7 +98,7 @@ public class NpcSkillTemplateEntry extends NpcSkillEntry {
 
 	@Override
 	public boolean conditionReady(Creature creature) {
-		if (creature == null || creature.getLifeStats().isAlreadyDead() || creature.getLifeStats().isAboutToDie()) {
+		if (creature == null || creature.isDead() || creature.getLifeStats().isAboutToDie()) {
 			return false;
 		}
 		NpcSkillConditionTemplate condTemp = getConditionTemplate();
@@ -113,7 +113,7 @@ public class NpcSkillTemplateEntry extends NpcSkillEntry {
 				for (VisibleObject obj : creature.getKnownList().getKnownObjects().values()) {
 					if (obj instanceof Creature) {
 						Creature target = (Creature) obj;
-						if (target.getLifeStats().isAlreadyDead() || target.getLifeStats().isAboutToDie())
+						if (target.isDead() || target.getLifeStats().isAboutToDie())
 							continue;
 						if (creature.canSee(target) && target.getEffectController().hasAbnormalEffect(condTemp.getSkillId())
 							&& PositionUtil.isInRange(creature, target, condTemp.getRange()) && GeoService.getInstance().canSee(creature, target)) {
@@ -127,7 +127,7 @@ public class NpcSkillTemplateEntry extends NpcSkillEntry {
 				for (VisibleObject obj : creature.getKnownList().getKnownObjects().values()) {
 					if (obj instanceof Creature) {
 						Creature target = (Creature) obj;
-						if (target.getLifeStats().isAlreadyDead() || target.getLifeStats().isAboutToDie())
+						if (target.isDead() || target.getLifeStats().isAboutToDie())
 							continue;
 						if ((TribeRelationService.isSupport(creature, target) || TribeRelationService.isFriend(creature, target))
 							&& target.getLifeStats().getHpPercentage() <= condTemp.getHpBelow() && creature.canSee(target)
@@ -210,7 +210,7 @@ public class NpcSkillTemplateEntry extends NpcSkillEntry {
 			case NPC_IS_ALIVE:
 				VisibleObject npc = creature.getKnownList().findObject(condTemp.getNpcId());
 				if (npc instanceof Npc)
-					return !((Npc) npc).getLifeStats().isAlreadyDead();
+					return !((Npc) npc).isDead();
 				return false;
 			default:
 				return true;
@@ -218,7 +218,7 @@ public class NpcSkillTemplateEntry extends NpcSkillEntry {
 	}
 
 	private boolean hasCarvedSignet(VisibleObject curTarget, SkillTemplate skillTemp, int signetLvl) {
-		if (skillTemp != null && curTarget instanceof Creature && !((Creature) curTarget).getLifeStats().isAlreadyDead()
+		if (skillTemp != null && curTarget instanceof Creature && !((Creature) curTarget).isDead()
 			&& !((Creature) curTarget).getLifeStats().isAboutToDie()) {
 			for (EffectTemplate effectTemp : skillTemp.getEffects().getEffects()) {
 				if (effectTemp instanceof SignetBurstEffect) {
@@ -239,7 +239,7 @@ public class NpcSkillTemplateEntry extends NpcSkillEntry {
 	public void fireOnStartCastEvents(Npc npc) {
 		NpcSkillConditionTemplate condTemp = getConditionTemplate();
 		if (condTemp == null) {
-			if (!npc.getLifeStats().isAboutToDie() && !npc.getLifeStats().isAlreadyDead()) {
+			if (!npc.getLifeStats().isAboutToDie() && !npc.isDead()) {
 				npc.getAi().onStartUseSkill(this);
 			}
 			return;
@@ -250,7 +250,7 @@ public class NpcSkillTemplateEntry extends NpcSkillEntry {
 	public void fireOnEndCastEvents(Npc npc) {
 		NpcSkillConditionTemplate condTemp = getConditionTemplate();
 		if (condTemp == null) {
-			if (!npc.getLifeStats().isAboutToDie() && !npc.getLifeStats().isAlreadyDead()) {
+			if (!npc.getLifeStats().isAboutToDie() && !npc.isDead()) {
 				npc.getAi().onEndUseSkill(this);
 			}
 			return;
@@ -263,7 +263,7 @@ public class NpcSkillTemplateEntry extends NpcSkillEntry {
 
 						@Override
 						public void run() {
-							if (npc == null || npc.getLifeStats().isAlreadyDead() || npc.getLifeStats().isAboutToDie()) {
+							if (npc == null || npc.isDead() || npc.getLifeStats().isAboutToDie()) {
 								return;
 							}
 							int amount = condTemp.getMaxAmount() > 1 ? Rnd.get(condTemp.getMinAmount(), condTemp.getMaxAmount()) : condTemp.getMinAmount();
@@ -285,7 +285,7 @@ public class NpcSkillTemplateEntry extends NpcSkillEntry {
 						}
 					}, condTemp.getDelay());
 				} else {
-					if (npc == null || npc.getLifeStats().isAlreadyDead() || npc.getLifeStats().isAboutToDie()) {
+					if (npc == null || npc.isDead() || npc.getLifeStats().isAboutToDie()) {
 						return;
 					}
 					int amount = condTemp.getMaxAmount() > 1 ? Rnd.get(condTemp.getMinAmount(), condTemp.getMaxAmount()) : condTemp.getMinAmount();

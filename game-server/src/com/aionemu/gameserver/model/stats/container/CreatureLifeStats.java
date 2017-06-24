@@ -24,7 +24,7 @@ public abstract class CreatureLifeStats<T extends Creature> {
 	private static final Logger log = LoggerFactory.getLogger(CreatureLifeStats.class);
 	protected int currentHp;
 	protected int currentMp;
-	protected boolean alreadyDead = false;
+	protected boolean isDead = false;
 	protected boolean isAboutToDie = false;// for long animation skills that will kill
 	protected int killingBlow;// for long animation skills that will kill - last damage
 	protected final T owner;
@@ -72,10 +72,10 @@ public abstract class CreatureLifeStats<T extends Creature> {
 	}
 
 	/**
-	 * @return the alreadyDead There is no setter method cause life stats should be completely renewed on revive
+	 * @return the isDead There is no setter method cause life stats should be completely renewed on revive
 	 */
-	public boolean isAlreadyDead() {
-		return alreadyDead;
+	public boolean isDead() {
+		return isDead;
 	}
 
 	public void setIsAboutToDie(boolean value) {
@@ -130,7 +130,7 @@ public abstract class CreatureLifeStats<T extends Creature> {
 		int hpReduced = 0;
 		hpLock.lock();
 		try {
-			if (alreadyDead)
+			if (isDead)
 				return 0;
 
 			int newHp = Math.max(currentHp - value, 0);
@@ -139,7 +139,7 @@ public abstract class CreatureLifeStats<T extends Creature> {
 				currentHp = newHp;
 				if (currentHp == 0) {
 					currentMp = 0;
-					alreadyDead = true;
+					isDead = true;
 					unsetIsAboutToDie();
 				}
 			}
@@ -150,7 +150,7 @@ public abstract class CreatureLifeStats<T extends Creature> {
 		if (hpReduced > 0 || skillId != 0)
 			onReduceHp(type, hpReduced, skillId, log);
 		if (hpReduced > 0) {
-			if (alreadyDead)
+			if (isDead)
 				getOwner().getController().onDie(attacker);
 			getOwner().getObserveController().notifyHPChangeObservers(currentHp);
 		}
@@ -174,7 +174,7 @@ public abstract class CreatureLifeStats<T extends Creature> {
 		int mpReduced = 0;
 		mpLock.lock();
 		try {
-			if (alreadyDead)
+			if (isDead)
 				return 0;
 
 			int newMp = Math.max(currentMp - value, 0);
@@ -213,7 +213,7 @@ public abstract class CreatureLifeStats<T extends Creature> {
 		int hpIncreased;
 		hpLock.lock();
 		try {
-			if (alreadyDead)
+			if (isDead)
 				return 0;
 
 			int newHp = Math.min(currentHp + value, getMaxHp());
@@ -221,7 +221,7 @@ public abstract class CreatureLifeStats<T extends Creature> {
 			currentHp = newHp;
 			if (hpIncreased < 0 && currentHp <= 0) { // some skills reduce hp via a negative heal (ghost absorption)
 				currentHp = 0;
-				alreadyDead = true;
+				isDead = true;
 			}
 		} finally {
 			hpLock.unlock();
@@ -252,7 +252,7 @@ public abstract class CreatureLifeStats<T extends Creature> {
 		int mpIncreased = 0;
 		mpLock.lock();
 		try {
-			if (alreadyDead)
+			if (isDead)
 				return 0;
 
 			int newMp = Math.min(currentMp + value, getMaxMp());
@@ -289,7 +289,7 @@ public abstract class CreatureLifeStats<T extends Creature> {
 	public void triggerRestoreTask() {
 		restoreLock.lock();
 		try {
-			if (lifeRestoreTask == null && !isAlreadyDead()) {
+			if (lifeRestoreTask == null && !isDead()) {
 				lifeRestoreTask = LifeStatsRestoreService.getInstance().scheduleRestoreTask(this);
 			}
 		} finally {
@@ -410,7 +410,7 @@ public abstract class CreatureLifeStats<T extends Creature> {
 			currentHp = (int) (hpPercent / 100f * getMaxHp());
 			getOwner().getObserveController().notifyHPChangeObservers(currentHp);
 			if (currentHp > 0)
-				alreadyDead = false;
+				isDead = false;
 		} finally {
 			hpLock.unlock();
 		}
@@ -423,7 +423,7 @@ public abstract class CreatureLifeStats<T extends Creature> {
 		hpLock.lock();
 		try {
 			currentHp = Math.max(0, hp);
-			alreadyDead = currentHp == 0;
+			isDead = currentHp == 0;
 		} finally {
 			hpLock.unlock();
 		}

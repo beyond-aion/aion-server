@@ -54,10 +54,10 @@ public class ModorsCloneAI extends AggressiveNpcAI {
 
 			@Override
 			public void run() {
-				if (isAlreadyDead()) {
+				if (isDead()) {
 					cancelSkillTask();
 				} else {
-					if (!isAlreadyDead()) {
+					if (!isDead()) {
 						Creature creature = getAggroList().getMostHated();
 						SkillEngine.getInstance().getSkill(getOwner(), 21175, 60, creature).useSkill();
 					}
@@ -65,7 +65,7 @@ public class ModorsCloneAI extends AggressiveNpcAI {
 
 						@Override
 						public void run() {
-							if (!isAlreadyDead()) {
+							if (!isDead()) {
 								Creature creature = getAggroList().getMostHated();
 								SkillEngine.getInstance().getSkill(getOwner(), 21175, 60, creature).useSkill();
 							}
@@ -76,7 +76,7 @@ public class ModorsCloneAI extends AggressiveNpcAI {
 
 						@Override
 						public void run() {
-							if (!isAlreadyDead()) {
+							if (!isDead()) {
 								SkillEngine.getInstance().getSkill(getOwner(), 21177, 1, getOwner()).useSkill();
 								if (getOwner().getNpcId() != 284384)
 									spawn(284386, 255.98627f, 259.0136f, 241.73842f, (byte) 0);

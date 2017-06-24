@@ -84,7 +84,7 @@ public class BrigadeGeneralVashartiAI extends AggressiveNpcAI {
 			setStateIfNot(AIState.FIGHT);
 			setSubStateIfNot(AISubState.NONE);
 			Creature creature = getAggroList().getMostHated();
-			if (creature != null && !creature.getLifeStats().isAlreadyDead() && getOwner().canSee(creature)) {
+			if (creature != null && !creature.isDead() && getOwner().canSee(creature)) {
 				getOwner().getQueuedSkills().clear();
 				getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(20533, 1, 100, true)));
 				getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(20534, 1, 100, 0, 10000, true)));
@@ -163,7 +163,7 @@ public class BrigadeGeneralVashartiAI extends AggressiveNpcAI {
 		final Npc buffNpc = (Npc) spawn(283007, 188.33f, 414.61f, 260.61f, (byte) 0);
 
 		ThreadPoolManager.getInstance().schedule(() -> {
-			if (!buffNpc.getLifeStats().isAlreadyDead()) {
+			if (!buffNpc.isDead()) {
 				startFlameSmashEvent(percent);
 				SkillEngine.getInstance().getSkill(buffNpc, 20538, 60, buffNpc).useNoAnimationSkill();
 				ThreadPoolManager.getInstance().schedule(() -> buffNpc.getController().delete(), 4000);
@@ -175,7 +175,7 @@ public class BrigadeGeneralVashartiAI extends AggressiveNpcAI {
 			cancelAirEvent();
 			startFlameBuffEvent();
 			Creature creature = getAggroList().getMostHated();
-			if (creature == null || creature.getLifeStats().isAlreadyDead() || !getOwner().canSee(creature)) {
+			if (creature == null || creature.isDead() || !getOwner().canSee(creature)) {
 				setStateIfNot(AIState.FIGHT);
 				think();
 			} else {
@@ -200,7 +200,7 @@ public class BrigadeGeneralVashartiAI extends AggressiveNpcAI {
 
 	private void startFlameSmashEvent(final int percent) {
 		flameSmashTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
-			if (isAlreadyDead()) {
+			if (isDead()) {
 				cancelFlameSmashTask();
 			} else {
 				List<Point3D> redFlameSmashs1 = getRedFlameSmashs(283008);
@@ -276,7 +276,7 @@ public class BrigadeGeneralVashartiAI extends AggressiveNpcAI {
 
 	private void cancelAirEvent() {
 		isInFlameShowerTask.set(false);
-		if (!isAlreadyDead()) {
+		if (!isDead()) {
 			getOwner().getEffectController().removeEffect(20534);
 		}
 		if (getPosition() != null) {
@@ -306,7 +306,7 @@ public class BrigadeGeneralVashartiAI extends AggressiveNpcAI {
 
 	private void startFlameBuffEvent() {
 		flameBuffTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
-			if (isAlreadyDead() || !getOwner().isSpawned()) {
+			if (isDead() || !getOwner().isSpawned()) {
 				cancelFlameBuffEvent();
 			} else {
 				getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(Rnd.get(0, 1) == 0 ? 20530 : 20531, 60, 100, true)));

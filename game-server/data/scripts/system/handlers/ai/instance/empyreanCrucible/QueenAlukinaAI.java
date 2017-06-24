@@ -74,7 +74,7 @@ public class QueenAlukinaAI extends AggressiveNpcAI {
 
 					@Override
 					public void run() {
-						if (isAlreadyDead()) {
+						if (isDead()) {
 							cancelTask();
 						} else {
 							SkillEngine.getInstance().getSkill(getOwner(), 17901, 41, getTarget()).useNoAnimationSkill();
@@ -97,7 +97,7 @@ public class QueenAlukinaAI extends AggressiveNpcAI {
 
 			@Override
 			public void run() {
-				if (!isAlreadyDead()) {
+				if (!isDead()) {
 					SkillEngine.getInstance().getSkill(getOwner(), skill, 41, getTarget()).useNoAnimationSkill();
 
 				}

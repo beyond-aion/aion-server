@@ -43,7 +43,7 @@ public class CM_TELEPORT_SELECT extends AionClientPacket {
 	@Override
 	protected void runImpl() {
 		Player player = getConnection().getActivePlayer();
-		if (player.getLifeStats().isAlreadyDead())
+		if (player.isDead())
 			return;
 
 		AionObject obj = player.getKnownList().getObject(targetObjId);

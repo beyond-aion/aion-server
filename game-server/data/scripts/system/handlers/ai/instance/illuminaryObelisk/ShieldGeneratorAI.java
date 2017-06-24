@@ -125,7 +125,7 @@ public abstract class ShieldGeneratorAI extends GeneralNpcAI {
 
 	protected void sp(final int npcId, final float x, final float y, final float z, final byte h, final int delay, final String walkerId) {
 		spawnTasks.add(ThreadPoolManager.getInstance().schedule(() -> {
-			if (!isAlreadyDead()) {
+			if (!isDead()) {
 				Npc npc = (Npc) spawn(npcId, x, y, z, h);
 				assaulter.add(npc);
 				npc.getSpawn().setWalkerId(walkerId);
@@ -138,7 +138,7 @@ public abstract class ShieldGeneratorAI extends GeneralNpcAI {
 
 	private void deleteNpcs(List<Npc> npcs) {
 		for (Npc npc : npcs)
-			if (npc != null && !npc.getLifeStats().isAlreadyDead())
+			if (npc != null && !npc.isDead())
 				npc.getController().delete();
 	}
 

@@ -59,7 +59,7 @@ public class LeagueService {
 	}
 
 	public static final boolean canInvite(Player inviter, Player invited) {
-		if (inviter.getLifeStats().isAlreadyDead()) {
+		if (inviter.isDead()) {
 			// You cannot use the Alliance League invitation function while you are dead.
 			PacketSendUtility.sendPacket(inviter, SM_SYSTEM_MESSAGE.STR_UNION_CANT_INVITE_WHEN_DEAD());
 			return false;

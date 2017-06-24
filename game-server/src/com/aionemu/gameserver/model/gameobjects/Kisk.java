@@ -245,6 +245,6 @@ public class Kisk extends SummonedObject<Player> {
 	}
 
 	public boolean isActive() {
-		return !getLifeStats().isAlreadyDead() && getRemainingResurrects() > 0;
+		return !isDead() && getRemainingResurrects() > 0;
 	}
 }

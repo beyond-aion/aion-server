@@ -24,13 +24,13 @@ public class DainatoumBombAI extends AggressiveNpcAI {
 
 			@Override
 			public void run() {
-				if (!isAlreadyDead()) {
+				if (!isDead()) {
 					SkillEngine.getInstance().getSkill(getOwner(), 21534, 1, getOwner()).useSkill();
 					ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 						@Override
 						public void run() {
-							if (!isAlreadyDead())
+							if (!isDead())
 								getOwner().getController().delete();
 						}
 					}, 3500);

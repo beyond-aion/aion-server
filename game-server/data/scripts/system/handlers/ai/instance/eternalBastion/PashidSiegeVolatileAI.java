@@ -37,7 +37,7 @@ public class PashidSiegeVolatileAI extends AggressiveNpcAI {
 
 			@Override
 			public void run() {
-				if (getOwner() == null || isAlreadyDead())
+				if (getOwner() == null || isDead())
 					return;
 				AIActions.useSkill(PashidSiegeVolatileAI.this, getOwner().getNpcId() == 231150 ? 21259 : 21272);
 			}

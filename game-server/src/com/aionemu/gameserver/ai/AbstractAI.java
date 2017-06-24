@@ -192,8 +192,8 @@ public abstract class AbstractAI extends AbstractEventSource<GeneralAIEvent> imp
 		return owner.getTarget();
 	}
 
-	public boolean isAlreadyDead() {
-		return owner.getLifeStats().isAlreadyDead();
+	public boolean isDead() {
+		return owner.isDead();
 	}
 
 	void setOwner(Creature owner) {

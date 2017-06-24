@@ -75,7 +75,7 @@ public class KuharaTheVolatileAI extends AggressiveNpcAI {
 
 	private void startBombEvent() {
 		bombEventTask = ThreadPoolManager.getInstance().schedule(() -> {
-			if (!isAlreadyDead()) {
+			if (!isDead()) {
 				PacketSendUtility.broadcastMessage(getOwner(), 1500394);
 				canThink = false;
 				EmoteManager.emoteStopAttacking(getOwner());
@@ -84,10 +84,10 @@ public class KuharaTheVolatileAI extends AggressiveNpcAI {
 				spawnBombEvent();
 
 				bombEventTask = ThreadPoolManager.getInstance().schedule(() -> {
-					if (!isAlreadyDead()) {
+					if (!isDead()) {
 						canThink = true;
 						Creature creature = getAggroList().getMostHated();
-						if (creature == null || creature.getLifeStats().isAlreadyDead() || !getOwner().canSee(creature)) {
+						if (creature == null || creature.isDead() || !getOwner().canSee(creature)) {
 							setStateIfNot(AIState.FIGHT);
 							think();
 						} else {
@@ -128,7 +128,7 @@ public class KuharaTheVolatileAI extends AggressiveNpcAI {
 	}
 
 	private void moveBombToBoss(final Npc npc) {
-		if (!isAlreadyDead()) {
+		if (!isDead()) {
 			npc.setTarget(getOwner());
 			npc.getMoveController().moveToTargetObject();
 		}
@@ -146,10 +146,10 @@ public class KuharaTheVolatileAI extends AggressiveNpcAI {
 		activeEventTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
 			PacketSendUtility.broadcastMessage(getOwner(), 1500395);
 			ThreadPoolManager.getInstance().schedule(() -> {
-				if (!isAlreadyDead()) {
+				if (!isDead()) {
 					SkillEngine.getInstance().getSkill(getOwner(), 19704, 60, getOwner()).useNoAnimationSkill();
 					ThreadPoolManager.getInstance().schedule(() -> {
-						if (!isAlreadyDead())
+						if (!isDead())
 							SkillEngine.getInstance().getSkill(getOwner(), 19705, 60, getOwner()).useNoAnimationSkill();
 					}, 3500);
 				}

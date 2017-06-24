@@ -19,7 +19,7 @@ public class SteelRakeKeyBoxAI extends ChestAI {
 
 			@Override
 			public void run() {
-				if (!isAlreadyDead() && getOwner().isSpawned()) {
+				if (!isDead() && getOwner().isSpawned()) {
 					AIActions.deleteOwner(SteelRakeKeyBoxAI.this);
 				}
 			}

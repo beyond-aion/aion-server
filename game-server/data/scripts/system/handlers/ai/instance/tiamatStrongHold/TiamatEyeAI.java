@@ -38,7 +38,7 @@ public class TiamatEyeAI extends NpcAI {
 
 			@Override
 			public void run() {
-				if (!isAlreadyDead()) {
+				if (!isDead()) {
 					AIActions.deleteOwner(TiamatEyeAI.this);
 				}
 			}

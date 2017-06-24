@@ -103,7 +103,7 @@ public class CM_EMOTION extends AionClientPacket {
 	@Override
 	protected void runImpl() {
 		Player player = getConnection().getActivePlayer();
-		if (player.getLifeStats().isAlreadyDead()) {
+		if (player.isDead()) {
 			return;
 		}
 

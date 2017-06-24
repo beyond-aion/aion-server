@@ -17,7 +17,7 @@ public class AncientMonsterAI extends AggressiveNpcAI {
 	protected void handleSpawned() {
 		super.handleSpawned();
 		getOwner().getController().addTask(TaskId.DESPAWN, ThreadPoolManager.getInstance().schedule(() -> {
-			if (!isAlreadyDead())
+			if (!isDead())
 				getOwner().getController().delete();
 		}, 1000 * 60 * 60));
 	}

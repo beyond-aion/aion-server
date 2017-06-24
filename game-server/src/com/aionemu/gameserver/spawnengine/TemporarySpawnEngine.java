@@ -40,7 +40,7 @@ public class TemporarySpawnEngine {
 					}
 					if (object instanceof Npc) {
 						Npc npc = (Npc) object;
-						if (!npc.getLifeStats().isAlreadyDead() && template.hasPool()) {
+						if (!npc.isDead() && template.hasPool()) {
 							spawn.setTemplateUse(npc.getInstanceId(), template, false);
 						}
 						npc.getController().cancelTask(TaskId.RESPAWN);

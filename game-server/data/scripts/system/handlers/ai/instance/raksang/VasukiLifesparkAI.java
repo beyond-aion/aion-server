@@ -38,7 +38,7 @@ public class VasukiLifesparkAI extends AggressiveNpcAI {
 
 				@Override
 				public void run() {
-					if (!isAlreadyDead()) {
+					if (!isDead()) {
 						SkillEngine.getInstance().getSkill(getOwner(), 19126, 46, getOwner()).useNoAnimationSkill();
 					}
 				}
@@ -88,7 +88,7 @@ public class VasukiLifesparkAI extends AggressiveNpcAI {
 
 							@Override
 							public void run() {
-								if (!isAlreadyDead()) {
+								if (!isDead()) {
 									if (getNpcId() == 217763) {
 										getPosition().getWorldMapInstance().getDoors().get(219).setOpen(true);
 									}
@@ -97,7 +97,7 @@ public class VasukiLifesparkAI extends AggressiveNpcAI {
 
 										@Override
 										public void run() {
-											if (!isAlreadyDead()) {
+											if (!isDead()) {
 												AIActions.deleteOwner(VasukiLifesparkAI.this);
 											}
 										}

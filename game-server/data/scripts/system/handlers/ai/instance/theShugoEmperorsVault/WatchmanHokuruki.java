@@ -93,7 +93,7 @@ public class WatchmanHokuruki extends IDSweep_Bosses {
 	
 	private void startHate() {
 		for (Npc npc : spawnedAdds) {
-			if (npc != null && !npc.getLifeStats().isAlreadyDead()) {
+			if (npc != null && !npc.isDead()) {
 				npc.getAggroList().addHate(getOwner().getAggroList().getMostHated(), 1);
 			}
 		}

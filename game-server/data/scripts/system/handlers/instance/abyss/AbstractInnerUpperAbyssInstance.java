@@ -149,7 +149,7 @@ public abstract class AbstractInnerUpperAbyssInstance extends GeneralInstanceHan
 	protected final void switchToEasyMode() {
 		if (isEasyMode.compareAndSet(false, true)) {
 			Npc boss = getNpc(getBossId());
-			if (boss != null && !boss.getLifeStats().isAlreadyDead()) {
+			if (boss != null && !boss.isDead()) {
 				spawn(getBossId() - 1, boss.getX(), boss.getY(), boss.getZ(), boss.getHeading());
 				boss.getController().delete();
 			}

@@ -2,7 +2,6 @@ package ai.instance.rakes;
 
 import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
-import com.aionemu.gameserver.model.actions.NpcActions;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.world.WorldMapInstance;
@@ -27,7 +26,7 @@ public class FeedingMantutuAI extends ShifterAI {
 	protected void handleUseItemFinish(Player player) {
 		super.handleUseItemFinish(player);
 		Npc boss = getPosition().getWorldMapInstance().getNpc(219033);
-		if (boss != null && boss.isSpawned() && !NpcActions.isAlreadyDead(boss)) {
+		if (boss != null && boss.isSpawned() && !boss.isDead()) {
 			Npc npc = null;
 			switch (getNpcId()) {
 				case 701387: // water supply

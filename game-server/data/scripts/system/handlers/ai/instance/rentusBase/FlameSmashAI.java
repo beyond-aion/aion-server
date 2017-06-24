@@ -20,7 +20,7 @@ public class FlameSmashAI extends NpcAI {
 
 			@Override
 			public void run() {
-				if (!isAlreadyDead()) {
+				if (!isDead()) {
 					SkillEngine.getInstance().getSkill(getOwner(), getNpcId() == 283008 ? 20540 : 20539, 60, getOwner()).useNoAnimationSkill();
 				}
 			}
@@ -40,7 +40,7 @@ public class FlameSmashAI extends NpcAI {
 	}
 
 	private void despawn() {
-		if (!isAlreadyDead()) {
+		if (!isDead()) {
 			AIActions.deleteOwner(this);
 		}
 	}

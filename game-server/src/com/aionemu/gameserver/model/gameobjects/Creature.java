@@ -45,29 +45,21 @@ import com.aionemu.gameserver.world.zone.ZoneName;
 public abstract class Creature extends VisibleObject {
 
 	private AI ai;
-
-	private CreatureLifeStats<? extends Creature> lifeStats;
 	private CreatureGameStats<? extends Creature> gameStats;
-
+	private CreatureLifeStats<? extends Creature> lifeStats;
 	private EffectController effectController;
 	protected MoveController moveController;
-
 	private int state = CreatureState.ACTIVE.getId();
 	private int visualState = CreatureVisualState.VISIBLE.getId();
 	private int seeState = CreatureSeeState.NORMAL.getId();
-
 	private Skill castingSkill;
 	private Map<Integer, Long> skillCoolDowns;
 	private Map<Integer, Long> skillCoolDownsBase;
 	private ObserveController observeController;
 	private TransformModel transformModel;
-
 	private final AggroList aggroList;
-
 	private Item usingItem;
-
-	private final transient byte[] zoneTypes = new byte[ZoneType.values().length];
-
+	private final byte[] zoneTypes = new byte[ZoneType.values().length];
 	private int skillNumber;
 	private int attackedCount;
 	private long spawnTime = System.currentTimeMillis();
@@ -159,6 +151,10 @@ public abstract class Creature extends VisibleObject {
 		this.ai = ai;
 	}
 
+	public boolean isDead() {
+		return lifeStats.isDead();
+	}
+	
 	/**
 	 * @return True if the creature is a flag (symbol on map)
 	 */
@@ -746,4 +742,5 @@ public abstract class Creature extends VisibleObject {
 	public boolean isWorldRaidMonster() {
 		return getTribe() == TribeClass.WORLDRAID_MONSTER || getTribe() == TribeClass.WORLDRAID_MONSTER_SANDWORMSUM && isRaidMonster();
 	}
+
 }

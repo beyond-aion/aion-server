@@ -30,7 +30,7 @@ public class CM_BIND_POINT_TELEPORT extends AionClientPacket {
 	@Override
 	protected void runImpl() {
 		Player player = getConnection().getActivePlayer();
-		if (player.getLifeStats().isAlreadyDead())
+		if (player.isDead())
 			return;
 
 		switch (action) {

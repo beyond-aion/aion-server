@@ -77,7 +77,7 @@ public class MercenaryLocation {
 		if (spawnedMercs.isEmpty())
 			return;
 		for (VisibleObject merc : spawnedMercs) {
-			if (merc.isSpawned() && !((Npc) merc).getLifeStats().isAlreadyDead())
+			if (merc.isSpawned() && !((Npc) merc).isDead())
 				merc.getController().delete();
 		}
 		spawnedMercs.clear();
@@ -106,7 +106,7 @@ public class MercenaryLocation {
 		int livingMercs = 0;
 		for (VisibleObject vo : spawnedMercs) {
 			if (vo instanceof Npc) {
-				if (vo.isSpawned() && !((Npc) vo).getLifeStats().isAlreadyDead())
+				if (vo.isSpawned() && !((Npc) vo).isDead())
 					livingMercs++;
 			}
 		}

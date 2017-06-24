@@ -50,7 +50,7 @@ public class CelestiusAI extends AggressiveNpcAI {
 
 			@Override
 			public void run() {
-				if (isAlreadyDead() && getLifeStats().getHpPercentage() < 90) {
+				if (isDead() && getLifeStats().getHpPercentage() < 90) {
 					deleteHelpers();
 					cancelHelpersTask();
 				} else {

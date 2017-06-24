@@ -10,7 +10,6 @@ import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.ai.manager.EmoteManager;
 import com.aionemu.gameserver.ai.manager.WalkManager;
 import com.aionemu.gameserver.model.EmotionType;
-import com.aionemu.gameserver.model.actions.NpcActions;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
@@ -80,7 +79,7 @@ public class EnragedNightmareAI extends AggressiveNpcAI {
 
 	private void useSkill(NpcAI ai, Creature creature) {
 		boss = getPosition().getWorldMapInstance().getNpc(233467);
-		if (boss != null && !NpcActions.isAlreadyDead(boss)) {
+		if (boss != null && !boss.isDead()) {
 			if (boss.getLifeStats().getHpPercentage() < 100) {
 				EmoteManager.emoteStopAttacking(getOwner());
 				SkillEngine.getInstance().getSkill(getOwner(), 21342, 1, boss).useSkill();

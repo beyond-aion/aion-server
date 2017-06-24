@@ -400,7 +400,7 @@ public class PlayerController extends CreatureController<Player> {
 	@Override
 	public void onBeforeSpawn() {
 		super.onBeforeSpawn();
-		if (getOwner().getLifeStats().isAlreadyDead())
+		if (getOwner().isDead())
 			return;
 		if (getOwner().getIsFlyingBeforeDeath())
 			getOwner().unsetState(CreatureState.FLOATING_CORPSE);
@@ -452,7 +452,7 @@ public class PlayerController extends CreatureController<Player> {
 	@Override
 	public void onAttack(Creature attacker, int skillId, TYPE type, int damage, boolean notifyAttack, LOG logId, AttackStatus attackStatus,
 		boolean allowGodstoneActivation) {
-		if (getOwner().getLifeStats().isAlreadyDead())
+		if (getOwner().isDead())
 			return;
 
 		if (getOwner().isProtectionActive())

@@ -151,7 +151,7 @@ public class AttackShieldObserver extends AttackCalcObserver {
 				}
 				break;
 			} else if (shieldType == ShieldType.PROTECT) { // shield type 8, protect effect (ex. skillId: 417 Bodyguard I)
-				if (effect.getEffector() == null || effect.getEffector().getLifeStats().isAlreadyDead()) {
+				if (effect.getEffector() == null || effect.getEffector().isDead()) {
 					effect.endEffect();
 					break;
 				}

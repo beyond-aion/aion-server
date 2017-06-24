@@ -78,7 +78,7 @@ public class PlayerLifeStats extends CreatureLifeStats<Player> {
 
 	@Override
 	public void synchronizeWithMaxStats() {
-		if (isAlreadyDead())
+		if (isDead())
 			return;
 
 		super.synchronizeWithMaxStats();
@@ -143,7 +143,7 @@ public class PlayerLifeStats extends CreatureLifeStats<Player> {
 		fpLock.lock();
 
 		try {
-			if (isAlreadyDead()) {
+			if (isDead()) {
 				return 0;
 			}
 			int newFp = this.currentFp + value;
@@ -241,7 +241,7 @@ public class PlayerLifeStats extends CreatureLifeStats<Player> {
 
 		restoreLock.lock();
 		try {
-			if (flyRestoreTask == null && !alreadyDead && !isFlyTimeFullyRestored()) {
+			if (flyRestoreTask == null && !isDead && !isFlyTimeFullyRestored()) {
 				flyRestoreTask = LifeStatsRestoreService.getInstance().scheduleFpRestoreTask(this);
 			}
 		} finally {
@@ -273,7 +273,7 @@ public class PlayerLifeStats extends CreatureLifeStats<Player> {
 		cancelFpRestore();
 		restoreLock.lock();
 		try {
-			if (flyReduceTask == null && !alreadyDead && !owner.hasAccess(AdminConfig.UNLIMITED_FLIGHT_TIME)) {
+			if (flyReduceTask == null && !isDead && !owner.hasAccess(AdminConfig.UNLIMITED_FLIGHT_TIME)) {
 				flyReduceTask = LifeStatsRestoreService.getInstance().scheduleFpReduceTask(this, costFp);
 			}
 		} finally {

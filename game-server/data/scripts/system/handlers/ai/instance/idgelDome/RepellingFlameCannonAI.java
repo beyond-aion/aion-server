@@ -26,7 +26,7 @@ public class RepellingFlameCannonAI extends NpcAI {
 
 			@Override
 			public void run() {
-				if (isAlreadyDead()) {
+				if (isDead()) {
 					cancelTask();
 				} else {
 					SkillEngine.getInstance().getSkill(getOwner(), 21648, 1, getOwner()).useNoAnimationSkill();

@@ -1,7 +1,6 @@
 package ai.instance.RukibukiCircusTroupe;
 
 import com.aionemu.gameserver.ai.AIName;
-import com.aionemu.gameserver.model.actions.NpcActions;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 
@@ -18,7 +17,7 @@ public class HarlequinLordReshkaSummonAI extends AggressiveNpcAI {
 	@Override
 	protected void handleSpawned() {
 		boss = getPosition().getWorldMapInstance().getNpc(233453);
-		if (boss != null && !NpcActions.isAlreadyDead(boss)) {
+		if (boss != null && !boss.isDead()) {
 			Creature player = boss.getPosition().getWorldMapInstance().getNpc(233453).getAggroList().getMostHated();
 			getAggroList().addHate(player, 1);
 		}

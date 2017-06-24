@@ -46,7 +46,7 @@ public class InfernalDainatoumAI extends DainatoumAI {
 	@Override
 	protected void scheduleDespawn() {
 		despawnTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
-			if (!isAlreadyDead()) {
+			if (!isDead()) {
 				switch (progress) {
 					case 0:
 						PacketSendUtility.broadcastToMap(getOwner(), SM_SYSTEM_MESSAGE.STR_MSG_IDF5_U3_HARD_BOSS_TIMER_01());

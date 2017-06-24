@@ -1530,7 +1530,7 @@ public class LegionService {
 		 */
 		private boolean canInvitePlayer(Player activePlayer, Player targetPlayer) {
 			Legion legion = activePlayer.getLegion();
-			if (activePlayer.getLifeStats().isAlreadyDead()) {
+			if (activePlayer.isDead()) {
 				PacketSendUtility.sendPacket(activePlayer, SM_SYSTEM_MESSAGE.STR_GUILD_INVITE_CANT_INVITE_WHEN_DEAD());
 				return false;
 			}

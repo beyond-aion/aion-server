@@ -63,7 +63,7 @@ public class CaptainXastaAI extends AggressiveNpcAI {
 
 			@Override
 			public void run() {
-				if (isAlreadyDead()) {
+				if (isDead()) {
 					cancelPhaseTask();
 				} else {
 					canThink = false;
@@ -92,7 +92,7 @@ public class CaptainXastaAI extends AggressiveNpcAI {
 
 			@Override
 			public void run() {
-				if (isAlreadyDead()) {
+				if (isDead()) {
 					cancelPhaseTask();
 				} else {
 					SkillEngine.getInstance().getSkill(getOwner(), 19729, 60, getOwner()).useNoAnimationSkill();
@@ -107,10 +107,10 @@ public class CaptainXastaAI extends AggressiveNpcAI {
 
 			@Override
 			public void run() {
-				if (!isAlreadyDead()) {
+				if (!isDead()) {
 					canThink = true;
 					Creature creature = getAggroList().getMostHated();
-					if (creature == null || creature.getLifeStats().isAlreadyDead() || !getOwner().canSee(creature)) {
+					if (creature == null || creature.isDead() || !getOwner().canSee(creature)) {
 						setStateIfNot(AIState.FIGHT);
 						getMoveController().recallPreviousStep();
 						getMoveController().abortMove();
@@ -143,7 +143,7 @@ public class CaptainXastaAI extends AggressiveNpcAI {
 
 			@Override
 			public void run() {
-				if (!isAlreadyDead()) {
+				if (!isDead()) {
 					PacketSendUtility.broadcastMessage(getOwner(), 1500389);
 					SkillEngine.getInstance().getSkill(getOwner(), 19968, 60, getOwner()).useNoAnimationSkill();
 					Npc npc1 = (Npc) spawn(282604, 263f, 537f, 203f, (byte) 0);
@@ -212,7 +212,7 @@ public class CaptainXastaAI extends AggressiveNpcAI {
 
 								@Override
 								public void run() {
-									if (!NpcActions.isAlreadyDead(ariana)) {
+									if (!ariana.isDead()) {
 										NpcActions.delete(ariana);
 									}
 								}

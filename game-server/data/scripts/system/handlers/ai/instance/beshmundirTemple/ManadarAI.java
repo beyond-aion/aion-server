@@ -35,7 +35,7 @@ public class ManadarAI extends AggressiveNpcAI {
 	}
 
 	private void check() {
-		if (getPosition().isSpawned() && !isAlreadyDead() && isStart) {
+		if (getPosition().isSpawned() && !isDead() && isStart) {
 			for (int i = 0; i < 5; i++) {
 				int distance = Rnd.get(4, 11);
 				int nrNpc = Rnd.get(1, 2);

@@ -23,7 +23,7 @@ public abstract class GaleCycloneObserver extends ActionObserver {
 	@Override
 	public void moved() {
 		double newRange = PositionUtil.getDistance(player, creature);
-		if (creature == null || creature.getLifeStats().isAlreadyDead()) {
+		if (creature == null || creature.isDead()) {
 			if (player != null) {
 				player.getObserveController().removeObserver(this);
 			}

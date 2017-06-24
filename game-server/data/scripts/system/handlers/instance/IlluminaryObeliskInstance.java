@@ -145,7 +145,7 @@ public class IlluminaryObeliskInstance extends GeneralInstanceHandler {
 				instance.forEachPlayer(new Consumer<Player>() {
 					@Override
 					public void accept(Player pl) {
-						if (!pl.getLifeStats().isAlreadyDead())
+						if (!pl.isDead())
 							pl.getController().die();
 					}
 				});

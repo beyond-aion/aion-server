@@ -31,7 +31,7 @@ public class KebbitAI extends GeneralNpcAI {
 
 			@Override
 			public void run() {
-				if (getOwner() != null && !getOwner().getLifeStats().isAlreadyDead()) {
+				if (getOwner() != null && !getOwner().isDead()) {
 					getOwner().getController().delete();
 				}
 			}

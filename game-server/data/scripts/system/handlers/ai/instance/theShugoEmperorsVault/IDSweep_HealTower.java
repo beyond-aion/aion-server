@@ -45,10 +45,10 @@ public class IDSweep_HealTower extends GeneralNpcAI {
 	 * checks if there are any wounded players nearby and heals 1x
 	 */
 	protected void checkForHeal() {
-		if (getOwner().isSpawned() && !getOwner().getLifeStats().isAlreadyDead()) {
+		if (getOwner().isSpawned() && !getOwner().isDead()) {
 			for (Player player : getOwner().getKnownList().getKnownPlayers().values()) {
 				PlayerLifeStats stats = player.getLifeStats();
-				if (!stats.isAlreadyDead() && isInRange(player, 3) && stats.getCurrentHp() < stats.getMaxHp()) {
+				if (!stats.isDead() && isInRange(player, 3) && stats.getCurrentHp() < stats.getMaxHp()) {
 					doHeal();
 					break;
 				}

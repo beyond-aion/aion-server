@@ -77,7 +77,7 @@ public class DainatoumAI extends AggressiveNpcAI {
 
 	protected void scheduleDespawn() {
 		despawnTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
-			if (!isAlreadyDead()) {
+			if (!isDead()) {
 				switch (progress) {
 					case 0:
 						PacketSendUtility.broadcastToMap(getOwner(), SM_SYSTEM_MESSAGE.STR_MSG_IDF5_U3_BOSS_TIMER_01());
@@ -99,7 +99,7 @@ public class DainatoumAI extends AggressiveNpcAI {
 	}
 
 	protected void onDespawn() {
-		if (getOwner() != null && getOwner().getLifeStats().isAlreadyDead())
+		if (getOwner() != null && getOwner().isDead())
 			SkillEngine.getInstance().getSkill(getOwner(), 21534, 1, getOwner()).useSkill();
 		getOwner().getController().delete();
 	}

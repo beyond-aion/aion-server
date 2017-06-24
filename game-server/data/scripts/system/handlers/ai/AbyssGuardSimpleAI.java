@@ -53,7 +53,7 @@ public class AbyssGuardSimpleAI extends AggressiveNpcAI {
 			return;
 
 		Npc owner = getOwner();
-		if (npc.getLifeStats().isAlreadyDead() || !owner.canSee(npc))
+		if (npc.isDead() || !owner.canSee(npc))
 			return;
 
 		if (!owner.isEnemy(npc) || npc.getLevel() < 2)

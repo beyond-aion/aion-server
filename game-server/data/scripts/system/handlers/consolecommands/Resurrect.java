@@ -36,7 +36,7 @@ public class Resurrect extends ConsoleCommand {
 
 		final Player player = (Player) target;
 
-		if (!player.getLifeStats().isAlreadyDead()) {
+		if (!player.isDead()) {
 			PacketSendUtility.sendMessage(admin, "That player is already alive.");
 			return;
 		}

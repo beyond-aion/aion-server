@@ -41,7 +41,7 @@ public class PadmarashkasCaveInstance extends GeneralInstanceHandler {
 				if (killedPadmarashkaProtector.incrementAndGet() == 4) {
 					killedPadmarashkaProtector.set(0);
 					final Npc padmarashka = getNpc(218756);
-					if (padmarashka != null && !padmarashka.getLifeStats().isAlreadyDead()) {
+					if (padmarashka != null && !padmarashka.isDead()) {
 						padmarashka.getEffectController().unsetAbnormal(AbnormalState.SLEEP);
 						// padmarashka.getEffectController().broadCastEffects(0);
 						SkillEngine.getInstance().getSkill(padmarashka, 19187, 55, padmarashka).useNoAnimationSkill();
@@ -60,7 +60,7 @@ public class PadmarashkasCaveInstance extends GeneralInstanceHandler {
 			case 282614:
 				if (killedEggs.incrementAndGet() == 20) { // TODO: find value
 					final Npc padmarashka = getNpc(218756);
-					if (padmarashka != null && !padmarashka.getLifeStats().isAlreadyDead()) {
+					if (padmarashka != null && !padmarashka.isDead()) {
 						SkillEngine.getInstance().applyEffectDirectly(20101, padmarashka, padmarashka, 0);
 					}
 				}

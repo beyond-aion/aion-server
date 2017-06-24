@@ -43,14 +43,14 @@ public class UnstableRukrilAI extends AggressiveNpcAI {
 
 			@Override
 			public void run() {
-				if (isAlreadyDead())
+				if (isDead())
 					cancelTask();
 				else {
 					if (getPosition().getWorldMapInstance().getNpc(283204) == null) {
 						SkillEngine.getInstance().getSkill(getOwner(), 19266, 55, getOwner()).useNoAnimationSkill();
 						spawn(283204, getOwner().getX() + 2, getOwner().getY() - 2, getOwner().getZ(), (byte) 0);
 					}
-					if (ebonsoul != null && !ebonsoul.getLifeStats().isAlreadyDead()) {
+					if (ebonsoul != null && !ebonsoul.isDead()) {
 						SkillEngine.getInstance().getSkill(ebonsoul, 19159, 55, ebonsoul).useNoAnimationSkill();
 						spawn(283205, ebonsoul.getX() + 2, ebonsoul.getY() - 2, ebonsoul.getZ(), (byte) 0);
 					}
@@ -67,7 +67,7 @@ public class UnstableRukrilAI extends AggressiveNpcAI {
 
 	private void regen() {
 		Npc ebonsoul = getPosition().getWorldMapInstance().getNpc(219552);
-		if (ebonsoul != null && !ebonsoul.getLifeStats().isAlreadyDead() && PositionUtil.isInRange(getOwner(), ebonsoul, 5))
+		if (ebonsoul != null && !ebonsoul.isDead() && PositionUtil.isInRange(getOwner(), ebonsoul, 5))
 			if (!getOwner().getLifeStats().isFullyRestoredHp())
 				getOwner().getLifeStats().increaseHp(TYPE.HP, 10000, 0, LOG.REGULAR);
 

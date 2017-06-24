@@ -31,7 +31,7 @@ public class YamenessPortalSummonedAI extends AggressiveNpcAI {
 
 				@Override
 				public void run() {
-					if (!isAlreadyDead() && getOwner() != null) {
+					if (!isDead() && getOwner() != null) {
 						spawn(281903, getOwner().getX() + 3, getOwner().getY() - 3, getOwner().getZ(), (byte) 0);
 						spawn(281904, getOwner().getX() - 3, getOwner().getY() + 3, getOwner().getZ(), (byte) 0);
 					}

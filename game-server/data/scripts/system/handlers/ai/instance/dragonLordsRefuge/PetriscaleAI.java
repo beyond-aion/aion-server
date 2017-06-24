@@ -30,7 +30,7 @@ public class PetriscaleAI extends AggressiveNpcAI {
 	}
 
 	private boolean isDead(Npc npc) {
-		return (npc != null && npc.getLifeStats().isAlreadyDead());
+		return (npc != null && npc.isDead());
 	}
 
 	private Npc getNpc(int npcId) {

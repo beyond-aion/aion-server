@@ -163,7 +163,7 @@ public class EnragedQueenModorAI extends AggressiveNpcAI {
 	}
 
 	private boolean canAct() {
-		return (getOwner() != null && !isAlreadyDead() && !isHome.get());
+		return (getOwner() != null && !isDead() && !isHome.get());
 	}
 
 	@Override

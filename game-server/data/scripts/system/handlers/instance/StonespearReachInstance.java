@@ -838,7 +838,7 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 
 	private boolean allPlayersAreDead() {
 		for (Player p : instance.getPlayersInside()) {
-			if (!p.getLifeStats().isAlreadyDead()) {
+			if (!p.isDead()) {
 				return false;
 			}
 		}

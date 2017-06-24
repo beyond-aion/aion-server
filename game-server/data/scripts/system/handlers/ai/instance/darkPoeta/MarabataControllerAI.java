@@ -37,7 +37,7 @@ public class MarabataControllerAI extends NpcAI {
 
 	private void applyEffect(boolean remove) {
 		Npc boss = getBoss();
-		if (boss != null && !boss.getLifeStats().isAlreadyDead()) {
+		if (boss != null && !boss.isDead()) {
 			switch (getNpcId()) {
 				case 700443:
 				case 700446:
@@ -79,7 +79,7 @@ public class MarabataControllerAI extends NpcAI {
 	}
 
 	private void useSkill() {
-		if (isAlreadyDead())
+		if (isDead())
 			return;
 
 		AIActions.targetSelf(this);

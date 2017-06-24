@@ -146,7 +146,7 @@ public class ShugoImperialTombInstance extends GeneralInstanceHandler {
 
 	private void deleteNpcs(List<Npc> npcs) {
 		for (Npc npc : npcs) {
-			if (npc != null && !npc.getLifeStats().isAlreadyDead()) {
+			if (npc != null && !npc.isDead()) {
 				npc.getController().delete();
 			}
 		}

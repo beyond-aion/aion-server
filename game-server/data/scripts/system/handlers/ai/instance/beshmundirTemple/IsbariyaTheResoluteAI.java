@@ -8,7 +8,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
-import com.aionemu.gameserver.model.actions.PlayerActions;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.geometry.Point3D;
@@ -106,7 +105,7 @@ public class IsbariyaTheResoluteAI extends AggressiveNpcAI {
 
 			@Override
 			public void run() {
-				if (isAlreadyDead())
+				if (isDead())
 					cancelSkillTask();
 				else
 					SkillEngine.getInstance().getSkill(getOwner(), 18912 + Rnd.get(2), 55, getOwner()).useNoAnimationSkill();
@@ -122,7 +121,7 @@ public class IsbariyaTheResoluteAI extends AggressiveNpcAI {
 	}
 
 	private void launchSpecial() {
-		if (isAlreadyDead() || stage == 0 || getOwner().getPosition().getWorldMapInstance() == null) {
+		if (isDead() || stage == 0 || getOwner().getPosition().getWorldMapInstance() == null) {
 			cancelSkillTask();
 			return;
 		}
@@ -168,7 +167,7 @@ public class IsbariyaTheResoluteAI extends AggressiveNpcAI {
 	private Player getTargetPlayer() {
 		List<Player> players = new ArrayList<>();
 		getKnownList().forEachPlayer(player -> {
-			if (!PlayerActions.isAlreadyDead(player) && PositionUtil.isInRange(player, getOwner(), 40) && player != getTarget()) {
+			if (!player.isDead() && PositionUtil.isInRange(player, getOwner(), 40) && player != getTarget()) {
 				players.add(player);
 			}
 		});

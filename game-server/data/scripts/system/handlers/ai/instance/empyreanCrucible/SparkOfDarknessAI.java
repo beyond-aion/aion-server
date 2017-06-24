@@ -26,7 +26,7 @@ public class SparkOfDarknessAI extends GeneralNpcAI {
 
 			@Override
 			public void run() {
-				if (!isAlreadyDead()) {
+				if (!isDead()) {
 					SkillEngine.getInstance().getSkill(getOwner(), 19554, 1, getOwner()).useNoAnimationSkill();
 				}
 			}

@@ -121,7 +121,7 @@ public class InfinityShardInstance extends GeneralInstanceHandler {
 			@Override
 			public void run() {
 				Npc hyperion = instance.getNpc(231073);
-				if (hyperion != null && !hyperion.getLifeStats().isAlreadyDead()) {
+				if (hyperion != null && !hyperion.isDead()) {
 					cancelIdeResonatorTask();
 					failInstance();
 				}
@@ -166,7 +166,7 @@ public class InfinityShardInstance extends GeneralInstanceHandler {
 
 				@Override
 				public void run() {
-					if (hyperion != null && !hyperion.getLifeStats().isAlreadyDead())
+					if (hyperion != null && !hyperion.isDead())
 						spawnResonator(npcId);
 				}
 
@@ -240,13 +240,13 @@ public class InfinityShardInstance extends GeneralInstanceHandler {
 	}
 
 	private boolean isDead(Npc npc) {
-		return (npc == null || npc.getLifeStats().isAlreadyDead());
+		return (npc == null || npc.isDead());
 	}
 
 	@Override
 	public void onPlayerLogOut(Player player) {
 		super.onPlayerLogOut(player);
-		if (player.getLifeStats().isAlreadyDead()) {
+		if (player.isDead()) {
 			TeleportService.moveToBindLocation(player);
 		}
 	}

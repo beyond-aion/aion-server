@@ -50,7 +50,7 @@ public class ShulackGuidedBombAI extends AggressiveNpcAI {
 
 			@Override
 			public void run() {
-				if (!isAlreadyDead() && !isDestroyed) {
+				if (!isDead() && !isDestroyed) {
 					despawn();
 				}
 			}
@@ -64,7 +64,7 @@ public class ShulackGuidedBombAI extends AggressiveNpcAI {
 
 			@Override
 			public void run() {
-				if (!isAlreadyDead() && !isDestroyed) {
+				if (!isDead() && !isDestroyed) {
 					destroy(creature);
 				} else {
 					if (task != null) {
@@ -78,13 +78,13 @@ public class ShulackGuidedBombAI extends AggressiveNpcAI {
 	}
 
 	private void despawn() {
-		if (!isAlreadyDead()) {
+		if (!isDead()) {
 			AIActions.deleteOwner(this);
 		}
 	}
 
 	private void destroy(Creature creature) {
-		if (!isDestroyed && !isAlreadyDead()) {
+		if (!isDestroyed && !isDead()) {
 			if (creature != null && PositionUtil.getDistance(getOwner(), creature) <= 4) {
 				isDestroyed = true;
 				SkillEngine.getInstance().getSkill(getOwner(), 19415, 49, getOwner()).useNoAnimationSkill();

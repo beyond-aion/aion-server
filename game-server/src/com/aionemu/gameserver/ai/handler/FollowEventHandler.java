@@ -32,7 +32,7 @@ public class FollowEventHandler {
 	 */
 	public static void creatureMoved(NpcAI npcAI, Creature creature) {
 		if (npcAI.isInState(AIState.FOLLOWING)) {
-			if (npcAI.getOwner().isTargeting(creature.getObjectId()) && !creature.getLifeStats().isAlreadyDead()) {
+			if (npcAI.getOwner().isTargeting(creature.getObjectId()) && !creature.isDead()) {
 				checkFollowTarget(npcAI, creature);
 			}
 		}

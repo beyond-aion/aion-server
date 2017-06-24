@@ -80,7 +80,7 @@ public class ServantNpcAI extends GeneralNpcAI {
 
 			@Override
 			public void run() {
-				if (target == null || target.getLifeStats().isAlreadyDead()) {
+				if (target == null || target.isDead()) {
 					AIActions.deleteOwner(ServantNpcAI.this);
 					cancelTask();
 				} else {

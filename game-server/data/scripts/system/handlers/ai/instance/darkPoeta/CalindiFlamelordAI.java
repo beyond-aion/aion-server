@@ -42,7 +42,7 @@ public class CalindiFlamelordAI extends AggressiveNpcAI {
 	private void scheduleWipe() {
 		PacketSendUtility.broadcastToMap(getOwner(), SM_SYSTEM_MESSAGE.STR_MSG_INSTANCE_A_RANK_BATTLE_TIME());
 		wipeTask = ThreadPoolManager.getInstance().schedule(() -> {
-			if (!getLifeStats().isAlreadyDead())
+			if (!isDead())
 				getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(19679, 50, 100, 0, 3000, true)));
 		}, 600000);
 	}

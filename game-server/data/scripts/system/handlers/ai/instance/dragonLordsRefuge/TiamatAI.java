@@ -63,7 +63,7 @@ public class TiamatAI extends AggressiveNpcAI {
 
 			@Override
 			public void run() {
-				if (isAlreadyDead())
+				if (isDead())
 					cancelSinkTask();
 				else {
 					isSinkingFlag.set(true);
@@ -77,7 +77,7 @@ public class TiamatAI extends AggressiveNpcAI {
 
 			@Override
 			public void run() {
-				if (isAlreadyDead())
+				if (isDead())
 					cancelTasks();
 				else {
 					spawnInfinitePain();
@@ -91,7 +91,7 @@ public class TiamatAI extends AggressiveNpcAI {
 
 			@Override
 			public void run() {
-				if (isAlreadyDead())
+				if (isDead())
 					cancelTasks();
 				else {
 					atrocityEvent();
@@ -201,7 +201,7 @@ public class TiamatAI extends AggressiveNpcAI {
 
 			@Override
 			public void run() {
-				if (isAlreadyDead())
+				if (isDead())
 					cancelTasks();
 				else {
 					spawn(283139, 464.24f, 462.26f, 417.4f, (byte) 18);

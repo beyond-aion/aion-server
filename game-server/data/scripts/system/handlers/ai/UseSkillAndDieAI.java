@@ -41,9 +41,9 @@ public class UseSkillAndDieAI extends NpcAI {
 			ThreadPoolManager.getInstance().schedule(new Runnable() {
 				@Override
 				public void run() {
-					if (getOwner() != null && !getOwner().getLifeStats().isAlreadyDead()) {
+					if (getOwner() != null && !getOwner().isDead()) {
 						Creature spawner = findCreator(getOwner().getCreatorId());
-						if (spawner != null && !spawner.getLifeStats().isAlreadyDead()) {
+						if (spawner != null && !spawner.isDead()) {
 							SkillEngine.getInstance().getSkill(getOwner(), skillList.getNpcSkills().get(0).getSkillId(),  skillList.getNpcSkills().get(0).getSkillLevel(), getOwner()).useSkill();
 						}
 					}
@@ -68,7 +68,7 @@ public class UseSkillAndDieAI extends NpcAI {
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
 			@Override
 			public void run() {
-				if (getOwner() != null && !getOwner().getLifeStats().isAlreadyDead())
+				if (getOwner() != null && !getOwner().isDead())
 					getOwner().getController().delete();
 			}
 		}, despawn_time);

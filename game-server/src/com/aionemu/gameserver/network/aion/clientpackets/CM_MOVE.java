@@ -66,7 +66,7 @@ public class CM_MOVE extends AionClientPacket {
 	@Override
 	protected void runImpl() {
 		Player player = getConnection().getActivePlayer();
-		if (player.getLifeStats().isAlreadyDead())
+		if (player.isDead())
 			return;
 		if (player.getEffectController().isUnderFear())
 			return;

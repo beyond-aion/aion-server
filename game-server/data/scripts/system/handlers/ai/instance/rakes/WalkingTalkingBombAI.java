@@ -22,13 +22,13 @@ public class WalkingTalkingBombAI extends AggressiveNpcAI {
 
 			@Override
 			public void run() {
-				if (!isAlreadyDead()) {
+				if (!isDead()) {
 					SkillEngine.getInstance().getSkill(getOwner(), 19416, 49, getOwner()).useNoAnimationSkill();
 					ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 						@Override
 						public void run() {
-							if (!isAlreadyDead()) {
+							if (!isDead()) {
 								despawn();
 							}
 						}

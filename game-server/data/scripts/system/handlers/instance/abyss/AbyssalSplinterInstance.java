@@ -72,7 +72,7 @@ public class AbyssalSplinterInstance extends GeneralInstanceHandler {
 				break;
 			case 281907:
 				Npc ebonsoul = getNpc(216949);
-				if (ebonsoul != null && !ebonsoul.getLifeStats().isAlreadyDead()) {
+				if (ebonsoul != null && !ebonsoul.isDead()) {
 					if (PositionUtil.isInRange(npc, ebonsoul, 5)) {
 						ebonsoul.getEffectController().removeEffect(19159);
 						deleteNpcs(instance.getNpcs(281907));
@@ -83,7 +83,7 @@ public class AbyssalSplinterInstance extends GeneralInstanceHandler {
 				break;
 			case 281908:
 				Npc rukril = getNpc(216948);
-				if (rukril != null && !rukril.getLifeStats().isAlreadyDead()) {
+				if (rukril != null && !rukril.isDead()) {
 					if (PositionUtil.isInRange(npc, rukril, 5)) {
 						rukril.getEffectController().removeEffect(19266);
 						deleteNpcs(instance.getNpcs(281908));
@@ -108,7 +108,7 @@ public class AbyssalSplinterInstance extends GeneralInstanceHandler {
 				if (++killedPazuzuWorms == 5) {
 					killedPazuzuWorms = 0;
 					Npc pazuzu = getNpc(216951);
-					if (pazuzu != null && !pazuzu.getLifeStats().isAlreadyDead()) {
+					if (pazuzu != null && !pazuzu.isDead()) {
 						pazuzu.getEffectController().removeEffect(19145);
 						pazuzu.getEffectController().removeEffect(19291);
 					}
@@ -235,8 +235,8 @@ public class AbyssalSplinterInstance extends GeneralInstanceHandler {
 		Npc gate1 = getNpc(282014);
 		Npc gate2 = getNpc(282015);
 		Npc gate3 = getNpc(282131);
-		if ((gate1 == null || gate1.getLifeStats().isAlreadyDead()) && (gate2 == null || gate2.getLifeStats().isAlreadyDead())
-			&& (gate3 == null || gate3.getLifeStats().isAlreadyDead())) {
+		if ((gate1 == null || gate1.isDead()) && (gate2 == null || gate2.isDead())
+			&& (gate3 == null || gate3.isDead())) {
 			deleteNpcs(instance.getNpcs(281903));// Summoned Orkanimum
 			deleteNpcs(instance.getNpcs(281904));// Summoned Lapilima
 		}

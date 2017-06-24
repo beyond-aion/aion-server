@@ -72,7 +72,7 @@ public class GoldenEyeMantutuAI extends AggressiveNpcAI {
 
 			@Override
 			public void run() {
-				if (!isAlreadyDead() && npc != null) {
+				if (!isDead() && npc != null) {
 					switch (npc.getNpcId()) {
 						case 281128:
 							// Feed Supply Device
@@ -88,7 +88,7 @@ public class GoldenEyeMantutuAI extends AggressiveNpcAI {
 					NpcActions.delete(npc);
 					canThink = true;
 					Creature creature = getAggroList().getMostHated();
-					if (creature == null || creature.getLifeStats().isAlreadyDead() || !getOwner().canSee(creature)) {
+					if (creature == null || creature.isDead() || !getOwner().canSee(creature)) {
 						setStateIfNot(AIState.FIGHT);
 						think();
 					} else {
@@ -134,7 +134,7 @@ public class GoldenEyeMantutuAI extends AggressiveNpcAI {
 	protected void handleDied() {
 		cancelHungerTask();
 		Npc npc = getPosition().getWorldMapInstance().getNpc(219037);
-		if (npc != null && !NpcActions.isAlreadyDead(npc)) {
+		if (npc != null && !npc.isDead()) {
 			npc.getEffectController().removeEffect(18189);
 		}
 		super.handleDied();

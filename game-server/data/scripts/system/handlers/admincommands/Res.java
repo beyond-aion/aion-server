@@ -30,7 +30,7 @@ public class Res extends AdminCommand {
 		}
 
 		final Player player = (Player) target;
-		if (!player.getLifeStats().isAlreadyDead()) {
+		if (!player.isDead()) {
 			PacketSendUtility.sendMessage(admin, "That player is already alive.");
 			return;
 		}

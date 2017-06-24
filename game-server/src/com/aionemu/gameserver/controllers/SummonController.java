@@ -98,7 +98,7 @@ public class SummonController extends CreatureController<Summon> {
 	@Override
 	public void onAttack(Creature creature, int skillId, TYPE type, int damage, boolean notifyAttack, LOG log, AttackStatus attackStatus,
 		boolean allowGodstoneActivation) {
-		if (getOwner().getLifeStats().isAlreadyDead())
+		if (getOwner().isDead())
 			return;
 
 		// temp
@@ -116,8 +116,8 @@ public class SummonController extends CreatureController<Summon> {
 		Player master = getOwner().getMaster();
 		SummonsService.release(owner, UnsummonType.UNSPECIFIED, isAttacked);
 
-		if (!master.equals(lastAttacker) && !owner.equals(lastAttacker) && !master.getLifeStats().isAlreadyDead()
-			&& !lastAttacker.getLifeStats().isAlreadyDead()) {
+		if (!master.equals(lastAttacker) && !owner.equals(lastAttacker) && !master.isDead()
+			&& !lastAttacker.isDead()) {
 			ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 				@Override

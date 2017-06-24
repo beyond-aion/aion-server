@@ -7,7 +7,6 @@ import java.util.stream.Collectors;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIName;
-import com.aionemu.gameserver.model.actions.PlayerActions;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.skill.NpcSkillEntry;
@@ -48,7 +47,7 @@ public class CalindiFlamelordAI extends AggressiveNpcAI {
 
 	private void startSkillTask() {
 		trapTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
-			if (isAlreadyDead())
+			if (isDead())
 				cancelTask();
 			else {
 				startHallucinatoryVictoryEvent();
@@ -110,7 +109,7 @@ public class CalindiFlamelordAI extends AggressiveNpcAI {
 
 	private Player getRandomTarget() {
 		List<Player> players = getKnownList().getKnownPlayers().values().stream()
-			.filter(player -> !PlayerActions.isAlreadyDead(player) && PositionUtil.isInRange(player, getOwner(), 50))
+			.filter(player -> !player.isDead() && PositionUtil.isInRange(player, getOwner(), 50))
 			.collect(Collectors.toList());
 		return Rnd.get(players);
 	}

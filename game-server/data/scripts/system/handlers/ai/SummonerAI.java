@@ -112,7 +112,7 @@ public class SummonerAI extends AggressiveNpcAI {
 	}
 
 	protected void spawnHelpers(SummonGroup summonGroup) {
-		if (!isAlreadyDead() && checkBeforeSpawn()) {
+		if (!isDead() && checkBeforeSpawn()) {
 			int count = 0;
 			if (summonGroup.getCount() != 0) {
 				count = summonGroup.getCount();

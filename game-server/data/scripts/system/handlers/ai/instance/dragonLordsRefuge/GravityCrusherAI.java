@@ -48,7 +48,7 @@ public class GravityCrusherAI extends AggressiveNpcAI {
 
 			@Override
 			public void run() {
-				if (!isAlreadyDead()) {
+				if (!isDead()) {
 					if (skillTask != null)
 						skillTask.cancel(true);
 					AIActions.useSkill(GravityCrusherAI.this, 20967); // self destruct

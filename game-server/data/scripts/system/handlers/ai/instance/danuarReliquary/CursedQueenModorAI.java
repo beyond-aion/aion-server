@@ -26,7 +26,7 @@ public class CursedQueenModorAI extends AggressiveNpcAI {
 	protected void handleSpawned() {
 		super.handleSpawned();
 		ThreadPoolManager.getInstance().schedule(() -> {
-			if (!isAlreadyDead()) {
+			if (!isDead()) {
 				PacketSendUtility.broadcastMessage(getOwner(), 1500740);
 				getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21171, 1, 100, true)));
 			}

@@ -31,7 +31,7 @@ public class AdvanceCorridorShield extends NpcAI {
 	
 	private void broadcastAttack() {
 		if (canShout.compareAndSet(true, false)) {
-			if (getOwner() != null && !getOwner().getLifeStats().isAlreadyDead()
+			if (getOwner() != null && !getOwner().isDead()
 				&& getOwner().getWorldId() == 400030000) {
 				switch (getOwner().getNpcId()) {
 					case 297306:
@@ -56,7 +56,7 @@ public class AdvanceCorridorShield extends NpcAI {
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
 			@Override
 			public void run() {
-				if (getOwner() != null && !getOwner().getLifeStats().isAlreadyDead()) {
+				if (getOwner() != null && !getOwner().isDead()) {
 					canShout.set(true);
 				}
 			}

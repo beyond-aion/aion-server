@@ -6,7 +6,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
 import com.aionemu.gameserver.instance.handlers.InstanceID;
 import com.aionemu.gameserver.model.Race;
-import com.aionemu.gameserver.model.actions.NpcActions;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -186,7 +185,7 @@ public class DragonLordsRefuge extends GeneralInstanceHandler {
 
 	private boolean isSpawned(int npcId) {
 		Npc npc = getNpc(npcId);
-		if (!isInstanceDestroyed && npc != null && !NpcActions.isAlreadyDead(npc))
+		if (!isInstanceDestroyed && npc != null && !npc.isDead())
 			return true;
 		return false;
 	}
@@ -213,7 +212,7 @@ public class DragonLordsRefuge extends GeneralInstanceHandler {
 		int npcId = instanceRace == Race.ELYOS ? 219488 : 219491;
 		int skill = 20993 + id;
 		Npc npc = instance.getNpc(npcId);
-		if (npc != null && !NpcActions.isAlreadyDead(npc)) {
+		if (npc != null && !npc.isDead()) {
 			SkillEngine.getInstance().getSkill(npc, skill, 60, npc).useNoAnimationSkill(); // heal 7% + def buff
 			sendMsg(1401551);
 		}

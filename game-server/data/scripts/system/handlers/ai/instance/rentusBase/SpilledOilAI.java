@@ -26,7 +26,7 @@ public class SpilledOilAI extends GeneralNpcAI {
 
 			@Override
 			public void run() {
-				if (!isAlreadyDead()) {
+				if (!isDead()) {
 					count++;
 					if (count < 7) {
 						SkillEngine.getInstance().getSkill(getOwner(), 19658, 60, getOwner()).useNoAnimationSkill();

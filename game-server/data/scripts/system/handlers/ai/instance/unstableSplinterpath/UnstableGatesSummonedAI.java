@@ -74,7 +74,7 @@ public class UnstableGatesSummonedAI extends GeneralNpcAI {
 			@Override
 			public void run() {
 				Npc boss = getPosition().getWorldMapInstance().getNpc(219563);
-				if (isAlreadyDead() && getOwner() == null)
+				if (isDead() && getOwner() == null)
 					cancelEventTask();
 				else {
 					if (Rnd.get(1) == 0)

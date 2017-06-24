@@ -87,7 +87,7 @@ public class EngineerLahulahuAI extends AggressiveNpcAI {
 	}
 
 	private void useSkills() {
-		if (getPosition().isSpawned() && !isAlreadyDead() && isStart) {
+		if (getPosition().isSpawned() && !isDead() && isStart) {
 			int rnd = Rnd.get(1, 8);
 			switch (rnd) {
 				case 1:

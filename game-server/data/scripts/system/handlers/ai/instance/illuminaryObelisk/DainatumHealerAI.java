@@ -41,7 +41,7 @@ public class DainatumHealerAI extends GeneralNpcAI {
 
 			@Override
 			public void run() {
-				if (!isAlreadyDead()) {
+				if (!isDead()) {
 					SkillEngine.getInstance().getSkill(getOwner(), 21535, 1, getTarget()).useSkill();
 					scheduleHealTask();
 				}

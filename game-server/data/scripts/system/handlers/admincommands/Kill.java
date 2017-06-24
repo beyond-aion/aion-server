@@ -94,7 +94,7 @@ public class Kill extends AdminCommand {
 	}
 
 	private boolean kill(Player attacker, Creature target) {
-		if (target.getLifeStats().isAlreadyDead() || target.getLifeStats().isAboutToDie())
+		if (target.isDead() || target.getLifeStats().isAboutToDie())
 			return false;
 
 		target.getController().onAttack(target.isPvpTarget(attacker) && !target.isEnemy(attacker) ? target : attacker, target.getLifeStats().getMaxHp(),

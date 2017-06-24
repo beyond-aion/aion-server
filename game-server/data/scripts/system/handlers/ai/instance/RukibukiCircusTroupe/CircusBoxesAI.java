@@ -47,7 +47,7 @@ public class CircusBoxesAI extends NpcAI {
 
 			@Override
 			public void run() {
-				if (!isAlreadyDead()) {
+				if (!isDead()) {
 					int count = Rnd.get(3, 5);
 					for (int i = 0; i < count; i++) {
 						switch (getOwner().getNpcId()) {

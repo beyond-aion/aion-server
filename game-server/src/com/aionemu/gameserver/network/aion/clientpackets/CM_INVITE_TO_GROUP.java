@@ -37,7 +37,7 @@ public class CM_INVITE_TO_GROUP extends AionClientPacket {
 	@Override
 	protected void runImpl() {
 		final Player inviter = getConnection().getActivePlayer();
-		if (inviter.getLifeStats().isAlreadyDead()) {
+		if (inviter.isDead()) {
 			sendPacket(SM_SYSTEM_MESSAGE.STR_PARTY_CANT_INVITE_WHEN_DEAD());
 			return;
 		}

@@ -305,7 +305,7 @@ public class AhserionRaid {
 		for (Npc npc : World.getInstance().getWorldMap(400030000).getMainWorldMapInstance().getNpcs()) {
 			if (npc.getSpawn().getStaticId() >= 180 && npc.getSpawn().getStaticId() <= 183 || npc.isFlag())
 				continue;
-			if (!npc.getLifeStats().isAlreadyDead() && npc.getSpawn() instanceof AhserionsFlightSpawnTemplate) {
+			if (!npc.isDead() && npc.getSpawn() instanceof AhserionsFlightSpawnTemplate) {
 				AhserionsFlightSpawnTemplate template = (AhserionsFlightSpawnTemplate) npc.getSpawn();
 				if (template.getTeam() == id)
 					npc.getController().delete();

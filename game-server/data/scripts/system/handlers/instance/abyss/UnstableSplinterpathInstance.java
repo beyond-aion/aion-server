@@ -71,7 +71,7 @@ public class UnstableSplinterpathInstance extends GeneralInstanceHandler {
 				break;
 			case 283204: // ex 284022
 				Npc ebonsoul = getNpc(219552);
-				if (ebonsoul != null && !ebonsoul.getLifeStats().isAlreadyDead()) {
+				if (ebonsoul != null && !ebonsoul.isDead()) {
 					if (PositionUtil.isInRange(npc, ebonsoul, 5)) {
 						ebonsoul.getEffectController().removeEffect(19159);
 						deleteNpcs(instance.getNpcs(281907));
@@ -82,7 +82,7 @@ public class UnstableSplinterpathInstance extends GeneralInstanceHandler {
 				break;
 			case 283205: // ex 284023:
 				Npc rukril = getNpc(219551);
-				if (rukril != null && !rukril.getLifeStats().isAlreadyDead()) {
+				if (rukril != null && !rukril.isDead()) {
 					if (PositionUtil.isInRange(npc, rukril, 5)) {
 						rukril.getEffectController().removeEffect(19266);
 						deleteNpcs(instance.getNpcs(281908));
@@ -110,7 +110,7 @@ public class UnstableSplinterpathInstance extends GeneralInstanceHandler {
 				if (++killedPazuzuWorms == 4) {
 					killedPazuzuWorms = 0;
 					Npc pazuzu = getNpc(219554);
-					if (pazuzu != null && !pazuzu.getLifeStats().isAlreadyDead()) {
+					if (pazuzu != null && !pazuzu.isDead()) {
 						pazuzu.getEffectController().removeEffect(19145);
 						pazuzu.getEffectController().removeEffect(19291);
 					}
@@ -224,8 +224,8 @@ public class UnstableSplinterpathInstance extends GeneralInstanceHandler {
 		Npc gate1 = getNpc(219567);
 		Npc gate2 = getNpc(219579);
 		Npc gate3 = getNpc(219580);
-		if ((gate1 == null || gate1.getLifeStats().isAlreadyDead()) && (gate2 == null || gate2.getLifeStats().isAlreadyDead())
-			&& (gate3 == null || gate3.getLifeStats().isAlreadyDead())) {
+		if ((gate1 == null || gate1.isDead()) && (gate2 == null || gate2.isDead())
+			&& (gate3 == null || gate3.isDead())) {
 			deleteNpcs(instance.getNpcs(219565));// Summoned Orkanimum
 			deleteNpcs(instance.getNpcs(219566));// Summoned Lapilima
 		}

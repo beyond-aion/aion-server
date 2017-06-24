@@ -121,7 +121,7 @@ public class GeneralNpcAI extends NpcAI {
 		VisibleObject currentTarget = getTarget();
 		Creature mostHated = getAggroList().getMostHated();
 
-		if (mostHated == null || mostHated.getLifeStats().isAlreadyDead())
+		if (mostHated == null || mostHated.isDead())
 			return AttackIntention.FINISH_ATTACK;
 
 		if (currentTarget == null)

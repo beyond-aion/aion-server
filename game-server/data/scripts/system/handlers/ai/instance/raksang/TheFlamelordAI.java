@@ -59,7 +59,7 @@ public class TheFlamelordAI extends AggressiveNpcAI {
 
 			@Override
 			public void run() {
-				if (!isAlreadyDead()) {
+				if (!isDead()) {
 					switch (percent) {
 						case 40:
 							moveExecutor(282451);
@@ -95,7 +95,7 @@ public class TheFlamelordAI extends AggressiveNpcAI {
 
 			@Override
 			public void run() {
-				if (!isAlreadyDead()) {
+				if (!isDead()) {
 					int targetId = 0;
 					switch (executorId) {
 						case 282451:
@@ -132,7 +132,7 @@ public class TheFlamelordAI extends AggressiveNpcAI {
 
 			@Override
 			public void run() {
-				if (isAlreadyDead()) {
+				if (isDead()) {
 					cancelPhaseTask();
 				} else {
 					SkillEngine.getInstance().getSkill(getOwner(), 19925, 44, getOwner()).useNoAnimationSkill();

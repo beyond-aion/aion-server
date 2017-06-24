@@ -66,14 +66,14 @@ public class TriroansSummonAI extends AggressiveNpcAI {
 
 	private synchronized void useSkill() {
 		Npc boss = getPosition().getWorldMapInstance().getNpc(214669);
-		if (boss != null && checkLocation(getOwner()) && !boss.getLifeStats().isAlreadyDead()) {
+		if (boss != null && checkLocation(getOwner()) && !boss.isDead()) {
 			SkillEngine.getInstance().getSkill(boss, helperSkill, 50, boss).useSkill();
 		} else
 			checkSkillUse(boss);
 	}
 
 	private void checkSkillUse(final Npc boss) {
-		if (boss != null && checkDistance() == 0 && !boss.getLifeStats().isAlreadyDead()) {
+		if (boss != null && checkDistance() == 0 && !boss.isDead()) {
 			if (!boss.isCasting())
 				SkillEngine.getInstance().getSkill(boss, helperSkill, 50, boss).useSkill();
 			else {
@@ -81,7 +81,7 @@ public class TriroansSummonAI extends AggressiveNpcAI {
 
 					@Override
 					public void run() {
-						if (checkDistance() == 0 && !boss.getLifeStats().isAlreadyDead())
+						if (checkDistance() == 0 && !boss.isDead())
 							checkSkillUse(boss);
 					}
 				}, 5000);

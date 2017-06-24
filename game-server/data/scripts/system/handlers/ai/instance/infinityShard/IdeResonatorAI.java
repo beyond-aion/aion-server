@@ -29,7 +29,7 @@ public class IdeResonatorAI extends NpcAI {
 
 			@Override
 			public void run() {
-				if (getOwner() == null || getOwner().getLifeStats().isAlreadyDead() || hyperion == null || hyperion.getLifeStats().isAlreadyDead()) {
+				if (getOwner() == null || getOwner().isDead() || hyperion == null || hyperion.isDead()) {
 					return;
 				}
 				int firstBuff = 21257;
@@ -52,7 +52,7 @@ public class IdeResonatorAI extends NpcAI {
 
 			@Override
 			public void run() {
-				if (getOwner() == null || getOwner().getLifeStats().isAlreadyDead() || hyperion == null || hyperion.getLifeStats().isAlreadyDead()) {
+				if (getOwner() == null || getOwner().isDead() || hyperion == null || hyperion.isDead()) {
 					return;
 				}
 				int secondBuff = 0;

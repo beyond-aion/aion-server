@@ -163,7 +163,7 @@ public abstract class Base<T extends BaseLocation> {
 
 	private void despawnAssaulter() {
 		for (Npc npc : assaulter) {
-			if (npc != null && !npc.getLifeStats().isAlreadyDead())
+			if (npc != null && !npc.isDead())
 				npc.getController().delete();
 		}
 		assaulter.clear();
@@ -221,7 +221,7 @@ public abstract class Base<T extends BaseLocation> {
 	public void despawnByHandlerType(SpawnHandlerType type) {
 		for (Npc npc : World.getInstance().getBaseSpawns(id)) {
 			if (npc != null && npc.getSpawn().getHandlerType() == type) {
-				if (!npc.getLifeStats().isAlreadyDead())
+				if (!npc.isDead())
 					npc.getController().delete();
 				else
 					npc.getController().cancelTask(TaskId.RESPAWN);

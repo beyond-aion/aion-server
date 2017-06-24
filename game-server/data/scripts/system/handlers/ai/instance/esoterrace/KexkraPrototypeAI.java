@@ -33,7 +33,7 @@ public class KexkraPrototypeAI extends AggressiveNpcAI {
 
 					@Override
 					public void accept(Player player) {
-						if (player.isOnline() && !player.getLifeStats().isAlreadyDead()) {
+						if (player.isOnline() && !player.isDead()) {
 							PacketSendUtility.sendPacket(player, new SM_PLAY_MOVIE(0, 472));
 						}
 					}

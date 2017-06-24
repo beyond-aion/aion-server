@@ -119,7 +119,7 @@ public class PlayerLeaveWorldService {
 			player.setPrisonTimer(prisonTimer);
 			log.debug("Update prison timer to " + prisonTimer / 1000 + " seconds !");
 		}
-		if (player.getLifeStats().isAlreadyDead()) {
+		if (player.isDead()) {
 			if (player.isInInstance() || player.getPanesterraTeam() != null)
 				PlayerReviveService.instanceRevive(player);
 			else

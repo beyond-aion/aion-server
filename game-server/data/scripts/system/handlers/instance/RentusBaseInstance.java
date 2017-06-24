@@ -185,12 +185,12 @@ public class RentusBaseInstance extends GeneralInstanceHandler {
 	}
 
 	private void deleteNpc(int npcId) {
-		if (getNpc(npcId) != null && !getNpc(npcId).getLifeStats().isAlreadyDead())
+		if (getNpc(npcId) != null && !getNpc(npcId).isDead())
 			getNpc(npcId).getController().delete();
 	}
 
 	private boolean isDeadNpc(int npcId) {
-		return (getNpc(npcId) == null || getNpc(npcId).getLifeStats().isAlreadyDead());
+		return (getNpc(npcId) == null || getNpc(npcId).isDead());
 	}
 
 	@Override

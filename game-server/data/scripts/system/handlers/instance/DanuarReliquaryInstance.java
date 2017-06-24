@@ -142,7 +142,7 @@ public class DanuarReliquaryInstance extends GeneralInstanceHandler {
 	}
 
 	private boolean isDeadNpc(int npcId) {
-		return (getNpc(npcId) == null || getNpc(npcId).getLifeStats().isAlreadyDead());
+		return (getNpc(npcId) == null || getNpc(npcId).isDead());
 	}
 
 	@Override
@@ -153,7 +153,7 @@ public class DanuarReliquaryInstance extends GeneralInstanceHandler {
 	@Override
 	public void onPlayerLogOut(Player player) {
 		super.onPlayerLogOut(player);
-		if (player.getLifeStats().isAlreadyDead()) {
+		if (player.isDead()) {
 			TeleportService.moveToBindLocation(player);
 		}
 	}

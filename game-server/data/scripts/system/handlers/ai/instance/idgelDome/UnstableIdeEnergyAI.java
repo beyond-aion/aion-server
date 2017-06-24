@@ -27,7 +27,7 @@ public class UnstableIdeEnergyAI extends NpcAI {
 
 			@Override
 			public void run() {
-				if (isAlreadyDead()) {
+				if (isDead()) {
 					cancelTask();
 				} else {
 					SkillEngine.getInstance().getSkill(getOwner(), 21559, 65, getOwner()).useWithoutPropSkill();

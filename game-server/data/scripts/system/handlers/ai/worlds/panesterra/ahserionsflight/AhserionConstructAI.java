@@ -43,7 +43,7 @@ public class AhserionConstructAI extends NpcAI {
 
 	private void broadcastAttack() {
 		if (canShout.compareAndSet(true, false)) {
-			if (getOwner() != null && !getOwner().getLifeStats().isAlreadyDead() && getOwner().getWorldId() == 400030000) {
+			if (getOwner() != null && !getOwner().isDead() && getOwner().getWorldId() == 400030000) {
 				switch (getOwner().getSpawn().getStaticId()) {
 					case 180:
 						PacketSendUtility.broadcastToMap(getOwner(), new SM_SYSTEM_MESSAGE(1402260));
@@ -68,7 +68,7 @@ public class AhserionConstructAI extends NpcAI {
 
 			@Override
 			public void run() {
-				if (getOwner() != null && !getOwner().getLifeStats().isAlreadyDead()) {
+				if (getOwner() != null && !getOwner().isDead()) {
 					canShout.set(true);
 				}
 			}

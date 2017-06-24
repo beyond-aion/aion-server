@@ -32,7 +32,7 @@ public class UnstableYamenessPortalSummonedAI extends AggressiveNpcAI {
 
 				@Override
 				public void run() {
-					if (!isAlreadyDead() && getOwner() != null) {
+					if (!isDead() && getOwner() != null) {
 						spawn(219565, getOwner().getX() + 3, getOwner().getY() - 3, getOwner().getZ(), (byte) 0);
 						spawn(219566, getOwner().getX() - 3, getOwner().getY() + 3, getOwner().getZ(), (byte) 0);
 					}

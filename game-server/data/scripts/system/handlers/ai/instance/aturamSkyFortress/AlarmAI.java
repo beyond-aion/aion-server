@@ -50,7 +50,7 @@ public class AlarmAI extends AggressiveNpcAI {
 
 						@Override
 						public void run() {
-							if (!isAlreadyDead()) {
+							if (!isDead()) {
 								despawn();
 							}
 						}

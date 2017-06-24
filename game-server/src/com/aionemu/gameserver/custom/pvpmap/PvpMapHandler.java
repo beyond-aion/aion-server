@@ -192,7 +192,7 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 
 	private void scheduleRandomBossDespawn(final Npc npc) {
 		tasks.add(ThreadPoolManager.getInstance().schedule(() -> {
-			if (npc != null && !npc.getLifeStats().isAboutToDie() && !npc.getLifeStats().isAlreadyDead()) {
+			if (npc != null && !npc.getLifeStats().isAboutToDie() && !npc.isDead()) {
 				npc.getController().delete();
 				randomBossAlive = false;
 			}
@@ -221,7 +221,7 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 			ThreadPoolManager.getInstance().schedule(() -> {
 				p.getObserveController().removeObserver(observer);
 				p.getController().cancelTask(TaskId.SKILL_USE);
-				if (!p.getController().isInCombat() && !p.getLifeStats().isAboutToDie() && !p.getLifeStats().isAlreadyDead()) {
+				if (!p.getController().isInCombat() && !p.getLifeStats().isAboutToDie() && !p.isDead()) {
 					if (isLeaving) {
 						removePlayer(p);
 					} else {
@@ -266,7 +266,7 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 	}
 
 	private boolean checkState(Player p) {
-		return !p.getController().isInCombat() && !p.getLifeStats().isAboutToDie() && !p.getLifeStats().isAlreadyDead() && !p.isLooting()
+		return !p.getController().isInCombat() && !p.getLifeStats().isAboutToDie() && !p.isDead() && !p.isLooting()
 			&& !p.isInGlidingState() && !p.isFlying() && !p.isUsingFlyTeleport() && !p.isInPlayerMode(PlayerMode.WINDSTREAM)
 			&& !p.isInPlayerMode(PlayerMode.RIDE) && !p.hasStore() && p.getCastingSkill() == null
 			&& !p.getEffectController().isInAnyAbnormalState(AbnormalState.CANT_ATTACK_STATE)
@@ -491,7 +491,7 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 
 	private synchronized void removePlayer(Player p) {
 		updateJoinOrLeaveTime(p);
-		if (p.getLifeStats().isAlreadyDead()) {
+		if (p.isDead()) {
 			PacketSendUtility.broadcastPacket(p, new SM_EMOTION(p, EmotionType.RESURRECT), true);
 			PlayerReviveService.revive(p, 25, 25, true, 0);
 		}

@@ -32,7 +32,7 @@ public class MonolithicAmbusherAI extends AggressiveNpcAI {
 	private void help(Creature creature) {
 		getKnownList().forEachNpc(npc -> {
 			if (isInRange(npc, 60)) {
-				if (!npc.getLifeStats().isAlreadyDead() && npc.getNpcId() == 216215 && (int) npc.getSpawn().getY() == (int) getSpawnTemplate().getY()) {
+				if (!npc.isDead() && npc.getNpcId() == 216215 && (int) npc.getSpawn().getY() == (int) getSpawnTemplate().getY()) {
 					npc.getAi().onCreatureEvent(AIEventType.CREATURE_AGGRO, creature);
 				}
 			}

@@ -56,7 +56,7 @@ public class BrigadeGeneralShebaAI extends AggressiveNpcAI {
 			spawn(284436, 918.12497f, 890.17401f, 412.1f, (byte) 61);
 		}
 		ThreadPoolManager.getInstance().schedule(() -> {
-			if (!isAlreadyDead())
+			if (!isDead())
 				getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21186, 1, 100, true)));
 		}, 7000);
 	}

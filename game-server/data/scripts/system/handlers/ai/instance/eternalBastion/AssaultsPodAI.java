@@ -55,7 +55,7 @@ public class AssaultsPodAI extends NpcAI {
 
 			@Override
 			public void run() {
-				if (!isAlreadyDead()) {
+				if (!isDead()) {
 					spawnSummons();
 				}
 			}

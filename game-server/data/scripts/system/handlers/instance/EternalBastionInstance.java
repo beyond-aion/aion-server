@@ -349,7 +349,7 @@ public class EternalBastionInstance extends GeneralInstanceHandler {
 	}
 
 	private boolean isDead(Npc npc) {
-		return (npc == null || npc.getLifeStats().isAlreadyDead());
+		return (npc == null || npc.isDead());
 	}
 
 	@Override

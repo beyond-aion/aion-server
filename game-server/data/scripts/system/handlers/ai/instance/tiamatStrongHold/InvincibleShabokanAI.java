@@ -40,7 +40,7 @@ public class InvincibleShabokanAI extends AggressiveNpcAI {
 
 			@Override
 			public void run() {
-				if (isAlreadyDead())
+				if (isDead())
 					cancelTask();
 				else {
 					chooseRandomEvent();

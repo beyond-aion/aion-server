@@ -61,7 +61,7 @@ public class BrigadeGeneralTerathAI extends AggressiveNpcAI {
 
 			@Override
 			public void run() {
-				if (isAlreadyDead())
+				if (isDead())
 					cancelskillTask();
 				else {
 					gravityDistortionEvent();
@@ -130,7 +130,7 @@ public class BrigadeGeneralTerathAI extends AggressiveNpcAI {
 						isGravityEvent = false;
 						startSkillTask();
 						Creature creature = getAggroList().getMostHated();
-						if (creature == null || creature.getLifeStats().isAlreadyDead() || !getOwner().canSee(creature)) {
+						if (creature == null || creature.isDead() || !getOwner().canSee(creature)) {
 							setStateIfNot(AIState.FIGHT);
 							think();
 						} else {

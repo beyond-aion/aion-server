@@ -42,7 +42,7 @@ public class CM_ATTACK extends AionClientPacket {
 	@Override
 	protected void runImpl() {
 		Player player = getConnection().getActivePlayer();
-		if (player.getLifeStats().isAlreadyDead())
+		if (player.isDead())
 			return;
 
 		if (player.isProtectionActive())

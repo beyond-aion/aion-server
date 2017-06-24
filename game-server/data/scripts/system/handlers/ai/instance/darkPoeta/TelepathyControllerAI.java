@@ -34,7 +34,7 @@ public class TelepathyControllerAI extends AggressiveNpcAI {
 		super.handleAttack(creature);
 		if (isAggred.compareAndSet(false, true)) {
 			spawnTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
-				if (!getLifeStats().isAlreadyDead()) {
+				if (!isDead()) {
 					Npc spawn = spawnHelper();
 					spawn.getKnownList().forEachPlayer(p -> spawn.getAggroList().addHate(p, 10));
 				}

@@ -7,7 +7,6 @@ import com.aionemu.gameserver.ai.AIState;
 import com.aionemu.gameserver.ai.AbstractAI;
 import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.model.EmotionType;
-import com.aionemu.gameserver.model.actions.NpcActions;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
@@ -30,7 +29,7 @@ public class PadmarashkaEggAI extends NpcAI {
 
 	@Override
 	protected void handleDied() {
-		if (protector != null && !NpcActions.isAlreadyDead(protector)) {
+		if (protector != null && !protector.isDead()) {
 			SkillEngine.getInstance().getSkill(protector, 20176, 55, protector).useNoAnimationSkill(); // apply wrath buff
 		}
 		super.handleDied();
@@ -98,7 +97,7 @@ public class PadmarashkaEggAI extends NpcAI {
 
 			@Override
 			public void run() {
-				if (getOwner() != null && !isAlreadyDead()) {
+				if (getOwner() != null && !isDead()) {
 					AIActions.deleteOwner(PadmarashkaEggAI.this);
 					attackPlayer((Npc) spawn(282616, getOwner().getX(), getOwner().getY(), getOwner().getZ(), (byte) 0));
 				}
@@ -112,7 +111,7 @@ public class PadmarashkaEggAI extends NpcAI {
 
 			@Override
 			public void run() {
-				if (getOwner() != null && !isAlreadyDead()) {
+				if (getOwner() != null && !isDead()) {
 					AIActions.deleteOwner(PadmarashkaEggAI.this);
 					attackPlayer((Npc) spawn(282620, getOwner().getX(), getOwner().getY(), getOwner().getZ(), (byte) 0));
 				}

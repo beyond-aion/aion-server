@@ -33,7 +33,7 @@ public class NidalberBalaurAI extends AggressiveNpcAI {
 		if (mapId != 310040000 && mapId != 320040000)
 			return;
 		questNpc = getOwner().getPosition().getWorldMapInstance().getNpc(mapId == 310040000 ? 204044 : 204432);
-		if (questNpc != null && !questNpc.getLifeStats().isAlreadyDead()) {
+		if (questNpc != null && !questNpc.isDead()) {
 			setNewSpawnPosition();
 			moveToQuestNpc();
 		} else {
@@ -71,7 +71,7 @@ public class NidalberBalaurAI extends AggressiveNpcAI {
 	private void addHate() {
 		if (getOwner().getPosition().getMapId() != 310040000 && getOwner().getPosition().getMapId() != 320040000)
 			return;
-		if (questNpc == null || questNpc.getLifeStats().isAlreadyDead()) {
+		if (questNpc == null || questNpc.isDead()) {
 			getOwner().getController().delete();
 			return;
 		}

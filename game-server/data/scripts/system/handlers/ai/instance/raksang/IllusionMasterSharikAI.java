@@ -79,7 +79,7 @@ public class IllusionMasterSharikAI extends AggressiveNpcAI {
 
 			@Override
 			public void run() {
-				if (isAlreadyDead()) {
+				if (isDead()) {
 					cancelPhaseTask();
 				} else {
 					PacketSendUtility.broadcastMessage(getOwner(), 1401114);
@@ -88,14 +88,14 @@ public class IllusionMasterSharikAI extends AggressiveNpcAI {
 
 						@Override
 						public void run() {
-							if (!isAlreadyDead()) {
+							if (!isDead()) {
 								SkillEngine.getInstance().getSkill(getOwner(), 19901, 44, getOwner()).useNoAnimationSkill();
 								if (percent <= 50) {
 									ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 										@Override
 										public void run() {
-											if (!isAlreadyDead()) {
+											if (!isDead()) {
 												SkillEngine.getInstance().getSkill(getOwner(), 19903, 44, getOwner()).useNoAnimationSkill();
 											}
 										}

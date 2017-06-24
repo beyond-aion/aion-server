@@ -71,9 +71,9 @@ public class SimpleAttackManager {
 		}
 		Npc npc = npcAI.getOwner();
 		Creature target;
-		if (npc.getTarget() instanceof Creature && !(target = (Creature) npc.getTarget()).getLifeStats().isAlreadyDead()) {
+		if (npc.getTarget() instanceof Creature && !(target = (Creature) npc.getTarget()).isDead()) {
 			Creature mostHated = npc.getAggroList().getMostHated();
-			if (mostHated != null && !mostHated.getLifeStats().isAlreadyDead() && !target.equals(mostHated)) {
+			if (mostHated != null && !mostHated.isDead() && !target.equals(mostHated)) {
 				npcAI.onCreatureEvent(AIEventType.TARGET_CHANGED, mostHated);
 				return;
 			}

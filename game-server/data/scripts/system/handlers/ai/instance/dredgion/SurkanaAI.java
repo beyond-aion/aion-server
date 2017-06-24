@@ -23,7 +23,7 @@ public class SurkanaAI extends OneDmgNoActionAI {
 
 	private void checkForSupport(Creature creature) {
 		getKnownList().forEachNpc(npc -> {
-			if (isInRange(npc, 25) && !npc.getLifeStats().isAlreadyDead())
+			if (!npc.isDead() && isInRange(npc, 25))
 				npc.getAi().onCreatureEvent(AIEventType.CREATURE_AGGRO, creature);
 		});
 	}

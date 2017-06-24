@@ -81,7 +81,7 @@ public class MonsterRaid {
 
 	private final void scheduleDespawn() {
 		despawnTask = ThreadPoolManager.getInstance().schedule(() -> {
-			if (!boss.getLifeStats().isAlreadyDead())
+			if (!boss.isDead())
 				MonsterRaidService.getInstance().stopRaid(getLocationId());
 		}, 3600 * 1000);
 	}

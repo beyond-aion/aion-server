@@ -7,7 +7,6 @@ import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.aionemu.gameserver.ai.AIName;
-import com.aionemu.gameserver.model.actions.PlayerActions;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -85,7 +84,7 @@ public class AethicFieldGeneratorAI extends GeneralNpcAI {
 
 			@Override
 			public void run() {
-				if (isAlreadyDead()) {
+				if (isDead()) {
 					cancelAggroTask();
 				} else {
 					if (!isInRangePlayer()) {
@@ -100,7 +99,7 @@ public class AethicFieldGeneratorAI extends GeneralNpcAI {
 
 	private boolean isInRangePlayer() {
 		for (Player player : getKnownList().getKnownPlayers().values()) {
-			if (isInRange(player, 40) && !PlayerActions.isAlreadyDead(player) && getOwner().canSee(player)) {
+			if (isInRange(player, 40) && !player.isDead() && getOwner().canSee(player)) {
 				return true;
 			}
 		}

@@ -24,21 +24,6 @@ public abstract class VisibleObject extends AionObject {
 	private final VisibleObjectTemplate objectTemplate;
 
 	/**
-	 * Constructor.
-	 *
-	 * @param objId
-	 * @param objectTemplate
-	 */
-	public VisibleObject(int objId, VisibleObjectController<? extends VisibleObject> controller, SpawnTemplate spawnTemplate,
-		VisibleObjectTemplate objectTemplate, WorldPosition position) {
-		super(objId);
-		this.controller = controller;
-		this.position = position;
-		this.spawn = spawnTemplate;
-		this.objectTemplate = objectTemplate;
-	}
-
-	/**
 	 * Position of object in the world.
 	 */
 	protected WorldPosition position;
@@ -62,6 +47,21 @@ public abstract class VisibleObject extends AionObject {
 	 * Spawn template of this visibleObject. .
 	 */
 	private SpawnTemplate spawn;
+
+	/**
+	 * Constructor.
+	 *
+	 * @param objId
+	 * @param objectTemplate
+	 */
+	public VisibleObject(int objId, VisibleObjectController<? extends VisibleObject> controller, SpawnTemplate spawnTemplate,
+		VisibleObjectTemplate objectTemplate, WorldPosition position) {
+		super(objId);
+		this.controller = controller;
+		this.position = position;
+		this.spawn = spawnTemplate;
+		this.objectTemplate = objectTemplate;
+	}
 
 	@Override
 	public String getName() {

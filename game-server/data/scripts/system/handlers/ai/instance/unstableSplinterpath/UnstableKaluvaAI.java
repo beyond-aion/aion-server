@@ -6,7 +6,6 @@ import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.AIState;
 import com.aionemu.gameserver.ai.manager.EmoteManager;
 import com.aionemu.gameserver.model.EmotionType;
-import com.aionemu.gameserver.model.actions.NpcActions;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
@@ -70,7 +69,7 @@ public class UnstableKaluvaAI extends AggressiveNpcAI {
 				public void run() {
 					canThink = true;
 					Creature creature = getAggroList().getMostHated();
-					if (creature == null || !getOwner().canSee(creature) || NpcActions.isAlreadyDead(creature)) {
+					if (creature == null || !getOwner().canSee(creature) || creature.isDead()) {
 						setStateIfNot(AIState.FIGHT);
 						think();
 					} else {
