@@ -117,25 +117,22 @@ public class FearEffect extends EffectTemplate {
 
 		@Override
 		public void run() {
-			if (effected.getEffectController().isUnderFear()) {
+			if (effected.getEffectController().isUnderFear() && PositionUtil.isInRange(effected, effector, 40)) {
 				float x = effected.getX();
 				float y = effected.getY();
-				if (!PositionUtil.isInRange(effected, effector, 40))
-					return;
 				float angle = PositionUtil.calculateAngleFrom(effector, effected);
-				byte moveAwayHeading = PositionUtil.convertAngleToHeading(angle);
 				double radian = Math.toRadians(angle);
 				float maxDistance = effected.getGameStats().getMovementSpeedFloat();
 				float x1 = (float) (Math.cos(radian) * maxDistance);
 				float y1 = (float) (Math.sin(radian) * maxDistance);
 				Vector3f closestCollision = GeoService.getInstance().getClosestCollision(effected, x + x1, y + y1, effected.getZ());
-				if (effected.isFlying()) {
+				if (effected.isFlying())
 					closestCollision.setZ(effected.getZ());
-				}
 				if (effected instanceof Npc) {
 					((Npc) effected).getMoveController().resetMove();
 					((Npc) effected).getMoveController().moveToPoint(closestCollision.getX(), closestCollision.getY(), closestCollision.getZ());
 				} else {
+					byte moveAwayHeading = PositionUtil.convertAngleToHeading(angle);
 					effected.getMoveController().setNewDirection(closestCollision.getX(), closestCollision.getY(), closestCollision.getZ(), moveAwayHeading);
 					effected.getMoveController().startMovingToDestination();
 				}

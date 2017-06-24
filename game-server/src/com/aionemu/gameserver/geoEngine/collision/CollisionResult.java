@@ -61,6 +61,7 @@ public class CollisionResult implements Comparable<CollisionResult> {
 		this.distance = dist;
 	}
 
+	@Override
 	public int compareTo(CollisionResult other) {
 		if (distance < other.distance)
 			return -1;

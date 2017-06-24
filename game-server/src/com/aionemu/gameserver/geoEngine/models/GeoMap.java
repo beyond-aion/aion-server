@@ -27,6 +27,8 @@ import com.aionemu.gameserver.geoEngine.scene.mesh.DoorGeometry;
 public class GeoMap extends Node {
 
 	private static final Logger log = LoggerFactory.getLogger(GeoMap.class);
+	public static final float MAX_Z = 4000;
+	public static final float MIN_Z = 0;
 
 	private short[] terrainData;
 	private List<BoundingBox> tmpBox = new ArrayList<>();
@@ -38,7 +40,7 @@ public class GeoMap extends Node {
 			for (int y = 0; y < worldSize; y += 256) {
 				Node geoNode = new Node("");
 				geoNode.setCollisionFlags((short) (CollisionIntention.ALL.getId() << 8));
-				tmpBox.add(new BoundingBox(new Vector3f(x, y, 0), new Vector3f(x + 256, y + 256, 4000)));
+				tmpBox.add(new BoundingBox(new Vector3f(x, y, MIN_Z), new Vector3f(x + 256, y + 256, MAX_Z)));
 				super.attachChild(geoNode);
 			}
 		}
@@ -104,21 +106,14 @@ public class GeoMap extends Node {
 	}
 
 	/**
-	 * @return The highest found Z coordinate at the given position or {@link Float#NaN} if not found.
-	 */
-	public float getZ(float x, float y) {
-		return getZ(x, y, 4000, 0, 1);
-	}
-
-	/**
 	 * @return The surface Z coordinate nearest to the given zMax value at the given position or {@link Float#NaN} if not found / less than zMin.
 	 */
 	public float getZ(float x, float y, float zMax, float zMin, int instanceId) {
 		CollisionResults results = new CollisionResults(CollisionIntention.PHYSICAL.getId(), false, instanceId);
-		Vector3f pos = new Vector3f(x, y, zMax);
-		Vector3f dir = new Vector3f(x, y, zMin);
-		dir.subtractLocal(pos).normalizeLocal();
-		Ray r = new Ray(pos, dir);
+		Vector3f origin = new Vector3f(x, y, zMax);
+		Vector3f target = new Vector3f(x, y, zMin);
+		target.subtractLocal(origin).normalizeLocal(); // convert to direction vector
+		Ray r = new Ray(origin, target);
 		r.setLimit(zMax - zMin);
 		collideWith(r, results);
 		Vector3f terrain = null;
@@ -139,41 +134,51 @@ public class GeoMap extends Node {
 
 	public Vector3f getClosestCollision(float x, float y, float z, float targetX, float targetY, float targetZ, boolean atNearGroundZ, int instanceId,
 		byte intentions) {
-		CollisionResult result = getCollisions(x, y, z + 1, targetX, targetY, targetZ + 1, instanceId, intentions).getClosestCollision();
-		if (result == null) {
+		int zOffset = 1; // check for collisions 1m above input z
+		float collisionOffset = 0.5f; // collision points will be 0.5m in front of the real contact
+		Vector3f origin = new Vector3f(x, y, z + zOffset);
+		CollisionResult closestCollision = getCollisions(origin, targetX, targetY, targetZ + zOffset, instanceId, intentions).getClosestCollision();
+		if (closestCollision == null) {
 			Vector3f end = new Vector3f(targetX, targetY, targetZ);
-			if (atNearGroundZ)
-				findAndSetGroundZNearPoint(end, instanceId);
+			if (atNearGroundZ) {
+				float geoZ = getZ(end.x, end.y, end.z + 1, end.z - 2, instanceId);
+				if (!Float.isNaN(geoZ))
+					end.z = geoZ;
+			}
 			return end;
+		} else if (closestCollision.getDistance() <= collisionOffset + 0.05f) { // avoid climbing steep hills or passing through walls
+			return new Vector3f(x, y, z);
 		}
-
-		Vector3f contactPoint = result.getContactPoint();
-		contactPoint.z -= 1; // -1m (offset from getCollisions call)
-		if (atNearGroundZ)
-			findAndSetGroundZNearPoint(contactPoint, instanceId);
+		Vector3f contactPoint = closestCollision.getContactPoint();
+		if (atNearGroundZ) {
+			Vector3f direction = contactPoint.subtract(origin).normalize();
+			contactPoint.subtractLocal(direction.multLocal(collisionOffset)); // set contact point back for proper ground calculation
+			float geoZ = getZ(contactPoint.x, contactPoint.y, contactPoint.z, contactPoint.z - 3, instanceId);
+			if (!Float.isNaN(geoZ))
+				contactPoint.z = geoZ;
+			else
+				contactPoint.z -= zOffset;
+		} else {
+			contactPoint.z -= zOffset;
+		}
 
 		return contactPoint;
 	}
 
-	private void findAndSetGroundZNearPoint(Vector3f point, int instanceId) {
-		float geoZ = getZ(point.x, point.y, point.z + 1, point.z - 2, instanceId);
-		if (!Float.isNaN(geoZ))
-			point.setZ(geoZ);
+	public CollisionResults getCollisions(float x, float y, float z, float targetX, float targetY, float targetZ, int instanceId, byte intentions) {
+		return getCollisions(new Vector3f(x, y, z), targetX, targetY, targetZ, instanceId, intentions);
 	}
 
-	public CollisionResults getCollisions(float x, float y, float z, float targetX, float targetY, float targetZ, int instanceId, byte intentions) {
-		Vector3f pos = new Vector3f(x, y, z);
-		Vector3f dir = new Vector3f(targetX, targetY, targetZ);
-
+	private CollisionResults getCollisions(Vector3f origin, float targetX, float targetY, float targetZ, int instanceId, byte intentions) {
 		CollisionResults results = new CollisionResults(intentions, false, instanceId);
-
-		float limit = pos.distance(dir);
-		dir.subtractLocal(pos).normalizeLocal();
-		Ray r = new Ray(pos, dir);
+		Vector3f target = new Vector3f(targetX, targetY, targetZ);
+		float limit = origin.distance(target);
+		target.subtractLocal(origin).normalizeLocal(); // convert to direction vector
+		Ray r = new Ray(origin, target);
 		r.setLimit(limit);
-		Vector3f terrain = calculateTerrainCollision(x, y, targetX, targetY, r);
+		Vector3f terrain = calculateTerrainCollision(origin.x, origin.y, targetX, targetY, r);
 		if (terrain != null) {
-			CollisionResult result = new CollisionResult(terrain, terrain.distance(pos));
+			CollisionResult result = new CollisionResult(terrain, terrain.distance(origin));
 			results.addCollision(result);
 		}
 
@@ -240,13 +245,13 @@ public class GeoMap extends Node {
 	}
 
 	public boolean canSee(float x, float y, float z, float targetX, float targetY, float targetZ, int instanceId) {
-		Vector3f pos = new Vector3f(x, y, z);
-		Vector3f dir = new Vector3f(targetX, targetY, targetZ);
-		float distance = pos.distance(dir);
+		Vector3f origin = new Vector3f(x, y, z);
+		Vector3f target = new Vector3f(targetX, targetY, targetZ);
+		float distance = origin.distance(target);
 		if (distance > 80f)
 			return false;
-		dir.subtractLocal(pos).normalizeLocal();
-		Ray r = new Ray(pos, dir);
+		target.subtractLocal(origin).normalizeLocal(); // convert to direction vector
+		Ray r = new Ray(origin, target);
 		r.setLimit(distance);
 		float x2 = x - targetX;
 		float y2 = y - targetY;

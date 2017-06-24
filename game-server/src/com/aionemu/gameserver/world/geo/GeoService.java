@@ -7,6 +7,7 @@ import com.aionemu.gameserver.configs.main.GeoDataConfig;
 import com.aionemu.gameserver.geoEngine.collision.CollisionIntention;
 import com.aionemu.gameserver.geoEngine.collision.CollisionResults;
 import com.aionemu.gameserver.geoEngine.math.Vector3f;
+import com.aionemu.gameserver.geoEngine.models.GeoMap;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.siege.SiegeNpc;
@@ -54,7 +55,7 @@ public class GeoService {
 	 * @return The highest found surface Z coordinate at the given position or {@link Float#NaN} if not found.
 	 */
 	public float getZ(int worldId, float x, float y) {
-		return geoData.getMap(worldId).getZ(x, y);
+		return getZ(worldId, x, y, GeoMap.MAX_Z, GeoMap.MIN_Z, 1);
 	}
 
 	/**

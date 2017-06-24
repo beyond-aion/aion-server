@@ -317,14 +317,13 @@ public final class BIHNode {
 					float t_world = new Ray(o, d).intersects(v1, v2, v3);
 					t = t_world;
 
-					Vector3f contactNormal = Triangle.computeTriangleNormal(v1, v2, v3, null);
 					Vector3f contactPoint = new Vector3f(d).multLocal(t).addLocal(o);
 					float worldSpaceDist = o.distance(contactPoint);
 					// fix invisible walls
 					if (worldSpaceDist > r.limit)
 						continue;
 					CollisionResult cr = new CollisionResult(contactPoint, worldSpaceDist);
-					cr.setContactNormal(contactNormal);
+					cr.setContactNormal(Triangle.computeTriangleNormal(v1, v2, v3, null));
 					results.addCollision(cr);
 					cols++;
 					if (results.isOnlyFirst())

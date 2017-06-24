@@ -15,11 +15,6 @@ public class DummyGeoMap extends GeoMap {
 	}
 
 	@Override
-	public final float getZ(float x, float y) {
-		return Float.NaN;
-	}
-
-	@Override
 	public final float getZ(float x, float y, float zMax, float zMin, int instanceId) {
 		return Float.NaN;
 	}
