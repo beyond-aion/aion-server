@@ -575,6 +575,7 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 	@Override
 	public void onDespawn() {
 		cancelTask(TaskId.DECAY);
+		getOwner().getEffectController().removeAllEffects();
 		getOwner().getMoveController().abortMove();
 		getOwner().getAggroList().clear();
 	}
