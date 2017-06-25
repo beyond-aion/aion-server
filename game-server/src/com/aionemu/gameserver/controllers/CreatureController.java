@@ -338,8 +338,8 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 		/**
 		 * Check all prerequisites
 		 */
-		if (!skipChecks && (target == null || getOwner().isDead() || getOwner().getLifeStats().isAboutToDie()
-			|| !getOwner().canAttack() || !getOwner().isSpawned())) {
+		if (!skipChecks
+			&& (target == null || getOwner().isDead() || getOwner().getLifeStats().isAboutToDie() || !getOwner().canAttack() || !getOwner().isSpawned())) {
 			return;
 		}
 
@@ -575,7 +575,6 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 	@Override
 	public void onDespawn() {
 		cancelTask(TaskId.DECAY);
-		getOwner().getEffectController().removeAllEffects();
 		getOwner().getMoveController().abortMove();
 		getOwner().getAggroList().clear();
 	}

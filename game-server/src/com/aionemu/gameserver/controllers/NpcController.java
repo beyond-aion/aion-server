@@ -109,6 +109,7 @@ public class NpcController extends CreatureController<Npc> {
 	public void onDespawn() {
 		Npc owner = getOwner();
 		cancelCurrentSkill(null);
+		owner.getEffectController().removeAllEffects();
 		DropService.getInstance().unregisterDrop(owner);
 		owner.getAi().onGeneralEvent(AIEventType.DESPAWNED);
 		getOwner().getObserveController().clear();
