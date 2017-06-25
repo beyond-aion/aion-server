@@ -6,6 +6,7 @@ import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.ai.event.AIEventType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.geo.GeoService;
@@ -54,9 +55,10 @@ public class SimpleAttackManager {
 	}
 
 	public static boolean isTargetInAttackRange(Npc npc) {
-		if (npc.getTarget() == null || !(npc.getTarget() instanceof Creature))
+		VisibleObject target = npc.getTarget();
+		if (!(target instanceof Creature))
 			return false;
-		return PositionUtil.isInAttackRange(npc, (Creature) npc.getTarget(), npc.getGameStats().getAttackRange().getCurrent() / 1000f);
+		return PositionUtil.isInAttackRange(npc, (Creature) target, npc.getGameStats().getAttackRange().getCurrent() / 1000f);
 	}
 
 	/**

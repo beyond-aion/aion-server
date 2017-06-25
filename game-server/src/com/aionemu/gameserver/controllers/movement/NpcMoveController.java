@@ -154,9 +154,8 @@ public class NpcMoveController extends CreatureMoveController<Npc> {
 		switch (destination) {
 			case TARGET_OBJECT:
 				VisibleObject target = owner.getTarget();// todo no target
-				if (!(target instanceof Creature)) {
+				if (!(target instanceof Creature))
 					return;
-				}
 				if (!PositionUtil.isInRange(target, pointX, pointY, pointZ, MOVE_CHECK_OFFSET)) {
 					Creature creature = (Creature) target;
 					pointX = target.getX();
@@ -261,8 +260,7 @@ public class NpcMoveController extends CreatureMoveController<Npc> {
 			&& owner.getAi().getState() != AIState.RETURNING && owner.getGameStats().getNextGeoZUpdate() < System.currentTimeMillis()) {
 			// fix Z if npc doesn't move to spawn point
 			if (owner.getSpawn().getX() != targetDestX || owner.getSpawn().getY() != targetDestY || owner.getSpawn().getZ() != targetDestZ) {
-				float geoZ = GeoService.getInstance().getZ(owner.getWorldId(), newX, newY, newZ + 2, Math.min(newZ, ownerZ) - 2,
-					owner.getInstanceId());
+				float geoZ = GeoService.getInstance().getZ(owner.getWorldId(), newX, newY, newZ + 2, Math.min(newZ, ownerZ) - 2, owner.getInstanceId());
 				if (!Float.isNaN(geoZ)) {
 					if (Math.abs(newZ - geoZ) > 1)
 						directionChanged = true;
@@ -283,8 +281,9 @@ public class NpcMoveController extends CreatureMoveController<Npc> {
 				AILogger.moveinfo(owner, "oldMask=" + movementMask + " newMask=" + newMask);
 			}
 			movementMask = newMask;
-			PacketSendUtility.broadcastPacket(owner, new SM_MOVE(owner));
 		}
+		if (movementMask != newMask || (movementMask & MovementMask.POSITION) == MovementMask.POSITION)
+			PacketSendUtility.broadcastPacket(owner, new SM_MOVE(owner));
 	}
 
 	private byte getMoveMask(boolean directionChanged) {
@@ -347,9 +346,6 @@ public class NpcMoveController extends CreatureMoveController<Npc> {
 			dest = WalkerGroup.getLinePoint(new Point2D(prevStep.getX(), prevStep.getY()), new Point2D(step.getX(), step.getY()),
 				owner.getWalkerGroupShift());
 			this.pointZ = prevStep.getZ();
-			if (GeoDataConfig.GEO_ENABLE && GeoDataConfig.GEO_NPC_MOVE) {
-				// TODO: fix Z
-			}
 			owner.getWalkerGroup().setStep(owner, step.getRouteStep());
 		} else {
 			this.pointZ = step.getZ();

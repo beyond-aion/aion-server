@@ -7,7 +7,6 @@ import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.geometry.Point3D;
 import com.aionemu.gameserver.model.templates.zone.Point2D;
 import com.aionemu.gameserver.skillengine.properties.AreaDirections;
-import com.aionemu.gameserver.taskmanager.tasks.MoveTaskManager;
 
 /**
  * Class with basic positional calculations.<br>
@@ -255,18 +254,18 @@ public class PositionUtil {
 			return false;
 		if (attacker.getMoveController().isInMove())
 			range += calculateMaxDistanceOffset(attacker);
-		if (target.getMoveController().isInMove())
+		if (target.getMoveController().isInMove() && !(attacker instanceof Npc))
 			range += calculateMaxDistanceOffset(target);
 		return isInRange(attacker, target, range, false);
 	}
 
 	private static float calculateMaxDistanceOffset(Creature creature) {
 		float metersPerSecond = creature.getGameStats().getMovementSpeedFloat();
-		if (creature instanceof Npc)
-			return metersPerSecond / MoveTaskManager.UPDATES_PER_SECOND;
-
-		// client updates position via CM_MOVE/CM_SUMMON_MOVE ~2-3 times per second
-		return metersPerSecond / 2.3f;
+		long lastMove = creature.getMoveController().getLastMoveUpdate();
+		if (lastMove == 0)
+			return 0;
+		long msSinceLastMove = System.currentTimeMillis() - lastMove;
+		return msSinceLastMove == 0 ? 0 : metersPerSecond * msSinceLastMove / 1000;
 	}
 
 	public static boolean isInTalkRange(Creature creature, Npc npc) {

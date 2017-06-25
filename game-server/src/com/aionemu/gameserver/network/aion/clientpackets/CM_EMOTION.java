@@ -138,9 +138,6 @@ public class CM_EMOTION extends AionClientPacket {
 		}
 
 		switch (emotionType) {
-			case JUMP:
-				player.getMoveController().updateLastJump();
-				break;
 			case SIT:
 				if (player.isInState(CreatureState.PRIVATE_SHOP)) {
 					return;

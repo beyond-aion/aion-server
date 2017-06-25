@@ -18,19 +18,9 @@ public class PlayerMoveController extends PlayableMoveController<Player> {
 
 	private float fallDistance;
 	private float lastFallZ;
-	private long lastJumpUpdate;
 
 	public PlayerMoveController(Player owner) {
 		super(owner);
-	}
-
-	public final void updateLastJump() {
-		lastJumpUpdate = System.currentTimeMillis();
-	}
-
-	@Override
-	public boolean isJumping() {
-		return System.currentTimeMillis() - lastJumpUpdate < 1000;
 	}
 
 	@Override

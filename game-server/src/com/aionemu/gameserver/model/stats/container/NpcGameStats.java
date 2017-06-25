@@ -163,7 +163,7 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
 			AILogger.info(owner.getAi(), "adelay = " + attackDelay + " aspeed = " + attackSpeed);
 		}
 		int nextAttack = 0;
-		if (lastAttackTime == 0 && owner.getTarget() instanceof Creature
+		if (lastAttackTime == 0 && !owner.getMoveController().isInMove() && owner.getTarget() instanceof Creature
 				&& PositionUtil.isInAttackRange(owner, (Creature) owner.getTarget(), getAttackRange().getCurrent() / 1000f)) {
 			nextAttack = 750;
 		}
@@ -177,11 +177,6 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
 		this.lastSkillTime = System.currentTimeMillis();
 	}
 
-	// not used at the moment
-	/*
-	 * public void renewLastSkilledTime() { this.lastSkilledTime = System.currentTimeMillis(); }
-	 */
-
 	public void renewLastChangeTargetTime() {
 		this.lastChangeTarget = System.currentTimeMillis();
 	}
@@ -189,11 +184,6 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
 	public int getLastSkillTimeDelta() {
 		return Math.round((System.currentTimeMillis() - lastSkillTime) / 1000f);
 	}
-
-	// not used at the moment
-	/*
-	 * public int getLastSkilledTimeDelta() { return Math.round((System.currentTimeMillis() - lastSkilledTime) / 1000f); }
-	 */
 
 	public int getLastChangeTargetTimeDelta() {
 		return Math.round((System.currentTimeMillis() - lastChangeTarget) / 1000f);

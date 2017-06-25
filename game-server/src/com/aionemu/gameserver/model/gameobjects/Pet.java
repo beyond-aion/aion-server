@@ -2,7 +2,6 @@ package com.aionemu.gameserver.model.gameobjects;
 
 import com.aionemu.gameserver.controllers.PetController;
 import com.aionemu.gameserver.controllers.movement.CreatureMoveController;
-import com.aionemu.gameserver.controllers.movement.MoveController;
 import com.aionemu.gameserver.model.gameobjects.player.PetCommonData;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.pet.PetTemplate;
@@ -14,7 +13,7 @@ import com.aionemu.gameserver.world.WorldPosition;
 public class Pet extends VisibleObject {
 
 	private final Player master;
-	private MoveController moveController;
+	private CreatureMoveController<Pet> moveController;
 	private final PetTemplate petTemplate;
 
 	/**
@@ -43,7 +42,7 @@ public class Pet extends VisibleObject {
 		return (PetCommonData) super.getObjectTemplate();
 	}
 
-	public final MoveController getMoveController() {
+	public final CreatureMoveController<Pet> getMoveController() {
 		return moveController;
 	}
 

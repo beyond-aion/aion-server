@@ -10,7 +10,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 /**
  * @author ATracer
  */
-public abstract class CreatureMoveController<T extends VisibleObject> implements MoveController {
+public abstract class CreatureMoveController<T extends VisibleObject> {
 
 	protected static final float MOVE_CHECK_OFFSET = 0.1f;
 	protected T owner;
@@ -28,26 +28,21 @@ public abstract class CreatureMoveController<T extends VisibleObject> implements
 		this.owner = owner;
 	}
 
-	@Override
 	public void moveToDestination() {
 	}
 
-	@Override
 	public float getTargetX2() {
 		return targetDestX;
 	}
 
-	@Override
 	public float getTargetY2() {
 		return targetDestY;
 	}
 
-	@Override
 	public float getTargetZ2() {
 		return targetDestZ;
 	}
 
-	@Override
 	public void setNewDirection(float x, float y, float z, byte heading) {
 		this.heading = heading;
 		setNewDirection(x, y, z);
@@ -59,11 +54,9 @@ public abstract class CreatureMoveController<T extends VisibleObject> implements
 		this.targetDestZ = z;
 	}
 
-	@Override
 	public void startMovingToDestination() {
 	}
 
-	@Override
 	public void abortMove() {
 	}
 
@@ -76,29 +69,22 @@ public abstract class CreatureMoveController<T extends VisibleObject> implements
 		lastMoveUpdate = System.currentTimeMillis();
 	}
 
-	/**
-	 * @return the lastMoveUpdate
-	 */
 	public long getLastMoveUpdate() {
 		return lastMoveUpdate;
 	}
 
-	@Override
 	public byte getMovementMask() {
 		return movementMask;
 	}
 
-	@Override
 	public boolean isJumping() {
 		return false;
 	}
 
-	@Override
 	public boolean isInMove() {
 		return isInMove;
 	}
 
-	@Override
 	public void setInMove(boolean value) {
 		isInMove = value;
 	}

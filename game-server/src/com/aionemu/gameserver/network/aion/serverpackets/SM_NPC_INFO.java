@@ -2,7 +2,7 @@ package com.aionemu.gameserver.network.aion.serverpackets;
 
 import java.util.Map.Entry;
 
-import com.aionemu.gameserver.controllers.movement.MoveController;
+import com.aionemu.gameserver.controllers.movement.CreatureMoveController;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.Summon;
@@ -46,7 +46,7 @@ public class SM_NPC_INFO extends AionServerPacket {
 	@Override
 	protected void writeImpl(AionConnection con) {
 		NpcTemplate npcTemplate = (NpcTemplate) npc.getObjectTemplate();
-		MoveController mc = npc.getMoveController();
+		CreatureMoveController<?> mc = npc.getMoveController();
 
 		writeF(npc.getX());
 		writeF(npc.getY());

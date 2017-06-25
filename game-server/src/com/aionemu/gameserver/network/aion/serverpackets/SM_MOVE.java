@@ -1,6 +1,6 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
-import com.aionemu.gameserver.controllers.movement.MoveController;
+import com.aionemu.gameserver.controllers.movement.CreatureMoveController;
 import com.aionemu.gameserver.controllers.movement.MovementMask;
 import com.aionemu.gameserver.controllers.movement.PlayableMoveController;
 import com.aionemu.gameserver.model.gameobjects.Creature;
@@ -31,7 +31,7 @@ public class SM_MOVE extends AionServerPacket {
 
 	@Override
 	protected void writeImpl(AionConnection client) {
-		MoveController mc =  creature.getMoveController();
+		CreatureMoveController<?> mc = creature.getMoveController();
 		PlayableMoveController<?> pmc = mc instanceof PlayableMoveController ? (PlayableMoveController<?>) mc : null;
 		writeD(creature.getObjectId());
 		writeF(creature.getX());

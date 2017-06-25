@@ -21,8 +21,7 @@ import com.aionemu.gameserver.world.zone.ZoneUpdateService;
  */
 public class MoveTaskManager extends AbstractPeriodicTaskManager {
 
-	public static final int UPDATE_PERIOD = 200;
-	public static final float UPDATES_PER_SECOND = 1000f / UPDATE_PERIOD;
+	private static final int UPDATE_PERIOD = 200;
 	private final Map<Integer, Creature> movingCreatures = new ConcurrentHashMap<>();
 	private final Consumer<Creature> CREATURE_MOVE_PREDICATE = new Consumer<Creature>() {
 

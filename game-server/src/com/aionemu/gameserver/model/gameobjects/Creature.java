@@ -12,7 +12,7 @@ import com.aionemu.gameserver.controllers.CreatureController;
 import com.aionemu.gameserver.controllers.ObserveController;
 import com.aionemu.gameserver.controllers.attack.AggroList;
 import com.aionemu.gameserver.controllers.effect.EffectController;
-import com.aionemu.gameserver.controllers.movement.MoveController;
+import com.aionemu.gameserver.controllers.movement.CreatureMoveController;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.CreatureType;
 import com.aionemu.gameserver.model.Race;
@@ -48,7 +48,7 @@ public abstract class Creature extends VisibleObject {
 	private CreatureGameStats<? extends Creature> gameStats;
 	private CreatureLifeStats<? extends Creature> lifeStats;
 	private EffectController effectController;
-	protected MoveController moveController;
+	protected CreatureMoveController<? extends Creature> moveController;
 	private int state = CreatureState.ACTIVE.getId();
 	private int visualState = CreatureVisualState.VISIBLE.getId();
 	private int seeState = CreatureSeeState.NORMAL.getId();
@@ -78,7 +78,7 @@ public abstract class Creature extends VisibleObject {
 		this.aggroList = createAggroList();
 	}
 
-	public MoveController getMoveController() {
+	public CreatureMoveController<? extends Creature> getMoveController() {
 		return moveController;
 	}
 
