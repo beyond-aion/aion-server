@@ -2,8 +2,12 @@ package ai.siege;
 
 import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
+import com.aionemu.gameserver.configs.main.SiegeConfig;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.model.gameobjects.VisibleObject;
+import com.aionemu.gameserver.model.stats.calc.Stat2;
+import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /*
@@ -34,22 +38,33 @@ public class DredgionCommanderAI extends SiegeNpcAI {
 	}
 
 	private void scheduleOneShot() {
+		int skillId = getSkill();
+		if (skillId == 0)
+			return;
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 			@Override
 			public void run() {
-				if (getSkill() != 0) {
-					if (getTarget() instanceof Npc) {
-						Npc target = (Npc) getTarget();
-						Race race = target.getRace();
-						if ((race.equals(Race.GCHIEF_DARK) || race.equals(Race.GCHIEF_LIGHT)) && !target.isDead()) {
-							AIActions.useSkill(DredgionCommanderAI.this, getSkill());
-							getAggroList().addHate(target, 10000);
-						}
+				if (!getOwner().isSpawned() || getOwner().isDead())
+					return;
+				VisibleObject obj = getTarget();
+				if (obj instanceof Npc) {
+					Npc target = (Npc) obj;
+					if (target.getRace() == Race.GCHIEF_DARK || target.getRace() == Race.GCHIEF_LIGHT) {
+						if (target.isDead())
+							return;
+						AIActions.useSkill(DredgionCommanderAI.this, skillId);
+						getAggroList().addHate(target, 10000);
 					}
-					scheduleOneShot();
 				}
+				scheduleOneShot();
 			}
 		}, 45 * 1000);
+	}
+
+	@Override
+	public void modifyOwnerStat(Stat2 stat) {
+		if (stat.getStat() == StatEnum.MAXHP)
+			stat.setBaseRate(SiegeConfig.SIEGE_HEALTH_MULTIPLIER);
 	}
 }
