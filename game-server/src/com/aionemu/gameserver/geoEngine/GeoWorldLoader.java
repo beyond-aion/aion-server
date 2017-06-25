@@ -50,10 +50,6 @@ public class GeoWorldLoader {
 
 	private static boolean DEBUG = false;
 
-	public static void setDebugMod(boolean debug) {
-		DEBUG = debug;
-	}
-
 	public static Map<String, Spatial> loadMeshs(String fileName) throws IOException {
 		Map<String, Spatial> geoms = new HashMap<>();
 		File geoFile = new File(fileName);
@@ -116,7 +112,7 @@ public class GeoWorldLoader {
 							geom.setName(name);
 							singleChildMaterialId = geom.getMaterialId();
 						} else
-							geom.setName(("child" + c + "_" + name).intern());
+							geom.setName(("child" + c + "_" + name));
 						node.attachChild(geom);
 					}
 					geoms.put(geom.getName(), geom);
@@ -155,7 +151,7 @@ public class GeoWorldLoader {
 				int nameLength = geo.getShort();
 				byte[] nameByte = new byte[nameLength];
 				geo.get(nameByte);
-				String name = new String(nameByte).replace("/", "\\").toLowerCase().intern();
+				String name = new String(nameByte).replace("/", "\\").toLowerCase();
 				Vector3f loc = new Vector3f(geo.getFloat(), geo.getFloat(), geo.getFloat());
 				float[] matrix = new float[9];
 				for (int i = 0; i < 9; i++)

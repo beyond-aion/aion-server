@@ -65,9 +65,9 @@ public class Node extends Spatial implements Cloneable {
 	protected short collisionFlags;
 
 	/**
-	 * Default constructor.
+	 * Do not use this constructor. Serialization purposes only.
 	 */
-	public Node() {
+	protected Node() {
 	}
 
 	/**
@@ -338,6 +338,7 @@ public class Node extends Spatial implements Cloneable {
 		}
 	}
 
+	@Override
 	public int collideWith(Collidable other, CollisionResults results) {
 		if ((getIntentions() & results.getIntentions()) == 0)
 			return 0;

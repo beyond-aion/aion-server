@@ -88,9 +88,10 @@ public abstract class Spatial implements Collidable, Cloneable {
 	protected transient Node parent;
 
 	/**
-	 * Default Constructor.
+	 * Do not use this constructor. Serialization purposes only.
 	 */
-	public Spatial() {
+	protected Spatial() {
+		this(null);
 	}
 
 	/**
@@ -101,9 +102,7 @@ public abstract class Spatial implements Collidable, Cloneable {
 	 *          the name of the scene element. This is required for identification and comparision purposes.
 	 */
 	public Spatial(String name) {
-		this();
-		if (name != null)
-			this.name = name.intern();
+		this.name = name;
 	}
 
 	/**
@@ -114,7 +113,7 @@ public abstract class Spatial implements Collidable, Cloneable {
 	 */
 	public void setName(String name) {
 		if (name != null)
-			this.name = name.intern();
+			this.name = name;
 	}
 
 	/**
@@ -169,11 +168,9 @@ public abstract class Spatial implements Collidable, Cloneable {
 	public boolean hasAncestor(Node ancestor) {
 		if (parent == null) {
 			return false;
-		}
-		else if (parent.equals(ancestor)) {
+		} else if (parent.equals(ancestor)) {
 			return true;
-		}
-		else {
+		} else {
 			return parent.hasAncestor(ancestor);
 		}
 	}
@@ -200,17 +197,17 @@ public abstract class Spatial implements Collidable, Cloneable {
 	 * @return The sum of all triangles under this Spatial.
 	 */
 	public abstract int getTriangleCount();
-	
+
 	public byte getMaterialId() {
 		return (byte) (getCollisionFlags() & 0xFF);
 	}
-	
+
 	public byte getIntentions() {
 		return (byte) (getCollisionFlags() >> 8);
 	}
-	
+
 	public abstract short getCollisionFlags();
-	
+
 	public abstract void setCollisionFlags(short flags);
 
 	/**
@@ -234,7 +231,7 @@ public abstract class Spatial implements Collidable, Cloneable {
 
 		return true;
 	}
-	
+
 	/**
 	 * <code>getWorldBound</code> retrieves the world bound at this node level.
 	 * 
