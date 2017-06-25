@@ -25852,6 +25852,104 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	}
 
 	/**
+	 * The weakened protective shield will disappear in 30 minutes.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDF5_U3_GAME_TIMER_01() {
+		return new SM_SYSTEM_MESSAGE(1402129);
+	}
+
+	/**
+	 * The weakened protective shield will disappear in 25 minutes.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDF5_U3_GAME_TIMER_02() {
+		return new SM_SYSTEM_MESSAGE(1402130);
+	}
+
+	/**
+	 * The weakened protective shield will disappear in 20 minutes.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDF5_U3_GAME_TIMER_03() {
+		return new SM_SYSTEM_MESSAGE(1402131);
+	}
+
+	/**
+	 * The weakened protective shield will disappear in 15 minutes.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDF5_U3_GAME_TIMER_04() {
+		return new SM_SYSTEM_MESSAGE(1402132);
+	}
+
+	/**
+	 * The weakened protective shield will disappear in 10 minutes.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDF5_U3_GAME_TIMER_05() {
+		return new SM_SYSTEM_MESSAGE(1402133);
+	}
+
+	/**
+	 * The weakened protective shield will disappear in 5 minutes.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDF5_U3_GAME_TIMER_06() {
+		return new SM_SYSTEM_MESSAGE(1402134);
+	}
+
+	/**
+	 * The eastern shield power generator is charging.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDF5_U3_OBJ_COMPLETE_01() {
+		return new SM_SYSTEM_MESSAGE(1402135);
+	}
+
+	/**
+	 * The western shield power generator is charging.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDF5_U3_OBJ_COMPLETE_02() {
+		return new SM_SYSTEM_MESSAGE(1402136);
+	}
+
+	/**
+	 * The southern shield power generator is charging.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDF5_U3_OBJ_COMPLETE_03() {
+		return new SM_SYSTEM_MESSAGE(1402137);
+	}
+
+	/**
+	 * The northern shield power generator is charging.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDF5_U3_OBJ_COMPLETE_04() {
+		return new SM_SYSTEM_MESSAGE(1402138);
+	}
+
+	/**
+	 * The eastern shield power generator has been destroyed.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDF5_U3_OBJ_DESTROY_01() {
+		return new SM_SYSTEM_MESSAGE(1402139);
+	}
+
+	/**
+	 * The western shield power generator has been destroyed.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDF5_U3_OBJ_DESTROY_02() {
+		return new SM_SYSTEM_MESSAGE(1402140);
+	}
+
+	/**
+	 * The southern shield power generator has been destroyed.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDF5_U3_OBJ_DESTROY_03() {
+		return new SM_SYSTEM_MESSAGE(1402141);
+	}
+
+	/**
+	 * The northern shield power generator has been destroyed.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDF5_U3_OBJ_DESTROY_04() {
+		return new SM_SYSTEM_MESSAGE(1402142);
+	}
+
+	/**
 	 * The Test Weapon Dynatoum's bomb timer has begun its countdown.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_IDF5_U3_BOSS_TIMER_01() {
@@ -25885,6 +25983,83 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	public static final SM_SYSTEM_MESSAGE STR_MSG_ITEM_AUTHORIZE_SUCCEEDED_MAX(String playerName, int nameId) {
 		return new SM_SYSTEM_MESSAGE(1402154, playerName, new DescriptionId(nameId), 10);
 	}
+	
+	/**
+	 * The entrance to the Illuminary Obelisk has opened.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDF5_U3_DOOR_OPEN() {
+		return new SM_SYSTEM_MESSAGE(1402193);
+	}
+	
+	/**
+	 * The eastern power generator is charging.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDF5_U3_OBJ_CHARGE_01() {
+		return new SM_SYSTEM_MESSAGE(1402194);
+	}
+	
+	/**
+	 * The western power generator is charging.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDF5_U3_OBJ_CHARGE_02() {
+		return new SM_SYSTEM_MESSAGE(1402195);
+	}
+	
+	/**
+	 * The southern power generator is charging.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDF5_U3_OBJ_CHARGE_03() {
+		return new SM_SYSTEM_MESSAGE(1402196);
+	}
+	
+	/**
+	 * The northern power generator is charging.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDF5_U3_OBJ_CHARGE_04() {
+		return new SM_SYSTEM_MESSAGE(1402197);
+	}
+	
+	/**
+	 * The eastern power generator will finish charging in 30 seconds.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDF5_U3_OBJ_FINAL_CHARGE_01() {
+		return new SM_SYSTEM_MESSAGE(1402198);
+	}
+	
+	/**
+	 * The western power generator will finish charging in 30 seconds.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDF5_U3_OBJ_FINAL_CHARGE_02() {
+		return new SM_SYSTEM_MESSAGE(1402199);
+	}
+	
+	/**
+	 * The southern power generator will finish charging in 30 seconds.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDF5_U3_OBJ_FINAL_CHARGE_03() {
+		return new SM_SYSTEM_MESSAGE(1402200);
+	}
+	
+	/**
+	 * The northern power generator will finish charging in 30 seconds.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDF5_U3_OBJ_FINAL_CHARGE_04() {
+		return new SM_SYSTEM_MESSAGE(1402201);
+	}
+	
+	/**
+	 * The shield is activated and the Pashid Destruction Unit is retreating. The Shield Control Room Teleporter has appeared.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDF5_U3_OBJ_ALL_COMPLETE() {
+		return new SM_SYSTEM_MESSAGE(1402202);
+	}
+	
+	/**
+	 * This power generator is fully charged. It cannot be charged any further.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDF5_U3_OBJ_CHARGE_END() {
+		return new SM_SYSTEM_MESSAGE(1402203);
+	}
 
 	/**
 	 * The amount of Glory Points to be deducted from you, %0, are: %1%[%gchar:glory_point].
@@ -25894,10 +26069,31 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	}
 
 	/**
+	 * The Dynatoum has destroyed the teleport device of the shield generation hub.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDF5_U3_BOSS_PORTAL_DESTROY() {
+		return new SM_SYSTEM_MESSAGE(1402212);
+	}
+
+	/**
 	 * %num0 Glory Points have been deducted from you.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_GLORY_POINT_LOSE(int num0) {
 		return new SM_SYSTEM_MESSAGE(1402219, num0);
+	}
+
+	/**
+	 * The weakened protective shield will disappear in 1 minute.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDF5_U3_GAME_TIMER_07() {
+		return new SM_SYSTEM_MESSAGE(1402235);
+	}
+
+	/**
+	 * The protective shield covering the Illuminary Obelisk has disappeared. The Pashid Destruction Unit's intense bombing commences.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDF5_U3_GAME_TIMER_08() {
+		return new SM_SYSTEM_MESSAGE(1402236);
 	}
 
 	/**
@@ -26075,6 +26271,13 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_IDF5_U3_HARD_BOSS_TIMER_04() {
 		return new SM_SYSTEM_MESSAGE(1402428);
+	}
+
+	/**
+	 * The Remodeled Dynatoum has destroyed the shield generator teleporter.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDF5_U3_HARD_BOSS_PORTAL_DESTROY() {
+		return new SM_SYSTEM_MESSAGE(1402429);
 	}
 
 	/**
