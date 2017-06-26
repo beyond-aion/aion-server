@@ -59,8 +59,8 @@ public abstract class PlayableMoveController<T extends Creature> extends Creatur
 		if (!owner.canPerformMove()) {
 			if (started.compareAndSet(true, false)) {
 				setAndSendStopMove(owner);
+				updateLastMove();
 			}
-			updateLastMove();
 			return;
 		}
 
