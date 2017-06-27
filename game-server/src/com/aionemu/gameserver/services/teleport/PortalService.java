@@ -57,8 +57,7 @@ public class PortalService {
 		boolean isInstance = portalPath.isInstance();
 
 		if (!player.hasAccess(AdminConfig.INSTANCE_ENTER_ALL)) {
-			if (playerSize > 1)
-				instanceGroupReq = !player.hasPermission(MembershipConfig.INSTANCES_GROUP_REQ);
+			instanceGroupReq = !player.hasPermission(MembershipConfig.INSTANCES_GROUP_REQ);
 
 			if (!checkMentor(player, mapId))
 				return;
@@ -126,39 +125,10 @@ public class PortalService {
 		PlayerGroup group = player.getPlayerGroup();
 		switch (playerSize) {
 			case 1:
-				// If there is a group (whatever group requirement exists or not)...
-				if (group != null && instanceGroupReq) {
-					instance = InstanceService.getRegisteredInstance(mapId, group.getTeamId());
-				}
-				// But if there is no group, go to solo
-				else {
-					instance = InstanceService.getRegisteredInstance(mapId, player.getObjectId());
-				}
-
-				// No group instance, group on and default requirement off
-				if (instance == null && group != null && instanceGroupReq) {
-					// For each player from group
-					for (Player member : group.getMembers()) {
-						// Get his instance
-						instance = InstanceService.getRegisteredInstance(mapId, member.getObjectId());
-
-						// If some player is soloing and I found no one else yet, I get his instance
-						if (instance != null) {
-							break;
-						}
-					}
-
-					// No solo instance found
-					if (instance == null && isInstance)
-						instance = registerTeam(group, mapId, playerSize, difficult);
-				}
-
 				// if already registered - just teleport
-				if (instance != null) {
-					if (mapId != player.getWorldId()) {
-						transfer(player, loc, instance, reenter);
-						return;
-					}
+				if (instance != null && mapId != player.getWorldId()) {
+					transfer(player, loc, instance, reenter);
+					return;
 				}
 				port(player, loc, reenter, isInstance);
 				break;
