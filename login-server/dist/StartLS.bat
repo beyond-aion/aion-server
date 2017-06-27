@@ -3,7 +3,7 @@ TITLE Aion Emu - Login Server Console
 
 :START
 CLS
-JAVA -Xms32m -Xmx32m -XX:+TieredCompilation -XX:+UseNUMA -server -ea -cp "libs/*" com.aionemu.loginserver.LoginServer
+JAVA -Xms48m -Xmx48m -XX:+UseNUMA -server -ea -cp "libs/*" com.aionemu.loginserver.LoginServer
 IF ERRORLEVEL 2 GOTO START
 IF ERRORLEVEL 1 GOTO ERROR
 IF ERRORLEVEL 0 GOTO END
