@@ -45,6 +45,9 @@ public class SM_NPC_INFO extends AionServerPacket {
 
 	@Override
 	protected void writeImpl(AionConnection con) {
+		Player player = con.getActivePlayer();
+		if (player == null) // just disconnected
+			return;
 		NpcTemplate npcTemplate = (NpcTemplate) npc.getObjectTemplate();
 		CreatureMoveController<?> mc = npc.getMoveController();
 
@@ -54,7 +57,7 @@ public class SM_NPC_INFO extends AionServerPacket {
 		writeD(npc.getObjectId());
 		writeD(npcTemplate.getTemplateId()); // npc id
 		writeD(npcTemplate.getTemplateId());
-		writeC(npc.getType(con.getActivePlayer()).getId());
+		writeC(npc.getType(player).getId());
 
 		/*
 		 * 3,19 - wings spread
