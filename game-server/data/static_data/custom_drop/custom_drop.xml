@@ -1985,8 +1985,8 @@
 	<!-- Krotan Barracks -->
 	<npc_drop npc_id="702288">
 		<drop_group race="PC_ALL"><!-- Named Boxes -->
-			<drop item_id="188052920" chance="50" each_member="true" /><!-- Manastone Box -->
-			<drop item_id="188052921" chance="50" each_member="true" /><!-- Ancient Relic Box -->
+			<drop item_id="188052920" chance="100" each_member="true" /><!-- Manastone Box -->
+			<drop item_id="188052921" chance="100" each_member="true" /><!-- Ancient Relic Box -->
 		</drop_group>
 		<drop_group race="PC_ALL"><!-- Named Food -->
 			<drop item_id="160002418" chance="25" /><!-- Fried Kucien -->
@@ -2016,8 +2016,8 @@
 	<!-- Krotan Barracks (Legion) -->
 	<npc_drop npc_id="702290">
 		<drop_group race="PC_ALL"><!-- Named Boxes -->
-			<drop item_id="188052743" chance="55" each_member="true" /><!-- Manastone Box -->
-			<drop item_id="188052744" chance="55" each_member="true" /><!-- Ancient Relic Box -->
+			<drop item_id="188052743" chance="100" each_member="true" /><!-- Manastone Box -->
+			<drop item_id="188052744" chance="100" each_member="true" /><!-- Ancient Relic Box -->
 		</drop_group>
 		<drop_group race="PC_ALL"><!-- Named Food -->
 			<drop item_id="160002418" chance="30" /><!-- Fried Kucien -->
@@ -2160,8 +2160,8 @@
 	<!-- Kysis Barracks -->
 	<npc_drop npc_id="702292">
 		<drop_group race="PC_ALL"><!-- Named Boxes -->
-			<drop item_id="188052920" chance="50" each_member="true" /><!-- Manastone Box -->
-			<drop item_id="188052921" chance="50" each_member="true" /><!-- Ancient Relic Box -->
+			<drop item_id="188052920" chance="100" each_member="true" /><!-- Manastone Box -->
+			<drop item_id="188052921" chance="100" each_member="true" /><!-- Ancient Relic Box -->
 		</drop_group>
 		<drop_group race="PC_ALL"><!-- Named Food -->
 			<drop item_id="160002418" chance="25" /><!-- Fried Kucien -->
@@ -2191,8 +2191,8 @@
 	<!-- Kysis Barracks (Legion) -->
 	<npc_drop npc_id="702294">
 		<drop_group race="PC_ALL"><!-- Named Boxes -->
-			<drop item_id="188052743" chance="55" each_member="true" /><!-- Manastone Box -->
-			<drop item_id="188052744" chance="55" each_member="true" /><!-- Ancient Relic Box -->
+			<drop item_id="188052743" chance="100" each_member="true" /><!-- Manastone Box -->
+			<drop item_id="188052744" chance="100" each_member="true" /><!-- Ancient Relic Box -->
 		</drop_group>
 		<drop_group race="PC_ALL"><!-- Named Food -->
 			<drop item_id="160002418" chance="30" /><!-- Fried Kucien -->
@@ -2551,8 +2551,8 @@
 	<!-- Miren Barracks -->
 	<npc_drop npc_id="702296">
 		<drop_group race="PC_ALL"><!-- Named Boxes -->
-			<drop item_id="188052920" chance="50" each_member="true" /><!-- Manastone Box -->
-			<drop item_id="188052921" chance="50" each_member="true" /><!-- Ancient Relic Box -->
+			<drop item_id="188052920" chance="100" each_member="true" /><!-- Manastone Box -->
+			<drop item_id="188052921" chance="100" each_member="true" /><!-- Ancient Relic Box -->
 		</drop_group>
 		<drop_group race="PC_ALL"><!-- Named Food -->
 			<drop item_id="160002418" chance="25" /><!-- Fried Kucien -->
@@ -2582,8 +2582,8 @@
 	<!-- Miren Barracks (Legion) -->
 	<npc_drop npc_id="702298">
 		<drop_group race="PC_ALL"><!-- Named Boxes -->
-			<drop item_id="188052743" chance="55" each_member="true" /><!-- Manastone Box -->
-			<drop item_id="188052744" chance="55" each_member="true" /><!-- Ancient Relic Box -->
+			<drop item_id="188052743" chance="100" each_member="true" /><!-- Manastone Box -->
+			<drop item_id="188052744" chance="100" each_member="true" /><!-- Ancient Relic Box -->
 		</drop_group>
 		<drop_group race="PC_ALL"><!-- Named Food -->
 			<drop item_id="160002418" chance="30" /><!-- Fried Kucien -->
