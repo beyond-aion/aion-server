@@ -154,6 +154,10 @@ public class GeneralInstanceHandler implements InstanceHandler {
 	}
 
 	@Override
+	public void onSpawn(VisibleObject object) {
+	}
+
+	@Override
 	public void onAggro(Npc npc) {
 	}
 

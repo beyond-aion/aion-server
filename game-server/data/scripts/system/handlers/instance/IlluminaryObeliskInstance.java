@@ -1,29 +1,21 @@
 package instance;
 
-import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE.STR_REBIRTH_MASSAGE_ME;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.function.Consumer;
 
-import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.ai.manager.WalkManager;
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
 import com.aionemu.gameserver.instance.handlers.InstanceID;
-import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.gameobjects.StaticDoor;
+import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.player.PlayerReviveService;
 import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
@@ -32,238 +24,301 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
 /**
- * @author M.O.G. Dision
- * @reworked Estrayl
+ * @author Estrayl
  */
 @InstanceID(301230000)
 public class IlluminaryObeliskInstance extends GeneralInstanceHandler {
 
-	private AtomicBoolean isRaceSet = new AtomicBoolean(false);
-	public Map<Integer, StaticDoor> doors;
-	private List<Future<?>> spawnTasks = new ArrayList<>();
-	private Future<?> generatorCheckTask;
-	protected Future<?> wipeTask;
+	private final AtomicBoolean isRaceSet = new AtomicBoolean();
+	private final List<Future<?>> tasks = new ArrayList<>();
 	public boolean isInstanceDestroyed;
-	protected int wipeMsgProgress = 1402129;
-	protected byte wipeProgress = 0;
-	
-	protected int getBossId() {
-		return 233740;
-	}
 
 	@Override
 	public void onInstanceCreate(WorldMapInstance wmi) {
 		super.onInstanceCreate(wmi);
-		doors = wmi.getDoors();
 		scheduleInstanceStart();
 	}
-	
+
 	private void scheduleInstanceStart() {
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-			@Override
-			public void run() {
-				sendMsg(1402193);
-				doors.get(129).setOpen(true);
-				scheduleWipeTask();
-				scheduleGeneratorCheck();
-				spawn(702014, 343.1202f, 254.10585f, 291.62302f, (byte) 0, 34); //Invasion Corridors
-				spawn(702015, 169.5563f, 254.52907f, 293.04276f, (byte) 0, 17);
-				spawn(702016, 255.7034f, 171.83853f, 325.81653f, (byte) 0, 18);
-				spawn(702017, 255.7926f, 338.22058f, 325.56473f, (byte) 0, 60);
-			}
-		}, 60000);
+		ThreadPoolManager.getInstance().schedule(() -> {
+			PacketSendUtility.broadcastToMap(instance, SM_SYSTEM_MESSAGE.STR_MSG_IDF5_U3_DOOR_OPEN());
+			instance.getDoors().get(129).setOpen(true);
+			scheduleWipe(3000);
+		}, 6000);
 	}
 
-	protected void scheduleWipeTask() {
-		wipeTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
-			@Override
-			public void run() {
-				if (!isInstanceDestroyed) {
-					switch (wipeProgress) {
-						case 0: //30min announce
-						case 5: //25min announce
-						case 10://20min announce
-						case 15://15min announce
-						case 20://10min announce
-						case 25:// 5min announce
-							sendMsg(wipeMsgProgress++);
-							if (wipeProgress != 0) //no sense for assault on start
-								scheduleAdditionalAttack(Rnd.get(1, 4));
-							break;
-						case 29:// 1min announce
-							sendMsg(1402235);
-							break;
-						case 30:// wipe
-							sendMsg(1402236);
-							wipe();
-							break;
-					}
-					wipeProgress++;
-				}
+	protected void scheduleWipe(int delay) {
+		tasks.add(ThreadPoolManager.getInstance().schedule(() -> {
+			if (isInstanceDestroyed)
+				return;
+			switch (delay) {
+				case 3000: // 30min
+					PacketSendUtility.broadcastToMap(instance, SM_SYSTEM_MESSAGE.STR_MSG_IDF5_U3_GAME_TIMER_01());
+					scheduleWipe(300000);
+					break;
+				case 300000: // 25min
+					PacketSendUtility.broadcastToMap(instance, SM_SYSTEM_MESSAGE.STR_MSG_IDF5_U3_GAME_TIMER_02());
+					scheduleWipe(300001);
+					break;
+				case 300001: // 20min
+					PacketSendUtility.broadcastToMap(instance, SM_SYSTEM_MESSAGE.STR_MSG_IDF5_U3_GAME_TIMER_03());
+					scheduleWipe(300002);
+					break;
+				case 300002: // 15min
+					PacketSendUtility.broadcastToMap(instance, SM_SYSTEM_MESSAGE.STR_MSG_IDF5_U3_GAME_TIMER_04());
+					scheduleWipe(300003);
+					break;
+				case 300003: // 10min
+					PacketSendUtility.broadcastToMap(instance, SM_SYSTEM_MESSAGE.STR_MSG_IDF5_U3_GAME_TIMER_05());
+					scheduleWipe(300004);
+					break;
+				case 300004: // 5min
+					PacketSendUtility.broadcastToMap(instance, SM_SYSTEM_MESSAGE.STR_MSG_IDF5_U3_GAME_TIMER_06());
+					scheduleWipe(240000);
+					break;
+				case 240000: // 1min
+					PacketSendUtility.broadcastToMap(instance, SM_SYSTEM_MESSAGE.STR_MSG_IDF5_U3_GAME_TIMER_07());
+					scheduleWipe(60000);
+					break;
+				case 60000: // wipe
+					PacketSendUtility.broadcastToMap(instance, SM_SYSTEM_MESSAGE.STR_MSG_IDF5_U3_GAME_TIMER_08());
+					wipe();
+					break;
 			}
-		}, 0, 60 * 1000); //Repeat every minute
+		}, delay));
 	}
-	
-	private void scheduleGeneratorCheck() {
-		generatorCheckTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
-			@Override
-			public void run() {
-				if (!isInstanceDestroyed)
+
+	@Override
+	public void onSpawn(VisibleObject object) {
+		if (object instanceof Npc) {
+			int npcId = ((Npc) object).getNpcId();
+			switch (((Npc) object).getNpcId()) {
+				case 702218:
+				case 702219:
+					PacketSendUtility.broadcastToMap(instance, SM_SYSTEM_MESSAGE.STR_MSG_IDF5_U3_OBJ_CHARGE_01());
+					break;
+				case 702220:
+					PacketSendUtility.broadcastToMap(instance, SM_SYSTEM_MESSAGE.STR_MSG_IDF5_U3_OBJ_CHARGE_01());
 					checkGenerators();
+					break;
+				case 702221:
+				case 702222:
+					PacketSendUtility.broadcastToMap(instance, SM_SYSTEM_MESSAGE.STR_MSG_IDF5_U3_OBJ_CHARGE_02());
+					break;
+				case 702223:
+					PacketSendUtility.broadcastToMap(instance, SM_SYSTEM_MESSAGE.STR_MSG_IDF5_U3_OBJ_FINAL_CHARGE_02());
+					checkGenerators();
+					break;
+				case 702224:
+				case 702225:
+					PacketSendUtility.broadcastToMap(instance, SM_SYSTEM_MESSAGE.STR_MSG_IDF5_U3_OBJ_CHARGE_03());
+					break;
+				case 702226:
+					PacketSendUtility.broadcastToMap(instance, SM_SYSTEM_MESSAGE.STR_MSG_IDF5_U3_OBJ_FINAL_CHARGE_03());
+					checkGenerators();
+					break;
+				case 702227:
+				case 702228:
+					PacketSendUtility.broadcastToMap(instance, SM_SYSTEM_MESSAGE.STR_MSG_IDF5_U3_OBJ_CHARGE_04());
+					break;
+				case 702229:
+					PacketSendUtility.broadcastToMap(instance, SM_SYSTEM_MESSAGE.STR_MSG_IDF5_U3_OBJ_FINAL_CHARGE_04());
+					checkGenerators();
+					break;
 			}
-		}, 1000, 15000);
-	}
-	
-	private void checkGenerators() {
-		Npc gen1 = instance.getNpc(702220);
-		Npc gen2 = instance.getNpc(702223);
-		Npc gen3 = instance.getNpc(702229);
-		Npc gen4 = instance.getNpc(702226);
-		if (gen1 == null || gen2 == null || gen3 == null || gen4 == null)
-			return;
-		
-		cancelTaskList();
-		cancelSingleTask(generatorCheckTask);
-		cancelSingleTask(wipeTask);
-		sendMsg(1402202); // Portal
-		for (Npc npc : instance.getNpcs()) {
-			npc.getController().delete();
+			scheduleChargeAttacks(npcId);
 		}
-		spawn(730886, 255.49f, 293.3f, 321.18497f, (byte) 30);
-		spawn(730886, 255.49f, 215.8f, 321.21344f, (byte) 30);
-		spawn(730886, 294.53f, 254.65f, 295.77176f, (byte) 60);
-		spawn(730886, 216.8f, 254.65f, 295.7729f, (byte) 0);
-		spawn(getBossId(), 255.48956f, 254.5804f, 455.1201f, (byte) 15);
+	}
+
+	protected void scheduleChargeAttacks(int npcId) {
+		switch (npcId) {
+			case 702218: // east first wave
+				spawn(233720, 255.3635f, 328.5584f, 325.0038f, (byte) 90, 0, "idf5_u3_east_2");
+				spawn(233721, 258.5159f, 328.5792f, 325.0038f, (byte) 90, 0, "idf5_u3_east_3");
+				spawn(233721, 252.3243f, 328.5881f, 325.0092f, (byte) 90, 0, "idf5_u3_east_4");
+				spawn(233722, 255.3635f, 328.5584f, 325.0038f, (byte) 90, 15000, "idf5_u3_east_2");
+				spawn(233720, 258.5159f, 328.5792f, 325.0038f, (byte) 90, 15000, "idf5_u3_east_3");
+				spawn(233720, 252.3243f, 328.5881f, 325.0092f, (byte) 90, 15000, "idf5_u3_east_4");
+				spawn(233723, 255.3635f, 328.5584f, 325.0038f, (byte) 90, 30000, "idf5_u3_east_2");
+				spawn(233726, 258.5159f, 328.5792f, 325.0038f, (byte) 90, 30000, "idf5_u3_east_3");
+				spawn(233726, 252.3243f, 328.5881f, 325.0092f, (byte) 90, 30000, "idf5_u3_east_4");
+				break;
+			case 702219: // east second wave
+				spawn(233723, 255.3635f, 328.5584f, 325.0038f, (byte) 90, 0, "idf5_u3_east_2");
+				spawn(233726, 258.5159f, 328.5792f, 325.0038f, (byte) 90, 0, "idf5_u3_east_3");
+				spawn(233726, 252.3243f, 328.5881f, 325.0092f, (byte) 90, 0, "idf5_u3_east_4");
+				spawn(233728, 255.3635f, 328.5584f, 325.0038f, (byte) 90, 15000, "idf5_u3_east_2");
+				spawn(233721, 258.5159f, 328.5792f, 325.0038f, (byte) 90, 15000, "idf5_u3_east_3");
+				spawn(233721, 252.3243f, 328.5881f, 325.0092f, (byte) 90, 15000, "idf5_u3_east_4");
+				spawn(233722, 255.3635f, 328.5584f, 325.0038f, (byte) 90, 30000, "idf5_u3_east_2");
+				spawn(233720, 258.5159f, 328.5792f, 325.0038f, (byte) 90, 30000, "idf5_u3_east_3");
+				spawn(233720, 252.3243f, 328.5881f, 325.0092f, (byte) 90, 30000, "idf5_u3_east_4");
+				break;
+			case 702220: // east third wave
+				spawn(233721, 252.3243f, 328.5881f, 325.0092f, (byte) 90, 0, "idf5_u3_east_1");
+				spawn(233726, 255.3635f, 328.5584f, 325.0038f, (byte) 90, 0, "idf5_u3_east_2");
+				spawn(233721, 256.6376f, 328.7015f, 325.0038f, (byte) 90, 0, "idf5_u3_east_3");
+				spawn(233726, 258.5159f, 328.5792f, 325.0038f, (byte) 90, 0, "idf5_u3_east_4");
+				spawn(233736, 253.8757f, 326.5010f, 325.0038f, (byte) 90, 0, "idf5_u3_east_6");
+				spawn(233720, 255.3635f, 328.5584f, 325.0038f, (byte) 90, 0, "idf5_u3_east_2");
+				spawn(233724, 256.6376f, 328.7015f, 325.0038f, (byte) 90, 0, "idf5_u3_east_3");
+				spawn(233720, 258.5159f, 328.5792f, 325.0038f, (byte) 90, 0, "idf5_u3_east_4");
+				spawn(233733, 256.9199f, 326.4982f, 325.0038f, (byte) 90, 0, "idf5_u3_east_5");
+				break;
+			case 702221: // west first wave
+				spawn(233720, 253.5314f, 183.5728f, 325.0038f, (byte) 30, 0, "idf5_u3_west_2");
+				spawn(233723, 255.2491f, 183.4584f, 325.0038f, (byte) 30, 0, "idf5_u3_west_3");
+				spawn(233720, 257.0595f, 183.5797f, 325.0045f, (byte) 30, 0, "idf5_u3_west_4");
+				spawn(233721, 253.5314f, 183.5728f, 325.0038f, (byte) 30, 15000, "idf5_u3_west_2");
+				spawn(233724, 255.2491f, 183.4584f, 325.0038f, (byte) 30, 15000, "idf5_u3_west_3");
+				spawn(233721, 257.0595f, 183.5797f, 325.0045f, (byte) 30, 15000, "idf5_u3_west_4");
+
+				spawn(233722, 253.5314f, 183.5728f, 325.0038f, (byte) 30, 30000, "idf5_u3_west_2");
+				spawn(233725, 255.2491f, 183.4584f, 325.0038f, (byte) 30, 30000, "idf5_u3_west_3");
+				spawn(233722, 257.0595f, 183.5797f, 325.0045f, (byte) 30, 30000, "idf5_u3_west_4");
+				break;
+			case 702222: // west second wave
+				spawn(233721, 253.5314f, 183.5728f, 325.0038f, (byte) 30, 0, "idf5_u3_west_2");
+				spawn(233720, 255.2491f, 183.4584f, 325.0038f, (byte) 30, 0, "idf5_u3_west_3");
+				spawn(233721, 257.0595f, 183.5797f, 325.0045f, (byte) 30, 0, "idf5_u3_west_4");
+				spawn(233726, 253.5314f, 183.5728f, 325.0038f, (byte) 30, 15000, "idf5_u3_west_2");
+				spawn(233727, 255.2491f, 183.4584f, 325.0038f, (byte) 30, 15000, "idf5_u3_west_3");
+				spawn(233726, 257.0595f, 183.5797f, 325.0045f, (byte) 30, 15000, "idf5_u3_west_4");
+
+				spawn(233725, 253.5314f, 183.5728f, 325.0038f, (byte) 30, 30000, "idf5_u3_west_2");
+				spawn(233732, 255.2491f, 183.4584f, 325.0038f, (byte) 30, 30000, "idf5_u3_west_3");
+				spawn(233725, 257.0595f, 183.5797f, 325.0045f, (byte) 30, 30000, "idf5_u3_west_4");
+				break;
+			case 702223: // west third wave
+				spawn(233721, 251.9594f, 183.4159f, 325.0038f, (byte) 30, 0, "idf5_u3_west_1");
+				spawn(233722, 253.5314f, 183.5728f, 325.0038f, (byte) 30, 0, "idf5_u3_west_2");
+				spawn(233722, 255.2491f, 183.4584f, 325.0038f, (byte) 30, 0, "idf5_u3_west_3");
+				spawn(233721, 257.0595f, 183.5797f, 325.0045f, (byte) 30, 0, "idf5_u3_west_4");
+				spawn(233737, 255.0448f, 185.5452f, 325.0038f, (byte) 30, 0, "idf5_u3_west_6");
+				spawn(233725, 253.5314f, 183.5728f, 325.0038f, (byte) 30, 15000, "idf5_u3_west_2");
+				spawn(233720, 252.2491f, 183.4584f, 325.0038f, (byte) 30, 15000, "idf5_u3_west_3");
+				spawn(233731, 257.0595f, 183.5797f, 325.0045f, (byte) 30, 15000, "idf5_u3_west_4");
+				spawn(233725, 258.7057f, 183.6840f, 325.0038f, (byte) 30, 15000, "idf5_u3_west_5");
+				break;
+			case 702224: // south first wave
+				spawn(233722, 326.3337f, 252.6159f, 291.8364f, (byte) 60, 0, "idf5_u3_south_2");
+				spawn(233723, 326.3333f, 253.1857f, 291.8364f, (byte) 60, 0, "idf5_u3_south_3");
+				spawn(233722, 326.4392f, 255.9983f, 291.8364f, (byte) 60, 0, "idf5_u3_south_4");
+				spawn(233725, 326.3337f, 252.6159f, 291.8364f, (byte) 60, 15000, "idf5_u3_south_2");
+				spawn(233730, 326.3333f, 253.1857f, 291.8364f, (byte) 60, 15000, "idf5_u3_south_3");
+				spawn(233725, 326.4392f, 255.9983f, 291.8364f, (byte) 60, 15000, "idf5_u3_south_4");
+				spawn(233726, 326.3337f, 252.6159f, 291.8364f, (byte) 60, 30000, "idf5_u3_south_2");
+				spawn(233727, 326.3333f, 253.1857f, 291.8364f, (byte) 60, 30000, "idf5_u3_south_3");
+				spawn(233726, 326.4392f, 255.9983f, 291.8364f, (byte) 60, 30000, "idf5_u3_south_4");
+				break;
+			case 702225: // south second wave
+				spawn(233722, 326.3337f, 252.6159f, 291.8364f, (byte) 60, 0, "idf5_u3_south_2");
+				spawn(233723, 326.3333f, 253.1857f, 291.8364f, (byte) 60, 0, "idf5_u3_south_3");
+				spawn(233722, 326.4392f, 255.9983f, 291.8364f, (byte) 60, 0, "idf5_u3_south_4");
+				spawn(233725, 326.3337f, 252.6159f, 291.8364f, (byte) 60, 15000, "idf5_u3_south_2");
+				spawn(233730, 326.3333f, 253.1857f, 291.8364f, (byte) 60, 15000, "idf5_u3_south_3");
+				spawn(233725, 326.4392f, 255.9983f, 291.8364f, (byte) 60, 15000, "idf5_u3_south_4");
+				spawn(233726, 326.3337f, 252.6159f, 291.8364f, (byte) 60, 30000, "idf5_u3_south_2");
+				spawn(233727, 326.3333f, 253.1857f, 291.8364f, (byte) 60, 30000, "idf5_u3_south_3");
+				spawn(233726, 326.4392f, 255.9983f, 291.8364f, (byte) 60, 30000, "idf5_u3_south_4");
+				break;
+			case 702226: // south third wave
+				spawn(233725, 326.3734f, 251.2209f, 291.8364f, (byte) 60, 0, "idf5_u3_south_1");
+				spawn(233720, 326.3337f, 252.6159f, 291.8364f, (byte) 60, 0, "idf5_u3_south_2");
+				spawn(233720, 326.3333f, 253.1857f, 291.8364f, (byte) 60, 0, "idf5_u3_south_3");
+				spawn(233725, 326.4392f, 255.9983f, 291.8364f, (byte) 60, 0, "idf5_u3_south_4");
+				spawn(233738, 324.7853f, 254.2962f, 291.8364f, (byte) 60, 0, "idf5_u3_south_6");
+				spawn(233722, 326.3337f, 252.6159f, 291.8364f, (byte) 60, 15000, "idf5_u3_south_2");
+				spawn(233722, 326.3333f, 253.1857f, 291.8364f, (byte) 60, 15000, "idf5_u3_south_3");
+				spawn(233735, 326.4392f, 255.9983f, 291.8364f, (byte) 60, 15000, "idf5_u3_south_4");
+				spawn(233723, 326.4354f, 257.6836f, 291.8466f, (byte) 60, 15000, "idf5_u3_south_5");
+				break;
+			case 702227: // north first wave
+				spawn(233722, 184.6565f, 256.3191f, 291.8364f, (byte) 0, 0, "idf5_u3_north_2");
+				spawn(233727, 184.6415f, 253.7202f, 291.8364f, (byte) 0, 0, "idf5_u3_north_3");
+				spawn(233722, 184.6134f, 253.0914f, 291.8364f, (byte) 0, 0, "idf5_u3_north_4");
+				spawn(233725, 184.6565f, 256.3191f, 291.8364f, (byte) 0, 15000, "idf5_u3_north_2");
+				spawn(233723, 184.6415f, 253.7202f, 291.8364f, (byte) 0, 15000, "idf5_u3_north_3");
+				spawn(233725, 184.6134f, 253.0914f, 291.8364f, (byte) 0, 15000, "idf5_u3_north_4");
+				spawn(233725, 184.6565f, 256.3191f, 291.8364f, (byte) 0, 30000, "idf5_u3_north_2");
+				spawn(233729, 184.6134f, 253.0914f, 291.8364f, (byte) 0, 30000, "idf5_u3_north_3");
+				spawn(233725, 184.6415f, 253.7202f, 291.8364f, (byte) 0, 30000, "idf5_u3_north_4");
+				spawn(233882, 253.1755f, 252.6574f, 298.2540f, (byte) 60, 30000, "idf5_u3_hide_1");
+				spawn(233883, 253.1821f, 254.5660f, 298.2540f, (byte) 60, 30000, "idf5_u3_hide_2");
+				spawn(233882, 253.3598f, 256.3680f, 298.2540f, (byte) 60, 30000, "idf5_u3_hide_3");
+				break;
+			case 702228: // north second wave
+				spawn(233726, 184.6565f, 256.3191f, 291.8364f, (byte) 0, 0, "idf5_u3_north_2");
+				spawn(233723, 184.6415f, 253.7202f, 291.8364f, (byte) 0, 0, "idf5_u3_north_3");
+				spawn(233726, 184.6134f, 253.0914f, 291.8364f, (byte) 0, 0, "idf5_u3_north_4");
+				spawn(233722, 184.6565f, 256.3191f, 291.8364f, (byte) 0, 15000, "idf5_u3_north_2");
+				spawn(233724, 184.6415f, 253.7202f, 291.8364f, (byte) 0, 15000, "idf5_u3_north_3");
+				spawn(233722, 184.6134f, 253.0914f, 291.8364f, (byte) 0, 15000, "idf5_u3_north_4");
+				spawn(233720, 184.6565f, 256.3191f, 291.8364f, (byte) 0, 30000, "idf5_u3_north_2");
+				spawn(233734, 184.6415f, 253.7202f, 291.8364f, (byte) 0, 30000, "idf5_u3_north_3");
+				spawn(233720, 184.6134f, 253.0914f, 291.8364f, (byte) 0, 30000, "idf5_u3_north_4");
+				break;
+			case 702229: // north third wave
+				spawn(233725, 184.6565f, 256.3191f, 291.8364f, (byte) 0, 0, "idf5_u3_north_1");
+				spawn(233720, 184.6415f, 253.7202f, 291.8364f, (byte) 0, 0, "idf5_u3_north_2");
+				spawn(233724, 184.6134f, 253.0914f, 291.8364f, (byte) 0, 0, "idf5_u3_north_3");
+				spawn(233725, 184.7428f, 251.3166f, 291.8842f, (byte) 0, 0, "idf5_u3_north_4");
+				spawn(233731, 186.8694f, 254.6730f, 291.8364f, (byte) 0, 0, "idf5_u3_north_6");
+				spawn(233722, 184.7428f, 251.3166f, 291.8842f, (byte) 0, 15000, "idf5_u3_north_2");
+				spawn(233721, 184.6565f, 256.3191f, 291.8364f, (byte) 0, 15000, "idf5_u3_north_3");
+				spawn(233739, 184.6415f, 253.7202f, 291.8364f, (byte) 0, 15000, "idf5_u3_north_4");
+				spawn(233722, 184.6134f, 253.0914f, 291.8364f, (byte) 0, 15000, "idf5_u3_north_5");
+				break;
+		}
+	}
+
+	private void checkGenerators() {
+		ThreadPoolManager.getInstance().schedule(() -> {
+			for (int id = 702220; id <= 702229; id += 3) {
+				if (instance.getNpc(id) == null)
+					return;
+			}
+			cancelTasks();
+			PacketSendUtility.broadcastToMap(instance, SM_SYSTEM_MESSAGE.STR_MSG_IDF5_U3_OBJ_ALL_COMPLETE());
+
+			for (Npc npc : instance.getNpcs())
+				npc.getController().delete();
+
+			spawn(730886, 255.49f, 293.03f, 321.1850f, (byte) 30);
+			spawn(730886, 255.49f, 215.80f, 321.2134f, (byte) 30);
+			spawn(730886, 294.53f, 254.65f, 295.7718f, (byte) 60);
+			spawn(730886, 216.80f, 254.65f, 295.7729f, (byte) 0);
+			spawnEndboss(233740);
+		}, 30000);
+	}
+
+	protected void spawnEndboss(int npcId) {
+		spawn(npcId, 255.48956f, 254.5804f, 455.1201f, (byte) 15);
 	}
 
 	protected void wipe() {
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-			@Override
-			public void run() {
-				if (isInstanceDestroyed)
-					return;
-				instance.forEachPlayer(new Consumer<Player>() {
-					@Override
-					public void accept(Player pl) {
-						if (!pl.isDead())
-							pl.getController().die();
-					}
-				});
-				onInstanceDestroy();
-			}
+		ThreadPoolManager.getInstance().schedule(() -> {
+			if (isInstanceDestroyed)
+				return;
+			instance.forEachPlayer(p -> {
+				if (!p.isDead())
+					p.getController().die();
+			});
 		}, 5000);
 	}
 
-	protected void sp(final int npcId, final float x, final float y, final float z, final byte h, final int delay, final String walkerId) {
-		Future<?> task = ThreadPoolManager.getInstance().schedule(new Runnable() {
-			@Override
-			public void run() {
-				if (!isInstanceDestroyed) {
-					Npc npc = (Npc) spawn(npcId, x, y, z, h);
-					npc.getSpawn().setWalkerId(walkerId);
-					WalkManager.startWalking((NpcAI) npc.getAi());
-					npc.setState(CreatureState.WALK_MODE);
-					PacketSendUtility.broadcastPacket(npc, new SM_EMOTION(npc, EmotionType.START_EMOTE2, 0, npc.getObjectId()));
-				}
+	protected void spawn(int npcId, float x, float y, float z, byte h, int delay, String walkerId) {
+		tasks.add(ThreadPoolManager.getInstance().schedule(() -> {
+			if (!isInstanceDestroyed) {
+				Npc npc = (Npc) spawn(npcId, x, y, z, h);
+				npc.getSpawn().setWalkerId(walkerId);
+				tasks.add(ThreadPoolManager.getInstance().schedule(() -> WalkManager.startWalking((NpcAI) npc.getAi()), 2500));
 			}
-		}, delay);
-		spawnTasks.add(task);
-	}
-	
-	protected void scheduleAdditionalAttack(int locationId) {
-		switch (locationId) {
-			case 1: //North
-				sp(233723, 181.01f, 257.40f, 291.83f, (byte) 119, 2000, "4_left_301230000");
-				sp(233724, 180.83f, 252.54f, 291.83f, (byte) 119, 2500, "4_right_301230000");
-				sp(233725, 183.05f, 254.72f, 291.83f, (byte) 119, 3000, "4_center_301230000");
-				sp(233726, 181.01f, 257.40f, 291.83f, (byte) 119, 11000, "4_left_301230000");
-				sp(233727, 180.83f, 252.54f, 291.83f, (byte) 119, 11500, "4_right_301230000");
-				sp(233728, 183.05f, 254.72f, 291.83f, (byte) 119, 12000, "4_center_301230000");
-				sp(233729, 181.01f, 257.40f, 291.83f, (byte) 119, 21000, "4_left_301230000");
-				sp(233722, 180.83f, 252.54f, 291.83f, (byte) 119, 21500, "4_right_301230000");
-				sp(233721, 183.05f, 254.72f, 291.83f, (byte) 119, 22000, "4_center_301230000");
-				sp(233723, 181.01f, 257.40f, 291.83f, (byte) 119, 81000, "4_left_301230000");
-				sp(233724, 180.83f, 252.54f, 291.83f, (byte) 119, 81500, "4_right_301230000");
-				sp(233725, 183.05f, 254.72f, 291.83f, (byte) 119, 82000, "4_center_301230000");
-				sp(233726, 181.01f, 257.40f, 291.83f, (byte) 119, 91000, "4_left_301230000");
-				sp(233727, 180.83f, 252.54f, 291.83f, (byte) 119, 91500, "4_right_301230000");
-				sp(233728, 183.05f, 254.72f, 291.83f, (byte) 119, 92000, "4_center_301230000");
-				sp(233729, 181.01f, 257.40f, 291.83f, (byte) 119, 101000, "4_left_301230000");
-				sp(233722, 180.83f, 252.54f, 291.83f, (byte) 119, 101500, "4_right_301230000");
-				sp(233721, 183.05f, 254.72f, 291.83f, (byte) 119, 102000, "4_center_301230000");
-				break;
-			case 2: //South
-				sp(233738, 329.78f, 251.68f, 291.83f, (byte) 60, 2000, "3_left_301230000");
-				sp(233739, 329.84f, 256.80f, 291.83f, (byte) 60, 2500, "3_right_301230000");
-				sp(233730, 328.09f, 254.24f, 291.83f, (byte) 60, 3000, "3_center_301230000");
-				sp(233731, 329.78f, 251.68f, 291.83f, (byte) 60, 11000, "3_left_301230000");
-				sp(233732, 329.84f, 256.80f, 291.83f, (byte) 60, 11500, "3_right_301230000");
-				sp(233733, 328.09f, 254.24f, 291.83f, (byte) 60, 12000, "3_center_301230000");
-				sp(233734, 329.78f, 251.68f, 291.83f, (byte) 60, 21000, "3_left_301230000");
-				sp(233735, 329.84f, 256.80f, 291.83f, (byte) 60, 21500, "3_right_301230000");
-				sp(233736, 328.09f, 254.24f, 291.83f, (byte) 60, 22000, "3_center_301230000");
-				sp(233738, 329.78f, 251.68f, 291.83f, (byte) 60, 81000, "3_left_301230000");
-				sp(233739, 329.84f, 256.80f, 291.83f, (byte) 60, 81500, "3_right_301230000");
-				sp(233730, 328.09f, 254.24f, 291.83f, (byte) 60, 82000, "3_center_301230000");
-				sp(233731, 329.78f, 251.68f, 291.83f, (byte) 60, 91000, "3_left_301230000");
-				sp(233732, 329.84f, 256.80f, 291.83f, (byte) 60, 91500, "3_right_301230000");
-				sp(233733, 328.09f, 254.24f, 291.83f, (byte) 60, 92000, "3_center_301230000");
-				sp(233734, 329.78f, 251.68f, 291.83f, (byte) 60, 101000, "3_left_301230000");
-				sp(233735, 329.84f, 256.80f, 291.83f, (byte) 60, 101500, "3_right_301230000");
-				sp(233736, 328.09f, 254.24f, 291.83f, (byte) 60, 102000, "3_center_301230000");
-				break;
-			case 3: //West
-				sp(233729, 253.31f, 180.35f, 325.00f, (byte) 30, 2000, "2_left_301230000");
-				sp(233730, 257.56f, 180.41f, 325.00f, (byte) 30, 2500, "2_right_301230000");
-				sp(233731, 255.39f, 182.25f, 325.00f, (byte) 30, 3000, "2_center_301230000");
-				sp(233732, 253.31f, 180.35f, 325.00f, (byte) 30, 11000, "2_left_301230000");
-				sp(233733, 257.56f, 180.41f, 325.00f, (byte) 30, 11500, "2_right_301230000");
-				sp(233734, 255.39f, 182.25f, 325.00f, (byte) 30, 12000, "2_center_301230000");
-				sp(233735, 253.31f, 180.35f, 325.00f, (byte) 30, 21000, "2_left_301230000");
-				sp(233736, 257.56f, 180.41f, 325.00f, (byte) 30, 21500, "2_right_301230000");
-				sp(233737, 255.39f, 182.25f, 325.00f, (byte) 30, 22000, "2_center_301230000");
-				sp(233729, 253.31f, 180.35f, 325.00f, (byte) 30, 81000, "2_left_301230000");
-				sp(233730, 257.56f, 180.41f, 325.00f, (byte) 30, 81500, "2_right_301230000");
-				sp(233731, 255.39f, 182.25f, 325.00f, (byte) 30, 82000, "2_center_301230000");
-				sp(233732, 253.31f, 180.35f, 325.00f, (byte) 30, 91000, "2_left_301230000");
-				sp(233733, 257.56f, 180.41f, 325.00f, (byte) 30, 91500, "2_right_301230000");
-				sp(233734, 255.39f, 182.25f, 325.00f, (byte) 30, 92000, "2_center_301230000");
-				sp(233735, 253.31f, 180.35f, 325.00f, (byte) 30, 101000, "2_left_301230000");
-				sp(233736, 257.56f, 180.41f, 325.00f, (byte) 30, 101500, "2_right_301230000");
-				sp(233737, 255.39f, 182.25f, 325.00f, (byte) 30, 102000, "2_center_301230000");
-				break;
-			case 4: //East
-				sp(233720, 257.31f, 328.03f, 325.00f, (byte) 91, 2000, "1_left_301230000");
-				sp(233721, 253.57f, 328.10f, 325.00f, (byte) 91, 2500, "1_right_301230000");
-				sp(233722, 255.40f, 326.54f, 325.00f, (byte) 91, 3000, "1_center_301230000");
-				sp(233723, 257.31f, 328.03f, 325.00f, (byte) 91, 11000, "1_left_301230000");
-				sp(233724, 253.57f, 328.10f, 325.00f, (byte) 91, 11500, "1_right_301230000");
-				sp(233725, 255.40f, 326.54f, 325.00f, (byte) 91, 12000, "1_center_301230000");
-				sp(233726, 257.31f, 328.03f, 325.00f, (byte) 91, 21000, "1_left_301230000");
-				sp(233727, 253.57f, 328.10f, 325.00f, (byte) 91, 21500, "1_right_301230000");
-				sp(233728, 255.40f, 326.54f, 325.00f, (byte) 91, 22000, "1_center_301230000");
-				sp(233720, 257.31f, 328.03f, 325.00f, (byte) 91, 81000, "1_left_301230000");
-				sp(233721, 253.57f, 328.10f, 325.00f, (byte) 91, 81500, "1_right_301230000");
-				sp(233722, 255.40f, 326.54f, 325.00f, (byte) 91, 82000, "1_center_301230000");
-				sp(233723, 257.31f, 328.03f, 325.00f, (byte) 91, 91000, "1_left_301230000");
-				sp(233724, 253.57f, 328.10f, 325.00f, (byte) 91, 91500, "1_right_301230000");
-				sp(233725, 255.40f, 326.54f, 325.00f, (byte) 91, 92000, "1_center_301230000");
-				sp(233726, 257.31f, 328.03f, 325.00f, (byte) 91, 101000, "1_left_301230000");
-				sp(233727, 253.57f, 328.10f, 325.00f, (byte) 91, 101500, "1_right_301230000");
-				sp(233728, 255.40f, 326.54f, 325.00f, (byte) 91, 102000, "1_center_301230000");
-				break;
-		}
-	}
-	
-	private void cancelTaskList() {
-		for (Future<?> task : spawnTasks) {
-			cancelSingleTask(task);
-		}
+		}, delay));
 	}
 
-	private void cancelSingleTask(Future<?> task) {
-		if (task != null && !task.isCancelled())
-			task.cancel(true);
+	private void cancelTasks() {
+		tasks.stream().filter(t -> t != null && !t.isCancelled()).forEach(t -> t.cancel(true));
 	}
 
 	@Override
@@ -274,7 +329,7 @@ public class IlluminaryObeliskInstance extends GeneralInstanceHandler {
 				break;
 			case 702009:
 				TeleportService.teleportTo(player, mapId, instanceId, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading(), TeleportAnimation.FADE_OUT_BEAM);
-				SkillEngine.getInstance().applyEffectDirectly(21511, npc, player, 0);
+				SkillEngine.getInstance().getSkill(npc, 21511, 1, player).useSkill();
 				npc.getController().delete();
 				break;
 			case 730905:
@@ -282,60 +337,50 @@ public class IlluminaryObeliskInstance extends GeneralInstanceHandler {
 				break;
 		}
 	}
-	
+
 	@Override
 	public void onEnterInstance(Player player) {
-		// PacketSendUtility.sendPacket(player, new SM_PLAY_MOVIE(0, 0, ???, 0));
+		// TODO: movie id PacketSendUtility.sendPacket(player, new SM_PLAY_MOVIE(0, 0, ???, 0));
 		if (isRaceSet.compareAndSet(false, true)) {
 			int npcId = player.getRace() == Race.ASMODIANS ? 802049 : 802048;
 			spawn(npcId, 315.74573f, 306.9366f, 405.49997f, (byte) 15);
 		}
 	}
-	
+
 	@Override
 	public void onEndEffect(Creature effector, Creature effected, int skillId) {
 		if (skillId == 21511)
 			spawn(702009, effected.getX(), effected.getY(), effected.getZ(), effected.getHeading());
 	}
-	
-	@Override
-	public boolean onDie(final Player player, Creature lastAttacker) {
-		PacketSendUtility.sendPacket(player, new SM_DIE(false, false, 0, 8));
-		return true;
-	}
-	
+
 	@Override
 	public void onDie(Npc npc) {
 		int npcId = npc.getNpcId();
-		if (npcId >= 233720 && npcId <= 233739)
-			npc.getController().delete();
-		if (npcId == getBossId())
+		if (npcId == 233740) {
 			spawn(730905, 267.64062f, 267.84793f, 276.65512f, (byte) 75); // exit
+			return;
+		}
+		if (npcId != 730884 && npcId != 730885)
+			npc.getController().delete();
 	}
-	
+
 	@Override
 	public boolean onReviveEvent(Player player) {
 		PlayerReviveService.revive(player, 25, 25, false, 0);
 		player.getGameStats().updateStatsAndSpeedVisually();
-		PacketSendUtility.sendPacket(player, STR_REBIRTH_MASSAGE_ME());
+		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REBIRTH_MASSAGE_ME());
 		TeleportService.teleportTo(player, mapId, instanceId, 271.1714f, 271.4455f, 276.67294f, (byte) 75);
 		return true;
 	}
-	
-	@Override
-	public void onInstanceDestroy() {
-		cancelSingleTask(generatorCheckTask);
-		cancelSingleTask(wipeTask);
-		cancelTaskList();
-		doors.clear();
-		for (Npc npc : instance.getNpcs()) {
-			npc.getController().delete();
-		}
-		isInstanceDestroyed = true;
-	}
-	
+
 	@Override
 	public void onExitInstance(Player player) {
 		TeleportService.moveToInstanceExit(player, mapId, player.getRace());
+	}
+
+	@Override
+	public void onInstanceDestroy() {
+		isInstanceDestroyed = true;
+		cancelTasks();
 	}
 }

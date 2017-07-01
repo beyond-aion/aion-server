@@ -4,18 +4,14 @@ import static com.aionemu.gameserver.model.DialogAction.SETPRO1;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import com.aionemu.gameserver.ai.NpcAI;
-import com.aionemu.gameserver.ai.manager.WalkManager;
 import com.aionemu.gameserver.controllers.observer.ItemUseObserver;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
@@ -26,28 +22,31 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 import ai.GeneralNpcAI;
 
 /**
+ * On retail you can fake charge waves - means waves will spawn when players begin to charge.
+ * But there is still no logical need to implement double-checks for this special case, so we
+ * spawn them event-based via {@link IlluminaryObeliskInstance#onSpawn()}.
+ * 
  * @author Estrayl
  */
 public abstract class ShieldGeneratorAI extends GeneralNpcAI {
 
-	private AtomicBoolean isUnderCharge = new AtomicBoolean();
-	private List<Future<?>> spawnTasks = new ArrayList<>();
-	private List<Npc> assaulter = new ArrayList<>();
-	protected List<Npc> support = new ArrayList<>();
+	private final AtomicBoolean isUnderCharge = new AtomicBoolean();
+	private final AtomicBoolean isVortexSpawned = new AtomicBoolean();
+	protected final List<Npc> charges = new ArrayList<>();
 	protected int chargeCount = 0;
-	private int attackCount = 14;
+	private long lastAttackedTime;
 
-	protected abstract int getAttackMsg();
+	protected abstract SM_SYSTEM_MESSAGE getAttackMsg();
 
-	protected abstract int getChargeMsg();
+	protected abstract SM_SYSTEM_MESSAGE getChargeMsg();
 
-	protected abstract int getGateMsg();
+	protected abstract SM_SYSTEM_MESSAGE getGateMsg();
 
-	protected abstract int getDestructionMsg();
+	protected abstract SM_SYSTEM_MESSAGE getDestructionMsg();
 
 	protected abstract void handleChargeComplete();
 
-	protected abstract void phaseAttack();
+	protected abstract void handleVortexSpawn();
 
 	@Override
 	public boolean canThink() {
@@ -57,15 +56,14 @@ public abstract class ShieldGeneratorAI extends GeneralNpcAI {
 	@Override
 	protected void handleAttack(Creature creature) {
 		super.handleAttack(creature);
-		attackCount++;
-		if (attackCount >= 15) {
-			attackCount = 0;
+		if (System.currentTimeMillis() - lastAttackedTime > 10000) {
+			lastAttackedTime = System.currentTimeMillis();
 			shout(getAttackMsg());
 		}
 	}
 
-	protected void shout(int msgId) {
-		PacketSendUtility.broadcastToMap(getOwner(), msgId);
+	protected void shout(SM_SYSTEM_MESSAGE msg) {
+		PacketSendUtility.broadcastToMap(getOwner(), msg);
 	}
 
 	@Override
@@ -77,13 +75,15 @@ public abstract class ShieldGeneratorAI extends GeneralNpcAI {
 	public boolean onDialogSelect(Player player, int dialogActionId, int questId, int extendedRewardIndex) {
 		if (dialogActionId == SETPRO1) {
 			if (chargeCount > 2) {
-				PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1402203));
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_IDF5_U3_OBJ_CHARGE_END());
 				return false;
 			}
 			if (player.getInventory().getItemCountByItemId(164000289) == 0) {
-				PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1402211));
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_IDF5_U3_OBJ_NOITEM());
 				return false;
 			}
+			if (isVortexSpawned.compareAndSet(false, true))
+				handleVortexSpawn();
 			if (isUnderCharge.compareAndSet(false, true))
 				handleCharging(player);
 		}
@@ -107,56 +107,31 @@ public abstract class ShieldGeneratorAI extends GeneralNpcAI {
 		PacketSendUtility.sendPacket(player, new SM_USE_OBJECT(player.getObjectId(), getObjectId(), 20000, 1));
 		PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.START_QUESTLOOT, 0, getObjectId()), true);
 		shout(getChargeMsg());
-		player.getController().addTask(TaskId.ACTION_ITEM_NPC, ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.END_QUESTLOOT, 0, getObjectId()), true);
-				PacketSendUtility.sendPacket(player, new SM_USE_OBJECT(player.getObjectId(), getObjectId(), 20000, 2));
-				player.getObserveController().removeObserver(observer);
-				player.getInventory().decreaseByItemId(164000289, 1);
+		player.getController().addTask(TaskId.ACTION_ITEM_NPC, ThreadPoolManager.getInstance().schedule(() -> {
+			PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.END_QUESTLOOT, 0, getObjectId()), true);
+			PacketSendUtility.sendPacket(player, new SM_USE_OBJECT(player.getObjectId(), getObjectId(), 20000, 2));
+			player.getObserveController().removeObserver(observer);
+			if (player.getInventory().decreaseByItemId(164000289, 1)) {
 				handleChargeComplete();
-				phaseAttack();
 				chargeCount++;
-				isUnderCharge.set(false);
 			}
+			isUnderCharge.set(false);
 		}, 20000));
 	}
 
-	protected void sp(final int npcId, final float x, final float y, final float z, final byte h, final int delay, final String walkerId) {
-		spawnTasks.add(ThreadPoolManager.getInstance().schedule(() -> {
-			if (!isDead()) {
-				Npc npc = (Npc) spawn(npcId, x, y, z, h);
-				assaulter.add(npc);
-				npc.getSpawn().setWalkerId(walkerId);
-				WalkManager.startWalking((NpcAI) npc.getAi());
-				npc.setState(CreatureState.WALK_MODE);
-				PacketSendUtility.broadcastPacket(npc, new SM_EMOTION(npc, EmotionType.START_EMOTE2, 0, npc.getObjectId()));
-			}
-		}, delay));
-	}
-
-	private void deleteNpcs(List<Npc> npcs) {
-		for (Npc npc : npcs)
-			if (npc != null && !npc.isDead())
-				npc.getController().delete();
+	private void deleteNpcs() {
+		charges.stream().forEach(s -> s.getController().delete());
 	}
 
 	@Override
 	protected void handleDespawned() {
-		for (Future<?> task : spawnTasks)
-			if (task != null && !task.isCancelled())
-				task.cancel(true);
-
-		deleteNpcs(support);
-		deleteNpcs(assaulter);
+		deleteNpcs();
 		super.handleDespawned();
 	}
 
 	@Override
 	protected void handleDied() {
-		deleteNpcs(support);
-		deleteNpcs(assaulter);
+		deleteNpcs();
 		shout(getDestructionMsg());
 		super.handleDied();
 	}

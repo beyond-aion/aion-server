@@ -25983,77 +25983,77 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	public static final SM_SYSTEM_MESSAGE STR_MSG_ITEM_AUTHORIZE_SUCCEEDED_MAX(String playerName, int nameId) {
 		return new SM_SYSTEM_MESSAGE(1402154, playerName, new DescriptionId(nameId), 10);
 	}
-	
+
 	/**
 	 * The entrance to the Illuminary Obelisk has opened.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_IDF5_U3_DOOR_OPEN() {
 		return new SM_SYSTEM_MESSAGE(1402193);
 	}
-	
+
 	/**
 	 * The eastern power generator is charging.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_IDF5_U3_OBJ_CHARGE_01() {
 		return new SM_SYSTEM_MESSAGE(1402194);
 	}
-	
+
 	/**
 	 * The western power generator is charging.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_IDF5_U3_OBJ_CHARGE_02() {
 		return new SM_SYSTEM_MESSAGE(1402195);
 	}
-	
+
 	/**
 	 * The southern power generator is charging.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_IDF5_U3_OBJ_CHARGE_03() {
 		return new SM_SYSTEM_MESSAGE(1402196);
 	}
-	
+
 	/**
 	 * The northern power generator is charging.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_IDF5_U3_OBJ_CHARGE_04() {
 		return new SM_SYSTEM_MESSAGE(1402197);
 	}
-	
+
 	/**
 	 * The eastern power generator will finish charging in 30 seconds.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_IDF5_U3_OBJ_FINAL_CHARGE_01() {
 		return new SM_SYSTEM_MESSAGE(1402198);
 	}
-	
+
 	/**
 	 * The western power generator will finish charging in 30 seconds.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_IDF5_U3_OBJ_FINAL_CHARGE_02() {
 		return new SM_SYSTEM_MESSAGE(1402199);
 	}
-	
+
 	/**
 	 * The southern power generator will finish charging in 30 seconds.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_IDF5_U3_OBJ_FINAL_CHARGE_03() {
 		return new SM_SYSTEM_MESSAGE(1402200);
 	}
-	
+
 	/**
 	 * The northern power generator will finish charging in 30 seconds.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_IDF5_U3_OBJ_FINAL_CHARGE_04() {
 		return new SM_SYSTEM_MESSAGE(1402201);
 	}
-	
+
 	/**
 	 * The shield is activated and the Pashid Destruction Unit is retreating. The Shield Control Room Teleporter has appeared.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_IDF5_U3_OBJ_ALL_COMPLETE() {
 		return new SM_SYSTEM_MESSAGE(1402202);
 	}
-	
+
 	/**
 	 * This power generator is fully charged. It cannot be charged any further.
 	 */
@@ -26069,6 +26069,13 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	}
 
 	/**
+	 * You need a Crystalline Idium Piece to charge the generator.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDF5_U3_OBJ_NOITEM() {
+		return new SM_SYSTEM_MESSAGE(1402211);
+	}
+
+	/**
 	 * The Dynatoum has destroyed the teleport device of the shield generation hub.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_IDF5_U3_BOSS_PORTAL_DESTROY() {
@@ -26080,6 +26087,62 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_GLORY_POINT_LOSE(int num0) {
 		return new SM_SYSTEM_MESSAGE(1402219, num0);
+	}
+
+	/**
+	 * The eastern power shield generator is under attack.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDF5_U3_DEFENCE_01_ATTACKED() {
+		return new SM_SYSTEM_MESSAGE(1402220);
+	}
+
+	/**
+	 * The western power shield generator is under attack.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDF5_U3_DEFENCE_02_ATTACKED() {
+		return new SM_SYSTEM_MESSAGE(1402221);
+	}
+
+	/**
+	 * The southern power shield generator is under attack.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDF5_U3_DEFENCE_03_ATTACKED() {
+		return new SM_SYSTEM_MESSAGE(1402222);
+	}
+
+	/**
+	 * The northern power shield generator is under attack.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDF5_U3_DEFENCE_04_ATTACKED() {
+		return new SM_SYSTEM_MESSAGE(1402223);
+	}
+
+	/**
+	 * An Abyss Gate has opened near the eastern power shield generator. Infiltration by Pashid Destruction Unit is underway.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDF5_U3_N_WAVE_01_BEGIN() {
+		return new SM_SYSTEM_MESSAGE(1402224);
+	}
+
+	/**
+	 * An Abyss Gate has opened near the western power shield generator. Infiltration by Pashid Destruction Unit is underway.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDF5_U3_N_WAVE_02_BEGIN() {
+		return new SM_SYSTEM_MESSAGE(1402225);
+	}
+
+	/**
+	 * An Abyss Gate has opened near the southern power shield generator. Infiltration by Pashid Destruction Unit is underway.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDF5_U3_N_WAVE_03_BEGIN() {
+		return new SM_SYSTEM_MESSAGE(1402226);
+	}
+
+	/**
+	 * An Abyss Gate has opened near the northern power shield generator. Infiltration by Pashid Destruction Unit is underway.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDF5_U3_N_WAVE_04_BEGIN() {
+		return new SM_SYSTEM_MESSAGE(1402227);
 	}
 
 	/**

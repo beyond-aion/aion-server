@@ -2,6 +2,7 @@ package ai.instance.illuminaryObelisk;
 
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 
 /**
  * @author Estrayl
@@ -10,52 +11,33 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 public class ShieldGeneratorWestAI extends ShieldGeneratorAI {
 
 	@Override
-	protected int getAttackMsg() {
-		return 1402221;
+	protected SM_SYSTEM_MESSAGE getAttackMsg() {
+		return SM_SYSTEM_MESSAGE.STR_MSG_IDF5_U3_DEFENCE_02_ATTACKED();
 	}
 
 	@Override
-	protected int getChargeMsg() {
-		if (chargeCount == 2)
-			return 1402199;
-		return 1402136;
+	protected SM_SYSTEM_MESSAGE getChargeMsg() {
+		return SM_SYSTEM_MESSAGE.STR_MSG_IDF5_U3_OBJ_CHARGE_02();
 	}
 
 	@Override
-	protected int getGateMsg() {
-		return 1402225;
+	protected SM_SYSTEM_MESSAGE getDestructionMsg() {
+		return SM_SYSTEM_MESSAGE.STR_MSG_IDF5_U3_OBJ_DESTROY_02();
 	}
 
 	@Override
-	protected int getDestructionMsg() {
-		return 1402140;
+	protected SM_SYSTEM_MESSAGE getGateMsg() {
+		return SM_SYSTEM_MESSAGE.STR_MSG_IDF5_U3_N_WAVE_02_BEGIN();
 	}
 
 	@Override
 	protected void handleChargeComplete() {
-		switch (chargeCount) {
-			case 0:
-				support.add((Npc) spawn(702221, 255.38824f, 211.9726f, 321.37753f, (byte) 89));
-				break;
-			case 1:
-				support.add((Npc) spawn(702222, 255.38824f, 211.9726f, 321.37753f, (byte) 89));
-				break;
-			case 2:
-				support.add((Npc) spawn(702223, 255.38824f, 211.9726f, 321.37753f, (byte) 89));
-				break;
-		}
+		charges.add((Npc) spawn(702221 + chargeCount, 255.38824f, 211.9726f, 321.37753f, (byte) 90));
 	}
 
 	@Override
-	protected void phaseAttack() {
-		sp(233729, 253.31f, 180.35f, 325.00f, (byte) 30, 2000, "2_left_301230000");
-		sp(233730, 257.56f, 180.41f, 325.00f, (byte) 30, 2500, "2_right_301230000");
-		sp(233731, 255.39f, 182.25f, 325.00f, (byte) 30, 3000, "2_center_301230000");
-		sp(233732, 253.31f, 180.35f, 325.00f, (byte) 30, 11000, "2_left_301230000");
-		sp(233733, 257.56f, 180.41f, 325.00f, (byte) 30, 11500, "2_right_301230000");
-		sp(233734, 255.39f, 182.25f, 325.00f, (byte) 30, 12000, "2_center_301230000");
-		sp(233735, 253.31f, 180.35f, 325.00f, (byte) 30, 21000, "2_left_301230000");
-		sp(233736, 257.56f, 180.41f, 325.00f, (byte) 30, 21500, "2_right_301230000");
-		sp(233737, 255.39f, 182.25f, 325.00f, (byte) 30, 22000, "2_center_301230000");
+	protected void handleVortexSpawn() {
+		spawn(702015, 255.7034f, 171.83853f, 325.81653f, (byte) 0, 18); // west
+		shout(SM_SYSTEM_MESSAGE.STR_MSG_IDF5_U3_N_WAVE_01_BEGIN());
 	}
 }
