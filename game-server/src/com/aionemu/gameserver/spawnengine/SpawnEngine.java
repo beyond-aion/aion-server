@@ -46,7 +46,7 @@ public class SpawnEngine {
 			spawn.getEventTemplate().addSpawnedObject(visObj);
 
 		spawn.setVisibleObject(visObj);
-		if (visObj.getPosition().isInstanceMap())
+		if (visObj != null && visObj.getPosition().isInstanceMap())
 			visObj.getPosition().getWorldMapInstance().getInstanceHandler().onSpawn(visObj);
 		return visObj;
 	}
