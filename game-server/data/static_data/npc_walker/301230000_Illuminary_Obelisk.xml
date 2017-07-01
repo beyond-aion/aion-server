@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<npc_walker xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="npc_walker.xsd" pool="1">
+<npc_walker xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="npc_walker.xsd">
 	<walker_template route_id="idf5_u3_east_1" pool="1">
         <routestep step="1" x="252.3243" y="328.5881" z="325.00922" />
         <routestep step="2" x="252.3243" y="325.01233" z="325.00378" />
