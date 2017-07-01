@@ -76,7 +76,7 @@ public class CronJobService {
 			public void run() {
 				AhserionRaid.getInstance().start();
 			}
-		}, "0 50 17 ? * SUN");
+		}, "0 50 18 ? * SUN");
 	}
 	
 	private void scheduleIdianDepthPortalSpawns() {
