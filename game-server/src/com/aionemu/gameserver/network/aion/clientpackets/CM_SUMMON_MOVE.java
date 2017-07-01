@@ -105,6 +105,7 @@ public class CM_SUMMON_MOVE extends AionClientPacket {
 			m.vehicleZ = vehicleZ;
 		}
 		World.getInstance().updatePosition(summon, x, y, z, heading);
+		m.updateLastMove();
 
 		if ((type & MovementMask.POSITION) == MovementMask.POSITION || type == MovementMask.IMMEDIATE)
 			PacketSendUtility.broadcastPacket(summon, new SM_MOVE(summon));

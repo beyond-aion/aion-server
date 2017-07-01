@@ -264,7 +264,7 @@ public class PositionUtil {
 		long lastMove = creature.getMoveController().getLastMoveUpdate();
 		if (lastMove == 0)
 			return 0;
-		long msSinceLastMove = System.currentTimeMillis() - lastMove;
+		long msSinceLastMove = Math.min(1500, System.currentTimeMillis() - lastMove); // cap ms to avoid huge atk ranges during lags
 		return msSinceLastMove == 0 ? 0 : metersPerSecond * msSinceLastMove / 1000;
 	}
 

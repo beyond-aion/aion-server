@@ -10,7 +10,7 @@
 			<gd_npc npc_id="230998" /> <!-- Slavir the Ancient -->
 			<gd_npc npc_id="230999" /> <!-- Promion the Undying -->
 			<gd_npc npc_id="231000" /> <!-- Bloodcrazed Grigol -->
-			<gd_npc npc_id="284262" /> <!-- Executioner Penemon-->
+			<gd_npc npc_id="284262" /> <!-- Executioner Penemon -->
 			<gd_npc npc_id="231003" /> <!-- Queen Serusia -->
 			<gd_npc npc_id="231196" /> <!-- Roaring Kamara -->
 		</gd_npcs>
@@ -18,7 +18,7 @@
 			<gd_item id="186000237" /> <!-- Ancient Coin" -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Crafting Material" base_chance="8">
+	<gd_rule rule_name="Named Crafting Material" base_chance="15">
 		<gd_maps>
 			<gd_map map_id="210090000" /><!-- Idian Depths Light -->
 			<gd_map map_id="220100000" /><!-- Idian Depths Dark -->
@@ -28,7 +28,7 @@
 			<gd_npc npc_id="230998" /> <!-- Slavir the Ancient -->
 			<gd_npc npc_id="230999" /> <!-- Promion the Undying -->
 			<gd_npc npc_id="231000" /> <!-- Bloodcrazed Grigol -->
-			<gd_npc npc_id="284262" /> <!-- Executioner Penemon-->
+			<gd_npc npc_id="284262" /> <!-- Executioner Penemon -->
 			<gd_npc npc_id="231003" /> <!-- Queen Serusia -->
 			<gd_npc npc_id="231196" /> <!-- Roaring Kamara -->
 		</gd_npcs>
@@ -48,7 +48,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Rata -->
-	<gd_rule rule_name="Named Epic Weapon" base_chance="7.5">
+	<gd_rule rule_name="Named Epic Weapon" base_chance="15">
 		<gd_maps>
 			<gd_map map_id="210090000" /><!-- Idian Depths Light -->
 			<gd_map map_id="220100000" /><!-- Idian Depths Dark -->
@@ -83,7 +83,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Slavir -->
-	<gd_rule rule_name="Named Epic Shield" base_chance="7.5">
+	<gd_rule rule_name="Named Epic Shield" base_chance="15">
 		<gd_maps>
 			<gd_map map_id="210090000" /><!-- Idian Depths Light -->
 			<gd_map map_id="220100000" /><!-- Idian Depths Dark -->
@@ -110,7 +110,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Promion -->
-	<gd_rule rule_name="Named Epic Armor" base_chance="7.5">
+	<gd_rule rule_name="Named Epic Armor" base_chance="15">
 		<gd_maps>
 			<gd_map map_id="210090000" /><!-- Idian Depths Light -->
 			<gd_map map_id="220100000" /><!-- Idian Depths Dark -->
@@ -145,7 +145,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Grigol -->
-	<gd_rule rule_name="Named Epic Weapon" base_chance="7.5">
+	<gd_rule rule_name="Named Epic Weapon" base_chance="15">
 		<gd_maps>
 			<gd_map map_id="210090000" /><!-- Idian Depths Light -->
 			<gd_map map_id="220100000" /><!-- Idian Depths Dark -->
@@ -181,7 +181,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Serusia -->
-	<gd_rule rule_name="Named Epic Armor" base_chance="7.5">
+	<gd_rule rule_name="Named Epic Armor" base_chance="15">
 		<gd_maps>
 			<gd_map map_id="210090000" /><!-- Idian Depths Light -->
 			<gd_map map_id="220100000" /><!-- Idian Depths Dark -->
@@ -196,7 +196,7 @@
 			<gd_item id="114601429" /> <!-- Serusia's Sabatons -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Epic Head" base_chance="7.5">
+	<gd_rule rule_name="Named Epic Head" base_chance="15">
 		<gd_maps>
 			<gd_map map_id="210090000" /><!-- Idian Depths Light -->
 			<gd_map map_id="220100000" /><!-- Idian Depths Dark -->
@@ -227,7 +227,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Kamara -->
-	<gd_rule rule_name="Named Epic Weapon" base_chance="7.5">
+	<gd_rule rule_name="Named Epic Weapon" base_chance="15">
 		<gd_maps>
 			<gd_map map_id="210090000" /><!-- Idian Depths Light -->
 			<gd_map map_id="220100000" /><!-- Idian Depths Dark -->
@@ -273,13 +273,13 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Penemon -->
-	<gd_rule rule_name="Named Epic Armor" base_chance="7.5">
+	<gd_rule rule_name="Named Epic Armor" base_chance="15">
 		<gd_maps>
 			<gd_map map_id="210090000" /><!-- Idian Depths Light -->
 			<gd_map map_id="220100000" /><!-- Idian Depths Dark -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="284262" /> <!-- Executioner Penemon-->
+			<gd_npc npc_id="284262" /> <!-- Executioner Penemon -->
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="110101657" /> <!-- Penemon's Tunic -->
@@ -292,13 +292,13 @@
 			<gd_item id="111601441" /> <!-- Penemon's Gauntlets -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Epic Shield" base_chance="7.5">
+	<gd_rule rule_name="Named Epic Shield" base_chance="15">
 		<gd_maps>
 			<gd_map map_id="210090000" /><!-- Idian Depths Light -->
 			<gd_map map_id="220100000" /><!-- Idian Depths Dark -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="284262" /> <!-- Executioner Penemon-->
+			<gd_npc npc_id="284262" /> <!-- Executioner Penemon -->
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="115001645" /> <!-- Penemon's Magic Shield -->
@@ -311,7 +311,7 @@
 			<gd_map map_id="220100000" /><!-- Idian Depths Dark -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="284262" /> <!-- Executioner Penemon-->
+			<gd_npc npc_id="284262" /> <!-- Executioner Penemon -->
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="115001644" /> <!-- Penemon's Shield -->
@@ -324,7 +324,7 @@
 			<gd_map map_id="220100000" /><!-- Idian Depths Dark -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="284262" /> <!-- Executioner Penemon-->
+			<gd_npc npc_id="284262" /> <!-- Executioner Penemon -->
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="125003652" /> <!-- Penemon's Headband -->

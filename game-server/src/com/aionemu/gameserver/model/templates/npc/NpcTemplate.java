@@ -155,10 +155,6 @@ public class NpcTemplate extends VisibleObjectTemplate {
 		return statsTemplate;
 	}
 
-	public void setStatsTemplate(StatsTemplate statsTemplate) {
-		this.statsTemplate = statsTemplate;
-	}
-
 	public KiskStatsTemplate getKiskStatsTemplate() {
 		return kiskStatsTemplate;
 	}

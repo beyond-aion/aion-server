@@ -52,7 +52,7 @@ public class Geometry extends Spatial {
 	/**
 	 * Do not use this constructor. Serialization purposes only.
 	 */
-	public Geometry() {
+	protected Geometry() {
 	}
 
 	/**
@@ -81,10 +81,12 @@ public class Geometry extends Spatial {
 		this.mesh = mesh;
 	}
 
+	@Override
 	public int getVertexCount() {
 		return mesh.getVertexCount();
 	}
 
+	@Override
 	public int getTriangleCount() {
 		return mesh.getTriangleCount();
 	}
@@ -108,6 +110,7 @@ public class Geometry extends Spatial {
 	/**
 	 * Updates the bounding volume of the mesh. Should be called when the mesh has been modified.
 	 */
+	@Override
 	public void updateModelBound() {
 		mesh.updateBound();
 		worldBound = getModelBound().transform(cachedWorldMat, worldBound);
@@ -122,6 +125,7 @@ public class Geometry extends Spatial {
 		mesh.setBound(modelBound);
 	}
 
+	@Override
 	public int collideWith(Collidable other, CollisionResults results) {
 		if (other instanceof Ray) {
 			if (!worldBound.intersects(((Ray) other)))

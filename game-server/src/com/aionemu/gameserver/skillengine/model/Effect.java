@@ -632,12 +632,17 @@ public class Effect implements StatOwner {
 			return;
 
 		for (EffectTemplate template : successEffects.values()) {
-			if (effected != null && effected.isDead() && !skillTemplate.hasResurrectEffect()) {
+			if (!shouldApplyFurtherEffects(effected))
 				break;
-			}
 			template.applyEffect(this);
+			if (!shouldApplyFurtherEffects(effected))
+				break;
 			template.startSubEffect(this);
 		}
+	}
+
+	private boolean shouldApplyFurtherEffects(Creature effected) {
+		return effected == null || effected.isSpawned() && (!effected.isDead() || skillTemplate.hasResurrectEffect());
 	}
 
 	/**

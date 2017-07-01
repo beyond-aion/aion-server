@@ -13,5 +13,5 @@
 <stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="com.aionemu.gameserver.GameServer"/>
 <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="Aion Game Server"/>
 <stringAttribute key="org.eclipse.jdt.launching.SOURCE_PATH_PROVIDER" value="org.eclipse.m2e.launchconfig.sourcepathProvider"/>
-<stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-javaagent:&quot;${project_loc:Aion Commons}\target\commons-2.0-SNAPSHOT.jar&quot;"/>
+<stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-javaagent:&quot;${project_loc:Aion Commons}\target\commons-2.0-SNAPSHOT.jar&quot;&#13;&#10;-Xmx2560M"/>
 </launchConfiguration>

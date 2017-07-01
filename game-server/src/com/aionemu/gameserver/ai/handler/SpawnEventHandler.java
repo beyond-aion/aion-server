@@ -35,7 +35,6 @@ public class SpawnEventHandler {
 	 * @param npcAI
 	 */
 	public static void onBeforeSpawn(NpcAI npcAI) {
-		npcAI.getOwner().getMoveController().resetMove();
 	}
 
 }

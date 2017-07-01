@@ -137,12 +137,12 @@ public class NpcMoveController extends CreatureMoveController<Npc> {
 			}
 			if (started.compareAndSet(true, false)) {
 				setAndSendStopMove(owner);
+				updateLastMove();
 			}
-			updateLastMove();
 			return;
 		} else if (started.compareAndSet(false, true)) {
-			movementMask = MovementMask.NPC_STARTMOVE;
-			PacketSendUtility.broadcastPacket(owner, new SM_MOVE(owner));
+			updateLastMove();
+			setAndSendStartMove(owner);
 		}
 
 		if (!started.get()) {

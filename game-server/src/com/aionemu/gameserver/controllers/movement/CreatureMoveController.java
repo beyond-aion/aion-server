@@ -60,7 +60,14 @@ public abstract class CreatureMoveController<T extends VisibleObject> {
 	public void abortMove() {
 	}
 
+	protected void setAndSendStartMove(Creature owner) {
+		setInMove(true);
+		movementMask = MovementMask.NPC_STARTMOVE;
+		PacketSendUtility.broadcastPacket(owner, new SM_MOVE(owner));
+	}
+
 	protected void setAndSendStopMove(Creature owner) {
+		setInMove(false);
 		movementMask = MovementMask.IMMEDIATE;
 		PacketSendUtility.broadcastPacket(owner, new SM_MOVE(owner));
 	}

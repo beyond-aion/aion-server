@@ -30,12 +30,12 @@ public class SiegeWeaponMoveController extends SummonMoveController {
 		if (!owner.canPerformMove() || (owner.getAi().getSubState() == AISubState.CAST)) {
 			if (started.compareAndSet(true, false)) {
 				setAndSendStopMove(owner);
+				updateLastMove();
 			}
-			updateLastMove();
 			return;
 		} else if (started.compareAndSet(false, true)) {
-			movementMask = MovementMask.NPC_STARTMOVE;
-			PacketSendUtility.broadcastPacket(owner, new SM_MOVE(owner));
+			updateLastMove();
+			setAndSendStartMove(owner);
 		}
 
 		VisibleObject target = owner.getTarget();
