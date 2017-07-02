@@ -172,8 +172,8 @@ public class FirstTargetProperty {
 		}
 
 		if (skill.getFirstTarget() != null) {
-			// update heading
-			if (!skill.getEffector().equals(skill.getFirstTarget()))
+			// update heading for npcs (players may look in a different direction)
+			if (skill.getEffector() instanceof Npc && !skill.getEffector().equals(skill.getFirstTarget()))
 				skill.getEffector().getPosition().setH(PositionUtil.getHeadingTowards(skill.getEffector(), skill.getFirstTarget()));
 			skill.getEffectedList().add(skill.getFirstTarget());
 		}
