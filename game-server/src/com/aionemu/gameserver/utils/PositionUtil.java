@@ -95,7 +95,7 @@ public class PositionUtil {
 	 * @return Angle in degrees
 	 */
 	public static float convertHeadingToAngle(byte clientHeading) {
-		return clientHeading * 3;
+		return clientHeading * 3f;
 	}
 
 	/**
