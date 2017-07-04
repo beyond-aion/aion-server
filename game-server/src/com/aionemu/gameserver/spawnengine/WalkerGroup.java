@@ -195,7 +195,7 @@ public class WalkerGroup {
 				memberSteps[i] = step;
 			}
 		}
-		if (step > currentStep || step == 1)
+		if (step > currentStep || step == 0)
 			groupStep = step;
 	}
 
@@ -243,7 +243,7 @@ public class WalkerGroup {
 			if (snpc.getWalkerIndex() == npc.getSpawn().getWalkerIndex() && snpc.getNpc().getNpcId() == npc.getNpcId()) {
 				synchronized (members) {
 					snpc.setNpc(npc);
-					memberSteps[index] = 1;
+					memberSteps[index] = 0;
 				}
 				break;
 			}
@@ -256,8 +256,8 @@ public class WalkerGroup {
 			// reset positions
 			form();
 			for (int index = 0; index < memberSteps.length; index++)
-				memberSteps[index] = 1;
-			groupStep = 1;
+				memberSteps[index] = 0;
+			groupStep = 0;
 		}
 		isSpawned = false;
 	}

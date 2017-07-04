@@ -98,11 +98,7 @@ public class WalkManager {
 		List<RouteStep> route = owner.getMoveController().getWalkerTemplate().getRouteSteps();
 		RouteStep nextStep = null;
 		if (owner.getWalkerGroup() != null) {
-			// always choose the 1st step, not the last which is close enough
-			if (owner.getWalkerGroup().getGroupStep() < 2)
-				nextStep = route.get(0);
-			else
-				nextStep = route.get(owner.getWalkerGroup().getGroupStep() - 1);
+			nextStep = route.get(owner.getWalkerGroup().getGroupStep());
 		} else {
 			double closestDist = 0;
 			float x = owner.getX();
