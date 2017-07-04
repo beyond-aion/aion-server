@@ -44,7 +44,7 @@
 		</spawn>
 		<!-- Agrima -->
 		<spawn npc_id="216846" respawn_time="295">
-			<spot x="1719.15" y="2301.74" z="438.603"/>
+			<spot x="1719.15" y="2301.74" z="319.1"/>
 		</spawn>
 		<!-- Alpha Kuruku -->
 		<spawn npc_id="216547" respawn_time="14400">
