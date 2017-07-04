@@ -1,10 +1,7 @@
 package admincommands;
 
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ScheduledFuture;
@@ -20,6 +17,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.model.templates.walker.RouteStep;
 import com.aionemu.gameserver.model.templates.walker.WalkerTemplate;
+import com.aionemu.gameserver.model.templates.walker.WalkerTemplate.LoopType;
 import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
@@ -35,7 +33,7 @@ public class FixPath extends AdminCommand {
 	private static boolean oldInvul = false;
 
 	public FixPath() {
-		super("fixpath", "Fixes Z-coordinates for npc walk routes.");
+		super("fixpath", "Fixes Z-coordinates for npc walk routes using your client (not internal geo data).");
 
 		// @formatter:off
 		setSyntaxInfo(
@@ -107,22 +105,23 @@ public class FixPath extends AdminCommand {
 
 		ThreadPoolManager.getInstance().execute(() -> { // run in a new thread to avoid blocking everything
 			admin.setCustomState(CustomPlayerState.INVULNERABLE);
-			RouteStep start = template.getRouteStep(1);
+			RouteStep start = template.getRouteStep(0);
 			TeleportService.teleportTo(admin, new WorldPosition(worldId, start.getX(), start.getY(), start.getZ() + zOff, admin.getHeading()));
 			float zDelta = getZ(admin) - start.getZ() + zOff;
 
-			Map<Integer, Float> corrections = new LinkedHashMap<>();
+			List<Float> corrections = new ArrayList<>(template.getRouteSteps().size());
 			try {
-				int lastStep = template.isReversed() ? (template.getRouteSteps().size() + 2) / 2 : template.getRouteSteps().size();
+				int maxNonWalkBackStep = template.getLoopType() == LoopType.WALK_BACK ? (template.getRouteSteps().size() + 1) / 2
+					: template.getRouteSteps().size();
 				for (RouteStep step : template.getRouteSteps()) {
 					if (runner == null) // on cancel
 						return;
-					if (step.getRouteStep() > lastStep) // reversing happens in afterUnmarshal, not in templates
-						continue;
-					sendInfo(admin, "Teleporting to step " + step.getRouteStep() + "...");
+					if (step.getStepIndex() > maxNonWalkBackStep) // walk back steps are added in afterUnmarshal, not in templates
+						break;
+					sendInfo(admin, "Teleporting to step " + step.getStepIndex() + "...");
 					TeleportService.teleportTo(admin,
 						new WorldPosition(admin.getWorldId(), step.getX(), step.getY(), step.getZ() + zDelta, admin.getHeading()));
-					corrections.put(step.getRouteStep(), getZ(admin));
+					corrections.add(getZ(admin));
 				}
 
 				sendInfo(admin, "Saving and applying corrections...");
@@ -131,19 +130,17 @@ public class FixPath extends AdminCommand {
 				WalkerTemplate newTemplate = new WalkerTemplate(template.getRouteId());
 				List<RouteStep> newSteps = new ArrayList<>();
 
-				for (Entry<Integer, Float> e : corrections.entrySet()) {
-					RouteStep oldStep = template.getRouteStep(e.getKey());
-					newSteps.add(new RouteStep(oldStep.getRouteStep(), oldStep.getX(), oldStep.getY(), e.getValue(), oldStep.getRestTime()));
-					oldStep.setZ(e.getValue()); // live fixing
-					if (template.isReversed()) {
-						int maxUnReversedStep = (template.getRouteSteps().size() + 1) / 2;
-						if (oldStep.getRouteStep() < maxUnReversedStep)
-							template.getRouteStep(template.getRouteSteps().size() + 1 - oldStep.getRouteStep()).setZ(e.getValue());
-					}
+				for (int stepIndex = 0; stepIndex < corrections.size(); stepIndex++) {
+					float fixedZ = corrections.get(stepIndex);
+					RouteStep oldStep = template.getRouteStep(stepIndex);
+					newSteps.add(new RouteStep(oldStep.getX(), oldStep.getY(), fixedZ, oldStep.getRestTime()));
+					oldStep.setZ(fixedZ); // live fixing
+					if (template.getLoopType() == LoopType.WALK_BACK && stepIndex > 0 && stepIndex < maxNonWalkBackStep) // live fixing of walk back steps
+						template.getRouteStep(template.getRouteSteps().size() - stepIndex).setZ(fixedZ);
 				}
 
 				newTemplate.setRouteSteps(newSteps);
-				newTemplate.setIsReversed(template.isReversed());
+				newTemplate.setLoopType(template.getLoopType());
 				newTemplate.setPool(template.getPool());
 				newTemplate.setType(template.getType());
 				newTemplate.setRows(template.getRows());
@@ -167,7 +164,8 @@ public class FixPath extends AdminCommand {
 		final ScheduledFuture<?>[] waitTask = { null };
 		waitTask[0] = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
 			float z = admin.getZ();
-			if (admin.getMoveController().getMovementMask() == MovementMask.IMMEDIATE && z != lastZ[0] && admin.isSpawned() && !admin.isInState(CreatureState.DEAD)) {
+			if (admin.getMoveController().getMovementMask() == MovementMask.IMMEDIATE && z != lastZ[0] && admin.isSpawned()
+				&& !admin.isInState(CreatureState.DEAD)) {
 				waitTask[0].cancel(true);
 				lastZ[0] = z;
 			}

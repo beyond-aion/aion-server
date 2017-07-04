@@ -38,7 +38,7 @@ public class ReianBomberAI extends GeneralNpcAI {
 
 	@Override
 	protected void handleMoveArrived() {
-		int point = getOwner().getMoveController().getCurrentPoint();
+		int point = getOwner().getMoveController().getCurrentStep().getStepIndex();
 		super.handleMoveArrived();
 		if (hasArrivedBoss.get()) {
 			startHelpEvent();

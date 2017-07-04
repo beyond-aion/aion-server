@@ -53,7 +53,7 @@ public class TriroansSummonAI extends AggressiveNpcAI {
 	@Override
 	protected void handleMoveArrived() {
 		super.handleMoveArrived();
-		int point = getOwner().getMoveController().getCurrentPoint();
+		int point = getOwner().getMoveController().getCurrentStep().getStepIndex();
 		if (walkPosition == point) {
 			if (isDestroyed.compareAndSet(false, true)) {
 				getSpawnTemplate().setWalkerId(null);

@@ -13,72 +13,67 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class RouteStep {
 
-	@XmlAttribute(name = "step", required = true)
-	private int routeStep;
-
 	@XmlAttribute(name = "x", required = true)
-	private float locX;
+	private float x;
 
 	@XmlAttribute(name = "y", required = true)
-	private float locY;
+	private float y;
 
 	@XmlAttribute(name = "z", required = true)
-	private float locZ;
+	private float z;
 
 	@XmlAttribute(name = "rest_time", required = true)
-	private int time = 0;
-
-	@XmlAttribute(name = "stop")
-	private boolean isStop = false;
+	private int restTime = 0;
 
 	@XmlTransient
-	private RouteStep nextStep;
+	private int stepIndex;
 
-	public RouteStep() {
+	@XmlTransient
+	private boolean isLastStep;
+
+	protected RouteStep() {
 	}
 
-	public RouteStep(int step, float x, float y, float z, int restTime) {
-		routeStep = step;
-		locX = x;
-		locY = y;
-		locZ = z;
-		time = restTime;
+	public RouteStep(float x, float y, float z, int restTime) {
+		this.x = x;
+		this.y = y;
+		this.z = z;
+		this.restTime = restTime;
 	}
 
 	public float getX() {
-		return locX;
+		return x;
 	}
 
 	public float getY() {
-		return locY;
+		return y;
 	}
 
 	public float getZ() {
-		return locZ;
+		return z;
 	}
 
 	public void setZ(float z) {
-		locZ = z;
+		this.z = z;
 	}
 
 	public int getRestTime() {
-		return time;
+		return restTime;
 	}
 
-	public RouteStep getNextStep() {
-		return nextStep;
+	public int getStepIndex() {
+		return stepIndex;
 	}
 
-	public void setNextStep(RouteStep nextStep) {
-		this.nextStep = nextStep;
+	public void setStepIndex(int stepIndex) {
+		this.stepIndex = stepIndex;
 	}
 
-	public int getRouteStep() {
-		return routeStep;
+	public boolean isLastStep() {
+		return isLastStep;
 	}
 
-	public boolean isStop() {
-		return isStop;
+	public void setIsLastStep(boolean isLastStep) {
+		this.isLastStep = isLastStep;
 	}
-
 }

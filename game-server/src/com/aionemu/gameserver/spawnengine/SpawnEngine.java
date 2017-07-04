@@ -41,13 +41,15 @@ public class SpawnEngine {
 	 * @return created and spawned VisibleObject
 	 */
 	public static VisibleObject spawnObject(SpawnTemplate spawn, int instanceIndex) {
-		final VisibleObject visObj = getSpawnedObject(spawn, instanceIndex);
-		if (spawn.isEventSpawn())
-			spawn.getEventTemplate().addSpawnedObject(visObj);
+		VisibleObject visObj = getSpawnedObject(spawn, instanceIndex);
+		if (visObj != null) {
+			if (spawn.isEventSpawn())
+				spawn.getEventTemplate().addSpawnedObject(visObj);
 
-		spawn.setVisibleObject(visObj);
-		if (visObj != null && visObj.getPosition().isInstanceMap())
-			visObj.getPosition().getWorldMapInstance().getInstanceHandler().onSpawn(visObj);
+			spawn.setVisibleObject(visObj);
+			if (visObj.getPosition().getMapRegion() != null)
+				visObj.getPosition().getWorldMapInstance().getInstanceHandler().onSpawn(visObj);
+		}
 		return visObj;
 	}
 

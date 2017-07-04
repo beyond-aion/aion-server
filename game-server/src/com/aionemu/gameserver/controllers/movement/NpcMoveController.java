@@ -21,6 +21,7 @@ import com.aionemu.gameserver.model.geometry.Point3D;
 import com.aionemu.gameserver.model.stats.calc.Stat2;
 import com.aionemu.gameserver.model.templates.walker.RouteStep;
 import com.aionemu.gameserver.model.templates.walker.WalkerTemplate;
+import com.aionemu.gameserver.model.templates.walker.WalkerTemplate.LoopType;
 import com.aionemu.gameserver.model.templates.zone.Point2D;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_MOVE;
 import com.aionemu.gameserver.spawnengine.WalkerFormator;
@@ -49,11 +50,8 @@ public class NpcMoveController extends CreatureMoveController<Npc> {
 	private LastUsedCache<Byte, Point3D> lastSteps = null;
 	private byte stepSequenceNr = 0;
 
-	// walk related
-	List<RouteStep> currentRoute;
-	int currentPoint;
-	int walkPause;
-
+	WalkerTemplate walkerTemplate;
+	RouteStep currentStep;
 	private float cachedTargetZ;
 
 	public NpcMoveController(Npc owner) {
@@ -331,35 +329,34 @@ public class NpcMoveController extends CreatureMoveController<Npc> {
 		pointZ = 0;
 	}
 
-	public void setCurrentRoute(List<RouteStep> currentRoute) {
-		if (currentRoute == null)
-			AILogger.info(owner.getAi(), "No specific route found for npc: " + owner.getNpcId() + ".");
-		else
-			this.currentRoute = currentRoute;
-
-		this.currentPoint = 0;
+	public WalkerTemplate getWalkerTemplate() {
+		return walkerTemplate;
 	}
 
-	public void setRouteStep(RouteStep step, RouteStep prevStep) {
+	public void setWalkerTemplate(WalkerTemplate walkerTemplate) {
+		this.walkerTemplate = walkerTemplate;
+		this.currentStep = walkerTemplate.getRouteStep(0);
+	}
+
+	public void setRouteStep(RouteStep step) {
 		Point2D dest = null;
 		if (owner.getWalkerGroup() != null) {
-			dest = WalkerGroup.getLinePoint(new Point2D(prevStep.getX(), prevStep.getY()), new Point2D(step.getX(), step.getY()),
+			dest = WalkerGroup.getLinePoint(new Point2D(currentStep.getX(), currentStep.getY()), new Point2D(step.getX(), step.getY()),
 				owner.getWalkerGroupShift());
-			this.pointZ = prevStep.getZ();
-			owner.getWalkerGroup().setStep(owner, step.getRouteStep());
+			this.pointZ = currentStep.getZ();
+			owner.getWalkerGroup().setStep(owner, step.getStepIndex());
 		} else {
 			this.pointZ = step.getZ();
-			this.isStop = step.isStop();
+			this.isStop = walkerTemplate.getLoopType() == LoopType.NONE && step.isLastStep();
 		}
-		this.currentPoint = step.getRouteStep() - 1;
+		this.currentStep = step;
 		this.pointX = dest == null ? step.getX() : dest.getX();
 		this.pointY = dest == null ? step.getY() : dest.getY();
 		this.destination = Destination.POINT;
-		this.walkPause = step.getRestTime();
 	}
 
-	public int getCurrentPoint() {
-		return currentPoint;
+	public RouteStep getCurrentStep() {
+		return currentStep;
 	}
 
 	public boolean isReachedPoint() {
@@ -369,34 +366,25 @@ public class NpcMoveController extends CreatureMoveController<Npc> {
 	public boolean isNextRouteStepChosen() {
 		if (isStop)
 			return false;
-		int oldPoint = currentPoint;
-		if (currentRoute == null) {
+		if (walkerTemplate == null) {
 			WalkManager.stopWalking((NpcAI) owner.getAi());
-			if (!WalkerFormator.processClusteredNpc(owner, owner.getWorldId(), owner.getInstanceId())) {
-				WalkerTemplate template = DataManager.WALKER_DATA.getWalkerTemplate(owner.getSpawn().getWalkerId());
-				if (template != null)
-					currentRoute = template.getRouteSteps();
-			}
-			if (currentRoute == null) {
-				log.warn("Bad Walker Id: " + owner.getNpcId() + " - point: " + oldPoint);
+			if (WalkerFormator.processClusteredNpc(owner, owner.getWorldId(), owner.getInstanceId()))
+				return false;
+
+			setWalkerTemplate(DataManager.WALKER_DATA.getWalkerTemplate(owner.getSpawn().getWalkerId()));
+			if (walkerTemplate == null) {
+				log.warn("Bad Walker Id: " + owner.getSpawn().getWalkerId() + " - point: " + currentStep.getStepIndex());
 				return false;
 			}
 		}
-		if (currentPoint < (currentRoute.size() - 1)) {
-			currentPoint++;
-		} else {
-			currentPoint = 0;
-		}
-		setRouteStep(currentRoute.get(currentPoint), currentRoute.get(oldPoint));
+		List<RouteStep> routeSteps = walkerTemplate.getRouteSteps();
+		RouteStep nextStep = currentStep.isLastStep() ? routeSteps.get(0) : routeSteps.get(currentStep.getStepIndex() + 1);
+		setRouteStep(nextStep);
 		return true;
 	}
 
-	public int getWalkPause() {
-		return walkPause;
-	}
-
 	public boolean isChangingDirection() {
-		return currentPoint == 0;
+		return currentStep.getStepIndex() == 0;
 	}
 
 	@Override

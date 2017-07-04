@@ -13,24 +13,29 @@
 			<xs:element minOccurs="0" maxOccurs="unbounded" name="routestep" type="RouteStep" />
 		</xs:sequence>
 		<xs:attribute name="route_id" type="xs:string" use="required" />
-		<xs:attribute name="pool" type="xs:int" use="required" />
-		<xs:attribute name="reversed" type="xs:boolean" use="optional" />
+		<xs:attribute name="pool" type="xs:int" default="1" />
 		<xs:attribute name="formation" type="formationType" use="optional" default="POINT" />
 		<xs:attribute name="rows" type="xs:string" use="optional" />
+		<xs:attribute name="loop_type" type="LoopType" use="optional" default="NORMAL"/>
 	</xs:complexType>
 	<xs:complexType name="RouteStep">
-		<xs:attribute name="step" type="xs:int" use="required" />
 		<xs:attribute name="x" type="xs:float" use="required" />
 		<xs:attribute name="y" type="xs:float" use="required" />
 		<xs:attribute name="z" type="xs:float" use="required" />
 		<xs:attribute name="rest_time" type="xs:int" use="optional" default="0" />
-		<xs:attribute name="stop" type="xs:boolean" use="optional" default="false"/>
 	</xs:complexType>
 	<xs:simpleType name="formationType">
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="POINT" />
 			<xs:enumeration value="SQUARE" />
 			<xs:enumeration value="CIRCLE" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="LoopType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NONE"/>
+			<xs:enumeration value="NORMAL"/>
+			<xs:enumeration value="WALK_BACK"/>
 		</xs:restriction>
 	</xs:simpleType>
 </xs:schema>

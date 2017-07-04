@@ -11,6 +11,7 @@ import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
+import com.aionemu.gameserver.model.templates.walker.RouteStep;
 import com.aionemu.gameserver.model.templates.walker.WalkerTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -41,9 +42,9 @@ public class ImprisonedReianAI extends GeneralNpcAI {
 
 	@Override
 	protected void handleMoveArrived() {
-		int point = getOwner().getMoveController().getCurrentPoint();
+		RouteStep step = getOwner().getMoveController().getCurrentStep();
 		super.handleMoveArrived();
-		if (template.getRouteSteps().size() - 4 == point) {
+		if (template.getRouteSteps().size() - 4 == step.getStepIndex()) {
 			getSpawnTemplate().setWalkerId(null);
 			WalkManager.stopWalking(this);
 			AIActions.deleteOwner(this);

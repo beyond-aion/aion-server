@@ -31,9 +31,8 @@ public class ArminosDrakyAI extends GeneralNpcAI {
 
 	@Override
 	protected void handleMoveArrived() {
-		int point = getOwner().getMoveController().getCurrentPoint();
 		super.handleMoveArrived();
-		if (point == 15) { // circle twice
+		if (getOwner().getMoveController().getCurrentStep().isLastStep()) { // circle twice
 			if (!isStart) {
 				getSpawnTemplate().setWalkerId(null);
 				WalkManager.stopWalking(this);

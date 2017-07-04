@@ -54,11 +54,9 @@ public class WalkManager {
 			return false;
 		if (!npcAI.setStateIfNot(AIState.WALKING) || !npcAI.setSubStateIfNot(AISubState.WALK_PATH))
 			return false;
-		List<RouteStep> route = template.getRouteSteps();
-		int currentPoint = owner.getMoveController().getCurrentPoint();
-		RouteStep nextStep = findNextRoutStep(owner, route);
-		owner.getMoveController().setCurrentRoute(route);
-		owner.getMoveController().setRouteStep(nextStep, route.get(currentPoint));
+		owner.getMoveController().setWalkerTemplate(template);
+		RouteStep nextStep = findNextRoutStep(owner);
+		owner.getMoveController().setRouteStep(nextStep);
 		EmoteManager.emoteStartWalking(npcAI.getOwner());
 		npcAI.getOwner().getMoveController().moveToNextPoint();
 		return true;
@@ -79,32 +77,26 @@ public class WalkManager {
 
 	/**
 	 * @param owner
-	 * @param route
 	 * @return
 	 */
-	protected static RouteStep findNextRoutStep(Npc owner, List<RouteStep> route) {
-		int currentPoint = owner.getMoveController().getCurrentPoint();
+	protected static RouteStep findNextRoutStep(Npc owner) {
+		RouteStep currentStep = owner.getMoveController().getCurrentStep();
 		RouteStep nextStep = null;
-		if (currentPoint != 0) {
-			nextStep = findNextRouteStepAfterPause(owner, route, currentPoint);
+		if (currentStep.getStepIndex() != 0) {
+			nextStep = findNextRouteStepAfterPause(owner, currentStep);
 		} else {
-			nextStep = findClosestRouteStep(owner, route, nextStep);
+			nextStep = findClosestRouteStep(owner);
 		}
 		return nextStep;
 	}
 
 	/**
 	 * @param owner
-	 * @param route
-	 * @param nextStep
 	 * @return
 	 */
-	protected static RouteStep findClosestRouteStep(Npc owner, List<RouteStep> route, RouteStep nextStep) {
-		double closestDist = 0;
-		float x = owner.getX();
-		float y = owner.getY();
-		float z = owner.getZ();
-
+	protected static RouteStep findClosestRouteStep(Npc owner) {
+		List<RouteStep> route = owner.getMoveController().getWalkerTemplate().getRouteSteps();
+		RouteStep nextStep = null;
 		if (owner.getWalkerGroup() != null) {
 			// always choose the 1st step, not the last which is close enough
 			if (owner.getWalkerGroup().getGroupStep() < 2)
@@ -112,6 +104,10 @@ public class WalkManager {
 			else
 				nextStep = route.get(owner.getWalkerGroup().getGroupStep() - 1);
 		} else {
+			double closestDist = 0;
+			float x = owner.getX();
+			float y = owner.getY();
+			float z = owner.getZ();
 			for (RouteStep step : route) {
 				double stepDist = PositionUtil.getDistance(x, y, z, step.getX(), step.getY(), step.getZ());
 				if (closestDist == 0 || stepDist < closestDist) {
@@ -126,16 +122,18 @@ public class WalkManager {
 	/**
 	 * @param owner
 	 * @param route
-	 * @param currentPoint
+	 * @param currentStep
 	 * @return
 	 */
-	protected static RouteStep findNextRouteStepAfterPause(Npc owner, List<RouteStep> route, int currentPoint) {
-		RouteStep nextStep = route.get(currentPoint);
-		double stepDist = PositionUtil.getDistance(owner.getX(), owner.getY(), owner.getZ(), nextStep.getX(), nextStep.getY(), nextStep.getZ());
-		if (stepDist < 1) {
-			nextStep = nextStep.getNextStep();
+	protected static RouteStep findNextRouteStepAfterPause(Npc owner, RouteStep currentStep) {
+		if (PositionUtil.isInRange(owner, currentStep.getX(), currentStep.getY(), currentStep.getZ(), 1)) {
+			List<RouteStep> route = owner.getMoveController().getWalkerTemplate().getRouteSteps();
+			if (currentStep.isLastStep())
+				return route.get(0);
+			else
+				return route.get(currentStep.getStepIndex() + 1);
 		}
-		return nextStep;
+		return currentStep;
 	}
 
 	/**
@@ -174,8 +172,8 @@ public class WalkManager {
 	/**
 	 * @param npcAI
 	 */
-	protected static void chooseNextRouteStep(final NpcAI npcAI) {
-		int walkPause = npcAI.getOwner().getMoveController().getWalkPause();
+	protected static void chooseNextRouteStep(NpcAI npcAI) {
+		int walkPause = npcAI.getOwner().getMoveController().getCurrentStep().getRestTime();
 		if (walkPause == 0) {
 			npcAI.getOwner().getMoveController().resetMove();
 			if (npcAI.getOwner().getMoveController().isNextRouteStepChosen())

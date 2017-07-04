@@ -1,1060 +1,1060 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <npc_walker xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="npc_walker.xsd">
-	<walker_template route_id="300280000_npcpathnamed_path1" pool="1">
-		<routestep step="1" x="520.72" y="499.37" z="181.80" />
-		<routestep step="2" x="509.81" y="484.69" z="181.95" />
-		<routestep step="3" x="488.13" y="462.96" z="176.35" />
-		<routestep step="4" x="473.25" y="454.97" z="175.48" />
-		<routestep step="5" x="455.36" y="446.50" z="172.65" />
-		<routestep step="6" x="440.31" y="449.88" z="171.93" />
-		<routestep step="7" x="430.72" y="468.22" z="171.03" />
-		<routestep step="8" x="416.22" y="491.31" z="168.99" />
-		<routestep step="9" x="400.31" y="516.80" z="168.54" />
-		<routestep step="10" x="381.39" y="543.90" z="166.83" />
-		<routestep step="11" x="365.32" y="574.07" z="154.73" />
-		<routestep step="12" x="353.35" y="596.23" z="146.57" />
-	</walker_template>
-	<walker_template route_id="300280000_drakanrider_flying_60_ae_sz1_2" pool="1">
-		<routestep step="1" x="605.65" y="220.23" z="65.28" />
-		<routestep step="2" x="604.64" y="206.06" z="64.91" />
-		<routestep step="3" x="608.34" y="191.60" z="65.61" />
-		<routestep step="4" x="617.68" y="179.95" z="67.81" />
-		<routestep step="5" x="631.17" y="173.00" z="71.04" />
-		<routestep step="6" x="646.14" y="171.38" z="75.00" />
-		<routestep step="7" x="659.60" y="176.29" z="78.55" />
-		<routestep step="8" x="670.61" y="185.72" z="81.56" />
-		<routestep step="9" x="676.96" y="198.86" z="83.29" />
-		<routestep step="10" x="677.99" y="214.85" z="83.96" />
-		<routestep step="11" x="673.38" y="228.99" z="83.02" />
-		<routestep step="12" x="664.97" y="239.43" z="81.03" />
-		<routestep step="13" x="651.68" y="246.13" z="77.59" />
-		<routestep step="14" x="638.68" y="247.81" z="74.40" />
-		<routestep step="15" x="624.76" y="243.92" z="70.75" />
-		<routestep step="16" x="612.94" y="234.76" z="67.54" />
-		<routestep step="17" x="605.65" y="220.22" z="65.28" />
-	</walker_template>
-	<walker_template route_id="300280000_drakanrider_flying_60_ae_sz1_3" pool="1">
-		<routestep step="1" x="719.79" y="131.02" z="84.75" />
-		<routestep step="2" x="701.70" y="134.85" z="81.95" />
-		<routestep step="3" x="682.51" y="132.47" z="78.30" />
-		<routestep step="4" x="666.05" y="122.00" z="74.52" />
-		<routestep step="5" x="654.99" y="105.18" z="71.06" />
-		<routestep step="6" x="650.50" y="85.29" z="68.89" />
-		<routestep step="7" x="654.68" y="66.33" z="68.18" />
-		<routestep step="8" x="665.06" y="49.84" z="68.79" />
-		<routestep step="9" x="680.98" y="39.01" z="70.66" />
-		<routestep step="10" x="701.36" y="34.70" z="74.18" />
-		<routestep step="11" x="720.28" y="38.36" z="77.88" />
-		<routestep step="12" x="735.03" y="47.79" z="81.27" />
-		<routestep step="13" x="745.80" y="64.50" z="84.33" />
-		<routestep step="14" x="749.99" y="81.62" z="86.58" />
-		<routestep step="15" x="747.19" y="101.03" z="87.57" />
-		<routestep step="16" x="737.30" y="118.55" z="87.13" />
-		<routestep step="17" x="719.79" y="131.01" z="84.75" />
-	</walker_template>
-	<walker_template route_id="300280000_drakanrider_flying_60_ae_sz1_8" pool="1">
-		<routestep step="1" x="807.22" y="152.45" z="105.57" />
-		<routestep step="2" x="824.96" y="161.99" z="104.34" />
-		<routestep step="3" x="845.85" y="165.43" z="102.76" />
-		<routestep step="4" x="866.42" y="159.68" z="100.79" />
-		<routestep step="5" x="883.35" y="145.67" z="98.94" />
-		<routestep step="6" x="894.25" y="126.51" z="97.01" />
-		<routestep step="7" x="895.79" y="105.62" z="95.95" />
-		<routestep step="8" x="890.05" y="85.39" z="95.52" />
-		<routestep step="9" x="876.78" y="69.29" z="96.09" />
-		<routestep step="10" x="856.68" y="58.57" z="97.10" />
-		<routestep step="11" x="835.67" y="56.54" z="98.76" />
-		<routestep step="12" x="817.22" y="61.75" z="100.52" />
-		<routestep step="13" x="800.73" y="75.70" z="102.70" />
-		<routestep step="14" x="790.92" y="92.12" z="104.06" />
-		<routestep step="15" x="787.78" y="113.04" z="105.25" />
-		<routestep step="16" x="792.69" y="134.19" z="105.79" />
-		<routestep step="17" x="807.22" y="152.45" z="105.57" />
-	</walker_template>
-	<walker_template route_id="300280000_drakanrider_flying_60_ae_sz1_9" pool="1">
-		<routestep step="1" x="967.68" y="217.47" z="118.00" />
-		<routestep step="2" x="976.24" y="242.91" z="123.75" />
-		<routestep step="3" x="975.89" y="271.20" z="129.50" />
-		<routestep step="4" x="963.31" y="297.07" z="134.31" />
-		<routestep step="5" x="940.54" y="316.38" z="137.15" />
-		<routestep step="6" x="912.25" y="326.55" z="138.43" />
-		<routestep step="7" x="883.88" y="324.04" z="136.87" />
-		<routestep step="8" x="858.11" y="312.07" z="133.48" />
-		<routestep step="9" x="839.70" y="291.10" z="128.28" />
-		<routestep step="10" x="830.08" y="262.24" z="122.30" />
-		<routestep step="11" x="832.34" y="234.09" z="116.65" />
-		<routestep step="12" x="843.70" y="210.90" z="112.34" />
-		<routestep step="13" x="866.34" y="192.22" z="109.12" />
-		<routestep step="14" x="890.65" y="182.83" z="108.36" />
-		<routestep step="15" x="919.44" y="183.24" z="109.50" />
-		<routestep step="16" x="946.63" y="194.30" z="112.76" />
-		<routestep step="17" x="967.68" y="217.47" z="118.00" />
-	</walker_template>
-	<walker_template route_id="300280000_drakanrider_flying_60_ae_sz1_11" pool="1">
-		<routestep step="1" x="757.86" y="298.75" z="133.71" />
-		<routestep step="2" x="779.67" y="305.55" z="136.95" />
-		<routestep step="3" x="803.86" y="305.00" z="138.74" />
-		<routestep step="4" x="825.99" y="294.49" z="137.84" />
-		<routestep step="5" x="842.45" y="275.69" z="134.62" />
-		<routestep step="6" x="851.22" y="252.59" z="129.27" />
-		<routestep step="7" x="849.10" y="229.48" z="123.26" />
-		<routestep step="8" x="838.88" y="208.58" z="117.17" />
-		<routestep step="9" x="820.90" y="193.72" z="112.20" />
-		<routestep step="10" x="796.28" y="186.20" z="108.12" />
-		<routestep step="11" x="772.21" y="188.31" z="106.74" />
-		<routestep step="12" x="752.38" y="197.79" z="107.56" />
-		<routestep step="13" x="736.34" y="216.37" z="111.19" />
-		<routestep step="14" x="728.35" y="236.33" z="115.38" />
-		<routestep step="15" x="728.68" y="259.80" z="121.34" />
-		<routestep step="16" x="738.13" y="281.87" z="127.66" />
-		<routestep step="17" x="757.86" y="298.75" z="133.71" />
-	</walker_template>
-	<walker_template route_id="300280000_drakanrider_flying_60_ae_sz1_12" pool="1">
-		<routestep step="1" x="757.21" y="438.09" z="141.37" />
-		<routestep step="2" x="740.22" y="440.99" z="142.91" />
-		<routestep step="3" x="722.26" y="438.16" z="143.57" />
-		<routestep step="4" x="706.96" y="427.98" z="143.06" />
-		<routestep step="5" x="696.78" y="412.16" z="141.33" />
-		<routestep step="6" x="692.87" y="393.72" z="139.18" />
-		<routestep step="7" x="697.05" y="376.43" z="136.56" />
-		<routestep step="8" x="707.02" y="361.63" z="133.95" />
-		<routestep step="9" x="722.06" y="352.23" z="131.62" />
-		<routestep step="10" x="741.27" y="348.95" z="130.21" />
-		<routestep step="11" x="758.97" y="352.95" z="129.73" />
-		<routestep step="12" x="772.68" y="362.12" z="130.19" />
-		<routestep step="13" x="782.52" y="377.85" z="131.62" />
-		<routestep step="14" x="786.25" y="393.71" z="133.74" />
-		<routestep step="15" x="783.36" y="411.45" z="136.34" />
-		<routestep step="16" x="773.84" y="427.22" z="139.06" />
-		<routestep step="17" x="757.21" y="438.09" z="141.37" />
-	</walker_template>
-	<walker_template route_id="300280000_drakanrider_flying_60_ae_sz1_14" pool="1">
-		<routestep step="1" x="893.63" y="386.84" z="145.94" />
-		<routestep step="2" x="886.71" y="404.14" z="145.64" />
-		<routestep step="3" x="874.00" y="419.01" z="144.42" />
-		<routestep step="4" x="856.09" y="427.21" z="142.43" />
-		<routestep step="5" x="835.91" y="427.42" z="139.82" />
-		<routestep step="6" x="816.86" y="420.40" z="137.53" />
-		<routestep step="7" x="803.43" y="406.59" z="135.61" />
-		<routestep step="8" x="795.52" y="388.90" z="134.27" />
-		<routestep step="9" x="795.41" y="369.64" z="133.67" />
-		<routestep step="10" x="803.22" y="350.12" z="134.36" />
-		<routestep step="11" x="816.85" y="336.16" z="135.71" />
-		<routestep step="12" x="832.95" y="328.85" z="137.50" />
-		<routestep step="13" x="852.86" y="328.86" z="139.74" />
-		<routestep step="14" x="869.44" y="334.59" z="142.04" />
-		<routestep step="15" x="884.02" y="347.47" z="144.09" />
-		<routestep step="16" x="893.06" y="365.31" z="145.57" />
-		<routestep step="17" x="893.62" y="386.84" z="145.93" />
-	</walker_template>
-	<walker_template route_id="300280000_drakanrider_flying_60_ae_sz1_16" pool="1">
-		<routestep step="1" x="872.90" y="539.58" z="171.60" />
-		<routestep step="2" x="891.02" y="527.93" z="168.63" />
-		<routestep step="3" x="904.96" y="510.44" z="163.84" />
-		<routestep step="4" x="910.03" y="488.85" z="157.37" />
-		<routestep step="5" x="905.43" y="466.61" z="150.44" />
-		<routestep step="6" x="892.87" y="447.50" z="143.71" />
-		<routestep step="7" x="873.88" y="436.09" z="139.26" />
-		<routestep step="8" x="851.78" y="431.66" z="136.85" />
-		<routestep step="9" x="829.74" y="436.08" z="137.39" />
-		<routestep step="10" x="809.33" y="449.40" z="140.37" />
-		<routestep step="11" x="796.65" y="467.67" z="145.45" />
-		<routestep step="12" x="792.15" y="487.07" z="151.27" />
-		<routestep step="13" x="796.92" y="508.80" z="158.46" />
-		<routestep step="14" x="807.45" y="525.68" z="164.00" />
-		<routestep step="15" x="825.65" y="538.56" z="168.86" />
-		<routestep step="16" x="848.19" y="544.19" z="171.67" />
-		<routestep step="17" x="872.90" y="539.57" z="171.60" />
-	</walker_template>
-	<walker_template route_id="300280000_drakanrider_flying_60_ae_sz1_18" pool="1">
-		<routestep step="1" x="981.86" y="444.71" z="163.10" />
-		<routestep step="2" x="984.71" y="461.82" z="166.58" />
-		<routestep step="3" x="981.74" y="480.02" z="169.02" />
-		<routestep step="4" x="971.33" y="495.65" z="169.68" />
-		<routestep step="5" x="955.21" y="506.21" z="168.30" />
-		<routestep step="6" x="936.46" y="510.45" z="165.73" />
-		<routestep step="7" x="918.93" y="506.50" z="161.88" />
-		<routestep step="8" x="903.95" y="496.67" z="157.53" />
-		<routestep step="9" x="894.49" y="481.63" z="153.18" />
-		<routestep step="10" x="891.25" y="462.25" z="149.57" />
-		<routestep step="11" x="895.41" y="444.30" z="147.39" />
-		<routestep step="12" x="904.79" y="430.29" z="146.81" />
-		<routestep step="13" x="920.83" y="420.11" z="147.91" />
-		<routestep step="14" x="936.95" y="416.06" z="150.36" />
-		<routestep step="15" x="954.94" y="418.69" z="154.08" />
-		<routestep step="16" x="970.90" y="428.06" z="158.53" />
-		<routestep step="17" x="981.86" y="444.72" z="163.10" />
-	</walker_template>
-	<walker_template route_id="300280000_drakanrider_flying_60_ae_sz1_20" pool="1">
-		<routestep step="1" x="1000.86" y="574.37" z="179.90" />
-		<routestep step="2" x="991.36" y="556.97" z="176.59" />
-		<routestep step="3" x="975.88" y="542.84" z="173.75" />
-		<routestep step="4" x="955.58" y="536.45" z="171.93" />
-		<routestep step="5" x="933.75" y="538.78" z="171.61" />
-		<routestep step="6" x="914.06" y="548.67" z="172.21" />
-		<routestep step="7" x="901.21" y="565.00" z="174.27" />
-		<routestep step="8" x="894.78" y="584.74" z="177.13" />
-		<routestep step="9" x="896.92" y="605.12" z="180.61" />
-		<routestep step="10" x="907.70" y="624.82" z="183.96" />
-		<routestep step="11" x="924.06" y="637.86" z="186.66" />
-		<routestep step="12" x="942.30" y="643.54" z="188.29" />
-		<routestep step="13" x="963.75" y="640.96" z="188.92" />
-		<routestep step="14" x="981.00" y="632.80" z="188.13" />
-		<routestep step="15" x="995.19" y="617.30" z="186.26" />
-		<routestep step="16" x="1002.83" y="597.26" z="183.40" />
-		<routestep step="17" x="1000.85" y="574.37" z="179.90" />
-	</walker_template>
-	<walker_template route_id="300280000_drakanrider_flying_60_ae_sz1_21" pool="1">
-		<routestep step="1" x="881.79" y="731.42" z="192.91" />
-		<routestep step="2" x="898.63" y="730.20" z="191.34" />
-		<routestep step="3" x="914.92" y="723.26" z="189.11" />
-		<routestep step="4" x="926.80" y="710.01" z="186.26" />
-		<routestep step="5" x="932.36" y="692.57" z="183.40" />
-		<routestep step="6" x="931.31" y="674.22" z="180.57" />
-		<routestep step="7" x="922.89" y="658.82" z="178.87" />
-		<routestep step="8" x="909.62" y="647.15" z="178.09" />
-		<routestep step="9" x="892.94" y="641.76" z="178.65" />
-		<routestep step="10" x="873.89" y="643.23" z="180.10" />
-		<routestep step="11" x="858.15" y="651.21" z="182.44" />
-		<routestep step="12" x="847.52" y="663.14" z="185.01" />
-		<routestep step="13" x="842.26" y="680.32" z="188.12" />
-		<routestep step="14" x="842.82" y="696.28" z="190.32" />
-		<routestep step="15" x="850.13" y="712.40" z="192.20" />
-		<routestep step="16" x="863.22" y="725.09" z="193.15" />
-		<routestep step="17" x="881.79" y="731.42" z="192.90" />
-	</walker_template>
-	<walker_template route_id="300280000_drakanrider_flying_60_ae_sz1_22" pool="1">
-		<routestep step="1" x="796.52" y="569.10" z="186.54" />
-		<routestep step="2" x="811.22" y="560.65" z="186.44" />
-		<routestep step="3" x="828.72" y="557.20" z="185.64" />
-		<routestep step="4" x="846.17" y="561.48" z="184.28" />
-		<routestep step="5" x="860.76" y="572.75" z="182.44" />
-		<routestep step="6" x="870.46" y="588.54" z="180.85" />
-		<routestep step="7" x="872.30" y="606.02" z="179.47" />
-		<routestep step="8" x="868.00" y="623.14" z="178.47" />
-		<routestep step="9" x="857.23" y="636.98" z="177.95" />
-		<routestep step="10" x="840.62" y="646.52" z="178.40" />
-		<routestep step="11" x="822.99" y="648.78" z="179.29" />
-		<routestep step="12" x="807.32" y="644.90" z="180.51" />
-		<routestep step="13" x="793.06" y="633.63" z="182.03" />
-		<routestep step="14" x="784.40" y="620.14" z="183.69" />
-		<routestep step="15" x="781.21" y="602.69" z="185.16" />
-		<routestep step="16" x="784.79" y="584.82" z="186.25" />
-		<routestep step="17" x="796.52" y="569.10" z="186.54" />
-	</walker_template>
-	<walker_template route_id="300280000_drakanrider_flying_60_ae_sz1_23" pool="1">
-		<routestep step="1" x="630.25" y="638.29" z="199.47" />
-		<routestep step="2" x="611.04" y="643.02" z="199.36" />
-		<routestep step="3" x="590.32" y="641.18" z="199.09" />
-		<routestep step="4" x="572.12" y="630.69" z="198.92" />
-		<routestep step="5" x="559.37" y="613.25" z="198.69" />
-		<routestep step="6" x="553.58" y="592.36" z="198.93" />
-		<routestep step="7" x="557.12" y="572.12" z="199.12" />
-		<routestep step="8" x="567.45" y="554.28" z="199.38" />
-		<routestep step="9" x="583.97" y="542.23" z="199.50" />
-		<routestep step="10" x="605.67" y="536.94" z="200.01" />
-		<routestep step="11" x="626.16" y="540.14" z="200.26" />
-		<routestep step="12" x="642.48" y="549.60" z="200.42" />
-		<routestep step="13" x="654.85" y="566.90" z="200.29" />
-		<routestep step="14" x="660.23" y="584.90" z="200.42" />
-		<routestep step="15" x="658.20" y="605.56" z="200.25" />
-		<routestep step="16" x="648.45" y="624.47" z="199.99" />
-		<routestep step="17" x="630.24" y="638.29" z="199.47" />
-	</walker_template>
-	<walker_template route_id="300280000_drakanrider_flying_60_ae_sz1_25" pool="1">
-		<routestep step="1" x="542.59" y="645.59" z="191.56" />
-		<routestep step="2" x="557.25" y="637.09" z="192.31" />
-		<routestep step="3" x="574.70" y="633.61" z="193.74" />
-		<routestep step="4" x="592.08" y="637.82" z="196.02" />
-		<routestep step="5" x="606.59" y="649.04" z="198.61" />
-		<routestep step="6" x="616.16" y="664.72" z="201.49" />
-		<routestep step="7" x="617.93" y="682.13" z="203.58" />
-		<routestep step="8" x="613.58" y="699.21" z="205.01" />
-		<routestep step="9" x="602.81" y="713.06" z="205.25" />
-		<routestep step="10" x="586.20" y="722.59" z="204.72" />
-		<routestep step="11" x="568.62" y="724.90" z="203.14" />
-		<routestep step="12" x="553.03" y="721.08" z="201.10" />
-		<routestep step="13" x="538.89" y="709.92" z="198.24" />
-		<routestep step="14" x="530.29" y="696.47" z="196.02" />
-		<routestep step="15" x="527.18" y="679.08" z="193.79" />
-		<routestep step="16" x="530.82" y="661.26" z="192.21" />
-		<routestep step="17" x="542.59" y="645.59" z="191.56" />
-	</walker_template>
-	<walker_template route_id="300280000_drakanrider_flying_60_ae_sz1_26" pool="1">
-		<routestep step="1" x="585.00" y="654.49" z="198.96" />
-		<routestep step="2" x="577.42" y="632.01" z="201.58" />
-		<routestep step="3" x="577.56" y="607.00" z="203.82" />
-		<routestep step="4" x="588.35" y="584.10" z="205.33" />
-		<routestep step="5" x="608.01" y="566.99" z="205.66" />
-		<routestep step="6" x="632.54" y="557.89" z="205.45" />
-		<routestep step="7" x="657.21" y="560.01" z="204.02" />
-		<routestep step="8" x="679.67" y="570.51" z="201.94" />
-		<routestep step="9" x="695.78" y="589.01" z="199.25" />
-		<routestep step="10" x="704.32" y="614.46" z="196.75" />
-		<routestep step="11" x="702.52" y="639.35" z="194.60" />
-		<routestep step="12" x="692.77" y="659.88" z="193.25" />
-		<routestep step="13" x="673.21" y="676.48" z="192.53" />
-		<routestep step="14" x="652.14" y="684.83" z="193.06" />
-		<routestep step="15" x="627.12" y="684.56" z="194.35" />
-		<routestep step="16" x="603.43" y="674.87" z="196.41" />
-		<routestep step="17" x="585.00" y="654.49" z="198.96" />
-	</walker_template>
-	<walker_template route_id="300280000_drakanrider_flying_60_ae_sz1_27" pool="1">
-		<routestep step="1" x="682.14" y="724.88" z="202.83" />
-		<routestep step="2" x="665.98" y="715.48" z="205.43" />
-		<routestep step="3" x="652.91" y="700.59" z="206.80" />
-		<routestep step="4" x="647.09" y="681.40" z="206.39" />
-		<routestep step="5" x="649.40" y="661.03" z="204.11" />
-		<routestep step="6" x="658.77" y="642.84" z="200.97" />
-		<routestep step="7" x="674.10" y="631.25" z="197.01" />
-		<routestep step="8" x="692.55" y="625.78" z="192.92" />
-		<routestep step="9" x="711.55" y="628.37" z="189.21" />
-		<routestep step="10" x="729.86" y="639.00" z="186.64" />
-		<routestep step="11" x="741.90" y="654.69" z="185.53" />
-		<routestep step="12" x="747.08" y="671.93" z="185.91" />
-		<routestep step="13" x="744.52" y="691.98" z="187.86" />
-		<routestep step="14" x="736.79" y="707.88" z="190.85" />
-		<routestep step="15" x="722.24" y="720.75" z="194.76" />
-		<routestep step="16" x="703.49" y="727.35" z="198.99" />
-		<routestep step="17" x="682.14" y="724.88" z="202.83" />
-	</walker_template>
-	<walker_template route_id="300280000_drakanrider_flying_60_ae_sz1_28" pool="1">
-		<routestep step="1" x="730.87" y="556.70" z="188.71" />
-		<routestep step="2" x="738.84" y="570.78" z="185.49" />
-		<routestep step="3" x="742.03" y="587.67" z="183.13" />
-		<routestep step="4" x="737.94" y="604.70" z="182.68" />
-		<routestep step="5" x="727.22" y="619.11" z="184.06" />
-		<routestep step="6" x="712.35" y="628.87" z="187.26" />
-		<routestep step="7" x="695.87" y="631.07" z="191.42" />
-		<routestep step="8" x="679.74" y="627.29" z="196.02" />
-		<routestep step="9" x="666.69" y="617.15" z="200.23" />
-		<routestep step="10" x="657.80" y="601.26" z="204.16" />
-		<routestep step="11" x="655.73" y="584.21" z="206.25" />
-		<routestep step="12" x="659.44" y="568.93" z="206.64" />
-		<routestep step="13" x="670.06" y="554.83" z="204.95" />
-		<routestep step="14" x="682.85" y="546.13" z="202.51" />
-		<routestep step="15" x="699.32" y="542.63" z="198.47" />
-		<routestep step="16" x="716.15" y="545.69" z="193.74" />
-		<routestep step="17" x="730.87" y="556.71" z="188.71" />
-	</walker_template>
-	<walker_template route_id="300280000_drakanrider_flying_60_ae_sz1_30" pool="1">
-		<routestep step="1" x="45.41" y="399.37" z="270.18" />
-		<routestep step="2" x="56.41" y="393.00" z="270.74" />
-		<routestep step="3" x="69.49" y="390.39" z="271.82" />
-		<routestep step="4" x="82.53" y="393.54" z="273.53" />
-		<routestep step="5" x="93.41" y="401.96" z="275.47" />
-		<routestep step="6" x="100.59" y="413.72" z="277.63" />
-		<routestep step="7" x="101.92" y="426.78" z="279.20" />
-		<routestep step="8" x="98.65" y="439.59" z="280.27" />
-		<routestep step="9" x="90.58" y="449.98" z="280.45" />
-		<routestep step="10" x="78.12" y="457.13" z="280.05" />
-		<routestep step="11" x="64.94" y="458.86" z="278.87" />
-		<routestep step="12" x="53.24" y="455.99" z="277.34" />
-		<routestep step="13" x="42.64" y="447.62" z="275.20" />
-		<routestep step="14" x="36.19" y="437.54" z="273.53" />
-		<routestep step="15" x="33.85" y="424.49" z="271.85" />
-		<routestep step="16" x="36.58" y="411.13" z="270.67" />
-		<routestep step="17" x="45.41" y="399.38" z="270.18" />
-	</walker_template>
-	<walker_template route_id="300280000_drakanrider_flying_60_ae_sz1_31" pool="1">
-		<routestep step="1" x="58.98" y="308.97" z="299.39" />
-		<routestep step="2" x="43.41" y="311.87" z="302.22" />
-		<routestep step="3" x="27.45" y="309.88" z="307.50" />
-		<routestep step="4" x="14.56" y="301.66" z="315.15" />
-		<routestep step="5" x="6.79" y="288.49" z="323.82" />
-		<routestep step="6" x="4.96" y="273.16" z="332.35" />
-		<routestep step="7" x="10.31" y="258.53" z="338.43" />
-		<routestep step="8" x="20.65" y="245.87" z="342.18" />
-		<routestep step="9" x="35.06" y="237.56" z="342.44" />
-		<routestep step="10" x="52.72" y="234.45" z="339.49" />
-		<routestep step="11" x="68.33" y="237.43" z="333.80" />
-		<routestep step="12" x="79.87" y="244.84" z="326.92" />
-		<routestep step="13" x="87.30" y="257.77" z="318.13" />
-		<routestep step="14" x="89.25" y="271.11" z="310.93" />
-		<routestep step="15" x="85.03" y="286.09" z="304.36" />
-		<routestep step="16" x="75.00" y="299.55" z="300.12" />
-		<routestep step="17" x="58.98" y="308.97" z="299.39" />
-	</walker_template>
-	<walker_template route_id="300280000_drakanrider_flying_60_ae_sz1_32" pool="1">
-		<routestep step="1" x="12.98" y="378.60" z="288.56" />
-		<routestep step="2" x="25.30" y="391.80" z="284.14" />
-		<routestep step="3" x="42.25" y="400.73" z="280.23" />
-		<routestep step="4" x="61.81" y="401.71" z="277.67" />
-		<routestep step="5" x="80.82" y="394.63" z="277.02" />
-		<routestep step="6" x="96.25" y="381.33" z="277.76" />
-		<routestep step="7" x="104.15" y="363.91" z="280.44" />
-		<routestep step="8" x="105.56" y="344.96" z="284.23" />
-		<routestep step="9" x="99.16" y="327.42" z="288.83" />
-		<routestep step="10" x="85.18" y="312.46" z="293.47" />
-		<routestep step="11" x="67.68" y="304.70" z="297.20" />
-		<routestep step="12" x="50.12" y="303.87" z="299.49" />
-		<routestep step="13" x="31.51" y="311.11" z="300.40" />
-		<routestep step="14" x="17.88" y="322.30" z="299.54" />
-		<routestep step="15" x="8.59" y="339.29" z="297.12" />
-		<routestep step="16" x="6.18" y="358.78" z="293.34" />
-		<routestep step="17" x="12.99" y="378.60" z="288.56" />
-	</walker_template>
-	<walker_template route_id="300280000_drakanrider_flying_60_ae_sz1_33" pool="1">
-		<routestep step="1" x="281.67" y="300.73" z="280.76" />
-		<routestep step="2" x="298.62" y="291.74" z="277.38" />
-		<routestep step="3" x="318.71" y="288.48" z="275.11" />
-		<routestep step="4" x="338.71" y="293.79" z="275.13" />
-		<routestep step="5" x="355.37" y="306.85" z="277.26" />
-		<routestep step="6" x="366.37" y="324.68" z="281.41" />
-		<routestep step="7" x="368.35" y="344.18" z="286.45" />
-		<routestep step="8" x="363.28" y="363.09" z="291.82" />
-		<routestep step="9" x="350.81" y="378.19" z="296.52" />
-		<routestep step="10" x="331.68" y="388.21" z="300.69" />
-		<routestep step="11" x="311.43" y="390.17" z="302.62" />
-		<routestep step="12" x="293.49" y="385.35" z="302.59" />
-		<routestep step="13" x="277.21" y="372.41" z="300.10" />
-		<routestep step="14" x="267.38" y="357.07" z="296.89" />
-		<routestep step="15" x="263.85" y="337.55" z="291.96" />
-		<routestep step="16" x="268.09" y="317.78" z="286.41" />
-		<routestep step="17" x="281.68" y="300.74" z="280.76" />
-	</walker_template>
-	<walker_template route_id="300280000_drakanrider_flying_60_ae_sz1_34" pool="1">
-		<routestep step="1" x="233.40" y="267.99" z="329.81" />
-		<routestep step="2" x="235.15" y="289.90" z="323.22" />
-		<routestep step="3" x="244.64" y="310.94" z="316.15" />
-		<routestep step="4" x="262.71" y="326.01" z="309.74" />
-		<routestep step="5" x="286.43" y="332.74" z="305.22" />
-		<routestep step="6" x="311.37" y="330.73" z="302.59" />
-		<routestep step="7" x="332.25" y="319.23" z="303.33" />
-		<routestep step="8" x="348.05" y="301.53" z="306.42" />
-		<routestep step="9" x="355.29" y="279.62" z="311.95" />
-		<routestep step="10" x="353.22" y="254.76" z="318.99" />
-		<routestep step="11" x="342.31" y="234.48" z="326.01" />
-		<routestep step="12" x="326.05" y="220.99" z="331.75" />
-		<routestep step="13" x="302.66" y="214.73" z="336.53" />
-		<routestep step="14" x="280.99" y="215.94" z="338.57" />
-		<routestep step="15" x="259.11" y="226.01" z="338.35" />
-		<routestep step="16" x="241.93" y="243.52" z="335.48" />
-		<routestep step="17" x="233.41" y="268.00" z="329.81" />
-	</walker_template>
-	<walker_template route_id="300280000_drakanrider_flying_60_ae_sz3_1" pool="1">
-		<routestep step="1" x="423.58" y="586.36" z="160.24" />
-		<routestep step="2" x="416.25" y="600.56" z="159.03" />
-		<routestep step="3" x="413.67" y="617.22" z="158.85" />
-		<routestep step="4" x="418.28" y="633.58" z="159.97" />
-		<routestep step="5" x="429.30" y="646.99" z="162.32" />
-		<routestep step="6" x="444.39" y="655.59" z="165.03" />
-		<routestep step="7" x="460.74" y="656.71" z="167.98" />
-		<routestep step="8" x="476.55" y="652.04" z="170.74" />
-		<routestep step="9" x="489.04" y="641.36" z="172.94" />
-		<routestep step="10" x="497.35" y="625.31" z="174.00" />
-		<routestep step="11" x="498.82" y="608.55" z="173.97" />
-		<routestep step="12" x="494.64" y="593.88" z="172.96" />
-		<routestep step="13" x="483.60" y="580.80" z="170.90" />
-		<routestep step="14" x="470.74" y="573.08" z="168.32" />
-		<routestep step="15" x="454.35" y="570.68" z="165.34" />
-		<routestep step="16" x="437.82" y="574.70" z="162.44" />
-		<routestep step="17" x="423.59" y="586.36" z="160.24" />
-	</walker_template>
-	<walker_template route_id="300280000_drakanrider_flying_60_ae_sz3_2" pool="1">
-		<routestep step="1" x="368.90" y="544.85" z="160.39" />
-		<routestep step="2" x="362.24" y="555.66" z="161.19" />
-		<routestep step="3" x="352.05" y="564.15" z="162.97" />
-		<routestep step="4" x="339.29" y="567.56" z="165.87" />
-		<routestep step="5" x="326.01" y="565.33" z="169.30" />
-		<routestep step="6" x="314.47" y="558.42" z="172.97" />
-		<routestep step="7" x="307.41" y="547.59" z="175.75" />
-		<routestep step="8" x="304.45" y="534.80" z="177.68" />
-		<routestep step="9" x="306.77" y="521.86" z="178.18" />
-		<routestep step="10" x="314.38" y="509.69" z="177.51" />
-		<routestep step="11" x="325.05" y="501.92" z="175.54" />
-		<routestep step="12" x="336.51" y="498.90" z="172.93" />
-		<routestep step="13" x="349.51" y="501.21" z="169.33" />
-		<routestep step="14" x="359.68" y="507.00" z="166.34" />
-		<routestep step="15" x="367.61" y="517.34" z="163.39" />
-		<routestep step="16" x="371.28" y="530.36" z="161.26" />
-		<routestep step="17" x="368.90" y="544.85" z="160.39" />
-	</walker_template>
-	<walker_template route_id="300280000_drakanrider_flying_60_ae_sz3_3" pool="1">
-		<routestep step="1" x="433.82" y="595.64" z="176.40" />
-		<routestep step="2" x="423.63" y="602.03" z="175.14" />
-		<routestep step="3" x="411.48" y="604.96" z="172.83" />
-		<routestep step="4" x="399.27" y="602.44" z="169.72" />
-		<routestep step="5" x="389.02" y="594.90" z="166.22" />
-		<routestep step="6" x="382.10" y="584.00" z="163.21" />
-		<routestep step="7" x="380.65" y="571.70" z="161.12" />
-		<routestep step="8" x="383.49" y="559.48" z="160.01" />
-		<routestep step="9" x="390.88" y="549.40" z="160.11" />
-		<routestep step="10" x="402.35" y="542.18" z="161.76" />
-		<routestep step="11" x="414.61" y="540.07" z="164.22" />
-		<routestep step="12" x="425.56" y="542.37" z="167.01" />
-		<routestep step="13" x="435.62" y="549.94" z="170.25" />
-		<routestep step="14" x="441.76" y="559.22" z="173.07" />
-		<routestep step="15" x="444.15" y="571.46" z="175.37" />
-		<routestep step="16" x="441.82" y="584.20" z="176.67" />
-		<routestep step="17" x="433.81" y="595.64" z="176.40" />
-	</walker_template>
-	<walker_template route_id="300280000_drakanrider_flying_60_ae_sz3_5" pool="1">
-		<routestep step="1" x="268.06" y="494.45" z="189.53" />
-		<routestep step="2" x="259.57" y="506.46" z="188.31" />
-		<routestep step="3" x="255.10" y="521.32" z="188.07" />
-		<routestep step="4" x="257.21" y="536.83" z="189.06" />
-		<routestep step="5" x="265.53" y="550.46" z="191.25" />
-		<routestep step="6" x="278.16" y="560.24" z="193.81" />
-		<routestep step="7" x="292.91" y="563.36" z="196.64" />
-		<routestep step="8" x="307.90" y="561.12" z="199.30" />
-		<routestep step="9" x="320.63" y="552.98" z="201.46" />
-		<routestep step="10" x="330.24" y="539.41" z="202.56" />
-		<routestep step="11" x="333.73" y="524.32" z="202.61" />
-		<routestep step="12" x="331.79" y="510.41" z="201.71" />
-		<routestep step="13" x="323.41" y="497.07" z="199.79" />
-		<routestep step="14" x="312.68" y="488.38" z="197.35" />
-		<routestep step="15" x="298.07" y="484.10" z="194.50" />
-		<routestep step="16" x="282.51" y="485.64" z="191.71" />
-		<routestep step="17" x="268.06" y="494.45" z="189.53" />
-	</walker_template>
-	<walker_template route_id="300280000_drakanrider_flying_60_ae_sz3_7" pool="1">
-		<routestep step="1" x="151.90" y="548.41" z="189.27" />
-		<routestep step="2" x="144.46" y="561.30" z="191.96" />
-		<routestep step="3" x="132.78" y="571.45" z="195.68" />
-		<routestep step="4" x="117.91" y="575.54" z="200.19" />
-		<routestep step="5" x="102.21" y="572.92" z="204.63" />
-		<routestep step="6" x="88.39" y="564.67" z="208.64" />
-		<routestep step="7" x="79.70" y="551.77" z="210.87" />
-		<routestep step="8" x="75.77" y="536.51" z="211.63" />
-		<routestep step="9" x="78.02" y="521.08" z="210.41" />
-		<routestep step="10" x="86.53" y="506.53" z="207.64" />
-		<routestep step="11" x="98.81" y="497.24" z="203.77" />
-		<routestep step="12" x="112.17" y="493.61" z="199.72" />
-		<routestep step="13" x="127.53" y="496.37" z="195.10" />
-		<routestep step="14" x="139.71" y="503.25" z="191.82" />
-		<routestep step="15" x="149.39" y="515.57" z="189.28" />
-		<routestep step="16" x="154.18" y="531.10" z="188.28" />
-		<routestep step="17" x="151.90" y="548.41" z="189.27" />
-	</walker_template>
-	<walker_template route_id="300280000_drakanrider_flying_60_ae_sz3_8" pool="1">
-		<routestep step="1" x="129.23" y="518.94" z="193.56" />
-		<routestep step="2" x="138.86" y="513.30" z="194.43" />
-		<routestep step="3" x="150.34" y="510.96" z="195.73" />
-		<routestep step="4" x="161.78" y="513.72" z="197.46" />
-		<routestep step="5" x="171.35" y="521.11" z="199.25" />
-		<routestep step="6" x="177.68" y="531.47" z="201.07" />
-		<routestep step="7" x="178.87" y="542.99" z="202.22" />
-		<routestep step="8" x="176.04" y="554.29" z="202.82" />
-		<routestep step="9" x="168.98" y="563.47" z="202.59" />
-		<routestep step="10" x="158.06" y="569.80" z="201.82" />
-		<routestep step="11" x="146.50" y="571.36" z="200.44" />
-		<routestep step="12" x="136.24" y="568.86" z="198.88" />
-		<routestep step="13" x="126.91" y="561.49" z="196.93" />
-		<routestep step="14" x="121.23" y="552.62" z="195.52" />
-		<routestep step="15" x="119.15" y="541.12" z="194.26" />
-		<routestep step="16" x="121.51" y="529.33" z="193.55" />
-		<routestep step="17" x="129.24" y="518.94" z="193.56" />
-	</walker_template>
-	<walker_template route_id="300280000_drakanrider_flying_60_ae_sz3_9" pool="1">
-		<routestep step="1" x="456.05" y="450.98" z="199.37" />
-		<routestep step="2" x="451.50" y="469.00" z="198.46" />
-		<routestep step="3" x="440.84" y="485.41" z="197.89" />
-		<routestep step="4" x="424.10" y="495.95" z="198.13" />
-		<routestep step="5" x="404.00" y="498.90" z="198.98" />
-		<routestep step="6" x="384.13" y="494.58" z="200.69" />
-		<routestep step="7" x="368.91" y="482.79" z="202.52" />
-		<routestep step="8" x="358.67" y="466.41" z="204.38" />
-		<routestep step="9" x="355.96" y="447.41" z="205.81" />
-		<routestep step="10" x="361.16" y="427.08" z="207.18" />
-		<routestep step="11" x="372.86" y="411.45" z="207.63" />
-		<routestep step="12" x="387.91" y="402.04" z="207.41" />
-		<routestep step="13" x="407.71" y="399.32" z="206.23" />
-		<routestep step="14" x="425.02" y="402.73" z="205.08" />
-		<routestep step="15" x="441.26" y="413.45" z="203.27" />
-		<routestep step="16" x="452.64" y="429.82" z="201.34" />
-		<routestep step="17" x="456.05" y="450.98" z="199.37" />
-	</walker_template>
-	<walker_template route_id="300280000_drakanrider_flying_60_ae_sz3_10" pool="1">
-		<routestep step="1" x="351.43" y="397.65" z="211.28" />
-		<routestep step="2" x="343.94" y="411.82" z="210.99" />
-		<routestep step="3" x="341.28" y="428.47" z="211.34" />
-		<routestep step="4" x="345.89" y="444.84" z="212.29" />
-		<routestep step="5" x="357.01" y="458.27" z="213.83" />
-		<routestep step="6" x="372.24" y="466.93" z="215.27" />
-		<routestep step="7" x="388.79" y="468.11" z="216.70" />
-		<routestep step="8" x="404.81" y="463.50" z="217.89" />
-		<routestep step="9" x="417.51" y="452.87" z="218.74" />
-		<routestep step="10" x="425.96" y="436.86" z="218.76" />
-		<routestep step="11" x="427.51" y="420.11" z="218.31" />
-		<routestep step="12" x="423.33" y="405.43" z="217.45" />
-		<routestep step="13" x="412.21" y="392.31" z="216.21" />
-		<routestep step="14" x="399.20" y="384.55" z="214.70" />
-		<routestep step="15" x="382.61" y="382.10" z="213.22" />
-		<routestep step="16" x="365.87" y="386.05" z="211.95" />
-		<routestep step="17" x="351.43" y="397.65" z="211.28" />
-	</walker_template>
-	<walker_template route_id="300280000_drakanrider_flying_60_ae_sz3_11" pool="1">
-		<routestep step="1" x="204.17" y="653.67" z="220.94" />
-		<routestep step="2" x="199.71" y="671.74" z="220.52" />
-		<routestep step="3" x="189.31" y="688.29" z="221.73" />
-		<routestep step="4" x="173.08" y="699.07" z="225.14" />
-		<routestep step="5" x="153.62" y="702.33" z="230.05" />
-		<routestep step="6" x="134.50" y="698.36" z="235.95" />
-		<routestep step="7" x="119.87" y="686.84" z="241.19" />
-		<routestep step="8" x="110.09" y="670.66" z="245.55" />
-		<routestep step="9" x="107.55" y="651.74" z="248.01" />
-		<routestep step="10" x="112.72" y="631.38" z="248.82" />
-		<routestep step="11" x="124.12" y="615.59" z="247.26" />
-		<routestep step="12" x="138.71" y="605.96" z="244.18" />
-		<routestep step="13" x="157.81" y="602.92" z="239.00" />
-		<routestep step="14" x="174.53" y="606.04" z="234.21" />
-		<routestep step="15" x="190.15" y="616.47" z="228.81" />
-		<routestep step="16" x="201.04" y="632.62" z="224.13" />
-		<routestep step="17" x="204.17" y="653.67" z="220.95" />
-	</walker_template>
-	<walker_template route_id="300280000_drakanrider_flying_60_ae_sz3_12" pool="1">
-		<routestep step="1" x="134.78" y="706.44" z="213.26" />
-		<routestep step="2" x="129.39" y="725.06" z="213.91" />
-		<routestep step="3" x="130.16" y="745.31" z="216.32" />
-		<routestep step="4" x="139.32" y="763.32" z="220.38" />
-		<routestep step="5" x="155.34" y="776.16" z="225.62" />
-		<routestep step="6" x="175.07" y="782.34" z="230.61" />
-		<routestep step="7" x="194.58" y="779.38" z="234.72" />
-		<routestep step="8" x="212.12" y="769.75" z="237.64" />
-		<routestep step="9" x="224.38" y="753.92" z="238.87" />
-		<routestep step="10" x="230.50" y="732.92" z="237.77" />
-		<routestep step="11" x="228.42" y="712.85" z="235.08" />
-		<routestep step="12" x="220.15" y="696.71" z="231.42" />
-		<routestep step="13" x="204.16" y="684.21" z="226.59" />
-		<routestep step="14" x="187.26" y="678.53" z="221.94" />
-		<routestep step="15" x="167.43" y="680.00" z="217.59" />
-		<routestep step="16" x="148.89" y="689.05" z="214.37" />
-		<routestep step="17" x="134.78" y="706.44" z="213.26" />
-	</walker_template>
-	<walker_template route_id="300280000_drakanrider_flying_60_ae_sz6_1" pool="1">
-		<routestep step="1" x="226.53" y="420.60" z="301.24" />
-		<routestep step="2" x="221.18" y="434.59" z="299.37" />
-		<routestep step="3" x="211.16" y="446.61" z="296.69" />
-		<routestep step="4" x="196.87" y="453.23" z="293.69" />
-		<routestep step="5" x="180.66" y="453.40" z="290.71" />
-		<routestep step="6" x="165.25" y="447.75" z="288.60" />
-		<routestep step="7" x="154.27" y="436.60" z="287.54" />
-		<routestep step="8" x="147.69" y="422.31" z="287.50" />
-		<routestep step="9" x="147.36" y="406.74" z="288.50" />
-		<routestep step="10" x="153.38" y="390.97" z="290.91" />
-		<routestep step="11" x="164.15" y="379.70" z="293.65" />
-		<routestep step="12" x="176.99" y="373.78" z="296.35" />
-		<routestep step="13" x="193.01" y="373.77" z="299.00" />
-		<routestep step="14" x="206.40" y="378.41" z="301.12" />
-		<routestep step="15" x="218.29" y="388.81" z="302.39" />
-		<routestep step="16" x="225.78" y="403.22" z="302.59" />
-		<routestep step="17" x="226.52" y="420.60" z="301.24" />
-	</walker_template>
-	<walker_template route_id="300280000_drakanrider_flying_60_ae_sz6_2" pool="1">
-		<routestep step="1" x="163.22" y="399.62" z="313.39" />
-		<routestep step="2" x="161.27" y="409.80" z="314.41" />
-		<routestep step="3" x="162.80" y="420.63" z="315.13" />
-		<routestep step="4" x="168.77" y="429.94" z="315.15" />
-		<routestep step="5" x="178.22" y="436.23" z="314.55" />
-		<routestep step="6" x="189.26" y="438.82" z="313.24" />
-		<routestep step="7" x="199.72" y="436.52" z="311.69" />
-		<routestep step="8" x="208.74" y="430.72" z="310.03" />
-		<routestep step="9" x="214.59" y="421.78" z="308.60" />
-		<routestep step="10" x="216.74" y="410.30" z="307.26" />
-		<routestep step="11" x="214.51" y="399.62" z="306.64" />
-		<routestep step="12" x="209.13" y="391.27" z="306.63" />
-		<routestep step="13" x="199.78" y="385.16" z="307.42" />
-		<routestep step="14" x="190.23" y="382.74" z="308.36" />
-		<routestep step="15" x="179.52" y="384.26" z="309.88" />
-		<routestep step="16" x="169.92" y="389.78" z="311.59" />
-		<routestep step="17" x="163.22" y="399.63" z="313.39" />
-	</walker_template>
-	<walker_template route_id="300280000_drakanrider_flying_60_ae_sz6_4" pool="1">
-		<routestep step="1" x="200.37" y="364.91" z="297.27" />
-		<routestep step="2" x="181.61" y="365.53" z="301.31" />
-		<routestep step="3" x="162.96" y="372.62" z="304.46" />
-		<routestep step="4" x="148.57" y="387.05" z="305.45" />
-		<routestep step="5" x="140.81" y="406.49" z="304.29" />
-		<routestep step="6" x="140.14" y="427.26" z="300.93" />
-		<routestep step="7" x="147.95" y="445.02" z="296.29" />
-		<routestep step="8" x="161.45" y="458.80" z="290.97" />
-		<routestep step="9" x="179.40" y="465.65" z="285.93" />
-		<routestep step="10" x="200.50" y="464.85" z="281.03" />
-		<routestep step="11" x="218.64" y="456.56" z="278.19" />
-		<routestep step="12" x="231.52" y="443.57" z="277.31" />
-		<routestep step="13" x="239.04" y="424.40" z="278.84" />
-		<routestep step="14" x="239.92" y="406.36" z="281.36" />
-		<routestep step="15" x="233.40" y="387.82" z="285.83" />
-		<routestep step="16" x="220.18" y="372.90" z="291.26" />
-		<routestep step="17" x="200.36" y="364.91" z="297.27" />
-	</walker_template>
-	<walker_template route_id="300280000_drakanfi_60_ae_sz3_39" pool="1">
-		<routestep step="1" x="277.55" y="741.04" z="163.62155" />
-      <routestep step="2" x="272.73" y="735.56" z="163.62155" />
-      <routestep step="3" x="265.58" y="733.31" z="163.62155" />
-      <routestep step="4" x="272.74" y="735.59" z="163.62155" />
-      <routestep step="5" x="277.55" y="741.04" z="163.62155" />
-	</walker_template>
-	<walker_template route_id="300280000_drakanfi_60_ae_sz3_43" pool="1">
-      <routestep step="1" x="498.0" y="530.56" z="144.805" />
-      <routestep step="2" x="503.7" y="526.01" z="145.99875" />
-      <routestep step="3" x="506.28" y="518.96" z="146.1075" />
-      <routestep step="4" x="503.68" y="526.02" z="145.9975" />
-      <routestep step="5" x="498.0" y="530.56" z="144.805" />
-	</walker_template>
-	<walker_template route_id="300280000_drakanfi_60_ae_sz3_45" pool="1">
-      <routestep step="1" x="365.41" y="638.91" z="150.91188" />
-      <routestep step="2" x="360.56" y="644.36" z="151.125" />
-      <routestep step="3" x="359.2" y="651.74" z="151.30875" />
-      <routestep step="4" x="360.58" y="644.35" z="151.125" />
-      <routestep step="5" x="365.41" y="638.91" z="150.91188" />
-	</walker_template>
-	<walker_template route_id="300280000_drakanfi_60_ae_sz3_47" pool="1">
-      <routestep step="1" x="124.31" y="335.06" z="252.62862" />
-      <routestep step="2" x="124.77" y="327.78" z="252.62862" />
-      <routestep step="3" x="121.31" y="321.13" z="252.62862" />
-      <routestep step="4" x="124.77" y="327.81" z="252.62862" />
-      <routestep step="5" x="124.31" y="335.06" z="252.62862" />
-	</walker_template>
-	<walker_template route_id="300280000_drakanfi_60_ae_sz3_48" pool="1">
-      <routestep step="1" x="160.64" y="372.64" z="207.94514" />
-      <routestep step="2" x="160.87" y="365.35" z="207.94516" />
-      <routestep step="3" x="157.19" y="358.81" z="207.94516" />
-      <routestep step="4" x="160.87" y="365.37" z="207.94516" />
-      <routestep step="5" x="160.64" y="372.64" z="207.94525" />
-	</walker_template>
-	<walker_template route_id="300280000_drakanfi_60_ae_sz3_49" pool="1">
-      <routestep step="1" x="198.79" y="294.8" z="252.62862" />
-      <routestep step="2" x="195.83" y="301.47" z="252.62862" />
-      <routestep step="3" x="189.68" y="305.76" z="252.62915" />
-      <routestep step="4" x="195.84" y="301.44" z="252.62862" />
-      <routestep step="5" x="198.79" y="294.8" z="252.62862" />
-	</walker_template>
-	<walker_template route_id="300280000_drakanfi_60_ae_sz3_50" pool="1">
-      <routestep step="1" x="126.0" y="280.28" z="252.6306" />
-      <routestep step="2" x="118.84" y="278.91" z="252.62862" />
-      <routestep step="3" x="111.81" y="281.52" z="252.62862" />
-      <routestep step="4" x="118.86" y="278.92" z="252.62862" />
-      <routestep step="5" x="126.0" y="280.28" z="252.62862" />
-	</walker_template>
-	<walker_template route_id="300280000_drakanfi_60_ae_sz3_51" pool="1">
-      <routestep step="1" x="163.94" y="225.56" z="252.62862" />
-      <routestep step="2" x="168.93" y="230.88" z="252.62862" />
-      <routestep step="3" x="176.15" y="232.9" z="252.62862" />
-      <routestep step="4" x="168.91" y="230.86" z="252.62862" />
-      <routestep step="5" x="163.94" y="225.56" z="252.62862" />
-	</walker_template>
-	<walker_template route_id="300280000_drakanfi_60_ae_sz3_52" pool="1">
-      <routestep step="1" x="296.92" y="685.78" z="162.8175" />
-      <routestep step="2" x="290.15" y="688.45" z="162.9625" />
-      <routestep step="3" x="283.03" y="687.63" z="164.13" />
-      <routestep step="4" x="290.17" y="688.44" z="162.96187" />
-      <routestep step="5" x="296.93" y="685.78" z="162.81688" />
-	</walker_template>
-	<walker_template route_id="300280000_drakanwi_60_ae_sz5_1" pool="1">
-      <routestep step="1" x="164.67" y="297.12" z="209.44398" />
-      <routestep step="2" x="169.91" y="302.46" z="209.44395" />
-      <routestep step="3" x="171.83" y="309.41" z="209.44386" />
-      <routestep step="4" x="169.84" y="316.35" z="209.44377" />
-      <routestep step="5" x="164.58" y="321.71" z="209.44371" />
-      <routestep step="6" x="157.89" y="323.26" z="209.44388" />
-      <routestep step="7" x="151.2" y="321.52" z="209.44366" />
-      <routestep step="8" x="146.45" y="316.94" z="209.44366" />
-      <routestep step="9" x="144.28" y="309.35" z="209.44366" />
-      <routestep step="10" x="145.82" y="303.12" z="209.44376" />
-      <routestep step="11" x="150.57" y="297.67" z="209.44385" />
-      <routestep step="12" x="158.01" y="295.34" z="209.44392" />
-	</walker_template>
-	<walker_template route_id="300280000_drakanwi_60_ae_sz5_2" pool="1">
-      <routestep step="1" x="183.57" y="352.53" z="207.94516" />
-      <routestep step="2" x="178.26" y="347.32" z="207.94516" />
-      <routestep step="3" x="171.34" y="345.41" z="207.94516" />
-      <routestep step="4" x="164.43" y="347.39" z="207.94516" />
-      <routestep step="5" x="159.1" y="352.62" z="207.94516" />
-      <routestep step="6" x="157.55" y="359.29" z="207.94516" />
-      <routestep step="7" x="159.28" y="365.95" z="207.94516" />
-      <routestep step="8" x="163.84" y="370.68" z="207.94514" />
-      <routestep step="9" x="171.39" y="372.83" z="207.94514" />
-      <routestep step="10" x="177.6" y="371.31" z="207.94514" />
-      <routestep step="11" x="183.02" y="366.57" z="207.94514" />
-      <routestep step="12" x="185.35" y="359.16" z="207.94514" />
-	</walker_template>
-	<walker_template route_id="300280000_drakanwi_60_ae_sz6_1" pool="1">
-      <routestep step="1" x="121.44" y="248.54" z="252.62862" />
-      <routestep step="2" x="126.68" y="253.88" z="252.62862" />
-      <routestep step="3" x="128.6" y="260.83" z="252.62862" />
-      <routestep step="4" x="126.61" y="267.77" z="252.62862" />
-      <routestep step="5" x="121.35" y="273.12" z="252.62862" />
-      <routestep step="6" x="114.66" y="274.68" z="252.62862" />
-      <routestep step="7" x="107.97" y="272.93" z="252.62862" />
-      <routestep step="8" x="103.22" y="268.36" z="252.62862" />
-      <routestep step="9" x="101.05" y="260.77" z="252.62862" />
-      <routestep step="10" x="102.59" y="254.53" z="252.62862" />
-      <routestep step="11" x="107.34" y="249.09" z="252.62862" />
-      <routestep step="12" x="114.78" y="246.76" z="252.62862" />
-	</walker_template>
-	<walker_template route_id="300280000_drakanwi_60_ae_sz6_2" pool="1">
-      <routestep step="1" x="188.62" y="243.46" z="252.62862" />
-      <routestep step="2" x="183.27" y="238.2" z="252.62862" />
-      <routestep step="3" x="176.3" y="236.28" z="252.62862" />
-      <routestep step="4" x="169.34" y="238.28" z="252.62862" />
-      <routestep step="5" x="163.97" y="243.55" z="252.62862" />
-      <routestep step="6" x="162.41" y="250.26" z="252.62862" />
-      <routestep step="7" x="164.16" y="256.97" z="252.62862" />
-      <routestep step="8" x="168.75" y="261.74" z="252.62862" />
-      <routestep step="9" x="176.35" y="263.91" z="252.62872" />
-      <routestep step="10" x="182.61" y="262.37" z="252.62862" />
-      <routestep step="11" x="188.07" y="257.6" z="252.62862" />
-      <routestep step="12" x="190.41" y="250.14" z="252.62936" />
-	</walker_template>
-	<walker_template route_id="300280000_npcpathsz4_named1" pool="1">
-      <routestep step="1" x="184.96" y="398.99" z="207.7295" />
-      <routestep step="2" x="186.85" y="406.37" z="207.7295" />
-      <routestep step="3" x="189.25" y="414.85" z="207.7295" />
-      <routestep step="4" x="192.2" y="425.29" z="205.04883" />
-      <routestep step="5" x="194.32" y="432.39" z="203.35092" />
-      <routestep step="6" x="199.15" y="448.9" z="203.35092" />
-      <routestep step="7" x="202.48" y="460.27" z="200.87013" />
-      <routestep step="8" x="204.84" y="469.47" z="197.8324" />
-      <routestep step="9" x="206.59" y="475.62" z="197.83089" />
-      <routestep step="10" x="206.17" y="475.73" z="197.83089" />
-      <routestep step="11" x="204.43" y="469.59" z="197.83089" />
-      <routestep step="12" x="201.87" y="460.44" z="200.8681" />
-      <routestep step="13" x="198.56" y="449.04" z="203.35092" />
-      <routestep step="14" x="193.73" y="432.57" z="203.35092" />
-      <routestep step="15" x="191.67" y="425.44" z="205.04631" />
-      <routestep step="16" x="188.69" y="414.92" z="207.7295" />
-      <routestep step="17" x="186.34" y="406.52" z="207.7295" />
-      <routestep step="18" x="184.48" y="399.05" z="207.7295" />
-	</walker_template>
-	<walker_template route_id="300280000_nmd_7named_60_ah" pool="1">
-      <routestep step="1" x="188.76" y="416.99" z="260.75488" />
-      <routestep step="2" x="188.17" y="414.04" z="260.75488" />
-      <routestep step="3" x="188.76" y="416.99" z="260.75488" />
-	</walker_template>
-	<walker_template route_id="300280000_soldier_hurt_15" pool="1">
-      <routestep step="1" x="481.12" y="484.42" z="151.45625" />
-      <routestep step="2" x="484.65" y="476.9" z="151.25" />
-      <routestep step="3" x="495.16" y="486.62" z="146.88875" />
-      <routestep step="4" x="515.29" y="520.49" z="146.0" />
-      <routestep step="5" x="495.19" y="486.64" z="146.88562" />
-      <routestep step="6" x="484.67" y="476.92" z="151.25" />
-      <routestep step="7" x="481.12" y="484.39" z="151.45438" />
-	</walker_template>
-	<walker_template route_id="300280000_soldier_hurt_19" pool="1">
-      <routestep step="1" x="288.85" y="683.8" z="163.85938" />
-      <routestep step="2" x="300.68" y="683.81" z="162.5322" />
-      <routestep step="3" x="334.07" y="669.06" z="154.69437" />
-      <routestep step="4" x="363.68" y="630.57" z="150.83937" />
-      <routestep step="5" x="333.99" y="669.17" z="154.72" />
-      <routestep step="6" x="300.63" y="683.78" z="162.5322" />
-      <routestep step="7" x="288.88" y="683.77" z="163.86313" />
-	</walker_template>
-	<walker_template route_id="300280000_soldier_hurt_22" pool="1">
-      <routestep step="1" x="269.63" y="738.42" z="163.62155" />
-      <routestep step="2" x="277.5" y="722.93" z="162.625" />
-      <routestep step="3" x="288.71" y="706.48" z="162.625" />
-      <routestep step="4" x="304.32" y="691.97" z="162.69687" />
-      <routestep step="5" x="288.78" y="706.37" z="162.625" />
-      <routestep step="6" x="277.5" y="722.9" z="162.625" />
-      <routestep step="7" x="269.61" y="738.45" z="163.62155" />
-	</walker_template>
-	<walker_template route_id="300280000_soldier_hurt_24" pool="1">
-      <routestep step="1" x="479.46" y="481.7" z="151.69125" />
-      <routestep step="2" x="483.79" y="477.12" z="151.25" />
-      <routestep step="3" x="494.23" y="486.75" z="146.93875" />
-      <routestep step="4" x="513.96" y="520.5" z="146.0" />
-      <routestep step="5" x="494.26" y="486.8" z="146.93375" />
-      <routestep step="6" x="483.76" y="477.13" z="151.25" />
-      <routestep step="7" x="479.46" y="481.7" z="151.69125" />
-	</walker_template>
-	<walker_template route_id="300280000_soldier_hurt_51" pool="1">
-      <routestep step="1" x="271.58" y="740.85" z="163.62155" />
-      <routestep step="2" x="278.96" y="724.87" z="162.625" />
-      <routestep step="3" x="289.83" y="707.35" z="162.625" />
-      <routestep step="4" x="304.84" y="692.87" z="162.75375" />
-      <routestep step="5" x="289.81" y="707.38" z="162.625" />
-      <routestep step="6" x="278.97" y="724.89" z="162.625" />
-      <routestep step="7" x="271.56" y="740.88" z="163.62155" />
-	</walker_template>
-	<walker_template route_id="300280000_soldier_hurt_54" pool="1">
-      <routestep step="1" x="530.85" y="506.12" z="146.0075" />
-      <routestep step="2" x="523.9" y="512.93" z="146.17688" />
-      <routestep step="3" x="521.87" y="533.07" z="146.125" />
-      <routestep step="4" x="531.73" y="568.61" z="146.9175" />
-      <routestep step="5" x="521.85" y="533.01" z="146.125" />
-      <routestep step="6" x="523.89" y="512.93" z="146.17625" />
-      <routestep step="7" x="530.9" y="506.03" z="146.00188" />
-	</walker_template>
-	<walker_template route_id="300280000_soldier_hurt_59" pool="1">
-      <routestep step="1" x="501.41" y="523.01" z="146.05125" />
-      <routestep step="2" x="508.48" y="530.92" z="146.125" />
-      <routestep step="3" x="521.34" y="549.98" z="146.125" />
-      <routestep step="4" x="533.0" y="567.39" z="146.96188" />
-      <routestep step="5" x="521.3" y="549.78" z="146.125" />
-      <routestep step="6" x="508.49" y="530.95" z="146.125" />
-      <routestep step="7" x="501.5" y="523.1" z="146.0625" />
-	</walker_template>
-	<walker_template route_id="300280000_soldier_hurt_61" pool="1">
-      <routestep step="1" x="364.63" y="646.26" z="151.14125" />
-      <routestep step="2" x="365.89" y="629.42" z="150.72063" />
-      <routestep step="3" x="366.96" y="614.81" z="145.875" />
-      <routestep step="4" x="363.02" y="578.41" z="145.625" />
-      <routestep step="5" x="366.96" y="614.96" z="145.875" />
-      <routestep step="6" x="365.86" y="629.52" z="150.72876" />
-      <routestep step="7" x="364.64" y="646.32" z="151.145" />
-	</walker_template>
-	<walker_template route_id="300280000_soldier_hurt_62" pool="1">
-      <routestep step="1" x="485.11" y="450.21" z="151.62563" />
-      <routestep step="2" x="493.17" y="460.9" z="151.37062" />
-      <routestep step="3" x="503.97" y="473.41" z="146.91562" />
-      <routestep step="4" x="517.63" y="517.68" z="146.0" />
-      <routestep step="5" x="503.95" y="473.39" z="146.91937" />
-      <routestep step="6" x="493.19" y="460.95" z="151.36734" />
-      <routestep step="7" x="485.08" y="450.17" z="151.62755" />
-	</walker_template>
-	<walker_template route_id="300280000_soldier_hurt_66" pool="1">
-      <routestep step="1" x="311.73" y="666.87" z="156.12563" />
-      <routestep step="2" x="327.59" y="664.65" z="154.5225" />
-      <routestep step="3" x="357.27" y="630.79" z="150.875" />
-      <routestep step="4" x="363.48" y="578.83" z="145.625" />
-      <routestep step="5" x="357.3" y="630.75" z="150.875" />
-      <routestep step="6" x="327.57" y="664.66" z="154.52562" />
-      <routestep step="7" x="311.73" y="666.91" z="156.13062" />
-	</walker_template>
-	<walker_template route_id="300280000_soldier_hurt_67" pool="1">
-      <routestep step="1" x="252.53" y="703.13" z="163.97188" />
-      <routestep step="2" x="271.15" y="702.02" z="163.40813" />
-      <routestep step="3" x="289.93" y="698.01" z="162.75438" />
-      <routestep step="4" x="304.33" y="692.16" z="162.72874" />
-      <routestep step="5" x="290.07" y="698.03" z="162.74562" />
-      <routestep step="6" x="271.16" y="702.0" z="163.4075" />
-      <routestep step="7" x="252.51" y="703.13" z="163.97438" />
-	</walker_template>
-	<walker_template route_id="300280000_soldier_hurt_69" pool="1">
-      <routestep step="1" x="517.19" y="473.38" z="145.75" />
-      <routestep step="2" x="516.01" y="491.92" z="145.87437" />
-      <routestep step="3" x="516.08" y="531.3" z="146.0" />
-      <routestep step="4" x="530.49" y="569.97" z="146.9325" />
-      <routestep step="5" x="516.09" y="531.21" z="146.0" />
-      <routestep step="6" x="516.06" y="491.9" z="145.87125" />
-      <routestep step="7" x="517.19" y="473.38" z="145.75" />
-	</walker_template>
-	<walker_template route_id="300280000_soldier_hurt_70" pool="1">
-      <routestep step="1" x="522.27" y="474.05" z="145.73" />
-      <routestep step="2" x="521.09" y="492.59" z="145.75055" />
-      <routestep step="3" x="521.16" y="531.97" z="146.125" />
-      <routestep step="4" x="533.01" y="567.5" z="145.96727" />
-      <routestep step="5" x="521.17" y="531.88" z="146.125" />
-      <routestep step="6" x="521.14" y="492.57" z="145.75218" />
-      <routestep step="7" x="522.27" y="474.05" z="145.73" />
-	</walker_template>
-	<walker_template route_id="300280000_soldier_hurt_71" pool="1">
-      <routestep step="1" x="497.11" y="501.72" z="146.43063" />
-      <routestep step="2" x="506.31" y="513.01" z="146.10562" />
-      <routestep step="3" x="519.0" y="539.97" z="146.125" />
-      <routestep step="4" x="531.44" y="567.86" z="146.83125" />
-      <routestep step="5" x="519.03" y="540.06" z="146.125" />
-      <routestep step="6" x="506.3" y="512.93" z="146.10625" />
-      <routestep step="7" x="497.12" y="501.75" z="146.43" />
-	</walker_template>
-	<walker_template route_id="300280000_soldier_imprisoned_17" pool="1">
-      <routestep step="1" x="291.55" y="682.34" z="163.8675" />
-      <routestep step="2" x="299.32" y="681.69" z="162.53223" />
-      <routestep step="3" x="331.4" y="667.32" z="154.615" />
-      <routestep step="4" x="359.72" y="630.27" z="150.875" />
-      <routestep step="5" x="331.32" y="667.36" z="154.63" />
-      <routestep step="6" x="299.33" y="681.7" z="162.53223" />
-      <routestep step="7" x="291.58" y="682.31" z="163.86938" />
-	</walker_template>
-	<walker_template route_id="300280000_soldier_imprisoned_19" pool="1">
-      <routestep step="1" x="476.39" y="481.28" z="152.10062" />
-      <routestep step="2" x="484.53" y="475.81" z="151.25" />
-      <routestep step="3" x="495.79" y="485.99" z="146.88875" />
-      <routestep step="4" x="516.5" y="520.39" z="146.0" />
-      <routestep step="5" x="495.84" y="486.01" z="146.88437" />
-      <routestep step="6" x="484.54" y="475.8" z="151.25" />
-      <routestep step="7" x="476.39" y="481.25" z="152.10062" />
-	</walker_template>
-	<walker_template route_id="300280000_soldier_imprisoned_40" pool="1">
-      <routestep step="1" x="532.89" y="503.34" z="145.81937" />
-      <routestep step="2" x="525.1" y="511.04" z="146.13374" />
-      <routestep step="3" x="523.08" y="532.99" z="146.125" />
-      <routestep step="4" x="532.91" y="567.35" z="146.94193" />
-      <routestep step="5" x="523.08" y="532.98" z="146.125" />
-      <routestep step="6" x="525.09" y="511.08" z="146.13562" />
-      <routestep step="7" x="532.95" y="503.25" z="145.81563" />
-	</walker_template>
-	<walker_template route_id="300280000_soldier_imprisoned_43" pool="1">
-      <routestep step="1" x="499.44" y="525.75" z="145.66063" />
-      <routestep step="2" x="505.85" y="532.83" z="145.98125" />
-      <routestep step="3" x="519.55" y="551.72" z="146.125" />
-      <routestep step="4" x="531.74" y="568.67" z="145.77063" />
-      <routestep step="5" x="519.5" y="551.64" z="146.125" />
-      <routestep step="6" x="505.83" y="532.79" z="145.97874" />
-      <routestep step="7" x="499.52" y="525.84" z="145.67" />
-	</walker_template>
-	<walker_template route_id="300280000_soldier_imprisoned_45" pool="1">
-      <routestep step="1" x="365.95" y="643.56" z="151.0" />
-      <routestep step="2" x="366.88" y="629.59" z="150.72438" />
-      <routestep step="3" x="368.11" y="614.97" z="145.87758" />
-      <routestep step="4" x="364.25" y="579.46" z="145.625" />
-      <routestep step="5" x="368.11" y="614.95" z="145.875" />
-      <routestep step="6" x="366.93" y="629.44" z="150.715" />
-      <routestep step="7" x="365.96" y="643.62" z="151.0" />
-	</walker_template>
-	<walker_template route_id="300280000_soldier_imprisoned_46" pool="1">
-      <routestep step="1" x="482.31" y="448.24" z="151.72" />
-      <routestep step="2" x="492.65" y="461.83" z="151.345" />
-      <routestep step="3" x="503.17" y="474.28" z="146.94376" />
-      <routestep step="4" x="516.4" y="517.91" z="146.0" />
-      <routestep step="5" x="503.1" y="474.11" z="146.97375" />
-      <routestep step="6" x="492.67" y="461.88" z="151.34062" />
-      <routestep step="7" x="482.29" y="448.19" z="151.72626" />
-	</walker_template>
-	<walker_template route_id="300280000_soldier_imprisoned_50" pool="1">
-      <routestep step="1" x="314.0" y="665.14" z="155.58875" />
-      <routestep step="2" x="327.3" y="663.65" z="154.44063" />
-      <routestep step="3" x="356.38" y="630.5" z="150.875" />
-      <routestep step="4" x="362.46" y="578.1" z="145.625" />
-      <routestep step="5" x="356.41" y="630.62" z="150.87613" />
-      <routestep step="6" x="327.28" y="663.62" z="154.44125" />
-      <routestep step="7" x="314.0" y="665.18" z="155.59625" />
-	</walker_template>
-	<walker_template route_id="300280000_soldier_imprisoned_51" pool="1">
-      <routestep step="1" x="255.34" y="701.65" z="163.98187" />
-      <routestep step="2" x="271.18" y="700.89" z="163.47313" />
-      <routestep step="3" x="289.82" y="697.15" z="162.81438" />
-      <routestep step="4" x="303.8" y="691.34" z="162.70921" />
-      <routestep step="5" x="289.76" y="697.16" z="162.8175" />
-      <routestep step="6" x="271.09" y="700.82" z="163.48875" />
-      <routestep step="7" x="255.32" y="701.65" z="163.98312" />
-	</walker_template>
-	<walker_template route_id="300280000_soldier_imprisoned_52" pool="1">
-      <routestep step="1" x="286.01" y="682.77" z="164.47874" />
-      <routestep step="2" x="300.04" y="682.75" z="162.53221" />
-      <routestep step="3" x="332.52" y="668.34" z="154.65625" />
-      <routestep step="4" x="361.67" y="630.4" z="150.85" />
-      <routestep step="5" x="332.62" y="668.28" z="154.63876" />
-      <routestep step="6" x="300.01" y="682.74" z="162.53221" />
-      <routestep step="7" x="286.04" y="682.74" z="164.47874" />
-	</walker_template>
-	<walker_template route_id="300280000_soldier_imprisoned_55" pool="1">
-      <routestep step="1" x="266.73" y="737.54" z="163.62155" />
-      <routestep step="2" x="275.33" y="721.96" z="162.625" />
-      <routestep step="3" x="287.9" y="705.6" z="162.625" />
-      <routestep step="4" x="303.68" y="691.36" z="162.70999" />
-      <routestep step="5" x="287.88" y="705.63" z="162.625" />
-      <routestep step="6" x="275.28" y="721.93" z="162.625" />
-      <routestep step="7" x="266.71" y="737.57" z="163.62155" />
-	</walker_template>
-	<walker_template route_id="300280000_soldier_imprisoned_56" pool="1">
-      <routestep step="1" x="519.83" y="472.08" z="145.86438" />
-      <routestep step="2" x="518.65" y="490.62" z="145.75" />
-      <routestep step="3" x="518.72" y="531.0" z="146.1075" />
-      <routestep step="4" x="531.76" y="568.75" z="146.93594" />
-      <routestep step="5" x="518.73" y="531.07" z="146.1125" />
-      <routestep step="6" x="518.7" y="490.6" z="145.75" />
-      <routestep step="7" x="519.84" y="472.08" z="145.865" />
-	</walker_template>
-	<walker_template route_id="300280000_soldier_imprisoned_57" pool="1">
-      <routestep step="1" x="495.77" y="499.0" z="146.52875" />
-      <routestep step="2" x="506.48" y="511.87" z="146.095" />
-      <routestep step="3" x="518.79" y="537.33" z="146.125" />
-      <routestep step="4" x="533.14" y="567.25" z="146.97063" />
-      <routestep step="5" x="518.78" y="537.26" z="146.125" />
-      <routestep step="6" x="506.54" y="511.91" z="146.09125" />
-      <routestep step="7" x="495.77" y="499.03" z="146.52875" />
+	<walker_template route_id="300280000_npcpathnamed_path1">
+		<routestep x="520.72" y="499.37" z="181.80" />
+		<routestep x="509.81" y="484.69" z="181.95" />
+		<routestep x="488.13" y="462.96" z="176.35" />
+		<routestep x="473.25" y="454.97" z="175.48" />
+		<routestep x="455.36" y="446.50" z="172.65" />
+		<routestep x="440.31" y="449.88" z="171.93" />
+		<routestep x="430.72" y="468.22" z="171.03" />
+		<routestep x="416.22" y="491.31" z="168.99" />
+		<routestep x="400.31" y="516.80" z="168.54" />
+		<routestep x="381.39" y="543.90" z="166.83" />
+		<routestep x="365.32" y="574.07" z="154.73" />
+		<routestep x="353.35" y="596.23" z="146.57" />
+	</walker_template>
+	<walker_template route_id="300280000_drakanrider_flying_60_ae_sz1_2">
+		<routestep x="605.65" y="220.23" z="65.28" />
+		<routestep x="604.64" y="206.06" z="64.91" />
+		<routestep x="608.34" y="191.60" z="65.61" />
+		<routestep x="617.68" y="179.95" z="67.81" />
+		<routestep x="631.17" y="173.00" z="71.04" />
+		<routestep x="646.14" y="171.38" z="75.00" />
+		<routestep x="659.60" y="176.29" z="78.55" />
+		<routestep x="670.61" y="185.72" z="81.56" />
+		<routestep x="676.96" y="198.86" z="83.29" />
+		<routestep x="677.99" y="214.85" z="83.96" />
+		<routestep x="673.38" y="228.99" z="83.02" />
+		<routestep x="664.97" y="239.43" z="81.03" />
+		<routestep x="651.68" y="246.13" z="77.59" />
+		<routestep x="638.68" y="247.81" z="74.40" />
+		<routestep x="624.76" y="243.92" z="70.75" />
+		<routestep x="612.94" y="234.76" z="67.54" />
+		<routestep x="605.65" y="220.22" z="65.28" />
+	</walker_template>
+	<walker_template route_id="300280000_drakanrider_flying_60_ae_sz1_3">
+		<routestep x="719.79" y="131.02" z="84.75" />
+		<routestep x="701.70" y="134.85" z="81.95" />
+		<routestep x="682.51" y="132.47" z="78.30" />
+		<routestep x="666.05" y="122.00" z="74.52" />
+		<routestep x="654.99" y="105.18" z="71.06" />
+		<routestep x="650.50" y="85.29" z="68.89" />
+		<routestep x="654.68" y="66.33" z="68.18" />
+		<routestep x="665.06" y="49.84" z="68.79" />
+		<routestep x="680.98" y="39.01" z="70.66" />
+		<routestep x="701.36" y="34.70" z="74.18" />
+		<routestep x="720.28" y="38.36" z="77.88" />
+		<routestep x="735.03" y="47.79" z="81.27" />
+		<routestep x="745.80" y="64.50" z="84.33" />
+		<routestep x="749.99" y="81.62" z="86.58" />
+		<routestep x="747.19" y="101.03" z="87.57" />
+		<routestep x="737.30" y="118.55" z="87.13" />
+		<routestep x="719.79" y="131.01" z="84.75" />
+	</walker_template>
+	<walker_template route_id="300280000_drakanrider_flying_60_ae_sz1_8">
+		<routestep x="807.22" y="152.45" z="105.57" />
+		<routestep x="824.96" y="161.99" z="104.34" />
+		<routestep x="845.85" y="165.43" z="102.76" />
+		<routestep x="866.42" y="159.68" z="100.79" />
+		<routestep x="883.35" y="145.67" z="98.94" />
+		<routestep x="894.25" y="126.51" z="97.01" />
+		<routestep x="895.79" y="105.62" z="95.95" />
+		<routestep x="890.05" y="85.39" z="95.52" />
+		<routestep x="876.78" y="69.29" z="96.09" />
+		<routestep x="856.68" y="58.57" z="97.10" />
+		<routestep x="835.67" y="56.54" z="98.76" />
+		<routestep x="817.22" y="61.75" z="100.52" />
+		<routestep x="800.73" y="75.70" z="102.70" />
+		<routestep x="790.92" y="92.12" z="104.06" />
+		<routestep x="787.78" y="113.04" z="105.25" />
+		<routestep x="792.69" y="134.19" z="105.79" />
+		<routestep x="807.22" y="152.45" z="105.57" />
+	</walker_template>
+	<walker_template route_id="300280000_drakanrider_flying_60_ae_sz1_9">
+		<routestep x="967.68" y="217.47" z="118.00" />
+		<routestep x="976.24" y="242.91" z="123.75" />
+		<routestep x="975.89" y="271.20" z="129.50" />
+		<routestep x="963.31" y="297.07" z="134.31" />
+		<routestep x="940.54" y="316.38" z="137.15" />
+		<routestep x="912.25" y="326.55" z="138.43" />
+		<routestep x="883.88" y="324.04" z="136.87" />
+		<routestep x="858.11" y="312.07" z="133.48" />
+		<routestep x="839.70" y="291.10" z="128.28" />
+		<routestep x="830.08" y="262.24" z="122.30" />
+		<routestep x="832.34" y="234.09" z="116.65" />
+		<routestep x="843.70" y="210.90" z="112.34" />
+		<routestep x="866.34" y="192.22" z="109.12" />
+		<routestep x="890.65" y="182.83" z="108.36" />
+		<routestep x="919.44" y="183.24" z="109.50" />
+		<routestep x="946.63" y="194.30" z="112.76" />
+		<routestep x="967.68" y="217.47" z="118.00" />
+	</walker_template>
+	<walker_template route_id="300280000_drakanrider_flying_60_ae_sz1_11">
+		<routestep x="757.86" y="298.75" z="133.71" />
+		<routestep x="779.67" y="305.55" z="136.95" />
+		<routestep x="803.86" y="305.00" z="138.74" />
+		<routestep x="825.99" y="294.49" z="137.84" />
+		<routestep x="842.45" y="275.69" z="134.62" />
+		<routestep x="851.22" y="252.59" z="129.27" />
+		<routestep x="849.10" y="229.48" z="123.26" />
+		<routestep x="838.88" y="208.58" z="117.17" />
+		<routestep x="820.90" y="193.72" z="112.20" />
+		<routestep x="796.28" y="186.20" z="108.12" />
+		<routestep x="772.21" y="188.31" z="106.74" />
+		<routestep x="752.38" y="197.79" z="107.56" />
+		<routestep x="736.34" y="216.37" z="111.19" />
+		<routestep x="728.35" y="236.33" z="115.38" />
+		<routestep x="728.68" y="259.80" z="121.34" />
+		<routestep x="738.13" y="281.87" z="127.66" />
+		<routestep x="757.86" y="298.75" z="133.71" />
+	</walker_template>
+	<walker_template route_id="300280000_drakanrider_flying_60_ae_sz1_12">
+		<routestep x="757.21" y="438.09" z="141.37" />
+		<routestep x="740.22" y="440.99" z="142.91" />
+		<routestep x="722.26" y="438.16" z="143.57" />
+		<routestep x="706.96" y="427.98" z="143.06" />
+		<routestep x="696.78" y="412.16" z="141.33" />
+		<routestep x="692.87" y="393.72" z="139.18" />
+		<routestep x="697.05" y="376.43" z="136.56" />
+		<routestep x="707.02" y="361.63" z="133.95" />
+		<routestep x="722.06" y="352.23" z="131.62" />
+		<routestep x="741.27" y="348.95" z="130.21" />
+		<routestep x="758.97" y="352.95" z="129.73" />
+		<routestep x="772.68" y="362.12" z="130.19" />
+		<routestep x="782.52" y="377.85" z="131.62" />
+		<routestep x="786.25" y="393.71" z="133.74" />
+		<routestep x="783.36" y="411.45" z="136.34" />
+		<routestep x="773.84" y="427.22" z="139.06" />
+		<routestep x="757.21" y="438.09" z="141.37" />
+	</walker_template>
+	<walker_template route_id="300280000_drakanrider_flying_60_ae_sz1_14">
+		<routestep x="893.63" y="386.84" z="145.94" />
+		<routestep x="886.71" y="404.14" z="145.64" />
+		<routestep x="874.00" y="419.01" z="144.42" />
+		<routestep x="856.09" y="427.21" z="142.43" />
+		<routestep x="835.91" y="427.42" z="139.82" />
+		<routestep x="816.86" y="420.40" z="137.53" />
+		<routestep x="803.43" y="406.59" z="135.61" />
+		<routestep x="795.52" y="388.90" z="134.27" />
+		<routestep x="795.41" y="369.64" z="133.67" />
+		<routestep x="803.22" y="350.12" z="134.36" />
+		<routestep x="816.85" y="336.16" z="135.71" />
+		<routestep x="832.95" y="328.85" z="137.50" />
+		<routestep x="852.86" y="328.86" z="139.74" />
+		<routestep x="869.44" y="334.59" z="142.04" />
+		<routestep x="884.02" y="347.47" z="144.09" />
+		<routestep x="893.06" y="365.31" z="145.57" />
+		<routestep x="893.62" y="386.84" z="145.93" />
+	</walker_template>
+	<walker_template route_id="300280000_drakanrider_flying_60_ae_sz1_16">
+		<routestep x="872.90" y="539.58" z="171.60" />
+		<routestep x="891.02" y="527.93" z="168.63" />
+		<routestep x="904.96" y="510.44" z="163.84" />
+		<routestep x="910.03" y="488.85" z="157.37" />
+		<routestep x="905.43" y="466.61" z="150.44" />
+		<routestep x="892.87" y="447.50" z="143.71" />
+		<routestep x="873.88" y="436.09" z="139.26" />
+		<routestep x="851.78" y="431.66" z="136.85" />
+		<routestep x="829.74" y="436.08" z="137.39" />
+		<routestep x="809.33" y="449.40" z="140.37" />
+		<routestep x="796.65" y="467.67" z="145.45" />
+		<routestep x="792.15" y="487.07" z="151.27" />
+		<routestep x="796.92" y="508.80" z="158.46" />
+		<routestep x="807.45" y="525.68" z="164.00" />
+		<routestep x="825.65" y="538.56" z="168.86" />
+		<routestep x="848.19" y="544.19" z="171.67" />
+		<routestep x="872.90" y="539.57" z="171.60" />
+	</walker_template>
+	<walker_template route_id="300280000_drakanrider_flying_60_ae_sz1_18">
+		<routestep x="981.86" y="444.71" z="163.10" />
+		<routestep x="984.71" y="461.82" z="166.58" />
+		<routestep x="981.74" y="480.02" z="169.02" />
+		<routestep x="971.33" y="495.65" z="169.68" />
+		<routestep x="955.21" y="506.21" z="168.30" />
+		<routestep x="936.46" y="510.45" z="165.73" />
+		<routestep x="918.93" y="506.50" z="161.88" />
+		<routestep x="903.95" y="496.67" z="157.53" />
+		<routestep x="894.49" y="481.63" z="153.18" />
+		<routestep x="891.25" y="462.25" z="149.57" />
+		<routestep x="895.41" y="444.30" z="147.39" />
+		<routestep x="904.79" y="430.29" z="146.81" />
+		<routestep x="920.83" y="420.11" z="147.91" />
+		<routestep x="936.95" y="416.06" z="150.36" />
+		<routestep x="954.94" y="418.69" z="154.08" />
+		<routestep x="970.90" y="428.06" z="158.53" />
+		<routestep x="981.86" y="444.72" z="163.10" />
+	</walker_template>
+	<walker_template route_id="300280000_drakanrider_flying_60_ae_sz1_20">
+		<routestep x="1000.86" y="574.37" z="179.90" />
+		<routestep x="991.36" y="556.97" z="176.59" />
+		<routestep x="975.88" y="542.84" z="173.75" />
+		<routestep x="955.58" y="536.45" z="171.93" />
+		<routestep x="933.75" y="538.78" z="171.61" />
+		<routestep x="914.06" y="548.67" z="172.21" />
+		<routestep x="901.21" y="565.00" z="174.27" />
+		<routestep x="894.78" y="584.74" z="177.13" />
+		<routestep x="896.92" y="605.12" z="180.61" />
+		<routestep x="907.70" y="624.82" z="183.96" />
+		<routestep x="924.06" y="637.86" z="186.66" />
+		<routestep x="942.30" y="643.54" z="188.29" />
+		<routestep x="963.75" y="640.96" z="188.92" />
+		<routestep x="981.00" y="632.80" z="188.13" />
+		<routestep x="995.19" y="617.30" z="186.26" />
+		<routestep x="1002.83" y="597.26" z="183.40" />
+		<routestep x="1000.85" y="574.37" z="179.90" />
+	</walker_template>
+	<walker_template route_id="300280000_drakanrider_flying_60_ae_sz1_21">
+		<routestep x="881.79" y="731.42" z="192.91" />
+		<routestep x="898.63" y="730.20" z="191.34" />
+		<routestep x="914.92" y="723.26" z="189.11" />
+		<routestep x="926.80" y="710.01" z="186.26" />
+		<routestep x="932.36" y="692.57" z="183.40" />
+		<routestep x="931.31" y="674.22" z="180.57" />
+		<routestep x="922.89" y="658.82" z="178.87" />
+		<routestep x="909.62" y="647.15" z="178.09" />
+		<routestep x="892.94" y="641.76" z="178.65" />
+		<routestep x="873.89" y="643.23" z="180.10" />
+		<routestep x="858.15" y="651.21" z="182.44" />
+		<routestep x="847.52" y="663.14" z="185.01" />
+		<routestep x="842.26" y="680.32" z="188.12" />
+		<routestep x="842.82" y="696.28" z="190.32" />
+		<routestep x="850.13" y="712.40" z="192.20" />
+		<routestep x="863.22" y="725.09" z="193.15" />
+		<routestep x="881.79" y="731.42" z="192.90" />
+	</walker_template>
+	<walker_template route_id="300280000_drakanrider_flying_60_ae_sz1_22">
+		<routestep x="796.52" y="569.10" z="186.54" />
+		<routestep x="811.22" y="560.65" z="186.44" />
+		<routestep x="828.72" y="557.20" z="185.64" />
+		<routestep x="846.17" y="561.48" z="184.28" />
+		<routestep x="860.76" y="572.75" z="182.44" />
+		<routestep x="870.46" y="588.54" z="180.85" />
+		<routestep x="872.30" y="606.02" z="179.47" />
+		<routestep x="868.00" y="623.14" z="178.47" />
+		<routestep x="857.23" y="636.98" z="177.95" />
+		<routestep x="840.62" y="646.52" z="178.40" />
+		<routestep x="822.99" y="648.78" z="179.29" />
+		<routestep x="807.32" y="644.90" z="180.51" />
+		<routestep x="793.06" y="633.63" z="182.03" />
+		<routestep x="784.40" y="620.14" z="183.69" />
+		<routestep x="781.21" y="602.69" z="185.16" />
+		<routestep x="784.79" y="584.82" z="186.25" />
+		<routestep x="796.52" y="569.10" z="186.54" />
+	</walker_template>
+	<walker_template route_id="300280000_drakanrider_flying_60_ae_sz1_23">
+		<routestep x="630.25" y="638.29" z="199.47" />
+		<routestep x="611.04" y="643.02" z="199.36" />
+		<routestep x="590.32" y="641.18" z="199.09" />
+		<routestep x="572.12" y="630.69" z="198.92" />
+		<routestep x="559.37" y="613.25" z="198.69" />
+		<routestep x="553.58" y="592.36" z="198.93" />
+		<routestep x="557.12" y="572.12" z="199.12" />
+		<routestep x="567.45" y="554.28" z="199.38" />
+		<routestep x="583.97" y="542.23" z="199.50" />
+		<routestep x="605.67" y="536.94" z="200.01" />
+		<routestep x="626.16" y="540.14" z="200.26" />
+		<routestep x="642.48" y="549.60" z="200.42" />
+		<routestep x="654.85" y="566.90" z="200.29" />
+		<routestep x="660.23" y="584.90" z="200.42" />
+		<routestep x="658.20" y="605.56" z="200.25" />
+		<routestep x="648.45" y="624.47" z="199.99" />
+		<routestep x="630.24" y="638.29" z="199.47" />
+	</walker_template>
+	<walker_template route_id="300280000_drakanrider_flying_60_ae_sz1_25">
+		<routestep x="542.59" y="645.59" z="191.56" />
+		<routestep x="557.25" y="637.09" z="192.31" />
+		<routestep x="574.70" y="633.61" z="193.74" />
+		<routestep x="592.08" y="637.82" z="196.02" />
+		<routestep x="606.59" y="649.04" z="198.61" />
+		<routestep x="616.16" y="664.72" z="201.49" />
+		<routestep x="617.93" y="682.13" z="203.58" />
+		<routestep x="613.58" y="699.21" z="205.01" />
+		<routestep x="602.81" y="713.06" z="205.25" />
+		<routestep x="586.20" y="722.59" z="204.72" />
+		<routestep x="568.62" y="724.90" z="203.14" />
+		<routestep x="553.03" y="721.08" z="201.10" />
+		<routestep x="538.89" y="709.92" z="198.24" />
+		<routestep x="530.29" y="696.47" z="196.02" />
+		<routestep x="527.18" y="679.08" z="193.79" />
+		<routestep x="530.82" y="661.26" z="192.21" />
+		<routestep x="542.59" y="645.59" z="191.56" />
+	</walker_template>
+	<walker_template route_id="300280000_drakanrider_flying_60_ae_sz1_26">
+		<routestep x="585.00" y="654.49" z="198.96" />
+		<routestep x="577.42" y="632.01" z="201.58" />
+		<routestep x="577.56" y="607.00" z="203.82" />
+		<routestep x="588.35" y="584.10" z="205.33" />
+		<routestep x="608.01" y="566.99" z="205.66" />
+		<routestep x="632.54" y="557.89" z="205.45" />
+		<routestep x="657.21" y="560.01" z="204.02" />
+		<routestep x="679.67" y="570.51" z="201.94" />
+		<routestep x="695.78" y="589.01" z="199.25" />
+		<routestep x="704.32" y="614.46" z="196.75" />
+		<routestep x="702.52" y="639.35" z="194.60" />
+		<routestep x="692.77" y="659.88" z="193.25" />
+		<routestep x="673.21" y="676.48" z="192.53" />
+		<routestep x="652.14" y="684.83" z="193.06" />
+		<routestep x="627.12" y="684.56" z="194.35" />
+		<routestep x="603.43" y="674.87" z="196.41" />
+		<routestep x="585.00" y="654.49" z="198.96" />
+	</walker_template>
+	<walker_template route_id="300280000_drakanrider_flying_60_ae_sz1_27">
+		<routestep x="682.14" y="724.88" z="202.83" />
+		<routestep x="665.98" y="715.48" z="205.43" />
+		<routestep x="652.91" y="700.59" z="206.80" />
+		<routestep x="647.09" y="681.40" z="206.39" />
+		<routestep x="649.40" y="661.03" z="204.11" />
+		<routestep x="658.77" y="642.84" z="200.97" />
+		<routestep x="674.10" y="631.25" z="197.01" />
+		<routestep x="692.55" y="625.78" z="192.92" />
+		<routestep x="711.55" y="628.37" z="189.21" />
+		<routestep x="729.86" y="639.00" z="186.64" />
+		<routestep x="741.90" y="654.69" z="185.53" />
+		<routestep x="747.08" y="671.93" z="185.91" />
+		<routestep x="744.52" y="691.98" z="187.86" />
+		<routestep x="736.79" y="707.88" z="190.85" />
+		<routestep x="722.24" y="720.75" z="194.76" />
+		<routestep x="703.49" y="727.35" z="198.99" />
+		<routestep x="682.14" y="724.88" z="202.83" />
+	</walker_template>
+	<walker_template route_id="300280000_drakanrider_flying_60_ae_sz1_28">
+		<routestep x="730.87" y="556.70" z="188.71" />
+		<routestep x="738.84" y="570.78" z="185.49" />
+		<routestep x="742.03" y="587.67" z="183.13" />
+		<routestep x="737.94" y="604.70" z="182.68" />
+		<routestep x="727.22" y="619.11" z="184.06" />
+		<routestep x="712.35" y="628.87" z="187.26" />
+		<routestep x="695.87" y="631.07" z="191.42" />
+		<routestep x="679.74" y="627.29" z="196.02" />
+		<routestep x="666.69" y="617.15" z="200.23" />
+		<routestep x="657.80" y="601.26" z="204.16" />
+		<routestep x="655.73" y="584.21" z="206.25" />
+		<routestep x="659.44" y="568.93" z="206.64" />
+		<routestep x="670.06" y="554.83" z="204.95" />
+		<routestep x="682.85" y="546.13" z="202.51" />
+		<routestep x="699.32" y="542.63" z="198.47" />
+		<routestep x="716.15" y="545.69" z="193.74" />
+		<routestep x="730.87" y="556.71" z="188.71" />
+	</walker_template>
+	<walker_template route_id="300280000_drakanrider_flying_60_ae_sz1_30">
+		<routestep x="45.41" y="399.37" z="270.18" />
+		<routestep x="56.41" y="393.00" z="270.74" />
+		<routestep x="69.49" y="390.39" z="271.82" />
+		<routestep x="82.53" y="393.54" z="273.53" />
+		<routestep x="93.41" y="401.96" z="275.47" />
+		<routestep x="100.59" y="413.72" z="277.63" />
+		<routestep x="101.92" y="426.78" z="279.20" />
+		<routestep x="98.65" y="439.59" z="280.27" />
+		<routestep x="90.58" y="449.98" z="280.45" />
+		<routestep x="78.12" y="457.13" z="280.05" />
+		<routestep x="64.94" y="458.86" z="278.87" />
+		<routestep x="53.24" y="455.99" z="277.34" />
+		<routestep x="42.64" y="447.62" z="275.20" />
+		<routestep x="36.19" y="437.54" z="273.53" />
+		<routestep x="33.85" y="424.49" z="271.85" />
+		<routestep x="36.58" y="411.13" z="270.67" />
+		<routestep x="45.41" y="399.38" z="270.18" />
+	</walker_template>
+	<walker_template route_id="300280000_drakanrider_flying_60_ae_sz1_31">
+		<routestep x="58.98" y="308.97" z="299.39" />
+		<routestep x="43.41" y="311.87" z="302.22" />
+		<routestep x="27.45" y="309.88" z="307.50" />
+		<routestep x="14.56" y="301.66" z="315.15" />
+		<routestep x="6.79" y="288.49" z="323.82" />
+		<routestep x="4.96" y="273.16" z="332.35" />
+		<routestep x="10.31" y="258.53" z="338.43" />
+		<routestep x="20.65" y="245.87" z="342.18" />
+		<routestep x="35.06" y="237.56" z="342.44" />
+		<routestep x="52.72" y="234.45" z="339.49" />
+		<routestep x="68.33" y="237.43" z="333.80" />
+		<routestep x="79.87" y="244.84" z="326.92" />
+		<routestep x="87.30" y="257.77" z="318.13" />
+		<routestep x="89.25" y="271.11" z="310.93" />
+		<routestep x="85.03" y="286.09" z="304.36" />
+		<routestep x="75.00" y="299.55" z="300.12" />
+		<routestep x="58.98" y="308.97" z="299.39" />
+	</walker_template>
+	<walker_template route_id="300280000_drakanrider_flying_60_ae_sz1_32">
+		<routestep x="12.98" y="378.60" z="288.56" />
+		<routestep x="25.30" y="391.80" z="284.14" />
+		<routestep x="42.25" y="400.73" z="280.23" />
+		<routestep x="61.81" y="401.71" z="277.67" />
+		<routestep x="80.82" y="394.63" z="277.02" />
+		<routestep x="96.25" y="381.33" z="277.76" />
+		<routestep x="104.15" y="363.91" z="280.44" />
+		<routestep x="105.56" y="344.96" z="284.23" />
+		<routestep x="99.16" y="327.42" z="288.83" />
+		<routestep x="85.18" y="312.46" z="293.47" />
+		<routestep x="67.68" y="304.70" z="297.20" />
+		<routestep x="50.12" y="303.87" z="299.49" />
+		<routestep x="31.51" y="311.11" z="300.40" />
+		<routestep x="17.88" y="322.30" z="299.54" />
+		<routestep x="8.59" y="339.29" z="297.12" />
+		<routestep x="6.18" y="358.78" z="293.34" />
+		<routestep x="12.99" y="378.60" z="288.56" />
+	</walker_template>
+	<walker_template route_id="300280000_drakanrider_flying_60_ae_sz1_33">
+		<routestep x="281.67" y="300.73" z="280.76" />
+		<routestep x="298.62" y="291.74" z="277.38" />
+		<routestep x="318.71" y="288.48" z="275.11" />
+		<routestep x="338.71" y="293.79" z="275.13" />
+		<routestep x="355.37" y="306.85" z="277.26" />
+		<routestep x="366.37" y="324.68" z="281.41" />
+		<routestep x="368.35" y="344.18" z="286.45" />
+		<routestep x="363.28" y="363.09" z="291.82" />
+		<routestep x="350.81" y="378.19" z="296.52" />
+		<routestep x="331.68" y="388.21" z="300.69" />
+		<routestep x="311.43" y="390.17" z="302.62" />
+		<routestep x="293.49" y="385.35" z="302.59" />
+		<routestep x="277.21" y="372.41" z="300.10" />
+		<routestep x="267.38" y="357.07" z="296.89" />
+		<routestep x="263.85" y="337.55" z="291.96" />
+		<routestep x="268.09" y="317.78" z="286.41" />
+		<routestep x="281.68" y="300.74" z="280.76" />
+	</walker_template>
+	<walker_template route_id="300280000_drakanrider_flying_60_ae_sz1_34">
+		<routestep x="233.40" y="267.99" z="329.81" />
+		<routestep x="235.15" y="289.90" z="323.22" />
+		<routestep x="244.64" y="310.94" z="316.15" />
+		<routestep x="262.71" y="326.01" z="309.74" />
+		<routestep x="286.43" y="332.74" z="305.22" />
+		<routestep x="311.37" y="330.73" z="302.59" />
+		<routestep x="332.25" y="319.23" z="303.33" />
+		<routestep x="348.05" y="301.53" z="306.42" />
+		<routestep x="355.29" y="279.62" z="311.95" />
+		<routestep x="353.22" y="254.76" z="318.99" />
+		<routestep x="342.31" y="234.48" z="326.01" />
+		<routestep x="326.05" y="220.99" z="331.75" />
+		<routestep x="302.66" y="214.73" z="336.53" />
+		<routestep x="280.99" y="215.94" z="338.57" />
+		<routestep x="259.11" y="226.01" z="338.35" />
+		<routestep x="241.93" y="243.52" z="335.48" />
+		<routestep x="233.41" y="268.00" z="329.81" />
+	</walker_template>
+	<walker_template route_id="300280000_drakanrider_flying_60_ae_sz3_1">
+		<routestep x="423.58" y="586.36" z="160.24" />
+		<routestep x="416.25" y="600.56" z="159.03" />
+		<routestep x="413.67" y="617.22" z="158.85" />
+		<routestep x="418.28" y="633.58" z="159.97" />
+		<routestep x="429.30" y="646.99" z="162.32" />
+		<routestep x="444.39" y="655.59" z="165.03" />
+		<routestep x="460.74" y="656.71" z="167.98" />
+		<routestep x="476.55" y="652.04" z="170.74" />
+		<routestep x="489.04" y="641.36" z="172.94" />
+		<routestep x="497.35" y="625.31" z="174.00" />
+		<routestep x="498.82" y="608.55" z="173.97" />
+		<routestep x="494.64" y="593.88" z="172.96" />
+		<routestep x="483.60" y="580.80" z="170.90" />
+		<routestep x="470.74" y="573.08" z="168.32" />
+		<routestep x="454.35" y="570.68" z="165.34" />
+		<routestep x="437.82" y="574.70" z="162.44" />
+		<routestep x="423.59" y="586.36" z="160.24" />
+	</walker_template>
+	<walker_template route_id="300280000_drakanrider_flying_60_ae_sz3_2">
+		<routestep x="368.90" y="544.85" z="160.39" />
+		<routestep x="362.24" y="555.66" z="161.19" />
+		<routestep x="352.05" y="564.15" z="162.97" />
+		<routestep x="339.29" y="567.56" z="165.87" />
+		<routestep x="326.01" y="565.33" z="169.30" />
+		<routestep x="314.47" y="558.42" z="172.97" />
+		<routestep x="307.41" y="547.59" z="175.75" />
+		<routestep x="304.45" y="534.80" z="177.68" />
+		<routestep x="306.77" y="521.86" z="178.18" />
+		<routestep x="314.38" y="509.69" z="177.51" />
+		<routestep x="325.05" y="501.92" z="175.54" />
+		<routestep x="336.51" y="498.90" z="172.93" />
+		<routestep x="349.51" y="501.21" z="169.33" />
+		<routestep x="359.68" y="507.00" z="166.34" />
+		<routestep x="367.61" y="517.34" z="163.39" />
+		<routestep x="371.28" y="530.36" z="161.26" />
+		<routestep x="368.90" y="544.85" z="160.39" />
+	</walker_template>
+	<walker_template route_id="300280000_drakanrider_flying_60_ae_sz3_3">
+		<routestep x="433.82" y="595.64" z="176.40" />
+		<routestep x="423.63" y="602.03" z="175.14" />
+		<routestep x="411.48" y="604.96" z="172.83" />
+		<routestep x="399.27" y="602.44" z="169.72" />
+		<routestep x="389.02" y="594.90" z="166.22" />
+		<routestep x="382.10" y="584.00" z="163.21" />
+		<routestep x="380.65" y="571.70" z="161.12" />
+		<routestep x="383.49" y="559.48" z="160.01" />
+		<routestep x="390.88" y="549.40" z="160.11" />
+		<routestep x="402.35" y="542.18" z="161.76" />
+		<routestep x="414.61" y="540.07" z="164.22" />
+		<routestep x="425.56" y="542.37" z="167.01" />
+		<routestep x="435.62" y="549.94" z="170.25" />
+		<routestep x="441.76" y="559.22" z="173.07" />
+		<routestep x="444.15" y="571.46" z="175.37" />
+		<routestep x="441.82" y="584.20" z="176.67" />
+		<routestep x="433.81" y="595.64" z="176.40" />
+	</walker_template>
+	<walker_template route_id="300280000_drakanrider_flying_60_ae_sz3_5">
+		<routestep x="268.06" y="494.45" z="189.53" />
+		<routestep x="259.57" y="506.46" z="188.31" />
+		<routestep x="255.10" y="521.32" z="188.07" />
+		<routestep x="257.21" y="536.83" z="189.06" />
+		<routestep x="265.53" y="550.46" z="191.25" />
+		<routestep x="278.16" y="560.24" z="193.81" />
+		<routestep x="292.91" y="563.36" z="196.64" />
+		<routestep x="307.90" y="561.12" z="199.30" />
+		<routestep x="320.63" y="552.98" z="201.46" />
+		<routestep x="330.24" y="539.41" z="202.56" />
+		<routestep x="333.73" y="524.32" z="202.61" />
+		<routestep x="331.79" y="510.41" z="201.71" />
+		<routestep x="323.41" y="497.07" z="199.79" />
+		<routestep x="312.68" y="488.38" z="197.35" />
+		<routestep x="298.07" y="484.10" z="194.50" />
+		<routestep x="282.51" y="485.64" z="191.71" />
+		<routestep x="268.06" y="494.45" z="189.53" />
+	</walker_template>
+	<walker_template route_id="300280000_drakanrider_flying_60_ae_sz3_7">
+		<routestep x="151.90" y="548.41" z="189.27" />
+		<routestep x="144.46" y="561.30" z="191.96" />
+		<routestep x="132.78" y="571.45" z="195.68" />
+		<routestep x="117.91" y="575.54" z="200.19" />
+		<routestep x="102.21" y="572.92" z="204.63" />
+		<routestep x="88.39" y="564.67" z="208.64" />
+		<routestep x="79.70" y="551.77" z="210.87" />
+		<routestep x="75.77" y="536.51" z="211.63" />
+		<routestep x="78.02" y="521.08" z="210.41" />
+		<routestep x="86.53" y="506.53" z="207.64" />
+		<routestep x="98.81" y="497.24" z="203.77" />
+		<routestep x="112.17" y="493.61" z="199.72" />
+		<routestep x="127.53" y="496.37" z="195.10" />
+		<routestep x="139.71" y="503.25" z="191.82" />
+		<routestep x="149.39" y="515.57" z="189.28" />
+		<routestep x="154.18" y="531.10" z="188.28" />
+		<routestep x="151.90" y="548.41" z="189.27" />
+	</walker_template>
+	<walker_template route_id="300280000_drakanrider_flying_60_ae_sz3_8">
+		<routestep x="129.23" y="518.94" z="193.56" />
+		<routestep x="138.86" y="513.30" z="194.43" />
+		<routestep x="150.34" y="510.96" z="195.73" />
+		<routestep x="161.78" y="513.72" z="197.46" />
+		<routestep x="171.35" y="521.11" z="199.25" />
+		<routestep x="177.68" y="531.47" z="201.07" />
+		<routestep x="178.87" y="542.99" z="202.22" />
+		<routestep x="176.04" y="554.29" z="202.82" />
+		<routestep x="168.98" y="563.47" z="202.59" />
+		<routestep x="158.06" y="569.80" z="201.82" />
+		<routestep x="146.50" y="571.36" z="200.44" />
+		<routestep x="136.24" y="568.86" z="198.88" />
+		<routestep x="126.91" y="561.49" z="196.93" />
+		<routestep x="121.23" y="552.62" z="195.52" />
+		<routestep x="119.15" y="541.12" z="194.26" />
+		<routestep x="121.51" y="529.33" z="193.55" />
+		<routestep x="129.24" y="518.94" z="193.56" />
+	</walker_template>
+	<walker_template route_id="300280000_drakanrider_flying_60_ae_sz3_9">
+		<routestep x="456.05" y="450.98" z="199.37" />
+		<routestep x="451.50" y="469.00" z="198.46" />
+		<routestep x="440.84" y="485.41" z="197.89" />
+		<routestep x="424.10" y="495.95" z="198.13" />
+		<routestep x="404.00" y="498.90" z="198.98" />
+		<routestep x="384.13" y="494.58" z="200.69" />
+		<routestep x="368.91" y="482.79" z="202.52" />
+		<routestep x="358.67" y="466.41" z="204.38" />
+		<routestep x="355.96" y="447.41" z="205.81" />
+		<routestep x="361.16" y="427.08" z="207.18" />
+		<routestep x="372.86" y="411.45" z="207.63" />
+		<routestep x="387.91" y="402.04" z="207.41" />
+		<routestep x="407.71" y="399.32" z="206.23" />
+		<routestep x="425.02" y="402.73" z="205.08" />
+		<routestep x="441.26" y="413.45" z="203.27" />
+		<routestep x="452.64" y="429.82" z="201.34" />
+		<routestep x="456.05" y="450.98" z="199.37" />
+	</walker_template>
+	<walker_template route_id="300280000_drakanrider_flying_60_ae_sz3_10">
+		<routestep x="351.43" y="397.65" z="211.28" />
+		<routestep x="343.94" y="411.82" z="210.99" />
+		<routestep x="341.28" y="428.47" z="211.34" />
+		<routestep x="345.89" y="444.84" z="212.29" />
+		<routestep x="357.01" y="458.27" z="213.83" />
+		<routestep x="372.24" y="466.93" z="215.27" />
+		<routestep x="388.79" y="468.11" z="216.70" />
+		<routestep x="404.81" y="463.50" z="217.89" />
+		<routestep x="417.51" y="452.87" z="218.74" />
+		<routestep x="425.96" y="436.86" z="218.76" />
+		<routestep x="427.51" y="420.11" z="218.31" />
+		<routestep x="423.33" y="405.43" z="217.45" />
+		<routestep x="412.21" y="392.31" z="216.21" />
+		<routestep x="399.20" y="384.55" z="214.70" />
+		<routestep x="382.61" y="382.10" z="213.22" />
+		<routestep x="365.87" y="386.05" z="211.95" />
+		<routestep x="351.43" y="397.65" z="211.28" />
+	</walker_template>
+	<walker_template route_id="300280000_drakanrider_flying_60_ae_sz3_11">
+		<routestep x="204.17" y="653.67" z="220.94" />
+		<routestep x="199.71" y="671.74" z="220.52" />
+		<routestep x="189.31" y="688.29" z="221.73" />
+		<routestep x="173.08" y="699.07" z="225.14" />
+		<routestep x="153.62" y="702.33" z="230.05" />
+		<routestep x="134.50" y="698.36" z="235.95" />
+		<routestep x="119.87" y="686.84" z="241.19" />
+		<routestep x="110.09" y="670.66" z="245.55" />
+		<routestep x="107.55" y="651.74" z="248.01" />
+		<routestep x="112.72" y="631.38" z="248.82" />
+		<routestep x="124.12" y="615.59" z="247.26" />
+		<routestep x="138.71" y="605.96" z="244.18" />
+		<routestep x="157.81" y="602.92" z="239.00" />
+		<routestep x="174.53" y="606.04" z="234.21" />
+		<routestep x="190.15" y="616.47" z="228.81" />
+		<routestep x="201.04" y="632.62" z="224.13" />
+		<routestep x="204.17" y="653.67" z="220.95" />
+	</walker_template>
+	<walker_template route_id="300280000_drakanrider_flying_60_ae_sz3_12">
+		<routestep x="134.78" y="706.44" z="213.26" />
+		<routestep x="129.39" y="725.06" z="213.91" />
+		<routestep x="130.16" y="745.31" z="216.32" />
+		<routestep x="139.32" y="763.32" z="220.38" />
+		<routestep x="155.34" y="776.16" z="225.62" />
+		<routestep x="175.07" y="782.34" z="230.61" />
+		<routestep x="194.58" y="779.38" z="234.72" />
+		<routestep x="212.12" y="769.75" z="237.64" />
+		<routestep x="224.38" y="753.92" z="238.87" />
+		<routestep x="230.50" y="732.92" z="237.77" />
+		<routestep x="228.42" y="712.85" z="235.08" />
+		<routestep x="220.15" y="696.71" z="231.42" />
+		<routestep x="204.16" y="684.21" z="226.59" />
+		<routestep x="187.26" y="678.53" z="221.94" />
+		<routestep x="167.43" y="680.00" z="217.59" />
+		<routestep x="148.89" y="689.05" z="214.37" />
+		<routestep x="134.78" y="706.44" z="213.26" />
+	</walker_template>
+	<walker_template route_id="300280000_drakanrider_flying_60_ae_sz6_1">
+		<routestep x="226.53" y="420.60" z="301.24" />
+		<routestep x="221.18" y="434.59" z="299.37" />
+		<routestep x="211.16" y="446.61" z="296.69" />
+		<routestep x="196.87" y="453.23" z="293.69" />
+		<routestep x="180.66" y="453.40" z="290.71" />
+		<routestep x="165.25" y="447.75" z="288.60" />
+		<routestep x="154.27" y="436.60" z="287.54" />
+		<routestep x="147.69" y="422.31" z="287.50" />
+		<routestep x="147.36" y="406.74" z="288.50" />
+		<routestep x="153.38" y="390.97" z="290.91" />
+		<routestep x="164.15" y="379.70" z="293.65" />
+		<routestep x="176.99" y="373.78" z="296.35" />
+		<routestep x="193.01" y="373.77" z="299.00" />
+		<routestep x="206.40" y="378.41" z="301.12" />
+		<routestep x="218.29" y="388.81" z="302.39" />
+		<routestep x="225.78" y="403.22" z="302.59" />
+		<routestep x="226.52" y="420.60" z="301.24" />
+	</walker_template>
+	<walker_template route_id="300280000_drakanrider_flying_60_ae_sz6_2">
+		<routestep x="163.22" y="399.62" z="313.39" />
+		<routestep x="161.27" y="409.80" z="314.41" />
+		<routestep x="162.80" y="420.63" z="315.13" />
+		<routestep x="168.77" y="429.94" z="315.15" />
+		<routestep x="178.22" y="436.23" z="314.55" />
+		<routestep x="189.26" y="438.82" z="313.24" />
+		<routestep x="199.72" y="436.52" z="311.69" />
+		<routestep x="208.74" y="430.72" z="310.03" />
+		<routestep x="214.59" y="421.78" z="308.60" />
+		<routestep x="216.74" y="410.30" z="307.26" />
+		<routestep x="214.51" y="399.62" z="306.64" />
+		<routestep x="209.13" y="391.27" z="306.63" />
+		<routestep x="199.78" y="385.16" z="307.42" />
+		<routestep x="190.23" y="382.74" z="308.36" />
+		<routestep x="179.52" y="384.26" z="309.88" />
+		<routestep x="169.92" y="389.78" z="311.59" />
+		<routestep x="163.22" y="399.63" z="313.39" />
+	</walker_template>
+	<walker_template route_id="300280000_drakanrider_flying_60_ae_sz6_4">
+		<routestep x="200.37" y="364.91" z="297.27" />
+		<routestep x="181.61" y="365.53" z="301.31" />
+		<routestep x="162.96" y="372.62" z="304.46" />
+		<routestep x="148.57" y="387.05" z="305.45" />
+		<routestep x="140.81" y="406.49" z="304.29" />
+		<routestep x="140.14" y="427.26" z="300.93" />
+		<routestep x="147.95" y="445.02" z="296.29" />
+		<routestep x="161.45" y="458.80" z="290.97" />
+		<routestep x="179.40" y="465.65" z="285.93" />
+		<routestep x="200.50" y="464.85" z="281.03" />
+		<routestep x="218.64" y="456.56" z="278.19" />
+		<routestep x="231.52" y="443.57" z="277.31" />
+		<routestep x="239.04" y="424.40" z="278.84" />
+		<routestep x="239.92" y="406.36" z="281.36" />
+		<routestep x="233.40" y="387.82" z="285.83" />
+		<routestep x="220.18" y="372.90" z="291.26" />
+		<routestep x="200.36" y="364.91" z="297.27" />
+	</walker_template>
+	<walker_template route_id="300280000_drakanfi_60_ae_sz3_39">
+		<routestep x="277.55" y="741.04" z="163.62155" />
+      <routestep x="272.73" y="735.56" z="163.62155" />
+      <routestep x="265.58" y="733.31" z="163.62155" />
+      <routestep x="272.74" y="735.59" z="163.62155" />
+      <routestep x="277.55" y="741.04" z="163.62155" />
+	</walker_template>
+	<walker_template route_id="300280000_drakanfi_60_ae_sz3_43">
+      <routestep x="498.0" y="530.56" z="144.805" />
+      <routestep x="503.7" y="526.01" z="145.99875" />
+      <routestep x="506.28" y="518.96" z="146.1075" />
+      <routestep x="503.68" y="526.02" z="145.9975" />
+      <routestep x="498.0" y="530.56" z="144.805" />
+	</walker_template>
+	<walker_template route_id="300280000_drakanfi_60_ae_sz3_45">
+      <routestep x="365.41" y="638.91" z="150.91188" />
+      <routestep x="360.56" y="644.36" z="151.125" />
+      <routestep x="359.2" y="651.74" z="151.30875" />
+      <routestep x="360.58" y="644.35" z="151.125" />
+      <routestep x="365.41" y="638.91" z="150.91188" />
+	</walker_template>
+	<walker_template route_id="300280000_drakanfi_60_ae_sz3_47">
+      <routestep x="124.31" y="335.06" z="252.62862" />
+      <routestep x="124.77" y="327.78" z="252.62862" />
+      <routestep x="121.31" y="321.13" z="252.62862" />
+      <routestep x="124.77" y="327.81" z="252.62862" />
+      <routestep x="124.31" y="335.06" z="252.62862" />
+	</walker_template>
+	<walker_template route_id="300280000_drakanfi_60_ae_sz3_48">
+      <routestep x="160.64" y="372.64" z="207.94514" />
+      <routestep x="160.87" y="365.35" z="207.94516" />
+      <routestep x="157.19" y="358.81" z="207.94516" />
+      <routestep x="160.87" y="365.37" z="207.94516" />
+      <routestep x="160.64" y="372.64" z="207.94525" />
+	</walker_template>
+	<walker_template route_id="300280000_drakanfi_60_ae_sz3_49">
+      <routestep x="198.79" y="294.8" z="252.62862" />
+      <routestep x="195.83" y="301.47" z="252.62862" />
+      <routestep x="189.68" y="305.76" z="252.62915" />
+      <routestep x="195.84" y="301.44" z="252.62862" />
+      <routestep x="198.79" y="294.8" z="252.62862" />
+	</walker_template>
+	<walker_template route_id="300280000_drakanfi_60_ae_sz3_50">
+      <routestep x="126.0" y="280.28" z="252.6306" />
+      <routestep x="118.84" y="278.91" z="252.62862" />
+      <routestep x="111.81" y="281.52" z="252.62862" />
+      <routestep x="118.86" y="278.92" z="252.62862" />
+      <routestep x="126.0" y="280.28" z="252.62862" />
+	</walker_template>
+	<walker_template route_id="300280000_drakanfi_60_ae_sz3_51">
+      <routestep x="163.94" y="225.56" z="252.62862" />
+      <routestep x="168.93" y="230.88" z="252.62862" />
+      <routestep x="176.15" y="232.9" z="252.62862" />
+      <routestep x="168.91" y="230.86" z="252.62862" />
+      <routestep x="163.94" y="225.56" z="252.62862" />
+	</walker_template>
+	<walker_template route_id="300280000_drakanfi_60_ae_sz3_52">
+      <routestep x="296.92" y="685.78" z="162.8175" />
+      <routestep x="290.15" y="688.45" z="162.9625" />
+      <routestep x="283.03" y="687.63" z="164.13" />
+      <routestep x="290.17" y="688.44" z="162.96187" />
+      <routestep x="296.93" y="685.78" z="162.81688" />
+	</walker_template>
+	<walker_template route_id="300280000_drakanwi_60_ae_sz5_1">
+      <routestep x="164.67" y="297.12" z="209.44398" />
+      <routestep x="169.91" y="302.46" z="209.44395" />
+      <routestep x="171.83" y="309.41" z="209.44386" />
+      <routestep x="169.84" y="316.35" z="209.44377" />
+      <routestep x="164.58" y="321.71" z="209.44371" />
+      <routestep x="157.89" y="323.26" z="209.44388" />
+      <routestep x="151.2" y="321.52" z="209.44366" />
+      <routestep x="146.45" y="316.94" z="209.44366" />
+      <routestep x="144.28" y="309.35" z="209.44366" />
+      <routestep x="145.82" y="303.12" z="209.44376" />
+      <routestep x="150.57" y="297.67" z="209.44385" />
+      <routestep x="158.01" y="295.34" z="209.44392" />
+	</walker_template>
+	<walker_template route_id="300280000_drakanwi_60_ae_sz5_2">
+      <routestep x="183.57" y="352.53" z="207.94516" />
+      <routestep x="178.26" y="347.32" z="207.94516" />
+      <routestep x="171.34" y="345.41" z="207.94516" />
+      <routestep x="164.43" y="347.39" z="207.94516" />
+      <routestep x="159.1" y="352.62" z="207.94516" />
+      <routestep x="157.55" y="359.29" z="207.94516" />
+      <routestep x="159.28" y="365.95" z="207.94516" />
+      <routestep x="163.84" y="370.68" z="207.94514" />
+      <routestep x="171.39" y="372.83" z="207.94514" />
+      <routestep x="177.6" y="371.31" z="207.94514" />
+      <routestep x="183.02" y="366.57" z="207.94514" />
+      <routestep x="185.35" y="359.16" z="207.94514" />
+	</walker_template>
+	<walker_template route_id="300280000_drakanwi_60_ae_sz6_1">
+      <routestep x="121.44" y="248.54" z="252.62862" />
+      <routestep x="126.68" y="253.88" z="252.62862" />
+      <routestep x="128.6" y="260.83" z="252.62862" />
+      <routestep x="126.61" y="267.77" z="252.62862" />
+      <routestep x="121.35" y="273.12" z="252.62862" />
+      <routestep x="114.66" y="274.68" z="252.62862" />
+      <routestep x="107.97" y="272.93" z="252.62862" />
+      <routestep x="103.22" y="268.36" z="252.62862" />
+      <routestep x="101.05" y="260.77" z="252.62862" />
+      <routestep x="102.59" y="254.53" z="252.62862" />
+      <routestep x="107.34" y="249.09" z="252.62862" />
+      <routestep x="114.78" y="246.76" z="252.62862" />
+	</walker_template>
+	<walker_template route_id="300280000_drakanwi_60_ae_sz6_2">
+      <routestep x="188.62" y="243.46" z="252.62862" />
+      <routestep x="183.27" y="238.2" z="252.62862" />
+      <routestep x="176.3" y="236.28" z="252.62862" />
+      <routestep x="169.34" y="238.28" z="252.62862" />
+      <routestep x="163.97" y="243.55" z="252.62862" />
+      <routestep x="162.41" y="250.26" z="252.62862" />
+      <routestep x="164.16" y="256.97" z="252.62862" />
+      <routestep x="168.75" y="261.74" z="252.62862" />
+      <routestep x="176.35" y="263.91" z="252.62872" />
+      <routestep x="182.61" y="262.37" z="252.62862" />
+      <routestep x="188.07" y="257.6" z="252.62862" />
+      <routestep x="190.41" y="250.14" z="252.62936" />
+	</walker_template>
+	<walker_template route_id="300280000_npcpathsz4_named1">
+      <routestep x="184.96" y="398.99" z="207.7295" />
+      <routestep x="186.85" y="406.37" z="207.7295" />
+      <routestep x="189.25" y="414.85" z="207.7295" />
+      <routestep x="192.2" y="425.29" z="205.04883" />
+      <routestep x="194.32" y="432.39" z="203.35092" />
+      <routestep x="199.15" y="448.9" z="203.35092" />
+      <routestep x="202.48" y="460.27" z="200.87013" />
+      <routestep x="204.84" y="469.47" z="197.8324" />
+      <routestep x="206.59" y="475.62" z="197.83089" />
+      <routestep x="206.17" y="475.73" z="197.83089" />
+      <routestep x="204.43" y="469.59" z="197.83089" />
+      <routestep x="201.87" y="460.44" z="200.8681" />
+      <routestep x="198.56" y="449.04" z="203.35092" />
+      <routestep x="193.73" y="432.57" z="203.35092" />
+      <routestep x="191.67" y="425.44" z="205.04631" />
+      <routestep x="188.69" y="414.92" z="207.7295" />
+      <routestep x="186.34" y="406.52" z="207.7295" />
+      <routestep x="184.48" y="399.05" z="207.7295" />
+	</walker_template>
+	<walker_template route_id="300280000_nmd_7named_60_ah">
+      <routestep x="188.76" y="416.99" z="260.75488" />
+      <routestep x="188.17" y="414.04" z="260.75488" />
+      <routestep x="188.76" y="416.99" z="260.75488" />
+	</walker_template>
+	<walker_template route_id="300280000_soldier_hurt_15">
+      <routestep x="481.12" y="484.42" z="151.45625" />
+      <routestep x="484.65" y="476.9" z="151.25" />
+      <routestep x="495.16" y="486.62" z="146.88875" />
+      <routestep x="515.29" y="520.49" z="146.0" />
+      <routestep x="495.19" y="486.64" z="146.88562" />
+      <routestep x="484.67" y="476.92" z="151.25" />
+      <routestep x="481.12" y="484.39" z="151.45438" />
+	</walker_template>
+	<walker_template route_id="300280000_soldier_hurt_19">
+      <routestep x="288.85" y="683.8" z="163.85938" />
+      <routestep x="300.68" y="683.81" z="162.5322" />
+      <routestep x="334.07" y="669.06" z="154.69437" />
+      <routestep x="363.68" y="630.57" z="150.83937" />
+      <routestep x="333.99" y="669.17" z="154.72" />
+      <routestep x="300.63" y="683.78" z="162.5322" />
+      <routestep x="288.88" y="683.77" z="163.86313" />
+	</walker_template>
+	<walker_template route_id="300280000_soldier_hurt_22">
+      <routestep x="269.63" y="738.42" z="163.62155" />
+      <routestep x="277.5" y="722.93" z="162.625" />
+      <routestep x="288.71" y="706.48" z="162.625" />
+      <routestep x="304.32" y="691.97" z="162.69687" />
+      <routestep x="288.78" y="706.37" z="162.625" />
+      <routestep x="277.5" y="722.9" z="162.625" />
+      <routestep x="269.61" y="738.45" z="163.62155" />
+	</walker_template>
+	<walker_template route_id="300280000_soldier_hurt_24">
+      <routestep x="479.46" y="481.7" z="151.69125" />
+      <routestep x="483.79" y="477.12" z="151.25" />
+      <routestep x="494.23" y="486.75" z="146.93875" />
+      <routestep x="513.96" y="520.5" z="146.0" />
+      <routestep x="494.26" y="486.8" z="146.93375" />
+      <routestep x="483.76" y="477.13" z="151.25" />
+      <routestep x="479.46" y="481.7" z="151.69125" />
+	</walker_template>
+	<walker_template route_id="300280000_soldier_hurt_51">
+      <routestep x="271.58" y="740.85" z="163.62155" />
+      <routestep x="278.96" y="724.87" z="162.625" />
+      <routestep x="289.83" y="707.35" z="162.625" />
+      <routestep x="304.84" y="692.87" z="162.75375" />
+      <routestep x="289.81" y="707.38" z="162.625" />
+      <routestep x="278.97" y="724.89" z="162.625" />
+      <routestep x="271.56" y="740.88" z="163.62155" />
+	</walker_template>
+	<walker_template route_id="300280000_soldier_hurt_54">
+      <routestep x="530.85" y="506.12" z="146.0075" />
+      <routestep x="523.9" y="512.93" z="146.17688" />
+      <routestep x="521.87" y="533.07" z="146.125" />
+      <routestep x="531.73" y="568.61" z="146.9175" />
+      <routestep x="521.85" y="533.01" z="146.125" />
+      <routestep x="523.89" y="512.93" z="146.17625" />
+      <routestep x="530.9" y="506.03" z="146.00188" />
+	</walker_template>
+	<walker_template route_id="300280000_soldier_hurt_59">
+      <routestep x="501.41" y="523.01" z="146.05125" />
+      <routestep x="508.48" y="530.92" z="146.125" />
+      <routestep x="521.34" y="549.98" z="146.125" />
+      <routestep x="533.0" y="567.39" z="146.96188" />
+      <routestep x="521.3" y="549.78" z="146.125" />
+      <routestep x="508.49" y="530.95" z="146.125" />
+      <routestep x="501.5" y="523.1" z="146.0625" />
+	</walker_template>
+	<walker_template route_id="300280000_soldier_hurt_61">
+      <routestep x="364.63" y="646.26" z="151.14125" />
+      <routestep x="365.89" y="629.42" z="150.72063" />
+      <routestep x="366.96" y="614.81" z="145.875" />
+      <routestep x="363.02" y="578.41" z="145.625" />
+      <routestep x="366.96" y="614.96" z="145.875" />
+      <routestep x="365.86" y="629.52" z="150.72876" />
+      <routestep x="364.64" y="646.32" z="151.145" />
+	</walker_template>
+	<walker_template route_id="300280000_soldier_hurt_62">
+      <routestep x="485.11" y="450.21" z="151.62563" />
+      <routestep x="493.17" y="460.9" z="151.37062" />
+      <routestep x="503.97" y="473.41" z="146.91562" />
+      <routestep x="517.63" y="517.68" z="146.0" />
+      <routestep x="503.95" y="473.39" z="146.91937" />
+      <routestep x="493.19" y="460.95" z="151.36734" />
+      <routestep x="485.08" y="450.17" z="151.62755" />
+	</walker_template>
+	<walker_template route_id="300280000_soldier_hurt_66">
+      <routestep x="311.73" y="666.87" z="156.12563" />
+      <routestep x="327.59" y="664.65" z="154.5225" />
+      <routestep x="357.27" y="630.79" z="150.875" />
+      <routestep x="363.48" y="578.83" z="145.625" />
+      <routestep x="357.3" y="630.75" z="150.875" />
+      <routestep x="327.57" y="664.66" z="154.52562" />
+      <routestep x="311.73" y="666.91" z="156.13062" />
+	</walker_template>
+	<walker_template route_id="300280000_soldier_hurt_67">
+      <routestep x="252.53" y="703.13" z="163.97188" />
+      <routestep x="271.15" y="702.02" z="163.40813" />
+      <routestep x="289.93" y="698.01" z="162.75438" />
+      <routestep x="304.33" y="692.16" z="162.72874" />
+      <routestep x="290.07" y="698.03" z="162.74562" />
+      <routestep x="271.16" y="702.0" z="163.4075" />
+      <routestep x="252.51" y="703.13" z="163.97438" />
+	</walker_template>
+	<walker_template route_id="300280000_soldier_hurt_69">
+      <routestep x="517.19" y="473.38" z="145.75" />
+      <routestep x="516.01" y="491.92" z="145.87437" />
+      <routestep x="516.08" y="531.3" z="146.0" />
+      <routestep x="530.49" y="569.97" z="146.9325" />
+      <routestep x="516.09" y="531.21" z="146.0" />
+      <routestep x="516.06" y="491.9" z="145.87125" />
+      <routestep x="517.19" y="473.38" z="145.75" />
+	</walker_template>
+	<walker_template route_id="300280000_soldier_hurt_70">
+      <routestep x="522.27" y="474.05" z="145.73" />
+      <routestep x="521.09" y="492.59" z="145.75055" />
+      <routestep x="521.16" y="531.97" z="146.125" />
+      <routestep x="533.01" y="567.5" z="145.96727" />
+      <routestep x="521.17" y="531.88" z="146.125" />
+      <routestep x="521.14" y="492.57" z="145.75218" />
+      <routestep x="522.27" y="474.05" z="145.73" />
+	</walker_template>
+	<walker_template route_id="300280000_soldier_hurt_71">
+      <routestep x="497.11" y="501.72" z="146.43063" />
+      <routestep x="506.31" y="513.01" z="146.10562" />
+      <routestep x="519.0" y="539.97" z="146.125" />
+      <routestep x="531.44" y="567.86" z="146.83125" />
+      <routestep x="519.03" y="540.06" z="146.125" />
+      <routestep x="506.3" y="512.93" z="146.10625" />
+      <routestep x="497.12" y="501.75" z="146.43" />
+	</walker_template>
+	<walker_template route_id="300280000_soldier_imprisoned_17">
+      <routestep x="291.55" y="682.34" z="163.8675" />
+      <routestep x="299.32" y="681.69" z="162.53223" />
+      <routestep x="331.4" y="667.32" z="154.615" />
+      <routestep x="359.72" y="630.27" z="150.875" />
+      <routestep x="331.32" y="667.36" z="154.63" />
+      <routestep x="299.33" y="681.7" z="162.53223" />
+      <routestep x="291.58" y="682.31" z="163.86938" />
+	</walker_template>
+	<walker_template route_id="300280000_soldier_imprisoned_19">
+      <routestep x="476.39" y="481.28" z="152.10062" />
+      <routestep x="484.53" y="475.81" z="151.25" />
+      <routestep x="495.79" y="485.99" z="146.88875" />
+      <routestep x="516.5" y="520.39" z="146.0" />
+      <routestep x="495.84" y="486.01" z="146.88437" />
+      <routestep x="484.54" y="475.8" z="151.25" />
+      <routestep x="476.39" y="481.25" z="152.10062" />
+	</walker_template>
+	<walker_template route_id="300280000_soldier_imprisoned_40">
+      <routestep x="532.89" y="503.34" z="145.81937" />
+      <routestep x="525.1" y="511.04" z="146.13374" />
+      <routestep x="523.08" y="532.99" z="146.125" />
+      <routestep x="532.91" y="567.35" z="146.94193" />
+      <routestep x="523.08" y="532.98" z="146.125" />
+      <routestep x="525.09" y="511.08" z="146.13562" />
+      <routestep x="532.95" y="503.25" z="145.81563" />
+	</walker_template>
+	<walker_template route_id="300280000_soldier_imprisoned_43">
+      <routestep x="499.44" y="525.75" z="145.66063" />
+      <routestep x="505.85" y="532.83" z="145.98125" />
+      <routestep x="519.55" y="551.72" z="146.125" />
+      <routestep x="531.74" y="568.67" z="145.77063" />
+      <routestep x="519.5" y="551.64" z="146.125" />
+      <routestep x="505.83" y="532.79" z="145.97874" />
+      <routestep x="499.52" y="525.84" z="145.67" />
+	</walker_template>
+	<walker_template route_id="300280000_soldier_imprisoned_45">
+      <routestep x="365.95" y="643.56" z="151.0" />
+      <routestep x="366.88" y="629.59" z="150.72438" />
+      <routestep x="368.11" y="614.97" z="145.87758" />
+      <routestep x="364.25" y="579.46" z="145.625" />
+      <routestep x="368.11" y="614.95" z="145.875" />
+      <routestep x="366.93" y="629.44" z="150.715" />
+      <routestep x="365.96" y="643.62" z="151.0" />
+	</walker_template>
+	<walker_template route_id="300280000_soldier_imprisoned_46">
+      <routestep x="482.31" y="448.24" z="151.72" />
+      <routestep x="492.65" y="461.83" z="151.345" />
+      <routestep x="503.17" y="474.28" z="146.94376" />
+      <routestep x="516.4" y="517.91" z="146.0" />
+      <routestep x="503.1" y="474.11" z="146.97375" />
+      <routestep x="492.67" y="461.88" z="151.34062" />
+      <routestep x="482.29" y="448.19" z="151.72626" />
+	</walker_template>
+	<walker_template route_id="300280000_soldier_imprisoned_50">
+      <routestep x="314.0" y="665.14" z="155.58875" />
+      <routestep x="327.3" y="663.65" z="154.44063" />
+      <routestep x="356.38" y="630.5" z="150.875" />
+      <routestep x="362.46" y="578.1" z="145.625" />
+      <routestep x="356.41" y="630.62" z="150.87613" />
+      <routestep x="327.28" y="663.62" z="154.44125" />
+      <routestep x="314.0" y="665.18" z="155.59625" />
+	</walker_template>
+	<walker_template route_id="300280000_soldier_imprisoned_51">
+      <routestep x="255.34" y="701.65" z="163.98187" />
+      <routestep x="271.18" y="700.89" z="163.47313" />
+      <routestep x="289.82" y="697.15" z="162.81438" />
+      <routestep x="303.8" y="691.34" z="162.70921" />
+      <routestep x="289.76" y="697.16" z="162.8175" />
+      <routestep x="271.09" y="700.82" z="163.48875" />
+      <routestep x="255.32" y="701.65" z="163.98312" />
+	</walker_template>
+	<walker_template route_id="300280000_soldier_imprisoned_52">
+      <routestep x="286.01" y="682.77" z="164.47874" />
+      <routestep x="300.04" y="682.75" z="162.53221" />
+      <routestep x="332.52" y="668.34" z="154.65625" />
+      <routestep x="361.67" y="630.4" z="150.85" />
+      <routestep x="332.62" y="668.28" z="154.63876" />
+      <routestep x="300.01" y="682.74" z="162.53221" />
+      <routestep x="286.04" y="682.74" z="164.47874" />
+	</walker_template>
+	<walker_template route_id="300280000_soldier_imprisoned_55">
+      <routestep x="266.73" y="737.54" z="163.62155" />
+      <routestep x="275.33" y="721.96" z="162.625" />
+      <routestep x="287.9" y="705.6" z="162.625" />
+      <routestep x="303.68" y="691.36" z="162.70999" />
+      <routestep x="287.88" y="705.63" z="162.625" />
+      <routestep x="275.28" y="721.93" z="162.625" />
+      <routestep x="266.71" y="737.57" z="163.62155" />
+	</walker_template>
+	<walker_template route_id="300280000_soldier_imprisoned_56">
+      <routestep x="519.83" y="472.08" z="145.86438" />
+      <routestep x="518.65" y="490.62" z="145.75" />
+      <routestep x="518.72" y="531.0" z="146.1075" />
+      <routestep x="531.76" y="568.75" z="146.93594" />
+      <routestep x="518.73" y="531.07" z="146.1125" />
+      <routestep x="518.7" y="490.6" z="145.75" />
+      <routestep x="519.84" y="472.08" z="145.865" />
+	</walker_template>
+	<walker_template route_id="300280000_soldier_imprisoned_57">
+      <routestep x="495.77" y="499.0" z="146.52875" />
+      <routestep x="506.48" y="511.87" z="146.095" />
+      <routestep x="518.79" y="537.33" z="146.125" />
+      <routestep x="533.14" y="567.25" z="146.97063" />
+      <routestep x="518.78" y="537.26" z="146.125" />
+      <routestep x="506.54" y="511.91" z="146.09125" />
+      <routestep x="495.77" y="499.03" z="146.52875" />
 	</walker_template>
 </npc_walker>

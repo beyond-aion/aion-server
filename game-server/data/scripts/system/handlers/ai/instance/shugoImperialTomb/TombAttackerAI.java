@@ -3,9 +3,7 @@ package ai.instance.shugoImperialTomb;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.manager.EmoteManager;
 import com.aionemu.gameserver.ai.manager.WalkManager;
-import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.templates.walker.WalkerTemplate;
 import com.aionemu.gameserver.skillengine.model.Effect;
 
 import ai.AggressiveNpcAI;
@@ -16,7 +14,6 @@ import ai.AggressiveNpcAI;
 @AIName("tombattacker")
 public class TombAttackerAI extends AggressiveNpcAI {
 
-	private WalkerTemplate template;
 	private boolean canThink = true;
 	private final static int[] npc_ids = { 831251, 831250, 831304, 831305, 831130 };
 
@@ -48,12 +45,7 @@ public class TombAttackerAI extends AggressiveNpcAI {
 	@Override
 	protected void handleMoveArrived() {
 		super.handleMoveArrived();
-		String walkerId = getOwner().getSpawn().getWalkerId();
-		if (walkerId != null) {
-			template = DataManager.WALKER_DATA.getWalkerTemplate(walkerId);
-		}
-		int point = getOwner().getMoveController().getCurrentPoint();
-		if (template.getRouteSteps().size() - 1 == point) {
+		if (getOwner().getMoveController().getCurrentStep().isLastStep()) {
 			getSpawnTemplate().setWalkerId(null);
 			WalkManager.stopWalking(this);
 			canThink = true;

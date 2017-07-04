@@ -33,6 +33,14 @@ public class WalkerFormator {
 	public static boolean processClusteredNpc(Npc npc, int worldId, int instanceId) {
 		String walkerId = npc.getSpawn().getWalkerId();
 		if (walkerId != null) {
+			WalkerTemplate template = DataManager.WALKER_DATA.getWalkerTemplate(walkerId);
+			if (template == null) {
+				log.warn("Missing walker ID: " + walkerId);
+				return false;
+			}
+			if (template.getPool() < 2)
+				return false;
+
 			InstanceWalkerFormations formations = WalkerFormationsCache.getInstanceFormations(worldId, instanceId);
 			WalkerGroup wg = formations.getSpawnWalkerGroup(walkerId);
 
@@ -42,13 +50,6 @@ public class WalkerFormator {
 				return false;
 			}
 
-			WalkerTemplate template = DataManager.WALKER_DATA.getWalkerTemplate(walkerId);
-			if (template == null) {
-				log.warn("Missing walker ID: " + walkerId);
-				return false;
-			}
-			if (template.getPool() < 2)
-				return false;
 			return formations.cacheWalkerCandidate(new ClusteredNpc(npc, instanceId, template));
 		}
 		return false;

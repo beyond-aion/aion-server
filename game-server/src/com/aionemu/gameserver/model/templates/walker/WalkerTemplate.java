@@ -7,10 +7,11 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
 
-import com.aionemu.gameserver.GameServerError;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.spawnengine.WalkerGroupType;
 
@@ -21,13 +22,21 @@ import com.aionemu.gameserver.spawnengine.WalkerGroupType;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class WalkerTemplate {
 
-	@XmlElement(name = "routestep")
+	@XmlType(name = "LoopType")
+	@XmlEnum
+	public enum LoopType {
+		NONE,
+		NORMAL,
+		WALK_BACK
+	}
+
+	@XmlElement(name = "routestep", required = true)
 	private List<RouteStep> routeStepList;
 
 	@XmlAttribute(name = "route_id", required = true)
 	private String routeId;
 
-	@XmlAttribute(name = "pool", required = true)
+	@XmlAttribute(name = "pool")
 	private int pool = 1;
 
 	@XmlAttribute(name = "formation")
@@ -36,8 +45,8 @@ public class WalkerTemplate {
 	@XmlAttribute(name = "rows")
 	private String rowValues;
 
-	@XmlAttribute(name = "reversed")
-	private boolean isReversed = false;
+	@XmlAttribute(name = "loop_type")
+	private LoopType loopType = LoopType.NORMAL;
 
 	@XmlTransient
 	private int[] rows;
@@ -54,22 +63,19 @@ public class WalkerTemplate {
 	 * @param parent
 	 */
 	void afterUnmarshal(Unmarshaller u, Object parent) {
-		routeStepList.sort((a, b) -> a.getRouteStep() - b.getRouteStep()); // sort ascending by step, to support scrambled templates
-		if (isReversed) { // add steps in backward order, so npcs turn and walk the same way back
-			int stepNo = routeStepList.size();
-			for (int i = routeStepList.size() - 2; i > 0; i--) {
+		if (loopType == LoopType.WALK_BACK) { // add steps in backward order, so npcs turn and walk the same way back
+			for (int i = routeStepList.size() - 2; i > 0; i--) { // skip first and last step
 				RouteStep step = routeStepList.get(i);
-				routeStepList.add(new RouteStep(++stepNo, step.getX(), step.getY(), step.getZ(), step.getRestTime()));
+				routeStepList.add(new RouteStep(step.getX(), step.getY(), step.getZ(), step.getRestTime()));
 			}
 		}
 		for (int i = 0; i < routeStepList.size() - 1; i++) {
 			RouteStep step = routeStepList.get(i);
-			RouteStep nextStep = routeStepList.get(i + 1);
-			if (step.getRouteStep() != nextStep.getRouteStep() - 1)
-				throw new GameServerError("Walker " + routeId + " has a gap between step " + step.getRouteStep() + " and " + nextStep.getRouteStep());
-			step.setNextStep(nextStep);
+			step.setStepIndex(i);
 		}
-		routeStepList.get(routeStepList.size() - 1).setNextStep(routeStepList.get(0));
+		RouteStep lastStep = routeStepList.get(routeStepList.size() - 1);
+		lastStep.setStepIndex(routeStepList.size() - 1);
+		lastStep.setIsLastStep(true);
 
 		if (pool == 2) {
 			formation = WalkerGroupType.SQUARE;
@@ -92,8 +98,8 @@ public class WalkerTemplate {
 		return routeStepList;
 	}
 
-	public RouteStep getRouteStep(int value) {
-		return routeStepList.get(value - 1);
+	public RouteStep getRouteStep(int stepIndex) {
+		return routeStepList.get(stepIndex);
 	}
 
 	public String getRouteId() {
@@ -116,20 +122,20 @@ public class WalkerTemplate {
 		routeStepList = newSteps;
 	}
 
-	public boolean isReversed() {
-		return isReversed;
-	}
-
-	public void setIsReversed(boolean value) {
-		isReversed = value;
-	}
-
 	public WalkerGroupType getType() {
 		return formation;
 	}
 
 	public void setType(WalkerGroupType type) {
 		formation = type;
+	}
+
+	public LoopType getLoopType() {
+		return loopType;
+	}
+
+	public void setLoopType(LoopType loopType) {
+		this.loopType = loopType;
 	}
 
 	public int[] getRows() {
@@ -139,4 +145,5 @@ public class WalkerTemplate {
 	public void setRows(int[] rows) {
 		this.rows = rows;
 	}
+
 }

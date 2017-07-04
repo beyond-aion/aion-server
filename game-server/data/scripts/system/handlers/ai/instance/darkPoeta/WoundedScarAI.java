@@ -50,7 +50,7 @@ public class WoundedScarAI extends GeneralNpcAI {
 			AIActions.deleteOwner(this);
 			return;
 		}
-		switch (getMoveController().getCurrentPoint()) {
+		switch (getMoveController().getCurrentStep().getStepIndex()) {
 			case 8:
 				AIActions.applyEffect(this, DataManager.SKILL_DATA.getSkillTemplate(18532), getOwner());
 				spawn(281148, 648.8706f, 1167.4102f, 143.6956f, (byte) 2);

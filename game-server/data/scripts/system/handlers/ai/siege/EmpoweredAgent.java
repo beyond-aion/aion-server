@@ -95,7 +95,7 @@ public class EmpoweredAgent extends AggressiveNpcAI {
 		String walkerId = getOwner().getSpawn().getWalkerId();
 		if (walkerId == null)
 			return;
-		int step = getOwner().getMoveController().getCurrentPoint();
+		int step = getOwner().getMoveController().getCurrentStep().getStepIndex();
 		int stop = 0;
 		switch (getOwner().getNpcId()) {
 		case 235064:

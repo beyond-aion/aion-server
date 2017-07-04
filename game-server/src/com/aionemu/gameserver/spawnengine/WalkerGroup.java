@@ -54,8 +54,8 @@ public class WalkerGroup {
 				float bounds = (float) members.stream().mapToDouble(cNpc -> cNpc.getNpc().getObjectTemplate().getBoundRadius().getSide()).sum();
 				float distance = (1 - members.size()) / 2f * (WalkerGroupShift.DISTANCE + bounds);
 				Point2D origin = new Point2D(walkerXpos, walkerYpos);
-				Point2D destination = new Point2D(members.get(0).getWalkTemplate().getRouteStep(2).getX(),
-					members.get(0).getWalkTemplate().getRouteStep(2).getY());
+				Point2D destination = new Point2D(members.get(0).getWalkTemplate().getRouteStep(1).getX(),
+					members.get(0).getWalkTemplate().getRouteStep(1).getY());
 				for (int i = 0; i < members.size(); i++, distance += WalkerGroupShift.DISTANCE) {
 					WalkerGroupShift shift = new WalkerGroupShift(distance, 0);
 					Point2D loc = getLinePoint(origin, destination, shift);
@@ -77,8 +77,8 @@ public class WalkerGroup {
 					coronalDist -= rowDistances[i];
 				}
 				Point2D origin = new Point2D(walkerXpos, walkerYpos);
-				Point2D destination = new Point2D(members.get(0).getWalkTemplate().getRouteStep(2).getX(),
-					members.get(0).getWalkTemplate().getRouteStep(2).getY());
+				Point2D destination = new Point2D(members.get(0).getWalkTemplate().getRouteStep(1).getX(),
+					members.get(0).getWalkTemplate().getRouteStep(1).getY());
 				int index = 0;
 				for (int i = 0; i < rows.length; i++) {
 					float sagittalDist = (1 - rows[i]) / 2f * WalkerGroupShift.DISTANCE;

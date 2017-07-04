@@ -53,7 +53,7 @@ public class TamerAnikikiAI extends GeneralNpcAI {
 
 	@Override
 	protected void handleMoveArrived() {
-		int point = getOwner().getMoveController().getCurrentPoint();
+		int point = getOwner().getMoveController().getCurrentStep().getStepIndex();
 		super.handleMoveArrived();
 		if (getNpcId() == 219040) {
 			if (point == 8) {

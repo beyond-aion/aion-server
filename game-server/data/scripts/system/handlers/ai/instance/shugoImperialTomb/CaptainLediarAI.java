@@ -8,11 +8,9 @@ import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.manager.EmoteManager;
 import com.aionemu.gameserver.ai.manager.WalkManager;
-import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
-import com.aionemu.gameserver.model.templates.walker.WalkerTemplate;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.world.World;
 
@@ -24,7 +22,6 @@ import ai.AggressiveNpcAI;
 @AIName("captain_lediar")
 public class CaptainLediarAI extends AggressiveNpcAI {
 
-	private WalkerTemplate template;
 	private boolean canThink = true;
 	private final List<Integer> spawnedNpc = new ArrayList<>();
 	private AtomicBoolean isSpawnedHelpers = new AtomicBoolean(false);
@@ -95,12 +92,7 @@ public class CaptainLediarAI extends AggressiveNpcAI {
 	@Override
 	protected void handleMoveArrived() {
 		super.handleMoveArrived();
-		String walkerId = getOwner().getSpawn().getWalkerId();
-		if (walkerId != null) {
-			template = DataManager.WALKER_DATA.getWalkerTemplate(walkerId);
-		}
-		int point = getOwner().getMoveController().getCurrentPoint();
-		if (template.getRouteSteps().size() - 1 == point) {
+		if (getOwner().getMoveController().getCurrentStep().isLastStep()) {
 			getSpawnTemplate().setWalkerId(null);
 			WalkManager.stopWalking(this);
 			canThink = true;

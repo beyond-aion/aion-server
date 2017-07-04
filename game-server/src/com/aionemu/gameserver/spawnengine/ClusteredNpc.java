@@ -77,7 +77,7 @@ public class ClusteredNpc {
 	}
 
 	public float getXDelta() {
-		return walkTemplate.getRouteStep(1).getX() - x;
+		return walkTemplate.getRouteStep(0).getX() - x;
 	}
 
 	/**
@@ -97,7 +97,7 @@ public class ClusteredNpc {
 	}
 
 	public float getYDelta() {
-		return walkTemplate.getRouteStep(1).getY() - y;
+		return walkTemplate.getRouteStep(0).getY() - y;
 	}
 
 	/**
