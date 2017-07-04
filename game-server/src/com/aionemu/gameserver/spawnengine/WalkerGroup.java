@@ -204,7 +204,8 @@ public class WalkerGroup {
 			npcAI.setSubStateIfNot(AISubState.WALK_WAIT_GROUP);
 			boolean allArrived = true;
 			for (ClusteredNpc snpc : members) {
-				allArrived &= snpc.getNpc().getAi().getSubState() == AISubState.WALK_WAIT_GROUP;
+				Npc npc = snpc.getNpc();
+				allArrived &= npc.isDead() || npc.getAi().getSubState() == AISubState.WALK_WAIT_GROUP;
 				if (!allArrived)
 					break;
 			}

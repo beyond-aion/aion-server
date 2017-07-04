@@ -86,7 +86,6 @@ public class ClusteredNpc {
 	 */
 	public void setX(float x) {
 		this.x = x;
-		this.getNpc().getSpawn().setX(x);
 	}
 
 	/**
@@ -106,7 +105,6 @@ public class ClusteredNpc {
 	 */
 	public void setY(float y) {
 		this.y = y;
-		this.getNpc().getSpawn().setY(y);
 	}
 
 	/**
