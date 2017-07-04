@@ -274,14 +274,15 @@ public class NpcMoveController extends CreatureMoveController<Npc> {
 		World.getInstance().updatePosition(owner, newX, newY, newZ, heading, false);
 
 		byte newMask = getMoveMask(directionChanged);
-		if (movementMask != newMask) {
-			if (owner.getAi().isLogging()) {
-				AILogger.moveinfo(owner, "oldMask=" + movementMask + " newMask=" + newMask);
+		if (movementMask != newMask || directionChanged) {
+			if (movementMask != newMask) {
+				if (owner.getAi().isLogging()) {
+					AILogger.moveinfo(owner, "oldMask=" + movementMask + " newMask=" + newMask);
+				}
+				movementMask = newMask;
 			}
-			movementMask = newMask;
-		}
-		if (movementMask != newMask || (movementMask & MovementMask.POSITION) == MovementMask.POSITION)
 			PacketSendUtility.broadcastPacket(owner, new SM_MOVE(owner));
+		}
 	}
 
 	private byte getMoveMask(boolean directionChanged) {
