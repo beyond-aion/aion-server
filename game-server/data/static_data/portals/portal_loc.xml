@@ -130,6 +130,7 @@
 	<portal_loc world_id="220040000" loc_id="2200408" x="2420.12" y="2061.31" z="579.7" h="0"/> <!-- Dark Poeta Exit -->
 	<portal_loc world_id="220040000" loc_id="2200409" x="2206.5" y="2921.2" z="700" h="47"/> <!-- Atreia Defense Portal (Asmo) -->
 	<portal_loc world_id="220040000" loc_id="2200410" x="2422.25" y="2063.94" z="579.62" h="76"/> <!-- Atreia Defense Portal (Asmo) -->
+	<portal_loc world_id="220040000" loc_id="2200411" x="2257.466" y="1267.1333" z="473.4867" h="4"/>
 	<!-- Brusthonin -->
 	<portal_loc world_id="220050000" loc_id="2200500" x="1538.9861" y="388.8925" z="231.18079"/> <!-- Theobomos Lab Exit -->
 	<portal_loc world_id="220050000" loc_id="2200501" x="1540.0343" y="389.20572" z="231.20036" h="18"/> <!-- Atreia Defense Portal (Asmo) -->

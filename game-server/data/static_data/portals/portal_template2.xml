@@ -1285,6 +1285,11 @@
 		</portal_path>
 	</portal_dialog>
 
+	<!-- Bulundur (Beluslan) -->
+	<portal_dialog npc_id="206356">
+		<portal_path dialog="104" loc_id="2200411" kinah="36000" />
+	</portal_dialog>
+
 	<!-- 4.7 Port NPCs -->
 	<!-- Sanctum Teleport Statue -->
 	<portal_dialog npc_id="804687">
