@@ -98,6 +98,15 @@
 		<spawn npc_id="219025">
 			<spot x="399.841" y="574.213" z="948.037" h="60"/>
 		</spawn>
+		<!-- Cockroach -->
+		<spawn npc_id="214714">
+			<spot x="521.24" y="535.72" z="952.4658" h="90" walker_id="DDE827EDAFD91E6A7812036A7C5D423183D94B75"/>
+		</spawn>
+		<!-- Kobold Worker -->
+		<spawn npc_id="219012">
+			<spot x="521.24" y="535.72" z="952.4658" h="90" walker_id="DDE827EDAFD91E6A7812036A7C5D423183D94B75"/>
+			<spot x="643.709" y="507.217" z="935.673" h="15"/>
+		</spawn>
 		<!-- Kobold Worker -->
 		<spawn npc_id="219013">
 			<spot x="268.160" y="478.739" z="947.013" h="90"/>
@@ -123,10 +132,6 @@
 		<!-- Kobold Worker -->
 		<spawn npc_id="219014">
 			<spot x="311.648" y="552.813" z="951.795" h="18"/>
-		</spawn>
-		<!-- Kobold Worker -->
-		<spawn npc_id="219012">
-			<spot x="643.709" y="507.217" z="935.673" h="15"/>
 		</spawn>
 		<!-- Kobold Worker -->
 		<spawn npc_id="219038">
