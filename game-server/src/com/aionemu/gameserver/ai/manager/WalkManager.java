@@ -180,16 +180,17 @@ public class WalkManager {
 				npcAI.getOwner().getMoveController().moveToNextPoint();
 		} else {
 			npcAI.getOwner().getMoveController().abortMove();
-			npcAI.getOwner().getMoveController().isNextRouteStepChosen();
-			ThreadPoolManager.getInstance().schedule(new Runnable() {
+			if (npcAI.getOwner().getMoveController().isNextRouteStepChosen()) {
+				ThreadPoolManager.getInstance().schedule(new Runnable() {
 
-				@Override
-				public void run() {
-					if (npcAI.isInState(AIState.WALKING)) {
-						npcAI.getOwner().getMoveController().moveToNextPoint();
+					@Override
+					public void run() {
+						if (npcAI.isInState(AIState.WALKING)) {
+							npcAI.getOwner().getMoveController().moveToNextPoint();
+						}
 					}
-				}
-			}, walkPause);
+				}, walkPause);
+			}
 		}
 	}
 

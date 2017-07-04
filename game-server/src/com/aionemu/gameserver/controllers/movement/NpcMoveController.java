@@ -364,8 +364,10 @@ public class NpcMoveController extends CreatureMoveController<Npc> {
 	}
 
 	public boolean isNextRouteStepChosen() {
-		if (isStop)
+		if (isStop) {
+			WalkManager.stopWalking((NpcAI) owner.getAi());
 			return false;
+		}
 		if (walkerTemplate == null) {
 			WalkManager.stopWalking((NpcAI) owner.getAi());
 			if (WalkerFormator.processClusteredNpc(owner, owner.getWorldId(), owner.getInstanceId()))
