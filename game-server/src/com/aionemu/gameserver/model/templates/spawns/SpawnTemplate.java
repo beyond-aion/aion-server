@@ -17,7 +17,7 @@ public class SpawnTemplate {
 	private int staticId;
 	private int randomWalk;
 	private String walkerId;
-	private int walkerIdx;
+	private Integer walkerIdx;
 	private int fly;
 	private String anchor;
 	private SpawnGroup spawnGroup;
@@ -165,7 +165,7 @@ public class SpawnTemplate {
 		this.walkerId = walkerId;
 	}
 
-	public int getWalkerIndex() {
+	public Integer getWalkerIndex() {
 		return walkerIdx;
 	}
 

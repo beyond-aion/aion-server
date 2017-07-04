@@ -49,12 +49,14 @@ public class WalkManager {
 		Npc owner = npcAI.getOwner();
 		if (!owner.isPathWalker())
 			return false;
-		WalkerTemplate template = DataManager.WALKER_DATA.getWalkerTemplate(owner.getSpawn().getWalkerId());
-		if (template == null)
-			return false;
+		if (owner.getMoveController().getWalkerTemplate() == null) {
+			WalkerTemplate template = DataManager.WALKER_DATA.getWalkerTemplate(owner.getSpawn().getWalkerId());
+			if (template == null)
+				return false;
+			owner.getMoveController().setWalkerTemplate(template, 0);
+		}
 		if (!npcAI.setStateIfNot(AIState.WALKING) || !npcAI.setSubStateIfNot(AISubState.WALK_PATH))
 			return false;
-		owner.getMoveController().setWalkerTemplate(template);
 		RouteStep nextStep = findNextRoutStep(owner);
 		owner.getMoveController().setRouteStep(nextStep);
 		EmoteManager.emoteStartWalking(npcAI.getOwner());

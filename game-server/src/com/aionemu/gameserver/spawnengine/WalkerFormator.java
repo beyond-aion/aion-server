@@ -47,7 +47,7 @@ public class WalkerFormator {
 			if (wg != null) {
 				npc.setWalkerGroup(wg);
 				wg.respawn(npc);
-				return false;
+				return true;
 			}
 
 			return formations.cacheWalkerCandidate(new ClusteredNpc(npc, instanceId, template));

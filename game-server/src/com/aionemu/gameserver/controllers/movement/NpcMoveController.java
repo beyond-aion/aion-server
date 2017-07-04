@@ -334,9 +334,9 @@ public class NpcMoveController extends CreatureMoveController<Npc> {
 		return walkerTemplate;
 	}
 
-	public void setWalkerTemplate(WalkerTemplate walkerTemplate) {
+	public void setWalkerTemplate(WalkerTemplate walkerTemplate, int stepIndex) {
 		this.walkerTemplate = walkerTemplate;
-		this.currentStep = walkerTemplate.getRouteStep(0);
+		this.currentStep = walkerTemplate.getRouteStep(stepIndex);
 	}
 
 	public void setRouteStep(RouteStep step) {
@@ -374,7 +374,7 @@ public class NpcMoveController extends CreatureMoveController<Npc> {
 			if (WalkerFormator.processClusteredNpc(owner, owner.getWorldId(), owner.getInstanceId()))
 				return false;
 
-			setWalkerTemplate(DataManager.WALKER_DATA.getWalkerTemplate(owner.getSpawn().getWalkerId()));
+			setWalkerTemplate(DataManager.WALKER_DATA.getWalkerTemplate(owner.getSpawn().getWalkerId()), 0);
 			if (walkerTemplate == null) {
 				log.warn("Bad Walker Id: " + owner.getSpawn().getWalkerId() + " - point: " + currentStep.getStepIndex());
 				return false;

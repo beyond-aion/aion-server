@@ -128,9 +128,7 @@ public class SpawnSpotTemplate {
 		this.walkerId = walkerId;
 	}
 
-	public int getWalkerIndex() {
-		if (walkerIdx == null)
-			return 0;
+	public Integer getWalkerIndex() {
 		return walkerIdx;
 	}
 

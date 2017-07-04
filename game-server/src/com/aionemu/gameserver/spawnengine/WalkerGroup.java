@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.spawnengine;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -14,6 +15,7 @@ import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.ai.manager.WalkManager;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
+import com.aionemu.gameserver.model.templates.walker.RouteStep;
 import com.aionemu.gameserver.model.templates.zone.Point2D;
 
 /**
@@ -34,7 +36,8 @@ public class WalkerGroup {
 	private boolean isSpawned;
 
 	public WalkerGroup(List<ClusteredNpc> members) {
-		this.members = members.stream().sorted((w1, w2) -> Integer.compare(w1.getWalkerIndex(), w2.getWalkerIndex())).collect(Collectors.toList());
+		this.members = members.stream().sorted(Comparator.comparing(ClusteredNpc::getWalkerIndex, Comparator.nullsLast(Comparator.naturalOrder())))
+			.collect(Collectors.toList());
 		memberSteps = new int[members.size()];
 		walkerXpos = members.get(0).getX();
 		walkerYpos = members.get(0).getY();
@@ -240,10 +243,14 @@ public class WalkerGroup {
 	public void respawn(Npc npc) {
 		for (int index = 0; index < members.size(); index++) {
 			ClusteredNpc snpc = members.get(index);
-			if (snpc.getWalkerIndex() == npc.getSpawn().getWalkerIndex() && snpc.getNpc().getNpcId() == npc.getNpcId()) {
+			if (snpc.getNpc().getNpcId() == npc.getNpcId() && (npc.getSpawn().getWalkerIndex() == null && snpc.getNpc().isDead()
+				|| npc.getSpawn().getWalkerIndex() != null && npc.getSpawn().getWalkerIndex() == snpc.getWalkerIndex())) {
 				synchronized (members) {
-					snpc.setNpc(npc);
-					memberSteps[index] = 0;
+					memberSteps[index] = Math.max(0, groupStep - 1);
+					RouteStep step = snpc.getWalkTemplate().getRouteStep(memberSteps[index]);
+					npc.getMoveController().setWalkerTemplate(snpc.getWalkTemplate(), memberSteps[index]);
+					snpc.setNpc(npc, step);
+					snpc.spawn(step.getZ());
 				}
 				break;
 			}

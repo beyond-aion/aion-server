@@ -2,6 +2,7 @@ package com.aionemu.gameserver.spawnengine;
 
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.model.templates.walker.RouteStep;
 import com.aionemu.gameserver.model.templates.walker.WalkerTemplate;
 
 /**
@@ -17,7 +18,6 @@ public class ClusteredNpc {
 	private WalkerTemplate walkTemplate;
 	private float x;
 	private float y;
-	private int walkerIdx;
 
 	public ClusteredNpc(Npc npc, int instance, WalkerTemplate walkTemplate) {
 		this.npc = npc;
@@ -25,7 +25,6 @@ public class ClusteredNpc {
 		this.walkTemplate = walkTemplate;
 		this.x = npc.getSpawn().getX();
 		this.y = npc.getSpawn().getY();
-		this.walkerIdx = npc.getSpawn().getWalkerIndex();
 	}
 
 	public Npc getNpc() {
@@ -46,11 +45,11 @@ public class ClusteredNpc {
 		npc.getController().delete();
 	}
 
-	public void setNpc(Npc npc) {
+	public void setNpc(Npc npc, RouteStep step) {
 		npc.setWalkerGroupShift(this.npc.getWalkerGroupShift());
 		this.npc = npc;
-		this.x = npc.getSpawn().getX();
-		this.y = npc.getSpawn().getY();
+		this.x = step.getX();
+		this.y = step.getY();
 	}
 
 	public boolean hasSamePosition(ClusteredNpc other) {
@@ -114,8 +113,8 @@ public class ClusteredNpc {
 		return walkTemplate;
 	}
 
-	public int getWalkerIndex() {
-		return walkerIdx;
+	public Integer getWalkerIndex() {
+		return npc.getSpawn().getWalkerIndex();
 	}
 
 }
