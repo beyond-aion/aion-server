@@ -2,7 +2,6 @@ package com.aionemu.gameserver.services;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -43,8 +42,6 @@ import com.aionemu.gameserver.world.WorldPosition;
 public class HousingService {
 
 	private static final Logger log = LoggerFactory.getLogger(HousingService.class);
-	// Contains non-instance houses initially (which are spawned)
-	private static final Map<Integer, List<House>> housesByMapId = new HashMap<>();
 	// Contains all houses by their addresses
 	private final Map<Integer, House> customHouses;
 	private final Map<Integer, House> studios;
@@ -76,9 +73,7 @@ public class HousingService {
 		if (lands == null) {
 			if (registeredId > 0) {
 				House studio;
-				synchronized (studios) {
-					studio = studios.get(registeredId);
-				}
+				studio = studios.get(registeredId);
 				if (studio == null)
 					return;
 				HouseAddress addr = studio.getAddress();
@@ -123,13 +118,6 @@ public class HousingService {
 				}
 				customHouse.spawn(instanceId);
 				spawnedCounter++;
-
-				List<House> housesForMap = housesByMapId.get(worldId);
-				if (housesForMap == null) {
-					housesForMap = new ArrayList<>();
-					housesByMapId.put(worldId, housesForMap);
-				}
-				housesForMap.add(customHouse);
 			}
 		}
 		if (spawnedCounter > 0) {
@@ -139,11 +127,9 @@ public class HousingService {
 
 	public List<House> searchPlayerHouses(int playerObjId) {
 		List<House> houses = new ArrayList<>();
-		synchronized (studios) {
-			if (studios.containsKey(playerObjId)) {
-				houses.add(studios.get(playerObjId));
-				return houses;
-			}
+		if (studios.containsKey(playerObjId)) {
+			houses.add(studios.get(playerObjId));
+			return houses;
 		}
 		for (House house : customHouses.values()) {
 			if (house.getOwnerId() == playerObjId)
@@ -153,10 +139,8 @@ public class HousingService {
 	}
 
 	public int getPlayerAddress(int playerId) {
-		synchronized (studios) {
-			if (studios.containsKey(playerId))
-				return studios.get(playerId).getAddress().getId();
-		}
+		if (studios.containsKey(playerId))
+			return studios.get(playerId).getAddress().getId();
 
 		for (House house : customHouses.values()) {
 			if (house.getStatus() == HouseStatus.INACTIVE)
@@ -186,11 +170,7 @@ public class HousingService {
 	}
 
 	public House getHouseByAddress(int address) {
-		for (House house : customHouses.values()) {
-			if (house.getAddress().getId() == address)
-				return house;
-		}
-		return null;
+		return customHouses.get(address);
 	}
 
 	public House activateBoughtHouse(int playerId) {
@@ -211,18 +191,12 @@ public class HousingService {
 	}
 
 	public House getPlayerStudio(int playerId) {
-		synchronized (studios) {
-			if (studios.containsKey(playerId))
-				return studios.get(playerId);
-		}
-		return null;
+		return studios.get(playerId);
 	}
 
 	public void removeStudio(int playerId) {
 		if (playerId != 0) {
-			synchronized (studios) {
-				studios.remove(playerId);
-			}
+			studios.remove(playerId);
 		}
 	}
 
@@ -250,9 +224,7 @@ public class HousingService {
 		House studio = new House(land.getDefaultBuilding(), land.getAddresses().get(0), 0);
 		studio.setOwnerId(player.getObjectId());
 
-		synchronized (studios) {
-			studios.put(player.getObjectId(), studio);
-		}
+		studios.put(player.getObjectId(), studio);
 		studio.setStatus(HouseStatus.ACTIVE);
 		studio.setAcquiredTime(new Timestamp(System.currentTimeMillis()));
 		studio.setFeePaid(true);
@@ -277,17 +249,22 @@ public class HousingService {
 	}
 
 	public List<House> getCustomHouses() {
-		List<House> houses = new ArrayList<>();
-		for (List<House> mapHouses : housesByMapId.values())
-			houses.addAll(mapHouses);
-		return houses;
+		return new ArrayList<>(customHouses.values());
+	}
+
+	public House findHouseOrStudio(int objId) {
+		if (studios.containsKey(objId)) { // studios share the objectId with owner
+			return studios.get(objId);
+		}
+		for (House house : customHouses.values()) {
+			if (house.getObjectId() == objId)
+				return house;
+		}
+		return null;
 	}
 
 	public void onInstanceDestroy(int ownerId) {
-		House studio;
-		synchronized (studios) {
-			studio = studios.get(ownerId);
-		}
+		House studio = studios.get(ownerId);
 		if (studio != null) {
 			studio.despawnNpcs();
 			studio.save();

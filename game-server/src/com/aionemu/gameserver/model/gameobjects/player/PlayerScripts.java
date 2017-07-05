@@ -8,7 +8,10 @@ import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.dao.HouseScriptsDAO;
+import com.aionemu.gameserver.model.gameobjects.PersistentState;
+import com.aionemu.gameserver.model.house.House;
 import com.aionemu.gameserver.model.house.PlayerScript;
+import com.aionemu.gameserver.services.HousingService;
 import com.aionemu.gameserver.utils.xml.CompressUtil;
 
 /**
@@ -41,8 +44,12 @@ public class PlayerScripts {
 		if (scriptXML == null)
 			return false;
 
-		if (doStore)
+		if (doStore) {
+			House house = HousingService.getInstance().findHouseOrStudio(houseObjId);
+			if (house.getPersistentState() == PersistentState.NEW)
+				house.save(); // new houses must be inserted first, due to foreign key constraints
 			DAOManager.getDAO(HouseScriptsDAO.class).storeScript(houseObjId, id, scriptXML);
+		}
 
 		scripts.put(id, new PlayerScript(compressedXML, uncompressedSize));
 		return true;
