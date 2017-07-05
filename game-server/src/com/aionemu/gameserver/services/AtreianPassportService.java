@@ -25,6 +25,7 @@ import com.aionemu.gameserver.services.item.ItemPacketService.ItemUpdateType;
 import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.services.item.ItemService.ItemUpdatePredicate;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.audit.AuditLogger;
 import com.aionemu.gameserver.utils.time.ServerTime;
 import com.aionemu.gameserver.world.World;
 
@@ -71,11 +72,11 @@ public class AtreianPassportService {
 			int time = timestamps.get(i);
 			Passport passport = ppl.getPassport(passId, time);
 			if (passport == null) {
-				// AuditLogger.info(player, "Trying to get non-existing passport!");
+				AuditLogger.log(player, "tried to get non-existing passport (ID: " + passId + ")");
 				continue;
 			}
 			if (passport.isRewarded() || passport.getState().equals(PersistentState.DELETED)) {
-				// AuditLogger.info(player, "Trying to get passport which is already rewarded!");
+				AuditLogger.log(player, "tried to get passport which is already rewarded (ID: " + passId + ")");
 				continue;
 			}
 
