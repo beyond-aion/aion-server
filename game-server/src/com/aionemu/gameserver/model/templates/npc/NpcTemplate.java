@@ -2,6 +2,7 @@ package com.aionemu.gameserver.model.templates.npc;
 
 import java.util.List;
 
+import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -119,6 +120,10 @@ public class NpcTemplate extends VisibleObjectTemplate {
 
 	@XmlElement(name = "massive_loot")
 	private MassiveLoot massiveLoot;
+
+	protected void afterUnmarshal(Unmarshaller u, Object parent) {
+		ai = ai.intern(); // intern to save RAM, since most npcs use same ai names
+	}
 
 	@Override
 	public int getTemplateId() {

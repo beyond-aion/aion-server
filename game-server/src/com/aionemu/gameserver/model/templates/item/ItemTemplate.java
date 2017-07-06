@@ -159,6 +159,7 @@ public class ItemTemplate extends VisibleObjectTemplate {
 		for (int i = 0; i < parts.length; i++) {
 			restricts[i] = Integer.parseInt(parts[i]);
 		}
+		restrict = null; // we don't use it, null to save RAM
 		if (restrictMax != null) {
 			String[] partsMax = restrictMax.split(",");
 			restrictsMax = new byte[17];
