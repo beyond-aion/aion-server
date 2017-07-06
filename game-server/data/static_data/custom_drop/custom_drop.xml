@@ -1948,7 +1948,7 @@
 	</npc_drop>
 	<npc_drop npc_id="700853">
 		<drop_group race="PC_ALL"><!-- Named Weapon (Rare) -->
-			<drop item_id="101500837" chance="3.5" /><!-- Dukaki Peon's Shovel -->
+			<drop item_id="101500837" chance="25" /><!-- Dukaki Peon's Shovel -->
 		</drop_group>
 		<drop_group race="PC_ALL"><!-- Named Enchantment Stone -->
 			<drop item_id="166000191" chance="25" /><!-- Alpha Enchantment Stone -->
