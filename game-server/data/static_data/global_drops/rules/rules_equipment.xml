@@ -1,65 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../global_rules.xsd">
-	<!--
-		TODO:
-		Dragonbound
-
-		<gd_item id="101900660" /><!- Dragonbound Aethercannon ->
-		<gd_item id="101700768" /><!- Dragonbound Bow ->
-		<gd_item id="102100589" /><!- Dragonbound Cipher-Blade ->
-		<gd_item id="100200849" /><!- Dragonbound Dagger ->
-		<gd_item id="100900726" /><!- Dragonbound Greatsword ->
-		<gd_item id="102000695" /><!- Dragonbound Harp ->
-		<gd_item id="100100725" /><!- Dragonbound Mace ->
-		<gd_item id="100500744" /><!- Dragonbound Orb ->
-		<gd_item id="101800659" /><!- Dragonbound Pistol ->
-		<gd_item id="101300700" /><!- Dragonbound Polearm ->
-		<gd_item id="100600801" /><!- Dragonbound Spellbook ->
-		<gd_item id="101500747" /><!- Dragonbound Staff ->
-		<gd_item id="100000953" /><!- Dragonbound Sword ->
-		<gd_item id="115001007" /><!- Dragonbound Shield ->
-
-		<gd_item id="110101079" /><!- Dragonbound Tunic ->
-		<gd_item id="110101086" /><!- Dragonbound Tunic ->
-		<gd_item id="110301028" /><!- Dragonbound Jerkin ->
-		<gd_item id="110301035" /><!- Dragonbound Jerkin ->
-		<gd_item id="110500996" /><!- Dragonbound Hauberk ->
-		<gd_item id="110501003" /><!- Dragonbound Hauberk ->
-		<gd_item id="110600976" /><!- Dragonbound Breastplate ->
-		<gd_item id="110600983" /><!- Dragonbound Breastplate ->
-		<gd_item id="111100974" /><!- Dragonbound Gloves ->
-		<gd_item id="111100981" /><!- Dragonbound Gloves ->
-		<gd_item id="111300979" /><!- Dragonbound Vambrace ->
-		<gd_item id="111300986" /><!- Dragonbound Vambrace ->
-		<gd_item id="111500965" /><!- Dragonbound Handguards ->
-		<gd_item id="111500973" /><!- Dragonbound Handguards ->
-		<gd_item id="111600957" /><!- Dragonbound Gauntlets ->
-		<gd_item id="111600964" /><!- Dragonbound Gauntlets ->
-		<gd_item id="112100930" /><!- Dragonbound Pauldrons ->
-		<gd_item id="112100937" /><!- Dragonbound Pauldrons ->
-		<gd_item id="112300928" /><!- Dragonbound Shoulderguards ->
-		<gd_item id="112300935" /><!- Dragonbound Shoulderguards ->
-		<gd_item id="112500915" /><!- Dragonbound Spaulders ->
-		<gd_item id="112500922" /><!- Dragonbound Spaulders ->
-		<gd_item id="112600930" /><!- Dragonbound Shoulderplates ->
-		<gd_item id="112600937" /><!- Dragonbound Shoulderplates ->
-		<gd_item id="113100985" /><!- Dragonbound Leggings ->
-		<gd_item id="113100992" /><!- Dragonbound Leggings ->
-		<gd_item id="113300998" /><!- Dragonbound Breeches ->
-		<gd_item id="113301005" /><!- Dragonbound Breeches ->
-		<gd_item id="113500968" /><!- Dragonbound Chausses ->
-		<gd_item id="113500975" /><!- Dragonbound Chausses ->
-		<gd_item id="113600939" /><!- Dragonbound Greaves ->
-		<gd_item id="113600946" /><!- Dragonbound Greaves ->
-		<gd_item id="114101013" /><!- Dragonbound Shoes ->
-		<gd_item id="114101021" /><!- Dragonbound Shoes ->
-		<gd_item id="114301034" /><!- Dragonbound Boots ->
-		<gd_item id="114301042" /><!- Dragonbound Boots ->
-		<gd_item id="114500977" /><!- Dragonbound Brogans ->
-		<gd_item id="114500985" /><!- Dragonbound Brogans ->
-		<gd_item id="114600936" /><!- Dragonbound Sabatons ->
-		<gd_item id="114600944" /><!- Dragonbound Sabatons ->
-	-->
 	<!-- Weapons (white, 1-50, Asmodae) -->
 	<gd_rule rule_name="Weapons (Common)" base_chance="1.3" min_diff="-1" max_diff="3">
 		<gd_worlds>
@@ -7490,6 +7430,53 @@
 			<gd_item id="125002655" /><!-- Fallen Hat -->
 			<gd_item id="125002656" /><!-- Fallen Chain Hood -->
 			<gd_item id="125002657" /><!-- Fallen Helm -->
+		</gd_items>
+	</gd_rule>
+	<!-- Dragonbound Armor & Weapons (green, 52, Inggison & Gelkmaros) -->
+	<gd_rule rule_name="Dragonbound Equipment (Rare)" base_chance="1.65" min_diff="0" max_diff="2">
+		<gd_npc_names>
+			<gd_npc_name function="START_WITH" value="apostate" />
+			<gd_npc_name function="START_WITH" value="turncoat" />
+		</gd_npc_names>
+		<gd_items>
+			<!-- Weapons -->
+			<!-- Level 52 -->
+			<gd_item id="101900660" /><!-- Dragonbound Aethercannon -->
+			<gd_item id="101700768" /><!-- Dragonbound Bow -->
+			<gd_item id="102100589" /><!-- Dragonbound Cipher-Blade -->
+			<gd_item id="100200849" /><!-- Dragonbound Dagger -->
+			<gd_item id="100900726" /><!-- Dragonbound Greatsword -->
+			<gd_item id="102000695" /><!-- Dragonbound Harp -->
+			<gd_item id="100100725" /><!-- Dragonbound Mace -->
+			<gd_item id="100500744" /><!-- Dragonbound Orb -->
+			<gd_item id="101800659" /><!-- Dragonbound Pistol -->
+			<gd_item id="101300700" /><!-- Dragonbound Polearm -->
+			<gd_item id="100600801" /><!-- Dragonbound Spellbook -->
+			<gd_item id="101500747" /><!-- Dragonbound Staff -->
+			<gd_item id="100000953" /><!-- Dragonbound Sword -->
+			<gd_item id="115001007" /><!-- Dragonbound Shield -->
+			<!-- Armor -->
+			<!-- Level 52 -->
+			<gd_item id="110101079" /><!-- Dragonbound Tunic -->
+			<gd_item id="110301028" /><!-- Dragonbound Jerkin -->
+			<gd_item id="110500996" /><!-- Dragonbound Hauberk -->
+			<gd_item id="110600976" /><!-- Dragonbound Breastplate -->
+			<gd_item id="111100974" /><!-- Dragonbound Gloves -->
+			<gd_item id="111300979" /><!-- Dragonbound Vambrace -->
+			<gd_item id="111500965" /><!-- Dragonbound Handguards -->
+			<gd_item id="111600957" /><!-- Dragonbound Gauntlets -->
+			<gd_item id="112100930" /><!-- Dragonbound Pauldrons -->
+			<gd_item id="112300928" /><!-- Dragonbound Shoulderguards -->
+			<gd_item id="112500915" /><!-- Dragonbound Spaulders -->
+			<gd_item id="112600930" /><!-- Dragonbound Shoulderplates -->
+			<gd_item id="113100985" /><!-- Dragonbound Leggings -->
+			<gd_item id="113300998" /><!-- Dragonbound Breeches -->
+			<gd_item id="113500968" /><!-- Dragonbound Chausses -->
+			<gd_item id="113600939" /><!-- Dragonbound Greaves -->
+			<gd_item id="114101013" /><!-- Dragonbound Shoes -->
+			<gd_item id="114301034" /><!-- Dragonbound Boots -->
+			<gd_item id="114500977" /><!-- Dragonbound Brogans -->
+			<gd_item id="114600936" /><!-- Dragonbound Sabatons -->
 		</gd_items>
 	</gd_rule>
 	<!-- Armor (blue, 22-51, Asmodae) -->
