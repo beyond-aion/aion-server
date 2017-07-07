@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.skillengine.model;
 
+import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -20,6 +21,11 @@ public class Motion {
 
 	@XmlAttribute(name = "instant_skill")
 	private boolean instantSkill = false;
+
+	protected void afterUnmarshal(Unmarshaller u, Object parent) {
+		if (name != null)
+			name = name.intern(); // intern to save RAM
+	}
 
 	public String getName() {
 		return name;

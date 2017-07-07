@@ -60,16 +60,11 @@ public class Npc extends Creature {
 		queuedSkills = new ConcurrentLinkedQueue<>();
 		setupStatContainers();
 
-		boolean aiOverride = false;
-		if (spawnTemplate.getModel() != null) {
-			if (spawnTemplate.getModel().getAi() != null) {
-				aiOverride = true;
-				AIEngine.getInstance().setupAI(spawnTemplate.getModel().getAi(), this);
-			}
-		}
+		String aiName = objectTemplate.getAi();
+		if (spawnTemplate.getModel() != null && spawnTemplate.getModel().getAi() != null)
+			aiName = spawnTemplate.getModel().getAi();
 
-		if (!aiOverride)
-			AIEngine.getInstance().setupAI(objectTemplate.getAi(), this);
+		AIEngine.getInstance().setupAI(aiName, this);
 	}
 
 	@Override
@@ -137,11 +132,11 @@ public class Npc extends Creature {
 	}
 
 	public NpcSkillList getSkillList() {
-		return this.skillList;
+		return skillList;
 	}
 
 	public ConcurrentLinkedQueue<NpcSkillEntry> getQueuedSkills() {
-		return this.queuedSkills;
+		return queuedSkills;
 	}
 
 	public boolean isWalker() {

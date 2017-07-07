@@ -116,7 +116,7 @@ public class ItemTemplate extends VisibleObjectTemplate {
 	@XmlElement(name = "weapon_stats")
 	private WeaponStats weaponStats;
 	@XmlAttribute(name = "activate_target")
-	private String activationTarget;
+	private ItemActivationTarget activationTarget;
 	@XmlAttribute(name = "tempering_name")
 	private String temperingName;
 	@XmlAttribute(name = "enchant_name")
@@ -547,12 +547,12 @@ public class ItemTemplate extends VisibleObjectTemplate {
 
 	public ItemActivationTarget getActivationTarget() {
 		if (getActivationRace() == null)
-			return ItemActivationTarget.getFromString(activationTarget);
-		return ItemActivationTarget.NONE;
+			return activationTarget;
+		return null;
 	}
 
 	public Race getActivationRace() {
-		return Race.getRaceByString(activationTarget);
+		return activationTarget == null ? null : activationTarget.getRace();
 	}
 
 	public boolean isCombatActivated() {

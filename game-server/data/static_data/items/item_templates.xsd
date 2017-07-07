@@ -115,7 +115,7 @@
 		<xs:attribute name="slot" type="xs:int" use="optional"/>
 		<xs:attribute name="activate_count" type="xs:int" use="optional"/>
 		<xs:attribute name="activate_combat" type="xs:boolean" use="optional"/>
-		<xs:attribute name="activate_target" type="xs:string"/>
+		<xs:attribute name="activate_target" type="ItemActivationTarget"/>
 		<xs:attribute name="m_slots" type="xs:int"/>
 		<xs:attribute name="max_tampering" type="xs:int"/>
 		<xs:attribute name="max_enchant_bonus" type="xs:int"/>
@@ -437,6 +437,27 @@
 			<xs:enumeration value="MAGICAL_WIND"/>
 			<xs:enumeration value="MAGICAL_FIRE"/>
 			<xs:enumeration value="MAGICAL_EARTH"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ItemActivationTarget">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="STANDALONE"/>
+			<xs:enumeration value="TARGET"/>
+			<xs:enumeration value="MYMENTO"/>
+			<xs:enumeration value="WORLD_EVENT_CAKE_D"/>
+			<xs:enumeration value="WORLD_EVENT_CAKE_L"/>
+			<!-- Races -->
+			<xs:enumeration value="BROWNIE"/>
+			<xs:enumeration value="GCHIEF_LIGHT"/>
+			<xs:enumeration value="GHENCHMAN_LIGHT"/>
+			<xs:enumeration value="GHENCHMAN_DARK"/>
+			<xs:enumeration value="KRALL"/>
+			<xs:enumeration value="LF5_Q_ITEM"/>
+			<xs:enumeration value="LIVINGWATER"/>
+			<xs:enumeration value="LYCAN"/>
+			<xs:enumeration value="EVENT_TOWER_LIGHT"/>
+			<xs:enumeration value="EVENT_TOWER_DARK"/>
+			<xs:enumeration value="WORLD_EVENT_DEFTOWER"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="storageType">

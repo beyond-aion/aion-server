@@ -176,37 +176,32 @@ public class SkillAttackManager {
 			}
 
 			NpcSkillList skillList = owner.getSkillList();
-			if (skillList == null || skillList.size() == 0) {
+			if (skillList.isEmpty()) {
 				return null;
 			}
 
 			NpcSkillEntry lastSkill = owner.getGameStats().getLastSkill();
 			if (lastSkill != null && lastSkill.hasChain() && lastSkill.canUseNextChain(owner)) {
 				List<NpcSkillEntry> chainSkills = skillList.getChainSkills(lastSkill);
-				if (chainSkills != null && !chainSkills.isEmpty()) {
-					if (chainSkills.size() > 1)
-						Collections.shuffle(chainSkills);
-					for (NpcSkillEntry entry : chainSkills) {
-						if (entry != null && isReady(owner, entry)) {
-							return getNpcSkillEntryIfNotTooFarAway(owner, entry);
-						}
+				if (chainSkills.size() > 1)
+					Collections.shuffle(chainSkills);
+				for (NpcSkillEntry entry : chainSkills) {
+					if (entry != null && isReady(owner, entry)) {
+						return getNpcSkillEntryIfNotTooFarAway(owner, entry);
 					}
 				}
 			}
 
-			List<Integer> priorities = skillList.getPriorities();
-			if (priorities != null && !priorities.isEmpty()) {
+			int[] priorities = skillList.getPriorities();
+			if (priorities != null) {
+				for (int index = priorities.length - 1; index >= 0; index--) {
+					List<NpcSkillEntry> skillsByPriority = skillList.getSkillsByPriority(priorities[index]);
+					if (skillsByPriority.size() > 1)
+						Collections.shuffle(skillsByPriority);
 
-				for (int index = priorities.size() - 1; index >= 0; index--) {
-					List<NpcSkillEntry> skillsByPriority = skillList.getSkillsByPriority(priorities.get(index));
-					if (skillsByPriority != null && !skillsByPriority.isEmpty()) {
-						if (skillsByPriority.size() > 2)
-							Collections.shuffle(skillsByPriority);
-
-						for (NpcSkillEntry entry : skillsByPriority) {
-							if (entry != null && entry.getChainId() == 0 && isReady(owner, entry)) {
-								return getNpcSkillEntryIfNotTooFarAway(owner, entry);
-							}
+					for (NpcSkillEntry entry : skillsByPriority) {
+						if (entry.getChainId() == 0 && isReady(owner, entry)) {
+							return getNpcSkillEntryIfNotTooFarAway(owner, entry);
 						}
 					}
 				}

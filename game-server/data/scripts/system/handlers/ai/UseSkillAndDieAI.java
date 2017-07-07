@@ -30,7 +30,7 @@ public class UseSkillAndDieAI extends NpcAI {
 			return;
 		}
 		NpcSkillList skillList = getOwner().getSkillList();
-		if (skillList == null || skillList.getNpcSkills().isEmpty()) {
+		if (skillList.getNpcSkills().isEmpty()) {
 			despawn(1);
 			return;
 		}

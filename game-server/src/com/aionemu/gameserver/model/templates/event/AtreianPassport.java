@@ -24,10 +24,10 @@ public class AtreianPassport {
 	@XmlAttribute(name = "active", required = true)
 	private int active;
 	@XmlAttribute(name = "period_start", required = true)
-	@XmlJavaTypeAdapter(value = ServerTime.XmlAdapter.class)
+	@XmlJavaTypeAdapter(ServerTime.XmlAdapter.class)
 	private ZonedDateTime pStart;
 	@XmlAttribute(name = "period_end", required = true)
-	@XmlJavaTypeAdapter(value = ServerTime.XmlAdapter.class)
+	@XmlJavaTypeAdapter(ServerTime.XmlAdapter.class)
 	private ZonedDateTime pEnd;
 	@XmlAttribute(name = "attend_type", required = true)
 	private AttendType attendType;

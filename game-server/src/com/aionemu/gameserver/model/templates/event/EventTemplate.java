@@ -72,11 +72,11 @@ public class EventTemplate {
 	private String name;
 
 	@XmlAttribute(name = "start", required = true)
-	@XmlJavaTypeAdapter(value = ServerTime.XmlAdapter.class)
+	@XmlJavaTypeAdapter(ServerTime.XmlAdapter.class)
 	private ZonedDateTime startDate;
 
 	@XmlAttribute(name = "end", required = true)
-	@XmlJavaTypeAdapter(value = ServerTime.XmlAdapter.class)
+	@XmlJavaTypeAdapter(ServerTime.XmlAdapter.class)
 	private ZonedDateTime endDate;
 
 	@XmlAttribute(name = "theme", required = false)

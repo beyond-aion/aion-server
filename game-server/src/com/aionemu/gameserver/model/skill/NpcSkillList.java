@@ -1,6 +1,7 @@
 package com.aionemu.gameserver.model.skill;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -15,95 +16,54 @@ import com.aionemu.gameserver.model.templates.npcskill.NpcSkillTemplates;
 
 /**
  * @author ATracer
- * @modified Yeats
+ * @modified Yeats, Neon
  */
-public class NpcSkillList implements SkillList<Npc> {
+public class NpcSkillList {
 
 	private static final Logger log = LoggerFactory.getLogger(NpcSkillList.class);
 
 	private List<NpcSkillEntry> skills;
-	private List<Integer> priorities;
+	private int[] priorities;
 
 	public NpcSkillList(Npc owner) {
 		initSkillList(owner.getNpcId());
 	}
 
 	private void initSkillList(int npcId) {
-		NpcSkillTemplates npcSkillList = DataManager.NPC_SKILL_DATA.getNpcSkillList(npcId);
-		if (npcSkillList != null) {
-			initSkills();
-			for (int index = npcSkillList.getNpcSkills().size() - 1; index >= 0; index--) {
-				NpcSkillTemplate template = npcSkillList.getNpcSkills().get(index);
+		NpcSkillTemplates npcSkillTemplates = DataManager.NPC_SKILL_DATA.getNpcSkillList(npcId);
+		List<NpcSkillTemplate> npcSkills = npcSkillTemplates == null ? null : npcSkillTemplates.getNpcSkills();
+		if (npcSkills == null || npcSkills.isEmpty()) {
+			skills = Collections.emptyList();
+		} else {
+			skills = new ArrayList<>(npcSkills.size());
+			List<Integer> prios = new ArrayList<>();
+			for (Iterator<NpcSkillTemplate> iter = npcSkills.iterator(); iter.hasNext();) {
+				NpcSkillTemplate template = iter.next();
 				if (DataManager.SKILL_DATA.getSkillTemplate(template.getSkillId()) == null) {
 					log.warn("Missing skill " + template.getSkillId() + " for npc " + npcId);
-					npcSkillList.getNpcSkills().remove(index);
+					iter.remove();
 					continue;
 				}
 				skills.add(new NpcSkillTemplateEntry(template));
-				if (!priorities.contains(template.getPriority())) {
-					priorities.add(template.getPriority());
+				if (!prios.contains(template.getPriority())) {
+					prios.add(template.getPriority());
 				}
 			}
-			priorities.sort(null);
+			prios.sort(null);
+			priorities = prios.stream().mapToInt(Integer::intValue).toArray();
 		}
 	}
 
-	@Override
-	public boolean addSkill(Npc creature, int skillId, int skillLevel) {
-		initSkills();
-		skills.add(new NpcSkillParameterEntry(skillId, skillLevel));
-		return true;
-	}
-
-	@Override
-	public boolean removeSkill(int skillId) {
-		Iterator<NpcSkillEntry> iter = skills.iterator();
-		while (iter.hasNext()) {
-			NpcSkillEntry next = iter.next();
-			if (next.getSkillId() == skillId) {
-				iter.remove();
-				return true;
-			}
-		}
-		return false;
-	}
-
-	@Override
-	public boolean isSkillPresent(int skillId) {
-		if (skills == null) {
-			return false;
-		}
-		return getSkill(skillId) != null;
-	}
-
-	@Override
-	public int getSkillLevel(int skillId) {
-		return getSkill(skillId).getSkillLevel();
-	}
-
-	@Override
-	public int size() {
-		return skills != null ? skills.size() : 0;
-	}
-
-	private void initSkills() {
-		if (skills == null) {
-			skills = new ArrayList<>();
-		}
-		
-		if (priorities == null) {
-			priorities = new ArrayList<>();
-		}
+	public boolean isEmpty() {
+		return skills.isEmpty();
 	}
 
 	public NpcSkillEntry getRandomSkill() {
-		if (skills == null)
-			return null;
 		return Rnd.get(skills);
 	}
 
 	public NpcSkillEntry getSkillOnPosition(int position) {
-		if (skills == null || skills.size() == 0)
+		if (skills.isEmpty())
 			return null;
 		if (position >= skills.size())
 			position = skills.size() - 1;
@@ -111,24 +71,10 @@ public class NpcSkillList implements SkillList<Npc> {
 		return skills.get(position);
 	}
 
-	private SkillEntry getSkill(int skillId) {
-		for (SkillEntry entry : skills) {
-			if (entry.getSkillId() == skillId) {
-				return entry;
-			}
-		}
-		return null;
-	}
-
 	public NpcSkillEntry getUseInSpawnedSkill() {
-		if (this.skills == null)
-			return null;
-		Iterator<NpcSkillEntry> iter = skills.iterator();
-		while (iter.hasNext()) {
-			NpcSkillEntry next = iter.next();
-			NpcSkillTemplateEntry tmpEntry = (NpcSkillTemplateEntry) next;
-			if (tmpEntry.UseInSpawned()) {
-				return next;
+		for (NpcSkillEntry skill : skills) {
+			if (((NpcSkillTemplateEntry) skill).UseInSpawned()) {
+				return skill;
 			}
 		}
 		return null;
@@ -137,36 +83,35 @@ public class NpcSkillList implements SkillList<Npc> {
 	public List<NpcSkillEntry> getNpcSkills() {
 		return skills;
 	}
-	
+
 	public List<NpcSkillEntry> getSkillsByPriority(int priority) {
-		if (skills != null && priorities != null && priorities.contains(priority)) {
-			List<NpcSkillEntry> skillsByPriority = new ArrayList<>();
-			
-			for (NpcSkillEntry entry : skills) {
-				if (entry.getPriority() == priority) {
-					skillsByPriority.add(entry);
-				}
+		if (skills.isEmpty())
+			return Collections.emptyList();
+
+		List<NpcSkillEntry> skillsByPriority = new ArrayList<>();
+		for (NpcSkillEntry skill : skills) {
+			if (skill.getPriority() == priority) {
+				skillsByPriority.add(skill);
 			}
-			return skillsByPriority;
-			
-		} else {
-			return null;
 		}
+		return skillsByPriority;
+
 	}
-	
-	public List<Integer> getPriorities() {
+
+	public int[] getPriorities() {
 		return priorities;
 	}
-	
+
 	public List<NpcSkillEntry> getChainSkills(NpcSkillEntry curSkill) {
+		if (skills.isEmpty())
+			return Collections.emptyList();
+
 		List<NpcSkillEntry> chainSkills = new ArrayList<>();
-		if (skills != null && curSkill != null) {
-			int id = curSkill.getNextChainId();
-			if (id > 0) {
-				for (NpcSkillEntry entry : skills) {
-					if (entry != null && entry.getChainId() == id) {
-						chainSkills.add(entry);
-					}
+		int id = curSkill.getNextChainId();
+		if (id > 0) {
+			for (NpcSkillEntry skill : skills) {
+				if (skill.getChainId() == id) {
+					chainSkills.add(skill);
 				}
 			}
 		}

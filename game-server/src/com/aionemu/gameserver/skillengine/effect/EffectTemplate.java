@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.skillengine.effect;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -81,7 +80,7 @@ public abstract class EffectTemplate {
 	@XmlAttribute(name = "accmod2")
 	protected int accMod2;// accvalue
 	@XmlAttribute(name = "preeffect")
-	protected String preEffect;
+	protected int[] preEffects;
 	@XmlAttribute(name = "preeffect_prob")
 	protected int preEffectProb = 100;
 	@XmlAttribute(name = "critprobmod2")
@@ -177,17 +176,14 @@ public abstract class EffectTemplate {
 	}
 
 	/**
-	 * @return the preEffect
-	 */
-	public String getPreEffect() {
-		return preEffect;
-	}
-
-	/**
 	 * @return the preEffectProb
 	 */
 	public int getPreEffectProb() {
 		return preEffectProb;
+	}
+
+	private int[] getPreEffects() {
+		return preEffects;
 	}
 
 	/**
@@ -369,46 +365,42 @@ public abstract class EffectTemplate {
 	private boolean nextEffectCheck(Effect effect, SpellStatus spellStatus, StatEnum statEnum) {
 		EffectTemplate firstEffect = effect.effectInPos(1);
 		if (getPosition() > 1) {
-			if (Rnd.chance() < this.getPreEffectProb()) {
-				List<Integer> positions = getPreEffects();
-				int successCount = 0;
+			if (Rnd.chance() < getPreEffectProb()) {
+				int[] positions = getPreEffects();
 				for (int pos : positions) {
-					if (effect.isInSuccessEffects(pos)) {
-						successCount++;
+					if (!effect.isInSuccessEffects(pos))
+						return false;
+				}
+				boolean cannotMiss = false;
+				if (this instanceof SkillAttackInstantEffect)
+					cannotMiss = ((SkillAttackInstantEffect) this).isCannotmiss();
+				if (!noResist && !cannotMiss) {
+					if (!this.calculateEffectResistRate(effect, statEnum)) {
+						if (!(firstEffect instanceof DamageEffect)) {
+							effect.getSuccessEffect().remove(firstEffect);
+						}
+						return false;
+					}
+					// check for BOOST_RESIST
+					int boostResist = 0;
+					switch (effect.getSkillTemplate().getSubType()) {
+						case DEBUFF:
+							boostResist = effect.getEffector().getGameStats().getStat(StatEnum.BOOST_RESIST_DEBUFF, 0).getCurrent();
+							break;
+					}
+					int accMod = accMod2 + accMod1 * effect.getSkillLevel() + effect.getAccModBoost() + boostResist;
+					switch (element) {
+						case NONE:
+							if (StatFunctions.calculatePhysicalDodgeRate(effect.getEffector(), effect.getEffected(), accMod))
+								return false;
+							break;
+						default:
+							if (Rnd.get(1, 1000) <= StatFunctions.calculateMagicalResistRate(effect.getEffector(), effect.getEffected(), accMod, element))
+								return false;
+							break;
 					}
 				}
-				if (successCount == positions.size()) {
-					boolean cannotMiss = false;
-					if (this instanceof SkillAttackInstantEffect)
-						cannotMiss = ((SkillAttackInstantEffect) this).isCannotmiss();
-					if (!noResist && !cannotMiss) {
-						if (!this.calculateEffectResistRate(effect, statEnum)) {
-							if (!(firstEffect instanceof DamageEffect)) {
-								effect.getSuccessEffect().remove(firstEffect);
-							}
-							return false;
-						}
-						// check for BOOST_RESIST
-						int boostResist = 0;
-						switch (effect.getSkillTemplate().getSubType()) {
-							case DEBUFF:
-								boostResist = effect.getEffector().getGameStats().getStat(StatEnum.BOOST_RESIST_DEBUFF, 0).getCurrent();
-								break;
-						}
-						int accMod = accMod2 + accMod1 * effect.getSkillLevel() + effect.getAccModBoost() + boostResist;
-						switch (element) {
-							case NONE:
-								if (StatFunctions.calculatePhysicalDodgeRate(effect.getEffector(), effect.getEffected(), accMod))
-									return false;
-								break;
-							default:
-								if (Rnd.get(1, 1000) <= StatFunctions.calculateMagicalResistRate(effect.getEffector(), effect.getEffected(), accMod, element))
-									return false;
-								break;
-						}
-					}
-					return true;
-				}
+				return true;
 			}
 		}
 		return false;
@@ -426,20 +418,6 @@ public abstract class EffectTemplate {
 	private boolean effectConditionsCheck(Effect effect) {
 		Conditions effectConditions = getEffectConditions();
 		return effectConditions != null ? effectConditions.validate(effect) : true;
-	}
-
-	private List<Integer> getPreEffects() {
-		List<Integer> preEffects = new ArrayList<>();
-
-		if (this.getPreEffect() == null)
-			return preEffects;
-
-		String[] parts = this.getPreEffect().split("_");
-		for (String part : parts) {
-			preEffects.add(Integer.parseInt(part));
-		}
-
-		return preEffects;
 	}
 
 	/**
