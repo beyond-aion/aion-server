@@ -11,7 +11,6 @@ import com.aionemu.gameserver.model.geometry.Area;
 import com.aionemu.gameserver.model.templates.zone.ZoneClassName;
 import com.aionemu.gameserver.model.templates.zone.ZoneInfo;
 import com.aionemu.gameserver.model.templates.zone.ZoneTemplate;
-import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.zone.handler.AdvancedZoneHandler;
 import com.aionemu.gameserver.world.zone.handler.ZoneHandler;
@@ -21,11 +20,10 @@ import com.aionemu.gameserver.world.zone.handler.ZoneHandler;
  */
 public class ZoneInstance implements Comparable<ZoneInstance> {
 
-	private ZoneInfo template;
-	private int mapId;
+	private final ZoneInfo template;
+	private final int mapId;
 	private Map<Integer, Creature> creatures = new HashMap<>();
 	protected List<ZoneHandler> handlers = new ArrayList<>();
-	protected List<ZoneHandler> questZoneHandlers = new ArrayList<>();
 
 	public ZoneInstance(int mapId, ZoneInfo template) {
 		this.template = template;
@@ -102,13 +100,7 @@ public class ZoneInstance implements Comparable<ZoneInstance> {
 	}
 
 	public void addHandler(ZoneHandler handler) {
-		this.handlers.add(handler);
-		if (handler instanceof AbstractQuestHandler)
-			this.questZoneHandlers.add(handler);
-	}
-
-	public boolean hasQuestZoneHandlers() {
-		return this.questZoneHandlers.size() != 0;
+		handlers.add(handler);
 	}
 
 	public boolean canFly() {

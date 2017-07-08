@@ -223,9 +223,9 @@ public class PlayerController extends CreatureController<Player> {
 		InstanceService.onEnterZone(player, zone);
 		ZoneName zoneName = zone.getAreaTemplate().getZoneName();
 		if (zoneName == null)
-			log.error("No name found for a Zone in the map " + zone.getAreaTemplate().getWorldId());
-		else if (!zone.hasQuestZoneHandlers()) // Zone handlers should notify QuestEngine directly
-			QuestEngine.getInstance().onEnterZone(new QuestEnv(null, player, 0), zone.getAreaTemplate().getZoneName());
+			log.warn("No name found for a zone in map " + zone.getAreaTemplate().getWorldId() + " with xml name " + zone.getZoneTemplate().getXmlName());
+		else
+			QuestEngine.getInstance().onEnterZone(new QuestEnv(null, player, 0), zoneName);
 	}
 
 	@Override
@@ -235,7 +235,7 @@ public class PlayerController extends CreatureController<Player> {
 		InstanceService.onLeaveZone(player, zone);
 		ZoneName zoneName = zone.getAreaTemplate().getZoneName();
 		if (zoneName == null)
-			log.error("No name found for a Zone in the map " + zone.getAreaTemplate().getWorldId());
+			log.warn("No name found for a zone in map " + zone.getAreaTemplate().getWorldId() + " with xml name " + zone.getZoneTemplate().getXmlName());
 		else
 			QuestEngine.getInstance().onLeaveZone(new QuestEnv(null, player, 0), zoneName);
 	}
