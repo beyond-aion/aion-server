@@ -21,7 +21,7 @@ public class _28511TheSoupNutsy extends QuestHandler {
 	public void register() {
 		int[] npcs = { 799522, 700954, 730359, 798031 };
 		qe.registerQuestNpc(799522).addOnQuestStart(questId);
-		qe.registerGetingItem(182212023, questId);
+		qe.registerOnGetItem(182212023, questId);
 		for (int npc : npcs) {
 			qe.registerQuestNpc(npc).addOnTalkEvent(questId);
 		}

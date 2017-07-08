@@ -21,7 +21,7 @@ public class _18511OutOfThePast extends QuestHandler {
 	public void register() {
 		int[] npcs = { 799522, 700954, 730359, 790000 };
 		qe.registerQuestNpc(799522).addOnQuestStart(questId);
-		qe.registerGetingItem(182212011, questId);
+		qe.registerOnGetItem(182212011, questId);
 		for (int npc : npcs) {
 			qe.registerQuestNpc(npc).addOnTalkEvent(questId);
 		}

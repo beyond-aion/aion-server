@@ -27,7 +27,7 @@ public class _19000ExpertEssencetappersTest extends QuestHandler {
 		qe.registerQuestNpc(203780).addOnQuestStart(questId);
 		qe.registerQuestNpc(203780).addOnTalkEvent(questId);
 		qe.registerQuestNpc(203781).addOnTalkEvent(questId);
-		qe.registerGetingItem(122001250, questId);
+		qe.registerOnGetItem(122001250, questId);
 	}
 
 	@Override

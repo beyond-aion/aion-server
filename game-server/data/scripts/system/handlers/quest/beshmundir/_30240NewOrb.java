@@ -23,7 +23,7 @@ public class _30240NewOrb extends QuestHandler {
 		int[] debilkarims = { 286904, 281419, 215795 };
 		qe.registerQuestNpc(799032).addOnQuestStart(questId);
 		qe.registerQuestNpc(799032).addOnTalkEvent(questId);
-		qe.registerGetingItem(182209638, questId);
+		qe.registerOnGetItem(182209638, questId);
 		for (int debilkarim : debilkarims) {
 			qe.registerQuestNpc(debilkarim).addOnKillEvent(questId);
 		}

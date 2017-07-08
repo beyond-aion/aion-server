@@ -24,7 +24,7 @@ public class _19600WelcometoWisplightAbbey extends QuestHandler {
 	@Override
 	public void register() {
 		qe.registerQuestNpc(npcId).addOnTalkEvent(questId);
-		qe.registerGetingItem(itemId, questId); // quest acquisition linked to abbey return stone acquisition
+		qe.registerOnGetItem(itemId, questId); // quest acquisition linked to abbey return stone acquisition
 	}
 
 	@Override

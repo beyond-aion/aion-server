@@ -25,7 +25,7 @@ public class _4721RiseOfChantraDredgion extends QuestHandler {
 		qe.registerQuestNpc(700948).addOnTalkEvent(questId);
 		qe.registerQuestNpc(216886).addOnKillEvent(questId);
 		qe.addHandlerSideQuestDrop(questId, 700948, 182205691, 1, 100, 1);
-		qe.registerGetingItem(182205691, questId);
+		qe.registerOnGetItem(182205691, questId);
 	}
 
 	@Override

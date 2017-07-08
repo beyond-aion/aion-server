@@ -21,7 +21,7 @@ public class _30103LairOfTheDragonbound extends QuestHandler {
 	public void register() {
 		qe.registerQuestNpc(799333).addOnQuestStart(questId);
 		qe.registerQuestNpc(799333).addOnTalkEvent(questId);
-		qe.registerGetingItem(182209189, questId);
+		qe.registerOnGetItem(182209189, questId);
 	}
 
 	@Override

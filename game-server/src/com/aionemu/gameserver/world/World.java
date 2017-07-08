@@ -446,7 +446,7 @@ public class World {
 					function.accept(player);
 			});
 		} catch (Exception ex) {
-			log.error("Exception when iterating over all players", ex);
+			log.error("Exception while iterating players", ex);
 		}
 	}
 
@@ -457,7 +457,7 @@ public class World {
 					function.accept(obj);
 			});
 		} catch (Exception ex) {
-			log.error("Exception when iterating over objects", ex);
+			log.error("Exception while iterating objects", ex);
 		}
 	}
 

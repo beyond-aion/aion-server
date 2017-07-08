@@ -25,7 +25,7 @@ public class _3721DisarmTheChantraDredgion extends QuestHandler {
 		qe.registerQuestNpc(216886).addOnKillEvent(questId);
 		qe.registerQuestNpc(700948).addOnTalkEvent(questId);
 		qe.addHandlerSideQuestDrop(questId, 700948, 182202193, 1, 100, 1);
-		qe.registerGetingItem(182202193, questId);
+		qe.registerOnGetItem(182202193, questId);
 	}
 
 	@Override

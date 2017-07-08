@@ -23,7 +23,7 @@ public class _11304TheRemainingFaithful extends QuestHandler {
 		qe.registerQuestNpc(798927).addOnTalkEvent(questId);
 		qe.registerQuestNpc(798926).addOnTalkEvent(questId);
 		qe.registerQuestNpc(798941).addOnTalkEvent(questId);
-		qe.registerGetingItem(182215336, questId);
+		qe.registerOnGetItem(182215336, questId);
 	}
 
 	@Override

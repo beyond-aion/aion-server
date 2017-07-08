@@ -86,27 +86,27 @@ public final class CronService {
 		}
 	}
 
-	public void schedule(Runnable r, String cronExpression) {
-		schedule(r, cronExpression, false);
+	public JobDetail schedule(Runnable r, String cronExpression) {
+		return schedule(r, cronExpression, false);
 	}
 
-	public void schedule(Runnable r, String cronExpression, boolean longRunning) {
+	public JobDetail schedule(Runnable r, String cronExpression, boolean longRunning) {
 		try {
-			schedule(r, new CronExpression(cronExpression), longRunning);
+			return schedule(r, new CronExpression(cronExpression), longRunning);
 		} catch (ParseException e) {
 			throw new RuntimeException("CronExpression \"" + cronExpression + "\" is invalid.", e);
 		}
 	}
 
-	public void schedule(Runnable r, CronExpression cronExpression) {
-		schedule(r, cronExpression, false);
+	public JobDetail schedule(Runnable r, CronExpression cronExpression) {
+		return schedule(r, cronExpression, false);
 	}
 
-	public void schedule(Runnable r, CronExpression cronExpression, boolean longRunning) {
-		schedule(r, runnableRunner, cronExpression, longRunning);
+	public JobDetail schedule(Runnable r, CronExpression cronExpression, boolean longRunning) {
+		return schedule(r, runnableRunner, cronExpression, longRunning);
 	}
 
-	public void schedule(Runnable r, Class<? extends RunnableRunner> runnableRunner, CronExpression cronExpression, boolean longRunning) {
+	public JobDetail schedule(Runnable r, Class<? extends RunnableRunner> runnableRunner, CronExpression cronExpression, boolean longRunning) {
 		try {
 			JobDataMap jdm = new JobDataMap();
 			jdm.put(RunnableRunner.KEY_RUNNABLE_OBJECT, r);
@@ -121,6 +121,7 @@ public final class CronService {
 			CronTrigger trigger = TriggerBuilder.newTrigger().withSchedule(csb).build();
 
 			scheduler.scheduleJob(jobDetail, trigger);
+			return jobDetail;
 		} catch (Exception e) {
 			throw new CronServiceException("Failed to start job", e);
 		}

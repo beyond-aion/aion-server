@@ -25,7 +25,7 @@ public class _4012TroublesomePromise extends QuestHandler {
 		qe.registerQuestNpc(730104).addOnTalkEvent(questId);
 		qe.registerQuestNpc(700342).addOnTalkEvent(questId);
 		qe.addHandlerSideQuestDrop(questId, 700342, 182209005, 1, 100);
-		qe.registerGetingItem(182209005, questId);
+		qe.registerOnGetItem(182209005, questId);
 	}
 
 	@Override

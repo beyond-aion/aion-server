@@ -23,7 +23,7 @@ public class _30349ImprovedHarp extends QuestHandler {
 		int[] debilkarims = { 286904, 281419, 215795 };
 		qe.registerQuestNpc(799336).addOnQuestStart(questId);
 		qe.registerQuestNpc(799336).addOnTalkEvent(questId);
-		qe.registerGetingItem(182213290, questId);
+		qe.registerOnGetItem(182213290, questId);
 		for (int debilkarim : debilkarims) {
 			qe.registerQuestNpc(debilkarim).addOnKillEvent(questId);
 		}

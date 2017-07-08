@@ -21,7 +21,7 @@ public class _30003SecretOfTheUdasTemple extends QuestHandler {
 	public void register() {
 		qe.registerQuestNpc(799029).addOnQuestStart(questId);
 		qe.registerQuestNpc(799029).addOnTalkEvent(questId);
-		qe.registerGetingItem(182209161, questId);
+		qe.registerOnGetItem(182209161, questId);
 	}
 
 	@Override

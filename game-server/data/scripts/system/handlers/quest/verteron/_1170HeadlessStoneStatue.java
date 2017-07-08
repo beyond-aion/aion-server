@@ -25,7 +25,7 @@ public class _1170HeadlessStoneStatue extends QuestHandler {
 		qe.registerQuestNpc(730000).addOnTalkEvent(questId);
 		qe.registerQuestNpc(700033).addOnTalkEvent(questId);
 		qe.registerOnMovieEndQuest(16, questId);
-		qe.registerGetingItem(182200504, questId);
+		qe.registerOnGetItem(182200504, questId);
 	}
 
 	@Override

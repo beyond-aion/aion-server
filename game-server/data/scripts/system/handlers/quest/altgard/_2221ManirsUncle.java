@@ -24,7 +24,7 @@ public class _2221ManirsUncle extends QuestHandler {
 		qe.registerQuestNpc(203607).addOnTalkEvent(questId);
 		qe.registerQuestNpc(203608).addOnTalkEvent(questId);
 		qe.registerQuestNpc(700214).addOnTalkEvent(questId);
-		qe.registerGetingItem(182203215, questId);
+		qe.registerOnGetItem(182203215, questId);
 	}
 
 	@Override

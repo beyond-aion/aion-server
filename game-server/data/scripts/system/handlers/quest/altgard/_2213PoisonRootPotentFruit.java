@@ -27,7 +27,7 @@ public class _2213PoisonRootPotentFruit extends QuestHandler {
 		qe.registerQuestNpc(700057).addOnTalkEvent(questId);
 		qe.registerQuestNpc(203604).addOnTalkEvent(questId);
 		qe.addHandlerSideQuestDrop(questId, 700057, 182203208, 1, 100);
-		qe.registerGetingItem(182203208, questId);
+		qe.registerOnGetItem(182203208, questId);
 	}
 
 	@Override

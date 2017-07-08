@@ -265,7 +265,7 @@ public class SiegeLocation implements ZoneHandler {
 					function.accept(c);
 			});
 		} catch (Exception ex) {
-			log.error("Exception when iterating over creatures", ex);
+			log.error("Exception while iterating creatures", ex);
 		}
 	}
 
@@ -276,7 +276,7 @@ public class SiegeLocation implements ZoneHandler {
 					function.accept(p);
 			});
 		} catch (Exception ex) {
-			log.error("Exception when iterating over players", ex);
+			log.error("Exception while iterating players", ex);
 		}
 	}
 }
