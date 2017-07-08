@@ -51,6 +51,11 @@ public class MoveTaskManager extends AbstractPeriodicTaskManager {
 	}
 
 	public void addCreature(Creature creature) {
+		if (!creature.isSpawned()) { // log with stack trace to find the cause
+			LoggerFactory.getLogger(MoveTaskManager.class)
+				.warn("Failed attempt to add " + creature + " to moving creatures (despawned objects cannot move)", new UnsupportedOperationException());
+			return;
+		}
 		movingCreatures.putIfAbsent(creature.getObjectId(), creature);
 	}
 
