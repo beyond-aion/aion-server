@@ -12,7 +12,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 public abstract class CreatureMoveController<T extends VisibleObject> {
 
-	protected static final float MOVE_CHECK_OFFSET = 0.1f;
+	public static final float MOVE_CHECK_OFFSET = 0.1f;
 	protected T owner;
 	protected byte heading;
 	protected long lastMoveUpdate = System.currentTimeMillis();

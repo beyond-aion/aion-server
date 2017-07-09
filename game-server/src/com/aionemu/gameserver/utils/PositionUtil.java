@@ -1,9 +1,11 @@
 package com.aionemu.gameserver.utils;
 
+import com.aionemu.gameserver.controllers.movement.CreatureMoveController;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.HouseObject;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
+import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.geometry.Point3D;
 import com.aionemu.gameserver.model.templates.zone.Point2D;
 import com.aionemu.gameserver.skillengine.properties.AreaDirections;
@@ -252,20 +254,28 @@ public class PositionUtil {
 	public static boolean isInAttackRange(Creature attacker, Creature target, float range) {
 		if (attacker == null || target == null)
 			return false;
-		if (attacker.getMoveController().isInMove())
-			range += calculateMaxDistanceOffset(attacker);
+		if (attacker.getMoveController().isInMove()) {
+			float offset = calculateMaxDistanceOffset(attacker);
+			if (attacker instanceof Player)
+				offset *= 1.33f; // client sends inaccurate coordinates during movement (they're always behind actual position...)
+			range += offset;
+		}
 		if (target.getMoveController().isInMove() && !(attacker instanceof Npc))
 			range += calculateMaxDistanceOffset(target);
 		return isInRange(attacker, target, range, false);
 	}
 
 	private static float calculateMaxDistanceOffset(Creature creature) {
-		float metersPerSecond = creature.getGameStats().getMovementSpeedFloat();
+		float offset = CreatureMoveController.MOVE_CHECK_OFFSET;
 		long lastMove = creature.getMoveController().getLastMoveUpdate();
-		if (lastMove == 0)
-			return 0;
-		long msSinceLastMove = Math.min(1500, System.currentTimeMillis() - lastMove); // cap ms to avoid huge atk ranges during lags
-		return msSinceLastMove == 0 ? 0 : metersPerSecond * msSinceLastMove / 1000;
+		if (lastMove > 0) {
+			int metersPerSecondInThousands = creature.getGameStats().getMovementSpeed().getCurrent();
+			long msSinceLastMove = Math.min(1000, System.currentTimeMillis() - lastMove); // cap ms to avoid huge atk ranges during lags
+			if (msSinceLastMove > 0) {
+				offset += metersPerSecondInThousands * msSinceLastMove / 1000000f;
+			}
+		}
+		return offset;
 	}
 
 	public static boolean isInTalkRange(Creature creature, Npc npc) {

@@ -51,10 +51,8 @@ public class CM_ATTACK extends AionClientPacket {
 		VisibleObject obj = player.getKnownList().getObject(targetObjectId);
 		if (obj instanceof Creature) {
 			player.getController().attackTarget((Creature) obj, time, false);
-		} else {
-			if (obj != null) {
-				log.warn("Attacking unsupported target" + obj + " id " + obj.getObjectTemplate().getTemplateId());
-			}
+		} else if (obj != null) {
+			log.warn(player + " attacking unsupported target " + obj);
 		}
 	}
 }
