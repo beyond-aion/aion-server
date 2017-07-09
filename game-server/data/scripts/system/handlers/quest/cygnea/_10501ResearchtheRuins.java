@@ -6,7 +6,7 @@ import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ITEM_USAGE_ANIMATION;
 import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
-import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
+import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -26,7 +26,7 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
  *               Obtain the Token of Balaur and take it to Mosphera.
  *               Help Mosphera investigate the secret of the suspicious ruins.
  */
-public class _10501ResearchtheRuins extends QuestHandler {
+public class _10501ResearchtheRuins extends AbstractQuestHandler {
 
 	private final static int workItemId = 182215598; // Ruins Location Map
 

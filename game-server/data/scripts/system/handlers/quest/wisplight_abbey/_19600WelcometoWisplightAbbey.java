@@ -3,7 +3,7 @@ package quest.wisplight_abbey;
 import static com.aionemu.gameserver.model.DialogAction.*;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
+import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -12,7 +12,7 @@ import com.aionemu.gameserver.services.QuestService;
 /**
  * @author Pad
  */
-public class _19600WelcometoWisplightAbbey extends QuestHandler {
+public class _19600WelcometoWisplightAbbey extends AbstractQuestHandler {
 
 	private static final int npcId = 804651; // Lena
 	private static final int itemId = 164000335; // Abbey Return Stone

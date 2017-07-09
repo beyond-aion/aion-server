@@ -5,7 +5,7 @@ import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
-import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
+import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -14,7 +14,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 /**
  * @author MrPoke, Dune11
  */
-public class _2125TheRobberyPlot extends QuestHandler {
+public class _2125TheRobberyPlot extends AbstractQuestHandler {
 
 	public _2125TheRobberyPlot() {
 		super(2125);

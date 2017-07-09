@@ -4,7 +4,7 @@ import static com.aionemu.gameserver.model.DialogAction.*;
 
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
+import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -14,7 +14,7 @@ import com.aionemu.gameserver.world.zone.ZoneName;
  * @author Artur
  * @reworked Majka
  */
-public class _24015TotemPlowed extends QuestHandler {
+public class _24015TotemPlowed extends AbstractQuestHandler {
 
 	public _24015TotemPlowed() {
 		super(24015);

@@ -5,7 +5,7 @@ import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
-import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
+import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -15,7 +15,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  * @author MrPoke
  * @modified Majka
  */
-public class _1003IllegalLogging extends QuestHandler {
+public class _1003IllegalLogging extends AbstractQuestHandler {
 
 	private final static int[] mob_ids = { 210096, 210149, 210145, 210146, 210150, 210151, 210092, 210160, 210154, 210685 };
 

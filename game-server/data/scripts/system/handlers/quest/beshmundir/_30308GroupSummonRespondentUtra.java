@@ -7,7 +7,7 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ITEM_USAGE_ANIMATION;
 import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
-import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
+import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -18,7 +18,7 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 /**
  * @author Gigi
  */
-public class _30308GroupSummonRespondentUtra extends QuestHandler {
+public class _30308GroupSummonRespondentUtra extends AbstractQuestHandler {
 
 	public _30308GroupSummonRespondentUtra() {
 		super(30308);

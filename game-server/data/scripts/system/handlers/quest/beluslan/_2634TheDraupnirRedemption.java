@@ -7,7 +7,7 @@ import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_NPC_INFO;
-import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
+import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -18,7 +18,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 /**
  * @author Cheatkiller
  */
-public class _2634TheDraupnirRedemption extends QuestHandler {
+public class _2634TheDraupnirRedemption extends AbstractQuestHandler {
 
 	private final static int[] npcs = { 204828, 700350, 204830 };
 

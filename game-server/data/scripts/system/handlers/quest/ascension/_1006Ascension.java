@@ -17,7 +17,7 @@ import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ASCENSION_MORPH;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
-import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
+import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -40,7 +40,7 @@ import com.aionemu.gameserver.world.zone.ZoneName;
  * @author MrPoke
  * @reworked vlog
  */
-public class _1006Ascension extends QuestHandler {
+public class _1006Ascension extends AbstractQuestHandler {
 
 	public _1006Ascension() {
 		super(1006);

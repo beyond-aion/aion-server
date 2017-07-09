@@ -1,11 +1,11 @@
 package quest.steel_rake;
 
-import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
+import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 
 /**
  * @author vlog TODO: implement
  */
-public class _3217ImprisonedGuardian extends QuestHandler {
+public class _3217ImprisonedGuardian extends AbstractQuestHandler {
 
 	public _3217ImprisonedGuardian() {
 		super(3217);

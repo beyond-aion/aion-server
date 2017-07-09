@@ -4,7 +4,7 @@ import static com.aionemu.gameserver.model.DialogAction.*;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
-import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
+import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -14,7 +14,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  * @author Gigi
  * @modified Pad
  */
-public class _19002ExpertAethertappersTest extends QuestHandler {
+public class _19002ExpertAethertappersTest extends AbstractQuestHandler {
 
 	private static final int itemId1 = 152003007;
 	private static final int itemId2 = 152003008;

@@ -11,7 +11,6 @@ import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
-import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -22,7 +21,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  * @author Altaress, Bobobear
  * @modified Pad
  */
-public class ItemOrders extends QuestHandler {
+public class ItemOrders extends AbstractTemplateQuestHandler {
 
 	private static final Logger log = LoggerFactory.getLogger(ItemOrders.class);
 

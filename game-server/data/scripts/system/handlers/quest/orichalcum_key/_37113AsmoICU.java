@@ -8,7 +8,7 @@ import com.aionemu.gameserver.model.actions.NpcActions;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.team.group.PlayerGroup;
-import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
+import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -19,7 +19,7 @@ import com.aionemu.gameserver.utils.PositionUtil;
 /**
  * @author Cheatkiller
  */
-public class _37113AsmoICU extends QuestHandler {
+public class _37113AsmoICU extends AbstractQuestHandler {
 
 	public _37113AsmoICU() {
 		super(37113);

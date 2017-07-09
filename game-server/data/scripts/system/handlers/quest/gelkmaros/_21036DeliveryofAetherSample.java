@@ -2,7 +2,7 @@ package quest.gelkmaros;
 
 import static com.aionemu.gameserver.model.DialogAction.*;
 
-import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
+import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -10,7 +10,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 /**
  * @author VladimirZ
  */
-public class _21036DeliveryofAetherSample extends QuestHandler {
+public class _21036DeliveryofAetherSample extends AbstractQuestHandler {
 
 	public _21036DeliveryofAetherSample() {
 		super(21036);

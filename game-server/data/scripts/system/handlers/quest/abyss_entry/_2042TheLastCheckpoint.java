@@ -3,7 +3,7 @@ package quest.abyss_entry;
 import static com.aionemu.gameserver.model.DialogAction.*;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
+import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -15,7 +15,7 @@ import com.aionemu.gameserver.services.QuestService;
  * @author Hellboy aion4Free, Hilgert
  * @reworked vlog
  */
-public class _2042TheLastCheckpoint extends QuestHandler {
+public class _2042TheLastCheckpoint extends AbstractQuestHandler {
 
 	private String[] rings = { "MORHEIM_ICE_FORTRESS_220020000_1", "MORHEIM_ICE_FORTRESS_220020000_2", "MORHEIM_ICE_FORTRESS_220020000_3",
 		"MORHEIM_ICE_FORTRESS_220020000_4", "MORHEIM_ICE_FORTRESS_220020000_5", "MORHEIM_ICE_FORTRESS_220020000_6" };

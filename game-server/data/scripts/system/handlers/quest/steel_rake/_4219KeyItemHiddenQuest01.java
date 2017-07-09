@@ -1,11 +1,11 @@
 package quest.steel_rake;
 
-import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
+import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 
 /**
  * @author vlog TODO: implement
  */
-public class _4219KeyItemHiddenQuest01 extends QuestHandler {
+public class _4219KeyItemHiddenQuest01 extends AbstractQuestHandler {
 
 	public _4219KeyItemHiddenQuest01() {
 		super(4219);

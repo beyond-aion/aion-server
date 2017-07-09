@@ -4,7 +4,7 @@ import static com.aionemu.gameserver.model.DialogAction.*;
 
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
+import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -12,7 +12,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 /**
  * @author Mr. Poke, modified Bobobear
  */
-public class _29071ADispatchtoAltgard extends QuestHandler {
+public class _29071ADispatchtoAltgard extends AbstractQuestHandler {
 
 	public _29071ADispatchtoAltgard() {
 		super(29071);

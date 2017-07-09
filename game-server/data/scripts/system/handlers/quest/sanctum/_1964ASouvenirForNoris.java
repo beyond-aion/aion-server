@@ -2,12 +2,12 @@ package quest.sanctum;
 
 import static com.aionemu.gameserver.model.DialogAction.*;
 
-import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
+import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
-public class _1964ASouvenirForNoris extends QuestHandler {
+public class _1964ASouvenirForNoris extends AbstractQuestHandler {
 
 	public _1964ASouvenirForNoris() {
 		super(1964);

@@ -8,7 +8,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_USE_OBJECT;
-import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
+import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -19,7 +19,7 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 /**
  * @author Nephis
  */
-public class _2620SummoningPhagrasul extends QuestHandler {
+public class _2620SummoningPhagrasul extends AbstractQuestHandler {
 
 	private final static int[] mob_ids = { 213109, 213111 };
 

@@ -6,7 +6,7 @@ import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_PLAY_MOVIE;
 import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
-import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
+import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -17,7 +17,7 @@ import com.aionemu.gameserver.world.zone.ZoneName;
 /**
  * @Author Majka
  */
-public class _20031GotoGelkmaros extends QuestHandler {
+public class _20031GotoGelkmaros extends AbstractQuestHandler {
 
 	private final static int[] mobs = { 216091, 216092, 216093, 216095, 216096, 216097 };
 

@@ -5,7 +5,7 @@ import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
-import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
+import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -14,7 +14,7 @@ import com.aionemu.gameserver.world.zone.ZoneName;
 /**
  * @author Pad
  */
-public class _23704LoudNoises extends QuestHandler {
+public class _23704LoudNoises extends AbstractQuestHandler {
 
 	private static final int npcId = 802343; // Rink
 	private static final int itemId = 182215533;

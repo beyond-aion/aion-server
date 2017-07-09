@@ -3,7 +3,7 @@ package quest.eltnen;
 import static com.aionemu.gameserver.model.DialogAction.*;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
+import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -13,7 +13,7 @@ import com.aionemu.gameserver.services.QuestService;
  * @author Artur
  * @modified Majka, Pad
  */
-public class _14023PlayingAroundAtTheTemple extends QuestHandler {
+public class _14023PlayingAroundAtTheTemple extends AbstractQuestHandler {
 
 	public _14023PlayingAroundAtTheTemple() {
 		super(14023);

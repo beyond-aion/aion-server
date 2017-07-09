@@ -6,7 +6,7 @@ import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
-import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
+import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -17,7 +17,7 @@ import com.aionemu.gameserver.world.WorldMapType;
 /**
  * @author xaerolt, Rolandas
  */
-public class _1926SecretLibraryAccess extends QuestHandler {
+public class _1926SecretLibraryAccess extends AbstractQuestHandler {
 
 	private final static int[] npc_ids = { 203894, 203701 };// Latri and Lavirintos
 

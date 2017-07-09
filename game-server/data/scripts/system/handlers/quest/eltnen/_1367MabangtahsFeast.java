@@ -5,7 +5,7 @@ import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.DialogPage;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
+import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -13,7 +13,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 /**
  * @author Atomics
  */
-public class _1367MabangtahsFeast extends QuestHandler {
+public class _1367MabangtahsFeast extends AbstractQuestHandler {
 
 	private static final int ITEM_ID_1 = 182201331;
 	private static final int ITEM_ID_2 = 182201332;

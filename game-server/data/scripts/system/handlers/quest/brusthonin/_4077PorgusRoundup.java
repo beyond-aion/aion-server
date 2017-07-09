@@ -5,7 +5,7 @@ import static com.aionemu.gameserver.model.DialogAction.QUEST_SELECT;
 import com.aionemu.gameserver.model.actions.NpcActions;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
+import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -14,7 +14,7 @@ import com.aionemu.gameserver.utils.PositionUtil;
 /**
  * @author Nephis
  */
-public class _4077PorgusRoundup extends QuestHandler {
+public class _4077PorgusRoundup extends AbstractQuestHandler {
 
 	public _4077PorgusRoundup() {
 		super(4077);

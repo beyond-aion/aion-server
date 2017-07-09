@@ -4,7 +4,7 @@ import static com.aionemu.gameserver.model.DialogAction.*;
 
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
+import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -13,7 +13,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  * @author Artur
  * @modified Majka
  */
-public class _14021ToCureACurse extends QuestHandler {
+public class _14021ToCureACurse extends AbstractQuestHandler {
 
 	private final static int[] mob_ids = { 210771, 210758, 210763, 210764, 210759, 210770 };
 

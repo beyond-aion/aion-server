@@ -6,7 +6,7 @@ import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ITEM_USAGE_ANIMATION;
 import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
-import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
+import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -27,7 +27,7 @@ import com.aionemu.gameserver.world.zone.ZoneName;
  *              Report back to Eukraton.
  *              Meet Eukraton, eliminate Aetheric Field Guards, and discover the secrets of Tiamat's ruins.
  */
-public class _10503GuardDownSecretsOut extends QuestHandler {
+public class _10503GuardDownSecretsOut extends AbstractQuestHandler {
 
 	private final static int mobTargetId = 236252; // Aetheric Field Guard
 	private final static int collectItemId = 182215603; // Old Balaur Document

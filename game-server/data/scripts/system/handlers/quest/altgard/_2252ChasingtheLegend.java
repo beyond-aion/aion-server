@@ -6,7 +6,7 @@ import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
+import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -18,7 +18,7 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
  * @author Ritsu
  * @modified Majka
  */
-public class _2252ChasingtheLegend extends QuestHandler {
+public class _2252ChasingtheLegend extends AbstractQuestHandler {
 
 	private final static int questStartNpcId = 203646; // Sinood
 	private final static int questStep1NpcId = 700060; // Bones of Munishan (Npc)

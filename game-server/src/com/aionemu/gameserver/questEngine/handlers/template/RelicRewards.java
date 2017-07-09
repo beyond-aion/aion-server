@@ -8,7 +8,6 @@ import java.util.Set;
 
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -18,7 +17,7 @@ import com.aionemu.gameserver.services.QuestService;
  * @author Bobobear, Rolandas
  * @modified Pad
  */
-public class RelicRewards extends QuestHandler {
+public class RelicRewards extends AbstractTemplateQuestHandler {
 
 	private final Set<Integer> startNpcIds = new HashSet<>();
 	private boolean isDataDriven;

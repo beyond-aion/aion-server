@@ -3,7 +3,7 @@ package quest.daevanion;
 import static com.aionemu.gameserver.model.DialogAction.QUEST_SELECT;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
+import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -11,7 +11,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 /**
  * @author Pad
  */
-public class _19638TroublewithTwos extends QuestHandler {
+public class _19638TroublewithTwos extends AbstractQuestHandler {
 
 	private static final int[] npcIds = { 798926, 799022 }; // Outremus & Lothas
 	private static final int[] mobIds = { 215510, 215511, 216649, 215514, 215515, 216651 };

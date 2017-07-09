@@ -7,7 +7,7 @@ import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
-import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
+import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -22,7 +22,7 @@ import com.aionemu.gameserver.world.WorldMapType;
  * @author Artur
  * @modified Pad
  */
-public class _14030RetrievedMemory extends QuestHandler {
+public class _14030RetrievedMemory extends AbstractQuestHandler {
 
 	private final static int[] npcs = { 790001, 700551, 205119, 700552, 203700 };
 	private final static int[] mobs = { 211043, 214578, 215396, 215397, 215398, 215399, 215400 };

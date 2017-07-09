@@ -5,7 +5,7 @@ import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.EmotionId;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
+import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -13,7 +13,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 /**
  * @author MrPoke remod By Xitanium and Rolandas
  */
-public class _1468HannetsLostLove extends QuestHandler {
+public class _1468HannetsLostLove extends AbstractQuestHandler {
 
 	public _1468HannetsLostLove() {
 		super(1468);

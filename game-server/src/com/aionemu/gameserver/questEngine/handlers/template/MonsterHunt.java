@@ -16,7 +16,6 @@ import com.aionemu.gameserver.model.rift.RiftLocation;
 import com.aionemu.gameserver.model.templates.quest.QuestCategory;
 import com.aionemu.gameserver.model.templates.quest.QuestItems;
 import com.aionemu.gameserver.model.vortex.VortexLocation;
-import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.handlers.models.Monster;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
@@ -32,7 +31,7 @@ import com.aionemu.gameserver.world.zone.ZoneName;
  * @reworked vlog, Bobobear
  * @modified Pad, Majka
  */
-public class MonsterHunt extends QuestHandler {
+public class MonsterHunt extends AbstractTemplateQuestHandler {
 
 	private static final Logger log = LoggerFactory.getLogger(MonsterHunt.class);
 

@@ -3,7 +3,7 @@ package quest.daevanion;
 import static com.aionemu.gameserver.model.DialogAction.*;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
+import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -11,7 +11,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 /**
  * @author Pad
  */
-public class _29635BeachDay extends QuestHandler {
+public class _29635BeachDay extends AbstractQuestHandler {
 
 	private static final int npcId = 205164; // BuBu Khaaan
 	private static final int[] mobIds = { 214486, 214487, 214482, 214483 };

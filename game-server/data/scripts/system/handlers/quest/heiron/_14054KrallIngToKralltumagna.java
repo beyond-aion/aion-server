@@ -3,7 +3,7 @@ package quest.heiron;
 import static com.aionemu.gameserver.model.DialogAction.*;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
+import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -12,7 +12,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  * @author Artur, Ritsu
  * @modified Majka
  */
-public class _14054KrallIngToKralltumagna extends QuestHandler {
+public class _14054KrallIngToKralltumagna extends AbstractQuestHandler {
 
 	private final static int[] indratu_runaway = { 235483, 235484, 235485, 235486, 235487, 235488, 235489, 235490, 235491, 235492, 235493, 235494,
 		235495, 235496, 235497, 235498, 235499, 235500, 235501, 235502 };

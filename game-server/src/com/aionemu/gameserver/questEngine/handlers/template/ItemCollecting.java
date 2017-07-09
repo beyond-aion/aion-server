@@ -13,7 +13,6 @@ import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.quest.QuestCategory;
 import com.aionemu.gameserver.model.templates.quest.QuestItems;
-import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -25,7 +24,7 @@ import com.aionemu.gameserver.world.zone.ZoneName;
  * @reworked vlog, Rolandas
  * @modified Majka, Pad
  */
-public class ItemCollecting extends QuestHandler {
+public class ItemCollecting extends AbstractTemplateQuestHandler {
 
 	private static final Logger log = LoggerFactory.getLogger(ItemCollecting.class);
 

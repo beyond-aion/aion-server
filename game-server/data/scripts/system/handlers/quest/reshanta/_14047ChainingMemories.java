@@ -7,7 +7,7 @@ import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
-import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
+import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -23,7 +23,7 @@ import com.aionemu.gameserver.world.WorldMapType;
  * @modified Majka
  * @reworked Pad
  */
-public class _14047ChainingMemories extends QuestHandler {
+public class _14047ChainingMemories extends AbstractQuestHandler {
 
 	private static final int icaronixNormalId = 233877; // elite version is not for this quest
 	private final static int[] npc_ids = { 203704, 798154, 204574, 802051, 802052, 278500 };

@@ -7,7 +7,7 @@ import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
-import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
+import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -21,7 +21,7 @@ import com.aionemu.gameserver.world.WorldMapInstance;
  * @author Mr. Poke, edited Rolandas
  * @reworked vlog
  */
-public class _2900NoEscapingDestiny extends QuestHandler {
+public class _2900NoEscapingDestiny extends AbstractQuestHandler {
 
 	public _2900NoEscapingDestiny() {
 		super(2900);

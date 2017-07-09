@@ -14,7 +14,6 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.rift.RiftLocation;
 import com.aionemu.gameserver.model.templates.world.WorldMapTemplate;
 import com.aionemu.gameserver.model.vortex.VortexLocation;
-import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -29,7 +28,7 @@ import com.aionemu.gameserver.services.VortexService;
  * @reworked bobobear
  * @modified Pad
  */
-public class KillInWorld extends QuestHandler {
+public class KillInWorld extends AbstractTemplateQuestHandler {
 
 	private static final Logger log = LoggerFactory.getLogger(KillInWorld.class);
 

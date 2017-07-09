@@ -5,7 +5,7 @@ import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
+import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -15,7 +15,7 @@ import com.aionemu.gameserver.services.teleport.TeleportService;
  * @author Artur
  * @modified Majka
  */
-public class _14046PiecingTheMemory extends QuestHandler {
+public class _14046PiecingTheMemory extends AbstractQuestHandler {
 
 	private final static int[] npc_ids = { 278500, 203834, 203786, 203754, 203704 };
 

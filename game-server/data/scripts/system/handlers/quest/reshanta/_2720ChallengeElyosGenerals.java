@@ -3,7 +3,7 @@ package quest.reshanta;
 import static com.aionemu.gameserver.model.DialogAction.QUEST_SELECT;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
+import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -14,7 +14,7 @@ import com.aionemu.gameserver.utils.stats.AbyssRankEnum;
  * 
  * @author vlog
  */
-public class _2720ChallengeElyosGenerals extends QuestHandler {
+public class _2720ChallengeElyosGenerals extends AbstractQuestHandler {
 
 	private final static int _questId = 2720;
 	private final static AbyssRankEnum _general = AbyssRankEnum.GENERAL;

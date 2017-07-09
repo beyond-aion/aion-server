@@ -5,7 +5,7 @@ import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
-import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
+import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -23,7 +23,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  *              Report back to Nixkon at the Henor Territory Village.
  *              Help Nixkon unravel the secrets of Cygnea.
  */
-public class _10502CygneaSecrets extends QuestHandler {
+public class _10502CygneaSecrets extends AbstractQuestHandler {
 
 	private final static int workItemId = 182215601; // Rubbing Tool Bag
 

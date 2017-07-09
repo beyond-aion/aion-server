@@ -5,7 +5,7 @@ import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
+import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -28,7 +28,7 @@ import com.aionemu.gameserver.world.zone.ZoneName;
  *              Assist Brunte by meeting with Investigator Noep and then pursue Beritra.
  * @ToCheck: correct behaviour of Corridor and spawn.
  */
-public class _10506MindOverMatter extends QuestHandler {
+public class _10506MindOverMatter extends AbstractQuestHandler {
 
 	public _10506MindOverMatter() {
 		super(10506);

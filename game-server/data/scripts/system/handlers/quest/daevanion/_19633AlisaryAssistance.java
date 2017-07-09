@@ -3,7 +3,7 @@ package quest.daevanion;
 import static com.aionemu.gameserver.model.DialogAction.*;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
+import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -11,7 +11,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 /**
  * @author Pad
  */
-public class _19633AlisaryAssistance extends QuestHandler {
+public class _19633AlisaryAssistance extends AbstractQuestHandler {
 
 	private static final int[] npcIds = { 800411, 205304 }; // Banirinrinerk & Ionse
 	private static final int[] mobIds = { 214259, 214260, 214193 };

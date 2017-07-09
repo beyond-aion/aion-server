@@ -5,7 +5,7 @@ import static com.aionemu.gameserver.model.DialogAction.USE_OBJECT;
 import com.aionemu.gameserver.model.PlayerClass;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
+import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -14,7 +14,7 @@ import com.aionemu.gameserver.services.QuestService;
 /**
  * @author MrPoke
  */
-public class _1205ANewSkill extends QuestHandler {
+public class _1205ANewSkill extends AbstractQuestHandler {
 
 	public _1205ANewSkill() {
 		super(1205);

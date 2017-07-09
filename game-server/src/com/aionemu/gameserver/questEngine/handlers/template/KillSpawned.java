@@ -10,7 +10,6 @@ import java.util.Set;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.spawns.SpawnSearchResult;
-import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.handlers.models.Monster;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
@@ -21,7 +20,7 @@ import com.aionemu.gameserver.services.QuestService;
  * @author vlog
  * @modified Pad
  */
-public class KillSpawned extends QuestHandler {
+public class KillSpawned extends AbstractTemplateQuestHandler {
 
 	private final Set<Integer> startNpcIds = new HashSet<>();
 	private final Set<Integer> endNpcIds = new HashSet<>();

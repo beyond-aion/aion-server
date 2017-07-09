@@ -6,7 +6,7 @@ import com.aionemu.gameserver.model.DialogPage;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
-import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
+import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestActionType;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
@@ -18,7 +18,7 @@ import com.aionemu.gameserver.world.zone.ZoneName;
 /**
  * @author Rolandas, Pad, Neon
  */
-public class _28604RecoveringRotan extends QuestHandler {
+public class _28604RecoveringRotan extends AbstractQuestHandler {
 
 	public _28604RecoveringRotan() {
 		super(28604);

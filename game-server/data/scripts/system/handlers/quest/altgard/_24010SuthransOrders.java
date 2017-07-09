@@ -3,7 +3,7 @@ package quest.altgard;
 import static com.aionemu.gameserver.model.DialogAction.QUEST_SELECT;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
+import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -14,7 +14,7 @@ import com.aionemu.gameserver.world.WorldMapType;
  * @author Artur
  * @modified Majka
  */
-public class _24010SuthransOrders extends QuestHandler {
+public class _24010SuthransOrders extends AbstractQuestHandler {
 
 	public _24010SuthransOrders() {
 		super(24010);

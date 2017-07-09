@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.dataholders;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -29,9 +30,10 @@ public class TownSpawnsData {
 	private Set<Integer> allNpcIds;
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
+		allNpcIds = new HashSet<>();
 		for (TownSpawnMap map : spawnMap) {
 			Stream<Spawn> spawns = map.getTownSpawns().stream().flatMap(ts -> ts.getTownLevels().stream().flatMap(tl -> tl.getSpawns().stream()));
-			allNpcIds = spawns.map(Spawn::getNpcId).collect(Collectors.toSet());
+			allNpcIds.addAll(spawns.map(Spawn::getNpcId).collect(Collectors.toList()));
 			spawnMapsData.put(map.getMapId(), map);
 		}
 		spawnMap.clear();

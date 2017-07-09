@@ -12,7 +12,6 @@ import java.util.Set;
 
 import javax.tools.JavaFileObject;
 
-import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -119,8 +118,8 @@ public class ScriptClassLoaderImpl extends ScriptClassLoader {
 			if (file.isDirectory()) {
 				Set<String> packageClasses = ClassUtils.getClassNamesFromPackage(file, packageName, false);
 				classNames.addAll(packageClasses);
-			} else if (FilenameUtils.getExtension(file.getName()).toLowerCase().equals(".jar!")) {
-				while (!FilenameUtils.getExtension(file.getName()).toLowerCase().equals(".jar!")) {
+			} else if (file.getName().toLowerCase().contains(".jar!")) {
+				while (file.getParentFile() != null && !file.getName().toLowerCase().endsWith(".jar!")) {
 					file = file.getParentFile();
 				}
 				// add jar file as library. Actually it's doesn't matter if we have it as library

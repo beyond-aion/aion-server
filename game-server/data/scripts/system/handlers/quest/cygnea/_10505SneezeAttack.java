@@ -6,7 +6,7 @@ import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ITEM_USAGE_ANIMATION;
 import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
-import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
+import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -25,7 +25,7 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
  *              Go to Erivale Territory Village and report back to Averse.
  *              Help Averse uncover Beritra's plans and follow the Balaur's trail.
  */
-public class _10505SneezeAttack extends QuestHandler {
+public class _10505SneezeAttack extends AbstractQuestHandler {
 
 	private final static int workItemId = 182215612; // Restored Beritra's Plans
 

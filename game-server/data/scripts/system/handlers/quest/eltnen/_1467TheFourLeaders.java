@@ -3,7 +3,7 @@ package quest.eltnen;
 import static com.aionemu.gameserver.model.DialogAction.*;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
+import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -13,7 +13,7 @@ import com.aionemu.gameserver.services.QuestService;
  * @author Balthazar
  * @modified Pad
  */
-public class _1467TheFourLeaders extends QuestHandler {
+public class _1467TheFourLeaders extends AbstractQuestHandler {
 
 	private static final int npcId = 204045;
 	private static final int[] mobIds = { 211696, 211697, 211698, 211699 };

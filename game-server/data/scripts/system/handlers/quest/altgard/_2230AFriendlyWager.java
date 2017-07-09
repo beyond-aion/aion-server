@@ -4,7 +4,7 @@ import static com.aionemu.gameserver.model.DialogAction.*;
 
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
+import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -14,7 +14,7 @@ import com.aionemu.gameserver.services.QuestService;
  * @author HellBoy
  * @reworked Majka
  */
-public class _2230AFriendlyWager extends QuestHandler {
+public class _2230AFriendlyWager extends AbstractQuestHandler {
 
 	private final static int questDropItemId = 182203223; // Mosbear Tusks
 	private final static int questStartNpcId = 203621; // Shania

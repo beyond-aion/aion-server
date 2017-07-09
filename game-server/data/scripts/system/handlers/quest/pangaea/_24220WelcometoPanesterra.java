@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
+import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -14,7 +14,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 /**
  * @author Pad
  */
-public class _24220WelcometoPanesterra extends QuestHandler {
+public class _24220WelcometoPanesterra extends AbstractQuestHandler {
 
 	private static final int startEndNpcId = 802542;
 	private static final int talkNpcId = 802543;

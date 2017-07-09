@@ -202,6 +202,11 @@ public class SpawnsData {
 		allNpcIds.addAll(baseSpawnMaps.valueCollection().stream().flatMap(group -> group.stream().map(SpawnGroup::getNpcId)).collect(Collectors.toSet()));
 		allNpcIds
 			.addAll(siegeSpawnMaps.valueCollection().stream().flatMap(group -> group.stream().map(SpawnGroup::getNpcId)).collect(Collectors.toSet()));
+		allNpcIds.addAll(riftSpawnMaps.valueCollection().stream().flatMap(group -> group.stream().map(SpawnGroup::getNpcId)).collect(Collectors.toSet()));
+		allNpcIds
+			.addAll(vortexSpawnMaps.valueCollection().stream().flatMap(group -> group.stream().map(SpawnGroup::getNpcId)).collect(Collectors.toSet()));
+		allNpcIds
+			.addAll(ahserionSpawnMaps.valueCollection().stream().flatMap(group -> group.stream().map(SpawnGroup::getNpcId)).collect(Collectors.toSet()));
 	}
 
 	public void clearTemplates() {

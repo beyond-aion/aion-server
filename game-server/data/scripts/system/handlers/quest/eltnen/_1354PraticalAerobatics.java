@@ -6,7 +6,7 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.LOG;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.TYPE;
-import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
+import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -17,7 +17,7 @@ import com.aionemu.gameserver.skillengine.SkillEngine;
  * @author Ritsu
  * @modified Pad
  */
-public class _1354PraticalAerobatics extends QuestHandler {
+public class _1354PraticalAerobatics extends AbstractQuestHandler {
 
 	// chronological order of the flight rings has been changed
 	private String[] rings = { "ERACUS_TEMPLE_210020000_1", "ERACUS_TEMPLE_210020000_4", "ERACUS_TEMPLE_210020000_3", "ERACUS_TEMPLE_210020000_6",

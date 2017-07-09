@@ -3,7 +3,7 @@ package quest.miragent_holy_templar;
 import static com.aionemu.gameserver.model.DialogAction.*;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
+import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -17,7 +17,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  * 
  * @author vlog, bobobear
  */
-public class _3940Loyalty extends QuestHandler {
+public class _3940Loyalty extends AbstractQuestHandler {
 
 	private static final int[] npcs = { 203701, 203752 };
 	private static final int[] mobs = { 251002, 251021, 251018, 251039, 251033, 251036, 214823, 216850 };

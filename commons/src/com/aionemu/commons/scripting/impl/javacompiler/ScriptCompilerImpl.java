@@ -159,7 +159,7 @@ public class ScriptCompilerImpl implements ScriptCompiler {
 	protected CompilationResult doCompilation(Iterable<JavaFileObject> compilationUnits) {
 		List<String> options = Arrays.asList("-encoding", "UTF-8", "-g");
 		DiagnosticListener<JavaFileObject> listener = new ErrorListener();
-		ClassFileManager manager = new ClassFileManager(ToolProvider.getSystemJavaCompiler(), listener);
+		ClassFileManager manager = new ClassFileManager(javaCompiler, listener);
 		manager.setParentClassLoader(parentClassLoader);
 
 		if (libraries != null) {

@@ -9,7 +9,6 @@ import java.util.Set;
 
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.handlers.models.Monster;
 import com.aionemu.gameserver.questEngine.handlers.models.xmlQuest.events.OnKillEvent;
 import com.aionemu.gameserver.questEngine.handlers.models.xmlQuest.events.OnTalkEvent;
@@ -21,7 +20,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  * @author Mr.Poke
  * @modified Bobobear, Pad
  */
-public class XmlQuest extends QuestHandler {
+public class XmlQuest extends AbstractTemplateQuestHandler {
 
 	private final Set<Integer> startNpcIds = new HashSet<>();
 	private final Set<Integer> endNpcIds = new HashSet<>();

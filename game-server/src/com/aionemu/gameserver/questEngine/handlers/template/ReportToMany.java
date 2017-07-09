@@ -14,7 +14,6 @@ import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.quest.QuestItems;
 import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
-import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.handlers.models.NpcInfos;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
@@ -26,7 +25,7 @@ import com.aionemu.gameserver.services.QuestService;
  * @modified vlog, Pad
  * @reworked Neon
  */
-public class ReportToMany extends QuestHandler {
+public class ReportToMany extends AbstractTemplateQuestHandler {
 
 	private final int startItemId;
 	private final Set<Integer> startNpcIds = new HashSet<>();

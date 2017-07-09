@@ -4,7 +4,7 @@ import static com.aionemu.gameserver.model.DialogAction.*;
 
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
+import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -13,7 +13,7 @@ import com.aionemu.gameserver.services.QuestService;
 /**
  * @Author Majka
  */
-public class _2263ShugoPotion extends QuestHandler {
+public class _2263ShugoPotion extends AbstractQuestHandler {
 
 	private final static int questDropItemId = 182203242; // Malodor Pollen
 	private final static int questStartNpcId = 798036; // Mabrunerk

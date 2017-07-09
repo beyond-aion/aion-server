@@ -8,7 +8,7 @@ import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
-import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
+import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -20,7 +20,7 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 /**
  * @Author Majka
  */
-public class _10034FoundUnderground extends QuestHandler {
+public class _10034FoundUnderground extends AbstractQuestHandler {
 
 	public _10034FoundUnderground() {
 		super(10034);

@@ -1,11 +1,11 @@
 package quest.steel_rake;
 
-import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
+import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 
 /**
  * @author vlog TODO: implement
  */
-public class _4208TruthOfTheBookmark extends QuestHandler {
+public class _4208TruthOfTheBookmark extends AbstractQuestHandler {
 
 	public _4208TruthOfTheBookmark() {
 		super(4208);

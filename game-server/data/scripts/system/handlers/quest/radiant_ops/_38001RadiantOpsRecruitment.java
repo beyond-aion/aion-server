@@ -3,7 +3,7 @@ package quest.radiant_ops;
 import static com.aionemu.gameserver.model.DialogAction.*;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
+import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -12,7 +12,7 @@ import com.aionemu.gameserver.services.QuestService;
 /**
  * @author vlog
  */
-public class _38001RadiantOpsRecruitment extends QuestHandler {
+public class _38001RadiantOpsRecruitment extends AbstractQuestHandler {
 
 	public _38001RadiantOpsRecruitment() {
 		super(38001);

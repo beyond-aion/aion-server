@@ -3,7 +3,7 @@ package quest.pandaemonium;
 import static com.aionemu.gameserver.model.DialogAction.*;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
+import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -11,7 +11,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 /**
  * @author vlog
  */
-public class _2985AnExpertsReward extends QuestHandler {
+public class _2985AnExpertsReward extends AbstractQuestHandler {
 
 	public _2985AnExpertsReward() {
 		super(2985);

@@ -8,7 +8,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ITEM_USAGE_ANIMATION;
 import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
-import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
+import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -20,7 +20,7 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
  * @author Rhys2002
  * @modified Hellboy
  */
-public class _2136TheLostAxe extends QuestHandler {
+public class _2136TheLostAxe extends AbstractQuestHandler {
 
 	private final static int[] npc_ids = { 700146, 790009 };
 

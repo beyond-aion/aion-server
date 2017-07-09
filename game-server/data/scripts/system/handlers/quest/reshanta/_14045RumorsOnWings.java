@@ -11,7 +11,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
-import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
+import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -23,7 +23,7 @@ import com.aionemu.gameserver.world.World;
  * @author Artur
  * @modified Majka
  */
-public class _14045RumorsOnWings extends QuestHandler {
+public class _14045RumorsOnWings extends AbstractQuestHandler {
 
 	public _14045RumorsOnWings() {
 		super(14045);

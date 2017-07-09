@@ -3,7 +3,7 @@ package quest.crafting;
 import static com.aionemu.gameserver.model.DialogAction.*;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
+import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -14,7 +14,7 @@ import com.aionemu.gameserver.services.craft.CraftSkillUpdateService;
  * @author Ritsu
  * @modified Pad
  */
-public class _19052ExpertPassionforConstruction extends QuestHandler {
+public class _19052ExpertPassionforConstruction extends AbstractQuestHandler {
 
 	public _19052ExpertPassionforConstruction() {
 		super(19052);

@@ -7,7 +7,7 @@ import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_PLAY_MOVIE;
 import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
-import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
+import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -19,7 +19,7 @@ import com.aionemu.gameserver.world.zone.ZoneName;
 /**
  * @Author Majka
  */
-public class _10031ARiskfortheObelisk extends QuestHandler {
+public class _10031ARiskfortheObelisk extends AbstractQuestHandler {
 
 	private final static int[] mobs = { 215504, 215505, 215516, 215517, 215518, 215519, 216463, 216464, 216647, 216648, 216691, 216692, 216782, 216783,
 		215508, 215509 };

@@ -5,7 +5,7 @@ import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
-import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
+import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -19,7 +19,7 @@ import com.aionemu.gameserver.world.zone.ZoneName;
  * @reworked Ritsu
  * @modified Majka
  */
-public class _24013PoisonInTheWaters extends QuestHandler {
+public class _24013PoisonInTheWaters extends AbstractQuestHandler {
 
 	private final static int[] mobs = { 210455, 210456, 214039, 210458, 214032 };
 

@@ -4,7 +4,7 @@ import static com.aionemu.gameserver.model.DialogAction.*;
 
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
+import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -16,7 +16,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  * 
  * @author vlog
  */
-public class _3502NereusNeedsYou extends QuestHandler {
+public class _3502NereusNeedsYou extends AbstractQuestHandler {
 
 	private final static int[] npcs = { 204656, 203752, 730192 };
 	private final static int[] mobs = { 214894, 214895, 214896, 214897, 214904 };

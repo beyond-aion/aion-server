@@ -7,7 +7,7 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ITEM_USAGE_ANIMATION;
 import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
-import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
+import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -21,7 +21,7 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
  * @author Balthazar
  * @reworked vlog
  */
-public class _1561TheMisersMap extends QuestHandler {
+public class _1561TheMisersMap extends AbstractQuestHandler {
 
 	public _1561TheMisersMap() {
 		super(1561);

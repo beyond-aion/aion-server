@@ -3,7 +3,7 @@ package quest.abyss_entry;
 import static com.aionemu.gameserver.model.DialogAction.*;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
+import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -17,7 +17,7 @@ import com.aionemu.gameserver.world.WorldMapInstance;
  * @modified Gigi, Rolandas
  * @reworked vlog On 2.5 the quest has dialogs only for one choice (underground arena)
  */
-public class _1922DeliveronYourPromises extends QuestHandler {
+public class _1922DeliveronYourPromises extends AbstractQuestHandler {
 
 	public _1922DeliveronYourPromises() {
 		super(1922);
