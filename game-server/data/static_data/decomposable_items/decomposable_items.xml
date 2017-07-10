@@ -29036,11 +29036,11 @@
 		</items>
 	</decomposable>
 	<decomposable item_id="188053322"><!-- Levinshor Alliance Manastone Box -->
-		<items>
-			<random_item type="MANASTONE_COMMON_GRADE_70" />
+		<items chance="40">
+			<random_item type="MANASTONE_COMMON_GRADE_70" max_count="3" />
 		</items>
-		<items>
-			<random_item type="MANASTONE_RARE_GRADE_70" />
+		<items chance="60">
+			<random_item type="MANASTONE_RARE_GRADE_70" max_count="3" />
 		</items>
 	</decomposable>
 	<decomposable item_id="188053323"><!-- Levinshor Alliance Ancient Manastone Box -->
