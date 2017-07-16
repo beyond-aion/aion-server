@@ -34319,12 +34319,14 @@
 		<npc_skill id="20490" lv="20" prob="0" />
 	</npc_skills>
 	<npc_skills npc_ids="219183">
-		<npc_skill id="19428" lv="1" prob="25" />
-		<npc_skill id="19417" lv="49" prob="25" />
+		<npc_skill id="19428" lv="1" prob="100" prio="1" max_hp="66" cd="180000" next_skill_time="2000" next_chain_id="1" />
+		<npc_skill id="19417" lv="49" prob="100" chain_id="1">
+			<spawn_npc npc_id="219186" delay="3000" />
+		</npc_skill>
 	</npc_skills>
 	<npc_skills npc_ids="219186">
-		<npc_skill id="19428" lv="1" prob="25" />
-		<npc_skill id="19425" lv="49" prob="25" />
+		<npc_skill id="19428" lv="1" prob="100" prio="1" cd="180000" next_skill_time="2000" next_chain_id="1" />
+		<npc_skill id="19425" lv="49" prob="100" chain_id="1" />
 	</npc_skills>
 	<npc_skills npc_ids="219203">
 		<npc_skill id="20242" lv="60" prob="25" min_hp="92" max_hp="100" />
