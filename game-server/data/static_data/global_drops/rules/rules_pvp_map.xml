@@ -346,8 +346,8 @@
 			<gd_map map_id="301220000" /><!-- Iron_Wall_Warfront -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="219218"/><!-- Keymaster Chookuri -->
-			<gd_npc npc_id="219191"/><!-- Keymaster Niksi -->
+			<gd_npc npc_id="219218" /><!-- Keymaster Chookuri -->
+			<gd_npc npc_id="219191" /><!-- Keymaster Niksi -->
 			<gd_npc npc_id="231196" /><!-- roaring kamara -->
 			<gd_npc npc_id="233740" /><!-- test weapon dynatoum -->
 			<gd_npc npc_id="235759" /><!-- fugitive mazikin leader -->
@@ -379,7 +379,7 @@
 			<gd_map map_id="301220000" /><!-- Iron_Wall_Warfront -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="219192"/><!-- Keymaster Zumita -->
+			<gd_npc npc_id="219192" /><!-- Keymaster Zumita -->
 			<gd_npc npc_id="231196" /><!-- roaring kamara -->
 			<gd_npc npc_id="233740" /><!-- test weapon dynatoum -->
 			<gd_npc npc_id="235759" /><!-- fugitive mazikin leader -->
@@ -411,7 +411,7 @@
 			<gd_map map_id="301220000" /><!-- Iron_Wall_Warfront -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="219193"/><!-- Keymaster Dabra -->
+			<gd_npc npc_id="219193" /><!-- Keymaster Dabra -->
 			<gd_npc npc_id="231196" /><!-- roaring kamara -->
 			<gd_npc npc_id="233740" /><!-- test weapon dynatoum -->
 			<gd_npc npc_id="235759" /><!-- fugitive mazikin leader -->
@@ -436,6 +436,313 @@
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="185000116" /><!-- Protectorate's Treasure Box Key -->
+		</gd_items>
+	</gd_rule>
+	<!-- Balic Hearts -->
+	<gd_rule rule_name="Balaur Heart" base_chance="8">
+		<gd_maps>
+			<gd_map map_id="301220000" /><!-- Iron_Wall_Warfront -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="218544" /><!-- protectorate special enforcer -->
+			<gd_npc npc_id="218545" /><!-- protectorate special stalker -->
+			<gd_npc npc_id="218546" /><!-- protectorate special seer -->
+			<gd_npc npc_id="218547" /><!-- protectorate special orderly -->
+			<gd_npc npc_id="218548" /><!-- protectorate warlord -->
+			<gd_npc npc_id="218549" /><!-- protectorate shadow -->
+			<gd_npc npc_id="218550" /><!-- protectorate highmagus -->
+			<gd_npc npc_id="218551" /><!-- protectorate surgeon -->
+			<gd_npc npc_id="218920" /><!-- balaur aethercannon -->
+			<gd_npc npc_id="219166" /><!-- protectorate combat officer -->
+			<gd_npc npc_id="219167" /><!-- protectorate hunter -->
+			<gd_npc npc_id="219169" /><!-- protectorate corpsman -->
+			<gd_npc npc_id="219187" /><!-- protectorate fighter -->
+			<gd_npc npc_id="219188" /><!-- protectorate searcher -->
+			<gd_npc npc_id="219189" /><!-- protectorate mage -->
+			<gd_npc npc_id="219190" /><!-- protectorate healer -->
+			<gd_npc npc_id="219194" /><!-- protectorate myrmidon -->
+			<gd_npc npc_id="219195" /><!-- protectorate pathfinder -->
+			<gd_npc npc_id="219196" /><!-- protectorate magistrate -->
+			<gd_npc npc_id="219197" /><!-- protectorate surgeon -->
+			<gd_npc npc_id="219198" /><!-- protectorate special ops -->
+			<gd_npc npc_id="219218" /><!-- Keymaster Chookuri -->
+			<gd_npc npc_id="219191" /><!-- Keymaster Niksi -->
+			<gd_npc npc_id="219192" /><!-- Keymaster Zumita -->
+			<gd_npc npc_id="219193" /><!-- Keymaster Dabra -->
+			<gd_npc npc_id="235771" /><!-- velkur aetherknife -->
+			<gd_npc npc_id="235619" /><!-- warmage suyaroka -->
+			<gd_npc npc_id="235620" /><!-- chief medic tagnu -->
+			<gd_npc npc_id="235621" /><!-- virulent ukahim -->
+			<gd_npc npc_id="230857" /><!-- guard captain ahuradim -->
+			<gd_npc npc_id="230858" /><!-- brigade general sheba -->
+		</gd_npcs>
+		<gd_items>
+			<!-- Level 60 -->
+			<gd_item id="186000097" /><!-- Burning Balaur Heart -->
+		</gd_items>
+	</gd_rule>
+	<!-- Balic Souls -->
+	<gd_rule rule_name="Balaur Souls (Rare)" base_chance="9">
+		<gd_maps>
+			<gd_map map_id="301220000" /><!-- Iron_Wall_Warfront -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="218544" /><!-- protectorate special enforcer -->
+			<gd_npc npc_id="218545" /><!-- protectorate special stalker -->
+			<gd_npc npc_id="218546" /><!-- protectorate special seer -->
+			<gd_npc npc_id="218547" /><!-- protectorate special orderly -->
+			<gd_npc npc_id="218548" /><!-- protectorate warlord -->
+			<gd_npc npc_id="218549" /><!-- protectorate shadow -->
+			<gd_npc npc_id="218550" /><!-- protectorate highmagus -->
+			<gd_npc npc_id="218551" /><!-- protectorate surgeon -->
+			<gd_npc npc_id="218920" /><!-- balaur aethercannon -->
+			<gd_npc npc_id="219166" /><!-- protectorate combat officer -->
+			<gd_npc npc_id="219167" /><!-- protectorate hunter -->
+			<gd_npc npc_id="219169" /><!-- protectorate corpsman -->
+			<gd_npc npc_id="219187" /><!-- protectorate fighter -->
+			<gd_npc npc_id="219188" /><!-- protectorate searcher -->
+			<gd_npc npc_id="219189" /><!-- protectorate mage -->
+			<gd_npc npc_id="219190" /><!-- protectorate healer -->
+			<gd_npc npc_id="219194" /><!-- protectorate myrmidon -->
+			<gd_npc npc_id="219195" /><!-- protectorate pathfinder -->
+			<gd_npc npc_id="219196" /><!-- protectorate magistrate -->
+			<gd_npc npc_id="219197" /><!-- protectorate surgeon -->
+			<gd_npc npc_id="219198" /><!-- protectorate special ops -->
+			<gd_npc npc_id="219218" /><!-- Keymaster Chookuri -->
+			<gd_npc npc_id="219191" /><!-- Keymaster Niksi -->
+			<gd_npc npc_id="219192" /><!-- Keymaster Zumita -->
+			<gd_npc npc_id="219193" /><!-- Keymaster Dabra -->
+			<gd_npc npc_id="235771" /><!-- velkur aetherknife -->
+			<gd_npc npc_id="235619" /><!-- warmage suyaroka -->
+			<gd_npc npc_id="235620" /><!-- chief medic tagnu -->
+			<gd_npc npc_id="235621" /><!-- virulent ukahim -->
+			<gd_npc npc_id="230857" /><!-- guard captain ahuradim -->
+			<gd_npc npc_id="230858" /><!-- brigade general sheba -->
+		</gd_npcs>
+		<gd_items>
+			<!-- Level 60 -->
+			<gd_item id="152013028" /><!-- Urge of Wrath -->
+			<gd_item id="152013031" /><!-- Urge of Terror -->
+			<gd_item id="152013034" /><!-- Urge of Pleasure -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Balaur Souls (Legend)" base_chance="4.5">
+		<gd_maps>
+			<gd_map map_id="301220000" /><!-- Iron_Wall_Warfront -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="218544" /><!-- protectorate special enforcer -->
+			<gd_npc npc_id="218545" /><!-- protectorate special stalker -->
+			<gd_npc npc_id="218546" /><!-- protectorate special seer -->
+			<gd_npc npc_id="218547" /><!-- protectorate special orderly -->
+			<gd_npc npc_id="218548" /><!-- protectorate warlord -->
+			<gd_npc npc_id="218549" /><!-- protectorate shadow -->
+			<gd_npc npc_id="218550" /><!-- protectorate highmagus -->
+			<gd_npc npc_id="218551" /><!-- protectorate surgeon -->
+			<gd_npc npc_id="218920" /><!-- balaur aethercannon -->
+			<gd_npc npc_id="219166" /><!-- protectorate combat officer -->
+			<gd_npc npc_id="219167" /><!-- protectorate hunter -->
+			<gd_npc npc_id="219169" /><!-- protectorate corpsman -->
+			<gd_npc npc_id="219187" /><!-- protectorate fighter -->
+			<gd_npc npc_id="219188" /><!-- protectorate searcher -->
+			<gd_npc npc_id="219189" /><!-- protectorate mage -->
+			<gd_npc npc_id="219190" /><!-- protectorate healer -->
+			<gd_npc npc_id="219194" /><!-- protectorate myrmidon -->
+			<gd_npc npc_id="219195" /><!-- protectorate pathfinder -->
+			<gd_npc npc_id="219196" /><!-- protectorate magistrate -->
+			<gd_npc npc_id="219197" /><!-- protectorate surgeon -->
+			<gd_npc npc_id="219198" /><!-- protectorate special ops -->
+			<gd_npc npc_id="219218" /><!-- Keymaster Chookuri -->
+			<gd_npc npc_id="219191" /><!-- Keymaster Niksi -->
+			<gd_npc npc_id="219192" /><!-- Keymaster Zumita -->
+			<gd_npc npc_id="219193" /><!-- Keymaster Dabra -->
+			<gd_npc npc_id="235771" /><!-- velkur aetherknife -->
+			<gd_npc npc_id="235619" /><!-- warmage suyaroka -->
+			<gd_npc npc_id="235620" /><!-- chief medic tagnu -->
+			<gd_npc npc_id="235621" /><!-- virulent ukahim -->
+			<gd_npc npc_id="230857" /><!-- guard captain ahuradim -->
+			<gd_npc npc_id="230858" /><!-- brigade general sheba -->
+		</gd_npcs>
+		<gd_items>
+			<!-- Level 60 -->
+			<gd_item id="152013029" /><!-- Maddened Urge of Wrath -->
+			<gd_item id="152013032" /><!-- Berserk Urge of Terror -->
+			<gd_item id="152013035" /><!-- Fatal Urge of Pleasure -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Balaur Souls (Unique)" base_chance="2.25">
+		<gd_maps>
+			<gd_map map_id="301220000" /><!-- Iron_Wall_Warfront -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="218544" /><!-- protectorate special enforcer -->
+			<gd_npc npc_id="218545" /><!-- protectorate special stalker -->
+			<gd_npc npc_id="218546" /><!-- protectorate special seer -->
+			<gd_npc npc_id="218547" /><!-- protectorate special orderly -->
+			<gd_npc npc_id="218548" /><!-- protectorate warlord -->
+			<gd_npc npc_id="218549" /><!-- protectorate shadow -->
+			<gd_npc npc_id="218550" /><!-- protectorate highmagus -->
+			<gd_npc npc_id="218551" /><!-- protectorate surgeon -->
+			<gd_npc npc_id="218920" /><!-- balaur aethercannon -->
+			<gd_npc npc_id="219166" /><!-- protectorate combat officer -->
+			<gd_npc npc_id="219167" /><!-- protectorate hunter -->
+			<gd_npc npc_id="219169" /><!-- protectorate corpsman -->
+			<gd_npc npc_id="219187" /><!-- protectorate fighter -->
+			<gd_npc npc_id="219188" /><!-- protectorate searcher -->
+			<gd_npc npc_id="219189" /><!-- protectorate mage -->
+			<gd_npc npc_id="219190" /><!-- protectorate healer -->
+			<gd_npc npc_id="219194" /><!-- protectorate myrmidon -->
+			<gd_npc npc_id="219195" /><!-- protectorate pathfinder -->
+			<gd_npc npc_id="219196" /><!-- protectorate magistrate -->
+			<gd_npc npc_id="219197" /><!-- protectorate surgeon -->
+			<gd_npc npc_id="219198" /><!-- protectorate special ops -->
+			<gd_npc npc_id="219218" /><!-- Keymaster Chookuri -->
+			<gd_npc npc_id="219191" /><!-- Keymaster Niksi -->
+			<gd_npc npc_id="219192" /><!-- Keymaster Zumita -->
+			<gd_npc npc_id="219193" /><!-- Keymaster Dabra -->
+			<gd_npc npc_id="235771" /><!-- velkur aetherknife -->
+			<gd_npc npc_id="235619" /><!-- warmage suyaroka -->
+			<gd_npc npc_id="235620" /><!-- chief medic tagnu -->
+			<gd_npc npc_id="235621" /><!-- virulent ukahim -->
+			<gd_npc npc_id="230857" /><!-- guard captain ahuradim -->
+			<gd_npc npc_id="230858" /><!-- brigade general sheba -->
+		</gd_npcs>
+		<gd_items>
+			<!-- Level 60 -->
+			<gd_item id="152013030" /><!-- Clouded Urge of Wrath -->
+			<gd_item id="152013033" /><!-- Furious Urge of Terror -->
+			<gd_item id="152013036" /><!-- Inescapable Urge of Pleasure -->
+		</gd_items>
+	</gd_rule>
+	<!-- Balic Horns & Scales -->
+	<gd_rule rule_name="Balaur Horns + Scales" base_chance="12.5">
+		<gd_maps>
+			<gd_map map_id="301220000" /><!-- Iron_Wall_Warfront -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="218544" /><!-- protectorate special enforcer -->
+			<gd_npc npc_id="218545" /><!-- protectorate special stalker -->
+			<gd_npc npc_id="218546" /><!-- protectorate special seer -->
+			<gd_npc npc_id="218547" /><!-- protectorate special orderly -->
+			<gd_npc npc_id="218548" /><!-- protectorate warlord -->
+			<gd_npc npc_id="218549" /><!-- protectorate shadow -->
+			<gd_npc npc_id="218550" /><!-- protectorate highmagus -->
+			<gd_npc npc_id="218551" /><!-- protectorate surgeon -->
+			<gd_npc npc_id="218920" /><!-- balaur aethercannon -->
+			<gd_npc npc_id="219166" /><!-- protectorate combat officer -->
+			<gd_npc npc_id="219167" /><!-- protectorate hunter -->
+			<gd_npc npc_id="219169" /><!-- protectorate corpsman -->
+			<gd_npc npc_id="219187" /><!-- protectorate fighter -->
+			<gd_npc npc_id="219188" /><!-- protectorate searcher -->
+			<gd_npc npc_id="219189" /><!-- protectorate mage -->
+			<gd_npc npc_id="219190" /><!-- protectorate healer -->
+			<gd_npc npc_id="219194" /><!-- protectorate myrmidon -->
+			<gd_npc npc_id="219195" /><!-- protectorate pathfinder -->
+			<gd_npc npc_id="219196" /><!-- protectorate magistrate -->
+			<gd_npc npc_id="219197" /><!-- protectorate surgeon -->
+			<gd_npc npc_id="219198" /><!-- protectorate special ops -->
+			<gd_npc npc_id="219218" /><!-- Keymaster Chookuri -->
+			<gd_npc npc_id="219191" /><!-- Keymaster Niksi -->
+			<gd_npc npc_id="219192" /><!-- Keymaster Zumita -->
+			<gd_npc npc_id="219193" /><!-- Keymaster Dabra -->
+			<gd_npc npc_id="235771" /><!-- velkur aetherknife -->
+			<gd_npc npc_id="235619" /><!-- warmage suyaroka -->
+			<gd_npc npc_id="235620" /><!-- chief medic tagnu -->
+			<gd_npc npc_id="235621" /><!-- virulent ukahim -->
+			<gd_npc npc_id="230857" /><!-- guard captain ahuradim -->
+			<gd_npc npc_id="230858" /><!-- brigade general sheba -->
+		</gd_npcs>
+		<gd_items>
+			<!-- Level 60 -->
+			<gd_item id="152014016" /><!-- Firm Balaur Horn -->
+			<gd_item id="152014017" /><!-- Firm Balaur Scale -->
+		</gd_items>
+	</gd_rule>
+	<!-- Balic Skin & Meat -->
+	<gd_rule rule_name="Balaur Flesh" base_chance="12.5">
+		<gd_maps>
+			<gd_map map_id="301220000" /><!-- Iron_Wall_Warfront -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="218544" /><!-- protectorate special enforcer -->
+			<gd_npc npc_id="218545" /><!-- protectorate special stalker -->
+			<gd_npc npc_id="218546" /><!-- protectorate special seer -->
+			<gd_npc npc_id="218547" /><!-- protectorate special orderly -->
+			<gd_npc npc_id="218548" /><!-- protectorate warlord -->
+			<gd_npc npc_id="218549" /><!-- protectorate shadow -->
+			<gd_npc npc_id="218550" /><!-- protectorate highmagus -->
+			<gd_npc npc_id="218551" /><!-- protectorate surgeon -->
+			<gd_npc npc_id="218920" /><!-- balaur aethercannon -->
+			<gd_npc npc_id="219166" /><!-- protectorate combat officer -->
+			<gd_npc npc_id="219167" /><!-- protectorate hunter -->
+			<gd_npc npc_id="219169" /><!-- protectorate corpsman -->
+			<gd_npc npc_id="219187" /><!-- protectorate fighter -->
+			<gd_npc npc_id="219188" /><!-- protectorate searcher -->
+			<gd_npc npc_id="219189" /><!-- protectorate mage -->
+			<gd_npc npc_id="219190" /><!-- protectorate healer -->
+			<gd_npc npc_id="219194" /><!-- protectorate myrmidon -->
+			<gd_npc npc_id="219195" /><!-- protectorate pathfinder -->
+			<gd_npc npc_id="219196" /><!-- protectorate magistrate -->
+			<gd_npc npc_id="219197" /><!-- protectorate surgeon -->
+			<gd_npc npc_id="219198" /><!-- protectorate special ops -->
+			<gd_npc npc_id="219218" /><!-- Keymaster Chookuri -->
+			<gd_npc npc_id="219191" /><!-- Keymaster Niksi -->
+			<gd_npc npc_id="219192" /><!-- Keymaster Zumita -->
+			<gd_npc npc_id="219193" /><!-- Keymaster Dabra -->
+			<gd_npc npc_id="235771" /><!-- velkur aetherknife -->
+			<gd_npc npc_id="235619" /><!-- warmage suyaroka -->
+			<gd_npc npc_id="235620" /><!-- chief medic tagnu -->
+			<gd_npc npc_id="235621" /><!-- virulent ukahim -->
+			<gd_npc npc_id="230857" /><!-- guard captain ahuradim -->
+			<gd_npc npc_id="230858" /><!-- brigade general sheba -->
+		</gd_npcs>
+		<gd_items>
+			<!-- Level 60 -->
+			<gd_item id="152014018" /><!-- Firm Balaur Skin -->
+			<gd_item id="152014020" /><!-- Lustrous Balaur Meat -->
+		</gd_items>
+	</gd_rule>
+	<!-- Balic Blood -->
+	<gd_rule rule_name="Balaur Blood" base_chance="12.5">
+		<gd_maps>
+			<gd_map map_id="301220000" /><!-- Iron_Wall_Warfront -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="218544" /><!-- protectorate special enforcer -->
+			<gd_npc npc_id="218545" /><!-- protectorate special stalker -->
+			<gd_npc npc_id="218546" /><!-- protectorate special seer -->
+			<gd_npc npc_id="218547" /><!-- protectorate special orderly -->
+			<gd_npc npc_id="218548" /><!-- protectorate warlord -->
+			<gd_npc npc_id="218549" /><!-- protectorate shadow -->
+			<gd_npc npc_id="218550" /><!-- protectorate highmagus -->
+			<gd_npc npc_id="218551" /><!-- protectorate surgeon -->
+			<gd_npc npc_id="218920" /><!-- balaur aethercannon -->
+			<gd_npc npc_id="219166" /><!-- protectorate combat officer -->
+			<gd_npc npc_id="219167" /><!-- protectorate hunter -->
+			<gd_npc npc_id="219169" /><!-- protectorate corpsman -->
+			<gd_npc npc_id="219187" /><!-- protectorate fighter -->
+			<gd_npc npc_id="219188" /><!-- protectorate searcher -->
+			<gd_npc npc_id="219189" /><!-- protectorate mage -->
+			<gd_npc npc_id="219190" /><!-- protectorate healer -->
+			<gd_npc npc_id="219194" /><!-- protectorate myrmidon -->
+			<gd_npc npc_id="219195" /><!-- protectorate pathfinder -->
+			<gd_npc npc_id="219196" /><!-- protectorate magistrate -->
+			<gd_npc npc_id="219197" /><!-- protectorate surgeon -->
+			<gd_npc npc_id="219198" /><!-- protectorate special ops -->
+			<gd_npc npc_id="219218" /><!-- Keymaster Chookuri -->
+			<gd_npc npc_id="219191" /><!-- Keymaster Niksi -->
+			<gd_npc npc_id="219192" /><!-- Keymaster Zumita -->
+			<gd_npc npc_id="219193" /><!-- Keymaster Dabra -->
+			<gd_npc npc_id="235771" /><!-- velkur aetherknife -->
+			<gd_npc npc_id="235619" /><!-- warmage suyaroka -->
+			<gd_npc npc_id="235620" /><!-- chief medic tagnu -->
+			<gd_npc npc_id="235621" /><!-- virulent ukahim -->
+			<gd_npc npc_id="230857" /><!-- guard captain ahuradim -->
+			<gd_npc npc_id="230858" /><!-- brigade general sheba -->
+		</gd_npcs>
+		<gd_items>
+			<!-- Level 60 -->
+			<gd_item id="152014019" /><!-- Burning Balaur Blood Stain -->
 		</gd_items>
 	</gd_rule>
 </global_rules>
