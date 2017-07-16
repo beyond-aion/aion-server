@@ -752,8 +752,8 @@ public class Skill {
 
 		endCondCheck();
 
-		if (this.getSkillTemplate().isDeityAvatar() && effector instanceof Player) {
-			AbyssService.rankerSkillAnnounce((Player) effector, this.getSkillTemplate().getNameId());
+		if (getSkillTemplate().isDeityAvatar() && effector instanceof Player) {
+			AbyssService.rankerSkillAnnounce((Player) effector, getSkillTemplate().getNameId());
 		}
 
 		if (effector instanceof Npc) {
@@ -763,7 +763,10 @@ public class Skill {
 				if (lastSkill.isQueued()) {
 					npc.getQueuedSkills().poll();
 				}
-				lastSkill.fireOnEndCastEvents(npc);
+				if (!npc.isDead()) {
+					lastSkill.fireOnEndCastEvents(npc);
+					npc.getAi().onEndUseSkill(lastSkill);
+				}
 			}
 			SkillAttackManager.afterUseSkill((NpcAI) effector.getAi());
 		}

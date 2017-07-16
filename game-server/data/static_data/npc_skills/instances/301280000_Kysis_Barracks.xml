@@ -3,16 +3,16 @@
 	<!-- Kysis Duke -->
 	<npc_skills npc_ids="233675 233676">
 		<npc_skill id="18003" lv="1" prob="100" max_hp="25" cd="600000" target="ME">
-			<cond cond_type="SPAWN_NPC" npc_id="284978" min_distance="1" max_distance="1" random_direction="true" min_amount="1" max_amount="1"/>
+			<spawn_npc npc_id="284978" min_distance="1" max_distance="1" min_count="1" max_count="1" />
 		</npc_skill>
-		<npc_skill id="18204" lv="65" prob="25" cd="10000"/>
-      <npc_skill id="18205" lv="65" prob="25" cd="10000"/>
-      <npc_skill id="18206" lv="65" prob="25" cd="10000"/>
-      <npc_skill id="18207" lv="65" prob="25"/>
-      <npc_skill id="18208" lv="65" prob="25"/>
-      <npc_skill id="18209" lv="65" prob="25" max_hp="50"/>
-      <npc_skill id="18210" lv="65" prob="25" cd="30000"/>
-      <npc_skill id="18211" lv="65" prob="25" max_hp="50" cd="30000"/>
-      <npc_skill id="18594" lv="65" prob="50" cd="30000"/>
-   </npc_skills>
+		<npc_skill id="18204" lv="65" prob="25" cd="10000" />
+		<npc_skill id="18205" lv="65" prob="25" cd="10000" />
+		<npc_skill id="18206" lv="65" prob="25" cd="10000" />
+		<npc_skill id="18207" lv="65" prob="25" />
+		<npc_skill id="18208" lv="65" prob="25" />
+		<npc_skill id="18209" lv="65" prob="25" max_hp="50" />
+		<npc_skill id="18210" lv="65" prob="25" cd="30000" />
+		<npc_skill id="18211" lv="65" prob="25" max_hp="50" cd="30000" />
+		<npc_skill id="18594" lv="65" prob="50" cd="30000" />
+	</npc_skills>
 </npc_skill_templates>

@@ -24,18 +24,6 @@ public class NpcSkillConditionTemplate {
 	protected int npc_id;
 	@XmlAttribute(name = "delay")
 	protected int delay;
-	@XmlAttribute(name = "min_distance")
-	protected int min_distance;
-	@XmlAttribute(name = "max_distance")
-	protected int max_distance;
-	@XmlAttribute(name = "direction")
-	protected int direction;
-	@XmlAttribute(name = "random_direction")
-	protected boolean random_direction;
-	@XmlAttribute(name = "min_amount")
-	protected int min_amount = 1;
-	@XmlAttribute(name = "max_amount")
-	protected int max_amount = 0;
 	@XmlAttribute(name = "can_die")
 	protected boolean canDie = true;
 	@XmlAttribute(name = "despawn_time")
@@ -63,30 +51,6 @@ public class NpcSkillConditionTemplate {
 
 	public int getDelay() {
 		return delay;
-	}
-
-	public int getMinDistance() {
-		return min_distance;
-	}
-
-	public int getMaxDistance() {
-		return max_distance;
-	}
-
-	public int getDirection() {
-		return direction;
-	}
-
-	public boolean isRandomDirection() {
-		return random_direction;
-	}
-
-	public int getMinAmount() {
-		return min_amount;
-	}
-
-	public int getMaxAmount() {
-		return max_amount;
 	}
 
 	public boolean canDie() {
