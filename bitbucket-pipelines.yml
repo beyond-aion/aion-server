@@ -4,21 +4,29 @@ pipelines:
   custom: # Pipelines that are triggered manually
     build-chat-server:
       - step:
+          caches:
+            - maven
           script:
             - mvn -f commons/pom.xml install
             - mvn -f chat-server/pom.xml package -Dftp.url=$LIVESERVER_FTP_URL
     build-game-server:
       - step:
+          caches:
+            - maven
           script:
             - mvn -f commons/pom.xml install
             - mvn -f game-server/pom.xml package -Dftp.url=$LIVESERVER_FTP_URL
     build-login-server:
       - step:
+          caches:
+            - maven
           script:
             - mvn -f commons/pom.xml install
             - mvn -f login-server/pom.xml package -Dftp.url=$LIVESERVER_FTP_URL
   default: # default action on commit
     - step:
+        caches:
+            - maven
         script:
           - mvn -f commons/pom.xml install
           - mvn -f chat-server/pom.xml compile
