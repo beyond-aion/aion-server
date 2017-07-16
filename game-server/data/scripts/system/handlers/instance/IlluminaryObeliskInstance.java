@@ -15,6 +15,7 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.player.PlayerReviveService;
 import com.aionemu.gameserver.services.teleport.TeleportService;
@@ -44,7 +45,7 @@ public class IlluminaryObeliskInstance extends GeneralInstanceHandler {
 			PacketSendUtility.broadcastToMap(instance, SM_SYSTEM_MESSAGE.STR_MSG_IDF5_U3_DOOR_OPEN());
 			instance.getDoors().get(129).setOpen(true);
 			scheduleWipe(3000);
-		}, 6000);
+		}, 60000);
 	}
 
 	protected void scheduleWipe(int delay) {
@@ -365,8 +366,14 @@ public class IlluminaryObeliskInstance extends GeneralInstanceHandler {
 	}
 
 	@Override
+	public boolean onDie(final Player player, Creature lastAttacker) {
+		PacketSendUtility.sendPacket(player, new SM_DIE(player, 8));
+		return true;
+	}
+
+	@Override
 	public boolean onReviveEvent(Player player) {
-		PlayerReviveService.revive(player, 25, 25, false, 0);
+		PlayerReviveService.revive(player, 25, 25, true, 0);
 		player.getGameStats().updateStatsAndSpeedVisually();
 		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REBIRTH_MASSAGE_ME());
 		TeleportService.teleportTo(player, mapId, instanceId, 271.1714f, 271.4455f, 276.67294f, (byte) 75);
