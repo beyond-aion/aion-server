@@ -38,19 +38,23 @@
 	</fortress>
 	<!-- Temple of Scales -->
 	<fortress id="2011">
-		<siegeTime>0 0 19 ? * MON,WED,SAT</siegeTime>
+		<siegeTime>0 0 19 ? * MON,SAT</siegeTime>
+		<siegeTime>0 0 21 ? * WED</siegeTime>
 	</fortress>
 	<!-- Altar of Avarice -->
 	<fortress id="2021">
-		<siegeTime>0 0 19 ? * MON,WED,SAT</siegeTime>
+		<siegeTime>0 0 19 ? * MON,SAT</siegeTime>
+		<siegeTime>0 0 21 ? * WED</siegeTime>
 	</fortress>
 	<!-- Vorgaltem Citadel -->
 	<fortress id="3011">
-		<siegeTime>0 0 19 ? * WED,THU,SAT</siegeTime>
+		<siegeTime>0 0 19 ? * THU,SAT</siegeTime>
+		<siegeTime>0 0 21 ? * WED</siegeTime>
 	</fortress>
 	<!-- Crimson Temple -->
 	<fortress id="3021">
-		<siegeTime>0 0 19 ? * WED,THU,SAT</siegeTime>
+		<siegeTime>0 0 19 ? * THU,SAT</siegeTime>
+		<siegeTime>0 0 21 ? * WED</siegeTime>
 	</fortress>
 	<!-- Wealhtheow Keep -->
 	<fortress id="7011">
