@@ -16,30 +16,26 @@ public class InventoryDrop {
 	@XmlValue
 	private int dropItem;
 
-	@XmlAttribute(name = "startlevel", required = false)
+	@XmlAttribute(name = "startlevel")
 	private int startLevel;
-
 	@XmlAttribute(name = "interval", required = true)
 	private int interval;
+	@XmlAttribute(name = "amount")
+	private int amount = 1;
 
-	/**
-	 * @return the dropItem
-	 */
 	public int getDropItem() {
 		return dropItem;
 	}
 
-	/**
-	 * @return the startLevel
-	 */
 	public int getStartLevel() {
 		return startLevel;
 	}
 
-	/**
-	 * @return the interval in minutes
-	 */
 	public int getInterval() {
 		return interval;
+	}
+
+	public int getAmount() {
+		return amount;
 	}
 }

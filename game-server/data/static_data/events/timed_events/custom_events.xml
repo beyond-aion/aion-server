@@ -1,4 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
 <timed_events xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="timed_events.xsd">
-
+	<event name="Beyond Aion Summer Event 2017" start="2017-07-17T00:00:00" end="2017-07-31T23:59:59">
+		<event_drops>
+			<gd_rule rule_name="Ice Component Elyos" base_chance="10" fixed_chance="true" restriction_race="ELYOS">
+				<gd_maps>
+					<gd_map map_id="220080000" /><!-- Enshar -->
+				</gd_maps>
+				<gd_ratings>
+					<gd_rating rating="NORMAL" />
+					<gd_rating rating="ELITE" />
+					<gd_rating rating="HERO" />
+				</gd_ratings>
+				<gd_items>
+					<gd_item id="188100124" /><!-- Ice Block -->
+					<gd_item id="188100125" /><!-- Ice Pick -->
+				</gd_items>
+			</gd_rule>
+			<gd_rule rule_name="Ice Component Asmodians" base_chance="20" fixed_chance="true" restriction_race="ASMODIANS">
+				<gd_maps>
+					<gd_map map_id="210070000" /><!-- Cygnea -->
+				</gd_maps>
+				<gd_ratings>
+					<gd_rating rating="NORMAL" />
+					<gd_rating rating="ELITE" />
+					<gd_rating rating="HERO" />
+				</gd_ratings>
+				<gd_items>
+					<gd_item id="188100124" /><!-- Ice Block -->
+					<gd_item id="188100125" /><!-- Ice Pick -->
+				</gd_items>
+			</gd_rule>
+			<gd_rule rule_name="Bag of Ice" base_chance="100" member_limit="12">
+				<gd_maps>
+					<gd_map map_id="300240000" /><!-- Aturam_Sky_Fortress -->
+					<gd_map map_id="300280000" /><!-- Rentus_Base -->
+					<gd_map map_id="300510000" /><!-- Tiamat_Stronghold -->
+					<gd_map map_id="300520000" /><!-- Dragon_Lords_Refuge -->
+					<gd_map map_id="300590000" /><!-- Ophidan_Bridge -->
+					<gd_map map_id="300610000" /><!-- Raksang_Ruins -->
+					<gd_map map_id="300620000" /><!-- Occupied_Rentus_Base -->
+					<!-- <gd_map map_id="300630000" /> --><!-- Anguished_Dragon_Lords_Refuge -->
+					<gd_map map_id="300800000" /><!-- Infinity_Shard -->
+					<gd_map map_id="301110000" /><!-- Danuar_Reliquary -->
+					<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
+					<gd_map map_id="301140000" /><!-- Seized_Danuar_Sanctuary -->
+					<gd_map map_id="301230000" /><!-- Illuminary_Obelisk -->
+					<gd_map map_id="301270000" /><!-- Linkgate_Foundry -->
+					<!-- <gd_map map_id="301360000" /> --><!-- Infernal_Danuar_Reliquary -->
+					<gd_map map_id="301370000" /><!-- Infernal_Illuminary_Obelisk -->
+					<gd_map map_id="301380000" /><!-- Danuar_Sanctuary -->
+					<!-- <gd_map map_id="301390000" /> --><!-- Drakenspire_Depths -->
+				</gd_maps>
+				<gd_npcs>
+					<gd_npc npc_id="217376" /><!-- Ahunatal Shadowslip -->
+					<gd_npc npc_id="217313" /><!-- Brigade General Vasharti -->
+					<gd_npc npc_id="701541" /><!-- Tahabata's Treasure Chest -->
+					<gd_npc npc_id="701542" /><!-- Tiamat's Huge Treasure Crate (Dragon Lord's Refuge) -->
+					<gd_npc npc_id="235759" /><!-- Fugitive Mazikin Leader -->
+					<gd_npc npc_id="235763" /><!-- Runaway Hirakiki Leader -->
+					<gd_npc npc_id="235767" /><!-- Escapee Asachin Leader-->
+					<gd_npc npc_id="235768" /><!-- Spirited Velkur -->
+					<gd_npc npc_id="235769" /><!-- Velkur Aethercaster -->
+					<gd_npc npc_id="235770" /><!-- Velkur Aetherpriest -->
+					<gd_npc npc_id="235771" /><!-- Velkur Aetherknife -->
+					<gd_npc npc_id="236306" /><!-- Reviver Nasto -->
+					<gd_npc npc_id="236300" /><!-- Brigade General Vasharti -->
+					<!-- Tiamat Lv65 236277 -->
+					<gd_npc npc_id="231073" /><!-- Hyperion -->
+					<gd_npc npc_id="701795" /><!-- Treasure Box (Danuar Reliquary) -->
+					<gd_npc npc_id="230857" /><!-- Guard Captain Ahuradim -->
+					<gd_npc npc_id="230858" /><!-- Brigade General Sheba -->
+					<gd_npc npc_id="235619" /><!-- Warmage Suyaroka -->
+					<gd_npc npc_id="235620" /><!-- Chief Medic Tagnu -->
+					<gd_npc npc_id="235621" /><!-- Virulent Ukahim -->
+					<gd_npc npc_id="233740" /><!-- Test Weapon Dynatoum -->
+					<gd_npc npc_id="234990" /><!-- Wounded Belsagos -->
+					<gd_npc npc_id="233898" /><!-- Volatile Belsagos -->
+					<gd_npc npc_id="234991" /><!-- Furious Belsagos -->
+					<!-- Lunatic Queen Modor -->
+					<gd_npc npc_id="234686" /><!-- Remodeled Weapon Dynatoum -->
+					<gd_npc npc_id="235624" /><!-- Warmage Suyaroka -->
+					<gd_npc npc_id="235625" /><!-- Chief Medic Tagnu -->
+					<gd_npc npc_id="235626" /><!-- Virulent Ukahim -->
+					<!-- Beritra -->
+				</gd_npcs>
+				<gd_items>
+					<gd_item id="188052627" /><!-- [Event] Bag of Ice -->
+				</gd_items>
+			</gd_rule>
+		</event_drops>
+	</event>
 </timed_events>

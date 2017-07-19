@@ -175,7 +175,7 @@ public class EventTemplate {
 						public void accept(Player player) {
 							if (player.isOnline() && player.getCommonData().getLevel() >= inventoryDrop.getStartLevel())
 								// TODO: check the exact type in retail
-								ItemService.addItem(player, inventoryDrop.getDropItem(), 1, true,
+								ItemService.addItem(player, inventoryDrop.getDropItem(), inventoryDrop.getAmount(), true,
 									new ItemUpdatePredicate(ItemAddType.ITEM_COLLECT, ItemUpdateType.INC_CASH_ITEM));
 						}
 					});
