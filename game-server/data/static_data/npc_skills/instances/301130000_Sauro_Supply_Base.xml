@@ -2,257 +2,257 @@
 <npc_skill_templates xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../npc_skills.xsd">
 	<!-- FIGHTER -->
 	<npc_skills npc_ids="230786 230787 230791">
-		<npc_skill id="20700" lv="1" prob="0" is_post_spawn="true"/>
-		<npc_skill id="20701" lv="1" prob="100" max_hp="50" cd="180000" target="ME"/>
-		<npc_skill id="17714" lv="56" prob="3"/>
-        <npc_skill id="17294" lv="56" prob="61"/>
-        <npc_skill id="21284" lv="56" prob="36"/>
-    </npc_skills>
+		<npc_skill id="20700" lv="1" prob="0" is_post_spawn="true" />
+		<npc_skill id="20701" lv="1" prob="100" max_hp="50" cd="180000" target="ME" />
+		<npc_skill id="17714" lv="56" prob="3" />
+		<npc_skill id="17294" lv="56" prob="61" />
+		<npc_skill id="21284" lv="56" prob="36" />
+	</npc_skills>
 	<!-- ASSASSIN -->
 	<npc_skills npc_ids="230792 230793 233277 230797">
-		<npc_skill id="19915" lv="1" prob="0" is_post_spawn="true"/>
-		<npc_skill id="20700" lv="1" prob="100" cd="100000"/>
-		<npc_skill id="20701" lv="1" prob="100" max_hp="50" cd="180000" target="ME"/>
-        <npc_skill id="17332" lv="56" prob="25"/>
-		<npc_skill id="17446" lv="56" prob="20"/>
-		<npc_skill id="18159" lv="1" prob="40"/>
-        <npc_skill id="21286" lv="1" prob="25"/>
-		<npc_skill id="21291" lv="56" prob="25"/>
-		<npc_skill id="21411" lv="1" prob="20"/>
-    </npc_skills>
+		<npc_skill id="19915" lv="1" prob="0" is_post_spawn="true" />
+		<npc_skill id="20700" lv="1" prob="100" cd="100000" />
+		<npc_skill id="20701" lv="1" prob="100" max_hp="50" cd="180000" target="ME" />
+		<npc_skill id="17332" lv="56" prob="25" />
+		<npc_skill id="17446" lv="56" prob="20" />
+		<npc_skill id="18159" lv="1" prob="40" />
+		<npc_skill id="21286" lv="1" prob="25" />
+		<npc_skill id="21291" lv="56" prob="25" />
+		<npc_skill id="21411" lv="1" prob="20" />
+	</npc_skills>
 	<!-- WITCH -->
 	<npc_skills npc_ids="230798">
-		<npc_skill id="20700" lv="1" prob="0" is_post_spawn="true"/>
-		<npc_skill id="20701" lv="1" prob="100" max_hp="50" cd="180000" target="ME"/>
-        <npc_skill id="17335" lv="56" prob="75" min_hp="63" max_hp="100"/>
-        <npc_skill id="21288" lv="56" prob="25" min_hp="85" max_hp="90"/>
-    </npc_skills>
+		<npc_skill id="20700" lv="1" prob="0" is_post_spawn="true" />
+		<npc_skill id="20701" lv="1" prob="100" max_hp="50" cd="180000" target="ME" />
+		<npc_skill id="17335" lv="56" prob="75" min_hp="63" max_hp="100" />
+		<npc_skill id="21288" lv="56" prob="25" min_hp="85" max_hp="90" />
+	</npc_skills>
 	<!-- PRIEST -->
 	<npc_skills npc_ids="230804">
-		<npc_skill id="19915" lv="1" prob="0" is_post_spawn="true"/>
-		<npc_skill id="20701" lv="1" prob="100" max_hp="50" cd="180000" target="ME"/>
+		<npc_skill id="19915" lv="1" prob="0" is_post_spawn="true" />
+		<npc_skill id="20701" lv="1" prob="100" max_hp="50" cd="180000" target="ME" />
 		<npc_skill id="16566" lv="56" prob="13" cd="20000">
-			<cond cond_type="HELP_FRIEND" hp_below="90" range="15"/>
+			<cond cond_type="HELP_FRIEND" hp_below="90" range="15" />
 		</npc_skill>
-        <npc_skill id="17359" lv="56" prob="38"/>
-		<npc_skill id="17360" lv="56" prob="25"/>
-		<npc_skill id="17361" lv="56" prob="20" cd="30000" max_hp="85"/>
+		<npc_skill id="17359" lv="56" prob="38" />
+		<npc_skill id="17360" lv="56" prob="25" />
+		<npc_skill id="17361" lv="56" prob="20" cd="30000" max_hp="85" />
 		<npc_skill id="17366" lv="56" prob="13" cd="30000">
-			<cond cond_type="HELP_FRIEND" hp_below="30" range="20"/>
+			<cond cond_type="HELP_FRIEND" hp_below="30" range="20" />
 		</npc_skill>
-		<npc_skill id="21278" lv="1" prob="13"/>
-    </npc_skills>
+		<npc_skill id="21278" lv="1" prob="13" />
+	</npc_skills>
 	<!-- RIDER -->
 	<npc_skills npc_ids="230810">
-		<npc_skill id="20700" lv="1" prob="0" is_post_spawn="true"/>
-		<npc_skill id="20701" lv="1" prob="100" max_hp="50" cd="180000" target="ME"/>
-        <npc_skill id="20648" lv="1" prob="6"/>
-        <npc_skill id="21294" lv="56" prob="25"/>
-		<npc_skill id="21295" lv="56" prob="25"/>
-		<npc_skill id="21296" lv="56" prob="25" cd="15000"/>
-		<npc_skill id="21297" lv="56" prob="29" cd="15000"/>
-    </npc_skills>
+		<npc_skill id="20700" lv="1" prob="0" is_post_spawn="true" />
+		<npc_skill id="20701" lv="1" prob="100" max_hp="50" cd="180000" target="ME" />
+		<npc_skill id="20648" lv="1" prob="6" />
+		<npc_skill id="21294" lv="56" prob="25" />
+		<npc_skill id="21295" lv="56" prob="25" />
+		<npc_skill id="21296" lv="56" prob="25" cd="15000" />
+		<npc_skill id="21297" lv="56" prob="29" cd="15000" />
+	</npc_skills>
 	<!-- GUNNER -->
 	<npc_skills npc_ids="230814">
-		<npc_skill id="20700" lv="1" prob="0" is_post_spawn="true"/>
-		<npc_skill id="20701" lv="1" prob="100" max_hp="50" cd="180000" target="ME"/>
-		<npc_skill id="20858" lv="56" prob="30" cd="30000"/>
-        <npc_skill id="21292" lv="56" prob="57"/>
-		<npc_skill id="21293" lv="56" prob="57"/>
-		<npc_skill id="21299" lv="1" prob="20" cd="15000"/>
-    </npc_skills>
+		<npc_skill id="20700" lv="1" prob="0" is_post_spawn="true" />
+		<npc_skill id="20701" lv="1" prob="100" max_hp="50" cd="180000" target="ME" />
+		<npc_skill id="20858" lv="56" prob="30" cd="30000" />
+		<npc_skill id="21292" lv="56" prob="57" />
+		<npc_skill id="21293" lv="56" prob="57" />
+		<npc_skill id="21299" lv="1" prob="20" cd="15000" />
+	</npc_skills>
 	<!-- MUSICIAN -->
 	<npc_skills npc_ids="230820">
-		<npc_skill id="20700" lv="1" prob="0" is_post_spawn="true"/>
-		<npc_skill id="20701" lv="1" prob="100" max_hp="50" cd="180000" target="ME"/>
-		<npc_skill id="20714" lv="56" prob="25"/>
-        <npc_skill id="20715" lv="56" prob="25"/>
-		<npc_skill id="20959" lv="1" prob="25"/>
-        <npc_skill id="20960" lv="56" prob="25"/>
-    </npc_skills>
+		<npc_skill id="20700" lv="1" prob="0" is_post_spawn="true" />
+		<npc_skill id="20701" lv="1" prob="100" max_hp="50" cd="180000" target="ME" />
+		<npc_skill id="20714" lv="56" prob="25" />
+		<npc_skill id="20715" lv="56" prob="25" />
+		<npc_skill id="20959" lv="1" prob="25" />
+		<npc_skill id="20960" lv="56" prob="25" />
+	</npc_skills>
 	<!-- Sheban Legion Bodyguard -->
 	<npc_skills npc_ids="230826">
-        <npc_skill id="20700" lv="1" prob="0" is_post_spawn="true"/>
-		<npc_skill id="16602" lv="56" prob="25"/>
-		<npc_skill id="16602" lv="56" prob="30" cd="20000"/>
-    </npc_skills>
+		<npc_skill id="20700" lv="1" prob="0" is_post_spawn="true" />
+		<npc_skill id="16602" lv="56" prob="25" />
+		<npc_skill id="16602" lv="56" prob="30" cd="20000" />
+	</npc_skills>
 	<!-- Sheban Legion Scout -->
 	<npc_skills npc_ids="230830">
-		<npc_skill id="20700" lv="1" prob="0" is_post_spawn="true"/>
-        <npc_skill id="19430" lv="56" prob="69"/>
-        <npc_skill id="16813" lv="56" prob="31"/>
-    </npc_skills>
+		<npc_skill id="20700" lv="1" prob="0" is_post_spawn="true" />
+		<npc_skill id="19430" lv="56" prob="69" />
+		<npc_skill id="16813" lv="56" prob="31" />
+	</npc_skills>
 	<!-- Debilitation Turret -->
 	<npc_skills npc_ids="230836">
-        <npc_skill id="20700" lv="1" prob="0" is_post_spawn="true"/>
-		<npc_skill id="17243" lv="56" prob="50"/>
-    </npc_skills>
+		<npc_skill id="20700" lv="1" prob="0" is_post_spawn="true" />
+		<npc_skill id="17243" lv="56" prob="50" />
+	</npc_skills>
 	<!-- Tamed Spaller Gatherer -->
 	<npc_skills npc_ids="230837">
-		<npc_skill id="20700" lv="1" prob="0" is_post_spawn="true"/>
-        <npc_skill id="17047" lv="43" prob="25"/>
-    </npc_skills>
+		<npc_skill id="20700" lv="1" prob="0" is_post_spawn="true" />
+		<npc_skill id="17047" lv="43" prob="25" />
+	</npc_skills>
 	<!-- Sauro Supply Base Drone -->
 	<npc_skills npc_ids="230843">
 		<npc_skill id="19498" lv="1" prob="100" cd="600000">
-			<cond cond_type="SPAWN_NPC" npc_id="230786" min_distance="2" max_distance="4" random_direction="true" min_amount="2" max_amount="2"/>
+			<spawn_npc npc_id="230786" min_distance="2" max_distance="4" min_count="2" max_count="2" />
 		</npc_skill>
 	</npc_skills>
 	<!-- Golem Loadbearer -->
 	<npc_skills npc_ids="230844">
-		<npc_skill id="20700" lv="1" prob="0" is_post_spawn="true"/>
-        <npc_skill id="16516" lv="56" prob="43"/>
-        <npc_skill id="16519" lv="1" prob="14"/>
-    </npc_skills>
+		<npc_skill id="20700" lv="1" prob="0" is_post_spawn="true" />
+		<npc_skill id="16516" lv="56" prob="43" />
+		<npc_skill id="16519" lv="1" prob="14" />
+	</npc_skills>
 	<!-- Sauro Base Grave Robber -->
 	<npc_skills npc_ids="230846">
-        <npc_skill id="17446" lv="56" prob="33"/>
-    </npc_skills>
+		<npc_skill id="17446" lv="56" prob="33" />
+	</npc_skills>
 	<!-- Guard Captain Rohuka -->
-    <npc_skills npc_ids="230849">
-		<npc_skill id="20700" lv="1" prob="0" is_post_spawn="true"/>
-		<npc_skill id="21135" lv="1" prob="100" max_hp="60" cd="60000"/>
-		<npc_skill id="17332" lv="56" prob="40"/>
-		<npc_skill id="17446" lv="56" prob="40" cd="7000"/>
-		<npc_skill id="17447" lv="56" prob="70" cd="15000"/>
-		<npc_skill id="18158" lv="56" prob="70" max_hp="50" cd="30000"/>
-        <npc_skill id="18159" lv="56" prob="40" cd="20000"/>
-		<npc_skill id="18160" lv="56" prob="70" max_hp="40" cd="30000"/>
-    </npc_skills>
+	<npc_skills npc_ids="230849">
+		<npc_skill id="20700" lv="1" prob="0" is_post_spawn="true" />
+		<npc_skill id="21135" lv="1" prob="100" max_hp="60" cd="60000" />
+		<npc_skill id="17332" lv="56" prob="40" />
+		<npc_skill id="17446" lv="56" prob="40" cd="7000" />
+		<npc_skill id="17447" lv="56" prob="70" cd="15000" />
+		<npc_skill id="18158" lv="56" prob="70" max_hp="50" cd="30000" />
+		<npc_skill id="18159" lv="56" prob="40" cd="20000" />
+		<npc_skill id="18160" lv="56" prob="70" max_hp="40" cd="30000" />
+	</npc_skills>
 	<!-- Researcher Teselik -->
 	<npc_skills npc_ids="230850">
-		<npc_skill id="20700" lv="1" prob="0" is_post_spawn="true"/>
-		<npc_skill id="21135" lv="1" prob="100" max_hp="60" cd="60000"/>
-        <npc_skill id="17335" lv="56" prob="33"/>
+		<npc_skill id="20700" lv="1" prob="0" is_post_spawn="true" />
+		<npc_skill id="21135" lv="1" prob="100" max_hp="60" cd="60000" />
+		<npc_skill id="17335" lv="56" prob="33" />
 		<npc_skill id="20657" lv="1" prob="100" cd="30000" target="ME">
-			<cond cond_type="SPAWN_NPC" npc_id="284455" min_distance="5" max_distance="8" random_direction="true" min_amount="2" max_amount="2"/>
+			<spawn_npc npc_id="284455" min_distance="5" max_distance="8" min_count="2" max_count="2" />
 		</npc_skill>
-		<npc_skill id="20701" lv="1" prob="100" cd="60000" target="ME"/>
-		<npc_skill id="21135" lv="1" prob="100" max_hp="60" cd="60000"/>
-        <npc_skill id="21288" lv="56" prob="23"/>
+		<npc_skill id="20701" lv="1" prob="100" cd="60000" target="ME" />
+		<npc_skill id="21135" lv="1" prob="100" max_hp="60" cd="60000" />
+		<npc_skill id="21288" lv="56" prob="23" />
 		<!-- These two skills are used to control the summoned hands to deal big damage. Actual we have no real handling for NPC summon control
-		<npc_skill id="20707" lv="56" prob="6"/>
-        <npc_skill id="20708" lv="56" prob="6"/> -->
-    </npc_skills>
+			<npc_skill id="20707" lv="56" prob="6"/>
+			<npc_skill id="20708" lv="56" prob="6"/> -->
+	</npc_skills>
 	<!-- Chief Gunner Kurmata -->
 	<npc_skills npc_ids="230851">
-		<npc_skill id="20700" lv="1" prob="0" is_post_spawn="true"/>
-		<npc_skill id="21135" lv="1" prob="100" max_hp="60" cd="60000"/>
-		<npc_skill id="20858" lv="56" prob="33" cd="20000"/>
-		<npc_skill id="21135" lv="1" prob="100" max_hp="60" cd="60000"/>
-		<npc_skill id="21219" lv="56" prob="33" cd="20000"/>
-        <npc_skill id="21292" lv="56" prob="33" cd="5000"/>
-    </npc_skills>
+		<npc_skill id="20700" lv="1" prob="0" is_post_spawn="true" />
+		<npc_skill id="21135" lv="1" prob="100" max_hp="60" cd="60000" />
+		<npc_skill id="20858" lv="56" prob="33" cd="20000" />
+		<npc_skill id="21135" lv="1" prob="100" max_hp="60" cd="60000" />
+		<npc_skill id="21219" lv="56" prob="33" cd="20000" />
+		<npc_skill id="21292" lv="56" prob="33" cd="5000" />
+	</npc_skills>
 	<!-- Commander Ranodim -->
 	<npc_skills npc_ids="230852">
-		<npc_skill id="20700" lv="1" prob="0" is_post_spawn="true"/>
-		<npc_skill id="21135" lv="1" prob="100" max_hp="60" cd="60000"/>
-		<npc_skill id="17294" lv="1" prob="30"/>
-        <npc_skill id="18166" lv="1" prob="20"/>
-        <npc_skill id="20702" lv="1" prob="20" cd="20000"/>
-		<npc_skill id="21135" lv="1" prob="100" max_hp="60" cd="60000"/>
-        <npc_skill id="21417" lv="1" prob="100" max_hp="50" cd="60000"/>
-		<npc_skill id="21285" lv="1" prob="20"/>
-    </npc_skills>
+		<npc_skill id="20700" lv="1" prob="0" is_post_spawn="true" />
+		<npc_skill id="21135" lv="1" prob="100" max_hp="60" cd="60000" />
+		<npc_skill id="17294" lv="1" prob="30" />
+		<npc_skill id="18166" lv="1" prob="20" />
+		<npc_skill id="20702" lv="1" prob="20" cd="20000" />
+		<npc_skill id="21135" lv="1" prob="100" max_hp="60" cd="60000" />
+		<npc_skill id="21417" lv="1" prob="100" max_hp="50" cd="60000" />
+		<npc_skill id="21285" lv="1" prob="20" />
+	</npc_skills>
 	<!-- Chief of Staff Moriata -->
 	<npc_skills npc_ids="230853">
-		<npc_skill id="20700" lv="1" prob="0" is_post_spawn="true"/>
-		<npc_skill id="21135" lv="1" prob="100" max_hp="60" cd="60000"/>
-        <npc_skill id="18156" lv="56" prob="20" cd="20000"/>
-		<npc_skill id="21207" lv="56" prob="20"/>
-        <npc_skill id="21208" lv="56" prob="20" cd="15000"/>
-		<npc_skill id="21209" lv="56" prob="20" cd="15000"/>
-		<npc_skill id="21210" lv="56" prob="20" cd="20000"/>
-		<npc_skill id="21417" lv="56" prob="100" cd="40000"/>
-		<npc_skill id="21418" lv="56" prob="15"/>
-        <npc_skill id="21419" lv="56" prob="18" cd="17000"/>
-    </npc_skills>
+		<npc_skill id="20700" lv="1" prob="0" is_post_spawn="true" />
+		<npc_skill id="21135" lv="1" prob="100" max_hp="60" cd="60000" />
+		<npc_skill id="18156" lv="56" prob="20" cd="20000" />
+		<npc_skill id="21207" lv="56" prob="20" />
+		<npc_skill id="21208" lv="56" prob="20" cd="15000" />
+		<npc_skill id="21209" lv="56" prob="20" cd="15000" />
+		<npc_skill id="21210" lv="56" prob="20" cd="20000" />
+		<npc_skill id="21417" lv="56" prob="100" cd="40000" />
+		<npc_skill id="21418" lv="56" prob="15" />
+		<npc_skill id="21419" lv="56" prob="18" cd="17000" />
+	</npc_skills>
 	<!-- Guard Captain Ahuradim -->
 	<npc_skills npc_ids="230857">
-		<npc_skill id="20700" lv="1" prob="0" is_post_spawn="true"/>
-		<npc_skill id="21135" lv="1" prob="100" max_hp="60" cd="60000"/>
-        <npc_skill id="21190" lv="1" prob="8"/>
-        <!-- <npc_skill id="21191" lv="1" prob="5"/> used by generators -->
-        <npc_skill id="21192" lv="1" prob="20" cd="30000"/>
-        <npc_skill id="21193" lv="1" prob="23" cd="30000"/>
-        <npc_skill id="21194" lv="1" prob="20" cd="30000"/>
-        <!-- <npc_skill id="21195" lv="1" prob="10"/> -->
-		<npc_skill id="21426" lv="1" prob="25" next_chain_id="1" next_skill_time="0" cd="30000"/>
-        <npc_skill id="21427" lv="1" prob="100" chain_id="1" next_skill_time="10000"/>
-        <npc_skill id="21428" lv="1" prob="5" cd="20000"/>
-        <npc_skill id="21429" lv="1" prob="5" cd="30000"/>
-    </npc_skills>
+		<npc_skill id="20700" lv="1" prob="0" is_post_spawn="true" />
+		<npc_skill id="21135" lv="1" prob="100" max_hp="60" cd="60000" />
+		<npc_skill id="21190" lv="1" prob="8" />
+		<!-- <npc_skill id="21191" lv="1" prob="5"/> used by generators -->
+		<npc_skill id="21192" lv="1" prob="20" cd="30000" />
+		<npc_skill id="21193" lv="1" prob="23" cd="30000" />
+		<npc_skill id="21194" lv="1" prob="20" cd="30000" />
+		<!-- <npc_skill id="21195" lv="1" prob="10"/> -->
+		<npc_skill id="21426" lv="1" prob="25" next_chain_id="1" next_skill_time="0" cd="30000" />
+		<npc_skill id="21427" lv="1" prob="100" chain_id="1" next_skill_time="10000" />
+		<npc_skill id="21428" lv="1" prob="5" cd="20000" />
+		<npc_skill id="21429" lv="1" prob="5" cd="30000" />
+	</npc_skills>
 	<!-- Brigade General Sheba -->
 	<npc_skills npc_ids="230858">
-        <npc_skill id="20700" lv="1" prob="0" is_post_spawn="true"/>
-		<npc_skill id="21184" lv="1" prob="100" max_hp="25" cd="600000" target="ME"/>
-		<npc_skill id="21184" lv="1" prob="100" max_hp="10" cd="600000" target="ME"/>
+		<npc_skill id="20700" lv="1" prob="0" is_post_spawn="true" />
+		<npc_skill id="21184" lv="1" prob="100" max_hp="25" cd="600000" target="ME" />
+		<npc_skill id="21184" lv="1" prob="100" max_hp="10" cd="600000" target="ME" />
 		<npc_skill id="21189" lv="1" prob="100" max_hp="66" cd="600000" target="ME">
-			<cond cond_type="SPAWN_NPC" npc_id="284435" min_distance="1" max_distance="2" random_direction="true" min_amount="4" max_amount="4"/>
+			<spawn_npc npc_id="284435" min_distance="1" max_distance="2" min_count="4" max_count="4" />
 		</npc_skill>
 		<npc_skill id="21189" lv="1" prob="100" max_hp="20" cd="600000" target="ME">
-			<cond cond_type="SPAWN_NPC" npc_id="284435" min_distance="1" max_distance="2" random_direction="true" min_amount="2" max_amount="2"/>
+			<spawn_npc npc_id="284435" min_distance="1" max_distance="2" min_count="2" max_count="2" />
 		</npc_skill>
 		<npc_skill id="21189" lv="1" prob="100" max_hp="15" cd="600000" target="ME">
-			<cond cond_type="SPAWN_NPC" npc_id="284435" min_distance="1" max_distance="2" random_direction="true" min_amount="2" max_amount="2"/>
-		</npc_skill>	
-		<npc_skill id="21183" lv="1" prob="40" max_hp="75" cd="60000" target="RANDOM"/>
-        <npc_skill id="21187" lv="1" prob="40" cd="30000"/>
-		<npc_skill id="21188" lv="1" prob="40" max_hp="90" cd="60000"/>
-        <npc_skill id="21410" lv="1" prob="20"/>
-        <npc_skill id="21425" lv="1" prob="20" cd="20000"/>
-        <npc_skill id="21450" lv="1" prob="5" max_hp="50" cd="30000"/>
-    </npc_skills>
+			<spawn_npc npc_id="284435" min_distance="1" max_distance="2" min_count="2" max_count="2" />
+		</npc_skill>
+		<npc_skill id="21183" lv="1" prob="40" max_hp="75" cd="60000" target="RANDOM" />
+		<npc_skill id="21187" lv="1" prob="40" cd="30000" />
+		<npc_skill id="21188" lv="1" prob="40" max_hp="90" cd="60000" />
+		<npc_skill id="21410" lv="1" prob="20" />
+		<npc_skill id="21425" lv="1" prob="20" cd="20000" />
+		<npc_skill id="21450" lv="1" prob="5" max_hp="50" cd="30000" />
+	</npc_skills>
 	<!-- Gatekeeper Stranir -->
 	<npc_skills npc_ids="233255">
-        <npc_skill id="20700" lv="1" prob="0" is_post_spawn="true"/>
-		<npc_skill id="21135" lv="1" prob="100" max_hp="60" cd="60000"/>
-		<npc_skill id="20648" lv="1" prob="10"/>
-        <npc_skill id="21294" lv="56" prob="25"/>
-		<npc_skill id="21295" lv="56" prob="25"/>
-		<npc_skill id="21296" lv="56" prob="25" cd="15000"/>
-		<npc_skill id="21297" lv="56" prob="29" cd="15000"/>
-    </npc_skills>
+		<npc_skill id="20700" lv="1" prob="0" is_post_spawn="true" />
+		<npc_skill id="21135" lv="1" prob="100" max_hp="60" cd="60000" />
+		<npc_skill id="20648" lv="1" prob="10" />
+		<npc_skill id="21294" lv="56" prob="25" />
+		<npc_skill id="21295" lv="56" prob="25" />
+		<npc_skill id="21296" lv="56" prob="25" cd="15000" />
+		<npc_skill id="21297" lv="56" prob="29" cd="15000" />
+	</npc_skills>
 	<!-- Darkblade Ovanuka -->
-    <npc_skills npc_ids="233256">
-        <npc_skill id="20700" lv="1" prob="0" is_post_spawn="true"/>
-		<npc_skill id="21135" lv="1" prob="100" max_hp="60" cd="60000"/>
-		<npc_skill id="17332" lv="56" prob="25"/>
-		<npc_skill id="17446" lv="56" prob="20"/>
-		<npc_skill id="18159" lv="1" prob="40"/>
-        <npc_skill id="21286" lv="1" prob="25"/>
-		<npc_skill id="21291" lv="56" prob="25"/>
-		<npc_skill id="21411" lv="1" prob="20"/>
-    </npc_skills>
+	<npc_skills npc_ids="233256">
+		<npc_skill id="20700" lv="1" prob="0" is_post_spawn="true" />
+		<npc_skill id="21135" lv="1" prob="100" max_hp="60" cd="60000" />
+		<npc_skill id="17332" lv="56" prob="25" />
+		<npc_skill id="17446" lv="56" prob="20" />
+		<npc_skill id="18159" lv="1" prob="40" />
+		<npc_skill id="21286" lv="1" prob="25" />
+		<npc_skill id="21291" lv="56" prob="25" />
+		<npc_skill id="21411" lv="1" prob="20" />
+	</npc_skills>
 	<!-- Archmagus Sayahum -->
-    <npc_skills npc_ids="233257">
-		<npc_skill id="20700" lv="1" prob="0" is_post_spawn="true"/>
-		<npc_skill id="21135" lv="1" prob="100" max_hp="60" cd="60000"/>
-		<npc_skill id="17335" lv="56" prob="75"/>
-		<npc_skill id="17722" lv="56" prob="50" cd="25000" target="RANDOM"/>
-        <npc_skill id="21288" lv="56" prob="25"/>
-        <npc_skill id="21451" lv="56" prob="25" cd="25000"/>
-        <npc_skill id="20712" lv="56" prob="25" cd="30000"/>
-    </npc_skills>
+	<npc_skills npc_ids="233257">
+		<npc_skill id="20700" lv="1" prob="0" is_post_spawn="true" />
+		<npc_skill id="21135" lv="1" prob="100" max_hp="60" cd="60000" />
+		<npc_skill id="17335" lv="56" prob="75" />
+		<npc_skill id="17722" lv="56" prob="50" cd="25000" target="RANDOM" />
+		<npc_skill id="21288" lv="56" prob="25" />
+		<npc_skill id="21451" lv="56" prob="25" cd="25000" />
+		<npc_skill id="20712" lv="56" prob="25" cd="30000" />
+	</npc_skills>
 	<!-- Derakanak The Reaver -->
 	<npc_skills npc_ids="233258">
-		<npc_skill id="20700" lv="1" prob="0" is_post_spawn="true"/>
-		<npc_skill id="21135" lv="1" prob="100" max_hp="60" cd="60000"/>
-		<npc_skill id="16574" lv="56" prob="33" cd="10000"/>
-		<npc_skill id="16702" lv="56" prob="20" cd="50000"/>
-		<npc_skill id="16918" lv="56" prob="100" max_hp="75" cd="30000"/>
-		<npc_skill id="16919" lv="56" prob="100" max_hp="75" cd="30000"/>
-		<npc_skill id="16987" lv="56" prob="25" cd="20000"/>
-		<npc_skill id="17888" lv="56" prob="100" max_hp="60" cd="45000"/>
-        <npc_skill id="20779" lv="56" prob="25" cd="30000"/>
-		<npc_skill id="20780" lv="56" prob="25" cd="30000"/>
-        <npc_skill id="20782" lv="56" prob="25" cd="30000"/>
-		<npc_skill id="21135" lv="1" prob="100" max_hp="60" cd="60000"/>
-    </npc_skills>
+		<npc_skill id="20700" lv="1" prob="0" is_post_spawn="true" />
+		<npc_skill id="21135" lv="1" prob="100" max_hp="60" cd="60000" />
+		<npc_skill id="16574" lv="56" prob="33" cd="10000" />
+		<npc_skill id="16702" lv="56" prob="20" cd="50000" />
+		<npc_skill id="16918" lv="56" prob="100" max_hp="75" cd="30000" />
+		<npc_skill id="16919" lv="56" prob="100" max_hp="75" cd="30000" />
+		<npc_skill id="16987" lv="56" prob="25" cd="20000" />
+		<npc_skill id="17888" lv="56" prob="100" max_hp="60" cd="45000" />
+		<npc_skill id="20779" lv="56" prob="25" cd="30000" />
+		<npc_skill id="20780" lv="56" prob="25" cd="30000" />
+		<npc_skill id="20782" lv="56" prob="25" cd="30000" />
+		<npc_skill id="21135" lv="1" prob="100" max_hp="60" cd="60000" />
+	</npc_skills>
 	<!-- Enslaved Danuar -->
 	<npc_skills npc_ids="284435">
 		<npc_skill id="21185" lv="16" prob="100">
-			<cond delay="6000" despawn_time="10000"/>
+			<cond delay="6000" despawn_time="10000" />
 		</npc_skill>
 	</npc_skills>
 </npc_skill_templates>

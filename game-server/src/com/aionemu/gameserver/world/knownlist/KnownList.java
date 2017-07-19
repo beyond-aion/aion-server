@@ -141,7 +141,11 @@ public class KnownList {
 
 	private void addToVisibleObjects(VisibleObject object) {
 		if (visualObjects.putIfAbsent(object.getObjectId(), object) == null) {
-			owner.getController().see(object);
+			try {
+				owner.getController().see(object);
+			} catch (Exception e) {
+				log.error("", e);
+			}
 			if (object instanceof Player) {
 				Player player = (Player) object;
 				if (player.getPet() != null) // pet spawn packet must be sent after SM_PLAYER_INFO, otherwise the pet will not be displayed
@@ -162,7 +166,11 @@ public class KnownList {
 			if (knownPlayers != null)
 				knownPlayers.remove(object.getObjectId());
 			delFromVisibleObjects(object, animation);
-			owner.getController().notKnow(object);
+			try {
+				owner.getController().notKnow(object);
+			} catch (Exception e) {
+				log.error("", e);
+			}
 		}
 	}
 
@@ -182,7 +190,11 @@ public class KnownList {
 				if (player.getPet() != null) // pets have no visual/see state
 					delFromVisibleObjects(player.getPet(), ObjectDeleteAnimation.FADE_OUT);
 			}
-			owner.getController().notSee(object, animation);
+			try {
+				owner.getController().notSee(object, animation);
+			} catch (Exception e) {
+				log.error("", e);
+			}
 		}
 	}
 

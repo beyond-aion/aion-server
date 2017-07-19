@@ -11,6 +11,7 @@ import com.aionemu.gameserver.model.templates.npc.AbyssNpcType;
 import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
 import com.aionemu.gameserver.model.templates.npcskill.NpcSkillCondition;
 import com.aionemu.gameserver.model.templates.npcskill.NpcSkillConditionTemplate;
+import com.aionemu.gameserver.model.templates.npcskill.NpcSkillSpawn;
 import com.aionemu.gameserver.model.templates.npcskill.NpcSkillTemplate;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.services.TribeRelationService;
@@ -248,64 +249,33 @@ public class NpcSkillTemplateEntry extends NpcSkillEntry {
 
 	@Override
 	public void fireOnEndCastEvents(Npc npc) {
-		NpcSkillConditionTemplate condTemp = getConditionTemplate();
-		if (condTemp == null) {
-			if (!npc.getLifeStats().isAboutToDie() && !npc.isDead()) {
-				npc.getAi().onEndUseSkill(this);
-			}
+		NpcSkillSpawn spawn = template.getSpawn();
+		if (spawn == null || npc.getLifeStats().isAboutToDie())
 			return;
-		}
-		NpcSkillCondition condType = condTemp.getCondType();
-		switch (condType) {
-			case SPAWN_NPC:
-				if (condTemp.getDelay() > 0) {
-					ThreadPoolManager.getInstance().schedule(new Runnable() {
+		if (spawn.getDelay() == 0)
+			spawnNpc(npc, spawn);
+		else
+			ThreadPoolManager.getInstance().schedule(() -> {
+				if (!npc.isDead() && !npc.getLifeStats().isAboutToDie())
+					spawnNpc(npc, spawn);
+			}, spawn.getDelay());
+	}
 
-						@Override
-						public void run() {
-							if (npc == null || npc.isDead() || npc.getLifeStats().isAboutToDie()) {
-								return;
-							}
-							int amount = condTemp.getMaxAmount() > 1 ? Rnd.get(condTemp.getMinAmount(), condTemp.getMaxAmount()) : condTemp.getMinAmount();
-							for (int i = 0; i < amount; i++) {
-								float x1 = 0;
-								float y1 = 0;
-								if (condTemp.getMinDistance() > 0) {
-									float direction = condTemp.isRandomDirection() ? Rnd.get(0, 199) / 100f : condTemp.getDirection() / 100f;
-									double radian = Math.toRadians(PositionUtil.convertHeadingToAngle(npc.getHeading()));
-									float distance = condTemp.getMaxDistance() > 0 ? Rnd.get(condTemp.getMinDistance(), condTemp.getMaxDistance())
-										: condTemp.getMinDistance();
-									x1 = (float) (Math.cos(Math.PI * direction + radian) * distance);
-									y1 = (float) (Math.sin(Math.PI * direction + radian) * distance);
-								}
-								SpawnTemplate template = SpawnEngine.newSingleTimeSpawn(npc.getWorldId(), condTemp.getNpcId(), npc.getX() + x1, npc.getY() + y1,
-									npc.getZ(), npc.getHeading(), npc.getObjectId());
-								SpawnEngine.spawnObject(template, npc.getInstanceId());
-							}
-						}
-					}, condTemp.getDelay());
-				} else {
-					if (npc == null || npc.isDead() || npc.getLifeStats().isAboutToDie()) {
-						return;
-					}
-					int amount = condTemp.getMaxAmount() > 1 ? Rnd.get(condTemp.getMinAmount(), condTemp.getMaxAmount()) : condTemp.getMinAmount();
-					for (int i = 0; i < amount; i++) {
-						float x1 = 0;
-						float y1 = 0;
-						if (condTemp.getMinDistance() > 0) {
-							float direction = condTemp.isRandomDirection() ? Rnd.get(0, 199) / 100f : condTemp.getDirection() / 100f;
-							double radian = Math.toRadians(PositionUtil.convertHeadingToAngle(npc.getHeading()));
-							float distance = condTemp.getMaxDistance() > 0 ? Rnd.get(condTemp.getMinDistance(), condTemp.getMaxDistance())
-								: condTemp.getMinDistance();
-							x1 = (float) (Math.cos(Math.PI * direction + radian) * distance);
-							y1 = (float) (Math.sin(Math.PI * direction + radian) * distance);
-						}
-						SpawnTemplate template = SpawnEngine.newSingleTimeSpawn(npc.getWorldId(), condTemp.getNpcId(), npc.getX() + x1, npc.getY() + y1,
-							npc.getZ(), npc.getHeading(), npc.getObjectId());
-						SpawnEngine.spawnObject(template, npc.getInstanceId());
-					}
-				}
-				break;
+	private void spawnNpc(Npc npc, NpcSkillSpawn spawn) {
+		int count = spawn.getMaxCount() > 1 ? Rnd.get(spawn.getMinCount(), spawn.getMaxCount()) : spawn.getMinCount();
+		for (int i = 0; i < count; i++) {
+			float x1 = 0;
+			float y1 = 0;
+			if (spawn.getMinDistance() > 0) {
+				float directionMod = (float) (Rnd.get() * 2 * Math.PI); // 0 = normal direction, PI = opposite direction
+				double radian = Math.toRadians(PositionUtil.convertHeadingToAngle(npc.getHeading())) + directionMod;
+				float distance = spawn.getMaxDistance() > 0 ? Rnd.get(spawn.getMinDistance(), spawn.getMaxDistance()) : spawn.getMinDistance();
+				x1 = (float) (Math.cos(radian) * distance);
+				y1 = (float) (Math.sin(radian) * distance);
+			}
+			SpawnTemplate template = SpawnEngine.newSingleTimeSpawn(npc.getWorldId(), spawn.getNpcId(), npc.getX() + x1, npc.getY() + y1, npc.getZ(),
+				npc.getHeading(), npc.getObjectId());
+			SpawnEngine.spawnObject(template, npc.getInstanceId());
 		}
 	}
 

@@ -3,122 +3,122 @@
 	<!-- Krotan Lord -->
 	<npc_skills npc_ids="233632 233633">
 		<npc_skill id="18003" lv="1" prob="100" max_hp="25" cd="600000" target="ME">
-			<cond cond_type="SPAWN_NPC" npc_id="284978" min_distance="1" max_distance="1" random_direction="true" min_amount="1" max_amount="1"/>
+			<spawn_npc npc_id="284978" min_distance="1" max_distance="1" min_count="1" max_count="1" />
 		</npc_skill>
-		<npc_skill id="18204" lv="61" prob="25" cd="10000"/>
-      <npc_skill id="18205" lv="61" prob="25" cd="10000"/>
-      <npc_skill id="18206" lv="61" prob="25" cd="10000"/>
-      <npc_skill id="18207" lv="61" prob="25"/>
-      <npc_skill id="18208" lv="61" prob="25"/>
-      <npc_skill id="18209" lv="61" prob="25" max_hp="50"/>
-      <npc_skill id="18210" lv="61" prob="25" cd="30000"/>
-      <npc_skill id="18211" lv="61" prob="25" max_hp="50" cd="30000"/>
-      <npc_skill id="18594" lv="61" prob="50" cd="30000"/>
-   </npc_skills>
+		<npc_skill id="18204" lv="61" prob="25" cd="10000" />
+		<npc_skill id="18205" lv="61" prob="25" cd="10000" />
+		<npc_skill id="18206" lv="61" prob="25" cd="10000" />
+		<npc_skill id="18207" lv="61" prob="25" />
+		<npc_skill id="18208" lv="61" prob="25" />
+		<npc_skill id="18209" lv="61" prob="25" max_hp="50" />
+		<npc_skill id="18210" lv="61" prob="25" cd="30000" />
+		<npc_skill id="18211" lv="61" prob="25" max_hp="50" cd="30000" />
+		<npc_skill id="18594" lv="61" prob="50" cd="30000" />
+	</npc_skills>
 	<!-- Archer -->
 	<npc_skills npc_ids="233593 233597 233601 233629 233752 233756 233768 233772">
-		<npc_skill id="17003" lv="61" prob="33"/>
-		<npc_skill id="17031" lv="61" prob="33" next_chain_id="1" next_skill_time="4000"/>
-		<npc_skill id="17032" lv="61" prob="100" chain_id="1" next_skill_time="6000"/>
-		<npc_skill id="17243" lv="61" prob="33"/>
-		<npc_skill id="17244" lv="61" prob="33"/>
-      <npc_skill id="18559" lv="61" prob="25"/>
-   </npc_skills>
+		<npc_skill id="17003" lv="61" prob="33" />
+		<npc_skill id="17031" lv="61" prob="33" next_chain_id="1" next_skill_time="4000" />
+		<npc_skill id="17032" lv="61" prob="100" chain_id="1" next_skill_time="6000" />
+		<npc_skill id="17243" lv="61" prob="33" />
+		<npc_skill id="17244" lv="61" prob="33" />
+		<npc_skill id="18559" lv="61" prob="25" />
+	</npc_skills>
 	<!-- Assassin -->
 	<npc_skills npc_ids="233592 233596 233600 233616 233620 233624 233628 233755 233767 233771">
-      <npc_skill id="16540" lv="61" prob="25"/>
-      <npc_skill id="17409" lv="61" prob="25"/>
-      <npc_skill id="17413" lv="61" prob="25"/>
-      <npc_skill id="17414" lv="61" prob="25"/>
-      <npc_skill id="17418" lv="61" prob="25"/>
-      <npc_skill id="17419" lv="61" prob="25"/>
-      <npc_skill id="17444" lv="61" prob="25"/>
-   </npc_skills>
+		<npc_skill id="16540" lv="61" prob="25" />
+		<npc_skill id="17409" lv="61" prob="25" />
+		<npc_skill id="17413" lv="61" prob="25" />
+		<npc_skill id="17414" lv="61" prob="25" />
+		<npc_skill id="17418" lv="61" prob="25" />
+		<npc_skill id="17419" lv="61" prob="25" />
+		<npc_skill id="17444" lv="61" prob="25" />
+	</npc_skills>
 	<!-- Cleric -->
 	<npc_skills npc_ids="233594 233598 233602 233618 233622 233626 233630 233757 233769 233773">
-      <npc_skill id="16563" lv="61" prob="10"/>
-      <npc_skill id="16635" lv="61" prob="25"/>
-		<npc_skill id="17357" lv="61" prob="25"/>
-      <npc_skill id="17360" lv="61" prob="25"/>
-      <npc_skill id="17362" lv="61" prob="25"/>
-      <npc_skill id="17363" lv="61" prob="25"/>
-      <npc_skill id="17365" lv="61" prob="25"/>
-      <npc_skill id="17367" lv="61" prob="25"/>
-      <npc_skill id="17380" lv="61" prob="25"/>
-		<npc_skill id="17480" lv="61" prob="25"/>
-      <npc_skill id="17481" lv="61" prob="25"/>
-      <npc_skill id="17485" lv="61" prob="25"/>
-      <npc_skill id="17486" lv="61" prob="25"/>
-      <npc_skill id="17487" lv="61" prob="25"/>
-      <npc_skill id="17497" lv="61" prob="25"/>
-      <npc_skill id="17701" lv="61" prob="25"/>
-      <npc_skill id="17702" lv="61" prob="25"/>
-      <npc_skill id="17703" lv="61" prob="25"/>
-      <npc_skill id="17704" lv="61" prob="25"/>
-   </npc_skills>
+		<npc_skill id="16563" lv="61" prob="10" />
+		<npc_skill id="16635" lv="61" prob="25" />
+		<npc_skill id="17357" lv="61" prob="25" />
+		<npc_skill id="17360" lv="61" prob="25" />
+		<npc_skill id="17362" lv="61" prob="25" />
+		<npc_skill id="17363" lv="61" prob="25" />
+		<npc_skill id="17365" lv="61" prob="25" />
+		<npc_skill id="17367" lv="61" prob="25" />
+		<npc_skill id="17380" lv="61" prob="25" />
+		<npc_skill id="17480" lv="61" prob="25" />
+		<npc_skill id="17481" lv="61" prob="25" />
+		<npc_skill id="17485" lv="61" prob="25" />
+		<npc_skill id="17486" lv="61" prob="25" />
+		<npc_skill id="17487" lv="61" prob="25" />
+		<npc_skill id="17497" lv="61" prob="25" />
+		<npc_skill id="17701" lv="61" prob="25" />
+		<npc_skill id="17702" lv="61" prob="25" />
+		<npc_skill id="17703" lv="61" prob="25" />
+		<npc_skill id="17704" lv="61" prob="25" />
+	</npc_skills>
 	<!-- Ebonlord Arknamium -->
 	<npc_skills npc_ids="233631">
-      <npc_skill id="17293" lv="61" prob="25"/>
-      <npc_skill id="17295" lv="61" prob="25"/>
-      <npc_skill id="17297" lv="61" prob="25"/>
-      <npc_skill id="17303" lv="61" prob="25"/>
-      <npc_skill id="17325" lv="61" prob="25"/>
-      <npc_skill id="17327" lv="61" prob="25"/>
-      <npc_skill id="17568" lv="61" prob="25"/>
-      <npc_skill id="17580" lv="61" prob="25"/>
-      <npc_skill id="17581" lv="61" prob="25"/>
-      <npc_skill id="18109" lv="61" prob="25"/>
-    </npc_skills>
+		<npc_skill id="17293" lv="61" prob="25" />
+		<npc_skill id="17295" lv="61" prob="25" />
+		<npc_skill id="17297" lv="61" prob="25" />
+		<npc_skill id="17303" lv="61" prob="25" />
+		<npc_skill id="17325" lv="61" prob="25" />
+		<npc_skill id="17327" lv="61" prob="25" />
+		<npc_skill id="17568" lv="61" prob="25" />
+		<npc_skill id="17580" lv="61" prob="25" />
+		<npc_skill id="17581" lv="61" prob="25" />
+		<npc_skill id="18109" lv="61" prob="25" />
+	</npc_skills>
 	<!-- Fighter -->
 	<npc_skills npc_ids="233591 233599 233623 233627 233754 233766 233770">
-      <npc_skill id="16602" lv="61" prob="25"/>
-      <npc_skill id="17459" lv="61" prob="25"/>
-      <npc_skill id="17471" lv="61" prob="25"/>
-      <npc_skill id="17473" lv="61" prob="25"/>
-      <npc_skill id="17519" lv="61" prob="25"/>
-      <npc_skill id="18363" lv="61" prob="25"/>
-   </npc_skills>
+		<npc_skill id="16602" lv="61" prob="25" />
+		<npc_skill id="17459" lv="61" prob="25" />
+		<npc_skill id="17471" lv="61" prob="25" />
+		<npc_skill id="17473" lv="61" prob="25" />
+		<npc_skill id="17519" lv="61" prob="25" />
+		<npc_skill id="18363" lv="61" prob="25" />
+	</npc_skills>
 	<!-- Knight -->
 	<npc_skills npc_ids="233595 233619 233625">
-      <npc_skill id="17293" lv="61" prob="25"/>
-      <npc_skill id="17295" lv="61" prob="25"/>
-      <npc_skill id="17296" lv="61" prob="25"/>
-      <npc_skill id="17303" lv="61" prob="25"/>
-      <npc_skill id="17310" lv="61" prob="25"/>
-      <npc_skill id="17325" lv="61" prob="25"/>
-      <npc_skill id="17327" lv="61" prob="25"/>
-      <npc_skill id="17579" lv="61" prob="25"/>
-   </npc_skills>
+		<npc_skill id="17293" lv="61" prob="25" />
+		<npc_skill id="17295" lv="61" prob="25" />
+		<npc_skill id="17296" lv="61" prob="25" />
+		<npc_skill id="17303" lv="61" prob="25" />
+		<npc_skill id="17310" lv="61" prob="25" />
+		<npc_skill id="17325" lv="61" prob="25" />
+		<npc_skill id="17327" lv="61" prob="25" />
+		<npc_skill id="17579" lv="61" prob="25" />
+	</npc_skills>
 	<!-- Snake Cleric -->
 	<npc_skills npc_ids="233606 233765 233777 233781">
-      <npc_skill id="16563" lv="61" prob="10"/>
-      <npc_skill id="16628" lv="61" prob="25"/>
-      <npc_skill id="16690" lv="61" prob="25"/>
-      <npc_skill id="17446" lv="61" prob="25"/>
-      <npc_skill id="17447" lv="61" prob="25"/>
-      <npc_skill id="17448" lv="61" prob="25"/>
-      <npc_skill id="17482" lv="61" prob="25"/>
-      <npc_skill id="18375" lv="61" prob="25"/>
-   </npc_skills>
+		<npc_skill id="16563" lv="61" prob="10" />
+		<npc_skill id="16628" lv="61" prob="25" />
+		<npc_skill id="16690" lv="61" prob="25" />
+		<npc_skill id="17446" lv="61" prob="25" />
+		<npc_skill id="17447" lv="61" prob="25" />
+		<npc_skill id="17448" lv="61" prob="25" />
+		<npc_skill id="17482" lv="61" prob="25" />
+		<npc_skill id="18375" lv="61" prob="25" />
+	</npc_skills>
 	<!-- Snake Fighter -->
 	<npc_skills npc_ids="233603 233604 233607 233608 233611 233612 233615 233758 233762 233763 233778 233779">
-      <npc_skill id="16602" lv="61" prob="25"/>
-      <npc_skill id="16614" lv="61" prob="25"/>
-      <npc_skill id="16933" lv="61" prob="25"/>
-      <npc_skill id="17460" lv="61" prob="25"/>
-      <npc_skill id="17462" lv="61" prob="25"/>
-      <npc_skill id="17463" lv="61" prob="25"/>
-      <npc_skill id="17472" lv="61" prob="25"/>
-      <npc_skill id="17495" lv="61" prob="25"/>
-    </npc_skills>
+		<npc_skill id="16602" lv="61" prob="25" />
+		<npc_skill id="16614" lv="61" prob="25" />
+		<npc_skill id="16933" lv="61" prob="25" />
+		<npc_skill id="17460" lv="61" prob="25" />
+		<npc_skill id="17462" lv="61" prob="25" />
+		<npc_skill id="17463" lv="61" prob="25" />
+		<npc_skill id="17472" lv="61" prob="25" />
+		<npc_skill id="17495" lv="61" prob="25" />
+	</npc_skills>
 	<!-- Snake Mage -->
 	<npc_skills npc_ids="233605 233609 233610 233613 233614 233617 233621 233760 233764 233776">
-      <npc_skill id="16576" lv="61" prob="25"/>
-      <npc_skill id="17452" lv="61" prob="25"/>
-      <npc_skill id="17454" lv="61" prob="25"/>
-      <npc_skill id="17457" lv="61" prob="25"/>
-      <npc_skill id="17520" lv="61" prob="25"/>
-      <npc_skill id="17521" lv="61" prob="25"/>
-		<npc_skill id="18377" lv="61" prob="25"/>
-   </npc_skills>
+		<npc_skill id="16576" lv="61" prob="25" />
+		<npc_skill id="17452" lv="61" prob="25" />
+		<npc_skill id="17454" lv="61" prob="25" />
+		<npc_skill id="17457" lv="61" prob="25" />
+		<npc_skill id="17520" lv="61" prob="25" />
+		<npc_skill id="17521" lv="61" prob="25" />
+		<npc_skill id="18377" lv="61" prob="25" />
+	</npc_skills>
 </npc_skill_templates>
