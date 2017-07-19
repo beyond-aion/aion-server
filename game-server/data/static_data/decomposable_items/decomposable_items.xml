@@ -7235,7 +7235,7 @@
 			<item id="125040045" /><!-- Diving Helmet/Summer Headwrap -->
 			<item id="125040046" /><!-- Beach Hat -->
 			<item id="125045076" /><!-- Cool Swim Cap -->
-			<item id="160010089" min_count="6" /><!-- Summer-Loving Inquin Form Candy -->
+			<item id="188053793" min_count="5" /><!-- Rare Manastone of Aetheric Field Bundle -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051091" selectable="true"><!-- [Event] Frozen Box -->
@@ -7247,7 +7247,8 @@
 			<item id="110900846" /><!-- Urban Summer Blue -->
 			<item id="110900847" /><!-- Urban Summer Lime -->
 			<item id="110900848" /><!-- Urban Summer Red -->
-			<item id="160010089" min_count="15" /><!-- Summer-Loving Inquin Form Candy -->
+			<item id="188053113" min_count="3" /><!-- Ahserion's Flight Ancient Manastone Bundle -->
+			<item id="188053609" min_count="3" /><!-- [Event] Level 60 Composite Manastone Bundle -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051092" selectable="true"><!-- [Event] Cold Box -->
@@ -7258,7 +7259,7 @@
 			<item id="125040045" /><!-- Diving Helmet/Summer Headwrap -->
 			<item id="125040046" /><!-- Beach Hat -->
 			<item id="125045076" /><!-- Cool Swim Cap -->
-			<item id="160010090" min_count="6" /><!-- Summer-Loving Inquin Form Candy -->
+			<item id="188053793" min_count="5" /><!-- Rare Manastone of Aetheric Field Bundle -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051093" selectable="true"><!-- [Event] Frozen Box -->
@@ -7270,7 +7271,8 @@
 			<item id="110900846" /><!-- Urban Summer Blue -->
 			<item id="110900847" /><!-- Urban Summer Lime -->
 			<item id="110900848" /><!-- Urban Summer Red -->
-			<item id="160010090" min_count="15" /><!-- Summer-Loving Inquin Form Candy -->
+			<item id="188053113" min_count="3" /><!-- Ahserion's Flight Ancient Manastone Bundle -->
+			<item id="188053609" min_count="3" /><!-- [Event] Level 60 Composite Manastone Bundle -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051094" /><!-- Scorching Heat Pouch -->
@@ -22980,9 +22982,68 @@
 	<decomposable item_id="188052622" /><!-- [Event] Romantic Gift Bundle -->
 	<decomposable item_id="188052623" /><!-- [Event] Romantic Dye Box -->
 	<decomposable item_id="188052624" /><!-- [Event] Dramata's Bone Wing Box -->
-	<decomposable item_id="188052625" /><!-- [Event] Ice-hot Box -->
+	<decomposable item_id="188052625"><!-- [Event] Ice-hot Box -->
+		<items chance="6">
+			<item id="188053636" /><!-- Blood Mark Box -->
+		</items>
+		<items chance="6">
+			<item id="162000124" min_count="20" max_count="20" /><!-- Superior Recovery Serum -->
+		</items>
+		<items chance="6">
+			<item id="162000107" min_count="10" max_count="10" /><!-- Saam King's Herb -->
+		</items>
+		<items chance="6">
+			<item id="164000255" min_count="10" max_count="10" /><!-- Fine Crit Strike Scroll -->
+		</items>
+		<items chance="6">
+			<item id="164000256" min_count="10" max_count="10" /><!-- Fine Crit Spell Scroll -->
+		</items>
+		<items chance="8">
+			<item id="166030005" min_count="1" max_count="3" /><!-- Tempering Solution -->
+		</items>
+		<items chance="8">
+			<item id="166020000" min_count="5" max_count="5" /><!-- Omega Enchantment Stone -->
+		</items>
+		<items chance="8">
+			<item id="166500002" min_count="1" max_count="3" /><!-- Amplfication Stone -->
+		</items>
+		<items chance="8">
+			<item id="188053295" /><!-- Empyrean Plume Chest -->
+		</items>
+		<items chance="8">
+			<item id="188052638" /><!-- [Event] Fabled Godstone Bundle -->
+		</items>
+		<items chance="5">
+			<item id="188052388" /><!-- Modor's Equipment Box -->
+		</items>
+		<items chance="5">
+			<item id="188052827" /><!-- Dynatoum's Equipment Chest -->
+		</items>
+		<items chance="5">
+			<item id="188053033" /><!-- Kunax's Equipment Box -->
+		</items>
+		<items chance="5">
+			<item id="188053004" /><!-- [Event] Dragon Lord's Weapon Chest -->
+		</items>
+		<items chance="3.34">
+			<item id="190020198" /><!-- Yongsam's Egg -->
+		</items>
+		<items chance="3.33">
+			<item id="190100108" /><!-- Snowfeather Board -->
+		</items>
+		<items chance="3.33">
+			<item id="187000129" /><!-- Brazen Bulwark Burster -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188052626" /><!-- [Event] Cocktail Shaker -->
-	<decomposable item_id="188052627" /><!-- [Event] Bag of Ice -->
+	<decomposable item_id="188052627"><!-- [Event] Bag of Ice -->
+		<items>
+			<item id="188100124" min_count="1" max_count="3" /><!-- Ice Block -->
+		</items>
+		<items>
+			<item id="188100125" min_count="1" max_count="3" /><!-- Ice Pick -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188052628" /><!-- [Event] Icy Idian Box -->
 	<decomposable item_id="188052629" /><!-- [Event] Sensible Summer Gear -->
 	<decomposable item_id="188052630" /><!-- [Event] Ophidan Headgear Skin -->
