@@ -498,10 +498,10 @@
 		</staticdoor>
 	</world>
 	<world world="300240000">
-		<staticdoor keyid="1" doorid="2" x="286.414246" y="846.1364" z="907.5599" mesh="surkana_control_door_01.cga" state="0x4">
+		<staticdoor keyid="1" doorid="2" x="286.414246" y="846.1364" z="907.5599" mesh="surkana_control_door_01.cga" state="0x0">
 			<box x1="280.403625" y1="843.0053" z1="887.0928" x2="292.424835" y2="849.2675" z2="900.505737" />
 		</staticdoor>
-		<staticdoor keyid="1" doorid="17" x="331.369" y="859.8553" z="911.6335" mesh="surkana_control_door_02.cga" state="0x4">
+		<staticdoor keyid="1" doorid="17" x="331.369" y="859.8553" z="911.6335" mesh="surkana_control_door_02.cga" state="0x1">
 			<box x1="325.79538" y1="849.2238" z1="876.835754" x2="336.9426" y2="870.4868" z2="900.547363" />
 		</staticdoor>
 		<staticdoor doorid="68" x="749.2766" y="169.781265" z="608.174438" mesh="cunbandaroom_exit_door.cga" state="0x4">

@@ -32,7 +32,7 @@ public class AshunatalShadowslipAI extends AggressiveNpcAI {
 	protected void handleCreatureAggro(Creature creature) {
 		super.handleCreatureAggro(creature);
 		if (isHome.compareAndSet(true, false)) {
-			getPosition().getWorldMapInstance().getDoors().get(17).setOpen(false);
+			getPosition().getWorldMapInstance().getDoors().get(2).setOpen(true); // this actually closes it on client side (wtf)
 		}
 	}
 
@@ -40,15 +40,15 @@ public class AshunatalShadowslipAI extends AggressiveNpcAI {
 	protected void handleBackHome() {
 		isHome.set(true);
 		super.handleBackHome();
-		getPosition().getWorldMapInstance().getDoors().get(17).setOpen(true);
+		getPosition().getWorldMapInstance().getDoors().get(2).setOpen(false); // this actually opens it on client side (wtf)
 	}
 
 	@Override
 	protected void handleDied() {
 		super.handleDied();
 		// ashunatal got killed early, therefore she could not spawn her shadow which usually would open the door
-		getPosition().getWorldMapInstance().getDoors().get(17).setOpen(true);
-		getPosition().getWorldMapInstance().getDoors().get(2).setOpen(true);
+		getPosition().getWorldMapInstance().getDoors().get(17).setOpen(false); // this actually opens it on client side (wtf)
+		getPosition().getWorldMapInstance().getDoors().get(2).setOpen(false); // this actually opens it on client side (wtf)
 	}
 
 	@Override
