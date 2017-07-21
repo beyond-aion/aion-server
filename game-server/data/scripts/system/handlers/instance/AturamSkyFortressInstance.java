@@ -174,7 +174,6 @@ public class AturamSkyFortressInstance extends GeneralInstanceHandler {
 		super.onInstanceCreate(instance);
 		doors = instance.getDoors();
 		doors.get(177).setOpen(true);
-		doors.get(17).setOpen(true);
 		Npc npc = instance.getNpc(217371);
 		if (npc != null) {
 			SkillEngine.getInstance().getSkill(npc, 19406, 1, npc).useNoAnimationSkill();

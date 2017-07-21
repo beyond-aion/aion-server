@@ -552,7 +552,7 @@ public class QuestEngine implements GameEngine {
 			TIntArrayList questIds = questOnMovieEnd.get(movieId);
 			if (questIds != null) {
 				for (int index = 0; index < questIds.size(); index++) {
-					AbstractQuestHandler questHandler = getQuestHandlerByQuestId(env.getQuestId());
+					AbstractQuestHandler questHandler = getQuestHandlerByQuestId(questIds.get(index));
 					if (questHandler != null) {
 						env.setQuestId(questIds.get(index));
 						if (questHandler.onMovieEndEvent(env, movieId))
