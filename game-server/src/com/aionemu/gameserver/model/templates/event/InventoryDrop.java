@@ -20,8 +20,8 @@ public class InventoryDrop {
 	private int startLevel;
 	@XmlAttribute(name = "interval", required = true)
 	private int interval;
-	@XmlAttribute(name = "amount")
-	private int amount = 1;
+	@XmlAttribute(name = "count")
+	private int count = 1;
 
 	public int getDropItem() {
 		return dropItem;
@@ -35,7 +35,7 @@ public class InventoryDrop {
 		return interval;
 	}
 
-	public int getAmount() {
-		return amount;
+	public int getCount() {
+		return count;
 	}
 }
