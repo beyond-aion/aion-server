@@ -31569,7 +31569,7 @@
 		<items>
 			<item id="186000243" min_count="5" max_count="10" /><!-- Fragmented Ceramium -->
 			<item id="188053628" /><!-- Pallasite Bundle -->
-			<random_item type="MANASTONE_LEGEND_GRADE_50" />
+			<random_item type="MANASTONE_LEGEND_GRADE_60" />
 		</items>
 		<items>
 			<item id="186000237" min_count="15" max_count="30" /><!-- Ancient Coin -->
