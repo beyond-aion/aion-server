@@ -201,7 +201,28 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Godstones -->
-	<gd_rule rule_name="Illusion Godstones" base_chance="0.01" fixed_chance="true">
+	<gd_rule rule_name="Illusion Godstones (Legend)" base_chance="0.02" fixed_chance="true">
+		<gd_items>
+			<gd_item id="168000212" /><!-- Illusion Godstone: Aion's Sorrow -->
+			<gd_item id="168000213" /><!-- Illusion Godstone: Fasimedes' Authority -->
+			<gd_item id="168000214" /><!-- Illusion Godstone: Thrasymedes' Foresight -->
+			<gd_item id="168000215" /><!-- Illusion Godstone: Freyr's Esprit -->
+			<gd_item id="168000216" /><!-- Illusion Godstone: Vidar's Nobility -->
+			<gd_item id="168000217" /><!-- Illusion Godstone: Charna's Cleverness -->
+			<gd_item id="168000218" /><!-- Illusion Godstone: Sif's Extensive Knowledge -->
+			<gd_item id="168000219" /><!-- Illusion Godstone: Jumentis' Agility -->
+			<gd_item id="168000220" /><!-- Illusion Godstone: Sigyn's Brightness -->
+			<gd_item id="168000221" /><!-- Illusion Godstone: Boreas' Encouragement -->
+			<gd_item id="168000222" /><!-- Illusion Godstone: Traufnir's Spirit -->
+			<gd_item id="168000223" /><!-- Illusion Godstone: Bollvig's Grief -->
+			<gd_item id="168000224" /><!-- Illusion Godstone: Helkes' Vengeance -->
+			<gd_item id="168000225" /><!-- Illusion Godstone: Deltras' Loyalty -->
+			<gd_item id="168000226" /><!-- Illusion Godstone: Orissan's Blood -->
+			<gd_item id="168000227" /><!-- Illusion Godstone: Mahisha's Wrath -->
+			<gd_item id="168000228" /><!-- Illusion Godstone: Khrudgelmir's Silence -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Illusion Godstones (Unique)" base_chance="0.01" fixed_chance="true">
 		<gd_items>
 			<gd_item id="168000229" /><!-- Illusion Godstone: Lumiel's Interference -->
 			<gd_item id="168000230" /><!-- Illusion Godstone: Meslamtaeda's Ambition -->
