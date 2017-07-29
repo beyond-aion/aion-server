@@ -71,8 +71,10 @@ public class BrigadeGeneralLaksyakaAI extends AggressiveNpcAI {
 				players.add(player);
 			}
 		});
-		Player player = Rnd.get(players);
-		SkillEngine.getInstance().applyEffectDirectly(20865, tiamatEye, player, 30000);
+		if (!players.isEmpty()) {
+			Player player = Rnd.get(players);
+			SkillEngine.getInstance().applyEffectDirectly(20865, tiamatEye, player, 30000);
+		}
 	}
 
 	private void spawnSummon() {
