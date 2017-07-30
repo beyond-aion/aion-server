@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <timed_events xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="timed_events.xsd">
-	<event name="Beyond Aion Summer Event 2017" start="2017-07-17T00:00:00" end="2017-07-31T23:59:59">
+	<event name="Beyond Aion Summer Event 2017" start="2017-08-11T00:00:00" end="2017-08-27T23:59:59">
 		<event_drops>
-			<gd_rule rule_name="Ice Component Elyos" base_chance="10" fixed_chance="true" restriction_race="ELYOS">
+			<gd_rule rule_name="Ice Component Elyos" base_chance="20" fixed_chance="true" restriction_race="ELYOS">
 				<gd_maps>
 					<gd_map map_id="220080000" /><!-- Enshar -->
 				</gd_maps>

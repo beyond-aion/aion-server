@@ -2088,10 +2088,10 @@
 			</spawn_map>
 		</spawns>
 	</event>
-	<event name="Scorching Heat Inventory" start="2017-07-11T00:00:00" end="2017-08-08T23:59:59">
+	<event name="Scorching Heat Inventory" start="2017-08-04T00:00:00" end="2017-08-20T23:59:59">
 		<inventory_drop startlevel="1" interval="30" count="3">186000111</inventory_drop>
 	</event>
-	<event name="Scorching Heat" start="2017-07-11T00:00:00" end="2017-08-10T23:59:59">
+	<event name="Scorching Heat" start="2017-08-04T00:00:00" end="2017-08-22T23:59:59">
 		<spawns>
 			<!-- Pandaemonium -->
 			<spawn_map map_id="120010000">
