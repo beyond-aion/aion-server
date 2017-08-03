@@ -22998,7 +22998,7 @@
 		<items chance="6">
 			<item id="164000256" min_count="10" /><!-- Fine Crit Spell Scroll -->
 		</items>
-		<items chance="11">
+		<items chance="20">
 			<item id="166030005" min_count="1" max_count="3" /><!-- Tempering Solution -->
 		</items>
 		<items chance="10">
@@ -23013,25 +23013,25 @@
 		<items chance="8">
 			<item id="188052638" /><!-- [Event] Fabled Godstone Bundle -->
 		</items>
-		<items chance="4">
+		<items chance="3">
 			<item id="188052388" /><!-- Modor's Equipment Box -->
 		</items>
-		<items chance="4">
+		<items chance="3">
 			<item id="188052827" /><!-- Dynatoum's Equipment Chest -->
 		</items>
-		<items chance="4">
+		<items chance="3">
 			<item id="188053033" /><!-- Kunax's Equipment Box -->
 		</items>
-		<items chance="4">
+		<items chance="1">
 			<item id="188053004" /><!-- [Event] Dragon Lord's Weapon Chest -->
 		</items>
-		<items chance="2">
+		<items chance="1">
 			<item id="190020198" /><!-- Yongsam's Egg -->
 		</items>
-		<items chance="2">
+		<items chance="1">
 			<item id="190100108" /><!-- Snowfeather Board -->
 		</items>
-		<items chance="2">
+		<items chance="1">
 			<item id="187000129" /><!-- Brazen Bulwark Burster -->
 		</items>
 	</decomposable>
