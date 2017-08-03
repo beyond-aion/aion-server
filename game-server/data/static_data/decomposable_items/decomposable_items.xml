@@ -22987,51 +22987,51 @@
 			<item id="188053636" /><!-- Blood Mark Box -->
 		</items>
 		<items chance="6">
-			<item id="162000124" min_count="20" max_count="20" /><!-- Superior Recovery Serum -->
+			<item id="162000124" min_count="20" /><!-- Superior Recovery Serum -->
 		</items>
 		<items chance="6">
-			<item id="162000107" min_count="10" max_count="10" /><!-- Saam King's Herb -->
+			<item id="162000107" min_count="10" /><!-- Saam King's Herb -->
 		</items>
 		<items chance="6">
-			<item id="164000255" min_count="10" max_count="10" /><!-- Fine Crit Strike Scroll -->
+			<item id="164000255" min_count="10" /><!-- Fine Crit Strike Scroll -->
 		</items>
 		<items chance="6">
-			<item id="164000256" min_count="10" max_count="10" /><!-- Fine Crit Spell Scroll -->
+			<item id="164000256" min_count="10" /><!-- Fine Crit Spell Scroll -->
 		</items>
-		<items chance="8">
+		<items chance="11">
 			<item id="166030005" min_count="1" max_count="3" /><!-- Tempering Solution -->
 		</items>
-		<items chance="8">
-			<item id="166020000" min_count="5" max_count="5" /><!-- Omega Enchantment Stone -->
+		<items chance="10">
+			<item id="166020000" min_count="5" /><!-- Omega Enchantment Stone -->
 		</items>
-		<items chance="8">
+		<items chance="10">
 			<item id="166500002" min_count="1" max_count="3" /><!-- Amplfication Stone -->
 		</items>
-		<items chance="8">
+		<items chance="9">
 			<item id="188053295" /><!-- Empyrean Plume Chest -->
 		</items>
 		<items chance="8">
 			<item id="188052638" /><!-- [Event] Fabled Godstone Bundle -->
 		</items>
-		<items chance="5">
+		<items chance="4">
 			<item id="188052388" /><!-- Modor's Equipment Box -->
 		</items>
-		<items chance="5">
+		<items chance="4">
 			<item id="188052827" /><!-- Dynatoum's Equipment Chest -->
 		</items>
-		<items chance="5">
+		<items chance="4">
 			<item id="188053033" /><!-- Kunax's Equipment Box -->
 		</items>
-		<items chance="5">
+		<items chance="4">
 			<item id="188053004" /><!-- [Event] Dragon Lord's Weapon Chest -->
 		</items>
-		<items chance="3.34">
+		<items chance="2">
 			<item id="190020198" /><!-- Yongsam's Egg -->
 		</items>
-		<items chance="3.33">
+		<items chance="2">
 			<item id="190100108" /><!-- Snowfeather Board -->
 		</items>
-		<items chance="3.33">
+		<items chance="2">
 			<item id="187000129" /><!-- Brazen Bulwark Burster -->
 		</items>
 	</decomposable>
@@ -26501,47 +26501,21 @@
 			<item id="169405253" min_count="1" max_count="1" /><!-- Weapon Shard -->
 		</items>
 	</decomposable>
-	<decomposable item_id="188053004"><!-- [Event] Dragon Lord's Weapon Chest -->
+	<decomposable item_id="188053004" selectable="true"><!-- [Event] Dragon Lord's Weapon Chest -->
 		<items>
 			<item id="115001410" /><!-- Dragon Lord's Sigh -->
-		</items>
-		<items>
 			<item id="115001411" /><!-- Dragon Lord's Agony -->
-		</items>
-		<items>
 			<item id="100001359" /><!-- Dragon Lord's Wrath -->
-		</items>
-		<items>
 			<item id="100501049" /><!-- Dragon Lord's Arrogance -->
-		</items>
-		<items>
 			<item id="100101037" /><!-- Dragon Lord's Delight -->
-		</items>
-		<items>
 			<item id="100601105" /><!-- Dragon Lord's Distrust -->
-		</items>
-		<items>
 			<item id="101701085" /><!-- Dragon Lord's Envy -->
-		</items>
-		<items>
 			<item id="101300993" /><!-- Dragon Lord's Greed -->
-		</items>
-		<items>
 			<item id="100901050" /><!-- Dragon Lord's Hatred -->
-		</items>
-		<items>
 			<item id="101501069" /><!-- Dragon Lord's Pride -->
-		</items>
-		<items>
 			<item id="101800858" /><!-- Dragon Lord's Pistol -->
-		</items>
-		<items>
 			<item id="101900856" /><!-- Dragon Lord's Conviction -->
-		</items>
-		<items>
 			<item id="102000890" /><!-- Dragon Lord's Harp -->
-		</items>
-		<items>
 			<item id="102100750" /><!-- Tiamat Guard's Cipher-Blade -->
 		</items>
 	</decomposable>
