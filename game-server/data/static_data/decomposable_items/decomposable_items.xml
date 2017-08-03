@@ -26503,20 +26503,16 @@
 	</decomposable>
 	<decomposable item_id="188053004" selectable="true"><!-- [Event] Dragon Lord's Weapon Chest -->
 		<items>
-			<item id="115001410" /><!-- Dragon Lord's Sigh -->
-			<item id="115001411" /><!-- Dragon Lord's Agony -->
-			<item id="100001359" /><!-- Dragon Lord's Wrath -->
-			<item id="100501049" /><!-- Dragon Lord's Arrogance -->
-			<item id="100101037" /><!-- Dragon Lord's Delight -->
-			<item id="100601105" /><!-- Dragon Lord's Distrust -->
-			<item id="101701085" /><!-- Dragon Lord's Envy -->
-			<item id="101300993" /><!-- Dragon Lord's Greed -->
-			<item id="100901050" /><!-- Dragon Lord's Hatred -->
-			<item id="101501069" /><!-- Dragon Lord's Pride -->
-			<item id="101800858" /><!-- Dragon Lord's Pistol -->
-			<item id="101900856" /><!-- Dragon Lord's Conviction -->
-			<item id="102000890" /><!-- Dragon Lord's Harp -->
-			<item id="102100750" /><!-- Tiamat Guard's Cipher-Blade -->
+			<item id="100001405" /><!-- Distorted Dragon Lord's Wrath -->
+			<item id="100101082" /><!-- Distorted Dragon Lord's Delight -->
+			<item id="100201244" /><!-- Distorted Dragon Lord's Murderous Intent -->
+			<item id="100501092" /><!-- Dragon Lord's Arrogance -->
+			<item id="100601148" /><!-- Dragon Lord's Distrust -->
+			<item id="100901098" /><!-- Distorted Dragon Lord's Hatred -->
+			<item id="101301035" /><!-- Distorted Dragon Lord's Greed -->
+			<item id="101501116" /><!-- Distorted Dragon Lord's Pride -->
+			<item id="101701129" /><!-- Dragon Lord's Envy -->
+			<item id="101800850" /><!-- Dragon Lord's Resolve -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188053005"><!-- [Event] Hyperion's Wing Chest -->
