@@ -44,6 +44,6 @@ public class CM_PRIVATE_STORE extends AionClientPacket {
 		if (tradePSItems.length <= 0)
 			PrivateStoreService.closePrivateStore(player);
 		else
-			PrivateStoreService.addItems(player, tradePSItems);
+			PrivateStoreService.createStoreWithItems(player, tradePSItems);
 	}
 }

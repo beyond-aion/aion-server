@@ -29,27 +29,18 @@ public class PrivateStoreService {
 
 	private static final Logger log = LoggerFactory.getLogger("EXCHANGE_LOG");
 
-	/**
-	 * @param activePlayer
-	 * @param itemObjId
-	 * @param itemId
-	 * @param itemAmount
-	 * @param itemPrice
-	 */
-	public static void addItems(Player activePlayer, TradePSItem[] tradePSItems) {
-		if (CreatureState.ACTIVE.getId() != activePlayer.getState())
+	public static void createStoreWithItems(Player activePlayer, TradePSItem[] tradePSItems) {
+		if (CreatureState.ACTIVE.getId() != activePlayer.getState() || activePlayer.getStore() != null)
 			return;
 
-		if (activePlayer.getStore() == null) // TODO synchronization
-			createStore(activePlayer);
-
-		PrivateStore store = activePlayer.getStore();
+		PrivateStore store = new PrivateStore(activePlayer);
 		for (int i = 0; i < tradePSItems.length; i++) {
 			Item item = activePlayer.getInventory().getItemByObjId(tradePSItems[i].getItemObjId());
 			if (!validateItem(store, item, tradePSItems[i]))
-				break;
+				return;
 			store.addItemToSell(tradePSItems[i].getItemObjId(), tradePSItems[i]);
 		}
+		createStore(activePlayer, store);
 	}
 
 	private static final boolean validateItem(PrivateStore store, Item item, TradePSItem psItem) {
@@ -86,8 +77,8 @@ public class PrivateStoreService {
 	 * 
 	 * @param activePlayer
 	 */
-	private static void createStore(Player activePlayer) {
-		activePlayer.setStore(new PrivateStore(activePlayer));
+	private static void createStore(Player activePlayer, PrivateStore store) {
+		activePlayer.setStore(store);
 		activePlayer.setState(CreatureState.PRIVATE_SHOP);
 		PacketSendUtility.broadcastPacket(activePlayer, new SM_EMOTION(activePlayer, EmotionType.OPEN_PRIVATESHOP, 0, 0), true);
 	}
