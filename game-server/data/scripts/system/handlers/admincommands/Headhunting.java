@@ -51,12 +51,9 @@ public class Headhunting extends AdminCommand {
 
 	public Headhunting() {
 		super("headhunting");
-		setSyntaxInfo(
-			"<analyze> - Analyzes the season.",
-			"<clear> - Clears the analayzed results",
+		setSyntaxInfo("<analyze> - Analyzes the season.", "<clear> - Clears the analayzed results",
 			"<show> <rewards|results> - Shows the registered rewards or analyzed results",
-			"<reward> - Executes the reward algorithm and clears all references (cached headhunters and database entries)."
-		);
+			"<reward> - Executes the reward algorithm and clears all references (cached headhunters and database entries).");
 
 		/* Initialize seasonal headhunting rewards */
 		rewards.put(1, new ArrayList<>());
@@ -66,15 +63,12 @@ public class Headhunting extends AdminCommand {
 
 		rewards.get(1).add(new RewardItem(186000242, 50)); // Ceramium Medal
 		rewards.get(1).add(new RewardItem(186000051, 30)); // Major Ancient Crown
-		rewards.get(1).add(new RewardItem(188051531, 3)); // Arena Ticket Supply Box
 
 		rewards.get(2).add(new RewardItem(186000242, 20)); // Ceramium Medal
 		rewards.get(2).add(new RewardItem(186000051, 15)); // Major Ancient Crown
-		rewards.get(2).add(new RewardItem(188051531, 2)); // Arena Ticket Supply Box
 
 		rewards.get(3).add(new RewardItem(186000242, 10)); // Ceramium Medal
 		rewards.get(3).add(new RewardItem(186000051, 5)); // Major Ancient Crown
-		rewards.get(3).add(new RewardItem(188051531, 1)); // Arena Ticket Supply Box
 
 		rewards.get(4).add(new RewardItem(186000051, 1)); // Major Ancient Crown
 	}
@@ -125,6 +119,10 @@ public class Headhunting extends AdminCommand {
 		results.put(Race.ELYOS, new EnumMap<>(PlayerClass.class));
 		for (Headhunter hunter : headhunters.values()) {
 			PlayerCommonData pcd = DAOManager.getDAO(PlayerDAO.class).loadPlayerCommonData(hunter.getHunterId());
+			if (pcd == null) {
+				log.warn("PlayerID: " + hunter.getHunterId() + " did not exist anymore.");
+				continue;
+			}
 			PlayerClass pc = pcd.getPlayerClass();
 			Race race = pcd.getRace();
 			results.get(race).putIfAbsent(pc, new ArrayList<>());
@@ -236,8 +234,8 @@ public class Headhunting extends AdminCommand {
 								+ item.getCount() + ").");
 						}
 					}
-					log.info("[Race: " + race + "] [PlayerClass: " + pc + "] [Rank: " + rank + "] [RewardedPlayer: " + name + "] [Kills: " + hunter.getKills()
-						+ "]");
+					log.info(
+						"[Race: " + race + "] [PlayerClass: " + pc + "] [Rank: " + rank + "] [RewardedPlayer: " + name + "] [Kills: " + hunter.getKills() + "]");
 					rewardedPlayers++;
 				}
 			}
