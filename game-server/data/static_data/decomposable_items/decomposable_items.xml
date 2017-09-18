@@ -23306,10 +23306,10 @@
 		</items>
 	</decomposable>
 	<decomposable item_id="188052640"><!-- [Event] Key Pouch -->
-		<items chance="80.0">
+		<items chance="60.0">
 			<item id="185000186" /><!-- [Event] Copper Key -->
 		</items>
-		<items chance="20.0">
+		<items chance="40.0">
 			<item id="185000185" /><!-- [Event] Golden Key -->
 		</items>
 	</decomposable>
@@ -23319,10 +23319,10 @@
 		</items>
 	</decomposable>
 	<decomposable item_id="188052642"><!-- [Event] Treasured Alchemist's Pouch -->
-		<items chance="70.0">
+		<items chance="50.0">
 			<item id="188100127" /><!-- [Event] Lead Fragment -->
 		</items>
-		<items chance="30.0">
+		<items chance="50.0">
 			<item id="188100126" /><!-- [Event] Alchemic Essence -->
 		</items>
 	</decomposable>
