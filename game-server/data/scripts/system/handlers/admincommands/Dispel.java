@@ -1,5 +1,6 @@
 package admincommands;
 
+import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -7,27 +8,24 @@ import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 
 /**
  * @author Hilgert
+ * @reworked Estrayl
  */
 public class Dispel extends AdminCommand {
 
 	public Dispel() {
-		super("dispel", "Dispels all (de)buffs");
+		super("dispel", "Removes all effects including transformations.");
 	}
 
 	@Override
 	public void execute(Player admin, String... params) {
-		Player target = null;
-		VisibleObject creature = admin.getTarget();
+		VisibleObject target = admin.getTarget();
+		if (target == null)
+			target = admin;
 
-		if (creature == null) {
-			PacketSendUtility.sendMessage(admin, "You should select a target first!");
-			return;
-		}
-
-		if (creature instanceof Player) {
-			target = (Player) creature;
-			target.getEffectController().removeAllEffects();
-			PacketSendUtility.sendMessage(admin, creature.getName() + " had all buff effects dispelled !");
+		if (target instanceof Creature) {
+			((Creature) target).getEffectController().removeAllEffects();
+			((Creature) target).getEffectController().removeTransformEffects();
+			PacketSendUtility.sendMessage(admin, "Removed all effects of " + target + ".");
 		}
 	}
 }
