@@ -3347,7 +3347,7 @@
 			</spawn_map>
 		</spawns>
 	</event>
-	<event name="Alchemy Event" start="2017-09-18T00:00:00" end="2017-09-21T00:00:00">
+	<event name="Alchemy Event" start="2017-09-29T00:00:00" end="2017-10-15T00:00:00">
 		<!-- [Event] Alchemist's Pouch -->
 		<event_drops>
 			<gd_rule rule_name="Alchemy Event Drop" min_count="1" base_chance="100" min_diff="-15" max_diff="70">
@@ -3413,8 +3413,6 @@
 					<spot x="1524" y="1516" z="566" />
 					<spot x="1524" y="1506" z="566" />
 					<spot x="1524" y="1511" z="566" />
-					<spot x="1524" y="1516" z="566" />
-					<spot x="1524" y="1516" z="566" />
 				</spawn>
 				<!-- Common Treasure Box -->
 				<spawn npc_id="831786" respawn_time="120">
