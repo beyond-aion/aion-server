@@ -116,7 +116,7 @@ public class RideAction extends AbstractItemAction {
 		player.getObserveController().addObserver(rideObserver);
 		player.setRideObservers(rideObserver);
 
-		// TODO some mounts have lower change of dismounting
+		// TODO some mounts have lower chance of dismounting
 		ActionObserver attackedObserver = new ActionObserver(ObserverType.ATTACKED) {
 
 			@Override

@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.model.actions;
 
+import java.util.List;
+
 import com.aionemu.gameserver.controllers.observer.ActionObserver;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.player.InRoll;
@@ -62,10 +64,13 @@ public class PlayerActions extends VisibleObjectActions {
 				player.getGameStats().updateStatsAndSpeedVisually();
 
 				// remove rideObservers
-				for (ActionObserver observer : player.getRideObservers()) {
-					player.getObserveController().removeObserver(observer);
+				List<ActionObserver> rideObservers = player.getRideObservers();
+				synchronized (rideObservers) {
+					for (ActionObserver observer : rideObservers) {
+						player.getObserveController().removeObserver(observer);
+					}
+					rideObservers.clear();
 				}
-				player.getRideObservers().clear();
 				return true;
 			case IN_ROLL:
 				if (player.inRoll == null)
