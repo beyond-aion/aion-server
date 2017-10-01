@@ -90,7 +90,6 @@ public class SummonsService {
 			int summonedBySkillId = owner.getSummonedBySkillId();
 
 			owner.getController().delete();
-			owner.setMaster(null);
 			if (owner.equals(master.getSummon()))
 				master.setSummon(null);
 
