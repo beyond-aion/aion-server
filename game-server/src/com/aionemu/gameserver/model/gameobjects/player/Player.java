@@ -1860,7 +1860,9 @@ public class Player extends Creature {
 		if (rideObservers == null)
 			rideObservers = new ArrayList<>();
 
-		rideObservers.add(observer);
+		synchronized (rideObservers) {
+			rideObservers.add(observer);
+		}
 	}
 
 	public List<ActionObserver> getRideObservers() {

@@ -110,14 +110,20 @@ public class SummonController extends CreatureController<Summon> {
 	}
 
 	@Override
+	public void onDespawn() {
+		if (getOwner().getMode() == SummonMode.RELEASE)
+			getOwner().getEffectController().removeAllEffects();
+		super.onDespawn();
+	}
+
+	@Override
 	public void onDie(Creature lastAttacker) {
 		super.onDie(lastAttacker);
 		Summon owner = getOwner();
 		Player master = getOwner().getMaster();
 		SummonsService.release(owner, UnsummonType.UNSPECIFIED, isAttacked);
 
-		if (!master.equals(lastAttacker) && !owner.equals(lastAttacker) && !master.isDead()
-			&& !lastAttacker.isDead()) {
+		if (!master.equals(lastAttacker) && !owner.equals(lastAttacker) && !master.isDead() && !lastAttacker.isDead()) {
 			ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 				@Override
