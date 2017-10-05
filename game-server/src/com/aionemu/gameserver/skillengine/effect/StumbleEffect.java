@@ -29,8 +29,8 @@ public class StumbleEffect extends EffectTemplate {
 		final Creature effector = effect.getEffector();
 		final Creature effected = effect.getEffected();
 		double radian = Math.toRadians(PositionUtil.convertHeadingToAngle(effector.getHeading()));
-		float x1 = (float) (Math.cos(radian) * 1.5f);
-		float y1 = (float) (Math.sin(radian) * 1.5f);
+		float x1 = (float) (Math.cos(radian) * 1.3f);
+		float y1 = (float) (Math.sin(radian) * 1.3f);
 		Vector3f closestCollision = GeoService.getInstance().getClosestCollision(effected, effected.getX() + x1, effected.getY() + y1, effected.getZ());
 		effect.setTargetLoc(closestCollision.getX(), closestCollision.getY(), closestCollision.getZ());
 		effect.addToEffectedController();
