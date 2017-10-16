@@ -4150,4 +4150,35 @@
 			</gd_rule>
 		</event_drops>
 	</event>
+	<event name="The Scattered Deck" start="2017-10-16T00:00:00" end="2017-10-28T23:59:59">
+		<event_drops>
+			<gd_rule rule_name="Mysterious Card" base_chance="10" fixed_chance="true">
+				<gd_maps>
+					<gd_map map_id="600100000"/><!-- Levinshor -->
+				</gd_maps>
+				<gd_ratings>
+					<gd_rating rating="NORMAL" />
+					<gd_rating rating="ELITE" />
+					<gd_rating rating="HERO" />
+				</gd_ratings>
+				<gd_items>
+					<gd_item id="186000381"/><!-- Mysterious Card -->
+				</gd_items>
+			</gd_rule>
+		</event_drops>
+		<spawns>
+			<!-- Sanctum -->
+			<spawn_map map_id="110010000">
+				<spawn npc_id="832265" respawn_time="295">
+					<spot x="1356.5542" y="1527.0270" z="569.0384" />
+				</spawn>
+			</spawn_map>
+			<!-- Pandaemonium -->
+			<spawn_map map_id="120010000">
+				<spawn npc_id="832266" respawn_time="295">
+					<spot x="1634.3815" y="1384.2788" z="193.1270" h="60" />
+				</spawn>
+			</spawn_map>
+		</spawns>
+	</event>
 </timed_events>
