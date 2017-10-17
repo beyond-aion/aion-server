@@ -1,41 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <timed_events xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="timed_events.xsd">
-	<event name="The Scattered Deck" start="2015-03-12T00:00:00" end="2015-03-26T00:00:00">
-		<event_drops>
-			<gd_rule rule_name="The Scattered Deck Event Drop" min_count="1" base_chance="20" min_diff="-20" max_diff="70" member_limit="12">
-				<gd_worlds>
-					<gd_world wd_type="ABYSS_INSTANCE" />
-					<gd_world wd_type="ARENA_INSTANCE" />
-					<gd_world wd_type="BALAUREA_INSTANCE" />
-					<gd_world wd_type="DREDGION_INSTANCE" />
-					<gd_world wd_type="STEEL_RAKE_INSTANCE" />
-				</gd_worlds>
-				<gd_ratings>
-					<gd_rating rating="HERO" />
-					<gd_rating rating="LEGENDARY" />
-				</gd_ratings>
-				<gd_items>
-					<gd_item id="188053101" /><!-- Mysterious Reward Box -->
-				</gd_items>
-			</gd_rule>
-		</event_drops>
-		<spawns>
-			<!-- Sanctum -->
-			<spawn_map map_id="110010000">
-				<!-- lein -->
-				<spawn npc_id="832265" respawn_time="295">
-					<spot x="1532.5" y="1513.8" z="565.8877" h="60" />
-				</spawn>
-			</spawn_map>
-			<!-- Pandaemonium -->
-			<spawn_map map_id="120010000">
-				<!-- trin -->
-				<spawn npc_id="832266" respawn_time="295">
-					<spot x="1282" y="1408" z="208.1250" h="30" />
-				</spawn>
-			</spawn_map>
-		</spawns>
-	</event>
 	<event name="Atreian City Festival" start="2015-02-06T00:00:00" end="2015-02-13T00:00:00">
 		<quests>
 			<maintainable>80162;80163;80164;80165;80166;80167;80168;80169</maintainable>
@@ -4169,12 +4133,14 @@
 		<spawns>
 			<!-- Sanctum -->
 			<spawn_map map_id="110010000">
+				<!-- Leti -->
 				<spawn npc_id="832265" respawn_time="295">
 					<spot x="1356.5542" y="1527.0270" z="569.0384" />
 				</spawn>
 			</spawn_map>
 			<!-- Pandaemonium -->
 			<spawn_map map_id="120010000">
+				<!-- Rin -->
 				<spawn npc_id="832266" respawn_time="295">
 					<spot x="1634.3815" y="1384.2788" z="193.1270" h="60" />
 				</spawn>
