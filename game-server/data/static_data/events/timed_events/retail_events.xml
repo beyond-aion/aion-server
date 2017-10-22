@@ -1474,7 +1474,7 @@
 			</spawn_map>
 		</spawns>
 	</event>
-	<event name="Trick or treat! The witch and the king" start="2016-10-30T00:00:00" end="2016-11-15T00:00:00" theme="halloween">
+	<event name="Trick or treat! The witch and the king" start="2017-10-29T18:00:00" end="2017-11-02T20:00:00" theme="halloween">
 		<event_drops>
 			<gd_rule rule_name="Event Potion" base_chance="50" min_diff="-29">
 				<gd_items>
@@ -1619,7 +1619,7 @@
 					<spot x="1631.184" y="1381.028" z="105.928" random_walk="5" />
 				</spawn>
 				<!-- Novice Witch Hunter -->
-				<spawn npc_id="217701" respawn_time="295">
+				<spawn npc_id="217701" respawn_time="175">
 					<spot x="1607.441" y="1592.559" z="107.825" h="106" />
 					<spot x="1536.936" y="1530.234" z="103.308" />
 					<spot x="1537.071" y="1528.782" z="103.170" h="116" />
@@ -1637,7 +1637,7 @@
 					<spot x="1516.041" y="1525.783" z="100.809" h="58" />
 				</spawn>
 				<!-- Novice Priest Soul -->
-				<spawn npc_id="217694" respawn_time="295">
+				<spawn npc_id="217694" respawn_time="175">
 					<spot x="1537.850" y="1524.990" z="103.438" />
 					<spot x="1591.386" y="1611.334" z="102.657" />
 					<spot x="1603.376" y="1608.442" z="105.569" />
@@ -1657,7 +1657,7 @@
 					<spot x="1531.048" y="1522.889" z="103.490" h="63" />
 				</spawn>
 				<!-- Novice Mage Soul -->
-				<spawn npc_id="217693" respawn_time="295">
+				<spawn npc_id="217693" respawn_time="175">
 					<spot x="1615.791" y="1601.976" z="107.267" />
 					<spot x="1595.620" y="1605.678" z="103.901" />
 					<spot x="1527.944" y="1518.073" z="103.133" h="22" />
@@ -1680,7 +1680,7 @@
 			</spawn_map>
 			<spawn_map map_id="210060000">
 				<!-- Apprentice Mage Soul -->
-				<spawn npc_id="217695" respawn_time="295">
+				<spawn npc_id="217695" respawn_time="175">
 					<spot x="1562.371" y="1429.571" z="23.285" h="80" />
 					<spot x="1547.733" y="1506.785" z="23.930" h="1" />
 					<spot x="1645.321" y="1331.154" z="27.912" h="55" />
@@ -1691,7 +1691,7 @@
 					<spot x="1587.696" y="1232.087" z="33.782" h="116" />
 				</spawn>
 				<!-- Apprentice Priest Soul -->
-				<spawn npc_id="217696" respawn_time="295">
+				<spawn npc_id="217696" respawn_time="175">
 					<spot x="1541.187" y="1444.517" z="23.430" h="29" />
 					<spot x="1562.690" y="1519.993" z="24.408" h="22" />
 					<spot x="1638.429" y="1362.660" z="26.352" h="55" />
@@ -1702,7 +1702,7 @@
 					<spot x="1705.642" y="1194.020" z="31.816" h="92" />
 				</spawn>
 				<!-- Apprentice Witch Hunter -->
-				<spawn npc_id="217702" respawn_time="295">
+				<spawn npc_id="217702" respawn_time="175">
 					<spot x="1545.364" y="1449.655" z="23.147" h="38" />
 					<spot x="1548.937" y="1498.961" z="22.429" h="8" />
 					<spot x="1637.224" y="1351.093" z="26.603" h="15" />
@@ -1715,7 +1715,7 @@
 			</spawn_map>
 			<spawn_map map_id="210020000">
 				<!-- Professional Witch Hunter -->
-				<spawn npc_id="217703" respawn_time="295">
+				<spawn npc_id="217703" respawn_time="175">
 					<spot x="197.854" y="2597.352" z="152.750" h="88" />
 					<spot x="157.398" y="2696.406" z="152.375" h="100" />
 					<spot x="314.433" y="2889.890" z="152.980" h="46" />
@@ -1726,7 +1726,7 @@
 					<spot x="296.007" y="2579.120" z="152.626" h="82" />
 				</spawn>
 				<!-- Professional Priest Soul -->
-				<spawn npc_id="217698" respawn_time="295">
+				<spawn npc_id="217698" respawn_time="175">
 					<spot x="197.105" y="2603.767" z="152.750" h="85" />
 					<spot x="151.806" y="2716.722" z="152.804" h="7" />
 					<spot x="317.087" y="2882.830" z="154.218" h="71" />
@@ -1736,7 +1736,7 @@
 					<spot x="298.822" y="2559.090" z="152.750" h="99" />
 				</spawn>
 				<!-- Professional Mage Soul -->
-				<spawn npc_id="217697" respawn_time="295">
+				<spawn npc_id="217697" respawn_time="175">
 					<spot x="160.994" y="2701.833" z="152.561" h="31" />
 					<spot x="314.359" y="2900.037" z="153.761" h="58" />
 					<spot x="406.362" y="2855.493" z="152.813" h="87" />
@@ -1750,7 +1750,7 @@
 			<!-- Heiron -->
 			<spawn_map map_id="210040000">
 				<!-- Senior Priest Soul -->
-				<spawn npc_id="217700" respawn_time="295">
+				<spawn npc_id="217700" respawn_time="175">
 					<spot x="2634.258" y="344.162" z="427.085" h="85" />
 					<spot x="2614.551" y="604.772" z="344.021" h="24" />
 					<spot x="2672.926" y="540.710" z="367.993" />
@@ -1762,7 +1762,7 @@
 					<spot x="2356.288" y="647.324" z="340.875" />
 				</spawn>
 				<!-- Senior Mage Soul -->
-				<spawn npc_id="217699" respawn_time="295">
+				<spawn npc_id="217699" respawn_time="175">
 					<spot x="2630.566" y="340.342" z="427.914" h="83" />
 					<spot x="2629.058" y="336.838" z="428.718" />
 					<spot x="2616.358" y="627.544" z="344.747" h="59" />
@@ -1776,7 +1776,7 @@
 					<spot x="2473.173" y="613.740" z="332.724" />
 				</spawn>
 				<!-- Senior Witch Hunter -->
-				<spawn npc_id="217704" respawn_time="295">
+				<spawn npc_id="217704" respawn_time="175">
 					<spot x="2635.086" y="345.748" z="426.688" />
 					<spot x="2595.454" y="613.132" z="342.432" h="13" />
 					<spot x="2544.990" y="589.832" z="339.114" h="70"/>
@@ -1791,7 +1791,7 @@
 			</spawn_map>
 			<spawn_map map_id="220020000">
 				<!-- Professional Exorcist Soul -->
-				<spawn npc_id="217709" respawn_time="295">
+				<spawn npc_id="217709" respawn_time="175">
 					<spot x="306.327" y="2225.923" z="438.510" h="66" />
 					<spot x="236.224" y="2259.283" z="438.510" h="48" />
 					<spot x="369.925" y="2249.950" z="438.510" h="62" />
@@ -1806,7 +1806,7 @@
 					<spot x="311.278" y="2492.734" z="438.510" h="102" />
 				</spawn>
 				<!-- Professional Witch Trapper -->
-				<spawn npc_id="217715" respawn_time="295">
+				<spawn npc_id="217715" respawn_time="175">
 					<spot x="320.132" y="2237.962" z="438.510" h="65" />
 					<spot x="236.662" y="2258.021" z="438.510" h="47" />
 					<spot x="381.230" y="2253.359" z="438.510" h="98" />
@@ -1819,7 +1819,7 @@
 					<spot x="313.226" y="2226.834" z="438.510" h="77" />
 				</spawn>
 				<!-- Professional Healer Soul -->
-				<spawn npc_id="217710" respawn_time="295">
+				<spawn npc_id="217710" respawn_time="175">
 					<spot x="323.733" y="2214.669" z="438.510" h="117" />
 					<spot x="226.728" y="2247.399" z="438.771" h="91" />
 					<spot x="390.256" y="2278.771" z="438.510" h="47" />
@@ -1859,7 +1859,7 @@
 					<spot x="1819.884" y="1893.218" z="249.375" random_walk="5" />
 				</spawn>
 				<!-- Novice Witch Trapper -->
-				<spawn npc_id="217713" respawn_time="295">
+				<spawn npc_id="217713" respawn_time="175">
 					<spot x="1777.515" y="1905.071" z="257.875" h="15" />
 					<spot x="1826.708" y="1892.875" z="249.008" h="105" />
 					<spot x="1806.375" y="1719.187" z="249.435" h="17" />
@@ -1877,7 +1877,7 @@
 					<spot x="1817.020" y="1906.946" z="249.375" />
 				</spawn>
 				<!-- Novice Exorcist Soul -->
-				<spawn npc_id="217705" respawn_time="295">
+				<spawn npc_id="217705" respawn_time="175">
 					<spot x="1769.487" y="1902.332" z="258.054" h="10" />
 					<spot x="1819.645" y="1888.281" z="249.375" h="27" />
 					<spot x="1820.529" y="1907.641" z="249.312" h="97" />
@@ -1891,7 +1891,7 @@
 					<spot x="1824.579" y="1906.113" z="248.721" h="12" />
 				</spawn>
 				<!-- Novice Healer Soul -->
-				<spawn npc_id="217706" respawn_time="295">
+				<spawn npc_id="217706" respawn_time="175">
 					<spot x="1818.401" y="1879.784" z="249.888" h="78" />
 					<spot x="1775.488" y="1916.829" z="257.875" h="17" />
 					<spot x="1818.630" y="1904.732" z="249.375" h="76" />
@@ -1907,7 +1907,7 @@
 			</spawn_map>
 			<spawn_map map_id="220040000">
 				<!-- Senior Healer Soul -->
-				<spawn npc_id="217712" respawn_time="295">
+				<spawn npc_id="217712" respawn_time="175">
 					<spot x="372.480" y="510.978" z="222.894" h="20" />
 					<spot x="489.652" y="480.689" z="214.700" h="18" />
 					<spot x="510.860" y="378.626" z="221.941" h="117" />
@@ -1917,7 +1917,7 @@
 					<spot x="251.777" y="521.223" z="226.135" h="47" />
 				</spawn>
 				<!-- Senior Exorcist Soul -->
-				<spawn npc_id="217711" respawn_time="295">
+				<spawn npc_id="217711" respawn_time="175">
 					<spot x="485.483" y="486.086" z="212.874" h="43" />
 					<spot x="353.104" y="514.676" z="225.690" h="87" />
 					<spot x="520.508" y="371.913" z="218.395" h="94" />
@@ -1928,7 +1928,7 @@
 					<spot x="252.726" y="504.940" z="226.883" />
 				</spawn>
 				<!-- Senior Witch Trapper -->
-				<spawn npc_id="217716" respawn_time="295">
+				<spawn npc_id="217716" respawn_time="175">
 					<spot x="367.975" y="513.796" z="224.559" h="114" />
 					<spot x="474.062" y="477.088" z="214.165" />
 					<spot x="515.073" y="375.073" z="220.906" h="99" />
@@ -1941,7 +1941,7 @@
 			</spawn_map>
 			<spawn_map map_id="220050000">
 				<!-- Apprentice Healer Soul -->
-				<spawn npc_id="217708" respawn_time="295">
+				<spawn npc_id="217708" respawn_time="175">
 					<spot x="2809.532" y="2495.916" z="21.088" h="31" />
 					<spot x="2764.712" y="2208.581" z="25.468" h="68" />
 					<spot x="2666.380" y="2200.376" z="17.375" h="60" />
@@ -1952,7 +1952,7 @@
 					<spot x="2531.703" y="2299.869" z="15.625" h="67" />
 				</spawn>
 				<!-- Apprentice Exorcist Soul -->
-				<spawn npc_id="217707" respawn_time="295">
+				<spawn npc_id="217707" respawn_time="175">
 					<spot x="2810.102" y="2481.430" z="18.460" h="85" />
 					<spot x="2770.749" y="2224.154" z="25.603" h="50" />
 					<spot x="2694.427" y="2200.245" z="20.128" h="54" />
@@ -1963,7 +1963,7 @@
 					<spot x="2546.471" y="2280.075" z="15.302" h="6" />
 				</spawn>
 				<!-- Apprentice Witch Trapper -->
-				<spawn npc_id="217714" respawn_time="295">
+				<spawn npc_id="217714" respawn_time="175">
 					<spot x="2797.976" y="2487.798" z="19.603" h="69" />
 					<spot x="2756.790" y="2215.731" z="25.089" h="44" />
 					<spot x="2673.142" y="2191.742" z="18.854" h="31" />
@@ -4114,7 +4114,7 @@
 			</gd_rule>
 		</event_drops>
 	</event>
-	<event name="The Scattered Deck" start="2017-10-16T00:00:00" end="2017-10-28T23:59:59">
+	<event name="The Scattered Deck" start="2017-10-23T00:00:00" end="2017-11-05T23:59:59" theme="halloween">
 		<event_drops>
 			<gd_rule rule_name="Mysterious Card" base_chance="10" fixed_chance="true">
 				<gd_maps>

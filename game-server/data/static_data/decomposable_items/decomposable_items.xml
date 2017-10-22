@@ -7331,7 +7331,7 @@
 		</items>
 	</decomposable>
 	<decomposable item_id="188051105"><!-- [Event] Pumpkin Pouch -->
-		<items>
+		<items chance="25">
 			<item id="164000073" min_count="3" /><!-- Greater Courage Scroll -->
 			<item id="164000076" min_count="3" /><!-- Greater Running Scroll -->
 			<item id="164000118" min_count="3" /><!-- Major Crit Strike Scroll -->
@@ -7339,10 +7339,10 @@
 			<item id="164000079" min_count="3" /><!-- Greater Raging Wind Scroll -->
 			<item id="164000134" min_count="3" /><!-- Greater Awakening Scroll -->
 		</items>
-		<items>
+		<items chance="25">
 			<random_item type="MANASTONE_RARE_GRADE_70" />
 		</items>
-		<items>
+		<items chance="25">
 			<item id="162000075" min_count="3" /><!-- Fine Life Potion -->
 			<item id="162000076" min_count="3" /><!-- Fine Mana Potion -->
 			<item id="162000077" min_count="3" /><!-- Fine Life Serum -->
@@ -7350,8 +7350,14 @@
 			<item id="162000080" min_count="3" /><!-- Fine Recovery Serum -->
 			<item id="162000081" min_count="3" /><!-- Fine Recovery Potion -->
 		</items>
-		<items>
-			<random_item type="ENCHANTMENT" />
+		<items chance="8.3">
+			<item id="166000193" /><!-- Gamma Enchantment Stone -->
+		</items>
+		<items chance="8.3">
+			<item id="166000194" /><!-- Delta Enchantment Stone -->
+		</items>
+		<items chance="8.3">
+			<item id="166000195" /><!-- Epsilon Enchantment Stone -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051106"><!-- [Event] Hat Box -->
@@ -10274,60 +10280,24 @@
 		<items chance="6.0">
 			<random_item type="MANASTONE_RARE_GRADE_70" min_count="1" max_count="5" />
 		</items>
-		<items chance="34.0">
-			<random_item type="ENCHANTMENT" min_count="1" max_count="3" />
+		<items chance="11.3">
+			<item id="166000193" min_count="1" max_count="3" /><!-- Gamma Enchantment Stone -->
+		</items>
+		<items chance="11.3">
+			<item id="166000194" min_count="1" max_count="3" /><!-- Delta Enchantment Stone -->
+		</items>
+		<items chance="11.3">
+			<item id="166000195" min_count="1" max_count="3" /><!-- Epsilon Enchantment Stone -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051336"><!-- [Event] Witchy Mystery -->
 		<items chance="14.0">
 			<item id="186000031" min_count="1" max_count="10" /><!-- Silver Medal -->
 		</items>
-		<items chance="13.0">
+		<items chance="14.0">
 			<item id="186000030" min_count="1" max_count="5" /><!-- Gold Medal -->
 		</items>
-		<items chance="1.0">
-			<item id="169230025" /><!-- [Event] Dye: Blue -->
-		</items>
-		<items chance="1.0">
-			<item id="169231002" /><!-- [Event] Concentrated Dye: True White -->
-		</items>
-		<items chance="1.0">
-			<item id="169231003" /><!-- [Event] Concentrated Dye: Rich Purple -->
-		</items>
-		<items chance="1.0">
-			<item id="169231004" /><!-- [Event] Concentrated Dye: Mustard -->
-		</items>
-		<items chance="1.0">
-			<item id="169231006" /><!-- [Event] Concentrated Dye: Olive Green -->
-		</items>
-		<items chance="1.0">
-			<item id="169231001" /><!-- [Event] Concentrated Dye: True Red -->
-		</items>
-		<items chance="1.0">
-			<item id="169231009" /><!-- [Event] Concentrated Dye: Hot Orange -->
-		</items>
-		<items chance="1.0">
-			<item id="169231010" /><!-- [Event] Concentrated Dye: Hot Pink -->
-		</items>
-		<items chance="1.0">
-			<item id="169231005" /><!-- [Event] Concentrated Dye: Green Tea -->
-		</items>
-		<items chance="1.0">
-			<item id="169231007" /><!-- [Event] Concentrated Dye: Deep Blue -->
-		</items>
-		<items chance="1.0">
-			<item id="169231008" /><!-- [Event] Concentrated Dye: True Black -->
-		</items>
-		<items chance="1.0">
-			<item id="169230026" /><!-- [Event] Dye: Brown -->
-		</items>
-		<items chance="1.0">
-			<item id="169230024" /><!-- [Event] Dye: Teal -->
-		</items>
-		<items chance="1.0">
-			<item id="169230027" /><!-- [Event] Dye: Purple -->
-		</items>
-		<items chance="5.0">
+		<items chance="6.0">
 			<item id="161000003" /><!-- Reviving Elemental Stone -->
 		</items>
 		<items chance="5.0">
@@ -10354,22 +10324,22 @@
 		<items chance="4.0">
 			<item id="125040157" /><!-- [Event] Enchanting Sorcerer Hat (7 days) -->
 		</items>
-		<items chance="3.0">
+		<items chance="5.0">
 			<random_item type="MANASTONE_COMMON_GRADE_50" min_count="1" max_count="5" />
 		</items>
-		<items chance="3.0">
+		<items chance="5.0">
 			<random_item type="MANASTONE_COMMON_GRADE_60" min_count="1" max_count="5" />
 		</items>
-		<items chance="3.0">
+		<items chance="5.0">
 			<random_item type="MANASTONE_COMMON_GRADE_70" min_count="1" max_count="5" />
 		</items>
-		<items chance="3.0">
+		<items chance="5.0">
 			<random_item type="MANASTONE_RARE_GRADE_50" min_count="1" max_count="3" />
 		</items>
-		<items chance="3.0">
+		<items chance="5.0">
 			<random_item type="MANASTONE_RARE_GRADE_60" min_count="1" max_count="3" />
 		</items>
-		<items chance="3.0">
+		<items chance="5.0">
 			<random_item type="MANASTONE_RARE_GRADE_70" min_count="1" max_count="5" />
 		</items>
 	</decomposable>
@@ -10382,9 +10352,6 @@
 		</items>
 		<items>
 			<item id="161000003" /><!-- Reviving Elemental Stone -->
-		</items>
-		<items>
-			<item id="169000009" min_count="100"/><!-- Power Shard: +35 -->
 		</items>
 		<items>
 			<item id="169000010" min_count="100"/><!-- Power Shard: +40 -->
@@ -27031,91 +26998,91 @@
 		</items>
 	</decomposable>
 	<decomposable item_id="188053101"><!-- Mysterious Reward Box -->
-		<items chance="0.8">
+		<items chance="0.3">
 			<item id="170100024" /><!-- Harvest Revel Log Cabinet -->
 		</items>
-		<items chance="0.8">
+		<items chance="0.3">
 			<item id="110900866" /><!-- Reveler's Reverie -->
 		</items>
-		<items chance="0.8">
+		<items chance="0.3">
 			<item id="190020087" /><!-- Green Diabol Egg -->
 		</items>
-		<items chance="0.8">
+		<items chance="0.3">
 			<item id="187050021" /><!-- [Event] Dramata Wings -->
 		</items>
-		<items chance="0.8">
+		<items chance="0.3">
 			<item id="169600218" /><!-- [Emotion Card] Harvest Reveling -->
 		</items>
-		<items chance="2">
+		<items chance="1.1">
 			<item id="188052638" /><!-- [Event] Fabled Godstone Bundle -->
 		</items>
-		<items chance="2">
+		<items chance="1.1">
 			<item id="188950007" /><!-- Special Courier Pass (Eternal/Lv. 56 - 60) -->
 		</items>
-		<items chance="2">
+		<items chance="1.1">
 			<item id="188950015" /><!-- Special Courier Pass (Eternal/Lv. 61-65) -->
 		</items>
-		<items chance="2">
+		<items chance="1.1">
 			<item id="188950018" /><!-- Special Courier Pass (Mythic/Lv. 56-60) -->
 		</items>
-		<items chance="2">
+		<items chance="1.1">
 			<item id="188950019" /><!-- Special Courier Pass (Mythic/Lv. 61-65) -->
 		</items>
-		<items chance="3.625">
+		<items chance="2.875">
 			<item id="166050081" /><!-- Idian: Physical Attack -->
 		</items>
-		<items chance="3.625">
+		<items chance="2.875">
 			<item id="166050083" /><!-- Idian: Physical Defense -->
 		</items>
-		<items chance="3.625">
+		<items chance="2.875">
 			<item id="166050082" /><!-- Idian: Magical Attack -->
 		</items>
-		<items chance="3.625">
+		<items chance="2.875">
 			<item id="166050084" /><!-- Idian: Magical Defense -->
 		</items>
-		<items chance="3.625">
+		<items chance="2.875">
 			<item id="166150018" /><!-- Greater Felicitous Socketing (Eternal) -->
 		</items>
-		<items chance="3.625">
+		<items chance="2.875">
 			<item id="166150019" /><!-- Greater Felicitous Socketing (Mythic) -->
 		</items>
-		<items chance="3.625">
+		<items chance="2.875">
 			<item id="186000242" min_count="2" /><!-- Ceramium Medal -->
 		</items>
-		<items chance="3.625">
+		<items chance="2.875">
 			<item id="186000051" min_count="2" /><!-- Major Ancient Crown -->
 		</items>
-		<items chance="5.18">
+		<items chance="6">
 			<item id="160002477" min_count="3" /><!-- Fresh Spicy Cheese Plucar -->
 		</items>
-		<items chance="5.18">
+		<items chance="6">
 			<item id="160002475" min_count="3" /><!-- Fresh Abex Cheese Soup -->
 		</items>
-		<items chance="5.18">
+		<items chance="6">
 			<item id="162000141" min_count="2" /><!-- Sumblime Wind Serum -->
 		</items>
-		<items chance="5.18">
+		<items chance="6">
 			<item id="162000137" min_count="2" /><!-- Sublime Life Serum -->
 		</items>
-		<items chance="5.18">
+		<items chance="6">
 			<item id="162000139" min_count="2" /><!-- Sublime Mana Serum -->
 		</items>
-		<items chance="5.18">
+		<items chance="6">
 			<item id="164002118" min_count="3" /><!-- [Event] Rx: Castafodin -->
 		</items>
-		<items chance="5.18">
+		<items chance="6">
 			<item id="164002117" min_count="3" /><!-- [Event] Rx: Blitzopan -->
 		</items>
-		<items chance="5.18">
+		<items chance="6">
 			<item id="164002116" min_count="3" /><!-- [Event] Rx: Accelerox -->
 		</items>
-		<items chance="5.18">
+		<items chance="6">
 			<item id="164002272" min_count="3" /><!-- [Event] Enduring Greater Raging Wind Scroll -->
 		</items>
-		<items chance="5.18">
+		<items chance="6">
 			<item id="160005027" min_count="2" /><!-- [Event] Ale Jelly -->
 		</items>
-		<items chance="5.18">
+		<items chance="10">
 			<item id="162001033" min_count="5" /><!-- [Event] Premium Recovery Serum -->
 		</items>
 	</decomposable>
