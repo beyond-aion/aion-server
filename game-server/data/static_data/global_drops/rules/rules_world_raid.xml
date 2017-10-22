@@ -130,4 +130,48 @@
 			<gd_item id="188053131" /><!-- Level 1 Invader Reward Box -->
 		</gd_items>
 	</gd_rule>
+	<gd_rule rule_name="TUNING_SCROLL_WORLD_RAID" min_count="1" base_chance="15" fixed_chance="true">
+		<gd_npcs>
+			<gd_npc npc_id="234589" /><!-- Prime Raedon III -->
+			<gd_npc npc_id="234590" /><!-- Prime Raedon III -->
+			<gd_npc npc_id="234594" /><!-- Prime Raedon III -->
+			<gd_npc npc_id="234597" /><!-- Prime Raedon III -->
+			<gd_npc npc_id="234588" /><!-- Prime Benoid II -->
+			<gd_npc npc_id="234595" /><!-- Prime Benoid II -->
+			<gd_npc npc_id="234596" /><!-- Prime Eiter II -->
+			<gd_npc npc_id="234598" /><!-- Prime Benoid II -->
+			<gd_npc npc_id="234599" /><!-- Prime Magnorion II -->
+			<gd_npc npc_id="234602" /><!-- Prime Eiter II -->
+			<gd_npc npc_id="234603" /><!-- Prime Tumon II -->
+			<gd_npc npc_id="234605" /><!-- Prime Tumon II -->
+			<gd_npc npc_id="234606" /><!-- Prime Benoid II -->
+			<gd_npc npc_id="234607" /><!-- Prime Tumon II -->
+			<gd_npc npc_id="234608" /><!-- Prime Raedon II -->
+			<gd_npc npc_id="234611" /><!-- Elite Magnorion II -->
+			<gd_npc npc_id="234612" /><!-- Prime Benoid II -->
+			<gd_npc npc_id="234614" /><!-- Prime Eiter II -->
+			<gd_npc npc_id="234615" /><!-- Prime Tumon II -->
+			<gd_npc npc_id="234591" /><!-- Prime Tumon I -->
+			<gd_npc npc_id="234592" /><!-- Prime Tumon I -->
+			<gd_npc npc_id="234593" /><!-- Prime Eiter I -->
+			<gd_npc npc_id="234600" /><!-- Prime Eiter I -->
+			<gd_npc npc_id="234601" /><!-- Prime Raedon I -->
+			<gd_npc npc_id="234604" /><!-- Prime Tarmat I -->
+			<gd_npc npc_id="234609" /><!-- Prime Raedon I -->
+			<gd_npc npc_id="234610" /><!-- Prime Tarmat I -->
+			<gd_npc npc_id="234613" /><!-- Prime Benoid I -->
+			<gd_npc npc_id="219998" /><!-- Prime Tarmat I -->
+			<gd_npc npc_id="219999" /><!-- Prime Benoid I -->
+			<gd_npc npc_id="220000" /><!-- Prime Eiter I -->
+			<gd_npc npc_id="220001" /><!-- Prime Tarmat I -->
+			<gd_npc npc_id="220002" /><!-- Prime Benoid I -->
+			<gd_npc npc_id="220003" /><!-- Prime Eiter I -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="166200021" /><!-- Mythic Weapon Tuning Scroll -->
+			<gd_item id="166200022" /><!-- Mythic Armor Tuning Scroll -->
+			<gd_item id="166200017" /><!-- Tochiro's Eternal Scroll of Weapon Retuning -->
+			<gd_item id="166200018" /><!-- Tochiro's Eternal Scroll of Armor Retuning -->
+		</gd_items>
+	</gd_rule>
 </global_rules>
