@@ -58,7 +58,7 @@ public class ModifiedIronWallAggressiveAI extends AggressiveNpcAI {
 					case 56:
 					case 35:
 					case 10:
-						getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21165, 1, 100, 0, 3000, true)));
+						getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21165, 1, 100, 0, 3000)));
 						break;
 				}
 				break;
@@ -184,7 +184,7 @@ public class ModifiedIronWallAggressiveAI extends AggressiveNpcAI {
 							return;
 						World.getInstance().updatePosition(getOwner(), pos.getX(), pos.getY(), pos.getZ(), pos.getHeading());
 						PacketSendUtility.broadcastPacketAndReceive(getOwner(), new SM_FORCED_MOVE(getOwner(), getOwner()));
-						ThreadPoolManager.getInstance().schedule(() -> getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21171, 1, 100, 0, 6000, true))), 500);
+						ThreadPoolManager.getInstance().schedule(() -> getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21171, 1, 100, 0, 6000))), 500);
 					}, 500);
 					break;
 			}

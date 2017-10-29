@@ -40,7 +40,7 @@ public class CalindiFlamelordAI extends AggressiveNpcAI {
 			if (getOwner().getLifeStats().getHpPercentage() <= 12) {
 				isFinalBuff = true;
 				cancelTask();
-				getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(20915, 1, 100, true)));
+				getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(20915, 1, 100)));
 			}
 		}
 	}
@@ -63,7 +63,7 @@ public class CalindiFlamelordAI extends AggressiveNpcAI {
 
 	private void startHallucinatoryVictoryEvent() {
 		if (getPosition().getWorldMapInstance().getNpc(730695) == null && getPosition().getWorldMapInstance().getNpc(730696) == null) {
-			getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(20911, 1, 100, true)));
+			getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(20911, 1, 100)));
 		}
 	}
 
@@ -87,7 +87,7 @@ public class CalindiFlamelordAI extends AggressiveNpcAI {
 
 	private void blazeEngraving() {
 		if (Rnd.chance() < 2 && getPosition().getWorldMapInstance().getNpc(283130) == null) {
-			getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(20913, 60, 100, true)));
+			getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(20913, 60, 100)));
 		}
 	}
 

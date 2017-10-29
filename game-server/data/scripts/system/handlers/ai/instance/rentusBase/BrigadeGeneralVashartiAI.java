@@ -70,7 +70,7 @@ public class BrigadeGeneralVashartiAI extends AggressiveNpcAI {
 				percents.remove(percent);
 				cancelFlameBuffEvent();
 				getOwner().getQueuedSkills().clear();
-				getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(20532, 1, 100, 0, 10000, true)));
+				getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(20532, 1, 100, 0, 10000)));
 				break;
 			}
 		}
@@ -86,8 +86,8 @@ public class BrigadeGeneralVashartiAI extends AggressiveNpcAI {
 			Creature creature = getAggroList().getMostHated();
 			if (creature != null && !creature.isDead() && getOwner().canSee(creature)) {
 				getOwner().getQueuedSkills().clear();
-				getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(20533, 1, 100, true)));
-				getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(20534, 1, 100, 0, 10000, true)));
+				getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(20533, 1, 100)));
+				getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(20534, 1, 100, 0, 10000)));
 				getOwner().setTarget(creature);
 				getOwner().getGameStats().renewLastAttackTime();
 				getOwner().getGameStats().renewLastAttackedTime();
@@ -309,13 +309,13 @@ public class BrigadeGeneralVashartiAI extends AggressiveNpcAI {
 			if (isDead() || !getOwner().isSpawned()) {
 				cancelFlameBuffEvent();
 			} else {
-				getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(Rnd.get(0, 1) == 0 ? 20530 : 20531, 60, 100, true)));
+				getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(Rnd.get(0, 1) == 0 ? 20530 : 20531, 60, 100)));
 			}
 		}, 4000, 40000);
 	}
 
 	private void useKissBuff(Npc npc) {
-		npc.getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate((npc.getNpcId() == 283001 ? 19346 : 19345), 60, 100, true)));
+		npc.getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate((npc.getNpcId() == 283001 ? 19346 : 19345), 60, 100)));
 	}
 
 	private void addPercent() {
