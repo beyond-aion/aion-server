@@ -93,7 +93,7 @@ public class BrigadeGeneralVashartiAI extends AggressiveNpcAI {
 				getOwner().getGameStats().renewLastAttackedTime();
 				getOwner().getGameStats().renewLastChangeTargetTime();
 				getOwner().getGameStats().renewLastSkillTime();
-				getOwner().getGameStats().setNextSkillTime(7000);
+				getOwner().getGameStats().setNextSkillDelay(7000);
 			}
 			think();
 		}

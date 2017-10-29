@@ -25,7 +25,7 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
 	private long lastAttackedTime = 0;
 	private long nextAttackTime = 0;
 	private long lastSkillTime = 0;
-	private long nextSkillTime = 0;
+	private long nextSkillDelay = 0;
 	private NpcSkillEntry lastSkill = null;
 	private long fightStartingTime = 0;
 	private int cachedState;
@@ -164,7 +164,7 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
 		}
 		int nextAttack = 0;
 		if (lastAttackTime == 0 && !owner.getMoveController().isInMove() && owner.getTarget() instanceof Creature
-				&& PositionUtil.isInAttackRange(owner, (Creature) owner.getTarget(), getAttackRange().getCurrent() / 1000f)) {
+			&& PositionUtil.isInAttackRange(owner, (Creature) owner.getTarget(), getAttackRange().getCurrent() / 1000f)) {
 			nextAttack = 750;
 		}
 		if (attackDelay < attackSpeed) {
@@ -188,36 +188,30 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
 	public int getLastChangeTargetTimeDelta() {
 		return Math.round((System.currentTimeMillis() - lastChangeTarget) / 1000f);
 	}
-	
+
 	public long getLastSkillTime() {
 		return lastSkillTime;
 	}
 
-	// only use skills after a minimum cooldown of 3 to 9 seconds
-	// TODO: Check wether this is a suitable time or not
 	public boolean canUseNextSkill() {
-		if (nextSkillTime < 0) {
-			if (getLastSkillTimeDelta() >= 6 + Rnd.get(-3, 3))
-				return true;
-		} else {
-			if (System.currentTimeMillis() >= lastSkillTime + nextSkillTime)
-				return true;
-		}
-		return false;
+		return nextSkillDelay == 0 || System.currentTimeMillis() >= lastSkillTime + nextSkillDelay;
 	}
 
-	public void setNextSkillTime(int nextSkillTime) {
-		this.nextSkillTime = nextSkillTime;
+	public void setNextSkillDelay(int nextSkillDelay) {
+		if (nextSkillDelay == -1) // xml skills without specific times in templates
+			this.nextSkillDelay = Rnd.get(3000, 9000);
+		else
+			this.nextSkillDelay = nextSkillDelay;
 	}
 
 	public void setLastSkill(NpcSkillEntry lastSkill) {
 		this.lastSkill = lastSkill;
 	}
-	
+
 	public NpcSkillEntry getLastSkill() {
 		return lastSkill;
 	}
-	
+
 	@Override
 	public void updateSpeedInfo() {
 		PacketSendUtility.broadcastPacket(owner, new SM_EMOTION(owner, EmotionType.START_EMOTE2, 0, 0));
@@ -242,6 +236,6 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
 		fightStartingTime = 0;
 		nextAttackTime = 0;
 		lastSkillTime = 0;
-		nextSkillTime = 0;
+		nextSkillDelay = 0;
 	}
 }

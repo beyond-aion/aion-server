@@ -137,6 +137,7 @@ public class GeneralNpcAI extends NpcAI {
 		} else {
 			NpcSkillEntry skill = SkillAttackManager.chooseNextSkill(this);
 			if (skill != null) {
+				getOwner().getGameStats().setLastSkill(skill);
 				skillId = skill.getSkillId();
 				skillLevel = skill.getSkillLevel();
 				return AttackIntention.SKILL_ATTACK;

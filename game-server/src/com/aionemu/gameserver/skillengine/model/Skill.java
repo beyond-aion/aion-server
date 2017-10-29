@@ -279,7 +279,7 @@ public class Skill {
 				npc.getGameStats().setLastSkill(lastSkill);
 			}
 			lastSkill.setLastTimeUsed();
-			npc.getGameStats().setNextSkillTime(lastSkill.getNextSkillTime());
+			npc.getGameStats().setNextSkillDelay(lastSkill.getNextSkillTime());
 			lastSkill.fireOnStartCastEvents(npc);
 		}
 		if (castDuration > 0) {

@@ -212,10 +212,9 @@ public class SkillAttackManager {
 
 	private static NpcSkillEntry getNpcSkillEntryIfNotTooFarAway(Npc owner, NpcSkillEntry entry) {
 		if (targetTooFar(owner, entry)) {
-			owner.getGameStats().setNextSkillTime(5000);
+			owner.getGameStats().setNextSkillDelay(5000);
 			return null;
 		}
-		owner.getGameStats().setLastSkill(entry);
 		return entry;
 	}
 
