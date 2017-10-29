@@ -25724,6 +25724,27 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	public static final SM_SYSTEM_MESSAGE STR_MSG_POLISH_WRONG_LEVEL() {
 		return new SM_SYSTEM_MESSAGE(1401649);
 	}
+	
+	/**
+	 * Modor activated the Danuar Bomb of grudge. You have 15 minutes to defeat her.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDLDF5_INDER_RUNE_START() {
+		return new SM_SYSTEM_MESSAGE(1401676);
+	}
+	
+	/**
+	 * 10 minutes elapsed.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDLDF5_INDER_RUNE_10MIN() {
+		return new SM_SYSTEM_MESSAGE(1401677);
+	}
+	
+	/**
+	 * The bomb has detonated.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDLDF5_INDER_RUNE_END() {
+		return new SM_SYSTEM_MESSAGE(1401678);
+	}
 
 	/**
 	 * Enchantment of %0 to +%num1 was successful.

@@ -1,7 +1,5 @@
 package instance;
 
-import java.util.List;
-import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -9,63 +7,55 @@ import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
 import com.aionemu.gameserver.instance.handlers.InstanceID;
 import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
  * @author Ritsu
+ * @reworked Estrayl October 29th, 2017.
  */
 @InstanceID(301110000)
 public class DanuarReliquaryInstance extends GeneralInstanceHandler {
 
-	private AtomicInteger cloneKill = new AtomicInteger();
-	private AtomicBoolean isSpawning = new AtomicBoolean();
-	private AtomicBoolean isBossSpawned = new AtomicBoolean();
-	private Future<?> timer10minTask;
-	private Future<?> timer15minTask;
+	private AtomicBoolean isCursedModorSpawned = new AtomicBoolean();
+	private AtomicInteger cloneKills = new AtomicInteger();
+	private boolean isCleared;
+
+	protected int getExitId() {
+		return 730843;
+	}
+
+	protected int getTreasureBoxId() {
+		return 701795;
+	}
 
 	@Override
 	public void onDie(Npc npc) {
 		final int npcId = npc.getNpcId();
 		switch (npcId) {
-			case 284379:
-			case 284378:
-			case 284377:
+			case 284379: // Idean Obscura
+			case 284378: // Idean Lapilima
+			case 284377: // Danuar Reliquary Novun
 				despawnNpc(npc);
-				if (isDeadNpc(284377) && isDeadNpc(284378) && isDeadNpc(284379) && isBossSpawned.compareAndSet(false, true)) {
-					spawn(231304, 255.98627f, 259.0136f, 241.73842f, (byte) 90);
-					sendMsg(1401676);
-					timer10minTask = ThreadPoolManager.getInstance().schedule(() -> sendMsg(1401677), 10 * 60000);
-					timer15minTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-						@Override
-						public void run() {
-							// KILLALL (skill 21199)
-							sendMsg(1401678);
-							despawnNpcs(231304); // despawn bosses
-							despawnNpcs(231305);
-							despawnAll();
-							spawn(730843, 255.66669f, 263.78525f, 241.7986f, (byte) 86); // Spawn exit portal
-						}
-					}, 15 * 60000);
-				}
+				if (isNullOrDead(284377) && isNullOrDead(284378) && isNullOrDead(284379) && isCursedModorSpawned.compareAndSet(false, true))
+					spawn(231304, 255.98627f, 259.0136f, 241.73842f, (byte) 90); // Cursed Queen Modor
 				break;
-			case 284383:
-				despawnNpcs(284384);
+			case 284383: // Modor's Clone
+				despawnNpcs(284384); // Modor's Clone - Fake
 				despawnNpc(npc);
-				if (cloneKill.incrementAndGet() == 3)
+				if (cloneKills.incrementAndGet() >= 3)
 					spawn(231305, 255.98627f, 259.0136f, 241.73842f, (byte) 90);
-				else if (isSpawning.compareAndSet(false, true))
+				else
 					spawnClone();
 				break;
-			case 231305:
-				despawnAll();
-				finalSpawn();
-				cancelTasks();
+			case 231305: // Enraged Queen Modor
+				isCleared = true;
+				onInstanceEnd(true);
 				break;
-			case 701795:
-				// don't delete
+			case 701795: // Treasure Box
 				break;
 			default:
 				despawnNpc(npc);
@@ -73,97 +63,93 @@ public class DanuarReliquaryInstance extends GeneralInstanceHandler {
 		}
 	}
 
-	protected void finalSpawn() {
-		spawn(730843, 255.66669f, 263.78525f, 241.7986f, (byte) 86); // Spawn exit portal
-		spawn(701795, 256.65f, 258.09f, 241.78f, (byte) 100);
-	}
-
-	private void despawnAll() {
-		despawnNpcs(284383);
-		despawnNpcs(284384);
-		despawnNpcs(284659);
-		despawnNpcs(284660);
-		despawnNpcs(284661);
-		despawnNpcs(284662);
-		despawnNpcs(284663);
-		despawnNpcs(284664);
-	}
-
-	private void despawnNpcs(int npcId) {
-		deleteNpcs(instance.getNpcs(npcId));
-	}
-
-	private void deleteNpcs(List<Npc> npcs) {
-		for (Npc npc : npcs) {
-			despawnNpc(npc);
-		}
-	}
-
-	protected void despawnNpc(Npc npc) {
-		if (npc != null) {
-			npc.getController().delete();
+	@Override
+	public void onSpawn(VisibleObject object) {
+		if (object instanceof Npc) {
+			switch (((Npc) object).getNpcId()) {
+				case 231304:
+					sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDLDF5_INDER_RUNE_START());
+					scheduleWipe(0);
+					break;
+			}
 		}
 	}
 
 	private void spawnClone() {
-		try {
-			int spawnCase = Rnd.get(1, 5);
-			switch (spawnCase) {
+		int spawnCase = Rnd.get(1, 5);
+		switch (spawnCase) {
+			case 1:
+				spawn(284383, 255.5489f, 293.42154f, 253.78925f, (byte) 90);
+				break;
+			case 2:
+				spawn(284383, 232.5363f, 263.90112f, 248.65384f, (byte) 114);
+				break;
+			case 3:
+				spawn(284383, 240.11194f, 235.08876f, 251.14906f, (byte) 17);
+				break;
+			case 4:
+				spawn(284383, 271.23627f, 230.30913f, 250.92981f, (byte) 42);
+				break;
+			case 5:
+				spawn(284383, 284.6919f, 262.7201f, 248.75252f, (byte) 63);
+				break;
+		}
+
+		if (spawnCase != 1)
+			spawn(284384, 255.5489f, 293.42154f, 253.78925f, (byte) 90);
+		if (spawnCase != 2)
+			spawn(284384, 232.5363f, 263.90112f, 248.65384f, (byte) 114);
+		if (spawnCase != 3)
+			spawn(284384, 240.11194f, 235.08876f, 251.14906f, (byte) 17);
+		if (spawnCase != 4)
+			spawn(284384, 271.23627f, 230.30913f, 250.92981f, (byte) 42);
+		if (spawnCase != 5)
+			spawn(284384, 284.6919f, 262.7201f, 248.75252f, (byte) 63);
+	}
+
+	private void onInstanceEnd(boolean successful) {
+		instance.getNpcs().stream().forEach(npc -> npc.getController().delete());
+		spawn(getExitId(), 255.66669f, 263.78525f, 241.7986f, (byte) 86); // Spawn exit portal
+		if (successful)
+			spawn(getTreasureBoxId(), 256.65f, 258.09f, 241.78f, (byte) 100); // Treasure Box
+	}
+
+	private void scheduleWipe(int iterations) {
+		ThreadPoolManager.getInstance().schedule(() -> {
+			if (isCleared)
+				return;
+			switch (iterations) {
 				case 1:
-					spawn(284383, 255.5489f, 293.42154f, 253.78925f, (byte) 90);
+					sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDLDF5_INDER_RUNE_10MIN());
 					break;
 				case 2:
-					spawn(284383, 232.5363f, 263.90112f, 248.65384f, (byte) 114);
-					break;
-				case 3:
-					spawn(284383, 240.11194f, 235.08876f, 251.14906f, (byte) 17);
-					break;
-				case 4:
-					spawn(284383, 271.23627f, 230.30913f, 250.92981f, (byte) 42);
-					break;
-				case 5:
-					spawn(284383, 284.6919f, 262.7201f, 248.75252f, (byte) 63);
-					break;
+					spawn(284387, 256.60f, 257.99f, 241.78f, (byte) 0);
+					sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDLDF5_INDER_RUNE_END());
+					onInstanceEnd(false);
+					return;
 			}
-
-			if (spawnCase != 1)
-				spawn(284384, 255.5489f, 293.42154f, 253.78925f, (byte) 90);
-			if (spawnCase != 2)
-				spawn(284384, 232.5363f, 263.90112f, 248.65384f, (byte) 114);
-			if (spawnCase != 3)
-				spawn(284384, 240.11194f, 235.08876f, 251.14906f, (byte) 17);
-			if (spawnCase != 4)
-				spawn(284384, 271.23627f, 230.30913f, 250.92981f, (byte) 42);
-			if (spawnCase != 5)
-				spawn(284384, 284.6919f, 262.7201f, 248.75252f, (byte) 63);
-		} finally {
-			isSpawning.set(false);
-		}
+			scheduleWipe(iterations + 1);
+		}, 5 * 60000);
 	}
 
-	private boolean isDeadNpc(int npcId) {
-		return (getNpc(npcId) == null || getNpc(npcId).isDead());
+	private void despawnNpcs(int npcId) {
+		for (Npc npc : instance.getNpcs(npcId))
+			despawnNpc(npc);
 	}
 
-	@Override
-	public void onInstanceDestroy() {
-		cancelTasks();
+	private void despawnNpc(Npc npc) {
+		if (npc != null)
+			npc.getController().delete();
+	}
+
+	private boolean isNullOrDead(int npcId) {
+		return getNpc(npcId) == null || getNpc(npcId).isDead();
 	}
 
 	@Override
 	public void onPlayerLogOut(Player player) {
 		super.onPlayerLogOut(player);
-		if (player.isDead()) {
+		if (player.isDead())
 			TeleportService.moveToBindLocation(player);
-		}
-	}
-
-	private void cancelTasks() {
-		if (timer10minTask != null && !timer10minTask.isDone()) {
-			timer10minTask.cancel(true);
-		}
-		if (timer15minTask != null && !timer15minTask.isDone()) {
-			timer15minTask.cancel(true);
-		}
 	}
 }
