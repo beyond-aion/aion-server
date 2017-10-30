@@ -68,7 +68,7 @@ public class EnragedQueenModorAI extends AggressiveNpcAI {
 				}, 70000);
 				break;
 			case 3:
-				getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21170, 10, 100, true)));
+				getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21170, 10, 100)));
 				break;
 
 		}
@@ -76,15 +76,15 @@ public class EnragedQueenModorAI extends AggressiveNpcAI {
 
 	private void rendSpace(boolean up) {
 		this.up = up;
-		getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21165, 60, 100, true)));
+		getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21165, 60, 100)));
 	}
 
 	private void onSpawnSkills() {
-		getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21171, 60, 100, true)));
-		getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21169, 60, 100, true)));
-		getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21181, 60, 100, true)));
-		getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21174, 60, 100, true)));
-		getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21175, 60, 100, true)));
+		getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21171, 60, 100)));
+		getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21169, 60, 100)));
+		getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21181, 60, 100)));
+		getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21174, 60, 100)));
+		getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21175, 60, 100)));
 		ThreadPoolManager.getInstance().schedule(() -> {
 			if (canAct()) {
 				startStage(1);
@@ -95,14 +95,14 @@ public class EnragedQueenModorAI extends AggressiveNpcAI {
 	private void startGroundTask() {
 		cancelSkillTask();
 		skillTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
-			getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21172, 60, 100, true)));
-			getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21173, 60, 100, true)));
+			getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21172, 60, 100)));
+			getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21173, 60, 100)));
 		}, 3000, 20000);
 	}
 
 	private void electrocute() {
-		getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21176, 60, 100, true)));
-		getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21229, 60, 100, true)));
+		getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21176, 60, 100)));
+		getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21229, 60, 100)));
 	}
 
 	@Override
@@ -152,7 +152,7 @@ public class EnragedQueenModorAI extends AggressiveNpcAI {
 	private void startIceTask() {
 		cancelSkillTask();
 		skillTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
-			getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21179, 1, 100, true)));
+			getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21179, 1, 100)));
 		}, 12000, 20000);
 	}
 

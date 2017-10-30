@@ -165,7 +165,7 @@ public class SkillAttackManager {
 		Npc owner = npcAI.getOwner();
 
 		NpcSkillEntry queuedSkill = owner.getQueuedSkills().peek();
-		if (queuedSkill != null && queuedSkill.ignoreNextSkillTime() && isReady(owner, queuedSkill)) {
+		if (queuedSkill != null && queuedSkill.isQueued() && queuedSkill.getNextSkillTime() == 0 && isReady(owner, queuedSkill)) {
 			return getNpcSkillEntryIfNotTooFarAway(owner, queuedSkill);
 		}
 
@@ -212,10 +212,9 @@ public class SkillAttackManager {
 
 	private static NpcSkillEntry getNpcSkillEntryIfNotTooFarAway(Npc owner, NpcSkillEntry entry) {
 		if (targetTooFar(owner, entry)) {
-			owner.getGameStats().setNextSkillTime(5000);
+			owner.getGameStats().setNextSkillDelay(5000);
 			return null;
 		}
-		owner.getGameStats().setLastSkill(entry);
 		return entry;
 	}
 

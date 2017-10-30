@@ -55,7 +55,7 @@ public class DynatoumAI extends SummonerAI {
 						scheduleDespawn(60);
 						break;
 					case 60:
-						getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21534, 1, 100, 0, 3000, true)));
+						getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21534, 1, 100, 0, 3000)));
 						break;
 				}
 			}

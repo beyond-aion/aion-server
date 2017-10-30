@@ -30,13 +30,13 @@ public class DynatoumHealerAI extends GeneralNpcAI {
 		Npc boss = getPosition().getWorldMapInstance().getNpc(getPosition().getMapId() == 301230000 ? 233740 : 234686);
 		if (boss != null) {
 			AIActions.targetCreature(this, boss);
-			getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21535, 1, 100, 0, 10000, false)));
+			getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21535, 1, 100, 0, 10000)));
 		}
 	}
 
 	@Override
 	public void onEndUseSkill(NpcSkillEntry usedSkill) {
 		if (usedSkill.getSkillId() == 21535)
-			getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21535, 1, 100, 0, 10000, false)));
+			getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21535, 1, 100, 0, 10000)));
 	}
 }

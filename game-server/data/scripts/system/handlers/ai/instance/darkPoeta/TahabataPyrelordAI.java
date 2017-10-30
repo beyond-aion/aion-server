@@ -32,7 +32,7 @@ public class TahabataPyrelordAI extends AggressiveNpcAI {
 		PacketSendUtility.broadcastToMap(getOwner(), SM_SYSTEM_MESSAGE.STR_MSG_INSTANCE_S_RANK_BATTLE_TIME());
 		wipeTask = ThreadPoolManager.getInstance().schedule(() -> {
 			if (!isDead())
-				getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(19679, 50, 100, 0, 3000, true)));
+				getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(19679, 50, 100, 0, 3000)));
 		}, 300000);
 	}
 

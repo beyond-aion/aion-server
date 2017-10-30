@@ -63,6 +63,5 @@ public abstract class NpcSkillEntry extends SkillEntry {
 
 	public abstract boolean isQueued();
 
-	public abstract boolean ignoreNextSkillTime();
 }
 

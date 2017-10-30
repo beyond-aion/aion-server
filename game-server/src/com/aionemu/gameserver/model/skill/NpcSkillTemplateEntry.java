@@ -329,8 +329,4 @@ public class NpcSkillTemplateEntry extends NpcSkillEntry {
 		return false;
 	}
 
-	@Override
-	public boolean ignoreNextSkillTime() {
-		return false;
-	}
 }

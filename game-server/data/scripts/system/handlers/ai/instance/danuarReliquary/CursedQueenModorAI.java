@@ -28,7 +28,7 @@ public class CursedQueenModorAI extends AggressiveNpcAI {
 		ThreadPoolManager.getInstance().schedule(() -> {
 			if (!isDead()) {
 				PacketSendUtility.broadcastMessage(getOwner(), 1500740);
-				getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21171, 1, 100, true)));
+				getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21171, 1, 100)));
 			}
 		}, 1000);
 	}
@@ -131,13 +131,13 @@ public class CursedQueenModorAI extends AggressiveNpcAI {
 	private void checkPercentage(int hpPercentage) {
 		if (hpPercentage <= 75 && stage == 0) {
 			stage = 1;
-			getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21165, 1, 100, true)));
+			getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21165, 1, 100)));
 		} else if (hpPercentage <= 70 && stage == 1) {
 			stage = 2;
-			getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21165, 1, 100, 0, 2500, true)));
+			getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21165, 1, 100, 0, 2500)));
 		} else if (hpPercentage <= 50 && stage == 2) {
 			stage = 3;
-			getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21165, 1, 100, 0, 5500, true)));
+			getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21165, 1, 100, 0, 5500)));
 		}
 	}
 }
