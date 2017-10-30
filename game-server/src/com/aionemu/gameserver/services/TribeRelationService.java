@@ -8,7 +8,6 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.npc.AbyssNpcType;
 import com.aionemu.gameserver.model.templates.spawns.basespawns.BaseSpawnTemplate;
-import com.aionemu.gameserver.services.panesterra.ahserion.PanesterraTeamId;
 
 /**
  * @author Cheatkiller
@@ -377,29 +376,18 @@ public class TribeRelationService {
 		switch (creature1.getBaseTribe()) {
 			case GAB1_SUB_DEST_69:
 			case GAB1_SUB_DEST_69_AGGRESSIVE:
-				if (player.getPanesterraTeam() != null) {
-					return player.getPanesterraTeam().getTeamId() != PanesterraTeamId.GAB1_SUB_DEST_69;
-				}
-				break;
+				return true;
 			case GAB1_SUB_DEST_70:
 			case GAB1_SUB_DEST_70_AGGRESSIVE:
-				if (player.getPanesterraTeam() != null) {
-					return player.getPanesterraTeam().getTeamId() != PanesterraTeamId.GAB1_SUB_DEST_70;
-				}
-				break;
+				return true;
 			case GAB1_SUB_DEST_71:
 			case GAB1_SUB_DEST_71_AGGRESSIVE:
-				if (player.getPanesterraTeam() != null) {
-					return player.getPanesterraTeam().getTeamId() != PanesterraTeamId.GAB1_SUB_DEST_71;
-				}
-				break;
+				return player.getRace() != Race.ELYOS;
 			case GAB1_SUB_DEST_72:
 			case GAB1_SUB_DEST_72_AGGRESSIVE:
-				if (player.getPanesterraTeam() != null) {
-					return player.getPanesterraTeam().getTeamId() != PanesterraTeamId.GAB1_SUB_DEST_72;
-				}
-				break;
+				return player.getRace() != Race.ASMODIANS;
+			default:
+				return false;
 		}
-		return false;
 	}
 }

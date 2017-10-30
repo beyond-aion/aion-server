@@ -17,7 +17,7 @@ import com.aionemu.gameserver.model.templates.spawns.riftspawns.RiftSpawnTemplat
 import com.aionemu.gameserver.model.templates.spawns.siegespawns.SiegeSpawnTemplate;
 import com.aionemu.gameserver.model.templates.spawns.vortexspawns.VortexSpawnTemplate;
 import com.aionemu.gameserver.model.vortex.VortexStateType;
-import com.aionemu.gameserver.services.panesterra.ahserion.PanesterraTeamId;
+import com.aionemu.gameserver.services.panesterra.ahserion.PanesterraFaction;
 import com.aionemu.gameserver.spawnengine.SpawnHandlerType;
 
 /**
@@ -93,17 +93,17 @@ public class SpawnGroup extends AbstractLockManager {
 			spots.add(spawnTemplate);
 		}
 	}
-	
+
 	/**
-	 * For Ahserions Flight
+	 * For Ahserion's Flight
 	 */
-	public SpawnGroup(int worldId, Spawn spawn, int stage, PanesterraTeamId team) {
+	public SpawnGroup(int worldId, Spawn spawn, int stage, PanesterraFaction faction) {
 		this.worldId = worldId;
 		initializing(spawn);
 		for (SpawnSpotTemplate template : spawn.getSpawnSpotTemplates()) {
 			AhserionsFlightSpawnTemplate ahserionTemplate = new AhserionsFlightSpawnTemplate(this, template);
 			ahserionTemplate.setStage(stage);
-			ahserionTemplate.setPanesterraTeam(team);
+			ahserionTemplate.setPanesterraTeam(faction);
 			spots.add(ahserionTemplate);
 		}
 	}

@@ -70,7 +70,7 @@ public class CronJobService {
 	}
 
 	private void scheduleAhserionsFlight() {
-		CronService.getInstance().schedule(() -> AhserionRaid.getInstance().start(), "0 50 18 ? * SUN");
+		CronService.getInstance().schedule(() -> AhserionRaid.getInstance().start(), SiegeConfig.AHSERION_START_SCHEDULE);
 	}
 
 	private void scheduleIdianDepthPortalSpawns() {

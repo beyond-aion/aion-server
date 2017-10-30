@@ -79,7 +79,6 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.DuelService;
 import com.aionemu.gameserver.services.HousingService;
-import com.aionemu.gameserver.services.panesterra.ahserion.PanesterraTeam;
 import com.aionemu.gameserver.services.serialkillers.SerialKiller;
 import com.aionemu.gameserver.skillengine.condition.ChainCondition;
 import com.aionemu.gameserver.skillengine.effect.AbnormalState;
@@ -213,9 +212,6 @@ public class Player extends Creature {
 	private int robotId;
 	private boolean isInFfaTeamMode;
 	private int customStates;
-
-	/*------ Panesterra ------*/
-	private PanesterraTeam panesterraTeam = null;
 
 	public Player(PlayerController controller, PlayerCommonData plCommonData, PlayerAppearance appereance, Account account) {
 		super(plCommonData.getPlayerObjId(), controller, null, plCommonData, plCommonData.getPosition());
@@ -1912,14 +1908,6 @@ public class Player extends Creature {
 			return false;
 
 		return super.canPerformMove();
-	}
-
-	public void setPanesterraTeam(PanesterraTeam panesterraTeam) {
-		this.panesterraTeam = panesterraTeam;
-	}
-
-	public PanesterraTeam getPanesterraTeam() {
-		return panesterraTeam;
 	}
 
 	@Override

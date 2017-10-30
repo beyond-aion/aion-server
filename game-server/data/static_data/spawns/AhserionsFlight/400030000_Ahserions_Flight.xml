@@ -2,7 +2,7 @@
 <spawns xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../spawns.xsd">
 	<spawn_map map_id="400030000">
 		<!-- Belus -->
-		<ahserion_spawn team="GAB1_SUB_DEST_69">
+		<ahserion_spawn faction="BELUS">
 			<ahserion_stage_spawn stage="0">
 				<spawn npc_id="804107">
 					<spot x="282.73" y="289.1" z="687.38" h="1"/>
@@ -75,7 +75,7 @@
 			</ahserion_stage_spawn>
 		</ahserion_spawn>
 		<!-- Aspida -->
-		<ahserion_spawn team="GAB1_SUB_DEST_70">
+		<ahserion_spawn faction="ASPIDA">
 			<ahserion_stage_spawn stage="0">
 				<spawn npc_id="804109">
 					<spot x="282.49" y="739.62" z="689.66" h="1"/>
@@ -148,7 +148,7 @@
 			</ahserion_stage_spawn>
 		</ahserion_spawn>
 		<!-- Athanos -->
-		<ahserion_spawn team="GAB1_SUB_DEST_71">
+		<ahserion_spawn faction="ATANATOS">
 			<ahserion_stage_spawn stage="0">
 				<spawn npc_id="804111">
 					<spot x="734.06" y="740.75" z="681.16" h="1"/>
@@ -221,7 +221,7 @@
 			</ahserion_stage_spawn>
 		</ahserion_spawn>
 		<!-- Deylon -->
-		<ahserion_spawn team="GAB1_SUB_DEST_72">
+		<ahserion_spawn faction="DISILLON">
 			<ahserion_stage_spawn stage="0">
 				<spawn npc_id="804113">
 					<spot x="738.58" y="286.02" z="680.71" h="1"/>
@@ -293,7 +293,7 @@
 				</spawn>
 			</ahserion_stage_spawn>
 		</ahserion_spawn>
-		<ahserion_spawn team="BALAUR">
+		<ahserion_spawn faction="BALAUR">
 			<ahserion_stage_spawn stage="0">
 				<!-- Bulwark Shield -->
 				<spawn npc_id="277231">

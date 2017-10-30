@@ -90,4 +90,142 @@
 			</gd_rule>
 		</event_drops>
 	</event>
+	<event name="Beyond Aion Growth" start="2017-10-28T00:00:00" end="2017-12-31T00:00:00">
+		<quests>
+			<maintainable>80212;80213;80214;80215;80216;80217;80218;80219;80220;80221;80222;80223;80224;80225;80226;80227;80228;80229;80387;80388;80389;80390;80398;80399;80400;80401;80487;80488;80489;80490;80491;80492;80493;80494;80495;80496;80497;80498;80499;80500;80501;80502;80503;80504;80505;80506;80507;80508;80509;80510;80511;80512;80513;80514;80515;80516;80517;80518;80519;80520;80521;80522;80523;80524;80525;80526;80527;80528;80529;80530;80531;80532;80533;80534;80535;80536;80537;80538</maintainable>
+		</quests>
+		<spawns>
+			<!-- Sanctum -->
+			<spawn_map map_id="110010000">
+				<!-- Luella -->
+				<spawn npc_id="831025" respawn_time="295">
+					<spot x="1458" y="1533" z="573" h="72" />
+				</spawn>
+				<!-- Nebrith -->
+				<spawn npc_id="831031" respawn_time="295">
+					<spot x="1458.5" y="1531.6" z="573.072" h="66" />
+				</spawn>
+			</spawn_map>
+			<!-- Pandaemonium -->
+			<spawn_map map_id="120010000">
+				<!-- Rikanellie -->
+				<spawn npc_id="831026" respawn_time="295">
+					<spot x="1300" y="1406" z="208" h="9" />
+				</spawn>
+				<!-- Edandos -->
+				<spawn npc_id="831029" respawn_time="295">
+					<spot x="1297.7" y="1407.1" z="208.1166" h="18" />
+				</spawn>
+			</spawn_map>
+			<!-- Poeta -->
+			<spawn_map map_id="210010000">
+				<!-- Nebrith -->
+				<spawn npc_id="831031" respawn_time="295">
+					<spot x="832" y="1248" z="118" h="89" />
+					<spot x="440" y="1746" z="119" h="46" />
+				</spawn>
+			</spawn_map>
+			<!-- Eltnen -->
+			<spawn_map map_id="210020000">
+				<!-- Netalion -->
+				<spawn npc_id="831030" respawn_time="295">
+					<spot x="333" y="2733" z="263" h="103" />
+					<spot x="675" y="420" z="331" h="32" />
+					<spot x="1756" y="881" z="421" h="17" />
+					<spot x="1933" y="2045" z="361" h="90" />
+					<spot x="2407" y="2720" z="361" h="44" />
+					<spot x="932" y="2210" z="253" h="17" />
+				</spawn>
+			</spawn_map>
+			<!-- Verteron -->
+			<spawn_map map_id="210030000">
+				<!-- Nebrith -->
+				<spawn npc_id="831031" respawn_time="295">
+					<spot x="1665" y="1491" z="119" h="48" />
+					<spot x="1286" y="2210" z="142" />
+					<spot x="2059" y="2421" z="274" h="84" />
+					<spot x="2332" y="1808" z="194" h="21" />
+					<spot x="2371" y="825" z="102" h="59" />
+				</spawn>
+			</spawn_map>
+			<!-- Heiron -->
+			<spawn_map map_id="210040000">
+				<!-- Renniah -->
+				<spawn npc_id="831024" respawn_time="295">
+					<spot x="2464" y="356" z="411" />
+					<spot x="982" y="686" z="135" h="44" />
+					<spot x="172" y="1654" z="120" h="60" />
+					<spot x="899" y="2259" z="157" />
+					<spot x="1629" y="2705" z="115" />
+					<spot x="2018" y="1403" z="118" h="78" />
+					<spot x="1434" y="1327" z="174" h="25" />
+				</spawn>
+			</spawn_map>
+			<!-- Theobomos -->
+			<spawn_map map_id="210060000">
+				<!-- Nebrith -->
+				<spawn npc_id="831031" respawn_time="295">
+					<spot x="2215" y="2243" z="46" h="8" />
+					<spot x="1405" y="1562" z="30" h="94" />
+					<spot x="899" y="2785" z="61" h="87" />
+					<spot x="2676" y="829" z="138" />
+				</spawn>
+			</spawn_map>
+			<!-- Ishalgen -->
+			<spawn_map map_id="220010000">
+				<!-- Edandos -->
+				<spawn npc_id="831029" respawn_time="295">
+					<spot x="576" y="2433" z="278" h="26" />
+					<spot x="937" y="1699" z="259" h="34" />
+				</spawn>
+			</spawn_map>
+			<!-- Morheim -->
+			<spawn_map map_id="220020000">
+				<!-- Erdat -->
+				<spawn npc_id="831028" respawn_time="295">
+					<spot x="1082" y="2497" z="239" h="85" />
+					<spot x="288" y="2345" z="444" h="67" />
+					<spot x="638" y="898" z="360" h="17" />
+					<spot x="1771" y="1667" z="197" />
+					<spot x="2391" y="1737" z="101" />
+					<spot x="2344" y="2229" z="127" />
+					<spot x="2778" y="1110" z="170" h="68" />
+				</spawn>
+			</spawn_map>
+			<!-- Altgard -->
+			<spawn_map map_id="220030000">
+				<!-- Edandos -->
+				<spawn npc_id="831029" respawn_time="295">
+					<spot x="1646" y="1825" z="254" h="17" />
+					<spot x="1477" y="2562" z="298" h="87" />
+					<spot x="1897" y="692" z="260" h="38" />
+					<spot x="2651" y="1656" z="325" h="38" />
+					<spot x="2689" y="1026" z="312" h="42" />
+				</spawn>
+			</spawn_map>
+			<!-- Beluslan -->
+			<spawn_map map_id="220040000">
+				<!-- Karzanke -->
+				<spawn npc_id="831027" respawn_time="295">
+					<spot x="394" y="418" z="222" h="77" />
+					<spot x="1251" y="813" z="259" h="22" />
+					<spot x="532" y="1881" z="261" h="23" />
+					<spot x="2433" y="2073" z="579" h="79" />
+					<spot x="1924" y="492" z="412" h="10" />
+				</spawn>
+			</spawn_map>
+			<!-- Brusthonin -->
+			<spawn_map map_id="220050000">
+				<!-- Edandos -->
+				<spawn npc_id="831029" respawn_time="295">
+					<spot x="2922" y="2436" z="16" h="85" />
+					<spot x="1387" y="2011" z="51" />
+					<spot x="1519" y="378" z="231" h="17" />
+					<spot x="821" y="2012" z="306" h="20" />
+					<spot x="448" y="859" z="75" h="8" />
+					<spot x="1519" y="378" z="231.1875" h="17" />
+				</spawn>
+			</spawn_map>
+		</spawns>
+	</event>
 </timed_events>

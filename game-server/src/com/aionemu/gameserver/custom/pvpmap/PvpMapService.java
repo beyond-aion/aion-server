@@ -41,10 +41,11 @@ public class PvpMapService {
 		}
 		return false;
 	}
+
 	private void join(Player p) {
 		if (p.getLevel() < 60) {
 			PacketSendUtility.sendMessage(p, "The PvP-Map is for players level 60 and above.");
-		} else if (p.isInInstance() || p.getPanesterraTeam() != null) {
+		} else if (p.isInInstance() || p.getWorldId() == 400030000) {
 			PacketSendUtility.sendMessage(p, "You cannot enter the PvP-Map while in an instance.");
 		} else if (p.getController().isInCombat()) {
 			PacketSendUtility.sendMessage(p, "You cannot enter the PvP-Map while in combat.");

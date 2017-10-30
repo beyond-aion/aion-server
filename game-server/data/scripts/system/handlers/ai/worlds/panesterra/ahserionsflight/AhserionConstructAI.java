@@ -19,14 +19,17 @@ import com.aionemu.gameserver.model.templates.spawns.SpawnGroup;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.model.templates.spawns.panesterra.AhserionsFlightSpawnTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
+import com.aionemu.gameserver.services.RespawnService;
 import com.aionemu.gameserver.services.panesterra.ahserion.AhserionRaid;
-import com.aionemu.gameserver.services.panesterra.ahserion.PanesterraTeamId;
+import com.aionemu.gameserver.services.panesterra.ahserion.PanesterraFaction;
+import com.aionemu.gameserver.services.panesterra.ahserion.PanesterraTeam;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
  * @author Yeats
+ * @modified Estrayl October 30th, 2017.
  */
 @AIName("ahserion_construct")
 public class AhserionConstructAI extends NpcAI {
@@ -46,16 +49,16 @@ public class AhserionConstructAI extends NpcAI {
 			if (getOwner() != null && !getOwner().isDead() && getOwner().getWorldId() == 400030000) {
 				switch (getOwner().getSpawn().getStaticId()) {
 					case 180:
-						PacketSendUtility.broadcastToMap(getOwner(), new SM_SYSTEM_MESSAGE(1402260));
+						PacketSendUtility.broadcastToMap(getOwner(), SM_SYSTEM_MESSAGE.STR_MSG_GAB1_SUB_TANK_C_ATTACKED());
 						break;
 					case 181:
-						PacketSendUtility.broadcastToMap(getOwner(), new SM_SYSTEM_MESSAGE(1402259));
+						PacketSendUtility.broadcastToMap(getOwner(), SM_SYSTEM_MESSAGE.STR_MSG_GAB1_SUB_TANK_B_ATTACKED());
 						break;
 					case 182:
-						PacketSendUtility.broadcastToMap(getOwner(), new SM_SYSTEM_MESSAGE(1402261));
+						PacketSendUtility.broadcastToMap(getOwner(), SM_SYSTEM_MESSAGE.STR_MSG_GAB1_SUB_TANK_D_ATTACKED());
 						break;
 					case 183:
-						PacketSendUtility.broadcastToMap(getOwner(), new SM_SYSTEM_MESSAGE(1402258));
+						PacketSendUtility.broadcastToMap(getOwner(), SM_SYSTEM_MESSAGE.STR_MSG_GAB1_SUB_TANK_A_ATTACKED());
 						break;
 				}
 				allowShout();
@@ -64,14 +67,9 @@ public class AhserionConstructAI extends NpcAI {
 	}
 
 	private void allowShout() {
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				if (getOwner() != null && !getOwner().isDead()) {
-					canShout.set(true);
-				}
-			}
+		ThreadPoolManager.getInstance().schedule(() -> {
+			if (!isDead())
+				canShout.set(true);
 		}, 3000);
 	}
 
@@ -95,16 +93,16 @@ public class AhserionConstructAI extends NpcAI {
 			public void run() {
 				switch (getOwner().getSpawn().getStaticId()) {
 					case 180:
-						AhserionRaid.getInstance().spawnStage(3, PanesterraTeamId.BALAUR);
+						AhserionRaid.getInstance().spawnStage(3, PanesterraFaction.BALAUR);
 						break;
 					case 181:
-						AhserionRaid.getInstance().spawnStage(4, PanesterraTeamId.BALAUR);
+						AhserionRaid.getInstance().spawnStage(4, PanesterraFaction.BALAUR);
 						break;
 					case 182:
-						AhserionRaid.getInstance().spawnStage(5, PanesterraTeamId.BALAUR);
+						AhserionRaid.getInstance().spawnStage(5, PanesterraFaction.BALAUR);
 						break;
 					case 183:
-						AhserionRaid.getInstance().spawnStage(6, PanesterraTeamId.BALAUR);
+						AhserionRaid.getInstance().spawnStage(6, PanesterraFaction.BALAUR);
 						break;
 				}
 			}
@@ -183,113 +181,83 @@ public class AhserionConstructAI extends NpcAI {
 		}
 	}
 
+	private void cancelAttackScheduleAndDeleteFlag() {
+		if (attackSchedule != null && !attackSchedule.isCancelled())
+			attackSchedule.cancel(false);
+		if (flag != null)
+			flag.getController().delete();
+	}
+
 	@Override
 	protected void handleDespawned() {
-		if (attackSchedule != null && !attackSchedule.isCancelled()) {
-			attackSchedule.cancel(false);
-		}
-		if (flag != null) {
-			flag.getController().delete();
-		}
+		cancelAttackScheduleAndDeleteFlag();
 		super.handleDespawned();
 	}
 
 	@Override
 	public void handleDied() {
-		if (attackSchedule != null && !attackSchedule.isCancelled()) {
-			attackSchedule.cancel(false);
-		}
-		if (flag != null) {
-			flag.getController().delete();
-		}
+		cancelAttackScheduleAndDeleteFlag();
 		switch (getOwner().getSpawn().getStaticId()) {
 			case 180:
-				PacketSendUtility.broadcastToMap(getOwner(), new SM_SYSTEM_MESSAGE(1402264));
+				PacketSendUtility.broadcastToMap(getOwner(), SM_SYSTEM_MESSAGE.STR_MSG_GAB1_SUB_TANK_C_BROKEN());
 				break;
 			case 181:
-				PacketSendUtility.broadcastToMap(getOwner(), new SM_SYSTEM_MESSAGE(1402263));
+				PacketSendUtility.broadcastToMap(getOwner(), SM_SYSTEM_MESSAGE.STR_MSG_GAB1_SUB_TANK_B_BROKEN());
 				break;
 			case 182:
-				PacketSendUtility.broadcastToMap(getOwner(), new SM_SYSTEM_MESSAGE(1402265));
+				PacketSendUtility.broadcastToMap(getOwner(), SM_SYSTEM_MESSAGE.STR_MSG_GAB1_SUB_TANK_D_BROKEN());
 				break;
 			case 183:
-				PacketSendUtility.broadcastToMap(getOwner(), new SM_SYSTEM_MESSAGE(1402262));
+				PacketSendUtility.broadcastToMap(getOwner(), SM_SYSTEM_MESSAGE.STR_MSG_GAB1_SUB_TANK_A_BROKEN());
 				break;
 		}
-		Map<PanesterraTeamId, Integer> panesterraDamage = new HashMap<>();
+		Map<PanesterraFaction, Integer> panesterraDamage = new HashMap<>();
 
 		// Only players or balaur can attack the controller, there are no other npcs on this map
 		for (AggroInfo ai : getOwner().getAggroList().getFinalDamageList(false)) {
+			PanesterraFaction faction = null;
 			if (ai.getAttacker() instanceof Player) {
-				Player attacker = (Player) ai.getAttacker();
-				if (attacker.getPanesterraTeam() != null) {
-					PanesterraTeamId teamId = attacker.getPanesterraTeam().getTeamId();
+				PanesterraTeam team = AhserionRaid.getInstance().getPanesterraFactionTeam((Player) ai.getAttacker());
+				if (team != null && !team.isEliminated())
+					faction = team.getFaction();
+			} else
+				faction = PanesterraFaction.BALAUR;
 
-					if (panesterraDamage.containsKey(teamId)) {
-						int curDamage = panesterraDamage.get(teamId);
-						panesterraDamage.put(teamId, curDamage + ai.getDamage());
-					} else {
-						panesterraDamage.put(attacker.getPanesterraTeam().getTeamId(), ai.getDamage());
-					}
-				}
-			} else {
-				if (panesterraDamage.containsKey(PanesterraTeamId.BALAUR)) {
-					int curDmg = panesterraDamage.get(PanesterraTeamId.BALAUR);
-					panesterraDamage.put(PanesterraTeamId.BALAUR, curDmg + ai.getDamage());
-				} else {
-					panesterraDamage.put(PanesterraTeamId.BALAUR, ai.getDamage());
-				}
-			}
+			Integer dmg = panesterraDamage.get(faction);
+			if (dmg != null)
+				panesterraDamage.put(faction, dmg + ai.getDamage());
+			else
+				panesterraDamage.put(faction, ai.getDamage());
 		}
 		findWinnerTeam(panesterraDamage);
+		RespawnService.scheduleDecayTask(getOwner(), 3000);
 		super.handleDied();
 	}
 
-	private void findWinnerTeam(Map<PanesterraTeamId, Integer> panesterraDamage) {
+	private void findWinnerTeam(Map<PanesterraFaction, Integer> panesterraDamage) {
 		// just in case: we'll spawn balaur construct again
-		PanesterraTeamId winner = PanesterraTeamId.BALAUR;
-		int maxDmg = panesterraDamage.getOrDefault(PanesterraTeamId.BALAUR, 0);
-		if (panesterraDamage.containsKey(PanesterraTeamId.GAB1_SUB_DEST_69)
-			&& AhserionRaid.getInstance().isTeamNotEliminated(PanesterraTeamId.GAB1_SUB_DEST_69)) {
-			if (panesterraDamage.get(PanesterraTeamId.GAB1_SUB_DEST_69) > maxDmg) {
-				maxDmg = panesterraDamage.get(PanesterraTeamId.GAB1_SUB_DEST_69);
-				winner = PanesterraTeamId.GAB1_SUB_DEST_69;
-			}
-		}
-		if (panesterraDamage.containsKey(PanesterraTeamId.GAB1_SUB_DEST_70)
-			&& AhserionRaid.getInstance().isTeamNotEliminated(PanesterraTeamId.GAB1_SUB_DEST_70)) {
-			if (panesterraDamage.get(PanesterraTeamId.GAB1_SUB_DEST_70) > maxDmg) {
-				maxDmg = panesterraDamage.get(PanesterraTeamId.GAB1_SUB_DEST_70);
-				winner = PanesterraTeamId.GAB1_SUB_DEST_70;
-			}
-		}
-		if (panesterraDamage.containsKey(PanesterraTeamId.GAB1_SUB_DEST_71)
-			&& AhserionRaid.getInstance().isTeamNotEliminated(PanesterraTeamId.GAB1_SUB_DEST_71)) {
-			if (panesterraDamage.get(PanesterraTeamId.GAB1_SUB_DEST_71) > maxDmg) {
-				maxDmg = panesterraDamage.get(PanesterraTeamId.GAB1_SUB_DEST_71);
-				winner = PanesterraTeamId.GAB1_SUB_DEST_71;
-			}
-		}
-		if (panesterraDamage.containsKey(PanesterraTeamId.GAB1_SUB_DEST_72)
-			&& AhserionRaid.getInstance().isTeamNotEliminated(PanesterraTeamId.GAB1_SUB_DEST_72)) {
-			if (panesterraDamage.get(PanesterraTeamId.GAB1_SUB_DEST_72) > maxDmg) {
-				maxDmg = panesterraDamage.get(PanesterraTeamId.GAB1_SUB_DEST_72);
-				winner = PanesterraTeamId.GAB1_SUB_DEST_72;
+		PanesterraFaction winner = PanesterraFaction.BALAUR;
+		int maxDmg = panesterraDamage.getOrDefault(PanesterraFaction.BALAUR, 0);
+		for (PanesterraFaction faction : PanesterraFaction.values()) {
+			Integer dmg = panesterraDamage.get(faction);
+			if (dmg != null && !AhserionRaid.getInstance().getFactionTeam(faction).isEliminated()) {
+				if (dmg > maxDmg) {
+					maxDmg = dmg;
+					winner = faction;
+				}
 			}
 		}
 		spawnTankFleetForWinner(getOwner().getSpawn().getStaticId(), winner);
 	}
 
-	private void spawnTankFleetForWinner(int staticId, PanesterraTeamId team) {
-
+	private void spawnTankFleetForWinner(int staticId, PanesterraFaction faction) {
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 			@Override
 			public void run() {
-				List<SpawnGroup> ahserionSpawns = DataManager.SPAWNS_DATA.getAhserionSpawnByTeamId(team.getId());
-				if (ahserionSpawns == null) {
+				List<SpawnGroup> ahserionSpawns = DataManager.SPAWNS_DATA.getAhserionSpawnByTeamId(faction.getId());
+				if (ahserionSpawns == null)
 					return;
-				}
 
 				for (SpawnGroup grp : ahserionSpawns) {
 					for (SpawnTemplate template : grp.getSpawnTemplates()) {
@@ -313,7 +281,6 @@ public class AhserionConstructAI extends NpcAI {
 	@Override
 	public boolean ask(AIQuestion question) {
 		switch (question) {
-			case SHOULD_DECAY:
 			case SHOULD_RESPAWN:
 			case SHOULD_LOOT:
 				return false;

@@ -29,15 +29,19 @@ public class Ahserion extends AdminCommand {
 		}
 
 		if (params[0].equalsIgnoreCase("start")) {
-			if (AhserionRaid.getInstance().start())
-				sendInfo(admin, "Started Ahserion's Flight.");
-			else
+			if (AhserionRaid.getInstance().isStarted()) {
 				sendInfo(admin, "Ahserion's Flight is already running.");
+			} else {
+				AhserionRaid.getInstance().start();
+				sendInfo(admin, "Started Ahserion's Flight.");
+			}
 		} else if (params[0].equalsIgnoreCase("stop")) {
-			if (AhserionRaid.getInstance().stop())
-				sendInfo(admin, "Stopped Ahserion's Flight.");
-			else
+			if (!AhserionRaid.getInstance().isStarted()) {
 				sendInfo(admin, "Ahserion's Flight is not running.");
+			} else {
+				AhserionRaid.getInstance().stop();
+				sendInfo(admin, "Stopped Ahserion's Flight.");
+			}
 		}
 	}
 }

@@ -37,10 +37,10 @@ public class SiegeConfig {
 	 */
 	@Property(key = "gameserver.siege.health.multiplier", defaultValue = "1")
 	public static float SIEGE_HEALTH_MULTIPLIER;
-	
-	@Property(key ="gameserver.siege.panesterra.ahserion.minplayer.type1", defaultValue="12")
-	public static int AHSERION_MIN_PLAYERS_TEAM_TYPE_1 = 12;
-	
-	@Property(key ="gameserver.siege.panesterra.ahserion.maxplayer.type1", defaultValue="24")
-	public static int AHSERION_MAX_PLAYERS_TEAM_TYPE_1 = 24;
+
+	@Property(key = "gameserver.siege.panesterra.ahserion.maxplayers", defaultValue = "100")
+	public static int AHSERION_MAX_PLAYERS_PER_TEAM;
+
+	@Property(key = "gameserver.siege.panesterra.ahserion.time", defaultValue = "0 50 18 ? * *")
+	public static CronExpression AHSERION_START_SCHEDULE;
 }

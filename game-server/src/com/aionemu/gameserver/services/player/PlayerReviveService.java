@@ -177,9 +177,8 @@ public class PlayerReviveService {
 			TeleportService.teleportToEvent(player);
 			return;
 		}
-		if (player.getPanesterraTeam() != null)
-			if (AhserionRaid.getInstance().revivePlayer(player, skillId))
-				return;
+		if (player.getWorldId() == 400030000 && AhserionRaid.getInstance().revivePlayer(player, skillId))
+			return;
 		if (player.getPosition().getWorldMapInstance().getInstanceHandler().onReviveEvent(player))
 			return;
 		WorldMap map = World.getInstance().getWorldMap(player.getWorldId());

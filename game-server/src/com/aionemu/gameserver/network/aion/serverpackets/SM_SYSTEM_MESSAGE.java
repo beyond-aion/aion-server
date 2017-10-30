@@ -25724,21 +25724,21 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	public static final SM_SYSTEM_MESSAGE STR_MSG_POLISH_WRONG_LEVEL() {
 		return new SM_SYSTEM_MESSAGE(1401649);
 	}
-	
+
 	/**
 	 * Modor activated the Danuar Bomb of grudge. You have 15 minutes to defeat her.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_IDLDF5_INDER_RUNE_START() {
 		return new SM_SYSTEM_MESSAGE(1401676);
 	}
-	
+
 	/**
 	 * 10 minutes elapsed.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_IDLDF5_INDER_RUNE_10MIN() {
 		return new SM_SYSTEM_MESSAGE(1401677);
 	}
-	
+
 	/**
 	 * The bomb has detonated.
 	 */
@@ -26237,6 +26237,118 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	}
 
 	/**
+	 * Chariot Hangar I Controller is under attack.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_GAB1_SUB_TANK_A_ATTACKED() {
+		return new SM_SYSTEM_MESSAGE(1402258);
+	}
+
+	/**
+	 * Chariot Hangar II Controller is under attack.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_GAB1_SUB_TANK_B_ATTACKED() {
+		return new SM_SYSTEM_MESSAGE(1402259);
+	}
+
+	/**
+	 * Ignus Engine Hangar I Controller is under attack.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_GAB1_SUB_TANK_C_ATTACKED() {
+		return new SM_SYSTEM_MESSAGE(1402260);
+	}
+
+	/**
+	 * Ignus Engine Hangar II Controller is under attack.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_GAB1_SUB_TANK_D_ATTACKED() {
+		return new SM_SYSTEM_MESSAGE(1402261);
+	}
+
+	/**
+	 * Chariot Hangar I Controller has been destroyed.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_GAB1_SUB_TANK_A_BROKEN() {
+		return new SM_SYSTEM_MESSAGE(1402262);
+	}
+
+	/**
+	 * Chariot Hangar II Controller has been destroyed.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_GAB1_SUB_TANK_B_BROKEN() {
+		return new SM_SYSTEM_MESSAGE(1402263);
+	}
+
+	/**
+	 * Ignus Engine Hangar I Controller has been destroyed.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_GAB1_SUB_TANK_C_BROKEN() {
+		return new SM_SYSTEM_MESSAGE(1402264);
+	}
+
+	/**
+	 * Ignus Engine Hangar II Controller has been destroyed.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_GAB1_SUB_TANK_D_BROKEN() {
+		return new SM_SYSTEM_MESSAGE(1402265);
+	}
+
+	/**
+	 * The Belus Advance Corridor Shield is under attack.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_GAB1_SUB_PORTAL_DEST_69_ATTACKED() {
+		return new SM_SYSTEM_MESSAGE(1402266);
+	}
+
+	/**
+	 * The Aspida Advance Corridor Shield is under attack.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_GAB1_SUB_PORTAL_DEST_70_ATTACKED() {
+		return new SM_SYSTEM_MESSAGE(1402267);
+	}
+
+	/**
+	 * The Atanatos Advance Corridor Shield is under attack.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_GAB1_SUB_PORTAL_DEST_71_ATTACKED() {
+		return new SM_SYSTEM_MESSAGE(1402268);
+	}
+
+	/**
+	 * The Disillon Advance Corridor Shield is under attack.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_GAB1_SUB_PORTAL_DEST_72_ATTACKED() {
+		return new SM_SYSTEM_MESSAGE(1402269);
+	}
+
+	/**
+	 * The Belus Advance Corridor Shield has been destroyed. The Daevas from the Belus camp have returned to the Arcadian Fortress.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_GAB1_SUB_PORTAL_DEST_69_BROKEN() {
+		return new SM_SYSTEM_MESSAGE(1402270);
+	}
+
+	/**
+	 * The Aspida Advance Corridor Shield is under attack. The Daevas from the Aspida camp have returned to the Umbral Fortress.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_GAB1_SUB_PORTAL_DEST_70_BROKEN() {
+		return new SM_SYSTEM_MESSAGE(1402271);
+	}
+
+	/**
+	 * The Atanatos Advance Corridor Shield is under attack. The Daevas from the Atanatos camp have returned to the Eternum Fortress.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_GAB1_SUB_PORTAL_DEST_71_BROKEN() {
+		return new SM_SYSTEM_MESSAGE(1402272);
+	}
+
+	/**
+	 * The Disillon Advance Corridor Shield has been destroyed. The Daevas from the Disillon camp have returned to the Skyclash Fortress.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_GAB1_SUB_PORTAL_DEST_72_BROKEN() {
+		return new SM_SYSTEM_MESSAGE(1402273);
+	}
+
+	/**
 	 * %0 has succeeded in enchanting %1 to Level 20.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_ENCHANT_ITEM_SUCCEEDED_20(String playerName, int nameId) {
@@ -26314,10 +26426,38 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	}
 
 	/**
+	 * It is not ready yet. Please wait.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_CANT_READY_PANGAEA() {
+		return new SM_SYSTEM_MESSAGE(1402395);
+	}
+
+	/**
 	 * Purification System
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_REGISTER_ITEM_MSG_UPGRADE_CANNOT(DescriptionId nameId) {
 		return new SM_SYSTEM_MESSAGE(1402397, nameId);
+	}
+
+	/**
+	 * An Advance Corridor to a Rift Portal battle has appeared.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_SVS_INVADE_DIRECT_PORTAL_OPEN() {
+		return new SM_SYSTEM_MESSAGE(1402399);
+	}
+
+	/**
+	 * Players of your level cannot use the Advance Corridor.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_CANNOT_USE_SVS_DIRECT_PORTAL_LEVEL_LIMIT() {
+		return new SM_SYSTEM_MESSAGE(1402400);
+	}
+
+	/**
+	 * The Advanced Corridor is full. Please Wait.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_CANNOT_USE_SVS_DIRECT_PORTAL_USE_COUNT_LIMIT() {
+		return new SM_SYSTEM_MESSAGE(1402401);
 	}
 
 	/**

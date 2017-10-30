@@ -9,7 +9,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
 import com.aionemu.gameserver.model.templates.spawns.Spawn;
-import com.aionemu.gameserver.services.panesterra.ahserion.PanesterraTeamId;
+import com.aionemu.gameserver.services.panesterra.ahserion.PanesterraFaction;
 
 /**
  * @author Yeats
@@ -21,11 +21,11 @@ public class AhserionsFlightSpawn {
 	
 	@XmlElement(name = "ahserion_stage_spawn")
 	private List<AhserionStageSpawnTemplate> ahserionStageSpawnTemplate;
-	@XmlAttribute(name = "team")
-	private PanesterraTeamId team;
+	@XmlAttribute(name = "faction")
+	private PanesterraFaction faction;
 	
-	public PanesterraTeamId getTeam() {
-		return team;
+	public PanesterraFaction getFaction() {
+		return faction;
 	}
 	
 	public List<AhserionStageSpawnTemplate> getStageSpawnTemplate() {

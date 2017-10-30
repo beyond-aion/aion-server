@@ -66,7 +66,7 @@
 		<xs:sequence>
 			<xs:element name="ahserion_stage_spawn" type="AhserionStageSpawnTemplate" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
-		<xs:attribute name="team" type="PanesterraTeam"/>
+		<xs:attribute name="faction" type="PanesterraFaction"/>
 	</xs:complexType>
 	<xs:complexType name="AhserionStageSpawnTemplate">
 		<xs:sequence>
@@ -74,12 +74,12 @@
 		</xs:sequence>
 		<xs:attribute name="stage" type="xs:int"/>
 	</xs:complexType>
-	<xs:simpleType name="PanesterraTeam">
+	<xs:simpleType name="PanesterraFaction">
 		<xs:restriction base="xs:string">
-			<xs:enumeration value="GAB1_SUB_DEST_69"/>
-			<xs:enumeration value="GAB1_SUB_DEST_70"/>
-			<xs:enumeration value="GAB1_SUB_DEST_71"/>
-			<xs:enumeration value="GAB1_SUB_DEST_72"/>
+			<xs:enumeration value="BELUS"/>
+			<xs:enumeration value="ASPIDA"/>
+			<xs:enumeration value="ATANATOS"/>
+			<xs:enumeration value="DISILLON"/>
 			<xs:enumeration value="BALAUR"/>
 		</xs:restriction>
 	</xs:simpleType>

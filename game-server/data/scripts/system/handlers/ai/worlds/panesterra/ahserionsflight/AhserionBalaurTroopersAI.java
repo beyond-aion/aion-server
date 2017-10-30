@@ -8,7 +8,6 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
  * @author Yeats
- *
  */
 @AIName("ahserion_troopers")
 public class AhserionBalaurTroopersAI extends NpcAI {
@@ -19,26 +18,22 @@ public class AhserionBalaurTroopersAI extends NpcAI {
 		spawnAttackers();
 		scheduleDespawn();
 	}
-	
+
 	private void spawnAttackers() {
-		if (getOwner().getNpcId() == 297187) { //297188 spawns already some attackers
+		if (getOwner().getNpcId() == 297187) { // 297188 spawns already some attackers
 			return;
 		}
 		if (getOwner().getSpawn() instanceof AhserionsFlightSpawnTemplate) {
-			ThreadPoolManager.getInstance().schedule(new Runnable() {
-				@Override
-				public void run() {
-					if (AhserionRaid.getInstance().isStarted()
-						&& AhserionRaid.getInstance().isTeamNotEliminated(((AhserionsFlightSpawnTemplate) getOwner().getSpawn()).getTeam())) {
-							AhserionRaid.getInstance().spawnStage(5, ((AhserionsFlightSpawnTemplate) getOwner().getSpawn()).getTeam());
-						}
-				}
+			ThreadPoolManager.getInstance().schedule(() -> {
+				if (AhserionRaid.getInstance().isStarted())
+					AhserionRaid.getInstance().spawnStage(5, ((AhserionsFlightSpawnTemplate) getOwner().getSpawn()).getFaction());
 			}, 6500);
 		}
 	}
-	
+
 	private void scheduleDespawn() {
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
+
 			@Override
 			public void run() {
 				if (getOwner() != null)

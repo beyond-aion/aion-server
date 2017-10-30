@@ -80,7 +80,7 @@ public class SpawnsData {
 	private TIntObjectHashMap<List<SpawnGroup>> vortexSpawnMaps = new TIntObjectHashMap<>();
 	private TIntObjectHashMap<MercenarySpawn> mercenarySpawns = new TIntObjectHashMap<>();
 	private TIntObjectHashMap<AssaultSpawn> assaultSpawns = new TIntObjectHashMap<>();
-	private TIntObjectHashMap<List<SpawnGroup>> ahserionSpawnMaps = new TIntObjectHashMap<>(); // ahserions flight
+	private TIntObjectHashMap<List<SpawnGroup>> ahserionSpawnMaps = new TIntObjectHashMap<>(); // Ahserion's flight
 	private Set<Integer> allNpcIds;
 
 	public void afterUnmarshal(Unmarshaller u, Object parent) {
@@ -182,7 +182,7 @@ public class SpawnsData {
 			}
 
 			for (AhserionsFlightSpawn ahserionSpawn : map.getAhserionSpawns()) {
-				int teamId = ahserionSpawn.getTeam().getId();
+				int teamId = ahserionSpawn.getFaction().getId();
 				if (!ahserionSpawnMaps.containsKey(teamId)) {
 					ahserionSpawnMaps.put(teamId, new ArrayList<SpawnGroup>());
 				}
@@ -192,7 +192,7 @@ public class SpawnsData {
 						continue;
 
 					for (Spawn spawn : stageTemplate.getSpawns()) {
-						SpawnGroup spawnGroup = new SpawnGroup(map.getMapId(), spawn, stageTemplate.getStage(), ahserionSpawn.getTeam());
+						SpawnGroup spawnGroup = new SpawnGroup(map.getMapId(), spawn, stageTemplate.getStage(), ahserionSpawn.getFaction());
 						ahserionSpawnMaps.get(teamId).add(spawnGroup);
 					}
 				}

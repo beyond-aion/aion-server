@@ -8,11 +8,10 @@ import ai.AggressiveNpcAI;
 
 /**
  * @author Yeats
- *
  */
 @AIName("ahserion_aggressive_npc")
 public class AhserionNpcAI extends AggressiveNpcAI {
-	
+
 	@Override
 	public boolean ask(AIQuestion question) {
 		switch (question) {
@@ -24,7 +23,7 @@ public class AhserionNpcAI extends AggressiveNpcAI {
 				return super.ask(question);
 		}
 	}
-	
+
 	@Override
 	protected AhserionsFlightSpawnTemplate getSpawnTemplate() {
 		return (AhserionsFlightSpawnTemplate) super.getSpawnTemplate();

@@ -2,149 +2,94 @@ package com.aionemu.gameserver.services.panesterra.ahserion;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.team.alliance.PlayerAllianceService;
-import com.aionemu.gameserver.model.team.group.PlayerGroupService;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_SIEGE_LOCATION_INFO;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.teleport.TeleportService;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.WorldPosition;
 
 /**
- * @author Yeats
- * @modified Estrayl
+ * Created on October 29th, 2017.
+ * Currently only supports Ahserion's Flight.
+ * 
+ * @author Estrayl
+ * @since Beyond AION 4.8
  */
-public abstract class PanesterraTeam {
+public class PanesterraTeam {
 
-	protected PanesterraTeamId teamId;
-	protected List<Integer> members = new ArrayList<>();
-	protected WorldPosition startPosition;
-	protected AtomicBoolean isEliminated = new AtomicBoolean(false);
+	private List<Integer> teamMembers = new ArrayList<>();
+	private PanesterraFaction faction;
+	private WorldPosition fortressPosition;
+	private WorldPosition startPosition;
+	private boolean isEliminated;
 
-	public PanesterraTeam(PanesterraTeamId id) {
-		teamId = id;
-		setStartPosition();
-	}
-
-	protected abstract void setStartPosition();
-
-	public void teleportToStartPosition() {
-		if (members.isEmpty() || startPosition == null)
-			return;
-		for (Integer id : members) {
-			Player player = World.getInstance().findPlayer(id);
-			if (player == null)
-				continue;
-			TeleportService.teleportTo(player, startPosition);
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_SVS_DIRECT_PORTAL_OPEN_NOTICE());
-			sendPackets(player);
+	public PanesterraTeam(PanesterraFaction faction) {
+		this.faction = faction;
+		switch (faction) {
+			case BELUS:
+				fortressPosition = new WorldPosition(0, 0, 0, 0, (byte) 0);
+				startPosition = new WorldPosition(400030000, 287.727f, 291.105f, 680.106f, (byte) 15);
+				break;
+			case ASPIDA:
+				fortressPosition = new WorldPosition(0, 0, 0, 0, (byte) 0);
+				startPosition = new WorldPosition(400030000, 288.272f, 731.896f, 680.117f, (byte) 105);
+				break;
+			case ATANATOS:
+				fortressPosition = new WorldPosition(110070000, 503.567f, 375.164f, 126.790f, (byte) 30);
+				startPosition = new WorldPosition(400030000, 728.675f, 735.638f, 680.099f, (byte) 75);
+				break;
+			case DISILLON:
+				fortressPosition = new WorldPosition(120080000, 429.001f, 250.508f, 93.129f, (byte) 60);
+				startPosition = new WorldPosition(400030000, 730.642f, 293.440f, 680.118f, (byte) 45);
+				break;
 		}
 	}
 
-	public void moveToBindPoint() {
-		if (!members.isEmpty()) {
-			for (Integer id : members) {
-				Player player = World.getInstance().findPlayer(id);
-				if (player == null)
-					continue;
-				player.setPanesterraTeam(null);
-				if (player.getWorldId() == 400030000) {
-					ungroupPlayer(player);
-					TeleportService.moveToBindLocation(player);
-					sendPackets(player);
-				}
-			}
-			members.clear();
+	public void moveTeamMembersToFortressPosition() {
+		for (Integer playerId : teamMembers) {
+			Player player = World.getInstance().findPlayer(playerId);
+			if (player != null)
+				TeleportService.teleportTo(player, fortressPosition);
 		}
 	}
 
-	public void addMember(Player newMember) {
-		if (isEliminated.get())
-			return;
-		synchronized (this) {
-			if (!members.contains(newMember.getObjectId())) {
-				members.add(newMember.getObjectId());
-				newMember.setPanesterraTeam(this);
-			}
-		}
+	public void movePlayerToStartPosition(Player player) {
+		TeleportService.teleportTo(player, startPosition);
 	}
 
-	public void ungroupPlayer(Player player) {
-		if (player.isInGroup())
-			PlayerGroupService.removePlayer(player);
-		else if (player.isInAlliance())
-			PlayerAllianceService.removePlayer(player);
-	}
-	
-	protected void sendPackets(Player player) {
-		PacketSendUtility.sendPacket(player, new SM_SIEGE_LOCATION_INFO());
+	public boolean addTeamMemberIfAbsent(int playerId) {
+		return !teamMembers.contains(playerId) && teamMembers.add(playerId);
 	}
 
-	public int getFortressId() {
-		switch (teamId) {
-			case GAB1_SUB_DEST_69:
-				return 10111;
-			case GAB1_SUB_DEST_70:
-				return 10211;
-			case GAB1_SUB_DEST_71:
-				return 10311;
-			case GAB1_SUB_DEST_72:
-				return 10411;
-		}
-		return 0;
+	public boolean isTeamMember(int playerId) {
+		return teamMembers.contains(playerId);
 	}
 
-	public PanesterraTeamId getTeamId() {
-		return teamId;
+	public boolean removeTeamMember(int playerId) {
+		return teamMembers.contains(playerId) && teamMembers.remove(playerId) != null;
 	}
 
-	public List<Integer> getMembers() {
-		return members;
+	public boolean isEliminated() {
+		return isEliminated;
+	}
+
+	public void setIsEliminated(boolean value) {
+		isEliminated = value;
+	}
+
+	public WorldPosition getFortressPosition() {
+		return fortressPosition;
 	}
 
 	public WorldPosition getStartPosition() {
 		return startPosition;
 	}
 
-	public boolean isEliminated() {
-		return this.isEliminated.get();
+	public int getMemberCount() {
+		return teamMembers.size();
 	}
 
-	public void setIsEliminated(boolean isEliminated) {
-		this.isEliminated.set(isEliminated);
-	}
-
-	public String getTeamName() {
-		switch (teamId) {
-			case GAB1_SUB_DEST_69:
-				return "BELUS";
-			case GAB1_SUB_DEST_70:
-				return "ASPIDA";
-			case GAB1_SUB_DEST_71:
-				return "ATHANOS";
-			case GAB1_SUB_DEST_72:
-				return "DEYLON";
-			default:
-				return "";
-		}
-	}
-	
-	public int getTeamColor() {
-		switch (teamId) {
-			case GAB1_SUB_DEST_69:
-				return -1962786561;
-			case GAB1_SUB_DEST_70:
-				return 6260223;
-			case GAB1_SUB_DEST_71:
-				return 1084100351;
-			case GAB1_SUB_DEST_72:
-				return -1135668993;
-				default:
-					return 0;
-		}
+	public PanesterraFaction getFaction() {
+		return faction;
 	}
 }

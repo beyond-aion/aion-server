@@ -374,7 +374,7 @@ public class PlayerController extends CreatureController<Player> {
 
 	private void sendDieFromCreature(Creature lastAttacker) {
 		Player player = getOwner();
-		if (player.getPanesterraTeam() != null && player.getWorldId() == 400030000) {
+		if (player.getWorldId() == 400030000) {
 			PacketSendUtility.sendPacket(player, new SM_DIE(player, 6));
 			return;
 		}
