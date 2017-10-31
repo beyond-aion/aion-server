@@ -26,11 +26,9 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.skill.NpcSkillEntry;
-import com.aionemu.gameserver.model.skill.NpcSkillTemplateEntry;
 import com.aionemu.gameserver.model.stats.calc.Stat2;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.model.templates.item.ItemTemplate;
-import com.aionemu.gameserver.model.templates.npcskill.QueuedNpcSkillTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_CASTSPELL;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_CASTSPELL_RESULT;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ITEM_USAGE_ANIMATION;
@@ -273,15 +271,15 @@ public class Skill {
 
 		if (effector instanceof Npc) {
 			Npc npc = (Npc) effector;
-			NpcSkillEntry lastSkill = npc.getGameStats().getLastSkill();
-			if (lastSkill == null) { // just in case the effector was forced to use the skill
-				lastSkill = new NpcSkillTemplateEntry(new QueuedNpcSkillTemplate(skillTemplate.getSkillId(), skillLevel, 100));
-				npc.getGameStats().setLastSkill(lastSkill);
+			NpcSkillEntry currentNpcSkillEntry = npc.getGameStats().getLastSkill();
+			if (currentNpcSkillEntry != null) {
+				currentNpcSkillEntry.setLastTimeUsed();
+				npc.getGameStats().setNextSkillDelay(currentNpcSkillEntry.getNextSkillTime());
+			} else {
+				npc.getGameStats().setNextSkillDelay(-1);
 			}
-			lastSkill.setLastTimeUsed();
-			npc.getGameStats().setNextSkillDelay(lastSkill.getNextSkillTime());
-			npc.getAi().onStartUseSkill(lastSkill);
 		}
+		effector.getAi().onStartUseSkill(skillTemplate);
 		if (castDuration > 0) {
 			schedule(castDuration);
 		} else {
@@ -760,6 +758,7 @@ public class Skill {
 			AbyssService.rankerSkillAnnounce((Player) effector, getSkillTemplate().getNameId());
 		}
 
+		effector.getAi().onEndUseSkill(skillTemplate);
 		if (effector instanceof Npc) {
 			Npc npc = (Npc) effector;
 			NpcSkillEntry lastSkill = npc.getGameStats().getLastSkill();
@@ -767,12 +766,9 @@ public class Skill {
 				if (lastSkill.isQueued()) {
 					npc.getQueuedSkills().poll();
 				}
-				if (!npc.isDead()) {
-					lastSkill.fireOnEndCastEvents(npc);
-					npc.getAi().onEndUseSkill(lastSkill);
-				}
+				lastSkill.fireOnEndCastEvents(npc);
 			}
-			SkillAttackManager.afterUseSkill((NpcAI) effector.getAi());
+			SkillAttackManager.afterUseSkill((NpcAI) npc.getAi());
 		}
 
 		if (skillMethod == SkillMethod.CAST || skillMethod == SkillMethod.CHARGE) {

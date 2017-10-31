@@ -1,7 +1,7 @@
 package ai.instance.abyss;
 
 import com.aionemu.gameserver.ai.AIName;
-import com.aionemu.gameserver.model.skill.NpcSkillEntry;
+import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 
 import ai.AggressiveNpcAI;
 
@@ -15,8 +15,8 @@ import ai.AggressiveNpcAI;
 public class FortressInstanceDukeAI extends AggressiveNpcAI {
 
 	@Override
-	public void onEndUseSkill(NpcSkillEntry usedSkill) {
-		if (usedSkill.getSkillId() == 18003)
+	public void onEndUseSkill(SkillTemplate skillTemplate) {
+		if (skillTemplate.getSkillId() == 18003)
 			spawn(284978, getOwner().getX(), getOwner().getY(), getOwner().getZ(), getOwner().getHeading());
 	}
 	

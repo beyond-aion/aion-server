@@ -20,6 +20,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 import ai.GeneralNpcAI;
+import instance.IlluminaryObeliskInstance;
 
 /**
  * On retail you can fake charge waves - means waves will spawn when players begin to charge.

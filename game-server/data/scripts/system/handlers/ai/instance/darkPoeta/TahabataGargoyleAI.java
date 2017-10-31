@@ -1,7 +1,7 @@
 package ai.instance.darkPoeta;
 
 import com.aionemu.gameserver.ai.AIName;
-import com.aionemu.gameserver.model.skill.NpcSkillEntry;
+import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 
 import ai.AggressiveNpcAI;
 
@@ -12,8 +12,8 @@ import ai.AggressiveNpcAI;
 public class TahabataGargoyleAI extends AggressiveNpcAI {
 
 	@Override
-	public void onEndUseSkill(NpcSkillEntry usedSkill) {
-		if (usedSkill.getSkillId() == 18219)
+	public void onEndUseSkill(SkillTemplate skillTemplate) {
+		if (skillTemplate.getSkillId() == 18219)
 			getOwner().getController().delete();
 	}
 }

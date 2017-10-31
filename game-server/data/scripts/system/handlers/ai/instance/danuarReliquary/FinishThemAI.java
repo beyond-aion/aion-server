@@ -4,7 +4,7 @@ import com.aionemu.commons.network.util.ThreadPoolManager;
 import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.NpcAI;
-import com.aionemu.gameserver.model.skill.NpcSkillEntry;
+import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 
 /**
  * @author Estrayl October 28th, 2017.
@@ -19,8 +19,8 @@ public class FinishThemAI extends NpcAI {
 	}
 
 	@Override
-	public void onEndUseSkill(NpcSkillEntry usedSkill) {
-		if (usedSkill.getSkillId() == 21199)
+	public void onEndUseSkill(SkillTemplate skillTemplate) {
+		if (skillTemplate.getSkillId() == 21199)
 			getOwner().getController().delete();
 	}
 }

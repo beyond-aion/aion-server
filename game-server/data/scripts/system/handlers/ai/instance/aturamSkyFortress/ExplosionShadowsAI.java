@@ -7,8 +7,8 @@ import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.skill.NpcSkillEntry;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
+import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
@@ -34,9 +34,9 @@ public class ExplosionShadowsAI extends AggressiveNpcAI {
 	}
 
 	@Override
-	public void onEndUseSkill(NpcSkillEntry usedSkill) {
-		super.onEndUseSkill(usedSkill);
-		if (usedSkill.getSkillId() == 19425) // Self Destruct
+	public void onEndUseSkill(SkillTemplate skillTemplate) {
+		super.onEndUseSkill(skillTemplate);
+		if (skillTemplate.getSkillId() == 19425) // Self Destruct
 			ThreadPoolManager.getInstance().schedule(() -> check(), 1500);
 	}
 

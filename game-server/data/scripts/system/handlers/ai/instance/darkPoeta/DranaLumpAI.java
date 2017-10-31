@@ -3,8 +3,8 @@ package ai.instance.darkPoeta;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.skill.NpcSkillEntry;
 import com.aionemu.gameserver.skillengine.SkillEngine;
+import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
@@ -40,8 +40,8 @@ public class DranaLumpAI extends ActionItemNpcAI {
 	}
 
 	@Override
-	public void onEndUseSkill(NpcSkillEntry usedSkill) {
-		if (usedSkill.getSkillId() == 18536)
+	public void onEndUseSkill(SkillTemplate skillTemplate) {
+		if (skillTemplate.getSkillId() == 18536)
 			getOwner().getController().delete();
 	}
 }

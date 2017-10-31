@@ -11,11 +11,11 @@ import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
-import com.aionemu.gameserver.model.skill.NpcSkillEntry;
 import com.aionemu.gameserver.model.skill.QueuedNpcSkillEntry;
 import com.aionemu.gameserver.model.templates.npcskill.QueuedNpcSkillTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.skillengine.SkillEngine;
+import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
@@ -87,8 +87,8 @@ public class HyperionAI extends AggressiveNpcAI {
 	}
 
 	@Override
-	public void onEndUseSkill(NpcSkillEntry usedSkill) {
-		switch (usedSkill.getSkillId()) {
+	public void onEndUseSkill(SkillTemplate skillTemplate) {
+		switch (skillTemplate.getSkillId()) {
 			case 21245:
 				switch (stage) {
 					case 0:

@@ -239,7 +239,7 @@ public class NpcSkillTemplateEntry extends NpcSkillEntry {
 	@Override
 	public void fireOnEndCastEvents(Npc npc) {
 		NpcSkillSpawn spawn = template.getSpawn();
-		if (spawn == null || npc.getLifeStats().isAboutToDie())
+		if (spawn == null || npc.isDead() || npc.getLifeStats().isAboutToDie())
 			return;
 		if (spawn.getDelay() == 0)
 			spawnNpc(npc, spawn);

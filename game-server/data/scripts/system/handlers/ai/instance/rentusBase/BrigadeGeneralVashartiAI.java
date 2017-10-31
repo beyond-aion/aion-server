@@ -19,11 +19,11 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.model.geometry.Point3D;
-import com.aionemu.gameserver.model.skill.NpcSkillEntry;
 import com.aionemu.gameserver.model.skill.QueuedNpcSkillEntry;
 import com.aionemu.gameserver.model.templates.npcskill.QueuedNpcSkillTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.skillengine.SkillEngine;
+import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
@@ -101,8 +101,8 @@ public class BrigadeGeneralVashartiAI extends AggressiveNpcAI {
 	}
 
 	@Override
-	public void onStartUseSkill(NpcSkillEntry startingSkill) {
-		switch (startingSkill.getSkillId()) {
+	public void onStartUseSkill(SkillTemplate skillTemplate) {
+		switch (skillTemplate.getSkillId()) {
 			case 20534:
 				startAirEvent();
 				break;
@@ -110,8 +110,8 @@ public class BrigadeGeneralVashartiAI extends AggressiveNpcAI {
 	}
 
 	@Override
-	public void onEndUseSkill(NpcSkillEntry usedSkill) {
-		switch (usedSkill.getSkillId()) {
+	public void onEndUseSkill(SkillTemplate skillTemplate) {
+		switch (skillTemplate.getSkillId()) {
 			case 20530:
 			case 20531:
 				WorldMapInstance instance = getPosition().getWorldMapInstance();

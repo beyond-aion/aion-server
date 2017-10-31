@@ -4,8 +4,8 @@ import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.NpcAI;
-import com.aionemu.gameserver.model.skill.NpcSkillEntry;
 import com.aionemu.gameserver.skillengine.model.Effect;
+import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 
 /**
  * @author Ritsu
@@ -31,8 +31,8 @@ public class VengefulOrbAI extends NpcAI {
 	}
 
 	@Override
-	public void onEndUseSkill(NpcSkillEntry usedSkill) {
-		if (usedSkill.getSkillId() == 21178)
+	public void onEndUseSkill(SkillTemplate skillTemplate) {
+		if (skillTemplate.getSkillId() == 21178)
 			getOwner().getController().delete();
 	}
 }

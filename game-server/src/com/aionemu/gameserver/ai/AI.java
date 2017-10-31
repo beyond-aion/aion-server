@@ -4,10 +4,10 @@ import com.aionemu.gameserver.ai.event.AIEventType;
 import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.skill.NpcSkillEntry;
 import com.aionemu.gameserver.model.stats.calc.Stat2;
 import com.aionemu.gameserver.model.templates.item.ItemAttackType;
 import com.aionemu.gameserver.skillengine.model.Effect;
+import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 
 /**
  * @author ATracer
@@ -74,7 +74,7 @@ public interface AI {
 
 	int modifyAggroRange(int value);
 
-	void onStartUseSkill(NpcSkillEntry startingSkill);
+	void onStartUseSkill(SkillTemplate skillTemplate);
 
-	void onEndUseSkill(NpcSkillEntry usedSkill);
+	void onEndUseSkill(SkillTemplate skillTemplate);
 }

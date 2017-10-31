@@ -3,8 +3,8 @@ package com.aionemu.gameserver.ai;
 import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.skill.NpcSkillEntry;
 import com.aionemu.gameserver.model.templates.npcshout.ShoutEventType;
+import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 
 /**
  * @author ATracer
@@ -154,10 +154,10 @@ public abstract class AITemplate extends AbstractAI {
 	}
 
 	@Override
-	public void onStartUseSkill(NpcSkillEntry startingSkill) {
+	public void onStartUseSkill(SkillTemplate skillTemplate) {
 	}
 
 	@Override
-	public void onEndUseSkill(NpcSkillEntry usedSkill) {
+	public void onEndUseSkill(SkillTemplate skillTemplate) {
 	}
 }

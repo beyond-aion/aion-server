@@ -3,10 +3,10 @@ package ai.instance.danuarReliquary;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.model.gameobjects.Creature;
-import com.aionemu.gameserver.model.skill.NpcSkillEntry;
 import com.aionemu.gameserver.model.skill.QueuedNpcSkillEntry;
 import com.aionemu.gameserver.model.templates.npcskill.QueuedNpcSkillTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_FORCED_MOVE;
+import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.World;
@@ -77,15 +77,15 @@ public class CursedQueenModorAI extends AggressiveNpcAI {
 	}
 
 	@Override
-	public void onStartUseSkill(NpcSkillEntry startingSkill) {
-		if (startingSkill.getSkillId() == 21165 && stage == 1) {
+	public void onStartUseSkill(SkillTemplate skillTemplate) {
+		if (skillTemplate.getSkillId() == 21165 && stage == 1) {
 			PacketSendUtility.broadcastMessage(getOwner(), 1500743);
 		}
 	}
 
 	@Override
-	public void onEndUseSkill(NpcSkillEntry usedSkill) {
-		switch (usedSkill.getSkillId()) {
+	public void onEndUseSkill(SkillTemplate skillTemplate) {
+		switch (skillTemplate.getSkillId()) {
 			case 21165:
 				switch (stage) {
 					case 1:

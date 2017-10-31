@@ -5,10 +5,10 @@ import java.util.concurrent.Future;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
-import com.aionemu.gameserver.model.skill.NpcSkillEntry;
 import com.aionemu.gameserver.model.skill.QueuedNpcSkillEntry;
 import com.aionemu.gameserver.model.templates.npcskill.QueuedNpcSkillTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
+import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldPosition;
@@ -48,8 +48,8 @@ public class CalindiFlamelordAI extends AggressiveNpcAI {
 	}
 
 	@Override
-	public void onEndUseSkill(NpcSkillEntry usedSkill) {
-		switch (usedSkill.getSkillId()) {
+	public void onEndUseSkill(SkillTemplate skillTemplate) {
+		switch (skillTemplate.getSkillId()) {
 			case 18233:
 				if (getLifeStats().getHpPercentage() >= 30 && getLifeStats().getHpPercentage() <= 60) {
 					spawn(281267, 1191.2714f, 1220.5795f, 144.2901f, (byte) 36);

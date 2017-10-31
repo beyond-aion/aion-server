@@ -9,13 +9,13 @@ import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.handler.ReturningEventHandler;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.skill.NpcSkillEntry;
 import com.aionemu.gameserver.model.skill.QueuedNpcSkillEntry;
 import com.aionemu.gameserver.model.stats.calc.Stat2;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.model.templates.npcskill.QueuedNpcSkillTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_FORCED_MOVE;
 import com.aionemu.gameserver.skillengine.model.Effect;
+import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
@@ -174,9 +174,9 @@ public class ModifiedIronWallAggressiveAI extends AggressiveNpcAI {
 	}
 
 	@Override
-	public void onEndUseSkill(NpcSkillEntry usedSkill) {
+	public void onEndUseSkill(SkillTemplate skillTemplate) {
 		if (getOwner().getNpcId() == 231304) {
-			switch (usedSkill.getSkillId()) {
+			switch (skillTemplate.getSkillId()) {
 				case 21165:
 					ThreadPoolManager.getInstance().schedule(() -> {
 						WorldPosition pos = getRandomTargetPosition();

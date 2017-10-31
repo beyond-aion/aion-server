@@ -7,8 +7,8 @@ import com.aionemu.gameserver.ai.manager.WalkManager;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
-import com.aionemu.gameserver.model.skill.NpcSkillEntry;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
+import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
@@ -52,9 +52,9 @@ public class AshunatalShadowslipAI extends AggressiveNpcAI {
 	}
 
 	@Override
-	public void onEndUseSkill(NpcSkillEntry usedSkill) {
-		super.onEndUseSkill(usedSkill);
-		if (usedSkill.getSkillId() == 19417) {
+	public void onEndUseSkill(SkillTemplate skillTemplate) {
+		super.onEndUseSkill(skillTemplate);
+		if (skillTemplate.getSkillId() == 19417) {
 			canThink = false;
 			ThreadPoolManager.getInstance().schedule(() -> {
 				getSpawnTemplate().setWalkerId("3002400001");
