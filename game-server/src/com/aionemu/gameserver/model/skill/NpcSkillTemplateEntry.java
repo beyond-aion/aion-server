@@ -237,17 +237,6 @@ public class NpcSkillTemplateEntry extends NpcSkillEntry {
 	}
 
 	@Override
-	public void fireOnStartCastEvents(Npc npc) {
-		NpcSkillConditionTemplate condTemp = getConditionTemplate();
-		if (condTemp == null) {
-			if (!npc.getLifeStats().isAboutToDie() && !npc.isDead()) {
-				npc.getAi().onStartUseSkill(this);
-			}
-			return;
-		}
-	}
-
-	@Override
 	public void fireOnEndCastEvents(Npc npc) {
 		NpcSkillSpawn spawn = template.getSpawn();
 		if (spawn == null || npc.getLifeStats().isAboutToDie())
