@@ -20,12 +20,11 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 import ai.GeneralNpcAI;
-import instance.IlluminaryObeliskInstance;
 
 /**
  * On retail you can fake charge waves - means waves will spawn when players begin to charge.
  * But there is still no logical need to implement double-checks for this special case, so we
- * spawn them event-based via {@link IlluminaryObeliskInstance#onSpawn()}.
+ * spawn them event-based via {@link instance.IlluminaryObeliskInstance#onSpawn()}.
  * 
  * @author Estrayl
  */
