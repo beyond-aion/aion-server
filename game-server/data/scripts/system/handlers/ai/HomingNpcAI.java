@@ -33,7 +33,7 @@ public class HomingNpcAI extends GeneralNpcAI {
 			if (skill != null) {
 				skillId = skill.getSkillId();
 				skillLevel = skill.getSkillLevel();
-				SkillEngine.getInstance().applyEffectDirectly(skillId, owner, (Creature) owner.getTarget(), 0);
+				SkillEngine.getInstance().applyEffectDirectly(skillId, skillLevel, owner, (Creature) owner.getTarget(), 0);
 			}
 		}
 	}

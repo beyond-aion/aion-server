@@ -130,8 +130,7 @@ public class SkillCooltimeResetAI extends NpcAI {
 
 					PlayerSkillList skillList = responder.getSkillList();
 					for (PlayerSkillEntry skill : skillList.getAllSkills()) {
-						skillId = skill.getSkillId();
-						SkillTemplate st = DataManager.SKILL_DATA.getSkillTemplate(skillId);
+						SkillTemplate st = DataManager.SKILL_DATA.getSkillTemplate(skill.getSkillId());
 
 						if (st != null && st.getCooldown() <= maxCooldownTime) {
 							if (!st.isDeityAvatar()) {

@@ -45,13 +45,11 @@ public class ShugoDelightedAdmirerAI extends NpcAI {
 				switch (getNpcId()) {
 					case 831114:
 					case 831306:
-						skillId = player.getRace() == Race.ASMODIANS ? 21104 : 21095;
-						SkillEngine.getInstance().applyEffectDirectly(skillId, player, player, 0);
+						SkillEngine.getInstance().applyEffectDirectly(player.getRace() == Race.ASMODIANS ? 21104 : 21095, player, player, 0);
 						break;
 					case 831115:
 					case 831195:
-						skillId = player.getRace() == Race.ASMODIANS ? 21105 : 21096;
-						SkillEngine.getInstance().applyEffectDirectly(skillId, player, player, 0);
+						SkillEngine.getInstance().applyEffectDirectly(player.getRace() == Race.ASMODIANS ? 21105 : 21096, player, player, 0);
 						break;
 				}
 				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 1012));
