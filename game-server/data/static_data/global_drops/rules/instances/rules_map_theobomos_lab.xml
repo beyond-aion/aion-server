@@ -322,17 +322,6 @@
 			<gd_map map_id="310110000" /><!-- Theobomos_Lab -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="214663" /><!-- Torch Spirit Iprita -->
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="185000017" /><!-- Research Center Key -->
-		</gd_items>
-	</gd_rule>
-	<gd_rule rule_name="Named Key" base_chance="100" no_reduction="true">
-		<gd_maps>
-			<gd_map map_id="310110000" /><!-- Theobomos_Lab -->
-		</gd_maps>
-		<gd_npcs>
 			<gd_npc npc_id="214664" /><!-- Wistful Syripne -->
 		</gd_npcs>
 		<gd_items>
