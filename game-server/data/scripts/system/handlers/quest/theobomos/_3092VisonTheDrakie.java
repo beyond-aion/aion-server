@@ -52,13 +52,7 @@ public class _3092VisonTheDrakie extends AbstractQuestHandler {
 				case 798214: // Vison
 					switch (env.getDialogActionId()) {
 						case QUEST_SELECT:
-							if (qs.getQuestVarById(0) == 0) {
-								long itemCount = player.getInventory().getItemCountByItemId(182208066);
-								if (itemCount >= 25) {
-									return sendQuestDialog(env, 1352);
-								}
-							}
-							return false;
+							return sendQuestDialog(env, 1352);
 						case SETPRO1:
 							return defaultCloseDialog(env, 0, 1); // 1
 					}
