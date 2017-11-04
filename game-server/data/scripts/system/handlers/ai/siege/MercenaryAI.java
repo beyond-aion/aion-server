@@ -172,22 +172,16 @@ public class MercenaryAI extends GeneralNpcAI {
 		FortressSiege siege = (FortressSiege) SiegeService.getInstance().getSiege(siegeId);
 		if (siege == null)
 			return;
+
 		MercenaryLocation mLoc = siege.getMercenaryLocationByZoneId(zoneId);
-		if (mLoc == null || !mLoc.isRequestValid() || !hasRequiredItems(player, mLoc.getCosts()))
+		if (mLoc == null || !mLoc.isRequestValid())
 			return;
-		player.getInventory().decreaseByItemId(186000236, mLoc.getCosts());
+		if (!player.getInventory().decreaseByItemId(186000236, mLoc.getCosts())) {
+			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), DialogPage.NO_RIGHT.id()));
+			return;
+		}
 		PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(mLoc.getMsgId()));
 		PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 2375));
 		mLoc.spawn();
 	}
-
-	private boolean hasRequiredItems(Player player, long itemCount) {
-		long count = player.getInventory().getItemCountByItemId(186000236);
-		if (count < itemCount) {
-			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), DialogPage.NO_RIGHT.id()));
-			return false;
-		}
-		return true;
-	}
-
 }

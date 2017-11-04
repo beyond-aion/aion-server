@@ -7744,10 +7744,6 @@
 					<spawn npc_id="279997" respawn_time="295">
 						<spot x="2056.4531" y="1275.1045" z="2956.2793" h="84"/>
 					</spawn>
-					<!-- brigir -->
-					<spawn npc_id="831933" respawn_time="295">
-						<spot x="2063.5061" y="1255.4404" z="2956.2854" h="60"/>
-					</spawn>
 					<!-- antber -->
 					<spawn npc_id="268023" respawn_time="295">
 						<spot x="2079.4570" y="1253.2587" z="2963.5488" h="60"/>
@@ -8547,10 +8543,6 @@
 					<!-- Krotan Medical Officer -->
 					<spawn npc_id="279949" respawn_time="295">
 						<spot x="2056.4531" y="1275.1045" z="2956.2793" h="84"/>
-					</spawn>
-					<!-- Imperator -->
-					<spawn npc_id="831936" respawn_time="295">
-						<spot x="2063.5061" y="1255.4404" z="2956.2854" h="60"/>
 					</spawn>
 					<!-- Hyprotes -->
 					<spawn npc_id="268022" respawn_time="295">

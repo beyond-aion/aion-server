@@ -2,7 +2,6 @@ package com.aionemu.gameserver.services.siege;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Consumer;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,7 +10,6 @@ import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
-import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.siege.SiegeModType;
 import com.aionemu.gameserver.model.siege.SiegeRace;
 import com.aionemu.gameserver.model.templates.siegelocation.SiegeMercenaryZone;
@@ -63,14 +61,7 @@ public class MercenaryLocation {
 		}
 		spawnedMercs.addAll(mercs);
 		lastSpawn = System.currentTimeMillis();
-
-		SiegeService.getInstance().getFortress(siegeId).forEachPlayer(new Consumer<Player>() {
-
-			@Override
-			public void accept(Player player) {
-				PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(smz.getAnnounceId()));
-			}
-		});
+		SiegeService.getInstance().getFortress(siegeId).forEachPlayer(p -> PacketSendUtility.sendPacket(p, new SM_SYSTEM_MESSAGE(smz.getAnnounceId())));
 	}
 
 	public void despawnCurrentMercs() {
@@ -87,13 +78,7 @@ public class MercenaryLocation {
 	 * @return true if cooldown is expired and enough mercs are dead
 	 */
 	public boolean isRequestValid() {
-		if (spawns == null)
-			return false;
-		if (!((System.currentTimeMillis() - lastSpawn) > smz.getCooldown()))
-			return false;
-		if (!hasEnoughMercsAlive())
-			return false;
-		return true;
+		return spawns != null && (System.currentTimeMillis() - lastSpawn) > smz.getCooldown() && !hasEnoughMercsAlive();
 	}
 
 	/**
