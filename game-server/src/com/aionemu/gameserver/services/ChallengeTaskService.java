@@ -206,6 +206,7 @@ public class ChallengeTaskService {
 		if (!task.isCompleted()) {
 			task.updateCompleteTime();
 			quest.increaseCompleteCount();
+			player.getLegion().getOnlineLegionMembers().stream().forEach(p -> showTaskList(p, ChallengeType.LEGION, legionId));
 			DAOManager.getDAO(ChallengeTasksDAO.class).storeTask(task);
 			if (task.isCompleted()) {
 				TreeMap<Integer, List<Integer>> winnersByPoints = new TreeMap<>();
@@ -214,7 +215,7 @@ public class ChallengeTaskService {
 					if (member != null) {
 						int score = member.getLegionMember().getChallengeScore();
 						if (winnersByPoints.get(score) == null)
-							winnersByPoints.put(score, new ArrayList<Integer>());
+							winnersByPoints.put(score, new ArrayList<>());
 						winnersByPoints.get(score).add(member.getObjectId());
 						member.getLegionMember().setChallengeScore(0);
 						continue;
@@ -222,7 +223,7 @@ public class ChallengeTaskService {
 						LegionMember legionMember = DAOManager.getDAO(LegionMemberDAO.class).loadLegionMember(memberObjId);
 						int score = legionMember.getChallengeScore();
 						if (winnersByPoints.get(score) == null)
-							winnersByPoints.put(score, new ArrayList<Integer>());
+							winnersByPoints.put(score, new ArrayList<>());
 						winnersByPoints.get(score).add(legionMember.getObjectId());
 						legionMember.setChallengeScore(0);
 						DAOManager.getDAO(LegionMemberDAO.class).storeLegionMember(memberObjId, legionMember);
