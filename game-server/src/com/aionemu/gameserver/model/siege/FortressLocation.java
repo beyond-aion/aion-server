@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.aionemu.gameserver.model.DescriptionId;
+import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Kisk;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
@@ -14,7 +15,10 @@ import com.aionemu.gameserver.model.templates.siegelocation.SiegeLocationTemplat
 import com.aionemu.gameserver.model.templates.siegelocation.SiegeMercenaryZone;
 import com.aionemu.gameserver.model.templates.siegelocation.SiegeReward;
 import com.aionemu.gameserver.model.templates.zone.ZoneType;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.teleport.TeleportService;
+import com.aionemu.gameserver.skillengine.SkillEngine;
+import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
 
 /**
@@ -69,12 +73,41 @@ public class FortressLocation extends SiegeLocation {
 	public void onEnterZone(Creature creature, ZoneInstance zone) {
 		super.onEnterZone(creature, zone);
 		creature.setInsideZoneType(ZoneType.SIEGE);
+		checkForBalanceBuff(creature, false);
 	}
 
 	@Override
 	public void onLeaveZone(Creature creature, ZoneInstance zone) {
 		super.onLeaveZone(creature, zone);
 		creature.unsetInsideZoneType(ZoneType.SIEGE);
+		checkForBalanceBuff(creature, true);
+
+	}
+
+	public void checkForBalanceBuff(Creature creature, boolean removeBuff) {
+		if (creature instanceof Player && isVulnerable() && getRace() != SiegeRace.BALAUR && getFactionBalance() != 0) {
+			if (removeBuff) {
+				for (int i = 8867; i <= 8884; i++) {
+					if (creature.getEffectController().hasAbnormalEffect(i)) {
+						creature.getEffectController().removeEffect(i);
+						if (creature.getRace() == Race.ELYOS)
+							PacketSendUtility.sendPacket((Player) creature, SM_SYSTEM_MESSAGE.STR_MSG_WEAK_RACE_BUFF_LIGHT_GET_OUT_AREA());
+						else
+							PacketSendUtility.sendPacket((Player) creature, SM_SYSTEM_MESSAGE.STR_MSG_WEAK_RACE_BUFF_DARK_GET_OUT_AREA());
+						break;
+					}
+				}
+			} else {
+				int balance = getFactionBalance();
+				if (creature.getRace() == Race.ELYOS && balance < 0) {
+					SkillEngine.getInstance().applyEffect(8866 + Math.abs(balance), creature, creature);
+					PacketSendUtility.sendPacket((Player) creature, SM_SYSTEM_MESSAGE.STR_MSG_WEAK_RACE_BUFF_LIGHT_GAIN());
+				} else if (creature.getRace() == Race.ASMODIANS && balance > 0) {
+					SkillEngine.getInstance().applyEffect(8875 + balance, creature, creature);
+					PacketSendUtility.sendPacket((Player) creature, SM_SYSTEM_MESSAGE.STR_MSG_WEAK_RACE_BUFF_DARK_GAIN());
+				}
+			}
+		}
 	}
 
 	@Override

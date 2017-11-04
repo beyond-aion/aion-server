@@ -895,6 +895,7 @@ CREATE TABLE `siege_locations` (
   `race` enum('ELYOS','ASMODIANS','BALAUR') NOT NULL,
   `legion_id` int(11) NOT NULL,
   `occupy_count` tinyint(4) NOT NULL DEFAULT '0',
+  `faction_balance` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

@@ -44,6 +44,7 @@ public class SiegeLocation implements ZoneHandler {
 	protected int siegeDuration;
 	protected int influenceValue;
 	protected int occupiedCount;
+	protected int factionBalance;
 	private Map<Integer, Creature> creatures = new ConcurrentHashMap<>();
 	private Map<Integer, Player> players = new ConcurrentHashMap<>();
 
@@ -138,6 +139,39 @@ public class SiegeLocation implements ZoneHandler {
 
 	public void setOccupiedCount(int occupiedCount) {
 		this.occupiedCount = occupiedCount;
+	}
+
+	/**
+	 * Gets the balance between factions of this location. So positive values between 1 and 9 means asmodians are handicapped,
+	 * vice versa -1 to -9 means elyos are handicapped.<br>
+	 * 0 = balanced<br>
+	 * 1 = weakest disadvantage.<br>
+	 * 9 = strongest disadvantage.<br>
+	 * <br>
+	 * Should only be used for {@link FortressLocation}.
+	 * 
+	 * @return factionBalance
+	 */
+	public int getFactionBalance() {
+		return factionBalance;
+	}
+
+	/**
+	 * In- or decrements the faction balance whether adjustment is positive or negative and limits
+	 * it to 9 or -9;
+	 * 
+	 * @param adjustment
+	 */
+	public void adjustFactionBalance(int adjustment) {
+		factionBalance += Integer.signum(adjustment);
+		if (factionBalance > 9)
+			factionBalance = 9;
+		else if (factionBalance < -9)
+			factionBalance = -9;
+	}
+
+	public void setFactionBalance(int factionBalance) {
+		this.factionBalance = factionBalance;
 	}
 
 	/**

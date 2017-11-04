@@ -26819,6 +26819,62 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	public static final SM_SYSTEM_MESSAGE STR_MSG_GAB1_SUB_ALARM_08() {
 		return new SM_SYSTEM_MESSAGE(1402587);
 	}
+	
+	/**
+	 * The power of Kaisinel's Protection surrounds you.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_WEAK_RACE_BUFF_LIGHT_GAIN() {
+		return new SM_SYSTEM_MESSAGE(1402588);
+	}
+	
+	/**
+	 * You are no longer under Kaisinel's Protection.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_WEAK_RACE_BUFF_LIGHT_GET_OUT_AREA() {
+		return new SM_SYSTEM_MESSAGE(1402589);
+	}
+	
+	/**
+	 * Kaisinel's Protection has faded because the fortress is invulnerable.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_WEAK_RACE_BUFF_LIGHT_MIST_OFF() {
+		return new SM_SYSTEM_MESSAGE(1402590);
+	}
+	
+	/**
+	 * Kaisinel's Protection has strengthened the opposing faction.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_WEAK_RACE_BUFF_LIGHT_WARNING() {
+		return new SM_SYSTEM_MESSAGE(1402591);
+	}
+	
+	/**
+	 * The power of Marchutan's Protection surrounds you.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_WEAK_RACE_BUFF_DARK_GAIN() {
+		return new SM_SYSTEM_MESSAGE(1402592);
+	}
+	
+	/**
+	 * You are no longer under Marchutan's Protection.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_WEAK_RACE_BUFF_DARK_GET_OUT_AREA() {
+		return new SM_SYSTEM_MESSAGE(1402593);
+	}
+	
+	/**
+	 * Marchutan's Protection has faded because the fortress is invulnerable.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_WEAK_RACE_BUFF_DARK_MIST_OFF() {
+		return new SM_SYSTEM_MESSAGE(1402594);
+	}
+	
+	/**
+	 * Marchutan's Protection has strengthened the opposing faction.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_WEAK_RACE_BUFF_DARK_WARNING() {
+		return new SM_SYSTEM_MESSAGE(1402595);
+	}
 
 	/**
 	 * Atreian Passport

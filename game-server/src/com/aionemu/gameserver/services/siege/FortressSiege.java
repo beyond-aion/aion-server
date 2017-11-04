@@ -83,9 +83,9 @@ public class FortressSiege extends Siege<FortressLocation> {
 		spawnNpcs(getSiegeLocationId(), getSiegeLocation().getRace(), SiegeModType.SIEGE);
 		initSiegeBoss();
 		this.oldLegionId = getSiegeLocation().getLegionId();
-		if (getSiegeLocation().getRace() == SiegeRace.BALAUR) {
+		if (getSiegeLocation().getRace() != SiegeRace.BALAUR) {
 			initMercenaryZones();
-		} else {
+			getSiegeLocation().forEachPlayer(p -> getSiegeLocation().checkForBalanceBuff(p, false));
 			if (getBoss().getLevel() == 65) {
 				SiegeRace oppositeRace = getSiegeLocation().getRace() == SiegeRace.ELYOS ? SiegeRace.ASMODIANS : SiegeRace.ELYOS;
 				ThreadPoolManager.getInstance().schedule(() -> spawnFactionTroopAssault(oppositeRace), Rnd.get(600, 1800) * 1000); // Faction Balance NPCs
@@ -151,6 +151,8 @@ public class FortressSiege extends Siege<FortressLocation> {
 
 		// despawn protectors and make fortress invulnerable
 		SiegeService.getInstance().deSpawnNpcs(getSiegeLocationId());
+		// need to remove balance buff before vulnerability is set to false
+		getSiegeLocation().forEachPlayer(p -> getSiegeLocation().checkForBalanceBuff(p, true));
 		getSiegeLocation().setVulnerable(false);
 		getSiegeLocation().setUnderShield(false);
 
@@ -162,6 +164,7 @@ public class FortressSiege extends Siege<FortressLocation> {
 			onDefended();
 			broadcastState(getSiegeLocation());
 		}
+		getSiegeLocation().adjustFactionBalance(getFactionBalanceAdjustment());
 
 		SiegeService.getInstance().spawnNpcs(getSiegeLocationId(), getSiegeLocation().getRace(), SiegeModType.PEACE);
 
@@ -224,8 +227,20 @@ public class FortressSiege extends Siege<FortressLocation> {
 		}
 	}
 
-	public void removeOldOwnersGp() {
-
+	private int getFactionBalanceAdjustment() {
+		switch (getSiegeLocation().getRace()) {
+			case ELYOS:
+				return 1;
+			case ASMODIANS:
+				return 1;
+			case BALAUR:
+				int b = getSiegeLocation().getFactionBalance();
+				if (b > 0)
+					return -1;
+				else if (b < 0)
+					return 1;
+		}
+		return 0;
 	}
 
 	private void onDefended() {
