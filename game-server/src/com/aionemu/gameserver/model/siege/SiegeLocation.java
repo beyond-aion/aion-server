@@ -142,11 +142,11 @@ public class SiegeLocation implements ZoneHandler {
 	}
 
 	/**
-	 * Gets the balance between factions of this location. So positive values between 1 and 9 means asmodians are handicapped,
-	 * vice versa -1 to -9 means elyos are handicapped.<br>
-	 * 0 = balanced<br>
-	 * 1 = weakest disadvantage.<br>
-	 * 9 = strongest disadvantage.<br>
+	 * Gets the balance between factions of this location. A positive value between 1 and 9 means asmodians are handicapped and will therefore get a
+	 * support buff. Vice versa, -1 to -9 means elyos are handicapped and will get a support buff.<br>
+	 * 0 = balanced, no support buff<br>
+	 * ±1 = weakest support buff<br>
+	 * ±9 = strongest support buff<br>
 	 * <br>
 	 * Should only be used for {@link FortressLocation}.
 	 * 
