@@ -53,7 +53,7 @@ public class _29064FangOfConstruction extends AbstractQuestHandler {
 						case QUEST_SELECT:
 							return sendQuestDialog(env, 1352);
 						case SETPRO1:
-							return defaultCloseDialog(env, 0, 1); // 1
+							return defaultCloseDialog(env, 0, 1, 152209288, 1, 0, 0);
 					}
 					break;
 				case 204075:
