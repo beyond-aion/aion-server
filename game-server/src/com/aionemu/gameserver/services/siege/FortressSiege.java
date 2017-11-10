@@ -232,7 +232,7 @@ public class FortressSiege extends Siege<FortressLocation> {
 			case ELYOS:
 				return 1;
 			case ASMODIANS:
-				return 1;
+				return -1;
 			case BALAUR:
 				int b = getSiegeLocation().getFactionBalance();
 				if (b > 0)

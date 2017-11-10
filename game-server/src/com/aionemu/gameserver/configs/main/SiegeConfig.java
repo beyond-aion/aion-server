@@ -41,6 +41,6 @@ public class SiegeConfig {
 	@Property(key = "gameserver.siege.panesterra.ahserion.maxplayers", defaultValue = "100")
 	public static int AHSERION_MAX_PLAYERS_PER_TEAM;
 
-	@Property(key = "gameserver.siege.panesterra.ahserion.time", defaultValue = "0 50 18 ? * *")
+	@Property(key = "gameserver.siege.panesterra.ahserion.time", defaultValue = "0 50 18 ? * SUN")
 	public static CronExpression AHSERION_START_SCHEDULE;
 }
