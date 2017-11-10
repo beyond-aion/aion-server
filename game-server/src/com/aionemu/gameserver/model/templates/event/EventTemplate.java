@@ -152,9 +152,21 @@ public class EventTemplate {
 					int spawnCount = 0;
 					for (Spawn spawn : map.getSpawns()) {
 						spawn.setEventTemplate(this);
-						for (SpawnTemplate t : new SpawnGroup(map.getMapId(), spawn).getSpawnTemplates()) {
-							SpawnEngine.spawnObject(t, instanceId);
-							spawnCount++;
+						SpawnGroup group = new SpawnGroup(map.getMapId(), spawn);
+						if (group.hasPool() && SpawnEngine.checkPool(group)) {
+							group.resetTemplates(instanceId);
+							for (int i = 0; i < group.getPool(); i++) {
+								SpawnTemplate t = group.getRndTemplate(instanceId);
+								if (t == null)
+									break;
+								SpawnEngine.spawnObject(t, instanceId);
+								spawnCount++;
+							}
+						} else {
+							for (SpawnTemplate t : group.getSpawnTemplates()) {
+								SpawnEngine.spawnObject(t, instanceId);
+								spawnCount++;
+							}
 						}
 					}
 					log.info("Spawned event objects in " + map.getMapId() + " [" + instanceId + "]: " + spawnCount + " (" + getName() + ")");

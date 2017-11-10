@@ -228,7 +228,7 @@ public class SpawnEngine {
 		HousingService.getInstance().spawnHouses(worldId, instanceId, ownerId);
 	}
 
-	private static boolean checkPool(SpawnGroup spawn) {
+	public static boolean checkPool(SpawnGroup spawn) {
 		if (spawn.getSpawnTemplates().size() < spawn.getPool()) {
 			log.warn("Pool size is greater than spots, npcId: " + spawn.getNpcId() + ", worldId: " + spawn.getWorldId());
 			return false;
