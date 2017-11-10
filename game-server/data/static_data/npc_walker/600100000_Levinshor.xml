@@ -1,0 +1,457 @@
+<?xml version="1.0" encoding="utf-8"?>
+<npc_walker xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="npc_walker.xsd">
+	<walker_template route_id="ldf4_advance_npcpath_ldf4_advance_v01_estriker_dr_fi_65_ae1">
+		<routestep x="419.83" y="1574.33" z="237.70876" />
+		<routestep x="415.65" y="1579.4" z="237.07837" />
+		<routestep x="410.22" y="1587.23" z="235.88063" />
+		<routestep x="404.97" y="1593.91" z="234.5775" />
+		<routestep x="409.51" y="1586.34" z="236.06125" />
+		<routestep x="415.65" y="1579.84" z="237.02" />
+		<routestep x="420.19" y="1572.9" z="237.94437" />
+		<routestep x="425.7" y="1566.23" z="238.72563" />
+		<routestep x="429.53" y="1558.93" z="239.63374" />
+		<routestep x="436.03" y="1553.41" z="240.07187" />
+		<routestep x="430.24" y="1559.91" z="239.49625" />
+		<routestep x="425.79" y="1565.96" z="238.77063" />
+		<routestep x="420.63" y="1572.19" z="238.05002" />
+	</walker_template>
+	<walker_template route_id="ldf4_advance_npcpath_ldf4_advance_v01_estriker_dr_fi_65_ae2">
+		<routestep x="442.93" y="1591.56" z="237.51874" />
+		<routestep x="438.75" y="1596.63" z="236.42938" />
+		<routestep x="433.32" y="1604.46" z="235.4975" />
+		<routestep x="428.07" y="1611.14" z="234.75876" />
+		<routestep x="432.61" y="1603.57" z="235.36438" />
+		<routestep x="438.75" y="1597.08" z="236.40125" />
+		<routestep x="443.29" y="1590.14" z="237.6525" />
+		<routestep x="448.8" y="1583.46" z="238.88376" />
+		<routestep x="452.63" y="1576.16" z="239.70375" />
+		<routestep x="459.13" y="1570.65" z="240.32062" />
+		<routestep x="453.34" y="1577.14" z="239.7925" />
+		<routestep x="448.89" y="1583.19" z="238.91188" />
+		<routestep x="443.73" y="1589.42" z="237.78874" />
+	</walker_template>
+	<walker_template route_id="ldf4_advance_npcpath_ldf4_advance_v01_estriker_dr_fi_65_ae3">
+		<routestep x="1383.11" y="339.8" z="250.73" />
+		<routestep x="1382.82" y="346.37" z="250.73" />
+		<routestep x="1383.2" y="355.89" z="250.73" />
+		<routestep x="1383.03" y="364.38" z="250.73" />
+		<routestep x="1382.1" y="355.61" z="250.73" />
+		<routestep x="1383.09" y="346.72" z="250.73" />
+		<routestep x="1382.54" y="338.45" z="250.73" />
+		<routestep x="1382.93" y="329.8" z="250.73" />
+		<routestep x="1381.59" y="321.66" z="250.73" />
+		<routestep x="1383.46" y="313.35" z="250.73" />
+		<routestep x="1382.75" y="322.02" z="250.73" />
+		<routestep x="1382.84" y="329.53" z="250.73" />
+		<routestep x="1382.47" y="337.61" z="250.73" />
+	</walker_template>
+	<walker_template route_id="ldf4_advance_npcpath_ldf4_advance_v01_estriker_dr_fi_65_ae4">
+		<routestep x="1413.26" y="343.54" z="250.73" />
+		<routestep x="1412.97" y="350.11" z="250.73" />
+		<routestep x="1413.35" y="359.63" z="250.73" />
+		<routestep x="1413.17" y="368.12" z="250.73" />
+		<routestep x="1412.25" y="359.35" z="250.73" />
+		<routestep x="1413.24" y="350.46" z="250.73" />
+		<routestep x="1412.69" y="342.19" z="250.73" />
+		<routestep x="1413.08" y="333.53" z="250.73" />
+		<routestep x="1411.74" y="325.4" z="250.73" />
+		<routestep x="1413.61" y="317.09" z="250.73" />
+		<routestep x="1412.9" y="325.76" z="250.73" />
+		<routestep x="1412.99" y="333.27" z="250.73" />
+		<routestep x="1412.62" y="341.35" z="250.73" />
+	</walker_template>
+	<walker_template route_id="ldf4_advance_npcpathmob_d1">
+		<routestep x="139.67" y="1254.09" z="226.99438" />
+		<routestep x="143.61" y="1254.94" z="227.10063" />
+		<routestep x="146.41" y="1257.57" z="227.125" />
+		<routestep x="148.53" y="1260.71" z="227.08063" />
+		<routestep x="150.97" y="1264.53" z="227.06062" />
+		<routestep x="150.72" y="1269.67" z="226.92" />
+		<routestep x="149.32" y="1274.48" z="226.875" />
+		<routestep x="145.67" y="1277.61" z="226.83" />
+		<routestep x="140.25" y="1277.99" z="226.75" />
+		<routestep x="135.73" y="1277.32" z="226.69063" />
+		<routestep x="135.67" y="1277.35" z="226.68875" />
+		<routestep x="140.22" y="1277.96" z="226.75272" />
+		<routestep x="145.71" y="1277.6" z="226.83188" />
+		<routestep x="149.32" y="1274.52" z="226.875" />
+		<routestep x="150.72" y="1269.67" z="226.92" />
+		<routestep x="150.97" y="1264.5" z="227.06062" />
+		<routestep x="148.55" y="1260.7" z="227.08125" />
+		<routestep x="146.41" y="1257.59" z="227.125" />
+		<routestep x="143.62" y="1254.88" z="227.10126" />
+		<routestep x="136.41" y="1252.77" z="226.90062" />
+	</walker_template>
+	<walker_template route_id="ldf4_advance_npcpathmob_d2">
+		<routestep x="184.54" y="1332.11" z="225.49313" />
+		<routestep x="183.17" y="1328.25" z="225.60938" />
+		<routestep x="180.19" y="1325.06" z="225.75" />
+		<routestep x="175.47" y="1323.53" z="225.77937" />
+		<routestep x="170.67" y="1325.07" z="225.9075" />
+		<routestep x="170.72" y="1325.08" z="225.90001" />
+		<routestep x="175.45" y="1323.48" z="225.7825" />
+		<routestep x="180.31" y="1325.16" z="225.75" />
+		<routestep x="183.17" y="1328.29" z="225.60687" />
+		<routestep x="185.39" y="1332.54" z="225.46625" />
+		<routestep x="186.73" y="1337.46" z="225.375" />
+		<routestep x="187.58" y="1344.2" z="225.25" />
+		<routestep x="186.92" y="1349.69" z="225.25" />
+		<routestep x="185.49" y="1353.85" z="225.25" />
+		<routestep x="182.68" y="1357.59" z="225.25" />
+		<routestep x="182.65" y="1357.62" z="225.25" />
+		<routestep x="185.48" y="1353.82" z="225.25" />
+		<routestep x="186.94" y="1349.74" z="225.25" />
+		<routestep x="187.55" y="1344.14" z="225.25" />
+		<routestep x="186.69" y="1337.5" z="225.375" />
+		<routestep x="185.08" y="1333.31" z="225.4425" />
+	</walker_template>
+	<walker_template route_id="ldf4_advance_npcpathmob_d3">
+		<routestep x="225.36" y="1342.41" z="225.25" />
+		<routestep x="222.51" y="1340.76" z="225.375" />
+		<routestep x="220.38" y="1336.64" z="225.47626" />
+		<routestep x="219.28" y="1332.32" z="225.58" />
+		<routestep x="219.43" y="1328.14" z="225.83063" />
+		<routestep x="221.44" y="1323.22" z="226.305" />
+		<routestep x="225.05" y="1319.44" z="226.72125" />
+		<routestep x="230.16" y="1317.95" z="227.13187" />
+		<routestep x="236.25" y="1318.54" z="227.40875" />
+		<routestep x="241.13" y="1321.16" z="227.50188" />
+		<routestep x="244.67" y="1327.1" z="227.19563" />
+		<routestep x="244.17" y="1332.49" z="226.47188" />
+		<routestep x="242.25" y="1336.02" z="225.7475" />
+		<routestep x="238.82" y="1339.2" z="225.425" />
+		<routestep x="234.04" y="1341.61" z="225.2525" />
+		<routestep x="234.1" y="1341.62" z="225.25626" />
+		<routestep x="238.85" y="1339.23" z="225.42313" />
+		<routestep x="242.23" y="1336.02" z="225.7475" />
+		<routestep x="244.21" y="1332.47" z="226.47813" />
+		<routestep x="244.71" y="1327.18" z="227.18312" />
+		<routestep x="241.22" y="1321.2" z="227.49875" />
+		<routestep x="236.29" y="1318.53" z="227.40813" />
+		<routestep x="230.19" y="1317.94" z="227.13312" />
+		<routestep x="225.09" y="1319.41" z="226.72438" />
+		<routestep x="221.48" y="1323.14" z="226.31" />
+		<routestep x="219.41" y="1328.08" z="225.83313" />
+		<routestep x="219.27" y="1332.25" z="225.57938" />
+		<routestep x="220.4" y="1336.69" z="225.475" />
+		<routestep x="222.55" y="1340.7" z="225.375" />
+		<routestep x="226.93" y="1341.66" z="225.25" />
+	</walker_template>
+	<walker_template route_id="ldf4_advance_npcpathmob_d4">
+		<routestep x="250.73" y="1297.08" z="229.26376" />
+		<routestep x="247.69" y="1297.82" z="228.74501" />
+		<routestep x="245.76" y="1300.99" z="227.8625" />
+		<routestep x="245.58" y="1305.13" z="227.375" />
+		<routestep x="246.64" y="1309.0" z="227.625" />
+		<routestep x="249.59" y="1310.94" z="227.65062" />
+		<routestep x="253.11" y="1311.69" z="227.71376" />
+		<routestep x="253.11" y="1311.65" z="227.71625" />
+		<routestep x="249.63" y="1310.9" z="227.64813" />
+		<routestep x="246.73" y="1309.0" z="227.625" />
+		<routestep x="245.54" y="1305.13" z="227.375" />
+		<routestep x="245.76" y="1300.99" z="227.8625" />
+		<routestep x="247.65" y="1297.83" z="228.73813" />
+		<routestep x="253.86" y="1296.11" z="229.83688" />
+	</walker_template>
+	<walker_template route_id="ldf4_advance_npcpathmob_d5">
+		<routestep x="294.25" y="1483.22" z="227.34187" />
+		<routestep x="303.72" y="1484.71" z="228.05374" />
+		<routestep x="310.82" y="1488.55" z="228.90901" />
+		<routestep x="317.75" y="1492.32" z="229.03387" />
+		<routestep x="321.72" y="1496.6" z="229.23468" />
+		<routestep x="321.51" y="1496.38" z="229.22652" />
+		<routestep x="317.8" y="1492.34" z="229.03201" />
+		<routestep x="310.73" y="1488.51" z="228.90652" />
+		<routestep x="303.73" y="1484.72" z="228.05624" />
+		<routestep x="293.6" y="1482.33" z="227.25" />
+		<routestep x="287.23" y="1480.47" z="226.875" />
+		<routestep x="280.74" y="1480.7" z="226.54625" />
+		<routestep x="274.47" y="1481.93" z="226.28331" />
+		<routestep x="267.93" y="1484.58" z="226.0" />
+		<routestep x="262.92" y="1487.92" z="226.0" />
+		<routestep x="263.55" y="1487.37" z="226.0" />
+		<routestep x="267.99" y="1484.6" z="226.0" />
+		<routestep x="274.53" y="1481.9" z="226.28313" />
+		<routestep x="280.78" y="1480.66" z="226.54875" />
+		<routestep x="287.22" y="1480.51" z="226.87962" />
+		<routestep x="292.84" y="1482.9" z="227.25" />
+	</walker_template>
+	<walker_template route_id="ldf4_advance_npcpathmob_d6">
+		<routestep x="200.3" y="1562.97" z="225.9125" />
+		<routestep x="200.62" y="1557.63" z="225.67938" />
+		<routestep x="201.1" y="1551.87" z="225.37938" />
+		<routestep x="202.9" y="1546.37" z="225.26062" />
+		<routestep x="203.06" y="1540.19" z="225.06625" />
+		<routestep x="204.97" y="1534.58" z="225.18562" />
+		<routestep x="207.11" y="1529.28" z="225.32202" />
+		<routestep x="206.41" y="1524.26" z="225.375" />
+		<routestep x="206.49" y="1524.24" z="225.375" />
+		<routestep x="207.06" y="1529.35" z="225.31625" />
+		<routestep x="204.98" y="1534.51" z="225.18625" />
+		<routestep x="203.06" y="1540.24" z="225.06625" />
+		<routestep x="202.82" y="1546.4" z="225.2525" />
+		<routestep x="201.15" y="1551.91" z="225.38812" />
+		<routestep x="200.64" y="1557.66" z="225.68375" />
+		<routestep x="200.36" y="1565.62" z="226.04375" />
+	</walker_template>
+	<walker_template route_id="ldf4_advance_npcpathmob_d7">
+		<routestep x="170.91" y="1522.74" z="226.76062" />
+		<routestep x="171.67" y="1518.86" z="227.21375" />
+		<routestep x="172.92" y="1513.94" z="227.8825" />
+		<routestep x="175.76" y="1508.99" z="228.26625" />
+		<routestep x="177.72" y="1503.21" z="228.6425" />
+		<routestep x="179.3" y="1497.25" z="229.08438" />
+		<routestep x="178.99" y="1492.14" z="229.66437" />
+		<routestep x="179.04" y="1492.19" z="229.63939" />
+		<routestep x="179.29" y="1497.21" z="229.08376" />
+		<routestep x="177.71" y="1503.15" z="228.64313" />
+		<routestep x="175.76" y="1509.0" z="228.265" />
+		<routestep x="172.93" y="1513.85" z="227.89375" />
+		<routestep x="171.66" y="1518.84" z="227.2175" />
+		<routestep x="171.74" y="1523.65" z="226.66875" />
+		<routestep x="171.36" y="1527.34" z="226.37625" />
+		<routestep x="171.25" y="1533.65" z="225.81876" />
+		<routestep x="172.42" y="1539.93" z="225.47812" />
+		<routestep x="174.41" y="1545.97" z="225.34938" />
+		<routestep x="174.36" y="1552.33" z="225.455" />
+		<routestep x="171.37" y="1556.83" z="225.95375" />
+		<routestep x="171.35" y="1556.88" z="225.95625" />
+		<routestep x="174.33" y="1552.34" z="225.45876" />
+		<routestep x="174.41" y="1546.01" z="225.34938" />
+		<routestep x="172.39" y="1539.9" z="225.48187" />
+		<routestep x="171.26" y="1533.68" z="225.81625" />
+		<routestep x="171.38" y="1527.31" z="226.37936" />
+		<routestep x="171.21" y="1524.47" z="226.59563" />
+	</walker_template>
+	<walker_template route_id="ldf4_advance_npcpathmob_d8">
+		<routestep x="184.37" y="1604.23" z="226.26437" />
+		<routestep x="177.68" y="1602.44" z="226.305" />
+		<routestep x="169.62" y="1602.34" z="226.69125" />
+		<routestep x="161.91" y="1606.01" z="228.01375" />
+		<routestep x="155.71" y="1614.01" z="231.09187" />
+		<routestep x="154.13" y="1621.92" z="233.3819" />
+		<routestep x="154.1" y="1621.87" z="233.36874" />
+		<routestep x="155.83" y="1613.94" z="231.04187" />
+		<routestep x="161.96" y="1605.96" z="227.995" />
+		<routestep x="169.68" y="1602.3" z="226.68251" />
+		<routestep x="177.63" y="1602.44" z="226.305" />
+		<routestep x="184.67" y="1604.92" z="226.3075" />
+		<routestep x="190.58" y="1607.06" z="226.08875" />
+		<routestep x="190.61" y="1607.01" z="226.08687" />
+		<routestep x="185.42" y="1604.68" z="226.28625" />
+	</walker_template>
+	<walker_template route_id="ldf4_advance_npcpathmob_d9">
+		<routestep x="306.01" y="1561.36" z="226.04001" />
+		<routestep x="301.35" y="1558.15" z="226.25" />
+		<routestep x="295.33" y="1555.89" z="226.29187" />
+		<routestep x="288.71" y="1554.64" z="226.91125" />
+		<routestep x="282.09" y="1554.78" z="227.25" />
+		<routestep x="274.81" y="1555.36" z="227.13562" />
+		<routestep x="267.56" y="1556.12" z="226.5975" />
+		<routestep x="260.09" y="1558.55" z="226.375" />
+		<routestep x="260.05" y="1558.49" z="226.375" />
+		<routestep x="267.47" y="1556.14" z="226.59187" />
+		<routestep x="274.88" y="1555.24" z="227.1325" />
+		<routestep x="282.04" y="1554.7" z="227.25" />
+		<routestep x="288.67" y="1554.66" z="226.91624" />
+		<routestep x="295.33" y="1555.89" z="226.29187" />
+		<routestep x="301.46" y="1558.15" z="226.25" />
+		<routestep x="306.36" y="1560.98" z="226.06375" />
+		<routestep x="308.91" y="1563.76" z="226.0" />
+	</walker_template>
+	<walker_template route_id="ldf4_advance_npcpathmob_d10">
+		<routestep x="259.78" y="1562.52" z="226.51375" />
+		<routestep x="266.74" y="1561.34" z="226.54625" />
+		<routestep x="273.41" y="1560.92" z="227.05125" />
+		<routestep x="280.73" y="1560.8" z="227.25" />
+		<routestep x="288.14" y="1561.91" z="226.8575" />
+		<routestep x="294.14" y="1563.62" z="226.24124" />
+		<routestep x="300.75" y="1566.03" z="226.0" />
+		<routestep x="306.24" y="1568.51" z="225.92188" />
+		<routestep x="306.21" y="1568.48" z="225.91812" />
+		<routestep x="300.76" y="1566.07" z="226.0" />
+		<routestep x="294.16" y="1563.63" z="226.24" />
+		<routestep x="288.17" y="1561.82" z="226.85374" />
+		<routestep x="280.84" y="1560.79" z="227.25" />
+		<routestep x="273.36" y="1560.87" z="227.045" />
+		<routestep x="266.71" y="1561.3" z="226.54832" />
+		<routestep x="258.33" y="1562.75" z="226.54688" />
+	</walker_template>
+	<walker_template route_id="ldf4_advance_npcpathmob_d11">
+		<routestep x="301.31" y="1726.48" z="234.0425" />
+		<routestep x="297.06" y="1727.91" z="235.15938" />
+		<routestep x="290.78" y="1729.81" z="236.50375" />
+		<routestep x="284.08" y="1730.48" z="237.395" />
+		<routestep x="277.61" y="1730.46" z="238.135" />
+		<routestep x="272.65" y="1730.11" z="239.10126" />
+		<routestep x="272.65" y="1730.12" z="239.10251" />
+		<routestep x="277.62" y="1730.45" z="238.13647" />
+		<routestep x="284.07" y="1730.49" z="237.40012" />
+		<routestep x="290.85" y="1729.8" z="236.49376" />
+		<routestep x="297.01" y="1727.95" z="235.17624" />
+		<routestep x="303.24" y="1725.81" z="233.48189" />
+	</walker_template>
+	<walker_template route_id="ldf4_advance_npcpathmob_d12">
+		<routestep x="218.35" y="1656.91" z="230.785" />
+		<routestep x="211.75" y="1653.12" z="230.90562" />
+		<routestep x="202.97" y="1649.83" z="231.30374" />
+		<routestep x="194.2" y="1647.95" z="231.61874" />
+		<routestep x="186.07" y="1647.44" z="232.47186" />
+		<routestep x="186.07" y="1647.37" z="232.45438" />
+		<routestep x="194.3" y="1647.94" z="231.6175" />
+		<routestep x="202.84" y="1649.86" z="231.31375" />
+		<routestep x="211.73" y="1653.04" z="230.89688" />
+		<routestep x="219.61" y="1656.32" z="230.66937" />
+		<routestep x="224.87" y="1659.95" z="230.385" />
+		<routestep x="231.09" y="1663.2" z="230.7" />
+		<routestep x="236.03" y="1666.59" z="231.54062" />
+		<routestep x="240.61" y="1670.25" z="232.21687" />
+		<routestep x="244.44" y="1674.51" z="232.58688" />
+		<routestep x="244.55" y="1674.64" z="232.60875" />
+		<routestep x="240.57" y="1670.22" z="232.20999" />
+		<routestep x="235.99" y="1666.6" z="231.53625" />
+		<routestep x="231.05" y="1663.22" z="230.70125" />
+		<routestep x="224.82" y="1659.89" z="230.38376" />
+		<routestep x="219.9" y="1657.61" z="230.73187" />
+	</walker_template>
+	<walker_template route_id="ldf4_advance_npcpathmob_d13">
+		<routestep x="362.16" y="1634.26" z="226.7375" />
+		<routestep x="367.62" y="1641.5" z="227.17874" />
+		<routestep x="368.5" y="1654.59" z="227.18188" />
+		<routestep x="367.41" y="1666.04" z="226.47751" />
+		<routestep x="360.96" y="1675.7" z="225.54124" />
+		<routestep x="352.41" y="1679.48" z="225.3425" />
+		<routestep x="352.46" y="1679.47" z="225.34187" />
+		<routestep x="360.96" y="1675.81" z="225.55237" />
+		<routestep x="367.46" y="1666.14" z="226.48999" />
+		<routestep x="368.52" y="1654.63" z="227.18312" />
+		<routestep x="367.67" y="1641.57" z="227.18813" />
+		<routestep x="359.54" y="1630.7" z="226.6775" />
+	</walker_template>
+	<walker_template route_id="ldf4_advance_npcpathmob_d14">
+		<routestep x="467.51" y="1763.84" z="226.65562" />
+      <routestep x="474.25" y="1765.71" z="226.21625" />
+      <routestep x="479.48" y="1771.7" z="226.17125" />
+      <routestep x="480.66" y="1781.23" z="226.62625" />
+      <routestep x="478.11" y="1789.78" z="226.63187" />
+      <routestep x="472.89" y="1794.45" z="226.90189" />
+      <routestep x="464.02" y="1795.41" z="228.16063" />
+      <routestep x="464.05" y="1795.46" z="228.15562" />
+      <routestep x="472.77" y="1794.46" z="226.92313" />
+      <routestep x="478.18" y="1789.75" z="226.6225" />
+      <routestep x="480.59" y="1781.2" z="226.63937" />
+      <routestep x="479.45" y="1771.76" z="226.17874" />
+      <routestep x="474.34" y="1765.75" z="226.2075" />
+      <routestep x="463.56" y="1762.76" z="226.855" />
+	</walker_template>
+	<walker_template route_id="ldf4_advance_npcpathmob_d15">
+		<routestep x="555.7" y="1712.78" z="227.27625" />
+	   <routestep x="559.21" y="1712.71" z="226.84875" />
+	   <routestep x="563.99" y="1713.9" z="226.50063" />
+	   <routestep x="566.6" y="1717.86" z="226.4625" />
+	   <routestep x="567.35" y="1722.87" z="226.41562" />
+	   <routestep x="567.13" y="1728.1" z="226.42938" />
+	   <routestep x="567.2" y="1728.1" z="226.425" />
+	   <routestep x="567.43" y="1722.87" z="226.41063" />
+	   <routestep x="566.61" y="1717.86" z="226.46188" />
+	   <routestep x="564.06" y="1713.98" z="226.5" />
+	   <routestep x="559.21" y="1712.56" z="226.84875" />
+	   <routestep x="552.63" y="1712.33" z="228.005" />
+	</walker_template>
+	<walker_template route_id="ldf4_advance_npcpathmob_d16">
+		<routestep x="605.97" y="1700.83" z="226.5" />
+		<routestep x="605.87" y="1694.4" z="226.725" />
+		<routestep x="608.25" y="1690.18" z="227.12936" />
+		<routestep x="612.74" y="1687.04" z="227.7775" />
+		<routestep x="617.28" y="1685.06" z="228.41" />
+		<routestep x="622.53" y="1684.26" z="228.82562" />
+		<routestep x="628.14" y="1685.93" z="228.62936" />
+		<routestep x="632.63" y="1690.37" z="228.48375" />
+		<routestep x="632.66" y="1690.3" z="228.47751" />
+		<routestep x="628.24" y="1686.01" z="228.625" />
+		<routestep x="622.75" y="1684.29" z="228.81" />
+		<routestep x="617.37" y="1684.99" z="228.42125" />
+		<routestep x="612.7" y="1687.03" z="227.77313" />
+		<routestep x="608.25" y="1690.24" z="227.12563" />
+		<routestep x="605.91" y="1694.4" z="226.725" />
+		<routestep x="604.81" y="1702.47" z="226.5" />
+	</walker_template>
+	<walker_template route_id="ldf4_advance_npcpathmob_d17" pool="2" formation="SQUARE" rows="1,1">
+      <routestep x="650.84" y="1622.68" z="232.95749" />
+      <routestep x="654.91" y="1619.04" z="233.30687" />
+      <routestep x="660.16" y="1615.03" z="233.82062" />
+      <routestep x="664.78" y="1610.2" z="234.3475" />
+      <routestep x="668.84" y="1606.35" z="234.73001" />
+      <routestep x="673.74" y="1601.41" z="235.25436" />
+      <routestep x="673.81" y="1601.29" z="235.27063" />
+      <routestep x="668.83" y="1606.37" z="234.72876" />
+      <routestep x="664.87" y="1610.23" z="234.35875" />
+      <routestep x="660.14" y="1615.01" z="233.82402" />
+      <routestep x="654.88" y="1619.2" z="233.3" />
+      <routestep x="649.1" y="1625.92" z="232.81876" />
+	</walker_template>
+	<walker_template route_id="ldf4_advance_npcpathmob_d18">
+	   <routestep x="644.2" y="1830.65" z="228.15625" />
+	   <routestep x="638.76" y="1830.15" z="228.34686" />
+	   <routestep x="633.5" y="1831.11" z="227.97937" />
+	   <routestep x="628.09" y="1832.96" z="227.20209" />
+	   <routestep x="622.54" y="1835.43" z="226.355" />
+	   <routestep x="617.64" y="1838.78" z="225.875" />
+	   <routestep x="612.78" y="1842.25" z="225.73438" />
+	   <routestep x="610.22" y="1847.39" z="225.4025" />
+	   <routestep x="610.15" y="1847.35" z="225.39375" />
+	   <routestep x="612.68" y="1842.33" z="225.72937" />
+	   <routestep x="617.58" y="1838.82" z="225.875" />
+	   <routestep x="622.47" y="1835.42" z="226.35187" />
+	   <routestep x="628.06" y="1832.93" z="227.20436" />
+	   <routestep x="633.51" y="1831.09" z="227.98438" />
+	   <routestep x="638.83" y="1830.13" z="228.35062" />
+	   <routestep x="648.59" y="1830.1" z="228.11874" />
+	</walker_template>
+	<walker_template route_id="ldf4_advance_npcpathmob_d19">
+	   <routestep x="595.38" y="1798.04" z="227.21625" />
+	   <routestep x="592.25" y="1801.65" z="227.25937" />
+	   <routestep x="589.66" y="1806.41" z="227.20749" />
+	   <routestep x="587.35" y="1811.58" z="226.73563" />
+	   <routestep x="584.9" y="1817.23" z="226.07562" />
+	   <routestep x="584.89" y="1817.1" z="226.09813" />
+	   <routestep x="587.34" y="1811.45" z="226.74313" />
+	   <routestep x="589.66" y="1806.28" z="227.20749" />
+	   <routestep x="592.31" y="1801.65" z="227.26688" />
+	   <routestep x="595.71" y="1796.74" z="227.15312" />
+	   <routestep x="599.39" y="1794.09" z="226.97874" />
+	   <routestep x="602.9" y="1790.72" z="226.74857" />
+	   <routestep x="607.49" y="1787.77" z="226.68938" />
+	   <routestep x="613.08" y="1786.08" z="227.15" />
+	   <routestep x="613.01" y="1786.02" z="227.13" />
+	   <routestep x="607.56" y="1787.7" z="226.685" />
+	   <routestep x="602.9" y="1790.79" z="226.76064" />
+	   <routestep x="599.46" y="1794.23" z="227.00937" />
+	   <routestep x="596.74" y="1797.02" z="227.235" />
+	</walker_template>
+	<walker_template route_id="ldf4_advance_npcpathmob_d20" pool="2" formation="SQUARE" rows="1,1">
+		<routestep x="398.51" y="1699.08" z="225.71439" />
+		<routestep x="394.77" y="1704.31" z="225.51938" />
+		<routestep x="389.65" y="1711.61" z="225.97562" />
+		<routestep x="384.02" y="1719.1" z="226.25" />
+		<routestep x="378.91" y="1726.59" z="226.44313" />
+		<routestep x="374.76" y="1735.17" z="226.7025" />
+		<routestep x="374.93" y="1735.06" z="226.69188" />
+		<routestep x="378.97" y="1726.68" z="226.43938" />
+		<routestep x="384.15" y="1719.19" z="226.25" />
+		<routestep x="389.66" y="1711.62" z="225.97626" />
+		<routestep x="394.78" y="1704.45" z="225.52812" />
+		<routestep x="400.29" y="1699.29" z="225.8125" />
+		<routestep x="401.38" y="1695.56" z="226.1525" />
+		<routestep x="406.96" y="1689.27" z="226.92062" />
+		<routestep x="412.2" y="1682.14" z="227.595" />
+		<routestep x="416.8" y="1675.45" z="228.39375" />
+		<routestep x="422.26" y="1665.87" z="229.75812" />
+		<routestep x="422.17" y="1665.96" z="229.7525" />
+		<routestep x="416.89" y="1675.36" z="228.39938" />
+		<routestep x="412.2" y="1682.14" z="227.595" />
+		<routestep x="407.05" y="1689.18" z="226.92624" />
+		<routestep x="401.29" y="1695.47" z="226.15813" />
+		<routestep x="399.47" y="1697.78" z="225.86937" />
+	</walker_template>
+</npc_walker>
