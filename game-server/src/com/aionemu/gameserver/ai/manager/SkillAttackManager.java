@@ -71,12 +71,10 @@ public class SkillAttackManager {
 		}
 		Creature target;
 		if (owner.getTarget() instanceof Creature && !(target = (Creature) owner.getTarget()).isDead()) {
-			final int skillId = npcAI.getSkillId();
-			final int skillLevel = npcAI.getSkillLevel();
-
-			SkillTemplate template = DataManager.SKILL_DATA.getSkillTemplate(skillId);
+			NpcSkillEntry skill = npcAI.getOwner().getGameStats().getLastSkill();
+			SkillTemplate template = DataManager.SKILL_DATA.getSkillTemplate(skill.getSkillId());
 			if (npcAI.isLogging()) {
-				AILogger.info(npcAI, "Using skill " + skillId + " level: " + skillLevel + " duration: " + template.getDuration());
+				AILogger.info(npcAI, "Using skill " + skill.getSkillId() + " level: " + skill.getSkillLevel() + " duration: " + template.getDuration());
 			}
 			if ((template.getType() == SkillType.MAGICAL && owner.getEffectController().isAbnormalSet(AbnormalState.SILENCE))
 				|| (template.getType() == SkillType.PHYSICAL && owner.getEffectController().isAbnormalSet(AbnormalState.BIND))
@@ -133,7 +131,7 @@ public class SkillAttackManager {
 						}
 					}
 				}
-				boolean success = owner.getController().useSkill(skillId, skillLevel);
+				boolean success = owner.getController().useSkill(skill.getSkillId(), skill.getSkillLevel());
 				if (!success) {
 					afterUseSkill(npcAI);
 				}

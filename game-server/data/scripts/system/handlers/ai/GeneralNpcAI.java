@@ -127,24 +127,23 @@ public class GeneralNpcAI extends NpcAI {
 		if (currentTarget == null)
 			onCreatureEvent(AIEventType.TARGET_CHANGED, mostHated);
 
-		if (getOwner().getObjectTemplate().getAttackRange() == 0) {
-			NpcSkillEntry skill = getOwner().getSkillList().getRandomSkill();
-			if (skill != null) {
-				getOwner().getGameStats().setLastSkill(skill);
-				skillId = skill.getSkillId();
-				skillLevel = skill.getSkillLevel();
-				return AttackIntention.SKILL_ATTACK;
-			}
-		} else {
-			NpcSkillEntry skill = SkillAttackManager.chooseNextSkill(this);
-			if (skill != null) {
-				getOwner().getGameStats().setLastSkill(skill);
-				skillId = skill.getSkillId();
-				skillLevel = skill.getSkillLevel();
-				return AttackIntention.SKILL_ATTACK;
-			}
-		}
+		if (chooseSkillAttack(getOwner().getObjectTemplate().getAttackRange() == 0))
+			return AttackIntention.SKILL_ATTACK;
 
 		return AttackIntention.SIMPLE_ATTACK;
+	}
+
+	protected final boolean chooseSkillAttack(boolean alwaysRandomSkill) {
+		NpcSkillEntry skill;
+		if (alwaysRandomSkill)
+			skill = getOwner().getSkillList().getRandomSkill();
+		else
+			skill = SkillAttackManager.chooseNextSkill(this);
+
+		if (skill != null) {
+			getOwner().getGameStats().setLastSkill(skill);
+			return true;
+		}
+		return false;
 	}
 }
