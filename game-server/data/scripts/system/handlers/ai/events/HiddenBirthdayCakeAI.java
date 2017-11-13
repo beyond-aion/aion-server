@@ -8,7 +8,7 @@ import java.util.List;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
-import com.aionemu.gameserver.model.DescriptionId;
+import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -16,6 +16,7 @@ import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.drop.DropRegistrationService;
 import com.aionemu.gameserver.services.drop.DropService;
+import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.utils.ChatUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
@@ -32,29 +33,25 @@ import ai.ActionItemNpcAI;
 @AIName("hidden_cake")
 public class HiddenBirthdayCakeAI extends ActionItemNpcAI {
 
-	private final static int SNUFFLER_SPAWN_CHANCE = 5;
+	private final static int SNUFFLER_SPAWN_CHANCE = 25;
 
 	@Override
 	protected void handleUseItemFinish(Player player) {
 		if (getOwner().isInState(CreatureState.DEAD))
 			return;
 
+		int droppedItemId = getDroppedItemId(player.getRace());
+
 		if (Rnd.chance() < SNUFFLER_SPAWN_CHANCE) {
 			VisibleObject s = spawn(210341, getOwner().getX(), getOwner().getY(), getOwner().getZ(), (byte) 0);
-			PacketSendUtility.sendPacket(player,
-				new SM_SYSTEM_MESSAGE(1400618, ChatUtil.nameId(s.getObjectTemplate().getNameId() * 2 + 1), new DescriptionId(1591869)));
-			AIActions.die(this);
-			return;
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_TOYPET_FEED_FOOD_NOT_LOVEFLAVOR(
+				ChatUtil.nameId(s.getObjectTemplate().getNameId() * 2 + 1), DataManager.ITEM_DATA.getItemTemplate(droppedItemId).getNameId()));
+			ItemService.addItem(player, droppedItemId, getItemCount(droppedItemId), true);
+		} else {
+			DropRegistrationService.getInstance().registerDrop(getOwner(), player, Arrays.asList(player));
+			DropRegistrationService.getInstance().getCurrentDropMap().get(getObjectId())
+				.add(DropRegistrationService.getInstance().regDropItem(1, player.getObjectId(), getObjectId(), droppedItemId, getItemCount(droppedItemId)));
 		}
-		analyzeOpening(player);
-	}
-
-	private void analyzeOpening(Player player) {
-		int droppedItem = getDroppedItemId(player.getRace());
-
-		DropRegistrationService.getInstance().registerDrop(getOwner(), player, Arrays.asList(player));
-		DropRegistrationService.getInstance().getCurrentDropMap().get(getObjectId())
-			.add(DropRegistrationService.getInstance().regDropItem(1, player.getObjectId(), getObjectId(), droppedItem, getItemCount(droppedItem)));
 		AIActions.die(this, player);
 		DropService.getInstance().requestDropList(player, getObjectId());
 		super.handleUseItemFinish(player);
