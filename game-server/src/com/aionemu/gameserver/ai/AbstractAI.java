@@ -41,9 +41,6 @@ public abstract class AbstractAI extends AbstractEventSource<GeneralAIEvent> imp
 
 	private boolean logging = false;
 
-	protected int skillId;
-	protected int skillLevel;
-
 	private volatile AIEventLog eventLog;
 
 	AbstractAI() {
@@ -92,14 +89,6 @@ public abstract class AbstractAI extends AbstractEventSource<GeneralAIEvent> imp
 			return annotation.value();
 		}
 		return "noname";
-	}
-
-	public int getSkillId() {
-		return skillId;
-	}
-
-	public int getSkillLevel() {
-		return skillLevel;
 	}
 
 	protected boolean canHandleEvent(AIEventType eventType) {

@@ -44,17 +44,14 @@ public class ServantNpcAI extends GeneralNpcAI {
 	}
 
 	private void healOrAttack() {
-		if (skillId == 0) {
-			NpcSkillEntry npcSkill = getSkillList().getRandomSkill();
-			if (npcSkill == null)
-				return;
-			skillId = npcSkill.getSkillId();
-			skillLevel = npcSkill.getSkillLevel();
-		}
+		NpcSkillEntry skill = getSkillList().getRandomSkill();
+		if (skill == null)
+			return;
+		getOwner().getGameStats().setLastSkill(skill);
 		int duration = getOwner().getNpcObjectType() == NpcObjectType.TOTEM ? 3000 : 5000;
 		int startDelay = 1000;
 		switch (getOwner().getNpcId()) {
-			//Taunting Spirit
+			// Taunting Spirit
 			case 833403:
 			case 833404:
 			case 833478:
@@ -64,7 +61,7 @@ public class ServantNpcAI extends GeneralNpcAI {
 				duration = 5000;
 				startDelay = 1000;
 				break;
-			//Battle Banner
+			// Battle Banner
 			case 833077:
 			case 833078:
 			case 833452:
@@ -84,7 +81,7 @@ public class ServantNpcAI extends GeneralNpcAI {
 					AIActions.deleteOwner(ServantNpcAI.this);
 					cancelTask();
 				} else {
-					SkillEngine.getInstance().getSkill(getOwner(), skillId, skillLevel, getOwner().getTarget()).useSkill();
+					SkillEngine.getInstance().getSkill(getOwner(), skill.getSkillId(), skill.getSkillLevel(), getOwner().getTarget()).useSkill();
 				}
 			}
 		}, startDelay, duration);
