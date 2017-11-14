@@ -53,7 +53,7 @@ public class HiddenBirthdayCakeAI extends ActionItemNpcAI {
 		int itemCount = getItemCount(droppedItemId);
 		String item = itemCount + " " + ChatUtil.nameId(DataManager.ITEM_DATA.getItemTemplate(droppedItemId).getNameId());
 		PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1401263, new DescriptionId(getObjectTemplate().getNameId() * 2 + 1), item));
-		ItemService.addItem(player, droppedItemId, itemCount, true, new ItemUpdatePredicate(ItemAddType.SERVER_GENERATED, ItemUpdateType.INC_ITEM_MERGE));
+		ItemService.addItem(player, droppedItemId, itemCount, true, new ItemUpdatePredicate(ItemAddType.SERVER_GENERATED, ItemUpdateType.STATS_CHANGE));
 		AIActions.die(this, player);
 		super.handleUseItemFinish(player);
 	}
