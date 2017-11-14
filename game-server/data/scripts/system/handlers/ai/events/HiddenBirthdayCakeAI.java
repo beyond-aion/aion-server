@@ -22,6 +22,7 @@ import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.services.item.ItemService.ItemUpdatePredicate;
 import com.aionemu.gameserver.utils.ChatUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 import ai.ActionItemNpcAI;
 
@@ -36,7 +37,8 @@ import ai.ActionItemNpcAI;
 @AIName("hidden_cake")
 public class HiddenBirthdayCakeAI extends ActionItemNpcAI {
 
-	private final static int SNUFFLER_SPAWN_CHANCE = 25;
+	private final static int JEST_SPAWN_CHANCE = 25;
+	private final static int[] JEST_SPAWN_IDS = { 210341, 214732, 210595 };
 
 	@Override
 	protected void handleUseItemFinish(Player player) {
@@ -45,8 +47,9 @@ public class HiddenBirthdayCakeAI extends ActionItemNpcAI {
 
 		int droppedItemId = getDroppedItemId(player.getRace());
 
-		if (Rnd.chance() < SNUFFLER_SPAWN_CHANCE) {
-			VisibleObject s = spawn(210341, getOwner().getX(), getOwner().getY(), getOwner().getZ(), (byte) 0);
+		if (Rnd.chance() < JEST_SPAWN_CHANCE) {
+			VisibleObject s = spawn(Rnd.get(JEST_SPAWN_IDS), getOwner().getX(), getOwner().getY(), getOwner().getZ(), (byte) 0);
+			ThreadPoolManager.getInstance().schedule(() -> s.getController().delete(), 120000);
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_TOYPET_FEED_FOOD_NOT_LOVEFLAVOR(
 				ChatUtil.nameId(s.getObjectTemplate().getNameId() * 2 + 1), getObjectTemplate().getNameId() * 2 + 1));
 		}
