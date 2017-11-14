@@ -4,6 +4,7 @@ import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.Future;
 import java.util.function.Consumer;
 
@@ -245,8 +246,13 @@ public class EventTemplate {
 
 	public void addSpawnedObject(VisibleObject object) {
 		if (spawnedObjects == null)
-			spawnedObjects = new ArrayList<>();
+			spawnedObjects = new CopyOnWriteArrayList<>();
 		spawnedObjects.add(object);
+	}
+
+	public void removeSpawnedObject(VisibleObject object) {
+		if (spawnedObjects != null)
+			spawnedObjects.remove(object);
 	}
 
 	/**

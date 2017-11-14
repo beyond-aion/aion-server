@@ -2,6 +2,7 @@ package com.aionemu.gameserver.controllers;
 
 import com.aionemu.gameserver.model.animations.ObjectDeleteAnimation;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
+import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.world.World;
 
 /**
@@ -87,5 +88,8 @@ public abstract class VisibleObjectController<T extends VisibleObject> {
 	 * Called before object gets removed from the world
 	 */
 	public void onDelete() {
+		SpawnTemplate spawn = getOwner().getSpawn();
+		if (spawn.isEventSpawn())
+			spawn.getEventTemplate().removeSpawnedObject(getOwner());
 	}
 }
