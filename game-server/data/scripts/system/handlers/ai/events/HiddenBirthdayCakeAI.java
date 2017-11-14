@@ -2,7 +2,6 @@ package ai.events;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import com.aionemu.commons.utils.Rnd;
@@ -64,9 +63,9 @@ public class HiddenBirthdayCakeAI extends ActionItemNpcAI {
 	private int getDroppedItemId(Race playerRace) {
 		List<Integer> items = new ArrayList<>();
 		int rnd = Rnd.get(1000);
-		if (rnd < 65) {
+		if (rnd < 49) {
 			items.addAll(Arrays.asList(169610093, 169610140, 168310019, 187060161, 169600005, 188054238, 188053007));
-		} else if (rnd < 315) {
+		} else if (rnd < 299) {
 			items.addAll(
 				Arrays.asList(188052638, 110900673, 110900765, 110900781, 190100077, 190100095, 190100083, 190070016, 190070018, 188053006, 188053618));
 		} else {
@@ -74,7 +73,6 @@ public class HiddenBirthdayCakeAI extends ActionItemNpcAI {
 				Arrays.asList(162000137, 162000139, 162000141, 186000399, 160010217, 186000236, 188053295, 166500002, 166020000, 166030007, 186000242));
 			items.add(playerRace == Race.ELYOS ? 184002016 : 184002017);
 		}
-		Collections.shuffle(items);
 		return Rnd.get(items);
 	}
 
@@ -94,6 +92,9 @@ public class HiddenBirthdayCakeAI extends ActionItemNpcAI {
 				return 15;
 			case 186000236: // Blood Mark
 				return 30;
+			case 184002016: // [Event] Birthday Cake Kisk
+			case 184002017: // [Event] Birthday Cake Kisk
+				return 2;
 			default:
 				return 1;
 		}
