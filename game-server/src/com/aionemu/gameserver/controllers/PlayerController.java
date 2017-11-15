@@ -91,6 +91,7 @@ import com.aionemu.gameserver.services.PvpService;
 import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.services.SerialKillerService;
 import com.aionemu.gameserver.services.SkillLearnService;
+import com.aionemu.gameserver.services.drop.DropService;
 import com.aionemu.gameserver.services.instance.InstanceService;
 import com.aionemu.gameserver.services.reward.PromotionKitService;
 import com.aionemu.gameserver.services.summons.SummonsService;
@@ -366,6 +367,13 @@ public class PlayerController extends CreatureController<Player> {
 			}
 		}
 		player.setRebirthEffect(null);
+	}
+
+	@Override
+	public void onDespawn() {
+		if (getOwner().isLooting())
+			DropService.getInstance().closeDropList(getOwner(), getOwner().getLootingNpcOid());
+		super.onDespawn();
 	}
 
 	public void sendDie() {

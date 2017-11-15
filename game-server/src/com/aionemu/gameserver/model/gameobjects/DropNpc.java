@@ -52,14 +52,14 @@ public class DropNpc {
 	 * @param player
 	 *          the lootingPlayer to set
 	 */
-	public void setBeingLooted(Player player) {
+	public void setLootingPlayer(Player player) {
 		this.lootingPlayer = player;
 	}
 
 	/**
 	 * @return lootingPlayer
 	 */
-	public Player getBeingLooted() {
+	public Player getLootingPlayer() {
 		return lootingPlayer;
 	}
 

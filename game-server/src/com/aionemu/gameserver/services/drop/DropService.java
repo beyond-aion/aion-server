@@ -100,13 +100,16 @@ public class DropService {
 	 * When player clicks on dead NPC to request drop list
 	 *
 	 * @param player
-	 * @param npcId
+	 * @param npcObjectId
 	 */
-	public void requestDropList(Player player, int npcId) {
-		DropNpc dropNpc = DropRegistrationService.getInstance().getDropRegistrationMap().get(npcId);
+	public void requestDropList(Player player, int npcObjectId) {
+		DropNpc dropNpc = DropRegistrationService.getInstance().getDropRegistrationMap().get(npcObjectId);
 		if (player == null || dropNpc == null) {
 			return;
 		}
+
+		if (player.isLooting())
+			closeDropList(player, player.getLootingNpcOid());
 
 		if (!dropNpc.containsKey(player.getObjectId()) && !dropNpc.isFreeForAll()) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_LOOT_NO_RIGHT());
@@ -114,12 +117,17 @@ public class DropService {
 		}
 
 		if (dropNpc.isBeingLooted()) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_LOOT_FAIL_ONLOOTING());
-			return;
+			if (!dropNpc.getLootingPlayer().isOnline()) {
+				log.warn(
+					dropNpc.getLootingPlayer() + " is offline but was still set as drop looter for " + World.getInstance().findVisibleObject(npcObjectId));
+			} else {
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_LOOT_FAIL_ONLOOTING());
+				return;
+			}
 		}
 
-		dropNpc.setBeingLooted(player);
-		VisibleObject visObj = World.getInstance().findVisibleObject(npcId);
+		dropNpc.setLootingPlayer(player);
+		VisibleObject visObj = World.getInstance().findVisibleObject(npcObjectId);
 		if (visObj instanceof Npc) {
 			Npc npc = ((Npc) visObj);
 			ScheduledFuture<?> decayTask = (ScheduledFuture<?>) npc.getController().cancelTask(TaskId.DECAY);
@@ -129,44 +137,44 @@ public class DropService {
 			}
 		}
 
-		Set<DropItem> dropItems = DropRegistrationService.getInstance().getCurrentDropMap().get(npcId);
+		Set<DropItem> dropItems = DropRegistrationService.getInstance().getCurrentDropMap().get(npcObjectId);
 
 		if (dropItems == null) {
 			dropItems = Collections.emptySet();
 		}
 
-		PacketSendUtility.sendPacket(player, new SM_LOOT_ITEMLIST(npcId, dropItems, player));
-		PacketSendUtility.sendPacket(player, new SM_LOOT_STATUS(npcId, 2));
+		PacketSendUtility.sendPacket(player, new SM_LOOT_ITEMLIST(npcObjectId, dropItems, player));
+		PacketSendUtility.sendPacket(player, new SM_LOOT_STATUS(npcObjectId, 2));
 		player.unsetState(CreatureState.ACTIVE);
 		player.setState(CreatureState.LOOTING);
-		player.setLootingNpcOid(npcId);
-		PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.START_LOOT, 0, npcId), true);
+		player.setLootingNpcOid(npcObjectId);
+		PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.START_LOOT, 0, npcObjectId), true);
 	}
 
 	/**
 	 * This method will change looted corpse to not in use
 	 *
 	 * @param player
-	 * @param npcId
+	 * @param npcObjectId
 	 */
-	public void closeDropList(Player player, int npcId) {
-		final DropNpc dropNpc = DropRegistrationService.getInstance().getDropRegistrationMap().get(npcId);
-		if (dropNpc == null)
-			return;
+	public void closeDropList(Player player, int npcObjectId) {
+		DropNpc dropNpc = DropRegistrationService.getInstance().getDropRegistrationMap().get(npcObjectId);
 
 		player.unsetState(CreatureState.LOOTING);
 		player.setState(CreatureState.ACTIVE);
 		player.setLootingNpcOid(0);
+		PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.END_LOOT, 0, npcObjectId), true);
 
-		PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.END_LOOT, 0, npcId), true);
+		if (dropNpc == null)
+			return;
 
-		if (dropNpc.getBeingLooted() != player)
+		if (!player.equals(dropNpc.getLootingPlayer()))
 			return;// cheater :)
 
-		Set<DropItem> dropItems = DropRegistrationService.getInstance().getCurrentDropMap().get(npcId);
-		dropNpc.setBeingLooted(null);
+		Set<DropItem> dropItems = DropRegistrationService.getInstance().getCurrentDropMap().get(npcObjectId);
+		dropNpc.setLootingPlayer(null);
 
-		Npc npc = (Npc) World.getInstance().findVisibleObject(npcId);
+		Npc npc = (Npc) World.getInstance().findVisibleObject(npcObjectId);
 		if (npc != null) {
 			if (dropItems == null || dropItems.isEmpty()) {
 				npc.getController().delete();
@@ -187,9 +195,9 @@ public class DropService {
 				}
 			}
 			if (dropNpc.isFreeForAll()) {
-				PacketSendUtility.broadcastPacket(npc, new SM_LOOT_STATUS(npcId, 0));
+				PacketSendUtility.broadcastPacket(npc, new SM_LOOT_STATUS(npcObjectId, 0));
 			} else {
-				PacketSendUtility.broadcastPacket(player, new SM_LOOT_STATUS(npcId, 0), true, p -> dropNpc.containsKey(p.getObjectId()));
+				PacketSendUtility.broadcastPacket(player, new SM_LOOT_STATUS(npcObjectId, 0), true, p -> dropNpc.containsKey(p.getObjectId()));
 			}
 		}
 	}
@@ -347,8 +355,7 @@ public class DropService {
 			if (player.isInTeam()) {
 				List<Player> entitledPlayers = new ArrayList<>();
 				for (Player member : player.getCurrentTeam().getMembers()) {
-					if (member.isOnline() && !member.isDead() && !member.isMentor()
-						&& PositionUtil.isInRange(member, player, GroupConfig.GROUP_MAX_DISTANCE))
+					if (member.isOnline() && !member.isDead() && !member.isMentor() && PositionUtil.isInRange(member, player, GroupConfig.GROUP_MAX_DISTANCE))
 						entitledPlayers.add(member);
 				}
 				if (entitledPlayers.isEmpty()) {
@@ -440,7 +447,7 @@ public class DropService {
 		} else
 			requestedItem.setCount(remainingCount);
 
-		resendDropList(dropNpc.getBeingLooted(), npcObjectId, dropItems);
+		resendDropList(dropNpc.getLootingPlayer(), npcObjectId, dropItems);
 	}
 
 	private void resendDropList(Player player, int npcObjectId, Set<DropItem> dropItems) {
