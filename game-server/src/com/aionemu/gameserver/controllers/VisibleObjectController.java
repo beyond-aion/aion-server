@@ -89,7 +89,7 @@ public abstract class VisibleObjectController<T extends VisibleObject> {
 	 */
 	public void onDelete() {
 		SpawnTemplate spawn = getOwner().getSpawn();
-		if (spawn.isEventSpawn())
+		if (spawn != null && spawn.isEventSpawn())
 			spawn.getEventTemplate().removeSpawnedObject(getOwner());
 	}
 }
