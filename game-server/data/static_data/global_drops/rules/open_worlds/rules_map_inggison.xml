@@ -35,9 +35,7 @@
 			<gd_npc npc_id="236334" /><!-- Inggison Shulack Hunter -->
 		</gd_npcs>
 		<gd_items>
-			<!-- 70% Lesser, 20% Normal, 10% Greater -->
-			<gd_item id="188053688" /><!-- Inggison Lesser Conqueror's Mark Box -->
-			<gd_item id="188053688" /><!-- Inggison Lesser Conqueror's Mark Box -->
+			<!-- 50% Lesser, 30% Normal, 20% Greater -->
 			<gd_item id="188053688" /><!-- Inggison Lesser Conqueror's Mark Box -->
 			<gd_item id="188053688" /><!-- Inggison Lesser Conqueror's Mark Box -->
 			<gd_item id="188053688" /><!-- Inggison Lesser Conqueror's Mark Box -->
@@ -45,6 +43,8 @@
 			<gd_item id="188053688" /><!-- Inggison Lesser Conqueror's Mark Box -->
 			<gd_item id="188053689" /><!-- Inggison Conqueror's Mark Box -->
 			<gd_item id="188053689" /><!-- Inggison Conqueror's Mark Box -->
+			<gd_item id="188053689" /><!-- Inggison Conqueror's Mark Box -->
+			<gd_item id="188053690" /><!-- Inggison Greater Conqueror's Mark Box -->
 			<gd_item id="188053690" /><!-- Inggison Greater Conqueror's Mark Box -->
 		</gd_items>
 	</gd_rule>
@@ -83,11 +83,7 @@
 			<gd_npc npc_id="236362" /><!-- Vulgar Inggison Shulack Hunter -->
 		</gd_npcs>
 		<gd_items>
-			<!-- 60% Lesser, 25% Normal, 15% Greater -->
-			<gd_item id="188053688" /><!-- Inggison Lesser Conqueror's Mark Box -->
-			<gd_item id="188053688" /><!-- Inggison Lesser Conqueror's Mark Box -->
-			<gd_item id="188053688" /><!-- Inggison Lesser Conqueror's Mark Box -->
-			<gd_item id="188053688" /><!-- Inggison Lesser Conqueror's Mark Box -->
+			<!-- 40% Lesser, 35% Normal, 25% Greater -->
 			<gd_item id="188053688" /><!-- Inggison Lesser Conqueror's Mark Box -->
 			<gd_item id="188053688" /><!-- Inggison Lesser Conqueror's Mark Box -->
 			<gd_item id="188053688" /><!-- Inggison Lesser Conqueror's Mark Box -->
@@ -101,6 +97,10 @@
 			<gd_item id="188053689" /><!-- Inggison Conqueror's Mark Box -->
 			<gd_item id="188053689" /><!-- Inggison Conqueror's Mark Box -->
 			<gd_item id="188053689" /><!-- Inggison Conqueror's Mark Box -->
+			<gd_item id="188053689" /><!-- Inggison Conqueror's Mark Box -->
+			<gd_item id="188053689" /><!-- Inggison Conqueror's Mark Box -->
+			<gd_item id="188053690" /><!-- Inggison Greater Conqueror's Mark Box -->
+			<gd_item id="188053690" /><!-- Inggison Greater Conqueror's Mark Box -->
 			<gd_item id="188053690" /><!-- Inggison Greater Conqueror's Mark Box -->
 			<gd_item id="188053690" /><!-- Inggison Greater Conqueror's Mark Box -->
 			<gd_item id="188053690" /><!-- Inggison Greater Conqueror's Mark Box -->
