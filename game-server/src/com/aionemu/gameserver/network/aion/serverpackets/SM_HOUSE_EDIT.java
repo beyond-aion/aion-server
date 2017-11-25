@@ -59,10 +59,7 @@ public class SM_HOUSE_EDIT extends AionServerPacket {
 			writeC(storeId);
 			writeD(itemObjectId);
 			writeD(templateId);
-			if (obj != null && obj.getUseSecondsLeft() > 0)
-				writeD(obj.getUseSecondsLeft());
-			else
-				writeD(0);
+			writeD(obj == null ? 0 : obj.secondsUntilExpiration());
 
 			writeDyeInfo(obj == null ? null : obj.getColor());
 			writeD(0); // expiration as for armor ?
@@ -88,10 +85,7 @@ public class SM_HOUSE_EDIT extends AionServerPacket {
 			writeF(z);
 			writeH(rotation);
 			writeD(player.getHouseObjectCooldownList().getReuseDelay(itemObjectId));
-			if (obj.getUseSecondsLeft() > 0)
-				writeD(obj.getUseSecondsLeft());
-			else
-				writeD(0);
+			writeD(obj.secondsUntilExpiration());
 
 			Integer color = obj.getColor();
 			writeC(color == null ? 0 : 1); // Is dyed

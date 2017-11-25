@@ -59,8 +59,7 @@ public class PetAdoptionService {
 		PetCommonData petCommonData = player.getPetList().addPet(player, petId, decorationId, name, expireTime);
 		if (petCommonData != null) {
 			PacketSendUtility.sendPacket(player, new SM_PET(PetAction.ADOPT, petCommonData));
-			if (expireTime > 0)
-				ExpireTimerTask.getInstance().addTask(petCommonData, player);
+			ExpireTimerTask.getInstance().registerExpirable(petCommonData, player);
 		}
 	}
 

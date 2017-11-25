@@ -150,7 +150,7 @@ public class PlayerLeaveWorldService {
 
 		PunishmentService.stopPrisonTask(player, true);
 		PunishmentService.stopGatherableTask(player, true);
-		ExpireTimerTask.getInstance().removePlayer(player);
+		ExpireTimerTask.getInstance().unregisterExpirables(player);
 		if (player.getCraftingTask() != null)
 			player.getCraftingTask().stop();
 

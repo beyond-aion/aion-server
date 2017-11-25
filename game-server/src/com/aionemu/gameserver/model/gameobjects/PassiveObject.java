@@ -12,9 +12,4 @@ public class PassiveObject extends HouseObject<HousingPassiveItem> {
 		super(owner, objId, templateId);
 	}
 
-	@Override
-	public boolean canExpireNow() {
-		return true;
-	}
-
 }

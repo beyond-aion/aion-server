@@ -46,7 +46,7 @@ public class ItemService {
 	public static long addItem(Player player, int itemId, long count) {
 		return addItem(player, itemId, count, null, false, DEFAULT_UPDATE_PREDICATE);
 	}
-	
+
 	public static long addItem(Player player, int itemId, long count, boolean allowInventoryOverflow, ItemUpdatePredicate predicate) {
 		return addItem(player, itemId, count, null, allowInventoryOverflow, predicate);
 	}
@@ -84,7 +84,7 @@ public class ItemService {
 		Objects.requireNonNull(predicate, "Predicate is not supplied");
 
 		if (LoggingConfig.LOG_ITEM)
-			log.info("Item: " +  itemTemplate.getTemplateId() + " [" + itemTemplate.getName()+ "] added to player " + player.getName() + " (count: " + count + ") (type: " + predicate.getAddType() + ")");
+			log.info("Item: " + itemTemplate.getTemplateId() + " [" + itemTemplate.getName()+ "] added to player " + player.getName() + " (count: " + count + ") (type: " + predicate.getAddType() + ")");
 
 		Storage inventory = player.getInventory();
 		if (itemTemplate.isKinah()) {
@@ -112,9 +112,7 @@ public class ItemService {
 		while ((allowInventoryOverflow || !inventory.isFull(itemTemplate.getExtraInventoryId())) && count > 0) {
 			Item newItem = ItemFactory.newItem(itemTemplate.getTemplateId());
 
-			if (newItem.getExpireTime() != 0) {
-				ExpireTimerTask.getInstance().addTask(newItem, player);
-			}
+			ExpireTimerTask.getInstance().registerExpirable(newItem, player);
 			if (sourceItem != null) {
 				copyItemInfo(sourceItem, newItem);
 			}
@@ -146,7 +144,7 @@ public class ItemService {
 			newItem.setTempering(sourceItem.getTempering());
 		if (sourceItem.isSoulBound())
 			newItem.setSoulBound(true);
-		
+
 		newItem.setBonusNumber(sourceItem.getBonusNumber());
 		newItem.setRandomStats(sourceItem.getRandomStats());
 		newItem.setTuneCount(sourceItem.getTuneCount());

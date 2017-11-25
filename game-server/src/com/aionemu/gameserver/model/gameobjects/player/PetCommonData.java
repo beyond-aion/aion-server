@@ -5,7 +5,7 @@ import java.sql.Timestamp;
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.dao.PlayerPetsDAO;
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.model.IExpirable;
+import com.aionemu.gameserver.model.Expirable;
 import com.aionemu.gameserver.model.templates.VisibleObjectTemplate;
 import com.aionemu.gameserver.model.templates.pet.PetDopingBag;
 import com.aionemu.gameserver.model.templates.pet.PetFunctionType;
@@ -21,7 +21,7 @@ import com.aionemu.gameserver.utils.idfactory.IDFactory;
 /**
  * @author ATracer
  */
-public class PetCommonData extends VisibleObjectTemplate implements IExpirable {
+public class PetCommonData extends VisibleObjectTemplate implements Expirable {
 
 	private int decoration;
 	private String name;
@@ -306,31 +306,15 @@ public class PetCommonData extends VisibleObjectTemplate implements IExpirable {
 		return this.isBuffing;
 	}
 
-	// pet id is not unique for adopt action, this not explicit
-	/**
-	 * public AdoptPetAction getAdoptAction() { ItemTemplate eggTemplate = DataManager.ITEM_DATA.getPetEggTemplate(petId); if (eggTemplate == null ||
-	 * eggTemplate.getActions() == null) return null; return eggTemplate.getActions().getAdoptPetAction(); }
-	 */
-
 	@Override
 	public int getExpireTime() {
 		return expireTime;
 	}
 
 	@Override
-	public void expireEnd(Player player) {
-		if (player == null)
-			return;
+	public void onExpire(Player player) {
 		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_PET_ABANDON_EXPIRE_TIME_COMPLETE(name));
 		PetAdoptionService.surrenderPet(player, petId);
 	}
 
-	@Override
-	public boolean canExpireNow() {
-		return true;
-	}
-
-	@Override
-	public void expireMessage(Player player, int time) {
-	}
 }

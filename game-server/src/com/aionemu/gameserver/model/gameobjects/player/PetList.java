@@ -27,9 +27,7 @@ public class PetList {
 		List<PetCommonData> playerPets = DAOManager.getDAO(PlayerPetsDAO.class).getPlayerPets(player);
 		PetCommonData lastUsedPet = null;
 		for (PetCommonData pet : playerPets) {
-			if (pet.getExpireTime() > 0) {
-				ExpireTimerTask.getInstance().addTask(pet, player);
-			}
+			ExpireTimerTask.getInstance().registerExpirable(pet, player);
 			pets.put(pet.getPetId(), pet);
 			if (lastUsedPet == null || pet.getDespawnTime().after(lastUsedPet.getDespawnTime()))
 				lastUsedPet = pet;

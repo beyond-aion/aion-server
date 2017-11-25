@@ -231,7 +231,7 @@ public class SM_PTRANSFER_CONTROL extends LsServerPacket {
 				writeD(emo.getEmotions().size());
 				for (Emotion e : emo.getEmotions()) {
 					writeD(e.getId());
-					writeD(e.getRemainingTime());
+					writeD(e.secondsUntilExpiration());
 				}
 
 				MotionList motions = this.player.getMotions();
@@ -272,7 +272,7 @@ public class SM_PTRANSFER_CONTROL extends LsServerPacket {
 				writeD(titles.getTitles().size());
 				for (Title t : titles.getTitles()) {
 					writeD(t.getId());
-					writeD(t.getRemainingTime());
+					writeD(t.secondsUntilExpiration());
 				}
 
 				PlayerSettings ps = this.player.getPlayerSettings();

@@ -1,23 +1,25 @@
 package com.aionemu.gameserver.model.gameobjects.player.emotion;
 
-import com.aionemu.gameserver.model.IExpirable;
+import com.aionemu.gameserver.model.Expirable;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
+import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author MrPoke
  */
-public class Emotion implements IExpirable {
+public class Emotion implements Expirable {
 
 	private int id;
-	private int dispearTime;
+	private int expireTime;
 
 	/**
 	 * @param id
-	 * @param dispearTime
+	 * @param expireTime
 	 */
-	public Emotion(int id, int dispearTime) {
+	public Emotion(int id, int expireTime) {
 		this.id = id;
-		this.dispearTime = dispearTime;
+		this.expireTime = expireTime;
 	}
 
 	/**
@@ -27,29 +29,16 @@ public class Emotion implements IExpirable {
 		return id;
 	}
 
-	public int getRemainingTime() {
-		if (dispearTime == 0)
-			return 0;
-		return dispearTime - (int) (System.currentTimeMillis() / 1000);
-	}
-
 	@Override
 	public int getExpireTime() {
-		return dispearTime;
+		return expireTime;
 	}
 
 	@Override
-	public void expireEnd(Player player) {
+	public void onExpire(Player player) {
 		player.getEmotions().remove(id);
-
+		// TODO emotion templates -> parse nameIds for system message, like 600228 for STR_EMOTION_CASH_DISCODANCE (Aion Boogie) etc.
+		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_DELETE_CASH_SOCIALACTION_BY_TIMEOUT(/* nameId */));
 	}
 
-	@Override
-	public void expireMessage(Player player, int time) {
-	}
-
-	@Override
-	public boolean canExpireNow() {
-		return true;
-	}
 }

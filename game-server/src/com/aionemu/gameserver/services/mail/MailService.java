@@ -55,6 +55,7 @@ public class MailService {
 
 	/**
 	 * TODO split this method
+	 * 
 	 * @param sender
 	 * @param recipientName
 	 * @param title
@@ -297,8 +298,7 @@ public class MailService {
 				} else {
 					if (player.getInventory().add(attachedItem, ItemPacketService.ItemAddType.MAIL) == null)
 						return;
-					if (attachedItem.getExpireTime() != 0)
-						ExpireTimerTask.getInstance().addTask(attachedItem, player);
+					ExpireTimerTask.getInstance().registerExpirable(attachedItem, player);
 				}
 				PacketSendUtility.sendPacket(player, new SM_MAIL_SERVICE(letterId, attachmentType));
 				letter.setAttachedItem(null);

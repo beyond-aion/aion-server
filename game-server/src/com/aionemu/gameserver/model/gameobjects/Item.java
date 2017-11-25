@@ -14,8 +14,7 @@ import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.configs.main.MembershipConfig;
 import com.aionemu.gameserver.dao.ItemStoneListDAO;
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.model.DescriptionId;
-import com.aionemu.gameserver.model.IExpirable;
+import com.aionemu.gameserver.model.Expirable;
 import com.aionemu.gameserver.model.enchants.EnchantEffect;
 import com.aionemu.gameserver.model.enchants.TemperingEffect;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -42,7 +41,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 /**
  * @author ATracer, Wakizashi, xTz
  */
-public class Item extends AionObject implements IExpirable, StatOwner {
+public class Item extends AionObject implements Expirable, StatOwner {
 
 	public static final int MAX_BASIC_STONES = 6;
 	private static final Logger log = LoggerFactory.getLogger(Item.class);
@@ -730,12 +729,6 @@ public class Item extends AionObject implements IExpirable, StatOwner {
 		return expireTime;
 	}
 
-	public int getExpireTimeRemaining() {
-		if (expireTime == 0)
-			return 0;
-		return expireTime - (int) (System.currentTimeMillis() / 1000);
-	}
-
 	/**
 	 * @return Returns the temporaryExchangeTime.
 	 */
@@ -758,10 +751,7 @@ public class Item extends AionObject implements IExpirable, StatOwner {
 	}
 
 	@Override
-	public void expireEnd(Player player) {
-		if (player == null)
-			return;
-
+	public void onExpire(Player player) {
 		if (isEquipped())
 			player.getEquipment().unEquipItem(getObjectId());
 
@@ -774,11 +764,11 @@ public class Item extends AionObject implements IExpirable, StatOwner {
 				storage.delete(this);
 				switch (i) {
 					case CUBE:
-						PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1400034, new DescriptionId(getNameId())));
+						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_DELETE_CASH_ITEM_BY_TIMEOUT(getNameId()));
 						break;
 					case ACCOUNT_WAREHOUSE:
 					case REGULAR_WAREHOUSE:
-						PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1400406, new DescriptionId(getNameId())));
+						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_DELETE_CASH_ITEM_BY_TIMEOUT_IN_WAREHOUSE(getNameId()));
 						break;
 				}
 			}
@@ -786,10 +776,8 @@ public class Item extends AionObject implements IExpirable, StatOwner {
 	}
 
 	@Override
-	public void expireMessage(Player player, int time) {
-		if (player != null) {
-			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1400481, new DescriptionId(getNameId()), time));
-		}
+	public void onBeforeExpire(Player player, int remainingMinutes) {
+		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CASH_ITEM_TIME_LEFT(getNameId(), remainingMinutes));
 	}
 
 	public void setRepurchasePrice(long price) {
@@ -849,11 +837,6 @@ public class Item extends AionObject implements IExpirable, StatOwner {
 			result -= diff;
 		}
 		return Math.max(0, result);
-	}
-
-	@Override
-	public boolean canExpireNow() {
-		return true;
 	}
 
 	public Improvement getImprovement() {

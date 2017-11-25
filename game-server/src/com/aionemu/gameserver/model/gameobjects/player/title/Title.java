@@ -1,27 +1,29 @@
 package com.aionemu.gameserver.model.gameobjects.player.title;
 
-import com.aionemu.gameserver.model.IExpirable;
+import com.aionemu.gameserver.model.Expirable;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.TitleTemplate;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
+import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author Mr. Poke
  */
-public class Title implements IExpirable {
+public class Title implements Expirable {
 
 	private TitleTemplate template;
 	private int id;
-	private int dispearTime;
+	private int expireTime;
 
 	/**
 	 * @param template
 	 * @param id
-	 * @param dispearTime
+	 * @param expireTime
 	 */
-	public Title(TitleTemplate template, int id, int dispearTime) {
+	public Title(TitleTemplate template, int id, int expireTime) {
 		this.template = template;
 		this.id = id;
-		this.dispearTime = dispearTime;
+		this.expireTime = expireTime;
 	}
 
 	/**
@@ -38,31 +40,15 @@ public class Title implements IExpirable {
 		return id;
 	}
 
-	/**
-	 * @return Returns the dispearTime.
-	 */
-	public int getRemainingTime() {
-		if (dispearTime == 0)
-			return 0;
-		return dispearTime - (int) (System.currentTimeMillis() / 1000);
-	}
-
 	@Override
 	public int getExpireTime() {
-		return dispearTime;
+		return expireTime;
 	}
 
 	@Override
-	public void expireEnd(Player player) {
+	public void onExpire(Player player) {
 		player.getTitleList().removeTitle(id);
+		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_DELETE_CASH_TITLE_BY_TIMEOUT(template.getNameId()));
 	}
 
-	@Override
-	public void expireMessage(Player player, int time) {
-	}
-
-	@Override
-	public boolean canExpireNow() {
-		return true;
-	}
 }

@@ -17443,15 +17443,19 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * The usage time of %0 title has expired.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_DELETE_CASH_TITLE_BY_TIMEOUT(String value0) {
-		return new SM_SYSTEM_MESSAGE(1390244, value0);
+	public static final SM_SYSTEM_MESSAGE STR_MSG_DELETE_CASH_TITLE_BY_TIMEOUT(int nameId) {
+		return new SM_SYSTEM_MESSAGE(1390244, new DescriptionId(nameId));
 	}
 
 	/**
 	 * Usage time for the %0 emote has expired.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_DELETE_CASH_SOCIALACTION_BY_TIMEOUT(String value0) {
-		return new SM_SYSTEM_MESSAGE(1390245, value0);
+	public static final SM_SYSTEM_MESSAGE STR_MSG_DELETE_CASH_SOCIALACTION_BY_TIMEOUT(int nameId) {
+		return new SM_SYSTEM_MESSAGE(1390245, new DescriptionId(nameId));
+	}
+
+	public static final SM_SYSTEM_MESSAGE STR_MSG_DELETE_CASH_SOCIALACTION_BY_TIMEOUT() {
+		return new SM_SYSTEM_MESSAGE(1390245);
 	}
 
 	/**
@@ -17895,8 +17899,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * Usage time for %0 has expired.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_DELETE_CASH_ITEM_BY_TIMEOUT(String value0) {
-		return new SM_SYSTEM_MESSAGE(1400034, value0);
+	public static final SM_SYSTEM_MESSAGE STR_MSG_DELETE_CASH_ITEM_BY_TIMEOUT(int nameId) {
+		return new SM_SYSTEM_MESSAGE(1400034, new DescriptionId(nameId));
 	}
 
 	/**
@@ -20513,8 +20517,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * Usage time for %0 in the warehouse has expired.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_DELETE_CASH_ITEM_BY_TIMEOUT_IN_WAREHOUSE(String value0) {
-		return new SM_SYSTEM_MESSAGE(1400406, value0);
+	public static final SM_SYSTEM_MESSAGE STR_MSG_DELETE_CASH_ITEM_BY_TIMEOUT_IN_WAREHOUSE(int nameId) {
+		return new SM_SYSTEM_MESSAGE(1400406, new DescriptionId(nameId));
 	}
 
 	/**
@@ -21024,8 +21028,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * %1 remains before the usage time for %0 expires.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_CASH_ITEM_TIME_LEFT(String value1, String value0) {
-		return new SM_SYSTEM_MESSAGE(1400481, value1, value0);
+	public static final SM_SYSTEM_MESSAGE STR_MSG_CASH_ITEM_TIME_LEFT(int nameId, int minutes) {
+		return new SM_SYSTEM_MESSAGE(1400481, new DescriptionId(nameId), minutes + "min");
 	}
 
 	/**
@@ -24072,6 +24076,10 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 		return new SM_SYSTEM_MESSAGE(1400917, value0);
 	}
 
+	public static final SM_SYSTEM_MESSAGE STR_MSG_DELETE_CASH_CUSTOMANIMATION_BY_TIMEOUT() {
+		return new SM_SYSTEM_MESSAGE(1400917);
+	}
+
 	/**
 	 * The Bridge to the Drana Production Lab has been raised.
 	 */
@@ -26819,56 +26827,56 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	public static final SM_SYSTEM_MESSAGE STR_MSG_GAB1_SUB_ALARM_08() {
 		return new SM_SYSTEM_MESSAGE(1402587);
 	}
-	
+
 	/**
 	 * The power of Kaisinel's Protection surrounds you.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_WEAK_RACE_BUFF_LIGHT_GAIN() {
 		return new SM_SYSTEM_MESSAGE(1402588);
 	}
-	
+
 	/**
 	 * You are no longer under Kaisinel's Protection.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_WEAK_RACE_BUFF_LIGHT_GET_OUT_AREA() {
 		return new SM_SYSTEM_MESSAGE(1402589);
 	}
-	
+
 	/**
 	 * Kaisinel's Protection has faded because the fortress is invulnerable.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_WEAK_RACE_BUFF_LIGHT_MIST_OFF() {
 		return new SM_SYSTEM_MESSAGE(1402590);
 	}
-	
+
 	/**
 	 * Kaisinel's Protection has strengthened the opposing faction.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_WEAK_RACE_BUFF_LIGHT_WARNING() {
 		return new SM_SYSTEM_MESSAGE(1402591);
 	}
-	
+
 	/**
 	 * The power of Marchutan's Protection surrounds you.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_WEAK_RACE_BUFF_DARK_GAIN() {
 		return new SM_SYSTEM_MESSAGE(1402592);
 	}
-	
+
 	/**
 	 * You are no longer under Marchutan's Protection.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_WEAK_RACE_BUFF_DARK_GET_OUT_AREA() {
 		return new SM_SYSTEM_MESSAGE(1402593);
 	}
-	
+
 	/**
 	 * Marchutan's Protection has faded because the fortress is invulnerable.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_WEAK_RACE_BUFF_DARK_MIST_OFF() {
 		return new SM_SYSTEM_MESSAGE(1402594);
 	}
-	
+
 	/**
 	 * Marchutan's Protection has strengthened the opposing faction.
 	 */

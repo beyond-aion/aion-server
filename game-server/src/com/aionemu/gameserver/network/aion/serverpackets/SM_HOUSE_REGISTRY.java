@@ -38,10 +38,7 @@ public class SM_HOUSE_REGISTRY extends AionServerPacket {
 				int templateId = obj.getObjectTemplate().getTemplateId();
 				writeD(templateId);
 				writeD(player.getHouseObjectCooldownList().getReuseDelay(obj.getObjectId()));
-				if (obj.getUseSecondsLeft() > 0)
-					writeD(obj.getUseSecondsLeft());
-				else
-					writeD(0);
+				writeD(obj.secondsUntilExpiration());
 
 				writeDyeInfo(obj.getColor());
 				writeD(0); // expiration as for armor ?

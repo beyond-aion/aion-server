@@ -61,8 +61,7 @@ public class TitleList {
 			Title entry = new Title(tt, titleId, time);
 			if (!titles.containsKey(titleId)) {
 				titles.put(titleId, entry);
-				if (time != 0)
-					ExpireTimerTask.getInstance().addTask(entry, owner);
+				ExpireTimerTask.getInstance().registerExpirable(entry, owner);
 				DAOManager.getDAO(PlayerTitleListDAO.class).storeTitles(owner, entry);
 			} else {
 				PacketSendUtility.sendPacket(owner, SM_SYSTEM_MESSAGE.STR_TOOLTIP_LEARNED_TITLE());

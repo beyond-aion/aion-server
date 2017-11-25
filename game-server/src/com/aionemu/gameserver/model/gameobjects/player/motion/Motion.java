@@ -3,13 +3,15 @@ package com.aionemu.gameserver.model.gameobjects.player.motion;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import com.aionemu.gameserver.model.IExpirable;
+import com.aionemu.gameserver.model.Expirable;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
+import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author MrPoke
  */
-public class Motion implements IExpirable {
+public class Motion implements Expirable {
 
 	static final Map<Integer, Integer> motionType = new LinkedHashMap<>();
 
@@ -63,12 +65,6 @@ public class Motion implements IExpirable {
 		return id;
 	}
 
-	public int getRemainingTime() {
-		if (deletionTime == 0)
-			return 0;
-		return deletionTime - (int) (System.currentTimeMillis() / 1000);
-	}
-
 	/**
 	 * @return the active
 	 */
@@ -90,16 +86,10 @@ public class Motion implements IExpirable {
 	}
 
 	@Override
-	public void expireEnd(Player player) {
+	public void onExpire(Player player) {
 		player.getMotions().remove(id);
+		// TODO motion templates -> parse nameIds for system message, like 600533 for STR_CMOTION_CASH_NINJA_IDLE (Ninja Idle) etc.
+		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_DELETE_CASH_CUSTOMANIMATION_BY_TIMEOUT(/* nameId */));
 	}
 
-	@Override
-	public void expireMessage(Player player, int time) {
-	}
-
-	@Override
-	public boolean canExpireNow() {
-		return true;
-	}
 }

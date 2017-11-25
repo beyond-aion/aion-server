@@ -127,7 +127,6 @@ public class SM_PET extends AionServerPacket {
 				writeH(pets.size());
 				for (PetCommonData petCommonData : pets) {
 					petTemplate = DataManager.PET_DATA.getPetTemplate(petCommonData.getPetId());
-					int expireTime = petCommonData.getExpireTime();
 					writeS(petCommonData.getName());
 					writeD(petCommonData.getPetId());
 					writeD(petCommonData.getObjectId());
@@ -135,7 +134,7 @@ public class SM_PET extends AionServerPacket {
 					writeD(0);
 					writeD(0);
 					writeD(petCommonData.getBirthday());
-					writeD(expireTime != 0 ? expireTime - (int) (System.currentTimeMillis() / 1000) : 0); // accompanying time
+					writeD(petCommonData.secondsUntilExpiration()); // accompanying time
 
 					int specialtyCount = 0;
 					if (petTemplate.containsFunction(PetFunctionType.WAREHOUSE)) {
@@ -202,7 +201,7 @@ public class SM_PET extends AionServerPacket {
 				writeD(0);
 				writeD(0);
 				writeD(commonData.getBirthday());
-				writeD(commonData.getExpireTime() != 0 ? commonData.getExpireTime() - (int) (System.currentTimeMillis() / 1000) : 0); // accompanying time
+				writeD(commonData.secondsUntilExpiration()); // accompanying time
 				petTemplate = DataManager.PET_DATA.getPetTemplate(commonData.getPetId());
 				int specialtyCount = 0;
 				if (petTemplate.containsFunction(PetFunctionType.WAREHOUSE)) {

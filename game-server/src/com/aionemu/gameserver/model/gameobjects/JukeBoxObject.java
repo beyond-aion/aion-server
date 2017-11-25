@@ -12,9 +12,4 @@ public class JukeBoxObject extends HouseObject<HousingJukeBox> {
 		super(owner, objId, templateId);
 	}
 
-	@Override
-	public boolean canExpireNow() {
-		return true;
-	}
-
 }

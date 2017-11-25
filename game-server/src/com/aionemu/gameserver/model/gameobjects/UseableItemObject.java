@@ -34,7 +34,7 @@ public class UseableItemObject extends UseableHouseObject<HousingUseableItem> {
 	public UseableItemObject(House owner, int objId, int templateId) {
 		super(owner, objId, templateId);
 		UseItemAction action = getObjectTemplate().getAction();
-		if (action != null && action.getFinalRewardId() != null && getUseSecondsLeft() == 0)
+		if (action != null && action.getFinalRewardId() != null && isExpired())
 			mustGiveLastReward = true;
 		entryWriter = new UseDataWriter(this);
 	}

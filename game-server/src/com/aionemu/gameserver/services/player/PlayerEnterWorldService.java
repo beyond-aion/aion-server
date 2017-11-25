@@ -35,6 +35,7 @@ import com.aionemu.gameserver.dao.PlayerSkillListDAO;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.dataholders.PlayerInitialData;
 import com.aionemu.gameserver.model.ChatType;
+import com.aionemu.gameserver.model.Expirable;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.account.Account;
 import com.aionemu.gameserver.model.account.CharacterBanInfo;
@@ -47,9 +48,6 @@ import com.aionemu.gameserver.model.gameobjects.player.BindPointPosition;
 import com.aionemu.gameserver.model.gameobjects.player.FriendList.Status;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.PlayerCommonData;
-import com.aionemu.gameserver.model.gameobjects.player.emotion.Emotion;
-import com.aionemu.gameserver.model.gameobjects.player.motion.Motion;
-import com.aionemu.gameserver.model.gameobjects.player.title.Title;
 import com.aionemu.gameserver.model.house.House;
 import com.aionemu.gameserver.model.items.storage.IStorage;
 import com.aionemu.gameserver.model.items.storage.Storage;
@@ -459,47 +457,26 @@ public final class PlayerEnterWorldService {
 		if (HTMLConfig.ENABLE_GUIDES)
 			HTMLService.onPlayerLogin(player);
 
+		player.getEquipment().checkRankLimitItems(); // Remove items after offline changed rank
+
+		List<Expirable> expirables = new ArrayList<>();
 		for (StorageType st : StorageType.values()) {
 			if (st == StorageType.LEGION_WAREHOUSE)
 				continue;
 			IStorage storage = player.getStorage(st.getId());
-			if (storage != null) {
-				for (Item item : storage.getItems())
-					if (item.getExpireTime() > 0)
-						ExpireTimerTask.getInstance().addTask(item, player);
-			}
+			if (storage != null)
+				expirables.addAll(storage.getItems());
 		}
-
-		for (Item item : player.getEquipment().getEquippedItems())
-			if (item.getExpireTime() > 0)
-				ExpireTimerTask.getInstance().addTask(item, player);
-
-		player.getEquipment().checkRankLimitItems(); // Remove items after offline changed rank
-
-		for (Motion motion : player.getMotions().getMotions().values()) {
-			if (motion.getExpireTime() != 0) {
-				ExpireTimerTask.getInstance().addTask(motion, player);
-			}
-		}
-
-		for (Emotion emotion : player.getEmotions().getEmotions()) {
-			if (emotion.getExpireTime() != 0) {
-				ExpireTimerTask.getInstance().addTask(emotion, player);
-			}
-		}
-
-		for (Title title : player.getTitleList().getTitles()) {
-			if (title.getExpireTime() != 0) {
-				ExpireTimerTask.getInstance().addTask(title, player);
-			}
-		}
+		expirables.addAll(player.getEquipment().getEquippedItems());
+		expirables.addAll(player.getMotions().getMotions().values());
+		expirables.addAll(player.getEmotions().getEmotions());
+		expirables.addAll(player.getTitleList().getTitles());
+		ExpireTimerTask.getInstance().registerExpirables(expirables, player);
 
 		if (player.getHouseRegistry() != null) {
 			for (HouseObject<?> obj : player.getHouseRegistry().getObjects()) {
-				if (obj.getPersistentState() == PersistentState.DELETED)
-					continue;
-				if (obj.getObjectTemplate().getUseDays() > 0)
-					ExpireTimerTask.getInstance().addTask(obj, player);
+				if (obj.getPersistentState() != PersistentState.DELETED)
+					ExpireTimerTask.getInstance().registerExpirable(obj, player);
 			}
 		}
 		// scheduler periodic update

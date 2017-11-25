@@ -2,7 +2,7 @@ package com.aionemu.gameserver.model.gameobjects;
 
 import com.aionemu.gameserver.controllers.PlaceableObjectController;
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.model.IExpirable;
+import com.aionemu.gameserver.model.Expirable;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.house.House;
 import com.aionemu.gameserver.model.templates.housing.HouseType;
@@ -22,7 +22,7 @@ import com.aionemu.gameserver.world.knownlist.PlayerAwareKnownList;
 /**
  * @author Rolandas
  */
-public abstract class HouseObject<T extends PlaceableHouseObject> extends VisibleObject implements IExpirable {
+public abstract class HouseObject<T extends PlaceableHouseObject> extends VisibleObject implements Expirable {
 
 	private int expireEnd;
 	private float x;
@@ -83,7 +83,7 @@ public abstract class HouseObject<T extends PlaceableHouseObject> extends Visibl
 	}
 
 	@Override
-	public void expireEnd(Player player) {
+	public void onExpire(Player player) {
 		final int descId = getObjectTemplate().getNameId();
 		final SM_SYSTEM_MESSAGE msg = SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_OBJECT_DELETE_EXPIRE_TIME(descId);
 		if (isSpawnedByPlayer())
@@ -105,25 +105,6 @@ public abstract class HouseObject<T extends PlaceableHouseObject> extends Visibl
 		// if owner is not online, we should save his items
 		if (owner == null || !owner.isOnline())
 			ownerHouse.getRegistry().save();
-	}
-
-	/**
-	 * Gets seconds left for the object use. If has no expiration return -1
-	 * 
-	 * @return
-	 */
-	public int getUseSecondsLeft() {
-		if (expireEnd == 0)
-			return -1;
-		int diff = expireEnd - (int) (System.currentTimeMillis() / 1000);
-		if (diff < 0)
-			return 0;
-		return diff;
-	}
-
-	@Override
-	public void expireMessage(Player player, int time) {
-		// TODO Add if it exists
 	}
 
 	@Override

@@ -62,8 +62,7 @@ public class MotionList {
 			}
 		}
 		if (persist) {
-			if (motion.getExpireTime() != 0)
-				ExpireTimerTask.getInstance().addTask(motion, owner);
+			ExpireTimerTask.getInstance().registerExpirable(motion, owner);
 			DAOManager.getDAO(MotionDAO.class).storeMotion(owner.getObjectId(), motion);
 		}
 	}

@@ -36,8 +36,7 @@ public class EmotionList {
 		emotions.put(emotionId, emotion);
 
 		if (isNew) {
-			if (emotion.getExpireTime() != 0)
-				ExpireTimerTask.getInstance().addTask(emotion, owner);
+			ExpireTimerTask.getInstance().registerExpirable(emotion, owner);
 			DAOManager.getDAO(PlayerEmotionListDAO.class).insertEmotion(owner, emotion);
 			PacketSendUtility.sendPacket(owner, new SM_EMOTION_LIST((byte) 1, Collections.singletonList(emotion)));
 		}

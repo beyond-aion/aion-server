@@ -18,9 +18,4 @@ public class PictureObject extends HouseObject<HousingPicture> {
 
 	}
 
-	@Override
-	public boolean canExpireNow() {
-		return true;
-	}
-
 }

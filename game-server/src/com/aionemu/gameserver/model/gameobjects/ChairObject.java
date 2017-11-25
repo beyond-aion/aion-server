@@ -18,9 +18,4 @@ public class ChairObject extends HouseObject<HousingChair> {
 
 	}
 
-	@Override
-	public boolean canExpireNow() {
-		return true;
-	}
-
 }

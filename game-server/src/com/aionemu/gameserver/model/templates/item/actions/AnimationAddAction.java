@@ -78,6 +78,6 @@ public class AnimationAddAction extends AbstractItemAction {
 	private void addMotion(Player player, int motionId) {
 		Motion motion = new Motion(motionId, minutes == null ? 0 : (int) (System.currentTimeMillis() / 1000) + minutes * 60, true);
 		player.getMotions().add(motion, true);
-		PacketSendUtility.sendPacket(player, new SM_MOTION((short) motion.getId(), motion.getRemainingTime()));
+		PacketSendUtility.sendPacket(player, new SM_MOTION((short) motion.getId(), motion.secondsUntilExpiration()));
 	}
 }

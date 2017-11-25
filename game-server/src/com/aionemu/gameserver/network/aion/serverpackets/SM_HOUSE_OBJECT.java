@@ -30,7 +30,7 @@ public class SM_HOUSE_OBJECT extends AionServerPacket {
 		House house = houseObject.getOwnerHouse();
 		if (house == null)
 			return;
-		
+
 		int templateId = houseObject.getObjectTemplate().getTemplateId();
 
 		writeD(house.getAddress().getId()); // if painted 0 ?
@@ -45,10 +45,7 @@ public class SM_HOUSE_OBJECT extends AionServerPacket {
 		writeH(houseObject.getRotation());
 
 		writeD(player.getHouseObjectCooldownList().getReuseDelay(houseObject.getObjectId()));
-		if (houseObject.getUseSecondsLeft() > 0)
-			writeD(houseObject.getUseSecondsLeft());
-		else
-			writeD(0);
+		writeD(houseObject.secondsUntilExpiration());
 
 		writeDyeInfo(houseObject == null ? null : houseObject.getColor());
 		writeD(0); // expiration as for armor ?

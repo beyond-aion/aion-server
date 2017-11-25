@@ -18,9 +18,4 @@ public class MoveableObject extends HouseObject<HousingMoveableItem> {
 
 	}
 
-	@Override
-	public boolean canExpireNow() {
-		return true;
-	}
-
 }
