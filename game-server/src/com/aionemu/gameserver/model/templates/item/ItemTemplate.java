@@ -67,7 +67,7 @@ public class ItemTemplate extends VisibleObjectTemplate {
 	@XmlAttribute(name = "attack_gap")
 	private float attackGap;
 	@XmlAttribute(name = "desc")
-	private String description;
+	private int description;
 	@XmlAttribute(name = "option_slot_bonus")
 	private int optionSlotBonus;
 	@XmlAttribute(name = "rnd_bonus")
@@ -256,12 +256,7 @@ public class ItemTemplate extends VisibleObjectTemplate {
 
 	@Override
 	public int getNameId() {
-		try {
-			int val = Integer.parseInt(description);
-			return val;
-		} catch (NumberFormatException nfe) {
-			return 0;
-		}
+		return description;
 	}
 
 	public long getMaxStackCount() {

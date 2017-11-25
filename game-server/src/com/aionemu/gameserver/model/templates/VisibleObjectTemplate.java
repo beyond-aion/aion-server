@@ -33,10 +33,4 @@ public abstract class VisibleObjectTemplate {
 		return BoundRadius.DEFAULT;
 	}
 
-	/**
-	 * @return default state
-	 */
-	public int getState() {
-		return 0;
-	}
 }

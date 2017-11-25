@@ -241,7 +241,6 @@ public class NpcTemplate extends VisibleObjectTemplate {
 		return race;
 	}
 
-	@Override
 	public int getState() {
 		return state;
 	}
