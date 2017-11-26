@@ -9,7 +9,6 @@ import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AbstractAI;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.Race;
-import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.base.BaseLocation;
 import com.aionemu.gameserver.model.base.StainedBaseLocation;
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -18,6 +17,7 @@ import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.model.templates.spawns.basespawns.BaseSpawnTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.BaseService;
+import com.aionemu.gameserver.services.RespawnService;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.spawnengine.SpawnHandlerType;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -223,8 +223,8 @@ public abstract class Base<T extends BaseLocation> {
 			if (npc != null && npc.getSpawn().getHandlerType() == type) {
 				if (!npc.isDead())
 					npc.getController().delete();
-				else
-					npc.getController().cancelTask(TaskId.RESPAWN);
+				else if (!npc.isSpawned())
+					RespawnService.cancelRespawn(npc);
 			}
 		}
 	}

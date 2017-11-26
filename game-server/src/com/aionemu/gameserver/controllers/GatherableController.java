@@ -211,7 +211,7 @@ public class GatherableController extends VisibleObjectController<Gatherable> {
 	public void completeInteraction() {
 		if (++gatherCount == getOwner().getObjectTemplate().getHarvestCount()) {
 			if (!getOwner().isInInstance())
-				RespawnService.scheduleRespawnTask(getOwner());
+				RespawnService.scheduleRespawn(getOwner());
 			getOwner().getController().delete();
 			gatherCount = 0;
 		}

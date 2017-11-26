@@ -426,22 +426,15 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 	}
 
 	/**
-	 * Cancel all tasks associated with this controller, except the respawn task (when deleting object)
+	 * Cancel all tasks associated with this controller
 	 */
 	public void cancelAllTasks() {
-		Future<?> respawnTask = null;
 		for (Entry<Integer, Future<?>> e : tasks.entrySet()) {
 			Future<?> task = e.getValue();
-			if (task != null) {
-				if (e.getKey() == TaskId.RESPAWN.ordinal())
-					respawnTask = task;
-				else
-					task.cancel(false);
-			}
+			if (task != null)
+				task.cancel(false);
 		}
 		tasks.clear();
-		if (respawnTask != null) // re-associate task with controller
-			addTask(TaskId.RESPAWN, respawnTask);
 	}
 
 	@Override

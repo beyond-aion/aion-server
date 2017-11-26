@@ -13,7 +13,6 @@ import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.configs.schedule.RiftSchedule;
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.rift.RiftLocation;
 import com.aionemu.gameserver.model.templates.rift.OpenRift;
@@ -189,8 +188,8 @@ public class RiftService {
 		for (Npc rift : location.getSpawned()) {
 			if (rift == null)
 				continue;
-			rift.getController().cancelTask(TaskId.RESPAWN);
-			rift.getController().delete();
+			if (!rift.getController().delete())
+				RespawnService.cancelRespawn(rift);
 		}
 
 		// Clear spawned list

@@ -49,7 +49,7 @@ public class CM_LEVEL_READY extends AionClientPacket {
 	protected void runImpl() {
 		Player activePlayer = getConnection().getActivePlayer();
 
-		if (activePlayer.getController().hasScheduledTask(TaskId.RESPAWN)) // player is about to teleport away
+		if (activePlayer.getController().hasScheduledTask(TaskId.TELEPORT)) // player is about to teleport away
 			return;
 
 		if (activePlayer.getHouseRegistry() != null)

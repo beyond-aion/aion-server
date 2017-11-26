@@ -91,7 +91,7 @@ public class AIActions {
 	}
 
 	public static void scheduleRespawn(AbstractAI ai2) {
-		RespawnService.scheduleRespawnTask(ai2.getOwner());
+		RespawnService.scheduleRespawn(ai2.getOwner());
 	}
 
 	/**

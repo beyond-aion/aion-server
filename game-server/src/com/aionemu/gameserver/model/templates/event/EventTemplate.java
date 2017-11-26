@@ -4,7 +4,6 @@ import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.Future;
 import java.util.function.Consumer;
 
@@ -23,9 +22,6 @@ import org.slf4j.LoggerFactory;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.dataholders.SpawnsData;
 import com.aionemu.gameserver.model.EventType;
-import com.aionemu.gameserver.model.TaskId;
-import com.aionemu.gameserver.model.gameobjects.Creature;
-import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.Guides.GuideTemplate;
 import com.aionemu.gameserver.model.templates.spawns.Spawn;
@@ -34,6 +30,7 @@ import com.aionemu.gameserver.model.templates.spawns.SpawnMap;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_VERSION_CHECK;
 import com.aionemu.gameserver.services.EventService;
+import com.aionemu.gameserver.services.RespawnService;
 import com.aionemu.gameserver.services.item.ItemPacketService.ItemAddType;
 import com.aionemu.gameserver.services.item.ItemPacketService.ItemUpdateType;
 import com.aionemu.gameserver.services.item.ItemService;
@@ -82,9 +79,6 @@ public class EventTemplate {
 
 	@XmlAttribute(name = "theme", required = false)
 	private String theme;
-
-	@XmlTransient
-	private List<VisibleObject> spawnedObjects;
 
 	@XmlTransient
 	private Future<?> invDropTask = null;
@@ -205,6 +199,7 @@ public class EventTemplate {
 		}
 
 		isStarted = true;
+		log.info("Started event: " + getName());
 
 		if (theme != null) // show city decoration (visible after teleport)
 			PacketSendUtility.broadcastToWorld(new SM_VERSION_CHECK(EventType.getEventType(theme)));
@@ -214,15 +209,18 @@ public class EventTemplate {
 		if (!isStarted)
 			return;
 
-		if (spawnedObjects != null) {
-			for (VisibleObject o : spawnedObjects) {
-				if (o instanceof Creature)
-					((Creature) o).getController().cancelTask(TaskId.RESPAWN);
-				o.getController().delete();
-			}
-			DataManager.SPAWNS_DATA.removeEventSpawnObjects(spawnedObjects);
-			log.info("Deleted " + spawnedObjects.size() + " event objects (" + getName() + ")");
-			spawnedObjects = null;
+		if (spawns != null && spawns.size() > 0) {
+			int[] count = { 0 };
+			World.getInstance().forEachObject(o -> {
+				SpawnTemplate spawn = o.getSpawn();
+				if (spawn != null && equals(spawn.getEventTemplate())) {
+					o.getController().delete();
+					count[0]++;
+				}
+			});
+			count[0] += RespawnService.cancelEventRespawns(this);
+			DataManager.SPAWNS_DATA.removeEventSpawnObjects(this);
+			log.info("Removed " + count[0] + " event spawns (" + getName() + ")");
 		}
 
 		if (invDropTask != null) {
@@ -239,20 +237,10 @@ public class EventTemplate {
 		}
 
 		isStarted = false;
+		log.info("Stopped event: " + getName());
 
 		if (theme != null && EventService.getInstance().getEventType() == EventType.NONE) // remove city decoration (visible after teleport)
 			PacketSendUtility.broadcastToWorld(new SM_VERSION_CHECK(EventType.NONE));
-	}
-
-	public void addSpawnedObject(VisibleObject object) {
-		if (spawnedObjects == null)
-			spawnedObjects = new CopyOnWriteArrayList<>();
-		spawnedObjects.add(object);
-	}
-
-	public void removeSpawnedObject(VisibleObject object) {
-		if (spawnedObjects != null)
-			spawnedObjects.remove(object);
 	}
 
 	/**

@@ -1,8 +1,6 @@
 package admincommands;
 
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.model.TaskId;
-import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Gatherable;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
@@ -40,9 +38,6 @@ public class Delete extends AdminCommand {
 			sendInfo(admin, "Can't delete special spawns (spawn type: " + spawn.getClass().getSimpleName().replace("Template", "") + ").");
 			return;
 		}
-
-		if (target instanceof Creature)
-			((Creature) target).getController().cancelTask(TaskId.RESPAWN);
 
 		target.getController().delete();
 		sendInfo(admin, "Spawn removed.");

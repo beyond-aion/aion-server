@@ -33,6 +33,7 @@ import com.aionemu.gameserver.model.gameobjects.Gatherable;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.templates.event.EventTemplate;
 import com.aionemu.gameserver.model.templates.spawns.Spawn;
 import com.aionemu.gameserver.model.templates.spawns.SpawnGroup;
 import com.aionemu.gameserver.model.templates.spawns.SpawnMap;
@@ -509,16 +510,10 @@ public class SpawnsData {
 		templates.add(spawnMap);
 	}
 
-	public void removeEventSpawnObjects(List<VisibleObject> objects) {
-		for (VisibleObject visObj : objects) {
-			if (!allSpawnMaps.contains(visObj.getWorldId()))
-				continue;
-			SimpleEntry<SpawnGroup, Spawn> entry = allSpawnMaps.get(visObj.getWorldId()).get(visObj.getObjectTemplate().getTemplateId());
-			if (!entry.getValue().isEventSpawn())
-				continue;
-			if (entry.getValue().getEventTemplate().equals(visObj.getSpawn().getEventTemplate()))
-				allSpawnMaps.get(visObj.getWorldId()).remove(entry);
-		}
+	public void removeEventSpawnObjects(EventTemplate eventTemplate) {
+		allSpawnMaps.valueCollection().forEach(map -> {
+			map.values().removeIf(entry -> eventTemplate.equals(entry.getValue().getEventTemplate()));
+		});
 	}
 
 	public List<SpawnMap> getTemplates() {

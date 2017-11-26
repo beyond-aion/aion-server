@@ -198,7 +198,7 @@ public class TeleportService {
 			// send teleport animation to player and trigger CM_TELEPORT_ANIMATION_DONE when the animation ended
 			PacketSendUtility.sendPacket(player, new SM_TELEPORT_LOC(worldId, instanceId, x, y, z, h, animation));
 			// task will be triggered from CM_TELEPORT_ANIMATION_DONE
-			player.getController().addTask(TaskId.RESPAWN, new FutureTask<Void>(spawnTask, null));
+			player.getController().addTask(TaskId.TELEPORT, new FutureTask<Void>(spawnTask, null));
 		}
 	}
 

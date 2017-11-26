@@ -43,9 +43,6 @@ public class SpawnEngine {
 	public static VisibleObject spawnObject(SpawnTemplate spawn, int instanceIndex) {
 		VisibleObject visObj = getSpawnedObject(spawn, instanceIndex);
 		if (visObj != null) {
-			if (spawn.isEventSpawn())
-				spawn.getEventTemplate().addSpawnedObject(visObj);
-
 			spawn.setVisibleObject(visObj);
 			if (visObj.getPosition().getMapRegion() != null)
 				visObj.getPosition().getWorldMapInstance().getInstanceHandler().onSpawn(visObj);

@@ -8,8 +8,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import com.aionemu.commons.services.CronService;
 import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.model.TaskId;
-import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.spawns.SpawnGroup;
@@ -134,8 +132,8 @@ public class VortexService {
 
 		// Despawn all NPC
 		for (VisibleObject npc : loc.getSpawned()) {
-			((Npc) npc).getController().cancelTask(TaskId.RESPAWN);
-			npc.getController().delete();
+			if (!npc.getController().delete())
+				RespawnService.cancelRespawn(npc);
 		}
 
 		loc.getSpawned().clear();

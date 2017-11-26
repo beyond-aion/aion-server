@@ -27,7 +27,7 @@ public class VisibleObjectActions {
 		if (obj != null) {
 			obj.getController().delete();
 			if (scheduleRespawn)
-				RespawnService.scheduleRespawnTask(obj);
+				RespawnService.scheduleRespawn(obj);
 		}
 	}
 }

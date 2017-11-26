@@ -6,12 +6,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
-import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.templates.spawns.SpawnGroup;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.model.templates.spawns.TemporarySpawn;
+import com.aionemu.gameserver.services.RespawnService;
 
 /**
  * @author xTz
@@ -43,9 +43,9 @@ public class TemporarySpawnEngine {
 						if (!npc.isDead() && template.hasPool()) {
 							spawn.setTemplateUse(npc.getInstanceId(), template, false);
 						}
-						npc.getController().cancelTask(TaskId.RESPAWN);
 					}
-					object.getController().delete();
+					if (!object.getController().delete())
+						RespawnService.cancelRespawn(object);
 				}
 			}
 		}

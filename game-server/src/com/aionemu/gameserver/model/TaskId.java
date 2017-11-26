@@ -5,7 +5,7 @@ package com.aionemu.gameserver.model;
  */
 public enum TaskId {
 	DECAY,
-	RESPAWN, // npc respawn task / player teleport task after leave animation
+	TELEPORT, // player teleport task after leave animation
 	PRISON,
 	PROTECTION_ACTIVE,
 	DROWN,

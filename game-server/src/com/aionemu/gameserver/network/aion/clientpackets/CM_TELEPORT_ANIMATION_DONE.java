@@ -32,7 +32,7 @@ public class CM_TELEPORT_ANIMATION_DONE extends AionClientPacket {
 	@Override
 	protected void runImpl() {
 		Player player = getConnection().getActivePlayer();
-		Future<?> task = player.getController().getAndRemoveTask(TaskId.RESPAWN);
+		Future<?> task = player.getController().getAndRemoveTask(TaskId.TELEPORT);
 		if (task instanceof RunnableFuture && !task.isDone())
 			try {
 				RunnableFuture<?> spawnTask = (RunnableFuture<?>) task;

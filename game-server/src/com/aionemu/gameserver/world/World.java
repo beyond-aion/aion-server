@@ -139,40 +139,44 @@ public class World {
 	 * Despawns (if spawned) and completely removes the object from the world.<br>
 	 * If the object is an Npc, it's objId will be released from IDFactory once it gets garbage collected (see {@link Npc#finalize()}}).
 	 * 
-	 * @param object
+	 * @return True if removed, false if the object wasn't in world
 	 */
-	public void removeObject(VisibleObject object) {
+	public boolean removeObject(VisibleObject object) {
 		if (allObjects.containsKey(object.getObjectId())) {
 			try {
 				if (object.isSpawned())
 					despawn(object);
 				object.getController().onDelete();
-			} finally {
-				allObjects.remove(object.getObjectId());
-
-				if (object instanceof Npc) {
-					if (object instanceof SiegeNpc) {
-						SiegeNpc siegeNpc = (SiegeNpc) object;
-						Collection<SiegeNpc> locSpawn = localSiegeNpcs.get(siegeNpc.getSiegeId());
-						if (!GenericValidator.isBlankOrNull(locSpawn)) {
-							locSpawn.remove(siegeNpc);
-						}
-					}
-
-					if (object.getSpawn() instanceof BaseSpawnTemplate) {
-						BaseSpawnTemplate bst = (BaseSpawnTemplate) object.getSpawn();
-						int baseId = bst.getId();
-						baseNpc.get(baseId).remove(object);
-					}
-
-					allNpcs.remove(object.getObjectId());
-				} else if (object instanceof Player) {
-					allPlayers.remove((Player) object);
-				}
-				if (object.getSpawn() != null && !object.getSpawn().isTemporarySpawn()) // allow object getting garbage collected
-					object.getSpawn().setVisibleObject(null);
+			} catch (Exception e) {
+				log.error(object + " did not leave world cleanly", e);
 			}
+			allObjects.remove(object.getObjectId());
+
+			if (object instanceof Npc) {
+				if (object instanceof SiegeNpc) {
+					SiegeNpc siegeNpc = (SiegeNpc) object;
+					Collection<SiegeNpc> locSpawn = localSiegeNpcs.get(siegeNpc.getSiegeId());
+					if (!GenericValidator.isBlankOrNull(locSpawn)) {
+						locSpawn.remove(siegeNpc);
+					}
+				}
+
+				if (object.getSpawn() instanceof BaseSpawnTemplate) {
+					BaseSpawnTemplate bst = (BaseSpawnTemplate) object.getSpawn();
+					int baseId = bst.getId();
+					baseNpc.get(baseId).remove(object);
+				}
+
+				allNpcs.remove(object.getObjectId());
+			} else if (object instanceof Player) {
+				allPlayers.remove((Player) object);
+			}
+			if (object.getSpawn() != null && !object.getSpawn().isTemporarySpawn()) // allow object getting garbage collected
+				object.getSpawn().setVisibleObject(null);
+
+			return true;
 		}
+		return false;
 	}
 
 	public Collection<SiegeNpc> getLocalSiegeNpcs(int locationId) {

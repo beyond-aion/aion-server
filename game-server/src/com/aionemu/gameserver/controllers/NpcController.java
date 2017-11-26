@@ -140,7 +140,7 @@ public class NpcController extends CreatureController<Npc> {
 		super.onDie(lastAttacker);
 
 		if (shouldRespawn && SiegeService.getInstance().isRespawnAllowed(owner))
-			RespawnService.scheduleRespawnTask(getOwner());
+			RespawnService.scheduleRespawn(getOwner());
 
 		if (shouldDecay) {
 			RespawnService.scheduleDecayTask(owner);
