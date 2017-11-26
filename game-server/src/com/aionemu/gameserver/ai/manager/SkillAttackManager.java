@@ -50,7 +50,7 @@ public class SkillAttackManager {
 		}
 		if (npcAI.setSubStateIfNot(AISubState.CAST)) {
 			if (delay > 0) {
-				ThreadPoolManager.getInstance().schedule(new SkillAction(npcAI), delay);
+				ThreadPoolManager.getInstance().schedule(() -> skillAction(npcAI), delay);
 			} else {
 				skillAction(npcAI);
 			}
@@ -61,6 +61,8 @@ public class SkillAttackManager {
 	 * @param npcAI
 	 */
 	protected static void skillAction(NpcAI npcAI) {
+		if (npcAI.getSubState() != AISubState.CAST)
+			return;
 		Npc owner = npcAI.getOwner();
 		if (owner.getObjectTemplate().getAttackRange() == 0) {
 			if (owner.getTarget() != null && !PositionUtil.isInRange(owner, owner.getTarget(), owner.getAggroRange())) {
@@ -256,18 +258,4 @@ public class SkillAttackManager {
 		return false;
 	}
 
-	private final static class SkillAction implements Runnable {
-
-		private NpcAI npcAI;
-
-		SkillAction(NpcAI npcAI) {
-			this.npcAI = npcAI;
-		}
-
-		@Override
-		public void run() {
-			skillAction(npcAI);
-			npcAI = null;
-		}
-	}
 }
