@@ -72,7 +72,6 @@ public class XmlDataLoader {
 		}
 	}
 
-	@SuppressWarnings("synthetic-access")
 	private static class SingletonHolder {
 
 		protected static final XmlDataLoader instance = new XmlDataLoader();

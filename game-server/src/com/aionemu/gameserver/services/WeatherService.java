@@ -282,7 +282,6 @@ public class WeatherService {
 		}
 	}
 
-	@SuppressWarnings("synthetic-access")
 	private static class SingletonHolder {
 
 		protected static final WeatherService instance = new WeatherService();

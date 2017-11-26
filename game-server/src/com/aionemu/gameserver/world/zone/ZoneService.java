@@ -332,7 +332,6 @@ public final class ZoneService implements GameEngine {
 		return SingletonHolder.instance;
 	}
 
-	@SuppressWarnings("synthetic-access")
 	private static class SingletonHolder {
 
 		protected static final ZoneService instance = new ZoneService();

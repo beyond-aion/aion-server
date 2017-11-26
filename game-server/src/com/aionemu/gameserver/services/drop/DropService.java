@@ -574,7 +574,6 @@ public class DropService {
 
 	}
 
-	@SuppressWarnings("synthetic-access")
 	private static class SingletonHolder {
 
 		protected static final DropService instance = new DropService();

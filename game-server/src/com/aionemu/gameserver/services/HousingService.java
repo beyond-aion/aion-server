@@ -46,7 +46,6 @@ public class HousingService {
 	private final Map<Integer, House> customHouses;
 	private final Map<Integer, House> studios;
 
-	@SuppressWarnings("synthetic-access")
 	private static class SingletonHolder {
 
 		protected static final HousingService instance = new HousingService();

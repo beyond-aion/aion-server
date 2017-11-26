@@ -74,7 +74,6 @@ public class FloodProtector {
 		}
 	}
 
-	@SuppressWarnings("synthetic-access")
 	private static class SingletonHolder {
 
 		protected static final FloodProtector instance = new FloodProtector();

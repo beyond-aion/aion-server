@@ -486,7 +486,6 @@ public class ExchangeService {
 		}
 	}
 
-	@SuppressWarnings("synthetic-access")
 	private static class SingletonHolder {
 
 		protected static final ExchangeService instance = new ExchangeService();

@@ -192,7 +192,6 @@ public class FindGroupService {
 		return SingletonHolder.instance;
 	}
 
-	@SuppressWarnings("synthetic-access")
 	private static class SingletonHolder {
 
 		protected static final FindGroupService instance = new FindGroupService();

@@ -60,7 +60,6 @@ public class DebugService {
 		log.info("Analysis of world players finished");
 	}
 
-	@SuppressWarnings("synthetic-access")
 	private static class SingletonHolder {
 
 		protected static final DebugService instance = new DebugService();

@@ -28,7 +28,6 @@ public class ShieldService {
 
 	Logger log = LoggerFactory.getLogger(ShieldService.class);
 
-	@SuppressWarnings("synthetic-access")
 	private static class SingletonHolder {
 
 		protected static final ShieldService instance = new ShieldService();

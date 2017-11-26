@@ -96,7 +96,6 @@ public class TemporaryTradeTimeTask extends AbstractPeriodicTaskManager {
 		}
 	}
 
-	@SuppressWarnings("synthetic-access")
 	private static class SingletonHolder {
 
 		protected static final TemporaryTradeTimeTask _instance = new TemporaryTradeTimeTask();

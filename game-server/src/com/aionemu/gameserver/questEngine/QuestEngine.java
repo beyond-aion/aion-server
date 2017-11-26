@@ -1130,7 +1130,6 @@ public class QuestEngine implements GameEngine {
 		return SingletonHolder.instance;
 	}
 
-	@SuppressWarnings("synthetic-access")
 	private static class SingletonHolder {
 
 		protected static final QuestEngine instance = new QuestEngine();

@@ -461,7 +461,6 @@ public class World {
 		}
 	}
 
-	@SuppressWarnings("synthetic-access")
 	private static class SingletonHolder {
 
 		protected static final World instance = new World();

@@ -21,7 +21,6 @@ public class StaticDoorService {
 		return SingletonHolder.instance;
 	}
 
-	@SuppressWarnings("synthetic-access")
 	private static class SingletonHolder {
 
 		protected static final StaticDoorService instance = new StaticDoorService();

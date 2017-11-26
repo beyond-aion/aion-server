@@ -99,7 +99,6 @@ public class NpcShoutsService {
 		return SingletonHolder.instance;
 	}
 
-	@SuppressWarnings("synthetic-access")
 	private static class SingletonHolder {
 
 		protected static final NpcShoutsService instance = new NpcShoutsService();

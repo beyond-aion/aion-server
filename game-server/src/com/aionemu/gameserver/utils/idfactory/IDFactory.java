@@ -205,7 +205,6 @@ public class IDFactory {
 		}
 	}
 
-	@SuppressWarnings("synthetic-access")
 	private static class SingletonHolder {
 
 		protected static final IDFactory instance = new IDFactory();

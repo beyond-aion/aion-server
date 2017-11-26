@@ -224,7 +224,6 @@ public final class DataManager {
 		log.info("##### [Static Data loaded in " + String.format("%.1f", time / 1000f) + " seconds] #####");
 	}
 
-	@SuppressWarnings("synthetic-access")
 	private static class SingletonHolder {
 
 		protected static final DataManager instance = new DataManager();

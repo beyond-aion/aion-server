@@ -92,7 +92,6 @@ public class InstanceEngine implements GameEngine {
 		return SingletonHolder.instance;
 	}
 
-	@SuppressWarnings("synthetic-access")
 	private static class SingletonHolder {
 
 		protected static final InstanceEngine instance = new InstanceEngine();

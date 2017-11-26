@@ -265,7 +265,6 @@ public class AionPacketHandlerFactory {
 		handler.addPacketPrototype(prototype);
 	}
 
-	@SuppressWarnings("synthetic-access")
 	private static class SingletonHolder {
 
 		protected static final AionPacketHandlerFactory instance = new AionPacketHandlerFactory();

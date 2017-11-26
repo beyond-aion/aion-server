@@ -612,7 +612,6 @@ public class DropRegistrationService {
 		return 1f;
 	}
 
-	@SuppressWarnings("synthetic-access")
 	private static class SingletonHolder {
 
 		protected static final DropRegistrationService instance = new DropRegistrationService();

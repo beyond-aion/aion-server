@@ -88,7 +88,6 @@ public class AnnouncementService {
 		return announcements.values();
 	}
 
-	@SuppressWarnings("synthetic-access")
 	private static class SingletonHolder {
 
 		protected static final AnnouncementService instance = new AnnouncementService();

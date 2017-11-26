@@ -132,7 +132,6 @@ public class GeoService {
 		return SingletonHolder.instance;
 	}
 
-	@SuppressWarnings("synthetic-access")
 	private static final class SingletonHolder {
 
 		protected static final GeoService instance = new GeoService();

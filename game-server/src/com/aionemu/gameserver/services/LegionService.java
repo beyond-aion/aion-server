@@ -1911,7 +1911,6 @@ public class LegionService {
 		}
 	}
 
-	@SuppressWarnings("synthetic-access")
 	private static class SingletonHolder {
 
 		protected static final LegionService instance = new LegionService();

@@ -476,7 +476,6 @@ public class MotionLoggingService {
 	private MotionLoggingService() {
 	}
 
-	@SuppressWarnings("synthetic-access")
 	private static class SingletonHolder {
 
 		protected static final MotionLoggingService instance = new MotionLoggingService();

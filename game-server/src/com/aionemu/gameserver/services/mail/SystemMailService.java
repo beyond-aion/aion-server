@@ -168,7 +168,6 @@ public class SystemMailService {
 		return true;
 	}
 
-	@SuppressWarnings("synthetic-access")
 	private static class SingletonHolder {
 
 		protected static final SystemMailService instance = new SystemMailService();

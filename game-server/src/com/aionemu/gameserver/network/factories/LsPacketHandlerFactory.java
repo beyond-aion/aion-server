@@ -53,7 +53,6 @@ public class LsPacketHandlerFactory {
 		return handler;
 	}
 
-	@SuppressWarnings("synthetic-access")
 	private static class SingletonHolder {
 
 		protected static final LsPacketHandlerFactory instance = new LsPacketHandlerFactory();

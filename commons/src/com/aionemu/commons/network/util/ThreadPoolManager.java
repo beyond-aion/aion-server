@@ -27,7 +27,6 @@ public class ThreadPoolManager implements Executor {
 	 * PriorityThreadFactory creating new threads for ThreadPoolManager
 	 */
 
-	@SuppressWarnings("synthetic-access")
 	private static class SingletonHolder {
 
 		protected static final ThreadPoolManager instance = new ThreadPoolManager();

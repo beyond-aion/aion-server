@@ -47,7 +47,6 @@ public class SecurityTokenService {
 		return SingletonHolder.instance;
 	}
 
-	@SuppressWarnings("synthetic-access")
 	private static class SingletonHolder {
 
 		protected static final SecurityTokenService instance = new SecurityTokenService();

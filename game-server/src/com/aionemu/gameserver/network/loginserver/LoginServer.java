@@ -272,7 +272,6 @@ public class LoginServer {
 			return false;
 	}
 
-	@SuppressWarnings("synthetic-access")
 	private static class SingletonHolder {
 
 		protected static final LoginServer instance = new LoginServer();

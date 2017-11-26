@@ -263,7 +263,6 @@ public class PetService {
 		PacketSendUtility.sendPacket(player, new SM_PET(activate));
 	}
 
-	@SuppressWarnings("synthetic-access")
 	private static class SingletonHolder {
 
 		protected static final PetService instance = new PetService();

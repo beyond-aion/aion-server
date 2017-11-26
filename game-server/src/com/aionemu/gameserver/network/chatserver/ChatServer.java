@@ -123,7 +123,6 @@ public class ChatServer {
 			csCon.sendPacket(new SM_CS_PLAYER_GAG(playerObjId, gagTime));
 	}
 
-	@SuppressWarnings("synthetic-access")
 	private static class SingletonHolder {
 
 		protected static final ChatServer instance = new ChatServer();

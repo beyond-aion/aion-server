@@ -185,7 +185,6 @@ public class AtreianPassportService {
 
 	}
 
-	@SuppressWarnings("synthetic-access")
 	private static class SingletonHolder {
 
 		protected static final AtreianPassportService instance = new AtreianPassportService();

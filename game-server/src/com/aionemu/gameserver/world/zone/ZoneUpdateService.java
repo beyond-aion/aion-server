@@ -31,7 +31,6 @@ public class ZoneUpdateService extends AbstractFIFOPeriodicTaskManager<Creature>
 		return SingletonHolder.instance;
 	}
 
-	@SuppressWarnings("synthetic-access")
 	private static class SingletonHolder {
 
 		protected static final ZoneUpdateService instance = new ZoneUpdateService();

@@ -71,7 +71,6 @@ public class PeriodicSaveService {
 		log.info("Data successfully saved.");
 	}
 
-	@SuppressWarnings("synthetic-access")
 	private static class SingletonHolder {
 
 		protected static final PeriodicSaveService instance = new PeriodicSaveService();

@@ -63,7 +63,6 @@ public class BruteForceProtector {
 		return false;
 	}
 
-	@SuppressWarnings("synthetic-access")
 	private static class SingletonHolder {
 
 		protected static final BruteForceProtector instance = new BruteForceProtector();

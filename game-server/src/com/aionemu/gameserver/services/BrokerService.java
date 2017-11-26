@@ -889,7 +889,6 @@ public class BrokerService {
 
 	}
 
-	@SuppressWarnings("synthetic-access")
 	private static class SingletonHolder {
 
 		protected static final BrokerService instance = new BrokerService();
