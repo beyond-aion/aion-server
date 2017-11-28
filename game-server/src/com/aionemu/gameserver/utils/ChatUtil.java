@@ -12,6 +12,7 @@ import org.apache.commons.lang3.math.NumberUtils;
 
 import com.aionemu.gameserver.configs.administration.AdminConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
+import com.aionemu.gameserver.model.ChatType;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
@@ -70,6 +71,14 @@ public class ChatUtil {
 	}
 
 	/**
+	 * @return Formatted string for the client to display the corresponding text for male/female characters. The provided male string must not contain
+	 *         spaces, otherwise only the part after the last space will be replaced. Does not work in {@link SM_MESSAGE}
+	 */
+	public static String genderize(String wordForMales, String textForFemales) {
+		return String.format("%s[f:\"%s\"]", wordForMales, textForFemales);
+	}
+
+	/**
 	 * @see #name(String)
 	 */
 	public static String name(Player player) {
@@ -77,8 +86,7 @@ public class ChatUtil {
 	}
 
 	/**
-	 * This creates a click-able character name.<br>
-	 * Does not work in public chats.
+	 * @return A clickable (for system {@link ChatType}s) character name.<br>
 	 */
 	public static String name(String name) {
 		return String.format("[charname:%s;1 1 1]", name); // the 3 parameters are color values, but client doesn't render them anyways
