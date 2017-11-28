@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
-import com.aionemu.gameserver.model.DescriptionId;
 import com.aionemu.gameserver.model.siege.ArtifactLocation;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
@@ -290,9 +289,7 @@ public class SM_QUESTION_WINDOW extends AionServerPacket {
 		writeD(code);
 
 		for (Object param : params) {
-			if (param instanceof DescriptionId)
-				writeNameId(((DescriptionId) param).getValue());
-			else if (param instanceof ArtifactLocation)
+			if (param instanceof ArtifactLocation)
 				this.artifact = (ArtifactLocation) param;
 			else
 				writeS(String.valueOf(param));

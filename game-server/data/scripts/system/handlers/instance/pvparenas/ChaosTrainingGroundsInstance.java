@@ -1,7 +1,6 @@
 package instance.pvparenas;
 
 import com.aionemu.gameserver.instance.handlers.InstanceID;
-import com.aionemu.gameserver.model.DescriptionId;
 import com.aionemu.gameserver.model.actions.NpcActions;
 import com.aionemu.gameserver.model.flyring.FlyRing;
 import com.aionemu.gameserver.model.gameobjects.Gatherable;
@@ -34,9 +33,7 @@ public class ChaosTrainingGroundsInstance extends PvPArenaInstance {
 		}
 		getPlayerReward(player.getObjectId()).addPoints(1250);
 		sendPacket();
-		int nameId = gatherable.getObjectTemplate().getNameId();
-		DescriptionId name = new DescriptionId(nameId * 2 + 1);
-		PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1400237, name, 1250));
+		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_GET_SCORE(gatherable.getObjectTemplate().getL10n(), 1250));
 	}
 
 	@Override

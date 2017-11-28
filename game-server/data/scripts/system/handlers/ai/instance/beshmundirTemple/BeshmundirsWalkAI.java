@@ -6,7 +6,6 @@ import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.AIRequest;
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.model.DescriptionId;
 import com.aionemu.gameserver.model.autogroup.AutoGroupType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -16,6 +15,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_FIND_GROUP;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUESTION_WINDOW;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.teleport.PortalService;
+import com.aionemu.gameserver.utils.ChatUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 import ai.ActionItemNpcAI;
@@ -70,12 +70,12 @@ public class BeshmundirsWalkAI extends ActionItemNpcAI {
 				break;
 			case SELECT_NONE_1: // I'll take the safer path
 				AIActions.addRequest(this, player, SM_QUESTION_WINDOW.STR_INSTANCE_DUNGEON_WITH_DIFFICULTY_ENTER_CONFIRM, getObjectId(), request, "300170000",
-					new DescriptionId(1804103));
+					ChatUtil.l10n(902051));
 				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 4762)); // Path selection
 				break;
 			case SELECT_NONE_2: // Give me the dangerous path
 				AIActions.addRequest(this, player, SM_QUESTION_WINDOW.STR_INSTANCE_DUNGEON_WITH_DIFFICULTY_ENTER_CONFIRM, getObjectId(), request, "300170000",
-					new DescriptionId(1804105));
+					ChatUtil.l10n(902052));
 				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 4762)); // Path selection
 				break;
 		}

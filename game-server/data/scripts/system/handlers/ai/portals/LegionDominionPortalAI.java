@@ -8,7 +8,6 @@ import java.time.ZonedDateTime;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.instance.handlers.InstanceHandler;
-import com.aionemu.gameserver.model.DescriptionId;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.portal.PortalPath;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
@@ -33,7 +32,7 @@ public class LegionDominionPortalAI extends PortalDialogAI {
 		}
 		ZonedDateTime now = ServerTime.now();
 		if (now.getDayOfWeek() == DayOfWeek.WEDNESDAY && now.getHour() >= 8 && now.getHour() <= 10) {
-			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1401306, new DescriptionId(301500000)));
+			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1401306, 301500000));
 			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 0, questId));
 			return true;
 		}

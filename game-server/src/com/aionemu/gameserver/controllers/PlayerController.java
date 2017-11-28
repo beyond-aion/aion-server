@@ -24,7 +24,6 @@ import com.aionemu.gameserver.controllers.attack.AttackUtil;
 import com.aionemu.gameserver.controllers.observer.ActionObserver;
 import com.aionemu.gameserver.controllers.observer.ObserverType;
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.model.DescriptionId;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.TaskId;
@@ -578,7 +577,7 @@ public class PlayerController extends CreatureController<Player> {
 			if (message != null)
 				PacketSendUtility.sendPacket(player, message);
 		} else if (castingSkill.getSkillMethod() == SkillMethod.ITEM) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_CANCELED(new DescriptionId(castingSkill.getItemTemplate().getNameId())));
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_CANCELED());
 			player.removeItemCoolDown(castingSkill.getItemTemplate().getUseLimits().getDelayId());
 			PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), castingSkill.getFirstTarget().getObjectId(),
 				castingSkill.getItemObjectId(), castingSkill.getItemTemplate().getTemplateId(), 0, 3, 0), true);

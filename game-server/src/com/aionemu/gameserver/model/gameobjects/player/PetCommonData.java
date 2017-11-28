@@ -157,8 +157,8 @@ public class PetCommonData extends VisibleObjectTemplate implements Expirable {
 	}
 
 	@Override
-	public int getNameId() {
-		return DataManager.PET_DATA.getPetTemplate(petId).getNameId();
+	public int getL10nId() {
+		return DataManager.PET_DATA.getPetTemplate(petId).getL10nId();
 	}
 
 	public final long getMoodStartTime() {

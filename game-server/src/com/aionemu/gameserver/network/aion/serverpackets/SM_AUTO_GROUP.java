@@ -29,8 +29,8 @@ public class SM_AUTO_GROUP extends AionServerPacket {
 		}
 
 		this.instanceMaskId = instanceMaskId;
-		this.messageId = agt.getNameId();
-		this.titleId = agt.getTittleId();
+		this.messageId = agt.getL10nId();
+		this.titleId = agt.getTitleId();
 		this.mapId = agt.getInstanceMapId();
 	}
 
@@ -54,19 +54,19 @@ public class SM_AUTO_GROUP extends AionServerPacket {
 
 	@Override
 	protected void writeImpl(AionConnection con) {
-		writeD(this.instanceMaskId);
-		writeC(this.windowId);
-		writeD(this.mapId);
-		switch (this.windowId) {
+		writeD(instanceMaskId);
+		writeC(windowId);
+		writeD(mapId);
+		switch (windowId) {
 			case 0: // request entry
-				writeD(this.messageId);
-				writeD(this.titleId);
+				writeD(messageId);
+				writeD(titleId);
 				writeD(0);
 				break;
 			case 1: // waiting window
 				writeD(0);
 				writeD(0);
-				writeD(this.waitTime);
+				writeD(waitTime);
 				break;
 			case 2: // cancel looking
 				writeD(0);
@@ -76,7 +76,7 @@ public class SM_AUTO_GROUP extends AionServerPacket {
 			case 3: // pass window
 				writeD(0);
 				writeD(0);
-				writeD(this.waitTime);
+				writeD(waitTime);
 				break;
 			case 4: // enter window
 				writeD(0);
@@ -89,22 +89,22 @@ public class SM_AUTO_GROUP extends AionServerPacket {
 				writeD(0);
 				break;
 			case wnd_EntryIcon: // entry icon
-				writeD(this.messageId);
-				writeD(this.titleId);
-				writeD(this.close ? 0 : 1);
+				writeD(messageId);
+				writeD(titleId);
+				writeD(close ? 0 : 1);
 				break;
 			case 7: // failed window
-				writeD(this.messageId);
-				writeD(this.titleId);
+				writeD(messageId);
+				writeD(titleId);
 				writeD(0);
 				break;
 			case 8: // on login
 				writeD(0);
 				writeD(0);
-				writeD(this.waitTime);
+				writeD(waitTime);
 				break;
 		}
 		writeC(0);
-		writeS(this.name);
+		writeS(name);
 	}
 }

@@ -8,7 +8,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
 import com.aionemu.gameserver.instance.handlers.InstanceID;
-import com.aionemu.gameserver.model.DescriptionId;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Gatherable;
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -51,7 +50,7 @@ public class DarkPoetaInstance extends GeneralInstanceHandler {
 		if (instanceReward.getInstanceScoreType().isStartProgress() && !excludedNpcs.contains(npcId)) {
 			instanceReward.addNpcKill();
 			instanceReward.addPoints(points);
-			sendPacket(npc.getObjectTemplate().getNameId(), points);
+			sendPacket(npc, points);
 		}
 		switch (npcId) {
 			case 214895: // Main Power Generator
@@ -63,7 +62,7 @@ public class DarkPoetaInstance extends GeneralInstanceHandler {
 			case 214904: // Brigade General Anuhart
 				instanceReward.setInstanceScoreType(InstanceScoreType.END_PROGRESS);
 				instanceReward.setRank(checkRank(instanceReward.getPoints()));
-				sendPacket(0, 0);
+				sendPacket(null, 0);
 				break;
 			case 215280: // Tahabata Pyrelord
 			case 215281: // Calindi Flamelord
@@ -88,10 +87,10 @@ public class DarkPoetaInstance extends GeneralInstanceHandler {
 		}
 	}
 
-	private void sendPacket(int nameId, int points) {
+	private void sendPacket(Npc npc, int points) {
 		instance.forEachPlayer(p -> {
-			if (nameId != 0)
-				PacketSendUtility.sendPacket(p, new SM_SYSTEM_MESSAGE(1400237, new DescriptionId(nameId * 2 + 1), points));
+			if (npc != null)
+				PacketSendUtility.sendPacket(p, SM_SYSTEM_MESSAGE.STR_MSG_GET_SCORE(npc.getObjectTemplate().getL10n(), points));
 			PacketSendUtility.sendPacket(p, new SM_INSTANCE_SCORE(new DarkPoetaScoreInfo(instanceReward), instanceReward, getTime()));
 		});
 	}
@@ -255,14 +254,14 @@ public class DarkPoetaInstance extends GeneralInstanceHandler {
 	private void onStart(boolean manually) {
 		instanceReward.setInstanceScoreType(InstanceScoreType.START_PROGRESS);
 		startTime = System.currentTimeMillis();
-		sendPacket(0, 0);
+		sendPacket(null, 0);
 		if (!manually)
 			instance.getDoors().values().stream().forEach(d -> d.setOpen(true));
 	}
 
 	@Override
 	public void onEnterInstance(final Player player) {
-		sendPacket(0, 0);
+		sendPacket(null, 0);
 	}
 
 	@Override
@@ -295,7 +294,7 @@ public class DarkPoetaInstance extends GeneralInstanceHandler {
 	@Override
 	public void onGather(Player player, Gatherable gatherable) {
 		instanceReward.addGather();
-		sendPacket(0, instanceId);
+		sendPacket(null, instanceId);
 	}
 
 	@Override

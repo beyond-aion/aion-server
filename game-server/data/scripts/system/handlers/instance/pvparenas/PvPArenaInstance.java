@@ -5,7 +5,6 @@ import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAG
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.controllers.attack.AggroInfo;
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
-import com.aionemu.gameserver.model.DescriptionId;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.StaticDoor;
@@ -115,9 +114,7 @@ public class PvPArenaInstance extends GeneralInstanceHandler {
 	}
 
 	protected void sendSystemMsg(Player player, Creature creature, int rewardPoints) {
-		int nameId = creature.getObjectTemplate().getNameId();
-		DescriptionId name = new DescriptionId(nameId * 2 + 1);
-		PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1400237, nameId == 0 ? creature.getName() : name, rewardPoints));
+		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_GET_SCORE(creature.getObjectTemplate().getL10n(), rewardPoints));
 	}
 
 	@Override

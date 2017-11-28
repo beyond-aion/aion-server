@@ -70,7 +70,7 @@ public class SM_NPC_INFO extends AionServerPacket {
 		writeH(npc.getState());
 
 		writeC(npc.getHeading());
-		writeD(npcTemplate.getNameId());
+		writeD(npcTemplate.getL10nId());
 		writeD(npcTemplate.getTitleId());// TODO: implement fortress titles
 
 		writeH(0x00);// unk

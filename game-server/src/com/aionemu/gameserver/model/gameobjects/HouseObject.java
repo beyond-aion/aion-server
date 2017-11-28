@@ -84,8 +84,7 @@ public abstract class HouseObject<T extends PlaceableHouseObject> extends Visibl
 
 	@Override
 	public void onExpire(Player player) {
-		final int descId = getObjectTemplate().getNameId();
-		final SM_SYSTEM_MESSAGE msg = SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_OBJECT_DELETE_EXPIRE_TIME(descId);
+		SM_SYSTEM_MESSAGE msg = SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_OBJECT_DELETE_EXPIRE_TIME(getObjectTemplate().getL10n());
 		if (isSpawnedByPlayer())
 			selfDestroy(player, msg);
 		else {

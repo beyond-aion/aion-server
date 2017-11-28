@@ -6,7 +6,6 @@ import java.time.LocalTime;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.model.DescriptionId;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.house.House;
@@ -94,15 +93,16 @@ public class UseableItemObject extends UseableHouseObject<HousingUseableItem> {
 		}
 
 		if (mustGiveLastReward && !isOwner) { // expired, wait for owner
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_OBJECT_DELETE_EXPIRE_TIME(getObjectTemplate().getNameId()));
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_OBJECT_DELETE_EXPIRE_TIME(getObjectTemplate().getL10n()));
 			return;
 		}
 
 		if (getObjectTemplate().getPlacementLimit() == LimitType.COOKING) {
 			// Check if player already has an item
 			if (player.getInventory().getItemCountByItemId(action.getRewardId()) > 0) {
-				int nameId = DataManager.ITEM_DATA.getItemTemplate(action.getRewardId()).getNameId();
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANNOT_USE_ALREADY_HAVE_REWARD_ITEM(nameId, getObjectTemplate().getNameId()));
+				String rewardL10n = DataManager.ITEM_DATA.getItemTemplate(action.getRewardId()).getL10n();
+				PacketSendUtility.sendPacket(player,
+					SM_SYSTEM_MESSAGE.STR_MSG_CANNOT_USE_ALREADY_HAVE_REWARD_ITEM(rewardL10n, getObjectTemplate().getL10n()));
 				return;
 			}
 		}
@@ -111,13 +111,13 @@ public class UseableItemObject extends UseableHouseObject<HousingUseableItem> {
 		if (requiredItem != null) {
 			if (action.getCheckType() == 1) { // equip item needed
 				if (player.getEquipment().getEquippedItemsByItemId(requiredItem).size() == 0) {
-					int descId = DataManager.ITEM_DATA.getItemTemplate(requiredItem).getNameId();
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANT_USE_HOUSE_OBJECT_ITEM_EQUIP(new DescriptionId(descId)));
+					String requiredItemL10n = DataManager.ITEM_DATA.getItemTemplate(requiredItem).getL10n();
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANT_USE_HOUSE_OBJECT_ITEM_EQUIP(requiredItemL10n));
 					return;
 				}
 			} else if (player.getInventory().getItemCountByItemId(requiredItem) < action.getRemoveCount()) {
-				int descId = DataManager.ITEM_DATA.getItemTemplate(requiredItem).getNameId();
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANT_USE_HOUSE_OBJECT_ITEM_CHECK(new DescriptionId(descId)));
+				String requiredItemL10n = DataManager.ITEM_DATA.getItemTemplate(requiredItem).getL10n();
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANT_USE_HOUSE_OBJECT_ITEM_CHECK(requiredItemL10n));
 				return;
 			}
 		}
@@ -141,7 +141,7 @@ public class UseableItemObject extends UseableHouseObject<HousingUseableItem> {
 
 		final int delay = getObjectTemplate().getDelay();
 		final int usedCount = useCount == null ? 0 : currentUseCount + 1;
-		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_OBJECT_USE(getObjectTemplate().getNameId()));
+		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_OBJECT_USE(getObjectTemplate().getL10n()));
 		PacketSendUtility.sendPacket(player, new SM_USE_OBJECT(player.getObjectId(), getObjectId(), delay, 8));
 		player.getController().addTask(TaskId.HOUSE_OBJECT_USE, ThreadPoolManager.getInstance().schedule(new Runnable() {
 
@@ -164,7 +164,7 @@ public class UseableItemObject extends UseableHouseObject<HousingUseableItem> {
 					} else if (action.getRewardId() != null) {
 						rewardId = action.getRewardId();
 						if (useCount == usedCount) {
-							PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_FLOWERPOT_GOAL(getObjectTemplate().getNameId()));
+							PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_FLOWERPOT_GOAL(getObjectTemplate().getL10n()));
 							if (action.getFinalRewardId() == null) {
 								delete = true;
 							} else {
@@ -187,11 +187,11 @@ public class UseableItemObject extends UseableHouseObject<HousingUseableItem> {
 				}
 				if (rewardId > 0) {
 					ItemService.addItem(player, rewardId, 1);
-					int rewardNameId = DataManager.ITEM_DATA.getItemTemplate(rewardId).getNameId();
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_OBJECT_REWARD_ITEM(getObjectTemplate().getNameId(), rewardNameId));
+					String rewardL10n = DataManager.ITEM_DATA.getItemTemplate(rewardId).getL10n();
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_OBJECT_REWARD_ITEM(getObjectTemplate().getL10n(), rewardL10n));
 				}
 				if (delete)
-					selfDestroy(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_OBJECT_DELETE_USE_COUNT_FINAL(getObjectTemplate().getNameId()));
+					selfDestroy(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_OBJECT_DELETE_USE_COUNT_FINAL(getObjectTemplate().getL10n()));
 				else {
 					long reuseTime;
 					Integer cd = getObjectTemplate().getCd();

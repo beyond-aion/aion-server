@@ -221,7 +221,7 @@ public class NpcController extends CreatureController<Npc> {
 					rewardAp *= instanceApMultiplier;
 
 					QuestEngine.getInstance().onKill(new QuestEnv(getOwner(), player, 0));
-					player.getCommonData().addExp(rewardXp, Rates.XP_HUNTING, this.getOwner().getObjectTemplate().getNameId());
+					player.getCommonData().addExp(rewardXp, Rates.XP_HUNTING, getOwner().getObjectTemplate().getL10n());
 					player.getCommonData().addDp(rewardDp);
 					if (getOwner().getAi().ask(AIQuestion.SHOULD_REWARD_AP)) {
 						int calculatedAp = StatFunctions.calculatePvEApGained(player, getOwner());

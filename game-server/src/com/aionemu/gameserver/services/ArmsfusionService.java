@@ -53,7 +53,7 @@ public class ArmsfusionService {
 		log.debug("Prix: " + price);
 
 		if (player.getInventory().getKinah() < price) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_COMPOUND_ERROR_NOT_ENOUGH_MONEY(firstItem.getNameId(), secondItem.getNameId()));
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_COMPOUND_ERROR_NOT_ENOUGH_MONEY(firstItem.getL10n(), secondItem.getL10n()));
 			return;
 		}
 
@@ -61,11 +61,11 @@ public class ArmsfusionService {
 		 * Fusioned weapons must be not fusioned
 		 */
 		if (firstItem.hasFusionedItem()) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_COMPOUND_ERROR_NOT_AVAILABLE(firstItem.getNameId()));
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_COMPOUND_ERROR_NOT_AVAILABLE(firstItem.getL10n()));
 			return;
 		}
 		if (secondItem.hasFusionedItem()) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_COMPOUND_ERROR_NOT_AVAILABLE(secondItem.getNameId()));
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_COMPOUND_ERROR_NOT_AVAILABLE(secondItem.getL10n()));
 			return;
 		}
 
@@ -76,7 +76,7 @@ public class ArmsfusionService {
 		}
 
 		if (!firstItem.getItemTemplate().isTwoHandWeapon()) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_COMPOUND_ERROR_NOT_AVAILABLE(firstItem.getNameId()));
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_COMPOUND_ERROR_NOT_AVAILABLE(firstItem.getL10n()));
 			return;
 		}
 
@@ -122,7 +122,7 @@ public class ArmsfusionService {
 
 		ItemPacketService.updateItemAfterInfoChange(player, firstItem);
 		player.getInventory().decreaseKinah(price);
-		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_COMPOUND_SUCCESS(firstItem.getNameId(), secondItem.getNameId()));
+		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_COMPOUND_SUCCESS(firstItem.getL10n(), secondItem.getL10n()));
 	}
 
 	private static double rarityRate(ItemQuality rarity) {
@@ -153,7 +153,7 @@ public class ArmsfusionService {
 			return;
 
 		if (!weaponToBreak.hasFusionedItem()) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_DECOMPOUND_ERROR_NOT_AVAILABLE(weaponToBreak.getNameId()));
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_DECOMPOUND_ERROR_NOT_AVAILABLE(weaponToBreak.getL10n()));
 			return;
 		}
 
@@ -163,6 +163,6 @@ public class ArmsfusionService {
 
 		ItemPacketService.updateItemAfterInfoChange(player, weaponToBreak);
 
-		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_COMPOUNDED_ITEM_DECOMPOUND_SUCCESS(weaponToBreak.getNameId()));
+		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_COMPOUNDED_ITEM_DECOMPOUND_SUCCESS(weaponToBreak.getL10n()));
 	}
 }

@@ -25,14 +25,12 @@ import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.configs.main.GroupConfig;
 import com.aionemu.gameserver.configs.main.MembershipConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.model.DescriptionId;
 import com.aionemu.gameserver.model.PlayerClass;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.drop.Drop;
 import com.aionemu.gameserver.model.drop.DropItem;
 import com.aionemu.gameserver.model.gameobjects.DropNpc;
-import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -254,7 +252,7 @@ public final class QuestService {
 			player.getInventory().increaseKinah(Rates.QUEST_KINAH.calcResult(player, rewards.getGold()), ItemUpdateType.INC_KINAH_QUEST);
 		if (rewards.getExp() != null) {
 			NpcTemplate npcTemplate = DataManager.NPC_DATA.getNpcTemplate(env.getTargetId());
-			player.getCommonData().addExp(rewards.getExp(), Rates.XP_QUEST, npcTemplate != null ? npcTemplate.getNameId() : 0);
+			player.getCommonData().addExp(rewards.getExp(), Rates.XP_QUEST, npcTemplate != null ? npcTemplate.getL10n() : null);
 		}
 		if (rewards.getTitle() != null)
 			player.getTitleList().addTitle(rewards.getTitle(), true, 0);
@@ -292,7 +290,7 @@ public final class QuestService {
 				repeatDate = repeatDate.plusDays(nextRepeatDay.getDay() - baseDay.getValue());
 			else
 				repeatDate = repeatDate.plusDays((7 - baseDay.getValue()) + nextRepeatDay.getDay());
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_QUEST_LIMIT_START_WEEK(new DescriptionId(nextRepeatDay.getNameId() * 2 + 1), 9));
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_QUEST_LIMIT_START_WEEK(nextRepeatDay.getL10n(), 9));
 		}
 		return new Timestamp(repeatDate.toEpochSecond() * 1000);
 	}
@@ -393,7 +391,7 @@ public final class QuestService {
 			if (template.getRequiredRank() != 0 && player.getAbyssRank().getRank().getId() < template.getRequiredRank()) {
 				if (warn)
 					PacketSendUtility.sendPacket(player,
-						SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_MIN_RANK(AbyssRankEnum.getRankById(template.getRequiredRank()).getDescriptionId()));
+						SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_MIN_RANK(AbyssRankEnum.getRankL10n(player.getRace(), template.getRequiredRank())));
 				return false;
 			}
 
@@ -599,19 +597,19 @@ public final class QuestService {
 		QuestTemplate template = DataManager.QUEST_DATA.getQuestById(env.getQuestId());
 		CollectItems collectItems = template.getCollectItems();
 		if (collectItems == null) {
-			// check inventoryItem to prevent exploits
+			// check inventoryItems to prevent exploits
 			InventoryItems inventoryItems = template.getInventoryItems();
 			if (inventoryItems == null)
 				return true;
 
-			for (InventoryItem inventoryItem : inventoryItems.getInventoryItem()) {
+			for (InventoryItem inventoryItem : inventoryItems.getInventoryItems()) {
 				int itemId = inventoryItem.getItemId();
 				if (player.getInventory().getItemCountByItemId(itemId) < inventoryItem.getCount())
 					return false;
 			}
 
 			if (removeItem) {
-				for (InventoryItem inventoryItem : inventoryItems.getInventoryItem()) {
+				for (InventoryItem inventoryItem : inventoryItems.getInventoryItems()) {
 					player.getInventory().decreaseByItemId(inventoryItem.getItemId(), inventoryItem.getCount());
 				}
 			}
@@ -640,23 +638,20 @@ public final class QuestService {
 		Player player = env.getPlayer();
 		QuestTemplate template = DataManager.QUEST_DATA.getQuestById(env.getQuestId());
 		InventoryItems inventoryItems = template.getInventoryItems();
-		if (inventoryItems == null)
-			return true;
-
-		int requiredItemNameId = 0;
-		// Usually counts are 1, and if more, then collect item checks exist
-		// Other quests having no collect item checks and counts greater than 1 are unused (old coin exchange quests)
-		for (InventoryItem inventoryItem : inventoryItems.getInventoryItem()) {
-			Item item = player.getInventory().getFirstItemByItemId(inventoryItem.getItemId());
-			if (item == null) {
-				requiredItemNameId = DataManager.ITEM_DATA.getItemTemplate(inventoryItem.getItemId()).getNameId();
-				break;
+		if (inventoryItems != null) {
+			// Usually counts are 1, and if more, then collect item checks exist
+			// Other quests having no collect item checks and counts greater than 1 are unused (old coin exchange quests)
+			for (InventoryItem inventoryItem : inventoryItems.getInventoryItems()) {
+				if (player.getInventory().getFirstItemByItemId(inventoryItem.getItemId()) == null) {
+					if (showWarning) {
+						String requiredItemL10n = DataManager.ITEM_DATA.getItemTemplate(inventoryItem.getItemId()).getL10n();
+						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_INVENTORY_ITEM(requiredItemL10n));
+					}
+					return false;
+				}
 			}
 		}
-		if (requiredItemNameId != 0 && showWarning) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_INVENTORY_ITEM(new DescriptionId(requiredItemNameId)));
-		}
-		return requiredItemNameId == 0;
+		return true;
 	}
 
 	/**
@@ -674,7 +669,7 @@ public final class QuestService {
 	public static int checkCollectItemsReward(QuestEnv env, boolean showWarning, boolean removeItem, Integer rewardIndex) {
 		Player player = env.getPlayer();
 		QuestTemplate template = DataManager.QUEST_DATA.getQuestById(env.getQuestId());
-		int requiredItemNameId = 0;
+		String requiredItemL10n = null;
 		int result = -1;
 
 		CollectItems collectItems = template.getCollectItems();
@@ -711,17 +706,17 @@ public final class QuestService {
 			if (!checkValid) {
 				// save last required item
 				CollectItem ci = collectItems.getCollectItem().get(index);
-				requiredItemNameId = DataManager.ITEM_DATA.getItemTemplate(ci.getItemId()).getNameId();
+				requiredItemL10n = DataManager.ITEM_DATA.getItemTemplate(ci.getItemId()).getL10n();
 			} else {
 				// all checks were success
-				requiredItemNameId = 0;
+				requiredItemL10n = null;
 				break;
 			}
 		}
 
-		if (requiredItemNameId != 0) {
+		if (requiredItemL10n != null) {
 			if (showWarning)
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_QUEST_COMPLETE_ERROR_QUEST_ITEM_RETRY(new DescriptionId(requiredItemNameId)));
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_QUEST_COMPLETE_ERROR_QUEST_ITEM_RETRY(requiredItemL10n));
 			return -1;
 		}
 

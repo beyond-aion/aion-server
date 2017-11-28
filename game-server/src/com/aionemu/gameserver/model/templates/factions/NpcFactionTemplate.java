@@ -8,13 +8,14 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
 import com.aionemu.gameserver.model.Race;
+import com.aionemu.gameserver.model.templates.L10n;
 
 /**
  * @author vlog
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "NpcFaction")
-public class NpcFactionTemplate {
+public class NpcFactionTemplate implements L10n {
 
 	@XmlAttribute(name = "id", required = true)
 	private int id;
@@ -43,7 +44,8 @@ public class NpcFactionTemplate {
 		return name;
 	}
 
-	public int getNameId() {
+	@Override
+	public int getL10nId() {
 		return nameId;
 	}
 

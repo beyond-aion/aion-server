@@ -42,7 +42,7 @@ public class SM_VIEW_PLAYER_DETAILS extends AionServerPacket {
 
 		writeD(0);
 		writeD(template.getTemplateId());
-		writeNameId(template.getNameId());
+		writeS(template.getL10n());
 
 		ItemInfoBlob itemInfoBlob = ItemInfoBlob.getFullBlob(player, item);
 		itemInfoBlob.writeMe(getBuf());

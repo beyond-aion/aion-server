@@ -23,7 +23,6 @@ import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.event.Headhunter;
 import com.aionemu.gameserver.model.gameobjects.AionObject;
 import com.aionemu.gameserver.model.gameobjects.PersistentState;
-import com.aionemu.gameserver.model.gameobjects.player.AbyssRank;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.Rates;
 import com.aionemu.gameserver.model.team.TemporaryPlayerTeam;
@@ -110,7 +109,7 @@ public class PvpService {
 			TemporaryPlayerTeam<?> team = victim.getCurrentTeam();
 			if (team != null)
 				team.sendPacket(Predicates.Players.allExcept(victim), SM_SYSTEM_MESSAGE.STR_MSG_COMBAT_FRIENDLY_DEATH(victim.getName()));
-			announceDeath(victim);
+			AbyssService.announceHighRankedDeath(victim);
 			return;
 		}
 
@@ -196,16 +195,7 @@ public class PvpService {
 				player -> !player.isEnemy(victim));
 			PacketSendUtility.broadcastPacket(winner, SM_SYSTEM_MESSAGE.STR_MSG_COMBAT_HOSTILE_DEATH_TO_B(winner.getName(), victim.getName()), false,
 				player -> player.isEnemy(victim));
-			announceDeath(victim);
-		}
-	}
-
-	// High ranked kill announce
-	private void announceDeath(Player player) {
-		AbyssRank ar = player.getAbyssRank();
-		if (AbyssService.isOnPvpMap(player) && ar != null) {
-			if (ar.getRank().getId() >= 9)
-				AbyssService.rankedKillAnnounce(player);
+			AbyssService.announceHighRankedDeath(victim);
 		}
 	}
 

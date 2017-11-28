@@ -10,7 +10,6 @@ import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.model.DescriptionId;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -112,7 +111,7 @@ public class NpcFactions {
 	private void leaveNpcFaction(NpcFaction npcFaction) {
 		NpcFactionTemplate npcFactionTemplate = DataManager.NPC_FACTIONS_DATA.getNpcFactionById(npcFaction.getId());
 
-		PacketSendUtility.sendPacket(owner, new SM_SYSTEM_MESSAGE(1300526, new DescriptionId(npcFactionTemplate.getNameId())));
+		PacketSendUtility.sendPacket(owner, new SM_SYSTEM_MESSAGE(1300526, npcFactionTemplate.getL10n()));
 		npcFaction.setActive(false);
 		activeNpcFaction[npcFactionTemplate.isMentor() ? 1 : 0] = null;
 		if (npcFaction.getState() == ENpcFactionQuestState.START) {
@@ -164,7 +163,7 @@ public class NpcFactions {
 			return;
 		}
 		if (npcFaction == null || !npcFaction.isActive()) {
-			PacketSendUtility.sendPacket(owner, new SM_SYSTEM_MESSAGE(1300524, new DescriptionId(npcFactionTemplate.getNameId())));
+			PacketSendUtility.sendPacket(owner, new SM_SYSTEM_MESSAGE(1300524, npcFactionTemplate.getL10n()));
 			PacketSendUtility.sendPacket(owner, new SM_DIALOG_WINDOW(targetObjectId, 1012));
 			setActive(npcFactionId);
 
@@ -186,8 +185,8 @@ public class NpcFactions {
 		};
 		boolean requested = owner.getResponseRequester().putRequest(SM_QUESTION_WINDOW.STR_ASK_JOIN_NEW_FACTION, responseHandler);
 		if (requested) {
-			PacketSendUtility.sendPacket(owner, new SM_QUESTION_WINDOW(SM_QUESTION_WINDOW.STR_ASK_JOIN_NEW_FACTION, 0, 0, new DescriptionId(
-				activeNpcFactionTemplate.getNameId()), new DescriptionId(npcFactionTemplate.getNameId())));
+			PacketSendUtility.sendPacket(owner,
+				new SM_QUESTION_WINDOW(SM_QUESTION_WINDOW.STR_ASK_JOIN_NEW_FACTION, 0, 0, activeNpcFactionTemplate.getL10n(), npcFactionTemplate.getL10n()));
 		}
 		return;
 	}
@@ -268,7 +267,7 @@ public class NpcFactions {
 				if (faction.getState() == ENpcFactionQuestState.START) {
 					QuestService.abandonQuest(owner, faction.getQuestId());
 				}
-				PacketSendUtility.sendPacket(owner, SM_SYSTEM_MESSAGE.STR_FACTION_LEAVE_BY_LEVEL_LIMIT(npcFactionTemplate.getNameId()));
+				PacketSendUtility.sendPacket(owner, SM_SYSTEM_MESSAGE.STR_FACTION_LEAVE_BY_LEVEL_LIMIT(npcFactionTemplate.getL10n()));
 				faction.setState(ENpcFactionQuestState.NOTING);
 			}
 		}

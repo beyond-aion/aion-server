@@ -605,8 +605,8 @@ public class Item extends AionObject implements Expirable, StatOwner {
 		return itemTemplate.getTemplateId();
 	}
 
-	public int getNameId() {
-		return itemTemplate.getNameId();
+	public String getL10n() {
+		return itemTemplate.getL10n();
 	}
 
 	public boolean hasFusionedItem() {
@@ -764,11 +764,11 @@ public class Item extends AionObject implements Expirable, StatOwner {
 				storage.delete(this);
 				switch (i) {
 					case CUBE:
-						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_DELETE_CASH_ITEM_BY_TIMEOUT(getNameId()));
+						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_DELETE_CASH_ITEM_BY_TIMEOUT(getL10n()));
 						break;
 					case ACCOUNT_WAREHOUSE:
 					case REGULAR_WAREHOUSE:
-						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_DELETE_CASH_ITEM_BY_TIMEOUT_IN_WAREHOUSE(getNameId()));
+						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_DELETE_CASH_ITEM_BY_TIMEOUT_IN_WAREHOUSE(getL10n()));
 						break;
 				}
 			}
@@ -777,7 +777,7 @@ public class Item extends AionObject implements Expirable, StatOwner {
 
 	@Override
 	public void onBeforeExpire(Player player, int remainingMinutes) {
-		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CASH_ITEM_TIME_LEFT(getNameId(), remainingMinutes));
+		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CASH_ITEM_TIME_LEFT(getL10n(), remainingMinutes));
 	}
 
 	public void setRepurchasePrice(long price) {

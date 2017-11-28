@@ -10,6 +10,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
+import com.aionemu.gameserver.model.templates.L10n;
 import com.aionemu.gameserver.model.templates.stats.PetStatsTemplate;
 
 /**
@@ -17,7 +18,7 @@ import com.aionemu.gameserver.model.templates.stats.PetStatsTemplate;
  */
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlRootElement(name = "pet")
-public class PetTemplate {
+public class PetTemplate implements L10n {
 
 	@XmlAttribute(name = "id", required = true)
 	private int id;
@@ -48,7 +49,8 @@ public class PetTemplate {
 		return name;
 	}
 
-	public int getNameId() {
+	@Override
+	public int getL10nId() {
 		return nameId;
 	}
 

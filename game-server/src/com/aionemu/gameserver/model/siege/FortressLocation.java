@@ -4,7 +4,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.aionemu.gameserver.model.DescriptionId;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Kisk;
@@ -60,13 +59,6 @@ public class FortressLocation extends SiegeLocation {
 	 */
 	public boolean isEnemy(Creature creature) {
 		return creature.getRace().getRaceId() != getRace().getRaceId();
-	}
-
-	/**
-	 * @return DescriptionId object with fortress name
-	 */
-	public DescriptionId getNameAsDescriptionId() {
-		return new DescriptionId(template.getNameId());
 	}
 
 	@Override

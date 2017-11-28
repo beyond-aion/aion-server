@@ -19,7 +19,6 @@ import com.aionemu.gameserver.controllers.attack.AttackStatus;
 import com.aionemu.gameserver.controllers.observer.DieObserver;
 import com.aionemu.gameserver.controllers.observer.StartMovingListener;
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.model.DescriptionId;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -186,7 +185,7 @@ public class Skill {
 			}
 
 			if (skillMethod == SkillMethod.ITEM && castDuration > 0 && player.getMoveController().isInMove()) {
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_CANCELED(new DescriptionId(getItemTemplate().getNameId())));
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_CANCELED());
 				return false;
 			}
 		}
@@ -755,7 +754,7 @@ public class Skill {
 		endCondCheck();
 
 		if (getSkillTemplate().isDeityAvatar() && effector instanceof Player) {
-			AbyssService.rankerSkillAnnounce((Player) effector, getSkillTemplate().getNameId());
+			AbyssService.announceAbyssSkillUsage((Player) effector, getSkillTemplate().getL10n());
 		}
 
 		effector.getAi().onEndUseSkill(skillTemplate);
@@ -828,7 +827,7 @@ public class Skill {
 					break;
 			}
 			if (skillMethod == SkillMethod.ITEM && effector instanceof Player) {
-				PacketSendUtility.sendPacket((Player) effector, SM_SYSTEM_MESSAGE.STR_USE_ITEM(new DescriptionId(getItemTemplate().getNameId())));
+				PacketSendUtility.sendPacket((Player) effector, SM_SYSTEM_MESSAGE.STR_USE_ITEM(getItemTemplate().getL10n()));
 			}
 		} else if (skillMethod == SkillMethod.ITEM) {
 
@@ -836,7 +835,7 @@ public class Skill {
 			PacketSendUtility.broadcastPacketAndReceive(effector, new SM_ITEM_USAGE_ANIMATION(effector.getObjectId(), firstTarget.getObjectId(),
 				(this.itemObjectId == 0 ? 0 : this.itemObjectId), itemTemplate.getTemplateId(), 0, 1, 0));
 			if (effector instanceof Player)
-				PacketSendUtility.sendPacket((Player) effector, SM_SYSTEM_MESSAGE.STR_USE_ITEM(new DescriptionId(getItemTemplate().getNameId())));
+				PacketSendUtility.sendPacket((Player) effector, SM_SYSTEM_MESSAGE.STR_USE_ITEM(getItemTemplate().getL10n()));
 		}
 	}
 

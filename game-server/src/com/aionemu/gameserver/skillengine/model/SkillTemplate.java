@@ -11,6 +11,7 @@ import javax.xml.bind.annotation.XmlType;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.controllers.attack.AttackStatus;
 import com.aionemu.gameserver.dataholders.DataManager;
+import com.aionemu.gameserver.model.templates.L10n;
 import com.aionemu.gameserver.skillengine.action.Actions;
 import com.aionemu.gameserver.skillengine.condition.ChainCondition;
 import com.aionemu.gameserver.skillengine.condition.Condition;
@@ -31,7 +32,7 @@ import com.aionemu.gameserver.skillengine.properties.Properties;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "skillTemplate", propOrder = { "properties", "startconditions", "useconditions", "endconditions", "useequipmentconditions", "effects",
 	"actions", "periodicActions", "motion" })
-public class SkillTemplate {
+public class SkillTemplate implements L10n {
 
 	private Properties properties;
 	private Conditions startconditions;
@@ -200,7 +201,8 @@ public class SkillTemplate {
 	/**
 	 * @return the nameId
 	 */
-	public int getNameId() {
+	@Override
+	public int getL10nId() {
 		return nameId;
 	}
 

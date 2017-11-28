@@ -13,7 +13,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_HOUSE_EDIT;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_UPDATE_PLAYER_APPEARANCE;
 import com.aionemu.gameserver.services.item.ItemPacketService;
-import com.aionemu.gameserver.utils.ChatUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
@@ -51,10 +50,10 @@ public class DyeAction extends AbstractItemAction implements IHouseObjectDyeActi
 		else
 			targetItem.setColorExpireTime(0);
 		if (targetItem.getItemColor() == null) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_COLOR_REMOVE_SUCCEED(ChatUtil.nameId(targetItem.getNameId())));
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_COLOR_REMOVE_SUCCEED(targetItem.getL10n()));
 		} else {
 			PacketSendUtility.sendPacket(player,
-				SM_SYSTEM_MESSAGE.STR_ITEM_COLOR_CHANGE_SUCCEED(ChatUtil.nameId(targetItem.getNameId()), ChatUtil.nameId(parentItem.getNameId())));
+				SM_SYSTEM_MESSAGE.STR_ITEM_COLOR_CHANGE_SUCCEED(targetItem.getL10n(), parentItem.getL10n()));
 		}
 
 		// item is equipped, so need broadcast packet
@@ -101,11 +100,11 @@ public class DyeAction extends AbstractItemAction implements IHouseObjectDyeActi
 		PacketSendUtility.sendPacket(player, new SM_HOUSE_EDIT(7, 0, targetHouseObject.getObjectId()));
 		PacketSendUtility.sendPacket(player, new SM_HOUSE_EDIT(5, targetHouseObject.getObjectId(), x, y, z, rotation));
 		targetHouseObject.spawn();
-		int objectName = targetHouseObject.getObjectTemplate().getNameId();
+		String objectName = targetHouseObject.getObjectTemplate().getL10n();
 		if (targetHouseObject.getColor() == null) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_ITEM_PAINT_REMOVE_SUCCEED(objectName));
 		} else {
-			int paintName = parentItem.getItemTemplate().getNameId();
+			String paintName = parentItem.getItemTemplate().getL10n();
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_ITEM_PAINT_SUCCEED(objectName, paintName));
 		}
 	}

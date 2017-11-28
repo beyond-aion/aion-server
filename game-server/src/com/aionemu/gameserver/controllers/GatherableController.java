@@ -24,6 +24,7 @@ import com.aionemu.gameserver.services.PunishmentService;
 import com.aionemu.gameserver.services.RespawnService;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.task.GatheringTask;
+import com.aionemu.gameserver.utils.ChatUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.captcha.CAPTCHAUtil;
@@ -156,13 +157,13 @@ public class GatherableController extends VisibleObjectController<Gatherable> {
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GATHER_INCORRECT_SKILL());
 			} else {
 				PacketSendUtility.sendPacket(player,
-					SM_SYSTEM_MESSAGE.STR_GATHER_LEARN_SKILL(DataManager.SKILL_DATA.getSkillTemplate(harvestSkillId).getNameId()));
+					SM_SYSTEM_MESSAGE.STR_GATHER_LEARN_SKILL(DataManager.SKILL_DATA.getSkillTemplate(harvestSkillId).getL10n()));
 			}
 			return false;
 		}
 		if (player.getSkillList().getSkillLevel(harvestSkillId) < template.getSkillLevel()) {
 			PacketSendUtility.sendPacket(player,
-				SM_SYSTEM_MESSAGE.STR_GATHER_OUT_OF_SKILL_POINT(DataManager.SKILL_DATA.getSkillTemplate(harvestSkillId).getNameId()));
+				SM_SYSTEM_MESSAGE.STR_GATHER_OUT_OF_SKILL_POINT(DataManager.SKILL_DATA.getSkillTemplate(harvestSkillId).getL10n()));
 			return false;
 		}
 		return true;
@@ -183,7 +184,8 @@ public class GatherableController extends VisibleObjectController<Gatherable> {
 
 			} else if (template.getCheckType() == 2) {
 				if (player.getInventory().getItemCountByItemId(template.getRequiredItemId()) < template.getEraseValue()) {
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANT_GATHERING_B_ITEM_CHECK(template.getRequiredItemNameId()));
+					String requiredItemL10n = ChatUtil.l10n(template.getRequiredItemNameId());
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANT_GATHERING_B_ITEM_CHECK(requiredItemL10n));
 					return 0;
 				} else
 					return 1;
@@ -234,7 +236,7 @@ public class GatherableController extends VisibleObjectController<Gatherable> {
 				player.getCommonData().addExp(xpReward, Rates.XP_GATHERING);
 			} else
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE
-					.STR_MSG_DONT_GET_PRODUCTION_EXP(DataManager.SKILL_DATA.getSkillTemplate(getOwner().getObjectTemplate().getHarvestSkill()).getNameId()));
+					.STR_MSG_DONT_GET_PRODUCTION_EXP(DataManager.SKILL_DATA.getSkillTemplate(getOwner().getObjectTemplate().getHarvestSkill()).getL10n()));
 		}
 	}
 

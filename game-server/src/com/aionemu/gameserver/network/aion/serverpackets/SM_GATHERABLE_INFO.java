@@ -35,7 +35,7 @@ public class SM_GATHERABLE_INFO extends AionServerPacket {
 			writeH(1);
 		}
 		writeC(visibleObject.getSpawn().getHeading());
-		writeD(visibleObject.getObjectTemplate().getNameId());
+		writeD(visibleObject.getObjectTemplate().getL10nId());
 		writeH(0);
 		writeH(0);
 		writeH(0);

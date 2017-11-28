@@ -6,7 +6,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.model.DescriptionId;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
@@ -70,8 +69,8 @@ public class ItemOrders extends AbstractTemplateQuestHandler {
 					if (player.getInventory().getItemCountByItemId(startItemId) > 0) {
 						QuestService.startQuest(env);
 					} else {
-						int requiredItemNameId = DataManager.ITEM_DATA.getItemTemplate(startItemId).getNameId();
-						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_INVENTORY_ITEM(new DescriptionId(requiredItemNameId)));
+						String requiredItemL10n = DataManager.ITEM_DATA.getItemTemplate(startItemId).getL10n();
+						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_INVENTORY_ITEM(requiredItemL10n));
 					}
 					return closeDialogWindow(env);
 				default:

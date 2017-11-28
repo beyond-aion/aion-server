@@ -25,7 +25,7 @@ public class PackAction extends AbstractItemAction {
 			return false;
 		}
 		if (targetItem.getItemTemplate().getPackCount() == 0) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_PACK_ITEM_CANNOT(targetItem.getNameId()));
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_PACK_ITEM_CANNOT(targetItem.getL10n()));
 			return false;
 		}
 		if (targetItem.isEquipped()) {
@@ -49,12 +49,12 @@ public class PackAction extends AbstractItemAction {
 			return false;
 		}
 		if (targetItem.getItemTemplate().getItemQuality().getQualityId() > parentItem.getItemTemplate().getItemQuality().getQualityId()) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_PACK_ITEM_WRONG_QUALITY(parentItem.getNameId(), targetItem.getNameId()));
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_PACK_ITEM_WRONG_QUALITY(parentItem.getL10n(), targetItem.getL10n()));
 			return false;
 		}
 		if (targetItem.getItemTemplate().getLevel() > parentItem.getItemTemplate().getLevel()) {
 			PacketSendUtility.sendPacket(player,
-				SM_SYSTEM_MESSAGE.STR_MSG_PACK_ITEM_WRONG_LEVEL(targetItem.getNameId(), targetItem.getItemTemplate().getLevel()));
+				SM_SYSTEM_MESSAGE.STR_MSG_PACK_ITEM_WRONG_LEVEL(targetItem.getL10n(), targetItem.getItemTemplate().getLevel()));
 			return false;
 		}
 		UseTarget type = null;
@@ -140,7 +140,7 @@ public class PackAction extends AbstractItemAction {
 		targetItem.setPackCount(++packCount);
 		targetItem.setPersistentState(PersistentState.UPDATE_REQUIRED);
 		PacketSendUtility.sendPacket(player, new SM_INVENTORY_UPDATE_ITEM(player, targetItem));
-		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_PACK_ITEM_SUCCEED(targetItem.getNameId()));
+		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_PACK_ITEM_SUCCEED(targetItem.getL10n()));
 	}
 
 	public UseTarget getTarget() {

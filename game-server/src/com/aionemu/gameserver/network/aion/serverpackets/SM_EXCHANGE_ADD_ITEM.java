@@ -31,7 +31,7 @@ public class SM_EXCHANGE_ADD_ITEM extends AionServerPacket {
 
 		writeD(itemTemplate.getTemplateId());
 		writeD(item.getObjectId());
-		writeNameId(itemTemplate.getNameId());
+		writeS(itemTemplate.getL10n());
 
 		ItemInfoBlob itemInfoBlob = ItemInfoBlob.getFullBlob(player, item);
 		itemInfoBlob.writeMe(getBuf());

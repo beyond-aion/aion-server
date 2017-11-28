@@ -57,7 +57,7 @@ public abstract class AbstractHouseObject extends VisibleObjectTemplate {
 	}
 
 	@Override
-	public int getNameId() {
+	public int getL10nId() {
 		return nameId;
 	}
 

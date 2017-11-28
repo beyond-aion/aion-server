@@ -15,6 +15,9 @@ import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_MESSAGE;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_QUESTION_WINDOW;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.WorldMapType;
 import com.aionemu.gameserver.world.WorldPosition;
@@ -82,11 +85,16 @@ public class ChatUtil {
 	}
 
 	/**
-	 * This displays the name of the given name ID in chat.<br>
-	 * Keep in mind that some nameIds need to be calculated beforehand, e.g. for npcs (nameId * 2 + 1).
+	 * @return String identifier for the localized client string with the given ID.<br/>
+	 *         The client will display the corresponding localized message instead of the string identifier. This works with {@link SM_MESSAGE} (only if
+	 *         the senderObjectId is 0), {@link SM_SYSTEM_MESSAGE} and {@link SM_QUESTION_WINDOW},
 	 */
-	public static String nameId(int nameId) {
-		return "$" + new String(new char[] { (char) (nameId & 0xFFFF), (char) ((nameId >>> 16) & 0xFFFF) });
+	public static String l10n(int l10nId) {
+		if (l10nId == 0)
+			return null;
+		l10nId = l10nId << 1 | 1; // client wants the rightmost bit = 1, followed by the id (effectively = l10nId * 2 + 1)
+		String idAsFourBytesString = new String(new char[] { (char) (l10nId & 0xFFFF), (char) ((l10nId >>> 16) & 0xFFFF) });
+		return "$" + idAsFourBytesString;
 	}
 
 	/**

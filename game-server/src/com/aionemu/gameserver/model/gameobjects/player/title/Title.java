@@ -48,7 +48,7 @@ public class Title implements Expirable {
 	@Override
 	public void onExpire(Player player) {
 		player.getTitleList().removeTitle(id);
-		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_DELETE_CASH_TITLE_BY_TIMEOUT(template.getNameId()));
+		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_DELETE_CASH_TITLE_BY_TIMEOUT(template.getL10n()));
 	}
 
 }

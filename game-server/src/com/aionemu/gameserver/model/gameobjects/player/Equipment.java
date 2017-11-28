@@ -16,7 +16,6 @@ import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.controllers.observer.ActionObserver;
 import com.aionemu.gameserver.controllers.observer.ObserverType;
 import com.aionemu.gameserver.dao.InventoryDAO;
-import com.aionemu.gameserver.model.DescriptionId;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.TaskId;
@@ -44,6 +43,7 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.services.StigmaService;
 import com.aionemu.gameserver.services.item.ItemPacketService;
 import com.aionemu.gameserver.services.item.ItemPacketService.ItemUpdateType;
+import com.aionemu.gameserver.utils.ChatUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
@@ -94,13 +94,13 @@ public class Equipment {
 		// don't allow to wear items of not allowed level
 		int requiredLevel = itemTemplate.getRequiredLevel(owner.getPlayerClass());
 		if (requiredLevel == -1 || requiredLevel > owner.getLevel()) {
-			PacketSendUtility.sendPacket(owner, STR_CANNOT_USE_ITEM_TOO_LOW_LEVEL_MUST_BE_THIS_LEVEL(item.getNameId(), requiredLevel));
+			PacketSendUtility.sendPacket(owner, STR_CANNOT_USE_ITEM_TOO_LOW_LEVEL_MUST_BE_THIS_LEVEL(item.getL10n(), requiredLevel));
 			return null;
 		}
 
 		byte levelRestrict = itemTemplate.getMaxLevelRestrict(owner.getPlayerClass());
 		if (levelRestrict != 0 && owner.getLevel() > levelRestrict) {
-			PacketSendUtility.sendPacket(owner, STR_CANNOT_USE_ITEM_TOO_HIGH_LEVEL(levelRestrict, itemTemplate.getNameId()));
+			PacketSendUtility.sendPacket(owner, STR_CANNOT_USE_ITEM_TOO_HIGH_LEVEL(levelRestrict, itemTemplate.getL10n()));
 			return null;
 		}
 
@@ -116,7 +116,7 @@ public class Equipment {
 		}
 
 		if (!verifyRankLimits(item)) {
-			PacketSendUtility.sendPacket(owner, STR_CANNOT_USE_ITEM_INVALID_RANK(AbyssRankEnum.getRankById(limits.getMinRank()).getDescriptionId()));
+			PacketSendUtility.sendPacket(owner, STR_CANNOT_USE_ITEM_INVALID_RANK(AbyssRankEnum.getRankL10n(owner.getRace(), limits.getMinRank())));
 			return null;
 		}
 
@@ -845,25 +845,28 @@ public class Equipment {
 	 * @return
 	 */
 	private boolean soulBindItem(final Player player, final Item item, final long slot) {
-		if (player.getInventory().getItemByObjId(item.getObjectId()) == null || player.isInState(CreatureState.GLIDING))
+		if (player.getInventory().getItemByObjId(item.getObjectId()) == null)
 			return false;
 		if (player.isDead()) {
-			PacketSendUtility.sendPacket(player, STR_SOUL_BOUND_INVALID_STANCE(2800119));
+			PacketSendUtility.sendPacket(player, STR_SOUL_BOUND_INVALID_STANCE(ChatUtil.l10n(1400059)));
 			return false;
 		} else if (player.isInPlayerMode(PlayerMode.RIDE)) {
-			PacketSendUtility.sendPacket(player, STR_SOUL_BOUND_INVALID_STANCE(2800114));
+			PacketSendUtility.sendPacket(player, STR_SOUL_BOUND_INVALID_STANCE(ChatUtil.l10n(1400056)));
 			return false;
 		} else if (player.isInState(CreatureState.CHAIR)) {
-			PacketSendUtility.sendPacket(player, STR_SOUL_BOUND_INVALID_STANCE(2800117));
+			PacketSendUtility.sendPacket(player, STR_SOUL_BOUND_INVALID_STANCE(ChatUtil.l10n(1400058)));
 			return false;
 		} else if (player.isInState(CreatureState.RESTING)) {
-			PacketSendUtility.sendPacket(player, STR_SOUL_BOUND_INVALID_STANCE(2800115));
+			PacketSendUtility.sendPacket(player, STR_SOUL_BOUND_INVALID_STANCE(ChatUtil.l10n(1400057)));
+			return false;
+		} else if (player.isInState(CreatureState.GLIDING)) {
+			PacketSendUtility.sendPacket(player, STR_SOUL_BOUND_INVALID_STANCE(ChatUtil.l10n(1400082)));
 			return false;
 		} else if (player.isInState(CreatureState.FLYING)) {
-			PacketSendUtility.sendPacket(player, STR_SOUL_BOUND_INVALID_STANCE(2800111));
+			PacketSendUtility.sendPacket(player, STR_SOUL_BOUND_INVALID_STANCE(ChatUtil.l10n(1400055)));
 			return false;
 		} else if (player.isInState(CreatureState.WEAPON_EQUIPPED)) {
-			PacketSendUtility.sendPacket(player, STR_SOUL_BOUND_INVALID_STANCE(2800159));
+			PacketSendUtility.sendPacket(player, STR_SOUL_BOUND_INVALID_STANCE(ChatUtil.l10n(1400079)));
 			return false;
 		}
 
@@ -883,7 +886,7 @@ public class Equipment {
 					@Override
 					public void moved() {
 						responder.getController().cancelTask(TaskId.ITEM_USE);
-						PacketSendUtility.sendPacket(responder, STR_SOUL_BOUND_ITEM_CANCELED(item.getNameId()));
+						PacketSendUtility.sendPacket(responder, STR_SOUL_BOUND_ITEM_CANCELED(item.getL10n()));
 						PacketSendUtility.broadcastPacket(responder,
 							new SM_ITEM_USAGE_ANIMATION(responder.getObjectId(), item.getObjectId(), item.getItemId(), 0, 8), true);
 					}
@@ -899,7 +902,7 @@ public class Equipment {
 
 						PacketSendUtility.broadcastPacket(responder,
 							new SM_ITEM_USAGE_ANIMATION(responder.getObjectId(), item.getObjectId(), item.getItemId(), 0, 6), true);
-						PacketSendUtility.sendPacket(responder, STR_SOUL_BOUND_ITEM_SUCCEED(item.getNameId()));
+						PacketSendUtility.sendPacket(responder, STR_SOUL_BOUND_ITEM_SUCCEED(item.getL10n()));
 
 						item.setSoulBound(true);
 						ItemPacketService.updateItemAfterInfoChange(owner, item);
@@ -912,14 +915,14 @@ public class Equipment {
 
 			@Override
 			public void denyRequest(Player requester, Player responder) {
-				PacketSendUtility.sendPacket(responder, STR_SOUL_BOUND_ITEM_CANCELED(item.getNameId()));
+				PacketSendUtility.sendPacket(responder, STR_SOUL_BOUND_ITEM_CANCELED(item.getL10n()));
 			}
 		};
 
 		boolean requested = player.getResponseRequester().putRequest(SM_QUESTION_WINDOW.STR_SOUL_BOUND_ITEM_DO_YOU_WANT_SOUL_BOUND, responseHandler);
 		if (requested) {
 			PacketSendUtility.sendPacket(player,
-				new SM_QUESTION_WINDOW(SM_QUESTION_WINDOW.STR_SOUL_BOUND_ITEM_DO_YOU_WANT_SOUL_BOUND, 0, 0, new DescriptionId(item.getNameId())));
+				new SM_QUESTION_WINDOW(SM_QUESTION_WINDOW.STR_SOUL_BOUND_ITEM_DO_YOU_WANT_SOUL_BOUND, 0, 0, item.getL10n()));
 		} else {
 			PacketSendUtility.sendPacket(player, STR_SOUL_BOUND_CLOSE_OTHER_MSG_BOX_AND_RETRY());
 		}
@@ -939,7 +942,7 @@ public class Equipment {
 		for (Item item : getEquippedItems()) {
 			if (!verifyRankLimits(item)) {
 				unEquipItem(item.getObjectId(), false);
-				PacketSendUtility.sendPacket(owner, STR_MSG_UNEQUIP_RANKITEM(item.getNameId()));
+				PacketSendUtility.sendPacket(owner, STR_MSG_UNEQUIP_RANKITEM(item.getL10n()));
 				// TODO: Check retail what happens with full inv and the task msgs.
 			}
 		}

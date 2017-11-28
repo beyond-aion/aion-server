@@ -1,7 +1,6 @@
 package com.aionemu.gameserver.model.siege;
 
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.model.DescriptionId;
 import com.aionemu.gameserver.model.templates.siegelocation.ArtifactActivation;
 import com.aionemu.gameserver.model.templates.siegelocation.SiegeLocationTemplate;
 import com.aionemu.gameserver.services.SiegeService;
@@ -52,16 +51,12 @@ public class ArtifactLocation extends SiegeLocation {
 	}
 
 	/**
-	 * Returns DescriptionId that describes name of this artifact.<br>
-	 *
-	 * @return DescriptionId with name
+	 * @return L10N that describes name of this artifact (for chat usage)
 	 */
-	public DescriptionId getNameAsDescriptionId() {
-		// Get Skill id, item, count and target defined for each artifact.
+	public String getL10n() {
 		ArtifactActivation activation = getTemplate().getActivation();
-		int skillId = activation.getSkillId();
-		SkillTemplate skillTemplate = DataManager.SKILL_DATA.getSkillTemplate(skillId);
-		return new DescriptionId(skillTemplate.getNameId());
+		SkillTemplate skillTemplate = DataManager.SKILL_DATA.getSkillTemplate(activation.getSkillId());
+		return skillTemplate.getL10n();
 	}
 
 	public boolean isStandAlone() {

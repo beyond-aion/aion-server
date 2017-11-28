@@ -2,7 +2,6 @@ package com.aionemu.gameserver.network.aion.clientpackets;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.controllers.observer.ItemUseObserver;
-import com.aionemu.gameserver.model.DescriptionId;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.PersistentState;
@@ -70,7 +69,6 @@ public class CM_TUNE extends AionClientPacket {
 			return;
 		}
 
-		final int nameId = template.getNameId();
 		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), item.getObjectId(), itemId, 5000, 9, 0), true);
 		final ItemUseObserver observer = new ItemUseObserver() {
 
@@ -78,7 +76,7 @@ public class CM_TUNE extends AionClientPacket {
 			public void abort() {
 				player.getController().cancelTask(TaskId.ITEM_USE);
 				player.removeItemCoolDown(template.getUseLimits().getDelayId());
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_CANCELED(new DescriptionId(nameId)));
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_CANCELED());
 				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjectId, itemId, 0, 11, 0), true);
 				player.getObserveController().removeObserver(this);
 			}
@@ -99,7 +97,7 @@ public class CM_TUNE extends AionClientPacket {
 				item.setPersistentState(PersistentState.UPDATE_REQUIRED);
 				player.getInventory().setPersistentState(PersistentState.UPDATE_REQUIRED);
 				PacketSendUtility.sendPacket(player, new SM_INVENTORY_UPDATE_ITEM(player, item));
-				PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1401626, new DescriptionId(nameId)));
+				PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1401626, template.getL10n()));
 			}
 
 		}, 5000));

@@ -2,7 +2,6 @@ package instance.dredgion;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.instance.handlers.InstanceID;
-import com.aionemu.gameserver.model.DescriptionId;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.actions.NpcActions;
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -54,8 +53,7 @@ public class TerathDredgionInstance2 extends DredgionInstance2 {
 		Race race = mostPlayerDamage.getRace();
 		captureRoom(race, npc.getNpcId() + 14 - 701454);
 		for (Player player : instance.getPlayersInside()) {
-			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1400199, new DescriptionId(race.equals(Race.ASMODIANS) ? 1800483 : 1800481),
-				new DescriptionId(npc.getObjectTemplate().getNameId() * 2 + 1)));
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_INSTANCE_ROOM_DESTROYED(race.getL10n(), npc.getObjectTemplate().getL10n()));
 		}
 		if (++surkanKills == 5) {
 			spawn(233371, 485.423f, 808.826f, 416.868f, (byte) 30);

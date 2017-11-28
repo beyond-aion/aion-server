@@ -21,10 +21,7 @@ public class Id extends PlayerCommand {
 	public Id() {
 		super("id", "Shows item/quest/npc IDs.");
 
-		setSyntaxInfo(
-			" - Shows the ID of the selected npc.",
-			"<item|quest> - Shows the ID of the specified item or quest."
-		);
+		setSyntaxInfo(" - Shows the ID of the selected npc.", "<item|quest> - Shows the ID of the specified item or quest.");
 	}
 
 	@Override
@@ -43,8 +40,8 @@ public class Id extends PlayerCommand {
 			}
 
 			VisibleObjectTemplate template = target.getObjectTemplate();
-			sendInfo(player, target.getClass().getSimpleName() + ": "
-				+ ChatUtil.path(ChatUtil.nameId(template.getNameId() * 2 + 1) + " | " + template.getTemplateId(), template.getTemplateId()));
+			sendInfo(player,
+				target.getClass().getSimpleName() + ": " + ChatUtil.path(template.getL10n() + " | " + template.getTemplateId(), template.getTemplateId()));
 			return;
 		} else {
 			int id = ChatUtil.getItemId(params[0]);
@@ -54,7 +51,7 @@ public class Id extends PlayerCommand {
 					sendInfo(player, "Invalid item.");
 					return;
 				}
-				sendInfo(player, "Item: " + ChatUtil.nameId(template.getNameId()) + "\nID: " + id);
+				sendInfo(player, "Item: " + template.getL10n() + "\nID: " + id);
 				return;
 			}
 
@@ -65,7 +62,7 @@ public class Id extends PlayerCommand {
 					sendInfo(player, "Invalid quest.");
 					return;
 				}
-				sendInfo(player, "Quest: " + ChatUtil.nameId(template.getNameId() * 2 + 1) + "\nID: " + id);
+				sendInfo(player, "Quest: " + template.getL10n() + "\nID: " + id);
 				return;
 			}
 		}

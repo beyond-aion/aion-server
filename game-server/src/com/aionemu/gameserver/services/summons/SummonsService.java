@@ -43,7 +43,7 @@ public class SummonsService {
 	/**
 	 * Release summon
 	 */
-	public static final void release(final Summon summon, final UnsummonType unsummonType, final boolean isAttacked) {
+	public static final void release(Summon summon, UnsummonType unsummonType, boolean isAttacked) {
 		if (summon.getMode() == SummonMode.RELEASE)
 			return;
 		summon.getController().cancelCurrentSkill(null);
@@ -51,7 +51,7 @@ public class SummonsService {
 		final Player master = summon.getMaster();
 		switch (unsummonType) {
 			case COMMAND:
-				PacketSendUtility.sendPacket(master, SM_SYSTEM_MESSAGE.STR_SKILL_SUMMON_UNSUMMON_FOLLOWER(summon.getNameId()));
+				PacketSendUtility.sendPacket(master, SM_SYSTEM_MESSAGE.STR_SKILL_SUMMON_UNSUMMON_FOLLOWER(summon.getL10n()));
 				PacketSendUtility.sendPacket(master, new SM_SUMMON_UPDATE(summon));
 				break;
 			case DISTANCE:
@@ -97,7 +97,7 @@ public class SummonsService {
 				case COMMAND:
 				case DISTANCE:
 				case UNSPECIFIED:
-					PacketSendUtility.sendPacket(master, SM_SYSTEM_MESSAGE.STR_SKILL_SUMMON_UNSUMMONED(owner.getNameId()));
+					PacketSendUtility.sendPacket(master, SM_SYSTEM_MESSAGE.STR_SKILL_SUMMON_UNSUMMONED(owner.getL10n()));
 					PacketSendUtility.sendPacket(master, new SM_SUMMON_PANEL_REMOVE(summonedBySkillId));
 					PacketSendUtility.sendPacket(master, new SM_SUMMON_OWNER_REMOVE(owner.getObjectId()));
 
@@ -129,16 +129,16 @@ public class SummonsService {
 	/**
 	 * Change to rest mode
 	 */
-	public static final void restMode(final Summon summon) {
+	public static final void restMode(Summon summon) {
 		summon.getController().cancelCurrentSkill(null);
 		summon.setMode(SummonMode.REST);
 		Player master = summon.getMaster();
-		PacketSendUtility.sendPacket(master, SM_SYSTEM_MESSAGE.STR_SKILL_SUMMON_REST_MODE(summon.getNameId()));
+		PacketSendUtility.sendPacket(master, SM_SYSTEM_MESSAGE.STR_SKILL_SUMMON_REST_MODE(summon.getL10n()));
 		PacketSendUtility.sendPacket(master, new SM_SUMMON_UPDATE(summon));
 		summon.getLifeStats().triggerRestoreTask();
 	}
 
-	public static final void setUnkMode(final Summon summon) {
+	public static final void setUnkMode(Summon summon) {
 		summon.setMode(SummonMode.UNK);
 		Player master = summon.getMaster();
 		PacketSendUtility.sendPacket(master, new SM_SUMMON_UPDATE(summon));
@@ -147,11 +147,11 @@ public class SummonsService {
 	/**
 	 * Change to guard mode
 	 */
-	public static final void guardMode(final Summon summon) {
+	public static final void guardMode(Summon summon) {
 		summon.getController().cancelCurrentSkill(null);
 		summon.setMode(SummonMode.GUARD);
 		Player master = summon.getMaster();
-		PacketSendUtility.sendPacket(master, SM_SYSTEM_MESSAGE.STR_SKILL_SUMMON_GUARD_MODE(summon.getNameId()));
+		PacketSendUtility.sendPacket(master, SM_SYSTEM_MESSAGE.STR_SKILL_SUMMON_GUARD_MODE(summon.getL10n()));
 		PacketSendUtility.sendPacket(master, new SM_SUMMON_UPDATE(summon));
 		summon.getLifeStats().triggerRestoreTask();
 	}
@@ -159,10 +159,10 @@ public class SummonsService {
 	/**
 	 * Change to attackMode
 	 */
-	public static final void attackMode(final Summon summon) {
+	public static final void attackMode(Summon summon) {
 		summon.setMode(SummonMode.ATTACK);
 		Player master = summon.getMaster();
-		PacketSendUtility.sendPacket(master, SM_SYSTEM_MESSAGE.STR_SKILL_SUMMON_ATTACK_MODE(summon.getNameId()));
+		PacketSendUtility.sendPacket(master, SM_SYSTEM_MESSAGE.STR_SKILL_SUMMON_ATTACK_MODE(summon.getL10n()));
 		PacketSendUtility.sendPacket(master, new SM_SUMMON_UPDATE(summon));
 		summon.getLifeStats().cancelRestoreTask();
 	}

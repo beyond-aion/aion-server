@@ -68,9 +68,9 @@ public class TitleList {
 				return false;
 			}
 			if (questReward)
-				PacketSendUtility.sendPacket(owner, SM_SYSTEM_MESSAGE.STR_QUEST_GET_REWARD_TITLE(tt.getNameId()));
+				PacketSendUtility.sendPacket(owner, SM_SYSTEM_MESSAGE.STR_QUEST_GET_REWARD_TITLE(tt.getL10n()));
 			else
-				PacketSendUtility.sendPacket(owner, SM_SYSTEM_MESSAGE.STR_MSG_GET_CASH_TITLE(tt.getNameId()));
+				PacketSendUtility.sendPacket(owner, SM_SYSTEM_MESSAGE.STR_MSG_GET_CASH_TITLE(tt.getL10n()));
 
 			PacketSendUtility.sendPacket(owner, new SM_TITLE_INFO(owner));
 			return true;

@@ -9,7 +9,6 @@ import javax.xml.bind.annotation.XmlList;
 import javax.xml.bind.annotation.XmlType;
 
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.model.DescriptionId;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.QuestStateList;
 import com.aionemu.gameserver.model.templates.QuestTemplate;
@@ -110,8 +109,8 @@ public class XMLStartCondition {
 		if (equipped != null && equipped.size() > 0) {
 			for (int itemId : equipped) {
 				if (!player.getEquipment().getEquippedItemIds().contains(itemId)) {
-					int requiredItemNameId = DataManager.ITEM_DATA.getItemTemplate(itemId).getNameId();
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_EQUIP_ITEM(new DescriptionId(requiredItemNameId)));
+					String requiredItem = DataManager.ITEM_DATA.getItemTemplate(itemId).getL10n();
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_EQUIP_ITEM(requiredItem));
 					return false;
 				}
 			}

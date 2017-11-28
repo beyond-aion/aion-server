@@ -9,7 +9,6 @@ import com.aionemu.gameserver.configs.main.GeoDataConfig;
 import com.aionemu.gameserver.configs.main.SecurityConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.dataholders.PlayerInitialData;
-import com.aionemu.gameserver.model.DescriptionId;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.TaskId;
@@ -511,7 +510,7 @@ public class TeleportService {
 		if (!player.getResponseRequester().putRequest(questionMsgId, handler))
 			return false;
 		PacketSendUtility.sendPacket(player,
-			new SM_QUESTION_WINDOW(questionMsgId, 0, 0, new DescriptionId(DataManager.NPC_DATA.getNpcTemplate(npcId).getNameId() * 2 + 1)));
+			new SM_QUESTION_WINDOW(questionMsgId, 0, 0, DataManager.NPC_DATA.getNpcTemplate(npcId).getL10n()));
 		return true;
 	}
 

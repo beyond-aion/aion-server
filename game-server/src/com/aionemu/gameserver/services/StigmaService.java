@@ -10,7 +10,6 @@ import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.configs.main.MembershipConfig;
 import com.aionemu.gameserver.controllers.observer.ItemUseObserver;
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.model.DescriptionId;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Item;
@@ -143,27 +142,35 @@ public class StigmaService {
 	}
 
 	public static void removeLinkedStigmaSkills(Player player) {
-		List<PlayerSkillEntry> linkedStigmaSkill = new ArrayList<>();
+		List<PlayerSkillEntry> linkedStigmaSkills = new ArrayList<>();
 		while (true) { // remove all linked stigma skills (can be more than one if stigma auto learning is enabled)
 			String stack = null;
-			linkedStigmaSkill.clear();
+			linkedStigmaSkills.clear();
 			for (PlayerSkillEntry skill : player.getSkillList().getAllSkills()) {
 				if (skill.isLinkedStigmaSkill()) {
 					SkillTemplate skillTemplate = DataManager.SKILL_DATA.getSkillTemplate(skill.getSkillId());
 					if (stack == null)
 						stack = skillTemplate.getStack();
 					if (skillTemplate.getStack().equalsIgnoreCase(stack))
-						linkedStigmaSkill.add(skill);
+						linkedStigmaSkills.add(skill);
 					if (stack.equalsIgnoreCase("NONE"))
 						break;
 				}
 			}
-			if (linkedStigmaSkill.size() == 0)
+			if (linkedStigmaSkills.isEmpty())
 				break;
-			for (PlayerSkillEntry skillEntry : linkedStigmaSkill)
+			String firstSkillL10n = null, secondSkillL10n = null;
+			int skillLevel = 0;
+			for (int i = 0; i < linkedStigmaSkills.size(); i++) {
+				PlayerSkillEntry skillEntry = linkedStigmaSkills.get(i);
 				SkillLearnService.removeSkill(player, skillEntry.getSkillId());
-			int nameId = DataManager.SKILL_DATA.getSkillTemplate(linkedStigmaSkill.get(0).getSkillId()).getNameId();
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_STIGMA_DELETE_HIDDEN_SKILL(nameId, linkedStigmaSkill.size()));
+				if (i == 0) {
+					firstSkillL10n = DataManager.SKILL_DATA.getSkillTemplate(skillEntry.getSkillId()).getL10n();
+					skillLevel = skillEntry.getSkillLevel();
+				} else if (i == 1)
+					secondSkillL10n = DataManager.SKILL_DATA.getSkillTemplate(skillEntry.getSkillId()).getL10n();
+			}
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_STIGMA_DELETE_HIDDEN_SKILL(firstSkillL10n, skillLevel, secondSkillL10n));
 		}
 	}
 
@@ -396,7 +403,6 @@ public class StigmaService {
 
 		final int parentItemId = stigma.getItemId();
 		final int parentObjectId = stigma.getObjectId();
-		final int parentNameId = stigma.getNameId();
 		PacketSendUtility.broadcastPacket(player,
 			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentObjectId, chargeStone.getObjectId(), parentItemId, 5000, 0, 0), true);
 		final ItemUseObserver observer = new ItemUseObserver() {
@@ -405,7 +411,7 @@ public class StigmaService {
 			public void abort() {
 				player.getController().cancelTask(TaskId.ITEM_USE);
 				player.removeItemCoolDown(stigma.getItemTemplate().getUseLimits().getDelayId());
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_CANCELED(new DescriptionId(parentNameId)));
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_CANCELED());
 				PacketSendUtility.broadcastPacket(player,
 					new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentObjectId, chargeStone.getObjectId(), parentItemId, 0, 2, 0), true);
 				player.getObserveController().removeObserver(this);
@@ -425,14 +431,14 @@ public class StigmaService {
 					if (stigma.isEquipped())
 						player.getEquipment().unEquipItem(stigma.getObjectId());
 					player.getInventory().decreaseByObjectId(stigma.getObjectId(), 1, ItemPacketService.ItemUpdateType.DEC_STIGMA_USE);
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_STIGMA_ENCHANT_FAIL(stigma.getNameId()));
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_STIGMA_ENCHANT_FAIL(stigma.getL10n()));
 				} else {
 					stigma.setEnchantLevel(stigma.getEnchantLevel() + 1);
 					if (stigma.isEquipped()) {
 						removeStigmaSkills(player, stigmaInfo, stigma.getEnchantLevel() - 1, false);
 						addStigmaSkills(player, stigmaInfo, stigma.getEnchantLevel());
 					}
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_STIGMA_ENCHANT_SUCCESS(stigma.getNameId()));
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_STIGMA_ENCHANT_SUCCESS(stigma.getL10n()));
 					PacketSendUtility.sendPacket(player, new SM_INVENTORY_UPDATE_ITEM(player, stigma));
 					if (stigma.getPersistentState() != PersistentState.DELETED) {
 						stigma.setPersistentState(PersistentState.UPDATE_REQUIRED);
@@ -455,17 +461,14 @@ public class StigmaService {
 						SkillLearnService.learnTemporarySkill(player, skill.getSkillId(), stigmaLevel + 1);
 	}
 
-	public static void removeStigmaSkills(Player player, Stigma stigma, int stigmaLevel, boolean onUnequip) {
+	public static void removeStigmaSkills(Player player, Stigma stigma, int stigmaLevel, boolean notifyPlayer) {
 		for (String skillGroup : stigma.getGainSkillGroups()) {
-			int nameId = 0;
 			for (SkillTemplate st : DataManager.SKILL_DATA.getSkillTemplatesByGroup(skillGroup)) {
-				if (onUnequip)
-					nameId = st.getNameId();
+				if (notifyPlayer && st.getL10n() != null)
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_STIGMA_YOU_CANNOT_USE_THIS_SKILL_AFTER_UNEQUIP_STIGMA_STONE(st.getL10n()));
 				for (SkillLearnTemplate skill : DataManager.SKILL_TREE_DATA.getTemplatesForSkill(st.getSkillId(), player.getPlayerClass(), player.getRace()))
 					SkillLearnService.removeSkill(player, skill.getSkillId());
 			}
-			if (nameId != 0)
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_STIGMA_YOU_CANNOT_USE_THIS_SKILL_AFTER_UNEQUIP_STIGMA_STONE(nameId));
 		}
 		removeLinkedStigmaSkills(player);
 	}

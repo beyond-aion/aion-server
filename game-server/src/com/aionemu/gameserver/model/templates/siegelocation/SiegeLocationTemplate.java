@@ -11,13 +11,14 @@ import javax.xml.bind.annotation.XmlList;
 import javax.xml.bind.annotation.XmlType;
 
 import com.aionemu.gameserver.model.siege.SiegeType;
+import com.aionemu.gameserver.model.templates.L10n;
 
 /**
  * @author Sarynth modified by antness & Source & Wakizashi
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "siegelocation")
-public class SiegeLocationTemplate {
+public class SiegeLocationTemplate implements L10n {
 
 	@XmlAttribute(name = "id")
 	protected int id;
@@ -98,7 +99,8 @@ public class SiegeLocationTemplate {
 	/**
 	 * @return the nameId
 	 */
-	public int getNameId() {
+	@Override
+	public int getL10nId() {
 		return nameId;
 	}
 

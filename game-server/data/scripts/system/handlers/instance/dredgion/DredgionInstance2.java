@@ -15,7 +15,6 @@ import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.ai.manager.WalkManager;
 import com.aionemu.gameserver.configs.main.GroupConfig;
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
-import com.aionemu.gameserver.model.DescriptionId;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -228,10 +227,9 @@ public class DredgionInstance2 extends GeneralInstanceHandler {
 		for (Player playerToGainScore : playersToGainScore) {
 			addPointToPlayer(playerToGainScore, points / playersToGainScore.size());
 			if (target instanceof Npc) {
-				PacketSendUtility.sendPacket(playerToGainScore, new SM_SYSTEM_MESSAGE(1400237, new DescriptionId(((Npc) target).getObjectTemplate()
-					.getNameId() * 2 + 1), points));
+				PacketSendUtility.sendPacket(playerToGainScore, SM_SYSTEM_MESSAGE.STR_MSG_GET_SCORE(((Npc) target).getObjectTemplate().getL10n(), points));
 			} else if (target instanceof Player) {
-				PacketSendUtility.sendPacket(playerToGainScore, new SM_SYSTEM_MESSAGE(1400237, target.getName(), points));
+				PacketSendUtility.sendPacket(playerToGainScore, SM_SYSTEM_MESSAGE.STR_MSG_GET_SCORE(target.getName(), points));
 			}
 		}
 
@@ -290,8 +288,8 @@ public class DredgionInstance2 extends GeneralInstanceHandler {
 
 	private void sendPacket() {
 		instance.forEachPlayer((Player player) -> {
-			PacketSendUtility.sendPacket(player, new SM_INSTANCE_SCORE(new DredgionScoreInfo(dredgionReward, instance.getPlayersInside()), dredgionReward,
-				getTime()));
+			PacketSendUtility.sendPacket(player,
+				new SM_INSTANCE_SCORE(new DredgionScoreInfo(dredgionReward, instance.getPlayersInside()), dredgionReward, getTime()));
 		});
 	}
 

@@ -20,7 +20,7 @@ public class SM_GATHER_UPDATE extends AionServerPacket {
 	private int itemId;
 	private int success;
 	private int failure;
-	private int nameId;
+	private String l10n;
 	private int executionSpeed;
 	private int delay;
 
@@ -32,7 +32,7 @@ public class SM_GATHER_UPDATE extends AionServerPacket {
 		this.failure = failure;
 		this.executionSpeed = executionSpeed;
 		this.delay = delay;
-		this.nameId = material.getNameId();
+		this.l10n = material.getL10n();
 	}
 
 	@Override
@@ -77,6 +77,6 @@ public class SM_GATHER_UPDATE extends AionServerPacket {
 	 */
 	private void writeSystemMsgInfo(int msgId) {
 		writeD(msgId); // msgId
-		writeNameId(nameId); // nameId
+		writeS(l10n); // parameter
 	}
 }

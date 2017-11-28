@@ -2,13 +2,15 @@ package com.aionemu.gameserver.model;
 
 import javax.xml.bind.annotation.XmlEnum;
 
+import com.aionemu.gameserver.model.templates.L10n;
+
 /**
  * This enum represent class that a player may belong to.
  * 
  * @author Luno
  */
 @XmlEnum
-public enum PlayerClass {
+public enum PlayerClass implements L10n {
 	WARRIOR(0, 240000, true),
 	GLADIATOR(1, 240001), // fighter
 	TEMPLAR(2, 240002), // knight
@@ -86,7 +88,7 @@ public enum PlayerClass {
 		throw new IllegalArgumentException("There is no player class with id " + classId);
 	}
 
-	public int getNameId() {
+	public int getL10nId() {
 		return nameId;
 	}
 

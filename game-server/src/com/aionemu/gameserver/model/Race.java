@@ -2,6 +2,8 @@ package com.aionemu.gameserver.model;
 
 import javax.xml.bind.annotation.XmlEnum;
 
+import com.aionemu.gameserver.model.templates.L10n;
+
 /**
  * Basic enum with races.<br>
  * I believe that NPCs will have their own races, so it's quite comfortable to have it in the same place
@@ -9,12 +11,12 @@ import javax.xml.bind.annotation.XmlEnum;
  * @author SoulKeeper
  */
 @XmlEnum
-public enum Race {
+public enum Race implements L10n {
 	/**
 	 * Playable races
 	 */
-	ELYOS(0, new DescriptionId(1800481)),
-	ASMODIANS(1, new DescriptionId(1800483)),
+	ELYOS(0, 900240),
+	ASMODIANS(1, 900241),
 
 	/**
 	 * Npc races
@@ -79,18 +81,18 @@ public enum Race {
 	LF5_Q_ITEM(46);
 
 	private int raceId;
-	private DescriptionId descriptionId;
+	private int l10nId;
 
 	/**
 	 * Constructors
 	 */
 	private Race(int raceId) {
-		this(raceId, null);
+		this(raceId, 0);
 	}
 
-	private Race(int raceId, DescriptionId descriptionId) {
+	private Race(int raceId, int l10nId) {
 		this.raceId = raceId;
-		this.descriptionId = descriptionId;
+		this.l10nId = l10nId;
 	}
 
 	/**
@@ -108,11 +110,9 @@ public enum Race {
 		return isAsmoOrEly() || this == PC_ALL;
 	}
 
-	public DescriptionId getRaceDescriptionId() {
-		if (descriptionId == null) {
-			throw new UnsupportedOperationException("Race name DescriptionId is unknown for race" + this);
-		}
-		return descriptionId;
+	@Override
+	public int getL10nId() {
+		return l10nId;
 	}
 
 	public static Race getRaceByString(String fieldName) {

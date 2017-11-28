@@ -93,13 +93,13 @@ public class CM_USE_ITEM extends AionClientPacket {
 
 		int requiredLevel = item.getItemTemplate().getRequiredLevel(player.getPlayerClass());
 		if (requiredLevel > player.getLevel()) {
-			PacketSendUtility.sendPacket(player, STR_CANNOT_USE_ITEM_TOO_LOW_LEVEL_MUST_BE_THIS_LEVEL(item.getNameId(), requiredLevel));
+			PacketSendUtility.sendPacket(player, STR_CANNOT_USE_ITEM_TOO_LOW_LEVEL_MUST_BE_THIS_LEVEL(item.getL10n(), requiredLevel));
 			return;
 		}
 
 		byte levelRestrict = item.getItemTemplate().getMaxLevelRestrict(player.getPlayerClass());
 		if (levelRestrict != 0 && player.getLevel() > levelRestrict) {
-			PacketSendUtility.sendPacket(player, STR_CANNOT_USE_ITEM_TOO_HIGH_LEVEL(levelRestrict, item.getNameId()));
+			PacketSendUtility.sendPacket(player, STR_CANNOT_USE_ITEM_TOO_HIGH_LEVEL(levelRestrict, item.getL10n()));
 			return;
 		}
 

@@ -4,7 +4,6 @@ import java.nio.ByteBuffer;
 
 import com.aionemu.commons.network.packet.BaseServerPacket;
 import com.aionemu.gameserver.network.Crypt;
-import com.aionemu.gameserver.utils.ChatUtil;
 
 /**
  * Base class for every GS -> Aion Server Packet.
@@ -89,21 +88,6 @@ public abstract class AionServerPacket extends BaseServerPacket {
 				buf.putChar(text.charAt(i));
 			buf.put(new byte[size - (len * 2)]);
 		}
-	}
-
-	/**
-	 * Writes a nameId (e.g. of items or skills) to show its name ingame. It's basically just writeS("$" + nameId) but nameId must not exceed 4 bytes
-	 * (in UTF-8 string form it would be 8 bytes long and the bytes would be inverted). That's why we send it byte-wise.
-	 * You could also send writeS({@link ChatUtil#nameId(nameId)}) but it would only create unnecessary overhead.
-	 * 
-	 * @param nameId
-	 */
-	protected final void writeNameId(int nameId) {
-		if (nameId > 0) {
-			writeH(0x24); // "$"
-			writeD(nameId);
-		}
-		writeH(0x00); // string end marker
 	}
 
 	/**

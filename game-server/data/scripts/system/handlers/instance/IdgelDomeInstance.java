@@ -9,7 +9,6 @@ import java.util.function.Consumer;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
 import com.aionemu.gameserver.instance.handlers.InstanceID;
-import com.aionemu.gameserver.model.DescriptionId;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -191,12 +190,12 @@ public class IdgelDomeInstance extends GeneralInstanceHandler {
 			spawnBossTask.cancel(true);
 	}
 
-	private void updatePoints(int points, Race race, boolean check, int nameId, Player player) {
+	private void updatePoints(int points, Race race, boolean check, String npcL10n, Player player) {
 		if (check && !idgelDomeReward.isStartProgress())
 			return;
 
-		if (nameId != 0)
-			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1400237, new DescriptionId(nameId * 2 + 1), points));
+		if (npcL10n != null)
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_GET_SCORE(npcL10n, points));
 			
 		idgelDomeReward.addPointsByRace(race, points);
 		sendPacket(new SM_INSTANCE_SCORE(new IdgelDomeScoreInfo(idgelDomeReward, 10, race.equals(Race.ELYOS) ? 0 : 1), idgelDomeReward, getTime()));
@@ -230,7 +229,7 @@ public class IdgelDomeInstance extends GeneralInstanceHandler {
 				break;
 		}
 		if (points > 0)
-			updatePoints(points, player.getRace(), true, npc.getObjectTemplate().getNameId(), player);
+			updatePoints(points, player.getRace(), true, npc.getObjectTemplate().getL10n(), player);
 	}
 
 	public void sendPacket(final AionServerPacket packet) {
@@ -289,14 +288,14 @@ public class IdgelDomeInstance extends GeneralInstanceHandler {
 				if (idgelDomeReward.isStartProgress() && getTime() >= 600000) // After 10 minutes increase reward points
 					killPoints = 300; // TODO: Check on retail
 
-				updatePoints(killPoints, lastAttacker.getRace(), true, 0, (Player) lastAttacker);
+				updatePoints(killPoints, lastAttacker.getRace(), true, null, (Player) lastAttacker);
 				PacketSendUtility.sendPacket((Player) lastAttacker, new SM_SYSTEM_MESSAGE(1400277, killPoints));
 				idgelDomeReward.getKillsByRace(lastAttacker.getRace()).increment();
 				sendPacket(new SM_INSTANCE_SCORE(new IdgelDomeScoreInfo(idgelDomeReward, 10, lastAttacker.getRace().equals(Race.ELYOS) ? 0 : 1),
 					idgelDomeReward, getTime()));
 			}
 		}
-		updatePoints(-100, player.getRace(), true, 0, player);
+		updatePoints(-100, player.getRace(), true, null, player);
 		return true;
 	}
 

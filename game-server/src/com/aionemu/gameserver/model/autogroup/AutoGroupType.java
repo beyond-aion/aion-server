@@ -334,11 +334,11 @@ public enum AutoGroupType {
 		return instanceMaskId;
 	}
 
-	public int getNameId() {
-		return template.getNameId();
+	public int getL10nId() {
+		return template.getL10nId();
 	}
 
-	public int getTittleId() {
+	public int getTitleId() {
 		return template.getTitleId();
 	}
 

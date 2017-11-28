@@ -34,7 +34,7 @@ public class SM_INVENTORY_UPDATE_ITEM extends AionServerPacket {
 		ItemTemplate itemTemplate = item.getItemTemplate();
 
 		writeD(item.getObjectId());
-		writeNameId(itemTemplate.getNameId());
+		writeS(itemTemplate.getL10n());
 
 		ItemInfoBlob itemInfoBlob;
 		switch (updateType) {

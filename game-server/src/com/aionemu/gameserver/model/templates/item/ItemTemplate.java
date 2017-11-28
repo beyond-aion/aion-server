@@ -255,7 +255,7 @@ public class ItemTemplate extends VisibleObjectTemplate {
 	}
 
 	@Override
-	public int getNameId() {
+	public int getL10nId() {
 		return description;
 	}
 

@@ -1,94 +1,94 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <siege_locations xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="siege_locations.xsd">
-	<siege_location id="0" type="UNDERPASS" world="210050000" name_id="0"/>
-	<siege_location id="0" type="UNDERPASS" world="220070000" name_id="0"/>
-	<siege_location id="0" type="UNDERPASS" world="600100000" name_id="0"/>
-	<siege_location id="3" type="INDUN" world="210020000" name_id="0"/>
-	<siege_location id="3" type="INDUN" world="220020000" name_id="0"/>
-	<siege_location id="4" type="INDUN" world="210040000" name_id="0"/>
-	<siege_location id="5" type="INDUN" world="220040000" name_id="0"/>
-	<siege_location id="6" type="INDUN" world="220050000" name_id="0"/>
-	<siege_location id="6" type="INDUN" world="210060000" name_id="0"/>
-	<siege_location id="8" type="INDUN" world="220020000" name_id="0"/>
-	<siege_location id="7" type="INDUN" world="220050000" name_id="0"/>
-	<siege_location id="8" type="INDUN" world="220020000" name_id="0"/>
-	<siege_location id="8" type="INDUN" world="210020000" name_id="0"/>
-	<siege_location id="8" type="INDUN" world="400010000" name_id="0"/>
-	<siege_location id="9" type="INDUN" world="220040000" name_id="0"/>
-	<siege_location id="9" type="INDUN" world="210040000" name_id="0"/>
-	<siege_location id="9" type="INDUN" world="400010000" name_id="0"/>
-	<siege_location id="18" type="INDUN" world="120010000" name_id="0"/>
-	<siege_location id="18" type="INDUN" world="110010000" name_id="0"/>
-	<siege_location id="25" type="INDUN" world="210040000" name_id="0"/>
-	<siege_location id="26" type="INDUN" world="210050000" name_id="0"/>
-	<siege_location id="26" type="INDUN" world="220070000" name_id="0"/>
-	<siege_location id="27" type="INDUN" world="210050000" name_id="0"/>
-	<siege_location id="27" type="INDUN" world="220070000" name_id="0"/>
-	<siege_location id="28" type="INDUN" world="600010000" name_id="0"/>
-	<siege_location id="29" type="INDUN" world="210050000" name_id="0"/>
-	<siege_location id="29" type="INDUN" world="220070000" name_id="0"/>
-	<siege_location id="45" type="INDUN" world="220040000" name_id="0"/>
-	<siege_location id="45" type="INDUN" world="210040000" name_id="0"/>
-	<siege_location id="46" type="INDUN" world="210030000" name_id="0"/>
-	<siege_location id="46" type="INDUN" world="220030000" name_id="0"/>
-	<siege_location id="49" type="INDUN" world="210070000" name_id="0"/>
-	<siege_location id="49" type="INDUN" world="220080000" name_id="0"/>
-	<siege_location id="50" type="INDUN" world="220080000" name_id="0"/>
-	<siege_location id="50" type="INDUN" world="210070000" name_id="0"/>
-	<siege_location id="54" type="INDUN" world="110070000" name_id="0"/>
-	<siege_location id="54" type="INDUN" world="120080000" name_id="0"/>
-	<siege_location id="57" type="INDUN" world="110070000" name_id="0"/>
-	<siege_location id="57" type="INDUN" world="120080000" name_id="0"/>
-	<siege_location id="61" type="INDUN" world="110070000" name_id="0"/>
-	<siege_location id="61" type="INDUN" world="120080000" name_id="0"/>
-	<siege_location id="62" type="INDUN" world="120080000" name_id="0"/>
-	<siege_location id="62" type="INDUN" world="110070000" name_id="0"/>
-	<siege_location id="68" type="INDUN" world="220070000" name_id="0"/>
-	<siege_location id="68" type="INDUN" world="210050000" name_id="0"/>
-	<siege_location id="69" type="INDUN" world="110070000" name_id="0"/>
-	<siege_location id="69" type="INDUN" world="120080000" name_id="0"/>
-	<siege_location id="70" type="INDUN" world="120080000" name_id="0"/>
-	<siege_location id="70" type="INDUN" world="110070000" name_id="0"/>
-	<siege_location id="74" type="INDUN" world="120080000" name_id="0"/>
-	<siege_location id="74" type="INDUN" world="110070000" name_id="0"/>
-	<siege_location id="75" type="INDUN" world="120010000" name_id="0"/>
-	<siege_location id="75" type="INDUN" world="110010000" name_id="0"/>
-	<siege_location id="77" type="INDUN" world="220080000" name_id="0"/>
-	<siege_location id="77" type="INDUN" world="210070000" name_id="0"/>
-	<siege_location id="80" type="INDUN" world="210070000" name_id="0"/>
-	<siege_location id="80" type="INDUN" world="220080000" name_id="0"/>
-	<siege_location id="81" type="INDUN" world="210070000" name_id="0"/>
-	<siege_location id="81" type="INDUN" world="220080000" name_id="0"/>
-	<siege_location id="83" type="INDUN" world="600090000" name_id="0"/>
-	<siege_location id="84" type="INDUN" world="120080000" name_id="0"/>
-	<siege_location id="84" type="INDUN" world="110070000" name_id="0"/>
-	<siege_location id="86" type="INDUN" world="120080000" name_id="0"/>
-	<siege_location id="86" type="INDUN" world="110070000" name_id="0"/>
-	<siege_location id="88" type="INDUN" world="210070000" name_id="0"/>
-	<siege_location id="88" type="INDUN" world="220080000" name_id="0"/>
-	<siege_location id="91" type="INDUN" world="600010000" name_id="0"/>
-	<siege_location id="94" type="INDUN" world="600100000" name_id="0"/>
-	<siege_location id="97" type="INDUN" world="120080000" name_id="0"/>
-	<siege_location id="97" type="INDUN" world="110070000" name_id="0"/>
-	<siege_location id="99" type="INDUN" world="600090000" name_id="0"/>
-	<siege_location id="103" type="INDUN" world="600100000" name_id="0"/>
-	<siege_location id="104" type="INDUN" world="220080000" name_id="0"/>
-	<siege_location id="104" type="INDUN" world="210070000" name_id="0"/>
-	<siege_location id="116" type="INDUN" world="600100000" name_id="0"/>
-	<siege_location id="121" type="INDUN" world="600100000" name_id="0"/>
-	<siege_location id="131" type="INDUN" world="600090000" name_id="0"/>
-	<siege_location id="132" type="INDUN" world="600100000" name_id="0"/>
-	<siege_location id="134" type="INDUN" world="220080000" name_id="0"/>
-	<siege_location id="134" type="INDUN" world="210070000" name_id="0"/>
-	<siege_location id="135" type="INDUN" world="220080000" name_id="0"/>
-	<siege_location id="135" type="INDUN" world="210070000" name_id="0"/>
-	<siege_location id="137" type="INDUN" world="210070000" name_id="0"/>
-	<siege_location id="137" type="INDUN" world="220080000" name_id="0"/>
-	<siege_location id="138" type="INDUN" world="220080000" name_id="0"/>
-	<siege_location id="138" type="INDUN" world="210070000" name_id="0"/>
-	<siege_location id="140" type="INDUN" world="220080000" name_id="0"/>
-	<siege_location id="140" type="INDUN" world="210070000" name_id="0"/>
-	<siege_location id="1011" type="FORTRESS" world="400010000" name_id="801821" occupy_count="2" siege_duration="3000" influence="10">
+	<siege_location id="0" type="UNDERPASS" world="210050000"/>
+	<siege_location id="0" type="UNDERPASS" world="220070000"/>
+	<siege_location id="0" type="UNDERPASS" world="600100000"/>
+	<siege_location id="3" type="INDUN" world="210020000"/>
+	<siege_location id="3" type="INDUN" world="220020000"/>
+	<siege_location id="4" type="INDUN" world="210040000"/>
+	<siege_location id="5" type="INDUN" world="220040000"/>
+	<siege_location id="6" type="INDUN" world="220050000"/>
+	<siege_location id="6" type="INDUN" world="210060000"/>
+	<siege_location id="8" type="INDUN" world="220020000"/>
+	<siege_location id="7" type="INDUN" world="220050000"/>
+	<siege_location id="8" type="INDUN" world="220020000"/>
+	<siege_location id="8" type="INDUN" world="210020000"/>
+	<siege_location id="8" type="INDUN" world="400010000"/>
+	<siege_location id="9" type="INDUN" world="220040000"/>
+	<siege_location id="9" type="INDUN" world="210040000"/>
+	<siege_location id="9" type="INDUN" world="400010000"/>
+	<siege_location id="18" type="INDUN" world="120010000"/>
+	<siege_location id="18" type="INDUN" world="110010000"/>
+	<siege_location id="25" type="INDUN" world="210040000"/>
+	<siege_location id="26" type="INDUN" world="210050000"/>
+	<siege_location id="26" type="INDUN" world="220070000"/>
+	<siege_location id="27" type="INDUN" world="210050000"/>
+	<siege_location id="27" type="INDUN" world="220070000"/>
+	<siege_location id="28" type="INDUN" world="600010000"/>
+	<siege_location id="29" type="INDUN" world="210050000"/>
+	<siege_location id="29" type="INDUN" world="220070000"/>
+	<siege_location id="45" type="INDUN" world="220040000"/>
+	<siege_location id="45" type="INDUN" world="210040000"/>
+	<siege_location id="46" type="INDUN" world="210030000"/>
+	<siege_location id="46" type="INDUN" world="220030000"/>
+	<siege_location id="49" type="INDUN" world="210070000"/>
+	<siege_location id="49" type="INDUN" world="220080000"/>
+	<siege_location id="50" type="INDUN" world="220080000"/>
+	<siege_location id="50" type="INDUN" world="210070000"/>
+	<siege_location id="54" type="INDUN" world="110070000"/>
+	<siege_location id="54" type="INDUN" world="120080000"/>
+	<siege_location id="57" type="INDUN" world="110070000"/>
+	<siege_location id="57" type="INDUN" world="120080000"/>
+	<siege_location id="61" type="INDUN" world="110070000"/>
+	<siege_location id="61" type="INDUN" world="120080000"/>
+	<siege_location id="62" type="INDUN" world="120080000"/>
+	<siege_location id="62" type="INDUN" world="110070000"/>
+	<siege_location id="68" type="INDUN" world="220070000"/>
+	<siege_location id="68" type="INDUN" world="210050000"/>
+	<siege_location id="69" type="INDUN" world="110070000"/>
+	<siege_location id="69" type="INDUN" world="120080000"/>
+	<siege_location id="70" type="INDUN" world="120080000"/>
+	<siege_location id="70" type="INDUN" world="110070000"/>
+	<siege_location id="74" type="INDUN" world="120080000"/>
+	<siege_location id="74" type="INDUN" world="110070000"/>
+	<siege_location id="75" type="INDUN" world="120010000"/>
+	<siege_location id="75" type="INDUN" world="110010000"/>
+	<siege_location id="77" type="INDUN" world="220080000"/>
+	<siege_location id="77" type="INDUN" world="210070000"/>
+	<siege_location id="80" type="INDUN" world="210070000"/>
+	<siege_location id="80" type="INDUN" world="220080000"/>
+	<siege_location id="81" type="INDUN" world="210070000"/>
+	<siege_location id="81" type="INDUN" world="220080000"/>
+	<siege_location id="83" type="INDUN" world="600090000"/>
+	<siege_location id="84" type="INDUN" world="120080000"/>
+	<siege_location id="84" type="INDUN" world="110070000"/>
+	<siege_location id="86" type="INDUN" world="120080000"/>
+	<siege_location id="86" type="INDUN" world="110070000"/>
+	<siege_location id="88" type="INDUN" world="210070000"/>
+	<siege_location id="88" type="INDUN" world="220080000"/>
+	<siege_location id="91" type="INDUN" world="600010000"/>
+	<siege_location id="94" type="INDUN" world="600100000"/>
+	<siege_location id="97" type="INDUN" world="120080000"/>
+	<siege_location id="97" type="INDUN" world="110070000"/>
+	<siege_location id="99" type="INDUN" world="600090000"/>
+	<siege_location id="103" type="INDUN" world="600100000"/>
+	<siege_location id="104" type="INDUN" world="220080000"/>
+	<siege_location id="104" type="INDUN" world="210070000"/>
+	<siege_location id="116" type="INDUN" world="600100000"/>
+	<siege_location id="121" type="INDUN" world="600100000"/>
+	<siege_location id="131" type="INDUN" world="600090000"/>
+	<siege_location id="132" type="INDUN" world="600100000"/>
+	<siege_location id="134" type="INDUN" world="220080000"/>
+	<siege_location id="134" type="INDUN" world="210070000"/>
+	<siege_location id="135" type="INDUN" world="220080000"/>
+	<siege_location id="135" type="INDUN" world="210070000"/>
+	<siege_location id="137" type="INDUN" world="210070000"/>
+	<siege_location id="137" type="INDUN" world="220080000"/>
+	<siege_location id="138" type="INDUN" world="220080000"/>
+	<siege_location id="138" type="INDUN" world="210070000"/>
+	<siege_location id="140" type="INDUN" world="220080000"/>
+	<siege_location id="140" type="INDUN" world="210070000"/>
+	<siege_location id="1011" type="FORTRESS" world="400010000" name_id="400910" occupy_count="2" siege_duration="3000" influence="10">
 		<artifact_activation itemid="188020000" count="1" skill="12078" cd="7200"/>
 		<siege_reward top="11" itemid="186000242" m_count="4" gp_win="300" gp_defeat="150"/>
 		<siege_reward top="22" itemid="186000242" m_count="3" gp_win="250" gp_defeat="125"/>
@@ -128,7 +128,7 @@
 	<siege_location id="1020" type="ARTIFACT" world="400010000">
 		<artifact_activation itemid="188020000" count="3" skill="12180" repeat_count="5" repeat_interval="4" cd="900"/>
 	</siege_location>
-	<siege_location id="1131" type="FORTRESS" world="400010000" name_id="801823" occupy_count="2" siege_duration="3600" influence="3">
+	<siege_location id="1131" type="FORTRESS" world="400010000" name_id="400911" occupy_count="2" siege_duration="3600" influence="3">
 		<artifact_activation itemid="188020000" count="1" skill="12147" repeat_count="1" repeat_interval="1" cd="3600"/>
 		<siege_reward top="12" itemid="186000096" m_count="3"/>
 		<siege_reward top="20" itemid="186000030" m_count="3"/>
@@ -141,7 +141,7 @@
 		<legion_reward itemid="188051893" m_count="1"/>
 		<legion_reward itemid="122001519" m_count="1"/>
 	</siege_location>
-	<siege_location id="1132" type="FORTRESS" world="400010000" name_id="801825" occupy_count="2" siege_duration="3600" influence="3">
+	<siege_location id="1132" type="FORTRESS" world="400010000" name_id="400912" occupy_count="2" siege_duration="3600" influence="3">
 		<artifact_activation itemid="188020000" count="1" skill="12148" repeat_count="1" repeat_interval="1" cd="3600"/>
 		<siege_reward top="12" itemid="186000096" m_count="3"/>
 		<siege_reward top="20" itemid="186000030" m_count="3"/>
@@ -163,7 +163,7 @@
 	<siege_location id="1135" type="ARTIFACT" world="400010000">
 		<artifact_activation itemid="188020000" count="1" skill="12042" repeat_count="1" repeat_interval="1" cd="900"/>
 	</siege_location>
-	<siege_location id="1141" type="FORTRESS" world="400010000" name_id="801827" occupy_count="2" siege_duration="3600" influence="3">
+	<siege_location id="1141" type="FORTRESS" world="400010000" name_id="400913" occupy_count="2" siege_duration="3600" influence="3">
 		<artifact_activation itemid="188020000" count="1" skill="12149" repeat_count="1" repeat_interval="1" cd="3600"/>
 		<siege_reward top="12" itemid="186000096" m_count="3"/>
 		<siege_reward top="20" itemid="186000030" m_count="3"/>
@@ -191,7 +191,7 @@
 	<siege_location id="1146" type="ARTIFACT" world="400010000">
 		<artifact_activation itemid="188020000" count="2" skill="8387" repeat_count="1" repeat_interval="1" cd="2700"/>
 	</siege_location>
-	<siege_location id="1211" type="FORTRESS" world="400010000" name_id="801829" occupy_count="2" siege_duration="3600" influence="4">
+	<siege_location id="1211" type="FORTRESS" world="400010000" name_id="400914" occupy_count="2" siege_duration="3600" influence="4">
 		<artifact_activation itemid="188020000" count="1" skill="12150" repeat_count="1" repeat_interval="1" cd="5400"/>
 		<siege_reward top="18" itemid="186000096" m_count="3"/>
 		<siege_reward top="30" itemid="186000030" m_count="3"/>
@@ -216,7 +216,7 @@
 	<siege_location id="1215" type="ARTIFACT" world="400010000">
 		<artifact_activation itemid="188020000" count="1" skill="12082" repeat_count="1" repeat_interval="1" cd="900"/>
 	</siege_location>
-	<siege_location id="1221" type="FORTRESS" world="400010000" name_id="801831" occupy_count="2" siege_duration="3600" influence="9">
+	<siege_location id="1221" type="FORTRESS" world="400010000" name_id="400915" occupy_count="2" siege_duration="3600" influence="9">
 		<artifact_activation itemid="188020000" count="1" skill="12152" cd="5400"/>
 		<siege_reward top="11" itemid="186000242" m_count="3" gp_win="250" gp_defeat="125"/>
 		<siege_reward top="22" itemid="186000242" m_count="2" gp_win="200" gp_defeat="100"/>
@@ -239,7 +239,7 @@
 	<siege_location id="1224" type="ARTIFACT" world="400010000">
 		<artifact_activation itemid="188020002" count="4" skill="12091" repeat_count="5" repeat_interval="3" cd="2700"/>
 	</siege_location>
-	<siege_location id="1231" type="FORTRESS" world="400010000" name_id="801833" occupy_count="2" siege_duration="3600" influence="9">
+	<siege_location id="1231" type="FORTRESS" world="400010000" name_id="400916" occupy_count="2" siege_duration="3600" influence="9">
 		<artifact_activation itemid="188020000" count="1" skill="12153" cd="5400"/>
 		<siege_reward top="11" itemid="186000242" m_count="3" gp_win="250" gp_defeat="125"/>
 		<siege_reward top="22" itemid="186000242" m_count="2" gp_win="200" gp_defeat="100"/>
@@ -259,7 +259,7 @@
 	<siege_location id="1233" type="ARTIFACT" world="400010000">
 		<artifact_activation itemid="188020002" count="1" skill="12089" repeat_count="6" repeat_interval="9" cd="900"/>
 	</siege_location>
-	<siege_location id="1241" type="FORTRESS" world="400010000" name_id="801835" occupy_count="2" siege_duration="3600" influence="9">
+	<siege_location id="1241" type="FORTRESS" world="400010000" name_id="400917" occupy_count="2" siege_duration="3600" influence="9">
 		<artifact_activation itemid="188020000" count="1" skill="12154" cd="5400"/>
 		<siege_reward top="11" itemid="186000242" m_count="3" gp_win="250" gp_defeat="125"/>
 		<siege_reward top="22" itemid="186000242" m_count="2" gp_win="200" gp_defeat="100"/>
@@ -278,7 +278,7 @@
 	<siege_location id="1243" type="ARTIFACT" world="400010000">
 		<artifact_activation itemid="188020002" count="2" skill="12089" repeat_count="6" repeat_interval="9" cd="900"/>
 	</siege_location>
-	<siege_location id="1251" type="FORTRESS" world="400010000" name_id="801837" occupy_count="2" siege_duration="3600" influence="4">
+	<siege_location id="1251" type="FORTRESS" world="400010000" name_id="400918" occupy_count="2" siege_duration="3600" influence="4">
 		<artifact_activation itemid="188020000" count="1" skill="12151" repeat_count="1" repeat_interval="1" cd="5400"/>
 		<siege_reward top="18" itemid="186000096" m_count="3"/>
 		<siege_reward top="30" itemid="186000030" m_count="3"/>
@@ -309,7 +309,7 @@
 	<siege_location id="1403" type="ARTIFACT" world="400010000">
 		<artifact_activation itemid="188020002" count="2" skill="12159" repeat_count="1" repeat_interval="1" cd="2700"/>
 	</siege_location>
-	<siege_location id="2011" type="FORTRESS" world="210050000" name_id="802577" occupy_count="2" siege_duration="2400" influence="8">
+	<siege_location id="2011" type="FORTRESS" world="210050000" name_id="401288" occupy_count="2" siege_duration="2400" influence="8">
 		<artifact_activation itemid="188020001" count="3" skill="12155" cd="7200"/>
 		<siege_reward top="11" itemid="188053163" m_count="1" gp_win="200" gp_defeat="100"/>
 		<siege_reward top="22" itemid="188053164" m_count="1" gp_win="175" gp_defeat="90"/>
@@ -333,7 +333,7 @@
 	<siege_location id="2014" type="ARTIFACT" world="210050000">
 		<artifact_activation itemid="188020002" count="2" skill="12159" repeat_count="5" repeat_interval="3" cd="1800"/>
 	</siege_location>
-	<siege_location id="2021" type="FORTRESS" world="210050000" name_id="802581" occupy_count="2" siege_duration="2400" influence="8">
+	<siege_location id="2021" type="FORTRESS" world="210050000" name_id="401290" occupy_count="2" siege_duration="2400" influence="8">
 		<artifact_activation itemid="188020001" count="2" skill="12156" cd="7200"/>
 		<siege_reward top="11" itemid="188053159" m_count="1" gp_win="200" gp_defeat="100"/>
 		<siege_reward top="22" itemid="188053160" m_count="1" gp_win="175" gp_defeat="90"/>
@@ -358,7 +358,7 @@
 		<artifact_activation itemid="188020002" count="2" skill="12159" repeat_count="5" repeat_interval="3" cd="1800"/>
 	</siege_location>
 	<siege_location id="2111" type="VEILLE" world="210050000" fortress_dependency="2011 2021" siege_duration="7200"/>
-	<siege_location id="3011" type="FORTRESS" world="220070000" name_id="802585" occupy_count="2" siege_duration="2400" influence="8">
+	<siege_location id="3011" type="FORTRESS" world="220070000" name_id="401292" occupy_count="2" siege_duration="2400" influence="8">
 		<artifact_activation itemid="188020001" count="2" skill="12157" cd="7200"/>
 		<siege_reward top="11" itemid="188053171" m_count="1" gp_win="200" gp_defeat="100"/>
 		<siege_reward top="22" itemid="188053172" m_count="1" gp_win="175" gp_defeat="90"/>
@@ -382,7 +382,7 @@
 	<siege_location id="3014" type="ARTIFACT" world="220070000">
 		<artifact_activation itemid="188020002" count="2" skill="12159" repeat_count="5" repeat_interval="3" cd="1800"/>
 	</siege_location>
-	<siege_location id="3021" type="FORTRESS" world="220070000" name_id="802589" occupy_count="2" siege_duration="2400" influence="8">
+	<siege_location id="3021" type="FORTRESS" world="220070000" name_id="401294" occupy_count="2" siege_duration="2400" influence="8">
 		<artifact_activation itemid="188020001" count="3" skill="12158" cd="7200"/>
 		<siege_reward top="11" itemid="188053167" m_count="1" gp_win="200" gp_defeat="100"/>
 		<siege_reward top="22" itemid="188053168" m_count="1" gp_win="175" gp_defeat="90"/>
@@ -408,7 +408,7 @@
 	</siege_location>
 	<siege_location id="3111" type="MASTARIUS" world="220070000" fortress_dependency="3011 3021" siege_duration="7200"/>
 	<!-- Wealhtheow's Keep -->
-	<siege_location id="7011" type="FORTRESS" world="600090000" name_id="808285" occupy_count="2" siege_duration="3600" influence="14">
+	<siege_location id="7011" type="FORTRESS" world="600090000" name_id="404142" occupy_count="2" siege_duration="3600" influence="14">
 	    <siege_reward top="11" itemid="188053140" m_count="1" gp_win="400" gp_defeat="200"/>
 		<siege_reward top="30" itemid="188053141" m_count="1" gp_win="300" gp_defeat="150"/>
 		<siege_reward top="60" itemid="188053142" m_count="1" gp_win="250" gp_defeat="100"/>
@@ -448,7 +448,7 @@
 		<siege_reward top="200" itemid="186000242" m_count="1" gp_win="100" gp_defeat="50"/>
 	</siege_location>
 	<!-- Panesterra -->
-	<siege_location id="10111" type="FORTRESS" world="400020000" name_id="808317" siege_duration="3600" influence="0">
+	<siege_location id="10111" type="FORTRESS" world="400020000" name_id="404158" siege_duration="3600" influence="0">
 		<siege_reward top="10" itemid="186000096" m_count="1"/>
 		<siege_reward top="10" itemid="188052121" m_count="1"/>
 		<siege_reward top="20" itemid="186000096" m_count="1"/>
@@ -458,7 +458,7 @@
 		<legion_reward itemid="188052121" m_count="1"/>
 		<legion_reward itemid="186000096" m_count="50"/>
 	</siege_location>
-	<siege_location id="10211" type="FORTRESS" world="400040000" name_id="808347" siege_duration="3600" influence="0">
+	<siege_location id="10211" type="FORTRESS" world="400040000" name_id="404173" siege_duration="3600" influence="0">
 		<siege_reward top="10" itemid="186000096" m_count="1"/>
 		<siege_reward top="10" itemid="188052121" m_count="1"/>
 		<siege_reward top="20" itemid="186000096" m_count="1"/>
@@ -468,7 +468,7 @@
 		<legion_reward itemid="188052121" m_count="1"/>
 		<legion_reward itemid="186000096" m_count="50"/>
 	</siege_location>
-	<siege_location id="10311" type="FORTRESS" world="400050000" name_id="808349" siege_duration="3600" influence="0">
+	<siege_location id="10311" type="FORTRESS" world="400050000" name_id="404174" siege_duration="3600" influence="0">
 		<siege_reward top="10" itemid="186000096" m_count="1"/>
 		<siege_reward top="10" itemid="188052121" m_count="1"/>
 		<siege_reward top="20" itemid="186000096" m_count="1"/>
@@ -478,7 +478,7 @@
 		<legion_reward itemid="188052121" m_count="1"/>
 		<legion_reward itemid="186000096" m_count="50"/>
 	</siege_location>
-	<siege_location id="10411" type="FORTRESS" world="400060000" name_id="808351" siege_duration="3600" influence="0">
+	<siege_location id="10411" type="FORTRESS" world="400060000" name_id="404175" siege_duration="3600" influence="0">
 		<siege_reward top="10" itemid="186000096" m_count="1"/>
 		<siege_reward top="10" itemid="188052121" m_count="1"/>
 		<siege_reward top="20" itemid="186000096" m_count="1"/>

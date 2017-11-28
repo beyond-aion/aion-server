@@ -6,7 +6,6 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.model.DescriptionId;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.items.storage.Storage;
 import com.aionemu.gameserver.model.templates.item.ItemTemplate;
@@ -34,7 +33,7 @@ public class ItemUseAction extends Action {
 			Player player = (Player) skill.getEffector();
 			Storage inventory = player.getInventory();
 			if (!inventory.decreaseByItemId(itemid, count)) {
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_NOT_ENOUGH_ITEM(new DescriptionId(item.getNameId())));
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_NOT_ENOUGH_ITEM(item.getL10n()));
 				return false;
 			}
 		}

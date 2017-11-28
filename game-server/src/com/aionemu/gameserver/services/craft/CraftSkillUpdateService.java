@@ -12,7 +12,6 @@ import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.configs.main.CraftConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.model.DescriptionId;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.RequestResponseHandler;
@@ -202,7 +201,7 @@ public class CraftSkillUpdateService {
 		boolean result = player.getResponseRequester().putRequest(SM_QUESTION_WINDOW.STR_CRAFT_ADDSKILL_CONFIRM, responseHandler);
 		if (result) {
 			PacketSendUtility.sendPacket(player, new SM_QUESTION_WINDOW(SM_QUESTION_WINDOW.STR_CRAFT_ADDSKILL_CONFIRM, 0, 0,
-				new DescriptionId(DataManager.SKILL_DATA.getSkillTemplate(skillId).getNameId()), String.valueOf(price)));
+				DataManager.SKILL_DATA.getSkillTemplate(skillId).getL10n(), String.valueOf(price)));
 		}
 	}
 

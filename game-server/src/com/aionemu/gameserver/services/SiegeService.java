@@ -22,7 +22,6 @@ import com.aionemu.gameserver.configs.main.SiegeConfig;
 import com.aionemu.gameserver.configs.schedule.SiegeSchedule;
 import com.aionemu.gameserver.dao.SiegeDAO;
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.model.DescriptionId;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.siege.SiegeNpc;
@@ -37,7 +36,6 @@ import com.aionemu.gameserver.model.siege.SiegeRace;
 import com.aionemu.gameserver.model.templates.spawns.SpawnGroup;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.model.templates.spawns.siegespawns.SiegeSpawnTemplate;
-import com.aionemu.gameserver.network.aion.AionServerPacket;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ABYSS_ARTIFACT_INFO3;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_AFTER_SIEGE_LOCINFO_475;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_FORTRESS_INFO;
@@ -256,7 +254,7 @@ public class SiegeService {
 		if (loc.getTemplate().getMaxOccupyCount() > 0 && loc.getOccupiedCount() >= loc.getTemplate().getMaxOccupyCount()
 			&& !loc.getRace().equals(SiegeRace.BALAUR)) {
 			log.debug("Resetting fortress to balaur control due to exceeded occupy count! locId:" + locationId);
-			this.resetSiegeLocation(loc);
+			resetSiegeLocation(loc);
 		}
 	}
 
@@ -328,10 +326,10 @@ public class SiegeService {
 		deSpawnNpcs(loc.getLocationId());
 		loc.clearLocation(); // remove all players
 		// Store old owner for msg
-		final int oldOwnerRaceId = loc.getRace().getRaceId();
-		final int legionId = loc.getLegionId();
-		final String legionName = legionId != 0 ? LegionService.getInstance().getLegion(legionId).getName() : "";
-		final DescriptionId nameId = new DescriptionId(loc.getTemplate().getNameId());
+		int oldOwnerRaceId = loc.getRace().getRaceId();
+		int legionId = loc.getLegionId();
+		String legionName = legionId != 0 ? LegionService.getInstance().getLegion(legionId).getName() : "";
+		String locL10n = loc.getTemplate().getL10n();
 
 		// Reset owner
 		loc.setRace(SiegeRace.BALAUR);
@@ -355,18 +353,11 @@ public class SiegeService {
 		loc.setOccupiedCount(0);
 
 		// On start preparations msg
-		World.getInstance().forEachPlayer(new Consumer<Player>() {
-
-			@Override
-			public void accept(Player player) {
-				if (legionId != 0 && player.getRace().getRaceId() == oldOwnerRaceId)
-					PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1301037, legionName, nameId));
-
-				PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1301039, loc.getRace().getDescriptionId(), nameId));
-
-				PacketSendUtility.sendPacket(player, new SM_SIEGE_LOCATION_INFO(loc));
-			}
-
+		World.getInstance().forEachPlayer(player -> {
+			if (legionId != 0 && player.getRace().getRaceId() == oldOwnerRaceId)
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ABYSS_GUILD_CASTLE_TAKEN(legionName, locL10n));
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ABYSS_WIN_CASTLE(loc.getRace().getL10n(), locL10n));
+			PacketSendUtility.sendPacket(player, new SM_SIEGE_LOCATION_INFO(loc));
 		});
 
 		// Spawn new npc
@@ -637,46 +628,13 @@ public class SiegeService {
 		return true;
 	}
 
-	public void broadcastUpdate() {
-		broadcast(new SM_SIEGE_LOCATION_INFO(), null);
-	}
-
 	public void broadcastUpdate(SiegeLocation loc) {
 		Influence.getInstance().recalculateInfluence();
-		broadcast(new SM_SIEGE_LOCATION_INFO(loc), new SM_INFLUENCE_RATIO());
-	}
-
-	public void broadcast(final AionServerPacket pkt1, final AionServerPacket pkt2) {
-		World.getInstance().forEachPlayer(new Consumer<Player>() {
-
-			@Override
-			public void accept(Player player) {
-				if (pkt1 != null)
-					PacketSendUtility.sendPacket(player, pkt1);
-				if (pkt2 != null)
-					PacketSendUtility.sendPacket(player, pkt2);
-			}
-
-		});
-	}
-
-	public void broadcastUpdate(SiegeLocation loc, DescriptionId nameId) {
-		SM_SIEGE_LOCATION_INFO pkt = new SM_SIEGE_LOCATION_INFO(loc);
-		SM_SYSTEM_MESSAGE info = loc.getLegionId() == 0 ? new SM_SYSTEM_MESSAGE(1301039, loc.getRace().getDescriptionId(), nameId)
-			: new SM_SYSTEM_MESSAGE(1301038, LegionService.getInstance().getLegion(loc.getLegionId()).getName(), nameId);
-		broadcast(pkt, info, loc.getRace());
-	}
-
-	private void broadcast(final AionServerPacket pkt, final AionServerPacket info, final SiegeRace race) {
-		World.getInstance().forEachPlayer(new Consumer<Player>() {
-
-			@Override
-			public void accept(Player player) {
-				if (player.getRace().getRaceId() == race.getRaceId())
-					PacketSendUtility.sendPacket(player, info);
-				PacketSendUtility.sendPacket(player, pkt);
-			}
-
+		SM_SIEGE_LOCATION_INFO pkt1 = new SM_SIEGE_LOCATION_INFO(loc);
+		SM_INFLUENCE_RATIO pkt2 = new SM_INFLUENCE_RATIO();
+		World.getInstance().forEachPlayer(player -> {
+			PacketSendUtility.sendPacket(player, pkt1);
+			PacketSendUtility.sendPacket(player, pkt2);
 		});
 	}
 

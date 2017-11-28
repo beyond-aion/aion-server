@@ -11,7 +11,6 @@ import com.aionemu.gameserver.model.templates.VisibleObjectTemplate;
 /**
  * @author ATracer, KID
  */
-
 @XmlRootElement(name = "gatherable_template")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class GatherableTemplate extends VisibleObjectTemplate {
@@ -151,7 +150,7 @@ public class GatherableTemplate extends VisibleObjectTemplate {
 	 * @return the nameId
 	 */
 	@Override
-	public int getNameId() {
+	public int getL10nId() {
 		return nameId;
 	}
 
@@ -168,7 +167,7 @@ public class GatherableTemplate extends VisibleObjectTemplate {
 	}
 
 	public int getRequiredItemNameId() {
-		return reqItemNameId * 2 + 1;
+		return reqItemNameId;
 	}
 
 	public int getCheckType() {

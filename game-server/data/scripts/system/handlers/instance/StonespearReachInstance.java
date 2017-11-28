@@ -7,7 +7,6 @@ import java.util.concurrent.Future;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
 import com.aionemu.gameserver.instance.handlers.InstanceID;
-import com.aionemu.gameserver.model.DescriptionId;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -64,7 +63,7 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 			timer = ThreadPoolManager.getInstance().schedule(() -> {
 				startTime = System.currentTimeMillis();
 				reward.setInstanceScoreType(InstanceScoreType.START_PROGRESS);
-				sendPacket(0, 0);
+				sendPacket(null, 0);
 				startInstance();
 				startFailTask();
 			}, 180000); // 3min
@@ -86,7 +85,7 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 		}
 
 		if (reward != null && !reward.isRewarded()) {
-			sendPacket(0, 0);
+			sendPacket(null, 0);
 		}
 		if (instanceLegion == null) {
 			instanceLegion = player.getLegion();
@@ -245,7 +244,7 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 			reward.setRank(rank);
 			despawnAll();
 			Long endTime = System.currentTimeMillis();
-			sendPacket(0, 0);
+			sendPacket(null, 0);
 			reward();
 			LegionDominionService.getInstance().onFinishInstance(instanceLegion, reward.getPoints(), (endTime - startTime));
 		}
@@ -656,16 +655,15 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 	private void addPoints(Npc npc, int points) {
 		if (reward.isStartProgress()) {
 			reward.addPoints(points);
-			sendPacket(npc.getObjectTemplate().getNameId(), points);
+			sendPacket(npc.getObjectTemplate().getL10n(), points);
 			// TODO points >= 100mio -> stop. But its actually impossible to reach 100mio points.. I'll just leave it out
 		}
 	}
 
-	private void sendPacket(final int nameId, final int point) {
+	private void sendPacket(String npcL10n, int points) {
 		instance.getPlayersInside().stream().filter(p -> p != null && p.isOnline()).forEach(p -> {
-			if (nameId != 0) {
-				PacketSendUtility.sendPacket(p, new SM_SYSTEM_MESSAGE(1400237, new DescriptionId(nameId * 2 + 1), point));
-			}
+			if (npcL10n != null)
+				PacketSendUtility.sendPacket(p, SM_SYSTEM_MESSAGE.STR_MSG_GET_SCORE(npcL10n, points));
 			PacketSendUtility.sendPacket(p, new SM_INSTANCE_SCORE(new LegionDominionScoreInfo(reward), reward, getTime()));
 		});
 	}
@@ -865,7 +863,7 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 							if (allowedPlayers.size() < 12 || allowedPlayers.contains(p.getObjectId())) {
 								return true;
 							} else {
-								PacketSendUtility.sendPacket(p, new SM_SYSTEM_MESSAGE(1400180, 12, new DescriptionId(mapId)));
+								PacketSendUtility.sendPacket(p, SM_SYSTEM_MESSAGE.STR_MSG_CANT_INSTANCE_TOO_MANY_MEMBERS(12, mapId));
 							}
 						} else {
 							PacketSendUtility.sendPacket(p, new SM_SYSTEM_MESSAGE(1402907));

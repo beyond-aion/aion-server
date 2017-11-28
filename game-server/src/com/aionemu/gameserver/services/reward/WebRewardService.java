@@ -133,7 +133,7 @@ public class WebRewardService {
 				pendingAscension.remove(player.getObjectId());
 				addBasicGear(player);
 				player.getCommonData().setLevel(maxLevel);
-				String message = ChatUtil.nameId(904804 * 2 + 1) + " Level " + player.getLevel(); // You receive the following reward: Level 65
+				String message = ChatUtil.l10n(904804) + " Level " + player.getLevel(); // You receive the following reward: Level 65
 				PacketSendUtility.sendMessage(player, message, ChatType.BRIGHT_YELLOW);
 				TeleportService.sendTeleportRequest(player, player.getRace() == Race.ELYOS ? 798926 : 799225); // Outremus / Richelle for daevanion quests
 			}

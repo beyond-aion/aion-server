@@ -114,7 +114,7 @@ public class DialogService {
 					TradeListTemplate tradeListTemplate = DataManager.TRADE_LIST_DATA.getTradeListTemplate(npc.getNpcId());
 					if (tradeListTemplate == null) {
 						log.warn("Buy list is missing for npc " + npc.getNpcId());
-						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_BUY_SELL_HE_DOES_NOT_SELL_ITEM(npc.getObjectTemplate().getNameId()));
+						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_BUY_SELL_HE_DOES_NOT_SELL_ITEM(npc.getObjectTemplate().getL10n()));
 						break;
 					}
 					int tradeModifier = tradeListTemplate.getSellPriceRate();
@@ -131,7 +131,7 @@ public class DialogService {
 						PacketSendUtility.sendPacket(player,
 							new SM_TRADELIST(player, npc, tradeListTemplate, PricesService.getVendorBuyModifier() * tradeModifier / 100));
 					else
-						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_BUY_SELL_HE_DOES_NOT_SELL_ITEM(npc.getObjectTemplate().getNameId()));
+						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_BUY_SELL_HE_DOES_NOT_SELL_ITEM(npc.getObjectTemplate().getL10n()));
 					break;
 				}
 				case DEPOSIT_CHAR_WAREHOUSE: // warehouse (2.5)
@@ -307,7 +307,7 @@ public class DialogService {
 					TradeListTemplate tradeListTemplate = DataManager.TRADE_LIST_DATA.getTradeInListTemplate(npc.getNpcId());
 					if (tradeListTemplate == null) {
 						log.warn("Trade-in list is missing for npc " + npc.getNpcId());
-						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_BUY_SELL_HE_DOES_NOT_SELL_ITEM(npc.getObjectTemplate().getNameId()));
+						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_BUY_SELL_HE_DOES_NOT_SELL_ITEM(npc.getObjectTemplate().getL10n()));
 					} else
 						PacketSendUtility.sendPacket(player, new SM_TRADE_IN_LIST(npc, tradeListTemplate, 100));
 					break;

@@ -48,11 +48,11 @@ import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.skillengine.effect.AbnormalState;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.spawnengine.StaticDoorSpawnManager;
+import com.aionemu.gameserver.utils.ChatUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.idfactory.IDFactory;
-import com.aionemu.gameserver.utils.stats.AbyssRankEnum;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.WorldPosition;
@@ -266,10 +266,9 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 	}
 
 	private boolean checkState(Player p) {
-		return !p.getController().isInCombat() && !p.getLifeStats().isAboutToDie() && !p.isDead() && !p.isLooting()
-			&& !p.isInGlidingState() && !p.isFlying() && !p.isUsingFlyTeleport() && !p.isInPlayerMode(PlayerMode.WINDSTREAM)
-			&& !p.isInPlayerMode(PlayerMode.RIDE) && !p.hasStore() && p.getCastingSkill() == null
-			&& !p.getEffectController().isInAnyAbnormalState(AbnormalState.CANT_ATTACK_STATE)
+		return !p.getController().isInCombat() && !p.getLifeStats().isAboutToDie() && !p.isDead() && !p.isLooting() && !p.isInGlidingState()
+			&& !p.isFlying() && !p.isUsingFlyTeleport() && !p.isInPlayerMode(PlayerMode.WINDSTREAM) && !p.isInPlayerMode(PlayerMode.RIDE) && !p.hasStore()
+			&& p.getCastingSkill() == null && !p.getEffectController().isInAnyAbnormalState(AbnormalState.CANT_ATTACK_STATE)
 			&& !p.getEffectController().isInAnyAbnormalState(AbnormalState.ROOT);
 	}
 
@@ -383,12 +382,12 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 
 	private void announceDeath(final Player player) {
 		if (!player.isStaff() && player.getAbyssRank() != null) {
-			int zoneNameId = getZoneNameId(player);
-			if (zoneNameId > 0)
+			String zoneNameL10n = getZoneNameL10n(player);
+			if (zoneNameL10n != null)
 				PacketSendUtility.broadcastToMap(instance,
-					SM_SYSTEM_MESSAGE.STR_ABYSS_ORDER_RANKER_DIE(player, AbyssRankEnum.getRankDescriptionId(player), zoneNameId));
+					SM_SYSTEM_MESSAGE.STR_ABYSS_ORDER_RANKER_DIE(player, zoneNameL10n));
 			else
-				PacketSendUtility.broadcastToMap(instance, SM_SYSTEM_MESSAGE.STR_ABYSS_ORDER_RANKER_DIE(player, AbyssRankEnum.getRankDescriptionId(player)));
+				PacketSendUtility.broadcastToMap(instance, SM_SYSTEM_MESSAGE.STR_ABYSS_ORDER_RANKER_DIE(player));
 		}
 	}
 
@@ -879,17 +878,18 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 		treasurePositions.add(new WorldPosition(mapId, 786.8716f, 291.9434f, 253.43422f, (byte) 46));
 	}
 
-	private int getZoneNameId(Player player) {
+	private String getZoneNameL10n(Player player) {
 		for (ZoneInstance zone : player.findZones()) {
-			if (!zone.getAreaTemplate().getZoneName().name().equalsIgnoreCase("301220000")) {
-				return getZoneNameIdByZoneName(zone.getAreaTemplate().getZoneName().name());
+			int zoneNameL10nId = getZoneNameL10nId(zone.getAreaTemplate().getZoneName().name());
+			if (zoneNameL10nId > 0) {
+				return ChatUtil.l10n(zoneNameL10nId);
 			}
 		}
-		return 0;
+		return null;
 	}
 
-	private int getZoneNameIdByZoneName(String name) {
-		switch (name) {
+	private int getZoneNameL10nId(String zoneName) {
+		switch (zoneName) {
 			case "ANCILLARY_SENTRY_POST_301220000":
 				return 404085;
 			case "ARTILLERY_COMMAND_CENTER_301220000":

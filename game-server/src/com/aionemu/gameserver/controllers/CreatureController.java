@@ -296,7 +296,7 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 			skill.setFirstTargetRangeCheck(false);
 			if (!skill.canUseSkill(CastState.CAST_START))
 				return;
-			PacketSendUtility.sendPacket(attacker, SM_SYSTEM_MESSAGE.STR_SKILL_PROC_EFFECT_OCCURRED(skill.getSkillTemplate().getNameId()));
+			PacketSendUtility.sendPacket(attacker, SM_SYSTEM_MESSAGE.STR_SKILL_PROC_EFFECT_OCCURRED(skill.getSkillTemplate().getL10n()));
 			Effect effect = new Effect(skill, getOwner(), 0);
 			effect.initialize();
 			effect.applyEffect();
@@ -305,10 +305,10 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 				godStone.increaseActivatedCount();
 				if (godStone.getActivatedCount() > godStoneInfo.getNonBreakCount() && Rnd.get(1, 1000) <= godStoneInfo.getBreakProb()) {
 					// TODO: Delay 10 Minutes, send messages etc
-					// PacketSendUtility.sendPacket(owner, SM_SYSTEM_MESSAGE.STR_MSG_BREAK_PROC_REMAIN_START(equippedItem.getNameId(),
-					// itemTemplate.getNameId()));
+					// PacketSendUtility.sendPacket(owner, SM_SYSTEM_MESSAGE.STR_MSG_BREAK_PROC_REMAIN_START(equippedItem.getL10n(),
+					// itemTemplate.getL10nId()));
 					weapon.setGodStone(null);
-					PacketSendUtility.sendPacket(attacker, SM_SYSTEM_MESSAGE.STR_MSG_BREAK_PROC(weapon.getNameId(), template.getNameId()));
+					PacketSendUtility.sendPacket(attacker, SM_SYSTEM_MESSAGE.STR_MSG_BREAK_PROC(weapon.getL10n(), template.getL10n()));
 					ItemPacketService.updateItemAfterInfoChange(attacker, weapon);
 				}
 			}

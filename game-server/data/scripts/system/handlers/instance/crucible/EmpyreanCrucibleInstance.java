@@ -7,7 +7,6 @@ import java.util.function.Consumer;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.instance.handlers.InstanceID;
-import com.aionemu.gameserver.model.DescriptionId;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.actions.NpcActions;
 import com.aionemu.gameserver.model.drop.DropItem;
@@ -91,16 +90,14 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 		PacketSendUtility.sendPacket(player, new SM_INSTANCE_STAGE_INFO(2, stageType.getId(), stageType.getType()));
 	}
 
-	private void sendPacket(int points, int nameId) {
+	private void sendPacket(int points, Npc npc) {
 		instance.forEachPlayer(new Consumer<Player>() {
 
 			@Override
 			public void accept(Player player) {
 				if (player.isOnline()) {
 					CruciblePlayerReward playerReward = getPlayerReward(player.getObjectId());
-					if (nameId != 0) {
-						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_GET_SCORE(new DescriptionId(nameId * 2 + 1), points));
-					}
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_GET_SCORE(npc.getObjectTemplate().getL10n(), points));
 					if (!playerReward.isRewarded()) {
 						playerReward.addPoints(points);
 					}
@@ -304,7 +301,7 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 		}
 
 		if (point != 0) {
-			sendPacket(point, npc.getObjectTemplate().getNameId());
+			sendPacket(point, npc);
 		}
 		switch (npc.getNpcId()) {
 			case 217486:

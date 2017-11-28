@@ -38,7 +38,7 @@ public class EmoteManager {
 		owner.unsetState(CreatureState.WEAPON_EQUIPPED);
 		VisibleObject target = owner.getTarget();
 		if (target instanceof Player) {
-			PacketSendUtility.sendPacket((Player) target, SM_SYSTEM_MESSAGE.STR_UI_COMBAT_NPC_RETURN(owner.getObjectTemplate().getNameId()));
+			PacketSendUtility.sendPacket((Player) target, SM_SYSTEM_MESSAGE.STR_UI_COMBAT_NPC_RETURN(owner.getObjectTemplate().getL10n()));
 		}
 	}
 

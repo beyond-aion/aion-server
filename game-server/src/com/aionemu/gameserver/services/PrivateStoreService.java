@@ -140,9 +140,9 @@ public class PrivateStoreService {
 				ItemService.addItem(buyer, item, boughtItem.getCount());
 
 				if (boughtItem.getCount() == 1)
-					PacketSendUtility.sendPacket(seller, SM_SYSTEM_MESSAGE.STR_MSG_PERSONAL_SHOP_SELL_ITEM(item.getNameId()));
+					PacketSendUtility.sendPacket(seller, SM_SYSTEM_MESSAGE.STR_MSG_PERSONAL_SHOP_SELL_ITEM(item.getL10n()));
 				else
-					PacketSendUtility.sendPacket(seller, SM_SYSTEM_MESSAGE.STR_MSG_PERSONAL_SHOP_SELL_ITEM_MULTI(boughtItem.getCount(), item.getNameId()));
+					PacketSendUtility.sendPacket(seller, SM_SYSTEM_MESSAGE.STR_MSG_PERSONAL_SHOP_SELL_ITEM_MULTI(boughtItem.getCount(), item.getL10n()));
 				log.info("[PRIVATE STORE] > [Seller: " + seller.getName() + "] sold [Item: " + item.getItemId() + "][Amount: " + boughtItem.getCount()
 					+ "] to [Buyer: " + buyer.getName() + "] for [Price: " + boughtItem.getPrice() * boughtItem.getCount() + "]");
 			}

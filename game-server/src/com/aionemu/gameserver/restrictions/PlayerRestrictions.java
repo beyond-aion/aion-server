@@ -3,7 +3,6 @@ package com.aionemu.gameserver.restrictions;
 import com.aionemu.gameserver.configs.administration.AdminConfig;
 import com.aionemu.gameserver.configs.main.GroupConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.model.DescriptionId;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.actions.PlayerMode;
 import com.aionemu.gameserver.model.gameobjects.Creature;
@@ -29,6 +28,7 @@ import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.skillengine.model.SkillType;
 import com.aionemu.gameserver.skillengine.model.TransformType;
 import com.aionemu.gameserver.skillengine.properties.TargetRelationAttribute;
+import com.aionemu.gameserver.utils.ChatUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
@@ -78,7 +78,7 @@ public class PlayerRestrictions extends AbstractRestrictions {
 		}
 
 		if (player.getStore() != null) { // You cannot use an item while running a Private Store.
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANNOT_USE_ITEM_DURING_PATH_FLYING(new DescriptionId(2800123)));
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANNOT_USE_ITEM_DURING_PATH_FLYING(ChatUtil.l10n(1400061)));
 			return false;
 		}
 
@@ -114,7 +114,7 @@ public class PlayerRestrictions extends AbstractRestrictions {
 		if (player.isCasting())
 			return false;
 
-		if ((!player.canAttack()) && !template.hasEvadeEffect()) {
+		if (!player.canAttack() && !template.hasEvadeEffect()) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_CAN_NOT_ATTACK_WHILE_IN_ABNORMAL_STATE());
 			return false;
 		}

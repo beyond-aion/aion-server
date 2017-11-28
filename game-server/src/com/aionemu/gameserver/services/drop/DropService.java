@@ -14,7 +14,6 @@ import org.slf4j.LoggerFactory;
 import com.aionemu.gameserver.configs.main.DropConfig;
 import com.aionemu.gameserver.configs.main.GroupConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.model.DescriptionId;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.actions.PlayerMode;
@@ -243,7 +242,7 @@ public class DropService {
 					return false;
 				} else {
 					PacketSendUtility.sendPacket(player,
-						SM_SYSTEM_MESSAGE.STR_MSG_LOOT_ALREADY_DISTRIBUTING_ITEM(DataManager.ITEM_DATA.getItemTemplate(itemId).getNameId()));
+						SM_SYSTEM_MESSAGE.STR_MSG_LOOT_ALREADY_DISTRIBUTING_ITEM(DataManager.ITEM_DATA.getItemTemplate(itemId).getL10n()));
 					if (!containDropItem) {
 						lootGrouRules.addItemToBeDistributed(requestedItem);
 					}
@@ -327,7 +326,7 @@ public class DropService {
 		if (template.hasLimitOne()) {
 			if (player.getInventory().getFirstItemByItemId(itemId) != null
 				|| player.getStorage(StorageType.REGULAR_WAREHOUSE.getId()).getFirstItemByItemId(itemId) != null) {
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CAN_NOT_GET_LORE_ITEM(new DescriptionId(template.getNameId())));
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CAN_NOT_GET_LORE_ITEM(template.getL10n()));
 				return;
 			}
 		}
@@ -336,7 +335,7 @@ public class DropService {
 		if (lootGrouRules != null && !requestedItem.isDistributeItem() && !requestedItem.isFreeForAll()) {
 			if (lootGrouRules.containDropItem(requestedItem)) {
 				if (!autoLoot)
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_LOOT_ALREADY_DISTRIBUTING_ITEM(template.getNameId()));
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_LOOT_ALREADY_DISTRIBUTING_ITEM(template.getL10n()));
 				return;
 			}
 
@@ -474,13 +473,13 @@ public class DropService {
 	 *          messages when item gained via ROLLED
 	 */
 	private void winningRollActions(Player player, int itemId, int npcObjectId) {
-		int nameId = DataManager.ITEM_DATA.getItemTemplate(itemId).getNameId();
-		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_LOOT_GET_ITEM_ME(nameId));
+		String itemL10n = DataManager.ITEM_DATA.getItemTemplate(itemId).getL10n();
+		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_LOOT_GET_ITEM_ME(itemL10n));
 
 		if (player.isInTeam()) {
 			for (Player member : DropRegistrationService.getInstance().getDropRegistrationMap().get(npcObjectId).getInRangePlayers()) {
 				if (member != null && !player.equals(member)) {
-					PacketSendUtility.sendPacket(member, SM_SYSTEM_MESSAGE.STR_MSG_LOOT_GET_ITEM_OTHER(player.getName(), nameId));
+					PacketSendUtility.sendPacket(member, SM_SYSTEM_MESSAGE.STR_MSG_LOOT_GET_ITEM_OTHER(player.getName(), itemL10n));
 				}
 			}
 		}
@@ -518,27 +517,20 @@ public class DropService {
 			for (Player member : dropNpc.getInRangePlayers()) {
 				if (member != null && !requestedItem.getWinningPlayer().equals(member) && member.isOnline())
 					PacketSendUtility.sendPacket(member, SM_SYSTEM_MESSAGE.STR_MSG_GET_ITEM_PARTYNOTICE(requestedItem.getWinningPlayer().getName(),
-						DataManager.ITEM_DATA.getItemTemplate(itemId).getNameId()));
+						DataManager.ITEM_DATA.getItemTemplate(itemId).getL10n()));
 			}
 		}
 	}
 
 	public void see(final Player player, Npc owner) {
 		final int id = owner.getObjectId();
-		final DropNpc dropNpc = DropRegistrationService.getInstance().getDropRegistrationMap().get(id);
+		DropNpc dropNpc = DropRegistrationService.getInstance().getDropRegistrationMap().get(id);
 
 		if (dropNpc == null)
 			return;
 
 		if (dropNpc.containsKey(player.getObjectId()) || dropNpc.isFreeForAll()) {
-			ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-				@Override
-				public void run() {
-					PacketSendUtility.sendPacket(player, new SM_LOOT_STATUS(id, 0));
-				}
-
-			}, 5000);
+			ThreadPoolManager.getInstance().schedule(() -> PacketSendUtility.sendPacket(player, new SM_LOOT_STATUS(id, 0)), 5000);
 		}
 	}
 

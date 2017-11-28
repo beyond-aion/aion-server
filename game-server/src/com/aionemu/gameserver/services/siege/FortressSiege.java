@@ -15,6 +15,7 @@ import com.aionemu.gameserver.configs.main.LoggingConfig;
 import com.aionemu.gameserver.configs.main.SiegeConfig;
 import com.aionemu.gameserver.dao.PlayerDAO;
 import com.aionemu.gameserver.dao.SiegeDAO;
+import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.PlayerCommonData;
 import com.aionemu.gameserver.model.gameobjects.siege.SiegeNpc;
@@ -30,6 +31,7 @@ import com.aionemu.gameserver.model.templates.siegelocation.SiegeLegionReward;
 import com.aionemu.gameserver.model.templates.siegelocation.SiegeMercenaryZone;
 import com.aionemu.gameserver.model.templates.siegelocation.SiegeReward;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.services.LegionService;
@@ -40,6 +42,7 @@ import com.aionemu.gameserver.services.mail.MailFormatter;
 import com.aionemu.gameserver.services.mail.SiegeResult;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
+import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.World;
 
@@ -198,9 +201,11 @@ public class FortressSiege extends Siege<FortressLocation> {
 	public void onCapture() {
 		SiegeRaceCounter winner = getSiegeCounter().getWinnerRaceCounter();
 		SiegeRace winnerRace = winner.getSiegeRace();
+		SiegeRace oldRace = getSiegeLocation().getRace();
+		Legion oldLegion = oldLegionId == 0 ? null : LegionService.getInstance().getLegion(oldLegionId);
 
 		// Players gain buffs on capture of some fortresses
-		applyWorldBuffs(winnerRace);
+		applyWorldBuffs(winnerRace, false);
 		// Set new fortress and artifact owner race
 		getSiegeLocation().setRace(winnerRace);
 		getArtifact().setRace(winnerRace);
@@ -208,12 +213,9 @@ public class FortressSiege extends Siege<FortressLocation> {
 		// reset occupy count
 		getSiegeLocation().setOccupiedCount(winnerRace == SiegeRace.BALAUR ? 0 : 1);
 
-		if (oldLegionId != 0 && getSiegeLocation().hasValidGpRewards()) { // make sure holding GP are deducted on Capture
-			int oldLegionGeneral = LegionService.getInstance().getBrigadeGeneralOfLegion(oldLegionId);
-			if (oldLegionGeneral != 0) {
-				GloryPointsService.decreaseGp(oldLegionGeneral, 1000);
-				LegionService.getInstance().getLegion(oldLegionId).decreaseSiegeGloryPoints(1000);
-			}
+		if (oldLegion != null && oldLegion.getBrigadeGeneral() != 0 && getSiegeLocation().hasValidGpRewards()) {
+			GloryPointsService.decreaseGp(oldLegion.getBrigadeGeneral(), 1000);
+			LegionService.getInstance().getLegion(oldLegionId).decreaseSiegeGloryPoints(1000);
 		}
 
 		// If new race is balaur
@@ -225,6 +227,32 @@ public class FortressSiege extends Siege<FortressLocation> {
 			getSiegeLocation().setLegionId(topLegionId != null ? topLegionId : 0);
 			getArtifact().setLegionId(topLegionId != null ? topLegionId : 0);
 		}
+
+		// announce
+		String locL10n = getSiegeLocation().getTemplate().getL10n();
+		Legion winnerLegion = getSiegeLocation().getLegionId() == 0 ? null : LegionService.getInstance().getLegion(getSiegeLocation().getLegionId());
+		SM_SYSTEM_MESSAGE loserMsg = getLoserMsg(oldRace, oldLegion, locL10n);
+		SM_SYSTEM_MESSAGE winnerMsg = getWinnerMsg(winnerRace, winnerLegion, locL10n);
+		World.getInstance().forEachPlayer(player -> {
+			if (player.getRace().getRaceId() == oldRace.getRaceId())
+				PacketSendUtility.sendPacket(player, loserMsg);
+			else
+				PacketSendUtility.sendPacket(player, winnerMsg);
+		});
+	}
+
+	private SM_SYSTEM_MESSAGE getWinnerMsg(SiegeRace winnerRace, Legion winnerLegion, String locationName) {
+		if (winnerLegion == null)
+			return SM_SYSTEM_MESSAGE.STR_ABYSS_WIN_CASTLE(winnerRace.getL10n(), locationName);
+		else
+			return SM_SYSTEM_MESSAGE.STR_ABYSS_GUILD_WIN_CASTLE(winnerLegion.getName(), locationName);
+	}
+
+	private SM_SYSTEM_MESSAGE getLoserMsg(SiegeRace loserRace, Legion oldLegion, String locationName) {
+		if (oldLegion == null)
+			return SM_SYSTEM_MESSAGE.STR_ABYSS_CASTLE_TAKEN(loserRace.getL10n(), locationName);
+		else
+			return SM_SYSTEM_MESSAGE.STR_ABYSS_GUILD_CASTLE_TAKEN(oldLegion.getName(), locationName);
 	}
 
 	private int getFactionBalanceAdjustment() {
@@ -250,10 +278,10 @@ public class FortressSiege extends Siege<FortressLocation> {
 		}
 
 		// Players gain buffs for successfully defense / failed capture the fortress
-		applyWorldBuffs(getSiegeLocation().getRace());
+		applyWorldBuffs(getSiegeLocation().getRace(), true);
 	}
 
-	private void applyWorldBuffs(SiegeRace winner) {
+	private void applyWorldBuffs(SiegeRace winner, boolean isDefense) {
 		final int skillId;
 
 		switch (getSiegeLocation().getLocationId()) {
@@ -294,9 +322,14 @@ public class FortressSiege extends Siege<FortressLocation> {
 				return;
 		}
 
-		World.getInstance().forEachPlayer(p -> {
-			if (SiegeRace.getByRace(p.getRace()) == winner) {
-				SkillEngine.getInstance().applyEffectDirectly(skillId, p, p, 0);
+		String skillL10n = DataManager.SKILL_DATA.getSkillTemplate(skillId).getL10n();
+		SM_SYSTEM_MESSAGE notification = isDefense
+			? SM_SYSTEM_MESSAGE.STR_CASTLE_DEFENCE_WIN_BUFF_ON(winner.getL10n(), getSiegeLocation().getTemplate().getL10n(), skillL10n)
+			: SM_SYSTEM_MESSAGE.STR_CASTLE_WIN_BUFF_ON(winner.getL10n(), getSiegeLocation().getTemplate().getL10n(), skillL10n);
+		World.getInstance().forEachPlayer(player -> {
+			if (player.getRace().getRaceId() == winner.getRaceId()) {
+				SkillEngine.getInstance().applyEffectDirectly(skillId, player, player, 0);
+				PacketSendUtility.sendPacket(player, notification);
 			}
 		});
 	}

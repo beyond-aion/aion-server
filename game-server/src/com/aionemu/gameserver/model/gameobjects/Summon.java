@@ -120,8 +120,8 @@ public class Summon extends Creature {
 		return getObjectTemplate().getTemplateId();
 	}
 
-	public int getNameId() {
-		return getObjectTemplate().getNameId();
+	public String getL10n() {
+		return getObjectTemplate().getL10n();
 	}
 
 	/**

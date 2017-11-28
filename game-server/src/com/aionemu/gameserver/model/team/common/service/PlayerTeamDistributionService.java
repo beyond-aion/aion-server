@@ -70,7 +70,7 @@ public class PlayerTeamDistributionService {
 			rewardAp *= damagePercent;
 			rewardAp *= instanceApMultiplier;
 
-			member.getCommonData().addExp(rewardXp, Rates.XP_GROUP_HUNTING, owner.getObjectTemplate().getNameId());
+			member.getCommonData().addExp(rewardXp, Rates.XP_GROUP_HUNTING, owner.getObjectTemplate().getL10n());
 			member.getCommonData().addDp(rewardDp);
 			if (owner.getAi().ask(AIQuestion.SHOULD_REWARD_AP) && !(filteredStats.mentorCount > 0 && CustomConfig.MENTOR_GROUP_AP)) {
 				rewardAp *= StatFunctions.calculatePvEApGained(member, owner);

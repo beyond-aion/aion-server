@@ -1,6 +1,5 @@
 package consolecommands;
 
-import com.aionemu.gameserver.model.DescriptionId;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.PersistentState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -67,7 +66,7 @@ public class Set_enchantcount extends ConsoleCommand {
 				else
 					admin.getInventory().setPersistentState(PersistentState.UPDATE_REQUIRED);
 
-				PacketSendUtility.sendPacket(admin, SM_SYSTEM_MESSAGE.STR_MSG_ENCHANT_ITEM_SUCCEED_NEW(new DescriptionId(item.getNameId()), enchant));
+				PacketSendUtility.sendPacket(admin, SM_SYSTEM_MESSAGE.STR_MSG_ENCHANT_ITEM_SUCCEED_NEW(item.getL10n(), enchant));
 			} else {
 				PacketSendUtility.sendMessage(admin, "Max Enchat for this item is: " + maxEnchant);
 			}

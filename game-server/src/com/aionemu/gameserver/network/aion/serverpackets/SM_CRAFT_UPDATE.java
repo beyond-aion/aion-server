@@ -15,7 +15,7 @@ public class SM_CRAFT_UPDATE extends AionServerPacket {
 	private int action;
 	private int success;
 	private int failure;
-	private int nameId;
+	private String itemNameL10n;
 	private int executionSpeed;
 	private int delay;
 
@@ -34,7 +34,7 @@ public class SM_CRAFT_UPDATE extends AionServerPacket {
 		this.itemId = item.getTemplateId();
 		this.success = success;
 		this.failure = failure;
-		this.nameId = item.getNameId();
+		this.itemNameL10n = item.getL10n();
 		this.executionSpeed = executionSpeed;
 		if (skillId == 40009) {
 			this.delay = 1000;
@@ -57,25 +57,25 @@ public class SM_CRAFT_UPDATE extends AionServerPacket {
 			case 0: // init
 			case 3: // crit = proc
 				writeD(1330048); // msgId
-				writeNameId(nameId);
+				writeS(itemNameL10n); // param
 				break;
 			case 1: // update (normal)
 			case 2: // crit (blue) = +10%
 				writeD(0);
-				writeNameId(0);
+				writeS(null);
 				break;
 			case 4: // cancelled
 				writeD(1330051);
-				writeNameId(0);
+				writeS(null);
 				break;
 			case 5: // success (end)
 				writeD(1330049);
-				writeNameId(nameId);
+				writeS(itemNameL10n); // param
 				break;
 			case 6: // failed (end)
 			case 7: // failure (never used?)
 				writeD(1330050);
-				writeNameId(nameId);
+				writeS(itemNameL10n); // param
 				break;
 		}
 	}

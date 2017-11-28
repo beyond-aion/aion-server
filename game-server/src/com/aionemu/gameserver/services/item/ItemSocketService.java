@@ -11,7 +11,6 @@ import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.controllers.observer.StartMovingListener;
 import com.aionemu.gameserver.dao.ItemStoneListDAO;
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.model.DescriptionId;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.PersistentState;
@@ -172,7 +171,7 @@ public class ItemSocketService {
 		long price = PricesService.getPriceForService(650, player.getRace());
 
 		if (player.getInventory().getKinah() < price) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REMOVE_ITEM_OPTION_NOT_ENOUGH_GOLD(new DescriptionId(item.getNameId())));
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REMOVE_ITEM_OPTION_NOT_ENOUGH_GOLD(item.getL10n()));
 			return;
 		}
 
@@ -182,7 +181,7 @@ public class ItemSocketService {
 		}
 
 		if (!item.hasManaStones()) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REMOVE_ITEM_OPTION_NO_OPTION_TO_REMOVE(new DescriptionId(item.getNameId())));
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REMOVE_ITEM_OPTION_NO_OPTION_TO_REMOVE(item.getL10n()));
 			log.warn("Item stone list is empty");
 			return;
 		}
@@ -200,12 +199,12 @@ public class ItemSocketService {
 			}
 		}
 		if (!found) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REMOVE_ITEM_OPTION_INVALID_OPTION_SLOT_NUMBER(new DescriptionId(item.getNameId())));
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REMOVE_ITEM_OPTION_INVALID_OPTION_SLOT_NUMBER(item.getL10n()));
 			log.warn("Invalid slot ID at manastone removal!");
 			return;
 		}
 		player.getInventory().decreaseKinah(price);
-		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REMOVE_ITEM_OPTION_SUCCEED(new DescriptionId(item.getNameId())));
+		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REMOVE_ITEM_OPTION_SUCCEED(item.getL10n()));
 		ItemPacketService.updateItemAfterInfoChange(player, item);
 	}
 
@@ -215,7 +214,7 @@ public class ItemSocketService {
 		Item item = inventory.getItemByObjId(itemObjId);
 		long price = PricesService.getPriceForService(650, player.getRace());
 		if (player.getInventory().getKinah() < price) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REMOVE_ITEM_OPTION_NOT_ENOUGH_GOLD(new DescriptionId(item.getNameId())));
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REMOVE_ITEM_OPTION_NOT_ENOUGH_GOLD(item.getL10n()));
 			return;
 		}
 
@@ -225,7 +224,7 @@ public class ItemSocketService {
 		}
 
 		if (!item.hasFusionStones()) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REMOVE_ITEM_OPTION_NO_OPTION_TO_REMOVE(new DescriptionId(item.getNameId())));
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REMOVE_ITEM_OPTION_NO_OPTION_TO_REMOVE(item.getL10n()));
 			log.warn("Item stone list is empty");
 			return;
 		}
@@ -243,12 +242,12 @@ public class ItemSocketService {
 			}
 		}
 		if (!found) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REMOVE_ITEM_OPTION_INVALID_OPTION_SLOT_NUMBER(new DescriptionId(item.getNameId())));
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REMOVE_ITEM_OPTION_INVALID_OPTION_SLOT_NUMBER(item.getL10n()));
 			log.warn("Invalid slot ID at manastone removal!");
 			return;
 		}
 		player.getInventory().decreaseKinah(price);
-		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REMOVE_ITEM_OPTION_SUCCEED(new DescriptionId(item.getNameId())));
+		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REMOVE_ITEM_OPTION_SUCCEED(item.getL10n()));
 		ItemPacketService.updateItemAfterInfoChange(player, item);
 	}
 
@@ -294,7 +293,7 @@ public class ItemSocketService {
 
 	public static void socketGodstone(Player player, Item weapon, int stoneId) {
 		if (!weapon.canSocketGodstone()) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GIVE_ITEM_PROC_NOT_PROC_GIVABLE_ITEM(new DescriptionId(weapon.getNameId())));
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GIVE_ITEM_PROC_NOT_PROC_GIVABLE_ITEM(weapon.getL10n()));
 			AuditLogger.log(player, "tried to insert godstone in not compatible item " + weapon.getItemId());
 			return;
 		}
@@ -306,7 +305,7 @@ public class ItemSocketService {
 				super.moved();
 				player.getObserveController().removeObserver(this);
 				player.getController().cancelUseItem();
-				PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1402238, new DescriptionId(weapon.getNameId())));
+				PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1402238, weapon.getL10n()));
 
 			}
 		};
@@ -340,7 +339,7 @@ public class ItemSocketService {
 					return;
 
 				weapon.addGodStone(godStoneItemId);
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GIVE_ITEM_PROC_ENCHANTED_TARGET_ITEM(new DescriptionId(weapon.getNameId())));
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GIVE_ITEM_PROC_ENCHANTED_TARGET_ITEM(weapon.getL10n()));
 
 				ItemPacketService.updateItemAfterInfoChange(player, weapon);
 			}

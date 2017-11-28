@@ -4,7 +4,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.stream.Collectors;
 
-import com.aionemu.gameserver.model.DescriptionId;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.PersistentState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -99,9 +98,9 @@ public class ItemChargeService {
 		player.getEquipment().setPersistentState(PersistentState.UPDATE_REQUIRED);
 		player.getInventory().setPersistentState(PersistentState.UPDATE_REQUIRED);
 		if (chargeWay == 1) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_ITEM_CHARGE_SUCCESS(new DescriptionId(item.getNameId()), level));
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_ITEM_CHARGE_SUCCESS(item.getL10n(), level));
 		} else {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_ITEM_CHARGE2_SUCCESS(new DescriptionId(item.getNameId()), level));
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_ITEM_CHARGE2_SUCCESS(item.getL10n(), level));
 		}
 		player.getGameStats().updateStatsVisually();
 	}

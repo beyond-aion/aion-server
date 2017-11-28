@@ -16,7 +16,7 @@ public class SM_SKILL_LIST extends AionServerPacket {
 
 	private List<PlayerSkillEntry> skillList;
 	private int messageId;
-	private int skillNameId;
+	private String skillNameL10n;
 	private String skillLvl;
 	boolean silentUpdate = false;
 
@@ -29,7 +29,7 @@ public class SM_SKILL_LIST extends AionServerPacket {
 	public SM_SKILL_LIST(PlayerSkillEntry skill, int messageId) {
 		this.skillList = Arrays.asList(skill);
 		this.messageId = messageId;
-		this.skillNameId = DataManager.SKILL_DATA.getSkillTemplate(skill.getSkillId()).getNameId();
+		this.skillNameL10n = DataManager.SKILL_DATA.getSkillTemplate(skill.getSkillId()).getL10n();
 		this.skillLvl = String.valueOf(skill.getSkillLevel());
 	}
 
@@ -47,7 +47,7 @@ public class SM_SKILL_LIST extends AionServerPacket {
 		}
 		writeD(messageId);
 		if (messageId != 0) {
-			writeNameId(skillNameId);
+			writeS(skillNameL10n);
 			writeS(skillLvl);
 			writeH(0x00);
 		}

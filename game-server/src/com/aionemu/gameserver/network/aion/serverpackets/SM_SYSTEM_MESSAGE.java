@@ -1,11 +1,11 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
 import com.aionemu.gameserver.model.ChatType;
-import com.aionemu.gameserver.model.DescriptionId;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
+import com.aionemu.gameserver.utils.stats.AbyssRankEnum;
 
 /**
  * System message packet.
@@ -64,8 +64,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * %0 has been dismissed.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_SKILL_SUMMON_UNSUMMONED(int value0) {
-		return new SM_SYSTEM_MESSAGE(1200006, calculateNameId(value0));
+	public static final SM_SYSTEM_MESSAGE STR_SKILL_SUMMON_UNSUMMONED(String value0) {
+		return new SM_SYSTEM_MESSAGE(1200006, value0);
 	}
 
 	/**
@@ -78,29 +78,29 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * %0 starts to attack the enemy.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_SKILL_SUMMON_ATTACK_MODE(int value0) {
-		return new SM_SYSTEM_MESSAGE(1200008, calculateNameId(value0));
+	public static final SM_SYSTEM_MESSAGE STR_SKILL_SUMMON_ATTACK_MODE(String value0) {
+		return new SM_SYSTEM_MESSAGE(1200008, value0);
 	}
 
 	/**
 	 * %0 is in Guard mode.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_SKILL_SUMMON_GUARD_MODE(int value0) {
-		return new SM_SYSTEM_MESSAGE(1200009, calculateNameId(value0));
+	public static final SM_SYSTEM_MESSAGE STR_SKILL_SUMMON_GUARD_MODE(String value0) {
+		return new SM_SYSTEM_MESSAGE(1200009, value0);
 	}
 
 	/**
 	 * %0 is in Resting mode.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_SKILL_SUMMON_REST_MODE(int value0) {
-		return new SM_SYSTEM_MESSAGE(1200010, calculateNameId(value0));
+	public static final SM_SYSTEM_MESSAGE STR_SKILL_SUMMON_REST_MODE(String value0) {
+		return new SM_SYSTEM_MESSAGE(1200010, value0);
 	}
 
 	/**
 	 * You unsummon %0.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_SKILL_SUMMON_UNSUMMON_FOLLOWER(int value0) {
-		return new SM_SYSTEM_MESSAGE(1200011, calculateNameId(value0));
+	public static final SM_SYSTEM_MESSAGE STR_SKILL_SUMMON_UNSUMMON_FOLLOWER(String value0) {
+		return new SM_SYSTEM_MESSAGE(1200011, value0);
 	}
 
 	/**
@@ -7949,7 +7949,7 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * You do not have enough %0 necessary to use the skill.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_SKILL_NOT_ENOUGH_ITEM(DescriptionId value0) {
+	public static final SM_SYSTEM_MESSAGE STR_SKILL_NOT_ENOUGH_ITEM(String value0) {
 		return new SM_SYSTEM_MESSAGE(1300018, value0);
 	}
 
@@ -8005,8 +8005,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * You cannot do that while you are %0.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_SKILL_CANT_CAST(int stateId) {
-		return new SM_SYSTEM_MESSAGE(1300026, calculateNameId(stateId));
+	public static final SM_SYSTEM_MESSAGE STR_SKILL_CANT_CAST(String value0) {
+		return new SM_SYSTEM_MESSAGE(1300026, value0);
 	}
 
 	/**
@@ -8068,8 +8068,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * You acquired the %0 title as a quest reward.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_QUEST_GET_REWARD_TITLE(int value0) {
-		return new SM_SYSTEM_MESSAGE(1300035, new DescriptionId(value0));
+	public static final SM_SYSTEM_MESSAGE STR_QUEST_GET_REWARD_TITLE(String value0) {
+		return new SM_SYSTEM_MESSAGE(1300035, value0);
 	}
 
 	/**
@@ -8096,15 +8096,15 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * %0 gives up the pursuit.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_UI_COMBAT_NPC_RETURN(int nameId) {
-		return new SM_SYSTEM_MESSAGE(1300039, calculateNameId(nameId));
+	public static final SM_SYSTEM_MESSAGE STR_UI_COMBAT_NPC_RETURN(String value0) {
+		return new SM_SYSTEM_MESSAGE(1300039, value0);
 	}
 
 	/**
 	 * You have discovered [%subzone].
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_UI_DISCOVERY_NEWZONE(String subzone) {
-		return new SM_SYSTEM_MESSAGE(1300040, subzone);
+	public static final SM_SYSTEM_MESSAGE STR_UI_DISCOVERY_NEWZONE() {
+		return new SM_SYSTEM_MESSAGE(1300040);
 	}
 
 	/**
@@ -8152,8 +8152,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * You cannot use an item while %0.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_CANNOT_USE_ITEM_DURING_PATH_FLYING(DescriptionId descriptionId) {
-		return new SM_SYSTEM_MESSAGE(1300048, descriptionId);
+	public static final SM_SYSTEM_MESSAGE STR_MSG_CANNOT_USE_ITEM_DURING_PATH_FLYING(String value0) {
+		return new SM_SYSTEM_MESSAGE(1300048, value0);
 	}
 
 	/**
@@ -10175,8 +10175,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * %0 does not sell items.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_BUY_SELL_HE_DOES_NOT_SELL_ITEM(int npcNameId) {
-		return new SM_SYSTEM_MESSAGE(1300336, calculateNameId(npcNameId));
+	public static final SM_SYSTEM_MESSAGE STR_BUY_SELL_HE_DOES_NOT_SELL_ITEM(String value0) {
+		return new SM_SYSTEM_MESSAGE(1300336, value0);
 	}
 
 	/**
@@ -10231,8 +10231,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * %0 is not an item that can be sold.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_BUY_SELL_ITEM_CAN_NOT_BE_SELLED_TO_NPC(int value0) {
-		return new SM_SYSTEM_MESSAGE(1300344, new DescriptionId(value0));
+	public static final SM_SYSTEM_MESSAGE STR_BUY_SELL_ITEM_CAN_NOT_BE_SELLED_TO_NPC(String value0) {
+		return new SM_SYSTEM_MESSAGE(1300344, value0);
 	}
 
 	/**
@@ -10413,8 +10413,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * You cannot use the selected item until you reach the %0 rank.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_CANNOT_USE_ITEM_INVALID_RANK(int value0) {
-		return new SM_SYSTEM_MESSAGE(1300370, new DescriptionId(value0));
+	public static final SM_SYSTEM_MESSAGE STR_CANNOT_USE_ITEM_INVALID_RANK(String value0) {
+		return new SM_SYSTEM_MESSAGE(1300370, value0);
 	}
 
 	/**
@@ -10427,8 +10427,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * You cannot use %1 until you reach level %0.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_CANNOT_USE_ITEM_TOO_LOW_LEVEL_MUST_BE_THIS_LEVEL(int value1, int value0) {
-		return new SM_SYSTEM_MESSAGE(1300372, value0, new DescriptionId(value1));
+	public static final SM_SYSTEM_MESSAGE STR_CANNOT_USE_ITEM_TOO_LOW_LEVEL_MUST_BE_THIS_LEVEL(String value1, int value0) {
+		return new SM_SYSTEM_MESSAGE(1300372, value0, value1);
 	}
 
 	/**
@@ -10490,7 +10490,7 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * You cannot discard %0.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_UNBREAKABLE_ITEM(DescriptionId value0) {
+	public static final SM_SYSTEM_MESSAGE STR_UNBREAKABLE_ITEM(String value0) {
 		return new SM_SYSTEM_MESSAGE(1300381, value0);
 	}
 
@@ -10574,7 +10574,7 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * You cannot use %0.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_CANT_USE_ITEM(DescriptionId value0) {
+	public static final SM_SYSTEM_MESSAGE STR_CANT_USE_ITEM(String value0) {
 		return new SM_SYSTEM_MESSAGE(1300393, value0);
 	}
 
@@ -10644,8 +10644,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * You have removed the Stigma Stone and can no longer use the %0 skill.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_STIGMA_YOU_CANNOT_USE_THIS_SKILL_AFTER_UNEQUIP_STIGMA_STONE(int value0) {
-		return new SM_SYSTEM_MESSAGE(1300403, new DescriptionId(value0));
+	public static final SM_SYSTEM_MESSAGE STR_STIGMA_YOU_CANNOT_USE_THIS_SKILL_AFTER_UNEQUIP_STIGMA_STONE(String value0) {
+		return new SM_SYSTEM_MESSAGE(1300403, value0);
 	}
 
 	/**
@@ -10693,8 +10693,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * You cannot remove the Stigma Stone because %1 is a prerequisite for the %0th Stigma Stone.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_STIGMA_CANNT_UNEQUIP_STONE_OTHER_STONE_NEED_ITS_SKILL(int value0, int value1) {
-		return new SM_SYSTEM_MESSAGE(1300410, new DescriptionId(value0), new DescriptionId(value1));
+	public static final SM_SYSTEM_MESSAGE STR_STIGMA_CANNT_UNEQUIP_STONE_OTHER_STONE_NEED_ITS_SKILL(String value0, String value1) {
+		return new SM_SYSTEM_MESSAGE(1300410, value0, value1);
 	}
 
 	/**
@@ -10777,14 +10777,14 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * You cannot have this item as you already have the limited possession item %0%.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_CAN_NOT_GET_LORE_ITEM(DescriptionId descriptionId) {
-		return new SM_SYSTEM_MESSAGE(1300422, descriptionId);
+	public static final SM_SYSTEM_MESSAGE STR_CAN_NOT_GET_LORE_ITEM(String value0) {
+		return new SM_SYSTEM_MESSAGE(1300422, value0);
 	}
 
 	/**
 	 * You have used %0.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_USE_ITEM(DescriptionId value0) {
+	public static final SM_SYSTEM_MESSAGE STR_USE_ITEM(String value0) {
 		return new SM_SYSTEM_MESSAGE(1300423, value0);
 	}
 
@@ -10812,8 +10812,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * You have cancelled using the item.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_ITEM_CANCELED(DescriptionId id) {
-		return new SM_SYSTEM_MESSAGE(1300427, id);
+	public static final SM_SYSTEM_MESSAGE STR_ITEM_CANCELED() {
+		return new SM_SYSTEM_MESSAGE(1300427);
 	}
 
 	/**
@@ -10948,8 +10948,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * %0 is not an extractable item.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_DECOMPOSE_ITEM_IT_CAN_NOT_BE_DECOMPOSED(int num0) {
-		return new SM_SYSTEM_MESSAGE(1300446, new DescriptionId(num0));
+	public static final SM_SYSTEM_MESSAGE STR_DECOMPOSE_ITEM_IT_CAN_NOT_BE_DECOMPOSED(String num0) {
+		return new SM_SYSTEM_MESSAGE(1300446, num0);
 	}
 
 	/**
@@ -10962,29 +10962,29 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * You have failed to extract from %0.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_DECOMPOSE_ITEM_FAILED(int value0) {
-		return new SM_SYSTEM_MESSAGE(1300448, new DescriptionId(value0));
+	public static final SM_SYSTEM_MESSAGE STR_DECOMPOSE_ITEM_FAILED(String value0) {
+		return new SM_SYSTEM_MESSAGE(1300448, value0);
 	}
 
 	/**
 	 * You have successfully extracted from %0.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_DECOMPOSE_ITEM_SUCCEED(int value0) {
-		return new SM_SYSTEM_MESSAGE(1300449, new DescriptionId(value0));
+	public static final SM_SYSTEM_MESSAGE STR_DECOMPOSE_ITEM_SUCCEED(String value0) {
+		return new SM_SYSTEM_MESSAGE(1300449, value0);
 	}
 
 	/**
 	 * You have cancelled the extraction from %0.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_DECOMPOSE_ITEM_CANCELED(int nameId) {
-		return new SM_SYSTEM_MESSAGE(1300450, new DescriptionId(nameId));
+	public static final SM_SYSTEM_MESSAGE STR_DECOMPOSE_ITEM_CANCELED(String value0) {
+		return new SM_SYSTEM_MESSAGE(1300450, value0);
 	}
 
 	/**
 	 * You cannot extract item in %0.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_DECOMPOSE_ITEM_INVALID_STANCE(int value0) {
-		return new SM_SYSTEM_MESSAGE(1300451, new DescriptionId(value0));
+	public static final SM_SYSTEM_MESSAGE STR_DECOMPOSE_ITEM_INVALID_STANCE(String value0) {
+		return new SM_SYSTEM_MESSAGE(1300451, value0);
 	}
 
 	/**
@@ -11011,15 +11011,15 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * You have successfully enchanted %0.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_ENCHANT_ITEM_SUCCEED(DescriptionId descriptionId) {
-		return new SM_SYSTEM_MESSAGE(1300455, descriptionId);
+	public static final SM_SYSTEM_MESSAGE STR_ENCHANT_ITEM_SUCCEED(String value0) {
+		return new SM_SYSTEM_MESSAGE(1300455, value0);
 	}
 
 	/**
 	 * You have failed to enchant %0.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_ENCHANT_ITEM_FAILED(DescriptionId descriptionId) {
-		return new SM_SYSTEM_MESSAGE(1300456, descriptionId);
+	public static final SM_SYSTEM_MESSAGE STR_ENCHANT_ITEM_FAILED(String value0) {
+		return new SM_SYSTEM_MESSAGE(1300456, value0);
 	}
 
 	/**
@@ -11046,29 +11046,29 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * %0 cannot be enchanted with %1.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_GIVE_ITEM_OPTION_IT_CAN_NOT_BE_GIVEN_OPTION(DescriptionId descriptionId, int targetItemNameId) {
-		return new SM_SYSTEM_MESSAGE(1300460, descriptionId, calculateNameId(targetItemNameId));
+	public static final SM_SYSTEM_MESSAGE STR_GIVE_ITEM_OPTION_IT_CAN_NOT_BE_GIVEN_OPTION(String value0, String value1) {
+		return new SM_SYSTEM_MESSAGE(1300460, value0, value1);
 	}
 
 	/**
 	 * %0 cannot be enchanted with %1 any more.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_GIVE_ITEM_OPTION_IT_CAN_NOT_BE_GIVEN_OPTION_MORE_TIME(DescriptionId descriptionId, int targetItemNameId) {
-		return new SM_SYSTEM_MESSAGE(1300461, descriptionId, calculateNameId(targetItemNameId));
+	public static final SM_SYSTEM_MESSAGE STR_GIVE_ITEM_OPTION_IT_CAN_NOT_BE_GIVEN_OPTION_MORE_TIME(String value0, String value1) {
+		return new SM_SYSTEM_MESSAGE(1300461, value0, value1);
 	}
 
 	/**
 	 * You have succeeded in the manastone socketing of %0.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_GIVE_ITEM_OPTION_SUCCEED(DescriptionId descriptionId) {
-		return new SM_SYSTEM_MESSAGE(1300462, descriptionId);
+	public static final SM_SYSTEM_MESSAGE STR_GIVE_ITEM_OPTION_SUCCEED(String value0) {
+		return new SM_SYSTEM_MESSAGE(1300462, value0);
 	}
 
 	/**
 	 * You have failed in the manastone socketing of %0.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_GIVE_ITEM_OPTION_FAILED(DescriptionId descriptionId) {
-		return new SM_SYSTEM_MESSAGE(1300463, descriptionId);
+	public static final SM_SYSTEM_MESSAGE STR_GIVE_ITEM_OPTION_FAILED(String value0) {
+		return new SM_SYSTEM_MESSAGE(1300463, value0);
 	}
 
 	/**
@@ -11116,29 +11116,29 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * %0 is not socketed with a manastone.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_REMOVE_ITEM_OPTION_NO_OPTION_TO_REMOVE(DescriptionId descriptionId) {
-		return new SM_SYSTEM_MESSAGE(1300470, descriptionId);
+	public static final SM_SYSTEM_MESSAGE STR_REMOVE_ITEM_OPTION_NO_OPTION_TO_REMOVE(String value0) {
+		return new SM_SYSTEM_MESSAGE(1300470, value0);
 	}
 
 	/**
 	 * The target slot on %0 is not socketed with a manastone.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_REMOVE_ITEM_OPTION_INVALID_OPTION_SLOT_NUMBER(DescriptionId descriptionId) {
-		return new SM_SYSTEM_MESSAGE(1300471, descriptionId);
+	public static final SM_SYSTEM_MESSAGE STR_REMOVE_ITEM_OPTION_INVALID_OPTION_SLOT_NUMBER(String value0) {
+		return new SM_SYSTEM_MESSAGE(1300471, value0);
 	}
 
 	/**
 	 * You do not have enough Kinah to remove the manastone from %0.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_REMOVE_ITEM_OPTION_NOT_ENOUGH_GOLD(DescriptionId descriptionId) {
-		return new SM_SYSTEM_MESSAGE(1300472, descriptionId);
+	public static final SM_SYSTEM_MESSAGE STR_REMOVE_ITEM_OPTION_NOT_ENOUGH_GOLD(String value0) {
+		return new SM_SYSTEM_MESSAGE(1300472, value0);
 	}
 
 	/**
 	 * You have removed the manastone from %0.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_REMOVE_ITEM_OPTION_SUCCEED(DescriptionId descriptionId) {
-		return new SM_SYSTEM_MESSAGE(1300473, descriptionId);
+	public static final SM_SYSTEM_MESSAGE STR_REMOVE_ITEM_OPTION_SUCCEED(String value0) {
+		return new SM_SYSTEM_MESSAGE(1300473, value0);
 	}
 
 	/**
@@ -11186,15 +11186,15 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * The appearance of %0 cannot be modified into %1 and vice versa as they are different type of items.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_CHANGE_ITEM_SKIN_NOT_COMPATIBLE(DescriptionId descriptionId, DescriptionId descriptionId2) {
-		return new SM_SYSTEM_MESSAGE(1300480, descriptionId, descriptionId2);
+	public static final SM_SYSTEM_MESSAGE STR_CHANGE_ITEM_SKIN_NOT_COMPATIBLE(String value0, String value1) {
+		return new SM_SYSTEM_MESSAGE(1300480, value0, value1);
 	}
 
 	/**
 	 * You do not have enough Kinah to modify the appearance of %0.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_CHANGE_ITEM_SKIN_NOT_ENOUGH_GOLD(DescriptionId descriptionId) {
-		return new SM_SYSTEM_MESSAGE(1300481, descriptionId);
+	public static final SM_SYSTEM_MESSAGE STR_CHANGE_ITEM_SKIN_NOT_ENOUGH_GOLD(String value0) {
+		return new SM_SYSTEM_MESSAGE(1300481, value0);
 	}
 
 	/**
@@ -11207,8 +11207,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * You have modified the appearance of %0.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_CHANGE_ITEM_SKIN_SUCCEED(DescriptionId descriptionId) {
-		return new SM_SYSTEM_MESSAGE(1300483, descriptionId);
+	public static final SM_SYSTEM_MESSAGE STR_CHANGE_ITEM_SKIN_SUCCEED(String value0) {
+		return new SM_SYSTEM_MESSAGE(1300483, value0);
 	}
 
 	/**
@@ -11221,8 +11221,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * You have successfully soul-bound %0.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_SOUL_BOUND_ITEM_SUCCEED(int value0) {
-		return new SM_SYSTEM_MESSAGE(1300485, new DescriptionId(value0));
+	public static final SM_SYSTEM_MESSAGE STR_SOUL_BOUND_ITEM_SUCCEED(String value0) {
+		return new SM_SYSTEM_MESSAGE(1300485, value0);
 	}
 
 	/**
@@ -11235,8 +11235,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * You cancelled the soul-binding of %0.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_SOUL_BOUND_ITEM_CANCELED(int value0) {
-		return new SM_SYSTEM_MESSAGE(1300487, new DescriptionId(value0));
+	public static final SM_SYSTEM_MESSAGE STR_SOUL_BOUND_ITEM_CANCELED(String value0) {
+		return new SM_SYSTEM_MESSAGE(1300487, value0);
 	}
 
 	/**
@@ -11249,8 +11249,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * You cannot soul-bind an item while %0.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_SOUL_BOUND_INVALID_STANCE(int value0) {
-		return new SM_SYSTEM_MESSAGE(1300489, new DescriptionId(value0));
+	public static final SM_SYSTEM_MESSAGE STR_SOUL_BOUND_INVALID_STANCE(String value0) {
+		return new SM_SYSTEM_MESSAGE(1300489, value0);
 	}
 
 	/**
@@ -11354,8 +11354,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * %0 is not an item you can add ability to.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_GIVE_ITEM_PROC_NOT_PROC_GIVABLE_ITEM(DescriptionId descriptionId) {
-		return new SM_SYSTEM_MESSAGE(1300504, descriptionId);
+	public static final SM_SYSTEM_MESSAGE STR_GIVE_ITEM_PROC_NOT_PROC_GIVABLE_ITEM(String value0) {
+		return new SM_SYSTEM_MESSAGE(1300504, value0);
 	}
 
 	/**
@@ -11375,15 +11375,15 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * You do not have enough Kinah to add ability to %0.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_GIVE_ITEM_PROC_NOT_ENOUGH_MONEY(DescriptionId descriptionId) {
-		return new SM_SYSTEM_MESSAGE(1300507, descriptionId);
+	public static final SM_SYSTEM_MESSAGE STR_GIVE_ITEM_PROC_NOT_ENOUGH_MONEY(String value0) {
+		return new SM_SYSTEM_MESSAGE(1300507, value0);
 	}
 
 	/**
 	 * You have successfully added ability to %0.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_GIVE_ITEM_PROC_ENCHANTED_TARGET_ITEM(DescriptionId descriptionId) {
-		return new SM_SYSTEM_MESSAGE(1300508, descriptionId);
+	public static final SM_SYSTEM_MESSAGE STR_GIVE_ITEM_PROC_ENCHANTED_TARGET_ITEM(String value0) {
+		return new SM_SYSTEM_MESSAGE(1300508, value0);
 	}
 
 	/**
@@ -11837,8 +11837,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * You can only receive this quest when your rank is %0 or above.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_QUEST_ACQUIRE_ERROR_MIN_RANK(int value0) {
-		return new SM_SYSTEM_MESSAGE(1300573, new DescriptionId(value0));
+	public static final SM_SYSTEM_MESSAGE STR_QUEST_ACQUIRE_ERROR_MIN_RANK(String value0) {
+		return new SM_SYSTEM_MESSAGE(1300573, value0);
 	}
 
 	/**
@@ -11977,15 +11977,15 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * You can only receive this quest when you are equipped with %0.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_QUEST_ACQUIRE_ERROR_EQUIP_ITEM(DescriptionId descriptionId) {
-		return new SM_SYSTEM_MESSAGE(1300593, descriptionId);
+	public static final SM_SYSTEM_MESSAGE STR_QUEST_ACQUIRE_ERROR_EQUIP_ITEM(String value0) {
+		return new SM_SYSTEM_MESSAGE(1300593, value0);
 	}
 
 	/**
 	 * You can only receive this quest when you have %0 in your inventory.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_QUEST_ACQUIRE_ERROR_INVENTORY_ITEM(DescriptionId descriptionId) {
-		return new SM_SYSTEM_MESSAGE(1300594, descriptionId);
+	public static final SM_SYSTEM_MESSAGE STR_QUEST_ACQUIRE_ERROR_INVENTORY_ITEM(String value0) {
+		return new SM_SYSTEM_MESSAGE(1300594, value0);
 	}
 
 	/**
@@ -12152,8 +12152,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * Quest failed: %0
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_QUEST_SYSTEMMSG_GIVEUP(int num0) {
-		return new SM_SYSTEM_MESSAGE(1300618, new DescriptionId(num0 * 2 + 1));
+	public static final SM_SYSTEM_MESSAGE STR_QUEST_SYSTEMMSG_GIVEUP(String value0) {
+		return new SM_SYSTEM_MESSAGE(1300618, value0);
 	}
 
 	/**
@@ -12523,8 +12523,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * You are now bound at [%subzone].
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_DEATH_REGISTER_RESURRECT_POINT(String subzone) {
-		return new SM_SYSTEM_MESSAGE(1300670, subzone);
+	public static final SM_SYSTEM_MESSAGE STR_DEATH_REGISTER_RESURRECT_POINT() {
+		return new SM_SYSTEM_MESSAGE(1300670);
 	}
 
 	/**
@@ -12887,8 +12887,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * You need %0 to open the door.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_CANNOT_OPEN_DOOR_NEED_NAMED_KEY_ITEM(DescriptionId descriptionId) {
-		return new SM_SYSTEM_MESSAGE(1300722, descriptionId);
+	public static final SM_SYSTEM_MESSAGE STR_CANNOT_OPEN_DOOR_NEED_NAMED_KEY_ITEM(String value0) {
+		return new SM_SYSTEM_MESSAGE(1300722, value0);
 	}
 
 	/**
@@ -13635,8 +13635,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * %0 cannot be socketed with Manastone.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_GIVE_ITEM_PROC_NOT_ADD_PROC(DescriptionId descriptionId) {
-		return new SM_SYSTEM_MESSAGE(1300833, descriptionId);
+	public static final SM_SYSTEM_MESSAGE STR_GIVE_ITEM_PROC_NOT_ADD_PROC(String value0) {
+		return new SM_SYSTEM_MESSAGE(1300833, value0);
 	}
 
 	/**
@@ -14405,15 +14405,15 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * You received %0 item as reward for the survey.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_GET_POLL_REWARD_ITEM(int nameId) {
-		return new SM_SYSTEM_MESSAGE(1300945, new DescriptionId(nameId));
+	public static final SM_SYSTEM_MESSAGE STR_MSG_GET_POLL_REWARD_ITEM(String value0) {
+		return new SM_SYSTEM_MESSAGE(1300945, value0);
 	}
 
 	/**
 	 * You received %num1 %0 items as reward for the survey.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_GET_POLL_REWARD_ITEM_MULTI(long num1, int nameId) {
-		return new SM_SYSTEM_MESSAGE(1300946, num1, new DescriptionId(nameId));
+	public static final SM_SYSTEM_MESSAGE STR_MSG_GET_POLL_REWARD_ITEM_MULTI(long num1, String value0) {
+		return new SM_SYSTEM_MESSAGE(1300946, num1, value0);
 	}
 
 	/**
@@ -15014,29 +15014,29 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * The %0 %1 is activating the %2 Artifact.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_ARTIFACT_CASTING(DescriptionId race, String value1, DescriptionId descriptionId) {
-		return new SM_SYSTEM_MESSAGE(1301033, race, value1, descriptionId);
+	public static final SM_SYSTEM_MESSAGE STR_ARTIFACT_CASTING(String race, String name, String artifact) {
+		return new SM_SYSTEM_MESSAGE(1301033, race, name, artifact);
 	}
 
 	/**
 	 * The %1 Artifact core in %0 possession has been deactivated.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_ARTIFACT_CORE_CASTING(DescriptionId race, DescriptionId descriptionId) {
-		return new SM_SYSTEM_MESSAGE(1301034, race, descriptionId);
+	public static final SM_SYSTEM_MESSAGE STR_ARTIFACT_CORE_CASTING(String race, String artifact) {
+		return new SM_SYSTEM_MESSAGE(1301034, race, artifact);
 	}
 
 	/**
 	 * The activation of the %1 Artifact in %0 possession has been cancelled.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_ARTIFACT_CANCELED(DescriptionId race, DescriptionId descriptionId) {
-		return new SM_SYSTEM_MESSAGE(1301035, race, descriptionId);
+	public static final SM_SYSTEM_MESSAGE STR_ARTIFACT_CANCELED(String race, String artifact) {
+		return new SM_SYSTEM_MESSAGE(1301035, race, artifact);
 	}
 
 	/**
 	 * The %0 %1 has succeeded in activating the %2 Artifact.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_ARTIFACT_FIRE(DescriptionId race, String value1, DescriptionId descriptionId) {
-		return new SM_SYSTEM_MESSAGE(1301036, race, value1, descriptionId);
+	public static final SM_SYSTEM_MESSAGE STR_ARTIFACT_FIRE(String race, String name, String artifact) {
+		return new SM_SYSTEM_MESSAGE(1301036, race, name, artifact);
 	}
 
 	/**
@@ -15063,15 +15063,15 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * %0 is now vulnerable.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_ABYSS_PVP_ON(DescriptionId descriptionId) {
-		return new SM_SYSTEM_MESSAGE(1301040, descriptionId);
+	public static final SM_SYSTEM_MESSAGE STR_ABYSS_PVP_ON(String value0) {
+		return new SM_SYSTEM_MESSAGE(1301040, value0);
 	}
 
 	/**
 	 * %0 is no longer vulnerable.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_ABYSS_PVP_OFF(DescriptionId descriptionId) {
-		return new SM_SYSTEM_MESSAGE(1301041, descriptionId);
+	public static final SM_SYSTEM_MESSAGE STR_ABYSS_PVP_OFF(String value0) {
+		return new SM_SYSTEM_MESSAGE(1301041, value0);
 	}
 
 	/**
@@ -15217,8 +15217,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * %0 has been activated.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_SKILL_PROC_EFFECT_OCCURRED(int value0) {
-		return new SM_SYSTEM_MESSAGE(1301062, new DescriptionId(value0));
+	public static final SM_SYSTEM_MESSAGE STR_SKILL_PROC_EFFECT_OCCURRED(String value0) {
+		return new SM_SYSTEM_MESSAGE(1301062, value0);
 	}
 
 	/**
@@ -15694,8 +15694,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * %1 of %0 has captured the %2 Artifact.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_GUILD_EVENT_WIN_ARTIFACT(String value1, String value0, String value2) {
-		return new SM_SYSTEM_MESSAGE(1320002, value1, value0, value2);
+	public static final SM_SYSTEM_MESSAGE STR_GUILD_EVENT_WIN_ARTIFACT(String value0, String value1, String value2) {
+		return new SM_SYSTEM_MESSAGE(1320002, value0, value1, value2);
 	}
 
 	/**
@@ -15729,8 +15729,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * Your %0 skill level is not high enough.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_GATHER_OUT_OF_SKILL_POINT(int nameId) {
-		return new SM_SYSTEM_MESSAGE(1330001, new DescriptionId(nameId));
+	public static final SM_SYSTEM_MESSAGE STR_GATHER_OUT_OF_SKILL_POINT(String value0) {
+		return new SM_SYSTEM_MESSAGE(1330001, value0);
 	}
 
 	/**
@@ -15995,22 +15995,22 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * You are too far from %0 to craft.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_COMBINE_TOO_FAR_FROM_TOOL(int value0) {
-		return new SM_SYSTEM_MESSAGE(1330040, new DescriptionId(value0));
+	public static final SM_SYSTEM_MESSAGE STR_COMBINE_TOO_FAR_FROM_TOOL(String value0) {
+		return new SM_SYSTEM_MESSAGE(1330040, value0);
 	}
 
 	/**
 	 * You cannot craft as you do not have %0.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_COMBINE_DO_NOT_HAVE_TOOL(int value0) {
-		return new SM_SYSTEM_MESSAGE(1330041, new DescriptionId(value0));
+	public static final SM_SYSTEM_MESSAGE STR_COMBINE_DO_NOT_HAVE_TOOL(String value0) {
+		return new SM_SYSTEM_MESSAGE(1330041, value0);
 	}
 
 	/**
 	 * You cannot start crafting as you have not learned the %0 skill.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_COMBINE_CANT_USE(int value0) {
-		return new SM_SYSTEM_MESSAGE(1330042, new DescriptionId(value0));
+	public static final SM_SYSTEM_MESSAGE STR_COMBINE_CANT_USE(String value0) {
+		return new SM_SYSTEM_MESSAGE(1330042, value0);
 	}
 
 	/**
@@ -16023,8 +16023,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * Your %0 skill is not good enough yet.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_COMBINE_OUT_OF_SKILL_POINT(int value0) {
-		return new SM_SYSTEM_MESSAGE(1330044, new DescriptionId(value0));
+	public static final SM_SYSTEM_MESSAGE STR_COMBINE_OUT_OF_SKILL_POINT(String value0) {
+		return new SM_SYSTEM_MESSAGE(1330044, value0);
 	}
 
 	/**
@@ -16037,15 +16037,15 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * You cannot craft as you do not have %0.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_COMBINE_NO_COMPONENT_ITEM_SINGLE(int value0) {
-		return new SM_SYSTEM_MESSAGE(1330046, new DescriptionId(value0));
+	public static final SM_SYSTEM_MESSAGE STR_COMBINE_NO_COMPONENT_ITEM_SINGLE(String value0) {
+		return new SM_SYSTEM_MESSAGE(1330046, value0);
 	}
 
 	/**
 	 * You cannot craft as you do not have %num1 %0.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_COMBINE_NO_COMPONENT_ITEM_MULTIPLE(int num1, int value0) {
-		return new SM_SYSTEM_MESSAGE(1330047, num1, new DescriptionId(value0));
+	public static final SM_SYSTEM_MESSAGE STR_COMBINE_NO_COMPONENT_ITEM_MULTIPLE(int num1, String value0) {
+		return new SM_SYSTEM_MESSAGE(1330047, value0, num1);
 	}
 
 	/**
@@ -16093,8 +16093,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * You must learn the %0 skill to start gathering.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_GATHER_LEARN_SKILL(int nameId) {
-		return new SM_SYSTEM_MESSAGE(1330054, new DescriptionId(nameId));
+	public static final SM_SYSTEM_MESSAGE STR_GATHER_LEARN_SKILL(String value0) {
+		return new SM_SYSTEM_MESSAGE(1330054, value0);
 	}
 
 	/**
@@ -16149,8 +16149,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * You cannot learn the design because you have not learned the %0 skill.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_CRAFT_RECIPE_CANT_LEARN_SKILL(int i) {
-		return new SM_SYSTEM_MESSAGE(1330062, new DescriptionId(i));
+	public static final SM_SYSTEM_MESSAGE STR_CRAFT_RECIPE_CANT_LEARN_SKILL(String value0) {
+		return new SM_SYSTEM_MESSAGE(1330062, value0);
 	}
 
 	/**
@@ -16254,22 +16254,22 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * You have started gathering %0.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_EXTRACT_GATHER_START_1_BASIC(DescriptionId descriptionId) {
-		return new SM_SYSTEM_MESSAGE(1330077, descriptionId);
+	public static final SM_SYSTEM_MESSAGE STR_EXTRACT_GATHER_START_1_BASIC(String value0) {
+		return new SM_SYSTEM_MESSAGE(1330077, value0);
 	}
 
 	/**
 	 * You have gathered %0.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_EXTRACT_GATHER_SUCCESS_1_BASIC(DescriptionId descriptionId) {
-		return new SM_SYSTEM_MESSAGE(1330078, descriptionId);
+	public static final SM_SYSTEM_MESSAGE STR_EXTRACT_GATHER_SUCCESS_1_BASIC(String value0) {
+		return new SM_SYSTEM_MESSAGE(1330078, value0);
 	}
 
 	/**
 	 * You have failed to gather %0.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_EXTRACT_GATHER_FAIL_1_BASIC(DescriptionId descriptionId) {
-		return new SM_SYSTEM_MESSAGE(1330079, descriptionId);
+	public static final SM_SYSTEM_MESSAGE STR_EXTRACT_GATHER_FAIL_1_BASIC(String value0) {
+		return new SM_SYSTEM_MESSAGE(1330079, value0);
 	}
 
 	/**
@@ -16377,10 +16377,6 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 		return new SM_SYSTEM_MESSAGE(1370000, value0, num1);
 	}
 
-	public static final SM_SYSTEM_MESSAGE STR_GET_EXP_DESC(DescriptionId value0, long num1) {
-		return new SM_SYSTEM_MESSAGE(1370000, value0, num1);
-	}
-
 	/**
 	 * You have earned %0 XP.
 	 */
@@ -16447,8 +16443,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * %0 has acquired %1.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_GET_ITEM_PARTYNOTICE(String value0, int nameId) {
-		return new SM_SYSTEM_MESSAGE(1390002, value0, new DescriptionId(nameId));
+	public static final SM_SYSTEM_MESSAGE STR_MSG_GET_ITEM_PARTYNOTICE(String value0, String value1) {
+		return new SM_SYSTEM_MESSAGE(1390002, value0, value1);
 	}
 
 	/**
@@ -16819,9 +16815,9 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * %1 of %0 uses %3 in %2.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_SKILL_ABYSS_SKILL_IS_FIRED(Player player, DescriptionId skill) {
-		return new SM_SYSTEM_MESSAGE(1390155, player.getRace().getRaceDescriptionId(), player.getName(), "%SubZone:" + player.getPosition().getMapId()
-			+ " " + player.getPosition().getX() + " " + player.getPosition().getY() + " " + player.getPosition().getZ(), skill);
+	public static final SM_SYSTEM_MESSAGE STR_SKILL_ABYSS_SKILL_IS_FIRED(Player player, String skill) {
+		return new SM_SYSTEM_MESSAGE(1390155, player.getRace().getL10n(), player.getName(), "%SubZone:" + player.getPosition().getMapId() + " "
+			+ player.getPosition().getX() + " " + player.getPosition().getY() + " " + player.getPosition().getZ(), skill);
 	}
 
 	/**
@@ -16995,15 +16991,15 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * You are now the owner of %0.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_LOOT_GET_ITEM_ME(int nameId) {
-		return new SM_SYSTEM_MESSAGE(1390180, new DescriptionId(nameId));
+	public static final SM_SYSTEM_MESSAGE STR_MSG_LOOT_GET_ITEM_ME(String value0) {
+		return new SM_SYSTEM_MESSAGE(1390180, value0);
 	}
 
 	/**
 	 * %0 is now the owner of %1.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_LOOT_GET_ITEM_OTHER(String value0, int nameId) {
-		return new SM_SYSTEM_MESSAGE(1390181, value0, new DescriptionId(nameId));
+	public static final SM_SYSTEM_MESSAGE STR_MSG_LOOT_GET_ITEM_OTHER(String value0, String value1) {
+		return new SM_SYSTEM_MESSAGE(1390181, value0, value1);
 	}
 
 	/**
@@ -17268,8 +17264,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * %0 is one of the quality items waiting to be distributed.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_LOOT_ALREADY_DISTRIBUTING_ITEM(int nameId) {
-		return new SM_SYSTEM_MESSAGE(1390219, new DescriptionId(nameId));
+	public static final SM_SYSTEM_MESSAGE STR_MSG_LOOT_ALREADY_DISTRIBUTING_ITEM(String value0) {
+		return new SM_SYSTEM_MESSAGE(1390219, value0);
 	}
 
 	/**
@@ -17282,8 +17278,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * The skill level for the %0 skill does not increase as the difficulty is too low.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_DONT_GET_PRODUCTION_EXP(int nameId) {
-		return new SM_SYSTEM_MESSAGE(1390221, new DescriptionId(nameId));
+	public static final SM_SYSTEM_MESSAGE STR_MSG_DONT_GET_PRODUCTION_EXP(String value0) {
+		return new SM_SYSTEM_MESSAGE(1390221, value0);
 	}
 
 	/**
@@ -17429,8 +17425,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * You have acquired the %0 title.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_GET_CASH_TITLE(int value0) {
-		return new SM_SYSTEM_MESSAGE(1390242, new DescriptionId(value0));
+	public static final SM_SYSTEM_MESSAGE STR_MSG_GET_CASH_TITLE(String value0) {
+		return new SM_SYSTEM_MESSAGE(1390242, value0);
 	}
 
 	/**
@@ -17443,15 +17439,15 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * The usage time of %0 title has expired.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_DELETE_CASH_TITLE_BY_TIMEOUT(int nameId) {
-		return new SM_SYSTEM_MESSAGE(1390244, new DescriptionId(nameId));
+	public static final SM_SYSTEM_MESSAGE STR_MSG_DELETE_CASH_TITLE_BY_TIMEOUT(String value0) {
+		return new SM_SYSTEM_MESSAGE(1390244, value0);
 	}
 
 	/**
 	 * Usage time for the %0 emote has expired.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_DELETE_CASH_SOCIALACTION_BY_TIMEOUT(int nameId) {
-		return new SM_SYSTEM_MESSAGE(1390245, new DescriptionId(nameId));
+	public static final SM_SYSTEM_MESSAGE STR_MSG_DELETE_CASH_SOCIALACTION_BY_TIMEOUT(String value0) {
+		return new SM_SYSTEM_MESSAGE(1390245, value0);
 	}
 
 	public static final SM_SYSTEM_MESSAGE STR_MSG_DELETE_CASH_SOCIALACTION_BY_TIMEOUT() {
@@ -17811,17 +17807,16 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * %0 %1 %2 has died in %3.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_ABYSS_ORDER_RANKER_DIE(Player victim, DescriptionId rankDescId, int zoneNameId) {
-		return new SM_SYSTEM_MESSAGE(1400023, victim.getRace().getRaceDescriptionId(), rankDescId, victim.getName(),
-			new DescriptionId(zoneNameId * 2 + 1));
+	public static final SM_SYSTEM_MESSAGE STR_ABYSS_ORDER_RANKER_DIE(Player victim) {
+		return SM_SYSTEM_MESSAGE.STR_ABYSS_ORDER_RANKER_DIE(victim, "%SubZone:" + victim.getPosition().getMapId() + " " + victim.getPosition().getX()
+			+ " " + victim.getPosition().getY() + " " + victim.getPosition().getZ());
 	}
 
 	/**
 	 * %0 %1 %2 has died in %3.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_ABYSS_ORDER_RANKER_DIE(Player victim, DescriptionId rankDescId) {
-		return new SM_SYSTEM_MESSAGE(1400023, victim.getRace().getRaceDescriptionId(), rankDescId, victim.getName(), "%SubZone:"
-			+ victim.getPosition().getMapId() + " " + victim.getPosition().getX() + " " + victim.getPosition().getY() + " " + victim.getPosition().getZ());
+	public static final SM_SYSTEM_MESSAGE STR_ABYSS_ORDER_RANKER_DIE(Player victim, String zoneName) {
+		return new SM_SYSTEM_MESSAGE(1400023, victim.getRace().getL10n(), AbyssRankEnum.getRankL10n(victim), victim.getName(), zoneName);
 	}
 
 	/**
@@ -17899,8 +17894,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * Usage time for %0 has expired.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_DELETE_CASH_ITEM_BY_TIMEOUT(int nameId) {
-		return new SM_SYSTEM_MESSAGE(1400034, new DescriptionId(nameId));
+	public static final SM_SYSTEM_MESSAGE STR_MSG_DELETE_CASH_ITEM_BY_TIMEOUT(String value0) {
+		return new SM_SYSTEM_MESSAGE(1400034, value0);
 	}
 
 	/**
@@ -18608,15 +18603,15 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * You have sold %0.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_PERSONAL_SHOP_SELL_ITEM(int value0) {
-		return new SM_SYSTEM_MESSAGE(1400134, new DescriptionId(value0));
+	public static final SM_SYSTEM_MESSAGE STR_MSG_PERSONAL_SHOP_SELL_ITEM(String value0) {
+		return new SM_SYSTEM_MESSAGE(1400134, value0);
 	}
 
 	/**
 	 * You have sold %num1 %0s.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_PERSONAL_SHOP_SELL_ITEM_MULTI(long num1, int value0) {
-		return new SM_SYSTEM_MESSAGE(1400135, new DescriptionId(value0), num1);
+	public static final SM_SYSTEM_MESSAGE STR_MSG_PERSONAL_SHOP_SELL_ITEM_MULTI(long num1, String value0) {
+		return new SM_SYSTEM_MESSAGE(1400135, value0, num1);
 	}
 
 	/**
@@ -18930,8 +18925,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * The %num0 player limit of %WORLDNAME1 has been exceeded.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_CANT_INSTANCE_TOO_MANY_MEMBERS(int num0, String worldname1) {
-		return new SM_SYSTEM_MESSAGE(1400180, num0, worldname1);
+	public static final SM_SYSTEM_MESSAGE STR_MSG_CANT_INSTANCE_TOO_MANY_MEMBERS(int num0, int mapId) {
+		return new SM_SYSTEM_MESSAGE(1400180, num0, mapId);
 	}
 
 	/**
@@ -19322,7 +19317,7 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * You have gained %num1 points from %0.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_GET_SCORE(Object value0, int num1) {
+	public static final SM_SYSTEM_MESSAGE STR_MSG_GET_SCORE(String value0, int num1) {
 		return new SM_SYSTEM_MESSAGE(1400237, value0, num1);
 	}
 
@@ -19532,8 +19527,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * Only those at or under level %0 can use %1.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_CANNOT_USE_ITEM_TOO_HIGH_LEVEL(int value0, int value1) {
-		return new SM_SYSTEM_MESSAGE(1400267, value0, new DescriptionId(value1));
+	public static final SM_SYSTEM_MESSAGE STR_CANNOT_USE_ITEM_TOO_HIGH_LEVEL(int value0, String value1) {
+		return new SM_SYSTEM_MESSAGE(1400267, value0, value1);
 	}
 
 	/**
@@ -19686,15 +19681,15 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * %0 cannot be combined.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_COMPOUND_ERROR_NOT_AVAILABLE(int i) {
-		return new SM_SYSTEM_MESSAGE(1400289, new DescriptionId(i));
+	public static final SM_SYSTEM_MESSAGE STR_COMPOUND_ERROR_NOT_AVAILABLE(String value0) {
+		return new SM_SYSTEM_MESSAGE(1400289, value0);
 	}
 
 	/**
 	 * This modification cannot be completed as the equipment requirements for %0 and %1 are different.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_CANT_CHANGE_SKIN_OPPOSITE_REQUIREMENT(DescriptionId item1, DescriptionId item2) {
-		return new SM_SYSTEM_MESSAGE(1400290, item1, item2);
+	public static final SM_SYSTEM_MESSAGE STR_MSG_CANT_CHANGE_SKIN_OPPOSITE_REQUIREMENT(String value0, String value1) {
+		return new SM_SYSTEM_MESSAGE(1400290, value0, value1);
 	}
 
 	/**
@@ -20008,22 +20003,22 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * The ability combined with %0 has been removed.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_COMPOUNDED_ITEM_DECOMPOUND_SUCCESS(int i) {
-		return new SM_SYSTEM_MESSAGE(1400335, new DescriptionId(i));
+	public static final SM_SYSTEM_MESSAGE STR_COMPOUNDED_ITEM_DECOMPOUND_SUCCESS(String value0) {
+		return new SM_SYSTEM_MESSAGE(1400335, value0);
 	}
 
 	/**
 	 * %1 has been combined with %0.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_COMPOUND_SUCCESS(int i, int j) {
-		return new SM_SYSTEM_MESSAGE(1400336, new DescriptionId(i), new DescriptionId(j));
+	public static final SM_SYSTEM_MESSAGE STR_COMPOUND_SUCCESS(String value0, String value1) {
+		return new SM_SYSTEM_MESSAGE(1400336, value0, value1);
 	}
 
 	/**
 	 * You do not have enough Kinah to combine %0 and %1.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_COMPOUND_ERROR_NOT_ENOUGH_MONEY(int i, int j) {
-		return new SM_SYSTEM_MESSAGE(1400337, new DescriptionId(i), new DescriptionId(j));
+	public static final SM_SYSTEM_MESSAGE STR_COMPOUND_ERROR_NOT_ENOUGH_MONEY(String value0, String value1) {
+		return new SM_SYSTEM_MESSAGE(1400337, value0, value1);
 	}
 
 	/**
@@ -20061,10 +20056,6 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 		return new SM_SYSTEM_MESSAGE(1400342, value0, num1, num2);
 	}
 
-	public static final SM_SYSTEM_MESSAGE STR_GET_EXP_VITAL_BONUS_DESC(DescriptionId value0, long num1, long num2) {
-		return new SM_SYSTEM_MESSAGE(1400342, value0, num1, num2);
-	}
-
 	/**
 	 * You have gained %num1 XP from %0 (Energy of Salvation %num2).
 	 */
@@ -20072,18 +20063,10 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 		return new SM_SYSTEM_MESSAGE(1400343, value0, num1, num2);
 	}
 
-	public static final SM_SYSTEM_MESSAGE STR_GET_EXP_MAKEUP_BONUS_DESC(DescriptionId value0, long num1, long num2) {
-		return new SM_SYSTEM_MESSAGE(1400343, value0, num1, num2);
-	}
-
 	/**
 	 * You have gained %num1 XP from %0 (Energy of Repose %num2, Energy of Salvation %num3).
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_GET_EXP_VITAL_MAKEUP_BONUS(String value0, long num1, long num2, long num3) {
-		return new SM_SYSTEM_MESSAGE(1400344, value0, num1, num2, num3);
-	}
-
-	public static final SM_SYSTEM_MESSAGE STR_GET_EXP_VITAL_MAKEUP_BONUS_DESC(DescriptionId value0, long num1, long num2, long num3) {
 		return new SM_SYSTEM_MESSAGE(1400344, value0, num1, num2, num3);
 	}
 
@@ -20286,8 +20269,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * %0 is not a combined item.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_DECOMPOUND_ERROR_NOT_AVAILABLE(int i) {
-		return new SM_SYSTEM_MESSAGE(1400373, new DescriptionId(i));
+	public static final SM_SYSTEM_MESSAGE STR_DECOMPOUND_ERROR_NOT_AVAILABLE(String value0) {
+		return new SM_SYSTEM_MESSAGE(1400373, value0);
 	}
 
 	/**
@@ -20307,8 +20290,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * You do not have enough %0 to gather.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_CANT_GATHERING_B_ITEM_CHECK(int nameId) {
-		return new SM_SYSTEM_MESSAGE(1400376, new DescriptionId(nameId));
+	public static final SM_SYSTEM_MESSAGE STR_MSG_CANT_GATHERING_B_ITEM_CHECK(String value0) {
+		return new SM_SYSTEM_MESSAGE(1400376, value0);
 	}
 
 	/**
@@ -20517,8 +20500,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * Usage time for %0 in the warehouse has expired.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_DELETE_CASH_ITEM_BY_TIMEOUT_IN_WAREHOUSE(int nameId) {
-		return new SM_SYSTEM_MESSAGE(1400406, new DescriptionId(nameId));
+	public static final SM_SYSTEM_MESSAGE STR_MSG_DELETE_CASH_ITEM_BY_TIMEOUT_IN_WAREHOUSE(String value0) {
+		return new SM_SYSTEM_MESSAGE(1400406, value0);
 	}
 
 	/**
@@ -20706,8 +20689,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * %0 has succeeded in enchanting %1 to Level 15.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_ENCHANT_ITEM_SUCCEEDED_15(String playerName, int nameId) {
-		return new SM_SYSTEM_MESSAGE(1400435, playerName, new DescriptionId(nameId));
+	public static final SM_SYSTEM_MESSAGE STR_MSG_ENCHANT_ITEM_SUCCEEDED_15(String playerName, String value1) {
+		return new SM_SYSTEM_MESSAGE(1400435, playerName, value1);
 	}
 
 	/**
@@ -20825,8 +20808,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * You have opened the %0.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_UNCOMPRESS_COMPRESSED_ITEM_SUCCEEDED(int num0) {
-		return new SM_SYSTEM_MESSAGE(1400452, new DescriptionId(num0));
+	public static final SM_SYSTEM_MESSAGE STR_UNCOMPRESS_COMPRESSED_ITEM_SUCCEEDED(String num0) {
+		return new SM_SYSTEM_MESSAGE(1400452, num0);
 	}
 
 	/**
@@ -21028,8 +21011,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * %1 remains before the usage time for %0 expires.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_CASH_ITEM_TIME_LEFT(int nameId, int minutes) {
-		return new SM_SYSTEM_MESSAGE(1400481, new DescriptionId(nameId), minutes + "min");
+	public static final SM_SYSTEM_MESSAGE STR_MSG_CASH_ITEM_TIME_LEFT(String value0, int minutes) {
+		return new SM_SYSTEM_MESSAGE(1400481, value0, minutes + "min");
 	}
 
 	/**
@@ -21532,8 +21515,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * %0's temporary trade time has expired. %0 can no longer be traded.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_END_OF_EXCHANGE_TIME(int nameId, int timeMin) {
-		return new SM_SYSTEM_MESSAGE(1400553, new DescriptionId(nameId), timeMin);
+	public static final SM_SYSTEM_MESSAGE STR_MSG_END_OF_EXCHANGE_TIME(String value0) {
+		return new SM_SYSTEM_MESSAGE(1400553, value0);
 	}
 
 	/**
@@ -21546,8 +21529,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * %0's temporary trade time has expired and can no longer be traded.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_EXCHANGE_TIME_OVER(int value0) {
-		return new SM_SYSTEM_MESSAGE(1400555, new DescriptionId(value0));
+	public static final SM_SYSTEM_MESSAGE STR_MSG_EXCHANGE_TIME_OVER(String value0) {
+		return new SM_SYSTEM_MESSAGE(1400555, value0);
 	}
 
 	/**
@@ -21966,8 +21949,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * %0 spits out %1 and makes a face.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_TOYPET_FEED_FOOD_NOT_LOVEFLAVOR(String petName, int nameId) {
-		return new SM_SYSTEM_MESSAGE(1400618, petName, new DescriptionId(nameId));
+	public static final SM_SYSTEM_MESSAGE STR_MSG_TOYPET_FEED_FOOD_NOT_LOVEFLAVOR(String value0, String value1) {
+		return new SM_SYSTEM_MESSAGE(1400618, value0, value1);
 	}
 
 	/**
@@ -23038,8 +23021,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * You have left %0 because of the level limit.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_FACTION_LEAVE_BY_LEVEL_LIMIT(int value0) {
-		return new SM_SYSTEM_MESSAGE(1400770, new DescriptionId(value0));
+	public static final SM_SYSTEM_MESSAGE STR_FACTION_LEAVE_BY_LEVEL_LIMIT(String value0) {
+		return new SM_SYSTEM_MESSAGE(1400770, value0);
 	}
 
 	/**
@@ -23648,7 +23631,7 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * You can receive the weekly quest again at %1 in the morning on %0.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_QUEST_LIMIT_START_WEEK(DescriptionId value0, int num1) {
+	public static final SM_SYSTEM_MESSAGE STR_MSG_QUEST_LIMIT_START_WEEK(String value0, int num1) {
 		return new SM_SYSTEM_MESSAGE(1400857, value0, num1);
 	}
 
@@ -23858,12 +23841,12 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * %0 has been conditioned to level %1.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_ITEM_CHARGE_SUCCESS(DescriptionId descriptionId, int level) {
-		return new SM_SYSTEM_MESSAGE(1400887, descriptionId, level);
+	public static final SM_SYSTEM_MESSAGE STR_MSG_ITEM_CHARGE_SUCCESS(String value0, int level) {
+		return new SM_SYSTEM_MESSAGE(1400887, value0, level);
 	}
 
-	public static final SM_SYSTEM_MESSAGE STR_MSG_ITEM_CHARGE2_SUCCESS(DescriptionId descriptionId, int level) {
-		return new SM_SYSTEM_MESSAGE(1401335, descriptionId, level);
+	public static final SM_SYSTEM_MESSAGE STR_MSG_ITEM_CHARGE2_SUCCESS(String value0, int level) {
+		return new SM_SYSTEM_MESSAGE(1401335, value0, level);
 	}
 
 	/**
@@ -25008,8 +24991,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * You must have %0 to do this.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_QUEST_COMPLETE_ERROR_QUEST_ITEM_RETRY(DescriptionId descriptionId) {
-		return new SM_SYSTEM_MESSAGE(1401066, descriptionId);
+	public static final SM_SYSTEM_MESSAGE STR_MSG_QUEST_COMPLETE_ERROR_QUEST_ITEM_RETRY(String value0) {
+		return new SM_SYSTEM_MESSAGE(1401066, value0);
 	}
 
 	/**
@@ -25174,113 +25157,101 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	}
 
 	/**
-	 * %0 disappears in 10 minutes because your Abyss Rank changed.
-	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_UNEQUIP_RANKITEM_TIMER_10M(int value0) {
-		return new SM_SYSTEM_MESSAGE(1401327, new DescriptionId(value0));
-	}
-
-	/**
-	 * %0 disappears in 1 minute because your Abyss Rank changed.
-	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_UNEQUIP_RANKITEM_TIMER_1M(int value0) {
-		return new SM_SYSTEM_MESSAGE(1401328, new DescriptionId(value0));
-	}
-
-	/**
-	 * %0 disappeared because your Abyss Rank changed.
-	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_UNEQUIP_RANKITEM(int value0) {
-		return new SM_SYSTEM_MESSAGE(1401329, new DescriptionId(value0));
-	}
-
-	// Housing messages
-	public static final SM_SYSTEM_MESSAGE STR_MSG_HOUSING_INS_OWN_SUCCESS() {
-		return new SM_SYSTEM_MESSAGE(1401275);
-	}
-
-	/**
-	 * You are not authorized to enter.
-	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_HOUSING_CANT_ENTER_NO_RIGHT2() {
-		return new SM_SYSTEM_MESSAGE(1401364);
-	}
-
-	/**
-	 * You cannot enter the house until it sells.
-	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_HOUSING_CANT_ENTER_HAVE_TO_RECREATE() {
-		return new SM_SYSTEM_MESSAGE(1401365);
-	}
-
-	/**
-	 * You must equip %0 to use it.
-	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_CANT_USE_HOUSE_OBJECT_ITEM_EQUIP(DescriptionId id) {
-		return new SM_SYSTEM_MESSAGE(1401294, id);
-	}
-
-	/**
 	 * You cannot use it as you don't have enough %0.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_CANT_USE_HOUSE_OBJECT_ITEM_CHECK(DescriptionId id) {
-		return new SM_SYSTEM_MESSAGE(1401199, id);
+	public static final SM_SYSTEM_MESSAGE STR_MSG_CANT_USE_HOUSE_OBJECT_ITEM_CHECK(String value0) {
+		return new SM_SYSTEM_MESSAGE(1401199, value0);
 	}
 
 	/**
-	 * You are too far away.
+	 * Your cube is full.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_HOUSING_OBJECT_TOO_FAR_TO_USE() {
-		return new SM_SYSTEM_MESSAGE(1401297);
+	public static final SM_SYSTEM_MESSAGE STR_MSG_CANT_USE_HOUSE_OBJECT_INVENTORY_IS_FULL() {
+		return new SM_SYSTEM_MESSAGE(1401200);
 	}
 
 	/**
-	 * Only the owner can use it.
+	 * You cannot make a bid for your own house.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_HOUSING_OBJECT_IS_ONLY_FOR_OWNER_VALID() {
-		return new SM_SYSTEM_MESSAGE(1401298);
+	public static final SM_SYSTEM_MESSAGE STR_MSG_HOUSING_CANT_BID_MY_HOUSE() {
+		return new SM_SYSTEM_MESSAGE(1401221);
 	}
 
 	/**
-	 * It is unavailable.
+	 * You can only bid on a house one time.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_HOUSING_OBJECT_ALL_CANT_USE() {
-		return new SM_SYSTEM_MESSAGE(1401296);
+	public static final SM_SYSTEM_MESSAGE STR_MSG_HOUSING_CANT_BID_SUCC_BID_HOUSE() {
+		return new SM_SYSTEM_MESSAGE(1401222);
 	}
 
 	/**
-	 * You have reached the maximum usage count.
+	 * You are currently the highest bidder for another house.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_HOUSING_OBJECT_ACHIEVE_USE_COUNT() {
-		return new SM_SYSTEM_MESSAGE(1401295);
+	public static final SM_SYSTEM_MESSAGE STR_MSG_HOUSING_CANT_BID_OTHER_HOUSE() {
+		return new SM_SYSTEM_MESSAGE(1401223);
 	}
 
 	/**
-	 * The item's cooldown time has yet to expire.
+	 * You may bid after the grace period ends on your other house.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_HOUSING_CANNOT_USE_FLOWERPOT_COOLTIME() {
-		return new SM_SYSTEM_MESSAGE(1401280);
+	public static final SM_SYSTEM_MESSAGE STR_MSG_HOUSING_CANT_BID_GRACE_HOUSE() {
+		return new SM_SYSTEM_MESSAGE(1401224);
 	}
 
 	/**
-	 * Another cabinet is already open.
+	 * You must be Level %0 or higher to bid on the house.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_ALREADY_OPEN_ANOTHER_STORAGE() {
-		return new SM_SYSTEM_MESSAGE(1401282);
+	public static final SM_SYSTEM_MESSAGE STR_MSG_HOUSING_CANT_BID_LOW_LEVEL(int minLevel) {
+		return new SM_SYSTEM_MESSAGE(1401225, minLevel);
 	}
 
 	/**
-	 * You can use it only once a day.
+	 * Your housing payment is due. Please pay your maintenance costs.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_HOUSING_OBJECT_CANT_USE_PER_DAY() {
-		return new SM_SYSTEM_MESSAGE(1401260);
+	public static final SM_SYSTEM_MESSAGE STR_MSG_HOUSING_OVERDUE() {
+		return new SM_SYSTEM_MESSAGE(1401226);
 	}
 
 	/**
-	 * You already have the %0% and cannot reuse %1.
+	 * Your house has been seized against your unpaid maintenance fees.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_CANNOT_USE_ALREADY_HAVE_REWARD_ITEM(int rewardNameId, int objectNameId) {
-		return new SM_SYSTEM_MESSAGE(1401396, new DescriptionId(rewardNameId), calculateNameId(objectNameId));
+	public static final SM_SYSTEM_MESSAGE STR_MSG_HOUSING_SEQUESTRATE() {
+		return new SM_SYSTEM_MESSAGE(1401227);
+	}
+
+	/**
+	 * Only house owners and their friends may enter.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_HOUSING_TELEPORT_CANT_USE() {
+		return new SM_SYSTEM_MESSAGE(1401244);
+	}
+
+	/**
+	 * A Spring Agrint has appeared.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_HF_SpringAgrintAppear() {
+		return new SM_SYSTEM_MESSAGE(1401246);
+	}
+
+	/**
+	 * A Summer Agrint has appeared.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_HF_SummerAgrintAppear() {
+		return new SM_SYSTEM_MESSAGE(1401247);
+	}
+
+	/**
+	 * A Autumn Agrint has appeared.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_HF_FallAgrintAppear() {
+		return new SM_SYSTEM_MESSAGE(1401248);
+	}
+
+	/**
+	 * A Winter Agrint has appeared.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_HF_WinterAgrintAppear() {
+		return new SM_SYSTEM_MESSAGE(1401249);
 	}
 
 	/**
@@ -25300,71 +25271,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * Using %0%.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_HOUSING_OBJECT_USE(int objectNameId) {
-		return new SM_SYSTEM_MESSAGE(1401257, calculateNameId(objectNameId));
-	}
-
-	/**
-	 * %0 is worn out and useless.
-	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_HOUSING_OBJECT_DELETE_EXPIRE_TIME(int nameId) {
-		return new SM_SYSTEM_MESSAGE(1401261, calculateNameId(nameId));
-	}
-
-	/**
-	 * %0 is is no longer available.
-	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_HOUSING_OBJECT_DELETE_USE_COUNT(int nameId) {
-		return new SM_SYSTEM_MESSAGE(1401262, calculateNameId(nameId));
-	}
-
-	/**
-	 * You have acquired %1% from %0%.
-	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_HOUSING_OBJECT_REWARD_ITEM(int objectNameId, int rewardItemNameId) {
-		return new SM_SYSTEM_MESSAGE(1401263, calculateNameId(objectNameId), new DescriptionId(rewardItemNameId));
-	}
-
-	/**
-	 * You have removed the paint from %0.
-	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_ITEM_PAINT_REMOVE_SUCCEED(int objectNameId) {
-		return new SM_SYSTEM_MESSAGE(1401435, calculateNameId(objectNameId));
-	}
-
-	/**
-	 * You can only paint decor that you own.
-	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_ITEM_PAINT_ERROR_NOTOWNER() {
-		return new SM_SYSTEM_MESSAGE(1401438);
-	}
-
-	/**
-	 * You cannot paint this decor.
-	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_ITEM_PAINT_ERROR_CANNOTPAINT() {
-		return new SM_SYSTEM_MESSAGE(1401439);
-	}
-
-	/**
-	 * This decor is yet to be painted.
-	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_ITEM_PAINT_ERROR_CANNOTREMOVE() {
-		return new SM_SYSTEM_MESSAGE(1401440);
-	}
-
-	/**
-	 * You have painted %0 with %1.
-	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_ITEM_PAINT_SUCCEED(int objectNameId, int colorItemNameId) {
-		return new SM_SYSTEM_MESSAGE(1401436, calculateNameId(objectNameId), new DescriptionId(colorItemNameId));
-	}
-
-	/**
-	 * Your cube is full.
-	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_CANT_USE_HOUSE_OBJECT_INVENTORY_IS_FULL() {
-		return new SM_SYSTEM_MESSAGE(1401200);
+	public static final SM_SYSTEM_MESSAGE STR_MSG_HOUSING_OBJECT_USE(String value0) {
+		return new SM_SYSTEM_MESSAGE(1401257, value0);
 	}
 
 	/**
@@ -25375,10 +25283,262 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	}
 
 	/**
+	 * You can use it only once a day.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_HOUSING_OBJECT_CANT_USE_PER_DAY() {
+		return new SM_SYSTEM_MESSAGE(1401260);
+	}
+
+	/**
+	 * %0 is worn out and useless.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_HOUSING_OBJECT_DELETE_EXPIRE_TIME(String value0) {
+		return new SM_SYSTEM_MESSAGE(1401261, value0);
+	}
+
+	/**
+	 * %0 is is no longer available.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_HOUSING_OBJECT_DELETE_USE_COUNT(String value0) {
+		return new SM_SYSTEM_MESSAGE(1401262, value0);
+	}
+
+	/**
+	 * You have acquired %1% from %0%.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_HOUSING_OBJECT_REWARD_ITEM(String value0, String value1) {
+		return new SM_SYSTEM_MESSAGE(1401263, value0, value1);
+	}
+
+	/**
+	 * You made a bid for %addr0.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_HOUSING_BID_SUCCESS(int address) {
+		return new SM_SYSTEM_MESSAGE(1401265, address);
+	}
+
+	/**
+	 * You have been passed over in favor of a higher bid.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_HOUSING_BID_CANCEL() {
+		return new SM_SYSTEM_MESSAGE(1401266);
+	}
+
+	/**
+	 * %addr0 is sold to you.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_HOUSING_BID_WIN(int address) {
+		return new SM_SYSTEM_MESSAGE(1401267, address);
+	}
+
+	/**
+	 * You listed %addr0 for auction.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_HOUSING_AUCTION_MY_HOUSE(int address) {
+		return new SM_SYSTEM_MESSAGE(1401268, address);
+	}
+
+	/**
+	 * You successfully auctioned %addr0.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_HOUSING_AUCTION_SUCCESS(int address) {
+		return new SM_SYSTEM_MESSAGE(1401269, address);
+	}
+
+	/**
+	 * Listed %addr0 was not auctioned.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_HOUSING_AUCTION_FAIL(int address) {
+		return new SM_SYSTEM_MESSAGE(1401270, address);
+	}
+
+	/**
+	 * You cannot make a bid now.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_HOUSING_CANT_BID_TIMEOUT() {
+		return new SM_SYSTEM_MESSAGE(1401274);
+	}
+
+	/**
+	 * You have bought a studio.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_HOUSING_INS_OWN_SUCCESS() {
+		return new SM_SYSTEM_MESSAGE(1401275);
+	}
+
+	/**
+	 * You already have a house.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_HOUSING_INS_CANT_OWN_MORE_HOUSE() {
+		return new SM_SYSTEM_MESSAGE(1401276);
+	}
+
+	/**
+	 * You must complete %quest0 first.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_HOUSING_CANT_OWN_NOT_COMPLETE_QUEST(int questId) {
+		return new SM_SYSTEM_MESSAGE(1401277, questId);
+	}
+
+	/**
+	 * The item's cooldown time has yet to expire.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_HOUSING_CANNOT_USE_FLOWERPOT_COOLTIME() {
+		return new SM_SYSTEM_MESSAGE(1401280);
+	}
+
+	/**
+	 * Another cabinet is already open.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_ALREADY_OPEN_ANOTHER_STORAGE() {
+		return new SM_SYSTEM_MESSAGE(1401282);
+	}
+
+	/**
+	 * You are too far away.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_HOUSING_OBJECT_TOO_FAR_TO_USE() {
+		return new SM_SYSTEM_MESSAGE(1401297);
+	}
+
+	/**
+	 * Only the owner can use it.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_HOUSING_OBJECT_IS_ONLY_FOR_OWNER_VALID() {
+		return new SM_SYSTEM_MESSAGE(1401298);
+	}
+
+	/**
+	 * You must equip %0 to use it.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_CANT_USE_HOUSE_OBJECT_ITEM_EQUIP(String value0) {
+		return new SM_SYSTEM_MESSAGE(1401294, value0);
+	}
+
+	/**
+	 * You have reached the maximum usage count.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_HOUSING_OBJECT_ACHIEVE_USE_COUNT() {
+		return new SM_SYSTEM_MESSAGE(1401295);
+	}
+
+	/**
+	 * It is unavailable.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_HOUSING_OBJECT_ALL_CANT_USE() {
+		return new SM_SYSTEM_MESSAGE(1401296);
+	}
+
+	/**
+	 * You cannot enter %WORLDNAME0 at this time.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_INSTANCE_CLOSED_TIME(int worldId) {
+		return new SM_SYSTEM_MESSAGE(1401306, worldId);
+	}
+
+	/**
+	 * You cannot register now.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_HOUSING_CANT_AUCTION_TIMEOUT() {
+		return new SM_SYSTEM_MESSAGE(1401308);
+	}
+
+	/**
+	 * You need to pay the maintenance fee to list it.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_HOUSING_CANT_AUCTION_OVERDUE() {
+		return new SM_SYSTEM_MESSAGE(1401317);
+	}
+
+	/**
+	 * The home you have made an offer for has a new high bid of %num0 Kinah.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_HOUSING_PRICE_CHANGE(long kinah) {
+		return new SM_SYSTEM_MESSAGE(1401324, kinah);
+	}
+
+	/**
+	 * %0 disappears in 10 minutes because your Abyss Rank changed.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_UNEQUIP_RANKITEM_TIMER_10M(String value0) {
+		return new SM_SYSTEM_MESSAGE(1401327, value0);
+	}
+
+	/**
+	 * %0 disappears in 1 minute because your Abyss Rank changed.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_UNEQUIP_RANKITEM_TIMER_1M(String value0) {
+		return new SM_SYSTEM_MESSAGE(1401328, value0);
+	}
+
+	/**
+	 * %0 disappeared because your Abyss Rank changed.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_UNEQUIP_RANKITEM(String value0) {
+		return new SM_SYSTEM_MESSAGE(1401329, value0);
+	}
+
+	/**
 	 * You reached your %0 usage goal.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_HOUSING_FLOWERPOT_GOAL(int nameId) {
-		return new SM_SYSTEM_MESSAGE(1401333, calculateNameId(nameId));
+	public static final SM_SYSTEM_MESSAGE STR_MSG_HOUSING_FLOWERPOT_GOAL(String value0) {
+		return new SM_SYSTEM_MESSAGE(1401333, value0);
+	}
+
+	/**
+	 * You cannot bid until you pay the maintenance fees on your house.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_HOUSING_CANT_BID_OVERDUE() {
+		return new SM_SYSTEM_MESSAGE(1401349);
+	}
+
+	/**
+	 * Some areas of the Ammunition Depot are locked.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_Station_DoorCtrl_Evileye() {
+		return new SM_SYSTEM_MESSAGE(1401350);
+	}
+
+	/**
+	 * You need a house for that.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_HOUSING_TELEPORT_NEED_HOUSE() {
+		return new SM_SYSTEM_MESSAGE(1401357);
+	}
+
+	/**
+	 * You cannot decorate in the current state.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_HOUSING_MODE_CANNOT_START() {
+		return new SM_SYSTEM_MESSAGE(1401358);
+	}
+
+	/**
+	 * You need a studio to enter.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_HOUSING_ENTER_NEED_HOUSE() {
+		return new SM_SYSTEM_MESSAGE(1401359);
+	}
+
+	/**
+	 * You are not authorized to enter.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_HOUSING_CANT_ENTER_NO_RIGHT2() {
+		return new SM_SYSTEM_MESSAGE(1401364);
+	}
+
+	/**
+	 * You cannot enter the house until it sells.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_HOUSING_CANT_ENTER_HAVE_TO_RECREATE() {
+		return new SM_SYSTEM_MESSAGE(1401365);
+	}
+
+	/**
+	 * Already listed. Please refresh your list.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_HOUSING_AUCTION_FAIL_ALREADY_REGISTED() {
+		return new SM_SYSTEM_MESSAGE(1401372);
 	}
 
 	/**
@@ -25438,222 +25598,10 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	}
 
 	/**
-	 * You need a house for that.
+	 * You already have the %0% and cannot reuse %1.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_HOUSING_TELEPORT_NEED_HOUSE() {
-		return new SM_SYSTEM_MESSAGE(1401357);
-	}
-
-	/**
-	 * You need a studio to enter.
-	 */
-	public static final SM_SYSTEM_MESSAGE STR_HOUSING_ENTER_NEED_HOUSE() {
-		return new SM_SYSTEM_MESSAGE(1401359);
-	}
-
-	/**
-	 * You cannot decorate in the current state.
-	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_HOUSING_MODE_CANNOT_START() {
-		return new SM_SYSTEM_MESSAGE(1401358);
-	}
-
-	/**
-	 * Only house owners and their friends may enter.
-	 */
-	public static final SM_SYSTEM_MESSAGE STR_HOUSING_TELEPORT_CANT_USE() {
-		return new SM_SYSTEM_MESSAGE(1401244);
-	}
-
-	/**
-	 * A Spring Agrint has appeared.
-	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_HF_SpringAgrintAppear() {
-		return new SM_SYSTEM_MESSAGE(1401246);
-	}
-
-	/**
-	 * A Summer Agrint has appeared.
-	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_HF_SummerAgrintAppear() {
-		return new SM_SYSTEM_MESSAGE(1401247);
-	}
-
-	/**
-	 * A Autumn Agrint has appeared.
-	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_HF_FallAgrintAppear() {
-		return new SM_SYSTEM_MESSAGE(1401248);
-	}
-
-	/**
-	 * A Winter Agrint has appeared.
-	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_HF_WinterAgrintAppear() {
-		return new SM_SYSTEM_MESSAGE(1401249);
-	}
-
-	/**
-	 * %0 is gone.
-	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_HOUSING_OBJECT_DELETE_USE_COUNT_FINAL(int nameId) {
-		return new SM_SYSTEM_MESSAGE(1401470, calculateNameId(nameId));
-	}
-
-	// House Bidding messages
-
-	/**
-	 * You made a bid for %addr0.
-	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_HOUSING_BID_SUCCESS(int address) {
-		return new SM_SYSTEM_MESSAGE(1401265, address);
-	}
-
-	/**
-	 * You have been passed over in favor of a higher bid.
-	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_HOUSING_BID_CANCEL() {
-		return new SM_SYSTEM_MESSAGE(1401266);
-	}
-
-	/**
-	 * %addr0 is sold to you.
-	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_HOUSING_BID_WIN(int address) {
-		return new SM_SYSTEM_MESSAGE(1401267, address);
-	}
-
-	/**
-	 * You listed %addr0 for auction.
-	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_HOUSING_AUCTION_MY_HOUSE(int address) {
-		return new SM_SYSTEM_MESSAGE(1401268, address);
-	}
-
-	/**
-	 * You successfully auctioned %addr0.
-	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_HOUSING_AUCTION_SUCCESS(int address) {
-		return new SM_SYSTEM_MESSAGE(1401269, address);
-	}
-
-	/**
-	 * Listed %addr0 was not auctioned.
-	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_HOUSING_AUCTION_FAIL(int address) {
-		return new SM_SYSTEM_MESSAGE(1401270, address);
-	}
-
-	/**
-	 * Already listed. Please refresh your list.
-	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_HOUSING_AUCTION_FAIL_ALREADY_REGISTED() {
-		return new SM_SYSTEM_MESSAGE(1401372);
-	}
-
-	/**
-	 * You cannot make a bid now.
-	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_HOUSING_CANT_BID_TIMEOUT() {
-		return new SM_SYSTEM_MESSAGE(1401274);
-	}
-
-	/**
-	 * You cannot register now.
-	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_HOUSING_CANT_AUCTION_TIMEOUT() {
-		return new SM_SYSTEM_MESSAGE(1401308);
-	}
-
-	/**
-	 * You must complete %quest0 first.
-	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_HOUSING_CANT_OWN_NOT_COMPLETE_QUEST(int questId) {
-		return new SM_SYSTEM_MESSAGE(1401277, questId);
-	}
-
-	/**
-	 * You already have a house.
-	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_HOUSING_INS_CANT_OWN_MORE_HOUSE() {
-		return new SM_SYSTEM_MESSAGE(1401276);
-	}
-
-	/**
-	 * You cannot make a bid for your own house.
-	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_HOUSING_CANT_BID_MY_HOUSE() {
-		return new SM_SYSTEM_MESSAGE(1401221);
-	}
-
-	/**
-	 * You can only bid on a house one time.
-	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_HOUSING_CANT_BID_SUCC_BID_HOUSE() {
-		return new SM_SYSTEM_MESSAGE(1401222);
-	}
-
-	/**
-	 * You are currently the highest bidder for another house.
-	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_HOUSING_CANT_BID_OTHER_HOUSE() {
-		return new SM_SYSTEM_MESSAGE(1401223);
-	}
-
-	/**
-	 * You may bid after the grace period ends on your other house.
-	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_HOUSING_CANT_BID_GRACE_HOUSE() {
-		return new SM_SYSTEM_MESSAGE(1401224);
-	}
-
-	/**
-	 * You must be Level %0 or higher to bid on the house.
-	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_HOUSING_CANT_BID_LOW_LEVEL(int minLevel) {
-		return new SM_SYSTEM_MESSAGE(1401225, minLevel);
-	}
-
-	/**
-	 * Your housing payment is due. Please pay your maintenance costs.
-	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_HOUSING_OVERDUE() {
-		return new SM_SYSTEM_MESSAGE(1401226);
-	}
-
-	/**
-	 * Your house has been seized against your unpaid maintenance fees.
-	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_HOUSING_SEQUESTRATE() {
-		return new SM_SYSTEM_MESSAGE(1401227);
-	}
-
-	/**
-	 * You need to pay the maintenance fee to list it.
-	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_HOUSING_CANT_AUCTION_OVERDUE() {
-		return new SM_SYSTEM_MESSAGE(1401317);
-	}
-
-	/**
-	 * The home you have made an offer for has a new high bid of %num0 Kinah.
-	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_HOUSING_PRICE_CHANGE(long kinah) {
-		return new SM_SYSTEM_MESSAGE(1401324, kinah);
-	}
-
-	/**
-	 * You cannot bid until you pay the maintenance fees on your house.
-	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_HOUSING_CANT_BID_OVERDUE() {
-		return new SM_SYSTEM_MESSAGE(1401349);
-	}
-
-	/**
-	 * Some areas of the Ammunition Depot are locked.
-	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_Station_DoorCtrl_Evileye() {
-		return new SM_SYSTEM_MESSAGE(1401350);
+	public static final SM_SYSTEM_MESSAGE STR_MSG_CANNOT_USE_ALREADY_HAVE_REWARD_ITEM(String value0, String value1) {
+		return new SM_SYSTEM_MESSAGE(1401396, value0, value1);
 	}
 
 	/**
@@ -25664,10 +25612,52 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	}
 
 	/**
+	 * You have removed the paint from %0.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_ITEM_PAINT_REMOVE_SUCCEED(String value0) {
+		return new SM_SYSTEM_MESSAGE(1401435, value0);
+	}
+
+	/**
+	 * You have painted %0 with %1.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_ITEM_PAINT_SUCCEED(String value0, String value1) {
+		return new SM_SYSTEM_MESSAGE(1401436, value0, value1);
+	}
+
+	/**
+	 * You can only paint decor that you own.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_ITEM_PAINT_ERROR_NOTOWNER() {
+		return new SM_SYSTEM_MESSAGE(1401438);
+	}
+
+	/**
+	 * You cannot paint this decor.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_ITEM_PAINT_ERROR_CANNOTPAINT() {
+		return new SM_SYSTEM_MESSAGE(1401439);
+	}
+
+	/**
+	 * This decor is yet to be painted.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_ITEM_PAINT_ERROR_CANNOTREMOVE() {
+		return new SM_SYSTEM_MESSAGE(1401440);
+	}
+
+	/**
 	 * There is no need to pay a maintenance fee for this house.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_F2P_CASH_HOUSE_FEE_FREE() {
 		return new SM_SYSTEM_MESSAGE(1401445);
+	}
+
+	/**
+	 * %0 is gone.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_HOUSING_OBJECT_DELETE_USE_COUNT_FINAL(String value0) {
+		return new SM_SYSTEM_MESSAGE(1401470, value0);
 	}
 
 	/**
@@ -25727,6 +25717,20 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	}
 
 	/**
+	 * %0 has captured %1. %2 has been activated.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_CASTLE_WIN_BUFF_ON(String value0, String value1, String value2) {
+		return new SM_SYSTEM_MESSAGE(1401574, value0, value1, value2);
+	}
+
+	/**
+	 * %0 did not manage to defend %1. %2 has been activated.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_CASTLE_LOOSE_BUFF_ON(String value0, String value1, String value2) {
+		return new SM_SYSTEM_MESSAGE(1401575, value0, value1, value2);
+	}
+
+	/**
 	 * The Idian level is too high for the selected item.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_POLISH_WRONG_LEVEL() {
@@ -25757,8 +25761,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * Enchantment of %0 to +%num1 was successful.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_ENCHANT_ITEM_SUCCEED_NEW(DescriptionId descriptionId, int value0) {
-		return new SM_SYSTEM_MESSAGE(1401681, descriptionId, value0);
+	public static final SM_SYSTEM_MESSAGE STR_MSG_ENCHANT_ITEM_SUCCEED_NEW(String value0, int num1) {
+		return new SM_SYSTEM_MESSAGE(1401681, value0, num1);
 	}
 
 	/**
@@ -25773,6 +25777,20 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_USEITEM(int num0) {
 		return new SM_SYSTEM_MESSAGE(1401873, num0);
+	}
+
+	/**
+	 * %0 did not capture %1. %2 has been activated.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_CASTLE_SIEGE_LOOSE_BUFF_ON(String value0, String value1, String value2) {
+		return new SM_SYSTEM_MESSAGE(1401930, value0, value1, value2);
+	}
+
+	/**
+	 * %0 successfully defended %1. %2 is now active.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_CASTLE_DEFENCE_WIN_BUFF_ON(String value0, String value1, String value2) {
+		return new SM_SYSTEM_MESSAGE(1401931, value0, value1, value2);
 	}
 
 	/**
@@ -25792,29 +25810,29 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * You cannot wrap %0.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_PACK_ITEM_CANNOT(int itemNameId) {
-		return new SM_SYSTEM_MESSAGE(1402015, new DescriptionId(itemNameId));
+	public static final SM_SYSTEM_MESSAGE STR_MSG_PACK_ITEM_CANNOT(String value0) {
+		return new SM_SYSTEM_MESSAGE(1402015, value0);
 	}
 
 	/**
 	 * %0's level is lower than %1, so you cannot wrap it.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_PACK_ITEM_WRONG_LEVEL(int itemNameId, int levelRequired) {
-		return new SM_SYSTEM_MESSAGE(1402016, new DescriptionId(itemNameId), levelRequired);
+	public static final SM_SYSTEM_MESSAGE STR_MSG_PACK_ITEM_WRONG_LEVEL(String value0, int levelRequired) {
+		return new SM_SYSTEM_MESSAGE(1402016, value0, levelRequired);
 	}
 
 	/**
 	 * %0's rank is lower than %1, so you cannot wrap it.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_PACK_ITEM_WRONG_QUALITY(int scrollNameId, int itemNameId) {
-		return new SM_SYSTEM_MESSAGE(1402017, new DescriptionId(scrollNameId), new DescriptionId(itemNameId));
+	public static final SM_SYSTEM_MESSAGE STR_MSG_PACK_ITEM_WRONG_QUALITY(String value0, String value1) {
+		return new SM_SYSTEM_MESSAGE(1402017, value0, value1);
 	}
 
 	/**
 	 * %1 cannot be wrapped with %0.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_PACK_ITEM_WRONG_TARGET_ITEM_CATEGORY(int scrollNameId, int itemNameId) {
-		return new SM_SYSTEM_MESSAGE(1402018, new DescriptionId(scrollNameId), new DescriptionId(itemNameId));
+	public static final SM_SYSTEM_MESSAGE STR_MSG_PACK_ITEM_WRONG_TARGET_ITEM_CATEGORY(String value0, String value1) {
+		return new SM_SYSTEM_MESSAGE(1402018, value0, value1);
 	}
 
 	/**
@@ -25862,8 +25880,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * Wrapping of %0 is complete.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_PACK_ITEM_SUCCEED(int itemNameId) {
-		return new SM_SYSTEM_MESSAGE(1402031, new DescriptionId(itemNameId));
+	public static final SM_SYSTEM_MESSAGE STR_MSG_PACK_ITEM_SUCCEED(String value0) {
+		return new SM_SYSTEM_MESSAGE(1402031, value0);
 	}
 
 	/**
@@ -26009,8 +26027,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * %0 has succeeded in tempering %1 to level %2.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_ITEM_AUTHORIZE_SUCCEEDED_MAX(String playerName, int nameId) {
-		return new SM_SYSTEM_MESSAGE(1402154, playerName, new DescriptionId(nameId), 10);
+	public static final SM_SYSTEM_MESSAGE STR_MSG_ITEM_AUTHORIZE_SUCCEEDED_MAX(String playerName, String value1, int num2) {
+		return new SM_SYSTEM_MESSAGE(1402154, playerName, value1, num2);
 	}
 
 	/**
@@ -26191,8 +26209,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * The %1 on %0 has been destroyed.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_BREAK_PROC(int weapon, int godstone) {
-		return new SM_SYSTEM_MESSAGE(1402237, new DescriptionId(weapon), new DescriptionId(godstone));
+	public static final SM_SYSTEM_MESSAGE STR_MSG_BREAK_PROC(String value0, String value1) {
+		return new SM_SYSTEM_MESSAGE(1402237, value0, value1);
 	}
 
 	/**
@@ -26359,8 +26377,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * %0 has succeeded in enchanting %1 to Level 20.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_ENCHANT_ITEM_SUCCEEDED_20(String playerName, int nameId) {
-		return new SM_SYSTEM_MESSAGE(1402285, playerName, new DescriptionId(nameId));
+	public static final SM_SYSTEM_MESSAGE STR_MSG_ENCHANT_ITEM_SUCCEEDED_20(String playerName, String value1) {
+		return new SM_SYSTEM_MESSAGE(1402285, playerName, value1);
 	}
 
 	/**
@@ -26443,8 +26461,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * Purification System
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_REGISTER_ITEM_MSG_UPGRADE_CANNOT(DescriptionId nameId) {
-		return new SM_SYSTEM_MESSAGE(1402397, nameId);
+	public static final SM_SYSTEM_MESSAGE STR_REGISTER_ITEM_MSG_UPGRADE_CANNOT(String value0) {
+		return new SM_SYSTEM_MESSAGE(1402397, value0);
 	}
 
 	/**
@@ -26753,22 +26771,22 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * %1 equipped in %0 was fractured. %1 will be destroyed in 10 minutes even if it is unequipped.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_BREAK_PROC_REMAIN_START(int weapon, int godstone) {
-		return new SM_SYSTEM_MESSAGE(1402536, new DescriptionId(weapon), new DescriptionId(godstone));
+	public static final SM_SYSTEM_MESSAGE STR_MSG_BREAK_PROC_REMAIN_START(String value0, String value1) {
+		return new SM_SYSTEM_MESSAGE(1402536, value0, value1);
 	}
 
 	/**
 	 * The %1 equipped in %0 will be destroyed in %2 minutes.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_BREAK_PROC_REMAIN_MIN(int weapon, int godstone, int minutes) {
-		return new SM_SYSTEM_MESSAGE(1402537, new DescriptionId(weapon), new DescriptionId(godstone), minutes);
+	public static final SM_SYSTEM_MESSAGE STR_MSG_BREAK_PROC_REMAIN_MIN(String value0, String value1, int minutes) {
+		return new SM_SYSTEM_MESSAGE(1402537, value0, value1, minutes);
 	}
 
 	/**
 	 * The %1 equipped in %0 will be destroyed in %2 seconds.2
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_BREAK_PROC_REMAIN_SEC(int weapon, int godstone, int seconds) {
-		return new SM_SYSTEM_MESSAGE(1402538, new DescriptionId(weapon), new DescriptionId(godstone), seconds);
+	public static final SM_SYSTEM_MESSAGE STR_MSG_BREAK_PROC_REMAIN_SEC(String value0, String value1, int seconds) {
+		return new SM_SYSTEM_MESSAGE(1402538, value0, value1, seconds);
 	}
 
 	/**
@@ -26793,18 +26811,24 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	}
 
 	/**
-	 * Purification System
+	 * You do not have enough Abyss Points to perform an Equipment Blessing.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_REGISTER_ITEM_MSG_UPGRADE_CANNOT_NEED_AP() {
 		return new SM_SYSTEM_MESSAGE(1402571);
 	}
 
+	/**
+	 * You do not have enough Kinah to perform an Equipment Blessing.
+	 */
 	public static final SM_SYSTEM_MESSAGE STR_REGISTER_ITEM_MSG_UPGRADE_CANNOT_NEED_QINA() {
 		return new SM_SYSTEM_MESSAGE(1402572);
 	}
 
-	public static final SM_SYSTEM_MESSAGE STR_ITEM_UPGRADE_MSG_UPGRADE_SUCCESS(DescriptionId nameId, DescriptionId nameId2) {
-		return new SM_SYSTEM_MESSAGE(1402579, nameId, nameId2);
+	/**
+	 * You obtained %1% from the Equipment Blessing for %0.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_ITEM_UPGRADE_MSG_UPGRADE_SUCCESS(String value0, String value1) {
+		return new SM_SYSTEM_MESSAGE(1402579, value0, value1);
 	}
 
 	/**
@@ -26992,33 +27016,33 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * Amplification System
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_EXCEED_CANNOT_01(DescriptionId nameId) {
-		return new SM_SYSTEM_MESSAGE(1402650, nameId);
+	public static final SM_SYSTEM_MESSAGE STR_MSG_EXCEED_CANNOT_01(String value0) {
+		return new SM_SYSTEM_MESSAGE(1402650, value0);
 	}
 
-	public static final SM_SYSTEM_MESSAGE STR_MSG_EXCEED_SUCCEED(DescriptionId nameId) {
-		return new SM_SYSTEM_MESSAGE(1402657, nameId);
+	public static final SM_SYSTEM_MESSAGE STR_MSG_EXCEED_SUCCEED(String value0) {
+		return new SM_SYSTEM_MESSAGE(1402657, value0);
 	}
 
 	/**
 	 * %0 cannot be used to enchant an amplified item.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_EXCEED_CANNOT_02(DescriptionId nameId) {
-		return new SM_SYSTEM_MESSAGE(1402661, nameId);
+	public static final SM_SYSTEM_MESSAGE STR_MSG_EXCEED_CANNOT_02(String value0) {
+		return new SM_SYSTEM_MESSAGE(1402661, value0);
 	}
 
 	/**
 	 * %0 successfully enchanted to level %1. The %2 skill has been added.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_EXCEED_SKILL_ENCHANT(DescriptionId targetName, int level, DescriptionId skillName) {
-		return new SM_SYSTEM_MESSAGE(1402662, targetName, level, skillName);
+	public static final SM_SYSTEM_MESSAGE STR_MSG_EXCEED_SKILL_ENCHANT(String value0, int num1, String value2) {
+		return new SM_SYSTEM_MESSAGE(1402662, value0, num1, value2);
 	}
 
 	/**
 	 * The boost for %0 failed. The item was destroyed.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_ENCHANT_TYPE1_ENCHANT_FAIL(DescriptionId descriptionId) {
-		return new SM_SYSTEM_MESSAGE(1402674, descriptionId);
+	public static final SM_SYSTEM_MESSAGE STR_MSG_ENCHANT_TYPE1_ENCHANT_FAIL(String value0) {
+		return new SM_SYSTEM_MESSAGE(1402674, value0);
 	}
 
 	/**
@@ -27444,8 +27468,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * You can no longer use the %2 %0 skill (Level %1) because your Linked Stigma combination has changed
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_STIGMA_DELETE_HIDDEN_SKILL(int value0, int value1) {
-		return new SM_SYSTEM_MESSAGE(1402895, new DescriptionId(value0), value1);
+	public static final SM_SYSTEM_MESSAGE STR_MSG_STIGMA_DELETE_HIDDEN_SKILL(String value0, int value1, String value2) {
+		return new SM_SYSTEM_MESSAGE(1402895, value0, value1, value2);
 	}
 
 	/**
@@ -27465,15 +27489,15 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * You have successfully enchanted %0 and the Stigma's enchantment level has increased by 1 level.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_STIGMA_ENCHANT_SUCCESS(int value0) {
-		return new SM_SYSTEM_MESSAGE(1402930, new DescriptionId(value0));
+	public static final SM_SYSTEM_MESSAGE STR_MSG_STIGMA_ENCHANT_SUCCESS(String value0) {
+		return new SM_SYSTEM_MESSAGE(1402930, value0);
 	}
 
 	/**
 	 * You have failed to enchant %0 and the Stigma has been destroyed.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_STIGMA_ENCHANT_FAIL(int value0) {
-		return new SM_SYSTEM_MESSAGE(1402931, new DescriptionId(value0));
+	public static final SM_SYSTEM_MESSAGE STR_MSG_STIGMA_ENCHANT_FAIL(String value0) {
+		return new SM_SYSTEM_MESSAGE(1402931, value0);
 	}
 
 	/**
@@ -27594,12 +27618,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 		writeD(senderObjId);
 		writeD(msgId);
 		writeC(params.length);
-		for (Object param : params) {
-			if (param instanceof DescriptionId)
-				writeNameId(((DescriptionId) param).getValue());
-			else
-				writeS(String.valueOf(param));
-		}
+		for (Object param : params)
+			writeS(param == null ? null : param.toString());
 
 		writeC(specialParams.length);
 		for (String param : specialParams) {
@@ -27614,7 +27634,4 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 		return msgId;
 	}
 
-	private static DescriptionId calculateNameId(int id) {
-		return new DescriptionId(id * 2 + 1);
-	}
 }

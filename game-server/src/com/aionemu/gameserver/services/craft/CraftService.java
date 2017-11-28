@@ -85,7 +85,7 @@ public class CraftService {
 			player.getCommonData().addExp(xpReward, Rates.XP_CRAFTING);
 		} else {
 			PacketSendUtility.sendPacket(player,
-				SM_SYSTEM_MESSAGE.STR_MSG_DONT_GET_PRODUCTION_EXP(DataManager.SKILL_DATA.getSkillTemplate(recipetemplate.getSkillId()).getNameId()));
+				SM_SYSTEM_MESSAGE.STR_MSG_DONT_GET_PRODUCTION_EXP(DataManager.SKILL_DATA.getSkillTemplate(recipetemplate.getSkillId()).getL10n()));
 		}
 
 		if (recipetemplate.getCraftDelayId() != null) {
@@ -157,7 +157,7 @@ public class CraftService {
 				AuditLogger.log(player, "tried to craft with incorrect target");
 				return false;
 			} else if (!PositionUtil.isInRange(player, target, 5, false)) {
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_COMBINE_TOO_FAR_FROM_TOOL(target.getObjectTemplate().getNameId()));
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_COMBINE_TOO_FAR_FROM_TOOL(target.getObjectTemplate().getL10n()));
 				return false;
 			}
 		}
@@ -188,29 +188,29 @@ public class CraftService {
 		}
 
 		if (!player.getSkillList().isSkillPresent(skillId)) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_COMBINE_CANT_USE(DataManager.SKILL_DATA.getSkillTemplate(skillId).getNameId()));
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_COMBINE_CANT_USE(DataManager.SKILL_DATA.getSkillTemplate(skillId).getL10n()));
 			return false;
 		}
 
 		if (player.getSkillList().getSkillLevel(skillId) < recipeTemplate.getSkillpoint()) {
 			PacketSendUtility.sendPacket(player,
-				SM_SYSTEM_MESSAGE.STR_COMBINE_OUT_OF_SKILL_POINT(DataManager.SKILL_DATA.getSkillTemplate(skillId).getNameId()));
+				SM_SYSTEM_MESSAGE.STR_COMBINE_OUT_OF_SKILL_POINT(DataManager.SKILL_DATA.getSkillTemplate(skillId).getL10n()));
 			return false;
 		}
 
 		if (craftType == 1 && !player.getInventory().decreaseByItemId(getBonusReqItem(skillId), 1)) {
 			PacketSendUtility.sendPacket(player,
-				SM_SYSTEM_MESSAGE.STR_COMBINE_NO_COMPONENT_ITEM_SINGLE(DataManager.ITEM_DATA.getItemTemplate(getBonusReqItem(skillId)).getNameId()));
+				SM_SYSTEM_MESSAGE.STR_COMBINE_NO_COMPONENT_ITEM_SINGLE(DataManager.ITEM_DATA.getItemTemplate(getBonusReqItem(skillId)).getL10n()));
 			return false;
 		}
 
 		for (Component component : recipeTemplate.getComponent()) {
 			if (player.getInventory().getItemCountByItemId(component.getItemid()) < component.getQuantity()) {
-				int nameId = DataManager.ITEM_DATA.getItemTemplate(getBonusReqItem(component.getItemid())).getNameId();
+				String itemL10n = DataManager.ITEM_DATA.getItemTemplate(getBonusReqItem(component.getItemid())).getL10n();
 				if (component.getQuantity() == 1)
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_COMBINE_NO_COMPONENT_ITEM_SINGLE(nameId));
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_COMBINE_NO_COMPONENT_ITEM_SINGLE(itemL10n));
 				else
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_COMBINE_NO_COMPONENT_ITEM_MULTIPLE(component.getQuantity(), nameId));
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_COMBINE_NO_COMPONENT_ITEM_MULTIPLE(component.getQuantity(), itemL10n));
 				return false;
 			}
 		}

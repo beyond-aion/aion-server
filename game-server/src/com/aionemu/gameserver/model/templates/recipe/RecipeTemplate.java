@@ -10,13 +10,14 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
 import com.aionemu.gameserver.model.Race;
+import com.aionemu.gameserver.model.templates.L10n;
 
 /**
  * @author ATracer
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "RecipeTemplate")
-public class RecipeTemplate {
+public class RecipeTemplate implements L10n {
 
 	@XmlElement(name = "components_data")
 	protected List<ComponentsData> componentsData;
@@ -159,7 +160,8 @@ public class RecipeTemplate {
 	/**
 	 * @return the nameid
 	 */
-	public int getNameId() {
+	@Override
+	public int getL10nId() {
 		return nameid;
 	}
 

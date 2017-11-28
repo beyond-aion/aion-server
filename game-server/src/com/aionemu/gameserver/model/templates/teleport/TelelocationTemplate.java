@@ -5,12 +5,14 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.aionemu.gameserver.model.templates.L10n;
+
 /**
  * @author orz
  */
 @XmlRootElement(name = "teleloc_template")
 @XmlAccessorType(XmlAccessType.NONE)
-public class TelelocationTemplate {
+public class TelelocationTemplate implements L10n {
 
 	/**
 	 * Location Id.
@@ -44,7 +46,8 @@ public class TelelocationTemplate {
 		return mapid;
 	}
 
-	public int getNameId() {
+	@Override
+	public int getL10nId() {
 		return nameId;
 	}
 

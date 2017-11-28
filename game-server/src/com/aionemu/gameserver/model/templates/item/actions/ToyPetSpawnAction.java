@@ -9,7 +9,6 @@ import javax.xml.bind.annotation.XmlType;
 
 import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.controllers.observer.ItemUseObserver;
-import com.aionemu.gameserver.model.DescriptionId;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Kisk;
@@ -81,7 +80,7 @@ public class ToyPetSpawnAction extends AbstractItemAction {
 			public void abort() {
 				player.getController().cancelTask(TaskId.ITEM_USE);
 				player.removeItemCoolDown(parentItem.getItemTemplate().getUseLimits().getDelayId());
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_CANCELED(new DescriptionId(parentItem.getItemTemplate().getNameId())));
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_CANCELED());
 				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem
 					.getItemTemplate().getTemplateId(), 0, 2, 0), true);
 			}

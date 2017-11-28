@@ -74,9 +74,8 @@ public class ArtifactSiege extends Siege<ArtifactLocation> {
 
 		// misc stuff to send player system message
 		if (getSiegeLocation().getRace() == SiegeRace.BALAUR) {
-			final AionServerPacket lRacePacket = new SM_SYSTEM_MESSAGE(1320004, getSiegeLocation().getNameAsDescriptionId(),
-				getSiegeLocation().getRace().getDescriptionId());
-			World.getInstance().forEachPlayer(p -> PacketSendUtility.sendPacket(p, lRacePacket));
+			PacketSendUtility.broadcastToWorld(
+				SM_SYSTEM_MESSAGE.STR_GUILD_EVENT_LOSE_ARTIFACT(getSiegeLocation().getL10n(), getSiegeLocation().getRace().getL10n()));
 		} else {
 			// Prepare packet data
 			String wPlayerName = "";
@@ -86,12 +85,12 @@ public class ArtifactSiege extends Siege<ArtifactLocation> {
 				Integer wPlayerId = wRaceCounter.getPlayerDamageCounter().keySet().iterator().next();
 				wPlayerName = PlayerService.getPlayerName(wPlayerId);
 			}
-			final String winnerName = wLegion != null ? wLegion.getName() : wPlayerName;
+			String winnerName = wLegion != null ? wLegion.getName() : wPlayerName;
 
 			// prepare packets, we can use single packet instance
-			final AionServerPacket wRacePacket = new SM_SYSTEM_MESSAGE(1320002, wRace.getRaceDescriptionId(), winnerName,
-				getSiegeLocation().getNameAsDescriptionId());
-			final AionServerPacket lRacePacket = new SM_SYSTEM_MESSAGE(1320004, getSiegeLocation().getNameAsDescriptionId(), wRace.getRaceDescriptionId());
+			AionServerPacket wRacePacket = SM_SYSTEM_MESSAGE.STR_GUILD_EVENT_WIN_ARTIFACT(wRace.getL10n(), winnerName,
+				getSiegeLocation().getL10n());
+			AionServerPacket lRacePacket = SM_SYSTEM_MESSAGE.STR_GUILD_EVENT_LOSE_ARTIFACT(getSiegeLocation().getL10n(), wRace.getL10n());
 
 			// send update to players
 			World.getInstance().forEachPlayer(p -> PacketSendUtility.sendPacket(p, p.getRace().equals(wRace) ? wRacePacket : lRacePacket));

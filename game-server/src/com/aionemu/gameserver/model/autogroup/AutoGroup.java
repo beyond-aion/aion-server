@@ -8,12 +8,14 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
+import com.aionemu.gameserver.model.templates.L10n;
+
 /**
  * @author MrPoke
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "AutoGroup")
-public class AutoGroup {
+public class AutoGroup implements L10n {
 
 	@XmlAttribute(required = true)
 	protected int id;
@@ -44,7 +46,8 @@ public class AutoGroup {
 		return instanceId;
 	}
 
-	public int getNameId() {
+	@Override
+	public int getL10nId() {
 		return nameId;
 	}
 

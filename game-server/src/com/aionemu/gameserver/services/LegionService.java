@@ -1986,9 +1986,8 @@ public class LegionService {
 		if (LegionDominionService.getInstance().join(legion.getLegionId(), locId)) {
 			legion.setCurrentLegionDominion(locId);
 			storeLegion(legion);
-			PacketSendUtility.broadcastToLegion(legion, new SM_SYSTEM_MESSAGE(1402902, LegionDominionService.getInstance().getNameDesc(locId))); // applied
-																																																																						// for
-																																																																						// stonespear
+			String locL10n = LegionDominionService.getInstance().getLegionDominionLoc(locId).getL10n();
+			PacketSendUtility.broadcastToLegion(legion, new SM_SYSTEM_MESSAGE(1402902, locL10n)); // applied for stonespear
 			PacketSendUtility.broadcastToLegion(legion, new SM_LEGION_INFO(legion));
 		}
 	}

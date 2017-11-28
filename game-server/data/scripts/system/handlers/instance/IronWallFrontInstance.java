@@ -11,7 +11,6 @@ import java.util.function.Consumer;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
 import com.aionemu.gameserver.instance.handlers.InstanceID;
-import com.aionemu.gameserver.model.DescriptionId;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -171,13 +170,12 @@ public class IronWallFrontInstance extends GeneralInstanceHandler {
 			instanceTask.cancel(true);
 	}
 
-	public void updatePoints(int points, Race race, boolean check, int nameId, Player player) {
+	public void updatePoints(int points, Race race, boolean check, String npcL10n, Player player) {
 		if (check && !ironWallFrontReward.isStartProgress()) {
 			return;
 		}
-		if (nameId != 0) {
-			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1400237, new DescriptionId(nameId * 2 + 1), points));
-		}
+		if (npcL10n != null)
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_GET_SCORE(npcL10n, points));
 		ironWallFrontReward.addPointsByRace(race, points);
 		sendPacket(new SM_INSTANCE_SCORE(new IronWallFrontScoreInfo(ironWallFrontReward, 10, race.equals(Race.ELYOS) ? 0 : 1), ironWallFrontReward,
 			getTime()));
@@ -213,7 +211,7 @@ public class IronWallFrontInstance extends GeneralInstanceHandler {
 				break;
 		}
 		if (points > 0) {
-			updatePoints(points, player.getRace(), true, npc.getObjectTemplate().getNameId(), player);
+			updatePoints(points, player.getRace(), true, npc.getObjectTemplate().getL10n(), player);
 		}
 	}
 
@@ -242,7 +240,7 @@ public class IronWallFrontInstance extends GeneralInstanceHandler {
 			case 730878:
 			case 730879:
 			case 730880:
-				updatePoints(200, player.getRace(), false, npc.getObjectTemplate().getNameId(), player);
+				updatePoints(200, player.getRace(), false, npc.getObjectTemplate().getL10n(), player);
 				if (player.getRace().equals(Race.ELYOS)) {
 					spawn(701900, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading());
 				} else {
@@ -252,7 +250,7 @@ public class IronWallFrontInstance extends GeneralInstanceHandler {
 				break;
 		}
 		if (points > 0) {
-			updatePoints(points, player.getRace(), true, npc.getObjectTemplate().getNameId(), player);
+			updatePoints(points, player.getRace(), true, npc.getObjectTemplate().getL10n(), player);
 			npc.getController().delete();
 		}
 	}
@@ -313,7 +311,7 @@ public class IronWallFrontInstance extends GeneralInstanceHandler {
 				if (ironWallFrontReward.isStartProgress() && getTime() >= 900000) {
 					killPoints = 300;
 				}
-				updatePoints(killPoints, lastAttacker.getRace(), true, 0, (Player) lastAttacker);
+				updatePoints(killPoints, lastAttacker.getRace(), true, null, (Player) lastAttacker);
 				PacketSendUtility.sendPacket((Player) lastAttacker, new SM_SYSTEM_MESSAGE(1400277, killPoints));
 				ironWallFrontReward.getKillsByRace(lastAttacker.getRace()).increment();
 				sendPacket(new SM_INSTANCE_SCORE(new IronWallFrontScoreInfo(ironWallFrontReward, 10, lastAttacker.getRace().equals(Race.ELYOS) ? 0 : 1),
@@ -321,7 +319,7 @@ public class IronWallFrontInstance extends GeneralInstanceHandler {
 			}
 		}
 		PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1400277, -100));
-		updatePoints(-100, player.getRace(), true, 0, player);
+		updatePoints(-100, player.getRace(), true, null, player);
 		return true;
 	}
 

@@ -9,90 +9,92 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
 import com.aionemu.gameserver.model.Race;
+import com.aionemu.gameserver.model.templates.L10n;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ChallengeTask", propOrder = { "quest", "contrib", "reward" })
-public class ChallengeTaskTemplate {
+public class ChallengeTaskTemplate implements L10n {
 
 	@XmlElement(required = true)
-	protected List<ChallengeQuestTemplate> quest;
-	protected List<ContributionReward> contrib;
+	private List<ChallengeQuestTemplate> quest;
+	private List<ContributionReward> contrib;
 
 	@XmlElement(required = true)
-	protected ChallengeReward reward;
+	private ChallengeReward reward;
 
 	@XmlAttribute
-	protected Boolean repeat;
+	private boolean repeat;
 
 	@XmlAttribute(name = "town_residence")
-	protected Boolean townResidence;
+	private boolean townResidence;
 
 	@XmlAttribute(name = "name_id")
-	protected Integer nameId;
+	private int nameId;
 
 	@XmlAttribute(name = "max_level", required = true)
-	protected int maxLevel;
+	private int maxLevel;
 
 	@XmlAttribute(name = "min_level", required = true)
-	protected int minLevel;
+	private int minLevel;
 
 	@XmlAttribute(name = "prev_task")
-	protected Integer prevTask;
+	private Integer prevTask;
 
 	@XmlAttribute(required = true)
-	protected Race race;
+	private Race race;
 
 	@XmlAttribute(required = true)
-	protected ChallengeType type;
+	private ChallengeType type;
 
 	@XmlAttribute(required = true)
-	protected int id;
+	private int id;
 
 	public List<ChallengeQuestTemplate> getQuests() {
-		return this.quest;
+		return quest;
 	}
 
 	public List<ContributionReward> getContrib() {
-		return this.contrib;
+		return contrib;
 	}
 
 	public ChallengeReward getReward() {
-		return this.reward;
+		return reward;
 	}
 
 	public boolean isRepeatable() {
-		return this.repeat != null && this.repeat == true;
+		return repeat == true;
 	}
 
 	public boolean isTownResidence() {
-		return this.townResidence != null && this.townResidence == true;
+		return townResidence == true;
 	}
 
-	public Integer getNameId() {
-		return this.nameId;
+	@Override
+	public int getL10nId() {
+		return nameId;
 	}
 
 	public int getMaxLevel() {
-		return this.maxLevel;
+		return maxLevel;
 	}
 
 	public int getMinLevel() {
-		return this.minLevel;
+		return minLevel;
 	}
 
 	public Integer getPrevTask() {
-		return this.prevTask;
+		return prevTask;
 	}
 
 	public Race getRace() {
-		return this.race;
+		return race;
 	}
 
 	public ChallengeType getType() {
-		return this.type;
+		return type;
 	}
 
 	public int getId() {
-		return this.id;
+		return id;
 	}
 }

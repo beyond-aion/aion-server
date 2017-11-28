@@ -17,7 +17,6 @@ import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.configs.main.LoggingConfig;
 import com.aionemu.gameserver.controllers.observer.ItemUseObserver;
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.model.DescriptionId;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Creature;
@@ -35,6 +34,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_USE_OBJECT;
 import com.aionemu.gameserver.services.SiegeService;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.skillengine.properties.TargetSpeciesAttribute;
+import com.aionemu.gameserver.utils.ChatUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
@@ -68,7 +68,7 @@ public class ArtifactAI extends NpcAI {
 						onActivate(responder);
 					}
 
-				}, new DescriptionId(2 * 716570 + 1), SiegeService.getInstance().getArtifact(getSpawnTemplate().getSiegeId()).getTemplate().getActivation()
+				}, ChatUtil.l10n(716570), SiegeService.getInstance().getArtifact(getSpawnTemplate().getSiegeId()).getTemplate().getActivation()
 					.getCount());
 
 			}
@@ -117,8 +117,7 @@ public class ArtifactAI extends NpcAI {
 		if (!loc.getStatus().equals(ArtifactStatus.IDLE))
 			return;
 		// Brodcast start activation.
-		final SM_SYSTEM_MESSAGE startMessage = STR_ARTIFACT_CASTING(player.getRace().getRaceDescriptionId(), player.getName(), new DescriptionId(
-			skillTemplate.getNameId()));
+		final SM_SYSTEM_MESSAGE startMessage = STR_ARTIFACT_CASTING(player.getRace().getL10n(), player.getName(), skillTemplate.getL10n());
 		loc.setStatus(ArtifactStatus.ACTIVATION);
 		final SM_ABYSS_ARTIFACT_INFO3 artifactInfo = new SM_ABYSS_ARTIFACT_INFO3(loc.getLocationId());
 		player.getPosition().getWorldMapInstance().forEachPlayer(new Consumer<Player>() {
@@ -141,7 +140,7 @@ public class ArtifactAI extends NpcAI {
 				player.getController().cancelTask(TaskId.ACTION_ITEM_NPC);
 				PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.END_QUESTLOOT, 0, getObjectId()), true);
 				PacketSendUtility.sendPacket(player, new SM_USE_OBJECT(player.getObjectId(), getObjectId(), 10000, 0));
-				final SM_SYSTEM_MESSAGE message = STR_ARTIFACT_CANCELED(loc.getRace().getDescriptionId(), new DescriptionId(skillTemplate.getNameId()));
+				final SM_SYSTEM_MESSAGE message = STR_ARTIFACT_CANCELED(loc.getRace().getL10n(), skillTemplate.getL10n());
 				loc.setStatus(ArtifactStatus.IDLE);
 				final SM_ABYSS_ARTIFACT_INFO3 artifactInfo = new SM_ABYSS_ARTIFACT_INFO3(loc.getLocationId());
 				getOwner().getPosition().getWorldMapInstance().forEachPlayer(new Consumer<Player>() {
@@ -170,7 +169,7 @@ public class ArtifactAI extends NpcAI {
 				PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.END_QUESTLOOT, 0, getObjectId()), true);
 				if (!player.getInventory().decreaseByItemId(itemId, count))
 					return;
-				final SM_SYSTEM_MESSAGE message = STR_ARTIFACT_CORE_CASTING(loc.getRace().getDescriptionId(), new DescriptionId(skillTemplate.getNameId()));
+				final SM_SYSTEM_MESSAGE message = STR_ARTIFACT_CORE_CASTING(loc.getRace().getL10n(), skillTemplate.getL10n());
 				loc.setStatus(ArtifactStatus.CASTING);
 				final SM_ABYSS_ARTIFACT_INFO3 artifactInfo = new SM_ABYSS_ARTIFACT_INFO3(loc.getLocationId());
 
@@ -224,7 +223,7 @@ public class ArtifactAI extends NpcAI {
 			this.player = activator;
 			this.skill = skill;
 			this.pkt = new SM_ABYSS_ARTIFACT_INFO3(artifact.getLocationId());
-			this.message = STR_ARTIFACT_FIRE(activator.getRace().getRaceDescriptionId(), player.getName(), new DescriptionId(skill.getNameId()));
+			this.message = STR_ARTIFACT_FIRE(activator.getRace().getL10n(), player.getName(), skill.getL10n());
 		}
 
 		@Override

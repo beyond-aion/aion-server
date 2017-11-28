@@ -6,7 +6,6 @@ import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.dao.PlayerQuestListDAO;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.dataholders.PlayerExperienceTable;
-import com.aionemu.gameserver.model.DescriptionId;
 import com.aionemu.gameserver.model.Gender;
 import com.aionemu.gameserver.model.PlayerClass;
 import com.aionemu.gameserver.model.Race;
@@ -163,18 +162,10 @@ public class PlayerCommonData extends VisibleObjectTemplate {
 	}
 
 	public void addExp(long value, Rates rates) {
-		addExp(value, rates, 0, "");
-	}
-
-	public void addExp(long value, Rates rates, int npcNameId) {
-		addExp(value, rates, npcNameId, "");
+		addExp(value, rates, null);
 	}
 
 	public void addExp(long value, Rates rates, String name) {
-		addExp(value, rates, 0, name);
-	}
-
-	private void addExp(long value, Rates rates, int npcNameId, String name) {
 		if (noExp)
 			return;
 
@@ -205,58 +196,26 @@ public class PlayerCommonData extends VisibleObjectTemplate {
 
 		setExp(exp + reward);
 		if (player != null) {
-			switch (rates) {
-				case XP_GROUP_HUNTING:
-				case XP_HUNTING:
-				case XP_QUEST:
-					if (npcNameId == 0) // Exception: quest w/o reward npc
-						// You have gained %num1 XP.
-						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GET_EXP2(reward));
-					else if (repose > 0 && salvation > 0)
-						// You have gained %num1 XP from %0 (Energy of Repose %num2, Energy of Salvation %num3).
-						PacketSendUtility.sendPacket(player,
-							SM_SYSTEM_MESSAGE.STR_GET_EXP_VITAL_MAKEUP_BONUS_DESC(new DescriptionId(npcNameId * 2 + 1), reward, repose, salvation));
-					else if (repose > 0 && salvation == 0)
-						// You have gained %num1 XP from %0 (Energy of Repose %num2).
-						PacketSendUtility.sendPacket(player,
-							SM_SYSTEM_MESSAGE.STR_GET_EXP_VITAL_BONUS_DESC(new DescriptionId(npcNameId * 2 + 1), reward, repose));
-					else if (repose == 0 && salvation > 0)
-						// You have gained %num1 XP from %0 (Energy of Salvation %num2).
-						PacketSendUtility.sendPacket(player,
-							SM_SYSTEM_MESSAGE.STR_GET_EXP_MAKEUP_BONUS_DESC(new DescriptionId(npcNameId * 2 + 1), reward, salvation));
-					else
-						// You have gained %num1 XP from %0.
-						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GET_EXP_DESC(new DescriptionId(npcNameId * 2 + 1), reward));
-					break;
-				case XP_PVP:
-					if (repose > 0 && salvation > 0)
-						// You have gained %num1 XP from %0 (Energy of Repose %num2, Energy of Salvation %num3).
-						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GET_EXP_VITAL_MAKEUP_BONUS(name, reward, repose, salvation));
-					else if (repose > 0 && salvation == 0)
-						// You have gained %num1 XP from %0 (Energy of Repose %num2).
-						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GET_EXP_VITAL_BONUS(name, reward, repose));
-					else if (repose == 0 && salvation > 0)
-						// You have gained %num1 XP from %0 (Energy of Salvation %num2).
-						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GET_EXP_MAKEUP_BONUS(name, reward, salvation));
-					else
-						// You have gained %num1 XP from %0.
-						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GET_EXP(name, reward));
-					break;
-				case XP_CRAFTING:
-				case XP_GATHERING:
-					if (repose > 0 && salvation > 0)
-						// You have gained %num1 XP(Energy of Repose %num2, Energy of Salvation %num3).
-						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GET_EXP2_VITAL_MAKEUP_BONUS(reward, repose, salvation));
-					else if (repose > 0 && salvation == 0)
-						// You have gained %num1 XP(Energy of Repose %num2).
-						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GET_EXP2_VITAL_BONUS(reward, repose));
-					else if (repose == 0 && salvation > 0)
-						// You have gained %num1 XP(Energy of Salvation %num2).
-						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GET_EXP2_MAKEUP_BONUS(reward, salvation));
-					else
-						// You have gained %num1 XP.
-						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GET_EXP2(reward));
-					break;
+			if (repose > 0 && salvation > 0) {
+				if (name != null) // You have gained %num1 XP from %0 (Energy of Repose %num2, Energy of Salvation %num3).
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GET_EXP_VITAL_MAKEUP_BONUS(name, reward, repose, salvation));
+				else // You have gained %num1 XP(Energy of Repose %num2, Energy of Salvation %num3).
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GET_EXP2_VITAL_MAKEUP_BONUS(reward, repose, salvation));
+			} else if (repose > 0 && salvation == 0) {
+				if (name != null) // You have gained %num1 XP from %0 (Energy of Repose %num2).
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GET_EXP_VITAL_BONUS(name, reward, repose));
+				else // You have gained %num1 XP(Energy of Repose %num2).
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GET_EXP2_VITAL_BONUS(reward, repose));
+			} else if (repose == 0 && salvation > 0) {
+				if (name != null) // You have gained %num1 XP from %0 (Energy of Salvation %num2).
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GET_EXP_MAKEUP_BONUS(name, reward, salvation));
+				else // You have gained %num1 XP (Energy of Salvation %num2).
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GET_EXP2_MAKEUP_BONUS(reward, salvation));
+			} else {
+				if (name != null) // You have gained %num1 XP from %0.
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GET_EXP(name, reward));
+				else // You have gained %num1 XP.
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GET_EXP2(reward));
 			}
 			if (getLevel() == 9 && exp >= DataManager.PLAYER_EXPERIENCE_TABLE.getStartExpForLevel(10))
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_LEVEL_LIMIT_QUEST_NOT_FINISHED1());
@@ -514,7 +473,7 @@ public class PlayerCommonData extends VisibleObjectTemplate {
 	}
 
 	@Override
-	public int getNameId() {
+	public int getL10nId() {
 		return 0;
 	}
 

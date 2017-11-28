@@ -66,9 +66,9 @@ public class SurveyService {
 			if (item.itemId == ItemId.KINAH.value())
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_GET_POLL_REWARD_MONEY(item.count));
 			else if (item.count == 1)
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_GET_POLL_REWARD_ITEM(template.getNameId()));
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_GET_POLL_REWARD_ITEM(template.getL10n()));
 			else
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_GET_POLL_REWARD_ITEM_MULTI(item.count, template.getNameId()));
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_GET_POLL_REWARD_ITEM_MULTI(item.count, template.getL10n()));
 
 			activeItems.remove(survId);
 		}

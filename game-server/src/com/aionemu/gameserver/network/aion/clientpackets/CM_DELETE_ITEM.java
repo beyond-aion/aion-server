@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
-import com.aionemu.gameserver.model.DescriptionId;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.items.storage.Storage;
@@ -35,7 +34,7 @@ public class CM_DELETE_ITEM extends AionClientPacket {
 
 		if (item != null) {
 			if (!item.getItemTemplate().isBreakable()) {
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_UNBREAKABLE_ITEM(new DescriptionId(item.getNameId())));
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_UNBREAKABLE_ITEM(item.getL10n()));
 			} else {
 				inventory.delete(item, ItemDeleteType.DISCARD);
 			}

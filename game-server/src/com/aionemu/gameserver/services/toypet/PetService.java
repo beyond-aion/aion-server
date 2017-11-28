@@ -116,7 +116,7 @@ public class PetService {
 				PacketSendUtility.sendPacket(player, new SM_PET(5, action, 0, 0, pet));
 				PacketSendUtility.sendPacket(player, new SM_EMOTION(player, EmotionType.END_FEEDING, 0, player.getObjectId()));
 				PacketSendUtility.sendPacket(player,
-					SM_SYSTEM_MESSAGE.STR_MSG_TOYPET_FEED_FOOD_NOT_LOVEFLAVOR(pet.getName(), item.getItemTemplate().getNameId()));
+					SM_SYSTEM_MESSAGE.STR_MSG_TOYPET_FEED_FOOD_NOT_LOVEFLAVOR(pet.getName(), item.getItemTemplate().getL10n()));
 				return;
 			}
 

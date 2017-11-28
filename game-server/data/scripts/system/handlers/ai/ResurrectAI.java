@@ -95,7 +95,7 @@ public class ResurrectAI extends NpcAI {
 						responder.getInventory().decreaseKinah(bindPointTemplate.getPrice());
 						TeleportService.sendSetBindPoint(responder);
 						PacketSendUtility.broadcastPacket(responder, new SM_LEVEL_UPDATE(responder.getObjectId(), 2, responder.getCommonData().getLevel()), true);
-						PacketSendUtility.sendPacket(responder, STR_DEATH_REGISTER_RESURRECT_POINT("")); // TODO
+						PacketSendUtility.sendPacket(responder, STR_DEATH_REGISTER_RESURRECT_POINT());
 						old = null;
 					} else
 						// if any errors happen, left that player with old bind point

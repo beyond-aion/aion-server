@@ -36,7 +36,7 @@ public class SM_REPURCHASE extends AionServerPacket {
 
 			writeD(item.getObjectId());
 			writeD(itemTemplate.getTemplateId());
-			writeNameId(itemTemplate.getNameId());
+			writeS(itemTemplate.getL10n());
 
 			ItemInfoBlob itemInfoBlob = ItemInfoBlob.getFullBlob(player, item);
 			itemInfoBlob.writeMe(getBuf());

@@ -11,7 +11,6 @@ import java.util.function.Consumer;
 import com.aionemu.gameserver.ai.event.AIEventType;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.CreatureType;
-import com.aionemu.gameserver.model.DescriptionId;
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.DialogPage;
 import com.aionemu.gameserver.model.EmotionId;
@@ -333,7 +332,7 @@ public abstract class AbstractQuestHandler {
 			if (nextStep != step) { // quest can be rolled back if nextStep < step
 				if (step > nextStep && qs.getStatus() == QuestStatus.START)
 					PacketSendUtility.sendPacket(env.getPlayer(),
-						SM_SYSTEM_MESSAGE.STR_QUEST_SYSTEMMSG_GIVEUP(DataManager.QUEST_DATA.getQuestById(questId).getNameId()));
+						SM_SYSTEM_MESSAGE.STR_QUEST_SYSTEMMSG_GIVEUP(DataManager.QUEST_DATA.getQuestById(questId).getL10n()));
 				if (varNum == -1)
 					qs.setQuestVar(nextStep);
 				else
@@ -639,7 +638,7 @@ public abstract class AbstractQuestHandler {
 				ItemService.addItem(player, itemId, itemsToGive, true, new ItemService.ItemUpdatePredicate(addType, updateType));
 				return true;
 			} else {
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CAN_NOT_GET_LORE_ITEM((new DescriptionId(item.getNameId()))));
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CAN_NOT_GET_LORE_ITEM((item.getL10n())));
 				return true;
 			}
 		}

@@ -55,7 +55,7 @@ public class SM_WAREHOUSE_INFO extends AionServerPacket {
 		writeD(item.getObjectId());
 		writeD(itemTemplate.getTemplateId());
 		writeC(0); // some item info (4 - weapon, 7 - armor, 8 - rings, 17 - bottles)
-		writeNameId(itemTemplate.getNameId());
+		writeS(itemTemplate.getL10n());
 
 		ItemInfoBlob itemInfoBlob = ItemInfoBlob.getFullBlob(player, item);
 		itemInfoBlob.writeMe(getBuf());

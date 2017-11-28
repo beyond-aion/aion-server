@@ -3,15 +3,16 @@ package com.aionemu.gameserver.services;
 import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.Map;
+import java.util.TreeMap;
 
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.dao.LegionDAO;
 import com.aionemu.gameserver.dao.LegionDominionDAO;
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.model.DescriptionId;
 import com.aionemu.gameserver.model.legionDominion.LegionDominionLocation;
 import com.aionemu.gameserver.model.legionDominion.LegionDominionParticipantInfo;
 import com.aionemu.gameserver.model.team.legion.Legion;
+import com.aionemu.gameserver.model.templates.LegionDominionLocationTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_LEGION_DOMINION_LOC_INFO;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_LEGION_DOMINION_RANK;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_LEGION_INFO;
@@ -26,14 +27,16 @@ public class LegionDominionService {
 
 	private static final LegionDominionService instance = new LegionDominionService();
 	
-	private Map<Integer, LegionDominionLocation> legionDominionLocations;
+	private Map<Integer, LegionDominionLocation> legionDominionLocations = new TreeMap<>();
 	
 	public static LegionDominionService getInstance() {
 		return instance;
 	}
 	
 	public void initLocations() {
-		legionDominionLocations = DataManager.LEGION_DOMINION_DATA.getLegionDominionLocations();
+		for (LegionDominionLocationTemplate temp : DataManager.LEGION_DOMINION_DATA.getLocationTemplates()) {
+			legionDominionLocations.put(temp.getId(), new LegionDominionLocation(temp));
+		}
 		DAOManager.getDAO(LegionDominionDAO.class).loadLegionDominionLocations(legionDominionLocations);
 		for (LegionDominionLocation loc : legionDominionLocations.values()) {
 			loc.setParticipantInfo(DAOManager.getDAO(LegionDominionDAO.class).loadParticipants(loc));
@@ -55,14 +58,6 @@ public class LegionDominionService {
 	 */
 	public boolean join(int legionId, int locId) {
 		return legionDominionLocations.get(locId).join(legionId);
-	}
-
-	/**
-	 * @param locId
-	 * @return
-	 */
-	public DescriptionId getNameDesc(int locId) {
-		return new DescriptionId( 2 * legionDominionLocations.get(locId).getNameId() + 2);
 	}
 
 	public LegionDominionLocation getLegionDominionByZone(String zoneName) {

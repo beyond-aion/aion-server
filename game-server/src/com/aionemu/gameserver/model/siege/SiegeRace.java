@@ -1,7 +1,7 @@
 package com.aionemu.gameserver.model.siege;
 
-import com.aionemu.gameserver.model.DescriptionId;
 import com.aionemu.gameserver.model.Race;
+import com.aionemu.gameserver.utils.ChatUtil;
 
 /**
  * @author Sarynth
@@ -9,19 +9,18 @@ import com.aionemu.gameserver.model.Race;
 public enum SiegeRace {
 	ELYOS(Race.ELYOS),
 	ASMODIANS(Race.ASMODIANS),
-	BALAUR(2, 1800485);
+	BALAUR(2, ChatUtil.l10n(900242));
 
-	private int raceId;
-	private DescriptionId descriptionId;
+	private final int raceId;
+	private final String l10n;
 
 	private SiegeRace(Race race) {
-		this.raceId = race.getRaceId();
-		this.descriptionId = race.getRaceDescriptionId();
+		this(race.getRaceId(), race.getL10n());
 	}
 
-	private SiegeRace(int id, int descriptionId) {
+	private SiegeRace(int id, String l10n) {
 		this.raceId = id;
-		this.descriptionId = new DescriptionId(descriptionId);
+		this.l10n = l10n;
 	}
 
 	public int getRaceId() {
@@ -39,10 +38,7 @@ public enum SiegeRace {
 		}
 	}
 
-	/**
-	 * @return the descriptionId
-	 */
-	public DescriptionId getDescriptionId() {
-		return descriptionId;
+	public String getL10n() {
+		return l10n;
 	}
 }

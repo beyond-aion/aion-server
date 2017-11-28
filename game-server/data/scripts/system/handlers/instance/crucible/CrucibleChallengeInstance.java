@@ -6,7 +6,6 @@ import java.util.function.Consumer;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.instance.handlers.InstanceID;
-import com.aionemu.gameserver.model.DescriptionId;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.drop.DropItem;
 import com.aionemu.gameserver.model.gameobjects.Creature;
@@ -55,20 +54,19 @@ public class CrucibleChallengeInstance extends CrucibleInstance {
 	@Override
 	public void onEnterInstance(Player player) {
 		super.onEnterInstance(player);
-		sendPacket(0, 0);
+		sendPacket(null, 0);
 		sendEventPacket();
 	}
 
-	private void sendPacket(final int nameId, final int points) {
+	private void sendPacket(String npcL10n, int points) {
 		instance.forEachPlayer(new Consumer<Player>() {
 
 			@Override
 			public void accept(Player player) {
 				if (player.isOnline()) {
 					PacketSendUtility.sendPacket(player, new SM_INSTANCE_SCORE(new CrucibleScoreInfo(instanceReward), instanceReward));
-					if (nameId != 0) {
-						PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1400237, new DescriptionId(nameId * 2 + 1), points));
-					}
+					if (npcL10n != null)
+						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_GET_SCORE(npcL10n, points));
 				}
 			}
 		});
@@ -153,7 +151,7 @@ public class CrucibleChallengeInstance extends CrucibleInstance {
 		}
 		if (points != 0) {
 			getPlayerReward(instance.getSoloPlayerObj()).addPoints(points);
-			sendPacket(npc.getObjectTemplate().getNameId(), points);
+			sendPacket(npc.getObjectTemplate().getL10n(), points);
 		}
 		switch (npcId) {
 			case 217784: // ely
@@ -542,7 +540,7 @@ public class CrucibleChallengeInstance extends CrucibleInstance {
 
 	@Override
 	public void onPlayerLogin(Player player) {
-		sendPacket(0, 0);
+		sendPacket(null, 0);
 		sendEventPacket();
 		if (getPlayerReward(player.getObjectId()).isRewarded()) {
 			doReward(player);

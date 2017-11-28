@@ -8,7 +8,6 @@ import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.ai.AbstractAI;
 import com.aionemu.gameserver.configs.main.SiegeConfig;
-import com.aionemu.gameserver.model.DescriptionId;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.siege.SiegeNpc;
@@ -19,6 +18,7 @@ import com.aionemu.gameserver.model.siege.SiegeRace;
 import com.aionemu.gameserver.model.templates.npc.AbyssNpcType;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SIEGE_LOCATION_STATE;
 import com.aionemu.gameserver.services.SiegeService;
+import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.World;
 
 /**
@@ -189,15 +189,11 @@ public abstract class Siege<SL extends SiegeLocation> {
 	}
 
 	protected void broadcastState(SiegeLocation location) {
-		SiegeService.getInstance().broadcast(new SM_SIEGE_LOCATION_STATE(location), null);
+		PacketSendUtility.broadcastToWorld(new SM_SIEGE_LOCATION_STATE(location));
 	}
 
 	protected void broadcastUpdate(SiegeLocation location) {
 		SiegeService.getInstance().broadcastUpdate(location);
-	}
-
-	protected void broadcastUpdate(SiegeLocation location, int nameId) {
-		SiegeService.getInstance().broadcastUpdate(location, new DescriptionId(nameId));
 	}
 
 	protected void updateOutpostStatusByFortress(FortressLocation location) {

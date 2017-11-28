@@ -2,11 +2,11 @@ package ai.siege;
 
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.NpcAI;
-import com.aionemu.gameserver.model.DescriptionId;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.RequestResponseHandler;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUESTION_WINDOW;
+import com.aionemu.gameserver.utils.ChatUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
@@ -31,8 +31,7 @@ public class GateRepairAI extends NpcAI {
 				};
 				if (player.getResponseRequester().putRequest(SM_QUESTION_WINDOW.STR_ASK_DOOR_REPAIR_DO_YOU_ACCEPT_REPAIR, repairstone))
 					PacketSendUtility.sendPacket(player,
-						new SM_QUESTION_WINDOW(SM_QUESTION_WINDOW.STR_ASK_DOOR_REPAIR_DO_YOU_ACCEPT_REPAIR, getObjectId(), 5, new DescriptionId(
-							2 * 716568 + 1)));
+						new SM_QUESTION_WINDOW(SM_QUESTION_WINDOW.STR_ASK_DOOR_REPAIR_DO_YOU_ACCEPT_REPAIR, getObjectId(), 5, ChatUtil.l10n(716568)));
 			}
 
 		};

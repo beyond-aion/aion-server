@@ -33,7 +33,7 @@ public class SM_WAREHOUSE_UPDATE_ITEM extends AionServerPacket {
 
 		writeD(item.getObjectId());
 		writeC(warehouseType);
-		writeNameId(itemTemplate.getNameId());
+		writeS(itemTemplate.getL10n());
 
 		ItemInfoBlob itemInfoBlob = new ItemInfoBlob(player, item);
 		itemInfoBlob.addBlobEntry(ItemBlobType.GENERAL_INFO);

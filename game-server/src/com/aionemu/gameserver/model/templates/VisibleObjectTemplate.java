@@ -3,7 +3,7 @@ package com.aionemu.gameserver.model.templates;
 /**
  * @author ATracer
  */
-public abstract class VisibleObjectTemplate {
+public abstract class VisibleObjectTemplate implements L10n {
 
 	/**
 	 * For Npcs it will return npcid from templates xml
@@ -18,13 +18,6 @@ public abstract class VisibleObjectTemplate {
 	 * @return name of object
 	 */
 	public abstract String getName();
-
-	/**
-	 * Name id of object template
-	 * 
-	 * @return int
-	 */
-	public abstract int getNameId();
 
 	/**
 	 * @return

@@ -39,7 +39,7 @@ public class RecipeService {
 
 		if (!player.getSkillList().isSkillPresent(template.getSkillId())) {
 			PacketSendUtility.sendPacket(player,
-				SM_SYSTEM_MESSAGE.STR_CRAFT_RECIPE_CANT_LEARN_SKILL(DataManager.SKILL_DATA.getSkillTemplate(template.getSkillId()).getNameId()));
+				SM_SYSTEM_MESSAGE.STR_CRAFT_RECIPE_CANT_LEARN_SKILL(DataManager.SKILL_DATA.getSkillTemplate(template.getSkillId()).getL10n()));
 			return null;
 		}
 

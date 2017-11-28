@@ -65,9 +65,9 @@ public class CM_SELECT_DECOMPOSABLE extends AionClientPacket {
 					return;
 				}
 				PacketSendUtility.broadcastPacketAndReceive(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), objectId, item.getItemId()));
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_UNCOMPRESS_COMPRESSED_ITEM_SUCCEEDED(item.getNameId()));
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_UNCOMPRESS_COMPRESSED_ITEM_SUCCEEDED(item.getL10n()));
 				player.getInventory().decreaseByObjectId(objectId, 1);
-				PacketSendUtility.sendPacket(player, new SM_SECONDARY_SHOW_DECOMPOSABLE(objectId, Collections.<ResultedItem> emptyList())); // to do
+				PacketSendUtility.sendPacket(player, new SM_SECONDARY_SHOW_DECOMPOSABLE(objectId, Collections.emptyList())); // TODO
 				ResultedItem selectedItem = selectableItems.get(index);
 				ItemService.addItem(player, selectedItem.getItemId(), selectedItem.getResultCount(), true, new ItemUpdatePredicate(ItemAddType.DECOMPOSABLE, ItemUpdateType.INC_ITEM_COLLECT));
 			}

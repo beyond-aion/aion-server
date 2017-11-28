@@ -113,7 +113,7 @@ public class QuestEngine implements GameEngine {
 				QuestService.addQuestDrop(drop.getNpcId(), drop);
 			}
 			if (data.getInventoryItems() != null) {
-				for (InventoryItem inventoryItem : data.getInventoryItems().getInventoryItem()) {
+				for (InventoryItem inventoryItem : data.getInventoryItems().getInventoryItems()) {
 					if (!questUpdateItems.contains(inventoryItem.getItemId()))
 						questUpdateItems.add(inventoryItem.getItemId());
 				}

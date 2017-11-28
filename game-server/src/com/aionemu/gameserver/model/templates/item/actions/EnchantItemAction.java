@@ -7,7 +7,6 @@ import javax.xml.bind.annotation.XmlType;
 
 import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.controllers.observer.StartMovingListener;
-import com.aionemu.gameserver.model.DescriptionId;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.enchants.EnchantmentStone;
 import com.aionemu.gameserver.model.gameobjects.Item;
@@ -55,19 +54,19 @@ public class EnchantItemAction extends AbstractItemAction {
 		}
 		if (parentItem.getItemTemplate().getItemGroup() == ItemGroup.ENCHANTMENT) {
 			if (targetItem.getItemTemplate().getMaxEnchantLevel() == 0 && !targetItem.getItemTemplate().canExceedEnchant()) {
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GIVE_ITEM_OPTION_IT_CAN_NOT_BE_GIVEN_OPTION(
-					new DescriptionId(targetItem.getItemTemplate().getNameId()), parentItem.getItemTemplate().getNameId()));
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GIVE_ITEM_OPTION_IT_CAN_NOT_BE_GIVEN_OPTION(targetItem.getItemTemplate().getL10n(),
+					parentItem.getItemTemplate().getL10n()));
 				return false;
 			} else if (!targetItem.isAmplified() && targetItem.getEnchantLevel() >= targetItem.getMaxEnchantLevel()) {
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GIVE_ITEM_OPTION_IT_CAN_NOT_BE_GIVEN_OPTION_MORE_TIME(
-					new DescriptionId(targetItem.getItemTemplate().getNameId()), parentItem.getItemTemplate().getNameId()));
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE
+					.STR_GIVE_ITEM_OPTION_IT_CAN_NOT_BE_GIVEN_OPTION_MORE_TIME(targetItem.getItemTemplate().getL10n(), parentItem.getItemTemplate().getL10n()));
 				return false;
 			} else if (targetItem.getEnchantLevel() >= 255) {
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GIVE_ITEM_OPTION_IT_CAN_NOT_BE_GIVEN_OPTION_MORE_TIME(
-					new DescriptionId(targetItem.getItemTemplate().getNameId()), parentItem.getItemTemplate().getNameId()));
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE
+					.STR_GIVE_ITEM_OPTION_IT_CAN_NOT_BE_GIVEN_OPTION_MORE_TIME(targetItem.getItemTemplate().getL10n(), parentItem.getItemTemplate().getL10n()));
 				return false;
 			} else if (targetItem.isAmplified() && EnchantmentStone.getByItemId(parentItem.getItemId()) != EnchantmentStone.OMEGA) {
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_EXCEED_CANNOT_02(new DescriptionId(parentItem.getItemTemplate().getNameId())));
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_EXCEED_CANNOT_02(parentItem.getItemTemplate().getL10n()));
 				return false;
 			}
 		}
@@ -83,8 +82,7 @@ public class EnchantItemAction extends AbstractItemAction {
 
 	// necessary overloading to not change AbstractItemAction
 	public void act(final Player player, final Item parentItem, final Item targetItem, final Item supplementItem, final int targetWeapon) {
-
-		final boolean stoneType = parentItem.getItemTemplate().getItemGroup() == ItemGroup.ENCHANTMENT;
+		boolean isEnchantmentStone = parentItem.getItemTemplate().getItemGroup() == ItemGroup.ENCHANTMENT;
 
 		if (supplementItem != null && !checkSupplementLevel(player, supplementItem.getItemTemplate(), targetItem.getItemTemplate()))
 			return;
@@ -96,7 +94,8 @@ public class EnchantItemAction extends AbstractItemAction {
 				super.moved();
 				player.getObserveController().removeObserver(this);
 				player.getController().cancelUseItem();
-				PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(stoneType ? 1300457 : 1300464, new DescriptionId(targetItem.getNameId())));
+				PacketSendUtility.sendPacket(player, isEnchantmentStone ? SM_SYSTEM_MESSAGE.STR_ENCHANT_ITEM_CANCELED(targetItem.getL10n())
+					: SM_SYSTEM_MESSAGE.STR_GIVE_ITEM_OPTION_CANCELED(targetItem.getL10n()));
 			}
 
 		};
@@ -108,7 +107,7 @@ public class EnchantItemAction extends AbstractItemAction {
 		final boolean isSuccess = isSuccess(player, parentItem, targetItem, supplementItem, targetWeapon);
 		// Item template
 		PacketSendUtility.broadcastPacketAndReceive(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), targetItem.getObjectId(),
-			parentItem.getObjectId(), parentItem.getItemTemplate().getTemplateId(), stoneType ? 5000 : 2000, 0, 0, 1, 0, 0));
+			parentItem.getObjectId(), parentItem.getItemTemplate().getTemplateId(), isEnchantmentStone ? 5000 : 2000, 0, 0, 1, 0, 0));
 
 		player.getController().addTask(TaskId.ITEM_USE, ThreadPoolManager.getInstance().schedule(new Runnable() {
 
@@ -123,28 +122,26 @@ public class EnchantItemAction extends AbstractItemAction {
 					return;
 				}
 
-				// Enchantment stone
-				if (stoneType)
+				if (isEnchantmentStone)
 					EnchantService.enchantItemAct(player, parentItem, targetItem, supplementItem, currentEnchant, isSuccess);
-				// Manastone
-				else
+				else // Manastone
 					EnchantService.socketManastoneAct(player, parentItem, targetItem, supplementItem, targetWeapon, isSuccess);
 
 				PacketSendUtility.broadcastPacketAndReceive(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(),
 					parentItem.getItemTemplate().getTemplateId(), 0, isSuccess ? 1 : 2, 0));
 				if (CustomConfig.ENABLE_ENCHANT_ANNOUNCE) {
-					if (stoneType && isSuccess && (targetItem.getEnchantLevel() == 15 || targetItem.getEnchantLevel() == 20)) {
+					if (isEnchantmentStone && isSuccess && (targetItem.getEnchantLevel() == 15 || targetItem.getEnchantLevel() == 20)) {
 						SM_SYSTEM_MESSAGE packet;
 						if (targetItem.getEnchantLevel() == 15)
-							packet = SM_SYSTEM_MESSAGE.STR_MSG_ENCHANT_ITEM_SUCCEEDED_15(player.getName(), targetItem.getItemTemplate().getNameId());
+							packet = SM_SYSTEM_MESSAGE.STR_MSG_ENCHANT_ITEM_SUCCEEDED_15(player.getName(), targetItem.getItemTemplate().getL10n());
 						else
-							packet = SM_SYSTEM_MESSAGE.STR_MSG_ENCHANT_ITEM_SUCCEEDED_20(player.getName(), targetItem.getItemTemplate().getNameId());
+							packet = SM_SYSTEM_MESSAGE.STR_MSG_ENCHANT_ITEM_SUCCEEDED_20(player.getName(), targetItem.getItemTemplate().getL10n());
 						PacketSendUtility.broadcastToWorld(packet, Predicates.Players.sameRace(player));
 					}
 				}
 			}
 
-		}, stoneType ? 5000 : 2000));
+		}, isEnchantmentStone ? 5000 : 2000));
 	}
 
 	/**

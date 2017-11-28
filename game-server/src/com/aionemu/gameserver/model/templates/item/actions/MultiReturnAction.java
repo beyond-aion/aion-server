@@ -8,7 +8,6 @@ import javax.xml.bind.annotation.XmlType;
 
 import com.aionemu.gameserver.controllers.observer.ItemUseObserver;
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.model.DescriptionId;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -47,7 +46,7 @@ public class MultiReturnAction extends AbstractItemAction {
 			public void abort() {
 				player.getController().cancelTask(TaskId.ITEM_USE);
 				player.removeItemCoolDown(item.getItemTemplate().getUseLimits().getDelayId());
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_CANCELED(new DescriptionId(item.getNameId())));
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_CANCELED());
 				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), item.getObjectId(), item.getItemId(), 0, 2, 0), true);
 				player.getObserveController().removeObserver(this);
 			}
@@ -65,7 +64,7 @@ public class MultiReturnAction extends AbstractItemAction {
 					}
 					player.getObserveController().removeObserver(observer);
 					TeleportService.useTeleportScroll(player, loc.getAlias().toUpperCase(), loc.getWorldid());
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_USE_ITEM(new DescriptionId(item.getNameId())));
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_USE_ITEM(item.getL10n()));
 				}
 			}
 

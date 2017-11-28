@@ -20,7 +20,7 @@ import com.aionemu.gameserver.model.templates.stats.ModifiersTemplate;
  */
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlRootElement(name = "title_templates")
-public class TitleTemplate implements StatOwner {
+public class TitleTemplate implements StatOwner, L10n {
 
 	@XmlAttribute(name = "id", required = true)
 	@XmlID
@@ -48,7 +48,8 @@ public class TitleTemplate implements StatOwner {
 		return race;
 	}
 
-	public int getNameId() {
+	@Override
+	public int getL10nId() {
 		return nameId;
 	}
 

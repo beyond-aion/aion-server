@@ -16,7 +16,7 @@ import com.aionemu.gameserver.model.Race;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Legion_dominion_location")
-public class LegionDominionLocationTemplate {
+public class LegionDominionLocationTemplate implements L10n {
 
 	@XmlAttribute(name = "id")
 	protected int id;
@@ -67,7 +67,8 @@ public class LegionDominionLocationTemplate {
 		return reward;
 	}
 
-	public int getNameId() {
+	@Override
+	public int getL10nId() {
 		return nameId;
 	}
 }

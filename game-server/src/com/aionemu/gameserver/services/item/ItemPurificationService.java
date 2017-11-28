@@ -6,7 +6,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.model.DescriptionId;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.items.ManaStone;
@@ -41,7 +40,7 @@ public class ItemPurificationService {
 		}
 
 		if (baseItem.getEnchantLevel() < resultItem.getCheckEnchantCount()) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REGISTER_ITEM_MSG_UPGRADE_CANNOT(new DescriptionId(baseItem.getNameId())));
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REGISTER_ITEM_MSG_UPGRADE_CANNOT(baseItem.getL10n()));
 			return false;
 		}
 
@@ -65,9 +64,9 @@ public class ItemPurificationService {
 				return false;
 			}
 		}
-		int nameId = DataManager.ITEM_DATA.getItemTemplate(resultItemId).getNameId();
+		String resultItemL10n = DataManager.ITEM_DATA.getItemTemplate(resultItemId).getL10n();
 		PacketSendUtility.sendPacket(player,
-			SM_SYSTEM_MESSAGE.STR_ITEM_UPGRADE_MSG_UPGRADE_SUCCESS(new DescriptionId(baseItem.getNameId()), new DescriptionId(nameId)));
+			SM_SYSTEM_MESSAGE.STR_ITEM_UPGRADE_MSG_UPGRADE_SUCCESS(baseItem.getL10n(), resultItemL10n));
 		return true;
 	}
 

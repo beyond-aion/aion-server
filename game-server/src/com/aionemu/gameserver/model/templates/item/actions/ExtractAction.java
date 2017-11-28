@@ -41,7 +41,7 @@ public class ExtractAction extends AbstractItemAction {
 			@Override
 			public void abort() {
 				player.getController().cancelTask(TaskId.ITEM_USE);
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_DECOMPOSE_ITEM_CANCELED(parentItem.getNameId()));
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_DECOMPOSE_ITEM_CANCELED(parentItem.getL10n()));
 				PacketSendUtility.sendPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemTemplate()
 					.getTemplateId(), 0, 2, 0));
 				player.getObserveController().removeObserver(this);

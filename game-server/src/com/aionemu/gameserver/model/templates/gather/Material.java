@@ -5,12 +5,14 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
+import com.aionemu.gameserver.model.templates.L10n;
+
 /**
  * @author ATracer
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Material")
-public class Material implements Comparable<Material> {
+public class Material implements Comparable<Material>, L10n {
 
 	@XmlAttribute
 	protected String name;
@@ -42,8 +44,9 @@ public class Material implements Comparable<Material> {
 	 * 
 	 * @return possible object is {@link Integer }
 	 */
-	public int getNameId() {
-		return nameid * 2 + 1;
+	@Override
+	public int getL10nId() {
+		return nameid;
 	}
 
 	/**

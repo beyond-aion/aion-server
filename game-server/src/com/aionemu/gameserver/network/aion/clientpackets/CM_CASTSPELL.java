@@ -7,6 +7,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
+import com.aionemu.gameserver.utils.ChatUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
@@ -78,7 +79,7 @@ public class CM_CASTSPELL extends AionClientPacket {
 		Player player = getConnection().getActivePlayer();
 
 		if (player.isDead()) {
-			PacketSendUtility.sendPacket(player, STR_SKILL_CANT_CAST(1400059));
+			PacketSendUtility.sendPacket(player, STR_SKILL_CANT_CAST(ChatUtil.l10n(1400059)));
 			return;
 		}
 

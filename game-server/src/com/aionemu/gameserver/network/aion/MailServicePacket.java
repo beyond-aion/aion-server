@@ -70,7 +70,7 @@ public abstract class MailServicePacket extends AionServerPacket {
 			writeD(itemTemplate.getTemplateId());
 			writeD(1); // unk
 			writeD(0); // unk
-			writeNameId(itemTemplate.getNameId());
+			writeS(itemTemplate.getL10n());
 
 			ItemInfoBlob itemInfoBlob = ItemInfoBlob.getFullBlob(player, item);
 			itemInfoBlob.writeMe(getBuf());

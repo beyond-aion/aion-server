@@ -46,7 +46,7 @@ public class SM_INVENTORY_ADD_ITEM extends AionServerPacket {
 
 		writeD(item.getObjectId());
 		writeD(itemTemplate.getTemplateId());
-		writeNameId(itemTemplate.getNameId());
+		writeS(itemTemplate.getL10n());
 
 		ItemInfoBlob.getFullBlob(player, item).writeMe(getBuf());
 

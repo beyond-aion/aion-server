@@ -8,7 +8,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
 import com.aionemu.gameserver.instance.handlers.InstanceID;
-import com.aionemu.gameserver.model.DescriptionId;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.StaticDoor;
@@ -60,7 +59,7 @@ public class TheShugoEmperorsVault extends GeneralInstanceHandler {
 				if (started.compareAndSet(false, true)) {
 					startTime = System.currentTimeMillis();
 					instanceReward.setInstanceScoreType(InstanceScoreType.START_PROGRESS);
-					sendPacket(0, 0);
+					sendPacket(null, 0);
 					doors.get(430).setOpen(true);
 					startInstance();
 					startFailTask();
@@ -79,7 +78,7 @@ public class TheShugoEmperorsVault extends GeneralInstanceHandler {
 					}
 					instanceReward.setInstanceScoreType(InstanceScoreType.START_PROGRESS);
 					startTime = System.currentTimeMillis();
-					sendPacket(0, 0);
+					sendPacket(null, 0);
 					startInstance();
 					if (failTimerTask == null) {
 						startFailTask();
@@ -106,7 +105,7 @@ public class TheShugoEmperorsVault extends GeneralInstanceHandler {
 	public void onEnterInstance(final Player player) {
 		super.onEnterInstance(player);
 		if (!instanceReward.isRewarded()) {
-			sendPacket(0, 0);
+			sendPacket(null, 0);
 		}
 	}
 	
@@ -332,7 +331,7 @@ public class TheShugoEmperorsVault extends GeneralInstanceHandler {
 	private void addPoints(Npc npc, int points) {
     if (instanceReward.getInstanceScoreType().isStartProgress()) {
         instanceReward.addPoints(points);
-        sendPacket(npc.getObjectTemplate().getNameId(), points);
+			sendPacket(npc.getObjectTemplate().getL10n(), points);
     }
 	}
 	
@@ -414,7 +413,7 @@ public class TheShugoEmperorsVault extends GeneralInstanceHandler {
 			despawnAll();
 			instanceReward.setInstanceScoreType(InstanceScoreType.END_PROGRESS);
 			instanceReward.setRank(rank);
-			sendPacket(0, 0);
+			sendPacket(null, 0);
 			reward();
 			if (rank <= 5) {
 				spawn(832932, 384f, 736f, 398.42203f, (byte) 105); //Shugo Emperor's Butler
@@ -517,11 +516,10 @@ public class TheShugoEmperorsVault extends GeneralInstanceHandler {
 		instance.getNpcs().stream().filter(npc -> npc != null).filter(npc -> npc.getNpcId() != 832925).forEach(npc -> npc.getController().delete());
 	}
 	
-	private void sendPacket(final int nameId, final int point) {
+	private void sendPacket(String npcL10n, int points) {
 		instance.getPlayersInside().stream().filter(p -> p != null && p.isOnline()).forEach(p -> {
-			if (nameId != 0) {
-				PacketSendUtility.sendPacket(p, new SM_SYSTEM_MESSAGE(1400237, new DescriptionId(nameId * 2 + 1), point));
-			}
+			if (npcL10n != null)
+				PacketSendUtility.sendPacket(p, SM_SYSTEM_MESSAGE.STR_MSG_GET_SCORE(npcL10n, points));
 			PacketSendUtility.sendPacket(p, new SM_INSTANCE_SCORE(new TheShugoEmperorsVaultScoreInfo(instanceReward), instanceReward, getTime()));
 		});
 	}

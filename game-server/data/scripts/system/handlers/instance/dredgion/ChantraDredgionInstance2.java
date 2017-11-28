@@ -2,14 +2,12 @@ package instance.dredgion;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.instance.handlers.InstanceID;
-import com.aionemu.gameserver.model.DescriptionId;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.actions.NpcActions;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.instance.InstanceScoreType;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author xTz
@@ -53,10 +51,7 @@ public class ChantraDredgionInstance2 extends DredgionInstance2 {
 	private void onDieSurkan(Npc npc, Player mostPlayerDamage, int points) {
 		Race race = mostPlayerDamage.getRace();
 		captureRoom(race, npc.getNpcId() + 14 - 700851);
-		for (Player player : instance.getPlayersInside()) {
-			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1400199, new DescriptionId(race.equals(Race.ASMODIANS) ? 1800483 : 1800481),
-				new DescriptionId(npc.getObjectTemplate().getNameId() * 2 + 1)));
-		}
+		sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_INSTANCE_ROOM_DESTROYED(race.getL10n(), npc.getObjectTemplate().getL10n()));
 		getPlayerReward(mostPlayerDamage).captureZone();
 		if (++surkanKills == 5) {
 			spawn(216886, 485.33f, 832.26f, 416.64f, (byte) 55);

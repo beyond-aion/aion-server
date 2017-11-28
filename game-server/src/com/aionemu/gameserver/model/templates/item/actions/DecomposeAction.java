@@ -101,7 +101,7 @@ public class DecomposeAction extends AbstractItemAction {
 		if (itemsCollections == null || itemsCollections.isEmpty()) {
 			if (DataManager.DECOMPOSABLE_ITEMS_DATA.getSelectableItems(parentItem.getItemId()) != null) // selectable decomposable
 				return true;
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_DECOMPOSE_ITEM_IT_CAN_NOT_BE_DECOMPOSED(parentItem.getNameId()));
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_DECOMPOSE_ITEM_IT_CAN_NOT_BE_DECOMPOSED(parentItem.getL10n()));
 			return false;
 		}
 		if (player.getInventory().isFull() || player.getInventory().isFullSpecialCube() && containsSpecialCubeItems(itemsCollections, player)) {
@@ -130,7 +130,7 @@ public class DecomposeAction extends AbstractItemAction {
 		if (selectedCollection.getItems().stream().filter(i -> i.isObtainableFor(player)).count() == 0 && selectedCollection.getRandomItems().isEmpty()) {
 			log.warn(
 				"Empty decomposable " + parentItem.getItemId() + " for " + player + ", class: " + player.getPlayerClass() + ", level: " + player.getLevel());
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_DECOMPOSE_ITEM_FAILED(parentItem.getNameId()));
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_DECOMPOSE_ITEM_FAILED(parentItem.getL10n()));
 			return;
 		}
 
@@ -143,7 +143,7 @@ public class DecomposeAction extends AbstractItemAction {
 			public void abort() {
 				player.getController().cancelTask(TaskId.ITEM_USE);
 				player.removeItemCoolDown(parentItem.getItemTemplate().getUseLimits().getDelayId());
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_DECOMPOSE_ITEM_CANCELED(parentItem.getNameId()));
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_DECOMPOSE_ITEM_CANCELED(parentItem.getL10n()));
 				PacketSendUtility.broadcastPacket(player,
 					new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemTemplate().getTemplateId(), 0, 2, 0), true);
 				player.getObserveController().removeObserver(this);
@@ -159,7 +159,7 @@ public class DecomposeAction extends AbstractItemAction {
 				player.getObserveController().removeObserver(observer);
 				boolean validAction = postValidate(player, parentItem);
 				if (validAction) {
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_DECOMPOSE_ITEM_SUCCEED(parentItem.getNameId()));
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_DECOMPOSE_ITEM_SUCCEED(parentItem.getL10n()));
 					for (ResultedItem resultItem : selectedCollection.getItems()) {
 						if (resultItem.isObtainableFor(player)) {
 							ItemService.addItem(player, resultItem.getItemId(), resultItem.getResultCount(), true,

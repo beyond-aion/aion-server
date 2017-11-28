@@ -3,12 +3,14 @@ package com.aionemu.gameserver.model.templates.quest;
 import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlType;
 
+import com.aionemu.gameserver.model.templates.L10n;
+
 /**
  * @author vlog
  */
 @XmlType(name = "QuestRepeatCycle")
 @XmlEnum
-public enum QuestRepeatCycle {
+public enum QuestRepeatCycle implements L10n {
 	ALL(0, 0),
 	MON(1, 900331),
 	TUE(2, 900332),
@@ -30,7 +32,8 @@ public enum QuestRepeatCycle {
 		return weekDay;
 	}
 
-	public int getNameId() {
+	@Override
+	public int getL10nId() {
 		return nameId;
 	}
 }

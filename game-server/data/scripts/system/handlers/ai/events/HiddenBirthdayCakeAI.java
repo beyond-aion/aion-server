@@ -9,7 +9,6 @@ import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.model.DescriptionId;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -19,7 +18,6 @@ import com.aionemu.gameserver.services.item.ItemPacketService.ItemAddType;
 import com.aionemu.gameserver.services.item.ItemPacketService.ItemUpdateType;
 import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.services.item.ItemService.ItemUpdatePredicate;
-import com.aionemu.gameserver.utils.ChatUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
@@ -49,12 +47,12 @@ public class HiddenBirthdayCakeAI extends ActionItemNpcAI {
 		if (Rnd.chance() < JEST_SPAWN_CHANCE) {
 			VisibleObject s = spawn(Rnd.get(JEST_SPAWN_IDS), getOwner().getX(), getOwner().getY(), getOwner().getZ(), (byte) 0);
 			ThreadPoolManager.getInstance().schedule(() -> s.getController().delete(), 120000);
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_TOYPET_FEED_FOOD_NOT_LOVEFLAVOR(
-				ChatUtil.nameId(s.getObjectTemplate().getNameId() * 2 + 1), getObjectTemplate().getNameId() * 2 + 1));
+			PacketSendUtility.sendPacket(player,
+				SM_SYSTEM_MESSAGE.STR_MSG_TOYPET_FEED_FOOD_NOT_LOVEFLAVOR(s.getObjectTemplate().getL10n(), getObjectTemplate().getL10n()));
 		}
 		int itemCount = getItemCount(droppedItemId);
-		String item = itemCount + " " + ChatUtil.nameId(DataManager.ITEM_DATA.getItemTemplate(droppedItemId).getNameId());
-		PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1401263, new DescriptionId(getObjectTemplate().getNameId() * 2 + 1), item));
+		String item = itemCount + " " + DataManager.ITEM_DATA.getItemTemplate(droppedItemId).getL10n();
+		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_OBJECT_REWARD_ITEM(getObjectTemplate().getL10n(), item));
 		ItemService.addItem(player, droppedItemId, itemCount, true, new ItemUpdatePredicate(ItemAddType.SERVER_GENERATED, ItemUpdateType.STATS_CHANGE));
 		AIActions.die(this, player);
 		super.handleUseItemFinish(player);

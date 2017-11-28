@@ -7,7 +7,6 @@ import javax.xml.bind.annotation.XmlType;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.controllers.observer.ItemUseObserver;
-import com.aionemu.gameserver.model.DescriptionId;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.PersistentState;
@@ -48,18 +47,17 @@ public class TuningAction extends AbstractItemAction {
 
 	@Override
 	public void act(final Player player, final Item parentItem, final Item targetItem) {
-		final int parentItemId = parentItem.getItemId();
-		final int parntObjectId = parentItem.getObjectId();
-		final int parentNameId = parentItem.getNameId();
+		int parentItemId = parentItem.getItemId();
+		int parntObjectId = parentItem.getObjectId();
 		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItemId, 5000, 9, 0),
 			true);
-		final ItemUseObserver observer = new ItemUseObserver() {
+		ItemUseObserver observer = new ItemUseObserver() {
 
 			@Override
 			public void abort() {
 				player.getController().cancelTask(TaskId.ITEM_USE);
 				player.removeItemCoolDown(parentItem.getItemTemplate().getUseLimits().getDelayId());
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_CANCELED(new DescriptionId(parentNameId)));
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_CANCELED());
 				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parntObjectId, parentItemId, 0, 11, 0), true);
 				player.getObserveController().removeObserver(this);
 			}

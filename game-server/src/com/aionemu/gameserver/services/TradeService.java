@@ -236,7 +236,7 @@ public class TradeService {
 				sellReward = (long) (item.getItemTemplate().getPrice() * purchaseTemplate.getBuyPriceRate() / 100D);
 			} else {
 				if (!item.isSellable()) {
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_BUY_SELL_ITEM_CAN_NOT_BE_SELLED_TO_NPC(item.getNameId()));
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_BUY_SELL_ITEM_CAN_NOT_BE_SELLED_TO_NPC(item.getL10n()));
 					return false;
 				}
 				sellReward = PricesService.getSellReward(item.getItemTemplate().getPrice(), sellModifier);

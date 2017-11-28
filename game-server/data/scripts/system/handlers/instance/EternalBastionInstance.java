@@ -12,7 +12,6 @@ import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.ai.manager.WalkManager;
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
 import com.aionemu.gameserver.instance.handlers.InstanceID;
-import com.aionemu.gameserver.model.DescriptionId;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.Creature;
@@ -189,7 +188,7 @@ public class EternalBastionInstance extends GeneralInstanceHandler {
 	private void addPoints(Npc npc, int points) {
 		if (instanceReward.getInstanceScoreType().isStartProgress()) {
 			instanceReward.addPoints(points);
-			sendPacket(npc.getObjectTemplate().getNameId(), points);
+			sendPacket(npc.getObjectTemplate().getL10n(), points);
 		}
 	}
 
@@ -203,10 +202,10 @@ public class EternalBastionInstance extends GeneralInstanceHandler {
 		return 0;
 	}
 
-	protected void sendPacket(final int nameId, final int point) {
+	protected void sendPacket(String npcL10n, int points) {
 		instance.forEachPlayer((Player player) -> {
-			if (nameId != 0) {
-				PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1400237, new DescriptionId(nameId * 2 + 1), point));
+			if (points != 0) {
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_GET_SCORE(npcL10n, points));
 			}
 			PacketSendUtility.sendPacket(player, new SM_INSTANCE_SCORE(new NormalScoreInfo(instanceReward), instanceReward, getTime()));
 		});
@@ -290,7 +289,7 @@ public class EternalBastionInstance extends GeneralInstanceHandler {
 				ItemService.addItem(player, instanceReward.getRewardItem2(), instanceReward.getRewardItem2Count());
 				ItemService.addItem(player, instanceReward.getRewardItem3(), instanceReward.getRewardItem3Count());
 				ItemService.addItem(player, instanceReward.getRewardItem4(), instanceReward.getRewardItem4Count());
-				sendPacket(0, 0);
+				sendPacket(null, 0);
 			}
 		});
 	}
@@ -355,7 +354,7 @@ public class EternalBastionInstance extends GeneralInstanceHandler {
 	@Override
 	public void onEnterInstance(final Player player) {
 		if (!instanceReward.isRewarded()) {
-			sendPacket(0, 0);
+			sendPacket(null, 0);
 		}
 
 		if (!isSpawned) {
@@ -431,7 +430,7 @@ public class EternalBastionInstance extends GeneralInstanceHandler {
 					rndSpawn((Npc) spawn(231169, 581.7766f, 377.6639f, 225.5279f, (byte) 110), 233315, 2);
 					rndSpawn((Npc) spawn(231170, 800.51465f, 469.41602f, 228.58566f, (byte) 90), 233313, 2);
 					instanceReward.setInstanceScoreType(InstanceScoreType.START_PROGRESS);
-					sendPacket(0, 0);
+					sendPacket(null, 0);
 					openDoors();
 					startAssaultsPodsTask();
 					startAssaultsMobsTask();

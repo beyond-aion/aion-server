@@ -5,7 +5,6 @@ import com.aionemu.gameserver.controllers.observer.ActionObserver;
 import com.aionemu.gameserver.controllers.observer.ObserverType;
 import com.aionemu.gameserver.dao.ItemStoneListDAO;
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.model.DescriptionId;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.PersistentState;
@@ -89,7 +88,7 @@ public class IdianStone extends ItemStone {
 		if (polishCharge == 0) {
 			onUnEquip(player);
 			PacketSendUtility.sendPacket(player, new SM_INVENTORY_UPDATE_ITEM(player, item));
-			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1401652, new DescriptionId(item.getNameId())));
+			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1401652, item.getL10n()));
 			item.setIdianStone(null);
 			setPersistentState(PersistentState.DELETED);
 			DAOManager.getDAO(ItemStoneListDAO.class).storeIdianStones(this);

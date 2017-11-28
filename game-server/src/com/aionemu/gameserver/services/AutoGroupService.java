@@ -441,7 +441,7 @@ public class AutoGroupService {
 				}
 				if (agt.isHarmonyArena() || agt.isTrainigHarmonyArena()) {
 					if (group.getOnlineMembers().size() > 3) {
-						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANT_INSTANCE_TOO_MANY_MEMBERS(3, Integer.toString(mapId)));
+						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANT_INSTANCE_TOO_MANY_MEMBERS(3, mapId));
 						return false;
 					}
 				}

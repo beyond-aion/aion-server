@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <npc_factions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="npc_factions.xsd">
-	<npc_faction id="1" name="The Jeridises" name_id="1300527" category="MENTOR" min_level="5" race="ELYOS"/>
-	<npc_faction id="2" name="Alabaster Order" npc_ids="799803 805145" name_id="2258001" category="DAILY" min_level="30" race="ELYOS"/>
-	<npc_faction id="3" name="Radiant Ops" npc_ids="799828 805146" name_id="2258003" category="DAILY" min_level="40" race="ELYOS"/>
-	<npc_faction id="4" name="Fortuneers" npc_ids="799840 805147" name_id="2258005" category="DAILY" min_level="50" race="ELYOS"/>
-	<npc_faction id="5" name="Field Wardens" npc_ids="799845 805157" name_id="2258007" category="DAILY" min_level="30" race="ASMODIANS"/>
-	<npc_faction id="6" name="Blood Crusade" npc_ids="799868 805158" name_id="2258009" category="DAILY" min_level="40" race="ASMODIANS"/>
-	<npc_faction id="7" name="Charlirunerk's Daemons" npc_ids="799886 805159" name_id="2258011" category="DAILY" min_level="50" race="ASMODIANS"/>
-	<npc_faction id="8" name="Kaisinel Academy" npc_ids="799813" name_id="2258013" category="MENTOR" min_level="10" max_level="39" race="ELYOS"/>
-	<npc_faction id="9" name="Orichalcum Key" npc_ids="799895" name_id="2258015" category="MENTOR" min_level="40" race="ELYOS"/>
-	<npc_faction id="10" name="Marchutan Priory" npc_ids="799847" name_id="2258017" category="MENTOR" min_level="10" max_level="39" race="ASMODIANS"/>
-	<npc_faction id="11" name="The Circle" npc_ids="799874" name_id="2258019" category="MENTOR" min_level="40" race="ASMODIANS"/>
-	<npc_faction id="12" name="Elyos Divine Item Cooperation" npc_ids="205552" name_id="2258021" category="COMBINESKILL" min_level="29" skill_points="400" race="ELYOS"/>
-	<npc_faction id="13" name="Asmodian Divine Item Cooperation" npc_ids="205652" name_id="2258023" category="COMBINESKILL" min_level="29" skill_points="400" race="ASMODIANS"/>
-	<npc_faction id="14" name="Black Cloud Traders" npc_ids="205631" name_id="2258025" category="SHUGO" min_level="55" race="NPC"/>
-	<npc_faction id="15" name="Silverine Ltd." npc_ids="800939" name_id="2258027" category="DAILY" min_level="60" race="ELYOS"/>
-	<npc_faction id="16" name="Silverine Ltd." npc_ids="800942" name_id="2258029" category="DAILY" min_level="60" race="ASMODIANS"/>
-	<npc_faction id="17" name="The Merry and Green" npc_ids="800945" name_id="2258031" category="DAILY" min_level="60" race="ELYOS"/>
-	<npc_faction id="18" name="The Merry and Green" npc_ids="800948" name_id="2258033" category="DAILY" min_level="60" race="ASMODIANS"/>
+	<npc_faction id="1" name="The Jeridises" name_id="650263" category="MENTOR" min_level="5" race="ELYOS"/>
+	<npc_faction id="2" name="Alabaster Order" npc_ids="799803 805145" name_id="1129000" category="DAILY" min_level="30" race="ELYOS"/>
+	<npc_faction id="3" name="Radiant Ops" npc_ids="799828 805146" name_id="1129001" category="DAILY" min_level="40" race="ELYOS"/>
+	<npc_faction id="4" name="Fortuneers" npc_ids="799840 805147" name_id="1129002" category="DAILY" min_level="50" race="ELYOS"/>
+	<npc_faction id="5" name="Field Wardens" npc_ids="799845 805157" name_id="1129003" category="DAILY" min_level="30" race="ASMODIANS"/>
+	<npc_faction id="6" name="Blood Crusade" npc_ids="799868 805158" name_id="1129004" category="DAILY" min_level="40" race="ASMODIANS"/>
+	<npc_faction id="7" name="Charlirunerk's Daemons" npc_ids="799886 805159" name_id="1129005" category="DAILY" min_level="50" race="ASMODIANS"/>
+	<npc_faction id="8" name="Kaisinel Academy" npc_ids="799813" name_id="1129006" category="MENTOR" min_level="10" max_level="39" race="ELYOS"/>
+	<npc_faction id="9" name="Orichalcum Key" npc_ids="799895" name_id="1129007" category="MENTOR" min_level="40" race="ELYOS"/>
+	<npc_faction id="10" name="Marchutan Priory" npc_ids="799847" name_id="1129008" category="MENTOR" min_level="10" max_level="39" race="ASMODIANS"/>
+	<npc_faction id="11" name="The Circle" npc_ids="799874" name_id="1129009" category="MENTOR" min_level="40" race="ASMODIANS"/>
+	<npc_faction id="12" name="Elyos Divine Item Cooperation" npc_ids="205552" name_id="1129010" category="COMBINESKILL" min_level="29" skill_points="400" race="ELYOS"/>
+	<npc_faction id="13" name="Asmodian Divine Item Cooperation" npc_ids="205652" name_id="1129011" category="COMBINESKILL" min_level="29" skill_points="400" race="ASMODIANS"/>
+	<npc_faction id="14" name="Black Cloud Traders" npc_ids="205631" name_id="1129012" category="SHUGO" min_level="55" race="NPC"/>
+	<npc_faction id="15" name="Silverine Ltd." npc_ids="800939" name_id="1129013" category="DAILY" min_level="60" race="ELYOS"/>
+	<npc_faction id="16" name="Silverine Ltd." npc_ids="800942" name_id="1129014" category="DAILY" min_level="60" race="ASMODIANS"/>
+	<npc_faction id="17" name="The Merry and Green" npc_ids="800945" name_id="1129015" category="DAILY" min_level="60" race="ELYOS"/>
+	<npc_faction id="18" name="The Merry and Green" npc_ids="800948" name_id="1129016" category="DAILY" min_level="60" race="ASMODIANS"/>
 </npc_factions>

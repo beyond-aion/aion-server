@@ -34,13 +34,8 @@ import com.aionemu.gameserver.model.templates.quest.XMLStartCondition;
  * @modified vlog, Neon
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "Quest"/*
-												 * , propOrder = { "collectItems", "rewards", "questDrop", "startConds", "classPermitted", "genderPermitted",
-												 * "questWorkItems", "fighterSelectableReward", "knightSelectableReward", "rangerSelectableReward",
-												 * "assassinSelectableReward", "wizardSelectableReward", "elementalistSelectableReward", "priestSelectableReward",
-												 * "chanterSelectableReward" }
-												 */)
-public class QuestTemplate {
+@XmlType(name = "Quest")
+public class QuestTemplate implements L10n {
 
 	@XmlElement(name = "collect_items")
 	private CollectItems collectItems;
@@ -313,7 +308,8 @@ public class QuestTemplate {
 		return name;
 	}
 
-	public int getNameId() {
+	@Override
+	public int getL10nId() {
 		return nameId;
 	}
 

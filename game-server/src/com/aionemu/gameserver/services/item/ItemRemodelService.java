@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.services.item;
 
-import com.aionemu.gameserver.model.DescriptionId;
 import com.aionemu.gameserver.model.Gender;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -44,8 +43,8 @@ public class ItemRemodelService {
 			Gender extractItemGender = extractItem.getItemTemplate().getUseLimits().getGenderPermitted();
 			if (keepItemGender != null && extractItemGender != null) {
 				if (keepItemGender != extractItemGender) {
-					DescriptionId item1 = new DescriptionId(keepItem.getItemTemplate().getNameId());
-					DescriptionId item2 = new DescriptionId(extractItem.getItemTemplate().getNameId());
+					String item1 = keepItem.getItemTemplate().getL10n();
+					String item2 = extractItem.getItemTemplate().getL10n();
 					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANT_CHANGE_SKIN_OPPOSITE_REQUIREMENT(item1, item2));
 					return;
 				}
@@ -55,7 +54,7 @@ public class ItemRemodelService {
 		// Check Kinah
 		if (player.getInventory().getKinah() < remodelCost) {
 			PacketSendUtility.sendPacket(player,
-				SM_SYSTEM_MESSAGE.STR_CHANGE_ITEM_SKIN_NOT_ENOUGH_GOLD(new DescriptionId(keepItem.getItemTemplate().getNameId())));
+				SM_SYSTEM_MESSAGE.STR_CHANGE_ITEM_SKIN_NOT_ENOUGH_GOLD(keepItem.getItemTemplate().getL10n()));
 			return;
 		}
 
@@ -80,7 +79,7 @@ public class ItemRemodelService {
 
 			// Notify Player
 			ItemPacketService.updateItemAfterInfoChange(player, keepItem);
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CHANGE_ITEM_SKIN_SUCCEED(new DescriptionId(keepItem.getItemTemplate().getNameId())));
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CHANGE_ITEM_SKIN_SUCCEED(keepItem.getItemTemplate().getL10n()));
 			return;
 		}
 		// Check that types match.
@@ -89,25 +88,25 @@ public class ItemRemodelService {
 		if ((keep != extract && !(extract.getItemSubType().equals(ItemSubType.CLOTHES) || extract.getItemSubType() == ItemSubType.ALL_ARMOR
 			&& keep.getValidEquipmentSlots() == extract.getValidEquipmentSlots()))
 			|| keep.getItemSubType().equals(ItemSubType.CLOTHES)) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CHANGE_ITEM_SKIN_NOT_COMPATIBLE(new DescriptionId(keepItem.getItemTemplate()
-				.getNameId()), new DescriptionId(extractItem.getItemSkinTemplate().getNameId())));
+			PacketSendUtility.sendPacket(player,
+				SM_SYSTEM_MESSAGE.STR_CHANGE_ITEM_SKIN_NOT_COMPATIBLE(keepItem.getItemTemplate().getL10n(), extractItem.getItemSkinTemplate().getL10n()));
 			return;
 		}
 
 		if (!keepItem.isRemodelable(player)) {
-			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1300478, new DescriptionId(keepItem.getItemTemplate().getNameId())));
+			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1300478, keepItem.getItemTemplate().getL10n()));
 			return;
 		}
 
 		if (!extractItem.isRemodelable(player)) {
-			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1300482, new DescriptionId(extractItem.getItemTemplate().getNameId())));
+			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1300482, extractItem.getItemTemplate().getL10n()));
 			return;
 		}
 
 		ItemTemplate skin = extractItem.getItemSkinTemplate();
 		ItemActions actions = skin.getActions();
 		if (extractItem.isSkinnedItem() && actions != null && actions.getRemodelAction() != null && actions.getRemodelAction().getExtractType() == 2) {
-			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1300482, new DescriptionId(extractItem.getItemTemplate().getNameId())));
+			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1300482, extractItem.getItemTemplate().getL10n()));
 			return;
 		}
 		// -- SUCCESS --
@@ -126,6 +125,6 @@ public class ItemRemodelService {
 
 		// Notify Player
 		ItemPacketService.updateItemAfterInfoChange(player, keepItem);
-		PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1300483, new DescriptionId(keepItem.getItemTemplate().getNameId())));
+		PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1300483, keepItem.getItemTemplate().getL10n()));
 	}
 }

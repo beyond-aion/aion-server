@@ -11,7 +11,6 @@ import java.util.function.Consumer;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
 import com.aionemu.gameserver.instance.handlers.InstanceID;
-import com.aionemu.gameserver.model.DescriptionId;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -299,13 +298,12 @@ public class KamarBattlefieldInstance extends GeneralInstanceHandler {
 		}
 	}
 
-	public void updatePoints(int points, Race race, boolean check, int nameId, Player player) {
+	public void updatePoints(int points, Race race, boolean check, String npcL10n, Player player) {
 		if (check && !kamarReward.isStartProgress()) {
 			return;
 		}
-		if (nameId != 0) {
-			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1400237, new DescriptionId(nameId * 2 + 1), points));
-		}
+		if (npcL10n != null)
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_GET_SCORE(npcL10n, points));
 		kamarReward.addPointsByRace(race, points);
 		sendPacket(new SM_INSTANCE_SCORE(new KamarBattlefieldScoreInfo(kamarReward, 10, race.equals(Race.ELYOS) ? 0 : 1), kamarReward, getTime()));
 		int diff = Math.abs(kamarReward.getAsmodiansPoint().intValue() - kamarReward.getElyosPoints().intValue());
@@ -360,7 +358,7 @@ public class KamarBattlefieldInstance extends GeneralInstanceHandler {
 				break;
 		}
 		if (points > 0) {
-			updatePoints(points, player.getRace(), true, npc.getObjectTemplate().getNameId(), player);
+			updatePoints(points, player.getRace(), true, npc.getObjectTemplate().getL10n(), player);
 		}
 	}
 
@@ -389,7 +387,7 @@ public class KamarBattlefieldInstance extends GeneralInstanceHandler {
 			case 730878:
 			case 730879:
 			case 730880:
-				updatePoints(200, player.getRace(), false, npc.getObjectTemplate().getNameId(), player);
+				updatePoints(200, player.getRace(), false, npc.getObjectTemplate().getL10n(), player);
 				if (player.getRace().equals(Race.ELYOS)) {
 					spawn(701900, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading());
 				} else {
@@ -399,7 +397,7 @@ public class KamarBattlefieldInstance extends GeneralInstanceHandler {
 				break;
 		}
 		if (points > 0) {
-			updatePoints(points, player.getRace(), true, npc.getObjectTemplate().getNameId(), player);
+			updatePoints(points, player.getRace(), true, npc.getObjectTemplate().getL10n(), player);
 			npc.getController().delete();
 		}
 	}
@@ -461,14 +459,14 @@ public class KamarBattlefieldInstance extends GeneralInstanceHandler {
 		PacketSendUtility.sendPacket(player, new SM_DIE(player.canUseRebirthRevive(), false, 0, 8));
 		if (lastAttacker instanceof Player) {
 			if (lastAttacker.getRace() != player.getRace()) {
-				updatePoints(150, lastAttacker.getRace(), true, 0, (Player) lastAttacker);
+				updatePoints(150, lastAttacker.getRace(), true, null, (Player) lastAttacker);
 				PacketSendUtility.sendPacket((Player) lastAttacker, new SM_SYSTEM_MESSAGE(1400277, 150));
 				kamarReward.getKillsByRace(lastAttacker.getRace()).increment();
 				sendPacket(new SM_INSTANCE_SCORE(new KamarBattlefieldScoreInfo(kamarReward, 10, lastAttacker.getRace().equals(Race.ELYOS) ? 0 : 1),
 					kamarReward, getTime()));
 			}
 		}
-		updatePoints(-100, player.getRace(), true, 0, player);
+		updatePoints(-100, player.getRace(), true, null, player);
 		return true;
 	}
 

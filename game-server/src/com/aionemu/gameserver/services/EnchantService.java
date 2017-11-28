@@ -9,7 +9,6 @@ import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.configs.administration.AdminConfig;
 import com.aionemu.gameserver.configs.main.RatesConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.model.DescriptionId;
 import com.aionemu.gameserver.model.enchants.EnchantEffect;
 import com.aionemu.gameserver.model.enchants.EnchantStat;
 import com.aionemu.gameserver.model.enchants.EnchantmentStone;
@@ -255,8 +254,8 @@ public class EnchantService {
 				}
 			}
 			// targetItem.setPackCount(targetItem.getPackCount() + 1);
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_EXCEED_SKILL_ENCHANT(new DescriptionId(targetItem.getNameId()), enchantLevel,
-				new DescriptionId(DataManager.SKILL_DATA.getSkillTemplate(buffId).getNameId())));
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_EXCEED_SKILL_ENCHANT(targetItem.getL10n(), enchantLevel,
+				DataManager.SKILL_DATA.getSkillTemplate(buffId).getL10n()));
 		}
 
 		if (targetItem.isEquipped()) {
@@ -268,16 +267,15 @@ public class EnchantService {
 		ItemPacketService.updateItemAfterInfoChange(player, targetItem, ItemUpdateType.STATS_CHANGE);
 
 		if (result)
-			PacketSendUtility.sendPacket(player,
-				SM_SYSTEM_MESSAGE.STR_MSG_ENCHANT_ITEM_SUCCEED_NEW(new DescriptionId(targetItem.getNameId()), enchantLevel));
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_ENCHANT_ITEM_SUCCEED_NEW(targetItem.getL10n(), enchantLevel));
 		else {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ENCHANT_ITEM_FAILED(new DescriptionId(targetItem.getNameId())));
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ENCHANT_ITEM_FAILED(targetItem.getL10n()));
 			if (targetItem.getItemTemplate().getEnchantType() > 0) {
 				if (targetItem.isEquipped())
 					player.getEquipment().decreaseEquippedItemCount(targetItem.getObjectId(), 1);
 				else
 					player.getInventory().decreaseByObjectId(targetItem.getObjectId(), 1);
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_ENCHANT_TYPE1_ENCHANT_FAIL(new DescriptionId(targetItem.getNameId())));
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_ENCHANT_TYPE1_ENCHANT_FAIL(targetItem.getL10n()));
 			}
 		}
 		if (targetItem.getPersistentState() != PersistentState.DELETED) {
@@ -433,7 +431,7 @@ public class EnchantService {
 		if (!player.getInventory().decreaseByObjectId(parentItem.getObjectId(), 1))
 			return false;
 		if (result) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GIVE_ITEM_OPTION_SUCCEED(new DescriptionId(targetItem.getNameId())));
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GIVE_ITEM_OPTION_SUCCEED(targetItem.getL10n()));
 			if (targetWeapon == 1) {
 				ManaStone manaStone = ItemSocketService.addManaStone(targetItem, parentItem.getItemTemplate().getTemplateId());
 				if (targetItem.isEquipped()) {
@@ -448,7 +446,7 @@ public class EnchantService {
 				}
 			}
 		} else {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GIVE_ITEM_OPTION_FAILED(new DescriptionId(targetItem.getNameId())));
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GIVE_ITEM_OPTION_FAILED(targetItem.getL10n()));
 		}
 
 		ItemPacketService.updateItemAfterInfoChange(player, targetItem, ItemUpdateType.STATS_CHANGE);
@@ -830,7 +828,7 @@ public class EnchantService {
 			return;
 		}
 		if (!targetItem.getItemTemplate().canExceedEnchant()) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_EXCEED_CANNOT_01(new DescriptionId(targetItem.getNameId())));
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_EXCEED_CANNOT_01(targetItem.getL10n()));
 			return;
 		}
 		if (targetItem.getEnchantLevel() < targetItem.getMaxEnchantLevel()) {
@@ -843,7 +841,7 @@ public class EnchantService {
 		}
 		if (player.getInventory().decreaseByObjectId(material.getObjectId(), 1) && player.getInventory().decreaseByObjectId(tool.getObjectId(), 1)) {
 			targetItem.setAmplified(true);
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_EXCEED_SUCCEED(new DescriptionId(targetItem.getNameId())));
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_EXCEED_SUCCEED(targetItem.getL10n()));
 			ItemPacketService.updateItemAfterInfoChange(player, targetItem);
 
 			if (targetItem.isEquipped())
