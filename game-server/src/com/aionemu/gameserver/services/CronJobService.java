@@ -17,12 +17,9 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 public class CronJobService {
 
 	private static final CronJobService INSTANCE = new CronJobService();
-	private Npc asmodianUndergroundEntrance;
-	private Npc elyosUndergroundEntrance;
-	private Npc moltenus;
 
 	private CronJobService() {
-		scheduleMoltenus();
+		scheduleMoltenusSpawn();
 		scheduleAhserionsFlight();
 		scheduleIdianDepthPortalSpawns();
 		scheduleLegionDominionCalculation();
@@ -32,17 +29,18 @@ public class CronJobService {
 		return INSTANCE;
 	}
 
-	private void scheduleMoltenus() {
+	private void scheduleMoltenusSpawn() {
 		CronService.getInstance().schedule(new Runnable() {
+
+			private Npc moltenus;
 
 			@Override
 			public void run() {
 				if (moltenus != null && moltenus.isSpawned())
 					return;
 
-				int randomPos = Rnd.get(1, 3);
 				SpawnTemplate template;
-				switch (randomPos) {
+				switch (Rnd.get(1, 3)) {
 					case 1:
 						template = SpawnEngine.newSingleTimeSpawn(400010000, 251045, 2464.9199f, 1689f, 2882.221f, (byte) 0);
 						break;
@@ -55,14 +53,10 @@ public class CronJobService {
 				}
 				moltenus = (Npc) SpawnEngine.spawnObject(template, 1);
 				// Despawn task
-				ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-					@Override
-					public void run() {
-						if (moltenus != null && !moltenus.isDead()) {
-							moltenus.getController().delete();
-							moltenus = null;
-						}
+				ThreadPoolManager.getInstance().schedule(() -> {
+					if (moltenus != null && !moltenus.isDead()) {
+						moltenus.getController().delete();
+						moltenus = null;
 					}
 				}, 3600 * 1000);
 			}
@@ -74,15 +68,20 @@ public class CronJobService {
 	}
 
 	private void scheduleIdianDepthPortalSpawns() {
-		ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
-			if (asmodianUndergroundEntrance != null) {
-				asmodianUndergroundEntrance.getController().delete();
-				asmodianUndergroundEntrance = null;
-			} else if (elyosUndergroundEntrance != null) {
-				elyosUndergroundEntrance.getController().delete();
-				elyosUndergroundEntrance = null;
-			}
+		new IdianDepthPortalSpawner().run(); // not a cronjob anymore, but let's keep it here
+	}
 
+	private void scheduleLegionDominionCalculation() {
+		CronService.getInstance().schedule(() -> LegionDominionService.getInstance().startWeeklyCalculation(), "0 0 9 ? * WED *");
+	}
+
+	private static class IdianDepthPortalSpawner implements Runnable {
+
+		private Npc asmodianUndergroundEntrance;
+		private Npc elyosUndergroundEntrance;
+
+		@Override
+		public void run() {
 			SpawnTemplate elyosSpawn;
 			switch (Rnd.get(1, 4)) {
 				case 1: // Levinshor
@@ -113,12 +112,13 @@ public class CronJobService {
 					asmodianSpawn = SpawnEngine.newSingleTimeSpawn(220080000, 731632, 233.39f, 1137.03f, 225.875f, (byte) 105);
 					break;
 			}
+			if (asmodianUndergroundEntrance != null)
+				asmodianUndergroundEntrance.getController().delete();
+			if (elyosUndergroundEntrance != null)
+				elyosUndergroundEntrance.getController().delete();
 			elyosUndergroundEntrance = (Npc) SpawnEngine.spawnObject(elyosSpawn, 1);
 			asmodianUndergroundEntrance = (Npc) SpawnEngine.spawnObject(asmodianSpawn, 1);
-		}, 100000, Rnd.get(3600, 18000) * 1000);
-	}
-
-	private void scheduleLegionDominionCalculation() {
-		CronService.getInstance().schedule(() -> LegionDominionService.getInstance().startWeeklyCalculation(), "0 0 9 ? * WED *");
+			ThreadPoolManager.getInstance().schedule(this, Rnd.get(3600, 18000) * 1000);
+		}
 	}
 }
