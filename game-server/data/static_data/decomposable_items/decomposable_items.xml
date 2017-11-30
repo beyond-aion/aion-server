@@ -30722,47 +30722,21 @@
 		</items>
 	</decomposable>
 	<decomposable item_id="188053645" /><!-- Shugo's Special Reward Chest -->
-	<decomposable item_id="188053646"><!-- Nether Dragon King's Sealed Box -->
+	<decomposable item_id="188053646" selectable="true"><!-- Nether Dragon King's Sealed Box -->
 		<items>
 			<item id="101901153" /><!-- Nether Dragon King's Aethercannon -->
-		</items>
-		<items>
 			<item id="101701388" /><!-- Nether Dragon King's Bow -->
-		</items>
-		<items>
 			<item id="102101088" /><!-- Nether Dragon King's Cipher-Blade -->
-		</items>
-		<items>
 			<item id="100201531" /><!-- Nether Dragon King's Dagger -->
-		</items>
-		<items>
 			<item id="100901397" /><!-- Nether Dragon King's Greatsword -->
-		</items>
-		<items>
 			<item id="102001271" /><!-- Nether Dragon King's Harp -->
-		</items>
-		<items>
 			<item id="100101356" /><!-- Nether Dragon King's Mace -->
-		</items>
-		<items>
 			<item id="100501333" /><!-- Nether Dragon King's Orb -->
-		</items>
-		<items>
 			<item id="101801244" /><!-- Nether Dragon King's Pistol -->
-		</items>
-		<items>
 			<item id="101301288" /><!-- Nether Dragon King's Polearm -->
-		</items>
-		<items>
 			<item id="115001797" /><!-- Nether Dragon King's Shield -->
-		</items>
-		<items>
 			<item id="100601452" /><!-- Nether Dragon King's Spellbook -->
-		</items>
-		<items>
 			<item id="101501378" /><!-- Nether Dragon King's Staff -->
-		</items>
-		<items>
 			<item id="100001762" /><!-- Nether Dragon King's Sword -->
 		</items>
 	</decomposable>
