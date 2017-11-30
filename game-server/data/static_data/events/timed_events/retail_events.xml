@@ -1229,7 +1229,7 @@
 			</spawn_map>
 		</spawns>
 	</event>
-	<event name="Celebrate Solorius" start="2016-12-01T00:00:00" end="2017-01-01T00:00:00" theme="christmas">
+	<event name="Celebrate Solorius" start="2017-12-01T00:00:00" end="2017-12-31T23:59:59" theme="christmas">
 		<event_drops>
 			<gd_rule rule_name="Celebrate Solorius Event Drop" base_chance="100" no_reduction="true">
 				<gd_npcs>
