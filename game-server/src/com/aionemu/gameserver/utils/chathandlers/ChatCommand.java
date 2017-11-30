@@ -187,13 +187,13 @@ public abstract class ChatCommand {
 	 * @param message
 	 */
 	private static void sendMessagePackets(Player player, String message) {
-		String[] lines = message.split("\n", -1);
-		if (lines.length <= SM_MESSAGE.MESSAGE_LINE_LIMIT) {
+		if (message.length() <= SM_MESSAGE.MESSAGE_SIZE_LIMIT) {
 			PacketSendUtility.sendMessage(player, message);
 		} else {
+			String[] lines = message.split("\n", -1);
 			StringBuilder sb = new StringBuilder(lines[0]);
 			for (int i = 1; i < lines.length; i++) {
-				if (i % SM_MESSAGE.MESSAGE_LINE_LIMIT == 0) {
+				if (sb.length() + lines[i].length() > SM_MESSAGE.MESSAGE_SIZE_LIMIT) {
 					PacketSendUtility.sendMessage(player, sb.toString());
 					sb.setLength(0);
 				} else {

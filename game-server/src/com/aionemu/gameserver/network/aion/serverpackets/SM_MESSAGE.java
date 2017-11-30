@@ -27,15 +27,11 @@ public class SM_MESSAGE extends AionServerPacket {
 	 * The client can't handle more than 4000 chars in one packet.<br>
 	 * 4001+ disables all further client chat processing, ~4500 triggers send log error.
 	 */
-	public static final short MESSAGE_SIZE_LIMIT = 4000;
-
+	public static final int MESSAGE_SIZE_HARDCAP = 4000;
 	/**
-	 * Maximum valid message line count for a single chat message packet.<br>
-	 * The client does not always correctly display more than this number of lines.<br>
-	 * Actual line limit depends on the message size, not sure how they exactly correlate. Usually a shorter overall message results in more allowed
-	 * lines.
+	 * Maximum number of characters the client will display from a single chat message packet. Tested with a 4.8 client.
 	 */
-	public static final short MESSAGE_LINE_LIMIT = 15;
+	public static final int MESSAGE_SIZE_LIMIT = 1022;
 
 	/**
 	 * ID of the object that is saying something or <tt>null</tt>.
@@ -117,13 +113,10 @@ public class SM_MESSAGE extends AionServerPacket {
 	}
 
 	private SM_MESSAGE(Creature sender, int senderObjectId, String senderName, String message, ChatType chatType) {
-		int lines = message.split("\n", -1).length;
-		if (lines > MESSAGE_LINE_LIMIT) {
-			log.warn("Exceeded maximum line number for packet SM_MESSAGE.\nLines: " + lines + "\nMessage: " + message);
-		}
 		if (message.length() > MESSAGE_SIZE_LIMIT) {
 			log.warn("Exceeded maximum string size for packet SM_MESSAGE.\nSize: " + message.length() + "\nMessage: " + message);
-			message = message.substring(0, MESSAGE_SIZE_LIMIT); // shorten message to avoid send log error
+			if (message.length() > MESSAGE_SIZE_HARDCAP)
+				message = message.substring(0, MESSAGE_SIZE_HARDCAP); // shorten message to avoid send log error
 		}
 		if (sender != null) {
 			if (sender instanceof Player && !chatType.isSysMsg() && !CustomConfig.SPEAKING_BETWEEN_FACTIONS && !((Player) sender).isStaff()) {
