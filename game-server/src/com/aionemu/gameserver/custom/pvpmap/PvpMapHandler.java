@@ -76,8 +76,6 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 	private List<Future<?>> tasks = new ArrayList<>();
 	private Future<?> supplyTask, despawnTask;
 	private boolean randomBossAlive = false;
-	private final int randomBossNpcIds[] = { 231196, 233740, 235759, 235765, 235763, 235767, 235771, 235619, 235620, 235621, 855822, 855843, 230857,
-		230858, 277224, 855776, 219934, 219933, 235975, 855263, 231304 };
 
 	public PvpMapHandler() {
 		super();
@@ -174,7 +172,7 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 			int bonus = World.getInstance().getAllPlayers().size() * 2;
 			bonus = bonus > 30 ? 30 : bonus;
 			if (Rnd.get(1, 100) <= (CustomConfig.PVP_MAP_RANDOM_BOSS_BASE_RATE + bonus)) {
-				int npcId = randomBossNpcIds[Rnd.get(0, randomBossNpcIds.length - 1)];
+				int npcId = PvpMapService.getInstance().getRandomBossId();
 				NpcTemplate template = DataManager.NPC_DATA.getNpcTemplate(npcId);
 				SpawnTemplate spawn = SpawnEngine.newSingleTimeSpawn(mapId, npcId, 744.337f, 292.986f, 233.697f, (byte) 43);
 				final Npc npc = new Npc(IDFactory.getInstance().nextId(), new NpcController(), spawn, template);

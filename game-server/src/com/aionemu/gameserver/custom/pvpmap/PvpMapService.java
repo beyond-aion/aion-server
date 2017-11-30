@@ -1,12 +1,16 @@
 package com.aionemu.gameserver.custom.pvpmap;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.model.ChatType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_MESSAGE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -20,6 +24,8 @@ public class PvpMapService {
 	private static final Logger log = LoggerFactory.getLogger(PvpMapService.class);
 	private AtomicBoolean isActive = new AtomicBoolean(true);
 	private PvpMapHandler handler = null;
+	private final List<Integer> randomBossNpcIds = Arrays.asList(231196, 233740, 235759, 235765, 235763, 235767, 235771, 235619, 235620, 235621, 855822,
+		855843, 230857, 230858, 277224, 855776, 219933, 219934, 235975, 855263, 231304);
 
 	public static PvpMapService getInstance() {
 		return instance;
@@ -33,6 +39,14 @@ public class PvpMapService {
 		if (isActive.get() && player.getLevel() >= 60 && isRandomBossAlive()) {
 			PacketSendUtility.sendPacket(player, new SM_MESSAGE(0, null, "[PvP-Map] A powerful monster appeared.", ChatType.BRIGHT_YELLOW_CENTER));
 		}
+	}
+
+	public boolean isRandomBoss(Npc npc) {
+		return randomBossNpcIds.contains(npc.getNpcId());
+	}
+
+	public int getRandomBossId() {
+		return Rnd.get(randomBossNpcIds);
 	}
 
 	private boolean isRandomBossAlive() {
