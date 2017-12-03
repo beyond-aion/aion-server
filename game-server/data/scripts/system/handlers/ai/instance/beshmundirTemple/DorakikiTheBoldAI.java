@@ -1,6 +1,7 @@
 package ai.instance.beshmundirTemple;
 
 import com.aionemu.gameserver.ai.AIName;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 
 import ai.AggressiveNpcAI;
 
@@ -9,6 +10,10 @@ import ai.AggressiveNpcAI;
  */
 @AIName("dorakiki_the_bold")
 public class DorakikiTheBoldAI extends AggressiveNpcAI {
+
+	public DorakikiTheBoldAI(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	protected void handleAttackComplete() {

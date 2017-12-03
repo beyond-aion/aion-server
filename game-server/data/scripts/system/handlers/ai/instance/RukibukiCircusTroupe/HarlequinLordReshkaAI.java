@@ -4,6 +4,7 @@ import java.util.concurrent.Future;
 
 import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
@@ -17,6 +18,10 @@ public class HarlequinLordReshkaAI extends AggressiveNpcAI {
 
 	private Future<?> openBoxesTask;
 	private Future<?> spawnBoxesTask;
+
+	public HarlequinLordReshkaAI(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	protected void handleSpawned() {

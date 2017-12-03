@@ -3,6 +3,7 @@ package ai.worlds;
 import static com.aionemu.gameserver.model.DialogAction.*;
 
 import com.aionemu.gameserver.ai.AIName;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.questEngine.QuestEngine;
@@ -17,6 +18,10 @@ import ai.GeneralNpcAI;
  */
 @AIName("world_blesser")
 public class WorldBlesserAI extends GeneralNpcAI {
+
+	public WorldBlesserAI(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	protected void handleDialogStart(Player player) {

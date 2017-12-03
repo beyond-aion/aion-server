@@ -26,6 +26,10 @@ public class IDF5_U3_VortexAI extends NoActionAI {
 	private final List<Future<?>> tasks = new ArrayList<>();
 	private final List<Integer> npcIds = new ArrayList<>();
 
+	public IDF5_U3_VortexAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	protected void handleSpawned() {
 		super.handleSpawned();

@@ -6,6 +6,7 @@ import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.manager.WalkManager;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
@@ -22,6 +23,10 @@ public class AshunatalShadowslipAI extends AggressiveNpcAI {
 
 	private AtomicBoolean isHome = new AtomicBoolean(true);
 	private boolean canThink = true;
+
+	public AshunatalShadowslipAI(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	public boolean canThink() {

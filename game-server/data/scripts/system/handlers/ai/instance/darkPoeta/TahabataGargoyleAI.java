@@ -1,6 +1,7 @@
 package ai.instance.darkPoeta;
 
 import com.aionemu.gameserver.ai.AIName;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 
 import ai.AggressiveNpcAI;
@@ -10,6 +11,10 @@ import ai.AggressiveNpcAI;
  */
 @AIName("tahabata_gargoyle")
 public class TahabataGargoyleAI extends AggressiveNpcAI {
+
+	public TahabataGargoyleAI(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	public void onEndUseSkill(SkillTemplate skillTemplate) {

@@ -80,19 +80,25 @@ public class SpawnEngine {
 	 * @return
 	 */
 	public static SpawnTemplate newSingleTimeSpawn(int worldId, int npcId, float x, float y, float z, byte heading) {
-		return newSpawn(worldId, npcId, x, y, z, heading, 0, 0);
+		return newSpawn(worldId, npcId, x, y, z, heading, 0, 0, null);
 	}
 
 	public static SpawnTemplate newSingleTimeSpawn(int worldId, int npcId, float x, float y, float z, byte heading, int creatorId) {
-		return newSpawn(worldId, npcId, x, y, z, heading, 0, creatorId);
+		return newSpawn(worldId, npcId, x, y, z, heading, 0, creatorId, null);
+	}
+
+	public static SpawnTemplate newSingleTimeSpawn(int worldId, int npcId, float x, float y, float z, byte heading, int creatorId,
+		String aiName) {
+		return newSpawn(worldId, npcId, x, y, z, heading, 0, creatorId, aiName);
 	}
 
 	public static SpawnTemplate newSpawn(int worldId, int npcId, float x, float y, float z, byte heading, int respawnTime) {
-		return newSpawn(worldId, npcId, x, y, z, heading, respawnTime, 0);
+		return newSpawn(worldId, npcId, x, y, z, heading, respawnTime, 0, null);
 	}
 
-	private static SpawnTemplate newSpawn(int worldId, int npcId, float x, float y, float z, byte heading, int respawnTime, int creatorId) {
-		return new SpawnTemplate(new SpawnGroup(worldId, npcId, respawnTime), x, y, z, heading, 0, null, 0, 0, creatorId);
+	private static SpawnTemplate newSpawn(int worldId, int npcId, float x, float y, float z, byte heading, int respawnTime, int creatorId,
+		String aiName) {
+		return new SpawnTemplate(new SpawnGroup(worldId, npcId, respawnTime), x, y, z, heading, 0, null, 0, 0, creatorId, aiName);
 	}
 
 	/**

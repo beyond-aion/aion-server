@@ -2,6 +2,7 @@ package ai.instance.pvpArenas;
 
 import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.instance.instancereward.InstanceReward;
 
@@ -14,6 +15,10 @@ import ai.ActionItemNpcAI;
 public class RelicsAI extends ActionItemNpcAI {
 
 	private boolean isRewarded;
+
+	public RelicsAI(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	protected void handleDialogStart(Player player) {

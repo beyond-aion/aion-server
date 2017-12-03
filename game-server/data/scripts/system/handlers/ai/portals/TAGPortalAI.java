@@ -4,6 +4,7 @@ import static com.aionemu.gameserver.model.DialogAction.*;
 
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.model.autogroup.AutoGroupType;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_AUTO_GROUP;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
@@ -14,6 +15,10 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 @AIName("t_a_g_portal")
 public class TAGPortalAI extends PortalDialogAI {
+
+	public TAGPortalAI(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	public boolean onDialogSelect(Player player, int dialogActionId, int questId, int extendedRewardIndex) {

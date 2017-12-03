@@ -3,6 +3,7 @@ package ai.instance.danuarReliquary;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.model.gameobjects.Creature;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.skill.QueuedNpcSkillEntry;
 import com.aionemu.gameserver.model.templates.npcskill.QueuedNpcSkillTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_FORCED_MOVE;
@@ -21,6 +22,10 @@ import ai.AggressiveNpcAI;
 public class CursedQueenModorAI extends AggressiveNpcAI {
 
 	private int stage = 0;
+
+	public CursedQueenModorAI(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	protected void handleSpawned() {

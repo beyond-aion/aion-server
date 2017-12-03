@@ -6,7 +6,6 @@ import java.util.concurrent.Future;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.AIState;
-import com.aionemu.gameserver.ai.AbstractAI;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -29,6 +28,10 @@ public class PadmarashkaAI extends AggressiveNpcAI {
 	private boolean isStart = false;
 	private boolean canThink = false;
 	private Future<?> mainSkillTask;
+
+	public PadmarashkaAI(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	protected void handleSpawned() {
@@ -107,7 +110,7 @@ public class PadmarashkaAI extends AggressiveNpcAI {
 			@Override
 			public void run() {
 				npc.setTarget(getTarget());
-				((AbstractAI) npc.getAi()).setStateIfNot(AIState.WALKING);
+				npc.getAi().setStateIfNot(AIState.WALKING);
 				npc.setState(CreatureState.ACTIVE, true);
 				npc.getMoveController().moveToTargetObject();
 				PacketSendUtility.broadcastPacket(npc, new SM_EMOTION(npc, EmotionType.START_EMOTE2, 0, npc.getObjectId()));

@@ -10,25 +10,28 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 
 /**
  * @author Yeats
- *
  */
 @AIName("ruthless_jabaraki")
 public class RuthlessJabaraki extends IDSweep_Bosses {
 
 	private List<Integer> percents = new ArrayList<>();
 	private List<Npc> spawnedAdds = new ArrayList<>();
-	
+
+	public RuthlessJabaraki(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	protected void handleAttack(Creature creature) {
 		super.handleAttack(creature);
 		checkPercentage(getLifeStats().getHpPercentage());
 	}
-	
+
 	private void addPercent() {
 		percents.clear();
-		Collections.addAll(percents, new Integer[]{96, 80, 60, 45, 40, 35});
+		Collections.addAll(percents, new Integer[] { 96, 80, 60, 45, 40, 35 });
 	}
-	
+
 	private synchronized void checkPercentage(int hpPercentage) {
 		for (Integer percent : percents) {
 			if (hpPercentage <= percent) {
@@ -57,7 +60,7 @@ public class RuthlessJabaraki extends IDSweep_Bosses {
 			}
 		}
 	}
-	
+
 	private void spawnAdds(int stage) {
 		switch (stage) {
 			case 1:
@@ -71,7 +74,7 @@ public class RuthlessJabaraki extends IDSweep_Bosses {
 				spawnedAdds.add((Npc) spawn(235630, 538.86127f, 389.05258f, 395.4342f, (byte) 8));
 				spawnedAdds.add((Npc) spawn(235630, 558.6854f, 382.02362f, 395.16785f, (byte) 43));
 				spawnedAdds.add((Npc) spawn(235630, 564.9021f, 400.29718f, 395.46262f, (byte) 69));
-				
+
 				spawnedAdds.add((Npc) spawn(235630, 540.625f, 406.0712f, 395.76875f, (byte) 110));
 				spawnedAdds.add((Npc) spawn(235630, 539.86127f, 390.05258f, 395.7342f, (byte) 8));
 				spawnedAdds.add((Npc) spawn(235630, 559.6854f, 383.02362f, 395.46785f, (byte) 43));
@@ -82,7 +85,7 @@ public class RuthlessJabaraki extends IDSweep_Bosses {
 				spawnedAdds.add((Npc) spawn(235629, 538.86127f, 389.05258f, 395.4342f, (byte) 8));
 				spawnedAdds.add((Npc) spawn(235629, 558.6854f, 382.02362f, 395.16785f, (byte) 43));
 				spawnedAdds.add((Npc) spawn(235629, 564.9021f, 400.29718f, 395.46262f, (byte) 69));
-				
+
 				spawnedAdds.add((Npc) spawn(235629, 540.625f, 406.0712f, 395.76875f, (byte) 110));
 				spawnedAdds.add((Npc) spawn(235629, 539.86127f, 390.05258f, 395.7342f, (byte) 8));
 				spawnedAdds.add((Npc) spawn(235629, 559.6854f, 383.02362f, 395.46785f, (byte) 43));
@@ -93,12 +96,12 @@ public class RuthlessJabaraki extends IDSweep_Bosses {
 				spawnedAdds.add((Npc) spawn(235630, 538.86127f, 389.05258f, 395.4342f, (byte) 8));
 				spawnedAdds.add((Npc) spawn(235630, 558.6854f, 382.02362f, 395.16785f, (byte) 43));
 				spawnedAdds.add((Npc) spawn(235630, 564.9021f, 400.29718f, 395.46262f, (byte) 69));
-				
+
 				spawnedAdds.add((Npc) spawn(235630, 540.625f, 406.0712f, 395.76875f, (byte) 110));
 				spawnedAdds.add((Npc) spawn(235630, 539.86127f, 390.05258f, 395.7342f, (byte) 8));
 				spawnedAdds.add((Npc) spawn(235630, 559.6854f, 383.02362f, 395.46785f, (byte) 43));
 				spawnedAdds.add((Npc) spawn(235630, 565.9021f, 401.29718f, 395.76262f, (byte) 69));
-				
+
 				spawnedAdds.add((Npc) spawn(235630, 541.625f, 407.0712f, 396.06875f, (byte) 110));
 				spawnedAdds.add((Npc) spawn(235630, 540.86127f, 391.05258f, 396.0342f, (byte) 8));
 				spawnedAdds.add((Npc) spawn(235630, 560.6854f, 384.02362f, 395.86785f, (byte) 43));
@@ -109,12 +112,12 @@ public class RuthlessJabaraki extends IDSweep_Bosses {
 				spawnedAdds.add((Npc) spawn(235631, 538.86127f, 389.05258f, 395.4342f, (byte) 8));
 				spawnedAdds.add((Npc) spawn(235631, 558.6854f, 382.02362f, 395.16785f, (byte) 43));
 				spawnedAdds.add((Npc) spawn(235631, 564.9021f, 400.29718f, 395.46262f, (byte) 69));
-				
+
 				spawnedAdds.add((Npc) spawn(235631, 540.625f, 406.0712f, 395.76875f, (byte) 110));
 				spawnedAdds.add((Npc) spawn(235631, 539.86127f, 390.05258f, 395.7342f, (byte) 8));
 				spawnedAdds.add((Npc) spawn(235631, 559.6854f, 383.02362f, 395.46785f, (byte) 43));
 				spawnedAdds.add((Npc) spawn(235631, 565.9021f, 401.29718f, 395.76262f, (byte) 69));
-				
+
 				spawnedAdds.add((Npc) spawn(235631, 541.625f, 407.0712f, 396.06875f, (byte) 110));
 				spawnedAdds.add((Npc) spawn(235631, 540.86127f, 391.05258f, 396.0342f, (byte) 8));
 				spawnedAdds.add((Npc) spawn(235631, 560.6854f, 384.02362f, 395.86785f, (byte) 43));
@@ -123,7 +126,7 @@ public class RuthlessJabaraki extends IDSweep_Bosses {
 		}
 		startHate();
 	}
-	
+
 	private void startHate() {
 		for (Npc npc : spawnedAdds) {
 			if (npc != null && !npc.isDead()) {
@@ -131,13 +134,13 @@ public class RuthlessJabaraki extends IDSweep_Bosses {
 			}
 		}
 	}
-	
+
 	@Override
 	protected void handleSpawned() {
 		super.handleSpawned();
 		addPercent();
 	}
-	
+
 	@Override
 	protected void handleDied() {
 		super.handleDied();

@@ -2,6 +2,7 @@ package ai;
 
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.model.gameobjects.Creature;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.stats.calc.Stat2;
 import com.aionemu.gameserver.skillengine.model.Effect;
 
@@ -10,6 +11,10 @@ import com.aionemu.gameserver.skillengine.model.Effect;
  */
 @AIName("onedmg_aggressive")
 public class OneDmgAI extends AggressiveNpcAI {
+
+	public OneDmgAI(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	public int modifyDamage(Creature attacker, int damage, Effect effect) {

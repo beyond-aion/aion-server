@@ -10,6 +10,10 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 @AIName("southern_generator")
 public class ShieldGeneratorSouthAI extends ShieldGeneratorAI {
 
+	public ShieldGeneratorSouthAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	protected SM_SYSTEM_MESSAGE getAttackMsg() {
 		return SM_SYSTEM_MESSAGE.STR_MSG_IDF5_U3_DEFENCE_03_ATTACKED();

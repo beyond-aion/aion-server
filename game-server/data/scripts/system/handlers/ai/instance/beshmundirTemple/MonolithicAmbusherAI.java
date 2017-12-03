@@ -3,6 +3,7 @@ package ai.instance.beshmundirTemple;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.event.AIEventType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 
 import ai.AggressiveNpcAI;
 
@@ -13,6 +14,10 @@ import ai.AggressiveNpcAI;
 public class MonolithicAmbusherAI extends AggressiveNpcAI {
 
 	private boolean hasHelped;
+
+	public MonolithicAmbusherAI(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	protected void handleBackHome() {

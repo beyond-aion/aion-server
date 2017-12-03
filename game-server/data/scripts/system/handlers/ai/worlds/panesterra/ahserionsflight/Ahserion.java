@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.controllers.attack.AggroInfo;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.services.panesterra.ahserion.AhserionRaid;
 import com.aionemu.gameserver.services.panesterra.ahserion.PanesterraFaction;
@@ -18,6 +19,10 @@ import ai.AggressiveNpcAI;
  */
 @AIName("ahserion")
 public class Ahserion extends AggressiveNpcAI {
+
+	public Ahserion(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	protected void handleDied() {

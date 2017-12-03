@@ -21,6 +21,10 @@ public class KinquidAI extends AggressiveNpcAI {
 	private AtomicBoolean isHome = new AtomicBoolean(true);
 	private Future<?> skillTask;
 
+	public KinquidAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	protected void handleCreatureAggro(Creature creature) {
 		super.handleCreatureAggro(creature);

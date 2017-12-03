@@ -51,8 +51,8 @@ public class SpawnSpotTemplate {
 	@XmlElement(name = "temporary_spawn")
 	private TemporarySpawn temporaySpawn;
 
-	@XmlElement(name = "model")
-	private SpawnModel model;
+	@XmlElement(name = "ai")
+	private String ai;
 
 	public SpawnSpotTemplate() {
 	}
@@ -144,8 +144,8 @@ public class SpawnSpotTemplate {
 		return anchor;
 	}
 
-	public SpawnModel getModel() {
-		return model;
+	public String getAi() {
+		return ai;
 	}
 
 	public int getState() {

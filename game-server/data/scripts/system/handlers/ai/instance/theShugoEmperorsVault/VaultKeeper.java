@@ -7,6 +7,7 @@ import java.util.Map;
 
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.services.teleport.TeleportService;
@@ -16,28 +17,31 @@ import ai.GeneralNpcAI;
 
 /**
  * @author Yeats
- *
  */
 @AIName("IDSweep_Treasure_Room")
 public class VaultKeeper extends GeneralNpcAI {
-	
+
+	public VaultKeeper(Npc owner) {
+		super(owner);
+	}
+
 	private int room = 0;
 	private Map<Integer, Integer> playerAndRoom = new HashMap<>();
-	
+
 	@Override
 	public boolean onDialogSelect(Player player, int dialogActionId, int questId, int extendedRewardIndex) {
 		checkEntryConditions(player, dialogActionId);
 		return true;
 	}
-	
+
 	private synchronized void checkEntryConditions(Player player, int dialogActionId) {
 		if (dialogActionId == SETPRO1) {
 			int roomNo = room;
-			
+
 			if (playerAndRoom.containsKey(player.getObjectId())) {
 				roomNo = playerAndRoom.get(player.getObjectId());
 			}
-			
+
 			if (roomNo == 0) {
 				playerAndRoom.put(player.getObjectId(), 0);
 				room++;

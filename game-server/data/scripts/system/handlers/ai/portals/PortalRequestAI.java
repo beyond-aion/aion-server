@@ -19,6 +19,10 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 @AIName("portal_request")
 public class PortalRequestAI extends PortalAI {
 
+	public PortalRequestAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	protected void handleUseItemFinish(Player player) {
 		if (teleportTemplate != null) {

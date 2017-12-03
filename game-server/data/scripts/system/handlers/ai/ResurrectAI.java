@@ -16,6 +16,7 @@ import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.TribeClass;
 import com.aionemu.gameserver.model.gameobjects.Creature;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.PersistentState;
 import com.aionemu.gameserver.model.gameobjects.player.BindPointPosition;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -35,6 +36,10 @@ public class ResurrectAI extends NpcAI {
 
 	private static Logger log = LoggerFactory.getLogger(ResurrectAI.class);
 
+	public ResurrectAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	protected void handleDialogStart(Player player) {
 		BindPointTemplate bindPointTemplate = DataManager.BIND_POINT_DATA.getBindPointTemplate(getNpcId());
@@ -44,8 +49,7 @@ public class ResurrectAI extends NpcAI {
 			return;
 		}
 
-		if (player.getBindPoint() != null
-			&& player.getBindPoint().getMapId() == getPosition().getMapId()
+		if (player.getBindPoint() != null && player.getBindPoint().getMapId() == getPosition().getMapId()
 			&& PositionUtil.getDistance(player.getBindPoint().getX(), player.getBindPoint().getY(), player.getBindPoint().getZ(), getPosition().getX(),
 				getPosition().getY(), getPosition().getZ()) < 20) {
 			PacketSendUtility.sendPacket(player, STR_ALREADY_REGISTER_THIS_RESURRECT_POINT());
@@ -87,8 +91,8 @@ public class ResurrectAI extends NpcAI {
 					}
 
 					BindPointPosition old = responder.getBindPoint();
-					BindPointPosition bpp = new BindPointPosition(requester.getWorldId(), responder.getX(), responder.getY(), responder.getZ(), responder
-						.getHeading());
+					BindPointPosition bpp = new BindPointPosition(requester.getWorldId(), responder.getX(), responder.getY(), responder.getZ(),
+						responder.getHeading());
 					bpp.setPersistentState(old == null ? PersistentState.NEW : PersistentState.UPDATE_REQUIRED);
 					responder.setBindPoint(bpp);
 					if (DAOManager.getDAO(PlayerBindPointDAO.class).store(responder)) {

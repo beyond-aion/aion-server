@@ -17,6 +17,10 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 @AIName("writhingcocoon")
 public class WrithingCocoonAI extends NpcAI {
 
+	public WrithingCocoonAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	public boolean onDialogSelect(Player player, int dialogActionId, int questId, int extendedRewardIndex) {
 		if (dialogActionId == SELECT1_1 && player.getInventory().decreaseByItemId(185000088, 1)) {

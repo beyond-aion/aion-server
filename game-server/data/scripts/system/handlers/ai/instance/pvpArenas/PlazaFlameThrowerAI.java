@@ -20,6 +20,10 @@ public class PlazaFlameThrowerAI extends ShifterAI {
 
 	private boolean isRewarded;
 
+	public PlazaFlameThrowerAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	protected void handleDialogStart(Player player) {
 		InstanceReward<?> instance = getPosition().getWorldMapInstance().getInstanceHandler().getInstanceReward();

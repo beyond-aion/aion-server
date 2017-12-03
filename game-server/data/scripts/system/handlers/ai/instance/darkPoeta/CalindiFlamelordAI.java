@@ -5,6 +5,7 @@ import java.util.concurrent.Future;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.skill.QueuedNpcSkillEntry;
 import com.aionemu.gameserver.model.templates.npcskill.QueuedNpcSkillTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
@@ -23,6 +24,10 @@ import ai.AggressiveNpcAI;
 public class CalindiFlamelordAI extends AggressiveNpcAI {
 
 	private Future<?> wipeTask;
+
+	public CalindiFlamelordAI(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	protected void handleSpawned() {

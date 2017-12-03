@@ -20,6 +20,10 @@ public class RakshaSealingWallAI extends GeneralNpcAI {
 
 	private AtomicBoolean startedEvent = new AtomicBoolean(false);
 
+	public RakshaSealingWallAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	public boolean canThink() {
 		return false;
@@ -36,8 +40,7 @@ public class RakshaSealingWallAI extends GeneralNpcAI {
 					Npc flamelord = instance.getNpc(217451);
 					Npc sealguard = instance.getNpc(217456);
 					int bossId;
-					if ((sharik == null || sharik.isDead()) && (flamelord == null || flamelord.isDead())
-						&& (sealguard == null || sealguard.isDead())) {
+					if ((sharik == null || sharik.isDead()) && (flamelord == null || flamelord.isDead()) && (sealguard == null || sealguard.isDead())) {
 						bossId = 217475;
 					} else {
 						bossId = 217647;

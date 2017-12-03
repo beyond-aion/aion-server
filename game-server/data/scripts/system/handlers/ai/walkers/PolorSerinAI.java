@@ -17,6 +17,10 @@ public class PolorSerinAI extends WalkGeneralRunnerAI {
 
 	static final int[] stopAdults = { 203129, 203132 };
 
+	public PolorSerinAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	protected void handleMoveArrived() {
 		boolean adultsNear = false;

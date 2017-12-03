@@ -15,6 +15,10 @@ public class KaluvaSpawnAI extends NpcAI {
 
 	private Future<?> task;
 
+	public KaluvaSpawnAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	protected void handleDied() {
 		super.handleDied();

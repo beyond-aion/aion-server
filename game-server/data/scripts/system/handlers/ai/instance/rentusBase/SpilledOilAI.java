@@ -2,6 +2,7 @@ package ai.instance.rentusBase;
 
 import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
@@ -14,6 +15,10 @@ import ai.GeneralNpcAI;
 public class SpilledOilAI extends GeneralNpcAI {
 
 	private int count;
+
+	public SpilledOilAI(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	protected void handleSpawned() {

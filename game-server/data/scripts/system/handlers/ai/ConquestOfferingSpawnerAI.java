@@ -6,6 +6,7 @@ import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.model.gameobjects.Creature;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
@@ -20,6 +21,10 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 public class ConquestOfferingSpawnerAI extends NpcAI {
 
 	private Future<?> respawnTask;
+
+	public ConquestOfferingSpawnerAI(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	protected void handleSpawned() {
@@ -128,7 +133,8 @@ public class ConquestOfferingSpawnerAI extends NpcAI {
 			if (respawnTask != null && !respawnTask.isCancelled() && !respawnTask.isDone()) {
 				return;
 			}
-			respawnTask = ThreadPoolManager.getInstance().schedule(() -> spawnRandomNpc(), (600000 + (Rnd.get(0, 2) * 300000))); // 10min + random 0 to 10min
+			long respawnDelay = 600000 + (Rnd.get(0, 2) * 300000); // random 10, 15 or 20 minutes
+			respawnTask = ThreadPoolManager.getInstance().schedule(() -> spawnRandomNpc(), respawnDelay);
 		}
 	}
 

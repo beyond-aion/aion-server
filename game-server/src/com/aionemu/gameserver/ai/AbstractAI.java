@@ -30,9 +30,9 @@ import com.aionemu.gameserver.world.WorldPosition;
 /**
  * @author ATracer
  */
-public abstract class AbstractAI extends AbstractEventSource<GeneralAIEvent> implements AI {
+public abstract class AbstractAI<T extends Creature> extends AbstractEventSource<GeneralAIEvent> implements AI {
 
-	private Creature owner;
+	private final T owner;
 	private AIState currentState;
 	private AISubState currentSubState;
 	private static volatile Map<Class<?>, Map<AIEventType, Method>> listenableMethodsByClass;
@@ -43,7 +43,8 @@ public abstract class AbstractAI extends AbstractEventSource<GeneralAIEvent> imp
 
 	private volatile AIEventLog eventLog;
 
-	AbstractAI() {
+	protected AbstractAI(T owner) {
+		this.owner = owner;
 		this.currentState = AIState.CREATED;
 		this.currentSubState = AISubState.NONE;
 
@@ -105,7 +106,7 @@ public abstract class AbstractAI extends AbstractEventSource<GeneralAIEvent> imp
 		if (this.currentState == newState)
 			return false;
 
-		if (this.isLogging()) {
+		if (isLogging()) {
 			AILogger.info(this, "Setting AI state to " + newState);
 			if (this.currentState == AIState.DIED && newState == AIState.FIGHT) {
 				StackTraceElement[] stack = new Throwable().getStackTrace();
@@ -119,12 +120,12 @@ public abstract class AbstractAI extends AbstractEventSource<GeneralAIEvent> imp
 
 	public synchronized boolean setSubStateIfNot(AISubState newSubState) {
 		if (this.currentSubState == newSubState) {
-			if (this.isLogging()) {
+			if (isLogging()) {
 				AILogger.info(this, "Can't change substate to " + newSubState + " from " + currentSubState);
 			}
 			return false;
 		}
-		if (this.isLogging()) {
+		if (isLogging()) {
 			AILogger.info(this, "Setting AI substate to " + newSubState);
 		}
 		this.currentSubState = newSubState;
@@ -134,7 +135,7 @@ public abstract class AbstractAI extends AbstractEventSource<GeneralAIEvent> imp
 	@Override
 	public final void onGeneralEvent(AIEventType event) {
 		if (currentState.canHandle(event) && canHandleEvent(event)) {
-			if (this.isLogging()) {
+			if (isLogging()) {
 				AILogger.info(this, "General event " + event);
 			}
 			handleGeneralEvent(event);
@@ -145,7 +146,7 @@ public abstract class AbstractAI extends AbstractEventSource<GeneralAIEvent> imp
 	public final void onCreatureEvent(AIEventType event, Creature creature) {
 		Objects.requireNonNull(creature, "Creature must not be null");
 		if (currentState.canHandle(event) && canHandleEvent(event)) {
-			if (this.isLogging()) {
+			if (isLogging()) {
 				AILogger.info(this, "Creature event " + event + ": " + creature.getObjectTemplate().getTemplateId());
 			}
 			handleCreatureEvent(event, creature);
@@ -154,7 +155,7 @@ public abstract class AbstractAI extends AbstractEventSource<GeneralAIEvent> imp
 
 	@Override
 	public final void onCustomEvent(int eventId, Object... args) {
-		if (this.isLogging()) {
+		if (isLogging()) {
 			AILogger.info(this, "Custom event - id = " + eventId);
 		}
 		handleCustomEvent(eventId, args);
@@ -165,7 +166,7 @@ public abstract class AbstractAI extends AbstractEventSource<GeneralAIEvent> imp
 	 * 
 	 * @return
 	 */
-	public Creature getOwner() {
+	public T getOwner() {
 		return owner;
 	}
 
@@ -183,10 +184,6 @@ public abstract class AbstractAI extends AbstractEventSource<GeneralAIEvent> imp
 
 	public boolean isDead() {
 		return owner.isDead();
-	}
-
-	void setOwner(Creature owner) {
-		this.owner = owner;
 	}
 
 	public final boolean tryLockThink() {
@@ -332,7 +329,7 @@ public abstract class AbstractAI extends AbstractEventSource<GeneralAIEvent> imp
 	}
 
 	protected void handleGeneralEvent(AIEventType event) {
-		if (this.isLogging()) {
+		if (isLogging()) {
 			AILogger.info(this, "Handle general event " + event);
 		}
 		logEvent(event);

@@ -35,7 +35,7 @@
 		<xs:attribute name="tribe" type="TribeClass"/>
 		<xs:attribute name="type" type="NpcTemplateType"/>
 		<xs:attribute name="abyss_type" type="AbyssType"/>
-		<xs:attribute name="ai" type="xs:string" default="dummy"/>
+		<xs:attribute name="ai" type="xs:string"/>
 		<xs:attribute name="race" type="Race"/>
 		<xs:attribute name="hpgauge" type="xs:int"/>
 		<xs:attribute name="arange" type="xs:int"/>

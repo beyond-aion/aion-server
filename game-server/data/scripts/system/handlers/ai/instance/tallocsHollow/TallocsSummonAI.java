@@ -10,6 +10,7 @@ import com.aionemu.gameserver.controllers.SummonController;
 import com.aionemu.gameserver.controllers.effect.EffectController;
 import com.aionemu.gameserver.model.CreatureType;
 import com.aionemu.gameserver.model.EmotionType;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.Summon;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
@@ -26,6 +27,10 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 public class TallocsSummonAI extends NpcAI {
 
 	private AtomicBoolean isTransformed = new AtomicBoolean(false);
+
+	public TallocsSummonAI(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	public boolean onDialogSelect(Player player, int dialogActionId, int questId, int extendedRewardIndex) {

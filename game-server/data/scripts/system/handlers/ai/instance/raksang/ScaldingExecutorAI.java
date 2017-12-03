@@ -21,6 +21,10 @@ public class ScaldingExecutorAI extends AggressiveNpcAI {
 
 	private AtomicBoolean isDestroyed = new AtomicBoolean(false);
 
+	public ScaldingExecutorAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	public boolean canThink() {
 		return false;

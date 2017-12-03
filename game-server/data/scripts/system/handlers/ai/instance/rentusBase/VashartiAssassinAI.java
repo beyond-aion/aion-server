@@ -20,6 +20,10 @@ public class VashartiAssassinAI extends AggressiveNpcAI {
 
 	private AtomicBoolean isHome = new AtomicBoolean(true);
 
+	public VashartiAssassinAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	protected void handleCreatureAggro(Creature creature) {
 		if (isHome.compareAndSet(true, false)) {

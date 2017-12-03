@@ -32,6 +32,10 @@ public class EngineerLahulahuAI extends AggressiveNpcAI {
 	private Npc npc10;
 	private Npc npc11;
 
+	public EngineerLahulahuAI(Npc owner) {
+		super(owner);
+	}
+
 	private void registerNpcs() {
 		WorldMapInstance instance = getPosition().getWorldMapInstance();
 		npc = instance.getNpc(281111);

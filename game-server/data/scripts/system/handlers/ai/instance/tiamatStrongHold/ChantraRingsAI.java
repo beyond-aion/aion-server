@@ -5,6 +5,7 @@ import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.model.gameobjects.Creature;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
@@ -14,6 +15,10 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
  */
 @AIName("chantrarings")
 public class ChantraRingsAI extends NpcAI {
+
+	public ChantraRingsAI(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	protected void handleCreatureSee(Creature creature) {

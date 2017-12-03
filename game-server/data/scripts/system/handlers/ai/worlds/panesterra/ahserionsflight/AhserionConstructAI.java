@@ -38,6 +38,10 @@ public class AhserionConstructAI extends NpcAI {
 	private Future<?> attackSchedule;
 	private AtomicBoolean canShout = new AtomicBoolean(true);
 
+	public AhserionConstructAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	public void handleAttack(Creature creature) {
 		super.handleAttack(creature);

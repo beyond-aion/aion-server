@@ -9,7 +9,11 @@ import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 /**
  * @author ATracer
  */
-public abstract class AITemplate extends AbstractAI {
+public abstract class AITemplate<T extends Creature> extends AbstractAI<T> {
+
+	protected AITemplate(T owner) {
+		super(owner);
+	}
 
 	@Override
 	public void think() {

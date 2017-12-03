@@ -18,6 +18,10 @@ import ai.AggressiveNpcAI;
 @AIName("kratia")
 public class Kratia extends AggressiveNpcAI {
 
+	public Kratia(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	protected void handleDied() {
 		Npc kratia = getOwner();

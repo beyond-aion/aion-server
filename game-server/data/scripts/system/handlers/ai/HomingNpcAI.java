@@ -3,12 +3,17 @@ package ai;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.AttackIntention;
 import com.aionemu.gameserver.ai.poll.AIQuestion;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 
 /**
  * @author ATracer
  */
 @AIName("homing")
 public class HomingNpcAI extends GeneralNpcAI {
+
+	public HomingNpcAI(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	public void think() {

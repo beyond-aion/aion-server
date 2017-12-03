@@ -8,6 +8,7 @@ import com.aionemu.gameserver.ai.AIRequest;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.autogroup.AutoGroupType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.portal.PortalPath;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
@@ -25,6 +26,10 @@ import ai.ActionItemNpcAI;
  */
 @AIName("beshmundirswalk")
 public class BeshmundirsWalkAI extends ActionItemNpcAI {
+
+	public BeshmundirsWalkAI(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	protected void handleUseItemFinish(Player player) {

@@ -20,6 +20,10 @@ public class GeyserBlockerAI extends AggressiveNpcAI {
 
 	private int staticId = -1;
 
+	public GeyserBlockerAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	protected void handleDied() {
 		super.handleDied();

@@ -372,7 +372,7 @@ public class VisibleObjectSpawner {
 		SpawnTemplate spawn = SpawnEngine.newSingleTimeSpawn(worldId, npcId, x, y, z, heading);
 		NpcTemplate npcTemplate = DataManager.NPC_DATA.getNpcTemplate(npcId);
 
-		boolean isSiegeWeapon = npcTemplate.getAi().equals("siege_weapon");
+		boolean isSiegeWeapon = "siege_weapon".equals(npcTemplate.getAiName());
 		Summon summon = new Summon(IDFactory.getInstance().nextId(), isSiegeWeapon ? new SiegeWeaponController(npcId) : new SummonController(), spawn,
 			npcTemplate, time);
 		summon.setKnownlist(new CreatureAwareKnownList(summon));

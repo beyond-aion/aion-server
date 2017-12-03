@@ -26,6 +26,10 @@ public class AethicFieldGeneratorAI extends GeneralNpcAI {
 	private Future<?> aggroTask;
 	private List<Integer> percents = new ArrayList<>();
 
+	public AethicFieldGeneratorAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	public boolean canThink() {
 		return false;

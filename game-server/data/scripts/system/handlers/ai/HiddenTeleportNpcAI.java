@@ -7,6 +7,7 @@ import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.actions.PlayerMode;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.model.templates.flypath.FlyPathEntry;
@@ -19,7 +20,11 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 @AIName("hidden_teleporter")
 public class HiddenTeleportNpcAI extends NpcAI {
-	
+
+	public HiddenTeleportNpcAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	protected void handleDialogStart(Player player) {
 		PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 1011));
@@ -45,7 +50,7 @@ public class HiddenTeleportNpcAI extends NpcAI {
 		player.setFlightTeleportId(teleId * 1000 + 1);
 		PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.START_FLYTELEPORT, teleId * 1000 + 1, 0), true);
 	}
-	
+
 	private int getTeleportId() {
 		switch (getOwner().getNpcId()) {
 			case 804811:

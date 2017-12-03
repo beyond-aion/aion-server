@@ -9,6 +9,7 @@ import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.model.gameobjects.Creature;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.geometry.Point3D;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
@@ -32,6 +33,10 @@ public class IsbariyaTheResoluteAI extends AggressiveNpcAI {
 	private List<Point3D> soulLocations = new ArrayList<>();
 	private Future<?> basicSkillTask;
 	private Future<?> spawnTask;
+
+	public IsbariyaTheResoluteAI(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	protected void handleAttack(Creature creature) {
@@ -186,8 +191,8 @@ public class IsbariyaTheResoluteAI extends AggressiveNpcAI {
 		float direction = Rnd.get(0, 199) / 100f;
 		float x1 = (float) (Math.cos(Math.PI * direction) * 5);
 		float y1 = (float) (Math.sin(Math.PI * direction) * 5);
-		return SpawnEngine.newSingleTimeSpawn(getPosition().getMapId(), npcId, getPosition().getX() + x1, getPosition().getY() + y1, getPosition()
-			.getZ(), getPosition().getHeading());
+		return SpawnEngine.newSingleTimeSpawn(getPosition().getMapId(), npcId, getPosition().getX() + x1, getPosition().getY() + y1, getPosition().getZ(),
+			getPosition().getHeading());
 	}
 
 }

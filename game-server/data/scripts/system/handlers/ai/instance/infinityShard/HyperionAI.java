@@ -31,6 +31,10 @@ public class HyperionAI extends AggressiveNpcAI {
 	private List<Integer> percents = new ArrayList<>();
 	private byte stage = 0;
 
+	public HyperionAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	protected void handleSpawned() {
 		super.handleSpawned();

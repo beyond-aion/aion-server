@@ -27,6 +27,10 @@ public class WoundedScarAI extends GeneralNpcAI {
 
 	private AtomicBoolean isDestinationReached = new AtomicBoolean();
 
+	public WoundedScarAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	public boolean canThink() {
 		return false;

@@ -6,6 +6,7 @@ import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.model.gameobjects.Creature;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
@@ -19,6 +20,10 @@ import ai.AggressiveNpcAI;
 public class DefenseTowerAI extends AggressiveNpcAI {
 
 	private Future<?> task;
+
+	public DefenseTowerAI(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	public boolean canThink() {

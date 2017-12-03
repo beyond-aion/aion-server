@@ -4,6 +4,7 @@ import com.aionemu.commons.network.util.ThreadPoolManager;
 import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.NpcAI;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 
 /**
@@ -11,6 +12,10 @@ import com.aionemu.gameserver.skillengine.model.SkillTemplate;
  */
 @AIName("finish_them")
 public class FinishThemAI extends NpcAI {
+
+	public FinishThemAI(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	protected void handleSpawned() {

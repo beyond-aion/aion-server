@@ -28,6 +28,10 @@ public class BollvigAI extends AggressiveNpcAI {
 	private Future<?> thirdTask;
 	private Future<?> lastTask;
 
+	public BollvigAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	protected void handleSpawned() {
 		addPercent();

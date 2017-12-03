@@ -24,6 +24,10 @@ public class WardenSuramaAI extends AggressiveNpcAI {
 
 	private List<Integer> percents = new ArrayList<>();
 
+	public WardenSuramaAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	protected void handleSpawned() {
 		super.handleSpawned();

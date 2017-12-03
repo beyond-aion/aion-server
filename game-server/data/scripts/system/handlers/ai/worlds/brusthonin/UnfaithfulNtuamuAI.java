@@ -16,6 +16,10 @@ import ai.AggressiveNpcAI;
 @AIName("unfaithfulntuamu")
 public class UnfaithfulNtuamuAI extends AggressiveNpcAI {
 
+	public UnfaithfulNtuamuAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	protected void handleAttack(Creature creature) {
 		super.handleAttack(creature);

@@ -4,6 +4,7 @@ import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.model.gameobjects.Creature;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.siege.SiegeNpc;
@@ -15,6 +16,10 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
  */
 @AIName("spring")
 public class SpringAI extends NpcAI {
+
+	public SpringAI(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	public void handleSpawned() {

@@ -9,6 +9,11 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
  */
 @AIName("incarnate")
 public class IncarnateAI extends SiegeNpcAI {
+
+	public IncarnateAI(Npc owner) {
+		super(owner);
+	}
+
 	// spawn for quest
 	@Override
 	protected void handleDied() {

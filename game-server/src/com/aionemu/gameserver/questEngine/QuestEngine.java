@@ -949,7 +949,7 @@ public class QuestEngine implements GameEngine {
 			log.warn("[QuestEngine] No such NPC template for " + npcId + " in Q" + questId);
 			return false;
 		}
-		if ("quest_use_item".equals(template.getAi())) {
+		if ("quest_use_item".equals(template.getAiName())) {
 			TIntArrayList questNpcs = questCanAct.get(npcId);
 			if (questNpcs == null) {
 				questNpcs = new TIntArrayList();

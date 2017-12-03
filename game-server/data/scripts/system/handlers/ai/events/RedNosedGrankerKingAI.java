@@ -20,6 +20,10 @@ public class RedNosedGrankerKingAI extends OneDmgAI {
 
 	private AtomicBoolean addsSpawned = new AtomicBoolean(false);
 
+	public RedNosedGrankerKingAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	protected void handleAttack(Creature creature) {
 		super.handleAttack(creature);

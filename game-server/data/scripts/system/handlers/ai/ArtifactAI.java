@@ -20,6 +20,7 @@ import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Creature;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.siege.SiegeNpc;
 import com.aionemu.gameserver.model.siege.ArtifactLocation;
@@ -48,6 +49,10 @@ public class ArtifactAI extends NpcAI {
 
 	private Map<Integer, ItemUseObserver> observers = new HashMap<>();
 
+	public ArtifactAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	protected SiegeSpawnTemplate getSpawnTemplate() {
 		return (SiegeSpawnTemplate) super.getSpawnTemplate();
@@ -68,8 +73,7 @@ public class ArtifactAI extends NpcAI {
 						onActivate(responder);
 					}
 
-				}, ChatUtil.l10n(716570), SiegeService.getInstance().getArtifact(getSpawnTemplate().getSiegeId()).getTemplate().getActivation()
-					.getCount());
+				}, ChatUtil.l10n(716570), SiegeService.getInstance().getArtifact(getSpawnTemplate().getSiegeId()).getTemplate().getActivation().getCount());
 
 			}
 
@@ -111,8 +115,8 @@ public class ArtifactAI extends NpcAI {
 			return;
 
 		if (LoggingConfig.LOG_SIEGE)
-			log.info("Artifact " + getSpawnTemplate().getSiegeId() + " activated by " + player.getName() + ". Activator race: "
-				+ player.getRace().toString());
+			log.info(
+				"Artifact " + getSpawnTemplate().getSiegeId() + " activated by " + player.getName() + ". Activator race: " + player.getRace().toString());
 
 		if (!loc.getStatus().equals(ArtifactStatus.IDLE))
 			return;

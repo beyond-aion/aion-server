@@ -2,6 +2,7 @@ package ai.instance.empyreanCrucible;
 
 import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
@@ -13,6 +14,10 @@ import ai.GeneralNpcAI;
  */
 @AIName("strange_creature")
 public class StrangeCreatureAI extends GeneralNpcAI {
+
+	public StrangeCreatureAI(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	protected void handleSpawned() {

@@ -4,6 +4,7 @@ import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.NpcAI;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 
@@ -13,6 +14,10 @@ import com.aionemu.gameserver.skillengine.model.SkillTemplate;
  */
 @AIName("vengeful_orb")
 public class VengefulOrbAI extends NpcAI {
+
+	public VengefulOrbAI(Npc owner) {
+		super(owner);
+	}
 
 	/**
 	 * Currently capped the damage value. Seems to be some defensive calculations are not even retail.

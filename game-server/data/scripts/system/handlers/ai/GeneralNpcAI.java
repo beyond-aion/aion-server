@@ -15,6 +15,7 @@ import com.aionemu.gameserver.ai.handler.ThinkEventHandler;
 import com.aionemu.gameserver.ai.manager.SkillAttackManager;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.Creature;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.skill.NpcSkillEntry;
@@ -24,6 +25,10 @@ import com.aionemu.gameserver.model.skill.NpcSkillEntry;
  */
 @AIName("general")
 public class GeneralNpcAI extends NpcAI {
+
+	public GeneralNpcAI(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	public void think() {

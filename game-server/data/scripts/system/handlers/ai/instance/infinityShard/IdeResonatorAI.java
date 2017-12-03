@@ -20,6 +20,10 @@ public class IdeResonatorAI extends NpcAI {
 
 	private Future<?> task1, task2;
 
+	public IdeResonatorAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	protected void handleSpawned() {
 		super.handleSpawned();

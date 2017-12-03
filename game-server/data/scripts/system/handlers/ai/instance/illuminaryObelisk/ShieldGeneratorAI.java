@@ -48,6 +48,10 @@ public abstract class ShieldGeneratorAI extends GeneralNpcAI {
 
 	protected abstract void handleVortexSpawn();
 
+	public ShieldGeneratorAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	public boolean canThink() {
 		return false;

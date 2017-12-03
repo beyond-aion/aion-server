@@ -4,6 +4,7 @@ import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAG
 
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.house.House;
 import com.aionemu.gameserver.services.HousingService;
@@ -20,6 +21,10 @@ import ai.ActionItemNpcAI;
  */
 @AIName("studioportal")
 public class StudioPortalAI extends ActionItemNpcAI {
+
+	public StudioPortalAI(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	public boolean onDialogSelect(Player player, int dialogActionId, int questId, int extendedRewardIndex) {

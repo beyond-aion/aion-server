@@ -25,6 +25,10 @@ public class KaluvaAI extends SummonerAI {
 
 	private boolean canThink = true;
 
+	public KaluvaAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	protected void handleIndividualSpawnedSummons(Percentage percent) {
 		spawn();

@@ -17,6 +17,10 @@ import ai.ActionItemNpcAI;
 @AIName("drana_lump")
 public class DranaLumpAI extends ActionItemNpcAI {
 
+	public DranaLumpAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	public void handleCreatureDetected(Creature creature) {
 		if (creature instanceof Npc) {

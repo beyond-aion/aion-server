@@ -1,6 +1,7 @@
 package ai.instance.kamarBf;
 
 import com.aionemu.gameserver.ai.AIName;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -14,6 +15,10 @@ import ai.portals.PortalAI;
 public class KamarTeleportAI extends PortalAI {
 
 	protected int remainingUses;
+
+	public KamarTeleportAI(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	protected void handleSpawned() {

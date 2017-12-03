@@ -27,10 +27,13 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 @AIName("siege_drill")
 public class SiegeDrill extends NpcAI {
 
-
 	protected int startBarAnimation = 1;
 	protected int cancelBarAnimation = 2;
 	private AtomicBoolean isUsed = new AtomicBoolean(false);
+
+	public SiegeDrill(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	public int modifyDamage(Creature attacker, int damage, Effect effect) {
@@ -53,7 +56,7 @@ public class SiegeDrill extends NpcAI {
 
 	@Override
 	protected void handleAttack(Creature creature) {
-		//do nothing
+		// do nothing
 	}
 
 	protected void handleUseItemStart(final Player player) {

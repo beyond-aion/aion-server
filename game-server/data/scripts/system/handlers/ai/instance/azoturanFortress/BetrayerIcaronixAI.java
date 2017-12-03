@@ -18,6 +18,10 @@ public class BetrayerIcaronixAI extends AggressiveNpcAI {
 
 	private AtomicBoolean isStartEvent = new AtomicBoolean();
 
+	public BetrayerIcaronixAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	protected void handleAttack(Creature creature) {
 		super.handleAttack(creature);

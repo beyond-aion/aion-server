@@ -3,6 +3,7 @@ package ai.instance.dredgion;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.event.AIEventType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 
 import ai.OneDmgNoActionAI;
 
@@ -13,6 +14,10 @@ import ai.OneDmgNoActionAI;
  */
 @AIName("surkana")
 public class SurkanaAI extends OneDmgNoActionAI {
+
+	public SurkanaAI(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	protected void handleAttack(Creature creature) {

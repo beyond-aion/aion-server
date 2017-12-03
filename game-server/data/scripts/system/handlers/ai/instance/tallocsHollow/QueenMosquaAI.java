@@ -26,6 +26,10 @@ public class QueenMosquaAI extends SummonerAI {
 
 	private boolean isHome = true;
 
+	public QueenMosquaAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	protected void handleCreatureAggro(Creature creature) {
 		super.handleCreatureAggro(creature);

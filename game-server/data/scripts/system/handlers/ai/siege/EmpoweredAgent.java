@@ -32,16 +32,20 @@ import ai.AggressiveNpcAI;
  */
 @AIName("empowered_agent")
 public class EmpoweredAgent extends AggressiveNpcAI {
-	
+
+	public EmpoweredAgent(Npc owner) {
+		super(owner);
+	}
+
 	private final List<Integer> guardIds = new ArrayList<>();
 	private final List<Integer> percents = new ArrayList<>();
 	private boolean canThink = true;
-	
+
 	@Override
 	public boolean canThink() {
 		return canThink;
 	}
-	
+
 	@Override
 	protected void handleSpawned() {
 		super.handleSpawned();
@@ -50,21 +54,21 @@ public class EmpoweredAgent extends AggressiveNpcAI {
 		EmoteManager.emoteStopAttacking(getOwner());
 		switch (getOwner().getNpcId()) {
 			case 235064:
-				Collections.addAll(guardIds, new Integer[] {235334, 235335, 235336, 235337, 235338, 235339});
+				Collections.addAll(guardIds, new Integer[] { 235334, 235335, 235336, 235337, 235338, 235339 });
 				break;
 			case 235065:
-				Collections.addAll(guardIds, new Integer[] {235340, 235341, 235342, 235343, 235344, 235345});
+				Collections.addAll(guardIds, new Integer[] { 235340, 235341, 235342, 235343, 235344, 235345 });
 				break;
 		}
-		Collections.addAll(percents, new Integer[] {80, 70, 60, 50, 40, 30, 25, 20, 5});
+		Collections.addAll(percents, new Integer[] { 80, 70, 60, 50, 40, 30, 25, 20, 5 });
 	}
-	
+
 	@Override
 	protected void handleAttack(Creature creature) {
 		super.handleAttack(creature);
 		checkPercentage(getLifeStats().getHpPercentage());
 	}
-	
+
 	private synchronized void checkPercentage(int hpPercentage) {
 		for (Integer percent : percents) {
 			if (hpPercentage <= percent) {
@@ -88,7 +92,7 @@ public class EmpoweredAgent extends AggressiveNpcAI {
 			}
 		}
 	}
-	
+
 	@Override
 	protected void handleMoveArrived() {
 		super.handleMoveArrived();
@@ -98,19 +102,19 @@ public class EmpoweredAgent extends AggressiveNpcAI {
 		int step = getOwner().getMoveController().getCurrentStep().getStepIndex();
 		int stop = 0;
 		switch (getOwner().getNpcId()) {
-		case 235064:
-			stop = 48;
-			break;
-		case 235065:
-			stop = 37;
-			break;
+			case 235064:
+				stop = 48;
+				break;
+			case 235065:
+				stop = 37;
+				break;
 		}
 		if (stop == step) {
 			ThreadPoolManager.getInstance().schedule(() -> onDestinationArrived(), 5000);
-			
+
 		}
 	}
-	
+
 	private void onDestinationArrived() {
 		getSpawnTemplate().setWalkerId(null);
 		getSpawnTemplate().setX(getOwner().getX());
@@ -122,21 +126,21 @@ public class EmpoweredAgent extends AggressiveNpcAI {
 		onAddHateEvent();
 		onReactiveThinking();
 	}
-	
+
 	private void onAddHateEvent() {
 		Npc target = null;
 		switch (getOwner().getNpcId()) {
-			case 235064: //Veille
+			case 235064: // Veille
 				target = getOwner().getPosition().getWorldMapInstance().getNpc(235065);
 				break;
-			case 235065: //Mastarius
+			case 235065: // Mastarius
 				target = getOwner().getPosition().getWorldMapInstance().getNpc(235064);
 				break;
 		}
 		if (target != null)
 			getOwner().getAggroList().addHate(target, Integer.MAX_VALUE / 2);
 	}
-	
+
 	private void onReactiveThinking() {
 		canThink = true;
 		Creature creature = getAggroList().getMostHated();
@@ -157,7 +161,7 @@ public class EmpoweredAgent extends AggressiveNpcAI {
 			PacketSendUtility.broadcastPacket(getOwner(), new SM_EMOTION(getOwner(), EmotionType.START_EMOTE2, 0, getOwner().getObjectId()));
 		}
 	}
-	
+
 	private void onGuardSpawnEvent() {
 		int worldId = getOwner().getWorldId();
 		float guardAmount = getOwner().getAggroList().getList().size() / 2.5f;
@@ -165,13 +169,13 @@ public class EmpoweredAgent extends AggressiveNpcAI {
 			guardAmount = 6;
 		for (int i = 0; i < guardAmount; i++) {
 			Point3D pos = getRndPos();
-			//TODO: change to dynamic siegeID
-			SiegeSpawnTemplate template = SpawnEngine.newSiegeSpawn(worldId, Rnd.get(guardIds), 8011, SiegeRace.BALAUR, SiegeModType.SIEGE,
-				pos.getX(), pos.getY(), pos.getZ(), (byte) 0);
+			// TODO: change to dynamic siegeID
+			SiegeSpawnTemplate template = SpawnEngine.newSiegeSpawn(worldId, Rnd.get(guardIds), 8011, SiegeRace.BALAUR, SiegeModType.SIEGE, pos.getX(),
+				pos.getY(), pos.getZ(), (byte) 0);
 			SpawnEngine.spawnObject(template, 1);
 		}
 	}
-	
+
 	private Point3D getRndPos() {
 		float direction = Rnd.get(0, 199) / 100f;
 		float distance = Rnd.get() * 10;
@@ -180,13 +184,13 @@ public class EmpoweredAgent extends AggressiveNpcAI {
 		WorldPosition p = getPosition();
 		return new Point3D(p.getX() + x1, p.getY() + y1, p.getZ());
 	}
-	
+
 	@Override
 	protected void handleDied() {
 		super.handleDied();
-		
+
 	}
-	
+
 	@Override
 	public boolean ask(AIQuestion question) {
 		switch (question) {

@@ -8,6 +8,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.model.gameobjects.Creature;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 import ai.AggressiveNpcAI;
@@ -21,6 +22,10 @@ public class NightmareLordHeiramuneAI extends AggressiveNpcAI {
 	private AtomicBoolean isHome = new AtomicBoolean(true);
 	private Future<?> spawnTask;
 	protected List<Integer> percents = new ArrayList<>();
+
+	public NightmareLordHeiramuneAI(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	protected void handleSpawned() {

@@ -1,6 +1,7 @@
 package ai.walkers;
 
 import com.aionemu.gameserver.ai.AIName;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 
 import ai.GeneralNpcAI;
@@ -10,6 +11,10 @@ import ai.GeneralNpcAI;
  */
 @AIName("generalrunner")
 public class WalkGeneralRunnerAI extends GeneralNpcAI {
+
+	public WalkGeneralRunnerAI(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	protected void handleMoveArrived() {

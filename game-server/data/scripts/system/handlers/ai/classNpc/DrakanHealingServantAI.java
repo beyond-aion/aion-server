@@ -8,6 +8,7 @@ import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Creature;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
@@ -15,6 +16,10 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
  */
 @AIName("drakanhealingservant")
 public class DrakanHealingServantAI extends NpcAI {
+
+	public DrakanHealingServantAI(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	protected void handleSpawned() {

@@ -10,6 +10,7 @@ import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.Race;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
@@ -36,6 +37,10 @@ public class HiddenBirthdayCakeAI extends ActionItemNpcAI {
 
 	private final static int JEST_SPAWN_CHANCE = 25;
 	private final static int[] JEST_SPAWN_IDS = { 210341, 214732, 210595 };
+
+	public HiddenBirthdayCakeAI(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	protected void handleUseItemFinish(Player player) {

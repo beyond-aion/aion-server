@@ -1,9 +1,14 @@
 package com.aionemu.gameserver.ai;
 
 import java.io.File;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
+import java.lang.reflect.TypeVariable;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.CountDownLatch;
 import java.util.stream.Collectors;
 
@@ -19,6 +24,7 @@ import com.aionemu.gameserver.configs.main.AIConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.GameEngine;
 import com.aionemu.gameserver.model.gameobjects.Creature;
+import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
 
 /**
  * @author ATracer
@@ -27,7 +33,7 @@ public class AIEngine implements GameEngine {
 
 	private static final Logger log = LoggerFactory.getLogger(AIEngine.class);
 	private ScriptManager scriptManager = new ScriptManager();
-	private Map<String, Class<? extends AbstractAI>> aiHandlers = new HashMap<>();
+	private Map<String, Class<? extends AbstractAI<? extends Creature>>> aiHandlers = new HashMap<>();
 
 	private AIEngine() {
 	}
@@ -67,41 +73,83 @@ public class AIEngine implements GameEngine {
 		log.info("AI engine shutdown complete");
 	}
 
-	public void registerAI(Class<? extends AbstractAI> class1) {
-		AIName nameAnnotation = class1.getAnnotation(AIName.class);
+	public void registerAI(Class<AbstractAI<? extends Creature>> aiClass) {
+		AIName nameAnnotation = aiClass.getAnnotation(AIName.class);
 		if (nameAnnotation != null) {
-			aiHandlers.put(nameAnnotation.value(), class1);
+			Class<?> presentClass = aiHandlers.putIfAbsent(nameAnnotation.value(), aiClass);
+			if (presentClass != null)
+				throw new IllegalArgumentException("Duplicate AIs with name " + nameAnnotation.value() + " (" + aiClass + ", " + presentClass + ")");
 		}
 	}
 
-	public final AI setupAI(String name, Creature owner) {
-		AbstractAI aiInstance = null;
-		try {
-			aiInstance = aiHandlers.get(name).newInstance();
-			aiInstance.setOwner(owner);
-			owner.setAi(aiInstance);
-			if (AIConfig.ONCREATE_DEBUG) {
-				aiInstance.setLogging(true);
+	public <T extends Creature> AbstractAI<? extends Creature> newAI(String name, T owner) {
+		AbstractAI<? extends Creature> aiInstance = null;
+		if (name == null) {
+			aiInstance = new DummyAI<>(owner);
+		} else {
+			Class<? extends AbstractAI<? extends Creature>> aiClass = aiHandlers.get(name);
+			if (aiClass == null)
+				throw new IllegalArgumentException("No AI found for name " + name);
+			Constructor<? extends AbstractAI<? extends Creature>> constructor = findConstructor(aiClass, owner.getClass());
+			if (constructor == null)
+				throw new IllegalArgumentException(aiClass + " cannot be instantiated with " + owner.getClass().getSimpleName() + " as the owner");
+			try {
+				aiInstance = constructor.newInstance(owner);
+			} catch (Exception e) {
+				throw new IllegalArgumentException("Could not instantiate AI for class " + aiClass + " (owner: " + owner + ")", e);
 			}
-		} catch (Exception e) {
-			log.error("[AI] AI factory error: " + name, e);
 		}
+		if (AIConfig.ONCREATE_DEBUG)
+			aiInstance.setLogging(true);
 		return aiInstance;
 	}
 
-	private void validateScripts() {
-		Collection<String> npcAINames = DataManager.NPC_DATA.getNpcData().valueCollection().stream().map(npc -> npc.getAi()).distinct().collect(Collectors.toList());
-		for (String name : npcAINames) {
-			try {
-				aiHandlers.get(name).newInstance();
-			} catch (Exception e) {
-				log.error("[AI] AI factory error: " + name, e);
+	private <T> Constructor<T> findConstructor(Class<T> aiClass, Class<? extends Creature> ownerType) {
+		for (@SuppressWarnings("unchecked")
+		Constructor<T> constructor : (Constructor<T>[]) aiClass.getDeclaredConstructors()) {
+			if (constructor.getParameterCount() == 1) {
+				Class<?> constructorParamType = constructor.getParameterTypes()[0];
+				if (constructorParamType.isAssignableFrom(ownerType))
+					return constructor;
 			}
 		}
+		return null;
+	}
+
+	private void validateScripts() {
+		aiHandlers.values().forEach(aiClass -> {
+			Class<? extends Creature> ownerType = findDefaultOwnerType(aiClass);
+			if (ownerType == null)
+				throw new GameServerError("Faulty AI handler: " + aiClass + " is missing generic owner type info");
+			if (findConstructor(aiClass, ownerType) == null)
+				throw new GameServerError(
+					"Faulty AI handler: " + aiClass + " is missing constructor taking owner of type " + ownerType + " as the only argument");
+		});
+		Collection<NpcTemplate> npcTemplates = DataManager.NPC_DATA.getNpcData().valueCollection();
+		Set<String> npcAINames = npcTemplates.stream().filter(t -> t.getAiName() != null).map(NpcTemplate::getAiName).collect(Collectors.toSet());
 		npcAINames.removeAll(aiHandlers.keySet());
-		if (npcAINames.size() > 0) {
-			log.warn("Bad AI names: " + String.join(", ", npcAINames));
+		if (!npcAINames.isEmpty())
+			throw new GameServerError("No AIs could be found for the following npc_template AI names: " + String.join(", ", npcAINames));
+	}
+
+	@SuppressWarnings("unchecked")
+	private Class<? extends Creature> findDefaultOwnerType(Class<? extends AbstractAI<? extends Creature>> aiClass) {
+		Class<?> currentClass = aiClass;
+		while (currentClass.getSuperclass() != AbstractAI.class) {
+			Type genericSuperClass = currentClass.getGenericSuperclass();
+			if (genericSuperClass instanceof ParameterizedType) {
+				ParameterizedType ownerTypeHolder = (ParameterizedType) genericSuperClass;
+				if (ownerTypeHolder.getActualTypeArguments().length == 1) {
+					Type type = ownerTypeHolder.getActualTypeArguments()[0];
+					if (type instanceof TypeVariable<?>)
+						type = ((TypeVariable<?>) type).getBounds()[0];
+					if (type instanceof Class && Creature.class.isAssignableFrom((Class<?>) type))
+						return (Class<? extends Creature>) type;
+				}
+			}
+			currentClass = currentClass.getSuperclass();
 		}
+		return null;
 	}
 
 	public static final AIEngine getInstance() {
@@ -111,5 +159,12 @@ public class AIEngine implements GameEngine {
 	private static class SingletonHolder {
 
 		protected static final AIEngine instance = new AIEngine();
+	}
+
+	private static class DummyAI<T extends Creature> extends AITemplate<T> {
+
+		DummyAI(T owner) {
+			super(owner);
+		}
 	}
 }

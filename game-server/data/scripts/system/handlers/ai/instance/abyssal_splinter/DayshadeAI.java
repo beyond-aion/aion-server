@@ -5,6 +5,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.model.gameobjects.Creature;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 
 import ai.AggressiveNpcAI;
 
@@ -15,6 +16,10 @@ import ai.AggressiveNpcAI;
 public class DayshadeAI extends AggressiveNpcAI {
 
 	private AtomicBoolean isHome = new AtomicBoolean(true);
+
+	public DayshadeAI(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	protected void handleAttack(Creature creature) {

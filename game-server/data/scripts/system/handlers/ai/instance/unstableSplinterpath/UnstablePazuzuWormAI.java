@@ -2,6 +2,7 @@ package ai.instance.unstableSplinterpath;
 
 import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 import ai.AggressiveNpcAI;
@@ -11,6 +12,10 @@ import ai.AggressiveNpcAI;
  */
 @AIName("unstablepazuzuworm")
 public class UnstablePazuzuWormAI extends AggressiveNpcAI {
+
+	public UnstablePazuzuWormAI(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	protected void handleSpawned() {

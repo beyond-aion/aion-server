@@ -1,6 +1,7 @@
 package ai.instance.drakenspire;
 
 import com.aionemu.gameserver.ai.AIName;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 
 import ai.AggressiveNpcAI;
@@ -10,6 +11,10 @@ import ai.AggressiveNpcAI;
  */
 @AIName("beritra_human_lv3")
 public class Lv3HumanBeritraAI extends AggressiveNpcAI {
+
+	public Lv3HumanBeritraAI(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	protected void handleSpawned() {

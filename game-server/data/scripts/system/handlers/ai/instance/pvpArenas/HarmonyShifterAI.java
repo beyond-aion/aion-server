@@ -20,6 +20,10 @@ public class HarmonyShifterAI extends ShifterAI {
 
 	private AtomicBoolean isRewarded = new AtomicBoolean(false);
 
+	public HarmonyShifterAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	protected void handleUseItemFinish(Player player) {
 		super.handleUseItemFinish(player);

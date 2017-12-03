@@ -13,6 +13,10 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 @AIName("marabata_controller")
 public class MarabataControllerAI extends NpcAI {
 
+	public MarabataControllerAI(Npc owner) {
+		super(owner);
+	}
+
 	private Npc getBoss() {
 		Npc npc = null;
 		switch (getNpcId()) {

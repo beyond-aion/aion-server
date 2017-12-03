@@ -5,6 +5,7 @@ import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.model.DialogPage;
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Item;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.services.teleport.TeleportService;
@@ -15,6 +16,10 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 @AIName("dsiportal")
 public class StartTeleportAI extends NpcAI {
+
+	public StartTeleportAI(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	protected void handleDialogStart(Player player) {

@@ -15,6 +15,10 @@ import com.aionemu.gameserver.world.geo.GeoService;
 @AIName("simple_abyssguard")
 public class AbyssGuardSimpleAI extends AggressiveNpcAI {
 
+	public AbyssGuardSimpleAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	protected boolean canHandleEvent(AIEventType eventType) {
 		switch (eventType) {

@@ -24,6 +24,10 @@ public class MagePreceptorAI extends AggressiveNpcAI {
 
 	private List<Integer> percents = new ArrayList<>();
 
+	public MagePreceptorAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	public void handleSpawned() {
 		super.handleSpawned();

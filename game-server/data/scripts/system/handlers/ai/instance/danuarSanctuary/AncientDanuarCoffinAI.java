@@ -3,6 +3,7 @@ package ai.instance.danuarSanctuary;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.model.gameobjects.Creature;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.skillengine.model.Effect;
 
 import ai.GeneralNpcAI;
@@ -12,6 +13,10 @@ import ai.GeneralNpcAI;
  */
 @AIName("ancientdanuarcoffin")
 public class AncientDanuarCoffinAI extends GeneralNpcAI {
+
+	public AncientDanuarCoffinAI(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	public boolean canThink() {

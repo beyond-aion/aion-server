@@ -20,6 +20,10 @@ import ai.GeneralNpcAI;
 @AIName("suramathetraitor")
 public class SuramaTheTraitorAI extends GeneralNpcAI {
 
+	public SuramaTheTraitorAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	protected void handleSpawned() {
 		super.handleSpawned();

@@ -2,6 +2,7 @@ package ai.worlds.panesterra.ahserionsflight;
 
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.poll.AIQuestion;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.templates.spawns.panesterra.AhserionsFlightSpawnTemplate;
 
 import ai.AggressiveNpcAI;
@@ -11,6 +12,10 @@ import ai.AggressiveNpcAI;
  */
 @AIName("ahserion_aggressive_npc")
 public class AhserionNpcAI extends AggressiveNpcAI {
+
+	public AhserionNpcAI(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	public boolean ask(AIQuestion question) {

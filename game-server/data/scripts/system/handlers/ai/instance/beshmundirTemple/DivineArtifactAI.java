@@ -3,6 +3,7 @@ package ai.instance.beshmundirTemple;
 import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.model.gameobjects.Creature;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 import ai.AggressiveNpcAI;
@@ -14,6 +15,10 @@ import ai.AggressiveNpcAI;
 public class DivineArtifactAI extends AggressiveNpcAI {
 
 	private boolean cooldown = false;
+
+	public DivineArtifactAI(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	protected void handleAttack(Creature creature) {

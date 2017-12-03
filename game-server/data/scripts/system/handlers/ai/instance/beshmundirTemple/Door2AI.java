@@ -6,6 +6,7 @@ import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.model.DialogPage;
 import com.aionemu.gameserver.model.Race;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -17,6 +18,10 @@ import ai.ActionItemNpcAI;
  */
 @AIName("door2")
 public class Door2AI extends ActionItemNpcAI {
+
+	public Door2AI(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	protected void handleDialogStart(Player player) {

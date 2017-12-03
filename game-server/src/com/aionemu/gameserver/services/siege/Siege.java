@@ -6,7 +6,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.gameserver.ai.AbstractAI;
 import com.aionemu.gameserver.configs.main.SiegeConfig;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -148,8 +147,7 @@ public abstract class Siege<SL extends SiegeLocation> {
 		getBoss().getAggroList().addEventListener(siegeBossDoAddDamageListener);
 
 		// Add die listener - we should stop the siege when general dies
-		AbstractAI ai = (AbstractAI) getBoss().getAi();
-		ai.addEventListener(siegeBossDeathListener);
+		getBoss().getAi().addEventListener(siegeBossDeathListener);
 	}
 
 	protected void unregisterSiegeBossListeners() {
@@ -157,8 +155,7 @@ public abstract class Siege<SL extends SiegeLocation> {
 		getBoss().getAggroList().removeEventListener(siegeBossDoAddDamageListener);
 
 		// Add die listener - we should stop the siege when general dies
-		AbstractAI ai = (AbstractAI) getBoss().getAi();
-		ai.removeEventListener(siegeBossDeathListener);
+		getBoss().getAi().removeEventListener(siegeBossDeathListener);
 	}
 
 	protected void initSiegeBoss() {

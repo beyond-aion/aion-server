@@ -152,7 +152,6 @@
 	<xs:complexType name="SpawnSpotTemplate">
 		<xs:sequence>
 			<xs:element name="temporary_spawn" type="TemporarySpawn" minOccurs="0" maxOccurs="1"/>
-			<xs:element name="model" type="SpawnModel" minOccurs="0" maxOccurs="1"/>
 		</xs:sequence>
 		<xs:attribute name="x" type="xs:float"/>
 		<xs:attribute name="y" type="xs:float"/>
@@ -165,9 +164,6 @@
 		<xs:attribute name="fly" type="xs:int" use="optional" default="0"/>
 		<xs:attribute name="anchor" type="xs:string"/>
 		<xs:attribute name="state" type="xs:int" use="optional" default="0"/>
-	</xs:complexType>
-	<xs:complexType name="SpawnModel">
-		<xs:attribute name="tribe" type="TribeClass"/>
 		<xs:attribute name="ai" type="xs:string"/>
 	</xs:complexType>
 	<xs:complexType name="TemporarySpawn">

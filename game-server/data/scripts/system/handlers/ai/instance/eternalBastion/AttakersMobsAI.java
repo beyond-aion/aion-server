@@ -19,6 +19,10 @@ import ai.AggressiveNpcAI;
 @AIName("eb_attakersMobs")
 public class AttakersMobsAI extends AggressiveNpcAI {
 
+	public AttakersMobsAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	protected void handleMoveValidate() {
 		super.handleMoveValidate();
@@ -32,8 +36,8 @@ public class AttakersMobsAI extends AggressiveNpcAI {
 	protected void handleCreatureMoved(Creature creature) {
 		Npc generalE = getPosition().getWorldMapInstance().getNpc(209516);
 		Npc generalA = getPosition().getWorldMapInstance().getNpc(209517);
-		if (generalE != null && !getOwner().getAggroList().isHating(generalE) && PositionUtil.isInRange(getOwner(), generalE, 20) || generalA != null
-			&& !getOwner().getAggroList().isHating(generalA) && PositionUtil.isInRange(getOwner(), generalA, 20)) {
+		if (generalE != null && !getOwner().getAggroList().isHating(generalE) && PositionUtil.isInRange(getOwner(), generalE, 20)
+			|| generalA != null && !getOwner().getAggroList().isHating(generalA) && PositionUtil.isInRange(getOwner(), generalA, 20)) {
 			getSpawnTemplate().setWalkerId(null);
 			WalkManager.stopWalking(this);
 			if (generalE != null) {

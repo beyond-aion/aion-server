@@ -4,6 +4,7 @@ import static com.aionemu.gameserver.model.DialogAction.*;
 
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.model.DialogPage;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.siege.SiegeNpc;
 import com.aionemu.gameserver.model.siege.FortressLocation;
@@ -22,6 +23,10 @@ import ai.GeneralNpcAI;
  */
 @AIName("mercenary")
 public class MercenaryAI extends GeneralNpcAI {
+
+	public MercenaryAI(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	protected void handleDialogStart(Player player) {

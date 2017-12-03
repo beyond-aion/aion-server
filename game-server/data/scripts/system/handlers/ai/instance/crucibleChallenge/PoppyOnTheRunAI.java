@@ -2,6 +2,7 @@ package ai.instance.crucibleChallenge;
 
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.model.EmotionType;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
@@ -15,6 +16,10 @@ import ai.GeneralNpcAI;
  */
 @AIName("poppyontherun")
 public class PoppyOnTheRunAI extends GeneralNpcAI {
+
+	public PoppyOnTheRunAI(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	public boolean canThink() {

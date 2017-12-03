@@ -8,6 +8,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.model.gameobjects.Creature;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -24,6 +25,10 @@ public class RakshaAI extends AggressiveNpcAI {
 	private AtomicBoolean isAggred = new AtomicBoolean(false);
 	private AtomicBoolean isStartedEvent = new AtomicBoolean(false);
 	private Future<?> phaseTask;
+
+	public RakshaAI(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	protected void handleDespawned() {

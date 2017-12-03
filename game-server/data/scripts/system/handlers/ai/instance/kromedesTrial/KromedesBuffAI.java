@@ -2,6 +2,7 @@ package ai.instance.kromedesTrial;
 
 import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.skillengine.SkillEngine;
@@ -14,6 +15,10 @@ import ai.ActionItemNpcAI;
  */
 @AIName("krbuff")
 public class KromedesBuffAI extends ActionItemNpcAI {
+
+	public KromedesBuffAI(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	protected void handleUseItemFinish(Player player) {

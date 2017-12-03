@@ -9,6 +9,7 @@ import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Creature;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_USE_OBJECT;
@@ -26,6 +27,10 @@ import ai.GeneralNpcAI;
 public class ShugoMorpher extends GeneralNpcAI {
 
 	private AtomicBoolean started = new AtomicBoolean(false);
+
+	public ShugoMorpher(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	protected void handleAttack(Creature creature) {

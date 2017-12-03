@@ -3,13 +3,14 @@ package ai.siege;
 import com.aionemu.gameserver.ai.AILogger;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.AIState;
-import com.aionemu.gameserver.ai.AISummon;
+import com.aionemu.gameserver.ai.AITemplate;
 import com.aionemu.gameserver.ai.handler.FollowEventHandler;
 import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.controllers.SiegeWeaponController;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.Creature;
+import com.aionemu.gameserver.model.gameobjects.Summon;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.summons.SummonMode;
 import com.aionemu.gameserver.model.templates.npcskill.NpcSkillTemplate;
@@ -20,12 +21,16 @@ import com.aionemu.gameserver.services.summons.SummonsService;
  * @author xTz
  */
 @AIName("siege_weapon")
-public class SiegeWeaponAI extends AISummon {
+public class SiegeWeaponAI extends AITemplate<Summon> {
 
 	private long lastAttackTime;
 	private int skill;
 	private int skillLvl;
 	private int duration;
+
+	public SiegeWeaponAI(Summon owner) {
+		super(owner);
+	}
 
 	@Override
 	protected void handleSpawned() {
@@ -34,7 +39,7 @@ public class SiegeWeaponAI extends AISummon {
 		NpcSkillTemplate skillTemplate = getNpcSkillTemplates().getNpcSkills().get(0);
 		skill = skillTemplate.getSkillId();
 		skillLvl = skillTemplate.getSkillLevel();
-		duration = DataManager.SKILL_DATA.getSkillTemplate(this.skill).getDuration();
+		duration = DataManager.SKILL_DATA.getSkillTemplate(skill).getDuration();
 	}
 
 	@Override
@@ -61,17 +66,12 @@ public class SiegeWeaponAI extends AISummon {
 
 	@Override
 	protected void handleMoveValidate() {
-		this.getOwner().getController().onMove();
-		getMoveController().moveToTargetObject();
-	}
-
-	@Override
-	protected SiegeWeaponController getController() {
-		return (SiegeWeaponController) super.getController();
+		getOwner().getController().onMove();
+		getOwner().getMoveController().moveToTargetObject();
 	}
 
 	private NpcSkillTemplates getNpcSkillTemplates() {
-		return getController().getNpcSkillTemplates();
+		return ((SiegeWeaponController) getOwner().getController()).getNpcSkillTemplates();
 	}
 
 	@Override

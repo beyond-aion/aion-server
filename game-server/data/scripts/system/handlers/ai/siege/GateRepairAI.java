@@ -15,6 +15,10 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 @AIName("siege_gaterepair")
 public class GateRepairAI extends NpcAI {
 
+	public GateRepairAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	protected void handleDialogStart(final Player player) {
 		RequestResponseHandler<Npc> gaterepair = new RequestResponseHandler<Npc>(getOwner()) {

@@ -36,6 +36,10 @@ import com.aionemu.gameserver.world.World;
 @AIName("anohas_sword")
 public class AnohasSwordAI extends NpcAI {
 
+	public AnohasSwordAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	protected void handleDialogStart(Player player) {
 		int siegeId = SiegeService.getInstance().getFortress(7011).getLegionId();
@@ -88,7 +92,7 @@ public class AnohasSwordAI extends NpcAI {
 				else
 					startQuest(receiver, raceSummoned == Race.ELYOS ? 13818 : 23818);
 			});
-		} , 30 * 60000);
+		}, 30 * 60000);
 		return true;
 	}
 

@@ -14,6 +14,10 @@ public class TakunGojiraAI extends AggressiveNpcAI {
 
 	private Npc counterpart;
 
+	public TakunGojiraAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	public void handleSpawned() {
 		super.handleSpawned();

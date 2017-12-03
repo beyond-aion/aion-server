@@ -10,6 +10,7 @@ import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.controllers.observer.ItemUseObserver;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.TaskId;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_USE_OBJECT;
@@ -26,6 +27,10 @@ public class ActionItemNpcAI extends NpcAI {
 	protected final int startBarAnimation = 1;
 	protected final int cancelBarAnimation = 2;
 	private final List<ItemUseObserver> observers = new ArrayList<>();
+
+	public ActionItemNpcAI(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	protected void handleDialogStart(Player player) {

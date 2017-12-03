@@ -14,6 +14,10 @@ public class HarlequinLordReshkaSummonAI extends AggressiveNpcAI {
 
 	private Npc boss;
 
+	public HarlequinLordReshkaSummonAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	protected void handleSpawned() {
 		boss = getPosition().getWorldMapInstance().getNpc(233453);

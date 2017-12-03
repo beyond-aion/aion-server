@@ -14,6 +14,10 @@ import ai.GeneralNpcAI;
 @AIName("dainatoum_healer")
 public class DainatumHealerAI extends GeneralNpcAI {
 
+	public DainatumHealerAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	public boolean canThink() {
 		return false;

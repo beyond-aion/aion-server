@@ -13,6 +13,10 @@ import ai.AggressiveNpcAI;
 @AIName("petriscale")
 public class PetriscaleAI extends AggressiveNpcAI {
 
+	public PetriscaleAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	protected void handleAttack(Creature creature) {
 		super.handleAttack(creature);

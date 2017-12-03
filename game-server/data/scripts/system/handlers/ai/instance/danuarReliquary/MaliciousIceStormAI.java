@@ -3,6 +3,7 @@ package ai.instance.danuarReliquary;
 import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.NpcAI;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
@@ -12,6 +13,10 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
  */
 @AIName("malicious_ice_storm")
 public class MaliciousIceStormAI extends NpcAI {
+
+	public MaliciousIceStormAI(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	protected void handleSpawned() {

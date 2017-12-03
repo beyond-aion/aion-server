@@ -14,6 +14,10 @@ import ai.AggressiveNpcAI;
 @AIName("pieceofmidnight")
 public class PieceOfMidnightAI extends AggressiveNpcAI {
 
+	public PieceOfMidnightAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	protected void handleCreatureSee(Creature creature) {
 		checkDistance(this, creature);

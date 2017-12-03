@@ -27,6 +27,10 @@ public class ReianBomberAI extends GeneralNpcAI {
 	private AtomicBoolean hasArrivedBoss = new AtomicBoolean(false);
 	private int position = 1;
 
+	public ReianBomberAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	protected void handleSpawned() {
 		super.handleSpawned();

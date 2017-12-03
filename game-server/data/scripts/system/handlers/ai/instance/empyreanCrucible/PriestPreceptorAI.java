@@ -25,6 +25,10 @@ public class PriestPreceptorAI extends AggressiveNpcAI {
 	private AtomicBoolean is75EventStarted = new AtomicBoolean(false);
 	private AtomicBoolean is25EventStarted = new AtomicBoolean(false);
 
+	public PriestPreceptorAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	public void handleSpawned() {
 		super.handleSpawned();

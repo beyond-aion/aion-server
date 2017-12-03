@@ -2,6 +2,7 @@ package ai.worlds.inggison;
 
 import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.ai.Percentage;
 import com.aionemu.gameserver.model.templates.ai.SummonGroup;
@@ -13,6 +14,10 @@ import ai.SummonerAI;
  */
 @AIName("omega")
 public class OmegaAI extends SummonerAI {
+
+	public OmegaAI(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	protected void handleBeforeSpawn(Percentage percent) {

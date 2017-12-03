@@ -29,6 +29,10 @@ public class UnstableYamenesAI extends AggressiveNpcAI {
 	private Future<?> portalTask = null;
 	private AtomicBoolean isStart = new AtomicBoolean(false);
 
+	public UnstableYamenesAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	protected void handleSpawned() {
 		addPercent();

@@ -15,6 +15,10 @@ public class KamarBossesAI extends AggressiveNpcAI {
 
 	private Npc flag;
 
+	public KamarBossesAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	protected void handleAttack(Creature creature) {
 		super.handleAttack(creature);

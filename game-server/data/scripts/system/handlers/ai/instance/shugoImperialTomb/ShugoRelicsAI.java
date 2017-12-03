@@ -7,6 +7,7 @@ import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.configs.main.GroupConfig;
 import com.aionemu.gameserver.model.ChatType;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_MESSAGE;
@@ -24,6 +25,10 @@ import ai.ActionItemNpcAI;
  */
 @AIName("shugo_relic")
 public class ShugoRelicsAI extends ActionItemNpcAI {
+
+	public ShugoRelicsAI(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	protected void handleUseItemFinish(Player player) {
@@ -73,6 +78,6 @@ public class ShugoRelicsAI extends ActionItemNpcAI {
 	}
 
 	private int getHighestLevel(Collection<Player> players) {
-		return players.stream().mapToInt(p -> p.getLevel()).max().getAsInt(); 
+		return players.stream().mapToInt(p -> p.getLevel()).max().getAsInt();
 	}
 }

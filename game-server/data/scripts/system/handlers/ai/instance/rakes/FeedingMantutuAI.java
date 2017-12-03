@@ -14,6 +14,10 @@ import ai.ShifterAI;
 @AIName("feeding_mantutu")
 public class FeedingMantutuAI extends ShifterAI {
 
+	public FeedingMantutuAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	protected void handleDialogStart(Player player) {
 		WorldMapInstance instance = getPosition().getWorldMapInstance();

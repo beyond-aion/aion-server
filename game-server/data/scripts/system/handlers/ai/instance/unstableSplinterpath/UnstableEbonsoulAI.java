@@ -24,6 +24,10 @@ public class UnstableEbonsoulAI extends AggressiveNpcAI {
 	private AtomicBoolean isHome = new AtomicBoolean(true);
 	private Future<?> skillTask;
 
+	public UnstableEbonsoulAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	protected void handleAttack(Creature creature) {
 		super.handleAttack(creature);

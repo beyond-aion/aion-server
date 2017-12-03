@@ -5,7 +5,6 @@ import java.util.concurrent.Future;
 import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.AIState;
-import com.aionemu.gameserver.ai.AbstractAI;
 import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.ai.manager.EmoteManager;
 import com.aionemu.gameserver.ai.manager.WalkManager;
@@ -28,6 +27,10 @@ public class EnragedNightmareAI extends AggressiveNpcAI {
 
 	private Future<?> skillTask;
 	private Npc boss;
+
+	public EnragedNightmareAI(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	protected void handleCreatureSee(Creature creature) {
@@ -62,13 +65,13 @@ public class EnragedNightmareAI extends AggressiveNpcAI {
 		super.handleSpawned();
 
 		if (getOwner().getPosition().getX() == 521.585f && getOwner().getPosition().getY() == 510.16528f) {
-			((AbstractAI) getOwner().getAi()).setStateIfNot(AIState.WALKING);
+			getOwner().getAi().setStateIfNot(AIState.WALKING);
 			WalkManager.startWalking((NpcAI) getOwner().getAi());
 			getOwner().setState(CreatureState.ACTIVE, true);
 			getOwner().getMoveController().moveToPoint(521.60913f, 551.00684f, 198.75f);
 			PacketSendUtility.broadcastPacket(getOwner(), new SM_EMOTION(getOwner(), EmotionType.START_EMOTE2, 0, getOwner().getObjectId()));
 		} else {
-			((AbstractAI) getOwner().getAi()).setStateIfNot(AIState.WALKING);
+			getOwner().getAi().setStateIfNot(AIState.WALKING);
 			WalkManager.startWalking((NpcAI) getOwner().getAi());
 			getOwner().setState(CreatureState.ACTIVE, true);
 			getOwner().getMoveController().moveToPoint(525.3831f, 585.3808f, 199.0476f);

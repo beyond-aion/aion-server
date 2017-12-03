@@ -3,6 +3,7 @@ package ai.siege;
 import java.util.function.Consumer;
 
 import com.aionemu.gameserver.ai.AIName;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.siege.SiegeNpc;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_FORTRESS_INFO;
@@ -16,6 +17,10 @@ import ai.GeneralNpcAI;
  */
 @AIName("siege_teleporter")
 public class SiegeTeleporterAI extends GeneralNpcAI {
+
+	public SiegeTeleporterAI(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	protected void handleDespawned() {

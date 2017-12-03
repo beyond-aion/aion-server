@@ -29,6 +29,10 @@ public class MuraganAI extends GeneralNpcAI {
 
 	private boolean isMove;
 
+	public MuraganAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	protected void handleSpawned() {
 		super.handleSpawned();

@@ -8,6 +8,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.model.gameobjects.Creature;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -26,6 +27,10 @@ public class RM1337AI extends AggressiveNpcAI {
 	private AtomicBoolean isHome = new AtomicBoolean(true);
 	private AtomicBoolean isEventStarted = new AtomicBoolean(false);
 	private Future<?> task1, task2;
+
+	public RM1337AI(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	public void handleSpawned() {

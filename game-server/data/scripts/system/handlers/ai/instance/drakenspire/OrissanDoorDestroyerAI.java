@@ -14,6 +14,10 @@ import ai.GeneralNpcAI;
 @AIName("orissan_door_destroyer")
 public class OrissanDoorDestroyerAI extends GeneralNpcAI {
 
+	public OrissanDoorDestroyerAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	protected void handleSpawned() {
 		super.handleSpawned();

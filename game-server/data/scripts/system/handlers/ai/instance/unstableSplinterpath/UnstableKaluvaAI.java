@@ -26,6 +26,10 @@ public class UnstableKaluvaAI extends AggressiveNpcAI {
 	private boolean canThink = true;
 	private boolean isInMove = false;
 
+	public UnstableKaluvaAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	protected void handleAttack(Creature creature) {
 		super.handleAttack(creature);

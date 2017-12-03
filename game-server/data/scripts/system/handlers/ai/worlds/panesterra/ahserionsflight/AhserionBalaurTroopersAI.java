@@ -2,6 +2,7 @@ package ai.worlds.panesterra.ahserionsflight;
 
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.NpcAI;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.templates.spawns.panesterra.AhserionsFlightSpawnTemplate;
 import com.aionemu.gameserver.services.panesterra.ahserion.AhserionRaid;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
@@ -11,6 +12,10 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
  */
 @AIName("ahserion_troopers")
 public class AhserionBalaurTroopersAI extends NpcAI {
+
+	public AhserionBalaurTroopersAI(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	public void handleSpawned() {

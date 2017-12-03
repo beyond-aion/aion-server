@@ -13,6 +13,10 @@ import ai.AggressiveNpcAI;
 @AIName("kinquid_debuff")
 public class KinquidDebuffAI extends AggressiveNpcAI {
 
+	public KinquidDebuffAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	protected void handleCreatureMoved(Creature creature) {
 		super.handleCreatureMoved(creature);

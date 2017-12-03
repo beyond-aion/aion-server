@@ -5,6 +5,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.model.gameobjects.Creature;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.skillengine.SkillEngine;
@@ -22,6 +23,10 @@ public class CaptainMuruganAI extends AggressiveNpcAI {
 	private AtomicBoolean isAggred = new AtomicBoolean(false);
 	private Future<?> task;
 	private Future<?> specialSkillTask;
+
+	public CaptainMuruganAI(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	protected void handleAttack(Creature creature) {

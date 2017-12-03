@@ -33,6 +33,10 @@ public class TiamatAI extends AggressiveNpcAI {
 	private Future<?> sinkingTask;
 	private int variable = 95;
 
+	public TiamatAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	protected void handleAttack(Creature creature) {
 		super.handleAttack(creature);

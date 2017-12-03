@@ -3,6 +3,7 @@ package ai.instance.beshmundirTemple;
 import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.model.gameobjects.Creature;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 import ai.AggressiveNpcAI;
@@ -15,6 +16,10 @@ public class VirhanaTheGreatAI extends AggressiveNpcAI {
 
 	private boolean isStart;
 	private int count;
+
+	public VirhanaTheGreatAI(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	public void handleAttack(Creature creature) {

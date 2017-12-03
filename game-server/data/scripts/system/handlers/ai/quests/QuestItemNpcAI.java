@@ -8,6 +8,7 @@ import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.handler.CreatureEventHandler;
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Creature;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.questEngine.QuestEngine;
@@ -26,6 +27,10 @@ import ai.ActionItemNpcAI;
 public class QuestItemNpcAI extends ActionItemNpcAI {
 
 	private List<Player> registeredPlayers = new ArrayList<>();
+
+	public QuestItemNpcAI(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	protected void handleDialogStart(Player player) {

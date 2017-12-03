@@ -3,6 +3,7 @@ package ai.worlds.levinshor;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.handler.TargetEventHandler;
 import com.aionemu.gameserver.model.TaskId;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 import ai.AggressiveNpcAI;
@@ -12,6 +13,10 @@ import ai.AggressiveNpcAI;
  */
 @AIName("LDF4_Advance_Ancient_Monster")
 public class AncientMonsterAI extends AggressiveNpcAI {
+
+	public AncientMonsterAI(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	protected void handleSpawned() {

@@ -1,6 +1,7 @@
 package ai.walkers;
 
 import com.aionemu.gameserver.ai.AIName;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 
 /**
  * @author Rolandas
@@ -8,4 +9,7 @@ import com.aionemu.gameserver.ai.AIName;
 @AIName("ulgornspriggs1")
 public class UlgornSpriggs1AI extends WalkGeneralRunnerAI {
 
+	public UlgornSpriggs1AI(Npc owner) {
+		super(owner);
+	}
 }

@@ -9,6 +9,7 @@ import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Kisk;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUESTION_WINDOW;
 import com.aionemu.gameserver.services.KiskService;
@@ -21,6 +22,10 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 public class KiskAI extends NpcAI {
 
 	private final int CANCEL_DIALOG_METERS = 5;
+
+	public KiskAI(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	public Kisk getOwner() {

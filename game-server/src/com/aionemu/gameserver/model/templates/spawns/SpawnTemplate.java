@@ -22,7 +22,7 @@ public class SpawnTemplate {
 	private String anchor;
 	private SpawnGroup spawnGroup;
 	private EventTemplate eventTemplate;
-	private SpawnModel model;
+	private String aiName;
 	private int state;
 	private int creatorId;
 	private TemporarySpawn temporarySpawn;
@@ -40,17 +40,17 @@ public class SpawnTemplate {
 		fly = spot.getFly();
 		anchor = spot.getAnchor();
 		walkerIdx = spot.getWalkerIndex();
-		model = spot.getModel();
+		aiName = spot.getAi();
 		state = spot.getState();
 		temporarySpawn = spot.getTemporarySpawn();
 	}
 
 	public SpawnTemplate(SpawnGroup spawnGroup, float x, float y, float z, byte heading, int randWalk, String walkerId, int staticId, int fly) {
-		this(spawnGroup, x, y, z, heading, randWalk, walkerId, staticId, fly, 0);
+		this(spawnGroup, x, y, z, heading, randWalk, walkerId, staticId, fly, 0, null);
 	}
 
 	public SpawnTemplate(SpawnGroup spawnGroup, float x, float y, float z, byte heading, int randWalk, String walkerId, int staticId, int fly,
-		int creatorId) {
+		int creatorId, String aiName) {
 		this.spawnGroup = spawnGroup;
 		this.x = x;
 		this.y = y;
@@ -60,6 +60,7 @@ public class SpawnTemplate {
 		this.walkerId = walkerId;
 		this.staticId = staticId;
 		this.fly = fly;
+		this.aiName = aiName;
 		this.creatorId = creatorId;
 		addTemplate();
 	}
@@ -148,7 +149,6 @@ public class SpawnTemplate {
 		return anchor;
 	}
 
-
 	public boolean isNoRespawn() {
 		return spawnGroup.getRespawnTime() == 0;
 	}
@@ -185,8 +185,8 @@ public class SpawnTemplate {
 		this.eventTemplate = eventTemplate;
 	}
 
-	public SpawnModel getModel() {
-		return model;
+	public String getAiName() {
+		return aiName;
 	}
 
 	public int getState() {

@@ -1,6 +1,7 @@
 package ai.walkers;
 
 import com.aionemu.gameserver.ai.AIName;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 
 import ai.AggressiveNpcAI;
@@ -10,6 +11,10 @@ import ai.AggressiveNpcAI;
  */
 @AIName("aggrorunner")
 public class WalkAggroRunnerAI extends AggressiveNpcAI {
+
+	public WalkAggroRunnerAI(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	protected void handleMoveArrived() {

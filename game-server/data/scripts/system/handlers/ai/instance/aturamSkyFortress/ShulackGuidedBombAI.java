@@ -6,6 +6,7 @@ import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.model.gameobjects.Creature;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
@@ -21,6 +22,10 @@ public class ShulackGuidedBombAI extends AggressiveNpcAI {
 	private boolean isDestroyed;
 	private boolean isHome = true;
 	Future<?> task;
+
+	public ShulackGuidedBombAI(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	protected void handleDespawned() {

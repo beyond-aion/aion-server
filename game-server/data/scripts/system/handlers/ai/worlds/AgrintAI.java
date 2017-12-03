@@ -21,6 +21,10 @@ public class AgrintAI extends OneDmgAI {
 
 	private AtomicBoolean isSpawned = new AtomicBoolean(false);
 
+	public AgrintAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	protected void handleSpawned() {
 		super.handleSpawned();

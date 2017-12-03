@@ -21,6 +21,10 @@ public class ExplosionDeviceAI extends ActionItemNpcAI {
 
 	private List<Npc> bomb = new ArrayList<>();
 
+	public ExplosionDeviceAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	protected void handleUseItemFinish(Player player) {
 		if (checkScroll(player)) {

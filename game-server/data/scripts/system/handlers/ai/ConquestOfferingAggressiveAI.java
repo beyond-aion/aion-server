@@ -15,6 +15,10 @@ public class ConquestOfferingAggressiveAI extends AggressiveNpcAI {
 
 	private Npc spawner;
 
+	public ConquestOfferingAggressiveAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	public void handleSpawned() {
 		super.handleSpawned();
@@ -47,13 +51,14 @@ public class ConquestOfferingAggressiveAI extends AggressiveNpcAI {
 		if (Rnd.chance() < 55) {
 			if (Rnd.chance() < 45) { // spawn a shugo
 				npcId = 856175 + Rnd.get(0, 3);
-			} else { //spawn a portal
+			} else { // spawn a portal
 				npcId = getOwner().getWorldId() == 210050000 ? 833018 : 833021;
 			}
 		}
 
 		if (npcId != 0) {
-			SpawnTemplate template = SpawnEngine.newSingleTimeSpawn(getOwner().getWorldId(), npcId, getOwner().getX() + 0.3f, getOwner().getY() + 0.3f, getOwner().getZ() + 0.2f, getOwner().getHeading());
+			SpawnTemplate template = SpawnEngine.newSingleTimeSpawn(getOwner().getWorldId(), npcId, getOwner().getX() + 0.3f, getOwner().getY() + 0.3f,
+				getOwner().getZ() + 0.2f, getOwner().getHeading());
 			SpawnEngine.spawnObject(template, getOwner().getInstanceId());
 		}
 	}

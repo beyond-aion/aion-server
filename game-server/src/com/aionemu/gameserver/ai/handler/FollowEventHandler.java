@@ -47,7 +47,7 @@ public class FollowEventHandler {
 		}
 	}
 
-	public static boolean isInRange(AbstractAI ai, VisibleObject object) {
+	public static boolean isInRange(AbstractAI<? extends Creature> ai, VisibleObject object) {
 		if (object == null) {
 			return false;
 		}

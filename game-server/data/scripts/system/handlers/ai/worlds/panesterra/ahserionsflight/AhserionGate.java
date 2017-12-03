@@ -2,6 +2,7 @@ package ai.worlds.panesterra.ahserionsflight;
 
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.poll.AIQuestion;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.services.RespawnService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 
@@ -12,6 +13,10 @@ import ai.NoActionAI;
  */
 @AIName("ahserion_gate")
 public class AhserionGate extends NoActionAI {
+
+	public AhserionGate(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	public void handleSpawned() {

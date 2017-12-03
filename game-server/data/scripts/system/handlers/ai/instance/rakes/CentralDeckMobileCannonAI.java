@@ -18,6 +18,10 @@ import ai.ActionItemNpcAI;
 @AIName("centralcannon")
 public class CentralDeckMobileCannonAI extends ActionItemNpcAI {
 
+	public CentralDeckMobileCannonAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	protected void handleUseItemFinish(Player player) {
 		if (!player.getInventory().decreaseByItemId(185000052, 1)) {

@@ -5,7 +5,6 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 
 import org.apache.commons.lang3.StringUtils;
 
-import com.aionemu.gameserver.ai.AIEngine;
 import com.aionemu.gameserver.controllers.NpcController;
 import com.aionemu.gameserver.controllers.movement.NpcMoveController;
 import com.aionemu.gameserver.dataholders.DataManager;
@@ -59,12 +58,6 @@ public class Npc extends Creature {
 		skillList = new NpcSkillList(this);
 		queuedSkills = new ConcurrentLinkedQueue<>();
 		setupStatContainers();
-
-		String aiName = objectTemplate.getAi();
-		if (spawnTemplate.getModel() != null && spawnTemplate.getModel().getAi() != null)
-			aiName = spawnTemplate.getModel().getAi();
-
-		AIEngine.getInstance().setupAI(aiName, this);
 	}
 
 	@Override

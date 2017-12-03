@@ -6,6 +6,7 @@ import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.ai.poll.AIQuestion;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
@@ -16,6 +17,10 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 public class CalindiSummonsAI extends NpcAI {
 
 	private Future<?> task;
+
+	public CalindiSummonsAI(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	protected void handleSpawned() {

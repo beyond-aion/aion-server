@@ -14,6 +14,10 @@ import ai.AggressiveNpcAI;
 @AIName("eb_wallsattacker")
 public class PashidSiegeVolatileAI extends AggressiveNpcAI {
 
+	public PashidSiegeVolatileAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	public void handleSpawned() {
 		super.handleSpawned();

@@ -4,7 +4,6 @@ import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.AIState;
-import com.aionemu.gameserver.ai.AbstractAI;
 import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
@@ -26,6 +25,10 @@ public class PadmarashkaEggAI extends NpcAI {
 	boolean isSmallEggProtectorSpawned = false;
 	boolean isHugeEggProtectorSpawned = false;
 	private Npc protector = null;
+
+	public PadmarashkaEggAI(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	protected void handleDied() {
@@ -75,8 +78,8 @@ public class PadmarashkaEggAI extends NpcAI {
 		float direction = Rnd.get(0, 199) / 100f;
 		float x1 = (float) (Math.cos(Math.PI * direction) * 5);
 		float y1 = (float) (Math.sin(Math.PI * direction) * 5);
-		return SpawnEngine.newSingleTimeSpawn(getPosition().getMapId(), npcId, getPosition().getX() + x1, getPosition().getY() + y1, getPosition()
-			.getZ(), getPosition().getHeading());
+		return SpawnEngine.newSingleTimeSpawn(getPosition().getMapId(), npcId, getPosition().getX() + x1, getPosition().getY() + y1, getPosition().getZ(),
+			getPosition().getHeading());
 	}
 
 	@Override
@@ -127,7 +130,7 @@ public class PadmarashkaEggAI extends NpcAI {
 				Npc padma = getOwner().getPosition().getWorldMapInstance().getNpc(218756);
 				if (padma != null) {
 					npc.setTarget(padma.getTarget());
-					((AbstractAI) npc.getAi()).setStateIfNot(AIState.WALKING);
+					npc.getAi().setStateIfNot(AIState.WALKING);
 					npc.setState(CreatureState.ACTIVE, true);
 					npc.getMoveController().moveToTargetObject();
 					PacketSendUtility.broadcastPacket(npc, new SM_EMOTION(npc, EmotionType.START_EMOTE2, 0, npc.getObjectId()));

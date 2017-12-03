@@ -24,6 +24,10 @@ public class ModorsCloneAI extends AggressiveNpcAI {
 	private AtomicBoolean canCancel = new AtomicBoolean();
 	private AtomicBoolean isHome = new AtomicBoolean(true);
 
+	public ModorsCloneAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	protected void handleSpawned() {
 		super.handleSpawned();

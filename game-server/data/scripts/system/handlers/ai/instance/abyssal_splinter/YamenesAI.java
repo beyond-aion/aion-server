@@ -28,6 +28,10 @@ public class YamenesAI extends AggressiveNpcAI {
 	private Future<?> portalTask = null;
 	private AtomicBoolean isStart = new AtomicBoolean(false);
 
+	public YamenesAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	protected void handleSpawned() {
 		addPercent();

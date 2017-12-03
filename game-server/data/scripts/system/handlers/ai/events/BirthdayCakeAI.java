@@ -3,6 +3,7 @@ package ai.events;
 import static com.aionemu.gameserver.model.DialogAction.SETPRO1;
 
 import com.aionemu.gameserver.ai.AIName;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 
@@ -13,6 +14,10 @@ import ai.GeneralNpcAI;
  */
 @AIName("birthday_cake")
 public class BirthdayCakeAI extends GeneralNpcAI {
+
+	public BirthdayCakeAI(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	public boolean onDialogSelect(Player player, int dialogActionId, int questId, int extendedRewardIndex) {

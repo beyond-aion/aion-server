@@ -27,6 +27,10 @@ public class CaptainLediarAI extends AggressiveNpcAI {
 	private AtomicBoolean isSpawnedHelpers = new AtomicBoolean(false);
 	private final static int[] npc_ids = { 831251, 831250, 831305 };
 
+	public CaptainLediarAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	protected void handleAttack(Creature creature) {
 		super.handleAttack(creature);

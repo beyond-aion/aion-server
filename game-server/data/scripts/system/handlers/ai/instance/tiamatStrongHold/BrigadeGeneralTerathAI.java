@@ -37,6 +37,10 @@ public class BrigadeGeneralTerathAI extends AggressiveNpcAI {
 	private boolean isGravityEvent;
 	private boolean isFinalBuff;
 
+	public BrigadeGeneralTerathAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	protected void handleAttack(Creature creature) {
 		super.handleAttack(creature);

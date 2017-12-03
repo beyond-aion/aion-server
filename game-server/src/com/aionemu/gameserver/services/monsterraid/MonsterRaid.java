@@ -4,7 +4,6 @@ import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.aionemu.commons.utils.Rnd;
-import com.aionemu.gameserver.ai.AbstractAI;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.templates.monsterraid.MonsterRaidLocation;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
@@ -99,13 +98,11 @@ public class MonsterRaid {
 	}
 
 	private void regDeathListener() {
-		AbstractAI ai = (AbstractAI) getBoss().getAi();
-		ai.addEventListener(deathListener);
+		getBoss().getAi().addEventListener(deathListener);
 	}
 
 	private void rmvDeathListener() {
-		AbstractAI ai = (AbstractAI) getBoss().getAi();
-		ai.removeEventListener(deathListener);
+		getBoss().getAi().removeEventListener(deathListener);
 	}
 
 	private void spawnBoss() {

@@ -8,6 +8,7 @@ import java.time.ZonedDateTime;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.instance.handlers.InstanceHandler;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.portal.PortalPath;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
@@ -23,6 +24,10 @@ import com.aionemu.gameserver.world.WorldMapInstance;
  */
 @AIName("legion_dominion_portal")
 public class LegionDominionPortalAI extends PortalDialogAI {
+
+	public LegionDominionPortalAI(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	public boolean onDialogSelect(Player player, int dialogActionId, int questId, int extendedRewardIndex) {

@@ -13,6 +13,10 @@ import ai.AggressiveNpcAI;
 @AIName("omegaclone")
 public class CloneOfBarrierAI extends AggressiveNpcAI {
 
+	public CloneOfBarrierAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	protected void handleDied() {
 		VisibleObject object = getKnownList().findObject(216516); // Omega

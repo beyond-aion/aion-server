@@ -6,6 +6,7 @@ import com.aionemu.gameserver.ai.handler.MoveEventHandler;
 import com.aionemu.gameserver.ai.manager.WalkManager;
 import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.model.EmotionType;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -15,6 +16,10 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 @AIName("atheric_field_blaststone")
 public class AethericFieldBlaststoneAI extends NpcAI {
+
+	public AethericFieldBlaststoneAI(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	public void handleSpawned() {

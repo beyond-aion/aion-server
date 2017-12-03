@@ -12,13 +12,17 @@ import ai.AggressiveNpcAI;
  */
 @AIName("wave_attacker")
 public class WaveAttackerAI extends AggressiveNpcAI {
-	
+
+	public WaveAttackerAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	public void handleCreatureDetected(Creature creature) {
 		if (creature.getTribe().equals(TribeClass.IDSEAL_PCGUARD)) {
 			for (Npc npc : getOwner().getPosition().getWorldMapInstance().getNpcs(236248))
 				getOwner().getAggroList().addHate(npc, 10000);
-				
+
 			for (Npc npc : getOwner().getPosition().getWorldMapInstance().getNpcs(236249))
 				getOwner().getAggroList().addHate(npc, 10000);
 		}

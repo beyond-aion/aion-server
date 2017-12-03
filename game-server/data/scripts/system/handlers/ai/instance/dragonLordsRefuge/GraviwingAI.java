@@ -13,6 +13,10 @@ import ai.AggressiveNpcAI;
 @AIName("graviwing")
 public class GraviwingAI extends AggressiveNpcAI {
 
+	public GraviwingAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	protected void handleAttack(Creature creature) {
 		super.handleAttack(creature);

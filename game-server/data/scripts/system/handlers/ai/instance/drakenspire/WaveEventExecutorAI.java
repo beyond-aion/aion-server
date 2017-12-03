@@ -3,6 +3,7 @@ package ai.instance.drakenspire;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.aionemu.gameserver.ai.AIName;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
@@ -16,6 +17,10 @@ import ai.GeneralNpcAI;
 public class WaveEventExecutorAI extends GeneralNpcAI {
 
 	private AtomicBoolean isDestinationReached = new AtomicBoolean();
+
+	public WaveEventExecutorAI(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	public void handleMoveArrived() {

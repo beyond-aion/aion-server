@@ -5,7 +5,6 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import com.aionemu.commons.utils.Rnd;
-import com.aionemu.gameserver.ai.AITemplate;
 import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.ChatType;
@@ -68,7 +67,7 @@ public class NpcShoutsService {
 		if (sender == null || shout == null)
 			return;
 
-		if (shout.getPattern() != null && !((AITemplate) sender.getAi()).onPatternShout(shout.getWhen(), shout.getPattern(), shout.getSkillNo()))
+		if (shout.getPattern() != null && !sender.getAi().onPatternShout(shout.getWhen(), shout.getPattern(), shout.getSkillNo()))
 			return;
 
 		int shoutRange = sender.getObjectTemplate().getMinimumShoutRange();

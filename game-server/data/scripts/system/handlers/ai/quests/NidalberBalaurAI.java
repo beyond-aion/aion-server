@@ -16,6 +16,10 @@ public class NidalberBalaurAI extends AggressiveNpcAI {
 
 	private Npc questNpc = null;
 
+	public NidalberBalaurAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	protected void handleSpawned() {
 		super.handleSpawned();

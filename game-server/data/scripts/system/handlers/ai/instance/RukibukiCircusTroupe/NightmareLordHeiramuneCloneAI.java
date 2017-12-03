@@ -17,6 +17,10 @@ import ai.AggressiveNpcAI;
 @AIName("nightmarelordheiramuneclone")
 public class NightmareLordHeiramuneCloneAI extends AggressiveNpcAI {
 
+	public NightmareLordHeiramuneCloneAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	protected void handleSpawned() {
 		super.handleSpawned();

@@ -13,14 +13,10 @@ public class AILogger {
 
 	private static final Logger log = LoggerFactory.getLogger(AILogger.class);
 
-	public static final void info(AbstractAI ai, String message) {
+	public static final void info(AbstractAI<? extends Creature> ai, String message) {
 		if (ai.isLogging()) {
 			log.info("[AI] " + ai.getOwner().getObjectId() + " - " + message);
 		}
-	}
-
-	public static final void info(AI ai, String message) {
-		info((AbstractAI) ai, message);
 	}
 
 	/**

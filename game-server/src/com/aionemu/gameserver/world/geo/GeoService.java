@@ -91,7 +91,7 @@ public class GeoService {
 			return true;
 
 		// TODO: remove this check after fixing geo doors attacking
-		if (target instanceof SiegeNpc && ((SiegeNpc) target).getObjectTemplate().getAi().equals("fortressgate"))
+		if (target instanceof SiegeNpc && ((SiegeNpc) target).getAi().getName().equals("fortressgate"))
 			return true;
 
 		float objectSeeCheckZ = object.getZ() + getSeeCheckOffset(object);

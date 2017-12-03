@@ -17,6 +17,10 @@ public class NamelessGraveAI extends GeneralNpcAI {
 
 	private AtomicBoolean isSpawned = new AtomicBoolean(false);
 
+	public NamelessGraveAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	public boolean canThink() {
 		return false;

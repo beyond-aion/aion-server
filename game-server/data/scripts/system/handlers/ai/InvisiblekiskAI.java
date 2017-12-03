@@ -2,6 +2,7 @@ package ai;
 
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.model.TribeClass;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 
 /**
@@ -9,6 +10,10 @@ import com.aionemu.gameserver.skillengine.SkillEngine;
  */
 @AIName("invisiblekisk")
 public class InvisiblekiskAI extends KiskAI {
+
+	public InvisiblekiskAI(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	protected void handleSpawned() {

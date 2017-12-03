@@ -24,6 +24,10 @@ public class DaliaCharlandsAI extends AggressiveNpcAI {
 
 	private List<Integer> percents = new ArrayList<>();
 
+	public DaliaCharlandsAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	protected void handleSpawned() {
 		addPercent();

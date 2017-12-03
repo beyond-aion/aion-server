@@ -9,6 +9,7 @@ import com.aionemu.gameserver.ai.manager.WalkManager;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.model.templates.walker.RouteStep;
@@ -29,6 +30,10 @@ public class ImprisonedReianAI extends GeneralNpcAI {
 	private AtomicBoolean isAsked = new AtomicBoolean(false);
 	private String walkerId;
 	private WalkerTemplate template;
+
+	public ImprisonedReianAI(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	protected void handleSpawned() {

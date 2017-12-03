@@ -21,6 +21,10 @@ public class DracusBox extends OneDmgNoActionAI {
 
 	private static int dracusId = 211800;
 
+	public DracusBox(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	protected void handleDied() {
 		int spawnId;

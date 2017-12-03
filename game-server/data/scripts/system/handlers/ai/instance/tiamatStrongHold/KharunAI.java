@@ -18,6 +18,10 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 @AIName("kharun")
 public class KharunAI extends NpcAI {
 
+	public KharunAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	protected void handleDialogStart(Player player) {
 		PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 1011));

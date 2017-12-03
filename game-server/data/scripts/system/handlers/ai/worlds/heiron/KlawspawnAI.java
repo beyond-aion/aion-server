@@ -15,6 +15,10 @@ import ai.GeneralNpcAI;
 @AIName("klawspawn")
 public class KlawspawnAI extends GeneralNpcAI {
 
+	public KlawspawnAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	public boolean canThink() {
 		return false;

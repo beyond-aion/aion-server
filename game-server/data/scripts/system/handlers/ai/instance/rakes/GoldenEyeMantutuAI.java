@@ -31,6 +31,10 @@ public class GoldenEyeMantutuAI extends AggressiveNpcAI {
 	private AtomicBoolean isHome = new AtomicBoolean(true);
 	private Future<?> hungerTask;
 
+	public GoldenEyeMantutuAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	public boolean canThink() {
 		return canThink;

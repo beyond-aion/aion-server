@@ -6,6 +6,7 @@ import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.AIState;
 import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.model.EmotionType;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.model.templates.item.ItemAttackType;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
@@ -20,6 +21,10 @@ import ai.AggressiveNpcAI;
  */
 @AIName("divisivecreation")
 public class DivisiveCreationAI extends AggressiveNpcAI {
+
+	public DivisiveCreationAI(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	protected void handleSpawned() {

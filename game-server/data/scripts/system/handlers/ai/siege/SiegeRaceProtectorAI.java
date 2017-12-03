@@ -3,6 +3,7 @@ package ai.siege;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.configs.main.SiegeConfig;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.stats.calc.Stat2;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
 
@@ -11,6 +12,10 @@ import com.aionemu.gameserver.model.stats.container.StatEnum;
  */
 @AIName("siege_raceprotector")
 public class SiegeRaceProtectorAI extends SiegeNpcAI {
+
+	public SiegeRaceProtectorAI(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	public boolean ask(AIQuestion question) {

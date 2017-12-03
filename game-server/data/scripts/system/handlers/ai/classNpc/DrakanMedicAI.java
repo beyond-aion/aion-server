@@ -20,6 +20,10 @@ import ai.AggressiveNpcAI;
 @AIName("drakanmedic")
 public class DrakanMedicAI extends AggressiveNpcAI {
 
+	public DrakanMedicAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	protected void handleAttack(Creature creature) {
 		super.handleAttack(creature);
@@ -71,7 +75,7 @@ public class DrakanMedicAI extends AggressiveNpcAI {
 		float direction = Rnd.get(0, 199) / 100f;
 		float x1 = (float) (Math.cos(Math.PI * direction) * 5);
 		float y1 = (float) (Math.sin(Math.PI * direction) * 5);
-		return SpawnEngine.newSingleTimeSpawn(getPosition().getMapId(), npcId, getPosition().getX() + x1, getPosition().getY() + y1, getPosition()
-			.getZ(), getPosition().getHeading());
+		return SpawnEngine.newSingleTimeSpawn(getPosition().getMapId(), npcId, getPosition().getX() + x1, getPosition().getY() + y1, getPosition().getZ(),
+			getPosition().getHeading());
 	}
 }

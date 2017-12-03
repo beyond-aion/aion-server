@@ -2,6 +2,7 @@ package ai.instance.rakes;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIName;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.templates.ai.Percentage;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
@@ -12,6 +13,10 @@ import ai.SummonerAI;
  */
 @AIName("gunnerkoakoa")
 public class ChiefGunnerKoakoaAI extends SummonerAI {
+
+	public ChiefGunnerKoakoaAI(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	protected void handleIndividualSpawnedSummons(Percentage percent) {

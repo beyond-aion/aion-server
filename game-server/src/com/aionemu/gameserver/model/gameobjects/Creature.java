@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import com.aionemu.gameserver.ai.AI;
 import com.aionemu.gameserver.ai.AIEngine;
+import com.aionemu.gameserver.ai.AbstractAI;
 import com.aionemu.gameserver.controllers.CreatureController;
 import com.aionemu.gameserver.controllers.ObserveController;
 import com.aionemu.gameserver.controllers.attack.AggroList;
@@ -23,7 +23,6 @@ import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureVisualState;
 import com.aionemu.gameserver.model.stats.container.CreatureGameStats;
 import com.aionemu.gameserver.model.stats.container.CreatureLifeStats;
-import com.aionemu.gameserver.model.templates.VisibleObjectTemplate;
 import com.aionemu.gameserver.model.templates.item.ItemAttackType;
 import com.aionemu.gameserver.model.templates.item.ItemTemplate;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
@@ -44,7 +43,7 @@ import com.aionemu.gameserver.world.zone.ZoneName;
  */
 public abstract class Creature extends VisibleObject {
 
-	private AI ai;
+	private final AbstractAI<? extends Creature> ai;
 	private CreatureGameStats<? extends Creature> gameStats;
 	private CreatureLifeStats<? extends Creature> lifeStats;
 	private EffectController effectController;
@@ -56,7 +55,7 @@ public abstract class Creature extends VisibleObject {
 	private Map<Integer, Long> skillCoolDowns;
 	private Map<Integer, Long> skillCoolDownsBase;
 	private ObserveController observeController;
-	private TransformModel transformModel;
+	private final TransformModel transformModel;
 	private final AggroList aggroList;
 	private Item usingItem;
 	private final byte[] zoneTypes = new byte[ZoneType.values().length];
@@ -66,15 +65,15 @@ public abstract class Creature extends VisibleObject {
 	protected CreatureType type = CreatureType.NULL;
 	private TribeClass tribe = TribeClass.GENERAL;
 
-	public Creature(int objId, CreatureController<? extends Creature> controller, SpawnTemplate spawnTemplate, VisibleObjectTemplate objectTemplate,
+	public Creature(int objId, CreatureController<? extends Creature> controller, SpawnTemplate spawnTemplate, CreatureTemplate objectTemplate,
 		WorldPosition position) {
 		super(objId, controller, spawnTemplate, objectTemplate, position);
+		String aiName = objectTemplate.getAiName();
+		if (spawnTemplate != null && spawnTemplate.getAiName() != null)
+			aiName = spawnTemplate.getAiName();
+		this.ai = AIEngine.getInstance().newAI(aiName, this);
 		this.observeController = new ObserveController();
-		this.setTransformModel(new TransformModel(this));
-		if (spawnTemplate != null && spawnTemplate.getModel() != null) {
-			if (spawnTemplate.getModel().getTribe() != null)
-				getTransformModel().setTribe(spawnTemplate.getModel().getTribe(), true);
-		}
+		this.transformModel = new TransformModel(this);
 		this.aggroList = createAggroList();
 	}
 
@@ -143,18 +142,14 @@ public abstract class Creature extends VisibleObject {
 		this.effectController = effectController;
 	}
 
-	public AI getAi() {
-		return ai != null ? ai : AIEngine.getInstance().setupAI("dummy", this);
-	}
-
-	public void setAi(AI ai) {
-		this.ai = ai;
+	public AbstractAI<? extends Creature> getAi() {
+		return ai;
 	}
 
 	public boolean isDead() {
 		return lifeStats.isDead();
 	}
-	
+
 	/**
 	 * @return True if the creature is a flag (symbol on map)
 	 */
@@ -390,14 +385,6 @@ public abstract class Creature extends VisibleObject {
 	 */
 	public TransformModel getTransformModel() {
 		return transformModel;
-	}
-
-	/**
-	 * @param model
-	 *          the transformedModel to set
-	 */
-	public final void setTransformModel(TransformModel model) {
-		this.transformModel = model;
 	}
 
 	public void endTransformation() {

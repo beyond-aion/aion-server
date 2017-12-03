@@ -16,6 +16,10 @@ import ai.ActionItemNpcAI;
 @AIName("antiaircraftgun")
 public class AntiAirCraftGunAI extends ActionItemNpcAI {
 
+	public AntiAirCraftGunAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	protected void handleDialogStart(Player player) {
 		InstanceReward<?> instance = getPosition().getWorldMapInstance().getInstanceHandler().getInstanceReward();

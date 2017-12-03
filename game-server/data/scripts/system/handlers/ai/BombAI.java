@@ -4,6 +4,7 @@ import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.dataholders.DataManager;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.templates.ai.BombTemplate;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
@@ -14,6 +15,10 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 public class BombAI extends AggressiveNpcAI {
 
 	private BombTemplate template;
+
+	public BombAI(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	protected void handleSpawned() {

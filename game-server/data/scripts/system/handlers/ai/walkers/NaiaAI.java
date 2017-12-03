@@ -22,6 +22,10 @@ public class NaiaAI extends GeneralNpcAI {
 	boolean saidCannon = false;
 	boolean saidQydro = false;
 
+	public NaiaAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	protected void handleMoveArrived() {
 		MoveEventHandler.onMoveArrived(this);

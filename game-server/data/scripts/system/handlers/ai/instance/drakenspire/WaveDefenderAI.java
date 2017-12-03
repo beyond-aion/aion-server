@@ -4,6 +4,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.model.Race;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 import ai.AggressiveNpcAI;
@@ -16,20 +17,24 @@ public class WaveDefenderAI extends AggressiveNpcAI {
 
 	private AtomicBoolean isDestinationReached = new AtomicBoolean();
 
+	public WaveDefenderAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	public void handleMoveArrived() {
 		super.handleMoveArrived();
 		if (getOwner().getMoveController().isStop() && isDestinationReached.compareAndSet(false, true))
-				scheduleLocationUpdate();
+			scheduleLocationUpdate();
 	}
-	
+
 	private void scheduleLocationUpdate() {
 		ThreadPoolManager.getInstance().schedule(() -> {
-				spawn(getOwner().getRace() == Race.ELYOS ? 236248 : 236249, getOwner().getX(), getOwner().getY(), getOwner().getZ(), getHeading());
-				getOwner().getController().delete();
+			spawn(getOwner().getRace() == Race.ELYOS ? 236248 : 236249, getOwner().getX(), getOwner().getY(), getOwner().getZ(), getHeading());
+			getOwner().getController().delete();
 		}, 3000);
 	}
-	
+
 	private byte getHeading() {
 		byte h = 30;
 		switch (getOwner().getSpawn().getWalkerId()) {

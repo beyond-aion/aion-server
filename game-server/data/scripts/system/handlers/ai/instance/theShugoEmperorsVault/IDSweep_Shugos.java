@@ -3,6 +3,7 @@ package ai.instance.theShugoEmperorsVault;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.instance.handlers.InstanceHandler;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.instance.InstanceScoreType;
 import com.aionemu.gameserver.model.instance.instancereward.InstanceReward;
 
@@ -13,6 +14,10 @@ import ai.AggressiveNpcAI;
  */
 @AIName("IDSweep_shugos")
 public class IDSweep_Shugos extends AggressiveNpcAI {
+
+	public IDSweep_Shugos(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	protected void handleSpawned() {

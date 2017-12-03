@@ -27,6 +27,10 @@ public class KingConsierdAI extends AggressiveNpcAI {
 	private Future<?> eventTask;
 	private Future<?> skillTask;
 
+	public KingConsierdAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	public void handleSpawned() {
 		super.handleSpawned();

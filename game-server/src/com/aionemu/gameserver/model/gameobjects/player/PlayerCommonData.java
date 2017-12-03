@@ -9,9 +9,9 @@ import com.aionemu.gameserver.dataholders.PlayerExperienceTable;
 import com.aionemu.gameserver.model.Gender;
 import com.aionemu.gameserver.model.PlayerClass;
 import com.aionemu.gameserver.model.Race;
+import com.aionemu.gameserver.model.gameobjects.CreatureTemplate;
 import com.aionemu.gameserver.model.stats.container.PlayerGameStats;
 import com.aionemu.gameserver.model.templates.BoundRadius;
-import com.aionemu.gameserver.model.templates.VisibleObjectTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DP_INFO;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_STATUPDATE_DP;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_STATUPDATE_EXP;
@@ -28,7 +28,7 @@ import com.aionemu.gameserver.world.WorldPosition;
  * @author Luno
  * @modified cura
  */
-public class PlayerCommonData extends VisibleObjectTemplate {
+public class PlayerCommonData extends CreatureTemplate {
 
 	private final int playerObjId;
 	private Race race;

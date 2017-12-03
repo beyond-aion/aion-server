@@ -9,6 +9,7 @@ import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.ai.event.AIEventType;
 import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.model.gameobjects.Creature;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureVisualState;
 import com.aionemu.gameserver.model.skill.NpcSkillEntry;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_PLAYER_STATE;
@@ -22,6 +23,10 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 public class TrapNpcAI extends NpcAI {
 
 	private Future<?> despawnTask;
+
+	public TrapNpcAI(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	protected void handleCreatureSee(Creature creature) {

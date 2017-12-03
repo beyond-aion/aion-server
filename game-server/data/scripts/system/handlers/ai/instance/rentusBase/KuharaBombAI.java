@@ -18,6 +18,10 @@ public class KuharaBombAI extends GeneralNpcAI {
 	private AtomicBoolean isDestroyed = new AtomicBoolean(false);
 	private Npc boss;
 
+	public KuharaBombAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	protected void handleSpawned() {
 		super.handleSpawned();

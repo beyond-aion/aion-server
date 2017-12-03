@@ -25,6 +25,10 @@ public class SiegeFortressGateAI extends NpcAI {
 
 	private String doorName = null;
 
+	public SiegeFortressGateAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	protected void handleDialogStart(Player player) {
 		AIActions.addRequest(this, player, 160017, 0, new AIRequest() {

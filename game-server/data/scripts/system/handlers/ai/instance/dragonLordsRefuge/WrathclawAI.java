@@ -13,6 +13,10 @@ import ai.AggressiveNpcAI;
 @AIName("wrathclaw")
 public class WrathclawAI extends AggressiveNpcAI {
 
+	public WrathclawAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	protected void handleAttack(Creature creature) {
 		super.handleAttack(creature);

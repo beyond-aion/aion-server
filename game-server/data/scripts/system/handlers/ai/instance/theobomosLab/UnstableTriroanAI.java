@@ -25,6 +25,10 @@ public class UnstableTriroanAI extends AggressiveNpcAI {
 
 	protected List<Integer> percents = new ArrayList<>();
 
+	public UnstableTriroanAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	protected void handleSpawned() {
 		addPercent();

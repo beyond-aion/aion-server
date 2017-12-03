@@ -6,6 +6,7 @@ import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.model.gameobjects.Creature;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.skillengine.SkillEngine;
@@ -22,6 +23,10 @@ public class PopuchinAI extends AggressiveNpcAI {
 
 	private boolean isHome = true;
 	private Future<?> bombTask;
+
+	public PopuchinAI(Npc owner) {
+		super(owner);
+	}
 
 	private void startBombTask() {
 		if (!isDead() && !isHome) {

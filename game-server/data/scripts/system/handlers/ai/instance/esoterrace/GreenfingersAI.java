@@ -22,6 +22,10 @@ public class GreenfingersAI extends AggressiveNpcAI {
 	private int walkPosition;
 	private int helperSkill;
 
+	public GreenfingersAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	public boolean canThink() {
 		return false;

@@ -24,6 +24,10 @@ public class UnstableGatesSummonedAI extends GeneralNpcAI {
 	private Future<?> eventTask;
 	private boolean canThink = true;
 
+	public UnstableGatesSummonedAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	protected void handleSpawned() {
 		super.handleSpawned();

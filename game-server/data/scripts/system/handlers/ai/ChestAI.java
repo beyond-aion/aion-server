@@ -11,6 +11,7 @@ import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.configs.main.GroupConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.Item;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.model.templates.chest.ChestTemplate;
@@ -29,6 +30,10 @@ import com.aionemu.gameserver.utils.audit.AuditLogger;
 public class ChestAI extends ActionItemNpcAI {
 
 	private ChestTemplate chestTemplate;
+
+	public ChestAI(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	protected void handleDialogStart(final Player player) {
@@ -108,6 +113,6 @@ public class ChestAI extends ActionItemNpcAI {
 	}
 
 	private int getHighestLevel(Collection<Player> players) {
-		return players.stream().mapToInt(p -> p.getLevel()).max().getAsInt(); 
+		return players.stream().mapToInt(p -> p.getLevel()).max().getAsInt();
 	}
 }

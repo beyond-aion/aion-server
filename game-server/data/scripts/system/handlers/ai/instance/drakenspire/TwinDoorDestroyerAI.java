@@ -18,6 +18,10 @@ public class TwinDoorDestroyerAI extends GeneralNpcAI {
 
 	private AtomicBoolean isGateReached = new AtomicBoolean();
 
+	public TwinDoorDestroyerAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	public void handleSpawned() {
 		super.handleSpawned();

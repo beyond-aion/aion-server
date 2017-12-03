@@ -6,6 +6,7 @@ import java.util.function.Consumer;
 import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.model.gameobjects.Creature;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_PLAY_MOVIE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -19,6 +20,10 @@ import ai.AggressiveNpcAI;
 public class KexkraPrototypeAI extends AggressiveNpcAI {
 
 	private AtomicBoolean isStartEvent = new AtomicBoolean(false);
+
+	public KexkraPrototypeAI(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	protected void handleAttack(Creature creature) {

@@ -10,7 +10,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.aionemu.commons.services.CronService;
 import com.aionemu.commons.utils.Rnd;
-import com.aionemu.gameserver.ai.AIEngine;
 import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.controllers.NpcController;
 import com.aionemu.gameserver.controllers.effect.EffectController;
@@ -171,12 +170,12 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 		CronService.getInstance().schedule(() -> {
 			int bonus = World.getInstance().getAllPlayers().size() * 2;
 			bonus = bonus > 30 ? 30 : bonus;
-			if (Rnd.get(1, 100) <= (CustomConfig.PVP_MAP_RANDOM_BOSS_BASE_RATE + bonus)) {
+			if (Rnd.chance() < (CustomConfig.PVP_MAP_RANDOM_BOSS_BASE_RATE + bonus)) {
 				int npcId = PvpMapService.getInstance().getRandomBossId();
 				NpcTemplate template = DataManager.NPC_DATA.getNpcTemplate(npcId);
-				SpawnTemplate spawn = SpawnEngine.newSingleTimeSpawn(mapId, npcId, 744.337f, 292.986f, 233.697f, (byte) 43);
+				SpawnTemplate spawn = SpawnEngine.newSingleTimeSpawn(mapId, npcId, 744.337f, 292.986f, 233.697f, (byte) 43, 0,
+					"modified_iron_wall_aggressive");
 				final Npc npc = new Npc(IDFactory.getInstance().nextId(), new NpcController(), spawn, template);
-				AIEngine.getInstance().setupAI("modified_iron_wall_aggressive", npc);
 				npc.setKnownlist(new NpcKnownList(npc));
 				npc.setEffectController(new EffectController(npc));
 				SpawnEngine.bringIntoWorld(npc, mapId, instanceId, spawn.getX(), spawn.getY(), spawn.getZ(), spawn.getHeading());
@@ -382,8 +381,7 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 		if (!player.isStaff() && player.getAbyssRank() != null) {
 			String zoneNameL10n = getZoneNameL10n(player);
 			if (zoneNameL10n != null)
-				PacketSendUtility.broadcastToMap(instance,
-					SM_SYSTEM_MESSAGE.STR_ABYSS_ORDER_RANKER_DIE(player, zoneNameL10n));
+				PacketSendUtility.broadcastToMap(instance, SM_SYSTEM_MESSAGE.STR_ABYSS_ORDER_RANKER_DIE(player, zoneNameL10n));
 			else
 				PacketSendUtility.broadcastToMap(instance, SM_SYSTEM_MESSAGE.STR_ABYSS_ORDER_RANKER_DIE(player));
 		}

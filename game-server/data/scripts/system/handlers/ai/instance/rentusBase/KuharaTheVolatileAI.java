@@ -30,6 +30,10 @@ public class KuharaTheVolatileAI extends AggressiveNpcAI {
 	private AtomicBoolean isStarted = new AtomicBoolean();
 	private boolean canThink = true;
 
+	public KuharaTheVolatileAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	public boolean canThink() {
 		return canThink;
@@ -133,7 +137,7 @@ public class KuharaTheVolatileAI extends AggressiveNpcAI {
 			npc.getMoveController().moveToTargetObject();
 		}
 	}
-	
+
 	private Npc rndSpawn(int npcId, float x, float y, float z) {
 		float direction = Rnd.get(0, 199) / 100f;
 		float distance = Rnd.get(0, 4);

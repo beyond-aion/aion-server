@@ -7,12 +7,9 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlType;
 
-//import com.aionemu.gameserver.model.templates.globaldrops.GlobalRule;
-
 /**
  * @author AionCool
  */
-
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "GlobalRule")
 public class GlobalRule {

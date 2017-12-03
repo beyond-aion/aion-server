@@ -5,7 +5,7 @@ import java.util.Objects;
 import java.util.Queue;
 import java.util.concurrent.Future;
 
-import com.aionemu.gameserver.ai.AIEngine;
+import com.aionemu.gameserver.controllers.SiegeWeaponController;
 import com.aionemu.gameserver.controllers.SummonController;
 import com.aionemu.gameserver.controllers.attack.AggroList;
 import com.aionemu.gameserver.controllers.attack.PlayerAggroList;
@@ -46,9 +46,7 @@ public class Summon extends Creature {
 	public Summon(int objId, SummonController controller, SpawnTemplate spawnTemplate, NpcTemplate objectTemplate, int time) {
 		super(objId, controller, spawnTemplate, objectTemplate, new WorldPosition(spawnTemplate.getWorldId()));
 		controller.setOwner(this);
-		String ai = objectTemplate.getAi();
-		AIEngine.getInstance().setupAI(ai, this);
-		moveController = ai.equals("siege_weapon") ? new SiegeWeaponMoveController(this) : new SummonMoveController(this);
+		moveController = controller instanceof SiegeWeaponController ? new SiegeWeaponMoveController(this) : new SummonMoveController(this);
 		this.liveTime = time;
 		setGameStats(new SummonGameStats(this));
 		setLifeStats(new SummonLifeStats(this));

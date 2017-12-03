@@ -34,6 +34,10 @@ public class CaptainXastaAI extends AggressiveNpcAI {
 	private Future<?> phaseTask;
 	private AtomicBoolean isHome = new AtomicBoolean(true);
 
+	public CaptainXastaAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	public boolean canThink() {
 		return canThink;

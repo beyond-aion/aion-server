@@ -8,6 +8,7 @@ import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.AIState;
 import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.model.gameobjects.Creature;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 
 import ai.AggressiveNpcAI;
 
@@ -18,6 +19,10 @@ import ai.AggressiveNpcAI;
 public class StonespearAggressiveNpcAI extends AggressiveNpcAI {
 
 	private List<Integer> guardIds = new ArrayList<>();
+
+	public StonespearAggressiveNpcAI(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	public void handleSpawned() {

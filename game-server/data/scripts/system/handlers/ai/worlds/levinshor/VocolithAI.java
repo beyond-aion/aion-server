@@ -31,6 +31,10 @@ public class VocolithAI extends GeneralNpcAI {
 
 	private AtomicBoolean used = new AtomicBoolean();
 
+	public VocolithAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	protected void handleDialogStart(Player player) {
 		if (!used.get()) {
@@ -89,6 +93,6 @@ public class VocolithAI extends GeneralNpcAI {
 			int npcId = 235217 + Rnd.get(0, 3);
 			Npc boss = (Npc) spawn(npcId, vocolith.getX(), vocolith.getY(), vocolith.getZ(), vocolith.getHeading());
 			PacketSendUtility.broadcastToMap(boss, SM_SYSTEM_MESSAGE.STR_MSG_LDF4_ADVANCE_FNAMED_SPAWN());
-		} , 5000);
+		}, 5000);
 	}
 }

@@ -8,6 +8,7 @@ import com.aionemu.gameserver.ai.AIRequest;
 import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Creature;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUESTION_WINDOW;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
@@ -21,6 +22,10 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 public class GroupGateAI extends NpcAI {
 
 	private final int CANCEL_DIALOG_METERS = 9;
+
+	public GroupGateAI(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	protected void handleDialogStart(Player player) {

@@ -23,6 +23,10 @@ public class GatesSummonedAI extends GeneralNpcAI {
 	private Future<?> eventTask;
 	private boolean canThink = true;
 
+	public GatesSummonedAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	protected void handleSpawned() {
 		super.handleSpawned();

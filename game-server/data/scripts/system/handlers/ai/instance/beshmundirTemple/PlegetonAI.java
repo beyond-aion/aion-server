@@ -23,6 +23,10 @@ public class PlegetonAI extends NpcAI {
 
 	private boolean isStartTimer = false;
 
+	public PlegetonAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	public boolean onDialogSelect(Player player, int dialogActionId, int questId, int extendedRewardIndex) {
 		if (dialogActionId == SETPRO1) {

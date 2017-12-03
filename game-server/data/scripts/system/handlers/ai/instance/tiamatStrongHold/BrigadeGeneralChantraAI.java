@@ -22,6 +22,10 @@ public class BrigadeGeneralChantraAI extends AggressiveNpcAI {
 	private Future<?> trapTask;
 	private boolean isFinalBuff;
 
+	public BrigadeGeneralChantraAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	protected void handleAttack(Creature creature) {
 		super.handleAttack(creature);

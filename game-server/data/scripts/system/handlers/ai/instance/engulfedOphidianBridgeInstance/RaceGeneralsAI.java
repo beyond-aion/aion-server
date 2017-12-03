@@ -19,6 +19,10 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 @AIName("engulfedophidiangenerals")
 public class RaceGeneralsAI extends NpcAI {
 
+	public RaceGeneralsAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	protected void handleDialogStart(Player player) {
 		PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 1011));

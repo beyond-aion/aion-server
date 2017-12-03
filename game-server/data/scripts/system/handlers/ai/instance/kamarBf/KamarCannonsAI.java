@@ -20,6 +20,10 @@ public class KamarCannonsAI extends ActionItemNpcAI {
 
 	private Npc flag;
 
+	public KamarCannonsAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	protected void handleUseItemFinish(Player player) {
 		switch (getOwner().getNpcId()) {

@@ -39,6 +39,10 @@ public class BrigadeGeneralTahabataAI extends AggressiveNpcAI {
 	private Future<?> fireStormTask;
 	protected List<Integer> percents = new ArrayList<>();
 
+	public BrigadeGeneralTahabataAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	protected void handleAttack(Creature creature) {
 		super.handleAttack(creature);
@@ -211,8 +215,8 @@ public class BrigadeGeneralTahabataAI extends AggressiveNpcAI {
 		float direction = Rnd.get(0, 199) / 100f;
 		float x1 = (float) (Math.cos(Math.PI * direction) * dist);
 		float y1 = (float) (Math.sin(Math.PI * direction) * dist);
-		return SpawnEngine.newSingleTimeSpawn(getPosition().getMapId(), npcId, getPosition().getX() + x1, getPosition().getY() + y1, getPosition()
-			.getZ(), getPosition().getHeading());
+		return SpawnEngine.newSingleTimeSpawn(getPosition().getMapId(), npcId, getPosition().getX() + x1, getPosition().getY() + y1, getPosition().getZ(),
+			getPosition().getHeading());
 	}
 
 	private void deleteNpcs(List<Npc> npcs) {

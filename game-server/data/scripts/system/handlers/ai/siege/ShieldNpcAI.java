@@ -3,6 +3,7 @@ package ai.siege;
 import java.util.function.Consumer;
 
 import com.aionemu.gameserver.ai.AIName;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SHIELD_EFFECT;
 import com.aionemu.gameserver.services.SiegeService;
@@ -13,6 +14,10 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 @AIName("siege_shieldnpc")
 public class ShieldNpcAI extends SiegeNpcAI {
+
+	public ShieldNpcAI(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	protected void handleDespawned() {

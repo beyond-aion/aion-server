@@ -3,6 +3,7 @@ package ai;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.model.gameobjects.Creature;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.skill.NpcSkillList;
 import com.aionemu.gameserver.model.templates.npcskill.NpcSkillConditionTemplate;
@@ -17,6 +18,10 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 public class UseSkillAndDieAI extends NpcAI {
 
 	boolean canDie = true;
+
+	public UseSkillAndDieAI(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	public void handleSpawned() {

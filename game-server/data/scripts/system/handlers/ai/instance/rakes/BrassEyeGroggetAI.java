@@ -1,6 +1,7 @@
 package ai.instance.rakes;
 
 import com.aionemu.gameserver.ai.AIName;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.templates.ai.Percentage;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
@@ -12,6 +13,9 @@ import ai.SummonerAI;
 @AIName("brasseyegrogget")
 public class BrassEyeGroggetAI extends SummonerAI {
 
+	public BrassEyeGroggetAI(Npc owner) {
+		super(owner);
+	}
 	// todo 4 towers in the room center and fix coordinates of monsters
 	// need snif
 

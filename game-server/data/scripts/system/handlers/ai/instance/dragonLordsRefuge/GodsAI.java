@@ -25,6 +25,10 @@ public class GodsAI extends AggressiveNpcAI {
 	private List<Integer> percents = new ArrayList<>();
 	Npc tiamat;
 
+	public GodsAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	protected void handleDeactivate() {
 	}

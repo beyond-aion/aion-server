@@ -15,6 +15,10 @@ public class LediarAssistantAI extends AggressiveNpcAI {
 
 	private final static int[] npc_ids = { 831251, 831250, 831305 };
 
+	public LediarAssistantAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	public int modifyOwnerDamage(int damage, Effect effect) {
 		return 1;

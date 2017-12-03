@@ -22,6 +22,10 @@ public class SilikorofMemoryAI extends AggressiveNpcAI {
 
 	protected List<Integer> percents = new ArrayList<>();
 
+	public SilikorofMemoryAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	protected void handleAttack(Creature creature) {
 		super.handleAttack(creature);

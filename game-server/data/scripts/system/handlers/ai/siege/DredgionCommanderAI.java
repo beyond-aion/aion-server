@@ -16,6 +16,10 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 @AIName("dredgionCommander")
 public class DredgionCommanderAI extends SiegeNpcAI {
 
+	public DredgionCommanderAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	protected void handleSpawned() {
 		super.handleSpawned();

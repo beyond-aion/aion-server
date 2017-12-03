@@ -7,6 +7,7 @@ import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.configs.main.GroupConfig;
 import com.aionemu.gameserver.model.ChatType;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_MESSAGE;
@@ -25,10 +26,15 @@ import ai.ActionItemNpcAI;
 @AIName("nightmare_crate")
 public class NightmareCrateAI extends ActionItemNpcAI {
 
+	public NightmareCrateAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	protected void handleUseItemFinish(Player player) {
 		int npcId = getOwner().getNpcId();
-		if ((npcId == 831745) && (player.getInventory().getItemCountByItemId(185000187) > 0 || player.getInventory().getItemCountByItemId(185000184) > 0)) {
+		if ((npcId == 831745)
+			&& (player.getInventory().getItemCountByItemId(185000187) > 0 || player.getInventory().getItemCountByItemId(185000184) > 0)) {
 			if (player.getInventory().decreaseByItemId(185000187, 1)) {
 				analyzeOpening(player);
 				return;
@@ -84,6 +90,6 @@ public class NightmareCrateAI extends ActionItemNpcAI {
 	}
 
 	private int getHighestLevel(Collection<Player> players) {
-		return players.stream().mapToInt(p -> p.getLevel()).max().getAsInt(); 
+		return players.stream().mapToInt(p -> p.getLevel()).max().getAsInt();
 	}
 }

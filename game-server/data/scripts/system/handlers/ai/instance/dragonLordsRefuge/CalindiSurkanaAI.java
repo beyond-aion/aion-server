@@ -19,6 +19,10 @@ public class CalindiSurkanaAI extends NpcAI {
 	private Future<?> skillTask;
 	Npc calindi;
 
+	public CalindiSurkanaAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	protected void handleSpawned() {
 		super.handleSpawned();

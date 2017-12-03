@@ -6,6 +6,7 @@ import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.model.TribeClass;
 import com.aionemu.gameserver.model.gameobjects.Item;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
@@ -19,6 +20,10 @@ import ai.ActionItemNpcAI;
  */
 @AIName("eb_siegecannon")
 public class SiegeCannonAI extends ActionItemNpcAI {
+
+	public SiegeCannonAI(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	protected void handleUseItemFinish(Player player) {

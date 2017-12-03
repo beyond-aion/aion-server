@@ -5,6 +5,7 @@ import java.util.concurrent.Future;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.ai.poll.AIQuestion;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
@@ -16,6 +17,10 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 public class StonespearGuardianStoneAI extends NpcAI {
 
 	private Future<?> task;
+
+	public StonespearGuardianStoneAI(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	public void handleSpawned() {

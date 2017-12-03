@@ -13,6 +13,10 @@ import ai.ActionItemNpcAI;
 @AIName("teleportation_device")
 public class AbyssalSplinterPortalAI extends ActionItemNpcAI {
 
+	public AbyssalSplinterPortalAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	protected void handleUseItemFinish(Player player) {
 		Npc npc = getOwner();

@@ -21,6 +21,10 @@ import ai.AggressiveNpcAI;
 @AIName("rvr_boss")
 public class RvrBossAI extends AggressiveNpcAI {
 
+	public RvrBossAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	protected void handleAttack(Creature creature) {
 		super.handleAttack(creature);

@@ -6,7 +6,6 @@ import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.aionemu.commons.utils.Rnd;
-import com.aionemu.gameserver.ai.AbstractAI;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.base.BaseLocation;
@@ -202,7 +201,7 @@ public abstract class Base<T extends BaseLocation> {
 		if (boss != null)
 			throw new BaseException("Tried to initialize boss twice! Base ID: " + id);
 		boss = npc;
-		((AbstractAI) boss.getAi()).addEventListener(new BaseBossDeathListener(this));
+		boss.getAi().addEventListener(new BaseBossDeathListener(this));
 	}
 
 	private void initFlag(Npc npc) throws BaseException, NullPointerException {

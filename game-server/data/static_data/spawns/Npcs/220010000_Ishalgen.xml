@@ -1497,12 +1497,8 @@
 			<spot x="153.24" y="2630.28" z="306.632" h="92"/>
 			<spot x="155.546" y="2672.93" z="304.874" h="86"/>
 			<spot x="159.094" y="2602.21" z="310.847" h="35"/>
-			<spot x="161.66" y="2685.45" z="305.43124" h="60" walker_id="7E2A9D55CA1BE02E7DAE0FDFC67FAA3FD5B6AAE2" walker_index="1" state="32">
-				<model ai="ulgornspriggs1"/>
-			</spot>
-			<spot x="161.66" y="2685.45" z="305.43124" h="60" walker_id="7E2A9D55CA1BE02E7DAE0FDFC67FAA3FD5B6AAE2" walker_index="2" state="32">
-				<model ai="ulgornspriggs1"/>
-			</spot>
+			<spot x="161.66" y="2685.45" z="305.43124" h="60" walker_id="7E2A9D55CA1BE02E7DAE0FDFC67FAA3FD5B6AAE2" walker_index="1" state="32" ai="ulgornspriggs1"/>
+			<spot x="161.66" y="2685.45" z="305.43124" h="60" walker_id="7E2A9D55CA1BE02E7DAE0FDFC67FAA3FD5B6AAE2" walker_index="2" state="32" ai="ulgornspriggs1"/>
 			<spot x="172.794" y="2696" z="303.776" h="43"/>
 			<spot x="175.106" y="2559.3" z="303.056" h="99"/>
 			<spot x="178.09" y="2573.03" z="302.303" h="118"/>
@@ -1720,9 +1716,7 @@
 		<spawn npc_id="203506" respawn_time="295">
 			<spot x="141.56" y="2551.59" z="308.856" h="66"/>
 			<spot x="144.356" y="2652.81" z="305.529" h="22"/>
-			<spot x="161.66" y="2685.45" z="305.43124" h="18" walker_id="7E2A9D55CA1BE02E7DAE0FDFC67FAA3FD5B6AAE2" state="32">
-				<model ai="ulgornspriggs1"/>
-			</spot>
+			<spot x="161.66" y="2685.45" z="305.43124" h="18" walker_id="7E2A9D55CA1BE02E7DAE0FDFC67FAA3FD5B6AAE2" state="32" ai="ulgornspriggs1"/>
 			<spot x="283.77" y="2559.7" z="288.8694" walker_id="ECD35392880296EA481B5A579EBAB14A5BFE04D0"/>
 			<spot x="429.81" y="2227.71" z="249.75" h="55"/>
 			<spot x="586.184" y="2046.65" z="256.371" h="117"/>

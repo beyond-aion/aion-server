@@ -6,6 +6,7 @@ import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.services.teleport.TeleportService;
@@ -17,6 +18,10 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 @AIName("shugodelightedadmirer")
 public class ShugoDelightedAdmirerAI extends NpcAI {
+
+	public ShugoDelightedAdmirerAI(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	protected void handleDialogStart(Player player) {

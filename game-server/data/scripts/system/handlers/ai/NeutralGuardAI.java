@@ -5,6 +5,7 @@ import java.util.function.Consumer;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.model.CreatureType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_CUSTOM_SETTINGS;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -15,6 +16,10 @@ import com.aionemu.gameserver.utils.PositionUtil;
  */
 @AIName("neutralguard")
 public class NeutralGuardAI extends AggressiveNpcAI {
+
+	public NeutralGuardAI(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	protected void handleBackHome() {

@@ -18,6 +18,10 @@ import ai.ActionItemNpcAI;
 @AIName("flame_vent")
 public class FlameVentAI extends ActionItemNpcAI {
 
+	public FlameVentAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	protected void handleUseItemFinish(Player player) {
 		if (getOwner().getNpcId() == 802548) // Elyos Switch

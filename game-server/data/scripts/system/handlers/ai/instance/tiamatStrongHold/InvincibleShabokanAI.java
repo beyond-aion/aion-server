@@ -24,6 +24,10 @@ public class InvincibleShabokanAI extends AggressiveNpcAI {
 	private Future<?> skillTask;
 	private boolean isFinalBuff;
 
+	public InvincibleShabokanAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	protected void handleAttack(Creature creature) {
 		super.handleAttack(creature);

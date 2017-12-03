@@ -3,6 +3,7 @@ package ai.instance.raksang;
 import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.poll.AIQuestion;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
@@ -13,6 +14,10 @@ import ai.AggressiveNpcAI;
  */
 @AIName("raksang_rubble")
 public class RaksangRubbleAI extends AggressiveNpcAI {
+
+	public RaksangRubbleAI(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	public boolean canThink() {

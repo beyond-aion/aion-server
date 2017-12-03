@@ -4,6 +4,7 @@ import java.util.concurrent.Future;
 
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.NpcAI;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
@@ -13,6 +14,10 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 public class GarnonQ20060AI extends NpcAI {
 
 	private Future<?> task;
+
+	public GarnonQ20060AI(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	protected void handleDespawned() {

@@ -12,9 +12,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.TribeClass;
+import com.aionemu.gameserver.model.gameobjects.CreatureTemplate;
 import com.aionemu.gameserver.model.items.NpcEquippedGear;
 import com.aionemu.gameserver.model.templates.BoundRadius;
-import com.aionemu.gameserver.model.templates.VisibleObjectTemplate;
 import com.aionemu.gameserver.model.templates.stats.KiskStatsTemplate;
 import com.aionemu.gameserver.model.templates.stats.StatsTemplate;
 
@@ -23,7 +23,7 @@ import com.aionemu.gameserver.model.templates.stats.StatsTemplate;
  */
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlRootElement(name = "npc_template")
-public class NpcTemplate extends VisibleObjectTemplate {
+public class NpcTemplate extends CreatureTemplate {
 
 	private int npcId;
 
@@ -95,7 +95,7 @@ public class NpcTemplate extends VisibleObjectTemplate {
 	private TribeClass tribe;
 
 	@XmlAttribute(name = "ai")
-	private String ai = "dummy";
+	private String ai;
 
 	@XmlAttribute
 	private Race race = Race.NONE;
@@ -122,7 +122,10 @@ public class NpcTemplate extends VisibleObjectTemplate {
 	private MassiveLoot massiveLoot;
 
 	protected void afterUnmarshal(Unmarshaller u, Object parent) {
-		ai = ai.intern(); // intern to save RAM, since most npcs use same ai names
+		if (level > 1 && !"noaction".equals(ai) && getAbyssNpcType().equals(AbyssNpcType.TELEPORTER)) // TODO: reparse npc_template
+			ai = "siege_teleporter";
+		if (ai != null)
+			ai = ai.intern(); // intern to save RAM, since most npcs use same ai names
 	}
 
 	@Override
@@ -168,9 +171,9 @@ public class NpcTemplate extends VisibleObjectTemplate {
 		return tribe;
 	}
 
-	public String getAi() {
-		// TODO: npc_template repars
-		return (!"noaction".equals(ai) && level > 1 && getAbyssNpcType().equals(AbyssNpcType.TELEPORTER)) ? "siege_teleporter" : ai;
+	@Override
+	public String getAiName() {
+		return ai;
 	}
 
 	@Override

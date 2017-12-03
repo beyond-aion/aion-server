@@ -6,7 +6,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIState;
-import com.aionemu.gameserver.ai.AbstractAI;
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
 import com.aionemu.gameserver.instance.handlers.InstanceID;
 import com.aionemu.gameserver.model.EmotionType;
@@ -150,7 +149,7 @@ public class TiamatStrongHoldInstance extends GeneralInstanceHandler {
 				if (!isInstanceDestroyed) {
 					for (Player player : instance.getPlayersInside()) {
 						npc.setTarget(player);
-						((AbstractAI) npc.getAi()).setStateIfNot(AIState.WALKING);
+						npc.getAi().setStateIfNot(AIState.WALKING);
 						npc.setState(CreatureState.ACTIVE, true);
 						npc.getMoveController().moveToTargetObject();
 						PacketSendUtility.broadcastPacket(npc, new SM_EMOTION(npc, EmotionType.START_EMOTE2, 0, npc.getObjectId()));
@@ -187,7 +186,7 @@ public class TiamatStrongHoldInstance extends GeneralInstanceHandler {
 	}
 
 	private void moveToForward(final Npc npc, float x, float y, float z, boolean despawn) {
-		((AbstractAI) npc.getAi()).setStateIfNot(AIState.WALKING);
+		npc.getAi().setStateIfNot(AIState.WALKING);
 		npc.setState(CreatureState.ACTIVE, true);
 		npc.getMoveController().moveToPoint(x, y, z);
 		PacketSendUtility.broadcastPacket(npc, new SM_EMOTION(npc, EmotionType.START_EMOTE2, 0, npc.getObjectId()));

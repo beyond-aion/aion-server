@@ -6,6 +6,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.model.gameobjects.Creature;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
@@ -20,6 +21,10 @@ public class YumeAI extends GeneralNpcAI {
 
 	private AtomicBoolean isStart = new AtomicBoolean(false);
 	private Future<?> skillTask;
+
+	public YumeAI(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	public boolean canThink() {

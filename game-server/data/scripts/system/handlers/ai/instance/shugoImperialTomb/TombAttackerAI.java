@@ -17,6 +17,10 @@ public class TombAttackerAI extends AggressiveNpcAI {
 	private boolean canThink = true;
 	private final static int[] npc_ids = { 831251, 831250, 831304, 831305, 831130 };
 
+	public TombAttackerAI(Npc owner) {
+		super(owner);
+	}
+
 	private void addHate() {
 		EmoteManager.emoteStopAttacking(getOwner());
 		for (int npc_id : npc_ids) {

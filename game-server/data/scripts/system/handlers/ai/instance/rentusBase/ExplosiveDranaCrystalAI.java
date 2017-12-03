@@ -24,6 +24,10 @@ public class ExplosiveDranaCrystalAI extends ActionItemNpcAI {
 	private AtomicBoolean isUsed = new AtomicBoolean(false);
 	private Future<?> lifeTask;
 
+	public ExplosiveDranaCrystalAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	protected void handleSpawned() {
 		super.handleSpawned();

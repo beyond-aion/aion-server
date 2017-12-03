@@ -21,6 +21,10 @@ public class TelepathyControllerAI extends AggressiveNpcAI {
 	private Future<?> spawnTask;
 	private AtomicBoolean isAggred = new AtomicBoolean();
 
+	public TelepathyControllerAI(Npc owner) {
+		super(owner);
+	}
+
 	private Npc spawnHelper() {
 		int distance = Rnd.get(7, 10);
 		float direction = Rnd.get(200) / 100f;

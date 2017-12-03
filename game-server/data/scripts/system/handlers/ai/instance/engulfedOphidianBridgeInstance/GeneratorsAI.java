@@ -14,6 +14,10 @@ public class GeneratorsAI extends ActionItemNpcAI {
 
 	private Npc flag;
 
+	public GeneratorsAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	protected void handleSpawned() {
 		super.handleSpawned();

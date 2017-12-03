@@ -1,6 +1,7 @@
 package ai.instance.unstableSplinterpath;
 
 import com.aionemu.gameserver.ai.AIName;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 import ai.AggressiveNpcAI;
@@ -12,6 +13,10 @@ import ai.AggressiveNpcAI;
 
 @AIName("unstableyamenessportal")
 public class UnstableYamenessPortalSummonedAI extends AggressiveNpcAI {
+
+	public UnstableYamenessPortalSummonedAI(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	protected void handleSpawned() {

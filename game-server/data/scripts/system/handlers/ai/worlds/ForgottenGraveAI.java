@@ -17,6 +17,10 @@ public class ForgottenGraveAI extends GeneralNpcAI {
 
 	private AtomicBoolean isSpawned = new AtomicBoolean(false);
 
+	public ForgottenGraveAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	public boolean canThink() {
 		return false;

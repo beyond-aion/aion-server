@@ -1,6 +1,7 @@
 package ai.quests;
 
 import com.aionemu.gameserver.ai.AIName;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 
 import ai.AggressiveNpcAI;
 
@@ -9,6 +10,10 @@ import ai.AggressiveNpcAI;
  */
 @AIName("infiltrator")
 public class InfiltratorsAI extends AggressiveNpcAI {
+
+	public InfiltratorsAI(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	protected void handleDied() {

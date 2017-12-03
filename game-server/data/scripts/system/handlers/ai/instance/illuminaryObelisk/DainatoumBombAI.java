@@ -1,6 +1,7 @@
 package ai.instance.illuminaryObelisk;
 
 import com.aionemu.gameserver.ai.AIName;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
@@ -12,6 +13,10 @@ import ai.AggressiveNpcAI;
  */
 @AIName("dainatoum_mine")
 public class DainatoumBombAI extends AggressiveNpcAI {
+
+	public DainatoumBombAI(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	protected void handleSpawned() {

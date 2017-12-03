@@ -6,7 +6,6 @@ import java.util.concurrent.Future;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-import com.aionemu.gameserver.ai.AbstractAI;
 import com.aionemu.gameserver.ai.GeneralAIEvent;
 import com.aionemu.gameserver.ai.eventcallback.OnDieEventListener;
 import com.aionemu.gameserver.custom.BattleService;
@@ -127,7 +126,7 @@ public class CustomBase implements Comparable<CustomBase> {
 								Npc npc = (Npc) ownerEvent.spawnObject(template.getNpcId(), template.getX(), template.getY(), template.getZ(), template.getHeading(),
 									0);
 								boss = npc;
-								((AbstractAI) boss.getAi()).addEventListener(new CBaseDeathListener(CustomBase.this));
+								boss.getAi().addEventListener(new CBaseDeathListener(CustomBase.this));
 							}
 						}
 					}

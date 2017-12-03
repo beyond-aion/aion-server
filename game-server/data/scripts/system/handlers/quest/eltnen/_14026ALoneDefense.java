@@ -7,7 +7,6 @@ import java.util.Collection;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIState;
-import com.aionemu.gameserver.ai.AbstractAI;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -246,7 +245,7 @@ public class _14026ALoneDefense extends AbstractQuestHandler {
 		}
 		if (target != null) {
 			spawn.setTarget(target);
-			((AbstractAI) spawn.getAi()).setStateIfNot(AIState.WALKING);
+			spawn.getAi().setStateIfNot(AIState.WALKING);
 			spawn.setState(CreatureState.ACTIVE, true);
 			spawn.getMoveController().moveToTargetObject();
 			PacketSendUtility.broadcastPacket(spawn, new SM_EMOTION(spawn, EmotionType.START_EMOTE2, 0, spawn.getObjectId()));

@@ -5,6 +5,7 @@ import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.AIRequest;
 import com.aionemu.gameserver.configs.main.SiegeConfig;
 import com.aionemu.gameserver.model.gameobjects.Creature;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.panesterra.ahserion.AhserionRaid;
@@ -23,6 +24,10 @@ import ai.GeneralNpcAI;
 public class AhserionRegistrationCorridor extends GeneralNpcAI {
 
 	private PanesterraFaction faction;
+
+	public AhserionRegistrationCorridor(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	protected void handleSpawned() {

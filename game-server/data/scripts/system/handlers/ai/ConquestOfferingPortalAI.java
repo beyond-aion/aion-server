@@ -7,6 +7,7 @@ import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.spawns.Spawn;
 import com.aionemu.gameserver.model.templates.spawns.SpawnSpotTemplate;
@@ -18,6 +19,10 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
  */
 @AIName("conquest_offering_portal")
 public class ConquestOfferingPortalAI extends ActionItemNpcAI {
+
+	public ConquestOfferingPortalAI(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	public void handleSpawned() {

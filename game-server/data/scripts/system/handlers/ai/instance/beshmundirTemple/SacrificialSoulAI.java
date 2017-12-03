@@ -17,6 +17,10 @@ public class SacrificialSoulAI extends GeneralNpcAI {
 
 	private Npc boss;
 
+	public SacrificialSoulAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	protected void handleSpawned() {
 		super.handleSpawned();

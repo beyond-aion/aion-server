@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.model.gameobjects.Creature;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 
 import ai.OneDmgNoActionAI;
 
@@ -17,6 +18,10 @@ import ai.OneDmgNoActionAI;
 public class BalaurBarricadeAI extends OneDmgNoActionAI {
 
 	protected List<Integer> percents = new ArrayList<>();
+
+	public BalaurBarricadeAI(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	protected void handleAttack(Creature creature) {
@@ -40,7 +45,7 @@ public class BalaurBarricadeAI extends OneDmgNoActionAI {
 			}
 		}
 	}
-	
+
 	private void spawnProtectors(boolean isFirstSpawn) {
 		switch (getNpcId()) {
 			case 700517:
@@ -56,7 +61,7 @@ public class BalaurBarricadeAI extends OneDmgNoActionAI {
 				spawn(isFirstSpawn ? 215262 : 215263, 201.9819f, 853.4918f, 101.0603f, (byte) 59);
 				break;
 		}
-	}	
+	}
 
 	private void addPercent() {
 		percents.clear();

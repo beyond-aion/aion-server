@@ -25,6 +25,10 @@ public class TheFlamelordAI extends AggressiveNpcAI {
 	private List<Integer> percents = new ArrayList<>();
 	private Future<?> phaseTask;
 
+	public TheFlamelordAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	protected void handleSpawned() {
 		super.handleSpawned();

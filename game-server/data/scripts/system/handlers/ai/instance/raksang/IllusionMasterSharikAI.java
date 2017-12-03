@@ -30,6 +30,10 @@ public class IllusionMasterSharikAI extends AggressiveNpcAI {
 	private int percent = 100;
 	private Future<?> phaseTask;
 
+	public IllusionMasterSharikAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	protected void handleSpawned() {
 		super.handleSpawned();

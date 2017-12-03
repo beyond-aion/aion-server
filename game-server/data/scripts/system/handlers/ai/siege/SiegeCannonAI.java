@@ -20,6 +20,10 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 @AIName("siege_cannon")
 public class SiegeCannonAI extends NpcAI {
 
+	public SiegeCannonAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	protected void handleDialogStart(Player player) {
 		TalkEventHandler.onTalk(this, player);

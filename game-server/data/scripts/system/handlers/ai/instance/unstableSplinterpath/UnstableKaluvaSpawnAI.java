@@ -18,6 +18,10 @@ public class UnstableKaluvaSpawnAI extends NpcAI {
 
 	private Future<?> task;
 
+	public UnstableKaluvaSpawnAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	protected void handleDied() {
 		super.handleDied();

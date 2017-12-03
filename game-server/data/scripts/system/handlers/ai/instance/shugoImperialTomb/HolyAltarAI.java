@@ -7,6 +7,7 @@ import java.util.List;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.model.DialogPage;
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
@@ -25,6 +26,10 @@ import ai.GeneralNpcAI;
  */
 @AIName("holy_altar")
 public class HolyAltarAI extends GeneralNpcAI {
+
+	public HolyAltarAI(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	protected void handleDialogStart(Player player) {

@@ -9,6 +9,7 @@ import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.handler.ReturningEventHandler;
 import com.aionemu.gameserver.custom.pvpmap.PvpMapService;
 import com.aionemu.gameserver.model.gameobjects.Creature;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.skill.QueuedNpcSkillEntry;
 import com.aionemu.gameserver.model.stats.calc.Stat2;
@@ -35,6 +36,10 @@ import ai.AggressiveNpcAI;
 public class ModifiedIronWallAggressiveAI extends AggressiveNpcAI {
 
 	private List<Integer> percents = new ArrayList<>();
+
+	public ModifiedIronWallAggressiveAI(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	protected void handleSpawned() {

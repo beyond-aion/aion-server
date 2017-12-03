@@ -47,6 +47,10 @@ public class BrigadeGeneralVashartiAI extends AggressiveNpcAI {
 	private int flameSmashCount = 1;
 	private AtomicBoolean isInFlameShowerTask = new AtomicBoolean();
 
+	public BrigadeGeneralVashartiAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	public boolean canThink() {
 		return canThink;

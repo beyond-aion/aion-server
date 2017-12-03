@@ -5,6 +5,7 @@ import java.util.concurrent.Future;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.model.gameobjects.Creature;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 import ai.GeneralNpcAI;
@@ -16,6 +17,10 @@ import ai.GeneralNpcAI;
 public class KebbitAI extends GeneralNpcAI {
 
 	private Future<?> despawnTask;
+
+	public KebbitAI(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	public void handleSpawned() {

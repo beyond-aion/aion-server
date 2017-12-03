@@ -8,7 +8,6 @@ import java.util.function.Consumer;
 
 import com.aionemu.commons.callbacks.util.GlobalCallbackHelper;
 import com.aionemu.commons.database.dao.DAOManager;
-import com.aionemu.gameserver.ai.AbstractAI;
 import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.ai.manager.WalkManager;
 import com.aionemu.gameserver.dao.PlayerDAO;
@@ -210,22 +209,18 @@ public class AgentSiege extends Siege<AgentLocation> {
 
 	private void registerListeners() {
 		veille.getAggroList().addEventListener(veilleDoAddDamageListener);
-		AbstractAI veilleAI = (AbstractAI) veille.getAi();
-		veilleAI.addEventListener(veilleDeathListener);
+		veille.getAi().addEventListener(veilleDeathListener);
 
 		masta.getAggroList().addEventListener(mastaDoAddDamageListener);
-		AbstractAI mastaAI = (AbstractAI) masta.getAi();
-		mastaAI.addEventListener(mastaDeathListener);
+		masta.getAi().addEventListener(mastaDeathListener);
 	}
 
 	private void removeListeners() {
 		veille.getAggroList().removeEventListener(veilleDoAddDamageListener);
-		AbstractAI veilleAI = (AbstractAI) veille.getAi();
-		veilleAI.removeEventListener(veilleDeathListener);
+		veille.getAi().removeEventListener(veilleDeathListener);
 
 		masta.getAggroList().removeEventListener(mastaDoAddDamageListener);
-		AbstractAI mastaAI = (AbstractAI) masta.getAi();
-		mastaAI.removeEventListener(mastaDeathListener);
+		masta.getAi().removeEventListener(mastaDeathListener);
 	}
 
 	private void broadcastMessage(AionServerPacket packet) {

@@ -5,6 +5,7 @@ import java.util.concurrent.Future;
 import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.poll.AIQuestion;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
@@ -19,6 +20,10 @@ import ai.GeneralNpcAI;
 public class DancingFlameAI extends GeneralNpcAI {
 
 	private Future<?> task;
+
+	public DancingFlameAI(Npc owner) {
+		super(owner);
+	}
 
 	private void startTask() {
 		task = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {

@@ -1,6 +1,7 @@
 package ai.instance.illuminaryObelisk;
 
 import com.aionemu.gameserver.ai.AIName;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.skill.QueuedNpcSkillEntry;
 import com.aionemu.gameserver.model.templates.npcskill.QueuedNpcSkillTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
@@ -12,6 +13,10 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
  */
 @AIName("infernal_dynatoum")
 public class InfernalDynatoumAI extends DynatoumAI {
+
+	public InfernalDynatoumAI(Npc owner) {
+		super(owner);
+	}
 
 	protected void scheduleDespawn(int delayInSec) {
 		despawnTask = ThreadPoolManager.getInstance().schedule(() -> {

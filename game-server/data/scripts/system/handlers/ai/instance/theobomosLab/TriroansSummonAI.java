@@ -22,6 +22,10 @@ public class TriroansSummonAI extends AggressiveNpcAI {
 	private int walkPosition;
 	private int helperSkill;
 
+	public TriroansSummonAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	public boolean canThink() {
 		return false;

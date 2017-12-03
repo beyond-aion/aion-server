@@ -6,6 +6,7 @@ import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.model.gameobjects.Creature;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.RespawnService;
 import com.aionemu.gameserver.services.panesterra.ahserion.AhserionRaid;
@@ -20,6 +21,10 @@ import com.aionemu.gameserver.world.World;
 public class AdvanceCorridorShield extends NpcAI {
 
 	private AtomicBoolean canShout = new AtomicBoolean(true);
+
+	public AdvanceCorridorShield(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	public void handleAttack(Creature creature) {

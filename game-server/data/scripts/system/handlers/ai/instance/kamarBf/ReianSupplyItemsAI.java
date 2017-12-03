@@ -13,6 +13,10 @@ public class ReianSupplyItemsAI extends ChestAI {
 
 	private Npc flag;
 
+	public ReianSupplyItemsAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	protected void handleSpawned() {
 		super.handleSpawned();

@@ -2,6 +2,7 @@ package ai.instance.empyreanCrucible;
 
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.NpcAI;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
@@ -9,6 +10,10 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 @AIName("empadministratorarminos")
 public class EmpyreanAdministratorArminosAI extends NpcAI {
+
+	public EmpyreanAdministratorArminosAI(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	protected void handleSpawned() {
@@ -35,8 +40,8 @@ public class EmpyreanAdministratorArminosAI extends NpcAI {
 				PacketSendUtility.broadcastToMap(getOwner(), 1401015, 118000);
 				PacketSendUtility.broadcastMessage(getOwner(), 1500255, 118000);
 				break;
-		// case
-		// despawn after 1min
+			// case
+			// despawn after 1min
 		}
 	}
 }

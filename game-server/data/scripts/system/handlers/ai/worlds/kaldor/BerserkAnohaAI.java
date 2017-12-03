@@ -28,6 +28,10 @@ public class BerserkAnohaAI extends AggressiveNpcAI {
 
 	private final String STR_MAIL_ANOHA = "To your Legion, for the successful vanquish of Berserk Anoha. Please take this reward in recognition of your service.\n- Commander Anoha";
 
+	public BerserkAnohaAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	protected void handleSpawned() {
 		super.handleSpawned();
@@ -40,7 +44,7 @@ public class BerserkAnohaAI extends AggressiveNpcAI {
 				getOwner().getController().delete();
 				broadcastAnnounce(SM_SYSTEM_MESSAGE.STR_MSG_ANOHA_DESPAWN());
 			}
-		} , 60 * 60000)); // 1hour
+		}, 60 * 60000)); // 1hour
 	}
 
 	@Override

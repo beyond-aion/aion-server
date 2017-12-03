@@ -9,6 +9,7 @@ import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.Creature;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.templates.ai.Percentage;
 import com.aionemu.gameserver.model.templates.ai.SummonGroup;
@@ -26,6 +27,10 @@ public class SummonerAI extends AggressiveNpcAI {
 	private final List<Integer> spawnedNpc = new ArrayList<>();
 	private List<Percentage> percentage = Collections.emptyList();
 	private int spawnedPercent = 0;
+
+	public SummonerAI(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	protected void handleAttack(Creature creature) {
@@ -138,8 +143,8 @@ public class SummonerAI extends AggressiveNpcAI {
 		float direction = Rnd.get(0, 199) / 100f;
 		float x = (float) (Math.cos(Math.PI * direction) * distance);
 		float y = (float) (Math.sin(Math.PI * direction) * distance);
-		return SpawnEngine.newSingleTimeSpawn(getPosition().getMapId(), npcId, getPosition().getX() + x, getPosition().getY() + y,
-			getPosition().getZ(), getPosition().getHeading());
+		return SpawnEngine.newSingleTimeSpawn(getPosition().getMapId(), npcId, getPosition().getX() + x, getPosition().getY() + y, getPosition().getZ(),
+			getPosition().getHeading());
 	}
 
 	protected boolean checkBeforeSpawn() {

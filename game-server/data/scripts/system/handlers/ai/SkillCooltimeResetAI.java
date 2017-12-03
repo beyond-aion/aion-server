@@ -13,6 +13,7 @@ import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.ChatType;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Creature;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.skill.PlayerSkillEntry;
 import com.aionemu.gameserver.model.skill.PlayerSkillList;
@@ -37,6 +38,11 @@ import com.aionemu.gameserver.world.geo.GeoService;
 public class SkillCooltimeResetAI extends NpcAI {
 
 	private Map<Integer, Long> playersInSight = new ConcurrentHashMap<>();
+
+	public SkillCooltimeResetAI(Npc owner) {
+		super(owner);
+	}
+
 	private final int price = 50000; // = 50.000 Kinah
 	private final int maxCooldownTime = 3000; // = 5min -> skills with a cd >5min are ignored
 

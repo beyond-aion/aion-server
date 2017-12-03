@@ -5,6 +5,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.model.actions.NpcActions;
 import com.aionemu.gameserver.model.gameobjects.Creature;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.instance.StageType;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
@@ -17,6 +18,10 @@ import ai.AggressiveNpcAI;
 public class SpectralWarriorAI extends AggressiveNpcAI {
 
 	private AtomicBoolean isDone = new AtomicBoolean(false);
+
+	public SpectralWarriorAI(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	protected void handleAttack(Creature creature) {

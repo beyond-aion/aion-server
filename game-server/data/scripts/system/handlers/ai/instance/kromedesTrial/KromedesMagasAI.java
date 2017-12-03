@@ -5,6 +5,7 @@ import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.model.DialogPage;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_PLAY_MOVIE;
@@ -15,6 +16,10 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 @AIName("krmagas")
 public class KromedesMagasAI extends NpcAI {
+
+	public KromedesMagasAI(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	public boolean onDialogSelect(Player player, int dialogActionId, int questId, int extendedRewardIndex) {

@@ -1,6 +1,7 @@
 package ai.instance.abyssal_splinter;
 
 import com.aionemu.gameserver.ai.AIName;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 import ai.AggressiveNpcAI;
@@ -11,6 +12,10 @@ import ai.AggressiveNpcAI;
 
 @AIName("yamenessportal")
 public class YamenessPortalSummonedAI extends AggressiveNpcAI {
+
+	public YamenessPortalSummonedAI(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	protected void handleSpawned() {

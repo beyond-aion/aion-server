@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.scripting.classlistener.ClassListener;
 import com.aionemu.commons.utils.ClassUtils;
+import com.aionemu.gameserver.model.gameobjects.Creature;
 
 /**
  * @author ATracer
@@ -26,7 +27,7 @@ public class AIHandlerClassListener implements ClassListener {
 				continue;
 
 			if (ClassUtils.isSubclass(c, AbstractAI.class))
-				AIEngine.getInstance().registerAI((Class<? extends AbstractAI>) c);
+				AIEngine.getInstance().registerAI((Class<AbstractAI<? extends Creature>>) c);
 		}
 	}
 

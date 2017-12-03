@@ -24,6 +24,10 @@ public class VasukiLifesparkAI extends AggressiveNpcAI {
 	private AtomicBoolean startedEvent = new AtomicBoolean(false);
 	private boolean think = false;
 
+	public VasukiLifesparkAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	public boolean canThink() {
 		return think;

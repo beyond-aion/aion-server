@@ -2,6 +2,7 @@ package ai;
 
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.model.EmotionType;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -11,6 +12,10 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 @AIName("shifter")
 public class ShifterAI extends ActionItemNpcAI {
+
+	public ShifterAI(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	protected void handleUseItemFinish(Player player) {

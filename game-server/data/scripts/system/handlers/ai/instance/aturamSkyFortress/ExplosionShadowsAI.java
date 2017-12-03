@@ -20,6 +20,10 @@ import ai.AggressiveNpcAI;
 @AIName("explosion_shadows")
 public class ExplosionShadowsAI extends AggressiveNpcAI {
 
+	public ExplosionShadowsAI(Npc owner) {
+		super(owner);
+	}
+
 	@Override
 	protected void handleBackHome() {
 		super.handleBackHome();

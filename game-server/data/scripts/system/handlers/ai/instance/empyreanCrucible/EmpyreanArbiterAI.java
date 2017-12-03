@@ -6,6 +6,7 @@ import java.util.function.Consumer;
 
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.NpcAI;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.instance.instancereward.InstanceReward;
 import com.aionemu.gameserver.model.instance.playerreward.CruciblePlayerReward;
@@ -19,6 +20,10 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 @AIName("empyreanarbiter")
 public class EmpyreanArbiterAI extends NpcAI {
+
+	public EmpyreanArbiterAI(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	protected void handleDialogStart(Player player) {

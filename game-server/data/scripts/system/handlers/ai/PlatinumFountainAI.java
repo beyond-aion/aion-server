@@ -2,6 +2,7 @@ package ai;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIName;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -11,6 +12,10 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 @AIName("fountain")
 public class PlatinumFountainAI extends ActionItemNpcAI {
+
+	public PlatinumFountainAI(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	protected void handleDialogStart(Player player) {

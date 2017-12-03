@@ -7,6 +7,7 @@ import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Creature;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.NpcObjectType;
 import com.aionemu.gameserver.model.skill.NpcSkillEntry;
 import com.aionemu.gameserver.skillengine.SkillEngine;
@@ -19,6 +20,10 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 public class ServantNpcAI extends GeneralNpcAI {
 
 	private Future<?> skillTask;
+
+	public ServantNpcAI(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	public void think() {
