@@ -9,7 +9,6 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.CountDownLatch;
 import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
@@ -39,7 +38,7 @@ public class AIEngine implements GameEngine {
 	}
 
 	@Override
-	public void load(CountDownLatch progressLatch) {
+	public void load() {
 		log.info("AI engine load started");
 
 		AggregatedClassListener acl = new AggregatedClassListener();
@@ -54,15 +53,12 @@ public class AIEngine implements GameEngine {
 			log.info("Loaded " + aiHandlers.size() + " ai handlers.");
 		} catch (Exception e) {
 			throw new GameServerError("Can't initialize ai handlers.", e);
-		} finally {
-			if (progressLatch != null)
-				progressLatch.countDown();
 		}
 	}
 
 	public void reload() {
 		shutdown();
-		load(null);
+		load();
 	}
 
 	@Override

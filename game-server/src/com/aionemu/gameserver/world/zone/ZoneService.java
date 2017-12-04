@@ -8,7 +8,6 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.CountDownLatch;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -62,7 +61,7 @@ public final class ZoneService implements GameEngine {
 	}
 
 	@Override
-	public void load(CountDownLatch progressLatch) {
+	public void load() {
 		log.info("Zone engine load started");
 
 		AggregatedClassListener acl = new AggregatedClassListener();
@@ -74,14 +73,8 @@ public final class ZoneService implements GameEngine {
 		try {
 			scriptManager.load(new File("./data/scripts/system/zonehandlers.xml"));
 			log.info("Loaded " + zoneHandlers.size() + " zone handlers.");
-		} catch (IllegalStateException e) {
-			log.warn("Can't initialize instance handlers.", e.getMessage());
 		} catch (Exception e) {
 			throw new GameServerError("Can't initialize instance handlers.", e);
-		} finally {
-			if (progressLatch != null) {
-				progressLatch.countDown();
-			}
 		}
 	}
 

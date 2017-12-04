@@ -7,7 +7,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.CountDownLatch;
 
 import org.apache.commons.lang3.StringUtils;
 import org.quartz.JobDetail;
@@ -104,7 +103,7 @@ public class QuestEngine implements GameEngine {
 	}
 
 	@Override
-	public void load(CountDownLatch progressLatch) {
+	public void load() {
 		log.info("Quest engine load started");
 
 		for (QuestTemplate data : DataManager.QUEST_DATA.getQuestsData()) {
@@ -135,9 +134,6 @@ public class QuestEngine implements GameEngine {
 				analyzeQuestHandlers();
 		} catch (Exception e) {
 			throw new GameServerError("Can't initialize quest handlers.", e);
-		} finally {
-			if (progressLatch != null)
-				progressLatch.countDown();
 		}
 
 		addMessageSendingTask();
@@ -145,7 +141,7 @@ public class QuestEngine implements GameEngine {
 
 	public void reload() {
 		shutdown();
-		load(null);
+		load();
 	}
 
 	@Override

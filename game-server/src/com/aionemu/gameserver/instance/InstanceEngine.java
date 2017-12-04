@@ -3,7 +3,6 @@ package com.aionemu.gameserver.instance;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.CountDownLatch;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,7 +28,7 @@ public class InstanceEngine implements GameEngine {
 	private Map<Integer, Class<? extends InstanceHandler>> instanceHandlers = new HashMap<>();
 
 	@Override
-	public void load(CountDownLatch progressLatch) {
+	public void load() {
 		log.info("Instance engine load started");
 
 		AggregatedClassListener acl = new AggregatedClassListener();
@@ -43,9 +42,6 @@ public class InstanceEngine implements GameEngine {
 			log.info("Loaded " + instanceHandlers.size() + " instance handlers.");
 		} catch (Exception e) {
 			throw new GameServerError("Can't initialize instance handlers.", e);
-		} finally {
-			if (progressLatch != null)
-				progressLatch.countDown();
 		}
 	}
 

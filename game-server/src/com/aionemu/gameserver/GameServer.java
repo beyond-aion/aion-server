@@ -30,6 +30,7 @@ import com.aionemu.commons.network.NioServer;
 import com.aionemu.commons.network.ServerCfg;
 import com.aionemu.commons.services.CronService;
 import com.aionemu.commons.utils.ConsoleUtil;
+import com.aionemu.commons.utils.ExitCode;
 import com.aionemu.commons.utils.concurrent.UncaughtExceptionHandler;
 import com.aionemu.commons.utils.info.SystemInfoUtil;
 import com.aionemu.commons.utils.info.VersionInfoUtil;
@@ -381,7 +382,16 @@ public class GameServer {
 		CountDownLatch progressLatch = new CountDownLatch(engines.length);
 
 		for (GameEngine engine : engines) {
-			ThreadPoolManager.getInstance().execute(() -> engine.load(progressLatch));
+			ThreadPoolManager.getInstance().execute(() -> {
+				try {
+					engine.load();
+				} catch (Throwable t) {
+					log.error("Aborting server start due to " + engine.getClass().getSimpleName() + " intialization error", t);
+					System.exit(ExitCode.CODE_ERROR);
+				} finally {
+					progressLatch.countDown();
+				}
+			});
 		}
 
 		try {

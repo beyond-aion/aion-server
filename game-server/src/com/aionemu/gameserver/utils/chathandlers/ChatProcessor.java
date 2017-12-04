@@ -39,61 +39,52 @@ public class ChatProcessor implements GameEngine {
 	}
 
 	@Override
-	public void load(CountDownLatch progressLatch) {
+	public void load() {
 		log.info("Chat processor load started");
 
 		try {
-			try {
-				Properties props = PropertiesUtils.load("config/administration/commands.properties");
+			Properties props = PropertiesUtils.load("config/administration/commands.properties");
 
-				for (Object key : props.keySet()) {
-					String str = (String) key;
-					accessLevel.put(str, Byte.valueOf(props.getProperty(str).trim()));
-				}
-			} catch (IOException e) {
-				log.error("Can't read commands.properties", e);
+			for (Object key : props.keySet()) {
+				String str = (String) key;
+				accessLevel.put(str, Byte.valueOf(props.getProperty(str).trim()));
 			}
-
-			AggregatedClassListener acl = new AggregatedClassListener();
-			acl.addClassListener(new OnClassLoadUnloadListener());
-			acl.addClassListener(new ScheduledTaskClassListener());
-			acl.addClassListener(new ChatCommandsLoader(this));
-			scriptManager.setGlobalClassListener(acl);
-
-			File[] files = new File[] { new File("./data/scripts/system/adminhandlers.xml"), new File("./data/scripts/system/playerhandlers.xml"),
-				new File("./data/scripts/system/consolehandlers.xml") };
-			CountDownLatch loadLatch = new CountDownLatch(files.length);
-			Throwable[] throwable = new Throwable[1];
-
-			for (File file : files) {
-				ThreadPoolManager.getInstance().execute(new Runnable() {
-
-					@Override
-					public void run() {
-						try {
-							scriptManager.load(file);
-						} catch (Throwable t) {
-							throwable[0] = t;
-						} finally {
-							loadLatch.countDown();
-						}
-					}
-				});
-			}
-
-			try {
-				loadLatch.await();
-			} catch (InterruptedException e1) {
-			}
-
-			if (throwable[0] != null)
-				throw new GameServerError("Can't initialize chat handlers.", throwable[0]);
-
-			log.info("Loaded " + commandHandlers.size() + " commands.");
-		} finally {
-			if (progressLatch != null)
-				progressLatch.countDown();
+		} catch (IOException e) {
+			log.error("Can't read commands.properties", e);
 		}
+
+		AggregatedClassListener acl = new AggregatedClassListener();
+		acl.addClassListener(new OnClassLoadUnloadListener());
+		acl.addClassListener(new ScheduledTaskClassListener());
+		acl.addClassListener(new ChatCommandsLoader(this));
+		scriptManager.setGlobalClassListener(acl);
+
+		File[] files = new File[] { new File("./data/scripts/system/adminhandlers.xml"), new File("./data/scripts/system/playerhandlers.xml"),
+			new File("./data/scripts/system/consolehandlers.xml") };
+		CountDownLatch loadLatch = new CountDownLatch(files.length);
+		Throwable[] throwable = new Throwable[1];
+
+		for (File file : files) {
+			ThreadPoolManager.getInstance().execute(() -> {
+				try {
+					scriptManager.load(file);
+				} catch (Throwable t) {
+					throwable[0] = t;
+				} finally {
+					loadLatch.countDown();
+				}
+			});
+		}
+
+		try {
+			loadLatch.await();
+		} catch (InterruptedException e1) {
+		}
+
+		if (throwable[0] != null)
+			throw new GameServerError("Can't initialize chat handlers.", throwable[0]);
+
+		log.info("Loaded " + commandHandlers.size() + " commands.");
 	}
 
 	public void reload() {
@@ -102,7 +93,7 @@ public class ChatProcessor implements GameEngine {
 		shutdown();
 
 		try {
-			load(null);
+			load();
 		} catch (Throwable e) {
 			accessLevel = backupAccessLevels;
 			commandHandlers = backupCommands;
