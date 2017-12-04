@@ -6,7 +6,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.scripting.classlistener.ClassListener;
-import com.aionemu.commons.utils.ClassUtils;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 
 /**
@@ -26,7 +25,7 @@ public class AIHandlerClassListener implements ClassListener {
 			if (!isValidClass(c))
 				continue;
 
-			if (ClassUtils.isSubclass(c, AbstractAI.class))
+			if (AbstractAI.class.isAssignableFrom(c))
 				AIEngine.getInstance().registerAI((Class<AbstractAI<? extends Creature>>) c);
 		}
 	}

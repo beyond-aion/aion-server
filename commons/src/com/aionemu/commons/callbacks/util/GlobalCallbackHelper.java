@@ -7,7 +7,6 @@ import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.callbacks.Callback;
 import com.aionemu.commons.callbacks.CallbackResult;
-import com.aionemu.commons.utils.ClassUtils;
 
 /**
  * This class is used to manage global callbacks.<br>
@@ -67,11 +66,11 @@ public class GlobalCallbackHelper {
 	 * @return result of invocation callbacks
 	 */
 	@SuppressWarnings({ "unchecked" })
-	public static CallbackResult<?> beforeCall(Object obj, Class callbackClass, Object... args) {
+	public static CallbackResult<?> beforeCall(Object obj, Class<?> callbackClass, Object... args) {
 
 		CallbackResult<?> cr = null;
 		for (Callback cb : globalCallbacks) {
-			if (!ClassUtils.isSubclass(cb.getBaseClass(), callbackClass)) {
+			if (!callbackClass.isAssignableFrom(cb.getBaseClass())) {
 				continue;
 			}
 
@@ -102,11 +101,11 @@ public class GlobalCallbackHelper {
 	 * @return global result, callback or method, doesn't matter
 	 */
 	@SuppressWarnings({ "unchecked" })
-	public static CallbackResult<?> afterCall(Object obj, Class callbackClass, Object[] args, Object result) {
+	public static CallbackResult<?> afterCall(Object obj, Class<?> callbackClass, Object[] args, Object result) {
 
 		CallbackResult<?> cr = null;
 		for (Callback cb : globalCallbacks) {
-			if (!ClassUtils.isSubclass(cb.getBaseClass(), callbackClass)) {
+			if (!callbackClass.isAssignableFrom(cb.getBaseClass())) {
 				continue;
 			}
 

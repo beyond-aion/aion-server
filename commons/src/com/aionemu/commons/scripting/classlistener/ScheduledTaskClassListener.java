@@ -7,7 +7,6 @@ import org.quartz.JobDetail;
 
 import com.aionemu.commons.scripting.metadata.Scheduled;
 import com.aionemu.commons.services.CronService;
-import com.aionemu.commons.utils.ClassUtils;
 
 public class ScheduledTaskClassListener implements ClassListener {
 
@@ -33,7 +32,7 @@ public class ScheduledTaskClassListener implements ClassListener {
 
 	public boolean isValidClass(Class<?> clazz) {
 
-		if (!ClassUtils.isSubclass(clazz, Runnable.class)) {
+		if (!Runnable.class.isAssignableFrom(clazz)) {
 			return false;
 		}
 

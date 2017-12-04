@@ -3,7 +3,6 @@ package com.aionemu.commons.database.dao;
 import java.lang.reflect.Modifier;
 
 import com.aionemu.commons.scripting.classlistener.ClassListener;
-import com.aionemu.commons.utils.ClassUtils;
 
 /**
  * Utility class that loads all DAO's after script context initialization.<br>
@@ -50,7 +49,7 @@ public class DAOLoader implements ClassListener {
 	 * @return boolean
 	 */
 	public boolean isValidDAO(Class<?> clazz) {
-		if (!ClassUtils.isSubclass(clazz, DAO.class))
+		if (!DAO.class.isAssignableFrom(clazz))
 			return false;
 
 		final int modifiers = clazz.getModifiers();

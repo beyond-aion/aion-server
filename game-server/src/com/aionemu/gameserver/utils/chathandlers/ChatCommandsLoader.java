@@ -3,7 +3,6 @@ package com.aionemu.gameserver.utils.chathandlers;
 import java.lang.reflect.Modifier;
 
 import com.aionemu.commons.scripting.classlistener.ClassListener;
-import com.aionemu.commons.utils.ClassUtils;
 
 /**
  * Created on: 12.09.2009 14:13:24
@@ -45,9 +44,6 @@ public class ChatCommandsLoader implements ClassListener {
 		if (!Modifier.isPublic(modifiers))
 			return false;
 
-		if (!ClassUtils.isSubclass(clazz, AdminCommand.class) && !ClassUtils.isSubclass(clazz, PlayerCommand.class)
-			&& !ClassUtils.isSubclass(clazz, ConsoleCommand.class))
-			return false;
-		return true;
+		return ChatCommand.class.isAssignableFrom(clazz);
 	}
 }

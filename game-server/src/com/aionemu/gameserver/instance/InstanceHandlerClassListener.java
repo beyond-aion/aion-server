@@ -6,7 +6,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.scripting.classlistener.ClassListener;
-import com.aionemu.commons.utils.ClassUtils;
 import com.aionemu.gameserver.instance.handlers.InstanceHandler;
 
 /**
@@ -26,7 +25,7 @@ public class InstanceHandlerClassListener implements ClassListener {
 			if (!isValidClass(c))
 				continue;
 
-			if (ClassUtils.isSubclass(c, InstanceHandler.class))
+			if (InstanceHandler.class.isAssignableFrom(c))
 				InstanceEngine.getInstance().addInstanceHandlerClass((Class<? extends InstanceHandler>) c);
 		}
 	}

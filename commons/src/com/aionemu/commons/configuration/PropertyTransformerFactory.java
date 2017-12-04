@@ -28,7 +28,6 @@ import com.aionemu.commons.configuration.transformers.ShortTransformer;
 import com.aionemu.commons.configuration.transformers.StringTransformer;
 import com.aionemu.commons.configuration.transformers.TimeZoneTransformer;
 import com.aionemu.commons.configuration.transformers.ZoneIdTransformer;
-import com.aionemu.commons.utils.ClassUtils;
 
 /**
  * This class is responsible for creating property transformers. Uses shared instances to avoid overhead.
@@ -66,21 +65,21 @@ public class PropertyTransformerFactory {
 			return StringTransformer.SHARED_INSTANCE;
 		else if (clazzToTransform.isEnum())
 			return EnumTransformer.SHARED_INSTANCE;
-		else if (ClassUtils.isSubclass(clazzToTransform, Collection.class))
+		else if (Collection.class.isAssignableFrom(clazzToTransform))
 			return CollectionTransformer.SHARED_INSTANCE;
 		else if (clazzToTransform.isArray())
 			return ArrayTransformer.SHARED_INSTANCE;
 		else if (clazzToTransform == File.class)
 			return FileTransformer.SHARED_INSTANCE;
-		else if (ClassUtils.isSubclass(clazzToTransform, InetSocketAddress.class))
+		else if (InetSocketAddress.class.isAssignableFrom(clazzToTransform))
 			return InetSocketAddressTransformer.SHARED_INSTANCE;
 		else if (clazzToTransform == Pattern.class)
 			return PatternTransformer.SHARED_INSTANCE;
 		else if (clazzToTransform == Class.class)
 			return ClassTransformer.SHARED_INSTANCE;
-		else if (ClassUtils.isSubclass(clazzToTransform, TimeZone.class))
+		else if (TimeZone.class.isAssignableFrom(clazzToTransform))
 			return TimeZoneTransformer.SHARED_INSTANCE;
-		else if (ClassUtils.isSubclass(clazzToTransform, ZoneId.class))
+		else if (ZoneId.class.isAssignableFrom(clazzToTransform))
 			return ZoneIdTransformer.SHARED_INSTANCE;
 		else if (clazzToTransform == CronExpression.class)
 			return CronExpressionTransformer.SHARED_INSTANCE;

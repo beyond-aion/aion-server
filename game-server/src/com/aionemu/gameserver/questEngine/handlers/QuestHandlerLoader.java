@@ -6,7 +6,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.scripting.classlistener.ClassListener;
-import com.aionemu.commons.utils.ClassUtils;
 import com.aionemu.gameserver.questEngine.QuestEngine;
 
 /**
@@ -31,7 +30,7 @@ public class QuestHandlerLoader implements ClassListener {
 			if (!isValidClass(c))
 				continue;
 
-			if (ClassUtils.isSubclass(c, AbstractQuestHandler.class)) {
+			if (AbstractQuestHandler.class.isAssignableFrom(c)) {
 				try {
 					Class<? extends AbstractQuestHandler> tmp = (Class<? extends AbstractQuestHandler>) c;
 					QuestEngine.getInstance().addQuestHandler(tmp.newInstance());
