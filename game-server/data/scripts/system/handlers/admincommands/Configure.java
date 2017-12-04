@@ -114,7 +114,7 @@ public class Configure extends AdminCommand {
 				Field property = cls.getDeclaredField(fieldName);
 				String value = getFieldValue(property);
 				if (params.length > 2) {
-					String newValue = StringUtils.join(params, " ", 2, params.length);
+					String newValue = StringUtils.join(params, ' ', 2, params.length);
 					Class<?> classType = property.getType();
 					PropertyTransformer<?> pt = PropertyTransformerFactory.getTransformer(classType);
 					try {

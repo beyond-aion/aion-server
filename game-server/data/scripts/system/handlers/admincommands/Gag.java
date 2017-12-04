@@ -75,7 +75,7 @@ public class Gag extends AdminCommand {
 		ChatBanService.banPlayer(player, time * 60000);
 		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_INGAME_BLOCK_ENABLE_NO_CHAT(time));
 
-		String reason = StringUtils.join(params, " ", 2, params.length);
+		String reason = StringUtils.join(params, ' ', 2, params.length);
 		sendInfo(player, StringUtils.appendIfMissing(StringUtils.capitalize(reason), ".", "!"));
 		sendInfo(admin, "Player " + player.getName() + " is now gagged for " + time + " minutes.");
 	}

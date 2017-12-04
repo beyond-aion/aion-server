@@ -6,8 +6,6 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlType;
 
-import org.apache.commons.lang3.StringUtils;
-
 /**
  * @author Rolandas
  */
@@ -29,23 +27,22 @@ public abstract class MailPart extends StringParamList implements IMailFormatter
 	}
 
 	public String getFormattedString(IMailFormatter customFormatter) {
-		String result = "";
 		IMailFormatter formatter = this;
 		if (customFormatter != null) {
 			formatter = customFormatter;
 		}
 
-		result = getFormattedString(getType());
+		String result = getFormattedString(getType());
 
 		String[] paramValues = new String[getParam().size()];
 		for (int i = 0; i < getParam().size(); i++) {
 			Param param = getParam().get(i);
 			paramValues[i] = formatter.getParamValue(param.getId());
 		}
-		String joinedParams = StringUtils.join(paramValues, ',');
-		if (StringUtils.isEmpty(result))
+		String joinedParams = String.join(",", paramValues);
+		if (result.isEmpty())
 			return joinedParams;
-		else if (!StringUtils.isEmpty(joinedParams))
+		else if (!joinedParams.isEmpty())
 			result += "," + joinedParams;
 
 		return result;

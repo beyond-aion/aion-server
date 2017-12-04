@@ -3,8 +3,6 @@ package admincommands;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang3.StringUtils;
-
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.dao.PlayerDAO;
 import com.aionemu.gameserver.dataholders.DataManager;
@@ -186,7 +184,7 @@ public class SysMail extends AdminCommand {
 					titleWords.add(word);
 			}
 
-			outText[0] = StringUtils.join(titleWords.toArray(new String[0]), ' ');
+			outText[0] = String.join(" ", titleWords);
 		}
 
 		return wordCount;

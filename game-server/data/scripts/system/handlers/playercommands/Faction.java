@@ -2,8 +2,6 @@ package playercommands;
 
 import java.util.function.Consumer;
 
-import org.apache.commons.lang3.StringUtils;
-
 import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.model.ChatType;
 import com.aionemu.gameserver.model.Race;
@@ -53,7 +51,7 @@ public class Faction extends PlayerCommand {
 		}
 
 		String senderName = player.getName(player.isStaff());
-		String message = CustomConfig.FACTION_CHAT_CHANNEL ? StringUtils.join(params, ' ') : senderName + ": " + StringUtils.join(params, ' ');
+		String message = CustomConfig.FACTION_CHAT_CHANNEL ? String.join(" ", params) : senderName + ": " + String.join(" ", params);
 		ChatType channel = CustomConfig.FACTION_CHAT_CHANNEL ? ChatType.CH1 : ChatType.BRIGHT_YELLOW;
 
 		PlayerChatService.logMessage(player, ChatType.NORMAL, "[Faction Msg] " + message);

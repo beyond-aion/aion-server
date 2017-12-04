@@ -10,6 +10,7 @@ import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -23,7 +24,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.validation.Schema;
 
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -320,7 +320,7 @@ public class SpawnsData {
 		SpawnSpotTemplate oldSpot = null;
 		for (SpawnSpotTemplate s : oldGroup.getSpawnSpotTemplates()) {
 			if (s.getX() == spot.getX() && s.getY() == spot.getY() && s.getZ() == spot.getZ() && s.getHeading() == spot.getHeading()) {
-				if (delete || !StringUtils.equals(s.getWalkerId(), spot.getWalkerId())) {
+				if (delete || !Objects.equals(s.getWalkerId(), spot.getWalkerId())) {
 					oldSpot = s;
 					break;
 				} else

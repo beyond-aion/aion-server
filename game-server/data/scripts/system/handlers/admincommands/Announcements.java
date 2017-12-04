@@ -82,7 +82,7 @@ public class Announcements extends AdminCommand {
 				return;
 			}
 
-			String message = StringEscapeUtils.unescapeJava(StringUtils.join(params, " ", 4, params.length));
+			String message = StringEscapeUtils.unescapeJava(StringUtils.join(params, ' ', 4, params.length));
 			if (message.isEmpty()) {
 				sendInfo(player, "The message cannot be empty.");
 				return;

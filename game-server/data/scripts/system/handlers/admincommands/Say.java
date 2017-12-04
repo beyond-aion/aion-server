@@ -1,7 +1,5 @@
 package admincommands;
 
-import org.apache.commons.lang3.StringUtils;
-
 import com.aionemu.gameserver.model.ChatType;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -34,6 +32,6 @@ public class Say extends AdminCommand {
 			return;
 		}
 
-		PacketSendUtility.broadcastPacket(admin, new SM_MESSAGE((Npc) admin.getTarget(), StringUtils.join(params, ' '), ChatType.NORMAL), true);
+		PacketSendUtility.broadcastPacket(admin, new SM_MESSAGE((Npc) admin.getTarget(), String.join(" ", params), ChatType.NORMAL), true);
 	}
 }

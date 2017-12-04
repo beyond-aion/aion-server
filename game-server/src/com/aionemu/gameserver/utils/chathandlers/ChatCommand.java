@@ -53,7 +53,7 @@ public abstract class ChatCommand {
 		try {
 			execute(player, params);
 		} catch (Exception e) {
-			log.error("Exception executing chat command " + getAliasWithPrefix() + " " + StringUtils.join(params, ' ') + "\nPlayer: " + player.getName()
+			log.error("Exception executing chat command " + getAliasWithPrefix() + " " + String.join(" ", params) + "\nPlayer: " + player.getName()
 				+ "\nTarget: " + player.getTarget(), e);
 			return false;
 		}

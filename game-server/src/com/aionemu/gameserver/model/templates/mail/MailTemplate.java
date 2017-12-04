@@ -13,8 +13,6 @@ import javax.xml.bind.annotation.XmlElements;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
-import org.apache.commons.lang3.StringUtils;
-
 import com.aionemu.gameserver.model.Race;
 
 /**
@@ -81,14 +79,14 @@ public class MailTemplate {
 		String bodyStr = getBody().getFormattedString(customFormatter);
 		String tailStr = getTail().getFormattedString(customFormatter);
 		String message = headerStr;
-		if (StringUtils.isEmpty(message))
+		if (message.isEmpty())
 			message = bodyStr;
-		else if (!StringUtils.isEmpty(bodyStr)) {
+		else if (!bodyStr.isEmpty()) {
 			message += "," + bodyStr;
 		}
-		if (StringUtils.isEmpty(message))
+		if (message.isEmpty())
 			message = tailStr;
-		else if (!StringUtils.isEmpty(tailStr)) {
+		else if (!tailStr.isEmpty()) {
 			message += "," + tailStr;
 		}
 		return message;

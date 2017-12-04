@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.utils.chathandlers;
 
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -54,7 +53,7 @@ public abstract class AdminCommand extends ChatCommand {
 		if (LoggingConfig.LOG_GMAUDIT)
 			log.info(
 				"[Admin Command] > [Player: " + player.getName() + "]" + (player.getTarget() != null ? "[Target: " + player.getTarget().getName() + "]" : "")
-					+ ": " + getAliasWithPrefix() + " " + StringUtils.join(params, ' '));
+					+ ": " + getAliasWithPrefix() + " " + String.join(" ", params));
 
 		if (!run(player, params))
 			sendInfo(player, "<Error while executing command>");
