@@ -19,6 +19,7 @@ import com.aionemu.gameserver.services.drop.DropRegistrationService;
 import com.aionemu.gameserver.services.instance.InstanceService;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
+import com.aionemu.gameserver.utils.idfactory.IDFactory;
 import com.aionemu.gameserver.world.World;
 
 /**
@@ -76,8 +77,13 @@ public class RespawnService {
 		ScheduledRespawn scheduledRespawn = new ScheduledRespawn(task, respawnTask);
 		ScheduledRespawn oldScheduledRespawn = pendingRespawns.put(visibleObject.getObjectId(), scheduledRespawn);
 		if (oldScheduledRespawn != null)
-			LoggerFactory.getLogger(RespawnService.class).warn("Duplicate respawn task initiated for " + visibleObject);
+			LoggerFactory.getLogger(RespawnService.class).warn("Duplicate respawn task initiated for " + visibleObject
+				+ " or the previous objectId owner had a pending respawn task but auto released its ID during finalization (see AionObject.finalize())");
 		return scheduledRespawn;
+	}
+
+	public static boolean hasRespawnTask(int objectId) {
+		return pendingRespawns.containsKey(objectId);
 	}
 
 	public static void cancelRespawn(VisibleObject object) {
@@ -85,7 +91,7 @@ public class RespawnService {
 	}
 
 	public static boolean cancelRespawn(int objectId) {
-		ScheduledRespawn scheduledRespawn = pendingRespawns.remove(objectId);
+		ScheduledRespawn scheduledRespawn = pendingRespawns.get(objectId);
 		if (scheduledRespawn != null) {
 			scheduledRespawn.cancel();
 			return true;
@@ -102,6 +108,13 @@ public class RespawnService {
 			}
 		}
 		return count;
+	}
+
+	private static ScheduledRespawn unregisterRespawnTask(int objectId) {
+		ScheduledRespawn respawn = pendingRespawns.remove(objectId);
+		if (respawn != null && !World.getInstance().isInWorld(objectId))
+			IDFactory.getInstance().releaseId(objectId);
+		return respawn;
 	}
 
 	private static class DecayTask implements Runnable {
@@ -136,12 +149,12 @@ public class RespawnService {
 
 		@Override
 		public void run() {
-			unregisterRespawnTask();
+			unregister();
 			respawn(spawn, instanceId);
 		}
 
-		public void unregisterRespawnTask() {
-			pendingRespawns.remove(despawnedObjectId);
+		public void unregister() {
+			unregisterRespawnTask(despawnedObjectId);
 		}
 
 		private void respawn(SpawnTemplate spawnTemplate, int instanceId) {
@@ -174,7 +187,7 @@ public class RespawnService {
 		}
 
 		public void cancel() {
-			respawnTask.unregisterRespawnTask();
+			respawnTask.unregister();
 			future.cancel(false);
 		}
 	}

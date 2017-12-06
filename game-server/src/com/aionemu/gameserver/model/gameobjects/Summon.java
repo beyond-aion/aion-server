@@ -22,6 +22,7 @@ import com.aionemu.gameserver.model.summons.SkillOrder;
 import com.aionemu.gameserver.model.summons.SummonMode;
 import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
+import com.aionemu.gameserver.services.RespawnService;
 import com.aionemu.gameserver.world.WorldPosition;
 
 /**
@@ -263,5 +264,12 @@ public class Summon extends Creature {
 
 	public SkillElement getAlwaysResistElement() {
 		return alwaysResistElement;
+	}
+
+	@Override
+	protected boolean autoReleaseObjectId() {
+		if (!(getLifeStats() instanceof SummonLifeStats)) // object id was inherited from npc with TallocsSummonAI
+			return false;
+		return !RespawnService.hasRespawnTask(getObjectId());
 	}
 }

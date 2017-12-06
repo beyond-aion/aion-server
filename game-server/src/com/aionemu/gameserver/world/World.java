@@ -15,6 +15,7 @@ import com.aionemu.commons.utils.GenericValidator;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.dataholders.PlayerInitialData.LocationData;
 import com.aionemu.gameserver.model.animations.ObjectDeleteAnimation;
+import com.aionemu.gameserver.model.gameobjects.AionObject;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
@@ -137,7 +138,8 @@ public class World {
 
 	/**
 	 * Despawns (if spawned) and completely removes the object from the world.<br>
-	 * If the object is an Npc, it's objId will be released from IDFactory once it gets garbage collected (see {@link Npc#finalize()}}).
+	 * If the object returns true for autoReleaseObjectId(), it's objectId will be released from IDFactory once it gets garbage collected (see
+	 * {@link AionObject#finalize()}).
 	 * 
 	 * @return True if removed, false if the object wasn't in world
 	 */

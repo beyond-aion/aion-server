@@ -50,4 +50,8 @@ public class Pet extends VisibleObject {
 		return petTemplate;
 	}
 
+	@Override
+	protected boolean autoReleaseObjectId() {
+		return true;
+	}
 }

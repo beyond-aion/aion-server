@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.model.gameobjects;
 
+import com.aionemu.gameserver.utils.idfactory.IDFactory;
+
 /**
  * This is the base class for all "in-game" objects, that player can interact with, such as: npcs, monsters, players, items.<br>
  * <br>
@@ -63,4 +65,16 @@ public abstract class AionObject {
 	public String toString() {
 		return getClass().getSimpleName() + " [name=" + getName() + ", objectId=" + objectId + "]";
 	}
+
+	@Override
+	protected void finalize() throws Throwable {
+		if (autoReleaseObjectId())
+			IDFactory.getInstance().releaseId(objectId); // release ID once the object is garbage collected
+		super.finalize();
+	}
+
+	protected boolean autoReleaseObjectId() {
+		return false;
+	}
+
 }
