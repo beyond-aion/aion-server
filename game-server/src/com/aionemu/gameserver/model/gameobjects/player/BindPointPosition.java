@@ -1,11 +1,11 @@
 package com.aionemu.gameserver.model.gameobjects.player;
 
-import com.aionemu.gameserver.model.gameobjects.PersistentState;
+import com.aionemu.gameserver.model.gameobjects.Persistable;
 
 /**
  * @author evilset
  */
-public class BindPointPosition {
+public class BindPointPosition implements Persistable {
 
 	private int mapId;
 	private float x;
@@ -68,6 +68,7 @@ public class BindPointPosition {
 	/**
 	 * @return the persistentState
 	 */
+	@Override
 	public PersistentState getPersistentState() {
 		return persistentState;
 	}
@@ -76,6 +77,7 @@ public class BindPointPosition {
 	 * @param persistentState
 	 *          the persistentState to set
 	 */
+	@Override
 	@SuppressWarnings("fallthrough")
 	public void setPersistentState(PersistentState persistentState) {
 		switch (persistentState) {

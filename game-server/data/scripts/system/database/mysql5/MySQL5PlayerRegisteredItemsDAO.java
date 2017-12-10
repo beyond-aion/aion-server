@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
@@ -22,7 +21,8 @@ import com.aionemu.gameserver.dao.MySQL5DAOUtils;
 import com.aionemu.gameserver.dao.PlayerRegisteredItemsDAO;
 import com.aionemu.gameserver.model.gameobjects.HouseDecoration;
 import com.aionemu.gameserver.model.gameobjects.HouseObject;
-import com.aionemu.gameserver.model.gameobjects.PersistentState;
+import com.aionemu.gameserver.model.gameobjects.Persistable;
+import com.aionemu.gameserver.model.gameobjects.Persistable.PersistentState;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.house.House;
 import com.aionemu.gameserver.model.house.HouseRegistry;
@@ -50,54 +50,6 @@ public class MySQL5PlayerRegisteredItemsDAO extends PlayerRegisteredItemsDAO {
 		+ "WHERE `player_id`=? AND `item_unique_id`=? AND `item_id`=?";
 	public static final String DELETE_QUERY = "DELETE FROM `player_registered_items` WHERE `item_unique_id` = ?";
 	public static final String RESET_QUERY = "UPDATE `player_registered_items` SET x=0,y=0,z=0,h=0,area='NONE' WHERE `player_id`=? AND `area` != 'DECOR'";
-
-	private static final Predicate<HouseObject<?>> objectsToAddPredicate = new Predicate<HouseObject<?>>() {
-
-		@Override
-		public boolean test(HouseObject<?> input) {
-			return input != null && (input.getPersistentState() == PersistentState.NEW);
-		}
-	};
-
-	private static final Predicate<HouseObject<?>> objectsToUpdatePredicate = new Predicate<HouseObject<?>>() {
-
-		@Override
-		public boolean test(HouseObject<?> input) {
-			return input != null && (input.getPersistentState() == PersistentState.UPDATE_REQUIRED);
-		}
-	};
-
-	private static final Predicate<HouseObject<?>> objectsToDeletePredicate = new Predicate<HouseObject<?>>() {
-
-		@Override
-		public boolean test(HouseObject<?> input) {
-			return input != null && PersistentState.DELETED == input.getPersistentState();
-		}
-	};
-
-	private static final Predicate<HouseDecoration> partsToAddPredicate = new Predicate<HouseDecoration>() {
-
-		@Override
-		public boolean test(HouseDecoration input) {
-			return input != null && (input.getPersistentState() == PersistentState.NEW);
-		}
-	};
-
-	private static final Predicate<HouseDecoration> partsToUpdatePredicate = new Predicate<HouseDecoration>() {
-
-		@Override
-		public boolean test(HouseDecoration input) {
-			return input != null && (input.getPersistentState() == PersistentState.UPDATE_REQUIRED);
-		}
-	};
-
-	private static final Predicate<HouseDecoration> partsToDeletePredicate = new Predicate<HouseDecoration>() {
-
-		@Override
-		public boolean test(HouseDecoration input) {
-			return input != null && PersistentState.DELETED == input.getPersistentState();
-		}
-	};
 
 	@Override
 	public int[] getUsedIDs() {
@@ -226,12 +178,12 @@ public class MySQL5PlayerRegisteredItemsDAO extends PlayerRegisteredItemsDAO {
 	public boolean store(HouseRegistry registry, int playerId) {
 		List<HouseObject<?>> objects = registry.getObjects();
 		List<HouseDecoration> decors = registry.getAllParts();
-		List<HouseObject<?>> objectsToAdd = objects.stream().filter(objectsToAddPredicate).collect(Collectors.toList());
-		List<HouseObject<?>> objectsToUpdate = objects.stream().filter(objectsToUpdatePredicate).collect(Collectors.toList());
-		List<HouseObject<?>> objectsToDelete = objects.stream().filter(objectsToDeletePredicate).collect(Collectors.toList());
-		List<HouseDecoration> partsToAdd = decors.stream().filter(partsToAddPredicate).collect(Collectors.toList());
-		List<HouseDecoration> partsToUpdate = decors.stream().filter(partsToUpdatePredicate).collect(Collectors.toList());
-		List<HouseDecoration> partsToDelete = decors.stream().filter(partsToDeletePredicate).collect(Collectors.toList());
+		List<HouseObject<?>> objectsToAdd = objects.stream().filter(Persistable.NEW).collect(Collectors.toList());
+		List<HouseObject<?>> objectsToUpdate = objects.stream().filter(Persistable.CHANGED).collect(Collectors.toList());
+		List<HouseObject<?>> objectsToDelete = objects.stream().filter(Persistable.DELETED).collect(Collectors.toList());
+		List<HouseDecoration> partsToAdd = decors.stream().filter(Persistable.NEW).collect(Collectors.toList());
+		List<HouseDecoration> partsToUpdate = decors.stream().filter(Persistable.CHANGED).collect(Collectors.toList());
+		List<HouseDecoration> partsToDelete = decors.stream().filter(Persistable.DELETED).collect(Collectors.toList());
 
 		boolean objectDeleteResult = false;
 		boolean partsDeleteResult = false;

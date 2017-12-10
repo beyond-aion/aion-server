@@ -9,7 +9,6 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
@@ -21,7 +20,8 @@ import com.aionemu.gameserver.dao.ItemStoneListDAO;
 import com.aionemu.gameserver.dao.MySQL5DAOUtils;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.Item;
-import com.aionemu.gameserver.model.gameobjects.PersistentState;
+import com.aionemu.gameserver.model.gameobjects.Persistable;
+import com.aionemu.gameserver.model.gameobjects.Persistable.PersistentState;
 import com.aionemu.gameserver.model.items.GodStone;
 import com.aionemu.gameserver.model.items.IdianStone;
 import com.aionemu.gameserver.model.items.ItemStone;
@@ -39,30 +39,6 @@ public class MySQL5ItemStoneListDAO extends ItemStoneListDAO {
 	public static final String UPDATE_QUERY = "UPDATE `item_stones` SET `item_id`=?, `slot`=?, `polishNumber`=?, `polishCharge`=?, `proc_count`=? where `item_unique_id`=? AND `category`=?";
 	public static final String DELETE_QUERY = "DELETE FROM `item_stones` WHERE `item_unique_id`=? AND slot=? AND category=?";
 	public static final String SELECT_QUERY = "SELECT `item_id`, `slot`, `category`, `polishNumber`, `polishCharge`, `proc_count` FROM `item_stones` WHERE `item_unique_id`=?";
-	private static final Predicate<ItemStone> itemStoneAddPredicate = new Predicate<ItemStone>() {
-
-		@Override
-		public boolean test(ItemStone itemStone) {
-			return itemStone != null && PersistentState.NEW == itemStone.getPersistentState();
-		}
-
-	};
-	private static final Predicate<ItemStone> itemStoneDeletedPredicate = new Predicate<ItemStone>() {
-
-		@Override
-		public boolean test(ItemStone itemStone) {
-			return itemStone != null && PersistentState.DELETED == itemStone.getPersistentState();
-		}
-
-	};
-	private static final Predicate<ItemStone> itemStoneUpdatePredicate = new Predicate<ItemStone>() {
-
-		@Override
-		public boolean test(ItemStone itemStone) {
-			return itemStone != null && PersistentState.UPDATE_REQUIRED == itemStone.getPersistentState();
-		}
-
-	};
 
 	@Override
 	public void load(final Collection<Item> items) {
@@ -183,9 +159,9 @@ public class MySQL5ItemStoneListDAO extends ItemStoneListDAO {
 			return;
 		}
 
-		Set<ItemStone> stonesToAdd = stones.stream().filter(itemStoneAddPredicate).collect(Collectors.toSet());
-		Set<ItemStone> stonesToDelete = stones.stream().filter(itemStoneDeletedPredicate).collect(Collectors.toSet());
-		Set<ItemStone> stonesToUpdate = stones.stream().filter(itemStoneUpdatePredicate).collect(Collectors.toSet());
+		Set<ItemStone> stonesToAdd = stones.stream().filter(Persistable.NEW).collect(Collectors.toSet());
+		Set<ItemStone> stonesToDelete = stones.stream().filter(Persistable.DELETED).collect(Collectors.toSet());
+		Set<ItemStone> stonesToUpdate = stones.stream().filter(Persistable.CHANGED).collect(Collectors.toSet());
 
 		try (Connection con = DatabaseFactory.getConnection()) {
 

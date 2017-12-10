@@ -16,7 +16,7 @@ import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.enchants.TemperingEffect;
 import com.aionemu.gameserver.model.enchants.TemperingStat;
 import com.aionemu.gameserver.model.gameobjects.Item;
-import com.aionemu.gameserver.model.gameobjects.PersistentState;
+import com.aionemu.gameserver.model.gameobjects.Persistable.PersistentState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.Rates;
 import com.aionemu.gameserver.model.templates.item.enums.ItemGroup;

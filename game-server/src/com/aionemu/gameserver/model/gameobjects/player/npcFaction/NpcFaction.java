@@ -1,12 +1,12 @@
 package com.aionemu.gameserver.model.gameobjects.player.npcFaction;
 
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.model.gameobjects.PersistentState;
+import com.aionemu.gameserver.model.gameobjects.Persistable;
 
 /**
  * @author MrPoke
  */
-public class NpcFaction {
+public class NpcFaction implements Persistable {
 
 	private int id;
 	private int time;
@@ -75,7 +75,7 @@ public class NpcFaction {
 	 */
 	public void setTime(int time) {
 		this.time = time;
-		this.setPersistentState(PersistentState.UPDATE_REQUIRED);
+		setPersistentState(PersistentState.UPDATE_REQUIRED);
 	}
 
 	/**
@@ -84,7 +84,7 @@ public class NpcFaction {
 	 */
 	public void setActive(boolean active) {
 		this.active = active;
-		this.setPersistentState(PersistentState.UPDATE_REQUIRED);
+		setPersistentState(PersistentState.UPDATE_REQUIRED);
 	}
 
 	/**
@@ -92,7 +92,7 @@ public class NpcFaction {
 	 *          the state to set
 	 */
 	public void setState(ENpcFactionQuestState state) {
-		this.setPersistentState(PersistentState.UPDATE_REQUIRED);
+		setPersistentState(PersistentState.UPDATE_REQUIRED);
 		this.state = state;
 	}
 
@@ -109,12 +109,13 @@ public class NpcFaction {
 	 */
 	public void setQuestId(int questId) {
 		this.questId = questId;
-		this.setPersistentState(PersistentState.UPDATE_REQUIRED);
+		setPersistentState(PersistentState.UPDATE_REQUIRED);
 	}
 
 	/**
 	 * @return the persistentState
 	 */
+	@Override
 	public PersistentState getPersistentState() {
 		return persistentState;
 	}
@@ -123,6 +124,7 @@ public class NpcFaction {
 	 * @param persistentState
 	 *          the persistentState to set
 	 */
+	@Override
 	public void setPersistentState(PersistentState persistentState) {
 		switch (persistentState) {
 			case DELETED:

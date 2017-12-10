@@ -5,7 +5,7 @@ import java.sql.Timestamp;
 /**
  * @author kosyachok
  */
-public class Letter extends AionObject {
+public class Letter extends AionObject implements Persistable {
 
 	private int recipientId;
 	private Item attachedItem;
@@ -111,7 +111,8 @@ public class Letter extends AionObject {
 			this.express = false;
 	}
 
-	public PersistentState getLetterPersistentState() {
+	@Override
+	public PersistentState getPersistentState() {
 		return persistentState;
 	}
 
@@ -120,11 +121,8 @@ public class Letter extends AionObject {
 		this.persistentState = PersistentState.UPDATE_REQUIRED;
 	}
 
-	public void delete() {
-		this.persistentState = PersistentState.DELETED;
-	}
-
-	public void setPersistState(PersistentState state) {
+	@Override
+	public void setPersistentState(PersistentState state) {
 		this.persistentState = state;
 	}
 

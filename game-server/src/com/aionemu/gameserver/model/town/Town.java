@@ -10,7 +10,7 @@ import java.util.function.Consumer;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.gameobjects.PersistentState;
+import com.aionemu.gameserver.model.gameobjects.Persistable;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.spawns.Spawn;
@@ -25,7 +25,7 @@ import com.aionemu.gameserver.world.World;
 /**
  * @author ViAl
  */
-public class Town {
+public class Town implements Persistable {
 
 	private int id;
 	private int level;
@@ -149,10 +149,12 @@ public class Town {
 		return levelUpDate;
 	}
 
+	@Override
 	public PersistentState getPersistentState() {
 		return persistentState;
 	}
 
+	@Override
 	public void setPersistentState(PersistentState state) {
 		if (this.persistentState == PersistentState.NEW && state == PersistentState.UPDATE_REQUIRED)
 			return;

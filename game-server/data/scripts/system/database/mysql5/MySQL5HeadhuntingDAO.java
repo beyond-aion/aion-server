@@ -13,7 +13,7 @@ import com.aionemu.commons.database.ParamReadStH;
 import com.aionemu.gameserver.dao.HeadhuntingDAO;
 import com.aionemu.gameserver.dao.MySQL5DAOUtils;
 import com.aionemu.gameserver.model.event.Headhunter;
-import com.aionemu.gameserver.model.gameobjects.PersistentState;
+import com.aionemu.gameserver.model.gameobjects.Persistable.PersistentState;
 import com.aionemu.gameserver.services.PvpService;
 
 /**

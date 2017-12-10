@@ -6,7 +6,7 @@ import com.aionemu.gameserver.model.templates.housing.HousePart;
 /**
  * @author Rolandas
  */
-public class HouseDecoration extends AionObject {
+public class HouseDecoration extends AionObject implements Persistable {
 
 	private int templateId;
 	private byte room;
@@ -28,10 +28,12 @@ public class HouseDecoration extends AionObject {
 		return DataManager.HOUSE_PARTS_DATA.getPartById(templateId);
 	}
 
+	@Override
 	public PersistentState getPersistentState() {
 		return persistentState;
 	}
 
+	@Override
 	public void setPersistentState(PersistentState persistentState) {
 		this.persistentState = persistentState;
 	}

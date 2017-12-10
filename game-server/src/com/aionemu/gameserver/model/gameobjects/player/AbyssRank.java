@@ -3,13 +3,13 @@ package com.aionemu.gameserver.model.gameobjects.player;
 import java.util.Calendar;
 
 import com.aionemu.gameserver.configs.main.CustomConfig;
-import com.aionemu.gameserver.model.gameobjects.PersistentState;
+import com.aionemu.gameserver.model.gameobjects.Persistable;
 import com.aionemu.gameserver.utils.stats.AbyssRankEnum;
 
 /**
  * @author ATracer, Divinity
  */
-public class AbyssRank {
+public class AbyssRank implements Persistable {
 
 	private int dailyAP;
 	private int weeklyAP;
@@ -240,6 +240,7 @@ public class AbyssRank {
 	/**
 	 * @return the persistentState
 	 */
+	@Override
 	public PersistentState getPersistentState() {
 		return persistentState;
 	}
@@ -248,6 +249,7 @@ public class AbyssRank {
 	 * @param persistentState
 	 *          the persistentState to set
 	 */
+	@Override
 	public void setPersistentState(PersistentState persistentState) {
 		if (persistentState != PersistentState.UPDATE_REQUIRED || this.persistentState != PersistentState.NEW)
 			this.persistentState = persistentState;

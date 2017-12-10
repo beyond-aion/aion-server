@@ -11,13 +11,13 @@ import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.dao.PlayerRegisteredItemsDAO;
 import com.aionemu.gameserver.model.gameobjects.HouseDecoration;
 import com.aionemu.gameserver.model.gameobjects.HouseObject;
-import com.aionemu.gameserver.model.gameobjects.PersistentState;
+import com.aionemu.gameserver.model.gameobjects.Persistable;
 import com.aionemu.gameserver.model.templates.housing.PartType;
 
 /**
  * @author Rolandas
  */
-public class HouseRegistry {
+public class HouseRegistry implements Persistable {
 
 	private static final Logger log = LoggerFactory.getLogger(HouseRegistry.class);
 	private House owner;
@@ -274,10 +274,12 @@ public class HouseRegistry {
 		}
 	}
 
+	@Override
 	public final PersistentState getPersistentState() {
 		return persistentState;
 	}
 
+	@Override
 	public final void setPersistentState(PersistentState persistentState) {
 		this.persistentState = persistentState;
 	}

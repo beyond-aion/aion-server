@@ -3,13 +3,13 @@ package com.aionemu.gameserver.model.account;
 import java.sql.Timestamp;
 
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.model.gameobjects.PersistentState;
+import com.aionemu.gameserver.model.gameobjects.Persistable;
 import com.aionemu.gameserver.model.templates.event.AtreianPassport;
 
 /**
  * @author ViAl
  */
-public class Passport {
+public class Passport implements Persistable {
 
 	private int id;
 	private boolean rewarded;
@@ -54,11 +54,13 @@ public class Passport {
 		this.arriveDate = arriveDate;
 	}
 
-	public PersistentState getState() {
+	@Override
+	public PersistentState getPersistentState() {
 		return state;
 	}
 
-	public void setState(PersistentState state) {
+	@Override
+	public void setPersistentState(PersistentState state) {
 		if (this.state == PersistentState.NEW) {
 			if (state == PersistentState.UPDATE_REQUIRED)
 				return;

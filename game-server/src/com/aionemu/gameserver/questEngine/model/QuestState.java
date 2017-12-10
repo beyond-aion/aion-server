@@ -3,14 +3,14 @@ package com.aionemu.gameserver.questEngine.model;
 import java.sql.Timestamp;
 
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.model.gameobjects.PersistentState;
+import com.aionemu.gameserver.model.gameobjects.Persistable;
 import com.aionemu.gameserver.model.templates.QuestTemplate;
 
 /**
  * @author MrPoke
  * @modified vlog, Rolandas
  */
-public class QuestState {
+public class QuestState implements Persistable {
 
 	private int questId;
 	private QuestVars questVars;
@@ -139,10 +139,12 @@ public class QuestState {
 		return true;
 	}
 
+	@Override
 	public PersistentState getPersistentState() {
 		return persistentState;
 	}
 
+	@Override
 	@SuppressWarnings("fallthrough")
 	public void setPersistentState(PersistentState persistentState) {
 		switch (persistentState) {

@@ -3,7 +3,7 @@ package com.aionemu.gameserver.model.skill;
 import java.util.List;
 
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.model.gameobjects.PersistentState;
+import com.aionemu.gameserver.model.gameobjects.Persistable;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SKILL_REMOVE;
 import com.aionemu.gameserver.skillengine.model.SkillLearnTemplate;
@@ -12,7 +12,7 @@ import com.aionemu.gameserver.skillengine.model.StigmaType;
 /**
  * @author ATracer, Neon
  */
-public class PlayerSkillEntry extends SkillEntry {
+public class PlayerSkillEntry extends SkillEntry implements Persistable {
 
 	private int skillType; // 0 normal skill , 1 stigma skill , 3 linked stigma skill
 	private int currentXp; // for crafting skills
@@ -141,6 +141,7 @@ public class PlayerSkillEntry extends SkillEntry {
 	/**
 	 * @return the pState
 	 */
+	@Override
 	public PersistentState getPersistentState() {
 		return persistentState;
 	}
@@ -149,6 +150,7 @@ public class PlayerSkillEntry extends SkillEntry {
 	 * @param persistentState
 	 *          the pState to set
 	 */
+	@Override
 	public void setPersistentState(PersistentState persistentState) {
 		switch (persistentState) {
 			case DELETED:

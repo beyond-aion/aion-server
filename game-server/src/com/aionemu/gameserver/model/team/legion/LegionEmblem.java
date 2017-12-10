@@ -1,12 +1,12 @@
 package com.aionemu.gameserver.model.team.legion;
 
-import com.aionemu.gameserver.model.gameobjects.PersistentState;
+import com.aionemu.gameserver.model.gameobjects.Persistable;
 
 /**
  * @author Simple
  ' @modified cura, Neon
  */
-public class LegionEmblem {
+public class LegionEmblem implements Persistable {
 
 	private byte emblemId = 0;
 	private byte color_a = 0;
@@ -192,6 +192,7 @@ public class LegionEmblem {
 	/**
 	 * @param persistentState
 	 */
+	@Override
 	@SuppressWarnings("fallthrough")
 	public void setPersistentState(PersistentState persistentState) {
 		switch (persistentState) {
@@ -206,6 +207,7 @@ public class LegionEmblem {
 	/**
 	 * @return the persistentState
 	 */
+	@Override
 	public PersistentState getPersistentState() {
 		return persistentState;
 	}

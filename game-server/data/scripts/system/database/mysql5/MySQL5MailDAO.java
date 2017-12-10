@@ -24,7 +24,7 @@ import com.aionemu.gameserver.dao.MySQL5DAOUtils;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Letter;
 import com.aionemu.gameserver.model.gameobjects.LetterType;
-import com.aionemu.gameserver.model.gameobjects.PersistentState;
+import com.aionemu.gameserver.model.gameobjects.Persistable.PersistentState;
 import com.aionemu.gameserver.model.gameobjects.player.Mailbox;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.PlayerCommonData;
@@ -83,7 +83,7 @@ public class MySQL5MailDAO extends MailDAO {
 					if (item.getObjectId() == attachedItemObjId)
 						letter.setAttachedItem(item);
 			}
-			letter.setPersistState(PersistentState.UPDATED);
+			letter.setPersistentState(PersistentState.UPDATED);
 			mailbox.putLetterToMailbox(letter);
 		}
 
@@ -175,19 +175,15 @@ public class MySQL5MailDAO extends MailDAO {
 	@Override
 	public boolean storeLetter(Timestamp time, Letter letter) {
 		boolean result = false;
-		switch (letter.getLetterPersistentState()) {
+		switch (letter.getPersistentState()) {
 			case NEW:
 				result = saveLetter(time, letter);
 				break;
-
 			case UPDATE_REQUIRED:
 				result = updateLetter(time, letter);
 				break;
-			/*
-			 * case DELETED: return deleteLetter(letter);
-			 */
 		}
-		letter.setPersistState(PersistentState.UPDATED);
+		letter.setPersistentState(PersistentState.UPDATED);
 
 		return result;
 	}

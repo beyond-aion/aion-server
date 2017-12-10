@@ -21,7 +21,7 @@ import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.actions.PlayerMode;
 import com.aionemu.gameserver.model.gameobjects.Item;
-import com.aionemu.gameserver.model.gameobjects.PersistentState;
+import com.aionemu.gameserver.model.gameobjects.Persistable;
 import com.aionemu.gameserver.model.gameobjects.Summon;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.model.items.ItemSlot;
@@ -53,7 +53,7 @@ import com.aionemu.gameserver.utils.stats.AbyssRankEnum;
  * @author Avol, ATracer, kosyachok
  * @modified cura
  */
-public class Equipment {
+public class Equipment implements Persistable {
 
 	private static final Logger log = LoggerFactory.getLogger(Equipment.class);
 
@@ -827,6 +827,7 @@ public class Equipment {
 	/**
 	 * @return the persistentState
 	 */
+	@Override
 	public PersistentState getPersistentState() {
 		return persistentState;
 	}
@@ -835,6 +836,7 @@ public class Equipment {
 	 * @param persistentState
 	 *          the persistentState to set
 	 */
+	@Override
 	public void setPersistentState(PersistentState persistentState) {
 		this.persistentState = persistentState;
 	}

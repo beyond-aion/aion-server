@@ -22,7 +22,7 @@ import com.aionemu.gameserver.world.knownlist.PlayerAwareKnownList;
 /**
  * @author Rolandas
  */
-public abstract class HouseObject<T extends PlaceableHouseObject> extends VisibleObject implements Expirable {
+public abstract class HouseObject<T extends PlaceableHouseObject> extends VisibleObject implements Expirable, Persistable {
 
 	private int expireEnd;
 	private float x;
@@ -45,10 +45,12 @@ public abstract class HouseObject<T extends PlaceableHouseObject> extends Visibl
 		setKnownlist(new PlayerAwareKnownList(this));
 	}
 
+	@Override
 	public PersistentState getPersistentState() {
 		return persistentState;
 	}
 
+	@Override
 	@SuppressWarnings("fallthrough")
 	public void setPersistentState(PersistentState persistentState) {
 		switch (persistentState) {

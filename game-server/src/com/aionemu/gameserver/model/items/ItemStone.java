@@ -1,12 +1,12 @@
 package com.aionemu.gameserver.model.items;
 
-import com.aionemu.gameserver.model.gameobjects.PersistentState;
+import com.aionemu.gameserver.model.gameobjects.Persistable;
 import com.aionemu.gameserver.model.stats.calc.StatOwner;
 
 /**
  * @author ATracer modified by Wakizashi
  */
-public class ItemStone implements StatOwner {
+public class ItemStone implements StatOwner, Persistable {
 
 	private int itemObjId;
 
@@ -69,6 +69,7 @@ public class ItemStone implements StatOwner {
 	/**
 	 * @return the pState
 	 */
+	@Override
 	public PersistentState getPersistentState() {
 		return persistentState;
 	}
@@ -76,6 +77,7 @@ public class ItemStone implements StatOwner {
 	/**
 	 * @param persistentState
 	 */
+	@Override
 	@SuppressWarnings("fallthrough")
 	public void setPersistentState(PersistentState persistentState) {
 		switch (persistentState) {

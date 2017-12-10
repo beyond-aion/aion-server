@@ -1,11 +1,11 @@
 package com.aionemu.gameserver.model.gameobjects.player;
 
-import com.aionemu.gameserver.model.gameobjects.PersistentState;
+import com.aionemu.gameserver.model.gameobjects.Persistable;
 
 /**
  * @author ATracer
  */
-public class PlayerSettings {
+public class PlayerSettings implements Persistable {
 
 	private PersistentState persistentState;
 
@@ -29,6 +29,7 @@ public class PlayerSettings {
 	/**
 	 * @return the persistentState
 	 */
+	@Override
 	public PersistentState getPersistentState() {
 		return persistentState;
 	}
@@ -37,6 +38,7 @@ public class PlayerSettings {
 	 * @param persistentState
 	 *          the persistentState to set
 	 */
+	@Override
 	public void setPersistentState(PersistentState persistentState) {
 		this.persistentState = persistentState;
 	}

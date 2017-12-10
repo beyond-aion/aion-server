@@ -8,7 +8,6 @@ import java.sql.Types;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
@@ -20,7 +19,8 @@ import com.aionemu.commons.utils.GenericValidator;
 import com.aionemu.gameserver.dao.InventoryDAO;
 import com.aionemu.gameserver.dao.MySQL5DAOUtils;
 import com.aionemu.gameserver.model.gameobjects.Item;
-import com.aionemu.gameserver.model.gameobjects.PersistentState;
+import com.aionemu.gameserver.model.gameobjects.Persistable;
+import com.aionemu.gameserver.model.gameobjects.Persistable.PersistentState;
 import com.aionemu.gameserver.model.gameobjects.player.Equipment;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.items.storage.PlayerStorage;
@@ -43,30 +43,6 @@ public class MySQL5InventoryDAO extends InventoryDAO {
 	public static final String SELECT_LEGION_QUERY = "SELECT `legion_id` FROM `legion_members` WHERE `player_id`=?";
 	public static final String DELETE_ACCOUNT_WH = "DELETE FROM inventory WHERE item_owner=? AND item_location=2";
 	public static final String SELECT_QUERY2 = "SELECT * FROM `inventory` WHERE `item_owner`=? AND `item_location`=?";
-
-	private static final Predicate<Item> itemsToInsertPredicate = new Predicate<Item>() {
-
-		@Override
-		public boolean test(Item input) {
-			return input != null && PersistentState.NEW == input.getPersistentState();
-		}
-	};
-
-	private static final Predicate<Item> itemsToUpdatePredicate = new Predicate<Item>() {
-
-		@Override
-		public boolean test(Item input) {
-			return input != null && PersistentState.UPDATE_REQUIRED == input.getPersistentState();
-		}
-	};
-
-	private static final Predicate<Item> itemsToDeletePredicate = new Predicate<Item>() {
-
-		@Override
-		public boolean test(Item input) {
-			return input != null && PersistentState.DELETED == input.getPersistentState();
-		}
-	};
 
 	@Override
 	public Storage loadStorage(int ownerId, StorageType storageType) {
@@ -265,9 +241,9 @@ public class MySQL5InventoryDAO extends InventoryDAO {
 
 	@Override
 	public boolean store(List<Item> items, Integer playerId, Integer accountId, Integer legionId) {
-		Collection<Item> itemsToUpdate = items.stream().filter(itemsToUpdatePredicate).collect(Collectors.toList());
-		Collection<Item> itemsToInsert = items.stream().filter(itemsToInsertPredicate).collect(Collectors.toList());
-		Collection<Item> itemsToDelete = items.stream().filter(itemsToDeletePredicate).collect(Collectors.toList());
+		Collection<Item> itemsToUpdate = items.stream().filter(Persistable.CHANGED).collect(Collectors.toList());
+		Collection<Item> itemsToInsert = items.stream().filter(Persistable.NEW).collect(Collectors.toList());
+		Collection<Item> itemsToDelete = items.stream().filter(Persistable.DELETED).collect(Collectors.toList());
 
 		boolean deleteResult = false;
 		boolean insertResult = false;

@@ -15,7 +15,7 @@ import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.account.Account;
 import com.aionemu.gameserver.model.account.Passport;
 import com.aionemu.gameserver.model.account.PassportsList;
-import com.aionemu.gameserver.model.gameobjects.PersistentState;
+import com.aionemu.gameserver.model.gameobjects.Persistable.PersistentState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.event.AtreianPassport;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATREIAN_PASSPORT;
@@ -75,7 +75,7 @@ public class AtreianPassportService {
 				AuditLogger.log(player, "tried to get non-existing passport (ID: " + passId + ")");
 				continue;
 			}
-			if (passport.isRewarded() || passport.getState().equals(PersistentState.DELETED)) {
+			if (passport.isRewarded() || passport.getPersistentState() == PersistentState.DELETED) {
 				AuditLogger.log(player, "tried to get passport which is already rewarded (ID: " + passId + ")");
 				continue;
 			}
@@ -89,7 +89,7 @@ public class AtreianPassportService {
 			ItemService.addItem(player, atp.getRewardItem(), atp.getRewardItemNum(), true, new ItemUpdatePredicate(ItemAddType.ITEM_COLLECT,
 				ItemUpdateType.INC_PASSPORT_ADD));
 			passport.setRewarded(true);
-			passport.setState(PersistentState.DELETED);
+			passport.setPersistentState(PersistentState.DELETED);
 			ppl.removePassport(passport);
 			toRemove.add(passport);
 		}
@@ -111,14 +111,14 @@ public class AtreianPassportService {
 					case DAILY:
 						if (doReward) {
 							Passport passport = new Passport(atp.getId(), false, new Timestamp(System.currentTimeMillis()));
-							passport.setState(PersistentState.NEW);
+							passport.setPersistentState(PersistentState.NEW);
 							pa.getPassportsList().addPassport(passport);
 						}
 						break;
 					case CUMULATIVE:
 						if (doReward && atp.getAttendNum() == pa.getPassportStamps() + 1) {
 							Passport passport = new Passport(atp.getId(), false, new Timestamp(System.currentTimeMillis()));
-							passport.setState(PersistentState.NEW);
+							passport.setPersistentState(PersistentState.NEW);
 							pa.getPassportsList().addPassport(passport);
 						} else {
 							if (!pa.getPassportsList().isPassportPresent(atp.getId())) {
@@ -172,7 +172,7 @@ public class AtreianPassportService {
 			Passport pp = pl.get(i);
 			if (!pp.isFakeStamp() && !pp.isRewarded()) {
 				if (++realSize > 50) {
-					pp.setState(PersistentState.DELETED);
+					pp.setPersistentState(PersistentState.DELETED);
 					toRemove.add(pp);
 				}
 			}

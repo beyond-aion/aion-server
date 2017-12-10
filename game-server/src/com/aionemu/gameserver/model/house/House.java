@@ -27,7 +27,7 @@ import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.TribeClass;
 import com.aionemu.gameserver.model.gameobjects.HouseDecoration;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.gameobjects.PersistentState;
+import com.aionemu.gameserver.model.gameobjects.Persistable;
 import com.aionemu.gameserver.model.gameobjects.SummonedHouseNpc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.HouseOwnerState;
@@ -57,7 +57,7 @@ import com.aionemu.gameserver.world.zone.ZoneService;
 /**
  * @author Rolandas
  */
-public class House extends VisibleObject {
+public class House extends VisibleObject implements Persistable {
 
 	private static final Logger log = LoggerFactory.getLogger(House.class);
 	private HousingLand land;
@@ -463,10 +463,12 @@ public class House extends VisibleObject {
 			this.houseRegistry.save();
 	}
 
+	@Override
 	public PersistentState getPersistentState() {
 		return persistentState;
 	}
 
+	@Override
 	public void setPersistentState(PersistentState persistentState) {
 		this.persistentState = persistentState;
 	}

@@ -41,7 +41,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 /**
  * @author ATracer, Wakizashi, xTz
  */
-public class Item extends AionObject implements Expirable, StatOwner {
+public class Item extends AionObject implements Expirable, StatOwner, Persistable {
 
 	public static final int MAX_BASIC_STONES = 6;
 	private static final Logger log = LoggerFactory.getLogger(Item.class);
@@ -538,6 +538,7 @@ public class Item extends AionObject implements Expirable, StatOwner {
 	/**
 	 * @return the persistentState
 	 */
+	@Override
 	public PersistentState getPersistentState() {
 		return persistentState;
 	}
@@ -549,6 +550,7 @@ public class Item extends AionObject implements Expirable, StatOwner {
 	 * @param persistentState
 	 *          the persistentState to set
 	 */
+	@Override
 	@SuppressWarnings("fallthrough")
 	public void setPersistentState(PersistentState persistentState) {
 		switch (persistentState) {

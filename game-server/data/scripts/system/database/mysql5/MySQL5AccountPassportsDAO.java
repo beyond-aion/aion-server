@@ -16,7 +16,7 @@ import com.aionemu.gameserver.dao.MySQL5DAOUtils;
 import com.aionemu.gameserver.model.account.Account;
 import com.aionemu.gameserver.model.account.Passport;
 import com.aionemu.gameserver.model.account.PassportsList;
-import com.aionemu.gameserver.model.gameobjects.PersistentState;
+import com.aionemu.gameserver.model.gameobjects.Persistable.PersistentState;
 
 /**
  * @author ViAl
@@ -47,7 +47,7 @@ public class MySQL5AccountPassportsDAO extends AccountPassportsDAO {
 						boolean rewarded = rset.getInt("rewarded") != 0;
 						Timestamp arriveDate = rset.getTimestamp("arrive_date");
 						Passport pp = new Passport(passport_id, rewarded, arriveDate);
-						pp.setState(PersistentState.UPDATED);
+						pp.setPersistentState(PersistentState.UPDATED);
 						passportList.addPassport(pp);
 					}
 					account.setPassportsList(passportList);
@@ -76,7 +76,7 @@ public class MySQL5AccountPassportsDAO extends AccountPassportsDAO {
 	@Override
 	public void storePassportList(int accountId, List<Passport> pList) {
 		for (Passport passport : pList) {
-			switch (passport.getState()) {
+			switch (passport.getPersistentState()) {
 				case NEW:
 					addPassports(accountId, passport);
 					break;
@@ -87,7 +87,7 @@ public class MySQL5AccountPassportsDAO extends AccountPassportsDAO {
 					deletePassport(accountId, passport);
 					break;
 			}
-			passport.setState(PersistentState.UPDATED);
+			passport.setPersistentState(PersistentState.UPDATED);
 		}
 	}
 

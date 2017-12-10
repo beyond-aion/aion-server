@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
@@ -15,7 +14,8 @@ import org.slf4j.LoggerFactory;
 import com.aionemu.commons.database.DatabaseFactory;
 import com.aionemu.gameserver.dao.MySQL5DAOUtils;
 import com.aionemu.gameserver.dao.PlayerSkillListDAO;
-import com.aionemu.gameserver.model.gameobjects.PersistentState;
+import com.aionemu.gameserver.model.gameobjects.Persistable;
+import com.aionemu.gameserver.model.gameobjects.Persistable.PersistentState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.skill.PlayerSkillEntry;
 import com.aionemu.gameserver.model.skill.PlayerSkillList;
@@ -31,30 +31,6 @@ public class MySQL5PlayerSkillListDAO extends PlayerSkillListDAO {
 	public static final String UPDATE_QUERY = "UPDATE `player_skills` set skill_level=? where player_id=? AND skill_id=?";
 	public static final String DELETE_QUERY = "DELETE FROM `player_skills` WHERE `player_id`=? AND skill_id=?";
 	public static final String SELECT_QUERY = "SELECT `skill_id`, `skill_level` FROM `player_skills` WHERE `player_id`=?";
-
-	private static final Predicate<PlayerSkillEntry> skillsToInsertPredicate = new Predicate<PlayerSkillEntry>() {
-
-		@Override
-		public boolean test(PlayerSkillEntry input) {
-			return input != null && PersistentState.NEW == input.getPersistentState();
-		}
-	};
-
-	private static final Predicate<PlayerSkillEntry> skillsToUpdatePredicate = new Predicate<PlayerSkillEntry>() {
-
-		@Override
-		public boolean test(PlayerSkillEntry input) {
-			return input != null && PersistentState.UPDATE_REQUIRED == input.getPersistentState();
-		}
-	};
-
-	private static final Predicate<PlayerSkillEntry> skillsToDeletePredicate = new Predicate<PlayerSkillEntry>() {
-
-		@Override
-		public boolean test(PlayerSkillEntry input) {
-			return input != null && PersistentState.DELETED == input.getPersistentState();
-		}
-	};
 
 	@Override
 	public PlayerSkillList loadSkillList(int playerId) {
@@ -109,7 +85,7 @@ public class MySQL5PlayerSkillListDAO extends PlayerSkillListDAO {
 	}
 
 	private void addSkills(Connection con, Player player, List<PlayerSkillEntry> skills) {
-		skills = skills.stream().filter(skillsToInsertPredicate).collect(Collectors.toList());
+		skills = skills.stream().filter(Persistable.NEW).collect(Collectors.toList());
 		if (skills.isEmpty())
 			return;
 
@@ -134,7 +110,7 @@ public class MySQL5PlayerSkillListDAO extends PlayerSkillListDAO {
 	}
 
 	private void updateSkills(Connection con, Player player, List<PlayerSkillEntry> skills) {
-		skills = skills.stream().filter(skillsToUpdatePredicate).collect(Collectors.toList());
+		skills = skills.stream().filter(Persistable.CHANGED).collect(Collectors.toList());
 		if (skills.isEmpty())
 			return;
 
@@ -159,7 +135,7 @@ public class MySQL5PlayerSkillListDAO extends PlayerSkillListDAO {
 	}
 
 	private void deleteSkills(Connection con, Player player, List<PlayerSkillEntry> skills) {
-		skills = skills.stream().filter(skillsToDeletePredicate).collect(Collectors.toList());
+		skills = skills.stream().filter(Persistable.DELETED).collect(Collectors.toList());
 		if (skills.isEmpty())
 			return;
 

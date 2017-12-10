@@ -1,6 +1,6 @@
 package com.aionemu.gameserver.model.event;
 
-import com.aionemu.gameserver.model.gameobjects.PersistentState;
+import com.aionemu.gameserver.model.gameobjects.Persistable;
 
 /**
  * Created on 30.05.2016
@@ -8,7 +8,7 @@ import com.aionemu.gameserver.model.gameobjects.PersistentState;
  * @author Estrayl
  * @since AION 4.8
  */
-public class Headhunter implements Comparable<Headhunter> {
+public class Headhunter implements Comparable<Headhunter>, Persistable {
 
 	private PersistentState state;
 	private final int hunterId;
@@ -40,10 +40,12 @@ public class Headhunter implements Comparable<Headhunter> {
 		state = PersistentState.UPDATE_REQUIRED;
 	}
 
+	@Override
 	public PersistentState getPersistentState() {
 		return state;
 	}
 
+	@Override
 	public void setPersistentState(PersistentState state) {
 		this.state = state;
 	}

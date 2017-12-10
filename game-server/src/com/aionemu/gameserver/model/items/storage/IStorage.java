@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Queue;
 
 import com.aionemu.gameserver.model.gameobjects.Item;
-import com.aionemu.gameserver.model.gameobjects.PersistentState;
+import com.aionemu.gameserver.model.gameobjects.Persistable;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.item.ItemPacketService.ItemAddType;
@@ -16,7 +16,7 @@ import com.aionemu.gameserver.services.item.ItemPacketService.ItemUpdateType;
  * 
  * @author ATracer
  */
-public interface IStorage {
+public interface IStorage extends Persistable {
 
 	/**
 	 * @param player
@@ -212,16 +212,6 @@ public interface IStorage {
 	 * @return
 	 */
 	int size();
-
-	/**
-	 * @return
-	 */
-	PersistentState getPersistentState();
-
-	/**
-	 * @param persistentState
-	 */
-	void setPersistentState(PersistentState persistentState);
 
 	/**
 	 * @return

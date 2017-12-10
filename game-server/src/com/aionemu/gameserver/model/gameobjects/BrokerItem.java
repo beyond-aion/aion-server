@@ -11,7 +11,7 @@ import com.aionemu.gameserver.model.broker.BrokerRace;
 /**
  * @author kosyachok
  */
-public class BrokerItem implements Comparable<BrokerItem> {
+public class BrokerItem implements Comparable<BrokerItem>, Persistable {
 
 	private Item item;
 	private int itemId;
@@ -99,7 +99,8 @@ public class BrokerItem implements Comparable<BrokerItem> {
 	}
 
 	/**
-	 * @param return itemCreator
+	 * @param return
+	 *          itemCreator
 	 */
 	public String getItemCreator() {
 		if (itemCreator == null)
@@ -177,6 +178,7 @@ public class BrokerItem implements Comparable<BrokerItem> {
 		return this.isSold;
 	}
 
+	@Override
 	@SuppressWarnings("fallthrough")
 	public void setPersistentState(PersistentState persistentState) {
 		switch (persistentState) {
@@ -195,6 +197,7 @@ public class BrokerItem implements Comparable<BrokerItem> {
 
 	}
 
+	@Override
 	public PersistentState getPersistentState() {
 		return state;
 	}

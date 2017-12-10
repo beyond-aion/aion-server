@@ -8,7 +8,6 @@ import java.sql.Timestamp;
 import java.sql.Types;
 import java.util.Collection;
 import java.util.Set;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
@@ -18,7 +17,8 @@ import com.aionemu.commons.database.DatabaseFactory;
 import com.aionemu.commons.utils.GenericValidator;
 import com.aionemu.gameserver.dao.MySQL5DAOUtils;
 import com.aionemu.gameserver.dao.PlayerQuestListDAO;
-import com.aionemu.gameserver.model.gameobjects.PersistentState;
+import com.aionemu.gameserver.model.gameobjects.Persistable;
+import com.aionemu.gameserver.model.gameobjects.Persistable.PersistentState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.QuestStateList;
 import com.aionemu.gameserver.questEngine.model.QuestState;
@@ -35,30 +35,6 @@ public class MySQL5PlayerQuestListDAO extends PlayerQuestListDAO {
 	public static final String UPDATE_QUERY = "UPDATE `player_quests` SET `status`=?, `quest_vars`=?, `flags`=?, `complete_count`=?, `next_repeat_time`=?, `reward`=?, `complete_time`=? WHERE `player_id`=? AND `quest_id`=?";
 	public static final String DELETE_QUERY = "DELETE FROM `player_quests` WHERE `player_id`=? AND `quest_id`=?";
 	public static final String INSERT_QUERY = "INSERT INTO `player_quests` (`player_id`, `quest_id`, `status`, `quest_vars`, `flags`, `complete_count`, `next_repeat_time`, `reward`, `complete_time`) VALUES (?,?,?,?,?,?,?,?,?)";
-
-	private static final Predicate<QuestState> questsToAddPredicate = new Predicate<QuestState>() {
-
-		@Override
-		public boolean test(QuestState input) {
-			return input != null && PersistentState.NEW == input.getPersistentState();
-		}
-	};
-
-	private static final Predicate<QuestState> questsToUpdatePredicate = new Predicate<QuestState>() {
-
-		@Override
-		public boolean test(QuestState input) {
-			return input != null && PersistentState.UPDATE_REQUIRED == input.getPersistentState();
-		}
-	};
-
-	private static final Predicate<QuestState> questsToDeletePredicate = new Predicate<QuestState>() {
-
-		@Override
-		public boolean test(QuestState input) {
-			return input != null && PersistentState.DELETED == input.getPersistentState();
-		}
-	};
 
 	@Override
 	public QuestStateList load(int playerObjId) {
@@ -111,7 +87,7 @@ public class MySQL5PlayerQuestListDAO extends PlayerQuestListDAO {
 	}
 
 	private void addQuests(Connection con, int playerId, Collection<QuestState> states) {
-		states = states.stream().filter(questsToAddPredicate).collect(Collectors.toList());
+		states = states.stream().filter(Persistable.NEW).collect(Collectors.toList());
 
 		if (GenericValidator.isBlankOrNull(states))
 			return;
@@ -138,7 +114,7 @@ public class MySQL5PlayerQuestListDAO extends PlayerQuestListDAO {
 	}
 
 	private void updateQuests(Connection con, int playerId, Collection<QuestState> states) {
-		states = states.stream().filter(questsToUpdatePredicate).collect(Collectors.toList());
+		states = states.stream().filter(Persistable.CHANGED).collect(Collectors.toList());
 
 		if (GenericValidator.isBlankOrNull(states))
 			return;
@@ -165,7 +141,7 @@ public class MySQL5PlayerQuestListDAO extends PlayerQuestListDAO {
 	}
 
 	private void deleteQuest(Connection con, int playerId, Collection<QuestState> states, Set<Integer> questIds) {
-		states = states.stream().filter(questsToDeletePredicate).collect(Collectors.toList());
+		states = states.stream().filter(Persistable.DELETED).collect(Collectors.toList());
 
 		if (GenericValidator.isBlankOrNull(states) && questIds.isEmpty())
 			return;

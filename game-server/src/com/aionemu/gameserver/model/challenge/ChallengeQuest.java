@@ -1,12 +1,12 @@
 package com.aionemu.gameserver.model.challenge;
 
-import com.aionemu.gameserver.model.gameobjects.PersistentState;
+import com.aionemu.gameserver.model.gameobjects.Persistable;
 import com.aionemu.gameserver.model.templates.challenge.ChallengeQuestTemplate;
 
 /**
  * @author ViAl
  */
-public class ChallengeQuest {
+public class ChallengeQuest implements Persistable {
 
 	private final ChallengeQuestTemplate template;
 	private int completeCount;
@@ -46,10 +46,12 @@ public class ChallengeQuest {
 		setPersistentState(PersistentState.UPDATE_REQUIRED);
 	}
 
+	@Override
 	public PersistentState getPersistentState() {
 		return persistentState;
 	}
 
+	@Override
 	public void setPersistentState(PersistentState persistentState) {
 		if (this.persistentState == PersistentState.NEW && persistentState == PersistentState.UPDATE_REQUIRED)
 			return;
