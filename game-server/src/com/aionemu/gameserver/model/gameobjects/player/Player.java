@@ -2,7 +2,6 @@ package com.aionemu.gameserver.model.gameobjects.player;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -215,7 +214,6 @@ public class Player extends Creature {
 
 	public Player(PlayerController controller, PlayerCommonData plCommonData, PlayerAppearance appereance, Account account) {
 		super(plCommonData.getPlayerObjId(), controller, null, plCommonData, plCommonData.getPosition());
-		this.daoVars = DAOManager.getDAO(PlayerVarsDAO.class);
 		this.playerCommonData = plCommonData;
 		this.playerAppearance = appereance;
 		this.playerAccount = account;
@@ -1654,17 +1652,16 @@ public class Player extends Creature {
 		return getRace() == Race.ELYOS ? Race.ASMODIANS : Race.ELYOS;
 	}
 
-	private PlayerVarsDAO daoVars;
-	private Map<String, Object> vars = new LinkedHashMap<>();
+	private Map<String, Object> vars = new HashMap<>();
 
 	public boolean hasVar(String key) {
 		return vars.containsKey(key);
 	}
 
-	public void setVar(String key, Object value, boolean sql) {
+	public void setVar(String key, Object value, boolean persist) {
 		vars.put(key, value);
-		if (sql)
-			daoVars.set(getObjectId(), key, value);
+		if (persist)
+			DAOManager.getDAO(PlayerVarsDAO.class).set(getObjectId(), key, value);
 	}
 
 	public Object getVar(String key) {
