@@ -27,14 +27,18 @@ public class PromotionKitService {
 
 	private PromotionKitService() {
 		itemMap.put(1, new ArrayList<>());
+		itemMap.put(20, new ArrayList<>());
 		itemMap.put(25, new ArrayList<>());
+		itemMap.put(35, new ArrayList<>());
 		itemMap.put(50, new ArrayList<>());
 
 		itemMap.get(1).add(new RewardItem(169610056, 1));
+		itemMap.get(20).add(new RewardItem(188054100, 1));
 		itemMap.get(25).add(new RewardItem(190100064, 1));
 		itemMap.get(25).add(new RewardItem(164002272, 25));
 		itemMap.get(25).add(new RewardItem(162000039, 25));
 		itemMap.get(25).add(new RewardItem(162002018, 25));
+		itemMap.get(35).add(new RewardItem(188054101, 1));
 		itemMap.get(50).add(new RewardItem(187060075, 1));
 		itemMap.get(50).add(new RewardItem(121000815, 1));
 		itemMap.get(50).add(new RewardItem(120000901, 1));
