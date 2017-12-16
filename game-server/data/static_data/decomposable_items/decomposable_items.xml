@@ -26368,7 +26368,7 @@
 			<item id="187000090" /><!-- Tiamat's Spectral Wings -->
 		</items>
 		<items chance="10.0">
-			<item id="190100156" /><!-- Quick Frillneck -->
+			<item id="190100163" /><!-- Magnificent Clucklich -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188053000"><!-- [Event] Assured Greater Felicitous Socketing Box -->
@@ -34397,8 +34397,18 @@
 	<decomposable item_id="188054097" /><!-- [Camping] Sealed Warehouse Manager Contract -->
 	<decomposable item_id="188054098" /><!-- [Black Star] Aether Cherry Bundle -->
 	<decomposable item_id="188054099" /><!-- Respite Benefit Package -->
-	<decomposable item_id="188054100" /><!-- Bronze Coin Box -->
-	<decomposable item_id="188054101" /><!-- Silver Coin Box -->
+	<decomposable item_id="188054100"><!-- Bronze Coin Box -->
+		<items>
+			<item id="186000002" min_count="15" race="ELYOS" />
+			<item id="186000007" min_count="15" race="ASMODIANS" />
+		</items>
+	</decomposable>
+	<decomposable item_id="188054101"><!-- Silver Coin Box -->
+		<items>
+			<item id="186000003" min_count="114" race="ELYOS" />
+			<item id="186000008" min_count="114" race="ASMODIANS" />
+		</items>
+	</decomposable>
 	<decomposable item_id="188054102" /><!-- Gold Coin Box -->
 	<decomposable item_id="188054103" /><!-- Platinum Coin Box -->
 	<decomposable item_id="188054104" /><!-- Mithril Coin Box -->
