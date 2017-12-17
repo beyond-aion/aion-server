@@ -10,9 +10,7 @@ import com.aionemu.commons.database.dao.DAO;
 public interface IDFactoryAwareDAO extends DAO {
 
 	/**
-	 * Returns array of all id's that are used by this DAO
-	 * 
-	 * @return array of used id's
+	 * @return All IDs that are used by this DAO or null on fail
 	 */
 	public int[] getUsedIDs();
 }

@@ -266,27 +266,21 @@ public class MySQL5MailDAO extends MailDAO {
 
 	@Override
 	public int[] getUsedIDs() {
-		PreparedStatement statement = DB.prepareStatement("SELECT mail_unique_id FROM mail", ResultSet.TYPE_SCROLL_INSENSITIVE,
-			ResultSet.CONCUR_READ_ONLY);
-
-		try {
-			ResultSet rs = statement.executeQuery();
+		try (Connection con = DatabaseFactory.getConnection();
+			PreparedStatement stmt = con.prepareStatement("SELECT mail_unique_id FROM mail", ResultSet.TYPE_SCROLL_INSENSITIVE,
+				ResultSet.CONCUR_READ_ONLY)) {
+			ResultSet rs = stmt.executeQuery();
 			rs.last();
 			int count = rs.getRow();
 			rs.beforeFirst();
 			int[] ids = new int[count];
-			for (int i = 0; i < count; i++) {
-				rs.next();
+			for (int i = 0; rs.next(); i++)
 				ids[i] = rs.getInt("mail_unique_id");
-			}
 			return ids;
 		} catch (SQLException e) {
-			log.error("Can't get list of id's from mail table", e);
-		} finally {
-			DB.close(statement);
+			log.error("Can't get list of IDs from mail table", e);
+			return null;
 		}
-
-		return new int[0];
 	}
 
 	@Override

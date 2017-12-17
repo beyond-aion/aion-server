@@ -13,7 +13,6 @@ import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.commons.database.DB;
 import com.aionemu.commons.database.DatabaseFactory;
 import com.aionemu.commons.utils.GenericValidator;
 import com.aionemu.gameserver.dao.InventoryDAO;
@@ -421,27 +420,21 @@ public class MySQL5InventoryDAO extends InventoryDAO {
 
 	@Override
 	public int[] getUsedIDs() {
-		PreparedStatement statement = DB.prepareStatement("SELECT item_unique_id FROM inventory", ResultSet.TYPE_SCROLL_INSENSITIVE,
-			ResultSet.CONCUR_READ_ONLY);
-
-		try {
-			ResultSet rs = statement.executeQuery();
+		try (Connection con = DatabaseFactory.getConnection();
+			PreparedStatement stmt = con.prepareStatement("SELECT item_unique_id FROM inventory", ResultSet.TYPE_SCROLL_INSENSITIVE,
+				ResultSet.CONCUR_READ_ONLY)) {
+			ResultSet rs = stmt.executeQuery();
 			rs.last();
 			int count = rs.getRow();
 			rs.beforeFirst();
 			int[] ids = new int[count];
-			for (int i = 0; i < count; i++) {
-				rs.next();
+			for (int i = 0; rs.next(); i++)
 				ids[i] = rs.getInt("item_unique_id");
-			}
 			return ids;
 		} catch (SQLException e) {
-			log.error("Can't get list of id's from inventory table", e);
-		} finally {
-			DB.close(statement);
+			log.error("Can't get list of IDs from inventory table", e);
+			return null;
 		}
-
-		return new int[0];
 	}
 
 	@Override

@@ -1,5 +1,6 @@
 package mysql5;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.database.DB;
+import com.aionemu.commons.database.DatabaseFactory;
 import com.aionemu.commons.database.IUStH;
 import com.aionemu.commons.database.ParamReadStH;
 import com.aionemu.gameserver.dao.LegionDAO;
@@ -199,26 +201,20 @@ public class MySQL5LegionDAO extends LegionDAO {
 
 	@Override
 	public int[] getUsedIDs() {
-		PreparedStatement statement = DB.prepareStatement("SELECT id FROM legions", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-
-		try {
-			ResultSet rs = statement.executeQuery();
+		try (Connection con = DatabaseFactory.getConnection();
+			PreparedStatement stmt = con.prepareStatement("SELECT id FROM legions", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY)) {
+			ResultSet rs = stmt.executeQuery();
 			rs.last();
 			int count = rs.getRow();
 			rs.beforeFirst();
 			int[] ids = new int[count];
-			for (int i = 0; i < count; i++) {
-				rs.next();
+			for (int i = 0; rs.next(); i++)
 				ids[i] = rs.getInt("id");
-			}
 			return ids;
 		} catch (SQLException e) {
-			log.error("Can't get list of id's from legions table", e);
-		} finally {
-			DB.close(statement);
+			log.error("Can't get list of IDs from legions table", e);
+			return null;
 		}
-
-		return new int[0];
 	}
 
 	@Override

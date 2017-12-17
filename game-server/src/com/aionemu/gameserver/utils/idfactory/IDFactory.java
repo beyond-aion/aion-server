@@ -48,8 +48,7 @@ public class IDFactory {
 		idList = new BitSet();
 		lock = new ReentrantLock();
 		lockIds(0);
-		// Here should be calls to all IDFactoryAwareDAO implementations to initialize
-		// used values in IDFactory
+		// Here should be calls to all IDFactoryAwareDAO implementations to initialize already used IDs
 		lockIds(DAOManager.getDAO(PlayerDAO.class).getUsedIDs());
 		lockIds(DAOManager.getDAO(InventoryDAO.class).getUsedIDs());
 		lockIds(DAOManager.getDAO(PlayerRegisteredItemsDAO.class).getUsedIDs());
@@ -57,7 +56,7 @@ public class IDFactory {
 		lockIds(DAOManager.getDAO(MailDAO.class).getUsedIDs());
 		lockIds(DAOManager.getDAO(GuideDAO.class).getUsedIDs());
 		lockIds(DAOManager.getDAO(HousesDAO.class).getUsedIDs());
-		log.info("IDFactory: " + getUsedCount() + " id's used.");
+		log.info("IDFactory: " + getUsedCount() + " IDs used.");
 	}
 
 	public static final IDFactory getInstance() {
@@ -100,48 +99,20 @@ public class IDFactory {
 	}
 
 	/**
-	 * Locks given ids.
+	 * Internal helper method without synchronization, to lock IDs during instantiation (public ID allocation should only happen via {@link #nextId()})
 	 *
 	 * @param ids
 	 *          ids to lock
 	 * @throws IDFactoryError
-	 *           if some of the id's were locked before
+	 *           if some of the id's are already locked
 	 */
 	private void lockIds(int... ids) {
-		try {
-			lock.lock();
-			for (int id : ids) {
-				boolean status = idList.get(id);
-				if (status) {
-					throw new IDFactoryError("ID " + id + " is already taken, fatal error!!!");
-				}
-				idList.set(id);
+		for (int id : ids) {
+			boolean status = idList.get(id);
+			if (status) {
+				throw new IDFactoryError("ID " + id + " is already taken, fatal error!!!");
 			}
-		} finally {
-			lock.unlock();
-		}
-	}
-
-	/**
-	 * Locks given ids.
-	 *
-	 * @param ids
-	 *          ids to lock
-	 * @throws IDFactoryError
-	 *           if some of the id's were locked before
-	 */
-	public void lockIds(Iterable<Integer> ids) {
-		try {
-			lock.lock();
-			for (int id : ids) {
-				boolean status = idList.get(id);
-				if (status) {
-					throw new IDFactoryError("ID " + id + " is already taken, fatal error!!!");
-				}
-				idList.set(id);
-			}
-		} finally {
-			lock.unlock();
+			idList.set(id);
 		}
 	}
 
