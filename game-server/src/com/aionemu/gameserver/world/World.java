@@ -98,8 +98,9 @@ public class World {
 			log.error("Tried to add {} with null position in world", object);
 			return;
 		}
-		if (allObjects.put(object.getObjectId(), object) != null)
-			throw new DuplicateAionObjectException(object, allObjects.get(object.getObjectId()));
+		VisibleObject oldObject = allObjects.putIfAbsent(object.getObjectId(), object);
+		if (oldObject != null)
+			throw new DuplicateAionObjectException(object, oldObject);
 
 		if (object instanceof Npc) {
 			if (object instanceof SiegeNpc) {
