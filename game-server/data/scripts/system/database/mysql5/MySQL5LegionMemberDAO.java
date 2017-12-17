@@ -243,10 +243,4 @@ public class MySQL5LegionMemberDAO extends LegionMemberDAO {
 		}
 		DB.executeUpdateAndClose(statement);
 	}
-
-	@Override
-	public int[] getUsedIDs() {
-		// TODO: Auto-generated method stub
-		return null;
-	}
 }

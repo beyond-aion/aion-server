@@ -2,6 +2,7 @@ package com.aionemu.gameserver.dao;
 
 import java.util.List;
 
+import com.aionemu.commons.database.dao.DAO;
 import com.aionemu.gameserver.model.team.legion.LegionMember;
 import com.aionemu.gameserver.model.team.legion.LegionMemberEx;
 
@@ -11,7 +12,7 @@ import com.aionemu.gameserver.model.team.legion.LegionMemberEx;
  * @author Simple
  */
 
-public abstract class LegionMemberDAO implements IDFactoryAwareDAO {
+public abstract class LegionMemberDAO implements DAO {
 
 	/**
 	 * Returns true if name is used, false in other case

@@ -230,30 +230,6 @@ public class MySQL5BrokerDAO extends BrokerDAO {
 	}
 
 	@Override
-	public int[] getUsedIDs() {
-		PreparedStatement statement = DB.prepareStatement("SELECT id FROM players", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-
-		try {
-			ResultSet rs = statement.executeQuery();
-			rs.last();
-			int count = rs.getRow();
-			rs.beforeFirst();
-			int[] ids = new int[count];
-			for (int i = 0; i < count; i++) {
-				rs.next();
-				ids[i] = rs.getInt("id");
-			}
-			return ids;
-		} catch (SQLException e) {
-			log.error("Can't get list of id's from players table", e);
-		} finally {
-			DB.close(statement);
-		}
-
-		return new int[0];
-	}
-
-	@Override
 	public boolean supports(String s, int i, int i1) {
 		return MySQL5DAOUtils.supports(s, i, i1);
 	}
