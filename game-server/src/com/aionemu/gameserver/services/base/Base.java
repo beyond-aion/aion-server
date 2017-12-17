@@ -222,7 +222,7 @@ public abstract class Base<T extends BaseLocation> {
 			if (npc != null && npc.getSpawn().getHandlerType() == type) {
 				if (!npc.isDead())
 					npc.getController().delete();
-				else if (!npc.isSpawned())
+				else
 					RespawnService.cancelRespawn(npc);
 			}
 		}
