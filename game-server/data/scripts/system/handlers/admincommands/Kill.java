@@ -43,7 +43,7 @@ public class Kill extends AdminCommand {
 			if (target instanceof Creature) {
 				String targetInfo = target.getClass().getSimpleName().toLowerCase() + ": ";
 				if (target instanceof Npc)
-					targetInfo += ChatUtil.path((Npc) target);
+					targetInfo += ChatUtil.path(target, true);
 				else
 					targetInfo += StringUtils.capitalize(target.getName());
 				if (kill(player, (Creature) target))

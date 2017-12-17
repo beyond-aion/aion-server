@@ -13,9 +13,9 @@ import org.apache.commons.lang3.math.NumberUtils;
 import com.aionemu.gameserver.configs.administration.AdminConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.ChatType;
-import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
+import com.aionemu.gameserver.model.templates.VisibleObjectTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_MESSAGE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUESTION_WINDOW;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
@@ -108,20 +108,32 @@ public class ChatUtil {
 	/**
 	 * @see #path(String, int)
 	 */
-	public static String path(Npc npc) {
-		return path(StringUtils.capitalize(npc.getName()), npc.getObjectTemplate().getTemplateId());
+	public static String path(VisibleObject object, boolean withIdInName) {
+		return path(object.getObjectTemplate(), withIdInName);
 	}
 
 	/**
 	 * @see #path(String, int)
 	 */
-	public static String path(int npcId) {
-		NpcTemplate template = DataManager.NPC_DATA.getNpcTemplate(npcId);
-		return path(template == null ? "Npc" : StringUtils.capitalize(template.getName()), npcId);
+	public static String path(int npcId, boolean withIdInName) {
+		VisibleObjectTemplate template = DataManager.NPC_DATA.getNpcTemplate(npcId);
+		if (template != null)
+			return path(template, withIdInName);
+		else
+			return path(withIdInName ? "Unknown ID " + npcId : "Unknown ID", npcId);
+	}
+
+	private static String path(VisibleObjectTemplate template, boolean withIdInName) {
+		String name = template.getL10n();
+		if (name == null)
+			name = StringUtils.capitalize(template.getName());
+		if (withIdInName)
+			name = name + " | " + template.getTemplateId();
+		return path(name, template.getTemplateId());
 	}
 
 	/**
-	 * @see #path(String, int)
+	 * @return The objects spawn point link, based on its localized name (client does a lookup in its current language)
 	 */
 	public static String path(String npcName) {
 		return String.format("[where:%s]", npcName);
@@ -130,7 +142,7 @@ public class ChatUtil {
 	/**
 	 * @param linkName
 	 * @param npcId
-	 * @return The NPC's spawn point link.
+	 * @return The objects spawn point link, based on its ID.
 	 */
 	public static String path(String linkName, int npcId) {
 		return String.format("[where:%s;%d]", linkName, npcId);

@@ -56,7 +56,7 @@ public class MoveTo extends AdminCommand {
 		if (params.length >= 1) {
 			int npcId = getNpcId(params);
 			if (npcId > 0) {
-				sendInfo(admin, "Teleported to " + ChatUtil.path(npcId) + ".");
+				sendInfo(admin, "Teleported to " + ChatUtil.path(npcId, true) + ".");
 				TeleportService.teleportToNpc(admin, npcId);
 				return;
 			} else if (errorMsg == null)

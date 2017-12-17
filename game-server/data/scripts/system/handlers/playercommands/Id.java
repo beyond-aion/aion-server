@@ -6,7 +6,6 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.QuestTemplate;
-import com.aionemu.gameserver.model.templates.VisibleObjectTemplate;
 import com.aionemu.gameserver.model.templates.item.ItemTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.utils.ChatUtil;
@@ -21,7 +20,12 @@ public class Id extends PlayerCommand {
 	public Id() {
 		super("id", "Shows item/quest/npc IDs.");
 
-		setSyntaxInfo(" - Shows the ID of the selected npc.", "<item|quest> - Shows the ID of the specified item or quest.");
+		// @formatter:off
+		setSyntaxInfo(
+			" - Shows the ID of the selected object.",
+			"<item|quest> - Shows the ID of the specified item or quest."
+		);
+		// @formatter:on
 	}
 
 	@Override
@@ -39,9 +43,7 @@ public class Id extends PlayerCommand {
 				return;
 			}
 
-			VisibleObjectTemplate template = target.getObjectTemplate();
-			sendInfo(player,
-				target.getClass().getSimpleName() + ": " + ChatUtil.path(template.getL10n() + " | " + template.getTemplateId(), template.getTemplateId()));
+			sendInfo(player, target.getClass().getSimpleName() + ": " + ChatUtil.path(target, true));
 			return;
 		} else {
 			int id = ChatUtil.getItemId(params[0]);

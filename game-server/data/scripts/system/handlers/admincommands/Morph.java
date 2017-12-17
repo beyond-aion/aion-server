@@ -1,11 +1,7 @@
 package admincommands;
 
-import org.apache.commons.lang3.StringUtils;
-
-import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
 import com.aionemu.gameserver.utils.ChatUtil;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 
@@ -58,9 +54,7 @@ public class Morph extends AdminCommand {
 		if (npcId == 0) {
 			sendInfo(admin, "Cancelled" + (target.equals(admin) ? "" : " " + target.getName() + "'s") + " morph.");
 		} else {
-			NpcTemplate template = DataManager.NPC_DATA.getNpcTemplate(npcId);
-			String name = template != null ? ChatUtil.path(StringUtils.capitalize(template.getName()) + " | " + npcId, npcId) : "unknown ID " + npcId;
-			sendInfo(admin, "You morphed" + (target.equals(admin) ? "" : " " + target.getName()) + " into " + name + ".");
+			sendInfo(admin, "You morphed" + (target.equals(admin) ? "" : " " + target.getName()) + " into " + ChatUtil.path(npcId, true) + ".");
 			if (!target.equals(admin))
 				sendInfo(target, ChatUtil.name(admin) + " morphed you into an npc form.");
 		}
