@@ -68,7 +68,7 @@ public abstract class AionObject {
 
 	@Override
 	protected void finalize() throws Throwable {
-		if (autoReleaseObjectId())
+		if (objectId != 0 && autoReleaseObjectId())
 			IDFactory.getInstance().releaseId(objectId); // release ID once the object is garbage collected
 		super.finalize();
 	}
