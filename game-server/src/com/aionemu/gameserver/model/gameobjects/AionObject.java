@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.model.gameobjects;
 
+import com.aionemu.gameserver.services.RespawnService;
 import com.aionemu.gameserver.utils.idfactory.IDFactory;
 
 /**
@@ -68,8 +69,10 @@ public abstract class AionObject {
 
 	@Override
 	protected void finalize() throws Throwable {
-		if (objectId != 0 && autoReleaseObjectId())
-			IDFactory.getInstance().releaseId(objectId); // release ID once the object is garbage collected
+		if (objectId != 0 && autoReleaseObjectId()) {
+			if (!RespawnService.setAutoReleaseId(objectId)) // try to register auto-release after respawn/respawn cancel
+				IDFactory.getInstance().releaseId(objectId); // otherwise release ID now
+		}
 		super.finalize();
 	}
 

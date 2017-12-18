@@ -30,7 +30,7 @@ public class RespawnService {
 
 	public static final int IMMEDIATE_DECAY = 2 * 1000;
 	public static final int WITH_DROP_DECAY = 5 * 60 * 1000;
-	private static final Map<Integer, ScheduledRespawn> pendingRespawns = new ConcurrentHashMap<>();
+	private static final Map<Integer, RespawnTask> pendingRespawns = new ConcurrentHashMap<>();
 
 	/**
 	 * Schedules decay (despawn) of the npc with the default delay time. If there is already a decay task, it will be replaced with this one. The task
@@ -68,22 +68,30 @@ public class RespawnService {
 	 * @param visibleObject
 	 * @return The task, if the respawn task was initiated, else null.
 	 */
-	public static ScheduledRespawn scheduleRespawn(VisibleObject visibleObject) {
+	public static RespawnTask scheduleRespawn(VisibleObject visibleObject) {
 		SpawnTemplate spawnTemplate = visibleObject.getSpawn();
 		if (spawnTemplate == null || spawnTemplate.isNoRespawn())
 			return null;
 		RespawnTask respawnTask = new RespawnTask(visibleObject);
-		Future<?> task = ThreadPoolManager.getInstance().schedule(respawnTask, spawnTemplate.getRespawnTime() * 1000);
-		ScheduledRespawn scheduledRespawn = new ScheduledRespawn(task, respawnTask);
-		ScheduledRespawn oldScheduledRespawn = pendingRespawns.put(visibleObject.getObjectId(), scheduledRespawn);
-		if (oldScheduledRespawn != null)
+		respawnTask.future = ThreadPoolManager.getInstance().schedule(respawnTask, spawnTemplate.getRespawnTime() * 1000);
+		RespawnTask oldRespawnTask = pendingRespawns.put(visibleObject.getObjectId(), respawnTask);
+		if (oldRespawnTask != null)
 			LoggerFactory.getLogger(RespawnService.class).warn("Duplicate respawn task initiated for " + visibleObject
 				+ " or the previous objectId owner had a pending respawn task but auto released its ID during finalization (see AionObject.finalize())");
-		return scheduledRespawn;
+		return respawnTask;
 	}
 
-	public static boolean hasRespawnTask(int objectId) {
-		return pendingRespawns.containsKey(objectId);
+	public static boolean setAutoReleaseId(int objectId) {
+		RespawnTask respawn = pendingRespawns.get(objectId);
+		if (respawn != null) {
+			synchronized (respawn) {
+				if (pendingRespawns.containsKey(objectId)) { // synchronized check (could've been unregistered due to bad timing)
+					respawn.releaseIdOnUnregister = true;
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 	public static void cancelRespawn(VisibleObject object) {
@@ -91,9 +99,9 @@ public class RespawnService {
 	}
 
 	public static boolean cancelRespawn(int objectId) {
-		ScheduledRespawn scheduledRespawn = pendingRespawns.get(objectId);
-		if (scheduledRespawn != null) {
-			scheduledRespawn.cancel();
+		RespawnTask respawn = pendingRespawns.get(objectId);
+		if (respawn != null) {
+			respawn.cancel();
 			return true;
 		}
 		return false;
@@ -101,8 +109,8 @@ public class RespawnService {
 
 	public static int cancelEventRespawns(EventTemplate eventTemplate) {
 		int count = 0;
-		for (ScheduledRespawn respawn : pendingRespawns.values()) {
-			if (eventTemplate.equals(respawn.getSpawnTemplate().getEventTemplate())) {
+		for (RespawnTask respawn : pendingRespawns.values()) {
+			if (eventTemplate.equals(respawn.spawnTemplate.getEventTemplate())) {
 				respawn.cancel();
 				count++;
 			}
@@ -110,10 +118,13 @@ public class RespawnService {
 		return count;
 	}
 
-	private static ScheduledRespawn unregisterRespawnTask(int objectId) {
-		ScheduledRespawn respawn = pendingRespawns.remove(objectId);
-		if (respawn != null && !World.getInstance().isInWorld(objectId))
-			IDFactory.getInstance().releaseId(objectId);
+	private static RespawnTask unregisterRespawnTask(int objectId) {
+		RespawnTask respawn = pendingRespawns.remove(objectId);
+		if (respawn != null) {
+			synchronized (respawn) {
+				respawn.onUnregister();
+			}
+		}
 		return respawn;
 	}
 
@@ -121,7 +132,7 @@ public class RespawnService {
 
 		private final int objectId;
 
-		DecayTask(int objectId) {
+		private DecayTask(int objectId) {
 			this.objectId = objectId;
 		}
 
@@ -137,57 +148,41 @@ public class RespawnService {
 
 	private static class RespawnTask implements Runnable {
 
-		private final SpawnTemplate spawn;
+		private final SpawnTemplate spawnTemplate;
 		private final int instanceId;
-		private final int despawnedObjectId;
+		private final int oldObjectId;
+		private Future<?> future;
+		private boolean releaseIdOnUnregister;
 
 		private RespawnTask(VisibleObject object) {
-			this.spawn = object.getSpawn();
+			this.spawnTemplate = object.getSpawn();
 			this.instanceId = object.getInstanceId();
-			this.despawnedObjectId = object.getObjectId();
+			this.oldObjectId = object.getObjectId(); // ID of corpse or already despawned object
 		}
 
 		@Override
 		public void run() {
-			unregister();
-			respawn(spawn, instanceId);
+			unregisterRespawnTask(oldObjectId);
+			respawn();
 		}
 
-		public void unregister() {
-			unregisterRespawnTask(despawnedObjectId);
-		}
-
-		private void respawn(SpawnTemplate spawnTemplate, int instanceId) {
+		private void respawn() {
 			if (spawnTemplate.isTemporarySpawn() && !spawnTemplate.getTemporarySpawn().isInSpawnTime())
 				return;
 
 			if (!InstanceService.isInstanceExist(spawnTemplate.getWorldId(), instanceId))
 				return;
 
-			if (spawnTemplate.hasPool())
-				spawnTemplate = spawnTemplate.changeTemplate(instanceId);
-
-			SpawnEngine.spawnObject(spawnTemplate, instanceId);
+			SpawnEngine.spawnObject(spawnTemplate.hasPool() ? spawnTemplate.changeTemplate(instanceId) : spawnTemplate, instanceId);
 		}
 
-	}
-
-	private static class ScheduledRespawn {
-
-		private final Future<?> future;
-		private final RespawnTask respawnTask;
-
-		private ScheduledRespawn(Future<?> future, RespawnTask respawnTask) {
-			this.future = future;
-			this.respawnTask = respawnTask;
-		}
-
-		public SpawnTemplate getSpawnTemplate() {
-			return respawnTask.spawn;
+		private void onUnregister() {
+			if (releaseIdOnUnregister)
+				IDFactory.getInstance().releaseId(oldObjectId);
 		}
 
 		public void cancel() {
-			respawnTask.unregister();
+			unregisterRespawnTask(oldObjectId);
 			future.cancel(false);
 		}
 	}

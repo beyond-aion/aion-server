@@ -3,7 +3,6 @@ package com.aionemu.gameserver.model.gameobjects;
 import com.aionemu.gameserver.controllers.StaticObjectController;
 import com.aionemu.gameserver.model.templates.VisibleObjectTemplate;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
-import com.aionemu.gameserver.services.RespawnService;
 import com.aionemu.gameserver.world.WorldPosition;
 
 /**
@@ -18,7 +17,6 @@ public class StaticObject extends VisibleObject {
 
 	@Override
 	protected boolean autoReleaseObjectId() {
-		return !RespawnService.hasRespawnTask(getObjectId());
+		return true;
 	}
-
 }

@@ -26,7 +26,6 @@ import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
 import com.aionemu.gameserver.model.templates.npc.NpcTemplateType;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_LOOKATOBJECT;
-import com.aionemu.gameserver.services.RespawnService;
 import com.aionemu.gameserver.services.TribeRelationService;
 import com.aionemu.gameserver.spawnengine.WalkerGroup;
 import com.aionemu.gameserver.spawnengine.WalkerGroupShift;
@@ -348,6 +347,6 @@ public class Npc extends Creature {
 
 	@Override
 	protected boolean autoReleaseObjectId() {
-		return !RespawnService.hasRespawnTask(getObjectId());
+		return true;
 	}
 }
