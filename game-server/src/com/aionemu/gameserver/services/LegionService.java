@@ -1720,16 +1720,16 @@ public class LegionService {
 			if (legion == null) {
 				return false;
 			}
-			if (!isBrigadeGeneral(activePlayer)) {
-				PacketSendUtility.sendPacket(activePlayer, SM_SYSTEM_MESSAGE.STR_GUILD_DISPERSE_ONLY_MASTER_CAN_DISPERSE());
-				return false;
-			} else if (legion.getLegionWarehouse().size() > 0) {
-				// TODO: Can't disband during using legion warehouse!!
-				return false;
-			} else if (legion.isDisbanding()) {
+			if (legion.isDisbanding()) {
 				PacketSendUtility.sendPacket(activePlayer, SM_SYSTEM_MESSAGE.STR_GUILD_DISPERSE_ALREADY_REQUESTED());
 				return false;
-			} else if (legion.getLegionWarehouse().size() > 0) {
+			} else if (!isBrigadeGeneral(activePlayer)) {
+				PacketSendUtility.sendPacket(activePlayer, SM_SYSTEM_MESSAGE.STR_GUILD_DISPERSE_ONLY_MASTER_CAN_DISPERSE());
+				return false;
+			} else if (legion.getLegionWarehouse().getWhUser() != 0) {
+				PacketSendUtility.sendPacket(activePlayer, SM_SYSTEM_MESSAGE.STR_GUILD_DISPERSE_CANT_DISPERSE_GUILD_WHILE_USING_WAREHOUSE());
+				return false;
+			} else if (legion.getLegionWarehouse().size() > 0 || legion.getLegionWarehouse().getKinah() > 0) {
 				PacketSendUtility.sendPacket(activePlayer, SM_SYSTEM_MESSAGE.STR_GUILD_DISPERSE_CANT_DISPERSE_GUILD_STORE_ITEM_IN_WAREHOUSE());
 				return false;
 			}
