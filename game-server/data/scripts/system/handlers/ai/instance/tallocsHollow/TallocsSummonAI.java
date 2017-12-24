@@ -14,10 +14,12 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.Summon;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
+import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_CUSTOM_SETTINGS;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_TRANSFORM_IN_SUMMON;
+import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
@@ -41,7 +43,10 @@ public class TallocsSummonAI extends NpcAI {
 				return true;
 			}
 
-			Summon summon = new Summon(getObjectId(), new SummonController(), getSpawnTemplate(), getObjectTemplate(), 0);
+			SpawnTemplate st = getSpawnTemplate();
+			SpawnTemplate spawnTemplate = SpawnEngine.newSingleTimeSpawn(st.getWorldId(), getNpcId(), st.getX(), st.getY(), st.getZ(), st.getHeading(),
+				0, SpawnTemplate.NO_AI);
+			Summon summon = new Summon(getObjectId(), new SummonController(), spawnTemplate, getObjectTemplate(), 0);
 			player.setSummon(summon);
 			summon.setMaster(player);
 			summon.setTarget(player.getTarget());

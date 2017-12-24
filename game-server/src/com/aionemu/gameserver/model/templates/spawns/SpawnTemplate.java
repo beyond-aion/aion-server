@@ -10,6 +10,7 @@ import com.aionemu.gameserver.spawnengine.SpawnHandlerType;
  */
 public class SpawnTemplate {
 
+	public static final String NO_AI = "__NO_AI__";
 	private float x;
 	private float y;
 	private float z;

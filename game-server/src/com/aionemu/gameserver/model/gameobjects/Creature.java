@@ -70,7 +70,7 @@ public abstract class Creature extends VisibleObject {
 		super(objId, controller, spawnTemplate, objectTemplate, position);
 		String aiName = objectTemplate.getAiName();
 		if (spawnTemplate != null && spawnTemplate.getAiName() != null)
-			aiName = spawnTemplate.getAiName();
+			aiName = SpawnTemplate.NO_AI.equals(spawnTemplate.getAiName()) ? null : spawnTemplate.getAiName();
 		this.ai = AIEngine.getInstance().newAI(aiName, this);
 		this.observeController = new ObserveController();
 		this.transformModel = new TransformModel(this);
