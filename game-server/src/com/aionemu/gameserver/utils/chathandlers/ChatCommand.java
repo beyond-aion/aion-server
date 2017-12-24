@@ -193,11 +193,11 @@ public abstract class ChatCommand {
 			String[] lines = message.split("\n", -1);
 			StringBuilder sb = new StringBuilder(lines[0]);
 			for (int i = 1; i < lines.length; i++) {
-				if (sb.length() + lines[i].length() > SM_MESSAGE.MESSAGE_SIZE_LIMIT) {
+				if (sb.length() + 1 + lines[i].length() > SM_MESSAGE.MESSAGE_SIZE_LIMIT) { // current length + newLine char + next line length
 					PacketSendUtility.sendMessage(player, sb.toString());
 					sb.setLength(0);
 				} else {
-					sb.append("\n");
+					sb.append('\n');
 				}
 				sb.append(lines[i]);
 			}
