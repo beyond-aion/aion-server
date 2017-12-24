@@ -83,14 +83,8 @@ public class RespawnService {
 
 	public static boolean setAutoReleaseId(int objectId) {
 		RespawnTask respawn = pendingRespawns.get(objectId);
-		if (respawn != null) {
-			synchronized (respawn) {
-				if (pendingRespawns.containsKey(objectId)) { // synchronized check (could've been unregistered due to bad timing)
-					respawn.releaseIdOnUnregister = true;
-					return true;
-				}
-			}
-		}
+		if (respawn != null)
+			return respawn.setReleaseIdOnCompletion();
 		return false;
 	}
 
@@ -116,16 +110,6 @@ public class RespawnService {
 			}
 		}
 		return count;
-	}
-
-	private static RespawnTask unregisterRespawnTask(int objectId) {
-		RespawnTask respawn = pendingRespawns.remove(objectId);
-		if (respawn != null) {
-			synchronized (respawn) {
-				respawn.onUnregister();
-			}
-		}
-		return respawn;
 	}
 
 	private static class DecayTask implements Runnable {
@@ -162,7 +146,7 @@ public class RespawnService {
 
 		@Override
 		public void run() {
-			unregisterRespawnTask(oldObjectId);
+			unregister();
 			respawn();
 		}
 
@@ -176,14 +160,31 @@ public class RespawnService {
 			SpawnEngine.spawnObject(spawnTemplate.hasPool() ? spawnTemplate.changeTemplate(instanceId) : spawnTemplate, instanceId);
 		}
 
+		private boolean setReleaseIdOnCompletion() {
+			synchronized (this) {
+				if (this.equals(pendingRespawns.get(oldObjectId))) { // unregistering not yet happened
+					releaseIdOnUnregister = true;
+					return true;
+				}
+			}
+			return false;
+		}
+
 		private void onUnregister() {
 			if (releaseIdOnUnregister)
 				IDFactory.getInstance().releaseId(oldObjectId);
 		}
 
 		public void cancel() {
-			unregisterRespawnTask(oldObjectId);
+			unregister();
 			future.cancel(false);
+		}
+
+		private void unregister() {
+			synchronized (this) {
+				if (pendingRespawns.remove(oldObjectId, this))
+					onUnregister();
+			}
 		}
 	}
 
