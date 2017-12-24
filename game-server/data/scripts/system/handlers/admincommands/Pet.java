@@ -2,6 +2,7 @@ package admincommands;
 
 import java.awt.Color;
 import java.util.Iterator;
+import java.util.stream.IntStream;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -22,11 +23,13 @@ public class Pet extends AdminCommand {
 	public Pet() {
 		super("pet", "Adds or removes a pet.");
 
+		// @formatter:off
 		setSyntaxInfo(
 			"<list> - Lists all available Pet IDs.",
 			"<add> <pet id> <name> - Adds the pet with the specified ID and names it.",
 			"<del> <pet id> - Deletes the pet with the specified ID."
 		);
+		// @formatter:on
 	}
 
 	@Override
@@ -38,15 +41,18 @@ public class Pet extends AdminCommand {
 
 		String action = params[0];
 		if (action.equalsIgnoreCase("list")) {
-			StringBuilder sb = new StringBuilder();
-			for (int id : DataManager.PET_DATA.getPetIds()) {
+			StringBuilder sb = new StringBuilder("List of pets:");
+			IntStream.of(DataManager.PET_DATA.getPetIds()).sorted().forEach(id -> {
 				PetTemplate template = DataManager.PET_DATA.getPetTemplate(id);
-				sb.append(template.getId() + " - " + ChatUtil.color(StringUtils.capitalize(template.getName()), Color.WHITE) + "\n\tFunctions: ");
+				sb.append('\n');
+				sb.append(template.getId());
+				sb.append(" - ");
+				sb.append(ChatUtil.color(StringUtils.capitalize(template.getName()), Color.WHITE));
+				sb.append("\n\tFunctions: ");
 				Iterator<PetFunction> iter = template.getPetFunctions().iterator();
 				while (iter.hasNext())
 					sb.append(iter.next().getPetFunctionType() + (iter.hasNext() ? ", " : ""));
-				sb.append("\n");
-			}
+			});
 			sendInfo(admin, sb.toString());
 		} else {
 			int petId;
