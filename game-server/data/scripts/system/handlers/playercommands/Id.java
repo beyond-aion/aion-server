@@ -38,12 +38,15 @@ public class Id extends PlayerCommand {
 				return;
 			}
 
-			if (!(target instanceof Npc) && !(target instanceof Gatherable)) {
+			if (!player.isStaff() && !(target instanceof Npc) && !(target instanceof Gatherable)) { // regular players only see IDs of npcs and gatherables
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_INVALID_TARGET());
 				return;
 			}
 
-			sendInfo(player, target.getClass().getSimpleName() + ": " + ChatUtil.path(target, true));
+			String msg = target.getClass().getSimpleName() + ": " + ChatUtil.path(target, true);
+			if (player.isStaff())
+				msg += " (Object ID: " + target.getObjectId() + ")";
+			sendInfo(player, msg);
 			return;
 		} else {
 			int id = ChatUtil.getItemId(params[0]);
