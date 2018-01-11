@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<global_npc_exclusions>
+<?xml version="1.0" encoding="UTF-8"?>
+<global_npc_exclusions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:noNamespaceSchemaLocation="global_npc_exclusions.xsd">
 	<global_exclusion npc_ids="219501 280603 280604 280605 280606 280607 217301 283001 283000 701413 217243 282604 216951 700835 256694" />
 	<global_exclusion npc_types="SUMMON_PET GENERAL MERCENARY HOUSING" />
 	<global_exclusion npc_tribes="PET PET_DARK QUESTGUARD_DARK QUESTGUARD_LIGHT DUMMY DUMMY2 DUMMY2_DGUARD DUMMY2_LGUARD DUMMY_DGUARD
