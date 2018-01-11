@@ -235,7 +235,6 @@ public class PetService {
 	}
 
 	private boolean isPetItemUseAllowed(Player player, Item item) {
-		// TODO: more restrictions?
 		if (item.getItemTemplate().hasAreaRestriction()) {
 			ZoneName restriction = item.getItemTemplate().getUseArea();
 			if (restriction != null && !player.isInsideItemUseZone(restriction)) {

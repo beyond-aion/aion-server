@@ -15,11 +15,9 @@ public final class ZoneName {
 
 	private static final Map<String, ZoneName> zoneNames = new HashMap<>();
 	public static final String NONE = "NONE";
-	public static final String ABYSS_CASTLE = "_ABYSS_CASTLE_AREA_";
 
 	static {
 		zoneNames.put(NONE, new ZoneName(NONE));
-		zoneNames.put(ABYSS_CASTLE, new ZoneName(ABYSS_CASTLE));
 	}
 
 	private String _name;

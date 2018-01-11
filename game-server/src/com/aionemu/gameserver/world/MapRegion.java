@@ -334,9 +334,8 @@ public class MapRegion {
 		for (Entry<Integer, TreeSet<ZoneInstance>> e : zoneMap.entrySet()) {
 			TreeSet<ZoneInstance> zones = e.getValue();
 			for (ZoneInstance zone : zones) {
-				if (zone.getZoneTemplate().getName() != zoneName)
-					continue;
-				return zone.isInsideCreature(creature);
+				if (zone.getZoneTemplate().getName() == zoneName)
+					return zone.isInsideCreature(creature);
 			}
 		}
 		return false;
@@ -350,14 +349,19 @@ public class MapRegion {
 	 * @return
 	 */
 	public boolean isInsideItemUseZone(ZoneName zoneName, Creature creature) {
+		boolean checkFortresses = "_ABYSS_CASTLE_AREA_".equals(zoneName.name()); // some items have this special zonename in uselimits
 		for (Entry<Integer, TreeSet<ZoneInstance>> e : zoneMap.entrySet()) {
 			TreeSet<ZoneInstance> zones = e.getValue();
 			for (ZoneInstance zone : zones) {
-				if (!zone.getZoneTemplate().getXmlName().startsWith(zoneName.toString()))
-					continue;
-				if (!zone.isInsideCreature(creature))
-					continue;
-				return true;
+				if (checkFortresses) {
+					if (!zone.getZoneTemplate().getZoneType().equals(ZoneClassName.FORT))
+						continue;
+				} else {
+					if (!zone.getZoneTemplate().getXmlName().startsWith(zoneName.toString()))
+						continue;
+				}
+				if (zone.isInsideCreature(creature))
+					return true;
 			}
 		}
 		return false;

@@ -15,7 +15,6 @@ import com.aionemu.gameserver.model.team.alliance.PlayerAlliance;
 import com.aionemu.gameserver.model.team.group.PlayerGroup;
 import com.aionemu.gameserver.model.templates.item.ItemUseLimits;
 import com.aionemu.gameserver.model.templates.panels.SkillPanel;
-import com.aionemu.gameserver.model.templates.zone.ZoneClassName;
 import com.aionemu.gameserver.model.templates.zone.ZoneType;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.AutoGroupService;
@@ -31,7 +30,6 @@ import com.aionemu.gameserver.skillengine.properties.TargetRelationAttribute;
 import com.aionemu.gameserver.utils.ChatUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
-import com.aionemu.gameserver.world.zone.ZoneInstance;
 import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
@@ -425,20 +423,7 @@ public class PlayerRestrictions extends AbstractRestrictions {
 
 		if (item.getItemTemplate().hasAreaRestriction()) {
 			ZoneName restriction = item.getItemTemplate().getUseArea();
-			if (restriction == ZoneName.get("_ABYSS_CASTLE_AREA_")) {
-				boolean isInFortZone = false;
-				for (ZoneInstance zone : player.findZones()) {
-					if (zone.getZoneTemplate().getZoneType().equals(ZoneClassName.FORT)) {
-						isInFortZone = true;
-						break;
-					}
-				}
-				if (!isInFortZone) {
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_CAN_NOT_USE_ITEM_IN_CURRENT_POSITION());
-					return false;
-				}
-			} else if (restriction != null && !player.isInsideItemUseZone(restriction)) {
-				// You cannot use that item here.
+			if (!player.isInsideItemUseZone(restriction)) {
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_CAN_NOT_USE_ITEM_IN_CURRENT_POSITION());
 				return false;
 			}
