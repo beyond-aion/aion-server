@@ -20,7 +20,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_MESSAGE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUESTION_WINDOW;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.world.World;
-import com.aionemu.gameserver.world.WorldMapType;
+import com.aionemu.gameserver.world.WorldMap;
 import com.aionemu.gameserver.world.WorldPosition;
 import com.aionemu.gameserver.world.geo.GeoService;
 
@@ -167,71 +167,71 @@ public class ChatUtil {
 
 	/**
 	 * @param posStr
-	 *          can be a string array of {mapId, x, y[, z[, layer]]} or Aion link like "{@code [pos:Teleporter;0 400010000 2128.8 1924.3 0.0 2]}"
+	 *          can be an Aion link like "{@code [pos:Teleporter;0 400010000 2128.8 1924.3 0.0 2]}"
 	 * @return The {@link WorldPosition} or null if input was invalid.
 	 */
-	public static WorldPosition getPosition(String... posStr) {
-		if (posStr == null || posStr.length == 0)
+	public static WorldPosition getPosition(String posLink) {
+		if (posLink == null || !posLink.startsWith("[pos:"))
 			return null;
 
-		if (posStr[0].startsWith("[pos:")) {
-			int startIndex = posStr[0].indexOf(";");
-			int endIndex = posStr[0].indexOf("]");
-			if (endIndex <= 0 || startIndex < 0 || startIndex > endIndex)
-				return null;
-			posStr = posStr[0].substring(startIndex, endIndex).trim().split("\\h+");
-			if (NumberUtils.toInt(posStr[0]) <= 1) // if present, strip ely/asmo language restriction flag (0 = ely only, 1 = asmo only)
-				posStr = ArrayUtils.subarray(posStr, 1, posStr.length);
-		}
+		int startIndex = posLink.indexOf(";");
+		int endIndex = posLink.indexOf("]");
+		if (startIndex < 0 || startIndex >= endIndex)
+			return null;
+		String[] posStr = posLink.substring(startIndex, endIndex).trim().split("\\h+");
+		if (NumberUtils.toInt(posStr[0]) <= 1) // if present, strip ely/asmo language restriction flag (0 = ely only, 1 = asmo only)
+			posStr = ArrayUtils.subarray(posStr, 1, posStr.length);
 
-		if (posStr == null || posStr.length < 3)
+		if (posStr.length < 3)
 			return null;
 
-		int mapId = NumberUtils.toInt(posStr[0]);
-		int instanceId = mapId % 10000;
-		if (instanceId > 0)
-			mapId -= instanceId;
-		instanceId += 1; // client counts instanceIds starting at 0, but on server side it starts at 1 (TODO change server side)
+		int mapAndInstanceId = NumberUtils.toInt(posStr[0]);
 		float x = NumberUtils.toFloat(posStr[1]);
 		float y = NumberUtils.toFloat(posStr[2]);
-		float z = posStr.length > 3 ? NumberUtils.toFloat(posStr[3]) : 0;
+		float z = posStr.length > 3 ? NumberUtils.toFloat(posStr[3]) : 0; // client always creates position links with z = 0
 		int layer = posStr.length > 4 ? NumberUtils.toInt(posStr[4]) : 0;
-
-		if (mapId == 0)
-			mapId = WorldMapType.getMapId(posStr[0]);
-
-		if (WorldMapType.getWorld(mapId) == null)
-			return null;
-
-		if (instanceId > 1 && !World.getInstance().getWorldMap(mapId).getAvailableInstanceIds().contains(instanceId))
-			instanceId = 1;
-
-		float geoZ;
-		if (z > 0)
-			geoZ = GeoService.getInstance().getZ(mapId, x, y, z, instanceId); // search relative to input z (max diff = z ±2)
-		else {
-			if (layer > 0 && z <= 0 && mapId == 400010000) { // abyss
-				switch (layer) {
-					case 1: // lower
-						z = 1700;
-						break;
-					case 2: // core
-						z = 2350;
-						break;
-					case 3: // upper
-						z = 2950;
-						break;
-				}
-				geoZ = GeoService.getInstance().getZ(mapId, x, y, z, z - 250, instanceId);
-			} else {
-				geoZ = GeoService.getInstance().getZ(mapId, x, y);
+		Integer zSearchOffset = null;
+		if (layer > 0 && z == 0 && mapAndInstanceId == 400010000) { // abyss
+			switch (layer) {
+				case 1: // lower
+					z = 1700f;
+					break;
+				case 2: // core
+					z = 2350f;
+					break;
+				case 3: // upper
+					z = 2950f;
+					break;
 			}
+			zSearchOffset = -250;
 		}
+
+		return parsedCoordsToWorldPosition(mapAndInstanceId, x, y, z == 0 ? null : z, zSearchOffset);
+	}
+
+	public static WorldPosition parsedCoordsToWorldPosition(int mapAndInstanceId, float x, float y, Float z, Integer zSearchOffset) {
+		int instanceId = mapAndInstanceId % 10000;
+		int mapId = mapAndInstanceId;
+		if (instanceId > 0)
+			mapId -= instanceId;
+		WorldMap map = World.getInstance().getWorldMap(mapId);
+		if (map == null)
+			return null;
+		instanceId += 1; // client counts instanceIds starting at 0, but on server side it starts at 1 (TODO change server side)
+		if (instanceId > 1 && !map.getAvailableInstanceIds().contains(instanceId))
+			instanceId = 1;
+		float geoZ;
+		if (z == null)
+			geoZ = GeoService.getInstance().getZ(mapId, x, y);
+		else if (zSearchOffset == null)
+			geoZ = GeoService.getInstance().getZ(mapId, x, y, z, instanceId); // search relative to input z (max diff = z ±2)
+		else
+			geoZ = GeoService.getInstance().getZ(mapId, x, y, z, z + zSearchOffset, instanceId);
 
 		if (!Float.isNaN(geoZ))
 			z = geoZ;
 
-		return World.getInstance().createPosition(mapId, x, y, z, (byte) 0, instanceId);
+		return z == null ? null : World.getInstance().createPosition(mapId, x, y, z, (byte) 0, instanceId);
 	}
 
 	public static String item(int itemId) {
