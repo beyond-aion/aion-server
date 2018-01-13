@@ -23,7 +23,7 @@
 		<xs:attribute name="name" type="xs:string" use="required" />
 		<xs:attribute name="start" type="xs:dateTime" use="required" />
 		<xs:attribute name="end" type="xs:dateTime" use="required" />
-		<xs:attribute name="theme" type="xs:string" use="optional" />
+		<xs:attribute name="theme" type="EventTheme" use="optional" />
 	</xs:complexType>
 
 	<xs:complexType name="EventDrops">
@@ -51,6 +51,15 @@
 
 	<xs:simpleType name="SurveyList">
 		<xs:list itemType="xs:string" />
+	</xs:simpleType>
+
+	<xs:simpleType name="EventTheme">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="CHRISTMAS" />
+			<xs:enumeration value="HALLOWEEN" />
+			<xs:enumeration value="VALENTINE" />
+			<xs:enumeration value="BRAXCAFE" />
+		</xs:restriction>
 	</xs:simpleType>
 
 </xs:schema>

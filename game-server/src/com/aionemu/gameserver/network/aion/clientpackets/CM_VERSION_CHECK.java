@@ -44,6 +44,6 @@ public class CM_VERSION_CHECK extends AionClientPacket {
 
 	@Override
 	protected void runImpl() {
-		sendPacket(new SM_VERSION_CHECK(version, EventService.getInstance().getEventType()));
+		sendPacket(new SM_VERSION_CHECK(version, EventService.getInstance().getEventTheme()));
 	}
 }

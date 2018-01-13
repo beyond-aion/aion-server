@@ -4,7 +4,7 @@ import com.aionemu.gameserver.GameServer;
 import com.aionemu.gameserver.configs.main.GSConfig;
 import com.aionemu.gameserver.configs.main.MembershipConfig;
 import com.aionemu.gameserver.configs.network.NetworkConfig;
-import com.aionemu.gameserver.model.EventType;
+import com.aionemu.gameserver.model.EventTheme;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
@@ -39,13 +39,13 @@ public class SM_VERSION_CHECK extends AionServerPacket {
 	/**
 	 * City theme (for Pandemonium & Sanctum)
 	 */
-	private EventType cityDecoration;
+	private EventTheme cityDecoration;
 
-	public SM_VERSION_CHECK(EventType cityDecoration) {
+	public SM_VERSION_CHECK(EventTheme cityDecoration) {
 		this(INTERNAL_VERSION, cityDecoration);
 	}
 
-	public SM_VERSION_CHECK(int version, EventType cityDecoration) {
+	public SM_VERSION_CHECK(int version, EventTheme cityDecoration) {
 		this.version = version;
 		this.cityDecoration = cityDecoration;
 	}

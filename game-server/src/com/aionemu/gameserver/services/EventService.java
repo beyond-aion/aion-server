@@ -8,7 +8,7 @@ import java.util.concurrent.Future;
 
 import com.aionemu.gameserver.configs.main.EventsConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.model.EventType;
+import com.aionemu.gameserver.model.EventTheme;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.QuestTemplate;
 import com.aionemu.gameserver.model.templates.event.EventTemplate;
@@ -181,14 +181,14 @@ public class EventService {
 		return false;
 	}
 
-	public EventType getEventType() {
+	public EventTheme getEventTheme() {
 		if (EventsConfig.ENABLE_EVENT_SERVICE) {
 			for (EventTemplate et : enabledEvents) {
 				if (et.isStarted() && et.getTheme() != null)
-					return EventType.getEventType(et.getTheme());
+					return et.getTheme();
 			}
 		}
-		return EventType.NONE;
+		return EventTheme.NONE;
 	}
 
 	public List<EventTemplate> getEnabledEvents() {

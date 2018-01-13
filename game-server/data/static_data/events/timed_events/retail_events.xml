@@ -73,7 +73,7 @@
 	<event name="Valentine's Day Inventory" start="2015-02-13T00:00:00" end="2015-02-28T00:00:00">
 		<inventory_drop startlevel="1" interval="6">186000167</inventory_drop>
 	</event>
-	<event name="Valentine's Day" start="2015-02-13T00:00:00" end="2015-02-28T00:00:00" theme="valentine">
+	<event name="Valentine's Day" start="2015-02-13T00:00:00" end="2015-02-28T00:00:00" theme="VALENTINE">
 		<event_drops>
 			<gd_rule rule_name="Valentine's Day Event Drop" min_count="1" base_chance="10" min_diff="-30" max_diff="70">
 				<gd_ratings>
@@ -716,7 +716,7 @@
 			</gd_rule>
 		</event_drops>
 	</event>
-	<event name="Crab Fest" start="2016-12-01T00:00:00" end="2017-01-01T00:00:00" theme="christmas">
+	<event name="Crab Fest" start="2016-12-01T00:00:00" end="2017-01-01T00:00:00" theme="CHRISTMAS">
 		<event_drops>
 			<gd_rule rule_name="Crab Fest Event Drop" base_chance="100" min_diff="0" max_diff="70" no_reduction="true">
 				<gd_npcs>
@@ -1229,7 +1229,7 @@
 			</spawn_map>
 		</spawns>
 	</event>
-	<event name="Celebrate Solorius" start="2017-12-01T00:00:00" end="2017-12-31T23:59:59" theme="christmas">
+	<event name="Celebrate Solorius" start="2017-12-01T00:00:00" end="2017-12-31T23:59:59" theme="CHRISTMAS">
 		<event_drops>
 			<gd_rule rule_name="Celebrate Solorius Event Drop" base_chance="100" no_reduction="true">
 				<gd_npcs>
@@ -1440,7 +1440,7 @@
 			</spawn_map>
 		</spawns>
 	</event>
-	<event name="New Year Event" start="2015-12-22T00:00:00" end="2016-01-12T00:00:00" theme="christmas">
+	<event name="New Year Event" start="2015-12-22T00:00:00" end="2016-01-12T00:00:00" theme="CHRISTMAS">
 		<event_drops>
 			<gd_rule rule_name="New Year Event Drop" min_count="1" base_chance="5" min_diff="-10" max_diff="70">
 				<gd_ratings>
@@ -1474,7 +1474,7 @@
 			</spawn_map>
 		</spawns>
 	</event>
-	<event name="Trick or treat! The witch and the king" start="2017-10-29T18:00:00" end="2017-11-02T20:00:00" theme="halloween">
+	<event name="Trick or treat! The witch and the king" start="2017-10-29T18:00:00" end="2017-11-02T20:00:00" theme="HALLOWEEN">
 		<event_drops>
 			<gd_rule rule_name="Event Potion" base_chance="50" min_diff="-29">
 				<gd_items>
@@ -3390,7 +3390,7 @@
 			</spawn_map>
 		</spawns>
 	</event>
-	<event name="Visit the Brax Cafe!" start="2015-10-09T00:00:00" end="2015-10-23T00:00:00" theme="brax_cafe">
+	<event name="Visit the Brax Cafe!" start="2015-10-09T00:00:00" end="2015-10-23T00:00:00" theme="BRAXCAFE">
 		<quests>
 			<maintainable>80268 80269 80270 80271</maintainable>
 		</quests>
@@ -4116,7 +4116,7 @@
 			</gd_rule>
 		</event_drops>
 	</event>
-	<event name="The Scattered Deck" start="2017-10-23T00:00:00" end="2017-11-05T23:59:59" theme="halloween">
+	<event name="The Scattered Deck" start="2017-10-23T00:00:00" end="2017-11-05T23:59:59" theme="HALLOWEEN">
 		<event_drops>
 			<gd_rule rule_name="Mysterious Card" base_chance="10" fixed_chance="true">
 				<gd_maps>

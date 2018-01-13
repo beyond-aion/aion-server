@@ -21,7 +21,7 @@ import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.dataholders.SpawnsData;
-import com.aionemu.gameserver.model.EventType;
+import com.aionemu.gameserver.model.EventTheme;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.Guides.GuideTemplate;
 import com.aionemu.gameserver.model.templates.spawns.Spawn;
@@ -78,7 +78,7 @@ public class EventTemplate {
 	private ZonedDateTime endDate;
 
 	@XmlAttribute(name = "theme", required = false)
-	private String theme;
+	private EventTheme theme;
 
 	@XmlTransient
 	private Future<?> invDropTask = null;
@@ -202,7 +202,7 @@ public class EventTemplate {
 		log.info("Started event: " + getName());
 
 		if (theme != null) // show city decoration (visible after teleport)
-			PacketSendUtility.broadcastToWorld(new SM_VERSION_CHECK(EventType.getEventType(theme)));
+			PacketSendUtility.broadcastToWorld(new SM_VERSION_CHECK(theme));
 	}
 
 	public void stop() {
@@ -239,14 +239,14 @@ public class EventTemplate {
 		isStarted = false;
 		log.info("Stopped event: " + getName());
 
-		if (theme != null && EventService.getInstance().getEventType() == EventType.NONE) // remove city decoration (visible after teleport)
-			PacketSendUtility.broadcastToWorld(new SM_VERSION_CHECK(EventType.NONE));
+		if (theme != null && EventService.getInstance().getEventTheme() == EventTheme.NONE) // remove city decoration (visible after teleport)
+			PacketSendUtility.broadcastToWorld(new SM_VERSION_CHECK(EventTheme.NONE));
 	}
 
 	/**
 	 * @return the theme name
 	 */
-	public String getTheme() {
+	public EventTheme getTheme() {
 		return theme;
 	}
 
