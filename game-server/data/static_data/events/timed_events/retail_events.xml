@@ -2,7 +2,7 @@
 <timed_events xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="timed_events.xsd">
 	<event name="Atreian City Festival" start="2015-02-06T00:00:00" end="2015-02-13T00:00:00">
 		<quests>
-			<maintainable>80162;80163;80164;80165;80166;80167;80168;80169</maintainable>
+			<maintainable>80162 80163 80164 80165 80166 80167 80168 80169</maintainable>
 		</quests>
 		<event_drops>
 			<gd_rule rule_name="Atreian City Festival Event Drop" min_count="1" base_chance="4" min_diff="-20" max_diff="70">
@@ -88,7 +88,7 @@
 			</gd_rule>
 		</event_drops>
 		<quests>
-			<maintainable>80170;80171</maintainable>
+			<maintainable>80170 80171</maintainable>
 		</quests>
 		<spawns>
 			<!-- Sanctum -->
@@ -157,7 +157,7 @@
 	</event>
 	<event name="Love is in the Air" start="2015-02-13T00:00:00" end="2015-02-28T00:00:00">
 		<quests>
-			<maintainable>80298;80299;80300;80301;80302;80303;80304;80305;80305;80306;80307;80308;80309</maintainable>
+			<maintainable>80298 80299 80300 80301 80302 80303 80304 80305 80305 80306 80307 80308 80309</maintainable>
 		</quests>
 		<spawns>
 			<!-- Oriel -->
@@ -500,7 +500,7 @@
 	</event>
 	<event name="Love is in the Aether" start="2015-02-12T00:00:00" end="2015-02-26T00:00:00">
 		<quests>
-			<maintainable>80545;80546;80547;80549;80550;80551</maintainable>
+			<maintainable>80545 80546 80547 80549 80550 80551</maintainable>
 		</quests>
 		<spawns>
 			<!-- Sanctum -->
@@ -537,8 +537,8 @@
 	</event>
 	<event name="The Fortune Fayre" start="2015-03-09T00:00:00" end="2015-03-23T00:00:00">
 		<quests>
-			<startable>80028;80029;80031;80032</startable>
-			<maintainable>80030;80033;80034;80035;80036;80037;80038;80039</maintainable>
+			<startable>80028 80029 80031 80032</startable>
+			<maintainable>80030 80033 80034 80035 80036 80037 80038 80039</maintainable>
 		</quests>
 		<spawns>
 			<!-- Sanctum -->
@@ -758,7 +758,7 @@
 			</gd_rule>
 		</event_drops>
 		<quests>
-			<maintainable>80112;80113;80114;80115;80116;80117;80118;80119;80128;80120;80121;80122;80123;80124;80125;80126;80127;80129</maintainable>
+			<maintainable>80112 80113 80114 80115 80116 80117 80118 80119 80128 80120 80121 80122 80123 80124 80125 80126 80127 80129</maintainable>
 		</quests>
 		<spawns>
 			<!-- Pandaemonium -->
@@ -1281,7 +1281,7 @@
 			</gd_rule>
 		</event_drops>
 		<quests>
-			<maintainable>50007;50008;50009;51007;51008;51009</maintainable>
+			<maintainable>50007 50008 50009 51007 51008 51009</maintainable>
 		</quests>
 		<spawns>
 			<!-- Sanctum -->
@@ -1455,7 +1455,7 @@
 			</gd_rule>
 		</event_drops>
 		<quests>
-			<maintainable>80022;80023;80024;80025;80026;80027</maintainable>
+			<maintainable>80022 80023 80024 80025 80026 80027</maintainable>
 		</quests>
 		<spawns>
 			<!-- Sanctum -->
@@ -1508,7 +1508,7 @@
 			</gd_rule>
 		</event_drops>
 		<quests>
-			<maintainable>80010;80011;80012;80013;80014;80015;80086;80087;80088;80089;80090;80091;80092;80093;80094;80095;80096;80097;80098;80099;80100;80101;80102;80103;80104;80105;80106;80107;80108;80109;80110;80111</maintainable>
+			<maintainable>80010 80011 80012 80013 80014 80015 80086 80087 80088 80089 80090 80091 80092 80093 80094 80095 80096 80097 80098 80099 80100 80101 80102 80103 80104 80105 80106 80107 80108 80109 80110 80111</maintainable>
 		</quests>
 		<spawns>
 			<!-- Pandaemonium -->
@@ -2003,7 +2003,7 @@
 			</gd_rule>
 		</event_drops>
 		<quests>
-			<maintainable>80076;80078;80079;80080;80081;80077;80082;80083;80084;80085</maintainable>
+			<maintainable>80076 80078 80079 80080 80081 80077 80082 80083 80084 80085</maintainable>
 		</quests>
 		<spawns>
 			<!-- Pandaemonium -->
@@ -2140,7 +2140,7 @@
 	</event>
 	<event name="Growth" start="2014-01-01T00:00:00" end="2014-12-31T00:00:00">
 		<quests>
-			<maintainable>80212;80213;80214;80215;80216;80217;80218;80219;80220;80221;80222;80223;80224;80225;80226;80227;80228;80229;80387;80388;80389;80390;80398;80399;80400;80401;80487;80488;80489;80490;80491;80492;80493;80494;80495;80496;80497;80498;80499;80500;80501;80502;80503;80504;80505;80506;80507;80508;80509;80510;80511;80512;80513;80514;80515;80516;80517;80518;80519;80520;80521;80522;80523;80524;80525;80526;80527;80528;80529;80530;80531;80532;80533;80534;80535;80536;80537;80538</maintainable>
+			<maintainable>80212 80213 80214 80215 80216 80217 80218 80219 80220 80221 80222 80223 80224 80225 80226 80227 80228 80229 80387 80388 80389 80390 80398 80399 80400 80401 80487 80488 80489 80490 80491 80492 80493 80494 80495 80496 80497 80498 80499 80500 80501 80502 80503 80504 80505 80506 80507 80508 80509 80510 80511 80512 80513 80514 80515 80516 80517 80518 80519 80520 80521 80522 80523 80524 80525 80526 80527 80528 80529 80530 80531 80532 80533 80534 80535 80536 80537 80538</maintainable>
 		</quests>
 		<spawns>
 			<!-- Sanctum -->
@@ -2349,7 +2349,7 @@
 	</event>
 	<event name="Transform and battle as a Guardian General" start="2015-04-01T00:00:00" end="2015-04-10T00:00:00">
 		<quests>
-			<maintainable>80330;80331</maintainable>
+			<maintainable>80330 80331</maintainable>
 		</quests>
 		<spawns>
 			<!-- Sanctum -->
@@ -2599,7 +2599,7 @@
 	</event>
 	<event name="Code Red: Atreia" start="2017-05-05T00:00:00" end="2017-05-14T23:59:59">
 		<quests>
-			<maintainable>80324;80325;80326;80327</maintainable>
+			<maintainable>80324 80325 80326 80327</maintainable>
 		</quests>
 		<spawns>
 			<!-- Sanctum -->
@@ -3094,7 +3094,7 @@
 	<!-- TODO: Check on retail NPC spawn position. real activation date is 2015-04-01 to 2015-05-22 but make it 2015 for test purpose -->
 	<event name="Shugo Imperial Tomb" start="2015-04-01T00:00:00" end="2015-05-22T00:00:00">
 		<quests>
-			<maintainable>80274;80275;80279;80282</maintainable>
+			<maintainable>80274 80275 80279 80282</maintainable>
 		</quests>
 		<spawns>
 			<!-- Pandaemonium -->
@@ -3145,7 +3145,7 @@
 	</event>
 	<event name="Shugo Emperor's Vault" start="2015-02-04T00:00:00" end="2015-02-18T00:00:00">
 		<quests>
-			<maintainable>80689;80690;80691;80692;80693;80694;80695;80696</maintainable>
+			<maintainable>80689 80690 80691 80692 80693 80694 80695 80696</maintainable>
 		</quests>
 		<spawns>
 			<spawn_map map_id="110010000">
@@ -3200,7 +3200,7 @@
 			</gd_rule>
 		</event_drops>
 		<quests>
-			<maintainable>80351;80352;80353;80354;80355;80356;80357;80358;80359;80360;80361;80362;80363;80364;80365;80366;80367;80368</maintainable>
+			<maintainable>80351 80352 80353 80354 80355 80356 80357 80358 80359 80360 80361 80362 80363 80364 80365 80366 80367 80368</maintainable>
 		</quests>
 		<spawns>
 			<!-- Pandaemonium -->
@@ -3392,7 +3392,7 @@
 	</event>
 	<event name="Visit the Brax Cafe!" start="2015-10-09T00:00:00" end="2015-10-23T00:00:00" theme="brax_cafe">
 		<quests>
-			<maintainable>80268;80269;80270;80271</maintainable>
+			<maintainable>80268 80269 80270 80271</maintainable>
 		</quests>
 		<spawns>
 			<!-- Pandaemonium -->
@@ -3495,7 +3495,7 @@
 	</event>
 	<event name="The Lost Words!" start="2015-06-04T00:00:00" end="2015-06-18T00:00:00">
 		<quests>
-			<maintainable>80567;80568;80569;80570;80571;80572;80573;80574</maintainable>
+			<maintainable>80567 80568 80569 80570 80571 80572 80573 80574</maintainable>
 		</quests>
 		<event_drops>
 			<gd_rule rule_name="Aion Community Appreciation Event Drop" min_count="1" base_chance="5" min_diff="-10" max_diff="70">
@@ -3640,7 +3640,7 @@
 	</event>
 	<event name="Boiling Point" start="2015-08-14T00:00:00" end="2015-08-28T00:00:00">
 		<quests>
-			<maintainable>51035;51036;51037;50035;50036;50037</maintainable>
+			<maintainable>51035 51036 51037 50035 50036 50037</maintainable>
 		</quests>
 		<event_drops>
 			<gd_rule rule_name="Boiling Point Event Drop 1" min_count="1" base_chance="10" min_diff="-10" max_diff="70" member_limit="12">
@@ -3750,7 +3750,7 @@
 	</event>
 	<event name="Frozen Magic Event" start="2017-12-17T00:00:00" end="2017-12-31T23:59:59">
 		<quests>
-			<maintainable>80575;80576;80577;80578;80579;80580</maintainable>
+			<maintainable>80575 80576 80577 80578 80579 80580</maintainable>
 		</quests>
 		<spawns>
 			<!-- Sanctum -->
@@ -3862,7 +3862,7 @@
 	</event>
 	<event name="Joker's Wild Event" start="2015-01-07T00:00:00" end="2015-01-21T00:00:00">
 		<quests>
-			<maintainable>80623;80624;80625;80626;80627;80628;80629;80630;80631;80632;80633;80634</maintainable>
+			<maintainable>80623 80624 80625 80626 80627 80628 80629 80630 80631 80632 80633 80634</maintainable>
 		</quests>
 		<spawns>
 			<!-- Sanctum -->
@@ -3978,7 +3978,7 @@
 	</event>
 	<event name="Legendary Symphony" start="2016-07-01T00:00:00" end="2016-07-20T23:59:59">
 		<quests>
-			<maintainable>80673;80674;80675;80676;80677;80678;80679;80680;80681;80682;80697;80698;80699;80700;80701;80702;80703;80704;80705;80706</maintainable>
+			<maintainable>80673 80674 80675 80676 80677 80678 80679 80680 80681 80682 80697 80698 80699 80700 80701 80702 80703 80704 80705 80706</maintainable>
 		</quests>
 		<spawns>
 			<!-- Sanctum -->
