@@ -3,6 +3,7 @@ package com.aionemu.gameserver.geoEngine;
 import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
+import java.io.StreamCorruptedException;
 import java.lang.reflect.Method;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -50,8 +51,8 @@ public class GeoWorldLoader {
 
 	private static boolean DEBUG = false;
 
-	public static Map<String, Spatial> loadMeshs(String fileName) throws IOException {
-		Map<String, Spatial> geoms = new HashMap<>();
+	public static Map<String, Node> loadMeshes(String fileName) throws IOException {
+		Map<String, Node> geoms = new HashMap<>();
 		File geoFile = new File(fileName);
 		FileChannel roChannel = null;
 		MappedByteBuffer geo = null;
@@ -93,27 +94,23 @@ public class GeoWorldLoader {
 					m.setBuffer(VertexBuffer.Type.Index, 3, indexes);
 					m.createCollisionData();
 
-					if ((intentions & CollisionIntention.DOOR.getId()) != 0 && (intentions & CollisionIntention.PHYSICAL.getId()) != 0) {
+					if ((m.getIntentions() & CollisionIntention.DOOR.getId()) != 0 && (m.getIntentions() & CollisionIntention.PHYSICAL.getId()) != 0) {
 						geom = new DoorGeometry(name);
 					} else {
 						MaterialTemplate mtl = DataManager.MATERIAL_DATA.getTemplate(m.getMaterialId());
-						geom = new Geometry(null, m);
+						geom = new Geometry(name, m);
 						if (mtl != null || m.getMaterialId() == 11) {
 							node.setName(name);
 						}
-						if (modelCount == 1) {
-							geom.setName(name);
+						if (modelCount == 1)
 							singleChildMaterialId = geom.getMaterialId();
-						} else
-							geom.setName(("child" + c + "_" + name));
-						node.attachChild(geom);
 					}
-					geoms.put(geom.getName(), geom);
+					node.attachChild(geom);
 				}
 				node.setCollisionFlags((short) (intentions << 8 | singleChildMaterialId & 0xFF));
-				if (!node.getChildren().isEmpty()) {
-					geoms.put(name, node);
-				}
+				if (node.getChildren().isEmpty())
+					throw new StreamCorruptedException("Cannot read mesh file \"" + fileName + "\": missing geometry data for " + name);
+				geoms.put(name, node);
 			}
 			destroyDirectByteBuffer(geo);
 		}
@@ -121,7 +118,7 @@ public class GeoWorldLoader {
 
 	}
 
-	public static boolean loadWorld(int worldId, Map<String, Spatial> models, GeoMap map, Set<String> missingMeshes, List<String> missingDoors) {
+	public static boolean loadWorld(int worldId, Map<String, Node> models, GeoMap map, Set<String> missingMeshes, List<String> missingDoors) {
 		File geoFile = new File(GEO_DIR + worldId + ".geo");
 		FileChannel roChannel = null;
 		MappedByteBuffer geo = null;
@@ -152,29 +149,31 @@ public class GeoWorldLoader {
 				float scale = geo.getFloat();
 				Matrix3f matrix3f = new Matrix3f();
 				matrix3f.set(matrix);
-				Spatial node = models.get(name);
+				Node node = models.get(name);
 				if (node != null) {
 					try {
-						if (node instanceof DoorGeometry) {
+						if ((node.getIntentions() & CollisionIntention.DOOR.getId()) != 0) {
 							if (!GeoDataConfig.GEO_DOORS_ENABLE) // ignore mesh for now (should be handled in collideWith() so it can be toggled during runtime)
 								continue;
-							Spatial nodeClone = node.clone();
-							if (createDoors(nodeClone, worldId, matrix3f, loc, scale))
-								map.attachChild(nodeClone);
-							else
-								missingDoors.add(nodeClone.getName() + " (map=" + worldId + "; pos=" + loc + ")");
+							for (Spatial door : node.getChildren()) {
+								DoorGeometry doorClone = (DoorGeometry) door.clone();
+								if (createDoors(doorClone, worldId, matrix3f, loc, scale))
+									map.attachChild(doorClone);
+								else
+									missingDoors.add(doorClone.getName() + " (map=" + worldId + "; pos=" + loc + ")");
+							}
 						} else {
 							if ((node.getIntentions() & CollisionIntention.MOVEABLE.getId()) != 0) // TODO: handle moveable collisions (ships, shugo boxes)
 								continue;
-							Spatial nodeClone = attachChild(map, node, matrix3f, loc, scale);
-							List<Spatial> children = ((Node) node).descendantMatches("child\\d+_" + name.replace("\\", "\\\\"));
-							if (children.size() == 0) {
+							Node nodeClone = (Node) attachChild(map, node, matrix3f, loc, scale);
+							List<Spatial> children = node.getChildren();
+							if (children.size() == 1) {
 								createZone(nodeClone, worldId, 0);
 							} else {
 								for (int c = 0; c < children.size(); c++) {
 									Spatial child = children.get(c);
-									nodeClone = attachChild(map, child, matrix3f, loc, scale);
-									createZone(nodeClone, worldId, c + 1);
+									Spatial childClone = attachChild(map, child, matrix3f, loc, scale);
+									createZone(childClone, worldId, c + 1);
 								}
 							}
 						}
@@ -194,8 +193,7 @@ public class GeoWorldLoader {
 	}
 
 	private static Spatial attachChild(GeoMap map, Spatial node, Matrix3f matrix, Vector3f location, float scale) throws CloneNotSupportedException {
-		Spatial nodeClone = node;
-		nodeClone = node.clone();
+		Spatial nodeClone = node.clone();
 		nodeClone.setTransform(matrix, location, scale);
 		nodeClone.updateModelBound();
 		map.attachChild(nodeClone);

@@ -25,15 +25,10 @@ public class AbyssCore implements ZoneHandler {
 	private Map<Integer, CollisionDieActor> observed = new HashMap<>();
 	private Node geometry;
 
-	public AbyssCore() {
-		try {
-			this.geometry = (Node) GeoWorldLoader.loadMeshs("data/geo/models/na_ab_lmark_col_01a.mesh").values().toArray()[0];
-			this.geometry.setTransform(new Matrix3f(1.15f, 0, 0, 0, 1.15f, 0, 0, 0, 1.15f),
-																 new Vector3f(2140.104f, 1925.5823f, 2303.919f), 1f);
-		}
-		catch (IOException e) {
-			e.printStackTrace();
-		}
+	public AbyssCore() throws IOException {
+		geometry = GeoWorldLoader.loadMeshes("data/geo/models/na_ab_lmark_col_01a.mesh")
+			.get("levels\\common\\abyss\\abground\\landmark\\ground_a\\na_ab_lmark_col_01a.cgf");
+		geometry.setTransform(new Matrix3f(1.15f, 0, 0, 0, 1.15f, 0, 0, 0, 1.15f), new Vector3f(2140.104f, 1925.5823f, 2303.919f), 1f);
 		geometry.updateModelBound();
 	}
 

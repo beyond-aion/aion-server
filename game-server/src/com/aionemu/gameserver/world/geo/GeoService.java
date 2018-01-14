@@ -24,7 +24,6 @@ public class GeoService {
 	 * Initialize geodata based on configuration, load necessary structures
 	 */
 	public void initializeGeo() {
-		ClassLoader.getSystemClassLoader().setPackageAssertionStatus("com.jme3", false); // disables unwanted assertion errors and optimizes runtime
 		switch (getConfiguredGeoType()) {
 			case GEO_MESHES:
 				geoData = new RealGeoData();

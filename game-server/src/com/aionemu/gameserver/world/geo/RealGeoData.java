@@ -15,7 +15,7 @@ import com.aionemu.commons.utils.ConsoleUtil;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.geoEngine.GeoWorldLoader;
 import com.aionemu.gameserver.geoEngine.models.GeoMap;
-import com.aionemu.gameserver.geoEngine.scene.Spatial;
+import com.aionemu.gameserver.geoEngine.scene.Node;
 import com.aionemu.gameserver.model.templates.world.WorldMapTemplate;
 
 import gnu.trove.map.hash.TIntObjectHashMap;
@@ -31,14 +31,14 @@ public class RealGeoData implements GeoData {
 
 	@Override
 	public void loadGeoMaps() {
-		Map<String, Spatial> models = loadMeshes();
+		Map<String, Node> models = loadMeshes();
 		loadWorldMaps(models);
 		models.clear();
 		models = null;
 		log.info("Geodata: " + geoMaps.size() + " geo maps loaded!");
 	}
 
-	protected void loadWorldMaps(Map<String, Spatial> models) {
+	protected void loadWorldMaps(Map<String, Node> models) {
 		log.info("Loading geo maps..");
 		ConsoleUtil.initAndPrintProgressBar(DataManager.WORLD_MAPS_DATA.size());
 		Set<String> missingMeshes = new HashSet<>();
@@ -66,11 +66,11 @@ public class RealGeoData implements GeoData {
 			log.warn(missingGeos.size() + " maps are missing and reverted to dummy implementation:\n" + missingGeos);
 	}
 
-	protected Map<String, Spatial> loadMeshes() {
+	protected Map<String, Node> loadMeshes() {
 		log.info("Loading meshes..");
-		Map<String, Spatial> models = null;
+		Map<String, Node> models = null;
 		try {
-			models = GeoWorldLoader.loadMeshs("data/geo/models/geo.mesh");
+			models = GeoWorldLoader.loadMeshes("data/geo/models/geo.mesh");
 		} catch (IOException e) {
 			throw new IllegalStateException("Problem loading meshes", e);
 		}
