@@ -166,15 +166,9 @@ public class GeoWorldLoader {
 							if ((node.getIntentions() & CollisionIntention.MOVEABLE.getId()) != 0) // TODO: handle moveable collisions (ships, shugo boxes)
 								continue;
 							Node nodeClone = (Node) attachChild(map, node, matrix3f, loc, scale);
-							List<Spatial> children = node.getChildren();
-							if (children.size() == 1) {
-								createZone(nodeClone, worldId, 0);
-							} else {
-								for (int c = 0; c < children.size(); c++) {
-									Spatial child = children.get(c);
-									Spatial childClone = attachChild(map, child, matrix3f, loc, scale);
-									createZone(childClone, worldId, c + 1);
-								}
+							List<Spatial> children = nodeClone.getChildren();
+							for (int c = 0; c < children.size(); c++) {
+								createZone(children.get(c), worldId, children.size() == 1 ? 0 : c + 1);
 							}
 						}
 					} catch (Exception e) {
@@ -200,27 +194,17 @@ public class GeoWorldLoader {
 		return nodeClone;
 	}
 
-	private static void createZone(Spatial node, int worldId, int childNumber) {
-		if (node.getName() == null) {
-			return;
-		}
-		if (GeoDataConfig.GEO_MATERIALS_ENABLE && (node.getIntentions() & CollisionIntention.MATERIAL.getId()) != 0) {
-			int regionId = getVectorHash(node.getWorldBound().getCenter());
-			int index = node.getName().lastIndexOf('\\');
-			int dotIndex = node.getName().lastIndexOf('.');
-			String zoneName = node.getName().substring(index + 1, dotIndex).toUpperCase();
+	private static void createZone(Spatial geometry, int worldId, int childNumber) {
+		if (GeoDataConfig.GEO_MATERIALS_ENABLE && (geometry.getIntentions() & CollisionIntention.MATERIAL.getId()) != 0) {
+			int regionId = getVectorHash(geometry.getWorldBound().getCenter());
+			int index = geometry.getName().lastIndexOf('\\');
+			int dotIndex = geometry.getName().lastIndexOf('.');
+			String name = geometry.getName().substring(index + 1, dotIndex).toUpperCase();
 			if (childNumber > 0)
-				zoneName += "_CHILD" + childNumber;
-			String existingName = zoneName + "_" + regionId + "_" + worldId;
-			if (ZoneName.getId(existingName) != ZoneName.getId(ZoneName.NONE)) {
-				// for override
-				zoneName += "_" + regionId;
-				node.setName(zoneName);
-				ZoneService.getInstance().createMaterialZoneTemplate(node, worldId, node.getMaterialId(), true);
-			} else {
-				node.setName(zoneName);
-				ZoneService.getInstance().createMaterialZoneTemplate(node, regionId, worldId, node.getMaterialId());
-			}
+				name += "_CHILD" + childNumber;
+			geometry.setName(name + "_" + regionId);
+			ZoneName zoneName = ZoneName.createOrGet(geometry.getName() + "_" + worldId);
+			ZoneService.getInstance().createMaterialZoneTemplate(geometry, worldId, zoneName);
 		}
 	}
 

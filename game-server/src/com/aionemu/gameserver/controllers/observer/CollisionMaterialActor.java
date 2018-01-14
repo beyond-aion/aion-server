@@ -66,6 +66,9 @@ public class CollisionMaterialActor extends AbstractCollisionObserver implements
 		if (foundSkill == null)
 			return null;
 
+		if (creature.getEffectController().hasAbnormalEffect(foundSkill.getId()))
+			return null;
+
 		int weatherCode = -1;
 		for (ZoneInstance regionZone : creature.findZones()) {
 			if (regionZone.getZoneTemplate().getZoneType() == ZoneClassName.WEATHER) {
@@ -102,9 +105,7 @@ public class CollisionMaterialActor extends AbstractCollisionObserver implements
 	public void onMoved(CollisionResults collisionResults) {
 		if (isCanceled.get())
 			return;
-		if (collisionResults.size() == 0) {
-			return;
-		} else {
+		if (collisionResults.size() > 0) {
 			if (GeoDataConfig.GEO_MATERIALS_SHOWDETAILS && creature instanceof Player) {
 				Player player = (Player) creature;
 				if (player.isStaff()) {
@@ -118,26 +119,17 @@ public class CollisionMaterialActor extends AbstractCollisionObserver implements
 
 	@Override
 	public void act() {
-		final MaterialSkill actSkill = getSkillForTarget(creature);
-		if (currentSkill.getAndSet(actSkill) != actSkill) {
-			if (actSkill == null)
-				return;
-			if (creature.getEffectController().hasAbnormalEffect(actSkill.getId())) {
-				return;
-			}
-			Future<?> task = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
-
-				@Override
-				public void run() {
-					if (!creature.getEffectController().hasAbnormalEffect(actSkill.getId())) {
-						if (GeoDataConfig.GEO_MATERIALS_SHOWDETAILS && creature instanceof Player) {
-							Player player = (Player) creature;
-							if (player.isStaff()) {
-								PacketSendUtility.sendMessage(player, "Use skill=" + actSkill.getId());
-							}
+		MaterialSkill actSkill = getSkillForTarget(creature);
+		if (actSkill != null && currentSkill.getAndSet(actSkill) != actSkill) {
+			Future<?> task = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
+				if (!creature.getEffectController().hasAbnormalEffect(actSkill.getId())) {
+					if (GeoDataConfig.GEO_MATERIALS_SHOWDETAILS && creature instanceof Player) {
+						Player player = (Player) creature;
+						if (player.isStaff()) {
+							PacketSendUtility.sendMessage(player, "Use skill=" + actSkill.getId());
 						}
-						SkillEngine.getInstance().applyEffectDirectly(actSkill.getId(), creature, creature, 0);
 					}
+					SkillEngine.getInstance().applyEffectDirectly(actSkill.getId(), creature, creature, 0);
 				}
 			}, 0, (long) (actSkill.getFrequency() * 1000));
 			creature.getController().addTask(TaskId.MATERIAL_ACTION, task);
@@ -146,9 +138,10 @@ public class CollisionMaterialActor extends AbstractCollisionObserver implements
 
 	@Override
 	public void abort() {
-		isCanceled.set(true);
-		creature.getController().cancelTask(TaskId.MATERIAL_ACTION);
-		currentSkill.set(null);
+		if (isCanceled.compareAndSet(false, true)) {
+			creature.getController().cancelTask(TaskId.MATERIAL_ACTION);
+			currentSkill.set(null);
+		}
 	}
 
 	@Override

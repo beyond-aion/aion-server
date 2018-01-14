@@ -242,32 +242,20 @@ public final class ZoneService implements GameEngine {
 		zoneData.saveData();
 	}
 
-	/**
-	 * @param node
-	 * @param worldId
-	 * @param materialId
-	 * @param b
-	 */
-	public void createMaterialZoneTemplate(Spatial geometry, int worldId, int materialId, boolean failOnMissing) {
-		ZoneName zoneName = null;
-		if (failOnMissing)
-			zoneName = ZoneName.get(geometry.getName() + "_" + worldId);
-		else
-			zoneName = ZoneName.createOrGet(geometry.getName() + "_" + worldId);
-
+	public void createMaterialZoneTemplate(Spatial geometry, int worldId, ZoneName zoneName) {
 		if (zoneName.name().equals(ZoneName.NONE))
 			return;
 
 		ZoneHandler handler = collidableHandlers.get(zoneName);
 		if (handler == null) {
-			if (materialId == 11) {
+			if (geometry.getMaterialId() == 11) {
 				if (GeoDataConfig.GEO_SHIELDS_ENABLE) {
 					handler = new SiegeShield(geometry);
 					ShieldService.getInstance().registerShield(worldId, (SiegeShield) handler);
 				} else
 					return;
 			} else {
-				MaterialTemplate template = DataManager.MATERIAL_DATA.getTemplate(materialId);
+				MaterialTemplate template = DataManager.MATERIAL_DATA.getTemplate(geometry.getMaterialId());
 				if (template == null)
 					return;
 				handler = new MaterialZoneHandler(geometry, template);
@@ -277,10 +265,10 @@ public final class ZoneService implements GameEngine {
 			log.warn("Duplicate material mesh: " + zoneName.toString());
 		}
 
-		Collection<ZoneInfo> areas = this.zoneByMapIdMap.get(worldId);
+		List<ZoneInfo> areas = zoneByMapIdMap.get(worldId);
 		if (areas == null) {
-			this.zoneByMapIdMap.put(worldId, new ArrayList<ZoneInfo>());
-			areas = this.zoneByMapIdMap.get(worldId);
+			areas = new ArrayList<>();
+			zoneByMapIdMap.put(worldId, areas);
 		}
 		ZoneInfo zoneInfo = null;
 		for (ZoneInfo area : areas) {
@@ -308,17 +296,6 @@ public final class ZoneService implements GameEngine {
 				areas.add(zoneInfo);
 			}
 		}
-	}
-
-	/**
-	 * @param node
-	 * @param regionId
-	 * @param worldId
-	 * @param materialId
-	 */
-	public void createMaterialZoneTemplate(Spatial geometry, int regionId, int worldId, byte materialId) {
-		geometry.setName(geometry.getName() + "_" + regionId);
-		createMaterialZoneTemplate(geometry, worldId, materialId, false);
 	}
 
 	public static ZoneService getInstance() {
