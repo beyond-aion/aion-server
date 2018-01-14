@@ -51,7 +51,8 @@ public class RealGeoData implements GeoData {
 			if (GeoWorldLoader.loadWorld(map.getMapId(), models, geoMap, missingMeshes, missingDoors)) {
 				geoMaps.put(map.getMapId(), geoMap);
 			} else {
-				missingGeos.add(map.getMapId());
+				if (map.getWorldSize() != 0) // don't warn about maps with size 0 (test maps which cannot be entered)
+					missingGeos.add(map.getMapId());
 				geoMaps.put(map.getMapId(), DummyGeoData.DUMMY_MAP);
 			}
 			ConsoleUtil.increaseAndPrintProgress();
