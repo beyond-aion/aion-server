@@ -15,7 +15,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 public class CollisionDieActor extends AbstractCollisionObserver implements IActor {
 
 	public CollisionDieActor(Creature creature, Spatial geometry) {
-		super(creature, geometry, CollisionIntention.MATERIAL.getId());
+		super(creature, geometry, CollisionIntention.MATERIAL.getId(), CheckType.PASS);
 	}
 
 	@Override

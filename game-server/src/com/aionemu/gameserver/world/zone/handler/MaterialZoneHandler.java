@@ -3,14 +3,17 @@ package com.aionemu.gameserver.world.zone.handler;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.aionemu.gameserver.configs.main.GeoDataConfig;
 import com.aionemu.gameserver.controllers.observer.ActionObserver;
 import com.aionemu.gameserver.controllers.observer.CollisionMaterialActor;
 import com.aionemu.gameserver.controllers.observer.IActor;
 import com.aionemu.gameserver.geoEngine.scene.Spatial;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.Creature;
+import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.materials.MaterialSkill;
 import com.aionemu.gameserver.model.templates.materials.MaterialTemplate;
+import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
 
 /**
@@ -59,15 +62,26 @@ public class MaterialZoneHandler implements ZoneHandler {
 		observed.put(creature.getObjectId(), actor);
 		if (actOnEnter)
 			actor.act();
+		else
+			actor.moved();
+		if (GeoDataConfig.GEO_MATERIALS_SHOWDETAILS && creature instanceof Player) {
+			Player player = (Player) creature;
+			if (player.isStaff())
+				PacketSendUtility.sendMessage(player, "Entered material zone " + geometry.getName());
+		}
 	}
 
 	@Override
 	public void onLeaveZone(Creature creature, ZoneInstance zone) {
-		IActor actor = observed.get(creature.getObjectId());
+		IActor actor = observed.remove(creature.getObjectId());
 		if (actor != null) {
 			creature.getObserveController().removeObserver((ActionObserver) actor);
-			observed.remove(creature.getObjectId());
 			actor.abort();
+		}
+		if (GeoDataConfig.GEO_MATERIALS_SHOWDETAILS && creature instanceof Player) {
+			Player player = (Player) creature;
+			if (player.isStaff())
+				PacketSendUtility.sendMessage(player, "Left material zone " + geometry.getName());
 		}
 	}
 

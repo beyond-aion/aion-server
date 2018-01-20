@@ -411,6 +411,14 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 		return task;
 	}
 
+	public boolean cancelTaskIfPresent(TaskId taskId, Future<?> task) {
+		if (tasks.remove(taskId, task)) {
+			task.cancel(false);
+			return true;
+		}
+		return false;
+	}
+
 	/**
 	 * If task already exist - it will be canceled
 	 * 

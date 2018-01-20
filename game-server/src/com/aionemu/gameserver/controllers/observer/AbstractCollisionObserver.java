@@ -19,14 +19,16 @@ public abstract class AbstractCollisionObserver extends ActionObserver {
 	protected Vector3f oldPos;
 	protected Spatial geometry;
 	protected byte intentions;
+	private final CheckType checkType;
 	private AtomicBoolean isRunning = new AtomicBoolean();
 
-	public AbstractCollisionObserver(Creature creature, Spatial geometry, byte intentions) {
+	public AbstractCollisionObserver(Creature creature, Spatial geometry, byte intentions, CheckType checkType) {
 		super(ObserverType.MOVE_OR_DIE);
 		this.creature = creature;
 		this.geometry = geometry;
 		this.oldPos = new Vector3f(creature.getX(), creature.getY(), creature.getZ());
 		this.intentions = intentions;
+		this.checkType = checkType;
 	}
 
 	@Override
@@ -37,8 +39,18 @@ public abstract class AbstractCollisionObserver extends ActionObserver {
 				@Override
 				public void run() {
 					try {
-						Vector3f pos = new Vector3f(creature.getX(), creature.getY(), creature.getZ());
-						Vector3f dir = oldPos.clone();
+						Vector3f pos;
+						Vector3f dir;
+						if (checkType == CheckType.TOUCH) { // check if we are standing on the geometry (either top or bottom)
+							float z = creature.getZ();
+							float zMax = z + 0.05f;
+							float zMin = z - 0.1f;
+							pos = new Vector3f(creature.getX(), creature.getY(), zMax);
+							dir = new Vector3f(pos.getX(), pos.getY(), zMin);
+						} else { // check if we are passed the geometry (either entering or leaving)
+							pos = new Vector3f(creature.getX(), creature.getY(), creature.getZ());
+							dir = oldPos.clone();
+						}
 						Float limit = pos.distance(dir);
 						dir.subtractLocal(pos).normalizeLocal();
 						Ray r = new Ray(pos, dir);
@@ -56,4 +68,9 @@ public abstract class AbstractCollisionObserver extends ActionObserver {
 	}
 
 	public abstract void onMoved(CollisionResults result);
+
+	public enum CheckType {
+		TOUCH,
+		PASS
+	}
 }

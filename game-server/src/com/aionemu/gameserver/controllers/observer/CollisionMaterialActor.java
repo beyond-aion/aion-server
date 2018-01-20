@@ -7,7 +7,6 @@ import java.util.concurrent.atomic.AtomicReference;
 import com.aionemu.gameserver.configs.main.GeoDataConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.geoEngine.collision.CollisionIntention;
-import com.aionemu.gameserver.geoEngine.collision.CollisionResult;
 import com.aionemu.gameserver.geoEngine.collision.CollisionResults;
 import com.aionemu.gameserver.geoEngine.math.Vector3f;
 import com.aionemu.gameserver.geoEngine.scene.Spatial;
@@ -31,12 +30,14 @@ import com.aionemu.gameserver.world.zone.ZoneInstance;
  */
 public class CollisionMaterialActor extends AbstractCollisionObserver implements IActor {
 
+	private volatile Future<?> task;
+	private boolean isTouched = false;
 	private MaterialTemplate actionTemplate;
 	private AtomicReference<MaterialSkill> currentSkill = new AtomicReference<>();
 	private AtomicBoolean isCanceled = new AtomicBoolean();
 
 	public CollisionMaterialActor(Creature creature, Spatial geometry, MaterialTemplate actionTemplate) {
-		super(creature, geometry, CollisionIntention.MATERIAL.getId());
+		super(creature, geometry, CollisionIntention.MATERIAL.getId(), CheckType.TOUCH);
 		this.actionTemplate = actionTemplate;
 	}
 
@@ -105,15 +106,21 @@ public class CollisionMaterialActor extends AbstractCollisionObserver implements
 	public void onMoved(CollisionResults collisionResults) {
 		if (isCanceled.get())
 			return;
+		boolean oldTouched = isTouched;
 		if (collisionResults.size() > 0) {
+			isTouched = true;
+			act();
+		} else {
+			isTouched = false;
+		}
+		if (oldTouched != isTouched) {
 			if (GeoDataConfig.GEO_MATERIALS_SHOWDETAILS && creature instanceof Player) {
 				Player player = (Player) creature;
 				if (player.isStaff()) {
-					CollisionResult result = collisionResults.getClosestCollision();
-					PacketSendUtility.sendMessage(player, "Entered " + result.getGeometry().getName());
+					Spatial geom = collisionResults.size() > 0 ? collisionResults.getClosestCollision().getGeometry() : geometry;
+					PacketSendUtility.sendMessage(player, (isTouched ? "Touched " : "Untouched ") + geom.getName());
 				}
 			}
-			act();
 		}
 	}
 
@@ -121,8 +128,8 @@ public class CollisionMaterialActor extends AbstractCollisionObserver implements
 	public void act() {
 		MaterialSkill actSkill = getSkillForTarget(creature);
 		if (actSkill != null && currentSkill.getAndSet(actSkill) != actSkill) {
-			Future<?> task = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
-				if (!creature.getEffectController().hasAbnormalEffect(actSkill.getId())) {
+			task = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
+				if (isTouched && !creature.getEffectController().hasAbnormalEffect(actSkill.getId())) {
 					if (GeoDataConfig.GEO_MATERIALS_SHOWDETAILS && creature instanceof Player) {
 						Player player = (Player) creature;
 						if (player.isStaff()) {
@@ -139,7 +146,7 @@ public class CollisionMaterialActor extends AbstractCollisionObserver implements
 	@Override
 	public void abort() {
 		if (isCanceled.compareAndSet(false, true)) {
-			creature.getController().cancelTask(TaskId.MATERIAL_ACTION);
+				creature.getController().cancelTaskIfPresent(TaskId.MATERIAL_ACTION, task);
 			currentSkill.set(null);
 		}
 	}
