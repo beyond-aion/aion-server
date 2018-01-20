@@ -31,7 +31,7 @@ CREATE TABLE `account_data` (
 DROP TABLE IF EXISTS `account_time`;
 CREATE TABLE `account_time` (
   `account_id` int(11) NOT NULL,
-  `last_active` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `last_active` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `expiration_time` timestamp NULL DEFAULT NULL,
   `session_duration` int(10) DEFAULT '0',
   `accumulated_online` int(10) DEFAULT '0',

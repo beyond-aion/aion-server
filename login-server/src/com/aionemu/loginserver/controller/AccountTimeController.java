@@ -55,6 +55,7 @@ public class AccountTimeController {
 	public static void updateOnLogout(Account account) {
 		AccountTime accountTime = account.getAccountTime();
 
+		accountTime.setLastLoginTime(new Timestamp(System.currentTimeMillis()));
 		accountTime.setSessionDuration(System.currentTimeMillis() - accountTime.getLastLoginTime().getTime());
 		accountTime.setAccumulatedOnlineTime(accountTime.getAccumulatedOnlineTime() + accountTime.getSessionDuration());
 		DAOManager.getDAO(AccountTimeDAO.class).updateAccountTime(account.getId(), accountTime);
