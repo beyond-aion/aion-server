@@ -91,7 +91,7 @@ public class MoveTo extends AdminCommand {
 		}
 		Float x = null, y = null, z = null;
 		Pattern p = Pattern.compile("^((?<type>x|y|z)(=|:)\"?)?(?<coord>[1-9][0-9]*(\\.[0-9]+)?f?)\"?,?$");
-		int maxIndex = Math.min(params.length, 3);
+		int maxIndex = Math.min(params.length, coordIndex + 3);
 		for (int i = coordIndex; i < maxIndex; i++) {
 			Matcher m = p.matcher(params[i]);
 			if (m.find()) {
