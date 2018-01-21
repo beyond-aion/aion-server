@@ -1,6 +1,8 @@
 package com.aionemu.gameserver.world.zone.handler;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.aionemu.gameserver.configs.main.GeoDataConfig;
@@ -24,20 +26,12 @@ public class MaterialZoneHandler implements ZoneHandler {
 	private final Map<Integer, IActor> observed = new HashMap<>();
 	private final Spatial geometry;
 	private final MaterialTemplate template;
-	private boolean actOnEnter = false;
 	private Race ownerRace = Race.NONE;
 
-	/**
-	 * @param geometry2
-	 * @param template2
-	 */
 	public MaterialZoneHandler(Spatial geometry, MaterialTemplate template) {
 		this.geometry = geometry;
 		this.template = template;
 		String name = geometry.getName();
-		if (name.indexOf("FIRE_BOX") != -1 || name.indexOf("FIRE_SEMISPHERE") != -1 || name.indexOf("FIREPOT") != -1 ||
-			name.indexOf("FIRE_CYLINDER") != -1 || name.indexOf("FIRE_CONE") != -1 || name.startsWith("BU_H_CENTERHALL"))
-			actOnEnter = true;
 		if (name.startsWith("BU_AB_DARKSP"))
 			ownerRace = Race.ASMODIANS;
 		else if (name.startsWith("BU_AB_LIGHTSP"))
@@ -48,27 +42,22 @@ public class MaterialZoneHandler implements ZoneHandler {
 	public void onEnterZone(Creature creature, ZoneInstance zone) {
 		if (ownerRace == creature.getRace())
 			return;
-		MaterialSkill foundSkill = null;
+		List<MaterialSkill> matchingSkills = new ArrayList<>();
 		for (MaterialSkill skill : template.getSkills()) {
-			if (skill.getTarget().isTarget(creature)) {
-				foundSkill = skill;
-				break;
-			}
+			if (skill.getTarget().matches(creature))
+				matchingSkills.add(skill);
 		}
-		if (foundSkill == null)
+		if (matchingSkills.isEmpty())
 			return;
-		CollisionMaterialActor actor = new CollisionMaterialActor(creature, geometry, template);
+		CollisionMaterialActor actor = new CollisionMaterialActor(creature, geometry, matchingSkills);
 		creature.getObserveController().addObserver(actor);
 		observed.put(creature.getObjectId(), actor);
-		if (actOnEnter)
-			actor.act();
-		else
-			actor.moved();
 		if (GeoDataConfig.GEO_MATERIALS_SHOWDETAILS && creature instanceof Player) {
 			Player player = (Player) creature;
 			if (player.isStaff())
 				PacketSendUtility.sendMessage(player, "Entered material zone " + geometry.getName());
 		}
+		actor.moved();
 	}
 
 	@Override

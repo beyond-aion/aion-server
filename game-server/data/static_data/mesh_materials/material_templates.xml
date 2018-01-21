@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<material_templates>
+<?xml version="1.0" encoding="UTF-8"?>
+<material_templates xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="material_templates.xsd">
     <material id="12">
         <skill id="8269" level="1" target="PLAYER" frequency="3.0"/>
     </material>
@@ -19,13 +19,13 @@
         <skill id="8302" level="1" target="PLAYER" frequency="5.0"/>
     </material>
     <material id="61">
-        <skill id="8302" level="1" target="PLAYER" frequency="5.0"/>
+        <skill id="8302" level="1" target="PLAYER" frequency="5.0" conditions="SUNNY NIGHT"/>
     </material>
     <material id="62">
-        <skill id="8302" level="1" target="PLAYER" frequency="5.0" time="DAY"/>
+        <skill id="8302" level="1" target="PLAYER" frequency="5.0" conditions="SUNNY"/>
     </material>
     <material id="63">
-        <skill id="8302" level="1" target="PLAYER" frequency="5.0" time="NIGHT"/>
+        <skill id="8302" level="1" target="PLAYER" frequency="5.0" conditions="NIGHT"/>
     </material>
     <material id="91">
         <skill id="259" level="1" target="PLAYER" frequency="6.0"/>

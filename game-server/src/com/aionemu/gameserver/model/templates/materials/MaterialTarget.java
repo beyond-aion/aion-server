@@ -7,6 +7,7 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.Summon;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.google.common.base.Predicate;
 
 /**
  * @author Rolandas
@@ -15,29 +16,19 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 @XmlEnum
 public enum MaterialTarget {
 
-	ALL,
-	NPC,
-	PLAYER,
-	PLAYER_WITH_PET;
+	ALL(c -> true),
+	NPC(c -> c instanceof Npc),
+	PLAYER(c -> c instanceof Player),
+	PLAYER_WITH_PET(c -> PLAYER.matches(c) || c instanceof Summon && ((Summon) c).getMaster() != null);
 
-	public String value() {
-		return name();
+	private final Predicate<Creature> isTargetCheck;
+
+	private MaterialTarget(Predicate<Creature> isTargetPredicate) {
+		this.isTargetCheck = isTargetPredicate;
 	}
 
-	public static MaterialTarget fromValue(String value) {
-		return valueOf(value);
-	}
-
-	public boolean isTarget(Creature creature) {
-		if (this == ALL)
-			return true;
-		if (this == NPC)
-			return creature instanceof Npc;
-		if (this == PLAYER)
-			return creature instanceof Player;
-		if (this == PLAYER_WITH_PET)
-			return creature instanceof Player || creature instanceof Summon && ((Summon) creature).getMaster() != null;
-		return false;
+	public boolean matches(Creature creature) {
+		return isTargetCheck.apply(creature);
 	}
 
 }

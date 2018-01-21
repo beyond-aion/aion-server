@@ -44,10 +44,10 @@ public abstract class AbstractCollisionObserver extends ActionObserver {
 						if (checkType == CheckType.TOUCH) { // check if we are standing on the geometry (either top or bottom)
 							float z = creature.getZ();
 							float zMax = z + 0.05f;
-							float zMin = z - 0.1f;
+							float zMin = z - 0.11f;
 							pos = new Vector3f(creature.getX(), creature.getY(), zMax);
 							dir = new Vector3f(pos.getX(), pos.getY(), zMin);
-						} else { // check if we are passed the geometry (either entering or leaving)
+						} else { // check if we passed the geometry (either entering or leaving)
 							pos = new Vector3f(creature.getX(), creature.getY(), creature.getZ());
 							dir = oldPos.clone();
 						}

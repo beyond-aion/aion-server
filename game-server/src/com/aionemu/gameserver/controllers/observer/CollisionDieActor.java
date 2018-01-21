@@ -40,8 +40,4 @@ public class CollisionDieActor extends AbstractCollisionObserver implements IAct
 	@Override
 	public void abort() {
 	}
-
-	@Override
-	public void setEnabled(boolean enable) {
-	}
 }

@@ -11,19 +11,18 @@ import javax.xml.bind.annotation.XmlType;
 /**
  * @author Rolandas
  */
-
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "MaterialTemplate", propOrder = { "skills" })
 public class MaterialTemplate {
 
 	@XmlElement(name = "skill", required = true)
-	protected List<MaterialSkill> skills;
+	private List<MaterialSkill> skills;
 
 	@XmlAttribute(name = "skill_obstacle")
-	protected Integer skillObstacle;
+	private Integer skillObstacle;
 
 	@XmlAttribute(required = true)
-	protected int id;
+	private int id;
 
 	public List<MaterialSkill> getSkills() {
 		return skills;

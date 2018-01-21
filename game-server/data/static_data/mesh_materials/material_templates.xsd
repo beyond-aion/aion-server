@@ -11,13 +11,13 @@
 		<xs:sequence minOccurs="0" maxOccurs="unbounded">
 			<xs:element name="skill" type="MaterialSkill"/>
 		</xs:sequence>
-		<xs:attribute name="skill_obstacle" type="xs:int" use="optional"/>
+		<xs:attribute name="skill_obstacle" type="xs:int"/>
 		<xs:attribute name="id" type="xs:int" use="required"/>
 	</xs:complexType>
 	<xs:complexType name="MaterialSkill">
-		<xs:attribute name="time" type="DayTime" use="optional"/>
+		<xs:attribute name="conditions" type="MaterialActConditions"/>
 		<xs:attribute name="frequency" type="xs:float" use="required"/>
-		<xs:attribute default="ALL" name="target" type="MaterialTarget"/>
+		<xs:attribute name="target" type="MaterialTarget"/>
 		<xs:attribute name="level" type="xs:int" use="required"/>
 		<xs:attribute name="id" type="xs:int" use="required"/>
 	</xs:complexType>
@@ -29,9 +29,12 @@
 			<xs:enumeration value="PLAYER_WITH_PET"/>
 		</xs:restriction>
 	</xs:simpleType>
-	<xs:simpleType name="DayTime">
+	<xs:simpleType name="MaterialActConditions">
+		<xs:list itemType="MaterialActCondition"/>
+	</xs:simpleType>
+	<xs:simpleType name="MaterialActCondition">
 		<xs:restriction base="xs:string">
-			<xs:enumeration value="DAY"/>
+			<xs:enumeration value="SUNNY"/>
 			<xs:enumeration value="NIGHT"/>
 		</xs:restriction>
 	</xs:simpleType>

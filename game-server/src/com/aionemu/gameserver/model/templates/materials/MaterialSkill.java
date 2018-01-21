@@ -1,8 +1,12 @@
 package com.aionemu.gameserver.model.templates.materials;
 
+import java.util.Collections;
+import java.util.List;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlList;
 import javax.xml.bind.annotation.XmlType;
 
 /**
@@ -13,22 +17,23 @@ import javax.xml.bind.annotation.XmlType;
 public class MaterialSkill {
 
 	@XmlAttribute
-	protected MaterialActTime time;
+	@XmlList
+	private List<MaterialActCondition> conditions;
 
 	@XmlAttribute(required = true)
-	protected float frequency;
+	private float frequency;
 
 	@XmlAttribute
-	protected MaterialTarget target;
+	private MaterialTarget target;
 
 	@XmlAttribute(required = true)
-	protected int level;
+	private int level;
 
 	@XmlAttribute(required = true)
-	protected int id;
+	private int id;
 
-	public MaterialActTime getTime() {
-		return time;
+	public List<MaterialActCondition> getConditions() {
+		return conditions == null ? Collections.emptyList() : conditions;
 	}
 
 	public float getFrequency() {
@@ -36,9 +41,7 @@ public class MaterialSkill {
 	}
 
 	public MaterialTarget getTarget() {
-		if (target == null)
-			return MaterialTarget.ALL;
-		return target;
+		return target == null ? MaterialTarget.ALL : target;
 	}
 
 	public int getSkillLevel() {
