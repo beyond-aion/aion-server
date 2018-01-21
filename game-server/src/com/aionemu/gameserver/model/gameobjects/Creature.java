@@ -26,7 +26,6 @@ import com.aionemu.gameserver.model.stats.container.CreatureLifeStats;
 import com.aionemu.gameserver.model.templates.item.ItemAttackType;
 import com.aionemu.gameserver.model.templates.item.ItemTemplate;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
-import com.aionemu.gameserver.model.templates.zone.ZoneClassName;
 import com.aionemu.gameserver.model.templates.zone.ZoneType;
 import com.aionemu.gameserver.skillengine.effect.AbnormalState;
 import com.aionemu.gameserver.skillengine.model.Skill;
@@ -657,20 +656,6 @@ public abstract class Creature extends VisibleObject {
 		if (!isSpawned())
 			return false;
 		return getPosition().getMapRegion().isInsideItemUseZone(zoneName, this);
-	}
-
-	public boolean isInsideWeatherZone(int weatherZoneId) {
-		if (!isSpawned())
-			return false;
-		for (ZoneInstance regionZone : findZones()) {
-			if (regionZone.getZoneTemplate().getZoneType() == ZoneClassName.WEATHER) {
-				if (DataManager.ZONE_DATA.getWeatherZoneId(regionZone.getZoneTemplate()) != weatherZoneId)
-					continue;
-				if (regionZone.getAreaTemplate().isInside3D(getPosition().getX(), getPosition().getY(), getPosition().getZ()))
-					return true;
-			}
-		}
-		return false;
 	}
 
 	/**

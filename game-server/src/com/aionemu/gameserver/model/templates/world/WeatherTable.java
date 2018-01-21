@@ -45,7 +45,7 @@ public class WeatherTable {
 	}
 
 	public WeatherEntry getWeatherAfter(WeatherEntry entry) {
-		if (entry.getWeatherName() == null || entry.isAfter())
+		if (entry == null || entry.getWeatherName() == null || entry.isAfter())
 			return null;
 		for (WeatherEntry we : getZoneData()) {
 			if (we.getZoneId() != entry.getZoneId())

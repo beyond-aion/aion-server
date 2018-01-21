@@ -12,13 +12,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "WeatherEntry")
 public class WeatherEntry {
 
-	public WeatherEntry() {
-	}
-
-	public WeatherEntry(int zoneId, int weatherCode) {
-		this.weatherCode = weatherCode;
-		this.zoneId = zoneId;
-	}
+	public static final WeatherEntry NONE = new WeatherEntry();
 
 	@XmlAttribute(name = "zone_id", required = true)
 	private int zoneId;
@@ -33,10 +27,18 @@ public class WeatherEntry {
 	private String weatherName;
 
 	@XmlAttribute(name = "before")
-	private Boolean isBefore;
+	private boolean isBefore;
 
 	@XmlAttribute(name = "after")
-	private Boolean isAfter;
+	private boolean isAfter;
+
+	private WeatherEntry() {
+	}
+
+	public WeatherEntry(int zoneId, int weatherCode) {
+		this.zoneId = zoneId;
+		this.weatherCode = weatherCode;
+	}
 
 	public int getZoneId() {
 		return zoneId;
@@ -50,15 +52,11 @@ public class WeatherEntry {
 		return rank;
 	}
 
-	public Boolean isBefore() {
-		if (isBefore == null)
-			return false;
+	public boolean isBefore() {
 		return isBefore;
 	}
 
-	public Boolean isAfter() {
-		if (isAfter == null)
-			return false;
+	public boolean isAfter() {
 		return isAfter;
 	}
 

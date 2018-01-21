@@ -5,10 +5,8 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
 
 import com.aionemu.gameserver.configs.main.GeoDataConfig;
-import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.geoEngine.collision.CollisionIntention;
 import com.aionemu.gameserver.geoEngine.collision.CollisionResults;
-import com.aionemu.gameserver.geoEngine.math.Vector3f;
 import com.aionemu.gameserver.geoEngine.scene.Spatial;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Creature;
@@ -16,14 +14,12 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.materials.MaterialActTime;
 import com.aionemu.gameserver.model.templates.materials.MaterialSkill;
 import com.aionemu.gameserver.model.templates.materials.MaterialTemplate;
-import com.aionemu.gameserver.model.templates.zone.ZoneClassName;
 import com.aionemu.gameserver.services.GameTimeService;
 import com.aionemu.gameserver.services.WeatherService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.time.gametime.DayTime;
-import com.aionemu.gameserver.world.zone.ZoneInstance;
 
 /**
  * @author Rolandas
@@ -70,17 +66,7 @@ public class CollisionMaterialActor extends AbstractCollisionObserver implements
 		if (creature.getEffectController().hasAbnormalEffect(foundSkill.getId()))
 			return null;
 
-		int weatherCode = -1;
-		for (ZoneInstance regionZone : creature.findZones()) {
-			if (regionZone.getZoneTemplate().getZoneType() == ZoneClassName.WEATHER) {
-				Vector3f center = geometry.getWorldBound().getCenter();
-				if (!regionZone.getAreaTemplate().isInside3D(center.x, center.y, center.z))
-					continue;
-				int weatherZoneId = DataManager.ZONE_DATA.getWeatherZoneId(regionZone.getZoneTemplate());
-				weatherCode = WeatherService.getInstance().getWeatherCode(creature.getWorldId(), weatherZoneId);
-				break;
-			}
-		}
+		int weatherCode = WeatherService.getInstance().findWeatherEntry(creature).getCode();
 
 		boolean dependsOnWeather = geometry.getName().indexOf("WEATHER") != -1;
 		// TODO: fix it
