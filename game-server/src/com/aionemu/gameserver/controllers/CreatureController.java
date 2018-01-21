@@ -412,7 +412,7 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 	}
 
 	public boolean cancelTaskIfPresent(TaskId taskId, Future<?> task) {
-		if (tasks.remove(taskId, task)) {
+		if (tasks.remove(taskId.ordinal(), task)) {
 			task.cancel(false);
 			return true;
 		}

@@ -132,9 +132,8 @@ public class CollisionMaterialActor extends AbstractCollisionObserver implements
 				if (isTouched && !creature.getEffectController().hasAbnormalEffect(actSkill.getId())) {
 					if (GeoDataConfig.GEO_MATERIALS_SHOWDETAILS && creature instanceof Player) {
 						Player player = (Player) creature;
-						if (player.isStaff()) {
+						if (player.isStaff())
 							PacketSendUtility.sendMessage(player, "Use skill=" + actSkill.getId());
-						}
 					}
 					SkillEngine.getInstance().applyEffectDirectly(actSkill.getId(), creature, creature, 0);
 				}
@@ -146,7 +145,7 @@ public class CollisionMaterialActor extends AbstractCollisionObserver implements
 	@Override
 	public void abort() {
 		if (isCanceled.compareAndSet(false, true)) {
-				creature.getController().cancelTaskIfPresent(TaskId.MATERIAL_ACTION, task);
+			creature.getController().cancelTaskIfPresent(TaskId.MATERIAL_ACTION, task);
 			currentSkill.set(null);
 		}
 	}
