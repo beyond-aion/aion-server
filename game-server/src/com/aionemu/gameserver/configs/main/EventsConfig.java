@@ -9,11 +9,8 @@ import com.aionemu.commons.configuration.Property;
  */
 public class EventsConfig {
 
-	@Property(key = "gameserver.event.service.enable", defaultValue = "false")
-	public static boolean ENABLE_EVENT_SERVICE;
-
-	@Property(key = "gameserver.event.service.enabled_events", defaultValue = "")
-	public static String ENABLED_EVENTS;
+	@Property(key = "gameserver.event.service.enabled_events")
+	public static List<String> ENABLED_EVENTS;
 
 	/**
 	 * Event Arcade Upgrade

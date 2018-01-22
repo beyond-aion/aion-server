@@ -66,7 +66,7 @@ public class _80030EventAnUnwelcomeGaze extends AbstractQuestHandler {
 	@Override
 	public HandlerResult onItemUseEvent(final QuestEnv env, Item item) {
 		// check if the parent quest is active (you get Charm Cards)
-		if (!EventService.getInstance().checkQuestIsActive(80029))
+		if (!EventService.getInstance().isActiveEventQuest(80029))
 			return HandlerResult.UNKNOWN;
 
 		final Player player = env.getPlayer();

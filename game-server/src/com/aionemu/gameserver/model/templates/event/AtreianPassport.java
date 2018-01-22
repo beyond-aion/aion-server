@@ -1,6 +1,6 @@
 package com.aionemu.gameserver.model.templates.event;
 
-import java.time.ZonedDateTime;
+import java.time.LocalDateTime;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -9,8 +9,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+import com.aionemu.gameserver.dataholders.loadingutils.adapters.LocalDateTimeAdapter;
 import com.aionemu.gameserver.model.AttendType;
-import com.aionemu.gameserver.utils.time.ServerTime;
 
 /**
  * @author Alcapwnd
@@ -24,11 +24,11 @@ public class AtreianPassport {
 	@XmlAttribute(name = "active", required = true)
 	private int active;
 	@XmlAttribute(name = "period_start", required = true)
-	@XmlJavaTypeAdapter(ServerTime.XmlAdapter.class)
-	private ZonedDateTime pStart;
+	@XmlJavaTypeAdapter(LocalDateTimeAdapter.class)
+	private LocalDateTime pStart;
 	@XmlAttribute(name = "period_end", required = true)
-	@XmlJavaTypeAdapter(ServerTime.XmlAdapter.class)
-	private ZonedDateTime pEnd;
+	@XmlJavaTypeAdapter(LocalDateTimeAdapter.class)
+	private LocalDateTime pEnd;
 	@XmlAttribute(name = "attend_type", required = true)
 	private AttendType attendType;
 	@XmlAttribute(name = "attend_num")
@@ -50,11 +50,11 @@ public class AtreianPassport {
 		return active;
 	}
 
-	public ZonedDateTime getPeriodStart() {
+	public LocalDateTime getPeriodStart() {
 		return pStart;
 	}
 
-	public ZonedDateTime getPeriodEnd() {
+	public LocalDateTime getPeriodEnd() {
 		return pEnd;
 	}
 

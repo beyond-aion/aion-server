@@ -127,15 +127,15 @@ public final class CronService {
 		}
 	}
 
-	public void cancel(Runnable r) {
+	public boolean cancel(Runnable r) {
 		Map<Runnable, JobDetail> map = getRunnables();
 		JobDetail jd = map.get(r);
-		cancel(jd);
+		return cancel(jd);
 	}
 
-	public void cancel(JobDetail jd) {
+	public boolean cancel(JobDetail jd) {
 		if (jd == null) {
-			return;
+			return false;
 		}
 
 		if (jd.getKey() == null) {
@@ -143,7 +143,7 @@ public final class CronService {
 		}
 
 		try {
-			scheduler.deleteJob(jd.getKey());
+			return scheduler.deleteJob(jd.getKey());
 		} catch (SchedulerException e) {
 			throw new CronServiceException("Failed to delete Job", e);
 		}

@@ -94,17 +94,4 @@ public final class ServerTime {
 	public static int getStandardOffset() {
 		return GSConfig.TIME_ZONE_ID.getRules().getStandardOffset(Instant.now()).getTotalSeconds();
 	}
-
-	public static class XmlAdapter extends javax.xml.bind.annotation.adapters.XmlAdapter<String, ZonedDateTime> {
-
-		@Override
-		public String marshal(ZonedDateTime v) throws Exception {
-			return v.toLocalDateTime().toString();
-		}
-
-		@Override
-		public ZonedDateTime unmarshal(String v) throws Exception {
-			return parseLocal(v);
-		}
-	}
 }

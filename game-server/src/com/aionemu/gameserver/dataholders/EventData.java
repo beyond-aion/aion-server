@@ -1,12 +1,10 @@
 package com.aionemu.gameserver.dataholders;
 
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -24,51 +22,35 @@ import com.aionemu.gameserver.model.templates.event.EventTemplate;
 public class EventData {
 
 	@XmlElement(name = "event")
-	protected List<EventTemplate> events;
-
-	@XmlTransient
-	private Map<String, EventTemplate> allEvents = new HashMap<>();
+	private List<EventTemplate> events;
 
 	@XmlTransient
 	private Set<Integer> allNpcIds = new HashSet<>();
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		if (events == null)
-			return;
-
-		allEvents.clear();
+			events = Collections.emptyList();
 		allNpcIds.clear();
 		for (EventTemplate ev : events) {
-			allEvents.put(ev.getName(), ev);
 			if (ev.getSpawns() != null)
 				allNpcIds.addAll(ev.getSpawns().getAllNpcIds());
 		}
-
-		events.clear();
-		events = null;
 	}
 
 	public int size() {
-		return allEvents.size();
-	}
-
-	public List<String> getEventNames() {
-		return new ArrayList<>(allEvents.keySet());
+		return events.size();
 	}
 
 	public List<EventTemplate> getEvents() {
-		return new ArrayList<>(allEvents.values());
+		return events;
 	}
 
-	public EventTemplate getEvent(String name) {
-		return allEvents.get(name);
+	public List<EventTemplate> getEvents(List<String> eventNames) {
+		return events.stream().filter(et -> eventNames.contains(et.getName())).collect(Collectors.toList());
 	}
 
 	public void setEvents(List<EventTemplate> events) {
-		for (EventTemplate et : allEvents.values())
-			et.stop();
-
-		this.events = events == null ? Collections.emptyList() : events;
+		this.events = events;
 		afterUnmarshal(null, null);
 	}
 

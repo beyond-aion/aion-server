@@ -2,7 +2,7 @@ package com.aionemu.gameserver.services;
 
 import java.sql.Timestamp;
 import java.time.LocalDate;
-import java.time.ZonedDateTime;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -102,7 +102,7 @@ public class AtreianPassportService {
 
 	public void onLogin(Player player) {
 		Account pa = player.getAccount();
-		ZonedDateTime now = ServerTime.now();
+		LocalDateTime now = ServerTime.now().toLocalDateTime();
 		boolean doReward = checkOnlineDate(pa) && pa.getPassportStamps() < 28;
 
 		for (AtreianPassport atp : DataManager.ATREIAN_PASSPORT_DATA.getAll().values()) {

@@ -1,6 +1,6 @@
 package com.aionemu.gameserver.model.templates.event;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -21,13 +21,6 @@ public class EventDrops {
 	 * Gets the value of the globalDrop property.
 	 */
 	public List<GlobalRule> getAllRules() {
-		if (globalDropRules == null) {
-			globalDropRules = new ArrayList<>();
-		}
-		return this.globalDropRules;
-	}
-
-	public int size() {
-		return globalDropRules.size();
+		return globalDropRules == null ? Collections.emptyList() : globalDropRules;
 	}
 }

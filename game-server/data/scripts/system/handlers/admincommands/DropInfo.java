@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.aionemu.gameserver.configs.main.DropConfig;
-import com.aionemu.gameserver.configs.main.EventsConfig;
 import com.aionemu.gameserver.configs.main.RatesConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.drop.Drop;
@@ -15,7 +14,6 @@ import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.Rates;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
-import com.aionemu.gameserver.model.templates.event.EventTemplate;
 import com.aionemu.gameserver.model.templates.globaldrops.GlobalDropItem;
 import com.aionemu.gameserver.model.templates.globaldrops.GlobalRule;
 import com.aionemu.gameserver.model.templates.housing.HouseType;
@@ -97,86 +95,80 @@ public class DropInfo extends AdminCommand {
 				}
 			}
 		}
-		if (EventsConfig.ENABLE_EVENT_SERVICE) {
-			sendInfo(player, "Events Enabled");
+		if (!EventService.getInstance().getActiveEventDropRules().isEmpty()) {
 			boolean isNpcQuest = currentNpc.getAi().getName().equals("quest_use_item");
 
 			// some exclusion from drops
 			if (!isNpcQuest && !drs.hasGlobalNpcExclusions(currentNpc)) {
-				for (EventTemplate eventTemplate : EventService.getInstance().getEnabledEvents()) {
-					if (eventTemplate.getEventDrops() == null || !eventTemplate.isActive())
+				for (GlobalRule rule : EventService.getInstance().getActiveEventDropRules()) {
+					if (rule.getGlobalRuleItems() == null)
 						continue;
 
-					for (GlobalRule rule : eventTemplate.getEventDrops().getAllRules()) {
-						if (rule.getGlobalRuleItems() == null)
+					// if getGlobalRuleNpcs() != null means drops are for specified npcs (like named drops)
+					// so the following restrictions will be ignored
+					if (rule.getGlobalRuleNpcs() == null) {
+						// exclude siege spawns, and inner base spawns
+						if (currentNpc.getSpawn() instanceof SiegeSpawnTemplate && currentNpc.getAbyssNpcType() != AbyssNpcType.DEFENDER)
 							continue;
-
-						// if getGlobalRuleNpcs() != null means drops are for specified npcs (like named drops)
-						// so the following restrictions will be ignored
-						if (rule.getGlobalRuleNpcs() == null) {
-							// exclude siege spawns, and inner base spawns
-							if (currentNpc.getSpawn() instanceof SiegeSpawnTemplate && currentNpc.getAbyssNpcType() != AbyssNpcType.DEFENDER)
-								continue;
-							if (currentNpc.getSpawn() instanceof BaseSpawnTemplate) {
-								if (currentNpc.getSpawn().getHandlerType() != SpawnHandlerType.OUTRIDER
-									&& currentNpc.getSpawn().getHandlerType() != SpawnHandlerType.OUTRIDER_ENHANCED)
-									continue;
-							}
-							// if npc level ==1 means missing stats, so better exclude it from drops
-							if (currentNpc.getLevel() < 2 && !isNpcChest && currentNpc.getWorldId() != WorldMapType.POETA.getId()
-								&& currentNpc.getWorldId() != WorldMapType.ISHALGEN.getId()) {
-								continue;
-							}
-							// if abyss type npc != null or npc is chest, the npc will be excluded from drops
-							if ((!isNpcChest && currentNpc.getAbyssNpcType() != AbyssNpcType.NONE) || isNpcChest) {
-								continue;
-							}
-						}
-
-						float chance = rule.getChance();
-						// if fixed_chance == true means all mob will have the same base chance (npcRating and npcRank will be excluded from calculation)
-						if (!rule.isFixedChance())
-							chance *= drs.getRankModifier(currentNpc) * drs.getRatingModifier(currentNpc);
-						// ignore dropRate if it's a noReduction rule (would be 0 since it includes the dropChance)
-						if (!rule.getNoReduction())
-							chance *= dropRate;
-
-						if (!DropConfig.DISABLE_REDUCTION && ((isNpcChest && currentNpc.getLevel() != 1 || !isNpcChest))
-							&& !DropConfig.NO_REDUCTION_MAPS.contains(currentNpc.getWorldId())) {
-							if (!showAll && (player.getLevel() - currentNpc.getLevel()) >= 10 && !rule.getNoReduction())
+						if (currentNpc.getSpawn() instanceof BaseSpawnTemplate) {
+							if (currentNpc.getSpawn().getHandlerType() != SpawnHandlerType.OUTRIDER
+								&& currentNpc.getSpawn().getHandlerType() != SpawnHandlerType.OUTRIDER_ENHANCED)
 								continue;
 						}
-						if (!drs.checkRestrictionRace(rule, player))
+						// if npc level ==1 means missing stats, so better exclude it from drops
+						if (currentNpc.getLevel() < 2 && !isNpcChest && currentNpc.getWorldId() != WorldMapType.POETA.getId()
+							&& currentNpc.getWorldId() != WorldMapType.ISHALGEN.getId()) {
 							continue;
-						if (!drs.checkGlobalRuleMaps(rule, currentNpc))
-							continue;
-						if (!drs.checkGlobalRuleWorlds(rule, currentNpc))
-							continue;
-						if (!drs.checkGlobalRuleRatings(rule, currentNpc))
-							continue;
-						if (!drs.checkGlobalRuleRaces(rule, currentNpc))
-							continue;
-						if (!drs.checkGlobalRuleTribes(rule, currentNpc))
-							continue;
-						if (!drs.checkGlobalRuleZones(rule, currentNpc))
-							continue;
-						if (!drs.checkGlobalRuleNpcs(rule, currentNpc))
-							continue;
-						// not used anymore, converted into Ids during Load Static Data
-						// if (!checkGlobalRuleNpcNames (rule, currentNpc))
-						// continue;
-						if (drs.checkGlobalRuleExcludedNpcs(rule, currentNpc))
-							continue;
-						List<Integer> alloweditems = getAllowedItems(rule, currentNpc);
-						if (alloweditems.size() == 0)
-							continue;
-
-						sendInfo(player, "EventDropGroup: " + rule.getRuleName() + " MaxDropGroup: " + rule.getMaxDropRule());
-
-						for (Integer itemId : alloweditems) {
-							sendInfo(player, "[item:" + itemId + "]" + "	Chance: " + chance);
-							count++;
 						}
+						// if abyss type npc != null or npc is chest, the npc will be excluded from drops
+						if ((!isNpcChest && currentNpc.getAbyssNpcType() != AbyssNpcType.NONE) || isNpcChest) {
+							continue;
+						}
+					}
+
+					float chance = rule.getChance();
+					// if fixed_chance == true means all mob will have the same base chance (npcRating and npcRank will be excluded from calculation)
+					if (!rule.isFixedChance())
+						chance *= drs.getRankModifier(currentNpc) * drs.getRatingModifier(currentNpc);
+					// ignore dropRate if it's a noReduction rule (would be 0 since it includes the dropChance)
+					if (!rule.getNoReduction())
+						chance *= dropRate;
+
+					if (!DropConfig.DISABLE_REDUCTION && ((isNpcChest && currentNpc.getLevel() != 1 || !isNpcChest))
+						&& !DropConfig.NO_REDUCTION_MAPS.contains(currentNpc.getWorldId())) {
+						if (!showAll && (player.getLevel() - currentNpc.getLevel()) >= 10 && !rule.getNoReduction())
+							continue;
+					}
+					if (!drs.checkRestrictionRace(rule, player))
+						continue;
+					if (!drs.checkGlobalRuleMaps(rule, currentNpc))
+						continue;
+					if (!drs.checkGlobalRuleWorlds(rule, currentNpc))
+						continue;
+					if (!drs.checkGlobalRuleRatings(rule, currentNpc))
+						continue;
+					if (!drs.checkGlobalRuleRaces(rule, currentNpc))
+						continue;
+					if (!drs.checkGlobalRuleTribes(rule, currentNpc))
+						continue;
+					if (!drs.checkGlobalRuleZones(rule, currentNpc))
+						continue;
+					if (!drs.checkGlobalRuleNpcs(rule, currentNpc))
+						continue;
+					// not used anymore, converted into Ids during Load Static Data
+					// if (!checkGlobalRuleNpcNames (rule, currentNpc))
+					// continue;
+					if (drs.checkGlobalRuleExcludedNpcs(rule, currentNpc))
+						continue;
+					List<Integer> alloweditems = getAllowedItems(rule, currentNpc);
+					if (alloweditems.size() == 0)
+						continue;
+
+					sendInfo(player, "EventDropGroup: " + rule.getRuleName() + " MaxDropGroup: " + rule.getMaxDropRule());
+
+					for (Integer itemId : alloweditems) {
+						sendInfo(player, "[item:" + itemId + "]" + "	Chance: " + chance);
+						count++;
 					}
 				}
 			}
