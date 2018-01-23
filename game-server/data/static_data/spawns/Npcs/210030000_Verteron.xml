@@ -324,7 +324,7 @@
 		</spawn>
 		<!-- Chieftain Kraka -->
 		<spawn npc_id="210187" respawn_time="3800">
-			<spot x="2617.03" y="1111.37" z="200.221" h="18"/>
+			<spot x="2617.03" y="1111.37" z="200.221" h="47"/>
 		</spawn>
 		<!-- Considerate Lagos -->
 		<spawn npc_id="203153" respawn_time="295">
