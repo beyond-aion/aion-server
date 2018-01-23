@@ -57,8 +57,7 @@ public class Reload extends AdminCommand {
 		}
 		if (params[0].equalsIgnoreCase("quests")) {
 			File xml = new File("./data/static_data/quest_data/quest_data.xml");
-			QuestsData data = JAXBUtil.deserialize(xml, QuestsData.class, "./data/static_data/static_data.xsd");
-			DataManager.QUEST_DATA.setQuestsData(data.getQuestsData());
+			DataManager.QUEST_DATA = JAXBUtil.deserialize(xml, QuestsData.class, "./data/static_data/static_data.xsd");
 			List<XMLQuest> templates = new ArrayList<>();
 			Collection<File> files = XmlUtil.listFiles("./data/static_data/quest_script_data", true);
 			JAXBUtil.deserialize(files, XMLQuests.class, "./data/static_data/static_data.xsd").forEach(e -> templates.addAll(e.getAllQuests()));

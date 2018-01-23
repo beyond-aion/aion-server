@@ -106,7 +106,7 @@ public class QuestEngine implements GameEngine {
 	public void load() {
 		log.info("Quest engine load started");
 
-		for (QuestTemplate data : DataManager.QUEST_DATA.getQuestsData()) {
+		for (QuestTemplate data : DataManager.QUEST_DATA.getQuestTemplates()) {
 			for (QuestDrop drop : data.getQuestDrop()) {
 				drop.setQuestId(data.getId());
 				QuestService.addQuestDrop(drop.getNpcId(), drop);

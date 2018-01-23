@@ -81,8 +81,6 @@ public abstract class AbstractQuestHandler {
 	}
 
 	private void loadActionItems(QuestTemplate template) {
-		if (template.getQuestDrop() == null)
-			return;
 		for (QuestDrop drop : template.getQuestDrop()) {
 			if (drop.getNpcId() / 100000 != 7)
 				continue;

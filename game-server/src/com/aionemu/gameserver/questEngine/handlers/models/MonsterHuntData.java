@@ -62,7 +62,7 @@ public class MonsterHuntData extends XMLQuest {
 		List<Monster> monsters;
 		QuestTemplate questTemplate = DataManager.QUEST_DATA.getQuestById(id);
 
-		if (questTemplate.getQuestKill() != null && questTemplate.getQuestKill().size() > 0) {
+		if (!questTemplate.getQuestKill().isEmpty()) {
 			monsters = new ArrayList<>();
 			for (QuestKill qk : questTemplate.getQuestKill()) {
 				Monster m = new Monster();
@@ -94,13 +94,10 @@ public class MonsterHuntData extends XMLQuest {
 			return endNpcIds.stream().filter(id -> id != npcId).collect(Collectors.toSet());
 		if (aggroNpcIds != null && aggroNpcIds.size() > 1 && aggroNpcIds.contains(npcId))
 			return aggroNpcIds.stream().filter(id -> id != npcId).collect(Collectors.toSet());
-		List<QuestKill> questKills = DataManager.QUEST_DATA.getQuestById(id).getQuestKill();
-		if (questKills != null) {
-			for (QuestKill qk : questKills) {
-				List<Integer> npcIds = qk.getNpcIds();
-				if (npcIds != null && npcIds.size() > 1 && npcIds.contains(npcId))
-					return npcIds.stream().filter(id -> id != npcId).collect(Collectors.toSet());
-			}
+		for (QuestKill qk : DataManager.QUEST_DATA.getQuestById(id).getQuestKill()) {
+			List<Integer> npcIds = qk.getNpcIds();
+			if (npcIds != null && npcIds.size() > 1 && npcIds.contains(npcId))
+				return npcIds.stream().filter(id -> id != npcId).collect(Collectors.toSet());
 		}
 		return null;
 	}

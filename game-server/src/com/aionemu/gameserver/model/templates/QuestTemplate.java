@@ -1,6 +1,6 @@
 package com.aionemu.gameserver.model.templates;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -131,26 +131,6 @@ public class QuestTemplate implements L10n {
 	@XmlAttribute(name = "data_driven")
 	private boolean dataDriven = false;
 
-	public QuestTemplate() {
-		rewards = new ArrayList<>();
-		bonus = new ArrayList<>();
-		questDrop = new ArrayList<>();
-		questKill = new ArrayList<>();
-		startConds = new ArrayList<>();
-		classPermitted = new ArrayList<>();
-		fighterSelectableReward = new ArrayList<>();
-		knightSelectableReward = new ArrayList<>();
-		rangerSelectableReward = new ArrayList<>();
-		assassinSelectableReward = new ArrayList<>();
-		wizardSelectableReward = new ArrayList<>();
-		elementalistSelectableReward = new ArrayList<>();
-		priestSelectableReward = new ArrayList<>();
-		chanterSelectableReward = new ArrayList<>();
-		gunnerSelectableReward = new ArrayList<>();
-		bardSelectableReward = new ArrayList<>();
-		riderSelectableReward = new ArrayList<>();
-	}
-
 	/**
 	 * Gets the value of the collectItems property.
 	 * 
@@ -164,60 +144,32 @@ public class QuestTemplate implements L10n {
 		return inventoryItems;
 	}
 
-	/**
-	 * Gets the value of the rewards property.
-	 * <p>
-	 * This accessor method returns a reference to the live list, not a snapshot. Therefore any modification you make to the returned list will be
-	 * present inside the JAXB object. This is why there is not a <CODE>set</CODE> method for the rewards property.
-	 * <p>
-	 * For example, to add a new item, do as follows:
-	 * 
-	 * <pre>
-	 * getRewards().add(newItem);
-	 * </pre>
-	 * <p>
-	 * Objects of the following type(s) are allowed in the list {@link Rewards }
-	 */
 	public List<Rewards> getRewards() {
-		return this.rewards;
+		return rewards == null ? Collections.emptyList() : rewards;
 	}
 
 	public Rewards getExtendedRewards() {
-		return this.extendedRewards;
+		return extendedRewards;
 	}
 
 	public List<QuestBonuses> getBonus() {
-		return this.bonus;
+		return bonus == null ? Collections.emptyList() : bonus;
 	}
 
-	/**
-	 * Gets the value of the questDrop property.
-	 * <p>
-	 * This accessor method returns a reference to the live list, not a snapshot. Therefore any modification you make to the returned list will be
-	 * present inside the JAXB object. This is why there is not a <CODE>set</CODE> method for the questDrop property.
-	 * <p>
-	 * For example, to add a new item, do as follows:
-	 * 
-	 * <pre>
-	 * getQuestDrop().add(newItem);
-	 * </pre>
-	 * <p>
-	 * Objects of the following type(s) are allowed in the list {@link QuestDrop }
-	 */
 	public List<QuestDrop> getQuestDrop() {
-		return this.questDrop;
+		return questDrop == null ? Collections.emptyList() : questDrop;
 	}
 
 	public List<QuestKill> getQuestKill() {
-		return this.questKill;
+		return questKill == null ? Collections.emptyList() : questKill;
 	}
 
 	public List<XMLStartCondition> getXMLStartConditions() {
-		return startConds;
+		return startConds == null ? Collections.emptyList() : startConds;
 	}
 
 	public int getRequiredConditionCount() {
-		if (getXMLStartConditions().size() == 0)
+		if (getXMLStartConditions().isEmpty())
 			return 0;
 		int optionalCount = 0;
 		int mandatoryCount = 0;
@@ -230,28 +182,14 @@ public class QuestTemplate implements L10n {
 
 		int result = Math.min(1, optionalCount) + mandatoryCount;
 
-		if (this.isMaster())
+		if (isMaster())
 			result += 1 - CraftConfig.MAX_MASTER_CRAFTING_SKILLS;
 
 		return result;
 	}
 
-	/**
-	 * Gets the value of the classPermitted property.
-	 * <p>
-	 * This accessor method returns a reference to the live list, not a snapshot. Therefore any modification you make to the returned list will be
-	 * present inside the JAXB object. This is why there is not a <CODE>set</CODE> method for the classPermitted property.
-	 * <p>
-	 * For example, to add a new item, do as follows:
-	 * 
-	 * <pre>
-	 * getClassPermitted().add(newItem);
-	 * </pre>
-	 * <p>
-	 * Objects of the following type(s) are allowed in the list {@link PlayerClass }
-	 */
 	public List<PlayerClass> getClassPermitted() {
-		return this.classPermitted;
+		return classPermitted == null ? Collections.emptyList() : classPermitted;
 	}
 
 	/**
@@ -275,27 +213,27 @@ public class QuestTemplate implements L10n {
 	public List<QuestItems> getSelectableRewardByClass(PlayerClass playerClass) {
 		switch (playerClass) {
 			case ASSASSIN:
-				return assassinSelectableReward;
+				return assassinSelectableReward == null ? Collections.emptyList() : assassinSelectableReward;
 			case CHANTER:
-				return chanterSelectableReward;
+				return chanterSelectableReward == null ? Collections.emptyList() : chanterSelectableReward;
 			case CLERIC:
-				return priestSelectableReward;
+				return priestSelectableReward == null ? Collections.emptyList() : priestSelectableReward;
 			case GLADIATOR:
-				return fighterSelectableReward;
+				return fighterSelectableReward == null ? Collections.emptyList() : fighterSelectableReward;
 			case RANGER:
-				return rangerSelectableReward;
+				return rangerSelectableReward == null ? Collections.emptyList() : rangerSelectableReward;
 			case SORCERER:
-				return wizardSelectableReward;
+				return wizardSelectableReward == null ? Collections.emptyList() : wizardSelectableReward;
 			case SPIRIT_MASTER:
-				return elementalistSelectableReward;
+				return elementalistSelectableReward == null ? Collections.emptyList() : elementalistSelectableReward;
 			case TEMPLAR:
-				return knightSelectableReward;
+				return knightSelectableReward == null ? Collections.emptyList() : knightSelectableReward;
 			case GUNNER:
-				return gunnerSelectableReward;
+				return gunnerSelectableReward == null ? Collections.emptyList() : gunnerSelectableReward;
 			case BARD:
-				return bardSelectableReward;
+				return bardSelectableReward == null ? Collections.emptyList() : bardSelectableReward;
 			case RIDER:
-				return riderSelectableReward;
+				return riderSelectableReward == null ? Collections.emptyList() : riderSelectableReward;
 		}
 		return null;
 	}

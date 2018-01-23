@@ -1,6 +1,7 @@
 package com.aionemu.gameserver.dataholders;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import javax.xml.bind.Unmarshaller;
@@ -24,15 +25,15 @@ import gnu.trove.map.hash.TIntObjectHashMap;
 public class QuestsData {
 
 	@XmlElement(name = "quest", required = true)
-	protected List<QuestTemplate> questsData;
-	private TIntObjectHashMap<QuestTemplate> questData = new TIntObjectHashMap<>();
+	private List<QuestTemplate> questsData;
+	private TIntObjectHashMap<QuestTemplate> questTemplates = new TIntObjectHashMap<>();
 	private TIntObjectHashMap<List<QuestTemplate>> sortedByFactionId = new TIntObjectHashMap<>();
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
-		questData.clear();
+		questTemplates.clear();
 		sortedByFactionId.clear();
 		for (QuestTemplate quest : questsData) {
-			questData.put(quest.getId(), quest);
+			questTemplates.put(quest.getId(), quest);
 			int npcFactionId = quest.getNpcFactionId();
 			if (npcFactionId == 0 || quest.isTimeBased())
 				continue;
@@ -44,10 +45,11 @@ public class QuestsData {
 				sortedByFactionId.get(npcFactionId).add(quest);
 			}
 		}
+		questsData = null;
 	}
 
 	public QuestTemplate getQuestById(int id) {
-		return questData.get(id);
+		return questTemplates.get(id);
 	}
 
 	public List<QuestTemplate> getQuestsByNpcFaction(int npcFactionId, Player player) {
@@ -63,22 +65,11 @@ public class QuestsData {
 	}
 
 	public int size() {
-		return questData.size();
+		return questTemplates.size();
 	}
 
-	/**
-	 * @return the questsData
-	 */
-	public List<QuestTemplate> getQuestsData() {
-		return questsData;
+	public Collection<QuestTemplate> getQuestTemplates() {
+		return questTemplates.valueCollection();
 	}
 
-	/**
-	 * @param questsData
-	 *          the questsData to set
-	 */
-	public void setQuestsData(List<QuestTemplate> questsData) {
-		this.questsData = questsData;
-		afterUnmarshal(null, null);
-	}
 }

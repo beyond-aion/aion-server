@@ -43,7 +43,7 @@ public class MentorMonsterHuntData extends MonsterHuntData {
 		List<Monster> monsters;
 		QuestTemplate questTemplate = DataManager.QUEST_DATA.getQuestById(id);
 
-		if (questTemplate.getQuestKill() != null && questTemplate.getQuestKill().size() > 0) {
+		if (!questTemplate.getQuestKill().isEmpty()) {
 			monsters = new ArrayList<>();
 			for (QuestKill qk : questTemplate.getQuestKill()) {
 				Monster m = new Monster();
