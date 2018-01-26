@@ -235,7 +235,7 @@ public class QuestTemplate implements L10n {
 			case RIDER:
 				return riderSelectableReward == null ? Collections.emptyList() : riderSelectableReward;
 		}
-		return null;
+		return Collections.emptyList();
 	}
 
 	public int getId() {

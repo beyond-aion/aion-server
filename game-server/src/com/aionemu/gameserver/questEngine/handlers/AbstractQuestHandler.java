@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Consumer;
+import java.util.stream.Stream;
 
 import com.aionemu.gameserver.ai.event.AIEventType;
 import com.aionemu.gameserver.dataholders.DataManager;
@@ -15,6 +16,7 @@ import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.DialogPage;
 import com.aionemu.gameserver.model.EmotionId;
 import com.aionemu.gameserver.model.EmotionType;
+import com.aionemu.gameserver.model.PlayerClass;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Item;
@@ -462,7 +464,7 @@ public abstract class AbstractQuestHandler {
 							List<FinishedQuestCond> finishedQuests = startCondition.getFinishedPreconditions();
 							if (finishedQuests != null) {
 								for (FinishedQuestCond fcondition : finishedQuests) {
-									if (fcondition.getQuestId() == env.getQuestId()) {
+									if (fcondition.getQuestId() == env.getQuestId() && isAcceptableQuest(template)) {
 										env.setQuestId(questId);
 										env.setDialogActionId(DialogAction.QUEST_SELECT);
 										return QuestEngine.getInstance().onDialog(env); // show start dialog of follow-up quest
@@ -488,6 +490,16 @@ public abstract class AbstractQuestHandler {
 			}
 		}
 		return false;
+	}
+
+	private boolean isAcceptableQuest(QuestTemplate quest) {
+		if (quest.getMinlevelPermitted() == 99)
+			return false;
+		if (quest.getRewards().isEmpty() && quest.getExtendedRewards() == null && quest.getBonus().isEmpty() && quest.getQuestDrop().isEmpty()
+			&& Stream.of(PlayerClass.values()).allMatch(c -> quest.getSelectableRewardByClass(c).isEmpty())) {
+			return false;
+		}
+		return true;
 	}
 
 	public boolean defaultCloseDialog(QuestEnv env, int step, int nextStep) {
