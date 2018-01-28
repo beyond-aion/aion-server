@@ -1,5 +1,7 @@
 package admincommands;
 
+import org.apache.commons.lang3.math.NumberUtils;
+
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
@@ -22,8 +24,8 @@ public class UseSkill extends AdminCommand {
 
 		// @formatter:off
 		setSyntaxInfo(
-			"<id> [lvl] - Uses the skill with the specified skill level on your target",
-			"<me|self|target> <id> [lvl] - Let's your target use the skill on you, itself or its target"
+			"<id> [lvl] [f] - Uses the skill with the specified skill level on your target (f = force use).",
+			"<me|self|target> <id> [lvl] [f] - Let's your target use the skill on you, itself or its target (f = force use)."
 		);
 		// @formatter:on
 	}
@@ -48,13 +50,13 @@ public class UseSkill extends AdminCommand {
 					targetMode = null;
 			}
 			SkillTemplate template = DataManager.SKILL_DATA.getSkillTemplate(Integer.parseInt(params[i++]));
-			int skillLevel = params.length > i ? Integer.parseInt(params[i]) : template.getLvl();
 			if (template != null) {
-				if (useSkill(admin, template, skillLevel, targetMode)) {
-					sendInfo(admin, "Successfully used skill.");
-				} else {
-					sendInfo(admin, "Could not use skill (missing preconditions).");
-				}
+				int skillLevel = params.length > i && NumberUtils.isNumber(params[i]) ? Integer.parseInt(params[i++]) : template.getLvl();
+				boolean forceUse = params.length > i && params[i].equals("f");
+				if (useSkill(admin, template, skillLevel, targetMode, forceUse))
+					sendInfo(admin, "Used skill: " + template.getL10n());
+				else
+					sendInfo(admin, "Could not use skill (" + (forceUse ? "missing preconditions" : "add parameter 'f' to force use") + ").");
 			} else {
 				sendInfo(admin, "Invalid skill id.");
 			}
@@ -65,7 +67,7 @@ public class UseSkill extends AdminCommand {
 
 	}
 
-	private boolean useSkill(Player player, SkillTemplate template, int skillLevel, String targetMode) {
+	private boolean useSkill(Player player, SkillTemplate template, int skillLevel, String targetMode, boolean forceUse) {
 		Creature effector;
 		VisibleObject target;
 		if (targetMode != null) {
@@ -82,7 +84,7 @@ public class UseSkill extends AdminCommand {
 
 		Skill skill = SkillEngine.getInstance().getSkill(effector, template.getSkillId(), skillLevel, target);
 		if (skill != null)
-			return skill.useNoAnimationSkill();
+			return forceUse ? skill.useWithoutPropSkill() : skill.useNoAnimationSkill();
 
 		return false;
 	}
