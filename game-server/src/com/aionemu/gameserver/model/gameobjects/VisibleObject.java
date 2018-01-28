@@ -44,9 +44,9 @@ public abstract class VisibleObject extends AionObject {
 	private VisibleObject target;
 
 	/**
-	 * Spawn template of this visibleObject. .
+	 * Spawn template of this visibleObject.
 	 */
-	private SpawnTemplate spawn;
+	private final SpawnTemplate spawnTemplate;
 
 	/**
 	 * Constructor.
@@ -59,7 +59,7 @@ public abstract class VisibleObject extends AionObject {
 		super(objId);
 		this.controller = controller;
 		this.position = position;
-		this.spawn = spawnTemplate;
+		this.spawnTemplate = spawnTemplate;
 		this.objectTemplate = objectTemplate;
 	}
 
@@ -221,16 +221,12 @@ public abstract class VisibleObject extends AionObject {
 	}
 
 	/**
-	 * Return spawn template of this VisibleObject
+	 * Return spawnTemplate template of this VisibleObject
 	 *
 	 * @return SpawnTemplate
 	 */
 	public SpawnTemplate getSpawn() {
-		return spawn;
-	}
-
-	public void setSpawn(SpawnTemplate spawn) {
-		this.spawn = spawn;
+		return spawnTemplate;
 	}
 
 	/**

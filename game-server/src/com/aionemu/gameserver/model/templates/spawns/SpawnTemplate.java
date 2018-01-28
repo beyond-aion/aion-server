@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.model.templates.spawns;
 
-import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.templates.event.EventTemplate;
 import com.aionemu.gameserver.spawnengine.SpawnHandlerType;
 
@@ -27,7 +26,6 @@ public class SpawnTemplate {
 	private int state;
 	private int creatorId;
 	private TemporarySpawn temporarySpawn;
-	private VisibleObject visibleObject;
 
 	public SpawnTemplate(SpawnGroup spawnGroup, SpawnSpotTemplate spot) {
 		this.spawnGroup = spawnGroup;
@@ -199,14 +197,6 @@ public class SpawnTemplate {
 	 */
 	public int getCreatorId() {
 		return creatorId;
-	}
-
-	public VisibleObject getVisibleObject() {
-		return visibleObject;
-	}
-
-	public void setVisibleObject(VisibleObject visibleObject) {
-		this.visibleObject = visibleObject;
 	}
 
 }

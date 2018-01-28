@@ -174,8 +174,6 @@ public class World {
 			} else if (object instanceof Player) {
 				allPlayers.remove((Player) object);
 			}
-			if (object.getSpawn() != null && !object.getSpawn().isTemporarySpawn()) // allow object getting garbage collected
-				object.getSpawn().setVisibleObject(null);
 
 			return true;
 		}

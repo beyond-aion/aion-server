@@ -42,10 +42,8 @@ public class SpawnEngine {
 	 */
 	public static VisibleObject spawnObject(SpawnTemplate spawn, int instanceIndex) {
 		VisibleObject visObj = getSpawnedObject(spawn, instanceIndex);
-		if (visObj != null) {
-			spawn.setVisibleObject(visObj);
-			if (visObj.getPosition().getMapRegion() != null)
-				visObj.getPosition().getWorldMapInstance().getInstanceHandler().onSpawn(visObj);
+		if (visObj != null && visObj.getPosition().getMapRegion() != null) {
+			visObj.getPosition().getWorldMapInstance().getInstanceHandler().onSpawn(visObj);
 		}
 		return visObj;
 	}
@@ -186,16 +184,13 @@ public class SpawnEngine {
 
 		int spawnedCounter = 0;
 		if (worldSpawns != null) {
-			WorldMapTemplate worldTemplate = DataManager.WORLD_MAPS_DATA.getTemplate(worldId);
 			for (SpawnGroup spawn : worldSpawns) {
 				int difficult = spawn.getDifficultId();
 				if (difficult != 0 && difficult != difficultId) {
 					continue;
 				}
 
-				// Disable temporary spawns in instances, TemporarySpawnEngine
-				// doesn't support removing spawns
-				if (spawn.isTemporarySpawn() && !worldTemplate.isInstance()) {
+				if (spawn.isTemporarySpawn()) {
 					TemporarySpawnEngine.addSpawnGroup(spawn, instanceId);
 					continue;
 				}

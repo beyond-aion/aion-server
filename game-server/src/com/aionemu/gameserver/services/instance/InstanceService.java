@@ -25,6 +25,7 @@ import com.aionemu.gameserver.services.AutoGroupService;
 import com.aionemu.gameserver.services.HousingService;
 import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
+import com.aionemu.gameserver.spawnengine.TemporarySpawnEngine;
 import com.aionemu.gameserver.spawnengine.WalkerFormator;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
@@ -118,6 +119,7 @@ public class InstanceService {
 
 		log.info("Destroying instance:" + worldId + " " + instanceId);
 
+		TemporarySpawnEngine.onInstanceDestroy(worldId, instanceId); // first unregister all temporary spawns, then despawn mobs
 		for (VisibleObject obj : instance) {
 			if (obj instanceof Player) {
 				Player player = (Player) obj;

@@ -151,9 +151,6 @@ public class RespawnService {
 		}
 
 		private void respawn() {
-			if (spawnTemplate.isTemporarySpawn() && !spawnTemplate.getTemporarySpawn().isInSpawnTime())
-				return;
-
 			if (!InstanceService.isInstanceExist(spawnTemplate.getWorldId(), instanceId))
 				return;
 

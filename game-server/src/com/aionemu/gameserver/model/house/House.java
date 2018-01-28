@@ -312,7 +312,6 @@ public class House extends VisibleObject implements Persistable {
 
 				if (newNpcId != oldNpcId) {
 					SpawnTemplate t = sign.getSpawn();
-					sign.setSpawn(null);
 					sign.getController().delete();
 					t = SpawnEngine.newSingleTimeSpawn(t.getWorldId(), newNpcId, t.getX(), t.getY(), t.getZ(), t.getHeading());
 					sign = (Npc) SpawnEngine.spawnObject(t, getInstanceId());
