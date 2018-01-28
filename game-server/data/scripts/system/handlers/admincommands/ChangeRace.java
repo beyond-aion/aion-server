@@ -19,6 +19,7 @@ public class ChangeRace extends AdminCommand {
 		admin.getCommonData().setRace(admin.getOppositeRace());
 		admin.clearKnownlist();
 		PacketSendUtility.sendPacket(admin, new SM_PLAYER_INFO(admin));
+		admin.getEffectController().updatePlayerEffectIcons(null);
 		admin.updateKnownlist();
 	}
 }
