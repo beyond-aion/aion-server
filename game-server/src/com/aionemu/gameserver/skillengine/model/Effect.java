@@ -910,10 +910,10 @@ public class Effect implements StatOwner {
 		Iterator<EffectTemplate> itr = successEffects.values().iterator();
 		while (itr.hasNext() && duration == 0) {
 			EffectTemplate et = itr.next();
-			int effectDuration = et.getDuration2() + et.getDuration1() * getSkillLevel();
+			long effectDuration = et.getDuration2() + ((long) et.getDuration1()) * getSkillLevel(); // some event skills would produce an int overflow
 			if (et.getRandomTime() > 0)
 				effectDuration -= Rnd.get(0, et.getRandomTime());
-			duration = duration > effectDuration ? duration : effectDuration;
+			duration = duration > effectDuration ? duration : (int) Math.min(Integer.MAX_VALUE, effectDuration);
 		}
 
 		// adjust with BOOST_DURATION
