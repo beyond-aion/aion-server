@@ -1417,11 +1417,11 @@
 			<spot x="555.704" y="1185.76" z="90.0185" h="1"/>
 		</spawn>
 		<!-- Campsite Guard -->
-		<spawn npc_id="209488" respawn_time="1800" pool="1">
+		<spawn npc_id="209488" respawn_time="1800">
 			<spot x="1222.15" y="364.17" z="218.11438" h="51" walker_id="31DB12679015A83D9DECF4C628695F424226CB1A"/>
 		</spawn>
 		<!-- Campsite Guard -->
-		<spawn npc_id="209489" respawn_time="1800" pool="1">
+		<spawn npc_id="209489" respawn_time="1800">
 			<spot x="1199.71" y="381.45" z="217.26813" h="63" walker_id="EA5F5166136CE7A4A4CC357C92AF68542BFF3B58"/>
 		</spawn>
 		<!-- Caochenrinerk -->

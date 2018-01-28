@@ -227,8 +227,8 @@ public class SpawnEngine {
 	}
 
 	public static boolean checkPool(SpawnGroup spawn) {
-		if (spawn.getSpawnTemplates().size() < spawn.getPool()) {
-			log.warn("Pool size is greater than spots, npcId: " + spawn.getNpcId() + ", worldId: " + spawn.getWorldId());
+		if (spawn.getPool() >= spawn.getSpawnTemplates().size()) {
+			log.warn("Spawn pool size must be smaller than spots to take effect, npcId: " + spawn.getNpcId() + ", worldId: " + spawn.getWorldId());
 			return false;
 		}
 		return true;
