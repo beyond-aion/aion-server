@@ -254,8 +254,7 @@ public class Skill {
 		// log skill time if effector instance of player
 		// TODO config
 		if (effector instanceof Player)
-			MotionLoggingService.getInstance().logTime((Player) effector, this.getSkillTemplate(), this.getHitTime(),
-				PositionUtil.getDistance(effector, firstTarget));
+			MotionLoggingService.getInstance().logTime((Player) effector, getSkillTemplate(), getHitTime(), firstTarget);
 
 		// send packets to start casting
 		if (skillMethod == SkillMethod.CAST || skillMethod == SkillMethod.ITEM || skillMethod == SkillMethod.CHARGE) {
@@ -685,11 +684,6 @@ public class Skill {
 
 					if (effect.getAttackStatus() == AttackStatus.RESIST || effect.getAttackStatus() == AttackStatus.DODGE) {
 						resistCount++;
-					}
-					for (Effect eventEffect : effector.getEffectController().getAbnormalEffectsToShow()) {
-						if (eventEffect.getDuration() >= 86400000 && eventEffect.getSkillId() == 322) {
-							dashStatus = 0;
-						}
 					}
 				}
 			}

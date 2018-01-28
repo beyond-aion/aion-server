@@ -210,10 +210,6 @@ public class Effect implements StatOwner {
 		return duration;
 	}
 
-	public void setDuration(int newDuration) {
-		this.duration = newDuration;
-	}
-
 	/**
 	 * @return The effected from effect constructor, can differ from getEffected if effect got reflected via shield observer.
 	 */

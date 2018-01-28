@@ -25,6 +25,7 @@ import com.aionemu.commons.database.DatabaseFactory;
 import com.aionemu.gameserver.dataholders.MotionData;
 import com.aionemu.gameserver.model.Gender;
 import com.aionemu.gameserver.model.Race;
+import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.item.enums.ItemGroup;
 import com.aionemu.gameserver.skillengine.model.Motion;
@@ -33,6 +34,7 @@ import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.skillengine.model.Times;
 import com.aionemu.gameserver.skillengine.model.WeaponTypeWrapper;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.PositionUtil;
 
 /**
  * @author kecimis
@@ -57,7 +59,7 @@ public class MotionLoggingService {
 		log.info("MotionLoggingService started.");
 	}
 
-	public void logTime(Player player, SkillTemplate sk, int clientTime, double distance) {
+	public void logTime(Player player, SkillTemplate sk, int clientTime, Creature firstTarget) {
 		int currentAttackSpeed = 0;
 		if (!started)
 			return;
@@ -88,6 +90,7 @@ public class MotionLoggingService {
 		if (motion.getName() == null)
 			return;
 
+		double distance = PositionUtil.getDistance(player, firstTarget);
 		long ammoTime = 0;
 		if (sk.getAmmoSpeed() != 0)
 			ammoTime = Math.round(distance / sk.getAmmoSpeed() * 1000);// checked with client
