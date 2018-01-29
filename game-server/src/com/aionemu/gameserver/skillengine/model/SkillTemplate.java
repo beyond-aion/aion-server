@@ -1,14 +1,11 @@
 package com.aionemu.gameserver.skillengine.model;
 
-import java.util.Iterator;
-
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
-import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.controllers.attack.AttackStatus;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.templates.L10n;
@@ -447,20 +444,6 @@ public class SkillTemplate implements L10n {
 
 	public boolean isNoSaveOnLogout() {
 		return noSaveOnLogout;
-	}
-
-	public int getEffectsDuration(int skillLevel) {
-		int duration = 0;
-		Iterator<EffectTemplate> itr = getEffects().getEffects().iterator();
-		while (itr.hasNext() && duration == 0) {
-			EffectTemplate et = itr.next();
-			int effectDuration = et.getDuration2() + et.getDuration1() * skillLevel;
-			if (et.getRandomTime() > 0)
-				effectDuration -= Rnd.get(0, et.getRandomTime());
-			duration = duration > effectDuration ? duration : effectDuration;
-		}
-
-		return duration;
 	}
 
 	public ChainCondition getChainCondition() {

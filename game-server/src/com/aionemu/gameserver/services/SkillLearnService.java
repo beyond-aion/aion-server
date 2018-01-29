@@ -23,7 +23,7 @@ public class SkillLearnService {
 			if (player.isSpawned())
 				sendPacket(player, skill, isNew);
 			if (DataManager.SKILL_DATA.getSkillTemplate(skillId).isPassive())
-				SkillEngine.getInstance().applyEffectDirectly(skillId, skillLevel, player, player, 0);
+				SkillEngine.getInstance().applyEffectDirectly(skillId, skillLevel, player, player);
 			if (skill.isProfessionSkill() && (skill.getSkillLevel() == 399 || skill.getSkillLevel() == 499))
 				player.getController().updateNearbyQuests();
 		}

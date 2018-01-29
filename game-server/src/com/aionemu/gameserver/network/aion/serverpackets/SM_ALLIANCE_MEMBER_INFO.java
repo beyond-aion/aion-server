@@ -112,7 +112,7 @@ public class SM_ALLIANCE_MEMBER_INFO extends AionServerPacket {
 					writeH(effect.getSkillId()); // spellid
 					writeC(effect.getSkillLevel()); // spell level
 					writeC(effect.getTargetSlot().ordinal()); // unk ?
-					writeD(effect.getRemainingTime()); // estimatedtime
+					writeD(effect.getRemainingTimeToDisplay()); // estimatedtime
 				}
 
 				writeD(0x00);
@@ -143,7 +143,7 @@ public class SM_ALLIANCE_MEMBER_INFO extends AionServerPacket {
 						writeH(effect.getSkillId()); // spellid
 						writeC(effect.getSkillLevel()); // spell level
 						writeC(effect.getTargetSlot().ordinal()); // unk ?
-						writeD(effect.getRemainingTime()); // estimatedtime
+						writeD(effect.getRemainingTimeToDisplay()); // estimatedtime
 					}
 					writeD(0x00);
 					writeD(0x00);

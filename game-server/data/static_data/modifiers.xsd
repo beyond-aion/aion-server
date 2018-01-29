@@ -202,8 +202,6 @@
 			<!-- Effects Boosts and Deboosts -->
 			<xs:enumeration value="HEAL_SKILL_BOOST"/>
 			<xs:enumeration value="HEAL_SKILL_DEBOOST" />
-			<!-- Boost duration of Buff skills -->
-			<xs:enumeration value="BOOST_DURATION_BUFF"/>
 			<!-- Boost resist of Debuff skills -->
 			<xs:enumeration value="BOOST_RESIST_DEBUFF"/>
 			<!-- 3.5 -->

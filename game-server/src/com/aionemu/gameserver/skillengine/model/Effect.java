@@ -2,7 +2,6 @@ package com.aionemu.gameserver.skillengine.model;
 
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeSet;
@@ -22,7 +21,6 @@ import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.stats.calc.StatOwner;
-import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.model.templates.item.ItemTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_PLAYER_STANCE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SKILL_ACTIVATION;
@@ -97,7 +95,7 @@ public class Effect implements StatOwner {
 	 */
 	private int effectHate;
 
-	private Map<Integer, EffectTemplate> successEffects = new ConcurrentHashMap<>();
+	private final Map<Integer, EffectTemplate> successEffects = new ConcurrentHashMap<>();
 
 	private int carvedSignet = 0;
 
@@ -117,7 +115,7 @@ public class Effect implements StatOwner {
 	/**
 	 * used to force duration, you should be very careful when to use it
 	 */
-	private boolean forcedDuration = false;
+	private final boolean forcedDuration;
 
 	private boolean isForcedEffect = false;
 
@@ -135,11 +133,16 @@ public class Effect implements StatOwner {
 	private boolean endedByTime = false;
 
 	public Effect(Creature effector, Creature effected, SkillTemplate skillTemplate, int skillLevel, int duration) {
+		this(effector, effected, skillTemplate, skillLevel, duration, false);
+	}
+
+	public Effect(Creature effector, Creature effected, SkillTemplate skillTemplate, int skillLevel, int duration, boolean forcedDuration) {
 		this.effector = effector;
 		this.effected = effected;
 		this.skillTemplate = skillTemplate;
 		this.skillLevel = skillLevel;
 		this.duration = duration;
+		this.forcedDuration = forcedDuration;
 		this.periodicActions = skillTemplate.getPeriodicActions();
 
 		this.power = initializePower();
@@ -521,10 +524,6 @@ public class Effect implements StatOwner {
 		return false;
 	}
 
-	public void setForcedDuration(boolean forcedDuration) {
-		this.forcedDuration = forcedDuration;
-	}
-
 	public void setIsForcedEffect(boolean isForcedEffect) {
 		this.isForcedEffect = isForcedEffect;
 	}
@@ -660,24 +659,20 @@ public class Effect implements StatOwner {
 				checkCancelOnDmg();
 			}
 
-			if (isToggle() && effector instanceof Player) {
-				activateToggleSkill();
-			}
-			if (!restored && !forcedDuration)
-				duration = getEffectsDuration();
-			if (isToggle())
+			if (isToggle()) {
+				if (effector instanceof Player)
+					activateToggleSkill();
 				duration = skillTemplate.getToggleTimer();
+			} else if (!restored && !forcedDuration) {
+				duration = getEffectsDuration();
+			}
 			if (duration == 0)
 				return;
 			endTime = System.currentTimeMillis() + duration;
 
-			endTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-				@Override
-				public void run() {
-					endedByTime = true;
-					endEffect(true);
-				}
+			endTask = ThreadPoolManager.getInstance().schedule(() -> {
+				endedByTime = true;
+				endEffect(true);
 			}, duration);
 		}
 	}
@@ -756,12 +751,27 @@ public class Effect implements StatOwner {
 	}
 
 	/**
-	 * Time till the effect end
-	 * 
-	 * @return
+	 * @return Time in milliseconds till the effect ends
 	 */
-	public int getRemainingTime() {
-		return getDuration() >= 86400000 ? -1 : (int) (endTime - System.currentTimeMillis());
+	public long getRemainingTimeMillis() {
+		return endTime - System.currentTimeMillis();
+	}
+
+	public int getRemainingTimeToDisplay() {
+		if (duration >= 86400000 && effected instanceof Npc) // >= 24h
+			return -1;
+		long remainingTimeMillis = getRemainingTimeMillis();
+		return remainingTimeMillis > Integer.MAX_VALUE ? -1 : (int) remainingTimeMillis;
+	}
+
+	public boolean canSaveOnLogout() {
+		if (skillTemplate.isNoSaveOnLogout())
+			return false;
+		if (duration == 0) // effects with duration 0 are permanent (such as passive or most toggle skills)
+			return false;
+		if (duration >= 86400000) // effects with duration >= 24h are event or instance related
+			return false;
+		return true;
 	}
 
 	/**
@@ -867,7 +877,7 @@ public class Effect implements StatOwner {
 	/**
 	 * @return
 	 */
-	public Collection<EffectTemplate> getSuccessEffect() {
+	public Collection<EffectTemplate> getSuccessEffects() {
 		return successEffects.values();
 	}
 
@@ -878,21 +888,13 @@ public class Effect implements StatOwner {
 		}
 	}
 
-	public void clearSucessEffects() {
-		successEffects.clear();
-	}
-
 	private void schedulePeriodicActions() {
 		if (periodicActions == null || periodicActions.getPeriodicActions() == null || periodicActions.getPeriodicActions().isEmpty())
 			return;
 		int checktime = periodicActions.getChecktime();
-		periodicActionsTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
-
-			@Override
-			public void run() {
-				for (PeriodicAction action : periodicActions.getPeriodicActions())
-					action.act(Effect.this);
-			}
+		periodicActionsTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
+			for (PeriodicAction action : periodicActions.getPeriodicActions())
+				action.act(Effect.this);
 		}, checktime, checktime);
 	}
 
@@ -904,33 +906,26 @@ public class Effect implements StatOwner {
 	}
 
 	public int getEffectsDuration() {
-		int duration = 0;
-
-		// iterate skill's effects until we can calculate a duration time, which is valid for all of them
-		Iterator<EffectTemplate> itr = successEffects.values().iterator();
-		while (itr.hasNext() && duration == 0) {
-			EffectTemplate et = itr.next();
-			long effectDuration = et.getDuration2() + ((long) et.getDuration1()) * getSkillLevel(); // some event skills would produce an int overflow
-			if (et.getRandomTime() > 0)
-				effectDuration -= Rnd.get(0, et.getRandomTime());
-			duration = duration > effectDuration ? duration : (int) Math.min(Integer.MAX_VALUE, effectDuration);
-		}
-
-		// adjust with BOOST_DURATION
-		switch (skillTemplate.getSubType()) {
-			case BUFF:
-				duration = effector.getGameStats().getStat(StatEnum.BOOST_DURATION_BUFF, duration).getCurrent();
-				break;
-		}
+		long duration = calculateTemplateDuration();
 
 		// adjust with pvp duration (not sure why some self target skills have pvp duration o.O idk how to handle that)
 		if (skillTemplate.getPvpDuration() != 0 && !effector.equals(effected) && getEffected() instanceof Player)
 			duration = duration * skillTemplate.getPvpDuration() / 100;
 
-		if (duration > 86400000)
-			duration = 86400000;
+		return (int) Math.min(Integer.MAX_VALUE, duration);
+	}
 
-		return duration;
+	private long calculateTemplateDuration() {
+		long longestTemplateDuration = 0;
+		// iterate skill's effects until we can calculate a duration time, which is valid for all of them
+		for (EffectTemplate et : successEffects.values()) {
+			long effectDuration = et.getDuration2() + ((long) et.getDuration1()) * getSkillLevel(); // some event skills would produce an int overflow
+			if (et.getRandomTime() > 0)
+				effectDuration -= Rnd.get(0, et.getRandomTime());
+			if (effectDuration > longestTemplateDuration)
+				longestTemplateDuration = effectDuration;
+		}
+		return longestTemplateDuration;
 	}
 
 	public boolean isDeityAvatar() {
@@ -1291,11 +1286,4 @@ public class Effect implements StatOwner {
 		this.mpShieldSkillId = mpShieldSkillId;
 	}
 
-	public EffectTemplate getFirstSuccessEffect() {
-		for (EffectTemplate et : getSuccessEffect()) {
-			return et;
-		}
-
-		return null;
-	}
 }

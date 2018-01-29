@@ -31,13 +31,7 @@ public class MySQL5PlayerEffectsDAO extends PlayerEffectsDAO {
 	public static final String DELETE_QUERY = "DELETE FROM `player_effects` WHERE `player_id`=?";
 	public static final String SELECT_QUERY = "SELECT `skill_id`, `skill_lvl`, `current_time`, `end_time` FROM `player_effects` WHERE `player_id`=?";
 
-	private static final Predicate<Effect> insertableEffectsPredicate = new Predicate<Effect>() {
-
-		@Override
-		public boolean test(Effect input) {
-			return input != null && input.getRemainingTime() > 28000 && !input.getSkillTemplate().isNoSaveOnLogout();
-		}
-	};
+	private static final Predicate<Effect> insertableEffectsPredicate = effect -> effect.canSaveOnLogout() && effect.getRemainingTimeMillis() > 28000;
 
 	@Override
 	public void loadPlayerEffects(final Player player) {
@@ -85,7 +79,7 @@ public class MySQL5PlayerEffectsDAO extends PlayerEffectsDAO {
 				ps.setInt(1, player.getObjectId());
 				ps.setInt(2, effect.getSkillId());
 				ps.setInt(3, effect.getSkillLevel());
-				ps.setInt(4, effect.getRemainingTime());
+				ps.setInt(4, (int) effect.getRemainingTimeMillis());
 				ps.setLong(5, effect.getEndTime());
 				ps.addBatch();
 			}

@@ -377,7 +377,7 @@ public abstract class EffectTemplate {
 				if (!noResist && !cannotMiss) {
 					if (!this.calculateEffectResistRate(effect, statEnum)) {
 						if (!(firstEffect instanceof DamageEffect)) {
-							effect.getSuccessEffect().remove(firstEffect);
+							effect.getSuccessEffects().remove(firstEffect);
 						}
 						return false;
 					}
@@ -501,7 +501,7 @@ public abstract class EffectTemplate {
 		if (hopType == null)
 			return;
 
-		if (effect.getSuccessEffect().isEmpty())
+		if (effect.getSuccessEffects().isEmpty())
 			return;
 
 		int currentHate = effect.getEffectHate();

@@ -135,19 +135,17 @@ public class SkillEngine {
 		applyEffectDirectly(skillTemplate, skillTemplate.getLvl(), effector, effected, duration);
 	}
 
-	public void applyEffectDirectly(int skillId, int lvl, Creature effector, Creature effected, int duration) {
+	public void applyEffectDirectly(int skillId, int lvl, Creature effector, Creature effected) {
 		SkillTemplate skillTemplate = DataManager.SKILL_DATA.getSkillTemplate(skillId);
 		if (skillTemplate == null)
 			return;
-		applyEffectDirectly(skillTemplate, lvl, effector, effected, duration);
+		applyEffectDirectly(skillTemplate, lvl, effector, effected, 0);
 	}
 
 	public void applyEffectDirectly(SkillTemplate skillTemplate, int lvl, Creature effector, Creature effected, int duration) {
-		final Effect ef = new Effect(effector, effected, skillTemplate, lvl, duration);
+		final Effect ef = new Effect(effector, effected, skillTemplate, lvl, duration, duration > 0);
 		ef.setIsForcedEffect(true);
 		ef.initialize();
-		if (duration > 0)
-			ef.setForcedDuration(true);
 		ef.applyEffect();
 	}
 

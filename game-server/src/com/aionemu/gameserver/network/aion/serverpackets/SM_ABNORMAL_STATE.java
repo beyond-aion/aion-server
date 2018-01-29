@@ -34,7 +34,7 @@ public class SM_ABNORMAL_STATE extends AionServerPacket {
 			writeH(effect.getSkillId());
 			writeC(effect.getSkillLevel());
 			writeC(effect.getTargetSlot().ordinal());
-			writeD(effect.getRemainingTime());
+			writeD(effect.getRemainingTimeToDisplay());
 		}
 	}
 }

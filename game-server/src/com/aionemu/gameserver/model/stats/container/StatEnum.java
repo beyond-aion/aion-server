@@ -180,7 +180,6 @@ public enum StatEnum {
 
 	BOOST_DROP_RATE,
 	BOOST_MANTRA_RANGE,
-	BOOST_DURATION_BUFF, // extend_duration
 	BOOST_RESIST_DEBUFF,
 
 	// 3.5
