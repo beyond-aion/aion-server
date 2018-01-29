@@ -2,6 +2,7 @@ package com.aionemu.gameserver.model.team.group;
 
 import com.aionemu.gameserver.model.team.TeamType;
 import com.aionemu.gameserver.model.team.TemporaryPlayerTeam;
+import com.aionemu.gameserver.utils.idfactory.IDFactory;
 
 /**
  * @author ATracer
@@ -10,9 +11,11 @@ public class PlayerGroup extends TemporaryPlayerTeam<PlayerGroupMember> {
 
 	private final PlayerGroupStats playerGroupStats;
 	private TeamType type;
+	private final boolean isNewId;
 
 	public PlayerGroup(PlayerGroupMember leader, TeamType type, int id) {
-		super(id);
+		super(id == 0 ? IDFactory.getInstance().nextId() : id);
+		this.isNewId = id == 0;
 		this.playerGroupStats = new PlayerGroupStats(this);
 		this.type = type;
 		setLeader(leader);
@@ -51,4 +54,8 @@ public class PlayerGroup extends TemporaryPlayerTeam<PlayerGroupMember> {
 		return type;
 	}
 
+	@Override
+	protected boolean autoReleaseObjectId() {
+		return isNewId;
+	}
 }

@@ -137,4 +137,8 @@ public class PlayerAlliance extends TemporaryPlayerTeam<PlayerAllianceMember> {
 		return type;
 	}
 
+	@Override
+	protected boolean autoReleaseObjectId() {
+		return true;
+	}
 }

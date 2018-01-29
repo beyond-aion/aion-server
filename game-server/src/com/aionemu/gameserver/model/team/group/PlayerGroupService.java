@@ -37,7 +37,6 @@ import com.aionemu.gameserver.restrictions.RestrictionsManager;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.TimeUtil;
-import com.aionemu.gameserver.utils.idfactory.IDFactory;
 
 /**
  * @author ATracer
@@ -60,9 +59,6 @@ public class PlayerGroupService {
 
 	@GlobalCallback(PlayerGroupCreateCallback.class)
 	public static final PlayerGroup createGroup(Player leader, Player invited, TeamType type, int id) {
-		if (id == 0) {
-			id = IDFactory.getInstance().nextId();
-		}
 		PlayerGroup newGroup = new PlayerGroup(new PlayerGroupMember(leader), type, id);
 		groups.put(newGroup.getTeamId(), newGroup);
 		addPlayer(newGroup, leader);

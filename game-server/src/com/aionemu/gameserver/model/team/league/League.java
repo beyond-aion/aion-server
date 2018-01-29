@@ -172,4 +172,8 @@ public class League extends GeneralTeam<PlayerAlliance, LeagueMember> {
 		return captains;
 	}
 
+	@Override
+	protected boolean autoReleaseObjectId() {
+		return true;
+	}
 }
