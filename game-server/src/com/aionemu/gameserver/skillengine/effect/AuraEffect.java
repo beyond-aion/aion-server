@@ -5,12 +5,11 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
-import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_MANTRA_EFFECT;
+import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.skillengine.model.Effect;
-import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
@@ -61,14 +60,8 @@ public class AuraEffect extends EffectTemplate {
 		PacketSendUtility.broadcastPacket(effector, new SM_MANTRA_EFFECT(effector, skillId));
 	}
 
-	/**
-	 * @param effector
-	 */
 	private void applyAuraTo(Player effected) {
-		SkillTemplate template = DataManager.SKILL_DATA.getSkillTemplate(skillId);
-		Effect e = new Effect(effected, effected, template, template.getLvl(), 0);
-		e.initialize();
-		e.applyEffect();
+		SkillEngine.getInstance().applyEffect(skillId, effected, effected);
 	}
 
 	@Override

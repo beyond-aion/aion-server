@@ -26,13 +26,13 @@ import com.aionemu.gameserver.model.templates.materials.MaterialTemplate;
 public class MaterialData {
 
 	@XmlElement(name = "material")
-	protected List<MaterialTemplate> materialTemplates;
+	private List<MaterialTemplate> materialTemplates;
 
 	@XmlTransient
-	Map<Integer, MaterialTemplate> materialsById = new HashMap<>();
+	private final Map<Integer, MaterialTemplate> materialsById = new HashMap<>();
 
 	@XmlTransient
-	Set<Integer> skillIds = new HashSet<>();
+	private final Set<Integer> skillIds = new HashSet<>();
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		if (materialTemplates == null)
@@ -44,7 +44,6 @@ public class MaterialData {
 				template.getSkills().forEach(skill -> skillIds.add(skill.getId()));
 		}
 
-		materialTemplates.clear();
 		materialTemplates = null;
 	}
 

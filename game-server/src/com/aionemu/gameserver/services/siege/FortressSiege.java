@@ -328,7 +328,7 @@ public class FortressSiege extends Siege<FortressLocation> {
 			: SM_SYSTEM_MESSAGE.STR_CASTLE_WIN_BUFF_ON(winner.getL10n(), getSiegeLocation().getTemplate().getL10n(), skillL10n);
 		World.getInstance().forEachPlayer(player -> {
 			if (player.getRace().getRaceId() == winner.getRaceId()) {
-				SkillEngine.getInstance().applyEffectDirectly(skillId, player, player, 0);
+				SkillEngine.getInstance().applyEffectDirectly(skillId, player, player);
 				PacketSendUtility.sendPacket(player, notification);
 			}
 		});

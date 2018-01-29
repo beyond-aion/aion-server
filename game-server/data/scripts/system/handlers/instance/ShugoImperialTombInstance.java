@@ -194,7 +194,7 @@ public class ShugoImperialTombInstance extends GeneralInstanceHandler {
 
 			@Override
 			public void run() {
-				SkillEngine.getInstance().applyEffectDirectly(skillId, player, player, 0);
+				SkillEngine.getInstance().applyEffectDirectly(skillId, player, player);
 			}
 
 		}, 1000);

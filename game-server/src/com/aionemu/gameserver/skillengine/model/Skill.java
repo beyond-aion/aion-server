@@ -499,7 +499,7 @@ public class Skill {
 		SkillTemplate penaltyTemplate = DataManager.SKILL_DATA.getSkillTemplate(penaltySkill);
 		String stack = penaltyTemplate.getStack();
 		if (stack != null && (stack.equals("BA_N_SONGOFWARMTH_ADDEFFECT") || stack.equals("BA_N_SONGOFWIND_ADDEFFECT"))) {
-			SkillEngine.getInstance().applyEffectDirectly(penaltySkill, effector, effector, 0);
+			SkillEngine.getInstance().applyEffectDirectly(penaltySkill, effector, effector);
 			if (effector instanceof Player) {
 				int count = 1;
 				if (((Player) effector).isInTeam()) {
@@ -511,14 +511,14 @@ public class Skill {
 							continue;
 						}
 						if (PositionUtil.isInRange(effector, p, penaltyTemplate.getProperties().getEffectiveRange())) {
-							SkillEngine.getInstance().applyEffectDirectly(penaltySkill, effector, p, 0);
+							SkillEngine.getInstance().applyEffectDirectly(penaltySkill, effector, p);
 							count++;
 						}
 					}
 				}
 			}
 		} else {
-			SkillEngine.getInstance().applyEffectDirectly(penaltySkill, firstTarget, effector, 0);
+			SkillEngine.getInstance().applyEffectDirectly(penaltySkill, firstTarget, effector);
 		}
 	}
 
@@ -663,7 +663,7 @@ public class Skill {
 				if (skillGroup != null && skillGroup.equalsIgnoreCase("RI_CHARGEATTACK"))
 					count = 2;
 				for (int i = 0; i < count; i++) {
-					Effect effect = new Effect(this, effected, 0);
+					Effect effect = new Effect(this, effected);
 					if (effected instanceof Player) {
 						if (effect.getEffectResult() == EffectResult.CONFLICT)
 							blockedStance = true;
@@ -695,7 +695,7 @@ public class Skill {
 
 			// exception for point point skills(example Ice Sheet)
 			if (effectedList.isEmpty() && this.isPointPointSkill()) {
-				Effect effect = new Effect(this, null, 0);
+				Effect effect = new Effect(this, null);
 				effect.initialize();
 				effect.setWorldPosition(effector.getWorldId(), effector.getInstanceId(), x, y, z);
 				effects.add(effect);

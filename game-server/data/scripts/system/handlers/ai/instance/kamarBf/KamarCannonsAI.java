@@ -29,7 +29,7 @@ public class KamarCannonsAI extends ActionItemNpcAI {
 		switch (getOwner().getNpcId()) {
 			case 701806:
 			case 701902:
-				SkillEngine.getInstance().applyEffectDirectly(21409, player, player, 0);
+				SkillEngine.getInstance().applyEffectDirectly(21409, player, player);
 				AIActions.deleteOwner(this);
 				break;
 			case 701808:
@@ -37,7 +37,7 @@ public class KamarCannonsAI extends ActionItemNpcAI {
 				Item siegePower = player.getInventory().getFirstItemByItemId(164000262);
 				if (siegePower != null && siegePower.getItemCount() >= 1) {
 					player.getInventory().decreaseByItemId(164000262, 1);
-					SkillEngine.getInstance().applyEffectDirectly(player.getRace() == Race.ELYOS ? 21403 : 21404, player, player, 0);
+					SkillEngine.getInstance().applyEffectDirectly(player.getRace() == Race.ELYOS ? 21403 : 21404, player, player);
 					AIActions.deleteOwner(this);
 				} else
 					PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1401854));

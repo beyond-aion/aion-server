@@ -41,7 +41,7 @@ public class KromedesTrialInstance extends GeneralInstanceHandler {
 	public void onEnterInstance(Player player) {
 		skillId = player.getRace() == Race.ASMODIANS ? 19270 : 19220;
 		sendMovie(player, 453);
-		SkillEngine.getInstance().applyEffectDirectly(skillId, player, player, 0);
+		SkillEngine.getInstance().applyEffectDirectly(skillId, player, player);
 	}
 
 	@Override
@@ -128,7 +128,7 @@ public class KromedesTrialInstance extends GeneralInstanceHandler {
 			TeleportService.teleportTo(player, mapId, instanceId, 248, 244, 189);
 		else
 			TeleportService.teleportTo(player, mapId, instanceId, 686, 676, 201);
-		SkillEngine.getInstance().applyEffectDirectly(skillId, player, player, 0);
+		SkillEngine.getInstance().applyEffectDirectly(skillId, player, player);
 		return true;
 	}
 

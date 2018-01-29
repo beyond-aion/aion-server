@@ -680,7 +680,7 @@ public class EternalBastionInstance extends GeneralInstanceHandler {
 	@Override
 	public void handleUseItemFinish(Player player, Npc npc) {
 		if (npc.getNpcId() == 701625 || npc.getNpcId() == 701922) {
-			SkillEngine.getInstance().applyEffectDirectly(npc.getNpcId() == 701625 ? 21138 : 21139, player, player, 0);
+			SkillEngine.getInstance().applyEffectDirectly(npc.getNpcId() == 701625 ? 21138 : 21139, player, player);
 			npc.getController().delete();
 			switch (Rnd.get(1, 2)) {
 				case 1:

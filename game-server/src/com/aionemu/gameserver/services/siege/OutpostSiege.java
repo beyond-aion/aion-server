@@ -89,7 +89,7 @@ public class OutpostSiege extends Siege<OutpostLocation> {
 				public void accept(Player player) {
 					PacketSendUtility.sendPacket(player, asp);
 					if (player.getRace().equals(race)) {
-						SkillEngine.getInstance().applyEffectDirectly(race == Race.ELYOS ? 12120 : 12119, player, player, 0);
+						SkillEngine.getInstance().applyEffectDirectly(race == Race.ELYOS ? 12120 : 12119, player, player);
 					}
 				}
 

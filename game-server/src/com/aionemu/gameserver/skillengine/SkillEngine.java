@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.skillengine;
 
+import org.slf4j.LoggerFactory;
+
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
@@ -81,7 +83,7 @@ public class SkillEngine {
 	public Skill getSkill(Creature creature, int skillId, int skillLevel, VisibleObject firstTarget) {
 		return getSkill(creature, skillId, skillLevel, firstTarget, null, false);
 	}
-	
+
 	public Skill getSkill(Creature creature, int skillId, int skillLevel, VisibleObject firstTarget, boolean isPenalty) {
 		return getSkill(creature, skillId, skillLevel, firstTarget, null, isPenalty);
 	}
@@ -118,32 +120,37 @@ public class SkillEngine {
 		return skillEngine;
 	}
 
-	/**
-	 * This method is used to apply directly effect of given skill without checking properties, sending packets, etc Should be only used from quest
-	 * scripts, or when you are sure about it
-	 * 
-	 * @param skillId
-	 * @param effector
-	 * @param effected
-	 * @param duration
-	 *          => 0 takes duration from skill_templates, >0 forced duration
-	 */
-	public void applyEffectDirectly(int skillId, Creature effector, Creature effected, int duration) {
+	public void applyEffectDirectly(int skillId, Creature effector, Creature effected) {
 		SkillTemplate skillTemplate = DataManager.SKILL_DATA.getSkillTemplate(skillId);
-		if (skillTemplate == null)
+		if (skillTemplate == null) {
+			LoggerFactory.getLogger(SkillEngine.class).warn("Could not apply effect, invalid skill id " + skillId + " (effector: " + effector + ")");
 			return;
-		applyEffectDirectly(skillTemplate, skillTemplate.getLvl(), effector, effected, duration);
+		}
+		applyEffectDirectly(skillTemplate, skillTemplate.getLvl(), effector, effected, null);
 	}
 
 	public void applyEffectDirectly(int skillId, int lvl, Creature effector, Creature effected) {
 		SkillTemplate skillTemplate = DataManager.SKILL_DATA.getSkillTemplate(skillId);
-		if (skillTemplate == null)
+		if (skillTemplate == null) {
+			LoggerFactory.getLogger(SkillEngine.class).warn("Could not apply effect, invalid skill id " + skillId + " (effector: " + effector + ")");
 			return;
-		applyEffectDirectly(skillTemplate, lvl, effector, effected, 0);
+		}
+		applyEffectDirectly(skillTemplate, lvl, effector, effected, null);
 	}
 
-	public void applyEffectDirectly(SkillTemplate skillTemplate, int lvl, Creature effector, Creature effected, int duration) {
-		final Effect ef = new Effect(effector, effected, skillTemplate, lvl, duration, duration > 0);
+	public void applyEffectDirectly(SkillTemplate skillTemplate, int skillLevel, Creature effector, Creature effected) {
+		applyEffectDirectly(skillTemplate, skillLevel, effector, effected, null);
+	}
+
+	/**
+	 * This method is used to apply directly effect of given skill without checking properties, sending packets, etc Should be only used from quest
+	 * scripts, or when you are sure about it
+	 * 
+	 * @param duration
+	 *          - null = calculates native duration, number = uses forced duration value (0 meaning permanent)
+	 */
+	public void applyEffectDirectly(SkillTemplate skillTemplate, int skillLevel, Creature effector, Creature effected, Integer duration) {
+		Effect ef = new Effect(effector, effected, skillTemplate, skillLevel, duration);
 		ef.setIsForcedEffect(true);
 		ef.initialize();
 		ef.applyEffect();
@@ -157,11 +164,12 @@ public class SkillEngine {
 	 * @param effected
 	 */
 	public void applyEffect(int skillId, Creature effector, Creature effected) {
-		SkillTemplate st = DataManager.SKILL_DATA.getSkillTemplate(skillId);
-		if (st == null)
+		SkillTemplate skillTemplate = DataManager.SKILL_DATA.getSkillTemplate(skillId);
+		if (skillTemplate == null) {
+			LoggerFactory.getLogger(SkillEngine.class).warn("Could not apply effect, invalid skill id " + skillId + " (effector: " + effector + ")");
 			return;
-
-		final Effect ef = new Effect(effector, effected, st, st.getLvl(), 0);
+		}
+		Effect ef = new Effect(effector, effected, skillTemplate, skillTemplate.getLvl());
 		ef.initialize();
 		ef.applyEffect();
 	}

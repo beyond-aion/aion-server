@@ -141,7 +141,7 @@ public class _2002WheresRae extends AbstractQuestHandler {
 					break;
 				case 700045:
 					if (var == 11 && env.getDialogActionId() == USE_OBJECT) {
-						SkillEngine.getInstance().applyEffectDirectly(8343, player, player, 0);
+						SkillEngine.getInstance().applyEffectDirectly(8343, player, player);
 						return true;
 					}
 					return false;

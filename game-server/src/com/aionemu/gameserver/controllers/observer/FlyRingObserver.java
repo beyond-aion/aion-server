@@ -62,7 +62,7 @@ public class FlyRingObserver extends ActionObserver {
 
 		if (passedThrough) {
 			if (ring.getTemplate().getMap() == 400010000 || isQuestactive() || isInstancetactive()) {
-				Effect speedUp = new Effect(player, player, skillTemplate, skillTemplate.getLvl(), 0);
+				Effect speedUp = new Effect(player, player, skillTemplate, skillTemplate.getLvl());
 				speedUp.initialize();
 				speedUp.addAllEffectToSucess();
 				speedUp.applyEffect();

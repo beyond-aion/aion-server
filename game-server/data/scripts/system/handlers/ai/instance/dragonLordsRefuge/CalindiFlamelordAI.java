@@ -76,8 +76,8 @@ public class CalindiFlamelordAI extends AggressiveNpcAI {
 	public void onEndUseSkill(SkillTemplate skillTemplate) {
 		switch (skillTemplate.getSkillId()) {
 			case 20911:
-				SkillEngine.getInstance().applyEffectDirectly(20590, getOwner(), getOwner(), 0);
-				SkillEngine.getInstance().applyEffectDirectly(20591, getOwner(), getOwner(), 0);
+				SkillEngine.getInstance().applyEffectDirectly(20590, getOwner(), getOwner());
+				SkillEngine.getInstance().applyEffectDirectly(20591, getOwner(), getOwner());
 				spawn(730695, 482.21f, 458.06f, 427.42f, (byte) 98);
 				spawn(730696, 482.21f, 571.16f, 427.42f, (byte) 22);
 				rndSpawn();

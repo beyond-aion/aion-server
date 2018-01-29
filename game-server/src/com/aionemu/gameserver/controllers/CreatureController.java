@@ -267,10 +267,7 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 		if (id == 0)
 			return;
 
-		SkillTemplate template = DataManager.SKILL_DATA.getSkillTemplate(id);
-		Effect e = new Effect(attacker, getOwner(), template, template.getLvl(), 0);
-		e.initialize();
-		e.applyEffect();
+		SkillEngine.getInstance().applyEffect(id, attacker, getOwner());
 	}
 
 	private void calculateGodStoneEffects(Player attacker) {
@@ -297,7 +294,7 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 			if (!skill.canUseSkill(CastState.CAST_START))
 				return;
 			PacketSendUtility.sendPacket(attacker, SM_SYSTEM_MESSAGE.STR_SKILL_PROC_EFFECT_OCCURRED(skill.getSkillTemplate().getL10n()));
-			Effect effect = new Effect(skill, getOwner(), 0);
+			Effect effect = new Effect(skill, getOwner());
 			effect.initialize();
 			effect.applyEffect();
 			// Illusion Godstones

@@ -39,7 +39,7 @@ public class HyperionAI extends AggressiveNpcAI {
 	protected void handleSpawned() {
 		super.handleSpawned();
 		addPercent();
-		SkillEngine.getInstance().applyEffectDirectly(21254, getOwner(), getOwner(), 0);
+		SkillEngine.getInstance().applyEffectDirectly(21254, getOwner(), getOwner());
 	}
 
 	@Override

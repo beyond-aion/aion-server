@@ -6,9 +6,8 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
 import com.aionemu.commons.utils.Rnd;
-import com.aionemu.gameserver.dataholders.DataManager;
+import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.skillengine.model.Effect;
-import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 
 /**
  * @author ATracer
@@ -42,10 +41,7 @@ public class CarveSignetEffect extends DamageEffect {
 		if (placedSignet != null)
 			placedSignet.endEffect();
 
-		SkillTemplate template = DataManager.SKILL_DATA.getSkillTemplate(signetid + nextSignetLevel - 1);
-		Effect newEffect = new Effect(effect.getEffector(), effect.getEffected(), template, nextSignetLevel, 0);
-		newEffect.initialize();
-		newEffect.applyEffect();
+		SkillEngine.getInstance().applyEffect(signetid + nextSignetLevel - 1, effect.getEffector(), effect.getEffected());
 	}
 
 	@Override

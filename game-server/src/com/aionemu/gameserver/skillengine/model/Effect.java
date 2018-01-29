@@ -46,7 +46,7 @@ public class Effect implements StatOwner {
 	private final SkillTemplate skillTemplate;
 	private Skill skill;
 	private int skillLevel;
-	private int duration;
+	private Integer duration;
 	private long endTime;
 	private PeriodicActions periodicActions;
 	private SkillMoveType skillMoveType = SkillMoveType.DEFAULT;
@@ -112,11 +112,6 @@ public class Effect implements StatOwner {
 	private float x, y, z;
 	private int worldId, instanceId;
 
-	/**
-	 * used to force duration, you should be very careful when to use it
-	 */
-	private final boolean forcedDuration;
-
 	private boolean isForcedEffect = false;
 
 	/**
@@ -132,25 +127,27 @@ public class Effect implements StatOwner {
 
 	private boolean endedByTime = false;
 
-	public Effect(Creature effector, Creature effected, SkillTemplate skillTemplate, int skillLevel, int duration) {
-		this(effector, effected, skillTemplate, skillLevel, duration, false);
+	public Effect(Skill skill, Creature effected) {
+		this(skill.getEffector(), effected, skill.getSkillTemplate(), skill.getSkillLevel(), null);
+		this.skill = skill;
 	}
 
-	public Effect(Creature effector, Creature effected, SkillTemplate skillTemplate, int skillLevel, int duration, boolean forcedDuration) {
+	public Effect(Creature effector, Creature effected, SkillTemplate skillTemplate, int skillLevel) {
+		this(effector, effected, skillTemplate, skillLevel, null);
+	}
+
+	/**
+	 * If duration is null, it will be calculated upon execution, else the forced value will be used.
+	 */
+	public Effect(Creature effector, Creature effected, SkillTemplate skillTemplate, int skillLevel, Integer duration) {
 		this.effector = effector;
 		this.effected = effected;
 		this.skillTemplate = skillTemplate;
 		this.skillLevel = skillLevel;
 		this.duration = duration;
-		this.forcedDuration = forcedDuration;
 		this.periodicActions = skillTemplate.getPeriodicActions();
 
 		this.power = initializePower();
-	}
-
-	public Effect(Skill skill, Creature effected, int duration) {
-		this(skill.getEffector(), effected, skill.getSkillTemplate(), skill.getSkillLevel(), duration);
-		this.skill = skill;
 	}
 
 	public void setWorldPosition(int worldId, int instanceId, float x, float y, float z) {
@@ -210,7 +207,7 @@ public class Effect implements StatOwner {
 	}
 
 	public int getDuration() {
-		return duration;
+		return duration == null ? 0 : duration;
 	}
 
 	/**
@@ -528,8 +525,8 @@ public class Effect implements StatOwner {
 		this.isForcedEffect = isForcedEffect;
 	}
 
-	public boolean getIsForcedEffect() {
-		return this.isForcedEffect || DataManager.MATERIAL_DATA.isMaterialSkill(this.getSkillId());
+	public boolean isForcedEffect() {
+		return isForcedEffect || DataManager.MATERIAL_DATA.isMaterialSkill(getSkillId());
 	}
 
 	public boolean isPhysicalEffect() {
@@ -644,7 +641,7 @@ public class Effect implements StatOwner {
 	 * Start effect which includes: - start effect defined in template - start subeffect if possible - activate toggle skill if needed - schedule end of
 	 * effect
 	 */
-	public void startEffect(boolean restored) {
+	public void startEffect() {
 		synchronized (this) {
 			if (hasEnded.get()) // multiple concurrent skill casts can end each others effects by conflict
 				return;
@@ -659,12 +656,14 @@ public class Effect implements StatOwner {
 				checkCancelOnDmg();
 			}
 
-			if (isToggle()) {
-				if (effector instanceof Player)
-					activateToggleSkill();
-				duration = skillTemplate.getToggleTimer();
-			} else if (!restored && !forcedDuration) {
-				duration = getEffectsDuration();
+			if (duration == null) {
+				if (isToggle()) {
+					if (effector instanceof Player)
+						activateToggleSkill();
+					duration = skillTemplate.getToggleTimer();
+				} else {
+					duration = calculateEffectsDuration();
+				}
 			}
 			if (duration == 0)
 				return;
@@ -758,6 +757,8 @@ public class Effect implements StatOwner {
 	}
 
 	public int getRemainingTimeToDisplay() {
+		if (getDuration() == 0) // permanent effect (or not yet started, should not happen)
+			return -1;
 		if (duration >= 86400000 && effected instanceof Npc) // >= 24h
 			return -1;
 		long remainingTimeMillis = getRemainingTimeMillis();
@@ -767,7 +768,7 @@ public class Effect implements StatOwner {
 	public boolean canSaveOnLogout() {
 		if (skillTemplate.isNoSaveOnLogout())
 			return false;
-		if (duration == 0) // effects with duration 0 are permanent (such as passive or most toggle skills)
+		if (getDuration() == 0) // permanent effect, such as toggle or passive skill (or not yet started, should not happen)
 			return false;
 		if (duration >= 86400000) // effects with duration >= 24h are event or instance related
 			return false;
@@ -905,7 +906,7 @@ public class Effect implements StatOwner {
 		}
 	}
 
-	public int getEffectsDuration() {
+	private int calculateEffectsDuration() {
 		long duration = calculateTemplateDuration();
 
 		// adjust with pvp duration (not sure why some self target skills have pvp duration o.O idk how to handle that)

@@ -145,7 +145,7 @@ public class _28602IntotheUnknown extends AbstractQuestHandler {
 					}
 				} else if (env.getDialogActionId() == SETPRO3) {
 					if (!player.getEffectController().hasAbnormalEffect(19288)) {
-						SkillEngine.getInstance().applyEffectDirectly(19288, player, player, 0); // Rage of Kromede
+						SkillEngine.getInstance().applyEffectDirectly(19288, player, player); // Rage of Kromede
 					}
 					return defaultCloseDialog(env, 2, 3);
 				}

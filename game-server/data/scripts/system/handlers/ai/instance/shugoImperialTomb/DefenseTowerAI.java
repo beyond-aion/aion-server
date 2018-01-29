@@ -38,17 +38,17 @@ public class DefenseTowerAI extends AggressiveNpcAI {
 
 	private void checkPercentage(int hpPercentage) {
 		if (hpPercentage > 50 && hpPercentage <= 100)
-			SkillEngine.getInstance().applyEffectDirectly(21097, getOwner(), getOwner(), 0);
+			SkillEngine.getInstance().applyEffectDirectly(21097, getOwner(), getOwner());
 		if (hpPercentage > 25 && hpPercentage <= 50)
-			SkillEngine.getInstance().applyEffectDirectly(21098, getOwner(), getOwner(), 0);
+			SkillEngine.getInstance().applyEffectDirectly(21098, getOwner(), getOwner());
 		if (hpPercentage >= 0 && hpPercentage <= 25)
-			SkillEngine.getInstance().applyEffectDirectly(21099, getOwner(), getOwner(), 0);
+			SkillEngine.getInstance().applyEffectDirectly(21099, getOwner(), getOwner());
 	}
 
 	@Override
 	protected void handleSpawned() {
 		super.handleSpawned();
-		SkillEngine.getInstance().applyEffectDirectly(21097, getOwner(), getOwner(), 0);
+		SkillEngine.getInstance().applyEffectDirectly(21097, getOwner(), getOwner());
 		task = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
 
 			@Override

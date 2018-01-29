@@ -10,8 +10,6 @@ import com.aionemu.gameserver.model.gameobjects.player.RequestResponseHandler;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUESTION_WINDOW;
 import com.aionemu.gameserver.services.RespawnService;
 import com.aionemu.gameserver.services.drop.DropRegistrationService;
-import com.aionemu.gameserver.skillengine.model.Effect;
-import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
@@ -58,16 +56,6 @@ public class AIActions {
 
 	public static void useSkill(AbstractAI<? extends Creature> ai, int skillId) {
 		ai.getOwner().getController().useSkill(skillId);
-	}
-
-	/**
-	 * Effect will be created and applied to target with 100% success
-	 */
-	public static void applyEffect(AbstractAI<? extends Creature> ai, SkillTemplate template, Creature target) {
-		Effect effect = new Effect(ai.getOwner(), target, template, template.getLvl(), 0);
-		effect.setIsForcedEffect(true);
-		effect.initialize();
-		effect.applyEffect();
 	}
 
 	public static void targetSelf(AbstractAI<? extends Creature> ai) {

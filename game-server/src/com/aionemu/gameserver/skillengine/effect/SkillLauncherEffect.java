@@ -5,9 +5,8 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
-import com.aionemu.gameserver.dataholders.DataManager;
+import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.skillengine.model.Effect;
-import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 
 /**
  * @author ATracer
@@ -21,18 +20,11 @@ public class SkillLauncherEffect extends EffectTemplate {
 
 	@Override
 	public void applyEffect(Effect effect) {
-		SkillTemplate template = DataManager.SKILL_DATA.getSkillTemplate(skillId);
-		Effect e = new Effect(effect.getEffector(), effect.getEffected(), template, template.getLvl(), 0);
-		e.initialize();
-		e.applyEffect();
+		SkillEngine.getInstance().applyEffect(skillId, effect.getEffector(), effect.getEffected());
 	}
 
 	@Override
 	public void calculate(Effect effect) {
 		effect.addSucessEffect(this);
-	}
-
-	public int getLaunchSkillId() {
-		return skillId;
 	}
 }

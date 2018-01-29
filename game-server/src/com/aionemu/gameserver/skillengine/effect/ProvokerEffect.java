@@ -145,7 +145,7 @@ public class ProvokerEffect extends ShieldEffect {
 			PacketSendUtility.sendPacket((Player) effector,
 				SM_SYSTEM_MESSAGE.STR_SKILL_PROC_EFFECT_OCCURRED(DataManager.SKILL_DATA.getSkillTemplate(skillId).getL10n()));
 		}
-		SkillEngine.getInstance().applyEffectDirectly(skillId, effector, target, 0);
+		SkillEngine.getInstance().applyEffectDirectly(skillId, effector, target);
 	}
 
 	/**

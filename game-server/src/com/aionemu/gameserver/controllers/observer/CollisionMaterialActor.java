@@ -84,7 +84,7 @@ public class CollisionMaterialActor extends AbstractCollisionObserver implements
 					if (player.isStaff())
 						PacketSendUtility.sendMessage(player, "Use skill=" + skill.getId());
 				}
-				SkillEngine.getInstance().applyEffectDirectly(skill.getId(), creature, creature, 0);
+				SkillEngine.getInstance().applyEffectDirectly(skill.getId(), skill.getSkillLevel(), creature, creature);
 			}, 0, (long) (skill.getFrequency() * 1000));
 			creature.getController().addTask(TaskId.MATERIAL_ACTION, task);
 		}

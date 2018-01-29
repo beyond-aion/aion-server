@@ -9,6 +9,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SKILL_LIST;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SKILL_REMOVE;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.skillengine.model.SkillLearnTemplate;
+import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
@@ -22,8 +23,9 @@ public class SkillLearnService {
 		if (player.getEffectController() != null) { // null on character creation
 			if (player.isSpawned())
 				sendPacket(player, skill, isNew);
-			if (DataManager.SKILL_DATA.getSkillTemplate(skillId).isPassive())
-				SkillEngine.getInstance().applyEffectDirectly(skillId, skillLevel, player, player);
+			SkillTemplate skillTemplate = DataManager.SKILL_DATA.getSkillTemplate(skillId);
+			if (skillTemplate.isPassive())
+				SkillEngine.getInstance().applyEffectDirectly(skillTemplate, skillLevel, player, player);
 			if (skill.isProfessionSkill() && (skill.getSkillLevel() == 399 || skill.getSkillLevel() == 499))
 				player.getController().updateNearbyQuests();
 		}

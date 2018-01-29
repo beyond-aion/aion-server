@@ -99,9 +99,8 @@ public class NochsanaEvent extends GameEvent {
 	private void applyBuffs(Player player) {
 		if (checkBuffCondition(player)) {
 			for (CustomBase base : bases) {
-				if (base.getOwner() == player.getRace()) {
-					SkillEngine.getInstance().applyEffectDirectly(base.getBuffId(), player, player, 0);
-				}
+				if (base.getOwner() == player.getRace())
+					SkillEngine.getInstance().applyEffectDirectly(base.getBuffId(), player, player);
 			}
 		}
 	}
@@ -190,7 +189,7 @@ public class NochsanaEvent extends GameEvent {
 
 		for (Player player : this.getPlayerByRace(this.defender == Race.ELYOS ? Race.ASMODIANS : Race.ELYOS)) {
 			if (winner != this.defender) {
-				SkillEngine.getInstance().applyEffectDirectly(base.getBuffId(), player, player, 0);
+				SkillEngine.getInstance().applyEffectDirectly(base.getBuffId(), player, player);
 			} else {
 				player.getEffectController().removeEffect(base.getBuffId());
 			}

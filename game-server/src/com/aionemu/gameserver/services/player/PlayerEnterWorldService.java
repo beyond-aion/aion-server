@@ -508,7 +508,7 @@ public final class PlayerEnterWorldService {
 		for (PlayerSkillEntry skillEntry : player.getSkillList().getAllSkills()) {
 			SkillTemplate skillTemplate = DataManager.SKILL_DATA.getSkillTemplate(skillEntry.getSkillId());
 			if (skillTemplate.isPassive())
-				SkillEngine.getInstance().applyEffectDirectly(skillTemplate, skillEntry.getSkillLevel(), player, player, 0);
+				SkillEngine.getInstance().applyEffectDirectly(skillTemplate, skillEntry.getSkillLevel(), player, player);
 		}
 	}
 

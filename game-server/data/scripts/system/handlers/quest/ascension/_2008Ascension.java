@@ -224,7 +224,7 @@ public class _2008Ascension extends AbstractQuestHandler {
 				switch (env.getDialogActionId()) {
 					case QUEST_SELECT:
 						if (var == 99) {
-							SkillEngine.getInstance().applyEffectDirectly(257, player, player, 0);
+							SkillEngine.getInstance().applyEffectDirectly(257, player, player);
 							player.setState(CreatureState.FLYING);
 							player.unsetState(CreatureState.ACTIVE);
 							player.setFlightTeleportId(3001);

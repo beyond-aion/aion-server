@@ -43,7 +43,7 @@ public class RukibukiCircusTroupeInstance extends GeneralInstanceHandler {
 
 			@Override
 			public void run() {
-				SkillEngine.getInstance().applyEffectDirectly(player.getRace() == Race.ELYOS ? 21329 : 21332, player, player, 0);
+				SkillEngine.getInstance().applyEffectDirectly(player.getRace() == Race.ELYOS ? 21329 : 21332, player, player);
 
 			}
 		}, 1000);

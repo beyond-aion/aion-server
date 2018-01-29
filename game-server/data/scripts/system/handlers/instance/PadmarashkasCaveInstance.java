@@ -61,7 +61,7 @@ public class PadmarashkasCaveInstance extends GeneralInstanceHandler {
 				if (killedEggs.incrementAndGet() == 20) { // TODO: find value
 					final Npc padmarashka = getNpc(218756);
 					if (padmarashka != null && !padmarashka.isDead()) {
-						SkillEngine.getInstance().applyEffectDirectly(20101, padmarashka, padmarashka, 0);
+						SkillEngine.getInstance().applyEffectDirectly(20101, padmarashka, padmarashka);
 					}
 				}
 				break;

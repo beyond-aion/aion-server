@@ -36,7 +36,7 @@ public class CalindiSurkanaAI extends NpcAI {
 			@Override
 			public void run() {
 				PacketSendUtility.broadcastToMap(getOwner(), 1401543);
-				SkillEngine.getInstance().applyEffectDirectly(20891, getOwner(), calindi, 0);
+				SkillEngine.getInstance().applyEffectDirectly(20891, getOwner(), calindi);
 			}
 		}, 3000, 10000);
 	}

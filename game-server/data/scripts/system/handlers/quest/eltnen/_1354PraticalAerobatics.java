@@ -125,7 +125,7 @@ public class _1354PraticalAerobatics extends AbstractQuestHandler {
 	private void applyFlightRingEffect(QuestEnv env) {
 		Player player = env.getPlayer();
 		player.getLifeStats().increaseFp(TYPE.FP_RINGS, 7, 0, LOG.REGULAR);
-		SkillEngine.getInstance().applyEffectDirectly(1856, player, player, 0);
+		SkillEngine.getInstance().applyEffectDirectly(1856, player, player);
 	}
 
 }

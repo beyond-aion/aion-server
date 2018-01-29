@@ -74,8 +74,8 @@ public class IdeResonatorAI extends NpcAI {
 					secondBuff = 21416;
 				}
 				if (secondBuff != 0) {
-					SkillEngine.getInstance().applyEffectDirectly(secondBuff, getOwner(), hyperion, 0);
-					SkillEngine.getInstance().applyEffectDirectly(21371, getOwner(), getOwner(), 0);
+					SkillEngine.getInstance().applyEffectDirectly(secondBuff, getOwner(), hyperion);
+					SkillEngine.getInstance().applyEffectDirectly(21371, getOwner(), getOwner());
 				}
 			}
 		}, 30000);

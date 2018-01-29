@@ -305,7 +305,7 @@ public abstract class EffectTemplate {
 		}
 
 		// dont check for forced effect
-		if (effect.getIsForcedEffect()) {
+		if (effect.isForcedEffect()) {
 			this.addSuccessEffect(effect, spellStatus);
 			calculateDamage(effect);
 			return true;
@@ -473,9 +473,9 @@ public abstract class EffectTemplate {
 		int level = 1;
 		if (subEffect.isAddEffect())
 			level = effect.getSignetBurstedCount();
-		Effect newEffect = new Effect(effect.getEffector(), effect.getOriginalEffected(), template, level, 0);
+		Effect newEffect = new Effect(effect.getEffector(), effect.getOriginalEffected(), template, level);
 		newEffect.setShieldDefense(effect.getShieldDefense());
-		newEffect.setIsForcedEffect(effect.getIsForcedEffect());
+		newEffect.setIsForcedEffect(effect.isForcedEffect());
 		newEffect.setAccModBoost(effect.getAccModBoost());
 		newEffect.initialize();
 		if (newEffect.getSpellStatus() != SpellStatus.DODGE && newEffect.getSpellStatus() != SpellStatus.RESIST)

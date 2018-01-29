@@ -46,7 +46,7 @@ public class SiegeCannonAI extends ActionItemNpcAI {
 			if (gen != null && gen.getItemCount() >= 1) {
 				int buffId = getOwner().getTribe() == TribeClass.IDF5_TD_WEAPON_PC ? 21138 : 21139;
 				player.getInventory().decreaseByItemId(185000136, 1);
-				SkillEngine.getInstance().applyEffectDirectly(buffId, player, player, 0);
+				SkillEngine.getInstance().applyEffectDirectly(buffId, player, player);
 				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 0));
 				AIActions.deleteOwner(this);
 			} else {
@@ -56,7 +56,7 @@ public class SiegeCannonAI extends ActionItemNpcAI {
 		} else {
 			if (key != null && key.getItemCount() >= 1) {
 				player.getInventory().decreaseByItemId(185000137, 1);
-				SkillEngine.getInstance().applyEffectDirectly(21141, player, player, 0);
+				SkillEngine.getInstance().applyEffectDirectly(21141, player, player);
 				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 0));
 				AIActions.deleteOwner(this);
 			} else {

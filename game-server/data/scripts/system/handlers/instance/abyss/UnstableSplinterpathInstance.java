@@ -98,7 +98,7 @@ public class UnstableSplinterpathInstance extends GeneralInstanceHandler {
 				deleteNpcs(instance.getNpcs(219586)); // Ex 219974
 				spawn(730317, 328.476f, 762.585f, 197.479f, (byte) 90); // Exit
 				for (Player p : instance.getPlayersInside())
-					SkillEngine.getInstance().applyEffectDirectly(19283, p, p, 0);
+					SkillEngine.getInstance().applyEffectDirectly(19283, p, p);
 				break;
 			case 701588: // HugeAetherFragment
 				destroyedFragments++;

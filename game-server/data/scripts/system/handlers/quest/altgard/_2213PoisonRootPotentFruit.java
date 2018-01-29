@@ -74,7 +74,7 @@ public class _2213PoisonRootPotentFruit extends AbstractQuestHandler {
 	@Override
 	public boolean onGetItemEvent(QuestEnv env) {
 		final Player player = env.getPlayer();
-		SkillEngine.getInstance().applyEffectDirectly(255, player, player, 0); // Add Okaru Log Poison effect [ID: 255]
+		SkillEngine.getInstance().applyEffectDirectly(255, player, player); // Add Okaru Log Poison effect [ID: 255]
 		return defaultOnGetItemEvent(env, 0, 1, false); // 1
 	}
 }

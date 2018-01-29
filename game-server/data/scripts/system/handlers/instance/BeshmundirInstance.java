@@ -67,13 +67,13 @@ public class BeshmundirInstance extends GeneralInstanceHandler {
 				int killedCount = macunbello.getAndSet(0);
 				if (killedCount < 12) {
 					npcMacunbello = (Npc) spawn(216735, 981.015015f, 134.373001f, 241.755005f, (byte) 30); // strongest macunbello
-					SkillEngine.getInstance().applyEffectDirectly(19046, npcMacunbello, npcMacunbello, 0);
+					SkillEngine.getInstance().applyEffectDirectly(19046, npcMacunbello, npcMacunbello);
 				} else if (killedCount < 14) {
 					npcMacunbello = (Npc) spawn(216734, 981.015015f, 134.373001f, 241.755005f, (byte) 30); // 2nd strongest macunbello
-					SkillEngine.getInstance().applyEffectDirectly(19047, npcMacunbello, npcMacunbello, 0);
+					SkillEngine.getInstance().applyEffectDirectly(19047, npcMacunbello, npcMacunbello);
 				} else if (killedCount < 21) {
 					npcMacunbello = (Npc) spawn(216737, 981.015015f, 134.373001f, 241.755005f, (byte) 30); // 2nd weakest macunbello
-					SkillEngine.getInstance().applyEffectDirectly(19048, npcMacunbello, npcMacunbello, 0);
+					SkillEngine.getInstance().applyEffectDirectly(19048, npcMacunbello, npcMacunbello);
 				} else {
 					spawn(216245, 981.015015f, 134.373001f, 241.755005f, (byte) 30); // weakest macunbello
 				}

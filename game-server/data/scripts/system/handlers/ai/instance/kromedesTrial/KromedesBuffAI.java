@@ -24,22 +24,22 @@ public class KromedesBuffAI extends ActionItemNpcAI {
 	protected void handleUseItemFinish(Player player) {
 		switch (getNpcId()) {
 			case 730336:
-				SkillEngine.getInstance().applyEffectDirectly(19216, player, player, 0);
-				PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1400655));
+				SkillEngine.getInstance().applyEffectDirectly(19216, player, player);
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_IDCROMEDE_BUFF_01());
 				break;
 			case 730337:
-				SkillEngine.getInstance().applyEffectDirectly(19217, player, player, 0);
-				PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1400656));
+				SkillEngine.getInstance().applyEffectDirectly(19217, player, player);
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_IDCROMEDE_BUFF_02());
 				AIActions.deleteOwner(this);
 				break;
 			case 730338:
-				SkillEngine.getInstance().applyEffectDirectly(19218, player, player, 0);
-				PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1400657));
+				SkillEngine.getInstance().applyEffectDirectly(19218, player, player);
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_IDCROMEDE_BUFF_03());
 				AIActions.deleteOwner(this);
 				break;
 			case 730339:
-				SkillEngine.getInstance().applyEffectDirectly(19219, player, player, 0);
-				PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1400658));
+				SkillEngine.getInstance().applyEffectDirectly(19219, player, player);
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_IDCROMEDE_BUFF_04());
 				break;
 		}
 	}

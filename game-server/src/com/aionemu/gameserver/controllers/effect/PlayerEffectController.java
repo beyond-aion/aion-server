@@ -29,7 +29,7 @@ public class PlayerEffectController extends EffectController {
 
 	@Override
 	public void addEffect(Effect effect) {
-		if (checkDuelCondition(effect) && !effect.getIsForcedEffect())
+		if (checkDuelCondition(effect) && !effect.isForcedEffect())
 			return;
 		super.addEffect(effect);
 		updatePlayerIconsAndGroup(effect);
@@ -117,7 +117,7 @@ public class PlayerEffectController extends EffectController {
 			lock.writeLock().unlock();
 		}
 		effect.addAllEffectToSucess();
-		effect.startEffect(true);
+		effect.startEffect();
 
 		if (effect.getSkillTemplate().getTargetSlot() != SkillTargetSlot.NOSHOW)
 			PacketSendUtility.sendPacket(getOwner(), new SM_ABNORMAL_STATE(Collections.singletonList(effect), abnormals, SkillTargetSlot.FULLSLOTS));

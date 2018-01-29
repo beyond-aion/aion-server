@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.skillengine.effect;
 
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -41,14 +43,15 @@ public class CondSkillLauncherEffect extends EffectTemplate {
 	public void startEffect(final Effect effect) {
 		ActionObserver observer = new ActionObserver(ObserverType.HP_CHANGED) {
 
+			private final AtomicBoolean isHpBelowThreshold = new AtomicBoolean();
+
 			@Override
 			public void hpChanged(int hpValue) {
 				if (hpValue <= (int) (value / 100f * effect.getEffected().getLifeStats().getMaxHp())) {
-					if (!effect.getEffected().getEffectController().hasAbnormalEffect(skillId)) {
-						SkillEngine.getInstance().applyEffectDirectly(skillId, effect.getEffected(), effect.getEffected(), 86400000);
-					}
+					if (!isHpBelowThreshold.getAndSet(true))
+						SkillEngine.getInstance().applyEffectDirectly(skillId, effect.getEffected(), effect.getEffected());
 				} else {
-					effect.getEffected().getEffectController().removeEffect(skillId);
+					isHpBelowThreshold.compareAndSet(true, false);
 				}
 			}
 		};
