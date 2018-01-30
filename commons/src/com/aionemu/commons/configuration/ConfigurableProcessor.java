@@ -166,6 +166,10 @@ public class ConfigurableProcessor {
 			value = "";
 		}
 
+		return transformValueToFieldType(field, value);
+	}
+
+	public static Object transformValueToFieldType(Field field, String value) throws TransformationException {
 		Class<?> cls = field.getType();
 		Type[] genericTypeArgs = {};
 		if (field.getGenericType() instanceof ParameterizedType)

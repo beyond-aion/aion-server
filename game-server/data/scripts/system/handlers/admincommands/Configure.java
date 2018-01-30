@@ -9,8 +9,7 @@ import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 
-import com.aionemu.commons.configuration.PropertyTransformer;
-import com.aionemu.commons.configuration.PropertyTransformerFactory;
+import com.aionemu.commons.configuration.ConfigurableProcessor;
 import com.aionemu.commons.configuration.TransformationException;
 import com.aionemu.gameserver.configs.administration.AdminConfig;
 import com.aionemu.gameserver.configs.administration.DeveloperConfig;
@@ -111,20 +110,18 @@ public class Configure extends AdminCommand {
 			}
 			String fieldName = params[1].toUpperCase();
 			try {
-				Field property = cls.getDeclaredField(fieldName);
-				String value = getFieldValue(property);
+				Field field = cls.getDeclaredField(fieldName);
+				String value = getFieldValue(field);
 				if (params.length > 2) {
 					String newValue = StringUtils.join(params, ' ', 2, params.length);
-					Class<?> classType = property.getType();
-					PropertyTransformer<?> pt = PropertyTransformerFactory.getTransformer(classType);
 					try {
-						property.set(null, pt.transform(newValue, property));
+						field.set(null, ConfigurableProcessor.transformValueToFieldType(field, newValue));
 					} catch (TransformationException e) {
 						sendInfo(admin, "The new value could not be set: " + e.getCause().getMessage());
 						return;
 					}
 					sendInfo(admin,
-						"The value of " + cls.getSimpleName() + "." + fieldName + " has been changed from " + value + " to " + getFieldValue(property));
+						"The value of " + cls.getSimpleName() + "." + fieldName + " has been changed from " + value + " to " + getFieldValue(field));
 				} else {
 					sendInfo(admin, "The current value of " + cls.getSimpleName() + "." + fieldName + " is " + value);
 				}
