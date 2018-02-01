@@ -1,8 +1,9 @@
 package com.aionemu.gameserver.model.vortex;
 
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.aionemu.gameserver.controllers.RVController;
 import com.aionemu.gameserver.model.Race;
@@ -10,9 +11,6 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Kisk;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.templates.vortex.HomePoint;
-import com.aionemu.gameserver.model.templates.vortex.ResurrectionPoint;
-import com.aionemu.gameserver.model.templates.vortex.StartPoint;
 import com.aionemu.gameserver.model.templates.vortex.VortexTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.vortex.DimensionalVortex;
@@ -28,33 +26,17 @@ import com.aionemu.gameserver.world.zone.handler.ZoneHandler;
  */
 public class VortexLocation implements ZoneHandler {
 
-	protected boolean isActive;
-	protected DimensionalVortex<VortexLocation> activeVortex;
-	protected RVController vortexController;
-	protected VortexTemplate template;
-	protected int id;
-	protected Race offenceRace;
-	protected Race defendsRace;
-	protected List<InvasionZoneInstance> zones;
-	protected LinkedHashMap<Integer, Player> players = new LinkedHashMap<>();
-	protected LinkedHashMap<Integer, Kisk> kisks = new LinkedHashMap<>();
+	private boolean isActive;
+	private DimensionalVortex<VortexLocation> activeVortex;
+	private RVController vortexController;
+	private final VortexTemplate template;
+	private final List<InvasionZoneInstance> zones = new ArrayList<>();
+	private final Map<Integer, Player> players = new HashMap<>();
+	private final Map<Integer, Kisk> kisks = new HashMap<>();
 	private final List<VisibleObject> spawned = new ArrayList<>();
-	protected HomePoint home;
-	protected ResurrectionPoint resurrection;
-	protected StartPoint start;
-
-	public VortexLocation() {
-	}
 
 	public VortexLocation(VortexTemplate template) {
 		this.template = template;
-		this.id = template.getId();
-		this.offenceRace = template.getInvadersRace();
-		this.defendsRace = template.getDefendersRace();
-		this.zones = new ArrayList<>();
-		this.home = template.getHomePoint();
-		this.resurrection = template.getResurrectionPoint();
-		this.start = template.getStartPoint();
 	}
 
 	public boolean isActive() {
@@ -83,46 +65,46 @@ public class VortexLocation implements ZoneHandler {
 	}
 
 	public WorldPosition getHomePoint() {
-		return home.getHomePoint();
+		return template.getHomePoint().getHomePoint();
 	}
 
 	public WorldPosition getResurrectionPoint() {
-		return resurrection.getResurrectionPoint();
+		return template.getResurrectionPoint().getResurrectionPoint();
 	}
 
 	public WorldPosition getStartPoint() {
-		return start.getStartPoint();
+		return template.getStartPoint().getStartPoint();
 	}
 
 	public int getId() {
-		return id;
+		return template.getId();
 	}
 
 	public Race getDefendersRace() {
-		return defendsRace;
+		return template.getDefendersRace();
 	}
 
 	public Race getInvadersRace() {
-		return offenceRace;
+		return template.getInvadersRace();
 	}
 
 	public int getHomeWorldId() {
-		return home.getWorldId();
+		return template.getHomePoint().getWorldId();
 	}
 
 	public int getInvasionWorldId() {
-		return start.getWorldId();
+		return template.getStartPoint().getWorldId();
 	}
 
 	public List<VisibleObject> getSpawned() {
 		return spawned;
 	}
 
-	public LinkedHashMap<Integer, Player> getPlayers() {
+	public Map<Integer, Player> getPlayers() {
 		return players;
 	}
 
-	public LinkedHashMap<Integer, Kisk> getInvadersKisks() {
+	public Map<Integer, Kisk> getInvadersKisks() {
 		return kisks;
 	}
 
@@ -199,28 +181,18 @@ public class VortexLocation implements ZoneHandler {
 							PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(904305));
 
 							// start kick timer
-							ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-								@Override
-								public void run() {
-									if (player.isOnline() && !isInsideActiveVotrex(player)) {
-										getActiveVortex().kickPlayer(player, true);
-									}
+							ThreadPoolManager.getInstance().schedule(() -> {
+								if (player.isOnline() && !isInsideActiveVotrex(player)) {
+									getActiveVortex().kickPlayer(player, true);
 								}
-
 							}, 10 * 1000);
 						}
 					} else {
 						// start kick timer
-						ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-							@Override
-							public void run() {
-								if (player.isOnline() && !isInsideActiveVotrex(player)) {
-									getActiveVortex().kickPlayer(player, false);
-								}
+						ThreadPoolManager.getInstance().schedule(() -> {
+							if (player.isOnline() && !isInsideActiveVotrex(player)) {
+								getActiveVortex().kickPlayer(player, false);
 							}
-
 						}, 10 * 1000);
 					}
 				}

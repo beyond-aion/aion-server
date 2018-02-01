@@ -1,7 +1,10 @@
 package com.aionemu.gameserver.services.vortex;
 
-import java.util.LinkedHashMap;
+import java.util.Arrays;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
+import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.model.gameobjects.Kisk;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -22,8 +25,8 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 public class Invasion extends DimensionalVortex<VortexLocation> {
 
-	private final Map<Integer, Player> invaders = new LinkedHashMap<>();
-	private final Map<Integer, Player> defenders = new LinkedHashMap<>();
+	private final Map<Integer, Player> invaders = new ConcurrentHashMap<>();
+	private final Map<Integer, Player> defenders = new ConcurrentHashMap<>();
 	private PlayerAlliance invAlliance, defAlliance;
 
 	public Invasion(VortexLocation vortex) {
@@ -62,27 +65,24 @@ public class Invasion extends DimensionalVortex<VortexLocation> {
 
 		if (alliance != null && !alliance.isDisbanded()) {
 			PlayerAllianceService.addPlayer(alliance, player);
-		} else if (!list.isEmpty()) {
-			Player first = null;
-
-			for (Player firstOne : list.values()) {
-				if (firstOne.isInGroup()) {
-					PlayerGroupService.removePlayer(firstOne);
-				} else if (firstOne.isInAlliance()) {
-					PlayerAllianceService.removePlayer(firstOne);
+		} else if (list.size() == 1) { // create alliance once two players participate in this invasion
+			Player otherPlayer = list.get(0);
+			for (Player p : Arrays.asList(player, otherPlayer)) {
+				if (p.isInGroup()) {
+					PlayerGroupService.removePlayer(p);
+				} else if (p.isInAlliance()) {
+					PlayerAllianceService.removePlayer(p);
 				}
-				first = firstOne;
 			}
 
-			if (player.equals(first)) {
-				if (isInvader) {
-					invAlliance = PlayerAllianceService.createAlliance(first, player, TeamType.ALLIANCE_OFFENCE);
-				} else {
-					defAlliance = PlayerAllianceService.createAlliance(first, player, TeamType.ALLIANCE_DEFENCE);
-				}
-			} else {
-				kickPlayer(player, isInvader);
-			}
+			if (isInvader)
+				invAlliance = PlayerAllianceService.createAlliance(otherPlayer, player, TeamType.ALLIANCE_OFFENCE);
+			else
+				defAlliance = PlayerAllianceService.createAlliance(otherPlayer, player, TeamType.ALLIANCE_DEFENCE);
+		} else if (list.size() > 1) { // should never happen
+			LoggerFactory.getLogger(Invasion.class).warn("Couldn't add " + player + " to " + (isInvader ? "invaders" : "defenders")
+				+ " (alliance not initialized). Current participants: " + list.size());
+			return;
 		}
 		list.put(player.getObjectId(), player);
 	}
