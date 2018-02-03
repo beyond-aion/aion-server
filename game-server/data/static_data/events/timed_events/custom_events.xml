@@ -1,5 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <timed_events xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="timed_events.xsd">
+	<event name="Beyond Aion Server Buffs">
+		<buffs>
+			<!-- Drop Rate Increase: 1h Drop Boost +10% -->
+			<buff skill_ids="10408">
+				<trigger condition="PVE_KILL" chance="0.1" />
+			</buff>
+			<!-- AP Boost: 1h AP Boost +10% -->
+			<buff skill_ids="10549">
+				<trigger condition="PVP_KILL" chance="2" />
+			</buff>
+			<!-- 18141 - Warrior's Courage I: Max HP +1500 -->
+			<!-- 21258 - Attack Boost: Phy./Mag. Atk. +15%, Mag. Boost +100 -->
+			<buff skill_ids="18141 21258" permanent="true" team="true">
+				<trigger condition="ENTER_MAP" />
+				<trigger condition="ENTER_TEAM" />
+				<restriction maps="GROUP_INSTANCE ALLIANCE_INSTANCE" team_size_max_percent="70" />
+			</buff>
+			<!-- [Event] Marvelous XP Energy: XP +100% -->
+			<!-- [Event] Marvelous Gathering Energy: Essence & Aether Tapping skill XP +100% -->
+			<!-- [Event] Celestial Crafting Energy: Crafting skill XP +100% -->
+			<buff skill_ids="10821 10823 10824" pool="1" permanent="true">
+				<trigger condition="ENTER_MAP" />
+				<restriction random_days_per_month="1" />
+			</buff>
+		</buffs>
+	</event>
 	<event name="Beyond Aion Birthday Event 2017" start="2017-11-15T00:00:00" end="2017-11-26T23:59:59">
 		<spawns>
 			<!-- Sanctum -->
@@ -74,7 +100,7 @@
 					<spot x="971.595" y="895.188" z="170.954" />
 					<spot x="982.929" y="767.799" z="182.536" />
 					<spot x="577.555" y="838.117" z="156.079" />
-				</spawn> 
+				</spawn>
 			</spawn_map>
 			<!-- GM Isle (TEST Purpose) -->
 			<spawn_map map_id="900110000">
@@ -147,7 +173,7 @@
 					<gd_npc npc_id="701542" /><!-- Tiamat's Huge Treasure Crate (Dragon Lord's Refuge) -->
 					<gd_npc npc_id="235759" /><!-- Fugitive Mazikin Leader -->
 					<gd_npc npc_id="235763" /><!-- Runaway Hirakiki Leader -->
-					<gd_npc npc_id="235767" /><!-- Escapee Asachin Leader-->
+					<gd_npc npc_id="235767" /><!-- Escapee Asachin Leader -->
 					<gd_npc npc_id="235768" /><!-- Spirited Velkur -->
 					<gd_npc npc_id="235769" /><!-- Velkur Aethercaster -->
 					<gd_npc npc_id="235770" /><!-- Velkur Aetherpriest -->

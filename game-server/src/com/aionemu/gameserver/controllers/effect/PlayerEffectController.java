@@ -13,7 +13,9 @@ import com.aionemu.gameserver.model.team.common.legacy.PlayerAllianceEvent;
 import com.aionemu.gameserver.model.team.group.PlayerGroupService;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ABNORMAL_STATE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_PLAYER_STANCE;
+import com.aionemu.gameserver.services.event.EventService;
 import com.aionemu.gameserver.skillengine.model.Effect;
+import com.aionemu.gameserver.skillengine.model.Effect.ForceType;
 import com.aionemu.gameserver.skillengine.model.SkillTargetSlot;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -90,13 +92,9 @@ public class PlayerEffectController extends EffectController {
 		return false;
 	}
 
-	/**
-	 * @param skillId
-	 * @param skillLvl
-	 * @param currentTime
-	 * @param reuseDelay
-	 */
-	public void addSavedEffect(int skillId, int skillLvl, int remainingTime, long endTime) {
+	public void addSavedEffect(int skillId, int skillLvl, int remainingTime, long endTime, ForceType forceType) {
+		if (EventService.getInstance().isInactiveEventForceType(forceType))
+			return;
 		SkillTemplate template = DataManager.SKILL_DATA.getSkillTemplate(skillId);
 
 		if (remainingTime <= 0)
@@ -109,7 +107,7 @@ public class PlayerEffectController extends EffectController {
 				remainingTime = (int) (endTime - System.currentTimeMillis());
 		}
 
-		Effect effect = new Effect(getOwner(), getOwner(), template, skillLvl, remainingTime);
+		Effect effect = new Effect(getOwner(), getOwner(), template, skillLvl, remainingTime, forceType);
 		lock.writeLock().lock();
 		try {
 			getMapForEffect(effect).put(effect.getStack(), effect);

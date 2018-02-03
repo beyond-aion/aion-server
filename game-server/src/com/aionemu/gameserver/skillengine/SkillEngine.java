@@ -10,6 +10,7 @@ import com.aionemu.gameserver.model.templates.item.ItemTemplate;
 import com.aionemu.gameserver.skillengine.model.ActivationAttribute;
 import com.aionemu.gameserver.skillengine.model.ChargeSkill;
 import com.aionemu.gameserver.skillengine.model.Effect;
+import com.aionemu.gameserver.skillengine.model.Effect.ForceType;
 import com.aionemu.gameserver.skillengine.model.Skill;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 
@@ -120,58 +121,56 @@ public class SkillEngine {
 		return skillEngine;
 	}
 
-	public void applyEffectDirectly(int skillId, Creature effector, Creature effected) {
-		SkillTemplate skillTemplate = DataManager.SKILL_DATA.getSkillTemplate(skillId);
-		if (skillTemplate == null) {
-			LoggerFactory.getLogger(SkillEngine.class).warn("Could not apply effect, invalid skill id " + skillId + " (effector: " + effector + ")");
-			return;
-		}
-		applyEffectDirectly(skillTemplate, skillTemplate.getLvl(), effector, effected, null);
-	}
-
-	public void applyEffectDirectly(int skillId, int lvl, Creature effector, Creature effected) {
-		SkillTemplate skillTemplate = DataManager.SKILL_DATA.getSkillTemplate(skillId);
-		if (skillTemplate == null) {
-			LoggerFactory.getLogger(SkillEngine.class).warn("Could not apply effect, invalid skill id " + skillId + " (effector: " + effector + ")");
-			return;
-		}
-		applyEffectDirectly(skillTemplate, lvl, effector, effected, null);
-	}
-
-	public void applyEffectDirectly(SkillTemplate skillTemplate, int skillLevel, Creature effector, Creature effected) {
-		applyEffectDirectly(skillTemplate, skillLevel, effector, effected, null);
+	public Effect applyEffectDirectly(int skillId, Creature effector, Creature effected) {
+		SkillTemplate skillTemplate = checkAndGetSkillTemplate(skillId);
+		return skillTemplate == null ? null : applyEffect(effector, effected, skillTemplate, skillTemplate.getLvl(), null, ForceType.DEFAULT);
 	}
 
 	/**
-	 * This method is used to apply directly effect of given skill without checking properties, sending packets, etc Should be only used from quest
-	 * scripts, or when you are sure about it
+	 * This method is used to apply effects of given skill directly without checking properties. Should be only used from handlers, or when you are sure
+	 * about it
 	 * 
 	 * @param duration
 	 *          - null = calculates native duration, number = uses forced duration value (0 meaning permanent)
+	 * @param forceType
+	 *          - null = not forced, else the force identifier (can later be retrieved by {@link Effect#getForceType()})
 	 */
-	public void applyEffectDirectly(SkillTemplate skillTemplate, int skillLevel, Creature effector, Creature effected, Integer duration) {
-		Effect ef = new Effect(effector, effected, skillTemplate, skillLevel, duration);
-		ef.setIsForcedEffect(true);
-		ef.initialize();
-		ef.applyEffect();
+	public Effect applyEffectDirectly(int skillId, Creature effector, Creature effected, Integer duration, ForceType forceType) {
+		SkillTemplate skillTemplate = checkAndGetSkillTemplate(skillId);
+		return skillTemplate == null ? null : applyEffect(effector, effected, skillTemplate, skillTemplate.getLvl(), duration, forceType);
+	}
+
+	public Effect applyEffectDirectly(int skillId, int lvl, Creature effector, Creature effected, Integer duration, ForceType forceType) {
+		SkillTemplate skillTemplate = checkAndGetSkillTemplate(skillId);
+		return skillTemplate == null ? null : applyEffect(effector, effected, skillTemplate, lvl, duration, forceType);
+	}
+
+	public Effect applyEffectDirectly(SkillTemplate skillTemplate, int skillLevel, Creature effector, Creature effected) {
+		return applyEffect(effector, effected, skillTemplate, skillLevel, null, ForceType.DEFAULT);
 	}
 
 	/**
-	 * similar function to applyeffectdirectly, but effect is not forced that means it checks for resists etc
-	 * 
-	 * @param skillId
-	 * @param effector
-	 * @param effected
+	 * Similar function to {@link #applyEffectDirectly}, but effect is not forced. That means it checks for resists etc.
 	 */
-	public void applyEffect(int skillId, Creature effector, Creature effected) {
-		SkillTemplate skillTemplate = DataManager.SKILL_DATA.getSkillTemplate(skillId);
-		if (skillTemplate == null) {
-			LoggerFactory.getLogger(SkillEngine.class).warn("Could not apply effect, invalid skill id " + skillId + " (effector: " + effector + ")");
-			return;
-		}
-		Effect ef = new Effect(effector, effected, skillTemplate, skillTemplate.getLvl());
+	public Effect applyEffect(int skillId, Creature effector, Creature effected) {
+		SkillTemplate skillTemplate = checkAndGetSkillTemplate(skillId);
+		return skillTemplate == null ? null : applyEffect(effector, effected, skillTemplate, skillTemplate.getLvl(), null, null);
+	}
+
+	private Effect applyEffect(Creature effector, Creature effected, SkillTemplate skillTemplate, int lvl, Integer duration, ForceType forceType) {
+		Effect ef = new Effect(effector, effected, skillTemplate, lvl, duration, forceType);
 		ef.initialize();
 		ef.applyEffect();
+		return ef;
+	}
+
+	private SkillTemplate checkAndGetSkillTemplate(int skillId) {
+		SkillTemplate skillTemplate = DataManager.SKILL_DATA.getSkillTemplate(skillId);
+		if (skillTemplate == null) {
+			LoggerFactory.getLogger(SkillEngine.class).warn("Could not apply effect, invalid skill id " + skillId, new IllegalArgumentException());
+			return null;
+		}
+		return skillTemplate;
 	}
 
 }

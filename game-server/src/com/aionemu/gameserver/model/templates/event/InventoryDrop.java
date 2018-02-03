@@ -4,7 +4,6 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.XmlValue;
 
 /**
  * @author Rolandas
@@ -13,9 +12,8 @@ import javax.xml.bind.annotation.XmlValue;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class InventoryDrop {
 
-	@XmlValue
-	private int dropItem;
-
+	@XmlAttribute(name = "item_id", required = true)
+	private int itemId;
 	@XmlAttribute(name = "startlevel")
 	private int startLevel;
 	@XmlAttribute(name = "interval", required = true)
@@ -23,8 +21,8 @@ public class InventoryDrop {
 	@XmlAttribute(name = "count")
 	private int count = 1;
 
-	public int getDropItem() {
-		return dropItem;
+	public int getItemId() {
+		return itemId;
 	}
 
 	public int getStartLevel() {

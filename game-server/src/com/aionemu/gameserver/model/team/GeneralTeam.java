@@ -57,18 +57,22 @@ public abstract class GeneralTeam<M extends AionObject, TM extends TeamMember<M>
 
 	public void addMember(TM member) {
 		Objects.requireNonNull(member, "Team member should be not null");
-		Preconditions.checkState(members.get(member.getObjectId()) == null, "Team member is already added");
-		members.put(member.getObjectId(), member);
+		Preconditions.checkState(members.put(member.getObjectId(), member) == null, "Team member is already added");
 	}
 
-	public void removeMember(TM member) {
+	public final TM removeMember(TM member) {
 		Objects.requireNonNull(member, "Team member should be not null");
-		Preconditions.checkState(members.remove(member.getObjectId()) != null, "Team member is already removed");
+		return removeMember(member.getObjectId());
 	}
 
-	public final void removeMember(int objectId) {
-		removeMember(members.get(objectId));
+	public final TM removeMember(int objectId) {
+		TM removedMember = members.remove(objectId);
+		Preconditions.checkState(removedMember != null, "Team member is already removed");
+		onRemoveMember(removedMember);
+		return removedMember;
 	}
+
+	protected abstract void onRemoveMember(TM member);
 
 	/**
 	 * Apply some function on all team members<br>

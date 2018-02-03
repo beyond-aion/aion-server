@@ -28,6 +28,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.player.PlayerReviveService;
 import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
+import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
@@ -486,8 +487,8 @@ public class DrakenspireDepths extends GeneralInstanceHandler {
 	}
 
 	@Override
-	public void onEndEffect(Creature effector, Creature effected, int skillId) {
-		switch (skillId) {
+	public void onEndEffect(Effect effect) {
+		switch (effect.getSkillId()) {
 			case 21610:
 			case 21611:
 			case 21612:

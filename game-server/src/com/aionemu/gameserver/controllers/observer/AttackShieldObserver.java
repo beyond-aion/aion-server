@@ -15,6 +15,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.LOG;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.TYPE;
 import com.aionemu.gameserver.skillengine.effect.EffectTemplate;
 import com.aionemu.gameserver.skillengine.model.Effect;
+import com.aionemu.gameserver.skillengine.model.Effect.ForceType;
 import com.aionemu.gameserver.skillengine.model.HealType;
 import com.aionemu.gameserver.skillengine.model.HitType;
 import com.aionemu.gameserver.skillengine.model.ShieldType;
@@ -142,7 +143,7 @@ public class AttackShieldObserver extends AttackCalcObserver {
 					attackResult.setReflectedSkillId(effect.getSkillId());
 
 					if (shieldType == ShieldType.SKILL_REFLECTOR) { // whole skill reflections are applied implicitly, see Effect#getEffected()
-						attackerEffect.setIsForcedEffect(true); // make sure it hits the effector (no checks needed at this point)
+						attackerEffect.setForceType(ForceType.DEFAULT); // make sure it hits the effector (no checks needed at this point)
 						effect.endEffect(); // one skill reflection ends the shield effect
 						return;
 					} else { // apply reflect damage

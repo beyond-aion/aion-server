@@ -10,27 +10,25 @@ public class SM_SHOW_BRAND extends AionServerPacket {
 
 	private final int brandId;
 	private final int targetObjectId;
-	private final boolean league;
+	private final boolean isLeague;
 
 	public SM_SHOW_BRAND(int brandId, int targetObjectId) {
-		this.brandId = brandId;
-		this.targetObjectId = targetObjectId;
-		league = false;
+		this(brandId, targetObjectId, false);
 	}
 
 	public SM_SHOW_BRAND(int brandId, int targetObjectId, boolean isLeague) {
 		this.brandId = brandId;
 		this.targetObjectId = targetObjectId;
-		league = isLeague;
+		this.isLeague = isLeague;
 	}
 
 	@Override
 	protected void writeImpl(AionConnection con) {
-		writeH(league ? 0x02 : 0x01);
+		writeH(isLeague ? 0x02 : 0x01);
 		writeD(0x01); // unk
 		writeD(brandId);
 		writeD(targetObjectId);
-		if (league) {
+		if (isLeague) {
 			writeD(2);
 			writeD(0);
 			writeD(0);

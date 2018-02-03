@@ -71,7 +71,7 @@
 		</spawns>
 	</event>
 	<event name="Valentine's Day Inventory" start="2015-02-13T00:00:00" end="2015-02-28T00:00:00">
-		<inventory_drop startlevel="1" interval="6">186000167</inventory_drop>
+		<inventory_drop item_id="186000167" startlevel="1" interval="6" />
 	</event>
 	<event name="Valentine's Day" start="2015-02-13T00:00:00" end="2015-02-28T00:00:00" theme="VALENTINE">
 		<event_drops>
@@ -566,7 +566,7 @@
 		</spawns>
 	</event>
 	<event name="Spring Event Inventory" start="2015-03-06T00:00:00" end="2015-03-21T00:00:00">
-		<inventory_drop startlevel="8" interval="15">186000168</inventory_drop>
+		<inventory_drop item_id="186000168" startlevel="8" interval="15" />
 	</event>
 	<event name="Spring Event" start="2015-03-06T00:00:00" end="2015-03-21T00:00:00">
 		<spawns>
@@ -613,7 +613,7 @@
 		</spawns>
 	</event>
 	<event name="Ascension Energy Inventory" start="2015-09-21T00:00:00" end="2015-10-26T00:00:00">
-		<inventory_drop startlevel="8" interval="15">186000127</inventory_drop>
+		<inventory_drop item_id="186000127" startlevel="8" interval="15" />
 	</event>
 	<event name="Ascension Energy" start="2016-11-15T00:00:00" end="2016-11-30T23:59:00">
 		<spawns>
@@ -2053,7 +2053,7 @@
 		</spawns>
 	</event>
 	<event name="Scorching Heat Inventory" start="2017-08-04T00:00:00" end="2017-08-20T23:59:59">
-		<inventory_drop startlevel="1" interval="30" count="3">186000111</inventory_drop>
+		<inventory_drop item_id="186000111" startlevel="1" interval="30" count="3" />
 	</event>
 	<event name="Scorching Heat" start="2017-08-04T00:00:00" end="2017-08-22T23:59:59">
 		<spawns>
@@ -3728,7 +3728,7 @@
 		</spawns>
 	</event>
 	<event name="Gank the Grankers Inventory" start="2015-12-16T00:00:00" end="2016-12-30T00:00:00">
-		<inventory_drop startlevel="8" interval="10">186000385</inventory_drop>
+		<inventory_drop item_id="186000385" startlevel="8" interval="10" />
 	</event>
 	<event name="Gank the Grankers" start="2015-12-16T00:00:00" end="2016-12-24T00:00:00">
 		<spawns>

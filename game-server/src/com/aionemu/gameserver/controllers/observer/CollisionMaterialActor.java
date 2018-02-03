@@ -18,6 +18,7 @@ import com.aionemu.gameserver.model.templates.world.WeatherEntry;
 import com.aionemu.gameserver.services.GameTimeService;
 import com.aionemu.gameserver.services.WeatherService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
+import com.aionemu.gameserver.skillengine.model.Effect.ForceType;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.time.gametime.DayTime;
@@ -84,7 +85,7 @@ public class CollisionMaterialActor extends AbstractCollisionObserver implements
 					if (player.isStaff())
 						PacketSendUtility.sendMessage(player, "Use skill=" + skill.getId());
 				}
-				SkillEngine.getInstance().applyEffectDirectly(skill.getId(), skill.getSkillLevel(), creature, creature);
+				SkillEngine.getInstance().applyEffectDirectly(skill.getId(), skill.getSkillLevel(), creature, creature, null, ForceType.MATERIAL_SKILL);
 			}, 0, (long) (skill.getFrequency() * 1000));
 			creature.getController().addTask(TaskId.MATERIAL_ACTION, task);
 		}

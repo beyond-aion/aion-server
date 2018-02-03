@@ -22,12 +22,12 @@ import com.aionemu.gameserver.model.team.alliance.events.ChangeAllianceLeaderEve
 import com.aionemu.gameserver.model.team.alliance.events.ChangeAllianceLootRulesEvent;
 import com.aionemu.gameserver.model.team.alliance.events.ChangeMemberGroupEvent;
 import com.aionemu.gameserver.model.team.alliance.events.CheckAllianceReadyEvent;
+import com.aionemu.gameserver.model.team.alliance.events.PlayerAllianceEnteredEvent;
 import com.aionemu.gameserver.model.team.alliance.events.PlayerAllianceInvite;
 import com.aionemu.gameserver.model.team.alliance.events.PlayerAllianceLeavedEvent;
 import com.aionemu.gameserver.model.team.alliance.events.PlayerAllianceUpdateEvent;
 import com.aionemu.gameserver.model.team.alliance.events.PlayerConnectedEvent;
 import com.aionemu.gameserver.model.team.alliance.events.PlayerDisconnectedEvent;
-import com.aionemu.gameserver.model.team.alliance.events.PlayerEnteredEvent;
 import com.aionemu.gameserver.model.team.common.events.PlayerLeavedEvent.LeaveReson;
 import com.aionemu.gameserver.model.team.common.events.ShowBrandEvent;
 import com.aionemu.gameserver.model.team.common.events.TeamCommand;
@@ -94,9 +94,10 @@ public class PlayerAllianceService {
 	}
 
 	@GlobalCallback(AddPlayerToAllianceCallback.class)
-	public static final void addPlayerToAlliance(PlayerAlliance alliance, Player invited) {
-		// TODO leader member is already set
-		alliance.addMember(new PlayerAllianceMember(invited));
+	public static final PlayerAllianceMember addPlayerToAlliance(PlayerAlliance alliance, Player invited) {
+		PlayerAllianceMember member = new PlayerAllianceMember(invited);
+		alliance.addMember(member);
+		return member;
 	}
 
 	/**
@@ -152,7 +153,7 @@ public class PlayerAllianceService {
 	 */
 	public static final void addPlayer(PlayerAlliance alliance, Player player) {
 		Objects.requireNonNull(alliance, "Alliance should not be null");
-		alliance.onEvent(new PlayerEnteredEvent(alliance, player));
+		alliance.onEvent(new PlayerAllianceEnteredEvent(alliance, player));
 	}
 
 	/**

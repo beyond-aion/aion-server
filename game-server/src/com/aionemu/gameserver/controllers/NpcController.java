@@ -39,6 +39,7 @@ import com.aionemu.gameserver.services.SiegeService;
 import com.aionemu.gameserver.services.abyss.AbyssPointsService;
 import com.aionemu.gameserver.services.drop.DropRegistrationService;
 import com.aionemu.gameserver.services.drop.DropService;
+import com.aionemu.gameserver.services.event.EventService;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.taskmanager.tasks.MoveTaskManager;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -221,6 +222,7 @@ public class NpcController extends CreatureController<Npc> {
 					rewardAp *= instanceApMultiplier;
 
 					QuestEngine.getInstance().onKill(new QuestEnv(getOwner(), player, 0));
+					EventService.getInstance().onPveKill(player, getOwner());
 					player.getCommonData().addExp(rewardXp, Rates.XP_HUNTING, getOwner().getObjectTemplate().getL10n());
 					player.getCommonData().addDp(rewardDp);
 					if (getOwner().getAi().ask(AIQuestion.SHOULD_REWARD_AP)) {

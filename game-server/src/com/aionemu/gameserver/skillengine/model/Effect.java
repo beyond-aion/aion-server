@@ -14,7 +14,6 @@ import com.aionemu.gameserver.controllers.attack.AttackStatus;
 import com.aionemu.gameserver.controllers.observer.ActionObserver;
 import com.aionemu.gameserver.controllers.observer.AttackCalcObserver;
 import com.aionemu.gameserver.controllers.observer.ObserverType;
-import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.SkillElement;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Item;
@@ -48,7 +47,6 @@ public class Effect implements StatOwner {
 	private int skillLevel;
 	private Integer duration;
 	private long endTime;
-	private PeriodicActions periodicActions;
 	private SkillMoveType skillMoveType = SkillMoveType.DEFAULT;
 	private Future<?> endTask = null;
 	private Future<?>[] periodicTasks = null;
@@ -112,7 +110,7 @@ public class Effect implements StatOwner {
 	private float x, y, z;
 	private int worldId, instanceId;
 
-	private boolean isForcedEffect = false;
+	private ForceType forceType;
 
 	/**
 	 * power of effect ( used for dispels)
@@ -128,24 +126,24 @@ public class Effect implements StatOwner {
 	private boolean endedByTime = false;
 
 	public Effect(Skill skill, Creature effected) {
-		this(skill.getEffector(), effected, skill.getSkillTemplate(), skill.getSkillLevel(), null);
+		this(skill.getEffector(), effected, skill.getSkillTemplate(), skill.getSkillLevel(), null, null);
 		this.skill = skill;
 	}
 
 	public Effect(Creature effector, Creature effected, SkillTemplate skillTemplate, int skillLevel) {
-		this(effector, effected, skillTemplate, skillLevel, null);
+		this(effector, effected, skillTemplate, skillLevel, null, null);
 	}
 
 	/**
 	 * If duration is null, it will be calculated upon execution, else the forced value will be used.
 	 */
-	public Effect(Creature effector, Creature effected, SkillTemplate skillTemplate, int skillLevel, Integer duration) {
+	public Effect(Creature effector, Creature effected, SkillTemplate skillTemplate, int skillLevel, Integer duration, ForceType forceType) {
 		this.effector = effector;
 		this.effected = effected;
 		this.skillTemplate = skillTemplate;
 		this.skillLevel = skillLevel;
 		this.duration = duration;
-		this.periodicActions = skillTemplate.getPeriodicActions();
+		this.forceType = forceType;
 
 		this.power = initializePower();
 	}
@@ -521,12 +519,16 @@ public class Effect implements StatOwner {
 		return false;
 	}
 
-	public void setIsForcedEffect(boolean isForcedEffect) {
-		this.isForcedEffect = isForcedEffect;
+	public void setForceType(ForceType forceType) {
+		this.forceType = forceType;
+	}
+
+	public ForceType getForceType() {
+		return forceType;
 	}
 
 	public boolean isForcedEffect() {
-		return isForcedEffect || DataManager.MATERIAL_DATA.isMaterialSkill(getSkillId());
+		return forceType != null;
 	}
 
 	public boolean isPhysicalEffect() {
@@ -726,7 +728,7 @@ public class Effect implements StatOwner {
 			deactivateToggleSkill();
 		}
 		effected.getEffectController().clearEffect(this, broadcast);
-		effected.getPosition().getWorldMapInstance().getInstanceHandler().onEndEffect(getEffector(), effected, this.getSkillId());
+		effected.getPosition().getWorldMapInstance().getInstanceHandler().onEndEffect(this);
 	}
 
 	/**
@@ -890,7 +892,10 @@ public class Effect implements StatOwner {
 	}
 
 	private void schedulePeriodicActions() {
-		if (periodicActions == null || periodicActions.getPeriodicActions() == null || periodicActions.getPeriodicActions().isEmpty())
+		if (skillTemplate.getPeriodicActions() == null)
+			return;
+		PeriodicActions periodicActions = skillTemplate.getPeriodicActions();
+		if (periodicActions.getPeriodicActions() == null || periodicActions.getPeriodicActions().isEmpty())
 			return;
 		int checktime = periodicActions.getChecktime();
 		periodicActionsTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
@@ -1287,4 +1292,23 @@ public class Effect implements StatOwner {
 		this.mpShieldSkillId = mpShieldSkillId;
 	}
 
+	public static class ForceType {
+		
+		private static final Map<String, ForceType> forceTypes = new ConcurrentHashMap<>();
+		public static final ForceType DEFAULT = getInstance("");
+		public static final ForceType MATERIAL_SKILL = getInstance("MATERIAL_SKILL");
+		private final String name;
+
+		private ForceType(String name) {
+			this.name = name;
+		}
+
+		public String getName() {
+			return name;
+		}
+
+		public static ForceType getInstance(String name) {
+			return forceTypes.computeIfAbsent(name, key -> new ForceType(name));
+		}
+	}
 }

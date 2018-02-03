@@ -8,6 +8,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlList;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
@@ -15,58 +16,52 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import com.aionemu.gameserver.dataholders.SpawnsData;
 import com.aionemu.gameserver.dataholders.loadingutils.adapters.LocalDateTimeAdapter;
 import com.aionemu.gameserver.model.EventTheme;
+import com.aionemu.gameserver.model.templates.globaldrops.GlobalRule;
 
 /**
- * @author Rolandas
+ * @author Rolandas, Neon
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "EventTemplate")
 public class EventTemplate {
 
-	@XmlElement(name = "event_drops", required = false)
-	private EventDrops eventDrops;
-
-	@XmlElement(name = "quests", required = false)
-	private EventQuestList quests;
-
-	@XmlElement(name = "spawns", required = false)
-	private SpawnsData spawns;
-
-	@XmlElement(name = "inventory_drop", required = false)
-	private InventoryDrop inventoryDrop;
-
-	@XmlList
-	@XmlElement(name = "surveys", required = false)
-	private List<String> surveys;
-
 	@XmlAttribute(name = "name", required = true)
 	private String name;
 
-	@XmlAttribute(name = "start", required = true)
+	@XmlAttribute(name = "start")
 	@XmlJavaTypeAdapter(LocalDateTimeAdapter.class)
 	private LocalDateTime startDate;
 
-	@XmlAttribute(name = "end", required = true)
+	@XmlAttribute(name = "end")
 	@XmlJavaTypeAdapter(LocalDateTimeAdapter.class)
 	private LocalDateTime endDate;
 
-	@XmlAttribute(name = "theme", required = false)
+	@XmlAttribute(name = "theme")
 	private EventTheme theme;
+
+	@XmlElementWrapper(name = "event_drops")
+	@XmlElement(name = "gd_rule")
+	private List<GlobalRule> eventDropRules;
+
+	@XmlElement(name = "quests")
+	private EventQuestList quests;
+
+	@XmlElement(name = "spawns")
+	private SpawnsData spawns;
+
+	@XmlElement(name = "inventory_drop")
+	private InventoryDrop inventoryDrop;
+
+	@XmlList
+	@XmlElement(name = "surveys")
+	private List<String> surveys;
+
+	@XmlElementWrapper(name = "buffs")
+	@XmlElement(name = "buff")
+	private List<Buff> buffs;
 
 	public String getName() {
 		return name;
-	}
-
-	public EventDrops getEventDrops() {
-		return eventDrops;
-	}
-
-	public SpawnsData getSpawns() {
-		return spawns;
-	}
-
-	public InventoryDrop getInventoryDrop() {
-		return inventoryDrop;
 	}
 
 	public LocalDateTime getStartDate() {
@@ -75,6 +70,22 @@ public class EventTemplate {
 
 	public LocalDateTime getEndDate() {
 		return endDate;
+	}
+
+	public EventTheme getTheme() {
+		return theme;
+	}
+
+	public List<GlobalRule> getEventDropRules() {
+		return eventDropRules;
+	}
+
+	public SpawnsData getSpawns() {
+		return spawns;
+	}
+
+	public InventoryDrop getInventoryDrop() {
+		return inventoryDrop;
 	}
 
 	public List<Integer> getStartableQuests() {
@@ -86,15 +97,15 @@ public class EventTemplate {
 	}
 
 	public boolean isInEventPeriod(LocalDateTime time) {
-		return !time.isBefore(getStartDate()) && time.isBefore(getEndDate());
+		return (startDate == null || !time.isBefore(startDate)) && (endDate == null || time.isBefore(endDate));
 	}
 
 	public List<String> getSurveys() {
 		return surveys;
 	}
 
-	public EventTheme getTheme() {
-		return theme;
+	public List<Buff> getBuffs() {
+		return buffs;
 	}
 
 }

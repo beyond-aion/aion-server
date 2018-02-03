@@ -27,6 +27,8 @@ import com.aionemu.gameserver.services.SerialKillerService;
 import com.aionemu.gameserver.services.SiegeService;
 import com.aionemu.gameserver.services.TownService;
 import com.aionemu.gameserver.services.WeatherService;
+import com.aionemu.gameserver.services.event.EventService;
+import com.aionemu.gameserver.services.instance.InstanceService;
 import com.aionemu.gameserver.services.rift.RiftInformer;
 import com.aionemu.gameserver.world.World;
 
@@ -110,6 +112,7 @@ public class CM_LEVEL_READY extends AionClientPacket {
 		QuestEngine.getInstance().onEnterWorld(activePlayer);
 
 		activePlayer.getController().onEnterWorld();
+		InstanceService.onEnterInstance(activePlayer);
 		activePlayer.getEffectController().updatePlayerEffectIcons(null);
 		sendPacket(SM_CUBE_UPDATE.cubeSize(StorageType.CUBE, activePlayer));
 
@@ -119,5 +122,6 @@ public class CM_LEVEL_READY extends AionClientPacket {
 		activePlayer.setPortAnimation(ArrivalAnimation.NONE);
 
 		TownService.getInstance().onEnterWorld(activePlayer);
+		EventService.getInstance().onEnterMap(activePlayer);
 	}
 }

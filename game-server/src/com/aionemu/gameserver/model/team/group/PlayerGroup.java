@@ -29,8 +29,7 @@ public class PlayerGroup extends TemporaryPlayerTeam<PlayerGroupMember> {
 	}
 
 	@Override
-	public void removeMember(PlayerGroupMember member) {
-		super.removeMember(member);
+	public void onRemoveMember(PlayerGroupMember member) {
 		playerGroupStats.onRemovePlayer(member);
 		member.getObject().setPlayerGroup(null);
 	}

@@ -25,7 +25,7 @@ public class SealGuardianAI extends AggressiveNpcAI {
 				.filter(aggroInfo -> aggroInfo.getAttacker() instanceof Player && !((Player) aggroInfo.getAttacker()).isDead()).findFirst()
 				.map(aggroInfo -> (Player) aggroInfo.getAttacker()).orElseGet(null);
 		if (killer != null)
-			SkillEngine.getInstance().applyEffect(21625, getOwner(), killer);
+			SkillEngine.getInstance().applyEffectDirectly(21625, getOwner(), killer);
 		super.handleDied();
 		getOwner().getController().delete();
 	}

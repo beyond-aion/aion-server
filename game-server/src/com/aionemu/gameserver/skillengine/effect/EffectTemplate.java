@@ -473,9 +473,8 @@ public abstract class EffectTemplate {
 		int level = 1;
 		if (subEffect.isAddEffect())
 			level = effect.getSignetBurstedCount();
-		Effect newEffect = new Effect(effect.getEffector(), effect.getOriginalEffected(), template, level);
+		Effect newEffect = new Effect(effect.getEffector(), effect.getOriginalEffected(), template, level, null, effect.getForceType());
 		newEffect.setShieldDefense(effect.getShieldDefense());
-		newEffect.setIsForcedEffect(effect.isForcedEffect());
 		newEffect.setAccModBoost(effect.getAccModBoost());
 		newEffect.initialize();
 		if (newEffect.getSpellStatus() != SpellStatus.DODGE && newEffect.getSpellStatus() != SpellStatus.RESIST)

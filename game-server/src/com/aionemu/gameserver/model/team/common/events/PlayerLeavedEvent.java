@@ -6,6 +6,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.team.TeamEvent;
 import com.aionemu.gameserver.model.team.TeamMember;
 import com.aionemu.gameserver.model.team.TemporaryPlayerTeam;
+import com.aionemu.gameserver.services.event.EventService;
 
 /**
  * @author ATracer
@@ -22,22 +23,20 @@ public abstract class PlayerLeavedEvent<TM extends TeamMember<Player>, T extends
 	protected final T team;
 	protected final Player leavedPlayer;
 	protected final LeaveReson reason;
-	protected final TM leavedTeamMember;
 	protected final String banPersonName;
 
-	public PlayerLeavedEvent(T alliance, Player player) {
-		this(alliance, player, LeaveReson.LEAVE);
+	public PlayerLeavedEvent(T team, Player player) {
+		this(team, player, LeaveReson.LEAVE);
 	}
 
-	public PlayerLeavedEvent(T alliance, Player player, LeaveReson reason) {
-		this(alliance, player, reason, StringUtils.EMPTY);
+	public PlayerLeavedEvent(T team, Player player, LeaveReson reason) {
+		this(team, player, reason, StringUtils.EMPTY);
 	}
 
 	public PlayerLeavedEvent(T team, Player player, LeaveReson reason, String banPersonName) {
 		this.team = team;
 		this.leavedPlayer = player;
 		this.reason = reason;
-		this.leavedTeamMember = team.getMember(player.getObjectId());
 		this.banPersonName = banPersonName;
 	}
 
@@ -49,4 +48,8 @@ public abstract class PlayerLeavedEvent<TM extends TeamMember<Player>, T extends
 		return team.hasMember(leavedPlayer.getObjectId());
 	}
 
+	@Override
+	public void handleEvent() {
+		EventService.getInstance().onLeftTeam(leavedPlayer, team);
+	}
 }

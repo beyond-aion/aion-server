@@ -8,6 +8,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.instance.StageList;
 import com.aionemu.gameserver.model.instance.StageType;
 import com.aionemu.gameserver.model.instance.instancereward.InstanceReward;
+import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.Skill;
 import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
@@ -83,7 +84,7 @@ public interface InstanceHandler {
 
 	void onAggro(Npc npc);
 
-	void onEndEffect(Creature effector, Creature effected, int skillId);
+	void onEndEffect(Effect effect);
 	
 	void onCreatureDetected(Npc detector, Creature detected);
 	

@@ -20,6 +20,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.player.PlayerReviveService;
 import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
+import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
@@ -349,9 +350,11 @@ public class IlluminaryObeliskInstance extends GeneralInstanceHandler {
 	}
 
 	@Override
-	public void onEndEffect(Creature effector, Creature effected, int skillId) {
-		if (skillId == 21511)
+	public void onEndEffect(Effect effect) {
+		if (effect.getSkillId() == 21511) {
+			Creature effected = effect.getEffected();
 			spawn(702009, effected.getX(), effected.getY(), effected.getZ(), effected.getHeading());
+		}
 	}
 
 	@Override

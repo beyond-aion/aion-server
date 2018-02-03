@@ -19,8 +19,8 @@ public class Lv3HumanBeritraAI extends AggressiveNpcAI {
 	@Override
 	protected void handleSpawned() {
 		super.handleSpawned();
-		SkillEngine.getInstance().applyEffect(21610, getOwner(), getOwner());
-		SkillEngine.getInstance().applyEffect(21611, getOwner(), getOwner());
-		SkillEngine.getInstance().applyEffect(21612, getOwner(), getOwner());
+		SkillEngine.getInstance().applyEffectDirectly(21610, getOwner(), getOwner());
+		SkillEngine.getInstance().applyEffectDirectly(21611, getOwner(), getOwner());
+		SkillEngine.getInstance().applyEffectDirectly(21612, getOwner(), getOwner());
 	}
 }

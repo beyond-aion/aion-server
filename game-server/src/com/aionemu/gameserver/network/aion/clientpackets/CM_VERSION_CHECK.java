@@ -3,7 +3,7 @@ package com.aionemu.gameserver.network.aion.clientpackets;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_VERSION_CHECK;
-import com.aionemu.gameserver.services.EventService;
+import com.aionemu.gameserver.services.event.EventService;
 
 /**
  * @author -Nemesiss-

@@ -15,31 +15,29 @@
 	<xs:complexType name="EventTemplate">
 		<xs:all>
 			<xs:element minOccurs="0" maxOccurs="1" name="event_drops" type="EventDrops" />
-			<xs:element minOccurs="0" name="quests" type="EventQuestList" />
+			<xs:element minOccurs="0" maxOccurs="1" name="quests" type="EventQuestList" />
 			<xs:element minOccurs="0" maxOccurs="1" name="spawns" type="SpawnsData" />
 			<xs:element minOccurs="0" maxOccurs="1" name="inventory_drop" type="InventoryDrop" />
 			<xs:element minOccurs="0" maxOccurs="1" name="surveys" type="SurveyList" />
+			<xs:element minOccurs="0" maxOccurs="1" name="buffs" type="Buffs" />
 		</xs:all>
 		<xs:attribute name="name" type="xs:string" use="required" />
-		<xs:attribute name="start" type="xs:dateTime" use="required" />
-		<xs:attribute name="end" type="xs:dateTime" use="required" />
+		<xs:attribute name="start" type="xs:dateTime" />
+		<xs:attribute name="end" type="xs:dateTime" />
 		<xs:attribute name="theme" type="EventTheme" use="optional" />
 	</xs:complexType>
 
 	<xs:complexType name="EventDrops">
 		<xs:sequence>
-			<xs:element minOccurs="0" maxOccurs="unbounded" name="gd_rule" type="GlobalRule" />
+			<xs:element maxOccurs="unbounded" name="gd_rule" type="GlobalRule" />
 		</xs:sequence>
 	</xs:complexType>
 
 	<xs:complexType name="InventoryDrop">
-		<xs:simpleContent>
-			<xs:extension base="itemId">
-				<xs:attribute name="startlevel" type="xs:int" />
-				<xs:attribute name="interval" type="xs:int" use="required" />
-				<xs:attribute name="count" type="xs:int" default="1" />
-			</xs:extension>
-		</xs:simpleContent>
+		<xs:attribute name="item_id" type="itemId" use="required" />
+		<xs:attribute name="startlevel" type="xs:int" />
+		<xs:attribute name="interval" type="xs:int" use="required" />
+		<xs:attribute name="count" type="xs:int" default="1" />
 	</xs:complexType>
 
 	<xs:complexType name="EventQuestList">
@@ -52,6 +50,56 @@
 	<xs:simpleType name="SurveyList">
 		<xs:list itemType="xs:string" />
 	</xs:simpleType>
+
+	<xs:complexType name="Buffs">
+		<xs:sequence>
+			<xs:element maxOccurs="unbounded" name="buff" type="Buff" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="Buff">
+		<xs:sequence>
+			<xs:element maxOccurs="unbounded" name="trigger" type="Trigger" />
+			<xs:element minOccurs="0" maxOccurs="unbounded" name="restriction" type="BuffRestriction" />
+		</xs:sequence>
+		<xs:attribute name="skill_ids" type="IntListType" use="required" />
+		<xs:attribute name="pool" type="xs:int" />
+		<xs:attribute name="permanent" type="xs:boolean" />
+		<xs:attribute name="team" type="xs:boolean" />
+	</xs:complexType>
+
+	<xs:simpleType name="BuffMapTypes">
+		<xs:list itemType="BuffMapType" />
+	</xs:simpleType>
+
+	<xs:simpleType name="BuffMapType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="WORLD_MAP" />
+			<xs:enumeration value="SOLO_INSTANCE" />
+			<xs:enumeration value="GROUP_INSTANCE" />
+			<xs:enumeration value="ALLIANCE_INSTANCE" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:complexType name="Trigger">
+		<xs:attribute name="condition" type="TriggerCondition" use="required" />
+		<xs:attribute name="chance" type="xs:float" default="100" />
+	</xs:complexType>
+
+	<xs:simpleType name="TriggerCondition">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="ENTER_MAP" />
+			<xs:enumeration value="ENTER_TEAM" />
+			<xs:enumeration value="PVE_KILL" />
+			<xs:enumeration value="PVP_KILL" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:complexType name="BuffRestriction">
+		<xs:attribute name="maps" type="BuffMapTypes" />
+		<xs:attribute name="team_size_max_percent" type="xs:float" />
+		<xs:attribute name="random_days_per_month" type="xs:int" />
+	</xs:complexType>
 
 	<xs:simpleType name="EventTheme">
 		<xs:restriction base="xs:string">

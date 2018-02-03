@@ -92,10 +92,10 @@ public class FortressLocation extends SiegeLocation {
 			} else {
 				int balance = getFactionBalance();
 				if (creature.getRace() == Race.ELYOS && balance < 0) {
-					SkillEngine.getInstance().applyEffect(8866 + Math.abs(balance), creature, creature);
+					SkillEngine.getInstance().applyEffectDirectly(8866 + Math.abs(balance), creature, creature);
 					PacketSendUtility.sendPacket((Player) creature, SM_SYSTEM_MESSAGE.STR_MSG_WEAK_RACE_BUFF_LIGHT_GAIN());
 				} else if (creature.getRace() == Race.ASMODIANS && balance > 0) {
-					SkillEngine.getInstance().applyEffect(8875 + balance, creature, creature);
+					SkillEngine.getInstance().applyEffectDirectly(8875 + balance, creature, creature);
 					PacketSendUtility.sendPacket((Player) creature, SM_SYSTEM_MESSAGE.STR_MSG_WEAK_RACE_BUFF_DARK_GAIN());
 				}
 			}

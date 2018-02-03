@@ -5,6 +5,7 @@ import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.services.RespawnService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
+import com.aionemu.gameserver.skillengine.model.Effect.ForceType;
 
 import ai.NoActionAI;
 
@@ -27,13 +28,13 @@ public class AhserionGate extends NoActionAI {
 	private void useBuff() {
 		switch (getNpcId()) {
 			case 277229:
-				SkillEngine.getInstance().applyEffectDirectly(21515, 50, getOwner(), getOwner());
+				SkillEngine.getInstance().applyEffectDirectly(21515, 50, getOwner(), getOwner(), null, ForceType.DEFAULT);
 				break;
 			case 277230:
-				SkillEngine.getInstance().applyEffectDirectly(21515, 60, getOwner(), getOwner());
+				SkillEngine.getInstance().applyEffectDirectly(21515, 60, getOwner(), getOwner(), null, ForceType.DEFAULT);
 				break;
 			case 277231:
-				SkillEngine.getInstance().applyEffectDirectly(21515, 70, getOwner(), getOwner());
+				SkillEngine.getInstance().applyEffectDirectly(21515, 70, getOwner(), getOwner(), null, ForceType.DEFAULT);
 				break;
 		}
 		getOwner().setTarget(null);

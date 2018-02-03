@@ -25,7 +25,7 @@ import com.aionemu.gameserver.model.team.group.events.ChangeGroupLootRulesEvent;
 import com.aionemu.gameserver.model.team.group.events.GroupDisbandEvent;
 import com.aionemu.gameserver.model.team.group.events.PlayerConnectedEvent;
 import com.aionemu.gameserver.model.team.group.events.PlayerDisconnectedEvent;
-import com.aionemu.gameserver.model.team.group.events.PlayerEnteredEvent;
+import com.aionemu.gameserver.model.team.group.events.PlayerGroupEnteredEvent;
 import com.aionemu.gameserver.model.team.group.events.PlayerGroupInvite;
 import com.aionemu.gameserver.model.team.group.events.PlayerGroupLeavedEvent;
 import com.aionemu.gameserver.model.team.group.events.PlayerGroupStopMentoringEvent;
@@ -131,7 +131,7 @@ public class PlayerGroupService {
 	 */
 	public static final void addPlayer(PlayerGroup group, Player player) {
 		Objects.requireNonNull(group, "Group should not be null");
-		group.onEvent(new PlayerEnteredEvent(group, player));
+		group.onEvent(new PlayerGroupEnteredEvent(group, player));
 	}
 
 	/**

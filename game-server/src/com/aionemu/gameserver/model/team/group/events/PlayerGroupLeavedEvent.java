@@ -86,18 +86,15 @@ public class PlayerGroupLeavedEvent extends PlayerLeavedEvent<PlayerGroupMember,
 			PacketSendUtility.sendPacket(leavedPlayer, new SM_LEAVE_GROUP_MEMBER());
 			if (team.equals(leavedPlayer.getPosition().getWorldMapInstance().getRegisteredTeam())) {
 				PacketSendUtility.sendPacket(leavedPlayer, SM_SYSTEM_MESSAGE.STR_MSG_LEAVE_INSTANCE_NOT_PARTY());
-				leavedPlayer.getController().addTask(TaskId.DESPAWN, ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-					@Override
-					public void run() {
-						if (leavedPlayer.getCurrentTeamId() != team.getObjectId()) {
-							if (leavedPlayer.getPosition().getWorldMapInstance().getRegisteredTeam() != null)
-								InstanceService.moveToExitPoint(leavedPlayer);
-						}
+				leavedPlayer.getController().addTask(TaskId.DESPAWN, ThreadPoolManager.getInstance().schedule(() -> {
+					if (leavedPlayer.getCurrentTeamId() != team.getObjectId()) {
+						if (leavedPlayer.getPosition().getWorldMapInstance().getRegisteredTeam() != null)
+							InstanceService.moveToExitPoint(leavedPlayer);
 					}
 				}, 30000));
 			}
 		}
+		super.handleEvent();
 	}
 
 }

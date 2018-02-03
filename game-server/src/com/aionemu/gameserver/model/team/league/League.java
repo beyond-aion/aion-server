@@ -43,8 +43,7 @@ public class League extends GeneralTeam<PlayerAlliance, LeagueMember> {
 	}
 
 	@Override
-	public void removeMember(LeagueMember member) {
-		super.removeMember(member);
+	public void onRemoveMember(LeagueMember member) {
 		member.getObject().setLeague(null);
 	}
 

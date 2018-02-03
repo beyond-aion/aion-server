@@ -40,8 +40,7 @@ public class PlayerAlliance extends TemporaryPlayerTeam<PlayerAllianceMember> {
 	}
 
 	@Override
-	public void removeMember(PlayerAllianceMember member) {
-		super.removeMember(member);
+	public void onRemoveMember(PlayerAllianceMember member) {
 		member.getPlayerAllianceGroup().removeMember(member);
 	}
 

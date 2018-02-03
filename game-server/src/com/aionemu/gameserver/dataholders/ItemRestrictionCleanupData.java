@@ -1,6 +1,6 @@
 package com.aionemu.gameserver.dataholders;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -25,6 +25,6 @@ public class ItemRestrictionCleanupData {
 	}
 
 	public List<ItemCleanupTemplate> getList() {
-		return bplist == null ? new ArrayList<>() : bplist;
+		return bplist == null ? Collections.emptyList() : bplist;
 	}
 }

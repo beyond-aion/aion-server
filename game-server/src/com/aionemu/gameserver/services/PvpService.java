@@ -36,6 +36,7 @@ import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.services.abyss.AbyssPointsService;
 import com.aionemu.gameserver.services.abyss.AbyssService;
+import com.aionemu.gameserver.services.event.EventService;
 import com.aionemu.gameserver.services.item.ItemPacketService.ItemAddType;
 import com.aionemu.gameserver.services.item.ItemPacketService.ItemUpdateType;
 import com.aionemu.gameserver.services.item.ItemService;
@@ -174,8 +175,11 @@ public class PvpService {
 
 		SerialKillerService.getInstance().onKillSerialKiller(winner, victim);
 
-		// notify Quest engine for winner + his group
-		notifyKillQuests(winner, victim);
+		if (winner.getRace() != victim.getRace()) {
+			// notify Quest engine for winner + his group
+			notifyKillQuests(winner, victim);
+			EventService.getInstance().onPvpKill(winner, victim);
+		}
 
 		// Apply lost AP to defeated player
 		final int apLost = StatFunctions.calculatePvPApLost(victim, winner);
@@ -254,9 +258,6 @@ public class PvpService {
 	}
 
 	private void notifyKillQuests(Player winner, Player victim) {
-		if (winner.getRace() == victim.getRace())
-			return;
-
 		List<Player> rewarded = new ArrayList<>();
 		int worldId = victim.getWorldId();
 

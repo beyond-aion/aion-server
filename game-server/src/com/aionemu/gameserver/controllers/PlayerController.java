@@ -281,7 +281,6 @@ public class PlayerController extends CreatureController<Player> {
 				getOwner().getEffectController().clearEffect(ef);
 			}
 		}
-		InstanceService.onEnterInstance(getOwner());
 	}
 
 	@Override

@@ -155,15 +155,15 @@ CREATE TABLE `craft_cooldowns` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Table structure for `event_rank`
+-- Table structure for `event`
 -- ----------------------------
-CREATE TABLE `event_rank` (
-  `player_id` int(11) NOT NULL,
-  `event_id` int(11) NOT NULL,
-  `wins` int(11) NOT NULL,
-  `loss` int(11) NOT NULL,
-  PRIMARY KEY (`player_id`,`event_id`),
-  CONSTRAINT `event_rank_ibfk_1` FOREIGN KEY (`player_id`) REFERENCES `players` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+CREATE TABLE `event` (
+  `event_name` varchar(255) NOT NULL,
+  `buff_index` int(11) NOT NULL,
+  `buff_active_pool_ids` varchar(255) DEFAULT NULL,
+  `buff_allowed_days` varchar(255) DEFAULT NULL,
+  `last_change` timestamp NOT NULL ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`event_name`,`buff_index`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -593,8 +593,9 @@ CREATE TABLE `player_effects` (
   `player_id` int(11) NOT NULL,
   `skill_id` int(11) NOT NULL,
   `skill_lvl` tinyint(4) NOT NULL,
-  `current_time` int(11) NOT NULL,
+  `remaining_time` int(11) NOT NULL,
   `end_time` bigint(13) NOT NULL,
+  `force_type` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`player_id`,`skill_id`),
   CONSTRAINT `player_effects_ibfk_1` FOREIGN KEY (`player_id`) REFERENCES `players` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

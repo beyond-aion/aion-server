@@ -11,6 +11,7 @@ import com.aionemu.gameserver.model.instance.StageType;
 import com.aionemu.gameserver.model.instance.instancereward.InstanceReward;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
+import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.Skill;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -202,7 +203,7 @@ public class GeneralInstanceHandler implements InstanceHandler {
 	}
 
 	@Override
-	public void onEndEffect(Creature effector, Creature effected, int skillId) {
+	public void onEndEffect(Effect effect) {
 
 	}
 

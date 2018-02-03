@@ -32,6 +32,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.item.ItemPacketService.ItemUpdateType;
 import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
+import com.aionemu.gameserver.skillengine.model.Effect.ForceType;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.Util;
@@ -205,7 +206,7 @@ public class PetService {
 						new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), player.getObjectId(), useItem.getObjectId(), useItem.getItemId(), 0, 1, 1, 1, 0, 15360),
 						true);
 					SkillEngine.getInstance().applyEffectDirectly(((SkillUseAction) itemAction).getSkillId(), ((SkillUseAction) itemAction).getLevel(), player,
-						player);
+						player, null, ForceType.DEFAULT);
 					player.addItemCoolDown(limit.getDelayId(), System.currentTimeMillis() + player.getItemCooldown(useItem.getItemTemplate()),
 						player.getItemCooldown(useItem.getItemTemplate()) / 1000);
 					player.getInventory().decreaseByItemId(itemId, 1);

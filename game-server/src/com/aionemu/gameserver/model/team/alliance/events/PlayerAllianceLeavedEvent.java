@@ -1,7 +1,5 @@
 package com.aionemu.gameserver.model.team.alliance.events;
 
-import java.util.Objects;
-
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.team.alliance.PlayerAlliance;
@@ -37,15 +35,12 @@ public class PlayerAllianceLeavedEvent extends PlayerLeavedEvent<PlayerAllianceM
 
 	@Override
 	public void handleEvent() {
-		Player leader = team.getLeaderObject();
-		Objects.requireNonNull(leader, "Alliance leader should not be null");
-
 		team.getViceCaptainIds().remove(leavedPlayer.getObjectId());
 
-		if (reason != LeaveReson.DISBAND && leavedPlayer.equals(leader)) // here we already must have a leader of the team
+		if (reason != LeaveReson.DISBAND && team.isLeader(leavedPlayer))
 			team.onEvent(new ChangeAllianceLeaderEvent(team));
 
-		team.removeMember(leavedPlayer.getObjectId());
+		PlayerAllianceMember leavedTeamMember = team.removeMember(leavedPlayer.getObjectId());
 
 		SM_SYSTEM_MESSAGE leaveMsg;
 		switch (reason) {
@@ -99,19 +94,15 @@ public class PlayerAllianceLeavedEvent extends PlayerLeavedEvent<PlayerAllianceM
 			PacketSendUtility.sendPacket(leavedPlayer, new SM_LEAVE_GROUP_MEMBER());
 			if (team.equals(leavedPlayer.getPosition().getWorldMapInstance().getRegisteredTeam())) {
 				PacketSendUtility.sendPacket(leavedPlayer, SM_SYSTEM_MESSAGE.STR_MSG_LEAVE_INSTANCE_NOT_PARTY());
-				leavedPlayer.getController().addTask(TaskId.DESPAWN, ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-					@Override
-					public void run() {
-						if (leavedPlayer.getCurrentTeamId() != team.getObjectId()) {
-							if (leavedPlayer.getPosition().getWorldMapInstance().getRegisteredTeam() != null)
-								InstanceService.moveToExitPoint(leavedPlayer);
-						}
+				leavedPlayer.getController().addTask(TaskId.DESPAWN, ThreadPoolManager.getInstance().schedule(() -> {
+					if (leavedPlayer.getCurrentTeamId() != team.getObjectId()) {
+						if (leavedPlayer.getPosition().getWorldMapInstance().getRegisteredTeam() != null)
+							InstanceService.moveToExitPoint(leavedPlayer);
 					}
-
 				}, 30000));
 			}
 		}
+		super.handleEvent();
 	}
 
 }

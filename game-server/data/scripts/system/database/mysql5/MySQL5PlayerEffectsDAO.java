@@ -19,6 +19,7 @@ import com.aionemu.gameserver.dao.MySQL5DAOUtils;
 import com.aionemu.gameserver.dao.PlayerEffectsDAO;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.skillengine.model.Effect;
+import com.aionemu.gameserver.skillengine.model.Effect.ForceType;
 
 /**
  * @author ATracer
@@ -27,9 +28,9 @@ public class MySQL5PlayerEffectsDAO extends PlayerEffectsDAO {
 
 	private static final Logger log = LoggerFactory.getLogger(MySQL5PlayerEffectsDAO.class);
 
-	public static final String INSERT_QUERY = "INSERT INTO `player_effects` (`player_id`, `skill_id`, `skill_lvl`, `current_time`, `end_time`) VALUES (?,?,?,?,?)";
+	public static final String INSERT_QUERY = "INSERT INTO `player_effects` (`player_id`, `skill_id`, `skill_lvl`, `remaining_time`, `end_time`, `force_type`) VALUES (?,?,?,?,?,?)";
 	public static final String DELETE_QUERY = "DELETE FROM `player_effects` WHERE `player_id`=?";
-	public static final String SELECT_QUERY = "SELECT `skill_id`, `skill_lvl`, `current_time`, `end_time` FROM `player_effects` WHERE `player_id`=?";
+	public static final String SELECT_QUERY = "SELECT `skill_id`, `skill_lvl`, `remaining_time`, `end_time`,`force_type` FROM `player_effects` WHERE `player_id`=?";
 
 	private static final Predicate<Effect> insertableEffectsPredicate = effect -> effect.canSaveOnLogout() && effect.getRemainingTimeMillis() > 28000;
 
@@ -47,11 +48,13 @@ public class MySQL5PlayerEffectsDAO extends PlayerEffectsDAO {
 				while (rset.next()) {
 					int skillId = rset.getInt("skill_id");
 					int skillLvl = rset.getInt("skill_lvl");
-					int remainingTime = rset.getInt("current_time");
+					int remainingTime = rset.getInt("remaining_time");
 					long endTime = rset.getLong("end_time");
+					String forceTypeStr = rset.getString("force_type");
+					ForceType forceType = forceTypeStr == null ? null : ForceType.getInstance(forceTypeStr);
 
 					if (remainingTime > 0)
-						player.getEffectController().addSavedEffect(skillId, skillLvl, remainingTime, endTime);
+						player.getEffectController().addSavedEffect(skillId, skillLvl, remainingTime, endTime, forceType);
 				}
 			}
 		});
@@ -81,6 +84,7 @@ public class MySQL5PlayerEffectsDAO extends PlayerEffectsDAO {
 				ps.setInt(3, effect.getSkillLevel());
 				ps.setInt(4, (int) effect.getRemainingTimeMillis());
 				ps.setLong(5, effect.getEndTime());
+				ps.setString(6, effect.getForceType().getName());
 				ps.addBatch();
 			}
 

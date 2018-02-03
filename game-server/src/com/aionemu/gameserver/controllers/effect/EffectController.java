@@ -130,7 +130,7 @@ public class EffectController {
 
 		// max 4 chants
 		if (nextEffect.isChant()) {
-			List<Effect> chants = filterEffects(abnormalEffectMap, e -> e.isChant());
+			List<Effect> chants = filterEffects(abnormalEffectMap, Effect::isChant);
 			if (chants.size() >= 4)
 				chants.get(0).endEffect();
 		}
@@ -146,7 +146,7 @@ public class EffectController {
 			lock.writeLock().unlock();
 		}
 
-		nextEffect.startEffect(false);
+		nextEffect.startEffect();
 
 		if (!nextEffect.isPassive())
 			broadCastEffects(nextEffect);
@@ -407,58 +407,61 @@ public class EffectController {
 			broadCastEffects(effect);
 	}
 
+	public Effect findBySkillId(int skillId) {
+		return findFirstEffect(getMapForEffect(skillId), effect -> effect.getSkillId() == skillId);
+	}
+
 	/**
 	 * Removes the effect by skillId.
 	 * 
 	 * @param skillId
 	 */
 	public void removeEffect(int skillId) {
-		Map<String, Effect> mapForEffect = getMapForEffect(skillId);
-		for (Effect effect : filterEffects(mapForEffect, effect -> effect.getSkillId() == skillId))
+		Effect effect = findBySkillId(skillId);
+		if (effect != null)
 			effect.endEffect();
 	}
 
 	public void removeHideEffects() {
-		for (Effect effect : filterEffects(abnormalEffectMap, Effect::isHideEffect))
-			effect.endEffect();
+		removeEffects(abnormalEffectMap, Effect::isHideEffect);
 	}
 
 	/**
 	 * Removes Petorderunsummon effects from owner.
 	 */
 	public void removePetOrderUnSummonEffects() {
-		for (Effect effect : filterEffects(abnormalEffectMap, Effect::isPetOrderUnSummonEffect))
-			effect.endEffect();
+		removeEffects(abnormalEffectMap, Effect::isPetOrderUnSummonEffect);
 	}
 
 	/**
 	 * Removes Paralyze effects from owner.
 	 */
 	public void removeParalyzeEffects() {
-		for (Effect effect : filterEffects(abnormalEffectMap, Effect::isParalyzeEffect))
-			effect.endEffect();
+		removeEffects(abnormalEffectMap, Effect::isParalyzeEffect);
 	}
 
 	/**
 	 * Removes Stun effects from owner.
 	 */
 	public void removeStunEffects() {
-		for (Effect effect : filterEffects(abnormalEffectMap, Effect::isStunEffect))
-			effect.endEffect();
+		removeEffects(abnormalEffectMap, Effect::isStunEffect);
 	}
 
 	/**
 	 * Removes Transform effects from owner. For more info see {@link TransformEffect} it doesn't remove Avatar transforms (TODO find out on retail)
 	 */
 	public void removeTransformEffects() {
-		List<Effect> effectsToEnd = filterEffects(abnormalEffectMap, effect -> {
+		removeEffects(abnormalEffectMap, effect -> {
 			for (EffectTemplate et : effect.getEffectTemplates()) {
 				if (et instanceof TransformEffect && ((TransformEffect) et).getTransformType() != TransformType.AVATAR)
 					return true;
 			}
 			return false;
 		});
-		for (Effect effect : effectsToEnd)
+	}
+
+	private void removeEffects(Map<String, Effect> mapForEffect, Predicate<Effect> predicate) {
+		for (Effect effect : filterEffects(mapForEffect, predicate))
 			effect.endEffect();
 	}
 
@@ -473,6 +476,19 @@ public class EffectController {
 			lock.readLock().unlock();
 		}
 		return null;
+	}
+
+	public List<Effect> getAllEffects() {
+		List<Effect> effects = new ArrayList<>();
+		lock.readLock().lock();
+		try {
+			effects.addAll(abnormalEffectMap.values());
+			effects.addAll(noshowEffects.values());
+			effects.addAll(passiveEffectMap.values());
+		} finally {
+			lock.readLock().unlock();
+		}
+		return effects;
 	}
 
 	private List<Effect> filterEffects(Map<String, Effect> effectMap, Predicate<Effect> filter) {
@@ -503,24 +519,8 @@ public class EffectController {
 	}
 
 	private boolean removeByEffectId(Map<String, Effect> effectMap, int effectId, int dispelLevel, int power) {
-		Effect effectToEnd = null;
-		lock.readLock().lock();
-		try {
-			for (Effect effect : effectMap.values()) {
-				if (!effect.containsEffectId(effectId))
-					continue;
-				// check dispel level
-				if (effect.getReqDispelLevel() > dispelLevel)
-					continue;
-
-				if (removePower(effect, power)) {
-					effectToEnd = effect;
-					break;
-				}
-			}
-		} finally {
-			lock.readLock().unlock();
-		}
+		Effect effectToEnd = findFirstEffect(effectMap,
+			effect -> effect.getReqDispelLevel() <= dispelLevel && effect.containsEffectId(effectId) && removePower(effect, power));
 		if (effectToEnd != null) {
 			effectToEnd.endEffect();
 			return true;
@@ -791,44 +791,26 @@ public class EffectController {
 	}
 
 	public void removeAllEffects(boolean logout) {
-		List<Effect> effects = new ArrayList<>();
-		lock.readLock().lock();
-		try {
-			if (logout) { // remove all effects on logout
-				effects.addAll(abnormalEffectMap.values());
-				effects.addAll(noshowEffects.values());
-				effects.addAll(passiveEffectMap.values());
-			} else {
+		List<Effect> effects;
+		if (logout) { // remove all effects on logout
+			effects = getAllEffects();
+		} else {
+			effects = new ArrayList<>();
+			lock.readLock().lock();
+			try {
 				for (Effect effect : abnormalEffectMap.values()) {
 					if (!effect.getSkillTemplate().isNoRemoveAtDie() && !effect.isXpBoost())
 						effects.add(effect);
 				}
 				effects.addAll(noshowEffects.values());
+			} finally {
+				lock.readLock().unlock();
 			}
-		} finally {
-			lock.readLock().unlock();
 		}
 		for (Effect effect : effects) // end outside lock so broadcasting effects can't cause deadlocks
 			effect.endEffect(false);
 		if (!logout)
 			broadCastEffects(null);
-	}
-
-	/**
-	 * Return true if skillId is present among creature's effects
-	 */
-	public boolean isPresentBySkillId(int skillId) {
-		Map<String, Effect> effects = getMapForEffect(skillId);
-		lock.readLock().lock();
-		try {
-			for (Effect effect : effects.values()) {
-				if (effect.getSkillId() == skillId)
-					return true;
-			}
-		} finally {
-			lock.readLock().unlock();
-		}
-		return false;
 	}
 
 	/**

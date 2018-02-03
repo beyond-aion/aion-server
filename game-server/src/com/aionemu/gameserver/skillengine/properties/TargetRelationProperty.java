@@ -23,20 +23,18 @@ public class TargetRelationProperty {
 	public static boolean set(final Skill skill, Properties properties) {
 
 		TargetRelationAttribute value = properties.getTargetRelation();
-
-		final List<Creature> targetsList = skill.getEffectedList();
-		boolean isMaterialSkill = DataManager.MATERIAL_DATA.isMaterialSkill(skill.getSkillId());
+		List<Creature> targetsList = skill.getEffectedList();
 		Creature source = skill.getEffector();
 
 		switch (value) {
 			case ALL:
 				break;
 			case ENEMY:
-				if (!isMaterialSkill)
+				if (!DataManager.MATERIAL_DATA.isMaterialSkill(skill.getSkillId()))
 					targetsList.removeIf(target -> !source.isEnemy(target));
 				break;
 			case FRIEND:
-				if (!isMaterialSkill)
+				if (!DataManager.MATERIAL_DATA.isMaterialSkill(skill.getSkillId()))
 					targetsList.removeIf(target -> source.isEnemy(target) || !isBuffAllowed(source, target));
 
 				if (targetsList.isEmpty()) {
