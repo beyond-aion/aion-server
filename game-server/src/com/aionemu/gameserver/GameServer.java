@@ -303,7 +303,7 @@ public class GameServer {
 
 		ConsoleUtil.printSection("Access Management");
 		AdminService.getInstance();
-		CommandsAccessService.getInstance();
+		CommandsAccessService.loadAccesses();
 
 		ConsoleUtil.printSection("Player Transfers");
 		PlayerTransferService.getInstance();

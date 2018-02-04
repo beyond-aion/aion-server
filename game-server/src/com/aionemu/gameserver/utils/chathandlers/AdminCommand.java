@@ -35,7 +35,7 @@ public abstract class AdminCommand extends ChatCommand {
 
 	@Override
 	public boolean validateAccess(Player player) {
-		return player.hasAccess(getLevel()) || CommandsAccessService.getInstance().hasAccess(player.getObjectId(), getAlias());
+		return player.hasAccess(getLevel()) || CommandsAccessService.hasAccess(player.getObjectId(), getAlias());
 	}
 
 	@Override

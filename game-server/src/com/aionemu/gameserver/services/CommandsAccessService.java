@@ -1,8 +1,9 @@
 package com.aionemu.gameserver.services;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.dao.CommandsAccessDAO;
@@ -11,26 +12,28 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.ChatProcessor;
 
 /**
- * @author ViAl
+ * @author ViAl, Neon
  */
 public class CommandsAccessService {
 
-	private Map<Integer, List<String>> playersAccess;
+	private static Map<Integer, Set<String>> commandAccesses = Collections.emptyMap();
 
 	private CommandsAccessService() {
-		this.playersAccess = DAOManager.getDAO(CommandsAccessDAO.class).loadAccesses();
 	}
 
-	public static final CommandsAccessService getInstance() {
-		return SingletonHolder.instance;
+	public static void loadAccesses() {
+		commandAccesses = DAOManager.getDAO(CommandsAccessDAO.class).loadAccesses();
 	}
 
-	private static class SingletonHolder {
-
-		protected static final CommandsAccessService instance = new CommandsAccessService();
+	public static void giveTemporaryAccess(Player admin, int playerId, String command) {
+		giveAccess(admin, playerId, command, true);
 	}
 
-	public void giveAccess(Player admin, int playerId, String command) {
+	public static void giveAccess(Player admin, int playerId, String command) {
+		giveAccess(admin, playerId, command, false);
+	}
+
+	private static void giveAccess(Player admin, int playerId, String command, boolean isTemporary) {
 		if (hasAccess(playerId, command)) {
 			PacketSendUtility.sendMessage(admin, "This player already has access on command " + command);
 			return;
@@ -39,41 +42,41 @@ public class CommandsAccessService {
 			PacketSendUtility.sendMessage(admin, "There is no such admin command as \"" + command + "\"");
 			return;
 		}
-		if (!playersAccess.containsKey(playerId)) {
-			playersAccess.put(playerId, new ArrayList<String>());
-		}
-		List<String> commands = playersAccess.get(playerId);
-		commands.add(command);
-		DAOManager.getDAO(CommandsAccessDAO.class).addAccess(playerId, command);
+		commandAccesses.compute(playerId, (key, commands) -> {
+			if (commands == null)
+				commands = new HashSet<>();
+			commands.add(command);
+			return commands;
+		});
+		if (!isTemporary)
+			DAOManager.getDAO(CommandsAccessDAO.class).addAccess(playerId, command);
 		PacketSendUtility.sendMessage(admin, "Command access was granted successfuly.");
 	}
 
-	public void removeAccess(Player admin, int playerId, String command) {
+	public static void removeAccess(Player admin, int playerId, String command) {
 		if (!hasAccess(playerId, command)) {
 			PacketSendUtility.sendMessage(admin, "This player has no access on command " + command);
 			return;
 		}
-		List<String> commands = playersAccess.get(playerId);
+		Set<String> commands = commandAccesses.get(playerId);
 		commands.remove(command);
 		DAOManager.getDAO(CommandsAccessDAO.class).removeAccess(playerId, command);
 		PacketSendUtility.sendMessage(admin, "Command access was removed successfully");
 	}
 
-	public void removeAllAccesses(int playerId) {
-		if (this.playersAccess.containsKey(playerId)) {
-			List<String> commands = this.playersAccess.get(playerId);
+	public static boolean removeAllAccesses(int playerId) {
+		Set<String> commands = commandAccesses.get(playerId);
+		if (commands != null) {
 			commands.clear();
 			DAOManager.getDAO(CommandsAccessDAO.class).removeAllAccesses(playerId);
+			return true;
 		}
+		return false;
 	}
 
-	public boolean hasAccess(int playerId, String command) {
-		if (!playersAccess.containsKey(playerId))
-			return false;
-		List<String> commands = playersAccess.get(playerId);
-		if (commands.contains(command))
-			return true;
-		else
-			return false;
+	public static boolean hasAccess(int playerId, String command) {
+		Set<String> commands = commandAccesses.get(playerId);
+		return commands != null && commands.contains(command);
 	}
+
 }

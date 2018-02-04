@@ -3,10 +3,10 @@ package mysql5;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,18 +33,20 @@ public class MySQL5CommandsAccessDAO extends CommandsAccessDAO {
 	}
 
 	@Override
-	public Map<Integer, List<String>> loadAccesses() {
-		Map<Integer, List<String>> accesses = new HashMap<>();
+	public Map<Integer, Set<String>> loadAccesses() {
+		Map<Integer, Set<String>> accesses = new HashMap<>();
 		try (Connection conn = DatabaseFactory.getConnection();
 			PreparedStatement stmt = conn.prepareStatement(LOAD_QUERY);
 			ResultSet rset = stmt.executeQuery()) {
 			while (rset.next()) {
 				int playerId = rset.getInt("player_id");
 				String command = rset.getString("command");
-				if (!accesses.containsKey(playerId)) {
-					accesses.put(playerId, new ArrayList<String>());
-				}
-				accesses.get(playerId).add(command);
+				accesses.compute(playerId, (key, commands) -> {
+					if (commands == null)
+						commands = new HashSet<>();
+					commands.add(command);
+					return commands;
+				});
 			}
 		} catch (Exception e) {
 			log.error("Error while loading commands accesses.", e);
