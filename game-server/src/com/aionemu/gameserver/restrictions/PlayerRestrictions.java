@@ -214,10 +214,11 @@ public class PlayerRestrictions extends AbstractRestrictions {
 		} else if (player.isDead()) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_PARTY_CANT_INVITE_WHEN_DEAD());
 			return false;
-		} else if (player.isInGroup() && target.isInGroup() && player.getPlayerGroup().getTeamId() == target.getPlayerGroup().getTeamId()) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_PARTY_HE_IS_ALREADY_MEMBER_OF_OUR_PARTY(target.getName()));
 		} else if (target.isInGroup()) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_PARTY_HE_IS_ALREADY_MEMBER_OF_OTHER_PARTY(target.getName()));
+			if (player.isInGroup() && player.getPlayerGroup().getTeamId() == target.getPlayerGroup().getTeamId())
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_PARTY_HE_IS_ALREADY_MEMBER_OF_OUR_PARTY(target.getName()));
+			else
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_PARTY_HE_IS_ALREADY_MEMBER_OF_OTHER_PARTY(target.getName()));
 			return false;
 		} else if (target.isInAlliance()) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_FORCE_ALREADY_OTHER_FORCE(target.getName()));
@@ -318,8 +319,7 @@ public class PlayerRestrictions extends AbstractRestrictions {
 
 	@Override
 	public boolean canAttack(Player player, VisibleObject target) {
-		if (!player.isSpawned() || target == null || !checkFly(player, target) || player.getLifeStats().isAboutToDie()
-			|| player.isDead())
+		if (!player.isSpawned() || target == null || !checkFly(player, target) || player.getLifeStats().isAboutToDie() || player.isDead())
 			return false;
 
 		if (!player.canAttack()) {
