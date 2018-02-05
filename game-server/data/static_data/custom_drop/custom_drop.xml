@@ -4017,7 +4017,7 @@
 	<!-- START: Sealed Danuar Mysticarium -->
 	<npc_drop npc_id="702700">
 		<drop_group race="PC_ALL"><!-- Key -->
-			<drop item_id="185000224" chance="20" /><!-- Solid Prison Key -->
+			<drop item_id="185000224" chance="22" /><!-- Solid Prison Key -->
 		</drop_group>
 		<drop_group race="PC_ALL"><!-- Ancient Relic -->
 			<drop item_id="186000064" chance="5" /><!-- Greater Ancient Icon -->

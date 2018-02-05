@@ -1,10 +1,10 @@
 package com.aionemu.gameserver.model.drop;
 
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -21,7 +21,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
  */
 @XmlRootElement(name = "drop_group")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class DropGroup implements DropCalculator {
+public class DropGroup {
 
 	@XmlElement(name = "drop")
 	protected List<Drop> drops;
@@ -51,40 +51,50 @@ public class DropGroup implements DropCalculator {
 		return name;
 	}
 
-	@Override
-	public int dropCalculator(Set<DropItem> result, int index, float dropModifier, Race race, Collection<Player> groupMembers) {
-		if (maxItems == 1) { // this block generates less overhead
-			Drop d;
-			if (drops.size() > 1) {
-				List<Drop> safeDrops = drops.stream().filter(drop -> drop.getChance() >= 100).collect(Collectors.toList());
-				if (!safeDrops.isEmpty())
-					d = Rnd.get(safeDrops);
-				else
-					d = Rnd.get(drops);
-			} else
-				d = drops.get(0);
-			index = d.dropCalculator(result, index, dropModifier, race, groupMembers);
-		} else if (maxItems > 1) {
-			int iterationCount = 0;
-
-			List<Drop> safeDrops = drops.stream().filter(drop -> drop.getChance() >= 100).collect(Collectors.toList());
-			if (!safeDrops.isEmpty()) {
-				Collections.shuffle(safeDrops);
-				for (Drop d : safeDrops) {
-					index = d.dropCalculator(result, index, dropModifier, race, groupMembers);
-					if (++iterationCount >= maxItems)
-						return index;
+	public int tryAddDropItems(Set<DropItem> result, int index, float dropModifier, Collection<Player> groupMembers) {
+		Set<Drop> remainingDrops = new HashSet<>(drops);
+		for (int i = 0; i < maxItems && !remainingDrops.isEmpty(); i++) {
+			float chance = Rnd.chance();
+			float nearestChanceDiff = Float.MAX_VALUE;
+			List<Drop> nearestDropsOfSameChance = new ArrayList<>();
+			for (Drop drop : remainingDrops) {
+				float finalChance = drop.getFinalChance(dropModifier);
+				if (chance < finalChance) {
+					float chanceDiff = finalChance - chance;
+					if (nearestDropsOfSameChance.isEmpty() || chanceDiff <= nearestChanceDiff) {
+						if (chanceDiff < nearestChanceDiff) {
+							nearestDropsOfSameChance.clear();
+							nearestChanceDiff = chanceDiff;
+						}
+						nearestDropsOfSameChance.add(drop);
+					}
 				}
 			}
-
-			List<Drop> unsafeDrops = drops.stream().filter(drop -> drop.getChance() < 100).collect(Collectors.toList());
-			Collections.shuffle(unsafeDrops);
-			for (int i = 0; i < unsafeDrops.size(); i++) {
-				Drop d = unsafeDrops.get(i);
-				index = d.dropCalculator(result, index, dropModifier, race, groupMembers);
-				if (++iterationCount >= maxItems) // check every iteration to ensure not to always drop maxItem count if there are many items in a group
-					return index;
+			Drop drop = Rnd.get(nearestDropsOfSameChance);
+			if (drop != null) {
+				index = addDropItem(index, result, drop, groupMembers);
+				remainingDrops.remove(drop);
 			}
+		}
+		return index;
+	}
+
+	private int addDropItem(int index, Set<DropItem> result, Drop drop, Collection<Player> groupMembers) {
+		if (drop.isEachMember() && groupMembers != null && !groupMembers.isEmpty()) {
+			for (Player player : groupMembers) {
+				DropItem dropitem = new DropItem(drop);
+				dropitem.calculateCount();
+				dropitem.setIndex(index++);
+				dropitem.setPlayerObjId(player.getObjectId());
+				dropitem.setWinningPlayer(player);
+				dropitem.isDistributeItem(true);
+				result.add(dropitem);
+			}
+		} else {
+			DropItem dropitem = new DropItem(drop);
+			dropitem.calculateCount();
+			dropitem.setIndex(index++);
+			result.add(dropitem);
 		}
 		return index;
 	}

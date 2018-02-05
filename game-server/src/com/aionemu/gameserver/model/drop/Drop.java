@@ -77,44 +77,6 @@ public class Drop {
 	}
 
 	@Override
-	public int dropCalculator(Set<DropItem> result, int index, float dropModifier, Race race, Collection<Player> groupMembers) {
-		float percent = chance;
-		if (!noReduce) {
-			percent *= dropModifier;
-		}
-		if (Rnd.chance() < percent) {
-			if (eachMember && groupMembers != null && !groupMembers.isEmpty()) {
-				for (Player player : groupMembers) {
-					DropItem dropitem = new DropItem(this);
-					dropitem.calculateCount();
-					dropitem.setIndex(index++);
-					dropitem.setPlayerObjId(player.getObjectId());
-					dropitem.setWinningPlayer(player);
-					dropitem.isDistributeItem(true);
-					result.add(dropitem);
-				}
-			} else {
-				DropItem dropitem = new DropItem(this);
-				dropitem.calculateCount();
-				dropitem.setIndex(index++);
-				result.add(dropitem);
-			}
-		}
-		return index;
-	}
-
-	public static Drop load(ByteBuffer buffer) {
-		Drop drop = new Drop();
-		drop.itemId = buffer.getInt();
-		drop.chance = buffer.getFloat();
-		drop.minAmount = buffer.getInt();
-		drop.maxAmount = buffer.getInt();
-		drop.noReduce = buffer.get() == 1 ? true : false;
-		drop.eachMember = buffer.get() == 1 ? true : false;
-		return drop;
-	}
-
-	@Override
 	public String toString() {
 		return "Drop [itemId=" + itemId + ", minAmount=" + minAmount + ", maxAmount=" + maxAmount + ", chance=" + chance + ", noReduce=" + noReduce
 			+ ", eachMember=" + eachMember + "]";

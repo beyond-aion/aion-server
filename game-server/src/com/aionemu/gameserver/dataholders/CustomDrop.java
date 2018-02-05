@@ -37,7 +37,6 @@ public class CustomDrop {
 			if (dropById.putIfAbsent(drop.getNpcId(), drop) != null)
 				LoggerFactory.getLogger(CustomDrop.class).warn("Tried to set custom drop for npc " + drop.getNpcId() + " twice!");
 		}
-		npcDrop.clear();
 		npcDrop = null;
 	}
 

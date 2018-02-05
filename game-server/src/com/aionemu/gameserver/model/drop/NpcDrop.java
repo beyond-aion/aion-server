@@ -45,7 +45,7 @@ public class NpcDrop implements DropCalculator {
 			return index;
 		for (DropGroup dg : dropGroup) {
 			if (dg.getRace() == Race.PC_ALL || dg.getRace() == race) {
-				index = dg.dropCalculator(result, index, dropModifier, race, groupMembers);
+				index = dg.tryAddDropItems(result, index, dropModifier, groupMembers);
 			}
 		}
 		return index;
