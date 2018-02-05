@@ -32,13 +32,19 @@ public class PromotionKitService {
 		itemMap.put(35, new ArrayList<>());
 		itemMap.put(50, new ArrayList<>());
 
-		itemMap.get(1).add(new RewardItem(169610056, 1));
-		itemMap.get(20).add(new RewardItem(188054100, 1));
-		itemMap.get(25).add(new RewardItem(190100064, 1));
-		itemMap.get(25).add(new RewardItem(164002272, 25));
-		itemMap.get(25).add(new RewardItem(162000039, 25));
-		itemMap.get(25).add(new RewardItem(162002018, 25));
-		itemMap.get(35).add(new RewardItem(188054101, 1));
+		itemMap.get(1).add(new RewardItem(169610056, 1)); // [Title Card] Novice of Atreia – 30-day pass
+		itemMap.get(20).add(new RewardItem(188054100, 1)); // Bronze Coin Box
+		itemMap.get(20).add(new RewardItem(125001832, 1)); // Experienced Lepharist Veil
+		itemMap.get(20).add(new RewardItem(122000449, 1)); // Ghost Rose Quartz Ring
+		itemMap.get(20).add(new RewardItem(122000451, 1)); // Ghost Crystal Ring
+		itemMap.get(20).add(new RewardItem(120015052, 1)); // Prestigious Magic Earrings
+		itemMap.get(20).add(new RewardItem(120015051, 1)); // Prestigious Combat Earrings
+		itemMap.get(20).add(new RewardItem(123000879, 1)); // Morai's Belt
+		itemMap.get(25).add(new RewardItem(190100064, 1)); // Flying Pagati (30 days)
+		itemMap.get(25).add(new RewardItem(164002272, 25)); // [Event] Enduring Greater Raging Wind Scroll
+		itemMap.get(25).add(new RewardItem(162000039, 25)); // Divine Wind Serum
+		itemMap.get(25).add(new RewardItem(162002018, 25)); // [Event] Wormwood Dish
+		itemMap.get(35).add(new RewardItem(188054101, 1)); // Silver Coin Box
 		itemMap.get(50).add(new RewardItem(187060075, 1));
 		itemMap.get(50).add(new RewardItem(121000815, 1));
 		itemMap.get(50).add(new RewardItem(120000901, 1));
