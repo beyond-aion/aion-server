@@ -209,9 +209,9 @@ public class DecomposeAction extends AbstractItemAction {
 										itemLvl = itemLvl % 10 == 0 ? itemLvl : ((int) Math.ceil((itemLvl == 1 ? player.getLevel() : itemLvl) / 10f) * 10);
 									else
 										itemLvl = randomType.getLevel();
-									List<ItemTemplate> stones = DataManager.ITEM_DATA.getManastones().get(itemLvl);
+									List<ItemTemplate> stones = DataManager.ITEM_DATA.getManastones(itemLvl);
 									if (stones == null) {
-										log.warn("DecomposeAction random item id not found. " + parentItem.getItemTemplate().getTemplateId());
+										log.warn("No lv" + itemLvl + " manastones found for decomposable random type " + randomItem.getType());
 										break;
 									}
 									if (!randomType.equals(RandomType.MANASTONE)) {
@@ -237,9 +237,9 @@ public class DecomposeAction extends AbstractItemAction {
 								case SPECIAL_MANASTONE_LEGEND_GRADE:
 								case SPECIAL_MANASTONE_UNIQUE_GRADE:
 								case SPECIAL_MANASTONE_EPIC_GRADE:
-									List<ItemTemplate> ancientStones = DataManager.ITEM_DATA.getSpecialManastones().get(randomType.getLevel());
+									List<ItemTemplate> ancientStones = DataManager.ITEM_DATA.getAncientManastones(randomType.getLevel());
 									if (ancientStones == null) {
-										log.warn("DecomposeAction random item id not found. " + parentItem.getItemTemplate().getTemplateId());
+										log.warn("No ancient manastones found for decomposable random type " + randomItem.getType());
 										break;
 									}
 									final ItemQuality itemQuality;

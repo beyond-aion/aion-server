@@ -1,7 +1,7 @@
 package com.aionemu.gameserver.dataholders;
 
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -13,6 +13,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 import com.aionemu.gameserver.model.items.ItemMask;
+import com.aionemu.gameserver.model.templates.item.ItemQuality;
 import com.aionemu.gameserver.model.templates.item.ItemTemplate;
 import com.aionemu.gameserver.model.templates.item.enums.ItemGroup;
 import com.aionemu.gameserver.model.templates.restriction.ItemCleanupTemplate;
@@ -33,45 +34,49 @@ public class ItemData {
 	private TIntObjectHashMap<ItemTemplate> items;
 
 	@XmlTransient
-	Map<Integer, List<ItemTemplate>> manastones = new LinkedHashMap<>();
+	private Map<Integer, List<ItemTemplate>> manastones = new HashMap<>();
 	@XmlTransient
-	Map<Integer, List<ItemTemplate>> eventManastones = new LinkedHashMap<>();
-	@XmlTransient
-	Map<Integer, List<ItemTemplate>> stampManastones = new LinkedHashMap<>();
-	@XmlTransient
-	Map<Integer, List<ItemTemplate>> specialManastones = new LinkedHashMap<>();
+	private Map<Integer, List<ItemTemplate>> ancientManastones = new HashMap<>();
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		items = new TIntObjectHashMap<>();
 		for (ItemTemplate it : its) {
 			items.put(it.getTemplateId(), it);
-			if (it.getItemGroup().equals(ItemGroup.MANASTONE)) {
-				int level = it.getLevel();
-				if (!manastones.containsKey(level)) {
-					manastones.put(level, new ArrayList<>());
+			if (it.getItemGroup() == ItemGroup.MANASTONE) {
+				String stoneName = it.getName().toLowerCase();
+				if (!stoneName.startsWith("[event]") && !stoneName.startsWith("[stamp]") && !stoneName.startsWith("[legion]")) {
+					add(manastones, it, it.getLevel());
+					addStonesForHigherLevels(manastones, it, it.getLevel());
 				}
-				if (!eventManastones.containsKey(level)) {
-					eventManastones.put(level, new ArrayList<>());
-				}
-				if (!stampManastones.containsKey(level)) {
-					stampManastones.put(level, new ArrayList<>());
-				}
-				if (it.getName().toLowerCase().startsWith("[stamp]"))
-					stampManastones.get(level).add(it);
-				else if (it.getName().toLowerCase().startsWith("[event]"))
-					eventManastones.get(level).add(it);
-				else if (!it.getName().toLowerCase().startsWith("[legion]"))
-					manastones.get(level).add(it);
-			} else if (it.getItemGroup().equals(ItemGroup.SPECIAL_MANASTONE)) {
-				int level = it.getLevel();
-				if (!specialManastones.containsKey(level))
-					specialManastones.put(level, new ArrayList<>());
-
+			} else if (it.getItemGroup() == ItemGroup.SPECIAL_MANASTONE) {
 				if (!it.getName().toLowerCase().startsWith("[stamp]"))
-					specialManastones.get(level).add(it);
+					add(ancientManastones, it, it.getLevel());
 			}
 		}
 		its = null;
+	}
+
+	private void add(Map<Integer, List<ItemTemplate>> itemMap, ItemTemplate item, int manastoneLevel) {
+		itemMap.compute(manastoneLevel, (level, items) -> {
+			if (items == null)
+				items = new ArrayList<>();
+			items.add(item);
+			return items;
+		});
+	}
+
+	private void addStonesForHigherLevels(Map<Integer, List<ItemTemplate>> itemMap, ItemTemplate item, int manastoneLevel) {
+		if (manastoneLevel == 60 && item.getTemplateId() == 167000563) // Manastone: Healing Boost +3
+			add(itemMap, item, 70);
+		if (manastoneLevel == 10 || manastoneLevel == 30 || manastoneLevel == 50) {
+			if (item.getItemQuality() == ItemQuality.COMMON || item.getItemQuality() == ItemQuality.RARE) {
+				if (item.getName().contains("Manastone: Attack +")) {
+					add(itemMap, item, manastoneLevel + 10); // add 10 as 20 / 30 as 40 / 50 as 60
+					if (manastoneLevel == 50)
+						add(itemMap, item, 70);
+				}
+			}
+		}
 	}
 
 	public void cleanup() {
@@ -109,19 +114,11 @@ public class ItemData {
 		return items.size();
 	}
 
-	public Map<Integer, List<ItemTemplate>> getManastones() {
-		return manastones;
+	public List<ItemTemplate> getManastones(int level) {
+		return manastones.get(level);
 	}
 
-	public Map<Integer, List<ItemTemplate>> getEventManastones() {
-		return eventManastones;
-	}
-
-	public Map<Integer, List<ItemTemplate>> getStampManastones() {
-		return stampManastones;
-	}
-
-	public Map<Integer, List<ItemTemplate>> getSpecialManastones() {
-		return specialManastones;
+	public List<ItemTemplate> getAncientManastones(int level) {
+		return ancientManastones.get(level);
 	}
 }
