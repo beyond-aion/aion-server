@@ -811,7 +811,7 @@ public final class QuestService {
 						if (dItem != null) {
 							dItem.setPlayerObjId(p.getObjectId());
 						}
-						dropNpc.setPlayerObjectId(p.getObjectId());
+						dropNpc.setAllowedLooter(p);
 						if (player.getPlayerGroup().getLootGroupRules().getLootRule() != LootRuleType.FREEFORALL) {
 							PacketSendUtility.sendPacket(p, new SM_LOOT_STATUS(npc.getObjectId(), 0));
 						}
@@ -845,7 +845,7 @@ public final class QuestService {
 						if (dItem != null) {
 							dItem.setPlayerObjId(p.getObjectId());
 						}
-						dropNpc.setPlayerObjectId(p.getObjectId());
+						dropNpc.setAllowedLooter(p);
 						if (player.getPlayerAlliance().getLootGroupRules().getLootRule() != LootRuleType.FREEFORALL) {
 							PacketSendUtility.sendPacket(p, new SM_LOOT_STATUS(npc.getObjectId(), 0));
 						}

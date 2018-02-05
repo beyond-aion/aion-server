@@ -1,29 +1,26 @@
 package com.aionemu.gameserver.model.templates.globaldrops;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Set;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlList;
 import javax.xml.bind.annotation.XmlType;
 
 /**
  * @author Bobobear
  */
-
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "GlobalDropExcludedNpcs")
 public class GlobalDropExcludedNpcs {
 
-	@XmlElement(name = "gd_excluded_npc")
-	protected List<GlobalDropExcludedNpc> gdExcludedNpcs;
+	@XmlList
+	@XmlAttribute(name = "npc_ids", required = true)
+	private Set<Integer> npcIds;
 
-	public List<GlobalDropExcludedNpc> getGlobalDropExcludedNpcs() {
-		if (gdExcludedNpcs == null) {
-			gdExcludedNpcs = new ArrayList<>();
-		}
-		return this.gdExcludedNpcs;
+	public Set<Integer> getNpcIds() {
+		return npcIds;
 	}
 
 }

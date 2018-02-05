@@ -10,8 +10,9 @@ public final class Rnd {
 	private static final MTRandom rnd = new MTRandom();
 
 	/**
-	 * To compare this chance with a success rate, evaluate "{@code if (chance() < success rate)}" to determine a success. This ensures that a success
-	 * rate of 0 (0%) will always fail, and a success rate of 100.0 (100%) always succeeds.
+	 * To compare this chance with a success rate, evaluate "{@code if (chance() < success rate)}" to determine a success or, alternatively
+	 * "{@code if (chance() >= success rate)}" to determine a fail. This ensures that a success rate of 0 (0%) will always fail, and a success rate of
+	 * 100.0 (100%) always succeeds.
 	 * 
 	 * @return A random chance between 0.0f (inclusive) and 100.0f (exclusive)
 	 */
@@ -55,7 +56,7 @@ public final class Rnd {
 	 * @return Random element
 	 */
 	public static <T> T get(List<T> list) {
-		return list.isEmpty() ? null : list.get(get(list.size()));
+		return list.isEmpty() ? null : list.size() == 1 ? list.get(0) : list.get(get(list.size()));
 	}
 
 	/**
@@ -65,7 +66,7 @@ public final class Rnd {
 	 * @return Random element
 	 */
 	public static <T> T get(T[] array) {
-		return array.length == 0 ? null : array[get(array.length)];
+		return array.length == 0 ? null : array.length == 1 ? array[0] : array[get(array.length)];
 	}
 
 	/**
@@ -77,7 +78,7 @@ public final class Rnd {
 	public static int get(int[] array) {
 		if (array.length == 0)
 			throw new IllegalArgumentException("Cannot get random int from an empty array.");
-		return array[get(array.length)];
+		return array.length == 1 ? array[0] : array[get(array.length)];
 	}
 
 	/**

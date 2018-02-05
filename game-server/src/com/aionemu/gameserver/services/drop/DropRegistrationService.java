@@ -2,6 +2,7 @@ package com.aionemu.gameserver.services.drop;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -14,6 +15,7 @@ import com.aionemu.gameserver.ai.event.AIEventType;
 import com.aionemu.gameserver.configs.main.DropConfig;
 import com.aionemu.gameserver.configs.main.RatesConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
+import com.aionemu.gameserver.dataholders.GlobalNpcExclusionData;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.drop.Drop;
 import com.aionemu.gameserver.model.drop.DropItem;
@@ -24,7 +26,6 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.Rates;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.model.team.common.legacy.LootGroupRules;
-import com.aionemu.gameserver.model.templates.globaldrops.GlobalDropExcludedNpc;
 import com.aionemu.gameserver.model.templates.globaldrops.GlobalDropItem;
 import com.aionemu.gameserver.model.templates.globaldrops.GlobalDropMap;
 import com.aionemu.gameserver.model.templates.globaldrops.GlobalDropNpc;
@@ -34,7 +35,6 @@ import com.aionemu.gameserver.model.templates.globaldrops.GlobalDropRating;
 import com.aionemu.gameserver.model.templates.globaldrops.GlobalDropTribe;
 import com.aionemu.gameserver.model.templates.globaldrops.GlobalDropWorld;
 import com.aionemu.gameserver.model.templates.globaldrops.GlobalDropZone;
-import com.aionemu.gameserver.model.templates.globaldrops.GlobalExclusion;
 import com.aionemu.gameserver.model.templates.globaldrops.GlobalRule;
 import com.aionemu.gameserver.model.templates.housing.HouseType;
 import com.aionemu.gameserver.model.templates.npc.AbyssNpcType;
@@ -70,32 +70,67 @@ public class DropRegistrationService {
 	 * After NPC dies, it can register arbitrary drop
 	 */
 	public void registerDrop(Npc npc, Player player, int highestLevel, Collection<Player> groupMembers) {
-		if (player == null) {
-			return;
-		}
 		int npcObjId = npc.getObjectId();
 
 		// Getting all possible drops for this Npc
 		NpcDrop npcDrop = DataManager.CUSTOM_NPC_DROP.getNpcDrop(npc.getNpcId());
-		Set<DropItem> droppedItems = new HashSet<>();
-		int index = 1;
-		int dropChance = 100;
-		int npcLevel = npc.getLevel();
 		String dropType = npc.getGroupDrop().name().toLowerCase();
 		boolean isChest = npc.getAi().getName().equals("chest") || dropType.startsWith("treasure") || dropType.endsWith("box");
-		if (!DropConfig.DISABLE_REDUCTION && ((isChest && npcLevel != 1 || !isChest)) && !DropConfig.NO_REDUCTION_MAPS.contains(npc.getWorldId())) {
-			dropChance = DropRewardEnum.dropRewardFrom(npcLevel - highestLevel); // reduce chance depending on level
+
+		List<Player> dropPlayers = new ArrayList<>();
+		Collection<Player> winningPlayers = new ArrayList<>();
+		Player looter = player;
+		int winnerObj = 0;
+		Player teamLooter = initDropNpc(player, npcObjId, dropPlayers, winningPlayers, groupMembers);
+		if (teamLooter != null) {
+			looter = teamLooter;
+			winnerObj = teamLooter.getObjectId();
 		}
 
-		// Generete drop by this player
-		Player genesis = player;
-		Integer winnerObj = 0;
+		int index = 1;
+		Set<DropItem> droppedItems = new HashSet<>();
+		float dropRate = calculateDropRate(looter, npc, isChest, highestLevel);
 
+		if (npcDrop != null) // add custom drops
+			index = npcDrop.dropCalculator(droppedItems, index, dropRate, looter.getRace(), groupMembers);
+
+		// Updating current dropMap
+		currentDropMap.put(npcObjId, droppedItems);
+
+		index = QuestService.getQuestDrop(droppedItems, index, npc, groupMembers, looter);
+
+		// if npc ai == quest_use_item it will be always excluded from global drops
+		boolean isNpcQuest = npc.getAi().getName().equals("quest_use_item");
+		if (!isNpcQuest && !hasGlobalNpcExclusions(npc)) {
+			boolean isAllowedDefaultGlobalDropNpc = isAllowedDefaultGlobalDropNpc(npc, isChest);
+			// instances with WorldDropType.NONE must not have global drops (example Arenas)
+			if (npc.getWorldDropType() != WorldDropType.NONE) {
+				index = addGlobalDrops(index, dropRate, looter, npc, isAllowedDefaultGlobalDropNpc, DataManager.GLOBAL_DROP_DATA.getAllRules(), droppedItems,
+					winningPlayers, winnerObj);
+			}
+			addGlobalDrops(index, dropRate, looter, npc, isAllowedDefaultGlobalDropNpc, EventService.getInstance().getActiveEventDropRules(), droppedItems,
+				winningPlayers, winnerObj);
+		}
+
+		if (npc.isInInstance()) {
+			npc.getPosition().getWorldMapInstance().getInstanceHandler().onDropRegistered(npc);
+		}
+		npc.getAi().onGeneralEvent(AIEventType.DROP_REGISTERED);
+
+		for (Player p : dropPlayers) {
+			PacketSendUtility.sendPacket(p, new SM_LOOT_STATUS(npcObjId, 0));
+		}
+
+		DropService.getInstance().scheduleFreeForAll(npcObjId);
+	}
+
+	private Player initDropNpc(Player player, int npcObjId, List<Player> dropPlayers, Collection<Player> winningPlayers,
+		Collection<Player> groupMembers) {
+		Player looter = null;
+		DropNpc dropNpc = new DropNpc(npcObjId);
+		Set<Integer> allowedDropPlayers = new HashSet<>();
 		// Distributing drops to players
-		Collection<Player> dropPlayers = new ArrayList<>();
-		Collection<Player> winningPlayers = new ArrayList<>();
 		if (player.isInGroup() || player.isInAlliance()) {
-			List<Integer> dropMembers = new ArrayList<>();
 			LootGroupRules lootGrouRules = player.getLootGroupRules();
 
 			switch (lootGrouRules.getLootRule()) {
@@ -111,9 +146,7 @@ public class DropRegistrationService {
 						i++;
 						if (i == lootGrouRules.getNrRoundRobin()) {
 							winningPlayers.add(p);
-							winnerObj = p.getObjectId();
-							setItemsToWinner(droppedItems, winnerObj);
-							genesis = p;
+							looter = p;
 							break;
 						}
 					}
@@ -124,30 +157,67 @@ public class DropRegistrationService {
 				case LEADER:
 					Player leader = player.isInGroup() ? player.getPlayerGroup().getLeaderObject() : player.getPlayerAlliance().getLeaderObject();
 					winningPlayers.add(leader);
-					winnerObj = leader.getObjectId();
-					setItemsToWinner(droppedItems, winnerObj);
-
-					genesis = leader;
+					looter = leader;
 					break;
 			}
 
 			for (Player member : winningPlayers) {
-				dropMembers.add(member.getObjectId());
+				allowedDropPlayers.add(member.getObjectId());
 				dropPlayers.add(member);
 			}
-			DropNpc dropNpc = new DropNpc(npcObjId);
-			dropRegistrationMap.put(npcObjId, dropNpc);
-			dropNpc.setPlayersObjectId(dropMembers);
+
 			dropNpc.setInRangePlayers(groupMembers);
 			dropNpc.setGroupSize(groupMembers.size());
 		} else {
-			List<Integer> singlePlayer = new ArrayList<>();
-			singlePlayer.add(player.getObjectId());
+			allowedDropPlayers.add(player.getObjectId());
 			dropPlayers.add(player);
-			dropRegistrationMap.put(npcObjId, new DropNpc(npcObjId));
-			dropRegistrationMap.get(npcObjId).setPlayersObjectId(singlePlayer);
 		}
+		dropNpc.setAllowedLooters(allowedDropPlayers);
+		dropRegistrationMap.put(npcObjId, dropNpc);
+		return looter;
+	}
 
+	public boolean isAllowedDefaultGlobalDropNpc(Npc npc, boolean isChest) {
+		// exclude most siege spawns, and inner base spawns
+		if (npc.getSpawn() instanceof SiegeSpawnTemplate && npc.getAbyssNpcType() != AbyssNpcType.DEFENDER)
+			return false;
+		if (npc.getSpawn() instanceof BaseSpawnTemplate && npc.getSpawn().getHandlerType() != SpawnHandlerType.OUTRIDER
+			&& npc.getSpawn().getHandlerType() != SpawnHandlerType.OUTRIDER_ENHANCED)
+			return false;
+		// if npc level == 1 means missing stats, so better exclude it from drops
+		if (npc.getLevel() < 2 && !isChest && npc.getWorldId() != WorldMapType.POETA.getId() && npc.getWorldId() != WorldMapType.ISHALGEN.getId())
+			return false;
+		// if abyss type npc != null or npc is chest, the npc will be excluded from drops
+		if (isChest || npc.getAbyssNpcType() != AbyssNpcType.NONE && npc.getAbyssNpcType() != AbyssNpcType.DEFENDER)
+			return false;
+		return true;
+	}
+
+	private int addGlobalDrops(int index, float dropRate, Player player, Npc npc, boolean isAllowedDefaultGlobalDropNpc, List<GlobalRule> rules,
+		Set<DropItem> droppedItems, Collection<Player> winningPlayers, int winnerObj) {
+		for (GlobalRule rule : rules) {
+			// if getGlobalRuleNpcs() != null means drops are for specified npcs (like named drops) so the default restrictions will be ignored
+			if (isAllowedDefaultGlobalDropNpc || rule.getGlobalRuleNpcs() != null) {
+				float chance = calculateEffectiveChance(rule, npc, dropRate);
+				if (Rnd.chance() >= chance)
+					continue;
+
+				index = addDropItems(index, droppedItems, rule, npc, player, winningPlayers, winnerObj);
+			}
+		}
+		return index;
+	}
+
+	public float calculateDropRate(Player player, Npc npc, boolean isChest, int highestLevel) {
+		int dropChance = 100;
+		if (!DropConfig.DISABLE_REDUCTION && (!isChest || npc.getLevel() != 1) && !DropConfig.NO_REDUCTION_MAPS.contains(npc.getWorldId()))
+			dropChance = DropRewardEnum.dropRewardFrom(npc.getLevel() - highestLevel); // reduce chance depending on level
+		float boostDropRate = calculateBoostDropRate(player, npc);
+		float dropRate = Rates.get(player, RatesConfig.DROP_RATES) * boostDropRate * dropChance / 100F;
+		return dropRate;
+	}
+
+	private float calculateBoostDropRate(Player genesis, Npc npc) {
 		// Drop rate from NPC can be boosted by Spiritmaster Erosion skill
 		float boostDropRate = npc.getGameStats().getStat(StatEnum.BOOST_DROP_RATE, 100).getCurrent() / 100f;
 
@@ -165,229 +235,47 @@ public class DropRegistrationService {
 
 		// can be exploited on duel with Spiritmaster Erosion skill
 		boostDropRate += genesis.getGameStats().getStat(StatEnum.BOOST_DROP_RATE, 100).getCurrent() / 100f - 1;
-
-		float dropRate = Rates.get(genesis, RatesConfig.DROP_RATES) * boostDropRate * dropChance / 100F;
-
-		if (npcDrop != null) {
-			index = npcDrop.dropCalculator(droppedItems, index, dropRate, genesis.getRace(), groupMembers);
-		}
-
-		// Updating current dropMap
-		currentDropMap.put(npcObjId, droppedItems);
-
-		index = QuestService.getQuestDrop(droppedItems, index, npc, groupMembers, genesis);
-
-		if (!EventService.getInstance().getActiveEventDropRules().isEmpty()) {
-			boolean isNpcQuest = npc.getAi().getName().equals("quest_use_item");
-			// if npc ai == quest_use_item it will be always excluded from event drops
-			// also check if npc must be excluded due to global npc restrictions
-			if (!isNpcQuest && !hasGlobalNpcExclusions(npc)) {
-				for (GlobalRule rule : EventService.getInstance().getActiveEventDropRules()) {
-					if (rule.getGlobalRuleItems() == null)
-						continue;
-
-					// if getGlobalRuleNpcs() != null means drops are for specified npcs (like named drops)
-					// so the following restrictions will be ignored
-					if (rule.getGlobalRuleNpcs() == null) {
-						// exclude most siege spawns, and inner base spawns
-						if (npc.getSpawn() instanceof SiegeSpawnTemplate && npc.getAbyssNpcType() != AbyssNpcType.DEFENDER)
-							continue;
-						if (npc.getSpawn() instanceof BaseSpawnTemplate) {
-							if (npc.getSpawn().getHandlerType() != SpawnHandlerType.OUTRIDER
-								&& npc.getSpawn().getHandlerType() != SpawnHandlerType.OUTRIDER_ENHANCED)
-								continue;
-						}
-						// if npc level ==1 means missing stats, so better exclude it from drops
-						if (npc.getLevel() < 2 && !isChest && npc.getWorldId() != WorldMapType.POETA.getId()
-							&& npc.getWorldId() != WorldMapType.ISHALGEN.getId()) {
-							continue;
-						}
-						// if abyss type npc != null or npc is chest, the npc will be excluded from drops
-						if ((!isChest && npc.getAbyssNpcType() != AbyssNpcType.NONE) || isChest) {
-							continue;
-						}
-					}
-
-					float chance = rule.getChance();
-					// if fixed_chance == true means all mobs will have the same base chance (npcRating and npcRank will be excluded from calculation)
-					if (!rule.isFixedChance())
-						chance *= getRankModifier(npc) * getRatingModifier(npc);
-					// ignore dropRate if it's a noReduction rule (would be 0 since it includes the dropChance)
-					if (!rule.getNoReduction())
-						chance *= dropRate;
-					if (Rnd.chance() > chance)
-						continue;
-
-					if (!DropConfig.DISABLE_REDUCTION && ((isChest && npc.getLevel() != 1 || !isChest))
-						&& !DropConfig.NO_REDUCTION_MAPS.contains(npc.getWorldId())) {
-						if ((player.getLevel() - npc.getLevel()) >= 10 && !rule.getNoReduction())
-							continue;
-					}
-					if (!checkRestrictionRace(rule, player))
-						continue;
-					if (!checkGlobalRuleMaps(rule, npc))
-						continue;
-					if (!checkGlobalRuleWorlds(rule, npc))
-						continue;
-					if (!checkGlobalRuleRatings(rule, npc))
-						continue;
-					if (!checkGlobalRuleRaces(rule, npc))
-						continue;
-					if (!checkGlobalRuleTribes(rule, npc))
-						continue;
-					if (!checkGlobalRuleZones(rule, npc))
-						continue;
-					if (!checkGlobalRuleNpcs(rule, npc))
-						continue;
-					if (!checkGlobalRuleNpcGroups(rule, npc)) // drop group from npc_templates
-						continue;
-					if (checkGlobalRuleExcludedNpcs(rule, npc))
-						continue;
-					List<Integer> alloweditems = getAllowedItems(rule, npc, player);
-					if (alloweditems.isEmpty())
-						continue;
-
-					if (rule.getMemberLimit() > 1 && (player.isInGroup() || player.isInAlliance() || player.isInLeague())) {
-						final int limit = rule.getMemberLimit();
-						int distributedItems = 0;
-						for (Player member : winningPlayers) {
-							for (int itemListed : alloweditems) {
-								DropItem dropitem = new DropItem(new Drop(itemListed, 1, 1, 100, false));
-								dropitem.setCount(getItemCount(itemListed, rule, npc));
-								dropitem.setIndex(index++);
-								dropitem.setPlayerObjId(member.getObjectId());
-								dropitem.setWinningPlayer(member);
-								dropitem.isDistributeItem(true);
-								droppedItems.add(dropitem);
-							}
-							if (++distributedItems >= limit)
-								break;
-						}
-					} else {
-						for (int itemListed : alloweditems) {
-							droppedItems.add(regDropItem(index++, winnerObj, npcObjId, itemListed, getItemCount(itemListed, rule, npc)));
-						}
-					}
-				}
-			}
-		}
-
-		// if npc ai == quest_use_item it will be always excluded from global drops
-		boolean isNpcQuest = npc.getAi().getName().equals("quest_use_item");
-		// instances with WorldDropType.NONE must not have global drops (example Arenas)
-		if (!isNpcQuest && !hasGlobalNpcExclusions(npc) && npc.getWorldDropType() != WorldDropType.NONE) {
-			for (GlobalRule rule : DataManager.GLOBAL_DROP_DATA.getAllRules()) {
-				if (rule.getGlobalRuleItems() == null)
-					continue;
-
-				// if getGlobalRuleNpcs() != null means drops are for specified npcs (like named drops)
-				// so the following restrictions will be ignored
-				if (rule.getGlobalRuleNpcs() == null) {
-					// exclude most siege spawns, and inner base spawns
-					if (npc.getSpawn() instanceof SiegeSpawnTemplate && npc.getAbyssNpcType() != AbyssNpcType.DEFENDER)
-						continue;
-					if (npc.getSpawn() instanceof BaseSpawnTemplate) {
-						if (npc.getSpawn().getHandlerType() != SpawnHandlerType.OUTRIDER && npc.getSpawn().getHandlerType() != SpawnHandlerType.OUTRIDER_ENHANCED)
-							continue;
-					}
-
-					// if npc level ==1 means missing stats, so better exclude it from drops
-					if (npc.getLevel() < 2 && !isChest && npc.getWorldId() != WorldMapType.POETA.getId() && npc.getWorldId() != WorldMapType.ISHALGEN.getId()) {
-						continue;
-					}
-					// if abyss type npc != null or npc is chest, the npc will be excluded from drops
-					if ((!isChest && npc.getAbyssNpcType() != AbyssNpcType.NONE && npc.getAbyssNpcType() != AbyssNpcType.DEFENDER) || isChest) {
-						continue;
-					}
-				}
-
-				float chance = rule.getChance();
-				// if fixed_chance == true means all mobs will have the same base chance (npcRating and npcRank will be excluded from calculation)
-				if (!rule.isFixedChance())
-					chance *= getRankModifier(npc) * getRatingModifier(npc);
-				// ignore dropRate if it's a noReduction rule (would be 0 since it includes the dropChance)
-				if (!rule.getNoReduction())
-					chance *= dropRate;
-				if (Rnd.chance() > chance)
-					continue;
-
-				if (!DropConfig.DISABLE_REDUCTION && ((isChest && npc.getLevel() != 1) || !isChest)
-					&& !DropConfig.NO_REDUCTION_MAPS.contains(npc.getWorldId())) {
-					if ((player.getLevel() - npc.getLevel()) >= 10 && !rule.getNoReduction())
-						continue;
-				}
-				if (!checkRestrictionRace(rule, player))
-					continue;
-				if (!checkGlobalRuleMaps(rule, npc))
-					continue;
-				if (!checkGlobalRuleWorlds(rule, npc))
-					continue;
-				if (!checkGlobalRuleRatings(rule, npc))
-					continue;
-				if (!checkGlobalRuleRaces(rule, npc))
-					continue;
-				if (!checkGlobalRuleTribes(rule, npc))
-					continue;
-				if (!checkGlobalRuleZones(rule, npc))
-					continue;
-				if (!checkGlobalRuleNpcs(rule, npc))
-					continue;
-				if (!checkGlobalRuleNpcGroups(rule, npc)) // drop group from npc_templates
-					continue;
-				// not used anymore, converted into Ids during Load Static Data
-				// if (!checkGlobalRuleNpcNames (rule, npc))
-				// continue;
-				if (checkGlobalRuleExcludedNpcs(rule, npc))
-					continue;
-				List<Integer> alloweditems = getAllowedItems(rule, npc, player);
-				if (alloweditems.size() == 0)
-					continue;
-
-				if (rule.getMemberLimit() > 1 && (player.isInGroup() || player.isInAlliance() || player.isInLeague())) {
-					final int limit = rule.getMemberLimit();
-					int distributedItems = 0;
-					for (Player member : winningPlayers) {
-						for (int itemListed : alloweditems) {
-							DropItem dropitem = new DropItem(new Drop(itemListed, 1, 1, 100, false));
-							dropitem.setCount(getItemCount(itemListed, rule, npc));
-							dropitem.setIndex(index++);
-							dropitem.setPlayerObjId(member.getObjectId());
-							dropitem.setWinningPlayer(member);
-							dropitem.isDistributeItem(true);
-							droppedItems.add(dropitem);
-						}
-						if (++distributedItems >= limit)
-							break;
-					}
-				} else {
-					for (int itemListed : alloweditems) {
-						droppedItems.add(regDropItem(index++, winnerObj, npcObjId, itemListed, getItemCount(itemListed, rule, npc)));
-					}
-				}
-			}
-		}
-
-		if (npc.isInInstance()) {
-			npc.getPosition().getWorldMapInstance().getInstanceHandler().onDropRegistered(npc);
-		}
-		npc.getAi().onGeneralEvent(AIEventType.DROP_REGISTERED);
-
-		for (Player p : dropPlayers) {
-			PacketSendUtility.sendPacket(p, new SM_LOOT_STATUS(npcObjId, 0));
-		}
-
-		DropService.getInstance().scheduleFreeForAll(npcObjId);
+		return boostDropRate;
 	}
 
-	public void setItemsToWinner(Set<DropItem> droppedItems, Integer obj) {
-		for (DropItem dropItem : droppedItems) {
-			if (!dropItem.getDropTemplate().isEachMember()) {
-				if (obj == 0)
-					dropItem.getPlayerObjIds().clear();
-				else
-					dropItem.setPlayerObjId(obj);
+	public float calculateEffectiveChance(GlobalRule rule, Npc npc, float dropRate) {
+		float chance = rule.getChance();
+		// if fixed_chance == true means all mobs will have the same base chance (npcRating and npcRank will be excluded from calculation)
+		if (!rule.isFixedChance())
+			chance *= getRankModifier(npc) * getRatingModifier(npc);
+		// ignore chance reducing dropRate if it's a noReduction rule
+		if (dropRate > 1 || !rule.getNoReduction())
+			chance *= dropRate;
+		return chance;
+	}
+
+	private int addDropItems(int index, Set<DropItem> droppedItems, GlobalRule rule, Npc npc, Player player, Collection<Player> winningPlayers,
+		int winnerObj) {
+		List<GlobalDropItem> alloweditems = getAllowedItems(rule, npc, player);
+		if (!alloweditems.isEmpty()) {
+			if (rule.getMemberLimit() > 1 && player.isInTeam()) {
+				final int limit = rule.getMemberLimit();
+				int distributedItems = 0;
+				for (Player member : winningPlayers) {
+					for (GlobalDropItem itemListed : alloweditems) {
+						DropItem dropitem = new DropItem(new Drop(itemListed.getId(), 1, 1, 100, false));
+						dropitem.setCount(getItemCount(itemListed.getId(), rule, npc));
+						dropitem.setIndex(index++);
+						dropitem.setPlayerObjId(member.getObjectId());
+						dropitem.setWinningPlayer(member);
+						dropitem.isDistributeItem(true);
+						droppedItems.add(dropitem);
+					}
+					if (++distributedItems >= limit)
+						break;
+				}
+			} else {
+				for (GlobalDropItem itemListed : alloweditems) {
+					droppedItems.add(regDropItem(index++, winnerObj, npc.getObjectId(), itemListed.getId(), getItemCount(itemListed.getId(), rule, npc)));
+				}
 			}
 		}
+		return index;
 	}
 
 	public DropItem regDropItem(int index, int playerObjId, int objId, int itemId, long count) {
@@ -418,27 +306,50 @@ public class DropRegistrationService {
 	}
 
 	public boolean hasGlobalNpcExclusions(Npc npc) {
-		for (GlobalExclusion gde : DataManager.GLOBAL_EXCLUSION_DATA.getGlobalExclusions()) {
-			if (gde.getNpcIds() != null && gde.getNpcIds().contains(npc.getNpcId())
-				|| gde.getNpcNames() != null && gde.getNpcNames().contains(npc.getName())
-				|| gde.getNpcTemplateTypes() != null && gde.getNpcTemplateTypes().contains(npc.getNpcTemplateType())
-				|| gde.getNpcTribes() != null && npc.getTribe() != null && gde.getNpcTribes().contains(npc.getTribe())
-				|| gde.getNpcAbyssTypes() != null && gde.getNpcAbyssTypes().contains(npc.getAbyssNpcType()))
+		GlobalNpcExclusionData gde = DataManager.GLOBAL_EXCLUSION_DATA;
+		if (!gde.isEmpty()) {
+			if (gde.getNpcIds().contains(npc.getNpcId()) || gde.getNpcNames().contains(npc.getName())
+				|| gde.getNpcTemplateTypes().contains(npc.getNpcTemplateType()) || npc.getTribe() != null && gde.getNpcTribes().contains(npc.getTribe())
+				|| gde.getNpcAbyssTypes().contains(npc.getAbyssNpcType()))
 				return true;
 		}
 		return false;
 	}
 
-	public boolean checkRestrictionRace(GlobalRule rule, Player player) {
+	private boolean checkRuleRestrictions(GlobalRule rule, Race race, Npc npc) {
+		if (!checkRestrictionRace(rule, race))
+			return false;
+		if (!checkGlobalRuleMaps(rule, npc))
+			return false;
+		if (!checkGlobalRuleWorlds(rule, npc))
+			return false;
+		if (!checkGlobalRuleRatings(rule, npc))
+			return false;
+		if (!checkGlobalRuleRaces(rule, npc))
+			return false;
+		if (!checkGlobalRuleTribes(rule, npc))
+			return false;
+		if (!checkGlobalRuleZones(rule, npc))
+			return false;
+		if (!checkGlobalRuleNpcs(rule, npc))
+			return false;
+		if (!checkGlobalRuleNpcGroups(rule, npc)) // drop group from npc_templates
+			return false;
+		if (!checkGlobalRuleExcludedNpcs(rule, npc))
+			return false;
+		return true;
+	}
+
+	private boolean checkRestrictionRace(GlobalRule rule, Race race) {
 		if (rule.getRestrictionRace() != null) {
-			if (player.getRace() == Race.ASMODIANS && rule.getRestrictionRace().equals(GlobalRule.RestrictionRace.ELYOS)
-				|| player.getRace() == Race.ELYOS && rule.getRestrictionRace().equals(GlobalRule.RestrictionRace.ASMODIANS))
+			if (race == Race.ASMODIANS && rule.getRestrictionRace() == GlobalRule.RestrictionRace.ELYOS
+				|| race == Race.ELYOS && rule.getRestrictionRace() == GlobalRule.RestrictionRace.ASMODIANS)
 				return false;
 		}
 		return true;
 	}
 
-	public boolean checkGlobalRuleMaps(GlobalRule rule, Npc npc) {
+	private boolean checkGlobalRuleMaps(GlobalRule rule, Npc npc) {
 		if (rule.getGlobalRuleMaps() != null) {
 			for (GlobalDropMap gdMap : rule.getGlobalRuleMaps().getGlobalDropMaps())
 				if (gdMap.getMapId() == npc.getPosition().getMapId())
@@ -448,7 +359,7 @@ public class DropRegistrationService {
 		return true;
 	}
 
-	public boolean checkGlobalRuleWorlds(GlobalRule rule, Npc npc) {
+	private boolean checkGlobalRuleWorlds(GlobalRule rule, Npc npc) {
 		if (rule.getGlobalRuleWorlds() != null) {
 			for (GlobalDropWorld gdWorld : rule.getGlobalRuleWorlds().getGlobalDropWorlds())
 				if (gdWorld.getWorldDropType().equals(npc.getWorldDropType()))
@@ -458,7 +369,7 @@ public class DropRegistrationService {
 		return true;
 	}
 
-	public boolean checkGlobalRuleRatings(GlobalRule rule, Npc npc) {
+	private boolean checkGlobalRuleRatings(GlobalRule rule, Npc npc) {
 		if (rule.getGlobalRuleRatings() != null) {
 			for (GlobalDropRating gdRating : rule.getGlobalRuleRatings().getGlobalDropRatings())
 				if (gdRating.getRating().equals(npc.getRating()))
@@ -468,7 +379,7 @@ public class DropRegistrationService {
 		return true;
 	}
 
-	public boolean checkGlobalRuleRaces(GlobalRule rule, Npc npc) {
+	private boolean checkGlobalRuleRaces(GlobalRule rule, Npc npc) {
 		if (rule.getGlobalRuleRaces() != null) {
 			for (GlobalDropRace gdRace : rule.getGlobalRuleRaces().getGlobalDropRaces())
 				if (gdRace.getRace().equals(npc.getRace()))
@@ -478,7 +389,7 @@ public class DropRegistrationService {
 		return true;
 	}
 
-	public boolean checkGlobalRuleTribes(GlobalRule rule, Npc npc) {
+	private boolean checkGlobalRuleTribes(GlobalRule rule, Npc npc) {
 		if (rule.getGlobalRuleTribes() != null) {
 			for (GlobalDropTribe gdTribe : rule.getGlobalRuleTribes().getGlobalDropTribes())
 				if (gdTribe.getTribe().equals(npc.getTribe()))
@@ -488,7 +399,7 @@ public class DropRegistrationService {
 		return true;
 	}
 
-	public boolean checkGlobalRuleZones(GlobalRule rule, Npc npc) {
+	private boolean checkGlobalRuleZones(GlobalRule rule, Npc npc) {
 		if (rule.getGlobalRuleZones() != null) {
 			for (GlobalDropZone gdZone : rule.getGlobalRuleZones().getGlobalDropZones())
 				if (npc.isInsideZone(ZoneName.get(gdZone.getZone())))
@@ -498,7 +409,7 @@ public class DropRegistrationService {
 		return true;
 	}
 
-	public boolean checkGlobalRuleNpcs(GlobalRule rule, Npc npc) {
+	private boolean checkGlobalRuleNpcs(GlobalRule rule, Npc npc) {
 		if (rule.getGlobalRuleNpcs() != null) {
 			for (GlobalDropNpc gdNpc : rule.getGlobalRuleNpcs().getGlobalDropNpcs())
 				if (gdNpc.getNpcId() == npc.getNpcId())
@@ -508,7 +419,7 @@ public class DropRegistrationService {
 		return true;
 	}
 
-	public boolean checkGlobalRuleNpcGroups(GlobalRule rule, Npc npc) {
+	private boolean checkGlobalRuleNpcGroups(GlobalRule rule, Npc npc) {
 		if (rule.getGlobalRuleNpcGroups() != null) {
 			for (GlobalDropNpcGroup gdGroup : rule.getGlobalRuleNpcGroups().getGlobalDropNpcGroups())
 				if (gdGroup.getGroup().equals(npc.getGroupDrop()))
@@ -518,20 +429,19 @@ public class DropRegistrationService {
 		return true;
 	}
 
-	public boolean checkGlobalRuleExcludedNpcs(GlobalRule rule, Npc npc) {
+	private boolean checkGlobalRuleExcludedNpcs(GlobalRule rule, Npc npc) {
 		if (rule.getGlobalRuleExcludedNpcs() != null)
-			for (GlobalDropExcludedNpc gdExcludedNpc : rule.getGlobalRuleExcludedNpcs().getGlobalDropExcludedNpcs())
-				if (gdExcludedNpc.getNpcId() == npc.getNpcId())
-					return true;
-		return false;
+			return !rule.getGlobalRuleExcludedNpcs().getNpcIds().contains(npc.getNpcId());
+		return true;
 	}
 
-	public List<Integer> getAllowedItems(GlobalRule rule, Npc npc, Player player) {
+	public List<GlobalDropItem> getAllowedItems(GlobalRule rule, Npc npc, Player player) {
+		if (!checkRuleRestrictions(rule, player.getRace(), npc))
+			return Collections.emptyList();
 		List<GlobalDropItem> tempItems = new ArrayList<>();
-		List<Integer> allowedItems = new ArrayList<>();
-		for (GlobalDropItem globalItem : rule.getGlobalRuleItems().getGlobalDropItems()) {
-			if (player.getRace() == Race.ASMODIANS && globalItem.getItemTemplate().getRace().equals(Race.ELYOS)
-				|| player.getRace() == Race.ELYOS && globalItem.getItemTemplate().getRace().equals(Race.ASMODIANS)) {
+		List<GlobalDropItem> allowedItems = new ArrayList<>();
+		for (GlobalDropItem globalItem : rule.getDropItems()) {
+			if (player.getOppositeRace() == globalItem.getItemTemplate().getRace()) {
 				continue;
 			}
 			int diff = npc.getLevel() - globalItem.getItemTemplate().getLevel();
@@ -547,7 +457,7 @@ public class DropRegistrationService {
 					GlobalDropItem item = iter.next();
 					currentSum += item.getChance();
 					if (rnd < currentSum) {
-						allowedItems.add(item.getId());
+						allowedItems.add(item);
 						iter.remove();
 						break;
 					}

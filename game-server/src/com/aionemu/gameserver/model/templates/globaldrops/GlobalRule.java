@@ -1,9 +1,12 @@
 package com.aionemu.gameserver.model.templates.globaldrops;
 
+import java.util.List;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlType;
 
@@ -14,63 +17,64 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "GlobalRule")
 public class GlobalRule {
 
-	@XmlElement(name = "gd_items", required = false)
-	protected GlobalDropItems gdItems;
+	@XmlElementWrapper(name = "gd_items", required = true)
+	@XmlElement(name = "gd_item", required = true)
+	private List<GlobalDropItem> gdItems;
 
-	@XmlElement(name = "gd_maps", required = false)
-	protected GlobalDropMaps gdMaps;
+	@XmlElement(name = "gd_maps")
+	private GlobalDropMaps gdMaps;
 
-	@XmlElement(name = "gd_races", required = false)
-	protected GlobalDropRaces gdRaces;
+	@XmlElement(name = "gd_races")
+	private GlobalDropRaces gdRaces;
 
-	@XmlElement(name = "gd_tribes", required = false)
-	protected GlobalDropTribes gdTribes;
+	@XmlElement(name = "gd_tribes")
+	private GlobalDropTribes gdTribes;
 
-	@XmlElement(name = "gd_ratings", required = false)
-	protected GlobalDropRatings gdRatings;
+	@XmlElement(name = "gd_ratings")
+	private GlobalDropRatings gdRatings;
 
-	@XmlElement(name = "gd_worlds", required = false)
-	protected GlobalDropWorlds gdWorlds;
+	@XmlElement(name = "gd_worlds")
+	private GlobalDropWorlds gdWorlds;
 
-	@XmlElement(name = "gd_npcs", required = false)
-	protected GlobalDropNpcs gdNpcs;
+	@XmlElement(name = "gd_npcs")
+	private GlobalDropNpcs gdNpcs;
 
-	@XmlElement(name = "gd_npc_names", required = false)
-	protected GlobalDropNpcNames gdNpcNames;
+	@XmlElement(name = "gd_npc_names")
+	private GlobalDropNpcNames gdNpcNames;
 
-	@XmlElement(name = "gd_npc_groups", required = false)
-	protected GlobalDropNpcGroups gdNpcGroups;
+	@XmlElement(name = "gd_npc_groups")
+	private GlobalDropNpcGroups gdNpcGroups;
 
-	@XmlElement(name = "gd_excluded_npcs", required = false)
-	protected GlobalDropExcludedNpcs gdExcludedNpcs;
+	@XmlElement(name = "gd_excluded_npcs")
+	private GlobalDropExcludedNpcs gdExcludedNpcs;
 
-	@XmlElement(name = "gd_zones", required = false)
-	protected GlobalDropZones gdZones;
+	@XmlElement(name = "gd_zones")
+	private GlobalDropZones gdZones;
 
 	@XmlAttribute(name = "rule_name", required = true)
-	protected String ruleName;
+	private String ruleName;
 	@XmlAttribute(name = "min_count")
-	protected Long minCount = 1L;
+	private Long minCount = 1L;
 	@XmlAttribute(name = "max_count")
-	protected Long maxCount = 1L;
+	private Long maxCount = 1L;
 	@XmlAttribute(name = "base_chance", required = true)
-	protected float chance;
+	private float chance;
 	@XmlAttribute(name = "min_diff")
-	protected int minDiff = -99;
+	private int minDiff = -99;
 	@XmlAttribute(name = "max_diff")
-	protected int maxDiff = 99;
+	private int maxDiff = 99;
 	@XmlAttribute(name = "restriction_race")
-	protected RestrictionRace restrictionRace;
+	private RestrictionRace restrictionRace;
 	@XmlAttribute(name = "no_reduction")
-	protected boolean noReduction;
+	private boolean noReduction;
 	@XmlAttribute(name = "member_limit")
-	protected int memberLimit = 1;
+	private int memberLimit = 1;
 	@XmlAttribute(name = "max_drop_rule")
-	protected int maxDropRule = 1;
+	private int maxDropRule = 1;
 	@XmlAttribute(name = "fixed_chance")
-	protected boolean fixedChance;
+	private boolean fixedChance;
 
-	public GlobalDropItems getGlobalRuleItems() {
+	public List<GlobalDropItem> getDropItems() {
 		return gdItems;
 	}
 
@@ -123,19 +127,11 @@ public class GlobalRule {
 	}
 
 	public long getMinCount() {
-		if (minCount == null) {
-			return 1L;
-		} else {
-			return minCount;
-		}
+		return minCount;
 	}
 
 	public long getMaxCount() {
-		if (maxCount == null) {
-			return 1L;
-		} else {
-			return maxCount;
-		}
+		return maxCount;
 	}
 
 	public float getChance() {

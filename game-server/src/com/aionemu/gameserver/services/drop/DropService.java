@@ -110,7 +110,7 @@ public class DropService {
 		if (player.isLooting())
 			closeDropList(player, player.getLootingNpcOid());
 
-		if (!dropNpc.containsKey(player.getObjectId()) && !dropNpc.isFreeForAll()) {
+		if (!dropNpc.isFreeForAll() && !dropNpc.isAllowedLooter(player)) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_LOOT_NO_RIGHT());
 			return;
 		}
@@ -183,20 +183,23 @@ public class DropService {
 			RespawnService.scheduleDecayTask(npc, dropNpc.getRemaingDecayTime());
 
 			LootGroupRules lootGrouRules = player.getLootGroupRules();
-			if (lootGrouRules != null && dropNpc.getInRangePlayers().size() > 1 && dropNpc.getPlayersObjectId().size() == 1) {
+			if (lootGrouRules != null && dropNpc.getInRangePlayers().size() > 1 && dropNpc.getAllowedLooters().size() == 1) {
 				LootRuleType lrt = lootGrouRules.getLootRule();
 				if (lrt != LootRuleType.FREEFORALL) {
 					for (Player member : dropNpc.getInRangePlayers()) {
 						if (member != null)
-							dropNpc.setPlayerObjectId(member.getObjectId());
+							dropNpc.setAllowedLooter(member);
 					}
-					DropRegistrationService.getInstance().setItemsToWinner(dropItems, 0);
+					for (DropItem dropItem : dropItems) {
+						if (!dropItem.getDropTemplate().isEachMember())
+							dropItem.getPlayerObjIds().clear();
+					}
 				}
 			}
 			if (dropNpc.isFreeForAll()) {
 				PacketSendUtility.broadcastPacket(npc, new SM_LOOT_STATUS(npcObjectId, 0));
 			} else {
-				PacketSendUtility.broadcastPacket(player, new SM_LOOT_STATUS(npcObjectId, 0), true, p -> dropNpc.containsKey(p.getObjectId()));
+				PacketSendUtility.broadcastPacket(player, new SM_LOOT_STATUS(npcObjectId, 0), true, p -> dropNpc.isAllowedLooter(p));
 			}
 		}
 	}
@@ -317,7 +320,7 @@ public class DropService {
 		}
 
 		// fix exploit
-		if (!requestedItem.isDistributeItem() && !dropNpc.containsKey(player.getObjectId()) && !dropNpc.isFreeForAll()) {
+		if (!requestedItem.isDistributeItem() && !dropNpc.isFreeForAll() && !dropNpc.isAllowedLooter(player)) {
 			return;
 		}
 
@@ -529,7 +532,7 @@ public class DropService {
 		if (dropNpc == null)
 			return;
 
-		if (dropNpc.containsKey(player.getObjectId()) || dropNpc.isFreeForAll()) {
+		if (dropNpc.isFreeForAll() || dropNpc.isAllowedLooter(player)) {
 			ThreadPoolManager.getInstance().schedule(() -> PacketSendUtility.sendPacket(player, new SM_LOOT_STATUS(id, 0)), 5000);
 		}
 	}
@@ -553,11 +556,11 @@ public class DropService {
 
 		@Override
 		public boolean changeItem(Item input) {
-			if (dropNpc.getPlayersObjectId().size() > 1) {
+			if (dropNpc.getAllowedLooters().size() > 1) {
 				ItemTemplate template = input.getItemTemplate();
 				if (template.getTempExchangeTime() != 0) {
 					input.setTemporaryExchangeTime((int) (System.currentTimeMillis() / 1000) + (template.getTempExchangeTime() * 60));
-					TemporaryTradeTimeTask.getInstance().addTask(input, dropNpc.getPlayersObjectId());
+					TemporaryTradeTimeTask.getInstance().addTask(input, dropNpc.getAllowedLooters());
 				}
 				return true;
 			}

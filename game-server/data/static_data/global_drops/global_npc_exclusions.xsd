@@ -5,17 +5,14 @@
 	<xs:element name="global_npc_exclusions">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:element maxOccurs="unbounded" name="global_exclusion" type="GlobalExclusion" />
+				<xs:element minOccurs="0" name="npc_ids" type="IntListType" />
+				<xs:element minOccurs="0" name="npc_names" type="StringListType" />
+				<xs:element minOccurs="0" name="npc_types" type="ListNpcTemplateType" />
+				<xs:element minOccurs="0" name="npc_tribes" type="ListTribeClass" />
+				<xs:element minOccurs="0" name="npc_abyss_types" type="ListAbyssType" />
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
-	<xs:complexType name="GlobalExclusion">
-		<xs:attribute type="IntListType" name="npc_ids" use="optional" />
-		<xs:attribute type="StringListType" name="npc_names" use="optional" />
-		<xs:attribute type="ListNpcTemplateType" name="npc_types" use="optional" />
-		<xs:attribute type="ListTribeClass" name="npc_tribes" use="optional" />
-		<xs:attribute type="ListAbyssType" name="npc_abyss_types" use="optional" />
-	</xs:complexType>
 	<xs:simpleType name="ListNpcTemplateType">
 		<xs:list itemType="NpcTemplateType" />
 	</xs:simpleType>

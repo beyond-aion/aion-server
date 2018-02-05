@@ -2,7 +2,8 @@ package com.aionemu.gameserver.model.gameobjects;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 
@@ -11,7 +12,8 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
  */
 public class DropNpc {
 
-	private Collection<Integer> allowedList = new ArrayList<>();
+	private final int objectIdId;
+	private Set<Integer> allowedLooters = new HashSet<>();
 	private Collection<Player> inRangePlayers = new ArrayList<>();
 	private Collection<Player> playerStatus = new ArrayList<>();
 	private Player lootingPlayer = null;
@@ -20,32 +22,29 @@ public class DropNpc {
 	private int currentIndex = 0;
 	private int groupSize = 0;
 	private boolean isFreeForAll = false;
-	private final int npcUniqueId;
 	private long remaingDecayTime;
 
-	public DropNpc(int npcUniqueId) {
-		this.npcUniqueId = npcUniqueId;
+	public DropNpc(int objectIdId) {
+		this.objectIdId = objectIdId;
 	}
 
-	public void setPlayersObjectId(List<Integer> allowedList) {
-		this.allowedList = allowedList;
+	public void setAllowedLooters(Set<Integer> allowedLooters) {
+		this.allowedLooters = allowedLooters;
 	}
 
-	public void setPlayerObjectId(int objectId) {
-		if (!allowedList.contains(objectId)) {
-			allowedList.add(objectId);
-		}
+	public void setAllowedLooter(Player player) {
+		allowedLooters.add(player.getObjectId());
 	}
 
-	public Collection<Integer> getPlayersObjectId() {
-		return allowedList;
+	public Set<Integer> getAllowedLooters() {
+		return allowedLooters;
 	}
 
 	/**
 	 * @return true if playerObjId is found in list
 	 */
-	public boolean containsKey(int playerObjId) {
-		return allowedList.contains(playerObjId);
+	public boolean isAllowedLooter(Player player) {
+		return allowedLooters.contains(player.getObjectId());
 	}
 
 	/**
@@ -178,11 +177,11 @@ public class DropNpc {
 	public void startFreeForAll() {
 		isFreeForAll = true;
 		distributionId = 0;
-		allowedList.clear();
+		allowedLooters.clear();
 	}
 
-	public final int getNpcUniqueId() {
-		return npcUniqueId;
+	public final int getObjectId() {
+		return objectIdId;
 	}
 
 	public long getRemaingDecayTime() {

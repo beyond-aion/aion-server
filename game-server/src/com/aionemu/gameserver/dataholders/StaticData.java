@@ -309,7 +309,7 @@ public class StaticData {
 		log.info("Loaded " + customNpcDrop.size() + " custom npc drops");
 		log.info("Loaded " + systemMailTemplates.size() + " system mail templates");
 		log.info("Loaded " + npcShoutData.size() + " npc shout templates");
-		log.info("Loaded " + petData.size() + " pet templates " + petFeedData.size() + " food flavours");
+		log.info("Loaded " + petData.size() + " pet templates and " + petFeedData.size() + " food flavours");
 		log.info("Loaded " + petDopingData.size() + " pet doping templates");
 		log.info("Loaded " + petBuffsData.size() + " pet buffs templates");
 		log.info("Loaded " + playerInitialData.size() + " initial player templates");
@@ -375,8 +375,7 @@ public class StaticData {
 		log.info("Loaded " + townSpawnsData.getSpawnsCount() + " town spawns");
 		log.info("Loaded " + temperingData.size() + " temperings");
 		log.info("Loaded " + enchantData.size() + " enchants");
-		log.info("Loaded " + globalDropData.size() + " global drop rules");
-		log.info("Loaded " + globalExclusionData.size() + " global drop npc exclusion rules");
+		log.info("Loaded " + globalDropData.size() + " global drop rules" + (globalExclusionData.isEmpty() ? "" : " with global drop npc exclusions"));
 		log.info("Loaded " + multiReturnItem.size() + " multi return item entries");
 		log.info("Loaded " + hotspotData.size() + " hotspot entries");
 		log.info("Loaded " + itemPurificationData.size() + " item purifications entries");

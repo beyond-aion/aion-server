@@ -1,24 +1,16 @@
 package com.aionemu.gameserver.model.drop;
 
-import java.nio.ByteBuffer;
-import java.util.Collection;
-import java.util.Set;
-
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
-
-import com.aionemu.commons.utils.Rnd;
-import com.aionemu.gameserver.model.Race;
-import com.aionemu.gameserver.model.gameobjects.player.Player;
 
 /**
  * @author MrPoke
  */
 @XmlRootElement(name = "drop")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Drop implements DropCalculator {
+public class Drop {
 
 	@XmlAttribute(name = "item_id")
 	private int itemId;
@@ -65,11 +57,15 @@ public class Drop implements DropCalculator {
 		return maxAmount;
 	}
 
-	/**
-	 * Gets the value of the chance property.
-	 */
 	public float getChance() {
 		return chance;
+	}
+
+	public float getFinalChance(float dropModifier) {
+		float finalChance = chance;
+		if (!noReduce)
+			finalChance *= dropModifier;
+		return finalChance;
 	}
 
 	public boolean isNoReduction() {
