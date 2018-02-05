@@ -84,7 +84,7 @@ public class MySQL5PlayerEffectsDAO extends PlayerEffectsDAO {
 				ps.setInt(3, effect.getSkillLevel());
 				ps.setInt(4, (int) effect.getRemainingTimeMillis());
 				ps.setLong(5, effect.getEndTime());
-				ps.setString(6, effect.getForceType().getName());
+				ps.setString(6, effect.getForceType() == null ? null : effect.getForceType().getName());
 				ps.addBatch();
 			}
 

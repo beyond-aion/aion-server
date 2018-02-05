@@ -23,6 +23,7 @@ import com.aionemu.gameserver.controllers.attack.AttackStatus;
 import com.aionemu.gameserver.controllers.attack.AttackUtil;
 import com.aionemu.gameserver.controllers.observer.ActionObserver;
 import com.aionemu.gameserver.controllers.observer.ObserverType;
+import com.aionemu.gameserver.custom.pvpmap.PvpMapService;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.Race;
@@ -265,7 +266,8 @@ public class PlayerController extends CreatureController<Player> {
 	// TODO [AT] move
 	public void onEnterWorld() {
 		if (getOwner().getPosition().getWorldMapInstance().getParent().isExceptBuff()) {
-			getOwner().getEffectController().removeAllEffects();
+			if (!PvpMapService.getInstance().isOnPvPMap(getOwner()))
+				getOwner().getEffectController().removeAllEffects();
 		}
 
 		for (Effect ef : getOwner().getEffectController().getAbnormalEffects()) {
