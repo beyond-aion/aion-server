@@ -26,6 +26,158 @@
 			</buff>
 		</buffs>
 	</event>
+	<event name="Beyond Aion Broken Hearts" start="2018-02-09T00:00:00" end="2018-02-18T23:59:59">
+		<event_drops>
+			<gd_rule rule_name="Broken Hearts L" min_count="1" base_chance="35" min_diff="-20" max_diff="70">
+				<gd_items>
+					<gd_item id="188100091" /><!-- [Event] Signet Piece: A -->
+				</gd_items>
+				<gd_maps>
+					<gd_map map_id="300200000" /><!-- Haramel -->
+					<gd_map map_id="300230000" /><!-- Kromede's Trial -->
+					<gd_map map_id="300240000" /><!-- Aturam Sky Fortress -->
+					<gd_map map_id="300610000" /><!-- Raksang Ruins -->
+					<gd_map map_id="301270000" /><!-- Linkgate Foundry -->
+				</gd_maps>
+			</gd_rule>
+			<gd_rule rule_name="Broken Hearts O" min_count="1" base_chance="35" min_diff="-20" max_diff="70">
+				<gd_npcs>
+					<gd_npc npc_id="236307" /><!-- Inggison Dionae -->
+					<gd_npc npc_id="236308" /><!-- Inggison Excura -->
+					<gd_npc npc_id="236309" /><!-- Inggison Rotron -->
+					<gd_npc npc_id="236310" /><!-- Inggison Kirrin -->
+					<gd_npc npc_id="236311" /><!-- Inggison Puca -->
+					<gd_npc npc_id="236312" /><!-- Inggison Rynoce -->
+					<gd_npc npc_id="236313" /><!-- Inggison Gnarl -->
+					<gd_npc npc_id="236314" /><!-- Inggison Baku -->
+					<gd_npc npc_id="236315" /><!-- Inggison Crettin -->
+					<gd_npc npc_id="236316" /><!-- Inggison Serrator -->
+					<gd_npc npc_id="236317" /><!-- Inggison Obscura -->
+					<gd_npc npc_id="236318" /><!-- Inggison Ashulagen -->
+					<gd_npc npc_id="236319" /><!-- Inggison Ksellid -->
+					<gd_npc npc_id="236320" /><!-- Inggison Vortile -->
+					<gd_npc npc_id="236321" /><!-- Inggison Luciferin -->
+					<gd_npc npc_id="236322" /><!-- Inggison Wraithling -->
+					<gd_npc npc_id="236323" /><!-- Inggison Gryphu -->
+					<gd_npc npc_id="236324" /><!-- Inggison Barghest -->
+					<gd_npc npc_id="236325" /><!-- Inggison Dragrint -->
+					<gd_npc npc_id="236326" /><!-- Inggison Murmur -->
+					<gd_npc npc_id="236327" /><!-- Inggison Spaller -->
+					<gd_npc npc_id="236328" /><!-- Inggison Petrahulk -->
+					<gd_npc npc_id="236329" /><!-- Inggison Ksellid -->
+					<gd_npc npc_id="236330" /><!-- Inggison Drake -->
+					<gd_npc npc_id="236331" /><!-- Inggison Shulack Shaman -->
+					<gd_npc npc_id="236332" /><!-- Inggison Shulack Lookout -->
+					<gd_npc npc_id="236333" /><!-- Inggison Shulack Assailant -->
+					<gd_npc npc_id="236334" /><!-- Inggison Shulack Hunter -->
+					<gd_npc npc_id="236335" /><!-- Vulgar Inggison Dionae -->
+					<gd_npc npc_id="236336" /><!-- Vulgar Inggison Excura -->
+					<gd_npc npc_id="236337" /><!-- Vulgar Inggison Rotron -->
+					<gd_npc npc_id="236338" /><!-- Vulgar Inggison Kirrin -->
+					<gd_npc npc_id="236339" /><!-- Vulgar Inggison Puca -->
+					<gd_npc npc_id="236340" /><!-- Vulgar Inggison Rynoce -->
+					<gd_npc npc_id="236341" /><!-- Vulgar Inggison Gnarl -->
+					<gd_npc npc_id="236342" /><!-- Vulgar Inggison Baku -->
+					<gd_npc npc_id="236343" /><!-- Vulgar Inggison Crettin -->
+					<gd_npc npc_id="236344" /><!-- Vulgar Inggison Serrator -->
+					<gd_npc npc_id="236345" /><!-- Vulgar Inggison Obscura -->
+					<gd_npc npc_id="236346" /><!-- Vulgar Inggison Ashulagen -->
+					<gd_npc npc_id="236347" /><!-- Vulgar Inggison Ksellid -->
+					<gd_npc npc_id="236348" /><!-- Vulgar Inggison Vortile -->
+					<gd_npc npc_id="236349" /><!-- Vulgar Inggison Luciferin -->
+					<gd_npc npc_id="236350" /><!-- Vulgar Inggison Wraithling -->
+					<gd_npc npc_id="236351" /><!-- Vulgar Inggison Gryphu -->
+					<gd_npc npc_id="236352" /><!-- Vulgar Inggison Barghest -->
+					<gd_npc npc_id="236353" /><!-- Vulgar Inggison Dragrint -->
+					<gd_npc npc_id="236354" /><!-- Vulgar Inggison Murmur -->
+					<gd_npc npc_id="236355" /><!-- Vulgar Inggison Spaller -->
+					<gd_npc npc_id="236356" /><!-- Vulgar Inggison Petrahulk -->
+					<gd_npc npc_id="236357" /><!-- Vulgar Inggison Ksellid -->
+					<gd_npc npc_id="236358" /><!-- Vulgar Inggison Drake -->
+					<gd_npc npc_id="236359" /><!-- Vulgar Inggison Shulack Shaman -->
+					<gd_npc npc_id="236360" /><!-- Vulgar Inggison Shulack Lookout -->
+					<gd_npc npc_id="236361" /><!-- Vulgar Inggison Shulack Assailant -->
+					<gd_npc npc_id="236362" /><!-- Vulgar Inggison Shulack Hunter -->
+					<gd_npc npc_id="236363" /><!-- Gelkmaros Dionae -->
+					<gd_npc npc_id="236364" /><!-- Gelkmaros Spaken -->
+					<gd_npc npc_id="236365" /><!-- Gelkmaros Cellatu -->
+					<gd_npc npc_id="236366" /><!-- Gelkmaros Luciferin -->
+					<gd_npc npc_id="236367" /><!-- Gelkmaros Dragrint -->
+					<gd_npc npc_id="236368" /><!-- Gelkmaros Leowasp -->
+					<gd_npc npc_id="236369" /><!-- Gelkmaros Crestlich -->
+					<gd_npc npc_id="236370" /><!-- Gelkmaros Serrator -->
+					<gd_npc npc_id="236371" /><!-- Gelkmaros Petrahulk -->
+					<gd_npc npc_id="236372" /><!-- Gelkmaros Scolopen -->
+					<gd_npc npc_id="236373" /><!-- Gelkmaros Wraithling -->
+					<gd_npc npc_id="236374" /><!-- Gelkmaros Zanthay -->
+					<gd_npc npc_id="236375" /><!-- Gelkmaros Barghest -->
+					<gd_npc npc_id="236376" /><!-- Gelkmaros Supraklaw -->
+					<gd_npc npc_id="236377" /><!-- Gelkmaros Murmur -->
+					<gd_npc npc_id="236378" /><!-- Gelkmaros Kalgolem -->
+					<gd_npc npc_id="236379" /><!-- Gelkmaros Bosbear -->
+					<gd_npc npc_id="236380" /><!-- Gelkmaros Luciferin -->
+					<gd_npc npc_id="236381" /><!-- Gelkmaros Gryphu -->
+					<gd_npc npc_id="236382" /><!-- Gelkmaros Dionae -->
+					<gd_npc npc_id="236383" /><!-- Gelkmaros Puca -->
+					<gd_npc npc_id="236384" /><!-- Gelkmaros Neokin -->
+					<gd_npc npc_id="236385" /><!-- Gelkmaros Earth Spirit -->
+					<gd_npc npc_id="236386" /><!-- Gelkmaros Caprex -->
+					<gd_npc npc_id="236387" /><!-- Gelkmaros Strigik Herbalist -->
+					<gd_npc npc_id="236388" /><!-- Gelkmaros Strigik Warrior -->
+					<gd_npc npc_id="236389" /><!-- Gelkmaros Strigik Assailant -->
+					<gd_npc npc_id="236390" /><!-- Gelkmaros Strigik Shaman -->
+					<gd_npc npc_id="236391" /><!-- Vulgar Gelkmaros Dionae -->
+					<gd_npc npc_id="236392" /><!-- Vulgar Gelkmaros Spaken -->
+					<gd_npc npc_id="236393" /><!-- Vulgar Gelkmaros Cellatu -->
+					<gd_npc npc_id="236394" /><!-- Vulgar Gelkmaros Luciferin -->
+					<gd_npc npc_id="236395" /><!-- Vulgar Gelkmaros Dragrint -->
+					<gd_npc npc_id="236396" /><!-- Vulgar Gelkmaros Leowasp -->
+					<gd_npc npc_id="236397" /><!-- Vulgar Gelkmaros Crestlich -->
+					<gd_npc npc_id="236398" /><!-- Vulgar Gelkmaros Serrator -->
+					<gd_npc npc_id="236399" /><!-- Vulgar Gelkmaros Petrahulk -->
+					<gd_npc npc_id="236400" /><!-- Vulgar Gelkmaros Scolopen -->
+					<gd_npc npc_id="236401" /><!-- Vulgar Gelkmaros Wraithling -->
+					<gd_npc npc_id="236402" /><!-- Vulgar Gelkmaros Zanthay -->
+					<gd_npc npc_id="236403" /><!-- Vulgar Gelkmaros Barghest -->
+					<gd_npc npc_id="236404" /><!-- Vulgar Gelkmaros Supraklwar -->
+					<gd_npc npc_id="236405" /><!-- Vulgar Gelkmaros Murmur -->
+					<gd_npc npc_id="236406" /><!-- Vulgar Gelkmaros Kalgolem -->
+					<gd_npc npc_id="236407" /><!-- Vulgar Gelkmaros Bosbear -->
+					<gd_npc npc_id="236408" /><!-- Vulgar Gelkmaros Luciferin -->
+					<gd_npc npc_id="236409" /><!-- Vulgar Gelkmaros Gryphu -->
+					<gd_npc npc_id="236410" /><!-- Vulgar Gelkmaros Dionae -->
+					<gd_npc npc_id="236411" /><!-- Vulgar Gelkmaros Puca -->
+					<gd_npc npc_id="236412" /><!-- Vulgar Gelkmaros Neokin -->
+					<gd_npc npc_id="236413" /><!-- Vulgar Gelkmaros Earth Spirit -->
+					<gd_npc npc_id="236414" /><!-- Vulgar Gelkmaros Caprex -->
+					<gd_npc npc_id="236415" /><!-- Vulgar Gelkmaros Strigik Herbalist -->
+					<gd_npc npc_id="236416" /><!-- Vulgar Gelkmaros Strigik Warrior -->
+					<gd_npc npc_id="236417" /><!-- Vulgar Gelkmaros Strigik Assailant -->
+					<gd_npc npc_id="236418" /><!-- Vulgar Gelkmaros Strigik Shaman -->
+				</gd_npcs>
+				<gd_items>
+					<gd_item id="188100092" /><!-- [Event] Signet Piece: I -->
+				</gd_items>
+			</gd_rule>
+			<gd_rule rule_name="Broken Hearts V" min_count="1" base_chance="35" min_diff="-20" max_diff="70">
+				<gd_items>
+					<gd_item id="188100093" /><!-- [Event] Signet Piece: O -->
+				</gd_items>
+				<gd_maps>
+					<gd_map map_id="301220000" /><!-- Iron Wall Warfront (PvP-Map) -->
+				</gd_maps>
+			</gd_rule>
+			<gd_rule rule_name="Broken Hearts E" min_count="1" base_chance="35" min_diff="-20" max_diff="70">
+				<gd_items>
+					<gd_item id="188100094" /><!-- [Event] Signet Piece: N -->
+				</gd_items>
+				<gd_maps>
+					<gd_map map_id="210090000" /><!-- Idian Depths Light -->
+					<gd_map map_id="220100000" /><!-- Idian Depths Dark -->
+				</gd_maps>
+			</gd_rule>
+		</event_drops>
+	</event>
 	<event name="Beyond Aion Birthday Event 2017" start="2017-11-15T00:00:00" end="2017-11-26T23:59:59">
 		<spawns>
 			<!-- Sanctum -->

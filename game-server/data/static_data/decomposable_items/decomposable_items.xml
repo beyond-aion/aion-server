@@ -4136,7 +4136,12 @@
 		</items>
 	</decomposable>
 	<decomposable item_id="188050713" /><!-- Butter Candy Box -->
-	<decomposable item_id="188050714" /><!-- Chocolate Candy Box -->
+	<decomposable item_id="188050714"><!-- Chocolate Candy Box -->
+		<items>
+			<item id="160010109" min_count="3" race="ELYOS"/><!-- Enamored Tiger Form Candy -->
+			<item id="160010110" min_count="3" race="ASMODIANS"/><!-- Enamored Tiger Form Candy -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188050715" /><!-- Honey Candy Box -->
 	<decomposable item_id="188050717" /><!-- Inggison Jewel Pouch -->
 	<decomposable item_id="188050718"><!-- Chunk of Earth -->
@@ -17874,45 +17879,92 @@
 	<decomposable item_id="188052316" /><!-- Heavy Green Sack -->
 	<decomposable item_id="188052317" /><!-- [Event] Broken Heart Box -->
 	<decomposable item_id="188052318"><!-- [Event] Mended Heart -->
-		<items chance="10.0">
-			<item id="188052695" /><!-- [Event] Ancient Crown Bundle -->
+		<items>
+			<item id="110900740" /><!-- [Event] Heartseeker Outfit -->
 		</items>
-		<items chance="10.0">
-			<item id="184002014" race="ELYOS" /><!-- [Event] Birthday Cake Kisk -->
-			<item id="184002015" race="ASMODIANS" /><!-- [Event] Birthday Cake Kisk -->
+		<items>
+			<item id="110900213" /><!-- Beatific Outfit -->
 		</items>
-		<items chance="10.0">
-			<item id="188052706" /><!-- [Event] Blood Mark Box -->
+		<items>
+			<item id="125040226" /><!-- [Event] Wild Heart Headband -->
 		</items>
-		<items chance="5.0">
-			<item id="188052321" /><!-- [Event] Protectorate Key Box -->
+		<items>
+			<item id="160010337" /><!-- [Event] Heartfelt Chocolate -->
 		</items>
-		<items chance="15.0">
-			<item id="188052320" /><!-- [Event] Manastone Bundle -->
+		<items>
+			<item id="160010338" /><!-- [Event] Loving Chocolate -->
 		</items>
-		<items chance="2.0">
-			<item id="188052585" /><!-- Dragon's Medal Box -->
+		<items>
+			<item id="160010208" /><!-- [Event] Sweet Chocolate -->
 		</items>
-		<items chance="2.0">
-			<item id="125050045" /><!-- [Event] Exotic Wedding Veil -->
+		<items>
+			<item id="188050714" /><!-- Chocolate Candy Box -->
 		</items>
-		<items chance="2.0">
-			<item id="110900415" /><!-- [Event] Perky Wedding Dress/Tuxedo -->
+		<items>
+			<item id="162002001" /><!-- Love Potion -->
 		</items>
-		<items chance="15.0">
-			<item id="110900349" /><!-- [Event] Perky Wedding Dress/Tuxedo (7 days) -->
+		<items>
+			<item id="164002269" /><!-- Love Firecracker No.1 -->
 		</items>
-		<items chance="15.0">
-			<item id="125045039" /><!-- [Event] Exotic Wedding Veil (7 days) -->
+		<items>
+			<item id="164002143" /><!-- Love Firecracker No.2 -->
 		</items>
-		<items chance="5.0">
-			<item id="188052297" /><!-- Noble Composite Manastone Bundle -->
+		<items>
+			<item id="164002073" /><!-- Love Firecracker No.3 -->
 		</items>
-		<items chance="2.0">
-			<item id="188051674" /><!-- Fabled Godstone Bundle -->
+		<items>
+			<item id="188950007" /><!-- Special Courier Pass (Eternal/Lv. 56 - 60) -->
 		</items>
-		<items chance="0.5">
-			<item id="188052319" /><!-- [Event] Dragon Lord's Wing Box -->
+		<items>
+			<item id="188950015" /><!-- Special Courier Pass (Eternal/Lv. 61-65) -->
+		</items>
+		<items>
+			<item id="188950019" /><!-- Special Courier Pass (Mythic/Lv. 61-65) -->
+		</items>
+		<items>
+			<item id="188950019" /><!-- Special Courier Pass (Mythic/Lv. 61-65) -->
+		</items>
+		<items>
+			<item id="190100153" /><!-- Shugo Gyrocopter (30 Days) -->
+		</items>
+		<items>
+			<item id="166050081" /><!-- Idian: Physical Attack -->
+		</items>
+		<items>
+			<item id="166050082" /><!-- Idian: Magical Attack -->
+		</items>
+		<items>
+			<item id="166050083" /><!-- Idian: Physical Defense -->
+		</items>
+		<items>
+			<item id="166050084" /><!-- Idian: Magical Defense -->
+		</items>
+		<items>
+			<item id="186000051" /><!-- Major Ancient Crown -->
+		</items>
+		<items>
+			<item id="186000242" /><!-- Ceramium Medals -->
+		</items>
+		<items>
+			<item id="186000236" /><!-- Blood Mark -->
+		</items>
+		<items>
+			<item id="166000195" /><!-- Epsilon Enchantment Stone -->
+		</items>
+		<items>
+			<item id="169620110" /><!-- [Event] Celestial Crafting Boost -->
+		</items>
+		<items>
+			<item id="169620079" /><!-- Gathering Boost Charm II - 100% -->
+		</items>
+		<items>
+			<item id="188053793" /><!-- Rare Manastone of Aetheric Field Bundle -->
+		</items>
+		<items>
+			<item id="188052822" /><!-- Noble Ancient Manastone Chest -->
+		</items>
+		<items>
+			<item id="188053113" /><!-- Ahserion's Flight Ancient Manastone Bundle -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188052319"><!-- [Event] Dragon Lord's Wing Box -->
