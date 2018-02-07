@@ -77,11 +77,10 @@ public class DropRegistrationService {
 		String dropType = npc.getGroupDrop().name().toLowerCase();
 		boolean isChest = npc.getAi().getName().equals("chest") || dropType.startsWith("treasure") || dropType.endsWith("box");
 
-		List<Player> dropPlayers = new ArrayList<>();
-		Collection<Player> winningPlayers = new ArrayList<>();
+		List<Player> allowedLooters = new ArrayList<>();
 		Player looter = player;
 		int winnerObj = 0;
-		Player teamLooter = initDropNpc(player, npcObjId, dropPlayers, winningPlayers, groupMembers);
+		Player teamLooter = initDropNpc(player, npcObjId, allowedLooters, groupMembers);
 		if (teamLooter != null) {
 			looter = teamLooter;
 			winnerObj = teamLooter.getObjectId();
@@ -106,10 +105,10 @@ public class DropRegistrationService {
 			// instances with WorldDropType.NONE must not have global drops (example Arenas)
 			if (npc.getWorldDropType() != WorldDropType.NONE) {
 				index = addGlobalDrops(index, dropRate, looter, npc, isAllowedDefaultGlobalDropNpc, DataManager.GLOBAL_DROP_DATA.getAllRules(), droppedItems,
-					winningPlayers, winnerObj);
+					groupMembers, winnerObj);
 			}
 			addGlobalDrops(index, dropRate, looter, npc, isAllowedDefaultGlobalDropNpc, EventService.getInstance().getActiveEventDropRules(), droppedItems,
-				winningPlayers, winnerObj);
+				groupMembers, winnerObj);
 		}
 
 		if (npc.isInInstance()) {
@@ -117,18 +116,16 @@ public class DropRegistrationService {
 		}
 		npc.getAi().onGeneralEvent(AIEventType.DROP_REGISTERED);
 
-		for (Player p : dropPlayers) {
+		for (Player p : allowedLooters) {
 			PacketSendUtility.sendPacket(p, new SM_LOOT_STATUS(npcObjId, 0));
 		}
 
 		DropService.getInstance().scheduleFreeForAll(npcObjId);
 	}
 
-	private Player initDropNpc(Player player, int npcObjId, List<Player> dropPlayers, Collection<Player> winningPlayers,
-		Collection<Player> groupMembers) {
+	private Player initDropNpc(Player player, int npcObjId, List<Player> allowedLooters, Collection<Player> groupMembers) {
 		Player looter = null;
 		DropNpc dropNpc = new DropNpc(npcObjId);
-		Set<Integer> allowedDropPlayers = new HashSet<>();
 		// Distributing drops to players
 		if (player.isInGroup() || player.isInAlliance()) {
 			LootGroupRules lootGrouRules = player.getLootGroupRules();
@@ -145,34 +142,28 @@ public class DropRegistrationService {
 					for (Player p : groupMembers) {
 						i++;
 						if (i == lootGrouRules.getNrRoundRobin()) {
-							winningPlayers.add(p);
+							allowedLooters.add(p);
 							looter = p;
 							break;
 						}
 					}
 					break;
 				case FREEFORALL:
-					winningPlayers = groupMembers;
+					allowedLooters.addAll(groupMembers);
 					break;
 				case LEADER:
 					Player leader = player.isInGroup() ? player.getPlayerGroup().getLeaderObject() : player.getPlayerAlliance().getLeaderObject();
-					winningPlayers.add(leader);
+					allowedLooters.add(leader);
 					looter = leader;
 					break;
-			}
-
-			for (Player member : winningPlayers) {
-				allowedDropPlayers.add(member.getObjectId());
-				dropPlayers.add(member);
 			}
 
 			dropNpc.setInRangePlayers(groupMembers);
 			dropNpc.setGroupSize(groupMembers.size());
 		} else {
-			allowedDropPlayers.add(player.getObjectId());
-			dropPlayers.add(player);
+			allowedLooters.add(player);
 		}
-		dropNpc.setAllowedLooters(allowedDropPlayers);
+		allowedLooters.forEach(dropNpc::setAllowedLooter);
 		dropRegistrationMap.put(npcObjId, dropNpc);
 		return looter;
 	}
@@ -194,7 +185,7 @@ public class DropRegistrationService {
 	}
 
 	private int addGlobalDrops(int index, float dropRate, Player player, Npc npc, boolean isAllowedDefaultGlobalDropNpc, List<GlobalRule> rules,
-		Set<DropItem> droppedItems, Collection<Player> winningPlayers, int winnerObj) {
+		Set<DropItem> droppedItems, Collection<Player> groupMembers, int winnerObj) {
 		for (GlobalRule rule : rules) {
 			// if getGlobalRuleNpcs() != null means drops are for specified npcs (like named drops) so the default restrictions will be ignored
 			if (isAllowedDefaultGlobalDropNpc || rule.getGlobalRuleNpcs() != null) {
@@ -202,7 +193,7 @@ public class DropRegistrationService {
 				if (Rnd.chance() >= chance)
 					continue;
 
-				index = addDropItems(index, droppedItems, rule, npc, player, winningPlayers, winnerObj);
+				index = addDropItems(index, droppedItems, rule, npc, player, groupMembers, winnerObj);
 			}
 		}
 		return index;
@@ -249,14 +240,16 @@ public class DropRegistrationService {
 		return chance;
 	}
 
-	private int addDropItems(int index, Set<DropItem> droppedItems, GlobalRule rule, Npc npc, Player player, Collection<Player> winningPlayers,
+	private int addDropItems(int index, Set<DropItem> droppedItems, GlobalRule rule, Npc npc, Player player, Collection<Player> groupMembers,
 		int winnerObj) {
 		List<GlobalDropItem> alloweditems = getAllowedItems(rule, npc, player);
 		if (!alloweditems.isEmpty()) {
 			if (rule.getMemberLimit() > 1 && player.isInTeam()) {
-				final int limit = rule.getMemberLimit();
+				List<Player> members = new ArrayList<>(groupMembers);
+				if (rule.getMemberLimit() > members.size())
+					Collections.shuffle(members);
 				int distributedItems = 0;
-				for (Player member : winningPlayers) {
+				for (Player member : members) {
 					for (GlobalDropItem itemListed : alloweditems) {
 						DropItem dropitem = new DropItem(new Drop(itemListed.getId(), 1, 1, 100, false));
 						dropitem.setCount(getItemCount(itemListed.getId(), rule, npc));
@@ -266,7 +259,7 @@ public class DropRegistrationService {
 						dropitem.isDistributeItem(true);
 						droppedItems.add(dropitem);
 					}
-					if (++distributedItems >= limit)
+					if (++distributedItems >= rule.getMemberLimit())
 						break;
 				}
 			} else {
