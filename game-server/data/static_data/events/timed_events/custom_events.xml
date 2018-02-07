@@ -26,9 +26,9 @@
 			</buff>
 		</buffs>
 	</event>
-	<event name="Beyond Aion Broken Hearts" start="2018-02-09T00:00:00" end="2018-02-18T23:59:59">
+	<event name="Beyond Aion Broken Hearts" start="2018-02-11T00:00:00" end="2018-02-18T23:59:59">
 		<event_drops>
-			<gd_rule rule_name="Broken Hearts L" min_count="1" base_chance="35" min_diff="-20" max_diff="70">
+			<gd_rule rule_name="Broken Hearts L" min_count="1" base_chance="15" fixed_chance="true" min_diff="-20" max_diff="70">
 				<gd_items>
 					<gd_item id="188100091" /><!-- [Event] Signet Piece: A -->
 				</gd_items>
@@ -40,7 +40,7 @@
 					<gd_map map_id="301270000" /><!-- Linkgate Foundry -->
 				</gd_maps>
 			</gd_rule>
-			<gd_rule rule_name="Broken Hearts O" min_count="1" base_chance="35" min_diff="-20" max_diff="70">
+			<gd_rule rule_name="Broken Hearts O" min_count="1" base_chance="60" fixed_chance="true" min_diff="-20" max_diff="70">
 				<gd_npcs>
 					<gd_npc npc_id="236307" /><!-- Inggison Dionae -->
 					<gd_npc npc_id="236308" /><!-- Inggison Excura -->
@@ -159,7 +159,7 @@
 					<gd_item id="188100092" /><!-- [Event] Signet Piece: I -->
 				</gd_items>
 			</gd_rule>
-			<gd_rule rule_name="Broken Hearts V" min_count="1" base_chance="35" min_diff="-20" max_diff="70">
+			<gd_rule rule_name="Broken Hearts V" min_count="1" base_chance="20" min_diff="-20" max_diff="70">
 				<gd_items>
 					<gd_item id="188100093" /><!-- [Event] Signet Piece: O -->
 				</gd_items>
@@ -167,7 +167,7 @@
 					<gd_map map_id="301220000" /><!-- Iron Wall Warfront (PvP-Map) -->
 				</gd_maps>
 			</gd_rule>
-			<gd_rule rule_name="Broken Hearts E" min_count="1" base_chance="35" min_diff="-20" max_diff="70">
+			<gd_rule rule_name="Broken Hearts E" min_count="1" base_chance="20" min_diff="-20" max_diff="70">
 				<gd_items>
 					<gd_item id="188100094" /><!-- [Event] Signet Piece: N -->
 				</gd_items>
