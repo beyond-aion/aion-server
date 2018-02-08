@@ -31,34 +31,37 @@ public class FirstTargetProperty {
 				skill.setFirstTarget(skill.getEffector());
 				break;
 			case TARGETORME:
+				if (skill.getEffector().equals(skill.getFirstTarget()))
+					break;
 				boolean changeTargetToMe = false;
 				if (skill.getFirstTarget() == null) {
-					skill.setFirstTarget(skill.getEffector());
-				} else if ((skill.getFirstTarget() instanceof Player) && (skill.getEffector() instanceof Player)) {
-					Player playerEffected = (Player) skill.getFirstTarget();
-					Player playerEffector = (Player) skill.getEffector();
-					if (!playerEffected.getRace().equals(playerEffector.getRace()) || playerEffected.isEnemy(playerEffector)) {
-						changeTargetToMe = true;
-					}
-				} else if (skill.getFirstTarget() instanceof Npc) {
-					Npc npcEffected = (Npc) skill.getFirstTarget();
-					Player playerEffector = (Player) skill.getEffector();
-					if (npcEffected.isEnemy(playerEffector)) {
-						changeTargetToMe = true;
-					}
-				} else if ((skill.getFirstTarget() instanceof Summon) && (skill.getEffector() instanceof Player)) {
-					Summon summon = (Summon) skill.getFirstTarget();
-					Player playerEffected = summon.getMaster();
-					Player playerEffector = (Player) skill.getEffector();
-					if (!playerEffected.getRace().equals(playerEffector.getRace()) || playerEffected.isEnemy(playerEffector)) {
-						changeTargetToMe = true;
-					}
-				}
-				if (!isTargetAllowed(skill)) {
 					changeTargetToMe = true;
+				} else {
+					switch (properties.getTargetRelation()) {
+						case ENEMY:
+							if (!skill.getFirstTarget().isEnemy(skill.getEffector()))
+								changeTargetToMe = true;
+							break;
+						case FRIEND:
+							if (skill.getFirstTarget().isEnemy(skill.getEffector()))
+								changeTargetToMe = true;
+							break;
+						case MYPARTY:
+							if (!isTargetTeamMember(skill, false)) {
+								if (skill.getFirstTarget().isEnemy(skill.getEffector())) {
+									changeTargetToMe = true;
+								} else {
+									PacketSendUtility.sendPacket((Player) skill.getEffector(), SM_SYSTEM_MESSAGE.STR_SKILL_INVALID_TARGET_PARTY_ONLY());
+									return false;
+								}
+							}
+							break;
+					}
+					if (!changeTargetToMe && !isTargetAllowed(skill))
+						changeTargetToMe = true;
 				}
 				if (changeTargetToMe) {
-					if (skill.getEffector() instanceof Player)
+					if (skill.getFirstTarget() != null && skill.getEffector() instanceof Player)
 						PacketSendUtility.sendPacket((Player) skill.getEffector(), SM_SYSTEM_MESSAGE.STR_SKILL_AUTO_CHANGE_TARGET_TO_MY());
 					skill.setFirstTarget(skill.getEffector());
 				}
@@ -88,19 +91,8 @@ public class FirstTargetProperty {
 				}
 
 				if (relation == TargetRelationAttribute.MYPARTY) {
-					Creature effected = skill.getFirstTarget();
-					boolean myParty = false;
-					TemporaryPlayerTeam<?> team = ((Player) skill.getEffector()).getCurrentTeam();
-					if (team != null) {
-						for (Player member : team.getMembers()) {
-							if (member.equals(effected) && !member.equals(skill.getEffector())) {
-								myParty = true;
-								break;
-							}
-						}
-					}
-					if (!myParty) {
-						PacketSendUtility.sendPacket((Player) skill.getEffector(), SM_SYSTEM_MESSAGE.STR_SKILL_TARGET_IS_NOT_VALID());
+					if (!isTargetTeamMember(skill, false)) {
+						PacketSendUtility.sendPacket((Player) skill.getEffector(), SM_SYSTEM_MESSAGE.STR_SKILL_INVALID_TARGET_PARTY_ONLY());
 						return false;
 					}
 				}
@@ -117,15 +109,11 @@ public class FirstTargetProperty {
 				Creature effector = skill.getEffector();
 				if (effector instanceof Player) {
 					Summon summon = ((Player) effector).getSummon();
-					if (summon != null)
-						skill.setFirstTarget(summon);
-					else
-						return false;
-
-					if (!isTargetAllowed(skill)) {
-						PacketSendUtility.sendPacket((Player) skill.getEffector(), SM_SYSTEM_MESSAGE.STR_SKILL_TARGET_IS_NOT_VALID());
+					if (summon == null || !isTargetAllowed(skill)) {
+						PacketSendUtility.sendPacket((Player) skill.getEffector(), SM_SYSTEM_MESSAGE.STR_SKILL_INVALID_TARGET_PET_ONLY());
 						return false;
 					}
+					skill.setFirstTarget(summon);
 				} else {
 					return false;
 				}
@@ -145,22 +133,8 @@ public class FirstTargetProperty {
 			case PASSIVE:
 				skill.setFirstTarget(skill.getEffector());
 				break;
-			case TARGET_MYPARTY_NONVISIBLE:
-				Creature effected = skill.getFirstTarget();
-				if (effected == null || skill.getEffector() == null)
-					return false;
-				if (!(effected instanceof Player) || !(skill.getEffector() instanceof Player) || !((Player) skill.getEffector()).isInGroup())
-					return false;
-				boolean myParty = false;
-				for (Player member : ((Player) skill.getEffector()).getPlayerGroup().getMembers()) {
-					if (member == skill.getEffector())
-						continue;
-					if (member == effected) {
-						myParty = true;
-						break;
-					}
-				}
-				if (!myParty)
+			case TARGET_MYPARTY_NONVISIBLE: // Summon Group Member
+				if (!isTargetTeamMember(skill, true))
 					return false;
 
 				skill.setFirstTargetRangeCheck(false);
@@ -178,6 +152,20 @@ public class FirstTargetProperty {
 			skill.getEffectedList().add(skill.getFirstTarget());
 		}
 		return true;
+	}
+
+	private static boolean isTargetTeamMember(Skill skill, boolean onlyGroup) {
+		if (skill.getFirstTarget() instanceof Player && skill.getEffector() instanceof Player) {
+			Player effector = (Player) skill.getEffector();
+			TemporaryPlayerTeam<?> team = onlyGroup ? effector.getCurrentGroup() : effector.getCurrentTeam();
+			if (team != null) {
+				for (Player member : team.getMembers()) {
+					if (member.equals(skill.getFirstTarget()) && !member.equals(skill.getEffector()))
+						return true;
+				}
+			}
+		}
+		return false;
 	}
 
 	/**
