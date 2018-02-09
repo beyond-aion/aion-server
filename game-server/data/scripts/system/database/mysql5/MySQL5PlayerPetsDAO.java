@@ -30,8 +30,7 @@ public class MySQL5PlayerPetsDAO extends PlayerPetsDAO {
 	public void saveFeedStatus(int petObjectId, int hungryLevel, int feedProgress, long reuseTime) {
 		try {
 			try (Connection con = DatabaseFactory.getConnection();
-				PreparedStatement stmt = con
-					.prepareStatement("UPDATE player_pets SET hungry_level = ?, feed_progress = ?, reuse_time = ? WHERE id = ?")) {
+				PreparedStatement stmt = con.prepareStatement("UPDATE player_pets SET hungry_level = ?, feed_progress = ?, reuse_time = ? WHERE id = ?")) {
 				stmt.setInt(1, hungryLevel);
 				stmt.setInt(2, feedProgress);
 				stmt.setLong(3, reuseTime);
@@ -97,8 +96,7 @@ public class MySQL5PlayerPetsDAO extends PlayerPetsDAO {
 	@Override
 	public void removePlayerPet(int petObjectId) {
 		try {
-			try (Connection con = DatabaseFactory.getConnection();
-				PreparedStatement stmt = con.prepareStatement("DELETE FROM player_pets WHERE id = ?")) {
+			try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement("DELETE FROM player_pets WHERE id = ?")) {
 				stmt.setInt(1, petObjectId);
 				stmt.execute();
 			}
@@ -195,8 +193,7 @@ public class MySQL5PlayerPetsDAO extends PlayerPetsDAO {
 	@Override
 	public int[] getUsedIDs() {
 		try (Connection con = DatabaseFactory.getConnection();
-			PreparedStatement stmt = con.prepareStatement("SELECT id FROM player_pets WHERE id IS NOT NULL", ResultSet.TYPE_SCROLL_INSENSITIVE,
-				ResultSet.CONCUR_READ_ONLY)) {
+			PreparedStatement stmt = con.prepareStatement("SELECT id FROM player_pets", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY)) {
 			ResultSet rs = stmt.executeQuery();
 			rs.last();
 			int count = rs.getRow();
