@@ -17897,16 +17897,16 @@
 		<items chance="2">
 			<item id="169620079" /><!-- Gathering Boost Charm II - 100% -->
 		</items>
-		<items chance="2.5">
+		<items chance="2">
 			<item id="188950007" /><!-- Special Courier Pass (Eternal/Lv. 56 - 60) -->
 		</items>
-		<items chance="2.5">
+		<items chance="2">
 			<item id="188950015" /><!-- Special Courier Pass (Eternal/Lv. 61-65) -->
 		</items>
-		<items chance="2.5">
+		<items chance="2">
 			<item id="188950019" /><!-- Special Courier Pass (Mythic/Lv. 61-65) -->
 		</items>
-		<items chance="2.5">
+		<items chance="2">
 			<item id="188950019" /><!-- Special Courier Pass (Mythic/Lv. 61-65) -->
 		</items>
 		<items chance="4">
@@ -17924,46 +17924,46 @@
 		<items chance="4">
 			<item id="188053113" /><!-- Ahserion's Flight Ancient Manastone Bundle -->
 		</items>
-		<items chance="4">
+		<items chance="5">
 			<item id="186000051" min_count="2" /><!-- Major Ancient Crown -->
 		</items>
-		<items chance="4">
+		<items chance="5">
 			<item id="186000242" /><!-- Ceramium Medals -->
 		</items>
-		<items chance="4">
-			<item id="186000236" min_count="10" max_count="15" /><!-- Blood Mark -->
+		<items chance="5">
+			<item id="186000236" min_count="15" max_count="25" /><!-- Blood Mark -->
 		</items>
-		<items chance="4">
+		<items chance="5">
 			<item id="166000195" min_count="3" /><!-- Epsilon Enchantment Stone -->
 		</items>
 		<items chance="4">
 			<item id="188052822" min_count="2" /><!-- Noble Ancient Manastone Chest -->
 		</items>
-		<items chance="4">
+		<items chance="5">
 			<item id="160010337" /><!-- [Event] Heartfelt Chocolate -->
 		</items>
-		<items chance="4">
+		<items chance="5">
 			<item id="160010338" /><!-- [Event] Loving Chocolate -->
 		</items>
-		<items chance="4.7">
+		<items chance="5">
 			<item id="160010208" min_count="2" /><!-- [Event] Sweet Chocolate -->
 		</items>
-		<items chance="4.8">
+		<items chance="5">
 			<item id="188050714" min_count="3" /><!-- Chocolate Candy Box -->
 		</items>
-		<items chance="4.7">
+		<items chance="5">
 			<item id="162002001" min_count="3" /><!-- Love Potion -->
 		</items>
-		<items chance="4.7">
+		<items chance="3">
 			<item id="164002269" min_count="2" /><!-- Love Firecracker No.1 -->
 		</items>
-		<items chance="4.7">
+		<items chance="3">
 			<item id="164002143" min_count="2" /><!-- Love Firecracker No.2 -->
 		</items>
-		<items chance="4.7">
+		<items chance="3">
 			<item id="164002073" min_count="2" /><!-- Love Firecracker No.3 -->
 		</items>
-		<items chance="4.7">
+		<items chance="5">
 			<item id="188053793" min_count="3" /><!-- Rare Manastone of Aetheric Field Bundle -->
 		</items>
 	</decomposable>
