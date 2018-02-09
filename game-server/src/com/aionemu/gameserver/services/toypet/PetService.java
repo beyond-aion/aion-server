@@ -12,7 +12,6 @@ import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Pet;
-import com.aionemu.gameserver.model.gameobjects.PetAction;
 import com.aionemu.gameserver.model.gameobjects.player.PetCommonData;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.team.common.legacy.LootRuleType;
@@ -58,46 +57,42 @@ public class PetService {
 		if (pet != null) {
 			pet.getCommonData().setName(name);
 			DAOManager.getDAO(PlayerPetsDAO.class).updatePetName(pet.getCommonData());
-			PacketSendUtility.broadcastPacket(player, new SM_PET(PetAction.RENAME, pet), true);
+			PacketSendUtility.broadcastPacket(player, new SM_PET(pet.getObjectId(), pet.getName()), true);
 		}
 	}
 
 	public void onPlayerLogin(Player player) {
 		Collection<PetCommonData> playerPets = player.getPetList().getPets();
-		if (playerPets != null && playerPets.size() > 0)
-			PacketSendUtility.sendPacket(player, new SM_PET(PetAction.LOAD_PETS, playerPets));
+		if (!playerPets.isEmpty())
+			PacketSendUtility.sendPacket(player, new SM_PET(playerPets));
 	}
 
-	public void removeObject(int objectId, int count, PetAction action, Player player) {
+	public void removeObject(int objectId, int count, Player player) {
 		Item item = player.getInventory().getItemByObjId(objectId);
 		if (item == null || player.getPet() == null || count > item.getItemCount())
 			return;
 
 		Pet pet = player.getPet();
 		pet.getCommonData().setCancelFeed(false);
-		PacketSendUtility.sendPacket(player, new SM_PET(1, action, item.getObjectId(), count, pet));
+		PacketSendUtility.sendPacket(player, new SM_PET(1, item.getObjectId(), count, pet));
 		PacketSendUtility.sendPacket(player, new SM_EMOTION(player, EmotionType.START_FEEDING, 0, player.getObjectId()));
 
-		schedule(pet, player, item, count, action);
+		schedule(pet, player, item, count);
 	}
 
-	private void schedule(final Pet pet, final Player player, final Item item, final int count, PetAction action) {
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				if (!pet.getCommonData().getCancelFeed())
-					checkFeeding(pet, player, item, count, action);
-			}
+	private void schedule(final Pet pet, final Player player, final Item item, final int count) {
+		ThreadPoolManager.getInstance().schedule(() -> {
+			if (!pet.getCommonData().getCancelFeed())
+				checkFeeding(pet, player, item, count);
 		}, 2500);
 	}
 
-	private void checkFeeding(Pet pet, Player player, Item item, int count, PetAction action) {
+	private void checkFeeding(Pet pet, Player player, Item item, int count) {
 		PetCommonData commonData = pet.getCommonData();
 		PetFeedProgress progress = commonData.getFeedProgress();
 
 		if (!commonData.getCancelFeed()) {
-			PetFunction func = pet.getPetTemplate().getPetFunction(PetFunctionType.FOOD);
+			PetFunction func = pet.getObjectTemplate().getPetFunction(PetFunctionType.FOOD);
 			PetFlavour flavour = DataManager.PET_FEED_DATA.getFlavourById(func.getId());
 			FoodType foodType = flavour.getFoodType(item.getItemId());
 			PetFeedResult reward = null;
@@ -109,12 +104,12 @@ public class PetService {
 				player.getInventory().decreaseItemCount(item, 1, ItemUpdateType.DEC_PET_FOOD);
 				reward = flavour.processFeedResult(progress, foodType, item.getItemTemplate().getLevel(), player.getCommonData().getLevel());
 				if (progress.getHungryLevel() == PetHungryLevel.FULL && reward != null)
-					PacketSendUtility.sendPacket(player, new SM_PET(2, action, item.getObjectId(), 0, pet));
+					PacketSendUtility.sendPacket(player, new SM_PET(2, item.getObjectId(), 0, pet));
 				else
-					PacketSendUtility.sendPacket(player, new SM_PET(2, action, item.getObjectId(), --count, pet));
+					PacketSendUtility.sendPacket(player, new SM_PET(2, item.getObjectId(), --count, pet));
 			} else {
 				// non eatable item
-				PacketSendUtility.sendPacket(player, new SM_PET(5, action, 0, 0, pet));
+				PacketSendUtility.sendPacket(player, new SM_PET(5, 0, 0, pet));
 				PacketSendUtility.sendPacket(player, new SM_EMOTION(player, EmotionType.END_FEEDING, 0, player.getObjectId()));
 				PacketSendUtility.sendPacket(player,
 					SM_SYSTEM_MESSAGE.STR_MSG_TOYPET_FEED_FOOD_NOT_LOVEFLAVOR(pet.getName(), item.getItemTemplate().getL10n()));
@@ -122,21 +117,22 @@ public class PetService {
 			}
 
 			if (progress.getHungryLevel() == PetHungryLevel.FULL && reward != null) {
-				PacketSendUtility.sendPacket(player, new SM_PET(6, action, reward.getItem(), 0, pet));
-				PacketSendUtility.sendPacket(player, new SM_PET(5, action, 0, 0, pet));
+				PacketSendUtility.sendPacket(player, new SM_PET(6, reward.getItem(), 0, pet));
+				PacketSendUtility.sendPacket(player, new SM_PET(5, 0, 0, pet));
 				PacketSendUtility.sendPacket(player, new SM_EMOTION(player, EmotionType.END_FEEDING, 0, player.getObjectId()));
-				PacketSendUtility.sendPacket(player, new SM_PET(7, action, 0, 0, pet)); // 2151591961
+				PacketSendUtility.sendPacket(player, new SM_PET(7, 0, 0, pet)); // 2151591961
 
 				ItemService.addItem(player, reward.getItem(), 1);
-				commonData.scheduleRefeed(flavour.getCooldDown() * 60000);
-				long refeedTime = System.currentTimeMillis() + flavour.getCooldDown() * 60000;
+				long delay = flavour.getCooldDown() * 60000;
+				commonData.scheduleRefeed(delay);
+				long refeedTime = System.currentTimeMillis() + delay;
 				commonData.setRefeedTime(refeedTime);
-				DAOManager.getDAO(PlayerPetsDAO.class).setTime(player, pet.getPetId(), refeedTime);
+				DAOManager.getDAO(PlayerPetsDAO.class).setTime(pet.getObjectId(), refeedTime);
 				progress.reset();
 			} else if (count > 0)
-				schedule(pet, player, item, count, action);
+				schedule(pet, player, item, count);
 			else {
-				PacketSendUtility.sendPacket(player, new SM_PET(5, action, 0, 0, pet));
+				PacketSendUtility.sendPacket(player, new SM_PET(5, 0, 0, pet));
 				PacketSendUtility.sendPacket(player, new SM_EMOTION(player, EmotionType.END_FEEDING, 0, player.getObjectId()));
 			}
 		}

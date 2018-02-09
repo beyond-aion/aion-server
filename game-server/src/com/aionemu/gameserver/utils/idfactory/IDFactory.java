@@ -1,5 +1,8 @@
 package com.aionemu.gameserver.utils.idfactory;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.BitSet;
 import java.util.Collection;
 import java.util.concurrent.locks.ReentrantLock;
@@ -7,6 +10,7 @@ import java.util.concurrent.locks.ReentrantLock;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.aionemu.commons.database.DatabaseFactory;
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.commons.utils.GenericValidator;
 import com.aionemu.gameserver.dao.GuideDAO;
@@ -15,6 +19,7 @@ import com.aionemu.gameserver.dao.InventoryDAO;
 import com.aionemu.gameserver.dao.LegionDAO;
 import com.aionemu.gameserver.dao.MailDAO;
 import com.aionemu.gameserver.dao.PlayerDAO;
+import com.aionemu.gameserver.dao.PlayerPetsDAO;
 import com.aionemu.gameserver.dao.PlayerRegisteredItemsDAO;
 import com.aionemu.gameserver.model.gameobjects.AionObject;
 
@@ -56,6 +61,33 @@ public class IDFactory {
 		lockIds(DAOManager.getDAO(MailDAO.class).getUsedIDs());
 		lockIds(DAOManager.getDAO(GuideDAO.class).getUsedIDs());
 		lockIds(DAOManager.getDAO(HousesDAO.class).getUsedIDs());
+		lockIds(DAOManager.getDAO(PlayerPetsDAO.class).getUsedIDs());
+
+		int count = 0;
+		try {
+			try (Connection con = DatabaseFactory.getConnection();
+				PreparedStatement query = con.prepareStatement("SELECT player_id, template_id FROM player_pets WHERE id IS NULL");
+				PreparedStatement update = con.prepareStatement("UPDATE player_pets SET id = ? WHERE player_id = ? AND template_id = ?")) {
+				ResultSet rs = query.executeQuery();
+				if (!rs.isAfterLast()) {
+					nextMinId = 117777;
+					while (rs.next()) {
+						update.setInt(1, nextId());
+						update.setInt(2, rs.getInt(1));
+						update.setInt(3, rs.getInt(2));
+						update.executeUpdate();
+						count++;
+					}
+				}
+			}
+			if (count > 0) {
+				log.info("Successfully set IDs for " + count + " pets... You can now apply the second database patch and restart the server.");
+				System.exit(0);
+			}
+		} catch (Exception e) {
+			log.error("Error updating pet table", e);
+		}
+
 		log.info("IDFactory: " + getUsedCount() + " IDs used.");
 	}
 

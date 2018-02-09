@@ -1,12 +1,10 @@
 package com.aionemu.gameserver.model.gameobjects.player;
 
 import java.sql.Timestamp;
+import java.util.concurrent.Future;
 
-import com.aionemu.commons.database.dao.DAOManager;
-import com.aionemu.gameserver.dao.PlayerPetsDAO;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.Expirable;
-import com.aionemu.gameserver.model.templates.VisibleObjectTemplate;
 import com.aionemu.gameserver.model.templates.pet.PetDopingBag;
 import com.aionemu.gameserver.model.templates.pet.PetFunctionType;
 import com.aionemu.gameserver.model.templates.pet.PetTemplate;
@@ -16,24 +14,23 @@ import com.aionemu.gameserver.services.toypet.PetFeedProgress;
 import com.aionemu.gameserver.services.toypet.PetHungryLevel;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
-import com.aionemu.gameserver.utils.idfactory.IDFactory;
 
 /**
  * @author ATracer
  */
-public class PetCommonData extends VisibleObjectTemplate implements Expirable {
+public class PetCommonData implements Expirable {
 
+	private final int objectId;
+	private final int templateId;
+	private final int masterObjectId;
 	private int decoration;
 	private String name;
-	private final int petId;
 	private Timestamp birthday;
 	PetFeedProgress feedProgress = null;
 	PetDopingBag dopingBag = null;
 	private volatile boolean cancelFeed = false;
 	private boolean feedingTime = true;
 	private long refeedTime;
-	private final int petObjectId;
-	private final int masterObjectId;
 	private long startMoodTime;
 	private int shuggleCounter;
 	private int lastSentPoints;
@@ -43,13 +40,14 @@ public class PetCommonData extends VisibleObjectTemplate implements Expirable {
 	private Timestamp despawnTime;
 	private boolean isLooting = false;
 	private boolean isBuffing = false;
+	private volatile Future<?> refeedTask;
 
-	public PetCommonData(int petId, int masterObjectId, int expireTime) {
-		this.petObjectId = IDFactory.getInstance().nextId();
-		this.petId = petId;
+	public PetCommonData(int objectId, int templateId, int masterObjectId, int expireTime) {
+		this.objectId = objectId;
+		this.templateId = templateId;
 		this.masterObjectId = masterObjectId;
 		this.expireTime = expireTime;
-		PetTemplate template = DataManager.PET_DATA.getPetTemplate(petId);
+		PetTemplate template = DataManager.PET_DATA.getPetTemplate(templateId);
 		if (template.containsFunction(PetFunctionType.FOOD)) {
 			int flavourId = template.getPetFunction(PetFunctionType.FOOD).getId();
 			int lovedLimit = DataManager.PET_FEED_DATA.getFlavourById(flavourId).getLovedFoodLimit();
@@ -60,25 +58,32 @@ public class PetCommonData extends VisibleObjectTemplate implements Expirable {
 		}
 	}
 
-	public final int getDecoration() {
+	public int getObjectId() {
+		return objectId;
+	}
+
+	public int getMasterObjectId() {
+		return masterObjectId;
+	}
+
+	public int getDecoration() {
 		return decoration;
 	}
 
-	public final void setDecoration(int decoration) {
+	public void setDecoration(int decoration) {
 		this.decoration = decoration;
 	}
 
-	@Override
-	public final String getName() {
+	public String getName() {
 		return name;
 	}
 
-	public final void setName(String name) {
+	public void setName(String name) {
 		this.name = name;
 	}
 
-	public final int getPetId() {
-		return petId;
+	public int getTemplateId() {
+		return templateId;
 	}
 
 	public int getBirthday() {
@@ -120,17 +125,19 @@ public class PetCommonData extends VisibleObjectTemplate implements Expirable {
 		this.cancelFeed = cancelFeed;
 	}
 
-	public void scheduleRefeed(final long reFoodTime) {
+	public void scheduleRefeed(long reFoodTime) {
 		setIsFeedingTime(false);
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				feedingTime = true;
-				refeedTime = 0;
-				feedProgress.setHungryLevel(PetHungryLevel.HUNGRY);
-			}
+		cancelRefeedTask();
+		refeedTask = ThreadPoolManager.getInstance().schedule(() -> {
+			feedingTime = true;
+			refeedTime = 0;
+			feedProgress.setHungryLevel(PetHungryLevel.HUNGRY);
 		}, reFoodTime);
+	}
+
+	public void cancelRefeedTask() {
+		if (refeedTask != null)
+			refeedTask.cancel(false);
 	}
 
 	public long getRefeedDelay() {
@@ -141,24 +148,6 @@ public class PetCommonData extends VisibleObjectTemplate implements Expirable {
 		}
 
 		return time;
-	}
-
-	public int getObjectId() {
-		return petObjectId;
-	}
-
-	public int getMasterObjectId() {
-		return masterObjectId;
-	}
-
-	@Override
-	public int getTemplateId() {
-		return petId;
-	}
-
-	@Override
-	public int getL10nId() {
-		return DataManager.PET_DATA.getPetTemplate(petId).getL10nId();
 	}
 
 	public final long getMoodStartTime() {
@@ -273,13 +262,6 @@ public class PetCommonData extends VisibleObjectTemplate implements Expirable {
 	}
 
 	/**
-	 * Saves mood data to DB
-	 */
-	public void savePetMoodData() {
-		DAOManager.getDAO(PlayerPetsDAO.class).savePetMoodData(this);
-	}
-
-	/**
 	 * @return feedProgress, null if pet has no feed function
 	 */
 	public PetFeedProgress getFeedProgress() {
@@ -314,7 +296,7 @@ public class PetCommonData extends VisibleObjectTemplate implements Expirable {
 	@Override
 	public void onExpire(Player player) {
 		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_PET_ABANDON_EXPIRE_TIME_COMPLETE(name));
-		PetAdoptionService.surrenderPet(player, petId);
+		PetAdoptionService.surrenderPet(player, templateId);
 	}
 
 }

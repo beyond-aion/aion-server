@@ -17,19 +17,21 @@ public abstract class PlayerPetsDAO implements DAO {
 		return PlayerPetsDAO.class.getName();
 	}
 
-	public abstract void insertPlayerPet(PetCommonData petCommonData);
+	public abstract void insertPlayerPet(Player player, PetCommonData petCommonData);
 
-	public abstract void removePlayerPet(Player player, int petId);
+	public abstract void removePlayerPet(int petObjectId);
 
 	public abstract void updatePetName(PetCommonData petCommonData);
 
 	public abstract List<PetCommonData> getPlayerPets(Player player);
 
-	public abstract void setTime(Player player, int petId, long time);
+	public abstract void setTime(int petObjectId, long time);
 
-	public abstract void saveFeedStatus(Player player, int petId, int hungryLevel, int feedProgress, long reuseTime);
+	public abstract void saveFeedStatus(int petObjectId, int hungryLevel, int feedProgress, long reuseTime);
 
 	public abstract boolean savePetMoodData(PetCommonData petCommonData);
 
-	public abstract void saveDopingBag(Player player, int petId, PetDopingBag bag);
+	public abstract void saveDopingBag(int petObjectId, PetDopingBag bag);
+
+	public abstract int[] getUsedIDs();
 }

@@ -29,7 +29,7 @@ public class Predicates {
 		public static final Predicate<Player> ONLINE = player -> player.isOnline();
 
 		public static final Predicate<Player> WITH_LOOT_PET = player -> player.getPet() != null
-			&& player.getPet().getPetTemplate().getPetFunction(PetFunctionType.LOOT) != null;
+			&& player.getPet().getObjectTemplate().getPetFunction(PetFunctionType.LOOT) != null;
 
 		public static final Predicate<Player> sameRace(Player p) {
 			return player -> p.getRace() == player.getRace();

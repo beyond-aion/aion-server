@@ -673,8 +673,9 @@ CREATE TABLE `player_passkey` (
 -- Table structure for `player_pets`
 -- ----------------------------
 CREATE TABLE `player_pets` (
+  `id` int(11) NOT NULL,
   `player_id` int(11) NOT NULL,
-  `pet_id` int(11) NOT NULL,
+  `template_id` int(11) NOT NULL,
   `decoration` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `hungry_level` tinyint(4) NOT NULL DEFAULT '0',
@@ -688,7 +689,8 @@ CREATE TABLE `player_pets` (
   `dopings` varchar(80) CHARACTER SET ascii DEFAULT NULL,
   `despawn_time` timestamp NULL DEFAULT NULL,
   `expire_time` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`player_id`,`pet_id`),
+  PRIMARY KEY (`id`),
+  KEY `player_id` (`player_id`),
   CONSTRAINT `FK_player_pets` FOREIGN KEY (`player_id`) REFERENCES `players` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

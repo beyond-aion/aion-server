@@ -4,7 +4,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.model.gameobjects.PetAction;
 import com.aionemu.gameserver.model.gameobjects.player.PetCommonData;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.item.ItemTemplate;
@@ -12,6 +11,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_PET;
 import com.aionemu.gameserver.taskmanager.tasks.ExpireTimerTask;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.Util;
+import com.aionemu.gameserver.utils.idfactory.IDFactory;
 
 /**
  * @author ATracer
@@ -58,7 +58,7 @@ public class PetAdoptionService {
 		name = Util.convertName(name);
 		PetCommonData petCommonData = player.getPetList().addPet(player, petId, decorationId, name, expireTime);
 		if (petCommonData != null) {
-			PacketSendUtility.sendPacket(player, new SM_PET(PetAction.ADOPT, petCommonData));
+			PacketSendUtility.sendPacket(player, new SM_PET(petCommonData, true));
 			ExpireTimerTask.getInstance().registerExpirable(petCommonData, player);
 		}
 	}
@@ -69,7 +69,7 @@ public class PetAdoptionService {
 			return false;
 		}
 		if (player.getPetList().hasPet(petId)) {
-			log.warn("Duplicate pet adoption");
+			log.warn("Duplicate pet adoption " + player + " (pet: " + petId + ")");
 			return false;
 		}
 		if (DataManager.PET_DATA.getPetTemplate(petId) == null) {
@@ -86,14 +86,16 @@ public class PetAdoptionService {
 	 * @param petId
 	 */
 	public static void surrenderPet(Player player, int petId) {
-		PetCommonData petCommonData = player.getPetList().getPet(petId);
-		if (player.getPet() != null && player.getPet().getPetId() == petCommonData.getPetId()) {
+		PetCommonData petCommonData = player.getPetList().deletePet(petId);
+		if (petCommonData == null)
+			return;
+		if (player.getPet() != null && player.getPet().getObjectId() == petCommonData.getObjectId()) {
 			if (petCommonData.getFeedProgress() != null)
 				petCommonData.setCancelFeed(true);
 			PetSpawnService.dismissPet(player);
 		}
-		player.getPetList().deletePet(petCommonData.getPetId());
-		PacketSendUtility.sendPacket(player, new SM_PET(PetAction.SURRENDER, petCommonData));
+		PacketSendUtility.sendPacket(player, new SM_PET(petCommonData, false));
+		IDFactory.getInstance().releaseId(petCommonData.getObjectId());
 	}
 
 }

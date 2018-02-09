@@ -37,7 +37,6 @@ import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Kisk;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.Pet;
-import com.aionemu.gameserver.model.gameobjects.PetAction;
 import com.aionemu.gameserver.model.gameobjects.PetEmote;
 import com.aionemu.gameserver.model.gameobjects.StaticObject;
 import com.aionemu.gameserver.model.gameobjects.Summon;
@@ -159,7 +158,7 @@ public class PlayerController extends CreatureController<Player> {
 			PacketSendUtility.sendPacket(getOwner(), new SM_GATHERABLE_INFO(object));
 		} else if (object instanceof Pet) {
 			Pet pet = (Pet) object;
-			PacketSendUtility.sendPacket(getOwner(), new SM_PET(PetAction.SPAWN, pet));
+			PacketSendUtility.sendPacket(getOwner(), new SM_PET(pet));
 			if (pet.getMaster().isInFlyingState())
 				PacketSendUtility.sendPacket(getOwner(), new SM_PET_EMOTE(pet, PetEmote.FLY_START));
 		} else if (object instanceof House) {
@@ -173,7 +172,7 @@ public class PlayerController extends CreatureController<Player> {
 	public void notSee(VisibleObject object, ObjectDeleteAnimation animation) {
 		super.notSee(object, animation);
 		if (object instanceof Pet) {
-			PacketSendUtility.sendPacket(getOwner(), new SM_PET((Pet) object, animation));
+			PacketSendUtility.sendPacket(getOwner(), new SM_PET(object.getObjectId(), animation));
 		} else if (object instanceof House) {
 			PacketSendUtility.sendPacket(getOwner(), new SM_DELETE_HOUSE(((House) object).getAddress().getId()));
 		} else if (object instanceof HouseObject) {

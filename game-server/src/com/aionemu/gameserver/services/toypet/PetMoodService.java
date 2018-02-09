@@ -41,7 +41,7 @@ public class PetMoodService {
 		}
 
 		if (pet.getCommonData().getGiftRemainingTime() > 0) {
-			AuditLogger.log(pet.getMaster(), "tried to get gift of pet " + pet.getPetId() + " during CD");
+			AuditLogger.log(pet.getMaster(), "tried to get gift of pet " + pet.getObjectId() + " during CD");
 			return;
 		}
 
@@ -53,9 +53,9 @@ public class PetMoodService {
 		pet.getCommonData().clearMoodStatistics();
 		PacketSendUtility.sendPacket(pet.getMaster(), new SM_PET(pet, 4, 0));
 		PacketSendUtility.sendPacket(pet.getMaster(), new SM_PET(pet, 3, 0));
-		int itemId = pet.getPetTemplate().getConditionReward();
+		int itemId = pet.getObjectTemplate().getConditionReward();
 		if (itemId != 0) {
-			ItemService.addItem(pet.getMaster(), pet.getPetTemplate().getConditionReward(), 1);
+			ItemService.addItem(pet.getMaster(), pet.getObjectTemplate().getConditionReward(), 1);
 		}
 	}
 

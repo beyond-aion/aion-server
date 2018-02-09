@@ -29,7 +29,7 @@ public class PetData {
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		for (PetTemplate pet : pets) {
-			petData.put(pet.getId(), pet);
+			petData.put(pet.getTemplateId(), pet);
 		}
 		pets.clear();
 		pets = null;

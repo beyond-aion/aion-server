@@ -51,8 +51,8 @@ public class Info extends AdminCommand {
 			if (creature instanceof Player) {
 				Player player = (Player) creature;
 				Pet pet = player.getPet();
-				sendInfo(admin, (pet != null ? "Pet Id: " + pet.getPetId() + ", ObjectId: " + pet.getObjectId() + "\n\t" : "") + "Town ID: "
-					+ TownService.getInstance().getTownResidence(player));
+				sendInfo(admin, (pet != null ? "Pet Id: " + pet.getObjectTemplate().getTemplateId() + ", ObjectId: " + pet.getObjectId() + "\n\t" : "")
+					+ "Town ID: " + TownService.getInstance().getTownResidence(player));
 				PlayerGameStats pgs = player.getGameStats();
 				sendInfo(admin,
 					"[Stats]\n\tPvP attack: " + pgs.getStat(StatEnum.PVP_ATTACK_RATIO, 0).getCurrent() * 0.1f + "%\n\tPvP p. attack: "

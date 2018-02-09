@@ -148,7 +148,7 @@ public class NpcController extends CreatureController<Npc> {
 			if (lastAttacker.getActingCreature() instanceof Player && shouldLoot) { // pet loot
 				Player player = (Player) lastAttacker.getActingCreature();
 				int npcObjId = owner.getObjectId();
-				if (player.getPet() != null && player.getPet().getPetTemplate().getPetFunction(PetFunctionType.LOOT) != null
+				if (player.getPet() != null && player.getPet().getObjectTemplate().getPetFunction(PetFunctionType.LOOT) != null
 					&& player.getPet().getCommonData().isLooting()) {
 					PacketSendUtility.sendPacket(player, new SM_PET(true, npcObjId));
 					Set<DropItem> drops = DropRegistrationService.getInstance().getCurrentDropMap().get(npcObjId);

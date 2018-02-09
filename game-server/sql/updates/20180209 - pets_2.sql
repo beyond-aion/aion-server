@@ -1,0 +1,5 @@
+ALTER TABLE `player_pets`
+MODIFY COLUMN `id`  int(11) NOT NULL FIRST ,
+DROP PRIMARY KEY,
+ADD PRIMARY KEY (`id`),
+ADD INDEX (`player_id`) ;

@@ -14,44 +14,36 @@ public class Pet extends VisibleObject {
 
 	private final Player master;
 	private CreatureMoveController<Pet> moveController;
-	private final PetTemplate petTemplate;
+	private final PetCommonData commonData;
 
-	/**
-	 * @param petTemplate
-	 * @param controller
-	 * @param commonData
-	 * @param master
-	 */
 	public Pet(PetTemplate petTemplate, PetController controller, PetCommonData commonData, Player master) {
-		super(commonData.getObjectId(), controller, null, commonData, new WorldPosition(master.getWorldId()));
+		super(commonData.getObjectId(), controller, null, petTemplate, new WorldPosition(master.getWorldId()));
 		controller.setOwner(this);
 		this.master = master;
-		this.petTemplate = petTemplate;
+		this.commonData = commonData;
 		this.moveController = new CreatureMoveController<Pet>(this) {};
+	}
+
+	@Override
+	public String getName() {
+		return commonData.getName();
 	}
 
 	public Player getMaster() {
 		return master;
 	}
 
-	public int getPetId() {
-		return getObjectTemplate().getTemplateId();
-	}
-
 	public final PetCommonData getCommonData() {
-		return (PetCommonData) super.getObjectTemplate();
+		return commonData;
 	}
 
 	public final CreatureMoveController<Pet> getMoveController() {
 		return moveController;
 	}
 
-	public final PetTemplate getPetTemplate() {
-		return petTemplate;
+	@Override
+	public final PetTemplate getObjectTemplate() {
+		return (PetTemplate) super.getObjectTemplate();
 	}
 
-	@Override
-	protected boolean autoReleaseObjectId() {
-		return true;
-	}
 }

@@ -11,6 +11,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 import com.aionemu.gameserver.model.templates.L10n;
+import com.aionemu.gameserver.model.templates.VisibleObjectTemplate;
 import com.aionemu.gameserver.model.templates.stats.PetStatsTemplate;
 
 /**
@@ -18,7 +19,7 @@ import com.aionemu.gameserver.model.templates.stats.PetStatsTemplate;
  */
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlRootElement(name = "pet")
-public class PetTemplate implements L10n {
+public class PetTemplate extends VisibleObjectTemplate implements L10n {
 
 	@XmlAttribute(name = "id", required = true)
 	private int id;
@@ -41,10 +42,12 @@ public class PetTemplate implements L10n {
 	@XmlTransient
 	Boolean hasPlayerFuncs = null;
 
-	public int getId() {
+	@Override
+	public int getTemplateId() {
 		return id;
 	}
 
+	@Override
 	public String getName() {
 		return name;
 	}

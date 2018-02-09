@@ -20,7 +20,9 @@ public class SM_PET extends AionServerPacket {
 
 	private PetAction action;
 	private Pet pet;
+	private int petObjectId;
 	private PetCommonData commonData;
+	private String petName;
 	private int itemObjectId;
 	private Collection<PetCommonData> pets;
 	private int count;
@@ -32,12 +34,11 @@ public class SM_PET extends AionServerPacket {
 	private int dopeSlot;
 	private byte animationId;
 
-	public SM_PET(int subType, PetAction action, int itemObjectId, int count, Pet pet) {
+	public SM_PET(int subType, int itemObjectId, int count, Pet pet) {
+		this.action = PetAction.FOOD;
 		this.subType = subType;
-		this.action = action;
 		this.count = count;
 		this.itemObjectId = itemObjectId;
-		this.pet = pet;
 		this.commonData = pet.getCommonData();
 	}
 
@@ -45,29 +46,32 @@ public class SM_PET extends AionServerPacket {
 		this.action = action;
 	}
 
-	public SM_PET(PetAction action, Pet pet) {
-		this(0, action, 0, 0, pet);
+	public SM_PET(int petObjectId, String petName) {
+		this.action = PetAction.RENAME;
+		this.petObjectId = petObjectId;
+		this.petName = petName;
 	}
 
-	/**
-	 * For adopt only
-	 * 
-	 * @param actionId
-	 * @param commonData
-	 */
-	public SM_PET(PetAction action, PetCommonData commonData) {
-		this.action = action;
+	public SM_PET(Pet pet) {
+		this.action = PetAction.SPAWN;
+		this.pet = pet;
+	}
+
+	public SM_PET(PetCommonData commonData, boolean isAdopt) {
+		this.action = isAdopt ? PetAction.ADOPT : PetAction.SURRENDER;
 		this.commonData = commonData;
+	}
+
+	public SM_PET(int petId, int petObjectId) {
+		this.action = PetAction.SURRENDER;
+		this.petObjectId = petObjectId;
 	}
 
 	/**
 	 * For listing all pets on this character
-	 * 
-	 * @param actionId
-	 * @param pets
 	 */
-	public SM_PET(PetAction action, Collection<PetCommonData> pets) {
-		this.action = action;
+	public SM_PET(Collection<PetCommonData> pets) {
+		this.action = PetAction.LOAD_PETS;
 		this.pets = pets;
 	}
 
@@ -103,156 +107,44 @@ public class SM_PET extends AionServerPacket {
 	 * @param shuggleEmotion
 	 */
 	public SM_PET(Pet pet, int subType, int shuggleEmotion) {
-		this(0, PetAction.MOOD, 0, 0, pet);
+		this.action = PetAction.MOOD;
 		this.shuggleEmotion = shuggleEmotion;
 		this.subType = subType;
+		this.commonData = pet.getCommonData();
 	}
 
 	/**
 	 * For deleting pet visually.
 	 */
-	public SM_PET(Pet pet, ObjectDeleteAnimation animation) {
-		this.pet = pet;
+	public SM_PET(int petObjectId, ObjectDeleteAnimation animation) {
 		this.action = PetAction.DISMISS;
+		this.petObjectId = petObjectId;
 		this.animationId = animation.getId();
 	}
 
 	@Override
 	protected void writeImpl(AionConnection con) {
-		PetTemplate petTemplate = null;
 		writeH(action.getActionId());
 		switch (action) {
 			case LOAD_PETS: // load list on login
 				writeC(0); // unk
 				writeH(pets.size());
-				for (PetCommonData petCommonData : pets) {
-					petTemplate = DataManager.PET_DATA.getPetTemplate(petCommonData.getPetId());
-					writeS(petCommonData.getName());
-					writeD(petCommonData.getPetId());
-					writeD(petCommonData.getObjectId());
-					writeD(petCommonData.getMasterObjectId());
-					writeD(0);
-					writeD(0);
-					writeD(petCommonData.getBirthday());
-					writeD(petCommonData.secondsUntilExpiration()); // accompanying time
-
-					int specialtyCount = 0;
-					if (petTemplate.containsFunction(PetFunctionType.WAREHOUSE)) {
-						writeH(PetFunctionType.WAREHOUSE.getId());
-						specialtyCount++;
-					}
-					if (petTemplate.containsFunction(PetFunctionType.LOOT)) {
-						writeH(PetFunctionType.LOOT.getId());
-						writeC(0);
-						specialtyCount++;
-					}
-					if (petTemplate.containsFunction(PetFunctionType.DOPING)) {
-						writeH(PetFunctionType.DOPING.getId());
-						short dopeId = (short) petTemplate.getPetFunction(PetFunctionType.DOPING).getId();
-						PetDopingEntry dope = DataManager.PET_DOPING_DATA.getDopingTemplate(dopeId);
-						writeD(dope.isUseFood() ? petCommonData.getDopingBag().getFoodItem() : 0);
-						writeD(dope.isUseDrink() ? petCommonData.getDopingBag().getDrinkItem() : 0);
-						int[] scrollBag = petCommonData.getDopingBag().getScrollsUsed();
-						if (scrollBag.length == 0) {
-							writeQ(0);
-							writeQ(0);
-							writeQ(0);
-						} else {
-							writeD(scrollBag[0]); // Scroll 1
-							writeD(scrollBag.length > 1 ? scrollBag[1] : 0); // Scroll 2
-							writeD(scrollBag.length > 2 ? scrollBag[2] : 0); // Scroll 3 - no pet supports it yet
-							writeD(scrollBag.length > 3 ? scrollBag[3] : 0); // Scroll 4 - no pet supports it yet
-							writeD(scrollBag.length > 4 ? scrollBag[4] : 0); // Scroll 5 - no pet supports it yet
-							writeD(scrollBag.length > 5 ? scrollBag[5] : 0); // Scroll 6 - no pet supports it yet
-						}
-						specialtyCount++;
-					}
-					if (petTemplate.containsFunction(PetFunctionType.FOOD)) {
-						writeH(PetFunctionType.FOOD.getId());
-						writeD(petCommonData.getFeedProgress().getDataForPacket());
-						writeD((int) petCommonData.getRefeedDelay() / 1000);
-						specialtyCount++;
-					}
-
-					// Pets have only 2 functions max. If absent filled with NONE
-					if (specialtyCount == 0) {
-						writeH(PetFunctionType.NONE.getId());
-						writeH(PetFunctionType.NONE.getId());
-					} else if (specialtyCount == 1) {
-						writeH(PetFunctionType.NONE.getId());
-					}
-
-					writeH(PetFunctionType.APPEARANCE.getId());
-					writeC(0); // not implemented color R ?
-					writeC(0); // not implemented color G ?
-					writeC(0); // not implemented color B ?
-					writeD(petCommonData.getDecoration());
-
-					// epilog
-					writeD(0); // unk
-					writeD(0); // unk
+				for (PetCommonData commonData : pets) {
+					writePetData(commonData);
 				}
 				break;
 			case ADOPT:
-				writeS(commonData.getName());
-				writeD(commonData.getPetId());
-				writeD(commonData.getObjectId());
-				writeD(commonData.getMasterObjectId());
-				writeD(0);
-				writeD(0);
-				writeD(commonData.getBirthday());
-				writeD(commonData.secondsUntilExpiration()); // accompanying time
-				petTemplate = DataManager.PET_DATA.getPetTemplate(commonData.getPetId());
-				int specialtyCount = 0;
-				if (petTemplate.containsFunction(PetFunctionType.WAREHOUSE)) {
-					writeH(PetFunctionType.WAREHOUSE.getId());
-					specialtyCount++;
-				}
-				if (petTemplate.containsFunction(PetFunctionType.LOOT)) {
-					writeH(PetFunctionType.LOOT.getId());
-					writeC(0);
-					specialtyCount++;
-				}
-				if (petTemplate.containsFunction(PetFunctionType.DOPING)) {
-					writeH(PetFunctionType.DOPING.getId());
-					writeQ(0);
-					writeQ(0);
-					writeQ(0);
-					writeQ(0);
-					specialtyCount++;
-				}
-				if (petTemplate.containsFunction(PetFunctionType.FOOD)) {
-					writeH(PetFunctionType.FOOD.getId());
-					writeQ(0);
-					specialtyCount++;
-				}
-				// Pets have only 2 functions max. If absent filled with NONE
-				if (specialtyCount == 0) {
-					writeH(PetFunctionType.NONE.getId());
-					writeH(PetFunctionType.NONE.getId());
-				} else if (specialtyCount == 1) {
-					writeH(PetFunctionType.NONE.getId());
-				}
-
-				writeH(PetFunctionType.APPEARANCE.getId());
-				writeC(0); // not implemented color R ?
-				writeC(0); // not implemented color G ?
-				writeC(0); // not implemented color B ?
-				writeD(commonData.getDecoration());
-
-				// epilog
-				writeD(0); // unk
-				writeD(0); // unk
+				writePetData(commonData);
 				break;
 			case SURRENDER:
-				writeD(commonData.getPetId());
+				writeD(commonData.getTemplateId());
 				writeD(commonData.getObjectId());
 				writeD(0); // unk
 				writeD(0); // unk
 				break;
 			case SPAWN:
 				writeS(pet.getName());
-				writeD(pet.getPetId());
+				writeD(pet.getObjectTemplate().getTemplateId());
 				writeD(pet.getObjectId());
 
 				writeF(pet.getPosition().getX());
@@ -265,14 +157,10 @@ public class SM_PET extends AionServerPacket {
 
 				writeD(pet.getMaster().getObjectId());
 
-				writeC(1); // unk
-				writeD(0); // accompanying time ??
-				writeD(pet.getCommonData().getDecoration());
-				writeD(0); // wings ID if customize_attach = 1
-				writeD(0); // unk
+				writeAppearance(pet.getCommonData());
 				break;
 			case DISMISS:
-				writeD(pet.getObjectId());
+				writeD(petObjectId);
 				writeC(animationId);
 				break;
 			case FOOD:
@@ -320,8 +208,8 @@ public class SM_PET extends AionServerPacket {
 				}
 				break;
 			case RENAME:
-				writeD(pet.getObjectId());
-				writeS(pet.getName());
+				writeD(petObjectId);
+				writeS(petName);
 				break;
 			case MOOD:
 				switch (subType) {
@@ -338,14 +226,14 @@ public class SM_PET extends AionServerPacket {
 					case 2: // emotion sent
 						writeC(subType);
 						writeD(0);
-						writeD(pet.getCommonData().getMoodPoints(true));
+						writeD(commonData.getMoodPoints(true));
 						writeD(shuggleEmotion);
-						commonData.setLastSentPoints(pet.getCommonData().getMoodPoints(true));
+						commonData.setLastSentPoints(commonData.getMoodPoints(true));
 						commonData.setMoodCdStarted(System.currentTimeMillis());
 						break;
 					case 3: // give gift
 						writeC(subType);
-						writeD(pet.getPetTemplate().getConditionReward());
+						writeD(DataManager.PET_DATA.getPetTemplate(commonData.getTemplateId()).getConditionReward());
 						commonData.setGiftCdStarted(System.currentTimeMillis());
 						break;
 					case 4: // periodic update
@@ -353,7 +241,7 @@ public class SM_PET extends AionServerPacket {
 						writeD(commonData.getMoodPoints(true));
 						writeD(commonData.getMoodRemainingTime());
 						writeD(commonData.getGiftRemainingTime());
-						commonData.setLastSentPoints(pet.getCommonData().getMoodPoints(true));
+						commonData.setLastSentPoints(commonData.getMoodPoints(true));
 						break;
 				}
 				break;
@@ -388,5 +276,75 @@ public class SM_PET extends AionServerPacket {
 				}
 				break;
 		}
+	}
+
+	private void writePetData(PetCommonData petCommonData) {
+		PetTemplate petTemplate = DataManager.PET_DATA.getPetTemplate(petCommonData.getTemplateId());
+		writeS(petCommonData.getName());
+		writeD(petCommonData.getTemplateId());
+		writeD(petCommonData.getObjectId());
+		writeD(petCommonData.getMasterObjectId());
+		writeD(0);
+		writeD(0);
+		writeD(petCommonData.getBirthday());
+		writeD(petCommonData.secondsUntilExpiration()); // accompanying time
+
+		int specialtyCount = 0;
+		if (petTemplate.containsFunction(PetFunctionType.WAREHOUSE)) {
+			writeH(PetFunctionType.WAREHOUSE.getId());
+			specialtyCount++;
+		}
+		if (petTemplate.containsFunction(PetFunctionType.LOOT)) {
+			writeH(PetFunctionType.LOOT.getId());
+			writeC(0);
+			specialtyCount++;
+		}
+		if (petTemplate.containsFunction(PetFunctionType.DOPING)) {
+			writeH(PetFunctionType.DOPING.getId());
+			short dopeId = (short) petTemplate.getPetFunction(PetFunctionType.DOPING).getId();
+			PetDopingEntry dope = DataManager.PET_DOPING_DATA.getDopingTemplate(dopeId);
+			writeD(dope.isUseFood() ? petCommonData.getDopingBag().getFoodItem() : 0);
+			writeD(dope.isUseDrink() ? petCommonData.getDopingBag().getDrinkItem() : 0);
+			int[] scrollBag = petCommonData.getDopingBag().getScrollsUsed();
+			if (scrollBag.length == 0) {
+				writeQ(0);
+				writeQ(0);
+				writeQ(0);
+			} else {
+				writeD(scrollBag[0]); // Scroll 1
+				writeD(scrollBag.length > 1 ? scrollBag[1] : 0); // Scroll 2
+				writeD(scrollBag.length > 2 ? scrollBag[2] : 0); // Scroll 3 - no pet supports it yet
+				writeD(scrollBag.length > 3 ? scrollBag[3] : 0); // Scroll 4 - no pet supports it yet
+				writeD(scrollBag.length > 4 ? scrollBag[4] : 0); // Scroll 5 - no pet supports it yet
+				writeD(scrollBag.length > 5 ? scrollBag[5] : 0); // Scroll 6 - no pet supports it yet
+			}
+			specialtyCount++;
+		}
+		if (petTemplate.containsFunction(PetFunctionType.FOOD)) {
+			writeH(PetFunctionType.FOOD.getId());
+			writeD(petCommonData.getFeedProgress().getDataForPacket());
+			writeD((int) (petCommonData.getRefeedDelay() / 1000));
+			specialtyCount++;
+		}
+
+		// Pets have only 2 functions max. If absent filled with NONE
+		if (specialtyCount == 0) {
+			writeH(PetFunctionType.NONE.getId());
+			writeH(PetFunctionType.NONE.getId());
+		} else if (specialtyCount == 1) {
+			writeH(PetFunctionType.NONE.getId());
+		}
+
+		writeAppearance(petCommonData);
+	}
+
+	private void writeAppearance(PetCommonData petCommonData) {
+		writeH(PetFunctionType.APPEARANCE.getId());
+		writeC(0); // not implemented color R ?
+		writeC(0); // not implemented color G ?
+		writeC(0); // not implemented color B ?
+		writeD(petCommonData.getDecoration());
+		writeD(0); // wings ID if customize_attach = 1
+		writeD(0); // unk
 	}
 }

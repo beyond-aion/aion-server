@@ -3,6 +3,7 @@ package mysql5;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,86 +27,83 @@ public class MySQL5PlayerPetsDAO extends PlayerPetsDAO {
 	private static final Logger log = LoggerFactory.getLogger(MySQL5PlayerPetsDAO.class);
 
 	@Override
-	public void saveFeedStatus(Player player, int petId, int hungryLevel, int feedProgress, long reuseTime) {
+	public void saveFeedStatus(int petObjectId, int hungryLevel, int feedProgress, long reuseTime) {
 		try {
 			try (Connection con = DatabaseFactory.getConnection();
 				PreparedStatement stmt = con
-					.prepareStatement("UPDATE player_pets SET hungry_level = ?, feed_progress = ?, reuse_time = ? WHERE player_id = ? AND pet_id = ?")) {
+					.prepareStatement("UPDATE player_pets SET hungry_level = ?, feed_progress = ?, reuse_time = ? WHERE id = ?")) {
 				stmt.setInt(1, hungryLevel);
 				stmt.setInt(2, feedProgress);
 				stmt.setLong(3, reuseTime);
-				stmt.setInt(4, player.getObjectId());
-				stmt.setInt(5, petId);
+				stmt.setInt(4, petObjectId);
 				stmt.execute();
 			}
 		} catch (Exception e) {
-			log.error("Error update pet #" + petId, e);
+			log.error("Error updating feed status for pet #" + petObjectId, e);
 		}
 	}
 
 	@Override
-	public void saveDopingBag(Player player, int petId, PetDopingBag bag) {
+	public void saveDopingBag(int petObjectId, PetDopingBag bag) {
 		try {
 			try (Connection con = DatabaseFactory.getConnection();
-				PreparedStatement stmt = con.prepareStatement("UPDATE player_pets SET dopings = ? WHERE player_id = ? AND pet_id = ?")) {
+				PreparedStatement stmt = con.prepareStatement("UPDATE player_pets SET dopings = ? WHERE id = ?")) {
 				String itemIds = bag.getFoodItem() + "," + bag.getDrinkItem();
 				for (int itemId : bag.getScrollsUsed())
-					itemIds += "," + Integer.toString(itemId);
+					itemIds += "," + itemId;
 				stmt.setString(1, itemIds);
-				stmt.setInt(2, player.getObjectId());
-				stmt.setInt(3, petId);
+				stmt.setInt(2, petObjectId);
 				stmt.execute();
 			}
 		} catch (Exception e) {
-			log.error("Error update doping for pet #" + petId, e);
+			log.error("Error update doping for pet #" + petObjectId, e);
 		}
 	}
 
 	@Override
-	public void setTime(Player player, int petId, long time) {
+	public void setTime(int petObjectId, long time) {
 		try {
 			try (Connection con = DatabaseFactory.getConnection();
-				PreparedStatement stmt = con.prepareStatement("UPDATE player_pets SET reuse_time = ? WHERE player_id = ? AND pet_id = ?")) {
+				PreparedStatement stmt = con.prepareStatement("UPDATE player_pets SET reuse_time = ? WHERE id = ?")) {
 				stmt.setLong(1, time);
+				stmt.setInt(2, petObjectId);
+				stmt.execute();
+			}
+		} catch (Exception e) {
+			log.error("Error update pet #" + petObjectId, e);
+		}
+	}
+
+	@Override
+	public void insertPlayerPet(Player player, PetCommonData petCommonData) {
+		try {
+			try (Connection con = DatabaseFactory.getConnection();
+				PreparedStatement stmt = con.prepareStatement(
+					"INSERT INTO player_pets(id, player_id, template_id, decoration, name, despawn_time, expire_time) VALUES(?, ?, ?, ?, ?, ?, ?)")) {
+				stmt.setInt(1, petCommonData.getObjectId());
 				stmt.setInt(2, player.getObjectId());
-				stmt.setInt(3, petId);
+				stmt.setInt(3, petCommonData.getTemplateId());
+				stmt.setInt(4, petCommonData.getDecoration());
+				stmt.setString(5, petCommonData.getName());
+				stmt.setTimestamp(6, petCommonData.getDespawnTime());
+				stmt.setInt(7, petCommonData.getExpireTime());
 				stmt.execute();
 			}
 		} catch (Exception e) {
-			log.error("Error update pet #" + petId, e);
+			log.error("Error inserting new pet #" + petCommonData.getObjectId() + ", name: " + petCommonData.getName(), e);
 		}
 	}
 
 	@Override
-	public void insertPlayerPet(PetCommonData petCommonData) {
+	public void removePlayerPet(int petObjectId) {
 		try {
 			try (Connection con = DatabaseFactory.getConnection();
-				PreparedStatement stmt = con
-					.prepareStatement("INSERT INTO player_pets(player_id, pet_id, decoration, name, despawn_time, expire_time) VALUES(?, ?, ?, ?, ?, ?)")) {
-				stmt.setInt(1, petCommonData.getMasterObjectId());
-				stmt.setInt(2, petCommonData.getPetId());
-				stmt.setInt(3, petCommonData.getDecoration());
-				stmt.setString(4, petCommonData.getName());
-				stmt.setTimestamp(5, petCommonData.getDespawnTime());
-				stmt.setInt(6, petCommonData.getExpireTime());
+				PreparedStatement stmt = con.prepareStatement("DELETE FROM player_pets WHERE id = ?")) {
+				stmt.setInt(1, petObjectId);
 				stmt.execute();
 			}
 		} catch (Exception e) {
-			log.error("Error inserting new pet #" + petCommonData.getPetId() + "[" + petCommonData.getName() + "]", e);
-		}
-	}
-
-	@Override
-	public void removePlayerPet(Player player, int petId) {
-		try {
-			try (Connection con = DatabaseFactory.getConnection();
-				PreparedStatement stmt = con.prepareStatement("DELETE FROM player_pets WHERE player_id = ? AND pet_id = ?")) {
-				stmt.setInt(1, player.getObjectId());
-				stmt.setInt(2, petId);
-				stmt.execute();
-			}
-		} catch (Exception e) {
-			log.error("Error removing pet #" + petId, e);
+			log.error("Error removing pet #" + petObjectId, e);
 		}
 	}
 
@@ -118,7 +116,8 @@ public class MySQL5PlayerPetsDAO extends PlayerPetsDAO {
 				stmt.setInt(1, player.getObjectId());
 				try (ResultSet rs = stmt.executeQuery()) {
 					while (rs.next()) {
-						PetCommonData petCommonData = new PetCommonData(rs.getInt("pet_id"), player.getObjectId(), rs.getInt("expire_time"));
+						PetCommonData petCommonData = new PetCommonData(rs.getInt("id"), rs.getInt("template_id"), player.getObjectId(),
+							rs.getInt("expire_time"));
 						petCommonData.setName(rs.getString("name"));
 						petCommonData.setDecoration(rs.getInt("decoration"));
 						if (petCommonData.getFeedProgress() != null) {
@@ -135,20 +134,11 @@ public class MySQL5PlayerPetsDAO extends PlayerPetsDAO {
 							}
 						}
 						petCommonData.setBirthday(rs.getTimestamp("birthday"));
-						if (petCommonData.getRefeedDelay() > 0) {
-							petCommonData.setIsFeedingTime(false);
-							petCommonData.scheduleRefeed(petCommonData.getRefeedDelay());
-						} else if (petCommonData.getFeedProgress() != null)
-							petCommonData.getFeedProgress().setHungryLevel(PetHungryLevel.HUNGRY);
 						petCommonData.setStartMoodTime(rs.getLong("mood_started"));
 						petCommonData.setShuggleCounter(rs.getInt("counter"));
 						petCommonData.setMoodCdStarted(rs.getLong("mood_cd_started"));
 						petCommonData.setGiftCdStarted(rs.getLong("gift_cd_started"));
-						Timestamp ts = null;
-						try {
-							ts = rs.getTimestamp("despawn_time");
-						} catch (Exception e) {
-						}
+						Timestamp ts = rs.getTimestamp("despawn_time");
 						if (ts == null)
 							ts = new Timestamp(System.currentTimeMillis());
 						petCommonData.setDespawnTime(ts);
@@ -157,7 +147,7 @@ public class MySQL5PlayerPetsDAO extends PlayerPetsDAO {
 				}
 			}
 		} catch (Exception e) {
-			log.error("Error getting pets for " + player.getObjectId(), e);
+			log.error("Error loading pets for " + player, e);
 		}
 		return pets;
 	}
@@ -166,14 +156,13 @@ public class MySQL5PlayerPetsDAO extends PlayerPetsDAO {
 	public void updatePetName(PetCommonData petCommonData) {
 		try {
 			try (Connection con = DatabaseFactory.getConnection();
-				PreparedStatement stmt = con.prepareStatement("UPDATE player_pets SET name = ? WHERE player_id = ? AND pet_id = ?")) {
+				PreparedStatement stmt = con.prepareStatement("UPDATE player_pets SET name = ? WHERE id = ?")) {
 				stmt.setString(1, petCommonData.getName());
-				stmt.setInt(2, petCommonData.getMasterObjectId());
-				stmt.setInt(3, petCommonData.getPetId());
+				stmt.setInt(2, petCommonData.getObjectId());
 				stmt.execute();
 			}
 		} catch (Exception e) {
-			log.error("Error update pet #" + petCommonData.getPetId(), e);
+			log.error("Error update pet #" + petCommonData.getObjectId(), e);
 		}
 	}
 
@@ -181,19 +170,18 @@ public class MySQL5PlayerPetsDAO extends PlayerPetsDAO {
 	public boolean savePetMoodData(PetCommonData petCommonData) {
 		try {
 			try (Connection con = DatabaseFactory.getConnection();
-				PreparedStatement stmt = con
-					.prepareStatement("UPDATE player_pets SET mood_started = ?, counter = ?, mood_cd_started = ?, gift_cd_started = ?, despawn_time = ? WHERE player_id = ? AND pet_id = ?")) {
+				PreparedStatement stmt = con.prepareStatement(
+					"UPDATE player_pets SET mood_started = ?, counter = ?, mood_cd_started = ?, gift_cd_started = ?, despawn_time = ? WHERE id = ?")) {
 				stmt.setLong(1, petCommonData.getMoodStartTime());
 				stmt.setInt(2, petCommonData.getShuggleCounter());
 				stmt.setLong(3, petCommonData.getMoodCdStarted());
 				stmt.setLong(4, petCommonData.getGiftCdStarted());
 				stmt.setTimestamp(5, petCommonData.getDespawnTime());
-				stmt.setInt(6, petCommonData.getMasterObjectId());
-				stmt.setInt(7, petCommonData.getPetId());
+				stmt.setInt(6, petCommonData.getObjectId());
 				stmt.execute();
 			}
 		} catch (Exception e) {
-			log.error("Error updating mood for pet #" + petCommonData.getPetId(), e);
+			log.error("Error updating mood for pet #" + petCommonData.getObjectId(), e);
 			return false;
 		}
 		return true;
@@ -204,4 +192,22 @@ public class MySQL5PlayerPetsDAO extends PlayerPetsDAO {
 		return MySQL5DAOUtils.supports(databaseName, majorVersion, minorVersion);
 	}
 
+	@Override
+	public int[] getUsedIDs() {
+		try (Connection con = DatabaseFactory.getConnection();
+			PreparedStatement stmt = con.prepareStatement("SELECT id FROM player_pets WHERE id IS NOT NULL", ResultSet.TYPE_SCROLL_INSENSITIVE,
+				ResultSet.CONCUR_READ_ONLY)) {
+			ResultSet rs = stmt.executeQuery();
+			rs.last();
+			int count = rs.getRow();
+			rs.beforeFirst();
+			int[] ids = new int[count];
+			for (int i = 0; rs.next(); i++)
+				ids[i] = rs.getInt("id");
+			return ids;
+		} catch (SQLException e) {
+			log.error("Can't get list of IDs from pets table", e);
+			return null;
+		}
+	}
 }

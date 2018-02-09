@@ -262,7 +262,7 @@ public class SM_PTRANSFER_CONTROL extends LsServerPacket {
 				Collection<PetCommonData> pets = this.player.getPetList().getPets();
 				writeD(pets.size());
 				for (PetCommonData pet : pets) {
-					writeD(pet.getPetId());
+					writeD(pet.getTemplateId());
 					writeD(pet.getDecoration());
 					writeQ(pet.getBirthdayTimestamp() == null ? 0 : pet.getBirthdayTimestamp().getTime());
 					writeS(pet.getName());

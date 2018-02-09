@@ -387,17 +387,12 @@ public class VisibleObjectSpawner {
 		return summon;
 	}
 
-	/**
-	 * @param player
-	 * @param petId
-	 * @return
-	 */
-	public static Pet spawnPet(Player player, int petId) {
-		PetCommonData petCommonData = player.getPetList().getPet(petId);
+	public static Pet spawnPet(Player player, int templateId) {
+		PetCommonData petCommonData = player.getPetList().getPet(templateId);
 		if (petCommonData == null)
 			return null;
 
-		PetTemplate petTemplate = DataManager.PET_DATA.getPetTemplate(petId);
+		PetTemplate petTemplate = DataManager.PET_DATA.getPetTemplate(templateId);
 		if (petTemplate == null)
 			return null;
 
@@ -410,7 +405,7 @@ public class VisibleObjectSpawner {
 		byte heading = player.getHeading();
 		int worldId = player.getWorldId();
 		int instanceId = player.getInstanceId();
-		SpawnTemplate spawn = SpawnEngine.newSingleTimeSpawn(worldId, petId, x, y, z, heading);
+		SpawnTemplate spawn = SpawnEngine.newSingleTimeSpawn(worldId, templateId, x, y, z, heading);
 		SpawnEngine.bringIntoWorld(pet, spawn, instanceId);
 		player.setPet(pet);
 		return pet;

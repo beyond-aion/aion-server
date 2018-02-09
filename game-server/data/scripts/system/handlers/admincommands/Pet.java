@@ -45,7 +45,7 @@ public class Pet extends AdminCommand {
 			IntStream.of(DataManager.PET_DATA.getPetIds()).sorted().forEach(id -> {
 				PetTemplate template = DataManager.PET_DATA.getPetTemplate(id);
 				sb.append('\n');
-				sb.append(template.getId());
+				sb.append(template.getTemplateId());
 				sb.append(" - ");
 				sb.append(ChatUtil.color(StringUtils.capitalize(template.getName()), Color.WHITE));
 				sb.append("\n\tFunctions: ");

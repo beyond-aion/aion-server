@@ -135,7 +135,7 @@ public class CM_BUY_ITEM extends AionClientPacket {
 					break;
 			}
 		} else if (target instanceof Pet) {
-			PetFunction pf = ((Pet) target).getPetTemplate().getPetFunction(PetFunctionType.MERCHANT);
+			PetFunction pf = ((Pet) target).getObjectTemplate().getPetFunction(PetFunctionType.MERCHANT);
 			if (pf != null && tradeActionId == 17) {
 				TradeService.performSellToShop(player, tradeList, null, pf.getRatePrice());
 			}
