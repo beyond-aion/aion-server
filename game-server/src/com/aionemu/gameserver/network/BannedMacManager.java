@@ -17,12 +17,11 @@ public class BannedMacManager {
 
 	private static BannedMacManager manager = new BannedMacManager();
 	private final Logger log = LoggerFactory.getLogger(BannedMacManager.class);
+	private final Map<String, BannedMacEntry> bannedList = new HashMap<>();
 
 	public static BannedMacManager getInstance() {
 		return manager;
 	}
-
-	private Map<String, BannedMacEntry> bannedList = new HashMap<>();
 
 	public final void banAddress(String address, long newTime, String details) {
 		BannedMacEntry entry;
@@ -45,8 +44,8 @@ public class BannedMacManager {
 	}
 
 	public final boolean unbanAddress(String address, String details) {
-		if (bannedList.containsKey(address)) {
-			bannedList.remove(address);
+		BannedMacEntry bannedMacEntry = bannedList.remove(address);
+		if (bannedMacEntry != null) {
 			log.info("unbanned " + address + " for " + details);
 			LoginServer.getInstance().sendPacket(new SM_MACBAN_CONTROL((byte) 0, address, 0, details));
 			return true;
@@ -55,17 +54,15 @@ public class BannedMacManager {
 	}
 
 	public final boolean isBanned(String address) {
-		if (bannedList.containsKey(address))
-			return this.bannedList.get(address).isActive();
-		else
-			return false;
+		BannedMacEntry bannedMacEntry = bannedList.get(address);
+		return bannedMacEntry != null && bannedMacEntry.isActive();
 	}
 
 	public final void dbLoad(String address, long time, String details) {
-		this.bannedList.put(address, new BannedMacEntry(address, new Timestamp(time), details));
+		bannedList.put(address, new BannedMacEntry(address, new Timestamp(time), details));
 	}
 
 	public void onEnd() {
-		log.info("Loaded " + this.bannedList.size() + " banned mac addesses");
+		log.info("Loaded " + bannedList.size() + " banned mac addresses");
 	}
 }
