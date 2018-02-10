@@ -75,9 +75,19 @@ public class RespawnService {
 		RespawnTask respawnTask = new RespawnTask(visibleObject);
 		respawnTask.future = ThreadPoolManager.getInstance().schedule(respawnTask, spawnTemplate.getRespawnTime() * 1000);
 		RespawnTask oldRespawnTask = pendingRespawns.put(visibleObject.getObjectId(), respawnTask);
-		if (oldRespawnTask != null)
-			LoggerFactory.getLogger(RespawnService.class).warn("Duplicate respawn task initiated for " + visibleObject
-				+ " or the previous objectId owner had a pending respawn task but auto released its ID during finalization (see AionObject.finalize())");
+		if (oldRespawnTask != null) { // objectId should not have been in pendingRespawns
+			if (visibleObject.getSpawn() == oldRespawnTask.spawnTemplate) {
+				LoggerFactory.getLogger(RespawnService.class).warn("Duplicate respawn task initiated for " + visibleObject, new IllegalStateException());
+			} else {
+				String oldOwnerInfo = "Old owner: Npc ID: " + oldRespawnTask.spawnTemplate.getNpcId() + ", map ID: "
+					+ oldRespawnTask.spawnTemplate.getWorldId();
+				String newOwnerInfo = "New owner: " + visibleObject;
+				LoggerFactory.getLogger(RespawnService.class)
+					.warn("ObjectId " + visibleObject.getObjectId()
+						+ " got released and reassigned while there was a still active respawn task for the old objectId owner.\n" + oldOwnerInfo + "\n"
+						+ newOwnerInfo);
+			}
+		}
 		return respawnTask;
 	}
 
