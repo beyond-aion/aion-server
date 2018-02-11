@@ -34,7 +34,7 @@ public class SimpleAttackManager {
 
 		npcAI.getOwner().getGameStats().setNextAttackTime(System.currentTimeMillis() + delay);
 		if (delay > 0) {
-			ThreadPoolManager.getInstance().schedule(new SimpleAttackAction(npcAI), delay);
+			ThreadPoolManager.getInstance().schedule(() -> attackAction(npcAI), delay);
 		} else {
 			attackAction(npcAI);
 		}
@@ -77,9 +77,7 @@ public class SimpleAttackManager {
 			Creature mostHated = npc.getAggroList().getMostHated();
 			if (mostHated != null && !mostHated.isDead() && !target.equals(mostHated)) {
 				npcAI.onCreatureEvent(AIEventType.TARGET_CHANGED, mostHated);
-				return;
-			}
-			if (!npc.canSee(target)) {
+			} else if (!npc.canSee(target)) {
 				npc.getController().abortCast();
 				npcAI.onGeneralEvent(AIEventType.TARGET_TOOFAR);
 			} else if (!isTargetInAttackRange(npc)) {
@@ -102,22 +100,6 @@ public class SimpleAttackManager {
 		} else {
 			npcAI.onGeneralEvent(AIEventType.TARGET_GIVEUP);
 		}
-	}
-
-	private final static class SimpleAttackAction implements Runnable {
-
-		private NpcAI npcAI;
-
-		SimpleAttackAction(NpcAI npcAI) {
-			this.npcAI = npcAI;
-		}
-
-		@Override
-		public void run() {
-			attackAction(npcAI);
-			npcAI = null;
-		}
-
 	}
 
 	private final static class SimpleCheckedAttackAction implements Runnable {

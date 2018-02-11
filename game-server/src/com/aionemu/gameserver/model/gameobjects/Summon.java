@@ -29,25 +29,19 @@ import com.aionemu.gameserver.world.WorldPosition;
  */
 public class Summon extends Creature {
 
-	private Player master;
+	private final Player master;
 	private SummonMode mode = SummonMode.GUARD;
 	private Queue<SkillOrder> skillOrders = new LinkedList<>();
 	private Future<?> releaseTask;
 	private SkillElement alwaysResistElement = SkillElement.NONE;
 	private int summonedBySkillId, liveTime;
 
-	/**
-	 * @param objId
-	 * @param controller
-	 * @param spawnTemplate
-	 * @param objectTemplate
-	 * @param time
-	 */
-	public Summon(int objId, SummonController controller, SpawnTemplate spawnTemplate, NpcTemplate objectTemplate, int time) {
+	public Summon(int objId, SummonController controller, SpawnTemplate spawnTemplate, NpcTemplate objectTemplate, Player master, int time) {
 		super(objId, controller, spawnTemplate, objectTemplate, new WorldPosition(spawnTemplate.getWorldId()));
 		controller.setOwner(this);
 		moveController = controller instanceof SiegeWeaponController ? new SiegeWeaponMoveController(this) : new SummonMoveController(this);
 		this.liveTime = time;
+		this.master = master;
 		setGameStats(new SummonGameStats(this));
 		setLifeStats(new SummonLifeStats(this));
 		setAlwaysResistElement(objectTemplate);
@@ -91,14 +85,6 @@ public class Summon extends Creature {
 	@Override
 	public Player getMaster() {
 		return master;
-	}
-
-	/**
-	 * @param master
-	 *          the master to set
-	 */
-	public void setMaster(Player master) {
-		this.master = master;
 	}
 
 	/**
@@ -154,34 +140,32 @@ public class Summon extends Creature {
 
 	@Override
 	public boolean isEnemy(Creature creature) {
-		return master != null && master.isEnemy(creature);
+		return master.isEnemy(creature);
 	}
 
 	@Override
 	public boolean isEnemyFrom(Npc npc) {
-		return master != null && master.isEnemyFrom(npc);
+		return master.isEnemyFrom(npc);
 	}
 
 	@Override
 	public boolean isEnemyFrom(Player player) {
-		return master != null && master.isEnemyFrom(player);
+		return master.isEnemyFrom(player);
 	}
 
 	@Override
 	public boolean isPvpTarget(Creature creature) {
-		return getMaster() != null && creature.getActingCreature() instanceof Player;
+		return creature.getActingCreature() instanceof Player;
 	}
 
 	@Override
 	public TribeClass getTribe() {
-		if (master == null)
-			return getObjectTemplate().getTribe();
 		return master.getTribe();
 	}
 
 	@Override
 	public CreatureType getType(Creature creature) {
-		boolean friend = master == null || master.getRace().equals(creature.getRace()) && !creature.isEnemy(master);
+		boolean friend = master.getRace() == creature.getRace() && !creature.isEnemy(master);
 		return friend ? CreatureType.SUPPORT : CreatureType.ATTACKABLE;
 	}
 
@@ -191,13 +175,13 @@ public class Summon extends Creature {
 	}
 
 	@Override
-	public Creature getActingCreature() {
-		return getMaster() == null ? this : getMaster();
+	public Player getActingCreature() {
+		return getMaster();
 	}
 
 	@Override
 	public Race getRace() {
-		return getMaster() != null ? getMaster().getRace() : Race.NONE;
+		return getMaster().getRace();
 	}
 
 	/**

@@ -51,13 +51,7 @@ public abstract class AbstractOverTimeEffect extends EffectTemplate {
 		// TODO figure out what to do with such cases
 		if (checktime == 0)
 			return;
-		Future<?> task = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
-
-			@Override
-			public void run() {
-				onPeriodicAction(effect);
-			}
-		}, waitingTime, checktime);
+		Future<?> task = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> onPeriodicAction(effect), waitingTime, checktime);
 		effect.setPeriodicTask(task, position);
 	}
 

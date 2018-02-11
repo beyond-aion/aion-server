@@ -67,13 +67,6 @@ public class SummonedObject<T extends VisibleObject> extends Npc {
 	}
 
 	@Override
-	public Creature getActingCreature() {
-		if (creator instanceof Creature)
-			return (Creature) getCreator();
-		return this;
-	}
-
-	@Override
 	public final Creature getMaster() {
 		if (creator instanceof Creature)
 			return (Creature) getCreator();
