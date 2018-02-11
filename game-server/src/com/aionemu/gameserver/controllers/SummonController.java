@@ -2,7 +2,6 @@ package com.aionemu.gameserver.controllers;
 
 import com.aionemu.gameserver.controllers.attack.AttackStatus;
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.model.animations.ObjectDeleteAnimation;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Summon;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
@@ -31,14 +30,10 @@ public class SummonController extends CreatureController<Summon> {
 	private boolean isAttacked = false;
 
 	@Override
-	public void notSee(VisibleObject object, ObjectDeleteAnimation animation) {
-		super.notSee(object, animation);
-		if (getOwner().getMaster() == null)
-			return;
-
-		if (getOwner().getMaster().equals(object)) {
+	public void notKnow(VisibleObject object) {
+		super.notKnow(object);
+		if (getOwner().getMaster().equals(object))
 			SummonsService.release(getOwner(), UnsummonType.DISTANCE, isAttacked);
-		}
 	}
 
 	/**
@@ -129,7 +124,7 @@ public class SummonController extends CreatureController<Summon> {
 				@Override
 				public void run() {
 					lastAttacker.getAggroList().addHate(master, 1);
-				}
+	}
 			}, 1000);
 		}
 	}
