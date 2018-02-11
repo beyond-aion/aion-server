@@ -103,7 +103,7 @@ public class SkillTemplate implements L10n {
 	@XmlAttribute(name = "counter_skill")
 	private AttackStatus counterSkill = null;
 	@XmlAttribute(name = "noremoveatdie")
-	private boolean noRemoveAtDie = false;
+	private boolean noRemoveOnDie = false;
 	@XmlAttribute(name = "no_save_on_logout")
 	private boolean noSaveOnLogout = false;
 	@XmlAttribute(name = "stigma")
@@ -438,8 +438,8 @@ public class SkillTemplate implements L10n {
 		return conflictId;
 	}
 
-	public boolean isNoRemoveAtDie() {
-		return noRemoveAtDie;
+	public boolean isNoRemoveOnDie() {
+		return noRemoveOnDie;
 	}
 
 	public boolean isNoSaveOnLogout() {

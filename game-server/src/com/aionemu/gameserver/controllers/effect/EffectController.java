@@ -799,7 +799,7 @@ public class EffectController {
 			lock.readLock().lock();
 			try {
 				for (Effect effect : abnormalEffectMap.values()) {
-					if (!effect.getSkillTemplate().isNoRemoveAtDie() && !effect.isXpBoost())
+					if (effect.canRemoveOnDie())
 						effects.add(effect);
 				}
 				effects.addAll(noshowEffects.values());

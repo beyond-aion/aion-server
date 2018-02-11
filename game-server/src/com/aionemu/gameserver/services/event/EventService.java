@@ -96,13 +96,7 @@ public class EventService {
 	}
 
 	public boolean isInactiveEventForceType(ForceType forceType) {
-		if (forceType == null)
-			return false;
-		if (!forceType.getName().startsWith(Event.EFFECT_FORCE_TYPE_PREFIX))
-			return false;
-		if (effectForceTypes.contains(forceType))
-			return false;
-		return true;
+		return Event.isEventEffectForceType(forceType) && !effectForceTypes.contains(forceType);
 	}
 
 	private void onTimeChanged() {

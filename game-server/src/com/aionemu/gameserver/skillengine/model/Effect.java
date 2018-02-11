@@ -23,6 +23,7 @@ import com.aionemu.gameserver.model.stats.calc.StatOwner;
 import com.aionemu.gameserver.model.templates.item.ItemTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_PLAYER_STANCE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SKILL_ACTIVATION;
+import com.aionemu.gameserver.services.event.Event;
 import com.aionemu.gameserver.skillengine.condition.Conditions;
 import com.aionemu.gameserver.skillengine.effect.AbnormalState;
 import com.aionemu.gameserver.skillengine.effect.AbstractAbsoluteStatEffect;
@@ -1208,10 +1209,6 @@ public class Effect implements StatOwner {
 			EffectType.SPELLATKDRAININSTANT, EffectType.SPELLATTACKINSTANT);
 	}
 
-	public boolean isXpBoost() {
-		return getSkillTemplate().hasAnyEffect(EffectType.XPBOOST);
-	}
-
 	public boolean isNoDeathPenalty() {
 		return getSkillTemplate().hasAnyEffect(EffectType.NODEATHPENALTY);
 	}
@@ -1240,6 +1237,16 @@ public class Effect implements StatOwner {
 
 	public boolean isPetOrderUnSummonEffect() {
 		return getSkillTemplate().hasAnyEffect(EffectType.PETORDERUNSUMMON);
+	}
+
+	public boolean canRemoveOnDie() {
+		if (getSkillTemplate().isNoRemoveOnDie())
+			return false;
+		if (Event.isEventEffectForceType(forceType))
+			return false;
+		if (getSkillTemplate().hasAnyEffect(EffectType.XPBOOST))
+			return false;
+		return true;
 	}
 
 	/**
@@ -1293,7 +1300,7 @@ public class Effect implements StatOwner {
 	}
 
 	public static class ForceType {
-		
+
 		private static final Map<String, ForceType> forceTypes = new ConcurrentHashMap<>();
 		public static final ForceType DEFAULT = getInstance("");
 		public static final ForceType MATERIAL_SKILL = getInstance("MATERIAL_SKILL");

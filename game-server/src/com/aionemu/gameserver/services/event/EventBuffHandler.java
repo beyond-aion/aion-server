@@ -49,7 +49,7 @@ public class EventBuffHandler {
 	public EventBuffHandler(String eventName, List<Buff> buffs) {
 		this.eventName = eventName;
 		this.buffs = buffs;
-		this.effectForceType = ForceType.getInstance(Event.EFFECT_FORCE_TYPE_PREFIX + eventName);
+		this.effectForceType = Event.getOrCreateEffectForceType(eventName);
 		initBuffData();
 	}
 

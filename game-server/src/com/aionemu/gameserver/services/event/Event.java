@@ -45,7 +45,7 @@ import com.aionemu.gameserver.world.World;
 public class Event {
 
 	private static final Logger log = LoggerFactory.getLogger(Event.class);
-	public static final String EFFECT_FORCE_TYPE_PREFIX = "[EVENT] ";
+	private static final String EFFECT_FORCE_TYPE_PREFIX = "[EVENT] ";
 
 	private final EventTemplate eventTemplate;
 	private EventBuffHandler eventBuffHandler;
@@ -57,6 +57,14 @@ public class Event {
 
 	public EventTemplate getEventTemplate() {
 		return eventTemplate;
+	}
+
+	public static ForceType getOrCreateEffectForceType(String identifier) {
+		return ForceType.getInstance(EFFECT_FORCE_TYPE_PREFIX + identifier);
+	}
+
+	public static boolean isEventEffectForceType(ForceType forceType) {
+		return forceType != null && forceType.getName().startsWith(EFFECT_FORCE_TYPE_PREFIX);
 	}
 
 	public void start() {
