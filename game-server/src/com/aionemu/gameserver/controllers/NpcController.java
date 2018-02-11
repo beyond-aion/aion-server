@@ -286,8 +286,8 @@ public class NpcController extends CreatureController<Npc> {
 			return;
 		final Creature actingCreature;
 
-		// summon should gain its own aggro
-		if (attacker instanceof Summon)
+		// summon should gain its own aggro (except if despawned, for example because of a damage over time effect)
+		if (attacker instanceof Summon && attacker.isSpawned())
 			actingCreature = attacker;
 		else
 			actingCreature = attacker.getActingCreature();

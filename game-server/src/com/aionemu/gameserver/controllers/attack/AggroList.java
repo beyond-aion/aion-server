@@ -187,25 +187,19 @@ public class AggroList extends AbstractEventSource<AddDamageEvent> {
 				ai.setHate(0);
 
 			if (ai.getHate() > maxHate) {
-				mostHated = attacker;
+				if (!attacker.isSpawned()) {
+					Creature master = attacker.getMaster();
+					if (master.equals(attacker) || !master.isSpawned())
+						continue;
+					mostHated = master;
+				} else {
+					mostHated = attacker;
+				}
 				maxHate = ai.getHate();
 			}
 		}
 
 		return mostHated;
-	}
-
-	/**
-	 * @param creature
-	 * @return
-	 */
-	public boolean isMostHated(Creature creature) {
-		if (creature == null || creature.isDead())
-			return false;
-
-		Creature mostHated = getMostHated();
-		return mostHated != null && mostHated.equals(creature);
-
 	}
 
 	/**
