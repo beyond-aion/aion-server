@@ -18,15 +18,12 @@ public class SwitchHostileEffect extends EffectTemplate {
 
 	@Override
 	public void applyEffect(Effect effect) {
-
-		Creature effected = effect.getEffected();
 		Creature effector = effect.getEffector();
-		AggroList aggroList = effected.getAggroList();
-
-		if (((Player) effector).getSummon() != null) {
-			Creature summon = ((Player) effector).getSummon();
+		Creature summon = ((Player) effector).getSummon();
+		if (summon != null) {
+			AggroList aggroList = effect.getEffected().getAggroList();
 			int playerHate = aggroList.getAggroInfo(effector).getHate();
-			int summonHate = aggroList.getAggroInfo(((Player) effector).getSummon()).getHate();
+			int summonHate = aggroList.getAggroInfo(summon).getHate();
 
 			aggroList.stopHating(summon);
 			aggroList.stopHating(effector);

@@ -212,12 +212,26 @@ public class AggroList extends AbstractEventSource<AddDamageEvent> {
 	}
 
 	/**
-	 * Remove completely creature from aggro list
+	 * Remove creature from aggro list, transfer its damages to the master
 	 *
 	 * @param creature
 	 */
 	public void remove(Creature creature) {
-		aggroList.remove(creature.getObjectId());
+		AggroInfo aggroInfo = aggroList.remove(creature.getObjectId());
+		if (aggroInfo != null)
+			transferDamagesToMaster(aggroInfo);
+	}
+
+	private void transferDamagesToMaster(AggroInfo aggroInfo) {
+		Creature master = ((Creature) aggroInfo.getAttacker()).getMaster();
+		if (!master.equals(aggroInfo.getAttacker())) {
+			aggroList.compute(master.getObjectId(), (key, masterAggroInfo) -> {
+				if (masterAggroInfo == null)
+					masterAggroInfo = new AggroInfo(master);
+				masterAggroInfo.addDamage(aggroInfo.getDamage());
+				return masterAggroInfo;
+			});
+		}
 	}
 
 	/**

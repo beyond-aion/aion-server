@@ -97,8 +97,8 @@ public class Info extends AdminCommand {
 				sendInfo(admin,
 					"[Sense range]\n\tRadius: " + npc.getAggroRange() + "\n\tSide: " + npc.getObjectTemplate().getBoundRadius().getSide() + ", Front: "
 						+ npc.getObjectTemplate().getBoundRadius().getFront() + ", Upper: " + npc.getObjectTemplate().getBoundRadius().getUpper()
-						+ "\n\tDirectional bound: " + PositionUtil.getDirectionalBound(npc, admin, true)
-						+ "\n\tDistance: " + (npc.getAggroRange() + PositionUtil.getDirectionalBound(npc, admin, true)) + "\n\tCollision: "
+						+ "\n\tDirectional bound: " + PositionUtil.getDirectionalBound(npc, admin, true) + "\n\tDistance: "
+						+ (npc.getAggroRange() + PositionUtil.getDirectionalBound(npc, admin, true)) + "\n\tCollision: "
 						+ (npc.getAggroRange() - npc.getObjectTemplate().getBoundRadius().getCollision()));
 				sendInfo(admin, "[Spawn info]\n\tStaticId: " + npc.getSpawn().getStaticId() + ", DistToSpawn: " + npc.getDistanceToSpawnLocation() + "m");
 				if (npc.isPathWalker()) {
@@ -137,16 +137,18 @@ public class Info extends AdminCommand {
 		StringBuilder sb = new StringBuilder("[AggroList]");
 		int aDmg = 0, eDmg = 0, tDmg = creature.getAggroList().getTotalDamage();
 		for (AggroInfo ai : creature.getAggroList().getList()) {
-			if (!(ai.getAttacker() instanceof Creature))
-				continue;
-			Creature master = ((Creature) ai.getAttacker()).getMaster();
-			if (master instanceof Player) {
+			String name = ai.getAttacker().getName();
+			if (ai.getAttacker() instanceof Creature) {
+				Creature attacker = ((Creature) ai.getAttacker());
+				Creature master = attacker.getMaster();
 				if (master.getRace() == Race.ASMODIANS)
 					aDmg += ai.getDamage();
-				else
+				else if (master.getRace() == Race.ELYOS)
 					eDmg += ai.getDamage();
+				if (!master.equals(ai.getAttacker()))
+					name = master.getName() + "'s " + attacker.getObjectTemplate().getL10n();
 			}
-			sb.append("\n\tName: " + (master == null ? "NULL" : master.getName()) + " Dmg: " + ai.getDamage());
+			sb.append("\n\tName: " + name + ", Dmg: " + ai.getDamage() + ", Hate: " + ai.getHate());
 		}
 		if (tDmg > 0) {
 			sb.append("\n\tTotal Dmg: ").append(tDmg);
