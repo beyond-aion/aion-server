@@ -1,7 +1,11 @@
 package com.aionemu.gameserver.services.summons;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import java.util.concurrent.Future;
 
+import com.aionemu.gameserver.controllers.attack.AggroList;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Summon;
@@ -43,87 +47,96 @@ public class SummonsService {
 	/**
 	 * Release summon
 	 */
-	public static final void release(Summon summon, UnsummonType unsummonType, boolean isAttacked) {
+	public static final void release(Summon summon, UnsummonType unsummonType) {
 		if (summon.getMode() == SummonMode.RELEASE)
 			return;
 		summon.getController().cancelCurrentSkill(null);
 		summon.setMode(SummonMode.RELEASE);
-		final Player master = summon.getMaster();
-		switch (unsummonType) {
-			case COMMAND:
-				PacketSendUtility.sendPacket(master, SM_SYSTEM_MESSAGE.STR_SKILL_SUMMON_UNSUMMON_FOLLOWER(summon.getL10n()));
-				PacketSendUtility.sendPacket(master, new SM_SUMMON_UPDATE(summon));
-				break;
-			case DISTANCE:
-				PacketSendUtility.sendPacket(master, SM_SYSTEM_MESSAGE.STR_SKILL_SUMMON_UNSUMMON_BY_TOO_DISTANCE());
-				PacketSendUtility.sendPacket(master, new SM_SUMMON_UPDATE(summon));
-				break;
-			case UNSPECIFIED:
-			case LOGOUT:
-				break;
-		}
 		summon.getObserveController().notifySummonReleaseObservers();
-		Future<?> releaseTask = ThreadPoolManager.getInstance().schedule(new ReleaseSummonTask(summon, unsummonType, isAttacked), 5000);
-		if (unsummonType == UnsummonType.COMMAND) // make it cancelable if triggered manually
-			summon.setReleaseTask(releaseTask);
+		new ReleaseSummonTask(summon, unsummonType).scheduleOrRun();
 	}
 
-	public static class ReleaseSummonTask implements Runnable {
+	private static class ReleaseSummonTask implements Runnable {
 
-		private Summon owner;
-		private UnsummonType unsummonType;
-		private Player master;
-		private VisibleObject target;
-		private boolean isAttacked;
+		private final Summon summon;
+		private final UnsummonType unsummonType;
+		private boolean addedMasterHate;
 
-		public ReleaseSummonTask(Summon owner, UnsummonType unsummonType, boolean isAttacked) {
-			this.owner = owner;
+		public ReleaseSummonTask(Summon owner, UnsummonType unsummonType) {
+			this.summon = owner;
 			this.unsummonType = unsummonType;
-			this.master = owner.getMaster();
-			this.target = master.getTarget();
-			this.isAttacked = isAttacked;
 		}
 
 		@Override
 		public void run() {
+			Player master = summon.getMaster();
 
-			int summonedBySkillId = owner.getSummonedBySkillId();
-
-			owner.getController().delete();
-			if (owner.equals(master.getSummon()))
+			summon.getController().delete();
+			if (summon.equals(master.getSummon()))
 				master.setSummon(null);
 
 			switch (unsummonType) {
 				case COMMAND:
 				case DISTANCE:
 				case UNSPECIFIED:
-					PacketSendUtility.sendPacket(master, SM_SYSTEM_MESSAGE.STR_SKILL_SUMMON_UNSUMMONED(owner.getL10n()));
-					PacketSendUtility.sendPacket(master, new SM_SUMMON_PANEL_REMOVE(summonedBySkillId));
-					PacketSendUtility.sendPacket(master, new SM_SUMMON_OWNER_REMOVE(owner.getObjectId()));
-
 					// reset cooldown for summoning skill
-					master.resetSkillCoolDown(summonedBySkillId);
+					master.resetSkillCoolDown(summon.getSummonedBySkillId());
 
-					// TODO temp till found on retail
-					if (target instanceof Creature) {
-						final Creature lastAttacker = (Creature) target;
-						if (!master.isDead() && !lastAttacker.isDead() && isAttacked) {
-							ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-								@Override
-								public void run() {
-									lastAttacker.getAggroList().addHate(master, 1);
-								}
-
-							}, 1000);
-						}
-					}
+					if (unsummonType == UnsummonType.DISTANCE)
+						PacketSendUtility.sendPacket(master, SM_SYSTEM_MESSAGE.STR_SKILL_SUMMON_UNSUMMON_BY_TOO_DISTANCE());
+					else
+						PacketSendUtility.sendPacket(master, SM_SYSTEM_MESSAGE.STR_SKILL_SUMMON_UNSUMMONED(summon.getL10n()));
+					PacketSendUtility.sendPacket(master, new SM_SUMMON_PANEL_REMOVE(summon.getSummonedBySkillId()));
+					PacketSendUtility.sendPacket(master, new SM_SUMMON_OWNER_REMOVE(summon.getObjectId()));
+					if (!addedMasterHate)
+						scheduleAddMasterHate(summon);
 					break;
 				case LOGOUT:
 					break;
 			}
 		}
 
+		public void scheduleOrRun() {
+			switch (unsummonType) {
+				case DISTANCE:
+				case LOGOUT:
+					run();
+					break;
+				default:
+					Future<?> releaseTask = ThreadPoolManager.getInstance().schedule(this, 5000);
+					if (unsummonType == UnsummonType.COMMAND) { // make it cancelable if released by master, master hate will be added delayed
+						PacketSendUtility.sendPacket(summon.getMaster(), SM_SYSTEM_MESSAGE.STR_SKILL_SUMMON_UNSUMMON_FOLLOWER(summon.getL10n()));
+						PacketSendUtility.sendPacket(summon.getMaster(), new SM_SUMMON_UPDATE(summon));
+						summon.setReleaseTask(releaseTask);
+					} else
+						scheduleAddMasterHate(summon);
+			}
+		}
+
+		private void scheduleAddMasterHate(Summon summon) {
+			addedMasterHate = true;
+			if (!summon.getMaster().isDead() && summon.getMaster().isOnline()) {
+				List<AggroList> summonOnlyHaters = findSummonOnlyHaters(summon);
+				if (!summonOnlyHaters.isEmpty()) // add master hate to every npc which was only attacked by the summon before
+					ThreadPoolManager.getInstance().schedule(() -> {
+						if (!summon.getMaster().isDead())
+							summonOnlyHaters.forEach(aggroList -> aggroList.addHate(summon.getMaster(), 1));
+					}, 1000);
+			}
+		}
+
+		private List<AggroList> findSummonOnlyHaters(Summon owner) {
+			Collection<VisibleObject> npcsKnownByMaster = owner.getMaster().getKnownList().getKnownObjects().values();
+			List<AggroList> aggroLists = new ArrayList<>();
+			npcsKnownByMaster.stream().forEach(object -> {
+				if (object instanceof Creature) {
+					AggroList aggroList = ((Creature) object).getAggroList();
+					if (aggroList.isHating(owner) && !aggroList.isHating(owner.getMaster()))
+						aggroLists.add(aggroList);
+				}
+			});
+			return aggroLists;
+		}
 	}
 
 	/**

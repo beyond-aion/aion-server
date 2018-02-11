@@ -366,7 +366,7 @@ public class KnownList {
 	}
 
 	public Map<Integer, Player> getKnownPlayers() {
-		return knownPlayers != null ? knownPlayers : Collections.<Integer, Player> emptyMap();
+		return knownPlayers != null ? knownPlayers : Collections.emptyMap();
 	}
 
 	final void checkKnownPlayersInitialized() {

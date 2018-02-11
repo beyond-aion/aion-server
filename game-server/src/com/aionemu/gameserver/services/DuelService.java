@@ -10,7 +10,6 @@ import com.aionemu.gameserver.model.DuelResult;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.RequestResponseHandler;
 import com.aionemu.gameserver.model.summons.SummonMode;
-import com.aionemu.gameserver.model.summons.UnsummonType;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DUEL;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUESTION_WINDOW;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
@@ -188,7 +187,7 @@ public class DuelService {
 			 */
 			if (player.getSummon() != null) {
 				// if (player.getSummon().getTarget().isTargeting(opponnentId))
-				SummonsService.doMode(SummonMode.GUARD, player.getSummon(), UnsummonType.UNSPECIFIED);
+				SummonsService.doMode(SummonMode.GUARD, player.getSummon());
 			}
 
 			/**
@@ -196,7 +195,7 @@ public class DuelService {
 			 */
 			if (opponent.getSummon() != null) {
 				// if (opponent.getSummon().getTarget().isTargeting(player.getObjectId()))
-				SummonsService.doMode(SummonMode.GUARD, opponent.getSummon(), UnsummonType.UNSPECIFIED);
+				SummonsService.doMode(SummonMode.GUARD, opponent.getSummon());
 			}
 
 			/**

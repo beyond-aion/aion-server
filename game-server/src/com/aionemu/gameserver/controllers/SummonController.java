@@ -18,7 +18,6 @@ import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.skillengine.model.Skill;
 import com.aionemu.gameserver.taskmanager.tasks.PlayerMoveTaskManager;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
  * @author ATracer
@@ -27,20 +26,19 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 public class SummonController extends CreatureController<Summon> {
 
 	private long lastAttackMilis = 0;
-	private boolean isAttacked = false;
 
 	@Override
 	public void notKnow(VisibleObject object) {
 		super.notKnow(object);
 		if (getOwner().getMaster().equals(object))
-			SummonsService.release(getOwner(), UnsummonType.DISTANCE, isAttacked);
-	}
+			SummonsService.release(getOwner(), UnsummonType.DISTANCE);
+		}
 
 	/**
 	 * Release summon
 	 */
 	public void release(final UnsummonType unsummonType) {
-		SummonsService.release(getOwner(), unsummonType, isAttacked);
+		SummonsService.release(getOwner(), unsummonType);
 	}
 
 	/**
@@ -114,19 +112,7 @@ public class SummonController extends CreatureController<Summon> {
 	@Override
 	public void onDie(Creature lastAttacker) {
 		super.onDie(lastAttacker);
-		Summon owner = getOwner();
-		Player master = getOwner().getMaster();
-		SummonsService.release(owner, UnsummonType.UNSPECIFIED, isAttacked);
-
-		if (!master.equals(lastAttacker) && !owner.equals(lastAttacker) && !master.isDead() && !lastAttacker.isDead()) {
-			ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-				@Override
-				public void run() {
-					lastAttacker.getAggroList().addHate(master, 1);
-	}
-			}, 1000);
-		}
+		SummonsService.release(getOwner(), UnsummonType.UNSPECIFIED);
 	}
 
 	public void useSkill(SkillOrder order) {
@@ -137,7 +123,7 @@ public class SummonController extends CreatureController<Summon> {
 		}
 		Skill skill = SkillEngine.getInstance().getSkill(creature, order.getSkillId(), 1, order.getTarget());
 		if (skill.useSkill() && order.isRelease()) {
-			SummonsService.release(getOwner(), UnsummonType.UNSPECIFIED, isAttacked);
+			SummonsService.release(getOwner(), UnsummonType.UNSPECIFIED);
 		}
 	}
 
