@@ -57,7 +57,7 @@ public class SkillUseAction extends AbstractItemAction {
 
 	@Override
 	public boolean canAct(Player player, Item parentItem, Item targetItem) {
-		Skill skill = SkillEngine.getInstance().getSkill(player, skillid, level, player.getTarget(), parentItem.getItemTemplate(), false);
+		Skill skill = SkillEngine.getInstance().getSkill(player, skillid, level, player.getTarget(), parentItem.getItemTemplate());
 		if (skill == null)
 			return false;
 		List<EffectTemplate> effects = skill.getSkillTemplate().getEffects().getEffects();
@@ -94,7 +94,7 @@ public class SkillUseAction extends AbstractItemAction {
 
 	@Override
 	public void act(Player player, Item parentItem, Item targetItem) {
-		Skill skill = SkillEngine.getInstance().getSkill(player, skillid, level, player.getTarget(), parentItem.getItemTemplate(), false);
+		Skill skill = SkillEngine.getInstance().getSkill(player, skillid, level, player.getTarget(), parentItem.getItemTemplate());
 		if (skill != null) {
 			player.getController().cancelUseItem();
 			skill.setItemObjectId(parentItem.getObjectId());

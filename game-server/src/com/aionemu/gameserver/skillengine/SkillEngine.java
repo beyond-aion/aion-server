@@ -82,14 +82,10 @@ public class SkillEngine {
 	 * @return Skill
 	 */
 	public Skill getSkill(Creature creature, int skillId, int skillLevel, VisibleObject firstTarget) {
-		return getSkill(creature, skillId, skillLevel, firstTarget, null, false);
+		return getSkill(creature, skillId, skillLevel, firstTarget, null);
 	}
 
-	public Skill getSkill(Creature creature, int skillId, int skillLevel, VisibleObject firstTarget, boolean isPenalty) {
-		return getSkill(creature, skillId, skillLevel, firstTarget, null, isPenalty);
-	}
-
-	public Skill getSkill(Creature creature, int skillId, int skillLevel, VisibleObject firstTarget, ItemTemplate itemTemplate, boolean isPenalty) {
+	public Skill getSkill(Creature creature, int skillId, int skillLevel, VisibleObject firstTarget, ItemTemplate itemTemplate) {
 		SkillTemplate template = DataManager.SKILL_DATA.getSkillTemplate(skillId);
 
 		if (template == null)
@@ -98,7 +94,7 @@ public class SkillEngine {
 		Creature target = null;
 		if (firstTarget instanceof Creature)
 			target = (Creature) firstTarget;
-		return new Skill(template, creature, skillLevel, target, itemTemplate, isPenalty);
+		return new Skill(template, creature, skillLevel, target, itemTemplate);
 	}
 
 	public ChargeSkill getChargeSkill(Player creature, int skillId, int skillLevel, VisibleObject firstTarget) {

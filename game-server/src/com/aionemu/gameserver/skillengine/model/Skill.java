@@ -98,7 +98,6 @@ public class Skill {
 	private int chainUsageDuration = 0;
 	private volatile boolean isMultiCast = false;
 	private float[] chargeTimes;
-	private final boolean isPenaltySkill;
 
 	public enum SkillMethod {
 		CAST,
@@ -116,11 +115,11 @@ public class Skill {
 	 * @param firstTarget
 	 */
 	public Skill(SkillTemplate skillTemplate, Player effector, Creature firstTarget) {
-		this(skillTemplate, effector, effector.getSkillList().getSkillLevel(skillTemplate.getSkillId()), firstTarget, null, false);
+		this(skillTemplate, effector, effector.getSkillList().getSkillLevel(skillTemplate.getSkillId()), firstTarget, null);
 	}
 
 	public Skill(SkillTemplate skillTemplate, Player effector, Creature firstTarget, int skillLevel) {
-		this(skillTemplate, effector, skillLevel, firstTarget, null, false);
+		this(skillTemplate, effector, skillLevel, firstTarget, null);
 	}
 
 	/**
@@ -129,8 +128,7 @@ public class Skill {
 	 * @param skillLvl
 	 * @param firstTarget
 	 */
-	public Skill(SkillTemplate skillTemplate, Creature effector, int skillLvl, Creature firstTarget, ItemTemplate itemTemplate,
-		boolean isPenaltySkill) {
+	public Skill(SkillTemplate skillTemplate, Creature effector, int skillLvl, Creature firstTarget, ItemTemplate itemTemplate) {
 		this.effectedList = new ArrayList<>();
 		this.conditionChangeListener = new StartMovingListener();
 		this.dieObserver = new DieObserver(this);
@@ -141,7 +139,6 @@ public class Skill {
 		this.baseCastDuration = skillTemplate.getDuration();
 		this.castDuration = skillTemplate.getDuration();
 		this.itemTemplate = itemTemplate;
-		this.isPenaltySkill = isPenaltySkill;
 
 		if (itemTemplate != null)
 			skillMethod = SkillMethod.ITEM;
@@ -259,8 +256,7 @@ public class Skill {
 		// send packets to start casting
 		if (skillMethod == SkillMethod.CAST || skillMethod == SkillMethod.ITEM || skillMethod == SkillMethod.CHARGE) {
 			castStartTime = System.currentTimeMillis();
-			if (!isPenaltySkill)
-				startCast();
+			startCast();
 			if (effector instanceof Npc)
 				((NpcAI) effector.getAi()).setSubStateIfNot(AISubState.CAST);
 		}
@@ -734,7 +730,7 @@ public class Skill {
 			QuestEngine.getInstance().onUseSkill(new QuestEnv(effector.getTarget(), (Player) effector, 0), skillTemplate.getSkillId());
 		}
 
-		if (setCooldowns && !isPenaltySkill)
+		if (setCooldowns)
 			setCooldowns();
 
 		if (instantSkill)
@@ -742,7 +738,7 @@ public class Skill {
 		else
 			ThreadPoolManager.getInstance().schedule(() -> applyEffect(effects), hitTime);
 
-		if (!isPenaltySkill && (skillMethod == SkillMethod.CAST || skillMethod == SkillMethod.ITEM || skillMethod == SkillMethod.CHARGE))
+		if (skillMethod == SkillMethod.CAST || skillMethod == SkillMethod.ITEM || skillMethod == SkillMethod.CHARGE)
 			sendCastspellEnd(dashStatus, effects);
 
 		endCondCheck();

@@ -290,8 +290,7 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 
 		if (Rnd.get(1, 1000) <= procProbability) {
 			ItemTemplate template = DataManager.ITEM_DATA.getItemTemplate(godStone.getItemId());
-			Skill skill = SkillEngine.getInstance().getSkill(attacker, godStoneInfo.getSkillId(), godStoneInfo.getSkillLevel(), getOwner(), template,
-				false);
+			Skill skill = SkillEngine.getInstance().getSkill(attacker, godStoneInfo.getSkillId(), godStoneInfo.getSkillLevel(), getOwner(), template);
 			skill.setFirstTargetRangeCheck(false);
 			if (!skill.canUseSkill(CastState.CAST_START))
 				return;
