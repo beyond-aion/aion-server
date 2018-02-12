@@ -39,7 +39,7 @@ public class ReturnPointEffect extends EffectTemplate {
 	public void calculate(Effect effect) {
 		ItemTemplate itemTemplate = effect.getItemTemplate();
 		if (itemTemplate != null)
-			effect.addSucessEffect(this);
+			effect.addSuccessEffect(this);
 	}
 
 	private final int getTargetObjectId(Player player) {

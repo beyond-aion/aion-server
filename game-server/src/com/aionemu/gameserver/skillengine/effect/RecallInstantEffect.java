@@ -67,7 +67,7 @@ public class RecallInstantEffect extends EffectTemplate {
 
 		if (effector.getWorldId() == effected.getWorldId() && !effector.isInInstance() && !(effector.isEnemy(effected))) {
 			effect.getSkill().setTargetPosition(effector.getX(), effector.getY(), effector.getZ(), effector.getHeading());
-			effect.addSucessEffect(this);
+			effect.addSuccessEffect(this);
 		}
 	}
 }

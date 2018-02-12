@@ -407,7 +407,7 @@ public abstract class EffectTemplate {
 	}
 
 	private void addSuccessEffect(Effect effect, SpellStatus spellStatus) {
-		effect.addSucessEffect(this);
+		effect.addSuccessEffect(this);
 		if (spellStatus != null)
 			effect.setSpellStatus(spellStatus);
 	}

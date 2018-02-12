@@ -23,7 +23,7 @@ public class EscapeEffect extends EffectTemplate {
 	@Override
 	public void calculate(Effect effect) {
 		if (effect.getEffected().isSpawned())
-			effect.addSucessEffect(this);
+			effect.addSuccessEffect(this);
 	}
 
 }

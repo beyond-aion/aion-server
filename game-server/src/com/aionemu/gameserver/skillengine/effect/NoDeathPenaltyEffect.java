@@ -6,6 +6,6 @@ public class NoDeathPenaltyEffect extends BufEffect {
 
 	@Override
 	public void calculate(Effect effect) {
-		effect.addSucessEffect(this);
+		effect.addSuccessEffect(this);
 	}
 }

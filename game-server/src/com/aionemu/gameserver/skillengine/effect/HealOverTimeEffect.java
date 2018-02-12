@@ -27,7 +27,7 @@ public abstract class HealOverTimeEffect extends AbstractOverTimeEffect {
 		if (!super.calculate(effect, null, null))
 			return;
 
-		effect.addSucessEffect(this);
+		effect.addSuccessEffect(this);
 	}
 
 	public void startEffect(Effect effect, HealType healType) {

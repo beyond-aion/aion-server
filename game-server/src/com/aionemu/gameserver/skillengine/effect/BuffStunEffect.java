@@ -15,6 +15,6 @@ public class BuffStunEffect extends StunEffect {
 
 	@Override
 	public void calculate(Effect effect) {
-		effect.addSucessEffect(this);
+		effect.addSuccessEffect(this);
 	}
 }

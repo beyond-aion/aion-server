@@ -23,6 +23,6 @@ public class ReturnEffect extends EffectTemplate {
 	@Override
 	public void calculate(Effect effect) {
 		if (effect.getEffected().isSpawned())
-			effect.addSucessEffect(this);
+			effect.addSuccessEffect(this);
 	}
 }

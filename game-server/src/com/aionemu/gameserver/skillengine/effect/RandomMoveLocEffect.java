@@ -39,7 +39,7 @@ public class RandomMoveLocEffect extends EffectTemplate {
 
 	@Override
 	public void calculate(Effect effect) {
-		effect.addSucessEffect(this);
+		effect.addSuccessEffect(this);
 		DashStatus ds = reserved5 == 1 ? DashStatus.RANDOMMOVELOC_NEW : DashStatus.RANDOMMOVELOC;
 		SkillMoveType mt = direction == 1 ? SkillMoveType.MOVEBEHIND : SkillMoveType.DODGE;
 		effect.setSkillMoveType(mt);

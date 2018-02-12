@@ -863,24 +863,18 @@ public class Effect implements StatOwner {
 		actionObserver[i - 1] = observer;
 	}
 
-	public void addSucessEffect(EffectTemplate effect) {
+	public void addSuccessEffect(EffectTemplate effect) {
 		successEffects.put(effect.getPosition(), effect);
 	}
 
 	public boolean isInSuccessEffects(int position) {
-		if (successEffects.get(position) != null)
-			return true;
-
-		return false;
+		return successEffects.get(position) != null;
 	}
 
 	public EffectTemplate effectInPos(int pos) {
 		return successEffects.get(pos);
 	}
 
-	/**
-	 * @return
-	 */
 	public Collection<EffectTemplate> getSuccessEffects() {
 		return successEffects.values();
 	}
