@@ -34,6 +34,7 @@ import com.aionemu.gameserver.skillengine.periodicaction.PeriodicAction;
 import com.aionemu.gameserver.skillengine.periodicaction.PeriodicActions;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
+import com.aionemu.gameserver.utils.stats.StatFunctions;
 
 /**
  * @author ATracer
@@ -540,11 +541,8 @@ public class Effect implements StatOwner {
 	}
 
 	/**
-	 * Correct lifecycle of Effect - INITIALIZE - APPLY - START - END
-	 */
-
-	/**
-	 * Do initialization with proper calculations
+	 * Do initialization with proper calculations<br>
+	 * Correct lifecycle of Effect: INITIALIZE - APPLY - START - END
 	 */
 	public void initialize() {
 		if (skillTemplate.getEffects() == null)
@@ -554,17 +552,14 @@ public class Effect implements StatOwner {
 			template.calculate(this);
 		}
 
-		for (EffectTemplate template : getEffectTemplates()) {
-			template.calculateHate(this);
-		}
-
 		if (!isInSuccessEffects(1)) {
 			successEffects.clear();
-		}
-
-		if (this.isLaunchSubEffect()) {
-			for (EffectTemplate template : successEffects.values()) {
-				template.calculateSubEffect(this);
+		} else {
+			effectHate = calculateHateForSuccessEffects();
+			if (isLaunchSubEffect()) {
+				for (EffectTemplate template : successEffects.values()) {
+					template.calculateSubEffect(this);
+				}
 			}
 		}
 
@@ -607,25 +602,24 @@ public class Effect implements StatOwner {
 		}
 	}
 
+	private int calculateHateForSuccessEffects() {
+		int effectHate = 0;
+		for (EffectTemplate template : successEffects.values()) {
+			effectHate += template.calculateHate(this);
+		}
+		return effectHate == 0 ? 0 : StatFunctions.calculateHate(getEffector(), effectHate);
+	}
+
 	/**
 	 * Apply all effect templates
 	 */
 	public void applyEffect() {
-		/**
-		 * broadcast final hate to all visible objects
-		 */
-		// TODO hostile_type?
-		Creature effected = getEffected();
-		if (effectHate != 0 && tauntHate >= 0) { // dont add hate if taunt hate is < 0!
-			if (effected instanceof Npc && !isDelayedDamage() && !isPetOrder() && !isSummoning())
-				effected.getAggroList().addHate(effector, 1);
-
-			effector.getController().broadcastHate(effectHate);
+		if (successEffects.isEmpty()) {
+			broadcastHate();
+			return;
 		}
 
-		if (skillTemplate.getEffects() == null)
-			return;
-
+		Creature effected = getEffected();
 		for (EffectTemplate template : successEffects.values()) {
 			if (!shouldApplyFurtherEffects(effected))
 				break;
@@ -633,6 +627,16 @@ public class Effect implements StatOwner {
 			if (!shouldApplyFurtherEffects(effected))
 				break;
 			template.startSubEffect(this);
+		}
+	}
+
+	public void broadcastHate() {
+		if (effectHate != 0 && tauntHate >= 0) { // don't add hate if taunt hate is < 0!
+			Creature effected = getEffected();
+			if (effected instanceof Npc && !isDelayedDamage() && !isPetOrder() && !isSummoning())
+				effected.getAggroList().addHate(effector, 1);
+			effector.getController().broadcastHate(effectHate);
+			effectHate = 0; // set to 0 to avoid external second broadcast
 		}
 	}
 
@@ -658,6 +662,8 @@ public class Effect implements StatOwner {
 				checkUseEquipmentConditions();
 				checkCancelOnDmg();
 			}
+
+			broadcastHate();
 
 			if (duration == null) {
 				if (isToggle()) {
@@ -813,21 +819,6 @@ public class Effect implements StatOwner {
 				addedToController = true;
 			}
 		}
-	}
-
-	/**
-	 * @return the effectHate
-	 */
-	public int getEffectHate() {
-		return effectHate;
-	}
-
-	/**
-	 * @param effectHate
-	 *          the effectHate to set
-	 */
-	public void setEffectHate(int effectHate) {
-		this.effectHate = effectHate;
 	}
 
 	/**

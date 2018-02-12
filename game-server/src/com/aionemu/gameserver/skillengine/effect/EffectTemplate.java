@@ -491,33 +491,23 @@ public abstract class EffectTemplate {
 		return effectSubConditions != null ? effectSubConditions.validate(effect) : true;
 	}
 
-	/**
-	 * Hate will be added to result value only if particular effect template has success result
-	 * 
-	 * @param effect
-	 */
-	public void calculateHate(Effect effect) {
-		if (hopType == null)
-			return;
-
-		if (effect.getSuccessEffects().isEmpty())
-			return;
-
-		int currentHate = effect.getEffectHate();
+	public int calculateHate(Effect effect) {
 		if (hopType != null) {
+			int hate;
 			switch (hopType) {
 				case DAMAGE:
-					currentHate += effect.getReserveds(0).getValue();
+					hate = effect.getReserveds(0).getValue();
 					break;
 				case SKILLLV:
 					int skillLvl = effect.getSkillLevel();
-					currentHate += hopB + hopA * skillLvl; // Agro-value of the effect
+					hate = hopB + hopA * skillLvl; // Aggro-value of the effect
 					break;
+				default:
+					throw new UnsupportedOperationException("Unhandled effect type " + hopType + " for hate calculation");
 			}
+			return Math.max(1, hate);
 		}
-		if (currentHate == 0)
-			currentHate = 1;
-		effect.setEffectHate(StatFunctions.calculateHate(effect.getEffector(), currentHate));
+		return 0;
 	}
 
 	/**
