@@ -186,8 +186,8 @@ public class AggroList extends AbstractEventSource<AddDamageEvent> {
 			if (attacker.isDead())
 				ai.setHate(0);
 
-			if (ai.getHate() > maxHate) {
-				if (!attacker.isSpawned()) {
+			if (ai.getHate() > maxHate && owner.canSee(attacker)) { // skip invisible attackers
+				if (!attacker.isSpawned()) { // use master if summon despawned
 					Creature master = attacker.getMaster();
 					if (master.equals(attacker) || !master.isSpawned())
 						continue;

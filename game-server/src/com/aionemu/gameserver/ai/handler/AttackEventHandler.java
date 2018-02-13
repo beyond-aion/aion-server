@@ -45,7 +45,8 @@ public class AttackEventHandler {
 			if (npcAI.isLogging())
 				AILogger.info(npcAI, "onAttack() -> startAttacking");
 			npcAI.setSubStateIfNot(AISubState.NONE);
-			npcAI.getOwner().setTarget(creature);
+			if (npcAI.getOwner().canSee(creature))
+				npcAI.getOwner().setTarget(creature);
 			AttackManager.startAttacking(npcAI);
 			ShoutEventHandler.onAttackBegin(npcAI);
 		}
