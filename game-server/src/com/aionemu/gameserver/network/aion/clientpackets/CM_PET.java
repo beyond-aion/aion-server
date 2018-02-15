@@ -132,7 +132,8 @@ public class CM_PET extends AionClientPacket {
 				PetSpawnService.summonPet(player, templateId);
 				break;
 			case DISMISS:
-				PetSpawnService.dismissPet(player);
+				if (pet != null)
+					pet.getController().delete();
 				break;
 			case FOOD:
 				if (actionType == 2) {

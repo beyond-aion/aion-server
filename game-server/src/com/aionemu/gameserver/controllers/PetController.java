@@ -1,17 +1,41 @@
 package com.aionemu.gameserver.controllers;
 
+import java.sql.Timestamp;
+
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.dao.PlayerPetsDAO;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Pet;
+import com.aionemu.gameserver.model.gameobjects.player.PetCommonData;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_PET;
+import com.aionemu.gameserver.services.toypet.PetFeedProgress;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author ATracer
  */
 public class PetController extends VisibleObjectController<Pet> {
+
+	@Override
+	public void onDelete() {
+		super.onDelete();
+		PlayerPetsDAO dao = DAOManager.getDAO(PlayerPetsDAO.class);
+		PetCommonData commonData = getOwner().getCommonData();
+		PetFeedProgress progress = commonData.getFeedProgress();
+		commonData.cancelRefeedTask();
+		if (progress != null) {
+			commonData.setCancelFeed(true);
+			dao.saveFeedStatus(getOwner().getObjectId(), progress.getHungryLevel().getValue(), progress.getDataForPacket(), commonData.getRefeedTime());
+		}
+		if (commonData.getDopingBag() != null && commonData.getDopingBag().isDirty())
+			dao.saveDopingBag(getOwner().getObjectId(), commonData.getDopingBag());
+
+		getOwner().getMaster().getController().cancelTask(TaskId.PET_UPDATE);
+		commonData.setDespawnTime(new Timestamp(System.currentTimeMillis()));
+		dao.savePetMoodData(commonData);
+		getOwner().getMaster().setPet(null);
+	}
 
 	public static class PetUpdateTask implements Runnable {
 

@@ -44,7 +44,6 @@ import com.aionemu.gameserver.services.drop.DropService;
 import com.aionemu.gameserver.services.findgroup.FindGroupService;
 import com.aionemu.gameserver.services.instance.InstanceService;
 import com.aionemu.gameserver.services.summons.SummonsService;
-import com.aionemu.gameserver.services.toypet.PetSpawnService;
 import com.aionemu.gameserver.taskmanager.tasks.ExpireTimerTask;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.audit.GMService;
@@ -144,7 +143,8 @@ public class PlayerLeaveWorldService {
 		Summon summon = player.getSummon();
 		if (summon != null)
 			SummonsService.doMode(SummonMode.RELEASE, summon, UnsummonType.LOGOUT);
-		PetSpawnService.dismissPet(player);
+		if (player.getPet() != null)
+			player.getPet().getController().delete();
 		if (player.getPostman() != null)
 			player.getPostman().getController().delete();
 

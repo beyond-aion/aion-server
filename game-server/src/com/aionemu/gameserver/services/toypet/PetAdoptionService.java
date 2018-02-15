@@ -40,8 +40,8 @@ public class PetAdoptionService {
 		if (!player.getInventory().decreaseByObjectId(eggObjId, 1))
 			return;
 
-		int expireTime = template.getActions().getAdoptPetAction().getExpireMinutes() != 0 ? (int) ((System.currentTimeMillis() / 1000) + template
-			.getActions().getAdoptPetAction().getExpireMinutes() * 60) : 0;
+		int expireTime = template.getActions().getAdoptPetAction().getExpireMinutes() != 0
+			? (int) ((System.currentTimeMillis() / 1000) + template.getActions().getAdoptPetAction().getExpireMinutes() * 60) : 0;
 
 		addPet(player, petId, name, decorationId, expireTime);
 	}
@@ -89,11 +89,8 @@ public class PetAdoptionService {
 		PetCommonData petCommonData = player.getPetList().deletePet(petId);
 		if (petCommonData == null)
 			return;
-		if (player.getPet() != null && player.getPet().getObjectId() == petCommonData.getObjectId()) {
-			if (petCommonData.getFeedProgress() != null)
-				petCommonData.setCancelFeed(true);
-			PetSpawnService.dismissPet(player);
-		}
+		if (player.getPet() != null && player.getPet().getObjectId() == petCommonData.getObjectId())
+			player.getPet().getController().delete();
 		PacketSendUtility.sendPacket(player, new SM_PET(petCommonData, false));
 		IDFactory.getInstance().releaseId(petCommonData.getObjectId());
 	}
