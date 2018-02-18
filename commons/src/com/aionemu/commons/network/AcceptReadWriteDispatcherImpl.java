@@ -83,9 +83,9 @@ public class AcceptReadWriteDispatcherImpl extends Dispatcher {
 		synchronized (pendingClose) {
 			if (!pendingClose.isEmpty()) {
 				for (AConnection<?> connection : pendingClose)
-				closeConnectionImpl(connection);
-			pendingClose.clear();
+					closeConnectionImpl(connection);
+				pendingClose.clear();
+			}
 		}
 	}
-}
 }

@@ -83,7 +83,7 @@ public class AionConnection extends AConnection<AionServerPacket> {
 	/**
 	 * AionClient is authenticating by passing to GameServer id of account.
 	 */
-	private Account account;
+	private final AtomicReference<Account> account = new AtomicReference<>();
 
 	/**
 	 * Crypt that will encrypt/decrypt packets.
@@ -93,7 +93,7 @@ public class AionConnection extends AConnection<AionServerPacket> {
 	/**
 	 * active Player that owner of this connection is playing [entered game]
 	 */
-	private AtomicReference<Player> activePlayer = new AtomicReference<>();
+	private final AtomicReference<Player> activePlayer = new AtomicReference<>();
 
 	private AionPacketHandler aionPacketHandler;
 	private long lastPingTime;
@@ -336,7 +336,7 @@ public class AionConnection extends AConnection<AionServerPacket> {
 	 * @return account object associated with this connection
 	 */
 	public Account getAccount() {
-		return account;
+		return account.get();
 	}
 
 	/**
@@ -346,8 +346,7 @@ public class AionConnection extends AConnection<AionServerPacket> {
 	 *          account object associated with this connection
 	 */
 	public void setAccount(Account account) {
-		Objects.requireNonNull(account, "Account can't be null");
-		this.account = account;
+		this.account.set(Objects.requireNonNull(account, "Account can't be null"));
 	}
 
 	/**
@@ -411,7 +410,7 @@ public class AionConnection extends AConnection<AionServerPacket> {
 
 	@Override
 	public String toString() {
-		return "AionConnection [state=" + state + ", account=" + account + ", activePlayer=" + activePlayer.get() + ", macAddress=" + macAddress
+		return "AionConnection [state=" + state + ", account=" + getAccount() + ", activePlayer=" + activePlayer.get() + ", macAddress=" + macAddress
 			+ ", getIP()=" + getIP() + "]";
 	}
 

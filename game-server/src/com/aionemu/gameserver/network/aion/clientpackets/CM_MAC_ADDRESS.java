@@ -49,10 +49,10 @@ public class CM_MAC_ADDRESS extends AionClientPacket {
 		AionConnection con = getConnection();
 		if (BannedMacManager.getInstance().isBanned(macAddress)) {
 			con.close();
-			log.info("[MAC_AUDIT] " + macAddress + " (" + con.getIP() + ") was kicked due to mac ban");
+			log.info("[MAC_AUDIT] " + con.getAccount() + ", MAC " + macAddress + " (" + con.getIP() + ") was kicked due to mac ban");
 		} else if (HDDBanService.getInstance().isBanned(hddSerial)) {
 			con.close();
-			log.info("[MAC_AUDIT] Account:" + con.getAccount() + ", HDD Serial " + hddSerial + " (" + con.getIP() + ") was kicked due to hdd serial ban");
+			log.info("[MAC_AUDIT] " + con.getAccount() + ", HDD Serial " + hddSerial + " (" + con.getIP() + ") was kicked due to hdd serial ban");
 		} else {
 			boolean firstPacket = con.getMacAddress() == null;
 			con.setMacAddress(macAddress);
