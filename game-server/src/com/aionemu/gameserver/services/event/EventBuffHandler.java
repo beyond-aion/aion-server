@@ -17,11 +17,14 @@ import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.dao.EventDAO;
 import com.aionemu.gameserver.dao.EventDAO.StoredBuffData;
+import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.ChatType;
+import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.team.TeamMember;
 import com.aionemu.gameserver.model.team.TemporaryPlayerTeam;
+import com.aionemu.gameserver.model.templates.InstanceCooltime;
 import com.aionemu.gameserver.model.templates.event.Buff;
 import com.aionemu.gameserver.model.templates.event.Buff.BuffMapType;
 import com.aionemu.gameserver.model.templates.event.Buff.Trigger;
@@ -266,10 +269,24 @@ public class EventBuffHandler {
 			return true;
 		WorldMapInstance worldMapInstance = player.getPosition().getWorldMapInstance();
 		for (BuffMapType buffMapType : buff.getRestriction().getMaps()) {
-			if (buffMapType.matches(worldMapInstance))
-				return true;
+			if (buffMapType.matches(worldMapInstance)) {
+				if (buffMapType == BuffMapType.WORLD_MAP)
+					return true;
+				if (checkInstanceLevel(player))
+					return true;
+			}
 		}
 		return false;
+	}
+
+	private boolean checkInstanceLevel(Player player) {
+		// only allow if the player level is not too high (max 9 levels above the instance entry level)
+		InstanceCooltime template = DataManager.INSTANCE_COOLTIME_DATA.getInstanceCooltimeByWorldId(player.getWorldId());
+		if (template != null) {
+			int instanceLevel = player.getRace() == Race.ELYOS ? template.getEnterMinLevelLight() : template.getEnterMinLevelDark();
+			return instanceLevel == 0 || player.getLevel() - instanceLevel < 10;
+		}
+		return true;
 	}
 
 }
