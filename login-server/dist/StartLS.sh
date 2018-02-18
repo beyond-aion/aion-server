@@ -21,7 +21,7 @@ run_ls() {
   # run server as a background job to instantly write PID file
   java $@ -Xms48m -Xmx48m -XX:+UseNUMA -ea -cp "libs/*" com.aionemu.loginserver.LoginServer &
   echo $! > loginserver.pid
-  # put job in foreground again (wait for LS termination) and return exit code
+  # put job in foreground again (wait for termination) and return exit code
   fg %+
   return $?
 }
@@ -37,7 +37,7 @@ loop() {
         break
         ;;
       1) # LS exit code: critical config or build error
-        echo "LoginServer stopped with a fatal error."
+        >&2 echo "LoginServer stopped with a fatal error."
         break
         ;;
       2) # LS exit code: restart
@@ -52,12 +52,13 @@ loop() {
         break
         ;;
       *) # other
-        echo "LoginServer has terminated abnormally (code: ${err}), restarting in 5 seconds."
+        >&2 echo "LoginServer has terminated abnormally (code: ${err}), restarting in 5 seconds."
         sleep 5
         ;;
     esac
   done
   echo "LoginServer restart loop has ended."
+  exit $err
 }
 
 cd `dirname $(readlink -f $0)`

@@ -21,7 +21,7 @@ run_cs() {
   # run server as a background job to instantly write PID file
   java $@ -Xms72m -Xmx72m -XX:+UseNUMA -ea -cp "libs/*" com.aionemu.chatserver.ChatServer &
   echo $! > chatserver.pid
-  # put job in foreground again (wait for LS termination) and return exit code
+  # put job in foreground again (wait for termination) and return exit code
   fg %+
   return $?
 }
@@ -37,7 +37,7 @@ loop() {
         break
         ;;
       1) # CS exit code: critical config or build error
-        echo "ChatServer stopped with a fatal error."
+        >&2 echo "ChatServer stopped with a fatal error."
         break
         ;;
       2) # CS exit code: restart
@@ -52,12 +52,13 @@ loop() {
         break
         ;;
       *) # other
-        echo "ChatServer has terminated abnormally (code: ${err}), restarting in 5 seconds."
+        >&2 echo "ChatServer has terminated abnormally (code: ${err}), restarting in 5 seconds."
         sleep 5
         ;;
     esac
   done
   echo "ChatServer restart loop has ended."
+  exit $err
 }
 
 cd `dirname $(readlink -f $0)`

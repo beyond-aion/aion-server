@@ -19,9 +19,9 @@ run_gs() {
   # activate job control in this script
   set -m
   # run server as a background job to instantly write PID file
-  java  $@ -Xms1024m -Xmx2560m -XX:+UseNUMA -ea -javaagent:libs/${javaagentlib} -cp "libs/*" com.aionemu.gameserver.GameServer &
+  java $@ -Xms1024m -Xmx2560m -XX:+UseNUMA -ea -javaagent:libs/${javaagentlib} -cp "libs/*" com.aionemu.gameserver.GameServer &
   echo $! > gameserver.pid
-  # put job in foreground again (wait for LS termination) and return exit code
+  # put job in foreground again (wait for termination) and return exit code
   fg %+
   return $?
 }
@@ -37,7 +37,7 @@ loop() {
         break
         ;;
       1) # GS exit code: critical config or build error
-        echo "GameServer stopped with a fatal error."
+        >&2 echo "GameServer stopped with a fatal error."
         break
         ;;
       2) # GS exit code: restart
@@ -52,12 +52,13 @@ loop() {
         break
         ;;
       *) # other
-        echo "GameServer has terminated abnormally (code: ${err}), restarting in 5 seconds."
+        >&2 echo "GameServer has terminated abnormally (code: ${err}), restarting in 5 seconds."
         sleep 5
         ;;
     esac
   done
   echo "GameServer restart loop has ended."
+  exit $err
 }
 
 cd `dirname $(readlink -f $0)`
