@@ -3,6 +3,7 @@ package instance;
 import java.util.Map;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
@@ -29,9 +30,10 @@ public class RaksangRuinsInstance extends GeneralInstanceHandler {
 	private volatile boolean isInstanceDestroyed;
 	private Map<Integer, StaticDoor> doors;
 	private AtomicBoolean isEventStarted = new AtomicBoolean();
+	private AtomicInteger waveKillz = new AtomicInteger();
 	private Future<?> spawnTask;
 	private boolean isDoorAccessible = false;
-	private byte way, waveKills, spawns;
+	private byte way, spawns;
 
 	@Override
 	public float getInstanceExpMultiplier() {
@@ -58,7 +60,7 @@ public class RaksangRuinsInstance extends GeneralInstanceHandler {
 			case 236012: // Crumbling Skelesword
 			case 236013: // Withering Husk
 			case 236014: // Ragelich Adept
-				if (++waveKills >= 31) {
+				if (waveKillz.incrementAndGet() >= 31) {
 					sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_TAMES_SOLO_A_END());
 					isDoorAccessible = true;
 				}
@@ -66,7 +68,7 @@ public class RaksangRuinsInstance extends GeneralInstanceHandler {
 			case 236074:
 			case 236075:
 			case 236076:
-				switch (++waveKills) {
+				switch (waveKillz.incrementAndGet()) {
 					case 15:
 						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_TAMES_SOLO_C_END());
 						doors.get(457).setOpen(true);
@@ -81,7 +83,7 @@ public class RaksangRuinsInstance extends GeneralInstanceHandler {
 			case 236021:
 			case 236096:
 			case 236097:
-				switch (++waveKills) {
+				switch (waveKillz.incrementAndGet()) {
 					case 28:
 						spawnTask.cancel(false);
 						spawnTask = null;
