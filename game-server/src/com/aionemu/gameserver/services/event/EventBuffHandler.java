@@ -254,8 +254,17 @@ public class EventBuffHandler {
 		if (buff.getRestriction() == null || buff.getRestriction().getTeamSizeMaxPercent() == 0)
 			return true;
 		TemporaryPlayerTeam<?> team = player.getCurrentTeam();
-		if (team != null && buff.getRestriction().getTeamSizeMaxPercent() >= team.size() * 100f / player.getCurrentTeam().getMaxMemberCount())
-			return true;
+		if (team != null) {
+			int maxAllowedTeamSize;
+			InstanceCooltime template = DataManager.INSTANCE_COOLTIME_DATA.getInstanceCooltimeByWorldId(player.getWorldId());
+			if (template != null)
+				maxAllowedTeamSize = player.getRace() == Race.ELYOS ? template.getMaxMemberLight() : template.getMaxMemberDark();
+			else
+				maxAllowedTeamSize = team.getMaxMemberCount();
+
+			if (buff.getRestriction().getTeamSizeMaxPercent() >= team.size() * 100f / maxAllowedTeamSize)
+				return true;
+		}
 		return false;
 	}
 
