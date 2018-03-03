@@ -35,17 +35,9 @@
 			<gd_npc npc_id="236334" /><!-- Inggison Shulack Hunter -->
 		</gd_npcs>
 		<gd_items>
-			<!-- 50% Lesser, 30% Normal, 20% Greater -->
-			<gd_item id="188053688" /><!-- Inggison Lesser Conqueror's Mark Box -->
-			<gd_item id="188053688" /><!-- Inggison Lesser Conqueror's Mark Box -->
-			<gd_item id="188053688" /><!-- Inggison Lesser Conqueror's Mark Box -->
-			<gd_item id="188053688" /><!-- Inggison Lesser Conqueror's Mark Box -->
-			<gd_item id="188053688" /><!-- Inggison Lesser Conqueror's Mark Box -->
-			<gd_item id="188053689" /><!-- Inggison Conqueror's Mark Box -->
-			<gd_item id="188053689" /><!-- Inggison Conqueror's Mark Box -->
-			<gd_item id="188053689" /><!-- Inggison Conqueror's Mark Box -->
-			<gd_item id="188053690" /><!-- Inggison Greater Conqueror's Mark Box -->
-			<gd_item id="188053690" /><!-- Inggison Greater Conqueror's Mark Box -->
+			<gd_item id="188053688" chance="50" /><!-- Inggison Lesser Conqueror's Mark Box -->
+			<gd_item id="188053689" chance="30" /><!-- Inggison Conqueror's Mark Box -->
+			<gd_item id="188053690" chance="20" /><!-- Inggison Greater Conqueror's Mark Box -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Inggison Conqueror's Mark Box (Vulgar)" base_chance="100" min_count="3">
@@ -83,27 +75,75 @@
 			<gd_npc npc_id="236362" /><!-- Vulgar Inggison Shulack Hunter -->
 		</gd_npcs>
 		<gd_items>
-			<!-- 40% Lesser, 35% Normal, 25% Greater -->
-			<gd_item id="188053688" /><!-- Inggison Lesser Conqueror's Mark Box -->
-			<gd_item id="188053688" /><!-- Inggison Lesser Conqueror's Mark Box -->
-			<gd_item id="188053688" /><!-- Inggison Lesser Conqueror's Mark Box -->
-			<gd_item id="188053688" /><!-- Inggison Lesser Conqueror's Mark Box -->
-			<gd_item id="188053688" /><!-- Inggison Lesser Conqueror's Mark Box -->
-			<gd_item id="188053688" /><!-- Inggison Lesser Conqueror's Mark Box -->
-			<gd_item id="188053688" /><!-- Inggison Lesser Conqueror's Mark Box -->
-			<gd_item id="188053688" /><!-- Inggison Lesser Conqueror's Mark Box -->
-			<gd_item id="188053689" /><!-- Inggison Conqueror's Mark Box -->
-			<gd_item id="188053689" /><!-- Inggison Conqueror's Mark Box -->
-			<gd_item id="188053689" /><!-- Inggison Conqueror's Mark Box -->
-			<gd_item id="188053689" /><!-- Inggison Conqueror's Mark Box -->
-			<gd_item id="188053689" /><!-- Inggison Conqueror's Mark Box -->
-			<gd_item id="188053689" /><!-- Inggison Conqueror's Mark Box -->
-			<gd_item id="188053689" /><!-- Inggison Conqueror's Mark Box -->
-			<gd_item id="188053690" /><!-- Inggison Greater Conqueror's Mark Box -->
-			<gd_item id="188053690" /><!-- Inggison Greater Conqueror's Mark Box -->
-			<gd_item id="188053690" /><!-- Inggison Greater Conqueror's Mark Box -->
-			<gd_item id="188053690" /><!-- Inggison Greater Conqueror's Mark Box -->
-			<gd_item id="188053690" /><!-- Inggison Greater Conqueror's Mark Box -->
+			<gd_item id="188053688" chance="40" /><!-- Inggison Lesser Conqueror's Mark Box -->
+			<gd_item id="188053689" chance="35" /><!-- Inggison Conqueror's Mark Box -->
+			<gd_item id="188053690" chance="25" /><!-- Inggison Greater Conqueror's Mark Box -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Lv70 Composite Stone Bundle" base_chance="0.09" min_count="1">
+		<gd_maps>
+			<gd_map map_id="210050000" /><!-- Inggison -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="236307" /><!-- Inggison Dionae -->
+			<gd_npc npc_id="236308" /><!-- Inggison Excura -->
+			<gd_npc npc_id="236309" /><!-- Inggison Rotron -->
+			<gd_npc npc_id="236310" /><!-- Inggison Kirrin -->
+			<gd_npc npc_id="236311" /><!-- Inggison Puca -->
+			<gd_npc npc_id="236312" /><!-- Inggison Rynoce -->
+			<gd_npc npc_id="236313" /><!-- Inggison Gnarl -->
+			<gd_npc npc_id="236314" /><!-- Inggison Baku -->
+			<gd_npc npc_id="236315" /><!-- Inggison Crettin -->
+			<gd_npc npc_id="236316" /><!-- Inggison Serrator -->
+			<gd_npc npc_id="236317" /><!-- Inggison Obscura -->
+			<gd_npc npc_id="236318" /><!-- Inggison Ashulagen -->
+			<gd_npc npc_id="236319" /><!-- Inggison Ksellid -->
+			<gd_npc npc_id="236320" /><!-- Inggison Vortile -->
+			<gd_npc npc_id="236321" /><!-- Inggison Luciferin -->
+			<gd_npc npc_id="236322" /><!-- Inggison Wraithling -->
+			<gd_npc npc_id="236323" /><!-- Inggison Gryphu -->
+			<gd_npc npc_id="236324" /><!-- Inggison Barghest -->
+			<gd_npc npc_id="236325" /><!-- Inggison Dragrint -->
+			<gd_npc npc_id="236326" /><!-- Inggison Murmur -->
+			<gd_npc npc_id="236327" /><!-- Inggison Spaller -->
+			<gd_npc npc_id="236328" /><!-- Inggison Petrahulk -->
+			<gd_npc npc_id="236329" /><!-- Inggison Ksellid -->
+			<gd_npc npc_id="236330" /><!-- Inggison Drake -->
+			<gd_npc npc_id="236331" /><!-- Inggison Shulack Shaman -->
+			<gd_npc npc_id="236332" /><!-- Inggison Shulack Lookout -->
+			<gd_npc npc_id="236333" /><!-- Inggison Shulack Assailant -->
+			<gd_npc npc_id="236334" /><!-- Inggison Shulack Hunter -->
+			<gd_npc npc_id="236335" /><!-- Vulgar Inggison Dionae -->
+			<gd_npc npc_id="236336" /><!-- Vulgar Inggison Excura -->
+			<gd_npc npc_id="236337" /><!-- Vulgar Inggison Rotron -->
+			<gd_npc npc_id="236338" /><!-- Vulgar Inggison Kirrin -->
+			<gd_npc npc_id="236339" /><!-- Vulgar Inggison Puca -->
+			<gd_npc npc_id="236340" /><!-- Vulgar Inggison Rynoce -->
+			<gd_npc npc_id="236341" /><!-- Vulgar Inggison Gnarl -->
+			<gd_npc npc_id="236342" /><!-- Vulgar Inggison Baku -->
+			<gd_npc npc_id="236343" /><!-- Vulgar Inggison Crettin -->
+			<gd_npc npc_id="236344" /><!-- Vulgar Inggison Serrator -->
+			<gd_npc npc_id="236345" /><!-- Vulgar Inggison Obscura -->
+			<gd_npc npc_id="236346" /><!-- Vulgar Inggison Ashulagen -->
+			<gd_npc npc_id="236347" /><!-- Vulgar Inggison Ksellid -->
+			<gd_npc npc_id="236348" /><!-- Vulgar Inggison Vortile -->
+			<gd_npc npc_id="236349" /><!-- Vulgar Inggison Luciferin -->
+			<gd_npc npc_id="236350" /><!-- Vulgar Inggison Wraithling -->
+			<gd_npc npc_id="236351" /><!-- Vulgar Inggison Gryphu -->
+			<gd_npc npc_id="236352" /><!-- Vulgar Inggison Barghest -->
+			<gd_npc npc_id="236353" /><!-- Vulgar Inggison Dragrint -->
+			<gd_npc npc_id="236354" /><!-- Vulgar Inggison Murmur -->
+			<gd_npc npc_id="236355" /><!-- Vulgar Inggison Spaller -->
+			<gd_npc npc_id="236356" /><!-- Vulgar Inggison Petrahulk -->
+			<gd_npc npc_id="236357" /><!-- Vulgar Inggison Ksellid -->
+			<gd_npc npc_id="236358" /><!-- Vulgar Inggison Drake -->
+			<gd_npc npc_id="236359" /><!-- Vulgar Inggison Shulack Shaman -->
+			<gd_npc npc_id="236360" /><!-- Vulgar Inggison Shulack Lookout -->
+			<gd_npc npc_id="236361" /><!-- Vulgar Inggison Shulack Assailant -->
+			<gd_npc npc_id="236362" /><!-- Vulgar Inggison Shulack Hunter -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="188053745" /><!-- Elegant High Grade Composite Manastone Bundle -->
 		</gd_items>
 	</gd_rule>
 </global_rules>
