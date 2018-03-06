@@ -252,8 +252,9 @@ public class HousingService {
 	}
 
 	public House findHouseOrStudio(int objId) {
-		if (studios.containsKey(objId)) { // studios share the objectId with owner
-			return studios.get(objId);
+		for (House studio : studios.values()) {
+			if (studio.getObjectId() == objId)
+				return studio;
 		}
 		for (House house : customHouses.values()) {
 			if (house.getObjectId() == objId)
