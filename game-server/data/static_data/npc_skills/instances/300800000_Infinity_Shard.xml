@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<npc_skill_templates xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../npc_skills.xsd">
+	<!-- Hyperion -->
+	<npc_skills npc_ids="231073">
+		<npc_skill id="21254" is_post_spawn="true" />
+		<npc_skill id="21242" lv="41" prob="50" cd="8000" />
+		<npc_skill id="21241" lv="41" prob="9" />
+		<npc_skill id="21241" lv="41" prob="5" target="RANDOM" />
+		<npc_skill id="21243" lv="41" prob="50" cd="8000" />
+		<npc_skill id="21244" lv="41" prob="40" max_hp="50" cd="25000" />
+		<npc_skill id="21247" lv="41" prob="40" max_hp="85" cd="20000" target="RANDOM" />
+		<npc_skill id="21248" lv="41" prob="40" max_hp="48" cd="25000" target="RANDOM" />
+		<npc_skill id="21250" lv="41" prob="40" max_hp="75" chain_id="0" next_chain_id="1" next_skill_time="6000" cd="60000" />
+		<npc_skill id="21251" lv="41" prob="100" chain_id="1" />
+	</npc_skills>
+	<!-- Ide Forcefield Generator -->
+	<npc_skills npc_ids="231074 231078 231082 231086">
+		<npc_skill id="21371" lv="41" is_post_spawn="true" />
+	</npc_skills>
+	<!-- Agent Kabalash -->
+	<npc_skills npc_ids="231075">
+		<npc_skill id="20700" lv="56" prob="9" />
+		<npc_skill id="20701" lv="56" prob="9" />
+		<npc_skill id="20712" lv="56" prob="9" />
+		<npc_skill id="17722" lv="56" prob="18" />
+		<npc_skill id="17335" lv="56" prob="18" />
+		<npc_skill id="20179" lv="56" prob="9" />
+		<npc_skill id="21288" lv="56" prob="9" />
+		<npc_skill id="20711" lv="56" prob="18" />
+	</npc_skills>
+	<!-- Hyperion Defense Elite Sniper -->
+	<npc_skills npc_ids="231076 231077 231080 231088">
+		<npc_skill id="17106" lv="56" prob="22" />
+		<npc_skill id="20700" lv="56" prob="11" />
+		<npc_skill id="17318" lv="56" prob="22" />
+		<npc_skill id="17317" lv="56" prob="22" />
+		<npc_skill id="17314" lv="56" prob="11" />
+		<npc_skill id="21230" lv="56" prob="11"	/>
+	</npc_skills>
+	<!-- Hyperion Defense Elite Assassin -->
+	<npc_skills npc_ids="231079">
+		<npc_skill id="17321" lv="56" prob="20" />
+		<npc_skill id="17332" lv="56" prob="40" />
+		<npc_skill id="21289" lv="56" prob="20" />
+		<npc_skill id="16452" lv="56" prob="20" />
+	</npc_skills>
+	<!-- Hyperion Defense Elite Medic -->
+	<npc_skills npc_ids="231081">
+		<npc_skill id="17359" lv="56" prob="25" min_hp="95" />
+		<npc_skill id="16566" lv="56" prob="25" min_hp="93" />
+	</npc_skills>
+	<!-- Hyperion Defense Elite Assaulter -->
+	<npc_skills npc_ids="231084">
+		<npc_skill id="17294" lv="56" prob="11" />
+	</npc_skills>
+	<!-- Hyperion Defense Elite Gunner -->
+	<npc_skills npc_ids="231091">
+		<npc_skill id="21293" lv="56" prob="25" />
+	</npc_skills>
+	<!-- Hyperion Defense Turret -->
+	<npc_skills npc_ids="231102">
+		<npc_skill id="21415" lv="41" prob="100" cd="15000" />
+	</npc_skills>
+	<!-- Ide Pool -->
+	<npc_skills npc_ids="231104">
+		<npc_skill id="21356" lv="56" prob="20" min_hp="0" />
+	</npc_skills>
+</npc_skill_templates>

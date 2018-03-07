@@ -683,6 +683,7 @@ public class Effect implements StatOwner {
 				endEffect(true);
 			}, duration);
 		}
+		effected.getPosition().getWorldMapInstance().getInstanceHandler().onStartEffect(this);
 	}
 
 	/**

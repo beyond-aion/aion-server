@@ -1,3 +1,23 @@
+/*
+1401795 * This file is part of the Aion emulation project, to which many groups
+ * have contributed over the years, such as:
+ * Aion-Emu, Aion-Unique, Zetta-Core, Aion-Lightning, Aion-Engine,
+ * Aion-Core, AionJ-Hungary, Aion X Emu, Aion-Extreme, Aion-Finish,
+ * U3J-Aion, Beyond Aion and many others.
+ * 
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package com.aionemu.gameserver.network.aion.serverpackets;
 
 import com.aionemu.gameserver.model.ChatType;
@@ -25773,10 +25793,66 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	}
 
 	/**
+	 * Ide Resonators are charging the Hyperion.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDRUNEWP_CHARGING() {
+		return new SM_SYSTEM_MESSAGE(1401790);
+	}
+
+	/**
+	 * Phase 1 of the Ide energy charging complete.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDRUNEWP_CHARGER1_COMPLETED() {
+		return new SM_SYSTEM_MESSAGE(1401791);
+	}
+
+	/**
+	 * Phase 2 of the Ide energy charging complete.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDRUNEWP_CHARGER2_COMPLETED() {
+		return new SM_SYSTEM_MESSAGE(1401792);
+	}
+
+	/**
+	 * Phase 3 of the Ide energy charging complete.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDRUNEWP_CHARGER3_COMPLETED() {
+		return new SM_SYSTEM_MESSAGE(1401793);
+	}
+
+	/**
+	 * Phase 4 of the Ide energy charging complete. Hyperion ultimate attack imminent.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDRUNEWP_CHARGER4_COMPLETED() {
+		return new SM_SYSTEM_MESSAGE(1401794);
+	}
+
+	/**
+	 * The Hyperion's shields are faltering.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDRUNEWP_BROKENPROTECTION() {
+		return new SM_SYSTEM_MESSAGE(1401795);
+	}
+
+	/**
+	 * The Hyperion's shields are down.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDRUNEWP_BROKENPROTECTIONALL() {
+		return new SM_SYSTEM_MESSAGE(1401796);
+	}
+
+	/**
 	 * You spent %num0 Item.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_USEITEM(int num0) {
 		return new SM_SYSTEM_MESSAGE(1401873, num0);
+	}
+
+	/**
+	 * The fully-charged Hyperion has disappeared into another dimension.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDRUNEWP_USER_KILL() {
+		return new SM_SYSTEM_MESSAGE(1401909);
 	}
 
 	/**
