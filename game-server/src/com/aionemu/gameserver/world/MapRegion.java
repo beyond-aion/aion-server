@@ -173,7 +173,7 @@ public class MapRegion {
 	final void checkActiveness(boolean active) {
 		if (active && regionActive.compareAndSet(false, true)) {
 			startActivation();
-		} else if (!active) {
+		} else if (!active && parent.getInstanceHandler() == null && parent.getMapId() != 400030000) {
 			startDeactivation();
 		}
 	}
