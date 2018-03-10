@@ -25682,38 +25682,150 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	}
 
 	/**
-	 * Lord Kaisinel attacks with all his force.
+	 * Enter the Internal Passage and destroy Tiamat's Incarnations while Kaisinel is dealing with Tiamat.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDTIAMAT_TIAMAT_2PHASE_START_LIGHT() {
+		return new SM_SYSTEM_MESSAGE(1401531);
+	}
+
+	/**
+	 * Enter the Internal Passage and destroy Tiamat's Incarnations while Marchutan is dealing with Tiamat.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDTIAMAT_TIAMAT_2PHASE_START_DARK() {
+		return new SM_SYSTEM_MESSAGE(1401532);
+	}
+
+	/**
+	 * Fissure Incarnate has collapsed.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDTIAMAT_TIAMAT_2PHASE_CLOSE_CRACK() {
+		return new SM_SYSTEM_MESSAGE(1401533);
+	}
+
+	/**
+	 * Wrath Incarnate has collapsed.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDTIAMAT_TIAMAT_2PHASE_CLOSE_RAGE() {
+		return new SM_SYSTEM_MESSAGE(1401534);
+	}
+
+	/**
+	 * Gravity Incarnate has collapsed.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDTIAMAT_TIAMAT_2PHASE_CLOSE_GRAVITY() {
+		return new SM_SYSTEM_MESSAGE(1401535);
+	}
+
+	/**
+	 * Petrification Incarnate has collapsed.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDTIAMAT_TIAMAT_2PHASE_CLOSE_CRYSTAL() {
+		return new SM_SYSTEM_MESSAGE(1401536);
+	}
+
+	/**
+	 * All of Tiamat's Incarnations have collapsed.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDTIAMAT_TIAMAT_2PHASE_CLOSE_ALL() {
+		return new SM_SYSTEM_MESSAGE(1401537);
+	}
+
+	/**
+	 * Empyrean Lord Kaisinel is attacking with all his might.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_IDTIAMAT_KAISINEL_2PHASE_DEADLYATK() {
 		return new SM_SYSTEM_MESSAGE(1401538);
 	}
 
 	/**
-	 * The Empyrian Lord Marchutan attacks with all his power.
+	 * Empyrean Lord Marchutan is attacking with all his might.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_IDTIAMAT_MARCHUTAN_2PHASE_DEADLYATK() {
 		return new SM_SYSTEM_MESSAGE(1401539);
 	}
 
 	/**
-	 * The Empyrian Lord has very few HP left!
+	 * Empyrean Lord Kaisinel is exhausted. You must take over the fight against Tiamat!
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDTIAMAT_KAISINEL_2PHASE_GROGGY() {
+		return new SM_SYSTEM_MESSAGE(1401540);
+	}
+
+	/**
+	 * Empyrean Lord Marchutan is exhausted. You must take over the fight against Tiamat!
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDTIAMAT_MARCHUTAN_2PHASE_GROGGY() {
+		return new SM_SYSTEM_MESSAGE(1401541);
+	}
+
+	/**
+	 * Dragon Lord Tiamat used its Death Roar to defeat the Empyrean Lord.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDTIAMAT_TIAMAT_DEADLYHOWLING() {
+		return new SM_SYSTEM_MESSAGE(1401542);
+	}
+
+	/**
+	 * Calindi has absorbed the Surkana's magic to become even stronger!
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDTIAMAT_KALYNDI_SURKANA_SPAWN() {
+		return new SM_SYSTEM_MESSAGE(1401543);
+	}
+
+	/**
+	 * The battle with Tiamat will automatically end in 30 minutes.
+	 */
+	public static final SM_SYSTEM_MESSAGE IDTIAMAT_TIAMAT_COUNTDOWN_START() {
+		return new SM_SYSTEM_MESSAGE(1401547);
+	}
+
+	/**
+	 * The Empyrean Lord needs more HP!
 	 */
 	public static final SM_SYSTEM_MESSAGE IDTIAMAT_TIAMAT_GOD_HP_LOWER_THAN_50p() {
 		return new SM_SYSTEM_MESSAGE(1401548);
 	}
 
 	/**
-	 * The Empyrian Lord has very few HP left! If the Empyrian Lord dies, you can no longer take on the Dragon Lord!
+	 * The Empyrean Lord is getting low on HP. Don't let him die, or Tiamat will defeat you easily!
 	 */
 	public static final SM_SYSTEM_MESSAGE IDTIAMAT_TIAMAT_GOD_HP_LOWER_THAN_15p() {
 		return new SM_SYSTEM_MESSAGE(1401549);
 	}
 
 	/**
-	 * If you kill the Balaur Soul Healer, the Empyrian Lord will receive positive reinforcements.
+	 * Eliminate the Balaur Spiritualist to grant a beneficial effect to the Empyrean Lord.
 	 */
 	public static final SM_SYSTEM_MESSAGE IDTIAMAT_TIAMAT_DRAKAN_BUFF_MSG() {
 		return new SM_SYSTEM_MESSAGE(1401550);
+	}
+
+	/**
+	 * The Empyrean Lord absorbed the Balaur Spiritualist's mental energy!
+	 */
+	public static final SM_SYSTEM_MESSAGE IDTIAMAT_TIAMAT_DRAKAN_ON_DIE() {
+		return new SM_SYSTEM_MESSAGE(1401551);
+	}
+
+	/**
+	 * Tiamat's power has been enhanced with Siel's Relics. Tiamat can now reflect attacks.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_IDTIAMAT_TIAMAT_WARNING_MSG() {
+		return new SM_SYSTEM_MESSAGE(1401553);
+	}
+
+	/**
+	 * The Gravity Crusher was not destroyed in time and has become a Gravity Vortex.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_IDTIAMAT_TIAMAT_SPAWN_BLACKHOLE() {
+		return new SM_SYSTEM_MESSAGE(1401554);
+	}
+
+	/**
+	 * Tiamat has regained power and escaped to safety.
+	 */
+	public static final SM_SYSTEM_MESSAGE IDTIAMAT_TIAMAT_COUNTDOWN_OVER() {
+		return new SM_SYSTEM_MESSAGE(1401563);
 	}
 
 	/**

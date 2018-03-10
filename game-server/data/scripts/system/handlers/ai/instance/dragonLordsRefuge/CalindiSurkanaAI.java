@@ -1,22 +1,19 @@
 package ai.instance.dragonLordsRefuge;
 
-import java.util.concurrent.Future;
-
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.skillengine.SkillEngine;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
  * @author Cheatkiller
+ * @modified Estrayl March 8th, 2018
  */
-@AIName("calindisurkana")
+@AIName("calindi_surkana")
 public class CalindiSurkanaAI extends NpcAI {
 
-	private Future<?> skillTask;
 	Npc calindi;
 
 	public CalindiSurkanaAI(Npc owner) {
@@ -31,22 +28,20 @@ public class CalindiSurkanaAI extends NpcAI {
 	}
 
 	private void reflect() {
-		skillTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
-
-			@Override
-			public void run() {
-				PacketSendUtility.broadcastToMap(getOwner(), 1401543);
-				SkillEngine.getInstance().applyEffectDirectly(20891, getOwner(), calindi);
+		ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
+			if (!isDead()) {
+				int buffId = 0;
+				switch (getNpcId()) {
+					case 730695:
+						buffId = 20590;
+						break;
+					case 730696:
+						buffId = 20591;
+						break;
+				}
+				SkillEngine.getInstance().applyEffectDirectly(buffId, getOwner(), calindi);
 			}
-		}, 3000, 10000);
-	}
-
-	@Override
-	protected void handleDied() {
-		super.handleDied();
-		if (skillTask != null && !skillTask.isCancelled()) {
-			skillTask.cancel(true);
-		}
+		}, 2500, 5000);
 	}
 
 	@Override

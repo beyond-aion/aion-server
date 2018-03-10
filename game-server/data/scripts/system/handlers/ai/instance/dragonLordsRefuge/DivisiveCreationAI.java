@@ -18,8 +18,9 @@ import ai.AggressiveNpcAI;
 
 /**
  * @author Cheatkiller
+ * @modified Estrayl March 8th, 2018
  */
-@AIName("divisivecreation")
+@AIName("divisive_creation")
 public class DivisiveCreationAI extends AggressiveNpcAI {
 
 	public DivisiveCreationAI(Npc owner) {
@@ -38,7 +39,7 @@ public class DivisiveCreationAI extends AggressiveNpcAI {
 				setStateIfNot(AIState.WALKING);
 				getOwner().setState(CreatureState.ACTIVE, true);
 				getMoveController().moveToTargetObject();
-				PacketSendUtility.broadcastPacket(getOwner(), new SM_EMOTION(getOwner(), EmotionType.START_EMOTE2, 0, getOwner().getObjectId()));
+				PacketSendUtility.broadcastToMap(getOwner(), new SM_EMOTION(getOwner(), EmotionType.WALK));
 			}
 		}, 5000);
 	}

@@ -2,21 +2,20 @@
 <!-- Dragon Lords Refugee 3.5 -->
 <spawns xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../spawns.xsd">
 	<spawn_map map_id="300520000">
-		<!-- calindi flamelord -->
-		<spawn npc_id="219359">
-			<spot x="485.8271" y="514.5500" z="417.4044"/>
-		</spawn>
 		<!-- tiamat aetheric field -->
 		<spawn npc_id="730694">
 			<spot x="436.7526" y="513.8103" z="420.6662" static_id="14"/>
 		</spawn>
-		<!-- tiamat (woman) -->
+		<!-- Tiamat -->
 		<spawn npc_id="219360">
-			<spot x="451.9700" y="514.5500" z="417.4044"/>
+			<spot x="466.747" y="514.550" z="417.4044" />
 		</spawn>
-		<!-- wavering surkana -->
+		<!-- Wavering Surkana -->
 		<spawn npc_id="730699">
 			<spot x="504.1100" y="514.9100" z="418" static_id="9"/>
+		</spawn>
+		<!-- Fallen Surkana -->
+		<spawn npc_id="730700">
 			<spot x="504.1100" y="514.9100" z="418.8708" static_id="47"/>
 		</spawn>
 		<!-- siel's relics -->
@@ -39,13 +38,13 @@
 		<spawn npc_id="730636">
 			<spot x="779.178" y="833.055" z="246.071" h="16"/>
 		</spawn>
-		<!-- kahrun 
-		<spawn npc_id="800340">
-			<spot x="497.60986" y="522.25696" z="240.26653" h="104"/>
-		</spawn> -->
 		<!-- kahrun -->
 		<spawn npc_id="800429">
 			<spot x="496.42648" y="516.493" z="240.26653"/>
+		</spawn>
+		<!-- Kahrun -->
+		<spawn npc_id="800341">
+			<spot x="483.463" y="514.519" z="417.404" h="60" />
 		</spawn>
 		<!-- fissurefang -->
 		<spawn npc_id="219365">

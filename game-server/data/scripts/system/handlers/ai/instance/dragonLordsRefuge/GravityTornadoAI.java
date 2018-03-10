@@ -11,8 +11,9 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
  * @author Luzien
+ * @modified Estrayl March 10th, 2018
  */
-@AIName("tiamat_tornado")
+@AIName("gravity_tornado")
 public class GravityTornadoAI extends NpcAI {
 
 	private Future<?> task;
@@ -24,13 +25,7 @@ public class GravityTornadoAI extends NpcAI {
 	@Override
 	protected void handleSpawned() {
 		super.handleSpawned();
-		task = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
-
-			@Override
-			public void run() {
-				AIActions.useSkill(GravityTornadoAI.this, 20966);
-			}
-		}, 0, 6000);
+		task = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> AIActions.useSkill(this, 20966), 2500, 6000);
 	}
 
 	@Override

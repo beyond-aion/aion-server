@@ -11,7 +11,7 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
  * @author Cheatkiller
- * @modified Luzien
+ * @modified Luzien, Estrayl March 8th, 2018
  */
 @AIName("calindisummon")
 public class CalindiSummonsAI extends NpcAI {
@@ -24,29 +24,11 @@ public class CalindiSummonsAI extends NpcAI {
 
 	@Override
 	protected void handleSpawned() {
-
 		super.handleSpawned();
-		final int skill = getOwner().getNpcId() == 283132 ? 20914 : 20916;
+		int skill = getOwner().getNpcId() == 283132 ? 20914 : 20916;
 		int delay = getNpcId() == 283132 ? 500 : 2000;
-		task = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
-
-			@Override
-			public void run() {
-				AIActions.useSkill(CalindiSummonsAI.this, skill);
-			}
-		}, delay, delay);
-
-		despawn();
-	}
-
-	private void despawn() {
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				getOwner().getController().delete();
-			}
-		}, 15000);
+		task = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> AIActions.useSkill(this, skill), delay, delay);
+		ThreadPoolManager.getInstance().schedule(() -> AIActions.deleteOwner(this), 15000);
 	}
 
 	@Override

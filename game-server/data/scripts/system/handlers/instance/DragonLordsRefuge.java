@@ -1,302 +1,298 @@
 package instance;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import com.aionemu.commons.utils.Rnd;
+import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
 import com.aionemu.gameserver.instance.handlers.InstanceID;
-import com.aionemu.gameserver.model.Race;
+import com.aionemu.gameserver.model.CreatureType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_CUSTOM_SETTINGS;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_ACTION;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
+import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
-import com.aionemu.gameserver.world.WorldMapInstance;
 
 /**
- * @author Bobobear
- * @modified Luzien
+ * Reworked March 10th, 2018
+ * 
+ * @author bobobear, Luzien, Estrayl
  */
 @InstanceID(300520000)
 public class DragonLordsRefuge extends GeneralInstanceHandler {
 
-	private final AtomicInteger specNpcKilled = new AtomicInteger();
-	private boolean isInstanceDestroyed;
-	private Race instanceRace;
+	private AtomicInteger raceId = new AtomicInteger(10);
+	private AtomicInteger incarnationKills = new AtomicInteger();
+	private AtomicInteger progress = new AtomicInteger();
 	private Future<?> failTask;
 
 	@Override
-	public void onDie(Npc npc) {
-		if (isInstanceDestroyed) {
-			return;
-		}
-
-		int npcId = npc.getNpcId();
-
-		switch (npcId) {
-			case 219365: // fissurefang
-				despawnNpc(219365); // despawn fissurefang corpse
-				performSkillToTarget(219361, 219361, 20979); // remove Fissure Buff
-				sendMsg(1401533);
-				checkIncarnationKills();
-				break;
-			case 219366: // graviwing
-				despawnNpc(219366); // despawn graviwing corpse
-				performSkillToTarget(219361, 219361, 20981); // remove Gravity Buff
-				sendMsg(1401535);
-				checkIncarnationKills();
-				break;
-			case 219367: // wrathclaw
-				despawnNpc(219367); // despawn wrathclaw corpse
-				performSkillToTarget(219361, 219361, 20980); // remove Wrath Buff
-				sendMsg(1401534);
-				checkIncarnationKills();
-				break;
-			case 219368: // petriscale
-				despawnNpc(219368); // despawn petriscale corpse
-				performSkillToTarget(219361, 219361, 20982); // remove Petrification Buff
-				sendMsg(1401536);
-				checkIncarnationKills();
-				break;
-			case 730695:
-				instance.getNpc(219359).getEffectController().removeEffect(20590);
-				break;
-			case 730696:
-				instance.getNpc(219359).getEffectController().removeEffect(20591);
-				break;
-			case 219359: // Calindi Flamelord
-				despawnNpc(730694); // despawn tiamat aetheric field
-				despawnNpc(730695); // despawn Surkanas if spawned
-				despawnNpc(730696); // despawn Surkanas if spawned
-				performSkillToTarget(219360, 219360, 20919); // Transformation
-				ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-					@Override
-					public void run() {
-						despawnNpc(219360); // despawn tiamat woman (1st spawn)
-						spawn(219361, 466.7468f, 514.5500f, 417.4044f, (byte) 0);// tiamat dragon 2nd Spawn
-						performSkillToTarget(219361, 219361, 20975); // Fissure Buff
-						performSkillToTarget(219361, 219361, 20976); // Wrath Buff
-						performSkillToTarget(219361, 219361, 20977); // Gravity Buff
-						performSkillToTarget(219361, 219361, 20978); // Petrification Buff
-						performSkillToTarget(219361, 219361, 20984); // Unbreakable Wing (reflect)
-					}
-				}, 5000);
-
-				// schedule dragon lords roar skill to block all players before spawn empyrean lords
-				ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-					@Override
-					public void run() {
-						performSkillToTarget(219361, 219361, 20920);
-					}
-				}, 8000);
-
-				// spawn Kaisinel or Marchutan Gods (depends of group race)
-				ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-					@Override
-					public void run() {
-						spawn((instanceRace == Race.ELYOS ? 219488 : 219491), 504f, 515f, 417.405f, (byte) 60);
-					}
-				}, 15000);
-
-				// schedule spawn of balaur spiritualists and broadcast messages
-				ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-					@Override
-					public void run() {
-						sendMsg(instanceRace == Race.ELYOS ? 1401531 : 1401532);
-						// spawn balaur spritualists (will defend Internal Passages)
+	public void onSpawn(VisibleObject object) {
+		if (object instanceof Npc) {
+			switch (((Npc) object).getNpcId()) {
+				case 219361: // Tiamat Dragon
+					ThreadPoolManager.getInstance().schedule(() -> {
+						spawn(730673, 459.548f, 456.849f, 417.405f, (byte) 21);
+						spawn(730674, 547.909f, 456.568f, 417.405f, (byte) 45);
+						spawn(730675, 460.082f, 571.978f, 417.405f, (byte) 98);
+						spawn(730676, 547.822f, 571.876f, 417.405f, (byte) 74);
+					}, 60000);
+					break;
+				case 219362: // Tiamat Weakened Dragon
+					sendMsg(SM_SYSTEM_MESSAGE.IDTIAMAT_TIAMAT_COUNTDOWN_START(), 2000);
+					PacketSendUtility.broadcastToMap(instance, new SM_QUEST_ACTION(0, 1800));
+					failTask = ThreadPoolManager.getInstance().schedule(() -> {
+						Npc tiamat = getNpc(219362);
+						if (tiamat != null && !tiamat.isDead()) {
+							endInstance(Arrays.asList(730625, 730633, 730634, 730635, 730636));
+							sendMsg(SM_SYSTEM_MESSAGE.IDTIAMAT_TIAMAT_COUNTDOWN_OVER());
+						}
+					}, 1800000); // 30'
+					break;
+				case 219488: // Kaisinel 1st Phase
+					sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDTIAMAT_TIAMAT_2PHASE_START_LIGHT(), 20000);
+					break;
+				case 219489: // Kaisinel 2nd Phase
+					sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDTIAMAT_KAISINEL_2PHASE_DEADLYATK(), 3000);
+					break;
+				case 219490: // Kaisinel 3rd Phase
+					sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDTIAMAT_KAISINEL_2PHASE_GROGGY(), 15000);
+					break;
+				case 219491: // Marchutan 1st Phase
+					sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDTIAMAT_TIAMAT_2PHASE_START_DARK(), 20000);
+					break;
+				case 219492: // Marchutan 2nd Phase
+					sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDTIAMAT_MARCHUTAN_2PHASE_DEADLYATK(), 3000);
+					break;
+				case 219493: // Marchutan 3rd Phase
+					sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDTIAMAT_MARCHUTAN_2PHASE_GROGGY(), 15000);
+					break;
+				case 283140:
+					sendMsg(SM_SYSTEM_MESSAGE.STR_IDTIAMAT_TIAMAT_SPAWN_BLACKHOLE(), 2500);
+					break;
+				case 730673:
+					ThreadPoolManager.getInstance().schedule(() -> {
 						spawn(283163, 463f, 568f, 417.405f, (byte) 105);
 						spawn(283164, 545f, 568f, 417.405f, (byte) 78);
 						spawn(283165, 545f, 461f, 417.405f, (byte) 46);
 						spawn(283166, 463f, 461f, 417.405f, (byte) 17);
-					}
-				}, 40000);
+					}, 10000);
+					break;
+				case 730695: // Surkana
+					sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDTIAMAT_KALYNDI_SURKANA_SPAWN(), 2500);
+					break;
+			}
+		}
+	}
+
+	@Override
+	public void onStartEffect(Effect effect) {
+		switch (effect.getSkillId()) {
+			case 20918:
+				PacketSendUtility.broadcastMessage(getNpc(800341), 1500612);
 				break;
-			case 219362: // Tiamat Dragon (3rd spawn)
-				if (failTask != null && !failTask.isDone())
-					failTask.cancel(true);
-				spawn(701542, 480f, 514f, 417.405f, (byte) 0);// tiamat treasure chest reward
-				spawn(730630, 548.18683f, 514.54523f, 420f, (byte) 0, 23);
-				spawn(800430, 502.426f, 510.462f, 417.405f, (byte) 0);
+			case 20920:
+				if (progress.compareAndSet(1, 2)) {
+					ThreadPoolManager.getInstance().schedule(() -> spawn(219488 + raceId.get() * 3, 504f, 515f, 417.405f, (byte) 60), 6000);
+					spawn(219532, 469f, 563f, 417.41f, (byte) 103);
+					spawn(219535, 466f, 560f, 417.41f, (byte) 103);
+					spawn(219533, 542f, 559f, 417.41f, (byte) 79);
+					spawn(219538, 538f, 562f, 417.41f, (byte) 79);
+					spawn(219534, 537f, 466f, 417.41f, (byte) 42);
+					spawn(219537, 541f, 469f, 417.41f, (byte) 42);
+					spawn(219536, 466f, 471f, 417.41f, (byte) 18);
+					spawn(219539, 470f, 467f, 417.41f, (byte) 18);
+				}
+				break;
+			case 20993:
+			case 20994:
+			case 20995:
+			case 20996:
+				sendMsg(SM_SYSTEM_MESSAGE.IDTIAMAT_TIAMAT_DRAKAN_ON_DIE());
+				break;
+		}
+	}
+
+	@Override
+	public void onEndEffect(Effect effect) {
+		switch (effect.getSkillId()) {
+			case 20975:
+				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDTIAMAT_TIAMAT_2PHASE_CLOSE_CRACK());
+				break;
+			case 20976:
+				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDTIAMAT_TIAMAT_2PHASE_CLOSE_RAGE());
+				break;
+			case 20977:
+				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDTIAMAT_TIAMAT_2PHASE_CLOSE_GRAVITY());
+				break;
+			case 20978:
+				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDTIAMAT_TIAMAT_2PHASE_CLOSE_CRYSTAL());
+				break;
+			case 20983:
+				if (((Npc) effect.getEffector()).getNpcId() == 219361)
+					endInstance(Arrays.asList(730625, 730633, 730634, 730635, 730636));
+				break;
+		}
+	}
+
+	private void endInstance(List<Integer> despawnExceptions) {
+		for (Npc npc : instance.getNpcs())
+			if (npc != null && !despawnExceptions.contains(npc.getNpcId()))
+				npc.getController().delete();
+		spawn(730630, 548.18683f, 514.54523f, 420f, (byte) 0, 23);
+	}
+
+	@Override
+	public void onDie(Npc npc) {
+		switch (npc.getNpcId()) {
+			case 219359: // Calindi Flamelord
+				despawnNpc(730695); // Surkana
+				despawnNpc(730696); // Surkana
+				ThreadPoolManager.getInstance().schedule(() -> AIActions.useSkill(getNpc(219360).getAi(), 20919), 4000);
+				ThreadPoolManager.getInstance().schedule(() -> despawnNpc(730694), 6000); // Aetheric field
+				break;
+			case 219361: // Tiamat Dragon - killed by Empyrean Lord
+				getNpc(730699).getController().die(); // Animates roof destruction
+				getNpc(730700).getController().die();
+				spawn(283134, 461f, 514f, 417.405f, (byte) 0);
+				spawn(219362, 461f, 514f, 417.405f, (byte) 0);
+				spawn(730704, 437.541f, 513.487f, 415.824f, (byte) 0, 17); // Collapsed Debris impaling Tiamat
+				break;
+			case 219362:
+				failTask.cancel(true);
+				PacketSendUtility.broadcastToMap(instance, new SM_QUEST_ACTION(0, 0));
+				// TODO: play movie
+				endInstance(Arrays.asList(219490, 219493, 219362, 730625, 730633, 730634, 730635, 730636));
+				spawn(701542, 480f, 514f, 417.405f, (byte) 0); // Treasure Chest
 				spawn(800431, 482.872f, 514.705f, 417.405f, (byte) 0);
 				spawn(800464, 544.964f, 517.898f, 417.405f, (byte) 113);
 				spawn(800465, 545.605f, 510.325f, 417.405f, (byte) 17);
 				break;
-			case 283163: // balaur spiritualist (spawn Portal after die)
-				healEmpyreanLord(0); // heal Empyrean Lord
-				spawn(730675, 460.082f, 571.978f, 417.405f, (byte) 43); // spawn portal to tiamat incarnation
+			case 219365: // Incarnations
+			case 219366:
+			case 219367:
+			case 219368:
+				if (incarnationKills.incrementAndGet() == 4)
+					handlePhaseProgress();
+				SkillEngine.getInstance().applyEffectDirectly(npc.getNpcId() - 198386, npc, getNpc(219361)); // 20979 - 20982
 				break;
+			case 283163: // Balaur Spiritualist
 			case 283164:
-				healEmpyreanLord(1);
-				spawn(730676, 547.822f, 571.876f, 417.405f, (byte) 18);
-				break;
 			case 283165:
-				healEmpyreanLord(2);
-				spawn(730674, 547.909f, 456.568f, 417.405f, (byte) 103);
-				break;
 			case 283166:
-				healEmpyreanLord(3);
-				spawn(730673, 459.548f, 456.849f, 417.405f, (byte) 78);
+				Npc empyreanLord = getNpc(219488 + raceId.get() * 3);
+				if (empyreanLord != null)
+					SkillEngine.getInstance().applyEffectDirectly(npc.getNpcId() - 262170, npc, empyreanLord); // 20993 - 20996
+				npc.getController().delete();
 				break;
-			case 219361: // Tiamat Dragon (1st spawn) - Players cannot kill tiamat, they must kill 4 incanation before
-				// TODO: what to do?
-				break;
-			case 219488: // Kaisinel Gods (1st Spawn)
-			case 219491: // Marchutan Gods (1st Spawn)
-				sendMsg(1401542);
-				Npc tiamat = getNpc(219361);
-				tiamat.getController().useSkill(20983);
-				ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-					@Override
-					public void run() {
-						despawnNpc(219361);// despawn tiamat dragon
-						spawn(730694, 436.7526f, 513.8103f, 420.6662f, (byte) 0, 14); // re-spawn tiamat aetheric field
-						spawn(219360, 451.9700f, 514.5500f, 417.4044f, (byte) 0); // re-spawn tiamat woman to initial position
-						sendMsg(1401563);// broadcast message of instance failed
-						spawn(730630, 548.18683f, 514.54523f, 420f, (byte) 0, 23); // spawn exit
-					}
-				}, 5000);
-				// TODO: check on retail
+			case 219488: // Kaisinel 1st Phase
+			case 219491: // Marchutan 1st Phase
+				if (incarnationKills.get() == 4) // in rare cases the empyrean lord dies while the instance have to wait for progress
+					return;
+				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDTIAMAT_TIAMAT_DEADLYHOWLING());
+				for (int i = 219365; i <= 219368; i++) {
+					Npc incarnation = getNpc(i);
+					if (incarnation != null)
+						AIActions.useSkill(incarnation.getAi(), 20983);
+				}
+				AIActions.useSkill(getNpc(219361).getAi(), 20983);
+				endInstance(Arrays.asList(730625, 730633, 730634, 730635, 730636, 730699, 730700));
 				break;
 		}
 	}
 
-	private void performSkillToTarget(int npcId, int targetId, int skillId) {
-		if (isSpawned(npcId) && isSpawned(targetId)) {
-			final Npc npc = getNpc(npcId);
-			final Npc target = getNpc(targetId);
-			SkillEngine.getInstance().getSkill(npc, skillId, 100, target).useSkill();
-		}
+	private void handlePhaseProgress() {
+		sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDTIAMAT_TIAMAT_2PHASE_CLOSE_ALL());
+
+		int empyreanLordId = 219488 + raceId.get() * 3;
+		getNpc(219361).getEffectController().removeEffect(20984); // Dispel Unbreakable Wing
+
+		// schedule spawn of empyrean lords for final attack to tiamat before became exhausted
+		ThreadPoolManager.getInstance().schedule(() -> {
+			despawnNpc(empyreanLordId);
+			spawn(219489 + raceId.get() * 3, 516.285f, 514.84f, 417.405f, (byte) 60);
+		}, 30000);
 	}
 
-	private void despawnNpc(int npcId) {
-		Npc npc = getNpc(npcId);
-		if (npc != null) {
-			npc.getController().delete();
-		}
+	/**
+	 * Smalltalk between Tiamat and Kahrun
+	 */
+	private void handleDialogueEvent(Npc tiamat) {
+		Npc kahrun = getNpc(800341);
+		AIActions.targetCreature(tiamat.getAi(), kahrun);
+		PacketSendUtility.broadcastMessage(tiamat, 1500613, 5000);
+		PacketSendUtility.broadcastMessage(kahrun, 1500609, 10000);
+		PacketSendUtility.broadcastMessage(tiamat, 1500614, 15000);
+		PacketSendUtility.broadcastMessage(kahrun, 1500610, 20000);
+		PacketSendUtility.broadcastMessage(tiamat, 1500615, 26500);
+		PacketSendUtility.broadcastMessage(kahrun, 1500611, 31500);
+		ThreadPoolManager.getInstance().schedule(() -> AIActions.useSkill(kahrun.getAi(), 20597), 35500);
+		PacketSendUtility.broadcastMessage(tiamat, 1500616, 40000);
+		ThreadPoolManager.getInstance().schedule(() -> AIActions.useSkill(tiamat.getAi(), 20918), 49000);
+		PacketSendUtility.broadcastMessage(tiamat, 1500617, 44500);
+		ThreadPoolManager.getInstance().schedule(() -> {
+			kahrun.getController().delete();
+			tiamat.getController().delete();
+			spawn(219360, 452, 514, 432, (byte) 0);
+			spawn(219359, kahrun.getX(), kahrun.getY(), kahrun.getZ(), (byte) 0);
+		}, 54500);
 	}
 
-	private boolean isSpawned(int npcId) {
-		Npc npc = getNpc(npcId);
-		if (!isInstanceDestroyed && npc != null && !npc.isDead())
-			return true;
-		return false;
+	@Override
+	public void onEnterInstance(Player player) {
+		raceId.compareAndSet(10, player.getRace().getRaceId());
 	}
 
-	private void startFinalTimer() {
-		sendMsg(1401547);// broadcast message for start time
-
-		failTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				if (isSpawned(219362)) {
-					despawnNpc(219362); // despawn tiamat dragon
-					spawn(730694, 436.7526f, 513.8103f, 420.6662f, (byte) 0, 14); // re-spawn tiamat aetheric field
-					spawn(219360, 451.9700f, 514.5500f, 417.4044f, (byte) 0); // re-spawn tiamat woman to initial position
-					sendMsg(1401563); // broadcast message of instance failed
-					spawn(730630, 548.18683f, 514.54523f, 420f, (byte) 0, 23); // spawn exit
-				}
-			}
-		}, 1800000);
+	@Override
+	public void onCreatureDetected(Npc detector, Creature detected) {
+		if (detector.getNpcId() == 219360 && detected instanceof Player && progress.compareAndSet(0, 1))
+			handleDialogueEvent(detector);
 	}
 
-	private void healEmpyreanLord(int id) {
-		int npcId = instanceRace == Race.ELYOS ? 219488 : 219491;
-		int skill = 20993 + id;
-		Npc npc = instance.getNpc(npcId);
-		if (npc != null && !npc.isDead()) {
-			SkillEngine.getInstance().getSkill(npc, skill, 60, npc).useNoAnimationSkill(); // heal 7% + def buff
-			sendMsg(1401551);
-		}
-	}
-
-	private void checkIncarnationKills() {
-		int killedCount = specNpcKilled.incrementAndGet();
-		if (killedCount == 4) {
-			if (!isSpawned(219361)) {
-				return;
-			}
-			Npc npc = getNpc(219361);
-			final int npcId = instanceRace == Race.ELYOS ? 219488 : 219491;
-			final int msg = instanceRace == Race.ELYOS ? 1401540 : 1401541;
-			npc.getEffectController().removeEffect(20984);// dispel Unbreakable Wing (reflect)
-			sendMsg(1401537);
-			// schedule spawn of empyrean lords for final attack to tiamat before became exausted
-			ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-				@Override
-				public void run() {
-					if (isSpawned(npcId)) {
-						despawnNpc(npcId);
-						spawn(npcId + 1, 528f, 514f, 417.405f, (byte) 60);
-					}
-				}
-			}, 30000);
-			// schedule spawn of Tiamat 3rd Spawn
-			ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-				@Override
-				public void run() {
-					if (isSpawned(npcId + 1)) {
-						spawn(283137, 461f, 514f, 417.405f, (byte) 0);
-						spawn(283134, 461f, 514f, 417.405f, (byte) 0);
-						spawn(219362, 461f, 514f, 417.405f, (byte) 0);
-						ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-							@Override
-							public void run() {
-								despawnNpc(283134);
-								despawnNpc(283137);
-								despawnNpc(219361);
-								sendMsg(msg);
-								ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-									@Override
-									public void run() {
-										startFinalTimer();
-									}
-								}, 10000);
-							}
-						}, 2000);
-					}
-				}
-			}, 40000);
+	@Override
+	public void handleUseItemFinish(Player player, Npc npc) {
+		if (npc.getNpcId() == 730625) {
+			float distance = Rnd.get(250, 450) * 0.1f;
+			double radian = Math.toRadians(Rnd.get(-45, 60));
+			float x = (float) (Math.cos(radian) * distance);
+			float y = (float) (Math.sin(radian) * distance);
+			TeleportService.teleportTo(player, instance.getMapId(), 503.389f + x, 514.661f + y, 417.404f);
+			PacketSendUtility.broadcastToMap(getNpc(219360), new SM_CUSTOM_SETTINGS(getNpc(219360).getObjectId(), 0, CreatureType.PEACE.getId(), 0));
 		}
 	}
 
 	@Override
-	public void onInstanceDestroy() {
-		isInstanceDestroyed = true;
+	public void onPlayerLogOut(Player player) {
+		if (player.isDead())
+			TeleportService.teleportTo(player, instance.getStartPos());
 	}
 
 	@Override
-	public void onInstanceCreate(WorldMapInstance instance) {
-		super.onInstanceCreate(instance);
-	}
-
-	@Override
-	public boolean onDie(final Player player, Creature lastAttacker) {
+	public boolean onDie(Player player, Creature lastAttacker) {
 		PacketSendUtility.sendPacket(player, new SM_DIE(player, 8));
 		return true;
 	}
 
 	@Override
-	public void onEnterInstance(Player player) {
-		if (instanceRace == null) {
-			instanceRace = player.getRace();
-		}
+	public void onInstanceDestroy() {
+		if (failTask != null && !failTask.isCancelled())
+			failTask.cancel(true);
 	}
 
-	@Override
-	public void onExitInstance(Player player) {
-		TeleportService.moveToInstanceExit(player, mapId, player.getRace());
+	private void despawnNpc(int npcId) {
+		Npc npc = getNpc(npcId);
+		if (npc != null)
+			npc.getController().delete();
 	}
 }

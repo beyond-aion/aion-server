@@ -34375,56 +34375,6 @@
 		<npc_skill id="20751" lv="47" prob="15" />
 		<npc_skill id="20760" lv="47" prob="15" />
 	</npc_skills>
-	<npc_skills npc_ids="219359">
-		<npc_skill id="20963" lv="60" prob="70" cd="25000" />
-		<npc_skill id="20964" lv="60" prob="70" cd="25000" />
-	</npc_skills>
-	<npc_skills npc_ids="219361">
-		<npc_skill id="20921" lv="60" prob="70" cd="20000" />
-	</npc_skills>
-	<npc_skills npc_ids="219365">
-		<npc_skill id="20105" lv="60" prob="40" cd="20000" />
-		<npc_skill id="20145" lv="60" prob="40" cd="20000" />
-		<npc_skill id="20146" lv="60" prob="40" cd="20000" />
-		<npc_skill id="20147" lv="60" prob="40" cd="20000" />
-		<npc_skill id="20168" lv="60" prob="40" cd="20000" />
-		<npc_skill id="20169" lv="60" prob="40" cd="20000" />
-		<npc_skill id="20170" lv="60" prob="40" cd="20000" />
-		<npc_skill id="20171" lv="60" prob="40" cd="20000" />
-		<!--<npc_skill id="20172" lv="60" prob="40" cd="20000" /> penalty skill sets owner in sanctuary for 4min -->
-		<npc_skill id="20173" lv="60" prob="40" cd="20000" />
-	</npc_skills>
-	<npc_skills npc_ids="219366">
-		<npc_skill id="20105" lv="60" prob="40" cd="20000" />
-		<npc_skill id="20145" lv="60" prob="40" cd="20000" />
-		<npc_skill id="20146" lv="60" prob="40" cd="20000" />
-		<npc_skill id="20147" lv="60" prob="40" cd="20000" />
-		<npc_skill id="20155" lv="60" prob="40" cd="20000" />
-		<npc_skill id="20156" lv="60" prob="40" cd="20000" />
-		<npc_skill id="20157" lv="60" prob="40" cd="20000" />
-		<npc_skill id="20158" lv="60" prob="40" cd="20000" />
-	</npc_skills>
-	<npc_skills npc_ids="219367">
-		<npc_skill id="20105" lv="60" prob="40" cd="20000" />
-		<npc_skill id="20145" lv="60" prob="40" cd="20000" />
-		<npc_skill id="20146" lv="60" prob="40" cd="20000" />
-		<npc_skill id="20147" lv="60" prob="40" cd="20000" />
-		<npc_skill id="20162" lv="60" prob="40" cd="20000" />
-		<npc_skill id="20163" lv="60" prob="40" cd="20000" />
-		<npc_skill id="20164" lv="60" prob="40" cd="20000" />
-		<npc_skill id="20165" lv="60" prob="40" cd="20000" />
-		<npc_skill id="20166" lv="60" prob="40" cd="20000" />
-		<npc_skill id="20167" lv="60" prob="40" cd="20000" />
-	</npc_skills>
-	<npc_skills npc_ids="219368">
-		<npc_skill id="20105" lv="60" prob="40" cd="20000" />
-		<npc_skill id="20145" lv="60" prob="40" cd="20000" />
-		<npc_skill id="20146" lv="60" prob="40" cd="20000" />
-		<npc_skill id="20147" lv="60" prob="40" cd="20000" />
-		<npc_skill id="20159" lv="60" prob="40" cd="20000" />
-		<npc_skill id="20160" lv="60" prob="40" cd="20000" />
-		<npc_skill id="20161" lv="60" prob="40" cd="20000" />
-	</npc_skills>
 	<npc_skills npc_ids="219442">
 		<npc_skill id="20905" lv="60" prob="25" />
 		<npc_skill id="20906" lv="60" prob="25" />
