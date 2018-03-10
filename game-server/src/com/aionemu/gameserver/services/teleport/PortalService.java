@@ -359,7 +359,7 @@ public class PortalService {
 
 	private static void transfer(Player player, PortalLoc loc, WorldMapInstance instance, boolean reenter) {
 		if (instance.getStartPos() == null)
-			instance.setStartPos(loc.getX(), loc.getY(), loc.getZ());
+			instance.setStartPos(loc.getX(), loc.getY(), loc.getZ(), loc.getH());
 		InstanceService.registerPlayerWithInstance(instance, player);
 		TeleportService.teleportTo(player, loc.getWorldId(), instance.getInstanceId(), loc.getX(), loc.getY(), loc.getZ(), loc.getH(),
 			TeleportAnimation.FADE_OUT_BEAM);

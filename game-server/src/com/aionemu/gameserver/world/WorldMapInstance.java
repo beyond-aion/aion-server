@@ -80,7 +80,7 @@ public abstract class WorldMapInstance implements Iterable<VisibleObject> {
 	private Map<ZoneName, ZoneInstance> zones = new HashMap<>();
 	// TODO: Merge this with owner
 	private int soloPlayer;
-	private float[] startPos;
+	private WorldPosition startPos;
 	private int playerSize;
 
 	/**
@@ -167,7 +167,8 @@ public abstract class WorldMapInstance implements Iterable<VisibleObject> {
 						updateNearbyQuests = true;
 					}
 				}
-				if (updateNearbyQuests && updateNearbyQuestsTask == null) { // delayed with null check to prevent packet spam on multispawns (bases, siege, ...)
+				if (updateNearbyQuests && updateNearbyQuestsTask == null) { // delayed with null check to prevent packet spam on multispawns (bases, siege,
+																																		// ...)
 					updateNearbyQuestsTask = ThreadPoolManager.getInstance().schedule(() -> {
 						updateNearbyQuestsTask = null;
 						forEachPlayer(player -> player.getController().updateNearbyQuests());
@@ -330,11 +331,11 @@ public abstract class WorldMapInstance implements Iterable<VisibleObject> {
 		this.instanceHandler = instanceHandler;
 	}
 
-	public void setStartPos(float instanceStartPosX, float instanceStartPosY, float instanceStartPosZ) {
-		this.startPos = new float[] { instanceStartPosX, instanceStartPosY, instanceStartPosZ };
+	public void setStartPos(float startPosX, float startPosY, float startPosZ, byte startPosH) {
+		startPos.setXYZH(startPosX, startPosY, startPosZ, startPosH);
 	}
 
-	public float[] getStartPos() {
+	public WorldPosition getStartPos() {
 		return startPos;
 	}
 
