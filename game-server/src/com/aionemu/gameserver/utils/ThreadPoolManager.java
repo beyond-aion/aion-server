@@ -14,6 +14,7 @@ import java.util.concurrent.TimeUnit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.aionemu.commons.network.util.DeadLockDetector;
 import com.aionemu.commons.utils.concurrent.AionRejectedExecutionHandler;
 import com.aionemu.commons.utils.concurrent.PriorityThreadFactory;
 import com.aionemu.commons.utils.concurrent.RunnableWrapper;
@@ -37,6 +38,7 @@ public final class ThreadPoolManager {
 	private ThreadPoolManager() {
 		final int instantPoolSize = ThreadConfig.BASE_THREAD_POOL_SIZE * Runtime.getRuntime().availableProcessors();
 
+		new DeadLockDetector(60, DeadLockDetector.RESTART).start();
 		instantPool = new ThreadPoolExecutor(instantPoolSize, instantPoolSize, 0, TimeUnit.SECONDS, new ArrayBlockingQueue<Runnable>(100000),
 			new PriorityThreadFactory("InstantPool", ThreadConfig.USE_PRIORITIES ? 7 : Thread.NORM_PRIORITY));
 		instantPool.setRejectedExecutionHandler(new AionRejectedExecutionHandler());
