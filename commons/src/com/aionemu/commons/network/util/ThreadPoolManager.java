@@ -10,6 +10,7 @@ import java.util.concurrent.TimeUnit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.aionemu.commons.utils.concurrent.DeadLockDetector;
 import com.aionemu.commons.utils.concurrent.PriorityThreadFactory;
 import com.aionemu.commons.utils.concurrent.RunnableWrapper;
 import com.google.common.util.concurrent.JdkFutureAdapters;
@@ -24,25 +25,9 @@ import com.google.common.util.concurrent.MoreExecutors;
 public class ThreadPoolManager implements Executor {
 
 	/**
-	 * PriorityThreadFactory creating new threads for ThreadPoolManager
-	 */
-
-	private static class SingletonHolder {
-
-		protected static final ThreadPoolManager instance = new ThreadPoolManager();
-	}
-
-	/**
 	 * Logger for this class
 	 */
 	private static final Logger log = LoggerFactory.getLogger(ThreadPoolManager.class);
-
-	/**
-	 * @return ThreadPoolManager instance.
-	 */
-	public static final ThreadPoolManager getInstance() {
-		return SingletonHolder.instance;
-	}
 
 	/**
 	 * STPE for normal scheduled tasks
@@ -140,5 +125,14 @@ public class ThreadPoolManager implements Executor {
 		} catch (InterruptedException e) {
 			log.error("Can't shutdown ThreadPoolManager", e);
 		}
+	}
+
+	public static final ThreadPoolManager getInstance() {
+		return SingletonHolder.instance;
+	}
+
+	private static class SingletonHolder {
+
+		protected static final ThreadPoolManager instance = new ThreadPoolManager();
 	}
 }

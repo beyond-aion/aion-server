@@ -14,6 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.utils.concurrent.AionRejectedExecutionHandler;
+import com.aionemu.commons.utils.concurrent.DeadLockDetector;
 import com.aionemu.commons.utils.concurrent.RunnableWrapper;
 import com.aionemu.commons.utils.concurrent.ScheduledFutureWrapper;
 
@@ -32,10 +33,10 @@ public final class ThreadPoolManager {
 	private final ThreadPoolExecutor longRunningPool;
 
 	private ThreadPoolManager() {
-
 		int threadpoolsize = 2 + Runtime.getRuntime().availableProcessors() * 4;
 		final int instantPoolSize = Math.max(1, threadpoolsize / 3);
 
+		new DeadLockDetector(60, DeadLockDetector.RESTART).start();
 		scheduledPool = new ScheduledThreadPoolExecutor(threadpoolsize - instantPoolSize);
 		scheduledPool.setRejectedExecutionHandler(new AionRejectedExecutionHandler());
 		scheduledPool.prestartAllCoreThreads();
