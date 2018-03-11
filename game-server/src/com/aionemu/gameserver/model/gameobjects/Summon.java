@@ -233,8 +233,8 @@ public class Summon extends Creature {
 		super.setTarget(target);
 	}
 
-	public void addSkillOrder(int skillId, int skillLvl, boolean release, Creature target) {
-		this.skillOrders.add(new SkillOrder(skillId, skillLvl, release, target));
+	public void addSkillOrder(int skillId, int skillLvl, Creature target, int hate, boolean release) {
+		skillOrders.add(new SkillOrder(skillId, skillLvl, target, hate, release));
 	}
 
 	public SkillOrder retrieveNextSkillOrder() {

@@ -12,7 +12,6 @@ import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AISubState;
 import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.ai.event.AIEventType;
-import com.aionemu.gameserver.controllers.attack.AggroList;
 import com.aionemu.gameserver.controllers.attack.AttackResult;
 import com.aionemu.gameserver.controllers.attack.AttackStatus;
 import com.aionemu.gameserver.controllers.attack.AttackUtil;
@@ -498,21 +497,6 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 			log.error("Exception during skill use: " + skillId, ex);
 		}
 		return false;
-	}
-
-	/**
-	 * Notify hate value to all visible creatures
-	 * 
-	 * @param value
-	 */
-	public void broadcastHate(int value) {
-		getOwner().getKnownList().forEachObject(visibleObject -> {
-			if (visibleObject instanceof Creature) {
-				AggroList al = ((Creature) visibleObject).getAggroList();
-				if (al.isHating(getOwner()))
-					al.addHate(getOwner(), value);
-			}
-		});
 	}
 
 	public Skill abortCast() {

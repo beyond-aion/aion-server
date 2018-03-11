@@ -10,6 +10,7 @@ import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.aionemu.commons.utils.Rnd;
+import com.aionemu.gameserver.controllers.attack.AggroList;
 import com.aionemu.gameserver.controllers.attack.AttackStatus;
 import com.aionemu.gameserver.controllers.observer.ActionObserver;
 import com.aionemu.gameserver.controllers.observer.AttackCalcObserver;
@@ -129,6 +130,7 @@ public class Effect implements StatOwner {
 
 	public Effect(Skill skill, Creature effected) {
 		this(skill.getEffector(), effected, skill.getSkillTemplate(), skill.getSkillLevel(), null, null);
+		this.effectHate = skill.getHate();
 		this.skill = skill;
 	}
 
@@ -555,7 +557,8 @@ public class Effect implements StatOwner {
 		if (!isInSuccessEffects(1)) {
 			successEffects.clear();
 		} else {
-			effectHate = calculateHateForSuccessEffects();
+			if (effectHate == 0) // can be overridden from constructor with skill (from pet order)
+				effectHate = calculateHateForSuccessEffects();
 			if (isLaunchSubEffect()) {
 				for (EffectTemplate template : successEffects.values()) {
 					template.calculateSubEffect(this);
@@ -633,9 +636,14 @@ public class Effect implements StatOwner {
 	public void broadcastHate() {
 		if (effectHate != 0 && tauntHate >= 0) { // don't add hate if taunt hate is < 0!
 			Creature effected = getEffected();
-			if (effected instanceof Npc && !isDelayedDamage() && !isPetOrder() && !isSummoning())
-				effected.getAggroList().addHate(effector, 1);
-			effector.getController().broadcastHate(effectHate);
+			effected.getAggroList().addHate(effector, effectHate);
+			effected.getKnownList().forEachObject(visibleObject -> {
+				if (visibleObject instanceof Creature) {
+					AggroList al = ((Creature) visibleObject).getAggroList();
+					if (al.isHating(effector))
+						al.addHate(effector, effectHate);
+				}
+			});
 			effectHate = 0; // set to 0 to avoid external second broadcast
 		}
 	}
@@ -819,6 +827,10 @@ public class Effect implements StatOwner {
 				addedToController = true;
 			}
 		}
+	}
+
+	public int getEffectHate() {
+		return effectHate;
 	}
 
 	/**
@@ -1208,10 +1220,6 @@ public class Effect implements StatOwner {
 
 	public boolean isDelayedDamage() {
 		return getSkillTemplate().hasAnyEffect(EffectType.DELAYEDSPELLATTACKINSTANT);
-	}
-
-	public boolean isPetOrder() {
-		return getSkillTemplate().hasAnyEffect(EffectType.PETORDERUSEULTRASKILL);
 	}
 
 	public boolean isSummoning() {
