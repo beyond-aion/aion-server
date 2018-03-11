@@ -26,17 +26,7 @@ public class AhserionGate extends NoActionAI {
 	}
 
 	private void useBuff() {
-		switch (getNpcId()) {
-			case 277229:
-				SkillEngine.getInstance().applyEffectDirectly(21515, 50, getOwner(), getOwner(), null, ForceType.DEFAULT);
-				break;
-			case 277230:
-				SkillEngine.getInstance().applyEffectDirectly(21515, 60, getOwner(), getOwner(), null, ForceType.DEFAULT);
-				break;
-			case 277231:
-				SkillEngine.getInstance().applyEffectDirectly(21515, 70, getOwner(), getOwner(), null, ForceType.DEFAULT);
-				break;
-		}
+		SkillEngine.getInstance().applyEffectDirectly(21515, getNpcId() - 277227, getOwner(), getOwner(), null, ForceType.DEFAULT);
 		getOwner().setTarget(null);
 	}
 

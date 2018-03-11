@@ -61,7 +61,7 @@ public interface InstanceHandler {
 	void onStopTraining(Player player);
 
 	void onDie(Npc npc);
-	
+
 	void onSpawn(VisibleObject obj);
 
 	void onChangeStage(StageType type);
@@ -84,10 +84,12 @@ public interface InstanceHandler {
 
 	void onAggro(Npc npc);
 
+	void onStartEffect(Effect effect);
+
 	void onEndEffect(Effect effect);
-	
+
 	void onCreatureDetected(Npc detector, Creature detected);
-	
+
 	void onSpecialEvent(Npc npc);
 
 	boolean canEnter(Player player);

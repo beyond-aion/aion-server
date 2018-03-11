@@ -1,7 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <npc_skill_templates xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../npc_skills.xsd">
-	<!-- Tiamat -->
-	<npc_skills npc_ids="219360">
-		<npc_skill id="20917" lv="1" is_post_spawn="true" />
+	<!-- Calindi Flamelord -->
+	<npc_skills npc_ids="219359">
+		<npc_skill id="20963" lv="60" prob="70" cd="25000" />
+		<npc_skill id="20964" lv="60" prob="70" cd="25000" />
+	</npc_skills>
+	<!-- Fissurefang -->
+	<npc_skills npc_ids="219365">
+		<npc_skill id="20105" lv="60" prob="40" cd="15000" />
+		<npc_skill id="20145" lv="60" prob="70" />
+		<npc_skill id="20146" lv="60" prob="40" />
+		<npc_skill id="20169" lv="60" prob="40" />
+	</npc_skills>
+	<!-- Graviwing -->
+	<npc_skills npc_ids="219366">
+		<npc_skill id="20105" lv="60" prob="40" cd="15000" />
+		<npc_skill id="20145" lv="60" prob="70" />
+		<npc_skill id="20146" lv="60" prob="40" />
+		<npc_skill id="20157" lv="60" prob="40" />
+	</npc_skills>
+	<!-- Wrathclaw -->
+	<npc_skills npc_ids="219367">
+		<npc_skill id="20105" lv="60" prob="40" cd="15000" />
+		<npc_skill id="20145" lv="60" prob="40" />
+		<npc_skill id="20146" lv="60" prob="40" />
+		<npc_skill id="20165" lv="60" prob="20" max_hp="25" />
+		<npc_skill id="20166" lv="60" prob="40" />
+	</npc_skills>
+	<!-- Petriscale -->
+	<npc_skills npc_ids="219368">
+		<npc_skill id="20105" lv="60" prob="40" cd="15000" />
+		<npc_skill id="20145" lv="60" prob="70" />
+		<npc_skill id="20146" lv="60" prob="40" />
+		<npc_skill id="20161" lv="60" prob="40" />
+	</npc_skills>
+	<!-- Divisive Creation -->
+	<npc_skills npc_ids="283139">
+		<npc_skill id="20986" lv="60" prob="100" />
+	</npc_skills>
+	<!-- Sinking Sand -->
+	<npc_skills npc_ids="283136">
+		<npc_skill id="20965" lv="60" prob="100">
+			<cond delay="1000" despawn_time="3000" />
+		</npc_skill>
+	</npc_skills>
+	<!-- Rockslam -->
+	<npc_skills npc_ids="283138">
+		<npc_skill id="20968" lv="60" prob="100">
+			<cond delay="1000" despawn_time="3000" />
+		</npc_skill>
+	</npc_skills>
+	<!-- Infinite Pain -->
+	<npc_skills npc_ids="283144">
+		<npc_skill id="20969" lv="60" prob="100">
+			<cond delay="1000" despawn_time="3000" />
+		</npc_skill>
 	</npc_skills>
 </npc_skill_templates>

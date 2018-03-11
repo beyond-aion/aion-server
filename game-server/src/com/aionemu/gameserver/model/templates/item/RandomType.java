@@ -48,7 +48,8 @@ public enum RandomType {
 	POTION,
 	LESSER_POTIONS,
 	POTION_50,
-	ILLUSION_GODSTONE;
+	ILLUSION_GODSTONE,
+	PREMIUM_OPHIDAN_RECIPE;
 
 	private int level;
 

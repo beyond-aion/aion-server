@@ -127,7 +127,7 @@ public class GeneralInstanceHandler implements InstanceHandler {
 	protected void sendMsg(SM_SYSTEM_MESSAGE msg, int delay) {
 		PacketSendUtility.broadcastToMap(instance, msg, delay);
 	}
-	
+
 	@Override
 	public float getInstanceExpMultiplier() {
 		return instance != null && instance.getParent().isInstanceType() ? 1.5f : 1.25f; // instance maps * 1.5, world maps * 1.25
@@ -200,6 +200,11 @@ public class GeneralInstanceHandler implements InstanceHandler {
 	@Override
 	public boolean canUseSkill(Player player, Skill skill) {
 		return true;
+	}
+
+	@Override
+	public void onStartEffect(Effect effect) {
+
 	}
 
 	@Override

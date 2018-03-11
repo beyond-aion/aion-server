@@ -1,8 +1,8 @@
 package ai.instance.dragonLordsRefuge;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.Future;
-import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
 
 import com.aionemu.commons.utils.Rnd;
@@ -13,87 +13,87 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.skill.QueuedNpcSkillEntry;
 import com.aionemu.gameserver.model.templates.npcskill.QueuedNpcSkillTemplate;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
-import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.PositionUtil;
-import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 import ai.AggressiveNpcAI;
 
 /**
  * @author Cheatkiller
+ * @reworked Yeats
+ * @modified Estrayl March 8th, 2018
  */
-@AIName("calindiflamelord60")
+@AIName("IDTiamat_2_calindi_flamelord")
 public class CalindiFlamelordAI extends AggressiveNpcAI {
 
-	private AtomicBoolean isHome = new AtomicBoolean(true);
-	private Future<?> trapTask;
-	private boolean isFinalBuff;
+	private List<Integer> percents = new ArrayList<>();
 
 	public CalindiFlamelordAI(Npc owner) {
 		super(owner);
 	}
 
 	@Override
+	protected void handleSpawned() {
+		super.handleSpawned();
+		addPercents();
+	}
+
+	@Override
+	protected void handleBackHome() {
+		super.handleBackHome();
+		addPercents();
+	}
+
+	@Override
 	protected void handleAttack(Creature creature) {
 		super.handleAttack(creature);
-		if (isHome.compareAndSet(true, false))
-			startSkillTask();
-		if (!isFinalBuff) {
-			blazeEngraving();
-			if (getOwner().getLifeStats().getHpPercentage() <= 12) {
-				isFinalBuff = true;
-				cancelTask();
-				getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(20915, 1, 100)));
-			}
-		}
+		blazeEngraving();
+		checkPercentage(getLifeStats().getHpPercentage());
 	}
 
-	private void startSkillTask() {
-		trapTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
-			if (isDead())
-				cancelTask();
-			else {
-				startHallucinatoryVictoryEvent();
+	private synchronized void checkPercentage(int hpPercentage) {
+		for (Integer percent : percents) {
+			if (hpPercentage <= percent) {
+				percents.remove(percent);
+				switch (percent) {
+					case 75:
+					case 50:
+					case 25:
+						startHallucinatoryVictoryEvent();
+						break;
+					case 12:
+						getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(20942, 1, 100)));
+						break;
+				}
+				break;
 			}
-		}, 5000, 80000);
-	}
-
-	private void cancelTask() {
-		if (trapTask != null && !trapTask.isCancelled()) {
-			trapTask.cancel(true);
 		}
 	}
 
 	private void startHallucinatoryVictoryEvent() {
-		if (getPosition().getWorldMapInstance().getNpc(730695) == null && getPosition().getWorldMapInstance().getNpc(730696) == null) {
+		if (getPosition().getWorldMapInstance().getNpc(730695) == null && getPosition().getWorldMapInstance().getNpc(730696) == null)
 			getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(20911, 1, 100)));
-		}
 	}
 
 	@Override
 	public void onEndUseSkill(SkillTemplate skillTemplate) {
 		switch (skillTemplate.getSkillId()) {
 			case 20911:
-				SkillEngine.getInstance().applyEffectDirectly(20590, getOwner(), getOwner());
-				SkillEngine.getInstance().applyEffectDirectly(20591, getOwner(), getOwner());
 				spawn(730695, 482.21f, 458.06f, 427.42f, (byte) 98);
 				spawn(730696, 482.21f, 571.16f, 427.42f, (byte) 22);
 				rndSpawn();
 				break;
 			case 20913:
 				Player target = getRandomTarget();
-				if (target != null) {
+				if (target != null)
 					spawn(283130, target.getX(), target.getY(), target.getZ(), (byte) 0);
-				}
 		}
 	}
 
 	private void blazeEngraving() {
-		if (Rnd.chance() < 2 && getPosition().getWorldMapInstance().getNpc(283130) == null) {
+		if (Rnd.chance() < 2 && getPosition().getWorldMapInstance().getNpc(283130) == null)
 			getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(20913, 60, 100)));
-		}
 	}
 
 	private void rndSpawn() {
@@ -118,23 +118,8 @@ public class CalindiFlamelordAI extends AggressiveNpcAI {
 		return Rnd.get(players);
 	}
 
-	@Override
-	protected void handleDied() {
-		super.handleDied();
-		cancelTask();
-	}
-
-	@Override
-	protected void handleDespawned() {
-		super.handleDespawned();
-		cancelTask();
-	}
-
-	@Override
-	protected void handleBackHome() {
-		super.handleBackHome();
-		cancelTask();
-		isFinalBuff = false;
-		isHome.set(true);
+	private void addPercents() {
+		percents.clear();
+		Collections.addAll(percents, new Integer[] { 75, 50, 25, 12 });
 	}
 }

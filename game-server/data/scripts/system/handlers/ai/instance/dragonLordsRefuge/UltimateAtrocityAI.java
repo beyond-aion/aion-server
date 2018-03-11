@@ -4,16 +4,20 @@ import java.util.concurrent.Future;
 
 import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
-import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.model.templates.item.ItemAttackType;
+import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
+
+import ai.GeneralNpcAI;
 
 /**
  * @author Luzien
+ * @modified Estrayl March 10th, 2018
  */
-@AIName("ultimateatrocity")
-public class UltimateAtrocityAI extends NpcAI {
+@AIName("ultimate_atrocity")
+public class UltimateAtrocityAI extends GeneralNpcAI {
 
 	private Future<?> task;
 
@@ -22,41 +26,37 @@ public class UltimateAtrocityAI extends NpcAI {
 	}
 
 	@Override
+	public ItemAttackType modifyAttackType(ItemAttackType type) {
+		return ItemAttackType.MAGICAL_FIRE;
+	}
+
+	@Override
+	public int modifyOwnerDamage(int damage, Effect effect) {
+		return damage / 4;
+	}
+
+	@Override
 	protected void handleSpawned() {
 		super.handleSpawned();
-		final int skill;
+		int skill;
 		switch (getNpcId()) {
-			case 283237:
-				skill = 20598;
-				break;
 			case 283244:
 				skill = 21160;
 				break;
 			case 283240:
 				skill = 21156;
 				break;
+			case 283237:
+			case 283241:
+				skill = 20923;
+				break;
 			default:
-				skill = 0;
+				return;
 		}
 
-		if (skill == 0)
-			return;
+		task = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> AIActions.useSkill(this, skill), 500, 2000);
 
-		task = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
-
-			@Override
-			public void run() {
-				AIActions.useSkill(UltimateAtrocityAI.this, skill);
-			}
-		}, 0, 2000);
-
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				AIActions.deleteOwner(UltimateAtrocityAI.this);
-			}
-		}, 11000);
+		ThreadPoolManager.getInstance().schedule(() -> AIActions.deleteOwner(this), 11000);
 	}
 
 	@Override

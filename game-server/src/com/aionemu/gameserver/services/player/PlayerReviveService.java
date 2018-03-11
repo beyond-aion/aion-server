@@ -192,8 +192,8 @@ public class PlayerReviveService {
 		PacketSendUtility.sendPacket(player, new SM_PLAYER_INFO(player));
 		PacketSendUtility.sendPacket(player, new SM_MOTION(player.getObjectId(), player.getMotions().getActiveMotions()));
 		if (map.isInstanceType() && player.getPosition().getWorldMapInstance().getStartPos() != null) {
-			float[] coords = player.getPosition().getWorldMapInstance().getStartPos();
-			TeleportService.teleportTo(player, player.getWorldId(), coords[0], coords[1], coords[2]);
+			WorldPosition pos = player.getPosition().getWorldMapInstance().getStartPos();
+			TeleportService.teleportTo(player, pos.getMapId(), pos.getX(), pos.getY(), pos.getZ());
 		} else
 			bindRevive(player);
 		player.unsetResPosState();

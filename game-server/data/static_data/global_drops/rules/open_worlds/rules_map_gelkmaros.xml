@@ -36,16 +36,9 @@
 		</gd_npcs>
 		<gd_items>
 			<!-- 50% Lesser, 30% Normal, 20% Greater -->
-			<gd_item id="188053691" /><!-- Gelkmaros Lesser Conqueror's Mark Box -->
-			<gd_item id="188053691" /><!-- Gelkmaros Lesser Conqueror's Mark Box -->
-			<gd_item id="188053691" /><!-- Gelkmaros Lesser Conqueror's Mark Box -->
-			<gd_item id="188053691" /><!-- Gelkmaros Lesser Conqueror's Mark Box -->
-			<gd_item id="188053691" /><!-- Gelkmaros Lesser Conqueror's Mark Box -->
-			<gd_item id="188053692" /><!-- Gelkmaros Conqueror's Mark Box -->
-			<gd_item id="188053692" /><!-- Gelkmaros Conqueror's Mark Box -->
-			<gd_item id="188053692" /><!-- Gelkmaros Conqueror's Mark Box -->
-			<gd_item id="188053693" /><!-- Gelkmaros Greater Conqueror's Mark Box -->
-			<gd_item id="188053693" /><!-- Gelkmaros Greater Conqueror's Mark Box -->
+			<gd_item id="188053691" chance="50" /><!-- Gelkmaros Lesser Conqueror's Mark Box -->
+			<gd_item id="188053692" chance="30" /><!-- Gelkmaros Conqueror's Mark Box -->
+			<gd_item id="188053693" chance="20" /><!-- Gelkmaros Greater Conqueror's Mark Box -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Gelkmaros Conqueror's Mark Box (Vulgar)" base_chance="100" min_count="3">
@@ -83,27 +76,75 @@
 			<gd_npc npc_id="236418" /><!-- Vulgar Gelkmaros Strigik Shaman -->
 		</gd_npcs>
 		<gd_items>
-			<!-- 40% Lesser, 35% Normal, 25% Greater -->
-			<gd_item id="188053691" /><!-- Gelkmaros Lesser Conqueror's Mark Box -->
-			<gd_item id="188053691" /><!-- Gelkmaros Lesser Conqueror's Mark Box -->
-			<gd_item id="188053691" /><!-- Gelkmaros Lesser Conqueror's Mark Box -->
-			<gd_item id="188053691" /><!-- Gelkmaros Lesser Conqueror's Mark Box -->
-			<gd_item id="188053691" /><!-- Gelkmaros Lesser Conqueror's Mark Box -->
-			<gd_item id="188053691" /><!-- Gelkmaros Lesser Conqueror's Mark Box -->
-			<gd_item id="188053691" /><!-- Gelkmaros Lesser Conqueror's Mark Box -->
-			<gd_item id="188053691" /><!-- Gelkmaros Lesser Conqueror's Mark Box -->
-			<gd_item id="188053692" /><!-- Gelkmaros Conqueror's Mark Box -->
-			<gd_item id="188053692" /><!-- Gelkmaros Conqueror's Mark Box -->
-			<gd_item id="188053692" /><!-- Gelkmaros Conqueror's Mark Box -->
-			<gd_item id="188053692" /><!-- Gelkmaros Conqueror's Mark Box -->
-			<gd_item id="188053692" /><!-- Gelkmaros Conqueror's Mark Box -->
-			<gd_item id="188053692" /><!-- Gelkmaros Conqueror's Mark Box -->
-			<gd_item id="188053692" /><!-- Gelkmaros Conqueror's Mark Box -->
-			<gd_item id="188053693" /><!-- Gelkmaros Greater Conqueror's Mark Box -->
-			<gd_item id="188053693" /><!-- Gelkmaros Greater Conqueror's Mark Box -->
-			<gd_item id="188053693" /><!-- Gelkmaros Greater Conqueror's Mark Box -->
-			<gd_item id="188053693" /><!-- Gelkmaros Greater Conqueror's Mark Box -->
-			<gd_item id="188053693" /><!-- Gelkmaros Greater Conqueror's Mark Box -->
+			<gd_item id="188053691" chance="40" /><!-- Gelkmaros Lesser Conqueror's Mark Box -->
+			<gd_item id="188053692" chance="35" /><!-- Gelkmaros Conqueror's Mark Box -->
+			<gd_item id="188053693" chance="25" /><!-- Gelkmaros Greater Conqueror's Mark Box -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Lv70 Composite Stone Bundle" base_chance="0.09" min_count="1">
+		<gd_maps>
+			<gd_map map_id="220070000" /><!-- Gelkmaros -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="236363" /><!-- Gelkmaros Dionae -->
+			<gd_npc npc_id="236364" /><!-- Gelkmaros Spaken -->
+			<gd_npc npc_id="236365" /><!-- Gelkmaros Cellatu -->
+			<gd_npc npc_id="236366" /><!-- Gelkmaros Luciferin -->
+			<gd_npc npc_id="236367" /><!-- Gelkmaros Dragrint -->
+			<gd_npc npc_id="236368" /><!-- Gelkmaros Leowasp -->
+			<gd_npc npc_id="236369" /><!-- Gelkmaros Crestlich -->
+			<gd_npc npc_id="236370" /><!-- Gelkmaros Serrator -->
+			<gd_npc npc_id="236371" /><!-- Gelkmaros Petrahulk -->
+			<gd_npc npc_id="236372" /><!-- Gelkmaros Scolopen -->
+			<gd_npc npc_id="236373" /><!-- Gelkmaros Wraithling -->
+			<gd_npc npc_id="236374" /><!-- Gelkmaros Zanthay -->
+			<gd_npc npc_id="236375" /><!-- Gelkmaros Barghest -->
+			<gd_npc npc_id="236376" /><!-- Gelkmaros Supraklaw -->
+			<gd_npc npc_id="236377" /><!-- Gelkmaros Murmur -->
+			<gd_npc npc_id="236378" /><!-- Gelkmaros Kalgolem -->
+			<gd_npc npc_id="236379" /><!-- Gelkmaros Bosbear -->
+			<gd_npc npc_id="236380" /><!-- Gelkmaros Luciferin -->
+			<gd_npc npc_id="236381" /><!-- Gelkmaros Gryphu -->
+			<gd_npc npc_id="236382" /><!-- Gelkmaros Dionae -->
+			<gd_npc npc_id="236383" /><!-- Gelkmaros Puca -->
+			<gd_npc npc_id="236384" /><!-- Gelkmaros Neokin -->
+			<gd_npc npc_id="236385" /><!-- Gelkmaros Earth Spirit -->
+			<gd_npc npc_id="236386" /><!-- Gelkmaros Caprex -->
+			<gd_npc npc_id="236387" /><!-- Gelkmaros Strigik Herbalist -->
+			<gd_npc npc_id="236388" /><!-- Gelkmaros Strigik Warrior -->
+			<gd_npc npc_id="236389" /><!-- Gelkmaros Strigik Assailant -->
+			<gd_npc npc_id="236390" /><!-- Gelkmaros Strigik Shaman -->
+			<gd_npc npc_id="236391" /><!-- Vulgar Gelkmaros Dionae -->
+			<gd_npc npc_id="236392" /><!-- Vulgar Gelkmaros Spaken -->
+			<gd_npc npc_id="236393" /><!-- Vulgar Gelkmaros Cellatu -->
+			<gd_npc npc_id="236394" /><!-- Vulgar Gelkmaros Luciferin -->
+			<gd_npc npc_id="236395" /><!-- Vulgar Gelkmaros Dragrint -->
+			<gd_npc npc_id="236396" /><!-- Vulgar Gelkmaros Leowasp -->
+			<gd_npc npc_id="236397" /><!-- Vulgar Gelkmaros Crestlich -->
+			<gd_npc npc_id="236398" /><!-- Vulgar Gelkmaros Serrator -->
+			<gd_npc npc_id="236399" /><!-- Vulgar Gelkmaros Petrahulk -->
+			<gd_npc npc_id="236400" /><!-- Vulgar Gelkmaros Scolopen -->
+			<gd_npc npc_id="236401" /><!-- Vulgar Gelkmaros Wraithling -->
+			<gd_npc npc_id="236402" /><!-- Vulgar Gelkmaros Zanthay -->
+			<gd_npc npc_id="236403" /><!-- Vulgar Gelkmaros Barghest -->
+			<gd_npc npc_id="236404" /><!-- Vulgar Gelkmaros Supraklwar -->
+			<gd_npc npc_id="236405" /><!-- Vulgar Gelkmaros Murmur -->
+			<gd_npc npc_id="236406" /><!-- Vulgar Gelkmaros Kalgolem -->
+			<gd_npc npc_id="236407" /><!-- Vulgar Gelkmaros Bosbear -->
+			<gd_npc npc_id="236408" /><!-- Vulgar Gelkmaros Luciferin -->
+			<gd_npc npc_id="236409" /><!-- Vulgar Gelkmaros Gryphu -->
+			<gd_npc npc_id="236410" /><!-- Vulgar Gelkmaros Dionae -->
+			<gd_npc npc_id="236411" /><!-- Vulgar Gelkmaros Puca -->
+			<gd_npc npc_id="236412" /><!-- Vulgar Gelkmaros Neokin -->
+			<gd_npc npc_id="236413" /><!-- Vulgar Gelkmaros Earth Spirit -->
+			<gd_npc npc_id="236414" /><!-- Vulgar Gelkmaros Caprex -->
+			<gd_npc npc_id="236415" /><!-- Vulgar Gelkmaros Strigik Herbalist -->
+			<gd_npc npc_id="236416" /><!-- Vulgar Gelkmaros Strigik Warrior -->
+			<gd_npc npc_id="236417" /><!-- Vulgar Gelkmaros Strigik Assailant -->
+			<gd_npc npc_id="236418" /><!-- Vulgar Gelkmaros Strigik Shaman -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="188053745" /><!-- Elegant High Grade Composite Manastone Bundle -->
 		</gd_items>
 	</gd_rule>
 </global_rules>
