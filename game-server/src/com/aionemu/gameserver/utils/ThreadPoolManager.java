@@ -3,6 +3,7 @@ package com.aionemu.gameserver.utils;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.Future;
@@ -15,6 +16,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.utils.concurrent.AionRejectedExecutionHandler;
+import com.aionemu.commons.utils.concurrent.DeadLockDetector;
 import com.aionemu.commons.utils.concurrent.PriorityThreadFactory;
 import com.aionemu.commons.utils.concurrent.RunnableWrapper;
 import com.aionemu.gameserver.configs.main.ThreadConfig;
@@ -22,7 +24,7 @@ import com.aionemu.gameserver.configs.main.ThreadConfig;
 /**
  * @author -Nemesiss-, NB4L1, MrPoke, lord_rex
  */
-public final class ThreadPoolManager {
+public final class ThreadPoolManager implements Executor {
 
 	private static final Logger log = LoggerFactory.getLogger(ThreadPoolManager.class);
 
@@ -37,6 +39,7 @@ public final class ThreadPoolManager {
 	private ThreadPoolManager() {
 		final int instantPoolSize = ThreadConfig.BASE_THREAD_POOL_SIZE * Runtime.getRuntime().availableProcessors();
 
+		new DeadLockDetector(60, DeadLockDetector.RESTART).start();
 		instantPool = new ThreadPoolExecutor(instantPoolSize, instantPoolSize, 0, TimeUnit.SECONDS, new ArrayBlockingQueue<Runnable>(100000),
 			new PriorityThreadFactory("InstantPool", ThreadConfig.USE_PRIORITIES ? 7 : Thread.NORM_PRIORITY));
 		instantPool.setRejectedExecutionHandler(new AionRejectedExecutionHandler());
@@ -53,13 +56,7 @@ public final class ThreadPoolManager {
 		WorkStealThreadFactory forkJoinThreadFactory = new WorkStealThreadFactory("ForkJoinPool");
 		workStealingPool = new ForkJoinPool(Runtime.getRuntime().availableProcessors(), forkJoinThreadFactory, null, true);
 
-		Thread maintainThread = new Thread(new Runnable() {
-
-			@Override
-			public void run() {
-				purge();
-			}
-		}, "ThreadPool Purge Task");
+		Thread maintainThread = new Thread(() -> purge(), "ThreadPool Purge Task");
 
 		maintainThread.setDaemon(true);
 		scheduleAtFixedRate(maintainThread, 150000, 150000);
@@ -100,6 +97,7 @@ public final class ThreadPoolManager {
 		return workStealingPool;
 	}
 
+	@Override
 	public final void execute(Runnable r) {
 		r = new ThreadPoolRunnableWrapper(r);
 		instantPool.execute(r);

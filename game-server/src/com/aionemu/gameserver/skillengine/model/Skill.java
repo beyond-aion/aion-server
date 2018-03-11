@@ -98,6 +98,7 @@ public class Skill {
 	private int chainUsageDuration = 0;
 	private volatile boolean isMultiCast = false;
 	private float[] chargeTimes;
+	private int hate;
 
 	public enum SkillMethod {
 		CAST,
@@ -1213,5 +1214,13 @@ public class Skill {
 	 */
 	public boolean isInstantSkill() {
 		return instantSkill;
+	}
+
+	public int getHate() {
+		return hate;
+	}
+
+	public void setHate(int hate) {
+		this.hate = hate;
 	}
 }

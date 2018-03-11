@@ -47,8 +47,8 @@ public class PetOrderUseUltraSkillEffect extends EffectTemplate {
 
 		int skillLvl = skillTemplate.getLvl();
 		int targetId = effect.getEffected().getObjectId();
-
-		effector.getSummon().addSkillOrder(petUseSkillId, skillLvl, release, effect.getEffected());
+		int hate = effect.getEffectHate() > 1 ? effect.getEffectHate() : 0;
+		effector.getSummon().addSkillOrder(petUseSkillId, skillLvl, effect.getEffected(), hate, release);
 		PacketSendUtility.sendPacket(effector, new SM_SUMMON_USESKILL(effectorId, petUseSkillId, skillLvl, targetId));
 	}
 

@@ -18,7 +18,9 @@ public class StatRateFunction extends StatFunction {
 	@Override
 	public void apply(Stat2 stat) {
 		if (isBonus()) {
-			stat.addToBonus((int) (stat.getBaseWithoutBaseRate() * getValue() / 100f));
+			// calculate relative to current resultValue if negative, otherwise we end up with <= 0% with multiple stat functions
+			int baseValue = getValue() < 0 && stat.getBonus() < 0 ? stat.getCurrent() : stat.getBaseWithoutBaseRate();
+			stat.addToBonus((int) (baseValue * getValue() / 100f));
 		} else {
 			stat.setBase((int) (stat.getBaseWithoutBaseRate() * stat.calculatePercent(getValue())));
 		}

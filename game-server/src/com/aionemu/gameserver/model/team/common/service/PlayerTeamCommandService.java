@@ -1,38 +1,36 @@
 package com.aionemu.gameserver.model.team.common.service;
 
+import java.util.Objects;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.team.TeamMember;
+import com.aionemu.gameserver.model.team.TemporaryPlayerTeam;
+import com.aionemu.gameserver.model.team.alliance.PlayerAlliance;
 import com.aionemu.gameserver.model.team.alliance.PlayerAllianceService;
 import com.aionemu.gameserver.model.team.alliance.events.AssignViceCaptainEvent.AssignType;
 import com.aionemu.gameserver.model.team.common.events.TeamCommand;
 import com.aionemu.gameserver.model.team.group.PlayerGroupService;
+import com.aionemu.gameserver.model.team.league.League;
 import com.aionemu.gameserver.model.team.league.LeagueMember;
 import com.aionemu.gameserver.model.team.league.LeagueService;
-import com.google.common.base.Preconditions;
 
 /**
  * @author ATracer
  */
 public class PlayerTeamCommandService {
 
-	public static final void executeCommand(Player player, TeamCommand command, int playerObjId) {
-		Player teamSubjective = getTeamSubjective(player, playerObjId);
-		// if playerObjId is not 0 - subjective should not be active player
-		Preconditions.checkArgument(playerObjId == 0 || command == TeamCommand.LEAGUE_SET_LEADER || teamSubjective.getObjectId() == playerObjId
-			|| command == TeamCommand.LEAGUE_EXPEL, "Wrong command detected " + command);
-		execute(player, command, teamSubjective);
-	}
-
-	private static final void execute(Player player, TeamCommand eventCode, Player teamSubjective) {
-		switch (eventCode) {
+	public static final void executeCommand(Player player, TeamCommand command, int memberObjId) {
+		TemporaryPlayerTeam<? extends TeamMember<Player>> team = player.getCurrentTeam();
+		Objects.requireNonNull(team, "Cannot execute team command: " + command + " from " + player + " without an active team");
+		switch (command) {
 			case GROUP_BAN_MEMBER:
-				PlayerGroupService.banPlayer(teamSubjective, player);
+				PlayerGroupService.banPlayer(findMember(team, player, memberObjId), player);
 				break;
 			case GROUP_SET_LEADER:
-				PlayerGroupService.changeLeader(teamSubjective);
+				PlayerGroupService.changeLeader(findMember(team, player, memberObjId));
 				break;
 			case GROUP_REMOVE_MEMBER:
-				PlayerGroupService.removePlayer(teamSubjective);
+				PlayerGroupService.removePlayer(findMember(team, player, memberObjId));
 				break;
 			case GROUP_START_MENTORING:
 				PlayerGroupService.startMentoring(player);
@@ -44,52 +42,49 @@ public class PlayerTeamCommandService {
 				PlayerAllianceService.removePlayer(player);
 				break;
 			case ALLIANCE_BAN_MEMBER:
-				PlayerAllianceService.banPlayer(teamSubjective, player);
+				PlayerAllianceService.banPlayer(findMember(team, player, memberObjId), player);
 				break;
 			case ALLIANCE_SET_CAPTAIN:
-				PlayerAllianceService.changeLeader(teamSubjective);
+				PlayerAllianceService.changeLeader(findMember(team, player, memberObjId));
 				break;
 			case ALLIANCE_CHECKREADY_CANCEL:
 			case ALLIANCE_CHECKREADY_START:
 			case ALLIANCE_CHECKREADY_AUTOCANCEL:
 			case ALLIANCE_CHECKREADY_NOTREADY:
 			case ALLIANCE_CHECKREADY_READY:
-				PlayerAllianceService.checkReady(player, eventCode);
+				PlayerAllianceService.checkReady(player, command);
 				break;
 			case ALLIANCE_SET_VICECAPTAIN:
-				PlayerAllianceService.changeViceCaptain(teamSubjective, AssignType.PROMOTE);
+				PlayerAllianceService.changeViceCaptain(findMember(team, player, memberObjId), AssignType.PROMOTE);
 				break;
 			case ALLIANCE_UNSET_VICECAPTAIN:
-				PlayerAllianceService.changeViceCaptain(teamSubjective, AssignType.DEMOTE);
+				PlayerAllianceService.changeViceCaptain(findMember(team, player, memberObjId), AssignType.DEMOTE);
 				break;
 			case LEAGUE_LEAVE:
 				LeagueService.removeAlliance(player.getPlayerAlliance());
 				break;
 			case LEAGUE_EXPEL:
-				LeagueService.expelAlliance(teamSubjective, player);
+				LeagueService.expelAlliance(findLeagueAlliance(team, player, memberObjId), player);
 				break;
 			case LEAGUE_SET_LEADER:
-				LeagueService.setLeader(player, teamSubjective);
+				PlayerAlliance leagueAlliance = findLeagueAlliance(team, player, memberObjId).getObject();
+				LeagueService.setLeader(player, leagueAlliance.getLeaderObject());
 				break;
 		}
 	}
 
-	private static final Player getTeamSubjective(Player player, int playerObjId) {
-		if (playerObjId == 0) {
+	private static LeagueMember findLeagueAlliance(TemporaryPlayerTeam<? extends TeamMember<Player>> team, Player player, int leagueAllianceId) {
+		League league = team instanceof PlayerAlliance ? ((PlayerAlliance) team).getLeague() : null;
+		Objects.requireNonNull(league, () -> player + " tried to execute league command without an active league alliance");
+		return Objects.requireNonNull(league.getMember(leagueAllianceId),
+			() -> player + " tried to execute league command on invalid alliance " + leagueAllianceId);
+	}
+
+	private static Player findMember(TemporaryPlayerTeam<? extends TeamMember<Player>> team, Player player, int memberObjId) {
+		if (memberObjId == 0)
 			return player;
-		}
-		if (player.isInTeam()) {
-			TeamMember<Player> member = player.getCurrentTeam().getMember(playerObjId);
-			if (member != null) {
-				return member.getObject();
-			}
-			if (player.isInLeague()) {
-				LeagueMember subjective = player.getPlayerAlliance().getLeague().getMember(playerObjId);
-				if (subjective != null) {
-					return subjective.getObject().getLeaderObject();
-				}
-			}
-		}
-		return player;
+		TeamMember<Player> member = team.getMember(memberObjId);
+		Objects.requireNonNull(member, () -> player + " tried to execute team command on non-existent member with ID " + memberObjId);
+		return member.getObject();
 	}
 }

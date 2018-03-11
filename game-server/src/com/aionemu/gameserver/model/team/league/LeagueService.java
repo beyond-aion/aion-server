@@ -126,26 +126,20 @@ public class LeagueService {
 	/**
 	 * Remove alliance from league (expel)
 	 */
-	public static final void expelAlliance(Player expelledPlayer, Player expelGiver) {
-		Objects.requireNonNull(expelledPlayer, "Expelled player should not be null");
-		Objects.requireNonNull(expelGiver, "ExpelGiver player should not be null");
-		Preconditions.checkArgument(expelGiver.isInLeague(), "Expelled player should be in league");
-		Preconditions.checkArgument(expelledPlayer.isInLeague(), "ExpelGiver should be in league");
-		Preconditions.checkArgument(expelGiver.getPlayerAlliance().getLeague().isLeader(expelGiver.getPlayerAlliance()),
-			"ExpelGiver alliance should be the leader of league");
-		Preconditions.checkArgument(expelGiver.getPlayerAlliance().isLeader(expelGiver), "ExpelGiver should be the leader of alliance");
-		PlayerAlliance alliance = expelGiver.getPlayerAlliance();
-		League league = alliance.getLeague();
-		league.onEvent(new LeagueLeftEvent(league, expelledPlayer.getPlayerAlliance(), LeaveReson.EXPEL));
+	public static final void expelAlliance(LeagueMember leagueAlliance, Player leagueLeader) {
+		PlayerAlliance leagueLeaderAlliance = leagueLeader.getPlayerAlliance();
+		Preconditions.checkArgument(leagueLeaderAlliance.isLeader(leagueLeader), "Given player is not the league alliance leader");
+		League league = leagueLeaderAlliance.getLeague();
+		Preconditions.checkArgument(league.isLeader(leagueLeaderAlliance), "Leaders alliance is not the league leader");
+		league.onEvent(new LeagueLeftEvent(league, leagueAlliance.getObject(), LeaveReson.EXPEL));
 	}
 
-	public static void setLeader(Player player, Player teamSubjective) {
+	public static void setLeader(Player player, Player allianceLeader) {
 		PlayerAlliance alliance = player.getPlayerAlliance();
 		if (alliance != null) {
 			League league = alliance.getLeague();
-			if (league != null) {
-				league.onEvent(new LeagueChangeLeaderEvent(alliance, teamSubjective));
-			}
+			if (league != null)
+				league.onEvent(new LeagueChangeLeaderEvent(alliance, allianceLeader));
 		}
 	}
 

@@ -5,6 +5,7 @@ import java.nio.channels.SelectionKey;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.concurrent.Executor;
 
 /**
  * This is implementation of <code>Dispatcher</code> that may accept connections, read and write data.
@@ -20,8 +21,8 @@ public class AcceptReadWriteDispatcherImpl extends Dispatcher {
 	 */
 	private final List<AConnection<?>> pendingClose = new ArrayList<>();
 
-	public AcceptReadWriteDispatcherImpl(String name) throws IOException {
-		super(name);
+	public AcceptReadWriteDispatcherImpl(String name, Executor dcExecutor) throws IOException {
+		super(name, dcExecutor);
 	}
 
 	/**

@@ -10,6 +10,7 @@ import com.aionemu.gameserver.ai.manager.EmoteManager;
 import com.aionemu.gameserver.ai.manager.WalkManager;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.skillengine.effect.AbnormalState;
 
 /**
  * @author ATracer
@@ -41,7 +42,8 @@ public class AttackEventHandler {
 			WalkManager.stopWalking(npcAI);
 		}
 		npcAI.getOwner().getGameStats().renewLastAttackedTime();
-		if (npcAI.setStateIfNot(AIState.FIGHT)) {
+		boolean allowFight = npcAI.getState() != AIState.FEAR || !npcAI.getOwner().getEffectController().isAbnormalSet(AbnormalState.FEAR);
+		if (allowFight && npcAI.setStateIfNot(AIState.FIGHT)) {
 			if (npcAI.isLogging())
 				AILogger.info(npcAI, "onAttack() -> startAttacking");
 			npcAI.setSubStateIfNot(AISubState.NONE);

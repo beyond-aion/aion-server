@@ -29,7 +29,6 @@ import com.aionemu.loginserver.dao.BannedMacDAO;
 import com.aionemu.loginserver.network.NetConnector;
 import com.aionemu.loginserver.network.ncrypt.KeyGen;
 import com.aionemu.loginserver.service.PlayerTransferService;
-import com.aionemu.loginserver.utils.DeadLockDetector;
 import com.aionemu.loginserver.utils.ThreadPoolManager;
 
 import ch.qos.logback.classic.LoggerContext;
@@ -101,10 +100,6 @@ public class LoginServer {
 		DatabaseFactory.init();
 		DAOManager.init();
 
-		/**
-		 * Start deadlock detector that will restart server if deadlock happened
-		 */
-		new DeadLockDetector(60, DeadLockDetector.RESTART).start();
 		ThreadPoolManager.getInstance();
 
 		/**
@@ -129,7 +124,7 @@ public class LoginServer {
 		VersionInfoUtil.printAllInfo(LoginServer.class);
 		SystemInfoUtil.printAllInfo();
 
-		NetConnector.getInstance().connect();
+		NetConnector.getInstance().connect(ThreadPoolManager.getInstance());
 		Runtime.getRuntime().addShutdownHook(Shutdown.getInstance());
 		log.info("Login Server started in " + (System.currentTimeMillis() - start) / 1000 + " seconds.");
 	}

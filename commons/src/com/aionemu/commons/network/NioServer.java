@@ -8,6 +8,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.Executor;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -76,9 +77,9 @@ public class NioServer {
 		this.cfgs = cfgs;
 	}
 
-	public void connect() {
+	public void connect(Executor dcExecutor) {
 		try {
-			this.initDispatchers(readWriteThreads);
+			initDispatchers(readWriteThreads, dcExecutor);
 
 			/** Create a new non-blocking server socket channel for clients */
 			for (ServerCfg cfg : cfgs) {
@@ -129,20 +130,20 @@ public class NioServer {
 	 * Initialize Dispatchers.
 	 * 
 	 * @param readWriteThreads
-	 * @param packetExecutor
+	 * @param dcExecutor
 	 * @throws IOException
 	 */
-	private void initDispatchers(int readWriteThreads) throws IOException {
+	private void initDispatchers(int readWriteThreads, Executor dcExecutor) throws IOException {
 		if (readWriteThreads < 1) {
-			acceptDispatcher = new AcceptReadWriteDispatcherImpl("AcceptReadWrite Dispatcher");
+			acceptDispatcher = new AcceptReadWriteDispatcherImpl("AcceptReadWrite Dispatcher", dcExecutor);
 			acceptDispatcher.start();
 		} else {
-			acceptDispatcher = new AcceptDispatcherImpl("Accept Dispatcher");
+			acceptDispatcher = new AcceptDispatcherImpl("Accept Dispatcher", dcExecutor);
 			acceptDispatcher.start();
 
 			readWriteDispatchers = new Dispatcher[readWriteThreads];
 			for (int i = 0; i < readWriteDispatchers.length; i++) {
-				readWriteDispatchers[i] = new AcceptReadWriteDispatcherImpl("ReadWrite-" + i + " Dispatcher");
+				readWriteDispatchers[i] = new AcceptReadWriteDispatcherImpl("ReadWrite-" + i + " Dispatcher", dcExecutor);
 				readWriteDispatchers[i].start();
 			}
 		}

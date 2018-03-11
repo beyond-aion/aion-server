@@ -19,7 +19,12 @@ public class HostileUpEffect extends EffectTemplate {
 	public void applyEffect(Effect effect) {
 		Creature effected = effect.getEffected();
 		if (effected instanceof Npc) {
-			((Npc) effected).getAggroList().addHate(effect.getEffector(), effect.getTauntHate());
+			int totalHate = effect.getTauntHate();
+			// FIXME some skills never broadcast regular hate. that's why the following check exists as a workaround, which should be removed once fixed
+			// hate broadcasts in Effect.startEffect (if added to EffectController) and applyEffect (if there are no successEffects), so some never do
+			if (effect.getSuccessEffects().size() == 1) // only this effect template is present, therefore we know regular hate will never broadcast
+				totalHate += effect.getEffectHate();
+			((Npc) effected).getAggroList().addHate(effect.getEffector(), totalHate);
 		}
 	}
 

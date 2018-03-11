@@ -122,6 +122,7 @@ public class SummonController extends CreatureController<Summon> {
 			return;
 		}
 		Skill skill = SkillEngine.getInstance().getSkill(creature, order.getSkillId(), 1, order.getTarget());
+		skill.setHate(order.getHate());
 		if (skill.useSkill() && order.isRelease()) {
 			SummonsService.release(getOwner(), UnsummonType.UNSPECIFIED);
 		}

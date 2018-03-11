@@ -226,8 +226,10 @@ public class AggroList extends AbstractEventSource<AddDamageEvent> {
 		Creature master = ((Creature) aggroInfo.getAttacker()).getMaster();
 		if (!master.equals(aggroInfo.getAttacker())) {
 			aggroList.compute(master.getObjectId(), (key, masterAggroInfo) -> {
-				if (masterAggroInfo == null)
+				if (masterAggroInfo == null) {
 					masterAggroInfo = new AggroInfo(master);
+					masterAggroInfo.setHate(1);
+				}
 				masterAggroInfo.addDamage(aggroInfo.getDamage());
 				return masterAggroInfo;
 			});

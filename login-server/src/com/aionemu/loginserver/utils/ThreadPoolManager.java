@@ -3,6 +3,7 @@ package com.aionemu.loginserver.utils;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.Executor;
 import java.util.concurrent.Future;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
@@ -14,13 +15,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.utils.concurrent.AionRejectedExecutionHandler;
+import com.aionemu.commons.utils.concurrent.DeadLockDetector;
 import com.aionemu.commons.utils.concurrent.RunnableWrapper;
 import com.aionemu.commons.utils.concurrent.ScheduledFutureWrapper;
 
 /**
  * @author -Nemesiss-, NB4L1, MrPoke, lord_rex
  */
-public final class ThreadPoolManager {
+public final class ThreadPoolManager implements Executor {
 
 	private static final Logger log = LoggerFactory.getLogger(ThreadPoolManager.class);
 
@@ -32,10 +34,10 @@ public final class ThreadPoolManager {
 	private final ThreadPoolExecutor longRunningPool;
 
 	private ThreadPoolManager() {
-
 		int threadpoolsize = 2 + Runtime.getRuntime().availableProcessors() * 4;
 		final int instantPoolSize = Math.max(1, threadpoolsize / 3);
 
+		new DeadLockDetector(60, DeadLockDetector.RESTART).start();
 		scheduledPool = new ScheduledThreadPoolExecutor(threadpoolsize - instantPoolSize);
 		scheduledPool.setRejectedExecutionHandler(new AionRejectedExecutionHandler());
 		scheduledPool.prestartAllCoreThreads();
@@ -100,6 +102,7 @@ public final class ThreadPoolManager {
 
 	// ===========================================================================================
 
+	@Override
 	public final void execute(Runnable r) {
 		r = new ThreadPoolRunnableWrapper(r);
 

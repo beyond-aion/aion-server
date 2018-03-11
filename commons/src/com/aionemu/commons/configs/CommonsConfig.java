@@ -9,4 +9,7 @@ public class CommonsConfig {
 
 	@Property(key = "commons.runnablestats.enable", defaultValue = "false")
 	public static boolean RUNNABLESTATS_ENABLE;
+
+	@Property(key = "commons.warn_execution_time.enable", defaultValue = "true")
+	public static volatile boolean EXECUTION_TIME_WARNING_ENABLE;
 }

@@ -105,9 +105,12 @@ public class PvPArenaReward extends InstanceReward<PvPArenaPlayerReward> {
 		if (position != 0) {
 			clearPosition(position, Boolean.FALSE);
 		}
-		Integer key = Rnd.get(getFreePositions());
-		clearPosition(key, Boolean.TRUE);
-		reward.setPosition(key);
+		List<Integer> freePositions = getFreePositions();
+		if (!freePositions.isEmpty()) {
+			int key = Rnd.get(freePositions);
+			clearPosition(key, Boolean.TRUE);
+			reward.setPosition(key);
+		}
 	}
 
 	public synchronized void clearPosition(int position, Boolean result) {
