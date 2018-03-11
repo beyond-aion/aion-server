@@ -18,8 +18,11 @@ public class StatRateFunction extends StatFunction {
 	@Override
 	public void apply(Stat2 stat) {
 		if (isBonus()) {
-			// calculate relative to current resultValue if negative, otherwise we end up with <= 0% with multiple stat functions
-			int baseValue = getValue() < 0 && stat.getBonus() < 0 ? stat.getCurrent() : stat.getBaseWithoutBaseRate();
+			int baseValue = stat.getBaseWithoutBaseRate();
+			if (getName() == StatEnum.SPEED && getValue() < 0 && stat.getBonus() < 0) { // fix to avoid run speed <= 0%
+				// calculate relative to current resultValue if negative, otherwise we end up with <= 0% on multiple stat functions
+				baseValue = stat.getCurrent();
+			}
 			stat.addToBonus((int) (baseValue * getValue() / 100f));
 		} else {
 			stat.setBase((int) (stat.getBaseWithoutBaseRate() * stat.calculatePercent(getValue())));
