@@ -12,6 +12,7 @@ import com.aionemu.gameserver.events.Listenable;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.AionObject;
 import com.aionemu.gameserver.model.gameobjects.Creature;
+import com.aionemu.gameserver.model.gameobjects.SummonedObject;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.team.group.PlayerGroup;
@@ -66,7 +67,9 @@ public class AggroList extends AbstractEventSource<AddDamageEvent> {
 	/**
 	 * Hate that is received without dealing damage
 	 */
-	public void addHate(final Creature creature, int hate) {
+	public void addHate(Creature creature, int hate) {
+		if (creature instanceof SummonedObject<?>) // ice sheet, threatening wave, etc. generate hate for their master
+			creature = creature.getMaster();
 		if (!isAware(creature))
 			return;
 		if (hate < 0 && !aggroList.containsKey(creature.getObjectId()))
