@@ -60,7 +60,7 @@ public class NpcStatCalculation {
 					case MAGICAL_ATTACK:
 						return 0.4f;
 					case ABNORMAL_RESISTANCE_ALL:
-						return 1f;
+						return 0.6f;
 				}
 				return 1f;
 			case ELITE:
