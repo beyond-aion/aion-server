@@ -11,6 +11,7 @@ import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIState;
 import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.ai.event.AIEventType;
+import com.aionemu.gameserver.ai.manager.EmoteManager;
 import com.aionemu.gameserver.configs.main.GeoDataConfig;
 import com.aionemu.gameserver.controllers.observer.ActionObserver;
 import com.aionemu.gameserver.controllers.observer.ObserverType;
@@ -64,8 +65,10 @@ public class FearEffect extends EffectTemplate {
 		// PacketSendUtility.broadcastPacketAndReceive(effected, new SM_TARGET_IMMOBILIZE(effected));
 		effected.getMoveController().abortMove();
 
-		if (effected instanceof Npc)
+		if (effected instanceof Npc) {
+			EmoteManager.emoteStartAttacking((Npc) effected, effector); // set weapon_equipped for faster walk speed
 			((NpcAI) effected.getAi()).setStateIfNot(AIState.FEAR);
+		}
 		if (GeoDataConfig.FEAR_ENABLE) {
 			ScheduledFuture<?> fearTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new FearTask(effector, effected), 0, 1000);
 			effect.setPeriodicTask(fearTask, position);
@@ -93,16 +96,15 @@ public class FearEffect extends EffectTemplate {
 
 		effect.getEffected().getMoveController().abortMove();
 		PacketSendUtility.broadcastPacketAndReceive(effect.getEffected(), new SM_TARGET_IMMOBILIZE(effect.getEffected()));
-		if (effect.getEffected() instanceof Npc) {
-			((NpcAI) effect.getEffected().getAi()).setStateIfNot(AIState.FIGHT);
-			effect.getEffected().getAi().onGeneralEvent(AIEventType.MOVE_ARRIVED);
-		}
 
 		if (resistchance < 100) {
 			ActionObserver observer = effect.getActionObserver(position);
 			if (observer != null)
 				effect.getEffected().getObserveController().removeObserver(observer);
 		}
+
+		if (effect.getEffected() instanceof Npc)
+			((Npc) effect.getEffected()).getAi().onCreatureEvent(AIEventType.ATTACK, effect.getEffected());
 	}
 
 	class FearTask implements Runnable {
