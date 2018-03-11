@@ -272,6 +272,10 @@ public abstract class CreatureGameStats<T extends Creature> {
 		return getStat(StatEnum.MAGIC_SKILL_BOOST_RESIST, getStatsTemplate().getMsup());
 	}
 
+	public Stat2 getAbnormalResistance() {
+		return getStat(StatEnum.ABNORMAL_RESISTANCE_ALL, getStatsTemplate().getAbnormalResistance());
+	}
+
 	public abstract Stat2 getAttackSpeed();
 
 	public abstract Stat2 getMovementSpeed();

@@ -5,6 +5,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  * This class is only a container for Stats. Created on: 04.08.2009 14:59:10
@@ -58,6 +59,9 @@ public class StatsTemplate {
 
 	@XmlElement
 	private CreatureSpeeds speeds;
+
+	@XmlTransient
+	private int abnormalResistance;
 
 	/* ======================================= */
 
@@ -219,5 +223,13 @@ public class StatsTemplate {
 
 	public float getFlySpeed() {
 		return speeds == null ? 0 : speeds.getFlySpeed();
+	}
+
+	public int getAbnormalResistance() {
+		return abnormalResistance;
+	}
+
+	public void setAbnormalResistance(int abnormalResistance) {
+		this.abnormalResistance = abnormalResistance;
 	}
 }

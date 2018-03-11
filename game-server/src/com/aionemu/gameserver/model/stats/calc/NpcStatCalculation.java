@@ -34,6 +34,8 @@ public class NpcStatCalculation {
 				return level * 40f;
 			case PHYSICAL_CRITICAL_RESIST:
 				return level * 2.2f;
+			case ABNORMAL_RESISTANCE_ALL:
+				return 100;
 			default:
 				throw new IllegalArgumentException("Stat calculation for " + stat + " is not implemented");
 		}
@@ -47,6 +49,8 @@ public class NpcStatCalculation {
 						return 1.05f;
 					case MAGICAL_ATTACK:
 						return 0.4f;
+					case ABNORMAL_RESISTANCE_ALL:
+						return 0f;
 				}
 				return 1f;
 			case NORMAL:
@@ -55,6 +59,8 @@ public class NpcStatCalculation {
 						return 1.05f;
 					case MAGICAL_ATTACK:
 						return 0.4f;
+					case ABNORMAL_RESISTANCE_ALL:
+						return 1f;
 				}
 				return 1f;
 			case ELITE:
@@ -74,6 +80,8 @@ public class NpcStatCalculation {
 						return 1.025f;
 					case PHYSICAL_CRITICAL_RESIST:
 						return 1.5f;
+					case ABNORMAL_RESISTANCE_ALL:
+						return 5f;
 				}
 				return 1f;
 			case HERO:
@@ -93,6 +101,8 @@ public class NpcStatCalculation {
 						return 1.07f;
 					case PHYSICAL_CRITICAL_RESIST:
 						return 1.75f;
+					case ABNORMAL_RESISTANCE_ALL:
+						return 10f;
 				}
 				return 1f;
 			case LEGENDARY:
@@ -109,6 +119,8 @@ public class NpcStatCalculation {
 						return 1.1f;
 					case PHYSICAL_CRITICAL_RESIST:
 						return 2.1f;
+					case ABNORMAL_RESISTANCE_ALL:
+						return 20f;
 				}
 				return 1f;
 			default:
@@ -153,6 +165,8 @@ public class NpcStatCalculation {
 						return 1.01f;
 					case PHYSICAL_CRITICAL_RESIST:
 						return 1.4f;
+					case ABNORMAL_RESISTANCE_ALL:
+						return 1.2f;
 				}
 				return 1f;
 			case EXPERT:
@@ -172,6 +186,8 @@ public class NpcStatCalculation {
 						return 1.02f;
 					case PHYSICAL_CRITICAL_RESIST:
 						return 1.6f;
+					case ABNORMAL_RESISTANCE_ALL:
+						return 1.4f;
 				}
 				return 1f;
 			case VETERAN:
@@ -191,6 +207,8 @@ public class NpcStatCalculation {
 						return 1.03f;
 					case PHYSICAL_CRITICAL_RESIST:
 						return 1.8f;
+					case ABNORMAL_RESISTANCE_ALL:
+						return 1.6f;
 				}
 				return 1f;
 			case MASTER:
@@ -210,6 +228,8 @@ public class NpcStatCalculation {
 						return 1.04f;
 					case PHYSICAL_CRITICAL_RESIST:
 						return 2f;
+					case ABNORMAL_RESISTANCE_ALL:
+						return 1.8f;
 				}
 				return 1f;
 			default:
