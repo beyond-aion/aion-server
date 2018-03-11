@@ -22,6 +22,7 @@ import com.aionemu.commons.utils.concurrent.ExecuteWrapper;
 import com.aionemu.commons.utils.concurrent.RunnableStatsManager;
 import com.aionemu.gameserver.GameServer;
 import com.aionemu.gameserver.configs.main.SecurityConfig;
+import com.aionemu.gameserver.configs.main.ThreadConfig;
 import com.aionemu.gameserver.configs.network.NetworkConfig;
 import com.aionemu.gameserver.model.ChatType;
 import com.aionemu.gameserver.model.account.Account;
@@ -50,7 +51,7 @@ public class AionConnection extends AConnection<AionServerPacket> {
 
 	private static final PacketProcessor<AionConnection> packetProcessor = new PacketProcessor<>(NetworkConfig.PACKET_PROCESSOR_MIN_THREADS,
 		NetworkConfig.PACKET_PROCESSOR_MAX_THREADS, NetworkConfig.PACKET_PROCESSOR_THREAD_SPAWN_THRESHOLD,
-		NetworkConfig.PACKET_PROCESSOR_THREAD_KILL_THRESHOLD, new ExecuteWrapper());
+		NetworkConfig.PACKET_PROCESSOR_THREAD_KILL_THRESHOLD, new ExecuteWrapper(ThreadConfig.MAXIMUM_RUNTIME_IN_MILLISEC_WITHOUT_WARNING));
 
 	/**
 	 * Possible states of AionConnection

@@ -24,6 +24,7 @@ import java.util.zip.ZipOutputStream;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.aionemu.commons.configs.CommonsConfig;
 import com.aionemu.commons.database.DatabaseFactory;
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.commons.network.NioServer;
@@ -214,6 +215,8 @@ public class GameServer {
 		initalizeLoggger();
 		initUtilityServicesAndConfig();
 
+		boolean enableExecutionTimeWarnings = CommonsConfig.EXECUTION_TIME_WARNING_ENABLE;
+		CommonsConfig.EXECUTION_TIME_WARNING_ENABLE = false;
 		ConsoleUtil.printSection("IDFactory");
 		IDFactory.getInstance();
 
@@ -324,6 +327,7 @@ public class GameServer {
 
 		nioServer = initNioServer();
 		Runtime.getRuntime().addShutdownHook(ShutdownHook.getInstance());
+		CommonsConfig.EXECUTION_TIME_WARNING_ENABLE = enableExecutionTimeWarnings;
 		log.info("Game Server started in " + (System.currentTimeMillis() - start) / 1000 + " seconds.");
 
 		LoginServer.getInstance().connect(nioServer);
