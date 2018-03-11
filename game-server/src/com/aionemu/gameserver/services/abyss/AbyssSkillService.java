@@ -2,6 +2,7 @@ package com.aionemu.gameserver.services.abyss;
 
 import org.slf4j.LoggerFactory;
 
+import com.aionemu.gameserver.configs.main.RankingConfig;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.player.AbyssRank;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -13,9 +14,6 @@ import com.aionemu.gameserver.utils.stats.AbyssRankEnum;
  */
 public class AbyssSkillService {
 
-	/**
-	 * @param player
-	 */
 	public static final void updateSkills(Player player) {
 		AbyssRank abyssRank = player.getAbyssRank();
 		if (abyssRank == null) {
@@ -29,10 +27,11 @@ public class AbyssSkillService {
 					SkillLearnService.removeSkill(player, skillId);
 			}
 		}
-		// add new skills
-		if (abyssRank.getRank().getId() >= AbyssRankEnum.STAR5_OFFICER.getId()) {
-			for (int skillId : AbyssSkills.getSkills(player.getRace(), rankEnum)) {
-				SkillLearnService.learnTemporarySkill(player, skillId, 1);
+		if (RankingConfig.XFORM_MIN_RANK != null) {
+			// add new skills
+			if (abyssRank.getRank().getId() >= RankingConfig.XFORM_MIN_RANK.getId()) {
+				for (int skillId : AbyssSkills.getSkills(player.getRace(), rankEnum))
+					SkillLearnService.learnTemporarySkill(player, skillId, 1);
 			}
 		}
 	}
