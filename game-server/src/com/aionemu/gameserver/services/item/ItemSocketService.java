@@ -17,7 +17,6 @@ import com.aionemu.gameserver.model.gameobjects.Persistable.PersistentState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.items.ManaStone;
 import com.aionemu.gameserver.model.items.storage.Storage;
-import com.aionemu.gameserver.model.templates.item.GodstoneInfo;
 import com.aionemu.gameserver.model.templates.item.ItemTemplate;
 import com.aionemu.gameserver.model.templates.item.enums.ItemGroup;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ITEM_USAGE_ANIMATION;
@@ -292,6 +291,11 @@ public class ItemSocketService {
 	}
 
 	public static void socketGodstone(Player player, Item weapon, int stoneId) {
+		if (weapon == null) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GIVE_ITEM_PROC_NO_TARGET_ITEM());
+			return;
+		}
+
 		if (!weapon.canSocketGodstone()) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GIVE_ITEM_PROC_NOT_PROC_GIVABLE_ITEM(weapon.getL10n()));
 			AuditLogger.log(player, "tried to insert godstone in not compatible item " + weapon.getItemId());
@@ -313,12 +317,13 @@ public class ItemSocketService {
 		player.getObserveController().attach(move);
 
 		Item godstone = player.getInventory().getItemByObjId(stoneId);
+		if (godstone == null) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GIVE_ITEM_PROC_NO_PROC_GIVE_ITEM());
+			return;
+		}
 
-		int godStoneItemId = godstone.getItemTemplate().getTemplateId();
-		ItemTemplate itemTemplate = DataManager.ITEM_DATA.getItemTemplate(godStoneItemId);
-		GodstoneInfo godstoneInfo = itemTemplate.getGodstoneInfo();
-
-		if (godstoneInfo == null) {
+		ItemTemplate itemTemplate = godstone.getItemTemplate();
+		if (itemTemplate.getGodstoneInfo() == null) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GIVE_ITEM_PROC_NO_PROC_GIVE_ITEM());
 			return;
 		}
@@ -338,7 +343,7 @@ public class ItemSocketService {
 				if (!player.getInventory().decreaseByObjectId(stoneId, 1))
 					return;
 
-				weapon.addGodStone(godStoneItemId);
+				weapon.addGodStone(itemTemplate.getTemplateId());
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GIVE_ITEM_PROC_ENCHANTED_TARGET_ITEM(weapon.getL10n()));
 
 				ItemPacketService.updateItemAfterInfoChange(player, weapon);
