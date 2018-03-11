@@ -6,9 +6,9 @@ import java.nio.ByteOrder;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.SocketChannel;
 import java.util.Queue;
+import java.util.concurrent.Executor;
 
 import com.aionemu.commons.network.packet.BaseServerPacket;
-import com.aionemu.commons.network.util.ThreadPoolManager;
 import com.aionemu.commons.options.Assertion;
 
 /**
@@ -158,7 +158,7 @@ public abstract class AConnection<T extends BaseServerPacket> {
 	/**
 	 * This will close the connection and call onDisconnect() on another thread. May be called only by Dispatcher Thread.
 	 */
-	final void disconnect() {
+	final void disconnect(Executor dcExecutor) {
 		/**
 		 * Test if this build should use assertion. If NetworkAssertion == false javac will remove this code block
 		 */
@@ -178,7 +178,7 @@ public abstract class AConnection<T extends BaseServerPacket> {
 		key.cancel();
 		key.attach(null);
 
-		ThreadPoolManager.getInstance().execute(() -> onDisconnect());
+		dcExecutor.execute(this::onDisconnect);
 	}
 
 	/**

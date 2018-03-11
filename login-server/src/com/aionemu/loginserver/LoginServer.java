@@ -124,7 +124,7 @@ public class LoginServer {
 		VersionInfoUtil.printAllInfo(LoginServer.class);
 		SystemInfoUtil.printAllInfo();
 
-		NetConnector.getInstance().connect();
+		NetConnector.getInstance().connect(ThreadPoolManager.getInstance());
 		Runtime.getRuntime().addShutdownHook(Shutdown.getInstance());
 		log.info("Login Server started in " + (System.currentTimeMillis() - start) / 1000 + " seconds.");
 	}

@@ -3,6 +3,7 @@ package com.aionemu.gameserver.utils;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.Future;
@@ -23,7 +24,7 @@ import com.aionemu.gameserver.configs.main.ThreadConfig;
 /**
  * @author -Nemesiss-, NB4L1, MrPoke, lord_rex
  */
-public final class ThreadPoolManager {
+public final class ThreadPoolManager implements Executor {
 
 	private static final Logger log = LoggerFactory.getLogger(ThreadPoolManager.class);
 
@@ -55,13 +56,7 @@ public final class ThreadPoolManager {
 		WorkStealThreadFactory forkJoinThreadFactory = new WorkStealThreadFactory("ForkJoinPool");
 		workStealingPool = new ForkJoinPool(Runtime.getRuntime().availableProcessors(), forkJoinThreadFactory, null, true);
 
-		Thread maintainThread = new Thread(new Runnable() {
-
-			@Override
-			public void run() {
-				purge();
-			}
-		}, "ThreadPool Purge Task");
+		Thread maintainThread = new Thread(() -> purge(), "ThreadPool Purge Task");
 
 		maintainThread.setDaemon(true);
 		scheduleAtFixedRate(maintainThread, 150000, 150000);
@@ -102,6 +97,7 @@ public final class ThreadPoolManager {
 		return workStealingPool;
 	}
 
+	@Override
 	public final void execute(Runnable r) {
 		r = new ThreadPoolRunnableWrapper(r);
 		instantPool.execute(r);

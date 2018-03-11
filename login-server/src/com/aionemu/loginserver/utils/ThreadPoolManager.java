@@ -3,6 +3,7 @@ package com.aionemu.loginserver.utils;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.Executor;
 import java.util.concurrent.Future;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
@@ -21,7 +22,7 @@ import com.aionemu.commons.utils.concurrent.ScheduledFutureWrapper;
 /**
  * @author -Nemesiss-, NB4L1, MrPoke, lord_rex
  */
-public final class ThreadPoolManager {
+public final class ThreadPoolManager implements Executor {
 
 	private static final Logger log = LoggerFactory.getLogger(ThreadPoolManager.class);
 
@@ -101,6 +102,7 @@ public final class ThreadPoolManager {
 
 	// ===========================================================================================
 
+	@Override
 	public final void execute(Runnable r) {
 		r = new ThreadPoolRunnableWrapper(r);
 

@@ -341,7 +341,7 @@ public class GameServer {
 	private static NioServer initNioServer() {
 		NioServer nioServer = new NioServer(NetworkConfig.NIO_READ_WRITE_THREADS,
 			new ServerCfg(NetworkConfig.CLIENT_SOCKET_ADDRESS, "Aion Connections", new GameConnectionFactoryImpl()));
-		nioServer.connect();
+		nioServer.connect(ThreadPoolManager.getInstance());
 		return nioServer;
 	}
 

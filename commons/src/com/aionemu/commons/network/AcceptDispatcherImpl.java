@@ -3,6 +3,7 @@ package com.aionemu.commons.network;
 import java.io.IOException;
 import java.nio.channels.SelectionKey;
 import java.util.Iterator;
+import java.util.concurrent.Executor;
 
 /**
  * This is implementation of <code>Dispatcher</code> that may only accept connections.
@@ -13,14 +14,8 @@ import java.util.Iterator;
  */
 public class AcceptDispatcherImpl extends Dispatcher {
 
-	/**
-	 * Constructor that accept <code>String</code> name as parameter.
-	 * 
-	 * @param name
-	 * @throws IOException
-	 */
-	public AcceptDispatcherImpl(String name) throws IOException {
-		super(name);
+	public AcceptDispatcherImpl(String name, Executor dcExecutor) throws IOException {
+		super(name, dcExecutor);
 	}
 
 	/**

@@ -8,6 +8,7 @@ import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.channels.SocketChannel;
 import java.nio.channels.spi.SelectorProvider;
+import java.util.concurrent.Executor;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,6 +29,8 @@ public abstract class Dispatcher extends Thread {
 	 */
 	private static final Logger log = LoggerFactory.getLogger(Dispatcher.class);
 
+	private final Executor dcExecutor;
+
 	/**
 	 * Selector thats selecting ready keys.
 	 */
@@ -42,10 +45,12 @@ public abstract class Dispatcher extends Thread {
 	 * Constructor.
 	 * 
 	 * @param name
+	 * @param dcExecutor
 	 * @throws IOException
 	 */
-	public Dispatcher(String name) throws IOException {
+	public Dispatcher(String name, Executor dcExecutor) throws IOException {
 		super(name);
+		this.dcExecutor = dcExecutor;
 		this.selector = SelectorProvider.provider().openSelector();
 	}
 
@@ -301,6 +306,6 @@ public abstract class Dispatcher extends Thread {
 		if (Assertion.NetworkAssertion)
 			assert Thread.currentThread() == this;
 
-		con.disconnect();
+		con.disconnect(dcExecutor);
 	}
 }
