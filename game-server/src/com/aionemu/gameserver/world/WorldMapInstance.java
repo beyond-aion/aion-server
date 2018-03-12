@@ -80,7 +80,7 @@ public abstract class WorldMapInstance implements Iterable<VisibleObject> {
 	private Map<ZoneName, ZoneInstance> zones = new HashMap<>();
 	// TODO: Merge this with owner
 	private int soloPlayer;
-	private WorldPosition startPos = new WorldPosition(getMapId());
+	private WorldPosition startPos;
 	private int playerSize;
 
 	/**
@@ -93,6 +93,7 @@ public abstract class WorldMapInstance implements Iterable<VisibleObject> {
 		this.instanceId = instanceId;
 		this.zones = ZoneService.getInstance().getZoneInstancesByWorldId(parent.getMapId());
 		initMapRegions();
+		startPos = new WorldPosition(getMapId());
 	}
 
 	/**
