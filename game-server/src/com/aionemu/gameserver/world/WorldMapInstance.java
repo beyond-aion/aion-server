@@ -93,7 +93,6 @@ public abstract class WorldMapInstance implements Iterable<VisibleObject> {
 		this.instanceId = instanceId;
 		this.zones = ZoneService.getInstance().getZoneInstancesByWorldId(parent.getMapId());
 		initMapRegions();
-		startPos = new WorldPosition(getMapId());
 	}
 
 	/**
@@ -332,8 +331,8 @@ public abstract class WorldMapInstance implements Iterable<VisibleObject> {
 		this.instanceHandler = instanceHandler;
 	}
 
-	public void setStartPos(float startPosX, float startPosY, float startPosZ, byte startPosH) {
-		startPos.setXYZH(startPosX, startPosY, startPosZ, startPosH);
+	public void setStartPos(WorldPosition startPos) {
+		this.startPos = startPos;
 	}
 
 	public WorldPosition getStartPos() {

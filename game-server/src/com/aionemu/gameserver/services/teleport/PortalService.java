@@ -32,6 +32,7 @@ import com.aionemu.gameserver.services.instance.InstanceService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.WorldMapType;
+import com.aionemu.gameserver.world.WorldPosition;
 
 /**
  * @author ATracer, xTz
@@ -359,7 +360,7 @@ public class PortalService {
 
 	private static void transfer(Player player, PortalLoc loc, WorldMapInstance instance, boolean reenter) {
 		if (instance.getStartPos() == null)
-			instance.setStartPos(loc.getX(), loc.getY(), loc.getZ(), loc.getH());
+			instance.setStartPos(new WorldPosition(loc.getWorldId(), loc.getX(), loc.getY(), loc.getZ(), loc.getH()));
 		InstanceService.registerPlayerWithInstance(instance, player);
 		TeleportService.teleportTo(player, loc.getWorldId(), instance.getInstanceId(), loc.getX(), loc.getY(), loc.getZ(), loc.getH(),
 			TeleportAnimation.FADE_OUT_BEAM);
