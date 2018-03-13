@@ -8,6 +8,7 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.skill.QueuedNpcSkillEntry;
 import com.aionemu.gameserver.model.templates.item.ItemAttackType;
 import com.aionemu.gameserver.model.templates.npcskill.QueuedNpcSkillTemplate;
+import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
@@ -32,6 +33,11 @@ public class ModorsCloneAI extends AggressiveNpcAI {
 	protected void handleSpawned() {
 		super.handleSpawned();
 		ThreadPoolManager.getInstance().schedule(() -> PacketSendUtility.broadcastMessage(getOwner(), 1500746), 3000);
+	}
+
+	@Override
+	public int modifyOwnerDamage(int damage, Effect effect) {
+		return Math.round(damage * 0.75f);
 	}
 
 	@Override
