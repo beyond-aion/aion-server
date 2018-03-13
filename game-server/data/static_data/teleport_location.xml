@@ -269,21 +269,21 @@
 	<teleloc_template loc_id="418" mapid="220080000" name="Arden Village" name_id="404623"/>
 	<teleloc_template loc_id="419" mapid="220080000" name="Cet Village" name_id="404624"/>
 	<teleloc_template loc_id="420" mapid="220080000" name="Bomire Village" name_id="404625"/>
-	<teleloc_template loc_id="421" mapid="220080000" name="Sky Fortress Insurgent Post" name_id="404626"/>
-	<teleloc_template loc_id="422" mapid="220080000" name="Rentus Recovery Base" name_id="404627"/>
-	<teleloc_template loc_id="423" mapid="220080000" name="Dragonfall's Glare" name_id="404628"/>
-	<teleloc_template loc_id="424" mapid="220080000" name="Raksang Ruins Entrance" name_id="404629"/>
-	<teleloc_template loc_id="425" mapid="220080000" name="Perkin Pursuers' Campsite" name_id="404630"/>
-	<teleloc_template loc_id="426" mapid="220080000" name="Danuar Sanctuary Inspector Tent" name_id="404631"/>
-	<teleloc_template loc_id="427" mapid="220080000" name="Shriekfang Crown" name_id="404632"/>
+	<teleloc_template loc_id="421" mapid="220080000" name="Sky Fortress Insurgent Post" name_id="404626" posX="702.228" posY="2852.409" posZ="215.721" heading="7" />
+	<teleloc_template loc_id="422" mapid="220080000" name="Rentus Recovery Base" name_id="404627" posX="2002.719" posY="2029.919" posZ="328.176" heading="68" />
+	<teleloc_template loc_id="423" mapid="220080000" name="Dragonfall's Glare" name_id="404628" posX="2799.936" posY="1674.644" posZ="298.037" heading="116" />
+	<teleloc_template loc_id="424" mapid="220080000" name="Raksang Ruins Entrance" name_id="404629" posX="407.587" posY="1453.453" posZ="274.435" heading="96" />
+	<teleloc_template loc_id="425" mapid="220080000" name="Perkin Pursuers' Campsite" name_id="404630" posX="503.783" posY="127.043" posZ="191.865" heading="83" />
+	<teleloc_template loc_id="426" mapid="220080000" name="Danuar Sanctuary Inspector Tent" name_id="404631" posX="1680.255" posY="559.209" posZ="255.94" heading="55" />
+	<teleloc_template loc_id="427" mapid="220080000" name="Shriekfang Crown" name_id="404632" posX="2954.051" posY="401.282" posZ="295.969" heading="107" />
 	<teleloc_template loc_id="428" mapid="210070000" name="Henor Village" name_id="404633"/>
 	<teleloc_template loc_id="429" mapid="210070000" name="Aedra Village" name_id="404634"/>
 	<teleloc_template loc_id="430" mapid="210070000" name="Erivale Village" name_id="404635"/>
-	<teleloc_template loc_id="431" mapid="210070000" name="Sky Fortress Operation Post" name_id="404636"/>
-	<teleloc_template loc_id="432" mapid="210070000" name="Reian Refugee Camp" name_id="404637"/>
-	<teleloc_template loc_id="433" mapid="210070000" name="Ruinhold Scatterings" name_id="404638"/>
-	<teleloc_template loc_id="434" mapid="210070000" name="Blindknife Hall Entrance" name_id="404639"/>
-	<teleloc_template loc_id="435" mapid="210070000" name="Perkin Chase" name_id="404640"/>
-	<teleloc_template loc_id="436" mapid="210070000" name="Danuar Sanctuary Inspector Camp" name_id="404641"/>
-	<teleloc_template loc_id="437" mapid="210070000" name="Howling Cauldron" name_id="404642"/>
+	<teleloc_template loc_id="431" mapid="210070000" name="Sky Fortress Operation Post" name_id="404636" posX="2425.206" posY="635.477" posZ="548.0" heading="62" />
+	<teleloc_template loc_id="432" mapid="210070000" name="Reian Refugee Camp" name_id="404637" posX="1135.903" posY="793.42" posZ="562.75" heading="32" />
+	<teleloc_template loc_id="433" mapid="210070000" name="Ruinhold Scatterings" name_id="404638" posX="111.471" posY="1450.985" posZ="491.125" heading="45" />
+	<teleloc_template loc_id="434" mapid="210070000" name="Blindknife Hall Entrance" name_id="404639" posX="2674.577" posY="1457.58" posZ="434.866" heading="99" />
+	<teleloc_template loc_id="435" mapid="210070000" name="Perkin Chase" name_id="404640" posX="2780.006" posY="2993.177" posZ="274.875" heading="18" />
+	<teleloc_template loc_id="436" mapid="210070000" name="Danuar Sanctuary Inspector Camp" name_id="404641" posX="2103.18" posY="2294.388" posZ="294.528" heading="72" />
+	<teleloc_template loc_id="437" mapid="210070000" name="Howling Cauldron" name_id="404642" posX="132.85" posY="2736.049" posZ="212.254" heading="52" />
 </teleport_location>
