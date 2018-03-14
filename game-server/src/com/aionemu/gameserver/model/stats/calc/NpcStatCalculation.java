@@ -35,7 +35,7 @@ public class NpcStatCalculation {
 			case PHYSICAL_CRITICAL_RESIST:
 				return level * 2.2f;
 			case ABNORMAL_RESISTANCE_ALL:
-				return 1;
+				return 100f;
 			default:
 				throw new IllegalArgumentException("Stat calculation for " + stat + " is not implemented");
 		}
