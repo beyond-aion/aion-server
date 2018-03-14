@@ -35,7 +35,7 @@ public class NpcStatCalculation {
 			case PHYSICAL_CRITICAL_RESIST:
 				return level * 2.2f;
 			case ABNORMAL_RESISTANCE_ALL:
-				return 100;
+				return 1;
 			default:
 				throw new IllegalArgumentException("Stat calculation for " + stat + " is not implemented");
 		}
@@ -60,7 +60,7 @@ public class NpcStatCalculation {
 					case MAGICAL_ATTACK:
 						return 0.4f;
 					case ABNORMAL_RESISTANCE_ALL:
-						return 0.6f;
+						return 0f;
 				}
 				return 1f;
 			case ELITE:
@@ -102,7 +102,7 @@ public class NpcStatCalculation {
 					case PHYSICAL_CRITICAL_RESIST:
 						return 1.75f;
 					case ABNORMAL_RESISTANCE_ALL:
-						return 10f;
+						return 20f;
 				}
 				return 1f;
 			case LEGENDARY:
@@ -131,7 +131,12 @@ public class NpcStatCalculation {
 	private static float getRankModifier(StatEnum stat, NpcRank rank) {
 		switch (rank) {
 			case NOVICE:
-				return 1f;
+				switch (stat) {
+					case ABNORMAL_RESISTANCE_ALL:
+						return 0.2f;
+					default:
+						return 1f;
+				}
 			case DISCIPLINED:
 				switch (stat) {
 					case PHYSICAL_ATTACK:
@@ -146,6 +151,8 @@ public class NpcStatCalculation {
 						return 1.05f;
 					case PHYSICAL_CRITICAL_RESIST:
 						return 1.2f;
+					case ABNORMAL_RESISTANCE_ALL:
+						return 0.4f;
 				}
 				return 1f;
 			case SEASONED:
@@ -166,7 +173,7 @@ public class NpcStatCalculation {
 					case PHYSICAL_CRITICAL_RESIST:
 						return 1.4f;
 					case ABNORMAL_RESISTANCE_ALL:
-						return 1.2f;
+						return 0.6f;
 				}
 				return 1f;
 			case EXPERT:
@@ -187,7 +194,7 @@ public class NpcStatCalculation {
 					case PHYSICAL_CRITICAL_RESIST:
 						return 1.6f;
 					case ABNORMAL_RESISTANCE_ALL:
-						return 1.4f;
+						return 1f;
 				}
 				return 1f;
 			case VETERAN:
@@ -208,7 +215,7 @@ public class NpcStatCalculation {
 					case PHYSICAL_CRITICAL_RESIST:
 						return 1.8f;
 					case ABNORMAL_RESISTANCE_ALL:
-						return 1.6f;
+						return 1.4f;
 				}
 				return 1f;
 			case MASTER:
@@ -229,7 +236,7 @@ public class NpcStatCalculation {
 					case PHYSICAL_CRITICAL_RESIST:
 						return 2f;
 					case ABNORMAL_RESISTANCE_ALL:
-						return 1.8f;
+						return 1.7f;
 				}
 				return 1f;
 			default:
