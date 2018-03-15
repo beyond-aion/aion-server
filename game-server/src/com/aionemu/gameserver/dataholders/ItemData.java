@@ -43,13 +43,10 @@ public class ItemData {
 		for (ItemTemplate it : its) {
 			items.put(it.getTemplateId(), it);
 			if (it.getItemGroup() == ItemGroup.MANASTONE) {
-				String stoneName = it.getName().toLowerCase();
-				if (!stoneName.startsWith("[event]") && !stoneName.startsWith("[stamp]") && !stoneName.startsWith("[legion]")) {
-					add(manastones, it, it.getLevel());
-					addStonesForHigherLevels(manastones, it, it.getLevel());
-				}
+				add(manastones, it, it.getLevel());
+				addStonesForHigherLevels(manastones, it, it.getLevel());
 			} else if (it.getItemGroup() == ItemGroup.SPECIAL_MANASTONE) {
-				if (!it.getName().toLowerCase().startsWith("[stamp]"))
+				if (!it.getName().toLowerCase().contains("pvp"))
 					add(ancientManastones, it, it.getLevel());
 			}
 		}
@@ -57,6 +54,8 @@ public class ItemData {
 	}
 
 	private void add(Map<Integer, List<ItemTemplate>> itemMap, ItemTemplate item, int manastoneLevel) {
+		if (item.getName().startsWith("[")) // skip [Stamp], [Event], [Legion], [Legion reward], ...
+			return;
 		itemMap.compute(manastoneLevel, (level, items) -> {
 			if (items == null)
 				items = new ArrayList<>();
@@ -68,7 +67,7 @@ public class ItemData {
 	private void addStonesForHigherLevels(Map<Integer, List<ItemTemplate>> itemMap, ItemTemplate item, int manastoneLevel) {
 		if (manastoneLevel == 60 && item.getTemplateId() == 167000563) // Manastone: Healing Boost +3
 			add(itemMap, item, 70);
-		if (manastoneLevel == 10 || manastoneLevel == 30 || manastoneLevel == 50) {
+		else if (manastoneLevel == 10 || manastoneLevel == 30 || manastoneLevel == 50) {
 			if (item.getItemQuality() == ItemQuality.COMMON || item.getItemQuality() == ItemQuality.RARE) {
 				if (item.getName().contains("Manastone: Attack +")) {
 					add(itemMap, item, manastoneLevel + 10); // add 10 as 20 / 30 as 40 / 50 as 60
