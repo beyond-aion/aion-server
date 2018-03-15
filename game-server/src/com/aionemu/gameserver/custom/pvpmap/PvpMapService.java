@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.custom.pvpmap;
 
+import java.awt.Color;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -12,7 +13,7 @@ import com.aionemu.gameserver.model.ChatType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_MESSAGE;
+import com.aionemu.gameserver.utils.ChatUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
@@ -36,9 +37,20 @@ public class PvpMapService {
 	}
 
 	public void onLogin(Player player) {
-		if (isActive.get() && player.getLevel() >= 60 && isRandomBossAlive()) {
-			PacketSendUtility.sendPacket(player, new SM_MESSAGE(0, null, "[PvP-Map] A powerful monster appeared.", ChatType.BRIGHT_YELLOW_CENTER));
+		if (isActive.get() && isRandomBossAlive()) {
+			notifyBossSpawn(player);
 		}
+	}
+
+	public void notifyBossSpawn(Player player) {
+		boolean isOnPvpMap = isOnPvPMap(player);
+		if (!isOnPvpMap && player.isInInstance()) // don't notify players inside instances
+			return;
+		boolean isLvSixtyOrHigher = player.getLevel() >= 60;
+		if (isOnPvpMap || isLvSixtyOrHigher)
+			PacketSendUtility.sendMessage(player, "[PvP-Map] A powerful monster appeared.", ChatType.BRIGHT_YELLOW_CENTER);
+		if (!isOnPvpMap && isLvSixtyOrHigher)
+			PacketSendUtility.sendMessage(player, "You can join the map via " + ChatUtil.color(".pvp join", Color.WHITE), ChatType.BRIGHT_YELLOW);
 	}
 
 	public boolean isRandomBoss(Npc npc) {
@@ -50,10 +62,7 @@ public class PvpMapService {
 	}
 
 	private boolean isRandomBossAlive() {
-		if (handler != null) {
-			return handler.isRandomBossAlive();
-		}
-		return false;
+		return handler != null && handler.isRandomBossAlive();
 	}
 
 	private void join(Player p) {

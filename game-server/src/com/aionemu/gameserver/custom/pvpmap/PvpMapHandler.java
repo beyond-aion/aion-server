@@ -181,8 +181,7 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 				SpawnEngine.bringIntoWorld(npc, mapId, instanceId, spawn.getX(), spawn.getY(), spawn.getZ(), spawn.getHeading());
 				scheduleRandomBossDespawn(npc);
 				randomBossAlive = true;
-				PacketSendUtility.broadcastToWorld(new SM_MESSAGE(0, null, "[PvP-Map] A powerful monster appeared.", ChatType.BRIGHT_YELLOW_CENTER),
-					p -> p.getLevel() >= 60);
+				World.getInstance().forEachPlayer(PvpMapService.getInstance()::notifyBossSpawn);
 			}
 		}, CustomConfig.PVP_MAP_RANDOM_BOSS_SCHEDULE);
 	}
