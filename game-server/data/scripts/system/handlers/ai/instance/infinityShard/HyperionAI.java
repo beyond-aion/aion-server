@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.Future;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIName;
@@ -36,6 +37,7 @@ public class HyperionAI extends AggressiveNpcAI {
 	private List<Integer> percents = new ArrayList<>();
 	private WorldPosition northernSpawnPos = new WorldPosition(getPosition().getMapId(), 112.006f, 122.894f, 123.303f, (byte) 0);
 	private WorldPosition southernSpawnPos = new WorldPosition(getPosition().getMapId(), 148.127f, 150.346f, 123.729f, (byte) 0);
+	private Future<?> spawnTask;
 	private byte stage = 0;
 
 	public HyperionAI(Npc owner) {
@@ -120,7 +122,7 @@ public class HyperionAI extends AggressiveNpcAI {
 	}
 
 	private void scheduleLastPhase() {
-		ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
+		spawnTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
 			if (!isDead()) {
 				spawnSummons(5);
 				spawnAncientTyrhund();
@@ -204,8 +206,14 @@ public class HyperionAI extends AggressiveNpcAI {
 		getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21241, 1, 100)));
 	}
 
+	private void cancelSpawnTask() {
+		if (spawnTask != null && !spawnTask.isCancelled())
+			spawnTask.cancel(true);
+	}
+
 	@Override
 	protected void handleBackHome() {
+		cancelSpawnTask();
 		super.handleBackHome();
 		stage = 0;
 		addPercent();
@@ -213,12 +221,14 @@ public class HyperionAI extends AggressiveNpcAI {
 
 	@Override
 	protected void handleDespawned() {
+		cancelSpawnTask();
 		super.handleDespawned();
 		percents.clear();
 	}
 
 	@Override
 	protected void handleDied() {
+		cancelSpawnTask();
 		super.handleDied();
 		percents.clear();
 	}
