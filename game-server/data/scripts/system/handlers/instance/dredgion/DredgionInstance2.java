@@ -11,6 +11,7 @@ import java.util.function.Consumer;
 
 import org.apache.commons.lang3.mutable.MutableInt;
 
+import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.ai.manager.WalkManager;
 import com.aionemu.gameserver.configs.main.GroupConfig;
@@ -129,6 +130,8 @@ public class DredgionInstance2 extends GeneralInstanceHandler {
 			if (player.getRace().equals(dredgionReward.getWinningRace())) {
 				abyssPoint += dredgionReward.getWinnerPoints();
 				ItemService.addItem(player, 186000242, 1); // Ceramium Medal
+				if (Rnd.chance() < 30)
+					ItemService.addItem(player, 188950017, 1); // Special Courier Pass (Abyss Eternal/Lv. 61-65)
 			} else {
 				abyssPoint += dredgionReward.getLooserPoints();
 				ItemService.addItem(player, 186000147, 1); // Mithril Medal

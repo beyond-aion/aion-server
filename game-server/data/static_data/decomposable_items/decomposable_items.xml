@@ -22919,7 +22919,32 @@
 		</items>
 	</decomposable>
 	<decomposable item_id="188052660" /><!-- Kamar Reward Box -->
-	<decomposable item_id="188052661" /><!-- Kamar Idian Bundle -->
+	<decomposable item_id="188052661"><!-- Kamar Idian Bundle -->
+		<items>
+			<item id="166050031" /><!-- Esoteric Idian: Physical Attack -->
+		</items>
+		<items>
+			<item id="166050032" /><!-- Esoteric Idian: Magical Attack -->
+		</items>
+		<items>
+			<item id="166050033" /><!-- Esoteric Idian: Physical Defense -->
+		</items>
+		<items>
+			<item id="166050034" /><!-- Esoteric Idian: Magical Defense -->
+		</items>
+		<items>
+			<item id="166050035" /><!-- Esoteric Idian: Assistance -->
+		</items>
+		<items>
+			<item id="166050036" /><!-- Esoteric Idian: Resistance -->
+		</items>
+		<items>
+			<item id="166050037" /><!-- Esoteric Idian: Physical/Magical Attack -->
+		</items>
+		<items>
+			<item id="166050038" /><!-- Esoteric Idian: Physical/Magical Defense -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188052662" /><!-- Mystery Stigma -->
 	<decomposable item_id="188052663" /><!-- Enigma Stigma -->
 	<decomposable item_id="188052664" /><!-- Occult Stigma -->
@@ -22936,21 +22961,29 @@
 	<decomposable item_id="188052668" /><!-- Combat Supplies Box -->
 	<decomposable item_id="188052669" /><!-- Kahrun's Symbol Bundle -->
 	<decomposable item_id="188052670"><!-- Kamar Victory Box -->
-		<items>
+		<items chance="28">
 			<item id="186000243" min_count="6" max_count="7" /><!-- Fragmented Ceramium -->
 			<item id="164000076" min_count="10" /><!-- Greater Running Scroll -->
+			<item id="188052611" /><!-- Kamar Idian Bundle -->
+			<item id="152012601" /><!-- Conviction Crystal -->
 		</items>
-		<items>
+		<items chance="28">
 			<item id="186000243" min_count="6" max_count="7" /><!-- Fragmented Ceramium -->
 			<item id="162000122" min_count="10" /><!-- Superior Life Serum -->
+			<item id="188052611" /><!-- Kamar Idian Bundle -->
+			<item id="152012603" /><!-- Ore of Conviction -->
 		</items>
-		<items>
+		<items chance="14">
 			<item id="186000243" min_count="6" max_count="7" /><!-- Fragmented Ceramium -->
 			<item id="162000123" min_count="10" /><!-- Superior Mana Serum -->
+			<item id="188052611" /><!-- Kamar Idian Bundle -->
+			<item id="162000131" /><!-- Fine Bracing Water -->
 		</items>
-		<items>
+		<items chance="30">
 			<item id="186000243" min_count="6" max_count="7" /><!-- Fragmented Ceramium -->
-			<item id="162000124" min_count="10" /><!-- Superior Recovery Serum -->
+			<item id="160003587" min_count="10" /><!-- Pepento Jelly -->
+			<item id="188052611" /><!-- Kamar Idian Bundle -->
+			<item id="188950017" /><!-- Special Courier Pass (Abyss Eternal/Lv. 61-65) -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188052671" /><!-- Test Enchantment Stone Bundle -->
@@ -23203,26 +23236,39 @@
 	<decomposable item_id="188052679" /><!-- [Growth] Stigma Bundle -->
 	<decomposable item_id="188052680" /><!-- [Growth] Shiny Stigma Bundle -->
 	<decomposable item_id="188052681"><!-- Reward Box of Ophidan Victory -->
-		<items>
+		<items chance="23.4">
 			<item id="164000134" min_count="5" max_count="10" /><!-- Greater Awakening Scroll -->
 			<item id="186000243" min_count="3" /><!-- Fragmented Ceramium -->
 			<item id="169405259" min_count="4" /><!-- Pure Flame Powder -->
 			<item id="169405261" min_count="4" /><!-- Pure Flame Crystal -->
 		</items>
-		<items>
+		<items chance="23.3">
 			<item id="186000237" min_count="25" /><!-- Ancient Coin -->
 			<item id="186000243" min_count="3" /><!-- Fragmented Ceramium -->
-			<item id="169405259" min_count="4" /><!-- Pure Flame Powder -->
-			<item id="169405261" min_count="4" /><!-- Pure Flame Crystal -->
+			<item id="152012601" /><!-- Conviction Crystal -->
+			<item id="152012603" /><!-- Ore of Conviction -->
 		</items>
-		<items>
+		<items chance="23.3">
 			<item id="188052739" /><!-- Ophidan Composite Manastone Bundle -->
 			<item id="186000243" min_count="3" /><!-- Fragmented Ceramium -->
-			<item id="169405259" min_count="4" /><!-- Pure Flame Powder -->
-			<item id="169405261" min_count="4" /><!-- Pure Flame Crystal -->
+			<item id="169405254" /><!-- Earth Trace -->
+		</items>
+		<items chance="30">
+			<item id="188052682" /><!-- Ophidan Recharger Bundle -->
+			<item id="186000243" min_count="3" /><!-- Fragmented Ceramium -->
+			<item id="188950017" /><!-- Special Courier Pass (Abyss Eternal/Lv. 61-65) -->
 		</items>
 	</decomposable>
-	<decomposable item_id="188052682" /><!-- Ophidan Recharger Bundle -->
+	<decomposable item_id="188052682"><!-- Ophidan Recharger Bundle -->
+		<items>
+			<item id="168310018" race="ELYOS" /><!-- Major Blessed Augment: Level 2 -->
+			<item id="168310019" race="ASMODIANS" /><!-- Major Blessed Augment: Level 2 -->
+		</items>
+		<items>
+			<item id="168310016" race="ELYOS" /><!-- Major Deep Conditioning: Level 2 -->
+			<item id="168310017" race="ASMODIANS" /><!-- Major Deep Conditioning: Level 2 -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188052683" /><!-- Beritra's Discards -->
 	<decomposable item_id="188052684"><!-- [Event] Dreamer's Reward -->
 		<items>
@@ -26251,11 +26297,19 @@
 	<decomposable item_id="188053028" /><!-- Infused Idian Shugo Box: Spell Resist -->
 	<decomposable item_id="188053029" /><!-- Infused Spring Box -->
 	<decomposable item_id="188053030"><!-- Idgel Dome Reward Box -->
-		<items>
+		<items chance="35">
 			<item id="152012598" min_count="2" /><!-- Heart of Destruction -->
 		</items>
-		<items>
+		<items chance="35">
 			<item id="152012599" min_count="2" /><!-- Heart of Protection -->
+		</items>
+		<items chance="15">
+			<item id="152012598" min_count="2" /><!-- Heart of Destruction -->
+			<item id="188950017" /><!-- Special Courier Pass (Abyss Eternal/Lv. 61-65) -->
+		</items>
+		<items chance="15">
+			<item id="152012599" min_count="2" /><!-- Heart of Protection -->
+			<item id="188950017" /><!-- Special Courier Pass (Abyss Eternal/Lv. 61-65) -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188053031" /><!-- Idgel Dome Consolation Prize -->
