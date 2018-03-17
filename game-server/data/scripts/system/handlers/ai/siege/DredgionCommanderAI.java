@@ -8,6 +8,7 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.stats.calc.Stat2;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
+import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /*
@@ -39,6 +40,13 @@ public class DredgionCommanderAI extends SiegeNpcAI {
 			default:
 				return 0;
 		}
+	}
+
+	@Override
+	public int modifyOwnerDamage(int damage, Effect effect) {
+		if (effect.getStack().equals("DGFI_ONESHOTONEKILL_WARPDR"))
+			damage *= SiegeConfig.SIEGE_HEALTH_MULTIPLIER;
+		return damage;
 	}
 
 	private void scheduleOneShot() {
