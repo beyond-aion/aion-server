@@ -33865,7 +33865,11 @@
 	<decomposable item_id="188053912" /><!-- Noble Enchantment Stone Bundle -->
 	<decomposable item_id="188053913" /><!-- Noble Enchantment Stone Bundle -->
 	<decomposable item_id="188053914" /><!-- Bountiful Stigma Bundle -->
-	<decomposable item_id="188053915" /><!-- [Event] Aether Bloom Bouquet -->
+	<decomposable item_id="188053915"><!-- [Event] Aether Bloom Bouquet -->
+		<items>
+			<item id="186000406" min_count="3" /><!-- [Event] Aether Bloom -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188053916"><!-- Guestpetal Bundle -->
 		<items>
 			<item id="186000146"/><!-- Guestpetal -->
@@ -33975,8 +33979,114 @@
 	<decomposable item_id="188054025" /><!-- [Event] Aetheric Field Fragment Bundle -->
 	<decomposable item_id="188054026" /><!-- [Event] Honorable Armor Box of Conquest -->
 	<decomposable item_id="188054027" /><!-- [Event] Honorable Weapon Box of Conquest -->
-	<decomposable item_id="188054028" /><!-- [Event] Fountain Gift -->
-	<decomposable item_id="188054029" /><!-- [Event] Blooming Gift -->
+	<decomposable item_id="188054028"><!-- [Event] Fountain Gift -->
+		<items chance="9.75">
+			<item id="164000255" min_count="5" max_count="10" /><!-- Fine Crit Strike Scroll -->
+		</items>
+		<items chance="9.75">
+			<item id="164000256" min_count="5" max_count="10" /><!-- Fine Crit Spell Scroll -->
+		</items>
+		<items chance="9.75">
+			<item id="188053609" min_count="1" max_count="2" /><!-- [Event] Level 60 Composite Manastone Bundle -->
+		</items>
+		<items chance="9.75">
+			<item id="160010101" min_count="3" race="ELYOS" /><!-- Summer-Loving Inquin Form Candy -->
+			<item id="160010102" min_count="3" race="ASMODIANS" /><!-- Summer-Loving Inquin Form Candy -->
+		</items>
+		<items chance="6.6">
+			<item id="186000242" min_count="2" /><!-- Ceramium Medal -->
+		</items>
+		<items chance="6.6">
+			<item id="186000051" min_count="2" max_count="3" /><!-- Major Ancient Crown -->
+		</items>
+		<items chance="6.6">
+			<item id="164000126" min_count="5" /><!-- Major Strike Resist Scroll -->
+		</items>
+		<items chance="6.6">
+			<item id="164000130" min_count="5" /><!-- Major Spell Resist Scroll -->
+		</items>
+		<items chance="6.6">
+			<item id="186000236" min_count="10" max_count="15" /><!-- Blood Mark -->
+		</items>
+		<items chance="6">
+			<item id="166100020" min_count="100" /><!-- [Stamp] Greater Supplements (Eternal) -->
+		</items>
+		<items chance="6">
+			<item id="186000406" /><!-- [Event] Aether Blossom -->
+		</items>
+		<items chance="6">
+			<item id="166020000" min_count="2" /><!-- Omega Enchantment Stone -->
+		</items>
+		<items chance="3">
+			<item id="188053702" /><!-- Vasharti's Equipment Box -->
+		</items>
+		<items chance="3">
+			<item id="188052388" /><!-- Modor's Equipment Box -->
+		</items>
+		<items chance="3">
+			<item id="188052827" /><!-- Dynatoum's Equipment Chest -->
+		</items>
+		<items chance="1">
+			<item id="169610060" /><!-- [Title Card] Chaser of Atreia – 30-day pass -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188054029"><!-- [Event] Blooming Gift -->
+		<items chance="8.34">
+			<item id="186000242" min_count="4" /><!-- Ceramium Medal -->
+		</items>
+		<items chance="8.33">
+			<item id="186000051" min_count="7" /><!-- Major Ancient Crown -->
+		</items>
+		<items chance="8.34">
+			<item id="186000236" min_count="50" /><!-- Blood Mark -->
+		</items>
+		<items chance="8.33">
+			<item id="188053610" min_count="2" max_count="4" /><!-- [Event] Level 70 Composite Manastone Bundle -->
+		</items>
+		<items chance="8.33">
+			<item id="166020000" min_count="8" /><!-- Omega Enchantment Stone -->
+		</items>
+		<items chance="8.33">
+			<item id="166100023" min_count="300" /><!-- [Stamp] Greater Supplements (Mythic) -->
+		</items>
+		<items chance="6.67">
+			<item id="188053295" /><!-- Empyrean Plume Chest -->
+		</items>
+		<items chance="6.67">
+			<item id="166500002" min_count="3" /><!-- Amplification Stone -->
+		</items>
+		<items chance="6.66">
+			<item id="166030005" min_count="2" max_count="3" /><!-- Tempering Solution -->
+		</items>
+		<items chance="5">
+			<item id="188053702" /><!-- Vasharti's Equipment Box -->
+		</items>
+		<items chance="5">
+			<item id="188052388" /><!-- Modor's Equipment Box -->
+		</items>
+		<items chance="5">
+			<item id="188052827" /><!-- Dynatoum's Equipment Chest -->
+		</items>
+		<items chance="5">
+			<item id="188053915" /><!-- [Event] Aether Blossom Bouquet -->
+		</items>
+		<items chance="3">
+			<item id="188053618" /><!-- Honorable Elim's Idian Bundle -->
+		</items>
+		<items chance="3">
+			<item id="188054238" /><!-- Iron Wall Armor Box -->
+		</items>
+		<items chance="3">
+			<item id="168310018" race="ELYOS" /><!-- Major Blessed Augment: Level 2 -->
+			<item id="168310019" race="ASMODIANS" /><!-- Major Blessed Augment: Level 2 -->
+		</items>
+		<items chance="0.5">
+			<item id="187000155" /><!-- Brigade General Vasharti's Wings -->
+		</items>
+		<items chance="0.5">
+			<item id="190100115" /><!-- Palomeno Heorn -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188054030" /><!-- [Club] Decorative Furniture Bundle -->
 	<decomposable item_id="188054031" /><!-- [Club] Functional Furniture Bundle -->
 	<decomposable item_id="188054032" /><!-- [Club] Employment Contract Bundle -->

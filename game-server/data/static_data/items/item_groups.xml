@@ -4990,7 +4990,7 @@
 		<item id="166000196" level="175"/>
 		<item id="166020000" level="200"/>
 	</enchants>
-	<event_legendary_symphony bonusType="EVENT_LEGENDARY_SYMPHONY">
+	<events bonusType="EVENTS">
 		<!-- 80673/80678 - %Quest_Branch_Cashquest_Event_01 -->
 		<item id="188100253" level="1" count="1" chance="16.66"/>
 		<item id="188100254" level="1" count="1" chance="16.66"/>
@@ -5041,7 +5041,12 @@
 		<item id="188100256" level="8" count="10" chance="20"/>
 		<item id="182007170" level="8" count="10" chance="20"/>
 		<item id="182007170" level="8" count="50" chance="20"/>
-	</event_legendary_symphony>
+		<!-- 80707 Magic Fountain -->
+		<item id="188054029" level="9" count="1" chance="5"/>
+		<item id="188054028" level="9" count="1" chance="10"/>
+		<item id="186000406" level="9" count="1" chance="20"/>
+		<item id="186000407" level="9" count="1" chance="65"/>
+	</events>
 	<boss_rare bonusType="BOSS">
 		<item id="110100122" race="ELYOS"/>
 		<item id="110100123" race="ASMODIANS"/>

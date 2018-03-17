@@ -26,6 +26,143 @@
 			</buff>
 		</buffs>
 	</event>
+	<event name="Blessing Of The Magic Fountain" start="2018-03-17T00:00:00" end="2018-03-30T23:59:59">
+		<inventory_drop item_id="186000406" startlevel="1" interval="60" />
+		<spawns>
+			<!-- Sanctum -->
+			<spawn_map map_id="110010000">
+				<!-- Decoration -->
+				<spawn npc_id="833500" respawn_time="295">
+					<spot x="1532.5385" y="1511.5795" z="565.8823" h="60" />
+				</spawn>
+				<!-- Shimmering Fountain -->
+				<spawn npc_id="833501" respawn_time="295">
+					<spot x="1537.6699" y="1507.7633" z="565.9822" h="60" />
+				</spawn>
+				<!-- Fountess Lollo -->
+				<spawn npc_id="833505" respawn_time="295">
+					<spot x="1533.6880" y="1508.4640" z="565.9783" h="69" />
+				</spawn>
+				<!-- Fountess Lolly -->
+				<spawn npc_id="833502" respawn_time="295">
+					<spot x="1535.2028" y="1504.7015" z="565.9864" h="68" />
+				</spawn>
+				<!-- Fountess Lilly -->
+				<spawn npc_id="833503" respawn_time="295">
+					<spot x="1532.7162" y="1513.9586" z="565.9809" h="65" />
+				</spawn>
+				<!-- Fountess Suri -->
+				<spawn npc_id="833507" respawn_time="295">
+					<spot x="1535.5231" y="1514.0200" z="565.9769" h="35" />
+				</spawn>
+				<!-- Fountess Polly -->
+				<spawn npc_id="833506" respawn_time="295">
+					<spot x="1534.9901" y="1515.8052" z="565.9838" h="99" />
+				</spawn>
+				<!-- Fountess Lulu -->
+				<spawn npc_id="833504" respawn_time="295">
+					<spot x="1529.5416" y="1518.0997" z="565.9816" h="2" />
+				</spawn>
+				<!-- Fountess Solly -->
+				<spawn npc_id="833508" respawn_time="295">
+					<spot x="1531.3630" y="1518.2821" z="565.9862" h="63" />
+				</spawn>
+			</spawn_map>
+			<!-- Pandaemonium -->
+			<spawn_map map_id="120010000">
+				<!-- Decoration -->
+				<spawn npc_id="833500" respawn_time="295">
+					<spot x="1193.6720" y="1396.0768" z="208.1250" h="10" />
+				</spawn>
+				<!-- Shimmering Fountain -->
+				<spawn npc_id="833501" respawn_time="295">
+					<spot x="1188.6794" y="1399.9371" z="208.2264" h="2" />
+				</spawn>
+				<!-- Fountess Lollo -->
+				<spawn npc_id="833505" respawn_time="295">
+					<spot x="1189.7926" y="1404.0980" z="208.2290" h="1" />
+				</spawn>
+				<!-- Fountess Lolly -->
+				<spawn npc_id="833502" respawn_time="295">
+					<spot x="1192.9993" y="1399.7278" z="208.2241" h="1" />
+				</spawn>
+				<!-- Fountess Lilly -->
+				<spawn npc_id="833503" respawn_time="295">
+					<spot x="1194.5085" y="1393.8834" z="208.2232" h="11" />
+				</spawn>
+				<!-- Fountess Lulu -->
+				<spawn npc_id="833504" respawn_time="295">
+					<spot x="1201.2903" y="1393.4363" z="208.2217" h="70" />
+				</spawn>
+				<!-- Fountess Polly -->
+				<spawn npc_id="833506" respawn_time="295">
+					<spot x="1199.9564" y="1392.1111" z="208.2227" h="15" />
+				</spawn>
+				<!-- Fountess Suri -->
+				<spawn npc_id="833507" respawn_time="295">
+					<spot x="1196.3632" y="1388.4945" z="208.2259" h="58" />
+				</spawn>
+				<!-- Fountess Solly -->
+				<spawn npc_id="833508" respawn_time="295">
+					<spot x="1194.5529" y="1388.4427" z="208.2309" h="2" />
+				</spawn>
+			</spawn_map>
+			<!-- GM Isle for test purpose -->
+			<spawn_map map_id="900110000">
+				<!-- Yellow Aether Blossom -->
+				<spawn npc_id="702786" respawn_time="30">
+					<spot x="2678.7410" y="125.1353" z="117.1250" />
+					<spot x="2678.5710" y="128.4471" z="117.1250" />
+					<spot x="2678.8208" y="132.0798" z="117.1250" />
+				</spawn>
+				<!-- Ruby Aether Blossom -->
+				<spawn npc_id="702787" respawn_time="30">
+					<spot x="2683.7239" y="122.9389" z="117.1250" />
+					<spot x="2683.6025" y="126.8875" z="117.1250" />
+					<spot x="2683.5195" y="130.8008" z="117.1250" />
+				</spawn>
+				<!-- Pure Aether Blossom -->
+				<spawn npc_id="702788" respawn_time="30">
+					<spot x="2686.2537" y="124.6852" z="117.1250" />
+					<spot x="2686.2402" y="128.8956" z="117.1250" />
+					<spot x="2686.3066" y="133.1986" z="117.1250" />
+				</spawn>
+			</spawn_map>
+		</spawns>
+		<event_drops>
+			<gd_rule rule_name="Aether Bloom Bouquet" min_count="1" base_chance="100" min_diff="-20" max_diff="40" member_limit="6">
+				<gd_maps>
+					<gd_map map_id="300590000" /><!-- Ophidan Bridge -->
+					<gd_map map_id="301380000" /><!-- Danuar Sanctuary -->
+					<gd_map map_id="301140000" /><!-- Seized Danuar Sanctuary -->
+					<gd_map map_id="301230000" /><!-- Illuminary Obelisk -->
+					<gd_map map_id="301370000" /><!-- Infernal Illuminary Obelisk -->
+				</gd_maps>
+				<gd_npcs>
+					<!-- Ophidan Bridge -->
+					<gd_npc npc_id="235768" /><!-- Spirited Velkur -->
+					<gd_npc npc_id="235769" /><!-- Velkur Aethercaster -->
+					<gd_npc npc_id="235770" /><!-- Velkur Aetherpriest -->
+					<gd_npc npc_id="235771" /><!-- Velkur Aetherknife -->
+					<!-- Danuar Sanctuary -->
+					<gd_npc npc_id="235624" /><!-- Warmage Suyaroka -->
+		 			<gd_npc npc_id="235625" /><!-- Chief Medic Tagnu -->
+		 			<gd_npc npc_id="235626" /><!-- Virulent Ukahim -->
+					<!-- Seized Danuar Sanctuary -->
+					<gd_npc npc_id="235619" /><!-- Warmage Suyaroka -->
+		 			<gd_npc npc_id="235620" /><!-- Chief Medic Tagnu -->
+		 			<gd_npc npc_id="235621" /><!-- Virulent Ukahim -->
+					<!-- Illuminary Obelisk -->
+					<gd_npc npc_id="233740" /><!-- Test Weapon Dynatoum -->
+					<!-- Infernal Illuminary Obelisk -->
+					<gd_npc npc_id="234686" /><!-- Remodeled Dynatoum -->
+				</gd_npcs>
+				<gd_items>
+					<gd_item id="188053915" /><!-- [Event] Aether Bloom Bouquet -->
+				</gd_items>
+				</gd_rule>	
+		</event_drops>
+	</event>
 	<event name="Beyond Aion Broken Hearts" start="2018-02-11T00:00:00" end="2018-02-18T23:59:59">
 		<event_drops>
 			<gd_rule rule_name="Broken Hearts L" min_count="1" base_chance="15" fixed_chance="true" min_diff="-20" max_diff="70">
