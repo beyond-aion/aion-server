@@ -1,5 +1,7 @@
 package ai.instance.infinityShard;
 
+import java.util.concurrent.Future;
+
 import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.NpcAI;
@@ -16,6 +18,8 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 @AIName("ide_resonator")
 public class IdeResonatorAI extends NpcAI {
 
+	private Future<?> task;
+
 	public IdeResonatorAI(Npc owner) {
 		super(owner);
 	}
@@ -26,7 +30,7 @@ public class IdeResonatorAI extends NpcAI {
 		Npc hyperion = getPosition().getWorldMapInstance().getNpc(231073);
 		AIActions.targetCreature(IdeResonatorAI.this, hyperion);
 		ThreadPoolManager.getInstance().schedule(() -> {
-			if (getOwner() != null && !getOwner().isDead() && hyperion != null && !hyperion.isDead()) {
+			if (!isDead() && hyperion != null && !hyperion.isDead()) {
 				int firstBuff = 0;
 				switch (getNpcId()) {
 					case 231093:
@@ -42,8 +46,8 @@ public class IdeResonatorAI extends NpcAI {
 				AIActions.useSkill(IdeResonatorAI.this, firstBuff);
 			}
 		}, 8000);
-		ThreadPoolManager.getInstance().schedule(() -> {
-			if (getOwner() != null && !getOwner().isDead() && hyperion != null && !hyperion.isDead()) {
+		task = ThreadPoolManager.getInstance().schedule(() -> {
+			if (!isDead() && !getOwner().getLifeStats().isAboutToDie() && hyperion != null && !hyperion.isDead()) {
 				int secondBuff = 0;
 				if (!hyperion.getEffectController().hasAbnormalEffect(21258))
 					secondBuff = 21258;
@@ -70,6 +74,19 @@ public class IdeResonatorAI extends NpcAI {
 				SkillEngine.getInstance().applyEffectDirectly(21371, getOwner(), getOwner());
 				break;
 		}
+	}
+
+	@Override
+	protected void handleDied() {
+		task.cancel(true);
+		super.handleDied();
+	}
+
+	@Override
+	protected void handleDespawned() {
+		if (task != null && !task.isCancelled())
+			task.cancel(true);
+		super.handleDespawned();
 	}
 
 	@Override
