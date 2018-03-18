@@ -146,16 +146,18 @@ public enum BrokerItemMask {
 	/**
 	 * Consumables Section + sub categories
 	 */
-	CONSUMABLES(9060, new BrokerContainsFilter(1410, 1600, 1620, 1640, 1660, 1661, 1670, 1680, 1690, 1692, 1693, 1694, 1696), null, true),
+	CONSUMABLES(9060, new BrokerContainsFilter(1410, 1600, 1620, 1640, 1660, 1661, 1665, 1670, 1680, 1690, 1692, 1693, 1694, 1696), null, true),
 	CONSUMABLES_FOOD(1600, new BrokerContainsFilter(1600), BrokerItemMask.CONSUMABLES, false),
 	CONSUMABLES_POTION(1620, new BrokerContainsFilter(1620), BrokerItemMask.CONSUMABLES, false),
 	CONSUMABLES_SCROLL(7060, new BrokerContainsFilter(1640), BrokerItemMask.CONSUMABLES, false),
-	CONSUMABLES_MODIFY(8060, new BrokerContainsFilter(1660, 1670, 1680, 1692, 1691), BrokerItemMask.CONSUMABLES, true),
-	CONSUMABLES_MODIFY_ENCHANTMENT_STONE(1660, new BrokerContainsFilter(1660), BrokerItemMask.CONSUMABLES_MODIFY, false),
+	CONSUMABLES_MODIFY(8060, new BrokerContainsFilter(1660, 1665, 1670, 1680, 1692, 1691), BrokerItemMask.CONSUMABLES, true),
+	CONSUMABLES_MODIFY_ENCHANTMENT_STONE(1660, new BrokerContainsExtraFilter(16600, 16602), BrokerItemMask.CONSUMABLES_MODIFY, false),
 	CONSUMABLES_MODIFY_MANASTONE(1670, new BrokerContainsFilter(1670), BrokerItemMask.CONSUMABLES_MODIFY, false),
+	CONSUMABLES_MODIFY_TEMPERING_SOLUTION(7065, new BrokerContainsExtraFilter(16603), BrokerItemMask.CONSUMABLES_MODIFY, false),
 	CONSUMABLES_MODIFY_GODSTONE(1680, new BrokerContainsFilter(1680), BrokerItemMask.CONSUMABLES_MODIFY, false),
 	CONSUMABLES_MODIFY_DYE(7061, new BrokerContainsFilter(1692), BrokerItemMask.CONSUMABLES_MODIFY, false),
 	CONSUMABLES_MODIFY_PAIN(7064, new BrokerContainsFilter(1691), BrokerItemMask.CONSUMABLES_MODIFY, false),
+	CONSUMABLES_MODIFY_AMPLIFICATION_STONE(1665, new BrokerContainsFilter(1665), BrokerItemMask.CONSUMABLES_MODIFY, false),
 	CONSUMABLES_MODIFY_OTHER(7063, new BrokerContainsFilter(1661), BrokerItemMask.CONSUMABLES_MODIFY, false),
 	CONSUMABLES_OTHER(7062, new BrokerContainsFilter(1410, 1690, 1693, 1694, 1696), BrokerItemMask.CONSUMABLES, false),
 
