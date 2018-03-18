@@ -17369,17 +17369,25 @@
 	</decomposable>
 	<decomposable item_id="188052295" selectable="true"><!-- Customized Skill Book Bundle -->
 		<items>
-			<item id="169500935" /><!-- Fear: Ginseng I -->
+			<item id="169500932" /><!-- Sleep: Frightcorn I -->
 			<item id="169500933" /><!-- Sleep: Scarecrow I -->
+			<item id="169500934" /><!-- Fear: Poppy I -->
+			<item id="169500935" /><!-- Fear: Ginseng I -->
+			<item id="169500939" /><!-- Summon Divine Mirror IV -->
 			<item id="169500947" /><!-- Summon Divine Crystal IV -->
+			<item id="169500919" /><!-- Transformation: White Tiger IV -->
 			<item id="169500927" /><!-- Transformation: Krall IV -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188052296" selectable="true"><!-- Customized Skill Book Bundle -->
 		<items>
-			<item id="169500935" /><!-- Fear: Ginseng I -->
+			<item id="169500932" /><!-- Sleep: Frightcorn I -->
 			<item id="169500933" /><!-- Sleep: Scarecrow I -->
+			<item id="169500934" /><!-- Fear: Poppy I -->
+			<item id="169500935" /><!-- Fear: Ginseng I -->
+			<item id="169500943" /><!-- Summon Divine Mirror IV -->
 			<item id="169500951" /><!-- Summon Divine Crystal IV -->
+			<item id="169500923" /><!-- Transformation: White Tiger IV -->
 			<item id="169500931" /><!-- Transformation: Krall IV -->
 		</items>
 	</decomposable>
