@@ -317,17 +317,6 @@ public class AhserionRaid {
 			TeleportService.teleportTo(player, team.getFortressPosition());
 	}
 
-	public void onPlayerLogout(Player player) {
-		if (player.isDead()) {
-			PanesterraTeam team = getPanesterraFactionTeam(player);
-			if (team != null) {
-				WorldPosition pos = team.getStartPosition();
-				TeleportService.teleportTo(player, pos.getMapId(), pos.getX(), pos.getY(), pos.getZ());
-			} else
-				TeleportService.moveToBindLocation(player);
-		}
-	}
-
 	public int getTeamMemberCountByFaction(PanesterraFaction faction) {
 		PanesterraTeam team = panesterraTeams.get(faction);
 		if (team != null)
