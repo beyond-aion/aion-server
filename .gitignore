@@ -7,3 +7,6 @@ game-server/log/
 game-server/target/
 login-server/log/
 login-server/target/
+
+.idea/
+**.iml
