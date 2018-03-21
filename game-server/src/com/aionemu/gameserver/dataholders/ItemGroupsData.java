@@ -62,7 +62,7 @@ import com.aionemu.gameserver.model.templates.rewards.IdLevelReward;
 @XmlRootElement(name = "item_groups")
 @XmlType(name = "", propOrder = { "craftMaterials", "craftShop", "craftBundles", "craftRecipes", "manastonesCommon", "manastonesRare",
 	"medals", "foodCommon", "foodRare", "foodLegendary", "medicineCommon", "medicineRare", "medicineLegendary", "oresRare", "oresLegendary",
-	"oresUnique", "oresEpic", "gatherRare", "enchants", "eventLegendarySymphony", "bossRare", "bossLegendary", "feedFluids", "feedArmor", "feedThorns",
+	"oresUnique", "oresEpic", "gatherRare", "enchants", "events", "bossRare", "bossLegendary", "feedFluids", "feedArmor", "feedThorns",
 	"feedBones", "feedBalaurScales", "feedSouls", "feedExcludes", "stinkingJunk", "healthyFoodAll", "healthyFoodSpicy", "aetherPowderBiscuit",
 	"aetherCrystalBiscuit", "aetherGemBiscuit", "poppySnack", "poppySnackTasty", "poppySnackNutritious", "shugoCoins", "aetherCherries" })
 @XmlAccessorType(XmlAccessType.NONE)
@@ -126,9 +126,9 @@ public class ItemGroupsData {
 
 	@XmlElement(name = "enchants")
 	protected EnchantGroup enchants;
-	
-	@XmlElement(name = "event_legendary_symphony")
-	protected EventGroup eventLegendarySymphony;
+
+	@XmlElement(name = "events")
+	protected EventGroup events;
 
 	@XmlElement(name = "boss_rare")
 	protected BossGroup bossRare;
@@ -186,7 +186,7 @@ public class ItemGroupsData {
 
 	@XmlElement(name = "feed_shugo_event_coin")
 	protected ShugoEventCoinGroup shugoCoins;
-	
+
 	@XmlElement(name = "feed_aether_cherry")
 	protected AetherCherryGroup aetherCherries;
 
@@ -499,9 +499,9 @@ public class ItemGroupsData {
 	public CraftRecipeGroup getCraftRecipes() {
 		return craftRecipes;
 	}
-	
-	public EventGroup getEventLegendarySymphony() {
-		return eventLegendarySymphony;
+
+	public EventGroup getEventGroups() {
+		return events;
 	}
 
 	public BonusItemGroup[] getCraftGroups() {
@@ -575,7 +575,7 @@ public class ItemGroupsData {
 
 	private List<ItemRaceEntry> getPetFood(FoodType foodType) {
 		switch (foodType) {
-		// Biscuits bought from shop
+			// Biscuits bought from shop
 			case AETHER_CRYSTAL_BISCUIT:
 				return aetherCrystalBiscuit.getItems();
 			case AETHER_GEM_BISCUIT:
@@ -583,7 +583,7 @@ public class ItemGroupsData {
 			case AETHER_POWDER_BISCUIT:
 				return aetherPowderBiscuit.getItems();
 
-				// Specific Junk
+			// Specific Junk
 			case ARMOR:
 				return feedArmor.getItems();
 			case BALAUR_SCALES:
@@ -597,13 +597,13 @@ public class ItemGroupsData {
 			case THORNS:
 				return feedThorns.getItems();
 
-				// Healthy Pet Food bought from vendors
+			// Healthy Pet Food bought from vendors
 			case HEALTHY_FOOD_ALL:
 				return healthyFoodAll.getItems();
 			case HEALTHY_FOOD_SPICY:
 				return healthyFoodSpicy.getItems();
 
-				// Runaway Poppy's Food
+			// Runaway Poppy's Food
 			case POPPY_SNACK:
 				return poppySnack.getItems();
 			case POPPY_SNACK_TASTY:
@@ -611,11 +611,11 @@ public class ItemGroupsData {
 			case POPPY_SNACK_NUTRITIOUS:
 				return poppySnackNutritious.getItems();
 
-				// Shugo Tomb Event pet food
+			// Shugo Tomb Event pet food
 			case SHUGO_EVENT_COIN:
 				return shugoCoins.getItems();
 
-				// Exclusions
+			// Exclusions
 			case STINKY:
 				return stinkingJunk.getItems();
 			case EXCLUDES:
@@ -629,7 +629,7 @@ public class ItemGroupsData {
 		return count + manastonesCommon.getItems().size() + manastonesRare.getItems().size() + foodCommon.getItems().size() + foodRare.getItems().size()
 			+ foodLegendary.getItems().size() + medicineCommon.getItems().size() + medicineRare.getItems().size() + medicineLegendary.getItems().size()
 			+ oresRare.getItems().size() + oresLegendary.getItems().size() + oresUnique.getItems().size() + oresEpic.getItems().size()
-			+ gatherRare.getItems().size() + enchants.getItems().size() + eventLegendarySymphony.getItems().size() + bossRare.getItems().size()
+			+ gatherRare.getItems().size() + enchants.getItems().size() + events.getItems().size() + bossRare.getItems().size()
 			+ bossLegendary.getItems().size();
 	}
 

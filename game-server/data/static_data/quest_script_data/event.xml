@@ -258,6 +258,7 @@
 	<!-- CUSTOM: report_to id="80578" start_npc_ids="832041" end_npc_ids="832041"/-->
 	<!-- CUSTOM: report_to id="80580" start_npc_ids="832040" end_npc_ids="832040"/-->
 	<report_to id="80689" start_npc_ids="832921" end_npc_ids="832922"/>
+	<report_to id="80708" start_npc_ids="833503"/>
 	
 	<!-- COLLECTING QUESTS -->
 	<item_collecting id="50035" start_npc_ids="832749"/>
@@ -425,4 +426,15 @@
 	<monster_hunt id="80694" start_npc_ids="832921"/>
 	<monster_hunt id="80695" start_npc_ids="832921"/>
 	<monster_hunt id="80696" start_npc_ids="832921"/>
+
+	<!-- KILL IN WORLD -->
+	<kill_in_world id="80709" start_npc_ids="833502" worlds="600100000" amount="30"/>
+	<kill_in_world id="80710" start_npc_ids="833502" worlds="210070000" amount="15"/>
+	<kill_in_world id="80711" start_npc_ids="833502" worlds="220080000" amount="15"/>
+	<kill_in_world id="80712" start_npc_ids="833502" worlds="600100000" amount="30"/>
+	<kill_in_world id="80713" start_npc_ids="833502" worlds="220080000" amount="15"/>
+	<kill_in_world id="80714" start_npc_ids="833502" worlds="210070000" amount="15"/>
+
+	<!-- FOUNTAIN REWARDS -->
+	<fountain_rewards id="80707" start_npc_ids="833501"/>
 </quest_scripts>

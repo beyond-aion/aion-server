@@ -22,7 +22,7 @@
         <xs:element minOccurs="0" name="ores_epic" type="OreGroup"/>
         <xs:element minOccurs="0" name="gather_rare" type="GatherGroup"/>
         <xs:element minOccurs="0" name="enchants" type="EnchantGroup"/>
-        <xs:element minOccurs="0" name="event_legendary_symphony" type="EventGroup"/>
+        <xs:element minOccurs="0" name="events" type="EventGroup"/>
         <xs:element minOccurs="0" name="boss_rare" type="BossGroup"/>
         <xs:element minOccurs="0" name="boss_legendary" type="BossGroup"/>
         <xs:element minOccurs="0" name="feed_fluid" type="FeedFluidGroup"/>
@@ -328,7 +328,7 @@
       <xs:enumeration value="BOSS"/>
       <xs:enumeration value="COIN"/>
       <xs:enumeration value="ENCHANT"/>
-	  <xs:enumeration value="EVENT_LEGENDARY_SYMPHONY"/>
+	  <xs:enumeration value="EVENTS"/>
       <xs:enumeration value="FOOD"/>
       <xs:enumeration value="FORTRESS"/>
       <xs:enumeration value="GATHER"/>

@@ -17369,17 +17369,25 @@
 	</decomposable>
 	<decomposable item_id="188052295" selectable="true"><!-- Customized Skill Book Bundle -->
 		<items>
-			<item id="169500935" /><!-- Fear: Ginseng I -->
+			<item id="169500932" /><!-- Sleep: Frightcorn I -->
 			<item id="169500933" /><!-- Sleep: Scarecrow I -->
+			<item id="169500934" /><!-- Fear: Poppy I -->
+			<item id="169500935" /><!-- Fear: Ginseng I -->
+			<item id="169500939" /><!-- Summon Divine Mirror IV -->
 			<item id="169500947" /><!-- Summon Divine Crystal IV -->
+			<item id="169500919" /><!-- Transformation: White Tiger IV -->
 			<item id="169500927" /><!-- Transformation: Krall IV -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188052296" selectable="true"><!-- Customized Skill Book Bundle -->
 		<items>
-			<item id="169500935" /><!-- Fear: Ginseng I -->
+			<item id="169500932" /><!-- Sleep: Frightcorn I -->
 			<item id="169500933" /><!-- Sleep: Scarecrow I -->
+			<item id="169500934" /><!-- Fear: Poppy I -->
+			<item id="169500935" /><!-- Fear: Ginseng I -->
+			<item id="169500943" /><!-- Summon Divine Mirror IV -->
 			<item id="169500951" /><!-- Summon Divine Crystal IV -->
+			<item id="169500923" /><!-- Transformation: White Tiger IV -->
 			<item id="169500931" /><!-- Transformation: Krall IV -->
 		</items>
 	</decomposable>
@@ -22919,7 +22927,32 @@
 		</items>
 	</decomposable>
 	<decomposable item_id="188052660" /><!-- Kamar Reward Box -->
-	<decomposable item_id="188052661" /><!-- Kamar Idian Bundle -->
+	<decomposable item_id="188052661"><!-- Kamar Idian Bundle -->
+		<items>
+			<item id="166050031" /><!-- Esoteric Idian: Physical Attack -->
+		</items>
+		<items>
+			<item id="166050032" /><!-- Esoteric Idian: Magical Attack -->
+		</items>
+		<items>
+			<item id="166050033" /><!-- Esoteric Idian: Physical Defense -->
+		</items>
+		<items>
+			<item id="166050034" /><!-- Esoteric Idian: Magical Defense -->
+		</items>
+		<items>
+			<item id="166050035" /><!-- Esoteric Idian: Assistance -->
+		</items>
+		<items>
+			<item id="166050036" /><!-- Esoteric Idian: Resistance -->
+		</items>
+		<items>
+			<item id="166050037" /><!-- Esoteric Idian: Physical/Magical Attack -->
+		</items>
+		<items>
+			<item id="166050038" /><!-- Esoteric Idian: Physical/Magical Defense -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188052662" /><!-- Mystery Stigma -->
 	<decomposable item_id="188052663" /><!-- Enigma Stigma -->
 	<decomposable item_id="188052664" /><!-- Occult Stigma -->
@@ -22936,21 +22969,29 @@
 	<decomposable item_id="188052668" /><!-- Combat Supplies Box -->
 	<decomposable item_id="188052669" /><!-- Kahrun's Symbol Bundle -->
 	<decomposable item_id="188052670"><!-- Kamar Victory Box -->
-		<items>
+		<items chance="28">
 			<item id="186000243" min_count="6" max_count="7" /><!-- Fragmented Ceramium -->
 			<item id="164000076" min_count="10" /><!-- Greater Running Scroll -->
+			<item id="188052611" /><!-- Kamar Idian Bundle -->
+			<item id="152012601" /><!-- Conviction Crystal -->
 		</items>
-		<items>
+		<items chance="28">
 			<item id="186000243" min_count="6" max_count="7" /><!-- Fragmented Ceramium -->
 			<item id="162000122" min_count="10" /><!-- Superior Life Serum -->
+			<item id="188052611" /><!-- Kamar Idian Bundle -->
+			<item id="152012603" /><!-- Ore of Conviction -->
 		</items>
-		<items>
+		<items chance="14">
 			<item id="186000243" min_count="6" max_count="7" /><!-- Fragmented Ceramium -->
 			<item id="162000123" min_count="10" /><!-- Superior Mana Serum -->
+			<item id="188052611" /><!-- Kamar Idian Bundle -->
+			<item id="162000131" /><!-- Fine Bracing Water -->
 		</items>
-		<items>
+		<items chance="30">
 			<item id="186000243" min_count="6" max_count="7" /><!-- Fragmented Ceramium -->
-			<item id="162000124" min_count="10" /><!-- Superior Recovery Serum -->
+			<item id="160003587" min_count="10" /><!-- Pepento Jelly -->
+			<item id="188052611" /><!-- Kamar Idian Bundle -->
+			<item id="188950017" /><!-- Special Courier Pass (Abyss Eternal/Lv. 61-65) -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188052671" /><!-- Test Enchantment Stone Bundle -->
@@ -23203,26 +23244,39 @@
 	<decomposable item_id="188052679" /><!-- [Growth] Stigma Bundle -->
 	<decomposable item_id="188052680" /><!-- [Growth] Shiny Stigma Bundle -->
 	<decomposable item_id="188052681"><!-- Reward Box of Ophidan Victory -->
-		<items>
+		<items chance="23.4">
 			<item id="164000134" min_count="5" max_count="10" /><!-- Greater Awakening Scroll -->
 			<item id="186000243" min_count="3" /><!-- Fragmented Ceramium -->
 			<item id="169405259" min_count="4" /><!-- Pure Flame Powder -->
 			<item id="169405261" min_count="4" /><!-- Pure Flame Crystal -->
 		</items>
-		<items>
+		<items chance="23.3">
 			<item id="186000237" min_count="25" /><!-- Ancient Coin -->
 			<item id="186000243" min_count="3" /><!-- Fragmented Ceramium -->
-			<item id="169405259" min_count="4" /><!-- Pure Flame Powder -->
-			<item id="169405261" min_count="4" /><!-- Pure Flame Crystal -->
+			<item id="152012601" /><!-- Conviction Crystal -->
+			<item id="152012603" /><!-- Ore of Conviction -->
 		</items>
-		<items>
+		<items chance="23.3">
 			<item id="188052739" /><!-- Ophidan Composite Manastone Bundle -->
 			<item id="186000243" min_count="3" /><!-- Fragmented Ceramium -->
-			<item id="169405259" min_count="4" /><!-- Pure Flame Powder -->
-			<item id="169405261" min_count="4" /><!-- Pure Flame Crystal -->
+			<item id="169405254" /><!-- Earth Trace -->
+		</items>
+		<items chance="30">
+			<item id="188052682" /><!-- Ophidan Recharger Bundle -->
+			<item id="186000243" min_count="3" /><!-- Fragmented Ceramium -->
+			<item id="188950017" /><!-- Special Courier Pass (Abyss Eternal/Lv. 61-65) -->
 		</items>
 	</decomposable>
-	<decomposable item_id="188052682" /><!-- Ophidan Recharger Bundle -->
+	<decomposable item_id="188052682"><!-- Ophidan Recharger Bundle -->
+		<items>
+			<item id="168310018" race="ELYOS" /><!-- Major Blessed Augment: Level 2 -->
+			<item id="168310019" race="ASMODIANS" /><!-- Major Blessed Augment: Level 2 -->
+		</items>
+		<items>
+			<item id="168310016" race="ELYOS" /><!-- Major Deep Conditioning: Level 2 -->
+			<item id="168310017" race="ASMODIANS" /><!-- Major Deep Conditioning: Level 2 -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188052683" /><!-- Beritra's Discards -->
 	<decomposable item_id="188052684"><!-- [Event] Dreamer's Reward -->
 		<items>
@@ -26251,11 +26305,19 @@
 	<decomposable item_id="188053028" /><!-- Infused Idian Shugo Box: Spell Resist -->
 	<decomposable item_id="188053029" /><!-- Infused Spring Box -->
 	<decomposable item_id="188053030"><!-- Idgel Dome Reward Box -->
-		<items>
+		<items chance="35">
 			<item id="152012598" min_count="2" /><!-- Heart of Destruction -->
 		</items>
-		<items>
+		<items chance="35">
 			<item id="152012599" min_count="2" /><!-- Heart of Protection -->
+		</items>
+		<items chance="15">
+			<item id="152012598" min_count="2" /><!-- Heart of Destruction -->
+			<item id="188950017" /><!-- Special Courier Pass (Abyss Eternal/Lv. 61-65) -->
+		</items>
+		<items chance="15">
+			<item id="152012599" min_count="2" /><!-- Heart of Protection -->
+			<item id="188950017" /><!-- Special Courier Pass (Abyss Eternal/Lv. 61-65) -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188053031" /><!-- Idgel Dome Consolation Prize -->
@@ -33811,7 +33873,11 @@
 	<decomposable item_id="188053912" /><!-- Noble Enchantment Stone Bundle -->
 	<decomposable item_id="188053913" /><!-- Noble Enchantment Stone Bundle -->
 	<decomposable item_id="188053914" /><!-- Bountiful Stigma Bundle -->
-	<decomposable item_id="188053915" /><!-- [Event] Aether Bloom Bouquet -->
+	<decomposable item_id="188053915"><!-- [Event] Aether Bloom Bouquet -->
+		<items>
+			<item id="186000406" min_count="3" /><!-- [Event] Aether Bloom -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188053916"><!-- Guestpetal Bundle -->
 		<items>
 			<item id="186000146"/><!-- Guestpetal -->
@@ -33921,8 +33987,114 @@
 	<decomposable item_id="188054025" /><!-- [Event] Aetheric Field Fragment Bundle -->
 	<decomposable item_id="188054026" /><!-- [Event] Honorable Armor Box of Conquest -->
 	<decomposable item_id="188054027" /><!-- [Event] Honorable Weapon Box of Conquest -->
-	<decomposable item_id="188054028" /><!-- [Event] Fountain Gift -->
-	<decomposable item_id="188054029" /><!-- [Event] Blooming Gift -->
+	<decomposable item_id="188054028"><!-- [Event] Fountain Gift -->
+		<items chance="9.75">
+			<item id="164000255" min_count="5" max_count="10" /><!-- Fine Crit Strike Scroll -->
+		</items>
+		<items chance="9.75">
+			<item id="164000256" min_count="5" max_count="10" /><!-- Fine Crit Spell Scroll -->
+		</items>
+		<items chance="9.75">
+			<item id="188053609" min_count="1" max_count="2" /><!-- [Event] Level 60 Composite Manastone Bundle -->
+		</items>
+		<items chance="9.75">
+			<item id="160010101" min_count="3" race="ELYOS" /><!-- Summer-Loving Inquin Form Candy -->
+			<item id="160010102" min_count="3" race="ASMODIANS" /><!-- Summer-Loving Inquin Form Candy -->
+		</items>
+		<items chance="6.6">
+			<item id="186000242" min_count="2" /><!-- Ceramium Medal -->
+		</items>
+		<items chance="6.6">
+			<item id="186000051" min_count="2" max_count="3" /><!-- Major Ancient Crown -->
+		</items>
+		<items chance="6.6">
+			<item id="164000126" min_count="5" /><!-- Major Strike Resist Scroll -->
+		</items>
+		<items chance="6.6">
+			<item id="164000130" min_count="5" /><!-- Major Spell Resist Scroll -->
+		</items>
+		<items chance="6.6">
+			<item id="186000236" min_count="10" max_count="15" /><!-- Blood Mark -->
+		</items>
+		<items chance="6">
+			<item id="166100020" min_count="100" /><!-- [Stamp] Greater Supplements (Eternal) -->
+		</items>
+		<items chance="6">
+			<item id="186000406" /><!-- [Event] Aether Blossom -->
+		</items>
+		<items chance="6">
+			<item id="166020000" min_count="2" /><!-- Omega Enchantment Stone -->
+		</items>
+		<items chance="3">
+			<item id="188053702" /><!-- Vasharti's Equipment Box -->
+		</items>
+		<items chance="3">
+			<item id="188052388" /><!-- Modor's Equipment Box -->
+		</items>
+		<items chance="3">
+			<item id="188052827" /><!-- Dynatoum's Equipment Chest -->
+		</items>
+		<items chance="1">
+			<item id="169610060" /><!-- [Title Card] Chaser of Atreia – 30-day pass -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188054029"><!-- [Event] Blooming Gift -->
+		<items chance="8.34">
+			<item id="186000242" min_count="4" /><!-- Ceramium Medal -->
+		</items>
+		<items chance="8.33">
+			<item id="186000051" min_count="7" /><!-- Major Ancient Crown -->
+		</items>
+		<items chance="8.34">
+			<item id="186000236" min_count="50" /><!-- Blood Mark -->
+		</items>
+		<items chance="8.33">
+			<item id="188053610" min_count="2" max_count="4" /><!-- [Event] Level 70 Composite Manastone Bundle -->
+		</items>
+		<items chance="8.33">
+			<item id="166020000" min_count="8" /><!-- Omega Enchantment Stone -->
+		</items>
+		<items chance="8.33">
+			<item id="166100023" min_count="300" /><!-- [Stamp] Greater Supplements (Mythic) -->
+		</items>
+		<items chance="6.67">
+			<item id="188053295" /><!-- Empyrean Plume Chest -->
+		</items>
+		<items chance="6.67">
+			<item id="166500002" min_count="3" /><!-- Amplification Stone -->
+		</items>
+		<items chance="6.66">
+			<item id="166030005" min_count="2" max_count="3" /><!-- Tempering Solution -->
+		</items>
+		<items chance="5">
+			<item id="188053702" /><!-- Vasharti's Equipment Box -->
+		</items>
+		<items chance="5">
+			<item id="188052388" /><!-- Modor's Equipment Box -->
+		</items>
+		<items chance="5">
+			<item id="188052827" /><!-- Dynatoum's Equipment Chest -->
+		</items>
+		<items chance="5">
+			<item id="188053915" /><!-- [Event] Aether Blossom Bouquet -->
+		</items>
+		<items chance="3">
+			<item id="188053618" /><!-- Honorable Elim's Idian Bundle -->
+		</items>
+		<items chance="3">
+			<item id="188054238" /><!-- Iron Wall Armor Box -->
+		</items>
+		<items chance="3">
+			<item id="168310018" race="ELYOS" /><!-- Major Blessed Augment: Level 2 -->
+			<item id="168310019" race="ASMODIANS" /><!-- Major Blessed Augment: Level 2 -->
+		</items>
+		<items chance="0.5">
+			<item id="187000155" /><!-- Brigade General Vasharti's Wings -->
+		</items>
+		<items chance="0.5">
+			<item id="190100115" /><!-- Palomeno Heorn -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188054030" /><!-- [Club] Decorative Furniture Bundle -->
 	<decomposable item_id="188054031" /><!-- [Club] Functional Furniture Bundle -->
 	<decomposable item_id="188054032" /><!-- [Club] Employment Contract Bundle -->

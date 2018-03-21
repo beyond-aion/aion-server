@@ -12,7 +12,7 @@
 	<rift id="210050000">
 		<open schedule="0 0 * ? * *"/>
 		<open schedule="0 0 18 ? * FRI,MON" spawn="true"/>
-		<open schedule="0 0 0 ? * THU,SUN" spawn="true"/>
+		<open schedule="0 0 23 ? * WED,SAT" spawn="true"/>
 	</rift>
 	<!-- Cygnea -->
 	<rift id="210070000">
@@ -33,7 +33,7 @@
 	<rift id="220070000">
 		<open schedule="0 0 * ? * *"/>
 		<open schedule="0 0 18 ? * SUN,THU" spawn="true"/>
-		<open schedule="0 0 0 ? * WED,SAT" spawn="true"/>
+		<open schedule="0 0 23 ? * TUE,FRI" spawn="true"/>
 	</rift>
 	<!-- Enshar -->
 	<rift id="220080000">

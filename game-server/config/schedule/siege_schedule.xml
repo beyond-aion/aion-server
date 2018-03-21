@@ -22,15 +22,18 @@
 	</fortress>
 	<!-- Krotan Refuge -->
 	<fortress id="1221">
-		<siegeTime>0 0 21 ? * MON,THU,SAT</siegeTime>
+		<siegeTime>0 0 19 ? * MON</siegeTime>
+		<siegeTime>0 0 21 ? * THU,SAT</siegeTime>
 	</fortress>
 	<!-- Kysis Fortress -->
 	<fortress id="1231">
-		<siegeTime>0 0 21 ? * MON,THU,SAT</siegeTime>
+		<siegeTime>0 0 19 ? * MON</siegeTime>
+		<siegeTime>0 0 21 ? * THU,SAT</siegeTime>
 	</fortress>
 	<!-- Miren Fortress -->
 	<fortress id="1241">
-		<siegeTime>0 0 21 ? * MON,THU,SAT</siegeTime>
+		<siegeTime>0 0 19 ? * MON</siegeTime>
+		<siegeTime>0 0 21 ? * THU,SAT</siegeTime>
 	</fortress>
 	<!-- Asteria Fortress -->
 	<fortress id="1251">
@@ -38,13 +41,13 @@
 	</fortress>
 	<!-- Temple of Scales -->
 	<fortress id="2011">
-		<siegeTime>0 0 19 ? * MON,SAT</siegeTime>
-		<siegeTime>0 0 21 ? * WED</siegeTime>
+		<siegeTime>0 0 19 ? * SAT</siegeTime>
+		<siegeTime>0 0 21 ? * MON,WED</siegeTime>
 	</fortress>
 	<!-- Altar of Avarice -->
 	<fortress id="2021">
-		<siegeTime>0 0 19 ? * MON,SAT</siegeTime>
-		<siegeTime>0 0 21 ? * WED</siegeTime>
+		<siegeTime>0 0 19 ? * SAT</siegeTime>
+		<siegeTime>0 0 21 ? * MON,WED</siegeTime>
 	</fortress>
 	<!-- Vorgaltem Citadel -->
 	<fortress id="3011">

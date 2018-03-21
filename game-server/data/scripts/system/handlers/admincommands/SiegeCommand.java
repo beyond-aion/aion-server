@@ -5,14 +5,11 @@ import org.apache.commons.lang3.math.NumberUtils;
 
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.dao.PlayerDAO;
-import com.aionemu.gameserver.dao.SiegeDAO;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.PlayerCommonData;
 import com.aionemu.gameserver.model.siege.ArtifactLocation;
 import com.aionemu.gameserver.model.siege.FortressLocation;
 import com.aionemu.gameserver.model.siege.OutpostLocation;
-import com.aionemu.gameserver.model.siege.SiegeLocation;
-import com.aionemu.gameserver.model.siege.SiegeModType;
 import com.aionemu.gameserver.model.siege.SiegeRace;
 import com.aionemu.gameserver.model.team.legion.Legion;
 import com.aionemu.gameserver.services.LegionService;
@@ -185,32 +182,7 @@ public class SiegeCommand extends AdminCommand {
 			return;
 		}
 
-		// capture
-		SiegeLocation loc = SiegeService.getInstance().getSiegeLocation(siegeLocationId);
-		Siege s = SiegeService.getInstance().getSiege(siegeLocationId);
-		if (s != null) {
-			s.getSiegeCounter().addRaceDamage(sr, s.getBoss().getLifeStats().getMaxHp() + 1);
-			s.setBossKilled(true);
-			SiegeService.getInstance().stopSiege(siegeLocationId);
-			loc.setLegionId(legion != null ? legion.getLegionId() : 0);
-		} else {
-			SiegeService.getInstance().deSpawnNpcs(siegeLocationId);
-			loc.setVulnerable(false);
-			loc.setUnderShield(false);
-			loc.setRace(sr);
-			loc.setLegionId(legion != null ? legion.getLegionId() : 0);
-			SiegeService.getInstance().spawnNpcs(siegeLocationId, sr, SiegeModType.PEACE);
-			DAOManager.getDAO(SiegeDAO.class).updateSiegeLocation(loc);
-			switch (siegeLocationId) {
-				case 2011:
-				case 2021:
-				case 3011:
-				case 3021:
-					SiegeService.getInstance().updateOutpostStatusByFortress((FortressLocation) loc);
-					break;
-			}
-		}
-		SiegeService.getInstance().broadcastUpdate(loc);
+		SiegeService.getInstance().captureSiege(sr, legion != null ? legion.getLegionId() : 0, siegeLocationId);
 	}
 
 	protected void assault(Player player, String[] params) {

@@ -14,6 +14,7 @@
 		<bounty item_id="188053113" count="2"/> <!-- Epic Ancient Manastone Bundle -->
 		<bounty item_id="166030005" count="5"/> <!-- Tempering Solution -->
 		<bounty item_id="166500002" count="2"/> <!-- Amplification Stone -->
+		<bounty item_id="188950017" count="2"/> <!-- Special Courier Pass (Abyss Eternal/Lv. 61-65) -->
 	</kill_bounty>
 	<kill_bounty type="PER_X_KILLS" kill_count="50">
 		<bounty item_id="186000242" count="3"/> <!-- Ceramium Medal -->
@@ -22,10 +23,10 @@
 		<bounty item_id="188052481" count="5"/> <!-- Balaur Serum Bundle -->
 	</kill_bounty>
 	<kill_bounty type="PER_X_KILLS" kill_count="20">
-		<bounty item_id="186000247" count="1"/> <!-- Major Danuar Relic -->
-		<bounty item_id="186000147" count="1"/> <!-- Mithril Medal -->
-		<bounty item_id="162000137" count="5"/> <!-- Divine Life Serum -->
-		<bounty item_id="162000139" count="5"/> <!-- Divine Mana Serum -->
-		<bounty item_id="162000141" count="5"/> <!-- Divine Flight Serum -->
+		<bounty item_id="186000247" count="1" /> <!-- Major Danuar Relic -->
+		<bounty item_id="186000147" count="1" /> <!-- Mithril Medal -->
+		<bounty item_id="162000137" count="5" /> <!-- Divine Life Serum -->
+		<bounty item_id="162000139" count="5" /> <!-- Divine Mana Serum -->
+		<bounty item_id="162000141" count="5" /> <!-- Divine Flight Serum -->
 	</kill_bounty>
 </kill_bounties>

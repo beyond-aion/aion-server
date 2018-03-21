@@ -77,7 +77,7 @@
 	
 	<!-- REPORTING QUESTS -->
 	<report_to id="14210" start_npc_ids="" end_npc_ids="802465 802663 802664 802665"/>
-	<report_to id="14211" start_npc_ids="804752"/>
+	<report_to id="14211" start_npc_ids="804751"/>
 	<report_to id="24210" start_npc_ids="" end_npc_ids="802465 802663 802664 802665"/>
 	<report_to id="24211" start_npc_ids="804752"/>
 </quest_scripts>

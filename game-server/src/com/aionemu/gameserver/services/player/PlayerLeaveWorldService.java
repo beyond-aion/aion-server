@@ -119,7 +119,7 @@ public class PlayerLeaveWorldService {
 			log.debug("Update prison timer to " + prisonTimer / 1000 + " seconds !");
 		}
 		if (player.isDead()) {
-			if (player.isInInstance() || player.getWorldId() != 400030000)
+			if (player.isInInstance() || player.getWorldId() == 400030000)
 				PlayerReviveService.instanceRevive(player);
 			else
 				PlayerReviveService.bindRevive(player);

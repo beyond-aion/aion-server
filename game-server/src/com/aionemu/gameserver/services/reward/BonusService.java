@@ -113,8 +113,8 @@ public class BonusService {
 		switch (bonus.getType()) {
 			case TASK:
 				return getCraftBonus(player, questTemplate);
-			case EVENT_LEGENDARY_SYMPHONY:
-				return getEventLegendarySymphonyBonus(player, bonus);
+			case EVENTS:
+				return getEventBonus(player, bonus);
 			case MANASTONE:
 				return getManastoneBonus(player, bonus);
 			case MEDAL:
@@ -178,11 +178,11 @@ public class BonusService {
 		return new QuestItems(reward.getId(), itemCount);
 	}
 
-	private QuestItems getEventLegendarySymphonyBonus(Player player, QuestBonuses bonus) {
+	private QuestItems getEventBonus(Player player, QuestBonuses bonus) {
 		List<FullRewardItem> possibleRewards = new ArrayList<>();
 
 		float total = 0;
-		for (FullRewardItem fRI : itemGroups.getEventLegendarySymphony().getItems()) {
+		for (FullRewardItem fRI : itemGroups.getEventGroups().getItems()) {
 			if (fRI.getLevel() != bonus.getLevel()) {
 				continue;
 			}

@@ -8,7 +8,7 @@ public enum BonusType {
 	BOSS, // %Quest_L_boss, items having suffix _g_
 	COIN, // %Quest_L_coin -- not used, 99 lvl quests replaced with trade
 	ENCHANT,
-	EVENT_LEGENDARY_SYMPHONY, // %Quest_Branch_Cashquest_Event
+	EVENTS, // %Quest_Branch_Cashquest_Event
 	FOOD, // %Quest_L_food
 	FORTRESS, // %Quest_L_fortress
 	GATHER,
