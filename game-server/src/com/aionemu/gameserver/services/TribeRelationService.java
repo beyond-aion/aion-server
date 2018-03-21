@@ -6,6 +6,7 @@ import com.aionemu.gameserver.model.TribeClass;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.siege.SiegeRace;
 import com.aionemu.gameserver.model.templates.npc.AbyssNpcType;
 import com.aionemu.gameserver.model.templates.spawns.basespawns.BaseSpawnTemplate;
 
@@ -16,6 +17,28 @@ public class TribeRelationService {
 
 	public static boolean isAggressive(Creature creature1, Creature creature2) {
 		switch (creature1.getTribe()) {
+			case GAB1_MONSTER:
+				if (creature2 instanceof Player)
+					return true;
+				break;
+			case GAB1_MONSTER_NONAGGRE:
+				if (creature2 instanceof Player)
+					return false;
+				break;
+			case AGGRESSIVESINGLEMONSTER:
+				switch (creature2.getTribe()) {
+					case YUN_GUARD:
+						return true;
+				}
+				break;
+			case IDF5U2_SHULACK:
+				switch (creature2.getTribe()) {
+					case FIELD_OBJECT_ALL_HOSTILEMONSTER:
+						return false;
+				}
+				break;
+		}
+		switch (creature1.getBaseTribe()) {
 			case GAB1_01_POINT_01:
 			case GAB1_01_POINT_02:
 			case GAB1_01_POINT_03:
@@ -36,37 +59,12 @@ public class TribeRelationService {
 			case GAB1_04_POINT_03:
 			case GAB1_04_POINT_04:
 			case GAB1_04_POINT_05:
-			case GAB1_MONSTER:
-				if (creature2 instanceof Player)
-					return !checkPanesterraRelation(creature1, (Player) creature2);
-				break;
-			case GAB1_MONSTER_NONAGGRE:
-				if (creature2 instanceof Player)
-					return false;
-				break;
-			case AGGRESSIVESINGLEMONSTER:
-				switch (creature2.getTribe()) {
-					case YUN_GUARD:
-						return true;
-				}
-				break;
-			case IDF5U2_SHULACK:
-				switch (creature2.getTribe()) {
-					case FIELD_OBJECT_ALL_HOSTILEMONSTER:
-						return false;
-				}
-				break;
-		}
-		switch (creature1.getBaseTribe()) {
 			case GAB1_SUB_DEST_69_AGGRESSIVE:
 			case GAB1_SUB_DEST_70_AGGRESSIVE:
 			case GAB1_SUB_DEST_71_AGGRESSIVE:
 			case GAB1_SUB_DEST_72_AGGRESSIVE:
-				if (creature2 instanceof Player) {
-					if (checkAhserionRelation(creature1, (Player) creature2)) {
-						return true;
-					}
-				}
+				if (creature2 instanceof Player)
+					return !checkPanesterraRelation(creature1, (Player) creature2);
 				break;
 			case GAB1_SUB_DRAKAN:
 			case GAB1_SUB_KILLER:
@@ -141,10 +139,6 @@ public class TribeRelationService {
 			case GAB1_04_POINT_03:
 			case GAB1_04_POINT_04:
 			case GAB1_04_POINT_05:
-			case GAB1_MONSTER:
-				if (creature2 instanceof Player)
-					return checkPanesterraRelation(creature1, (Player) creature2);
-				break;
 			case GAB1_SUB_DEST_69:
 			case GAB1_SUB_DEST_70:
 			case GAB1_SUB_DEST_71:
@@ -153,11 +147,12 @@ public class TribeRelationService {
 			case GAB1_SUB_DEST_70_AGGRESSIVE:
 			case GAB1_SUB_DEST_71_AGGRESSIVE:
 			case GAB1_SUB_DEST_72_AGGRESSIVE:
-				if (creature2 instanceof Player) {
-					if (!checkAhserionRelation(creature1, (Player) creature2)) {
-						return true;
-					}
-				}
+				if (creature2 instanceof Player)
+					return checkPanesterraRelation(creature1, (Player) creature2);
+				break;
+			case GAB1_MONSTER:
+				if (creature2 instanceof Player)
+					return false;
 				break;
 			case USEALL:
 			case FIELD_OBJECT_ALL:
@@ -221,10 +216,6 @@ public class TribeRelationService {
 			case GAB1_04_POINT_03:
 			case GAB1_04_POINT_04:
 			case GAB1_04_POINT_05:
-			case GAB1_MONSTER:
-				if (creature2 instanceof Player)
-					return checkPanesterraRelation(creature1, (Player) creature2);
-				break;
 			case GAB1_SUB_DEST_69:
 			case GAB1_SUB_DEST_70:
 			case GAB1_SUB_DEST_71:
@@ -233,11 +224,12 @@ public class TribeRelationService {
 			case GAB1_SUB_DEST_70_AGGRESSIVE:
 			case GAB1_SUB_DEST_71_AGGRESSIVE:
 			case GAB1_SUB_DEST_72_AGGRESSIVE:
-				if (creature2 instanceof Player) {
-					if (!checkAhserionRelation(creature1, (Player) creature2)) {
-						return true;
-					}
-				}
+				if (creature2 instanceof Player)
+					return checkPanesterraRelation(creature1, (Player) creature2);
+				break;
+			case GAB1_MONSTER:
+				if (creature2 instanceof Player)
+					return false;
 				break;
 			case GUARD_DARK:
 				switch (creature2.getBaseTribe()) {
@@ -322,22 +314,16 @@ public class TribeRelationService {
 			case GAB1_04_POINT_03:
 			case GAB1_04_POINT_04:
 			case GAB1_04_POINT_05:
+			case GAB1_SUB_DEST_69:
+			case GAB1_SUB_DEST_70:
+			case GAB1_SUB_DEST_71:
+			case GAB1_SUB_DEST_72:
 				if (creature2 instanceof Player)
 					return !checkPanesterraRelation(creature1, (Player) creature2);
 				break;
 			case GAB1_MONSTER_NONAGGRE:
 				if (creature2 instanceof Player)
 					return true;
-				break;
-			case GAB1_SUB_DEST_69:
-			case GAB1_SUB_DEST_70:
-			case GAB1_SUB_DEST_71:
-			case GAB1_SUB_DEST_72:
-				if (creature2 instanceof Player) {
-					if (checkAhserionRelation(creature1, (Player) creature2)) {
-						return true;
-					}
-				}
 				break;
 			case GAB1_SUB_ATTACKABLE_FOBJ:
 			case GAB1_SUB_NONAGGRESSIVE_DRAKAN:
@@ -362,32 +348,54 @@ public class TribeRelationService {
 	}
 
 	/**
-	 * @param creature1
-	 * @param player
-	 * @return true, if
-	 *         - creature1 has the same tribe as the player and is not a DRAKAN.
+	 * returns true if the player's faction holds the respective fortress and has a resulting friendly relation to the NPC.
+	 * <br>
+	 * <br>
+	 * TODO: If Panesterra sieges will be implemented it is necessary to distinguish between each _POINT_ type.
+	 * <br>
+	 * So each _POINT_01 represents the fortress owner and the following four the possible attackers.
 	 */
-	public static boolean checkPanesterraRelation(Creature creature1, Player player) {
-		TribeClass playerTribe = player.getRace() == Race.ELYOS ? TribeClass.GAB1_03_POINT_01 : TribeClass.GAB1_04_POINT_01;
-		return creature1.getBaseTribe() == playerTribe && creature1.getRace() != Race.DRAKAN;
-	}
-
-	public static boolean checkAhserionRelation(Creature creature1, Player player) {
-		switch (creature1.getBaseTribe()) {
+	public static boolean checkPanesterraRelation(Creature npc, Player player) {
+		int panesterraFortressId = 0;
+		switch (npc.getBaseTribe()) {
+			case GAB1_01_POINT_01:
+			case GAB1_01_POINT_02:
+			case GAB1_01_POINT_03:
+			case GAB1_01_POINT_04:
+			case GAB1_01_POINT_05:
 			case GAB1_SUB_DEST_69:
 			case GAB1_SUB_DEST_69_AGGRESSIVE:
-				return true;
+				panesterraFortressId = 10111;
+				break;
+			case GAB1_02_POINT_01:
+			case GAB1_02_POINT_02:
+			case GAB1_02_POINT_03:
+			case GAB1_02_POINT_04:
+			case GAB1_02_POINT_05:
 			case GAB1_SUB_DEST_70:
 			case GAB1_SUB_DEST_70_AGGRESSIVE:
-				return true;
+				panesterraFortressId = 10211;
+				break;
+			case GAB1_03_POINT_01:
+			case GAB1_03_POINT_02:
+			case GAB1_03_POINT_03:
+			case GAB1_03_POINT_04:
+			case GAB1_03_POINT_05:
 			case GAB1_SUB_DEST_71:
 			case GAB1_SUB_DEST_71_AGGRESSIVE:
-				return player.getRace() != Race.ELYOS;
+				panesterraFortressId = 10311;
+				break;
+			case GAB1_04_POINT_01:
+			case GAB1_04_POINT_02:
+			case GAB1_04_POINT_03:
+			case GAB1_04_POINT_04:
+			case GAB1_04_POINT_05:
 			case GAB1_SUB_DEST_72:
 			case GAB1_SUB_DEST_72_AGGRESSIVE:
-				return player.getRace() != Race.ASMODIANS;
-			default:
-				return false;
+				panesterraFortressId = 10411;
+				break;
 		}
+		SiegeRace occupier = SiegeService.getInstance().getFortress(panesterraFortressId).getRace();
+		return SiegeRace.getByRace(player.getRace()) == occupier && npc.getRace() != Race.DRAKAN;
 	}
 }
