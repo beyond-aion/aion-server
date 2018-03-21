@@ -318,6 +318,37 @@ public class SiegeService {
 		siege.stopSiege();
 	}
 
+	/**
+	 * Used to capture fortresses or artifacts without regular siege
+	 */
+	public void captureSiege(SiegeRace sr, int legionId, int locId) {
+		SiegeLocation loc = SiegeService.getInstance().getSiegeLocation(locId);
+		Siege<?> s = SiegeService.getInstance().getSiege(locId);
+		if (s != null) {
+			s.getSiegeCounter().addRaceDamage(sr, s.getBoss().getLifeStats().getMaxHp() + 1);
+			s.setBossKilled(true);
+			SiegeService.getInstance().stopSiege(locId);
+			loc.setLegionId(legionId);
+		} else {
+			SiegeService.getInstance().deSpawnNpcs(locId);
+			loc.setVulnerable(false);
+			loc.setUnderShield(false);
+			loc.setRace(sr);
+			loc.setLegionId(legionId);
+			SiegeService.getInstance().spawnNpcs(locId, sr, SiegeModType.PEACE);
+			DAOManager.getDAO(SiegeDAO.class).updateSiegeLocation(loc);
+			switch (locId) {
+				case 2011:
+				case 2021:
+				case 3011:
+				case 3021:
+					SiegeService.getInstance().updateOutpostStatusByFortress((FortressLocation) loc);
+					break;
+			}
+		}
+		SiegeService.getInstance().broadcastUpdate(loc);
+	}
+
 	/*
 	 * Return location to balaur control
 	 */
