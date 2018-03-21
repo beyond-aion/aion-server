@@ -68,7 +68,7 @@ public class AggroList extends AbstractEventSource<AddDamageEvent> {
 	 * Hate that is received without dealing damage
 	 */
 	public void addHate(Creature creature, int hate) {
-		if (creature instanceof SummonedObject<?>) // ice sheet, threatening wave, etc. generate hate for their master
+		if (shouldAddHateToMaster(creature))
 			creature = creature.getMaster();
 		if (!isAware(creature))
 			return;
@@ -79,6 +79,24 @@ public class AggroList extends AbstractEventSource<AddDamageEvent> {
 		boolean isNewInAggroList = ai.getHate() == 0;
 		ai.addHate(hate);
 		owner.getController().onAddHate(creature, isNewInAggroList);
+	}
+
+	private boolean shouldAddHateToMaster(Creature creature) {
+		// ice sheet, threatening wave, etc. generate hate for their master. taunting spirit does not!
+		return creature instanceof SummonedObject<?> && !isTauntingSpirit((SummonedObject) creature);
+	}
+
+	private boolean isTauntingSpirit(SummonedObject<?> npc) {
+		switch (npc.getNpcId()) {
+			case 833403:
+			case 833404:
+			case 833478:
+			case 833479:
+			case 833480:
+			case 833481:
+				return true; // spawned by Summon Vexing Energy
+		}
+		return false;
 	}
 
 	/**
