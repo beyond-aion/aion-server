@@ -845,7 +845,7 @@ public class StatFunctions {
 
 		if (resistRate <= 0) // 0.1% min cap
 			resistRate = 1;
-		else if (resistRate > 500) // 50% max cap (new in 4.7)
+		else if (resistRate > 500 && attacker instanceof Player && attacked instanceof Player) // checked on retail: only applies to PvP
 			resistRate = 500;
 
 		return resistRate;
