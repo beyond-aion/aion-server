@@ -31,6 +31,7 @@ public class UseSkillAndDieAI extends NpcAI {
 
 	private void scheduleSkill() {
 		if (getOwner().getCreatorId() == 0) {
+			System.out.println("brüfte");
 			despawn(1);
 			return;
 		}

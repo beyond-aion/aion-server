@@ -30,7 +30,7 @@ public class GeyserBlockerAI extends AggressiveNpcAI {
 		if (staticId == -1) // no geyser was despawned on spawn, so we cannot respawn it
 			return;
 		SpawnTemplate spawnPoint = getOwner().getSpawn();
-		spawn(getOwner().getWorldId(), 700545, spawnPoint.getX(), spawnPoint.getY(), spawnPoint.getZ(), (byte) 0, staticId, getOwner().getInstanceId());
+		spawn(700545, spawnPoint.getX(), spawnPoint.getY(), spawnPoint.getZ(), (byte) 0, staticId);
 		PacketSendUtility.broadcastPacket(getOwner(), SM_SYSTEM_MESSAGE.STR_MSG_WINDBOX_TRIGGER_ON_INFO(),
 			player -> PositionUtil.isInRange(getOwner(), player, 30));
 	}

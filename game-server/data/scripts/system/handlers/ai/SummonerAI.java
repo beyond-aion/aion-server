@@ -13,8 +13,6 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.templates.ai.Percentage;
 import com.aionemu.gameserver.model.templates.ai.SummonGroup;
-import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
-import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.World;
 
@@ -91,9 +89,8 @@ public class SummonerAI extends AggressiveNpcAI {
 
 			if (hpPercentage <= percent.getPercent()) {
 				int skill = percent.getSkillId();
-				if (skill != 0) {
+				if (skill != 0)
 					AIActions.useSkill(this, skill);
-				}
 
 				if (percent.isIndividual()) {
 					handleIndividualSpawnedSummons(percent);
@@ -101,14 +98,7 @@ public class SummonerAI extends AggressiveNpcAI {
 					handleBeforeSpawn(percent);
 					for (SummonGroup summonGroup : percent.getSummons()) {
 						final SummonGroup sg = summonGroup;
-						ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-							@Override
-							public void run() {
-								spawnHelpers(sg);
-							}
-						}, summonGroup.getSchedule());
-
+						ThreadPoolManager.getInstance().schedule(() -> spawnHelpers(sg), summonGroup.getSchedule());
 					}
 				}
 				spawnedPercent = percent.getPercent();
@@ -119,32 +109,29 @@ public class SummonerAI extends AggressiveNpcAI {
 	protected void spawnHelpers(SummonGroup summonGroup) {
 		if (!isDead() && checkBeforeSpawn()) {
 			int count = 0;
-			if (summonGroup.getCount() != 0) {
+			if (summonGroup.getCount() != 0)
 				count = summonGroup.getCount();
-			} else {
+			else
 				count = Rnd.get(summonGroup.getMinCount(), summonGroup.getMaxCount());
-			}
+
 			for (int i = 0; i < count; i++) {
-				SpawnTemplate summon = null;
-				if (summonGroup.getDistance() != 0) {
-					summon = rndSpawnInRange(summonGroup.getNpcId(), summonGroup.getDistance());
-				} else {
-					summon = SpawnEngine.newSingleTimeSpawn(getPosition().getMapId(), summonGroup.getNpcId(), summonGroup.getX(), summonGroup.getY(),
-						summonGroup.getZ(), summonGroup.getH());
-				}
-				VisibleObject npc = SpawnEngine.spawnObject(summon, getPosition().getInstanceId());
+				VisibleObject npc = null;
+				if (summonGroup.getDistance() != 0)
+					npc = rndSpawnInRange(summonGroup.getNpcId(), summonGroup.getDistance());
+				else
+					npc = spawn(summonGroup.getNpcId(), summonGroup.getX(), summonGroup.getY(), summonGroup.getZ(), summonGroup.getH());
+
 				addHelpersSpawn(npc.getObjectId());
 			}
 			handleSpawnFinished(summonGroup);
 		}
 	}
 
-	protected SpawnTemplate rndSpawnInRange(int npcId, float distance) {
+	protected VisibleObject rndSpawnInRange(int npcId, float distance) {
 		float direction = Rnd.get(0, 199) / 100f;
 		float x = (float) (Math.cos(Math.PI * direction) * distance);
 		float y = (float) (Math.sin(Math.PI * direction) * distance);
-		return SpawnEngine.newSingleTimeSpawn(getPosition().getMapId(), npcId, getPosition().getX() + x, getPosition().getY() + y, getPosition().getZ(),
-			getPosition().getHeading());
+		return spawn(npcId, getPosition().getX() + x, getPosition().getY() + y, getPosition().getZ(), getPosition().getHeading());
 	}
 
 	protected boolean checkBeforeSpawn() {

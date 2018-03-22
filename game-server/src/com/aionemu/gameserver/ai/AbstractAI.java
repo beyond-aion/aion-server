@@ -480,18 +480,18 @@ public abstract class AbstractAI<T extends Creature> extends AbstractEventSource
 	 * Spawn object in the same world and instance as AI's owner
 	 */
 	protected VisibleObject spawn(int npcId, float x, float y, float z, byte heading) {
-		return spawn(owner.getWorldId(), npcId, x, y, z, heading, 0, getPosition().getInstanceId());
+		return spawn(owner.getWorldId(), npcId, x, y, z, heading, 0, owner.getObjectId(), getPosition().getInstanceId());
 	}
 
 	/**
 	 * Spawn object with staticId in the same world and instance as AI's owner
 	 */
 	protected VisibleObject spawn(int npcId, float x, float y, float z, byte heading, int staticId) {
-		return spawn(owner.getWorldId(), npcId, x, y, z, heading, staticId, getPosition().getInstanceId());
+		return spawn(owner.getWorldId(), npcId, x, y, z, heading, staticId, owner.getObjectId(), getPosition().getInstanceId());
 	}
 
-	protected VisibleObject spawn(int worldId, int npcId, float x, float y, float z, byte heading, int staticId, int instanceId) {
-		SpawnTemplate template = SpawnEngine.newSingleTimeSpawn(worldId, npcId, x, y, z, heading);
+	protected VisibleObject spawn(int worldId, int npcId, float x, float y, float z, byte heading, int staticId, int creatorId, int instanceId) {
+		SpawnTemplate template = SpawnEngine.newSingleTimeSpawn(worldId, npcId, x, y, z, heading, creatorId);
 		template.setStaticId(staticId);
 		return SpawnEngine.spawnObject(template, instanceId);
 	}
