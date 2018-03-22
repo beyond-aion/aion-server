@@ -301,7 +301,6 @@ public class StatFunctions {
 	 * @param element
 	 * @return Damage made to target (-hp value)
 	 */
-
 	public static int calculateAttackDamage(Creature attacker, Creature target, boolean isMainHand, SkillElement element) {
 		int resultDamage = 0;
 		if (element == SkillElement.NONE) {
@@ -314,11 +313,6 @@ public class StatFunctions {
 
 		// adjusting baseDamages according to attacker and target level
 		resultDamage = (int) adjustDamages(attacker, target, resultDamage, 0, true, element, false);
-
-		// magical defense
-		/*
-		 * if (element != SkillElement.NONE) resultDamage -= target.getGameStats().getStat(StatEnum.MAGICAL_DEFEND, 0).getCurrent();
-		 */
 
 		if (target instanceof Npc)
 			return target.getAi().modifyDamage(attacker, resultDamage, null);
@@ -483,18 +477,17 @@ public class StatFunctions {
 		}
 
 		// elemental resistance
-		if (element != SkillElement.NONE) {
-			float elementalDef = getMovementModifier(target, SkillElement.getResistanceForElement(element),
-				target.getGameStats().getMagicalDefenseFor(element));
-			resultDamage = Math.round(resultDamage * (1 - elementalDef / 1250f));
-		}
+		float elementalDef = getMovementModifier(target, SkillElement.getResistanceForElement(element),
+			target.getGameStats().getMagicalDefenseFor(element));
+		resultDamage = Math.round(resultDamage * (1 - elementalDef / 1250f));
+		
+		// Magical Defense for test purpose
+		resultDamage -= Math.round(target.getGameStats().getStat(StatEnum.MAGICAL_DEFEND, 0).getCurrent() * 0.1f);
 
 		if (resultDamage <= 0)
 			resultDamage = 1;
 
-		/**
-		 * 15% seems to be correct
-		 */
+		// 15% seems to be correct
 		resultDamage *= 1.15f;
 
 		return Math.round(resultDamage);
