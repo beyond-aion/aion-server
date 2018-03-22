@@ -323,7 +323,7 @@
 			<gd_item id="125003697" /><!-- Sauren Helm -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Mythic)" base_chance="9">
+	<gd_rule rule_name="Named Armor (Mythic)" base_chance="13.5">
 		<gd_maps>
 			<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
 		</gd_maps>
@@ -374,7 +374,7 @@
 			<gd_item id="114601433" /><!-- Sauro Commander's Sabatons -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Mythic)" base_chance="6">
+	<gd_rule rule_name="Named Accessory (Mythic)" base_chance="9">
 		<gd_maps>
 			<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
 		</gd_maps>
@@ -397,7 +397,7 @@
 			<gd_item id="123001393" /><!-- Sauro Commander's Sash -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Head (Mythic)" base_chance="3">
+	<gd_rule rule_name="Named Head (Mythic)" base_chance="4.5">
 		<gd_maps>
 			<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
 		</gd_maps>
@@ -607,7 +607,7 @@
 			<gd_item id="114601435" /><!-- Sauren Sabatons -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Mythic)" base_chance="4">
+	<gd_rule rule_name="Named Weapon (Mythic)" base_chance="6">
 		<gd_maps>
 			<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
 		</gd_maps>
@@ -632,7 +632,7 @@
 			<gd_item id="115001624" /><!-- Sauro Commander's Scale Shield -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Mythic)" base_chance="5">
+	<gd_rule rule_name="Named Weapon (Mythic)" base_chance="8">
 		<gd_maps>
 			<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
 		</gd_maps>
