@@ -678,6 +678,32 @@
 			</percentage>
 		</summons>
 	</ai>
+	<!-- Brigade General Sheba -->
+	<ai npcId="230858">
+		<summons>
+			<percentage percent="66" skillId="21189">
+				<summonGroup npcId="284435" count="4" distance="4" schedule="4000"/>
+			</percentage>
+			<percentage percent="25" skillId="21184">
+				<summonGroup npcId="284436" x="900.12497" y="889.17401" z="412.1" count="1" schedule="4000"/>
+			</percentage>
+			<percentage percent="20" skillId="21189">
+				<summonGroup npcId="284435" count="2" distance="4" schedule="4000"/>
+			</percentage>
+			<percentage percent="15" skillId="21189">
+				<summonGroup npcId="284435" count="2" distance="4" schedule="4000"/>
+			</percentage>
+			<percentage percent="10" skillId="21184">
+				<summonGroup npcId="284436" x="913.12497" y="876.17401" z="412.1" h="45" count="1" schedule="4000"/>
+				<summonGroup npcId="284436" x="900.12497" y="870.17401" z="412.1" h="30" count="1" schedule="4000"/>
+				<summonGroup npcId="284436" x="886.12497" y="876.17401" z="412.1" h="16" count="1" schedule="4000"/>
+				<summonGroup npcId="284436" x="881.12497" y="889.17401" z="412.1" count="1" schedule="4000"/>
+				<summonGroup npcId="284436" x="899.12497" y="909.17401" z="412.1" h="90" count="1" schedule="4000"/>
+				<summonGroup npcId="284436" x="913.12497" y="902.17401" z="412.1" h="78" count="1" schedule="4000"/>
+				<summonGroup npcId="284436" x="918.12497" y="890.17401" z="412.1" h="61" count="1" schedule="4000"/>
+			</percentage>
+		</summons>
+	</ai>
 	<ai npcId="233459">
 		<summons>
 			<percentage percent="100">
