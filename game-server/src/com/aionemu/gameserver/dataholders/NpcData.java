@@ -67,6 +67,8 @@ public class NpcData {
 					template.setMacc(NpcStatCalculation.calculateStat(StatEnum.MAGICAL_ACCURACY, rating, rank, level));
 				if (template.getMresist() == 0)
 					template.setMresist(NpcStatCalculation.calculateStat(StatEnum.MAGICAL_RESIST, rating, rank, level));
+				if (template.getMdef() == 0)
+					template.setMdef(NpcStatCalculation.calculateStat(StatEnum.MAGICAL_DEFEND, rating, rank, level));
 				if (template.getMcrit() == 0)
 					template.setMcrit(50);
 				if (template.getPcrit() == 0)

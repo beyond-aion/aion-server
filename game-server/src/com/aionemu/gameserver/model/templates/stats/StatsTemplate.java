@@ -119,6 +119,10 @@ public class StatsTemplate {
 		return mdef;
 	}
 
+	public void setMdef(int mdef) {
+		this.mdef = mdef;
+	}
+
 	public int getMresist() {
 		return mresist;
 	}
