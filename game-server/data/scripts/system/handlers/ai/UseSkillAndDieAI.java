@@ -17,7 +17,7 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 @AIName("useSkillAndDie")
 public class UseSkillAndDieAI extends NpcAI {
 
-	boolean canDie = true;
+	private volatile boolean canDie = true;
 
 	public UseSkillAndDieAI(Npc owner) {
 		super(owner);
@@ -31,7 +31,6 @@ public class UseSkillAndDieAI extends NpcAI {
 
 	private void scheduleSkill() {
 		if (getOwner().getCreatorId() == 0) {
-			System.out.println("brüfte");
 			despawn(1);
 			return;
 		}
