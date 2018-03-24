@@ -28616,43 +28616,19 @@
 	</decomposable>
 	<decomposable item_id="188053307"><!-- Legion's Honorable Reward Box -->
 		<items>
-			<item id="188053308" /><!-- Legion's Illusion Godstone Bundle -->
-		</items>
-		<items>
-			<item id="188053309" /><!-- Legion's Ceramium Medal Box -->
-		</items>
-		<items>
-			<item id="188053310" /><!-- Legion's Fine Ancient Manastone Bundle -->
-		</items>
-		<items>
-			<item id="188053311" /><!-- Legion's Greater Ancient Manastone Bundle -->
-		</items>
-		<items>
-			<item id="188053312" /><!-- Legion's Ancient Manastone Bundle -->
-		</items>
-		<items>
-			<item id="188053313" /><!-- Legion's Lesser Ancient Manastone Bundle -->
-		</items>
-		<items>
-			<item id="188053314" /><!-- Legion's Greater Composite Manastone Bundle -->
-		</items>
-		<items>
-			<item id="188053315" /><!-- Legion's Composite Manastone Bundle -->
-		</items>
-		<items>
-			<item id="188053316" /><!-- Legion's Lesser Composite Manastone Bundle -->
-		</items>
-		<items>
-			<item id="188053317" /><!-- Legion's Major Crown Bundle -->
-		</items>
-		<items>
-			<item id="188053318" /><!-- Legion's Greater Crown Bundle -->
-		</items>
-		<items>
-			<item id="188053319" /><!-- Legion's Crown Bundle -->
-		</items>
-		<items>
-			<item id="188053320" /><!-- Legion's Lesser Crown Bundle -->
+			<item id="188053308" min_count="20" /><!-- Legion's Illusion Godstone Bundle -->
+			<item id="188053309" min_count="100" /><!-- Legion's Ceramium Medal Box -->
+			<item id="188053310" min_count="20" /><!-- Legion's Fine Ancient Manastone Bundle -->
+			<item id="188053311" min_count="25" /><!-- Legion's Greater Ancient Manastone Bundle -->
+			<item id="188053312" min_count="30" /><!-- Legion's Ancient Manastone Bundle -->
+			<item id="188053313" min_count="35" /><!-- Legion's Lesser Ancient Manastone Bundle -->
+			<item id="188053314" min_count="10" /><!-- Legion's Greater Composite Manastone Bundle -->
+			<item id="188053315" min_count="15" /><!-- Legion's Composite Manastone Bundle -->
+			<item id="188053316" min_count="20" /><!-- Legion's Lesser Composite Manastone Bundle -->
+			<item id="188053317" min_count="15" /><!-- Legion's Major Crown Bundle -->
+			<item id="188053318" min_count="20" /><!-- Legion's Greater Crown Bundle -->
+			<item id="188053319" min_count="25" /><!-- Legion's Crown Bundle -->
+			<item id="188053320" min_count="30" /><!-- Legion's Lesser Crown Bundle -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188053308"><!-- Legion's Illusion Godstone Bundle -->
