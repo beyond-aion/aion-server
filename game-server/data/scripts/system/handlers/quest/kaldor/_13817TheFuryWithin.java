@@ -11,9 +11,9 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 /**
  * @author Ritsu
  */
-public class _13817WeeklyTheWithin extends AbstractQuestHandler {
+public class _13817TheFuryWithin extends AbstractQuestHandler {
 
-	public _13817WeeklyTheWithin() {
+	public _13817TheFuryWithin() {
 		super(13817);
 	}
 
