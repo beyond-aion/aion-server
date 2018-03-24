@@ -31161,11 +31161,11 @@
 	</decomposable>
 	<decomposable item_id="188053717"><!-- Volatile Rift Victory Loot Bundle -->
 		<items>
-			<item id="186000242" /><!-- Ceramium Medal -->
-			<item id="166020000" /><!-- Omega Enchantment Stone -->
+			<item id="186000242" min_count="4" /><!-- Ceramium Medal -->
+			<item id="166020000" min_count="5" /><!-- Omega Enchantment Stone -->
 			<item id="182215750" race="ELYOS" /><!-- Asmodian Guardian General's Token -->
 			<item id="182215751" race="ASMODIANS" /><!-- Elyos Guardian General Token -->
-			<random_item type="MANASTONE_LEGEND_GRADE_60" min_count="1" max_count="3" />
+			<random_item type="MANASTONE_LEGEND_GRADE_70" min_count="1" max_count="3" />
 		</items>
 	</decomposable>
 	<decomposable item_id="188053718"><!-- Protectors Composite Manastone Bundle -->

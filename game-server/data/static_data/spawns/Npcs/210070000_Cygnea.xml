@@ -4462,10 +4462,6 @@
 			<spot x="2572.57935" y="2919.56641" z="297.97266" h="117" />
 			<spot x="2574.44189" y="2925.05176" z="297.76050" h="117" />
 		</spawn>
-		<!-- seventh ironlightian deity general -->
-		<spawn npc_id="236055" respawn_time="295">
-			<spot x="2580.96313" y="2920.03906" z="297.12500" h="117" />
-		</spawn>
 		<!-- seventh lightbinder -->
 		<spawn npc_id="220246" respawn_time="295">
 			<spot x="2545.65894" y="2931.17798" z="301.00000" h="117" />
@@ -4584,10 +4580,6 @@
 			<spot x="2107.76831" y="2023.04492" z="223.38948" h="13" />
 			<spot x="2111.61133" y="2017.60864" z="223.39946" h="13" />
 			<spot x="2113.15430" y="2022.41138" z="223.12500" h="13" />
-		</spawn>
-		<!-- sixth ironlightian deity general -->
-		<spawn npc_id="236048" respawn_time="295">
-			<spot x="2062.11914" y="1989.01843" z="221.25000" h="73" />
 		</spawn>
 		<!-- sixth lightbinder -->
 		<spawn npc_id="220242" respawn_time="295">
@@ -5177,10 +5169,6 @@
 			<spot x="515.33032" y="1131.26367" z="477.74109" h="90" />
 			<spot x="517.31177" y="1187.85022" z="477.12500" h="30" />
 			<spot x="520.43176" y="1183.84595" z="477.27698" h="30" />
-		</spawn>
-		<!-- third ironlightian deity general -->
-		<spawn npc_id="236035" respawn_time="295">
-			<spot x="511.96002" y="1124.78467" z="477.17404" h="90" />
 		</spawn>
 		<!-- third lightbinder -->
 		<spawn npc_id="220234" respawn_time="295">

@@ -1883,21 +1883,9 @@
 		<spawn npc_id="804935" respawn_time="295">
 			<spot x="1648.73999" y="67.52000" z="188.45741" h="15"/>
 		</spawn>
-		<!-- captain brimas -->
-		<spawn npc_id="219887" respawn_time="295">
-			<spot x="2866.14893" y="1866.78552" z="255.10272" h="30"/>
-		</spawn>
 		<!-- captain faun -->
 		<spawn npc_id="801007" respawn_time="295">
 			<spot x="1664.73999" y="66.52000" z="188.55006" h="43"/>
-		</spawn>
-		<!-- captain meriward -->
-		<spawn npc_id="219906" respawn_time="295">
-			<spot x="733.35925" y="260.30963" z="227.26459" h="67"/>
-		</spawn>
-		<!-- captain roblick -->
-		<spawn npc_id="219913" respawn_time="295">
-			<spot x="1470.11816" y="496.49655" z="217.87500" h="30"/>
 		</spawn>
 		<!-- captain wigthor -->
 		<spawn npc_id="219874" respawn_time="295">

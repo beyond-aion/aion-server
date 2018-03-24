@@ -137,6 +137,10 @@
 		</rift_spawn>
 		<!-- ENSHAR_GS -->
 		<rift_spawn id="2176">
+			<!-- captain brimas -->
+			<spawn npc_id="219887">
+				<spot x="2866.14893" y="1866.78552" z="255.10272" h="30"/>
+			</spawn>
 			<!-- flameskin cellatu -->
 			<spawn npc_id="219699" respawn_time="1800">
 				<spot x="2609.84766" y="2320.55811" z="195.62500"/>
@@ -281,6 +285,10 @@
 		</rift_spawn>
 		<!-- ENSHAR_HS -->
 		<rift_spawn id="2177">
+			<!-- captain meriward -->
+			<spawn npc_id="219906">
+				<spot x="733.35925" y="260.30963" z="227.26459" h="67"/>
+			</spawn>
 			<!-- flameskin cellatu -->
 			<spawn npc_id="219699" respawn_time="1800">
 				<spot x="2609.84766" y="2320.55811" z="195.62500"/>
@@ -425,6 +433,10 @@
 		</rift_spawn>
 		<!-- ENSHAR_IS -->
 		<rift_spawn id="2178">
+			<!-- captain roblick -->
+			<spawn npc_id="219913">
+				<spot x="1470.11816" y="496.49655" z="217.87500" h="30"/>
+			</spawn>
 			<!-- flameskin cellatu -->
 			<spawn npc_id="219699" respawn_time="1800">
 				<spot x="2609.84766" y="2320.55811" z="195.62500"/>

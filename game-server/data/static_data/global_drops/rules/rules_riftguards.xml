@@ -131,7 +131,19 @@
 			<gd_item id="186000147" /><!-- Mithril Medal -->
 		</gd_items>
 	</gd_rule>
-
+	<gd_rule rule_name="Named Boss Volatile Bundle" base_chance="100" fixed_chance="true" member_limit="144">
+		<gd_npcs>
+			<gd_npc npc_id="219887" /><!-- Captain Brimas -->
+			<gd_npc npc_id="219906" /><!-- Captain Meriward  -->
+			<gd_npc npc_id="219913" /><!-- Captaim Roblick -->
+			<gd_npc npc_id="236035" /><!-- Third Ironlightian Deity General -->
+			<gd_npc npc_id="236048" /><!-- Sixth Ironlightian Deity General -->
+			<gd_npc npc_id="236055" /><!-- Seventh Ironlightian Deity General -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="188053717" /><!-- Volatile Rift Victory Loot Bundle -->
+		</gd_items>
+	</gd_rule>
 	<gd_rule rule_name="Named Volatile Bundle" base_chance="100" fixed_chance="true" member_limit="6">
 		<gd_npcs>
 			<gd_npc npc_id="235830" /><!-- Mutated Gatorback Skilex -->

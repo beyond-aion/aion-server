@@ -137,6 +137,10 @@
 		</rift_spawn>
 		<!-- CYGNEA_GS -->
 		<rift_spawn id="2286">
+			<!-- third ironlightian deity general -->
+			<spawn npc_id="236035">
+				<spot x="511.96002" y="1124.78467" z="477.17404" h="90" />
+			</spawn>
 			<!-- Mutated Gatorback Skilex -->
 			<spawn npc_id="235830" respawn_time="1800">
 				<spot x="291.46518" y="132.40854" z="413.50000"/>
@@ -263,6 +267,10 @@
 		</rift_spawn>
 		<!-- CYGNEA_HS -->
 		<rift_spawn id="2287">
+			<!-- seventh ironlightian deity general -->
+			<spawn npc_id="236055">
+				<spot x="2580.96313" y="2920.03906" z="297.12500" h="117" />
+			</spawn>
 			<!-- Mutated Gatorback Skilex -->
 			<spawn npc_id="235830" respawn_time="1800">
 				<spot x="291.46518" y="132.40854" z="413.50000"/>
@@ -389,6 +397,10 @@
 		</rift_spawn>
 		<!-- CYGNEA_IS -->
 		<rift_spawn id="2288">
+			<!-- sixth ironlightian deity general -->
+			<spawn npc_id="236048">
+				<spot x="2062.11914" y="1989.01843" z="221.25000" h="73" />
+			</spawn>
 			<!-- Mutated Gatorback Skilex -->
 			<spawn npc_id="235830" respawn_time="1800">
 				<spot x="291.46518" y="132.40854" z="413.50000"/>
