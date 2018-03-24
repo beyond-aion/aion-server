@@ -181,23 +181,22 @@
   					<spawn npc_id="804577" respawn_time="295">
     					<spot x="791.27985" y="489.02353" z="142.90796" static_id="77"/>
   					</spawn>
-  					<!-- Falfyr(LDF5_Fortress_7011_Phillipa_D_E) -->
-  					<spawn npc_id="804589" respawn_time="295">
-    					<spot x="819.322876" y="279.971710" z="143.977325" h="0"/>
-  					</spawn>
-  					<!-- Banuan(LDF5_Fortress_7011_Banuan_D_E) -->
+  					<!-- Banuan -->
   					<spawn npc_id="804590" respawn_time="295">
-    					<spot h="58" z="143.97733" y="283.9717" x="819.3229"/>
+  						<spot x="819.3229" y="283.9717" z="143.97733" h="58"/>
   					</spawn>
-  					<!-- Salonte(LDF5_Fortress_7011_Salonte_D_L_E) -->
+  					<!-- Salonte-->
   					<spawn npc_id="804591" respawn_time="295">
-    					<spot h="58" z="143.97733" y="281.9717" x="819.3229"/>
+    					<spot x="819.3229" y="281.9717" z="143.97733" h="58"/>
+  					</spawn>
+  					<!-- Falfyr-->
+  					<spawn npc_id="804589" respawn_time="295">
+    					<spot x="819.323" y="279.972" z="143.97733" h="58"/>
   					</spawn>
  					<!-- Mailbox -->
   					<spawn npc_id="700079" respawn_time="295">
     					<spot x="754.059570" y="295.750824" z="156.987228" h="0"/>
   					</spawn>
-					
 					
 					<!-- Outer Gate(LDF5_Fortress_7011_Mist_Off_Terrace_Door_Da) -->
 					<spawn npc_id="252495">
@@ -247,6 +246,11 @@
 					<spawn npc_id="250207">
 						<spot x="825.1958" y="261.07306" z="157.0737" h="90" static_id="655"/>
 					</spawn>
+					
+					<!-- Leton -->
+  					<spawn npc_id="804588" respawn_time="295">
+    					<spot x="1298.8" y="1305.4" z="199.777" h="25"/>
+  					</spawn>
  				</siege_mod>
 				<siege_mod mod="SIEGE">
 					<!-- Massive Gates in North + South -->
@@ -831,17 +835,17 @@
   					<spawn npc_id="804576" respawn_time="295">
     					<spot x="791.27985" y="489.02353" z="142.90796" static_id="77"/>
   					</spawn>
-  					<!-- Venia(LDF5_Fortress_7011_Benia_L_L_E) -->
+  					<!-- Gantis -->
+  					<spawn npc_id="804585" respawn_time="295">
+  						<spot x="819.3229" y="283.9717" z="143.97733" h="58"/>
+  					</spawn>
+  					<!-- Venia-->
   					<spawn npc_id="804586" respawn_time="295">
-    					<spot x="819.322876" y="279.971710" z="143.977325" h="0"/>
+    					<spot x="819.3229" y="281.9717" z="143.97733" h="58"/>
   					</spawn>
-  					<!-- Setanos(LDF5_Fortress_7011_Setanos_L_L_E) -->
-  					<spawn npc_id="804587" respawn_time="295">
-    					<spot h="58" z="143.97733" y="283.9717" x="819.3229"/>
-  					</spawn>
-  					<!-- Leton(LDF5_Fortress_Reton_E) -->
-  					<spawn npc_id="804588" respawn_time="295">
-    					<spot h="58" z="143.97733" y="281.9717" x="819.3229"/>
+  					<!-- Terenoa-->
+  					<spawn npc_id="804584" respawn_time="295">
+    					<spot x="819.323" y="279.972" z="143.97733" h="58"/>
   					</spawn>
  					<!-- Mailbox -->
   					<spawn npc_id="700000" respawn_time="295">
@@ -898,6 +902,11 @@
 					<spawn npc_id="250206" respawn_time="295">
 						<spot x="825.1958" y="261.07306" z="157.0737" h="90" static_id="655"/>
 					</spawn>
+					
+					<!-- Ibatu -->
+  					<spawn npc_id="804593" respawn_time="295">
+    					<spot x="394.6" y="1352.4" z="163.781" h="12"/>
+  					</spawn>
  				</siege_mod>
 				<siege_mod mod="SIEGE">
 					<!-- Massive Gates in North + South -->
