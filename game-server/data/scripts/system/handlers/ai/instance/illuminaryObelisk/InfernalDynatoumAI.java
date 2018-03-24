@@ -18,6 +18,7 @@ public class InfernalDynatoumAI extends DynatoumAI {
 		super(owner);
 	}
 
+	@Override
 	protected void scheduleDespawn(int delayInSec) {
 		despawnTask = ThreadPoolManager.getInstance().schedule(() -> {
 			if (!isDead()) {
