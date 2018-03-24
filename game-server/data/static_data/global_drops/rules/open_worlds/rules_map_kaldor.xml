@@ -119,4 +119,70 @@
 			<gd_item id="125004021"/><!-- Darok's Mask -->
 		</gd_items>
 	</gd_rule>
+	<gd_rule rule_name="Material Burning Vitality" base_chance="3">
+		<gd_maps>
+			<gd_map map_id="600090000"/><!-- Kaldor -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="234282"/><!-- Cinder Drakie -->
+			<gd_npc npc_id="234283"/><!-- Volcanic Spirit -->
+			<gd_npc npc_id="234284"/><!-- Blaze Drake -->
+			<gd_npc npc_id="234285"/><!-- Cinder Ampha -->
+			<gd_npc npc_id="234286"/><!-- Ashen Karnif -->
+			<gd_npc npc_id="234287"/><!-- Blaze Drakie -->
+			<gd_npc npc_id="234288"/><!-- Flamescreech Spirit -->
+			<gd_npc npc_id="234290"/><!-- Flame Ampha -->
+			<gd_npc npc_id="234294"/><!-- Blazing Obscura -->
+			<gd_npc npc_id="234295"/><!-- Cinder Sparkle -->
+			<gd_npc npc_id="234296"/><!-- Stokesnuff Ametgolem -->
+			<gd_npc npc_id="234298"/><!-- Anoha Mugolem -->
+			<gd_npc npc_id="234303"/><!-- Emberkeeper Zefirun -->
+			<gd_npc npc_id="234310"/><!-- Magma Belcher Buldon -->
+			<gd_npc npc_id="234515"/><!-- Flamebeak Zefirun -->
+			<gd_npc npc_id="234525"/><!-- Red Striped Snuffler -->
+			<gd_npc npc_id="234526"/><!-- Crag Snuffler -->
+			<gd_npc npc_id="234528"/><!-- Ember Snuffler -->
+			<gd_npc npc_id="234530"/><!-- Flaming Obscura -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="152012613"/><!-- Burning Vitality-->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Material Burning Mind" base_chance="3">
+		<gd_maps>
+			<gd_map map_id="600090000"/><!-- Kaldor -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="234252"/><!-- Hurricane Worg -->
+			<gd_npc npc_id="234253"/><!-- Gluespit Sylphen -->
+			<gd_npc npc_id="234254"/><!-- Raging Ettin -->
+			<gd_npc npc_id="234255"/><!-- Bloodmoon Archna -->
+			<gd_npc npc_id="234256"/><!-- Wandering Oculis -->
+			<gd_npc npc_id="234257"/><!-- Vasharti Grunt -->
+			<gd_npc npc_id="234258"/><!-- Vasharti Spellslinger -->
+			<gd_npc npc_id="234259"/><!-- Vasharti Lacerator -->
+			<gd_npc npc_id="234269"/><!-- Vicious Karnif -->
+			<gd_npc npc_id="234270"/><!-- Relic Sparkle -->
+			<gd_npc npc_id="234271"/><!-- Listless Nagolem -->
+			<gd_npc npc_id="234272"/><!-- Vengeful Nagolem -->
+			<gd_npc npc_id="234305"/><!-- Arrogant Darok -->
+			<gd_npc npc_id="234306"/><!-- Moaning Throil -->
+			<gd_npc npc_id="234307"/><!-- Grieving Minorda -->
+			<gd_npc npc_id="234509"/><!-- Blackthorn Crynac -->
+			<gd_npc npc_id="234510"/><!-- Slinking Blackthorn Crynac -->
+			<gd_npc npc_id="234511"/><!-- Ridgeback Starturtle -->
+			<gd_npc npc_id="234519"/><!-- Grove Snuffler -->
+			<gd_npc npc_id="234522"/><!-- Spotted Snuffler -->
+			<gd_npc npc_id="234659"/><!-- Vasharti Warrior -->
+			<gd_npc npc_id="234660"/><!-- Vasharti Sorcerer -->
+			<gd_npc npc_id="234661"/><!-- Vasharti Sentinel -->
+			<gd_npc npc_id="234665"/><!-- Vasharti Grunt -->
+			<gd_npc npc_id="234666"/><!-- Vasharti Scout -->
+			<gd_npc npc_id="234667"/><!-- Wounded Vasharti Infantry -->
+			<gd_npc npc_id="234668"/><!-- Wounded Vasharti Strongbow -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="152012615"/><!-- Burning Mind-->
+		</gd_items>
+	</gd_rule>
 </global_rules>
