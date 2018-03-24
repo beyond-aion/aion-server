@@ -162,6 +162,7 @@
 			<xs:element name="noacquired" type="NumberListType" minOccurs="0" maxOccurs="1"/>
 			<xs:element name="acquired" type="NumberListType" minOccurs="0" maxOccurs="1"/>
 			<xs:element name="equipped" type="NumberListType" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="required_title" type="xs:int" minOccurs="0" maxOccurs="1"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="FinishedQuest">

@@ -41,6 +41,8 @@ public class XMLStartCondition {
 	@XmlList
 	@XmlElement(name = "equipped", type = Integer.class)
 	protected List<Integer> equipped;
+	@XmlElement(name = "required_title")
+	protected int requiredTitle;
 
 	public boolean isOptional() {
 		return finished != null && finished.size() > 0;
@@ -118,11 +120,17 @@ public class XMLStartCondition {
 		return true;
 	}
 
+	private boolean isRequiredTitleDisplayed(Player player) {
+		if (requiredTitle != 0 && player.getCommonData().getTitleId() != requiredTitle)
+			return false;
+		return true;
+	}
+
 	/** Check all conditions */
 	public boolean check(Player player, boolean warn) {
 		QuestStateList qsl = player.getQuestStateList();
 		return checkFinishedQuests(qsl) && checkUnfinishedQuests(qsl) && checkAcquiredQuests(qsl) && checkNoAcquiredQuests(qsl)
-			&& checkEquippedItems(player, warn);
+			&& checkEquippedItems(player, warn) && isRequiredTitleDisplayed(player);
 	}
 
 	public List<FinishedQuestCond> getFinishedPreconditions() {
