@@ -1,0 +1,1 @@
+DELETE FROM inventory WHERE item_id = 182215545;
