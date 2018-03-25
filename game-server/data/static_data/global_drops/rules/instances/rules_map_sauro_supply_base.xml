@@ -66,7 +66,6 @@
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="169405253" /><!-- Weapon Shard -->
-			<gd_item id="188052575" /><!-- Veteran's Crafting Bundle -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Material" base_chance="100">
