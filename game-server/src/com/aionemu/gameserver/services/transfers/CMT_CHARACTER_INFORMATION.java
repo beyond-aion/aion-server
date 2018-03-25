@@ -129,7 +129,7 @@ public class CMT_CHARACTER_INFORMATION extends AionClientPacket {
 		playerAppearance.setHips(readUC());
 		playerAppearance.setArmThickness(readUC());
 		playerAppearance.setHandSize(readUC());
-		playerAppearance.setLegThicnkess(readUC());
+		playerAppearance.setLegThickness(readUC());
 		playerAppearance.setFootSize(readUC());
 		playerAppearance.setFacialRate(readUC());
 		playerAppearance.setArmLength(readUC());

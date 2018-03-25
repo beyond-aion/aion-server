@@ -175,7 +175,7 @@ public class SM_PLAYER_INFO extends AionServerPacket {
 		writeC(playerAppearance.getHips());
 		writeC(playerAppearance.getArmThickness());
 		writeC(playerAppearance.getHandSize());
-		writeC(playerAppearance.getLegThicnkess());
+		writeC(playerAppearance.getLegThickness());
 
 		writeC(playerAppearance.getFootSize());
 		writeC(playerAppearance.getFacialRate());
