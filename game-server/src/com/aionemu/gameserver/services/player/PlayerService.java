@@ -173,10 +173,7 @@ public class PlayerService {
 		 * Player common data and appearance should be already loaded in account
 		 */
 		PlayerAccountData playerAccountData = account.getPlayerAccountData(playerObjId);
-		PlayerCommonData pcd = playerAccountData.getPlayerCommonData();
-		PlayerAppearance appearance = playerAccountData.getAppearance();
-
-		player = new Player(new PlayerController(), pcd, appearance, account);
+		player = new Player(playerAccountData, account);
 		LegionMember legionMember = LegionService.getInstance().getLegionMember(player.getObjectId());
 		if (legionMember != null) {
 			player.setLegionMember(legionMember);
@@ -276,19 +273,19 @@ public class PlayerService {
 	/**
 	 * This method is used for creating new players
 	 *
-	 * @param playerCommonData
-	 * @param playerAppearance
+	 * @param playerAccountData
 	 * @param account
 	 * @return Player
 	 */
-	public static Player newPlayer(PlayerCommonData playerCommonData, PlayerAppearance playerAppearance, Account account) {
+	public static Player newPlayer(PlayerAccountData playerAccountData, Account account) {
+		PlayerCommonData playerCommonData = playerAccountData.getPlayerCommonData();
 		PlayerInitialData playerInitialData = DataManager.PLAYER_INITIAL_DATA;
 		LocationData ld = playerInitialData.getSpawnLocation(playerCommonData.getRace());
 
 		WorldPosition position = World.getInstance().createPosition(ld.getMapId(), ld.getX(), ld.getY(), ld.getZ(), ld.getHeading(), 0);
 		playerCommonData.setPosition(position);
 
-		Player newPlayer = new Player(new PlayerController(), playerCommonData, playerAppearance, account);
+		Player newPlayer = new Player(playerAccountData, account);
 
 		// Starting skills
 		newPlayer.setSkillList(new PlayerSkillList());

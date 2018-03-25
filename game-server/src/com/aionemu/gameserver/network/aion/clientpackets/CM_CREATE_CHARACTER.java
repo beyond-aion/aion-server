@@ -214,15 +214,15 @@ public class CM_CREATE_CHARACTER extends AionClientPacket {
 				}
 			}
 		}
-		Player player = PlayerService.newPlayer(playerCommonData, playerAppearance, account);
+		PlayerAccountData accPlData = new PlayerAccountData(playerCommonData, playerAppearance);
+		Player player = PlayerService.newPlayer(accPlData, account);
 
 		if (!PlayerService.storeNewPlayer(player, account.getName(), account.getId())) {
 			client.sendPacket(new SM_CREATE_CHARACTER(null, SM_CREATE_CHARACTER.RESPONSE_DB_ERROR));
 			IDFactory.getInstance().releaseId(playerCommonData.getPlayerObjId());
 		} else {
 			List<Item> equipment = DAOManager.getDAO(InventoryDAO.class).loadEquipment(player.getObjectId());
-			PlayerAccountData accPlData = new PlayerAccountData(playerCommonData, null, playerAppearance, equipment, null);
-
+			accPlData.setEquipment(equipment);
 			accPlData.setCreationDate(new Timestamp(System.currentTimeMillis()));
 			PlayerService.storeCreationTime(player.getObjectId(), accPlData.getCreationDate());
 

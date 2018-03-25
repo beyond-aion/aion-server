@@ -124,7 +124,7 @@ public class AccountService {
 		// Load only equipment and its stones to display on character selection screen
 		List<Item> equipment = DAOManager.getDAO(InventoryDAO.class).loadEquipment(playerId);
 
-		PlayerAccountData playerAccData = new PlayerAccountData(playerCommonData, cbi, appereance, equipment, legionMember);
+		PlayerAccountData playerAccData = new PlayerAccountData(playerCommonData, appereance, cbi, equipment, legionMember);
 		DAOManager.getDAO(PlayerDAO.class).setCreationDeletionTime(playerAccData);
 		return playerAccData;
 	}
