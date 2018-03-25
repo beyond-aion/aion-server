@@ -5,6 +5,7 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.skill.QueuedNpcSkillEntry;
 import com.aionemu.gameserver.model.templates.npcskill.QueuedNpcSkillTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
+import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
@@ -49,9 +50,12 @@ public class InfernalDynatoumAI extends DynatoumAI {
 	}
 
 	@Override
-	protected void handleDespawned() {
-		cancelDespawnTask();
-		PacketSendUtility.broadcastToMap(getOwner(), SM_SYSTEM_MESSAGE.STR_MSG_IDF5_U3_HARD_BOSS_TIMER_04());
-		super.handleDespawned();
+	public void onEndUseSkill(SkillTemplate skillTemplate) {
+		switch (skillTemplate.getSkillId()) {
+			case 21534:
+				getOwner().getController().delete();
+				PacketSendUtility.broadcastToMap(getOwner(), SM_SYSTEM_MESSAGE.STR_MSG_IDF5_U3_HARD_BOSS_TIMER_04());
+				break;
+		}
 	}
 }
