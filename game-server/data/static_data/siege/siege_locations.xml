@@ -409,10 +409,10 @@
 	<siege_location id="3111" type="MASTARIUS" world="220070000" fortress_dependency="3011 3021" siege_duration="7200"/>
 	<!-- Wealhtheow's Keep -->
 	<siege_location id="7011" type="FORTRESS" world="600090000" name_id="404142" occupy_count="2" siege_duration="3600" influence="14">
-	    <siege_reward top="11" itemid="188053140" m_count="1" gp_win="400" gp_defeat="200"/>
-		<siege_reward top="30" itemid="188053141" m_count="1" gp_win="300" gp_defeat="150"/>
-		<siege_reward top="60" itemid="188053142" m_count="1" gp_win="250" gp_defeat="100"/>
-		<siege_reward top="200" itemid="188053143" m_count="1" gp_win="200" gp_defeat="50"/>
+	    <siege_reward top="11" itemid="169610150" m_count="1" gp_win="0" gp_defeat="200"/>
+		<siege_reward top="30" itemid="169610150" m_count="1" gp_win="0" gp_defeat="150"/>
+		<siege_reward top="60" itemid="169610150" m_count="1" gp_win="0" gp_defeat="100"/>
+		<siege_reward top="200" itemid="169610150" m_count="1" gp_win="0" gp_defeat="50"/>
 		<legion_reward itemid="182400001" m_count="30000000" />
 		<legion_reward itemid="186000242" m_count="4"/>
 		<legion_reward itemid="182215545" m_count="1"/>
