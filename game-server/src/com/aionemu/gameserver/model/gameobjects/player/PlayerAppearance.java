@@ -3,7 +3,7 @@ package com.aionemu.gameserver.model.gameobjects.player;
 /**
  * @author SoulKeeper, srx47, alexa026
  */
-public class PlayerAppearance implements Cloneable {
+public class PlayerAppearance {
 
 	/**
 	 * Player's face
@@ -1060,23 +1060,5 @@ public class PlayerAppearance implements Cloneable {
 	 */
 	public void setHeight(float height) {
 		this.height = height;
-	}
-
-	/**
-	 * Allow to copy the object
-	 * 
-	 * @author Divinity
-	 */
-	@Override
-	public Object clone() {
-		Object newObject = null;
-
-		try {
-			newObject = super.clone();
-		} catch (CloneNotSupportedException e) {
-			e.printStackTrace();
-		}
-
-		return newObject;
 	}
 }

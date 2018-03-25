@@ -59,8 +59,7 @@ public class FactionPackService {
 	}
 
 	private void sendRewards(Player player, LocalDateTime minCreationTime, LocalDateTime maxCreationTime) {
-		Timestamp playerCreationDate = player.getAccount().getPlayerAccountData(player.getObjectId()).getCreationDate();
-		LocalDateTime creationTime = ServerTime.atDate(playerCreationDate).toLocalDateTime();
+		LocalDateTime creationTime = ServerTime.atDate(player.getCreationDate()).toLocalDateTime();
 		if (creationTime.isBefore(minCreationTime))
 			return;
 		if (creationTime.isAfter(maxCreationTime))

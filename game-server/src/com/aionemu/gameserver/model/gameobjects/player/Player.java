@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.model.gameobjects.player;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -65,7 +66,6 @@ import com.aionemu.gameserver.model.team.common.legacy.LootGroupRules;
 import com.aionemu.gameserver.model.team.group.PlayerGroup;
 import com.aionemu.gameserver.model.team.legion.Legion;
 import com.aionemu.gameserver.model.team.legion.LegionMember;
-import com.aionemu.gameserver.model.templates.BoundRadius;
 import com.aionemu.gameserver.model.templates.flypath.FlyPathEntry;
 import com.aionemu.gameserver.model.templates.item.ItemAttackType;
 import com.aionemu.gameserver.model.templates.item.ItemTemplate;
@@ -1283,6 +1283,10 @@ public class Player extends Creature {
 
 	public Account getAccount() {
 		return playerAccount;
+	}
+
+	public Timestamp getCreationDate() {
+		return playerAccountData.getCreationDate();
 	}
 
 	/**
