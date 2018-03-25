@@ -40,7 +40,7 @@
 			25092 [XML] Pontificating Possible Power (Collect Item)
 			25093 [XML] A Royal Target (Monster Hunt)
 			25094 [ToDo] An Offering of Friendship (Collect Item)
-			25200 [ToDo] Break Elyos, Take Token
+			25200 [XML] Break Elyos, Take Token
 			25201 [XML] Tejhi Termination (Monster Hunt)
 			25202 [XML] Tejhi Tasks (Monster Hunt)
 			25203 [XML] Creatures of Cloudtalon Valley (Monster Hunt)
@@ -75,6 +75,7 @@
 		<npc_infos npc_ids="804718"/>
 	</report_to_many>
 	<report_to id="28970" start_npc_ids="804927" end_npc_ids="805216 805217 805218"/>
+	<report_to id="25200" end_npc_ids="804719"/>
 	
 	<!-- FOUNTAIN REWARD -->
 	<fountain_rewards id="25205" start_npc_ids="730557 804759"/>

@@ -116,7 +116,7 @@
 			15107 [UNUSED] HOLD
 			15108 [UNUSED] HOLD
 			15109 [UNUSED] HOLD
-			15200 [ToDo] A Token of Victory (PvP)
+			15200 [XML] A Token of Victory (PvP)
 			15201 [XML] [Repeat] The Black Fin Threat (Monster Hunt)
 			15202 [XML] [Repeat] Take out the Elites (Monster Hunt)
 			15203 [XML] [Repeat] Dangerous Wildlife (Monster Hunt)
@@ -145,6 +145,7 @@
 	
 	<!-- REPORTING QUESTS -->
 	<report_to id="18970" start_npc_ids="804709" end_npc_ids="805213 805214 805215"/>
+	<report_to id="15200" end_npc_ids="804699"/>
 	
 	<!-- COLLECTING QUESTS -->
 	<item_collecting id="15002" start_npc_ids="804698"/>
