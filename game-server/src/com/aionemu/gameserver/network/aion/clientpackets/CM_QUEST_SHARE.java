@@ -1,8 +1,17 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import static com.aionemu.gameserver.utils.collections.Predicates.Players.ONLINE;
+import static com.aionemu.gameserver.utils.collections.Predicates.Players.allExcept;
+
+import java.util.Collections;
+import java.util.List;
+import java.util.function.Predicate;
+
 import com.aionemu.gameserver.configs.main.GroupConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.team.TeamMember;
+import com.aionemu.gameserver.model.team.TemporaryPlayerTeam;
 import com.aionemu.gameserver.model.templates.QuestTemplate;
 import com.aionemu.gameserver.model.templates.quest.QuestTarget;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
@@ -21,7 +30,7 @@ import com.aionemu.gameserver.utils.PositionUtil;
  */
 public class CM_QUEST_SHARE extends AionClientPacket {
 
-	public int questId;
+	private int questId;
 
 	public CM_QUEST_SHARE(int opcode, State state, State... restStates) {
 		super(opcode, state, restStates);
@@ -36,36 +45,33 @@ public class CM_QUEST_SHARE extends AionClientPacket {
 	protected void runImpl() {
 		Player player = getConnection().getActivePlayer();
 		QuestTemplate questTemplate = DataManager.QUEST_DATA.getQuestById(questId);
-		QuestState questState = player.getQuestStateList().getQuestState(questId);
-
 		if (questTemplate == null || questTemplate.isCannotShare()) {
 			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1100001)); // This quest cannot be shared.
 			return;
 		}
 
+		QuestState questState = player.getQuestStateList().getQuestState(questId);
 		if (questState == null || questState.getStatus() == QuestStatus.COMPLETE)
 			return;
 
-		if (!player.isInAlliance() && questTemplate.getTarget() == QuestTarget.ALLIANCE) {
-			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1100005)); // There are no Alliance members to share the quest with.
-			return;
+		List<Player> membersToShareWith;
+		TemporaryPlayerTeam<? extends TeamMember<Player>> currentGroup = player.getCurrentGroup();
+		if (currentGroup == null) {
+			membersToShareWith = Collections.emptyList();
+		} else {
+			Predicate<Player> memberFilter = allExcept(player).and(ONLINE).and(member -> PositionUtil.isInRange(member, player, GroupConfig.GROUP_MAX_DISTANCE));
+			membersToShareWith = currentGroup.filterMembers(memberFilter);
 		}
-
-		if (!player.isInTeam()) {
-			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1100000)); // There are no group members to share the quest with.
-			return;
-		}
-
-		for (Player member : player.isInGroup() ? player.getPlayerGroup().getOnlineMembers() : player.getPlayerAllianceGroup().getOnlineMembers()) {
-			if (player.equals(member) || !PositionUtil.isInRange(member, player, GroupConfig.GROUP_MAX_DISTANCE))
-				continue;
-
-			if (member.getQuestStateList().hasQuest(questId)) {
-				QuestStatus qs = member.getQuestStateList().getQuestState(questId).getStatus();
-				if (qs == QuestStatus.START || qs == QuestStatus.REWARD)
-					continue;
+		if (membersToShareWith.isEmpty()) {
+			if (questTemplate.getTarget() == QuestTarget.ALLIANCE) {
+				PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1100005)); // There are no Alliance members to share the quest with.
+			} else {
+				PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1100000)); // There are no group members to share the quest with.
 			}
+			return;
+		}
 
+		for (Player member : membersToShareWith) {
 			if (!QuestService.checkStartConditions(member, questId, false)) {
 				PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1100003, member.getName())); // You failed to share the quest with %0.
 			} else {
