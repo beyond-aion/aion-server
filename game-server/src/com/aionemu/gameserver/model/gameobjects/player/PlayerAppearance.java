@@ -3,7 +3,7 @@ package com.aionemu.gameserver.model.gameobjects.player;
 /**
  * @author SoulKeeper, srx47, alexa026
  */
-public class PlayerAppearance implements Cloneable {
+public class PlayerAppearance {
 
 	/**
 	 * Player's face
@@ -55,7 +55,7 @@ public class PlayerAppearance implements Cloneable {
 	private int armThickness;
 	private int armLength;
 	private int handSize;
-	private int legThicnkess;
+	private int legThickness;
 	private int legLength;
 	private int footSize;
 	private int facialRate;
@@ -946,18 +946,18 @@ public class PlayerAppearance implements Cloneable {
 	 * 
 	 * @return leg thickness
 	 */
-	public int getLegThicnkess() {
-		return legThicnkess;
+	public int getLegThickness() {
+		return legThickness;
 	}
 
 	/**
 	 * Sets leg thickness
 	 * 
-	 * @param legThicnkess
+	 * @param legThickness
 	 *          leg thickness
 	 */
-	public void setLegThicnkess(int legThicnkess) {
-		this.legThicnkess = legThicnkess;
+	public void setLegThickness(int legThickness) {
+		this.legThickness = legThickness;
 	}
 
 	/**
@@ -1060,23 +1060,5 @@ public class PlayerAppearance implements Cloneable {
 	 */
 	public void setHeight(float height) {
 		this.height = height;
-	}
-
-	/**
-	 * Allow to copy the object
-	 * 
-	 * @author Divinity
-	 */
-	@Override
-	public Object clone() {
-		Object newObject = null;
-
-		try {
-			newObject = super.clone();
-		} catch (CloneNotSupportedException e) {
-			e.printStackTrace();
-		}
-
-		return newObject;
 	}
 }

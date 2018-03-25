@@ -74,13 +74,14 @@ public class CosmeticItemAction extends AbstractItemAction {
 			playerAppearance.setDeco(id);
 		} else if (type.equals("preset_name")) {
 			CosmeticItemTemplate.Preset preset = template.getPreset();
-			playerAppearance.setEyeRGB((preset.getEyeColor()));
-			playerAppearance.setLipRGB((preset.getLipColor()));
-			playerAppearance.setHairRGB((preset.getHairColor()));
-			playerAppearance.setSkinRGB((preset.getEyeColor()));
-			playerAppearance.setHair((preset.getHairType()));
-			playerAppearance.setFace((preset.getFaceType()));
-			playerAppearance.setHeight((preset.getScale()));
+			playerAppearance.setEyeRGB(preset.getEyeColor());
+			playerAppearance.setLipRGB(preset.getLipColor());
+			playerAppearance.setHairRGB(preset.getHairColor());
+			playerAppearance.setSkinRGB(preset.getEyeColor());
+			playerAppearance.setHair(preset.getHairType());
+			playerAppearance.setFace(preset.getFaceType());
+			playerAppearance.setHeight(preset.getScale());
+			player.getAccountData().updateBoundingRadius();
 		}
 		DAOManager.getDAO(PlayerAppearanceDAO.class).store(player);
 		player.getInventory().delete(targetItem);

@@ -78,7 +78,7 @@ public class MySQL5PlayerAppearanceDAO extends PlayerAppearanceDAO {
 						pa.setArmThickness(resultSet.getInt("arm_thickness"));
 						pa.setArmLength(resultSet.getInt("arm_length"));
 						pa.setHandSize(resultSet.getInt("hand_size"));
-						pa.setLegThicnkess(resultSet.getInt("leg_thickness"));
+						pa.setLegThickness(resultSet.getInt("leg_thickness"));
 						pa.setLegLength(resultSet.getInt("leg_length"));
 						pa.setFootSize(resultSet.getInt("foot_size"));
 						pa.setFacialRate(resultSet.getInt("facial_rate"));
@@ -158,7 +158,7 @@ public class MySQL5PlayerAppearanceDAO extends PlayerAppearanceDAO {
 				ps.setInt(46, pa.getArmThickness());
 				ps.setInt(47, pa.getArmLength());
 				ps.setInt(48, pa.getHandSize());
-				ps.setInt(49, pa.getLegThicnkess());
+				ps.setInt(49, pa.getLegThickness());
 				ps.setInt(50, pa.getLegLength());
 				ps.setInt(51, pa.getFootSize());
 				ps.setInt(52, pa.getFacialRate());

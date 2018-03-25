@@ -149,7 +149,7 @@ public class AtreianPassportService {
 	private void sendPassport(Player player) {
 		Account pa = player.getAccount();
 		// player creation date in the servers time zone (transforming the timestamp directly would instead apply the system time zone)
-		LocalDate playerCreationDate = ServerTime.atDate(pa.getPlayerAccountData(player.getObjectId()).getCreationDate()).toLocalDate();
+		LocalDate playerCreationDate = ServerTime.atDate(player.getCreationDate()).toLocalDate();
 		PacketSendUtility.sendPacket(player, new SM_ATREIAN_PASSPORT(pa.getPassportsList(), pa.getPassportStamps(), playerCreationDate));
 	}
 

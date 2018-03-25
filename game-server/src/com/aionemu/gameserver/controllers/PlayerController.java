@@ -124,7 +124,7 @@ import com.aionemu.gameserver.world.zone.ZoneName;
  */
 public class PlayerController extends CreatureController<Player> {
 
-	private static Logger log = LoggerFactory.getLogger(PlayerController.class);
+	private static final Logger log = LoggerFactory.getLogger(PlayerController.class);
 	private long lastAttackMillis = 0;
 	private long lastAttackedMillis = 0;
 	private int stance = 0;

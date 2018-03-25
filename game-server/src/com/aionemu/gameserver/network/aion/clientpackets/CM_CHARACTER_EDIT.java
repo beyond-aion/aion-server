@@ -106,7 +106,7 @@ public class CM_CHARACTER_EDIT extends AionClientPacket {
 		newAppearance.setArmThickness(readUC());
 
 		newAppearance.setHandSize(readUC());
-		newAppearance.setLegThicnkess(readUC());
+		newAppearance.setLegThickness(readUC());
 
 		newAppearance.setFootSize(readUC());
 		newAppearance.setFacialRate(readUC());

@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.aionemu.gameserver.model.account.PlayerAccountData;
 import org.slf4j.Logger;
 
 import com.aionemu.commons.database.dao.DAOManager;
@@ -129,7 +130,7 @@ public class CMT_CHARACTER_INFORMATION extends AionClientPacket {
 		playerAppearance.setHips(readUC());
 		playerAppearance.setArmThickness(readUC());
 		playerAppearance.setHandSize(readUC());
-		playerAppearance.setLegThicnkess(readUC());
+		playerAppearance.setLegThickness(readUC());
 		playerAppearance.setFootSize(readUC());
 		playerAppearance.setFacialRate(readUC());
 		playerAppearance.setArmLength(readUC());
@@ -139,9 +140,10 @@ public class CMT_CHARACTER_INFORMATION extends AionClientPacket {
 		playerAppearance.setVoice(readUC());
 		playerAppearance.setHeight(readF());
 
+		PlayerAccountData accPlData = new PlayerAccountData(playerCommonData, playerAppearance);
 		Account account = AccountService.loadAccount(targetAccount);
 		account.setName(accountName);
-		Player player = PlayerService.newPlayer(playerCommonData, playerAppearance, account);
+		Player player = PlayerService.newPlayer(accPlData, account);
 		float x = readF();
 		float y = readF();
 		float z = readF();

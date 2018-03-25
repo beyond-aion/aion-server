@@ -12,37 +12,31 @@ import com.aionemu.commons.configuration.Property;
 public class DatabaseConfig {
 
 	/**
-	 * Default database url.
+	 * Fully qualified name of the database driver
 	 */
-	@Property(key = "database.url", defaultValue = "jdbc:mysql://localhost:3306/aion_server?useUnicode=true&characterEncoding=UTF-8")
-	public static String DATABASE_URL;
-
-	/**
-	 * Name of database Driver
-	 */
-	@Property(key = "database.driver", defaultValue = "com.mysql.jdbc.jdbc2.optional.MysqlDataSource")
+	@Property(key = "database.driver")
 	public static Class<?> DATABASE_DRIVER;
 
-	/**
-	 * Default database user
-	 */
-	@Property(key = "database.user", defaultValue = "root")
+	@Property(key = "database.url")
+	public static String DATABASE_URL;
+
+	@Property(key = "database.user")
 	public static String DATABASE_USER;
 
-	/**
-	 * Default database password
-	 */
-	@Property(key = "database.password", defaultValue = "root")
+	@Property(key = "database.password")
 	public static String DATABASE_PASSWORD;
 
-	@Property(key = "database.connectionpool.timeout", defaultValue = "5000")
-	public static int DATABASE_TIMEOUT = 5000;
-
 	/**
-	 * Maximum amount of connections that are allowed to use in bonecp partition
+	 * Maximum amount of connections kept in connection pool
 	 */
 	@Property(key = "database.connectionpool.connections.max", defaultValue = "5")
+
 	public static int DATABASE_CONNECTIONS_MAX;
+	/**
+	 * Maximum wait time when getting a DB connection, before throwing a timeout error
+	 */
+	@Property(key = "database.connectionpool.timeout", defaultValue = "5000")
+	public static int DATABASE_TIMEOUT;
 
 	/**
 	 * Location of database script context descriptor

@@ -91,7 +91,7 @@ public abstract class PlayerInfo extends AionServerPacket {
 		writeC(playerAppearance.getHips());
 		writeC(playerAppearance.getArmThickness());
 		writeC(playerAppearance.getHandSize());
-		writeC(playerAppearance.getLegThicnkess());
+		writeC(playerAppearance.getLegThickness());
 		writeC(playerAppearance.getFootSize());
 		writeC(playerAppearance.getFacialRate());
 		writeC(0x00); // 0x00

@@ -8,6 +8,7 @@ import com.aionemu.gameserver.model.gameobjects.player.PlayerAppearance;
 import com.aionemu.gameserver.model.gameobjects.player.PlayerCommonData;
 import com.aionemu.gameserver.model.team.legion.Legion;
 import com.aionemu.gameserver.model.team.legion.LegionMember;
+import com.aionemu.gameserver.model.templates.BoundRadius;
 
 /**
  * This class is holding information about player, that is displayed on char selection screen, such as: player commondata, player's appearance and
@@ -19,21 +20,26 @@ import com.aionemu.gameserver.model.team.legion.LegionMember;
  */
 public class PlayerAccountData {
 
+	private final PlayerCommonData playerCommonData;
+	private PlayerAppearance appearance;
 	private CharacterBanInfo cbi;
-	private PlayerCommonData playerCommonData;
-	private PlayerAppearance appereance;
 	private List<Item> equipment;
 	private Timestamp creationDate;
 	private Timestamp deletionDate;
 	private LegionMember legionMember;
 
-	public PlayerAccountData(PlayerCommonData playerCommonData, CharacterBanInfo cbi, PlayerAppearance appereance, List<Item> equipment,
+	public PlayerAccountData(PlayerCommonData playerCommonData, PlayerAppearance appearance) {
+		this(playerCommonData, appearance, null, null, null);
+	}
+
+	public PlayerAccountData(PlayerCommonData playerCommonData, PlayerAppearance appearance, CharacterBanInfo cbi, List<Item> equipment,
 		LegionMember legionMember) {
 		this.playerCommonData = playerCommonData;
+		this.appearance = appearance;
 		this.cbi = cbi;
-		this.appereance = appereance;
 		this.equipment = equipment;
 		this.legionMember = legionMember;
+		updateBoundingRadius();
 	}
 
 	public CharacterBanInfo getCharBanInfo() {
@@ -82,16 +88,17 @@ public class PlayerAccountData {
 		return playerCommonData;
 	}
 
-	/**
-	 * @param playerCommonData
-	 *          the playerCommonData to set
-	 */
-	public void setPlayerCommonData(PlayerCommonData playerCommonData) {
-		this.playerCommonData = playerCommonData;
+	public PlayerAppearance getAppearance() {
+		return appearance;
 	}
 
-	public PlayerAppearance getAppearance() {
-		return appereance;
+	public void setAppearance(PlayerAppearance appearance) {
+		this.appearance = appearance;
+		updateBoundingRadius();
+	}
+
+	public void updateBoundingRadius() {
+		playerCommonData.setBoundingRadius(new BoundRadius(0.5f, 0.5f, appearance.getBoundHeight()));
 	}
 
 	/**

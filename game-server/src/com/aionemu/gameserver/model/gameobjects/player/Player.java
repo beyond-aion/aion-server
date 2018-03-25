@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.model.gameobjects.player;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -24,6 +25,7 @@ import com.aionemu.gameserver.model.PlayerClass;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.TribeClass;
 import com.aionemu.gameserver.model.account.Account;
+import com.aionemu.gameserver.model.account.PlayerAccountData;
 import com.aionemu.gameserver.model.actions.PlayerActions;
 import com.aionemu.gameserver.model.actions.PlayerMode;
 import com.aionemu.gameserver.model.animations.ArrivalAnimation;
@@ -64,7 +66,6 @@ import com.aionemu.gameserver.model.team.common.legacy.LootGroupRules;
 import com.aionemu.gameserver.model.team.group.PlayerGroup;
 import com.aionemu.gameserver.model.team.legion.Legion;
 import com.aionemu.gameserver.model.team.legion.LegionMember;
-import com.aionemu.gameserver.model.templates.BoundRadius;
 import com.aionemu.gameserver.model.templates.flypath.FlyPathEntry;
 import com.aionemu.gameserver.model.templates.item.ItemAttackType;
 import com.aionemu.gameserver.model.templates.item.ItemTemplate;
@@ -99,9 +100,8 @@ public class Player extends Creature {
 	public volatile InRoll inRoll;
 	public volatile WindstreamPath windstreamPath;
 	public InGameShop inGameShop;
-	private PlayerAppearance playerAppearance;
-	private PlayerCommonData playerCommonData;
-	private Account playerAccount;
+	private final PlayerAccountData playerAccountData;
+	private final Account playerAccount;
 	private LegionMember legionMember;
 
 	private MacroList macroList;
@@ -205,17 +205,17 @@ public class Player extends Creature {
 	private List<ActionObserver> rideObservers;
 	private SerialKiller skList;
 
-	byte houseOwnerStates = HouseOwnerState.BUY_STUDIO_ALLOWED.getId();
+	private byte houseOwnerStates = HouseOwnerState.BUY_STUDIO_ALLOWED.getId();
 	private int battleReturnMap;
 	private float[] battleReturnCoords;
 	private int robotId;
 	private boolean isInFfaTeamMode;
 	private int customStates;
 
-	public Player(PlayerController controller, PlayerCommonData plCommonData, PlayerAppearance appereance, Account account) {
-		super(plCommonData.getPlayerObjId(), controller, null, plCommonData, plCommonData.getPosition());
-		this.playerCommonData = plCommonData;
-		this.playerAppearance = appereance;
+	public Player(PlayerAccountData playerAccountData, Account account) {
+		super(playerAccountData.getPlayerCommonData().getPlayerObjId(), new PlayerController(), null, playerAccountData.getPlayerCommonData(),
+			playerAccountData.getPlayerCommonData().getPosition());
+		this.playerAccountData = playerAccountData;
 		this.playerAccount = account;
 
 		this.requester = new ResponseRequester(this);
@@ -225,9 +225,8 @@ public class Player extends Creature {
 		this.craftCooldownList = new CraftCooldownList(this);
 		this.houseObjectCooldownList = new HouseObjectCooldownList();
 		this.toyPetList = new PetList(this);
-		controller.setOwner(this);
+		getController().setOwner(this);
 		moveController = new PlayerMoveController(this);
-		plCommonData.setBoundingRadius(new BoundRadius(0.5f, 0.5f, getPlayerAppearance().getBoundHeight()));
 
 		setGameStats(new PlayerGameStats(this));
 		setLifeStats(new PlayerLifeStats(this));
@@ -259,7 +258,7 @@ public class Player extends Creature {
 	}
 
 	public PlayerCommonData getCommonData() {
-		return playerCommonData;
+		return playerAccountData.getPlayerCommonData();
 	}
 
 	@Override
@@ -271,17 +270,17 @@ public class Player extends Creature {
 		if (displayCustomTag && AdminConfig.NAME_TAGS.length > 0) {
 			int index = playerAccount.getAccessLevel() - 1;
 			if (index >= 0 && index < AdminConfig.NAME_TAGS.length)
-				return String.format(AdminConfig.NAME_TAGS[index], playerCommonData.getName());
+				return String.format(AdminConfig.NAME_TAGS[index], getCommonData().getName());
 		}
-		return playerCommonData.getName();
+		return getCommonData().getName();
 	}
 
 	public PlayerAppearance getPlayerAppearance() {
-		return playerAppearance;
+		return playerAccountData.getAppearance();
 	}
 
 	public void setPlayerAppearance(PlayerAppearance playerAppearance) {
-		this.playerAppearance = playerAppearance;
+		playerAccountData.setAppearance(playerAppearance);
 	}
 
 	/**
@@ -442,15 +441,15 @@ public class Player extends Creature {
 	}
 
 	public int getQuestExpands() {
-		return playerCommonData.getQuestExpands();
+		return getCommonData().getQuestExpands();
 	}
 
 	public int getNpcExpands() {
-		return playerCommonData.getNpcExpands();
+		return getCommonData().getNpcExpands();
 	}
 
 	public int getItemExpands() {
-		return playerCommonData.getItemExpands();
+		return getCommonData().getItemExpands();
 	}
 
 	public void setCubeLimit() {
@@ -458,11 +457,11 @@ public class Player extends Creature {
 	}
 
 	public PlayerClass getPlayerClass() {
-		return playerCommonData.getPlayerClass();
+		return getCommonData().getPlayerClass();
 	}
 
 	public Gender getGender() {
-		return playerCommonData.getGender();
+		return getCommonData().getGender();
 	}
 
 	/**
@@ -477,7 +476,7 @@ public class Player extends Creature {
 
 	@Override
 	public byte getLevel() {
-		return (byte) playerCommonData.getLevel();
+		return (byte) getCommonData().getLevel();
 	}
 
 	/**
@@ -741,15 +740,15 @@ public class Player extends Creature {
 	}
 
 	public int getWarehouseSize() {
-		return playerCommonData.getWhNpcExpands() + playerCommonData.getWhBonusExpands();
+		return getCommonData().getWhNpcExpands() + getCommonData().getWhBonusExpands();
 	}
 
 	public int getWhNpcExpands() {
-		return playerCommonData.getWhNpcExpands();
+		return getCommonData().getWhNpcExpands();
 	}
 
 	public int getWhBonusExpands() {
-		return playerCommonData.getWhBonusExpands();
+		return getCommonData().getWhBonusExpands();
 	}
 
 	public void setWarehouseLimit() {
@@ -1122,17 +1121,10 @@ public class Player extends Creature {
 		this.kisk = newKisk;
 	}
 
-	/**
-	 * @return
-	 */
 	public Kisk getKisk() {
 		return kisk;
 	}
 
-	/**
-	 * @param delayId
-	 * @return
-	 */
 	public boolean isItemUseDisabled(ItemUseLimits limits) {
 		if (limits == null)
 			return false;
@@ -1257,10 +1249,6 @@ public class Player extends Creature {
 		return isInTeam() ? getCurrentTeam().getTeamId() : 0;
 	}
 
-	/**
-	 * @param worldId
-	 * @return
-	 */
 	public PortalCooldownList getPortalCooldownList() {
 		return portalCooldownList;
 	}
@@ -1289,8 +1277,16 @@ public class Player extends Creature {
 		this.postman = postman;
 	}
 
+	public PlayerAccountData getAccountData() {
+		return playerAccountData;
+	}
+
 	public Account getAccount() {
 		return playerAccount;
+	}
+
+	public Timestamp getCreationDate() {
+		return playerAccountData.getCreationDate();
 	}
 
 	/**
@@ -1504,7 +1500,7 @@ public class Player extends Creature {
 	}
 
 	public void addSalvationPoints(long points) {
-		playerCommonData.addSalvationPoints(points);
+		getCommonData().addSalvationPoints(points);
 		PacketSendUtility.sendPacket(this, new SM_STATS_INFO(this));
 	}
 
@@ -1645,7 +1641,7 @@ public class Player extends Creature {
 
 	@Override
 	public Race getRace() {
-		return playerCommonData.getRace();
+		return getCommonData().getRace();
 	}
 
 	public Race getOppositeRace() {
@@ -1877,12 +1873,12 @@ public class Player extends Creature {
 
 	@Override
 	public WorldPosition getPosition() {
-		return playerCommonData.getPosition();
+		return getCommonData().getPosition();
 	}
 
 	@Override
 	public void setPosition(WorldPosition position) {
-		playerCommonData.setPosition(position);
+		getCommonData().setPosition(position);
 	}
 
 	public int getRobotId() {
@@ -1908,7 +1904,7 @@ public class Player extends Creature {
 
 	@Override
 	public String toString() {
-		return "Player [id=" + getObjectId() + ", name=" + playerCommonData.getName() + "]";
+		return "Player [id=" + getObjectId() + ", name=" + getName() + "]";
 	}
 
 	public void setCustomState(CustomPlayerState state) {
