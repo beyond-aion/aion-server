@@ -480,7 +480,7 @@ public class StatFunctions {
 		float elementalDef = getMovementModifier(target, SkillElement.getResistanceForElement(element),
 			target.getGameStats().getMagicalDefenseFor(element));
 		resultDamage = Math.round(resultDamage * (1 - elementalDef / 1250f));
-		
+
 		// Magical Defense for test purpose
 		resultDamage -= Math.round(target.getGameStats().getStat(StatEnum.MAGICAL_DEFEND, 0).getCurrent() * 0.1f);
 
@@ -518,15 +518,12 @@ public class StatFunctions {
 		if (!noReduce && element != SkillElement.NONE) {
 			float elementalDef = getMovementModifier(target, SkillElement.getResistanceForElement(element), tgs.getMagicalDefenseFor(element));
 			damages = Math.round(damages * (1 - (elementalDef / 1250f)));
+			// magic defense for test purpose
+			damages -= target.getGameStats().getMDef().getCurrent();
 		}
 
 		// useKnowledge? This boolean is later used to determine whether movement boni are applied or not. Therefore this might not be correct.
 		damages = adjustDamages(speller, target, damages, pvpDamage, useKnowledge, element, noReduce);
-
-		// magical defense
-		// if (!noReduce && element != SkillElement.NONE) {
-		// damages -= target.getGameStats().getMDef().getCurrent();
-		// }
 
 		if (damages < 1)
 			damages = 1;

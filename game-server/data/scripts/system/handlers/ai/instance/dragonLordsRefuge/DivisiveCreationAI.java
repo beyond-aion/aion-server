@@ -10,6 +10,7 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.model.templates.item.ItemAttackType;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
+import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
@@ -17,6 +18,10 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 import ai.AggressiveNpcAI;
 
 /**
+ * March 25th, 2018: Reduced the damage output of 'Summon Rock' by 50% since on retail templars only receive
+ * 2k to 3k damage, which is about 50% of the current. The base damage of this skill is 4500 so it is reduced
+ * by something on retail. Maybe remove this hard-coded adjustment if something changes in damage calculations.
+ * 
  * @author Cheatkiller
  * @modified Estrayl March 8th, 2018
  */
@@ -42,6 +47,13 @@ public class DivisiveCreationAI extends AggressiveNpcAI {
 				PacketSendUtility.broadcastToMap(getOwner(), new SM_EMOTION(getOwner(), EmotionType.WALK));
 			}
 		}, 5000);
+	}
+
+	@Override
+	public int modifyOwnerDamage(int damage, Effect effect) {
+		if (effect != null && effect.getSkillId() == 20986)
+			damage *= 0.5f;
+		return damage;
 	}
 
 	@Override

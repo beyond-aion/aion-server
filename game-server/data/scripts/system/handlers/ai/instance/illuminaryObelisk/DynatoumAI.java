@@ -72,6 +72,7 @@ public class DynatoumAI extends SummonerAI {
 		switch (skillTemplate.getSkillId()) {
 			case 21534:
 				getOwner().getController().delete();
+				PacketSendUtility.broadcastToMap(getOwner(), SM_SYSTEM_MESSAGE.STR_MSG_IDF5_U3_BOSS_TIMER_04());
 				break;
 		}
 	}
@@ -84,7 +85,6 @@ public class DynatoumAI extends SummonerAI {
 	@Override
 	protected void handleDespawned() {
 		cancelDespawnTask();
-		PacketSendUtility.broadcastToMap(getOwner(), SM_SYSTEM_MESSAGE.STR_MSG_IDF5_U3_BOSS_TIMER_04());
 		super.handleDespawned();
 	}
 
@@ -96,7 +96,6 @@ public class DynatoumAI extends SummonerAI {
 
 	@Override
 	protected void handleBackHome() {
-		cancelDespawnTask();
 		super.handleBackHome();
 	}
 }

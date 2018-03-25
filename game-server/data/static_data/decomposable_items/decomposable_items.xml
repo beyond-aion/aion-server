@@ -20075,114 +20075,32 @@
 	<decomposable item_id="188052498" /><!-- [Event] The Four Elements -->
 	<decomposable item_id="188052499"><!-- Danuar Reliquary Expedition's Excavation Box -->
 		<items>
-			<item id="167020056" /><!-- Ancient Manastone: Accuracy +33 -->
-			<item id="152012583" /><!-- Fire Source -->
 			<item id="186000237" min_count="25" /><!-- Ancient Coin -->
+			<item id="152012581" /><!-- Fire Breath -->
+			<random_item type="SPECIAL_MANASTONE_LEGEND_GRADE" />
 		</items>
 		<items>
-			<item id="167020057" /><!-- Ancient Manastone: Evasion +23 -->
-			<item id="152012583" /><!-- Fire Source -->
 			<item id="186000237" min_count="25" /><!-- Ancient Coin -->
+			<item id="152012583" /><!-- Fire Source -->
+			<random_item type="SPECIAL_MANASTONE_LEGEND_GRADE" />
 		</items>
 		<items>
-			<item id="167020058" /><!-- Ancient Manastone: Parry +33 -->
-			<item id="152012583" /><!-- Fire Source -->
 			<item id="186000237" min_count="25" /><!-- Ancient Coin -->
+			<item id="152012616" /><!-- Passion Crystal -->
+			<item id="188057222" /><!-- Danuar Reliquary Expedition's Idian Bundle -->
+			<random_item type="SPECIAL_MANASTONE_LEGEND_GRADE" />
 		</items>
 		<items>
-			<item id="167020059" /><!-- Ancient Manastone: Block +33 -->
-			<item id="152012583" /><!-- Fire Source -->
 			<item id="186000237" min_count="25" /><!-- Ancient Coin -->
+			<item id="152012618" /><!-- Ore of Pssion -->
+			<item id="188057222" /><!-- Danuar Reliquary Expedition's Idian Bundle -->
+			<random_item type="SPECIAL_MANASTONE_UNIQUE_GRADE" />
 		</items>
 		<items>
-			<item id="167020060" /><!-- Ancient Manastone: Physical Critical Resistance +22 -->
-			<item id="152012583" /><!-- Fire Source -->
 			<item id="186000237" min_count="25" /><!-- Ancient Coin -->
-		</items>
-		<items>
-			<item id="167020061" /><!-- Ancient Manastone: Magical Critical Resistance +9 -->
-			<item id="152012583" /><!-- Fire Source -->
-			<item id="186000237" min_count="25" /><!-- Ancient Coin -->
-		</items>
-		<items>
-			<item id="167020062" /><!-- Ancient Manastone: Physical Defense +80 -->
-			<item id="152012583" /><!-- Fire Source -->
-			<item id="186000237" min_count="25" /><!-- Ancient Coin -->
-		</items>
-		<items>
-			<item id="167020063" /><!-- Ancient Manastone: Attack +7 -->
-			<item id="152012583" /><!-- Fire Source -->
-			<item id="186000237" min_count="25" /><!-- Ancient Coin -->
-		</items>
-		<items>
-			<item id="167020064" /><!-- Ancient Manastone: Magical Accuracy +20 -->
-			<item id="152012583" /><!-- Fire Source -->
-			<item id="186000237" min_count="25" /><!-- Ancient Coin -->
-		</items>
-		<items>
-			<item id="167020065" /><!-- Ancient Manastone: Magic Boost +32 -->
-			<item id="152012583" /><!-- Fire Source -->
-			<item id="186000237" min_count="25" /><!-- Ancient Coin -->
-		</items>
-		<items>
-			<item id="167020056" /><!-- Ancient Manastone: Accuracy +33 -->
-			<item id="152012583" /><!-- Fire Source -->
-			<item id="188052500" /><!-- Danuar Reliquary Expedition's Idian Bundle -->
-			<item id="186000237" min_count="25" /><!-- Ancient Coin -->
-		</items>
-		<items>
-			<item id="167020057" /><!-- Ancient Manastone: Evasion +23 -->
-			<item id="152012583" /><!-- Fire Source -->
-			<item id="188052500" /><!-- Danuar Reliquary Expedition's Idian Bundle -->
-			<item id="186000237" min_count="25" /><!-- Ancient Coin -->
-		</items>
-		<items>
-			<item id="167020058" /><!-- Ancient Manastone: Parry +33 -->
-			<item id="152012583" /><!-- Fire Source -->
-			<item id="188052500" /><!-- Danuar Reliquary Expedition's Idian Bundle -->
-			<item id="186000237" min_count="25" /><!-- Ancient Coin -->
-		</items>
-		<items>
-			<item id="167020059" /><!-- Ancient Manastone: Block +33 -->
-			<item id="152012583" /><!-- Fire Source -->
-			<item id="188052500" /><!-- Danuar Reliquary Expedition's Idian Bundle -->
-			<item id="186000237" min_count="25" /><!-- Ancient Coin -->
-		</items>
-		<items>
-			<item id="167020060" /><!-- Ancient Manastone: Physical Critical Resistance +22 -->
-			<item id="152012583" /><!-- Fire Source -->
-			<item id="188052500" /><!-- Danuar Reliquary Expedition's Idian Bundle -->
-			<item id="186000237" min_count="25" /><!-- Ancient Coin -->
-		</items>
-		<items>
-			<item id="167020061" /><!-- Ancient Manastone: Magical Critical Resistance +9 -->
-			<item id="152012583" /><!-- Fire Source -->
-			<item id="188052500" /><!-- Danuar Reliquary Expedition's Idian Bundle -->
-			<item id="186000237" min_count="25" /><!-- Ancient Coin -->
-		</items>
-		<items>
-			<item id="167020062" /><!-- Ancient Manastone: Physical Defense +80 -->
-			<item id="152012583" /><!-- Fire Source -->
-			<item id="188052500" /><!-- Danuar Reliquary Expedition's Idian Bundle -->
-			<item id="186000237" min_count="25" /><!-- Ancient Coin -->
-		</items>
-		<items>
-			<item id="167020063" /><!-- Ancient Manastone: Attack +7 -->
-			<item id="152012583" /><!-- Fire Source -->
-			<item id="188052500" /><!-- Danuar Reliquary Expedition's Idian Bundle -->
-			<item id="186000237" min_count="25" /><!-- Ancient Coin -->
-		</items>
-		<items>
-			<item id="167020064" /><!-- Ancient Manastone: Magical Accuracy +20 -->
-			<item id="152012583" /><!-- Fire Source -->
-			<item id="188052500" /><!-- Danuar Reliquary Expedition's Idian Bundle -->
-			<item id="186000237" min_count="25" /><!-- Ancient Coin -->
-		</items>
-		<items>
-			<item id="167020065" /><!-- Ancient Manastone: Magic Boost +32 -->
-			<item id="152012583" /><!-- Fire Source -->
-			<item id="188052500" /><!-- Danuar Reliquary Expedition's Idian Bundle -->
-			<item id="186000237" min_count="25" /><!-- Ancient Coin -->
+			<item id="152012620" /><!-- Passion Gemstone -->
+			<item id="188057222" /><!-- Danuar Reliquary Expedition's Idian Bundle -->
+			<random_item type="SPECIAL_MANASTONE_UNIQUE_GRADE" />
 		</items>
 	</decomposable>
 	<decomposable item_id="188052500"><!-- Danuar Reliquary Expedition's Idian Bundle -->
@@ -21391,43 +21309,19 @@
 	<decomposable item_id="188052574" /><!-- Hamerun's Special Box -->
 	<decomposable item_id="188052575"><!-- Veteran's Crafting Bundle -->
 		<items>
-			<item id="152012580" /><!-- Fire Mote -->
+			<item id="152012617" /><!-- Pure Crystal -->
 		</items>
 		<items>
-			<item id="152012581" /><!-- Fire Breath -->
+			<item id="152012621" /><!-- Pure Gemstone -->
 		</items>
 		<items>
-			<item id="152012582" /><!-- Fire Fragment -->
-		</items>
-		<items>
-			<item id="152012583" /><!-- Fire Source -->
-		</items>
-		<items>
-			<item id="152012584" /><!-- Water Source -->
-		</items>
-		<items>
-			<item id="152012585" /><!-- Wind Mote -->
+			<item id="152012619" /><!-- Pure Ore -->
 		</items>
 		<items>
 			<item id="152012586" /><!-- Wind Breath -->
 		</items>
 		<items>
-			<item id="152012587" /><!-- Wind Eternity -->
-		</items>
-		<items>
-			<item id="152012588" /><!-- Wind Fragment -->
-		</items>
-		<items>
 			<item id="152012589" /><!-- Wind Source -->
-		</items>
-		<items>
-			<item id="152012590" /><!-- Wind Origin -->
-		</items>
-		<items>
-			<item id="152012591" /><!-- Water Fragment -->
-		</items>
-		<items>
-			<item id="152012592" /><!-- Earth Scrap -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188052576"><!-- Veteran's Composite Manastone Bundle -->
@@ -26490,7 +26384,38 @@
 		</items>
 	</decomposable>
 	<decomposable item_id="188053091" /><!-- Modor's Curiosity Box -->
-	<decomposable item_id="188053092" /><!-- Danuar Reliquary Expedition's Artifacts -->
+	<decomposable item_id="188053092"><!-- Danuar Reliquary Expedition's Artifacts -->
+		<items>
+			<item id="186000237" min_count="35" /><!-- Ancient Coin -->
+			<item id="152012581" min_count="2" /><!-- Fire Breath -->
+			<item id="188057222" /><!-- Danuar Reliquary Expedition's Idian Bundle -->
+			<random_item type="SPECIAL_MANASTONE_LEGEND_GRADE" />
+		</items>
+		<items>
+			<item id="186000237" min_count="35" /><!-- Ancient Coin -->
+			<item id="152012583" min_count="2" /><!-- Fire Source -->
+			<item id="188057222" /><!-- Danuar Reliquary Expedition's Idian Bundle -->
+			<random_item type="SPECIAL_MANASTONE_LEGEND_GRADE" />
+		</items>
+		<items>
+			<item id="186000237" min_count="35" /><!-- Ancient Coin -->
+			<item id="152012616" min_count="2" /><!-- Passion Crystal -->
+			<item id="188057222" /><!-- Danuar Reliquary Expedition's Idian Bundle -->
+			<random_item type="SPECIAL_MANASTONE_LEGEND_GRADE" min_count="2" />
+		</items>
+		<items>
+			<item id="186000237" min_count="35" /><!-- Ancient Coin -->
+			<item id="152012618" min_count="2" /><!-- Ore of Pssion -->
+			<item id="188057222" /><!-- Danuar Reliquary Expedition's Idian Bundle -->
+			<random_item type="SPECIAL_MANASTONE_UNIQUE_GRADE" />
+		</items>
+		<items>
+			<item id="186000237" min_count="35" /><!-- Ancient Coin -->
+			<item id="152012620" min_count="2" /><!-- Passion Gemstone -->
+			<item id="188057222" /><!-- Danuar Reliquary Expedition's Idian Bundle -->
+			<random_item type="SPECIAL_MANASTONE_UNIQUE_GRADE" min_count="2" />
+		</items>
+	</decomposable>
 	<decomposable item_id="188053093"><!-- Dynatoum's Curiosity Box -->
 		<items chance="10">
 			<item id="125004085" player_classes="TEMPLAR" /><!-- Pure Dynatoum Radiant Helm -->
