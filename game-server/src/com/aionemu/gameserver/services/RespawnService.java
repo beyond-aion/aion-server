@@ -111,6 +111,19 @@ public class RespawnService {
 		return false;
 	}
 
+	/**
+	 * Cancels the respawn for the given objectId only if it also matches the given spawn template (meaning, that this respawn belonged to an npc with
+	 * the specified spawn template)
+	 */
+	public static boolean cancelRespawn(int objectId, SpawnTemplate spawnTemplate) {
+		RespawnTask respawnTask = pendingRespawns.get(objectId);
+		if (respawnTask != null && respawnTask.spawnTemplate == spawnTemplate) {
+			respawnTask.cancel();
+			return true;
+		}
+		return false;
+	}
+
 	public static int cancelEventRespawns(EventTemplate eventTemplate) {
 		int count = 0;
 		for (RespawnTask respawn : pendingRespawns.values()) {
@@ -164,7 +177,10 @@ public class RespawnService {
 			if (!InstanceService.isInstanceExist(spawnTemplate.getWorldId(), instanceId))
 				return;
 
-			SpawnEngine.spawnObject(spawnTemplate.hasPool() ? spawnTemplate.changeTemplate(instanceId) : spawnTemplate, instanceId);
+			VisibleObject respawn = SpawnEngine.spawnObject(spawnTemplate.hasPool() ? spawnTemplate.changeTemplate(instanceId) : spawnTemplate, instanceId);
+			if (respawn != null) {
+				RiftService.getInstance().updateSpawned(oldObjectId, respawn);
+			}
 		}
 
 		private boolean setReleaseIdOnCompletion() {

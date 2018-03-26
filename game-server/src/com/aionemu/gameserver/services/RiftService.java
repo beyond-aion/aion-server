@@ -13,7 +13,8 @@ import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.configs.schedule.RiftSchedule;
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.model.gameobjects.Creature;
+import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.rift.RiftLocation;
 import com.aionemu.gameserver.model.templates.rift.OpenRift;
 import com.aionemu.gameserver.model.templates.spawns.SpawnGroup;
@@ -23,6 +24,7 @@ import com.aionemu.gameserver.services.rift.RiftInformer;
 import com.aionemu.gameserver.services.rift.RiftManager;
 import com.aionemu.gameserver.services.rift.RiftOpenRunnable;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
+import com.aionemu.gameserver.world.World;
 
 /**
  * @author Source
@@ -120,7 +122,7 @@ public class RiftService {
 
 	/**
 	 * Just a work-around, this stuff needs refactoring
-	 * 
+	 *
 	 * @param id
 	 *          better use map IDs
 	 */
@@ -141,7 +143,7 @@ public class RiftService {
 					possibleLocs.add(loc);
 			}
 		}
-		
+
 		int maxCount = 1;
 		if (!guards) {
 			switch (id) {
@@ -153,11 +155,11 @@ public class RiftService {
 					maxCount = 4;
 			}
 		}
-		
+
 		int count = Rnd.get(1, maxCount);
 		while (possibleLocs.size() > count)
 			possibleLocs.remove(Rnd.get(0, possibleLocs.size() - 1));
-		
+
 		for (RiftLocation loc : possibleLocs)
 			openRifts(loc, guards);
 	}
@@ -171,7 +173,7 @@ public class RiftService {
 			for (SpawnGroup group : locSpawns) {
 				for (SpawnTemplate st : group.getSpawnTemplates()) {
 					RiftSpawnTemplate template = (RiftSpawnTemplate) st;
-					location.getSpawned().add((Npc) SpawnEngine.spawnObject(template, 1));
+					location.addSpawned(SpawnEngine.spawnObject(template, 1));
 				}
 			}
 		}
@@ -185,11 +187,11 @@ public class RiftService {
 		location.setOpened(false);
 
 		// Despawn NPC
-		for (Npc rift : location.getSpawned()) {
-			if (rift == null)
-				continue;
-			if (!rift.getController().delete())
-				RespawnService.cancelRespawn(rift);
+		for (Map.Entry<Integer, SpawnTemplate> entry : location.getSpawned().entrySet()) {
+			int npcObjectId = entry.getKey();
+			VisibleObject npc = World.getInstance().findVisibleObject(npcObjectId);
+			if (npc == null || ((Creature) npc).getLifeStats().isDead() || !npc.getController().delete())
+				RespawnService.cancelRespawn(npcObjectId, entry.getValue());
 		}
 
 		// Clear spawned list
@@ -206,6 +208,13 @@ public class RiftService {
 			activeRifts.clear();
 		} finally {
 			closing.unlock();
+		}
+	}
+
+	public void updateSpawned(int oldObjectId, VisibleObject respawn) {
+		for (RiftLocation loc : locations.values()) {
+			if (loc.replaceSpawned(oldObjectId, respawn))
+				break;
 		}
 	}
 

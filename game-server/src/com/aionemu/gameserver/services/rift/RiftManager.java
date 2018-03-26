@@ -78,8 +78,8 @@ public class RiftManager {
 				vl.getSpawned().add(slave);
 			} else {
 				spawned = rl.getSpawned().size();
-				rl.getSpawned().add(master);
-				rl.getSpawned().add(slave);
+				rl.addSpawned(master);
+				rl.addSpawned(slave);
 			}
 		}
 

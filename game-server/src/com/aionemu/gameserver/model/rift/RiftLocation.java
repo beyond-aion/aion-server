@@ -1,10 +1,11 @@
 package com.aionemu.gameserver.model.rift;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
-import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.templates.rift.RiftTemplate;
+import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 
 /**
  * @author Source
@@ -13,7 +14,7 @@ public class RiftLocation {
 
 	private boolean opened;
 	private final RiftTemplate template;
-	private List<Npc> spawned = new ArrayList<>();
+	private Map<Integer, SpawnTemplate> spawned = new ConcurrentHashMap<>();
 
 	public RiftLocation(RiftTemplate template) {
 		this.template = template;
@@ -39,7 +40,19 @@ public class RiftLocation {
 		opened = state;
 	}
 
-	public List<Npc> getSpawned() {
+	public Map<Integer, SpawnTemplate> getSpawned() {
 		return spawned;
+	}
+
+	public void addSpawned(VisibleObject object) {
+		spawned.put(object.getObjectId(), object.getSpawn());
+	}
+
+	public boolean replaceSpawned(int oldObjectId, VisibleObject newObject) {
+		if (spawned.remove(oldObjectId) != null) {
+			addSpawned(newObject);
+			return true;
+		}
+		return false;
 	}
 }
