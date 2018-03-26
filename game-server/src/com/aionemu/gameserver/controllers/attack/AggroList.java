@@ -83,7 +83,7 @@ public class AggroList extends AbstractEventSource<AddDamageEvent> {
 
 	private boolean shouldAddHateToMaster(Creature creature) {
 		// ice sheet, threatening wave, etc. generate hate for their master. taunting spirit does not!
-		return creature instanceof SummonedObject<?> && !isTauntingSpirit((SummonedObject) creature);
+		return creature instanceof SummonedObject<?> && !isTauntingSpirit((SummonedObject<?>) creature);
 	}
 
 	private boolean isTauntingSpirit(SummonedObject<?> npc) {
