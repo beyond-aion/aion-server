@@ -1,44 +1,38 @@
 image: maven:3.3.9
 
 clone:
-  depth: 1 # shallow git clone, since we don't need all the history
+  depth: 3 # shallow git clone, since we don't need all the history
 
 pipelines:
-  # default: # default action on commit
-    # - step:
-        # caches:
-          # - maven
-        # script:
-          # - mvn -f commons/pom.xml install
-          # - mvn -f chat-server/pom.xml compile
-          # - mvn -f login-server/pom.xml compile
-          # - mvn -f game-server/pom.xml compile
+  default: # default action on commit
+    - step:
+        caches:
+          - maven
+        script:
+          - mvn -f commons/pom.xml install
+          - mvn -f chat-server/pom.xml compile
+          - mvn -f login-server/pom.xml compile
+          - mvn -f game-server/pom.xml compile
   custom: # triggered manually
-    build-servers:
+    build-chat-server:
+      - step:
+          caches:
+            - maven
+          script:
+            - mvn -f commons/pom.xml install
+            - mvn -f chat-server/pom.xml package -Dftp.url=$LIVESERVER_FTP_URL
+    build-game-server:
       - step:
           deployment: production
           caches:
             - maven
           script:
             - mvn -f commons/pom.xml install
-      - step:
-          name: Build Chat Server
-          trigger: manual
-          caches:
-            - maven
-          script:
-            - mvn -f chat-server/pom.xml package -Dftp.url=$LIVESERVER_FTP_URL
-      - step:
-          name: Build Game Server
-          trigger: manual
-          caches:
-            - maven
-          script:
             - mvn -f game-server/pom.xml package -Dftp.url=$LIVESERVER_FTP_URL
+    build-login-server:
       - step:
-          name: Build Login Server
-          trigger: manual
           caches:
             - maven
           script:
+            - mvn -f commons/pom.xml install
             - mvn -f login-server/pom.xml package -Dftp.url=$LIVESERVER_FTP_URL
