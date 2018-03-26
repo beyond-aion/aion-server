@@ -4149,7 +4149,7 @@
 			</spawn_map>
 		</spawns>
 	</event>
-	<event name="Blessing Of The Magic Fountain" start="2018-03-17T00:00:00" end="2018-03-30T23:59:59">
+	<event name="Blessing Of The Magic Fountain" start="2018-04-06T00:00:00" end="2018-04-22T23:59:59">
 		<inventory_drop item_id="186000406" startlevel="1" interval="60" />
 		<spawns>
 			<!-- Sanctum -->
