@@ -36,10 +36,6 @@ public abstract class AionObject {
 		return objectId;
 	}
 
-	private int dummyObjHashCode() {
-		return super.hashCode();
-	}
-
 	@Override
 	public final boolean equals(Object obj) {
 		if (this == obj)
@@ -49,7 +45,7 @@ public abstract class AionObject {
 			return false;
 
 		if (objectId == 0) // object is a dummy (no unique ID from IDFactory)
-			return dummyObjHashCode() == ((AionObject) obj).dummyObjHashCode();
+			return System.identityHashCode(this) ==  System.identityHashCode(obj);
 
 		return hashCode() == obj.hashCode(); // cheap direct objectId comparison (see above)
 	}
