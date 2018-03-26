@@ -204,18 +204,16 @@ public class AggroList extends AbstractEventSource<AddDamageEvent> {
 			// aggroList will never contain anything but creatures
 			Creature attacker = (Creature) ai.getAttacker();
 
-			if (attacker.isDead())
-				ai.setHate(0);
+			if (attacker.isDead() || !attacker.isSpawned()) {
+				if (!attacker.getMaster().equals(attacker)) { // remove creature from aggro list and transfer its damages to master
+					remove(attacker);
+					return getMostHated(); // re-evaluate so we don't skip the summon's master
+				} else
+					ai.setHate(0);
+			}
 
 			if (ai.getHate() > maxHate && owner.canSee(attacker)) { // skip invisible attackers
-				if (!attacker.isSpawned()) { // use master if summon despawned
-					Creature master = attacker.getMaster();
-					if (master.equals(attacker) || !master.isSpawned())
-						continue;
-					mostHated = master;
-				} else {
-					mostHated = attacker;
-				}
+				mostHated = attacker;
 				maxHate = ai.getHate();
 			}
 		}
