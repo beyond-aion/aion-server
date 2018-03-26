@@ -5,6 +5,8 @@ import java.lang.reflect.Modifier;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.Properties;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,6 +19,7 @@ import org.slf4j.LoggerFactory;
 public class ConfigurableProcessor {
 
 	private static final Logger log = LoggerFactory.getLogger(ConfigurableProcessor.class);
+	private static final Pattern propertyPattern = Pattern.compile("\\$\\{([^}]+)\\}"); // finds strings enclosed in ${}
 
 	/**
 	 * This method is an entry point to the parser logic.<br>
@@ -164,9 +167,22 @@ public class ConfigurableProcessor {
 			log.debug("Using default value for field " + field.getName() + " of class " + field.getDeclaringClass().getName());
 		} else if (value.trim().equals("\"\"")) {
 			value = "";
+		} else {
+			value = replacePropertyPlaceholders(value, props);
 		}
 
 		return transformValueToFieldType(field, value);
+	}
+
+	private static String replacePropertyPlaceholders(String value, Properties[] props) {
+		Matcher matcher = propertyPattern.matcher(value);
+		while (matcher.find()) {
+			String completeToken = matcher.group(); // ${property.name}
+			String token = matcher.group(1); // property.name
+			String replacement = findPropertyByKey(token, props);
+			value = value.replace(completeToken, replacement == null ? "" : replacement);
+		}
+		return value;
 	}
 
 	public static Object transformValueToFieldType(Field field, String value) throws TransformationException {
