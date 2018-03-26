@@ -20,17 +20,17 @@
 	<rift_location id="2150" world="210050000"/>
 	<rift_location id="2151" world="210050000"/>
 	<rift_location id="2152" world="210050000"/>
-	<rift_location id="2153" world="210050000"  has_spawns="true"/>
+	<rift_location id="2153" world="210050000" has_spawns="true"/>
 	<!-- Cygnea -->
-    <rift_location id="2170" world="210070000"/>
-    <rift_location id="2171" world="210070000"/>
-    <rift_location id="2172" world="210070000"/>
-    <rift_location id="2173" world="210070000"/>
-    <rift_location id="2174" world="210070000"/>
-    <rift_location id="2175" world="210070000"/>
-    <rift_location id="2176" world="210070000" has_spawns="true"/>
-    <rift_location id="2177" world="210070000" has_spawns="true"/>
-    <rift_location id="2178" world="210070000" has_spawns="true"/>
+	<rift_location id="2170" world="210070000"/>
+	<rift_location id="2171" world="210070000"/>
+	<rift_location id="2172" world="210070000"/>
+	<rift_location id="2173" world="210070000"/>
+	<rift_location id="2174" world="210070000"/>
+	<rift_location id="2175" world="210070000"/>
+	<rift_location id="2176" world="210070000" has_spawns="true"/>
+	<rift_location id="2177" world="210070000" has_spawns="true"/>
+	<rift_location id="2178" world="210070000" has_spawns="true"/>
 	<!-- Morheim -->
 	<rift_location id="2220" world="220020000"/>
 	<rift_location id="2221" world="220020000"/>
@@ -51,15 +51,15 @@
 	<rift_location id="2270" world="220070000"/>
 	<rift_location id="2271" world="220070000"/>
 	<rift_location id="2272" world="220070000"/>
-	<rift_location id="2273" world="220070000"  has_spawns="true"/>
+	<rift_location id="2273" world="220070000" has_spawns="true"/>
 	<!-- Enshar -->
-    <rift_location id="2280" world="220080000"/>
-    <rift_location id="2281" world="220080000"/>
-    <rift_location id="2282" world="220080000"/>
-    <rift_location id="2283" world="220080000"/>
-    <rift_location id="2284" world="220080000"/>
-    <rift_location id="2285" world="220080000"/>
-    <rift_location id="2286" world="220080000" has_spawns="true"/>
-    <rift_location id="2287" world="220080000" has_spawns="true"/>
-    <rift_location id="2288" world="220080000" has_spawns="true"/>
+	<rift_location id="2280" world="220080000"/>
+	<rift_location id="2281" world="220080000"/>
+	<rift_location id="2282" world="220080000"/>
+	<rift_location id="2283" world="220080000"/>
+	<rift_location id="2284" world="220080000"/>
+	<rift_location id="2285" world="220080000"/>
+	<rift_location id="2286" world="220080000" has_spawns="true"/>
+	<rift_location id="2287" world="220080000" has_spawns="true"/>
+	<rift_location id="2288" world="220080000" has_spawns="true"/>
 </rift_locations>
