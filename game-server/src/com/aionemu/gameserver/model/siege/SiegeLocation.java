@@ -211,7 +211,7 @@ public class SiegeLocation implements ZoneHandler {
 		if (template.getSiegeRewards() == null)
 			return false;
 		for (SiegeReward sr : template.getSiegeRewards()) {
-			if (sr.getGpForWin() == 0 || sr.getGpForDefeat() == 0)
+			if (sr.getGpForWin() == 0 && sr.getGpForDefeat() == 0)
 				return false;
 		}
 		return true;

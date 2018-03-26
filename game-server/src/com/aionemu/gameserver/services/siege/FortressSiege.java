@@ -430,9 +430,9 @@ public class FortressSiege extends Siege<FortressLocation> {
 					if (result.equals(SiegeResult.OCCUPY) || result.equals(SiegeResult.DEFENDER))
 						MailFormatter.sendAbyssRewardMail(getSiegeLocation(), pcd, level, result, System.currentTimeMillis(), topGrade.getItemId(),
 							topGrade.getMedalCount(), 0);
-
-					if (getSiegeLocation().hasValidGpRewards())
-						GloryPointsService.increaseGp(playerId, isWinner ? topGrade.getGpForWin() : topGrade.getGpForDefeat());
+					int gp = isWinner ? topGrade.getGpForWin() : topGrade.getGpForDefeat();
+					if (gp > 0)
+						GloryPointsService.increaseGp(playerId, gp);
 				}
 			}
 		} catch (Exception e) {
