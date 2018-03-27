@@ -302,9 +302,11 @@ public class IlluminaryObeliskInstance extends GeneralInstanceHandler {
 		ThreadPoolManager.getInstance().schedule(() -> {
 			if (isInstanceDestroyed)
 				return;
-			instance.forEachPlayer(p -> {
-				if (!p.isDead())
-					p.getController().die();
+			instance.forEach(o -> {
+				if (o instanceof Npc)
+					o.getController().delete();
+				else if (o instanceof Player && !((Player) o).isDead())
+					((Player) o).getController().die();
 			});
 		}, 5000);
 	}
