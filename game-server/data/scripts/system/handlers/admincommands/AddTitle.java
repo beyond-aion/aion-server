@@ -1,8 +1,11 @@
 package admincommands;
 
+import org.apache.commons.lang3.math.NumberUtils;
+
+import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.model.templates.TitleTemplate;
 import com.aionemu.gameserver.utils.Util;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 import com.aionemu.gameserver.world.World;
@@ -13,19 +16,21 @@ import com.aionemu.gameserver.world.World;
 public class AddTitle extends AdminCommand {
 
 	public AddTitle() {
-		super("addtitle");
+		super("addtitle", "Adds titles to players.");
+
+		setSyntaxInfo("<titleId> [playerName] - Adds the title to your target or the specified player.");
 	}
 
 	@Override
 	public void execute(Player player, String... params) {
-		if ((params.length < 1) || (params.length > 2)) {
-			info(player, null);
+		if (params.length < 1 || params.length > 2) {
+			sendInfo(player);
 			return;
 		}
 
-		int titleId = Integer.parseInt(params[0]);
-		if ((titleId > 272) || (titleId < 1)) {
-			PacketSendUtility.sendMessage(player, "title id " + titleId + " is invalid (must be between 1 and 272)");
+		TitleTemplate titleTemplate = DataManager.TITLE_DATA.getTitleTemplate(NumberUtils.toInt(params[0]));
+		if (titleTemplate == null) {
+			sendInfo(player, "Invalid title id.");
 			return;
 		}
 
@@ -33,7 +38,7 @@ public class AddTitle extends AdminCommand {
 		if (params.length == 2) {
 			target = World.getInstance().findPlayer(Util.convertName(params[1]));
 			if (target == null) {
-				PacketSendUtility.sendMessage(player, "player " + params[1] + " was not found");
+				sendInfo(player, "player " + params[1] + " was not found");
 				return;
 			}
 		} else {
@@ -47,23 +52,14 @@ public class AddTitle extends AdminCommand {
 			}
 		}
 
-		if (titleId < 272)
-			titleId = target.getRace().getRaceId() * 272 + titleId;
-
-		if (!target.getTitleList().addTitle(titleId, false, 0)) {
-			PacketSendUtility.sendMessage(player, "you can't add title #" + titleId + " to " + (target.equals(player) ? "yourself" : target.getName()));
+		if (!target.getTitleList().addTitle(titleTemplate.getTitleId(), false, 0)) {
+			if (!target.equals(player))
+				sendInfo(player, "Couldn't add title \"" + titleTemplate.getL10n() + "\" to " + target);
 		} else {
-			if (target.equals(player)) {
-				PacketSendUtility.sendMessage(player, "you added to yourself title #" + titleId);
-			} else {
-				PacketSendUtility.sendMessage(player, "you added to " + target.getName() + " title #" + titleId);
-				PacketSendUtility.sendMessage(target, player.getName() + " gave you title #" + titleId);
+			if (!target.equals(player)) {
+				sendInfo(player, "Added title \"" + titleTemplate.getL10n() + "\" to " + target);
+				sendInfo(target, player.getName(true) + " gave you the title \"" + titleTemplate.getL10n() + "\"");
 			}
 		}
-	}
-
-	@Override
-	public void info(Player player, String message) {
-		PacketSendUtility.sendMessage(player, "syntax //addtitle title_id [playerName]");
 	}
 }

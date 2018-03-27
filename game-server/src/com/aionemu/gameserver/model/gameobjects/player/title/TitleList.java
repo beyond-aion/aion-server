@@ -82,6 +82,7 @@ public class TitleList {
 		PacketSendUtility.sendPacket(owner, new SM_TITLE_INFO(titleId));
 		PacketSendUtility.broadcastPacketAndReceive(owner, (new SM_TITLE_INFO(owner, titleId)));
 		owner.getCommonData().setTitleId(titleId);
+		owner.getController().updateNearbyQuests();
 	}
 
 	public void setBonusTitle(int bonusTitleId) {
