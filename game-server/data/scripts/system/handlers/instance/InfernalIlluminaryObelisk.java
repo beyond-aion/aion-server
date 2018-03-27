@@ -91,7 +91,7 @@ public class InfernalIlluminaryObelisk extends IlluminaryObeliskInstance {
 				spawn(234725, 326.4392f, 255.9983f, 291.8364f, (byte) 60, 15000, "idf5_u3_south_4");
 				spawn(234726, 326.3337f, 252.6159f, 291.8364f, (byte) 60, 30000, "idf5_u3_south_2");
 				spawn(234727, 326.3333f, 253.1857f, 291.8364f, (byte) 60, 30000, "idf5_u3_south_3");
-				spawn(23726, 326.4392f, 255.9983f, 291.8364f, (byte) 60, 30000, "idf5_u3_south_4");
+				spawn(234726, 326.4392f, 255.9983f, 291.8364f, (byte) 60, 30000, "idf5_u3_south_4");
 				break;
 			case 702225: // south second wave
 				spawn(234722, 326.3337f, 252.6159f, 291.8364f, (byte) 60, 0, "idf5_u3_south_2");
