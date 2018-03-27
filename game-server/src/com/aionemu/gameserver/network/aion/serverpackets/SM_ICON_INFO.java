@@ -18,9 +18,8 @@ public class SM_ICON_INFO extends AionServerPacket {
 
 	@Override
 	protected void writeImpl(AionConnection con) {
-		writeC(buffId);
-		writeC(0x00);// unk
-		writeH(0x00);// unk
+		writeD(0); // unk
+		writeD(buffId);
 		writeC(display ? 1 : 0);
 	}
 
