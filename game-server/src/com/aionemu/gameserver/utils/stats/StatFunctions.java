@@ -519,7 +519,7 @@ public class StatFunctions {
 			float elementalDef = getMovementModifier(target, SkillElement.getResistanceForElement(element), tgs.getMagicalDefenseFor(element));
 			damages = Math.round(damages * (1 - (elementalDef / 1250f)));
 			// magic defense for test purpose
-			damages -= target.getGameStats().getMDef().getCurrent();
+			damages -= Math.round(target.getGameStats().getStat(StatEnum.MAGICAL_DEFEND, 0).getCurrent() * 0.1f);
 		}
 
 		// useKnowledge? This boolean is later used to determine whether movement boni are applied or not. Therefore this might not be correct.
