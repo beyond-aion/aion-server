@@ -6,7 +6,7 @@
 			<gd_map map_id="301370000" /><!-- Infernal_Illuminary_Obelisk -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="284858" /><!-- Boss -->
+			<gd_npc npc_id="234686" /><!-- Remodeled Dynatoum -->
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="186000238" /><!-- Conqueror's Mark -->
@@ -17,7 +17,7 @@
 			<gd_map map_id="301370000" /><!-- Infernal_Illuminary_Obelisk -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="284858" /><!-- Boss -->
+			<gd_npc npc_id="234686" /><!-- Remodeled Dynatoum -->
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="188053094" /><!-- Illuminary Obelisk Supplies Bundle -->
@@ -28,7 +28,7 @@
 			<gd_map map_id="301370000" /><!-- Infernal_Illuminary_Obelisk -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="284858" /><!-- Boss -->
+			<gd_npc npc_id="234686" /><!-- Remodeled Dynatoum -->
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="188053093" /><!-- Dynatoum's Curiosity Box -->
@@ -39,7 +39,7 @@
 			<gd_map map_id="301370000" /><!-- Infernal_Illuminary_Obelisk -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="284858" /><!-- Boss -->
+			<gd_npc npc_id="234686" /><!-- Remodeled Dynatoum -->
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="187000130" /><!-- Bulwark Burster -->
@@ -50,7 +50,7 @@
 			<gd_map map_id="301370000" /><!-- Infernal_Illuminary_Obelisk -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="284858" /><!-- Boss -->
+			<gd_npc npc_id="234686" /><!-- Remodeled Dynatoum -->
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="187000129" /><!-- Brazen Bulwark Burster -->
