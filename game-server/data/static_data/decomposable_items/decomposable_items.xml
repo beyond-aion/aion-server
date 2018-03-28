@@ -24931,7 +24931,12 @@
 	</decomposable>
 	<decomposable item_id="188052824"><!-- Illuminary Obelisk Enhancement Chest -->
 		<items>
-			<random_item type="ENCHANTMENT" min_count="1" max_count="3" />
+			<item id="168310018" race="ELYOS" /><!-- Major Blessed Augment: Level 2 -->
+			<item id="168310019" race="ASMODIANS" /><<!-- Major Deep Conditioning: Level 2 -->
+		</items>
+		<items>
+			<item id="168310016" race="ELYOS" /><!-- Major Blessed Augment: Level 2 -->
+			<item id="168310017" race="ASMODIANS" /><!-- Major Deep Conditioning: Level 2 -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188052825"><!-- Illuminary Obelisk Idian Pouch -->
@@ -26417,7 +26422,11 @@
 		</items>
 	</decomposable>
 	<decomposable item_id="188053093"><!-- Dynatoum's Curiosity Box -->
-		<items chance="10">
+		<items chance="50">
+			<item id="188052827" /><!-- Dynatoum's Equipment Chest -->
+			<item id="188053628" /><!-- Pallasite Bundle -->
+		</items>
+		<items chance="30">
 			<item id="125004085" player_classes="TEMPLAR" /><!-- Pure Dynatoum Radiant Helm -->
 			<item id="125004086" player_classes="GLADIATOR" /><!-- Pure Dynatoum Radiant Helm -->
 			<item id="125004089" player_classes="ASSASSIN RANGER" /><!-- Pure Dynatoum Radiant Hat -->
@@ -26426,36 +26435,38 @@
 			<item id="125004087" player_classes="CLERIC RIDER" /><!-- Pure Dynatoum Radiant Chain Helm -->
 			<item id="125004091" player_classes="SORCERER SPIRIT_MASTER" /><!-- Pure Dynatoum Radiant Headband -->
 			<item id="125004092" player_classes="BARD" /><!-- Pure Dynatoum Radiant Headband -->
+		</items>
+		<items chance="20">
 			<item id="188053100" /><!-- Pure Dynatoum's Equipment Crux Box -->
-		</items>
-		<items chance="25">
-			<item id="188052828" /><!-- Dynatoum's Weapon Box -->
-		</items>
-		<items chance="25">
-			<item id="188052829" /><!-- Dynatoum's Armor Box -->
-		</items>
-		<items chance="20">
-			<item id="188052830" /><!-- Dynatoum's Brazen Weapon Box -->
-		</items>
-		<items chance="20">
-			<item id="188052831" /><!-- Dynatoum's Brazen Armor Box -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188053094"><!-- Illuminary Obelisk Supplies Bundle -->
 		<items>
-			<item id="152012591" /><!-- Water Fragment -->
+			<item id="152012591" min_count="2" /><!-- Water Fragment -->
+			<item id="169405255" /><!-- Water Eternity -->
 			<item id="188052825" /><!-- Illuminary Obelisk Idian Pouch -->
 			<item id="152012612" /><!-- Heart of Eternity -->
+			<item id="169405268" min_count="5" />
+			<item id="186000236" min_count="15" /><!-- Blood Mark -->
+			<random_item type="PREMIUM_OPHIDAN_RECIPE" />
 		</items>
 		<items>
-			<item id="152012588" /><!-- Wind Fragment -->
+			<item id="152012588" min_count="2" /><!-- Wind Fragment -->
+			<item id="152012590" /><!-- Wind Origin -->
 			<item id="188052825" /><!-- Illuminary Obelisk Idian Pouch -->
 			<item id="152012611" /><!-- Heart of Safety -->
+			<item id="169405268" min_count="5" />
+			<item id="186000236" min_count="15" /><!-- Blood Mark -->
+			<random_item type="PREMIUM_OPHIDAN_RECIPE" />
 		</items>
 		<items>
-			<item id="152012585" /><!-- Wind Mote -->
+			<item id="152012585" min_count="2" /><!-- Wind Mote -->
+			<item id="152012587" /><!-- Wind Eternity -->
 			<item id="188052825" /><!-- Illuminary Obelisk Idian Pouch -->
 			<item id="152012610" /><!-- Heart of Chaos -->
+			<item id="169405268" min_count="5" />
+			<item id="186000236" min_count="15" /><!-- Blood Mark -->
+			<random_item type="PREMIUM_OPHIDAN_RECIPE" />
 		</items>
 	</decomposable>
 	<decomposable item_id="188053095" /><!-- Modor's Eternal Weapon Box -->
@@ -30946,67 +30957,75 @@
 	</decomposable>
 	<decomposable item_id="188053706"><!-- Rentus Base Supplies -->
 		<items>
-			<item id="152012601" /><!-- Conviction Crystal -->
+			<item id="152012601" min_count="1" max_count="2" /><!-- Conviction Crystal -->
+			<item id="166000195" /><!-- Epsilon Enchantment Stone -->
 		</items>
 		<items>
-			<item id="152012603" /><!-- Ore of Conviction -->
+			<item id="152012603" min_count="1" max_count="2" /><!-- Ore of Conviction -->
+			<item id="166000195" /><!-- Epsilon Enchantment Stone -->
 		</items>
 		<items>
-			<item id="152012598" /><!-- Heart of Destruction -->
+			<item id="152012598" min_count="1" max_count="2" /><!-- Heart of Destruction -->
+			<item id="166000195" /><!-- Epsilon Enchantment Stone -->
 		</items>
 		<items>
-			<item id="152012599" /><!-- Heart of Protection -->
+			<item id="152012599" min_count="1" max_count="2" /><!-- Heart of Protection -->
+			<item id="166000195" /><!-- Epsilon Enchantment Stone -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188053707"><!-- Glimmering Treasure Chest of Balaur Lord Tiamat -->
-		<items chance="16.7">
-			<item id="152012580" /><!-- Fire Mote -->
-		</items>
-		<items chance="16.7">
-			<item id="152012582" /><!-- Fire Fragment -->
-		</items>
-		<items chance="16.6">
-			<item id="152012584" /><!-- Water Source -->
-		</items>
-		<items chance="25.0">
+		<items>
+			<item id="152012580" min_count="1" max_count="2" /><!-- Fire Mote -->
 			<random_item type="MANASTONE_LEGEND_GRADE_50" />
 		</items>
-		<items chance="25.0">
+		<items>
+			<item id="152012582" min_count="1" max_count="2" /><!-- Fire Fragment -->
+			<random_item type="MANASTONE_LEGEND_GRADE_60" />
+		</items>
+		<items>
+			<item id="152012584" min_count="1" max_count="2" /><!-- Water Source -->
 			<random_item type="MANASTONE_LEGEND_GRADE_60" />
 		</items>
 	</decomposable>
 	<decomposable item_id="188053708"><!-- Stolen Shelter Consumables Bundle -->
-		<items chance="6.7">
+		<items>
 			<item id="152012585" /><!-- Wind Mote -->
-		</items>
-		<items chance="6.7">
-			<item id="152012588" /><!-- Wind Fragment -->
-		</items>
-		<items chance="6.6">
-			<item id="152012591" /><!-- Water Fragment -->
-		</items>
-		<items chance="6.7">
-			<item id="152012617" /><!-- Pure Crystal -->
-		</items>
-		<items chance="6.7">
-			<item id="152012619" /><!-- Pure Ore -->
-		</items>
-		<items chance="6.6">
-			<item id="152012621" /><!-- Pure Gemstone -->
-		</items>
-		<items chance="20.0">
-			<item id="169405252" /><!-- Fury Powder -->
-		</items>
-		<items chance="20.0">
-			<item id="169405268" /><!-- Lightning Vitality -->
-		</items>
-		<items chance="20.0">
-			<item id="186000242" /><!-- Ceramium Medal -->
-		</items>
-		<items chance="10.0">
+			<item id="186000242" min_count="1" max_count="2" /><!-- Ceramium Medal -->
 			<random_item type="SPECIAL_MANASTONE_UNIQUE_GRADE" />
 		</items>
-		<items chance="10.0">
+		<items>
+			<item id="152012588" /><!-- Wind Fragment -->
+			<item id="186000242" min_count="1" max_count="2" /><!-- Ceramium Medal -->
+			<random_item type="SPECIAL_MANASTONE_EPIC_GRADE" />
+		</items>
+		<items>
+			<item id="152012591" /><!-- Water Fragment -->
+			<item id="186000242" min_count="1" max_count="2" /><!-- Ceramium Medal -->
+			<random_item type="SPECIAL_MANASTONE_UNIQUE_GRADE" />
+		</items>
+		<items>
+			<item id="152012617" /><!-- Pure Crystal -->
+			<item id="186000242" min_count="1" max_count="2" /><!-- Ceramium Medal -->
+			<random_item type="SPECIAL_MANASTONE_EPIC_GRADE" />
+		</items>
+		<items>
+			<item id="152012621" /><!-- Pure Gemstone -->
+			<item id="186000242" min_count="1" max_count="2" /><!-- Ceramium Medal -->
+			<random_item type="SPECIAL_MANASTONE_UNIQUE_GRADE" />
+		</items>
+		<items>
+			<item id="152012619" /><!-- Pure Ore -->
+			<item id="186000242" min_count="1" max_count="2" /><!-- Ceramium Medal -->
+			<random_item type="SPECIAL_MANASTONE_EPIC_GRADE" />
+		</items>
+		<items>
+			<item id="169405268" /><!-- Lightning Vitality -->
+			<item id="186000242" min_count="1" max_count="2" /><!-- Ceramium Medal -->
+			<random_item type="SPECIAL_MANASTONE_UNIQUE_GRADE" />
+		</items>
+		<items>
+			<item id="169405252" /><!-- Fury Powder -->
+			<item id="186000242" /><!-- Ceramium Medal -->
 			<random_item type="SPECIAL_MANASTONE_EPIC_GRADE" />
 		</items>
 	</decomposable>
