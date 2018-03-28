@@ -34,7 +34,7 @@
 			<gd_item id="188053093" /><!-- Dynatoum's Curiosity Box -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Wings (Epic)" base_chance="2">
+	<gd_rule rule_name="Named Enhancement Chest" base_chance="20">
 		<gd_maps>
 			<gd_map map_id="301370000" /><!-- Infernal_Illuminary_Obelisk -->
 		</gd_maps>
@@ -42,10 +42,10 @@
 			<gd_npc npc_id="234686" /><!-- Remodeled Dynatoum -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="187000130" /><!-- Bulwark Burster -->
+			<gd_item id="188052824" /><!-- Illuminary Obelisk Enhancement Box -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Wings (Mythic)" base_chance="1">
+	<gd_rule rule_name="Named Wings" base_chance="10">
 		<gd_maps>
 			<gd_map map_id="301370000" /><!-- Infernal_Illuminary_Obelisk -->
 		</gd_maps>
@@ -53,7 +53,9 @@
 			<gd_npc npc_id="234686" /><!-- Remodeled Dynatoum -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="187000129" /><!-- Brazen Bulwark Burster -->
+			<gd_item id="187000130" chance="50" /><!-- Bulwark Burster -->
+			<gd_item id="187000129" chance="30" /><!-- Brazen Bulwark Burster -->
+			<gd_item id="187000143" chance="20" /><!-- Pure Dynatoum's Radiant Wing Feather -->
 		</gd_items>
 	</gd_rule>
 </global_rules>
