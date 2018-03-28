@@ -24932,10 +24932,10 @@
 	<decomposable item_id="188052824"><!-- Illuminary Obelisk Enhancement Chest -->
 		<items>
 			<item id="168310018" race="ELYOS" /><!-- Major Blessed Augment: Level 2 -->
-			<item id="168310019" race="ASMODIANS" /><<!-- Major Deep Conditioning: Level 2 -->
+			<item id="168310019" race="ASMODIANS" /><!-- Major Blessed Augment: Level 2 -->
 		</items>
 		<items>
-			<item id="168310016" race="ELYOS" /><!-- Major Blessed Augment: Level 2 -->
+			<item id="168310016" race="ELYOS" /><!-- Major Deep Conditioning: Level 2 -->
 			<item id="168310017" race="ASMODIANS" /><!-- Major Deep Conditioning: Level 2 -->
 		</items>
 	</decomposable>
