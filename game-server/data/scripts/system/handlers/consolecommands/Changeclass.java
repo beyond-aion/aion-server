@@ -45,8 +45,12 @@ public class Changeclass extends ConsoleCommand {
 		else if (newClass.equalsIgnoreCase("elementalist"))
 			newClass = "SPIRIT_MASTER";
 
-		PlayerClass playerClass = PlayerClass.getPlayerClassByString(newClass.toUpperCase());
-		if (playerClass == null || playerClass.getClassId() >= PlayerClass.ALL.getClassId()) {
+		PlayerClass playerClass;
+		try {
+			playerClass = PlayerClass.valueOf(newClass.toUpperCase());
+			if (playerClass.getClassId() >= PlayerClass.ALL.getClassId())
+				throw new IllegalArgumentException();
+		} catch (IllegalArgumentException e) {
 			sendInfo(admin, "Invalid player class.");
 			return;
 		}

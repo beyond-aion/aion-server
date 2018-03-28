@@ -3,7 +3,6 @@ package quest.ascension;
 import static com.aionemu.gameserver.model.DialogAction.*;
 
 import com.aionemu.gameserver.configs.main.CustomConfig;
-import com.aionemu.gameserver.model.PlayerClass;
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
@@ -93,8 +92,7 @@ public class _1007ACeremonyinSanctum extends AbstractQuestHandler {
 							return playQuestMovie(env, 91);
 						case SETPRO3:
 							if (var == 2) {
-								PlayerClass playerClass = PlayerClass.getStartingClassFor(player.getCommonData().getPlayerClass());
-								switch (playerClass) {
+								switch (player.getPlayerClass().getStartingClass()) {
 									case WARRIOR:
 										qs.setQuestVar(10);
 										qs.setRewardGroup(0);

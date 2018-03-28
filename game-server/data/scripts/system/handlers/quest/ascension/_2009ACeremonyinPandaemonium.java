@@ -3,7 +3,6 @@ package quest.ascension;
 import static com.aionemu.gameserver.model.DialogAction.*;
 
 import com.aionemu.gameserver.configs.main.CustomConfig;
-import com.aionemu.gameserver.model.PlayerClass;
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -102,8 +101,7 @@ public class _2009ACeremonyinPandaemonium extends AbstractQuestHandler {
 						return false;
 					case SETPRO3:
 						if (var == 2) {
-							PlayerClass playerClass = PlayerClass.getStartingClassFor(player.getCommonData().getPlayerClass());
-							switch (playerClass) {
+							switch (player.getPlayerClass().getStartingClass()) {
 								case WARRIOR:
 									qs.setQuestVar(10);
 									qs.setRewardGroup(0);

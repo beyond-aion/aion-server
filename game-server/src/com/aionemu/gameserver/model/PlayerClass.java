@@ -12,24 +12,24 @@ import com.aionemu.gameserver.model.templates.L10n;
 @XmlEnum
 public enum PlayerClass implements L10n {
 	WARRIOR(0, 240000, true),
-	GLADIATOR(1, 240001), // fighter
-	TEMPLAR(2, 240002), // knight
+	GLADIATOR(1, 240001, WARRIOR), // fighter
+	TEMPLAR(2, 240002, WARRIOR), // knight
 	SCOUT(3, 240003, true),
-	ASSASSIN(4, 240004),
-	RANGER(5, 240005),
+	ASSASSIN(4, 240004, SCOUT),
+	RANGER(5, 240005, SCOUT),
 	MAGE(6, 240006, true),
-	SORCERER(7, 240007), // wizard
-	SPIRIT_MASTER(8, 240008), // elementalist
+	SORCERER(7, 240007, MAGE), // wizard
+	SPIRIT_MASTER(8, 240008, MAGE), // elementalist
 	PRIEST(9, 240009, true),
-	CLERIC(10, 240010),
-	CHANTER(11, 240011),
+	CLERIC(10, 240010, PRIEST),
+	CHANTER(11, 240011, PRIEST),
 	ENGINEER(12, 904314, true),
-	RIDER(13, 904315),
-	GUNNER(14, 904316),
+	RIDER(13, 904315, ENGINEER),
+	GUNNER(14, 904316, ENGINEER),
 	ARTIST(15, 904317, true),
-	BARD(16, 904318),
+	BARD(16, 904318, ARTIST),
 	ALL(17),
-	
+
 	PHYSICAL_CLASS(WARRIOR.getClassId() | GLADIATOR.getClassId() | TEMPLAR.getClassId() |
 								SCOUT.getClassId() | ASSASSIN.getClassId() | RANGER.getClassId() | CHANTER.getClassId()),
 	MAGICAL_CLASS(MAGE.getClassId() | SORCERER.getClassId() | SPIRIT_MASTER.getClassId() |  PRIEST.getClassId() |
@@ -37,29 +37,31 @@ public enum PlayerClass implements L10n {
 								ARTIST.getClassId() | BARD.getClassId());
 
 	/** This id is used on client side */
-	private byte classId;
+	private final byte classId;
 
-	private int nameId;
+	private final int nameId;
 
 	/** This is the mask for this class id, used with bitwise AND in arguments that contain more than one possible class */
-	private int idMask;
+	private final int idMask;
 
 	/** Tells whether player can create new character with this class */
-	private boolean startingClass;
+	private PlayerClass startingClass;
 
-	private PlayerClass(int classId) {
+	PlayerClass(int classId) {
 		this(classId, 0, false);
 	}
 
-	private PlayerClass(int classId, int nameId) {
+	PlayerClass(int classId, int nameId, PlayerClass startingClass) {
 		this(classId, nameId, false);
+		this.startingClass = startingClass;
 	}
 
-	private PlayerClass(int classId, int nameId, boolean startingClass) {
+	PlayerClass(int classId, int nameId, boolean isStartingClass) {
 		this.classId = (byte) classId;
 		this.nameId = nameId;
-		this.startingClass = startingClass;
 		this.idMask = (int) Math.pow(2, classId);
+		if (isStartingClass)
+			this.startingClass = this;
 	}
 
 	/**
@@ -96,30 +98,11 @@ public enum PlayerClass implements L10n {
 	 * @return true if this is one of starting classes ( player can create char with this class )
 	 */
 	public boolean isStartingClass() {
+		return startingClass == this;
+	}
+
+	public PlayerClass getStartingClass() {
 		return startingClass;
-	}
-
-	/**
-	 * @param pc
-	 * @return starting class for second class
-	 */
-	public static PlayerClass getStartingClassFor(PlayerClass pc) {
-		PlayerClass[] vals = values();
-		byte i = pc.getClassId();
-		while (i >= 0) {
-			if (vals[i].isStartingClass())
-				return vals[i];
-			i--;
-		}
-		throw new IllegalArgumentException("No Starting Class for PlayerClass: " + pc.toString());
-	}
-
-	public static PlayerClass getPlayerClassByString(String fieldName) {
-		for (PlayerClass pc : values()) {
-			if (pc.toString().equals(fieldName))
-				return pc;
-		}
-		return null;
 	}
 
 	public int getMask() {

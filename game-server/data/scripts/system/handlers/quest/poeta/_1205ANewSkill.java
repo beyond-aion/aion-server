@@ -39,10 +39,7 @@ public class _1205ANewSkill extends AbstractQuestHandler {
 		if (QuestService.startQuest(env)) {
 			QuestState qs = player.getQuestStateList().getQuestState(questId);
 			qs.setStatus(QuestStatus.REWARD);
-			PlayerClass playerClass = player.getPlayerClass();
-			if (!playerClass.isStartingClass())
-				playerClass = PlayerClass.getStartingClassFor(playerClass);
-			switch (playerClass) {
+			switch (player.getPlayerClass().getStartingClass()) {
 				case WARRIOR:
 					qs.setQuestVar(1);
 					qs.setRewardGroup(0);
@@ -70,7 +67,6 @@ public class _1205ANewSkill extends AbstractQuestHandler {
 			}
 			updateQuestStatus(env);
 		}
-		return;
 	}
 
 	@Override
@@ -83,7 +79,7 @@ public class _1205ANewSkill extends AbstractQuestHandler {
 		int targetId = 0;
 		if (env.getVisibleObject() instanceof Npc)
 			targetId = ((Npc) env.getVisibleObject()).getNpcId();
-		PlayerClass playerClass = PlayerClass.getStartingClassFor(player.getCommonData().getPlayerClass());
+		PlayerClass playerClass = player.getPlayerClass().getStartingClass();
 		switch (targetId) {
 			case 203087:
 				if (playerClass == PlayerClass.WARRIOR) {
@@ -134,7 +130,6 @@ public class _1205ANewSkill extends AbstractQuestHandler {
 				}
 				return false;
 		}
-
 		return false;
 	}
 }

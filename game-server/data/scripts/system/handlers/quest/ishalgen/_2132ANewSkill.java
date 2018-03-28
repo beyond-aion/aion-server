@@ -39,38 +39,34 @@ public class _2132ANewSkill extends AbstractQuestHandler {
 		if (QuestService.startQuest(env)) {
 			QuestState qs = player.getQuestStateList().getQuestState(questId);
 			qs.setStatus(QuestStatus.REWARD);
-			PlayerClass playerClass = player.getPlayerClass();
-			if (!playerClass.isStartingClass())
-				playerClass = PlayerClass.getStartingClassFor(playerClass);
-			switch (playerClass) {
+			switch (player.getPlayerClass().getStartingClass()) {
 				case WARRIOR:
-					qs.setRewardGroup(0);
 					qs.setQuestVar(1);
+					qs.setRewardGroup(0);
 					break;
 				case SCOUT:
-					qs.setRewardGroup(1);
 					qs.setQuestVar(2);
+					qs.setRewardGroup(1);
 					break;
 				case MAGE:
-					qs.setRewardGroup(2);
 					qs.setQuestVar(3);
+					qs.setRewardGroup(2);
 					break;
 				case PRIEST:
-					qs.setRewardGroup(3);
 					qs.setQuestVar(4);
+					qs.setRewardGroup(3);
 					break;
 				case ENGINEER:
-					qs.setRewardGroup(4);
 					qs.setQuestVar(5);
+					qs.setRewardGroup(4);
 					break;
 				case ARTIST:
-					qs.setRewardGroup(5);
 					qs.setQuestVar(6);
+					qs.setRewardGroup(5);
 					break;
 			}
 			updateQuestStatus(env);
 		}
-		return;
 	}
 
 	@Override
@@ -83,8 +79,7 @@ public class _2132ANewSkill extends AbstractQuestHandler {
 		int targetId = 0;
 		if (env.getVisibleObject() instanceof Npc)
 			targetId = ((Npc) env.getVisibleObject()).getNpcId();
-
-		PlayerClass playerClass = PlayerClass.getStartingClassFor(player.getCommonData().getPlayerClass());
+		PlayerClass playerClass = player.getPlayerClass().getStartingClass();
 		switch (targetId) {
 			case 203527:
 				if (playerClass == PlayerClass.WARRIOR) {

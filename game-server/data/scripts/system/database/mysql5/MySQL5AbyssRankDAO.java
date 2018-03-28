@@ -249,15 +249,11 @@ public class MySQL5AbyssRankDAO extends AbyssRankDAO {
 						int gp = resultSet.getInt("abyss_rank.gp");
 						int playerTitle = resultSet.getInt("players.title_id");
 						int playerId = resultSet.getInt("players.id");
-						String playerClassStr = resultSet.getString("players.player_class");
+						PlayerClass playerClass = PlayerClass.valueOf(resultSet.getString("players.player_class"));
 						int playerLevel = DataManager.PLAYER_EXPERIENCE_TABLE.getLevelForExp(resultSet.getLong("players.exp"));
 						String playerLegion = resultSet.getString("legions.name");
 						int oldRankPos = resultSet.getInt("old_rank_pos");
 						int rankPos = resultSet.getInt("rank_pos");
-						PlayerClass playerClass = PlayerClass.getPlayerClassByString(playerClassStr);
-						if (playerClass == null) {
-							continue;
-						}
 						Gender gender = Gender.valueOf(resultSet.getString("players.gender"));
 						AbyssRankingResult rsl = new AbyssRankingResult(name, playerAbyssRank, playerId, ap, gp, playerTitle, playerClass, gender, playerLevel,
 							playerLegion, oldRankPos, rankPos);

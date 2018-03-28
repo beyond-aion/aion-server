@@ -67,14 +67,6 @@ public class SkillLearnAction extends AbstractItemAction {
 	}
 
 	private boolean validateClass(PlayerClass pc) {
-		boolean result = false;
-		// 2. check if current class is second class and book is for starting class
-		if (!pc.isStartingClass() && PlayerClass.getStartingClassFor(pc).ordinal() == playerClass.ordinal())
-			result = true;
-		// 3. check player class and SkillClass.ALL
-		if (pc == playerClass || playerClass == PlayerClass.ALL)
-			result = true;
-
-		return result;
+		return playerClass == pc || playerClass == PlayerClass.ALL || playerClass == pc.getStartingClass();
 	}
 }

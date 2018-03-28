@@ -194,7 +194,7 @@ public class ItemTemplate extends VisibleObjectTemplate {
 	public boolean isClassSpecific(PlayerClass playerClass) {
 		boolean related = restricts[playerClass.ordinal()] > 0;
 		if (!related && !playerClass.isStartingClass()) {
-			related = restricts[PlayerClass.getStartingClassFor(playerClass).ordinal()] > 0;
+			related = restricts[playerClass.getStartingClass().ordinal()] > 0;
 		}
 		return related;
 	}

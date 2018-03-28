@@ -55,7 +55,7 @@ public class SkillLearnService {
 	 */
 	public static void learnNewSkills(Player player, int fromLevel, int toLevel) {
 		PlayerClass playerClass = player.getCommonData().getPlayerClass();
-		PlayerClass playerStartClass = playerClass.isStartingClass() ? null : PlayerClass.getStartingClassFor(playerClass);
+		PlayerClass playerStartClass = playerClass.isStartingClass() ? null : playerClass.getStartingClass();
 		for (int level = toLevel; level >= fromLevel; level--) { // reversed order to add only the highest of each skill (more efficient)
 			if (level < 10 && playerStartClass != null) // add missing start class skills if already switched class
 				autoLearnSkills(player, level, playerStartClass, player.getRace());
