@@ -1,6 +1,8 @@
 package admincommands;
 
+import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.team.TemporaryPlayerTeam;
 import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.Util;
@@ -8,42 +10,83 @@ import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 import com.aionemu.gameserver.world.World;
 
 /**
- * Admin movetome command.
- * 
- * @author Cyrakuse
+ * @author Cyrakuse, Estrayl
  */
 public class MoveToMe extends AdminCommand {
 
 	public MoveToMe() {
-		super("movetome");
+		super("movetome", "Teleports a player (optional his team), a specific faction or all online players to the user.");
+		// @formatter:off
+		setSyntaxInfo(
+			"<name> - Teleports only the player.",
+			"<name> <(g)rp|(a)lli> - Teleports either the players group or his alliance including him.",
+			"<ely|asmo> - Teleports the <ely>os or the <asmo>dian faction.",
+			"<all> - Teleports all online players.");
+		// @formatter:on
 	}
 
 	@Override
-	public void execute(Player player, String... params) {
-		if (params == null || params.length < 1) {
-			PacketSendUtility.sendMessage(player, "syntax //movetome <characterName>");
+	public void execute(Player admin, String... params) {
+		if (params.length < 1) {
+			sendInfo(admin);
 			return;
 		}
 
+		Race raceToMove = null;
+		switch (params[0].toLowerCase()) {
+			case "ely":
+				raceToMove = Race.ELYOS;
+				break;
+			case "asmo":
+				raceToMove = Race.ASMODIANS;
+				break;
+			case "all":
+				raceToMove = Race.PC_ALL;
+		}
+
+		if (raceToMove != null)
+			handleFactionTeleport(raceToMove, admin);
+		else
+			handlePlayerTeleport(admin, params);
+	}
+
+	private void handlePlayerTeleport(Player admin, String... params) {
 		Player playerToMove = World.getInstance().findPlayer(Util.convertName(params[0]));
 		if (playerToMove == null) {
-			PacketSendUtility.sendMessage(player, "The specified player is not online.");
+			sendInfo(admin, "The specified player is not online.");
 			return;
 		}
-
-		if (playerToMove == player) {
-			PacketSendUtility.sendMessage(player, "Cannot use this command on yourself.");
-			return;
+		if (params.length >= 2) {
+			if (!playerToMove.isInTeam()) {
+				sendInfo(admin, "The player does not belong to a team.");
+				return;
+			}
+			TemporaryPlayerTeam<?> teamToMove;
+			switch (params[2].toLowerCase()) {
+				case "g":
+				case "grp":
+				case "group":
+					teamToMove = playerToMove.getPlayerGroup();
+					break;
+				default:
+					teamToMove = playerToMove.getCurrentTeam();
+					break;
+			}
+			teamToMove.getOnlineMembers().stream().forEach(p -> teleportPlayer(p, admin));
+		} else {
+			teleportPlayer(playerToMove, admin);
 		}
-
-		TeleportService.teleportTo(playerToMove, player.getWorldId(), player.getInstanceId(), player.getX(), player.getY(), player.getZ(),
-			player.getHeading());
-		PacketSendUtility.sendMessage(player, "Teleported player " + playerToMove.getName() + " to your location.");
-		PacketSendUtility.sendMessage(playerToMove, "You have been teleported by " + player.getName() + ".");
 	}
 
-	@Override
-	public void info(Player player, String message) {
-		PacketSendUtility.sendMessage(player, "syntax //movetome <characterName>");
+	private void handleFactionTeleport(Race raceToMove, Player admin) {
+		for (Player playerToMove : World.getInstance().getAllPlayers())
+			if (!playerToMove.equals(admin) && (raceToMove == Race.PC_ALL || playerToMove.getRace() == raceToMove))
+				teleportPlayer(playerToMove, admin);
+	}
+
+	private void teleportPlayer(Player playerToMove, Player admin) {
+		TeleportService.teleportTo(playerToMove, admin.getPosition());
+		PacketSendUtility.sendMessage(admin, "Teleported player " + playerToMove.getName() + " to your location.");
+		PacketSendUtility.sendMessage(playerToMove, "You have been teleported by " + admin.getName() + ".");
 	}
 }
