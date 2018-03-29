@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.model.templates.materials;
 
+import java.util.function.Predicate;
+
 import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlType;
 
@@ -7,7 +9,6 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.Summon;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.google.common.base.Predicate;
 
 /**
  * @author Rolandas
@@ -23,12 +24,12 @@ public enum MaterialTarget {
 
 	private final Predicate<Creature> isTargetCheck;
 
-	private MaterialTarget(Predicate<Creature> isTargetPredicate) {
+	MaterialTarget(Predicate<Creature> isTargetPredicate) {
 		this.isTargetCheck = isTargetPredicate;
 	}
 
 	public boolean matches(Creature creature) {
-		return isTargetCheck.apply(creature);
+		return isTargetCheck.test(creature);
 	}
 
 }

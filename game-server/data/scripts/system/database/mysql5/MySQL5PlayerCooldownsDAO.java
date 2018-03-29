@@ -1,13 +1,10 @@
 package mysql5;
 
-/**
- * @author nrg
- */
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -20,9 +17,10 @@ import com.aionemu.commons.database.ParamReadStH;
 import com.aionemu.gameserver.dao.MySQL5DAOUtils;
 import com.aionemu.gameserver.dao.PlayerCooldownsDAO;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.google.common.base.Predicate;
-import com.google.common.collect.Maps;
 
+/**
+ * @author nrg
+ */
 public class MySQL5PlayerCooldownsDAO extends PlayerCooldownsDAO {
 
 	private static final Logger log = LoggerFactory.getLogger(MySQL5PlayerCooldownsDAO.class);
@@ -30,14 +28,6 @@ public class MySQL5PlayerCooldownsDAO extends PlayerCooldownsDAO {
 	public static final String INSERT_QUERY = "INSERT INTO `player_cooldowns` (`player_id`, `cooldown_id`, `reuse_delay`) VALUES (?,?,?)";
 	public static final String DELETE_QUERY = "DELETE FROM `player_cooldowns` WHERE `player_id`=?";
 	public static final String SELECT_QUERY = "SELECT `cooldown_id`, `reuse_delay` FROM `player_cooldowns` WHERE `player_id`=?";
-
-	private static final Predicate<Long> cooldownPredicate = new Predicate<Long>() {
-
-		@Override
-		public boolean apply(Long input) {
-			return input != null && input - System.currentTimeMillis() > 28000;
-		}
-	};
 
 	@Override
 	public void loadPlayerCooldowns(final Player player) {
@@ -66,35 +56,29 @@ public class MySQL5PlayerCooldownsDAO extends PlayerCooldownsDAO {
 		deletePlayerCooldowns(player);
 
 		Map<Integer, Long> cooldowns = player.getSkillCoolDowns();
-		if (cooldowns != null && cooldowns.size() > 0) {
-			Map<Integer, Long> filteredCooldown = Maps.filterValues(cooldowns, cooldownPredicate);
+		if (cooldowns == null || cooldowns.isEmpty())
+			return;
 
-			if (filteredCooldown.isEmpty()) {
-				return;
+		cooldowns = new HashMap<>(cooldowns);
+		cooldowns.values().removeIf(reuseTime -> reuseTime == null || reuseTime - System.currentTimeMillis() <= 28000);
+
+		if (cooldowns.isEmpty())
+			return;
+
+		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement st = con.prepareStatement(INSERT_QUERY)) {
+			con.setAutoCommit(false);
+
+			for (Map.Entry<Integer, Long> entry : cooldowns.entrySet()) {
+				st.setInt(1, player.getObjectId());
+				st.setInt(2, entry.getKey());
+				st.setLong(3, entry.getValue());
+				st.addBatch();
 			}
 
-			Connection con = null;
-			PreparedStatement st = null;
-			try {
-				con = DatabaseFactory.getConnection();
-				con.setAutoCommit(false);
-				st = con.prepareStatement(INSERT_QUERY);
-
-				for (Map.Entry<Integer, Long> entry : filteredCooldown.entrySet()) {
-					st.setInt(1, player.getObjectId());
-					st.setInt(2, entry.getKey());
-					st.setLong(3, entry.getValue());
-					st.addBatch();
-				}
-
-				st.executeBatch();
-				con.commit();
-
-			} catch (SQLException e) {
-				log.error("Can't save cooldowns for player " + player.getObjectId());
-			} finally {
-				DatabaseFactory.close(st, con);
-			}
+			st.executeBatch();
+			con.commit();
+		} catch (SQLException e) {
+			log.error("Couldn't save cooldowns for " + player, e);
 		}
 	}
 

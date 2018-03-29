@@ -1,7 +1,6 @@
 package com.aionemu.gameserver.model.gameobjects;
 
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -516,7 +515,7 @@ public abstract class Creature extends VisibleObject {
 		}
 
 		/*
-		 * Some shared cooldown skills have indipendent and different cooldown they must not be blocked
+		 * Some shared cooldown skills have independent and different cooldown they must not be blocked
 		 */
 		if (skillCoolDownsBase != null && skillCoolDownsBase.get(cooldownId) != null) {
 			if ((template.getDuration() + template.getCooldown() * 100 + skillCoolDownsBase.get(cooldownId)) < System.currentTimeMillis())
@@ -556,7 +555,7 @@ public abstract class Creature extends VisibleObject {
 	 * @return the skillCoolDowns
 	 */
 	public Map<Integer, Long> getSkillCoolDowns() {
-		return skillCoolDowns == null ? null : new HashMap<>(skillCoolDowns);
+		return skillCoolDowns;
 	}
 
 	/**
