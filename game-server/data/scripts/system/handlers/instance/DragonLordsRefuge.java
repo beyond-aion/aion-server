@@ -268,7 +268,8 @@ public class DragonLordsRefuge extends GeneralInstanceHandler {
 			float x = (float) (Math.cos(radian) * distance);
 			float y = (float) (Math.sin(radian) * distance);
 			TeleportService.teleportTo(player, instance.getMapId(), 503.389f + x, 514.661f + y, 417.404f);
-			PacketSendUtility.broadcastToMap(getNpc(219360), new SM_CUSTOM_SETTINGS(getNpc(219360).getObjectId(), 0, CreatureType.PEACE.getId(), 0));
+			if (getNpc(219360) != null)
+				PacketSendUtility.broadcastToMap(getNpc(219360), new SM_CUSTOM_SETTINGS(getNpc(219360).getObjectId(), 0, CreatureType.PEACE.getId(), 0));
 		}
 	}
 

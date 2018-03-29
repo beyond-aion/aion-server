@@ -44,7 +44,7 @@ public class DredgionCommanderAI extends SiegeNpcAI {
 
 	@Override
 	public int modifyOwnerDamage(int damage, Effect effect) {
-		if (effect.getStack().equals("DGFI_ONESHOTONEKILL_WARPDR"))
+		if (effect != null && effect.getStack().equals("DGFI_ONESHOTONEKILL_WARPDR"))
 			damage *= SiegeConfig.SIEGE_HEALTH_MULTIPLIER;
 		return damage;
 	}
