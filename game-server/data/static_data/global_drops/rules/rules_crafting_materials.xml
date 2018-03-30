@@ -1407,7 +1407,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Moonflower -->
-	<gd_rule rule_name="Moonflower Fruit" base_chance="24" min_diff="-2" max_diff="2">
+	<gd_rule rule_name="Moonflower Fruit" base_chance="24" min_diff="-14" max_diff="-5">
 		<gd_worlds>
 			<gd_world wd_type="ELYSEA" />
 		</gd_worlds>
@@ -1417,6 +1417,18 @@
 		<gd_items>
 			<!-- Level 50 -->
 			<gd_item id="152015010" /><!-- Moonflower Fruit -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Moonflower Leaf" base_chance="24" min_diff="-4" max_diff="5">
+		<gd_worlds>
+			<gd_world wd_type="ELYSEA" />
+		</gd_worlds>
+		<gd_npc_groups>
+			<gd_npc_group group="FELLIAL" />
+		</gd_npc_groups>
+		<gd_items>
+			<!-- Level 55 -->
+			<gd_item id="152015514" /><!-- Moonflower Leaf -->
 		</gd_items>
 	</gd_rule>
 	<!-- Specter -->
