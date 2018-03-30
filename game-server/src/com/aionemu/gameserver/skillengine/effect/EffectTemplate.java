@@ -55,9 +55,9 @@ public abstract class EffectTemplate {
 	protected int position;
 	@XmlAttribute(name = "basiclvl")
 	protected int basicLvl;
-	@XmlAttribute(name = "hittype", required = false)
+	@XmlAttribute(name = "hittype")
 	protected HitType hitType = HitType.EVERYHIT;
-	@XmlAttribute(name = "hittypeprob2", required = false)
+	@XmlAttribute(name = "hittypeprob2")
 	protected int hitTypeProb = 100;
 	@XmlAttribute(name = "element")
 	protected SkillElement element = SkillElement.NONE;
@@ -233,9 +233,7 @@ public abstract class EffectTemplate {
 		if (modifiers == null)
 			return null;
 
-		/**
-		 * Only one of modifiers will be applied now
-		 */
+		// Only one of modifiers will be applied now
 		for (ActionModifier modifier : modifiers.getActionModifiers()) {
 			if (modifier.check(effect))
 				return modifier;
@@ -316,11 +314,11 @@ public abstract class EffectTemplate {
 			return false;
 
 		if (firstEffectCheck(effect, statEnum, spellStatus, element)) {
-			this.addSuccessEffect(effect, spellStatus);
+			addSuccessEffect(effect, spellStatus);
 			calculateDamage(effect);
 			return true;
 		} else if (nextEffectCheck(effect, spellStatus, statEnum)) {
-			this.addSuccessEffect(effect, spellStatus);
+			addSuccessEffect(effect, spellStatus);
 			calculateDamage(effect);
 			return true;
 		} else {
@@ -329,33 +327,14 @@ public abstract class EffectTemplate {
 	}
 
 	private boolean firstEffectCheck(Effect effect, StatEnum statEnum, SpellStatus spellStatus, SkillElement element) {
-		if (this.getPosition() == 1) {
+		if (getPosition() == 1) {
 			// check effectresistrate
-			if (!this.calculateEffectResistRate(effect, statEnum)) {
+			if (!calculateEffectResistRate(effect, statEnum)) {
 				return false;
 			}
-			boolean cannotMiss = false;
-			if (this instanceof SkillAttackInstantEffect)
-				cannotMiss = ((SkillAttackInstantEffect) this).isCannotmiss();
-			if (!noResist && !cannotMiss) {
-				// check for BOOST_RESIST
-				int boostResist = 0;
-				switch (effect.getSkillTemplate().getSubType()) {
-					case DEBUFF:
-						boostResist = effect.getEffector().getGameStats().getStat(StatEnum.BOOST_RESIST_DEBUFF, 0).getCurrent();
-						break;
-				}
-				int accMod = accMod2 + accMod1 * effect.getSkillLevel() + effect.getAccModBoost() + boostResist;
-				switch (element) {
-					case NONE:
-						if (StatFunctions.calculatePhysicalDodgeRate(effect.getEffector(), effect.getEffected(), accMod))
-							return false;
-						break;
-					default:
-						if (Rnd.get(1, 1000) <= StatFunctions.calculateMagicalResistRate(effect.getEffector(), effect.getEffected(), accMod, element))
-							return false;
-						break;
-				}
+			if (!noResist && !isCannotMiss()) {
+				if (isDodgedOrResisted(effect))
+					return false;
 			}
 			return true;
 		}
@@ -367,43 +346,47 @@ public abstract class EffectTemplate {
 		if (getPosition() > 1) {
 			if (Rnd.chance() < getPreEffectProb()) {
 				int[] positions = getPreEffects();
-				for (int pos : positions) {
-					if (!effect.isInSuccessEffects(pos))
-						return false;
+				if (positions != null) {
+					for (int pos : positions) {
+						if (!effect.isInSuccessEffects(pos))
+							return false;
+					}
 				}
-				boolean cannotMiss = false;
-				if (this instanceof SkillAttackInstantEffect)
-					cannotMiss = ((SkillAttackInstantEffect) this).isCannotmiss();
-				if (!noResist && !cannotMiss) {
-					if (!this.calculateEffectResistRate(effect, statEnum)) {
+				if (!noResist && !isCannotMiss()) {
+					if (!calculateEffectResistRate(effect, statEnum)) {
 						if (!(firstEffect instanceof DamageEffect)) {
 							effect.getSuccessEffects().remove(firstEffect);
 						}
 						return false;
 					}
-					// check for BOOST_RESIST
-					int boostResist = 0;
-					switch (effect.getSkillTemplate().getSubType()) {
-						case DEBUFF:
-							boostResist = effect.getEffector().getGameStats().getStat(StatEnum.BOOST_RESIST_DEBUFF, 0).getCurrent();
-							break;
-					}
-					int accMod = accMod2 + accMod1 * effect.getSkillLevel() + effect.getAccModBoost() + boostResist;
-					switch (element) {
-						case NONE:
-							if (StatFunctions.calculatePhysicalDodgeRate(effect.getEffector(), effect.getEffected(), accMod))
-								return false;
-							break;
-						default:
-							if (Rnd.get(1, 1000) <= StatFunctions.calculateMagicalResistRate(effect.getEffector(), effect.getEffected(), accMod, element))
-								return false;
-							break;
-					}
+					if (isDodgedOrResisted(effect))
+						return false;
 				}
 				return true;
 			}
 		}
 		return false;
+	}
+
+	private boolean isCannotMiss() {
+		return this instanceof SkillAttackInstantEffect && ((SkillAttackInstantEffect) this).isCannotmiss();
+	}
+
+	private boolean isDodgedOrResisted(Effect effect) {
+		// check for BOOST_RESIST
+		int boostResist = 0;
+		switch (effect.getSkillTemplate().getSubType()) {
+			case DEBUFF:
+				boostResist = effect.getEffector().getGameStats().getStat(StatEnum.BOOST_RESIST_DEBUFF, 0).getCurrent();
+				break;
+		}
+		int accMod = accMod2 + accMod1 * effect.getSkillLevel() + effect.getAccModBoost() + boostResist;
+		switch (element) {
+			case NONE:
+				return StatFunctions.calculatePhysicalDodgeRate(effect.getEffector(), effect.getEffected(), accMod);
+			default:
+				return Rnd.get(1, 1000) <= StatFunctions.calculateMagicalResistRate(effect.getEffector(), effect.getEffected(), accMod, element);
+		}
 	}
 
 	private void addSuccessEffect(Effect effect, SpellStatus spellStatus) {
@@ -417,7 +400,7 @@ public abstract class EffectTemplate {
 	 */
 	private boolean effectConditionsCheck(Effect effect) {
 		Conditions effectConditions = getEffectConditions();
-		return effectConditions != null ? effectConditions.validate(effect) : true;
+		return effectConditions == null || effectConditions.validate(effect);
 	}
 
 	/**
@@ -433,7 +416,7 @@ public abstract class EffectTemplate {
 	 * @param effect
 	 */
 	public void startEffect(Effect effect) {
-	};
+	}
 
 	public void calculateDamage(Effect effect) {
 		// evaluate skill reflect for non-dmg skills
@@ -444,7 +427,7 @@ public abstract class EffectTemplate {
 			effect.setShieldDefense(effect.getShieldDefense() | attackResult.getShieldType());
 			effect.setReflectedSkillId(attackResult.getReflectedSkillId());
 		}
-	};
+	}
 
 	/**
 	 * @param effect
@@ -488,7 +471,7 @@ public abstract class EffectTemplate {
 	 * Check all sub effect condition statuses for effect
 	 */
 	private boolean effectSubConditionsCheck(Effect effect) {
-		return effectSubConditions != null ? effectSubConditions.validate(effect) : true;
+		return effectSubConditions == null || effectSubConditions.validate(effect);
 	}
 
 	public int calculateHate(Effect effect) {
