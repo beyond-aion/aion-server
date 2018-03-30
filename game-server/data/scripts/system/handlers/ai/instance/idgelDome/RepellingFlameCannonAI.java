@@ -2,53 +2,40 @@ package ai.instance.idgelDome;
 
 import java.util.concurrent.Future;
 
+import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.NpcAI;
+import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.skillengine.SkillEngine;
+import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
- * @author Ritsu
+ * @author Ritsu, Estrayl
  */
 @AIName("repelling_flame_cannon")
 public class RepellingFlameCannonAI extends NpcAI {
 
-	private Future<?> skillTask = null;
+	private Future<?> skillTask;
 
 	public RepellingFlameCannonAI(Npc owner) {
 		super(owner);
 	}
 
 	@Override
+	public int modifyDamage(Creature attacker, int damage, Effect effect) {
+		return 0;
+	}
+
+	@Override
 	protected void handleSpawned() {
 		super.handleSpawned();
-		startTask();
-	}
-
-	private void startTask() {
-		skillTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
-
-			@Override
-			public void run() {
-				if (isDead()) {
-					cancelTask();
-				} else {
-					SkillEngine.getInstance().getSkill(getOwner(), 21648, 1, getOwner()).useNoAnimationSkill();
-				}
-			}
-		}, 100, 100);
-	}
-
-	private void cancelTask() {
-		if (skillTask != null && !skillTask.isDone()) {
-			skillTask.cancel(true);
-		}
+		skillTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> AIActions.useSkill(this, 21648), 1000, 1000);
 	}
 
 	@Override
 	protected void handleDespawned() {
-		cancelTask();
+		skillTask.cancel(true);
 		super.handleDespawned();
 	}
 }

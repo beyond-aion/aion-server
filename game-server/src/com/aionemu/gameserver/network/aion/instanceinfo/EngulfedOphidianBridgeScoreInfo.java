@@ -3,7 +3,7 @@ package com.aionemu.gameserver.network.aion.instanceinfo;
 import java.nio.ByteBuffer;
 
 import com.aionemu.gameserver.model.Race;
-import com.aionemu.gameserver.model.instance.InstanceScoreType;
+import com.aionemu.gameserver.model.instance.InstanceProgressionType;
 import com.aionemu.gameserver.model.instance.instancereward.EngulfedOphidianBridgeReward;
 import com.aionemu.gameserver.model.instance.playerreward.EngulfedOphidianBridgePlayerReward;
 
@@ -15,13 +15,13 @@ public class EngulfedOphidianBridgeScoreInfo extends InstanceScoreInfo {
 	private final EngulfedOphidianBridgeReward engulfedOBReward;
 	private final int type;
 	private final int objectId;
-	private final InstanceScoreType instanceScoreType;
+	private final InstanceProgressionType instanceScoreType;
 
 	public EngulfedOphidianBridgeScoreInfo(EngulfedOphidianBridgeReward engulfedOBReward, int type, int objectId) {
 		this.engulfedOBReward = engulfedOBReward;
 		this.type = type;
 		this.objectId = objectId;
-		this.instanceScoreType = engulfedOBReward.getInstanceScoreType();
+		this.instanceScoreType = engulfedOBReward.getInstanceProgressionType();
 	}
 
 	@Override
@@ -95,13 +95,13 @@ public class EngulfedOphidianBridgeScoreInfo extends InstanceScoreInfo {
 				writeD(buf, engulfedOBReward.getElyosKills().intValue());
 				writeD(buf, engulfedOBReward.getElyosPoints().intValue());
 				writeD(buf, 0); // asmodians 0
-				writeD(buf, instanceScoreType.isReinforsing() ? 1 : 0xFFFF);// 1 | 65535 - 0xFFFF | 0
+				writeD(buf, instanceScoreType.isReinforcing() ? 1 : 0xFFFF);// 1 | 65535 - 0xFFFF | 0
 				// asmodians reward
 				writeC(buf, 0);
 				writeD(buf, engulfedOBReward.getAsmodiansKills().intValue());
 				writeD(buf, engulfedOBReward.getAsmodiansPoint().intValue());
 				writeD(buf, 1); // elyos
-				writeD(buf, instanceScoreType.isReinforsing() ? 1 : 0xFFFF); // 1 | 65535 - 0xFFFF | 0
+				writeD(buf, instanceScoreType.isReinforcing() ? 1 : 0xFFFF); // 1 | 65535 - 0xFFFF | 0
 				break;
 			case 10:
 				writeC(buf, 0);

@@ -16,7 +16,7 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.StaticDoor;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.instance.InstanceScoreType;
+import com.aionemu.gameserver.model.instance.InstanceProgressionType;
 import com.aionemu.gameserver.model.instance.instancereward.InstanceReward;
 import com.aionemu.gameserver.model.instance.instancereward.IronWallFrontReward;
 import com.aionemu.gameserver.model.instance.playerreward.IronWallFrontPlayerReward;
@@ -91,7 +91,7 @@ public class IronWallFrontInstance extends GeneralInstanceHandler {
 			@Override
 			public void run() {
 				openFirstDoors();
-				ironWallFrontReward.setInstanceScoreType(InstanceScoreType.START_PROGRESS);
+				ironWallFrontReward.setInstanceProgressionType(InstanceProgressionType.START_PROGRESS);
 				sendPacket(new SM_INSTANCE_SCORE(new IronWallFrontScoreInfo(ironWallFrontReward, 6, 0), ironWallFrontReward, getTime()));
 			}
 
@@ -111,7 +111,7 @@ public class IronWallFrontInstance extends GeneralInstanceHandler {
 			instanceTask.cancel(true);
 		if (ironWallFrontReward.isRewarded())
 			return;
-		ironWallFrontReward.setInstanceScoreType(InstanceScoreType.END_PROGRESS);
+		ironWallFrontReward.setInstanceProgressionType(InstanceProgressionType.END_PROGRESS);
 		final Race winningrace = ironWallFrontReward.getWinningRace();
 		instance.forEachPlayer(new Consumer<Player>() {
 
@@ -282,7 +282,7 @@ public class IronWallFrontInstance extends GeneralInstanceHandler {
 	public void onInstanceCreate(WorldMapInstance instance) {
 		super.onInstanceCreate(instance);
 		ironWallFrontReward = new IronWallFrontReward(mapId, instanceId);
-		ironWallFrontReward.setInstanceScoreType(InstanceScoreType.PREPARING);
+		ironWallFrontReward.setInstanceProgressionType(InstanceProgressionType.PREPARING);
 		doors = instance.getDoors();
 		startInstanceTask();
 	}

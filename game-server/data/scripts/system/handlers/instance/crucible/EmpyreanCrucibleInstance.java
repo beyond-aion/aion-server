@@ -13,7 +13,7 @@ import com.aionemu.gameserver.model.drop.DropItem;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.instance.InstanceScoreType;
+import com.aionemu.gameserver.model.instance.InstanceProgressionType;
 import com.aionemu.gameserver.model.instance.StageType;
 import com.aionemu.gameserver.model.instance.playerreward.CruciblePlayerReward;
 import com.aionemu.gameserver.network.aion.instanceinfo.CrucibleScoreInfo;
@@ -1024,7 +1024,7 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 		}
 
 		PacketSendUtility.sendPacket(player,
-			new SM_INSTANCE_SCORE(new CrucibleScoreInfo(instanceReward, InstanceScoreType.END_PROGRESS), instanceReward, InstanceScoreType.END_PROGRESS));
+			new SM_INSTANCE_SCORE(new CrucibleScoreInfo(instanceReward, InstanceProgressionType.END_PROGRESS), instanceReward, InstanceProgressionType.END_PROGRESS));
 	}
 
 	@Override

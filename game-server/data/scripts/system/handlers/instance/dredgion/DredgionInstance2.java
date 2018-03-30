@@ -22,7 +22,7 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.StaticDoor;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.Rates;
-import com.aionemu.gameserver.model.instance.InstanceScoreType;
+import com.aionemu.gameserver.model.instance.InstanceProgressionType;
 import com.aionemu.gameserver.model.instance.instancereward.DredgionReward;
 import com.aionemu.gameserver.model.instance.instancereward.InstanceReward;
 import com.aionemu.gameserver.model.instance.playerreward.DredgionPlayerReward;
@@ -84,7 +84,7 @@ public class DredgionInstance2 extends GeneralInstanceHandler {
 			@Override
 			public void run() {
 				openFirstDoors();
-				dredgionReward.setInstanceScoreType(InstanceScoreType.START_PROGRESS);
+				dredgionReward.setInstanceProgressionType(InstanceProgressionType.START_PROGRESS);
 				sendPacket();
 			}
 
@@ -111,14 +111,14 @@ public class DredgionInstance2 extends GeneralInstanceHandler {
 	public void onInstanceCreate(WorldMapInstance instance) {
 		super.onInstanceCreate(instance);
 		dredgionReward = new DredgionReward(mapId, instanceId);
-		dredgionReward.setInstanceScoreType(InstanceScoreType.PREPARING);
+		dredgionReward.setInstanceProgressionType(InstanceProgressionType.PREPARING);
 		doors = instance.getDoors();
 	}
 
 	protected void stopInstance(Race race) {
 		stopInstanceTask();
 		dredgionReward.setWinningRace(race);
-		dredgionReward.setInstanceScoreType(InstanceScoreType.END_PROGRESS);
+		dredgionReward.setInstanceProgressionType(InstanceProgressionType.END_PROGRESS);
 		doReward();
 		sendPacket();
 	}

@@ -3,7 +3,7 @@ package com.aionemu.gameserver.network.aion.instanceinfo;
 import java.nio.ByteBuffer;
 
 import com.aionemu.gameserver.model.Race;
-import com.aionemu.gameserver.model.instance.InstanceScoreType;
+import com.aionemu.gameserver.model.instance.InstanceProgressionType;
 import com.aionemu.gameserver.model.instance.instancereward.KamarReward;
 import com.aionemu.gameserver.model.instance.playerreward.KamarPlayerReward;
 
@@ -15,13 +15,13 @@ public class KamarBattlefieldScoreInfo extends InstanceScoreInfo {
 	private final KamarReward kamarReward;
 	private final int type;
 	private final int objectId;
-	private final InstanceScoreType instanceScoreType;
+	private final InstanceProgressionType instanceScoreType;
 
 	public KamarBattlefieldScoreInfo(KamarReward kamarReward, int type, int objectId) {
 		this.kamarReward = kamarReward;
 		this.type = type;
 		this.objectId = objectId;
-		this.instanceScoreType = kamarReward.getInstanceScoreType();
+		this.instanceScoreType = kamarReward.getInstanceProgressionType();
 	}
 
 	@Override
@@ -102,13 +102,13 @@ public class KamarBattlefieldScoreInfo extends InstanceScoreInfo {
 				writeD(buf, kamarReward.getElyosKills().intValue());
 				writeD(buf, kamarReward.getElyosPoints().intValue());
 				writeD(buf, 0); // asmodians 0
-				writeD(buf, instanceScoreType.isReinforsing() ? 1 : 0xFFFF);// 1 | 65535 - 0xFFFF | 0
+				writeD(buf, instanceScoreType.isReinforcing() ? 1 : 0xFFFF);// 1 | 65535 - 0xFFFF | 0
 				// asmodians reward
 				writeC(buf, 0);
 				writeD(buf, kamarReward.getAsmodiansKills().intValue());
 				writeD(buf, kamarReward.getAsmodiansPoint().intValue());
 				writeD(buf, 1); // elyos
-				writeD(buf, instanceScoreType.isReinforsing() ? 1 : 0xFFFF); // 1 | 65535 - 0xFFFF | 0
+				writeD(buf, instanceScoreType.isReinforcing() ? 1 : 0xFFFF); // 1 | 65535 - 0xFFFF | 0
 				break;
 			case 10:
 				writeC(buf, 0);

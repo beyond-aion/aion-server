@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.instance.InstanceScoreType;
+import com.aionemu.gameserver.model.instance.InstanceProgressionType;
 import com.aionemu.gameserver.model.instance.instancereward.DredgionReward;
 import com.aionemu.gameserver.model.instance.playerreward.DredgionPlayerReward;
 import com.aionemu.gameserver.model.instance.playerreward.InstancePlayerReward;
@@ -17,12 +17,12 @@ public class DredgionScoreInfo extends InstanceScoreInfo {
 
 	private final DredgionReward dredgionReward;
 	private final List<Player> players;
-	private final InstanceScoreType instanceScoreType;
+	private final InstanceProgressionType instanceScoreType;
 
 	public DredgionScoreInfo(DredgionReward dredgionReward, List<Player> players) {
 		this.dredgionReward = dredgionReward;
 		this.players = players;
-		this.instanceScoreType = dredgionReward.getInstanceScoreType();
+		this.instanceScoreType = dredgionReward.getInstanceProgressionType();
 	}
 
 	@Override

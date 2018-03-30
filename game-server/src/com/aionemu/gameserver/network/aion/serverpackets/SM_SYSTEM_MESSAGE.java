@@ -26550,6 +26550,27 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	}
 
 	/**
+	 * Destroyer Kunax has appeared in the Slaying Arena
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_FORTRESS_RE_BOSSSPAWN() {
+		return new SM_SYSTEM_MESSAGE(1402367);
+	}
+
+	/**
+	 * The Asmodian Flame Vent has been activated.\nThe Asmodians are trapped!
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_FORTRESS_RE_FIRESPAWN_A() {
+		return new SM_SYSTEM_MESSAGE(1402368);
+	}
+
+	/**
+	 * The Elyos Flame Vent has been activated.\nThe Elyos are trapped!
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_FORTRESS_RE_FIRESPAWN_B() {
+		return new SM_SYSTEM_MESSAGE(1402369);
+	}
+
+	/**
 	 * The Beritra Legion's Invasion Corridor has appeared.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_WORLDRAID_MESSAGE_01() {
@@ -27074,6 +27095,13 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_WEAK_RACE_BUFF_DARK_WARNING() {
 		return new SM_SYSTEM_MESSAGE(1402595);
+	}
+
+	/**
+	 * Destroyer Kunax has spawned.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDLDF5_FORTRESS_RE_BOSS_SPAWN() {
+		return new SM_SYSTEM_MESSAGE(1402598);
 	}
 
 	/**

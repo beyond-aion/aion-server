@@ -12,7 +12,7 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Gatherable;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.instance.InstanceScoreType;
+import com.aionemu.gameserver.model.instance.InstanceProgressionType;
 import com.aionemu.gameserver.model.instance.instancereward.DarkPoetaReward;
 import com.aionemu.gameserver.model.team.TemporaryPlayerTeam;
 import com.aionemu.gameserver.network.aion.instanceinfo.DarkPoetaScoreInfo;
@@ -47,7 +47,7 @@ public class DarkPoetaInstance extends GeneralInstanceHandler {
 
 		int npcId = npc.getNpcId();
 		int points = calculatePointsReward(npc);
-		if (instanceReward.getInstanceScoreType().isStartProgress() && !excludedNpcs.contains(npcId)) {
+		if (instanceReward.getInstanceProgressionType().isStartProgress() && !excludedNpcs.contains(npcId)) {
 			instanceReward.addNpcKill();
 			instanceReward.addPoints(points);
 			sendPacket(npc, points);
@@ -60,7 +60,7 @@ public class DarkPoetaInstance extends GeneralInstanceHandler {
 					spawn(214904, 275.34537f, 323.02072f, 130.9302f, (byte) 52);
 				break;
 			case 214904: // Brigade General Anuhart
-				instanceReward.setInstanceScoreType(InstanceScoreType.END_PROGRESS);
+				instanceReward.setInstanceProgressionType(InstanceProgressionType.END_PROGRESS);
 				instanceReward.setRank(checkRank(instanceReward.getPoints()));
 				sendPacket(null, 0);
 				break;
@@ -76,7 +76,7 @@ public class DarkPoetaInstance extends GeneralInstanceHandler {
 
 	private int getTime() {
 		int current = (int) (System.currentTimeMillis() - startTime);
-		switch (instanceReward.getInstanceScoreType()) {
+		switch (instanceReward.getInstanceProgressionType()) {
 			case PREPARING:
 				return 120000 - current;
 			case START_PROGRESS:
@@ -252,7 +252,7 @@ public class DarkPoetaInstance extends GeneralInstanceHandler {
 	}
 
 	private void onStart(boolean manually) {
-		instanceReward.setInstanceScoreType(InstanceScoreType.START_PROGRESS);
+		instanceReward.setInstanceProgressionType(InstanceProgressionType.START_PROGRESS);
 		startTime = System.currentTimeMillis();
 		sendPacket(null, 0);
 		if (!manually)
@@ -286,7 +286,7 @@ public class DarkPoetaInstance extends GeneralInstanceHandler {
 		super.onInstanceCreate(instance);
 		excludedNpcs.addAll(Arrays.asList(700439, 700440, 700441, 700442, 700443, 700444, 700445, 700446, 700447, 281178));
 		instanceReward = new DarkPoetaReward(mapId, instanceId);
-		instanceReward.setInstanceScoreType(InstanceScoreType.PREPARING);
+		instanceReward.setInstanceProgressionType(InstanceProgressionType.PREPARING);
 		startTime = System.currentTimeMillis();
 		instanceTimer = ThreadPoolManager.getInstance().schedule(() -> onStart(false), 121000);
 	}
@@ -305,7 +305,7 @@ public class DarkPoetaInstance extends GeneralInstanceHandler {
 
 	@Override
 	public void onExitInstance(Player player) {
-		if (instanceReward.getInstanceScoreType().isEndProgress())
+		if (instanceReward.getInstanceProgressionType().isEndProgress())
 			TeleportService.moveToInstanceExit(player, mapId, player.getRace());
 	}
 

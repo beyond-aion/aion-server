@@ -2670,10 +2670,10 @@
 		</staticdoor>
 	</world>
 	<world world="301310000">
-		<staticdoor doorid="1" x="248.913757" y="179.707291" z="79.8473053" mesh="idldf5_fortress_re_door.cga" state="0x0">
+		<staticdoor keyid="1" doorid="1" x="248.913757" y="179.707291" z="79.8473053" mesh="idldf5_fortress_re_door.cga" state="0x0">
 			<box x1="246.210358" y1="177.06842" z1="79.73147" x2="251.65419" y2="182.3545" z2="86.98319" />
 		</staticdoor>
-		<staticdoor doorid="99" x="280.384979" y="338.575317" z="79.8601" mesh="idldf5_fortress_re_door.cga" state="0x0">
+		<staticdoor keyid="1" doorid="99" x="280.384979" y="338.575317" z="79.8601" mesh="idldf5_fortress_re_door.cga" state="0x0">
 			<box x1="277.644531" y1="335.9281" z1="79.74426" x2="283.088348" y2="341.214172" z2="86.99599" />
 		</staticdoor>
 	</world>

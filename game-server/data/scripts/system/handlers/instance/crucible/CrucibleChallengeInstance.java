@@ -12,7 +12,7 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.instance.InstanceScoreType;
+import com.aionemu.gameserver.model.instance.InstanceProgressionType;
 import com.aionemu.gameserver.model.instance.StageType;
 import com.aionemu.gameserver.model.instance.playerreward.CruciblePlayerReward;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
@@ -388,7 +388,7 @@ public class CrucibleChallengeInstance extends CrucibleInstance {
 			playerReward.setRewarded();
 			ItemService.addItem(player, 186000130, (int) reward);
 			playerReward.setInsignia((int) reward);
-			instanceReward.setInstanceScoreType(InstanceScoreType.END_PROGRESS);
+			instanceReward.setInstanceProgressionType(InstanceProgressionType.END_PROGRESS);
 		}
 		PacketSendUtility.sendPacket(player, new SM_INSTANCE_SCORE(new CrucibleScoreInfo(instanceReward), instanceReward));
 	}

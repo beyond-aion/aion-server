@@ -9,7 +9,7 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.StaticDoor;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.instance.InstanceScoreType;
+import com.aionemu.gameserver.model.instance.InstanceProgressionType;
 import com.aionemu.gameserver.model.instance.instancereward.InstanceReward;
 import com.aionemu.gameserver.model.instance.instancereward.PvPArenaReward;
 import com.aionemu.gameserver.model.instance.playerreward.PvPArenaPlayerReward;
@@ -107,7 +107,7 @@ public class PvPArenaInstance extends GeneralInstanceHandler {
 			}
 		}
 		if (instanceReward.hasCapPoints()) {
-			instanceReward.setInstanceScoreType(InstanceScoreType.END_PROGRESS);
+			instanceReward.setInstanceProgressionType(InstanceProgressionType.END_PROGRESS);
 			reward();
 		}
 		sendPacket();
@@ -247,7 +247,7 @@ public class PvPArenaInstance extends GeneralInstanceHandler {
 	public void onInstanceCreate(WorldMapInstance instance) {
 		super.onInstanceCreate(instance);
 		instanceReward = new PvPArenaReward(mapId, instanceId, instance);
-		instanceReward.setInstanceScoreType(InstanceScoreType.PREPARING);
+		instanceReward.setInstanceProgressionType(InstanceProgressionType.PREPARING);
 		spawnRings();
 		if (!instanceReward.isSoloArena()) {
 			spawnRndRelics(0);
@@ -261,7 +261,7 @@ public class PvPArenaInstance extends GeneralInstanceHandler {
 				if (!isInstanceDestroyed && !instanceReward.isRewarded() && canStart()) {
 					openDoors();
 					sendPacket(new SM_SYSTEM_MESSAGE(1401058));
-					instanceReward.setInstanceScoreType(InstanceScoreType.START_PROGRESS);
+					instanceReward.setInstanceProgressionType(InstanceProgressionType.START_PROGRESS);
 					sendPacket();
 					ThreadPoolManager.getInstance().schedule(new Runnable() {
 
@@ -290,7 +290,7 @@ public class PvPArenaInstance extends GeneralInstanceHandler {
 												public void run() {
 													// end
 													if (!isInstanceDestroyed && !instanceReward.isRewarded()) {
-														instanceReward.setInstanceScoreType(InstanceScoreType.END_PROGRESS);
+														instanceReward.setInstanceProgressionType(InstanceProgressionType.END_PROGRESS);
 														reward();
 														sendPacket();
 													}
@@ -314,7 +314,7 @@ public class PvPArenaInstance extends GeneralInstanceHandler {
 	private boolean canStart() {
 		if (instance.getPlayersInside().size() < 2) {
 			sendPacket(new SM_SYSTEM_MESSAGE(1401303));
-			instanceReward.setInstanceScoreType(InstanceScoreType.END_PROGRESS);
+			instanceReward.setInstanceProgressionType(InstanceProgressionType.END_PROGRESS);
 			reward();
 			sendPacket();
 			return false;

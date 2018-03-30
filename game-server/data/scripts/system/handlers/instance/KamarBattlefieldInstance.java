@@ -16,7 +16,7 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.StaticDoor;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.instance.InstanceScoreType;
+import com.aionemu.gameserver.model.instance.InstanceProgressionType;
 import com.aionemu.gameserver.model.instance.instancereward.InstanceReward;
 import com.aionemu.gameserver.model.instance.instancereward.KamarReward;
 import com.aionemu.gameserver.model.instance.playerreward.KamarPlayerReward;
@@ -94,7 +94,7 @@ public class KamarBattlefieldInstance extends GeneralInstanceHandler {
 
 			@Override
 			public void run() {
-				kamarReward.setInstanceScoreType(InstanceScoreType.PREPARING);
+				kamarReward.setInstanceProgressionType(InstanceProgressionType.PREPARING);
 				sendPacket(new SM_INSTANCE_SCORE(new KamarBattlefieldScoreInfo(kamarReward, 6, 0), kamarReward, getTime()));
 				// teleport secondary group
 				for (Player player : instance.getPlayersInside()) {
@@ -108,7 +108,7 @@ public class KamarBattlefieldInstance extends GeneralInstanceHandler {
 					@Override
 					public void run() {
 						openFirstDoors();
-						kamarReward.setInstanceScoreType(InstanceScoreType.START_PROGRESS);
+						kamarReward.setInstanceProgressionType(InstanceProgressionType.START_PROGRESS);
 						sendPacket(new SM_INSTANCE_SCORE(new KamarBattlefieldScoreInfo(kamarReward, 6, 0), kamarReward, getTime()));
 						startTimeCheck();
 						instanceTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
@@ -232,7 +232,7 @@ public class KamarBattlefieldInstance extends GeneralInstanceHandler {
 		if (kamarReward.isRewarded()) {
 			return;
 		}
-		kamarReward.setInstanceScoreType(InstanceScoreType.END_PROGRESS);
+		kamarReward.setInstanceProgressionType(InstanceProgressionType.END_PROGRESS);
 		final Race winningrace = kamarReward.getWinningRace();
 		instance.forEachPlayer(new Consumer<Player>() {
 
@@ -431,7 +431,7 @@ public class KamarBattlefieldInstance extends GeneralInstanceHandler {
 	public void onInstanceCreate(WorldMapInstance instance) {
 		super.onInstanceCreate(instance);
 		kamarReward = new KamarReward(mapId, instanceId);
-		kamarReward.setInstanceScoreType(InstanceScoreType.REINFORCE_MEMBER);
+		kamarReward.setInstanceProgressionType(InstanceProgressionType.REINFORCE_MEMBER);
 		doors = instance.getDoors();
 		startInstanceTask();
 	}

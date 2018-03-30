@@ -3,6 +3,7 @@ package admincommands;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.services.instance.periodic.DredgionService;
 import com.aionemu.gameserver.services.instance.periodic.EngulfedOphidianBridgeService;
+import com.aionemu.gameserver.services.instance.periodic.IdgelDomeService;
 import com.aionemu.gameserver.services.instance.periodic.IronWallFrontService;
 import com.aionemu.gameserver.services.instance.periodic.KamarBattlefieldService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -60,6 +61,13 @@ public class Instance extends AdminCommand {
 					DredgionService.getInstance().startRegistration();
 					PacketSendUtility.sendMessage(admin, instanceName + " started successfully.");
 				}
+			} else if (instanceName.equalsIgnoreCase("idgel")) {
+				if (IdgelDomeService.getInstance().isRegisterAvailable()) {
+					PacketSendUtility.sendMessage(admin, instanceName + " is already started, can't start twice.");
+				} else {
+					IdgelDomeService.getInstance().startRegistration();
+					PacketSendUtility.sendMessage(admin, instanceName + " started successfully.");
+				}
 			} else if (instanceName.equalsIgnoreCase("ophidian_bridge")) {
 				if (EngulfedOphidianBridgeService.getInstance().isRegisterAvailable()) {
 					PacketSendUtility.sendMessage(admin, instanceName + " is already started, can't start twice.");
@@ -89,6 +97,13 @@ public class Instance extends AdminCommand {
 					PacketSendUtility.sendMessage(admin, instanceName + " isn't started, can't end.");
 				} else {
 					KamarBattlefieldService.getInstance().stopRegistration();
+					PacketSendUtility.sendMessage(admin, instanceName + " stopped successfully.");
+				}
+			} else if (instanceName.equalsIgnoreCase("idgel")) {
+				if (IdgelDomeService.getInstance().isRegisterAvailable()) {
+					PacketSendUtility.sendMessage(admin, instanceName + " isn't started, can't end.");
+				} else {
+					IdgelDomeService.getInstance().stopRegistration();
 					PacketSendUtility.sendMessage(admin, instanceName + " stopped successfully.");
 				}
 			} else if (instanceName.equalsIgnoreCase("dredgion")) {

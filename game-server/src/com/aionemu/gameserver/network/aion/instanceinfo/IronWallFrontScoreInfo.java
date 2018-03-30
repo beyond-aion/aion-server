@@ -3,7 +3,7 @@ package com.aionemu.gameserver.network.aion.instanceinfo;
 import java.nio.ByteBuffer;
 
 import com.aionemu.gameserver.model.Race;
-import com.aionemu.gameserver.model.instance.InstanceScoreType;
+import com.aionemu.gameserver.model.instance.InstanceProgressionType;
 import com.aionemu.gameserver.model.instance.instancereward.IronWallFrontReward;
 import com.aionemu.gameserver.model.instance.playerreward.IronWallFrontPlayerReward;
 
@@ -15,13 +15,13 @@ public class IronWallFrontScoreInfo extends InstanceScoreInfo {
 	private final IronWallFrontReward ironWallFrontReward;
 	private final int type;
 	private final int objectId;
-	private final InstanceScoreType instanceScoreType;
+	private final InstanceProgressionType instanceScoreType;
 
 	public IronWallFrontScoreInfo(IronWallFrontReward ironWallFrontReward, int type, int objectId) {
 		this.ironWallFrontReward = ironWallFrontReward;
 		this.type = type;
 		this.objectId = objectId;
-		this.instanceScoreType = ironWallFrontReward.getInstanceScoreType();
+		this.instanceScoreType = ironWallFrontReward.getInstanceProgressionType();
 	}
 
 	@Override
@@ -98,13 +98,13 @@ public class IronWallFrontScoreInfo extends InstanceScoreInfo {
 				writeD(buf, ironWallFrontReward.getElyosKills().intValue());
 				writeD(buf, ironWallFrontReward.getElyosPoints().intValue());
 				writeD(buf, 0); // asmodians 0
-				writeD(buf, instanceScoreType.isReinforsing() ? 1 : 0xFFFF);// 1 | 65535 - 0xFFFF | 0
+				writeD(buf, instanceScoreType.isReinforcing() ? 1 : 0xFFFF);// 1 | 65535 - 0xFFFF | 0
 				// asmodians reward
 				writeC(buf, 0);
 				writeD(buf, ironWallFrontReward.getAsmodiansKills().intValue());
 				writeD(buf, ironWallFrontReward.getAsmodiansPoint().intValue());
 				writeD(buf, 1); // elyos
-				writeD(buf, instanceScoreType.isReinforsing() ? 1 : 0xFFFF); // 1 | 65535 - 0xFFFF | 0
+				writeD(buf, instanceScoreType.isReinforcing() ? 1 : 0xFFFF); // 1 | 65535 - 0xFFFF | 0
 				break;
 			case 10:
 				writeC(buf, 0);

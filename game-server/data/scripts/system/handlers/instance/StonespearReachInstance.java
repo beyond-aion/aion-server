@@ -11,7 +11,7 @@ import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.instance.InstanceScoreType;
+import com.aionemu.gameserver.model.instance.InstanceProgressionType;
 import com.aionemu.gameserver.model.instance.instancereward.LegionDominionReward;
 import com.aionemu.gameserver.model.team.legion.Legion;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
@@ -53,7 +53,7 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 	public void onInstanceCreate(WorldMapInstance instance) {
 		super.onInstanceCreate(instance);
 		reward = new LegionDominionReward(mapId, instanceId);
-		reward.setInstanceScoreType(InstanceScoreType.PREPARING);
+		reward.setInstanceProgressionType(InstanceProgressionType.PREPARING);
 		SpawnTemplate temp = SpawnEngine.newSingleTimeSpawn(mapId, 833284, 231.14f, 264.399f, 96.23f, (byte) 1);
 		temp.setStaticId(14);
 		SpawnEngine.spawnObject(temp, instanceId);
@@ -62,7 +62,7 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 			startTime = System.currentTimeMillis();
 			timer = ThreadPoolManager.getInstance().schedule(() -> {
 				startTime = System.currentTimeMillis();
-				reward.setInstanceScoreType(InstanceScoreType.START_PROGRESS);
+				reward.setInstanceProgressionType(InstanceProgressionType.START_PROGRESS);
 				sendPacket(null, 0);
 				startInstance();
 				startFailTask();
@@ -240,7 +240,7 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 		}
 
 		if (!reward.isRewarded()) {
-			reward.setInstanceScoreType(InstanceScoreType.END_PROGRESS);
+			reward.setInstanceProgressionType(InstanceProgressionType.END_PROGRESS);
 			reward.setRank(rank);
 			despawnAll();
 			Long endTime = System.currentTimeMillis();
@@ -851,14 +851,14 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 
 	@Override
 	public synchronized boolean canEnter(Player p) {
-		if (reward.getInstanceScoreType() == InstanceScoreType.END_PROGRESS) {
+		if (reward.getInstanceProgressionType() == InstanceProgressionType.END_PROGRESS) {
 			PacketSendUtility.sendPacket(p, new SM_SYSTEM_MESSAGE(1402947));
 			return false;
 		}
 		if (instanceLegion != null) {
 			if (p.getLegion() != null) {
 				if (p.getLegion().getCurrentLegionDominion() > 0) {
-					if (reward.getInstanceScoreType() == InstanceScoreType.PREPARING) {
+					if (reward.getInstanceProgressionType() == InstanceProgressionType.PREPARING) {
 						if (p.getLegion().getLegionId() == instanceLegion.getLegionId()) {
 							if (allowedPlayers.size() < 12 || allowedPlayers.contains(p.getObjectId())) {
 								return true;

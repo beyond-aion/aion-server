@@ -3,19 +3,22 @@ package ai.instance.idgelDome;
 import java.util.concurrent.Future;
 
 import com.aionemu.commons.utils.Rnd;
+import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.NpcAI;
+import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.skillengine.SkillEngine;
+import com.aionemu.gameserver.skillengine.model.Effect;
+import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
- * @author Ritsu
+ * @author Ritsu, Estrayl
  */
 @AIName("unstable_id_energy")
 public class UnstableIdeEnergyAI extends NpcAI {
 
-	private Future<?> skillTask = null;
+	private Future<?> skillTask;
 
 	public UnstableIdeEnergyAI(Npc owner) {
 		super(owner);
@@ -24,32 +27,30 @@ public class UnstableIdeEnergyAI extends NpcAI {
 	@Override
 	protected void handleSpawned() {
 		super.handleSpawned();
-		startTask();
+		scheduleSkill(Rnd.get(10000, 30000));
 	}
 
-	private void startTask() {
-		skillTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
-
-			@Override
-			public void run() {
-				if (isDead()) {
-					cancelTask();
-				} else {
-					SkillEngine.getInstance().getSkill(getOwner(), 21559, 65, getOwner()).useWithoutPropSkill();
-				}
-			}
-		}, Rnd.get(10000, 30000), Rnd.get(10000, 30000));
+	@Override
+	public int modifyDamage(Creature attacker, int damage, Effect effect) {
+		return 0;
 	}
 
-	private void cancelTask() {
-		if (skillTask != null && !skillTask.isDone()) {
-			skillTask.cancel(true);
+	private void scheduleSkill(int delay) {
+		skillTask = ThreadPoolManager.getInstance().schedule(() -> AIActions.useSkill(this, 21559), delay);
+	}
+
+	@Override
+	public void onEndUseSkill(SkillTemplate skillTemplate) {
+		switch (skillTemplate.getSkillId()) {
+			case 21559:
+				scheduleSkill(Rnd.get(10000, 30000));
+				break;
 		}
 	}
 
 	@Override
 	protected void handleDespawned() {
-		cancelTask();
+		skillTask.cancel(true);
 		super.handleDespawned();
 	}
 }

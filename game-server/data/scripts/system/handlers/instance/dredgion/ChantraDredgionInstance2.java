@@ -6,7 +6,7 @@ import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.actions.NpcActions;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.instance.InstanceScoreType;
+import com.aionemu.gameserver.model.instance.InstanceProgressionType;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 
 /**
@@ -63,7 +63,7 @@ public class ChantraDredgionInstance2 extends DredgionInstance2 {
 
 	@Override
 	public void onDie(Npc npc) {
-		if (dredgionReward.getInstanceScoreType() != InstanceScoreType.START_PROGRESS) {
+		if (dredgionReward.getInstanceProgressionType() != InstanceProgressionType.START_PROGRESS) {
 			return;
 		}
 		switch (npc.getNpcId()) {

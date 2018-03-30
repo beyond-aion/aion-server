@@ -1,6 +1,6 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
-import com.aionemu.gameserver.model.instance.InstanceScoreType;
+import com.aionemu.gameserver.model.instance.InstanceProgressionType;
 import com.aionemu.gameserver.model.instance.instancereward.InstanceReward;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
@@ -14,7 +14,7 @@ public class SM_INSTANCE_SCORE extends AionServerPacket {
 
 	private int mapId;
 	private int instanceTime;
-	private InstanceScoreType instanceScoreType;
+	private InstanceProgressionType instanceScoreType;
 	private InstanceScoreInfo isi;
 
 	public SM_INSTANCE_SCORE(InstanceScoreInfo isi, InstanceReward<?> instanceReward) {
@@ -25,12 +25,12 @@ public class SM_INSTANCE_SCORE extends AionServerPacket {
 		this(isi, instanceReward, null, instanceTime);
 	}
 
-	public SM_INSTANCE_SCORE(InstanceScoreInfo isi, InstanceReward<?> instanceReward, InstanceScoreType instanceScoreType) {
+	public SM_INSTANCE_SCORE(InstanceScoreInfo isi, InstanceReward<?> instanceReward, InstanceProgressionType instanceScoreType) {
 		this(isi, instanceReward, instanceScoreType, 0);
 	}
 
-	private SM_INSTANCE_SCORE(InstanceScoreInfo isi, InstanceReward<?> instanceReward, InstanceScoreType instanceScoreType, int instanceTime) {
-		this.instanceScoreType = instanceScoreType != null ? instanceScoreType : instanceReward.getInstanceScoreType();
+	private SM_INSTANCE_SCORE(InstanceScoreInfo isi, InstanceReward<?> instanceReward, InstanceProgressionType instanceScoreType, int instanceTime) {
+		this.instanceScoreType = instanceScoreType != null ? instanceScoreType : instanceReward.getInstanceProgressionType();
 		this.mapId = instanceReward.getMapId();
 		this.instanceTime = instanceTime;
 		this.isi = isi;

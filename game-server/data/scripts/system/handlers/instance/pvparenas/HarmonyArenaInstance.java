@@ -13,7 +13,7 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.StaticDoor;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.Rates;
-import com.aionemu.gameserver.model.instance.InstanceScoreType;
+import com.aionemu.gameserver.model.instance.InstanceProgressionType;
 import com.aionemu.gameserver.model.instance.instancereward.HarmonyArenaReward;
 import com.aionemu.gameserver.model.instance.instancereward.InstanceReward;
 import com.aionemu.gameserver.model.instance.playerreward.HarmonyGroupReward;
@@ -135,7 +135,7 @@ public class HarmonyArenaInstance extends GeneralInstanceHandler {
 			}
 		}
 		if (instanceReward.hasCapPoints()) {
-			instanceReward.setInstanceScoreType(InstanceScoreType.END_PROGRESS);
+			instanceReward.setInstanceProgressionType(InstanceProgressionType.END_PROGRESS);
 			reward();
 			instanceReward.sendPacket(5, null);
 		}
@@ -181,7 +181,7 @@ public class HarmonyArenaInstance extends GeneralInstanceHandler {
 	public void onInstanceCreate(final WorldMapInstance instance) {
 		super.onInstanceCreate(instance);
 		instanceReward = new HarmonyArenaReward(mapId, instanceId, instance);
-		instanceReward.setInstanceScoreType(InstanceScoreType.PREPARING);
+		instanceReward.setInstanceProgressionType(InstanceProgressionType.PREPARING);
 		instanceReward.setInstanceStartTime();
 		spawnRings();
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
@@ -196,7 +196,7 @@ public class HarmonyArenaInstance extends GeneralInstanceHandler {
 						}
 					}
 					sendPacket(new SM_SYSTEM_MESSAGE(1401058));
-					instanceReward.setInstanceScoreType(InstanceScoreType.START_PROGRESS);
+					instanceReward.setInstanceProgressionType(InstanceProgressionType.START_PROGRESS);
 					instanceReward.sendPacket(10, null);
 					instanceReward.sendPacket(2, null);
 					ThreadPoolManager.getInstance().schedule(new Runnable() {
@@ -228,7 +228,7 @@ public class HarmonyArenaInstance extends GeneralInstanceHandler {
 												public void run() {
 													// end
 													if (!isInstanceDestroyed && !instanceReward.isRewarded()) {
-														instanceReward.setInstanceScoreType(InstanceScoreType.END_PROGRESS);
+														instanceReward.setInstanceProgressionType(InstanceProgressionType.END_PROGRESS);
 														reward();
 														instanceReward.sendPacket(5, null);
 													}
@@ -256,7 +256,7 @@ public class HarmonyArenaInstance extends GeneralInstanceHandler {
 	private boolean canStart() {
 		if (instanceReward.getHarmonyGroupInside().size() < 2) {
 			sendPacket(new SM_SYSTEM_MESSAGE(1401303));
-			instanceReward.setInstanceScoreType(InstanceScoreType.END_PROGRESS);
+			instanceReward.setInstanceProgressionType(InstanceProgressionType.END_PROGRESS);
 			reward();
 			instanceReward.sendPacket(5, null);
 			return false;

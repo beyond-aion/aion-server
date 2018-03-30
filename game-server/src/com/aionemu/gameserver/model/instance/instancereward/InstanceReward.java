@@ -3,7 +3,7 @@ package com.aionemu.gameserver.model.instance.instancereward;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.aionemu.gameserver.model.instance.InstanceScoreType;
+import com.aionemu.gameserver.model.instance.InstanceProgressionType;
 import com.aionemu.gameserver.model.instance.playerreward.InstancePlayerReward;
 
 /**
@@ -14,7 +14,7 @@ public class InstanceReward<T extends InstancePlayerReward> {
 	protected final int mapId;
 	protected final int instanceId;
 	private final List<T> instanceRewards = new ArrayList<>();
-	private InstanceScoreType instanceScoreType = InstanceScoreType.START_PROGRESS;
+	private InstanceProgressionType instanceProgressionType = InstanceProgressionType.START_PROGRESS;
 
 	public InstanceReward(int mapId, int instanceId) {
 		this.mapId = mapId;
@@ -46,12 +46,12 @@ public class InstanceReward<T extends InstancePlayerReward> {
 		instanceRewards.add(reward);
 	}
 
-	public void setInstanceScoreType(InstanceScoreType instanceScoreType) {
-		this.instanceScoreType = instanceScoreType;
+	public void setInstanceProgressionType(InstanceProgressionType instanceProgressionType) {
+		this.instanceProgressionType = instanceProgressionType;
 	}
 
-	public InstanceScoreType getInstanceScoreType() {
-		return instanceScoreType;
+	public InstanceProgressionType getInstanceProgressionType() {
+		return instanceProgressionType;
 	}
 
 	public int getMapId() {
@@ -63,19 +63,19 @@ public class InstanceReward<T extends InstancePlayerReward> {
 	}
 
 	public boolean isRewarded() {
-		return instanceScoreType.isEndProgress();
+		return instanceProgressionType.isEndProgress();
 	}
 
 	public boolean isReinforcing() {
-		return instanceScoreType.isReinforsing();
+		return instanceProgressionType.isReinforcing();
 	}
 
 	public boolean isPreparing() {
-		return instanceScoreType.isPreparing();
+		return instanceProgressionType.isPreparing();
 	}
 
 	public boolean isStartProgress() {
-		return instanceScoreType.isStartProgress();
+		return instanceProgressionType.isStartProgress();
 	}
 
 	public void clear() {

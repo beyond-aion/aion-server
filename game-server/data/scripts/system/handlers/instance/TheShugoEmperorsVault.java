@@ -12,7 +12,7 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.StaticDoor;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.instance.InstanceScoreType;
+import com.aionemu.gameserver.model.instance.InstanceProgressionType;
 import com.aionemu.gameserver.model.instance.instancereward.InstanceReward;
 import com.aionemu.gameserver.model.instance.instancereward.NormalReward;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
@@ -50,7 +50,7 @@ public class TheShugoEmperorsVault extends GeneralInstanceHandler {
 		super.onInstanceCreate(instance);
 		
 		instanceReward = new NormalReward(mapId, instanceId);
-		instanceReward.setInstanceScoreType(InstanceScoreType.PREPARING);
+		instanceReward.setInstanceProgressionType(InstanceProgressionType.PREPARING);
 		doors = instance.getDoors();
 		spawnMorphShugos();
 		if (timer == null) {
@@ -58,7 +58,7 @@ public class TheShugoEmperorsVault extends GeneralInstanceHandler {
 			timer = ThreadPoolManager.getInstance().schedule(() -> {
 				if (started.compareAndSet(false, true)) {
 					startTime = System.currentTimeMillis();
-					instanceReward.setInstanceScoreType(InstanceScoreType.START_PROGRESS);
+					instanceReward.setInstanceProgressionType(InstanceProgressionType.START_PROGRESS);
 					sendPacket(null, 0);
 					doors.get(430).setOpen(true);
 					startInstance();
@@ -76,7 +76,7 @@ public class TheShugoEmperorsVault extends GeneralInstanceHandler {
 					if (timer != null) {
                         timer.cancel(false);
 					}
-					instanceReward.setInstanceScoreType(InstanceScoreType.START_PROGRESS);
+					instanceReward.setInstanceProgressionType(InstanceProgressionType.START_PROGRESS);
 					startTime = System.currentTimeMillis();
 					sendPacket(null, 0);
 					startInstance();
@@ -329,7 +329,7 @@ public class TheShugoEmperorsVault extends GeneralInstanceHandler {
 	}
 
 	private void addPoints(Npc npc, int points) {
-    if (instanceReward.getInstanceScoreType().isStartProgress()) {
+    if (instanceReward.getInstanceProgressionType().isStartProgress()) {
         instanceReward.addPoints(points);
 			sendPacket(npc.getObjectTemplate().getL10n(), points);
     }
@@ -411,7 +411,7 @@ public class TheShugoEmperorsVault extends GeneralInstanceHandler {
 
 		if (!instanceReward.isRewarded()) {
 			despawnAll();
-			instanceReward.setInstanceScoreType(InstanceScoreType.END_PROGRESS);
+			instanceReward.setInstanceProgressionType(InstanceProgressionType.END_PROGRESS);
 			instanceReward.setRank(rank);
 			sendPacket(null, 0);
 			reward();
@@ -526,7 +526,7 @@ public class TheShugoEmperorsVault extends GeneralInstanceHandler {
 	
 	private int getTime() {
     long result = System.currentTimeMillis() - startTime;
-    if (instanceReward.getInstanceScoreType().isPreparing()) {
+    if (instanceReward.getInstanceProgressionType().isPreparing()) {
         return (int) (60000 - result);
     } else if (result < 480000) {
         return (int) (480000 - result);

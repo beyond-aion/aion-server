@@ -93,7 +93,7 @@ public abstract class AutoInstance extends AbstractLockManager implements AutoIn
 	protected boolean satisfyTime(SearchInstance searchInstance) {
 		if (instance != null) {
 			InstanceReward<?> instanceReward = instance.getInstanceHandler().getInstanceReward();
-			if ((instanceReward != null && instanceReward.getInstanceScoreType().isEndProgress())) {
+			if ((instanceReward != null && instanceReward.getInstanceProgressionType().isEndProgress())) {
 				return false;
 			}
 		}

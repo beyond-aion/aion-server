@@ -4,7 +4,7 @@ import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.instance.handlers.InstanceHandler;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.instance.InstanceScoreType;
+import com.aionemu.gameserver.model.instance.InstanceProgressionType;
 import com.aionemu.gameserver.model.instance.instancereward.InstanceReward;
 
 import ai.AggressiveNpcAI;
@@ -27,7 +27,7 @@ public class IDSweep_Shugos extends AggressiveNpcAI {
 		if (handler != null) {
 			reward = handler.getInstanceReward();
 			if (reward != null) {
-				if (reward.getInstanceScoreType() == InstanceScoreType.END_PROGRESS) {
+				if (reward.getInstanceProgressionType() == InstanceProgressionType.END_PROGRESS) {
 					getOwner().getController().delete();
 				}
 			}

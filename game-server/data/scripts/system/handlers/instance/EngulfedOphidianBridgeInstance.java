@@ -15,7 +15,7 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.StaticDoor;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.instance.InstanceScoreType;
+import com.aionemu.gameserver.model.instance.InstanceProgressionType;
 import com.aionemu.gameserver.model.instance.instancereward.EngulfedOphidianBridgeReward;
 import com.aionemu.gameserver.model.instance.instancereward.InstanceReward;
 import com.aionemu.gameserver.model.instance.playerreward.EngulfedOphidianBridgePlayerReward;
@@ -75,7 +75,7 @@ public class EngulfedOphidianBridgeInstance extends GeneralInstanceHandler {
 			@Override
 			public void run() {
 				openFirstDoors();
-				engulfedOBReward.setInstanceScoreType(InstanceScoreType.START_PROGRESS);
+				engulfedOBReward.setInstanceProgressionType(InstanceProgressionType.START_PROGRESS);
 				sendPacket(new SM_INSTANCE_SCORE(new EngulfedOphidianBridgeScoreInfo(engulfedOBReward, 6, 0), engulfedOBReward, getTime()));
 				startTimeCheck();
 			}
@@ -247,7 +247,7 @@ public class EngulfedOphidianBridgeInstance extends GeneralInstanceHandler {
 		if (engulfedOBReward.isRewarded()) {
 			return;
 		}
-		engulfedOBReward.setInstanceScoreType(InstanceScoreType.END_PROGRESS);
+		engulfedOBReward.setInstanceProgressionType(InstanceProgressionType.END_PROGRESS);
 		final Race winningrace = engulfedOBReward.getWinningRace();
 		instance.forEachPlayer(new Consumer<Player>() {
 
@@ -503,7 +503,7 @@ public class EngulfedOphidianBridgeInstance extends GeneralInstanceHandler {
 	public void onInstanceCreate(WorldMapInstance instance) {
 		super.onInstanceCreate(instance);
 		engulfedOBReward = new EngulfedOphidianBridgeReward(mapId, instanceId);
-		engulfedOBReward.setInstanceScoreType(InstanceScoreType.PREPARING);
+		engulfedOBReward.setInstanceProgressionType(InstanceProgressionType.PREPARING);
 		doors = instance.getDoors();
 		racePosition = engulfedOBReward.getRacePosition();
 		spawn((racePosition == 0 ? 802025 : 802026), 753.31775f, 570.89905f, 577.3619f, (byte) 36);

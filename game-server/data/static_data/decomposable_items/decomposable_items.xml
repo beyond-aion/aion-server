@@ -26219,7 +26219,14 @@
 			<item id="188950017" /><!-- Special Courier Pass (Abyss Eternal/Lv. 61-65) -->
 		</items>
 	</decomposable>
-	<decomposable item_id="188053031" /><!-- Idgel Dome Consolation Prize -->
+	<decomposable item_id="188053031"><!-- Idgel Dome Consolation Prize -->
+		<items>
+			<item id="152012598" /><!-- Heart of Destruction -->
+		</items>
+		<items>
+			<item id="152012599" /><!-- Heart of Protection -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188053032"><!-- Idgel Dome Tribute Box -->
 		<items>
 			<random_item type="MANASTONE_LEGEND_GRADE_60" />

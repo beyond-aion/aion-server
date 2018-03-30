@@ -19,7 +19,7 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.StaticDoor;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
-import com.aionemu.gameserver.model.instance.InstanceScoreType;
+import com.aionemu.gameserver.model.instance.InstanceProgressionType;
 import com.aionemu.gameserver.model.instance.instancereward.NormalReward;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.network.aion.instanceinfo.NormalScoreInfo;
@@ -186,7 +186,7 @@ public class EternalBastionInstance extends GeneralInstanceHandler {
 	}
 
 	private void addPoints(Npc npc, int points) {
-		if (instanceReward.getInstanceScoreType().isStartProgress()) {
+		if (instanceReward.getInstanceProgressionType().isStartProgress()) {
 			instanceReward.addPoints(points);
 			sendPacket(npc.getObjectTemplate().getL10n(), points);
 		}
@@ -252,7 +252,7 @@ public class EternalBastionInstance extends GeneralInstanceHandler {
 			// TODO
 			rank = 8;
 		}
-		instanceReward.setInstanceScoreType(InstanceScoreType.END_PROGRESS);
+		instanceReward.setInstanceProgressionType(InstanceProgressionType.END_PROGRESS);
 		instanceReward.setRank(rank);
 		for (Npc npc : instance.getNpcs()) {
 			npc.getController().delete();
@@ -415,7 +415,7 @@ public class EternalBastionInstance extends GeneralInstanceHandler {
 	public void onInstanceCreate(WorldMapInstance instance) {
 		super.onInstanceCreate(instance);
 		instanceReward = new NormalReward(mapId, instanceId);
-		instanceReward.setInstanceScoreType(InstanceScoreType.PREPARING);
+		instanceReward.setInstanceProgressionType(InstanceProgressionType.PREPARING);
 		instanceReward.setBasicAp(20000);
 		instanceReward.setPoints(20000);
 		doors = instance.getDoors();
@@ -429,7 +429,7 @@ public class EternalBastionInstance extends GeneralInstanceHandler {
 					rndSpawn((Npc) spawn(231168, 652.1909f, 461.2643f, 225.09502f, (byte) 80), 233313, 2);
 					rndSpawn((Npc) spawn(231169, 581.7766f, 377.6639f, 225.5279f, (byte) 110), 233315, 2);
 					rndSpawn((Npc) spawn(231170, 800.51465f, 469.41602f, 228.58566f, (byte) 90), 233313, 2);
-					instanceReward.setInstanceScoreType(InstanceScoreType.START_PROGRESS);
+					instanceReward.setInstanceProgressionType(InstanceProgressionType.START_PROGRESS);
 					sendPacket(null, 0);
 					openDoors();
 					startAssaultsPodsTask();
@@ -722,7 +722,7 @@ public class EternalBastionInstance extends GeneralInstanceHandler {
 
 	@Override
 	public void onExitInstance(Player player) {
-		if (instanceReward.getInstanceScoreType().isEndProgress()) {
+		if (instanceReward.getInstanceProgressionType().isEndProgress()) {
 			TeleportService.moveToInstanceExit(player, mapId, player.getRace());
 		}
 	}

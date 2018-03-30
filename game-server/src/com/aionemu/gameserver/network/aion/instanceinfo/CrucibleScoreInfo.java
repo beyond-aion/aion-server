@@ -2,7 +2,7 @@ package com.aionemu.gameserver.network.aion.instanceinfo;
 
 import java.nio.ByteBuffer;
 
-import com.aionemu.gameserver.model.instance.InstanceScoreType;
+import com.aionemu.gameserver.model.instance.InstanceProgressionType;
 import com.aionemu.gameserver.model.instance.instancereward.InstanceReward;
 import com.aionemu.gameserver.model.instance.playerreward.CruciblePlayerReward;
 
@@ -12,13 +12,13 @@ import com.aionemu.gameserver.model.instance.playerreward.CruciblePlayerReward;
 public class CrucibleScoreInfo extends InstanceScoreInfo {
 
 	private final InstanceReward<CruciblePlayerReward> instanceReward;
-	private final InstanceScoreType instanceScoreType;
+	private final InstanceProgressionType instanceScoreType;
 
 	public CrucibleScoreInfo(InstanceReward<CruciblePlayerReward> instanceReward) {
-		this(instanceReward, instanceReward.getInstanceScoreType());
+		this(instanceReward, instanceReward.getInstanceProgressionType());
 	}
 
-	public CrucibleScoreInfo(InstanceReward<CruciblePlayerReward> instanceReward, InstanceScoreType instanceScoreType) {
+	public CrucibleScoreInfo(InstanceReward<CruciblePlayerReward> instanceReward, InstanceProgressionType instanceScoreType) {
 		this.instanceScoreType = instanceScoreType;
 		this.instanceReward = instanceReward;
 	}
