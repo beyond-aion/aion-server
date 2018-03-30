@@ -7793,6 +7793,11 @@
 		<spawn npc_id="700620" respawn_time="295">
 			<spot x="460.1300" y="2027.9900" z="287.4879" static_id="616"/>
 		</spawn>
+		<!-- Treasure Box -->
+		<spawn npc_id="217099" respawn_time="1800">
+			<spot x="966.3" y="1035.5" z="425.2301" h="73"/>
+			<spot x="174.8" y="238.6" z="645.281" h="69"/>
+		</spawn>
 		<!-- Tricorn Food -->
 		<spawn npc_id="700764" respawn_time="295">
 			<spot x="2703.68" y="1985.8" z="190.853"/>

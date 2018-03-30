@@ -252,6 +252,36 @@
 			<drop item_id="115000825" chance="30" /><!-- Shipwreck Shield -->
 		</drop_group>
 	</npc_drop>
+	<!-- Inggison -->
+	<npc_drop npc_id="217099"><!-- Treasure Box -->
+		<drop_group race="PC_ALL"><!-- Quest item -->
+			<drop item_id="186000109" chance="100" /><!-- Old Weathered Seal -->
+		</drop_group>
+		<drop_group race="PC_ALL"><!-- Serum -->
+			<drop item_id="162000050" chance="65" min_amount="10" max_amount="15" /><!-- Major Recovery Serum -->
+		</drop_group>
+		<drop_group race="PC_ALL"><!-- Power Shard -->
+			<drop item_id="169000010" chance="65" min_amount="15" max_amount="25" /><!-- Superior Power Shard -->
+		</drop_group>
+		<drop_group race="ELYOS"><!-- Essencetapping Material -->
+			<drop item_id="169405035" chance="50" min_amount="5" max_amount="20" /><!-- Cretos' Activator -->
+		</drop_group>
+	</npc_drop>
+	<!-- Gelkmaros -->
+	<npc_drop npc_id="217075"><!-- Gathering Kit -->
+		<drop_group race="PC_ALL"><!-- Quest item -->
+			<drop item_id="186000109" chance="100" /><!-- Old Weathered Seal -->
+		</drop_group>
+		<drop_group race="PC_ALL"><!-- Serum -->
+			<drop item_id="162000050" chance="65" min_amount="10" max_amount="15" /><!-- Major Recovery Serum -->
+		</drop_group>
+		<drop_group race="PC_ALL"><!-- Power Shard -->
+			<drop item_id="169000010" chance="65" min_amount="15" max_amount="25" /><!-- Superior Power Shard -->
+		</drop_group>
+		<drop_group race="ASMODIANS"><!-- Essencetapping Material -->
+			<drop item_id="169405038" chance="50" min_amount="5" max_amount="20" /><!-- Lucia's Activator -->
+		</drop_group>
+	</npc_drop>
 	<!-- Instances -->
 	<!-- Abyssal Splinter -->
 	<!-- 701574 >> Unstable Abyssal Splinter -->
