@@ -87,8 +87,7 @@ public final class IntMap<T> implements Iterable<Entry<T>>, Cloneable {
 			}
 			clone.table = newTable;
 			return clone;
-		}
-		catch (CloneNotSupportedException ex) {
+		} catch (CloneNotSupportedException ignored) {
 		}
 		return null;
 	}
@@ -155,8 +154,7 @@ public final class IntMap<T> implements Iterable<Entry<T>>, Cloneable {
 						e.next = newTable[index];
 						newTable[index] = e;
 						e = next;
-					}
-					while (e != null);
+					} while (e != null);
 				}
 			}
 			table = newTable;
@@ -178,8 +176,7 @@ public final class IntMap<T> implements Iterable<Entry<T>>, Cloneable {
 				size--;
 				if (prev == e) {
 					table[index] = next;
-				}
-				else {
+				} else {
 					prev.next = next;
 				}
 				return (T) e.value;
@@ -231,7 +228,8 @@ public final class IntMap<T> implements Iterable<Entry<T>>, Cloneable {
 			return el < size;
 		}
 
-		public Entry next() {
+		@SuppressWarnings("unchecked")
+		public Entry<T> next() {
 			if (el >= size)
 				throw new IllegalStateException("No more elements!");
 
@@ -252,8 +250,7 @@ public final class IntMap<T> implements Iterable<Entry<T>>, Cloneable {
 				// either we exhausted the current entry list, or
 				// the entry was null. find another non-null entry.
 				cur = table[++idx];
-			}
-			while (cur == null);
+			} while (cur == null);
 			Entry e = cur;
 			cur = cur.next;
 			el++;
@@ -295,8 +292,7 @@ public final class IntMap<T> implements Iterable<Entry<T>>, Cloneable {
 				Entry<T> clone = (Entry<T>) super.clone();
 				clone.next = next != null ? next.clone() : null;
 				return clone;
-			}
-			catch (CloneNotSupportedException ex) {
+			} catch (CloneNotSupportedException ignored) {
 			}
 			return null;
 		}

@@ -79,7 +79,7 @@ public class AIEngine implements GameEngine {
 	}
 
 	public <T extends Creature> AbstractAI<? extends Creature> newAI(String name, T owner) {
-		AbstractAI<? extends Creature> aiInstance = null;
+		AbstractAI<? extends Creature> aiInstance;
 		if (name == null) {
 			aiInstance = new DummyAI<>(owner);
 		} else {
@@ -100,13 +100,13 @@ public class AIEngine implements GameEngine {
 		return aiInstance;
 	}
 
+	@SuppressWarnings("unchecked")
 	private <T> Constructor<T> findConstructor(Class<T> aiClass, Class<? extends Creature> ownerType) {
-		for (@SuppressWarnings("unchecked")
-		Constructor<T> constructor : (Constructor<T>[]) aiClass.getDeclaredConstructors()) {
+		for (Constructor<?> constructor : aiClass.getDeclaredConstructors()) {
 			if (constructor.getParameterCount() == 1) {
 				Class<?> constructorParamType = constructor.getParameterTypes()[0];
 				if (constructorParamType.isAssignableFrom(ownerType))
-					return constructor;
+					return (Constructor<T>) constructor;
 			}
 		}
 		return null;
@@ -148,7 +148,7 @@ public class AIEngine implements GameEngine {
 		return null;
 	}
 
-	public static final AIEngine getInstance() {
+	public static AIEngine getInstance() {
 		return SingletonHolder.instance;
 	}
 
@@ -159,7 +159,7 @@ public class AIEngine implements GameEngine {
 
 	private static class DummyAI<T extends Creature> extends AITemplate<T> {
 
-		DummyAI(T owner) {
+		private DummyAI(T owner) {
 			super(owner);
 		}
 	}
