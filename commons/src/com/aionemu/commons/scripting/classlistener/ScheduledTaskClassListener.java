@@ -1,7 +1,7 @@
 package com.aionemu.commons.scripting.classlistener;
 
 import java.lang.reflect.Modifier;
-import java.util.Map;
+import java.util.List;
 
 import org.quartz.JobDetail;
 
@@ -80,12 +80,9 @@ public class ScheduledTaskClassListener implements ClassListener {
 	}
 
 	protected void unScheduleClass(Class<? extends Runnable> clazz) {
-		Map<Runnable, JobDetail> map = getCronService().getRunnables();
-		for (Map.Entry<Runnable, JobDetail> entry : map.entrySet()) {
-			if (entry.getKey().getClass() == clazz) {
-				getCronService().cancel(entry.getValue());
-			}
-		}
+		List<JobDetail> jobs = getCronService().findJobs(clazz, false);
+		for (JobDetail job : jobs)
+			getCronService().cancel(job);
 	}
 
 	protected CronService getCronService() {

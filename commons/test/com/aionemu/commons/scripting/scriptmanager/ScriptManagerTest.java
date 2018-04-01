@@ -1,6 +1,7 @@
 package com.aionemu.commons.scripting.scriptmanager;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.lang.reflect.Constructor;
@@ -31,13 +32,13 @@ public class ScriptManagerTest {
 	@BeforeClass
 	public static void initCronService() throws Exception {
 		((Logger) LoggerFactory.getLogger("org.quartz")).setLevel(Level.OFF);
-		Constructor<CronService> constructor = CronService.class.getDeclaredConstructor(new Class[] { Class.class, TimeZone.class });
+		Constructor<CronService> constructor = CronService.class.getDeclaredConstructor(Class.class, TimeZone.class);
 		constructor.setAccessible(true);
 		cronService = constructor.newInstance(CurrentThreadRunnableRunner.class, null);
 	}
 
 	@Test
-	public void testOnClassLoadAndUnload() throws Exception {
+	public void testOnClassLoadAndUnload() {
 		ScriptManager sm = new ScriptManager();
 		sm.setGlobalClassListener(new OnClassLoadUnloadListener());
 		sm.loadDirectory(new File(FILE_TEST_DATA_DIR));
@@ -48,17 +49,17 @@ public class ScriptManagerTest {
 	}
 
 	@Test
-	public void testScheduledAnnotation() throws Exception {
+	public void testScheduledAnnotation() {
 		ScriptManager sm = new ScriptManager();
 		sm.setGlobalClassListener(new ScheduledTaskClassListenerTestAdapter(cronService));
 		sm.loadDirectory(new File(FILE_TEST_DATA_DIR));
-		assertEquals(cronService.getRunnables().size(), 1);
+		assertEquals(cronService.findJobs(Runnable.class, true).size(), 1);
 		sm.shutdown();
-		assertEquals(cronService.getRunnables().size(), 0);
+		assertEquals(cronService.findJobs(Runnable.class, true).size(), 0);
 	}
 
 	@AfterClass
-	public static void afterTest() throws Exception {
+	public static void afterTest() {
 		cronService.shutdown();
 	}
 }

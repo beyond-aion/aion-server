@@ -15,7 +15,7 @@ public class SM_INFLUENCE_RATIO extends AionServerPacket {
 	protected void writeImpl(AionConnection con) {
 		Influence inf = Influence.getInstance();
 
-		writeD(SiegeService.getInstance().getSecondsBeforeHourEnd());
+		writeD(SiegeService.getInstance().getSecondsUntilNextFortressState());
 		writeF(inf.getElyosInfluenceRate());
 		writeF(inf.getAsmodianInfluenceRate());
 		writeF(inf.getBalaurInfluenceRate());

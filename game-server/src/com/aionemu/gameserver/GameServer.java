@@ -241,7 +241,7 @@ public class GameServer {
 		// This is loading only siege location data, no siege schedule or spawns
 		ConsoleUtil.printSection("Location Data");
 		BaseService.getInstance();
-		SiegeService.getInstance().initSiegeLocations();
+		SiegeService.getInstance();
 		MonsterRaidService.getInstance().initMonsterRaidLocations();
 		// DAOManager.getDAO(SiegeMercenariesDAO.class).loadActiveMercenaries();
 		VortexService.getInstance().initVortexLocations();

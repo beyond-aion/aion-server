@@ -17,18 +17,17 @@ import com.aionemu.commons.utils.xml.JAXBUtil;
 /**
  * @author SoulKeeper, Source
  * @modified Estrayl
- *           TODO: Remove code redundancy
  */
 @XmlRootElement(name = "siege_schedule")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class SiegeSchedule {
+public class SiegeSchedules {
 
 	@XmlElement(name = "fortress", required = true)
 	private List<Fortress> fortressesList;
 	@XmlElement(name = "agent_fight", required = true)
 	private List<AgentFight> agentFights;
 
-	public List<Fortress> getFortressesList() {
+	public List<Fortress> getFortresses() {
 		return fortressesList;
 	}
 
@@ -37,8 +36,7 @@ public class SiegeSchedule {
 	}
 
 	@XmlAccessorType(XmlAccessType.FIELD)
-	@XmlRootElement(name = "fortress")
-	public static class Fortress {
+	private static abstract class SiegeSchedule {
 
 		@XmlAttribute(required = true)
 		private int id;
@@ -54,33 +52,21 @@ public class SiegeSchedule {
 		}
 	}
 
-	@XmlAccessorType(XmlAccessType.FIELD)
-	@XmlRootElement(name = "agent_fight")
-	public static class AgentFight {
-
-		@XmlAttribute(required = true)
-		private int id;
-		@XmlElement(name = "siegeTime", required = true)
-		private List<String> siegeTime;
-
-		public int getId() {
-			return id;
-		}
-
-		public List<String> getSiegeTimes() {
-			return siegeTime;
-		}
+	@XmlRootElement(name = "fortress")
+	public static class Fortress extends SiegeSchedule {
 	}
 
-	public static SiegeSchedule load() {
-		SiegeSchedule ss;
+	@XmlRootElement(name = "agent_fight")
+	public static class AgentFight extends SiegeSchedule {
+	}
+
+	public static SiegeSchedules load() {
 		try {
 			String xml = FileUtils.readFileToString(new File("./config/schedule/siege_schedule.xml"), StandardCharsets.UTF_8);
-			ss = JAXBUtil.deserialize(xml, SiegeSchedule.class);
+			return JAXBUtil.deserialize(xml, SiegeSchedules.class);
 		} catch (Exception e) {
 			throw new RuntimeException("Failed to initialize sieges", e);
 		}
-		return ss;
 	}
 
 }
