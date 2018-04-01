@@ -163,7 +163,6 @@ public class Summon extends Creature {
 		return master.getTribe();
 	}
 
-	@Override
 	public CreatureType getType(Creature creature) {
 		boolean friend = master.getRace() == creature.getRace() && !creature.isEnemy(master);
 		return friend ? CreatureType.SUPPORT : CreatureType.ATTACKABLE;

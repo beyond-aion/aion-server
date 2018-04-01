@@ -6,7 +6,6 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.function.Consumer;
 import java.util.stream.Stream;
 
 import com.aionemu.gameserver.ai.event.AIEventType;
@@ -33,7 +32,6 @@ import com.aionemu.gameserver.model.templates.quest.QuestItems;
 import com.aionemu.gameserver.model.templates.quest.QuestNpc;
 import com.aionemu.gameserver.model.templates.quest.XMLStartCondition;
 import com.aionemu.gameserver.model.templates.rewards.BonusType;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_CUSTOM_SETTINGS;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ITEM_USAGE_ANIMATION;
@@ -816,26 +814,15 @@ public abstract class AbstractQuestHandler {
 	}
 
 	/** NPC starts following the player to the target. Use onLostTarget and onReachTarget for further actions. */
-	public boolean defaultStartFollowEvent(QuestEnv env, final Npc follower, int targetNpcId, int step, int nextStep) {
-		final Player player = env.getPlayer();
+	public boolean defaultStartFollowEvent(QuestEnv env, Npc follower, int targetNpcId, int step, int nextStep) {
+		Player player = env.getPlayer();
 		if (!(env.getVisibleObject() instanceof Npc)) {
 			return false;
 		}
-		follower.setNpcType(CreatureType.PEACE);
-		follower.getKnownList().forEachPlayer(new Consumer<Player>() {
-
-			@Override
-			public void accept(Player player) {
-				PacketSendUtility.sendPacket(player, new SM_CUSTOM_SETTINGS(follower.getObjectId(), 0, follower.getType(player).getId(), 0));
-			}
-		});
+		follower.overrideNpcType(CreatureType.PEACE);
 		follower.getAi().onCreatureEvent(AIEventType.FOLLOW_ME, player);
 		player.getController().addTask(TaskId.QUEST_FOLLOW, QuestTasks.newFollowingToTargetCheckTask(env, follower, targetNpcId));
-		if (step == 0 && nextStep == 0) {
-			return true;
-		} else {
-			return defaultCloseDialog(env, step, nextStep);
-		}
+		return step == 0 && nextStep == 0 || defaultCloseDialog(env, step, nextStep);
 	}
 
 	/** NPC starts following the player to the target location. Use onLostTarget and onReachTarget for further actions. */
@@ -844,7 +831,7 @@ public abstract class AbstractQuestHandler {
 		if (!(env.getVisibleObject() instanceof Npc)) {
 			return false;
 		}
-		PacketSendUtility.sendPacket(player, new SM_NPC_INFO(follower));
+		PacketSendUtility.sendPacket(player, new SM_NPC_INFO(follower, player));
 		follower.getAi().onCreatureEvent(AIEventType.FOLLOW_ME, player);
 		player.getController().addTask(TaskId.QUEST_FOLLOW, QuestTasks.newFollowingToTargetCheckTask(env, follower, x, y, z));
 		if (step == 0 && nextStep == 0) {

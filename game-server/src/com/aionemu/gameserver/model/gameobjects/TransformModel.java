@@ -1,7 +1,5 @@
 package com.aionemu.gameserver.model.gameobjects;
 
-import java.util.function.Consumer;
-
 import com.aionemu.gameserver.model.TribeClass;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_CUSTOM_SETTINGS;
@@ -95,20 +93,14 @@ public class TransformModel {
 
 	private void updateTribeVisually() {
 		if (owner instanceof Npc) {
-			owner.getKnownList().forEachPlayer(new Consumer<Player>() {
-
-				@Override
-				public void accept(Player player) {
-					PacketSendUtility.sendPacket(player, new SM_CUSTOM_SETTINGS(owner.getObjectId(), 0, owner.getType(player).getId(), 0));
-				}
+			Npc npc = (Npc) owner;
+			npc.getKnownList().forEachPlayer(player -> {
+				PacketSendUtility.sendPacket(player, new SM_CUSTOM_SETTINGS(npc.getObjectId(), 0, npc.getType(player).getId(), 0));
 			});
 		} else if (owner instanceof Player) {
-			owner.getKnownList().forEachNpc(new Consumer<Npc>() {
-
-				@Override
-				public void accept(Npc npc) {
-					PacketSendUtility.sendPacket((Player) owner, new SM_CUSTOM_SETTINGS(npc.getObjectId(), 0, npc.getType(owner).getId(), 0));
-				}
+			Player player = (Player) owner;
+			player.getKnownList().forEachNpc(npc -> {
+				PacketSendUtility.sendPacket(player, new SM_CUSTOM_SETTINGS(npc.getObjectId(), 0, npc.getType(player).getId(), 0));
 			});
 		}
 	}

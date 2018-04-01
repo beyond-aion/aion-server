@@ -19,10 +19,9 @@ public class IDTiamat_2_NPC_TiamatAI extends GeneralNpcAI {
 	}
 
 	@Override
-	protected void handleSpawned() {
-		super.handleSpawned();
-		getOwner().setNpcType(CreatureType.PEACE);
-		getOwner().getNpcObjectType();
+	protected void handleBeforeSpawned() {
+		super.handleBeforeSpawned();
+		getOwner().overrideNpcType(CreatureType.PEACE);
 	}
 
 	@Override

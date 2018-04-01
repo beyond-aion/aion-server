@@ -13,7 +13,6 @@ import com.aionemu.gameserver.controllers.attack.AggroList;
 import com.aionemu.gameserver.controllers.effect.EffectController;
 import com.aionemu.gameserver.controllers.movement.CreatureMoveController;
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.model.CreatureType;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.TribeClass;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -60,7 +59,6 @@ public abstract class Creature extends VisibleObject {
 	private int skillNumber;
 	private int attackedCount;
 	private long spawnTime = System.currentTimeMillis();
-	protected CreatureType type = CreatureType.NULL;
 	private TribeClass tribe = TribeClass.GENERAL;
 
 	public Creature(int objId, CreatureController<? extends Creature> controller, SpawnTemplate spawnTemplate, CreatureTemplate objectTemplate,
@@ -688,10 +686,6 @@ public abstract class Creature extends VisibleObject {
 
 	public Race getRace() {
 		return Race.NONE;
-	}
-
-	public CreatureType getType(Creature creature) {
-		return type;
 	}
 
 	public int getSkillCooldown(SkillTemplate template) {

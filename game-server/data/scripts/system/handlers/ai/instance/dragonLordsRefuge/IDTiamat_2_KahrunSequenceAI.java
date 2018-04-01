@@ -8,7 +8,6 @@ import com.aionemu.gameserver.model.CreatureType;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_CUSTOM_SETTINGS;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
@@ -24,9 +23,14 @@ public class IDTiamat_2_KahrunSequenceAI extends NpcAI {
 	}
 
 	@Override
+	protected void handleBeforeSpawned() {
+		super.handleBeforeSpawned();
+		getOwner().overrideNpcType(CreatureType.PEACE);
+	}
+
+	@Override
 	protected void handleSpawned() {
 		super.handleSpawned();
-		PacketSendUtility.broadcastToMap(getOwner(), new SM_CUSTOM_SETTINGS(getOwner().getObjectId(), 0, CreatureType.PEACE.getId(), 0));
 		PacketSendUtility.broadcastMessage(getOwner(), 1500604, 1500);
 		ThreadPoolManager.getInstance().schedule(() -> {
 			getMoveController().moveToPoint(500f, 516.6f, 240.27f);

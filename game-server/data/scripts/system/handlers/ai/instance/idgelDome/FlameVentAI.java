@@ -3,12 +3,9 @@ package ai.instance.idgelDome;
 import java.util.concurrent.TimeUnit;
 
 import com.aionemu.gameserver.ai.AIName;
-import com.aionemu.gameserver.model.CreatureType;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_CUSTOM_SETTINGS;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 import ai.ActionItemNpcAI;
@@ -22,13 +19,6 @@ public class FlameVentAI extends ActionItemNpcAI {
 
 	public FlameVentAI(Npc owner) {
 		super(owner);
-	}
-
-	@Override
-	protected void handleSpawned() {
-		super.handleSpawned();
-		getOwner().setNpcType(CreatureType.PEACE);
-		PacketSendUtility.broadcastToMap(getOwner(), new SM_CUSTOM_SETTINGS(getOwner().getObjectId(), 0, CreatureType.PEACE.getId(), 0));
 	}
 
 	@Override

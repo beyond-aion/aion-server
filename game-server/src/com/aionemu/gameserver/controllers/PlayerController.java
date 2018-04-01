@@ -136,7 +136,7 @@ public class PlayerController extends CreatureController<Player> {
 			Creature creature = (Creature) object;
 			if (creature instanceof Npc) {
 				Npc npc = (Npc) creature;
-				PacketSendUtility.sendPacket(getOwner(), new SM_NPC_INFO(npc));
+				PacketSendUtility.sendPacket(getOwner(), new SM_NPC_INFO(npc, getOwner()));
 				if (npc instanceof Kisk) {
 					if (getOwner().getRace() == ((Kisk) npc).getOwnerRace())
 						PacketSendUtility.sendPacket(getOwner(), new SM_KISK_UPDATE((Kisk) npc));
@@ -150,7 +150,7 @@ public class PlayerController extends CreatureController<Player> {
 				if (player.isInPlayerMode(PlayerMode.RIDE))
 					PacketSendUtility.sendPacket(getOwner(), new SM_EMOTION(player, EmotionType.RIDE, 0, player.ride.getNpcId()));
 			} else if (creature instanceof Summon) {
-				PacketSendUtility.sendPacket(getOwner(), new SM_NPC_INFO((Summon) creature));
+				PacketSendUtility.sendPacket(getOwner(), new SM_NPC_INFO((Summon) creature, getOwner()));
 			}
 			if (!creature.getEffectController().isEmpty())
 				PacketSendUtility.sendPacket(getOwner(), new SM_ABNORMAL_EFFECT(creature));

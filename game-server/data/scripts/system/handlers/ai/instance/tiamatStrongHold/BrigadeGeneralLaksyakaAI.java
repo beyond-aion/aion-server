@@ -109,9 +109,9 @@ public class BrigadeGeneralLaksyakaAI extends AggressiveNpcAI {
 	}
 
 	@Override
-	protected void handleSpawned() {
-		super.handleSpawned();
-		getOwner().setNpcType(CreatureType.PEACE);
+	protected void handleBeforeSpawned() {
+		super.handleBeforeSpawned();
+		getOwner().overrideNpcType(CreatureType.PEACE);
 	}
 
 	@Override

@@ -14,7 +14,6 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_CUSTOM_SETTINGS;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_ACTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
@@ -268,8 +267,9 @@ public class DragonLordsRefuge extends GeneralInstanceHandler {
 			float x = (float) (Math.cos(radian) * distance);
 			float y = (float) (Math.sin(radian) * distance);
 			TeleportService.teleportTo(player, instance.getMapId(), 503.389f + x, 514.661f + y, 417.404f);
-			if (getNpc(219360) != null)
-				PacketSendUtility.broadcastToMap(getNpc(219360), new SM_CUSTOM_SETTINGS(getNpc(219360).getObjectId(), 0, CreatureType.PEACE.getId(), 0));
+			Npc tiamat = getNpc(219360);
+			if (tiamat != null)
+				tiamat.overrideNpcType(CreatureType.PEACE);
 		}
 	}
 
