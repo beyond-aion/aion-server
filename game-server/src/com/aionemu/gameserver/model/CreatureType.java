@@ -5,7 +5,7 @@ package com.aionemu.gameserver.model;
  * @modified Wakizashi
  */
 public enum CreatureType {
-	NULL(-1),
+
 	/** These are regular monsters */
 	ATTACKABLE(0),
 	/** These are Peace npc, which you cannot talk to */

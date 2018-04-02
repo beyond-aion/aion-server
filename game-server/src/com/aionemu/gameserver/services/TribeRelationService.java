@@ -89,7 +89,6 @@ public class TribeRelationService {
 					case GENERAL_DARK:
 					case GUARD_DRAGON:
 						return true;
-
 				}
 				break;
 			case GUARD_DRAGON:
@@ -101,7 +100,6 @@ public class TribeRelationService {
 					case GENERAL_DARK:
 					case GENERAL:
 						return true;
-
 				}
 				break;
 		}
@@ -158,32 +156,33 @@ public class TribeRelationService {
 			case FIELD_OBJECT_ALL:
 				return true;
 			case GENERAL_DARK:
-				switch (creature2.getBaseTribe()) {
-					case PC_DARK:
-					case GUARD_DARK:
-						return true;
+				if (creature1.getTribe() != TribeClass.DRAMA_EVE_NONPC_DARKA && creature1.getTribe() != TribeClass.DRAMA_EVE_NONPC_DARKB) {
+					switch (creature2.getBaseTribe()) {
+						case PC_DARK:
+						case GUARD_DARK:
+							return true;
+					}
 				}
 				break;
 			case GENERAL:
-				switch (creature2.getBaseTribe()) {
-					case PC:
-					case GUARD:
-						return true;
-
+				if (creature1.getTribe() != TribeClass.DRAMA_EVE_NONPC_A && creature1.getTribe() != TribeClass.DRAMA_EVE_NONPC_B) {
+					switch (creature2.getBaseTribe()) {
+						case PC:
+						case GUARD:
+							return true;
+					}
 				}
 				break;
 			case FIELD_OBJECT_LIGHT:
 				switch (creature2.getBaseTribe()) {
 					case PC:
 						return true;
-
 				}
 				break;
 			case FIELD_OBJECT_DARK:
 				switch (creature2.getBaseTribe()) {
 					case PC_DARK:
 						return true;
-
 				}
 				break;
 		}
@@ -270,7 +269,6 @@ public class TribeRelationService {
 				switch (creature2.getBaseTribe()) {
 					case PC:
 						return true;
-
 				}
 				break;
 		}

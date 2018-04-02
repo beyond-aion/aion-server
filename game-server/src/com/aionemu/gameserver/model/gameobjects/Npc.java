@@ -203,7 +203,7 @@ public class Npc extends Creature {
 			return CreatureType.FRIEND;
 		else if (TribeRelationService.isSupport(this, creature))
 			return CreatureType.SUPPORT;
-		return CreatureType.NULL;
+		return CreatureType.ATTACKABLE;
 	}
 
 	/**
