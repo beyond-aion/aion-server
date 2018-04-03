@@ -357,46 +357,46 @@
 	
 	<!-- SKILL USE -->
 	<skill_use id="4922" start_npc_ids="204056">
-		<skill end_var="10" ids="599"/>
+		<skill end_var="10" ids="599"/><!-- Gladiator: Daevic Fury -->
 	</skill_use>
 	<skill_use id="4923" start_npc_ids="204056">
-		<skill end_var="10" ids="3161"/>
+		<skill end_var="10" ids="3161"/><!-- Templar: Hand of Healing -->
 	</skill_use>
 	<skill_use id="4924" start_npc_ids="204057">
-		<skill end_var="10" ids="18260"/>
+		<skill end_var="10" ids="872"/><!-- Ranger: Transformation: Mau -->
 	</skill_use>
 	<skill_use id="4925" start_npc_ids="204057">
-		<skill end_var="10" ids="3491"/>
+		<skill end_var="10" ids="3491"/><!-- Assassin: Wind Walk -->
 	</skill_use>
 	<skill_use id="4926" start_npc_ids="204058">
-		<skill end_var="10" ids="1338"/>
+		<skill end_var="10" ids="1338"/><!-- Sorcerer: Tranquilizing Cloud -->
 	</skill_use>
 	<skill_use id="4927" start_npc_ids="204058">
-		<skill end_var="10" ids="3781"/>
+		<skill end_var="10" ids="3781"/><!-- Spiritmaster: Disenchant -->
 	</skill_use>
 	<skill_use id="4928" start_npc_ids="204059">
-		<skill end_var="10" ids="4220"/>
+		<skill end_var="10" ids="4220"/><!-- Cleric: Acquittal -->
 	</skill_use>
 	<skill_use id="4929" start_npc_ids="204059">
-		<skill end_var="10" ids="1810"/>
+		<skill end_var="10" ids="1810"/><!-- Chanter: Word of Wind -->
 	</skill_use>
 	<skill_use id="4930" start_npc_ids="204083" end_npc_ids="204059">
-		<skill end_var="10" ids="9912"/>
+		<skill end_var="10" ids="9912"/><!-- Elemental Stone of Resurrection -->
 	</skill_use>
 	<skill_use id="4931" start_npc_ids="204059">
-		<skill end_var="100" ids="9912"/>
+		<skill end_var="100" ids="9912"/><!-- Elemental Stone of Resurrection -->
 	</skill_use>
 	<skill_use id="4932" start_npc_ids="204083" end_npc_ids="204059">
-		<skill end_var="10" ids="972 973 974 990 1057 1128 1051 2139"/>
+		<skill end_var="10" ids="1699 4646 4004 4456"/><!-- Cleric/Chanter/Bard: Light of Resurrection, Resurrection Loci, Cherubim Call -->
 	</skill_use>
 	<skill_use id="4933" start_npc_ids="204059">
-		<skill end_var="20" ids="972 973 974 990 1057 1128 1051 2139"/>
+		<skill end_var="20" ids="1699 4646 4004 4456"/><!-- Cleric/Chanter/Bard: Light of Resurrection, Resurrection Loci, Cherubim Call -->
 	</skill_use>
 	<skill_use id="29074" start_npc_ids="801222">
-		<skill end_var="10" ids="2007"/>
+		<skill end_var="10" ids="2007"/><!-- Gunner: Spend Success -->
 	</skill_use>
 	<skill_use id="29075" start_npc_ids="801223">
-		<skill end_var="10" ids="4469"/>
+		<skill end_var="10" ids="4469"/><!-- Bard: Symphony of Destruction -->
 	</skill_use>
 	
 	<!-- COLLECTING QUESTS -->
