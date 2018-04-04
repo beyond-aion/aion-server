@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Consumer;
 
 import com.aionemu.commons.callbacks.util.GlobalCallbackHelper;
 import com.aionemu.commons.database.dao.DAOManager;
@@ -26,7 +25,6 @@ import com.aionemu.gameserver.model.templates.siegelocation.SiegeReward;
 import com.aionemu.gameserver.model.templates.spawns.SpawnGroup;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.model.templates.spawns.siegespawns.SiegeSpawnTemplate;
-import com.aionemu.gameserver.network.aion.AionServerPacket;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -72,7 +70,7 @@ public class AgentSiege extends Siege<AgentLocation> {
 
 	@Override
 	protected void onSiegeStart() {
-		broadcastMessage(SM_SYSTEM_MESSAGE.STR_MSG_LDF4_ADVANCE_GODELITE_TIME_01());
+		PacketSendUtility.broadcastToWorld(SM_SYSTEM_MESSAGE.STR_MSG_LDF4_ADVANCE_GODELITE_TIME_01());
 		getSiegeLocation().setVulnerable(true);
 		delayStart();
 	}
@@ -84,7 +82,7 @@ public class AgentSiege extends Siege<AgentLocation> {
 			public void run() {
 				startProgress++;
 				if (startProgress == 5) {
-					broadcastMessage(SM_SYSTEM_MESSAGE.STR_MSG_LDF4_ADVANCE_GODELITE_TIME_02());
+					PacketSendUtility.broadcastToWorld(SM_SYSTEM_MESSAGE.STR_MSG_LDF4_ADVANCE_GODELITE_TIME_02());
 				} else if (startProgress >= 10) {
 					onQuestDistribute();
 					onSpawn(); // Should initialize Agents and their flags
@@ -98,7 +96,7 @@ public class AgentSiege extends Siege<AgentLocation> {
 
 	@Override
 	protected void onSiegeFinish() {
-		broadcastMessage(SM_SYSTEM_MESSAGE.STR_MSG_LDF4_ADVANCE_GODELITE_TIME_03());
+		PacketSendUtility.broadcastToWorld(SM_SYSTEM_MESSAGE.STR_MSG_LDF4_ADVANCE_GODELITE_TIME_03());
 		getSiegeLocation().setVulnerable(false);
 		GlobalCallbackHelper.removeCallback(apListener);
 		removeListeners();
@@ -112,10 +110,9 @@ public class AgentSiege extends Siege<AgentLocation> {
 		sendRewardsToParticipatedPlayers(getSiegeCounter().getRaceCounter(looser), false);
 	}
 
-	protected void sendRewardsToParticipatedPlayers(SiegeRaceCounter damage, boolean isWinner) {
+	private void sendRewardsToParticipatedPlayers(SiegeRaceCounter damage, boolean isWinner) {
 		Map<Integer, Long> playerAbyssPoints = damage.getPlayerAbyssPoints();
-		List<Integer> topPlayersIds = new ArrayList<>();
-		topPlayersIds.addAll(playerAbyssPoints.keySet());
+		List<Integer> topPlayersIds = new ArrayList<>(playerAbyssPoints.keySet());
 		SiegeResult result = isWinner ? SiegeResult.OCCUPY : SiegeResult.FAIL;
 
 		int i = 0;
@@ -133,7 +130,7 @@ public class AgentSiege extends Siege<AgentLocation> {
 
 				int gp = isWinner ? topGrade.getGpForWin() : topGrade.getGpForDefeat();
 				if (gp > 0)
-					GloryPointsService.increaseGp(playerId, isWinner ? topGrade.getGpForWin() : topGrade.getGpForDefeat());
+					GloryPointsService.increaseGp(playerId, gp);
 			}
 		}
 	}
@@ -220,18 +217,6 @@ public class AgentSiege extends Siege<AgentLocation> {
 
 		masta.getAggroList().removeEventListener(mastaDoAddDamageListener);
 		masta.getAi().removeEventListener(mastaDeathListener);
-	}
-
-	private void broadcastMessage(AionServerPacket packet) {
-		World.getInstance().forEachPlayer(new Consumer<Player>() {
-
-			@Override
-			public void accept(Player player) {
-				if (packet != null)
-					PacketSendUtility.sendPacket(player, packet);
-			}
-
-		});
 	}
 
 	public void setWinnerRace(SiegeRace race) {
