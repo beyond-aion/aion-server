@@ -1,7 +1,6 @@
 package com.aionemu.gameserver.model.gameobjects;
 
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -14,7 +13,6 @@ import com.aionemu.gameserver.controllers.attack.AggroList;
 import com.aionemu.gameserver.controllers.effect.EffectController;
 import com.aionemu.gameserver.controllers.movement.CreatureMoveController;
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.model.CreatureType;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.TribeClass;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -61,7 +59,6 @@ public abstract class Creature extends VisibleObject {
 	private int skillNumber;
 	private int attackedCount;
 	private long spawnTime = System.currentTimeMillis();
-	protected CreatureType type = CreatureType.NULL;
 	private TribeClass tribe = TribeClass.GENERAL;
 
 	public Creature(int objId, CreatureController<? extends Creature> controller, SpawnTemplate spawnTemplate, CreatureTemplate objectTemplate,
@@ -516,7 +513,7 @@ public abstract class Creature extends VisibleObject {
 		}
 
 		/*
-		 * Some shared cooldown skills have indipendent and different cooldown they must not be blocked
+		 * Some shared cooldown skills have independent and different cooldown they must not be blocked
 		 */
 		if (skillCoolDownsBase != null && skillCoolDownsBase.get(cooldownId) != null) {
 			if ((template.getDuration() + template.getCooldown() * 100 + skillCoolDownsBase.get(cooldownId)) < System.currentTimeMillis())
@@ -556,7 +553,7 @@ public abstract class Creature extends VisibleObject {
 	 * @return the skillCoolDowns
 	 */
 	public Map<Integer, Long> getSkillCoolDowns() {
-		return skillCoolDowns == null ? null : new HashMap<>(skillCoolDowns);
+		return skillCoolDowns;
 	}
 
 	/**
@@ -689,10 +686,6 @@ public abstract class Creature extends VisibleObject {
 
 	public Race getRace() {
 		return Race.NONE;
-	}
-
-	public CreatureType getType(Creature creature) {
-		return type;
 	}
 
 	public int getSkillCooldown(SkillTemplate template) {

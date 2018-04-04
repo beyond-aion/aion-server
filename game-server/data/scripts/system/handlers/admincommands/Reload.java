@@ -11,6 +11,7 @@ import com.aionemu.gameserver.ai.AIEngine;
 import com.aionemu.gameserver.configs.Config;
 import com.aionemu.gameserver.dataholders.CustomDrop;
 import com.aionemu.gameserver.dataholders.DataManager;
+import com.aionemu.gameserver.dataholders.DecomposableItemsData;
 import com.aionemu.gameserver.dataholders.EventData;
 import com.aionemu.gameserver.dataholders.ItemData;
 import com.aionemu.gameserver.dataholders.NpcData;
@@ -44,7 +45,8 @@ public class Reload extends AdminCommand {
 			"<quests> - Reloads quest templates and handlers.",
 			"<skills|npcskills> - Reloads the specified skill templates.",
 			"<events> - Reloads event templates and (re)starts events.",
-			"<npcs|items|customdrops|gameshop> - Reloads the specified data."
+			"<decomposables> - Reloads content of item bundles",
+			"<npcs|items|customdrops|gameshop> - Reloads the specified data." 
 		);
 		// @formatter:on
 	}
@@ -108,6 +110,10 @@ public class Reload extends AdminCommand {
 			DataManager.EVENT_DATA.setEvents(templates);
 			EventService.getInstance().start();
 			sendInfo(admin, DataManager.EVENT_DATA.size() + " events loaded.");
+		} else if (params[0].equalsIgnoreCase("decomposables")) {
+			File xml = new File("./data/static_data/decomposable_items/decomposable_items.xml");
+			DataManager.DECOMPOSABLE_ITEMS_DATA = JAXBUtil.deserialize(xml, DecomposableItemsData.class, "./data/static_data/decomposable_items/decomposable_items.xsd");
+			sendInfo(admin, DataManager.DECOMPOSABLE_ITEMS_DATA.size() + " item bundles reloaded.");
 		} else
 			sendInfo(admin);
 	}

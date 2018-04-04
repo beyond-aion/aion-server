@@ -134,10 +134,14 @@ public class IdgelDomeInstance extends GeneralInstanceHandler {
 				case 802548:
 				case 802549:
 					instance.getPlayersInside().stream().filter(p -> p.getRace() != ((Npc) object).getRace())
-						.forEach(p -> PacketSendUtility.sendPacket(p, new SM_CUSTOM_SETTINGS(object.getObjectId(), 0, CreatureType.PEACE.getId(), 0)));
+						.forEach(p -> setFlameVentNoInteraction(p, object));
 					break;
 			}
 		}
+	}
+
+	private void setFlameVentNoInteraction(Player player, VisibleObject flameVent) {
+		PacketSendUtility.sendPacket(player, new SM_CUSTOM_SETTINGS(flameVent.getObjectId(), 0, CreatureType.PEACE.getId(), 0));
 	}
 
 	@Override
@@ -229,6 +233,9 @@ public class IdgelDomeInstance extends GeneralInstanceHandler {
 
 	@Override
 	public void onEnterInstance(Player player) {
+		Npc forbiddenFlameVent = getNpc(player.getRace() == Race.ASMODIANS ? 802548 : 802549);
+		if (forbiddenFlameVent != null)
+			setFlameVentNoInteraction(player, forbiddenFlameVent);
 		if (!idi.containsPlayer(player.getObjectId()))
 			idi.addPlayerReward(new IdgelDomePlayerInfo(player.getObjectId(), player.getRace()));
 

@@ -25,6 +25,7 @@ import com.aionemu.gameserver.model.templates.npc.NpcRating;
 import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
 import com.aionemu.gameserver.model.templates.npc.NpcTemplateType;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_CUSTOM_SETTINGS;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_LOOKATOBJECT;
 import com.aionemu.gameserver.services.TribeRelationService;
 import com.aionemu.gameserver.spawnengine.WalkerGroup;
@@ -47,6 +48,7 @@ public class Npc extends Creature {
 	private String masterName;
 	private int creatorId = 0;
 	private int townId;
+	private CreatureType type = null;
 	private ItemAttackType attacktype = ItemAttackType.PHYSICAL;
 
 	public Npc(int objId, NpcController controller, SpawnTemplate spawnTemplate, NpcTemplate objectTemplate) {
@@ -185,11 +187,12 @@ public class Npc extends Creature {
 
 	@Override
 	public boolean isEnemyFrom(Player player) {
-		return player.isEnemyFrom(this) || type == CreatureType.AGGRESSIVE || type == CreatureType.ATTACKABLE;
+		return player.isEnemyFrom(this);
 	}
 
-	@Override
 	public CreatureType getType(Creature creature) {
+		if (type != null)
+			return type;
 		if (TribeRelationService.isNone(this, creature))
 			return CreatureType.PEACE;
 		else if (TribeRelationService.isAggressive(this, creature))
@@ -200,7 +203,20 @@ public class Npc extends Creature {
 			return CreatureType.FRIEND;
 		else if (TribeRelationService.isSupport(this, creature))
 			return CreatureType.SUPPORT;
-		return CreatureType.NULL;
+		return CreatureType.ATTACKABLE;
+	}
+
+	/**
+	 * Sets a constant type and broadcasts it, if the npc is spawned. Set to null, to disable it.
+	 */
+	public void overrideNpcType(CreatureType newType) {
+		type = newType;
+		if (isSpawned()) {
+			if (type != null)
+				PacketSendUtility.broadcastPacket(this, new SM_CUSTOM_SETTINGS(getObjectId(), 0, type.getId(), 0));
+			else
+				getKnownList().forEachPlayer(p -> PacketSendUtility.sendPacket(p, new SM_CUSTOM_SETTINGS(getObjectId(), 0, getType(p).getId(), 0)));
+		}
 	}
 
 	/**
@@ -302,10 +318,6 @@ public class Npc extends Creature {
 	@Override
 	public Race getRace() {
 		return getObjectTemplate().getRace();
-	}
-
-	public void setNpcType(CreatureType newType) {
-		type = newType;
 	}
 
 	/**

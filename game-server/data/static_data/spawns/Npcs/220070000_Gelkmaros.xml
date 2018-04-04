@@ -1826,7 +1826,7 @@
 			<spot x="726.1794" y="2280.9617" z="389.6456" static_id="1367"/>
 		</spawn>
 		<!-- Gathering Kit -->
-		<spawn npc_id="217075" respawn_time="295">
+		<spawn npc_id="217075" respawn_time="1800">
 			<spot x="2447.59" y="2500.11" z="410.756"/>
 			<spot x="2492.51" y="2417.84" z="398.705"/>
 			<spot x="2640.99" y="2344.65" z="412.834"/>

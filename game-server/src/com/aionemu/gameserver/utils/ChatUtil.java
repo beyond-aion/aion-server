@@ -1,6 +1,6 @@
 package com.aionemu.gameserver.utils;
 
-import java.awt.Color;
+import java.awt.*;
 import java.text.DecimalFormat;
 import java.util.Locale;
 import java.util.regex.Matcher;
@@ -13,6 +13,7 @@ import org.apache.commons.lang3.math.NumberUtils;
 import com.aionemu.gameserver.configs.administration.AdminConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.ChatType;
+import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.VisibleObjectTemplate;
@@ -30,6 +31,8 @@ import com.aionemu.gameserver.world.geo.GeoService;
 public class ChatUtil {
 
 	private static final DecimalFormat DF = (DecimalFormat) DecimalFormat.getInstance(Locale.US);
+	private static final char ASMO_NAME_PREFIX = '\uE053';
+	private static final char ELYOS_NAME_PREFIX = '\uE052';
 
 	static {
 		DF.applyPattern(".##");
@@ -283,6 +286,10 @@ public class ChatUtil {
 		if (name.matches("^[A-Za-z]+$"))
 			return Util.convertName(name);
 
+		char firstChar = name.charAt(0);
+		if (firstChar == ASMO_NAME_PREFIX || firstChar == ELYOS_NAME_PREFIX)
+			name = name.substring(1);
+
 		String nameFlag = "%s";
 		for (String nameFormat : AdminConfig.NAME_TAGS) {
 			int nameStartIndex = nameFormat.indexOf(nameFlag);
@@ -298,5 +305,15 @@ public class ChatUtil {
 		}
 
 		return Util.convertName(name);
+	}
+
+	/**
+	 * @return The player name with an icon in front to distinguish between elyos and asmodians. Only added if the reader is a staff member.
+	 */
+	public static String toFactionPrefixedName(Player reader, Player player) {
+		String name = player.getName(true);
+		if (reader.isStaff())
+			name = (player.getRace() == Race.ELYOS ? ELYOS_NAME_PREFIX : ASMO_NAME_PREFIX) + name;
+		return name;
 	}
 }

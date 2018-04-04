@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Iterator;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -18,8 +18,6 @@ import com.aionemu.gameserver.dao.ItemCooldownsDAO;
 import com.aionemu.gameserver.dao.MySQL5DAOUtils;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.items.ItemCooldown;
-import com.google.common.base.Predicate;
-import com.google.common.collect.Maps;
 
 /**
  * @author ATracer
@@ -31,14 +29,6 @@ public class MySQL5ItemCooldownsDAO extends ItemCooldownsDAO {
 	public static final String INSERT_QUERY = "INSERT INTO `item_cooldowns` (`player_id`, `delay_id`, `use_delay`, `reuse_time`) VALUES (?,?,?,?)";
 	public static final String DELETE_QUERY = "DELETE FROM `item_cooldowns` WHERE `player_id`=?";
 	public static final String SELECT_QUERY = "SELECT `delay_id`, `use_delay`, `reuse_time` FROM `item_cooldowns` WHERE `player_id`=?";
-
-	private static final Predicate<ItemCooldown> itemCooldownPredicate = new Predicate<ItemCooldown>() {
-
-		@Override
-		public boolean apply(ItemCooldown input) {
-			return input != null && input.getReuseTime() - System.currentTimeMillis() > 30000;
-		}
-	};
 
 	@Override
 	public void loadItemCooldowns(final Player player) {
@@ -68,26 +58,21 @@ public class MySQL5ItemCooldownsDAO extends ItemCooldownsDAO {
 	@Override
 	public void storeItemCooldowns(Player player) {
 		deleteItemCooldowns(player);
+
 		Map<Integer, ItemCooldown> itemCoolDowns = player.getItemCoolDowns();
-
-		if (itemCoolDowns == null)
+		if (itemCoolDowns == null || itemCoolDowns.isEmpty())
 			return;
 
-		Map<Integer, ItemCooldown> map = Maps.filterValues(itemCoolDowns, itemCooldownPredicate);
-		final Iterator<Map.Entry<Integer, ItemCooldown>> iterator = map.entrySet().iterator();
-		if (!iterator.hasNext()) {
-			return;
-		}
+		itemCoolDowns = new HashMap<>(itemCoolDowns);
+		itemCoolDowns.values().removeIf(itemCooldown -> itemCooldown == null || itemCooldown.getReuseTime() - System.currentTimeMillis() <= 30000);
 
-		Connection con = null;
-		PreparedStatement st = null;
-		try {
-			con = DatabaseFactory.getConnection();
+		if (itemCoolDowns.isEmpty())
+			return;
+
+		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement st = con.prepareStatement(INSERT_QUERY)) {
 			con.setAutoCommit(false);
-			st = con.prepareStatement(INSERT_QUERY);
 
-			while (iterator.hasNext()) {
-				Map.Entry<Integer, ItemCooldown> entry = iterator.next();
+			for (Map.Entry<Integer, ItemCooldown> entry : itemCoolDowns.entrySet()) {
 				st.setInt(1, player.getObjectId());
 				st.setInt(2, entry.getKey());
 				st.setInt(3, entry.getValue().getUseDelay());
@@ -98,9 +83,7 @@ public class MySQL5ItemCooldownsDAO extends ItemCooldownsDAO {
 			st.executeBatch();
 			con.commit();
 		} catch (SQLException e) {
-			log.error("Error while storing item cooldows for player " + player.getObjectId(), e);
-		} finally {
-			DatabaseFactory.close(st, con);
+			log.error("Error while storing item cooldowns for " + player, e);
 		}
 	}
 

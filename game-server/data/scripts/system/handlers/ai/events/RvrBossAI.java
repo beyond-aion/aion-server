@@ -30,7 +30,7 @@ public class RvrBossAI extends AggressiveNpcAI {
 		super.handleAttack(creature);
 		// add player to event list for additional reward
 		if (creature instanceof Player && getPosition().getMapId() == 600010000) {
-			SiegeService.getInstance().checkRvrPlayerOnEvent((Player) creature);
+			SiegeService.getInstance().checkRvrEventPlayer((Player) creature);
 		}
 		// TODO Spawn defensive guards (only for bosses in silentera Canyon)
 	}
@@ -40,7 +40,7 @@ public class RvrBossAI extends AggressiveNpcAI {
 		super.handleDied();
 		despawnEnemyBoss();
 		scheduleRespawn();
-		performPartecipationReward();
+		sendParticipationRewards();
 	}
 
 	// despawn enemy boss (only for silentera)
@@ -72,17 +72,16 @@ public class RvrBossAI extends AggressiveNpcAI {
 		}
 	}
 
-	private void performPartecipationReward() {
+	private void sendParticipationRewards() {
 		if (getPosition().getMapId() == 600010000) {
 			int hour = ServerTime.now().getHour();
 			if (hour >= 19 && hour <= 23) {
-				List<Player> eventPlayerList = SiegeService.getInstance().getRvrPlayersOnEvent();
-				for (Player rewardedPlayer : eventPlayerList) {
+				for (Player rewardedPlayer : SiegeService.getInstance().getRvrEventPlayers()) {
 					SystemMailService.getInstance().sendMail("EventService", rewardedPlayer.getName(), "EventReward", "Medal", 186000147, 1, 0,
 						LetterType.NORMAL);
 				}
 			}
-			SiegeService.getInstance().clearRvrPlayersOnEvent();
+			SiegeService.getInstance().clearRvrEventPlayers();
 		}
 	}
 

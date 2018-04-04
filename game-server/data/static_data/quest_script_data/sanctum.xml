@@ -471,46 +471,46 @@
 	
 	<!-- SKILL USE -->
 	<skill_use id="3909" start_npc_ids="203761" end_npc_ids="203707">
-		<skill end_var="10" ids="9912"/>
+		<skill end_var="10" ids="9912"/><!-- Elemental Stone of Resurrection -->
 	</skill_use>
 	<skill_use id="3910" start_npc_ids="203707">
-		<skill end_var="100" ids="9912"/>
+		<skill end_var="100" ids="9912"/><!-- Elemental Stone of Resurrection -->
 	</skill_use>
 	<skill_use id="3911" start_npc_ids="203761" end_npc_ids="203707">
-		<skill end_var="10" ids="972 973 974 990 1057 1128 1051 2139"/>
+		<skill end_var="10" ids="1699 4646 4004 4456"/><!-- Cleric/Chanter/Bard: Light of Resurrection, Resurrection Loci, Cherubim Call -->
 	</skill_use>
 	<skill_use id="3912" start_npc_ids="203707">
-		<skill end_var="20" ids="972 973 974 990 1057 1128 1051 2139"/>
+		<skill end_var="20" ids="1699 4646 4004 4456"/><!-- Cleric/Chanter/Bard: Light of Resurrection, Resurrection Loci, Cherubim Call -->
 	</skill_use>
 	<skill_use id="3922" start_npc_ids="203704">
-		<skill end_var="10" ids="599"/>
+		<skill end_var="10" ids="599"/><!-- Gladiator: Daevic Fury -->
 	</skill_use>
 	<skill_use id="3923" start_npc_ids="203704">
-		<skill end_var="10" ids="3161"/>
+		<skill end_var="10" ids="3161"/><!-- Templar: Hand of Healing -->
 	</skill_use>
 	<skill_use id="3924" start_npc_ids="203705">
-		<skill end_var="10" ids="18260"/>
+		<skill end_var="10" ids="4610"/><!-- Ranger: Transformation: Mau -->
 	</skill_use>
 	<skill_use id="3925" start_npc_ids="203705">
-		<skill end_var="10" ids="3491"/>
+		<skill end_var="10" ids="3491"/><!-- Assassin: Wind Walk -->
 	</skill_use>
 	<skill_use id="3926" start_npc_ids="203706">
-		<skill end_var="10" ids="1338"/>
+		<skill end_var="10" ids="1338"/><!-- Sorcerer: Tranquilizing Cloud -->
 	</skill_use>
 	<skill_use id="3927" start_npc_ids="203706">
-		<skill end_var="10" ids="3781"/>
+		<skill end_var="10" ids="3781"/><!-- Spiritmaster: Disenchant -->
 	</skill_use>
 	<skill_use id="3928" start_npc_ids="203707">
-		<skill end_var="10" ids="4220"/>
+		<skill end_var="10" ids="4220"/><!-- Cleric: Acquittal -->
 	</skill_use>
 	<skill_use id="3929" start_npc_ids="203707">
-		<skill end_var="10" ids="1810"/>
+		<skill end_var="10" ids="1810"/><!-- Chanter: Word of Wind -->
 	</skill_use>
 	<skill_use id="19074" start_npc_ids="801214">
-		<skill end_var="10" ids="2007"/>
+		<skill end_var="10" ids="2007"/><!-- Gunner: Spend Success -->
 	</skill_use>
 	<skill_use id="19075" start_npc_ids="801215">
-		<skill end_var="10" ids="4469"/>
+		<skill end_var="10" ids="4469"/><!-- Bard: Symphony of Destruction -->
 	</skill_use>
 	
 	<!-- COLLECTING QUESTS -->

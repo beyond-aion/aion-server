@@ -1,25 +1,28 @@
 package com.aionemu.gameserver.services;
 
-import java.util.ArrayList;
-import java.util.Calendar;
+import java.text.ParseException;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
-import org.quartz.JobDetail;
-import org.quartz.Trigger;
+import org.quartz.CronExpression;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.commons.services.CronService;
 import com.aionemu.gameserver.configs.main.SiegeConfig;
-import com.aionemu.gameserver.configs.schedule.SiegeSchedule;
+import com.aionemu.gameserver.configs.schedule.SiegeSchedules;
 import com.aionemu.gameserver.dao.SiegeDAO;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -67,14 +70,21 @@ import com.google.common.collect.Maps;
  */
 public class SiegeService {
 
-	/**
-	 * Just a logger
-	 */
 	private static final Logger log = LoggerFactory.getLogger("SIEGE_LOG");
+
 	/**
 	 * We should broadcast fortress status every hour Actually only influence packet must be sent, but that doesn't matter
 	 */
-	private static final String SIEGE_LOCATION_STATUS_BROADCAST_SCHEDULE = "0 0 * ? * *";
+	private static final CronExpression SIEGE_LOCATION_STATUS_BROADCAST_SCHEDULE;
+
+	static {
+		try {
+			SIEGE_LOCATION_STATUS_BROADCAST_SCHEDULE = new CronExpression("0 0 * ? * *");
+		} catch (ParseException e) {
+			throw new ExceptionInInitializerError(e);
+		}
+	}
+
 	/**
 	 * Singleton that is loaded on the class initialization. Guys, we really do not SingletonHolder classes
 	 */
@@ -83,41 +93,24 @@ public class SiegeService {
 	 * Map that holds fortressId to Siege. We can easily know what fortresses is under siege ATM :)
 	 */
 	private final Map<Integer, Siege<? extends SiegeLocation>> activeSieges = new ConcurrentHashMap<>();
-	/**
-	 * Object that holds siege schedule.<br>
-	 * And maybe other useful information (in future).
-	 */
-	private SiegeSchedule siegeSchedule;
 
 	// Player list on RVR Event.
-	private List<Player> rvrPlayersOnEvent = new ArrayList<>();
+	private final AtomicBoolean isInitialized = new AtomicBoolean();
+	private final Map<Integer, ArtifactLocation> artifacts;
+	private final Map<Integer, FortressLocation> fortresses;
+	private final Map<Integer, OutpostLocation> outposts;
+	private final Map<Integer, SiegeLocation> locations;
+	private AgentLocation agent;
+	private Date nextStateUpdateTime;
+	private Set<Player> rvrEventPlayers = new HashSet<>();
 
-	/**
-	 * Returns the single instance of siege service
-	 * 
-	 * @return siege service instance
-	 */
 	public static SiegeService getInstance() {
 		return instance;
 	}
 
-	private Map<Integer, ArtifactLocation> artifacts;
-	private Map<Integer, FortressLocation> fortresses;
-	private Map<Integer, OutpostLocation> outposts;
-	private Map<Integer, SiegeLocation> locations;
-	private AgentLocation agent;
-
-	/**
-	 * Initializer. Should be called once.
-	 */
-	public void initSiegeLocations() {
+	private SiegeService() {
 		if (SiegeConfig.SIEGE_ENABLED) {
 			log.info("Initializing sieges...");
-
-			if (siegeSchedule != null) {
-				log.error("SiegeService should not be initialized two times!");
-				return;
-			}
 
 			// initialize current siege locations
 			artifacts = DataManager.SIEGE_LOCATION_DATA.getArtifacts();
@@ -135,8 +128,12 @@ public class SiegeService {
 		}
 	}
 
+	private void updateNextStateUpdateTime() {
+		nextStateUpdateTime = SIEGE_LOCATION_STATUS_BROADCAST_SCHEDULE.getTimeAfter(new Date());
+	}
+
 	public void initSieges() {
-		if (!SiegeConfig.SIEGE_ENABLED)
+		if (!isInitialized.compareAndSet(false, true) || !SiegeConfig.SIEGE_ENABLED)
 			return;
 
 		// despawn all NPCs spawned by spawn engine.
@@ -163,24 +160,22 @@ public class SiegeService {
 		}
 
 		// initialize siege schedule
-		siegeSchedule = SiegeSchedule.load();
+		SiegeSchedules siegeSchedules = SiegeSchedules.load();
 
 		// Schedule fortresses sieges protector spawn
-		for (final SiegeSchedule.Fortress f : siegeSchedule.getFortressesList()) {
+		for (SiegeSchedules.Fortress f : siegeSchedules.getFortresses()) {
 			for (String siegeTime : f.getSiegeTimes()) {
-				String preperationCron = getPreperationCronString(siegeTime);
-				if (preperationCron != null) {
-					CronService.getInstance().schedule(new SiegeStartRunnable(f.getId()), preperationCron);
-					log.debug("Scheduled siege of fortressID " + f.getId() + " based on cron expression: " + preperationCron);
-				}
+				String preparationCron = getPreparationCronString(siegeTime);
+				CronService.getInstance().schedule(new SiegeStartRunnable(f.getId()), preparationCron);
+				log.debug("Scheduled siege of fortressID " + f.getId() + " based on cron expression: " + preparationCron);
 			}
 		}
 
 		// Schedule agent fights
-		for (final SiegeSchedule.AgentFight a : siegeSchedule.getAgentFights()) {
+		for (SiegeSchedules.AgentFight a : siegeSchedules.getAgentFights()) {
 			for (String siegeTime : a.getSiegeTimes()) {
 				CronService.getInstance().schedule(new SiegeStartRunnable(a.getId()), siegeTime);
-				log.debug("Scheduled agentfight based on cron expression: " + siegeTime);
+				log.debug("Scheduled agent fight based on cron expression: " + siegeTime);
 			}
 		}
 
@@ -208,8 +203,8 @@ public class SiegeService {
 			}
 		}
 
-		// We should set valid next state for fortress on startup
-		// no need to broadcast state here, no players @ server ATM
+		// We should set valid next state for fortress on startup. No need to broadcast state here, no players @ server ATM
+		updateNextStateUpdateTime();
 		updateFortressNextState();
 
 		// Schedule siege status broadcast (every hour)
@@ -217,6 +212,7 @@ public class SiegeService {
 
 			@Override
 			public void run() {
+				updateNextStateUpdateTime();
 				updateFortressNextState();
 				World.getInstance().forEachPlayer(new Consumer<Player>() {
 
@@ -245,9 +241,9 @@ public class SiegeService {
 			startPreparations(locationId);
 	}
 
-	public void startPreparations(final int locationId) {
+	private void startPreparations(final int locationId) {
 		log.debug("Starting preparations of siege Location:" + locationId);
-		FortressLocation loc = this.getFortress(locationId);
+		FortressLocation loc = getFortress(locationId);
 		// Set siege start timer..
 		ThreadPoolManager.getInstance().schedule(() -> startSiege(locationId), 300 * 1000);
 		if (loc.getTemplate().getMaxOccupyCount() > 0 && loc.getOccupiedCount() >= loc.getTemplate().getMaxOccupyCount()
@@ -351,7 +347,7 @@ public class SiegeService {
 	/*
 	 * Return location to balaur control
 	 */
-	protected void resetSiegeLocation(SiegeLocation loc) {
+	private void resetSiegeLocation(SiegeLocation loc) {
 		// Despawn old npc
 		deSpawnNpcs(loc.getLocationId());
 		loc.clearLocation(); // remove all players
@@ -391,73 +387,40 @@ public class SiegeService {
 	/**
 	 * Updates next state for fortresses
 	 */
-	protected void updateFortressNextState() {
-		// get current hour and add 1 hour
-		Calendar currentHourPlus1 = Calendar.getInstance();
-		currentHourPlus1.set(Calendar.MINUTE, 0);
-		currentHourPlus1.set(Calendar.SECOND, 0);
-		currentHourPlus1.set(Calendar.MILLISECOND, 0);
-		currentHourPlus1.add(Calendar.HOUR, 1);
-
-		// filter fortress siege start runnables
-		Map<Runnable, JobDetail> siegeStartRunables = CronService.getInstance().getRunnables();
-		siegeStartRunables = Maps.filterKeys(siegeStartRunables, runnable -> runnable instanceof SiegeStartRunnable);
-
-		// Create map FortressId-To-AllTriggers
-		Map<Integer, List<Trigger>> siegeIdToStartTriggers = new HashMap<>();
-		for (Map.Entry<Runnable, JobDetail> entry : siegeStartRunables.entrySet()) {
-			SiegeStartRunnable fssr = (SiegeStartRunnable) entry.getKey();
-
-			List<Trigger> storage = siegeIdToStartTriggers.get(fssr.getLocationId());
-			if (storage == null) {
-				storage = new ArrayList<>();
-				siegeIdToStartTriggers.put(fssr.getLocationId(), storage);
-			}
-			storage.addAll(CronService.getInstance().getJobTriggers(entry.getValue()));
-		}
-
+	private void updateFortressNextState() {
+		Map<Integer, Date> startDatesByLocId = collectNextSiegeStartDates();
 		// update each fortress next state
-		for (Map.Entry<Integer, List<Trigger>> entry : siegeIdToStartTriggers.entrySet()) {
-			List<Date> nextFireDates = new ArrayList<>();
-			for (Trigger trigger : entry.getValue()) {
-				nextFireDates.add(trigger.getNextFireTime());
-			}
-			nextFireDates.sort(null);
-
-			// clear non-required times
-			Date nextSiegeDate = nextFireDates.get(0);
-			Calendar siegeStartHour = Calendar.getInstance();
-			siegeStartHour.setTime(nextSiegeDate);
-			siegeStartHour.set(Calendar.MINUTE, 0);
-			siegeStartHour.set(Calendar.SECOND, 0);
-			siegeStartHour.set(Calendar.MILLISECOND, 0);
-
-			// update fortress state that will be valid in 1 h
+		for (Map.Entry<Integer, Date> entry : startDatesByLocId.entrySet()) {
+			// update fortress state that will be valid within the next hour
 			SiegeLocation fortress = getSiegeLocation(entry.getKey());
-			// check if siege duration is > than 1 Hour
-			Calendar siegeCalendar = Calendar.getInstance();
-			siegeCalendar.set(Calendar.MINUTE, 0);
-			siegeCalendar.set(Calendar.SECOND, 0);
-			siegeCalendar.set(Calendar.MILLISECOND, 0);
-			siegeCalendar.add(Calendar.HOUR, 0);
-			siegeCalendar.add(Calendar.SECOND, getRemainingSiegeTimeInSeconds(fortress.getLocationId()));
-
-			if (currentHourPlus1.getTimeInMillis() == siegeStartHour.getTimeInMillis()
-				|| siegeCalendar.getTimeInMillis() > currentHourPlus1.getTimeInMillis())
+			if (!entry.getValue().after(nextStateUpdateTime)) // date is > now and <= next update time (this check also accounts for the preparation time)
 				fortress.setNextState(SiegeLocation.STATE_VULNERABLE);
 			else
 				fortress.setNextState(SiegeLocation.STATE_INVULNERABLE);
 		}
 	}
 
+	private Map<Integer, Date> collectNextSiegeStartDates() {
+		Map<SiegeStartRunnable, Date> dates = CronService.getInstance().findNextFireTimes(SiegeStartRunnable.class, true);
+		Map<Integer, Date> nextSiegeStartDates = new HashMap<>(dates.size());
+		for (Map.Entry<SiegeStartRunnable, Date> entry : dates.entrySet()) {
+			nextSiegeStartDates.compute(entry.getKey().getLocationId(), (k, oldDate) -> {
+				Date date = entry.getValue();
+				if (oldDate == null || oldDate.after(date))
+					return date;
+				return oldDate;
+			});
+		}
+		return nextSiegeStartDates;
+	}
+
 	/**
-	 * @return seconds before hour end
+	 * @return Number of seconds until fortress.getNextState() will be the current state (max. 3600 since states update every hour).
 	 */
-	public int getSecondsBeforeHourEnd() {
-		Calendar c = Calendar.getInstance();
-		int minutesAsSeconds = c.get(Calendar.MINUTE) * 60;
-		int seconds = c.get(Calendar.SECOND);
-		return 3600 - (minutesAsSeconds + seconds);
+	public int getSecondsUntilNextFortressState() {
+		if (nextStateUpdateTime == null) // null if siege service is deactivated
+			return 0;
+		return (int) (nextStateUpdateTime.getTime() - System.currentTimeMillis()) / 1000;
 	}
 
 	public int getRemainingSiegeTimeInSeconds(int siegeLocationId) {
@@ -536,7 +499,7 @@ public class SiegeService {
 		return agent;
 	}
 
-	protected Siege<? extends SiegeLocation> newSiege(int siegeLocationId) {
+	private Siege<? extends SiegeLocation> newSiege(int siegeLocationId) {
 		if (fortresses.containsKey(siegeLocationId))
 			return new FortressSiege(fortresses.get(siegeLocationId));
 		else if (outposts.containsKey(siegeLocationId))
@@ -550,7 +513,7 @@ public class SiegeService {
 	}
 
 	public void cleanLegionId(int legionId) {
-		for (SiegeLocation loc : this.getSiegeLocations().values()) {
+		for (SiegeLocation loc : getSiegeLocations().values()) {
 			if (loc.getLegionId() == legionId) {
 				loc.setLegionId(0);
 				break;
@@ -643,8 +606,8 @@ public class SiegeService {
 			if (fort != null) {
 				if (fort.isVulnerable())
 					return false;
-				else if (fort.getNextState() == 1)
-					return npc.getSpawn().getRespawnTime() < getSecondsBeforeHourEnd();
+				else if (fort.getNextState() == SiegeLocation.STATE_VULNERABLE)
+					return npc.getSpawn().getRespawnTime() < getSecondsUntilNextFortressState();
 			}
 		}
 		return true;
@@ -797,52 +760,42 @@ public class SiegeService {
 		}
 	}
 
-	// return RVR Event players list
-	public List<Player> getRvrPlayersOnEvent() {
-		return rvrPlayersOnEvent;
+	public Set<Player> getRvrEventPlayers() {
+		return rvrEventPlayers;
 	}
 
-	// check if player is in RVR event list, if not the player is added.
-	public void checkRvrPlayerOnEvent(Player player) {
-		if (player != null && !rvrPlayersOnEvent.contains(player))
-			rvrPlayersOnEvent.add(player);
+	/**
+	 * Checks if the player is in RVR event list, if not the player is added.
+	 */
+	public void checkRvrEventPlayer(Player player) {
+		if (player != null && !rvrEventPlayers.contains(player))
+			rvrEventPlayers.add(player);
+	}
+
+	public void clearRvrEventPlayers() {
+		rvrEventPlayers = new HashSet<>();
 	}
 
 	/*
-	 * modifies cron string to 5 minutes earlier to allow preperation methods
+	 * modifies cron string to 5 minutes earlier to allow preparation methods
 	 */
-	private String getPreperationCronString(String siegeTime) {
-		String prepCron = "";
+	private String getPreparationCronString(String siegeTime) {
 		try {
-			String[] crons = siegeTime.split(" ");
-			byte minutes = Byte.parseByte(crons[1]);
-			byte hours = Byte.parseByte(crons[2]);
+			String[] cronParts = siegeTime.split(" ");
+			byte minutes = Byte.parseByte(cronParts[1]);
+			byte hours = Byte.parseByte(cronParts[2]);
 			minutes -= 5;
 			if (minutes < 0) {
 				minutes += 60;
 				hours -= 1;
-				if (hours < 0) {
-					log.error("Failed converting cron expression:" + siegeTime + "\npreperation over midnight not supported.");
-					return siegeTime;
-				}
+				if (hours < 0)
+					throw new UnsupportedOperationException("Failed converting cron expression: " + siegeTime + "\nPreparation over midnight not supported.");
 			}
-			crons[1] = String.valueOf(minutes);
-			crons[2] = String.valueOf(hours);
-			for (String cron : crons) {
-				prepCron += cron;
-				prepCron += " ";
-			}
-			prepCron = prepCron.trim();
-
+			cronParts[1] = String.valueOf(minutes);
+			cronParts[2] = String.valueOf(hours);
+			return Stream.of(cronParts).collect(Collectors.joining(" "));
 		} catch (NumberFormatException e) {
-			log.error("Failed converting cron expression:" + siegeTime, e);
-			return null;
+			throw new UnsupportedOperationException("Failed converting cron expression: " + siegeTime, e);
 		}
-		return prepCron;
-	}
-
-	// clear RVR event players list
-	public void clearRvrPlayersOnEvent() {
-		rvrPlayersOnEvent = new ArrayList<>();
 	}
 }

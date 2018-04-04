@@ -1,9 +1,8 @@
 package com.aionemu.gameserver.model.trade;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
-import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.services.RepurchaseService;
 
@@ -13,28 +12,18 @@ import com.aionemu.gameserver.services.RepurchaseService;
 public class RepurchaseList {
 
 	private final int sellerObjId;
-	private List<Item> repurchases = new ArrayList<>();
+	private Set<Integer> repurchases = new LinkedHashSet<>();
 
 	public RepurchaseList(int sellerObjId) {
 		this.sellerObjId = sellerObjId;
 	}
 
-	/**
-	 * @param player
-	 * @param itemObjectId
-	 * @param count
-	 */
 	public void addRepurchaseItem(Player player, int itemObjectId, long count) {
-		Item item = RepurchaseService.getInstance().getRepurchaseItem(player, itemObjectId);
-		if (item != null) {
-			repurchases.add(item);
-		}
+		if (RepurchaseService.getInstance().canRepurchase(player, itemObjectId))
+			repurchases.add(itemObjectId);
 	}
 
-	/**
-	 * @return the tradeItems
-	 */
-	public List<Item> getRepurchaseItems() {
+	public Set<Integer> getRepurchaseItems() {
 		return repurchases;
 	}
 

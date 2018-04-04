@@ -139,9 +139,9 @@ public class FortressAssault extends Assault<FortressSiege> {
 		float influence;
 
 		if (defender == SiegeRace.ASMODIANS)
-			influence = Influence.getInstance().getGlobalAsmodiansInfluence();
+			influence = Influence.getInstance().getAsmodianInfluenceRate();
 		else
-			influence = Influence.getInstance().getGlobalElyosInfluence();
+			influence = Influence.getInstance().getElyosInfluenceRate();
 
 		if (influence >= 0.9f)
 			return 3;

@@ -6,7 +6,6 @@ import com.aionemu.gameserver.model.CreatureType;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_CUSTOM_SETTINGS;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -51,7 +50,7 @@ public class SuramaTheTraitorAI extends GeneralNpcAI {
 	}
 
 	private void startDialog() {
-		final Npc raksha = getPosition().getWorldMapInstance().getNpc(219356);
+		Npc raksha = getPosition().getWorldMapInstance().getNpc(219356);
 		PacketSendUtility.broadcastMessage(getOwner(), 390841);
 		PacketSendUtility.broadcastMessage(getOwner(), 390842, 3000);
 		PacketSendUtility.broadcastMessage(raksha, 390843, 6000);
@@ -61,15 +60,8 @@ public class SuramaTheTraitorAI extends GeneralNpcAI {
 			public void run() {
 				raksha.setTarget(getOwner());
 				SkillEngine.getInstance().getSkill(raksha, 20952, 60, getOwner()).useNoAnimationSkill();
-				changeNpcType(raksha, CreatureType.ATTACKABLE);
+				raksha.overrideNpcType(CreatureType.ATTACKABLE);
 			}
 		}, 8000);
-	}
-
-	private void changeNpcType(Npc npc, CreatureType newType) {
-		npc.setNpcType(newType);
-		npc.getKnownList().forEachPlayer(player -> {
-			PacketSendUtility.sendPacket(player, new SM_CUSTOM_SETTINGS(npc.getObjectId(), 0, newType.getId(), 0));
-		});
 	}
 }

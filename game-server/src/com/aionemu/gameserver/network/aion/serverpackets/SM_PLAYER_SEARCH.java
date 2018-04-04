@@ -6,6 +6,7 @@ import com.aionemu.gameserver.model.gameobjects.player.DeniedStatus;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
+import com.aionemu.gameserver.utils.ChatUtil;
 
 /**
  * Sent to fill the search panel of a players social window<br />
@@ -29,6 +30,7 @@ public class SM_PLAYER_SEARCH extends AionServerPacket {
 
 	@Override
 	protected void writeImpl(AionConnection con) {
+		Player activePlayer = con.getActivePlayer();
 		writeH(players.size());
 		for (Player player : players) {
 			writeD(player.getWorldId());
@@ -39,7 +41,7 @@ public class SM_PLAYER_SEARCH extends AionServerPacket {
 			writeC(player.getGender().getGenderId());
 			writeC(player.getLevel());
 			writeC(player.getPlayerSettings().isInDeniedStatus(DeniedStatus.GROUP) ? 1 : player.isInTeam() ? 3 : player.isLookingForGroup() ? 2 : 0);
-			writeS(player.getName(true), 56);
+			writeS(ChatUtil.toFactionPrefixedName(activePlayer, player), 56);
 		}
 	}
 }

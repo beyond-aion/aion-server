@@ -1,9 +1,9 @@
 package com.aionemu.commons.services;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.lang.reflect.Constructor;
-import java.util.Collection;
 import java.util.List;
 import java.util.TimeZone;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -31,13 +31,13 @@ public class CronServiceTest {
 	@BeforeClass
 	public static void init() throws Exception {
 		((Logger) LoggerFactory.getLogger("org.quartz")).setLevel(Level.OFF);
-		Constructor<CronService> constructor = CronService.class.getDeclaredConstructor(new Class[] { Class.class, TimeZone.class });
+		Constructor<CronService> constructor = CronService.class.getDeclaredConstructor(Class.class, TimeZone.class);
 		constructor.setAccessible(true);
 		cronService = constructor.newInstance(CurrentThreadRunnableRunner.class, null);
 	}
 
 	@Test
-	public void testCronTriggerExecutionTime() throws Exception {
+	public void testCronTriggerExecutionTime() {
 		AtomicInteger ref = new AtomicInteger();
 		Runnable test = newIncrementingRunnable(ref);
 
@@ -53,12 +53,11 @@ public class CronServiceTest {
 	public void testGetRunnables() {
 		Runnable test = newRunnable();
 		cronService.schedule(test, "* 5 * * * ?");
-		Collection<Runnable> col = cronService.getRunnables().keySet();
-		assertTrue(col.contains(test));
+		assertTrue(cronService.findJobDetails(test).size() == 1);
 	}
 
 	@Test
-	public void testCancelRunnableUsingRunnableReference() throws Exception {
+	public void testCancelRunnableUsingRunnableReference() {
 		final AtomicInteger val = new AtomicInteger();
 		Runnable test = new Runnable() {
 
@@ -74,14 +73,14 @@ public class CronServiceTest {
 	}
 
 	@Test
-	public void testCancelRunnableUsingJobDetails() throws Exception {
+	public void testCancelRunnableUsingJobDetails() {
 		final AtomicInteger val = new AtomicInteger();
 		Runnable test = new Runnable() {
 
 			@Override
 			public void run() {
 				val.getAndIncrement();
-				cronService.cancel(cronService.getRunnables().get(this));
+				cronService.cancel(cronService.findJobDetails(this).get(0));
 			}
 		};
 		cronService.schedule(test, "0/2 * * * * ?");
@@ -90,7 +89,7 @@ public class CronServiceTest {
 	}
 
 	@Test
-	public void testCancelledRunableGC() throws Exception {
+	public void testCancelledRunableGC() {
 		final AtomicBoolean collected = new AtomicBoolean();
 		Runnable r = new Runnable() {
 
@@ -118,7 +117,7 @@ public class CronServiceTest {
 	public void testGetJobTriggers() {
 		Runnable r = newRunnable();
 		cronService.schedule(r, "0 15 * * * ?");
-		JobDetail jd = cronService.getRunnables().get(r);
+		JobDetail jd = cronService.findJobDetails(r).get(0);
 		List<? extends Trigger> triggers = cronService.getJobTriggers(jd);
 		assertEquals(triggers.size(), 1);
 	}

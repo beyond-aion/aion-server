@@ -3,6 +3,7 @@ package com.aionemu.gameserver.network.aion.serverpackets;
 import java.util.Map.Entry;
 
 import com.aionemu.gameserver.controllers.movement.CreatureMoveController;
+import com.aionemu.gameserver.model.CreatureType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.Summon;
@@ -25,14 +26,16 @@ public class SM_NPC_INFO extends AionServerPacket {
 	private Creature npc;
 	private int creatorId;
 	private String masterName;
+	private CreatureType creatureType;
 
-	public SM_NPC_INFO(Npc npc) {
+	public SM_NPC_INFO(Npc npc, Player player) {
 		this.npc = npc;
 		creatorId = npc.getCreatorId();
 		masterName = npc.getMasterName();
+		creatureType = npc.getType(player);
 	}
 
-	public SM_NPC_INFO(Summon summon) {
+	public SM_NPC_INFO(Summon summon, Player player) {
 		this.npc = summon;
 		Player owner = summon.getMaster();
 		if (owner != null) {
@@ -41,13 +44,11 @@ public class SM_NPC_INFO extends AionServerPacket {
 		} else {
 			masterName = "LOST";
 		}
+		creatureType = summon.getType(player);
 	}
 
 	@Override
 	protected void writeImpl(AionConnection con) {
-		Player player = con.getActivePlayer();
-		if (player == null) // just disconnected
-			return;
 		NpcTemplate npcTemplate = (NpcTemplate) npc.getObjectTemplate();
 		CreatureMoveController<?> mc = npc.getMoveController();
 
@@ -57,7 +58,7 @@ public class SM_NPC_INFO extends AionServerPacket {
 		writeD(npc.getObjectId());
 		writeD(npcTemplate.getTemplateId()); // npc id
 		writeD(npcTemplate.getTemplateId());
-		writeC(npc.getType(player).getId());
+		writeC(creatureType.getId());
 
 		/*
 		 * 3,19 - wings spread

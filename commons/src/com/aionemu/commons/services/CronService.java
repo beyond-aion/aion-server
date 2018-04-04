@@ -1,10 +1,10 @@
 package com.aionemu.commons.services;
 
 import java.text.ParseException;
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -28,7 +28,6 @@ import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.services.cron.CronServiceException;
 import com.aionemu.commons.services.cron.RunnableRunner;
-import com.aionemu.commons.utils.GenericValidator;
 
 /**
  * @author SoulKeeper
@@ -127,12 +126,6 @@ public final class CronService {
 		}
 	}
 
-	public boolean cancel(Runnable r) {
-		Map<Runnable, JobDetail> map = getRunnables();
-		JobDetail jd = map.get(r);
-		return cancel(jd);
-	}
-
 	public boolean cancel(JobDetail jd) {
 		if (jd == null) {
 			return false;
@@ -149,47 +142,29 @@ public final class CronService {
 		}
 	}
 
-	protected Collection<JobDetail> getJobDetails() {
-		if (scheduler == null) {
-			return Collections.emptySet();
+	public boolean cancel(Runnable r) {
+		List<JobDetail> jobDetails = findJobDetails(r);
+		if (jobDetails.isEmpty())
+			return false;
+		boolean allCancelled = true;
+		for (JobDetail jobDetail : jobDetails) {
+			allCancelled &= cancel(jobDetail);
 		}
+		return allCancelled;
+	}
 
+	public List<JobDetail> findJobDetails(Runnable runnable) {
 		try {
-			Set<JobKey> keys = scheduler.getJobKeys(null);
-
-			if (GenericValidator.isBlankOrNull(keys)) {
-				return Collections.emptySet();
+			List<JobDetail> jobs = new ArrayList<>();
+			for (JobKey jobKey : scheduler.getJobKeys(null)) {
+				JobDetail jobDetail = scheduler.getJobDetail(jobKey);
+				if (jobDetail.getJobDataMap().get(RunnableRunner.KEY_RUNNABLE_OBJECT) == runnable)
+					jobs.add(jobDetail);
 			}
-
-			Set<JobDetail> result = new HashSet<>(keys.size());
-			for (JobKey jk : keys) {
-				result.add(scheduler.getJobDetail(jk));
-			}
-
-			return result;
+			return jobs;
 		} catch (Exception e) {
 			throw new CronServiceException("Can't get all active job details", e);
 		}
-	}
-
-	public Map<Runnable, JobDetail> getRunnables() {
-		Collection<JobDetail> jobDetails = getJobDetails();
-		if (GenericValidator.isBlankOrNull(jobDetails)) {
-			return Collections.emptyMap();
-		}
-
-		Map<Runnable, JobDetail> result = new HashMap<>();
-		for (JobDetail jd : jobDetails) {
-			if (GenericValidator.isBlankOrNull(jd.getJobDataMap())) {
-				continue;
-			}
-
-			if (jd.getJobDataMap().containsKey(RunnableRunner.KEY_RUNNABLE_OBJECT)) {
-				result.put((Runnable) jd.getJobDataMap().get(RunnableRunner.KEY_RUNNABLE_OBJECT), jd);
-			}
-		}
-
-		return Collections.unmodifiableMap(result);
 	}
 
 	public List<? extends Trigger> getJobTriggers(JobDetail jd) {
@@ -197,14 +172,52 @@ public final class CronService {
 	}
 
 	public List<? extends Trigger> getJobTriggers(JobKey jk) {
-		if (scheduler == null) {
-			return Collections.emptyList();
-		}
-
 		try {
 			return scheduler.getTriggersOfJob(jk);
 		} catch (SchedulerException e) {
 			throw new CronServiceException("Can't get triggers for JobKey " + jk, e);
+		}
+	}
+
+	public <T extends Runnable> List<JobDetail> findJobs(Class<T> runnableType, boolean withSubTypes) {
+		try {
+			Set<JobKey> keys = scheduler.getJobKeys(null);
+			if (keys.isEmpty())
+				return Collections.emptyList();
+
+			List<JobDetail> jobs = new ArrayList<>(keys.size());
+			for (JobKey jk : keys) {
+				JobDetail jobDetail = scheduler.getJobDetail(jk);
+				Object runnable = jobDetail.getJobDataMap().get(RunnableRunner.KEY_RUNNABLE_OBJECT);
+				if (runnable != null) {
+					if (runnableType == runnable.getClass() || withSubTypes && runnableType.isAssignableFrom(runnable.getClass()))
+						jobs.add(jobDetail);
+				}
+			}
+			return jobs;
+		} catch (Exception e) {
+			throw new CronServiceException("Couldn't collect job details for jobs of type " + runnableType, e);
+		}
+	}
+
+	@SuppressWarnings("unchecked")
+	public <T extends Runnable> Map<T, Date> findNextFireTimes(Class<T> runnableType, boolean withSubTypes) {
+		List<JobDetail> jobs = findJobs(runnableType, withSubTypes);
+		if (jobs.isEmpty())
+			return Collections.emptyMap();
+
+		try {
+			long now = System.currentTimeMillis();
+			Map<T, Date> nextFireTimes = new HashMap<>(jobs.size());
+			for (JobDetail job : jobs) {
+				Object runnable = job.getJobDataMap().get(RunnableRunner.KEY_RUNNABLE_OBJECT);
+				scheduler.getTriggersOfJob(job.getKey()).stream().map(Trigger::getNextFireTime)
+					.filter(nextFireTime -> nextFireTime != null && nextFireTime.getTime() > now).sorted().findFirst().ifPresent(nextFireTime -> nextFireTimes
+						.compute((T) runnable, (k, oldDate) -> oldDate == null || oldDate.after(nextFireTime) ? nextFireTime : oldDate));
+			}
+			return nextFireTimes;
+		} catch (Exception e) {
+			throw new CronServiceException("Can't get all active job details", e);
 		}
 	}
 }

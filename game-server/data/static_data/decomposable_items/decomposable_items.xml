@@ -26380,7 +26380,41 @@
 	</decomposable>
 	<decomposable item_id="188053087" /><!-- Abyss of Triniel -->
 	<decomposable item_id="188053088" /><!-- Dark Abyss of Triniel -->
-	<decomposable item_id="188053089" /><!-- Idgel Dome Champion's Bundle -->
+	<decomposable item_id="188053089"><!-- Idgel Dome Champion's Bundle -->
+		<items>
+			<item id="166050031" /><!-- Esoteric Idian: Physical Attack -->
+		</items>
+		<items>
+			<item id="166050032" /><!-- Esoteric Idian: Magical Attack -->
+		</items>
+		<items>
+			<item id="166050033" /><!-- Esoteric Idian: Physical Defense -->
+		</items>
+		<items>
+			<item id="166050034" /><!-- Esoteric Idian: Magical Defense -->
+		</items>
+		<items>
+			<item id="166050035" /><!-- Esoteric Idian: Assistance -->
+		</items>
+		<items>
+			<item id="166050036" /><!-- Esoteric Idian: Resistance -->
+		</items>
+		<items>
+			<item id="166050037" /><!-- Esoteric Idian: Physical/Magical Attack -->
+		</items>
+		<items>
+			<item id="166050038" /><!-- Esoteric Idian: Physical/Magical Defense -->
+		</items>
+		<items>
+			<item id="166050124" /><!-- Blazing Fighter's Idian: Physical Attack -->
+		</items>
+		<items>
+			<item id="166050125" /><!-- Blazing Fighter's Idian: Magical Attack -->
+		</items>
+		<items>
+			<item id="166050126" /><!-- Blazing Fighter's Idian: Physical/Magical Attack -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188053090"><!-- Ahserion's Flight Champion's Bundle -->
 		<items>
 			<item id="166050127" /><!-- Blazing Warlord's Idian: Physical Attack -->

@@ -1,86 +1,73 @@
 package com.aionemu.gameserver.services;
 
-import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.items.storage.Storage;
 import com.aionemu.gameserver.model.trade.RepurchaseList;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.restrictions.RestrictionsManager;
 import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
-import com.google.common.collect.ArrayListMultimap;
-import com.google.common.collect.Multimap;
 
 /**
  * @author xTz
  */
 public class RepurchaseService {
 
-	private Multimap<Integer, Item> repurchaseItems = ArrayListMultimap.create();
+	private Map<Integer, Set<Item>> repurchaseItems = new ConcurrentHashMap<>();
+
+	private RepurchaseService() {
+	}
 
 	/**
 	 * Save items for repurchase for this player
 	 */
 	public void addRepurchaseItems(Player player, List<Item> items) {
-		repurchaseItems.putAll(player.getObjectId(), items);
+		repurchaseItems.put(player.getObjectId(), new HashSet<>(items));
 	}
 
 	/**
 	 * Delete all repurchase items for this player
 	 */
 	public void removeRepurchaseItems(Player player) {
-		repurchaseItems.removeAll(player.getObjectId());
+		repurchaseItems.remove(player.getObjectId());
 	}
 
-	public void removeRepurchaseItem(Player player, Item item) {
-		repurchaseItems.get(player.getObjectId()).remove(item);
+	public Set<Item> getRepurchaseItems(int playerObjectId) {
+		return repurchaseItems.getOrDefault(playerObjectId, Collections.emptySet());
 	}
 
-	public Collection<Item> getRepurchaseItems(int playerObjectId) {
-		Collection<Item> items = repurchaseItems.get(playerObjectId);
-		return items != null ? items : Collections.<Item> emptyList();
+	public boolean canRepurchase(Player player, int itemObjectId) {
+		return getRepurchaseItems(player.getObjectId()).stream().anyMatch(item -> item.getObjectId() == itemObjectId);
 	}
 
-	public Item getRepurchaseItem(Player player, int itemObjectId) {
-		Collection<Item> items = getRepurchaseItems(player.getObjectId());
-		for (Item item : items) {
-			if (item.getObjectId() == itemObjectId) {
-				return item;
-			}
-		}
-		return null;
-	}
-
-	/**
-	 * @param player
-	 * @param repurchaseList
-	 */
 	public void repurchaseFromShop(Player player, RepurchaseList repurchaseList) {
 		if (!RestrictionsManager.canTrade(player)) {
 			return;
 		}
-		Storage inventory = player.getInventory();
-		for (Item repurchaseItem : repurchaseList.getRepurchaseItems()) {
+		Set<Item> items = repurchaseItems.get(player.getObjectId());
+		for (int itemObjectId : repurchaseList.getRepurchaseItems()) {
 			if (player.getInventory().isFull()) {
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_DICE_INVEN_ERROR());
 				break;
 			}
-			Collection<Item> items = repurchaseItems.get(player.getObjectId());
-			if (items.contains(repurchaseItem)) {
-				if (inventory.tryDecreaseKinah(repurchaseItem.getRepurchasePrice())) {
+
+			Item repurchaseItem = items.stream().filter(item -> item.getObjectId() == itemObjectId).findAny().orElse(null);
+			if (repurchaseItem != null) {
+				if (player.getInventory().tryDecreaseKinah(repurchaseItem.getRepurchasePrice())) {
 					ItemService.addItem(player, repurchaseItem);
-					removeRepurchaseItem(player, repurchaseItem);
+					items.remove(repurchaseItem);
 				} else {
 					AuditLogger.log(player, "tried to repurchase item " + repurchaseItem.getItemId() + ", count: " + repurchaseItem.getItemCount()
-						+ " whithout kinah");
+							+ " without kinah");
 				}
-			} else {
-				AuditLogger.log(player, "might be abusing CM_BUY_ITEM to dupe item " + repurchaseItem.getItemId() + ", count: " + repurchaseItem.getItemCount());
 			}
 		}
 	}

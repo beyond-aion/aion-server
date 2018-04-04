@@ -29,7 +29,7 @@ public class RvrGuardAI extends AggressiveNpcAI {
 				Npc bossAsmo = getPosition().getWorldMapInstance().getNpc(220948);
 				Npc bossElyos = getPosition().getWorldMapInstance().getNpc(220949);
 				if (bossAsmo != null && bossElyos != null) {
-					SiegeService.getInstance().checkRvrPlayerOnEvent((Player) creature);
+					SiegeService.getInstance().checkRvrEventPlayer((Player) creature);
 				}
 			}
 		}

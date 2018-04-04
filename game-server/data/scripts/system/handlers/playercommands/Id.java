@@ -17,6 +17,8 @@ import com.aionemu.gameserver.utils.chathandlers.PlayerCommand;
  */
 public class Id extends PlayerCommand {
 
+	private static final char ITEM_ICON = '\uE054'; // bag
+
 	public Id() {
 		super("id", "Shows item/quest/npc IDs.");
 
@@ -56,7 +58,7 @@ public class Id extends PlayerCommand {
 					sendInfo(player, "Invalid item.");
 					return;
 				}
-				sendInfo(player, "Item: " + template.getL10n() + "\nID: " + id);
+				sendInfo(player, "Item:" + ITEM_ICON + template.getL10n() + "\nID: " + id);
 				return;
 			}
 
@@ -67,11 +69,24 @@ public class Id extends PlayerCommand {
 					sendInfo(player, "Invalid quest.");
 					return;
 				}
-				sendInfo(player, "Quest: " + template.getL10n() + "\nID: " + id);
+				sendInfo(player, "Quest:" + getQuestIcon(template) + template.getL10n() + "\nID: " + id);
 				return;
 			}
 		}
 
 		sendInfo(player);
+	}
+
+	private char getQuestIcon(QuestTemplate template) {
+		switch (template.getCategory()) {
+			case EVENT:
+				return '\uE039'; // pink
+			case MISSION:
+				return '\uE037'; // golden
+			case IMPORTANT:
+			case SIGNIFICANT:
+				return '\uE03F'; // dark blue
+		}
+		return '\uE034'; // light blue
 	}
 }

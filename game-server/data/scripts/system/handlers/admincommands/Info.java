@@ -115,7 +115,8 @@ public class Info extends AdminCommand {
 			sendInfo(admin, createZoneInfo(creature));
 			sendInfo(admin, "[Tribe]\n\tRace: " + creature.getRace() + ", Tribe: " + creature.getTribe() + ", TribeBase: " + creature.getBaseTribe());
 			sendInfo(admin, "[Your relation]\n\tisEnemy: " + admin.isEnemy(creature) + ", canAttack: " + RestrictionsManager.canAttack(admin, target));
-			sendInfo(admin, "[Targets relation]\n\tisEnemy: " + creature.isEnemy(admin) + ", Hostility: " + creature.getType(admin));
+			sendInfo(admin, "[Targets relation]\n\tisEnemy: " + creature.isEnemy(admin)
+				+ (creature instanceof Npc ? ", Hostility: " + ((Npc) creature).getType(admin) : ""));
 			sendInfo(admin, "[Life stats]\n\tHP: " + creature.getLifeStats().getCurrentHp() + " / " + creature.getLifeStats().getMaxHp() + "\n\tMP: "
 				+ creature.getLifeStats().getCurrentMp() + " / " + creature.getLifeStats().getMaxMp());
 			sendInfo(admin, createAggroInfo(creature));

@@ -50,15 +50,15 @@ public class NpcMoveController extends CreatureMoveController<Npc> {
 	private LastUsedCache<Byte, Point3D> lastSteps = null;
 	private byte stepSequenceNr = 0;
 
-	WalkerTemplate walkerTemplate;
-	RouteStep currentStep;
+	private WalkerTemplate walkerTemplate;
+	private RouteStep currentStep;
 	private float cachedTargetZ;
 
 	public NpcMoveController(Npc owner) {
 		super(owner);
 	}
 
-	private static enum Destination {
+	private enum Destination {
 		TARGET_OBJECT,
 		POINT,
 		FORCED_POINT
@@ -197,12 +197,10 @@ public class NpcMoveController extends CreatureMoveController<Npc> {
 	 * @return
 	 */
 	protected void moveToLocation(float targetX, float targetY, float targetZ) {
-		boolean directionChanged = false;
 		float ownerX = owner.getX();
 		float ownerY = owner.getY();
 		float ownerZ = owner.getZ();
-
-		directionChanged = targetX != targetDestX || targetY != targetDestY || targetZ != targetDestZ;
+		boolean directionChanged = targetX != targetDestX || targetY != targetDestY || targetZ != targetDestZ;
 
 		if (directionChanged) {
 			heading = (byte) (Math.toDegrees(Math.atan2(targetY - ownerY, targetX - ownerX)) / 3);
@@ -263,6 +261,9 @@ public class NpcMoveController extends CreatureMoveController<Npc> {
 					if (Math.abs(newZ - geoZ) > 1)
 						directionChanged = true;
 					newZ = geoZ;
+					boolean isXYDestinationReached = PositionUtil.getDistance(newX, newY, pointX, pointY) < MOVE_OFFSET;
+					if (isXYDestinationReached && !PositionUtil.isInRange(newX, newY, newZ, pointX, pointY, pointZ, MOVE_OFFSET))
+						pointZ = newZ; // original pointZ is unreachable, override it so isReachedPoint() can return true
 				}
 			}
 			owner.getGameStats().setNextGeoZUpdate(System.currentTimeMillis() + 1000);
@@ -361,7 +362,7 @@ public class NpcMoveController extends CreatureMoveController<Npc> {
 	}
 
 	public boolean isReachedPoint() {
-		return PositionUtil.isInRange(owner.getX(), owner.getY(), owner.getZ(), pointX, pointY, pointZ, MOVE_OFFSET);
+		return PositionUtil.isInRange(owner, pointX, pointY, pointZ, MOVE_OFFSET);
 	}
 
 	public boolean isNextRouteStepChosen() {

@@ -11,7 +11,6 @@ import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_CUSTOM_SETTINGS;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -40,8 +39,7 @@ public class WoundedScarAI extends GeneralNpcAI {
 	protected void handleDialogStart(Player player) {
 		Npc owner = getOwner();
 		owner.getSpawn().setWalkerId("9C671D72B623B88FDFAFF9E2AF491976B84AE720");
-		owner.setNpcType(CreatureType.PEACE);
-		PacketSendUtility.broadcastToMap(owner, new SM_CUSTOM_SETTINGS(getOwner().getObjectId(), 0, CreatureType.INVULNERABLE.getId(), 0));
+		owner.overrideNpcType(CreatureType.INVULNERABLE);
 		WalkManager.startWalking((NpcAI) owner.getAi());
 	}
 

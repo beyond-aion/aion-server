@@ -3,8 +3,6 @@ package com.aionemu.commons.scripting.classlistener;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.google.common.collect.Lists;
-
 /**
  * ClassListener that aggregates a collection of ClassListeners.<br>
  * Please note that "shutdown" listeners will be executed in reverse order.
@@ -28,20 +26,20 @@ public class AggregatedClassListener implements ClassListener {
 	}
 
 	public void addClassListener(ClassListener cl) {
-		getClassListeners().add(cl);
+		classListeners.add(cl);
 	}
 
 	@Override
 	public void postLoad(Class<?>[] classes) {
-		for (ClassListener cl : getClassListeners()) {
+		for (ClassListener cl : classListeners) {
 			cl.postLoad(classes);
 		}
 	}
 
 	@Override
 	public void preUnload(Class<?>[] classes) {
-		for (ClassListener cl : Lists.reverse(getClassListeners())) {
-			cl.preUnload(classes);
+		for (int i = classListeners.size() - 1; i >= 0; i--) {
+			classListeners.get(i).preUnload(classes);
 		}
 	}
 }
