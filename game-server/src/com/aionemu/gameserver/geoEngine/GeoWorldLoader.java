@@ -54,12 +54,9 @@ public class GeoWorldLoader {
 	public static Map<String, Node> loadMeshes(String fileName) throws IOException {
 		Map<String, Node> geoms = new HashMap<>();
 		File geoFile = new File(fileName);
-		FileChannel roChannel = null;
-		MappedByteBuffer geo = null;
-		try (RandomAccessFile file = new RandomAccessFile(geoFile, "r")) {
-			roChannel = file.getChannel();
+		try (RandomAccessFile file = new RandomAccessFile(geoFile, "r"); FileChannel roChannel = file.getChannel()) {
 			int size = (int) roChannel.size();
-			geo = roChannel.map(FileChannel.MapMode.READ_ONLY, 0, size).load();
+			MappedByteBuffer geo = roChannel.map(FileChannel.MapMode.READ_ONLY, 0, size).load();
 			geo.order(ByteOrder.LITTLE_ENDIAN);
 			while (geo.hasRemaining()) {
 				short namelenght = geo.getShort();
@@ -87,7 +84,7 @@ public class GeoWorldLoader {
 						indexes.put(geo.getShort());
 					}
 
-					Geometry geom = null;
+					Geometry geom;
 					m.setCollisionFlags(geo.getShort());
 					intentions |= m.getIntentions();
 					m.setBuffer(VertexBuffer.Type.Position, 3, vertices);
@@ -128,9 +125,17 @@ public class GeoWorldLoader {
 			else {
 				int size = geo.getInt();
 				short[] terrainData = new short[size];
-				for (int i = 0; i < size; i++)
-					terrainData[i] = geo.getShort();
-				map.setTerrainData(terrainData);
+				short z = 0;
+				boolean isAllSameZ = true;
+				for (int i = 0; i < size; i++) {
+					if (z != (z = geo.getShort()))
+						isAllSameZ = false;
+					terrainData[i] = z;
+				}
+				if (isAllSameZ)
+					map.setTerrainData(new short[] { z }); // save memory by setting only one z coordinate
+				else
+					map.setTerrainData(terrainData);
 			}
 
 			while (geo.hasRemaining()) {
@@ -227,7 +232,7 @@ public class GeoWorldLoader {
 
 			// Check if location is inside the template box. Usually, it's a center of box
 			if (!boundingBox.contains(location)) {
-				Vector3f templatePos = null;
+				Vector3f templatePos;
 				// Not inside? Crappy templates, check the position then and do the best
 				if (template.getX() != null) {
 					// enough to check one coordinate for presence
@@ -284,6 +289,5 @@ public class GeoWorldLoader {
 			clean.invoke(cleaner.invoke(toBeDestroyed));
 		} catch (Exception ex) {
 		}
-		toBeDestroyed = null;
 	}
 }
