@@ -46,27 +46,20 @@ public class SiegeLocationTemplate implements L10n {
 	protected int influenceValue;
 	@XmlAttribute(name = "occupy_count")
 	protected int maxOccupyCount;
+	@XmlAttribute(name = "legion_gp")
+	protected int legionGp;
 	@XmlList
 	@XmlAttribute(name = "fortress_dependency")
 	protected List<Integer> fortressDependency;
 
-	/**
-	 * @return the location id
-	 */
 	public int getId() {
 		return id;
 	}
 
-	/**
-	 * @return the location type
-	 */
 	public SiegeType getType() {
 		return type;
 	}
 
-	/**
-	 * @return the world id
-	 */
 	public int getWorldId() {
 		return world;
 	}
@@ -75,52 +68,31 @@ public class SiegeLocationTemplate implements L10n {
 		return artifactActivation;
 	}
 
-	/**
-	 * @return the reward list
-	 */
 	public List<SiegeReward> getSiegeRewards() {
 		return siegeRewards;
 	}
 
-	/**
-	 * @return the legion rewards
-	 */
 	public List<SiegeLegionReward> getSiegeLegionRewards() {
 		return siegeLegionRewards;
 	}
-	
-	/**
-	 * @return the mercenary zones
-	 */
+
 	public List<SiegeMercenaryZone> getSiegeMercenaryZones() {
 		return siegeMercenaryZones;
 	}
 
-	/**
-	 * @return the nameId
-	 */
 	@Override
 	public int getL10nId() {
 		return nameId;
 	}
 
-	/**
-	 * @return the repeatCount
-	 */
 	public int getRepeatCount() {
 		return repeatCount;
 	}
 
-	/**
-	 * @return the repeatInterval
-	 */
 	public int getRepeatInterval() {
 		return repeatInterval;
 	}
 
-	/**
-	 * @return the fortressDependency
-	 */
 	public List<Integer> getFortressDependency() {
 		if (fortressDependency == null)
 			return Collections.emptyList();
@@ -134,17 +106,15 @@ public class SiegeLocationTemplate implements L10n {
 		return siegeDuration;
 	}
 
-	/**
-	 * @return the influence Points
-	 */
 	public int getInfluenceValue() {
 		return influenceValue;
 	}
 
-	/**
-	 * @return occupyCount
-	 */
 	public int getMaxOccupyCount() {
 		return maxOccupyCount;
+	}
+	
+	public int getLegionGp() {
+		return legionGp;
 	}
 }

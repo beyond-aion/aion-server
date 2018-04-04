@@ -107,8 +107,6 @@ public class AgentSiege extends Siege<AgentLocation> {
 			return;
 		Race winnerRace = winner == SiegeRace.ELYOS ? Race.ELYOS : Race.ASMODIANS;
 		BaseService.getInstance().capture(6113, winnerRace);
-		if (!getSiegeLocation().hasValidGpRewards())
-			return;
 		SiegeRace looser = winner == SiegeRace.ELYOS ? SiegeRace.ASMODIANS : SiegeRace.ELYOS;
 		sendRewardsToParticipatedPlayers(getSiegeCounter().getRaceCounter(winner), true);
 		sendRewardsToParticipatedPlayers(getSiegeCounter().getRaceCounter(looser), false);
@@ -133,7 +131,8 @@ public class AgentSiege extends Siege<AgentLocation> {
 					MailFormatter.sendAbyssRewardMail(getSiegeLocation(), pcd, level, result, System.currentTimeMillis(), topGrade.getItemId(),
 						topGrade.getMedalCount(), 0);
 
-				if (getSiegeLocation().hasValidGpRewards())
+				int gp = isWinner ? topGrade.getGpForWin() : topGrade.getGpForDefeat();
+				if (gp > 0)
 					GloryPointsService.increaseGp(playerId, isWinner ? topGrade.getGpForWin() : topGrade.getGpForDefeat());
 			}
 		}

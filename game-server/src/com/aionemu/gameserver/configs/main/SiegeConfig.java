@@ -43,4 +43,7 @@ public class SiegeConfig {
 
 	@Property(key = "gameserver.siege.panesterra.ahserion.time", defaultValue = "0 50 18 ? * SUN")
 	public static CronExpression AHSERION_START_SCHEDULE;
+
+	@Property(key = "gameserver.siege.legion.gp.cap_per_member", defaultValue = "200")
+	public static int LEGION_GP_CAP_PER_MEMBER;
 }

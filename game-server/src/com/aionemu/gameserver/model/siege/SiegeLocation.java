@@ -12,7 +12,6 @@ import org.slf4j.LoggerFactory;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.siegelocation.SiegeLocationTemplate;
-import com.aionemu.gameserver.model.templates.siegelocation.SiegeReward;
 import com.aionemu.gameserver.world.zone.SiegeZoneInstance;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
 import com.aionemu.gameserver.world.zone.handler.ZoneHandler;
@@ -115,16 +114,10 @@ public class SiegeLocation implements ZoneHandler {
 		this.nextState = nextState;
 	}
 
-	/**
-	 * @return isVulnerable
-	 */
 	public boolean isVulnerable() {
 		return vulnerable;
 	}
 
-	/**
-	 * @return isUnderShield
-	 */
 	public boolean isUnderShield() {
 		return isUnderShield;
 	}
@@ -174,10 +167,6 @@ public class SiegeLocation implements ZoneHandler {
 		this.factionBalance = factionBalance;
 	}
 
-	/**
-	 * @param value
-	 *          new undershield value
-	 */
 	public void setUnderShield(boolean value) {
 		this.isUnderShield = value;
 		if (shields != null) {
@@ -193,42 +182,20 @@ public class SiegeLocation implements ZoneHandler {
 			log.debug(shield.toString());
 	}
 
-	/**
-	 * @return the canTeleport
-	 */
 	public boolean isCanTeleport(Player player) {
 		if (player == null)
 			return canTeleport;
 		return canTeleport && player.getRace().getRaceId() == getRace().getRaceId();
 	}
-
-	/**
-	 * Validates Gp Rewards for location. Will return false, if some gp attributes are missing.
-	 * 
-	 * @return default true
-	 */
-	public boolean hasValidGpRewards() {
-		if (template.getSiegeRewards() == null)
-			return false;
-		for (SiegeReward sr : template.getSiegeRewards()) {
-			if (sr.getGpForWin() == 0 && sr.getGpForDefeat() == 0)
-				return false;
-		}
-		return true;
+	
+	public int getLegionGp() {
+		return template.getLegionGp();
 	}
 
-	/**
-	 * @param canTeleport
-	 *          the canTeleport to set
-	 */
 	public void setCanTeleport(boolean canTeleport) {
 		this.canTeleport = canTeleport;
 	}
 
-	/**
-	 * @param value
-	 *          new vulnerable value
-	 */
 	public void setVulnerable(boolean value) {
 		this.vulnerable = value;
 	}
@@ -237,17 +204,10 @@ public class SiegeLocation implements ZoneHandler {
 		return influenceValue;
 	}
 
-	/**
-	 * @return the zone
-	 */
 	public List<SiegeZoneInstance> getZone() {
 		return zone;
 	}
 
-	/**
-	 * @param zone
-	 *          the zone to set
-	 */
 	public void addZone(SiegeZoneInstance zone) {
 		this.zone.add(zone);
 		zone.addHandler(this);

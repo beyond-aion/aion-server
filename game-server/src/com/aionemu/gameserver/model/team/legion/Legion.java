@@ -29,7 +29,6 @@ public class Legion extends AionObject {
 	private int legionLevel = 1;
 	private int legionRank = 0;
 	private long contributionPoints = 0;
-	private int siegeGloryPoints = 0;
 	private Collection<Integer> legionMembers = new ArrayList<>();
 	private int onlineMembersCount = 0;
 	private short deputyPermission = 0x1E0C;
@@ -234,26 +233,6 @@ public class Legion extends AionObject {
 	 */
 	public long getContributionPoints() {
 		return contributionPoints;
-	}
-
-	public int getSiegeGloryPoints() {
-		return siegeGloryPoints;
-	}
-
-	public void setSiegeGloryPoints(int siegeGloryPoints) {
-		this.siegeGloryPoints = siegeGloryPoints;
-	}
-
-	public void increaseSiegeGloryPoints(int value) {
-		this.siegeGloryPoints += value;
-		if (this.siegeGloryPoints < 0)
-			this.siegeGloryPoints = 0;
-	}
-
-	public void decreaseSiegeGloryPoints(int value) {
-		this.siegeGloryPoints -= value;
-		if (this.siegeGloryPoints < 0)
-			this.siegeGloryPoints = 0;
 	}
 
 	/**
