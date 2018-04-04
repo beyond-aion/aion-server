@@ -64,14 +64,6 @@ public class BIHTree implements CollisionData {
 
     private transient float[] bihSwapTmp;
 
-    private static final TriangleAxisComparator[] comparators = new TriangleAxisComparator[3];
-
-    static {
-        comparators[0] = new TriangleAxisComparator(0);
-        comparators[1] = new TriangleAxisComparator(1);
-        comparators[2] = new TriangleAxisComparator(2);
-    }
-
     private void initTriList(FloatBuffer vb, IndexBuffer ib){
         pointData = new float[numTris * 3 * 3];
         int p = 0;
@@ -191,84 +183,6 @@ public class BIHTree implements CollisionData {
             return bbox.getMax(null).get(axis);
     }
 
-//    private BIHNode createNode2(int l, int r, BoundingBox nodeBbox, int depth){
-//        if ((r - l) < maxTrisPerNode || depth > 100)
-//            return createLeaf(l, r);
-//
-//        BoundingBox currentBox = createBox(l, r);
-//        int axis = depth % 3;
-//        float split = currentBox.getCenter().get(axis);
-//
-//        TriangleAxisComparator comparator = comparators[axis];
-//        Arrays.sort(tris, l, r, comparator);
-//        int splitIndex = -1;
-//
-//        float leftPlane, rightPlane = Float.POSITIVE_INFINITY;
-//        leftPlane = tris[l].getExtreme(axis, false);
-//        for (int i = l; i <= r; i++){
-//            BIHTriangle tri = tris[i];
-//            if (splitIndex == -1){
-//                float v = tri.getCenter().get(axis);
-//                if (v > split){
-//                    if (i == 0){
-//                        // no left plane
-//                        splitIndex = -2;
-//                    }else{
-//                        splitIndex = i;
-//                        // first triangle assigned to right
-//                        rightPlane = tri.getExtreme(axis, true);
-//                    }
-//                }else{
-//                    // triangle assigned to left
-//                    float ex = tri.getExtreme(axis, false);
-//                    if (ex > leftPlane)
-//                        leftPlane = ex;
-//                }
-//            }else{
-//                float ex = tri.getExtreme(axis, true);
-//                if (ex < rightPlane)
-//                    rightPlane = ex;
-//            }
-//        }
-//
-//        if (splitIndex < 0){
-//            splitIndex = (r - l) / 2;
-//
-//            leftPlane = Float.NEGATIVE_INFINITY;
-//            rightPlane = Float.POSITIVE_INFINITY;
-//
-//            for (int i = l; i < splitIndex; i++){
-//                float ex = tris[i].getExtreme(axis, false);
-//                if (ex > leftPlane){
-//                    leftPlane = ex;
-//                }
-//            }
-//            for (int i = splitIndex; i <= r; i++){
-//                float ex = tris[i].getExtreme(axis, true);
-//                if (ex < rightPlane){
-//                    rightPlane = ex;
-//                }
-//            }
-//        }
-//
-//        BIHNode node = new BIHNode(axis);
-//        node.leftPlane = leftPlane;
-//        node.rightPlane = rightPlane;
-//
-//        node.leftIndex = l;
-//        node.rightIndex = r;
-//
-//        BoundingBox leftBbox = new BoundingBox(currentBox);
-//        setMinMax(leftBbox, false, axis, split);
-//        node.left = createNode2(l, splitIndex-1, leftBbox, depth+1);
-//
-//        BoundingBox rightBbox = new BoundingBox(currentBox);
-//        setMinMax(rightBbox, true, axis, split);
-//        node.right = createNode2(splitIndex, r, rightBbox, depth+1);
-//
-//        return node;
-//    }
-
     private BIHNode createNode(int l, int r, BoundingBox nodeBbox, int depth) {
         if ((r - l) < maxTrisPerNode || depth > MAX_TREE_DEPTH){
             return new BIHNode(l, r);
@@ -295,7 +209,6 @@ public class BIHTree implements CollisionData {
         if (exteriorExt.equals(Vector3f.ZERO))
             axis = 0;
 
-//        Arrays.sort(tris, l, r, comparators[axis]);
         float split = currentBox.getCenter().get(axis);
         int pivot = sortTriangles(l, r, split, axis);
         if (pivot == l || pivot == r)

@@ -32,7 +32,8 @@
 
 package com.aionemu.gameserver.geoEngine.collision.bih;
 
-import static java.lang.Math.*;
+import static java.lang.Math.max;
+import static java.lang.Math.min;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +44,6 @@ import com.aionemu.gameserver.geoEngine.collision.CollisionResult;
 import com.aionemu.gameserver.geoEngine.collision.CollisionResults;
 import com.aionemu.gameserver.geoEngine.math.Matrix4f;
 import com.aionemu.gameserver.geoEngine.math.Ray;
-import com.aionemu.gameserver.geoEngine.math.Triangle;
 import com.aionemu.gameserver.geoEngine.math.Vector3f;
 
 /**
@@ -128,7 +128,7 @@ public final class BIHNode {
 
 		stack.add(new BIHStackData(this, 0, 0));
 
-		Triangle t = new Triangle();
+		Vector3f pointA = new Vector3f(), pointB = new Vector3f(), pointC = new Vector3f();
 		int cols = 0;
 
 		stackloop:
@@ -159,11 +159,11 @@ public final class BIHNode {
 			}
 
 			for (int i = node.leftIndex; i <= node.rightIndex; i++) {
-				tree.getTriangle(i, t.get1(), t.get2(), t.get3());
+				tree.getTriangle(i, pointA, pointB, pointC);
 				if (worldMatrix != null) {
-					worldMatrix.mult(t.get1(), t.get1());
-					worldMatrix.mult(t.get2(), t.get2());
-					worldMatrix.mult(t.get3(), t.get3());
+					worldMatrix.mult(pointA, pointA);
+					worldMatrix.mult(pointB, pointB);
+					worldMatrix.mult(pointC, pointC);
 				}
 
 				/*
@@ -323,7 +323,7 @@ public final class BIHNode {
 					if (worldSpaceDist > r.limit)
 						continue;
 					CollisionResult cr = new CollisionResult(contactPoint, worldSpaceDist);
-					cr.setContactNormal(Triangle.computeTriangleNormal(v1, v2, v3, null));
+					cr.setContactNormal(computeTriangleNormal(v1, v2, v3, null));
 					results.addCollision(cr);
 					cols++;
 					if (results.isOnlyFirst())
@@ -337,4 +337,13 @@ public final class BIHNode {
 		return cols;
 	}
 
+	public static Vector3f computeTriangleNormal(Vector3f v1, Vector3f v2, Vector3f v3, Vector3f store){
+		if (store == null)
+			store = new Vector3f(v2);
+		else
+			store.set(v2);
+
+		store.subtractLocal(v1).crossLocal(v3.x-v1.x, v3.y-v1.y, v3.z-v1.z);
+		return store.normalizeLocal();
+	}
 }

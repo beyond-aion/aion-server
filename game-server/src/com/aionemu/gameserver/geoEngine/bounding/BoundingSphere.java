@@ -41,9 +41,7 @@ import com.aionemu.gameserver.geoEngine.collision.CollisionResults;
 import com.aionemu.gameserver.geoEngine.collision.UnsupportedCollisionException;
 import com.aionemu.gameserver.geoEngine.math.FastMath;
 import com.aionemu.gameserver.geoEngine.math.Matrix4f;
-import com.aionemu.gameserver.geoEngine.math.Plane;
 import com.aionemu.gameserver.geoEngine.math.Ray;
-import com.aionemu.gameserver.geoEngine.math.Triangle;
 import com.aionemu.gameserver.geoEngine.math.Vector3f;
 import com.aionemu.gameserver.geoEngine.utils.BufferUtils;
 
@@ -119,58 +117,6 @@ public class BoundingSphere extends BoundingVolume {
 	public void computeFromPoints(FloatBuffer points) {
 		calcWelzl(points);
 	}
-
-	/**
-	 * <code>computeFromTris</code> creates a new Bounding Box from a given set of triangles. It is used in OBBTree
-	 * calculations.
-	 * 
-	 * @param tris
-	 * @param start
-	 * @param end
-	 */
-	public void computeFromTris(Triangle[] tris, int start, int end) {
-		if (end - start <= 0) {
-			return;
-		}
-
-		Vector3f[] vertList = new Vector3f[(end - start) * 3];
-
-		int count = 0;
-		for (int i = start; i < end; i++) {
-			vertList[count++] = tris[i].get(0);
-			vertList[count++] = tris[i].get(1);
-			vertList[count++] = tris[i].get(2);
-		}
-		averagePoints(vertList);
-	}
-
-	//
-	// /**
-	// * <code>computeFromTris</code> creates a new Bounding Box from a given
-	// * set of triangles. It is used in OBBTree calculations.
-	// *
-	// * @param indices
-	// * @param mesh
-	// * @param start
-	// * @param end
-	// */
-	// public void computeFromTris(int[] indices, Mesh mesh, int start, int end) {
-	// if (end - start <= 0) {
-	// return;
-	// }
-	//
-	// Vector3f[] vertList = new Vector3f[(end - start) * 3];
-	//
-	// int count = 0;
-	// for (int i = start; i < end; i++) {
-	// mesh.getTriangle(indices[i], verts);
-	// vertList[count++] = new Vector3f(verts[0]);
-	// vertList[count++] = new Vector3f(verts[1]);
-	// vertList[count++] = new Vector3f(verts[2]);
-	// }
-	//
-	// averagePoints(vertList);
-	// }
 
 	/**
 	 * Calculates a minimum bounding sphere for the set of points. The algorithm was originally found at
@@ -387,27 +333,6 @@ public class BoundingSphere extends BoundingVolume {
 			return y;
 
 		return z;
-	}
-
-	/**
-	 * <code>whichSide</code> takes a plane (typically provided by a view frustum) to determine which side this bound is
-	 * on.
-	 * 
-	 * @param plane
-	 *          the plane to check against.
-	 * @return side
-	 */
-	@Override
-	public Plane.Side whichSide(Plane plane) {
-		float distance = plane.pseudoDistance(center);
-
-		if (distance <= -radius) {
-			return Plane.Side.Negative;
-		} else if (distance >= radius) {
-			return Plane.Side.Positive;
-		} else {
-			return Plane.Side.None;
-		}
 	}
 
 	/**

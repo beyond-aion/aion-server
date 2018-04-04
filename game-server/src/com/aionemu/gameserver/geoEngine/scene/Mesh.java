@@ -45,7 +45,6 @@ import com.aionemu.gameserver.geoEngine.collision.Collidable;
 import com.aionemu.gameserver.geoEngine.collision.CollisionResults;
 import com.aionemu.gameserver.geoEngine.collision.bih.BIHTree;
 import com.aionemu.gameserver.geoEngine.math.Matrix4f;
-import com.aionemu.gameserver.geoEngine.math.Triangle;
 import com.aionemu.gameserver.geoEngine.math.Vector2f;
 import com.aionemu.gameserver.geoEngine.math.Vector3f;
 import com.aionemu.gameserver.geoEngine.scene.VertexBuffer.Format;
@@ -310,25 +309,6 @@ public class Mesh {
 				BufferUtils.populateFromBuffer(v2, fpb, vert2);
 				BufferUtils.populateFromBuffer(v3, fpb, vert3);
 			}
-		}
-	}
-
-	public void getTriangle(int index, Triangle tri) {
-		getTriangle(index, tri.get1(), tri.get2(), tri.get3());
-		tri.setIndex(index);
-	}
-
-	public void getTriangle(int index, int[] indices) {
-		VertexBuffer ib = getBuffer(Type.Index);
-		if (ib.getFormat() == Format.UnsignedShort) {
-			// accepted format for buffers
-			ShortBuffer sib = (ShortBuffer) ib.getData();
-
-			// aquire triangle's vertex indices
-			int vertIndex = index * 3;
-			indices[0] = sib.get(vertIndex);
-			indices[1] = sib.get(vertIndex + 1);
-			indices[2] = sib.get(vertIndex + 2);
 		}
 	}
 

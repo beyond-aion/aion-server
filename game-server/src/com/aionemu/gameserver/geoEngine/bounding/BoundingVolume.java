@@ -36,7 +36,6 @@ import java.nio.FloatBuffer;
 
 import com.aionemu.gameserver.geoEngine.collision.Collidable;
 import com.aionemu.gameserver.geoEngine.math.Matrix4f;
-import com.aionemu.gameserver.geoEngine.math.Plane;
 import com.aionemu.gameserver.geoEngine.math.Ray;
 import com.aionemu.gameserver.geoEngine.math.Vector3f;
 
@@ -97,16 +96,6 @@ public abstract class BoundingVolume implements Collidable {
 	 */
 
 	public abstract BoundingVolume transform(Matrix4f trans, BoundingVolume store);
-
-	/**
-	 * <code>whichSide</code> returns the side on which the bounding volume lies on a plane. Possible values are
-	 * POSITIVE_SIDE, NEGATIVE_SIDE, and NO_SIDE.
-	 * 
-	 * @param plane
-	 *          the plane to check against this bounding volume.
-	 * @return the side on which this bounding volume lies.
-	 */
-	public abstract Plane.Side whichSide(Plane plane);
 
 	/**
 	 * <code>computeFromPoints</code> generates a bounding volume that encompasses a collection of points.

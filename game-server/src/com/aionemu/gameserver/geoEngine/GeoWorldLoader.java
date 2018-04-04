@@ -120,12 +120,8 @@ public class GeoWorldLoader {
 
 	public static boolean loadWorld(int worldId, Map<String, Node> models, GeoMap map, Set<String> missingMeshes, List<String> missingDoors) {
 		File geoFile = new File(GEO_DIR + worldId + ".geo");
-		FileChannel roChannel = null;
-		MappedByteBuffer geo = null;
-
-		try (RandomAccessFile file = new RandomAccessFile(geoFile, "r")) {
-			roChannel = file.getChannel();
-			geo = roChannel.map(FileChannel.MapMode.READ_ONLY, 0, (int) roChannel.size()).load();
+		try (RandomAccessFile file = new RandomAccessFile(geoFile, "r"); FileChannel roChannel = file.getChannel()) {
+			MappedByteBuffer geo = roChannel.map(FileChannel.MapMode.READ_ONLY, 0, (int) roChannel.size()).load();
 			geo.order(ByteOrder.LITTLE_ENDIAN);
 			if (geo.get() == 0)
 				map.setTerrainData(new short[] { geo.getShort() });

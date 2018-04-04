@@ -46,17 +46,9 @@ import com.aionemu.gameserver.geoEngine.utils.BufferUtils;
  * @author Mark Powell
  * @author Joshua Slack
  */
-public final class Matrix3f implements Cloneable /* Reusable*/ {
+public final class Matrix3f implements Cloneable {
 
     private static final Logger logger = Logger.getLogger(Matrix3f.class.getName());
-
-    //@SuppressWarnings("rawtypes")
-		//private static final ObjectFactory FACTORY = new ObjectFactory() {
-
-      public Object create() {
-          return new Matrix3f();
-      }
- // };
 
     protected float m00, m01, m02;
     protected float m10, m11, m12;

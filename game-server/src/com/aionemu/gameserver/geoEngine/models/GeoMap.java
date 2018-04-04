@@ -2,7 +2,6 @@ package com.aionemu.gameserver.geoEngine.models;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -15,7 +14,6 @@ import com.aionemu.gameserver.geoEngine.collision.CollisionIntention;
 import com.aionemu.gameserver.geoEngine.collision.CollisionResult;
 import com.aionemu.gameserver.geoEngine.collision.CollisionResults;
 import com.aionemu.gameserver.geoEngine.math.Ray;
-import com.aionemu.gameserver.geoEngine.math.Triangle;
 import com.aionemu.gameserver.geoEngine.math.Vector3f;
 import com.aionemu.gameserver.geoEngine.scene.Node;
 import com.aionemu.gameserver.geoEngine.scene.Spatial;
@@ -206,38 +204,37 @@ public class GeoMap extends Node {
 		x /= 2f;
 		int xInt = (int) x;
 		int yInt = (int) y;
-		// p1-----p2
-		// || ||
-		// || ||
-		// p3-----p4
-		float p1, p2, p3, p4;
+		// z1┌───┐z2
+		//   │ ∕ │ (top view, each point represents a z coordinate around given x/y, this "rectangle" consists of two adjacent triangles in 3d space)
+		// z3└───┘z4
+		float z1, z2, z3, z4;
 		if (terrainData.length == 1) {
-			p1 = p2 = p3 = p4 = terrainData[0] / 32f;
+			z1 = z2 = z3 = z4 = terrainData[0] / 32f;
 		} else {
 			int size = (int) Math.sqrt(terrainData.length);
 			try {
 				int i1 = yInt + (xInt * size);
 				int i2 = yInt + ((xInt + 1) * size);
-				p1 = terrainData[i1] / 32f;
-				p2 = terrainData[i1 + 1] / 32f;
-				p3 = terrainData[i2] / 32f;
-				p4 = terrainData[i2 + 1] / 32f;
+				z1 = terrainData[i1] / 32f;
+				z2 = terrainData[i1 + 1] / 32f;
+				z3 = terrainData[i2] / 32f;
+				z4 = terrainData[i2 + 1] / 32f;
 			} catch (Exception e) {
 				return null;
 			}
 		}
-		if (p2 >= 0 && p3 >= 0) {
+		if (z2 >= 0 && z3 >= 0) {
 			Vector3f result = new Vector3f();
-			if (p1 >= 0) {
-				Triangle triangle1 = new Triangle(new Vector3f(xInt * 2, yInt * 2, p1), new Vector3f(xInt * 2, (yInt + 1) * 2, p2),
-					new Vector3f((xInt + 1) * 2, yInt * 2, p3));
-				if (ray.intersectWhere(triangle1, result))
+			Vector3f pointA = new Vector3f(xInt * 2, yInt * 2, z1);
+			Vector3f pointB = new Vector3f(xInt * 2, (yInt + 1) * 2, z2);
+			Vector3f pointC = new Vector3f((xInt + 1) * 2, yInt * 2, z3);
+			if (z1 >= 0) {
+				if (ray.intersectWhere(pointA, pointB, pointC, result))
 					return result;
 			}
-			if (p4 >= 0) {
-				Triangle triangle2 = new Triangle(new Vector3f((xInt + 1) * 2, (yInt + 1) * 2, p4), new Vector3f(xInt * 2, (yInt + 1) * 2, p2),
-					new Vector3f((xInt + 1) * 2, yInt * 2, p3));
-				if (ray.intersectWhere(triangle2, result))
+			if (z4 >= 0) {
+				pointA.set((xInt + 1) * 2, (yInt + 1) * 2, z4);
+				if (ray.intersectWhere(pointA, pointB, pointC, result))
 					return result;
 			}
 		}
@@ -271,13 +268,7 @@ public class GeoMap extends Node {
 	@Override
 	public void updateModelBound() {
 		if (getChildren() != null) {
-			Iterator<Spatial> i = getChildren().iterator();
-			while (i.hasNext()) {
-				Spatial s = i.next();
-				if (s instanceof Node && ((Node) s).getChildren().isEmpty()) {
-					i.remove();
-				}
-			}
+			getChildren().removeIf(s -> s instanceof Node && ((Node) s).getChildren().isEmpty());
 		}
 		super.updateModelBound();
 	}

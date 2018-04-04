@@ -38,18 +38,12 @@ import com.aionemu.gameserver.geoEngine.collision.Collidable;
 import com.aionemu.gameserver.geoEngine.collision.CollisionResult;
 import com.aionemu.gameserver.geoEngine.collision.CollisionResults;
 import com.aionemu.gameserver.geoEngine.collision.UnsupportedCollisionException;
-import com.aionemu.gameserver.geoEngine.math.Array3f;
 import com.aionemu.gameserver.geoEngine.math.FastMath;
 import com.aionemu.gameserver.geoEngine.math.Matrix3f;
 import com.aionemu.gameserver.geoEngine.math.Matrix4f;
-import com.aionemu.gameserver.geoEngine.math.Plane;
 import com.aionemu.gameserver.geoEngine.math.Ray;
-import com.aionemu.gameserver.geoEngine.math.Triangle;
 import com.aionemu.gameserver.geoEngine.math.Vector3f;
-import com.aionemu.gameserver.geoEngine.scene.Mesh;
 import com.aionemu.gameserver.geoEngine.utils.BufferUtils;
-
-//import com.jme.scene.TriMesh;
 
 /**
  * <code>BoundingBox</code> defines an axis-aligned cube that defines a container for a group of vertices of a
@@ -109,72 +103,7 @@ public class BoundingBox extends BoundingVolume {
 		containAABB(points);
 	}
 
-	/**
-	 * <code>computeFromTris</code> creates a new Bounding Box from a given set of triangles. It is used in OBBTree
-	 * calculations.
-	 * 
-	 * @param tris
-	 * @param start
-	 * @param end
-	 */
-	public void computeFromTris(Triangle[] tris, int start, int end) {
-		if (end - start <= 0) {
-			return;
-		}
-		Vector3f min = new Vector3f();
-		Vector3f max = new Vector3f();
-		min.set(new Vector3f(Float.POSITIVE_INFINITY, Float.POSITIVE_INFINITY, Float.POSITIVE_INFINITY));
-		max.set(new Vector3f(Float.NEGATIVE_INFINITY, Float.NEGATIVE_INFINITY, Float.NEGATIVE_INFINITY));
-
-		Vector3f point;
-		for (int i = start; i < end; i++) {
-			point = tris[i].get(0);
-			checkMinMax(min, max, point);
-			point = tris[i].get(1);
-			checkMinMax(min, max, point);
-			point = tris[i].get(2);
-			checkMinMax(min, max, point);
-		}
-
-		center.set(min.addLocal(max));
-		center.multLocal(0.5f);
-
-		xExtent = max.x - center.x;
-		yExtent = max.y - center.y;
-		zExtent = max.z - center.z;
-	}
-
-	public void computeFromTris(int[] indices, Mesh mesh, int start, int end) {
-		if (end - start <= 0) {
-			return;
-		}
-		Vector3f vect1 = new Vector3f();
-		Vector3f vect2 = new Vector3f();
-		Triangle triangle = new Triangle();
-
-		Vector3f min = vect1.set(Float.POSITIVE_INFINITY, Float.POSITIVE_INFINITY, Float.POSITIVE_INFINITY);
-		Vector3f max = vect2.set(Float.NEGATIVE_INFINITY, Float.NEGATIVE_INFINITY, Float.NEGATIVE_INFINITY);
-		Vector3f point;
-
-		for (int i = start; i < end; i++) {
-			mesh.getTriangle(indices[i], triangle);
-			point = triangle.get(0);
-			checkMinMax(min, max, point);
-			point = triangle.get(1);
-			checkMinMax(min, max, point);
-			point = triangle.get(2);
-			checkMinMax(min, max, point);
-		}
-
-		center.set(min.addLocal(max));
-		center.multLocal(0.5f);
-
-		xExtent = max.x - center.x;
-		yExtent = max.y - center.y;
-		zExtent = max.z - center.z;
-	}
-
-	public static final void checkMinMax(Vector3f min, Vector3f max, Vector3f point) {
+	public static void checkMinMax(Vector3f min, Vector3f max, Vector3f point) {
 		if (point.x < min.x)
 			min.x = point.x;
 		if (point.x > max.x)
@@ -265,30 +194,6 @@ public class BoundingBox extends BoundingVolume {
 	}
 
 	/**
-	 * <code>whichSide</code> takes a plane (typically provided by a view frustum) to determine which side this bound is
-	 * on.
-	 * 
-	 * @param plane
-	 *          the plane to check against.
-	 */
-	@Override
-	public Plane.Side whichSide(Plane plane) {
-		float radius = FastMath.abs(xExtent * plane.getNormal().getX()) + FastMath.abs(yExtent * plane.getNormal().getY())
-			+ FastMath.abs(zExtent * plane.getNormal().getZ());
-
-		float distance = plane.pseudoDistance(center);
-
-		// changed to < and > to prevent floating point precision problems
-		if (distance < -radius) {
-			return Plane.Side.Negative;
-		} else if (distance > radius) {
-			return Plane.Side.Positive;
-		} else {
-			return Plane.Side.None;
-		}
-	}
-
-	/**
 	 * <code>merge</code> combines this sphere with a second bounding sphere. This new sphere contains both bounding
 	 * spheres and is returned.
 	 * 
@@ -347,50 +252,6 @@ public class BoundingBox extends BoundingVolume {
 				return null;
 		}
 	}
-
-	/**
-	 * Merges this AABB with the given OBB.
-	 * 
-	 * @param volume
-	 *          the OBB to merge this AABB with.
-	 * @return This AABB extended to fit the given OBB.
-	 */
-	// private BoundingBox mergeOBB(OrientedBoundingBox volume) {
-	// if (!volume.correctCorners)
-	// volume.computeCorners();
-	//
-	// TempVars vars = TempVars.get();
-	// Vector3f min = vars.compVect1.set(center.x - xExtent, center.y - yExtent,
-	// center.z - zExtent);
-	// Vector3f max = vars.compVect2.set(center.x + xExtent, center.y + yExtent,
-	// center.z + zExtent);
-	//
-	// for (int i = 1; i < volume.vectorStore.length; i++) {
-	// Vector3f temp = volume.vectorStore[i];
-	// if (temp.x < min.x)
-	// min.x = temp.x;
-	// else if (temp.x > max.x)
-	// max.x = temp.x;
-	//
-	// if (temp.y < min.y)
-	// min.y = temp.y;
-	// else if (temp.y > max.y)
-	// max.y = temp.y;
-	//
-	// if (temp.z < min.z)
-	// min.z = temp.z;
-	// else if (temp.z > max.z)
-	// max.z = temp.z;
-	// }
-	//
-	// center.set(min.addLocal(max));
-	// center.multLocal(0.5f);
-	//
-	// xExtent = max.x - center.x;
-	// yExtent = max.y - center.y;
-	// zExtent = max.z - center.z;
-	// return this;
-	// }
 
 	/**
 	 * <code>merge</code> combines this bounding box with another box which is defined by the center, x, y, z extents.
@@ -459,8 +320,7 @@ public class BoundingBox extends BoundingVolume {
 			return rVal;
 		}
 
-		BoundingBox rVal = new BoundingBox(center.clone(), xExtent, yExtent, zExtent);
-		return rVal;
+		return new BoundingBox(center.clone(), xExtent, yExtent, zExtent);
 	}
 
 	/**
@@ -517,35 +377,24 @@ public class BoundingBox extends BoundingVolume {
 	}
 
 	/**
-	 * determines if this bounding box intersects with a given oriented bounding box.
-	 * 
-	 * @see com.jme.bounding.BoundingVolume#intersectsOrientedBoundingBox(com.jme.bounding.OrientedBoundingBox)
-	 */
-	// public boolean intersectsOrientedBoundingBox(OrientedBoundingBox obb) {
-	// return obb.intersectsBoundingBox(this);
-	// }
-
-	/**
 	 * determines if this bounding box intersects with a given ray object. If an intersection has occurred, true is
 	 * returned, otherwise false is returned.
 	 * 
-	 * @see com.aionemu.gameserver.geoEngine.bounding.jme.bounding.BoundingVolume#intersects(com.jme.math.Ray)
+	 * @see com.aionemu.gameserver.geoEngine.bounding.BoundingVolume#intersects(Ray)
 	 */
 	@Override
 	public boolean intersects(Ray ray) {
 		// assert Vector3f.isValidVector(center);
 
-		float rhs;
-
 		Vector3f vect1 = new Vector3f();
 		Vector3f vect2 = new Vector3f();
 		Vector3f diff = ray.origin.subtract(getCenter(vect2), vect1);
 
-		final Array3f fWdU = new Array3f();
-		final Array3f fAWdU = new Array3f();
-		final Array3f fDdU = new Array3f();
-		final Array3f fADdU = new Array3f();
-		final Array3f fAWxDdU = new Array3f();
+		Array3f fWdU = new Array3f();
+		Array3f fAWdU = new Array3f();
+		Array3f fDdU = new Array3f();
+		Array3f fADdU = new Array3f();
+		Array3f fAWxDdU = new Array3f();
 
 		fWdU.a = ray.getDirection().dot(Vector3f.UNIT_X);
 		fAWdU.a = FastMath.abs(fWdU.a);
@@ -574,7 +423,7 @@ public class BoundingBox extends BoundingVolume {
 		Vector3f wCrossD = ray.getDirection().cross(diff, vect2);
 
 		fAWxDdU.a = FastMath.abs(wCrossD.dot(Vector3f.UNIT_X));
-		rhs = yExtent * fAWdU.c + zExtent * fAWdU.b;
+		float rhs = yExtent * fAWdU.c + zExtent * fAWdU.b;
 		if (fAWxDdU.a > rhs) {
 			return false;
 		}
@@ -594,7 +443,7 @@ public class BoundingBox extends BoundingVolume {
 	}
 
 	/**
-	 * @see com.aionemu.gameserver.geoEngine.bounding.jme.bounding.BoundingVolume#intersectsWhere(com.jme.math.Ray)
+	 * @see com.aionemu.gameserver.geoEngine.bounding.BoundingVolume#intersectsWhere(Ray)
 	 */
 	private int collideWithRay(Ray ray, CollisionResults results) {
 		Vector3f diff = new Vector3f().set(ray.origin).subtractLocal(center);
@@ -633,29 +482,9 @@ public class BoundingBox extends BoundingVolume {
 		if (other instanceof Ray) {
 			Ray ray = (Ray) other;
 			return collideWithRay(ray, results);
-		} else if (other instanceof Triangle) {
-			Triangle t = (Triangle) other;
-			if (intersects(t.get1(), t.get2(), t.get3())) {
-				CollisionResult r = new CollisionResult();
-				results.addCollision(r);
-				return 1;
-			}
-			return 0;
 		} else {
 			throw new UnsupportedCollisionException("With: " + other.getClass().getSimpleName());
 		}
-	}
-
-	/**
-	 * C code ported from http://www.cs.lth.se/home/Tomas_Akenine_Moller/code/tribox3.txt
-	 * 
-	 * @param v1
-	 * @param v2
-	 * @param v3
-	 * @return
-	 */
-	public boolean intersects(Vector3f v1, Vector3f v2, Vector3f v3) {
-		return Intersection.intersect(this, v1, v2, v3);
 	}
 
 	@Override
@@ -816,5 +645,12 @@ public class BoundingBox extends BoundingVolume {
 	@Override
 	public float getVolume() {
 		return (8 * xExtent * yExtent * zExtent);
+	}
+
+	private static class Array3f {
+
+		private float a = 0;
+		private float b = 0;
+		private float c = 0;
 	}
 }
