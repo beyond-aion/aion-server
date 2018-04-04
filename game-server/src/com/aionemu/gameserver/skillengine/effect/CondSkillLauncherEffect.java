@@ -25,8 +25,6 @@ public class CondSkillLauncherEffect extends EffectTemplate {
 	@XmlAttribute
 	protected HealType type;
 
-	protected Effect launcherEffect;
-
 	// TODO what if you fall? effect is not applied? what if you use skill that consume hp?
 	@Override
 	public void applyEffect(Effect effect) {

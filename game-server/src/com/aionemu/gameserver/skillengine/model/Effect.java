@@ -536,10 +536,8 @@ public class Effect implements StatOwner {
 	}
 
 	public boolean isPhysicalEffect() {
-		for (EffectTemplate template : getEffectTemplates()) {
-			return template.getElement() == SkillElement.NONE;
-		}
-		return false;
+		EffectTemplate mainEffectTemplate = skillTemplate.getEffectTemplate(1);
+		return mainEffectTemplate != null && mainEffectTemplate.getElement() == SkillElement.NONE;
 	}
 
 	/**
@@ -649,7 +647,13 @@ public class Effect implements StatOwner {
 	}
 
 	private boolean shouldApplyFurtherEffects(Creature effected) {
-		return effected == null || effected.isSpawned() && (!effected.isDead() || skillTemplate.hasResurrectEffect());
+		if (effected != null) {
+			if (!effected.isSpawned() && !skillTemplate.isPassive()) // only allow on despawned if it's a passive skill (players get them during enterWorld)
+				return false;
+			if (effected.isDead() && !skillTemplate.hasResurrectEffect())
+				return false;
+		}
+		return true;
 	}
 
 	/**
@@ -757,9 +761,9 @@ public class Effect implements StatOwner {
 		}
 
 		if (periodicTasks != null) {
-			for (int i = 0; i < periodicTasks.length; i++) {
-				if (periodicTasks[i] != null)
-					periodicTasks[i].cancel(false);
+			for (Future<?> periodicTask : periodicTasks) {
+				if (periodicTask != null)
+					periodicTask.cancel(false);
 			}
 			periodicTasks = null;
 		}
@@ -1023,7 +1027,7 @@ public class Effect implements StatOwner {
 	 */
 	private boolean useEquipmentConditionsCheck() {
 		Conditions useEquipConditions = skillTemplate.getUseEquipmentconditions();
-		return useEquipConditions != null ? useEquipConditions.validate(this) : true;
+		return useEquipConditions == null || useEquipConditions.validate(this);
 	}
 
 	/**
