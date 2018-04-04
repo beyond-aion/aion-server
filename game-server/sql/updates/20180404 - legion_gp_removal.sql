@@ -1,0 +1,1 @@
+ALTER TABLE legions DROP COLUMN siege_glory_points;

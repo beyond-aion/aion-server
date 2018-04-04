@@ -40,7 +40,7 @@ public class MySQL5LegionDAO extends LegionDAO {
 	private static final String SELECT_LEGION_QUERY1 = "SELECT * FROM legions WHERE id=?";
 	private static final String SELECT_LEGION_QUERY2 = "SELECT * FROM legions WHERE name=?";
 	private static final String DELETE_LEGION_QUERY = "DELETE FROM legions WHERE id = ?";
-	private static final String UPDATE_LEGION_QUERY = "UPDATE legions SET name=?, level=?, contribution_points=?, deputy_permission=?, centurion_permission=?, legionary_permission=?, volunteer_permission=?, disband_time=?, siege_glory_points=?, occupied_legion_dominion=?, last_legion_dominion=?, current_legion_dominion=? WHERE id=?";
+	private static final String UPDATE_LEGION_QUERY = "UPDATE legions SET name=?, level=?, contribution_points=?, deputy_permission=?, centurion_permission=?, legionary_permission=?, volunteer_permission=?, disband_time=?, occupied_legion_dominion=?, last_legion_dominion=?, current_legion_dominion=? WHERE id=?";
 	/** Announcement Queries **/
 	private static final String INSERT_ANNOUNCEMENT_QUERY = "INSERT INTO legion_announcement_list(`legion_id`, `announcement`, `date`) VALUES (?, ?, ?)";
 	private static final String SELECT_ANNOUNCEMENTLIST_QUERY = "SELECT * FROM legion_announcement_list WHERE legion_id=? ORDER BY date ASC LIMIT 0,7;";
@@ -104,11 +104,10 @@ public class MySQL5LegionDAO extends LegionDAO {
 				stmt.setInt(6, legion.getLegionaryPermission());
 				stmt.setInt(7, legion.getVolunteerPermission());
 				stmt.setInt(8, legion.getDisbandTime());
-				stmt.setInt(9, legion.getSiegeGloryPoints());
-				stmt.setInt(10, legion.getOccupiedLegionDominion());
-				stmt.setInt(11, legion.getLastLegionDominion());
-				stmt.setInt(12, legion.getCurrentLegionDominion());
-				stmt.setInt(13, legion.getLegionId());
+				stmt.setInt(9, legion.getOccupiedLegionDominion());
+				stmt.setInt(10, legion.getLastLegionDominion());
+				stmt.setInt(11, legion.getCurrentLegionDominion());
+				stmt.setInt(12, legion.getLegionId());
 				stmt.execute();
 			}
 		});
@@ -131,7 +130,6 @@ public class MySQL5LegionDAO extends LegionDAO {
 					legion[0] = new Legion(resultSet.getInt("id"), resultSet.getString("name"));
 					legion[0].setLegionLevel(resultSet.getInt("level"));
 					legion[0].addContributionPoints(resultSet.getLong("contribution_points"));
-					legion[0].setSiegeGloryPoints(resultSet.getInt("siege_glory_points"));
 
 					legion[0].setLegionPermissions(resultSet.getShort("deputy_permission"), resultSet.getShort("centurion_permission"),
 						resultSet.getShort("legionary_permission"), resultSet.getShort("volunteer_permission"));
@@ -164,7 +162,6 @@ public class MySQL5LegionDAO extends LegionDAO {
 					legion[0] = new Legion(legionId, resultSet.getString("name"));
 					legion[0].setLegionLevel(resultSet.getInt("level"));
 					legion[0].addContributionPoints(resultSet.getLong("contribution_points"));
-					legion[0].setSiegeGloryPoints(resultSet.getInt("siege_glory_points"));
 
 					legion[0].setLegionPermissions(resultSet.getShort("deputy_permission"), resultSet.getShort("centurion_permission"),
 						resultSet.getShort("legionary_permission"), resultSet.getShort("volunteer_permission"));

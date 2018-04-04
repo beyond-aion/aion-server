@@ -45,7 +45,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_RIFT_ANNOUNCE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SHIELD_EFFECT;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SIEGE_LOCATION_INFO;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
-import com.aionemu.gameserver.services.abyss.GloryPointsService;
 import com.aionemu.gameserver.services.siege.AgentSiege;
 import com.aionemu.gameserver.services.siege.ArtifactSiege;
 import com.aionemu.gameserver.services.siege.FortressSiege;
@@ -371,14 +370,6 @@ public class SiegeService {
 			if (artifact != null) {
 				artifact.setRace(SiegeRace.BALAUR);
 				artifact.setLegionId(0);
-			}
-		}
-
-		if (legionId != 0 && loc.hasValidGpRewards()) { // make sure holding GP are deducted on Capture
-			int oldLegionGeneral = LegionService.getInstance().getBrigadeGeneralOfLegion(legionId);
-			if (oldLegionGeneral != 0) {
-				GloryPointsService.decreaseGp(oldLegionGeneral, 1000);
-				LegionService.getInstance().getLegion(legionId).decreaseSiegeGloryPoints(1000);
 			}
 		}
 		loc.setOccupiedCount(0);

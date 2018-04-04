@@ -459,7 +459,6 @@ CREATE TABLE `legions` (
   `disband_time` int(11) NOT NULL DEFAULT '0',
   `rank_pos` int(11) NOT NULL DEFAULT '0',
   `old_rank_pos` int(11) NOT NULL DEFAULT '0',
-  `siege_glory_points` int(11) NOT NULL DEFAULT '0',
   `occupied_legion_dominion` int(11) NOT NULL DEFAULT '0',
   `last_legion_dominion` int(11) NOT NULL DEFAULT '0',
   `current_legion_dominion` int(11) NOT NULL DEFAULT '0',

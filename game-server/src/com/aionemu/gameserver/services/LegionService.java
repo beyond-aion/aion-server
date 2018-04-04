@@ -53,7 +53,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_QUESTION_WINDOW;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_WAREHOUSE_INFO;
 import com.aionemu.gameserver.services.abyss.AbyssRankingCache;
-import com.aionemu.gameserver.services.abyss.GloryPointsService;
 import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.services.trade.PricesService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -644,10 +643,6 @@ public class LegionService {
 							PacketSendUtility.broadcastToLegion(legion, new SM_LEGION_UPDATE_MEMBER(responder, 1300273, responder.getName()));
 							PacketSendUtility.broadcastToLegion(legion, new SM_LEGION_EDIT(0x08));
 							addHistory(legion, responder.getName(), LegionHistoryType.APPOINTED);
-							// transfer gp to new Brigade General
-							int gpToTransfer = requester.getLegion().getSiegeGloryPoints();
-							GloryPointsService.decreaseGp(requester.getObjectId(), gpToTransfer);
-							GloryPointsService.addGp(responder, gpToTransfer, false);
 						}
 					}
 				}

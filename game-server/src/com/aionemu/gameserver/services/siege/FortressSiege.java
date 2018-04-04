@@ -1,6 +1,7 @@
 package com.aionemu.gameserver.services.siege;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -25,7 +26,6 @@ import com.aionemu.gameserver.model.siege.SiegeModType;
 import com.aionemu.gameserver.model.siege.SiegeRace;
 import com.aionemu.gameserver.model.team.legion.Legion;
 import com.aionemu.gameserver.model.team.legion.LegionHistoryType;
-import com.aionemu.gameserver.model.team.legion.LegionRank;
 import com.aionemu.gameserver.model.templates.npc.AbyssNpcType;
 import com.aionemu.gameserver.model.templates.siegelocation.SiegeLegionReward;
 import com.aionemu.gameserver.model.templates.siegelocation.SiegeMercenaryZone;
@@ -174,14 +174,12 @@ public class FortressSiege extends Siege<FortressLocation> {
 		// Reward players and owning legion
 		// If fortress was not captured by balaur
 		if (SiegeRace.BALAUR != getSiegeLocation().getRace()) {
-			giveRewardsToLegion();
-			if (getSiegeLocation().hasValidGpRewards())
-				calculateLegionGloryPointsRewards();
-
 			SiegeRace winnerRace = getSiegeLocation().getRace();
 			SiegeRace looserRace = winnerRace == SiegeRace.ASMODIANS ? SiegeRace.ELYOS : SiegeRace.ASMODIANS;
 			sendRewardsToParticipatedPlayers(getSiegeCounter().getRaceCounter(winnerRace), true);
 			sendRewardsToParticipatedPlayers(getSiegeCounter().getRaceCounter(looserRace), false);
+			distributeLegionGp(getSiegeCounter().getRaceCounter(winnerRace));
+			giveRewardsToLegion();
 		}
 
 		// Update outpost status
@@ -212,11 +210,6 @@ public class FortressSiege extends Siege<FortressLocation> {
 
 		// reset occupy count
 		getSiegeLocation().setOccupiedCount(winnerRace == SiegeRace.BALAUR ? 0 : 1);
-
-		if (oldLegion != null && oldLegion.getBrigadeGeneral() != 0 && getSiegeLocation().hasValidGpRewards()) {
-			GloryPointsService.decreaseGp(oldLegion.getBrigadeGeneral(), 1000);
-			LegionService.getInstance().getLegion(oldLegionId).decreaseSiegeGloryPoints(1000);
-		}
 
 		// If new race is balaur
 		if (SiegeRace.BALAUR == winnerRace) {
@@ -373,29 +366,23 @@ public class FortressSiege extends Siege<FortressLocation> {
 		}
 	}
 
-	protected void calculateLegionGloryPointsRewards() {
+	protected void distributeLegionGp(SiegeRaceCounter src) {
 		try {
 			int winnerLegionId = getSiegeLocation().getLegionId();
-			if (winnerLegionId == 0)
+			int legionGp = getSiegeLocation().getLegionGp();
+			if (winnerLegionId == 0 || legionGp <= 0)
 				return;
 
-			int legionBGeneral = LegionService.getInstance().getBrigadeGeneralOfLegion(winnerLegionId);
-			if (legionBGeneral == 0)
-				return;
+			Legion legion = LegionService.getInstance().getLegion(winnerLegionId);
+			Collection<Integer> legionMembers = legion.getLegionMembers();
+			Collection<Integer> participatedLegionMembers = new ArrayList<>();
+			for (Integer participantId : src.getPlayerAbyssPoints().keySet())
+				if (legionMembers.contains(participantId))
+					participatedLegionMembers.add(participantId);
 
-			boolean defenseSuccessful = winnerLegionId == oldLegionId;
-			if (defenseSuccessful) {
-				List<Integer> deputies = LegionService.getInstance().getMembersByRank(winnerLegionId, LegionRank.DEPUTY);
-				int gpReward = Math.round(500 / (float) (1 + deputies.size()));
-				GloryPointsService.increaseGp(legionBGeneral, gpReward);
-				for (int playerObjId : deputies) {
-					GloryPointsService.increaseGp(playerObjId, gpReward);
-				}
-			} else {
-				GloryPointsService.increaseGp(legionBGeneral, 1000, false);
-				Legion legion = LegionService.getInstance().getLegion(winnerLegionId);
-				legion.increaseSiegeGloryPoints(1000);
-			}
+			for (Integer participant : participatedLegionMembers)
+				GloryPointsService.increaseGp(participant,
+					Math.min(Math.round(legionGp / (float) participatedLegionMembers.size()), SiegeConfig.LEGION_GP_CAP_PER_MEMBER));
 		} catch (Exception e) {
 			log.error("Error while calculating glory points reward for fortress siege.", e);
 		}
