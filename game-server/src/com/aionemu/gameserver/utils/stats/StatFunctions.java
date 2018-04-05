@@ -482,7 +482,7 @@ public class StatFunctions {
 		resultDamage = Math.round(resultDamage * (1 - elementalDef / 1250f));
 
 		// Magical Defense for test purpose
-		resultDamage -= Math.round(target.getGameStats().getStat(StatEnum.MAGICAL_DEFEND, 0).getCurrent() * 0.1f);
+		resultDamage -= Math.round(resultDamage * Math.min(target.getGameStats().getMDef().getCurrent() * 0.0001f, 99f));
 
 		if (resultDamage <= 0)
 			resultDamage = 1;
@@ -513,13 +513,13 @@ public class StatFunctions {
 		// add bonus damage
 		damages += bonus;
 		/*
-		 * element resist: fire, wind, water, eath 10 elemental resist ~ 1% reduce of magical baseDamages
+		 * element resist: fire, wind, water, earth 10 elemental resist ~ 1% reduce of magical baseDamages
 		 */
 		if (!noReduce && element != SkillElement.NONE) {
 			float elementalDef = getMovementModifier(target, SkillElement.getResistanceForElement(element), tgs.getMagicalDefenseFor(element));
 			damages = Math.round(damages * (1 - (elementalDef / 1250f)));
 			// magic defense for test purpose
-			damages -= Math.round(target.getGameStats().getStat(StatEnum.MAGICAL_DEFEND, 0).getCurrent() * 0.1f);
+			damages -= Math.round(damages * Math.min(tgs.getMDef().getCurrent() * 0.0001f, 99f));
 		}
 
 		// useKnowledge? This boolean is later used to determine whether movement boni are applied or not. Therefore this might not be correct.
