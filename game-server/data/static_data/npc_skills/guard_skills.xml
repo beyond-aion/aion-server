@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<npc_skill_templates xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="npc_skills.xsd">
+	<!-- Fighter (GFI_) -->
+	<npc_skills npc_ids="235617 235618 236674">
+		<npc_skill id="17059" lv="65" prob="40" cd="30000" /><!-- Cleave -->
+		<npc_skill id="17061" lv="65" prob="60" cd="20000" /><!-- Force Cleave -->
+		<npc_skill id="17062" lv="65" prob="60" cd="25000" /><!-- Crippling Cut -->
+		<npc_skill id="17066" lv="65" prob="60" cd="35000" /><!-- Wide Aerial Lockdown -->
+		<npc_skill id="17072" lv="65" prob="60" cd="15000" /><!-- Ferocious Strike -->
+		<npc_skill id="17074" lv="65" prob="60" cd="30000" /><!-- Wide Area Thrust -->
+		<npc_skill id="17080" lv="65" prob="60" cd="50000" /><!-- Decrease Attack -->
+	</npc_skills>
+	<!-- Ranger (GRA_) -->
+	<!-- Witch (GWI_) -->
+	<!-- Priest (GPR_) -->
+	<!-- Assassin (GAS_) -->
+	<!-- Trap (GTRAP_) -->
+	<!-- Holy Servant (GHS_) -->
+</npc_skill_templates>
