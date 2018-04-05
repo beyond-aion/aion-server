@@ -16,12 +16,7 @@ import com.aionemu.gameserver.utils.PositionUtil;
  */
 public class FirstTargetProperty {
 
-	/**
-	 * @param skill
-	 * @param properties
-	 * @return
-	 */
-	public static final boolean set(Skill skill, Properties properties) {
+	public static boolean set(Skill skill, Properties properties) {
 
 		FirstTargetAttribute value = properties.getFirstTarget();
 		skill.setFirstTargetAttribute(value);
@@ -57,7 +52,7 @@ public class FirstTargetProperty {
 							}
 							break;
 					}
-					if (!changeTargetToMe && !isTargetAllowed(skill))
+					if (!changeTargetToMe && !isTargetAllowed(skill, skill.getFirstTarget()))
 						changeTargetToMe = true;
 				}
 				if (changeTargetToMe) {
@@ -82,8 +77,7 @@ public class FirstTargetProperty {
 							return skill.getFirstTarget() != null;
 
 						TargetRangeAttribute type = skill.getSkillTemplate().getProperties().getTargetType();
-						if ((relation != TargetRelationAttribute.ALL && relation != TargetRelationAttribute.MYPARTY && skill.getSkillId() != 2768)
-							|| type == TargetRangeAttribute.PARTY || skill.getSkillId() == 2353) { // TODO: Remove ID, find logic!
+						if ((relation != TargetRelationAttribute.ALL && relation != TargetRelationAttribute.MYPARTY) || type == TargetRangeAttribute.PARTY) {
 							PacketSendUtility.sendPacket((Player) skill.getEffector(), SM_SYSTEM_MESSAGE.STR_SKILL_TARGET_IS_NOT_VALID());
 							return false;
 						}
@@ -97,19 +91,18 @@ public class FirstTargetProperty {
 					}
 				}
 
-				if (relation != TargetRelationAttribute.ENEMY && !isTargetAllowed(skill)) {
+				if (relation != TargetRelationAttribute.ENEMY && !isTargetAllowed(skill, skill.getFirstTarget())) {
 					if (skill.getEffector() instanceof Player) {
 						PacketSendUtility.sendPacket((Player) skill.getEffector(), SM_SYSTEM_MESSAGE.STR_SKILL_TARGET_IS_NOT_VALID());
 					}
 					return false;
 				}
-
 				break;
 			case MYPET:
 				Creature effector = skill.getEffector();
 				if (effector instanceof Player) {
 					Summon summon = ((Player) effector).getSummon();
-					if (summon == null || !isTargetAllowed(skill)) {
+					if (summon == null || !isTargetAllowed(skill, summon)) {
 						PacketSendUtility.sendPacket((Player) skill.getEffector(), SM_SYSTEM_MESSAGE.STR_SKILL_INVALID_TARGET_PET_ONLY());
 						return false;
 					}
@@ -169,13 +162,10 @@ public class FirstTargetProperty {
 	}
 
 	/**
-	 * @param skill
 	 * @return true = allow buff, false = deny buff
 	 */
-	public static boolean isTargetAllowed(Skill skill) {
+	public static boolean isTargetAllowed(Skill skill, Creature target) {
 		Creature source = skill.getEffector();
-		Creature target = skill.getFirstTarget();
-
 		return TargetRelationProperty.isBuffAllowed(source, target);
 	}
 
