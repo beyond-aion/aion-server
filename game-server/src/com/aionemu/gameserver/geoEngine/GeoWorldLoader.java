@@ -128,7 +128,7 @@ public class GeoWorldLoader {
 				short z = 0;
 				boolean isAllSameZ = true;
 				for (int i = 0; i < size; i++) {
-					if (z != (z = geo.getShort()))
+					if (z != (z = geo.getShort()) && i > 0)
 						isAllSameZ = false;
 					terrainData[i] = z;
 				}
