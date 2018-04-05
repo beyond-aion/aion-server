@@ -21,8 +21,9 @@ public class NpcStatCalculation {
 		switch (stat) {
 			case PHYSICAL_ATTACK:
 				return level * 8f;
-			case MAGICAL_ATTACK:
 			case MAGICAL_DEFEND:
+				return level * 5f;
+			case MAGICAL_ATTACK:
 			case PHYSICAL_DEFENSE:
 				return level * 20f;
 			case MAGICAL_ACCURACY:
