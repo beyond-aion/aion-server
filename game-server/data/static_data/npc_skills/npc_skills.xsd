@@ -74,6 +74,7 @@
 			<xs:enumeration value="TARGET_IS_AETHERS_HOLD" />
 			<xs:enumeration value="TARGET_IS_POISONED" />
 			<xs:enumeration value="TARGET_IS_BLEEDING" />
+			<xs:enumeration value="TARGET_IS_FLYING" />
 			<xs:enumeration value="TARGET_IS_GATE" />
 			<xs:enumeration value="TARGET_IS_PLAYER" />
 			<xs:enumeration value="TARGET_IS_PHYSICAL_CLASS" />

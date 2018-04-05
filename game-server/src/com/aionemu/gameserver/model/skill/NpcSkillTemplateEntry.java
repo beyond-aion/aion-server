@@ -164,6 +164,11 @@ public class NpcSkillTemplateEntry extends NpcSkillEntry {
 					return ((Creature) curTarget).getEffectController().isInAnyAbnormalState(AbnormalState.SLEEP);
 				}
 				return false;
+			case TARGET_IS_FLYING:
+				if (curTarget instanceof Creature) {
+					return ((Creature) curTarget).isInFlyingState();
+				}
+				return false;
 			case TARGET_IS_POISONED:
 				if (curTarget instanceof Creature) {
 					return ((Creature) curTarget).getEffectController().isInAnyAbnormalState(AbnormalState.POISON);
