@@ -82,12 +82,13 @@ public class EnchantItemAction extends AbstractItemAction {
 
 	// necessary overloading to not change AbstractItemAction
 	public void act(final Player player, final Item parentItem, final Item targetItem, final Item supplementItem, final int targetWeapon) {
-		boolean isEnchantmentStone = parentItem.getItemTemplate().getItemGroup() == ItemGroup.ENCHANTMENT;
-
 		if (supplementItem != null && !checkSupplementLevel(player, supplementItem.getItemTemplate(), targetItem.getItemTemplate()))
 			return;
 
-		final StartMovingListener move = new StartMovingListener() {
+		boolean isEnchantmentStone = parentItem.getItemTemplate().getItemGroup() == ItemGroup.ENCHANTMENT;
+		int enchantDurationMillis = isEnchantmentStone ? 4000 : 2000;
+
+		StartMovingListener move = new StartMovingListener() {
 
 			@Override
 			public void moved() {
@@ -103,11 +104,11 @@ public class EnchantItemAction extends AbstractItemAction {
 		player.getObserveController().attach(move);
 
 		// Current enchant level
-		final int currentEnchant = targetItem.getEnchantLevel();
-		final boolean isSuccess = isSuccess(player, parentItem, targetItem, supplementItem, targetWeapon);
+		int currentEnchant = targetItem.getEnchantLevel();
+		boolean isSuccess = isSuccess(player, parentItem, targetItem, supplementItem, targetWeapon);
 		// Item template
 		PacketSendUtility.broadcastPacketAndReceive(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), targetItem.getObjectId(),
-			parentItem.getObjectId(), parentItem.getItemTemplate().getTemplateId(), isEnchantmentStone ? 5000 : 2000, 0, 0, 1, 0, 0));
+			parentItem.getObjectId(), parentItem.getItemTemplate().getTemplateId(), enchantDurationMillis, 0, 0, 1, 0, 0));
 
 		player.getController().addTask(TaskId.ITEM_USE, ThreadPoolManager.getInstance().schedule(new Runnable() {
 
@@ -116,7 +117,7 @@ public class EnchantItemAction extends AbstractItemAction {
 				player.getObserveController().removeObserver(move);
 
 				if (player.getInventory().getItemByObjId(targetItem.getObjectId()) == null && !targetItem.isEquipped()) {
-					PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1300452));
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ENCHANT_ITEM_NO_TARGET_ITEM());
 					PacketSendUtility.broadcastPacketAndReceive(player,
 						new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemTemplate().getTemplateId(), 0, 2, 0));
 					return;
@@ -141,7 +142,7 @@ public class EnchantItemAction extends AbstractItemAction {
 				}
 			}
 
-		}, isEnchantmentStone ? 5000 : 2000));
+		}, enchantDurationMillis));
 	}
 
 	/**
