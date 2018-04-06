@@ -1,6 +1,5 @@
 package admincommands;
 
-import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.team.TemporaryPlayerTeam;
 import com.aionemu.gameserver.services.teleport.TeleportService;
@@ -15,13 +14,11 @@ import com.aionemu.gameserver.world.World;
 public class MoveToMe extends AdminCommand {
 
 	public MoveToMe() {
-		super("movetome", "Teleports a player (optional his team), a specific faction or all online players to the user.");
+		super("movetome", "Teleports a player (optional his team) to the user.");
 		// @formatter:off
 		setSyntaxInfo(
 			"<name> - Teleports only the player.",
-			"<name> <(g)rp|(a)lli> - Teleports either the players group or his alliance including him.",
-			"<ely|asmo> - Teleports the <ely>os or the <asmo>dian faction.",
-			"<all> - Teleports all online players.");
+			"<name> <(g)rp|(a)lli> - Teleports either the players group or his alliance including him.");
 		// @formatter:on
 	}
 
@@ -31,23 +28,7 @@ public class MoveToMe extends AdminCommand {
 			sendInfo(admin);
 			return;
 		}
-
-		Race raceToMove = null;
-		switch (params[0].toLowerCase()) {
-			case "ely":
-				raceToMove = Race.ELYOS;
-				break;
-			case "asmo":
-				raceToMove = Race.ASMODIANS;
-				break;
-			case "all":
-				raceToMove = Race.PC_ALL;
-		}
-
-		if (raceToMove != null)
-			handleFactionTeleport(raceToMove, admin);
-		else
-			handlePlayerTeleport(admin, params);
+		handlePlayerTeleport(admin, params);
 	}
 
 	private void handlePlayerTeleport(Player admin, String... params) {
@@ -76,12 +57,6 @@ public class MoveToMe extends AdminCommand {
 		} else {
 			teleportPlayer(playerToMove, admin);
 		}
-	}
-
-	private void handleFactionTeleport(Race raceToMove, Player admin) {
-		for (Player playerToMove : World.getInstance().getAllPlayers())
-			if (!playerToMove.equals(admin) && (raceToMove == Race.PC_ALL || playerToMove.getRace() == raceToMove))
-				teleportPlayer(playerToMove, admin);
 	}
 
 	private void teleportPlayer(Player playerToMove, Player admin) {
