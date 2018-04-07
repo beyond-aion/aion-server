@@ -1,7 +1,6 @@
 package com.aionemu.gameserver.services;
 
 import java.sql.Timestamp;
-import java.time.Duration;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -12,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -462,7 +462,7 @@ public class HousingBidService extends AbstractCronTask {
 				// make the new house inactive until the old one is sold
 				obtainedHouse.setStatus(HouseStatus.INACTIVE);
 				result = AuctionResult.GRACE_START;
-				time = (getRunTime() + Duration.ofDays(14).getSeconds()) * 1000;
+				time = (getRunTime() + TimeUnit.DAYS.toSeconds(14)) * 1000;
 			}
 		}
 		obtainedHouse.setOwnerId(winner.getPlayerObjId());

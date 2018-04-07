@@ -1,6 +1,6 @@
 package com.aionemu.gameserver.services;
 
-import java.time.Duration;
+import java.util.concurrent.TimeUnit;
 
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.dao.PlayerPunishmentsDAO;
@@ -57,8 +57,7 @@ public class PunishmentService {
 	public static long calculateDuration(int dayCount) {
 		if (dayCount == 0)
 			return Integer.MAX_VALUE; // int because client handles this with seconds timestamp in int
-
-		return Duration.ofDays(dayCount).getSeconds();
+		return TimeUnit.DAYS.toSeconds(dayCount);
 	}
 
 	/**
@@ -71,10 +70,8 @@ public class PunishmentService {
 	public static void setIsInPrison(Player player, boolean state, long delayInMinutes, String reason) {
 		stopPrisonTask(player, false);
 		if (state) {
-			long prisonTimer = player.getPrisonTimer();
 			if (delayInMinutes > 0) {
-				prisonTimer = delayInMinutes * 60000L;
-				schedulePrisonTask(player, prisonTimer);
+				schedulePrisonTask(player, TimeUnit.MINUTES.toMillis(delayInMinutes));
 				ChatBanService.banPlayer(player, delayInMinutes);
 				player.setStartPrison(System.currentTimeMillis());
 				TeleportService.teleportToPrison(player);

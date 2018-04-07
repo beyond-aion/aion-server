@@ -1,9 +1,7 @@
 package com.aionemu.gameserver.services;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -753,18 +751,17 @@ public class BrokerService {
 	private void checkExpiredItems() {
 		Map<Integer, BrokerItem> asmoBrokerItems = getRaceBrokerItems(Race.ASMODIANS);
 		Map<Integer, BrokerItem> elyosBrokerItems = getRaceBrokerItems(Race.ELYOS);
-
-		Timestamp currentTime = new Timestamp(Calendar.getInstance().getTimeInMillis());
+		long now = System.currentTimeMillis();
 
 		for (BrokerItem item : asmoBrokerItems.values()) {
-			if (item != null && item.getExpireTime().getTime() <= currentTime.getTime()) {
+			if (item != null && item.getExpireTime().getTime() <= now) {
 				putToSettled(Race.ASMODIANS, item, false);
 				asmodianBrokerItems.remove(item.getItemUniqueId());
 			}
 		}
 
 		for (BrokerItem item : elyosBrokerItems.values()) {
-			if (item != null && item.getExpireTime().getTime() <= currentTime.getTime()) {
+			if (item != null && item.getExpireTime().getTime() <= now) {
 				putToSettled(Race.ELYOS, item, false);
 				this.elyosBrokerItems.remove(item.getItemUniqueId());
 			}

@@ -1,7 +1,7 @@
 package com.aionemu.gameserver.services.item;
 
-import java.time.Duration;
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.ChairObject;
@@ -74,7 +74,7 @@ public final class HouseObjectFactory {
 		HouseObject<?> obj = createNew(house, IDFactory.getInstance().nextId(), objectTemplateId);
 		int useDays = obj.getObjectTemplate().getUseDays();
 		if (useDays > 0) {
-			int expireEnd = (int) (System.currentTimeMillis() / 1000 + Duration.ofDays(useDays).getSeconds());
+			int expireEnd = (int) (System.currentTimeMillis() / 1000 + TimeUnit.DAYS.toSeconds(useDays));
 			obj.setExpireTime(expireEnd);
 		}
 		return obj;

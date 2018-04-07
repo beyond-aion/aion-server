@@ -1,10 +1,10 @@
 package com.aionemu.gameserver.model.house;
 
 import java.sql.Timestamp;
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -135,7 +135,7 @@ public class MaintenanceTask extends AbstractCronTask {
 			}
 
 			if (payTime <= beforePreviousRun) {
-				long plusDay = beforePreviousRun - Duration.ofDays(1).getSeconds() * 1000;
+				long plusDay = beforePreviousRun - TimeUnit.DAYS.toMillis(1);
 				if (payTime <= plusDay) {
 					// player didn't pay after the second warning and one day passed
 					impoundTime = now;
