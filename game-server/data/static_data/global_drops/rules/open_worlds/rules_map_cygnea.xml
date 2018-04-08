@@ -43,20 +43,6 @@
 			<gd_item id="102100748" /><!-- Sunayaka's Cipher-Blade -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Enchantment Stone" base_chance="100" max_drop_rule="3" fixed_chance="true">
-		<gd_maps>
-			<gd_map map_id="210070000" /><!-- Cygnea -->
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="235970" /><!-- Deadly Sunayaka -->
-			<gd_npc npc_id="235966" /><!-- Aurelian Dadar -->
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="166000195" /><!-- Epsilon Enchantment Stone -->
-			<gd_item id="166000195" /><!-- Epsilon Enchantment Stone -->
-			<gd_item id="166000195" /><!-- Epsilon Enchantment Stone -->
-		</gd_items>
-	</gd_rule>
 	<!-- Tatar -->
 	<gd_rule rule_name="Named Helm" base_chance="100" fixed_chance="true">
 		<gd_maps>
@@ -178,17 +164,28 @@
 			<gd_item id="115001861" /><!-- Scale Shield of Reviving Earth -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Enchantment Stone Bundle" base_chance="100" max_drop_rule="6" fixed_chance="true">
+	<gd_rule rule_name="Named Enchantment Stone" base_chance="100" max_drop_rule="5" fixed_chance="true">
 		<gd_maps>
 			<gd_map map_id="210070000" /><!-- Cygnea -->
 		</gd_maps>
 		<gd_npcs>
+			<gd_npc npc_id="235963" /><!-- Chromeleaf Flowershot -->
+			<gd_npc npc_id="235965" /><!-- Shatterroar Kirrin -->
+			<gd_npc npc_id="235967" /><!-- Betrayer Squallo -->
+			<gd_npc npc_id="235968" /><!-- Garden Protector Nenupar -->
+			<gd_npc npc_id="235969" /><!-- Tenacious Sashirr -->
 			<gd_npc npc_id="235971" /><!-- Machine Spirit Tottal -->
+			<gd_npc npc_id="235972" /><!-- Commander Ratash -->
+			<gd_npc npc_id="235973" /><!-- Fierce Sandmane Tigric -->
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="166000194" /><!-- Delta Enchantment Stone -->
 			<gd_item id="166000194" /><!-- Delta Enchantment Stone -->
 			<gd_item id="166000194" /><!-- Delta Enchantment Stone -->
+			<gd_item id="166000194" /><!-- Delta Enchantment Stone -->
+			<gd_item id="166000194" /><!-- Delta Enchantment Stone -->
+			<gd_item id="166000195" /><!-- Epsilon Enchantment Stone -->
+			<gd_item id="166000195" /><!-- Epsilon Enchantment Stone -->
 			<gd_item id="166000195" /><!-- Epsilon Enchantment Stone -->
 			<gd_item id="166000195" /><!-- Epsilon Enchantment Stone -->
 			<gd_item id="166000195" /><!-- Epsilon Enchantment Stone -->
@@ -265,6 +262,8 @@
 			<gd_map map_id="210070000" /><!-- Cygnea -->
 		</gd_maps>
 		<gd_npcs>
+			<gd_npc npc_id="235966" /><!-- Aurelian Dadar -->
+			<gd_npc npc_id="235970" /><!-- Deadly Sunayaka -->
 			<gd_npc npc_id="235975" /><!-- Gatekeeper Flox -->
 		</gd_npcs>
 		<gd_items>
@@ -274,6 +273,16 @@
 			<gd_item id="166000194" /><!-- Delta Enchantment Stone -->
 			<gd_item id="166000194" /><!-- Delta Enchantment Stone -->
 			<gd_item id="166000194" /><!-- Delta Enchantment Stone -->
+			<gd_item id="166000194" /><!-- Delta Enchantment Stone -->
+			<gd_item id="166000194" /><!-- Delta Enchantment Stone -->
+			<gd_item id="166000194" /><!-- Delta Enchantment Stone -->
+			<gd_item id="166000194" /><!-- Delta Enchantment Stone -->
+			<gd_item id="166000195" /><!-- Epsilon Enchantment Stone -->
+			<gd_item id="166000195" /><!-- Epsilon Enchantment Stone -->
+			<gd_item id="166000195" /><!-- Epsilon Enchantment Stone -->
+			<gd_item id="166000195" /><!-- Epsilon Enchantment Stone -->
+			<gd_item id="166000195" /><!-- Epsilon Enchantment Stone -->
+			<gd_item id="166000195" /><!-- Epsilon Enchantment Stone -->
 			<gd_item id="166000195" /><!-- Epsilon Enchantment Stone -->
 			<gd_item id="166000195" /><!-- Epsilon Enchantment Stone -->
 			<gd_item id="166000195" /><!-- Epsilon Enchantment Stone -->
@@ -578,7 +587,7 @@
 			<gd_item id="188053744" /><!-- Elegant Middle Grade Composite Manastone Bundle -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Manastone Pouch" base_chance="100" fixed_chance="true">
+	<gd_rule rule_name="Named Manastone Pouch" base_chance="100" max_drop_rule="3" fixed_chance="true">
 		<gd_maps>
 			<gd_map map_id="210070000" /><!-- Cygnea -->
 		</gd_maps>
@@ -586,6 +595,8 @@
 			<gd_npc npc_id="235975" /><!-- Gatekeeper Flox -->
 		</gd_npcs>
 		<gd_items>
+			<gd_item id="188053745" /><!-- Elegant High Grade Composite Manastone Bundle -->
+			<gd_item id="188053745" /><!-- Elegant High Grade Composite Manastone Bundle -->
 			<gd_item id="188053745" /><!-- Elegant High Grade Composite Manastone Bundle -->
 		</gd_items>
 	</gd_rule>

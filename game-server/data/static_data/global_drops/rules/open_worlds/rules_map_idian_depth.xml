@@ -453,7 +453,7 @@
 			<gd_item id="167020065" /><!-- Ancient Manastone: Magic Boost +32 -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Enchantment Stone" base_chance="1">
+	<gd_rule rule_name="Enchantment Stone" base_chance="3">
 		<gd_maps>
 			<gd_map map_id="210090000" /><!-- Idian Depths Light -->
 			<gd_map map_id="220100000" /><!-- Idian Depths Dark -->
