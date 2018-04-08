@@ -85,21 +85,26 @@ public class IdgelDomeInstance extends GeneralInstanceHandler {
 			IdgelDomePlayerInfo reward = idi.getPlayerReward(p.getObjectId());
 			if (reward.getRace() == winningrace) {
 				reward.setBaseAp(IdgelDomeInfo.WIN_AP);
-				reward.setBonusAp(Rnd.get(5000, 7000));
+				reward.setBonusAp(Rnd.get(10000, 14000));
 				reward.setBaseGp(50);
-				reward.addItemReward(new RewardItem(186000243, 6));
+				reward.addItemReward(new RewardItem(186000243, 3));
 				reward.addItemReward(new RewardItem(188053030, 1));
 				reward.addItemReward(new RewardItem(0, 0));
-				reward.addItemReward(new RewardItem(0, 0));
-				if (isKunaxKilled)
+				if (isKunaxKilled) {
+					RewardItem mythicKunaxEq = new RewardItem(0, 0);
+					if (Rnd.chance() < 20)
+						mythicKunaxEq = idi.getMythicKunaxEquipmentByPlayerClass(p.getPlayerClass());
+					reward.addItemReward(mythicKunaxEq);
 					reward.addItemReward(new RewardItem(188053032, 1));
-				else
+				} else {
 					reward.addItemReward(new RewardItem(0, 0));
+					reward.addItemReward(new RewardItem(0, 0));
+				}
 			} else {
 				reward.setBaseAp(IdgelDomeInfo.DEFEAT_AP);
-				reward.setBonusAp(Rnd.get(1500, 3000));
+				reward.setBonusAp(Rnd.get(3000, 6000));
 				reward.setBaseGp(10);
-				reward.addItemReward(new RewardItem(186000243, 2));
+				reward.addItemReward(new RewardItem(186000242, 1));
 				reward.addItemReward(new RewardItem(188053031, 1));
 				reward.addItemReward(new RewardItem(0, 0));
 				reward.addItemReward(new RewardItem(0, 0));
@@ -117,7 +122,7 @@ public class IdgelDomeInstance extends GeneralInstanceHandler {
 			for (Player player : instance.getPlayersInside()) {
 				if (player.isDead())
 					PlayerReviveService.duelRevive(player);
-				tasks.add(ThreadPoolManager.getInstance().schedule(() -> onExitInstance(player), 10000));
+				tasks.add(ThreadPoolManager.getInstance().schedule(() -> onExitInstance(player), 30000));
 			}
 			AutoGroupService.getInstance().unRegisterInstance(instanceId);
 		}, 10000));
@@ -151,6 +156,7 @@ public class IdgelDomeInstance extends GeneralInstanceHandler {
 			return;
 
 		int points = 0;
+		boolean isKunaxKilled = false;
 		switch (npc.getNpcId()) {
 			case 234186:
 			case 234187:
@@ -164,11 +170,13 @@ public class IdgelDomeInstance extends GeneralInstanceHandler {
 				break;
 			case 234190:
 				points = 6000;
-				onStop(true);
+				isKunaxKilled = true;
 				break;
 		}
 		if (points > 0)
 			updatePoints(points, player.getRace(), npc.getObjectTemplate().getL10n(), player);
+		if (isKunaxKilled)
+			onStop(true);
 	}
 
 	@Override
