@@ -1,7 +1,6 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
-import java.sql.Timestamp;
-import java.util.Calendar;
+import java.util.concurrent.TimeUnit;
 
 import com.aionemu.gameserver.model.gameobjects.BrokerItem;
 import com.aionemu.gameserver.model.gameobjects.Item;
@@ -29,7 +28,7 @@ public class SM_BROKER_SERVICE extends AionServerPacket {
 
 		private int id;
 
-		private BrokerPacketType(int id) {
+		BrokerPacketType(int id) {
 			this.id = id;
 		}
 
@@ -237,8 +236,7 @@ public class SM_BROKER_SERVICE extends AionServerPacket {
 		writeQ(brokerItem.getPrice() * brokerItem.getItemCount());
 		writeQ(item.getItemCount());
 		writeQ(item.getItemCount());
-		Timestamp currentTime = new Timestamp(Calendar.getInstance().getTimeInMillis());
-		int daysLeft = (int) ((brokerItem.getExpireTime().getTime() - currentTime.getTime()) / 86400000);
+		int daysLeft = (int) TimeUnit.MILLISECONDS.toDays(brokerItem.getExpireTime().getTime() - System.currentTimeMillis());
 		writeC(daysLeft);
 
 		ItemInfoBlob.newBlobEntry(ItemBlobType.MANA_SOCKETS, null, item).writeThisBlob(getBuf());

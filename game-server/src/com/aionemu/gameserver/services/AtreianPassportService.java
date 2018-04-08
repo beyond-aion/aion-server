@@ -4,9 +4,7 @@ import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
-import java.util.function.Consumer;
 
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.commons.services.CronService;
@@ -36,31 +34,20 @@ import com.aionemu.gameserver.world.World;
 public class AtreianPassportService {
 
 	private AtreianPassportService() {
-		CronService.getInstance().schedule(new Runnable() {
+		CronService.getInstance().schedule(() -> {
+			boolean isFirstDayOfMonth = ServerTime.now().getDayOfMonth() == 1;
+			DAOManager.getDAO(AccountPassportsDAO.class).resetAllPassports();
+			if (isFirstDayOfMonth)
+				DAOManager.getDAO(AccountPassportsDAO.class).resetAllStamps();
 
-			@Override
-			public void run() {
-				Calendar calendar = Calendar.getInstance();
-				DAOManager.getDAO(AccountPassportsDAO.class).resetAllPassports();
-				if (calendar.get(Calendar.DAY_OF_MONTH) == 1) {
-					DAOManager.getDAO(AccountPassportsDAO.class).resetAllStamps();
-				}
+			World.getInstance().forEachPlayer(player -> {
+				player.getAccount().setLastStamp(null);
 
-				World.getInstance().forEachPlayer(new Consumer<Player>() {
+				if (isFirstDayOfMonth)
+					player.getAccount().setPassportStamps(0);
 
-					@Override
-					public void accept(Player p) {
-						if (p.getCommonData() != null) {
-							p.getAccount().setLastStamp(null);
-
-							if (calendar.get(Calendar.DAY_OF_MONTH) == 1)
-								p.getAccount().setPassportStamps(0);
-
-							onLogin(p);
-						}
-					}
-				});
-			}
+				onLogin(player);
+			});
 		}, "0 0 9 ? * *");
 	}
 
@@ -86,8 +73,8 @@ public class AtreianPassportService {
 			}
 
 			AtreianPassport atp = DataManager.ATREIAN_PASSPORT_DATA.getAtreianPassportId(passId);
-			ItemService.addItem(player, atp.getRewardItem(), atp.getRewardItemNum(), true, new ItemUpdatePredicate(ItemAddType.ITEM_COLLECT,
-				ItemUpdateType.INC_PASSPORT_ADD));
+			ItemService.addItem(player, atp.getRewardItem(), atp.getRewardItemNum(), true,
+				new ItemUpdatePredicate(ItemAddType.ITEM_COLLECT, ItemUpdateType.INC_PASSPORT_ADD));
 			passport.setRewarded(true);
 			passport.setPersistentState(PersistentState.DELETED);
 			ppl.removePassport(passport);
@@ -190,7 +177,7 @@ public class AtreianPassportService {
 		protected static final AtreianPassportService instance = new AtreianPassportService();
 	}
 
-	public static final AtreianPassportService getInstance() {
+	public static AtreianPassportService getInstance() {
 		return SingletonHolder.instance;
 	}
 

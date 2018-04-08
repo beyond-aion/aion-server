@@ -1,8 +1,8 @@
 package com.aionemu.gameserver.model.gameobjects;
 
 import java.sql.Timestamp;
-import java.util.Calendar;
 import java.util.Comparator;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -54,9 +54,8 @@ public class BrokerItem implements Comparable<BrokerItem>, Persistable {
 		this.isSold = false;
 		this.isSettled = false;
 		this.splittingAvailable = splittingAvailable;
-		this.expireTime = new Timestamp(Calendar.getInstance().getTimeInMillis() + 691200000); // 8 days
-		this.settleTime = new Timestamp(Calendar.getInstance().getTimeInMillis());
-
+		this.expireTime = new Timestamp(System.currentTimeMillis() + TimeUnit.DAYS.toMillis(8));
+		this.settleTime = new Timestamp(System.currentTimeMillis());
 		this.state = PersistentState.NEW;
 	}
 
@@ -135,7 +134,7 @@ public class BrokerItem implements Comparable<BrokerItem>, Persistable {
 		// this.item = null;
 		this.isSold = true;
 		this.isSettled = true;
-		this.settleTime = new Timestamp(Calendar.getInstance().getTimeInMillis());
+		this.settleTime = new Timestamp(System.currentTimeMillis());
 	}
 
 	public int getItemId() {
@@ -208,7 +207,7 @@ public class BrokerItem implements Comparable<BrokerItem>, Persistable {
 
 	public void setSettled() {
 		this.isSettled = true;
-		this.settleTime = new Timestamp(Calendar.getInstance().getTimeInMillis());
+		this.settleTime = new Timestamp(System.currentTimeMillis());
 	}
 
 	public Timestamp getExpireTime() {

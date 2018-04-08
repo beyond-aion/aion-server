@@ -2,7 +2,6 @@ package com.aionemu.gameserver.services.mail;
 
 import java.sql.Timestamp;
 import java.util.Arrays;
-import java.util.Calendar;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -199,7 +198,7 @@ public class MailService {
 		}
 
 		senderInventory.decreaseKinah(finalMailKinah);
-		Timestamp time = new Timestamp(Calendar.getInstance().getTimeInMillis());
+		Timestamp time = new Timestamp(System.currentTimeMillis());
 		Letter newLetter = new Letter(IDFactory.getInstance().nextId(), recipientObjId, attachedItem, attachedKinahCount, title, message,
 			sender.getName(), time, true, letterType);
 
