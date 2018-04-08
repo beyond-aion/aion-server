@@ -12,9 +12,6 @@ import com.aionemu.gameserver.services.SiegeService;
  */
 public class OutpostLocation extends SiegeLocation {
 
-	public OutpostLocation() {
-	}
-
 	public OutpostLocation(SiegeLocationTemplate template) {
 		super(template);
 	}
@@ -43,7 +40,7 @@ public class OutpostLocation extends SiegeLocation {
 	 * @return Fortresses that must be captured to own this outpost
 	 */
 	public List<Integer> getFortressDependency() {
-		return template.getFortressDependency();
+		return getTemplate().getFortressDependency();
 	}
 
 	public boolean isSiegeAllowed() {

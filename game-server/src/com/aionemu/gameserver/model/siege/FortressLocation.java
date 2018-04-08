@@ -1,18 +1,14 @@
 package com.aionemu.gameserver.model.siege;
 
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Kisk;
-import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.siegelocation.SiegeLegionReward;
 import com.aionemu.gameserver.model.templates.siegelocation.SiegeLocationTemplate;
 import com.aionemu.gameserver.model.templates.siegelocation.SiegeMercenaryZone;
-import com.aionemu.gameserver.model.templates.siegelocation.SiegeReward;
 import com.aionemu.gameserver.model.templates.zone.ZoneType;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.teleport.TeleportService;
@@ -25,33 +21,16 @@ import com.aionemu.gameserver.world.zone.ZoneInstance;
  */
 public class FortressLocation extends SiegeLocation {
 
-	protected List<SiegeReward> siegeRewards;
-	protected List<SiegeLegionReward> siegeLegionRewards;
-	protected List<SiegeMercenaryZone> siegeMercenaryZones;
-	protected boolean isUnderAssault;
-	/**
-	 * Zone ID - List of mercenaries
-	 */
-	protected Map<Integer, List<VisibleObject>> mercenaries;
-
 	public FortressLocation(SiegeLocationTemplate template) {
 		super(template);
-		siegeRewards = template.getSiegeRewards();
-		siegeLegionRewards = template.getSiegeLegionRewards();
-		siegeMercenaryZones = template.getSiegeMercenaryZones();
-		mercenaries = new LinkedHashMap<>();
 	}
 
-	public List<SiegeReward> getReward() {
-		return siegeRewards;
-	}
-
-	public List<SiegeLegionReward> getLegionReward() {
-		return siegeLegionRewards;
+	public List<SiegeLegionReward> getLegionRewards() {
+		return getTemplate().getSiegeLegionRewards();
 	}
 
 	public List<SiegeMercenaryZone> getSiegeMercenaryZones() {
-		return siegeMercenaryZones;
+		return getTemplate().getSiegeMercenaryZones();
 	}
 
 	/**
@@ -112,10 +91,6 @@ public class FortressLocation extends SiegeLocation {
 					TeleportService.moveToBindLocation((Player) creature);
 			}
 		});
-	}
-
-	public void addMercenaries(int zoneId, List<VisibleObject> mercs) {
-		mercenaries.put(zoneId, mercs);
 	}
 
 }

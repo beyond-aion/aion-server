@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.siegelocation.SiegeLocationTemplate;
+import com.aionemu.gameserver.model.templates.siegelocation.SiegeReward;
 import com.aionemu.gameserver.world.zone.SiegeZoneInstance;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
 import com.aionemu.gameserver.world.zone.handler.ZoneHandler;
@@ -24,40 +25,23 @@ public class SiegeLocation implements ZoneHandler {
 	private static final Logger log = LoggerFactory.getLogger(SiegeLocation.class);
 	public static final int STATE_INVULNERABLE = 0;
 	public static final int STATE_VULNERABLE = 1;
-	/**
-	 * Unique id, defined by NCSoft
-	 */
-	protected SiegeLocationTemplate template;
-	protected int locationId;
-	protected SiegeType type;
-	protected int worldId;
-	protected SiegeRace siegeRace = SiegeRace.BALAUR;
-	protected int legionId;
-	protected long lastArtifactActivation;
+
+	private final SiegeLocationTemplate template;
+	private final List<SiegeZoneInstance> zones = new ArrayList<>();
+	private final Map<Integer, Creature> creatures = new ConcurrentHashMap<>();
+	private final Map<Integer, Player> players = new ConcurrentHashMap<>();
+	private SiegeRace siegeRace = SiegeRace.BALAUR;
+	private int legionId;
 	private boolean vulnerable;
 	private int nextState;
-	protected List<SiegeZoneInstance> zone;
 	private List<SiegeShield> shields;
-	protected boolean isUnderShield;
-	protected boolean canTeleport = true;
-	protected int siegeDuration;
-	protected int influenceValue;
-	protected int occupiedCount;
-	protected int factionBalance;
-	private Map<Integer, Creature> creatures = new ConcurrentHashMap<>();
-	private Map<Integer, Player> players = new ConcurrentHashMap<>();
-
-	public SiegeLocation() {
-	}
+	private boolean isUnderShield;
+	private boolean canTeleport = true;
+	private int occupiedCount;
+	private int factionBalance;
 
 	public SiegeLocation(SiegeLocationTemplate template) {
 		this.template = template;
-		this.locationId = template.getId();
-		this.worldId = template.getWorldId();
-		this.type = template.getType();
-		this.siegeDuration = template.getSiegeDuration();
-		this.zone = new ArrayList<>();
-		this.influenceValue = template.getInfluenceValue();
 	}
 
 	public SiegeLocationTemplate getTemplate() {
@@ -65,24 +49,26 @@ public class SiegeLocation implements ZoneHandler {
 	}
 
 	/**
-	 * Returns unique LocationId of Siege Location
-	 * 
-	 * @return Integer LocationId
+	 * @return unique LocationId of this Siege Location
 	 */
 	public int getLocationId() {
-		return locationId;
+		return template.getId();
 	}
 
 	public int getWorldId() {
-		return worldId;
+		return template.getWorldId();
 	}
 
 	public SiegeType getType() {
-		return type;
+		return template.getType();
 	}
 
 	public int getSiegeDuration() {
-		return siegeDuration;
+		return template.getSiegeDuration();
+	}
+
+	public List<SiegeReward> getRewards() {
+		return template.getSiegeRewards();
 	}
 
 	public SiegeRace getRace() {
@@ -177,7 +163,7 @@ public class SiegeLocation implements ZoneHandler {
 
 	public void setShields(List<SiegeShield> shields) {
 		this.shields = shields;
-		log.debug("Attached shields for locId: " + locationId);
+		log.debug("Attached shields for locId: " + getLocationId());
 		for (SiegeShield shield : shields)
 			log.debug(shield.toString());
 	}
@@ -187,7 +173,7 @@ public class SiegeLocation implements ZoneHandler {
 			return canTeleport;
 		return canTeleport && player.getRace().getRaceId() == getRace().getRaceId();
 	}
-	
+
 	public int getLegionGp() {
 		return template.getLegionGp();
 	}
@@ -201,32 +187,32 @@ public class SiegeLocation implements ZoneHandler {
 	}
 
 	public int getInfluenceValue() {
-		return influenceValue;
+		return template.getInfluenceValue();
 	}
 
 	public List<SiegeZoneInstance> getZone() {
-		return zone;
+		return zones;
 	}
 
 	public void addZone(SiegeZoneInstance zone) {
-		this.zone.add(zone);
+		zones.add(zone);
 		zone.addHandler(this);
 	}
 
 	public boolean isInsideLocation(Creature creature) {
-		if (zone.isEmpty())
+		if (zones.isEmpty())
 			return false;
-		for (int i = 0; i < zone.size(); i++)
-			if (zone.get(i).isInsideCreature(creature))
+		for (SiegeZoneInstance zone : zones)
+			if (zone.isInsideCreature(creature))
 				return true;
 		return false;
 	}
 
 	public boolean isInsideLocation(float x, float y, float z) {
-		if (zone.isEmpty())
+		if (zones.isEmpty())
 			return false;
-		for (int i = 0; i < zone.size(); i++)
-			if (zone.get(i).isInsideCordinate(x, y, z))
+		for (SiegeZoneInstance zone : zones)
+			if (zone.isInsideCordinate(x, y, z))
 				return true;
 		return false;
 	}

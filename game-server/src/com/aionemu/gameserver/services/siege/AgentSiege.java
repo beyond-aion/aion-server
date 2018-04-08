@@ -1,27 +1,21 @@
 package com.aionemu.gameserver.services.siege;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.Map;
 
 import com.aionemu.commons.callbacks.util.GlobalCallbackHelper;
-import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.ai.manager.WalkManager;
-import com.aionemu.gameserver.dao.PlayerDAO;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.gameobjects.player.PlayerCommonData;
 import com.aionemu.gameserver.model.gameobjects.siege.SiegeNpc;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.model.siege.AgentLocation;
 import com.aionemu.gameserver.model.siege.SiegeModType;
 import com.aionemu.gameserver.model.siege.SiegeRace;
-import com.aionemu.gameserver.model.templates.siegelocation.SiegeReward;
 import com.aionemu.gameserver.model.templates.spawns.SpawnGroup;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.model.templates.spawns.siegespawns.SiegeSpawnTemplate;
@@ -31,9 +25,6 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.services.BaseService;
 import com.aionemu.gameserver.services.QuestService;
-import com.aionemu.gameserver.services.abyss.GloryPointsService;
-import com.aionemu.gameserver.services.mail.AbyssSiegeLevel;
-import com.aionemu.gameserver.services.mail.MailFormatter;
 import com.aionemu.gameserver.services.mail.SiegeResult;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.spawnengine.SpawnHandlerType;
@@ -106,33 +97,8 @@ public class AgentSiege extends Siege<AgentLocation> {
 		Race winnerRace = winner == SiegeRace.ELYOS ? Race.ELYOS : Race.ASMODIANS;
 		BaseService.getInstance().capture(6113, winnerRace);
 		SiegeRace looser = winner == SiegeRace.ELYOS ? SiegeRace.ASMODIANS : SiegeRace.ELYOS;
-		sendRewardsToParticipatedPlayers(getSiegeCounter().getRaceCounter(winner), true);
-		sendRewardsToParticipatedPlayers(getSiegeCounter().getRaceCounter(looser), false);
-	}
-
-	private void sendRewardsToParticipatedPlayers(SiegeRaceCounter damage, boolean isWinner) {
-		Map<Integer, Long> playerAbyssPoints = damage.getPlayerAbyssPoints();
-		List<Integer> topPlayersIds = new ArrayList<>(playerAbyssPoints.keySet());
-		SiegeResult result = isWinner ? SiegeResult.OCCUPY : SiegeResult.FAIL;
-
-		int i = 0;
-		List<SiegeReward> playerRewards = getSiegeLocation().getReward();
-		int rewardLevel = 0;
-		for (SiegeReward topGrade : playerRewards) {
-			AbyssSiegeLevel level = AbyssSiegeLevel.getLevelById(++rewardLevel);
-			for (int rewardedPC = 0; i < topPlayersIds.size() && rewardedPC < topGrade.getTop(); ++i) {
-				Integer playerId = topPlayersIds.get(i);
-				PlayerCommonData pcd = DAOManager.getDAO(PlayerDAO.class).loadPlayerCommonData(playerId);
-				++rewardedPC;
-				if (result.equals(SiegeResult.OCCUPY))
-					MailFormatter.sendAbyssRewardMail(getSiegeLocation(), pcd, level, result, System.currentTimeMillis(), topGrade.getItemId(),
-						topGrade.getMedalCount(), 0);
-
-				int gp = isWinner ? topGrade.getGpForWin() : topGrade.getGpForDefeat();
-				if (gp > 0)
-					GloryPointsService.increaseGp(playerId, gp);
-			}
-		}
+		sendRewardsToParticipants(getSiegeCounter().getRaceCounter(winner), SiegeResult.OCCUPY);
+		sendRewardsToParticipants(getSiegeCounter().getRaceCounter(looser), SiegeResult.FAIL);
 	}
 
 	private void onWalkingEvent(Npc npc, String walkerId) {

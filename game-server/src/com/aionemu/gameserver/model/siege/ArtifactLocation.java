@@ -12,11 +12,8 @@ import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 public class ArtifactLocation extends SiegeLocation {
 
 	private ArtifactStatus status;
-
-	public ArtifactLocation() {
-		this.status = ArtifactStatus.IDLE;
-	}
-
+	private long lastArtifactActivation;
+	
 	public ArtifactLocation(SiegeLocationTemplate template) {
 		super(template);
 		// Artifacts Always Vulnerable
@@ -29,25 +26,25 @@ public class ArtifactLocation extends SiegeLocation {
 	}
 
 	public long getLastActivation() {
-		return this.lastArtifactActivation;
+		return lastArtifactActivation;
 	}
 
 	public void setInitialDelay(long capturedTime) {
-		long cd = this.template.getActivation().getCd();
+		long cd = getTemplate().getActivation().getCd();
 		lastArtifactActivation = cd > 900000 ? capturedTime - cd + 900000 : capturedTime;
 	}
 
-	public void setLastActivation(long paramLong) {
-		this.lastArtifactActivation = paramLong;
+	public void setLastActivation(long lastActivation) {
+		lastArtifactActivation = lastActivation;
 	}
 
 	public int getCoolDown() {
-		long i = this.template.getActivation().getCd();
-		long l = System.currentTimeMillis() - this.lastArtifactActivation;
-		if (l > i)
+		long cd = getTemplate().getActivation().getCd();
+		long millisSinceLastActivation = System.currentTimeMillis() - lastArtifactActivation;
+		if (millisSinceLastActivation > cd)
 			return 0;
 		else
-			return (int) ((i - l) / 1000);
+			return (int) ((cd - millisSinceLastActivation) / 1000);
 	}
 
 	/**

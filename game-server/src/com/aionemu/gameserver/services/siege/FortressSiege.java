@@ -29,7 +29,6 @@ import com.aionemu.gameserver.model.team.legion.LegionHistoryType;
 import com.aionemu.gameserver.model.templates.npc.AbyssNpcType;
 import com.aionemu.gameserver.model.templates.siegelocation.SiegeLegionReward;
 import com.aionemu.gameserver.model.templates.siegelocation.SiegeMercenaryZone;
-import com.aionemu.gameserver.model.templates.siegelocation.SiegeReward;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.questEngine.QuestEngine;
@@ -102,7 +101,7 @@ public class FortressSiege extends Siege<FortressLocation> {
 	/**
 	 * Handles an additional assault of race-specific troops (asmo/ely only), to ensure players glory point rewards
 	 */
-	private final void spawnFactionTroopAssault(SiegeRace race) {
+	private void spawnFactionTroopAssault(SiegeRace race) {
 		if (!getSiegeLocation().isVulnerable())
 			return;
 
@@ -121,7 +120,7 @@ public class FortressSiege extends Siege<FortressLocation> {
 		}
 	}
 
-	private final void initMercenaryZones() {
+	private void initMercenaryZones() {
 		List<SiegeMercenaryZone> mercs = getSiegeLocation().getSiegeMercenaryZones(); // can be null if not implemented
 		if (mercs == null)
 			return;
@@ -176,8 +175,8 @@ public class FortressSiege extends Siege<FortressLocation> {
 		if (SiegeRace.BALAUR != getSiegeLocation().getRace()) {
 			SiegeRace winnerRace = getSiegeLocation().getRace();
 			SiegeRace looserRace = winnerRace == SiegeRace.ASMODIANS ? SiegeRace.ELYOS : SiegeRace.ASMODIANS;
-			sendRewardsToParticipatedPlayers(getSiegeCounter().getRaceCounter(winnerRace), true);
-			sendRewardsToParticipatedPlayers(getSiegeCounter().getRaceCounter(looserRace), false);
+			sendRewardsToParticipants(getSiegeCounter().getRaceCounter(winnerRace), isBossKilled() ? SiegeResult.OCCUPY : SiegeResult.DEFENDER);
+			sendRewardsToParticipants(getSiegeCounter().getRaceCounter(looserRace), isBossKilled() ? SiegeResult.FAIL : SiegeResult.EMPTY);
 			distributeLegionGp(getSiegeCounter().getRaceCounter(winnerRace));
 			giveRewardsToLegion();
 		}
@@ -196,7 +195,7 @@ public class FortressSiege extends Siege<FortressLocation> {
 		}
 	}
 
-	public void onCapture() {
+	private void onCapture() {
 		SiegeRaceCounter winner = getSiegeCounter().getWinnerRaceCounter();
 		SiegeRace winnerRace = winner.getSiegeRace();
 		SiegeRace oldRace = getSiegeLocation().getRace();
@@ -327,7 +326,7 @@ public class FortressSiege extends Siege<FortressLocation> {
 		});
 	}
 
-	protected void giveRewardsToLegion() {
+	private void giveRewardsToLegion() {
 		try {
 			// Legion with id 0 = not exists?
 			int legionId = getSiegeLocation().getLegionId();
@@ -337,11 +336,11 @@ public class FortressSiege extends Siege<FortressLocation> {
 						+ "] Legion Reward not sending because fortress not owned by any legion.");
 				return;
 			}
-			List<SiegeLegionReward> legionRewards = getSiegeLocation().getLegionReward();
+			List<SiegeLegionReward> legionRewards = getSiegeLocation().getLegionRewards();
 			if (legionRewards != null) {
 				Legion legion = LegionService.getInstance().getLegion(legionId);
 
-				int bgId = legion.getBrigadeGeneral();
+				int bgId = legion == null ? 0 : legion.getBrigadeGeneral();
 				if (bgId != 0) {
 					PlayerCommonData brigadeGeneral = DAOManager.getDAO(PlayerDAO.class).loadPlayerCommonData(bgId);
 					for (SiegeLegionReward legionReward : legionRewards) {
@@ -366,7 +365,7 @@ public class FortressSiege extends Siege<FortressLocation> {
 		}
 	}
 
-	protected void distributeLegionGp(SiegeRaceCounter src) {
+	private void distributeLegionGp(SiegeRaceCounter src) {
 		try {
 			int winnerLegionId = getSiegeLocation().getLegionId();
 			int legionGp = getSiegeLocation().getLegionGp();
@@ -385,45 +384,6 @@ public class FortressSiege extends Siege<FortressLocation> {
 					Math.min(Math.round(legionGp / (float) participatedLegionMembers.size()), SiegeConfig.LEGION_GP_CAP_PER_MEMBER));
 		} catch (Exception e) {
 			log.error("Error while calculating glory points reward for fortress siege.", e);
-		}
-	}
-
-	/**
-	 * Will send rewards to players who participated in this siege.
-	 * 
-	 * @param damageCounter
-	 * @param isWinner
-	 */
-	protected void sendRewardsToParticipatedPlayers(SiegeRaceCounter damage, boolean isWinner) {
-		try {
-			Map<Integer, Long> playerAbyssPoints = damage.getPlayerAbyssPoints();
-			List<Integer> topPlayersIds = new ArrayList<>();
-			topPlayersIds.addAll(playerAbyssPoints.keySet());
-			SiegeResult result;
-			if (isBossKilled())
-				result = isWinner ? SiegeResult.OCCUPY : SiegeResult.FAIL;
-			else
-				result = isWinner ? SiegeResult.DEFENDER : SiegeResult.EMPTY;
-
-			int i = 0;
-			List<SiegeReward> playerRewards = getSiegeLocation().getReward();
-			int rewardLevel = 0;
-			for (SiegeReward topGrade : playerRewards) {
-				AbyssSiegeLevel level = AbyssSiegeLevel.getLevelById(++rewardLevel);
-				for (int rewardedPC = 0; i < topPlayersIds.size() && rewardedPC < topGrade.getTop(); ++i) {
-					Integer playerId = topPlayersIds.get(i);
-					PlayerCommonData pcd = DAOManager.getDAO(PlayerDAO.class).loadPlayerCommonData(playerId);
-					++rewardedPC;
-					if (result.equals(SiegeResult.OCCUPY) || result.equals(SiegeResult.DEFENDER))
-						MailFormatter.sendAbyssRewardMail(getSiegeLocation(), pcd, level, result, System.currentTimeMillis(), topGrade.getItemId(),
-							topGrade.getMedalCount(), 0);
-					int gp = isWinner ? topGrade.getGpForWin() : topGrade.getGpForDefeat();
-					if (gp > 0)
-						GloryPointsService.increaseGp(playerId, gp);
-				}
-			}
-		} catch (Exception e) {
-			log.error("[SIEGE] Error while calculating rewards for fortress siege.", e);
 		}
 	}
 

@@ -1,22 +1,33 @@
 package com.aionemu.gameserver.services.siege;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.configs.main.SiegeConfig;
+import com.aionemu.gameserver.dao.PlayerDAO;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.gameobjects.player.PlayerCommonData;
 import com.aionemu.gameserver.model.gameobjects.siege.SiegeNpc;
 import com.aionemu.gameserver.model.siege.FortressLocation;
 import com.aionemu.gameserver.model.siege.SiegeLocation;
 import com.aionemu.gameserver.model.siege.SiegeModType;
 import com.aionemu.gameserver.model.siege.SiegeRace;
 import com.aionemu.gameserver.model.templates.npc.AbyssNpcType;
+import com.aionemu.gameserver.model.templates.siegelocation.SiegeReward;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SIEGE_LOCATION_STATE;
 import com.aionemu.gameserver.services.SiegeService;
+import com.aionemu.gameserver.services.abyss.GloryPointsService;
+import com.aionemu.gameserver.services.mail.AbyssSiegeLevel;
+import com.aionemu.gameserver.services.mail.MailFormatter;
+import com.aionemu.gameserver.services.mail.SiegeResult;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.World;
 
@@ -195,5 +206,39 @@ public abstract class Siege<SL extends SiegeLocation> {
 
 	protected void updateOutpostStatusByFortress(FortressLocation location) {
 		SiegeService.getInstance().updateOutpostStatusByFortress(location);
+	}
+
+	protected void sendRewardsToParticipants(SiegeRaceCounter raceCounter, SiegeResult raceResult) {
+		try {
+			Map<Integer, Long> playerAbyssPoints = raceCounter.getPlayerAbyssPoints();
+			List<Integer> topPlayersIds = new ArrayList<>(playerAbyssPoints.keySet());
+			boolean isWinner = raceResult == SiegeResult.OCCUPY || raceResult == SiegeResult.DEFENDER;
+
+			int playerIndex = 0;
+			int rewardLevel = 0;
+			long timeMillis = System.currentTimeMillis();
+			for (SiegeReward topGrade : getSiegeLocation().getRewards()) {
+				AbyssSiegeLevel level = AbyssSiegeLevel.getLevelById(++rewardLevel);
+				int gp = isWinner ? topGrade.getGpForWin() : topGrade.getGpForDefeat();
+				for (int i = 0; i < topGrade.getTop() && playerIndex < topPlayersIds.size(); i++, playerIndex++) {
+					int playerId = topPlayersIds.get(playerIndex);
+					if (isWinner)
+						MailFormatter.sendAbyssRewardMail(getSiegeLocation(), getPlayerCommonData(playerId), level, raceResult, timeMillis, topGrade.getItemId(),
+							topGrade.getMedalCount(), 0);
+					if (gp > 0)
+						GloryPointsService.increaseGp(playerId, gp);
+				}
+			}
+		} catch (Exception e) {
+			log.error("[SIEGE] Error while distributing rewards for " + getClass().getSimpleName() + " (location: " + getSiegeLocationId() + ")", e);
+		}
+	}
+
+	private PlayerCommonData getPlayerCommonData(int playerId) {
+		Player player = World.getInstance().findPlayer(playerId);
+		if (player != null)
+			return player.getCommonData();
+		else
+			return DAOManager.getDAO(PlayerDAO.class).loadPlayerCommonData(playerId);
 	}
 }
