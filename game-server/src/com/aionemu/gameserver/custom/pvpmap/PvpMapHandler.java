@@ -69,7 +69,8 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 	private static final int SHUGO_SPAWN_RATE = 30;
 	private final Map<Integer, WorldPosition> origins = new HashMap<>();
 	private final Map<Integer, Long> joinOrLeaveTime = new HashMap<>();
-	private final List<WorldPosition> respawnLocations = new ArrayList<>(), treasurePositions = new ArrayList<>(), supplyPositions = new ArrayList<>(),
+	private final Map<Race, List<WorldPosition>> respawnLocations = new HashMap<>();
+	private final List<WorldPosition> treasurePositions = new ArrayList<>(), supplyPositions = new ArrayList<>(),
 		keymasterPositions = new ArrayList<>();
 	private final AtomicBoolean canJoin = new AtomicBoolean();
 	private List<Future<?>> tasks = new ArrayList<>();
@@ -224,7 +225,7 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 						updateOrigin(p);
 						updateJoinOrLeaveTime(p);
 						InstanceService.registerPlayerWithInstance(instance, p);
-						WorldPosition pos = Rnd.get(respawnLocations);
+						WorldPosition pos = Rnd.get(respawnLocations.get(p.getRace()));
 						TeleportService.teleportTo(p, pos.getMapId(), instanceId, pos.getX(), pos.getY(), pos.getZ(), pos.getHeading(),
 							TeleportAnimation.BATTLEGROUND);
 					}
@@ -291,7 +292,7 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 				removePlayer(player);
 			}
 		} else {
-			WorldPosition pos = Rnd.get(respawnLocations);
+			WorldPosition pos = Rnd.get(respawnLocations.get(player.getRace()));
 			TeleportService.teleportTo(player, pos.getMapId(), instanceId, pos.getX(), pos.getY(), pos.getZ(), pos.getHeading(),
 				TeleportAnimation.BATTLEGROUND);
 		}
@@ -776,25 +777,12 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 
 	private void addRespawnLocations() {
 		respawnLocations.clear();
-		respawnLocations.add(new WorldPosition(mapId, 635.93634f, 321.30035f, 225.83354f, (byte) 55));
-		respawnLocations.add(new WorldPosition(mapId, 676.42755f, 372.9569f, 241.59515f, (byte) 44));
-		respawnLocations.add(new WorldPosition(mapId, 608.67224f, 160.21959f, 216.97983f, (byte) 75));
-		respawnLocations.add(new WorldPosition(mapId, 714.85077f, 449.22028f, 229.7269f, (byte) 66));
-		respawnLocations.add(new WorldPosition(mapId, 782.01263f, 324.34634f, 230.98207f, (byte) 72));
-		respawnLocations.add(new WorldPosition(mapId, 780.9346f, 394.94186f, 231.91853f, (byte) 23));
-		respawnLocations.add(new WorldPosition(mapId, 711.1087f, 631.0938f, 211.92676f, (byte) 36));
-		respawnLocations.add(new WorldPosition(mapId, 621.7019f, 586.81824f, 207.56651f, (byte) 22));
-		respawnLocations.add(new WorldPosition(mapId, 507.85767f, 748.89264f, 209.65799f, (byte) 95));
-		respawnLocations.add(new WorldPosition(mapId, 619.7108f, 848.1294f, 194.60683f, (byte) 85));
-		respawnLocations.add(new WorldPosition(mapId, 338.4661f, 624.9308f, 246.96532f, (byte) 46));
-		respawnLocations.add(new WorldPosition(mapId, 345.87512f, 674.56555f, 215.51974f, (byte) 62));
-		respawnLocations.add(new WorldPosition(mapId, 284.751f, 393.5447f, 238.20274f, (byte) 15));
-		respawnLocations.add(new WorldPosition(mapId, 289.76865f, 549.3902f, 231.23553f, (byte) 90));
-		respawnLocations.add(new WorldPosition(mapId, 537.4296f, 261.55344f, 232.69629f, (byte) 102));
-		respawnLocations.add(new WorldPosition(mapId, 449.66992f, 449.04193f, 270.74738f, (byte) 75));
-		respawnLocations.add(new WorldPosition(mapId, 620.88776f, 460.86237f, 224.73405f, (byte) 61));
-		respawnLocations.add(new WorldPosition(mapId, 587.5866f, 679.81f, 211.82333f, (byte) 49));
-		respawnLocations.add(new WorldPosition(mapId, 685.5478f, 766.70215f, 182.31891f, (byte) 73));
+		respawnLocations.put(Race.ELYOS, new ArrayList<>());
+		respawnLocations.get(Race.ELYOS).add(new WorldPosition(mapId, 274.143f, 384.335f, 239.973f, (byte) 14));
+		respawnLocations.get(Race.ELYOS).add(new WorldPosition(mapId, 342.138f, 616.856f, 248.197f, (byte) 35));
+		respawnLocations.put(Race.ASMODIANS, new ArrayList<>());
+		respawnLocations.get(Race.ASMODIANS).add(new WorldPosition(mapId, 598.229f, 712.984f, 223.306f, (byte) 73));
+		respawnLocations.get(Race.ASMODIANS).add(new WorldPosition(mapId, 711.403f, 621.797f, 213.276f, (byte) 31));
 	}
 
 	private void addSupplyPositions() {
