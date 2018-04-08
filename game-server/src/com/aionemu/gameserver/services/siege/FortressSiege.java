@@ -1,9 +1,9 @@
 package com.aionemu.gameserver.services.siege;
 
-import java.util.ArrayList;
-import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.slf4j.Logger;
@@ -14,7 +14,6 @@ import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.configs.main.LoggingConfig;
 import com.aionemu.gameserver.configs.main.SiegeConfig;
-import com.aionemu.gameserver.dao.PlayerDAO;
 import com.aionemu.gameserver.dao.SiegeDAO;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -65,8 +64,7 @@ public class FortressSiege extends Siege<FortressLocation> {
 	@Override
 	public void onSiegeStart() {
 		if (LoggingConfig.LOG_SIEGE)
-			log.info("[SIEGE] > Siege started. [FORTRESS:" + getSiegeLocationId() + "] [RACE: " + getSiegeLocation().getRace() + "] [LegionId:"
-				+ getSiegeLocation().getLegionId() + "]");
+			log.info(this + ": Siege started. Race: " + getSiegeLocation().getRace() + ", legion ID: " + getSiegeLocation().getLegionId());
 		// Mark fortress as vulnerable
 		getSiegeLocation().setVulnerable(true);
 
@@ -133,14 +131,15 @@ public class FortressSiege extends Siege<FortressLocation> {
 	@Override
 	public void onSiegeFinish() {
 		if (LoggingConfig.LOG_SIEGE) {
-			SiegeRaceCounter winner = getSiegeCounter().getWinnerRaceCounter();
-			if (isBossKilled() && winner != null)
-				log.info("[SIEGE] > Siege finished. [FORTRESS:" + getSiegeLocationId() + "] [OLD RACE: " + getSiegeLocation().getRace() + "] [OLD LegionId:"
-					+ getSiegeLocation().getLegionId() + "] [NEW RACE: " + winner.getSiegeRace() + "] [NEW LegionId:"
-					+ (winner.getWinnerLegionId() == null ? 0 : winner.getWinnerLegionId()) + "]");
-			else
-				log.info("[SIEGE] > Siege finished. No winner found [FORTRESS:" + getSiegeLocationId() + "] [RACE: " + getSiegeLocation().getRace()
-					+ "] [LegionId:" + getSiegeLocation().getLegionId() + "]");
+			SiegeRace oldRace = getSiegeLocation().getRace();
+			int oldLegionId = getSiegeLocation().getLegionId();
+			if (isBossKilled()) {
+				SiegeRaceCounter winner = getSiegeCounter().getWinnerRaceCounter();
+				log.info(this + ": Siege finished. Old race: " + oldRace + ", legion ID: " + oldLegionId + " -> New race: " + winner.getSiegeRace()
+					+ ", legion ID: " + (winner.getWinnerLegionId() == null ? 0 : winner.getWinnerLegionId()) + "]");
+			} else {
+				log.info(this + ": Siege finished. No winner found. Race: " + oldRace + ", legion ID: " + oldLegionId + "]");
+			}
 		}
 
 		// Unregister abyss points listener callback
@@ -174,11 +173,12 @@ public class FortressSiege extends Siege<FortressLocation> {
 		// If fortress was not captured by balaur
 		if (SiegeRace.BALAUR != getSiegeLocation().getRace()) {
 			SiegeRace winnerRace = getSiegeLocation().getRace();
-			SiegeRace looserRace = winnerRace == SiegeRace.ASMODIANS ? SiegeRace.ELYOS : SiegeRace.ASMODIANS;
-			sendRewardsToParticipants(getSiegeCounter().getRaceCounter(winnerRace), isBossKilled() ? SiegeResult.OCCUPY : SiegeResult.DEFENDER);
-			sendRewardsToParticipants(getSiegeCounter().getRaceCounter(looserRace), isBossKilled() ? SiegeResult.FAIL : SiegeResult.EMPTY);
-			distributeLegionGp(getSiegeCounter().getRaceCounter(winnerRace));
-			giveRewardsToLegion();
+			SiegeRace loserRace = winnerRace == SiegeRace.ASMODIANS ? SiegeRace.ELYOS : SiegeRace.ASMODIANS;
+			SiegeRaceCounter winnerRaceCounter = getSiegeCounter().getRaceCounter(winnerRace);
+			SiegeRaceCounter loserRaceCounter = getSiegeCounter().getRaceCounter(loserRace);
+			sendRewardsToParticipants(winnerRaceCounter, isBossKilled() ? SiegeResult.OCCUPY : SiegeResult.DEFENDER);
+			sendRewardsToParticipants(loserRaceCounter, isBossKilled() ? SiegeResult.FAIL : SiegeResult.EMPTY);
+			distributeLegionRewards(winnerRaceCounter);
 		}
 
 		// Update outpost status
@@ -326,64 +326,74 @@ public class FortressSiege extends Siege<FortressLocation> {
 		});
 	}
 
-	private void giveRewardsToLegion() {
-		try {
-			// Legion with id 0 = not exists?
-			int legionId = getSiegeLocation().getLegionId();
-			if (legionId == 0) {
-				if (LoggingConfig.LOG_SIEGE)
-					log.info("[SIEGE] > [FORTRESS:" + getSiegeLocationId() + "] [RACE: " + getSiegeLocation().getRace() + "] [LEGION :" + legionId
-						+ "] Legion Reward not sending because fortress not owned by any legion.");
-				return;
-			}
-			List<SiegeLegionReward> legionRewards = getSiegeLocation().getLegionRewards();
-			if (legionRewards != null) {
-				Legion legion = LegionService.getInstance().getLegion(legionId);
+	private void distributeLegionRewards(SiegeRaceCounter winnerRaceCounter) {
+		int legionId = getSiegeLocation().getLegionId();
+		Legion legion = legionId == 0 ? null : LegionService.getInstance().getLegion(legionId);
+		if (legion == null) {
+			if (LoggingConfig.LOG_SIEGE)
+				log.info(this + ": Skipped sending legion rewards because the fortress is not owned by any legion (owner race: "
+					+ getSiegeLocation().getRace() + ").");
+			return;
+		}
+		distributeLegionGp(legion, winnerRaceCounter);
+		distributeLegionRewards(legion);
+	}
 
-				int bgId = legion == null ? 0 : legion.getBrigadeGeneral();
-				if (bgId != 0) {
-					PlayerCommonData brigadeGeneral = DAOManager.getDAO(PlayerDAO.class).loadPlayerCommonData(bgId);
-					for (SiegeLegionReward legionReward : legionRewards) {
-						if (LoggingConfig.LOG_SIEGE) {
-							log.info("[SIEGE] > [Legion Reward to: " + brigadeGeneral.getName() + "] ITEM RETURN " + legionReward.getItemId() + " ITEM COUNT "
-								+ legionReward.getCount());
-						}
-						if (legionReward.getItemId() == 182400001) { // handles kinah rewards
-							int kinahAmount = isBossKilled() ? legionReward.getCount() : Math.round(legionReward.getCount() * 0.7f);
-							legion.getLegionWarehouse().increaseKinah(kinahAmount);
-							LegionService.getInstance().addRewardHistory(legion, kinahAmount,
-								isBossKilled() ? LegionHistoryType.OCCUPATION : LegionHistoryType.DEFENSE, getSiegeLocationId());
-							continue;
-						}
-						MailFormatter.sendAbyssRewardMail(getSiegeLocation(), brigadeGeneral, AbyssSiegeLevel.NONE, SiegeResult.PROTECT,
-							System.currentTimeMillis(), legionReward.getItemId(), legionReward.getCount(), 0);
-					}
-				}
+	private void distributeLegionGp(Legion legion, SiegeRaceCounter src) {
+		int legionGp = getSiegeLocation().getLegionGp();
+		if (legionGp <= 0)
+			return;
+		try {
+			Set<Integer> participatedLegionMembers = new HashSet<>(src.getPlayerAbyssPoints().keySet());
+			participatedLegionMembers.retainAll(legion.getLegionMembers());
+
+			if (participatedLegionMembers.isEmpty()) {
+				if (LoggingConfig.LOG_SIEGE)
+					log.info(this + ": Distributed no GP to the members of " + legion + " because no one made AP");
+			} else {
+				int gp = Math.min(Math.round(legionGp / (float) participatedLegionMembers.size()), SiegeConfig.LEGION_GP_CAP_PER_MEMBER);
+				for (Integer participant : participatedLegionMembers)
+					GloryPointsService.increaseGp(participant, gp);
+				if (LoggingConfig.LOG_SIEGE)
+					log.info(this + ": Distributed " + gp + " GP each, to the following members of " + legion + ": " + participatedLegionMembers);
 			}
 		} catch (Exception e) {
-			log.error("[SIEGE] Error while calculating legion reward for fortress siege. Location:" + getSiegeLocation().getLocationId(), e);
+			log.error("Error while distributing legion GP for " + this, e);
 		}
 	}
 
-	private void distributeLegionGp(SiegeRaceCounter src) {
+	private void distributeLegionRewards(Legion legion) {
+		List<SiegeLegionReward> legionRewards = getSiegeLocation().getLegionRewards();
+		if (legionRewards == null || legionRewards.isEmpty())
+			return;
 		try {
-			int winnerLegionId = getSiegeLocation().getLegionId();
-			int legionGp = getSiegeLocation().getLegionGp();
-			if (winnerLegionId == 0 || legionGp <= 0)
-				return;
-
-			Legion legion = LegionService.getInstance().getLegion(winnerLegionId);
-			Collection<Integer> legionMembers = legion.getLegionMembers();
-			Collection<Integer> participatedLegionMembers = new ArrayList<>();
-			for (Integer participantId : src.getPlayerAbyssPoints().keySet())
-				if (legionMembers.contains(participantId))
-					participatedLegionMembers.add(participantId);
-
-			for (Integer participant : participatedLegionMembers)
-				GloryPointsService.increaseGp(participant,
-					Math.min(Math.round(legionGp / (float) participatedLegionMembers.size()), SiegeConfig.LEGION_GP_CAP_PER_MEMBER));
+			long totalKinah = 0;
+			int nonKinahItems = 0;
+			PlayerCommonData brigadeGeneral = getPlayerCommonData(legion.getBrigadeGeneral());
+			for (SiegeLegionReward item : legionRewards) {
+				if (item.getItemId() == 182400001) { // handles kinah rewards
+					long kinah = isBossKilled() ? item.getCount() : Math.round(item.getCount() * 0.7f);
+					legion.getLegionWarehouse().increaseKinah(kinah);
+					LegionService.getInstance().addRewardHistory(legion, kinah, isBossKilled() ? LegionHistoryType.OCCUPATION : LegionHistoryType.DEFENSE,
+						getSiegeLocationId());
+					totalKinah += kinah;
+				} else {
+					nonKinahItems++;
+					MailFormatter.sendAbyssRewardMail(getSiegeLocation(), brigadeGeneral, AbyssSiegeLevel.NONE, SiegeResult.PROTECT, System.currentTimeMillis(),
+						item.getItemId(), item.getCount(), 0);
+				}
+			}
+			if (LoggingConfig.LOG_SIEGE) {
+				String msg = "";
+				if (totalKinah > 0)
+					msg += "Added " + totalKinah + " kinah to the legion warehouse";
+				if (nonKinahItems > 0)
+					msg += (msg.isEmpty() ? "Sent " : " and sent ") + nonKinahItems + " legion rewards to brigade general " + brigadeGeneral.getName() + " of "
+						+ legion + " (see sysmail.log)";
+				log.info(this + ": " + msg);
+			}
 		} catch (Exception e) {
-			log.error("Error while calculating glory points reward for fortress siege.", e);
+			log.error("Error while distributing legion rewards for " + this, e);
 		}
 	}
 

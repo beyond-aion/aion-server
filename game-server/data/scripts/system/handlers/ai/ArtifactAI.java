@@ -116,8 +116,7 @@ public class ArtifactAI extends NpcAI {
 			return;
 
 		if (LoggingConfig.LOG_SIEGE)
-			log.info(
-				"Artifact " + getSpawnTemplate().getSiegeId() + " activated by " + player.getName() + ". Activator race: " + player.getRace().toString());
+			log.info("Artifact " + getSpawnTemplate().getSiegeId() + " activated by " + player.getName() + " (race: " + player.getRace() + ")");
 
 		if (!loc.getStatus().equals(ArtifactStatus.IDLE))
 			return;

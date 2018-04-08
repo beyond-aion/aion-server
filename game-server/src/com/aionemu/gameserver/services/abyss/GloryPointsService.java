@@ -45,17 +45,17 @@ public class GloryPointsService {
 		addGp(player, additionalGp, true);
 	}
 
-	public static void addGp(Player player, int additionalGp, boolean addRates) {
+	public static void addGp(Player player, int gp, boolean addRates) {
 		if (player == null)
 			return;
 		AbyssRank rank = player.getAbyssRank();
 		if (addRates)
-			additionalGp = (int) Rates.GP.calcResult(player, additionalGp);
-		rank.addGp(additionalGp);
-		if (additionalGp > 0)
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_GLORY_POINT_GAIN(additionalGp));
+			gp = (int) Rates.GP.calcResult(player, gp);
+		rank.addGp(gp);
+		if (gp >= 0)
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_GLORY_POINT_GAIN(gp));
 		else
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_GLORY_POINT_LOSE(additionalGp * -1));
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_GLORY_POINT_LOSE(gp * -1));
 		PacketSendUtility.sendPacket(player, new SM_ABYSS_RANK(player.getAbyssRank()));
 	}
 }

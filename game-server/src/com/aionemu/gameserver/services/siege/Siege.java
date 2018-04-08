@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.database.dao.DAOManager;
+import com.aionemu.gameserver.configs.main.LoggingConfig;
 import com.aionemu.gameserver.configs.main.SiegeConfig;
 import com.aionemu.gameserver.dao.PlayerDAO;
 import com.aionemu.gameserver.model.gameobjects.Creature;
@@ -66,11 +67,10 @@ public abstract class Siege<SL extends SiegeLocation> {
 		}
 
 		if (doubleStart) {
-			log.error("Attempt to start siege of SiegeLocation#" + siegeLocation.getLocationId() + " for 2 times");
-			return;
+			log.error("Attempt to start " + this + " twice", new IllegalStateException());
+		} else {
+			onSiegeStart();
 		}
-
-		onSiegeStart();
 	}
 
 	public final void startSiege(int locationId) {
@@ -85,7 +85,7 @@ public abstract class Siege<SL extends SiegeLocation> {
 				BalaurAssaultService.getInstance().onSiegeFinish(this);
 			}
 		} else {
-			log.error("Attempt to stop siege of SiegeLocation#" + siegeLocation.getLocationId() + " for 2 times");
+			log.error("Attempt to stop " + this + " twice", new IllegalStateException());
 		}
 	}
 
@@ -218,6 +218,7 @@ public abstract class Siege<SL extends SiegeLocation> {
 			int rewardLevel = 0;
 			long timeMillis = System.currentTimeMillis();
 			for (SiegeReward topGrade : getSiegeLocation().getRewards()) {
+				List<Integer> rewardedGpPlayers = new ArrayList<>();
 				AbyssSiegeLevel level = AbyssSiegeLevel.getLevelById(++rewardLevel);
 				int gp = isWinner ? topGrade.getGpForWin() : topGrade.getGpForDefeat();
 				for (int i = 0; i < topGrade.getTop() && playerIndex < topPlayersIds.size(); i++, playerIndex++) {
@@ -225,20 +226,31 @@ public abstract class Siege<SL extends SiegeLocation> {
 					if (isWinner)
 						MailFormatter.sendAbyssRewardMail(getSiegeLocation(), getPlayerCommonData(playerId), level, raceResult, timeMillis, topGrade.getItemId(),
 							topGrade.getMedalCount(), 0);
-					if (gp > 0)
+					if (gp > 0) {
+						rewardedGpPlayers.add(playerId);
 						GloryPointsService.increaseGp(playerId, gp);
+					}
+				}
+				if (LoggingConfig.LOG_SIEGE && !rewardedGpPlayers.isEmpty()) {
+					log.info(this + ": Distributed " + gp + " " + (isWinner ? "winner" : "loser") + " GP each, to the following players (rank " + rewardLevel
+						+ "): " + rewardedGpPlayers);
 				}
 			}
 		} catch (Exception e) {
-			log.error("[SIEGE] Error while distributing rewards for " + getClass().getSimpleName() + " (location: " + getSiegeLocationId() + ")", e);
+			log.error("Error while distributing rewards for " + this, e);
 		}
 	}
 
-	private PlayerCommonData getPlayerCommonData(int playerId) {
+	protected final PlayerCommonData getPlayerCommonData(int playerId) {
 		Player player = World.getInstance().findPlayer(playerId);
 		if (player != null)
 			return player.getCommonData();
 		else
 			return DAOManager.getDAO(PlayerDAO.class).loadPlayerCommonData(playerId);
+	}
+
+	@Override
+	public String toString() {
+		return getClass().getSimpleName() + " [locationId=" + getSiegeLocationId() + "]";
 	}
 }

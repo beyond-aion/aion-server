@@ -33,6 +33,7 @@ import com.aionemu.gameserver.world.World;
  * TODO: Send Peace Dredgion without assault
  */
 public class BalaurAssaultService {
+
 	private static final Logger log = LoggerFactory.getLogger("SIEGE_LOG");
 	private final Map<Integer, FortressAssault> fortressAssaults = new ConcurrentHashMap<>();
 	private final Map<Integer, ArtifactAssault> artifactAssaults = new ConcurrentHashMap<>();
@@ -50,10 +51,7 @@ public class BalaurAssaultService {
 			if (artifactAssaults.containsKey(siege.getSiegeLocation().getLocationId()) || siege.getSiegeLocation().getRace() == SiegeRace.BALAUR)
 				return;
 			newAssault(siege, Rnd.get(180, 2880)); // between 3 and 48 hours
-		} else
-			return;
-		if (LoggingConfig.LOG_SIEGE)
-			log.debug("[SIEGE] Balaur Assault scheduled on Siege ID: " + siege.getSiegeLocationId() + "!");
+		}
 	}
 
 	public void onSiegeFinish(Siege<?> siege) {
@@ -62,17 +60,17 @@ public class BalaurAssaultService {
 			Boolean bossIsKilled = siege.isBossKilled();
 			fortressAssaults.get(locId).finishAssault(bossIsKilled);
 			if (bossIsKilled && siege.getSiegeLocation().getRace().equals(SiegeRace.BALAUR))
-				log.debug("[SIEGE] > [FORTRESS:" + siege.getSiegeLocationId() + "] has been captured by Balaur Assault!");
+				log.info(siege + " has been captured by Balaur assault!");
 			else
-				log.debug("[SIEGE] > [FORTRESS:" + siege.getSiegeLocationId() + "] Balaur Assault finished without capture!");
+				log.info(siege + " Balaur assault finished without capture!");
 			fortressAssaults.remove(locId);
 		} else if (artifactAssaults.containsKey(locId)) {
-			Boolean bossIsKilled = siege.isBossKilled();
+			boolean bossIsKilled = siege.isBossKilled();
 			artifactAssaults.get(locId).finishAssault(bossIsKilled);
 			if (bossIsKilled && siege.getSiegeLocation().getRace().equals(SiegeRace.BALAUR))
-				log.debug("[SIEGE] > [ARTIFACT:" + siege.getSiegeLocationId() + "] has been captured by Balaur Assault!");
+				log.info(siege + " has been captured by Balaur assault!");
 			else {
-				log.debug("[SIEGE] > [ARTIFACT:" + siege.getSiegeLocationId() + "] Balaur Assault finished without capture!");
+				log.info(siege + " Balaur assault finished without capture!");
 			}
 			artifactAssaults.remove(locId);
 		}
@@ -95,8 +93,8 @@ public class BalaurAssaultService {
 		if (count >= (isBalaurea ? 1 : 2))
 			return false;
 
-		float influence = fortress.getRace() == SiegeRace.ASMODIANS ? Influence.getInstance().getAsmodianInfluenceRate() : Influence.getInstance()
-			.getElyosInfluenceRate();
+		float influence = fortress.getRace() == SiegeRace.ASMODIANS ? Influence.getInstance().getAsmodianInfluenceRate()
+			: Influence.getInstance().getElyosInfluenceRate();
 
 		if (Rnd.nextFloat() >= influence / SiegeConfig.BALAUR_ASSAULT_RATE)
 			return false;
@@ -109,7 +107,6 @@ public class BalaurAssaultService {
 			PacketSendUtility.sendMessage(player, "Assault on " + location + " was already started.");
 			return;
 		}
-
 		newAssault(SiegeService.getInstance().getSiege(location), delay);
 	}
 
@@ -118,10 +115,14 @@ public class BalaurAssaultService {
 			FortressAssault assault = new FortressAssault((FortressSiege) siege);
 			assault.startAssault(delay);
 			fortressAssaults.put(siege.getSiegeLocationId(), assault);
+			if (LoggingConfig.LOG_SIEGE)
+				log.info("Scheduled Balaur assault of " + siege + " in " + delay + "seconds");
 		} else if (siege instanceof ArtifactSiege) {
 			ArtifactAssault assault = new ArtifactAssault((ArtifactSiege) siege);
 			assault.startAssault(delay);
 			artifactAssaults.put(siege.getSiegeLocationId(), assault);
+			if (LoggingConfig.LOG_SIEGE)
+				log.info("Scheduled Balaur assault of " + siege + " in " + delay + " minutes");
 		}
 	}
 
@@ -137,7 +138,7 @@ public class BalaurAssaultService {
 			PacketSendUtility.sendPacket(p, SM_SYSTEM_MESSAGE.STR_ABYSS_CARRIER_SPAWN());
 		}
 	}
-	
+
 	private static class SingletonHolder {
 
 		private static final BalaurAssaultService INSTANCE = new BalaurAssaultService();

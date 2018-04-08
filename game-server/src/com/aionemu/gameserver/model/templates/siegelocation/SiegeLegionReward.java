@@ -13,15 +13,15 @@ import javax.xml.bind.annotation.XmlType;
 public class SiegeLegionReward {
 
 	@XmlAttribute(name = "itemid")
-	protected int itemId;
+	private int itemId;
 	@XmlAttribute(name = "m_count")
-	protected int mCount;
+	private long itemCount;
 
 	public int getItemId() {
 		return itemId;
 	}
 
-	public int getCount() {
-		return mCount;
+	public long getCount() {
+		return itemCount;
 	}
 }

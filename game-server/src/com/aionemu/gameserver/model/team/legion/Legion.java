@@ -25,7 +25,7 @@ import com.aionemu.gameserver.world.World;
  */
 public class Legion extends AionObject {
 
-	private String legionName = "";
+	private String legionName;
 	private int legionLevel = 1;
 	private int legionRank = 0;
 	private long contributionPoints = 0;
@@ -540,4 +540,8 @@ public class Legion extends AionObject {
 		this.lastLegionDominion = lastLegionDominion;
 	}
 
+	@Override
+	public String toString() {
+		return "Legion [id=" + getObjectId() + ", name=" + getName() + "]";
+	}
 }

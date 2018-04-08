@@ -25,7 +25,7 @@ public class SiegeCounter {
 	public void addDamage(Creature creature, int damage) {
 		SiegeRace siegeRace;
 		if (creature instanceof Player)
-			siegeRace = SiegeRace.getByRace(((Player) creature).getRace());
+			siegeRace = SiegeRace.getByRace(creature.getRace());
 		else if (creature instanceof SiegeNpc) {
 			siegeRace = ((SiegeNpc) creature).getSiegeRace();
 			if (siegeRace == null) {
@@ -66,8 +66,7 @@ public class SiegeCounter {
 	 * @return all siege race damage counters sorted by descending order
 	 */
 	public SiegeRaceCounter getWinnerRaceCounter() {
-		List<SiegeRaceCounter> list = new ArrayList<>();
-		list.addAll(siegeRaceCounters.values());
+		List<SiegeRaceCounter> list = new ArrayList<>(siegeRaceCounters.values());
 		list.sort(null);
 		return list.get(0);
 	}
