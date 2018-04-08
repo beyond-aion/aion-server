@@ -101,7 +101,7 @@ public class IdgelDomeInfo extends InstanceReward<IdgelDomePlayerInfo> {
 	public RewardItem getMythicKunaxEquipment(Player player) {
 		int[] weapons;
 		int[] armor;
-		switch (player.getPlayerClass()) { // Chest, Gloves, Shoulders, Pants, Shoes, Helmet, Weapon, Weapon, Weapon/Shield
+		switch (player.getPlayerClass()) { // armor: Chest, Gloves, Shoulders, Pants, Shoes, Helmet
 			case TEMPLAR:
 				weapons = new int[] { 100901305, 100001682, 115001702 }; // Greatsword, Sword, Shield
 				armor = new int[] { 110601549, 111601512, 112601494, 113601495, 114601502, 125003995 };

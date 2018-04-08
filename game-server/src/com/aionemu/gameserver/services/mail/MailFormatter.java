@@ -14,8 +14,8 @@ import com.aionemu.gameserver.model.templates.mail.MailTemplate;
  */
 public final class MailFormatter {
 
-	public static void sendBlackCloudMail(String recipientName, final int itemObjectId, final int itemCount) {
-		final MailTemplate template = DataManager.SYSTEM_MAIL_TEMPLATES.getMailTemplate("$$CASH_ITEM_MAIL", "", Race.PC_ALL);
+	public static void sendBlackCloudMail(String recipientName, int itemObjectId, int itemCount) {
+		MailTemplate template = DataManager.SYSTEM_MAIL_TEMPLATES.getMailTemplate("$$CASH_ITEM_MAIL", "", Race.PC_ALL);
 
 		MailPart formatter = new MailPart() {
 
@@ -40,8 +40,8 @@ public final class MailFormatter {
 		SystemMailService.getInstance().sendMail("$$CASH_ITEM_MAIL", recipientName, title, body, itemObjectId, itemCount, 0, LetterType.BLACKCLOUD);
 	}
 
-	public static void sendHouseMaintenanceMail(final House ownedHouse, int warnCount, final long impoundTime) {
-		String templateName = "";
+	public static void sendHouseMaintenanceMail(House ownedHouse, int warnCount, long impoundTime) {
+		String templateName;
 		switch (warnCount) {
 			case 1:
 				templateName = "$$HS_OVERDUE_1ST";
@@ -56,7 +56,7 @@ public final class MailFormatter {
 				return;
 		}
 
-		final MailTemplate template = DataManager.SYSTEM_MAIL_TEMPLATES.getMailTemplate(templateName, "", ownedHouse.getPlayerRace());
+		MailTemplate template = DataManager.SYSTEM_MAIL_TEMPLATES.getMailTemplate(templateName, "", ownedHouse.getPlayerRace());
 
 		MailPart formatter = new MailPart() {
 
@@ -77,9 +77,8 @@ public final class MailFormatter {
 		SystemMailService.getInstance().sendMail(templateName, ownedHouse.getButler().getMasterName(), title, message, 0, 0, 0, LetterType.NORMAL);
 	}
 
-	public static void sendHouseAuctionMail(final House ownedHouse, final PlayerCommonData playerData, final AuctionResult result, final long time,
-		long returnKinah) {
-		final MailTemplate template = DataManager.SYSTEM_MAIL_TEMPLATES.getMailTemplate("$$HS_AUCTION_MAIL", "", playerData.getRace());
+	public static void sendHouseAuctionMail(House ownedHouse, PlayerCommonData playerData, AuctionResult result, long time, long returnKinah) {
+		MailTemplate template = DataManager.SYSTEM_MAIL_TEMPLATES.getMailTemplate("$$HS_AUCTION_MAIL", "", playerData.getRace());
 		if (ownedHouse == null || result == null)
 			return;
 
@@ -105,10 +104,10 @@ public final class MailFormatter {
 		SystemMailService.getInstance().sendMail("$$HS_AUCTION_MAIL", playerData.getName(), title, message, 0, 0, returnKinah, LetterType.NORMAL);
 	}
 
-	public static void sendAbyssRewardMail(final SiegeLocation siegeLocation, final PlayerCommonData playerData, final AbyssSiegeLevel level,
-		final SiegeResult result, final long time, int attachedItemObjId, long attachedItemCount, long attachedKinahCount) {
+	public static void sendAbyssRewardMail(SiegeLocation siegeLocation, PlayerCommonData playerData, AbyssSiegeLevel level, SiegeResult result,
+		long time, int attachedItemObjId, long attachedItemCount, long attachedKinahCount) {
 
-		final MailTemplate template = DataManager.SYSTEM_MAIL_TEMPLATES.getMailTemplate("$$ABYSS_REWARD_MAIL", "", playerData.getRace());
+		MailTemplate template = DataManager.SYSTEM_MAIL_TEMPLATES.getMailTemplate("$$ABYSS_REWARD_MAIL", "", playerData.getRace());
 
 		MailPart formatter = new MailPart() {
 

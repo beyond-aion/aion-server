@@ -82,11 +82,13 @@ public class IdgelDomeInstance extends GeneralInstanceHandler {
 		sendPacket(new SM_INSTANCE_SCORE(new IdgelDomeScoreInfo(idi, InstanceScoreType.UPDATE_PLAYER_INFO, instance.getPlayersInside()), idi, getTime()));
 		Race winningrace = idi.getWinningRace();
 		RewardItem spacer = new RewardItem(0, 0);
+		int winnerBonusAp = Rnd.get(10000, 14000);
+		int loserBonusAp = Rnd.get(3000, 6000);
 		instance.forEachPlayer(p -> {
 			IdgelDomePlayerInfo reward = idi.getPlayerReward(p.getObjectId());
 			if (reward.getRace() == winningrace) {
 				reward.setBaseAp(IdgelDomeInfo.WIN_AP);
-				reward.setBonusAp(Rnd.get(10000, 14000));
+				reward.setBonusAp(winnerBonusAp);
 				reward.setBaseGp(50);
 				reward.addItemReward(new RewardItem(186000243, 3));
 				reward.addItemReward(new RewardItem(188053030, 1));
@@ -103,7 +105,7 @@ public class IdgelDomeInstance extends GeneralInstanceHandler {
 				}
 			} else {
 				reward.setBaseAp(IdgelDomeInfo.DEFEAT_AP);
-				reward.setBonusAp(Rnd.get(3000, 6000));
+				reward.setBonusAp(loserBonusAp);
 				reward.setBaseGp(10);
 				reward.addItemReward(new RewardItem(186000242, 1));
 				reward.addItemReward(new RewardItem(188053031, 1));
