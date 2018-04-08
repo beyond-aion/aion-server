@@ -1,10 +1,12 @@
 package com.aionemu.gameserver.model.gameobjects.player;
 
-import java.util.Calendar;
+import java.time.ZonedDateTime;
+import java.time.temporal.IsoFields;
 
 import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.model.gameobjects.Persistable;
 import com.aionemu.gameserver.utils.stats.AbyssRankEnum;
+import com.aionemu.gameserver.utils.time.ServerTime;
 
 /**
  * @author ATracer, Divinity
@@ -42,8 +44,8 @@ public class AbyssRank implements Persistable {
 	 * @param lastAP
 	 * @param lastUpdate
 	 */
-	public AbyssRank(int dailyAP, int weeklyAP, int ap, int rank, int topRanking, int dailyKill, int weeklyKill, int allKill, int maxRank,
-		int lastKill, int lastAP, long lastUpdate, int daily_gp, int weekly_gp, int gp, int last_gp) {
+	public AbyssRank(int dailyAP, int weeklyAP, int ap, int rank, int topRanking, int dailyKill, int weeklyKill, int allKill, int maxRank, int lastKill,
+		int lastAP, long lastUpdate, int daily_gp, int weekly_gp, int gp, int last_gp) {
 		this.dailyAP = dailyAP;
 		this.weeklyAP = weeklyAP;
 		this.currentAp = ap;
@@ -267,29 +269,25 @@ public class AbyssRank implements Persistable {
 	 */
 	public void doUpdate() {
 		boolean needUpdate = false;
-		Calendar lastCal = Calendar.getInstance();
-		lastCal.setTimeInMillis(lastUpdate);
-
-		Calendar curCal = Calendar.getInstance();
-		curCal.setTimeInMillis(System.currentTimeMillis());
+		ZonedDateTime lastTime = ServerTime.ofEpochMilli(lastUpdate);
+		ZonedDateTime now = ServerTime.now();
 
 		// Checking the day - month & year are checked to prevent if a player come back after 1 month, the same day
-		if (lastCal.get(Calendar.DAY_OF_MONTH) != curCal.get(Calendar.DAY_OF_MONTH) || lastCal.get(Calendar.MONTH) != curCal.get(Calendar.MONTH)
-			|| lastCal.get(Calendar.YEAR) != curCal.get(Calendar.YEAR)) {
-			this.dailyAP = 0;
-			this.dailyKill = 0;
-			this.dailyGP = 0;
+		if (lastTime.getDayOfMonth() != now.getDayOfMonth() || lastTime.getMonth() != now.getMonth() || lastTime.getYear() != now.getYear()) {
+			dailyAP = 0;
+			dailyKill = 0;
+			dailyGP = 0;
 			needUpdate = true;
 		}
 
 		// Checking the week - year is checked to prevent if a player come back after 1 year, the same week
-		if (lastCal.get(Calendar.WEEK_OF_YEAR) != curCal.get(Calendar.WEEK_OF_YEAR) || lastCal.get(Calendar.YEAR) != curCal.get(Calendar.YEAR)) {
-			this.lastKill = this.weeklyKill;
-			this.lastAP = this.weeklyAP;
-			this.lastGP = this.weeklyGP;
-			this.weeklyKill = 0;
-			this.weeklyAP = 0;
-			this.weeklyGP = 0;
+		if (lastTime.get(IsoFields.WEEK_OF_WEEK_BASED_YEAR) != now.get(IsoFields.WEEK_OF_WEEK_BASED_YEAR) || lastTime.getYear() != now.getYear()) {
+			lastKill = weeklyKill;
+			lastAP = weeklyAP;
+			lastGP = weeklyGP;
+			weeklyKill = 0;
+			weeklyAP = 0;
+			weeklyGP = 0;
 			needUpdate = true;
 		}
 
@@ -300,7 +298,7 @@ public class AbyssRank implements Persistable {
 		}
 
 		// Finally, update the the last update
-		this.lastUpdate = System.currentTimeMillis();
+		lastUpdate = System.currentTimeMillis();
 
 		if (needUpdate)
 			setPersistentState(PersistentState.UPDATE_REQUIRED);

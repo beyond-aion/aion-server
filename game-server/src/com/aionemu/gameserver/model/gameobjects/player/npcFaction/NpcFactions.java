@@ -1,6 +1,7 @@
 package com.aionemu.gameserver.model.gameobjects.player.npcFaction;
 
-import java.util.Calendar;
+import java.time.LocalTime;
+import java.time.ZonedDateTime;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -27,6 +28,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_TITLE_INFO;
 import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.services.craft.CraftSkillUpdateService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.time.ServerTime;
 
 /**
  * @author MrPoke
@@ -188,7 +190,6 @@ public class NpcFactions {
 			PacketSendUtility.sendPacket(owner,
 				new SM_QUESTION_WINDOW(SM_QUESTION_WINDOW.STR_ASK_JOIN_NEW_FACTION, 0, 0, activeNpcFactionTemplate.getL10n(), npcFactionTemplate.getL10n()));
 		}
-		return;
 	}
 
 	public void startQuest(QuestTemplate questTemplate) {
@@ -274,23 +275,18 @@ public class NpcFactions {
 	}
 
 	private int getNextTime() {
-		Calendar repeatDate = Calendar.getInstance(); // current date
-		repeatDate.set(Calendar.AM_PM, Calendar.AM);
-		repeatDate.set(Calendar.HOUR, 9);
-		repeatDate.set(Calendar.MINUTE, 0);
-		repeatDate.set(Calendar.SECOND, 0); // current date 09:00
-		if (repeatDate.getTime().getTime() < System.currentTimeMillis()) {
-			repeatDate.add(Calendar.HOUR, 24); // can repeat next day
+		ZonedDateTime now = ServerTime.now();
+		long repeatDateEpochSeconds;
+		if (now.getHour() >= 9) {
+			repeatDateEpochSeconds = now.with(LocalTime.MIDNIGHT).withHour(9).plusDays(1).toEpochSecond(); // tomorrow morning at 9:00 AM
+		} else {
+			repeatDateEpochSeconds = now.with(LocalTime.MIDNIGHT).withHour(9).toEpochSecond(); // today morning at 9:00 AM
 		}
-		return (int) (repeatDate.getTimeInMillis() / 1000);
+		return (int) repeatDateEpochSeconds;
 	}
 
 	public boolean canStartQuest(QuestTemplate template) {
 		int type = template.isMentor() ? 1 : 0;
-		NpcFaction faction = activeNpcFaction[type];
-		if (faction != null && this.timeLimit[type] < System.currentTimeMillis() / 1000) {
-			return true;
-		}
-		return false;
+		return activeNpcFaction[type] != null && timeLimit[type] < System.currentTimeMillis() / 1000;
 	}
 }
