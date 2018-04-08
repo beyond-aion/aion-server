@@ -463,7 +463,7 @@
 			<gd_item id="167000563" /><!-- Manastone: Healing Boost +3 -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Amplification Stone (Single)" base_chance="3">
+	<gd_rule rule_name="Amplification Stone (Single)" base_chance="6">
 		<gd_maps>
 			<gd_map map_id="310110000" /><!-- Theobomos_Lab -->
 			<gd_map map_id="320130000" /><!-- Adma_Stronghold -->
@@ -577,7 +577,7 @@
 			<gd_item id="166500002" /><!-- Amplification Stone -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Amplification Stone (Multi)" base_chance="3" member_limit="192">
+	<gd_rule rule_name="Amplification Stone (Multi)" base_chance="6" member_limit="192">
 		<gd_maps>
 			<gd_map map_id="310110000" /><!-- Theobomos_Lab -->
 			<gd_map map_id="320130000" /><!-- Adma_Stronghold -->

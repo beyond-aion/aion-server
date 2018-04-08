@@ -93,7 +93,7 @@
 			<gd_item id="166020000" /> <!-- Omega Enchantment Stone -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Random Boss amplification stone" base_chance="10" fixed_chance="true" member_limit="3">
+	<gd_rule rule_name="Random Boss amplification stone" base_chance="20" fixed_chance="true" member_limit="3">
 		<gd_maps>
 			<gd_map map_id="301220000" /><!-- Iron_Wall_Warfront -->
 		</gd_maps>

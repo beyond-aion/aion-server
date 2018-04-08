@@ -1292,7 +1292,7 @@
 			<drop item_id="186000238" min_amount="3" max_amount="5" chance="100" each_member="true" /><!-- Conqueror's Mark -->
 		</drop_group>
 		<drop_group race="PC_ALL"><!-- Amplification Stone (Multi) -->
-			<drop item_id="166500002" chance="5" each_member="true" /><!-- Amplification Stone -->
+			<drop item_id="166500002" chance="10" each_member="true" /><!-- Amplification Stone -->
 		</drop_group>
 		<drop_group race="PC_ALL"><!-- Named Equipment Box (Epic) -->
 			<drop item_id="188052388" chance="100" each_member="true" /><!-- Modor's Equipment Box -->
@@ -1578,7 +1578,7 @@
 			<drop item_id="186000238" min_amount="3" max_amount="5" chance="100" each_member="true" /><!-- Conqueror's Mark -->
 		</drop_group>
 		<drop_group race="PC_ALL"><!-- Amplification Stone (Multi) -->
-			<drop item_id="166500002" chance="5" each_member="true" /><!-- Amplification Stone -->
+			<drop item_id="166500002" chance="10" each_member="true" /><!-- Amplification Stone -->
 		</drop_group>
 		<drop_group race="PC_ALL"><!-- Named Box -->
 			<drop item_id="188052084" chance="100" each_member="true" /><!-- Dragon Lord Tiamat Treasure Chest -->
@@ -1909,10 +1909,10 @@
 			<drop item_id="188052599" min_amount="4" max_amount="4" chance="100" /><!-- Defender's Supply Box -->
 		</drop_group>
 		<drop_group race="PC_ALL"><!-- Named Amplification Stone -->
-			<drop item_id="166500002" chance="5" /><!-- Amplification Stone -->
+			<drop item_id="166500002" chance="10" /><!-- Amplification Stone -->
 		</drop_group>
 		<drop_group race="PC_ALL"><!-- Named Tempering Solution Chest -->
-			<drop item_id="188053083" chance="5" /><!-- Tempering Solution Chest -->
+			<drop item_id="188053083" chance="10" /><!-- Tempering Solution Chest -->
 		</drop_group>
 	</npc_drop>
 	<!-- Haramel -->
