@@ -64,7 +64,7 @@ public class IdgelDomeInstance extends GeneralInstanceHandler {
 		sendPacket(new SM_INSTANCE_SCORE(new IdgelDomeScoreInfo(idi, InstanceScoreType.UPDATE_PROGRESS), idi, getTime()));
 		sendPacket(new SM_INSTANCE_SCORE(new IdgelDomeScoreInfo(idi, InstanceScoreType.UPDATE_PLAYER_INFO, instance.getPlayersInside()), idi, getTime()));
 		sendPacket(new SM_INSTANCE_SCORE(new IdgelDomeScoreInfo(idi, InstanceScoreType.UPDATE_SCORE, instance.getPlayersInside()), idi, getTime()));
-		instance.getDoors().values().stream().forEach(d -> d.setOpen(true));
+		instance.getDoors().values().forEach(d -> d.setOpen(true));
 		tasks.add(ThreadPoolManager.getInstance().schedule(() -> spawn(234190, 264.4382f, 258.58527f, 88.452042f, (byte) 31), 600000));
 		tasks.add(ThreadPoolManager.getInstance().schedule(() -> onStop(false), 1200000));
 		spawnAndSetRespawn(802548, 199.187f, 191.761f, 80.7466f, (byte) 15, 180);
@@ -80,7 +80,8 @@ public class IdgelDomeInstance extends GeneralInstanceHandler {
 		sendPacket(new SM_INSTANCE_SCORE(new IdgelDomeScoreInfo(idi, InstanceScoreType.UPDATE_PROGRESS), idi, getTime()));
 		sendPacket(new SM_INSTANCE_SCORE(new IdgelDomeScoreInfo(idi, InstanceScoreType.UPDATE_SCORE, instance.getPlayersInside()), idi, getTime()));
 		sendPacket(new SM_INSTANCE_SCORE(new IdgelDomeScoreInfo(idi, InstanceScoreType.UPDATE_PLAYER_INFO, instance.getPlayersInside()), idi, getTime()));
-		final Race winningrace = idi.getWinningRace();
+		Race winningrace = idi.getWinningRace();
+		RewardItem spacer = new RewardItem(0, 0);
 		instance.forEachPlayer(p -> {
 			IdgelDomePlayerInfo reward = idi.getPlayerReward(p.getObjectId());
 			if (reward.getRace() == winningrace) {
@@ -89,16 +90,16 @@ public class IdgelDomeInstance extends GeneralInstanceHandler {
 				reward.setBaseGp(50);
 				reward.addItemReward(new RewardItem(186000243, 3));
 				reward.addItemReward(new RewardItem(188053030, 1));
-				reward.addItemReward(new RewardItem(0, 0));
+				reward.addItemReward(spacer);
 				if (isKunaxKilled) {
-					RewardItem mythicKunaxEq = new RewardItem(0, 0);
+					RewardItem mythicKunaxEq = null;
 					if (Rnd.chance() < 20)
-						mythicKunaxEq = idi.getMythicKunaxEquipmentByPlayerClass(p.getPlayerClass());
-					reward.addItemReward(mythicKunaxEq);
+						mythicKunaxEq = idi.getMythicKunaxEquipment(p);
+					reward.addItemReward(mythicKunaxEq == null ? spacer : mythicKunaxEq);
 					reward.addItemReward(new RewardItem(188053032, 1));
 				} else {
-					reward.addItemReward(new RewardItem(0, 0));
-					reward.addItemReward(new RewardItem(0, 0));
+					reward.addItemReward(spacer);
+					reward.addItemReward(spacer);
 				}
 			} else {
 				reward.setBaseAp(IdgelDomeInfo.DEFEAT_AP);
@@ -106,9 +107,9 @@ public class IdgelDomeInstance extends GeneralInstanceHandler {
 				reward.setBaseGp(10);
 				reward.addItemReward(new RewardItem(186000242, 1));
 				reward.addItemReward(new RewardItem(188053031, 1));
-				reward.addItemReward(new RewardItem(0, 0));
-				reward.addItemReward(new RewardItem(0, 0));
-				reward.addItemReward(new RewardItem(0, 0));
+				reward.addItemReward(spacer);
+				reward.addItemReward(spacer);
+				reward.addItemReward(spacer);
 			}
 			sendPacket(new SM_INSTANCE_SCORE(new IdgelDomeScoreInfo(idi, InstanceScoreType.SHOW_REWARD, p.getObjectId(), 0), idi, getTime()));
 			AbyssPointsService.addAp(p, reward.getBaseAp() + reward.getBonusAp());

@@ -1,13 +1,12 @@
 package com.aionemu.gameserver.model.instance.instancereward;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.slf4j.LoggerFactory;
+
 import com.aionemu.commons.utils.Rnd;
-import com.aionemu.gameserver.model.PlayerClass;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.instance.playerreward.IdgelDomePlayerInfo;
@@ -99,45 +98,60 @@ public class IdgelDomeInfo extends InstanceReward<IdgelDomePlayerInfo> {
 		TeleportService.teleportTo(player, p.getMapId(), instanceId, p.getX(), p.getY(), p.getZ(), p.getHeading());
 	}
 
-	public RewardItem getMythicKunaxEquipmentByPlayerClass(PlayerClass pc) {
-		List<Integer> possibleRewards = new ArrayList<>();
-		switch (pc) { // Chest, Gloves, Shoulders, Pants, Shoes, Helmet, Weapon, Weapon, Weapon/Shield
-			case TEMPLAR: // Greatsword, Sword, Shield
-				possibleRewards.addAll(Arrays.asList(110601549, 111601512, 112601494, 113601495, 114601502, 125003995, 100901305, 100001682, 115001702));
+	public RewardItem getMythicKunaxEquipment(Player player) {
+		int[] weapons;
+		int[] armor;
+		switch (player.getPlayerClass()) { // Chest, Gloves, Shoulders, Pants, Shoes, Helmet, Weapon, Weapon, Weapon/Shield
+			case TEMPLAR:
+				weapons = new int[] { 100901305, 100001682, 115001702 }; // Greatsword, Sword, Shield
+				armor = new int[] { 110601549, 111601512, 112601494, 113601495, 114601502, 125003995 };
 				break;
-			case GLADIATOR: // Greatsword, Polearm, Bow
-				possibleRewards.addAll(Arrays.asList(110601549, 111601512, 112601494, 113601495, 114601502, 125003995, 100901305, 101301215, 101701319));
+			case GLADIATOR:
+				weapons = new int[] { 100901305, 101301215, 101701319 }; // Greatsword, Polearm, Bow
+				armor = new int[] { 110601549, 111601512, 112601494, 113601495, 114601502, 125003995 };
 				break;
-			case RANGER: // Bow, Bow, Bow
-				possibleRewards.addAll(Arrays.asList(110301751, 111301689, 112301628, 113301720, 114301757, 125003997, 101701319, 101701319, 101701319));
+			case RANGER:
+				weapons = new int[] { 101701319 }; // Bow
+				armor = new int[] { 110301751, 111301689, 112301628, 113301720, 114301757, 125003997 };
 				break;
-			case ASSASSIN: // Sword, Dagger, Bow
-				possibleRewards.addAll(Arrays.asList(110301751, 111301689, 112301628, 113301720, 114301757, 125003997, 100001682, 100201455, 101701319));
+			case ASSASSIN:
+				weapons = new int[] { 100001682, 100201455, 101701319 }; // Sword, Dagger, Bow
+				armor = new int[] { 110301751, 111301689, 112301628, 113301720, 114301757, 125003997 };
 				break;
-			case GUNNER: // Pistol, Pistol, Cannon
-				possibleRewards.addAll(Arrays.asList(110301751, 111301689, 112301628, 113301720, 114301757, 125003997, 101801170, 101801170, 101901081));
+			case GUNNER:
+				weapons = new int[] { 101801170, 101801170, 101901081 }; // Pistol, Pistol, Cannon
+				armor = new int[] { 110301751, 111301689, 112301628, 113301720, 114301757, 125003997 };
 				break;
-			case SORCERER: // Tome, Tome, Orb
-				possibleRewards.addAll(Arrays.asList(110101754, 111101579, 112101529, 113101591, 114101625, 125003998, 100601378, 100601378, 100501268));
+			case SORCERER:
+				weapons = new int[] { 100601378, 100601378, 100501268 }; // Tome, Tome, Orb
+				armor = new int[] { 110101754, 111101579, 112101529, 113101591, 114101625, 125003998 };
 				break;
-			case SPIRIT_MASTER: // Tome, Orb, Orb
-				possibleRewards.addAll(Arrays.asList(110101754, 111101579, 112101529, 113101591, 114101625, 125003998, 100601378, 100501268, 100501268));
+			case SPIRIT_MASTER:
+				weapons = new int[] { 100601378, 100501268, 100501268 }; // Tome, Orb, Orb
+				armor = new int[] { 110101754, 111101579, 112101529, 113101591, 114101625, 125003998 };
 				break;
-			case BARD: // Harp, Harp, Harp
-				possibleRewards.addAll(Arrays.asList(110101754, 111101579, 112101529, 113101591, 114101625, 125003998, 102001197, 102001197, 102001197));
+			case BARD:
+				weapons = new int[] { 102001197 };
+				armor = new int[] { 110101754, 111101579, 112101529, 113101591, 114101625, 125003998 };
 				break;
-			case CLERIC: // Staff, Mace, Shield
-				possibleRewards.addAll(Arrays.asList(110551084, 111501643, 112501582, 113501661, 114501671, 125003996, 101501304, 100101281, 115001702));
+			case CLERIC:
+				weapons = new int[] { 101501304, 100101281, 115001702 }; // Staff, Mace, Shield
+				armor = new int[] { 110551084, 111501643, 112501582, 113501661, 114501671, 125003996 };
 				break;
-			case CHANTER: // Staff, Mace, Shield
-				possibleRewards.addAll(Arrays.asList(110551084, 111501643, 112501582, 113501661, 114501671, 125003996, 101501304, 100101281, 115001702));
+			case CHANTER:
+				weapons = new int[] { 101501304, 101501304, 100101281, 115001702 }; // Staff, Staff, Mace, Shield
+				armor = new int[] { 110551084, 111501643, 112501582, 113501661, 114501671, 125003996 };
 				break;
-			case RIDER: // Key, Key, Key
-				possibleRewards.addAll(Arrays.asList(110551084, 111501643, 112501582, 113501661, 114501671, 125003996, 102100969, 102100969, 102100969));
+			case RIDER:
+				weapons = new int[] { 102100969 };
+				armor = new int[] { 110551084, 111501643, 112501582, 113501661, 114501671, 125003996 };
 				break;
-			default: // just in case
-				possibleRewards.add(0);
+			default:
+				LoggerFactory.getLogger(IdgelDomeInfo.class)
+					.warn("Couldn't get mythic Kunax equipment for " + player + ". Rewards for " + player.getPlayerClass() + " are not implemented");
+				return null;
 		}
+		int[] possibleRewards = Rnd.chance() < 17.5f ? weapons : armor;
 		return new RewardItem(Rnd.get(possibleRewards), 1);
 	}
 }
