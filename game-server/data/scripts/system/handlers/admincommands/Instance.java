@@ -61,7 +61,7 @@ public class Instance extends AdminCommand {
 					DredgionService.getInstance().startRegistration();
 					PacketSendUtility.sendMessage(admin, instanceName + " started successfully.");
 				}
-			} else if (instanceName.equalsIgnoreCase("idgel")) {
+			} else if (instanceName.equalsIgnoreCase("idgel_dome")) {
 				if (IdgelDomeService.getInstance().isRegisterAvailable()) {
 					PacketSendUtility.sendMessage(admin, instanceName + " is already started, can't start twice.");
 				} else {
@@ -99,7 +99,7 @@ public class Instance extends AdminCommand {
 					KamarBattlefieldService.getInstance().stopRegistration();
 					PacketSendUtility.sendMessage(admin, instanceName + " stopped successfully.");
 				}
-			} else if (instanceName.equalsIgnoreCase("idgel")) {
+			} else if (instanceName.equalsIgnoreCase("idgel_dome")) {
 				if (IdgelDomeService.getInstance().isRegisterAvailable()) {
 					PacketSendUtility.sendMessage(admin, instanceName + " isn't started, can't end.");
 				} else {
