@@ -14,8 +14,8 @@ import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
  */
 public class Instance extends AdminCommand {
 
-	private static final String SYNTAX = "Syntax: //instance start (kamar|dredgion|ophidian_bridge|iron_wall_front)>"
-		+ "//instance end (kamar|dredgion|ophidian_bridge|iron_wall_front)";
+	private static final String SYNTAX = "Syntax: //instance start (kamar|dredgion|ophidian_bridge|iron_wall_front|idgel_dome)>"
+		+ "//instance end (kamar|dredgion|ophidian_bridge|iron_wall_front|idgel_dome)";
 
 	public Instance() {
 		super("instance");
