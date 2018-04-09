@@ -169,14 +169,7 @@
 			<gd_map map_id="210070000" /><!-- Cygnea -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="235963" /><!-- Chromeleaf Flowershot -->
-			<gd_npc npc_id="235965" /><!-- Shatterroar Kirrin -->
-			<gd_npc npc_id="235967" /><!-- Betrayer Squallo -->
-			<gd_npc npc_id="235968" /><!-- Garden Protector Nenupar -->
-			<gd_npc npc_id="235969" /><!-- Tenacious Sashirr -->
 			<gd_npc npc_id="235971" /><!-- Machine Spirit Tottal -->
-			<gd_npc npc_id="235972" /><!-- Commander Ratash -->
-			<gd_npc npc_id="235973" /><!-- Fierce Sandmane Tigric -->
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="166000194" /><!-- Delta Enchantment Stone -->
