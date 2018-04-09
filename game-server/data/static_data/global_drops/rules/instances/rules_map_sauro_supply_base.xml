@@ -80,14 +80,20 @@
 			<gd_item id="188052575" /><!-- Veteran's Crafting Bundle -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Unique)" base_chance="20">
+	<gd_rule rule_name="Named Weapon (Unique)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
 		</gd_maps>
 		<gd_npcs>
 			<gd_npc npc_id="230849" /><!-- Guard Captain Rohuka -->
+			<gd_npc npc_id="230850" /><!-- Researcher Teselik -->
 			<gd_npc npc_id="230851" /><!-- Chief Gunner Kurmata -->
+			<gd_npc npc_id="230853" /><!-- Chief of Staff Moriata -->
+			<gd_npc npc_id="233255" /><!-- Gatekeeper Stranir -->
+			<gd_npc npc_id="233256" /><!-- Darkblade Ovanuka -->
+			<gd_npc npc_id="233257" /><!-- Archmagus Sayahum -->
 			<gd_npc npc_id="233258" /><!-- Derakanak the Reaver -->
+			<gd_npc npc_id="233316" /><!-- Commander Ranodim -->
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="100001578" /><!-- Sauro Guard's Sword -->
@@ -103,29 +109,16 @@
 			<gd_item id="101901013" /><!-- Sauro Guard's Aethercannon -->
 			<gd_item id="102001087" /><!-- Sauro Guard's Harp -->
 			<gd_item id="102100840" /><!-- Sauro Guard's Cipher-Blade -->
+			<gd_item id="115001622" /><!-- Sauro Guard's Shield -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Shield (Unique)" base_chance="20">
+	<gd_rule rule_name="Named Armor (Unique)" base_chance="100" fixed_chance="true">
 		<gd_maps>
 			<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
 		</gd_maps>
 		<gd_npcs>
 			<gd_npc npc_id="230849" /><!-- Guard Captain Rohuka -->
-			<gd_npc npc_id="230851" /><!-- Chief Gunner Kurmata -->
-			<gd_npc npc_id="233256" /><!-- Darkblade Ovanuka -->
-			<gd_npc npc_id="233257" /><!-- Archmagus Sayahum -->
-			<gd_npc npc_id="233258" /><!-- Derakanak the Reaver -->
-			<gd_npc npc_id="233316" /><!-- Commander Ranodim -->
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="115001622" /><!-- Sauro Guard's Shield -->
-		</gd_items>
-	</gd_rule>
-	<gd_rule rule_name="Named Armor (Unique)" base_chance="20">
-		<gd_maps>
-			<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
-		</gd_maps>
-		<gd_npcs>
+			<gd_npc npc_id="230850" /><!-- Researcher Teselik -->
 			<gd_npc npc_id="230851" /><!-- Chief Gunner Kurmata -->
 			<gd_npc npc_id="230853" /><!-- Chief of Staff Moriata -->
 			<gd_npc npc_id="233255" /><!-- Gatekeeper Stranir -->
@@ -157,55 +150,52 @@
 			<gd_item id="114601436" /><!-- Sauro Guard's Sabatons -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Unique)" base_chance="20">
+	<gd_rule rule_name="Named Accessory (Unique)" base_chance="40">
 		<gd_maps>
 			<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
 		</gd_maps>
 		<gd_npcs>
+			<gd_npc npc_id="230849" /><!-- Guard Captain Rohuka -->
 			<gd_npc npc_id="230850" /><!-- Researcher Teselik -->
+			<gd_npc npc_id="230851" /><!-- Chief Gunner Kurmata -->
+			<gd_npc npc_id="230853" /><!-- Chief of Staff Moriata -->
 			<gd_npc npc_id="233255" /><!-- Gatekeeper Stranir -->
-			<gd_npc npc_id="233256" /><!-- Darkblade Ovanuka -->
-			<gd_npc npc_id="233257" /><!-- Archmagus Sayahum -->
-			<gd_npc npc_id="233316" /><!-- Commander Ranodim -->
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="120001465" /><!-- Sauro Guard's Corundum Earrings -->
-			<gd_item id="120001466" /><!-- Sauro Guard's Turquoise Earrings -->
-			<gd_item id="121001339" /><!-- Sauro Guard's Corundum Necklace -->
-			<gd_item id="121001340" /><!-- Sauro Guard's Turquoise Necklace -->
-			<gd_item id="122001608" /><!-- Sauro Guard's Corundum Ring -->
-			<gd_item id="122001609" /><!-- Sauro Guard's Turquoise Ring -->
-			<gd_item id="123001388" /><!-- Sauro Guard's Leather Belt -->
-			<gd_item id="123001389" /><!-- Sauro Guard's Sash -->
-		</gd_items>
-	</gd_rule>
-	<gd_rule rule_name="Named Head (Unique)" base_chance="10">
-		<gd_maps>
-			<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="230850" /><!-- Researcher Teselik -->
-			<gd_npc npc_id="233255" /><!-- Gatekeeper Stranir -->
-			<gd_npc npc_id="233256" /><!-- Darkblade Ovanuka -->
-			<gd_npc npc_id="233257" /><!-- Archmagus Sayahum -->
-			<gd_npc npc_id="233316" /><!-- Commander Ranodim -->
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="125003683" /><!-- Sauro Guard's Headband -->
-			<gd_item id="125003688" /><!-- Sauro Guard's Hat -->
-			<gd_item id="125003693" /><!-- Sauro Guard's Chain Hood -->
-			<gd_item id="125003698" /><!-- Sauro Guard's Helm -->
-		</gd_items>
-	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Epic)" base_chance="6">
-		<gd_maps>
-			<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="230857" /><!-- Guard Captain Ahuradim -->
 			<gd_npc npc_id="233256" /><!-- Darkblade Ovanuka -->
 			<gd_npc npc_id="233257" /><!-- Archmagus Sayahum -->
 			<gd_npc npc_id="233258" /><!-- Derakanak the Reaver -->
+			<gd_npc npc_id="233316" /><!-- Commander Ranodim -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="120001465" chance="10" /><!-- Sauro Guard's Corundum Earrings -->
+			<gd_item id="120001466" chance="10" /><!-- Sauro Guard's Turquoise Earrings -->
+			<gd_item id="121001339" chance="10" /><!-- Sauro Guard's Corundum Necklace -->
+			<gd_item id="121001340" chance="10" /><!-- Sauro Guard's Turquoise Necklace -->
+			<gd_item id="122001608" chance="10" /><!-- Sauro Guard's Corundum Ring -->
+			<gd_item id="122001609" chance="10" /><!-- Sauro Guard's Turquoise Ring -->
+			<gd_item id="123001388" chance="10" /><!-- Sauro Guard's Leather Belt -->
+			<gd_item id="123001389" chance="10" /><!-- Sauro Guard's Sash -->
+			<gd_item id="125003683" chance="5" /><!-- Sauro Guard's Headband -->
+			<gd_item id="125003688" chance="5" /><!-- Sauro Guard's Hat -->
+			<gd_item id="125003693" chance="5" /><!-- Sauro Guard's Chain Hood -->
+			<gd_item id="125003698" chance="5" /><!-- Sauro Guard's Helm -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Weapon (Epic)" base_chance="25">
+		<gd_maps>
+			<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="230849" /><!-- Guard Captain Rohuka -->
+			<gd_npc npc_id="230850" /><!-- Researcher Teselik -->
+			<gd_npc npc_id="230851" /><!-- Chief Gunner Kurmata -->
+			<gd_npc npc_id="230853" /><!-- Chief of Staff Moriata -->
+			<gd_npc npc_id="230857" /><!-- Guard Captain Ahuradim -->
+			<gd_npc npc_id="230858" /><!-- Brigade General Sheba -->
+			<gd_npc npc_id="233255" /><!-- Gatekeeper Stranir -->
+			<gd_npc npc_id="233256" /><!-- Darkblade Ovanuka -->
+			<gd_npc npc_id="233257" /><!-- Archmagus Sayahum -->
+			<gd_npc npc_id="233258" /><!-- Derakanak the Reaver -->
+			<gd_npc npc_id="233316" /><!-- Commander Ranodim -->
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="100001579" /><!-- Sauren Sword -->
@@ -221,35 +211,26 @@
 			<gd_item id="101901014" /><!-- Sauren Aethercannon -->
 			<gd_item id="102001088" /><!-- Sauren Harp -->
 			<gd_item id="102100841" /><!-- Sauren Cipher-Blade -->
-		</gd_items>
-	</gd_rule>
-	<gd_rule rule_name="Named Shield (Epic)" base_chance="6">
-		<gd_maps>
-			<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="230857" /><!-- Guard Captain Ahuradim -->
-			<gd_npc npc_id="233256" /><!-- Darkblade Ovanuka -->
-			<gd_npc npc_id="233257" /><!-- Archmagus Sayahum -->
-			<gd_npc npc_id="233258" /><!-- Derakanak the Reaver -->
-		</gd_npcs>
-		<gd_items>
 			<gd_item id="115001620" /><!-- Sauren Shield -->
 			<gd_item id="115001621" /><!-- Sauren Scale Shield -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Epic)" base_chance="9">
+	<gd_rule rule_name="Named Armor (Epic)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
 		</gd_maps>
 		<gd_npcs>
 			<gd_npc npc_id="230849" /><!-- Guard Captain Rohuka -->
+			<gd_npc npc_id="230850" /><!-- Researcher Teselik -->
+			<gd_npc npc_id="230851" /><!-- Chief Gunner Kurmata -->
 			<gd_npc npc_id="230853" /><!-- Chief of Staff Moriata -->
 			<gd_npc npc_id="230857" /><!-- Guard Captain Ahuradim -->
+			<gd_npc npc_id="230858" /><!-- Brigade General Sheba -->
 			<gd_npc npc_id="233255" /><!-- Gatekeeper Stranir -->
 			<gd_npc npc_id="233256" /><!-- Darkblade Ovanuka -->
 			<gd_npc npc_id="233257" /><!-- Archmagus Sayahum -->
 			<gd_npc npc_id="233258" /><!-- Derakanak the Reaver -->
+			<gd_npc npc_id="233316" /><!-- Commander Ranodim -->
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="110101671" /><!-- Sauren Tunic -->
@@ -294,47 +275,93 @@
 			<gd_item id="114601435" /><!-- Sauren Sabatons -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Epic)" base_chance="6">
+	<gd_rule rule_name="Named Accessory (Epic)" base_chance="20">
 		<gd_maps>
 			<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
 		</gd_maps>
 		<gd_npcs>
+			<gd_npc npc_id="230849" /><!-- Guard Captain Rohuka -->
 			<gd_npc npc_id="230850" /><!-- Researcher Teselik -->
+			<gd_npc npc_id="230851" /><!-- Chief Gunner Kurmata -->
+			<gd_npc npc_id="230853" /><!-- Chief of Staff Moriata -->
+			<gd_npc npc_id="230857" /><!-- Guard Captain Ahuradim -->
+			<gd_npc npc_id="230858" /><!-- Brigade General Sheba -->
 			<gd_npc npc_id="233255" /><!-- Gatekeeper Stranir -->
+			<gd_npc npc_id="233256" /><!-- Darkblade Ovanuka -->
+			<gd_npc npc_id="233257" /><!-- Archmagus Sayahum -->
+			<gd_npc npc_id="233258" /><!-- Derakanak the Reaver -->
 			<gd_npc npc_id="233316" /><!-- Commander Ranodim -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="120001467" /><!-- Sauren Corundum Earrings -->
-			<gd_item id="120001468" /><!-- Sauren Turquoise Earrings -->
-			<gd_item id="121001341" /><!-- Sauren Corundum Necklace -->
-			<gd_item id="121001342" /><!-- Sauren Turquoise Necklace -->
-			<gd_item id="122001610" /><!-- Sauren Corundum Ring -->
-			<gd_item id="122001611" /><!-- Sauren Turquoise Ring -->
-			<gd_item id="123001390" /><!-- Sauren Leather Belt -->
-			<gd_item id="123001391" /><!-- Sauren Sash -->
+			<gd_item id="120001467" chance="10" /><!-- Sauren Corundum Earrings -->
+			<gd_item id="120001468" chance="10" /><!-- Sauren Turquoise Earrings -->
+			<gd_item id="121001341" chance="10" /><!-- Sauren Corundum Necklace -->
+			<gd_item id="121001342" chance="10" /><!-- Sauren Turquoise Necklace -->
+			<gd_item id="122001610" chance="10" /><!-- Sauren Corundum Ring -->
+			<gd_item id="122001611" chance="10" /><!-- Sauren Turquoise Ring -->
+			<gd_item id="123001390" chance="10" /><!-- Sauren Leather Belt -->
+			<gd_item id="123001391" chance="10" /><!-- Sauren Sash -->
+			<gd_item id="125003681" chance="2.5" /><!-- Sauren Headband -->
+			<gd_item id="125003682" chance="2.5" /><!-- Sauren Headband -->
+			<gd_item id="125003686" chance="2.5" /><!-- Sauren Hat -->
+			<gd_item id="125003687" chance="2.5" /><!-- Sauren Hat -->
+			<gd_item id="125003691" chance="2.5" /><!-- Sauren Chain Hood -->
+			<gd_item id="125003692" chance="2.5" /><!-- Sauren Chain Hood -->
+			<gd_item id="125003696" chance="2.5" /><!-- Sauren Helm -->
+			<gd_item id="125003697" chance="2.5" /><!-- Sauren Helm -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Head (Epic)" base_chance="6">
+	<gd_rule rule_name="Named Weapon (Mythic)" base_chance="9">
 		<gd_maps>
 			<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="230850" /><!-- Researcher Teselik -->
-			<gd_npc npc_id="233255" /><!-- Gatekeeper Stranir -->
-			<gd_npc npc_id="233316" /><!-- Commander Ranodim -->
+			<gd_npc npc_id="230857" /><!-- Guard Captain Ahuradim -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="125003681" /><!-- Sauren Headband -->
-			<gd_item id="125003682" /><!-- Sauren Headband -->
-			<gd_item id="125003686" /><!-- Sauren Hat -->
-			<gd_item id="125003687" /><!-- Sauren Hat -->
-			<gd_item id="125003691" /><!-- Sauren Chain Hood -->
-			<gd_item id="125003692" /><!-- Sauren Chain Hood -->
-			<gd_item id="125003696" /><!-- Sauren Helm -->
-			<gd_item id="125003697" /><!-- Sauren Helm -->
+			<gd_item id="100001580" /><!-- Sauro Commander's Sword -->
+			<gd_item id="100101218" /><!-- Sauro Commander's Warhammer -->
+			<gd_item id="100201388" /><!-- Sauro Commander's Dagger -->
+			<gd_item id="100501208" /><!-- Sauro Commander's Orb -->
+			<gd_item id="100601300" /><!-- Sauro Commander's Spellbook -->
+			<gd_item id="100901230" /><!-- Sauro Commander's Greatsword -->
+			<gd_item id="101301156" /><!-- Sauro Commander's Polearm -->
+			<gd_item id="101501243" /><!-- Sauro Commander's Staff -->
+			<gd_item id="101701259" /><!-- Sauro Commander's Bow -->
+			<gd_item id="101801065" /><!-- Sauro Commander's Pistol -->
+			<gd_item id="101901015" /><!-- Sauro Commander's Aethercannon -->
+			<gd_item id="102001089" /><!-- Sauro Commander's Harp -->
+			<gd_item id="102100842" /><!-- Sauro Commander's Cipher-Blade -->
+			<gd_item id="115001623" /><!-- Sauro Commander's Shield -->
+			<gd_item id="115001624" /><!-- Sauro Commander's Scale Shield -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Mythic)" base_chance="13.5">
+	<gd_rule rule_name="Named Weapon (Mythic)" base_chance="12.5">
+		<gd_maps>
+			<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="230858" /><!-- Brigade General Sheba -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="100001580" /><!-- Sauro Commander's Sword -->
+			<gd_item id="100101218" /><!-- Sauro Commander's Warhammer -->
+			<gd_item id="100201388" /><!-- Sauro Commander's Dagger -->
+			<gd_item id="100501208" /><!-- Sauro Commander's Orb -->
+			<gd_item id="100601300" /><!-- Sauro Commander's Spellbook -->
+			<gd_item id="100901230" /><!-- Sauro Commander's Greatsword -->
+			<gd_item id="101301156" /><!-- Sauro Commander's Polearm -->
+			<gd_item id="101501243" /><!-- Sauro Commander's Staff -->
+			<gd_item id="101701259" /><!-- Sauro Commander's Bow -->
+			<gd_item id="101801065" /><!-- Sauro Commander's Pistol -->
+			<gd_item id="101901015" /><!-- Sauro Commander's Aethercannon -->
+			<gd_item id="102001089" /><!-- Sauro Commander's Harp -->
+			<gd_item id="102100842" /><!-- Sauro Commander's Cipher-Blade -->
+			<gd_item id="115001623" /><!-- Sauro Commander's Shield -->
+			<gd_item id="115001624" /><!-- Sauro Commander's Scale Shield -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Mythic)" base_chance="25">
 		<gd_maps>
 			<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
 		</gd_maps>
@@ -385,46 +412,36 @@
 			<gd_item id="114601433" /><!-- Sauro Commander's Sabatons -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Mythic)" base_chance="9">
+	<gd_rule rule_name="Named Accessory (Mythic)" base_chance="10">
 		<gd_maps>
 			<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
 		</gd_maps>
 		<gd_npcs>
+			<gd_npc npc_id="230849" /><!-- Guard Captain Rohuka -->
+			<gd_npc npc_id="230850" /><!-- Researcher Teselik -->
+			<gd_npc npc_id="230851" /><!-- Chief Gunner Kurmata -->
+			<gd_npc npc_id="230853" /><!-- Chief of Staff Moriata -->
 			<gd_npc npc_id="230857" /><!-- Guard Captain Ahuradim -->
 			<gd_npc npc_id="230858" /><!-- Brigade General Sheba -->
 			<gd_npc npc_id="233255" /><!-- Gatekeeper Stranir -->
 			<gd_npc npc_id="233256" /><!-- Darkblade Ovanuka -->
 			<gd_npc npc_id="233257" /><!-- Archmagus Sayahum -->
 			<gd_npc npc_id="233258" /><!-- Derakanak the Reaver -->
+			<gd_npc npc_id="233316" /><!-- Commander Ranodim -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="120001469" /><!-- Sauro Commander's Corundum Earrings -->
-			<gd_item id="120001470" /><!-- Sauro Commander's Turquoise Earrings -->
-			<gd_item id="121001343" /><!-- Sauro Commander's Corundum Necklace -->
-			<gd_item id="121001344" /><!-- Sauro Commander's Turquoise Necklace -->
-			<gd_item id="122001612" /><!-- Sauro Commander's Corundum Ring -->
-			<gd_item id="122001613" /><!-- Sauro Commander's Turquoise Ring -->
-			<gd_item id="123001392" /><!-- Sauro Commander's Leather Belt -->
-			<gd_item id="123001393" /><!-- Sauro Commander's Sash -->
-		</gd_items>
-	</gd_rule>
-	<gd_rule rule_name="Named Head (Mythic)" base_chance="4.5">
-		<gd_maps>
-			<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="230857" /><!-- Guard Captain Ahuradim -->
-			<gd_npc npc_id="230858" /><!-- Brigade General Sheba -->
-			<gd_npc npc_id="233255" /><!-- Gatekeeper Stranir -->
-			<gd_npc npc_id="233256" /><!-- Darkblade Ovanuka -->
-			<gd_npc npc_id="233257" /><!-- Archmagus Sayahum -->
-			<gd_npc npc_id="233258" /><!-- Derakanak the Reaver -->
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="125003679" /><!-- Sauro Commander's Headband -->
-			<gd_item id="125003684" /><!-- Sauro Commander's Hat -->
-			<gd_item id="125003689" /><!-- Sauro Commander's Chain Hood -->
-			<gd_item id="125003694" /><!-- Sauro Commander's Helm -->
+			<gd_item id="120001469" chance="10" /><!-- Sauro Commander's Corundum Earrings -->
+			<gd_item id="120001470" chance="10" /><!-- Sauro Commander's Turquoise Earrings -->
+			<gd_item id="121001343" chance="10" /><!-- Sauro Commander's Corundum Necklace -->
+			<gd_item id="121001344" chance="10" /><!-- Sauro Commander's Turquoise Necklace -->
+			<gd_item id="122001612" chance="10" /><!-- Sauro Commander's Corundum Ring -->
+			<gd_item id="122001613" chance="10" /><!-- Sauro Commander's Turquoise Ring -->
+			<gd_item id="123001392" chance="10" /><!-- Sauro Commander's Leather Belt -->
+			<gd_item id="123001393" chance="10" /><!-- Sauro Commander's Sash -->
+			<gd_item id="125003679" chance="5" /><!-- Sauro Commander's Headband -->
+			<gd_item id="125003684" chance="5" /><!-- Sauro Commander's Hat -->
+			<gd_item id="125003689" chance="5" /><!-- Sauro Commander's Chain Hood -->
+			<gd_item id="125003694" chance="5" /><!-- Sauro Commander's Helm -->
 		</gd_items>
 	</gd_rule>
 	<!-- Single Monster Drops -->
@@ -531,141 +548,6 @@
 			<gd_item id="125003725" /><!-- Danuar Hat Skin -->
 			<gd_item id="125003726" /><!-- Danuar Chain Hood Skin -->
 			<gd_item id="125003727" /><!-- Danuar Helm Skin -->
-		</gd_items>
-	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Epic)" base_chance="15">
-		<gd_maps>
-			<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="230858" /><!-- Brigade General Sheba -->
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="100001579" /><!-- Sauren Sword -->
-			<gd_item id="100101215" /><!-- Sauren Mace -->
-			<gd_item id="100201387" /><!-- Sauren Dagger -->
-			<gd_item id="100501207" /><!-- Sauren Orb -->
-			<gd_item id="100601299" /><!-- Sauren Spellbook -->
-			<gd_item id="100901229" /><!-- Sauren Greatsword -->
-			<gd_item id="101301155" /><!-- Sauren Polearm -->
-			<gd_item id="101501241" /><!-- Sauren Staff -->
-			<gd_item id="101701258" /><!-- Sauren Bow -->
-			<gd_item id="101801064" /><!-- Sauren Pistol -->
-			<gd_item id="101901014" /><!-- Sauren Aethercannon -->
-			<gd_item id="102001088" /><!-- Sauren Harp -->
-			<gd_item id="102100841" /><!-- Sauren Cipher-Blade -->
-		</gd_items>
-	</gd_rule>
-	<gd_rule rule_name="Named Shield (Epic)" base_chance="15">
-		<gd_maps>
-			<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="230858" /><!-- Brigade General Sheba -->
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="115001620" /><!-- Sauren Shield -->
-			<gd_item id="115001621" /><!-- Sauren Scale Shield -->
-		</gd_items>
-	</gd_rule>
-	<gd_rule rule_name="Named Armor (Epic)" base_chance="20">
-		<gd_maps>
-			<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="230858" /><!-- Brigade General Sheba -->
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="110101671" /><!-- Sauren Tunic -->
-			<gd_item id="110101672" /><!-- Sauren Tunic -->
-			<gd_item id="110301679" /><!-- Sauren Jerkin -->
-			<gd_item id="110301680" /><!-- Sauren Jerkin -->
-			<gd_item id="110501509" /><!-- Sauren Hauberk -->
-			<gd_item id="110501510" /><!-- Sauren Magic Hauberk -->
-			<gd_item id="110601483" /><!-- Sauren Breastplate -->
-			<gd_item id="110601484" /><!-- Sauren Breastplate -->
-			<gd_item id="111101503" /><!-- Sauren Gloves -->
-			<gd_item id="111101504" /><!-- Sauren Gloves -->
-			<gd_item id="111301617" /><!-- Sauren Vambrace -->
-			<gd_item id="111301618" /><!-- Sauren Vambrace -->
-			<gd_item id="111501464" /><!-- Sauren Handguards -->
-			<gd_item id="111501465" /><!-- Sauren Magic Handguards -->
-			<gd_item id="111601446" /><!-- Sauren Gauntlets -->
-			<gd_item id="111601447" /><!-- Sauren Gauntlets -->
-			<gd_item id="112101456" /><!-- Sauren Pauldrons -->
-			<gd_item id="112101457" /><!-- Sauren Pauldrons -->
-			<gd_item id="112301556" /><!-- Sauren Shoulderguards -->
-			<gd_item id="112301557" /><!-- Sauren Shoulderguards -->
-			<gd_item id="112501406" /><!-- Sauren Spaulders -->
-			<gd_item id="112501407" /><!-- Sauren Spaulders -->
-			<gd_item id="112601427" /><!-- Sauren Shoulderplates -->
-			<gd_item id="112601428" /><!-- Sauren Shoulderplates -->
-			<gd_item id="113101518" /><!-- Sauren Leggings -->
-			<gd_item id="113101519" /><!-- Sauren Leggings -->
-			<gd_item id="113301648" /><!-- Sauren Breeches -->
-			<gd_item id="113301649" /><!-- Sauren Breeches -->
-			<gd_item id="113501482" /><!-- Sauren Chausses -->
-			<gd_item id="113501483" /><!-- Sauren Chausses -->
-			<gd_item id="113601429" /><!-- Sauren Greaves -->
-			<gd_item id="113601430" /><!-- Sauren Greaves -->
-			<gd_item id="114101550" /><!-- Sauren Shoes -->
-			<gd_item id="114101551" /><!-- Sauren Shoes -->
-			<gd_item id="114301685" /><!-- Sauren Boots -->
-			<gd_item id="114301686" /><!-- Sauren Boots -->
-			<gd_item id="114501491" /><!-- Sauren Brogans -->
-			<gd_item id="114501492" /><!-- Sauren Magic Brogans -->
-			<gd_item id="114601434" /><!-- Sauren Sabatons -->
-			<gd_item id="114601435" /><!-- Sauren Sabatons -->
-		</gd_items>
-	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Mythic)" base_chance="6">
-		<gd_maps>
-			<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="230857" /><!-- Guard Captain Ahuradim -->
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="100001580" /><!-- Sauro Commander's Sword -->
-			<gd_item id="100101218" /><!-- Sauro Commander's Warhammer -->
-			<gd_item id="100201388" /><!-- Sauro Commander's Dagger -->
-			<gd_item id="100501208" /><!-- Sauro Commander's Orb -->
-			<gd_item id="100601300" /><!-- Sauro Commander's Spellbook -->
-			<gd_item id="100901230" /><!-- Sauro Commander's Greatsword -->
-			<gd_item id="101301156" /><!-- Sauro Commander's Polearm -->
-			<gd_item id="101501243" /><!-- Sauro Commander's Staff -->
-			<gd_item id="101701259" /><!-- Sauro Commander's Bow -->
-			<gd_item id="101801065" /><!-- Sauro Commander's Pistol -->
-			<gd_item id="101901015" /><!-- Sauro Commander's Aethercannon -->
-			<gd_item id="102001089" /><!-- Sauro Commander's Harp -->
-			<gd_item id="102100842" /><!-- Sauro Commander's Cipher-Blade -->
-			<gd_item id="115001623" /><!-- Sauro Commander's Shield -->
-			<gd_item id="115001624" /><!-- Sauro Commander's Scale Shield -->
-		</gd_items>
-	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Mythic)" base_chance="8">
-		<gd_maps>
-			<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="230858" /><!-- Brigade General Sheba -->
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="100001580" /><!-- Sauro Commander's Sword -->
-			<gd_item id="100101218" /><!-- Sauro Commander's Warhammer -->
-			<gd_item id="100201388" /><!-- Sauro Commander's Dagger -->
-			<gd_item id="100501208" /><!-- Sauro Commander's Orb -->
-			<gd_item id="100601300" /><!-- Sauro Commander's Spellbook -->
-			<gd_item id="100901230" /><!-- Sauro Commander's Greatsword -->
-			<gd_item id="101301156" /><!-- Sauro Commander's Polearm -->
-			<gd_item id="101501243" /><!-- Sauro Commander's Staff -->
-			<gd_item id="101701259" /><!-- Sauro Commander's Bow -->
-			<gd_item id="101801065" /><!-- Sauro Commander's Pistol -->
-			<gd_item id="101901015" /><!-- Sauro Commander's Aethercannon -->
-			<gd_item id="102001089" /><!-- Sauro Commander's Harp -->
-			<gd_item id="102100842" /><!-- Sauro Commander's Cipher-Blade -->
-			<gd_item id="115001623" /><!-- Sauro Commander's Shield -->
-			<gd_item id="115001624" /><!-- Sauro Commander's Scale Shield -->
 		</gd_items>
 	</gd_rule>
 </global_rules>
