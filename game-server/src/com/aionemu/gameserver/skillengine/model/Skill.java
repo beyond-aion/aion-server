@@ -16,7 +16,8 @@ import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.configs.main.GeoDataConfig;
 import com.aionemu.gameserver.configs.main.SecurityConfig;
 import com.aionemu.gameserver.controllers.attack.AttackStatus;
-import com.aionemu.gameserver.controllers.observer.DieObserver;
+import com.aionemu.gameserver.controllers.observer.ActionObserver;
+import com.aionemu.gameserver.controllers.observer.ObserverType;
 import com.aionemu.gameserver.controllers.observer.StartMovingListener;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.Creature;
@@ -69,7 +70,6 @@ public class Skill {
 	private final int skillLevel;
 	private final SkillMethod skillMethod;
 	protected final StartMovingListener conditionChangeListener;
-	private final DieObserver dieObserver;
 	private final SkillTemplate skillTemplate;
 	private boolean firstTargetRangeCheck = true;
 	private final ItemTemplate itemTemplate;
@@ -99,6 +99,7 @@ public class Skill {
 	private volatile boolean isMultiCast = false;
 	private float[] chargeTimes;
 	private int hate;
+	private volatile ActionObserver firstTargetDieObserver;
 
 	public enum SkillMethod {
 		CAST,
@@ -132,7 +133,6 @@ public class Skill {
 	public Skill(SkillTemplate skillTemplate, Creature effector, int skillLvl, Creature firstTarget, ItemTemplate itemTemplate) {
 		this.effectedList = new ArrayList<>();
 		this.conditionChangeListener = new StartMovingListener();
-		this.dieObserver = new DieObserver(this);
 		this.firstTarget = firstTarget;
 		this.skillLevel = skillLvl;
 		this.skillTemplate = skillTemplate;
@@ -259,7 +259,7 @@ public class Skill {
 			castStartTime = System.currentTimeMillis();
 			startCast();
 			if (effector instanceof Npc)
-				((NpcAI) effector.getAi()).setSubStateIfNot(AISubState.CAST);
+				effector.getAi().setSubStateIfNot(AISubState.CAST);
 		}
 
 		effector.getObserveController().attach(conditionChangeListener);
@@ -380,9 +380,7 @@ public class Skill {
 		if (player.getEquipment().getMainHandWeaponType() == null)
 			return true;
 
-		/**
-		 * exceptions for certain skills -herb and mana treatment -traps
-		 */
+		// exceptions for certain skills -herb and mana treatment -traps
 		if (getSkillTemplate().getGroup() != null) {
 			switch (getSkillTemplate().getGroup()) {
 				case "MENDING_L": // Bandage Heal
@@ -568,7 +566,13 @@ public class Skill {
 				|| (skillTemplate.getProperties().getFirstTarget() == FirstTargetAttribute.TARGET && skillTemplate.getProperties().getEffectiveDist() > 0)) {
 				return;
 			}
-			firstTarget.getObserveController().attach(dieObserver);
+			firstTargetDieObserver = new ActionObserver(ObserverType.DEATH) {
+				@Override
+				public void died(Creature creature) {
+					getEffector().getController().cancelCurrentSkill(null, SM_SYSTEM_MESSAGE.STR_SKILL_TARGET_LOST());
+				}
+			};
+			firstTarget.getObserveController().attach(firstTargetDieObserver);
 		}
 
 	}
@@ -584,9 +588,8 @@ public class Skill {
 	 * Apply effects and perform actions specified in skill template
 	 */
 	protected void endCast() {
-		if (firstTarget != null) {
-			firstTarget.getObserveController().removeObserver(dieObserver);
-		}
+		if (firstTargetDieObserver != null)
+			firstTarget.getObserveController().removeObserver(firstTargetDieObserver);
 		if (!effector.isCasting() || isCancelled || skillTemplate == null)
 			return;
 
@@ -608,11 +611,9 @@ public class Skill {
 
 		effector.setCasting(null);
 
-		/**
-		 * try removing item, if its not possible return to prevent exploits
-		 */
+		// try removing item, if its not possible return to prevent exploits
 		if (effector instanceof Player && skillMethod == SkillMethod.ITEM) {
-			Item item = ((Player) effector).getInventory().getItemByObjId(this.itemObjectId);
+			Item item = ((Player) effector).getInventory().getItemByObjId(itemObjectId);
 			if (item == null)
 				return;
 			if (item.getActivationCount() > 1) {
@@ -623,18 +624,14 @@ public class Skill {
 			}
 		}
 
-		/**
-		 * set instantSkill, must be before calculate effect
-		 */
+		// set instantSkill, must be before calculate effect
 		Motion motion = skillTemplate.getMotion();
 		if (motion != null && motion.isInstantSkill() || hitTime == 0)
 			instantSkill = true;
 		else if (skillTemplate.getSkillCategory() == SkillCategory.HEAL && !skillTemplate.getStack().equals("BA_SONGOFBLESS"))
 			instantSkill = true; // TODO remove this condition entirely? should heals really always hit instantly?
 
-		/**
-		 * Perform necessary actions (use mp,dp items etc)
-		 */
+		// Perform necessary actions (use mp,dp items etc)
 		Actions skillActions = skillTemplate.getActions();
 		if (skillActions != null) {
 			for (Action action : skillActions.getActions()) {
@@ -643,9 +640,7 @@ public class Skill {
 			}
 		}
 
-		/**
-		 * Create effects and precalculate result
-		 */
+		// Create effects and precalculate result
 		int dashStatus = 0;
 		int resistCount = 0;
 		boolean blockedChain = false;
@@ -782,16 +777,12 @@ public class Skill {
 	}
 
 	private void applyEffect(List<Effect> effects) {
-		/**
-		 * Apply effects to effected objects
-		 */
+		// Apply effects to effected objects
 		effects.forEach(Effect::applyEffect);
 
 		addResistedEffectHateAndNotifyFriends(effects);
 
-		/**
-		 * Use penalty skill (now 100% success)
-		 */
+		// Use penalty skill (now 100% success)
 		if (!blockedPenaltySkill)
 			startPenaltySkill();
 	}
@@ -823,8 +814,8 @@ public class Skill {
 		} else if (skillMethod == SkillMethod.ITEM) {
 
 			// TODO: Find out when SM_CASTSPELL_RESULT should be sent with dashStatus = 2, and no SM_ITEM_USAGE_ANIMATION
-			PacketSendUtility.broadcastPacketAndReceive(effector, new SM_ITEM_USAGE_ANIMATION(effector.getObjectId(), firstTarget.getObjectId(),
-				(this.itemObjectId == 0 ? 0 : this.itemObjectId), itemTemplate.getTemplateId(), 0, 1, 0));
+			PacketSendUtility.broadcastPacketAndReceive(effector,
+				new SM_ITEM_USAGE_ANIMATION(effector.getObjectId(), firstTarget.getObjectId(), itemObjectId, itemTemplate.getTemplateId(), 0, 1, 0));
 			if (effector instanceof Player)
 				PacketSendUtility.sendPacket((Player) effector, SM_SYSTEM_MESSAGE.STR_USE_ITEM(getItemTemplate().getL10n()));
 		}
@@ -838,8 +829,8 @@ public class Skill {
 			if (!isCancelled && skillMethod == SkillMethod.CHARGE) {
 				cancelCast();
 				effector.setCasting(null);
-				if (firstTarget != null)
-					firstTarget.getObserveController().removeObserver(dieObserver);
+				if (firstTargetDieObserver != null)
+					firstTarget.getObserveController().removeObserver(firstTargetDieObserver);
 				PacketSendUtility.broadcastPacketAndReceive(effector, new SM_SKILL_CANCEL(effector, skillTemplate.getSkillId()));
 				return;
 			}

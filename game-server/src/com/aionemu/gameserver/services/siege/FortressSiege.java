@@ -136,9 +136,9 @@ public class FortressSiege extends Siege<FortressLocation> {
 			if (isBossKilled()) {
 				SiegeRaceCounter winner = getSiegeCounter().getWinnerRaceCounter();
 				log.info(this + ": Siege finished. Old race: " + oldRace + ", legion ID: " + oldLegionId + " -> New race: " + winner.getSiegeRace()
-					+ ", legion ID: " + (winner.getWinnerLegionId() == null ? 0 : winner.getWinnerLegionId()) + "]");
+					+ ", legion ID: " + (winner.getWinnerLegionId() == null ? 0 : winner.getWinnerLegionId()));
 			} else {
-				log.info(this + ": Siege finished. No winner found. Race: " + oldRace + ", legion ID: " + oldLegionId + "]");
+				log.info(this + ": Siege finished. No winner found. Race: " + oldRace + ", legion ID: " + oldLegionId);
 			}
 		}
 

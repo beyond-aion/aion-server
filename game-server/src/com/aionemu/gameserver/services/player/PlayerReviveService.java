@@ -1,7 +1,5 @@
 package com.aionemu.gameserver.services.player;
 
-import java.util.function.Consumer;
-
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.configs.administration.AdminConfig;
@@ -36,14 +34,14 @@ import com.aionemu.gameserver.world.WorldPosition;
  */
 public class PlayerReviveService {
 
-	public static final void duelRevive(Player player) {
+	public static void duelRevive(Player player) {
 		revive(player, 30, 30, false, 0);
 		PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.RESURRECT), true);
 		player.getGameStats().updateStatsAndSpeedVisually();
 		player.unsetResPosState();
 	}
 
-	public static final void skillRevive(Player player) {
+	public static void skillRevive(Player player) {
 		if (!player.getResStatus()) {
 			AuditLogger.log(player, "possibly tried to use a selfres hack (accepted missing res by another player)");
 			return;
@@ -66,7 +64,7 @@ public class PlayerReviveService {
 		player.setIsFlyingBeforeDeath(false);
 	}
 
-	public static final void rebirthRevive(Player player) {
+	public static void rebirthRevive(Player player) {
 		if (!player.canUseRebirthRevive()) {
 			AuditLogger.log(player, "possibly tried to use a selfres hack (no rebirth effect present)");
 			return;
@@ -103,11 +101,11 @@ public class PlayerReviveService {
 		player.setIsFlyingBeforeDeath(false);
 	}
 
-	public static final void bindRevive(Player player) {
+	public static void bindRevive(Player player) {
 		bindRevive(player, 0);
 	}
 
-	public static final void bindRevive(Player player, int skillId) {
+	public static void bindRevive(Player player, int skillId) {
 		if (player.isInCustomState(CustomPlayerState.EVENT_MODE))
 			revive(player, 100, 100, false, skillId);
 		else
@@ -136,12 +134,11 @@ public class PlayerReviveService {
 		player.unsetResPosState();
 	}
 
-	public static final void kiskRevive(Player player) {
+	public static void kiskRevive(Player player) {
 		kiskRevive(player, 0);
 	}
 
-	public static final void kiskRevive(Player player, int skillId) {
-
+	public static void kiskRevive(Player player, int skillId) {
 		if (player.isInPrison())
 			TeleportService.teleportToPrison(player);
 		else if (player.isInCustomState(CustomPlayerState.EVENT_MODE))
@@ -165,11 +162,11 @@ public class PlayerReviveService {
 		}
 	}
 
-	public static final void instanceRevive(Player player) {
+	public static void instanceRevive(Player player) {
 		instanceRevive(player, 0);
 	}
 
-	public static final void instanceRevive(Player player, int skillId) {
+	public static void instanceRevive(Player player, int skillId) {
 		if (player.isInCustomState(CustomPlayerState.EVENT_MODE)) {
 			revive(player, 100, 100, false, skillId);
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REBIRTH_MASSAGE_ME());
@@ -199,15 +196,11 @@ public class PlayerReviveService {
 		player.unsetResPosState();
 	}
 
-	public static final void revive(final Player player, int hpPercent, int mpPercent, boolean setSoulsickness, int resurrectionSkill) {
-		player.getKnownList().forEachPlayer(new Consumer<Player>() {
-
-			@Override
-			public void accept(Player visitor) {
-				if (player.equals(visitor.getTarget())) {
-					visitor.setTarget(null);
-					PacketSendUtility.sendPacket(visitor, new SM_TARGET_SELECTED(null));
-				}
+	public static void revive(Player player, int hpPercent, int mpPercent, boolean setSoulSickness, int resurrectionSkill) {
+		player.getKnownList().forEachPlayer(p -> {
+				if (player.equals(p.getTarget())) {
+					p.setTarget(null);
+					PacketSendUtility.sendPacket(p, new SM_TARGET_SELECTED(null));
 			}
 		});
 		boolean isNoResurrectPenalty = player.getEffectController().isNoResurrectPenaltyInEffect();
@@ -217,7 +210,7 @@ public class PlayerReviveService {
 		if (player.getCommonData().getDp() > 0 && !isNoResurrectPenalty)
 			player.getCommonData().setDp(0);
 		player.getLifeStats().triggerRestoreOnRevive();
-		if (!isNoResurrectPenalty && setSoulsickness) {
+		if (!isNoResurrectPenalty && setSoulSickness) {
 			player.getController().updateSoulSickness(resurrectionSkill);
 		}
 		player.setResurrectionSkill(0);
@@ -231,7 +224,7 @@ public class PlayerReviveService {
 		}
 	}
 
-	public static final void itemSelfRevive(Player player) {
+	public static void itemSelfRevive(Player player) {
 		Item item = player.getSelfRezStone();
 		if (item == null) {
 			AuditLogger.log(player, "tried to use selfres without having the required selfres stone");

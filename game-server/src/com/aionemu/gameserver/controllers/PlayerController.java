@@ -308,13 +308,10 @@ public class PlayerController extends CreatureController<Player> {
 			DuelService.getInstance().loseDuel(player);
 		}
 
-		/**
-		 * Release summon
-		 */
+		// Release summon
 		Summon summon = player.getSummon();
-		if (summon != null) {
+		if (summon != null)
 			SummonsService.doMode(SummonMode.RELEASE, summon, UnsummonType.UNSPECIFIED);
-		}
 
 		// setIsFlyingBeforeDead for PlayerReviveService
 		if (player.isInState(CreatureState.FLYING))
@@ -449,11 +446,7 @@ public class PlayerController extends CreatureController<Player> {
 		}
 		lastAttackMillis = milis;
 
-		/**
-		 * notify attack observers
-		 */
 		super.attackTarget(target, time, true);
-
 	}
 
 	@Override
@@ -513,8 +506,7 @@ public class PlayerController extends CreatureController<Player> {
 	 */
 	public void useSkill(SkillTemplate template, int targetType, float x, float y, float z, int clientHitTime, int skillLevel) {
 		Player player = getOwner();
-		Skill skill = null;
-		skill = SkillEngine.getInstance().getSkillFor(player, template, player.getTarget());
+		Skill skill = SkillEngine.getInstance().getSkillFor(player, template, player.getTarget());
 		if (skill == null && player.isTransformed()) {
 			SkillPanel panel = DataManager.PANEL_SKILL_DATA.getSkillPanel(player.getTransformModel().getPanelId());
 			if (panel != null && panel.canUseSkill(template.getSkillId(), skillLevel)) {
