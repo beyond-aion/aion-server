@@ -49,7 +49,7 @@
 
 	<xs:complexType name="GlobalDropItem">
 		<xs:attribute type="xs:int" name="id" use="required" />
-		<xs:attribute type="xs:int" name="chance" default="100" />
+		<xs:attribute type="xs:float" name="chance" default="100" />
 	</xs:complexType>
 
 	<xs:complexType name="GlobalDropWorlds">
