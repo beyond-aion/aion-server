@@ -156,4 +156,14 @@ public class ItemActions {
 		}
 		return null;
 	}
+
+	public RideAction getRideAction() {
+		if (itemActions == null)
+			return null;
+		for (AbstractItemAction action : itemActions) {
+			if (action instanceof RideAction)
+				return (RideAction) action;
+		}
+		return null;
+	}
 }

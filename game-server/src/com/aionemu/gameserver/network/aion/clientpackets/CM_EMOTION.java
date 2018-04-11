@@ -5,8 +5,10 @@ import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.actions.PlayerMode;
+import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
+import com.aionemu.gameserver.model.templates.item.actions.ItemActions;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
@@ -119,7 +121,9 @@ public class CM_EMOTION extends AionClientPacket {
 			&& (emotionType == EmotionType.CHAIR_SIT || emotionType == EmotionType.JUMP))
 			return;
 
-		player.getController().cancelUseItem();
+		Item usingItem = player.getUsingItem();
+		if (usingItem != null && !hasRideAction(usingItem)) // don't cancel getting on mount
+			player.getController().cancelUseItem();
 		if (emotionType == EmotionType.SELECT_TARGET)
 			return;
 
@@ -224,7 +228,12 @@ public class CM_EMOTION extends AionClientPacket {
 			player.getController().stopProtectionActiveTask();
 	}
 
-	private final int getTargetObjectId(Player player) {
+	private boolean hasRideAction(Item item) {
+		ItemActions actions = item.getItemTemplate().getActions();
+		return actions != null && actions.getRideAction() != null;
+	}
+
+	private int getTargetObjectId(Player player) {
 		return player.getTarget() == null ? targetObjectId : player.getTarget().getObjectId();
 	}
 }
