@@ -1,6 +1,7 @@
 package zone.pvpZones;
 
-import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE.*;
+import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE.STR_MSG_PvPZONE_MY_DEATH_TO_B;
+import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE.STR_PvPZONE_OUT_MESSAGE;
 
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -26,7 +27,7 @@ public abstract class PvPZone implements AdvancedZoneHandler {
 	}
 
 	@Override
-	public boolean onDie(final Creature lastAttacker, Creature target, final ZoneInstance zone) {
+	public boolean onDie(Creature lastAttacker, Creature target, ZoneInstance zone) {
 		if (!(target instanceof Player))
 			return false;
 
@@ -34,14 +35,10 @@ public abstract class PvPZone implements AdvancedZoneHandler {
 			Player player = (Player) target;
 			PacketSendUtility.broadcastToZone((SiegeZoneInstance) zone, STR_PvPZONE_OUT_MESSAGE(player.getName()));
 
-			ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-				@Override
-				public void run() {
-					PlayerReviveService.duelRevive(player);
-					doTeleport(player, zone.getZoneTemplate().getName());
-					PacketSendUtility.sendPacket(player, STR_MSG_PvPZONE_MY_DEATH_TO_B(lastAttacker.getName()));
-				}
+			ThreadPoolManager.getInstance().schedule(() -> {
+				PlayerReviveService.duelRevive(player);
+				doTeleport(player, zone.getZoneTemplate().getName());
+				PacketSendUtility.sendPacket(player, STR_MSG_PvPZONE_MY_DEATH_TO_B(lastAttacker.getName()));
 			}, 5000);
 		}
 		return true;

@@ -1,7 +1,9 @@
 package zone.pvpZones;
 
+import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.services.teleport.TeleportService;
+import com.aionemu.gameserver.world.zone.ZoneInstance;
 import com.aionemu.gameserver.world.zone.ZoneName;
 import com.aionemu.gameserver.world.zone.handler.ZoneNameAnnotation;
 
@@ -10,6 +12,16 @@ import com.aionemu.gameserver.world.zone.handler.ZoneNameAnnotation;
  */
 @ZoneNameAnnotation(value = "LC1_PVP_SUB_C_110010000 DC1_PVP_ZONE_120010000")
 public class PvPAreaZone extends PvPZone {
+
+	@Override
+	public void onEnterZone(Creature player, ZoneInstance zone) {
+		player.getEffectController().setKeepBuffsOnDie(true);
+	}
+
+	@Override
+	public void onLeaveZone(Creature player, ZoneInstance zone) {
+		player.getEffectController().setKeepBuffsOnDie(false);
+	}
 
 	@Override
 	protected void doTeleport(Player player, ZoneName zoneName) {

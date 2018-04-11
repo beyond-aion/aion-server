@@ -49,6 +49,8 @@ import com.aionemu.gameserver.model.house.House;
 import com.aionemu.gameserver.model.stats.container.PlayerGameStats;
 import com.aionemu.gameserver.model.summons.SummonMode;
 import com.aionemu.gameserver.model.summons.UnsummonType;
+import com.aionemu.gameserver.model.team.TeamMember;
+import com.aionemu.gameserver.model.team.TemporaryPlayerTeam;
 import com.aionemu.gameserver.model.templates.QuestTemplate;
 import com.aionemu.gameserver.model.templates.flypath.FlyPathEntry;
 import com.aionemu.gameserver.model.templates.panels.SkillPanel;
@@ -181,6 +183,19 @@ public class PlayerController extends CreatureController<Player> {
 			PacketSendUtility.sendPacket(getOwner(), new SM_DELETE(object, ObjectDeleteAnimation.DELAYED));
 		} else {
 			PacketSendUtility.sendPacket(getOwner(), new SM_DELETE(object, animation));
+		}
+	}
+
+	@Override
+	public void onHide() {
+		super.onHide();
+		// send SM_DELETE a second time to fix client not fading out the char (only happens when dueling with a team member of a group or alliance)
+		TemporaryPlayerTeam<? extends TeamMember<Player>> team = getOwner().getCurrentTeam();
+		if (team != null) {
+			team.forEach(p -> {
+				if (!p.canSee(getOwner()))
+					PacketSendUtility.sendPacket(p, new SM_DELETE(getOwner()));
+			});
 		}
 	}
 
