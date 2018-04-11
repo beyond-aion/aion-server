@@ -186,12 +186,17 @@ public class RiftService {
 	public void closeRift(RiftLocation location) {
 		location.setOpened(false);
 
-		// Despawn NPC
+		// Despawn rift NPCs and cancel their respawns
 		for (Map.Entry<Integer, SpawnTemplate> entry : location.getSpawned().entrySet()) {
 			int npcObjectId = entry.getKey();
+			SpawnTemplate npcSpawnTemplate = entry.getValue();
 			VisibleObject npc = World.getInstance().findVisibleObject(npcObjectId);
-			if (npc == null || ((Creature) npc).getLifeStats().isDead() || !npc.getController().delete())
-				RespawnService.cancelRespawn(npcObjectId, entry.getValue());
+			boolean tryCancelRespawn = true;
+			// non matching spawn template means the object ID belongs no longer to an npc originally spawned by this rift
+			if (npc != null && npc.getSpawn() == npcSpawnTemplate && !((Creature) npc).getLifeStats().isDead())
+				tryCancelRespawn = !npc.getController().delete();
+			if (tryCancelRespawn)
+				RespawnService.cancelRespawn(npcObjectId, npcSpawnTemplate);
 		}
 
 		// Clear spawned list
