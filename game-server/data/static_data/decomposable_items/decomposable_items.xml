@@ -34123,71 +34123,71 @@
 	<decomposable item_id="188054239" /><!-- Iron Wall Helm Box -->
 	<decomposable item_id="188054240"><!-- Iron Wall Cloth Armor Box -->
 			<items>
-				<item id="110101686" player_classes="SORCERER SPIRIT_MASTER"/><!-- Bastion Defender Firm Tunic -->
-				<item id="110101688" player_classes="BARD"/><!-- Bastion Protector Firm Tunic -->
+				<item id="110101686" player_classes="SORCERER SPIRIT_MASTER ASSASSIN RANGER GUNNER GLADIATOR TEMPLAR RIDER"/><!-- Bastion Defender Firm Tunic -->
+				<item id="110101688" player_classes="BARD CLERIC CHANTER"/><!-- Bastion Protector Firm Tunic -->
 			</items>
 			<items>
-				<item id="111101518" player_classes="SORCERER SPIRIT_MASTER" /><!-- Bastion Defender Firm Gloves -->
-				<item id="111101520" player_classes="BARD" /><!-- Bastion Protector Firm Gloves -->
+				<item id="111101518" player_classes="SORCERER SPIRIT_MASTER ASSASSIN RANGER GUNNER GLADIATOR TEMPLAR RIDER" /><!-- Bastion Defender Firm Gloves -->
+				<item id="111101520" player_classes="BARD CLERIC CHANTER" /><!-- Bastion Protector Firm Gloves -->
 			</items>
 			<items>
-				<item id="112101471" player_classes="SORCERER SPIRIT_MASTER" /><!-- Bastion Defender Firm Pauldrons -->
-				<item id="112101473" player_classes="BARD" /><!-- Bastion Protector Firm Pauldrons -->
+				<item id="112101471" player_classes="SORCERER SPIRIT_MASTER ASSASSIN RANGER GUNNER GLADIATOR TEMPLAR RIDER" /><!-- Bastion Defender Firm Pauldrons -->
+				<item id="112101473" player_classes="BARD CLERIC CHANTER" /><!-- Bastion Protector Firm Pauldrons -->
 			</items>
 			<items>
-				<item id="113101533" player_classes="SORCERER SPIRIT_MASTER" /><!-- Bastion Defender Firm Leggings -->
-				<item id="113101535" player_classes="BARD" /><!-- Bastion Protector Firm Leggings -->
+				<item id="113101533" player_classes="SORCERER SPIRIT_MASTER ASSASSIN RANGER GUNNER GLADIATOR TEMPLAR RIDER" /><!-- Bastion Defender Firm Leggings -->
+				<item id="113101535" player_classes="BARD CLERIC CHANTER" /><!-- Bastion Protector Firm Leggings -->
 			</items>
 			<items>
-				<item id="114101567" player_classes="SORCERER SPIRIT_MASTER" /><!-- Bastion Defender Firm Shoes -->
-				<item id="114101569" player_classes="BARD" /><!-- Bastion Protector Firm Shoes -->
+				<item id="114101567" player_classes="SORCERER SPIRIT_MASTER ASSASSIN RANGER GUNNER GLADIATOR TEMPLAR RIDER" /><!-- Bastion Defender Firm Shoes -->
+				<item id="114101569" player_classes="BARD CLERIC CHANTER" /><!-- Bastion Protector Firm Shoes -->
 			</items>
 	</decomposable>
 	<decomposable item_id="188054241"><!-- Iron Wall Leather Armor Box -->
 			<items>
-				<item id="110301694" player_classes="ASSASSIN RANGER" /><!-- Bastion Defender Firm Jerkin -->
-				<item id="110301696" player_classes="GUNNER" /><!-- Bastion Protector Firm Magic Jerkin -->
+				<item id="110301694" player_classes="ASSASSIN RANGER TEMPLAR GLADIATOR CHANTER" /><!-- Bastion Defender Firm Jerkin -->
+				<item id="110301696" player_classes="GUNNER RIDER CLERIC" /><!-- Bastion Protector Firm Magic Jerkin -->
 			</items>
 			<items>
-				<item id="111301632" player_classes="ASSASSIN RANGER" /><!--Bastion Defender Firm Vambrace  -->
-				<item id="111301634" player_classes="GUNNER" /><!-- Bastion Protector Firm Magic Vambrace -->
+				<item id="111301632" player_classes="ASSASSIN RANGER TEMPLAR GLADIATOR CHANTER" /><!--Bastion Defender Firm Vambrace  -->
+				<item id="111301634" player_classes="GUNNER RIDER CLERIC" /><!-- Bastion Protector Firm Magic Vambrace -->
 			</items>
 			<items>
-				<item id="112301571" player_classes="ASSASSIN RANGER" /><!-- Bastion Defender Firm Shoulderguards -->
-				<item id="112301573" player_classes="GUNNER" /><!-- Bastion Protector Firm Magic Shoulderguards -->
+				<item id="112301571" player_classes="ASSASSIN RANGER TEMPLAR GLADIATOR CHANTER" /><!-- Bastion Defender Firm Shoulderguards -->
+				<item id="112301573" player_classes="GUNNER RIDER CLERIC" /><!-- Bastion Protector Firm Magic Shoulderguards -->
 			</items>
 			<items>
-				<item id="113301663" player_classes="ASSASSIN RANGER" /><!-- Bastion Defender Firm Breeches -->
-				<item id="113301665" player_classes="GUNNER" /><!-- Bastion Protector Firm Magic Breeches -->
+				<item id="113301663" player_classes="ASSASSIN RANGER TEMPLAR GLADIATOR CHANTER" /><!-- Bastion Defender Firm Breeches -->
+				<item id="113301665" player_classes="GUNNER RIDER CLERIC" /><!-- Bastion Protector Firm Magic Breeches -->
 			</items>
 			<items>
-				<item id="114301700" player_classes="ASSASSIN RANGER" /><!-- Bastion Defender Firm Boots -->
-				<item id="114301702" player_classes="GUNNER" /><!-- Bastion Protector Firm Magic Boots -->
+				<item id="114301700" player_classes="ASSASSIN RANGER TEMPLAR GLADIATOR CHANTER" /><!-- Bastion Defender Firm Boots -->
+				<item id="114301702" player_classes="GUNNER RIDER CLERIC" /><!-- Bastion Protector Firm Magic Boots -->
 			</items>
 	</decomposable>
 	<decomposable item_id="188054242"><!-- Iron Wall Chain Armor Box -->
 			<items>
-				<item id="110501523" player_classes="CHANTER" /><!-- Bastion Defender Firm Hauberk -->
+				<item id="110501523" player_classes="CHANTER GLADIATOR TEMPLAR" /><!-- Bastion Defender Firm Hauberk -->
 				<item id="110501528" player_classes="CLERIC" /><!-- Bastion Protector Firm Hauberk -->
 				<item id="110501529" player_classes="RIDER" /><!-- Bastion Defender Firm Magic Hauberk -->
 			</items>
 			<items>
-				<item id="111501478" player_classes="CHANTER" /><!-- Bastion Defender Firm Handguards -->
+				<item id="111501478" player_classes="CHANTER GLADIATOR TEMPLAR" /><!-- Bastion Defender Firm Handguards -->
 				<item id="111501480" player_classes="CLERIC" /><!-- Bastion Protector Firm Handguards -->
 				<item id="111501487" player_classes="RIDER" /><!-- Bastion Defender Firm Magic Handguards -->
 			</items>
 			<items>
-				<item id="112501420" player_classes="CHANTER" /><!-- Bastion Defender Firm Spaulders -->
+				<item id="112501420" player_classes="CHANTER GLADIATOR TEMPLAR" /><!-- Bastion Defender Firm Spaulders -->
 				<item id="112501422" player_classes="CLERIC" /><!-- Bastion Protector Firm Spaulders -->
 				<item id="112501429" player_classes="RIDER" /><!-- Bastion Defender Firm Magic Spaulders -->
 			</items>
 			<items>
-				<item id="113501496" player_classes="CHANTER" /><!-- Bastion Defender Firm Chausses -->
+				<item id="113501496" player_classes="CHANTER GLADIATOR TEMPLAR" /><!-- Bastion Defender Firm Chausses -->
 				<item id="113501498" player_classes="CLERIC" /><!-- Bastion Protector Firm Chausses -->
 				<item id="113501505" player_classes="RIDER" /><!-- Bastion Defender Firm Magic Chausses -->
 			</items>
 			<items>
-				<item id="114501505" player_classes="CHANTER" /><!-- Bastion Defender Firm Brogans -->
+				<item id="114501505" player_classes="CHANTER GLADIATOR TEMPLAR" /><!-- Bastion Defender Firm Brogans -->
 				<item id="114501507" player_classes="CLERIC" /><!-- Bastion Protector Firm Brogans -->
 				<item id="114501514" player_classes="RIDER" /><!-- Bastion Defender Firm Magic Brogans -->
 			</items>
