@@ -73,9 +73,7 @@ public class ResurrectAI extends NpcAI {
 	}
 
 	private void bindHere(Player player, final BindPointTemplate bindPointTemplate) {
-
-		String price = Integer.toString(bindPointTemplate.getPrice());
-		AIActions.addRequest(this, player, SM_QUESTION_WINDOW.STR_ASK_REGISTER_RESURRECT_POINT, 0, new AIRequest() {
+		AIActions.addRequest(this, player, SM_QUESTION_WINDOW.STR_ASK_REGISTER_RESURRECT_POINT, new AIRequest() {
 
 			@Override
 			public void acceptRequest(Creature requester, Player responder, int requestId) {
@@ -100,13 +98,12 @@ public class ResurrectAI extends NpcAI {
 						TeleportService.sendSetBindPoint(responder);
 						PacketSendUtility.broadcastPacket(responder, new SM_LEVEL_UPDATE(responder.getObjectId(), 2, responder.getCommonData().getLevel()), true);
 						PacketSendUtility.sendPacket(responder, STR_DEATH_REGISTER_RESURRECT_POINT());
-						old = null;
 					} else
 						// if any errors happen, left that player with old bind point
 						responder.setBindPoint(old);
 				}
 			}
-		}, price);
+		}, bindPointTemplate.getPrice());
 	}
 
 }

@@ -61,7 +61,7 @@ public class HouseGateAI extends NpcAI {
 		if (!returnBattle)
 			requestId = SM_QUESTION_WINDOW.STR_HOUSE_GATE_ACCEPT_MOVE_DONT_RETURN;
 
-		AIActions.addRequest(this, player, requestId, 0, 9, new AIRequest() {
+		AIActions.addRequest(this, player, requestId, 9, new AIRequest() {
 
 			private boolean decided = false;
 
@@ -76,11 +76,10 @@ public class HouseGateAI extends NpcAI {
 					house = HousingService.getInstance().getHouseByAddress(address);
 				}
 
-				int exitMapId = 0;
-				float x = 0, y = 0, z = 0;
+				float x, y, z;
 				byte heading = 0;
-				int instanceId = 0;
-				exitMapId = house.getAddress().getMapId();
+				int instanceId;
+				int exitMapId = house.getAddress().getMapId();
 				if (house.getBuilding().getType() == BuildingType.PERSONAL_INS) { // entering studio
 					WorldMapInstance instance = InstanceService.getPersonalInstance(exitMapId, creatorId);
 					if (instance == null) {

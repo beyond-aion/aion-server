@@ -51,17 +51,15 @@ public class SkillCooltimeResetAI extends NpcAI {
 		super.handleSpawned();
 		if (PvpMapService.getInstance().isOnPvPMap(getOwner())) {
 			getOwner().getController().addTask(TaskId.DESPAWN, ThreadPoolManager.getInstance().schedule(() -> getOwner().getController().delete(), 30000));
-			ThreadPoolManager.getInstance().schedule(() -> {
-				getOwner().getKnownList().forEachPlayer(p -> {
-					if (p.isDead() || !getOwner().canSee(p) || playersInSight.containsKey(p.getObjectId()))
-						return;
-					if (PositionUtil.isInRange(getOwner(), p, 8) && GeoService.getInstance().canSee(getOwner(), p)) {
-						playersInSight.put(p.getObjectId(), System.currentTimeMillis());
-						PacketSendUtility.sendPacket(p, new SM_MESSAGE(getOwner(),
-							String.format("I can heal you and reset your skill cooldowns for %,d Kinah, yang yang.", price), ChatType.NPC));
-					}
-				});
-			}, 1000);
+			ThreadPoolManager.getInstance().schedule(() -> getOwner().getKnownList().forEachPlayer(p -> {
+				if (p.isDead() || !getOwner().canSee(p) || playersInSight.containsKey(p.getObjectId()))
+					return;
+				if (PositionUtil.isInRange(getOwner(), p, 8) && GeoService.getInstance().canSee(getOwner(), p)) {
+					playersInSight.put(p.getObjectId(), System.currentTimeMillis());
+					PacketSendUtility.sendPacket(p, new SM_MESSAGE(getOwner(),
+						String.format("I can heal you and reset your skill cooldowns for %,d Kinah, yang yang.", price), ChatType.NPC));
+				}
+			}), 1000);
 		}
 	}
 
@@ -117,7 +115,7 @@ public class SkillCooltimeResetAI extends NpcAI {
 
 	private void sendRequest(final Player player) {
 		int distance = 5;
-		AIActions.addRequest(this, player, 1300765, getObjectId(), distance, new AIRequest() {
+		AIActions.addRequest(this, player, 1300765, distance, new AIRequest() {
 
 			@Override
 			public void acceptRequest(Creature requester, Player responder, int requestId) {

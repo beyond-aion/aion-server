@@ -30,6 +30,7 @@ import com.aionemu.gameserver.model.templates.siegelocation.ArtifactActivation;
 import com.aionemu.gameserver.model.templates.spawns.siegespawns.SiegeSpawnTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ABYSS_ARTIFACT_INFO3;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_QUESTION_WINDOW;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_USE_OBJECT;
 import com.aionemu.gameserver.services.SiegeService;
@@ -60,14 +61,15 @@ public class ArtifactAI extends NpcAI {
 	}
 
 	@Override
-	protected void handleDialogStart(final Player player) {
-		final ArtifactLocation loc = SiegeService.getInstance().getArtifact(getSpawnTemplate().getSiegeId());
-		AIActions.addRequest(this, player, 160028, new AIRequest() {
+	protected void handleDialogStart(Player player) {
+		ArtifactLocation loc = SiegeService.getInstance().getArtifact(getSpawnTemplate().getSiegeId());
+		// open artifact activation window
+		AIActions.addRequest(this, player, SM_QUESTION_WINDOW.STR_ASK_ARTIFACT_POPUPDIALOG, loc.getCoolDown(), new AIRequest() {
 
 			@Override
 			public void acceptRequest(Creature requester, Player responder, int requestId) {
-
-				AIActions.addRequest(ArtifactAI.this, player, 160016, new AIRequest() {
+				// show required item and count in confirm dialog
+				AIActions.addRequest(ArtifactAI.this, player, SM_QUESTION_WINDOW.STR_ASK_USE_ARTIFACT, new AIRequest() {
 
 					@Override
 					public void acceptRequest(Creature requester, Player responder, int requestId) {
@@ -75,10 +77,8 @@ public class ArtifactAI extends NpcAI {
 					}
 
 				}, ChatUtil.l10n(716570), SiegeService.getInstance().getArtifact(getSpawnTemplate().getSiegeId()).getTemplate().getActivation().getCount());
-
 			}
-
-		}, loc);
+		});
 	}
 
 	@Override

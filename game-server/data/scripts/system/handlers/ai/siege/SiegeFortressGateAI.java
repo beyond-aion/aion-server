@@ -11,6 +11,7 @@ import com.aionemu.gameserver.configs.main.GeoDataConfig;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_QUESTION_WINDOW;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -31,7 +32,7 @@ public class SiegeFortressGateAI extends NpcAI {
 
 	@Override
 	protected void handleDialogStart(Player player) {
-		AIActions.addRequest(this, player, 160017, 0, new AIRequest() {
+		AIActions.addRequest(this, player, SM_QUESTION_WINDOW.STR_ASK_PASS_BY_GATE, new AIRequest() {
 
 			@Override
 			public void acceptRequest(Creature fortressGate, Player responder, int requestId) {
