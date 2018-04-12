@@ -124,12 +124,6 @@ public class Skill {
 		this(skillTemplate, effector, skillLevel, firstTarget, null);
 	}
 
-	/**
-	 * @param skillTemplate
-	 * @param effector
-	 * @param skillLvl
-	 * @param firstTarget
-	 */
 	public Skill(SkillTemplate skillTemplate, Creature effector, int skillLvl, Creature firstTarget, ItemTemplate itemTemplate) {
 		this.effectedList = new ArrayList<>();
 		this.conditionChangeListener = new StartMovingListener();
@@ -174,7 +168,7 @@ public class Skill {
 			if ((skillMethod == SkillMethod.CAST || skillMethod == SkillMethod.CHARGE) && chainCategory == null) // category gets set in preCastCheck()
 				player.getChainSkills().resetChain();
 
-			if (this.skillTemplate.getCounterSkill() != null) {
+			if (skillTemplate.getCounterSkill() != null) {
 				long time = player.getLastCounterSkill(skillTemplate.getCounterSkill());
 				if ((time + 5000) < System.currentTimeMillis()) {
 					log.debug("chain skill failed, too late");
@@ -590,25 +584,14 @@ public class Skill {
 	protected void endCast() {
 		if (firstTargetDieObserver != null)
 			firstTarget.getObserveController().removeObserver(firstTargetDieObserver);
-		if (!effector.isCasting() || isCancelled || skillTemplate == null)
+		if (!effector.isCasting() || isCancelled)
 			return;
-
-		// Check if target is out of skill range
+		// check if target is out of skill range or other requirements are not met (anymore)
 		Properties properties = skillTemplate.getProperties();
-		if (properties != null && !properties.endCastValidate(this)) {
-			effector.getController().cancelCurrentSkill(null);
+		if (properties != null && !properties.endCastValidate(this) || !validateEffectedList() || !preUsageCheck()) {
+			effector.getController().cancelCurrentSkill(null); // calls effector.setCasting(null) and sends skill cancel packet
 			return;
 		}
-
-		if (!validateEffectedList()) {
-			effector.getController().cancelCurrentSkill(null);
-			return;
-		}
-
-		if (!preUsageCheck()) {
-			return;
-		}
-
 		effector.setCasting(null);
 
 		// try removing item, if its not possible return to prevent exploits
