@@ -122,7 +122,7 @@ public class CM_EMOTION extends AionClientPacket {
 			return;
 
 		Item usingItem = player.getUsingItem();
-		if (usingItem != null && !hasRideAction(usingItem)) // don't cancel getting on mount
+		if (usingItem == null || !hasRideAction(usingItem)) // don't cancel getting on mount
 			player.getController().cancelUseItem();
 		if (emotionType == EmotionType.SELECT_TARGET)
 			return;
