@@ -1,7 +1,6 @@
 package com.aionemu.gameserver.services;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -132,8 +131,11 @@ public class EnchantService {
 			successChance += stoneToItemLevelDiff; // absolutely increase/reduce chance by 1% for every level difference
 			successChance += stoneToItemQualityDiff * 5; // absolutely increase/reduce chance by 5% for each quality difference
 
-			// Retail Tests: constant rates for 0 -> 10 and 11 -> 15
-			if (targetItem.getEnchantLevel() >= 10)
+			if (targetItem.getEnchantLevel() == 0) // boost enchant chance for +1 by 20%
+				successChance *= 1.2f;
+			else if (targetItem.getEnchantLevel() < 5) // boost enchant chance up to +5 by 10%
+				successChance *= 1.1f;
+			else if (targetItem.getEnchantLevel() >= 10) // reduce enchant chance from +10 by 10%
 				successChance *= 0.9f;
 
 			// Retail Tests: 80% = Success Cap for Enchanting without Supplements
@@ -318,8 +320,7 @@ public class EnchantService {
 	 *          fusioned weapon
 	 */
 	public static boolean socketManastone(Player player, Item parentItem, Item targetItem, Item supplementItem, int targetWeapon) {
-
-		int targetItemLevel = 1;
+		int targetItemLevel;
 
 		// Fusioned weapon. Primary weapon level.
 		if (targetWeapon == 1)
@@ -454,358 +455,360 @@ public class EnchantService {
 	}
 
 	public static int getEquipBuff(Item item) {
-		List<Integer> skillsSet = new ArrayList<>();
+		int[] skills;
 		switch (item.getItemTemplate().getExceedEnchantSkill()) {
 			case RANK1_SET1_MAGICAL_GLOVES:
-				skillsSet = (Arrays.asList(13042, 13046, 13055));
+				skills = new int[] { 13042, 13046, 13055 };
 				break;
 			case RANK1_SET1_MAGICAL_PANTS:
-				skillsSet = (Arrays.asList(13071, 13075, 13078));
+				skills = new int[] { 13071, 13075, 13078 };
 				break;
 			case RANK1_SET1_MAGICAL_SHOES:
-				skillsSet = (Arrays.asList(13108, 13118, 13121));
+				skills = new int[] { 13108, 13118, 13121 };
 				break;
 			case RANK1_SET1_MAGICAL_SHOULDER:
-				skillsSet = (Arrays.asList(13104, 13097, 13098));
+				skills = new int[] { 13104, 13097, 13098 };
 				break;
 			case RANK1_SET1_MAGICAL_TORSO:
-				skillsSet = (Arrays.asList(13128, 13132, 13144));
+				skills = new int[] { 13128, 13132, 13144 };
 				break;
 			case RANK1_SET1_MAGICAL_WEAPON:
-				skillsSet = (Arrays.asList(13011, 13012, 13027));
+				skills = new int[] { 13011, 13012, 13027 };
 				break;
 			case RANK1_SET1_PHYSICAL_GLOVES:
-				skillsSet = (Arrays.asList(13042, 13046, 13055));
+				skills = new int[] { 13042, 13046, 13055 };
 				break;
 			case RANK1_SET1_PHYSICAL_PANTS:
-				skillsSet = (Arrays.asList(13071, 13075, 13078));
+				skills = new int[] { 13071, 13075, 13078 };
 				break;
 			case RANK1_SET1_PHYSICAL_SHOES:
-				skillsSet = (Arrays.asList(13108, 13118, 13121));
+				skills = new int[] { 13108, 13118, 13121 };
 				break;
 			case RANK1_SET1_PHYSICAL_SHOULDER:
-				skillsSet = (Arrays.asList(13104, 13097, 13098));
+				skills = new int[] { 13104, 13097, 13098 };
 				break;
 			case RANK1_SET1_PHYSICAL_TORSO:
-				skillsSet = (Arrays.asList(13128, 13132, 13144));
+				skills = new int[] { 13128, 13132, 13144 };
 				break;
 			case RANK1_SET1_PHYSICAL_WEAPON:
-				skillsSet = (Arrays.asList(13011, 13012, 13027));
+				skills = new int[] { 13011, 13012, 13027 };
 				break;
 			case RANK1_SET2_MAGICAL_GLOVES:
-				skillsSet = (Arrays.asList(13046, 13058, 13056));
+				skills = new int[] { 13046, 13058, 13056 };
 				break;
 			case RANK1_SET2_MAGICAL_PANTS:
-				skillsSet = (Arrays.asList(13075, 13061, 13067));
+				skills = new int[] { 13075, 13061, 13067 };
 				break;
 			case RANK1_SET2_MAGICAL_SHOES:
-				skillsSet = (Arrays.asList(13121, 13114, 13119));
+				skills = new int[] { 13121, 13114, 13119 };
 				break;
 			case RANK1_SET2_MAGICAL_SHOULDER:
-				skillsSet = (Arrays.asList(13104, 13094, 13192));
+				skills = new int[] { 13104, 13094, 13192 };
 				break;
 			case RANK1_SET2_MAGICAL_TORSO:
-				skillsSet = (Arrays.asList(13144, 13135, 13133));
+				skills = new int[] { 13144, 13135, 13133 };
 				break;
 			case RANK1_SET2_MAGICAL_WEAPON:
-				skillsSet = (Arrays.asList(13029, 13003, 13023));
+				skills = new int[] { 13029, 13003, 13023 };
 				break;
 			case RANK1_SET2_PHYSICAL_GLOVES:
-				skillsSet = (Arrays.asList(13046, 13058, 13056));
+				skills = new int[] { 13046, 13058, 13056 };
 				break;
 			case RANK1_SET2_PHYSICAL_PANTS:
-				skillsSet = (Arrays.asList(13075, 13064, 13069));
+				skills = new int[] { 13075, 13064, 13069 };
 				break;
 			case RANK1_SET2_PHYSICAL_SHOES:
-				skillsSet = (Arrays.asList(13121, 13114, 13119));
+				skills = new int[] { 13121, 13114, 13119 };
 				break;
 			case RANK1_SET2_PHYSICAL_SHOULDER:
-				skillsSet = (Arrays.asList(13104, 13094, 13192));
+				skills = new int[] { 13104, 13094, 13192 };
 				break;
 			case RANK1_SET2_PHYSICAL_TORSO:
-				skillsSet = (Arrays.asList(13144, 13135, 13133));
+				skills = new int[] { 13144, 13135, 13133 };
 				break;
 			case RANK1_SET2_PHYSICAL_WEAPON:
-				skillsSet = (Arrays.asList(13029, 13006, 13023));
+				skills = new int[] { 13029, 13006, 13023 };
 				break;
 			case RANK1_SET3_MAGICAL_WEAPON:
-				skillsSet = (Arrays.asList(13031, 13022, 13026));
+				skills = new int[] { 13031, 13022, 13026 };
 				break;
 			case RANK1_SET3_PHYSICAL_WEAPON:
-				skillsSet = (Arrays.asList(13031, 13022, 13026));
+				skills = new int[] { 13031, 13022, 13026 };
 				break;
 			case RANK2_SET1_MAGICAL_GLOVES:
-				skillsSet = (Arrays.asList(13050, 13047, 13057));
+				skills = new int[] { 13050, 13047, 13057 };
 				break;
 			case RANK2_SET1_MAGICAL_PANTS:
-				skillsSet = (Arrays.asList(13072, 13075, 13068));
+				skills = new int[] { 13072, 13075, 13068 };
 				break;
 			case RANK2_SET1_MAGICAL_SHOES:
-				skillsSet = (Arrays.asList(13125, 13122, 13120));
+				skills = new int[] { 13125, 13122, 13120 };
 				break;
 			case RANK2_SET1_MAGICAL_SHOULDER:
-				skillsSet = (Arrays.asList(13088, 13105, 13193));
+				skills = new int[] { 13088, 13105, 13193 };
 				break;
 			case RANK2_SET1_MAGICAL_TORSO:
-				skillsSet = (Arrays.asList(13139, 13145, 13134));
+				skills = new int[] { 13139, 13145, 13134 };
 				break;
 			case RANK2_SET1_MAGICAL_WEAPON:
-				skillsSet = (Arrays.asList(13008, 13010, 13024));
+				skills = new int[] { 13008, 13010, 13024 };
 				break;
 			case RANK2_SET1_PHYSICAL_GLOVES:
-				skillsSet = (Arrays.asList(13050, 13047, 13057));
+				skills = new int[] { 13050, 13047, 13057 };
 				break;
 			case RANK2_SET1_PHYSICAL_PANTS:
-				skillsSet = (Arrays.asList(13072, 13075, 13070));
+				skills = new int[] { 13072, 13075, 13070 };
 				break;
 			case RANK2_SET1_PHYSICAL_SHOES:
-				skillsSet = (Arrays.asList(13125, 13122, 13120));
+				skills = new int[] { 13125, 13122, 13120 };
 				break;
 			case RANK2_SET1_PHYSICAL_SHOULDER:
-				skillsSet = (Arrays.asList(13091, 13105, 13193));
+				skills = new int[] { 13091, 13105, 13193 };
 				break;
 			case RANK2_SET1_PHYSICAL_TORSO:
-				skillsSet = (Arrays.asList(13139, 13145, 13134));
+				skills = new int[] { 13139, 13145, 13134 };
 				break;
 			case RANK2_SET2_MAGICAL_WEAPON:
-				skillsSet = (Arrays.asList(13010, 13032, 13004));
+				skills = new int[] { 13010, 13032, 13004 };
 				break;
 			case RANK2_SET2_PHYSICAL_GLOVES:
-				skillsSet = (Arrays.asList(13050, 13043, 13059));
+				skills = new int[] { 13050, 13043, 13059 };
 				break;
 			case RANK2_SET2_PHYSICAL_PANTS:
-				skillsSet = (Arrays.asList(13072, 13078, 13065));
+				skills = new int[] { 13072, 13078, 13065 };
 				break;
 			case RANK2_SET2_PHYSICAL_SHOES:
-				skillsSet = (Arrays.asList(13125, 13109, 13115));
+				skills = new int[] { 13125, 13109, 13115 };
 				break;
 			case RANK2_SET2_PHYSICAL_SHOULDER:
-				skillsSet = (Arrays.asList(13091, 13099, 13095));
+				skills = new int[] { 13091, 13099, 13095 };
 				break;
 			case RANK2_SET2_PHYSICAL_TORSO:
-				skillsSet = (Arrays.asList(13139, 13129, 13136));
+				skills = new int[] { 13139, 13129, 13136 };
 				break;
 			case RANK2_SET2_PHYSICAL_WEAPON:
-				skillsSet = (Arrays.asList(13010, 13032, 13007));
+				skills = new int[] { 13010, 13032, 13007 };
 				break;
 			case RANK2_SET1_PHYSICAL_WEAPON:
-				skillsSet = (Arrays.asList(13008, 13010, 13024));
+				skills = new int[] { 13008, 13010, 13024 };
 				break;
 			case RANK2_SET3_MAGICAL_WEAPON:
-				skillsSet = (Arrays.asList(13008, 13013, 13030));
+				skills = new int[] { 13008, 13013, 13030 };
 				break;
 			case RANK2_SET3_PHYSICAL_WEAPON:
-				skillsSet = (Arrays.asList(13008, 13013, 13030));
+				skills = new int[] { 13008, 13013, 13030 };
 				break;
 			case RANK3_SET1_MAGICAL_GLOVES:
-				skillsSet = (Arrays.asList(13038, 13051, 13060));
+				skills = new int[] { 13038, 13051, 13060 };
 				break;
 			case RANK3_SET1_MAGICAL_PANTS:
-				skillsSet = (Arrays.asList(13080, 13073, 13063));
+				skills = new int[] { 13080, 13073, 13063 };
 				break;
 			case RANK3_SET1_MAGICAL_SHOES:
-				skillsSet = (Arrays.asList(13112, 13126, 13116));
+				skills = new int[] { 13112, 13126, 13116 };
 				break;
 			case RANK3_SET1_MAGICAL_SHOULDER:
-				skillsSet = (Arrays.asList(13082, 13089, 13096));
+				skills = new int[] { 13082, 13089, 13096 };
 				break;
 			case RANK3_SET1_MAGICAL_TORSO:
-				skillsSet = (Arrays.asList(13142, 13140, 13137));
+				skills = new int[] { 13142, 13140, 13137 };
 				break;
 			case RANK3_SET1_MAGICAL_WEAPON:
-				skillsSet = (Arrays.asList(13034, 13018, 13009));
+				skills = new int[] { 13034, 13018, 13009 };
 				break;
 			case RANK3_SET1_PHYSICAL_GLOVES:
-				skillsSet = (Arrays.asList(13040, 13051, 13060));
+				skills = new int[] { 13040, 13051, 13060 };
 				break;
 			case RANK3_SET1_PHYSICAL_PANTS:
-				skillsSet = (Arrays.asList(13080, 13073, 13066));
+				skills = new int[] { 13080, 13073, 13066 };
 				break;
 			case RANK3_SET1_PHYSICAL_SHOES:
-				skillsSet = (Arrays.asList(13112, 13126, 13116));
+				skills = new int[] { 13112, 13126, 13116 };
 				break;
 			case RANK3_SET1_PHYSICAL_SHOULDER:
-				skillsSet = (Arrays.asList(13084, 13092, 13096));
+				skills = new int[] { 13084, 13092, 13096 };
 				break;
 			case RANK3_SET1_PHYSICAL_TORSO:
-				skillsSet = (Arrays.asList(13142, 13140, 13137));
+				skills = new int[] { 13142, 13140, 13137 };
 				break;
 			case RANK3_SET1_PHYSICAL_WEAPON:
-				skillsSet = (Arrays.asList(13036, 13020, 13009));
+				skills = new int[] { 13036, 13020, 13009 };
 				break;
 			case RANK3_SET2_MAGICAL_GLOVES:
-				skillsSet = (Arrays.asList(13038, 13048, 13044));
+				skills = new int[] { 13038, 13048, 13044 };
 				break;
 			case RANK3_SET2_MAGICAL_PANTS:
-				skillsSet = (Arrays.asList(13080, 13076, 13079));
+				skills = new int[] { 13080, 13076, 13079 };
 				break;
 			case RANK3_SET2_MAGICAL_SHOES:
-				skillsSet = (Arrays.asList(13112, 13123, 13110));
+				skills = new int[] { 13112, 13123, 13110 };
 				break;
 			case RANK3_SET2_MAGICAL_SHOULDER:
-				skillsSet = (Arrays.asList(13082, 13106, 13100));
+				skills = new int[] { 13082, 13106, 13100 };
 				break;
 			case RANK3_SET2_MAGICAL_TORSO:
-				skillsSet = (Arrays.asList(13142, 13146, 13130));
+				skills = new int[] { 13142, 13146, 13130 };
 				break;
 			case RANK3_SET2_MAGICAL_WEAPON:
-				skillsSet = (Arrays.asList(13034, 13014, 13025));
+				skills = new int[] { 13034, 13014, 13025 };
 				break;
 			case RANK3_SET2_PHYSICAL_GLOVES:
-				skillsSet = (Arrays.asList(13040, 13048, 13044));
+				skills = new int[] { 13040, 13048, 13044 };
 				break;
 			case RANK3_SET2_PHYSICAL_PANTS:
-				skillsSet = (Arrays.asList(13080, 13076, 13079));
+				skills = new int[] { 13080, 13076, 13079 };
 				break;
 			case RANK3_SET2_PHYSICAL_SHOES:
-				skillsSet = (Arrays.asList(13112, 13123, 13110));
+				skills = new int[] { 13112, 13123, 13110 };
 				break;
 			case RANK3_SET2_PHYSICAL_SHOULDER:
-				skillsSet = (Arrays.asList(13084, 13106, 13100));
+				skills = new int[] { 13084, 13106, 13100 };
 				break;
 			case RANK3_SET2_PHYSICAL_TORSO:
-				skillsSet = (Arrays.asList(13142, 13146, 13130));
+				skills = new int[] { 13142, 13146, 13130 };
 				break;
 			case RANK3_SET2_PHYSICAL_WEAPON:
-				skillsSet = (Arrays.asList(13036, 13014, 13025));
+				skills = new int[] { 13036, 13014, 13025 };
 				break;
 			case RANK3_SET3_MAGICAL_WEAPON:
-				skillsSet = (Arrays.asList(13018, 13014, 13033));
+				skills = new int[] { 13018, 13014, 13033 };
 				break;
 			case RANK3_SET3_PHYSICAL_WEAPON:
-				skillsSet = (Arrays.asList(13020, 13014, 13033));
+				skills = new int[] { 13020, 13014, 13033 };
 				break;
 			case RANK2_SET2_MAGICAL_GLOVES:
-				skillsSet = (Arrays.asList(13050, 13043, 13059));
+				skills = new int[] { 13050, 13043, 13059 };
 				break;
 			case RANK2_SET2_MAGICAL_PANTS:
-				skillsSet = (Arrays.asList(13072, 13078, 13062));
+				skills = new int[] { 13072, 13078, 13062 };
 				break;
 			case RANK2_SET2_MAGICAL_SHOES:
-				skillsSet = (Arrays.asList(13125, 13109, 13115));
+				skills = new int[] { 13125, 13109, 13115 };
 				break;
 			case RANK2_SET2_MAGICAL_SHOULDER:
-				skillsSet = (Arrays.asList(13088, 13099, 13095));
+				skills = new int[] { 13088, 13099, 13095 };
 				break;
 			case RANK2_SET2_MAGICAL_TORSO:
-				skillsSet = (Arrays.asList(13139, 13129, 13136));
+				skills = new int[] { 13139, 13129, 13136 };
 				break;
 			case RANK4_SET1_MAGICAL_GLOVES:
-				skillsSet = (Arrays.asList(13053, 13039, 13045));
+				skills = new int[] { 13053, 13039, 13045 };
 				break;
 			case RANK4_SET1_MAGICAL_PANTS:
-				skillsSet = (Arrays.asList(13077, 13081, 13079));
+				skills = new int[] { 13077, 13081, 13079 };
 				break;
 			case RANK4_SET1_MAGICAL_SHOES:
-				skillsSet = (Arrays.asList(13117, 13113, 13111));
+				skills = new int[] { 13117, 13113, 13111 };
 				break;
 			case RANK4_SET1_MAGICAL_SHOULDER:
-				skillsSet = (Arrays.asList(13086, 13083, 13101));
+				skills = new int[] { 13086, 13083, 13101 };
 				break;
 			case RANK4_SET1_MAGICAL_TORSO:
-				skillsSet = (Arrays.asList(13138, 13143, 13131));
+				skills = new int[] { 13138, 13143, 13131 };
 				break;
 			case RANK4_SET1_MAGICAL_WEAPON:
-				skillsSet = (Arrays.asList(13015, 13028, 13017));
+				skills = new int[] { 13015, 13028, 13017 };
 				break;
 			case RANK4_SET1_PHYSICAL_GLOVES:
-				skillsSet = (Arrays.asList(13054, 13041, 13045));
+				skills = new int[] { 13054, 13041, 13045 };
 				break;
 			case RANK4_SET1_PHYSICAL_PANTS:
-				skillsSet = (Arrays.asList(13077, 13081, 13079));
+				skills = new int[] { 13077, 13081, 13079 };
 				break;
 			case RANK4_SET1_PHYSICAL_SHOES:
-				skillsSet = (Arrays.asList(13117, 13113, 13111));
+				skills = new int[] { 13117, 13113, 13111 };
 				break;
 			case RANK4_SET1_PHYSICAL_SHOULDER:
-				skillsSet = (Arrays.asList(13087, 13085, 13101));
+				skills = new int[] { 13087, 13085, 13101 };
 				break;
 			case RANK4_SET1_PHYSICAL_TORSO:
-				skillsSet = (Arrays.asList(13138, 13143, 13131));
+				skills = new int[] { 13138, 13143, 13131 };
 				break;
 			case RANK4_SET1_PHYSICAL_WEAPON:
-				skillsSet = (Arrays.asList(13016, 13028, 13017));
+				skills = new int[] { 13016, 13028, 13017 };
 				break;
 			case RANK4_SET2_MAGICAL_GLOVES:
-				skillsSet = (Arrays.asList(13053, 13052, 13049));
+				skills = new int[] { 13053, 13052, 13049 };
 				break;
 			case RANK4_SET2_MAGICAL_PANTS:
-				skillsSet = (Arrays.asList(13077, 13074, 13076));
+				skills = new int[] { 13077, 13074, 13076 };
 				break;
 			case RANK4_SET2_MAGICAL_SHOES:
-				skillsSet = (Arrays.asList(13117, 13127, 13124));
+				skills = new int[] { 13117, 13127, 13124 };
 				break;
 			case RANK4_SET2_MAGICAL_SHOULDER:
-				skillsSet = (Arrays.asList(13086, 13090, 13107));
+				skills = new int[] { 13086, 13090, 13107 };
 				break;
 			case RANK4_SET2_MAGICAL_TORSO:
-				skillsSet = (Arrays.asList(13138, 13141, 13147));
+				skills = new int[] { 13138, 13141, 13147 };
 				break;
 			case RANK4_SET2_MAGICAL_WEAPON:
-				skillsSet = (Arrays.asList(13019, 13017, 13005));
+				skills = new int[] { 13019, 13017, 13005 };
 				break;
 			case RANK4_SET2_PHYSICAL_GLOVES:
-				skillsSet = (Arrays.asList(13054, 13052, 13049));
+				skills = new int[] { 13054, 13052, 13049 };
 				break;
 			case RANK4_SET2_PHYSICAL_PANTS:
-				skillsSet = (Arrays.asList(13077, 13074, 13076));
+				skills = new int[] { 13077, 13074, 13076 };
 				break;
 			case RANK4_SET2_PHYSICAL_SHOES:
-				skillsSet = (Arrays.asList(13117, 13127, 13124));
+				skills = new int[] { 13117, 13127, 13124 };
 				break;
 			case RANK4_SET2_PHYSICAL_SHOULDER:
-				skillsSet = (Arrays.asList(13087, 13093, 13107));
+				skills = new int[] { 13087, 13093, 13107 };
 				break;
 			case RANK4_SET2_PHYSICAL_TORSO:
-				skillsSet = (Arrays.asList(13138, 13141, 13147));
+				skills = new int[] { 13138, 13141, 13147 };
 				break;
 			case RANK4_SET2_PHYSICAL_WEAPON:
-				skillsSet = (Arrays.asList(13021, 13017, 13005));
+				skills = new int[] { 13021, 13017, 13005 };
 				break;
 			case RANK4_SET3_MAGICAL_WEAPON:
-				skillsSet = (Arrays.asList(13035, 13001, 13005));
+				skills = new int[] { 13035, 13001, 13005 };
 				break;
 			case RANK4_SET3_PHYSICAL_WEAPON:
-				skillsSet = (Arrays.asList(13037, 13001, 13005));
+				skills = new int[] { 13037, 13001, 13005 };
 				break;
 			case RANK5_SET1_MAGICAL_TORSO:
-				skillsSet = (Arrays.asList(13235, 13236, 13238));
+				skills = new int[] { 13235, 13236, 13238 };
 				break;
 			case RANK5_SET1_MAGICAL_GLOVES:
-				skillsSet = (Arrays.asList(13248, 13253, 13251));
+				skills = new int[] { 13248, 13253, 13251 };
 				break;
 			case RANK5_SET1_MAGICAL_PANTS:
-				skillsSet = (Arrays.asList(13241, 13079, 13240));
+				skills = new int[] { 13241, 13079, 13240 };
 				break;
 			case RANK5_SET1_MAGICAL_SHOULDER:
-				skillsSet = (Arrays.asList(13269, 13279, 13247));
+				skills = new int[] { 13269, 13279, 13247 };
 				break;
 			case RANK5_SET1_MAGICAL_SHOES:
-				skillsSet = (Arrays.asList(13245, 13266, 13246));
+				skills = new int[] { 13245, 13266, 13246 };
 				break;
 			case RANK5_SET1_PHYSICAL_TORSO:
-				skillsSet = (Arrays.asList(13235, 13236, 13238));
+				skills = new int[] { 13235, 13236, 13238 };
 				break;
 			case RANK5_SET1_PHYSICAL_GLOVES:
-				skillsSet = (Arrays.asList(13251, 13249, 13248));
+				skills = new int[] { 13251, 13249, 13248 };
 				break;
 			case RANK5_SET1_PHYSICAL_SHOULDER:
-				skillsSet = (Arrays.asList(13270, 13247, 13269));
+				skills = new int[] { 13270, 13247, 13269 };
 				break;
 			case RANK5_SET1_PHYSICAL_PANTS:
-				skillsSet = (Arrays.asList(13241, 13079, 13240));
+				skills = new int[] { 13241, 13079, 13240 };
 				break;
 			case RANK5_SET1_PHYSICAL_SHOES:
-				skillsSet = (Arrays.asList(13245, 13244, 13266));
+				skills = new int[] { 13245, 13244, 13266 };
 				break;
 			case RANK5_SET1_MAGICAL_WEAPON:
-				skillsSet = (Arrays.asList(13228, 13234, 13231));
+				skills = new int[] { 13228, 13234, 13231 };
 				break;
 			case RANK5_SET1_PHYSICAL_WEAPON:
-				skillsSet = (Arrays.asList(13229, 13234, 13231));
+				skills = new int[] { 13229, 13234, 13231 };
 				break;
+			default:
+				throw new UnsupportedOperationException("Unhandled breakthrough skill type " + item.getItemTemplate().getExceedEnchantSkill());
 		}
-		return Rnd.get(skillsSet);
+		return Rnd.get(skills);
 	}
 
 	public static void amplifyItem(Player player, int targetItemObjId, int materialId, int toolId) {

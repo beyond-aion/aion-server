@@ -38,8 +38,9 @@ public class PortalRequestAI extends PortalAI {
 
 				};
 				long transportationPrice = PricesService.getPriceForService(loc.getPrice(), player.getRace());
-				if (player.getResponseRequester().putRequest(160013, portal)) {
-					PacketSendUtility.sendPacket(player, new SM_QUESTION_WINDOW(160013, getObjectId(), 0, locationTemplate.getL10n(), transportationPrice));
+				if (player.getResponseRequester().putRequest(SM_QUESTION_WINDOW.STR_TELEPORT_NEED_CONFIRM, portal)) {
+					PacketSendUtility.sendPacket(player,
+						new SM_QUESTION_WINDOW(SM_QUESTION_WINDOW.STR_TELEPORT_NEED_CONFIRM, getObjectId(), 5, locationTemplate.getL10n(), transportationPrice));
 				}
 			}
 		}

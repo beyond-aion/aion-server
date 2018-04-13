@@ -1035,14 +1035,8 @@ public class Player extends Creature {
 	}
 
 	public boolean isInSameTeam(Player player) {
-		if (isInGroup() && player.isInGroup()) {
-			return getPlayerGroup().getTeamId() == player.getPlayerGroup().getTeamId();
-		} else if (isInAlliance() && player.isInAlliance()) {
-			return getPlayerAlliance().equals(player.getPlayerAlliance());
-		} else if (isInLeague() && player.isInLeague()) {
-			return getPlayerAllianceGroup().equals(player.getPlayerAllianceGroup());
-		}
-		return false;
+		int teamId = getCurrentTeamId();
+		return teamId != 0 && teamId == player.getCurrentTeamId();
 	}
 
 	@Override
@@ -1054,10 +1048,11 @@ public class Player extends Creature {
 			return true;
 
 		if (object instanceof Creature) {
-			if (object instanceof Player && isInSameTeam((Player) object))
-				return true;
-			if (((Creature) object).getMaster() instanceof Player && isInSameTeam((Player) ((Creature) object).getMaster())) // traps
-				return true;
+			if (((Creature) object).getMaster() instanceof Player) { // player or a summon's master
+				Player player = (Player) ((Creature) object).getMaster();
+				if (isInSameTeam(player) && !isDueling(player))
+					return true;
+			}
 			if (object instanceof Kisk && ((Kisk) object).getOwnerRace() == getRace()) // invisible kisks can be seen from players of the same race
 				return true;
 		}
@@ -1243,10 +1238,11 @@ public class Player extends Creature {
 	}
 
 	/**
-	 * @return current team id
+	 * @return current team id, 0 if not in a team
 	 */
 	public final int getCurrentTeamId() {
-		return isInTeam() ? getCurrentTeam().getTeamId() : 0;
+		TemporaryPlayerTeam<? extends TeamMember<Player>> team = getCurrentTeam();
+		return team == null ? 0 : team.getTeamId();
 	}
 
 	public PortalCooldownList getPortalCooldownList() {

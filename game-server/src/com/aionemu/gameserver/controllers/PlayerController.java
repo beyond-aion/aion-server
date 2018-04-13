@@ -49,6 +49,8 @@ import com.aionemu.gameserver.model.house.House;
 import com.aionemu.gameserver.model.stats.container.PlayerGameStats;
 import com.aionemu.gameserver.model.summons.SummonMode;
 import com.aionemu.gameserver.model.summons.UnsummonType;
+import com.aionemu.gameserver.model.team.TeamMember;
+import com.aionemu.gameserver.model.team.TemporaryPlayerTeam;
 import com.aionemu.gameserver.model.templates.QuestTemplate;
 import com.aionemu.gameserver.model.templates.flypath.FlyPathEntry;
 import com.aionemu.gameserver.model.templates.panels.SkillPanel;
@@ -185,6 +187,19 @@ public class PlayerController extends CreatureController<Player> {
 	}
 
 	@Override
+	public void onHide() {
+		super.onHide();
+		// send SM_DELETE a second time to fix client not fading out the char (only happens when dueling with a team member of a group or alliance)
+		TemporaryPlayerTeam<? extends TeamMember<Player>> team = getOwner().getCurrentTeam();
+		if (team != null) {
+			team.forEach(p -> {
+				if (!p.canSee(getOwner()))
+					PacketSendUtility.sendPacket(p, new SM_DELETE(getOwner()));
+			});
+		}
+	}
+
+	@Override
 	public void onHideEnd() {
 		Pet pet = getOwner().getPet();
 		if (pet != null && !PositionUtil.isInRange(getOwner(), pet, 3)) // client sends pet position only every 50m...
@@ -308,13 +323,10 @@ public class PlayerController extends CreatureController<Player> {
 			DuelService.getInstance().loseDuel(player);
 		}
 
-		/**
-		 * Release summon
-		 */
+		// Release summon
 		Summon summon = player.getSummon();
-		if (summon != null) {
+		if (summon != null)
 			SummonsService.doMode(SummonMode.RELEASE, summon, UnsummonType.UNSPECIFIED);
-		}
 
 		// setIsFlyingBeforeDead for PlayerReviveService
 		if (player.isInState(CreatureState.FLYING))
@@ -449,11 +461,7 @@ public class PlayerController extends CreatureController<Player> {
 		}
 		lastAttackMillis = milis;
 
-		/**
-		 * notify attack observers
-		 */
 		super.attackTarget(target, time, true);
-
 	}
 
 	@Override
@@ -513,8 +521,7 @@ public class PlayerController extends CreatureController<Player> {
 	 */
 	public void useSkill(SkillTemplate template, int targetType, float x, float y, float z, int clientHitTime, int skillLevel) {
 		Player player = getOwner();
-		Skill skill = null;
-		skill = SkillEngine.getInstance().getSkillFor(player, template, player.getTarget());
+		Skill skill = SkillEngine.getInstance().getSkillFor(player, template, player.getTarget());
 		if (skill == null && player.isTransformed()) {
 			SkillPanel panel = DataManager.PANEL_SKILL_DATA.getSkillPanel(player.getTransformModel().getPanelId());
 			if (panel != null && panel.canUseSkill(template.getSkillId(), skillLevel)) {

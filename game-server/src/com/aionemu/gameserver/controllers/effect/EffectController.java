@@ -51,6 +51,7 @@ public class EffectController {
 	protected int abnormals;
 
 	private boolean isUnderShield = false;
+	private boolean keepBuffsOnDie;
 
 	public EffectController(Creature owner) {
 		this.owner = owner;
@@ -799,7 +800,7 @@ public class EffectController {
 			lock.readLock().lock();
 			try {
 				for (Effect effect : abnormalEffectMap.values()) {
-					if (effect.canRemoveOnDie())
+					if (effect.canRemoveOnDie() && (!keepBuffsOnDie || effect.getTargetSlot() == SkillTargetSlot.DEBUFF))
 						effects.add(effect);
 				}
 				effects.addAll(noshowEffects.values());
@@ -918,4 +919,7 @@ public class EffectController {
 		return abnormalEffectMap.isEmpty();
 	}
 
+	public void setKeepBuffsOnDie(boolean keepBuffsOnDie) {
+		this.keepBuffsOnDie = keepBuffsOnDie;
+	}
 }

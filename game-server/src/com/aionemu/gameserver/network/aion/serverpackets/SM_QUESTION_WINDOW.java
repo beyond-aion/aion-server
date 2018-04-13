@@ -1,13 +1,12 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
-import com.aionemu.gameserver.model.siege.ArtifactLocation;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 
 /**
  * Opens a yes/no question window on the client. Question based on the code given, defined in client_strings.xml
  * 
- * @author Ben, avol, Lyahim
+ * @author Ben, avol, Lyahim, Neon
  */
 public class SM_QUESTION_WINDOW extends AionServerPacket {
 
@@ -129,6 +128,11 @@ public class SM_QUESTION_WINDOW extends AionServerPacket {
 	public static final int STR_ASK_REGISTER_RESURRECT_POINT = 160012;
 
 	/**
+	 * It costs &lt;font font_xml="v3_msgbox_money"&gt; %qina1 &lt;/font&gt; to travel to %0. Proceed?
+	 */
+	public static final int STR_TELEPORT_NEED_CONFIRM = 160013;
+
+	/**
 	 * Do you want to travel using the magic passage?
 	 */
 	public static final int STR_ASK_GROUP_GATE_DO_YOU_ACCEPT_MOVE = 160014;
@@ -167,6 +171,11 @@ public class SM_QUESTION_WINDOW extends AionServerPacket {
 	 * @
 	 */
 	public static final int STR_ASK_DOOR_REPAIR_POPUPDIALOG = 160027;
+
+	/**
+	 * @
+	 */
+	public static final int STR_ASK_ARTIFACT_POPUPDIALOG = 160028;
 
 	/**
 	 * You are currently a member of %0. Do you want to leave it to join %1?
@@ -250,20 +259,21 @@ public class SM_QUESTION_WINDOW extends AionServerPacket {
 	public static final int STR_HOUSING_TELEPORT_GUILD_CONFIRM = 903536;
 
 	/**
+	 * Do you want to enter the Advance Corridor?
+	 */
+	public static final int STR_ASK_PASS_BY_SVS_DIRECT_PORTAL = 905067;
+
+	/**
 	 * %0 wants to list you as a friend. Do you want to accept it?
 	 */
 	public static final int STR_BUDDYLIST_ADD_BUDDY_REQUEST = 1401498;
 
-	/**
-	 * %0 declined your trade offer. TODO: make it a simple box, not a question.
-	 */
-	public static final int STR_EXCHANGE_HE_REJECTED_EXCHANGE = 1300354;
+	private static final int MAX_PARAM_COUNT = 3;
 
-	private int code;
-	private int senderId;
-	private int range;
-	private Object[] params;
-	private ArtifactLocation artifact;
+	private final int code;
+	private final int senderId;
+	private final int rangeOrCooldownSeconds;
+	private final Object[] params;
 
 	/**
 	 * Creates a new <tt>SM_QUESTION_WINDOW</tt> packet
@@ -272,65 +282,28 @@ public class SM_QUESTION_WINDOW extends AionServerPacket {
 	 *          - code The string code to display, found in client_strings.xml
 	 * @param senderId
 	 *          - sender Object id
-	 * @param range
-	 *          - the valid range to react to this dialog
+	 * @param rangeOrCooldownSeconds
+	 *          - the valid range for this dialog (relative to the senderId) or the stone cooldown time for artifact or door repair windows
 	 * @param params
 	 *          - params The parameters for the string, if any
 	 */
-	public SM_QUESTION_WINDOW(int code, int senderId, int range, Object... params) {
+	public SM_QUESTION_WINDOW(int code, int senderId, int rangeOrCooldownSeconds, Object... params) {
 		this.code = code;
 		this.senderId = senderId;
-		this.range = range;
+		this.rangeOrCooldownSeconds = rangeOrCooldownSeconds;
+		if (params.length > MAX_PARAM_COUNT)
+			throw new IllegalArgumentException("More than " + MAX_PARAM_COUNT + " message parameters are not supported");
 		this.params = params;
 	}
 
 	@Override
 	protected void writeImpl(AionConnection con) {
 		writeD(code);
-
-		for (Object param : params) {
-			if (param instanceof ArtifactLocation)
-				this.artifact = (ArtifactLocation) param;
-			else
-				writeS(String.valueOf(param));
-		}
-
-		// Guardian Stone Activation Window
-		if (code == STR_ASK_DOOR_REPAIR_POPUPDIALOG) {
-			writeD(0x00);
-			writeD(0x00);
-			writeD(0x00);
-			writeH(0x00);
-			writeC(0x01);
-			writeD(senderId);
-			writeD(0x05);
-		}
-		// ArtifactLocation Activation Window
-		else if (code == 160028) {
-			writeD(0x00);
-			writeD(0x00);
-			writeH(0x00);
-			writeC(0x00);
-			writeD(0x00);
-			if (artifact == null)
-				writeD(0x00);
-			else
-				writeD(artifact.getCoolDown());// ArtifactLocation reuse
-		} else if (code == STR_BUDDYLIST_ADD_BUDDY_REQUEST) {
-			writeB(new byte[17]);
-		} else if (code == STR_INSTANCE_DUNGEON_WITH_DIFFICULTY_ENTER_CONFIRM) {
-			writeD(0x00);
-			writeH(0x00);
-			writeC(0x01);
-			writeD(senderId);
-			writeD(0x05);
-		} else {
-			writeD(0x00);// unk
-			writeD(0x00);// unk
-			writeH(0x00);// unk
-			writeC(range > 0 ? 0x01 : 0x00);// unk maybe boolean for rangecheck?
-			writeD(senderId);
-			writeD(range);// range within the Question is valid
-		}
+		for (int i = 0; i < MAX_PARAM_COUNT; i++) // client always wants content here, even if there is none
+			writeS(i < params.length ? String.valueOf(params[i]) : null);
+		writeD(0x00);// unk
+		writeC(rangeOrCooldownSeconds > 0 ? 1 : 0); // 1 = check for range (client will auto decline) / display cooldown time
+		writeD(senderId);
+		writeD(rangeOrCooldownSeconds); // range within the question is valid or artifact/repair stone cooldown to display
 	}
 }

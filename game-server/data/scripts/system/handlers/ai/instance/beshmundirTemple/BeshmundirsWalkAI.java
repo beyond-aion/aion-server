@@ -38,19 +38,6 @@ public class BeshmundirsWalkAI extends ActionItemNpcAI {
 
 	@Override
 	public boolean onDialogSelect(Player player, int dialogActionId, int questId, int extendedRewardIndex) {
-		AIRequest request = new AIRequest() {
-
-			@Override
-			public void acceptRequest(Creature requester, Player responder, int requestId) {
-				// TODO: create an instance, depending on difficulty level
-				if (requestId == SM_QUESTION_WINDOW.STR_INSTANCE_DUNGEON_WITH_DIFFICULTY_ENTER_CONFIRM) {
-					moveToInstance(responder, (byte) 2);
-				} else {
-					moveToInstance(responder, (byte) 1);
-				}
-			}
-
-		};
 		switch (dialogActionId) {
 			case OPEN_INSTANCE_RECRUIT:
 				AutoGroupType agt = AutoGroupType.getAutoGroup(player.getLevel(), getNpcId());
@@ -74,13 +61,23 @@ public class BeshmundirsWalkAI extends ActionItemNpcAI {
 				}
 				break;
 			case SELECT_NONE_1: // I'll take the safer path
-				AIActions.addRequest(this, player, SM_QUESTION_WINDOW.STR_INSTANCE_DUNGEON_WITH_DIFFICULTY_ENTER_CONFIRM, getObjectId(), request, "300170000",
-					ChatUtil.l10n(902051));
-				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 4762)); // Path selection
-				break;
 			case SELECT_NONE_2: // Give me the dangerous path
-				AIActions.addRequest(this, player, SM_QUESTION_WINDOW.STR_INSTANCE_DUNGEON_WITH_DIFFICULTY_ENTER_CONFIRM, getObjectId(), request, "300170000",
-					ChatUtil.l10n(902052));
+				AIRequest request = new AIRequest() {
+
+					@Override
+					public void acceptRequest(Creature requester, Player responder, int requestId) {
+						if (requestId == SM_QUESTION_WINDOW.STR_INSTANCE_DUNGEON_WITH_DIFFICULTY_ENTER_CONFIRM) {
+							moveToInstance(responder, (byte) 2);
+						} else {
+							moveToInstance(responder, (byte) 1);
+						}
+					}
+
+				};
+				// 902051 = STR_INSTANCE_DUNGEON_DIFFICULTY_NORMAL (Normal), 902052 = STR_INSTANCE_DUNGEON_DIFFICULTY_HARD (Difficult)
+				int pathL10nId = dialogActionId == SELECT_NONE_1 ? 902051 : 902052;
+				AIActions.addRequest(this, player, SM_QUESTION_WINDOW.STR_INSTANCE_DUNGEON_WITH_DIFFICULTY_ENTER_CONFIRM, request, "300170000",
+					ChatUtil.l10n(pathL10nId));
 				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 4762)); // Path selection
 				break;
 		}

@@ -169,13 +169,6 @@
 			<gd_map map_id="220080000" /><!-- Enshar -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="219926" /><!-- Rootage Rotron -->
-			<gd_npc npc_id="219927" /><!-- Chromascale Dreadclaw -->
-			<gd_npc npc_id="219928" /><!-- Seabrine Jotun -->
-			<gd_npc npc_id="219929" /><!-- Tidalsail Spirit -->
-			<gd_npc npc_id="219930" /><!-- Infernomane Vortile -->
-			<gd_npc npc_id="219931" /><!-- Usurper Demaluk -->
-			<gd_npc npc_id="219932" /><!-- Deputy Brigade General Amar -->
 			<gd_npc npc_id="219933" /><!-- Arcticore Aizenka -->
 		</gd_npcs>
 		<gd_items>

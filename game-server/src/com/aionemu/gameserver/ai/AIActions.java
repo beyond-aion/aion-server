@@ -83,18 +83,18 @@ public class AIActions {
 	}
 
 	/**
-	 * Add RequestResponseHandler to player with senderId equal to objectId of AI owner
+	 * Add RequestResponseHandler to player, valid within 5 meters around the AI owner (client will auto decline when walking out of range).
 	 */
 	public static void addRequest(AbstractAI<? extends Creature> ai, Player player, int requestId, AIRequest request, Object... requestParams) {
-		addRequest(ai, player, requestId, ai.getObjectId(), request, requestParams);
+		addRequest(ai, player, requestId, 5, request, requestParams);
 	}
 
 	/**
-	 * Add RequestResponseHandler to player, which cancels request on movement
+	 * Add RequestResponseHandler to player, valid in the given range around the AI owner (client will auto decline when walking out of range).
+	 * For special windows like for artifact activation, this parameter instead controls the reuse cooldown.
 	 */
-	public static void addRequest(AbstractAI<? extends Creature> ai, Player player, int requestId, int senderId, int range, final AIRequest request,
+	public static void addRequest(AbstractAI<? extends Creature> ai, Player player, int requestId, int rangeOrCooldownSeconds, AIRequest request,
 		Object... requestParams) {
-
 		boolean requested = player.getResponseRequester().putRequest(requestId, new RequestResponseHandler<Creature>(ai.getOwner()) {
 
 			@Override
@@ -109,8 +109,8 @@ public class AIActions {
 		});
 
 		if (requested) {
-			if (range > 0) {
-				player.getObserveController().addObserver(new DialogObserver(ai.getOwner(), player, range) {
+			if (rangeOrCooldownSeconds > 0) {
+				player.getObserveController().addObserver(new DialogObserver(ai.getOwner(), player, rangeOrCooldownSeconds) {
 
 					@Override
 					public void tooFar() {
@@ -118,15 +118,7 @@ public class AIActions {
 					}
 				});
 			}
-			PacketSendUtility.sendPacket(player, new SM_QUESTION_WINDOW(requestId, senderId, range, requestParams));
+			PacketSendUtility.sendPacket(player, new SM_QUESTION_WINDOW(requestId, ai.getObjectId(), rangeOrCooldownSeconds, requestParams));
 		}
-	}
-
-	/**
-	 * Add RequestResponseHandler to player
-	 */
-	public static void addRequest(AbstractAI<? extends Creature> ai, Player player, int requestId, int senderId, final AIRequest request,
-		Object... requestParams) {
-		addRequest(ai, player, requestId, senderId, 0, request, requestParams);
 	}
 }

@@ -21,7 +21,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 @AIName("groupgate")
 public class GroupGateAI extends NpcAI {
 
-	private final int CANCEL_DIALOG_METERS = 9;
+	private static final int CANCEL_DIALOG_METERS = 9;
 
 	public GroupGateAI(Npc owner) {
 		super(owner);
@@ -39,39 +39,38 @@ public class GroupGateAI extends NpcAI {
 			return;
 		}
 
-		AIActions.addRequest(this, player, SM_QUESTION_WINDOW.STR_ASK_GROUP_GATE_DO_YOU_ACCEPT_MOVE, getOwner().getObjectId(), CANCEL_DIALOG_METERS,
-			new AIRequest() {
+		AIActions.addRequest(this, player, SM_QUESTION_WINDOW.STR_ASK_GROUP_GATE_DO_YOU_ACCEPT_MOVE, CANCEL_DIALOG_METERS, new AIRequest() {
 
-				private boolean decisionTaken = false;
+			private boolean decisionTaken = false;
 
-				@Override
-				public void acceptRequest(Creature requester, Player responder, int requestId) {
-					if (!decisionTaken) {
-						switch (getNpcId()) {
-							// Group Gates
-							case 833208:
-							case 749017:
-								TeleportService.teleportTo(responder, 110010000, 1444.9f, 1577.2f, 572.9f, (byte) 0, TeleportAnimation.JUMP_IN);
-								break;
-							case 833207:
-							case 749083:
-								TeleportService.teleportTo(responder, 120010000, 1657.5f, 1398.7f, 194.7f, (byte) 0, TeleportAnimation.JUMP_IN);
-								break;
-							// Binding Group Gates
-							case 749131:
-							case 749132:
-								TeleportService.moveToBindLocation(responder);
-								break;
-						}
-						decisionTaken = true;
+			@Override
+			public void acceptRequest(Creature requester, Player responder, int requestId) {
+				if (!decisionTaken) {
+					switch (getNpcId()) {
+						// Group Gates
+						case 833208:
+						case 749017:
+							TeleportService.teleportTo(responder, 110010000, 1444.9f, 1577.2f, 572.9f, (byte) 0, TeleportAnimation.JUMP_IN);
+							break;
+						case 833207:
+						case 749083:
+							TeleportService.teleportTo(responder, 120010000, 1657.5f, 1398.7f, 194.7f, (byte) 0, TeleportAnimation.JUMP_IN);
+							break;
+						// Binding Group Gates
+						case 749131:
+						case 749132:
+							TeleportService.moveToBindLocation(responder);
+							break;
 					}
-				}
-
-				@Override
-				public void denyRequest(Creature requester, Player responder) {
 					decisionTaken = true;
 				}
+			}
 
-			});
+			@Override
+			public void denyRequest(Creature requester, Player responder) {
+				decisionTaken = true;
+			}
+
+		});
 	}
 }

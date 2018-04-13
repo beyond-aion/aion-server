@@ -318,31 +318,17 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 	public void doReward() {
 	}
 
-	/**
-	 * This method should be overriden in more specific controllers
-	 * 
-	 * @param player
-	 */
 	public void onDialogRequest(Player player) {
 	}
 
-	/**
-	 * @param target
-	 * @param time
-	 */
-	public void attackTarget(final Creature target, int time, boolean skipChecks) {
+	public void attackTarget(Creature target, int time, boolean skipChecks) {
 		boolean addAttackObservers = true;
-		/**
-		 * Check all prerequisites
-		 */
 		if (!skipChecks
 			&& (target == null || getOwner().isDead() || getOwner().getLifeStats().isAboutToDie() || !getOwner().canAttack() || !getOwner().isSpawned())) {
 			return;
 		}
 
-		/**
-		 * Calculate and apply damage
-		 */
+		// Calculate and apply damage
 		int attackType = 0;
 		List<AttackResult> attackResult;
 		if (getOwner() instanceof Homing) {
@@ -506,7 +492,7 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 			castingSkill.cancelCast();
 			creature.setCasting(null);
 			if (creature instanceof Npc) {
-				((NpcAI) creature.getAi()).setSubStateIfNot(AISubState.NONE);
+				creature.getAi().setSubStateIfNot(AISubState.NONE);
 				removeQueuedSkill((Npc) creature);
 				((Npc) creature).getGameStats().setLastSkill(null);
 			}
@@ -569,7 +555,7 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 		private int finalDamage;
 		private AttackStatus attackStatus;
 
-		public DelayedOnAttack(Creature target, Creature creature, int finalDamage, AttackStatus attackStatus) {
+		private DelayedOnAttack(Creature target, Creature creature, int finalDamage, AttackStatus attackStatus) {
 			this.target = target;
 			this.creature = creature;
 			this.finalDamage = finalDamage;

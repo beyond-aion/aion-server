@@ -76,7 +76,7 @@ public class RideAction extends AbstractItemAction {
 				player.removeItemCoolDown(parentItem.getItemTemplate().getUseLimits().getDelayId());
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_CANCELED());
 				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem
-					.getItemTemplate().getTemplateId(), 0, 2, 0), true);
+					.getItemId(), 0, 3, 0), true);
 				player.getObserveController().removeObserver(this);
 			}
 
