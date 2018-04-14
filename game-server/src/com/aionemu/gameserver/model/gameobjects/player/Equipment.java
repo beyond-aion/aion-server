@@ -6,8 +6,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.SortedMap;
 import java.util.TreeMap;
+import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -333,11 +335,7 @@ public class Equipment implements Persistable {
 			|| owner.getSkillList().isSkillPresent(144) || owner.getSkillList().isSkillPresent(207);
 	}
 
-	/**
-	 * @param requiredSkills
-	 * @return
-	 */
-	public boolean checkAvailableEquipSkills(Item item) {
+	private boolean checkAvailableEquipSkills(Item item) {
 		int[] requiredSkills = item.getItemTemplate().getRequiredSkills();
 		if (requiredSkills.length == 0) // if no skills required - validate as true
 			return true;
@@ -350,12 +348,6 @@ public class Equipment implements Persistable {
 		return false;
 	}
 
-	/**
-	 * Will look item in equipment item set
-	 * 
-	 * @param value
-	 * @return Item
-	 */
 	public Item getEquippedItemByObjId(int value) {
 		synchronized (equipment) {
 			for (Item item : equipment.values()) {
@@ -363,14 +355,9 @@ public class Equipment implements Persistable {
 					return item;
 			}
 		}
-
 		return null;
 	}
 
-	/**
-	 * @param value
-	 * @return List<Item>
-	 */
 	public List<Item> getEquippedItemsByItemId(int value) {
 		List<Item> equippedItemsById = new ArrayList<>();
 		synchronized (equipment) {
@@ -379,62 +366,39 @@ public class Equipment implements Persistable {
 					equippedItemsById.add(item);
 			}
 		}
-
 		return equippedItemsById;
 	}
 
-	/**
-	 * @return List<Item>
-	 */
 	public List<Item> getEquippedItems() {
-		HashSet<Item> equippedItems = new HashSet<>();
-		equippedItems.addAll(equipment.values());
-
-		return Arrays.asList(equippedItems.toArray(new Item[0]));
+		return equipment.values().stream().distinct().collect(Collectors.toList());
 	}
 
-	public List<Integer> getEquippedItemIds() {
-		HashSet<Integer> equippedIds = new HashSet<>();
-		for (Item i : equipment.values())
-			equippedIds.add(i.getItemId());
-
-		return Arrays.asList(equippedIds.toArray(new Integer[0]));
+	public Set<Integer> getEquippedItemIds() {
+		return equipment.values().stream().map(Item::getItemId).collect(Collectors.toSet());
 	}
 
-	/**
-	 * @return List<Item>
-	 */
 	public List<Item> getEquippedItemsWithoutStigma() {
 		List<Item> equippedItems = new ArrayList<>();
-		List<Item> twoHanded = new ArrayList<>();
+		Set<Item> twoHanded = new HashSet<>();
 		for (Item item : equipment.values()) {
 			if (!ItemSlot.isStigma(item.getEquipmentSlot())) {
-				if (item.getItemTemplate().isTwoHandWeapon()) {
-					if (twoHanded.contains(item))
-						continue;
-					twoHanded.add(item);
-				}
+				if (item.getItemTemplate().isTwoHandWeapon() && !twoHanded.add(item))
+					continue;
 				equippedItems.add(item);
 			}
 		}
-		twoHanded.clear();
-		twoHanded = null;
 		return equippedItems;
 	}
 
-	public List<Item> getEquippedForAppearence() {
+	public List<Item> getEquippedForAppearance() {
 		List<Item> equippedItems = new ArrayList<>();
 		for (Item item : equipment.values()) {
 			if (ItemSlot.isVisible(item.getEquipmentSlot()) && !(item.getItemTemplate().isTwoHandWeapon() && equippedItems.contains(item)))
 				equippedItems.add(item);
 		}
-
 		return equippedItems;
 	}
 
-	/**
-	 * @return List<Item>
-	 */
 	public List<Item> getEquippedItemsAllStigma() {
 		List<Item> equippedItems = new ArrayList<>();
 		for (Item item : equipment.values()) {
@@ -677,7 +641,7 @@ public class Equipment implements Persistable {
 		}
 
 		ItemPacketService.updateItemAfterInfoChange(owner, equippedItem, ItemUpdateType.STATS_CHANGE);
-		PacketSendUtility.broadcastPacket(owner, new SM_UPDATE_PLAYER_APPEARANCE(owner.getObjectId(), owner.getEquipment().getEquippedForAppearence()),
+		PacketSendUtility.broadcastPacket(owner, new SM_UPDATE_PLAYER_APPEARANCE(owner.getObjectId(), owner.getEquipment().getEquippedForAppearance()),
 			true);
 		setPersistentState(PersistentState.UPDATE_REQUIRED);
 	}
@@ -910,7 +874,7 @@ public class Equipment implements Persistable {
 						ItemPacketService.updateItemAfterInfoChange(owner, item);
 
 						equip(slot, item);
-						PacketSendUtility.broadcastPacket(responder, new SM_UPDATE_PLAYER_APPEARANCE(responder.getObjectId(), getEquippedForAppearence()), true);
+						PacketSendUtility.broadcastPacket(responder, new SM_UPDATE_PLAYER_APPEARANCE(responder.getObjectId(), getEquippedForAppearance()), true);
 					}
 				}, 5000));
 			}

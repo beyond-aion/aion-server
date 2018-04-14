@@ -102,7 +102,7 @@ public class SM_PLAYER_INFO extends AionServerPacket {
 		writeH(pcd.getDp());// current dp
 		writeC(0x00);// unk (0x00)
 
-		List<Item> items = player.getEquipment().getEquippedForAppearence();
+		List<Item> items = player.getEquipment().getEquippedForAppearance();
 		int mask = 0;
 		for (Item item : items) {
 			mask |= item.getEquipmentSlot();
@@ -201,9 +201,7 @@ public class SM_PLAYER_INFO extends AionServerPacket {
 
 		writeS(player.hasStore() ? player.getStore().getStoreMessage() : ""); // private store message
 
-		/**
-		 * Movement
-		 */
+		// Movement
 		writeF(0);
 		writeF(0);
 		writeF(0);
