@@ -1,11 +1,15 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import com.aionemu.gameserver.model.DialogAction;
+import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.services.ArmsfusionService;
+import com.aionemu.gameserver.utils.audit.AuditLogger;
 
 /**
- * @author zdead modified by Wakizashi
+ * @author zdead
+ * @modified Wakizashi, Neon
  */
 public class CM_FUSION_WEAPONS extends AionClientPacket {
 
@@ -13,19 +17,23 @@ public class CM_FUSION_WEAPONS extends AionClientPacket {
 		super(opcode, state, restStates);
 	}
 
-	private int firstItemId;
-	private int secondItemId;
+	private int npcObjId;
+	private int mainWeaponObjId;
+	private int fuseWeaponObjId;
 
 	@Override
 	protected void readImpl() {
-		readD();
-		firstItemId = readD();
-		secondItemId = readD();
+		npcObjId = readD();
+		mainWeaponObjId = readD();
+		fuseWeaponObjId = readD();
 	}
-
 
 	@Override
 	protected void runImpl() {
-		ArmsfusionService.fusionWeapons(getConnection().getActivePlayer(), firstItemId, secondItemId);
+		Player player = getConnection().getActivePlayer();
+		if (player.isTargetingNpcWithFunction(npcObjId, DialogAction.COMPOUND_WEAPON))
+			ArmsfusionService.fusionWeapons(getConnection().getActivePlayer(), mainWeaponObjId, fuseWeaponObjId);
+		else
+			AuditLogger.log(player, "tried to fuse weapons without targeting an armsfusion officer");
 	}
 }

@@ -1,8 +1,6 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
 import com.aionemu.gameserver.model.DialogAction;
-import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
@@ -40,13 +38,9 @@ public class CM_REGISTER_BROKER_ITEM extends AionClientPacket {
 		if (player.isTrading() || itemCount <= 0)
 			return;
 
-		VisibleObject broker = player.getTarget();
-		if (!(broker instanceof Npc) || broker.getObjectId() != brokerObjId
-			|| !((Npc) broker).getObjectTemplate().supportsAction(DialogAction.OPEN_VENDOR)) {
-			AuditLogger.log(player, "possibly modified packet to register broker item with no broker in target");
-			return;
-		}
-
-		BrokerService.getInstance().registerItem(player, itemUniqueId, itemCount, price, splittingAvailable);
+		if (player.isTargetingNpcWithFunction(brokerObjId, DialogAction.OPEN_VENDOR))
+			BrokerService.getInstance().registerItem(player, itemUniqueId, itemCount, price, splittingAvailable);
+		else
+			AuditLogger.log(player, "tried to register a broker item without targeting a broker");
 	}
 }

@@ -1513,6 +1513,11 @@ public class Player extends Creature {
 		return creature.getActingCreature() instanceof Player;
 	}
 
+	public boolean isTargetingNpcWithFunction(int objectId, int dialogActionId) {
+		VisibleObject target = getTarget();
+		return target instanceof Npc && target.getObjectId() == objectId && ((Npc) target).getObjectTemplate().supportsAction(dialogActionId);
+	}
+
 	/**
 	 * @return the motions
 	 */
@@ -1565,7 +1570,7 @@ public class Player extends Creature {
 	 * @return selfRezItem
 	 */
 	public Item getSelfRezStone() {
-		Item item = null;
+		Item item;
 		item = getReviveStone(161001001);
 		if (item == null)
 			item = getReviveStone(161000003);
