@@ -795,9 +795,9 @@ public class Equipment implements Persistable {
 	 * @param armorType
 	 */
 	public boolean isArmorEquipped(ItemSubType subType) {
-
 		for (long slot : ARMOR_SLOTS) {
-			if (equipment.get(slot) != null && equipment.get(slot).getItemTemplate().getItemSubType() == subType)
+			Item item = equipment.get(slot);
+			if (item != null && item.getItemTemplate().getItemSubType() == subType)
 				return true;
 		}
 		return false;

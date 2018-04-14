@@ -3,6 +3,7 @@ package com.aionemu.gameserver.model.gameobjects;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -49,7 +50,7 @@ public class Item extends AionObject implements Expirable, StatOwner, Persistabl
 	private Integer itemColor;
 	private int colorExpireTime = 0;
 	private String itemCreator;
-	private ItemTemplate itemTemplate;
+	private final ItemTemplate itemTemplate;
 	private ItemTemplate itemSkinTemplate;
 	private ItemTemplate fusionedItemTemplate;
 	private boolean isEquipped = false;
@@ -122,7 +123,7 @@ public class Item extends AionObject implements Expirable, StatOwner, Persistabl
 		int buffSkill, int rndPlumeBonusValue) {
 		super(objId);
 
-		this.itemTemplate = DataManager.ITEM_DATA.getItemTemplate(itemId);
+		this.itemTemplate = Objects.requireNonNull(DataManager.ITEM_DATA.getItemTemplate(itemId), () -> "Missing template for item " + itemId);
 		this.itemCount = itemCount;
 		this.itemColor = itemColor;
 		this.colorExpireTime = colorExpires;
@@ -650,18 +651,10 @@ public class Item extends AionObject implements Expirable, StatOwner, Persistabl
 		return 0;
 	}
 
-	/**
-	 * @return the mask
-	 */
 	public int getItemMask(Player player) {
-		int finalMask = checkConfig(player, itemTemplate.getMask());
-		return finalMask;
+		return checkConfig(player, itemTemplate.getMask());
 	}
 
-	/**
-	 * @param player
-	 * @return
-	 */
 	private int checkConfig(Player player, int mask) {
 		int newMask = mask;
 		if (player.hasPermission(MembershipConfig.STORE_WH_ALL)) {
