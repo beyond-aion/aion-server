@@ -80,7 +80,7 @@
 			<gd_item id="188052575" /><!-- Veteran's Crafting Bundle -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Unique)" base_chance="50">
+	<gd_rule rule_name="Named Weapon (Unique)" base_chance="50" fixed_chance="true">
 		<gd_maps>
 			<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
 		</gd_maps>
@@ -150,7 +150,7 @@
 			<gd_item id="114601436" /><!-- Sauro Guard's Sabatons -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Unique)" base_chance="40">
+	<gd_rule rule_name="Named Accessory (Unique)" base_chance="40" fixed_chance="true">
 		<gd_maps>
 			<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
 		</gd_maps>
@@ -180,7 +180,7 @@
 			<gd_item id="125003698" chance="5" /><!-- Sauro Guard's Helm -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Epic)" base_chance="25">
+	<gd_rule rule_name="Named Weapon (Epic)" base_chance="25" fixed_chance="true">
 		<gd_maps>
 			<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
 		</gd_maps>
@@ -215,7 +215,7 @@
 			<gd_item id="115001621" /><!-- Sauren Scale Shield -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Epic)" base_chance="50">
+	<gd_rule rule_name="Named Armor (Epic)" base_chance="50" fixed_chance="true">
 		<gd_maps>
 			<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
 		</gd_maps>
@@ -275,7 +275,7 @@
 			<gd_item id="114601435" /><!-- Sauren Sabatons -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Epic)" base_chance="20">
+	<gd_rule rule_name="Named Accessory (Epic)" base_chance="20" fixed_chance="true">
 		<gd_maps>
 			<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
 		</gd_maps>
@@ -311,7 +311,7 @@
 			<gd_item id="125003697" chance="2.5" /><!-- Sauren Helm -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Mythic)" base_chance="9">
+	<gd_rule rule_name="Named Weapon (Mythic)" base_chance="9" fixed_chance="true">
 		<gd_maps>
 			<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
 		</gd_maps>
