@@ -3,7 +3,7 @@
 	<xs:include schemaLocation="items/item_templates.xsd"/>
 	<xs:include schemaLocation="skills/skills.xsd"/>
 	<xs:complexType name="Modifiers">
-		<xs:sequence minOccurs="0" maxOccurs="unbounded">
+		<xs:sequence maxOccurs="unbounded">
 			<xs:element name="add" type="SimpleModifier" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element name="sub" type="SimpleModifier" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element name="rate" type="SimpleModifier" minOccurs="0" maxOccurs="unbounded"/>

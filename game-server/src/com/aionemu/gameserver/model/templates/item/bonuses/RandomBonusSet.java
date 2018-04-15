@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.model.templates.item.bonuses;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -12,28 +11,22 @@ import javax.xml.bind.annotation.XmlType;
 import com.aionemu.gameserver.model.templates.stats.ModifiersTemplate;
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "RandomBonus", propOrder = { "modifiers" })
-public class RandomBonus {
+@XmlType(name = "RandomBonusSet")
+public class RandomBonusSet {
 
 	@XmlElement(required = true)
-	protected List<ModifiersTemplate> modifiers;
+	private List<ModifiersTemplate> modifiers;
 
 	@XmlAttribute(required = true)
-	protected int id;
+	private int id;
 
 	@XmlAttribute(name = "type", required = true)
 	private StatBonusType bonusType;
 
 	public List<ModifiersTemplate> getModifiers() {
-		if (modifiers == null) {
-			modifiers = new ArrayList<>();
-		}
-		return this.modifiers;
+		return modifiers;
 	}
 
-	/**
-	 * Gets the value of the id property.
-	 */
 	public int getId() {
 		return id;
 	}

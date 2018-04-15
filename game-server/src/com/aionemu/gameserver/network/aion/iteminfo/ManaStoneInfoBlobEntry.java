@@ -28,11 +28,10 @@ public class ManaStoneInfoBlobEntry extends ItemBlobEntry {
 	@Override
 	public void writeThisBlob(ByteBuffer buf) {
 		Item item = ownerItem;
-		int optionalSocket = item.getOptionalSocket();
 		writeC(buf, item.isSoulBound() ? 1 : 0);
 		writeC(buf, item.getEnchantLevel()); // enchant (1-15)
 		writeD(buf, item.getItemSkinTemplate().getTemplateId());
-		writeC(buf, !item.isIdentified() ? -1 : optionalSocket);
+		writeC(buf, !item.isIdentified() ? -1 : item.getOptionalSockets());
 		writeC(buf, !item.isIdentified() ? -1 : item.getEnchantBonus());
 
 		writeItemStones(buf);

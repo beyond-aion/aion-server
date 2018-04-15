@@ -24,8 +24,7 @@ import com.aionemu.gameserver.model.items.GodStone;
 import com.aionemu.gameserver.model.items.IdianStone;
 import com.aionemu.gameserver.model.items.ItemMask;
 import com.aionemu.gameserver.model.items.ManaStone;
-import com.aionemu.gameserver.model.items.RandomBonusResult;
-import com.aionemu.gameserver.model.items.RandomStats;
+import com.aionemu.gameserver.model.items.RandomBonusEffect;
 import com.aionemu.gameserver.model.items.storage.IStorage;
 import com.aionemu.gameserver.model.items.storage.ItemStorage;
 import com.aionemu.gameserver.model.items.storage.StorageType;
@@ -58,8 +57,8 @@ public class Item extends AionObject implements Expirable, StatOwner, Persistabl
 	private PersistentState persistentState;
 	private Set<ManaStone> manaStones;
 	private Set<ManaStone> fusionStones;
-	private int optionalSocket;
-	private int optionalFusionSocket;
+	private int optionalSockets;
+	private int fusionedItemOptionalSockets;
 	private GodStone godStone;
 	private IdianStone idianStone;
 	private boolean isSoulBound = false;
@@ -71,10 +70,10 @@ public class Item extends AionObject implements Expirable, StatOwner, Persistabl
 	private long repurchasePrice;
 	private int activationCount = 0;
 	private ChargeInfo conditioningInfo;
-	private int bonusNumber = 0;
 	private List<StatFunction> currentModifiers;
-	private RandomStats randomStats;
 	private int tuneCount = 0;
+	private RandomBonusEffect bonusStatsEffect;
+	private RandomBonusEffect fusionedItemBonusStatsEffect;
 	private int packCount;
 	private int indexReturn;
 	private int tempering;
@@ -91,15 +90,11 @@ public class Item extends AionObject implements Expirable, StatOwner, Persistabl
 		super(objId);
 		this.itemTemplate = itemTemplate;
 		this.activationCount = itemTemplate.getActivationCount();
-		if (itemTemplate.getExpireTime() != 0) {
+		if (itemTemplate.getExpireTime() != 0)
 			expireTime = ((int) (System.currentTimeMillis() / 1000) + itemTemplate.getExpireTime() * 60) - 1;
-		}
-		if (itemTemplate.canTune()) {
-			tuneCount = -1; // not randomized yet
-		}
-		if (itemTemplate.getEnchantType() == 1) {
-			isAmplified = true;
-		}
+		if (itemTemplate.canTune())
+			tuneCount = -1; // not identified yet (bonus stats need to be rolled)
+		isAmplified = itemTemplate.getEnchantType() == 1;
 		this.persistentState = PersistentState.NEW;
 		updateChargeInfo(0);
 	}
@@ -119,8 +114,8 @@ public class Item extends AionObject implements Expirable, StatOwner, Persistabl
 	 */
 	public Item(int objId, int itemId, long itemCount, Integer itemColor, int colorExpires, String itemCreator, int expireTime, int activationCount,
 		boolean isEquipped, boolean isSoulBound, long equipmentSlot, int itemLocation, int enchant, int enchantBonus, int itemSkin, int fusionedItem,
-		int optionalSocket, int optionalFusionSocket, int charge, int randomBonus, int tuneCount, int tempering, int packCount, boolean isAmplified,
-		int buffSkill, int rndPlumeBonusValue) {
+		int optionalSockets, int fusionedItemOptionalSockets, int charge, int tuneCount, int statBonusId, int fusionedItemStatBonusId, int tempering,
+		int packCount, boolean isAmplified, int buffSkill, int rndPlumeBonusValue) {
 		super(objId);
 
 		this.itemTemplate = Objects.requireNonNull(DataManager.ITEM_DATA.getItemTemplate(itemId), () -> "Missing template for item " + itemId);
@@ -138,10 +133,9 @@ public class Item extends AionObject implements Expirable, StatOwner, Persistabl
 		this.enchantBonus = enchantBonus;
 		this.fusionedItemTemplate = DataManager.ITEM_DATA.getItemTemplate(fusionedItem);
 		this.itemSkinTemplate = DataManager.ITEM_DATA.getItemTemplate(itemSkin);
-		this.optionalSocket = optionalSocket;
-		this.optionalFusionSocket = optionalFusionSocket;
-		this.bonusNumber = randomBonus;
 		this.tuneCount = tuneCount;
+		this.optionalSockets = optionalSockets;
+		this.fusionedItemOptionalSockets = fusionedItemOptionalSockets;
 		if (tuneCount == -1 && !itemTemplate.canTune()) {
 			this.tuneCount = 0; // NC made it not tunable
 		}
@@ -150,14 +144,17 @@ public class Item extends AionObject implements Expirable, StatOwner, Persistabl
 		this.isAmplified = isAmplified;
 		this.buffSkill = buffSkill;
 		this.rndPlumeBonusValue = rndPlumeBonusValue;
-		if (itemTemplate.getRandomBonusId() != 0 && bonusNumber > 0) {
-			randomStats = new RandomStats(itemTemplate.getRandomBonusId(), bonusNumber);
+		if (itemTemplate.getStatBonusSetId() != 0 && statBonusId > 0) {
+			setBonusStats(statBonusId, false);
 		}
 		if (fusionedItemTemplate != null) {
+			if (fusionedItemTemplate.getStatBonusSetId() != 0 && fusionedItemStatBonusId > 0) {
+				setFusionedItemBonusStats(fusionedItemStatBonusId, false);
+			}
 			if (!itemTemplate.isCanFuse() || !itemTemplate.isTwoHandWeapon() || !fusionedItemTemplate.isCanFuse()
 				|| !fusionedItemTemplate.isTwoHandWeapon()) {
 				this.fusionedItemTemplate = null;
-				this.optionalFusionSocket = 0;
+				this.fusionedItemOptionalSockets = 0;
 			}
 		}
 		updateChargeInfo(charge);
@@ -172,28 +169,19 @@ public class Item extends AionObject implements Expirable, StatOwner, Persistabl
 		setPersistentState(PersistentState.UPDATE_REQUIRED);
 	}
 
-	public final boolean setRndBonus() {
-		int setId = itemTemplate.getRandomBonusId();
-		if (setId > 0) {
-			RandomBonusResult bonus = DataManager.ITEM_RANDOM_BONUSES.getRandomModifiers(StatBonusType.INVENTORY, setId);
-			if (bonus != null) {
-				bonusNumber = bonus.getTemplateNumber();
-				randomStats = new RandomStats(itemTemplate.getRandomBonusId(), bonusNumber);
-				return true;
-			}
-		}
-		return false;
+	public void setRndBonus() {
+		int setId = itemTemplate.getStatBonusSetId();
+		if (setId > 0)
+			setBonusStats(DataManager.ITEM_RANDOM_BONUSES.selectRandomBonusNumber(StatBonusType.INVENTORY, setId), true);
 	}
 
 	private void updateChargeInfo(int charge) {
 		int chargeLevel = getChargeLevelMax();
-		if (conditioningInfo == null && chargeLevel > 0) {
-			this.conditioningInfo = new ChargeInfo(charge, this);
-		}
+		if (conditioningInfo == null && chargeLevel > 0)
+			conditioningInfo = new ChargeInfo(charge, this);
 		// when break fusioned item and second item has conditioned info - set to null
-		if (conditioningInfo != null && chargeLevel == 0) {
-			this.conditioningInfo = null;
-		}
+		if (conditioningInfo != null && chargeLevel == 0)
+			conditioningInfo = null;
 	}
 
 	@Override
@@ -222,28 +210,28 @@ public class Item extends AionObject implements Expirable, StatOwner, Persistabl
 		return itemTemplate.getName();
 	}
 
-	public int getOptionalSocket() {
-		return optionalSocket;
+	public int getOptionalSockets() {
+		return optionalSockets;
 	}
 
-	public void setOptionalSocket(int optionalSocket) {
-		this.optionalSocket = optionalSocket;
+	public void setOptionalSockets(int optionalSockets) {
+		this.optionalSockets = optionalSockets;
 	}
 
 	public boolean hasOptionalSocket() {
-		return optionalSocket != 0;
+		return optionalSockets != 0;
 	}
 
-	public int getOptionalFusionSocket() {
-		return optionalFusionSocket;
+	public int getFusionedItemOptionalSockets() {
+		return fusionedItemOptionalSockets;
 	}
 
 	public boolean hasOptionalFusionSocket() {
-		return optionalFusionSocket != 0;
+		return fusionedItemOptionalSockets != 0;
 	}
 
-	public void setOptionalFusionSocket(int optionalFusionSocket) {
-		this.optionalFusionSocket = optionalFusionSocket;
+	public void setFusionedItemOptionalSockets(int fusionedItemOptionalSockets) {
+		this.fusionedItemOptionalSockets = fusionedItemOptionalSockets;
 	}
 
 	public int getEnchantBonus() {
@@ -624,9 +612,28 @@ public class Item extends AionObject implements Expirable, StatOwner, Persistabl
 		return fusionedItemTemplate != null ? fusionedItemTemplate.getTemplateId() : 0;
 	}
 
-	public void setFusionedItem(ItemTemplate itemTemplate) {
-		this.fusionedItemTemplate = itemTemplate;
+	public void setFusionedItem(Item fusionedItem) {
+		if (fusionedItem == null)
+			setFusionedItem(null, 0, 0);
+		else
+			setFusionedItem(fusionedItem.getItemTemplate(), fusionedItem.getBonusStatsId(), fusionedItem.getOptionalSockets());
+	}
+
+	public void setFusionedItem(ItemTemplate template, int bonusStatsId, int optionalSockets) {
+		removeAllFusionStones();
+		fusionedItemTemplate = template;
+		setFusionedItemBonusStats(bonusStatsId, false);
+		setFusionedItemOptionalSockets(optionalSockets);
 		updateChargeInfo(0);
+	}
+
+	private void removeAllFusionStones() {
+		if (!hasFusionStones())
+			return;
+		for (ManaStone ms : fusionStones)
+			ms.setPersistentState(PersistentState.DELETED);
+		DAOManager.getDAO(ItemStoneListDAO.class).storeFusionStone(fusionStones);
+		fusionStones.clear();
 	}
 
 	public int getSockets(boolean isFusionItem) {
@@ -639,10 +646,10 @@ public class Item extends AionObject implements Expirable, StatOwner, Persistabl
 					return 0;
 				}
 				numSockets = fusedTemp.getManastoneSlots();
-				numSockets += hasOptionalFusionSocket() ? getOptionalFusionSocket() : 0;
+				numSockets += hasOptionalFusionSocket() ? getFusionedItemOptionalSockets() : 0;
 			} else {
 				numSockets = getItemTemplate().getManastoneSlots();
-				numSockets += hasOptionalSocket() ? getOptionalSocket() : 0;
+				numSockets += hasOptionalSocket() ? getOptionalSockets() : 0;
 			}
 			if (numSockets < 6)
 				return numSockets;
@@ -826,7 +833,8 @@ public class Item extends AionObject implements Expirable, StatOwner, Persistabl
 	public int getAvailableChargeLevel(Player player) {
 		int result = getChargeLevelMax();
 		ItemUseLimits limits = hasFusionedItem() && getFusionedItemTemplate().getLevel() > this.getItemTemplate().getLevel()
-			? getFusionedItemTemplate().getUseLimits() : getItemTemplate().getUseLimits();
+			? getFusionedItemTemplate().getUseLimits()
+			: getItemTemplate().getUseLimits();
 		if (limits.getRecommendRank() > 0) {
 			int diff = Math.max(0, limits.getRecommendRank() - player.getAbyssRank().getRank().getId());
 			result -= diff;
@@ -861,20 +869,25 @@ public class Item extends AionObject implements Expirable, StatOwner, Persistabl
 		this.idianStone = idianStone;
 	}
 
-	public RandomStats getRandomStats() {
-		return randomStats;
+	public int getBonusStatsId() {
+		return bonusStatsEffect == null ? 0 : bonusStatsEffect.getStatBonusId();
 	}
 
-	public void setRandomStats(RandomStats randomStats) {
-		this.randomStats = randomStats;
+	public RandomBonusEffect getBonusStatsEffect() {
+		return bonusStatsEffect;
 	}
 
-	public int getBonusNumber() {
-		return bonusNumber;
-	}
-
-	public void setBonusNumber(int bonusNumber) {
-		this.bonusNumber = bonusNumber;
+	/**
+	 * Must only be called while the item is unequipped, otherwise the old stats will remain active.
+	 */
+	public void setBonusStats(int statBonusId, boolean validate) {
+		if (validate && isEquipped)
+			log.warn(getItemId() + " was equipped while switching bonus stats from " + getBonusStatsId() + " to " + statBonusId,
+				new IllegalStateException());
+		if (statBonusId == 0)
+			bonusStatsEffect = null;
+		else
+			bonusStatsEffect = new RandomBonusEffect(StatBonusType.INVENTORY, itemTemplate.getStatBonusSetId(), statBonusId);
 	}
 
 	public int getTuneCount() {
@@ -892,8 +905,25 @@ public class Item extends AionObject implements Expirable, StatOwner, Persistabl
 		return tuneCount != -1;
 	}
 
-	public int[] getRequiredSkill() {
-		return itemTemplate.getRequiredSkills();
+	public int getFusionedItemBonusStatsId() {
+		return fusionedItemBonusStatsEffect == null ? 0 : fusionedItemBonusStatsEffect.getStatBonusId();
+	}
+
+	public RandomBonusEffect getFusionedItemBonusStatsEffect() {
+		return fusionedItemBonusStatsEffect;
+	}
+
+	/**
+	 * Must only be called while the item is unequipped, otherwise the old stats will remain active.
+	 */
+	public void setFusionedItemBonusStats(int statBonusId, boolean validate) {
+		if (validate && isEquipped)
+			log.warn(getItemId() + " was equipped while switching fusioned bonus stats from " + getFusionedItemBonusStatsId() + " to " + statBonusId,
+				new IllegalStateException());
+		if (statBonusId == 0)
+			fusionedItemBonusStatsEffect = null;
+		else
+			fusionedItemBonusStatsEffect = new RandomBonusEffect(StatBonusType.INVENTORY, fusionedItemTemplate.getStatBonusSetId(), statBonusId);
 	}
 
 	public void setTemperingEffect(TemperingEffect temperingEffect) {
@@ -979,10 +1009,10 @@ public class Item extends AionObject implements Expirable, StatOwner, Persistabl
 		return "Item [getItemId()=" + getItemId() + ", getObjectId()=" + getObjectId() + ", itemCount=" + itemCount + ", itemColor=" + itemColor
 			+ ", colorExpireTime=" + colorExpireTime + ", itemCreator=" + itemCreator + ", itemSkinId=" + getItemSkinTemplate().getTemplateId()
 			+ ", getFusionedItemId()=" + getFusionedItemId() + ", isEquipped=" + isEquipped + ", manaStones=" + manaStones + ", fusionStones="
-			+ fusionStones + ", optionalSocket=" + optionalSocket + ", optionalFusionSocket=" + optionalFusionSocket + ", getGodStoneId()="
+			+ fusionStones + ", optionalSockets=" + optionalSockets + ", fusionedItemOptionalSockets=" + fusionedItemOptionalSockets + ", getGodStoneId()="
 			+ getGodStoneId() + ", isSoulBound=" + isSoulBound + ", itemLocation=" + itemLocation + ", enchantLevel=" + enchantLevel + ", enchantBonus="
 			+ enchantBonus + ", expireTime=" + expireTime + ", temporaryExchangeTime=" + temporaryExchangeTime + ", repurchasePrice=" + repurchasePrice
-			+ ", activationCount=" + activationCount + ", bonusNumber=" + bonusNumber + ", tuneCount=" + tuneCount + ", packCount=" + packCount
+			+ ", activationCount=" + activationCount + ", bonusNumber=" + getBonusStatsId() + ", tuneCount=" + tuneCount + ", packCount=" + packCount
 			+ ", indexReturn=" + indexReturn + ", tempering=" + tempering + ", isAmplified=" + isAmplified + ", buffSkill=" + buffSkill
 			+ ", rndPlumeBonusValue=" + rndPlumeBonusValue + ", getChargePoints()=" + getChargePoints() + "]";
 	}

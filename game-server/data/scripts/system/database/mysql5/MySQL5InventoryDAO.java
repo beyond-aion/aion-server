@@ -33,11 +33,13 @@ import com.aionemu.gameserver.utils.idfactory.IDFactory;
 public class MySQL5InventoryDAO extends InventoryDAO {
 
 	private static final Logger log = LoggerFactory.getLogger(MySQL5InventoryDAO.class);
-	public static final String SELECT_QUERY = "SELECT `item_unique_id`, `item_id`, `item_count`, `item_color`, `color_expires`, `item_creator`, `expire_time`, `activation_count`, `is_equiped`, `is_soul_bound`, `slot`, `enchant`, `enchant_bonus`, `item_skin`, `fusioned_item`, `optional_socket`, `optional_fusion_socket`, `charge`, `rnd_bonus`, `rnd_count`, `tempering`, `pack_count`, `is_amplified`, `buff_skill`, `rnd_plume_bonus` FROM `inventory` WHERE `item_owner`=? AND `item_location`=? AND `is_equiped`=?";
-	public static final String INSERT_QUERY = "INSERT INTO `inventory` (`item_unique_id`, `item_id`, `item_count`, `item_color`, `color_expires`, `item_creator`, `expire_time`, `activation_count`, `item_owner`, `is_equiped`, is_soul_bound, `slot`, `item_location`, `enchant`, `enchant_bonus`, `item_skin`, `fusioned_item`, `optional_socket`, `optional_fusion_socket`, `charge`, `rnd_bonus`, `rnd_count`, `tempering`, `pack_count`, `is_amplified`, `buff_skill`, `rnd_plume_bonus`) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-	public static final String UPDATE_QUERY = "UPDATE inventory SET item_count=?, item_color=?, color_expires=?, item_creator=?, expire_time=?, activation_count=?, item_owner=?, is_equiped=?, is_soul_bound=?, slot=?, item_location=?, enchant=?, enchant_bonus=?, item_skin=?, fusioned_item=?, optional_socket=?, optional_fusion_socket=?, charge=?, rnd_bonus=?, rnd_count=?, tempering=?, pack_count=?, is_amplified=?, buff_skill=?, rnd_plume_bonus=? WHERE item_unique_id=?";
+	public static final String SELECT_QUERY = "SELECT * FROM `inventory` WHERE `item_owner`=? AND `item_location`=? AND `is_equipped`=?";
+	public static final String INSERT_QUERY = "INSERT INTO `inventory` (`item_unique_id`, `item_id`, `item_count`, `item_color`, `color_expires`, `item_creator`, `expire_time`, `activation_count`, `item_owner`, `is_equipped`, is_soul_bound, `slot`, `item_location`, `enchant`, `enchant_bonus`, `item_skin`, `fusioned_item`, `optional_socket`, `optional_fusion_socket`, `charge`, `tune_count`, `rnd_bonus`, `fusion_rnd_bonus`, `tempering`, `pack_count`, `is_amplified`, `buff_skill`, `rnd_plume_bonus`) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+	public static final String UPDATE_QUERY = "UPDATE inventory SET item_count=?, item_color=?, color_expires=?, item_creator=?, expire_time=?, activation_count=?, item_owner=?, is_equipped=?, is_soul_bound=?, slot=?, item_location=?, enchant=?, enchant_bonus=?, item_skin=?, fusioned_item=?, optional_socket=?, optional_fusion_socket=?, charge=?, tune_count=?, rnd_bonus=?, fusion_rnd_bonus=?, tempering=?, pack_count=?, is_amplified=?, buff_skill=?, rnd_plume_bonus=? WHERE item_unique_id=?";
 	public static final String DELETE_QUERY = "DELETE FROM inventory WHERE item_unique_id=?";
-	public static final String DELETE_CLEAN_QUERY = "DELETE FROM inventory WHERE item_owner=? AND item_location != 2"; // exclude acc wh since item_owner (acc id) is no idfactory id
+	public static final String DELETE_CLEAN_QUERY = "DELETE FROM inventory WHERE item_owner=? AND item_location != 2"; // exclude acc wh since
+																																																											// item_owner (acc id) is no
+																																																											// idfactory id
 	public static final String SELECT_ACCOUNT_QUERY = "SELECT `account_id` FROM `players` WHERE `id`=?";
 	public static final String SELECT_LEGION_QUERY = "SELECT `legion_id` FROM `legion_members` WHERE `player_id`=?";
 	public static final String DELETE_ACCOUNT_WH = "DELETE FROM inventory WHERE item_owner=? AND item_location=2";
@@ -143,7 +145,7 @@ public class MySQL5InventoryDAO extends InventoryDAO {
 		String itemCreator = rset.getString("item_creator");
 		int expireTime = rset.getInt("expire_time");
 		int activationCount = rset.getInt("activation_count");
-		int isEquiped = rset.getInt("is_equiped");
+		int isEquiped = rset.getInt("is_equipped");
 		int isSoulBound = rset.getInt("is_soul_bound");
 		long slot = rset.getLong("slot");
 		int enchant = rset.getInt("enchant");
@@ -153,18 +155,18 @@ public class MySQL5InventoryDAO extends InventoryDAO {
 		int optionalSocket = rset.getInt("optional_socket");
 		int optionalFusionSocket = rset.getInt("optional_fusion_socket");
 		int charge = rset.getInt("charge");
-		int randomBonus = rset.getInt("rnd_bonus");
-		int rndCount = rset.getInt("rnd_count");
+		int tuneCount = rset.getInt("tune_count");
+		int bonusStatsId = rset.getInt("rnd_bonus");
+		int fusionedItemBonusStatsId = rset.getInt("fusion_rnd_bonus");
 		int tempering = rset.getInt("tempering");
 		int packCount = rset.getInt("pack_count");
 		int isAmplified = rset.getInt("is_amplified");
 		int buffSkill = rset.getInt("buff_skill");
 		int rndPlumeBonusValue = rset.getInt("rnd_plume_bonus");
 
-		Item item = new Item(itemUniqueId, itemId, itemCount, itemColor, colorExpireTime, itemCreator, expireTime, activationCount, isEquiped == 1,
-			isSoulBound == 1, slot, storage, enchant, enchantBonus, itemSkin, fusionedItem, optionalSocket, optionalFusionSocket, charge, randomBonus,
-			rndCount, tempering, packCount, isAmplified == 1, buffSkill, rndPlumeBonusValue);
-		return item;
+		return new Item(itemUniqueId, itemId, itemCount, itemColor, colorExpireTime, itemCreator, expireTime, activationCount, isEquiped == 1,
+			isSoulBound == 1, slot, storage, enchant, enchantBonus, itemSkin, fusionedItem, optionalSocket, optionalFusionSocket, charge, tuneCount,
+			bonusStatsId, fusionedItemBonusStatsId, tempering, packCount, isAmplified == 1, buffSkill, rndPlumeBonusValue);
 	}
 
 	private int loadPlayerAccountId(final int playerId) {
@@ -304,16 +306,17 @@ public class MySQL5InventoryDAO extends InventoryDAO {
 				stmt.setInt(15, item.getEnchantBonus());
 				stmt.setInt(16, item.getItemSkinTemplate().getTemplateId());
 				stmt.setInt(17, item.getFusionedItemId());
-				stmt.setInt(18, item.getOptionalSocket());
-				stmt.setInt(19, item.getOptionalFusionSocket());
+				stmt.setInt(18, item.getOptionalSockets());
+				stmt.setInt(19, item.getFusionedItemOptionalSockets());
 				stmt.setInt(20, item.getChargePoints());
-				stmt.setInt(21, item.getBonusNumber());
-				stmt.setInt(22, item.getTuneCount());
-				stmt.setInt(23, item.getTempering());
-				stmt.setInt(24, item.getPackCount());
-				stmt.setBoolean(25, item.isAmplified());
-				stmt.setInt(26, item.getBuffSkill());
-				stmt.setInt(27, item.getRndPlumeBonusValue());
+				stmt.setInt(21, item.getTuneCount());
+				stmt.setInt(22, item.getBonusStatsId());
+				stmt.setInt(23, item.getFusionedItemBonusStatsId());
+				stmt.setInt(24, item.getTempering());
+				stmt.setInt(25, item.getPackCount());
+				stmt.setBoolean(26, item.isAmplified());
+				stmt.setInt(27, item.getBuffSkill());
+				stmt.setInt(28, item.getRndPlumeBonusValue());
 				stmt.addBatch();
 			}
 
@@ -349,17 +352,18 @@ public class MySQL5InventoryDAO extends InventoryDAO {
 				stmt.setInt(13, item.getEnchantBonus());
 				stmt.setInt(14, item.getItemSkinTemplate().getTemplateId());
 				stmt.setInt(15, item.getFusionedItemId());
-				stmt.setInt(16, item.getOptionalSocket());
-				stmt.setInt(17, item.getOptionalFusionSocket());
+				stmt.setInt(16, item.getOptionalSockets());
+				stmt.setInt(17, item.getFusionedItemOptionalSockets());
 				stmt.setInt(18, item.getChargePoints());
-				stmt.setInt(19, item.getBonusNumber());
-				stmt.setInt(20, item.getTuneCount());
-				stmt.setInt(21, item.getTempering());
-				stmt.setInt(22, item.getPackCount());
-				stmt.setBoolean(23, item.isAmplified());
-				stmt.setInt(24, item.getBuffSkill());
-				stmt.setInt(25, item.getRndPlumeBonusValue());
-				stmt.setInt(26, item.getObjectId());
+				stmt.setInt(19, item.getTuneCount());
+				stmt.setInt(20, item.getBonusStatsId());
+				stmt.setInt(21, item.getFusionedItemBonusStatsId());
+				stmt.setInt(22, item.getTempering());
+				stmt.setInt(23, item.getPackCount());
+				stmt.setBoolean(24, item.isAmplified());
+				stmt.setInt(25, item.getBuffSkill());
+				stmt.setInt(26, item.getRndPlumeBonusValue());
+				stmt.setInt(27, item.getObjectId());
 				stmt.addBatch();
 			}
 

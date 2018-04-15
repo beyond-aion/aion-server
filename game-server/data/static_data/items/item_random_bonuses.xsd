@@ -4,11 +4,11 @@
 	<xs:element name="random_bonuses">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:element maxOccurs="unbounded" name="random_bonus" type="RandomBonus" />
+				<xs:element maxOccurs="unbounded" name="random_bonus" type="RandomBonusSet" />
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
-	<xs:complexType name="RandomBonus">
+	<xs:complexType name="RandomBonusSet">
 		<xs:sequence>
 			<xs:element maxOccurs="unbounded" name="modifiers" type="Modifiers" />
 		</xs:sequence>

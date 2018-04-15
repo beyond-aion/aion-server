@@ -26,8 +26,8 @@ public class CompositeItemBlobEntry extends ItemBlobEntry {
 
 		writeD(buf, item.getFusionedItemId());
 		writeFusionStones(buf);
-		// TODO: verify it
-		writeH(buf, item.hasOptionalFusionSocket() ? item.getOptionalFusionSocket() : 0x00);
+		writeC(buf, item.getFusionedItemOptionalSockets()); // additional manastone sockets
+		writeC(buf, item.getFusionedItemBonusStatsId());
 	}
 
 	private void writeFusionStones(ByteBuffer buf) {
@@ -41,10 +41,7 @@ public class CompositeItemBlobEntry extends ItemBlobEntry {
 			}
 			for (int i = 0; i < Item.MAX_BASIC_STONES; i++) {
 				ManaStone stone = stonesBySlot.get(i);
-				if (stone == null)
-					writeD(buf, 0);
-				else
-					writeD(buf, stone.getItemId());
+				writeD(buf, stone == null ? 0 : stone.getItemId());
 			}
 		} else {
 			skip(buf, Item.MAX_BASIC_STONES * 4);

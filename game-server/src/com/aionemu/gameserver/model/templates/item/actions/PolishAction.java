@@ -14,11 +14,11 @@ import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Persistable.PersistentState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.items.IdianStone;
-import com.aionemu.gameserver.model.items.RandomBonusResult;
 import com.aionemu.gameserver.model.templates.item.bonuses.StatBonusType;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_INVENTORY_UPDATE_ITEM;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ITEM_USAGE_ANIMATION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
+import com.aionemu.gameserver.utils.ChatUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
@@ -30,7 +30,7 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 public class PolishAction extends AbstractItemAction {
 
 	@XmlAttribute(name = "set_id")
-	protected int polishSetId;
+	private int polishSetId;
 
 	@Override
 	public boolean canAct(Player player, Item parentItem, Item targetItem) {
@@ -46,57 +46,48 @@ public class PolishAction extends AbstractItemAction {
 	}
 
 	@Override
-	public void act(final Player player, final Item parentItem, final Item targetItem) {
-		final int parentItemId = parentItem.getItemId();
-		final int parntObjectId = parentItem.getObjectId();
-		String parentItemL10n = parentItem.getL10n();
-		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItemId, 5000, 0, 0),
+	public void act(Player player, Item parentItem, Item targetItem) {
+		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), 5000, 0, 0),
 			true);
-		final ItemUseObserver observer = new ItemUseObserver() {
+		ItemUseObserver observer = new ItemUseObserver() {
 
 			@Override
 			public void abort() {
 				player.getController().cancelTask(TaskId.ITEM_USE);
 				player.removeItemCoolDown(parentItem.getItemTemplate().getUseLimits().getDelayId());
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_CANCELED());
-				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parntObjectId, parentItemId, 0, 2, 0), true);
+				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), 0, 2, 0), true);
 				player.getObserveController().removeObserver(this);
 			}
 
 		};
 		player.getObserveController().attach(observer);
-		player.getController().addTask(TaskId.ITEM_USE, ThreadPoolManager.getInstance().schedule(new Runnable() {
+		player.getController().addTask(TaskId.ITEM_USE, ThreadPoolManager.getInstance().schedule(() -> {
+			player.getObserveController().removeObserver(observer);
 
-			@Override
-			public void run() {
-				player.getObserveController().removeObserver(observer);
-
-				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parntObjectId, parentItemId, 0, 1, 1), true);
-				if (!player.getInventory().decreaseByObjectId(parntObjectId, 1)) {
-					return;
-				}
-				RandomBonusResult bonus = DataManager.ITEM_RANDOM_BONUSES.getRandomModifiers(StatBonusType.POLISH, polishSetId);
-				if (bonus == null) {
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ENCHANT_ITEM_FAILED(parentItemL10n));
-					return;
-				}
-				PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1401650, "[item_ex:" + targetItem.getItemId() + ";" + targetItem.getItemName()
-					+ "]"));
-				IdianStone idianStone = targetItem.getIdianStone();
-				if (idianStone != null) {
-					idianStone.onUnEquip(player);
-					targetItem.setIdianStone(null);
-					idianStone.setPersistentState(PersistentState.DELETED);
-					DAOManager.getDAO(ItemStoneListDAO.class).storeIdianStones(idianStone);
-				}
-				idianStone = new IdianStone(parentItemId, PersistentState.NEW, targetItem, bonus.getTemplateNumber(), 1000000);
-				targetItem.setIdianStone(idianStone);
-				if (targetItem.isEquipped()) {
-					idianStone.onEquip(player, targetItem.getEquipmentSlot());
-				}
-				PacketSendUtility.sendPacket(player, new SM_INVENTORY_UPDATE_ITEM(player, targetItem));
+			PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), 0, 1, 1), true);
+			if (!player.getInventory().decreaseByObjectId(parentItem.getObjectId(), 1)) {
+				return;
 			}
-
+			int bonusNumber = DataManager.ITEM_RANDOM_BONUSES.selectRandomBonusNumber(StatBonusType.POLISH, polishSetId);
+			if (bonusNumber == 0) {
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ENCHANT_ITEM_FAILED(parentItem.getL10n()));
+				return;
+			}
+			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1401650, ChatUtil.itemName(targetItem.getItemId())));
+			IdianStone idianStone = targetItem.getIdianStone();
+			if (idianStone != null) {
+				idianStone.onUnEquip(player);
+				targetItem.setIdianStone(null);
+				idianStone.setPersistentState(PersistentState.DELETED);
+				DAOManager.getDAO(ItemStoneListDAO.class).storeIdianStones(idianStone);
+			}
+			idianStone = new IdianStone(parentItem.getItemId(), PersistentState.NEW, targetItem, bonusNumber, 1000000);
+			targetItem.setIdianStone(idianStone);
+			if (targetItem.isEquipped()) {
+				idianStone.onEquip(player, targetItem.getEquipmentSlot());
+			}
+			PacketSendUtility.sendPacket(player, new SM_INVENTORY_UPDATE_ITEM(player, targetItem));
 		}, 5000));
 
 	}

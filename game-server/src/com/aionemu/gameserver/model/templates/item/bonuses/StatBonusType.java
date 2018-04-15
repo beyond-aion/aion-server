@@ -11,14 +11,5 @@ import javax.xml.bind.annotation.XmlType;
 public enum StatBonusType {
 
 	INVENTORY,
-	POLISH;
-
-	public String value() {
-		return name();
-	}
-
-	public static StatBonusType fromValue(String v) {
-		return valueOf(v);
-	}
-
+	POLISH
 }

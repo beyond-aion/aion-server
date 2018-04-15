@@ -1,6 +1,6 @@
 package com.aionemu.gameserver.utils;
 
-import java.awt.*;
+import java.awt.Color;
 import java.text.DecimalFormat;
 import java.util.Locale;
 import java.util.regex.Matcher;
@@ -239,6 +239,10 @@ public class ChatUtil {
 
 	public static String item(int itemId) {
 		return String.format("[item:%d]", itemId);
+	}
+
+	public static String itemName(int itemId) {
+		return String.format("[item_ex:%d]", itemId);
 	}
 
 	public static String recipe(int recipeId) {

@@ -4,7 +4,6 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.aionemu.gameserver.model.account.PlayerAccountData;
 import org.slf4j.Logger;
 
 import com.aionemu.commons.database.dao.DAOManager;
@@ -18,6 +17,7 @@ import com.aionemu.gameserver.model.Gender;
 import com.aionemu.gameserver.model.PlayerClass;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.account.Account;
+import com.aionemu.gameserver.model.account.PlayerAccountData;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Persistable.PersistentState;
 import com.aionemu.gameserver.model.gameobjects.player.AbyssRank;
@@ -196,8 +196,9 @@ public class CMT_CHARACTER_INFORMATION extends AionClientPacket {
 			}
 			int godstone = readD();
 			int colorExpires = readD();
-			int bonusNum = readD();
-			int randomNum = readD();
+			int tuneCount = readD();
+			int bonusStatsId = readD();
+			int fusionedItemBonusStatsId = readD();
 			int tempering = readD();
 			int packCount = readD();
 			boolean itemAmplified = readUC() == 1;
@@ -221,8 +222,8 @@ public class CMT_CHARACTER_INFORMATION extends AionClientPacket {
 			// dye expiration is lost
 			// plume Bonus is lost
 			Item item = new Item(newId, itemId, itemCnt, itemColor, colorExpires, itemCreator, itemExpireTime, itemActivationCnt, itemEquipped,
-				itemSoulBound, equipSlot, location, enchant, enchantBonus, skinId, fusionId, optSocket, optFusion, charge, bonusNum, randomNum, tempering,
-				packCount, itemAmplified, buffSkill, 0);
+				itemSoulBound, equipSlot, location, enchant, enchantBonus, skinId, fusionId, optSocket, optFusion, charge, tuneCount, bonusStatsId,
+				fusionedItemBonusStatsId, tempering, packCount, itemAmplified, buffSkill, 0);
 			if (manastones.size() > 0) {
 				for (int[] stone : manastones) {
 					ItemSocketService.addManaStone(item, stone[0], stone[1]);
@@ -326,7 +327,7 @@ public class CMT_CHARACTER_INFORMATION extends AionClientPacket {
 				DAOManager.getDAO(PlayerTitleListDAO.class).storeTitles(player, t);
 			}
 
-		String[] posBind = null;
+		String[] posBind;
 		switch (player.getRace()) {
 			case ELYOS:
 				posBind = PlayerTransferConfig.BIND_ELYOS.split(" ");
@@ -336,8 +337,8 @@ public class CMT_CHARACTER_INFORMATION extends AionClientPacket {
 				break;
 		}
 
-		player.setBindPoint(new BindPointPosition(Integer.parseInt(posBind[0]), Float.parseFloat(posBind[1]), Float.parseFloat(posBind[2]), Float
-			.parseFloat(posBind[3]), Byte.parseByte(posBind[4])));
+		player.setBindPoint(new BindPointPosition(Integer.parseInt(posBind[0]), Float.parseFloat(posBind[1]), Float.parseFloat(posBind[2]),
+			Float.parseFloat(posBind[3]), Byte.parseByte(posBind[4])));
 		DAOManager.getDAO(PlayerBindPointDAO.class).store(player);
 
 		int uilen = readD(), shortlen = readD();
@@ -395,8 +396,8 @@ public class CMT_CHARACTER_INFORMATION extends AionClientPacket {
 			int flags = readD();
 
 			if (PlayerTransferConfig.ALLOW_QUESTS) {
-				player.getQuestStateList().addQuest(questId,
-					new QuestState(questId, QuestStatus.valueOf(status), qvars, flags, completeCount, nextRepeatTime, reward == -1 ? null : reward, completeTime));
+				player.getQuestStateList().addQuest(questId, new QuestState(questId, QuestStatus.valueOf(status), qvars, flags, completeCount, nextRepeatTime,
+					reward == -1 ? null : reward, completeTime));
 			}
 		}
 

@@ -90,7 +90,7 @@ public class CM_TUNE extends AionClientPacket {
 				player.getObserveController().removeObserver(observer);
 				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjectId, itemId, 0, 10, 0), true);
 
-				item.setOptionalSocket(Rnd.get(0, item.getItemTemplate().getOptionSlotBonus()));
+				item.setOptionalSockets(Rnd.get(0, item.getItemTemplate().getOptionSlotBonus()));
 				item.setRndBonus();
 				item.setEnchantBonus(Rnd.get(0, item.getItemTemplate().getMaxEnchantBonus()));
 				item.setTuneCount(item.getTuneCount() + 1); // not tuned have count = -1
