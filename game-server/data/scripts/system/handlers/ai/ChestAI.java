@@ -8,12 +8,14 @@ import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
+import com.aionemu.gameserver.configs.main.DropConfig;
 import com.aionemu.gameserver.configs.main.GroupConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
+import com.aionemu.gameserver.model.team.TemporaryPlayerTeam;
 import com.aionemu.gameserver.model.templates.chest.ChestTemplate;
 import com.aionemu.gameserver.model.templates.chest.KeyItem;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
@@ -55,18 +57,12 @@ public class ChestAI extends ActionItemNpcAI {
 			}
 
 			Collection<Player> players = new HashSet<>();
-			if (player.isInGroup()) {
-				for (Player member : player.getPlayerGroup().getOnlineMembers()) {
-					if (PositionUtil.isInRange(member, getOwner(), GroupConfig.GROUP_MAX_DISTANCE)) {
+			TemporaryPlayerTeam<?> playerTeam = player.getCurrentTeam();
+			if (playerTeam != null) {
+				for (Player member : playerTeam.getOnlineMembers())
+					if (PositionUtil.isInRange(member, getOwner(),
+						DropConfig.DISABLE_RANGE_CHECK_MAPS.contains(getPosition().getMapId()) ? 9999 : GroupConfig.GROUP_MAX_DISTANCE))
 						players.add(member);
-					}
-				}
-			} else if (player.isInAlliance()) {
-				for (Player member : player.getPlayerAlliance().getOnlineMembers()) {
-					if (PositionUtil.isInRange(member, getOwner(), GroupConfig.GROUP_MAX_DISTANCE)) {
-						players.add(member);
-					}
-				}
 			} else {
 				players.add(player);
 			}

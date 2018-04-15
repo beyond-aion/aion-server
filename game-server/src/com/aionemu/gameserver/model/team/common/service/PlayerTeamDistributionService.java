@@ -6,6 +6,7 @@ import java.util.function.Consumer;
 
 import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.configs.main.CustomConfig;
+import com.aionemu.gameserver.configs.main.DropConfig;
 import com.aionemu.gameserver.configs.main.GroupConfig;
 import com.aionemu.gameserver.model.gameobjects.AionObject;
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -33,7 +34,8 @@ public class PlayerTeamDistributionService {
 		}
 
 		// Find team's members and determine highest level
-		PlayerTeamRewardStats filteredStats = new PlayerTeamRewardStats(owner);
+		boolean disableRangeChecks = DropConfig.DISABLE_RANGE_CHECK_MAPS.contains(owner.getPosition().getMapId());
+		PlayerTeamRewardStats filteredStats = new PlayerTeamRewardStats(owner, disableRangeChecks);
 		team.forEach(filteredStats);
 
 		// All non-mentors are not nearby or dead
@@ -96,19 +98,21 @@ public class PlayerTeamDistributionService {
 	private static class PlayerTeamRewardStats implements Consumer<Player> {
 
 		final List<Player> players = new ArrayList<>();
+		final boolean disableRangeChecks;
 		int partyLvlSum = 0;
 		int highestLevel = 0;
 		int mentorCount = 0;
 		boolean hasLivingPlayer = false;
 		Npc owner;
 
-		public PlayerTeamRewardStats(Npc owner) {
+		public PlayerTeamRewardStats(Npc owner, boolean disableRangeChecks) {
 			this.owner = owner;
+			this.disableRangeChecks = disableRangeChecks;
 		}
 
 		@Override
 		public void accept(Player member) {
-			if (member.isOnline() && PositionUtil.isInRange(member, owner, GroupConfig.GROUP_MAX_DISTANCE)) {
+			if (member.isOnline() && PositionUtil.isInRange(member, owner, disableRangeChecks ? 9999 : GroupConfig.GROUP_MAX_DISTANCE)) {
 				QuestEngine.getInstance().onKill(new QuestEnv(owner, member, 0));
 
 				if (member.isMentor()) {

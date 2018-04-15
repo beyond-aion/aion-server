@@ -29,4 +29,10 @@ public class DropConfig {
 	 */
 	@Property(key = "gameserver.drop.no_reduction_maps")
 	public static List<Integer> NO_REDUCTION_MAPS;
+	
+	/**
+	 * Disable range checks for specified maps
+	 */
+	@Property(key = "gameserver.drop.disable_range_check_maps")
+	public static List<Integer> DISABLE_RANGE_CHECK_MAPS;
 }
