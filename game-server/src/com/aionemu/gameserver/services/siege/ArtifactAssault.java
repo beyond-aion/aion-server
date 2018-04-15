@@ -57,7 +57,7 @@ public class ArtifactAssault extends Assault<ArtifactSiege> {
 			case 50:
 				return 277016;
 			default:
-				return 251160;
+				return 251463;
 		}
 	}
 }
