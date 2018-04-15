@@ -150,7 +150,7 @@
 			<gd_item id="114601436" /><!-- Sauro Guard's Sabatons -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Unique)" base_chance="40" fixed_chance="true">
+	<gd_rule rule_name="Named Accessory (Unique)" base_chance="60" fixed_chance="true">
 		<gd_maps>
 			<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
 		</gd_maps>
@@ -275,7 +275,7 @@
 			<gd_item id="114601435" /><!-- Sauren Sabatons -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Epic)" base_chance="20" fixed_chance="true">
+	<gd_rule rule_name="Named Accessory (Epic)" base_chance="30" fixed_chance="true">
 		<gd_maps>
 			<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
 		</gd_maps>
@@ -311,7 +311,7 @@
 			<gd_item id="125003697" chance="2.5" /><!-- Sauren Helm -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Mythic)" base_chance="9" fixed_chance="true">
+	<gd_rule rule_name="Named Weapon (Mythic)" base_chance="12.5" fixed_chance="true">
 		<gd_maps>
 			<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
 		</gd_maps>
@@ -336,7 +336,7 @@
 			<gd_item id="115001624" /><!-- Sauro Commander's Scale Shield -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Mythic)" base_chance="12.5">
+	<gd_rule rule_name="Named Weapon (Mythic)" base_chance="16.5" fixed_chance="true">
 		<gd_maps>
 			<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
 		</gd_maps>
@@ -361,7 +361,7 @@
 			<gd_item id="115001624" /><!-- Sauro Commander's Scale Shield -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Mythic)" base_chance="25">
+	<gd_rule rule_name="Named Armor (Mythic)" base_chance="25" fixed_chance="true">
 		<gd_maps>
 			<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
 		</gd_maps>
@@ -412,7 +412,7 @@
 			<gd_item id="114601433" /><!-- Sauro Commander's Sabatons -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Mythic)" base_chance="10">
+	<gd_rule rule_name="Named Accessory (Mythic)" base_chance="18.6" fixed_chance="true">
 		<gd_maps>
 			<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
 		</gd_maps>
