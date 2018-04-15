@@ -19,6 +19,7 @@ import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.model.instance.StageList;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -219,7 +220,7 @@ public class ShugoImperialTombInstance extends GeneralInstanceHandler {
 				sp(831251, 186.37216f, 226.88597f, 535.81213f, (byte) 0);
 				sp(831250, 169.97723f, 239.81743f, 535.81213f, (byte) 0);
 				sp(831130, 170.58615f, 224.70198f, 535.81213f, (byte) 0);
-				sendMsg(1401582);
+				sendMsg(SM_SYSTEM_MESSAGE.STR_IDEVENT01_S1_START());
 				// Kobolds wave 1
 				sp(219508, 204.39177f, 288.3569f, 550.68805f, (byte) 0, 5000, "3005600001", false);
 				sp(219508, 220.89374f, 275.24585f, 550.68805f, (byte) 0, 5000, "3005600011", false);
@@ -310,7 +311,7 @@ public class ShugoImperialTombInstance extends GeneralInstanceHandler {
 				sp(219508, 221.26567f, 272.89868f, 550.68805f, (byte) 0, 65000, "3005600017", false);
 				break;
 			case START_STAGE_1_PHASE_2:
-				sendMsg(1401664); // The 3rd looting begins in 10 seconds!
+				sendMsg(SM_SYSTEM_MESSAGE.STR_IDEVENT01_PHASE03());
 				sp(219505, 199.23898f, 280.70059f, 550.49426f, (byte) 0);
 				sp(219505, 217.23492f, 266.69803f, 550.49426f, (byte) 0);
 				sp(219544, 210.49338f, 275.42099f, 550.49426f, (byte) 0);
@@ -318,7 +319,7 @@ public class ShugoImperialTombInstance extends GeneralInstanceHandler {
 
 					@Override
 					public void run() {
-						sendMsg(1401665); // Grave Robbers will attack again in 5 seconds!
+						sendMsg(SM_SYSTEM_MESSAGE.STR_IDEVENT01_PHASE04());
 						ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 							@Override
@@ -420,7 +421,7 @@ public class ShugoImperialTombInstance extends GeneralInstanceHandler {
 				sp(831250, 338.8206f, 415.69327f, 294.76065f, (byte) 0);
 				// Transformation device
 				sp(831096, 307.86002f, 433.87598f, 298.31903f, (byte) 0);
-				sendMsg(1401583);
+				sendMsg(SM_SYSTEM_MESSAGE.STR_IDEVENT01_S2_START());
 
 				// Wave 1
 				// side 1
@@ -600,7 +601,7 @@ public class ShugoImperialTombInstance extends GeneralInstanceHandler {
 				break;
 
 			case START_STAGE_2_PHASE_2:
-				sendMsg(1401586); // The 2nd looting begins in 10 seconds!
+				sendMsg(SM_SYSTEM_MESSAGE.STR_IDEVENT01_PHASE());
 				sp(219544, 316.4301f, 431.30615f, 294.58875f, (byte) 0);
 				sp(219505, 319.37946f, 438.7644f, 294.58875f, (byte) 0);
 				sp(219505, 316.30917f, 422.88278f, 294.58875f, (byte) 0);
@@ -608,7 +609,7 @@ public class ShugoImperialTombInstance extends GeneralInstanceHandler {
 
 					@Override
 					public void run() {
-						sendMsg(1401665); // Grave Robbers will attack again in 5 seconds!
+						sendMsg(SM_SYSTEM_MESSAGE.STR_IDEVENT01_PHASE04());
 						ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 							@Override
@@ -746,7 +747,7 @@ public class ShugoImperialTombInstance extends GeneralInstanceHandler {
 				sp(831250, 437.19818f, 119.67343f, 214.33812f, (byte) 0);
 				// Transformation device
 				sp(831097, 410.5438f, 86.79955f, 222.13731f, (byte) 0);
-				sendMsg(1401584);
+				sendMsg(SM_SYSTEM_MESSAGE.STR_IDEVENT01_S3_START());
 
 				// Wave 1
 				// side 1
@@ -904,7 +905,7 @@ public class ShugoImperialTombInstance extends GeneralInstanceHandler {
 				sp(219529, 388.09738f, 104.93561f, 222.41173f, (byte) 0, 55000, "3005600061", true);
 				break;
 			case START_STAGE_3_PHASE_2:
-				sendMsg(1401670); // The last looting begins in 10 seconds!
+				sendMsg(SM_SYSTEM_MESSAGE.STR_IDEVENT01_PHASE09());
 				sp(219543, 425.69678f, 85.350716f, 214.338f, (byte) 0);
 				sp(219544, 418.70923f, 100.76572f, 214.33798f, (byte) 0);
 				sp(219544, 421.16943f, 92.78562f, 214.33856f, (byte) 0);
@@ -912,7 +913,7 @@ public class ShugoImperialTombInstance extends GeneralInstanceHandler {
 
 					@Override
 					public void run() {
-						sendMsg(1401671); // Grave Robbers will attack in again in 5 seconds!
+						sendMsg(SM_SYSTEM_MESSAGE.STR_IDEVENT01_PHASE10());
 						ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 							@Override
@@ -1017,12 +1018,12 @@ public class ShugoImperialTombInstance extends GeneralInstanceHandler {
 		sp(219505, 199.23898f, 280.70059f, 550.49426f, (byte) 0);
 		sp(219505, 217.23492f, 266.69803f, 550.49426f, (byte) 0);
 		sp(219543, 210.49338f, 275.42099f, 550.49426f, (byte) 0);
-		sendMsg(1401586); // The 2nd looting will begin in 10 seconds!
+		sendMsg(SM_SYSTEM_MESSAGE.STR_IDEVENT01_PHASE());
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 			@Override
 			public void run() {
-				sendMsg(1401607); // Grave Robbers will attack again in 5 seconds!
+				sendMsg(SM_SYSTEM_MESSAGE.STR_IDEVENT01_PHASE02());
 				ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 					@Override
@@ -1039,12 +1040,12 @@ public class ShugoImperialTombInstance extends GeneralInstanceHandler {
 		sp(219507, 425.69678f, 85.350716f, 214.338f, (byte) 0);
 		sp(219507, 418.70923f, 100.76572f, 214.33798f, (byte) 0);
 		sp(219544, 421.16943f, 92.78562f, 214.33856f, (byte) 0);
-		sendMsg(1401586); // The 2nd looting will begin in 10 seconds!
+		sendMsg(SM_SYSTEM_MESSAGE.STR_IDEVENT01_PHASE());
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 			@Override
 			public void run() {
-				sendMsg(1401607); // Grave Robbers will attack again in 5 seconds!
+				sendMsg(SM_SYSTEM_MESSAGE.STR_IDEVENT01_PHASE02());
 				ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 					@Override

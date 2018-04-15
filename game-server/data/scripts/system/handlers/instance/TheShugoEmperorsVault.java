@@ -28,7 +28,6 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 
 /**
  * @author Yeats
- *
  */
 @InstanceID(301400000)
 public class TheShugoEmperorsVault extends GeneralInstanceHandler {
@@ -43,12 +42,11 @@ public class TheShugoEmperorsVault extends GeneralInstanceHandler {
 	private int stage = 0;
 	private boolean lastStage = false;
 	private List<Integer> spawns = new ArrayList<>();
-	
-	
+
 	@Override
 	public void onInstanceCreate(WorldMapInstance instance) {
 		super.onInstanceCreate(instance);
-		
+
 		instanceReward = new NormalReward(mapId, instanceId);
 		instanceReward.setInstanceProgressionType(InstanceProgressionType.PREPARING);
 		doors = instance.getDoors();
@@ -67,14 +65,14 @@ public class TheShugoEmperorsVault extends GeneralInstanceHandler {
 			}, 60000);
 		}
 	}
-	
+
 	@Override
 	public void onOpenDoor(int door) {
 		switch (door) {
 			case 430:
 				if (started.compareAndSet(false, true)) {
 					if (timer != null) {
-                        timer.cancel(false);
+						timer.cancel(false);
 					}
 					instanceReward.setInstanceProgressionType(InstanceProgressionType.START_PROGRESS);
 					startTime = System.currentTimeMillis();
@@ -87,7 +85,7 @@ public class TheShugoEmperorsVault extends GeneralInstanceHandler {
 				break;
 		}
 	}
-	
+
 	private void startFailTask() {
 		failTimerTask = ThreadPoolManager.getInstance().schedule(() -> {
 			if (!instanceReward.isRewarded()) {
@@ -100,7 +98,7 @@ public class TheShugoEmperorsVault extends GeneralInstanceHandler {
 		spawnShugos();
 		spawnRoom1();
 	}
-	
+
 	@Override
 	public void onEnterInstance(final Player player) {
 		super.onEnterInstance(player);
@@ -108,7 +106,7 @@ public class TheShugoEmperorsVault extends GeneralInstanceHandler {
 			sendPacket(null, 0);
 		}
 	}
-	
+
 	private void spawnRoom1() {
 		spawn(235629, 543.0397f, 379.352f, 395.5941f, (byte) -29);
 		spawn(235629, 550.9587f, 386.137f, 395.4688f, (byte) -29);
@@ -117,18 +115,18 @@ public class TheShugoEmperorsVault extends GeneralInstanceHandler {
 		spawn(235630, 547.8836f, 396.374f, 395.635f, (byte) -29);
 		spawn(235660, 550.3436f, 394.35f, 395.8965f, (byte) 89);
 	}
-	
+
 	private void spawnRoom2() {
 		spawn(235652, 553.8901f, 458.2198f, 393.7637f, (byte) 82);
 		spawn(235652, 552.2185f, 460.511f, 393.84183f, (byte) 70);
 		spawn(235653, 554.2595f, 460.333f, 394.06946f, (byte) 73);
 		spawn(235653, 543.0456f, 465.201f, 393.7852f, (byte) 4);
-		spawn(235652,  542.338f, 463.762f, 393.91965f, (byte) 5);
+		spawn(235652, 542.338f, 463.762f, 393.91965f, (byte) 5);
 		spawn(235652, 541.4067f, 465.952f, 393.82715f, (byte) 13);
 		spawn(235653, 535.63f, 479.995f, 393.95377f, (byte) 90);
 		spawn(235652, 533.9135f, 478.527f, 393.7392f, (byte) 99);
 		spawn(235652, 534.0383f, 480.717f, 393.7548f, (byte) 94);
-		spawn(235652, 528.2363f, 491.233f, 393.29797f,(byte)113);
+		spawn(235652, 528.2363f, 491.233f, 393.29797f, (byte) 113);
 		spawn(235652, 527.017f, 493.8221f, 393.4868f, (byte) 108);
 		spawn(235653, 529.137f, 493.5578f, 393.375f, (byte) 116);
 		spawn(235652, 539.268f, 535.151f, 394.4232f, (byte) 89);
@@ -142,12 +140,12 @@ public class TheShugoEmperorsVault extends GeneralInstanceHandler {
 		spawn(235652, 525.675f, 543.710f, 394.52032f, (byte) 105);
 		spawn(235644, 530.4512f, 551.6766f, 393.7782f, (byte) 89);
 	}
-	
+
 	private void spawnRoom3() {
 		spawn(235634, 485.096f, 639.773f, 395.92987f, (byte) 94);
 		spawn(832922, 465.98782f, 645.2775f, 395.66122f, (byte) 110);
 	}
-	
+
 	private void spawnRoom4() {
 		respawn(301400000, 235637, 423.61447f, 729.6906f, 398.42203f, (byte) 33, 90);
 		respawn(301400000, 235635, 352.69745f, 712.68024f, 398.42203f, (byte) 15, 90);
@@ -207,28 +205,28 @@ public class TheShugoEmperorsVault extends GeneralInstanceHandler {
 		respawn(301400000, 235680, 359.43243f, 721.8015f, 398.42203f, (byte) 24, 90);
 		respawn(301400000, 235651, 436.61176f, 736.3438f, 398.42203f, (byte) 63, 90);
 	}
-	
+
 	@Override
 	public void onDie(Npc npc) {
 		int npcId = npc.getNpcId();
 		switch (npcId) {
-			case 235629: //Intruder Skirmisher
-			case 235630: //Intruder Scout
+			case 235629: // Intruder Skirmisher
+			case 235630: // Intruder Scout
 				addPoints(npc, 180);
 				break;
-			case 235660: //Ruthless Jabaraki
+			case 235660: // Ruthless Jabaraki
 				addPoints(npc, 1740);
 				doors.get(431).setOpen(true);
 				spawnRoom2();
 				break;
-			case 235631: //Brainwashed Peon
+			case 235631: // Brainwashed Peon
 				addPoints(npc, 160);
 				break;
-			case 235652: //Intruder Warrior
-			case 235653: //Intruder Sharpeye
+			case 235652: // Intruder Warrior
+			case 235653: // Intruder Sharpeye
 				addPoints(npc, 250);
 				break;
-			case 235641: //Shugo Turncoat
+			case 235641: // Shugo Turncoat
 				addPoints(npc, 660);
 				amount++;
 				if (amount >= 2) {
@@ -236,53 +234,53 @@ public class TheShugoEmperorsVault extends GeneralInstanceHandler {
 					spawnRoom3();
 				}
 				break;
-			case 235634: //Watchman Hokuruki
+			case 235634: // Watchman Hokuruki
 				addPoints(npc, 2040);
 				lastStage = true;
 				spawnVaultDoorAndHealingSpring();
 				break;
-			case 235649: //Intruder Sniper
+			case 235649: // Intruder Sniper
 				addPoints(npc, 760);
 				break;
-			case 236083: //Intruder Marksman
-			case 235633: //Intruder Marksman
+			case 236083: // Intruder Marksman
+			case 235633: // Intruder Marksman
 				addPoints(npc, 1070);
 				break;
-			case 235650: //Intruder Assassin
-			case 235635: //Intruder Challenger
-			case 235636: //Intruder Guard
+			case 235650: // Intruder Assassin
+			case 235635: // Intruder Challenger
+			case 235636: // Intruder Guard
 				addPoints(npc, 700);
 				break;
-			case 235637: //Intruder Scrapper
-			case 235638: //Intruder Combatant
+			case 235637: // Intruder Scrapper
+			case 235638: // Intruder Combatant
 				addPoints(npc, 820);
 				break;
-			case 235651: //Intruder Gladiator
+			case 235651: // Intruder Gladiator
 				addPoints(npc, 1400);
 				break;
-			case 235681: //Intruder Lookout
-			case 235680: //Intruder Brawler
+			case 235681: // Intruder Lookout
+			case 235680: // Intruder Brawler
 				addPoints(npc, 530);
 				break;
-			case 235640: //Captain Mirez
+			case 235640: // Captain Mirez
 				addPoints(npc, 12000);
 				stage++;
 				break;
-			case 235685: //Longknife Zodica
+			case 235685: // Longknife Zodica
 				addPoints(npc, 14400);
 				stage++;
 				break;
-			case 235684: //Sorcerer Budyn
+			case 235684: // Sorcerer Budyn
 				addPoints(npc, 16000);
 				stage++;
 				break;
-			case 235683: //Elite captain rupasha
+			case 235683: // Elite captain rupasha
 				addPoints(npc, 88000);
 				stage++;
 				break;
-			case 235647: //Grand Commander Gradi
+			case 235647: // Grand Commander Gradi
 				addPoints(npc, 224000);
-				sendMsg(1402681); //Intruders have fled
+				sendMsg(SM_SYSTEM_MESSAGE.STR_IDSweep_Stage2_End()); // Intruders have fled
 				checkRank(instanceReward.getPoints());
 				break;
 		}
@@ -329,18 +327,18 @@ public class TheShugoEmperorsVault extends GeneralInstanceHandler {
 	}
 
 	private void addPoints(Npc npc, int points) {
-    if (instanceReward.getInstanceProgressionType().isStartProgress()) {
-        instanceReward.addPoints(points);
+		if (instanceReward.getInstanceProgressionType().isStartProgress()) {
+			instanceReward.addPoints(points);
 			sendPacket(npc.getObjectTemplate().getL10n(), points);
-    }
+		}
 	}
-	
+
 	private void spawnCaptainMirez() {
 		spawn(235640, 361.35477f, 757.3215f, 398.42203f, (byte) 105);
 		spawn(235681, 366.179f, 761.93866f, 398.42203f, (byte) 103);
 		spawn(235681, 356.9046f, 753.294f, 398.42203f, (byte) 104);
 	}
-	
+
 	private void spawnLongknifeZodica() {
 		spawn(235680, 368.96704f, 766.34576f, 398.42203f, (byte) 104);
 		spawn(235680, 356.247f, 754.2303f, 398.42203f, (byte) 105);
@@ -348,7 +346,7 @@ public class TheShugoEmperorsVault extends GeneralInstanceHandler {
 		spawn(235680, 365.84665f, 763.2926f, 398.42203f, (byte) 104);
 		spawn(235680, 353.47806f, 751.28973f, 398.42203f, (byte) 105);
 	}
-	
+
 	private void spawnSorcererBudyn() {
 		spawn(235650, 370.77155f, 765.0706f, 398.42203f, (byte) 104);
 		spawn(235684, 362.24368f, 757.7284f, 398.42203f, (byte) 106);
@@ -358,7 +356,7 @@ public class TheShugoEmperorsVault extends GeneralInstanceHandler {
 		spawn(235650, 366.51083f, 761.46844f, 398.42203f, (byte) 104);
 		spawn(235650, 368.6693f, 763.1063f, 398.42203f, (byte) 104);
 	}
-	
+
 	private void spawnEliteCaptainRupasha() {
 		spawn(235637, 371.05835f, 765.09326f, 398.42203f, (byte) 103);
 		spawn(235683, 362.33813f, 757.7157f, 398.42203f, (byte) 105);
@@ -368,7 +366,7 @@ public class TheShugoEmperorsVault extends GeneralInstanceHandler {
 		spawn(235637, 368.85718f, 763.3262f, 398.42203f, (byte) 103);
 		spawn(235637, 366.7636f, 761.72046f, 398.42203f, (byte) 103);
 	}
-	
+
 	private void spawnCommanderGradi() {
 		spawn(235651, 353.5293f, 747.9316f, 398.42203f, (byte) 104);
 		spawn(235651, 356.48816f, 750.8252f, 398.42203f, (byte) 105);
@@ -376,7 +374,7 @@ public class TheShugoEmperorsVault extends GeneralInstanceHandler {
 		spawn(235651, 369.30795f, 763.17236f, 398.42203f, (byte) 104);
 		spawn(235651, 372.4574f, 765.96375f, 398.42203f, (byte) 105);
 	}
-	
+
 	private void spawnVaultDoorAndHealingSpring() {
 		spawn(832925, 469.500f, 658.475f, 397.0672f, (byte) 106);
 		spawn(832919, 464.428f, 640.168f, 395.475f, (byte) 59);
@@ -384,7 +382,7 @@ public class TheShugoEmperorsVault extends GeneralInstanceHandler {
 		spawn(832922, 465.9878f, 645.2775f, 395.6612f, (byte) 110);
 		spawnRoom4();
 	}
-	
+
 	private synchronized void checkRank(int totalPoints) {
 		int rank = 8;
 		if (totalPoints >= 471200) {
@@ -416,28 +414,28 @@ public class TheShugoEmperorsVault extends GeneralInstanceHandler {
 			sendPacket(null, 0);
 			reward();
 			if (rank <= 5) {
-				spawn(832932, 384f, 736f, 398.42203f, (byte) 105); //Shugo Emperor's Butler
+				spawn(832932, 384f, 736f, 398.42203f, (byte) 105); // Shugo Emperor's Butler
 				spawnChests();
 			}
-    }
+		}
 	}
-	
+
 	private void reward() {
 		instance.forEachPlayer(player -> ItemService.addItem(player, instanceReward.getRewardItem1(), instanceReward.getRewardItem1Count()));
 	}
-	
+
 	private void spawnShugos() {
 		spawn(832927, 544.512f, 360.4175f, 396.0757f, (byte) 49);
 		spawn(832927, 551.6949f, 343.4657f, 396.75f, (byte) 49);
 		spawn(832927, 535.149f, 402.6f, 393.756f, (byte) 118);
 	}
-	
+
 	private void spawnMorphShugos() {
 		spawn(833491, 543.808f, 306.197f, 400.387f, (byte) 90);
 		spawn(833492, 548.7077f, 306.5808f, 400.24207f, (byte) 88);
 		spawn(833493, 553.514f, 305.849f, 400.469f, (byte) 75);
 	}
-	
+
 	private void spawnChests() {
 		spawn(832931, 175.04216f, 198.45958f, 395.9671f, (byte) 36);
 		spawn(832930, 161.91292f, 198.62294f, 395.0f, (byte) 23);
@@ -506,16 +504,16 @@ public class TheShugoEmperorsVault extends GeneralInstanceHandler {
 		spawn(832930, 188.49672f, 527.9214f, 395.02612f, (byte) 61);
 		spawn(832930, 174.70316f, 523.2922f, 395.0f, (byte) 57);
 	}
-	
+
 	private void respawn(int mapId, int npcId, float x, float y, float z, byte heading, int respawnTime) {
 		SpawnTemplate template = SpawnEngine.newSpawn(mapId, npcId, x, y, z, heading, respawnTime);
 		SpawnEngine.spawnObject(template, instanceId);
 	}
-	
+
 	private void despawnAll() {
 		instance.getNpcs().stream().filter(npc -> npc != null).filter(npc -> npc.getNpcId() != 832925).forEach(npc -> npc.getController().delete());
 	}
-	
+
 	private void sendPacket(String npcL10n, int points) {
 		instance.getPlayersInside().stream().filter(p -> p != null && p.isOnline()).forEach(p -> {
 			if (npcL10n != null)
@@ -523,26 +521,26 @@ public class TheShugoEmperorsVault extends GeneralInstanceHandler {
 			PacketSendUtility.sendPacket(p, new SM_INSTANCE_SCORE(new TheShugoEmperorsVaultScoreInfo(instanceReward), instanceReward, getTime()));
 		});
 	}
-	
+
 	private int getTime() {
-    long result = System.currentTimeMillis() - startTime;
-    if (instanceReward.getInstanceProgressionType().isPreparing()) {
-        return (int) (60000 - result);
-    } else if (result < 480000) {
-        return (int) (480000 - result);
-    }
-    return 0;
+		long result = System.currentTimeMillis() - startTime;
+		if (instanceReward.getInstanceProgressionType().isPreparing()) {
+			return (int) (60000 - result);
+		} else if (result < 480000) {
+			return (int) (480000 - result);
+		}
+		return 0;
 	}
-	
+
 	@Override
 	public InstanceReward<?> getInstanceReward() {
 		return instanceReward;
 	}
-	
+
 	@Override
 	public boolean onDie(final Player player, Creature lastAttacker) {
 		PacketSendUtility.sendPacket(player, new SM_DIE(false, false, 0, 8));
 		return true;
 	}
-	
+
 }

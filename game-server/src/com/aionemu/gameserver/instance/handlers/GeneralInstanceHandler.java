@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.instance.handlers;
 
-import com.aionemu.gameserver.model.ChatType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Gatherable;
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -98,20 +97,6 @@ public class GeneralInstanceHandler implements InstanceHandler {
 
 	protected Npc getNpc(int npcId) {
 		return instance.getNpc(npcId);
-	}
-
-	/**
-	 * Sends a message to all players in this instance.
-	 */
-	protected void sendMsg(int msg) {
-		sendMsg(new SM_SYSTEM_MESSAGE(ChatType.GOLDEN_YELLOW, null, msg));
-	}
-
-	/**
-	 * Sends a message to all players in this instance.
-	 */
-	protected void sendMsg(int msg, int delay) {
-		sendMsg(new SM_SYSTEM_MESSAGE(ChatType.GOLDEN_YELLOW, null, msg), delay);
 	}
 
 	/**

@@ -16,6 +16,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
@@ -53,20 +54,20 @@ public class TiamatStrongHoldInstance extends GeneralInstanceHandler {
 					thirdWave();
 				break;
 			case 219352: // ex 219400
-				sendMsg(1401614);
+				sendMsg(SM_SYSTEM_MESSAGE.STR_IDTIAMAT_TIAMAT_REWARD_SPAWN());
 				spawn(283177, 1175.65f, 1069.08f, 498.52f, (byte) 0); // ex 283913
 				spawn(701501, 1075.4409f, 1078.5071f, 787.685f, (byte) 16);
 				doors.get(48).setOpen(true);
 				spawnKahrun();
 				break;
 			case 219357:// ex 219405
-				sendMsg(1401614);
+				sendMsg(SM_SYSTEM_MESSAGE.STR_IDTIAMAT_TIAMAT_REWARD_SPAWN());
 				spawn(701501, 1077.1716f, 1058.1995f, 787.685f, (byte) 61);
 				doors.get(37).setOpen(true);
 				isDeadBosses();
 				break;
 			case 219358:// ex 219406
-				sendMsg(1401614);
+				sendMsg(SM_SYSTEM_MESSAGE.STR_IDTIAMAT_TIAMAT_REWARD_SPAWN());
 				spawn(701541, 677.35785f, 1069.5361f, 499.86716f, (byte) 0);
 				spawn(701527, 1073.948f, 1068.8732f, 787.685f, (byte) 61);
 				spawn(730622, 652.4821f, 1069.0302f, 498.7787f, (byte) 0, 82);
@@ -74,20 +75,20 @@ public class TiamatStrongHoldInstance extends GeneralInstanceHandler {
 				isDeadBosses();
 				break;
 			case 219353:// ex 219401
-				sendMsg(1401614);
+				sendMsg(SM_SYSTEM_MESSAGE.STR_IDTIAMAT_TIAMAT_REWARD_SPAWN());
 				spawn(701501, 1071.5909f, 1040.6797f, 787.685f, (byte) 23);
 				doors.get(711).setOpen(true);
 				isDeadBosses();
 				break;
 			case 219354:// ex 219402
-				sendMsg(1401614);
+				sendMsg(SM_SYSTEM_MESSAGE.STR_IDTIAMAT_TIAMAT_REWARD_SPAWN());
 				spawn(283179, 1030.03f, 301.83f, 411f, (byte) 26);// ex 283914
 				spawn(701501, 1086.274f, 1098.3997f, 787.685f, (byte) 90);
 				spawn(730622, 1029.792f, 267.0502f, 409.7982f, (byte) 0, 83);
 				isDeadBosses();
 				break;
 			case 219355:// ex 219403
-				sendMsg(1401614);
+				sendMsg(SM_SYSTEM_MESSAGE.STR_IDTIAMAT_TIAMAT_REWARD_SPAWN());
 				spawn(701501, 1063.5973f, 1092.7402f, 787.685f, (byte) 107);
 				doors.get(51).setOpen(true);
 				doors.get(54).setOpen(true);
@@ -97,7 +98,7 @@ public class TiamatStrongHoldInstance extends GeneralInstanceHandler {
 				isDeadBosses();
 				break;
 			case 219356:// ex 219404
-				sendMsg(1401614);
+				sendMsg(SM_SYSTEM_MESSAGE.STR_IDTIAMAT_TIAMAT_REWARD_SPAWN());
 				spawn(701501, 1099.8691f, 1047.1895f, 787.685f, (byte) 64);
 				spawn(730622, 644.4221f, 1319.6221f, 488.7422f, (byte) 0, 15);
 				spawn(800438, 665.63409f, 1319.7051f, 487.9f, (byte) 61);

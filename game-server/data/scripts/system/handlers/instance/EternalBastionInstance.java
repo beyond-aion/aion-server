@@ -123,7 +123,7 @@ public class EternalBastionInstance extends GeneralInstanceHandler {
 			case 230757:
 			case 230754:
 				addPoints(npc, 1002);
-				sendMsg(1401940);
+				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDLDF5b_TD_Notice_06());
 				killedOfficer.incrementAndGet();
 				if (killedOfficer.compareAndSet(5, 0)) {
 					cancelBombersTask();
@@ -136,11 +136,11 @@ public class EternalBastionInstance extends GeneralInstanceHandler {
 				break;
 			case 831333:
 				addPoints(npc, -1350);
-				sendMsg(1401826);
+				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDLDF5b_TD_Notice_04());
 				break;
 			case 831335:
 				addPoints(npc, -1350);
-				sendMsg(1401824);
+				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDLDF5b_TD_Notice_02());
 				cancelBombersTask();
 				break;
 			case 209516:
@@ -307,27 +307,27 @@ public class EternalBastionInstance extends GeneralInstanceHandler {
 			switch (phase) {
 				case 1:
 					final Npc wall = instance.getNpc(831335);
-					sendMsg(1401816);// START 2 phase
+					sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDLDF5b_TD_MainWave_02());// START 2 phase
 					rndSpawn((Npc) spawn(231171, 655.75482f, 212.60637f, 225.09502f, (byte) 80), 233315, 2);
 					ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 						@Override
 						public void run() {
 							instance.getNpc(231171).getAggroList().addHate(wall, 1000);
-							sendMsg(1401823);
+							sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDLDF5b_TD_Notice_01());
 						}
 					}, 1500);
 					rndSpawn((Npc) spawn(231172, 581.7766f, 377.6639f, 225.5279f, (byte) 110), 233313, 2);
 					rndSpawn((Npc) spawn(231173, 800.51465f, 469.41602f, 226.03f, (byte) 90), 233315, 2);
 					break;
 				case 2:
-					sendMsg(1401817);// START 3 phase
+					sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDLDF5b_TD_MainWave_03());// START 3 phase
 					spawn(231174, 669.85052f, 468.26706f, 225.25f, (byte) 80);
 					spawn(231175, 583.83014f, 373.8118f, 225.28f, (byte) 110);
 					spawn(231176, 760.21906f, 392.47076f, 247.1223f, (byte) 50);
 					break;
 				case 3:
-					sendMsg(1401818);// START 4 phase
+					sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDLDF5b_TD_MainWave_04());// START 4 phase
 					spawn(231143, 613.2310f, 262.16318f, 227.25543f, (byte) 3);
 					spawn(231152, 608.371f, 303.51367f, 226.29489f, (byte) 113);
 					spawn(231153, 625.2439f, 352.62399f, 226.29483f, (byte) 113);
@@ -335,7 +335,7 @@ public class EternalBastionInstance extends GeneralInstanceHandler {
 					spawn(231155, 691.53613f, 409.36713f, 231.72017f, (byte) 98);
 					break;
 				case 4:
-					sendMsg(1401819);// final phase
+					sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDLDF5b_TD_MainWave_05());// final phase
 					spawn(231130, 740.66846f, 298.08191f, 237.59772f, (byte) 100);
 					spawn(231133, 713.24158f, 289.97089f, 250.80768f, (byte) 0);
 					spawn(231133, 745.82031f, 322.91565f, 253.1721f, (byte) 90);
@@ -436,7 +436,7 @@ public class EternalBastionInstance extends GeneralInstanceHandler {
 					startAssaultsMobsTask();
 					startBombersTask();
 					startFailTask();
-					sendMsg(1401815);
+					sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDLDF5b_TD_MainWave_01());
 				}
 			}, START_DELAY + 2000);
 		}
@@ -447,7 +447,7 @@ public class EternalBastionInstance extends GeneralInstanceHandler {
 
 			@Override
 			public void run() {
-				sendMsg(1401939);
+				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDLDF5b_TD_MainWave_06());
 				checkRank(0);
 			}
 		}, 1800000);
@@ -617,7 +617,7 @@ public class EternalBastionInstance extends GeneralInstanceHandler {
 	}
 
 	private void spawnBombers() {
-		sendMsg(1401825);
+		sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDLDF5b_TD_Notice_03());
 		if (getTime() > 60000 * 15) {
 			spawn(231142, 801.82086f, 410.5512f, 232.53445f, (byte) 82);
 			spawn(231142, 794.6926f, 416.54745f, 232.25f, (byte) 64);
@@ -659,8 +659,8 @@ public class EternalBastionInstance extends GeneralInstanceHandler {
 		float direction = Rnd.get(0, 199) / 100f;
 		float x1 = (float) (Math.cos(Math.PI * direction) * 5);
 		float y1 = (float) (Math.sin(Math.PI * direction) * 5);
-		return SpawnEngine.newSingleTimeSpawn(instance.getMapId(), npcId, npc.getPosition().getX() + x1, npc.getPosition().getY() + y1, npc
-			.getPosition().getZ(), npc.getPosition().getHeading());
+		return SpawnEngine.newSingleTimeSpawn(instance.getMapId(), npcId, npc.getPosition().getX() + x1, npc.getPosition().getY() + y1,
+			npc.getPosition().getZ(), npc.getPosition().getHeading());
 	}
 
 	private void openDoors() {

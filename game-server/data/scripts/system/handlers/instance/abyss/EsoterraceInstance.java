@@ -46,20 +46,20 @@ public class EsoterraceInstance extends GeneralInstanceHandler {
 				openDoor(39);
 				break;
 			case 282291: // Surkana Feeder enables "hardmode"
-				sendMsg(1400996);
+				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDF4Re_Drana_08());
 				getNpc(217204).getController().delete();
 				spawn(217205, 1315.43f, 1171.04f, 51.8054f, (byte) 66);
 				break;
 			case 217289:
-				sendMsg(1400924);
+				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDF4Re_Drana_07());
 				openDoor(122);
 				break;
 			case 217281:
-				sendMsg(1400921);
+				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDF4Re_Drana_04());
 				openDoor(70);
 				break;
 			case 217195:
-				sendMsg(1400922);
+				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDF4Re_Drana_05());
 				openDoor(45);
 				openDoor(52);
 				openDoor(67);
@@ -93,7 +93,7 @@ public class EsoterraceInstance extends GeneralInstanceHandler {
 				Npc npc2 = getNpc(217283);
 				Npc npc3 = getNpc(217282);
 				if (isDead(npc1) && isDead(npc2) && isDead(npc3)) {
-					sendMsg(1400920);
+					sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDF4Re_Drana_03());
 					openDoor(111);
 				}
 				break;

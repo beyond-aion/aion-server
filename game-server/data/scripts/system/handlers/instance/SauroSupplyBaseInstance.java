@@ -11,6 +11,7 @@ import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.StaticDoor;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.WorldPosition;
@@ -94,35 +95,35 @@ public class SauroSupplyBaseInstance extends GeneralInstanceHandler {
 	public void onDie(Npc npc) {
 		switch (npc.getNpcId()) {
 			case 230837:
-				sendMsg(1401916);
+				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDVritra_Base_DoorOpen_03());
 				doors.get(372).setOpen(true);
 				break;
 			case 230849:
-				sendMsg(1401914);
+				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDVritra_Base_DoorOpen_01());
 				doors.get(383).setOpen(true);
 				break;
 			case 230850:
-				sendMsg(1401917);
+				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDVritra_Base_DoorOpen_04());
 				doors.get(375).setOpen(true);
 				break;
 			case 230851:
-				sendMsg(1401915);
+				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDVritra_Base_DoorOpen_02());
 				doors.get(59).setOpen(true);
 				break;
 			case 230852: // Ranodim
-				sendMsg(1401919);
+				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDVritra_Base_DoorOpen_06());
 				doors.get(388).setOpen(true);
 				break;
 			case 233255:
-				sendMsg(1401918);
+				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDVritra_Base_DoorOpen_05());
 				doors.get(378).setOpen(true);
 				break;
 			case 230838:
-				sendMsg(1401920);
+				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDVritra_Base_DoorOpen_07());
 				doors.get(376).setOpen(true);
 				break;
 			case 230853:
-				sendMsg(1401921);
+				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDVritra_Base_DoorOpen_08());
 				spawn(730872, 129.16417f, 432.32669f, 153.33147f, (byte) 2, 3);// Boss Teleporter
 				break;
 			case 230854:

@@ -63,8 +63,8 @@ public class EngulfedOphidianBridgeInstance extends GeneralInstanceHandler {
 			addPlayerToReward(player);
 		}
 		sendPacket(new SM_INSTANCE_SCORE(new EngulfedOphidianBridgeScoreInfo(engulfedOBReward, 3, player.getObjectId()), engulfedOBReward, getTime()));
-		PacketSendUtility.sendPacket(player, new SM_INSTANCE_SCORE(new EngulfedOphidianBridgeScoreInfo(engulfedOBReward, 6, player.getObjectId()),
-			engulfedOBReward, getTime()));
+		PacketSendUtility.sendPacket(player,
+			new SM_INSTANCE_SCORE(new EngulfedOphidianBridgeScoreInfo(engulfedOBReward, 6, player.getObjectId()), engulfedOBReward, getTime()));
 		// sendPacket();
 	}
 
@@ -127,18 +127,18 @@ public class EngulfedOphidianBridgeInstance extends GeneralInstanceHandler {
 						} else if (!instance.getNpcs(802043).isEmpty()) { // Asmo
 							spawn(702044, 499.52756f, 522.5279f, 597.6485f, (byte) 25); // Bridge
 						}
-						sendMsg(1401968);
+						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_GuardDarkHeroTrigger_Spawn_IDLDF5_Under_01_War());
 						spawn((racePosition == 0 ? 701988 : 701989), 758.5892f, 564.36304f, 576.8448f, (byte) 83);
 						spawn((racePosition == 0 ? 701984 : 701985), 761.9165f, 561.8183f, 577.1422f, (byte) 83);
 						spawn((racePosition == 0 ? 701986 : 701987), 754.92f, 563.0107f, 577.17413f, (byte) 83);
 						spawn((racePosition == 0 ? 701989 : 701988), 320.97195f, 490.1614f, 596.14105f, (byte) 0);
 						spawn((racePosition == 0 ? 701985 : 701984), 320.28528f, 494.81866f, 596.2401f, (byte) 0);
 						spawn((racePosition == 0 ? 701987 : 701986), 320.01007f, 485.90097f, 596.2371f, (byte) 0);
-						sendMsg(1402086);
+						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDLDF5_Under_01_War_Drop_MSG_01());
 						break;
 					case 480: // 8 minutes
 						spawn(701976, 575.5561f, 477.6238f, 620.8339f, (byte) 0); // hidden box supply
-						sendMsg(1402086);
+						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDLDF5_Under_01_War_Drop_MSG_01());
 						break;
 					case 600: // 10 minutes
 						if (!instance.getNpcs(802038).isEmpty()) { // BALAUR
@@ -169,10 +169,10 @@ public class EngulfedOphidianBridgeInstance extends GeneralInstanceHandler {
 						} else if (!instance.getNpcs(802043).isEmpty()) { // Asmo
 							spawn(702044, 499.61383f, 552.3009f, 597.6485f, (byte) 25); // Bridge
 						}
-						sendMsg(1401968);
+						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_GuardDarkHeroTrigger_Spawn_IDLDF5_Under_01_War());
 						spawn(702018, 759.98627f, 549.6435f, 577.5169f, (byte) 30); // supply box
 						spawn(702018, 332.92816f, 486.6423f, 596.86804f, (byte) 0); // supply box
-						sendMsg(1401965);
+						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_GUARDLIGHTHERO_SPAWN_IDLDF5_UNDER_01_WAR());
 						if (racePosition == 0) {
 							spawn(233491, 612.2644f, 569.6577f, 590.75f, (byte) 77); // Captain Avran
 							spawn(233490, 615.8132f, 568.7348f, 590.75f, (byte) 77); // Avran crusher
@@ -212,14 +212,14 @@ public class EngulfedOphidianBridgeInstance extends GeneralInstanceHandler {
 						} else if (!instance.getNpcs(802043).isEmpty()) { // Asmo
 							spawn(702044, 475.17694f, 541.69165f, 597.5f, (byte) 25); // Bridge
 						}
-						sendMsg(1401968);
+						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_GuardDarkHeroTrigger_Spawn_IDLDF5_Under_01_War());
 						spawn(702018, 752.6556f, 550.7634f, 577.52795f, (byte) 30); // supply box
 						spawn(702018, 332.7056f, 494.46088f, 596.86206f, (byte) 0); // supply box
-						sendMsg(1401965);
+						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_GUARDLIGHTHERO_SPAWN_IDLDF5_UNDER_01_WAR());
 						break;
 					case 960: // 16 minutes
 						spawn(701976, 619.3583f, 515.6447f, 592.1339f, (byte) 0); // hidden box supply
-						sendMsg(1402086);
+						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDLDF5_Under_01_War_Drop_MSG_01());
 						break;
 					case 1500: // 25 minutes
 						if (timeCheckTask != null && !timeCheckTask.isDone()) {
@@ -264,7 +264,8 @@ public class EngulfedOphidianBridgeInstance extends GeneralInstanceHandler {
 					reward.setGloryPoints(10);
 					reward.setBaseReward(EngulfedOphidianBridgeReward.looserPoints);
 				}
-				sendPacket(new SM_INSTANCE_SCORE(new EngulfedOphidianBridgeScoreInfo(engulfedOBReward, 5, player.getObjectId()), engulfedOBReward, getTime()));
+				sendPacket(
+					new SM_INSTANCE_SCORE(new EngulfedOphidianBridgeScoreInfo(engulfedOBReward, 5, player.getObjectId()), engulfedOBReward, getTime()));
 				AbyssPointsService.addAp(player, reward.getBaseReward() + reward.getBonusReward());
 				GloryPointsService.addGp(player, reward.getGloryPoints());
 				if (reward.getOphidianBox() > 0) {
@@ -320,8 +321,8 @@ public class EngulfedOphidianBridgeInstance extends GeneralInstanceHandler {
 		if (npcL10n != null)
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_GET_SCORE(npcL10n, points));
 		engulfedOBReward.addPointsByRace(race, points);
-		sendPacket(new SM_INSTANCE_SCORE(new EngulfedOphidianBridgeScoreInfo(engulfedOBReward, 10, race.equals(Race.ELYOS) ? 0 : 1), engulfedOBReward,
-			getTime()));
+		sendPacket(
+			new SM_INSTANCE_SCORE(new EngulfedOphidianBridgeScoreInfo(engulfedOBReward, 10, race.equals(Race.ELYOS) ? 0 : 1), engulfedOBReward, getTime()));
 		int diff = Math.abs(engulfedOBReward.getAsmodiansPoint().intValue() - engulfedOBReward.getElyosPoints().intValue());
 		if (diff >= 30000) {
 			stopInstance();
@@ -336,8 +337,8 @@ public class EngulfedOphidianBridgeInstance extends GeneralInstanceHandler {
 		int points = generators.size() * 100;
 		sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_GET_SCORE(generators.get(0).getObjectTemplate().getL10n(), points));
 		engulfedOBReward.addPointsByRace(race, points);
-		sendPacket(new SM_INSTANCE_SCORE(new EngulfedOphidianBridgeScoreInfo(engulfedOBReward, 10, race.equals(Race.ELYOS) ? 0 : 1), engulfedOBReward,
-			getTime()));
+		sendPacket(
+			new SM_INSTANCE_SCORE(new EngulfedOphidianBridgeScoreInfo(engulfedOBReward, 10, race.equals(Race.ELYOS) ? 0 : 1), engulfedOBReward, getTime()));
 		int diff = Math.abs(engulfedOBReward.getAsmodiansPoint().intValue() - engulfedOBReward.getElyosPoints().intValue());
 		if (diff >= 30000) {
 			stopInstance();
@@ -438,7 +439,7 @@ public class EngulfedOphidianBridgeInstance extends GeneralInstanceHandler {
 		if (npc.getNpcId() == 701945 || npc.getNpcId() == 701944 || npc.getNpcId() == 701943) {
 			int npcId = player.getRace() == Race.ELYOS ? 701943 : 701944;
 			if (npc.getRace() == player.getRace()) {
-				sendMsg(1402007);
+				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_Base_IDLDF5_Under_01_War_Flag02());
 				return;
 			}
 			switch (npc.getSpawn().getStaticId()) {
@@ -554,8 +555,8 @@ public class EngulfedOphidianBridgeInstance extends GeneralInstanceHandler {
 				updatePoints(killPoints, lastAttacker.getRace(), true, null, (Player) lastAttacker);
 				PacketSendUtility.sendPacket((Player) lastAttacker, new SM_SYSTEM_MESSAGE(1400277, killPoints));
 				engulfedOBReward.getKillsByRace(lastAttacker.getRace()).increment();
-				sendPacket(new SM_INSTANCE_SCORE(
-					new EngulfedOphidianBridgeScoreInfo(engulfedOBReward, 10, lastAttacker.getRace().equals(Race.ELYOS) ? 0 : 1), engulfedOBReward, getTime()));
+				sendPacket(new SM_INSTANCE_SCORE(new EngulfedOphidianBridgeScoreInfo(engulfedOBReward, 10, lastAttacker.getRace().equals(Race.ELYOS) ? 0 : 1),
+					engulfedOBReward, getTime()));
 			}
 		}
 		updatePoints(-100, player.getRace(), true, null, player);

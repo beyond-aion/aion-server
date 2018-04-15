@@ -24891,6 +24891,27 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	}
 
 	/**
+	 * The door to Ashunatal's Ready Room is now open. You can see Ashunatal behind the door.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDStation_3FDoor_322() {
+		return new SM_SYSTEM_MESSAGE(1401048);
+	}
+
+	/**
+	 * The door of the Aircrew Room is now open. Kill the Drakan!
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDStation_3FDoor_312() {
+		return new SM_SYSTEM_MESSAGE(1401049);
+	}
+
+	/**
+	 * Alarms rang in the Waiting Room. High-powered Drakan are heading your way!
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDStation_3FDoor_311() {
+		return new SM_SYSTEM_MESSAGE(1401050);
+	}
+
+	/**
 	 * You have been disconnected from the Bid Withdrawal Server. Please try again later.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_ITEM_BILLING_SERVER_DOWN_SA2() {
@@ -25841,12 +25862,109 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	public static final SM_SYSTEM_MESSAGE STR_CASTLE_LOOSE_BUFF_ON(String value0, String value1, String value2) {
 		return new SM_SYSTEM_MESSAGE(1401575, value0, value1, value2);
 	}
+	
+	/**
+	 * You need the Emperor's Golden Tag to move.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_IDEVENT01_GOLD_MAP() {
+		return new SM_SYSTEM_MESSAGE(1401579);
+	}
+	/**
+	 * You need the Empress' Silver Tag to move.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_IDEVENT01_SILVER_MAP() {
+		return new SM_SYSTEM_MESSAGE(1401580);
+	}
+	/**
+	 * You need the Crown Prince's Brass Tag to move.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_IDEVENT01_BRONZE_MAP() {
+		return new SM_SYSTEM_MESSAGE(1401581);
+	}
+	/**
+	 * Pillagers incoming. Guard the Crown Prince's Monument!
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_IDEVENT01_S1_START() {
+		return new SM_SYSTEM_MESSAGE(1401582);
+	}
+	/**
+	 * Pillagers incoming. Guard the Empress' Monument!
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_IDEVENT01_S2_START() {
+		return new SM_SYSTEM_MESSAGE(1401583);
+	}
+	/**
+	 * Pillagers incoming. Guard the Emperor's Monument!
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_IDEVENT01_S3_START() {
+		return new SM_SYSTEM_MESSAGE(1401584);
+	}
+	/**
+	 * Take the treasure with the key you're carrying.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_IDEVENT01_TB_START() {
+		return new SM_SYSTEM_MESSAGE(1401585);
+	}
+	/**
+	 * A second wave of pillagers will arrive in 10 seconds!
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_IDEVENT01_PHASE() {
+		return new SM_SYSTEM_MESSAGE(1401586);
+	}
+	/**
+	 * You need a key to open this box.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_IDEVENT01_TREASUREBOX() {
+		return new SM_SYSTEM_MESSAGE(1401587);
+	}
+	
+	/**
+	 * More pillagers will arrive in 5 seconds!
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_IDEVENT01_PHASE02() {
+		return new SM_SYSTEM_MESSAGE(1401607);
+	}
+
+	/**
+	 * A Balaur Medal Chest appeared in the Noble's Garden.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_IDTIAMAT_TIAMAT_REWARD_SPAWN() {
+		return new SM_SYSTEM_MESSAGE(1401614);
+	}
 
 	/**
 	 * The Idian level is too high for the selected item.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_POLISH_WRONG_LEVEL() {
 		return new SM_SYSTEM_MESSAGE(1401649);
+	}
+	
+	/**
+	 * A third wave of pillagers will arrive in 10 seconds!
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_IDEVENT01_PHASE03() {
+		return new SM_SYSTEM_MESSAGE(1401664);
+	}
+	
+	/**
+	 * More pillagers will arrive in 5 seconds!
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_IDEVENT01_PHASE04() {
+		return new SM_SYSTEM_MESSAGE(1401665);
+	}
+	
+	/**
+	 * The final wave of pillagers will arrive in 10 seconds!
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_IDEVENT01_PHASE09() {
+		return new SM_SYSTEM_MESSAGE(1401670);
+	}
+	
+	/**
+	 * More pillagers will arrive in 5 seconds!
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_IDEVENT01_PHASE10() {
+		return new SM_SYSTEM_MESSAGE(1401671);
 	}
 
 	/**
@@ -25934,6 +26052,174 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	}
 
 	/**
+	 * The Pashid Legion's 1st Siege Troop is attacking the Bastion's gates.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDLDF5b_TD_MainWave_01() {
+		return new SM_SYSTEM_MESSAGE(1401815);
+	}
+
+	/**
+	 * The Pashid Legion's 2nd Siege Troop is attacking the Bastion's gates.<
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDLDF5b_TD_MainWave_02() {
+		return new SM_SYSTEM_MESSAGE(1401816);
+	}
+
+	/**
+	 * The Pashid Legion's 3rd Siege Troop is attacking the Bastion's gates.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDLDF5b_TD_MainWave_03() {
+		return new SM_SYSTEM_MESSAGE(1401817);
+	}
+
+	/**
+	 * The Pashid Legion's Sheban Siege Troop is attacking the Bastion's gates.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDLDF5b_TD_MainWave_04() {
+		return new SM_SYSTEM_MESSAGE(1401818);
+	}
+
+	/**
+	 * Grand Commander Pashid has arrived with the Guard to assault the fortress.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDLDF5b_TD_MainWave_05() {
+		return new SM_SYSTEM_MESSAGE(1401819);
+	}
+
+	/**
+	 * One of the assault machines is faltering and will collapse within the Eternal Bastion.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDLDF5b_TD_AddWave_01() {
+		return new SM_SYSTEM_MESSAGE(1401820);
+	}
+
+	/**
+	 * Another assault machine has been hit and will crash within the Bastion's wall.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDLDF5b_TD_AddWave_02() {
+		return new SM_SYSTEM_MESSAGE(1401821);
+	}
+
+	/**
+	 * Another assault machine has been hit and will crash within the Bastion's wall.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDLDF5b_TD_AddWave_03() {
+		return new SM_SYSTEM_MESSAGE(1401822);
+	}
+
+	/**
+	 * The Pashid Legion is attacking the underground waterway.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDLDF5b_TD_Notice_01() {
+		return new SM_SYSTEM_MESSAGE(1401823);
+	}
+
+	/**
+	 * The Pashid Legion has destroyed the gate at the underground wateray.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDLDF5b_TD_Notice_02() {
+		return new SM_SYSTEM_MESSAGE(1401824);
+	}
+
+	/**
+	 * The Pashid Legion is attacking the Eternal Bastion's walls.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDLDF5b_TD_Notice_03() {
+		return new SM_SYSTEM_MESSAGE(1401825);
+	}
+
+	/**
+	 * The Bastion has been breached. The Pashid Legion is flooding through the hole.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDLDF5b_TD_Notice_04() {
+		return new SM_SYSTEM_MESSAGE(1401826);
+	}
+
+	/**
+	 * Reian Tribe supplies have been deposited in Peace Square.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDKamar_YunSupply_Spawn() {
+		return new SM_SYSTEM_MESSAGE(1401840);
+	}
+
+	/**
+	 * A Cannon has arrived in Peace Square.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDKamar_SeigeWeapon_Spawn() {
+		return new SM_SYSTEM_MESSAGE(1401841);
+	}
+
+	/**
+	 * The Dredgion has appeared.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDKamar_Dreadgion_Spawn() {
+		return new SM_SYSTEM_MESSAGE(1401842);
+	}
+
+	/**
+	 * The Dredgion is disgorging a massive number of troops.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDKamar_DrakanH_Spawn() {
+		return new SM_SYSTEM_MESSAGE(1401843);
+	}
+
+	/**
+	 * Commander Varga and his Deputy have arrived at the battle.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDKamar_DrakanGeneral_Spawn() {
+		return new SM_SYSTEM_MESSAGE(1401844);
+	}
+
+	/**
+	 * Commander Varga is under attack.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDKamar_DrakanGeneral_Hit() {
+		return new SM_SYSTEM_MESSAGE(1401845);
+	}
+
+	/**
+	 * Commander Varga has died.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDKamar_DrakanGeneral_Die() {
+		return new SM_SYSTEM_MESSAGE(1401846);
+	}
+
+	/**
+	 * Reinforcements for the Elyos and Asmodians have arrived.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDKamar_LightDarkGeneral_Spawn() {
+		return new SM_SYSTEM_MESSAGE(1401847);
+	}
+
+	/**
+	 * Acting Commander Crispin is under attack.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDKamar_LightGeneral_Hit() {
+		return new SM_SYSTEM_MESSAGE(1401848);
+	}
+
+	/**
+	 * Acting Commander Crispin has died.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDKamar_LightGeneral_Die() {
+		return new SM_SYSTEM_MESSAGE(1401849);
+	}
+
+	/**
+	 * Acting Commander Tepes is under attack.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDKamar_DarkGeneral_Hit() {
+		return new SM_SYSTEM_MESSAGE(1401850);
+	}
+
+	/**
+	 * Acting Commander Tepes has died.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDKamar_DarkGeneral_Die() {
+		return new SM_SYSTEM_MESSAGE(1401851);
+	}
+
+	/**
 	 * You spent %num0 Item.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_USEITEM(int num0) {
@@ -25945,6 +26231,76 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_IDRUNEWP_USER_KILL() {
 		return new SM_SYSTEM_MESSAGE(1401909);
+	}
+
+	/**
+	 * Teleport Statues have appeared at the entrance to Kamar and the boarding site.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDKamar_StartTeleporter_Spawn() {
+		return new SM_SYSTEM_MESSAGE(1401913);
+	}
+
+	/**
+	 * The door to the Defiled Danuar Temple has opened.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDVritra_Base_DoorOpen_01() {
+		return new SM_SYSTEM_MESSAGE(1401914);
+	}
+
+	/**
+	 * The door to the Danuar Meditation Garden has opened.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDVritra_Base_DoorOpen_02() {
+		return new SM_SYSTEM_MESSAGE(1401915);
+	}
+
+	/**
+	 * The door to the Head Researcher's Office has opened.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDVritra_Base_DoorOpen_03() {
+		return new SM_SYSTEM_MESSAGE(1401916);
+	}
+
+	/**
+	 * The door to the Lost Tree of Devotion has opened.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDVritra_Base_DoorOpen_04() {
+		return new SM_SYSTEM_MESSAGE(1401917);
+	}
+
+	/**
+	 * The door to the Sauro Armory has opened.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDVritra_Base_DoorOpen_05() {
+		return new SM_SYSTEM_MESSAGE(1401918);
+	}
+
+	/**
+	 * The door to the Heavy Storage Area has opened.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDVritra_Base_DoorOpen_06() {
+		return new SM_SYSTEM_MESSAGE(1401919);
+	}
+
+	/**
+	 * The door to Moriata's Quarters has opened.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDVritra_Base_DoorOpen_07() {
+		return new SM_SYSTEM_MESSAGE(1401920);
+	}
+
+	/**
+	 * A device leading to the Danuar Omphanium has been activated.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDVritra_Base_DoorOpen_08() {
+		return new SM_SYSTEM_MESSAGE(1401921);
+	}
+
+	/**
+	 * The passage to the Danuar Omphanium will be open for five minutes.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDVritra_Base_DoorOpen_09() {
+		return new SM_SYSTEM_MESSAGE(1401922);
 	}
 
 	/**
@@ -25962,6 +26318,20 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	}
 
 	/**
+	 * The Eternal Bastion defenders have withdrawn in preparation of Pashid's assault.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDLDF5b_TD_MainWave_06() {
+		return new SM_SYSTEM_MESSAGE(1401939);
+	}
+
+	/**
+	 * The commander of the garrison has been killed. The assault force is no longer coordinated and is in retreat.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDLDF5b_TD_Notice_06() {
+		return new SM_SYSTEM_MESSAGE(1401940);
+	}
+
+	/**
 	 * Supplies have been delivered to some of the sentry posts.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_GUARDLIGHTHERO_SPAWN_IDLDF5_UNDER_01_WAR() {
@@ -25969,10 +26339,24 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	}
 
 	/**
+	 * A hero and their reinforcements have been spotted at the starting point.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_GuardDarkHeroTrigger_Spawn_IDLDF5_Under_01_War() {
+		return new SM_SYSTEM_MESSAGE(1401968);
+	}
+
+	/**
 	 * You can't open any private shops as long as you remain hidden.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_PERSONAL_SHOP_DISABLED_IN_HIDDEN_MODE() {
 		return new SM_SYSTEM_MESSAGE(1401969);
+	}
+
+	/**
+	 * This sentry post has already been captured.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_Base_IDLDF5_Under_01_War_Flag02() {
+		return new SM_SYSTEM_MESSAGE(1402007);
 	}
 
 	/**
@@ -26064,6 +26448,13 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_GLORY_POINT_LOSE_COMMON() {
 		return new SM_SYSTEM_MESSAGE(1402082);
+	}
+
+	/**
+	 * Supplies have been dropped in a confidential area.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDLDF5_Under_01_War_Drop_MSG_01() {
+		return new SM_SYSTEM_MESSAGE(1402086);
 	}
 
 	/**
@@ -26720,6 +27111,55 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	}
 
 	/**
+	 * You have entered the Linkgate Foundry. Monsters in the lab, except Belsagos, will disappear in 20 minutes.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDLDF4_Re_01_Time_01() {
+		return new SM_SYSTEM_MESSAGE(1402453);
+	}
+
+	/**
+	 * Monsters in the lab, except Belsagos, will disappear in 15 minutes.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDLDF4_Re_01_Time_02() {
+		return new SM_SYSTEM_MESSAGE(1402454);
+	}
+
+	/**
+	 * Monsters in the lab, except Belsagos, will disappear in 10 minutes.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDLDF4_Re_01_Time_03() {
+		return new SM_SYSTEM_MESSAGE(1402455);
+	}
+
+	/**
+	 * Monsters in the lab, except Belsagos, will disappear in 5 minutes.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDLDF4_Re_01_Time_04() {
+		return new SM_SYSTEM_MESSAGE(1402456);
+	}
+
+	/**
+	 * Monsters in the lab, except Belsagos, will disappear in 3 minutes.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDLDF4_Re_01_Time_05() {
+		return new SM_SYSTEM_MESSAGE(1402457);
+	}
+
+	/**
+	 * Monsters in the lab, except Belsagos, will disappear in 1 minutes.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDLDF4_Re_01_Time_06() {
+		return new SM_SYSTEM_MESSAGE(1402458);
+	}
+
+	/**
+	 * All monsters except Belsagos have disappeared from the Linkgate Foundry.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDLDF4_Re_01_Time_07() {
+		return new SM_SYSTEM_MESSAGE(1402461);
+	}
+
+	/**
 	 * Release Berserk Anoha
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_LDF5_FORTRESS_NAMED_SPAWN() {
@@ -27112,6 +27552,13 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	}
 
 	/**
+	 * The Secret Lab's location was revealed three times. Nothing remains in the lab and the researchers have fled.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDLDF4_Re_01_secret_room_03() {
+		return new SM_SYSTEM_MESSAGE(1402603);
+	}
+
+	/**
 	 * The Advance Corridor Shield has been activated.
 	 * If the protection device is destroyed, the corridor will disappear and you will return to the fortress.
 	 */
@@ -27239,6 +27686,13 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_ENCHANT_TYPE1_ENCHANT_FAIL(String value0) {
 		return new SM_SYSTEM_MESSAGE(1402674, value0);
+	}
+
+	/**
+	 * All the intruders have fled. You've cleared the Vault!
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_IDSweep_Stage2_End() {
+		return new SM_SYSTEM_MESSAGE(1402681);
 	}
 
 	/**
@@ -27634,6 +28088,48 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	}
 
 	/**
+	 * Locate the prison keys to defeat the monsters inside.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDLDF5Re_solo_game1_1() {
+		return new SM_SYSTEM_MESSAGE(1402801);
+	}
+
+	/**
+	 * All monsters and key boxes in the library will disappear in 1 minute.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDLDF5Re_solo_game1_2() {
+		return new SM_SYSTEM_MESSAGE(1402802);
+	}
+
+	/**
+	 * All monsters and key boxes in the library will disappear in 30 seconds.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDLDF5Re_solo_game1_3() {
+		return new SM_SYSTEM_MESSAGE(1402803);
+	}
+
+	/**
+	 * All monsters and key boxes in the library will disappear in a moment.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDLDF5Re_solo_game1_4() {
+		return new SM_SYSTEM_MESSAGE(1402804);
+	}
+
+	/**
+	 * All monsters and key boxes in the library have disappeared.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDLDF5Re_solo_game1_5() {
+		return new SM_SYSTEM_MESSAGE(1402805);
+	}
+
+	/**
+	 * Locate the prison keys to defeat the monsters inside.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDLDF5Re_solo_game1_6() {
+		return new SM_SYSTEM_MESSAGE(1402806);
+	}
+
+	/**
 	 * The door cannot be opened yet.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_TAMES_SOLO_A_DOOR_CONDITION() {
@@ -27662,6 +28158,13 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	}
 
 	/**
+	 * The Aetheric Field Blaststone will explode in 2 minutes.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_OBJ_Bomb() {
+		return new SM_SYSTEM_MESSAGE(1402874);
+	}
+
+	/**
 	 * You can no longer use the %2 %0 skill (Level %1) because your Linked Stigma combination has changed
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_STIGMA_DELETE_HIDDEN_SKILL(String value0, int value1, String value2) {
@@ -27669,10 +28172,31 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	}
 
 	/**
+	 * %0 has been killed and will be moved to the waiting area.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_LEGION_DOMINION_MOVE_BIRTHAREA_FRIENDLY(String playerName) {
+		return new SM_SYSTEM_MESSAGE(1402911, playerName);
+	}
+
+	/**
+	 * The Aetheric Field Blaststone has exploded!
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_OBJ_Bomb_Die() {
+		return new SM_SYSTEM_MESSAGE(1402914);
+	}
+
+	/**
 	 * You are too far from the target to use that skill.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_SKILL_NOT_ENOUGH_DISTANCE() {
 		return new SM_SYSTEM_MESSAGE(1402920);
+	}
+
+	/**
+	 * Protect the Guardian Stone for 2 minutes.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_OBJ_Start() {
+		return new SM_SYSTEM_MESSAGE(1402924);
 	}
 
 	/**

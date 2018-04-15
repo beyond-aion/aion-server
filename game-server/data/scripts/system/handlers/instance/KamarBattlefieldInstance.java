@@ -83,8 +83,8 @@ public class KamarBattlefieldInstance extends GeneralInstanceHandler {
 		}
 		kamarReward.getPlayerReward(player.getObjectId()).applyBoostMoraleEffect(player);
 		sendPacket(new SM_INSTANCE_SCORE(new KamarBattlefieldScoreInfo(kamarReward, 4, player.getObjectId()), kamarReward, getTime()));
-		PacketSendUtility.sendPacket(player, new SM_INSTANCE_SCORE(new KamarBattlefieldScoreInfo(kamarReward, 6, player.getObjectId()), kamarReward,
-			getTime()));
+		PacketSendUtility.sendPacket(player,
+			new SM_INSTANCE_SCORE(new KamarBattlefieldScoreInfo(kamarReward, 6, player.getObjectId()), kamarReward, getTime()));
 		// sendPacket();
 	}
 
@@ -142,22 +142,22 @@ public class KamarBattlefieldInstance extends GeneralInstanceHandler {
 						spawn(802017, 1109.5887f, 1532.7554f, 586.6358f, (byte) 0, 221);
 						spawn(802018, 1213.4902f, 1363.4617f, 613.93866f, (byte) 0, 225);
 						spawn(802019, 1527.215f, 1561.5153f, 613.47742f, (byte) 0, 224);
-						sendMsg(1401913);
+						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDKamar_StartTeleporter_Spawn());
 						break;
 					case 10:
 						spawn(801772, 1353.1956f, 1413.8037f, 598.75f, (byte) 0);
 						spawn(801772, 1356.0574f, 1479.6165f, 594.15155f, (byte) 0);
 						spawn(801772, 1371.584f, 1550.1755f, 595.375f, (byte) 0);
-						sendMsg(1401840);
+						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDKamar_YunSupply_Spawn());
 						break;
 					case 12:
 						spawnAndSetRespawn(701808, 1285.834f, 1489.1963f, 595.66486f, (byte) 0, 180);
 						spawnAndSetRespawn(701912, 1414.2816f, 1463.925f, 598.7676f, (byte) 0, 180);
-						sendMsg(1401841);
+						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDKamar_SeigeWeapon_Spawn());
 						break;
 					case 14:
 						spawn(801962, 1325.73f, 1521.42f, 700.0f, (byte) 15);
-						sendMsg(1401842);
+						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDKamar_Dreadgion_Spawn());
 						break;
 					case 15:
 						spawn(232847, 1221.6609f, 1563.3887f, 585.343f, (byte) 30);
@@ -179,7 +179,7 @@ public class KamarBattlefieldInstance extends GeneralInstanceHandler {
 						spawn(232851, 1133.2808f, 1504.6725f, 585.22835f, (byte) 116);
 						spawn(233261, 1357.5049f, 1434.2639f, 598.875f, (byte) 88);
 						spawn(233261, 1375.0513f, 1531.0963f, 597.12115f, (byte) 16);
-						sendMsg(1401843);
+						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDKamar_DrakanH_Spawn());
 						break;
 					case 18:
 						List<WorldPosition> temp = new ArrayList<>();
@@ -203,7 +203,7 @@ public class KamarBattlefieldInstance extends GeneralInstanceHandler {
 						spawn(232846, 1427.12f, 1621.19f, 599.9493f, (byte) 70);
 						spawn(232846, 1431.09f, 1613.77f, 599.9493f, (byte) 70);
 						// spawn Bark
-						sendMsg(1401844);
+						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDKamar_DrakanGeneral_Spawn());
 						break;
 					case 25:
 						spawn(232857, 1250.54f, 1646.07f, 584.9f, (byte) 100);
@@ -212,7 +212,7 @@ public class KamarBattlefieldInstance extends GeneralInstanceHandler {
 						spawn(232858, 1388.45f, 1438.7f, 600, (byte) 40);
 						spawn(232860, 1394, 1440.34f, 600, (byte) 40);
 						spawn(232860, 1385.74f, 1435.5f, 600, (byte) 40);
-						sendMsg(1401847);
+						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDKamar_LightDarkGeneral_Spawn());
 						if (timeCheckTask != null && !timeCheckTask.isDone()) {
 							timeCheckTask.cancel(true);
 						}

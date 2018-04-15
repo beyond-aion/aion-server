@@ -446,7 +446,7 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 							@Override
 							public void run() {
 								if (getNpc(217737) != null) {
-									sendMsg(1400979);
+									sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_S2_Saam1_01());
 									ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 										@Override
@@ -801,7 +801,7 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 			case 217587:
 				sendEventPacket(StageType.PASS_GROUP_STAGE_7, 0);
 				sp(217753, 1782.881f, 800.114f, 469.420f, (byte) 0, 2000);
-				sendMsg(1400983);
+				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_S7_BookBox_01());
 				sp(205341, 1781.610f, 796.920f, 469.350f, (byte) 0, 2000);
 				break;
 			case 217588:
@@ -858,17 +858,17 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 
 			@Override
 			public void run() {
-				sendMsg(1401010); // 30 sec
+				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDArena_S3_Bonus_01()); // 30 sec
 				ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 					@Override
 					public void run() {
-						sendMsg(1401011); // 10 sec
+						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDArena_S3_Bonus_02()); // 10 sec
 						ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 							@Override
 							public void run() {
-								sendMsg(1401012); // 5 sec
+								sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDArena_S3_Bonus_03()); // 5 sec
 								ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 									@Override
@@ -879,7 +879,7 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 										despawnNpc(getNpc(217743));
 										sp(205331, 345.25f, 349.24f, 96.09097f, (byte) 0);
 										sp(217735, 378.9331f, 346.74878f, 96.74762f, (byte) 0);
-										sendMsg(1400976); // A Ticket Box appeared
+										sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_S3_ResurBox1_01()); // A Ticket Box appeared
 										despawnNpc(getNpc(217744));
 									}
 
@@ -1023,8 +1023,8 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 			TeleportService.teleportTo(player, mapId, player.getInstanceId(), 381.41684f, 346.78162f, 96.74763f, (byte) 43);
 		}
 
-		PacketSendUtility.sendPacket(player,
-			new SM_INSTANCE_SCORE(new CrucibleScoreInfo(instanceReward, InstanceProgressionType.END_PROGRESS), instanceReward, InstanceProgressionType.END_PROGRESS));
+		PacketSendUtility.sendPacket(player, new SM_INSTANCE_SCORE(new CrucibleScoreInfo(instanceReward, InstanceProgressionType.END_PROGRESS),
+			instanceReward, InstanceProgressionType.END_PROGRESS));
 	}
 
 	@Override

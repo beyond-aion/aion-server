@@ -7,6 +7,7 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_PLAY_MOVIE;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
@@ -23,7 +24,7 @@ public class HaramelInstance extends GeneralInstanceHandler {
 		switch (npc.getNpcId()) {
 			case 216922:
 				npc.getController().delete();
-				sendMsg(1400713); // Hamerun has dropped a treasure chest.
+				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDNOVICE_HAMEROON_TREASUREBOX_SPAWN());
 				PacketSendUtility.sendPacket(player, new SM_PLAY_MOVIE(0, 457));
 				switch (player.getPlayerClass()) {
 					case GLADIATOR:

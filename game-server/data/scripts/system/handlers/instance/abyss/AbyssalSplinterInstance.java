@@ -10,6 +10,7 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.PositionUtil;
@@ -48,7 +49,7 @@ public class AbyssalSplinterInstance extends GeneralInstanceHandler {
 					spawnDayshadeGenesisTreasureBoxes();
 					spawnDayshadeAbyssalTreasureChest();
 				} else {
-					sendMsg(npcId == 216948 ? 1400634 : 1400635); // Defeat Rukril/Ebonsoul in 1 min!
+					sendMsg(npcId == 216948 ? SM_SYSTEM_MESSAGE.STR_MSG_IDAbRe_Core_NmdC_Light_Die() : SM_SYSTEM_MESSAGE.STR_MSG_IDAbRe_Core_NmdC_Dark_Die());
 					ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 						@Override
@@ -146,12 +147,12 @@ public class AbyssalSplinterInstance extends GeneralInstanceHandler {
 					ItemService.addItem(player, 182209803, 1);
 				break;
 			case 701593:
-				sendMsg(1400732);
+				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDAbRe_Core_NmdDH_Wakeup());
 				spawn(216960, 329.70886f, 733.8744f, 197.60938f, (byte) 0);
 				npc.getController().die();
 				break;
 			case 700856:
-				sendMsg(1400731);
+				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDAbRe_Core_NmdD_Wakeup());
 				spawn(216952, 329.70886f, 733.8744f, 197.60938f, (byte) 0);
 				npc.getController().die();
 				break;
@@ -209,7 +210,7 @@ public class AbyssalSplinterInstance extends GeneralInstanceHandler {
 	}
 
 	private void spawnDayshadeAbyssalTreasureChest() {
-		sendMsg(1400636); // A Treasure Box Appeared
+		sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDAbRe_Core_NmdC_BoxSpawn());
 		spawn(700936, 404.891f, 650.2943f, 439.2548f, (byte) 130);
 	}
 
@@ -235,8 +236,7 @@ public class AbyssalSplinterInstance extends GeneralInstanceHandler {
 		Npc gate1 = getNpc(282014);
 		Npc gate2 = getNpc(282015);
 		Npc gate3 = getNpc(282131);
-		if ((gate1 == null || gate1.isDead()) && (gate2 == null || gate2.isDead())
-			&& (gate3 == null || gate3.isDead())) {
+		if ((gate1 == null || gate1.isDead()) && (gate2 == null || gate2.isDead()) && (gate3 == null || gate3.isDead())) {
 			deleteNpcs(instance.getNpcs(281903));// Summoned Orkanimum
 			deleteNpcs(instance.getNpcs(281904));// Summoned Lapilima
 		}
@@ -245,19 +245,15 @@ public class AbyssalSplinterInstance extends GeneralInstanceHandler {
 	private void onFragmentKill() {
 		switch (destroyedFragments) {
 			case 1:
-				// The destruction of the Huge Aether Fragment has destabilized the artifact!
-				sendMsg(1400689);
+				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDAbRe_Core_Artifact_Die_01());
 				break;
 			case 2:
-				// The destruction of the Huge Aether Fragment has put the artifact protector on alert!
-				sendMsg(1400690);
+				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDAbRe_Core_Artifact_Die_02());
 				break;
 			case 3:
-				// The destruction of the Huge Aether Fragment has caused abnormality on the artifact. The artifact protector is
-				// furious!
 				deleteNpcs(instance.getNpcs(700856));
 				spawn(701593, 326.1821f, 766.9640f, 202.1832f, (byte) 100, 79);
-				sendMsg(1400691);
+				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDAbRe_Core_Artifact_Die_03());
 				break;
 		}
 	}

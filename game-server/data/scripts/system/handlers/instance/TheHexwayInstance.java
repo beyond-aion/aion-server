@@ -12,6 +12,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.flyring.FlyRingTemplate;
 import com.aionemu.gameserver.model.utils3d.Point3D;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_ACTION;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
@@ -32,8 +33,8 @@ public class TheHexwayInstance extends GeneralInstanceHandler {
 	}
 
 	private void spawnRings() {
-		FlyRing f1 = new FlyRing(new FlyRingTemplate("HEXWAY_WING_1", mapId, new Point3D(576.2102, 585.4146, 353.90677), new Point3D(576.2102, 585.4146,
-			359.90677), new Point3D(575.18384, 596.36664, 353.90677), 10), instanceId);
+		FlyRing f1 = new FlyRing(new FlyRingTemplate("HEXWAY_WING_1", mapId, new Point3D(576.2102, 585.4146, 353.90677),
+			new Point3D(576.2102, 585.4146, 359.90677), new Point3D(575.18384, 596.36664, 353.90677), 10), instanceId);
 		f1.spawn();
 	}
 
@@ -46,7 +47,7 @@ public class TheHexwayInstance extends GeneralInstanceHandler {
 
 					@Override
 					public void run() {
-						sendMsg(1400244);
+						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_TREASUREBOX_DESPAWN_ALL());
 						despawnNpcs(getNpcs(701664));
 						despawnNpcs(getNpcs(701662));
 						despawnNpcs(getNpcs(701663));

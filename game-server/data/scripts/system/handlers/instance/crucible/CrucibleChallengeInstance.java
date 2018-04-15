@@ -593,12 +593,12 @@ public class CrucibleChallengeInstance extends CrucibleInstance {
 			case START_STAGE_3_ROUND_1:
 				switch (Rnd.get(1, 2)) {
 					case 1:
-						sendMsg(1401085);
+						sendMsg(SM_SYSTEM_MESSAGE.STR_CHAT_IDArena_Solo_S4_System2());
 						npcId = 217844;
 						barrelId = 218560;
 						break;
 					case 2:
-						sendMsg(1401084);
+						sendMsg(SM_SYSTEM_MESSAGE.STR_CHAT_IDArena_Solo_S4_System1());
 						npcId = 217842;
 						barrelId = 217840;
 						break;

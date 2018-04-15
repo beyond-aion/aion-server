@@ -268,14 +268,14 @@ public class RukibukiCircusTroupeInstance extends GeneralInstanceHandler {
 					sp(233450, 521.3197f, 494.83768f, 198.40182f, (byte) 90, 140000, "3011600006");
 					sp(233450, 523.791f, 496.6259f, 198.52597f, (byte) 90, 140000, "3011600007");
 					sp(233450, 521.4548f, 496.7582f, 198.46896f, (byte) 90, 140000, "3011600008");
-					sendMsg(1501136, 160000);
+					// TODO: NPC shout sendMsg(1501136, 160000);
 					// Mistress Viloa
 					sp(233459, 549.0792f, 565.6647f, 198.83736f, (byte) 60, 160000);
-					sendMsg(1501123, 180000);
-					sendMsg(1501143, 200000);
+					// TODO: NPC shout sendMsg(1501123, 180000);
+					// TODO: NPC shout sendMsg(1501143, 200000);
 					// Harlequin Lord Reshka
 					sp(233453, 549.0792f, 565.6647f, 198.83736f, (byte) 60, 200000);
-					sendMsg(1501131, 300000);
+					// TODO: NPC shout sendMsg(1501131, 300000);
 					// Nightmare Lord Heiramune
 					sp(233467, 549.0792f, 565.6647f, 198.83736f, (byte) 60, 300000);
 				}

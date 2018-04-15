@@ -13,6 +13,7 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.StaticDoor;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
@@ -25,20 +26,18 @@ import com.aionemu.gameserver.world.WorldMapInstance;
  * the first room, the way to the next one is blocked. After time expires
  * a portal to the prisons will be spawned, where you can open the doors
  * with your keys to kill the NPC behind them and get some ap relics.
- * 
  * The second one seems to be a hide&seek with a time limit about 5
  * minutes, too. The goal of this is actually not clear. After time expires
  * you get access to the last room with a "Test Subject ..." NPC, who drops
  * five rare manastone bundles. There is also a chest containing relics
  * behind the test subject.
- * 
  * The third one is a tower defense game, where wave of balaur spawn and
  * try to kill something. It seems to be finished after 5 minutes too with
  * the commander wave. Maybe he drops the missing ap relics or rare
  * manastone bundles. (written by Estrayl)
  * 
  * @author Yeats
- * TODO: Mini Game 2 & 3
+ *         TODO: Mini Game 2 & 3
  */
 @InstanceID(300480000)
 public class DanuarMysticariumInstance extends GeneralInstanceHandler {
@@ -91,7 +90,7 @@ public class DanuarMysticariumInstance extends GeneralInstanceHandler {
 			case 731583:
 				startTasks();
 				doors.get(3).setOpen(true);
-				sendMsg(1402801);
+				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDLDF5Re_solo_game1_1());
 				TeleportService.teleportTo(player, mapId, instanceId, 140.45f, 182.2f, 242f, (byte) 10, TeleportAnimation.FADE_OUT_BEAM);
 				npc.getController().delete();
 				break;
@@ -106,16 +105,17 @@ public class DanuarMysticariumInstance extends GeneralInstanceHandler {
 
 	private void startTasks() {
 		tasks = new ArrayList<>();
-		tasks.add(ThreadPoolManager.getInstance().schedule(() -> sendMsg(1402802), 125000));
-		tasks.add(ThreadPoolManager.getInstance().schedule(() -> sendMsg(1402803), 155000));
-		tasks.add(ThreadPoolManager.getInstance().schedule(() -> sendMsg(1402804), 175000));
+		tasks.add(ThreadPoolManager.getInstance().schedule(() -> sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDLDF5Re_solo_game1_2()), 125000));
+		tasks.add(ThreadPoolManager.getInstance().schedule(() -> sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDLDF5Re_solo_game1_3()), 155000));
+		tasks.add(ThreadPoolManager.getInstance().schedule(() -> sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDLDF5Re_solo_game1_4()), 175000));
 		tasks.add(ThreadPoolManager.getInstance().schedule(() -> {
-			instance.getNpcs().stream().filter(npc -> npc != null && (npc.getNpcId() == 219958 || npc.getNpcId() == 219959 ||
-					npc.getNpcId() == 702700 || npc.getNpcId() == 702701)).forEach(npc -> npc.getController().delete());
+			instance.getNpcs().stream()
+				.filter(npc -> npc != null && (npc.getNpcId() == 219958 || npc.getNpcId() == 219959 || npc.getNpcId() == 702700 || npc.getNpcId() == 702701))
+				.forEach(npc -> npc.getController().delete());
 			spawn(702715, 169.366f, 208.93f, 188.02f, (byte) 0);
-			sendMsg(1402805);
-			sendMsg(1402806);
-		}, 185000)); //3min 5sec
+			sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDLDF5Re_solo_game1_5());
+			sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDLDF5Re_solo_game1_6());
+		}, 185000)); // 3min 5sec
 	}
 
 	private void cancelTasks() {

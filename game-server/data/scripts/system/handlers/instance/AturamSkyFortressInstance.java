@@ -20,6 +20,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.LOG;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.abyss.AbyssPointsService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -70,7 +71,7 @@ public class AturamSkyFortressInstance extends GeneralInstanceHandler {
 			case 701043:
 				despawnNpc(npc);
 				despawnNpc(instance.getNpc(701030));
-				sendMsg(1400909);
+				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDStation_HugenNM_00());
 				break;
 			case 217371:
 				spawn(730374, npc.getX(), npc.getY(), npc.getZ(), (byte) 0);
@@ -79,7 +80,7 @@ public class AturamSkyFortressInstance extends GeneralInstanceHandler {
 				int killed1 = officerKilled.incrementAndGet();
 				if (killed1 == 4) {
 					doors.get(174).setOpen(true);
-					sendMsg(1401050);
+					sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDStation_3FDoor_311());
 					startOfficerWalkerEvent();
 				} else if (killed1 == 8) {
 					doors.get(175).setOpen(true);
@@ -102,7 +103,7 @@ public class AturamSkyFortressInstance extends GeneralInstanceHandler {
 				if (player != null) {
 					AbyssPointsService.addAp(player, 540);
 				}
-				sendMsg(1401048);
+				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDStation_3FDoor_322());
 				break;
 			case 218577:
 				spawn(217382, 258.3894f, 796.7554f, 901.6453f, (byte) 80);
@@ -112,19 +113,19 @@ public class AturamSkyFortressInstance extends GeneralInstanceHandler {
 				int used = generators.incrementAndGet();
 				if (boss != null) {
 					if (used == 1) {
-						sendMsg(1400910);
+						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDStation_HugenNM_01());
 					} else if (used == 2) {
 						boss.getEffectController().removeEffect(19406);
 						SkillEngine.getInstance().getSkill(boss, 19407, 1, boss).useNoAnimationSkill();
-						sendMsg(1400911);
+						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDStation_HugenNM_02());
 					} else if (used == 3) {
 						boss.getEffectController().removeEffect(19407);
 						SkillEngine.getInstance().getSkill(boss, 19408, 1, boss).useNoAnimationSkill();
-						sendMsg(1400912);
+						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDStation_HugenNM_03());
 					} else if (used == 4) {
 						boss.getEffectController().removeEffect(19408);
 						SkillEngine.getInstance().getSkill(boss, 18117, 1, boss).useNoAnimationSkill();
-						sendMsg(1400913);
+						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDStation_HugenNM_04());
 					}
 				}
 				despawnNpc(npc);
@@ -138,7 +139,7 @@ public class AturamSkyFortressInstance extends GeneralInstanceHandler {
 	}
 
 	private void startMarbataWalkerEvent() {
-		sendMsg(1401050);
+		sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDStation_3FDoor_311());
 		startWalk((Npc) spawn(218577, 193.45583f, 802.1455f, 900.7575f, (byte) 103), "3002400009");
 		startWalk((Npc) spawn(217655, 198.34431f, 801.4107f, 900.66125f, (byte) 110), "30024000010");
 		startWalk((Npc) spawn(217655, 197.13315f, 798.7863f, 900.6499f, (byte) 110), "30024000011");
@@ -206,12 +207,12 @@ public class AturamSkyFortressInstance extends GeneralInstanceHandler {
 			case 730398:
 				player.getLifeStats().increaseHp(SM_ATTACK_STATUS.TYPE.HP, 5205, 0, LOG.REGULAR);
 				player.getLifeStats().increaseMp(SM_ATTACK_STATUS.TYPE.MP, 5205, 0, LOG.REGULAR);
-				sendMsg(1400927);
+				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDStation_Doping_02());
 				despawnNpc(npc);
 				break;
 			case 730397:
 				SkillEngine.getInstance().getSkill(npc, 19520, 51, player).useNoAnimationSkill();
-				sendMsg(1400926);
+				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDStation_Doping_01());
 				break;
 			case 730410:
 				doors.get(90).setOpen(true);

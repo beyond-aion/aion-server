@@ -17,6 +17,7 @@ import com.aionemu.gameserver.network.aion.AionServerPacket;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_PLAY_MOVIE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_ACTION;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.WorldMapInstance;
@@ -41,7 +42,7 @@ public class BeshmundirInstance extends GeneralInstanceHandler {
 			instanceRace = player.getRace();
 		}
 	}
-	
+
 	@Override
 	public float getInstanceExpMultiplier() {
 		return 3f;
@@ -96,9 +97,9 @@ public class BeshmundirInstance extends GeneralInstanceHandler {
 			case 216740:
 				int killedTotal = kills.incrementAndGet();
 				if (killedTotal < 10) {
-					sendMsg(1400465);
+					sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDCatacombs_NmdSpecter_Spawn());
 				} else if (killedTotal == 10) {
-					sendMsg(1400470);
+					sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDCatacombs_NmdSpecter_Start());
 					spawn(216158, 1356.5719f, 147.76418f, 246.27373f, (byte) 91);
 				}
 				break;
@@ -117,12 +118,12 @@ public class BeshmundirInstance extends GeneralInstanceHandler {
 				// super boss
 				spawn(216183, 558.306f, 1369.02f, 224.795f, (byte) 70);
 				// gate
-				sendMsg(1400480);
+				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDCatacombs_BigOrb_Spawn());
 				spawn(730275, 1611.1266f, 1604.6935f, 310.39972f, (byte) 17);
 				break;
 			case 216250: // Dorakiki the Bold
 			case 216169:
-				sendMsg(1400471);
+				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDCatacombs_NmdShulack_Rufukin());
 				spawn(216527, 1161.859985f, 1213.859985f, 284.057007f, (byte) 110); // Lupukin: cat trader
 				break;
 			case 216206:
@@ -136,13 +137,13 @@ public class BeshmundirInstance extends GeneralInstanceHandler {
 				int killedMacunbello = macunbello.incrementAndGet();
 				switch (killedMacunbello) {
 					case 12:
-						sendMsg(1400466);
+						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDCatacombs_NmdLich_weakness1());
 						break;
 					case 14:
-						sendMsg(1400467);
+						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDCatacombs_NmdLich_weakness2());
 						break;
 					case 21:
-						sendMsg(1400468);
+						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDCatacombs_NmdLich_weakness3());
 						break;
 				}
 				break;

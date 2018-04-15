@@ -9,6 +9,7 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.PositionUtil;
@@ -47,7 +48,7 @@ public class UnstableSplinterpathInstance extends GeneralInstanceHandler {
 					spawnDayshadeGenesisTreasureBoxes();
 					spawnDayshadeAbyssalTreasureChest();
 				} else {
-					sendMsg(npcId == 219551 ? 1400634 : 1400635); // Defeat Rukril/Ebonsoul in 1 min!
+					sendMsg(npcId == 219551 ? SM_SYSTEM_MESSAGE.STR_MSG_IDAbRe_Core_NmdC_Light_Die() : SM_SYSTEM_MESSAGE.STR_MSG_IDAbRe_Core_NmdC_Dark_Die());
 					ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 						@Override
@@ -135,12 +136,12 @@ public class UnstableSplinterpathInstance extends GeneralInstanceHandler {
 	public void handleUseItemFinish(Player player, Npc npc) {
 		switch (npc.getNpcId()) {
 			case 700957:
-				sendMsg(1400732);
+				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDAbRe_Core_NmdDH_Wakeup());
 				spawn(219563, 329.70886f, 733.8744f, 197.60938f, (byte) 0);
 				npc.getController().delete();
 				break;
 			case 701589:
-				sendMsg(1400731);
+				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDAbRe_Core_NmdD_Wakeup());
 				spawn(219555, 329.70886f, 733.8744f, 197.60938f, (byte) 0);
 				npc.getController().delete();
 				break;
@@ -198,7 +199,7 @@ public class UnstableSplinterpathInstance extends GeneralInstanceHandler {
 	}
 
 	private void spawnDayshadeAbyssalTreasureChest() {
-		sendMsg(1400636); // A Treasure Box Appeared
+		sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDAbRe_Core_NmdC_BoxSpawn());
 		spawn(701578, 404.891f, 650.2943f, 439.2548f, (byte) 130);
 	}
 
@@ -224,8 +225,7 @@ public class UnstableSplinterpathInstance extends GeneralInstanceHandler {
 		Npc gate1 = getNpc(219567);
 		Npc gate2 = getNpc(219579);
 		Npc gate3 = getNpc(219580);
-		if ((gate1 == null || gate1.isDead()) && (gate2 == null || gate2.isDead())
-			&& (gate3 == null || gate3.isDead())) {
+		if ((gate1 == null || gate1.isDead()) && (gate2 == null || gate2.isDead()) && (gate3 == null || gate3.isDead())) {
 			deleteNpcs(instance.getNpcs(219565));// Summoned Orkanimum
 			deleteNpcs(instance.getNpcs(219566));// Summoned Lapilima
 		}
@@ -234,19 +234,15 @@ public class UnstableSplinterpathInstance extends GeneralInstanceHandler {
 	private void onFragmentKill() {
 		switch (destroyedFragments) {
 			case 1:
-				// The destruction of the Huge Aether Fragment has destabilized the artifact!
-				sendMsg(1400689);
+				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDAbRe_Core_Artifact_Die_01());
 				break;
 			case 2:
-				// The destruction of the Huge Aether Fragment has put the artifact protector on alert!
-				sendMsg(1400690);
+				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDAbRe_Core_Artifact_Die_02());
 				break;
 			case 3:
-				// The destruction of the Huge Aether Fragment has caused abnormality on the artifact. The artifact protector is
-				// furious!
 				deleteNpcs(instance.getNpcs(701589));
 				spawn(700957, 326.1821f, 766.9640f, 202.1832f, (byte) 100, 79);
-				sendMsg(1400691);
+				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDAbRe_Core_Artifact_Die_03());
 				break;
 		}
 	}

@@ -10,6 +10,7 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
@@ -51,7 +52,7 @@ public class LinkgateFoundryInstance extends GeneralInstanceHandler {
 	public void handleUseItemFinish(Player player, Npc npc) {
 		switch (npc.getNpcId()) {
 			case 804578:
-				sendMsg(1402453); // 20 min
+				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDLDF4_Re_01_Time_01()); // 20 min
 				startTimeCheck();
 				npc.getController().die(); // not a static door in client data o.O
 				break;
@@ -71,7 +72,7 @@ public class LinkgateFoundryInstance extends GeneralInstanceHandler {
 				if (secretLabEntranceCount < 3) {
 					spawn(234992, 244.1839f, 322.5356f, 270.9474f, (byte) 0);
 				} else
-					sendMsg(1402603);
+					sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDLDF4_Re_01_secret_room_03());
 				break;
 		}
 	}
@@ -84,22 +85,22 @@ public class LinkgateFoundryInstance extends GeneralInstanceHandler {
 				timeInMin++;
 				switch (timeInMin) {
 					case 5:
-						sendMsg(1402454); // 15 min
+						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDLDF4_Re_01_Time_02());
 						break;
 					case 10:
-						sendMsg(1402455); // 10 min
+						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDLDF4_Re_01_Time_03());
 						break;
 					case 15:
-						sendMsg(1402456); // 5 min
+						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDLDF4_Re_01_Time_04());
 						break;
 					case 17:
-						sendMsg(1402457); // 3 min
+						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDLDF4_Re_01_Time_05());
 						break;
 					case 19:
-						sendMsg(1402458); // 1 min
+						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDLDF4_Re_01_Time_06());
 						break;
 					case 20:
-						sendMsg(1402461);
+						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDLDF4_Re_01_Time_07());
 						for (Npc npc : instance.getNpcs()) {
 							if (npc.getNpcId() != 233898 && npc.getNpcId() != 234990 && npc.getNpcId() != 234991 // belsagos does not despawn
 								&& npc.getNpcId() != 702339 && npc.getNpcId() != 804629) { // teleport device does not despawn
