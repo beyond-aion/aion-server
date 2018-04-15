@@ -28,7 +28,6 @@ public final class ThreadPoolManager implements Executor {
 
 	private static final Logger log = LoggerFactory.getLogger(ThreadPoolManager.class);
 
-	public static final long MAXIMUM_RUNTIME_IN_MILLISEC_WITHOUT_WARNING = 5000;
 	private static final long MAX_DELAY = TimeUnit.NANOSECONDS.toMillis(Long.MAX_VALUE - System.nanoTime()) / 2;
 
 	private final ScheduledThreadPoolExecutor scheduledPool;
@@ -40,7 +39,7 @@ public final class ThreadPoolManager implements Executor {
 		final int instantPoolSize = ThreadConfig.BASE_THREAD_POOL_SIZE * Runtime.getRuntime().availableProcessors();
 
 		new DeadLockDetector(60, DeadLockDetector.RESTART).start();
-		instantPool = new ThreadPoolExecutor(instantPoolSize, instantPoolSize, 0, TimeUnit.SECONDS, new ArrayBlockingQueue<Runnable>(100000),
+		instantPool = new ThreadPoolExecutor(instantPoolSize, instantPoolSize, 0, TimeUnit.SECONDS, new ArrayBlockingQueue<>(100000),
 			new PriorityThreadFactory("InstantPool", ThreadConfig.USE_PRIORITIES ? 7 : Thread.NORM_PRIORITY));
 		instantPool.setRejectedExecutionHandler(new AionRejectedExecutionHandler());
 		instantPool.prestartAllCoreThreads();
@@ -56,7 +55,7 @@ public final class ThreadPoolManager implements Executor {
 		WorkStealThreadFactory forkJoinThreadFactory = new WorkStealThreadFactory("ForkJoinPool");
 		workStealingPool = new ForkJoinPool(Runtime.getRuntime().availableProcessors(), forkJoinThreadFactory, null, true);
 
-		Thread maintainThread = new Thread(() -> purge(), "ThreadPool Purge Task");
+		Thread maintainThread = new Thread(this::purge, "ThreadPool Purge Task");
 
 		maintainThread.setDaemon(true);
 		scheduleAtFixedRate(maintainThread, 150000, 150000);
@@ -99,26 +98,19 @@ public final class ThreadPoolManager implements Executor {
 
 	@Override
 	public final void execute(Runnable r) {
-		r = new ThreadPoolRunnableWrapper(r);
-		instantPool.execute(r);
+		instantPool.execute(new ThreadPoolRunnableWrapper(r));
 	}
 
 	public final void executeLongRunning(Runnable r) {
-		r = new RunnableWrapper(r);
-
-		longRunningPool.execute(r);
+		longRunningPool.execute(new RunnableWrapper(r));
 	}
 
 	public final Future<?> submit(Runnable r) {
-		r = new ThreadPoolRunnableWrapper(r);
-
-		return instantPool.submit(r);
+		return instantPool.submit(new ThreadPoolRunnableWrapper(r));
 	}
 
 	public final Future<?> submitLongRunning(Runnable r) {
-		r = new RunnableWrapper(r);
-
-		return longRunningPool.submit(r);
+		return longRunningPool.submit(new RunnableWrapper(r));
 	}
 
 	public void purge() {
@@ -147,14 +139,13 @@ public final class ThreadPoolManager implements Executor {
 
 		boolean success = false;
 		try {
-			success |= awaitTermination(5000);
+			success = awaitTermination(5000);
 
 			scheduledPool.setExecuteExistingDelayedTasksAfterShutdownPolicy(false);
 			scheduledPool.setContinueExistingPeriodicTasksAfterShutdownPolicy(false);
 
 			success |= awaitTermination(10000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
+		} catch (InterruptedException ignored) {
 		}
 
 		log.info("\t... success: " + success + " in " + (System.currentTimeMillis() - begin) + " msec.");
