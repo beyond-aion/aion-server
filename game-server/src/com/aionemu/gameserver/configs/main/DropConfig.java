@@ -1,6 +1,7 @@
 package com.aionemu.gameserver.configs.main;
 
 import java.util.List;
+import java.util.Set;
 
 import com.aionemu.commons.configuration.Property;
 import com.aionemu.gameserver.model.templates.item.ItemQuality;
@@ -19,6 +20,7 @@ public class DropConfig {
 
 	/**
 	 * Announce when a player drops an item with the configured minimum item quality
+	 * 
 	 * @see ItemQuality
 	 */
 	@Property(key = "gameserver.drop.announce_quality")
@@ -29,10 +31,10 @@ public class DropConfig {
 	 */
 	@Property(key = "gameserver.drop.no_reduction_maps")
 	public static List<Integer> NO_REDUCTION_MAPS;
-	
+
 	/**
 	 * Disable range checks for specified maps
 	 */
 	@Property(key = "gameserver.drop.disable_range_check_maps")
-	public static List<Integer> DISABLE_RANGE_CHECK_MAPS;
+	public static Set<Integer> DISABLE_RANGE_CHECK_MAPS;
 }
