@@ -173,7 +173,6 @@ public class TiamatWeakenedDragonAI extends AggressiveNpcAI {
 		spawnTasks.add(ThreadPoolManager.getInstance().schedule(() -> {
 			if (hasAggro.get() && !isDead()) {
 				spawn(283143, 508.32f, 515.18f, 417.4f, (byte) 0);
-				spawn(283144, 508.32f, 515.18f, 417.4f, (byte) 0);
 				scheduleInfinitePain();
 			}
 		}, 90000));

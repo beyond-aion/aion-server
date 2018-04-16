@@ -18,13 +18,21 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
 /**
+ * 1st keymaster
+ * 2nd keymaster
+ * 3rd cumulative kills = 30
+ * 4th cumulative kills = 60
+ * 5th Easy Hero Killed
+ * 6th Hard Hero Killed
+ * 
  * @author xTz, Bobobear
  */
 @InstanceID(300700000)
 public class TheHexwayInstance extends GeneralInstanceHandler {
 
 	private AtomicLong startTime = new AtomicLong();
-	private boolean isInstanceDestroyed = false;
+	private AtomicLong kills = new AtomicLong();
+	private boolean isTimeUp;
 
 	@Override
 	public void onInstanceCreate(WorldMapInstance instance) {
@@ -43,17 +51,7 @@ public class TheHexwayInstance extends GeneralInstanceHandler {
 		if (flyingRing.equals("HEXWAY_WING_1")) {
 			if (startTime.compareAndSet(0, System.currentTimeMillis())) {
 				PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(0, 900));
-				ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-					@Override
-					public void run() {
-						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_TREASUREBOX_DESPAWN_ALL());
-						despawnNpcs(getNpcs(701664));
-						despawnNpcs(getNpcs(701662));
-						despawnNpcs(getNpcs(701663));
-					}
-
-				}, 900000);
+				ThreadPoolManager.getInstance().schedule(() -> isTimeUp = true, 900000);
 			}
 		}
 		return false;
@@ -70,23 +68,14 @@ public class TheHexwayInstance extends GeneralInstanceHandler {
 		}
 
 	}
-
-	private List<Npc> getNpcs(int npcId) {
-		if (!isInstanceDestroyed) {
-			return instance.getNpcs(npcId);
-		}
-		return Collections.emptyList();
-	}
-
+	
 	private void despawnNpcs(List<Npc> npcs) {
-		for (Npc npc : npcs) {
+		for (Npc npc : npcs)
 			npc.getController().delete();
-		}
 	}
 
 	@Override
 	public void onInstanceDestroy() {
-		isInstanceDestroyed = true;
-		startTime.set(0);
+		
 	}
 }
