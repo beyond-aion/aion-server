@@ -15,7 +15,7 @@ public class PremiumOptionInfoBlobEntry extends ItemBlobEntry {
 
 	@Override
 	public void writeThisBlob(ByteBuffer buf) {
-		writeC(buf, !ownerItem.isIdentified() ? -1 : ownerItem.getBonusNumber());
+		writeC(buf, !ownerItem.isIdentified() ? -1 : ownerItem.getBonusStatsId());
 		writeC(buf, !ownerItem.isIdentified() ? 0 : ownerItem.getTuneCount());
 		writeC(buf, 0);
 	}

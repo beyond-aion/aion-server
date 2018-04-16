@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.Consumer;
 
 import org.slf4j.LoggerFactory;
 
@@ -16,7 +17,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.items.IdianStone;
 import com.aionemu.gameserver.model.items.ItemSlot;
 import com.aionemu.gameserver.model.items.ManaStone;
-import com.aionemu.gameserver.model.items.RandomStats;
+import com.aionemu.gameserver.model.items.RandomBonusEffect;
 import com.aionemu.gameserver.model.stats.calc.functions.StatAddFunction;
 import com.aionemu.gameserver.model.stats.calc.functions.StatFunction;
 import com.aionemu.gameserver.model.stats.container.CreatureGameStats;
@@ -67,7 +68,7 @@ public class ItemEquipmentListener {
 			HashMap<Integer, Long> coolDowns = new HashMap<>();
 			long currTime = System.currentTimeMillis();
 			long oldCooldown = owner.getSkillCoolDown(buffSkill.getCooldownId());
-			long newCooldown = 0;
+			long newCooldown;
 			if (oldCooldown - currTime > 15000) // cd active
 				newCooldown = oldCooldown;
 			else
@@ -76,10 +77,7 @@ public class ItemEquipmentListener {
 			coolDowns.put(buffSkill.getCooldownId(), newCooldown);
 			PacketSendUtility.sendPacket(owner, new SM_SKILL_COOLDOWN(coolDowns));
 		}
-		RandomStats randomStats = item.getRandomStats();
-		if (randomStats != null) {
-			randomStats.onEquip(owner);
-		}
+		forEachBonusStats(bonusStats -> bonusStats.applyEffect(owner), item.getBonusStatsEffect(), item.getFusionedItemBonusStatsEffect());
 		if (item.getConditioningInfo() != null) {
 			owner.getObserveController().addObserver(item.getConditioningInfo());
 			item.getConditioningInfo().setPlayer(owner);
@@ -104,6 +102,12 @@ public class ItemEquipmentListener {
 				}
 			}
 		}
+	}
+
+	private static void forEachBonusStats(Consumer<RandomBonusEffect> action, RandomBonusEffect... bonusStatsEffects) {
+		for (RandomBonusEffect bonusStats : bonusStatsEffects)
+			if (bonusStats != null)
+				action.accept(bonusStats);
 	}
 
 	/**
@@ -134,9 +138,7 @@ public class ItemEquipmentListener {
 		IdianStone idianStone = item.getIdianStone();
 		if (idianStone != null)
 			idianStone.onUnEquip(owner);
-		RandomStats randomStats = item.getRandomStats();
-		if (randomStats != null)
-			randomStats.onUnEquip(owner);
+		forEachBonusStats(bonusStats -> bonusStats.endEffect(owner), item.getBonusStatsEffect(), item.getFusionedItemBonusStatsEffect());
 		if (item.getEnchantEffect() != null) {
 			item.getEnchantEffect().endEffect(owner);
 			item.setEnchantEffect(null);
@@ -162,7 +164,7 @@ public class ItemEquipmentListener {
 			return;
 		}
 
-		List<StatFunction> allModifiers = null;
+		List<StatFunction> allModifiers;
 
 		if ((slot & ItemSlot.MAIN_OR_SUB.getSlotIdMask()) != 0) {
 			allModifiers = wrapModifiers(item, modifiers);

@@ -312,7 +312,7 @@ CREATE TABLE `inventory` (
   `expire_time` int(11) NOT NULL DEFAULT '0',
   `activation_count` int(11) NOT NULL DEFAULT '0',
   `item_owner` int(11) NOT NULL,
-  `is_equiped` tinyint(1) NOT NULL DEFAULT '0',
+  `is_equipped` tinyint(1) NOT NULL DEFAULT '0',
   `is_soul_bound` tinyint(1) NOT NULL DEFAULT '0',
   `slot` bigint(20) NOT NULL DEFAULT '0',
   `item_location` tinyint(1) DEFAULT '0',
@@ -323,8 +323,9 @@ CREATE TABLE `inventory` (
   `optional_socket` int(1) NOT NULL DEFAULT '0',
   `optional_fusion_socket` int(1) NOT NULL DEFAULT '0',
   `charge` mediumint(9) NOT NULL DEFAULT '0',
-  `rnd_bonus` smallint(6) DEFAULT NULL,
-  `rnd_count` smallint(6) NOT NULL DEFAULT '0',
+  `tune_count` smallint(6) NOT NULL DEFAULT '0',
+  `rnd_bonus` smallint(6) NOT NULL DEFAULT '0',
+  `fusion_rnd_bonus` smallint(6) NOT NULL DEFAULT '0',
   `tempering` tinyint(3) UNSIGNED NOT NULL DEFAULT '0',
   `pack_count` smallint(6) NOT NULL DEFAULT '0',
   `is_amplified` tinyint(1) NOT NULL DEFAULT '0',
@@ -332,7 +333,7 @@ CREATE TABLE `inventory` (
   `rnd_plume_bonus` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`item_unique_id`),
   KEY `item_location` (`item_location`) USING HASH,
-  KEY `index3` (`item_owner`,`item_location`,`is_equiped`)
+  KEY `index3` (`item_owner`,`item_location`,`is_equipped`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------

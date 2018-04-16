@@ -29,7 +29,7 @@ import com.aionemu.gameserver.utils.chathandlers.PlayerCommand;
  */
 public class Preview extends PlayerCommand {
 
-	private static final Map<Integer, ScheduledFuture<?>> PREVIEW_RESETS = new ConcurrentHashMap<Integer, ScheduledFuture<?>>();
+	private static final Map<Integer, ScheduledFuture<?>> PREVIEW_RESETS = new ConcurrentHashMap<>();
 	private static final byte PREVIEW_TIME = 10;
 
 	public Preview() {
@@ -63,8 +63,8 @@ public class Preview extends PlayerCommand {
 		Integer itemColor = null; // null = default item color
 		String colorText = "default";
 		if (params.length > 1) {
-			if (!items.stream().anyMatch(ItemTemplate::isItemDyePermitted)) {
-				sendInfo(player, "The specified item" + (items.size() == 1 ? "" : "s") + " can not be dyed.");
+			if (items.stream().noneMatch(ItemTemplate::isItemDyePermitted)) {
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_COLOR_CHANGE_ERROR_CANNOTDYE(items.get(0).getL10n()));
 				return;
 			}
 
@@ -184,7 +184,7 @@ public class Preview extends PlayerCommand {
 
 	private static void addOwnEquipment(Player player, List<Item> previewItems, long previewItemsSlotMask) {
 		boolean previewTwoHanded = false;
-		for (Item visibleEquipment : player.getEquipment().getEquippedForAppearence()) {
+		for (Item visibleEquipment : player.getEquipment().getEquippedForAppearance()) {
 			if (previewTwoHanded || ItemSlot.isTwoHandedWeapon(visibleEquipment.getEquipmentSlot())) {
 				previewTwoHanded = true;
 				if (visibleEquipment.getEquipmentSlot() == ItemSlot.SUB_HAND.getSlotIdMask())
@@ -208,7 +208,7 @@ public class Preview extends PlayerCommand {
 			@Override
 			public void run() {
 				if (player.isOnline()) {
-					PacketSendUtility.sendPacket(player, new SM_UPDATE_PLAYER_APPEARANCE(objId, player.getEquipment().getEquippedForAppearence()));
+					PacketSendUtility.sendPacket(player, new SM_UPDATE_PLAYER_APPEARANCE(objId, player.getEquipment().getEquippedForAppearance()));
 					PacketSendUtility.sendMessage(player, "Preview time ended.");
 				}
 				PREVIEW_RESETS.remove(objId);

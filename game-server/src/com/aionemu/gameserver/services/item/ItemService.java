@@ -84,7 +84,8 @@ public class ItemService {
 		Objects.requireNonNull(predicate, "Predicate is not supplied");
 
 		if (LoggingConfig.LOG_ITEM)
-			log.info("Item: " + itemTemplate.getTemplateId() + " [" + itemTemplate.getName()+ "] added to player " + player.getName() + " (count: " + count + ") (type: " + predicate.getAddType() + ")");
+			log.info("Item: " + itemTemplate.getTemplateId() + " [" + itemTemplate.getName() + "] added to player " + player.getName() + " (count: " + count
+				+ ") (type: " + predicate.getAddType() + ")");
 
 		Storage inventory = player.getInventory();
 		if (itemTemplate.isKinah()) {
@@ -107,7 +108,8 @@ public class ItemService {
 	/**
 	 * Add non-stackable item to inventory
 	 */
-	private static long addNonStackableItem(Player player, ItemTemplate itemTemplate, long count, Item sourceItem, boolean allowInventoryOverflow, ItemUpdatePredicate predicate) {
+	private static long addNonStackableItem(Player player, ItemTemplate itemTemplate, long count, Item sourceItem, boolean allowInventoryOverflow,
+		ItemUpdatePredicate predicate) {
 		Storage inventory = player.getInventory();
 		while ((allowInventoryOverflow || !inventory.isFull(itemTemplate.getExtraInventoryId())) && count > 0) {
 			Item newItem = ItemFactory.newItem(itemTemplate.getTemplateId());
@@ -124,10 +126,10 @@ public class ItemService {
 	}
 
 	/**
-	 * Copy some item values like item stones and enchant level
+	 * Copy some item values like item stones and enchant level, without any fusion item attributes
 	 */
 	public static void copyItemInfo(Item sourceItem, Item newItem) {
-		newItem.setOptionalSocket(sourceItem.getOptionalSocket());
+		newItem.setOptionalSockets(sourceItem.getOptionalSockets());
 		newItem.setItemCreator(sourceItem.getItemCreator());
 		if (sourceItem.hasManaStones()) {
 			for (ManaStone manaStone : sourceItem.getItemStones())
@@ -135,19 +137,13 @@ public class ItemService {
 		}
 		if (sourceItem.getGodStone() != null)
 			newItem.addGodStone(sourceItem.getGodStone().getItemId(), sourceItem.getGodStone().getActivatedCount());
-		if (sourceItem.getEnchantLevel() > 0) {
-			newItem.setEnchantLevel(sourceItem.getEnchantLevel());
-			newItem.setAmplified(sourceItem.isAmplified());
-			newItem.setBuffSkill(sourceItem.getBuffSkill());
-		}
-		if (sourceItem.getTempering() > 0)
-			newItem.setTempering(sourceItem.getTempering());
-		if (sourceItem.isSoulBound())
-			newItem.setSoulBound(true);
-
-		newItem.setBonusNumber(sourceItem.getBonusNumber());
-		newItem.setRandomStats(sourceItem.getRandomStats());
+		newItem.setEnchantLevel(sourceItem.getEnchantLevel());
+		newItem.setAmplified(sourceItem.isAmplified());
+		newItem.setBuffSkill(sourceItem.getBuffSkill());
+		newItem.setTempering(sourceItem.getTempering());
+		newItem.setSoulBound(sourceItem.isSoulBound());
 		newItem.setTuneCount(sourceItem.getTuneCount());
+		newItem.setBonusStats(sourceItem.getBonusStatsId(), true);
 		newItem.setIdianStone(sourceItem.getIdianStone());
 		newItem.setItemColor(sourceItem.getItemColor());
 		newItem.setEnchantBonus(sourceItem.getEnchantBonus());
@@ -157,7 +153,8 @@ public class ItemService {
 	/**
 	 * Add stackable item to inventory
 	 */
-	private static long addStackableItem(Player player, ItemTemplate itemTemplate, long count, boolean allowInventoryOverflow, ItemUpdatePredicate predicate) {
+	private static long addStackableItem(Player player, ItemTemplate itemTemplate, long count, boolean allowInventoryOverflow,
+		ItemUpdatePredicate predicate) {
 		Collection<Item> items;
 		// dirty & hacky check for arrows and shards...
 		if (itemTemplate.getItemGroup() == ItemGroup.POWER_SHARDS) {

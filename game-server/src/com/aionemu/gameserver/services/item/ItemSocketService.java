@@ -270,26 +270,6 @@ public class ItemSocketService {
 		ItemPacketService.updateItemAfterInfoChange(player, item);
 	}
 
-	public static void removeAllFusionStone(Player player, Item item) {
-		if (item == null) {
-			log.warn("Item not found during manastone remove");
-			return;
-		}
-
-		if (!item.hasFusionStones()) {
-			return;
-		}
-
-		Set<ManaStone> fusionStones = item.getFusionStones();
-		for (ManaStone ms : fusionStones) {
-			ms.setPersistentState(PersistentState.DELETED);
-		}
-		DAOManager.getDAO(ItemStoneListDAO.class).storeFusionStone(fusionStones);
-		fusionStones.clear();
-
-		ItemPacketService.updateItemAfterInfoChange(player, item);
-	}
-
 	public static void socketGodstone(Player player, Item weapon, int stoneId) {
 		if (weapon == null) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GIVE_ITEM_PROC_NO_TARGET_ITEM());

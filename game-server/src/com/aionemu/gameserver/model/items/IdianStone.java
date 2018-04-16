@@ -8,7 +8,7 @@ import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.templates.item.ItemTemplate;
+import com.aionemu.gameserver.model.templates.item.actions.ItemActions;
 import com.aionemu.gameserver.model.templates.item.bonuses.StatBonusType;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_INVENTORY_UPDATE_ITEM;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
@@ -21,10 +21,7 @@ public class IdianStone extends ItemStone {
 
 	private ActionObserver actionListener;
 	private int polishCharge;
-	private final int polishSetId;
-	private final int polishNumber;
 	private final Item item;
-	private final ItemTemplate template;
 	private final int burnDefend;
 	private final int burnAttack;
 	private final RandomBonusEffect rndBonusEffect;
@@ -35,10 +32,8 @@ public class IdianStone extends ItemStone {
 		burnDefend = item.getItemTemplate().getIdianAction().getBurnDefend();
 		burnAttack = item.getItemTemplate().getIdianAction().getBurnAttack();
 		this.polishCharge = polishCharge;
-		this.template = DataManager.ITEM_DATA.getItemTemplate(itemId);
-		this.polishNumber = polishNumber;
-		polishSetId = template.getActions().getPolishAction().getPolishSetId();
-		rndBonusEffect = new RandomBonusEffect(StatBonusType.POLISH, polishSetId, polishNumber);
+		ItemActions actions = DataManager.ITEM_DATA.getItemTemplate(itemId).getActions();
+		rndBonusEffect = new RandomBonusEffect(StatBonusType.POLISH, actions.getPolishAction().getPolishSetId(), polishNumber);
 	}
 
 	public void onEquip(final Player player, long slot) {
@@ -71,7 +66,7 @@ public class IdianStone extends ItemStone {
 	}
 
 	private synchronized void decreasePolishCharge(Player player, boolean isAttacked, int skillValue) {
-		int result = 0;
+		int result;
 		if (polishCharge <= 0) {
 			return;
 		}
@@ -95,11 +90,7 @@ public class IdianStone extends ItemStone {
 	}
 
 	public int getPolishNumber() {
-		return polishNumber;
-	}
-
-	public int getPolishSetId() {
-		return polishSetId;
+		return rndBonusEffect.getStatBonusId();
 	}
 
 	public int getPolishCharge() {

@@ -77,11 +77,6 @@ public class StatFunctionProxy implements IStatFunction, Comparable<IStatFunctio
 	}
 
 	@Override
-	public int getRandomNumber() {
-		return proxiedFunction.getRandomNumber();
-	}
-
-	@Override
 	public int getPriority() {
 		return proxiedFunction.getPriority();
 	}

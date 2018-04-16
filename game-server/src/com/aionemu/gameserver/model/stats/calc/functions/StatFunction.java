@@ -7,7 +7,6 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
 import com.aionemu.gameserver.model.stats.calc.Stat2;
@@ -32,8 +31,6 @@ public class StatFunction implements IStatFunction {
 	protected int value;
 	@XmlElement(name = "conditions")
 	private Conditions conditions;
-	@XmlTransient
-	private int rndNumber;
 
 	public StatFunction() {
 	}
@@ -83,11 +80,11 @@ public class StatFunction implements IStatFunction {
 
 	@Override
 	public boolean validate(Stat2 stat) {
-		return conditions != null ? conditions.validate(stat, this) : true;
+		return conditions == null || conditions.validate(stat, this);
 	}
 
 	protected boolean validate(Stat2 stat, IStatFunction statFunction) {
-		return conditions != null ? conditions.validate(stat, statFunction) : true;
+		return conditions == null || conditions.validate(stat, statFunction);
 	}
 
 	@Override
@@ -110,15 +107,6 @@ public class StatFunction implements IStatFunction {
 	}
 
 	@Override
-	public int getRandomNumber() {
-		return rndNumber;
-	}
-
-	public void setRandomNumber(int rndNumber) {
-		this.rndNumber = rndNumber;
-	}
-
-	@Override
 	public boolean hasNullOwner() {
 		if (nullOwnerStats.containsKey(getName()))
 			return nullOwnerStats.get(getName());
@@ -131,7 +119,7 @@ public class StatFunction implements IStatFunction {
 				break;
 			}
 		}
-		nullOwnerStats.put(getName(), Boolean.valueOf(hasNullOwner));
+		nullOwnerStats.put(getName(), hasNullOwner);
 		return hasNullOwner;
 	}
 

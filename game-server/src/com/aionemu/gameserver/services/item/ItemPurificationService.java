@@ -9,7 +9,6 @@ import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.items.ManaStone;
-import com.aionemu.gameserver.model.items.RandomStats;
 import com.aionemu.gameserver.model.templates.item.purification.ItemPurificationTemplate;
 import com.aionemu.gameserver.model.templates.item.purification.PurificationResultItem;
 import com.aionemu.gameserver.model.templates.item.purification.SubMaterialItem;
@@ -95,7 +94,7 @@ public class ItemPurificationService {
 
 	public static void upgradeItem(Player player, Item sourceItem, int targetItemId) {
 		Item newItem = ItemFactory.newItem(targetItemId, 1);
-		newItem.setOptionalSocket(sourceItem.getOptionalSocket());
+		newItem.setOptionalSockets(sourceItem.getOptionalSockets());
 		newItem.setItemCreator(sourceItem.getItemCreator());
 		newItem.setEnchantLevel(sourceItem.getEnchantLevel() - 5);
 		newItem.setEnchantBonus(sourceItem.getEnchantBonus());
@@ -104,8 +103,7 @@ public class ItemPurificationService {
 			newItem.setBuffSkill(sourceItem.getBuffSkill());
 		}
 		if (sourceItem.hasFusionedItem()) {
-			newItem.setFusionedItem(sourceItem.getFusionedItemTemplate());
-			newItem.setOptionalFusionSocket(sourceItem.getOptionalFusionSocket());
+			newItem.setFusionedItem(sourceItem.getFusionedItemTemplate(), sourceItem.getFusionedItemBonusStatsId(), sourceItem.getFusionedItemOptionalSockets());
 		}
 		if (sourceItem.hasManaStones()) {
 			for (ManaStone manaStone : sourceItem.getItemStones())
@@ -121,9 +119,8 @@ public class ItemPurificationService {
 			newItem.setTempering(sourceItem.getTempering());
 		if (sourceItem.isSoulBound())
 			newItem.setSoulBound(true);
-		if (sourceItem.getItemTemplate().getRandomBonusId() != 0 && newItem.getItemTemplate().getRandomBonusId() != 0) {
-			newItem.setBonusNumber(sourceItem.getBonusNumber());
-			newItem.setRandomStats(new RandomStats(newItem.getItemTemplate().getRandomBonusId(), newItem.getBonusNumber()));
+		if (sourceItem.getItemTemplate().getStatBonusSetId() != 0 && newItem.getItemTemplate().getStatBonusSetId() != 0) {
+			newItem.setBonusStats(sourceItem.getBonusStatsId(), true);
 			newItem.setTuneCount(1);
 		}
 		newItem.setItemColor(sourceItem.getItemColor());

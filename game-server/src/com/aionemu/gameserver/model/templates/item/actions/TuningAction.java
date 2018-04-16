@@ -78,10 +78,9 @@ public class TuningAction extends AbstractItemAction {
 					return;
 				}
 				int newSockets = Rnd.get(0, targetItem.getItemTemplate().getOptionSlotBonus());
-				if (noReduce && targetItem.getOptionalSocket() > newSockets)
-					newSockets = targetItem.getOptionalSocket();
-				targetItem.setOptionalSocket(newSockets);
-				// TODO: how we should handle that ?
+				if (noReduce && targetItem.getOptionalSockets() > newSockets)
+					newSockets = targetItem.getOptionalSockets();
+				targetItem.setOptionalSockets(newSockets);
 				targetItem.setRndBonus();
 				int newEnchantBonus = Rnd.get(0, targetItem.getItemTemplate().getMaxEnchantBonus());
 				if (noReduce && targetItem.getEnchantBonus() > newEnchantBonus)

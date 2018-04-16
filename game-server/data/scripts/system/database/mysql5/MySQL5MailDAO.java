@@ -64,8 +64,9 @@ public class MySQL5MailDAO extends MailDAO {
 					long attachedKinahCount = rset.getLong("attached_kinah_count");
 					LetterType letterType = LetterType.getLetterTypeById(rset.getInt("express"));
 					Timestamp receivedTime = rset.getTimestamp("recieved_time");
-					letters.put(new Letter(mailUniqueId, recipientId, null, attachedKinahCount, mailTitle, mailMessage, senderName, receivedTime, unread,
-						letterType), attachedItemObjId);
+					letters.put(
+						new Letter(mailUniqueId, recipientId, null, attachedKinahCount, mailTitle, mailMessage, senderName, receivedTime, unread, letterType),
+						attachedItemObjId);
 				}
 			}
 		});
@@ -131,7 +132,7 @@ public class MySQL5MailDAO extends MailDAO {
 					String itemCreator = rset.getString("item_creator");
 					int expireTime = rset.getInt("expire_time");
 					int activationCount = rset.getInt("activation_count");
-					int isEquiped = rset.getInt("is_equiped");
+					int isEquiped = rset.getInt("is_equipped");
 					int isSoulBound = rset.getInt("is_soul_bound");
 					int slot = rset.getInt("slot");
 					int enchant = rset.getInt("enchant");
@@ -141,8 +142,9 @@ public class MySQL5MailDAO extends MailDAO {
 					int optionalSocket = rset.getInt("optional_socket");
 					int optionalFusionSocket = rset.getInt("optional_fusion_socket");
 					int charge = rset.getInt("charge");
-					int randomBonus = rset.getInt("rnd_bonus");
-					int rndCount = rset.getInt("rnd_count");
+					int tuneCount = rset.getInt("tune_count");
+					int bonusStatsId = rset.getInt("rnd_bonus");
+					int fusionedItemBonusStatsId = rset.getInt("fusion_rnd_bonus");
 					int tempering = rset.getInt("tempering");
 					int packCount = rset.getInt("pack_count");
 					int isAmplified = rset.getInt("is_amplified");
@@ -151,7 +153,7 @@ public class MySQL5MailDAO extends MailDAO {
 
 					Item item = new Item(itemUniqueId, itemId, itemCount, itemColor, colorExpireTime, itemCreator, expireTime, activationCount, isEquiped == 1,
 						isSoulBound == 1, slot, StorageType.MAILBOX.getId(), enchant, enchantBonus, itemSkin, fusionedItem, optionalSocket, optionalFusionSocket,
-						charge, randomBonus, rndCount, tempering, packCount, isAmplified == 1, buffSkill, rndPlumeBonusValue);
+						charge, tuneCount, bonusStatsId, fusionedItemBonusStatsId, tempering, packCount, isAmplified == 1, buffSkill, rndPlumeBonusValue);
 					item.setPersistentState(PersistentState.UPDATED);
 					mailboxItems.add(item);
 				}

@@ -1,12 +1,8 @@
 package com.aionemu.gameserver.services;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.dao.InventoryDAO;
 import com.aionemu.gameserver.model.gameobjects.Item;
-import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.Persistable.PersistentState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.item.ItemQuality;
@@ -15,142 +11,119 @@ import com.aionemu.gameserver.services.item.ItemPacketService;
 import com.aionemu.gameserver.services.item.ItemSocketService;
 import com.aionemu.gameserver.services.trade.PricesService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.audit.AuditLogger;
 
 /**
- * This class is responsible of Armsfusion-related tasks (fusion,breaking)
+ * This class is responsible for armsfusion related tasks (fusion and breaking, called COMPOUND and DECOMPOUND by the client)
  * 
- * @author Wakizashi modified by Source & xTz
+ * @author Wakizashi
+ * @modified Source, xTz, Neon
  */
 public class ArmsfusionService {
 
-	private static final Logger log = LoggerFactory.getLogger(ArmsfusionService.class);
+	public static void fusionWeapons(Player player, int mainWeaponObjId, int fuseWeaponObjId) {
+		Item mainWeapon = player.getInventory().getItemByObjId(mainWeaponObjId);
+		Item fuseWeapon = player.getInventory().getItemByObjId(fuseWeaponObjId);
 
-	public static void fusionWeapons(Player player, int firstItemUniqueId, int secondItemUniqueId) {
-		Item firstItem = player.getInventory().getItemByObjId(firstItemUniqueId);
-		if (firstItem == null)
-			firstItem = player.getEquipment().getEquippedItemByObjId(firstItemUniqueId);
-
-		Item secondItem = player.getInventory().getItemByObjId(secondItemUniqueId);
-		if (secondItem == null)
-			secondItem = player.getEquipment().getEquippedItemByObjId(secondItemUniqueId);
-
-		/*
-		 * Check if item is in bag
-		 */
-		if (firstItem == null || secondItem == null || !(player.getTarget() instanceof Npc))
-			return;
-		if (!firstItem.getItemTemplate().isWeapon() || !secondItem.getItemTemplate().isWeapon()) {
+		// Check if item is in bag
+		if (mainWeapon == null || fuseWeapon == null) {
+			if (player.getEquipment().getEquippedItemByObjId(mainWeaponObjId) != null
+				|| player.getEquipment().getEquippedItemByObjId(fuseWeaponObjId) != null)
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_COMPOUND_ERROR_EQUIPED_ITEM());
+			else {
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_COMPOUND_ITEM_NO_TARGET_ITEM());
+				AuditLogger.log(player, "tried to fuse weapons he doesn't have (obj IDs:" + mainWeaponObjId + ", " + fuseWeaponObjId + ")");
+			}
 			return;
 		}
-		double priceRate = PricesService.getGlobalPrices(player.getRace()) * .01;
-		double taxRate = PricesService.getTaxes(player.getRace()) * .01;
-		double rarity = rarityRate(firstItem.getItemTemplate().getItemQuality());
-		int priceMod = PricesService.getGlobalPricesModifier() * 2;
-		int level = firstItem.getItemTemplate().getLevel();
 
-		int price = (int) (priceMod * priceRate * taxRate * rarity * level * level);
-		log.debug("Rarete: " + rarity + " Prix Ratio: " + priceRate + " Tax: " + taxRate + " Mod: " + priceMod + " NiveauDeLArme: " + level);
-		log.debug("Prix: " + price);
+		if (!mainWeapon.getItemTemplate().isCanFuse() || !fuseWeapon.getItemTemplate().isCanFuse()) {
+			Item item = mainWeapon.getItemTemplate().isCanFuse() ? mainWeapon : fuseWeapon;
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_COMPOUND_ERROR_NOT_AVAILABLE(item.getL10n()));
+			AuditLogger.log(player,
+				"tried to fuse item " + fuseWeapon.getItemId() + " onto " + mainWeapon.getItemId() + " (" + item.getItemId() + " isn't fusible)");
+			return;
+		}
+
+		long basePricePerLevelSquared = getBasePricePerLevelSquared(mainWeapon.getItemTemplate().getItemQuality());
+		int level = mainWeapon.getItemTemplate().getLevel();
+		long price = PricesService.getPriceForService(basePricePerLevelSquared * level * level, player.getRace());
 
 		if (player.getInventory().getKinah() < price) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_COMPOUND_ERROR_NOT_ENOUGH_MONEY(firstItem.getL10n(), secondItem.getL10n()));
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_COMPOUND_ERROR_NOT_ENOUGH_MONEY(mainWeapon.getL10n(), fuseWeapon.getL10n()));
 			return;
 		}
 
-		/*
-		 * Fusioned weapons must be not fusioned
-		 */
-		if (firstItem.hasFusionedItem()) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_COMPOUND_ERROR_NOT_AVAILABLE(firstItem.getL10n()));
-			return;
-		}
-		if (secondItem.hasFusionedItem()) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_COMPOUND_ERROR_NOT_AVAILABLE(secondItem.getL10n()));
+		if (mainWeapon.getTemporaryExchangeTime() != 0) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_COMPOUND_ERROR_TEMPORARY_EXCHANGE_ITEM());
 			return;
 		}
 
-		if (!firstItem.getItemTemplate().isCanFuse() || !secondItem.getItemTemplate().isCanFuse()) {
-			PacketSendUtility.sendMessage(player, "You performed illegal operation, admin will catch you");
-			log.info("[AUDIT] Client hack with item fusion, player: " + player.getName());
-			return;
-		}
-
-		if (!firstItem.getItemTemplate().isTwoHandWeapon()) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_COMPOUND_ERROR_NOT_AVAILABLE(firstItem.getL10n()));
+		// Fusioned weapons must be not fusioned
+		if (mainWeapon.hasFusionedItem() || fuseWeapon.hasFusionedItem()) {
+			Item item = mainWeapon.hasFusionedItem() ? mainWeapon : fuseWeapon;
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_COMPOUND_ERROR_NOT_AVAILABLE(item.getL10n()));
 			return;
 		}
 
 		// Fusioned weapons must have same type
-		if (firstItem.getItemTemplate().getItemGroup() != secondItem.getItemTemplate().getItemGroup()) {
+		if (mainWeapon.getItemTemplate().getItemGroup() != fuseWeapon.getItemTemplate().getItemGroup()) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_COMPOUND_ERROR_DIFFERENT_TYPE());
 			return;
 		}
 
-		/*
-		 * Second weapon must have inferior or equal lvl. in relation to first weapon
-		 */
-		if (secondItem.getItemTemplate().getLevel() > firstItem.getItemTemplate().getLevel()) {
+		// Second weapon must have inferior or equal lvl. in relation to first weapon
+		if (fuseWeapon.getItemTemplate().getLevel() > mainWeapon.getItemTemplate().getLevel()) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_COMPOUND_ERROR_MAIN_REQUIRE_HIGHER_LEVEL());
 			return;
 		}
 
 		// You can not combine Conditioning and Augmenting
-		if (firstItem.getImprovement() != null && secondItem.getImprovement() != null) {
-			if (firstItem.getImprovement().getChargeWay() != secondItem.getImprovement().getChargeWay()) {
+		if (mainWeapon.getImprovement() != null && fuseWeapon.getImprovement() != null) {
+			if (mainWeapon.getImprovement().getChargeWay() != fuseWeapon.getImprovement().getChargeWay()) {
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_COMPOUND_ERROR_NOT_COMPARABLE_ITEM());
 				return;
 			}
 		}
-		
-		secondItem.setBuffSkill(0);
 
-		firstItem.setFusionedItem(secondItem.getItemTemplate());
-
-		ItemSocketService.removeAllFusionStone(player, firstItem);
-
-		if (secondItem.hasOptionalSocket())
-			firstItem.setOptionalFusionSocket(secondItem.getOptionalSocket());
-		else
-			firstItem.setOptionalFusionSocket(0);
-
-		ItemSocketService.copyFusionStones(secondItem, firstItem);
-		firstItem.setPersistentState(PersistentState.UPDATE_REQUIRED);
-		DAOManager.getDAO(InventoryDAO.class).store(firstItem, player);
-
-		if (!player.getInventory().decreaseByObjectId(secondItemUniqueId, 1))
+		if (!player.getInventory().decreaseByObjectId(fuseWeaponObjId, 1))
 			return;
+		mainWeapon.setFusionedItem(fuseWeapon);
+		ItemSocketService.copyFusionStones(fuseWeapon, mainWeapon);
+		mainWeapon.setPersistentState(PersistentState.UPDATE_REQUIRED);
+		DAOManager.getDAO(InventoryDAO.class).store(mainWeapon, player);
 
-		ItemPacketService.updateItemAfterInfoChange(player, firstItem);
+		ItemPacketService.updateItemAfterInfoChange(player, mainWeapon);
 		player.getInventory().decreaseKinah(price);
-		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_COMPOUND_SUCCESS(firstItem.getL10n(), secondItem.getL10n()));
+		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_COMPOUND_SUCCESS(mainWeapon.getL10n(), fuseWeapon.getL10n()));
 	}
 
-	private static double rarityRate(ItemQuality rarity) {
+	private static long getBasePricePerLevelSquared(ItemQuality rarity) {
 		switch (rarity) {
+			case JUNK:
 			case COMMON:
-				return 1.0;
+				return 200;
 			case RARE:
-				return 1.25;
+				return 250;
 			case LEGEND:
-				return 1.5;
+				return 300;
 			case UNIQUE:
-				return 2.0;
+				return 400;
 			case EPIC:
-				return 2.5;
+				return 500;
 			case MYTHIC:
-				return 3.0;
 			default:
-				return 1.0;
+				return 600;
 		}
 	}
 
 	public static void breakWeapons(Player player, int weaponToBreakUniqueId) {
 		Item weaponToBreak = player.getInventory().getItemByObjId(weaponToBreakUniqueId);
-		if (weaponToBreak == null)
-			weaponToBreak = player.getEquipment().getEquippedItemByObjId(weaponToBreakUniqueId);
 
-		if (weaponToBreak == null || !(player.getTarget() instanceof Npc))
+		if (weaponToBreak == null) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_DECOMPOUND_ITEM_NO_TARGET_ITEM());
 			return;
+		}
 
 		if (!weaponToBreak.hasFusionedItem()) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_DECOMPOUND_ERROR_NOT_AVAILABLE(weaponToBreak.getL10n()));
@@ -158,7 +131,6 @@ public class ArmsfusionService {
 		}
 
 		weaponToBreak.setFusionedItem(null);
-		ItemSocketService.removeAllFusionStone(player, weaponToBreak);
 		DAOManager.getDAO(InventoryDAO.class).store(weaponToBreak, player);
 
 		ItemPacketService.updateItemAfterInfoChange(player, weaponToBreak);

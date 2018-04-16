@@ -482,7 +482,7 @@ public class ItemTemplate extends VisibleObjectTemplate {
 	/**
 	 * @return the rndBonusId, 0 if no bonus exists
 	 */
-	public int getRandomBonusId() {
+	public int getStatBonusSetId() {
 		return rndBonusId;
 	}
 

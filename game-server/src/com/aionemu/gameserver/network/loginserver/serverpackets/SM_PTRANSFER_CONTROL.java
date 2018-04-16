@@ -199,8 +199,8 @@ public class SM_PTRANSFER_CONTROL extends LsServerPacket {
 
 					writeD(item.getItemSkinTemplate().getTemplateId());
 					writeD(item.getFusionedItemId());
-					writeD(item.getOptionalSocket());
-					writeD(item.getOptionalFusionSocket());
+					writeD(item.getOptionalSockets());
+					writeD(item.getFusionedItemOptionalSockets());
 
 					writeD(item.getChargePoints());
 					Set<ManaStone> itemStones = item.getItemStones();
@@ -217,8 +217,9 @@ public class SM_PTRANSFER_CONTROL extends LsServerPacket {
 					}
 					writeD(item.getGodStoneId());
 					writeD(item.getColorExpireTime());
-					writeD(item.getBonusNumber());
 					writeD(item.getTuneCount());
+					writeD(item.getBonusStatsId());
+					writeD(item.getFusionedItemBonusStatsId());
 					writeD(item.getTempering());
 					writeD(item.getPackCount());
 					writeC(item.isAmplified() ? 1 : 0);

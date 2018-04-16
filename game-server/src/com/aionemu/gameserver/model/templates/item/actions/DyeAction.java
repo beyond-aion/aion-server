@@ -59,7 +59,7 @@ public class DyeAction extends AbstractItemAction implements IHouseObjectDyeActi
 		// item is equipped, so need broadcast packet
 		if (player.getEquipment().getEquippedItemByObjId(targetItem.getObjectId()) != null) {
 			PacketSendUtility.broadcastPacket(player,
-				new SM_UPDATE_PLAYER_APPEARANCE(player.getObjectId(), player.getEquipment().getEquippedForAppearence()), true);
+				new SM_UPDATE_PLAYER_APPEARANCE(player.getObjectId(), player.getEquipment().getEquippedForAppearance()), true);
 			player.getEquipment().setPersistentState(PersistentState.UPDATE_REQUIRED);
 		} else { // item is not equipped
 			player.getInventory().setPersistentState(PersistentState.UPDATE_REQUIRED);

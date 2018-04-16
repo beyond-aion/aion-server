@@ -72,11 +72,11 @@ public class ServerPacketsOpcodes {
 		addPacketOpcode(SM_ABNORMAL_EFFECT.class, 0x32, idSet);
 		addPacketOpcode(SM_SKILL_COOLDOWN.class, 0x33, idSet);
 		addPacketOpcode(SM_QUESTION_WINDOW.class, 0x34, idSet);
-		// 53 TODO: format: dd unk msg_id
+		addPacketOpcode(SM_SYSTEM_MESSAGE_2.class, 0x35, idSet);
 		addPacketOpcode(SM_ATTACK.class, 0x36, idSet);
 		addPacketOpcode(SM_MOVE.class, 0x37, idSet);
 		// 56
-		addPacketOpcode(SM_HEADING_UPDATE.class, 0x39, idSet);// TODO! not used
+		addPacketOpcode(SM_HEADING_UPDATE.class, 0x39, idSet);
 		addPacketOpcode(SM_TRANSFORM.class, 0x3A, idSet);
 		addPacketOpcode(SM_GM_SHOW_PLAYER_SKILLS.class, 0x3B, idSet);
 		addPacketOpcode(SM_DIALOG_WINDOW.class, 0x3C, idSet);

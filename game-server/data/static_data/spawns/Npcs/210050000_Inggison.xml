@@ -5103,7 +5103,6 @@
 		</spawn>
 		<!-- Obelisk -->
 		<spawn npc_id="730236" respawn_time="295">
-			<spot x="379.19" y="952.372" z="461.399" h="107"/>
 			<spot x="2714.708" y="1482.349" z="384.637" static_id="552"/>
 		</spawn>
 		<!-- Oconerk -->

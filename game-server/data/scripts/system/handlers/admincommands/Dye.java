@@ -8,6 +8,7 @@ import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Persistable.PersistentState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.item.ItemTemplate;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_UPDATE_PLAYER_APPEARANCE;
 import com.aionemu.gameserver.services.item.ItemPacketService;
 import com.aionemu.gameserver.utils.ChatUtil;
@@ -72,7 +73,15 @@ public class Dye extends AdminCommand {
 			}
 		}
 
-		List<Item> appearanceItems = target.getEquipment().getEquippedForAppearence();
+		List<Item> appearanceItems = target.getEquipment().getEquippedForAppearance();
+		if (appearanceItems.isEmpty()) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CHANGE_ITEM_SKIN_NO_TARGET_ITEM());
+			return;
+		}
+		if (appearanceItems.stream().noneMatch(item -> item.getItemTemplate().isItemDyePermitted())) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_COLOR_CHANGE_ERROR_CANNOTDYE(appearanceItems.get(0).getL10n()));
+			return;
+		}
 		for (Item item : appearanceItems) {
 			if (item.getItemSkinTemplate().isItemDyePermitted())
 				item.setItemColor(itemColor);
