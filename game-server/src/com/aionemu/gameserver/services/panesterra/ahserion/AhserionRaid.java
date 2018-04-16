@@ -22,7 +22,6 @@ import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.World;
-import com.aionemu.gameserver.world.WorldPosition;
 
 /**
  * @author Yeats
@@ -74,7 +73,7 @@ public class AhserionRaid {
 	private void startInstanceTimer() {
 		progressTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
 
-			int progress;
+			private int progress;
 
 			@Override
 			public void run() {
@@ -218,8 +217,7 @@ public class AhserionRaid {
 				break;
 		}
 
-		PanesterraTeam eliminatedTeam = null;
-
+		PanesterraTeam eliminatedTeam;
 		synchronized (panesterraTeams) {
 			eliminatedTeam = panesterraTeams.remove(eliminatedFaction);
 		}
@@ -251,7 +249,7 @@ public class AhserionRaid {
 				npc.getController().delete();
 		}
 		SpawnEngine.spawnObject(SpawnEngine.newSingleTimeSpawn(400030000, 804680 + winnerFaction.getId(), 509.239f, 513.011f, 675.089f, (byte) 48), 1); // Pasha
-		ThreadPoolManager.getInstance().schedule(() -> stop(), 900000); // 15min
+		ThreadPoolManager.getInstance().schedule(this::stop, 900000); // 15min
 	}
 
 	private void sendMsg(SM_SYSTEM_MESSAGE msg) {
@@ -283,15 +281,13 @@ public class AhserionRaid {
 		return null;
 	}
 
-	public void revivePlayer(Player player) {
+	public boolean teleportToTeamStartPosition(Player player) {
 		PanesterraTeam team = getPanesterraFactionTeam(player);
-		if (team == null || team.isEliminated())
-			return;
-		WorldPosition pos = team.getStartPosition();
-		if (pos != null)
-			TeleportService.teleportTo(player, pos.getMapId(), pos.getX(), pos.getY(), pos.getZ());
-		else
-			TeleportService.moveToBindLocation(player);
+		if (team != null && !team.isEliminated() && team.getStartPosition() != null) {
+			TeleportService.teleportTo(player, team.getStartPosition());
+			return true;
+		}
+		return false;
 	}
 
 	/**

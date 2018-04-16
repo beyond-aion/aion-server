@@ -117,9 +117,7 @@ public class PlayerReviveService {
 			TeleportService.teleportToPrison(player);
 		} else if (player.isInCustomState(CustomPlayerState.EVENT_MODE)) {
 			TeleportService.teleportToEvent(player);
-		} else if (player.getWorldId() == 400030000) {
-			AhserionRaid.getInstance().revivePlayer(player);
-		} else {
+		} else if (player.getWorldId() != 400030000 || !AhserionRaid.getInstance().teleportToTeamStartPosition(player)) {
 			WorldPosition resPos = null;
 			for (VortexLocation loc : VortexService.getInstance().getVortexLocations().values()) {
 				if (loc.isInsideActiveVotrex(player) && player.getRace().equals(loc.getInvadersRace())) {
