@@ -117,6 +117,8 @@ public class PlayerReviveService {
 			TeleportService.teleportToPrison(player);
 		} else if (player.isInCustomState(CustomPlayerState.EVENT_MODE)) {
 			TeleportService.teleportToEvent(player);
+		} else if (player.getWorldId() == 400030000) {
+			AhserionRaid.getInstance().revivePlayer(player);
 		} else {
 			WorldPosition resPos = null;
 			for (VortexLocation loc : VortexService.getInstance().getVortexLocations().values()) {
@@ -174,8 +176,6 @@ public class PlayerReviveService {
 			TeleportService.teleportToEvent(player);
 			return;
 		}
-		if (AhserionRaid.getInstance().revivePlayer(player, skillId))
-			return;
 		if (player.getPosition().getWorldMapInstance().getInstanceHandler().onReviveEvent(player))
 			return;
 		WorldMap map = World.getInstance().getWorldMap(player.getWorldId());
@@ -198,9 +198,9 @@ public class PlayerReviveService {
 
 	public static void revive(Player player, int hpPercent, int mpPercent, boolean setSoulSickness, int resurrectionSkill) {
 		player.getKnownList().forEachPlayer(p -> {
-				if (player.equals(p.getTarget())) {
-					p.setTarget(null);
-					PacketSendUtility.sendPacket(p, new SM_TARGET_SELECTED(null));
+			if (player.equals(p.getTarget())) {
+				p.setTarget(null);
+				PacketSendUtility.sendPacket(p, new SM_TARGET_SELECTED(null));
 			}
 		});
 		boolean isNoResurrectPenalty = player.getEffectController().isNoResurrectPenaltyInEffect();

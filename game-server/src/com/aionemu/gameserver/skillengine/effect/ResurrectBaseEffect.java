@@ -42,7 +42,7 @@ public class ResurrectBaseEffect extends ResurrectEffect {
 					if (effected instanceof Player) {
 						Player effected = (Player) effect.getEffected();
 						if (!PvpMapService.getInstance().isOnPvPMap(effected)) {
-							if (effected.isInInstance() || effected.getWorldId() == 400030000)
+							if (effected.isInInstance())
 								PlayerReviveService.instanceRevive(effected, skillId);
 							else if (effected.getKisk() != null)
 								PlayerReviveService.kiskRevive(effected, skillId);

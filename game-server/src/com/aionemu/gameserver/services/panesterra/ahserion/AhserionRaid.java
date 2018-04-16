@@ -16,10 +16,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.spawns.SpawnGroup;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.model.templates.spawns.panesterra.AhserionsFlightSpawnTemplate;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_MOTION;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_PLAYER_INFO;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
-import com.aionemu.gameserver.services.player.PlayerReviveService;
 import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -286,26 +283,15 @@ public class AhserionRaid {
 		return null;
 	}
 
-	public boolean revivePlayer(Player player, int skillId) {
-		if (player.getWorldId() != 400030000)
-			return false;
-
+	public void revivePlayer(Player player) {
 		PanesterraTeam team = getPanesterraFactionTeam(player);
 		if (team == null || team.isEliminated())
-			return false;
-
-		PlayerReviveService.revive(player, 25, 25, false, skillId);
-		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REBIRTH_MASSAGE_ME());
-		player.getGameStats().updateStatsAndSpeedVisually();
-		PacketSendUtility.sendPacket(player, new SM_PLAYER_INFO(player, false));
-		PacketSendUtility.sendPacket(player, new SM_MOTION(player.getObjectId(), player.getMotions().getActiveMotions()));
+			return;
 		WorldPosition pos = team.getStartPosition();
 		if (pos != null)
 			TeleportService.teleportTo(player, pos.getMapId(), pos.getX(), pos.getY(), pos.getZ());
 		else
 			TeleportService.moveToBindLocation(player);
-		player.unsetResPosState();
-		return true;
 	}
 
 	/**

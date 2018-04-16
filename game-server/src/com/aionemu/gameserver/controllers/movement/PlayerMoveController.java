@@ -7,7 +7,6 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.LOG;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.TYPE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
-import com.aionemu.gameserver.services.panesterra.ahserion.AhserionRaid;
 import com.aionemu.gameserver.services.player.PlayerReviveService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.stats.StatFunctions;
@@ -39,7 +38,7 @@ public class PlayerMoveController extends PlayableMoveController<Player> {
 				if (!owner.getController().die(TYPE.FALL_DAMAGE, LOG.REGULAR)) // invulnerable players cannot die
 					return;
 				owner.getController().onStopMove(); // stops and notifies move observers
-				if (!owner.isInInstance() && !AhserionRaid.getInstance().revivePlayer(owner, 0)) { // instant revive at kisk or bind point
+				if (!owner.isInInstance()) { // instant revive at kisk or bind point
 					Kisk kisk = owner.getKisk();
 					if (kisk != null && kisk.isActive())
 						PlayerReviveService.kiskRevive(owner);
