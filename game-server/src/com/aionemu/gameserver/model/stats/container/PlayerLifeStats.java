@@ -19,9 +19,8 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 public class PlayerLifeStats extends CreatureLifeStats<Player> {
 
-	protected int currentFp;
 	private final ReentrantLock fpLock = new ReentrantLock();
-
+	private int currentFp;
 	private Future<?> flyRestoreTask;
 	private Future<?> flyReduceTask;
 
@@ -35,43 +34,38 @@ public class PlayerLifeStats extends CreatureLifeStats<Player> {
 		if (isFullyRestoredHp()) // FIXME: Temp Fix: Reset aggro list when hp is full
 			owner.getAggroList().clear();
 		super.onIncreaseHp(type, value, skillId, log);
-		if (value > 0) {
-			sendHpPacketUpdate();
-			sendGroupPacketUpdate();
-		}
 	}
 
 	@Override
 	protected void onReduceHp(TYPE type, int value, int skillId, LOG log) {
 		super.onReduceHp(type, value, skillId, log);
-		if (value > 0) {
-			sendHpPacketUpdate();
-			sendGroupPacketUpdate();
+		if (value > 0)
 			triggerRestoreTask();
-		}
 	}
 
 	@Override
-	protected void onIncreaseMp(TYPE type, int value, int skillId, LOG log) {
-		sendAttackStatusPacketUpdate(type, value, skillId, log);
-		if (value > 0) {
-			sendMpPacketUpdate();
-			sendGroupPacketUpdate();
-		}
+	protected void onHpChanged() {
+		super.onHpChanged();
+		sendHpPacketUpdate();
+		sendGroupPacketUpdate();
 	}
 
 	@Override
 	protected void onReduceMp(TYPE type, int value, int skillId, LOG log) {
-		sendAttackStatusPacketUpdate(type, value, skillId, log);
-		if (value > 0) {
-			sendMpPacketUpdate();
-			sendGroupPacketUpdate();
+		super.onReduceMp(type, value, skillId, log);
+		if (value > 0)
 			triggerRestoreTask();
-		}
+	}
+
+	@Override
+	protected void onMpChanged() {
+		super.onMpChanged();
+		sendMpPacketUpdate();
+		sendGroupPacketUpdate();
 	}
 
 	private void sendGroupPacketUpdate() {
-		if (owner.isInTeam()) {
+		if (owner.isInTeam() && !TeamEffectUpdater.getInstance().hasTask(owner)) {
 			TeamEffectUpdater.getInstance().startTask(owner);
 		}
 	}
@@ -105,11 +99,11 @@ public class PlayerLifeStats extends CreatureLifeStats<Player> {
 			triggerFpRestore();
 	}
 
-	public void sendHpPacketUpdate() {
+	private void sendHpPacketUpdate() {
 		PacketSendUtility.sendPacket(owner, new SM_STATUPDATE_HP(currentHp, getMaxHp()));
 	}
 
-	public void sendMpPacketUpdate() {
+	private void sendMpPacketUpdate() {
 		PacketSendUtility.sendPacket(owner, new SM_STATUPDATE_MP(currentMp, getMaxMp()));
 	}
 
@@ -166,8 +160,7 @@ public class PlayerLifeStats extends CreatureLifeStats<Player> {
 	/**
 	 * This method is called whenever caller wants to reduce creatures' FP
 	 * 
-	 * @param value
-	 * @return
+	 * @return Current flight points
 	 */
 	public int reduceFp(TYPE type, int value, int skillId, LOG log) {
 		fpLock.lock();

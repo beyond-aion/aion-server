@@ -369,16 +369,26 @@ public abstract class CreatureLifeStats<T extends Creature> {
 
 	protected void onIncreaseHp(TYPE type, int value, int skillId, LOG log) {
 		sendAttackStatusPacketUpdate(type, value, skillId, log);
+		if (value > 0)
+			onHpChanged();
 	}
 
 	protected void onReduceHp(TYPE type, int value, int skillId, LOG log) {
 		sendAttackStatusPacketUpdate(type, value, skillId, log);
+		if (value > 0)
+			onHpChanged();
 	}
 
 	protected void onIncreaseMp(TYPE type, int value, int skillId, LOG log) {
+		sendAttackStatusPacketUpdate(type, value, skillId, log);
+		if (value > 0)
+			onMpChanged();
 	}
 
 	protected void onReduceMp(TYPE type, int value, int skillId, LOG log) {
+		sendAttackStatusPacketUpdate(type, value, skillId, log);
+		if (value > 0)
+			onMpChanged();
 	}
 
 	public int getMaxFp() {
@@ -400,7 +410,7 @@ public abstract class CreatureLifeStats<T extends Creature> {
 	}
 
 	/**
-	 * This method can be used for Npc's to fully restore its HP and remove dead state of lifestats
+	 * This method can be used to fully restore owners HP and remove dead state of lifestats
 	 * 
 	 * @param hpPercent
 	 */
@@ -414,10 +424,11 @@ public abstract class CreatureLifeStats<T extends Creature> {
 		} finally {
 			hpLock.unlock();
 		}
+		onSetHp();
 	}
 
 	/**
-	 * Sets the current HP without sending packets or notifying observers
+	 * Sets the current HP without notifying observers
 	 */
 	public final void setCurrentHp(int hp) {
 		hpLock.lock();
@@ -427,10 +438,21 @@ public abstract class CreatureLifeStats<T extends Creature> {
 		} finally {
 			hpLock.unlock();
 		}
+		onSetHp();
+	}
+
+	private void onSetHp() {
+		// broadcast current hp percentage to others
+		PacketSendUtility.broadcastToSightedPlayers(owner, new SM_ATTACK_STATUS(owner, TYPE.HP, 0, 0, LOG.REGULAR));
+		// update hp bar on owners client
+		onHpChanged();
+	}
+
+	protected void onHpChanged() {
 	}
 
 	/**
-	 * Sets the current MP without sending packets or notifying observers
+	 * Sets the current MP without notifying observers
 	 */
 	public final void setCurrentMp(int value) {
 		mpLock.lock();
@@ -439,20 +461,31 @@ public abstract class CreatureLifeStats<T extends Creature> {
 		} finally {
 			mpLock.unlock();
 		}
+		onSetMp();
 	}
 
 	/**
-	 * This method can be used for Npc's to fully restore its MP
+	 * This method can be used to fully restore owners MP
 	 * 
 	 * @param mpPercent
 	 */
 	public final void setCurrentMpPercent(int mpPercent) {
 		mpLock.lock();
 		try {
-			this.currentMp = (int) (mpPercent / 100f * getMaxMp());
+			currentMp = (int) (mpPercent / 100f * getMaxMp());
 		} finally {
 			mpLock.unlock();
 		}
+		onSetMp();
 	}
 
+	private void onSetMp() {
+		// broadcast current mp percentage to others
+		PacketSendUtility.broadcastToSightedPlayers(owner, new SM_ATTACK_STATUS(owner, TYPE.HEAL_MP, 0, 0, LOG.MPHEAL));
+		// update mp bar on owners client
+		onMpChanged();
+	}
+
+	protected void onMpChanged() {
+	}
 }
