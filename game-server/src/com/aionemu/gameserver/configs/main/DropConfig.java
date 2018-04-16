@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.configs.main;
 
-import java.util.List;
 import java.util.Set;
 
 import com.aionemu.commons.configuration.Property;
@@ -30,7 +29,7 @@ public class DropConfig {
 	 * Disable drop rate reduction based on level difference for maps
 	 */
 	@Property(key = "gameserver.drop.no_reduction_maps")
-	public static List<Integer> NO_REDUCTION_MAPS;
+	public static Set<Integer> NO_REDUCTION_MAPS;
 
 	/**
 	 * Disable range checks for specified maps
