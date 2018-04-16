@@ -174,7 +174,7 @@ public class PlayerReviveService {
 			TeleportService.teleportToEvent(player);
 			return;
 		}
-		if (player.getWorldId() == 400030000 && AhserionRaid.getInstance().revivePlayer(player, skillId))
+		if (AhserionRaid.getInstance().revivePlayer(player, skillId))
 			return;
 		if (player.getPosition().getWorldMapInstance().getInstanceHandler().onReviveEvent(player))
 			return;

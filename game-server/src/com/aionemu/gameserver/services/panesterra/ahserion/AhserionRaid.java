@@ -287,6 +287,9 @@ public class AhserionRaid {
 	}
 
 	public boolean revivePlayer(Player player, int skillId) {
+		if (player.getWorldId() != 400030000)
+			return false;
+
 		PanesterraTeam team = getPanesterraFactionTeam(player);
 		if (team == null || team.isEliminated())
 			return false;
