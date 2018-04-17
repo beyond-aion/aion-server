@@ -229,7 +229,7 @@ public class TiamatWeakenedDragonAI extends AggressiveNpcAI {
 	@Override
 	public boolean ask(AIQuestion question) {
 		switch (question) {
-			case SHOULD_REWARD:
+			case SHOULD_LOOT:
 				return false;
 			default:
 				return super.ask(question);
