@@ -52,6 +52,8 @@
 	-->
 	
 	<!-- REPORTING QUESTS -->
+	<report_to id="30720" end_npc_ids="804897 804898" />
+	<report_to id="30723" end_npc_ids="804897 804898" />
 	<report_to id="30764" start_npc_ids="730703" end_npc_ids="800462" />
 	<!-- <report_to id="30769" start_npc_ids="800438 800462" /> -->
 	
@@ -61,6 +63,4 @@
 	<!-- HUNTING QUESTS -->
 	
 	<!-- ITEM ORDERS QUESTS -->
-	<item_order id="30720" end_npc_id="804898" />
-	<item_order id="30723" end_npc_id="804898" />
 </quest_scripts>
