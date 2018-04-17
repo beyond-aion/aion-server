@@ -1,7 +1,9 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 import org.slf4j.LoggerFactory;
 
@@ -15,30 +17,29 @@ import com.aionemu.gameserver.services.AtreianPassportService;
  */
 public class CM_ATREIAN_PASSPORT extends AionClientPacket {
 
-	private int count;
-	private List<Integer> passportId = new ArrayList<>();
-	private List<Integer> timestamps = new ArrayList<>();
+	private Map<Integer, Set<Integer>> passports = new HashMap<>();
 
-	/**
-	 * @param opcode
-	 * @param state
-	 * @param restStates
-	 */
 	public CM_ATREIAN_PASSPORT(int opcode, State state, State... restStates) {
 		super(opcode, state, restStates);
 	}
 
 	@Override
 	protected void readImpl() {
-		count = readUH();
+		int count = readUH();
 		for (int i = 0; i < count; i++) {
 			if (getRemainingBytes() == 0) { // debugging purposes due to error on readD
 				LoggerFactory.getLogger(CM_ATREIAN_PASSPORT.class)
 					.warn("Received invalid passport count (" + count + ") from " + getConnection().getActivePlayer());
 				break;
 			}
-			passportId.add(readD());
-			timestamps.add(readD());
+			int passportId = readD();
+			int timestamp = readD();
+			passports.compute(passportId, (ppId, timestamps) -> {
+				if (timestamps == null)
+					timestamps = new HashSet<>();
+				timestamps.add(timestamp);
+				return timestamps;
+			});
 		}
 
 	}
@@ -46,9 +47,8 @@ public class CM_ATREIAN_PASSPORT extends AionClientPacket {
 	@Override
 	protected void runImpl() {
 		Player player = getConnection().getActivePlayer();
-		if (player == null)
-			return;
-		AtreianPassportService.getInstance().takeReward(player, timestamps, passportId);
+		if (player != null)
+			AtreianPassportService.getInstance().takeReward(player, passports);
 	}
 
 }

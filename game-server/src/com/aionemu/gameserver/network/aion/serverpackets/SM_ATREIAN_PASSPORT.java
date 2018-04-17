@@ -32,7 +32,7 @@ public class SM_ATREIAN_PASSPORT extends AionServerPacket {
 		for (Passport pp : passports.getAllPassports()) {
 			writeD(pp.getId());
 			writeD(stamps); // wrong, this is the stamp count when each passport was received (current month sends current count for upcoming rewards)
-			writeD(pp.getRewardStatus()); // wrong: 0 = not yet arrived (upcoming this months rewards), 1 = arrived and not taken, 2 = arrived and taken, 3 = not arrived (last months rewards)
+			writeD(pp.getRewardStatus().getId()); // 0 = not yet arrived (upcoming this months rewards), 1 = arrived and not taken, 2 = arrived and taken, 3 = not arrived (last months rewards)
 			writeD((int) (pp.getArriveDate().getTime() / 1000)); // for upcoming rewards it's the first login time each day
 		}
 	}

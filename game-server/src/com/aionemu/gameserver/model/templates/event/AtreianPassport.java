@@ -6,7 +6,6 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import com.aionemu.gameserver.dataholders.loadingutils.adapters.LocalDateTimeAdapter;
@@ -22,7 +21,7 @@ public class AtreianPassport {
 	@XmlAttribute(name = "id", required = true)
 	private int id;
 	@XmlAttribute(name = "active", required = true)
-	private int active;
+	private boolean active;
 	@XmlAttribute(name = "period_start", required = true)
 	@XmlJavaTypeAdapter(LocalDateTimeAdapter.class)
 	private LocalDateTime pStart;
@@ -34,19 +33,15 @@ public class AtreianPassport {
 	@XmlAttribute(name = "attend_num")
 	private int attendNum;
 	@XmlAttribute(name = "reward_item", required = true)
-	private int rewardItem;
+	private int rewardItemId;
 	@XmlAttribute(name = "reward_item_num", required = true)
-	private int rewardItemNum = 1;
-	@XmlAttribute(name = "reward_item_expire")
-	private int rewardItemExpire;
-	@XmlTransient
-	private int rewardId = 0;
+	private int rewardItemCount;
 
 	public int getId() {
 		return id;
 	}
 
-	public int getActive() {
+	public boolean isActive() {
 		return active;
 	}
 
@@ -66,15 +61,11 @@ public class AtreianPassport {
 		return attendNum;
 	}
 
-	public int getRewardItem() {
-		return rewardItem;
+	public int getRewardItemId() {
+		return rewardItemId;
 	}
 
-	public int getRewardItemNum() {
-		return rewardItemNum;
-	}
-
-	public int getRewardItemExpire() {
-		return rewardItemExpire;
+	public int getRewardItemCount() {
+		return rewardItemCount;
 	}
 }
