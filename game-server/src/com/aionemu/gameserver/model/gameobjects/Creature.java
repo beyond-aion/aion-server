@@ -347,6 +347,10 @@ public abstract class Creature extends VisibleObject {
 
 		return false;
 	}
+	
+	public boolean isInAnyHide() {
+		return visualState != CreatureVisualState.VISIBLE.getId() && visualState != CreatureVisualState.BLINKING.getId();
+	}
 
 	/**
 	 * @return seeState

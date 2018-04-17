@@ -6,7 +6,6 @@ import org.slf4j.LoggerFactory;
 import com.aionemu.gameserver.model.gameobjects.player.DeniedStatus;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.RequestResponseHandler;
-import com.aionemu.gameserver.model.gameobjects.state.CreatureVisualState;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUESTION_WINDOW;
@@ -54,12 +53,12 @@ public class CM_EXCHANGE_REQUEST extends AionClientPacket {
 			return;
 		}
 
-		if (activePlayer.getVisualState() > 0 && activePlayer.getVisualState() != CreatureVisualState.BLINKING.getId()) {
+		if (activePlayer.isInAnyHide()) {
 			sendPacket(SM_SYSTEM_MESSAGE.STR_EXCHANGE_CANT_EXCHANGE_WHILE_INVISIBLE());
 			return;
 		}
 
-		if (targetPlayer.getVisualState() > 0 && targetPlayer.getVisualState() != CreatureVisualState.BLINKING.getId()) {
+		if (targetPlayer.isInAnyHide()) {
 			sendPacket(SM_SYSTEM_MESSAGE.STR_EXCHANGE_CANT_EXCHANGE_WITH_INVISIBLE_USER());
 			return;
 		}

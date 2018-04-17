@@ -1031,7 +1031,7 @@ public class Player extends Creature {
 	}
 
 	public boolean isDueling(Player player) {
-		return DuelService.getInstance().isDueling(player.getObjectId(), this.getObjectId());
+		return DuelService.getInstance().isDueling(player, this);
 	}
 
 	public boolean isInSameTeam(Player player) {

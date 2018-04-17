@@ -277,7 +277,7 @@ public class TeleportService {
 		if (player.isDead()) {
 			PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.RESURRECT), true);
 			PlayerReviveService.revive(player, 20, 20, true, 0);
-		} else if (DuelService.getInstance().isDueling(player.getObjectId())) {
+		} else if (DuelService.getInstance().isDueling(player)) {
 			DuelService.getInstance().loseDuel(player);
 		}
 		sendLoc(player, worldId, instanceId, x, y, z, heading, animation);

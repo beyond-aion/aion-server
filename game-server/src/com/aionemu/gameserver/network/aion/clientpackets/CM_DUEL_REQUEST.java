@@ -1,8 +1,6 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
-import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
-import com.aionemu.gameserver.model.gameobjects.player.DeniedStatus;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
@@ -41,34 +39,8 @@ public class CM_DUEL_REQUEST extends AionClientPacket {
 		if (activePlayer.isDead())
 			return;
 
-		if (activePlayer.isInInstance() && !CustomConfig.INSTANCE_DUEL_ENABLE)
-			return;
-
-		if (target == null)
-			return;
-
-		if (target instanceof Player && !((Player) target).equals(activePlayer)) {
-			DuelService duelService = DuelService.getInstance();
-
-			Player targetPlayer = (Player) target;
-
-			if (duelService.isDueling(activePlayer.getObjectId())) {
-				sendPacket(SM_SYSTEM_MESSAGE.STR_DUEL_YOU_ARE_IN_DUEL_ALREADY());
-				return;
-			}
-			if (duelService.isDueling(targetPlayer.getObjectId())) {
-				sendPacket(SM_SYSTEM_MESSAGE.STR_DUEL_PARTNER_IN_DUEL_ALREADY(target.getName()));
-				return;
-			}
-			if (targetPlayer.getPlayerSettings().isInDeniedStatus(DeniedStatus.DUEL)) {
-				sendPacket(SM_SYSTEM_MESSAGE.STR_MSG_REJECTED_DUEL(targetPlayer.getName()));
-				return;
-			}
-			if (targetPlayer.isDead()) {
-				sendPacket(SM_SYSTEM_MESSAGE.STR_DUEL_PARTNER_INVALID(target.getName()));
-				return;
-			}
-			duelService.onDuelRequest(activePlayer, targetPlayer);
+		if (target instanceof Player && !target.equals(activePlayer)) {
+			DuelService.getInstance().onDuelRequest(activePlayer, (Player) target);
 		} else {
 			sendPacket(SM_SYSTEM_MESSAGE.STR_DUEL_PARTNER_INVALID(target.getName()));
 		}

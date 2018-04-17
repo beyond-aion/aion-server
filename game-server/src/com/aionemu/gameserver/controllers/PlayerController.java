@@ -49,8 +49,6 @@ import com.aionemu.gameserver.model.house.House;
 import com.aionemu.gameserver.model.stats.container.PlayerGameStats;
 import com.aionemu.gameserver.model.summons.SummonMode;
 import com.aionemu.gameserver.model.summons.UnsummonType;
-import com.aionemu.gameserver.model.team.TeamMember;
-import com.aionemu.gameserver.model.team.TemporaryPlayerTeam;
 import com.aionemu.gameserver.model.templates.QuestTemplate;
 import com.aionemu.gameserver.model.templates.flypath.FlyPathEntry;
 import com.aionemu.gameserver.model.templates.panels.SkillPanel;
@@ -189,14 +187,7 @@ public class PlayerController extends CreatureController<Player> {
 	@Override
 	public void onHide() {
 		super.onHide();
-		// send SM_DELETE a second time to fix client not fading out the char (only happens when dueling with a team member of a group or alliance)
-		TemporaryPlayerTeam<? extends TeamMember<Player>> team = getOwner().getCurrentTeam();
-		if (team != null) {
-			team.forEach(p -> {
-				if (!p.canSee(getOwner()))
-					PacketSendUtility.sendPacket(p, new SM_DELETE(getOwner()));
-			});
-		}
+		DuelService.getInstance().fixTeamVisibility(getOwner());
 	}
 
 	@Override
@@ -306,9 +297,10 @@ public class PlayerController extends CreatureController<Player> {
 		setRebirthReviveInfo();
 		Creature master = lastAttacker.getMaster();
 
-		if (DuelService.getInstance().isDueling(player.getObjectId())) {
-			if (master instanceof Player && ((Player) master).isDueling(player)) {
-				DuelService.getInstance().loseDuel(player);
+		if (DuelService.getInstance().isDueling(player)) {
+			boolean killedByOpponent = master instanceof Player && ((Player) master).isDueling(player);
+			DuelService.getInstance().loseDuel(player);
+			if (killedByOpponent) {
 				player.getEffectController().removeByDispelSlotType(DispelSlotType.DEBUFF);
 				if (player.getLifeStats().getHpPercentage() < 33)
 					player.getLifeStats().setCurrentHpPercent(33);
@@ -320,7 +312,6 @@ public class PlayerController extends CreatureController<Player> {
 					master.getLifeStats().setCurrentMpPercent(33);
 				return;
 			}
-			DuelService.getInstance().loseDuel(player);
 		}
 
 		// Release summon
@@ -685,7 +676,7 @@ public class PlayerController extends CreatureController<Player> {
 			AttackUtil.cancelCastOn(getOwner());
 			AttackUtil.removeTargetFrom(getOwner());
 			PacketSendUtility.broadcastPacket(getOwner(), new SM_PLAYER_STATE(getOwner()), true);
-			addTask(TaskId.PROTECTION_ACTIVE, ThreadPoolManager.getInstance().schedule(() -> stopProtectionActiveTask(), 60000));
+			addTask(TaskId.PROTECTION_ACTIVE, ThreadPoolManager.getInstance().schedule(this::stopProtectionActiveTask, 60000));
 		}
 	}
 

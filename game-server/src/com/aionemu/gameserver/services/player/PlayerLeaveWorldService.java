@@ -123,7 +123,7 @@ public class PlayerLeaveWorldService {
 				PlayerReviveService.instanceRevive(player);
 			else
 				PlayerReviveService.bindRevive(player);
-		} else if (DuelService.getInstance().isDueling(player.getObjectId())) {
+		} else if (DuelService.getInstance().isDueling(player)) {
 			DuelService.getInstance().loseDuel(player);
 		}
 		// store current effects
