@@ -37,7 +37,6 @@ public class IDSweep_Shugos extends AggressiveNpcAI {
 	@Override
 	public boolean ask(AIQuestion question) {
 		switch (question) {
-			case SHOULD_REWARD:
 			case SHOULD_LOOT:
 				return false;
 			default:
