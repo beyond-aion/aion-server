@@ -145,7 +145,7 @@ public abstract class BaseClientPacket extends AbstractPacket {
 	 * @return String
 	 */
 	protected final String readS() {
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 		char ch;
 		try {
 			while ((ch = buf.readChar()) != 0)

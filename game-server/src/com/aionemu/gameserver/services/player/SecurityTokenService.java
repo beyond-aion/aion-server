@@ -32,7 +32,7 @@ public class SecurityTokenService {
 		try {
 			MessageDigest md = MessageDigest.getInstance("MD5");
 			byte[] array = md.digest(md5.getBytes());
-			StringBuffer sb = new StringBuffer();
+			StringBuilder sb = new StringBuilder();
 			for (byte element : array) {
 				sb.append(Integer.toHexString((element & 0xFF) | 0x100).substring(1, 3));
 			}
@@ -43,7 +43,7 @@ public class SecurityTokenService {
 		return null;
 	}
 
-	public static final SecurityTokenService getInstance() {
+	public static SecurityTokenService getInstance() {
 		return SingletonHolder.instance;
 	}
 

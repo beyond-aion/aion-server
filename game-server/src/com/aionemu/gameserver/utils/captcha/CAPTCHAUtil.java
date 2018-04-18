@@ -7,6 +7,8 @@ import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.nio.ByteBuffer;
 
+import org.slf4j.LoggerFactory;
+
 /**
  * @author Cura
  */
@@ -27,12 +29,8 @@ public class CAPTCHAUtil {
 	 * @return byte[]
 	 */
 	public static ByteBuffer createCAPTCHA(String word) {
-		ByteBuffer byteBuffer = null;
 		BufferedImage bImg = createImage(word);
-
-		byteBuffer = DDSConverter.convertToDxt1NoTransparency(bImg);
-
-		return byteBuffer;
+		return DDSConverter.convertToDxt1NoTransparency(bImg);
 	}
 
 	/**
@@ -43,7 +41,7 @@ public class CAPTCHAUtil {
 	 * @return BufferedImage
 	 */
 	private static BufferedImage createImage(String word) {
-		BufferedImage bImg = null;
+		BufferedImage bImg;
 
 		try {
 			// image create
@@ -73,7 +71,7 @@ public class CAPTCHAUtil {
 			// resource dispose
 			g2.dispose();
 		} catch (Exception e) {
-			e.printStackTrace();
+			LoggerFactory.getLogger(CAPTCHAUtil.class).error("", e);
 			bImg = null;
 		}
 
@@ -91,7 +89,7 @@ public class CAPTCHAUtil {
 	 * @return CAPTCHA word
 	 */
 	private static String randomWord(int wordLength) {
-		StringBuffer word = new StringBuffer();
+		StringBuilder word = new StringBuilder();
 
 		for (int i = 0; i < wordLength; i++) {
 			int index = Math.abs((int) (Math.random() * WORD.length()));
