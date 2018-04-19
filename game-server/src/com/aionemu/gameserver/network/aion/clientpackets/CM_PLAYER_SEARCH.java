@@ -38,7 +38,7 @@ public class CM_PLAYER_SEARCH extends AionClientPacket {
 
 	@Override
 	protected void readImpl() {
-		name = Util.convertName(readS(52));
+		name = Util.convertName(readS(25));
 		region = readD();
 		classMask = readD();
 		minLevel = readUC();
