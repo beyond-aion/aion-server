@@ -90,7 +90,7 @@ public class IdgelDomeInstance extends GeneralInstanceHandler {
 				reward.setBaseAp(IdgelDomeInfo.WIN_AP);
 				reward.setBonusAp(winnerBonusAp);
 				reward.setBaseGp(50);
-				reward.addItemReward(new RewardItem(186000243, 3));
+				reward.addItemReward(new RewardItem(186000242, 3));
 				reward.addItemReward(new RewardItem(188053030, 1));
 				reward.addItemReward(spacer);
 				if (isKunaxKilled) {
