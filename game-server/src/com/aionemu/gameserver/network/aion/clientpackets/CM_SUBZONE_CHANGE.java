@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import java.util.Set;
+
 import com.aionemu.gameserver.configs.administration.AdminConfig;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.zone.ZoneClassName;
@@ -15,8 +17,8 @@ public class CM_SUBZONE_CHANGE extends AionClientPacket {
 
 	private byte unk;
 
-	public CM_SUBZONE_CHANGE(int opcode, State state, State... restStates) {
-		super(opcode, state, restStates);
+	public CM_SUBZONE_CHANGE(int opcode, Set<State> validStates) {
+		super(opcode, validStates);
 	}
 
 	@Override

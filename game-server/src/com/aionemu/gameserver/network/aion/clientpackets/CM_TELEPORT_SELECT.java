@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import java.util.Set;
+
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.AionObject;
@@ -30,8 +32,8 @@ public class CM_TELEPORT_SELECT extends AionClientPacket {
 	 */
 	private int locId;
 
-	public CM_TELEPORT_SELECT(int opcode, State state, State... restStates) {
-		super(opcode, state, restStates);
+	public CM_TELEPORT_SELECT(int opcode, Set<State> validStates) {
+		super(opcode, validStates);
 	}
 
 	@Override

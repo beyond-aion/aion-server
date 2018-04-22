@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import java.util.Set;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import java.util.concurrent.RunnableFuture;
@@ -21,8 +22,8 @@ import com.aionemu.gameserver.world.World;
  */
 public class CM_TELEPORT_ANIMATION_DONE extends AionClientPacket {
 
-	public CM_TELEPORT_ANIMATION_DONE(int opcode, State state, State... restStates) {
-		super(opcode, state, restStates);
+	public CM_TELEPORT_ANIMATION_DONE(int opcode, Set<State> validStates) {
+		super(opcode, validStates);
 	}
 
 	@Override

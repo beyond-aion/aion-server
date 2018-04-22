@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import java.util.Set;
+
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -18,8 +20,8 @@ public class CM_SHOW_DIALOG extends AionClientPacket {
 	 * 
 	 * @param opcode
 	 */
-	public CM_SHOW_DIALOG(int opcode, State state, State... restStates) {
-		super(opcode, state, restStates);
+	public CM_SHOW_DIALOG(int opcode, Set<State> validStates) {
+		super(opcode, validStates);
 	}
 
 	@Override

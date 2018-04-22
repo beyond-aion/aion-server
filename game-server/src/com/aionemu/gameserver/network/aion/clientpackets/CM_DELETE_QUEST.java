@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import java.util.Set;
+
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -13,8 +15,8 @@ public class CM_DELETE_QUEST extends AionClientPacket {
 
 	private int questId;
 
-	public CM_DELETE_QUEST(int opcode, State state, State... restStates) {
-		super(opcode, state, restStates);
+	public CM_DELETE_QUEST(int opcode, Set<State> validStates) {
+		super(opcode, validStates);
 	}
 
 	@Override

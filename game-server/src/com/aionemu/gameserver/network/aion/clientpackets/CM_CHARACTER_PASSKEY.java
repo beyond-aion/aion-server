@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import java.util.Set;
+
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.configs.main.SecurityConfig;
 import com.aionemu.gameserver.dao.PlayerPasskeyDAO;
@@ -24,8 +26,8 @@ public class CM_CHARACTER_PASSKEY extends AionClientPacket {
 	private String passkey;
 	private String newPasskey;
 
-	public CM_CHARACTER_PASSKEY(int opcode, State state, State... restStates) {
-		super(opcode, state, restStates);
+	public CM_CHARACTER_PASSKEY(int opcode, Set<State> validStates) {
+		super(opcode, validStates);
 	}
 
 	@Override

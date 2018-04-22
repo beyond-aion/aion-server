@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import java.util.Set;
+
 import com.aionemu.gameserver.model.gameobjects.Gatherable;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -13,8 +15,8 @@ public class CM_GATHER extends AionClientPacket {
 
 	boolean isStartGather = false;
 
-	public CM_GATHER(int opcode, State state, State... restStates) {
-		super(opcode, state, restStates);
+	public CM_GATHER(int opcode, Set<State> validStates) {
+		super(opcode, validStates);
 	}
 
 	@Override

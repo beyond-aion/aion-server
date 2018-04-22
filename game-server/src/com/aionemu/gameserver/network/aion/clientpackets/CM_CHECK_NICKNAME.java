@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import java.util.Set;
+
 import com.aionemu.gameserver.configs.main.GSConfig;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection;
@@ -28,8 +30,8 @@ public class CM_CHECK_NICKNAME extends AionClientPacket {
 	 * 
 	 * @param opcode
 	 */
-	public CM_CHECK_NICKNAME(int opcode, State state, State... restStates) {
-		super(opcode, state, restStates);
+	public CM_CHECK_NICKNAME(int opcode, Set<State> validStates) {
+		super(opcode, validStates);
 	}
 
 	@Override

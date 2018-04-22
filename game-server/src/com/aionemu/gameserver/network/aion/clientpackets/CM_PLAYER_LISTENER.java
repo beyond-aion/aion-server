@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import java.util.Set;
+
 import com.aionemu.gameserver.configs.main.GSConfig;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
@@ -12,8 +14,8 @@ import com.aionemu.gameserver.services.reward.WebRewardService;
  */
 public class CM_PLAYER_LISTENER extends AionClientPacket {
 
-	public CM_PLAYER_LISTENER(int opcode, State state, State... restStates) {
-		super(opcode, state, restStates);
+	public CM_PLAYER_LISTENER(int opcode, Set<State> validStates) {
+		super(opcode, validStates);
 	}
 
 	@Override

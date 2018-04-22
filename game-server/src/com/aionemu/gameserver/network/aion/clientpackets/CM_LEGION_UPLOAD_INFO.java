@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import java.util.Set;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.team.legion.LegionEmblemType;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
@@ -21,8 +23,8 @@ public class CM_LEGION_UPLOAD_INFO extends AionClientPacket {
 	/**
 	 * @param opcode
 	 */
-	public CM_LEGION_UPLOAD_INFO(int opcode, State state, State... restStates) {
-		super(opcode, state, restStates);
+	public CM_LEGION_UPLOAD_INFO(int opcode, Set<State> validStates) {
+		super(opcode, validStates);
 	}
 
 	@Override

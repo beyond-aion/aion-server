@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import java.util.Set;
+
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
@@ -11,8 +13,8 @@ import com.aionemu.gameserver.services.teleport.TeleportService;
  */
 public class CM_HOUSE_TELEPORT_BACK extends AionClientPacket {
 
-	public CM_HOUSE_TELEPORT_BACK(int opcode, State state, State... restStates) {
-		super(opcode, state, restStates);
+	public CM_HOUSE_TELEPORT_BACK(int opcode, Set<State> validStates) {
+		super(opcode, validStates);
 	}
 
 	@Override

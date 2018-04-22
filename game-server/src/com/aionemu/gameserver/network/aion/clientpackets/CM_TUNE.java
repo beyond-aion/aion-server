@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import java.util.Set;
+
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.controllers.observer.ItemUseObserver;
 import com.aionemu.gameserver.model.TaskId;
@@ -25,8 +27,8 @@ public class CM_TUNE extends AionClientPacket {
 
 	private int itemObjectId, tuningScrollId;
 
-	public CM_TUNE(int opcode, State state, State... restStates) {
-		super(opcode, state, restStates);
+	public CM_TUNE(int opcode, Set<State> validStates) {
+		super(opcode, validStates);
 	}
 
 	@Override

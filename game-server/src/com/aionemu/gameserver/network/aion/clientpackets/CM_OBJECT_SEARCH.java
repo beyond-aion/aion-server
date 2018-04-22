@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import java.util.Set;
+
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.spawns.SpawnSearchResult;
@@ -20,8 +22,8 @@ public class CM_OBJECT_SEARCH extends AionClientPacket {
 	 * 
 	 * @param opcode
 	 */
-	public CM_OBJECT_SEARCH(int opcode, State state, State... restStates) {
-		super(opcode, state, restStates);
+	public CM_OBJECT_SEARCH(int opcode, Set<State> validStates) {
+		super(opcode, validStates);
 	}
 
 	@Override

@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import java.util.Set;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,8 +26,8 @@ public class CM_EXCHANGE_REQUEST extends AionClientPacket {
 
 	private static final Logger log = LoggerFactory.getLogger(CM_EXCHANGE_REQUEST.class);
 
-	public CM_EXCHANGE_REQUEST(int opcode, State state, State... restStates) {
-		super(opcode, state, restStates);
+	public CM_EXCHANGE_REQUEST(int opcode, Set<State> validStates) {
+		super(opcode, validStates);
 	}
 
 	@Override

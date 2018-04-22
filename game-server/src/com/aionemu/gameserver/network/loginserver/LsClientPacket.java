@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.network.loginserver;
 
-import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.network.packet.BaseClientPacket;
@@ -8,12 +7,7 @@ import com.aionemu.commons.network.packet.BaseClientPacket;
 /**
  * @author -Nemesiss-
  */
-public abstract class LsClientPacket extends BaseClientPacket<LoginServerConnection> implements Cloneable {
-
-	/**
-	 * Logger for this class.
-	 */
-	private static final Logger log = LoggerFactory.getLogger(LsClientPacket.class);
+public abstract class LsClientPacket extends BaseClientPacket<LoginServerConnection> {
 
 	/**
 	 * Constructs new client packet with specified opcode. If using this constructor, user must later manually set buffer and connection.
@@ -33,7 +27,7 @@ public abstract class LsClientPacket extends BaseClientPacket<LoginServerConnect
 		try {
 			runImpl();
 		} catch (Throwable e) {
-			log.warn("error handling ls (" + getConnection().getIP() + ") message " + this, e);
+			LoggerFactory.getLogger(LsClientPacket.class).error("Error handling LS packet from " + getConnection().getIP() + ": " + this, e);
 		}
 	}
 
@@ -46,16 +40,4 @@ public abstract class LsClientPacket extends BaseClientPacket<LoginServerConnect
 		getConnection().sendPacket(msg);
 	}
 
-	/**
-	 * Clones this packet object.
-	 * 
-	 * @return LsClientPacket
-	 */
-	public LsClientPacket clonePacket() {
-		try {
-			return (LsClientPacket) super.clone();
-		} catch (CloneNotSupportedException e) {
-			return null;
-		}
-	}
 }

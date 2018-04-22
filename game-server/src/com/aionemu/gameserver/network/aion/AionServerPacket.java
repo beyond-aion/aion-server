@@ -106,4 +106,9 @@ public abstract class AionServerPacket extends BaseServerPacket {
 			writeC(rgb & 0xFF); // b
 		}
 	}
+
+	@Override
+	public String toFormattedPacketNameString() {
+		return String.format("[0x%03X] %s", getOpCode(), getPacketName());
+	}
 }

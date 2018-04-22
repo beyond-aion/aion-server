@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import java.util.Set;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
@@ -8,14 +10,13 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author Yeats
- *
  */
 public class CM_LEGION_DOMINION_REQUEST_RANKING extends AionClientPacket {
 
 	int stonespearId;
 	
-	public CM_LEGION_DOMINION_REQUEST_RANKING(int opcode, State state, State... restStates) {
-		super(opcode, state, restStates);
+	public CM_LEGION_DOMINION_REQUEST_RANKING(int opcode, Set<State> validStates) {
+		super(opcode, validStates);
 	}
 
 	@Override

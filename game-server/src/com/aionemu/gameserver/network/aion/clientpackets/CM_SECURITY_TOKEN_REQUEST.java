@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import java.util.Set;
+
 import com.aionemu.gameserver.model.account.Account;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
@@ -15,8 +17,8 @@ public class CM_SECURITY_TOKEN_REQUEST extends AionClientPacket {
 	 * @param state
 	 * @param restStates
 	 */
-	public CM_SECURITY_TOKEN_REQUEST(int opcode, State state, State... restStates) {
-		super(opcode, state, restStates);
+	public CM_SECURITY_TOKEN_REQUEST(int opcode, Set<State> validStates) {
+		super(opcode, validStates);
 	}
 
 	@Override

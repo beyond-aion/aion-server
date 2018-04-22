@@ -2,6 +2,7 @@ package com.aionemu.gameserver.network.aion.clientpackets;
 
 import java.sql.Timestamp;
 import java.time.ZonedDateTime;
+import java.util.Set;
 
 import com.aionemu.gameserver.configs.main.HousingConfig;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -21,8 +22,8 @@ public class CM_HOUSE_PAY_RENT extends AionClientPacket {
 
 	int weekCount;
 
-	public CM_HOUSE_PAY_RENT(int opcode, State state, State... restStates) {
-		super(opcode, state, restStates);
+	public CM_HOUSE_PAY_RENT(int opcode, Set<State> validStates) {
+		super(opcode, validStates);
 	}
 
 	@Override

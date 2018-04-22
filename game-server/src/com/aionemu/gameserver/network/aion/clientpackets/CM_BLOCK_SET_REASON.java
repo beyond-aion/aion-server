@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import java.util.Set;
+
 import com.aionemu.gameserver.model.gameobjects.player.BlockedPlayer;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
@@ -15,8 +17,8 @@ public class CM_BLOCK_SET_REASON extends AionClientPacket {
 	String targetName;
 	String reason;
 
-	public CM_BLOCK_SET_REASON(int opcode, State state, State... restStates) {
-		super(opcode, state, restStates);
+	public CM_BLOCK_SET_REASON(int opcode, Set<State> validStates) {
+		super(opcode, validStates);
 	}
 
 	@Override

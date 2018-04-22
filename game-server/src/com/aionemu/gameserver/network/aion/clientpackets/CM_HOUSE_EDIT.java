@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import java.util.Set;
+
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.HouseDecoration;
 import com.aionemu.gameserver.model.gameobjects.HouseObject;
@@ -32,8 +34,8 @@ public class CM_HOUSE_EDIT extends AionClientPacket {
 	int rotation;
 	int buildingId;
 
-	public CM_HOUSE_EDIT(int opcode, State state, State... restStates) {
-		super(opcode, state, restStates);
+	public CM_HOUSE_EDIT(int opcode, Set<State> validStates) {
+		super(opcode, validStates);
 	}
 
 	@Override

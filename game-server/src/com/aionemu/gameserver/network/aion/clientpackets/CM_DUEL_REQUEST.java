@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import java.util.Set;
+
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
@@ -22,8 +24,8 @@ public class CM_DUEL_REQUEST extends AionClientPacket {
 	 * 
 	 * @param opcode
 	 */
-	public CM_DUEL_REQUEST(int opcode, State state, State... restStates) {
-		super(opcode, state, restStates);
+	public CM_DUEL_REQUEST(int opcode, Set<State> validStates) {
+		super(opcode, validStates);
 	}
 
 	@Override

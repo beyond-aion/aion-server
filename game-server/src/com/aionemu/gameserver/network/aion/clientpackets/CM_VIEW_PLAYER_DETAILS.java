@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import java.util.Set;
+
 import com.aionemu.gameserver.configs.administration.AdminConfig;
 import com.aionemu.gameserver.model.gameobjects.player.DeniedStatus;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -15,8 +17,8 @@ public class CM_VIEW_PLAYER_DETAILS extends AionClientPacket {
 
 	private int targetObjectId;
 
-	public CM_VIEW_PLAYER_DETAILS(int opcode, State state, State... restStates) {
-		super(opcode, state, restStates);
+	public CM_VIEW_PLAYER_DETAILS(int opcode, Set<State> validStates) {
+		super(opcode, validStates);
 	}
 
 	@Override

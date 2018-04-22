@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import java.util.Set;
+
 import com.aionemu.gameserver.model.gameobjects.Pet;
 import com.aionemu.gameserver.model.gameobjects.PetEmote;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -20,8 +22,8 @@ public class CM_PET_EMOTE extends AionClientPacket {
 	private int emotionId;
 	private int unk2;
 
-	public CM_PET_EMOTE(int opcode, State state, State... restStates) {
-		super(opcode, state, restStates);
+	public CM_PET_EMOTE(int opcode, Set<State> validStates) {
+		super(opcode, validStates);
 	}
 
 	@Override

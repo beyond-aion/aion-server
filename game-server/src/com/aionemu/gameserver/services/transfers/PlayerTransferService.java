@@ -16,7 +16,6 @@ import com.aionemu.gameserver.dao.LegionMemberDAO;
 import com.aionemu.gameserver.dao.PlayerDAO;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.PlayerCommonData;
-import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.network.loginserver.LoginServer;
 import com.aionemu.gameserver.network.loginserver.serverpackets.SM_PTRANSFER_CONTROL;
 import com.aionemu.gameserver.services.AccountService;
@@ -172,9 +171,7 @@ public class PlayerTransferService {
 			return;
 		}
 
-		CMT_CHARACTER_INFORMATION acp = new CMT_CHARACTER_INFORMATION(0, State.CONNECTED);
-		acp.setBuffer(transfer.getDB());
-		Player cha = acp.readInfo(name, targetAccountId, account, rsList, textLog);
+		Player cha = new CMT_CHARACTER_INFORMATION(transfer.getDB()).readInfo(name, targetAccountId, account, rsList, textLog);
 
 		if (cha == null) { // something went wrong!
 			log.error("clone failed #" + taskId + " `" + name + "`");

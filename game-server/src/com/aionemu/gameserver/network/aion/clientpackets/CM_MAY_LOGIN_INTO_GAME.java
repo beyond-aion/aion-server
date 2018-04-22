@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import java.util.Set;
+
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
@@ -17,8 +19,8 @@ public class CM_MAY_LOGIN_INTO_GAME extends AionClientPacket {
 	 * 
 	 * @param opcode
 	 */
-	public CM_MAY_LOGIN_INTO_GAME(int opcode, State state, State... restStates) {
-		super(opcode, state, restStates);
+	public CM_MAY_LOGIN_INTO_GAME(int opcode, Set<State> validStates) {
+		super(opcode, validStates);
 	}
 
 	@Override

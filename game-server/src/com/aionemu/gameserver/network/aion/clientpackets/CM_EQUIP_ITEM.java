@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import java.util.Set;
+
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Equipment;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -19,8 +21,8 @@ public class CM_EQUIP_ITEM extends AionClientPacket {
 	private int itemObjId;
 	private byte action;
 
-	public CM_EQUIP_ITEM(int opcode, State state, State... restStates) {
-		super(opcode, state, restStates);
+	public CM_EQUIP_ITEM(int opcode, Set<State> validStates) {
+		super(opcode, validStates);
 	}
 
 	@Override

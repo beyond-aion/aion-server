@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import java.util.Set;
+
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.network.chatserver.ChatServer;
@@ -16,8 +18,8 @@ public class CM_CHAT_AUTH extends AionClientPacket {
 	 * 
 	 * @param opcode
 	 */
-	public CM_CHAT_AUTH(int opcode, State state, State... restStates) {
-		super(opcode, state, restStates);
+	public CM_CHAT_AUTH(int opcode, Set<State> validStates) {
+		super(opcode, validStates);
 	}
 
 	@Override

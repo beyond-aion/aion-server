@@ -1,6 +1,7 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
 import java.util.List;
+import java.util.Set;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.house.HouseBidEntry;
@@ -16,8 +17,8 @@ import com.aionemu.gameserver.utils.collections.ListSplitter;
  */
 public class CM_GET_HOUSE_BIDS extends AionClientPacket {
 
-	public CM_GET_HOUSE_BIDS(int opcode, State state, State... restStates) {
-		super(opcode, state, restStates);
+	public CM_GET_HOUSE_BIDS(int opcode, Set<State> validStates) {
+		super(opcode, validStates);
 	}
 
 	@Override

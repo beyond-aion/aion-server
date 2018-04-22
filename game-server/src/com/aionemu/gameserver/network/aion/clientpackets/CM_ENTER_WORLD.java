@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import java.util.Set;
+
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.services.player.PlayerEnterWorldService;
@@ -17,8 +19,8 @@ public class CM_ENTER_WORLD extends AionClientPacket {
 	 */
 	private int objectId;
 
-	public CM_ENTER_WORLD(int opcode, State state, State... restStates) {
-		super(opcode, state, restStates);
+	public CM_ENTER_WORLD(int opcode, Set<State> validStates) {
+		super(opcode, validStates);
 	}
 
 	@Override

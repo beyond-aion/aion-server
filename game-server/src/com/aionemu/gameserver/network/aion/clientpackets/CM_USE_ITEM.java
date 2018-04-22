@@ -4,6 +4,7 @@ import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAG
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.HouseObject;
@@ -30,8 +31,8 @@ public class CM_USE_ITEM extends AionClientPacket {
 	private byte type;
 	private int targetItemId, indexReturn;
 
-	public CM_USE_ITEM(int opcode, State state, State... restStates) {
-		super(opcode, state, restStates);
+	public CM_USE_ITEM(int opcode, Set<State> validStates) {
+		super(opcode, validStates);
 	}
 
 	@Override

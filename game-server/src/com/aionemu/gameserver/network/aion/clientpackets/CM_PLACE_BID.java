@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import java.util.Set;
+
 import com.aionemu.gameserver.configs.main.HousingConfig;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
@@ -14,8 +16,8 @@ public class CM_PLACE_BID extends AionClientPacket {
 	int listIndex = 0;
 	long bidOffer = 0;
 
-	public CM_PLACE_BID(int opcode, State state, State... restStates) {
-		super(opcode, state, restStates);
+	public CM_PLACE_BID(int opcode, Set<State> validStates) {
+		super(opcode, validStates);
 	}
 
 	@Override

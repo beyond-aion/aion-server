@@ -2,6 +2,7 @@ package com.aionemu.gameserver.network.aion.clientpackets;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
@@ -25,8 +26,8 @@ public class CM_BUY_TRADE_IN_TRADE extends AionClientPacket {
 	/**
 	 * @param opcode
 	 */
-	public CM_BUY_TRADE_IN_TRADE(int opcode, State state, State... restStates) {
-		super(opcode, state, restStates);
+	public CM_BUY_TRADE_IN_TRADE(int opcode, Set<State> validStates) {
+		super(opcode, validStates);
 	}
 
 	@Override

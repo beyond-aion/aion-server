@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import java.util.Set;
+
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_BLOCK_LIST;
@@ -11,8 +13,8 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_BLOCK_LIST;
  */
 public class CM_SHOW_BLOCKLIST extends AionClientPacket {
 
-	public CM_SHOW_BLOCKLIST(int opcode, State state, State... restStates) {
-		super(opcode, state, restStates);
+	public CM_SHOW_BLOCKLIST(int opcode, Set<State> validStates) {
+		super(opcode, validStates);
 	}
 
 	@Override

@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import java.util.Set;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
@@ -18,8 +20,8 @@ public class CM_QUESTION_RESPONSE extends AionClientPacket {
 	@SuppressWarnings("unused")
 	private int senderid;
 
-	public CM_QUESTION_RESPONSE(int opcode, State state, State... restStates) {
-		super(opcode, state, restStates);
+	public CM_QUESTION_RESPONSE(int opcode, Set<State> validStates) {
+		super(opcode, validStates);
 	}
 
 	@Override

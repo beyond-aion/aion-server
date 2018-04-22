@@ -2,6 +2,7 @@ package com.aionemu.gameserver.network.aion.clientpackets;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Set;
 
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -18,8 +19,8 @@ public class CM_CHARGE_ITEM extends AionClientPacket {
 	private int chargeLevel;
 	private Collection<Integer> itemIds;
 
-	public CM_CHARGE_ITEM(int opcode, State state, State... restStates) {
-		super(opcode, state, restStates);
+	public CM_CHARGE_ITEM(int opcode, Set<State> validStates) {
+		super(opcode, validStates);
 	}
 
 	@Override

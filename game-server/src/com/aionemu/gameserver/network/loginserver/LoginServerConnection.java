@@ -13,7 +13,6 @@ import org.slf4j.LoggerFactory;
 import com.aionemu.commons.network.AConnection;
 import com.aionemu.commons.network.Dispatcher;
 import com.aionemu.gameserver.GameServer;
-import com.aionemu.gameserver.network.factories.LsPacketHandlerFactory;
 import com.aionemu.gameserver.network.loginserver.serverpackets.SM_GS_AUTH;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
@@ -29,7 +28,7 @@ public class LoginServerConnection extends AConnection<LsServerPacket> {
 	/**
 	 * Possible states of GsConnection
 	 */
-	public static enum State {
+	public enum State {
 		/**
 		 * game server just connect
 		 */
@@ -49,12 +48,10 @@ public class LoginServerConnection extends AConnection<LsServerPacket> {
 	 * Current state of this connection
 	 */
 	private State state;
-	private LsPacketHandler lsPacketHandler;
 
 	public LoginServerConnection(SocketChannel sc, Dispatcher d) throws IOException {
 		super(sc, d, 8192 * 8, 8192 * 8);
 		this.state = State.CONNECTED;
-		this.lsPacketHandler = LsPacketHandlerFactory.getInstance().getPacketHandler();
 	}
 
 	@Override
@@ -76,12 +73,9 @@ public class LoginServerConnection extends AConnection<LsServerPacket> {
 	 */
 	@Override
 	public boolean processData(ByteBuffer data) {
-		LsClientPacket pck = lsPacketHandler.handle(data, this);
-		log.debug("received packet: " + pck);
+		LsClientPacket pck = LsClientPacketFactory.tryCreatePacket(data, this);
 
-		/**
-		 * Execute packet only if packet exist (!= null) and read was ok.
-		 */
+		// Execute packet only if packet exist (!= null) and read was ok.
 		if (pck != null && pck.read())
 			ThreadPoolManager.getInstance().execute(pck);
 

@@ -3,6 +3,7 @@ package com.aionemu.gameserver.network.aion.clientpackets;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
@@ -35,8 +36,8 @@ public class CM_HOUSE_TELEPORT extends AionClientPacket {
 	int playerId1;
 	int playerId2;
 
-	public CM_HOUSE_TELEPORT(int opcode, State state, State... restStates) {
-		super(opcode, state, restStates);
+	public CM_HOUSE_TELEPORT(int opcode, Set<State> validStates) {
+		super(opcode, validStates);
 	}
 
 	@Override

@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import java.util.Set;
+
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.model.EmotionType;
@@ -16,15 +18,14 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_WINDSTREAM;
 import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-
 public class CM_WINDSTREAM extends AionClientPacket {
 
 	int teleportId;
 	int distance;
 	int state;
 
-	public CM_WINDSTREAM(int opcode, State state, State... restStates) {
-		super(opcode, state, restStates);
+	public CM_WINDSTREAM(int opcode, Set<State> validStates) {
+		super(opcode, validStates);
 	}
 
 	@Override

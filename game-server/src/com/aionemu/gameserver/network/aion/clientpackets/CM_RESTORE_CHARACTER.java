@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import java.util.Set;
+
 import com.aionemu.gameserver.model.account.Account;
 import com.aionemu.gameserver.model.account.PlayerAccountData;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
@@ -29,8 +31,8 @@ public class CM_RESTORE_CHARACTER extends AionClientPacket {
 	 * 
 	 * @param opcode
 	 */
-	public CM_RESTORE_CHARACTER(int opcode, State state, State... restStates) {
-		super(opcode, state, restStates);
+	public CM_RESTORE_CHARACTER(int opcode, Set<State> validStates) {
+		super(opcode, validStates);
 	}
 
 	@Override

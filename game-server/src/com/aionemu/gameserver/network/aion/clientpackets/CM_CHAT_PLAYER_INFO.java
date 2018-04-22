@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import java.util.Set;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
@@ -16,8 +18,8 @@ public class CM_CHAT_PLAYER_INFO extends AionClientPacket {
 
 	private String playerName;
 
-	public CM_CHAT_PLAYER_INFO(int opcode, State state, State... restStates) {
-		super(opcode, state, restStates);
+	public CM_CHAT_PLAYER_INFO(int opcode, Set<State> validStates) {
+		super(opcode, validStates);
 	}
 
 	@Override

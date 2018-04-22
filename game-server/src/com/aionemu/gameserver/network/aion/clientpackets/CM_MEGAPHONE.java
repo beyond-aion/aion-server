@@ -4,6 +4,7 @@ import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAG
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.Item;
@@ -23,8 +24,8 @@ public class CM_MEGAPHONE extends AionClientPacket {
 	private String message;
 	private int uniqueItemId;
 
-	public CM_MEGAPHONE(int opcode, State state, State... restStates) {
-		super(opcode, state, restStates);
+	public CM_MEGAPHONE(int opcode, Set<State> validStates) {
+		super(opcode, validStates);
 	}
 
 	@Override

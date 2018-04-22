@@ -1,6 +1,9 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
-import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE.*;
+import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE.STR_SKILL_CANT_CAST;
+import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE.STR_SKILL_NOT_READY;
+
+import java.util.Set;
 
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -33,8 +36,8 @@ public class CM_CASTSPELL extends AionClientPacket {
 	 * 
 	 * @param opcode
 	 */
-	public CM_CASTSPELL(int opcode, State state, State... restStates) {
-		super(opcode, state, restStates);
+	public CM_CASTSPELL(int opcode, Set<State> validStates) {
+		super(opcode, validStates);
 	}
 
 	@Override

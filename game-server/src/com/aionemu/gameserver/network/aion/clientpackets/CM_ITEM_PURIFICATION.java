@@ -1,8 +1,9 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import java.util.Set;
+
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-//import com.aionemu.gameserver.network.PacketLoggerService;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.services.item.ItemPurificationService;
@@ -21,8 +22,8 @@ public class CM_ITEM_PURIFICATION extends AionClientPacket {
 	/**
 	 * @param opcode
 	 */
-	public CM_ITEM_PURIFICATION(int opcode, State state, State... restStates) {
-		super(opcode, state, restStates);
+	public CM_ITEM_PURIFICATION(int opcode, Set<State> validStates) {
+		super(opcode, validStates);
 	}
 
 	@Override

@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import java.util.Set;
+
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.dao.PlayerPunishmentsDAO;
 import com.aionemu.gameserver.model.account.PlayerAccountData;
@@ -26,8 +28,8 @@ public class CM_QUIT extends AionClientPacket {
 	 * 
 	 * @param opcode
 	 */
-	public CM_QUIT(int opcode, State state, State... restStates) {
-		super(opcode, state, restStates);
+	public CM_QUIT(int opcode, Set<State> validStates) {
+		super(opcode, validStates);
 	}
 
 	@Override

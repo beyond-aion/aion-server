@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import java.util.Set;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.items.storage.StorageType;
 import com.aionemu.gameserver.model.team.legion.Legion;
@@ -20,8 +22,8 @@ public class CM_LEGION_WH_KINAH extends AionClientPacket {
 	private long amount;
 	private byte actionType;
 
-	public CM_LEGION_WH_KINAH(int opcode, State state, State... restStates) {
-		super(opcode, state, restStates);
+	public CM_LEGION_WH_KINAH(int opcode, Set<State> validStates) {
+		super(opcode, validStates);
 	}
 
 	@Override

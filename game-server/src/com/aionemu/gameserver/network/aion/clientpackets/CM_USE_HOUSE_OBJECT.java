@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import java.util.Set;
+
 import com.aionemu.gameserver.model.gameobjects.HouseObject;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -14,8 +16,8 @@ public class CM_USE_HOUSE_OBJECT extends AionClientPacket {
 
 	int itemObjectId;
 
-	public CM_USE_HOUSE_OBJECT(int opcode, State state, State... restStates) {
-		super(opcode, state, restStates);
+	public CM_USE_HOUSE_OBJECT(int opcode, Set<State> validStates) {
+		super(opcode, validStates);
 	}
 
 	@Override

@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import java.util.Set;
+
 import com.aionemu.gameserver.configs.administration.AdminConfig;
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -22,8 +24,8 @@ public class CM_HOUSE_OPEN_DOOR extends AionClientPacket {
 	int address;
 	boolean leave = false;
 
-	public CM_HOUSE_OPEN_DOOR(int opcode, State state, State... restStates) {
-		super(opcode, state, restStates);
+	public CM_HOUSE_OPEN_DOOR(int opcode, Set<State> validStates) {
+		super(opcode, validStates);
 	}
 
 	@Override

@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import java.util.Set;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -37,8 +39,8 @@ public class CM_BUY_ITEM extends AionClientPacket {
 	private TradeList tradeList;
 	private RepurchaseList repurchaseList;
 
-	public CM_BUY_ITEM(int opcode, State state, State... restStates) {
-		super(opcode, state, restStates);
+	public CM_BUY_ITEM(int opcode, Set<State> validStates) {
+		super(opcode, validStates);
 	}
 
 	@Override

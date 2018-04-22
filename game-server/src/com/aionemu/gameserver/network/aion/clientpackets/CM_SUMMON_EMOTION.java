@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import java.util.Set;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,8 +25,8 @@ public class CM_SUMMON_EMOTION extends AionClientPacket {
 	private int objId;
 	private int emotionTypeId;
 
-	public CM_SUMMON_EMOTION(int opcode, State state, State... restStates) {
-		super(opcode, state, restStates);
+	public CM_SUMMON_EMOTION(int opcode, Set<State> validStates) {
+		super(opcode, validStates);
 	}
 
 	@Override

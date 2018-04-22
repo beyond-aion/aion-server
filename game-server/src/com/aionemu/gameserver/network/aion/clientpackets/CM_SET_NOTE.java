@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import java.util.Set;
+
 import com.aionemu.gameserver.model.gameobjects.player.Friend;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
@@ -17,8 +19,8 @@ public class CM_SET_NOTE extends AionClientPacket {
 
 	private String note;
 
-	public CM_SET_NOTE(int opcode, State state, State... restStates) {
-		super(opcode, state, restStates);
+	public CM_SET_NOTE(int opcode, Set<State> validStates) {
+		super(opcode, validStates);
 	}
 
 	@Override

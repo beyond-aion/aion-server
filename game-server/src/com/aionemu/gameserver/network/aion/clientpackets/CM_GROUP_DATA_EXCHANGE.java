@@ -1,10 +1,11 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
 import java.util.Collection;
+import java.util.Set;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
-import com.aionemu.gameserver.network.aion.AionConnection;
+import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_GROUP_DATA_EXCHANGE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
@@ -16,17 +17,17 @@ public class CM_GROUP_DATA_EXCHANGE extends AionClientPacket {
 	private int groupType;
 	private int action;
 	private int unk2;
-	private int dataSize;
 	private byte[] data;
 
-	public CM_GROUP_DATA_EXCHANGE(int opcode, AionConnection.State state, AionConnection.State... restStates) {
-		super(opcode, state, restStates);
+	public CM_GROUP_DATA_EXCHANGE(int opcode, Set<State> validStates) {
+		super(opcode, validStates);
 	}
 
 	@Override
 	protected void readImpl() {
 		action = readUC();
 
+		int dataSize;
 		switch (action) {
 			case 1:
 				dataSize = readD();

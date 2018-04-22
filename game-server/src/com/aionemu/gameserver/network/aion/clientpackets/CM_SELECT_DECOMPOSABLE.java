@@ -3,6 +3,7 @@ package com.aionemu.gameserver.network.aion.clientpackets;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.Item;
@@ -29,8 +30,8 @@ public class CM_SELECT_DECOMPOSABLE extends AionClientPacket {
 	private int unk;
 	private int index;
 
-	public CM_SELECT_DECOMPOSABLE(int opcode, State state, State... restStates) {
-		super(opcode, state, restStates);
+	public CM_SELECT_DECOMPOSABLE(int opcode, Set<State> validStates) {
+		super(opcode, validStates);
 	}
 
 	@Override

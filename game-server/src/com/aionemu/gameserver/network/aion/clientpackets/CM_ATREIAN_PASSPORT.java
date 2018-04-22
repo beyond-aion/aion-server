@@ -17,8 +17,8 @@ public class CM_ATREIAN_PASSPORT extends AionClientPacket {
 
 	private Map<Integer, Set<Integer>> passports = new HashMap<>();
 
-	public CM_ATREIAN_PASSPORT(int opcode, State state, State... restStates) {
-		super(opcode, state, restStates);
+	public CM_ATREIAN_PASSPORT(int opcode, Set<State> validStates) {
+		super(opcode, validStates);
 	}
 
 	@Override

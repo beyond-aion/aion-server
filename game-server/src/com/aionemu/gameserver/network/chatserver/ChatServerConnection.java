@@ -14,7 +14,6 @@ import com.aionemu.commons.network.AConnection;
 import com.aionemu.commons.network.Dispatcher;
 import com.aionemu.gameserver.GameServer;
 import com.aionemu.gameserver.network.chatserver.serverpackets.SM_CS_AUTH;
-import com.aionemu.gameserver.network.factories.CsPacketHandlerFactory;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
@@ -27,7 +26,7 @@ public class ChatServerConnection extends AConnection<CsServerPacket> {
 	/**
 	 * Possible states of CsConnection
 	 */
-	public static enum State {
+	public enum State {
 		/**
 		 * chat server just connected
 		 */
@@ -47,12 +46,10 @@ public class ChatServerConnection extends AConnection<CsServerPacket> {
 	 * Current state of this connection
 	 */
 	private State state;
-	private CsPacketHandler csPacketHandler;
 
 	public ChatServerConnection(SocketChannel sc, Dispatcher d) throws IOException {
 		super(sc, d, 8192 * 2, 8192 * 2);
 		this.state = State.CONNECTED;
-		this.csPacketHandler = new CsPacketHandlerFactory().getPacketHandler();
 	}
 
 	@Override
@@ -68,11 +65,9 @@ public class ChatServerConnection extends AConnection<CsServerPacket> {
 
 	@Override
 	public boolean processData(ByteBuffer data) {
-		CsClientPacket pck = csPacketHandler.handle(data, this);
+		CsClientPacket pck = CsClientPacketFactory.tryCreatePacket(data, this);
 
-		/**
-		 * Execute packet only if packet exist (!= null) and read was ok.
-		 */
+		// Execute packet only if packet exist (!= null) and read was ok.
 		if (pck != null && pck.read())
 			ThreadPoolManager.getInstance().execute(pck);
 

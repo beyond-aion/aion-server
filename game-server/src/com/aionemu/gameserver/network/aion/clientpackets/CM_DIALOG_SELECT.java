@@ -2,6 +2,8 @@ package com.aionemu.gameserver.network.aion.clientpackets;
 
 import static com.aionemu.gameserver.model.DialogAction.*;
 
+import java.util.Set;
+
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.configs.administration.AdminConfig;
@@ -43,8 +45,8 @@ public class CM_DIALOG_SELECT extends AionClientPacket {
 	 * @param state
 	 * @param restStates
 	 */
-	public CM_DIALOG_SELECT(int opcode, State state, State... restStates) {
-		super(opcode, state, restStates);
+	public CM_DIALOG_SELECT(int opcode, Set<State> validStates) {
+		super(opcode, validStates);
 	}
 
 	@Override

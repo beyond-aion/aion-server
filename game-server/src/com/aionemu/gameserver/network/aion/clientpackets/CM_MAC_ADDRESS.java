@@ -2,6 +2,7 @@ package com.aionemu.gameserver.network.aion.clientpackets;
 
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,8 +30,8 @@ public class CM_MAC_ADDRESS extends AionClientPacket {
 	private static final Logger log = LoggerFactory.getLogger(CM_MAC_ADDRESS.class);
 	private String macAddress, hddSerial;
 
-	public CM_MAC_ADDRESS(int opcode, State state, State... restStates) {
-		super(opcode, state, restStates);
+	public CM_MAC_ADDRESS(int opcode, Set<State> validStates) {
+		super(opcode, validStates);
 	}
 
 	@Override

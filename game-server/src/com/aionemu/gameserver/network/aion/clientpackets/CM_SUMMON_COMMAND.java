@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import java.util.Set;
+
 import com.aionemu.gameserver.model.gameobjects.Summon;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.summons.SummonMode;
@@ -16,8 +18,8 @@ public class CM_SUMMON_COMMAND extends AionClientPacket {
 	private int mode;
 	private int targetObjId;
 
-	public CM_SUMMON_COMMAND(int opcode, State state, State... restStates) {
-		super(opcode, state, restStates);
+	public CM_SUMMON_COMMAND(int opcode, Set<State> validStates) {
+		super(opcode, validStates);
 	}
 
 	@Override

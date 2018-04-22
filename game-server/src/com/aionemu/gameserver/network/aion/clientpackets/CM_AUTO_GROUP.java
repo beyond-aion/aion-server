@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import java.util.Set;
+
 import com.aionemu.gameserver.configs.main.AutoGroupConfig;
 import com.aionemu.gameserver.model.autogroup.EntryRequestType;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -18,8 +20,8 @@ public class CM_AUTO_GROUP extends AionClientPacket {
 	private byte windowId;
 	private byte entryRequestId;
 
-	public CM_AUTO_GROUP(int opcode, State state, State... restStates) {
-		super(opcode, state, restStates);
+	public CM_AUTO_GROUP(int opcode, Set<State> validStates) {
+		super(opcode, validStates);
 	}
 
 	@Override

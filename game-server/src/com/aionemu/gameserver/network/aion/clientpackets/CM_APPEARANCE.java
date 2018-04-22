@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import java.util.Set;
+
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.dao.LegionDAO;
@@ -38,8 +40,8 @@ public class CM_APPEARANCE extends AionClientPacket {
 	private int itemObjId;
 	private String newName;
 
-	public CM_APPEARANCE(int opcode, State state, State... restStates) {
-		super(opcode, state, restStates);
+	public CM_APPEARANCE(int opcode, Set<State> validStates) {
+		super(opcode, validStates);
 	}
 
 	@Override

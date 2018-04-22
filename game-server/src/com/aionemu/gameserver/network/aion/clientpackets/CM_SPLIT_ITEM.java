@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import java.util.Set;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
@@ -17,8 +19,8 @@ public class CM_SPLIT_ITEM extends AionClientPacket {
 	byte destinationStorageType;
 	short slotNum;
 
-	public CM_SPLIT_ITEM(int opcode, State state, State... restStates) {
-		super(opcode, state, restStates);
+	public CM_SPLIT_ITEM(int opcode, Set<State> validStates) {
+		super(opcode, validStates);
 	}
 
 	@Override

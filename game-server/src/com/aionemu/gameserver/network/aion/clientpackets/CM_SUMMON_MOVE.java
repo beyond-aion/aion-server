@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import java.util.Set;
+
 import com.aionemu.gameserver.controllers.movement.MovementMask;
 import com.aionemu.gameserver.controllers.movement.SummonMoveController;
 import com.aionemu.gameserver.model.gameobjects.Summon;
@@ -23,8 +25,8 @@ public class CM_SUMMON_MOVE extends AionClientPacket {
 	private byte glideFlag;
 	private int unk1, unk2;
 
-	public CM_SUMMON_MOVE(int opcode, State state, State... restStates) {
-		super(opcode, state, restStates);
+	public CM_SUMMON_MOVE(int opcode, Set<State> validStates) {
+		super(opcode, validStates);
 	}
 
 	@Override

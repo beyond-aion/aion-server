@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import java.util.Set;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,8 +27,8 @@ public class CM_START_LOOT extends AionClientPacket {
 	 * 
 	 * @param opcode
 	 */
-	public CM_START_LOOT(int opcode, State state, State... restStates) {
-		super(opcode, state, restStates);
+	public CM_START_LOOT(int opcode, Set<State> validStates) {
+		super(opcode, validStates);
 	}
 
 	@Override

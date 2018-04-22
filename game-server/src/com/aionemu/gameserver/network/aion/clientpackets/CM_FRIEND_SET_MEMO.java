@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import java.util.Set;
+
 import com.aionemu.gameserver.model.gameobjects.player.Friend;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
@@ -15,8 +17,8 @@ public class CM_FRIEND_SET_MEMO extends AionClientPacket {
 	private String targetName;
 	private String memo;
 
-	public CM_FRIEND_SET_MEMO(int opcode, State state, State... restStates) {
-		super(opcode, state, restStates);
+	public CM_FRIEND_SET_MEMO(int opcode, Set<State> validStates) {
+		super(opcode, validStates);
 	}
 
 	@Override

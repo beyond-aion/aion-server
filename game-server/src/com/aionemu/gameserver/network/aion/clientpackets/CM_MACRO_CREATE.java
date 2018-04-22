@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import java.util.Set;
+
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_MACRO_RESULT;
@@ -27,8 +29,8 @@ public class CM_MACRO_CREATE extends AionClientPacket {
 	 * 
 	 * @param opcode
 	 */
-	public CM_MACRO_CREATE(int opcode, State state, State... restStates) {
-		super(opcode, state, restStates);
+	public CM_MACRO_CREATE(int opcode, Set<State> validStates) {
+		super(opcode, validStates);
 	}
 
 	/**

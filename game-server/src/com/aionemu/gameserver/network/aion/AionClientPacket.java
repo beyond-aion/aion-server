@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.network.aion;
 
-import java.util.EnumSet;
 import java.util.Set;
 
 import org.slf4j.Logger;
@@ -16,28 +15,23 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
  * 
  * @author -Nemesiss-
  */
-public abstract class AionClientPacket extends BaseClientPacket<AionConnection> implements Cloneable {
+public abstract class AionClientPacket extends BaseClientPacket<AionConnection> {
 
-	/**
-	 * Logger for this class.
-	 */
 	private static final Logger log = LoggerFactory.getLogger(AionClientPacket.class);
 
 	private final Set<State> validStates;
 
 	/**
-	 * Constructs new client packet instance. ByBuffer and ClientConnection should be later set manually, after using this constructor.
+	 * Constructs new client packet instance. ByteBuffer and ClientConnection should be later set manually, after using this constructor.
 	 * 
 	 * @param opcode
 	 *          packet id
-	 * @param state
-	 *          connection valid state
-	 * @param restStates
-	 *          rest of connection valid state (optional - if there are more than one)
+	 * @param validStates
+	 *          connection valid states
 	 */
-	protected AionClientPacket(int opcode, State state, State... restStates) {
+	protected AionClientPacket(int opcode, Set<State> validStates) {
 		super(opcode);
-		validStates = EnumSet.of(state, restStates);
+		this.validStates = validStates;
 	}
 
 	/**
@@ -45,13 +39,9 @@ public abstract class AionClientPacket extends BaseClientPacket<AionConnection> 
 	 */
 	@Override
 	public final void run() {
-
 		try {
-			// run only if packet is still valid (connection state didn't changed)
-			if (!isValid()) {
-				log.info(this + " won't be processed because the connections current state (" + getConnection().getState() + ") is invalid");
+			if (!isValid()) // run only if packet is still valid (connection state didn't change, for example due to logout)
 				return;
-			}
 			if (isForbidden()) {
 				getConnection().sendPacket(SM_SYSTEM_MESSAGE.STR_MSG_ACCUSE_TARGET_IS_NOT_VALID());
 				return;
@@ -59,7 +49,7 @@ public abstract class AionClientPacket extends BaseClientPacket<AionConnection> 
 			runImpl();
 		} catch (Throwable e) {
 			String name = getConnection().getAccount() == null ? getConnection().getIP() : getConnection().getAccount().toString();
-			log.error("Error handling client (" + name + ") message :" + this, e);
+			log.error("Error handling client packet from " + name + ": " + this, e);
 		}
 	}
 
@@ -70,19 +60,6 @@ public abstract class AionClientPacket extends BaseClientPacket<AionConnection> 
 	 */
 	protected void sendPacket(AionServerPacket msg) {
 		getConnection().sendPacket(msg);
-	}
-
-	/**
-	 * Clones this packet object.
-	 * 
-	 * @return AionClientPacket
-	 */
-	public AionClientPacket clonePacket() {
-		try {
-			return (AionClientPacket) super.clone();
-		} catch (CloneNotSupportedException e) {
-			return null;
-		}
 	}
 
 	/**
@@ -115,5 +92,10 @@ public abstract class AionClientPacket extends BaseClientPacket<AionConnection> 
 		if (getConnection().getAccount() == null)
 			return false;
 		return getConnection().getAccount().isHacked() && SecurityConfig.HDD_SERIAL_HACKED_ACCOUNTS_FORBIDDEN_PACKETS.contains(getClass());
+	}
+
+	@Override
+	public String toFormattedPacketNameString() {
+		return String.format("[0x%03X] %s", getOpCode(), getPacketName());
 	}
 }

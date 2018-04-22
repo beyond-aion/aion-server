@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import java.util.Set;
+
 import com.aionemu.gameserver.configs.main.AutoGroupConfig;
 import com.aionemu.gameserver.configs.main.EventsConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
@@ -38,8 +40,8 @@ import com.aionemu.gameserver.world.World;
  */
 public class CM_LEVEL_READY extends AionClientPacket {
 
-	public CM_LEVEL_READY(int opcode, State state, State... restStates) {
-		super(opcode, state, restStates);
+	public CM_LEVEL_READY(int opcode, Set<State> validStates) {
+		super(opcode, validStates);
 	}
 
 	@Override

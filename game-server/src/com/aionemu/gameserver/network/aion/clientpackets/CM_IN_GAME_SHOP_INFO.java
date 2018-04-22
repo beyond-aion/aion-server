@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import java.util.Set;
+
 import com.aionemu.gameserver.configs.main.InGameShopConfig;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.ingameshop.InGameShopEn;
@@ -22,8 +24,8 @@ public class CM_IN_GAME_SHOP_INFO extends AionClientPacket {
 	private String senderName;
 	private String senderMessage;
 
-	public CM_IN_GAME_SHOP_INFO(int opcode, State state, State... restStates) {
-		super(opcode, state, restStates);
+	public CM_IN_GAME_SHOP_INFO(int opcode, Set<State> validStates) {
+		super(opcode, validStates);
 	}
 
 	@Override

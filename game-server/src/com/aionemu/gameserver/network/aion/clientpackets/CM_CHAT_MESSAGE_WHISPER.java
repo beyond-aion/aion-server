@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import java.util.Set;
+
 import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.model.ChatType;
 import com.aionemu.gameserver.model.gameobjects.player.CustomPlayerState;
@@ -37,8 +39,8 @@ public class CM_CHAT_MESSAGE_WHISPER extends AionClientPacket {
 	 * 
 	 * @param opcode
 	 */
-	public CM_CHAT_MESSAGE_WHISPER(int opcode, State state, State... restStates) {
-		super(opcode, state, restStates);
+	public CM_CHAT_MESSAGE_WHISPER(int opcode, Set<State> validStates) {
+		super(opcode, validStates);
 	}
 
 	/**

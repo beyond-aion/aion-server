@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import java.util.Set;
+
 import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.model.gameobjects.player.DeniedStatus;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -25,8 +27,8 @@ public class CM_FRIEND_ADD extends AionClientPacket {
 	private String targetName;
 	private String message;
 
-	public CM_FRIEND_ADD(int opcode, State state, State... restStates) {
-		super(opcode, state, restStates);
+	public CM_FRIEND_ADD(int opcode, Set<State> validStates) {
+		super(opcode, validStates);
 	}
 
 	@Override

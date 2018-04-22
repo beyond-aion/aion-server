@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import java.util.Set;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.team.alliance.PlayerAlliance;
 import com.aionemu.gameserver.model.team.alliance.PlayerAllianceService;
@@ -30,8 +32,8 @@ public class CM_DISTRIBUTION_SETTINGS extends AionClientPacket {
 	@SuppressWarnings("unused")
 	private int unk;
 
-	public CM_DISTRIBUTION_SETTINGS(int opcode, State state, State... restStates) {
-		super(opcode, state, restStates);
+	public CM_DISTRIBUTION_SETTINGS(int opcode, Set<State> validStates) {
+		super(opcode, validStates);
 	}
 
 	@Override

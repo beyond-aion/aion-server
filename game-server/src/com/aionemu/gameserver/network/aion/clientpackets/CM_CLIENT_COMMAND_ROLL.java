@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import java.util.Set;
+
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
@@ -15,8 +17,8 @@ public class CM_CLIENT_COMMAND_ROLL extends AionClientPacket {
 	private int maxRoll;
 	private int roll;
 
-	public CM_CLIENT_COMMAND_ROLL(int opcode, State state, State... restStates) {
-		super(opcode, state, restStates);
+	public CM_CLIENT_COMMAND_ROLL(int opcode, Set<State> validStates) {
+		super(opcode, validStates);
 	}
 
 	@Override

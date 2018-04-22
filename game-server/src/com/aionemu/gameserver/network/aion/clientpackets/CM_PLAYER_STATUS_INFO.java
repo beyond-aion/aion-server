@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import java.util.Set;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.team.alliance.PlayerAllianceService;
 import com.aionemu.gameserver.model.team.common.events.TeamCommand;
@@ -20,8 +22,8 @@ public class CM_PLAYER_STATUS_INFO extends AionClientPacket {
 	private int allianceGroupId;
 	private int secondObjectId;
 
-	public CM_PLAYER_STATUS_INFO(int opcode, State state, State... restStates) {
-		super(opcode, state, restStates);
+	public CM_PLAYER_STATUS_INFO(int opcode, Set<State> validStates) {
+		super(opcode, validStates);
 	}
 
 	@Override

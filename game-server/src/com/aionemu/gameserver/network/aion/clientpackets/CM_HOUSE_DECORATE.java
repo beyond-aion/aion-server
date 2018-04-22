@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import java.util.Set;
+
 import com.aionemu.gameserver.model.gameobjects.HouseDecoration;
 import com.aionemu.gameserver.model.gameobjects.Persistable.PersistentState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -20,8 +22,8 @@ public class CM_HOUSE_DECORATE extends AionClientPacket {
 	int templateId;
 	int lineNr; // Line number (starts from 1 in 3.0 and from 2 in 3.5) of part in House render/update packet
 
-	public CM_HOUSE_DECORATE(int opcode, State state, State... restStates) {
-		super(opcode, state, restStates);
+	public CM_HOUSE_DECORATE(int opcode, Set<State> validStates) {
+		super(opcode, validStates);
 	}
 
 	@Override

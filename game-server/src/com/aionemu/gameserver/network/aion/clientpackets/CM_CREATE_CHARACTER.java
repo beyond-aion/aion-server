@@ -2,6 +2,7 @@ package com.aionemu.gameserver.network.aion.clientpackets;
 
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Set;
 
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.configs.main.GSConfig;
@@ -46,8 +47,8 @@ public class CM_CREATE_CHARACTER extends AionClientPacket {
 	 * 
 	 * @param opcode
 	 */
-	public CM_CREATE_CHARACTER(int opcode, State state, State... restStates) {
-		super(opcode, state, restStates);
+	public CM_CREATE_CHARACTER(int opcode, Set<State> validStates) {
+		super(opcode, validStates);
 	}
 
 	@Override

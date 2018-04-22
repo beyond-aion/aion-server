@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import java.util.Set;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
@@ -13,8 +15,8 @@ public class CM_TOGGLE_SKILL_DEACTIVATE extends AionClientPacket {
 
 	private int skillId;
 
-	public CM_TOGGLE_SKILL_DEACTIVATE(int opcode, State state, State... restStates) {
-		super(opcode, state, restStates);
+	public CM_TOGGLE_SKILL_DEACTIVATE(int opcode, Set<State> validStates) {
+		super(opcode, validStates);
 	}
 
 	@Override

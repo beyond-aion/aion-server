@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import java.util.Set;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
@@ -13,8 +15,8 @@ public class CM_UPGRADE_ARCADE extends AionClientPacket {
 	private byte action;
 	private int sessionId;
 
-	public CM_UPGRADE_ARCADE(int opcode, State state, State... restStates) {
-		super(opcode, state, restStates);
+	public CM_UPGRADE_ARCADE(int opcode, Set<State> validStates) {
+		super(opcode, validStates);
 	}
 
 	@Override

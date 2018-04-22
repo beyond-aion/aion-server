@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import java.util.Set;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.team.alliance.PlayerAllianceService;
 import com.aionemu.gameserver.model.team.group.PlayerGroupService;
@@ -16,8 +18,8 @@ public class CM_GROUP_DISTRIBUTION extends AionClientPacket {
 	private long amount;
 	private byte partyType;
 
-	public CM_GROUP_DISTRIBUTION(int opcode, State state, State... restStates) {
-		super(opcode, state, restStates);
+	public CM_GROUP_DISTRIBUTION(int opcode, Set<State> validStates) {
+		super(opcode, validStates);
 	}
 
 	@Override

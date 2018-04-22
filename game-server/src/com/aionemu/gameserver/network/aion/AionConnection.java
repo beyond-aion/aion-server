@@ -32,7 +32,6 @@ import com.aionemu.gameserver.network.PacketFloodFilter;
 import com.aionemu.gameserver.network.aion.clientpackets.CM_PING;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_KEY;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_MESSAGE;
-import com.aionemu.gameserver.network.factories.AionPacketHandlerFactory;
 import com.aionemu.gameserver.network.loginserver.LoginServer;
 import com.aionemu.gameserver.services.player.PlayerLeaveWorldService;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
@@ -56,7 +55,7 @@ public class AionConnection extends AConnection<AionServerPacket> {
 	/**
 	 * Possible states of AionConnection
 	 */
-	public static enum State {
+	public enum State {
 		/**
 		 * client just connect
 		 */
@@ -96,7 +95,6 @@ public class AionConnection extends AConnection<AionServerPacket> {
 	 */
 	private final AtomicReference<Player> activePlayer = new AtomicReference<>();
 
-	private AionPacketHandler aionPacketHandler;
 	private long lastPingTime;
 	private volatile int pingFailCount;
 
@@ -124,9 +122,6 @@ public class AionConnection extends AConnection<AionServerPacket> {
 	public AionConnection(SocketChannel sc, Dispatcher d) throws IOException {
 		super(sc, d, 8192 * 4, 8192 * 4);
 
-		AionPacketHandlerFactory aionPacketHandlerFactory = AionPacketHandlerFactory.getInstance();
-		this.aionPacketHandler = aionPacketHandlerFactory.getPacketHandler();
-
 		state = State.CONNECTED;
 
 		String ip = getIP();
@@ -142,7 +137,6 @@ public class AionConnection extends AConnection<AionServerPacket> {
 
 	@Override
 	protected void initialized() {
-		/** Send SM_KEY packet */
 		sendPacket(new SM_KEY());
 	}
 
@@ -185,15 +179,13 @@ public class AionConnection extends AConnection<AionServerPacket> {
 		}
 
 		if (data.remaining() < 5) {// op + static code + op == 5 bytes
-			log.error("Received fake packet from: " + this);
+			log.warn("Received fake packet from " + this);
 			return false;
 		}
 
-		AionClientPacket pck = aionPacketHandler.handle(data, this);
+		AionClientPacket pck = AionClientPacketFactory.tryCreatePacket(data, this);
 
-		/**
-		 * Execute packet only if packet exist (!= null) and read was ok.
-		 */
+		// Execute packet only if packet exist (!= null) and read was ok.
 		if (pck != null) {
 			if (SecurityConfig.PFF_ENABLE) {
 				int opcode = pck.getOpCode();

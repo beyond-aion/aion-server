@@ -5,6 +5,7 @@ import static com.aionemu.gameserver.utils.collections.Predicates.Players.allExc
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import com.aionemu.gameserver.configs.main.GroupConfig;
@@ -32,8 +33,8 @@ public class CM_QUEST_SHARE extends AionClientPacket {
 
 	private int questId;
 
-	public CM_QUEST_SHARE(int opcode, State state, State... restStates) {
-		super(opcode, state, restStates);
+	public CM_QUEST_SHARE(int opcode, Set<State> validStates) {
+		super(opcode, validStates);
 	}
 
 	@Override

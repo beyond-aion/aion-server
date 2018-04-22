@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.services.transfers;
 
+import java.nio.ByteBuffer;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -7,6 +8,7 @@ import java.util.List;
 import org.slf4j.Logger;
 
 import com.aionemu.commons.database.dao.DAOManager;
+import com.aionemu.commons.network.packet.BaseClientPacket;
 import com.aionemu.gameserver.configs.main.PlayerTransferConfig;
 import com.aionemu.gameserver.dao.InventoryDAO;
 import com.aionemu.gameserver.dao.PlayerBindPointDAO;
@@ -40,8 +42,7 @@ import com.aionemu.gameserver.model.gameobjects.player.title.TitleList;
 import com.aionemu.gameserver.model.items.storage.StorageType;
 import com.aionemu.gameserver.model.skill.PlayerSkillList;
 import com.aionemu.gameserver.model.templates.item.ItemTemplate;
-import com.aionemu.gameserver.network.aion.AionClientPacket;
-import com.aionemu.gameserver.network.aion.AionConnection.State;
+import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.AccountService;
@@ -55,10 +56,14 @@ import com.aionemu.gameserver.world.WorldPosition;
 /**
  * @author KID
  */
-public class CMT_CHARACTER_INFORMATION extends AionClientPacket {
+public class CMT_CHARACTER_INFORMATION extends BaseClientPacket<AionConnection> {
 
-	protected CMT_CHARACTER_INFORMATION(int opcode, State state, State... restStates) {
-		super(opcode, state, restStates);
+	protected CMT_CHARACTER_INFORMATION(ByteBuffer byteBuffer) {
+		super(byteBuffer, 0);
+	}
+
+	@Override
+	public void run() {
 	}
 
 	@Override

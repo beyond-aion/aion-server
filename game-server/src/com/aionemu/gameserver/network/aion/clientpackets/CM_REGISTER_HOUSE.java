@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import java.util.Set;
+
 import com.aionemu.gameserver.configs.main.HousingConfig;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.house.House;
@@ -20,8 +22,8 @@ public class CM_REGISTER_HOUSE extends AionClientPacket {
 	long bidKinah;
 	long unk1;
 
-	public CM_REGISTER_HOUSE(int opcode, State state, State... restStates) {
-		super(opcode, state, restStates);
+	public CM_REGISTER_HOUSE(int opcode, Set<State> validStates) {
+		super(opcode, validStates);
 	}
 
 	@Override

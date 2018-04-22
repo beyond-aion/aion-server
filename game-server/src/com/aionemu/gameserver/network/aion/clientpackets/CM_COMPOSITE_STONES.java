@@ -1,10 +1,12 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import java.util.Set;
+
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.item.actions.CompositionAction;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
-import com.aionemu.gameserver.network.aion.AionConnection;
+import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.restrictions.RestrictionsManager;
 
 /**
@@ -26,8 +28,8 @@ public class CM_COMPOSITE_STONES extends AionClientPacket {
 	 * @param restStates
 	 *          rest of connection valid state (optional - if there are more than one)
 	 */
-	public CM_COMPOSITE_STONES(int opcode, AionConnection.State state, AionConnection.State... restStates) {
-		super(opcode, state, restStates);
+	public CM_COMPOSITE_STONES(int opcode, Set<State> validStates) {
+		super(opcode, validStates);
 	}
 
 	@Override

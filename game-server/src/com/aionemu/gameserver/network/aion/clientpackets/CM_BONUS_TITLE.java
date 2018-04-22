@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import java.util.Set;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
@@ -11,8 +13,8 @@ public class CM_BONUS_TITLE extends AionClientPacket {
 
 	private int bonusTitleId;
 
-	public CM_BONUS_TITLE(int opcode, State state, State... restStates) {
-		super(opcode, state, restStates);
+	public CM_BONUS_TITLE(int opcode, Set<State> validStates) {
+		super(opcode, validStates);
 	}
 
 	@Override

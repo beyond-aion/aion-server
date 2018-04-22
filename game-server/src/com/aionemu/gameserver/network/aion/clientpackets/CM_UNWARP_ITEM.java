@@ -1,10 +1,12 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import java.util.Set;
+
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Persistable.PersistentState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
-import com.aionemu.gameserver.network.aion.AionConnection;
+import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_INVENTORY_UPDATE_ITEM;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_UNWARP_ITEM;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -16,8 +18,8 @@ public class CM_UNWARP_ITEM extends AionClientPacket {
 
 	private int objectId;
 
-	public CM_UNWARP_ITEM(int opcode, AionConnection.State state, AionConnection.State... restStates) {
-		super(opcode, state, restStates);
+	public CM_UNWARP_ITEM(int opcode, Set<State> validStates) {
+		super(opcode, validStates);
 	}
 
 	@Override

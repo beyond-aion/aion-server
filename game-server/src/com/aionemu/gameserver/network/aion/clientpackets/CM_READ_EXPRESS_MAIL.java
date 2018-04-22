@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import java.util.Set;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,8 +23,8 @@ public class CM_READ_EXPRESS_MAIL extends AionClientPacket {
 	private static final Logger log = LoggerFactory.getLogger(CM_READ_EXPRESS_MAIL.class);
 	private byte action;
 
-	public CM_READ_EXPRESS_MAIL(int opcode, State state, State... restStates) {
-		super(opcode, state, restStates);
+	public CM_READ_EXPRESS_MAIL(int opcode, Set<State> validStates) {
+		super(opcode, validStates);
 	}
 
 	@Override

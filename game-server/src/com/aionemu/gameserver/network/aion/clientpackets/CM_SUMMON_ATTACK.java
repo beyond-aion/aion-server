@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import java.util.Set;
+
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Summon;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
@@ -21,8 +23,8 @@ public class CM_SUMMON_ATTACK extends AionClientPacket {
 	@SuppressWarnings("unused")
 	private byte unk3;
 
-	public CM_SUMMON_ATTACK(int opcode, State state, State... restStates) {
-		super(opcode, state, restStates);
+	public CM_SUMMON_ATTACK(int opcode, Set<State> validStates) {
+		super(opcode, validStates);
 	}
 
 	@Override

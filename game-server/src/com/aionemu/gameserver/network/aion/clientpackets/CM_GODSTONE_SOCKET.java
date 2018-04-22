@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import java.util.Set;
+
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -17,8 +19,8 @@ public class CM_GODSTONE_SOCKET extends AionClientPacket {
 	private int weaponId;
 	private int stoneId;
 
-	public CM_GODSTONE_SOCKET(int opcode, State state, State... restStates) {
-		super(opcode, state, restStates);
+	public CM_GODSTONE_SOCKET(int opcode, Set<State> validStates) {
+		super(opcode, validStates);
 	}
 
 	@Override

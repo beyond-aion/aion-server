@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import java.util.Set;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.PlayerScripts;
 import com.aionemu.gameserver.model.house.House;
@@ -23,8 +25,8 @@ public class CM_HOUSE_SCRIPT extends AionClientPacket {
 	int uncompressedSize;
 	byte[] stream;
 
-	public CM_HOUSE_SCRIPT(int opcode, State state, State... restStates) {
-		super(opcode, state, restStates);
+	public CM_HOUSE_SCRIPT(int opcode, Set<State> validStates) {
+		super(opcode, validStates);
 	}
 
 	@Override

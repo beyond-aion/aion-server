@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import java.util.Set;
+
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ACCOUNT_PROPERTIES;
@@ -22,8 +24,8 @@ public class CM_CHARACTER_LIST extends AionClientPacket {
 	 * 
 	 * @param opcode
 	 */
-	public CM_CHARACTER_LIST(int opcode, State state, State... restStates) {
-		super(opcode, state, restStates);
+	public CM_CHARACTER_LIST(int opcode, Set<State> validStates) {
+		super(opcode, validStates);
 	}
 
 	@Override

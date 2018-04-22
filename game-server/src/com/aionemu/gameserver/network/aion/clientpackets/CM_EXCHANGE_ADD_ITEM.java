@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import java.util.Set;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
@@ -13,8 +15,8 @@ public class CM_EXCHANGE_ADD_ITEM extends AionClientPacket {
 	public int itemObjId;
 	public int itemCount;
 
-	public CM_EXCHANGE_ADD_ITEM(int opcode, State state, State... restStates) {
-		super(opcode, state, restStates);
+	public CM_EXCHANGE_ADD_ITEM(int opcode, Set<State> validStates) {
+		super(opcode, validStates);
 	}
 
 	@Override

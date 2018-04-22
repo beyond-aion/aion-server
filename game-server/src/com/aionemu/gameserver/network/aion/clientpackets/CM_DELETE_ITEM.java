@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import java.util.Set;
+
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.items.storage.Storage;
@@ -16,8 +18,8 @@ public class CM_DELETE_ITEM extends AionClientPacket {
 
 	public int itemObjectId;
 
-	public CM_DELETE_ITEM(int opcode, State state, State... restStates) {
-		super(opcode, state, restStates);
+	public CM_DELETE_ITEM(int opcode, Set<State> validStates) {
+		super(opcode, validStates);
 	}
 
 	@Override

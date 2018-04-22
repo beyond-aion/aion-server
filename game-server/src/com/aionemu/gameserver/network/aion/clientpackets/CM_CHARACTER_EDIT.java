@@ -2,6 +2,8 @@ package com.aionemu.gameserver.network.aion.clientpackets;
 
 import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE.STR_EDIT_CHAR_GENDER_CANT_NO_ITEM;
 
+import java.util.Set;
+
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.dao.PlayerAppearanceDAO;
 import com.aionemu.gameserver.model.Gender;
@@ -32,8 +34,8 @@ public class CM_CHARACTER_EDIT extends AionClientPacket {
 	 * 
 	 * @param opcode
 	 */
-	public CM_CHARACTER_EDIT(int opcode, State state, State... restStates) {
-		super(opcode, state, restStates);
+	public CM_CHARACTER_EDIT(int opcode, Set<State> validStates) {
+		super(opcode, validStates);
 	}
 
 	@Override

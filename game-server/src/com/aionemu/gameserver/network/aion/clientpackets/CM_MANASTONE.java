@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import java.util.Set;
+
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
@@ -30,8 +32,8 @@ public class CM_MANASTONE extends AionClientPacket {
 	/**
 	 * @param opcode
 	 */
-	public CM_MANASTONE(int opcode, State state, State... restStates) {
-		super(opcode, state, restStates);
+	public CM_MANASTONE(int opcode, Set<State> validStates) {
+		super(opcode, validStates);
 	}
 
 	@Override

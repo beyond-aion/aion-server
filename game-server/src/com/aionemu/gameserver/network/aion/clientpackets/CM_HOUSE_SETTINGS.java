@@ -1,6 +1,7 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
 import java.nio.charset.StandardCharsets;
+import java.util.Set;
 
 import com.aionemu.gameserver.controllers.HouseController;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -22,8 +23,8 @@ public class CM_HOUSE_SETTINGS extends AionClientPacket {
 	int displayOwner;
 	String signNotice;
 
-	public CM_HOUSE_SETTINGS(int opcode, State state, State... restStates) {
-		super(opcode, state, restStates);
+	public CM_HOUSE_SETTINGS(int opcode, Set<State> validStates) {
+		super(opcode, validStates);
 	}
 
 	@Override

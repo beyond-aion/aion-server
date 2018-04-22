@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import java.util.Set;
+
 import com.aionemu.gameserver.configs.main.SecurityConfig;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
@@ -15,8 +17,8 @@ public class CM_PING extends AionClientPacket {
 
 	public static final int CLIENT_PING_INTERVAL = 180 * 1000; // client sends CM_PING every 180 seconds
 
-	public CM_PING(int opcode, State state, State... restStates) {
-		super(opcode, state, restStates);
+	public CM_PING(int opcode, Set<State> validStates) {
+		super(opcode, validStates);
 	}
 
 	@Override

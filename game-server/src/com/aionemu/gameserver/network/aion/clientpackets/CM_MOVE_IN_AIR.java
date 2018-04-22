@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import java.util.Set;
+
 import com.aionemu.gameserver.model.actions.PlayerMode;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
@@ -25,8 +27,8 @@ public class CM_MOVE_IN_AIR extends AionClientPacket {
 	 * 
 	 * @param opcode
 	 */
-	public CM_MOVE_IN_AIR(int opcode, State state, State... restStates) {
-		super(opcode, state, restStates);
+	public CM_MOVE_IN_AIR(int opcode, Set<State> validStates) {
+		super(opcode, validStates);
 	}
 
 	@Override

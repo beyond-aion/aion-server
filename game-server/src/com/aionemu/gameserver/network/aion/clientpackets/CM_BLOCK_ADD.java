@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import java.util.Set;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,8 +24,8 @@ public class CM_BLOCK_ADD extends AionClientPacket {
 	private String targetName;
 	private String reason;
 
-	public CM_BLOCK_ADD(int opcode, State state, State... restStates) {
-		super(opcode, state, restStates);
+	public CM_BLOCK_ADD(int opcode, Set<State> validStates) {
+		super(opcode, validStates);
 	}
 
 	@Override

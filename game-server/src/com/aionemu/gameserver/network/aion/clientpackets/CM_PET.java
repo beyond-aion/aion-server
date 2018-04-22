@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import java.util.Set;
+
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.Pet;
 import com.aionemu.gameserver.model.gameobjects.PetAction;
@@ -40,8 +42,8 @@ public class CM_PET extends AionClientPacket {
 	@SuppressWarnings("unused")
 	private int unk2, unk3, unk5, unk6;
 
-	public CM_PET(int opcode, State state, State... restStates) {
-		super(opcode, state, restStates);
+	public CM_PET(int opcode, Set<State> validStates) {
+		super(opcode, validStates);
 	}
 
 	@Override

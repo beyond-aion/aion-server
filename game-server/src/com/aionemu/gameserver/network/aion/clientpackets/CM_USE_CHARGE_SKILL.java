@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import java.util.Set;
+
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
@@ -13,8 +15,8 @@ import com.aionemu.gameserver.skillengine.model.Skill;
  */
 public class CM_USE_CHARGE_SKILL extends AionClientPacket {
 
-	public CM_USE_CHARGE_SKILL(int opcode, State state, State... restStates) {
-		super(opcode, state, restStates);
+	public CM_USE_CHARGE_SKILL(int opcode, Set<State> validStates) {
+		super(opcode, validStates);
 	}
 
 	@Override

@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import java.util.Set;
+
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -32,8 +34,8 @@ public class CM_TARGET_SELECT extends AionClientPacket {
 	 *
 	 * @param opcode
 	 */
-	public CM_TARGET_SELECT(int opcode, State state, State... restStates) {
-		super(opcode, state, restStates);
+	public CM_TARGET_SELECT(int opcode, Set<State> validStates) {
+		super(opcode, validStates);
 	}
 
 	/**

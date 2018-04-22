@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import java.util.Set;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
@@ -12,8 +14,8 @@ public class CM_MOTION extends AionClientPacket {
 	private int motionId;
 	private int motionType;
 
-	public CM_MOTION(int opcode, State state, State... restStates) {
-		super(opcode, state, restStates);
+	public CM_MOTION(int opcode, Set<State> validStates) {
+		super(opcode, validStates);
 	}
 
 	@Override

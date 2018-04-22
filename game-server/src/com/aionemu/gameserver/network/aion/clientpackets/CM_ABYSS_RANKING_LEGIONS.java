@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import java.util.Set;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,8 +22,8 @@ public class CM_ABYSS_RANKING_LEGIONS extends AionClientPacket {
 
 	private byte raceId;
 
-	public CM_ABYSS_RANKING_LEGIONS(int opcode, State state, State... restStates) {
-		super(opcode, state, restStates);
+	public CM_ABYSS_RANKING_LEGIONS(int opcode, Set<State> validStates) {
+		super(opcode, validStates);
 	}
 
 	@Override
@@ -32,8 +34,8 @@ public class CM_ABYSS_RANKING_LEGIONS extends AionClientPacket {
 	@Override
 	protected void runImpl() {
 		Player player = getConnection().getActivePlayer();
-		Race queriedRace = null;
-		AbyssRankUpdateType updateType = null;
+		Race queriedRace;
+		AbyssRankUpdateType updateType;
 		switch (raceId) {
 			case 0:
 				queriedRace = Race.ELYOS;

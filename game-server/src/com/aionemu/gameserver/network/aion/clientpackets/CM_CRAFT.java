@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import java.util.Set;
+
 import com.aionemu.gameserver.GameServer;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -24,8 +26,8 @@ public class CM_CRAFT extends AionClientPacket {
 	/**
 	 * @param opcode
 	 */
-	public CM_CRAFT(int opcode, State state, State... restStates) {
-		super(opcode, state, restStates);
+	public CM_CRAFT(int opcode, Set<State> validStates) {
+		super(opcode, validStates);
 	}
 
 	@Override

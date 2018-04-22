@@ -92,10 +92,16 @@ public class NetworkConfig {
 	public static int PACKET_PROCESSOR_THREAD_SPAWN_THRESHOLD;
 
 	/**
-	 * If unknown packets should be logged.
+	 * If aion client packets unknown by the server should be logged.
 	 */
-	@Property(key = "gameserver.network.display.unknownpackets", defaultValue = "false")
-	public static boolean DISPLAY_UNKNOWNPACKETS;
+	@Property(key = "gameserver.network.logging.unknown_packets", defaultValue = "false")
+	public static boolean LOG_UNKNOWN_PACKETS;
+
+	/**
+	 * If ignored aion client packets (due to invalid connection state) should be logged.
+	 */
+	@Property(key = "gameserver.network.logging.ignored_packets", defaultValue = "false")
+	public static boolean LOG_IGNORED_PACKETS;
 
 	@Property(key = "gameserver.network.flood.connections", defaultValue = "false")
 	public static boolean ENABLE_FLOOD_CONNECTIONS;

@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import java.util.Set;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,8 +26,8 @@ public class CM_INVITE_TO_GROUP extends AionClientPacket {
 	private String playerName;
 	private int inviteType;
 
-	public CM_INVITE_TO_GROUP(int opcode, State state, State... restStates) {
-		super(opcode, state, restStates);
+	public CM_INVITE_TO_GROUP(int opcode, Set<State> validStates) {
+		super(opcode, validStates);
 	}
 
 	@Override

@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import java.util.Set;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.trade.TradePSItem;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
@@ -18,8 +20,8 @@ public class CM_PRIVATE_STORE extends AionClientPacket {
 	private Player player;
 	private TradePSItem[] tradePSItems;
 
-	public CM_PRIVATE_STORE(int opcode, State state, State... restStates) {
-		super(opcode, state, restStates);
+	public CM_PRIVATE_STORE(int opcode, Set<State> validStates) {
+		super(opcode, validStates);
 	}
 
 	@Override

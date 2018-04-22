@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import java.util.Set;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -31,8 +33,8 @@ public class CM_CAPTCHA extends AionClientPacket {
 	/**
 	 * @param opcode
 	 */
-	public CM_CAPTCHA(int opcode, State state, State... restStates) {
-		super(opcode, state, restStates);
+	public CM_CAPTCHA(int opcode, Set<State> validStates) {
+		super(opcode, validStates);
 	}
 
 	@Override

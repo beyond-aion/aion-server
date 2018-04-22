@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import java.util.Set;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.team.alliance.PlayerAllianceService;
 import com.aionemu.gameserver.model.team.group.PlayerGroupService;
@@ -22,8 +24,8 @@ public class CM_SHOW_BRAND extends AionClientPacket {
 	/**
 	 * @param opcode
 	 */
-	public CM_SHOW_BRAND(int opcode, State state, State... restStates) {
-		super(opcode, state, restStates);
+	public CM_SHOW_BRAND(int opcode, Set<State> validStates) {
+		super(opcode, validStates);
 	}
 
 	@Override
