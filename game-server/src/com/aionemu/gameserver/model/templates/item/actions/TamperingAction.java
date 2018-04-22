@@ -68,7 +68,7 @@ public class TamperingAction extends AbstractItemAction {
 				player.getObserveController().removeObserver(observer);
 
 				if (player.getInventory().getItemByObjId(targetItem.getObjectId()) == null && !targetItem.isEquipped()) {
-					PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1300452));
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ENCHANT_ITEM_NO_TARGET_ITEM());
 					PacketSendUtility.broadcastPacketAndReceive(player,
 						new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parntObjectId, parentItemId, 0, 2, 0));
 					return;
@@ -157,11 +157,11 @@ public class TamperingAction extends AbstractItemAction {
 		}, 5000));
 	}
 
-	private float calculateChance(Player player, Item target) {
-		if (target.getItemTemplate().getItemGroup() == ItemGroup.PLUME) {
-			float curTemp = target.getTempering();
-			return Math.max(25, 100 - (curTemp * 10));
-		}
+	private float calculateChance(Player player, Item item) {
+		if (item.getTempering() == 0) // +0 -> +1 is always safe
+			return 100;
+		if (item.getItemTemplate().getItemGroup() == ItemGroup.PLUME)
+			return Math.max(25, 100 - (item.getTempering() * 10));
 		return Rates.get(player, RatesConfig.TEMPERING_CHANCES);
 	}
 }
