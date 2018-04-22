@@ -29784,15 +29784,12 @@
 		<npc_skill id="19135" lv="46" prob="25" />
 	</npc_skills>
 	<npc_skills npc_ids="216520">
-		<npc_skill id="19186" lv="1" prob="55" />
-		<npc_skill id="18727" lv="1" prob="55" />
-		<npc_skill id="18728" lv="1" prob="55" />
-		<npc_skill id="18729" lv="1" prob="55" />
-		<npc_skill id="18732" lv="1" prob="55" />
-		<npc_skill id="18733" lv="1" prob="55" />
-		<npc_skill id="18730" lv="1" prob="55" />
-		<npc_skill id="18731" lv="1" prob="55" />
-		<npc_skill id="18734" lv="1" prob="55" />
+		<npc_skill id="18730" lv="1" prob="100" min_time="1200000" cd="1800000" />
+		<npc_skill id="18731" lv="1" prob="100" min_time="1500000" cd="300000" />
+		<npc_skill id="18728" lv="1" prob="70" />
+		<npc_skill id="18729" lv="1" prob="70" />
+		<npc_skill id="18732" lv="1" prob="70" />
+		<npc_skill id="18733" lv="1" prob="70" />
 	</npc_skills>
 	<npc_skills npc_ids="216521">
 		<npc_skill id="16516" lv="46" prob="25" />
