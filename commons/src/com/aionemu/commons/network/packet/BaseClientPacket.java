@@ -1,6 +1,9 @@
 package com.aionemu.commons.network.packet;
 
 import java.nio.ByteBuffer;
+import java.util.Arrays;
+import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,10 +19,8 @@ import com.aionemu.commons.network.AConnection;
  */
 public abstract class BaseClientPacket<T extends AConnection<?>> extends BasePacket implements Runnable {
 
-	/**
-	 * Logger for this class.
-	 */
 	private static final Logger log = LoggerFactory.getLogger(BaseClientPacket.class);
+	private static final Set<Integer> partiallyReadPackets = ConcurrentHashMap.newKeySet();
 	/**
 	 * Owner of this packet.
 	 */
@@ -79,8 +80,8 @@ public abstract class BaseClientPacket<T extends AConnection<?>> extends BasePac
 		try {
 			readImpl();
 
-			if (getRemainingBytes() > 0)
-				log.debug("Packet " + this + " not fully readed!");
+			if (getRemainingBytes() > 0 && partiallyReadPackets.add(getOpCode()))
+				log.warn(this + " was not fully read! Remaining bytes: " + Arrays.toString(readB(getRemainingBytes())));
 
 			return true;
 		} catch (Exception re) {
