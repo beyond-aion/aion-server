@@ -55,7 +55,7 @@ public class CM_CREATE_CHARACTER extends AionClientPacket {
 		readD(); // account id
 		readS(); // account name
 
-		characterName = Util.convertName(readS(52));
+		characterName = Util.convertName(readS(25));
 
 		if (characterName.equals("B")) {
 			return;

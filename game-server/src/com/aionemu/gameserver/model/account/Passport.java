@@ -39,11 +39,11 @@ public class Passport implements Persistable {
 		this.rewarded = rewarded;
 	}
 
-	public int getRewardStatus() {
-		if (this.isFakeStamp())
-			return this.rewarded ? 2 : 0;
+	public RewardStatus getRewardStatus() {
+		if (fakeStamp)
+			return rewarded ? RewardStatus.TAKEN : RewardStatus.UPCOMING;
 		else
-			return this.rewarded ? 3 : 1;
+			return rewarded ? RewardStatus.EXPIRED : RewardStatus.AVAILABLE;
 	}
 
 	public Timestamp getArriveDate() {
@@ -82,5 +82,23 @@ public class Passport implements Persistable {
 
 	public AtreianPassport getTemplate() {
 		return DataManager.ATREIAN_PASSPORT_DATA.getAtreianPassportId(id);
+	}
+
+	public enum RewardStatus {
+
+		UPCOMING(0),
+		AVAILABLE(1),
+		TAKEN(2),
+		EXPIRED(3);
+
+		private final int id;
+
+		RewardStatus(int id) {
+			this.id = id;
+		}
+
+		public int getId() {
+			return id;
+		}
 	}
 }

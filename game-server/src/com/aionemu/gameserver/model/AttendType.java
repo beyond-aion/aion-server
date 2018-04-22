@@ -14,16 +14,10 @@ public enum AttendType {
 
 	private int id;
 
-	/**
-	 * Constructors
-	 */
-	private AttendType(int id) {
+	AttendType(int id) {
 		this.id = id;
 	}
 
-	/**
-	 * Accessors
-	 */
 	public int getId() {
 		return id;
 	}

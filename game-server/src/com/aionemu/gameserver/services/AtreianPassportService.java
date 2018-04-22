@@ -5,6 +5,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.commons.services.CronService;
@@ -51,39 +53,38 @@ public class AtreianPassportService {
 		}, "0 0 9 ? * *");
 	}
 
-	public void takeReward(Player player, List<Integer> timestamps, List<Integer> passportIds) {
+	public void takeReward(Player player, Map<Integer, Set<Integer>> passports) {
 		List<Passport> toRemove = new ArrayList<>();
 		PassportsList ppl = player.getAccount().getPassportsList();
-		for (int i = 0; i < passportIds.size(); i++) {
-			int passId = passportIds.get(i);
-			int time = timestamps.get(i);
-			Passport passport = ppl.getPassport(passId, time);
-			if (passport == null) {
-				AuditLogger.log(player, "tried to get non-existing passport (ID: " + passId + ")");
-				continue;
-			}
-			if (passport.isRewarded() || passport.getPersistentState() == PersistentState.DELETED) {
-				AuditLogger.log(player, "tried to get passport which is already rewarded (ID: " + passId + ")");
-				continue;
-			}
+		for (Map.Entry<Integer, Set<Integer>> e : passports.entrySet()) {
+			int passId = e.getKey();
+			for (int time : e.getValue()) {
+				Passport passport = ppl.getPassport(passId, time);
+				if (passport == null) {
+					AuditLogger.log(player, "tried to get non-existing passport (ID: " + passId + ", time: " + time + ")");
+					continue;
+				}
+				if (passport.isRewarded() || passport.getPersistentState() == PersistentState.DELETED) {
+					AuditLogger.log(player, "tried to get passport which is already rewarded (ID: " + passId + ")");
+					continue;
+				}
 
-			if (player.getInventory().isFull()) {
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_WAREHOUSE_FULL_INVENTORY());
-				break;
-			}
+				if (player.getInventory().isFull()) {
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_WAREHOUSE_FULL_INVENTORY());
+					break;
+				}
 
-			AtreianPassport atp = DataManager.ATREIAN_PASSPORT_DATA.getAtreianPassportId(passId);
-			ItemService.addItem(player, atp.getRewardItem(), atp.getRewardItemNum(), true,
-				new ItemUpdatePredicate(ItemAddType.ITEM_COLLECT, ItemUpdateType.INC_PASSPORT_ADD));
-			passport.setRewarded(true);
-			passport.setPersistentState(PersistentState.DELETED);
-			ppl.removePassport(passport);
-			toRemove.add(passport);
+				AtreianPassport atp = DataManager.ATREIAN_PASSPORT_DATA.getAtreianPassportId(passId);
+				ItemService.addItem(player, atp.getRewardItemId(), atp.getRewardItemCount(), true,
+					new ItemUpdatePredicate(ItemAddType.ITEM_COLLECT, ItemUpdateType.INC_PASSPORT_ADD));
+				passport.setRewarded(true);
+				passport.setPersistentState(PersistentState.DELETED);
+				ppl.removePassport(passport);
+				toRemove.add(passport);
+			}
 		}
-		if (!toRemove.isEmpty()) {
+		if (!toRemove.isEmpty())
 			DAOManager.getDAO(AccountPassportsDAO.class).storePassportList(player.getAccount().getId(), toRemove);
-			toRemove.clear();
-		}
 		onLogin(player);
 	}
 
@@ -93,7 +94,7 @@ public class AtreianPassportService {
 		boolean doReward = checkOnlineDate(pa) && pa.getPassportStamps() < 28;
 
 		for (AtreianPassport atp : DataManager.ATREIAN_PASSPORT_DATA.getAll().values()) {
-			if (atp.getPeriodStart().isBefore(now) && atp.getPeriodEnd().isAfter(now)) {
+			if (atp.isActive() && atp.getPeriodStart().isBefore(now) && atp.getPeriodEnd().isAfter(now)) {
 				switch (atp.getAttendType()) {
 					case DAILY:
 						if (doReward) {

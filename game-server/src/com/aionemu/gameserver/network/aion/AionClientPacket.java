@@ -85,12 +85,13 @@ public abstract class AionClientPacket extends BaseClientPacket<AionConnection> 
 		}
 	}
 
-	protected final String readS(int size) {
-		String string = readS();
-		if (string != null)
-			readB(size - (string.length() * 2 + 2));
-		else
-			readB(size);
+	/**
+	 * Reads a fixed size string from the buffer, omitting not present trailing characters for the return value.
+	 */
+	protected final String readS(int characterCount) {
+		String string = readS(); // read byte length = characters * 2 + 2
+		if (string.length() < characterCount)
+			readB((characterCount - string.length()) * 2);
 		return string;
 	}
 

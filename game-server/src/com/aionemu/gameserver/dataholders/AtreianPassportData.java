@@ -9,6 +9,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 import com.aionemu.gameserver.model.templates.event.AtreianPassport;
 
@@ -23,17 +24,13 @@ public class AtreianPassportData {
 	@XmlElement(name = "login_event")
 	private List<AtreianPassport> list;
 
+	@XmlTransient
 	private Map<Integer, AtreianPassport> passportData = new HashMap<>();
 
-	/**
-	 * @param u
-	 * @param parent
-	 */
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		for (AtreianPassport passport : list) {
 			passportData.put(passport.getId(), passport);
 		}
-		list.clear();
 		list = null;
 	}
 
