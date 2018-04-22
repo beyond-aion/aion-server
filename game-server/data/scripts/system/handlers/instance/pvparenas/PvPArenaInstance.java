@@ -73,7 +73,7 @@ public class PvPArenaInstance extends GeneralInstanceHandler {
 			return;
 		}
 
-		int bonus = 0;
+		int bonus;
 		int rank = 0;
 
 		// Decrease victim points
@@ -85,25 +85,24 @@ public class PvPArenaInstance extends GeneralInstanceHandler {
 		} else
 			bonus = getNpcBonus(((Npc) victim).getNpcId());
 
-		if (bonus == 0) {
-			return;
-		}
+		if (victim instanceof Player && instanceReward.getRound() == 3 && rank == 0)
+			bonus *= 3;
 
+		if (bonus == 0)
+			return;
+
+		int totalDamage = victim.getAggroList().getTotalDamage();
 		// Reward all damagers
-		for (AggroInfo damager : victim.getAggroList().getFinalDamageList(false)) {
-			if (!(damager.getAttacker() instanceof Creature)) {
+		for (AggroInfo aggroInfo : victim.getAggroList().getFinalDamageList(false)) {
+			if (aggroInfo.getDamage() == 0) // e.g. when victim got killed by lava, but attacker only debuffed him without dealing damage
 				continue;
-			}
-			Creature master = ((Creature) damager.getAttacker()).getMaster();
-			if (master == null) {
+			if (!(aggroInfo.getAttacker() instanceof Creature))
 				continue;
-			}
+			Creature master = ((Creature) aggroInfo.getAttacker()).getMaster();
 			if (master instanceof Player) {
-				Player attacker = (Player) master;
-				int rewardPoints = (victim instanceof Player && instanceReward.getRound() == 3 && rank == 0 ? bonus * 3 : bonus) * damager.getDamage()
-					/ victim.getAggroList().getTotalDamage();
-				getPlayerReward(attacker.getObjectId()).addPoints(rewardPoints);
-				sendSystemMsg(attacker, victim, rewardPoints);
+				int rewardPoints = bonus * aggroInfo.getDamage() / totalDamage;
+				getPlayerReward(master.getObjectId()).addPoints(rewardPoints);
+				sendSystemMsg((Player) master, victim, rewardPoints);
 			}
 		}
 		if (instanceReward.hasCapPoints()) {
