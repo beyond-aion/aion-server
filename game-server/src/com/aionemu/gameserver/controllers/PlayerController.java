@@ -302,8 +302,10 @@ public class PlayerController extends CreatureController<Player> {
 			DuelService.getInstance().loseDuel(player);
 			if (killedByOpponent) {
 				player.getEffectController().removeByDispelSlotType(DispelSlotType.DEBUFF);
-				if (player.getLifeStats().getHpPercentage() < 33)
+				if (player.getLifeStats().getHpPercentage() < 33) {
 					player.getLifeStats().setCurrentHpPercent(33);
+					player.getLifeStats().triggerRestoreOnRevive();
+				}
 				if (player.getLifeStats().getMpPercentage() < 33)
 					player.getLifeStats().setCurrentMpPercent(33);
 				if (master.getLifeStats().getHpPercentage() < 33)
