@@ -1281,6 +1281,10 @@
 			<spot x="1056.22" y="340.3505" z="146.0561" h="89"/>
 			<spot x="1038.602" y="356.4878" z="149.3495" h="2"/>
 		</spawn>
+		<!-- The Eternal Bastion Entrance -->
+		<spawn npc_id="833009" respawn_time="295">
+			<spot x="699.1963" y="777.31415" z="174.33951" h="53" static_id="1509"/>
+		</spawn>
 		<!-- Thickhide Worg -->
 		<spawn npc_id="234248" respawn_time="295">
 			<spot x="1258.216" y="1233.758" z="188.7045" h="26"/>
