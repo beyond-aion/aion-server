@@ -57,7 +57,7 @@ public class ItemActionService {
 	public static void applyTuneResult(Player player, Item itemToTune) {
 		PendingTuneResult tuneResult = itemToTune.getPendingTuneResult();
 		if (tuneResult == null) {
-			AuditLogger.log(player, player + " attempt to apply a tune result without tuning the item beforehand.");
+			AuditLogger.log(player, "attempted to apply a tune result without tuning the item beforehand.");
 			return;
 		}
 		if (!tuneResult.shouldNotReduceTuneCount()) {

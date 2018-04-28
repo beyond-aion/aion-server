@@ -48,7 +48,7 @@ public class CM_TUNE extends AionClientPacket {
 			if (action != null && action.canAct(player, tuningScroll, item))
 				action.act(player, tuningScroll, item);
 		} else {
-			AuditLogger.log(player, "attempt to tune an already identified item without tuning scroll.");
+			AuditLogger.log(player, "attempted to tune an already identified item without tuning scroll.");
 		}
 	}
 
