@@ -24,6 +24,7 @@ import com.aionemu.gameserver.model.items.GodStone;
 import com.aionemu.gameserver.model.items.IdianStone;
 import com.aionemu.gameserver.model.items.ItemMask;
 import com.aionemu.gameserver.model.items.ManaStone;
+import com.aionemu.gameserver.model.items.PendingTuneResult;
 import com.aionemu.gameserver.model.items.RandomBonusEffect;
 import com.aionemu.gameserver.model.items.storage.IStorage;
 import com.aionemu.gameserver.model.items.storage.ItemStorage;
@@ -82,6 +83,7 @@ public class Item extends AionObject implements Expirable, StatOwner, Persistabl
 	private boolean isAmplified = false;
 	private int buffSkill;
 	private int rndPlumeBonusValue;
+	private PendingTuneResult pendingTuneResult;
 
 	/**
 	 * Create simple item with minimum information
@@ -167,12 +169,6 @@ public class Item extends AionObject implements Expirable, StatOwner, Persistabl
 	public void setTempering(int tempering) {
 		this.tempering = tempering;
 		setPersistentState(PersistentState.UPDATE_REQUIRED);
-	}
-
-	public void setRndBonus() {
-		int setId = itemTemplate.getStatBonusSetId();
-		if (setId > 0)
-			setBonusStats(DataManager.ITEM_RANDOM_BONUSES.selectRandomBonusNumber(StatBonusType.INVENTORY, setId), true);
 	}
 
 	private void updateChargeInfo(int charge) {
@@ -1002,6 +998,14 @@ public class Item extends AionObject implements Expirable, StatOwner, Persistabl
 
 	public void setRndPlumeBonusValue(int rndPlumeBonusValue) {
 		this.rndPlumeBonusValue = rndPlumeBonusValue;
+	}
+
+	public PendingTuneResult getPendingTuneResult() {
+		return pendingTuneResult;
+	}
+
+	public void setPendingTuneResult(PendingTuneResult pendingTuneResult) {
+		this.pendingTuneResult = pendingTuneResult;
 	}
 
 	@Override

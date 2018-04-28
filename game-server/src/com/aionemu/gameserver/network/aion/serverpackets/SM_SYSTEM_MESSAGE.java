@@ -25862,62 +25862,70 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	public static final SM_SYSTEM_MESSAGE STR_CASTLE_LOOSE_BUFF_ON(String value0, String value1, String value2) {
 		return new SM_SYSTEM_MESSAGE(1401575, value0, value1, value2);
 	}
-	
+
 	/**
 	 * You need the Emperor's Golden Tag to move.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_IDEVENT01_GOLD_MAP() {
 		return new SM_SYSTEM_MESSAGE(1401579);
 	}
+
 	/**
 	 * You need the Empress' Silver Tag to move.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_IDEVENT01_SILVER_MAP() {
 		return new SM_SYSTEM_MESSAGE(1401580);
 	}
+
 	/**
 	 * You need the Crown Prince's Brass Tag to move.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_IDEVENT01_BRONZE_MAP() {
 		return new SM_SYSTEM_MESSAGE(1401581);
 	}
+
 	/**
 	 * Pillagers incoming. Guard the Crown Prince's Monument!
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_IDEVENT01_S1_START() {
 		return new SM_SYSTEM_MESSAGE(1401582);
 	}
+
 	/**
 	 * Pillagers incoming. Guard the Empress' Monument!
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_IDEVENT01_S2_START() {
 		return new SM_SYSTEM_MESSAGE(1401583);
 	}
+
 	/**
 	 * Pillagers incoming. Guard the Emperor's Monument!
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_IDEVENT01_S3_START() {
 		return new SM_SYSTEM_MESSAGE(1401584);
 	}
+
 	/**
 	 * Take the treasure with the key you're carrying.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_IDEVENT01_TB_START() {
 		return new SM_SYSTEM_MESSAGE(1401585);
 	}
+
 	/**
 	 * A second wave of pillagers will arrive in 10 seconds!
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_IDEVENT01_PHASE() {
 		return new SM_SYSTEM_MESSAGE(1401586);
 	}
+
 	/**
 	 * You need a key to open this box.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_IDEVENT01_TREASUREBOX() {
 		return new SM_SYSTEM_MESSAGE(1401587);
 	}
-	
+
 	/**
 	 * More pillagers will arrive in 5 seconds!
 	 */
@@ -25933,33 +25941,96 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	}
 
 	/**
+	 * Canceled tuning of %0.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_ITEM_IDENTIFY_CANCELED(String itemL10n) {
+		return new SM_SYSTEM_MESSAGE(1401625, itemL10n);
+	}
+
+	/**
+	 * Completing tuning of %0.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_ITEM_IDENTIFY_SUCCEED(String itemL10n) {
+		return new SM_SYSTEM_MESSAGE(1401626, itemL10n);
+	}
+
+	/**
+	 * %0 cannot retune %1.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_ITEM_REIDENTIFY_WRONG_SELECT(String tuningScrollL10n, String targetItemL10n) {
+		return new SM_SYSTEM_MESSAGE(1401633, tuningScrollL10n, targetItemL10n);
+	}
+
+	/**
+	 * You cannot retune %1 because %0 has a lower rank.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_ITEM_REIDENTIFY_WRONG_QUALITY(String tuningScrollL10n, String targetItemL10n) {
+		return new SM_SYSTEM_MESSAGE(1401634, tuningScrollL10n, targetItemL10n);
+	}
+
+	/**
+	 * You cannot retune %1 because %0 has a lower level.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_ITEM_REIDENTIFY_WRONG_LEVEL(String tuningScrollL10n, String targetItemL10n) {
+		return new SM_SYSTEM_MESSAGE(1401635, tuningScrollL10n, targetItemL10n);
+	}
+
+	/**
+	 * %0 cannot be retuned.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_ITEM_REIDENTIFY_CANNOT_REIDENTIFY(String itemL10n) {
+		return new SM_SYSTEM_MESSAGE(1401636, itemL10n);
+	}
+
+	/**
+	 * %0 has never been tuned.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_ITEM_REIDENTIFY_DIDNT_IDENTIFY(String itemL10n) {
+		return new SM_SYSTEM_MESSAGE(1401637, itemL10n);
+	}
+
+	/**
+	 * Canceled tuning of %0.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_ITEM_REIDENTIFY_CANCELED(String itemL10n) {
+		return new SM_SYSTEM_MESSAGE(1401638, itemL10n);
+	}
+
+	/**
+	 * Completing tuning of %0.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_ITEM_REIDENTIFY_SUCCEED(String itemL10n) {
+		return new SM_SYSTEM_MESSAGE(1401639, itemL10n);
+	}
+
+	/**
 	 * The Idian level is too high for the selected item.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_POLISH_WRONG_LEVEL() {
 		return new SM_SYSTEM_MESSAGE(1401649);
 	}
-	
+
 	/**
 	 * A third wave of pillagers will arrive in 10 seconds!
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_IDEVENT01_PHASE03() {
 		return new SM_SYSTEM_MESSAGE(1401664);
 	}
-	
+
 	/**
 	 * More pillagers will arrive in 5 seconds!
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_IDEVENT01_PHASE04() {
 		return new SM_SYSTEM_MESSAGE(1401665);
 	}
-	
+
 	/**
 	 * The final wave of pillagers will arrive in 10 seconds!
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_IDEVENT01_PHASE09() {
 		return new SM_SYSTEM_MESSAGE(1401670);
 	}
-	
+
 	/**
 	 * More pillagers will arrive in 5 seconds!
 	 */
@@ -26231,6 +26302,20 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_IDRUNEWP_USER_KILL() {
 		return new SM_SYSTEM_MESSAGE(1401909);
+	}
+
+	/**
+	 * The returned results have been applied to %0.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_ITEM_REIDENTIFY_APPLY_YES(String itemL10n) {
+		return new SM_SYSTEM_MESSAGE(1401910, itemL10n);
+	}
+
+	/**
+	 * You aborted the action of applying returned results.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_ITEM_REIDENTIFY_APPLY_NO() {
+		return new SM_SYSTEM_MESSAGE(1401911);
 	}
 
 	/**

@@ -64,8 +64,7 @@ public class ItemPurificationService {
 			}
 		}
 		String resultItemL10n = DataManager.ITEM_DATA.getItemTemplate(resultItemId).getL10n();
-		PacketSendUtility.sendPacket(player,
-			SM_SYSTEM_MESSAGE.STR_ITEM_UPGRADE_MSG_UPGRADE_SUCCESS(baseItem.getL10n(), resultItemL10n));
+		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_UPGRADE_MSG_UPGRADE_SUCCESS(baseItem.getL10n(), resultItemL10n));
 		return true;
 	}
 
@@ -103,7 +102,8 @@ public class ItemPurificationService {
 			newItem.setBuffSkill(sourceItem.getBuffSkill());
 		}
 		if (sourceItem.hasFusionedItem()) {
-			newItem.setFusionedItem(sourceItem.getFusionedItemTemplate(), sourceItem.getFusionedItemBonusStatsId(), sourceItem.getFusionedItemOptionalSockets());
+			newItem.setFusionedItem(sourceItem.getFusionedItemTemplate(), sourceItem.getFusionedItemBonusStatsId(),
+				sourceItem.getFusionedItemOptionalSockets());
 		}
 		if (sourceItem.hasManaStones()) {
 			for (ManaStone manaStone : sourceItem.getItemStones())
@@ -121,10 +121,9 @@ public class ItemPurificationService {
 			newItem.setSoulBound(true);
 		if (sourceItem.getItemTemplate().getStatBonusSetId() != 0 && newItem.getItemTemplate().getStatBonusSetId() != 0) {
 			newItem.setBonusStats(sourceItem.getBonusStatsId(), true);
-			newItem.setTuneCount(1);
+			newItem.setTuneCount(sourceItem.getTuneCount());
 		}
 		newItem.setItemColor(sourceItem.getItemColor());
-		newItem.setRndBonus();
 		player.getInventory().add(newItem);
 	}
 

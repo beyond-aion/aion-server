@@ -310,7 +310,7 @@ public class ServerPacketsOpcodes {
 		addPacketOpcode(SM_MEGAPHONE.class, 0x11D, idSet); // Megaphone
 		addPacketOpcode(SM_SECONDARY_SHOW_DECOMPOSABLE.class, 0x11E, idSet);
 		// 287
-		// 0x120
+		addPacketOpcode(SM_TUNE_RESULT.class, 0x120, idSet);
 		addPacketOpcode(SM_UNWARP_ITEM.class, 0x121, idSet);
 		addPacketOpcode(SM_QUEST_REPEAT.class, 0x122, idSet);
 		// 291

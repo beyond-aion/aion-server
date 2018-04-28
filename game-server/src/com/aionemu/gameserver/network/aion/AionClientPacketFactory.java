@@ -188,6 +188,7 @@ public class AionClientPacketFactory {
 			packets.put(0x1A2, new PacketInfo<>(CM_HOUSE_PAY_RENT.class, State.IN_GAME));
 			packets.put(0x1A3, new PacketInfo<>(CM_USE_HOUSE_OBJECT.class, State.IN_GAME));
 			packets.put(0x1B0, new PacketInfo<>(CM_MEGAPHONE.class, State.IN_GAME));
+			packets.put(0x1B1, new PacketInfo<>(CM_TUNE_RESULT.class, State.IN_GAME));
 			packets.put(0x1B2, new PacketInfo<>(CM_FRIEND_SET_MEMO.class, State.IN_GAME));
 			packets.put(0x1B3, new PacketInfo<>(CM_UNWARP_ITEM.class, State.IN_GAME));
 			packets.put(0x1B5, new PacketInfo<>(CM_CHARACTER_PASSKEY.class, State.AUTHED));
