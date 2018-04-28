@@ -71,10 +71,10 @@ public class CaseHealEffect extends AbstractHealEffect {
 		final int valueWithDelta = value + delta * effect.getSkillLevel();
 		final int currentValue = getCurrentStatValue(effect);
 		final int maxValue = getMaxStatValue(effect);
-		if (currentValue <= (maxValue * condValue / 100)) {
+		if (currentValue <= (maxValue * condValue / 100f)) {
 			int possibleHealValue = 0;
 			if (percent)
-				possibleHealValue = maxValue * valueWithDelta / 100;
+				possibleHealValue = Math.round(maxValue * valueWithDelta / 100f);
 			else
 				possibleHealValue = valueWithDelta;
 
