@@ -9,6 +9,7 @@ import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.items.ManaStone;
+import com.aionemu.gameserver.model.templates.item.actions.TuningAction;
 import com.aionemu.gameserver.model.templates.item.purification.ItemPurificationTemplate;
 import com.aionemu.gameserver.model.templates.item.purification.PurificationResultItem;
 import com.aionemu.gameserver.model.templates.item.purification.SubMaterialItem;
@@ -119,10 +120,13 @@ public class ItemPurificationService {
 			newItem.setTempering(sourceItem.getTempering());
 		if (sourceItem.isSoulBound())
 			newItem.setSoulBound(true);
-		if (sourceItem.getItemTemplate().getStatBonusSetId() != 0 && newItem.getItemTemplate().getStatBonusSetId() != 0) {
-			newItem.setBonusStats(sourceItem.getBonusStatsId(), true);
-			newItem.setTuneCount(sourceItem.getTuneCount());
+		if (sourceItem.getBonusStatsId() > 0) {
+			int statBonusId = sourceItem.getBonusStatsId();
+			if (sourceItem.getItemTemplate().getStatBonusSetId() != newItem.getItemTemplate().getStatBonusSetId())
+				statBonusId = TuningAction.getRandomStatBonusIdFor(newItem);
+			newItem.setBonusStats(statBonusId, true);
 		}
+		newItem.setTuneCount(sourceItem.getTuneCount());
 		newItem.setItemColor(sourceItem.getItemColor());
 		player.getInventory().add(newItem);
 	}

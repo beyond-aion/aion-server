@@ -27,10 +27,10 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 public class TuningAction extends AbstractItemAction {
 
 	@XmlAttribute
-	UseTarget target;
+	private UseTarget target;
 
 	@XmlAttribute(name = "no_reduce")
-	boolean shouldNotReduceTuneCount;
+	private boolean shouldNotReduceTuneCount;
 
 	@Override
 	public boolean canAct(Player player, Item parentItem, Item targetItem) {
@@ -53,12 +53,12 @@ public class TuningAction extends AbstractItemAction {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_ITEM_REIDENTIFY_WRONG_LEVEL(parentItem.getL10n(), targetItem.getL10n()));
 			return false;
 		}
-		
+
 		return shouldNotReduceTuneCount || targetItem.getTuneCount() < targetItem.getItemTemplate().getMaxTuneCount();
 	}
 
 	@Override
-	public void act(final Player player, final Item parentItem, final Item targetItem) {
+	public void act(Player player, Item parentItem, Item targetItem) {
 		int parentItemId = parentItem.getItemId();
 		int tuningScrollObjectId = parentItem.getObjectId();
 		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItemId, 5000, 9, 0),
@@ -95,8 +95,7 @@ public class TuningAction extends AbstractItemAction {
 					newOptionalSockets = Rnd.get(0, targetItem.getItemTemplate().getOptionSlotBonus());
 					newEnchantBonus = Rnd.get(0, targetItem.getItemTemplate().getMaxEnchantBonus());
 				}
-				newRndBonusSetId = DataManager.ITEM_RANDOM_BONUSES.selectRandomBonusNumber(StatBonusType.INVENTORY,
-					targetItem.getItemTemplate().getStatBonusSetId());
+				newRndBonusSetId = getRandomStatBonusIdFor(targetItem);
 				PendingTuneResult result = new PendingTuneResult(newOptionalSockets, newEnchantBonus, newRndBonusSetId, shouldNotReduceTuneCount);
 				targetItem.setPendingTuneResult(result);
 				PacketSendUtility.sendPacket(player, new SM_TUNE_RESULT(targetItem, tuningScrollObjectId, result));
@@ -104,7 +103,9 @@ public class TuningAction extends AbstractItemAction {
 			}
 
 		}, 5000));
-
 	}
 
+	public static int getRandomStatBonusIdFor(Item item) {
+		return DataManager.ITEM_RANDOM_BONUSES.selectRandomBonusNumber(StatBonusType.INVENTORY, item.getItemTemplate().getStatBonusSetId());
+	}
 }
