@@ -54,17 +54,17 @@ public class ItemActionService {
 		}, 5000));
 	}
 
-	public static void applyTuneResult(Player player, Item itemToTune) {
-		PendingTuneResult tuneResult = itemToTune.getPendingTuneResult();
+	public static void applyTuneResult(Player player, Item item) {
+		PendingTuneResult tuneResult = item.getPendingTuneResult();
 		if (tuneResult == null) {
 			AuditLogger.log(player, "attempted to apply a tune result without tuning the item beforehand.");
 			return;
 		}
-		if (!tuneResult.shouldNotReduceTuneCount()) {
-			itemToTune.setOptionalSockets(tuneResult.getOptionalSockets());
-			itemToTune.setEnchantBonus(tuneResult.getEnchantBonus());
-		}
-		itemToTune.setBonusStats(tuneResult.getBonusSetId(), true);
-		itemToTune.setPendingTuneResult(null);
+		item.setOptionalSockets(tuneResult.getOptionalSockets());
+		item.setEnchantBonus(tuneResult.getEnchantBonus());
+		item.setBonusStats(tuneResult.getStatBonusId(), true);
+		item.setPendingTuneResult(null);
+		item.setPersistentState(PersistentState.UPDATE_REQUIRED);
+		player.getInventory().setPersistentState(PersistentState.UPDATE_REQUIRED);
 	}
 }

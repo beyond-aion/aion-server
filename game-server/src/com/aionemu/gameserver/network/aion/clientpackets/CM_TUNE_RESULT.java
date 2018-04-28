@@ -3,7 +3,6 @@ package com.aionemu.gameserver.network.aion.clientpackets;
 import java.util.Set;
 
 import com.aionemu.gameserver.model.gameobjects.Item;
-import com.aionemu.gameserver.model.gameobjects.Persistable.PersistentState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
@@ -42,8 +41,6 @@ public class CM_TUNE_RESULT extends AionClientPacket {
 				itemToTune.setPendingTuneResult(null);
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_ITEM_REIDENTIFY_APPLY_NO());
 			}
-			itemToTune.setPersistentState(PersistentState.UPDATE_REQUIRED);
-			player.getInventory().setPersistentState(PersistentState.UPDATE_REQUIRED);
 			PacketSendUtility.sendPacket(player, new SM_INVENTORY_UPDATE_ITEM(player, itemToTune));
 		}
 	}

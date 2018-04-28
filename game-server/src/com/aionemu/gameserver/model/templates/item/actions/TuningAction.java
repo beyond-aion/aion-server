@@ -86,17 +86,18 @@ public class TuningAction extends AbstractItemAction {
 					true);
 				if (!player.getInventory().decreaseByObjectId(tuningScrollObjectId, 1))
 					return;
-				
-				int newOptionalSockets = 0;
-				int newEnchantBonus = 0;
-				int newRndBonusSetId = 0;
-				if (!shouldNotReduceTuneCount) {
+
+				int newOptionalSockets, newEnchantBonus, newStatBonusId;
+				if (shouldNotReduceTuneCount) { // only tune attributes (bonus stats)
+					newOptionalSockets = targetItem.getOptionalSockets();
+					newEnchantBonus = targetItem.getEnchantBonus();
+				} else {
 					targetItem.setTuneCount(targetItem.getTuneCount() + 1);
 					newOptionalSockets = Rnd.get(0, targetItem.getItemTemplate().getOptionSlotBonus());
 					newEnchantBonus = Rnd.get(0, targetItem.getItemTemplate().getMaxEnchantBonus());
 				}
-				newRndBonusSetId = getRandomStatBonusIdFor(targetItem);
-				PendingTuneResult result = new PendingTuneResult(newOptionalSockets, newEnchantBonus, newRndBonusSetId, shouldNotReduceTuneCount);
+				newStatBonusId = getRandomStatBonusIdFor(targetItem);
+				PendingTuneResult result = new PendingTuneResult(newOptionalSockets, newEnchantBonus, newStatBonusId);
 				targetItem.setPendingTuneResult(result);
 				PacketSendUtility.sendPacket(player, new SM_TUNE_RESULT(targetItem, tuningScrollObjectId, result));
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_ITEM_REIDENTIFY_SUCCEED(targetItem.getL10n()));

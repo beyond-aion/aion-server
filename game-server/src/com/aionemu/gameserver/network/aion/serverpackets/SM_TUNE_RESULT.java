@@ -1,69 +1,44 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
-import java.util.HashMap;
+import java.util.Collections;
 import java.util.Map;
-import java.util.Set;
+import java.util.stream.Collectors;
 
 import com.aionemu.gameserver.model.gameobjects.Item;
+import com.aionemu.gameserver.model.items.ItemStone;
 import com.aionemu.gameserver.model.items.ManaStone;
 import com.aionemu.gameserver.model.items.PendingTuneResult;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 
 /**
- * //fsc 0x120 ddhcdhdddddddbdcbcc 107015 1 2 10 110551054 1281 0 0 0 0 0 0 0 13 0 2 120 1 1
- * 
  * @author Estrayl
  */
 public class SM_TUNE_RESULT extends AionServerPacket {
 
 	private final Item targetItem;
 	private final int tuningScrollObjectId;
-	private final int rndBonus;
-	private int enchantBonus;
-	private int optionalSockets;
+	private final PendingTuneResult result;
 
 	public SM_TUNE_RESULT(Item targetItem, int tuningScrollObjectId, PendingTuneResult result) {
 		this.targetItem = targetItem;
 		this.tuningScrollObjectId = tuningScrollObjectId;
-		rndBonus = result.getBonusSetId();
-		if (result.shouldNotReduceTuneCount()) {
-			enchantBonus = targetItem.getEnchantBonus();
-			optionalSockets = targetItem.getOptionalSockets();
-		} else {
-			enchantBonus = result.getEnchantBonus();
-			optionalSockets = result.getOptionalSockets();
-		}
+		this.result = result;
 	}
 
 	@Override
 	protected void writeImpl(AionConnection con) {
 		writeD(targetItem.getObjectId());
 		writeD(tuningScrollObjectId);
-		writeH(rndBonus);
+		writeH(result.getStatBonusId());
 		writeC(targetItem.getEnchantLevel());
 		writeD(targetItem.getItemId());
-		writeH(enchantBonus * 256 + optionalSockets);
-		if (targetItem.hasManaStones()) {
-			Set<ManaStone> itemStones = targetItem.getItemStones();
-			Map<Integer, ManaStone> stonesBySlot = new HashMap<>();
-			for (ManaStone itemStone : itemStones) {
-				stonesBySlot.put(itemStone.getSlot(), itemStone);
-			}
-			for (int i = 0; i < Item.MAX_BASIC_STONES; i++) {
-				ManaStone stone = stonesBySlot.get(i);
-				if (stone == null)
-					writeD(0);
-				else
-					writeD(stone.getItemId());
-			}
-		} else {
-			writeD(0);
-			writeD(0);
-			writeD(0);
-			writeD(0);
-			writeD(0);
-			writeD(0);
+		writeC(result.getOptionalSockets());
+		writeC(result.getEnchantBonus());
+		Map<Integer, ManaStone> stonesBySlot = createManastoneMap(targetItem);
+		for (int i = 0; i < Item.MAX_BASIC_STONES; i++) {
+			ManaStone stone = stonesBySlot.get(i);
+			writeD(stone == null ? 0 : stone.getItemId());
 		}
 		writeD(targetItem.getGodStoneId());
 		writeB(new byte[13]);
@@ -72,5 +47,12 @@ public class SM_TUNE_RESULT extends AionServerPacket {
 		writeB(new byte[120]);
 		writeC(0); // UNK
 		writeC(0); // UNK
+	}
+
+	private Map<Integer, ManaStone> createManastoneMap(Item item) {
+		if (item.hasManaStones())
+			return item.getItemStones().stream().collect(Collectors.toMap(ItemStone::getSlot, s -> s));
+		else
+			return Collections.emptyMap();
 	}
 }
