@@ -2,6 +2,7 @@ package com.aionemu.gameserver.services.panesterra.ahserion;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.services.teleport.TeleportService;
@@ -46,19 +47,15 @@ public class PanesterraTeam {
 	}
 
 	public void moveTeamMembersToFortressPosition() {
+		forEachMember(player -> TeleportService.teleportTo(player, fortressPosition));
+	}
+
+	public void forEachMember(Consumer<Player> consumer) {
 		for (Integer playerId : teamMembers) {
 			Player player = World.getInstance().findPlayer(playerId);
 			if (player != null)
-				TeleportService.teleportTo(player, fortressPosition);
+				consumer.accept(player);
 		}
-	}
-
-	public void moveTeamToStartPosition() {
-		teamMembers.stream().forEach(playerId -> {
-			Player p = World.getInstance().findPlayer(playerId);
-			if (p != null)
-				movePlayerToStartPosition(p);
-		});
 	}
 
 	public void movePlayerToStartPosition(Player player) {

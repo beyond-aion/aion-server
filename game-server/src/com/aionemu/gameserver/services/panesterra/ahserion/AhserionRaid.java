@@ -20,8 +20,11 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
+import com.aionemu.gameserver.utils.audit.AuditLogger;
 import com.aionemu.gameserver.world.World;
+import com.aionemu.gameserver.world.WorldPosition;
 
 /**
  * @author Yeats
@@ -99,10 +102,10 @@ public class AhserionRaid {
 						break;
 					case 19:
 						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_GAB1_SUB_ALARM_07());
-						panesterraTeams.values().stream().forEach(PanesterraTeam::moveTeamMembersToFortressPosition);
 						spawnStage(2, PanesterraFaction.BALAUR); // spawn mobs 30s before doors are opened
 						break;
 					case 20:
+						checkForIllegalMovement();
 						for (StaticDoor door : World.getInstance().getWorldMap(400030000).getMainWorldMapInstance().getDoors().values())
 							door.setOpen(true);
 						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_GAB1_SUB_ALARM_08());
@@ -124,6 +127,18 @@ public class AhserionRaid {
 				}
 			}
 		}, 30000, 30000);
+	}
+
+	private void checkForIllegalMovement() {
+		panesterraTeams.values().forEach(team -> {
+			WorldPosition startPosition = team.getStartPosition();
+			team.forEachMember(player -> {
+				if (!PositionUtil.isInRange(player, startPosition.getX(), startPosition.getY(), startPosition.getZ(), 81f)) {
+					AuditLogger.log(player, "bugged himself through the " + team.getFaction() + " start door");
+					team.movePlayerToStartPosition(player);
+				}
+			});
+		});
 	}
 
 	/**
