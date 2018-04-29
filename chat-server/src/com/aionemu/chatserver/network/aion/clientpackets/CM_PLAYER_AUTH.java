@@ -1,6 +1,6 @@
 package com.aionemu.chatserver.network.aion.clientpackets;
 
-import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 
 import org.jboss.netty.buffer.ChannelBuffer;
 
@@ -16,7 +16,8 @@ public class CM_PLAYER_AUTH extends AbstractClientPacket {
 	private int playerId;
 	private byte[] token;
 	private byte[] identifier;
-	private byte[] accountName;
+	private String identifierSeparator;
+	private String accountName;
 
 	public CM_PLAYER_AUTH(ChannelBuffer channelBuffer, ClientChannelHandler clientChannelHandler, byte opCode) {
 		super(channelBuffer, clientChannelHandler, opCode);
@@ -24,35 +25,30 @@ public class CM_PLAYER_AUTH extends AbstractClientPacket {
 
 	@Override
 	protected void readImpl() {
-		readC(); // 0x40 = @
-		readH(); // 0
+		identifierSeparator = new String(readB(2), StandardCharsets.UTF_16LE); // @
+		readC(); // 0
 		readD(); // 1
 		int gameNameLength = readH() * 2;
 		readB(gameNameLength); // AION
 		readD(); // 27
-		int unkLength = readH() * 2;
-		readB(unkLength); // empty
+		readD(); // 1 or 3
+		readD(); // 0
 		playerId = readD();
 		readD(); // 0
 		readD(); // 0
 		readD(); // 0
 		int length = readH() * 2;
-		identifier = readB(length); // Name@identifier
-		int accountLenght = readH() * 2;
-		accountName = readB(accountLenght);
+		identifier = readB(length);
+		int accountNameLength = readH() * 2;
+		accountName = new String(readB(accountNameLength), StandardCharsets.UTF_16LE);
 		int tokenLength = readH();
 		token = readB(tokenLength);
 	}
 
 	@Override
 	protected void runImpl() {
-		try {
-			String nameIdentifier = new String(identifier, "UTF-16le");
-			String charName = nameIdentifier.substring(0, nameIdentifier.lastIndexOf("@"));
-			String accName = new String(accountName, "UTF-16le");
-			ChatService.getInstance().registerPlayerConnection(playerId, token, identifier, charName, accName, clientChannelHandler);
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		}
+		String nameIdentifier = new String(identifier, StandardCharsets.UTF_16LE); // Name@identifier
+		String charName = nameIdentifier.substring(0, nameIdentifier.lastIndexOf(identifierSeparator));
+		ChatService.getInstance().registerPlayerConnection(playerId, token, identifier, charName, accountName, clientChannelHandler);
 	}
 }

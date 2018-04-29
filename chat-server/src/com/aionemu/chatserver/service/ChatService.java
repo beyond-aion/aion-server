@@ -1,6 +1,6 @@
 package com.aionemu.chatserver.service;
 
-import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
@@ -46,10 +46,10 @@ public class ChatService {
 	 * @return
 	 * @throws NoSuchAlgorithmException
 	 */
-	public ChatClient registerPlayer(int playerId, String accName, String nick, Race race, byte accessLevel) throws NoSuchAlgorithmException, UnsupportedEncodingException {
+	public ChatClient registerPlayer(int playerId, String accName, String nick, Race race, byte accessLevel) throws NoSuchAlgorithmException {
 		MessageDigest md = MessageDigest.getInstance("SHA-256");
 		md.reset();
-		md.update(accName.getBytes("UTF-8"), 0, accName.length());
+		md.update(accName.getBytes(StandardCharsets.UTF_8), 0, accName.length());
 		byte[] accountToken = md.digest();
 		byte[] token = generateToken(accountToken);
 		ChatClient chatClient = new ChatClient(playerId, token, accName, nick, race, accessLevel);
@@ -83,10 +83,8 @@ public class ChatService {
 	 * @param name
 	 * @param accName
 	 * @param clientChannelHandler
-	 * @throws UnsupportedEncodingException
 	 */
-	public void registerPlayerConnection(int playerId, byte[] token, byte[] identifier, String name, String accName, ClientChannelHandler channelHandler)
-		throws UnsupportedEncodingException {
+	public void registerPlayerConnection(int playerId, byte[] token, byte[] identifier, String name, String accName, ClientChannelHandler channelHandler) {
 		ChatClient chatClient = players.get(playerId);
 		if (chatClient == null)
 			log.warn("Client tried to connect but was not yet registered from game server side");
