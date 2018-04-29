@@ -53,6 +53,14 @@ public class PanesterraTeam {
 		}
 	}
 
+	public void moveTeamToStartPosition() {
+		teamMembers.stream().forEach(playerId -> {
+			Player p = World.getInstance().findPlayer(playerId);
+			if (p != null)
+				movePlayerToStartPosition(p);
+		});
+	}
+
 	public void movePlayerToStartPosition(Player player) {
 		TeleportService.teleportTo(player, startPosition);
 	}

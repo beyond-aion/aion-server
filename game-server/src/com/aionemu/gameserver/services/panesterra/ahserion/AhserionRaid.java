@@ -99,6 +99,7 @@ public class AhserionRaid {
 						break;
 					case 19:
 						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_GAB1_SUB_ALARM_07());
+						panesterraTeams.values().stream().forEach(PanesterraTeam::moveTeamMembersToFortressPosition);
 						spawnStage(2, PanesterraFaction.BALAUR); // spawn mobs 30s before doors are opened
 						break;
 					case 20:
