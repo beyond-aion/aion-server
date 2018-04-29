@@ -637,19 +637,13 @@ public class Item extends AionObject implements Expirable, StatOwner, Persistabl
 		if (itemTemplate.isWeapon() || itemTemplate.isArmor()) {
 			if (isFusionItem) {
 				ItemTemplate fusedTemp = getFusionedItemTemplate();
-				if (fusedTemp == null) {
-					log.error("Item {} with itemId {} has empty fusioned item ", getObjectId(), getItemId());
+				if (fusedTemp == null)
 					return 0;
-				}
-				numSockets = fusedTemp.getManastoneSlots();
-				numSockets += hasOptionalFusionSocket() ? getFusionedItemOptionalSockets() : 0;
+				numSockets = fusedTemp.getManastoneSlots() + getFusionedItemOptionalSockets();
 			} else {
-				numSockets = getItemTemplate().getManastoneSlots();
-				numSockets += hasOptionalSocket() ? getOptionalSockets() : 0;
+				numSockets = getItemTemplate().getManastoneSlots() + getOptionalSockets();
 			}
-			if (numSockets < 6)
-				return numSockets;
-			return 6;
+			return Math.min(numSockets, MAX_BASIC_STONES);
 		}
 		return 0;
 	}

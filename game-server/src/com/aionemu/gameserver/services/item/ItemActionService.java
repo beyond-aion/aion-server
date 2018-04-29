@@ -1,11 +1,17 @@
 package com.aionemu.gameserver.services.item;
 
+import java.util.Set;
+import java.util.stream.Collectors;
+
+import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.controllers.observer.ItemUseObserver;
+import com.aionemu.gameserver.dao.ItemStoneListDAO;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Persistable.PersistentState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.items.ManaStone;
 import com.aionemu.gameserver.model.items.PendingTuneResult;
 import com.aionemu.gameserver.model.templates.item.actions.TuningAction;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_INVENTORY_UPDATE_ITEM;
@@ -66,5 +72,17 @@ public class ItemActionService {
 		item.setPendingTuneResult(null);
 		item.setPersistentState(PersistentState.UPDATE_REQUIRED);
 		player.getInventory().setPersistentState(PersistentState.UPDATE_REQUIRED);
+		if (item.hasManaStones())
+			removeManastonesExceedingMaxSlot(item);
+	}
+
+	private static void removeManastonesExceedingMaxSlot(Item item) {
+		int maxManastoneSlotIndex = item.getSockets(false) - 1;
+		Set<ManaStone> manastonesToRemove = item.getItemStones().stream().filter(m -> m.getSlot() > maxManastoneSlotIndex).collect(Collectors.toSet());
+		if (!manastonesToRemove.isEmpty()) {
+			item.getItemStones().removeAll(manastonesToRemove);
+			manastonesToRemove.forEach(m -> m.setPersistentState(PersistentState.DELETED));
+			DAOManager.getDAO(ItemStoneListDAO.class).storeManaStones(manastonesToRemove);
+		}
 	}
 }
