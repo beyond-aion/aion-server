@@ -10,6 +10,7 @@ import com.aionemu.gameserver.controllers.observer.ItemUseObserver;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Item;
+import com.aionemu.gameserver.model.gameobjects.Persistable;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.items.PendingTuneResult;
 import com.aionemu.gameserver.model.templates.item.bonuses.StatBonusType;
@@ -93,6 +94,8 @@ public class TuningAction extends AbstractItemAction {
 					newEnchantBonus = targetItem.getEnchantBonus();
 				} else {
 					targetItem.setTuneCount(targetItem.getTuneCount() + 1);
+					targetItem.setPersistentState(Persistable.PersistentState.UPDATE_REQUIRED);
+					player.getInventory().setPersistentState(Persistable.PersistentState.UPDATE_REQUIRED);
 					newOptionalSockets = Rnd.get(0, targetItem.getItemTemplate().getOptionSlotBonus());
 					newEnchantBonus = Rnd.get(0, targetItem.getItemTemplate().getMaxEnchantBonus());
 				}
