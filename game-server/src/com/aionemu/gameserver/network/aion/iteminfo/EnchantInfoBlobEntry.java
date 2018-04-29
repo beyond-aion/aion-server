@@ -1,40 +1,53 @@
 package com.aionemu.gameserver.network.aion.iteminfo;
 
 import java.nio.ByteBuffer;
-import java.util.HashMap;
-import java.util.Set;
+import java.util.Collections;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.items.IdianStone;
+import com.aionemu.gameserver.model.items.ItemStone;
 import com.aionemu.gameserver.model.items.ManaStone;
 import com.aionemu.gameserver.model.stats.container.PlumStatEnum;
 import com.aionemu.gameserver.model.templates.item.enums.ItemGroup;
 import com.aionemu.gameserver.network.aion.iteminfo.ItemInfoBlob.ItemBlobType;
 
 /**
- * This blob sends info about mana stones.
+ * This blob sends info about enchantment, bonus attributes, mana stones, god stone etc.
  * 
  * @author -Nemesiss-
  * @modified Rolandas
  */
-public class ManaStoneInfoBlobEntry extends ItemBlobEntry {
+public class EnchantInfoBlobEntry extends ItemBlobEntry {
 
 	public static int size = /* 8 + Item.MAX_BASIC_STONES * 4 + 4 + 13 + 5 + 5 + (18 * 4 + 1) */138;
 
-	ManaStoneInfoBlobEntry() {
-		super(ItemBlobType.MANA_SOCKETS);
+	EnchantInfoBlobEntry() {
+		super(ItemBlobType.ENCHANT_INFO);
 	}
 
 	@Override
 	public void writeThisBlob(ByteBuffer buf) {
-		Item item = ownerItem;
+		writeInfo(buf, ownerItem);
+	}
+
+	public static void writeInfo(ByteBuffer buf, Item item) {
+		writeInfo(buf, item, !item.isIdentified() ? -1 : item.getOptionalSockets(), !item.isIdentified() ? -1 : item.getEnchantBonus());
+	}
+
+	public static void writeInfo(ByteBuffer buf, Item item, int optionalManastoneSockets, int enchantBonus) {
 		writeC(buf, item.isSoulBound() ? 1 : 0);
 		writeC(buf, item.getEnchantLevel()); // enchant (1-15)
 		writeD(buf, item.getItemSkinTemplate().getTemplateId());
-		writeC(buf, !item.isIdentified() ? -1 : item.getOptionalSockets());
-		writeC(buf, !item.isIdentified() ? -1 : item.getEnchantBonus());
+		writeC(buf, optionalManastoneSockets);
+		writeC(buf, enchantBonus);
 
-		writeItemStones(buf);
+		Map<Integer, ManaStone> stonesBySlot = createManastoneMap(item);
+		for (int i = 0; i < Item.MAX_BASIC_STONES; i++) {
+			ManaStone stone = stonesBySlot.get(i);
+			writeD(buf, stone == null ? 0 : stone.getItemId());
+		}
 
 		writeD(buf, item.getGodStoneId());
 
@@ -90,30 +103,11 @@ public class ManaStoneInfoBlobEntry extends ItemBlobEntry {
 		writeD(buf, 0x00); // skillId
 	}
 
-	/**
-	 * Writes manastones
-	 * 
-	 * @param item
-	 */
-	private void writeItemStones(ByteBuffer buf) {
-		Item item = ownerItem;
-
-		if (item.hasManaStones()) {
-			Set<ManaStone> itemStones = item.getItemStones();
-			HashMap<Integer, ManaStone> stonesBySlot = new HashMap<>();
-			for (ManaStone itemStone : itemStones) {
-				stonesBySlot.put(itemStone.getSlot(), itemStone);
-			}
-			for (int i = 0; i < Item.MAX_BASIC_STONES; i++) {
-				ManaStone stone = stonesBySlot.get(i);
-				if (stone == null)
-					writeD(buf, 0);
-				else
-					writeD(buf, stone.getItemId());
-			}
-		} else {
-			skip(buf, Item.MAX_BASIC_STONES * 4);
-		}
+	private static Map<Integer, ManaStone> createManastoneMap(Item item) {
+		if (item.hasManaStones())
+			return item.getItemStones().stream().collect(Collectors.toMap(ItemStone::getSlot, s -> s));
+		else
+			return Collections.emptyMap();
 	}
 
 	@Override

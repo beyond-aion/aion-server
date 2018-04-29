@@ -87,8 +87,7 @@ public class ItemInfoBlob extends PacketWriteHelper {
 				blob.addBlobEntry(ItemBlobType.SLOTS_WEAPON);
 			}
 
-			// MANA STONES
-			blob.addBlobEntry(ItemBlobType.MANA_SOCKETS);
+			blob.addBlobEntry(ItemBlobType.ENCHANT_INFO);
 
 			if (item.getConditioningInfo() != null)
 				blob.addBlobEntry(ItemBlobType.CONDITIONING_INFO);
@@ -234,12 +233,11 @@ public class ItemInfoBlob extends PacketWriteHelper {
 				return new BonusInfoBlobEntry();
 			}
 		},
-		// [Not handled before] retail send it xx times (smth dynamically changed)
-		MANA_SOCKETS(0x0B) {
+		ENCHANT_INFO(0x0B) {
 
 			@Override
 			ItemBlobEntry newBlobEntry() {
-				return new ManaStoneInfoBlobEntry();
+				return new EnchantInfoBlobEntry();
 			}
 		},
 		// 0x0C - not used?
@@ -267,7 +265,7 @@ public class ItemInfoBlob extends PacketWriteHelper {
 
 		private int entryId;
 
-		private ItemBlobType(int entryId) {
+		ItemBlobType(int entryId) {
 			this.entryId = entryId;
 		}
 

@@ -6,9 +6,9 @@ import com.aionemu.gameserver.model.gameobjects.BrokerItem;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
+import com.aionemu.gameserver.network.aion.iteminfo.EnchantInfoBlobEntry;
 import com.aionemu.gameserver.network.aion.iteminfo.ItemInfoBlob;
 import com.aionemu.gameserver.network.aion.iteminfo.ItemInfoBlob.ItemBlobType;
-import com.aionemu.gameserver.network.aion.iteminfo.ManaStoneInfoBlobEntry;
 
 /**
  * @author IlBuono, kosyachok
@@ -192,21 +192,16 @@ public class SM_BROKER_SERVICE extends AionServerPacket {
 		writeH(brokerItems.length);
 		for (BrokerItem settledItem : brokerItems) {
 			writeD(settledItem.getItemId());
-			if (settledItem.isSold())
-				writeQ(settledItem.getPrice() * settledItem.getItemCount());
-			else
-				writeQ(0);
+			writeQ(settledItem.isSold() ? settledItem.getPrice() * settledItem.getItemCount() : 0);
 			writeQ(settledItem.getItemCount());
 			writeQ(settledItem.getItemCount());
-			int time = (int) (settledItem.getSettleTime().getTime() / 60000);
-			writeD(time);
+			writeD((int) (settledItem.getSettleTime().getTime() / 60000));
 
-			// TODO! thats really odd - looks like getItem() may return null...
 			Item item = settledItem.getItem();
 			if (item != null)
-				ItemInfoBlob.newBlobEntry(ItemBlobType.MANA_SOCKETS, null, item).writeThisBlob(getBuf());
-			else
-				writeB(new byte[ManaStoneInfoBlobEntry.size]);
+				EnchantInfoBlobEntry.writeInfo(getBuf(), item);
+			else // sold items are null because they are not in item_location 126 (broker) anymore
+				writeB(new byte[EnchantInfoBlobEntry.size]);
 
 			writeS(settledItem.getItemCreator());
 			/*
@@ -239,7 +234,7 @@ public class SM_BROKER_SERVICE extends AionServerPacket {
 		int daysLeft = (int) TimeUnit.MILLISECONDS.toDays(brokerItem.getExpireTime().getTime() - System.currentTimeMillis());
 		writeC(daysLeft);
 
-		ItemInfoBlob.newBlobEntry(ItemBlobType.MANA_SOCKETS, null, item).writeThisBlob(getBuf());
+		EnchantInfoBlobEntry.writeInfo(getBuf(), item);
 		// ItemInfoBlob.newBlobEntry(ItemBlobType.PREMIUM_OPTION, null, item).writeThisBlob(getBuf());
 
 		writeS(brokerItem.getItemCreator());
@@ -259,7 +254,7 @@ public class SM_BROKER_SERVICE extends AionServerPacket {
 		writeQ(brokerItem.getAveragePrice()); // AWR price
 		writeQ(item.getItemCount());
 
-		ItemInfoBlob.newBlobEntry(ItemBlobType.MANA_SOCKETS, null, item).writeThisBlob(getBuf());
+		EnchantInfoBlobEntry.writeInfo(getBuf(), item);
 		// ItemInfoBlob.newBlobEntry(ItemBlobType.PREMIUM_OPTION, null, item).writeThisBlob(getBuf());
 
 		writeS(brokerItem.getSeller());
