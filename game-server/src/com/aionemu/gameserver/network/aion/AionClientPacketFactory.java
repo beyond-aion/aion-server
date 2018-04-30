@@ -226,6 +226,7 @@ public class AionClientPacketFactory {
 		data.position(data.position() + 3); // skip static code (short) and secondary opcode (byte)
 		PacketInfo<? extends AionClientPacket> packetInfo = packets.get(opCode);
 		if (packetInfo == null) {
+			client.sendUnknownClientPacketInfo(opCode);
 			if (NetworkConfig.LOG_UNKNOWN_PACKETS)
 				log.warn(String.format("Aion client sent data with unknown opcode: 0x%03X, state=%s %n%s", opCode, state.toString(), Util.toHex(data)));
 			return null;

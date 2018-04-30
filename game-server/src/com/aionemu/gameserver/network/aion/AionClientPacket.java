@@ -95,7 +95,7 @@ public abstract class AionClientPacket extends BaseClientPacket<AionConnection> 
 	}
 
 	@Override
-	public String toFormattedPacketNameString() {
-		return String.format("[0x%03X] %s", getOpCode(), getPacketName());
+	protected int getOpCodeZeroPadding() {
+		return 3;
 	}
 }

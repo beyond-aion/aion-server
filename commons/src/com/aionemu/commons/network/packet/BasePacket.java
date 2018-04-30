@@ -52,21 +52,27 @@ public abstract class BasePacket {
 	 * @return packet name
 	 * @see Class#getSimpleName()
 	 */
-	public String getPacketName() {
+	public final String getPacketName() {
 		return getClass().getSimpleName();
 	}
 
+	protected int getOpCodeZeroPadding() {
+		return 2;
+	}
+
 	public String toFormattedPacketNameString() {
-		return String.format("[0x%02X] %s", getOpCode(), getPacketName());
+		return toFormattedPacketNameString(getOpCodeZeroPadding(), getOpCode(), getPacketName());
+	}
+
+	public static String toFormattedPacketNameString(int zeroPadding, int opCode, String packetName) {
+		return String.format("[0x%0" + zeroPadding + "X] %s", opCode, packetName);
 	}
 
 	/**
-	 * Returns string representation of this packet based on packet type, opCode and name.
+	 * Returns string representation of this packet based on opCode and name.
 	 * 
 	 * @return packet type string
-	 * @see #TYPE_PATTERN
-	 * @see java.util.Formatter
-	 * @see String#format(String, Object[])
+	 * @see #toFormattedPacketNameString
 	 */
 	@Override
 	public String toString() {

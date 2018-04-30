@@ -232,7 +232,8 @@ public class AionConnection extends AConnection<AionServerPacket> {
 			if (sendMsgQueue.isEmpty())
 				return false;
 			AionServerPacket packet = sendMsgQueue.removeFirst();
-			sendPacketInfo(packet);
+			if (packet.getClass() != SM_MESSAGE.class)
+				sendPacketInfo(packet);
 			long begin = System.nanoTime();
 			packet.write(this, data);
 			if (CommonsConfig.RUNNABLESTATS_ENABLE) {
@@ -243,10 +244,18 @@ public class AionConnection extends AConnection<AionServerPacket> {
 		}
 	}
 
+	private boolean canReceivePacketInfoInChat() {
+		return getState() == State.IN_GAME && getAccount().getMembership() == 10;
+	}
+
 	private void sendPacketInfo(BasePacket packet) {
-		if (getState() == State.IN_GAME && getAccount().getMembership() == 10 && packet.getClass() != SM_MESSAGE.class) {
+		if (canReceivePacketInfoInChat())
 			sendPacket(new SM_MESSAGE(0, null, packet.toFormattedPacketNameString(), ChatType.BRIGHT_YELLOW));
-		}
+	}
+
+	void sendUnknownClientPacketInfo(int opCode) {
+		if (canReceivePacketInfoInChat())
+			sendPacket(new SM_MESSAGE(0, null, BasePacket.toFormattedPacketNameString(3, opCode, "CM_UNK"), ChatType.YELLOW));
 	}
 
 	@Override

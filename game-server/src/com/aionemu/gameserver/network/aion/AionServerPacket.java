@@ -26,18 +26,14 @@ public abstract class AionServerPacket extends BaseServerPacket {
 
 	/**
 	 * Write packet opCode and two additional bytes
-	 * 
-	 * @param buf
-	 * @param value
 	 */
-	private final void writeOP() {
-		/** obfuscate packet id */
+	private void writeOP() {
+		// obfuscate packet id
 		int op = Crypt.encodeOpcodec(getOpCode());
 		buf.putShort((short) (op));
-		/** put static server packet code */
+		// put static server packet code
 		buf.put(Crypt.staticServerPacketCode);
-
-		/** for checksum? */
+		// for checksum?
 		buf.putShort((short) (~op));
 	}
 
@@ -108,7 +104,7 @@ public abstract class AionServerPacket extends BaseServerPacket {
 	}
 
 	@Override
-	public String toFormattedPacketNameString() {
-		return String.format("[0x%03X] %s", getOpCode(), getPacketName());
+	protected int getOpCodeZeroPadding() {
+		return 3;
 	}
 }
