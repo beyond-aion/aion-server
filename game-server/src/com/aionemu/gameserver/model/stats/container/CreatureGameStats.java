@@ -154,7 +154,7 @@ public abstract class CreatureGameStats<T extends Creature> {
 					func.apply(stat);
 				}
 			}
-			StatCapUtil.calculateBaseValue(stat, owner.isPlayer());
+			StatCapUtil.calculateBaseValue(stat, owner);
 		}
 		return stat;
 	}

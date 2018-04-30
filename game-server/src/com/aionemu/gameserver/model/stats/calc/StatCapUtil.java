@@ -2,6 +2,8 @@ package com.aionemu.gameserver.model.stats.calc;
 
 import java.util.EnumMap;
 
+import com.aionemu.gameserver.model.gameobjects.Creature;
+import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
 
 /**
@@ -17,9 +19,9 @@ public class StatCapUtil {
 		}
 	}
 
-	public static void calculateBaseValue(Stat2 stat, byte isPlayer) {
+	public static void calculateBaseValue(Stat2 stat, Creature creature) {
 		int lowerCap = getLowerCap(stat.getStat());
-		int upperCap = getUpperCap(stat.getStat());
+		int upperCap = getUpperCap(stat.getStat(), creature);
 
 		if (stat.getStat() == StatEnum.ATTACK_SPEED) {
 			int base = stat.getBase() / 2;
@@ -27,8 +29,6 @@ public class StatCapUtil {
 				stat.setBonus(base);
 			else if (stat.getBonus() < 0 && base < -stat.getBonus())
 				stat.setBonus(-base);
-		} else if (isPlayer == 2 && (stat.getStat() == StatEnum.SPEED || stat.getStat() == StatEnum.FLY_SPEED)) {
-			upperCap = Integer.MAX_VALUE;
 		}
 
 		calculate(stat, lowerCap, upperCap);
@@ -38,7 +38,10 @@ public class StatCapUtil {
 		return limits.get(stat).lowerCap;
 	}
 
-	public static int getUpperCap(StatEnum stat) {
+	public static int getUpperCap(StatEnum stat, Creature creature) {
+		boolean isSpeedUnrestricted = !(creature instanceof Player) || ((Player) creature).isStaff();
+		if ((stat == StatEnum.SPEED || stat == StatEnum.FLY_SPEED) && isSpeedUnrestricted)
+			return Integer.MAX_VALUE;
 		return limits.get(stat).upperCap;
 	}
 
@@ -52,10 +55,10 @@ public class StatCapUtil {
 
 	private static class StatLimits {
 
-		public final int lowerCap;
-		public final int upperCap;
+		private final int lowerCap;
+		private final int upperCap;
 
-		public StatLimits(StatEnum stat) {
+		private StatLimits(StatEnum stat) {
 			this.lowerCap = lowerCapFor(stat);
 			this.upperCap = upperCapFor(stat);
 		}

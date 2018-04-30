@@ -1501,14 +1501,6 @@ public class Player extends Creature {
 	}
 
 	@Override
-	public byte isPlayer() {
-		if (isStaff())
-			return 2;
-		else
-			return 1;
-	}
-
-	@Override
 	public boolean isPvpTarget(Creature creature) {
 		return creature.getActingCreature() instanceof Player;
 	}

@@ -624,10 +624,6 @@ public abstract class Creature extends VisibleObject {
 		return isInState(CreatureState.FLYING) && !isInState(CreatureState.RESTING);
 	}
 
-	public byte isPlayer() {
-		return 0;
-	}
-
 	public boolean isPvpTarget(Creature creature) {
 		return false;
 	}
