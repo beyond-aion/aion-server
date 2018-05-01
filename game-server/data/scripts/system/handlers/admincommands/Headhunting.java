@@ -52,15 +52,19 @@ public class Headhunting extends AdminCommand {
 
 	public Headhunting() {
 		super("headhunting");
-		setSyntaxInfo("<analyze> - Analyzes the season.", "<clear> - Clears the analayzed results",
+
+		// @formatter:off
+		setSyntaxInfo(
+			"<analyze> - Analyzes the season.", "<clear> - Clears the analayzed results",
 			"<show> <rewards|results> - Shows the registered rewards or analyzed results",
-			"<reward> - Executes the reward algorithm and clears all references (cached headhunters and database entries).");
+			"<reward> - Executes the reward algorithm and clears all references (cached headhunters and database entries)."
+		);
+		// @formatter:on
 
 		/* Initialize seasonal headhunting rewards */
 		rewards.put(1, new ArrayList<>());
 		rewards.put(2, new ArrayList<>());
 		rewards.put(3, new ArrayList<>());
-		rewards.put(4, new ArrayList<>()); // equivalent for consolation prize
 
 		rewards.get(1).add(new RewardItem(186000242, 40)); // Ceramium Medal
 		rewards.get(1).add(new RewardItem(186000051, 30)); // Major Ancient Crown
@@ -152,8 +156,8 @@ public class Headhunting extends AdminCommand {
 				builder.append("<br><br>" + pc.toString() + "<br>");
 				List<Headhunter> hunterz = raceMap.get(pc);
 				for (int pos = 0; pos < hunterz.size(); pos++) {
-					final Headhunter hunter = hunterz.get(pos);
-					if (pos > 2 && hunter.getKills() < EventsConfig.HEADHUNTING_CONSOLATION_PRIZE_KILLS)
+					Headhunter hunter = hunterz.get(pos);
+					if (pos + 1 > rewards.size() && hunter.getKills() < EventsConfig.HEADHUNTING_CONSOLATION_PRIZE_KILLS)
 						break;
 
 					String name = DAOManager.getDAO(PlayerDAO.class).getPlayerNameByObjId(hunter.getHunterId());
