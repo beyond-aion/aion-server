@@ -61,8 +61,9 @@ public class Headhunting extends AdminCommand {
 		rewards.put(3, new ArrayList<>());
 		rewards.put(4, new ArrayList<>()); // equivalent for consolation prize
 
-		rewards.get(1).add(new RewardItem(186000242, 50)); // Ceramium Medal
+		rewards.get(1).add(new RewardItem(186000242, 40)); // Ceramium Medal
 		rewards.get(1).add(new RewardItem(186000051, 30)); // Major Ancient Crown
+		rewards.get(1).add(new RewardItem(188950017, 3)); // Major Ancient Crown
 
 		rewards.get(2).add(new RewardItem(186000242, 20)); // Ceramium Medal
 		rewards.get(2).add(new RewardItem(186000051, 15)); // Major Ancient Crown
@@ -207,7 +208,7 @@ public class Headhunting extends AdminCommand {
 					else if (hunter.getKills() >= EventsConfig.HEADHUNTING_CONSOLATION_PRIZE_KILLS)
 						items = rewards.get(4);
 					else
-						break;
+						continue;
 
 					String name = DAOManager.getDAO(PlayerDAO.class).getPlayerNameByObjId(hunter.getHunterId());
 					String rank;
