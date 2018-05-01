@@ -43,6 +43,7 @@ public class Headhunting extends AdminCommand {
 	 * Contains the rewards for different rankings (key value).
 	 */
 	private final Map<Integer, List<RewardItem>> rewards = new LinkedHashMap<>();
+	private final List<RewardItem> consolationRewards = new ArrayList<>();
 
 	/**
 	 * Contains a sorted descending list of {@link Headhunter} by kills per {@link PlayerClass}.
@@ -63,7 +64,7 @@ public class Headhunting extends AdminCommand {
 
 		rewards.get(1).add(new RewardItem(186000242, 40)); // Ceramium Medal
 		rewards.get(1).add(new RewardItem(186000051, 30)); // Major Ancient Crown
-		rewards.get(1).add(new RewardItem(188950017, 3)); // Major Ancient Crown
+		rewards.get(1).add(new RewardItem(188950017, 3)); // Special Courier Pass (Abyss Eternal/Lv. 61-65)
 
 		rewards.get(2).add(new RewardItem(186000242, 20)); // Ceramium Medal
 		rewards.get(2).add(new RewardItem(186000051, 15)); // Major Ancient Crown
@@ -71,7 +72,7 @@ public class Headhunting extends AdminCommand {
 		rewards.get(3).add(new RewardItem(186000242, 10)); // Ceramium Medal
 		rewards.get(3).add(new RewardItem(186000051, 5)); // Major Ancient Crown
 
-		rewards.get(4).add(new RewardItem(186000051, 1)); // Major Ancient Crown
+		consolationRewards.add(new RewardItem(186000051, 1)); // Major Ancient Crown
 	}
 
 	@Override
@@ -176,6 +177,11 @@ public class Headhunting extends AdminCommand {
 			for (RewardItem item : items)
 				builder.append("<br>" + item.getCount() + "x " + DataManager.ITEM_DATA.getItemTemplate(item.getId()).getName());
 		}
+		if (!consolationRewards.isEmpty()) {
+			builder.append("<br><br>Consolation prize for >= " + EventsConfig.HEADHUNTING_CONSOLATION_PRIZE_KILLS + " kills<br>");
+			for (RewardItem item : consolationRewards)
+				builder.append("<br>" + item.getCount() + "x " + DataManager.ITEM_DATA.getItemTemplate(item.getId()).getName());
+		}
 		HTMLService.showHTML(admin, HTMLCache.getInstance().getHTML("headhunting.xhtml").replace("HUNTERZ", builder));
 	}
 
@@ -202,12 +208,13 @@ public class Headhunting extends AdminCommand {
 				List<Headhunter> hunterz = raceMap.get(pc);
 				for (int pos = 0; pos < hunterz.size(); pos++) {
 					final Headhunter hunter = hunterz.get(pos);
-					List<RewardItem> items;
+					List<RewardItem> items = null;
 					if (pos < 3)
 						items = rewards.get(pos + 1);
 					else if (hunter.getKills() >= EventsConfig.HEADHUNTING_CONSOLATION_PRIZE_KILLS)
-						items = rewards.get(4);
-					else
+						items = consolationRewards;
+
+					if (items == null || items.isEmpty())
 						continue;
 
 					String name = DAOManager.getDAO(PlayerDAO.class).getPlayerNameByObjId(hunter.getHunterId());
