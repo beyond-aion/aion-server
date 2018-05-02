@@ -13512,8 +13512,46 @@
 	<decomposable item_id="188051706" /><!-- [Event] Silver Box -->
 	<decomposable item_id="188051707" /><!-- [Event] Gold Box -->
 	<decomposable item_id="188051708" /><!-- [Event] Jade Box -->
-	<decomposable item_id="188051709" /><!-- [Event] Silver Box -->
-	<decomposable item_id="188051710" /><!-- [Event] Gold Box -->
+	<decomposable item_id="188051709" selectable="true"><!-- [Event] Silver Box -->
+		<items>
+			<item id="110601550" player_classes="TEMPLAR GLADIATOR" /><!-- Kunax's Breastplate -->
+			<item id="111601513" player_classes="TEMPLAR GLADIATOR" /><!-- Kunax's Gauntlets -->
+			<item id="112601495" player_classes="TEMPLAR GLADIATOR" /><!-- Kunax's Shoulderplates -->
+			<item id="113601496" player_classes="TEMPLAR GLADIATOR" /><!-- Kunax's Greaves -->
+			<item id="114601503" player_classes="TEMPLAR GLADIATOR" /><!-- Kunax's Sabatons -->
+			<item id="110301752" player_classes="ASSASSIN RANGER GUNNER" /><!-- Kunax's Jerkin -->
+			<item id="111301690" player_classes="ASSASSIN RANGER GUNNER" /><!-- Kunax's Vambrace -->
+			<item id="112301629" player_classes="ASSASSIN RANGER GUNNER" /><!-- Kunax's Shoulderguards -->
+			<item id="113301721" player_classes="ASSASSIN RANGER GUNNER" /><!-- Kunax's Breeches -->
+			<item id="114301758" player_classes="ASSASSIN RANGER GUNNER" /><!-- Kunax's Boots -->
+			<item id="110101755" player_classes="SORCERER SPIRIT_MASTER BARD" /><!-- Kunax's Tunic -->
+			<item id="111101580" player_classes="SORCERER SPIRIT_MASTER BARD" /><!-- Kunax's Gloves -->
+			<item id="112101530" player_classes="SORCERER SPIRIT_MASTER BARD" /><!-- Kunax's Pauldrons -->
+			<item id="113101592" player_classes="SORCERER SPIRIT_MASTER BARD" /><!-- Kunax's Leggings -->
+			<item id="114101626" player_classes="SORCERER SPIRIT_MASTER BARD" /><!-- Kunax's Shoes -->
+			<item id="110551085" player_classes="CLERIC CHANTER RIDER" /><!-- Kunax's Hauberk -->
+			<item id="111501644" player_classes="CLERIC CHANTER RIDER" /><!-- Kunax's Handguards -->
+			<item id="112501583" player_classes="CLERIC CHANTER RIDER" /><!-- Kunax's Spaulders -->
+			<item id="113501662" player_classes="CLERIC CHANTER RIDER" /><!-- Kunax's Chausses -->
+			<item id="114501672" player_classes="CLERIC CHANTER RIDER" /><!-- Kunax's Brogans -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188051710" selectable="true"><!-- [Event] Gold Box -->
+		<items>
+			<item id="125003995" player_classes="TEMPLAR GLADIATOR" /><!-- Destroyer Kunax's Helm -->
+			<item id="125003997" player_classes="ASSASSIN RANGER GUNNER" /><!-- Destroyer Kunax's Hat -->
+			<item id="125003998" player_classes="SORCERER SPIRIT_MASTER BARD" /><!-- Destroyer Kunax's Headband -->
+			<item id="125003996" player_classes="CLERIC CHANTER RIDER" /><!-- Destroyer Kunax's Chain Helm -->
+			<item id="121001373" player_classes="TEMPLAR GLADIATOR ASSASSIN RANGER CHANTER" /><!-- Destroyer Kunax's Opal Necklace -->
+			<item id="120001501" player_classes="TEMPLAR GLADIATOR ASSASSIN RANGER CHANTER" /><!-- Destroyer Kunax's Opal Earrings -->
+			<item id="122001642" player_classes="TEMPLAR GLADIATOR ASSASSIN RANGER CHANTER" /><!-- Destroyer Kunax's Opal Ring -->
+			<item id="123001419" player_classes="TEMPLAR GLADIATOR ASSASSIN RANGER CHANTER" /><!-- Destroyer Kunax's Leather Belt -->
+			<item id="121001374" player_classes="GUNNER SORCERER SPIRIT_MASTER BARD CLERIC RIDER" /><!-- Destroyer Kunax's Nolan Necklace -->
+			<item id="120001502" player_classes="GUNNER SORCERER SPIRIT_MASTER BARD CLERIC RIDER" /><!-- Destroyer Kunax's Nolan Earrings -->
+			<item id="122001643" player_classes="GUNNER SORCERER SPIRIT_MASTER BARD CLERIC RIDER" /><!-- Destroyer Kunax's Nolan Ring -->
+			<item id="123001420" player_classes="GUNNER SORCERER SPIRIT_MASTER BARD CLERIC RIDER" /><!-- Destroyer Kunax's Sash -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188051711" /><!-- [Event] Firecracker Box -->
 	<decomposable item_id="188051712"><!-- Premium Kahrun's Box -->
 		<items>
