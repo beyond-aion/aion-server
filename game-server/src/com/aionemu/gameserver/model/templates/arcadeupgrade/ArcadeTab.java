@@ -14,11 +14,23 @@ public class ArcadeTab {
 
 	@XmlAttribute(name = "id")
 	private int id;
+	@XmlAttribute(name = "min_level")
+	private int minLevel;
+	@XmlAttribute(name = "upgrade_chance")
+	private float upgradeChance;
 	@XmlElement(name = "item")
 	private List<ArcadeTabItemList> arcadeTabItem;
 
 	public int getId() {
 		return id;
+	}
+
+	public int getMinLevel() {
+		return minLevel;
+	}
+
+	public float getUpgradeChance() {
+		return upgradeChance;
 	}
 
 	public List<ArcadeTabItemList> getArcadeTabItems() {

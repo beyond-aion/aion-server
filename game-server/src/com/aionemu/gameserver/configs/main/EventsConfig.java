@@ -1,6 +1,7 @@
 package com.aionemu.gameserver.configs.main;
 
 import java.util.List;
+import java.util.Set;
 
 import com.aionemu.commons.configuration.Property;
 
@@ -18,9 +19,6 @@ public class EventsConfig {
 	@Property(key = "gameserver.event.arcade.enable", defaultValue = "false")
 	public static boolean ENABLE_EVENT_ARCADE;
 
-	@Property(key = "gameserver.event.arcade.chance", defaultValue = "50")
-	public static int EVENT_ARCADE_CHANCE;
-	
 	@Property(key = "gameserver.event.arcade.resume_token", defaultValue = "3")
 	public static int ARCADE_RESUME_TOKEN;
 
@@ -29,16 +27,16 @@ public class EventsConfig {
 	 */
 	@Property(key = "gameserver.monster.raid.enable", defaultValue = "false")
 	public static boolean ENABLE_MONSTER_RAID;
-	
+
 	/**
 	 * Headhunting
 	 */
 	@Property(key = "gameserver.event.headhunting.enable", defaultValue = "false")
 	public static boolean ENABLE_HEADHUNTING;
-	
+
 	@Property(key = "gameserver.event.headhunting.maps", defaultValue = "")
-	public static List<Integer> HEADHUNTING_MAPS;
-	
+	public static Set<Integer> HEADHUNTING_MAPS;
+
 	@Property(key = "gameserver.event.headhunting.consolation_prize_kills", defaultValue = "50")
 	public static int HEADHUNTING_CONSOLATION_PRIZE_KILLS;
 }

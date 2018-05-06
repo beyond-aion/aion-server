@@ -32,32 +32,10 @@ public class ArcadeUpgradeService {
 	 * Consider, each progress will be lost after restarting the server.
 	 */
 	private final Map<Integer, ArcadeProgress> cachedProgress = new ConcurrentHashMap<>();
-	private int[] tabReward = new int[4];
-
-	private ArcadeUpgradeService() {
-		tabReward[0] = 0;
-		tabReward[1] = 4;
-		tabReward[2] = 6;
-		tabReward[3] = 8;
-	}
 
 	private ArcadeProgress getProgress(final int objId) {
 		ArcadeProgress progress = cachedProgress.putIfAbsent(objId, new ArcadeProgress(objId));
 		return progress != null ? progress : cachedProgress.get(objId);
-	}
-
-	public int getRewardTabForLevel(int level) {
-		int tab = 1;
-
-		for (int i = tabReward.length; i > 0; i--) {
-			if (level >= tabReward[(i - 1)]) {
-				tab = i;
-				break;
-			}
-		}
-		if (tab > tabReward.length)
-			return tabReward.length;
-		return tab;
 	}
 
 	public void start(Player player, int sessionId) {
@@ -79,15 +57,23 @@ public class ArcadeUpgradeService {
 		return DataManager.ARCADE_UPGRADE_DATA.getArcadeTabs();
 	}
 
+	public ArcadeTab getRewardTabForLevel(int level) {
+		for (ArcadeTab at : getTabs()) {
+			if (at.getMinLevel() >= level)
+				return at;
+		}
+		return null;
+	}
+
 	public void startTry(Player player) {
 		if (!EventsConfig.ENABLE_EVENT_ARCADE)
 			return;
 
 		final ArcadeProgress progress = getProgress(player.getObjectId());
-
-		if (progress.getCurrentLevel() >= 8) {
+		int currentLevel = progress.getCurrentLevel();
+		if (currentLevel >= 8) {
 			return;
-		} else if (progress.getCurrentLevel() == 1) {
+		} else if (currentLevel == 1) {
 			if (!player.getInventory().decreaseByItemId(186000389, 1))
 				return;
 
@@ -106,19 +92,18 @@ public class ArcadeUpgradeService {
 				}
 			}
 		}
-		final boolean success = Rnd.chance() < EventsConfig.EVENT_ARCADE_CHANCE;
+		final boolean success = Rnd.chance() < getRewardTabForLevel(currentLevel + 1).getUpgradeChance();
 		PacketSendUtility.sendPacket(player, new SM_UPGRADE_ARCADE(3, success, progress.getFrenzyPoints()));
 		if (success) {
 			ThreadPoolManager.getInstance().schedule(() -> {
-				PacketSendUtility.sendPacket(player, new SM_UPGRADE_ARCADE(4, progress.setCurrentLevel(progress.getCurrentLevel() + 1)));
+				PacketSendUtility.sendPacket(player, new SM_UPGRADE_ARCADE(4, progress.setCurrentLevel(currentLevel + 1)));
 			}, 3000);
 		} else {
-			ThreadPoolManager.getInstance().schedule(
-				() -> {
-					final boolean isResumeAllowed = progress.getCurrentLevel() == 7 && progress.isResumeAllowed();
-					PacketSendUtility.sendPacket(player,
-						new SM_UPGRADE_ARCADE(5, progress.setCurrentLevel(1), EventsConfig.ARCADE_RESUME_TOKEN, isResumeAllowed));
-				}, 3000);
+			ThreadPoolManager.getInstance().schedule(() -> {
+				final boolean isResumeAllowed = progress.getCurrentLevel() == 7 && progress.isResumeAllowed();
+				PacketSendUtility.sendPacket(player,
+					new SM_UPGRADE_ARCADE(5, progress.setCurrentLevel(1), EventsConfig.ARCADE_RESUME_TOKEN, isResumeAllowed));
+			}, 3000);
 		}
 	}
 
@@ -139,18 +124,16 @@ public class ArcadeUpgradeService {
 		ArcadeProgress progress = getProgress(player.getObjectId());
 		List<ArcadeTabItemList> rewardList = new ArrayList<>();
 
-		final int rewardTab = getRewardTabForLevel(progress.getCurrentLevel());
-		for (ArcadeTab arcadeTab : getTabs()) {
-			if (rewardTab == arcadeTab.getId()) {
-				for (ArcadeTabItemList arcadeTabItem : arcadeTab.getArcadeTabItems()) {
-					if (progress.isFrenzyActive()) {
-						if (arcadeTabItem.getFrenzyCount() > 0)
-							rewardList.add(arcadeTabItem);
-					} else {
-						if (arcadeTabItem.getNormalCount() > 0)
-							rewardList.add(arcadeTabItem);
-					}
-				}
+		ArcadeTab rewardTab = getRewardTabForLevel(progress.getCurrentLevel());
+		if (rewardTab == null)
+			return;
+		for (ArcadeTabItemList arcadeTabItem : rewardTab.getArcadeTabItems()) {
+			if (progress.isFrenzyActive()) {
+				if (arcadeTabItem.getFrenzyCount() > 0)
+					rewardList.add(arcadeTabItem);
+			} else {
+				if (arcadeTabItem.getNormalCount() > 0)
+					rewardList.add(arcadeTabItem);
 			}
 		}
 
