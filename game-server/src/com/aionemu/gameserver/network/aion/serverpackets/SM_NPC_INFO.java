@@ -38,12 +38,8 @@ public class SM_NPC_INFO extends AionServerPacket {
 	public SM_NPC_INFO(Summon summon, Player player) {
 		this.npc = summon;
 		Player owner = summon.getMaster();
-		if (owner != null) {
-			creatorId = owner.getObjectId();
-			masterName = owner.getName();
-		} else {
-			masterName = "LOST";
-		}
+		creatorId = owner.getObjectId();
+		masterName = owner.getName();
 		creatureType = summon.getType(player);
 	}
 
@@ -95,7 +91,7 @@ public class SM_NPC_INFO extends AionServerPacket {
 		} else {
 			writeD(gear.getItemsMask());
 			boolean hasWeapon = false;
-			 // getting it from template (later if we make sure that npcs actually use items, we'll make Item from it)
+			// getting it from template (later if we make sure that npcs actually use items, we'll make Item from it)
 			for (Entry<ItemSlot, ItemTemplate> item : gear) {
 				if (!hasWeapon)
 					hasWeapon = item.getValue().isWeapon();

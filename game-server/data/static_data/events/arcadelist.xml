@@ -1,40 +1,39 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <arcadelist xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="arcadelist.xsd">
-	<tab id="1" min_level="0" upgrade_chance="80">
+	<tab id="1" min_level="0" upgrade_chance="85">
 		<item item_id="162002030" normal_count="10" frenzy_count="10" />
 		<item item_id="186000236" normal_count="5" frenzy_count="5" />
 		<item item_id="166000195" normal_count="5" frenzy_count="5" />
 		<item item_id="188053616" normal_count="1" frenzy_count="1" />
 		<item item_id="186000237" normal_count="20" frenzy_count="20" />
 		<item item_id="162000107" normal_count="0" frenzy_count="5" />
-		<item item_id="160001277" normal_count="0" frenzy_count="3" />
+		<item item_id="188053845" normal_count="0" frenzy_count="1" />
 		<item item_id="188052632" normal_count="0" frenzy_count="1" />
 		<item item_id="188052562" normal_count="0" frenzy_count="1" />
-		<item item_id="186000238" normal_count="0" frenzy_count="20" />
+		<item item_id="186000399" normal_count="0" frenzy_count="10" />
 	</tab>
-	<tab id="2" min_level="4" upgrade_chance="70">
+	<tab id="2" min_level="4" upgrade_chance="80">
 		<item item_id="125045455" normal_count="1" frenzy_count="1" />
 		<item item_id="188053845" normal_count="1" frenzy_count="1" />
 		<item item_id="188052719" normal_count="2" frenzy_count="2" />
-		<item item_id="169405376" normal_count="1" frenzy_count="1" />
+		<item item_id="169405253" normal_count="1" frenzy_count="1" />
 		<item item_id="186000199" normal_count="5" frenzy_count="5" />
 		<item item_id="166020000" normal_count="0" frenzy_count="7" />
 		<item item_id="166030005" normal_count="0" frenzy_count="3" />
 		<item item_id="188053628" normal_count="0" frenzy_count="3" />
 		<item item_id="166150018" normal_count="0" frenzy_count="1" />
 	</tab>
-	<tab id="3" min_level="6" upgrade_chance="60">
+	<tab id="3" min_level="6" upgrade_chance="70">
 		<item item_id="110900788" normal_count="1" frenzy_count="1" />
 		<item item_id="188053614" normal_count="1" frenzy_count="1" />
 		<item item_id="190020219" normal_count="1" frenzy_count="1" />
 		<item item_id="166100011" normal_count="100" frenzy_count="100" />
 		<item item_id="188053609" normal_count="3" frenzy_count="3" />
-		<item item_id="188053704" normal_count="0" frenzy_count="1" />
 		<item item_id="166500002" normal_count="0" frenzy_count="5" />
 		<item item_id="188053618" normal_count="0" frenzy_count="1" />
 		<item item_id="188053113" normal_count="0" frenzy_count="1" />
 	</tab>
-	<tab id="4" min_level="8" upgrade_chance="50">
+	<tab id="4" min_level="8" upgrade_chance="70">
 		<item item_id="188052831" normal_count="1" frenzy_count="1" />
 		<item item_id="190100143" normal_count="1" frenzy_count="1" />
 		<item item_id="188053295" normal_count="1" frenzy_count="1" />
@@ -42,7 +41,8 @@
 		<item item_id="188051709" normal_count="1" frenzy_count="1" />
 		<item item_id="187060103" normal_count="0" frenzy_count="1" />
 		<item item_id="188051710" normal_count="0" frenzy_count="1" />
-		<item item_id="188950020" normal_count="0" frenzy_count="1" />
+		<item item_id="188950017" normal_count="0" frenzy_count="1" />
 		<item item_id="188053610" normal_count="0" frenzy_count="2" />
+		<item item_id="188053100" normal_count="0" frenzy_count="1" />
 	</tab>
 </arcadelist>

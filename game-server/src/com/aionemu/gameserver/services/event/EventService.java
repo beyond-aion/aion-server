@@ -5,6 +5,7 @@ import java.time.ZonedDateTime;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -54,7 +55,7 @@ public class EventService {
 
 		validateConfiguredEventNames();
 		checkActiveEvents();
-		checkTask = CronService.getInstance().schedule(() -> onTimeChanged(), "0 0/5 * ? * *");
+		checkTask = CronService.getInstance().schedule(this::onTimeChanged, "0 0/5 * ? * *");
 		return true;
 	}
 
@@ -91,7 +92,7 @@ public class EventService {
 			activeEventDropRules = collectDropRules(activeEvents);
 			updateEventTheme();
 			startOrStopEvents(oldActiveEvents, activeEvents);
-			effectForceTypes = activeEvents.stream().map(Event::getEffectForceType).filter(type -> type != null).collect(Collectors.toSet());
+			effectForceTypes = activeEvents.stream().map(Event::getEffectForceType).filter(Objects::nonNull).collect(Collectors.toSet());
 		}
 	}
 
@@ -186,6 +187,10 @@ public class EventService {
 			.flatMap(e -> e.getEventTemplate().getEventDropRules().stream()).collect(Collectors.toList());
 	}
 
+	public boolean isEventActive(String eventName) {
+		return activeEvents.stream().anyMatch(e -> e.getEventTemplate().getName().equals(eventName));
+	}
+
 	public boolean isActiveEventQuest(int questId) {
 		return activeEventQuests.contains(questId);
 	}
@@ -218,8 +223,7 @@ public class EventService {
 		protected static final EventService instance = new EventService();
 	}
 
-	public static final EventService getInstance() {
+	public static EventService getInstance() {
 		return SingletonHolder.instance;
 	}
-
 }

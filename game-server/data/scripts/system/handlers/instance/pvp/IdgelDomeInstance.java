@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.concurrent.Future;
 
 import com.aionemu.commons.utils.Rnd;
+import com.aionemu.gameserver.configs.main.EventsConfig;
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
 import com.aionemu.gameserver.instance.handlers.InstanceID;
 import com.aionemu.gameserver.model.CreatureType;
@@ -30,6 +31,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.AutoGroupService;
 import com.aionemu.gameserver.services.abyss.AbyssPointsService;
 import com.aionemu.gameserver.services.abyss.GloryPointsService;
+import com.aionemu.gameserver.services.event.EventService;
 import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.services.player.PlayerReviveService;
 import com.aionemu.gameserver.services.teleport.TeleportService;
@@ -55,7 +57,7 @@ public class IdgelDomeInstance extends GeneralInstanceHandler {
 		idi = new IdgelDomeInfo(mapId, instanceId);
 		idi.setInstanceProgressionType(InstanceProgressionType.PREPARING);
 		startTime = System.currentTimeMillis();
-		tasks.add(ThreadPoolManager.getInstance().schedule(() -> onStart(), 120000));
+		tasks.add(ThreadPoolManager.getInstance().schedule(this::onStart, 120000));
 	}
 
 	private void onStart() {
@@ -82,6 +84,8 @@ public class IdgelDomeInstance extends GeneralInstanceHandler {
 		sendPacket(new SM_INSTANCE_SCORE(new IdgelDomeScoreInfo(idi, InstanceScoreType.UPDATE_PLAYER_INFO, instance.getPlayersInside()), idi, getTime()));
 		Race winningrace = idi.getWinningRace();
 		RewardItem spacer = new RewardItem(0, 0);
+		String eventName = EventsConfig.ENABLED_EVENTS.stream().filter(name->name.toLowerCase().contains("arcade upgrade")).findFirst().orElse(null);
+		boolean isArcadeEventActive = EventService.getInstance().isEventActive(eventName);
 		int winnerBonusAp = Rnd.get(10000, 14000);
 		int loserBonusAp = Rnd.get(3000, 6000);
 		instance.forEachPlayer(p -> {
@@ -92,7 +96,7 @@ public class IdgelDomeInstance extends GeneralInstanceHandler {
 				reward.setBaseGp(50);
 				reward.addItemReward(new RewardItem(186000242, 3));
 				reward.addItemReward(new RewardItem(188053030, 1));
-				reward.addItemReward(spacer);
+				reward.addItemReward(isArcadeEventActive ? new RewardItem(188053870, 1) : spacer);
 				if (isKunaxKilled) {
 					RewardItem mythicKunaxEq = null;
 					if (Rnd.chance() < 20)
@@ -109,7 +113,7 @@ public class IdgelDomeInstance extends GeneralInstanceHandler {
 				reward.setBaseGp(10);
 				reward.addItemReward(new RewardItem(186000242, 1));
 				reward.addItemReward(new RewardItem(188053031, 1));
-				reward.addItemReward(spacer);
+				reward.addItemReward(isArcadeEventActive ? new RewardItem(188053869, 1) : spacer);
 				reward.addItemReward(spacer);
 				reward.addItemReward(spacer);
 			}
@@ -206,12 +210,14 @@ public class IdgelDomeInstance extends GeneralInstanceHandler {
 
 	private void spawnChest() {
 		WorldPosition p = Rnd.get(chestPositions);
-		chestPositions.remove(p);
-		spawn(702581 + Rnd.get(0, 2), p.getX(), p.getY(), p.getZ(), p.getHeading());
+		if (p != null) {
+			chestPositions.remove(p);
+			spawn(702581 + Rnd.get(0, 2), p.getX(), p.getY(), p.getZ(), p.getHeading());
+		}
 	}
 
 	private void scheduleChestRespawn() {
-		tasks.add(ThreadPoolManager.getInstance().schedule(() -> spawnChest(), 120000));
+		tasks.add(ThreadPoolManager.getInstance().schedule(this::spawnChest, 120000));
 	}
 
 	@Override
