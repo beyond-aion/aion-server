@@ -254,7 +254,21 @@
 			<gd_npc npc_id="215281" /><!-- Calindi Flamelord -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="188054068" /><!-- Anuhart's Fabled Weapon Box -->
+			<gd_item id="100500601" /><!-- Anuhart Elite's Jewel -->
+			<gd_item id="100900590" /><!-- Anuhart Elite's Greatsword -->
+			<gd_item id="100200701" /><!-- Anuhart Elite's Dirk -->
+			<gd_item id="100000767" /><!-- Anuhart Elite's Azure Scale Sword -->
+			<gd_item id="100100580" /><!-- Anuhart Elite's Warhammer -->
+			<gd_item id="100600635" /><!-- Anuhart Elite's Tome -->
+			<gd_item id="101500604" /><!-- Anuhart Elite's Staff -->
+			<gd_item id="101300563" /><!-- Anuhart Elite's Spear -->
+			<gd_item id="101700619" /><!-- Anuhart Elite's Longbow -->
+			<gd_item id="100000766" /><!-- Anuhart Elite's Reversed-Scale Sword -->
+			<gd_item id="101800862" /><!-- Anuhart Elite's Pistol -->
+			<gd_item id="101800863" /><!-- Anuhart Elite's Pistol -->
+			<gd_item id="101900570" /><!-- Anuhart Elite's Aethercannon -->
+			<gd_item id="102000600" /><!-- Anuhart Elite's Harp -->
+			<gd_item id="102100765" /><!-- Anuhart Elite's Cipher-Blade -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Weapon (Unique)" base_chance="5">
