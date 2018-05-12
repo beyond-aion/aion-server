@@ -115,7 +115,7 @@ public final class DataManager {
 	 * Constructor creating <tt>DataManager</tt> instance.<br>
 	 * NOTICE: calling constructor implies loading whole data from /data/static_data immediately
 	 */
-	public static final DataManager getInstance() {
+	public static DataManager getInstance() {
 		return SingletonHolder.instance;
 	}
 
@@ -216,6 +216,7 @@ public final class DataManager {
 
 		// subsequent data processing (must be called after initializing DataManager fields)
 		ITEM_DATA.cleanup();
+		GLOBAL_DROP_DATA.validateItemIds();
 		GLOBAL_DROP_DATA.processRules(NPC_DATA.getNpcData().valueCollection());
 		SKILL_DATA.validateMotions();
 		DecomposeAction.validateRandomItemIds();

@@ -37,6 +37,7 @@ import com.aionemu.gameserver.model.templates.globaldrops.GlobalDropWorld;
 import com.aionemu.gameserver.model.templates.globaldrops.GlobalDropZone;
 import com.aionemu.gameserver.model.templates.globaldrops.GlobalRule;
 import com.aionemu.gameserver.model.templates.housing.HouseType;
+import com.aionemu.gameserver.model.templates.item.ItemTemplate;
 import com.aionemu.gameserver.model.templates.npc.AbyssNpcType;
 import com.aionemu.gameserver.model.templates.spawns.basespawns.BaseSpawnTemplate;
 import com.aionemu.gameserver.model.templates.spawns.siegespawns.SiegeSpawnTemplate;
@@ -434,10 +435,11 @@ public class DropRegistrationService {
 		List<GlobalDropItem> tempItems = new ArrayList<>();
 		List<GlobalDropItem> allowedItems = new ArrayList<>();
 		for (GlobalDropItem globalItem : rule.getDropItems()) {
-			if (player.getOppositeRace() == globalItem.getItemTemplate().getRace()) {
+			ItemTemplate itemTemplate = DataManager.ITEM_DATA.getItemTemplate(globalItem.getId());
+			if (player.getOppositeRace() == itemTemplate.getRace()) {
 				continue;
 			}
-			int diff = npc.getLevel() - globalItem.getItemTemplate().getLevel();
+			int diff = npc.getLevel() - itemTemplate.getLevel();
 			if (diff >= rule.getMinDiff() && diff <= rule.getMaxDiff())
 				tempItems.add(globalItem);
 		}

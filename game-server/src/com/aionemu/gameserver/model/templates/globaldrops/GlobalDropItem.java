@@ -3,16 +3,11 @@ package com.aionemu.gameserver.model.templates.globaldrops;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
-
-import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.model.templates.item.ItemTemplate;
 
 /**
  * @author AionCool
  */
-
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "GlobalDropItem")
 public class GlobalDropItem {
@@ -22,21 +17,11 @@ public class GlobalDropItem {
 	@XmlAttribute(name = "chance")
 	private float chance = 100f;
 
-	@XmlTransient
-	private ItemTemplate template;
-
 	public int getId() {
 		return itemId;
 	}
-	
+
 	public float getChance() {
 		return chance;
-	}
-
-	public ItemTemplate getItemTemplate() {
-		if (template == null) {
-			template = DataManager.ITEM_DATA.getItemTemplate(itemId);
-		}
-		return template;
 	}
 }
