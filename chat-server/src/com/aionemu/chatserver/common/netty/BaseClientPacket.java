@@ -1,5 +1,6 @@
 package com.aionemu.chatserver.common.netty;
 
+import com.aionemu.commons.utils.NetworkUtils;
 import org.jboss.netty.buffer.ChannelBuffer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,7 +33,7 @@ public abstract class BaseClientPacket extends AbstractPacket {
 		try {
 			readImpl();
 			if (getRemainingBytes() > 0)
-				log.warn("Packet " + this + " not fully read (remaining bytes: " + getRemainingBytes() +")");
+				log.warn("Packet " + this + " not fully read! Remaining bytes:\n" + NetworkUtils.toHex(buf.toByteBuffer()));
 			return true;
 		} catch (Exception ex) {
 			log.error("Reading failed for packet " + this, ex);

@@ -8,13 +8,13 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+import com.aionemu.commons.utils.NetworkUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.network.chatserver.ChatServerConnection.State;
 import com.aionemu.gameserver.network.chatserver.clientpackets.CM_CS_AUTH_RESPONSE;
 import com.aionemu.gameserver.network.chatserver.clientpackets.CM_CS_PLAYER_AUTH_RESPONSE;
-import com.aionemu.gameserver.utils.Util;
 
 /**
  * @author Neon
@@ -38,7 +38,7 @@ public class CsClientPacketFactory {
 		int opCode = data.get() & 0xff;
 		PacketInfo<? extends CsClientPacket> packetInfo = packets.get(opCode);
 		if (packetInfo == null) {
-			log.warn(String.format(client + " sent data with unknown opcode: 0x%02X, state=%s %n%s", opCode, state.toString(), Util.toHex(data)));
+			log.warn(String.format(client + " sent data with unknown opcode: 0x%02X, state=%s %n%s", opCode, state.toString(), NetworkUtils.toHex(data)));
 			return null;
 		}
 		if (!packetInfo.isValid(state)) {

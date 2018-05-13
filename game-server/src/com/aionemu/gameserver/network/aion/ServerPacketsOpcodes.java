@@ -261,7 +261,7 @@ public class ServerPacketsOpcodes {
 		addPacketOpcode(SM_RIFT_ANNOUNCE.class, 0xEC, idSet);
 		addPacketOpcode(SM_ABYSS_RANK.class, 0xED, idSet);
 		addPacketOpcode(SM_ACCOUNT_PROPERTIES.class, 0xEE, idSet);
-		// 239 petition/support
+		// 239 petition/support - //fsc 239 cdhsdccd 1 0 42 TestNo. 1 127 100 5
 		addPacketOpcode(SM_FRIEND_UPDATE.class, 0xF0, idSet);
 		addPacketOpcode(SM_LEARN_RECIPE.class, 0xF1, idSet);
 		addPacketOpcode(SM_RECIPE_DELETE.class, 0xF2, idSet);

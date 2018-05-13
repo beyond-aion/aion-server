@@ -1,7 +1,6 @@
 package com.aionemu.commons.network.packet;
 
 import java.nio.ByteBuffer;
-import java.util.Arrays;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -9,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.network.AConnection;
+import com.aionemu.commons.utils.NetworkUtils;
 
 /**
  * Base class for every Client Packet
@@ -81,7 +81,7 @@ public abstract class BaseClientPacket<T extends AConnection<?>> extends BasePac
 			readImpl();
 
 			if (getRemainingBytes() > 0 && partiallyReadPackets.add(getOpCode()))
-				log.warn(this + " was not fully read! Remaining bytes: " + Arrays.toString(readB(getRemainingBytes())));
+				log.warn(this + " was not fully read! Remaining bytes:\n" + NetworkUtils.toHex(buf));
 
 			return true;
 		} catch (Exception re) {

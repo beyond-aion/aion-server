@@ -11,9 +11,9 @@ import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.aionemu.commons.utils.NetworkUtils;
 import com.aionemu.gameserver.network.loginserver.LoginServerConnection.State;
 import com.aionemu.gameserver.network.loginserver.clientpackets.*;
-import com.aionemu.gameserver.utils.Util;
 
 /**
  * @author Neon
@@ -47,7 +47,7 @@ public class LsClientPacketFactory {
 		int opCode = data.get() & 0xff;
 		PacketInfo<? extends LsClientPacket> packetInfo = packets.get(opCode);
 		if (packetInfo == null) {
-			log.warn(String.format(client + " sent data with unknown opcode: 0x%02X, state=%s %n%s", opCode, state.toString(), Util.toHex(data)));
+			log.warn(String.format(client + " sent data with unknown opcode: 0x%02X, state=%s %n%s", opCode, state.toString(), NetworkUtils.toHex(data)));
 			return null;
 		}
 		if (!packetInfo.isValid(state)) {

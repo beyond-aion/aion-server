@@ -8,13 +8,13 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+import com.aionemu.commons.utils.NetworkUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.configs.network.NetworkConfig;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.network.aion.clientpackets.*;
-import com.aionemu.gameserver.utils.Util;
 
 /**
  * @author Neon
@@ -228,7 +228,7 @@ public class AionClientPacketFactory {
 		if (packetInfo == null) {
 			client.sendUnknownClientPacketInfo(opCode);
 			if (NetworkConfig.LOG_UNKNOWN_PACKETS)
-				log.warn(String.format("Aion client sent data with unknown opcode: 0x%03X, state=%s %n%s", opCode, state.toString(), Util.toHex(data)));
+				log.warn(String.format("Aion client sent data with unknown opcode: 0x%03X, state=%s %n%s", opCode, state.toString(), NetworkUtils.toHex(data)));
 			return null;
 		}
 		if (!packetInfo.isValid(state)) {
