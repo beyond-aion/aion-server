@@ -11,8 +11,9 @@ public class ArcadeProgress {
 	private final int playerObjId;
 	private int frenzyPoints;
 	private int currentLevel = 1;
-	private boolean isFrenzyActive;
-	private boolean isResumeAllowed = true;
+	private long frenzyEndTimeMillis;
+	private int resumeLevel;
+	private long nextTryTimeMillis;
 
 	public ArcadeProgress(int playerObjId) {
 		this.playerObjId = playerObjId;
@@ -34,27 +35,31 @@ public class ArcadeProgress {
 		return currentLevel;
 	}
 
-	/**
-	 * @return currentLevel
-	 *         - the new value
-	 */
-	public int setCurrentLevel(int currentLevel) {
-		return this.currentLevel = currentLevel;
+	public void setCurrentLevel(int currentLevel) {
+		this.currentLevel = currentLevel;
 	}
 
-	public boolean isFrenzyActive() {
-		return isFrenzyActive;
+	public long getFrenzyEndTimeMillis() {
+		return frenzyEndTimeMillis;
 	}
 
-	public void setFrenzyActive(boolean isFrenzyActive) {
-		this.isFrenzyActive = isFrenzyActive;
+	public void setFrenzyEndTimeMillis(long frenzyEndTimeMillis) {
+		this.frenzyEndTimeMillis = frenzyEndTimeMillis;
 	}
 
-	public boolean isResumeAllowed() {
-		return currentLevel == 7 && isResumeAllowed;
+	public int getResumeLevel() {
+		return resumeLevel;
 	}
 
-	public void setResumeAllowed(boolean isResumeAllowed) {
-		this.isResumeAllowed = isResumeAllowed;
+	public void setResumeLevel(int resumeLevel) {
+		this.resumeLevel = resumeLevel;
+	}
+
+	public long getNextTryTimeMillis() {
+		return nextTryTimeMillis;
+	}
+
+	public void setTimeNextTry(long nextTryTimeMillis) {
+		this.nextTryTimeMillis = nextTryTimeMillis;
 	}
 }

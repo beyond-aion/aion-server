@@ -6,25 +6,25 @@ import javax.xml.bind.annotation.XmlType;
 /**
  * @author ginho1
  */
-@XmlType(name = "ArcadeTabItemList")
-public class ArcadeTabItemList {
+@XmlType(name = "ArcadeRewardItem")
+public class ArcadeRewardItem {
 
 	@XmlAttribute(name = "item_id")
 	private int itemId;
 	@XmlAttribute(name = "normal_count")
-	private int normalCount;
+	private long normalCount;
 	@XmlAttribute(name = "frenzy_count")
-	private int frenzyCount;
+	private long frenzyCount;
 
-	public final int getItemId() {
+	public int getItemId() {
 		return itemId;
 	}
 
-	public final int getNormalCount() {
+	public long getNormalCount() {
 		return normalCount;
 	}
 
-	public final int getFrenzyCount() {
+	public long getFrenzyCount() {
 		return frenzyCount;
 	}
 }

@@ -1,28 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:jxb="http://java.sun.com/xml/ns/jaxb" jxb:version="2.1">
-	<xs:include schemaLocation="../global_types.xsd" />
+	<xs:include schemaLocation="../global_types.xsd"/>
 	<xs:element name="arcadelist">
 		<xs:complexType>
-      		<xs:sequence>
-        		<xs:element maxOccurs="unbounded" ref="tab" />
+			<xs:sequence>
+				<xs:element ref="levels"/>
+				<xs:element maxOccurs="unbounded" ref="rewards"/>
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
-	<xs:element name="tab">
+	<xs:element name="levels">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:element maxOccurs="unbounded" ref="item" />
+				<xs:element maxOccurs="unbounded" ref="level"/>
 			</xs:sequence>
-			<xs:attribute name="id" use="required" type="xs:int" />
-			<xs:attribute name="min_level" use="required" type="xs:int" />
-			<xs:attribute name="upgrade_chance" use="required" type="xs:float" />
+			<xs:attribute name="min_resumable_level" type="xs:int" />
+		</xs:complexType>
+		<xs:unique name="UniqueLevel">
+			<xs:selector xpath="level" />
+			<xs:field xpath="@level" />
+		</xs:unique>
+	</xs:element>
+	<xs:element name="level">
+		<xs:complexType>
+			<xs:attribute name="level" type="xs:int"/>
+			<xs:attribute name="icon" type="xs:string"/>
+			<xs:attribute name="upgrade_chance" type="xs:float"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="rewards">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element maxOccurs="unbounded" ref="item"/>
+			</xs:sequence>
+			<xs:attribute name="min_level" use="required" type="xs:int"/>
 		</xs:complexType>
 	</xs:element>
 	<xs:element name="item">
 		<xs:complexType>
-			<xs:attribute name="item_id" use="required" type="xs:int" />
-			<xs:attribute name="normal_count" use="required" type="xs:int" />
-			<xs:attribute name="frenzy_count" use="required" type="xs:int" />
+			<xs:attribute name="item_id" use="required" type="xs:int"/>
+			<xs:attribute name="normal_count" use="required" type="xs:int"/>
+			<xs:attribute name="frenzy_count" use="required" type="xs:int"/>
 		</xs:complexType>
 	</xs:element>
 </xs:schema>

@@ -2,6 +2,8 @@ package com.aionemu.gameserver.network.aion.clientpackets;
 
 import java.util.Set;
 
+import org.slf4j.LoggerFactory;
+
 import com.aionemu.gameserver.configs.main.EventsConfig;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
@@ -50,6 +52,8 @@ public class CM_UPGRADE_ARCADE extends AionClientPacket {
 			case 5:// get reward list
 				ArcadeUpgradeService.getInstance().showRewardList(player);
 				break;
+			default:
+				LoggerFactory.getLogger(CM_UPGRADE_ARCADE.class).warn("Unhandled arcade action " + action);
 		}
 	}
 }

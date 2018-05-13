@@ -10,16 +10,19 @@ import com.aionemu.gameserver.configs.main.EventsConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.event.ArcadeProgress;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.templates.arcadeupgrade.ArcadeTab;
-import com.aionemu.gameserver.model.templates.arcadeupgrade.ArcadeTabItemList;
+import com.aionemu.gameserver.model.templates.arcadeupgrade.ArcadeLevel;
+import com.aionemu.gameserver.model.templates.arcadeupgrade.ArcadeRewardItem;
+import com.aionemu.gameserver.model.templates.arcadeupgrade.ArcadeRewards;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_UPGRADE_ARCADE;
 import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
+import com.aionemu.gameserver.utils.audit.AuditLogger;
+import com.aionemu.gameserver.world.World;
 
 /**
  * @author ginho1
- * @reworked Estrayl
+ * @reworked Estrayl, Neon
  */
 public class ArcadeUpgradeService {
 
@@ -40,27 +43,29 @@ public class ArcadeUpgradeService {
 
 	public void start(Player player, int sessionId) {
 		ArcadeProgress progress = getProgress(player.getObjectId());
-		PacketSendUtility.sendPacket(player, new SM_UPGRADE_ARCADE(1, progress.getFrenzyPoints(), sessionId));
+		PacketSendUtility.sendPacket(player, new SM_UPGRADE_ARCADE(progress, sessionId));
 		if (progress.getCurrentLevel() > 1)
-			PacketSendUtility.sendPacket(player, new SM_UPGRADE_ARCADE(4, progress.getCurrentLevel()));
+			PacketSendUtility.sendPacket(player, new SM_UPGRADE_ARCADE(progress));
+		if (progress.getFrenzyEndTimeMillis() > System.currentTimeMillis())
+			PacketSendUtility.sendPacket(player, new SM_UPGRADE_ARCADE((int) ((progress.getFrenzyEndTimeMillis() - System.currentTimeMillis()) / 1000)));
 	}
 
 	public void open(Player player) {
-		PacketSendUtility.sendPacket(player, new SM_UPGRADE_ARCADE(2));
+		PacketSendUtility.sendPacket(player, new SM_UPGRADE_ARCADE());
 	}
 
 	public void showRewardList(Player player) {
-		PacketSendUtility.sendPacket(player, new SM_UPGRADE_ARCADE(10));
+		PacketSendUtility.sendPacket(player, new SM_UPGRADE_ARCADE(ArcadeUpgradeService.getInstance().getRewards()));
 	}
 
-	public List<ArcadeTab> getTabs() {
-		return DataManager.ARCADE_UPGRADE_DATA.getArcadeTabs();
+	public List<ArcadeRewards> getRewards() {
+		return DataManager.ARCADE_UPGRADE_DATA.getRewards();
 	}
 
-	public ArcadeTab getRewardTabForLevel(int level) {
-		List<ArcadeTab> arcadeRewards = getTabs();
+	public ArcadeRewards getRewardsForLevel(int level) {
+		List<ArcadeRewards> arcadeRewards = DataManager.ARCADE_UPGRADE_DATA.getRewards();
 		for (int i = arcadeRewards.size() - 1; i >= 0; i--) {
-			ArcadeTab rewards = arcadeRewards.get(i);
+			ArcadeRewards rewards = arcadeRewards.get(i);
 			if (level >= rewards.getMinLevel())
 				return rewards;
 		}
@@ -68,77 +73,105 @@ public class ArcadeUpgradeService {
 	}
 
 	public void startTry(Player player) {
-		final ArcadeProgress progress = getProgress(player.getObjectId());
-		int currentLevel = progress.getCurrentLevel();
-		if (currentLevel >= 8) {
+		ArcadeProgress progress = getProgress(player.getObjectId());
+		long nowMillis = System.currentTimeMillis();
+		if (nowMillis < progress.getNextTryTimeMillis()) {
+			AuditLogger.log(player, "tried to start next arcade try while the button was still greyed out");
 			return;
-		} else if (currentLevel == 1) {
+		}
+		if (progress.getCurrentLevel() >= DataManager.ARCADE_UPGRADE_DATA.getMaxUpgradeLevel().getLevel()) {
+			return;
+		} else if (progress.getCurrentLevel() == 0) {
 			if (!player.getInventory().decreaseByItemId(186000389, 1))
 				return;
 
-			if (!progress.isFrenzyActive()) {
-				progress.setFrenzyPoints(progress.getFrenzyPoints() + 8);
-
+			progress.setCurrentLevel(1);
+			boolean isFrenzyInactive = nowMillis > progress.getFrenzyEndTimeMillis();
+			if (isFrenzyInactive) {
 				if (progress.getFrenzyPoints() >= 100) {
-					PacketSendUtility.sendPacket(player, new SM_UPGRADE_ARCADE(7, 90));
-					progress.setFrenzyActive(true);
+					int frenzyDurationSeconds = 90;
+					long frenzyDurationMillis = frenzyDurationSeconds * 1000;
+					progress.setFrenzyEndTimeMillis(nowMillis + frenzyDurationMillis);
+					PacketSendUtility.sendPacket(player, new SM_UPGRADE_ARCADE(frenzyDurationSeconds));
 					progress.setFrenzyPoints(8);
-
+					int playerId = player.getObjectId();
 					ThreadPoolManager.getInstance().schedule(() -> {
-						PacketSendUtility.sendPacket(player, new SM_UPGRADE_ARCADE(7, 0));
-						progress.setFrenzyActive(false);
-					}, 90000);
+						Player p = World.getInstance().findPlayer(playerId);
+						if (p != null)
+							PacketSendUtility.sendPacket(p, new SM_UPGRADE_ARCADE(0));
+					}, frenzyDurationMillis);
+				} else {
+					progress.setFrenzyPoints(progress.getFrenzyPoints() + 8);
 				}
 			}
 		}
-		final boolean success = Rnd.chance() < getRewardTabForLevel(currentLevel + 1).getUpgradeChance();
-		PacketSendUtility.sendPacket(player, new SM_UPGRADE_ARCADE(3, success, progress.getFrenzyPoints()));
+		int delayMillis = 3000;
+		progress.setTimeNextTry(nowMillis + delayMillis);
+		boolean success = Rnd.chance() < getUpgradeChance(progress.getCurrentLevel());
+		PacketSendUtility.sendPacket(player, new SM_UPGRADE_ARCADE(success, progress));
 		if (success) {
 			ThreadPoolManager.getInstance().schedule(() -> {
-				PacketSendUtility.sendPacket(player, new SM_UPGRADE_ARCADE(4, progress.setCurrentLevel(currentLevel + 1)));
-			}, 3000);
+				progress.setCurrentLevel(progress.getCurrentLevel() + 1);
+				PacketSendUtility.sendPacket(player, new SM_UPGRADE_ARCADE(progress));
+			}, delayMillis);
 		} else {
 			ThreadPoolManager.getInstance().schedule(() -> {
-				final boolean isResumeAllowed = progress.getCurrentLevel() == 7 && progress.isResumeAllowed();
-				PacketSendUtility.sendPacket(player,
-					new SM_UPGRADE_ARCADE(5, progress.setCurrentLevel(1), EventsConfig.ARCADE_RESUME_TOKEN, isResumeAllowed));
-			}, 3000);
+				boolean canResume = progress.getResumeLevel() == 0 && progress.getCurrentLevel() >= DataManager.ARCADE_UPGRADE_DATA.getMinResumableLevel();
+				progress.setResumeLevel(canResume ? progress.getCurrentLevel() : 0);
+				progress.setCurrentLevel(1);
+				PacketSendUtility.sendPacket(player, new SM_UPGRADE_ARCADE(progress, canResume));
+			}, delayMillis);
 		}
 	}
 
+	private float getUpgradeChance(int currentLevel) {
+		ArcadeLevel lv = DataManager.ARCADE_UPGRADE_DATA.getUpgradeLevels().stream().filter(level -> level.getLevel() == currentLevel).findFirst()
+			.orElse(null);
+		return lv == null ? DataManager.ARCADE_UPGRADE_DATA.getMaxUpgradeLevel().getUpgradeChance() : lv.getUpgradeChance();
+	}
+
 	public void resume(Player player) {
-		if (!player.getInventory().decreaseByItemId(186000389, EventsConfig.ARCADE_RESUME_TOKEN)) {
-			PacketSendUtility.sendPacket(player, new SM_UPGRADE_ARCADE(8));
+		ArcadeProgress progress = getProgress(player.getObjectId());
+		if (progress.getResumeLevel() == 0) {
+			AuditLogger.log(player, "illegally tried to resume arcade");
 			return;
 		}
-		final ArcadeProgress progress = getProgress(player.getObjectId());
-		progress.setResumeAllowed(false);
-		PacketSendUtility.sendPacket(player, new SM_UPGRADE_ARCADE(4, progress.setCurrentLevel(7)));
+		if (!player.getInventory().decreaseByItemId(186000389, EventsConfig.ARCADE_RESUME_TOKEN)) {
+			PacketSendUtility.sendPacket(player, new SM_UPGRADE_ARCADE(8, true));
+			return;
+		}
+		progress.setCurrentLevel(progress.getResumeLevel());
+		PacketSendUtility.sendPacket(player, new SM_UPGRADE_ARCADE(progress));
 	}
 
 	public void getReward(Player player) {
 		ArcadeProgress progress = getProgress(player.getObjectId());
-		List<ArcadeTabItemList> rewardList = new ArrayList<>();
-
-		ArcadeTab rewardTab = getRewardTabForLevel(progress.getCurrentLevel());
-		if (rewardTab == null)
+		if (progress.getCurrentLevel() == 0) {
+			AuditLogger.log(player, "tried to get arcade rewards without spending token");
 			return;
-		for (ArcadeTabItemList arcadeTabItem : rewardTab.getArcadeTabItems()) {
-			if (progress.isFrenzyActive()) {
+		}
+		List<ArcadeRewardItem> rewardList = new ArrayList<>();
+
+		ArcadeRewards rewards = getRewardsForLevel(progress.getCurrentLevel());
+		if (rewards == null)
+			return;
+		boolean isFrenzyActive = System.currentTimeMillis() < progress.getFrenzyEndTimeMillis();
+		for (ArcadeRewardItem arcadeTabItem : rewards.getArcadeRewardItems()) {
+			if (isFrenzyActive) {
 				if (arcadeTabItem.getFrenzyCount() > 0)
 					rewardList.add(arcadeTabItem);
-			} else {
-				if (arcadeTabItem.getNormalCount() > 0)
-					rewardList.add(arcadeTabItem);
+			} else if (arcadeTabItem.getNormalCount() > 0) {
+				rewardList.add(arcadeTabItem);
 			}
 		}
 
-		if (rewardList.size() > 0) {
-			ArcadeTabItemList item = Rnd.get(rewardList);
-			ItemService.addItem(player, item.getItemId(), progress.isFrenzyActive() ? item.getFrenzyCount() : item.getNormalCount());
-			PacketSendUtility.sendPacket(player, new SM_UPGRADE_ARCADE(6, item));
-			progress.setCurrentLevel(1);
-			progress.setResumeAllowed(true);
+		ArcadeRewardItem item = Rnd.get(rewardList);
+		if (item != null) {
+			long itemCount = isFrenzyActive ? item.getFrenzyCount() : item.getNormalCount();
+			ItemService.addItem(player, item.getItemId(), itemCount, true);
+			PacketSendUtility.sendPacket(player, new SM_UPGRADE_ARCADE(item.getItemId(), itemCount));
+			progress.setResumeLevel(0);
+			progress.setCurrentLevel(0);
 		}
 	}
 
