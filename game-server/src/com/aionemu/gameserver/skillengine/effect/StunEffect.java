@@ -23,8 +23,6 @@ public class StunEffect extends EffectTemplate {
 
 	@Override
 	public void calculate(Effect effect) {
-		if (effect.getEffected().getEffectController().isAbnormalSet(AbnormalState.PULLED))
-			return;
 		super.calculate(effect, StatEnum.STUN_RESISTANCE, null);
 	}
 
