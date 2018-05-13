@@ -101,15 +101,17 @@ public class DropRegistrationService {
 
 		// if npc ai == quest_use_item it will be always excluded from global drops
 		boolean isNpcQuest = npc.getAi().getName().equals("quest_use_item");
-		if (!isNpcQuest && !hasGlobalNpcExclusions(npc)) {
+		if (!isNpcQuest) {
+			boolean hasGlobalNpcExclusions = hasGlobalNpcExclusions(npc);
 			boolean isAllowedDefaultGlobalDropNpc = isAllowedDefaultGlobalDropNpc(npc, isChest);
 			// instances with WorldDropType.NONE must not have global drops (example Arenas)
-			if (npc.getWorldDropType() != WorldDropType.NONE) {
-				index = addGlobalDrops(index, dropRate, looter, npc, !isChest && isAllowedDefaultGlobalDropNpc, DataManager.GLOBAL_DROP_DATA.getAllRules(), droppedItems,
+			if (!hasGlobalNpcExclusions && npc.getWorldDropType() != WorldDropType.NONE) {
+				index = addGlobalDrops(index, dropRate, looter, npc, isAllowedDefaultGlobalDropNpc, DataManager.GLOBAL_DROP_DATA.getAllRules(), droppedItems,
 					groupMembers, winnerObj);
 			}
-			addGlobalDrops(index, dropRate, looter, npc, isAllowedDefaultGlobalDropNpc, EventService.getInstance().getActiveEventDropRules(), droppedItems,
-				groupMembers, winnerObj);
+			if (!hasGlobalNpcExclusions || isChest)
+				addGlobalDrops(index, dropRate, looter, npc, isAllowedDefaultGlobalDropNpc, EventService.getInstance().getActiveEventDropRules(),
+					droppedItems, groupMembers, winnerObj);
 		}
 
 		if (npc.isInInstance()) {
@@ -179,8 +181,8 @@ public class DropRegistrationService {
 		// if npc level == 1 means missing stats, so better exclude it from drops
 		if (npc.getLevel() < 2 && !isChest && npc.getWorldId() != WorldMapType.POETA.getId() && npc.getWorldId() != WorldMapType.ISHALGEN.getId())
 			return false;
-		// if abyss type npc != null, the npc will be excluded from drops
-		if (npc.getAbyssNpcType() != AbyssNpcType.NONE && npc.getAbyssNpcType() != AbyssNpcType.DEFENDER)
+		// if abyss type npc != null or npc is chest, the npc will be excluded from drops
+		if (isChest || npc.getAbyssNpcType() != AbyssNpcType.NONE && npc.getAbyssNpcType() != AbyssNpcType.DEFENDER)
 			return false;
 		return true;
 	}

@@ -66,15 +66,17 @@ public class DropInfo extends AdminCommand {
 
 		// if npc ai == quest_use_item it will be always excluded from global drops
 		boolean isNpcQuest = npc.getAi().getName().equals("quest_use_item");
-		if (!isNpcQuest && !DropRegistrationService.getInstance().hasGlobalNpcExclusions(npc)) {
+		if (!isNpcQuest) {
+			boolean hasGlobalNpcExclusions = DropRegistrationService.getInstance().hasGlobalNpcExclusions(npc);
 			boolean isAllowedDefaultGlobalDropNpc = DropRegistrationService.getInstance().isAllowedDefaultGlobalDropNpc(npc, isChest);
 			// instances with WorldDropType.NONE must not have global drops (example Arenas)
-			if (npc.getWorldDropType() != WorldDropType.NONE) {
-				info += collectDropInfo("Global", DataManager.GLOBAL_DROP_DATA.getAllRules(), player, npc, dropRate, !isChest && isAllowedDefaultGlobalDropNpc, showAll,
+			if (!hasGlobalNpcExclusions && npc.getWorldDropType() != WorldDropType.NONE) {
+				info += collectDropInfo("Global", DataManager.GLOBAL_DROP_DATA.getAllRules(), player, npc, dropRate, isAllowedDefaultGlobalDropNpc, showAll,
 					counts);
 			}
-			info += collectDropInfo("Event", EventService.getInstance().getActiveEventDropRules(), player, npc, dropRate, isAllowedDefaultGlobalDropNpc,
-				showAll, counts);
+			if (!hasGlobalNpcExclusions || isChest)
+				info += collectDropInfo("Event", EventService.getInstance().getActiveEventDropRules(), player, npc, dropRate, isAllowedDefaultGlobalDropNpc,
+					showAll, counts);
 		}
 
 		info += "\n" + counts[0] + " total drops available in " + counts[1] + " drop groups" + (showAll ? "." : " on your level.");
