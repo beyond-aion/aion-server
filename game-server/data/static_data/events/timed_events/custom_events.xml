@@ -33,22 +33,19 @@
 				<gd_maps>
 					<gd_map map_id="300520000" /> <!-- Dragon Lords Refuge -->
 					<gd_map map_id="301110000" /> <!-- Danuar Reliquary -->
-				</gd_maps>
-				<gd_ratings>
-					<gd_rating rating="HERO" />
-				</gd_ratings>
-				<gd_items>
-					<gd_item id="188053869"/> <!-- [Event] Arcade Token Bundle (3) -->
-				</gd_items>
-			</gd_rule>
-			<gd_rule rule_name="Instance Boss Arcade Token" base_chance="50">
-				<gd_maps>
 					<gd_map map_id="301140000" /> <!-- Seized Danaur Sanctuary -->
 					<gd_map map_id="300590000" /> <!-- Ophidan Bridge -->
 				</gd_maps>
-				<gd_ratings>
-					<gd_rating rating="HERO" />
-				</gd_ratings>
+				<gd_npcs>
+					<gd_npc npc_id="701542" /> <!-- Tiamat´s Huge Treasure Chest (Dragon Lords Refuge) -->
+					<gd_npc npc_id="701795" /> <!-- Treasue Box (Danuar Reliquary) -->
+					<gd_npc npc_id="235619" /> <!-- Warmage Suyaroka (Seized Danuar Sanctuary) -->
+					<gd_npc npc_id="235620" /> <!-- Chief Medic Tagnu (Seized Danuar Sanctuary) -->
+					<gd_npc npc_id="235621" /> <!-- Virulent Ukahim (Seized Danuar Sanctuary) -->
+					<gd_npc npc_id="235769" /> <!-- Velkur Aethercaster (Ophidan Bridge) -->
+					<gd_npc npc_id="235770" /> <!-- Velkur Aetherpriest (Ophidan Bridge) -->
+					<gd_npc npc_id="235771" /> <!-- Velkur Aetherknife (Ophidan Bridge) -->
+				</gd_npcs>
 				<gd_items>
 					<gd_item id="188053869"/> <!-- [Event] Arcade Token Bundle (3) -->
 				</gd_items>

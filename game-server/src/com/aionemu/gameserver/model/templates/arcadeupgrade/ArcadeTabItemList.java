@@ -10,21 +10,21 @@ import javax.xml.bind.annotation.XmlType;
 public class ArcadeTabItemList {
 
 	@XmlAttribute(name = "item_id")
-	protected int item_id;
-	@XmlAttribute(name = "normalcount")
-	protected int normalcount;
-	@XmlAttribute(name = "frenzycount")
-	protected int frenzycount;
+	private int itemId;
+	@XmlAttribute(name = "normal_count")
+	private int normalCount;
+	@XmlAttribute(name = "frenzy_count")
+	private int frenzyCount;
 
 	public final int getItemId() {
-		return item_id;
+		return itemId;
 	}
 
 	public final int getNormalCount() {
-		return normalcount;
+		return normalCount;
 	}
 
 	public final int getFrenzyCount() {
-		return frenzycount;
+		return frenzyCount;
 	}
 }

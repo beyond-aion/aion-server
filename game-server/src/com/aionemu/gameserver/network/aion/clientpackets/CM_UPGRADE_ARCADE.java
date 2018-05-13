@@ -2,6 +2,7 @@ package com.aionemu.gameserver.network.aion.clientpackets;
 
 import java.util.Set;
 
+import com.aionemu.gameserver.configs.main.EventsConfig;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
@@ -27,6 +28,8 @@ public class CM_UPGRADE_ARCADE extends AionClientPacket {
 
 	@Override
 	protected void runImpl() {
+		if (!EventsConfig.ENABLE_EVENT_ARCADE)
+			return;
 		Player player = getConnection().getActivePlayer();
 		switch (action) {
 			case 0:// get start upgrade arcade info

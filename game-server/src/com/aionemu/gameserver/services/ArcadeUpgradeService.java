@@ -23,7 +23,7 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
  */
 public class ArcadeUpgradeService {
 
-	public static final ArcadeUpgradeService getInstance() {
+	public static ArcadeUpgradeService getInstance() {
 		return SingletonHolder.instance;
 	}
 
@@ -58,17 +58,16 @@ public class ArcadeUpgradeService {
 	}
 
 	public ArcadeTab getRewardTabForLevel(int level) {
-		for (ArcadeTab at : getTabs()) {
-			if (at.getMinLevel() >= level)
-				return at;
+		List<ArcadeTab> arcadeRewards = getTabs();
+		for (int i = arcadeRewards.size() - 1; i >= 0; i--) {
+			ArcadeTab rewards = arcadeRewards.get(i);
+			if (level >= rewards.getMinLevel())
+				return rewards;
 		}
 		return null;
 	}
 
 	public void startTry(Player player) {
-		if (!EventsConfig.ENABLE_EVENT_ARCADE)
-			return;
-
 		final ArcadeProgress progress = getProgress(player.getObjectId());
 		int currentLevel = progress.getCurrentLevel();
 		if (currentLevel >= 8) {
@@ -118,9 +117,6 @@ public class ArcadeUpgradeService {
 	}
 
 	public void getReward(Player player) {
-		if (!EventsConfig.ENABLE_EVENT_ARCADE)
-			return;
-
 		ArcadeProgress progress = getProgress(player.getObjectId());
 		List<ArcadeTabItemList> rewardList = new ArrayList<>();
 

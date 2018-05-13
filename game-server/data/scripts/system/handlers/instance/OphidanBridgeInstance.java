@@ -100,7 +100,7 @@ public class OphidanBridgeInstance extends GeneralInstanceHandler {
 		spawn(npcId, 325.1554f, 483.4476f, 607.6434f, (byte) 0);
 		switch (npcId) {
 			case 235759:
-				spawn(235769, 323.016f, 489.295f, 607.645f, (byte) 0); // Velkur Aetherknife
+				spawn(235769, 323.016f, 489.295f, 607.645f, (byte) 0); // Velkur Aethercaster
 				break;
 			case 235763:
 				spawn(235770, 323.016f, 489.295f, 607.645f, (byte) 0); // Velkur Aetherpriest

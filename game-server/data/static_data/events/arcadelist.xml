@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <arcadelist xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="arcadelist.xsd">
-	<tab id="1" min_level="0" upgrade_chance="85">
+	<tab id="1" min_level="0" upgrade_chance="90">
 		<item item_id="162002030" normal_count="10" frenzy_count="10" />
 		<item item_id="186000236" normal_count="5" frenzy_count="5" />
 		<item item_id="166000195" normal_count="5" frenzy_count="5" />
