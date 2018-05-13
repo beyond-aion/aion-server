@@ -105,7 +105,7 @@ public class DropRegistrationService {
 			boolean isAllowedDefaultGlobalDropNpc = isAllowedDefaultGlobalDropNpc(npc, isChest);
 			// instances with WorldDropType.NONE must not have global drops (example Arenas)
 			if (npc.getWorldDropType() != WorldDropType.NONE) {
-				index = addGlobalDrops(index, dropRate, looter, npc, isAllowedDefaultGlobalDropNpc, DataManager.GLOBAL_DROP_DATA.getAllRules(), droppedItems,
+				index = addGlobalDrops(index, dropRate, looter, npc, !isChest && isAllowedDefaultGlobalDropNpc, DataManager.GLOBAL_DROP_DATA.getAllRules(), droppedItems,
 					groupMembers, winnerObj);
 			}
 			addGlobalDrops(index, dropRate, looter, npc, isAllowedDefaultGlobalDropNpc, EventService.getInstance().getActiveEventDropRules(), droppedItems,
@@ -179,8 +179,8 @@ public class DropRegistrationService {
 		// if npc level == 1 means missing stats, so better exclude it from drops
 		if (npc.getLevel() < 2 && !isChest && npc.getWorldId() != WorldMapType.POETA.getId() && npc.getWorldId() != WorldMapType.ISHALGEN.getId())
 			return false;
-		// if abyss type npc != null or npc is chest, the npc will be excluded from drops
-		if (isChest || npc.getAbyssNpcType() != AbyssNpcType.NONE && npc.getAbyssNpcType() != AbyssNpcType.DEFENDER)
+		// if abyss type npc != null, the npc will be excluded from drops
+		if (npc.getAbyssNpcType() != AbyssNpcType.NONE && npc.getAbyssNpcType() != AbyssNpcType.DEFENDER)
 			return false;
 		return true;
 	}

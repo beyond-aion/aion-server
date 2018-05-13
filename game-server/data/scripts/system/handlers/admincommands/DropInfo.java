@@ -70,7 +70,7 @@ public class DropInfo extends AdminCommand {
 			boolean isAllowedDefaultGlobalDropNpc = DropRegistrationService.getInstance().isAllowedDefaultGlobalDropNpc(npc, isChest);
 			// instances with WorldDropType.NONE must not have global drops (example Arenas)
 			if (npc.getWorldDropType() != WorldDropType.NONE) {
-				info += collectDropInfo("Global", DataManager.GLOBAL_DROP_DATA.getAllRules(), player, npc, dropRate, isAllowedDefaultGlobalDropNpc, showAll,
+				info += collectDropInfo("Global", DataManager.GLOBAL_DROP_DATA.getAllRules(), player, npc, dropRate, !isChest && isAllowedDefaultGlobalDropNpc, showAll,
 					counts);
 			}
 			info += collectDropInfo("Event", EventService.getInstance().getActiveEventDropRules(), player, npc, dropRate, isAllowedDefaultGlobalDropNpc,
