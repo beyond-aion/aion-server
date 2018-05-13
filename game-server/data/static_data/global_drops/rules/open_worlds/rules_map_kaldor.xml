@@ -145,7 +145,48 @@
 			<gd_npc npc_id="234530"/><!-- Flaming Obscura -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="152012613"/><!-- Burning Vitality-->
+			<gd_item id="152012613"/><!-- Burning Vitality -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Material Burning Sulfur" base_chance="3">
+		<gd_maps>
+			<gd_map map_id="600090000"/><!-- Kaldor -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="233997"/><!-- Sandshell Starturtle -->
+			<gd_npc npc_id="234260"/><!-- Defiant Zefirun -->
+			<gd_npc npc_id="234261"/><!-- Mirrorwing Sylphen -->
+			<gd_npc npc_id="234262"/><!-- Thornstick Crynac -->
+			<gd_npc npc_id="234263"/><!-- Toxic Crynac -->
+			<gd_npc npc_id="234264"/><!-- Misshapen Oculis -->
+			<gd_npc npc_id="234265"/><!-- Fearless Zefirun -->
+			<gd_npc npc_id="234266"/><!-- Pygmy Sylphen -->
+			<gd_npc npc_id="234267"/><!-- Rockhusk Agrint -->
+			<gd_npc npc_id="234268"/><!-- Choking Oculis -->
+			<gd_npc npc_id="234273"/><!-- Bloody Zefirun -->
+			<gd_npc npc_id="234274"/><!-- Ancient Sylphen -->
+			<gd_npc npc_id="234275"/><!-- Deathsting Arachna -->
+			<gd_npc npc_id="234276"/><!-- Vindictive Oculis -->
+			<gd_npc npc_id="234277"/><!-- Crazed Karnif -->
+			<gd_npc npc_id="234278"/><!-- Flamedust Sparkle -->
+			<gd_npc npc_id="234279"/><!-- Manduri Lavafist -->
+			<gd_npc npc_id="234280"/><!-- Ash Ampha -->
+			<gd_npc npc_id="234299"/><!-- Earsplit Arachna -->
+			<gd_npc npc_id="234300"/><!-- Nightlord Karnif -->
+			<gd_npc npc_id="234512"/><!-- Ravening Arachna -->
+			<gd_npc npc_id="234513"/><!-- Bladefang Crynac -->
+			<gd_npc npc_id="234514"/><!-- Sly Bladefang Crynac -->
+			<gd_npc npc_id="234520"/><!-- Stem Snuffler -->
+			<gd_npc npc_id="234521"/><!-- Plated Snuffler -->
+			<gd_npc npc_id="234523"/><!-- Golden Snuffler -->
+			<gd_npc npc_id="234524"/><!-- Speckled Snuffler -->
+			<gd_npc npc_id="234531"/><!-- Smoldering Agrint -->
+			<gd_npc npc_id="234532"/><!-- Diabolic Spirit -->
+			<gd_npc npc_id="234647"/><!-- Commander Gartacia -->
+			<gd_npc npc_id="234648"/><!-- Commander Virca -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="152012614"/><!-- Burning Sulfur -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Material Burning Mind" base_chance="3">
@@ -182,7 +223,7 @@
 			<gd_npc npc_id="234668"/><!-- Wounded Vasharti Strongbow -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="152012615"/><!-- Burning Mind-->
+			<gd_item id="152012615"/><!-- Burning Mind -->
 		</gd_items>
 	</gd_rule>
 </global_rules>
