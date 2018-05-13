@@ -8,10 +8,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-import com.aionemu.commons.utils.NetworkUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.aionemu.commons.utils.NetworkUtils;
 import com.aionemu.gameserver.configs.network.NetworkConfig;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.network.aion.clientpackets.*;
@@ -163,6 +163,7 @@ public class AionClientPacketFactory {
 			packets.put(0x184, new PacketInfo<>(CM_RELEASE_OBJECT.class, State.IN_GAME));
 			packets.put(0x185, new PacketInfo<>(CM_HOUSE_OPEN_DOOR.class, State.IN_GAME));
 			// packets.put(0x186, new PacketInfo<>(CM_IN_GAME_SHOP_INFO.class, State.IN_GAME));
+			packets.put(0x188, new PacketInfo<>(CM_PING_INGAME.class, State.IN_GAME));
 			packets.put(0x189, new PacketInfo<>(CM_SHOW_FRIENDLIST.class, State.IN_GAME));
 			packets.put(0x18B, new PacketInfo<>(CM_CHALLENGE_LIST.class, State.IN_GAME));
 			packets.put(0x18C, new PacketInfo<>(CM_BONUS_TITLE.class, State.IN_GAME));

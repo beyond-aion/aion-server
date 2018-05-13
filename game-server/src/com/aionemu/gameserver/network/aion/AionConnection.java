@@ -30,6 +30,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.Crypt;
 import com.aionemu.gameserver.network.PacketFloodFilter;
 import com.aionemu.gameserver.network.aion.clientpackets.CM_PING;
+import com.aionemu.gameserver.network.aion.clientpackets.CM_PING_INGAME;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_KEY;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_MESSAGE;
 import com.aionemu.gameserver.network.loginserver.LoginServer;
@@ -423,7 +424,8 @@ public class AionConnection extends AConnection<AionServerPacket> {
 		private PingChecker() {
 			if (AionConnection.this.pingChecker != null)
 				throw new IllegalStateException("PingChecker for " + AionConnection.this + " is already assigned.");
-			task = ThreadPoolManager.getInstance().scheduleAtFixedRate(this, CM_PING.CLIENT_PING_INTERVAL * 2, CM_PING.CLIENT_PING_INTERVAL);
+			int checkIntervalMillis = Math.min(CM_PING_INGAME.CLIENT_PING_INTERVAL, CM_PING.CLIENT_PING_INTERVAL); 
+			task = ThreadPoolManager.getInstance().scheduleAtFixedRate(this, checkIntervalMillis * 2, checkIntervalMillis);
 		}
 
 		private void stop() {
@@ -432,7 +434,8 @@ public class AionConnection extends AConnection<AionServerPacket> {
 
 		@Override
 		public void run() {
-			if (System.currentTimeMillis() - getLastPingTime() > CM_PING.CLIENT_PING_INTERVAL * 2) {
+			int expectedPingInterval = getActivePlayer() == null ? CM_PING.CLIENT_PING_INTERVAL : CM_PING_INGAME.CLIENT_PING_INTERVAL;
+			if (System.currentTimeMillis() - getLastPingTime() > expectedPingInterval * 2) {
 				log.info("Closing hanged up connection of client: " + AionConnection.this);
 				close();
 			}

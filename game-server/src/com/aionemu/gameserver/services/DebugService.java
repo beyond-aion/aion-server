@@ -5,7 +5,7 @@ import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionConnection;
-import com.aionemu.gameserver.network.aion.clientpackets.CM_PING;
+import com.aionemu.gameserver.network.aion.clientpackets.CM_PING_INGAME;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.World;
 
@@ -31,30 +31,25 @@ public class DebugService {
 			}
 
 		}, ANALYZE_PLAYERS_INTERVAL, ANALYZE_PLAYERS_INTERVAL);
-		log.info("DebugService started. Analyze iterval: " + ANALYZE_PLAYERS_INTERVAL);
+		log.info("DebugService started. Analyze interval: " + ANALYZE_PLAYERS_INTERVAL);
 	}
 
 	private void analyzeWorldPlayers() {
 		log.info("Starting analysis of world players");
 
 		for (Player player : World.getInstance().getAllPlayers()) {
-			/**
-			 * Check connection
-			 */
+			// Check connection
 			AionConnection connection = player.getClientConnection();
 			if (connection == null) {
 				log.warn("[DEBUG SERVICE] Found {} without connection: Spawned {}", player, player.isSpawned());
 				continue;
 			}
 
-			/**
-			 * Check CM_PING packet
-			 */
+			// Check CM_PING packet
 			long lastPingTimeMS = connection.getLastPingTime();
 			long pingInterval = System.currentTimeMillis() - lastPingTimeMS;
-			if (lastPingTimeMS > 0 && pingInterval > CM_PING.CLIENT_PING_INTERVAL * 2) {
+			if (lastPingTimeMS > 0 && pingInterval > CM_PING_INGAME.CLIENT_PING_INTERVAL * 2)
 				log.warn("[DEBUG SERVICE] Found {} with large ping interval: Spawned {}, PingMS {}", player, player.isSpawned(), pingInterval);
-			}
 		}
 
 		log.info("Analysis of world players finished");
