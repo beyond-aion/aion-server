@@ -84,7 +84,7 @@ public class IdgelDomeInstance extends GeneralInstanceHandler {
 		sendPacket(new SM_INSTANCE_SCORE(new IdgelDomeScoreInfo(idi, InstanceScoreType.UPDATE_PLAYER_INFO, instance.getPlayersInside()), idi, getTime()));
 		Race winningrace = idi.getWinningRace();
 		RewardItem spacer = new RewardItem(0, 0);
-		String eventName = EventsConfig.ENABLED_EVENTS.stream().filter(name->name.toLowerCase().contains("arcade upgrade")).findFirst().orElse(null);
+		String eventName = EventsConfig.ENABLED_EVENTS.stream().filter(name->name.toLowerCase().contains("upgrade arcade")).findFirst().orElse(null);
 		boolean isArcadeEventActive = EventService.getInstance().isEventActive(eventName);
 		int winnerBonusAp = Rnd.get(10000, 14000);
 		int loserBonusAp = Rnd.get(3000, 6000);

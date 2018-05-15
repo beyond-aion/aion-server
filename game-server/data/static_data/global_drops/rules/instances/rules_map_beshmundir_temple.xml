@@ -597,7 +597,30 @@
 			<gd_item id="186000099" /><!-- Vorpal Essence -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Unique)" base_chance="10">
+	<gd_rule rule_name="Named Weapon (Epic)" base_chance="20">
+		<gd_maps>
+			<gd_map map_id="300170000" /><!-- Beshmundir_Temple -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216183" /><!-- Stormwing -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="100000893" chance="4.185" /><!-- Stormwing's Azure Scale Sword -->
+			<gd_item id="100001080" chance="4.185" /><!-- Stormwing Scale Sword -->
+			<gd_item id="100100676" chance="8.33" /><!-- Stormwing's Warhammer -->
+			<gd_item id="100200807" chance="8.33" /><!-- Stormwing's Dagger -->
+			<gd_item id="100500698" chance="8.33" /><!-- Stormwing's Jewel -->
+			<gd_item id="100600755" chance="8.33" /><!-- Stormwing's Tome -->
+			<gd_item id="100900684" chance="8.33" /><!-- Stormwing's Greatsword -->
+			<gd_item id="101300655" chance="8.33" /><!-- Stormwing's Spear -->
+			<gd_item id="101500698" chance="8.33" /><!-- Stormwing's Staff -->
+			<gd_item id="101700722" chance="8.33" /><!-- Stormwing's Longbow -->
+			<gd_item id="101800867" chance="8.33" /><!-- Stormwing's Pistol -->
+			<gd_item id="101900627" chance="8.33" /><!-- Stormwing's Aethercannon -->
+			<gd_item id="102000662" chance="8.33" /><!-- Stormwing's Harp -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Weapon (Unique)" base_chance="20">
 		<gd_maps>
 			<gd_map map_id="300170000" /><!-- Beshmundir_Temple -->
 		</gd_maps>
