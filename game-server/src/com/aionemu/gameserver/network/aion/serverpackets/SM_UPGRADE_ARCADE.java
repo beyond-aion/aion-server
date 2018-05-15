@@ -104,7 +104,7 @@ public class SM_UPGRADE_ARCADE extends AionServerPacket {
 				break;
 			case 3: // upgrade start
 				writeC(success ? 1 : 0);// 1 success - 0 fail
-				writeD(progress.getFrenzyPoints() > 100 ? 100 : progress.getFrenzyPoints());
+				writeD(progress.getFrenzyPoints());
 				break;
 			case 4: // update success
 				writeD(progress.getCurrentLevel());// upgradeLevel

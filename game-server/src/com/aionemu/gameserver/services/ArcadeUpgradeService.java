@@ -47,7 +47,12 @@ public class ArcadeUpgradeService {
 		if (progress.getCurrentLevel() > 1)
 			PacketSendUtility.sendPacket(player, new SM_UPGRADE_ARCADE(progress));
 		if (progress.getFrenzyEndTimeMillis() > System.currentTimeMillis())
-			PacketSendUtility.sendPacket(player, new SM_UPGRADE_ARCADE((int) ((progress.getFrenzyEndTimeMillis() - System.currentTimeMillis()) / 1000)));
+			sendRemainingFrenzyModeTime(player, progress);
+	}
+
+	private void sendRemainingFrenzyModeTime(Player player, ArcadeProgress progress) {
+		int remainingFrenzyModeSeconds = (int) ((progress.getFrenzyEndTimeMillis() - System.currentTimeMillis()) / 1000);
+		PacketSendUtility.sendPacket(player, new SM_UPGRADE_ARCADE(Math.max(0, remainingFrenzyModeSeconds)));
 	}
 
 	public void open(Player player) {
@@ -85,24 +90,21 @@ public class ArcadeUpgradeService {
 			if (!player.getInventory().decreaseByItemId(186000389, 1))
 				return;
 
+			int frenzyModeThreshold = 100;
 			progress.setCurrentLevel(1);
-			boolean isFrenzyInactive = nowMillis > progress.getFrenzyEndTimeMillis();
-			if (isFrenzyInactive) {
-				if (progress.getFrenzyPoints() >= 100) {
-					int frenzyDurationSeconds = 90;
-					long frenzyDurationMillis = frenzyDurationSeconds * 1000;
-					progress.setFrenzyEndTimeMillis(nowMillis + frenzyDurationMillis);
-					PacketSendUtility.sendPacket(player, new SM_UPGRADE_ARCADE(frenzyDurationSeconds));
-					progress.setFrenzyPoints(8);
-					int playerId = player.getObjectId();
-					ThreadPoolManager.getInstance().schedule(() -> {
-						Player p = World.getInstance().findPlayer(playerId);
-						if (p != null)
-							PacketSendUtility.sendPacket(p, new SM_UPGRADE_ARCADE(0));
-					}, frenzyDurationMillis);
-				} else {
-					progress.setFrenzyPoints(progress.getFrenzyPoints() + 8);
-				}
+			progress.setFrenzyPoints(progress.getFrenzyPoints() + 8);
+			if (progress.getFrenzyPoints() >= frenzyModeThreshold) {
+				progress.setFrenzyPoints(progress.getFrenzyPoints() % frenzyModeThreshold);
+				int frenzyDurationSeconds = 90;
+				long frenzyDurationMillis = frenzyDurationSeconds * 1000;
+				progress.setFrenzyEndTimeMillis(nowMillis + frenzyDurationMillis);
+				PacketSendUtility.sendPacket(player, new SM_UPGRADE_ARCADE(frenzyDurationSeconds));
+				int playerId = player.getObjectId();
+				ThreadPoolManager.getInstance().schedule(() -> {
+					Player p = World.getInstance().findPlayer(playerId);
+					if (p != null)
+						sendRemainingFrenzyModeTime(p, progress);
+				}, frenzyDurationMillis);
 			}
 		}
 		int delayMillis = 3000;

@@ -10,7 +10,7 @@ public class ArcadeProgress {
 
 	private final int playerObjId;
 	private int frenzyPoints;
-	private int currentLevel = 1;
+	private int currentLevel;
 	private long frenzyEndTimeMillis;
 	private int resumeLevel;
 	private long nextTryTimeMillis;
