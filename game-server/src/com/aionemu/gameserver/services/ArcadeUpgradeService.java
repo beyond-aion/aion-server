@@ -26,9 +26,7 @@ import com.aionemu.gameserver.world.World;
  */
 public class ArcadeUpgradeService {
 
-	public static ArcadeUpgradeService getInstance() {
-		return SingletonHolder.instance;
-	}
+	private static final int FRENZY_POINTS_PER_TOKEN = 8;
 
 	/**
 	 * A map containing all player arcade progresses to avoid data loss caused by disconnects.
@@ -36,7 +34,7 @@ public class ArcadeUpgradeService {
 	 */
 	private final Map<Integer, ArcadeProgress> cachedProgress = new ConcurrentHashMap<>();
 
-	private ArcadeProgress getProgress(final int objId) {
+	private ArcadeProgress getProgress(int objId) {
 		ArcadeProgress progress = cachedProgress.putIfAbsent(objId, new ArcadeProgress(objId));
 		return progress != null ? progress : cachedProgress.get(objId);
 	}
@@ -90,22 +88,10 @@ public class ArcadeUpgradeService {
 			if (!player.getInventory().decreaseByItemId(186000389, 1))
 				return;
 
-			int frenzyModeThreshold = 100;
 			progress.setCurrentLevel(1);
-			progress.setFrenzyPoints(progress.getFrenzyPoints() + 8);
-			if (progress.getFrenzyPoints() >= frenzyModeThreshold) {
-				progress.setFrenzyPoints(progress.getFrenzyPoints() % frenzyModeThreshold);
-				int frenzyDurationSeconds = 90;
-				long frenzyDurationMillis = frenzyDurationSeconds * 1000;
-				progress.setFrenzyEndTimeMillis(nowMillis + frenzyDurationMillis);
-				PacketSendUtility.sendPacket(player, new SM_UPGRADE_ARCADE(frenzyDurationSeconds));
-				int playerId = player.getObjectId();
-				ThreadPoolManager.getInstance().schedule(() -> {
-					Player p = World.getInstance().findPlayer(playerId);
-					if (p != null)
-						sendRemainingFrenzyModeTime(p, progress);
-				}, frenzyDurationMillis);
-			}
+			increaseFrenzyPoints(player, progress, FRENZY_POINTS_PER_TOKEN);
+		} else if (progress.getCurrentLevel() == progress.getResumeLevel()) { // start after paying the tokens to resume
+			increaseFrenzyPoints(player, progress, FRENZY_POINTS_PER_TOKEN * EventsConfig.ARCADE_RESUME_TOKEN);
 		}
 		int delayMillis = 3000;
 		progress.setTimeNextTry(nowMillis + delayMillis);
@@ -123,6 +109,24 @@ public class ArcadeUpgradeService {
 				progress.setCurrentLevel(1);
 				PacketSendUtility.sendPacket(player, new SM_UPGRADE_ARCADE(progress, canResume));
 			}, delayMillis);
+		}
+	}
+
+	private void increaseFrenzyPoints(Player player, ArcadeProgress progress, int frenzyPoints) {
+		int frenzyModeThreshold = 100;
+		progress.setFrenzyPoints(progress.getFrenzyPoints() + frenzyPoints);
+		if (progress.getFrenzyPoints() >= frenzyModeThreshold) {
+			progress.setFrenzyPoints(progress.getFrenzyPoints() % frenzyModeThreshold);
+			int frenzyDurationSeconds = 90;
+			long frenzyDurationMillis = frenzyDurationSeconds * 1000;
+			progress.setFrenzyEndTimeMillis(System.currentTimeMillis() + frenzyDurationMillis);
+			PacketSendUtility.sendPacket(player, new SM_UPGRADE_ARCADE(frenzyDurationSeconds));
+			int playerId = player.getObjectId();
+			ThreadPoolManager.getInstance().schedule(() -> {
+				Player p = World.getInstance().findPlayer(playerId);
+				if (p != null)
+					sendRemainingFrenzyModeTime(p, progress);
+			}, frenzyDurationMillis);
 		}
 	}
 
@@ -175,6 +179,10 @@ public class ArcadeUpgradeService {
 			progress.setResumeLevel(0);
 			progress.setCurrentLevel(0);
 		}
+	}
+
+	public static ArcadeUpgradeService getInstance() {
+		return SingletonHolder.instance;
 	}
 
 	private static class SingletonHolder {
