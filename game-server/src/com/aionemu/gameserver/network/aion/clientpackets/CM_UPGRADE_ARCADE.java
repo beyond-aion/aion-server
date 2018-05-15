@@ -8,7 +8,7 @@ import com.aionemu.gameserver.configs.main.EventsConfig;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
-import com.aionemu.gameserver.services.ArcadeUpgradeService;
+import com.aionemu.gameserver.services.UpgradeArcadeService;
 
 /**
  * @author ginho1
@@ -35,22 +35,22 @@ public class CM_UPGRADE_ARCADE extends AionClientPacket {
 		Player player = getConnection().getActivePlayer();
 		switch (action) {
 			case 0:// get start upgrade arcade info
-				ArcadeUpgradeService.getInstance().start(player, sessionId);
+				UpgradeArcadeService.getInstance().start(player, sessionId);
 				break;
 			case 1:// open upgrade arcade
-				ArcadeUpgradeService.getInstance().open(player);
+				UpgradeArcadeService.getInstance().open(player);
 				break;
 			case 2:// try upgrade arcade
-				ArcadeUpgradeService.getInstance().startTry(player);
+				UpgradeArcadeService.getInstance().startTry(player);
 				break;
 			case 3:// get reward
-				ArcadeUpgradeService.getInstance().getReward(player);
+				UpgradeArcadeService.getInstance().getReward(player);
 				break;
 			case 4:// resume upgrade arcade
-				ArcadeUpgradeService.getInstance().resume(player);
+				UpgradeArcadeService.getInstance().resume(player);
 				break;
 			case 5:// get reward list
-				ArcadeUpgradeService.getInstance().showRewardList(player);
+				UpgradeArcadeService.getInstance().showRewardList(player);
 				break;
 			default:
 				LoggerFactory.getLogger(CM_UPGRADE_ARCADE.class).warn("Unhandled arcade action " + action);

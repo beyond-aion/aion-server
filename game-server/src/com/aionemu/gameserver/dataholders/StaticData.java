@@ -279,7 +279,7 @@ public class StaticData {
 	public ItemPurificationData itemPurificationData;
 
 	@XmlElement(name = "arcadelist")
-	public ArcadeUpgradeData arcadeUpgradeData;
+	public UpgradeArcadeData upgradeArcadeData;
 
 	@XmlElement(name = "login_events")
 	public AtreianPassportData atreianPassportData;
@@ -379,7 +379,7 @@ public class StaticData {
 		log.info("Loaded " + multiReturnItem.size() + " multi return item entries");
 		log.info("Loaded " + hotspotData.size() + " hotspot entries");
 		log.info("Loaded " + itemPurificationData.size() + " item purifications entries");
-		log.info("Loaded " + arcadeUpgradeData.size() + " arcade upgrade entries");
+		log.info("Loaded " + upgradeArcadeData.size() + " upgrade arcade entries");
 		log.info("Loaded " + atreianPassportData.size() + " atreian passports");
 		log.info("Loaded " + raidData.size() + " raid entries");
 		log.info("Loaded " + killBountyData.size() + " kill bounty templates");

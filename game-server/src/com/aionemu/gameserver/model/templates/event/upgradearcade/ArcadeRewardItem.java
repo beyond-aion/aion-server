@@ -1,4 +1,4 @@
-package com.aionemu.gameserver.model.templates.arcadeupgrade;
+package com.aionemu.gameserver.model.templates.event.upgradearcade;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;

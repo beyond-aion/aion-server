@@ -7,16 +7,16 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.aionemu.gameserver.model.templates.arcadeupgrade.ArcadeLevel;
-import com.aionemu.gameserver.model.templates.arcadeupgrade.ArcadeLevels;
-import com.aionemu.gameserver.model.templates.arcadeupgrade.ArcadeRewards;
+import com.aionemu.gameserver.model.templates.event.upgradearcade.ArcadeLevel;
+import com.aionemu.gameserver.model.templates.event.upgradearcade.ArcadeLevels;
+import com.aionemu.gameserver.model.templates.event.upgradearcade.ArcadeRewards;
 
 /**
  * @author ginho1
  */
 @XmlRootElement(name = "arcadelist")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class ArcadeUpgradeData {
+public class UpgradeArcadeData {
 
 	@XmlElement(name = "levels")
 	private ArcadeLevels levels;

@@ -21,7 +21,7 @@ public final class DataManager {
 	private static final Logger log = LoggerFactory.getLogger(DataManager.class);
 	public static AbsoluteStatsData ABSOLUTE_STATS_DATA;
 	public static AIData AI_DATA;
-	public static ArcadeUpgradeData ARCADE_UPGRADE_DATA;
+	public static UpgradeArcadeData UPGRADE_ARCADE_DATA;
 	public static AssembledNpcsData ASSEMBLED_NPC_DATA;
 	public static AssemblyItemsData ASSEMBLY_ITEM_DATA;
 	public static AtreianPassportData ATREIAN_PASSPORT_DATA;
@@ -208,7 +208,7 @@ public final class DataManager {
 		MULTIRETURN_DATA = data.multiReturnItem;
 		HOTSPOT_DATA = data.hotspotData;
 		ITEM_PURIFICATION_DATA = data.itemPurificationData;
-		ARCADE_UPGRADE_DATA = data.arcadeUpgradeData;
+		UPGRADE_ARCADE_DATA = data.upgradeArcadeData;
 		ATREIAN_PASSPORT_DATA = data.atreianPassportData;
 		RAID_DATA = data.raidData;
 		KILL_BOUNTY_DATA = data.killBountyData;

@@ -5,9 +5,9 @@ import java.util.List;
 import com.aionemu.gameserver.configs.main.EventsConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.event.ArcadeProgress;
-import com.aionemu.gameserver.model.templates.arcadeupgrade.ArcadeLevel;
-import com.aionemu.gameserver.model.templates.arcadeupgrade.ArcadeRewardItem;
-import com.aionemu.gameserver.model.templates.arcadeupgrade.ArcadeRewards;
+import com.aionemu.gameserver.model.templates.event.upgradearcade.ArcadeLevel;
+import com.aionemu.gameserver.model.templates.event.upgradearcade.ArcadeRewardItem;
+import com.aionemu.gameserver.model.templates.event.upgradearcade.ArcadeRewards;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 
@@ -91,12 +91,12 @@ public class SM_UPGRADE_ARCADE extends AionServerPacket {
 			case 1: // show start upgrade arcade info
 				writeD(sessionId);// SessionId
 				writeD(progress.getFrenzyPoints());// frenzy meter
-				for (ArcadeRewards arcadeReward : DataManager.ARCADE_UPGRADE_DATA.getRewards())
+				for (ArcadeRewards arcadeReward : DataManager.UPGRADE_ARCADE_DATA.getRewards())
 					writeD(arcadeReward.getMinLevel());
-				writeD(DataManager.ARCADE_UPGRADE_DATA.getMaxUpgradeLevel().getLevel());
+				writeD(DataManager.UPGRADE_ARCADE_DATA.getMaxUpgradeLevel().getLevel());
 				writeC(1);
-				writeC(DataManager.ARCADE_UPGRADE_DATA.getUpgradeLevels().size() * 2);
-				for (ArcadeLevel arcadeLevel : DataManager.ARCADE_UPGRADE_DATA.getUpgradeLevels())
+				writeC(DataManager.UPGRADE_ARCADE_DATA.getUpgradeLevels().size() * 2);
+				for (ArcadeLevel arcadeLevel : DataManager.UPGRADE_ARCADE_DATA.getUpgradeLevels())
 					writeS(arcadeLevel.getIcon());
 				break;
 			case 2: // open upgrade arcade

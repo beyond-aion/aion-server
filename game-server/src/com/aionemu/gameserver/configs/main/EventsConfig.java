@@ -14,7 +14,7 @@ public class EventsConfig {
 	public static List<String> ENABLED_EVENTS;
 
 	/**
-	 * Event Arcade Upgrade
+	 * Event Upgrade Arcade
 	 */
 	@Property(key = "gameserver.event.arcade.enable", defaultValue = "false")
 	public static boolean ENABLE_EVENT_ARCADE;

@@ -10,9 +10,9 @@ import com.aionemu.gameserver.configs.main.EventsConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.event.ArcadeProgress;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.templates.arcadeupgrade.ArcadeLevel;
-import com.aionemu.gameserver.model.templates.arcadeupgrade.ArcadeRewardItem;
-import com.aionemu.gameserver.model.templates.arcadeupgrade.ArcadeRewards;
+import com.aionemu.gameserver.model.templates.event.upgradearcade.ArcadeLevel;
+import com.aionemu.gameserver.model.templates.event.upgradearcade.ArcadeRewardItem;
+import com.aionemu.gameserver.model.templates.event.upgradearcade.ArcadeRewards;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_UPGRADE_ARCADE;
 import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -24,7 +24,7 @@ import com.aionemu.gameserver.world.World;
  * @author ginho1
  * @reworked Estrayl, Neon
  */
-public class ArcadeUpgradeService {
+public class UpgradeArcadeService {
 
 	private static final int FRENZY_POINTS_PER_TOKEN = 8;
 
@@ -58,15 +58,15 @@ public class ArcadeUpgradeService {
 	}
 
 	public void showRewardList(Player player) {
-		PacketSendUtility.sendPacket(player, new SM_UPGRADE_ARCADE(ArcadeUpgradeService.getInstance().getRewards()));
+		PacketSendUtility.sendPacket(player, new SM_UPGRADE_ARCADE(UpgradeArcadeService.getInstance().getRewards()));
 	}
 
 	public List<ArcadeRewards> getRewards() {
-		return DataManager.ARCADE_UPGRADE_DATA.getRewards();
+		return DataManager.UPGRADE_ARCADE_DATA.getRewards();
 	}
 
 	public ArcadeRewards getRewardsForLevel(int level) {
-		List<ArcadeRewards> arcadeRewards = DataManager.ARCADE_UPGRADE_DATA.getRewards();
+		List<ArcadeRewards> arcadeRewards = DataManager.UPGRADE_ARCADE_DATA.getRewards();
 		for (int i = arcadeRewards.size() - 1; i >= 0; i--) {
 			ArcadeRewards rewards = arcadeRewards.get(i);
 			if (level >= rewards.getMinLevel())
@@ -82,7 +82,7 @@ public class ArcadeUpgradeService {
 			AuditLogger.log(player, "tried to start next arcade try while the button was still greyed out");
 			return;
 		}
-		if (progress.getCurrentLevel() >= DataManager.ARCADE_UPGRADE_DATA.getMaxUpgradeLevel().getLevel()) {
+		if (progress.getCurrentLevel() >= DataManager.UPGRADE_ARCADE_DATA.getMaxUpgradeLevel().getLevel()) {
 			return;
 		} else if (progress.getCurrentLevel() == 0) {
 			if (!player.getInventory().decreaseByItemId(186000389, 1))
@@ -104,7 +104,7 @@ public class ArcadeUpgradeService {
 			}, delayMillis);
 		} else {
 			ThreadPoolManager.getInstance().schedule(() -> {
-				boolean canResume = progress.getResumeLevel() == 0 && progress.getCurrentLevel() >= DataManager.ARCADE_UPGRADE_DATA.getMinResumableLevel();
+				boolean canResume = progress.getResumeLevel() == 0 && progress.getCurrentLevel() >= DataManager.UPGRADE_ARCADE_DATA.getMinResumableLevel();
 				progress.setResumeLevel(canResume ? progress.getCurrentLevel() : 0);
 				progress.setCurrentLevel(1);
 				PacketSendUtility.sendPacket(player, new SM_UPGRADE_ARCADE(progress, canResume));
@@ -131,9 +131,9 @@ public class ArcadeUpgradeService {
 	}
 
 	private float getUpgradeChance(int currentLevel) {
-		ArcadeLevel lv = DataManager.ARCADE_UPGRADE_DATA.getUpgradeLevels().stream().filter(level -> level.getLevel() == currentLevel).findFirst()
+		ArcadeLevel lv = DataManager.UPGRADE_ARCADE_DATA.getUpgradeLevels().stream().filter(level -> level.getLevel() == currentLevel).findFirst()
 			.orElse(null);
-		return lv == null ? DataManager.ARCADE_UPGRADE_DATA.getMaxUpgradeLevel().getUpgradeChance() : lv.getUpgradeChance();
+		return lv == null ? DataManager.UPGRADE_ARCADE_DATA.getMaxUpgradeLevel().getUpgradeChance() : lv.getUpgradeChance();
 	}
 
 	public void resume(Player player) {
@@ -181,12 +181,12 @@ public class ArcadeUpgradeService {
 		}
 	}
 
-	public static ArcadeUpgradeService getInstance() {
+	public static UpgradeArcadeService getInstance() {
 		return SingletonHolder.instance;
 	}
 
 	private static class SingletonHolder {
 
-		protected static final ArcadeUpgradeService instance = new ArcadeUpgradeService();
+		protected static final UpgradeArcadeService instance = new UpgradeArcadeService();
 	}
 }
