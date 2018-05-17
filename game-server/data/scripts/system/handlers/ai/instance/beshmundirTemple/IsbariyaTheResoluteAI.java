@@ -28,7 +28,7 @@ import ai.AggressiveNpcAI;
 @AIName("isbariya")
 public class IsbariyaTheResoluteAI extends AggressiveNpcAI {
 
-	private int stage = 0;
+	private volatile int stage = 0;
 	private AtomicBoolean isStart = new AtomicBoolean(false);
 	private List<Point3D> soulLocations = new ArrayList<>();
 	private Future<?> basicSkillTask;
