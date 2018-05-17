@@ -96,7 +96,7 @@ public class AionConnection extends AConnection<AionServerPacket> {
 	 */
 	private final AtomicReference<Player> activePlayer = new AtomicReference<>();
 
-	private long lastPingTime;
+	private volatile long lastPingTime;
 	private volatile int pingFailCount;
 
 	private int nbInvalidPackets = 0;
