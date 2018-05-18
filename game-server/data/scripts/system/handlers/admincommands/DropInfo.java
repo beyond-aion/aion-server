@@ -51,7 +51,7 @@ public class DropInfo extends AdminCommand {
 		if (npcDrop != null) {
 			for (DropGroup dropGroup : npcDrop.getDropGroup()) {
 				if (dropGroup.getRace() == Race.PC_ALL || dropGroup.getRace() == player.getRace()) {
-					info += "\nCustom drop group: " + dropGroup.getName() + ", Max. drops: " + dropGroup.getMaxItems();
+					info += "\nCustom drop group: " + dropGroup.getName() + ", max drops: " + dropGroup.getMaxItems();
 					counts[1]++;
 					for (Drop drop : dropGroup.getDrop()) {
 						float finalChance = drop.getFinalChance(dropRate);
@@ -96,7 +96,9 @@ public class DropInfo extends AdminCommand {
 
 				List<GlobalDropItem> alloweditems = DropRegistrationService.getInstance().getAllowedItems(rule, npc, player);
 				if (!alloweditems.isEmpty()) {
-					info += "\n" + dropGroupPrefix + " drop group: \"" + rule.getRuleName() + "\", Max. drops: " + rule.getMaxDropRule();
+					info += "\n" + dropGroupPrefix + " drop group: \"" + rule.getRuleName() + "\", max drops: " + rule.getMaxDropRule();
+					if (rule.getMemberLimit() != 1)
+						info += ", member limit: " + rule.getMemberLimit();
 					info += "\n\tBase chance: " + rule.getChance() + "%, effective: " + chance + "%";
 					counts[1]++;
 					for (GlobalDropItem item : alloweditems) {
