@@ -9,7 +9,7 @@ import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
 
 /**
- * Client sends this every 30 seconds with no data
+ * Client sends this every 30 seconds with no data and once when entering world
  * 
  * @author Neon
  */

@@ -273,7 +273,7 @@ public final class PlayerEnterWorldService {
 		Account account = player.getAccount();
 		PlayerCommonData pcd = player.getCommonData();
 
-		client.resetPingFailCount(); // client sometimes falls below 5 minutes between pings (after changing characters ?)
+		client.resetPingFailCount(); // each character login triggers CM_PING_INGAME
 		activatePassiveSkillEffects(player); // before setClientConnection to avoid packet spam
 		player.setClientConnection(client);
 		if (!client.setActivePlayer(player))
@@ -295,9 +295,7 @@ public final class PlayerEnterWorldService {
 		// if player skipped some levels offline, learn missing skills and stuff
 		player.getController().onLevelChange(DAOManager.getDAO(PlayerDAO.class).getOldCharacterLevel(player.getObjectId()), player.getLevel());
 
-		/**
-		 * Energy of Repose must be calculated before sending SM_STATS_INFO
-		 */
+		// Energy of Repose must be calculated before sending SM_STATS_INFO
 		if (pcd.getLastOnline() != null) {
 			long secondsOffline = (System.currentTimeMillis() - pcd.getLastOnline().getTime()) / 1000;
 			if (secondsOffline > 10 * 60) // 10 mins offline = 0 salvation points
@@ -442,9 +440,7 @@ public final class PlayerEnterWorldService {
 			client.sendPacket(SM_SYSTEM_MESSAGE.STR_MSG_GLORY_POINT_LOSE_PERSONAL(player.getName(), player.getAbyssRank().getRank().getGpLossPerDay()));
 		}
 
-		/**
-		 * Trigger restore services on login.
-		 */
+		// Trigger restore services on login.
 		player.getLifeStats().updateCurrentStats();
 		player.getObserveController().notifyHPChangeObservers(player.getLifeStats().getCurrentHp());
 		SerialKillerService.getInstance().onLogin(player);
