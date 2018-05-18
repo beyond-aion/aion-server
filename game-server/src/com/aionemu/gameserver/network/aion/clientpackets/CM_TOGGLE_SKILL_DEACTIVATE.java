@@ -21,7 +21,8 @@ public class CM_TOGGLE_SKILL_DEACTIVATE extends AionClientPacket {
 
 	@Override
 	protected void readImpl() {
-		skillId = readUH();
+		skillId = readD();
+		readH();
 	}
 
 	@Override

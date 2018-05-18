@@ -40,6 +40,7 @@ public class CM_TELEPORT_SELECT extends AionClientPacket {
 	protected void readImpl() {
 		targetObjId = readD();
 		locId = readD(); // locationId
+		readH();
 	}
 
 	@Override
