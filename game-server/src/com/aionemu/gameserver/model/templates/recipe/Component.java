@@ -17,17 +17,11 @@ public class Component {
 	@XmlAttribute
 	protected int quantity;
 
-	/**
-	 * Gets the value of the itemid property.
-	 */
-	public Integer getItemid() {
+	public int getItemId() {
 		return itemid;
 	}
 
-	/**
-	 * Gets the value of the quantity property.
-	 */
-	public Integer getQuantity() {
+	public int getQuantity() {
 		return quantity;
 	}
 }

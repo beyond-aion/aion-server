@@ -205,8 +205,8 @@ public class CraftService {
 		}
 
 		for (Component component : recipeTemplate.getComponent()) {
-			if (player.getInventory().getItemCountByItemId(component.getItemid()) < component.getQuantity()) {
-				String itemL10n = DataManager.ITEM_DATA.getItemTemplate(getBonusReqItem(component.getItemid())).getL10n();
+			if (player.getInventory().getItemCountByItemId(component.getItemId()) < component.getQuantity()) {
+				String itemL10n = DataManager.ITEM_DATA.getItemTemplate(component.getItemId()).getL10n();
 				if (component.getQuantity() == 1)
 					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_COMBINE_NO_COMPONENT_ITEM_SINGLE(itemL10n));
 				else
@@ -216,7 +216,7 @@ public class CraftService {
 		}
 
 		for (Component component : recipeTemplate.getComponent())
-			player.getInventory().decreaseByItemId(component.getItemid(), component.getQuantity());
+			player.getInventory().decreaseByItemId(component.getItemId(), component.getQuantity());
 
 		return true;
 	}
