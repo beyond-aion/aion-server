@@ -30,7 +30,8 @@ public class CM_REMOVE_ALTERED_STATE extends AionClientPacket {
 		Effect effect = player.getEffectController().findBySkillId(skillId);
 		if (effect != null) {
 			if (!player.equals(effect.getEffector())) {
-				AuditLogger.log(player, "tried to remove a (de)buff he didn't cast himself");
+				AuditLogger.log(player, "tried to remove a (de)buff he didn't cast himself: " + skillId + " " + effect.getSkillName() + " (effector: "
+					+ effect.getEffector() + ")");
 			} else {
 				effect.endEffect();
 			}
