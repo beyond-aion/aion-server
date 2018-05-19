@@ -1,7 +1,6 @@
 package com.aionemu.gameserver.controllers.effect;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -268,8 +267,8 @@ public class EffectController {
 	 */
 	private void addBeforeLastElement(Map<String, Effect> mapToUpdate, Effect newEffect) {
 		Effect lastEffect = null;
-		for (Iterator<Effect> iter = mapToUpdate.values().iterator(); iter.hasNext();) {
-			lastEffect = iter.next();
+		for (Effect effect : mapToUpdate.values()) {
+			lastEffect = effect;
 		}
 
 		if (lastEffect != null && !(lastEffect.getEffector() instanceof Player))
@@ -281,10 +280,6 @@ public class EffectController {
 
 	protected Map<String, Effect> getMapForEffect(Effect effect) {
 		return getMapForEffect(effect.getSkillTemplate());
-	}
-
-	private Map<String, Effect> getMapForEffect(int skillId) {
-		return getMapForEffect(DataManager.SKILL_DATA.getSkillTemplate(skillId));
 	}
 
 	private Map<String, Effect> getMapForEffect(SkillTemplate template) {
@@ -409,7 +404,10 @@ public class EffectController {
 	}
 
 	public Effect findBySkillId(int skillId) {
-		return findFirstEffect(getMapForEffect(skillId), effect -> effect.getSkillId() == skillId);
+		SkillTemplate skillTemplate = DataManager.SKILL_DATA.getSkillTemplate(skillId);
+		if (skillTemplate == null)
+			throw new NullPointerException("Skill with ID " + skillId + " does not exist");
+		return findFirstEffect(getMapForEffect(skillTemplate), effect -> effect.getSkillId() == skillId);
 	}
 
 	/**
