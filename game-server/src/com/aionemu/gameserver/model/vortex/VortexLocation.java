@@ -117,17 +117,15 @@ public class VortexLocation implements ZoneHandler {
 	}
 
 	public void addZone(InvasionZoneInstance zone) {
-		this.zones.add(zone);
+		zones.add(zone);
 		zone.addHandler(this);
 	}
 
 	public boolean isInsideLocation(Creature creature) {
-		if (zones.isEmpty()) {
-			return false;
-		}
-		for (int i = 0; i < zones.size(); i++) {
-			if (zones.get(i).isInsideCreature(creature)) {
-				return true;
+		if (!zones.isEmpty()) {
+			for (InvasionZoneInstance zone : zones) {
+				if (zone.isInsideCreature(creature))
+					return true;
 			}
 		}
 		return false;
@@ -168,8 +166,7 @@ public class VortexLocation implements ZoneHandler {
 		if (!isInsideLocation(creature)) {
 			if (creature instanceof Kisk) {
 				kisks.remove(creature.getObjectId());
-			}
-			if (creature instanceof Player) {
+			} else if (creature instanceof Player) {
 				Player player = (Player) creature;
 
 				players.remove(player.getObjectId());

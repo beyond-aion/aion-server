@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.services.vortex;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -46,7 +47,7 @@ public class Invasion extends DimensionalVortex<VortexLocation> {
 	public void stopInvasion() {
 		getVortexLocation().setActiveVortex(null);
 		unregisterSiegeBossListeners();
-		for (Kisk kisk : getVortexLocation().getInvadersKisks().values()) {
+		for (Kisk kisk : new ArrayList<>(getVortexLocation().getInvadersKisks().values())) {
 			kisk.getController().die();
 		}
 		for (Player invader : invaders.values()) {
