@@ -15,7 +15,7 @@ import com.aionemu.gameserver.utils.PositionUtil;
  */
 public class MaxCountProperty {
 
-	public static final boolean set(final Skill skill, Properties properties) {
+	public static boolean set(final Skill skill, Properties properties) {
 		TargetRangeAttribute value = properties.getTargetType();
 		int maxCount = properties.getTargetMaxCount();
 		if (maxCount == 0 || skill.getEffectedList().size() <= maxCount)
@@ -37,8 +37,11 @@ public class MaxCountProperty {
 				skill.getEffectedList().clear();
 				nearestCreatures.forEach(c -> {
 					skill.getEffectedList().add(c);
-					if (value == TargetRangeAttribute.PARTY_WITHPET && c instanceof Player)
-						skill.getEffectedList().add(((Player) c).getSummon());
+					if (value == TargetRangeAttribute.PARTY_WITHPET && c instanceof Player) {
+						Summon summon = ((Player) c).getSummon();
+						if (summon != null)
+							skill.getEffectedList().add(summon);
+					}
 				});
 		}
 		return true;
