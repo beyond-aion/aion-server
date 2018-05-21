@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.function.Consumer;
 
 import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.model.Race;
@@ -31,27 +30,18 @@ public class SerialKillerService {
 	private final Map<Integer, SerialKiller> serialKillers = new ConcurrentHashMap<>();
 	private final Map<Integer, Long> cooldowns = new ConcurrentHashMap<>(); // cd for intruder scan
 	private final Collection<Integer> ldPlayers = new ArrayList<>();
-	private static final Map<Integer, WorldType> handledWorlds = new HashMap<>();
-
-	private enum WorldType {
-		ASMODIANS,
-		ELYOS,
-		USEALL;
-	}
+	private final Map<Integer, Race> handledWorlds = new HashMap<>();
 
 	private SerialKillerService() {
 	}
 
 	public void initSerialKillers() {
-		if (!CustomConfig.SERIALKILLER_ENABLED)
+		if (!CustomConfig.SERIALKILLER_ENABLED || CustomConfig.SERIALKILLER_WORLDS.isEmpty())
 			return;
 
-		for (String world : CustomConfig.SERIALKILLER_WORLDS.split(",")) {
-			if ("".equals(world))
-				break;
-			int worldId = Integer.parseInt(world);
-			int worldType = Integer.parseInt(String.valueOf(world.charAt(1)));
-			WorldType type = worldType > 0 ? worldType > 1 ? WorldType.ASMODIANS : WorldType.ELYOS : WorldType.USEALL;
+		for (int worldId : CustomConfig.SERIALKILLER_WORLDS) {
+			int worldType = worldId / 10000000 % 10; // the second digit in the map ID denotes the world type (0 = all, 1 = elyos, 2 = asmodians)
+			Race type = worldType > 0 ? worldType > 1 ? Race.ASMODIANS : Race.ELYOS : Race.PC_ALL;
 			handledWorlds.put(worldId, type);
 		}
 
@@ -60,35 +50,29 @@ public class SerialKillerService {
 			@Override
 			public void run() {
 				for (SerialKiller info : serialKillers.values()) {
-					if (!info.getOwner().isOnline() || !isHandledWorld(info.getOwner().getWorldId())) {
-						removeSerialKiller(info.getOwner());
-						getOrRemoveCooldown(info.getOwner().getObjectId());
+					Player player = World.getInstance().findPlayer(info.getPlayerId());
+					if (player == null || !player.isOnline() || !isHandledWorld(player.getWorldId())) {
+						removeSerialKiller(info.getPlayerId());
+						getOrRemoveCooldown(info.getPlayerId());
 						continue;
 					}
-					getOrRemoveCooldown(info.getOwner().getObjectId());
-					if (info.victims > 0) {
-						info.victims -= CustomConfig.SERIALKILLER_DECREASE;
+					getOrRemoveCooldown(player.getObjectId());
+					if (info.getVictims() > 0) {
+						info.setVictims(Math.max(0, info.getVictims() - CustomConfig.SERIALKILLER_DECREASE));
 
-						if (info.victims < 1) {
-							removeSerialKiller(info.getOwner());
+						if (info.getVictims() == 0) {
+							removeSerialKiller(player.getObjectId());
 							continue;
 						}
-						int newRank = getKillerRank(info.victims);
+						int newRank = getKillerRank(info.getVictims());
 
 						if (info.getRank() != newRank) {
 							info.setRank(newRank);
-							if (!ldPlayers.contains(info.getOwner().getObjectId())) {
-								boolean isEnemyWorld = isEnemyWorld(info.getOwner());
+							if (!ldPlayers.contains(player.getObjectId())) {
+								boolean isEnemyWorld = isEnemyWorld(player);
 
-								PacketSendUtility.sendPacket(info.getOwner(), new SM_SERIAL_KILLER(isEnemyWorld ? 1 : 8, info.getRank()));
-
-								info.getOwner().getKnownList().forEachPlayer(new Consumer<Player>() {
-
-									@Override
-									public void accept(Player observed) {
-										PacketSendUtility.sendPacket(observed, new SM_SERIAL_KILLER(isEnemyWorld ? 6 : 7, info.getOwner()));
-									}
-								});
+								PacketSendUtility.sendPacket(player, new SM_SERIAL_KILLER(isEnemyWorld ? 1 : 8, info.getRank()));
+								PacketSendUtility.broadcastPacket(player, new SM_SERIAL_KILLER(isEnemyWorld ? 6 : 7, player));
 							}
 						}
 					}
@@ -97,23 +81,28 @@ public class SerialKillerService {
 		}, CustomConfig.SERIALKILLER_REFRESH * 60000, CustomConfig.SERIALKILLER_REFRESH * 60000); // kills remove timer
 	}
 
-	public List<Player> getWorldKillers(Player player) {
+	private List<Player> getWorldKillers(Player player) {
 		List<Player> killers = new ArrayList<>();
 		for (SerialKiller sk : serialKillers.values()) {
-			int rank = player.getSKInfo().getLDRank() > player.getSKInfo().getRank() ? player.getSKInfo().getLDRank() : player.getSKInfo().getRank();
-			if (rank == 0) { // ok this should never happen but anyways
-				continue;
-			} else if (rank == 1 && sk.getRank() != 3) { // protectors rank 1 can only see intruders rank 3
-				continue;
-			} else if (rank == 2 && sk.getRank() == 1) {// protectors rank 2 can only see intruders rank 2 & 3
-				continue;
-			} else { // protectors rank 3 & stonespear owner can see all ranks
-				if (PositionUtil.isInRange(sk.getOwner(), player, 500))
-					if (sk.getOwner().getRace() != player.getRace())
-						killers.add(sk.getOwner());
+			if (canSee(player.getSKInfo(), sk)) {
+				Player intruder = World.getInstance().findPlayer(sk.getPlayerId());
+				if (intruder != null && intruder.getRace() != player.getRace() && PositionUtil.isInRange(intruder, player, 500))
+					killers.add(intruder);
 			}
 		}
 		return killers;
+	}
+
+	private boolean canSee(SerialKiller protector, SerialKiller intruder) {
+		int rank = Math.max(protector.getLDRank(), protector.getRank());
+		if (rank == 0) { // ok this should never happen but anyways
+			return false;
+		} else if (rank == 1) {
+			return intruder.getRank() == 3; // protectors rank 1 can only see intruders rank 3
+		} else if (rank == 2) {
+			return intruder.getRank() >= 2; // protectors rank 2 can only see intruders rank 2 & 3
+		}
+		return true; // protectors rank 3 & stonespear owner can see all ranks
 	}
 
 	public void onLogin(Player player) {
@@ -123,7 +112,6 @@ public class SerialKillerService {
 		if (serialKillerInfo != null) {
 			boolean isEnemyWorld = isEnemyWorld(player);
 			player.setSKInfo(serialKillerInfo);
-			player.getSKInfo().refreshOwner(player);
 			if (ldPlayers.contains(player.getObjectId())) {
 				PacketSendUtility.sendPacket(player, new SM_SERIAL_KILLER(7, player.getSKInfo().getLDRank(), getOrRemoveCooldown(player.getObjectId())));
 			} else {
@@ -141,7 +129,7 @@ public class SerialKillerService {
 		if (!CustomConfig.SERIALKILLER_ENABLED)
 			return;
 
-		removeSerialKiller(player);
+		removeSerialKiller(player.getObjectId());
 	}
 
 	// for Legion Dominion Zones
@@ -178,24 +166,21 @@ public class SerialKillerService {
 	}
 
 	// update victims rank
-	public void onKillSerialKiller(final Player killer, final Player victim) {
+	public void onKillSerialKiller(Player killer, Player victim) {
 		if (!CustomConfig.SERIALKILLER_ENABLED)
 			return;
 		if (isHandledWorld(victim.getWorldId())) {
 			SerialKiller info = victim.getSKInfo();
 			if (killer.getLevel() - victim.getLevel() <= CustomConfig.SERIALKILLER_LEVEL_DIFF) {
-				if (info.victims > 0) {
-					int rank = getKillerRank(--info.victims);
+				if (info.getVictims() > 0) {
+					info.setVictims(info.getVictims() - 1);
+					int rank = getKillerRank(info.getVictims());
 					boolean isEnemyWorld = isEnemyWorld(victim);
 					if (isEnemyWorld && info.getRank() == 3) { // old rank
-						World.getInstance().getWorldMap(victim.getWorldId()).getMainWorldMapInstance().forEachPlayer(new Consumer<Player>() {
-
-							@Override
-							public void accept(Player player) {
-								PacketSendUtility.sendPacket(player,
-									new SM_SYSTEM_MESSAGE(killer.getRace() == Race.ASMODIANS ? 1400141 : 1400142, killer.getName(), victim.getName()));
-							}
-						});
+						SM_SYSTEM_MESSAGE msg = killer.getRace() == Race.ASMODIANS
+							? SM_SYSTEM_MESSAGE.STR_MSG_SLAYER_LIGHT_DEATH_TO_B(killer.getName(), victim.getName())
+							: SM_SYSTEM_MESSAGE.STR_MSG_SLAYER_DARK_DEATH_TO_B(killer.getName(), victim.getName());
+						PacketSendUtility.broadcastToMap(victim, msg);
 					}
 					if (info.getRank() != rank) {
 						info.setRank(rank);
@@ -204,14 +189,7 @@ public class SerialKillerService {
 							victim.getSKInfo().getBuff().applyEffect(victim, isEnemyWorld ? "KILLER" : "GUARD", victim.getRace(), rank);
 
 							PacketSendUtility.sendPacket(victim, new SM_SERIAL_KILLER(isEnemyWorld ? 1 : 8, info.getRank()));
-
-							victim.getKnownList().forEachPlayer(new Consumer<Player>() {
-
-								@Override
-								public void accept(Player observed) {
-									PacketSendUtility.sendPacket(observed, new SM_SERIAL_KILLER(isEnemyWorld ? 6 : 9, victim));
-								}
-							});
+							PacketSendUtility.broadcastPacket(victim, new SM_SERIAL_KILLER(isEnemyWorld ? 6 : 9, victim));
 						}
 					}
 					serialKillers.putIfAbsent(victim.getObjectId(), info);
@@ -245,14 +223,15 @@ public class SerialKillerService {
 	}
 
 	// update killers rank
-	public void updateRank(final Player killer, Player victim) {
+	public void updateRank(Player killer, Player victim) {
 		if (!CustomConfig.SERIALKILLER_ENABLED)
 			return;
 		if (isHandledWorld(killer.getWorldId())) {
 			getOrRemoveCooldown(killer.getObjectId());
 			SerialKiller info = killer.getSKInfo();
 			if (killer.getLevel() - victim.getLevel() <= CustomConfig.SERIALKILLER_LEVEL_DIFF) {
-				int rank = getKillerRank(++info.victims);
+				info.setVictims(info.getVictims() + 1);
+				int rank = getKillerRank(info.getVictims());
 
 				if (info.getRank() != rank) {
 					boolean isEnemyWorld = isEnemyWorld(killer);
@@ -262,14 +241,7 @@ public class SerialKillerService {
 						killer.getSKInfo().getBuff().applyEffect(killer, isEnemyWorld ? "KILLER" : "GUARD", killer.getRace(), rank);
 
 						PacketSendUtility.sendPacket(killer, new SM_SERIAL_KILLER(isEnemyWorld ? 1 : 8, info.getRank()));
-
-						killer.getKnownList().forEachPlayer(new Consumer<Player>() {
-
-							@Override
-							public void accept(Player observed) {
-								PacketSendUtility.sendPacket(observed, new SM_SERIAL_KILLER(isEnemyWorld ? 6 : 9, killer));
-							}
-						});
+						PacketSendUtility.broadcastPacket(killer, new SM_SERIAL_KILLER(isEnemyWorld ? 6 : 9, killer));
 					}
 				}
 				serialKillers.putIfAbsent(killer.getObjectId(), info);
@@ -291,14 +263,7 @@ public class SerialKillerService {
 			}
 
 			PacketSendUtility.sendPacket(player, new SM_SERIAL_KILLER(isEnemyWorld ? 1 : 8, info.getRank()));
-
-			player.getKnownList().forEachPlayer(new Consumer<Player>() {
-
-				@Override
-				public void accept(Player observed) {
-					PacketSendUtility.sendPacket(observed, new SM_SERIAL_KILLER(isEnemyWorld ? 6 : 9, player));
-				}
-			});
+			PacketSendUtility.broadcastPacket(player, new SM_SERIAL_KILLER(isEnemyWorld ? 6 : 9, player));
 		}
 	}
 
@@ -325,21 +290,21 @@ public class SerialKillerService {
 	}
 
 	public boolean isEnemyWorld(Player player) {
-		if (isHandledWorld(player.getWorldId())) {
-			WorldType homeType = player.getRace().equals(Race.ASMODIANS) ? WorldType.ASMODIANS : WorldType.ELYOS;
-			return !handledWorlds.get(player.getWorldId()).equals(homeType);
-		}
-		return false;
+		Race race = handledWorlds.get(player.getWorldId());
+		return race != null && race != player.getRace();
 	}
 
-	public void removeSerialKiller(Player player) {
-		player.getSKInfo().victims = 0;
-		player.getSKInfo().setRank(0);
-		player.getSKInfo().setLDRank(0);
-		player.getSKInfo().getBuff().endEffect(player);
-		serialKillers.remove(player.getObjectId());
-		if (ldPlayers.contains(player.getObjectId()))
-			ldPlayers.remove(player.getObjectId());
+	public void removeSerialKiller(int playerId) {
+		SerialKiller sk = serialKillers.remove(playerId);
+		ldPlayers.remove(playerId);
+		if (sk != null) {
+			sk.setVictims(0);
+			sk.setRank(0);
+			sk.setLDRank(0);
+			Player player = World.getInstance().findPlayer(playerId);
+			if (player != null)
+				sk.getBuff().endEffect(player);
+		}
 	}
 
 	public static SerialKillerService getInstance() {

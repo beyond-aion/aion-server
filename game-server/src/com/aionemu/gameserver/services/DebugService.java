@@ -18,19 +18,12 @@ public class DebugService {
 
 	private static final int ANALYZE_PLAYERS_INTERVAL = 30 * 60 * 1000;
 
-	public static final DebugService getInstance() {
+	public static DebugService getInstance() {
 		return SingletonHolder.instance;
 	}
 
 	private DebugService() {
-		ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
-
-			@Override
-			public void run() {
-				analyzeWorldPlayers();
-			}
-
-		}, ANALYZE_PLAYERS_INTERVAL, ANALYZE_PLAYERS_INTERVAL);
+		ThreadPoolManager.getInstance().scheduleAtFixedRate(this::analyzeWorldPlayers, ANALYZE_PLAYERS_INTERVAL, ANALYZE_PLAYERS_INTERVAL);
 		log.info("DebugService started. Analyze interval: " + ANALYZE_PLAYERS_INTERVAL);
 	}
 

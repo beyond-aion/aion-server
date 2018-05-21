@@ -7,23 +7,19 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
  */
 public class SerialKiller {
 
-	private Player owner;
+	private final int playerId;
 	private int killerRank;
 	private int ldRank;
-	public int victims;
+	private int victims;
 	private SerialKillerDebuff buff;
 
 	public SerialKiller(Player owner) {
-		this.owner = owner;
+		playerId = owner.getObjectId();
 		buff = new SerialKillerDebuff();
 	}
 
-	public void refreshOwner(Player player) {
-		owner = player;
-	}
-
-	public Player getOwner() {
-		return owner;
+	public int getPlayerId() {
+		return playerId;
 	}
 
 	public void setRank(int rank) {
@@ -33,15 +29,23 @@ public class SerialKiller {
 	public void setLDRank(int rank) {
 		ldRank = rank;
 	}
-	
+
 	public int getRank() {
 		return killerRank;
 	}
-	
+
 	public int getLDRank() {
 		return ldRank;
 	}
-	
+
+	public int getVictims() {
+		return victims;
+	}
+
+	public void setVictims(int victims) {
+		this.victims = victims;
+	}
+
 	public SerialKillerDebuff getBuff() {
 		return buff;
 	}

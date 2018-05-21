@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.configs.main;
 
+import java.util.Set;
+
 import org.quartz.CronExpression;
 
 import com.aionemu.commons.configuration.Property;
@@ -208,7 +210,7 @@ public class CustomConfig {
 	@Property(key = "gameserver.serialkiller.enable", defaultValue = "true")
 	public static boolean SERIALKILLER_ENABLED;
 	@Property(key = "gameserver.serialkiller.handledworlds", defaultValue = "210020000,210040000,210050000,210070000,220020000,220040000,220070000,220080000")
-	public static String SERIALKILLER_WORLDS = "";
+	public static Set<Integer> SERIALKILLER_WORLDS;
 	@Property(key = "gameserver.serialkiller.kills.refresh", defaultValue = "10")
 	public static int SERIALKILLER_REFRESH;
 	@Property(key = "gameserver.serialkiller.kills.decrease", defaultValue = "1")
