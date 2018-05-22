@@ -41,8 +41,27 @@ public class ItemRandomBonusData {
 		randomBonusSets = null;
 	}
 
+	/**
+	 * NCSoft in their wisdom decided to implement different stat bonus sets with identical content and use one for the base item and the other one for
+	 * the purified version of that item. To ensure that purification does not trigger a re-roll of random bonus stats, we need this method 
+	 */
+	public boolean areBonusSetsEqual(StatBonusType statBonusType, int statBonusSetId1, int statBonusSetId2) {
+		if (statBonusSetId1 == statBonusSetId2)
+			return true;
+		RandomBonusSet bonusSet1 = getBonusSet(statBonusType, statBonusSetId1);
+		RandomBonusSet bonusSet2 = getBonusSet(statBonusType, statBonusSetId2);
+		if (bonusSet1 == null || bonusSet2 == null)
+			return bonusSet1 == bonusSet2;
+		// if size comparison isn't sufficient we should override ModifiersTemplate.equals() and check if both lists are equal
+		return bonusSet1.getModifiers().size() == bonusSet2.getModifiers().size();
+	}
+
+	private RandomBonusSet getBonusSet(StatBonusType statBonusType, int statBonusSetId) {
+		return bonusData.get(statBonusType).get(statBonusSetId);
+	}
+
 	public int selectRandomBonusNumber(StatBonusType statBonusType, int statBonusSetId) {
-		RandomBonusSet bonus = bonusData.get(statBonusType).get(statBonusSetId);
+		RandomBonusSet bonus = getBonusSet(statBonusType, statBonusSetId);
 		if (bonus == null)
 			return 0;
 
@@ -65,7 +84,7 @@ public class ItemRandomBonusData {
 	}
 
 	public ModifiersTemplate getTemplate(StatBonusType statBonusType, int statBonusSetId, int statBonusId) {
-		RandomBonusSet bonus = bonusData.get(statBonusType).get(statBonusSetId);
+		RandomBonusSet bonus = getBonusSet(statBonusType, statBonusSetId);
 		return bonus == null ? null : bonus.getModifiers().get(statBonusId - 1);
 	}
 
