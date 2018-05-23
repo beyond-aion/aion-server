@@ -9,6 +9,8 @@ import com.aionemu.gameserver.controllers.observer.ActionObserver;
 import com.aionemu.gameserver.controllers.observer.ObserverType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.team.TeamMember;
+import com.aionemu.gameserver.model.team.TemporaryPlayerTeam;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.LOG;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.TYPE;
 import com.aionemu.gameserver.skillengine.model.Effect;
@@ -30,37 +32,25 @@ public class HealCastorOnAttackedEffect extends EffectTemplate {
 	}
 
 	@Override
-	public void calculate(Effect effect) {
-		if (effect.getEffected() instanceof Player)
-			super.calculate(effect, null, null);
-	}
-
-	@Override
 	public void startEffect(final Effect effect) {
 		super.startEffect(effect);
 
-		final Player player = (Player) effect.getEffector();
-		final int valueWithDelta = value + delta * effect.getSkillLevel();
+		Player player = (Player) effect.getEffector();
+		int valueWithDelta = value + delta * effect.getSkillLevel();
 
 		ActionObserver observer = new ActionObserver(ObserverType.ATTACKED) {
 
 			@Override
 			public void attacked(Creature creature, int skillId) {
-				if (player.getPlayerGroup() != null) {
-					for (Player p : player.getPlayerGroup().getMembers()) {
-						if (PositionUtil.isInRange(effect.getEffected(), p, range))
-							p.getLifeStats().increaseHp(TYPE.HP, valueWithDelta, effect.getSkillId(), LOG.REGULAR);
-					}
-				} else if (player.isInAlliance()) {
-					for (Player p : player.getPlayerAllianceGroup().getMembers()) {
-						if (!p.isOnline())
-							continue;
+				TemporaryPlayerTeam<? extends TeamMember<Player>> group = player.getCurrentGroup();
+				if (group != null) {
+					for (Player p : group.getOnlineMembers()) {
 						if (PositionUtil.isInRange(effect.getEffected(), p, range))
 							p.getLifeStats().increaseHp(TYPE.HP, valueWithDelta, effect.getSkillId(), LOG.REGULAR);
 					}
 				} else {
 					if (PositionUtil.isInRange(effect.getEffected(), player, range))
-						effect.getEffected().getLifeStats().increaseHp(TYPE.HP, valueWithDelta, effect.getSkillId(), LOG.REGULAR);
+						effect.getEffector().getLifeStats().increaseHp(TYPE.HP, valueWithDelta, effect.getSkillId(), LOG.REGULAR);
 				}
 			}
 		};
