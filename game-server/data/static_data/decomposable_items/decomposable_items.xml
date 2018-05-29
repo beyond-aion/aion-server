@@ -30074,7 +30074,11 @@
 	<decomposable item_id="188053611" /><!-- [Event] Wing Box -->
 	<decomposable item_id="188053612" /><!-- [Event] Small School Uniform Box -->
 	<decomposable item_id="188053613" /><!-- [Event] Critical Hit Boost Bundle -->
-	<decomposable item_id="188053614" /><!-- Illusion Godstone Bundle -->
+	<decomposable item_id="188053614"><!-- Illusion Godstone Bundle -->
+		<items>
+			<random_item type="ILLUSION_GODSTONE" />
+		</items>
+	</decomposable>
 	<decomposable item_id="188053615" /><!-- Buff Pet Bundle -->
 	<decomposable item_id="188053616"><!-- Tidal Idian Bundle -->
 		<items>
