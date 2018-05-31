@@ -15,7 +15,7 @@ import com.aionemu.gameserver.utils.audit.AuditLogger;
  */
 public class CM_PING_INGAME extends AionClientPacket {
 
-	public static final int CLIENT_PING_INTERVAL = 30 * 1000; // client sends this packet every 30 seconds
+	public static final int CLIENT_PING_INTERVAL = 30 * 1000 + 33; // client sends this packet every ~30.033 seconds
 
 	public CM_PING_INGAME(int opcode, Set<State> validStates) {
 		super(opcode, validStates);
@@ -38,10 +38,10 @@ public class CM_PING_INGAME extends AionClientPacket {
 				if (getConnection().increaseAndGetPingFailCount() == 3) { // CM_PING_INGAME + CM_PING both update ping time, so don't immediately trigger
 					if (SecurityConfig.PINGCHECK_KICK) {
 						AuditLogger.log(player,
-								"Possible time/speed hack (client ping interval: " + pingInterval + "/" + CLIENT_PING_INTERVAL + "), kicking player");
+								"possibly using time/speed hack (client ping interval: " + pingInterval + "/" + CLIENT_PING_INTERVAL + "), kicking player");
 						getConnection().close();
 					} else {
-						AuditLogger.log(player, "Possible time/speed hack (client ping interval: " + pingInterval + "/" + CLIENT_PING_INTERVAL + ")");
+						AuditLogger.log(player, "possibly using time/speed hack (client ping interval: " + pingInterval + "/" + CLIENT_PING_INTERVAL + ")");
 						getConnection().resetPingFailCount();
 					}
 				}

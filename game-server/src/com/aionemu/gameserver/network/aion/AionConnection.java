@@ -434,9 +434,10 @@ public class AionConnection extends AConnection<AionServerPacket> {
 
 		@Override
 		public void run() {
-			int expectedPingInterval = getActivePlayer() == null ? CM_PING.CLIENT_PING_INTERVAL : CM_PING_INGAME.CLIENT_PING_INTERVAL;
-			if (System.currentTimeMillis() - getLastPingTime() > expectedPingInterval * 2) {
-				log.info("Closing hanged up connection of client: " + AionConnection.this);
+			int expectedPingIntervalMillis = getActivePlayer() == null ? CM_PING.CLIENT_PING_INTERVAL : CM_PING_INGAME.CLIENT_PING_INTERVAL;
+			long millisSinceLastPing = System.currentTimeMillis() - getLastPingTime();
+			if (millisSinceLastPing - 2000 > expectedPingIntervalMillis * 2) {
+				log.info("Closing hanged up connection of client: " + AionConnection.this + ", milliseconds since last ping: " + millisSinceLastPing);
 				close();
 			}
 		}
