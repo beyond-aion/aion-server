@@ -26,9 +26,9 @@ public class AionClientPacketFactory {
 
 	static {
 		try {
-			// packets.put(0x0A5, new PacketInfo<>(CM_LOGIN_OUT.class, State.AUTHED, State.IN_GAME));
+			packets.put(0x0A5, new PacketInfo<>(CM_DISCONNECT.class, State.AUTHED, State.IN_GAME));
 			packets.put(0x0A6, new PacketInfo<>(CM_QUIT.class, State.AUTHED, State.IN_GAME));
-			packets.put(0x0A7, new PacketInfo<>(CM_MAY_QUIT.class, State.AUTHED, State.IN_GAME));
+			packets.put(0x0A7, new PacketInfo<>(CM_MAY_QUIT.class, State.IN_GAME));
 			packets.put(0x0A8, new PacketInfo<>(CM_REVIVE.class, State.IN_GAME));
 			packets.put(0x0AA, new PacketInfo<>(CM_CHARACTER_EDIT.class, State.AUTHED));
 			packets.put(0x0AB, new PacketInfo<>(CM_ENTER_WORLD.class, State.AUTHED));
