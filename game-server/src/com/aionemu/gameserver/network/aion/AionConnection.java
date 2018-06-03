@@ -44,9 +44,6 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
  */
 public class AionConnection extends AConnection<AionServerPacket> {
 
-	/**
-	 * Logger for this class.
-	 */
 	private static final Logger log = LoggerFactory.getLogger(AionConnection.class);
 
 	private static final PacketProcessor<AionConnection> packetProcessor = new PacketProcessor<>(NetworkConfig.PACKET_PROCESSOR_MIN_THREADS,
@@ -96,18 +93,17 @@ public class AionConnection extends AConnection<AionServerPacket> {
 	 */
 	private final AtomicReference<Player> activePlayer = new AtomicReference<>();
 
+	private volatile long lastClientMessageTime;
 	private volatile long lastPingTime;
 	private volatile int pingFailCount;
 
-	private int nbInvalidPackets = 0;
-	// TODO! why there is no any comments what is this doing? i have no clue what is it for [Nemesiss]
-	private final static int MAX_INVALID_PACKETS = 3;
+	private final static int MAX_CORRUPT_PACKETS_BEFORE_DISCONNECT = 3;
+	private volatile int corruptPackets = 0;
 
 	private String macAddress;
 	private String hddSerial;
 
-	/** Ping checker - for detecting hanged up connections **/
-	private PingChecker pingChecker;
+	private ConnectionAliveChecker connectionAliveChecker;
 
 	/** packet flood filter **/
 	private int[] pff;
@@ -128,7 +124,7 @@ public class AionConnection extends AConnection<AionServerPacket> {
 		String ip = getIP();
 		log.debug("connection from: " + ip);
 
-		pingChecker = new PingChecker();
+		connectionAliveChecker = new ConnectionAliveChecker();
 
 		if (SecurityConfig.PFF_ENABLE) {
 			pff = PacketFloodFilter.getInstance().getPackets();
@@ -166,21 +162,20 @@ public class AionConnection extends AConnection<AionServerPacket> {
 	protected final boolean processData(ByteBuffer data) {
 		try {
 			if (!crypt.decrypt(data)) {
-				nbInvalidPackets++;
-				log.debug("[" + nbInvalidPackets + "/" + MAX_INVALID_PACKETS + "] Decrypt fail, client packet passed...");
-				if (nbInvalidPackets >= MAX_INVALID_PACKETS) {
-					log.warn("Decrypt fail!");
+				if (++corruptPackets >= MAX_CORRUPT_PACKETS_BEFORE_DISCONNECT) {
+					log.warn("Client packet decryption failed " + corruptPackets + " times, disconnecting " + this);
 					return false;
 				}
+				log.debug("[" + corruptPackets + "/" + MAX_CORRUPT_PACKETS_BEFORE_DISCONNECT + "] Decrypt fail, client packet passed...");
 				return true;
 			}
 		} catch (Exception ex) {
-			log.error("Exception caught during decrypt!" + ex.getMessage());
+			log.error(null, ex);
 			return false;
 		}
 
 		if (data.remaining() < 5) {// op + static code + op == 5 bytes
-			log.warn("Received fake packet from " + this);
+			log.warn("Received fake packet from " + this + ", disconnecting");
 			return false;
 		}
 
@@ -188,25 +183,18 @@ public class AionConnection extends AConnection<AionServerPacket> {
 
 		// Execute packet only if packet exist (!= null) and read was ok.
 		if (pck != null) {
+			lastClientMessageTime = System.currentTimeMillis();
 			if (SecurityConfig.PFF_ENABLE) {
 				int opcode = pck.getOpCode();
-				if (pff.length > opcode) {
-					if (pff[opcode] > 0) {
-						long last = this.pffRequests[opcode];
-						if (last == 0)
-							this.pffRequests[opcode] = System.currentTimeMillis();
-						else {
-							long diff = System.currentTimeMillis() - last;
-							if (diff < pff[opcode]) {
-								log.warn(this + " has flooding " + pck.getClass().getSimpleName() + " " + diff);
-								switch (SecurityConfig.PFF_LEVEL) {
-									case 1: // disconnect
-										return false;
-									case 2:
-										break;
-								}
-							} else
-								this.pffRequests[opcode] = System.currentTimeMillis();
+				if (pff.length > opcode && pff[opcode] > 0) {
+					long last = pffRequests[opcode];
+					pffRequests[opcode] = lastClientMessageTime;
+					if (last > 0) {
+						long diff = lastClientMessageTime - last;
+						if (diff < pff[opcode]) {
+							log.warn(this + " is flooding " + pck.getClass().getSimpleName() + " (last diff: " + diff + "ms)");
+							if (SecurityConfig.PFF_LEVEL == 1) // disconnect
+								return false;
 						}
 					}
 				}
@@ -261,7 +249,7 @@ public class AionConnection extends AConnection<AionServerPacket> {
 
 	@Override
 	protected final void onDisconnect() {
-		pingChecker.stop();
+		connectionAliveChecker.stop();
 		if (GameServer.isShuttingDown()) { // client crashing during countdown
 			safeLogout(); // instant synchronized leaveWorld to ensure completion before onServerClose
 			return;
@@ -379,6 +367,10 @@ public class AionConnection extends AConnection<AionServerPacket> {
 		return activePlayer.get();
 	}
 
+	public long getLastClientMessageTime() {
+		return lastClientMessageTime;
+	}
+
 	public long getLastPingTime() {
 		return lastPingTime;
 	}
@@ -417,14 +409,14 @@ public class AionConnection extends AConnection<AionServerPacket> {
 			+ ", getIP()=" + getIP() + "]";
 	}
 
-	private class PingChecker implements Runnable {
+	private class ConnectionAliveChecker implements Runnable {
 
 		private ScheduledFuture<?> task;
 
-		private PingChecker() {
-			if (AionConnection.this.pingChecker != null)
-				throw new IllegalStateException("PingChecker for " + AionConnection.this + " is already assigned.");
-			int checkIntervalMillis = Math.min(CM_PING_INGAME.CLIENT_PING_INTERVAL, CM_PING.CLIENT_PING_INTERVAL); 
+		private ConnectionAliveChecker() {
+			if (connectionAliveChecker != null)
+				throw new IllegalStateException("ConnectionAliveChecker for " + AionConnection.this + " is already assigned.");
+			int checkIntervalMillis = Math.min(CM_PING_INGAME.CLIENT_PING_INTERVAL, CM_PING.CLIENT_PING_INTERVAL);
 			task = ThreadPoolManager.getInstance().scheduleAtFixedRate(this, checkIntervalMillis * 2, checkIntervalMillis);
 		}
 
@@ -435,9 +427,10 @@ public class AionConnection extends AConnection<AionServerPacket> {
 		@Override
 		public void run() {
 			int expectedPingIntervalMillis = getActivePlayer() == null ? CM_PING.CLIENT_PING_INTERVAL : CM_PING_INGAME.CLIENT_PING_INTERVAL;
-			long millisSinceLastPing = System.currentTimeMillis() - getLastPingTime();
-			if (millisSinceLastPing - 2000 > expectedPingIntervalMillis * 2) {
-				log.info("Closing hanged up connection of client: " + AionConnection.this + ", milliseconds since last ping: " + millisSinceLastPing);
+			// just checking lastPingTime is not sufficient, CM_PING_INGAME interval seems to vary or skip from time to time / under certain circumstances
+			long millisSinceLastClientPacket = System.currentTimeMillis() - lastClientMessageTime;
+			if (millisSinceLastClientPacket - 5000 > expectedPingIntervalMillis) {
+				log.info("Closing hanged up connection of " + AionConnection.this + " (last sign of life was " + millisSinceLastClientPacket + "ms ago)");
 				close();
 			}
 		}

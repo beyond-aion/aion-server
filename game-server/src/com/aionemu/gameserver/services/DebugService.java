@@ -38,11 +38,11 @@ public class DebugService {
 				continue;
 			}
 
-			// Check CM_PING packet
-			long lastPingTimeMS = connection.getLastPingTime();
-			long pingInterval = System.currentTimeMillis() - lastPingTimeMS;
-			if (lastPingTimeMS > 0 && pingInterval > CM_PING_INGAME.CLIENT_PING_INTERVAL * 2)
-				log.warn("[DEBUG SERVICE] Found {} with large ping interval: Spawned {}, PingMS {}", player, player.isSpawned(), pingInterval);
+			if (connection.getLastPingTime() > 0) {
+				long pingInterval = System.currentTimeMillis() - connection.getLastPingTime();
+				if (pingInterval - 5000 > CM_PING_INGAME.CLIENT_PING_INTERVAL)
+					log.warn("[DEBUG SERVICE] Found {} with large ping interval: Spawned {}, PingMS {}", player, player.isSpawned(), pingInterval);
+			}
 		}
 
 		log.info("Analysis of world players finished");
