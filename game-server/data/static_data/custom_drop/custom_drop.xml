@@ -4073,7 +4073,7 @@
 			<drop item_id="169230008" chance="100" no_reduce="true" /><!-- [Event] Dye: True Black -->
 		</drop_group>
 	</npc_drop>
-	<!-- Permium Treasure Box -->
+	<!-- Premium Treasure Box -->
 	<npc_drop npc_id="831785">
 		<drop_group race="PC_ALL"><!-- Crafting Materials -->
 			<drop item_id="169405254" chance="100" min_amount="3" max_amount="3" no_reduce="true" /><!-- Earth Trace -->
@@ -4087,6 +4087,7 @@
 			<drop item_id="152000914" chance="100" min_amount="10" max_amount="10" no_reduce="true" /><!-- Brilliant Magical Aether -->
 		</drop_group>
 		<drop_group race="PC_ALL"><!-- Crafting Materials -->
+			<drop item_id="169405252" chance="100" min_amount="3" max_amount="3" no_reduce="true" /><!-- Fury Powder -->
 			<drop item_id="152012588" chance="100" min_amount="3" max_amount="3" no_reduce="true" /><!-- Wind Fragment -->
 			<drop item_id="152012585" chance="100" min_amount="3" max_amount="3" no_reduce="true" /><!-- Wind Mote -->
 			<drop item_id="152012589" chance="100" min_amount="3" max_amount="3" no_reduce="true" /><!-- Wind Source -->
