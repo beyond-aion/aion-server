@@ -644,6 +644,23 @@
 			<gd_item id="166500002" /><!-- Amplification Stone -->
 		</gd_items>
 	</gd_rule>
+	<gd_rule rule_name="Tempering Solution (World Drop)" base_chance="0.05" fixed_chance="true">
+		<gd_ratings>
+			<gd_rating rating="NORMAL" />
+			<gd_rating rating="ELITE" />
+			<gd_rating rating="HERO" />
+			<gd_rating rating="LEGENDARY" />
+		</gd_ratings>
+		<gd_worlds>
+			<gd_world wd_type="BALAUREA" />
+			<gd_world wd_type="BALAUREA_HIGH" />
+			<gd_world wd_type="BALAUREA_HIGH_INSTANCE" />
+			<gd_world wd_type="BALAUREA_INSTANCE" />
+		</gd_worlds>
+		<gd_items>
+			<gd_item id="166030005" /><!-- Tempering Solution -->
+		</gd_items>
+	</gd_rule>
 	<gd_rule rule_name="Omega Enchantment Stone" base_chance="1" fixed_chance="true">
 		<gd_ratings>
 			<gd_rating rating="NORMAL" />
