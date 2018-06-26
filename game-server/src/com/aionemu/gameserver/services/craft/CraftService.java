@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.services.craft;
 
+import java.util.Map;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,6 +16,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Rates;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.model.templates.item.ItemTemplate;
 import com.aionemu.gameserver.model.templates.recipe.Component;
+import com.aionemu.gameserver.model.templates.recipe.ComponentsData;
 import com.aionemu.gameserver.model.templates.recipe.RecipeTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_CRAFT_ANIMATION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_CRAFT_UPDATE;
@@ -99,14 +102,14 @@ public class CraftService {
 	 * @param recipeId
 	 * @param targetObjId
 	 */
-	public static void startCrafting(Player player, int recipeId, int targetObjId, int craftType) {
+	public static void startCrafting(Player player, int recipeId, int targetObjId, int craftType, Map<Integer, Long> sendMaterialsData) {
 
 		RecipeTemplate recipeTemplate = DataManager.RECIPE_DATA.getRecipeTemplateById(recipeId);
 		int skillId = recipeTemplate.getSkillId();
 		VisibleObject target = player.getKnownList().getObject(targetObjId);
 		ItemTemplate itemTemplate = DataManager.ITEM_DATA.getItemTemplate(recipeTemplate.getProductId());
 
-		if (!checkCraft(player, recipeTemplate, skillId, target, itemTemplate, craftType)) {
+		if (!checkCraft(player, recipeTemplate, skillId, target, itemTemplate, craftType, sendMaterialsData)) {
 			sendCancelCraft(player, skillId, targetObjId, itemTemplate);
 			return;
 		}
@@ -137,7 +140,7 @@ public class CraftService {
 	}
 
 	private static boolean checkCraft(Player player, RecipeTemplate recipeTemplate, int skillId, VisibleObject target, ItemTemplate itemTemplate,
-		int craftType) {
+		int craftType, Map<Integer, Long> sendMaterialsData) {
 
 		if (recipeTemplate == null) {
 			return false;
@@ -198,31 +201,50 @@ public class CraftService {
 			return false;
 		}
 
+		for (ComponentsData componentsData : recipeTemplate.getComponents()) {
+			Component firstComponent = componentsData.getComponent().get(0);
+			if (!sendMaterialsData.containsKey(firstComponent.getItemId()))
+				continue;
+			for (Component component : componentsData.getComponent()) {
+				long availableComponentCount = player.getInventory().getItemCountByItemId(component.getItemId());
+				long sendComponentCount = sendMaterialsData.get(component.getItemId());
+				if (availableComponentCount != sendComponentCount) {
+					AuditLogger.log(player, "tried to craft with not matching component count [recipeID=" + recipeTemplate.getItemId() + ", componentID="
+						+ component.getItemId() + ", sendcomponentCount=" + sendComponentCount + ", availableComponentCount=" + availableComponentCount + "]");
+					return false;
+				}
+				if (availableComponentCount < component.getQuantity()) {
+					String itemL10n = DataManager.ITEM_DATA.getItemTemplate(component.getItemId()).getL10n();
+					if (component.getQuantity() == 1)
+						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_COMBINE_NO_COMPONENT_ITEM_SINGLE(itemL10n));
+					else
+						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_COMBINE_NO_COMPONENT_ITEM_MULTIPLE(component.getQuantity(), itemL10n));
+					return false;
+				}
+			}
+			break;
+		}
+
 		if (craftType == 1 && !player.getInventory().decreaseByItemId(getBonusReqItem(skillId), 1)) {
 			PacketSendUtility.sendPacket(player,
 				SM_SYSTEM_MESSAGE.STR_COMBINE_NO_COMPONENT_ITEM_SINGLE(DataManager.ITEM_DATA.getItemTemplate(getBonusReqItem(skillId)).getL10n()));
 			return false;
 		}
 
-		for (Component component : recipeTemplate.getComponent()) {
-			if (player.getInventory().getItemCountByItemId(component.getItemId()) < component.getQuantity()) {
-				String itemL10n = DataManager.ITEM_DATA.getItemTemplate(component.getItemId()).getL10n();
-				if (component.getQuantity() == 1)
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_COMBINE_NO_COMPONENT_ITEM_SINGLE(itemL10n));
-				else
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_COMBINE_NO_COMPONENT_ITEM_MULTIPLE(component.getQuantity(), itemL10n));
-				return false;
-			}
-		}
+		for (ComponentsData componentsData : recipeTemplate.getComponents()) {
+			Component firstComponent = componentsData.getComponent().get(0);
+			if (!sendMaterialsData.containsKey(firstComponent.getItemId()))
+				continue;
 
-		for (Component component : recipeTemplate.getComponent())
-			player.getInventory().decreaseByItemId(component.getItemId(), component.getQuantity());
+			for (Component component : componentsData.getComponent())
+				player.getInventory().decreaseByItemId(component.getItemId(), component.getQuantity());
+			break;
+		}
 
 		return true;
 	}
 
 	private static void sendCancelCraft(Player player, int skillId, int targetObjId, ItemTemplate itemTemplate) {
-
 		PacketSendUtility.sendPacket(player, new SM_CRAFT_UPDATE(skillId, itemTemplate, 0, 0, 4, 0, 0));
 		PacketSendUtility.broadcastPacket(player, new SM_CRAFT_ANIMATION(player.getObjectId(), targetObjId, 0, 2), true);
 	}

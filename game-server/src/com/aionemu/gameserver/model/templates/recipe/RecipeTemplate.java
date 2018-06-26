@@ -64,11 +64,8 @@ public class RecipeTemplate implements L10n {
 	 * <p>
 	 * Objects of the following type(s) are allowed in the list {@link Component}
 	 */
-	public List<Component> getComponent() {
-		if (componentsData == null) {
-			return Collections.<Component> emptyList();
-		}
-		return this.componentsData.get(0).getComponent(); // to do xTz
+	public List<ComponentsData> getComponents() {
+		return componentsData == null ? Collections.<ComponentsData> emptyList() : componentsData;
 	}
 
 	public Integer getComboProduct(int num) {

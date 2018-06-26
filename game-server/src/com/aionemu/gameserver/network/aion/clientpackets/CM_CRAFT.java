@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 
 import com.aionemu.gameserver.GameServer;
@@ -19,13 +21,10 @@ public class CM_CRAFT extends AionClientPacket {
 	private int targetTemplateId;
 	private int recipeId;
 	private int targetObjId;
-	@SuppressWarnings("unused")
 	private int materialsCount;
 	private int craftType;
+	private Map<Integer, Long> materialsData = new HashMap<>();
 
-	/**
-	 * @param opcode
-	 */
 	public CM_CRAFT(int opcode, Set<State> validStates) {
 		super(opcode, validStates);
 	}
@@ -38,11 +37,8 @@ public class CM_CRAFT extends AionClientPacket {
 		targetObjId = readD();
 		materialsCount = readUH();
 		craftType = readUC();
-		// un used
-		// for (int i = 0; i < materialsCount; i++) {
-		// readD(); // materialId
-		// readQ(); // materialCount
-		// }
+		for (int i = 0; i < materialsCount; i++)
+			materialsData.put(readD(), readQ());
 	}
 
 	@Override
@@ -63,6 +59,6 @@ public class CM_CRAFT extends AionClientPacket {
 				return;
 		}
 
-		CraftService.startCrafting(player, recipeId, targetObjId, craftType);
+		CraftService.startCrafting(player, recipeId, targetObjId, craftType, materialsData);
 	}
 }
