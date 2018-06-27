@@ -7,19 +7,22 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * @author Ranastic
- * @reworked Navyan
+ * @reworked Navyan, Estrayl
  */
-@XmlRootElement(name = "NeedAbyssPoint")
+@XmlRootElement(name = "RequiredMaterial")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class NeedAbyssPoint {
+public class RequiredMaterial {
 
-	@XmlAttribute(name = "count")
-	private int count;
+	@XmlAttribute(name = "item_id")
+	private int itemId;
+	@XmlAttribute(name = "item_count")
+	private int itemCount;
 
-	/**
-	 * @return the count
-	 */
-	public int getCount() {
-		return count;
+	public int getItemId() {
+		return itemId;
+	}
+
+	public int getItemCount() {
+		return itemCount;
 	}
 }

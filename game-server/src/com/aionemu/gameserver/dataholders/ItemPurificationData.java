@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 import com.aionemu.gameserver.model.templates.item.purification.ItemPurificationTemplate;
-import com.aionemu.gameserver.model.templates.item.purification.PurificationResultItem;
+import com.aionemu.gameserver.model.templates.item.purification.PurificationResult;
 
 import gnu.trove.map.hash.TIntObjectHashMap;
 
@@ -29,7 +29,7 @@ public class ItemPurificationData {
 	@XmlTransient
 	private TIntObjectHashMap<ItemPurificationTemplate> itemPurificationSets;
 	@XmlTransient
-	private Map<Integer, Map<Integer, PurificationResultItem>> possibleResultItems;
+	private Map<Integer, Map<Integer, PurificationResult>> possibleResultItems;
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		itemPurificationSets = new TIntObjectHashMap<>();
@@ -39,27 +39,20 @@ public class ItemPurificationData {
 			itemPurificationSets.put(purificationTemplate.getBaseItemId(), purificationTemplate);
 
 			possibleResultItems.put(purificationTemplate.getBaseItemId(), new HashMap<>());
-			for (PurificationResultItem resultItem : purificationTemplate.getPurificationResultItems())
-				possibleResultItems.get(purificationTemplate.getBaseItemId()).put(resultItem.getItemId(), resultItem);
+			for (PurificationResult resultItem : purificationTemplate.getPurificationResults())
+				possibleResultItems.get(purificationTemplate.getBaseItemId()).put(resultItem.getResultItemId(), resultItem);
 		}
 		itemPurificationTemplates = null;
 	}
 
-	/**
-	 * @param itemSetId
-	 * @return
-	 */
 	public ItemPurificationTemplate getItemPurificationTemplate(int itemSetId) {
 		return itemPurificationSets.get(itemSetId);
 	}
 
-	public Map<Integer, PurificationResultItem> getResultItemMap(int baseItemId) {
+	public Map<Integer, PurificationResult> getResultItemMap(int baseItemId) {
 		return possibleResultItems.get(baseItemId);
 	}
 
-	/**
-	 * @return itemSets.size()
-	 */
 	public int size() {
 		return itemPurificationSets.size();
 	}

@@ -45,10 +45,10 @@ public class CM_ITEM_PURIFICATION extends AionClientPacket {
 			return;
 
 		Item baseItem = player.getInventory().getItemByObjId(upgradedItemObjectId);
-		if (!ItemPurificationService.checkItemUpgrade(player, baseItem, resultItemId))
+		if (!ItemPurificationService.isPurificationAllowed(player, baseItem, resultItemId))
 			return;
 
-		if (!ItemPurificationService.decreaseMaterial(player, baseItem, resultItemId))
+		if (!ItemPurificationService.decreaseMaterials(player, baseItem, resultItemId))
 			return;
 
 		ItemPurificationService.upgradeItem(player, baseItem, resultItemId);

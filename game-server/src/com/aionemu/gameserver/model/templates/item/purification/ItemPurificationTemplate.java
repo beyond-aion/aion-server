@@ -8,23 +8,22 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.aionemu.gameserver.model.stats.calc.StatOwner;
-
 /**
  * @author Ranastic
  * @reworked Navyan
+ * @modified Estrayl
  */
 @XmlRootElement(name = "ItemPurification")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class ItemPurificationTemplate implements StatOwner {
+public class ItemPurificationTemplate {
 
-	@XmlElement(name = "purification_result_item", required = true)
-	private List<PurificationResultItem> purificationResultItems;
-	@XmlAttribute(name = "base_item")
+	@XmlElement(name = "purification_result", required = true)
+	private List<PurificationResult> purificationResults;
+	@XmlAttribute(name = "base_item_id")
 	private int baseItemId;
 
-	public List<PurificationResultItem> getPurificationResultItems() {
-		return purificationResultItems;
+	public List<PurificationResult> getPurificationResults() {
+		return purificationResults;
 	}
 
 	public int getBaseItemId() {
