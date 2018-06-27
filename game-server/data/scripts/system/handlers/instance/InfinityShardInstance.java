@@ -115,7 +115,7 @@ public class InfinityShardInstance extends GeneralInstanceHandler {
 		if (wipePlayers)
 			for (Npc npc : instance.getNpcs(231104))
 				npc.getController().useSkill(21199);
-		despawnInstance();
+		ThreadPoolManager.getInstance().schedule(() -> despawnInstance(), 1500); // delay despawn for invisible NPCs to use the skill
 	}
 
 	private void spawnResonators() {
@@ -133,23 +133,7 @@ public class InfinityShardInstance extends GeneralInstanceHandler {
 	}
 
 	private void despawnInstance() {
-		deleteNpcs(instance.getNpcs(231092));
-		deleteNpcs(instance.getNpcs(231093));
-		deleteNpcs(instance.getNpcs(231094));
-		deleteNpcs(instance.getNpcs(231095));
-		deleteNpcs(instance.getNpcs(231104));
-		deleteNpcs(instance.getNpcs(231102));
-		deleteNpcs(instance.getNpcs(231096));
-		deleteNpcs(instance.getNpcs(231097));
-		deleteNpcs(instance.getNpcs(231098));
-		deleteNpcs(instance.getNpcs(231099));
-		deleteNpcs(instance.getNpcs(231103));
-	}
-
-	private void deleteNpcs(List<Npc> npcs) {
-		for (Npc npc : npcs)
-			if (npc != null)
-				npc.getController().delete();
+		instance.getNpcs().stream().filter(npc -> npc != null && npc.getNpcId() != 231073).forEach(npc -> npc.getController().delete());
 	}
 
 	/*
