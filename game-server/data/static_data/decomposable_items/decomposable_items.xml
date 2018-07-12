@@ -7234,46 +7234,42 @@
 	<decomposable item_id="188051089" /><!-- Major Pudgy Porgus Bundle -->
 	<decomposable item_id="188051090" selectable="true"><!-- [Event] Cold Box -->
 		<items>
-			<item id="125040042" /><!-- Summer Sunglasses -->
+			<item id="125040046" /><!-- Beach Hat -->
 			<item id="125040044" /><!-- Cute Swim Hat -->
-			<item id="125040039" /><!-- [Jakunerk] Cool Mirror Shades -->
-			<item id="125040045" /><!-- Diving Helmet/Summer Headwrap -->
+			<item id="125040039" /><!-- Cool Mirror Shades -->
+			<item id="125045076" /><!-- Cool Swim Cap -->
 			<item id="188053793" min_count="5" /><!-- Rare Manastone of Aetheric Field Bundle -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051091" selectable="true"><!-- [Event] Frozen Box -->
 		<items>
-			<item id="169600217" /><!-- [Emotion Card] Summer Holidays -->
-			<item id="169600090" /><!-- [Emotion Card] 'Fluttering Heart' Dance -->
-			<item id="169600086" /><!-- [Emotion Card] 'Shut Up' Dance -->
-			<item id="110900770" /><!-- Leopard Swimwear -->
-			<item id="110900552" /><!-- Marine Blue Bathing Suit -->
+			<item id="169600087" /><!-- [Emotion Card] 'Bad Girl' Dance -->
+			<item id="110900770" /><!-- Leopard Bikini -->
+			<item id="110900105" /><!-- Hot Swimsuit -->
 			<item id="110900846" /><!-- Urban Summer Blue -->
 			<item id="110900847" /><!-- Urban Summer Lime -->
-			<item id="110900848" /><!-- Urban Summer Red -->
+			<item id="110900824" /><!-- Inked-Up Swimsuit-->
 			<item id="188053113" min_count="3" /><!-- Ahserion's Flight Ancient Manastone Bundle -->
 			<item id="188053609" min_count="3" /><!-- [Event] Level 60 Composite Manastone Bundle -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051092" selectable="true"><!-- [Event] Cold Box -->
 		<items>
-			<item id="125040042" /><!-- Summer Sunglasses -->
+			<item id="125040046" /><!-- Beach Hat -->
 			<item id="125040044" /><!-- Cute Swim Hat -->
-			<item id="125040039" /><!-- [Jakunerk] Cool Mirror Shades -->
-			<item id="125040045" /><!-- Diving Helmet/Summer Headwrap -->
+			<item id="125040039" /><!-- Cool Mirror Shades -->
+			<item id="125045076" /><!-- Cool Swim Cap -->
 			<item id="188053793" min_count="5" /><!-- Rare Manastone of Aetheric Field Bundle -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051093" selectable="true"><!-- [Event] Frozen Box -->
 		<items>
-			<item id="169600217" /><!-- [Emotion Card] Summer Holidays -->
-			<item id="169600090" /><!-- [Emotion Card] 'Fluttering Heart' Dance -->
-			<item id="169600086" /><!-- [Emotion Card] 'Shut Up' Dance -->
-			<item id="110900770" /><!-- Leopard Swimwear -->
-			<item id="110900552" /><!-- Marine Blue Bathing Suit -->
+			<item id="169600087" /><!-- [Emotion Card] 'Bad Girl' Dance -->
+			<item id="110900770" /><!-- Leopard Bikini -->
+			<item id="110900105" /><!-- Hot Swimsuit -->
 			<item id="110900846" /><!-- Urban Summer Blue -->
 			<item id="110900847" /><!-- Urban Summer Lime -->
-			<item id="110900848" /><!-- Urban Summer Red -->
+			<item id="110900824" /><!-- Inked-Up Swimsuit-->
 			<item id="188053113" min_count="3" /><!-- Ahserion's Flight Ancient Manastone Bundle -->
 			<item id="188053609" min_count="3" /><!-- [Event] Level 60 Composite Manastone Bundle -->
 		</items>
@@ -22455,7 +22451,7 @@
 			<item id="166020000" min_count="5" /><!-- Omega Enchantment Stone -->
 		</items>
 		<items chance="10">
-			<item id="166500002" min_count="1" max_count="3" /><!-- Amplfication Stone -->
+			<item id="166500002" min_count="1" max_count="3" /><!-- Amplification Stone -->
 		</items>
 		<items chance="9">
 			<item id="188053295" /><!-- Empyrean Plume Chest -->
