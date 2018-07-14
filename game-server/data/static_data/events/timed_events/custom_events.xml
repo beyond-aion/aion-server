@@ -293,11 +293,11 @@
 			</spawn_map>
 		</spawns>
 	</event>
-	<event name="Beyond Aion Summer Event 2017" start="2017-08-11T00:00:00" end="2017-08-27T23:59:59">
+	<event name="Beyond Aion Summer Event 2018" start="2018-07-13T00:00:00" end="2018-08-19T23:59:59">
 		<event_drops>
-			<gd_rule rule_name="Ice Component Elyos" base_chance="20" fixed_chance="true" restriction_race="ELYOS">
+			<gd_rule rule_name="Ice Block" base_chance="10" fixed_chance="true">
 				<gd_maps>
-					<gd_map map_id="220080000" /><!-- Enshar -->
+					<gd_map map_id="600100000" /><!-- Levinshor -->
 				</gd_maps>
 				<gd_ratings>
 					<gd_rating rating="NORMAL" />
@@ -306,12 +306,11 @@
 				</gd_ratings>
 				<gd_items>
 					<gd_item id="188100124" /><!-- Ice Block -->
-					<gd_item id="188100125" /><!-- Ice Pick -->
 				</gd_items>
 			</gd_rule>
-			<gd_rule rule_name="Ice Component Asmodians" base_chance="20" fixed_chance="true" restriction_race="ASMODIANS">
+			<gd_rule rule_name="Ice Pick" base_chance="5" fixed_chance="true">
 				<gd_maps>
-					<gd_map map_id="210070000" /><!-- Cygnea -->
+					<gd_map map_id="600090000" /><!-- Kaldor -->
 				</gd_maps>
 				<gd_ratings>
 					<gd_rating rating="NORMAL" />
@@ -319,7 +318,6 @@
 					<gd_rating rating="HERO" />
 				</gd_ratings>
 				<gd_items>
-					<gd_item id="188100124" /><!-- Ice Block -->
 					<gd_item id="188100125" /><!-- Ice Pick -->
 				</gd_items>
 			</gd_rule>
@@ -371,7 +369,7 @@
 					<gd_npc npc_id="233898" /><!-- Volatile Belsagos -->
 					<gd_npc npc_id="234991" /><!-- Furious Belsagos -->
 					<!-- Lunatic Queen Modor -->
-					<gd_npc npc_id="234686" /><!-- Remodeled Weapon Dynatoum -->
+					<gd_npc npc_id="234686" /><!-- Remodeled Dynatoum -->
 					<gd_npc npc_id="235624" /><!-- Warmage Suyaroka -->
 					<gd_npc npc_id="235625" /><!-- Chief Medic Tagnu -->
 					<gd_npc npc_id="235626" /><!-- Virulent Ukahim -->
