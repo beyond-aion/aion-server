@@ -35866,6 +35866,16 @@
 		<npc_skill id="21776" lv="65" prob="50" cd="50000" max_hp="95" />
 		<npc_skill id="21777" lv="65" prob="50" cd="90000" max_hp="50" />
 	</npc_skills>
+	<npc_skills npc_ids="237174">
+		<npc_skill id="19140" lv="85" prob="75" />
+		<npc_skill id="19148" lv="1" prob="55" />
+		<npc_skill id="19150" lv="90" prob="55" />
+		<npc_skill id="19155" lv="150" prob="55" />
+		<npc_skill id="19156" lv="250" prob="55" />
+		<npc_skill id="19160" lv="1" prob="55" />
+		<npc_skill id="19289" lv="65" prob="65" />
+		<npc_skill id="22717" lv="65" prob="75" />
+	</npc_skills>
 	<npc_skills npc_ids="251001">
 		<npc_skill id="17829" lv="42" prob="25" />
 		<npc_skill id="17830" lv="42" prob="25" />
