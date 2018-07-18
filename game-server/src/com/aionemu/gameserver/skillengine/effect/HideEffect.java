@@ -87,13 +87,14 @@ public class HideEffect extends BufEffect {
 
 				@Override
 				public void startSkillCast(Skill skill) {
-
 					// TODO find better way
 					if (skill.getSkillMethod() == SkillMethod.ITEM) {
 						if (skill.getItemTemplate().isPotion() || skill.getSkillTemplate().getDuration() > 0) {
 							effect.endEffect();
 						} else
 							return;
+					} else if (skill.getSkillTemplate().getEffects().hasAnyEffectType(EffectType.SHAPECHANGE)) {
+						effect.endEffect();
 					}
 
 					if (skill.isSelfBuff() && buffNumber++ < buffCount)
