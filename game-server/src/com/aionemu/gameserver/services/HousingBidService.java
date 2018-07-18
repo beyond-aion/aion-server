@@ -3,7 +3,6 @@ package com.aionemu.gameserver.services;
 import java.sql.Timestamp;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
@@ -107,9 +106,7 @@ public class HousingBidService extends AbstractCronTask {
 
 	private int fillBidData() {
 		int count = 0;
-		List<House> houses = new ArrayList<>();
-		houses.addAll(HousingService.getInstance().getCustomHouses());
-		Collections.shuffle(houses);
+		List<House> houses = HousingService.getInstance().getCustomHouses();
 		while (!houses.isEmpty()) {
 			House house = Rnd.get(houses);
 			houses.remove(house);
