@@ -34533,9 +34533,6 @@
 	<npc_skills npc_ids="219899">
 		<npc_skill id="20665" lv="65" prob="25" />
 	</npc_skills>
-	<npc_skills npc_ids="220004">
-		<npc_skill id="17291" lv="65" prob="25" />
-	</npc_skills>
 	<npc_skills npc_ids="220123">
 		<npc_skill id="17078" lv="65" prob="100" />
 	</npc_skills>

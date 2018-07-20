@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<npc_skill_templates xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="npc_skills.xsd">
+	<!-- Assassin Guard -->
+	<npc_skills npc_ids="219891">
+		<npc_skill id="16822" lv="1" is_post_spawn="true" /><!-- Hide Shape 24h -->
+	</npc_skills>
+	<!-- Tejhi Fighter -->
+	<npc_skills npc_ids="219802 219803 219804 219805 219806 220004 220005">
+		<npc_skill id="16873" lv="1" is_post_spawn="true" /><!-- Bellicosity 24h -->
+		<npc_skill id="17291" lv="65" prob="100" cd="60000" /><!-- Cleave -->
+		<npc_skill id="17571" lv="65" prob="100" max_hp="50" cd="60000" /><!-- Cleave Armor -->
+		<npc_skill id="16579" lv="1" prob="100" max_hp="50" cd="120000" /><!-- Protective Shield -->
+		<npc_skill id="16519" lv="65" prob="100" cd="10000" /><!-- Power Attack -->
+		<npc_skill id="16673" lv="65" prob="100" cd="10000" /><!-- Wide Power Attack -->
+	</npc_skills>
+	<!-- Tejhi Assassin -->
+	<npc_skills npc_ids="219814">
+		<npc_skill id="16873" lv="1" is_post_spawn="true" /><!-- Bellicosity 24h -->
+		<npc_skill id="16822" lv="1" is_post_spawn="true" /><!-- Hide Shape 24h -->
+		<npc_skill id="16519" lv="65" prob="100" cd="10000" /><!-- Power Attack -->
+		<npc_skill id="21302" lv="65" prob="100" prio="1" cd="10000" next_skill_time="2000" next_chain_id="1" /><!-- Wide Rebuttal -->
+		<npc_skill id="17321" lv="65" prob="100" cd="10000" chain_id="1" /><!-- Surprise Attack -->
+	</npc_skills>
+	<npc_skills npc_ids="219808 219809 219810 219811 219812 219813 220006 220007">
+		<npc_skill id="16873" lv="1" is_post_spawn="true" /><!-- Bellicosity 24h -->
+		<npc_skill id="16519" lv="65" prob="100" cd="10000" /><!-- Power Attack -->
+		<npc_skill id="21302" lv="65" prob="100" prio="1" cd="10000" next_skill_time="2000" next_chain_id="1" /><!-- Wide Rebuttal -->
+		<npc_skill id="17321" lv="65" prob="100" cd="10000" chain_id="1" /><!-- Surprise Attack -->
+	</npc_skills>
+	<!-- Tejhi Healer -->
+	<npc_skills npc_ids="219815 219816 219817 219818 219819 220009">
+		<npc_skill id="16873" lv="1" is_post_spawn="true" /><!-- Bellicosity 24h -->
+		<npc_skill id="17361" lv="65" prob="100" max_hp="50" cd="20000" /><!-- Healing Light -->
+		<npc_skill id="16519" lv="65" prob="100" cd="15000" /><!-- Power Attack -->
+		<npc_skill id="20517" lv="65" prob="100" cd="15000" /><!-- Hallowed Strike -->
+	</npc_skills>
+	<!-- Tejhi Witch -->
+	<npc_skills npc_ids="219821 219822 219823 219824 219825 219826 220010 220011">
+		<npc_skill id="16873" lv="1" is_post_spawn="true" /><!-- Bellicosity 24h -->
+		<npc_skill id="16571" lv="65" prob="100" cd="10000" /><!-- Ice Harpoon -->
+		<npc_skill id="16677" lv="65" prob="100" cd="10000" /><!-- Water Cyclone -->
+	</npc_skills>
+</npc_skill_templates>
