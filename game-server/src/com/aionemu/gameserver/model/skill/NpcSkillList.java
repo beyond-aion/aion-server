@@ -71,13 +71,12 @@ public class NpcSkillList {
 		return skills.get(position);
 	}
 
-	public NpcSkillEntry getUseInSpawnedSkill() {
-		for (NpcSkillEntry skill : skills) {
-			if (((NpcSkillTemplateEntry) skill).UseInSpawned()) {
-				return skill;
-			}
-		}
-		return null;
+	public List<NpcSkillEntry> getPostSpawnSkills() {
+		List<NpcSkillEntry> filteredSkills = new ArrayList<>();
+		for (NpcSkillEntry skill : skills)
+			if (((NpcSkillTemplateEntry) skill).hasPostSpawnCondition())
+				filteredSkills.add(skill);
+		return filteredSkills;
 	}
 
 	public List<NpcSkillEntry> getNpcSkills() {

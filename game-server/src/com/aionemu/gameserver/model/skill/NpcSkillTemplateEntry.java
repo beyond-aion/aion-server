@@ -88,7 +88,7 @@ public class NpcSkillTemplateEntry extends NpcSkillEntry {
 	}
 
 	@Override
-	public boolean UseInSpawned() {
+	public boolean hasPostSpawnCondition() {
 		return template.isPostSpawn();
 	}
 

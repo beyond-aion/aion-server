@@ -27,7 +27,7 @@ public abstract class NpcSkillEntry extends SkillEntry {
 
 	public abstract boolean hasCooldown();
 
-	public abstract boolean UseInSpawned();
+	public abstract boolean hasPostSpawnCondition();
 
 	public long getLastTimeUsed() {
 		return lastTimeUsed;
