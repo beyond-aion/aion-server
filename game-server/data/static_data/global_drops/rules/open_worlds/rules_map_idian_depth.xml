@@ -410,7 +410,6 @@
 		<gd_items>
 			<!-- Level 70 -->
 			<gd_item id="167020024" /><!-- Ancient Manastone: HP +105 -->
-			<gd_item id="167020025" /><!-- Ancient Manastone: MP +120 -->
 			<gd_item id="167020026" /><!-- Ancient Manastone: Accuracy +31 -->
 			<gd_item id="167020027" /><!-- Ancient Manastone: Evasion +21 -->
 			<gd_item id="167020028" /><!-- Ancient Manastone: Parry +31 -->

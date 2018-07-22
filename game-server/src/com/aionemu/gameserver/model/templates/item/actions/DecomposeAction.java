@@ -219,7 +219,7 @@ public class DecomposeAction extends AbstractItemAction {
 								case MANASTONE_LEGEND_GRADE_50:
 								case MANASTONE_LEGEND_GRADE_60:
 								case MANASTONE_LEGEND_GRADE_70:
-									if (randomType.equals(RandomType.MANASTONE)) // stone level near or equal to item level (if 1, near player level)
+									if (randomType == RandomType.MANASTONE) // stone level near or equal to item level (if 1, near player level)
 										itemLvl = itemLvl % 10 == 0 ? itemLvl : ((int) Math.ceil((itemLvl == 1 ? player.getLevel() : itemLvl) / 10f) * 10);
 									else
 										itemLvl = randomType.getLevel();
@@ -228,7 +228,7 @@ public class DecomposeAction extends AbstractItemAction {
 										log.warn("No lv" + itemLvl + " manastones found for decomposable random type " + randomItem.getType());
 										break;
 									}
-									if (!randomType.equals(RandomType.MANASTONE)) {
+									if (randomType != RandomType.MANASTONE) {
 										final ItemQuality itemQuality;
 										if (randomType.name().contains("RARE"))
 											itemQuality = ItemQuality.RARE;
@@ -236,11 +236,12 @@ public class DecomposeAction extends AbstractItemAction {
 											itemQuality = ItemQuality.LEGEND;
 										else
 											itemQuality = ItemQuality.COMMON;
-										List<ItemTemplate> selectedStones = stones.stream().filter(t -> t.getItemQuality() == itemQuality).collect(Collectors.toList());
+										List<ItemTemplate> selectedStones = stones.stream()
+											.filter(t -> t.getItemQuality() == itemQuality && !t.getName().contains(" MP ")).collect(Collectors.toList());
 										randomId = Rnd.get(selectedStones).getTemplateId();
 									} else {
-										List<ItemTemplate> selectedStones = stones.stream().filter(t -> t.getItemQuality() != ItemQuality.LEGEND)
-											.collect(Collectors.toList());
+										List<ItemTemplate> selectedStones = stones.stream()
+											.filter(t -> t.getItemQuality() != ItemQuality.LEGEND && !t.getName().contains(" MP ")).collect(Collectors.toList());
 										randomId = Rnd.get(selectedStones).getTemplateId();
 									}
 
@@ -267,8 +268,8 @@ public class DecomposeAction extends AbstractItemAction {
 										itemQuality = ItemQuality.EPIC;
 									else
 										itemQuality = ItemQuality.COMMON;
-									List<ItemTemplate> selectedStones = ancientStones.stream().filter(t -> t.getItemQuality() == itemQuality)
-										.collect(Collectors.toList());
+									List<ItemTemplate> selectedStones = ancientStones.stream()
+										.filter(t -> t.getItemQuality() == itemQuality && !t.getName().contains(" MP ")).collect(Collectors.toList());
 									randomId = Rnd.get(selectedStones).getTemplateId();
 
 									if (!validateItemId(randomId))

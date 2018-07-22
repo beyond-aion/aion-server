@@ -360,7 +360,6 @@
 		<gd_items>
 			<!-- Level 20 -->
 			<gd_item id="167000418" /><!-- Manastone: HP +55 -->
-			<gd_item id="167000419" /><!-- Manastone: MP +55 -->
 			<gd_item id="167000420" /><!-- Manastone: Accuracy +19 -->
 			<gd_item id="167000421" /><!-- Manastone: Evasion +9 -->
 			<gd_item id="167000423" /><!-- Manastone: Magic Boost +19 -->
@@ -370,7 +369,6 @@
 			<gd_item id="167000535" /><!-- Manastone: Magical Accuracy +6 -->
 			<!-- Level 30 -->
 			<gd_item id="167000450" /><!-- Manastone: HP +65 -->
-			<gd_item id="167000451" /><!-- Manastone: MP +65 -->
 			<gd_item id="167000454" /><!-- Manastone: Attack +4 -->
 			<gd_item id="167000452" /><!-- Manastone: Accuracy +21 -->
 			<gd_item id="167000453" /><!-- Manastone: Evasion +11 -->
@@ -381,7 +379,6 @@
 			<gd_item id="167000537" /><!-- Manastone: Magical Accuracy +8 -->
 			<!-- Level 40 -->
 			<gd_item id="167000482" /><!-- Manastone: HP +75 -->
-			<gd_item id="167000483" /><!-- Manastone: MP +75 -->
 			<gd_item id="167000484" /><!-- Manastone: Accuracy +23 -->
 			<gd_item id="167000485" /><!-- Manastone: Evasion +13 -->
 			<gd_item id="167000487" /><!-- Manastone: Magic Boost +23 -->
@@ -391,7 +388,6 @@
 			<gd_item id="167000539" /><!-- Manastone: Magical Accuracy +10 -->
 			<!-- Level 50 -->
 			<gd_item id="167000514" /><!-- Manastone: HP +85 -->
-			<gd_item id="167000515" /><!-- Manastone: MP +85 -->
 			<gd_item id="167000518" /><!-- Manastone: Attack +5 -->
 			<gd_item id="167000516" /><!-- Manastone: Accuracy +25 -->
 			<gd_item id="167000517" /><!-- Manastone: Evasion +15 -->
@@ -403,7 +399,6 @@
 			<gd_item id="167000542" /><!-- Manastone: Resist Magic +12 -->
 			<!-- Level 60 -->
 			<gd_item id="167000551" /><!-- Manastone: HP +95 -->
-			<gd_item id="167000552" /><!-- Manastone: MP +95 -->
 			<gd_item id="167000553" /><!-- Manastone: Accuracy +27 -->
 			<gd_item id="167000554" /><!-- Manastone: Evasion +17 -->
 			<gd_item id="167000555" /><!-- Manastone: Magic Boost +27 -->
@@ -416,7 +411,6 @@
 			<gd_item id="167000563" /><!-- Manastone: Healing Boost +3 -->
 			<!-- Level 70 -->
 			<gd_item id="167000766" /><!-- Manastone: HP +100 -->
-			<gd_item id="167000767" /><!-- Manastone: MP +105 -->
 			<gd_item id="167000768" /><!-- Manastone: Accuracy +29 -->
 			<gd_item id="167000769" /><!-- Manastone: Evasion +19 -->
 			<gd_item id="167000770" /><!-- Manastone: Magic Boost +28 -->
