@@ -1446,7 +1446,6 @@
 	<npc_drop npc_id="233190">
 		<drop_group race="PC_ALL"><!-- Named Ancient Manastone (Legend/Unique) -->
 			<drop item_id="167020024" chance="100" /><!-- Ancient Manastone: HP +105 -->
-			<drop item_id="167020025" chance="100" /><!-- Ancient Manastone: MP +120 -->
 			<drop item_id="167020026" chance="100" /><!-- Ancient Manastone: Accuracy +31 -->
 			<drop item_id="167020027" chance="100" /><!-- Ancient Manastone: Evasion +21 -->
 			<drop item_id="167020028" chance="100" /><!-- Ancient Manastone: Parry +31 -->
@@ -1492,7 +1491,6 @@
 	<npc_drop npc_id="233191">
 		<drop_group race="PC_ALL"><!-- Named Ancient Manastone (Legend) -->
 			<drop item_id="167020024" chance="70" /><!-- Ancient Manastone: HP +105 -->
-			<drop item_id="167020025" chance="70" /><!-- Ancient Manastone: MP +120 -->
 			<drop item_id="167020026" chance="70" /><!-- Ancient Manastone: Accuracy +31 -->
 			<drop item_id="167020027" chance="70" /><!-- Ancient Manastone: Evasion +21 -->
 			<drop item_id="167020028" chance="70" /><!-- Ancient Manastone: Parry +31 -->
@@ -1529,7 +1527,6 @@
 	<npc_drop npc_id="233192">
 		<drop_group race="PC_ALL"><!-- Ancient Manastone -->
 			<drop item_id="167020024" chance="30" /><!-- Ancient Manastone: HP +105 -->
-			<drop item_id="167020025" chance="30" /><!-- Ancient Manastone: MP +120 -->
 			<drop item_id="167020026" chance="30" /><!-- Ancient Manastone: Accuracy +31 -->
 			<drop item_id="167020027" chance="30" /><!-- Ancient Manastone: Evasion +21 -->
 			<drop item_id="167020028" chance="30" /><!-- Ancient Manastone: Parry +31 -->
@@ -1547,16 +1544,16 @@
 			<drop item_id="167020040" chance="30" /><!-- Ancient Manastone: Healing Boost +5 -->
 		</drop_group>
 		<drop_group race="PC_ALL"><!-- Random Special Reward -->
-			<drop item_id="186000242" chance="15" /><!-- Ceramium Medal -->
-			<drop item_id="166020000" chance="15" /><!-- Omega Enchantment Stone -->
-			<drop item_id="166500002" chance="15" /><!-- Amplification Stone -->
-			<drop item_id="166030005" chance="15" /><!-- Tempering Solution -->
-			<drop item_id="188053783" chance="15" /><!-- Stigma Sack -->
-			<drop item_id="188053618" chance="15" /><!-- Honorable Elim's Idian Bundle -->
-			<drop item_id="188053905" chance="15" /><!-- Faded High Grade Composite Manastone Bundle -->
-			<drop item_id="186000236" chance="25" min_amount="2" max_amount="7" /><!-- Blood Mark -->
-			<drop item_id="186000237" chance="25" min_amount="8" max_amount="17" /><!-- Ancient Coin -->
-			<drop item_id="186000243" chance="25" min_amount="2" max_amount="7" /><!-- Fragmented Ceramium -->
+			<drop item_id="186000242" chance="20" /><!-- Ceramium Medal -->
+			<drop item_id="166020000" chance="20" /><!-- Omega Enchantment Stone -->
+			<drop item_id="166500002" chance="20" /><!-- Amplification Stone -->
+			<drop item_id="166030005" chance="20" /><!-- Tempering Solution -->
+			<drop item_id="188053783" chance="20" /><!-- Stigma Sack -->
+			<drop item_id="188053618" chance="20" /><!-- Honorable Elim's Idian Bundle -->
+			<drop item_id="188053905" chance="20" /><!-- Faded High Grade Composite Manastone Bundle -->
+			<drop item_id="186000236" chance="30" min_amount="2" max_amount="7" /><!-- Blood Mark -->
+			<drop item_id="186000237" chance="30" min_amount="8" max_amount="17" /><!-- Ancient Coin -->
+			<drop item_id="186000243" chance="30" min_amount="2" max_amount="7" /><!-- Fragmented Ceramium -->
 		</drop_group>
 		<drop_group race="PC_ALL"><!-- Supplies -->
 			<drop item_id="162000124" chance="40" min_amount="25" max_amount="25" /><!-- Superior Recovery Serum -->
@@ -1566,10 +1563,10 @@
 			<drop item_id="164000079" chance="35" min_amount="10" max_amount="25" /><!-- Greater Raging Wind Scroll -->
 		</drop_group>
 		<drop_group race="PC_ALL"><!-- Kinah -->
-			<drop item_id="182400001" chance="75" min_amount="20242" max_amount="94120" /><!-- Kinah -->
+			<drop item_id="182400001" chance="100" min_amount="20242" max_amount="94120" /><!-- Kinah -->
 		</drop_group>
 		<drop_group race="PC_ALL"><!-- Conquerors Mark -->
-			<drop item_id="186000238" min_amount="1" max_amount="3" chance="100" /><!-- Conqueror's Mark -->
+			<drop item_id="186000238" min_amount="10" max_amount="30" chance="100" /><!-- Conqueror's Mark -->
 		</drop_group>
 	</npc_drop>
 	<!-- Dragon Lords Refuge -->

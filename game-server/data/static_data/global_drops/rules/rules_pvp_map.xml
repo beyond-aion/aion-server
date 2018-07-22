@@ -62,7 +62,7 @@
 			<gd_item id="186000236" /> <!-- Blood Mark -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Random Boss omega enchantment stone" base_chance="15" fixed_chance="true" member_limit="3">
+	<gd_rule rule_name="Random Boss omega enchantment stone" base_chance="20" fixed_chance="true" member_limit="3">
 		<gd_maps>
 			<gd_map map_id="301220000" /><!-- Iron_Wall_Warfront -->
 		</gd_maps>
@@ -93,7 +93,7 @@
 			<gd_item id="166020000" /> <!-- Omega Enchantment Stone -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Random Boss amplification stone" base_chance="20" fixed_chance="true" member_limit="3">
+	<gd_rule rule_name="Random Boss amplification stone" base_chance="25" fixed_chance="true" member_limit="3">
 		<gd_maps>
 			<gd_map map_id="301220000" /><!-- Iron_Wall_Warfront -->
 		</gd_maps>
@@ -124,7 +124,7 @@
 			<gd_item id="166500002" /> <!-- Amplification Stone -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Random Boss Faded High Grade Composite Manastone Bundle" base_chance="20" min_count="1" max_count="3" fixed_chance="true" member_limit="6">
+	<gd_rule rule_name="Random Boss Faded High Grade Composite Manastone Bundle" base_chance="25" min_count="1" max_count="3" fixed_chance="true" member_limit="6">
 		<gd_maps>
 			<gd_map map_id="301220000" /><!-- Iron_Wall_Warfront -->
 		</gd_maps>
@@ -155,7 +155,7 @@
 			<gd_item id="188053905" /> <!-- Faded High Grade Composite Manastone Bundle -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Random Boss tempering solution" base_chance="10" fixed_chance="true">
+	<gd_rule rule_name="Random Boss tempering solution" base_chance="15" fixed_chance="true">
 		<gd_maps>
 			<gd_map map_id="301220000" /><!-- Iron_Wall_Warfront -->
 		</gd_maps>
@@ -186,7 +186,7 @@
 			<gd_item id="166030005" /> <!-- Tempering Solution -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Random Boss Empyrean Plume Chest" base_chance="5" fixed_chance="true">
+	<gd_rule rule_name="Random Boss Empyrean Plume Chest" base_chance="7.5" fixed_chance="true">
 		<gd_maps>
 			<gd_map map_id="301220000" /><!-- Iron_Wall_Warfront -->
 		</gd_maps>
@@ -217,7 +217,7 @@
 			<gd_item id="188053295" /> <!-- Empyrean Plume Chest -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Random Boss Honorable Elim's Idian Bundle" base_chance="10" fixed_chance="true" member_limit="3">
+	<gd_rule rule_name="Random Boss Honorable Elim's Idian Bundle" base_chance="15" fixed_chance="true" member_limit="3">
 		<gd_maps>
 			<gd_map map_id="301220000" /><!-- Iron_Wall_Warfront -->
 		</gd_maps>
@@ -785,12 +785,10 @@
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="167000614" /><!-- Manastone: Attack +4 / HP +37 -->
-			<gd_item id="167000615" /><!-- Manastone: Attack +4 / MP +37 -->
 			<gd_item id="167000616" /><!-- Manastone: Attack +4 / Crit Strike +6 -->
 			<gd_item id="167000617" /><!-- Manastone: Attack +4 / Resist Magic +5 -->
 			<gd_item id="167000618" /><!-- Manastone: Attack +4 / Magical Accuracy +5 -->
 			<gd_item id="167000619" /><!-- Manastone: Crit Strike +13 / HP +37 -->
-			<gd_item id="167000620" /><!-- Manastone: Crit Strike +13 / MP +37 -->
 			<gd_item id="167000621" /><!-- Manastone: Crit Strike +13 / Attack +2 -->
 			<gd_item id="167000622" /><!-- Manastone: Crit Strike +13 / Accuracy +11 -->
 			<gd_item id="167000623" /><!-- Manastone: Crit Strike +13 / Evasion +11 -->
@@ -799,7 +797,6 @@
 			<gd_item id="167000626" /><!-- Manastone: Crit Strike +13 / Resist Magic +5 -->
 			<gd_item id="167000627" /><!-- Manastone: Crit Strike +13 / Magical Accuracy +5 -->
 			<gd_item id="167000628" /><!-- Manastone: Magic Boost +23 / HP +37 -->
-			<gd_item id="167000629" /><!-- Manastone: Magic Boost +23 / MP +37 -->
 			<gd_item id="167000630" /><!-- Manastone: Magic Boost +23 / Accuracy +11 -->
 			<gd_item id="167000631" /><!-- Manastone: Magic Boost +23 / Evasion +11 -->
 			<gd_item id="167000632" /><!-- Manastone: Magic Boost +23 / Parry +11 -->
@@ -808,7 +805,6 @@
 			<gd_item id="167000635" /><!-- Manastone: Magic Boost +23 / Resist Magic +5 -->
 			<gd_item id="167000636" /><!-- Manastone: Magic Boost +23 / Magical Accuracy +5 -->
 			<gd_item id="167000637" /><!-- Manastone: Magical Accuracy +10 / HP +37 -->
-			<gd_item id="167000638" /><!-- Manastone: Magical Accuracy +10 / MP +37 -->
 			<gd_item id="167000639" /><!-- Manastone: Magical Accuracy +10 / Magic Boost +11-->
 			<gd_item id="167000640" /><!-- Manastone: Magical Accuracy +10 / Accuracy +11 -->
 			<gd_item id="167000641" /><!-- Manastone: Magical Accuracy +10 / Evasion +11 -->
