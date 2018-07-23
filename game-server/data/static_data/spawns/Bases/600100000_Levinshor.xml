@@ -2816,7 +2816,11 @@
 				<spawn npc_id="805281" handler="MERCHANT" respawn_time="295">
 					<spot x="953.5" y="1055.9" z="334.94" h="48"/>
 				</spawn>
-				
+				<!-- Teleport Device -->
+				<spawn npc_id="731457" handler="MERCHANT" respawn_time="295">
+					<spot x="943.09155" y="1034.9174" z="334.29272" static_id="959" />
+				</spawn>
+
 				<!-- Tomul Brawler -->
 				<spawn npc_id="235378" handler="OUTRIDER" respawn_time="295">
 					<spot x="822.5720" y="1034.7391" z="330.67120"/>
@@ -2957,6 +2961,10 @@
 				<!-- Jitetiche -->
 				<spawn npc_id="805294" handler="MERCHANT" respawn_time="295">
 					<spot x="953.5" y="1055.9" z="334.94" h="48"/>
+				</spawn>
+				<!-- Teleport Device -->
+				<spawn npc_id="731460" handler="MERCHANT" respawn_time="295">
+					<spot x="943.09155" y="1034.9174" z="334.29272" static_id="959" />
 				</spawn>
 				
 				<!-- Denku Feralclaw -->
