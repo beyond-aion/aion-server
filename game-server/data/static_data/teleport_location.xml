@@ -202,7 +202,7 @@
 	<teleloc_template loc_id="327" mapid="600090000" name="Flamecrest Outpost Approach" name_id="404272" posX="1098" posY="1251" posZ="178" heading="0"/><!-- new teleport 4.7.1 -->
 	<teleloc_template loc_id="328" mapid="600090000" name="Rubirinerk's Settlement" name_id="404273" posX="421.4091" posY="1372.543" posZ="163.6858" heading="83"/>
 	<teleloc_template loc_id="329" mapid="600090000" name="Saparinerk's Settlement" name_id="404274" posX="1267.398" posY="1362.599" posZ="196.0841" heading="75"/>
-	<teleloc_template loc_id="332" mapid="600100000" name="Lumewillow Glade" name_id="404277"/>
+	<teleloc_template loc_id="332" mapid="600100000" name="Lumewillow Glade" name_id="404277" posX="115.133" posY="128.6176" posZ="347.898" heading="80"/>
 	<teleloc_template loc_id="333" mapid="600100000" name="Pinnacle Cataract" name_id="404278" posX="1850.624" posY="1782.898" posZ="305.539" heading="60"/>
 	<teleloc_template loc_id="334" mapid="600100000" name="Lobneru Lagoon" name_id="404279"/><!-- new Flying Levinshor 4.7.1 NA -->
 	<teleloc_template loc_id="335" mapid="600100000" name="Lobneru Lagoon" name_id="404280"/><!-- new Flying Levinshor 4.7.1 NA -->
