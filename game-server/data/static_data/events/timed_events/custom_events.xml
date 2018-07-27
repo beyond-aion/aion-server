@@ -293,9 +293,9 @@
 			</spawn_map>
 		</spawns>
 	</event>
-	<event name="Beyond Aion Summer Event 2018" start="2018-07-13T00:00:00" end="2018-08-19T23:59:59">
+	<event name="Beyond Aion Summer Event 2018" start="2018-07-27T00:00:00" end="2018-08-19T23:59:59">
 		<event_drops>
-			<gd_rule rule_name="Ice Block" base_chance="10" fixed_chance="true">
+			<gd_rule rule_name="Ice Block" base_chance="14" fixed_chance="true">
 				<gd_maps>
 					<gd_map map_id="600100000" /><!-- Levinshor -->
 				</gd_maps>
@@ -308,7 +308,7 @@
 					<gd_item id="188100124" /><!-- Ice Block -->
 				</gd_items>
 			</gd_rule>
-			<gd_rule rule_name="Ice Pick" base_chance="5" fixed_chance="true">
+			<gd_rule rule_name="Ice Pick" base_chance="7" fixed_chance="true">
 				<gd_maps>
 					<gd_map map_id="600090000" /><!-- Kaldor -->
 				</gd_maps>
