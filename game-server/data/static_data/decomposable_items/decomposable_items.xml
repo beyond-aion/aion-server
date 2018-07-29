@@ -28052,51 +28052,26 @@
 	<decomposable item_id="188053205" /><!-- [Event] Katalam Accessory Bundle -->
 	<decomposable item_id="188053206" selectable="true"><!-- [Event] Stormwing's Eternal Armor Chest -->
 		<items>
-			<item id="110101071" player_classes="SORCERER" /><!-- Stormwing's Tunic -->
-			<item id="113100977" player_classes="SORCERER" /><!-- Stormwing's Leggings -->
-			<item id="111100964" player_classes="SORCERER" /><!-- Stormwing's Gloves -->
-			<item id="114101003" player_classes="SORCERER" /><!-- Stormwing's Shoes -->
-			<item id="112100922" player_classes="SORCERER" /><!-- Stormwing's Pauldrons -->
-			<item id="110101071" player_classes="SPIRIT_MASTER" /><!-- Stormwing's Tunic -->
-			<item id="113100977" player_classes="SPIRIT_MASTER" /><!-- Stormwing's Leggings -->
-			<item id="111100964" player_classes="SPIRIT_MASTER" /><!-- Stormwing's Gloves -->
-			<item id="114101003" player_classes="SPIRIT_MASTER" /><!-- Stormwing's Shoes -->
-			<item id="112100922" player_classes="SPIRIT_MASTER" /><!-- Stormwing's Pauldrons -->
-			<item id="110101071" player_classes="BARD" /><!-- Stormwing's Tunic -->
-			<item id="113100977" player_classes="BARD" /><!-- Stormwing's Leggings -->
-			<item id="111100964" player_classes="BARD" /><!-- Stormwing's Gloves -->
-			<item id="114101003" player_classes="BARD" /><!-- Stormwing's Shoes -->
-			<item id="112100922" player_classes="BARD" /><!-- Stormwing's Pauldrons -->
-			<item id="110500988" player_classes="CHANTER" /><!-- Stormwing's Hauberk -->
-			<item id="113500960" player_classes="CHANTER" /><!-- Stormwing's Chausses -->
-			<item id="111500955" player_classes="CHANTER" /><!-- Stormwing's Handguards -->
-			<item id="114500967" player_classes="CHANTER" /><!-- Stormwing's Brogans -->
-			<item id="112500907" player_classes="CHANTER" /><!-- Stormwing's Spaulders -->
-			<item id="110500988" player_classes="CLERIC" /><!-- Stormwing's Hauberk -->
-			<item id="113500960" player_classes="CLERIC" /><!-- Stormwing's Chausses -->
-			<item id="111500955" player_classes="CLERIC" /><!-- Stormwing's Handguards -->
-			<item id="114500967" player_classes="CLERIC" /><!-- Stormwing's Brogans -->
-			<item id="112500907" player_classes="CLERIC" /><!-- Stormwing's Spaulders -->
-			<item id="110600968" player_classes="TEMPLAR" /><!-- Stormwing's Breastplate -->
-			<item id="113600931" player_classes="TEMPLAR" /><!-- Stormwing's Greaves -->
-			<item id="112600922" player_classes="TEMPLAR" /><!-- Stormwing's Shoulderplates -->
-			<item id="110600968" player_classes="TEMPLAR" /><!-- Stormwing's Breastplate -->
-			<item id="111600947" player_classes="TEMPLAR" /><!-- Stormwing's Gauntlets -->
-			<item id="110600968" player_classes="GLADIATOR" /><!-- Stormwing's Breastplate -->
-			<item id="113600931" player_classes="GLADIATOR" /><!-- Stormwing's Greaves -->
-			<item id="112600922" player_classes="GLADIATOR" /><!-- Stormwing's Shoulderplates -->
-			<item id="110600968" player_classes="GLADIATOR" /><!-- Stormwing's Breastplate -->
-			<item id="111600947" player_classes="GLADIATOR" /><!-- Stormwing's Gauntlets -->
-			<item id="110301020" player_classes="ASSASSIN" /><!-- Stormwing's Jerkin -->
-			<item id="113300990" player_classes="ASSASSIN" /><!-- Stormwing's Breeches -->
-			<item id="111300969" player_classes="ASSASSIN" /><!-- Stormwing's Vambrace -->
-			<item id="112300920" player_classes="ASSASSIN" /><!-- Stormwing's Shoulderguards -->
-			<item id="114301024" player_classes="ASSASSIN" /><!-- Stormwing's Boots -->
-			<item id="110301020" player_classes="RANGER" /><!-- Stormwing's Jerkin -->
-			<item id="113300990" player_classes="RANGER" /><!-- Stormwing's Breeches -->
-			<item id="111300969" player_classes="RANGER" /><!-- Stormwing's Vambrace -->
-			<item id="112300920" player_classes="RANGER" /><!-- Stormwing's Shoulderguards -->
-			<item id="114301024" player_classes="RANGER" /><!-- Stormwing's Boots -->
+			<item id="110101071" player_classes="SORCERER SPIRIT_MASTER BARD" /><!-- Stormwing's Tunic -->
+			<item id="113100977" player_classes="SORCERER SPIRIT_MASTER BARD" /><!-- Stormwing's Leggings -->
+			<item id="111100964" player_classes="SORCERER SPIRIT_MASTER BARD" /><!-- Stormwing's Gloves -->
+			<item id="114101003" player_classes="SORCERER SPIRIT_MASTER BARD" /><!-- Stormwing's Shoes -->
+			<item id="112100922" player_classes="SORCERER SPIRIT_MASTER BARD" /><!-- Stormwing's Pauldrons -->
+			<item id="110500988" player_classes="CHANTER CLERIC" /><!-- Stormwing's Hauberk -->
+			<item id="113500960" player_classes="CHANTER CLERIC" /><!-- Stormwing's Chausses -->
+			<item id="111500955" player_classes="CHANTER CLERIC" /><!-- Stormwing's Handguards -->
+			<item id="114500967" player_classes="CHANTER CLERIC" /><!-- Stormwing's Brogans -->
+			<item id="112500907" player_classes="CHANTER CLERIC" /><!-- Stormwing's Spaulders -->
+			<item id="110600968" player_classes="TEMPLAR GLADIATOR" /><!-- Stormwing's Breastplate -->
+			<item id="113600931" player_classes="TEMPLAR GLADIATOR" /><!-- Stormwing's Greaves -->
+			<item id="111600947" player_classes="TEMPLAR GLADIATOR" /><!-- Stormwing's Gauntlets -->
+			<item id="114600926" player_classes="TEMPLAR GLADIATOR" /><!-- Stormwing's Sabatons -->
+			<item id="112600922" player_classes="TEMPLAR GLADIATOR" /><!-- Stormwing's Shoulderplates -->
+			<item id="110301020" player_classes="ASSASSIN RANGER" /><!-- Stormwing's Jerkin -->
+			<item id="113300990" player_classes="ASSASSIN RANGER" /><!-- Stormwing's Breeches -->
+			<item id="111300969" player_classes="ASSASSIN RANGER" /><!-- Stormwing's Vambrace -->
+			<item id="112300920" player_classes="ASSASSIN RANGER" /><!-- Stormwing's Shoulderguards -->
+			<item id="114301024" player_classes="ASSASSIN RANGER" /><!-- Stormwing's Boots -->
 			<item id="110301584" player_classes="GUNNER" /><!-- Stormwing's Magic Jerkin -->
 			<item id="113301550" player_classes="GUNNER" /><!-- Stormwing's Magic Breeches -->
 			<item id="111301522" player_classes="GUNNER" /><!-- Stormwing's Magic Vambrace -->
