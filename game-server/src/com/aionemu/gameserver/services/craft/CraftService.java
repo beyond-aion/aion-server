@@ -207,12 +207,6 @@ public class CraftService {
 				continue;
 			for (Component component : componentsData.getComponent()) {
 				long availableComponentCount = player.getInventory().getItemCountByItemId(component.getItemId());
-				long sendComponentCount = sendMaterialsData.get(component.getItemId());
-				if (availableComponentCount != sendComponentCount) {
-					AuditLogger.log(player, "tried to craft with not matching component count [recipeID=" + recipeTemplate.getItemId() + ", componentID="
-						+ component.getItemId() + ", sendcomponentCount=" + sendComponentCount + ", availableComponentCount=" + availableComponentCount + "]");
-					return false;
-				}
 				if (availableComponentCount < component.getQuantity()) {
 					String itemL10n = DataManager.ITEM_DATA.getItemTemplate(component.getItemId()).getL10n();
 					if (component.getQuantity() == 1)
