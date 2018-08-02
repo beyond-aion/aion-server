@@ -1,12 +1,12 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import java.util.Set;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
-
-import java.util.Set;
 
 /**
  * @author dragoon112, Neon
