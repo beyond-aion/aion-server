@@ -1,12 +1,12 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
-import java.util.Set;
-
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
+
+import java.util.Set;
 
 /**
  * @author dragoon112, Neon
@@ -21,7 +21,9 @@ public class CM_REMOVE_ALTERED_STATE extends AionClientPacket {
 
 	@Override
 	protected void readImpl() {
-		skillId = readD();
+		skillId = readUH();
+		readC();
+		readC(); // seen 1 with skillId 3573
 	}
 
 	@Override
