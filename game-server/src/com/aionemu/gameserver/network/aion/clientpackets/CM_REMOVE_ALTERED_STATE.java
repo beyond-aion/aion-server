@@ -21,7 +21,9 @@ public class CM_REMOVE_ALTERED_STATE extends AionClientPacket {
 
 	@Override
 	protected void readImpl() {
-		skillId = readD();
+		skillId = readUH();
+		readC();
+		readC(); // seen 1 with skillId 3573
 	}
 
 	@Override
