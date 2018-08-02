@@ -11,11 +11,13 @@ import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
-/*
- * @author Luzien
+/**
+ * @author Luzien, Estrayl
  */
-@AIName("dredgionCommander")
+@AIName("dredgion_commander")
 public class DredgionCommanderAI extends SiegeNpcAI {
+
+	private Npc fortressBoss;
 
 	public DredgionCommanderAI(Npc owner) {
 		super(owner);
@@ -24,59 +26,53 @@ public class DredgionCommanderAI extends SiegeNpcAI {
 	@Override
 	protected void handleSpawned() {
 		super.handleSpawned();
-		scheduleOneShot();
+		ThreadPoolManager.getInstance().schedule(this::findFortressBoss, 3000);
 	}
 
-	private int getSkill() {
-		switch (getNpcId()) {
-			case 276649:
-				return 17572;
-			case 276871:
-			case 276872:
-				return 18411;
-			case 258236:
-			case 273343:
-				return 18428;
-			default:
-				return 0;
+	private void findFortressBoss() {
+		for (VisibleObject vo : getKnownList().getKnownObjects().values()) {
+			if (vo instanceof Npc) {
+				if (((Npc) vo).getRace() == Race.GCHIEF_LIGHT || ((Npc) vo).getRace() == Race.GCHIEF_DARK) {
+					fortressBoss = (Npc) vo;
+					getAggroList().addHate(fortressBoss, 600000);
+					break;
+				}
+			}
+		}
+	}
+
+	@Override
+	protected void handleMoveArrived() {
+		super.handleMoveArrived();
+		if (getOwner().getDistanceToSpawnLocation() >= 25.0d && fortressBoss != null) {
+			getAggroList().addHate(fortressBoss, 1000000);
+			AIActions.targetCreature(this, fortressBoss);
+			getOwner().getMoveController().moveToPoint(fortressBoss.getX(), fortressBoss.getY(), fortressBoss.getZ());
 		}
 	}
 
 	@Override
 	public int modifyOwnerDamage(int damage, Effect effect) {
-		if (effect != null && effect.getStack().equals("DGFI_ONESHOTONEKILL_WARPDR"))
-			damage *= SiegeConfig.SIEGE_HEALTH_MULTIPLIER;
+		if (fortressBoss != null && effect != null && effect.getEffected() == fortressBoss && effect.getStack().equals("DGFI_ONESHOTONEKILL_WARPDR"))
+			damage = Math.round(fortressBoss.getLifeStats().getMaxHp() * 0.2f);
 		return damage;
-	}
-
-	private void scheduleOneShot() {
-		int skillId = getSkill();
-		if (skillId == 0)
-			return;
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				if (!getOwner().isSpawned() || getOwner().isDead())
-					return;
-				VisibleObject obj = getTarget();
-				if (obj instanceof Npc) {
-					Npc target = (Npc) obj;
-					if (target.getRace() == Race.GCHIEF_DARK || target.getRace() == Race.GCHIEF_LIGHT) {
-						if (target.isDead())
-							return;
-						AIActions.useSkill(DredgionCommanderAI.this, skillId);
-						getAggroList().addHate(target, 10000);
-					}
-				}
-				scheduleOneShot();
-			}
-		}, 45 * 1000);
 	}
 
 	@Override
 	public void modifyOwnerStat(Stat2 stat) {
 		if (stat.getStat() == StatEnum.MAXHP)
 			stat.setBaseRate(SiegeConfig.SIEGE_HEALTH_MULTIPLIER);
+	}
+
+	@Override
+	protected void handleDespawned() {
+		fortressBoss = null;
+		super.handleDespawned();
+	}
+
+	@Override
+	protected void handleDied() {
+		fortressBoss = null;
+		super.handleDied();
 	}
 }
