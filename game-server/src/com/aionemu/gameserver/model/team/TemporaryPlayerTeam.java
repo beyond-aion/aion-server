@@ -1,6 +1,8 @@
 package com.aionemu.gameserver.model.team;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Predicate;
 
 import com.aionemu.gameserver.model.Race;
@@ -9,6 +11,7 @@ import com.aionemu.gameserver.model.team.common.legacy.LootGroupRules;
 import com.aionemu.gameserver.model.team.common.legacy.LootRuleType;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_PET;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_SHOW_BRAND;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.collections.Predicates;
@@ -19,6 +22,7 @@ import com.aionemu.gameserver.utils.collections.Predicates;
 public abstract class TemporaryPlayerTeam<TM extends TeamMember<Player>> extends GeneralTeam<Player, TM> {
 
 	private LootGroupRules lootGroupRules = new LootGroupRules();
+	private Map<Integer, Integer> brandCache = new HashMap<>();
 
 	public TemporaryPlayerTeam(int objId) {
 		super(objId);
@@ -33,6 +37,17 @@ public abstract class TemporaryPlayerTeam<TM extends TeamMember<Player>> extends
 	 * Level of the player with highest exp
 	 */
 	public abstract int getMaxExpPlayerLevel();
+
+	public void onBrand(int targetObjectId, int brandId) {
+		if (brandCache.containsKey(brandId))
+			brandCache.remove(brandId);
+
+		brandCache.put(brandId, targetObjectId);
+	}
+
+	public void updateCachedBrands(Player member) {
+		brandCache.keySet().forEach(b -> PacketSendUtility.sendPacket(member, new SM_SHOW_BRAND(b, brandCache.get(b))));
+	}
 
 	@Override
 	public Race getRace() {

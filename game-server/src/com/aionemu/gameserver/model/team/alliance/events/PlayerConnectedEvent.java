@@ -7,7 +7,6 @@ import com.aionemu.gameserver.model.team.common.events.AlwaysTrueTeamEvent;
 import com.aionemu.gameserver.model.team.common.legacy.PlayerAllianceEvent;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ALLIANCE_INFO;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ALLIANCE_MEMBER_INFO;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_SHOW_BRAND;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
@@ -31,9 +30,9 @@ public class PlayerConnectedEvent extends AlwaysTrueTeamEvent {
 
 		PacketSendUtility.sendPacket(connected, new SM_ALLIANCE_INFO(alliance));
 		PacketSendUtility.sendPacket(connected, new SM_ALLIANCE_MEMBER_INFO(connectedMember, PlayerAllianceEvent.RECONNECT));
-		PacketSendUtility.sendPacket(connected, new SM_SHOW_BRAND(0, 0));
 
 		alliance.forEachTeamMember(member -> {
+			alliance.updateCachedBrands(connected);
 			Player player = member.getObject();
 			if (!connected.equals(player)) {
 				PacketSendUtility.sendPacket(player, new SM_ALLIANCE_MEMBER_INFO(connectedMember, PlayerAllianceEvent.RECONNECT));

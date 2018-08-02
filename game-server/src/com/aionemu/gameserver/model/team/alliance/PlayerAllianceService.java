@@ -273,6 +273,7 @@ public class PlayerAllianceService {
 	public static void showBrand(Player player, int targetObjId, int brandId) {
 		PlayerAlliance alliance = player.getPlayerAlliance();
 		if (alliance != null) {
+			alliance.onBrand(targetObjId, brandId);
 			alliance.onEvent(new ShowBrandEvent<>(alliance, targetObjId, brandId));
 		}
 	}
