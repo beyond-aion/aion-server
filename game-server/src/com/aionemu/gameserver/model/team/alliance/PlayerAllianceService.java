@@ -29,7 +29,6 @@ import com.aionemu.gameserver.model.team.alliance.events.PlayerAllianceUpdateEve
 import com.aionemu.gameserver.model.team.alliance.events.PlayerConnectedEvent;
 import com.aionemu.gameserver.model.team.alliance.events.PlayerDisconnectedEvent;
 import com.aionemu.gameserver.model.team.common.events.PlayerLeavedEvent.LeaveReson;
-import com.aionemu.gameserver.model.team.common.events.ShowBrandEvent;
 import com.aionemu.gameserver.model.team.common.events.TeamCommand;
 import com.aionemu.gameserver.model.team.common.events.TeamKinahDistributionEvent;
 import com.aionemu.gameserver.model.team.common.legacy.LootGroupRules;
@@ -274,7 +273,6 @@ public class PlayerAllianceService {
 		PlayerAlliance alliance = player.getPlayerAlliance();
 		if (alliance != null) {
 			alliance.onBrand(targetObjId, brandId);
-			alliance.onEvent(new ShowBrandEvent<>(alliance, targetObjId, brandId));
 		}
 	}
 

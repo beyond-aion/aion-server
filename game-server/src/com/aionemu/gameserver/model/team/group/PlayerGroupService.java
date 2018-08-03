@@ -13,7 +13,6 @@ import com.aionemu.gameserver.configs.main.GroupConfig;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.team.TeamType;
 import com.aionemu.gameserver.model.team.common.events.PlayerLeavedEvent.LeaveReson;
-import com.aionemu.gameserver.model.team.common.events.ShowBrandEvent;
 import com.aionemu.gameserver.model.team.common.events.TeamKinahDistributionEvent;
 import com.aionemu.gameserver.model.team.common.legacy.GroupEvent;
 import com.aionemu.gameserver.model.team.common.legacy.LootGroupRules;
@@ -186,7 +185,7 @@ public class PlayerGroupService {
 	public static void showBrand(Player player, int targetObjId, int brandId) {
 		PlayerGroup group = player.getPlayerGroup();
 		if (group != null) {
-			group.onEvent(new ShowBrandEvent<>(group, targetObjId, brandId));
+			group.onBrand(targetObjId, brandId);
 		}
 	}
 

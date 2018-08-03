@@ -1,12 +1,13 @@
 package com.aionemu.gameserver.model.team;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Predicate;
 
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.team.common.events.ShowBrandEvent;
 import com.aionemu.gameserver.model.team.common.legacy.LootGroupRules;
 import com.aionemu.gameserver.model.team.common.legacy.LootRuleType;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
@@ -22,7 +23,7 @@ import com.aionemu.gameserver.utils.collections.Predicates;
 public abstract class TemporaryPlayerTeam<TM extends TeamMember<Player>> extends GeneralTeam<Player, TM> {
 
 	private LootGroupRules lootGroupRules = new LootGroupRules();
-	private Map<Integer, Integer> brandCache = new HashMap<>();
+	private Map<Integer, Integer> brands = new ConcurrentHashMap<>();
 
 	public TemporaryPlayerTeam(int objId) {
 		super(objId);
@@ -39,14 +40,16 @@ public abstract class TemporaryPlayerTeam<TM extends TeamMember<Player>> extends
 	public abstract int getMaxExpPlayerLevel();
 
 	public void onBrand(int targetObjectId, int brandId) {
-		if (brandCache.containsKey(brandId))
-			brandCache.remove(brandId);
-
-		brandCache.put(brandId, targetObjectId);
+		brands.put(targetObjectId, brandId);
+		onEvent(new ShowBrandEvent<>(this, targetObjectId, brandId));
 	}
 
-	public void updateCachedBrands(Player member) {
-		brandCache.keySet().forEach(b -> PacketSendUtility.sendPacket(member, new SM_SHOW_BRAND(b, brandCache.get(b))));
+	public void removeBrand(int targetObjectId) {
+		brands.remove(targetObjectId);
+	}
+
+	public void sendBrands(Player member) {
+		brands.forEach((targetObjId, brandId) -> PacketSendUtility.sendPacket(member, new SM_SHOW_BRAND(brandId, targetObjId)));
 	}
 
 	@Override
