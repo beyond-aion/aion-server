@@ -33,6 +33,7 @@ public class PlayerAllianceEnteredEvent extends PlayerEnteredEvent<PlayerAllianc
 		PacketSendUtility.sendPacket(player, allianceMark);
 		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_FORCE_ENTERED_FORCE());
 		PacketSendUtility.sendPacket(player, allianceMemberInfo);
+		team.sendBrands(player);
 		team.forEachTeamMember(member -> {
 			Player p = member.getObject();
 			if (!player.equals(p)) {
