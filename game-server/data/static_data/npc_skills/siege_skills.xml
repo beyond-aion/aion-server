@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<npc_skill_templates xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="npc_skills.xsd">
+	<!-- Dredgion Commander Lv40 -->
+	<npc_skills npc_ids="276649">
+		<npc_skill id="19125" lv="1" prob="100" is_post_spawn="true" /><!-- Dragon's Blessing -->
+		<npc_skill id="17572" lv="65" prob="100" cd="45000" /><!-- Dragon Lord Blade I -->
+		<npc_skill id="17299" lv="65" prob="100" cd="25000" /><!-- Wide Area Ferocious Strike III -->
+		<npc_skill id="17301" lv="65" prob="100" cd="25000" /><!-- Wide Area Cleave Armor -->
+		<npc_skill id="17303" lv="65" prob="100" cd="25000" next_skill_time="0" next_chain_id="2" /><!-- Wide Area Pull -->
+		<npc_skill id="17305" lv="65" prob="100" cd="25000" next_skill_time="0" next_chain_id="1" /><!-- Wide Area Wrathful Strike -->
+		<npc_skill id="17307" lv="65" prob="0" cd="25000" chain_id="1"/><!-- Wide Area Crippling Cut -->
+		<npc_skill id="17310" lv="200" prob="100" cd="60000" /><!-- Rage 25s -->
+		<npc_skill id="17325" lv="65" prob="0" chain_id="2" next_skill_time="0" next_chain_id="3" /><!-- Wide Area Aerial Thrust -->
+		<npc_skill id="17327" lv="65" prob="0" chain_id="3" /><!-- Wide Area Crashing Wind Strike -->
+		<npc_skill id="17579" lv="1" prob="100" cd="90000" /><!-- Fear Shriek -->
+	</npc_skills>
+	<!-- Dredgion Commander Lv50 -->
+	<npc_skills npc_ids="276871 276872">
+		<npc_skill id="19125" lv="1" prob="100" is_post_spawn="true" /><!-- Dragon's Blessing -->
+		<npc_skill id="18411" lv="65" prob="100" cd="45000" /><!-- Dragon Lord Blade III -->
+		<npc_skill id="17299" lv="65" prob="100" cd="25000" /><!-- Wide Area Ferocious Strike III -->
+		<npc_skill id="17301" lv="65" prob="100" cd="25000" /><!-- Wide Area Cleave Armor -->
+		<npc_skill id="17303" lv="65" prob="100" cd="25000" next_skill_time="0" next_chain_id="2" /><!-- Wide Area Pull -->
+		<npc_skill id="17305" lv="65" prob="100" cd="25000" next_skill_time="0" next_chain_id="1" /><!-- Wide Area Wrathful Strike -->
+		<npc_skill id="17307" lv="65" prob="0" cd="25000" chain_id="1"/><!-- Wide Area Crippling Cut -->
+		<npc_skill id="17310" lv="200" prob="100" cd="60000" /><!-- Rage 25s -->
+		<npc_skill id="17325" lv="65" prob="0" chain_id="2" next_skill_time="0" next_chain_id="3" /><!-- Wide Area Aerial Thrust -->
+		<npc_skill id="17327" lv="65" prob="0" chain_id="3" /><!-- Wide Area Crashing Wind Strike -->
+		<npc_skill id="17579" lv="1" prob="100" cd="90000" /><!-- Fear Shriek -->
+	</npc_skills>
+	<!-- Dredgion Commander Lv65 -->
+	<npc_skills npc_ids="258236 273343">
+		<npc_skill id="19125" lv="1" prob="100" is_post_spawn="true" /><!-- Dragon's Blessing -->
+		<npc_skill id="18428" lv="65" prob="100" cd="45000" /><!-- Dragon Lord Blade IV -->
+		<npc_skill id="17299" lv="65" prob="100" cd="25000" /><!-- Wide Area Ferocious Strike III -->
+		<npc_skill id="17301" lv="65" prob="100" cd="25000" /><!-- Wide Area Cleave Armor -->
+		<npc_skill id="17303" lv="65" prob="100" cd="25000" next_skill_time="0" next_chain_id="2" /><!-- Wide Area Pull -->
+		<npc_skill id="17305" lv="65" prob="100" cd="25000" next_skill_time="0" next_chain_id="1" /><!-- Wide Area Wrathful Strike -->
+		<npc_skill id="17307" lv="65" prob="0" cd="25000" chain_id="1"/><!-- Wide Area Crippling Cut -->
+		<npc_skill id="17310" lv="200" prob="100" cd="60000" /><!-- Rage 25s -->
+		<npc_skill id="17325" lv="65" prob="0" chain_id="2" next_skill_time="0" next_chain_id="3" /><!-- Wide Area Aerial Thrust -->
+		<npc_skill id="17327" lv="65" prob="0" chain_id="3" /><!-- Wide Area Crashing Wind Strike -->
+		<npc_skill id="17579" lv="1" prob="100" cd="90000" /><!-- Fear Shriek -->
+	</npc_skills>
+</npc_skill_templates>
