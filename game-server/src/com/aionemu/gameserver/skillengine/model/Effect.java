@@ -748,6 +748,9 @@ public class Effect implements StatOwner {
 			deactivateToggleSkill();
 		}
 		effected.getEffectController().clearEffect(this, broadcast);
+		
+		if (effected instanceof Npc)
+			effected.getAi().onEffectEnd(this);
 		effected.getPosition().getWorldMapInstance().getInstanceHandler().onEndEffect(this);
 	}
 

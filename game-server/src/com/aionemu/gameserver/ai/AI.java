@@ -77,4 +77,6 @@ public interface AI {
 	void onStartUseSkill(SkillTemplate skillTemplate);
 
 	void onEndUseSkill(SkillTemplate skillTemplate);
+
+	void onEffectEnd(Effect effect);
 }
