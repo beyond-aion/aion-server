@@ -58,6 +58,7 @@ public class PlayerAllianceLeavedEvent extends PlayerLeavedEvent<PlayerAllianceM
 				leaveMsg = SM_SYSTEM_MESSAGE.STR_PARTY_ALLIANCE_DISPERSED();
 				break;
 		}
+		team.removeBrand(leavedPlayer.getObjectId());
 		team.forEach(player -> {
 			PacketSendUtility.sendPacket(player, leaveMsg);
 			if (reason != LeaveReson.DISBAND) {
