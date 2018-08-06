@@ -20121,19 +20121,19 @@
 		<items>
 			<item id="186000237" min_count="25" /><!-- Ancient Coin -->
 			<item id="152012616" /><!-- Passion Crystal -->
-			<item id="188057222" /><!-- Danuar Reliquary Expedition's Idian Bundle -->
+			<item id="188052500" /><!-- Danuar Reliquary Expedition's Idian Bundle -->
 			<random_item type="SPECIAL_MANASTONE_LEGEND_GRADE" />
 		</items>
 		<items>
 			<item id="186000237" min_count="25" /><!-- Ancient Coin -->
 			<item id="152012618" /><!-- Ore of Pssion -->
-			<item id="188057222" /><!-- Danuar Reliquary Expedition's Idian Bundle -->
+			<item id="188052500" /><!-- Danuar Reliquary Expedition's Idian Bundle -->
 			<random_item type="SPECIAL_MANASTONE_UNIQUE_GRADE" />
 		</items>
 		<items>
 			<item id="186000237" min_count="25" /><!-- Ancient Coin -->
 			<item id="152012620" /><!-- Passion Gemstone -->
-			<item id="188057222" /><!-- Danuar Reliquary Expedition's Idian Bundle -->
+			<item id="188052500" /><!-- Danuar Reliquary Expedition's Idian Bundle -->
 			<random_item type="SPECIAL_MANASTONE_UNIQUE_GRADE" />
 		</items>
 	</decomposable>
