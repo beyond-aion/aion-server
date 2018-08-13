@@ -29,7 +29,7 @@ public class NpcStatCalculation {
 			case MAGICAL_ACCURACY:
 				return level * 25f;
 			case MAGICAL_RESIST: // formula with help of https://www.wolframalpha.com/input/?i=fit+(1,20),(15,270),(30,585),(50,1075),(60,1350),(65,1495)
-				return 0.1f * (float) Math.sqrt(level) + 16.5f * level;
+				return 0.1f * (float) Math.pow(level, 2) + 16.5f * level;
 			case PHYSICAL_ACCURACY:
 				return level * 37f;
 			case PARRY:
