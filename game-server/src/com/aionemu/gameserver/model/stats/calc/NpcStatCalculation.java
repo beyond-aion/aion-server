@@ -24,8 +24,9 @@ public class NpcStatCalculation {
 			case MAGICAL_DEFEND:
 				return level * 5f;
 			case MAGICAL_ATTACK:
-			case PHYSICAL_DEFENSE:
 				return level * 20f;
+			case PHYSICAL_DEFENSE:
+				return level * 17f;
 			case MAGICAL_ACCURACY:
 				return level * 25f;
 			case MAGICAL_RESIST: // formula with help of https://www.wolframalpha.com/input/?i=fit+(1,20),(15,270),(30,585),(50,1075),(60,1350),(65,1495)
