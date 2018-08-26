@@ -12,8 +12,7 @@ import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
- * @author Cheatkiller
- * @modified Luzien, Estrayl March 6th, 2018
+ * @author Cheatkiller, Luzien, Estrayl
  */
 @AIName("ide_resonator")
 public class IdeResonatorAI extends NpcAI {
@@ -28,7 +27,7 @@ public class IdeResonatorAI extends NpcAI {
 	protected void handleSpawned() {
 		super.handleSpawned();
 		Npc hyperion = getPosition().getWorldMapInstance().getNpc(231073);
-		AIActions.targetCreature(IdeResonatorAI.this, hyperion);
+		AIActions.targetCreature(this, hyperion);
 		ThreadPoolManager.getInstance().schedule(() -> {
 			if (!isDead() && hyperion != null && !hyperion.isDead()) {
 				int firstBuff = 0;
@@ -43,23 +42,27 @@ public class IdeResonatorAI extends NpcAI {
 						firstBuff = 21257;
 						break;
 				}
-				AIActions.useSkill(IdeResonatorAI.this, firstBuff);
+				AIActions.useSkill(this, firstBuff);
 			}
 		}, 8000);
-		task = ThreadPoolManager.getInstance().schedule(() -> {
-			if (!isDead() && !getOwner().getLifeStats().isAboutToDie() && hyperion != null && !hyperion.isDead()) {
-				int secondBuff = 0;
-				if (!hyperion.getEffectController().hasAbnormalEffect(21258))
-					secondBuff = 21258;
-				else if (!hyperion.getEffectController().hasAbnormalEffect(21382))
-					secondBuff = 21382;
-				else if (!hyperion.getEffectController().hasAbnormalEffect(21384))
-					secondBuff = 21384;
-				else if (!hyperion.getEffectController().hasAbnormalEffect(21416))
-					secondBuff = 21416;
+		task = ThreadPoolManager.getInstance().schedule(new Runnable() {
 
-				if (secondBuff != 0)
-					AIActions.useSkill(this, secondBuff);
+			@Override
+			public void run() {
+				if (!isDead() && hyperion != null && !hyperion.isDead()) {
+					int secondBuff = 0;
+					if (!hyperion.getEffectController().hasAbnormalEffect(21258))
+						secondBuff = 21258;
+					else if (!hyperion.getEffectController().hasAbnormalEffect(21382))
+						secondBuff = 21382;
+					else if (!hyperion.getEffectController().hasAbnormalEffect(21384))
+						secondBuff = 21384;
+					else if (!hyperion.getEffectController().hasAbnormalEffect(21416))
+						secondBuff = 21416;
+
+					if (secondBuff != 0)
+						AIActions.useSkill(IdeResonatorAI.this, secondBuff);
+				}
 			}
 		}, 18000);
 	}
@@ -76,16 +79,20 @@ public class IdeResonatorAI extends NpcAI {
 		}
 	}
 
+	private void cancelTask() {
+		if (task != null && !task.isCancelled())
+			task.cancel(true);
+	}
+
 	@Override
 	protected void handleDied() {
-		task.cancel(true);
+		cancelTask();
 		super.handleDied();
 	}
 
 	@Override
 	protected void handleDespawned() {
-		if (task != null && !task.isCancelled())
-			task.cancel(true);
+		cancelTask();
 		super.handleDespawned();
 	}
 
