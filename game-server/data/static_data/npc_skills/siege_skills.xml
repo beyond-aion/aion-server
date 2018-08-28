@@ -1,5 +1,76 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <npc_skill_templates xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="npc_skills.xsd">
+	<!-- Enraged Veille -->
+	<npc_skills npc_ids="258200 258201 258202 258203 258204">
+		<npc_skill id="18704" lv="1" prob="100" max_hp="50" prio="1" cd="240000"/>
+		<npc_skill id="18707" lv="1" prob="20" max_hp="30" cd="300000" /><!-- Veille's Will 3 min -->
+		<npc_skill id="18709" lv="60" prob="100" cd="25000" /><!-- Agent's Call -->
+		<npc_skill id="18710" lv="60" prob="100" cd="25000" /><!-- Withering Stare -->
+		<npc_skill id="18711" lv="60" prob="100" cd="25000" /><!-- Agent's Wrath -->
+		<npc_skill id="18712" lv="51" prob="100" cd="25000" /><!-- Trap Strike -->
+		<npc_skill id="18713" lv="60" prob="100" cd="25000" /><!-- Demoralize -->
+		<npc_skill id="18986" lv="60" prob="100" cd="25000" /><!-- Sinful Retribution -->
+		<npc_skill id="18987" lv="60" prob="100" cd="25000" /><!-- Fool's Bane -->
+		<npc_skill id="20362" lv="1" prob="100" min_time="1800000" cd="1800000" /><!-- Veille's Will 30 min -->
+	</npc_skills>
+	<!-- Veille's Fire Spirit -->
+	<npc_skills npc_ids="281434">
+		<npc_skill id="18714" lv="60" prob="100" /><!-- Fire Power -->
+		<npc_skill id="18718" lv="60" prob="100" /><!-- Punishing Flame -->
+	</npc_skills>
+	<!-- Veille's Hurrikane -->
+	<npc_skills npc_ids="281435">
+		<npc_skill id="18715" lv="60" prob="100" /><!-- Power of Wind -->
+		<npc_skill id="18719" lv="60" prob="100" /><!-- Wind's Bane -->
+	</npc_skills>
+	<!-- Veille's Earth Spirit -->
+	<npc_skills npc_ids="281436">
+		<npc_skill id="18716" lv="60" prob="100" /><!-- Earth Power -->
+		<npc_skill id="18720" lv="60" prob="100" /><!-- Punishing Earth -->
+	</npc_skills>
+	<!-- Veille's Undertow -->
+	<npc_skills npc_ids="281437">
+		<npc_skill id="18717" lv="60" prob="100" /><!-- Water Power -->
+		<npc_skill id="18721" lv="60" prob="100" /><!-- Punishing Wave -->
+	</npc_skills>
+	<!-- Enraged Mastarius -->
+	<npc_skills npc_ids="258205 258206 258207 258208 258209">
+		<npc_skill id="18704" lv="1" prob="100" max_hp="50" prio="1" cd="240000"/>
+		<npc_skill id="18706" lv="1" prob="20" max_hp="30" cd="300000" /><!-- Blessing of Mastarius 3 min -->
+		<npc_skill id="18709" lv="60" prob="100" cd="25000" /><!-- Agent's Call -->
+		<npc_skill id="18710" lv="60" prob="100" cd="25000" /><!-- Withering Stare -->
+		<npc_skill id="18711" lv="60" prob="100" cd="25000" /><!-- Agent's Wrath -->
+		<npc_skill id="18712" lv="51" prob="100" cd="25000" /><!-- Trap Strike -->
+		<npc_skill id="18713" lv="60" prob="100" cd="25000" /><!-- Demoralize -->
+		<npc_skill id="18986" lv="60" prob="100" cd="25000" /><!-- Sinful Retribution -->
+		<npc_skill id="18987" lv="60" prob="100" cd="25000" /><!-- Fool's Bane -->
+		<npc_skill id="20361" lv="1" prob="100" min_time="1800000" cd="1800000" /><!-- Blessing of Mastarius 30 min -->
+	</npc_skills>
+	<!-- Mastarius Holy Servant I -->
+	<npc_skills npc_ids="281441">
+		<npc_skill id="18735" lv="60" prob="100" /><!-- Divine Power -->
+		<npc_skill id="18736" lv="60" prob="100" /><!-- Divine Wave -->
+	</npc_skills>
+	<!-- Mastarius Holy Servant II -->
+	<npc_skills npc_ids="281442">
+		<npc_skill id="18735" lv="60" prob="100" /><!-- Divine Power -->
+		<npc_skill id="18737" lv="60" prob="100" /><!-- Divine Pain -->
+	</npc_skills>
+	<!-- Mastarius Divine Crusader I -->
+	<npc_skills npc_ids="281443">
+		<npc_skill id="18735" lv="60" prob="100" /><!-- Divine Power -->
+		<npc_skill id="18738" lv="60" prob="100" /><!-- Divine Strike -->
+	</npc_skills>
+	<!-- Mastarius Consecration -->
+	<npc_skills npc_ids="281444">
+		<npc_skill id="18735" lv="60" prob="100" /><!-- Divine Power -->
+		<npc_skill id="18739" lv="60" prob="100" /><!-- Divine Silence -->
+	</npc_skills>
+	<!-- Aether Tower Sentry -->
+	<npc_skills npc_ids="281492 281493">
+		<npc_skill id="17789" lv="65" prob="100" />
+		<npc_skill id="17791" lv="65" prob="100" />
+	</npc_skills>
 	<!-- Dredgion Commander Lv40 -->
 	<npc_skills npc_ids="276649">
 		<npc_skill id="19125" lv="1" prob="100" is_post_spawn="true" /><!-- Dragon's Blessing -->

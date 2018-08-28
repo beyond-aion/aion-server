@@ -59,8 +59,7 @@ public class SiegeLocationData {
 					artifactLocations.put(template.getId(), artifact);
 					siegeLocations.put(template.getId(), artifact);
 					break;
-				case VEILLE:
-				case MASTARIUS:
+				case OUTPOST:
 					OutpostLocation protector = new OutpostLocation(template);
 					outpostLocations.put(template.getId(), protector);
 					siegeLocations.put(template.getId(), protector);

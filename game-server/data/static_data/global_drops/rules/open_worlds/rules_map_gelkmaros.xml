@@ -147,4 +147,97 @@
 			<gd_item id="188053745" /><!-- Elegant High Grade Composite Manastone Bundle -->
 		</gd_items>
 	</gd_rule>
+	<gd_rule rule_name="Mastarius Weapon" base_chance="100" min_count="1" fixed_chance="true">
+		<gd_maps>
+			<gd_map map_id="220070000" /><!-- Gelkmaros -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="258207" /><!-- Enraged Mastarius -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="100001308" /><!-- Enraged Mastarius' Sword -->
+			<gd_item id="100100997" /><!-- Enraged Mastarius' Mace -->
+			<gd_item id="100201159" /><!-- Enraged Mastarius' Dagger -->
+			<gd_item id="100501013" /><!-- Enraged Mastarius' Orb -->
+			<gd_item id="100601066" /><!-- Enraged Mastarius' Spellbook -->
+			<gd_item id="100901002" /><!-- Enraged Mastarius' Greatsword -->
+			<gd_item id="101300956" /><!-- Enraged Mastarius' Spear -->
+			<gd_item id="101501026" /><!-- Enraged Mastarius' Staff -->
+			<gd_item id="101701038" /><!-- Enraged Mastarius' Bow -->
+			<gd_item id="101800799" /><!-- Enraged Mastarius' Pistol -->
+			<gd_item id="101900803" /><!-- Enraged Mastarius' Main Cannon -->
+			<gd_item id="102000837" /><!-- Enraged Mastarius' Harp -->
+			<gd_item id="102100699" /><!-- Enraged Mastarius' Cipher-Blade -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Mastarius Armor" base_chance="100" min_count="1" max_drop_rule="3" fixed_chance="true">
+		<gd_maps>
+			<gd_map map_id="220070000" /><!-- Gelkmaros -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="258207" /><!-- Enraged Mastarius -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="110101395" /><!-- Enraged Mastarius' Tunic -->
+			<gd_item id="110301321" /><!-- Enraged Mastarius' Jerkin -->
+			<gd_item id="110301587" /><!-- Enraged Mastarius' Magic Jerkin -->
+			<gd_item id="110501299" /><!-- Enraged Mastarius' Hauberk -->
+			<gd_item id="110551008" /><!-- Enraged Mastarius' Magic Hauberk -->
+			<gd_item id="110601273" /><!-- Enraged Mastarius' Breastplate -->
+			<gd_item id="111101272" /><!-- Enraged Mastarius' Gloves -->
+			<gd_item id="111301266" /><!-- Enraged Mastarius' Vambrace -->
+			<gd_item id="111301525" /><!-- Enraged Mastarius' Magic Vambrace -->
+			<gd_item id="111501260" /><!-- Enraged Mastarius' Handguards -->
+			<gd_item id="111501566" /><!-- Enraged Mastarius' Magic Handguards -->
+			<gd_item id="111601240" /><!-- Enraged Mastarius' Gauntlets -->
+			<gd_item id="112101228" /><!-- Enraged Mastarius' Pauldrons -->
+			<gd_item id="112301210" /><!-- Enraged Mastarius' Shoulderguards -->
+			<gd_item id="112301466" /><!-- Enraged Mastarius' Magic Shoulderguards -->
+			<gd_item id="112501203" /><!-- Enraged Mastarius' Spaulders -->
+			<gd_item id="112501508" /><!-- Enraged Mastarius' Magic Spaulders -->
+			<gd_item id="112601216" /><!-- Enraged Mastarius' Shoulderplates -->
+			<gd_item id="113101289" /><!-- Enraged Mastarius' Leggings -->
+			<gd_item id="113301290" /><!-- Enraged Mastarius' Breeches -->
+			<gd_item id="113301553" /><!-- Enraged Mastarius' Magic Breeches -->
+			<gd_item id="113501275" /><!-- Enraged Mastarius' Chausses -->
+			<gd_item id="113501584" /><!-- Enraged Mastarius' Magic Chausses -->
+			<gd_item id="113601229" /><!-- Enraged Mastarius' Greaves -->
+			<gd_item id="114101318" /><!-- Enraged Mastarius' Shoes -->
+			<gd_item id="114301323" /><!-- Enraged Mastarius' Boots -->
+			<gd_item id="114301591" /><!-- Enraged Mastarius' Magic Boots -->
+			<gd_item id="114501281" /><!-- Enraged Mastarius' Brogans -->
+			<gd_item id="114501593" /><!-- Enraged Mastarius' Magic Brogans -->
+			<gd_item id="114601224" /><!-- Enraged Mastarius' Sabatons -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Mastarius Shield" base_chance="10" min_count="1" fixed_chance="true">
+		<gd_maps>
+			<gd_map map_id="220070000" /><!-- Gelkmaros -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="258207" /><!-- Enraged Mastarius -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="115001358" /><!-- Enraged Mastarius' Shield -->
+			<gd_item id="115001360" /><!-- Enraged Mastarius' Scale Shield -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Mastarius Accessory" base_chance="100" min_count="1" fixed_chance="true">
+		<gd_maps>
+			<gd_map map_id="220070000" /><!-- Gelkmaros -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="258207" /><!-- Enraged Mastarius -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="120001053" /><!-- Mastarius' Corundum Earrings -->
+			<gd_item id="120001054" /><!-- Mastarius' Turquoise Earrings -->
+			<gd_item id="125002321" /><!-- Mastarius' Headband -->
+			<gd_item id="125002322" /><!-- Mastarius' Hat -->
+			<gd_item id="125002323" /><!-- Mastarius' Chain Hood -->
+			<gd_item id="125002324" /><!-- Mastarius' Helm -->
+			<gd_item id="125003570" /><!-- Mastarius' Hat -->
+			<gd_item id="125003836" /><!-- Mastarius' Magic Helm -->
+		</gd_items>
+	</gd_rule>
 </global_rules>

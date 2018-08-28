@@ -8,8 +8,7 @@ public enum SiegeType {
 	FORTRESS,
 	ARTIFACT,
 
-	VEILLE,
-	MASTARIUS,
+	OUTPOST,
 	AGENT_FIGHT,
 
 	// Unk

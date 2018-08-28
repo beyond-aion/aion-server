@@ -19919,15 +19919,15 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * %1 of %0 has killed Marchutan's Agent Mastarius.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_FIELDABYSS_DARKBOSS_KILLED(String value1, String value0) {
-		return new SM_SYSTEM_MESSAGE(1400323, value1, value0);
+	public static final SM_SYSTEM_MESSAGE STR_FIELDABYSS_DARKBOSS_KILLED(String playerName, String legionName) {
+		return new SM_SYSTEM_MESSAGE(1400323, legionName, playerName);
 	}
 
 	/**
 	 * %1 of %0 has killed Kaisinel's Agent Veille.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_FIELDABYSS_LIGHTBOSS_KILLED(String value1, String value0) {
-		return new SM_SYSTEM_MESSAGE(1400324, value1, value0);
+	public static final SM_SYSTEM_MESSAGE STR_FIELDABYSS_LIGHTBOSS_KILLED(String playerName, String legionName) {
+		return new SM_SYSTEM_MESSAGE(1400324, legionName, playerName);
 	}
 
 	/**

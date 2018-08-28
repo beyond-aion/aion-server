@@ -6,9 +6,13 @@ import com.aionemu.gameserver.model.templates.siegelocation.SiegeLocationTemplat
 import com.aionemu.gameserver.services.SiegeService;
 
 /**
- * @author Source These bosses only appear when an faction conquer all balaurea fortress... If Elyos conquer all fortress the Enraged Mastarius appear
- *         on Ancient City of Marayas If Asmodians conquer all fortress the Enraged Veille appear on Inggison Outpost He/She still active for 2 hours
- *         after that he/she disappear and respawn again next day on the end of Siege (if the faction owns all fortress)
+ * These bosses only appear when a faction conquers the balaurea fortresses of their enemy map.
+ * If Elyos conquer Gelkmaros' fortresses Enraged Mastarius will appear on Ancient City of Marayas.
+ * If Asmodians conquer Inggison's fortresses Enraged Veille will appear on Inggison Outpost.
+ * He/She will stay for about 2 hours after that he/she disappears and re-spawns after the end of the next siege if conditions
+ * are still met.
+ * 
+ * @author Source
  */
 public class OutpostLocation extends SiegeLocation {
 
@@ -51,14 +55,12 @@ public class OutpostLocation extends SiegeLocation {
 		return !isSiegeAllowed() && !getRace().equals(SiegeRace.BALAUR);
 	}
 
-	public boolean isRouteSpawned() {
+	public boolean areFortressesOccupiedByAnotherFaction() {
 		for (Integer fortressId : getFortressDependency()) {
-			SiegeRace sr = SiegeService.getInstance().getFortresses().get(fortressId).getRace();
-			if (sr == getLocationRace()) {
-				return true;
-			}
+			SiegeRace fortressSiegeRace = SiegeService.getInstance().getFortresses().get(fortressId).getRace();
+			if (fortressSiegeRace == getLocationRace())
+				return false;
 		}
-
-		return false;
+		return true;
 	}
 }

@@ -774,4 +774,50 @@
 			</percentage>
 		</summons>
 	</ai>
+	<!-- Enraged Veille -->
+	<ai npcId="258203">
+		<summons>
+			<percentage percent="80">
+				<summonGroup npcId="281434" count="1" distance="10"/><!-- Fire Spirit -->
+			</percentage>
+			<percentage percent="60">
+				<summonGroup npcId="281434" count="1" distance="10"/><!-- Fire Spirit -->
+				<summonGroup npcId="281435" count="1" distance="10"/><!-- Hurrikane -->
+			</percentage>
+			<percentage percent="40">
+				<summonGroup npcId="281434" count="1" distance="10"/><!-- Fire Spirit -->
+				<summonGroup npcId="281435" count="1" distance="10"/><!-- Hurrikane -->
+				<summonGroup npcId="281436" count="1" distance="10"/><!-- Earth Spirit -->
+			</percentage>
+			<percentage percent="20">
+				<summonGroup npcId="281434" count="1" distance="10"/><!-- Fire Spirit -->
+				<summonGroup npcId="281435" count="1" distance="10"/><!-- Hurrikane -->
+				<summonGroup npcId="281436" count="1" distance="10"/><!-- Earth Spirit -->
+				<summonGroup npcId="281437" count="1" distance="10"/><!-- Undertow -->
+			</percentage>
+		</summons>
+	</ai>
+	<!-- Enraged Mastarius -->
+	<ai npcId="258207">
+		<summons>
+			<percentage percent="80">
+				<summonGroup npcId="281441" count="1" distance="10"/><!-- Holy Servant I -->
+			</percentage>
+			<percentage percent="60">
+				<summonGroup npcId="281441" count="1" distance="10"/><!-- Holy Servant I -->
+				<summonGroup npcId="281442" count="1" distance="10"/><!-- Holy Servant II -->
+			</percentage>
+			<percentage percent="40">
+				<summonGroup npcId="281441" count="1" distance="10"/><!-- Holy Servant I -->
+				<summonGroup npcId="281442" count="1" distance="10"/><!-- Holy Servant II -->
+				<summonGroup npcId="281443" count="1" distance="10"/><!-- Divine Crusader I -->
+			</percentage>
+			<percentage percent="20">
+				<summonGroup npcId="281441" count="1" distance="10"/><!-- Holy Servant I -->
+				<summonGroup npcId="281442" count="1" distance="10"/><!-- Holy Servant II -->
+				<summonGroup npcId="281443" count="1" distance="10"/><!-- Divine Crusader I -->
+				<summonGroup npcId="281444" count="1" distance="10"/><!-- Consecration -->
+			</percentage>
+		</summons>
+	</ai>
 </ai_templates>

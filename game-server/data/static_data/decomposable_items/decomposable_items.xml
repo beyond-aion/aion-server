@@ -4079,45 +4079,110 @@
 	</decomposable>
 	<decomposable item_id="188050702"><!-- Veille's 1st Grade Reward -->
 		<items>
-			<item id="186000096" min_count="5" /><!-- Platinum Medal -->
+			<item id="169610112" /><!-- [Title] Vanquisher of Mastarius -->
+			<item id="186000242" min_count="5" /><!-- Ceramium Medal -->
+			<item id="182006281" min_count="3" /><!-- Veille's Favor -->
+			<random_item type="ANCIENT_CROWN" min_count="3" max_count="5" />
+			<random_item type="ILLUSION_GODSTONE" />
 		</items>
 	</decomposable>
 	<decomposable item_id="188050703"><!-- Veille's 2nd Grade Reward -->
-		<items>
-			<item id="186000096" min_count="4" /><!-- Platinum Medal -->
+		<items chance="20">
+			<item id="169610112" /><!-- [Title] Vanquisher of Mastarius -->
+			<item id="186000242" min_count="3" /><!-- Ceramium Medal -->
+			<item id="182006281" min_count="2" /><!-- Veille's Favor -->
+			<random_item type="ANCIENT_GOBLET" min_count="3" max_count="5" />
+		</items>
+		<items chance="80">
+			<item id="169610112" /><!-- [Title] Vanquisher of Mastarius -->
+			<item id="186000242" min_count="3" /><!-- Ceramium Medal -->
+			<item id="182006281" min_count="2" /><!-- Veille's Favor -->
+			<random_item type="ANCIENT_GOBLET" min_count="3" max_count="5" />
+			<random_item type="ILLUSION_GODSTONE" />
 		</items>
 	</decomposable>
 	<decomposable item_id="188050704"><!-- Veille's 3rd Grade Reward -->
 		<items>
-			<item id="186000096" min_count="3" /><!-- Platinum Medal -->
+			<item id="169610112" /><!-- [Title] Vanquisher of Mastarius -->
+			<item id="186000242" min_count="2" /><!-- Ceramium Medal -->
+			<item id="182006281" min_count="1" /><!-- Veille's Favor -->
+			<random_item type="ANCIENT_SEAL" min_count="3" max_count="5" />
+		</items>
+		<items>
+			<item id="169610112" /><!-- [Title] Vanquisher of Mastarius -->
+			<item id="186000242" min_count="2" /><!-- Ceramium Medal -->
+			<item id="182006281" min_count="1" /><!-- Veille's Favor -->
+			<random_item type="ANCIENT_SEAL" min_count="3" max_count="5" />
+			<random_item type="ILLUSION_GODSTONE" />
 		</items>
 	</decomposable>
 	<decomposable item_id="188050705"><!-- Veille's 4th Grade Reward -->
-		<items>
-			<item id="186000096" min_count="2" /><!-- Platinum Medal -->
+		<items chance="80">
+			<item id="169610112" /><!-- [Title] Vanquisher of Mastarius -->
+			<item id="186000242" min_count="1" /><!-- Ceramium Medal -->
+			<item id="182006281" min_count="1" /><!-- Veille's Favor -->
+			<random_item type="ANCIENT_ICON" min_count="3" max_count="5" />
+		</items>
+		<items chance="20">
+			<item id="169610112" /><!-- [Title] Vanquisher of Mastarius -->
+			<item id="186000242" min_count="1" /><!-- Ceramium Medal -->
+			<item id="182006281" min_count="1" /><!-- Veille's Favor -->
+			<random_item type="ANCIENT_ICON" min_count="3" max_count="5" />
+			<random_item type="ILLUSION_GODSTONE" />
 		</items>
 	</decomposable>
 	<decomposable item_id="188050706"><!-- Mastarius' 1st Grade Reward -->
 		<items>
-			<item id="186000096" min_count="5" /><!-- Platinum Medal -->
+			<item id="169610312" /><!-- [Title] Vanquisher of Veille -->
+			<item id="186000242" min_count="5" /><!-- Ceramium Medal -->
+			<item id="182006282" min_count="3" /><!-- Mastarius' Favor -->
+			<random_item type="ANCIENT_CROWN" min_count="3" max_count="5" />
+			<random_item type="ILLUSION_GODSTONE" />
 		</items>
 	</decomposable>
 	<decomposable item_id="188050707"><!-- Mastarius' 2nd Grade Reward -->
-		<items>
-			<item id="182006282" /><!-- Mastarius' Favor -->
+		<items chance="20">
+			<item id="169610312" /><!-- [Title] Vanquisher of Veille -->
+			<item id="186000242" min_count="3" /><!-- Ceramium Medal -->
+			<item id="182006282" min_count="2" /><!-- Mastarius' Favor -->
+			<random_item type="ANCIENT_GOBLET" min_count="3" max_count="5" />
 		</items>
-		<items>
-			<item id="186000096" min_count="4" /><!-- Platinum Medal -->
+		<items chance="80">
+			<item id="169610312" /><!-- [Title] Vanquisher of Veille -->
+			<item id="186000242" min_count="3" /><!-- Ceramium Medal -->
+			<item id="182006282" min_count="2" /><!-- Mastarius' Favor -->
+			<random_item type="ANCIENT_GOBLET" min_count="3" max_count="5" />
+			<random_item type="ILLUSION_GODSTONE" />
 		</items>
 	</decomposable>
 	<decomposable item_id="188050708"><!-- Mastarius' 3rd Grade Reward -->
 		<items>
-			<item id="186000096" min_count="3" /><!-- Platinum Medal -->
+			<item id="169610312" /><!-- [Title] Vanquisher of Veille -->
+			<item id="186000242" min_count="2" /><!-- Ceramium Medal -->
+			<item id="182006282" min_count="1" /><!-- Mastarius' Favor -->
+			<random_item type="ANCIENT_SEAL" min_count="3" max_count="5" />
+		</items>
+		<items>
+			<item id="169610312" /><!-- [Title] Vanquisher of Veille -->
+			<item id="186000242" min_count="2" /><!-- Ceramium Medal -->
+			<item id="182006282" min_count="1" /><!-- Mastarius' Favor -->
+			<random_item type="ANCIENT_SEAL" min_count="3" max_count="5" />
+			<random_item type="ILLUSION_GODSTONE" />
 		</items>
 	</decomposable>
 	<decomposable item_id="188050709"><!-- Mastarius' 4th Grade Reward -->
-		<items>
-			<item id="186000096" min_count="2" /><!-- Platinum Medal -->
+		<items chance="80">
+			<item id="169610312" /><!-- [Title] Vanquisher of Veille -->
+			<item id="186000242" min_count="1" /><!-- Ceramium Medal -->
+			<item id="182006282" min_count="1" /><!-- Mastarius' Favor -->
+			<random_item type="ANCIENT_ICON" min_count="3" max_count="5" />
+		</items>
+		<items chance="20">
+			<item id="169610312" /><!-- [Title] Vanquisher of Veille -->
+			<item id="186000242" min_count="1" /><!-- Ceramium Medal -->
+			<item id="182006282" min_count="1" /><!-- Mastarius' Favor -->
+			<random_item type="ANCIENT_ICON" min_count="3" max_count="5" />
+			<random_item type="ILLUSION_GODSTONE" />
 		</items>
 	</decomposable>
 	<decomposable item_id="188050710"><!-- Proposal Candy Box -->

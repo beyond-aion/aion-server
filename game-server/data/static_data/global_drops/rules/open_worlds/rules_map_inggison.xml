@@ -146,4 +146,93 @@
 			<gd_item id="188053745" /><!-- Elegant High Grade Composite Manastone Bundle -->
 		</gd_items>
 	</gd_rule>
+	<gd_rule rule_name="Veille Weapon" base_chance="100" min_count="1" fixed_chance="true">
+		<gd_maps>
+			<gd_map map_id="210050000" /><!-- Inggison -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="258203" /><!-- Enraged Veille -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="100001307" /><!-- Enraged Veille's Sword -->
+			<gd_item id="100100996" /><!-- Enraged Veille's Warhammer -->
+			<gd_item id="100201158" /><!-- Enraged Veille's Dagger -->
+			<gd_item id="100501012" /><!-- Enraged Veille's Jewel -->
+			<gd_item id="100601065" /><!-- Enraged Veille's Tome -->
+			<gd_item id="100901001" /><!-- Enraged Veille's Greatsword -->
+			<gd_item id="101300955" /><!-- Enraged Veille's Spear -->
+			<gd_item id="101501025" /><!-- Enraged Veille's Staff -->
+			<gd_item id="101701037" /><!-- Enraged Veille's Longbow -->
+			<gd_item id="101800798" /><!-- Enraged Veille's Pistol -->
+			<gd_item id="101900802" /><!-- Enraged Veille's Aethercannon -->
+			<gd_item id="102000836" /><!-- Enraged Veille's Harp -->
+			<gd_item id="102100698" /><!-- Enraged Veille's Cipher-Blade -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Veille Armor" base_chance="100" min_count="1" max_drop_rule="3" fixed_chance="true">
+		<gd_maps>
+			<gd_map map_id="210050000" /><!-- Inggison -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="258203" /><!-- Enraged Veille -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="110101394" /><!-- Enraged Veille's Tunic -->
+			<gd_item id="110301320" /><!-- Enraged Veille's Jerkin -->
+			<gd_item id="110301619" /><!-- Enraged Veille's Magic Jerkin -->
+			<gd_item id="110501298" /><!-- Enraged Veille's Hauberk -->
+			<gd_item id="110551009" /><!-- Enraged Veille's Magic Hauberk -->
+			<gd_item id="110601272" /><!-- Enraged Veille's Breastplate -->
+			<gd_item id="111101271" /><!-- Enraged Veille's Gloves -->
+			<gd_item id="111301265" /><!-- Enraged Veille's Vambrace -->
+			<gd_item id="111301557" /><!-- Enraged Veille's Magic Vambrace -->
+			<gd_item id="111501259" /><!-- Enraged Veille's Handguards -->
+			<gd_item id="111501567" /><!-- Enraged Veille's Magic Handguards -->
+			<gd_item id="111601239" /><!-- Enraged Veille's Gauntlets -->
+			<gd_item id="112101227" /><!-- Enraged Veille's Pauldrons -->
+			<gd_item id="112301209" /><!-- Enraged Veille's Shoulderguards -->
+			<gd_item id="112301498" /><!-- Enraged Veille's Magic Shoulderguards -->
+			<gd_item id="112501202" /><!-- Enraged Veille's Spaulders -->
+			<gd_item id="112501509" /><!-- Enraged Veille's Magic Spaulders -->
+			<gd_item id="112601215" /><!-- Enraged Veille's Shoulderplates -->
+			<gd_item id="113101288" /><!-- Enraged Veille's Leggings -->
+			<gd_item id="113301289" /><!-- Enraged Veille's Breeches -->
+			<gd_item id="113301585" /><!-- Enraged Veille's Magic Breeches -->
+			<gd_item id="113501274" /><!-- Enraged Veille's Chausses -->
+			<gd_item id="113501585" /><!-- Enraged Veille's Magic Chausses -->
+			<gd_item id="113601228" /><!-- Enraged Veille's Greaves -->
+			<gd_item id="114101317" /><!-- Enraged Veille's Shoes -->
+			<gd_item id="114301322" /><!-- Enraged Veille's Boots -->
+			<gd_item id="114301623" /><!-- Enraged Veille's Magic Boots -->
+			<gd_item id="114501280" /><!-- Enraged Veille's Brogans -->
+			<gd_item id="114501594" /><!-- Enraged Veille's Magic Brogans -->
+			<gd_item id="114601223" /><!-- Enraged Veille's Sabatons -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Veille Shield" base_chance="10" min_count="1" fixed_chance="true">
+		<gd_maps>
+			<gd_map map_id="210050000" /><!-- Inggison -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="258203" /><!-- Enraged Veille -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="115001357" /><!-- Enraged Veille's Shield -->
+			<gd_item id="115001359" /><!-- Enraged Veille's Scale Shield -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Veille Accessory" base_chance="100" min_count="1" fixed_chance="true">
+		<gd_maps>
+			<gd_map map_id="210050000" /><!-- Inggison -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="258203" /><!-- Enraged Veille -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="121000951" /><!-- Veille's Corundum Necklace -->
+			<gd_item id="121000952" /><!-- Veille's Turquoise Necklace -->
+			<gd_item id="122001180" /><!-- Veille's Corundum Ring -->
+			<gd_item id="122001181" /><!-- Veille's Turquoise Ring -->
+		</gd_items>
+	</gd_rule>
 </global_rules>

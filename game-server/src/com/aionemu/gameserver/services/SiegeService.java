@@ -149,9 +149,7 @@ public class SiegeService {
 
 		// spawn outpost protectors...
 		for (OutpostLocation o : getOutposts().values()) {
-			if (SiegeRace.BALAUR != o.getRace() && o.getLocationRace() != o.getRace()) {
-				spawnNpcs(o.getLocationId(), o.getRace(), SiegeModType.PEACE);
-			}
+			spawnNpcs(o.getLocationId(), o.getRace(), SiegeModType.PEACE);
 		}
 
 		// spawn artifacts
@@ -178,20 +176,6 @@ public class SiegeService {
 				log.debug("Scheduled agent fight based on cron expression: " + siegeTime);
 			}
 		}
-
-		// Outpost siege start...
-		CronService.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				// spawn outpost protectors...
-				for (OutpostLocation o : getOutposts().values()) {
-					if (o.isSiegeAllowed())
-						startSiege(o.getLocationId());
-				}
-			}
-
-		}, SiegeConfig.RACE_PROTECTOR_SPAWN_SCHEDULE);
 
 		// Start siege of artifacts
 		for (ArtifactLocation artifact : artifacts.values()) {
@@ -521,22 +505,28 @@ public class SiegeService {
 		}
 	}
 
-	public void updateOutpostStatusByFortress(FortressLocation fortress) {
+	/**
+	 * Maybe we can implement some fancy features for cases where balaur captured the both fortresses
+	 * or successful home defenses in future.
+	 */
+	public void updateOutpostStatusByFortress(FortressLocation fortressLoc) {
 		for (OutpostLocation outpost : getOutposts().values()) {
-
-			if (!outpost.getFortressDependency().contains(fortress.getLocationId())) {
+			List<Integer> dependencies = outpost.getFortressDependency();
+			if (!dependencies.contains(fortressLoc.getLocationId()))
 				continue;
-			}
+			if (dependencies.stream().anyMatch(dependency -> getSiegeLocation(dependency).isVulnerable()))
+				break;
 
-			SiegeRace newFortressRace, newOutpostRace;
+			SiegeRace newFortressRace;
+			SiegeRace newOutpostRace;
 
-			if (!outpost.isRouteSpawned()) {
+			if (outpost.areFortressesOccupiedByAnotherFaction()) {
 				// Check if all fortresses are captured by the same owner
 				// If not - common fortress race is balaur
-				newFortressRace = fortress.getRace();
-				for (Integer fortressId : outpost.getFortressDependency()) {
-					SiegeRace sr = getFortresses().get(fortressId).getRace();
-					if (newFortressRace != sr) {
+				newFortressRace = fortressLoc.getRace();
+				for (Integer fortressId : dependencies) {
+					SiegeRace dependencyFortressSiegeRace = getFortresses().get(fortressId).getRace();
+					if (newFortressRace != dependencyFortressSiegeRace) {
 						newFortressRace = SiegeRace.BALAUR;
 						break;
 					}
@@ -561,7 +551,7 @@ public class SiegeService {
 				stopSiege(outpost.getLocationId());
 				deSpawnNpcs(outpost.getLocationId());
 
-				// update outpost race and store in db
+				// update outpost race and store in DB
 				outpost.setRace(newOutpostRace);
 				DAOManager.getDAO(SiegeDAO.class).updateSiegeLocation(outpost);
 
@@ -570,11 +560,11 @@ public class SiegeService {
 
 				// spawn NPC's or sieges
 				if (SiegeRace.BALAUR != outpost.getRace()) {
-					/*
-					 * if (outpost.isSiegeAllowed()) { startSiege(outpost.getLocationId()); } else {
-					 */
-					spawnNpcs(outpost.getLocationId(), outpost.getRace(), SiegeModType.PEACE);
-					// }
+					if (outpost.isSiegeAllowed()) {
+						startSiege(outpost.getLocationId());
+					} else {
+						spawnNpcs(outpost.getLocationId(), outpost.getRace(), SiegeModType.PEACE);
+					}
 				}
 			}
 		}
