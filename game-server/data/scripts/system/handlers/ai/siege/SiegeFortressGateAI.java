@@ -11,8 +11,11 @@ import com.aionemu.gameserver.configs.main.GeoDataConfig;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.gameobjects.siege.SiegeNpc;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUESTION_WINDOW;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
+import com.aionemu.gameserver.services.SiegeService;
+import com.aionemu.gameserver.services.siege.Siege;
 import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.PositionUtil;
@@ -52,7 +55,7 @@ public class SiegeFortressGateAI extends NpcAI {
 	@Override
 	public boolean ask(AIQuestion question) {
 		switch (question) {
-			case SHOULD_DECAY:
+			case SHOULD_LOOT:
 			case SHOULD_RESPAWN:
 				return false;
 			default:
@@ -60,23 +63,62 @@ public class SiegeFortressGateAI extends NpcAI {
 		}
 	}
 
+	private String getMeshFileName() {
+		switch (getOwner().getWorldId()) {
+			case 600090000:
+				switch (getNpcId()) {
+					case 252115:
+					case 252116:
+					case 252117:
+						return "ldf5_fortress_door_01.cgf";
+					case 881578:
+						return "barricade_light_large_01a.cgf";
+					case 881579:
+						return "barricade_vritra_large_01a.cgf";
+					case 881580:
+						return "barricade_dark_large_01a.cgf";
+				}
+				break;
+			default:
+				return "ab_castledoor_100.cgf";
+		}
+		return "";
+	}
+
 	@Override
 	protected void handleSpawned() {
 		super.handleSpawned();
 		if (GeoDataConfig.GEO_DOORS_ENABLE) {
-			doorName = GeoService.getInstance().getDoorName(getOwner().getWorldId(), "ab_castledoor_100.cgf", getOwner().getX(), getOwner().getY(),
+			doorName = GeoService.getInstance().getDoorName(getOwner().getWorldId(), getMeshFileName(), getOwner().getX(), getOwner().getY(),
 				getOwner().getZ());
-			if (doorName != null)
-				GeoService.getInstance().setDoorState(getOwner().getWorldId(), getOwner().getInstanceId(), doorName, false);
-			else
-				LoggerFactory.getLogger(SiegeFortressGateAI.class).warn("Couldn't find siege door name for position of " + getOwner());
+			updateDoorState(false, true);
 		}
+	}
+
+	@Override
+	protected void handleDied() {
+		if (getOwner() instanceof SiegeNpc) {
+			Siege<?> siege = SiegeService.getInstance().getSiege(((SiegeNpc) getOwner()).getSiegeId());
+			if (siege != null) {
+				SiegeNpc boss = siege.getBoss();
+				if (boss != null)
+					boss.getEffectController().removeEffect(19111);
+			}
+		}
+		super.handleDied();
+		updateDoorState(true, false);
 	}
 
 	@Override
 	protected void handleDespawned() {
 		super.handleDespawned();
+		updateDoorState(true, false);
+	}
+
+	private void updateDoorState(boolean isOpened, boolean shouldLog) {
 		if (doorName != null)
-			GeoService.getInstance().setDoorState(getOwner().getWorldId(), getOwner().getInstanceId(), doorName, true);
+			GeoService.getInstance().setDoorState(getOwner().getWorldId(), getOwner().getInstanceId(), doorName, isOpened);
+		else if (shouldLog)
+			LoggerFactory.getLogger(SiegeFortressGateAI.class).warn("Couldn't find siege door name for position of " + getOwner());
 	}
 }
