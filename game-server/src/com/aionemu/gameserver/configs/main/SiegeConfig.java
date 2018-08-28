@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.configs.main;
 
+import java.util.List;
+
 import org.quartz.CronExpression;
 
 import com.aionemu.commons.configuration.Property;
@@ -23,11 +25,6 @@ public class SiegeConfig {
 	public static float BALAUR_ASSAULT_RATE;
 
 	/**
-	 * Siege Race Protector spawn schedule
-	 */
-	@Property(key = "gameserver.siege.protector.time", defaultValue = "0 0 21 ? * *")
-	public static CronExpression RACE_PROTECTOR_SPAWN_SCHEDULE;
-	/**
 	 * Berserker Sunayaka spawn time
 	 */
 	@Property(key = "gameserver.moltenus.time", defaultValue = "0 0 22 ? * SUN")
@@ -43,6 +40,9 @@ public class SiegeConfig {
 
 	@Property(key = "gameserver.siege.panesterra.ahserion.time", defaultValue = "0 50 18 ? * SUN")
 	public static CronExpression AHSERION_START_SCHEDULE;
+
+	@Property(key = "gameserver.siege.kinah.reward.percentages", defaultValue = "0.4,0.3,0.2,0.1")
+	public static List<Float> SIEGE_KINAH_REWARD_PERCENTAGES;
 
 	@Property(key = "gameserver.siege.legion.gp.cap_per_member", defaultValue = "200")
 	public static int LEGION_GP_CAP_PER_MEMBER;

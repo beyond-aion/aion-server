@@ -14,10 +14,10 @@ public class SiegeReward {
 
 	@XmlAttribute(name = "top")
 	protected int top;
-	@XmlAttribute(name = "itemid")
+	@XmlAttribute(name = "item_id")
 	protected int itemId;
-	@XmlAttribute(name = "m_count")
-	protected int mCount;
+	@XmlAttribute(name = "item_count")
+	protected int itemCount;
 	@XmlAttribute(name = "gp_win")
 	protected int gpWin;
 	@XmlAttribute(name = "gp_defeat")
@@ -31,8 +31,8 @@ public class SiegeReward {
 		return itemId;
 	}
 
-	public int getMedalCount() {
-		return mCount;
+	public int getItemCount() {
+		return itemCount;
 	}
 
 	public int getGpForWin() {

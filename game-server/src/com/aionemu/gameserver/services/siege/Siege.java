@@ -219,13 +219,21 @@ public abstract class Siege<SL extends SiegeLocation> {
 			long timeMillis = System.currentTimeMillis();
 			for (SiegeReward topGrade : getSiegeLocation().getRewards()) {
 				List<Integer> rewardedGpPlayers = new ArrayList<>();
+				long kinahPoolForRewardLevel = 0;
+				if (isWinner && SiegeConfig.SIEGE_KINAH_REWARD_PERCENTAGES.size() - 1 >= rewardLevel)
+					kinahPoolForRewardLevel = Math
+						.round(getSiegeLocation().getTemplate().getKinahPool() * SiegeConfig.SIEGE_KINAH_REWARD_PERCENTAGES.get(rewardLevel));
 				AbyssSiegeLevel level = AbyssSiegeLevel.getLevelById(++rewardLevel);
 				int gp = isWinner ? topGrade.getGpForWin() : topGrade.getGpForDefeat();
+
 				for (int i = 0; i < topGrade.getTop() && playerIndex < topPlayersIds.size(); i++, playerIndex++) {
 					int playerId = topPlayersIds.get(playerIndex);
+					long kinahReward = Math.round(kinahPoolForRewardLevel / (float) topGrade.getTop());
+					if (kinahReward > 40000000)
+						kinahReward = 40000000;
 					if (isWinner)
 						MailFormatter.sendAbyssRewardMail(getSiegeLocation(), getPlayerCommonData(playerId), level, raceResult, timeMillis, topGrade.getItemId(),
-							topGrade.getMedalCount(), 0);
+							topGrade.getItemCount(), kinahReward);
 					if (gp > 0) {
 						rewardedGpPlayers.add(playerId);
 						GloryPointsService.increaseGp(playerId, gp);

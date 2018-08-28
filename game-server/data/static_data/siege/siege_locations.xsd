@@ -27,6 +27,7 @@
 		<xs:attribute name="influence" type="xs:int" use="optional" default="0"/>
 		<xs:attribute name="legion_gp" type="xs:int"/>
 		<xs:attribute name="occupy_count" type="xs:int" use="optional" default="0"/>
+		<xs:attribute name="kinah_pool" type="xs:long" use="optional" default="0"/>
 	</xs:complexType>
 	
 	<xs:simpleType name="DependencyList">
@@ -36,15 +37,14 @@
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="FORTRESS"/>
 			<xs:enumeration value="ARTIFACT"/>
-			<xs:enumeration value="VEILLE"/>
-			<xs:enumeration value="MASTARIUS"/>
+			<xs:enumeration value="OUTPOST"/>
 			<xs:enumeration value="AGENT_FIGHT"/>
 			<xs:enumeration value="INDUN"/>
 			<xs:enumeration value="UNDERPASS"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:complexType name="ArtifactActivation">
-		<xs:attribute name="itemid" type="xs:int" use="optional" default="188020000"/>
+		<xs:attribute name="item_id" type="xs:int" use="optional" default="188020000"/>
 		<xs:attribute name="count" type="xs:int" use="optional" default="1"/>
 		<xs:attribute name="skill" type="xs:int" use="optional" default="0"/>
 		<xs:attribute name="repeat_count" type="xs:int" use="optional" default="1"/>
@@ -53,14 +53,14 @@
 	</xs:complexType>
 	<xs:complexType name="SiegeReward">
 		<xs:attribute name="top" type="xs:int" use="required"/>
-		<xs:attribute name="itemid" type="xs:int" use="required"/>
-		<xs:attribute name="m_count" type="xs:int" use="required"/>
+		<xs:attribute name="item_id" type="xs:int" use="required"/>
+		<xs:attribute name="item_count" type="xs:int" use="required"/>
 		<xs:attribute name="gp_win" type="xs:int" use="optional" default="0"/>
 		<xs:attribute name="gp_defeat" type="xs:int" use="optional" default="0"/>
 	</xs:complexType>
 	<xs:complexType name="SiegeLegionReward">
-		<xs:attribute name="itemid" type="xs:int" use="required"/>
-		<xs:attribute name="m_count" type="xs:int" use="required"/>
+		<xs:attribute name="item_id" type="xs:int" use="required"/>
+		<xs:attribute name="item_count" type="xs:int" use="required"/>
 	</xs:complexType>
 	<xs:complexType name="SiegeMercenaryZone">
 		<xs:attribute name="id" type="xs:int" use="required"/>

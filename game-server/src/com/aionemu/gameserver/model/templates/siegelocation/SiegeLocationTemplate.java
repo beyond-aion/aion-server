@@ -48,6 +48,8 @@ public class SiegeLocationTemplate implements L10n {
 	protected int maxOccupyCount;
 	@XmlAttribute(name = "legion_gp")
 	protected int legionGp;
+	@XmlAttribute(name = "kinah_pool")
+	protected long kinahPool;
 	@XmlList
 	@XmlAttribute(name = "fortress_dependency")
 	protected List<Integer> fortressDependency;
@@ -113,8 +115,12 @@ public class SiegeLocationTemplate implements L10n {
 	public int getMaxOccupyCount() {
 		return maxOccupyCount;
 	}
-	
+
 	public int getLegionGp() {
 		return legionGp;
+	}
+
+	public long getKinahPool() {
+		return kinahPool;
 	}
 }

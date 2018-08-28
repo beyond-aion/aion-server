@@ -372,7 +372,7 @@ public class FortressSiege extends Siege<FortressLocation> {
 			PlayerCommonData brigadeGeneral = getPlayerCommonData(legion.getBrigadeGeneral());
 			for (SiegeLegionReward item : legionRewards) {
 				if (item.getItemId() == 182400001) { // handles kinah rewards
-					long kinah = isBossKilled() ? item.getCount() : Math.round(item.getCount() * 0.7f);
+					long kinah = isBossKilled() ? item.getItemCount() : Math.round(item.getItemCount() * 0.7f);
 					legion.getLegionWarehouse().increaseKinah(kinah);
 					LegionService.getInstance().addRewardHistory(legion, kinah, isBossKilled() ? LegionHistoryType.OCCUPATION : LegionHistoryType.DEFENSE,
 						getSiegeLocationId());
@@ -380,7 +380,7 @@ public class FortressSiege extends Siege<FortressLocation> {
 				} else {
 					nonKinahItems++;
 					MailFormatter.sendAbyssRewardMail(getSiegeLocation(), brigadeGeneral, AbyssSiegeLevel.NONE, SiegeResult.PROTECT, System.currentTimeMillis(),
-						item.getItemId(), item.getCount(), 0);
+						item.getItemId(), item.getItemCount(), 0);
 				}
 			}
 			if (LoggingConfig.LOG_SIEGE) {
