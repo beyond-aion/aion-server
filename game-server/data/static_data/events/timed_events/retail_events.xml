@@ -3143,37 +3143,71 @@
 			</spawn_map>
 		</spawns>
 	</event>
-	<event name="Shugo Emperor's Vault" start="2015-02-04T00:00:00" end="2015-02-18T00:00:00">
-		<quests>
+	<event name="Shugo Emperor's Vault" start="2018-08-04T00:00:00" end="2018-09-18T00:00:00">
+		<event_drops>
+			<gd_rule rule_name="Emperor's Vault Key" min_count="1" base_chance="20" fixed_chance="true">
+				<gd_maps>
+					<gd_map map_id="301400000" /><!-- The_Shugo_Emperors_Vault -->
+				</gd_maps>
+				<gd_npcs>
+					<gd_npc npc_id="235660" /> <!-- Ruthless Jabaraki -->
+					<gd_npc npc_id="235634" /> <!-- Watchman Hokuruki -->
+					<gd_npc npc_id="235640" /> <!-- Captain Mirez -->
+					<gd_npc npc_id="235685" /> <!-- Longknife Zodica -->
+					<gd_npc npc_id="235684" /> <!-- Sorcerer Budyn -->
+					<gd_npc npc_id="235683" /> <!-- Elite captain rupasha -->
+					<gd_npc npc_id="235647" /> <!-- Grand Commander Gradi -->
+				</gd_npcs>
+				<gd_items>
+					<gd_item id="185000221" /><!-- Eternal Vault Key -->
+				</gd_items>
+			</gd_rule>
+			<gd_rule rule_name="Emperor's Vault Entry Scroll" min_count="1" base_chance="100" fixed_chance="true" member_limit="12">
+				<gd_maps>
+					<gd_map map_id="300520000" /><!-- Dragon_Lords_Refuge -->
+					<gd_map map_id="301110000" /><!-- Danuar_Reliquary -->
+					<gd_map map_id="301370000" /><!-- Infernal_Illuminary_Obelisk -->
+				</gd_maps>
+				<gd_npcs>
+					<gd_npc npc_id="701542" /><!-- Tiamat's Huge Treasure Crate (Dragon Lord's Refuge) -->
+					<gd_npc npc_id="701795" /><!-- Treasure Box (Danuar Reliquary) -->
+					<gd_npc npc_id="234686" /><!-- Remodeled Dynatoum -->
+				</gd_npcs>
+				<gd_items>
+					<gd_item id="188600311" /><!-- Shugo Emperor's Vault Bonus Entry Scroll -->
+				</gd_items>
+			</gd_rule>
+		</event_drops>
+		<!-- <quests>
 			<maintainable>80689 80690 80691 80692 80693 80694 80695 80696</maintainable>
-		</quests>
+		</quests> -->
 		<spawns>
 			<spawn_map map_id="110010000">
 				<!-- Indinerk Jonakak's Secret Passage -->
 				<spawn npc_id="832920" respawn_time="295">
-					<spot x="1459.0" y="1504.39" z="573.07" h="60"/>
+					<spot x="1459.0" y="1504.39" z="573.07" h="60" />
 				</spawn>
 				<!-- Indinerk Jonakak -->
 				<spawn npc_id="832921" respawn_time="295">
-					<spot x="1457.25" y="1499.95" z="573.07" h="60"/>
+					<spot x="1457.25" y="1499.95" z="573.07" h="60" />
 				</spawn>
 				<!-- Guardrunerk -->
 				<spawn npc_id="832923" respawn_time="295">
-					<spot x="1457.3" y="1508.8" z="573.07" h="60"/>
+					<spot x="1457.3" y="1508.8" z="573.07" h="60" />
 				</spawn>
 			</spawn_map>
 			<spawn_map map_id="120010000">
 				<!-- Indinerk Jonakak's Secret Passage -->
 				<spawn npc_id="832920" respawn_time="295">
-					<spot x="1609.5" y="1423.9" z="193.127" h="100"/>
+					<spot x="1609.5" y="1423.9" z="193.127" h="100" />
 				</spawn>
 				<!-- Indinerk Jonakak -->
 				<spawn npc_id="832921" respawn_time="295">
-					<spot x="1614.2" y="1424.3" z="193.127" h="100"/>
+					<spot x="1614.2" y="1424.3" z="193.127" h="100" />
 				</spawn>
 				<!-- Guardrunerk -->
 				<spawn npc_id="832923" respawn_time="295">
-					<spot x="1606.8" y="1420.4" z="193.127" h="100"/>
+					<spot x="1606.8" y="1420.4" z="193.127" h="100" />
 				</spawn>
 			</spawn_map>
 		</spawns>

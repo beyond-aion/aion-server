@@ -4070,7 +4070,7 @@
 			<drop item_id="169230008" chance="100" no_reduce="true" /><!-- [Event] Dye: True Black -->
 		</drop_group>
 	</npc_drop>
-	<!-- Premium Treasure Box -->
+	<!-- Alchemy Event: Premium Treasure Box -->
 	<npc_drop npc_id="831785">
 		<drop_group race="PC_ALL"><!-- Crafting Materials -->
 			<drop item_id="169405254" chance="100" min_amount="3" max_amount="3" no_reduce="true" /><!-- Earth Trace -->
@@ -4113,7 +4113,7 @@
 			<drop item_id="166000195" chance="10" min_amount="5" max_amount="10" no_reduce="true" /><!-- Epsilon Enchantment Stone -->
 		</drop_group>
 	</npc_drop>
-	<!-- Common Treasure Box -->
+	<!-- Alchemy Event: Common Treasure Box -->
 	<npc_drop npc_id="831786">
 		<drop_group race="PC_ALL"><!-- Crafting Materials -->
 			<drop item_id="152010316" chance="100" min_amount="30" max_amount="40" no_reduce="true" /><!-- Greater Elemental Stone -->
@@ -4145,6 +4145,129 @@
 			<drop item_id="186000130" chance="15" min_amount="100" max_amount="200" no_reduce="true" /><!-- Crucible Insignia -->
 			<drop item_id="186000237" chance="15" min_amount="100" max_amount="100" no_reduce="true" /><!-- Ancient Coin -->
 			<drop item_id="166000194" chance="15" min_amount="5" max_amount="10" no_reduce="true" /><!-- Delta Enchantment Stone -->
+		</drop_group>
+	</npc_drop>
+	<!-- Shugo Emperor's Vault: Emperor's Treasure Box -->
+	<npc_drop npc_id="832929">
+		<drop_group race="PC_ALL">
+			<drop item_id="186000237" chance="100" min_amount="5" max_amount="10" no_reduce="true" /><!-- Ancient Coin -->
+		</drop_group>
+		<drop_group race="PC_ALL">
+			<drop item_id="162002030" chance="100" min_amount="5" max_amount="10" no_reduce="true" /><!-- [Event] Premium Restoration Serum -->
+		</drop_group>
+		<drop_group race="PC_ALL">
+			<drop item_id="186000238" chance="100" min_amount="10" max_amount="15" no_reduce="true" /><!-- Conqueror's Mark -->
+		</drop_group>
+		<drop_group race="PC_ALL">
+			<drop item_id="164002235" chance="30" min_amount="5" max_amount="5" no_reduce="true" /><!-- Greater Running Scroll (10 Minutes) -->
+		</drop_group>
+		<drop_group race="PC_ALL">
+			<drop item_id="186000051" chance="10" min_amount="2" max_amount="2" no_reduce="true" /><!-- Major Ancient Crown -->
+		</drop_group>
+		<drop_group race="PC_ALL">
+			<drop item_id="169620110" chance="10" no_reduce="true" /><!-- [Event] Celestial Crafting Boost -->
+			<drop item_id="169620067" chance="10" no_reduce="true" /><!-- AP Boost Charm II - 50% -->
+			<drop item_id="169620079" chance="10" no_reduce="true" /><!-- Gathering Boost Charm II - 100% -->
+		</drop_group>
+		<drop_group race="PC_ALL">
+			<drop item_id="166000195" chance="5" min_amount="3" max_amount="5" no_reduce="true" /><!-- Epsilon Enchantment Stone -->
+		</drop_group>
+		<drop_group race="PC_ALL">
+			<drop item_id="188053636" chance="10" no_reduce="true" /><!-- Blood Mark Box -->
+		</drop_group>
+		<drop_group race="ELYOS">
+			<drop item_id="160010158" chance="10" min_amount="3" max_amount="3" no_reduce="true" /><!-- [Event] Shugo Disguise Candy -->
+		</drop_group>
+		<drop_group race="ASMODIANS">
+			<drop item_id="160010159" chance="10" min_amount="3" max_amount="3" no_reduce="true" /><!-- [Event] Shugo Disguise Candy -->
+		</drop_group>
+	</npc_drop>
+	<!-- Shugo Emperor's Vault: Emperor's Quality Treasure Box -->
+	<npc_drop npc_id="832930">
+		<drop_group race="PC_ALL">
+			<drop item_id="186000237" chance="100" min_amount="10" max_amount="15" no_reduce="true" /><!-- Ancient Coin -->
+		</drop_group>
+		<drop_group race="PC_ALL">
+			<drop item_id="162002030" chance="100" min_amount="10" max_amount="20" no_reduce="true" /><!-- [Event] Premium Restoration Serum -->
+		</drop_group>
+		<drop_group race="PC_ALL">
+			<drop item_id="186000238" chance="100" min_amount="15" max_amount="25" no_reduce="true" /><!-- Conqueror's Mark -->
+		</drop_group>
+		<drop_group race="PC_ALL">
+			<drop item_id="164002235" chance="30" min_amount="10" max_amount="10" no_reduce="true" /><!-- Greater Running Scroll (10 Minutes) -->
+		</drop_group>
+		<drop_group race="PC_ALL">
+			<drop item_id="186000051" chance="10" min_amount="5" max_amount="5" no_reduce="true" /><!-- Major Ancient Crown -->
+		</drop_group>
+		<drop_group race="PC_ALL">
+			<drop item_id="169620110" chance="5" no_reduce="true" /><!-- Noble Composite Manastone Bundle -->
+		</drop_group>
+		<drop_group race="PC_ALL">
+			<drop item_id="166020000" chance="5" min_amount="5" max_amount="5" no_reduce="true" /><!-- Omega Enchantment Stone -->
+		</drop_group>
+		<drop_group race="PC_ALL">
+			<drop item_id="190100144" chance="5" no_reduce="true" /><!-- Seakissed Aetherboard (30 days) -->
+			<drop item_id="190100130" chance="5" no_reduce="true" /><!-- Dew Steed (30 days) -->
+			<drop item_id="190100142" chance="5" no_reduce="true" /><!-- Nimble Space Glider (30 days) -->
+			<drop item_id="190100153" chance="5" no_reduce="true" /><!-- Shugo Jet (30 days) -->
+		</drop_group>
+		<drop_group race="PC_ALL">
+			<drop item_id="166030005" chance="10" min_amount="3" max_amount="3" no_reduce="true" /><!-- Tempering Solution -->
+		</drop_group>
+	</npc_drop>
+	<!-- Shugo Emperor's Vault: Emperor's Premium Treasure Box -->
+	<npc_drop npc_id="832931">
+		<drop_group race="PC_ALL">
+			<drop item_id="186000237" chance="100" min_amount="15" max_amount="20" no_reduce="true" /><!-- Ancient Coin -->
+		</drop_group>
+		<drop_group race="PC_ALL">
+			<drop item_id="162002030" chance="100" min_amount="25" max_amount="25" no_reduce="true" /><!-- [Event] Premium Restoration Serum -->
+		</drop_group>
+		<drop_group race="PC_ALL">
+			<drop item_id="186000399" chance="100" min_amount="10" max_amount="10" no_reduce="true" /><!-- Honorable Conqueror's Mark -->
+		</drop_group>
+		<drop_group race="PC_ALL">
+			<drop item_id="164002235" chance="30" min_amount="15" max_amount="15" no_reduce="true" /><!-- Greater Running Scroll (10 Minutes) -->
+		</drop_group>
+		<drop_group race="PC_ALL">
+			<drop item_id="186000051" chance="10" min_amount="7" max_amount="7" no_reduce="true" /><!-- Major Ancient Crown -->
+		</drop_group>
+		<drop_group race="PC_ALL">
+			<drop item_id="169620110" chance="5" min_amount="3" max_amount="3" no_reduce="true" /><!-- Noble Composite Manastone Bundle -->
+		</drop_group>
+		<drop_group race="PC_ALL">
+			<drop item_id="166020000" chance="10" no_reduce="true" /><!-- Honorable Elim's Idian Bundle -->
+		</drop_group>
+		<drop_group race="PC_ALL">
+			<drop item_id="166500002" chance="5" min_amount="3" max_amount="3" no_reduce="true" /><!-- Amplification Stone -->
+		</drop_group>
+		<drop_group race="PC_ALL">
+			<drop item_id="110900876" chance="2" no_reduce="true" /><!-- Nyerkcarrier -->
+		</drop_group>
+		<drop_group race="PC_ALL">
+			<drop item_id="188052936" chance="2" no_reduce="true" /><!-- Shugo Icebox -->
+			<drop item_id="188053995" chance="2" no_reduce="true" /><!-- Emperor Trillirunerk's Feather Box -->
+		</drop_group>
+		<drop_group race="PC_ALL">
+			<drop item_id="188950017" chance="2" min_amount="2" max_amount="2" no_reduce="true" /><!-- Special Courier Pass (Abyss Eternal/Lv. 61-65) -->
+		</drop_group>
+		<drop_group race="PC_ALL">
+			<drop item_id="188950019" chance="2" no_reduce="true" /><!-- Special Courier Pass (Mythic/Lv. 61-65) -->
+		</drop_group>
+	</npc_drop>
+	<!-- Shugo Emperor's Vault: Indinerk Jonakak's Supply Box -->
+	<npc_drop npc_id="235644">
+		<drop_group race="PC_ALL">
+			<drop item_id="162002031" chance="100" no_reduce="true" each_member="true" /><!-- Shugo Warrior's Minor Salve -->
+		</drop_group>
+		<drop_group race="PC_ALL">
+			<drop item_id="162002032" chance="100" no_reduce="true" each_member="true" /><!-- Shugo Warrior's Greater Salve -->
+		</drop_group>
+		<drop_group race="PC_ALL">
+			<drop item_id="162002033" chance="100" no_reduce="true" /><!-- Shugo Warrior's Minor Adrenaline -->
+		</drop_group>
+		<drop_group race="PC_ALL">
+			<drop item_id="162002034" chance="100" no_reduce="true" /><!-- Shugo Warrior's Greater Adrenaline -->
 		</drop_group>
 	</npc_drop>
 </custom_drop>

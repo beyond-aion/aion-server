@@ -25518,7 +25518,36 @@
 	<decomposable item_id="188052933" /><!-- Courage Insignia Box -->
 	<decomposable item_id="188052934" /><!-- Greater Scroll Bundle -->
 	<decomposable item_id="188052935" /><!-- Special Medal Chest -->
-	<decomposable item_id="188052936" /><!-- Shugo Icebox -->
+	<decomposable item_id="188052936"><!-- Shugo Icebox -->
+		<items chance="45">
+			<item id="166200009" /><!-- Mythic Weapon Tuning Scroll -->
+		</items>
+		<items chance="45">
+			<item id="166200010" /><!-- Mythic Armor Tuning Scroll -->
+		</items>
+		<items chance="2">
+			<item id="121001449" player_classes="SORCERER SPIRIT_MASTER BARD GUNNER RIDER CLERIC" /><!-- Trillirunerk's Magic Necklace -->
+			<item id="121001450" player_classes="TEMPLAR GLADIATOR ASSASSIN RANGER CHANTER" /><!-- Trillirunerk's Combat Necklace -->
+		</items>
+		<items chance="2">
+			<item id="120015046" player_classes="SORCERER SPIRIT_MASTER BARD GUNNER RIDER CLERIC"/><!-- Trillirunerk's Magic Earrings -->
+			<item id="120015047" player_classes="TEMPLAR GLADIATOR ASSASSIN RANGER CHANTER" /><!-- Trillirunerk's Combat Earrings -->
+		</items>
+		<items chance="2">
+			<item id="122001730" player_classes="TEMPLAR GLADIATOR ASSASSIN RANGER CHANTER" /><!-- Trillirunerk's Combat Ring -->
+			<item id="122001731" player_classes="SORCERER SPIRIT_MASTER BARD GUNNER RIDER CLERIC"/><!-- Trillirunerk's Magic Ring -->
+		</items>
+		<items chance="2">
+			<item id="123001493" player_classes="TEMPLAR GLADIATOR ASSASSIN RANGER CHANTER" /><!-- Noble Emperor Trillirunerk's Belt -->
+			<item id="123001494" player_classes="SORCERER SPIRIT_MASTER BARD GUNNER RIDER CLERIC"/><!-- Noble Emperor Trillirunerk's Waistband -->
+		</items>
+		<items chance="2">
+			<item id="125004324" player_classes="SORCERER SPIRIT_MASTER BARD" /><!-- Trillirunerk's Headband -->
+			<item id="125004325" player_classes="ASSASSIN RANGER GUNNER" /><!-- Trillirunerk's Hat -->
+			<item id="125004326" player_classes="CLERIC CHANTER RIDER" /><!-- Trillirunerk's Chain Helm -->
+			<item id="125004327" player_classes="TEMPLAR GLADIATOR" /><!-- Trillirunerk's Helm -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188052937" /><!-- Farushunerk's Bonus Bundle -->
 	<decomposable item_id="188052938" /><!-- Iron Wall Warfront Medal Bundle -->
 	<decomposable item_id="188052939" /><!-- [Event] Fleeting Chromanimbus Container(15 days) -->
@@ -34046,7 +34075,12 @@
 	<decomposable item_id="188053989" /><!-- Songweaver Stigma Bundle -->
 	<decomposable item_id="188053990" /><!-- Secret Document -->
 	<decomposable item_id="188053994" /><!-- Kromede's Key Bundle -->
-	<decomposable item_id="188053995" /><!-- Emperor Trillirunerk's Feather Box -->
+	<decomposable item_id="188053995" selectable="true"><!-- Emperor Trillirunerk's Feather Box -->
+		<items>
+			<item id="187060166" /><!-- Trillirunerk's Ice Flame Feather -->
+			<item id="187060170" /><!-- Trillirunerk's Blue Flame Feather -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188053996" /><!-- Emperor Trillirunerk's Feather Box -->
 	<decomposable item_id="188053997" /><!-- Ancient Crown Bundle -->
 	<decomposable item_id="188053998" /><!-- Ornate Enchantment Stone Bundle -->

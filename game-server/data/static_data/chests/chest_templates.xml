@@ -571,4 +571,17 @@
 	<chest npcid="702701">
 		<keyitem id="1" itemid="0" quantity="1"/>
 	</chest>
+	<!-- Shugo Emperor's Vault -->
+	<chest npcid="832929">
+		<keyitem id="1" itemid="185000221" quantity="1"/>
+	</chest>
+	<chest npcid="832930">
+		<keyitem id="1" itemid="185000221" quantity="3"/>
+	</chest>
+	<chest npcid="832931">
+		<keyitem id="1" itemid="185000221" quantity="5"/>
+	</chest>
+	<chest npcid="235644">
+		<keyitem id="1" itemid="0" quantity="1"/>
+	</chest>
 </chest_templates>
