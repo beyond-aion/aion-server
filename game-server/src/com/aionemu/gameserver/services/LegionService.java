@@ -1982,7 +1982,7 @@ public class LegionService {
 			legion.setCurrentLegionDominion(locId);
 			storeLegion(legion);
 			String locL10n = LegionDominionService.getInstance().getLegionDominionLoc(locId).getL10n();
-			PacketSendUtility.broadcastToLegion(legion, new SM_SYSTEM_MESSAGE(1402902, locL10n)); // applied for stonespear
+			PacketSendUtility.broadcastToLegion(legion, SM_SYSTEM_MESSAGE.STR_MSG_GUILD_APPLY_DOMINION(locL10n));
 			PacketSendUtility.broadcastToLegion(legion, new SM_LEGION_INFO(legion));
 		}
 	}

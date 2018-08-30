@@ -75,7 +75,7 @@ public class AssemblyItemAction extends AbstractItemAction {
 				}
 				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem
 					.getItemTemplate().getTemplateId(), 0, 1, 0), true);
-				PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1401122));
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ASSEMBLY_ITEM_SUCCEEDED());
 				ItemService.addItem(player, assemblyItem.getId(), 1);
 			}
 

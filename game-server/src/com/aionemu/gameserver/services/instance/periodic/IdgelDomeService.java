@@ -17,7 +17,7 @@ public class IdgelDomeService extends PeriodicInstance {
 
 	@Override
 	protected void onSendEntry(Player player, byte maskId) {
-		PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1402192));
+		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_INSTANCE_OPEN_IDLDF5_Fortress_Re());
 	}
 
 	private static class SingletonHolder {

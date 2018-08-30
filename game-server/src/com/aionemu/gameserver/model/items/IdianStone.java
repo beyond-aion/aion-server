@@ -82,7 +82,7 @@ public class IdianStone extends ItemStone {
 		if (polishCharge == 0) {
 			onUnEquip(player);
 			PacketSendUtility.sendPacket(player, new SM_INVENTORY_UPDATE_ITEM(player, item));
-			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1401652, item.getL10n()));
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_POLISH_CHANGE_CONDITION_END(item.getL10n()));
 			item.setIdianStone(null);
 			setPersistentState(PersistentState.DELETED);
 			DAOManager.getDAO(ItemStoneListDAO.class).storeIdianStones(this);

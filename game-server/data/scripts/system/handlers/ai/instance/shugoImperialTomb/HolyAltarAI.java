@@ -99,7 +99,7 @@ public class HolyAltarAI extends GeneralNpcAI {
 					entryCount++;
 					TeleportService.teleportTo(player, 300560000, instanceId, 335.55219f, 334.60947f, 458.5939f, (byte) 0, TeleportAnimation.FADE_OUT_BEAM);
 				}
-				PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1401579));
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_IDEVENT01_GOLD_MAP());
 				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 0));
 				break;
 			case SETPRO2: // Empress treasure room
@@ -113,7 +113,7 @@ public class HolyAltarAI extends GeneralNpcAI {
 					entryCount++;
 					TeleportService.teleportTo(player, 300560000, instanceId, 75.203018f, 432.58603f, 455.82312f, (byte) 0, TeleportAnimation.FADE_OUT_BEAM);
 				} else {
-					PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1401580));
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_IDEVENT01_SILVER_MAP());
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 0));
 				}
 				break;
@@ -128,7 +128,7 @@ public class HolyAltarAI extends GeneralNpcAI {
 					entryCount++;
 					TeleportService.teleportTo(player, 300560000, instanceId, 177.63902f, 77.778755f, 466.1734f, (byte) 0, TeleportAnimation.FADE_OUT_BEAM);
 				} else {
-					PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1401581));
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_IDEVENT01_BRONZE_MAP());
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 0));
 				}
 				break;

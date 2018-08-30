@@ -64,13 +64,13 @@ public class AutoGroupService {
 		int obj = player.getObjectId();
 		LookingForParty lfp = searchers.get(obj);
 		if (penalties.contains(obj)) {
-			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1400181, agt.getInstanceMapId()));
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANT_INSTANCE_ALREADY_REGISTERED(agt.getInstanceMapId()));
 			return;
 		}
 		if (lfp == null) {
 			searchers.putIfAbsent(obj, new LookingForParty(player, instanceMaskId, ert));
 		} else if (lfp.hasPenalty() || lfp.isRegistredInstance(instanceMaskId)) {
-			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1400181, agt.getInstanceMapId()));
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANT_INSTANCE_ALREADY_REGISTERED(agt.getInstanceMapId()));
 			return;
 		} else {
 			lfp.addInstanceMaskId(instanceMaskId, ert);
@@ -81,14 +81,14 @@ public class AutoGroupService {
 				if (agt.isIconInvite()) {
 					PacketSendUtility.sendPacket(member, new SM_AUTO_GROUP(instanceMaskId, 6, true));
 				}
-				PacketSendUtility.sendPacket(member, new SM_SYSTEM_MESSAGE(1400194, agt.getInstanceMapId()));
+				PacketSendUtility.sendPacket(member, SM_SYSTEM_MESSAGE.STR_MSG_INSTANCE_REGISTER_SUCCESS());
 				PacketSendUtility.sendPacket(member, new SM_AUTO_GROUP(instanceMaskId, 1, ert.getId(), player.getName()));
 			}
 		} else {
 			if (agt.isIconInvite()) {
 				PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(instanceMaskId, 6, true));
 			}
-			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1400194, agt.getInstanceMapId()));
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_INSTANCE_REGISTER_SUCCESS());
 			PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(instanceMaskId, 1, ert.getId(), player.getName()));
 		}
 		startSort(ert, instanceMaskId, true);
@@ -179,14 +179,14 @@ public class AutoGroupService {
 			PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(maskId, SM_AUTO_GROUP.wnd_EntryIcon, closed));
 		}
 		for (byte maskId : KamarBattlefieldService.getInstance().getMaskIds())
-			PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(maskId, SM_AUTO_GROUP.wnd_EntryIcon, !KamarBattlefieldService.getInstance()
-				.isEnterAvailable(player)));
+			PacketSendUtility.sendPacket(player,
+				new SM_AUTO_GROUP(maskId, SM_AUTO_GROUP.wnd_EntryIcon, !KamarBattlefieldService.getInstance().isEnterAvailable(player)));
 		for (byte maskId : EngulfedOphidianBridgeService.getInstance().getMaskIds())
-			PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(maskId, SM_AUTO_GROUP.wnd_EntryIcon, !EngulfedOphidianBridgeService.getInstance()
-				.isEnterAvailable(player)));
+			PacketSendUtility.sendPacket(player,
+				new SM_AUTO_GROUP(maskId, SM_AUTO_GROUP.wnd_EntryIcon, !EngulfedOphidianBridgeService.getInstance().isEnterAvailable(player)));
 		for (byte maskId : IronWallFrontService.getInstance().getMaskIds())
-			PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(maskId, SM_AUTO_GROUP.wnd_EntryIcon, !IronWallFrontService.getInstance()
-				.isEnterAvailable(player)));
+			PacketSendUtility.sendPacket(player,
+				new SM_AUTO_GROUP(maskId, SM_AUTO_GROUP.wnd_EntryIcon, !IronWallFrontService.getInstance().isEnterAvailable(player)));
 		for (byte maskId : IdgelDomeService.getInstance().getMaskIds())
 			PacketSendUtility.sendPacket(player,
 				new SM_AUTO_GROUP(maskId, SM_AUTO_GROUP.wnd_EntryIcon, !IdgelDomeService.getInstance().isEnterAvailable(player)));
@@ -211,8 +211,8 @@ public class AutoGroupService {
 					PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(instanceMaskId, 2));
 					continue;
 				}
-				PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(searchInstance.getInstanceMaskId(), 8, searchInstance.getRemainingTime()
-					+ searchInstance.getEntryRequestType().getId(), player.getName()));
+				PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(searchInstance.getInstanceMaskId(), 8,
+					searchInstance.getRemainingTime() + searchInstance.getEntryRequestType().getId(), player.getName()));
 				if (searchInstance.isDredgion()) {
 					PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(searchInstance.getInstanceMaskId(), SM_AUTO_GROUP.wnd_EntryIcon, true));
 				}
@@ -237,14 +237,14 @@ public class AutoGroupService {
 			PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(maskId, SM_AUTO_GROUP.wnd_EntryIcon, closed));
 		}
 		for (byte maskId : KamarBattlefieldService.getInstance().getMaskIds())
-			PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(maskId, SM_AUTO_GROUP.wnd_EntryIcon, !KamarBattlefieldService.getInstance()
-				.isEnterAvailable(player)));
+			PacketSendUtility.sendPacket(player,
+				new SM_AUTO_GROUP(maskId, SM_AUTO_GROUP.wnd_EntryIcon, !KamarBattlefieldService.getInstance().isEnterAvailable(player)));
 		for (byte maskId : EngulfedOphidianBridgeService.getInstance().getMaskIds())
-			PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(maskId, SM_AUTO_GROUP.wnd_EntryIcon, !EngulfedOphidianBridgeService.getInstance()
-				.isEnterAvailable(player)));
+			PacketSendUtility.sendPacket(player,
+				new SM_AUTO_GROUP(maskId, SM_AUTO_GROUP.wnd_EntryIcon, !EngulfedOphidianBridgeService.getInstance().isEnterAvailable(player)));
 		for (byte maskId : IronWallFrontService.getInstance().getMaskIds())
-			PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(maskId, SM_AUTO_GROUP.wnd_EntryIcon, !IronWallFrontService.getInstance()
-				.isEnterAvailable(player)));
+			PacketSendUtility.sendPacket(player,
+				new SM_AUTO_GROUP(maskId, SM_AUTO_GROUP.wnd_EntryIcon, !IronWallFrontService.getInstance().isEnterAvailable(player)));
 		for (byte maskId : IdgelDomeService.getInstance().getMaskIds())
 			PacketSendUtility.sendPacket(player,
 				new SM_AUTO_GROUP(maskId, SM_AUTO_GROUP.wnd_EntryIcon, !IdgelDomeService.getInstance().isEnterAvailable(player)));
@@ -455,7 +455,7 @@ public class AutoGroupService {
 						return false;
 					}
 					if (agt.isHarmonyArena() && !PvPArenaService.checkItem(member, agt)) {
-						PacketSendUtility.sendPacket(member, new SM_SYSTEM_MESSAGE(1400219, agt.getInstanceMapId()));
+						PacketSendUtility.sendPacket(member, SM_SYSTEM_MESSAGE.STR_MSG_INSTANCE_CANT_ENTER_WITHOUT_ITEM());
 						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANT_INSTANCE_ENTER_MEMBER(member.getName()));
 						return false;
 					}

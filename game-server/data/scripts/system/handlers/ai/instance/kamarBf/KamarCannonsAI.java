@@ -40,7 +40,7 @@ public class KamarCannonsAI extends ActionItemNpcAI {
 					SkillEngine.getInstance().applyEffectDirectly(player.getRace() == Race.ELYOS ? 21403 : 21404, player, player);
 					AIActions.deleteOwner(this);
 				} else
-					PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1401854));
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_IDKAMAR_CANT_USE_SEIGEWEAPON());
 				break;
 		}
 	}

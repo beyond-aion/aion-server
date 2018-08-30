@@ -94,15 +94,15 @@ public class Rename extends AdminCommand {
 
 	private static boolean check(Player admin, String rename) {
 		if (!NameRestrictionService.isValidName(rename)) {
-			PacketSendUtility.sendPacket(admin, new SM_SYSTEM_MESSAGE(1400151));
+			PacketSendUtility.sendPacket(admin, SM_SYSTEM_MESSAGE.STR_MSG_EDIT_CHAR_NAME_ERROR_WRONG_INPUT());
 			return false;
 		}
 		if (!PlayerService.isFreeName(rename)) {
-			PacketSendUtility.sendPacket(admin, new SM_SYSTEM_MESSAGE(1400155));
+			PacketSendUtility.sendPacket(admin, SM_SYSTEM_MESSAGE.STR_MSG_EDIT_CHAR_NAME_ALREADY_EXIST());
 			return false;
 		}
 		if (!CustomConfig.OLD_NAMES_COMMAND_DISABLED && PlayerService.isOldName(rename)) {
-			PacketSendUtility.sendPacket(admin, new SM_SYSTEM_MESSAGE(1400155));
+			PacketSendUtility.sendPacket(admin, SM_SYSTEM_MESSAGE.STR_MSG_EDIT_CHAR_NAME_ALREADY_EXIST());
 			return false;
 		}
 		return true;

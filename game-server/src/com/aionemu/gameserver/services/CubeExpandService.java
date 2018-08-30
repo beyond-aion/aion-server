@@ -71,7 +71,7 @@ public class CubeExpandService {
 				PacketSendUtility.sendPacket(player, new SM_QUESTION_WINDOW(SM_QUESTION_WINDOW.STR_WAREHOUSE_EXPAND_WARNING, 0, 0, String.valueOf(price)));
 			}
 		} else
-			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1300430));
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_EXTEND_INVENTORY_CANT_EXTEND_MORE());
 	}
 
 	/**
@@ -84,7 +84,7 @@ public class CubeExpandService {
 	private static void expand(Player player, int type) {
 		if (!canExpand(player))
 			return;
-		PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1300431, "9")); // 9 Slots added
+		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_EXTEND_INVENTORY_SIZE_EXTENDED(9));
 		switch (type) {
 			case 1: // npc
 				player.getCommonData().setNpcExpands(player.getNpcExpands() + 1);

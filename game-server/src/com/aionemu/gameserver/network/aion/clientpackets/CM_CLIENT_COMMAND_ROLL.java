@@ -31,7 +31,7 @@ public class CM_CLIENT_COMMAND_ROLL extends AionClientPacket {
 		Player player = getConnection().getActivePlayer();
 
 		roll = Rnd.get(1, maxRoll);
-		PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1400126, roll, maxRoll));
-		PacketSendUtility.broadcastPacket(player, new SM_SYSTEM_MESSAGE(1400127, player.getName(), roll, maxRoll));
+		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_DICE_CUSTOM_ME(roll, maxRoll));
+		PacketSendUtility.broadcastPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_DICE_CUSTOM_OTHER(player.getName(), roll, maxRoll));
 	}
 }

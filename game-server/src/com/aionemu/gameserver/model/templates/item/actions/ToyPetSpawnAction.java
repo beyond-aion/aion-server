@@ -58,7 +58,7 @@ public class ToyPetSpawnAction extends AbstractItemAction {
 			return false;
 		}
 		if (KiskService.getInstance().haveKisk(player.getObjectId()) && CustomConfig.ENABLE_KISK_RESTRICTION) {
-			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1390160));
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_BINDSTONE_ALREADY_INSTALLED());
 			return false;
 		}
 		if (!isPutKiskZone(player)) {

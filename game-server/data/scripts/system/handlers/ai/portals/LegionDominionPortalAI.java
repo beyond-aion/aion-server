@@ -37,13 +37,13 @@ public class LegionDominionPortalAI extends PortalDialogAI {
 		}
 		ZonedDateTime now = ServerTime.now();
 		if (now.getDayOfWeek() == DayOfWeek.WEDNESDAY && now.getHour() >= 8 && now.getHour() <= 10) {
-			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1401306, 301500000));
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_INSTANCE_CLOSED_TIME(301500000));
 			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 0, questId));
 			return true;
 		}
 
 		if (player.getLevel() < 65) {
-			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1400179));
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANT_INSTANCE_ENTER_LEVEL());
 			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 0, questId));
 			return true;
 		}
@@ -52,7 +52,7 @@ public class LegionDominionPortalAI extends PortalDialogAI {
 			PortalPath portalPath = DataManager.PORTAL2_DATA.getPortalDialogPath(getNpcId(), dialogActionId, player);
 			WorldMapInstance instance = InstanceService.getRegisteredInstance(301500000, player.getPlayerAlliance().getObjectId());
 			if (portalPath == null) {
-				PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1401106));
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_NEW_MAP_INFO_CANT_FIND_INSTANCE());
 				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 0, questId));
 				return true;
 			}
@@ -71,7 +71,7 @@ public class LegionDominionPortalAI extends PortalDialogAI {
 						return true;
 					}
 				} else {
-					PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1400182));
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANT_INSTANCE_NOT_LEADER());
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 0, questId));
 					return true;
 				}
@@ -98,12 +98,12 @@ public class LegionDominionPortalAI extends PortalDialogAI {
 				}
 				return true;
 			} else {
-				PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1400185));
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANT_INSTANCE_ENTER_STATE());
 				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 0, questId));
 				return true;
 			}
 		} else {
-			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1400544));
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_ENTER_ONLY_FORCE_DON());
 		}
 
 		PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 0, questId));

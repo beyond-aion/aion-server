@@ -42,7 +42,7 @@ public class CM_LEGION_WH_KINAH extends AionClientPacket {
 				case 0:
 					if (!LM.hasRights(LegionPermissionsMask.WH_WITHDRAWAL)) {
 						// You do not have the authority to use the Legion warehouse.
-						PacketSendUtility.sendPacket(activePlayer, new SM_SYSTEM_MESSAGE(1300322));
+						PacketSendUtility.sendPacket(activePlayer, SM_SYSTEM_MESSAGE.STR_GUILD_WAREHOUSE_NO_RIGHT());
 						return;
 					}
 					if (activePlayer.getStorage(StorageType.LEGION_WAREHOUSE.getId()).tryDecreaseKinah(amount)) {
@@ -53,7 +53,7 @@ public class CM_LEGION_WH_KINAH extends AionClientPacket {
 				case 1:
 					if (!LM.hasRights(LegionPermissionsMask.WH_DEPOSIT)) {
 						// You do not have the authority to use the Legion warehouse.
-						PacketSendUtility.sendPacket(activePlayer, new SM_SYSTEM_MESSAGE(1300322));
+						PacketSendUtility.sendPacket(activePlayer, SM_SYSTEM_MESSAGE.STR_GUILD_WAREHOUSE_NO_RIGHT());
 						return;
 					}
 					if (activePlayer.getInventory().tryDecreaseKinah(amount)) {

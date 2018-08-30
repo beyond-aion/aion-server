@@ -77,7 +77,7 @@ public class WarehouseService {
 	public static void expand(Player player, boolean isNpcExpand) {
 		if (!canExpand(player))
 			return;
-		PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1300433, "8")); // 8 Slots added
+		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_EXTEND_CHAR_WAREHOUSE_SIZE_EXTENDED(8)); // 8 Slots added
 		PlayerCommonData pcd = player.getCommonData();
 		if (isNpcExpand) {
 			pcd.setWhNpcExpands(pcd.getWhNpcExpands() + 1);

@@ -60,7 +60,7 @@ public class QueenMosquaAI extends SummonerAI {
 
 				@Override
 				public void accept(Player player) {
-					PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1400476));
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_IDELIM_EGG_BREAK());
 					Summon summon = player.getSummon();
 					if (summon != null) {
 						if (summon.getNpcId() == 799500 || summon.getNpcId() == 799501) {

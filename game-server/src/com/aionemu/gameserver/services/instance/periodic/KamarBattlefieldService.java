@@ -16,7 +16,7 @@ public class KamarBattlefieldService extends PeriodicInstance {
 
 	@Override
 	protected void onSendEntry(Player player, byte maskId) {
-		PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1401730));
+		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_INSTANCE_OPEN_IDKamar());
 	}
 
 	private static class SingletonHolder {

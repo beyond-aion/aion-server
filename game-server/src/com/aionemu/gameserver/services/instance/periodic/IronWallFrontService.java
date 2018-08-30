@@ -17,7 +17,7 @@ public class IronWallFrontService extends PeriodicInstance {
 
 	@Override
 	protected void onSendEntry(Player player, byte maskId) {
-		PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1402032));
+		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_INSTANCE_OPEN_IDF5_TD_war());
 	}
 
 	private static class SingletonHolder {

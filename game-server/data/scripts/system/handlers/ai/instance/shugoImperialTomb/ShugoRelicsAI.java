@@ -45,7 +45,7 @@ public class ShugoRelicsAI extends ActionItemNpcAI {
 				PacketSendUtility.broadcastPacket(player, new SM_MESSAGE(player, "I could use 3 keys to open this box", ChatType.NORMAL), true);
 			else
 				PacketSendUtility.broadcastPacket(player, new SM_MESSAGE(player, "I could use 1 key to open this box", ChatType.NORMAL), true);
-			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1401587));
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_IDEVENT01_TREASUREBOX());
 			return;
 		}
 	}

@@ -10840,7 +10840,7 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * %0 spaces have been added to your cube.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_EXTEND_INVENTORY_SIZE_EXTENDED(String value0) {
+	public static final SM_SYSTEM_MESSAGE STR_EXTEND_INVENTORY_SIZE_EXTENDED(int value0) {
 		return new SM_SYSTEM_MESSAGE(1300431, value0);
 	}
 
@@ -10854,7 +10854,7 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * %0 spaces have been added to your personal warehouse.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_EXTEND_CHAR_WAREHOUSE_SIZE_EXTENDED(String value0) {
+	public static final SM_SYSTEM_MESSAGE STR_EXTEND_CHAR_WAREHOUSE_SIZE_EXTENDED(int value0) {
 		return new SM_SYSTEM_MESSAGE(1300433, value0);
 	}
 
@@ -19555,7 +19555,7 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * Your incantation was incorrect; you failed to purify the poison. You have %0 attempts left.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_CAPTCHA_UNRESTRICT_FAILED_RETRY(String value0) {
+	public static final SM_SYSTEM_MESSAGE STR_MSG_CAPTCHA_UNRESTRICT_FAILED_RETRY(int value0) {
 		return new SM_SYSTEM_MESSAGE(1400271, value0);
 	}
 
@@ -25157,6 +25157,27 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	}
 
 	/**
+	 * You cannot get on the mount here.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_CANNOT_RIDE_INVALID_LOCATION() {
+		return new SM_SYSTEM_MESSAGE(1401099);
+	}
+	
+	/**
+	 * Failed to find the instance.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_NEW_MAP_INFO_CANT_FIND_INSTANCE() {
+		return new SM_SYSTEM_MESSAGE(1401106);
+	}
+
+	/**
+	 * Assembly success.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_ASSEMBLY_ITEM_SUCCEEDED() {
+		return new SM_SYSTEM_MESSAGE(1401122);
+	}
+
+	/**
 	 * This emblem is already registered.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_GUILD_ALREADY_POSTED_THIS_EMBLEM() {
@@ -25675,10 +25696,29 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	}
 
 	/**
+	 * &lt;p&gt;A Rift Portal battle has begun.&lt;/p&gt;
+	 * &lt;p&gt;If the Rift Generator is destroyed or &lt;/p&gt;
+	 * &lt;p&gt;if you leave the battlefield,&lt;/p&gt;
+	 * &lt;p&gt;you will automatically return to your camp and be kicked out of the alliance.&lt;/p&gt;
+	 * &lt;p&gt;&lt;/p&gt;
+	 * &lt;p&gt;You will also quit the alliance if you return by using a skill or an item.&lt;/p&gt;
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_INVADE_DIRECT_PORTAL_OPEN_NOTICE() {
+		return new SM_SYSTEM_MESSAGE(1401454);
+	}
+
+	/**
 	 * %0 is gone.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_HOUSING_OBJECT_DELETE_USE_COUNT_FINAL(String value0) {
 		return new SM_SYSTEM_MESSAGE(1401470, value0);
+	}
+
+	/**
+	 * You will be returned to where you entered.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_INVADE_DIRECT_PORTAL_OUT_COMPULSION() {
+		return new SM_SYSTEM_MESSAGE(1401474);
 	}
 
 	/**
@@ -25693,6 +25733,13 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_NO_RELATIONSHIP_RECENTLY() {
 		return new SM_SYSTEM_MESSAGE(1401504);
+	}
+
+	/**
+	 * %0 has reached level %1.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_TOWN_LEVEL_LEVEL_UP(int townId, int level) {
+		return new SM_SYSTEM_MESSAGE(1401520, townId, level);
 	}
 
 	/**
@@ -26011,6 +26058,20 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	}
 
 	/**
+	 * %0's Idian is fully charged.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_POLISH_SUCCEED(String weaponL10n) {
+		return new SM_SYSTEM_MESSAGE(1401650, weaponL10n);
+	}
+
+	/**
+	 * The Idian charge on %0 ran out.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_POLISH_CHANGE_CONDITION_END(String weaponL10n) {
+		return new SM_SYSTEM_MESSAGE(1401652, weaponL10n);
+	}
+
+	/**
 	 * A third wave of pillagers will arrive in 10 seconds!
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_IDEVENT01_PHASE03() {
@@ -26058,12 +26119,33 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	public static final SM_SYSTEM_MESSAGE STR_MSG_IDLDF5_INDER_RUNE_END() {
 		return new SM_SYSTEM_MESSAGE(1401678);
 	}
+	
+	/**
+	 * This weapon has no power generator and cannot be boarded.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDLDF5B_TD_DEFWeapon() {
+		return new SM_SYSTEM_MESSAGE(1401679);
+	}
+	
+	/**
+	 * You need a Cannon Starter to board this.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDLDF5B_TD_Tank() {
+		return new SM_SYSTEM_MESSAGE(1401680);
+	}
 
 	/**
 	 * Enchantment of %0 to +%num1 was successful.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_ENCHANT_ITEM_SUCCEED_NEW(String value0, int num1) {
 		return new SM_SYSTEM_MESSAGE(1401681, value0, num1);
+	}
+
+	/**
+	 * Join the fight in the Kamar Battlefield.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_INSTANCE_OPEN_IDKamar() {
+		return new SM_SYSTEM_MESSAGE(1401730);
 	}
 
 	/**
@@ -26289,6 +26371,13 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	public static final SM_SYSTEM_MESSAGE STR_MSG_IDKamar_DarkGeneral_Die() {
 		return new SM_SYSTEM_MESSAGE(1401851);
 	}
+	
+	/**
+	 * The Aetheric Cannon requires fuel before it can be operated.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_IDKAMAR_CANT_USE_SEIGEWEAPON() {
+		return new SM_SYSTEM_MESSAGE(1401854);
+	}
 
 	/**
 	 * You spent %num0 Item.
@@ -26417,6 +26506,13 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	}
 
 	/**
+	 * You can now participate in the Ophidan Bridge battle.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_INSTANCE_OPEN_IDLDF5_Under_01_War() {
+		return new SM_SYSTEM_MESSAGE(1401947);
+	}
+
+	/**
 	 * Supplies have been delivered to some of the sentry posts.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_GUARDLIGHTHERO_SPAWN_IDLDF5_UNDER_01_WAR() {
@@ -26512,6 +26608,13 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_PACK_ITEM_NEED_IDENTIFY() {
 		return new SM_SYSTEM_MESSAGE(1402030);
+	}
+
+	/**
+	 * You may participate in the Iron Wall Warfront.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_INSTANCE_OPEN_IDF5_TD_war() {
+		return new SM_SYSTEM_MESSAGE(1402032);
 	}
 
 	/**
@@ -26669,10 +26772,38 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	}
 
 	/**
+	 * You have canceled the tempering of %0.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_ITEM_AUTHORIZE_CANCEL(String itemL10n) {
+		return new SM_SYSTEM_MESSAGE(1402147, itemL10n);
+	}
+
+	/**
+	 * You have successfully tempered %0. +%num1 temperance level achieved.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_ITEM_AUTHORIZE_SUCCEEDED(String itemL10n, int temperingLevel) {
+		return new SM_SYSTEM_MESSAGE(1402148, itemL10n, temperingLevel);
+	}
+
+	/**
+	 * Tempering of %0 has failed and the temperance level has decreased to 0.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_ITEM_AUTHORIZE_FAILED(String itemL10n) {
+		return new SM_SYSTEM_MESSAGE(1402149, itemL10n);
+	}
+
+	/**
 	 * %0 has succeeded in tempering %1 to level %2.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_ITEM_AUTHORIZE_SUCCEEDED_MAX(String playerName, String value1, int num2) {
 		return new SM_SYSTEM_MESSAGE(1402154, playerName, value1, num2);
+	}
+
+	/**
+	 * You can now participate in the Idgel Dome battle.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_INSTANCE_OPEN_IDLDF5_Fortress_Re() {
+		return new SM_SYSTEM_MESSAGE(1402192);
 	}
 
 	/**
@@ -26855,6 +26986,13 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_BREAK_PROC(String value0, String value1) {
 		return new SM_SYSTEM_MESSAGE(1402237, value0, value1);
+	}
+
+	/**
+	 * %0's Godstone Socketing cancelled.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_GIVE_PROC_CANCEL(String value0) {
+		return new SM_SYSTEM_MESSAGE(1402238, value0);
 	}
 
 	/**
@@ -27242,6 +27380,13 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_IDLDF4_Re_01_Time_07() {
 		return new SM_SYSTEM_MESSAGE(1402461);
+	}
+
+	/**
+	 * Tempering %0 has failed, and the item has been destroyed.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_ITEM_AUTHORIZE_FAILED_TSHIRT(String plumeL10n) {
+		return new SM_SYSTEM_MESSAGE(1402447, plumeL10n);
 	}
 
 	/**
@@ -27742,12 +27887,36 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	}
 
 	/**
-	 * Amplification System
+	 * Amplification is not available for %0.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_EXCEED_CANNOT_01(String value0) {
 		return new SM_SYSTEM_MESSAGE(1402650, value0);
 	}
 
+	/**
+	 * Must be at maximum enchantment level to enable amplification.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_EXCEED_CANNOT_02() {
+		return new SM_SYSTEM_MESSAGE(1402651);
+	}
+
+	/**
+	 * Unable to find a qualifying item for amplification.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_EXCEED_NO_TARGET_ITEM() {
+		return new SM_SYSTEM_MESSAGE(1402655);
+	}
+
+	/**
+	 * Amplification already applied to this item.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_EXCEED_ALREADY() {
+		return new SM_SYSTEM_MESSAGE(1402656);
+	}
+
+	/**
+	 * Successfully amplified %0.
+	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_EXCEED_SUCCEED(String value0) {
 		return new SM_SYSTEM_MESSAGE(1402657, value0);
 	}
@@ -28254,6 +28423,13 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_STIGMA_DELETE_HIDDEN_SKILL(String value0, int value1, String value2) {
 		return new SM_SYSTEM_MESSAGE(1402895, value0, value1, value2);
+	}
+
+	/**
+	 * %0 Stonespear Siege application has been submitted.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_GUILD_APPLY_DOMINION(String siegeName) {
+		return new SM_SYSTEM_MESSAGE(1402902, siegeName);
 	}
 
 	/**

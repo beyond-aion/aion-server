@@ -17,14 +17,14 @@ public class PvPArenaService {
 
 	public static boolean isPvPArenaAvailable(Player player, AutoGroupType agt) {
 		if (AutoGroupConfig.START_TIME_ENABLE && !checkTime(agt)) {
-			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1401306, agt.getInstanceMapId()));
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_INSTANCE_CLOSED_TIME(agt.getInstanceMapId()));
 			return false;
 		}
 		if (!checkItem(player, agt)) {
-			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1400219, agt.getInstanceMapId()));
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_INSTANCE_CANT_ENTER_WITHOUT_ITEM());
 			return false;
 		}
-		// todo check cool down
+		// TODO check cool down
 		return true;
 	}
 

@@ -70,7 +70,7 @@ public class RVController extends NpcController {
 		this.minLevel = riftTemplate.getMinLevel();
 		this.maxLevel = riftTemplate.getMaxLevel();
 		this.deSpawnedTime = ((int) (System.currentTimeMillis() / 1000))
-				+ (isVortex ? VortexService.getInstance().getDuration() * 3600 : RiftService.getInstance().getDuration() * 3600);
+			+ (isVortex ? VortexService.getInstance().getDuration() * 3600 : RiftService.getInstance().getDuration() * 3600);
 
 		if (slave != null)// master rift should be created
 		{
@@ -114,8 +114,7 @@ public class RVController extends NpcController {
 						VortexLocation loc = VortexService.getInstance().getLocationByRift(requester.getNpcId());
 						TeleportService.teleportTo(responder, loc.getStartPoint());
 
-						// A Rift Portal battle has begun.
-						PacketSendUtility.sendPacket(responder, new SM_SYSTEM_MESSAGE(1401454));
+						PacketSendUtility.sendPacket(responder, SM_SYSTEM_MESSAGE.STR_MSG_INVADE_DIRECT_PORTAL_OPEN_NOTICE());
 
 						// Update passed players count
 						passedPlayers.put(responder.getObjectId(), responder);

@@ -76,7 +76,7 @@ public class EmpyreanArbiterAI extends NpcAI {
 
 				@Override
 				public void accept(Player p) {
-					PacketSendUtility.sendPacket(p, new SM_SYSTEM_MESSAGE(1400964, player.getName()));
+					PacketSendUtility.sendPacket(p, SM_SYSTEM_MESSAGE.STR_MSG_FRIENDLY_MOVE_COMBATAREA_IDARENA(player.getName()));
 				}
 
 			});

@@ -110,8 +110,7 @@ public class Invasion extends DimensionalVortex<VortexLocation> {
 		}
 
 		if (isInvader && player.isOnline() && player.getWorldId() == getVortexLocation().getInvasionWorldId()) {
-			// You will be returned to where you entered.
-			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1401474));
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_INVADE_DIRECT_PORTAL_OUT_COMPULSION());
 			TeleportService.teleportTo(player, getVortexLocation().getHomePoint());
 		}
 

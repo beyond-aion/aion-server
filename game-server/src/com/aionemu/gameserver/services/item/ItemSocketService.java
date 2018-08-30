@@ -289,7 +289,7 @@ public class ItemSocketService {
 				super.moved();
 				player.getObserveController().removeObserver(this);
 				player.getController().cancelUseItem();
-				PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1402238, weapon.getL10n()));
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_GIVE_PROC_CANCEL(weapon.getL10n()));
 
 			}
 		};

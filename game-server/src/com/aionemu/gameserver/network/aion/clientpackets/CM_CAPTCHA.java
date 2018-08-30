@@ -21,18 +21,12 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 public class CM_CAPTCHA extends AionClientPacket {
 
-	/**
-	 * Logger
-	 */
 	private static final Logger log = LoggerFactory.getLogger(CM_CAPTCHA.class);
 
 	private int type;
 	private int count;
 	private String word;
 
-	/**
-	 * @param opcode
-	 */
 	public CM_CAPTCHA(int opcode, Set<State> validStates) {
 		super(opcode, validStates);
 	}
@@ -59,7 +53,7 @@ public class CM_CAPTCHA extends AionClientPacket {
 		switch (type) {
 			case 0x02:
 				if (player.getCaptchaWord().equalsIgnoreCase(word)) {
-					PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1400270));
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CAPTCHA_UNRESTRICT());
 					PacketSendUtility.sendPacket(player, new SM_CAPTCHA(true, 0));
 
 					PunishmentService.setIsNotGatherable(player, 0, false, 0);
@@ -70,11 +64,11 @@ public class CM_CAPTCHA extends AionClientPacket {
 					int banTime = SecurityConfig.CAPTCHA_EXTRACTION_BAN_TIME + (SecurityConfig.CAPTCHA_EXTRACTION_BAN_ADD_TIME * count);
 
 					if (count < 3) {
-						PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1400271, 3 - count));
+						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CAPTCHA_UNRESTRICT_FAILED_RETRY(3 - count));
 						PacketSendUtility.sendPacket(player, new SM_CAPTCHA(false, banTime));
 						PunishmentService.setIsNotGatherable(player, count, true, banTime * 1000L);
 					} else {
-						PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1400272));
+						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CAPTCHA_UNRESTRICT_FAILED());
 						PunishmentService.setIsNotGatherable(player, count, true, banTime * 1000L);
 					}
 				}

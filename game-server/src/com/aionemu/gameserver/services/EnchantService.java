@@ -823,11 +823,11 @@ public class EnchantService {
 		Item tool = player.getInventory().getItemByObjId(toolId);
 
 		if (targetItem == null || material == null || tool == null) {
-			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1402655));
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_EXCEED_NO_TARGET_ITEM());
 			return;
 		}
 		if (targetItem.isAmplified()) {
-			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1402656));
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_EXCEED_ALREADY());
 			return;
 		}
 		if (!targetItem.getItemTemplate().canExceedEnchant()) {
@@ -835,11 +835,11 @@ public class EnchantService {
 			return;
 		}
 		if (targetItem.getEnchantLevel() < targetItem.getMaxEnchantLevel()) {
-			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1402651));
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_EXCEED_CANNOT_02());
 			return;
 		}
 		if (targetItem.getItemId() != material.getItemId() && material.getItemId() != 166500002) {
-			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1402655));
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_EXCEED_NO_TARGET_ITEM());
 			return;
 		}
 		if (player.getInventory().decreaseByObjectId(material.getObjectId(), 1) && player.getInventory().decreaseByObjectId(tool.getObjectId(), 1)) {

@@ -26,7 +26,7 @@ public class ItemRestrictionService {
 				if (!LegionService.getInstance().getLegionMember(player.getObjectId()).hasRights(LegionPermissionsMask.WH_WITHDRAWAL)
 					|| !LegionConfig.LEGION_WAREHOUSE || !player.isLegionMember()) {
 					// You do not have the authority to use the Legion warehouse.
-					PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1300322));
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GUILD_WAREHOUSE_NO_RIGHT());
 					return true;
 				}
 				break;
@@ -43,14 +43,14 @@ public class ItemRestrictionService {
 			case REGULAR_WAREHOUSE:
 				if (!item.isStorableinWarehouse(player)) {
 					// You cannot store this in the warehouse.
-					PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1300418));
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_WAREHOUSE_CANT_DEPOSIT_ITEM());
 					return true;
 				}
 				break;
 			case ACCOUNT_WAREHOUSE:
 				if (!item.isStorableinAccWarehouse(player)) {
 					// You cannot store this item in the account warehouse.
-					PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1400356));
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_WAREHOUSE_CANT_ACCOUNT_DEPOSIT());
 					return true;
 				}
 				break;
@@ -59,9 +59,8 @@ public class ItemRestrictionService {
 					// You cannot store this item in the Legion warehouse.
 					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_WAREHOUSE_CANT_LEGION_DEPOSIT());
 					return true;
-				} else if (!player.isLegionMember()
-					|| (!player.getLegionMember().hasRights(LegionPermissionsMask.WH_DEPOSIT) && !player.getLegionMember().hasRights(
-						LegionPermissionsMask.WH_WITHDRAWAL))) {
+				} else if (!player.isLegionMember() || (!player.getLegionMember().hasRights(LegionPermissionsMask.WH_DEPOSIT)
+					&& !player.getLegionMember().hasRights(LegionPermissionsMask.WH_WITHDRAWAL))) {
 					// You do not have the authority to use the Legion warehouse.
 					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GUILD_WAREHOUSE_NO_RIGHT());
 					return true;

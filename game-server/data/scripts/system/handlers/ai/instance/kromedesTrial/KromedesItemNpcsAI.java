@@ -30,27 +30,24 @@ public class KromedesItemNpcsAI extends ActionItemNpcAI {
 				case 730325:
 					if (player.getInventory().getItemCountByItemId(164000142) < 1) {
 						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 1012));
-						PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1400701)); // TODO: more sys messages, but for
-																																									// now not needed!
 						ItemService.addItem(player, 164000142, 1);
+						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_IDCROMEDE_SKILL_01()); // TODO: more sys messages
 					} else
 						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), DialogPage.NO_RIGHT.id()));
 					break;
 				case 730340:
 					if (player.getInventory().getItemCountByItemId(164000140) < 1) {
 						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 1012));
-						PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1400701)); // TODO: more sys messages, but for
-																																									// now not needed!
 						ItemService.addItem(player, 164000140, 1);
+						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_IDCROMEDE_SKILL_01()); // TODO: more sys messages
 					} else
 						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), DialogPage.NO_RIGHT.id()));
 					break;
 				case 730341:
 					if (player.getInventory().getItemCountByItemId(164000143) < 1) {
 						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 1012));
-						PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1400701)); // TODO: more sys messages, but for
-																																									// now not needed!
 						ItemService.addItem(player, 164000143, 1);
+						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_IDCROMEDE_SKILL_01()); // TODO: more sys messages
 					} else
 						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), DialogPage.NO_RIGHT.id()));
 					break;

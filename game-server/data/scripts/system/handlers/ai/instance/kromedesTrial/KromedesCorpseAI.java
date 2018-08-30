@@ -27,9 +27,8 @@ public class KromedesCorpseAI extends NpcAI {
 		if (dialogActionId == SELECT1_1) {
 			if (player.getInventory().getItemCountByItemId(164000141) < 1) {
 				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 1012));
-				PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1400701)); // TODO: more sys messages, but for now
-																																							// not needed!
 				ItemService.addItem(player, 164000141, 1);
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_IDCROMEDE_SKILL_01()); // TODO: more sys messages
 			} else
 				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), DialogPage.NO_RIGHT.id()));
 		}

@@ -175,7 +175,7 @@ public class ChallengeTaskService {
 					// PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1401519, new DescriptionId(804307), 601));
 				}
 				if (town.getLevel() != oldLevel)
-					PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1401520, town.getId(), town.getLevel()));
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_TOWN_LEVEL_LEVEL_UP(town.getId(), town.getLevel()));
 				DAOManager.getDAO(TownDAO.class).store(town);
 			}
 		}

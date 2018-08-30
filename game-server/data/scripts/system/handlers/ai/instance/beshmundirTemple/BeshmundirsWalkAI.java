@@ -47,14 +47,14 @@ public class BeshmundirsWalkAI extends ActionItemNpcAI {
 				break;
 			case INSTANCE_ENTRY: // I'm ready to enter
 				if (!player.isInGroup()) {
-					PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1390256));
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_ENTER_ONLY_PARTY_DON());
 					return true;
 				}
 				if (player.getPlayerGroup().isLeader(player)) {
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 4762)); // Path selection
 				} else {
 					if (!isAGroupMemberInInstance(player)) {
-						PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1400361));
+						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_INSTANCE_DUNGEON_CANT_ENTER_NOT_OPENED());
 						return true;
 					}
 					moveToInstance(player, (byte) 0);

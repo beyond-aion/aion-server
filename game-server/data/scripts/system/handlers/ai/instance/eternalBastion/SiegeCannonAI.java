@@ -50,7 +50,7 @@ public class SiegeCannonAI extends ActionItemNpcAI {
 				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 0));
 				AIActions.deleteOwner(this);
 			} else {
-				PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1401679));
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_IDLDF5B_TD_DEFWeapon());
 				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 0));
 			}
 		} else {
@@ -60,7 +60,7 @@ public class SiegeCannonAI extends ActionItemNpcAI {
 				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 0));
 				AIActions.deleteOwner(this);
 			} else {
-				PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1401680));
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_IDLDF5B_TD_Tank());
 				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 0));
 			}
 		}

@@ -113,7 +113,7 @@ public class NpcFactions {
 	private void leaveNpcFaction(NpcFaction npcFaction) {
 		NpcFactionTemplate npcFactionTemplate = DataManager.NPC_FACTIONS_DATA.getNpcFactionById(npcFaction.getId());
 
-		PacketSendUtility.sendPacket(owner, new SM_SYSTEM_MESSAGE(1300526, npcFactionTemplate.getL10n()));
+		PacketSendUtility.sendPacket(owner, SM_SYSTEM_MESSAGE.STR_FACTION_LEAVE(npcFactionTemplate.getL10n()));
 		npcFaction.setActive(false);
 		activeNpcFaction[npcFactionTemplate.isMentor() ? 1 : 0] = null;
 		if (npcFaction.getState() == ENpcFactionQuestState.START) {
@@ -157,7 +157,7 @@ public class NpcFactions {
 			return;
 		}
 		if (npcFaction != null && npcFaction.isActive()) {
-			PacketSendUtility.sendPacket(owner, new SM_SYSTEM_MESSAGE(1300525));
+			PacketSendUtility.sendPacket(owner, SM_SYSTEM_MESSAGE.STR_FACTION_CAN_NOT_JOIN());
 			return;
 		}
 		if (activeNpcFaction != null && activeNpcFaction.getId() != npcFactionId) {
@@ -165,7 +165,7 @@ public class NpcFactions {
 			return;
 		}
 		if (npcFaction == null || !npcFaction.isActive()) {
-			PacketSendUtility.sendPacket(owner, new SM_SYSTEM_MESSAGE(1300524, npcFactionTemplate.getL10n()));
+			PacketSendUtility.sendPacket(owner, SM_SYSTEM_MESSAGE.STR_FACTION_JOIN(npcFactionTemplate.getL10n()));
 			PacketSendUtility.sendPacket(owner, new SM_DIALOG_WINDOW(targetObjectId, 1012));
 			setActive(npcFactionId);
 

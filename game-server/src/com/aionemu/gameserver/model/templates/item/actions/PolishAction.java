@@ -18,7 +18,6 @@ import com.aionemu.gameserver.model.templates.item.bonuses.StatBonusType;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_INVENTORY_UPDATE_ITEM;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ITEM_USAGE_ANIMATION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
-import com.aionemu.gameserver.utils.ChatUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
@@ -47,8 +46,8 @@ public class PolishAction extends AbstractItemAction {
 
 	@Override
 	public void act(Player player, Item parentItem, Item targetItem) {
-		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), 5000, 0, 0),
-			true);
+		PacketSendUtility.broadcastPacket(player,
+			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), 5000, 0, 0), true);
 		ItemUseObserver observer = new ItemUseObserver() {
 
 			@Override
@@ -56,7 +55,8 @@ public class PolishAction extends AbstractItemAction {
 				player.getController().cancelTask(TaskId.ITEM_USE);
 				player.removeItemCoolDown(parentItem.getItemTemplate().getUseLimits().getDelayId());
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_CANCELED());
-				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), 0, 2, 0), true);
+				PacketSendUtility.broadcastPacket(player,
+					new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), 0, 2, 0), true);
 				player.getObserveController().removeObserver(this);
 			}
 
@@ -65,7 +65,8 @@ public class PolishAction extends AbstractItemAction {
 		player.getController().addTask(TaskId.ITEM_USE, ThreadPoolManager.getInstance().schedule(() -> {
 			player.getObserveController().removeObserver(observer);
 
-			PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), 0, 1, 1), true);
+			PacketSendUtility.broadcastPacket(player,
+				new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), 0, 1, 1), true);
 			if (!player.getInventory().decreaseByObjectId(parentItem.getObjectId(), 1)) {
 				return;
 			}
@@ -74,7 +75,7 @@ public class PolishAction extends AbstractItemAction {
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ENCHANT_ITEM_FAILED(parentItem.getL10n()));
 				return;
 			}
-			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1401650, ChatUtil.itemName(targetItem.getItemId())));
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_POLISH_SUCCEED(targetItem.getL10n()));
 			IdianStone idianStone = targetItem.getIdianStone();
 			if (idianStone != null) {
 				idianStone.onUnEquip(player);

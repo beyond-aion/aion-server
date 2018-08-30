@@ -93,8 +93,7 @@ public class TradeList {
 		}
 
 		if (ap < requiredAp) {
-			// You do not have enough Abyss Points.
-			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1300927));
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_NOT_ENOUGH_ABYSSPOINT());
 			return false;
 		}
 

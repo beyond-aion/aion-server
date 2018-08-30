@@ -181,7 +181,7 @@ public class PunishmentService {
 			scheduleGatherableTask(player, delay);
 			DAOManager.getDAO(PlayerPunishmentsDAO.class).punishPlayer(player, PunishmentType.GATHER, "Possible gatherbot");
 		} else {
-			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1400269));
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CAPTCHA_RECOVERED());
 			player.setCaptchaWord(null);
 			player.setCaptchaImage(null);
 			player.setGatherableTimer(0);

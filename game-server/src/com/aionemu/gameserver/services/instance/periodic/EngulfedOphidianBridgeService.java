@@ -17,7 +17,7 @@ public class EngulfedOphidianBridgeService extends PeriodicInstance {
 
 	@Override
 	protected void onSendEntry(Player player, byte maskId) {
-		PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1401947));
+		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_INSTANCE_OPEN_IDLDF5_Under_01_War());
 	}
 
 	public static EngulfedOphidianBridgeService getInstance() {

@@ -50,7 +50,7 @@ public class RideAction extends AbstractItemAction {
 		if (CustomConfig.ENABLE_RIDE_RESTRICTION) {
 			for (ZoneInstance zone : player.findZones()) {
 				if (!zone.canRide()) {
-					PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1401099));
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANNOT_RIDE_INVALID_LOCATION());
 					return false;
 				}
 			}

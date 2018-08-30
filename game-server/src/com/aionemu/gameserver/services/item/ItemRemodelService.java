@@ -53,8 +53,7 @@ public class ItemRemodelService {
 
 		// Check Kinah
 		if (player.getInventory().getKinah() < remodelCost) {
-			PacketSendUtility.sendPacket(player,
-				SM_SYSTEM_MESSAGE.STR_CHANGE_ITEM_SKIN_NOT_ENOUGH_GOLD(keepItem.getItemTemplate().getL10n()));
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CHANGE_ITEM_SKIN_NOT_ENOUGH_GOLD(keepItem.getItemTemplate().getL10n()));
 			return;
 		}
 
@@ -85,8 +84,8 @@ public class ItemRemodelService {
 		// Check that types match.
 		ItemGroup keep = keepItem.getItemTemplate().getItemGroup();
 		ItemGroup extract = extractItem.getItemSkinTemplate().getItemGroup();
-		if ((keep != extract && !(extract.getItemSubType().equals(ItemSubType.CLOTHES) || extract.getItemSubType() == ItemSubType.ALL_ARMOR
-			&& keep.getValidEquipmentSlots() == extract.getValidEquipmentSlots()))
+		if ((keep != extract && !(extract.getItemSubType().equals(ItemSubType.CLOTHES)
+			|| extract.getItemSubType() == ItemSubType.ALL_ARMOR && keep.getValidEquipmentSlots() == extract.getValidEquipmentSlots()))
 			|| keep.getItemSubType().equals(ItemSubType.CLOTHES)) {
 			PacketSendUtility.sendPacket(player,
 				SM_SYSTEM_MESSAGE.STR_CHANGE_ITEM_SKIN_NOT_COMPATIBLE(keepItem.getItemTemplate().getL10n(), extractItem.getItemSkinTemplate().getL10n()));
@@ -94,19 +93,19 @@ public class ItemRemodelService {
 		}
 
 		if (!keepItem.isRemodelable(player)) {
-			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1300478, keepItem.getItemTemplate().getL10n()));
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CHANGE_ITEM_SKIN_NOT_SKIN_CHANGABLE_ITEM(keepItem.getItemTemplate().getL10n()));
 			return;
 		}
 
 		if (!extractItem.isRemodelable(player)) {
-			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1300482, extractItem.getItemTemplate().getL10n()));
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CHANGE_ITEM_SKIN_CAN_NOT_REMOVE_SKIN_ITEM(extractItem.getItemTemplate().getL10n()));
 			return;
 		}
 
 		ItemTemplate skin = extractItem.getItemSkinTemplate();
 		ItemActions actions = skin.getActions();
 		if (extractItem.isSkinnedItem() && actions != null && actions.getRemodelAction() != null && actions.getRemodelAction().getExtractType() == 2) {
-			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1300482, extractItem.getItemTemplate().getL10n()));
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CHANGE_ITEM_SKIN_CAN_NOT_REMOVE_SKIN_ITEM(extractItem.getItemTemplate().getL10n()));
 			return;
 		}
 		// -- SUCCESS --
@@ -125,6 +124,6 @@ public class ItemRemodelService {
 
 		// Notify Player
 		ItemPacketService.updateItemAfterInfoChange(player, keepItem);
-		PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1300483, keepItem.getItemTemplate().getL10n()));
+		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CHANGE_ITEM_SKIN_SUCCEED(keepItem.getItemTemplate().getL10n()));
 	}
 }

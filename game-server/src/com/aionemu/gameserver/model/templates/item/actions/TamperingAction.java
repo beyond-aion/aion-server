@@ -55,7 +55,7 @@ public class TamperingAction extends AbstractItemAction {
 			public void abort() {
 				player.getController().cancelTask(TaskId.ITEM_USE);
 				player.removeItemCoolDown(parentItem.getItemTemplate().getUseLimits().getDelayId());
-				PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1402147, targetItem.getL10n()));
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_ITEM_AUTHORIZE_CANCEL(targetItem.getL10n()));
 				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parntObjectId, parentItemId, 0, 3, 0), true);
 				player.getObserveController().removeObserver(this);
 			}
@@ -108,7 +108,7 @@ public class TamperingAction extends AbstractItemAction {
 							}
 						}
 						PacketSendUtility.sendPacket(player,
-							new SM_SYSTEM_MESSAGE(1402148, targetItem.getL10n(), targetItem.getTempering()));
+							SM_SYSTEM_MESSAGE.STR_MSG_ITEM_AUTHORIZE_SUCCEEDED(targetItem.getL10n(), targetItem.getTempering()));
 						PacketSendUtility.broadcastPacketAndReceive(player,
 							new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parntObjectId, parentItemId, 0, 1, 0));
 
@@ -125,7 +125,7 @@ public class TamperingAction extends AbstractItemAction {
 					} else {
 						targetItem.setTempering(0);
 						if (targetItem.getItemTemplate().getItemGroup() == ItemGroup.PLUME) {
-							PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1402447, targetItem.getL10n()));
+							PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_ITEM_AUTHORIZE_FAILED_TSHIRT(targetItem.getL10n()));
 							PacketSendUtility.broadcastPacketAndReceive(player,
 								new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parntObjectId, parentItemId, 0, 2, 0));
 							if (targetItem.isEquipped())
@@ -133,7 +133,7 @@ public class TamperingAction extends AbstractItemAction {
 							else
 								player.getInventory().decreaseByObjectId(targetItem.getObjectId(), 1);
 						} else {
-							PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1402149, targetItem.getL10n()));
+							PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_ITEM_AUTHORIZE_FAILED(targetItem.getL10n()));
 							PacketSendUtility.broadcastPacketAndReceive(player,
 								new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parntObjectId, parentItemId, 0, 2, 0));
 						}

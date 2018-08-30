@@ -54,11 +54,11 @@ public class FindGroupService {
 				switch (action) {
 					case 0x02:
 						elyosRecruitFindGroups.put(objectId, findGroup);
-						PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1400392));
+						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_PARTY_MATCH_OFFER_PARTY_POSTED());
 						break;
 					case 0x06:
 						elyosApplyFindGroups.put(objectId, findGroup);
-						PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1400393));
+						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_PARTY_MATCH_SEEK_PARTY_POSTED());
 						break;
 				}
 				break;
@@ -66,11 +66,11 @@ public class FindGroupService {
 				switch (action) {
 					case 0x02:
 						asmodianRecruitFindGroups.put(objectId, findGroup);
-						PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1400392));
+						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_PARTY_MATCH_OFFER_PARTY_POSTED());
 						break;
 					case 0x06:
 						asmodianApplyFindGroups.put(objectId, findGroup);
-						PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1400393));
+						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_PARTY_MATCH_SEEK_PARTY_POSTED());
 						break;
 				}
 				break;

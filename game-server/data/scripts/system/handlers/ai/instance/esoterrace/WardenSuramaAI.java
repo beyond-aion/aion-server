@@ -79,8 +79,8 @@ public class WardenSuramaAI extends AggressiveNpcAI {
 			@Override
 			public void accept(Player player) {
 				if (player.isOnline()) {
-					PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1400998));
-					PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1400997));
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_IDF4Re_Drana_10());
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_IDF4Re_Drana_09());
 				}
 			}
 		});
