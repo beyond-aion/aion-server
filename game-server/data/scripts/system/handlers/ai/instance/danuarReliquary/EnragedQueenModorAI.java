@@ -8,20 +8,25 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.skill.QueuedNpcSkillEntry;
 import com.aionemu.gameserver.model.templates.npcskill.QueuedNpcSkillTemplate;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_FORCED_MOVE;
+import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
-import com.aionemu.gameserver.world.WorldPosition;
+import com.aionemu.gameserver.world.World;
+
+import ai.AggressiveNpcAI;
 
 /**
- * @author Ritsu, Luzien, Yeats, Estrayl
+ * @author Ritsu
+ * @reworked Luzien, Yeats 26.05.2016
  */
 @AIName("enraged_queen_modor")
-public class EnragedQueenModorAI extends AbstractModorAI {
+public class EnragedQueenModorAI extends AggressiveNpcAI {
 
-	private AtomicBoolean isFearEventReady = new AtomicBoolean();
-	private AtomicBoolean isFearEventCompleted = new AtomicBoolean();
-	private AtomicBoolean isElectricVengeanceReady = new AtomicBoolean();
-	private Future<?> electricVengeanceTask;
+	private Future<?> skillTask;
+	private AtomicBoolean isHome = new AtomicBoolean(true);
+	private boolean up;
+	private int stage = 0;
 
 	public EnragedQueenModorAI(Npc owner) {
 		super(owner);
@@ -30,78 +35,159 @@ public class EnragedQueenModorAI extends AbstractModorAI {
 	@Override
 	protected void handleSpawned() {
 		super.handleSpawned();
-		ThreadPoolManager.getInstance().schedule(() -> PacketSendUtility.broadcastMessage(getOwner(), 1500743), 1500);
-		ThreadPoolManager.getInstance().schedule(() -> {
-			getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21171, 60, 100)));
-			getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21169, 60, 100)));
-			getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21181, 60, 100)));
-			getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21174, 60, 100)));
-			getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21175, 60, 100)));
-		}, 2000);
-		electricVengeanceTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> isElectricVengeanceReady.set(true), 90000, 240000);
-	}
-
-	@Override
-	protected void handleAttack(Creature creature) {
-		super.handleAttack(creature);
-		if (getLifeStats().getHpPercentage() <= 50)
-			isFearEventReady.compareAndSet(false, true);
-	}
-
-	@Override
-	protected void handleGroundSkillSet() {
-		if (isFearEventReady.get() && isFearEventCompleted.compareAndSet(false, true)) {
-			getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21268, 60, 100)));
-			getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21269, 60, 100)));
-			getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21174, 60, 100)));
-		} else {
-			if (isElectricVengeanceReady.compareAndSet(true, false)) {
-				getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21176, 60, 100)));
-				getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21229, 60, 100)));
-			} else {
-				getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21171, 60, 100)));
-				getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21172, 60, 100)));
-			}
-			handleAdvancedGroundSkillSet();
+		if (isHome.compareAndSet(true, false)) {
+			ThreadPoolManager.getInstance().schedule(() -> {
+				PacketSendUtility.broadcastMessage(getOwner(), 1500743);
+				onSpawnSkills();
+			}, 1000);
 		}
 	}
 
-	protected void handleAdvancedGroundSkillSet() {
-		getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21173, 60, 100)));
+	private void startStage(int stage) {
+		if (!canAct())
+			return;
+		switch (stage) {
+			case 1:
+				PacketSendUtility.broadcastMessage(getOwner(), 1500750);
+				rendSpace(true);
+				spawn(284659, 256.57727f, 278.18225f, 241.54623f, (byte) 90);
+				spawn(284660, 246.65663f, 275.51996f, 241.54623f, (byte) 96);
+				spawn(284660, 246.65663f, 275.51996f, 241.54623f, (byte) 96);
+				spawn(284661, 266.26517f, 273.97614f, 241.54623f, (byte) 83);
+				startIceTask();
+				ThreadPoolManager.getInstance().schedule(() -> {
+					if (canAct()) {
+						startStage(2);
+					}
+				}, 70000);
+				break;
+			case 2:
+				rendSpace(false);
+				startGroundTask();
+				ThreadPoolManager.getInstance().schedule(() -> {
+					if (canAct()) {
+						cancelSkillTask();
+						startStage(3);
+					}
+
+				}, 70000);
+				break;
+			case 3:
+				getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21170, 10, 100)));
+				break;
+
+		}
+	}
+
+	private void rendSpace(boolean up) {
+		this.up = up;
+		getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21165, 60, 100)));
+	}
+
+	private void onSpawnSkills() {
+		getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21171, 60, 100)));
+		getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21169, 60, 100)));
+		getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21181, 60, 100)));
+		getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21174, 60, 100)));
+		getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21175, 60, 100)));
+		ThreadPoolManager.getInstance().schedule(() -> {
+			if (canAct()) {
+				startStage(1);
+			}
+		}, 22000);
+	}
+
+	private void startGroundTask() {
+		cancelSkillTask();
+		skillTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
+			getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21172, 60, 100)));
+			getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21173, 60, 100)));
+		}, 3000, 20000);
+	}
+
+	private void electrocute() {
+		getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21176, 60, 100)));
+		getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21229, 60, 100)));
 	}
 
 	@Override
-	protected void handlePlatformSkillSet() {
-		getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21179, 1, 100))); // Ice Storm
-		getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21174, 60, 100, 0, 12000))); // Malice
-		getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21174, 60, 100))); // Malice
-		getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21175, 60, 100))); // Revenge
+	public void onEndUseSkill(SkillTemplate skillTemplate) {
+		switch (skillTemplate.getSkillId()) {
+			case 21179:
+				Creature creature = getAggroList().getMostHated();
+				if (creature != null) {
+					spawn(284385, creature.getX(), creature.getY(), creature.getZ(), creature.getHeading());
+				}
+				break;
+			case 21165:
+				ThreadPoolManager.getInstance().schedule(() -> {
+					if (up) {
+						World.getInstance().updatePosition(getOwner(), 255.49063f, 293.35785f, 253.79933f, (byte) 90);
+					} else {
+						World.getInstance().updatePosition(getOwner(), 255.98627f, 259.0136f, 241.73842f, (byte) 90);
+					}
+					PacketSendUtility.broadcastPacketAndReceive(getOwner(), new SM_FORCED_MOVE(getOwner(), getOwner()));
+					if (stage == 1) {
+						spawn(284663, 266.26517f, 273.97614f, 241.54623f, (byte) 83);
+						spawn(284663, 266.26517f, 273.97614f, 241.54623f, (byte) 83);
+						spawn(284662, 256.57727f, 278.18225f, 241.54623f, (byte) 90);
+						spawn(284664, 246.65663f, 275.51996f, 241.54623f, (byte) 96);
+					} else if (stage == 2) {
+						electrocute();
+						stage = 0;
+						startStage(1);
+					}
+				}, 500);
+				break;
+			case 21170:
+				stage = 1;
+				rendSpace(true);
+				startIceTask();
+				ThreadPoolManager.getInstance().schedule(() -> {
+					if (canAct()) {
+						cancelSkillTask();
+						stage = 2;
+						rendSpace(false);
+					}
+				}, 35000);
+				break;
+		}
 	}
 
-	protected void summonAdds() {
-		spawn(284660, 266.26517f, 273.97614f, 241.54623f, (byte) 83);
-		spawn(284661, 266.26517f, 273.97614f, 241.54623f, (byte) 83);
-		spawn(284662, 256.57727f, 278.18225f, 241.54623f, (byte) 90);
-		spawn(284664, 246.65663f, 275.51996f, 241.54623f, (byte) 96);
+	private void startIceTask() {
+		cancelSkillTask();
+		skillTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
+			getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21179, 1, 100)));
+		}, 12000, 20000);
+	}
+
+	private void cancelSkillTask() {
+		if (skillTask != null && !skillTask.isDone()) {
+			skillTask.cancel(true);
+		}
+	}
+
+	private boolean canAct() {
+		return (getOwner() != null && !isDead() && !isHome.get());
 	}
 
 	@Override
 	protected void handleDied() {
-		cancelTasks(electricVengeanceTask);
-		forcePositionUpdate(new WorldPosition(getPosition().getMapId(), 255.5310f, 292.5890f, 253.7162f, (byte) 90));
+		cancelSkillTask();
 		super.handleDied();
 	}
 
 	@Override
-	protected void handleBackHome() {
-		cancelTasks(electricVengeanceTask);
-		super.handleBackHome();
+	protected void handleDespawned() {
+		super.handleDespawned();
+		cancelSkillTask();
 	}
 
 	@Override
-	protected void handleDespawned() {
-		cancelTasks(electricVengeanceTask);
-		super.handleDespawned();
+	protected void handleBackHome() {
+		super.handleBackHome();
+		cancelSkillTask();
+		stage = 0;
+		isHome.set(true);
 	}
-
 }
