@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0">
 	<xs:include schemaLocation="../zones/zones.xsd"/>
+	<xs:include schemaLocation="../global_types.xsd" />
 	<xs:include schemaLocation="../world_maps.xsd"/>
 	<xs:include schemaLocation="../import.xsd"/>
 	<xs:element name="siege_locations">
@@ -22,17 +23,14 @@
 		<xs:attribute name="type" type="SiegeType" use="required"/>
 		<xs:attribute name="world" type="xs:int" use="required"/>
 		<xs:attribute name="name_id" type="xs:int"/>
-		<xs:attribute name="fortress_dependency" type="DependencyList"/>
+		<xs:attribute name="fortress_dependency" type="IntListType"/>
 		<xs:attribute name="siege_duration" type="xs:int" use="optional" default="-1"/>
 		<xs:attribute name="influence" type="xs:int" use="optional" default="0"/>
 		<xs:attribute name="legion_gp" type="xs:int"/>
 		<xs:attribute name="occupy_count" type="xs:int" use="optional" default="0"/>
-		<xs:attribute name="kinah_pool" type="xs:long" use="optional" default="0"/>
+		<xs:attribute name="kinah_rewards" type="IntListType" use="optional" default="0"/>
 	</xs:complexType>
-	
-	<xs:simpleType name="DependencyList">
-		<xs:list itemType="xs:int"/>
-	</xs:simpleType>
+
 	<xs:simpleType name="SiegeType">
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="FORTRESS"/>

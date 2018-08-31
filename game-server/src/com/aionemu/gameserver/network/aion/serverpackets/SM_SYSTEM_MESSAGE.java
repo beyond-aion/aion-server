@@ -25162,7 +25162,7 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	public static final SM_SYSTEM_MESSAGE STR_MSG_CANNOT_RIDE_INVALID_LOCATION() {
 		return new SM_SYSTEM_MESSAGE(1401099);
 	}
-	
+
 	/**
 	 * Failed to find the instance.
 	 */
@@ -26119,14 +26119,14 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	public static final SM_SYSTEM_MESSAGE STR_MSG_IDLDF5_INDER_RUNE_END() {
 		return new SM_SYSTEM_MESSAGE(1401678);
 	}
-	
+
 	/**
 	 * This weapon has no power generator and cannot be boarded.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_IDLDF5B_TD_DEFWeapon() {
 		return new SM_SYSTEM_MESSAGE(1401679);
 	}
-	
+
 	/**
 	 * You need a Cannon Starter to board this.
 	 */
@@ -26371,7 +26371,7 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	public static final SM_SYSTEM_MESSAGE STR_MSG_IDKamar_DarkGeneral_Die() {
 		return new SM_SYSTEM_MESSAGE(1401851);
 	}
-	
+
 	/**
 	 * The Aetheric Cannon requires fuel before it can be operated.
 	 */

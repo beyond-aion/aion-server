@@ -357,7 +357,7 @@
 	<siege_location id="2024" type="ARTIFACT" world="210050000">
 		<artifact_activation item_id="188020002" count="2" skill="12159" repeat_count="5" repeat_interval="3" cd="1800"/>
 	</siege_location>
-	<siege_location id="2111" type="OUTPOST" world="210050000" fortress_dependency="2011 2021" siege_duration="7200" kinah_pool="1000000000">
+	<siege_location id="2111" type="OUTPOST" world="210050000" fortress_dependency="2011 2021" siege_duration="7200" kinah_rewards="400000000 300000000 200000000 100000000">
 		<siege_reward top="11" item_id="188050706" item_count="1" gp_win="300" gp_defeat="150"/>
 		<siege_reward top="22" item_id="188050707" item_count="1" gp_win="200" gp_defeat="100"/>
 		<siege_reward top="33" item_id="188050708" item_count="1" gp_win="150" gp_defeat="75"/>
@@ -411,7 +411,7 @@
 	<siege_location id="3024" type="ARTIFACT" world="220070000">
 		<artifact_activation item_id="188020002" count="2" skill="12159" repeat_count="5" repeat_interval="3" cd="1800"/>
 	</siege_location>
-	<siege_location id="3111" type="OUTPOST" world="220070000" fortress_dependency="3011 3021" siege_duration="7200" kinah_pool="1000000000">
+	<siege_location id="3111" type="OUTPOST" world="220070000" fortress_dependency="3011 3021" siege_duration="7200" kinah_rewards="400000000 300000000 200000000 100000000">
 		<siege_reward top="11" item_id="188050702" item_count="1" gp_win="300" gp_defeat="150"/>
 		<siege_reward top="22" item_id="188050703" item_count="1" gp_win="200" gp_defeat="100"/>
 		<siege_reward top="33" item_id="188050704" item_count="1" gp_win="150" gp_defeat="75"/>
