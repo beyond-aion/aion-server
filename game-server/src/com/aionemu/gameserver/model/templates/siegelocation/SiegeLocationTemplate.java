@@ -121,7 +121,7 @@ public class SiegeLocationTemplate implements L10n {
 	}
 
 	public int getKinahRewardByRewardLevel(int rewardLevel) {
-		if (kinahRewards != null && rewardLevel > kinahRewards.size() - 1)
+		if (kinahRewards == null || rewardLevel > kinahRewards.size() - 1)
 			return 0;
 		return kinahRewards.get(rewardLevel);
 	}
