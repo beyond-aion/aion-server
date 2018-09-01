@@ -19,8 +19,8 @@ public class NpcStatCalculation {
 
 	private static float getBaseValue(StatEnum stat, byte level) {
 		switch (stat) {
-			case PHYSICAL_ATTACK:
-				return level * 8f;
+			case PHYSICAL_ATTACK: // https://www.wolframalpha.com/input/?i=-0.0007x%5E3+%2B+0.1x%5E2+%2B+5.3x+-+4.3
+				return -0.0007f * (float) Math.pow(level, 3) + 0.1f * (float) Math.pow(level, 2) + 5.3f * level - 4.3f;
 			case MAGICAL_DEFEND:
 				return level * 5f;
 			case MAGICAL_ATTACK:
@@ -48,8 +48,6 @@ public class NpcStatCalculation {
 		switch (rating) {
 			case JUNK:
 				switch (stat) {
-					case PHYSICAL_ATTACK:
-						return 1.05f;
 					case MAGICAL_ATTACK:
 						return 0.4f;
 					case ABNORMAL_RESISTANCE_ALL:
@@ -58,8 +56,6 @@ public class NpcStatCalculation {
 				return 1f;
 			case NORMAL:
 				switch (stat) {
-					case PHYSICAL_ATTACK:
-						return 1.05f;
 					case MAGICAL_ATTACK:
 						return 0.4f;
 					case ABNORMAL_RESISTANCE_ALL:
