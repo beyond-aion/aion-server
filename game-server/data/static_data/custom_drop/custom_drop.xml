@@ -4200,7 +4200,7 @@
 			<drop item_id="186000051" chance="10" min_amount="5" max_amount="5" no_reduce="true" /><!-- Major Ancient Crown -->
 		</drop_group>
 		<drop_group race="PC_ALL">
-			<drop item_id="169620110" chance="5" no_reduce="true" /><!-- Noble Composite Manastone Bundle -->
+			<drop item_id="188052297" chance="5" no_reduce="true" /><!-- Noble Composite Manastone Bundle -->
 		</drop_group>
 		<drop_group race="PC_ALL">
 			<drop item_id="166020000" chance="5" min_amount="5" max_amount="5" no_reduce="true" /><!-- Omega Enchantment Stone -->
@@ -4233,10 +4233,10 @@
 			<drop item_id="186000051" chance="10" min_amount="7" max_amount="7" no_reduce="true" /><!-- Major Ancient Crown -->
 		</drop_group>
 		<drop_group race="PC_ALL">
-			<drop item_id="169620110" chance="5" min_amount="3" max_amount="3" no_reduce="true" /><!-- Noble Composite Manastone Bundle -->
+			<drop item_id="188052297" chance="5" min_amount="3" max_amount="3" no_reduce="true" /><!-- Noble Composite Manastone Bundle -->
 		</drop_group>
 		<drop_group race="PC_ALL">
-			<drop item_id="166020000" chance="10" no_reduce="true" /><!-- Honorable Elim's Idian Bundle -->
+			<drop item_id="188053618" chance="10" no_reduce="true" /><!-- Honorable Elim's Idian Bundle -->
 		</drop_group>
 		<drop_group race="PC_ALL">
 			<drop item_id="166500002" chance="5" min_amount="3" max_amount="3" no_reduce="true" /><!-- Amplification Stone -->

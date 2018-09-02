@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
 import com.aionemu.gameserver.instance.handlers.InstanceID;
 import com.aionemu.gameserver.model.gameobjects.Creature;
@@ -386,8 +387,9 @@ public class TheShugoEmperorsVault extends GeneralInstanceHandler {
 	private synchronized void checkRank(int totalPoints) {
 		int rank = 8;
 		if (totalPoints >= 471200) {
+			int additionalKeys = Rnd.chance() < 10 ? Rnd.get(2, 4) : 0;
 			instanceReward.setRewardItem1(185000222);
-			instanceReward.setRewardItem1Count(6);
+			instanceReward.setRewardItem1Count(6 + additionalKeys);
 			rank = 1;
 		} else if (totalPoints >= 233700) {
 			instanceReward.setRewardItem1(185000222);
