@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.model.templates.chest;
 
+import java.util.List;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -12,31 +14,16 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "KeyItem")
 public class KeyItem {
 
-	@XmlAttribute(name = "id")
-	protected int id;
-	@XmlAttribute(name = "itemid")
-	protected int itemid;
-	@XmlAttribute(name = "quantity")
-	protected int quantity;
+	@XmlAttribute(name = "item_ids")
+	private List<Integer> itemIds;
+	@XmlAttribute(name = "count")
+	private int count;
 
-	/**
-	 * @return the id
-	 */
-	public int getId() {
-		return id;
+	public List<Integer> getItemIds() {
+		return itemIds;
 	}
 
-	/**
-	 * @return the itemid
-	 */
-	public int getItemId() {
-		return itemid;
-	}
-
-	/**
-	 * @return the quantity
-	 */
-	public int getQuantity() {
-		return quantity;
+	public int getCount() {
+		return count;
 	}
 }

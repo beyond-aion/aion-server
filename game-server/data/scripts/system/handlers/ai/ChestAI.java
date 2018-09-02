@@ -11,7 +11,6 @@ import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.configs.main.DropConfig;
 import com.aionemu.gameserver.configs.main.GroupConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
@@ -50,7 +49,7 @@ public class ChestAI extends ActionItemNpcAI {
 
 	@Override
 	protected void handleUseItemFinish(Player player) {
-		if (analyzeOpening(player)) {
+		if (isOpeningSuccessful(player)) {
 			if (getOwner().isInState(CreatureState.DEAD)) {
 				AuditLogger.log(player, "attempted multiple chest looting!");
 				return;
@@ -75,37 +74,31 @@ public class ChestAI extends ActionItemNpcAI {
 		}
 	}
 
-	private boolean analyzeOpening(final Player player) {
-		List<KeyItem> keyItems = chestTemplate.getKeyItem();
-		int i = 0;
-		for (KeyItem keyItem : keyItems) {
-			if (keyItem.getItemId() == 0) {
+	private boolean isOpeningSuccessful(Player player) {
+		List<KeyItem> keyItems = chestTemplate.getKeyItems();
+		for (KeyItem keyItem : keyItems) { // check if enough key items are available
+			if (keyItem.getItemIds() != null && keyItem.getItemIds().get(0) == 0) // chest can be opened w/o keys
 				return true;
+			int availableKeys = 0;
+			for (Integer keyItemId : keyItem.getItemIds()) {
+				availableKeys += player.getInventory().getItemCountByItemId(keyItemId);
 			}
-			Item item = player.getInventory().getFirstItemByItemId(keyItem.getItemId());
-			if (item != null) {
-				if (item.getItemCount() != keyItem.getQuantity()) {
-					int _i = 0;
-					for (Item findedItem : player.getInventory().getItemsByItemId(keyItem.getItemId())) {
-						_i += findedItem.getItemCount();
-					}
-					if (_i < keyItem.getQuantity()) {
-						return false;
-					}
-				}
-				i++;
-				continue;
-			} else {
+			if (availableKeys < keyItem.getCount())
 				return false;
+		}
+		for (KeyItem keyItem : keyItems) { // remove key items
+			int keyCountToDecrease = keyItem.getCount();
+			for (Integer keyItemId : keyItem.getItemIds()) {
+				long availableKeys = player.getInventory().getItemCountByItemId(keyItemId);
+				if (availableKeys >= keyCountToDecrease) {
+					player.getInventory().decreaseByItemId(keyItemId, keyCountToDecrease);
+				} else {
+					keyCountToDecrease -= availableKeys;
+					player.getInventory().decreaseByItemId(keyItemId, availableKeys);
+				}
 			}
 		}
-		if (i == keyItems.size()) {
-			for (KeyItem keyItem : keyItems) {
-				player.getInventory().decreaseByItemId(keyItem.getItemId(), keyItem.getQuantity());
-			}
-			return true;
-		}
-		return false;
+		return true;
 	}
 
 	private int getHighestLevel(Collection<Player> players) {
