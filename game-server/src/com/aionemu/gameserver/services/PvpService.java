@@ -114,17 +114,27 @@ public class PvpService {
 			return;
 		}
 
-		// Add Player Kill to record.
-		winner.getAbyssRank().setAllKill();
-		// Pvp Kill Reward.
-		if (CustomConfig.ENABLE_KILL_REWARD) {
-			int kills = winner.getAbyssRank().getAllKill();
-			for (KillBountyTemplate template : killBounties) {
-				int killStep = template.getKillCount();
-				if (kills % killStep == 0)
-					sendBountyReward(winner, BountyType.PER_X_KILLS, killStep);
+		List<Player> onlineGroupMembers = new ArrayList<>();
+		if (winner.isInAlliance())
+			onlineGroupMembers = winner.getPlayerAllianceGroup().getOnlineMembers();
+		else if (winner.isInGroup())
+			onlineGroupMembers = winner.getPlayerGroup().getOnlineMembers();
+		else
+			onlineGroupMembers.add(winner);
+
+		onlineGroupMembers.stream().filter(p -> PositionUtil.isInRange(p, victim, GroupConfig.GROUP_MAX_DISTANCE) && !p.isDead()).forEach(p -> {
+			// Add Player Kill to record.
+			p.getAbyssRank().incrementAllKills();
+			// PvP Kill Reward.
+			if (CustomConfig.ENABLE_KILL_REWARD) {
+				int kills = p.getAbyssRank().getAllKill();
+				for (KillBountyTemplate template : killBounties) {
+					int killStep = template.getKillCount();
+					if (kills % killStep == 0)
+						sendBountyReward(p, BountyType.PER_X_KILLS, killStep);
+				}
 			}
-		}
+		});
 
 		if (EventsConfig.ENABLE_HEADHUNTING) {
 			if (EventsConfig.HEADHUNTING_MAPS.contains(winner.getPosition().getMapId())) {

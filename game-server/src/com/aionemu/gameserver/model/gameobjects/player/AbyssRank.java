@@ -197,10 +197,10 @@ public class AbyssRank implements Persistable {
 	/**
 	 * Add one kill to a player
 	 */
-	public void setAllKill() {
-		this.dailyKill += 1;
-		this.weeklyKill += 1;
-		this.allKill += 1;
+	public void incrementAllKills() {
+		dailyKill++;
+		weeklyKill++;
+		allKill++;
 	}
 
 	/**
