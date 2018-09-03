@@ -49,7 +49,7 @@ public class ChestAI extends ActionItemNpcAI {
 
 	@Override
 	protected void handleUseItemFinish(Player player) {
-		if (isOpeningSuccessful(player)) {
+		if (tryOpening(player)) {
 			if (getOwner().isInState(CreatureState.DEAD)) {
 				AuditLogger.log(player, "attempted multiple chest looting!");
 				return;
@@ -74,7 +74,7 @@ public class ChestAI extends ActionItemNpcAI {
 		}
 	}
 
-	private boolean isOpeningSuccessful(Player player) {
+	private boolean tryOpening(Player player) {
 		List<KeyItem> keyItems = chestTemplate.getKeyItems();
 		for (KeyItem keyItem : keyItems) { // check if enough key items are available
 			if (keyItem.getItemIds() != null && keyItem.getItemIds().get(0) == 0) // chest can be opened w/o keys
