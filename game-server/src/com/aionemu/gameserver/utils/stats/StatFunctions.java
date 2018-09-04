@@ -398,14 +398,19 @@ public class StatFunctions {
 				resultDamage += Rnd.get(-diff, diff);
 			}
 		} else {
+			System.out.println("Basedamage: " + resultDamage);
 			int rnd = (int) (resultDamage * 0.20f);
+			System.out.println("Randombonus: " + rnd);
 			resultDamage += Rnd.get(-rnd, rnd);
+			System.out.println("Base+Bonus: " + resultDamage);
 		}
 
 		// subtract defense
 		float pDef = target.getGameStats().getPDef().getBonus()
 			+ getMovementModifier(target, StatEnum.PHYSICAL_DEFENSE, target.getGameStats().getPDef().getBase());
+		System.out.println("Pdef: " + pDef);
 		resultDamage -= (pDef * 0.10f);
+		System.out.println("Finaldamage: " + resultDamage);
 
 		if (resultDamage <= 0)
 			resultDamage = 1;
@@ -659,14 +664,13 @@ public class StatFunctions {
 				damages *= Influence.getInstance().getPvpRaceBonus(attacker.getRace());
 			}
 		} else {
-			damages = damages * 1.15f; // 15% pve boost. Checked on NA & GF (4.9) 19.03.2016
-			attackBonus = attacker.getGameStats().getStat(StatEnum.PVE_ATTACK_RATIO, 0).getCurrent() * 0.001f;
-			defenceBonus = target.getGameStats().getStat(StatEnum.PVE_DEFEND_RATIO, 0).getCurrent() * 0.001f;
-
-			if (attacker instanceof Player) { // npcs dmg is not reduced because of the level difference GF (4.9) 23.04.2016
-				int levelDiff = target.getLevel() - attacker.getLevel();
+			if (attacker instanceof Player) {
+				damages = damages * 1.15f; // 15% pve boost. Checked on NA & GF (4.9) 19.03.2016
+				int levelDiff = target.getLevel() - attacker.getLevel(); // npcs dmg is not reduced because of the level difference GF (4.9) 23.04.2016
 				damages *= (1f - getNpcLevelDiffMod(levelDiff, 0));
 			}
+			attackBonus = attacker.getGameStats().getStat(StatEnum.PVE_ATTACK_RATIO, 0).getCurrent() * 0.001f;
+			defenceBonus = target.getGameStats().getStat(StatEnum.PVE_DEFEND_RATIO, 0).getCurrent() * 0.001f;
 			switch (element) {
 				case NONE:
 					attackBonus += attacker.getGameStats().getStat(StatEnum.PVE_ATTACK_RATIO_PHYSICAL, 0).getCurrent() * 0.001f;
