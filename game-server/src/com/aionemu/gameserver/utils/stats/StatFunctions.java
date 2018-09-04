@@ -398,7 +398,7 @@ public class StatFunctions {
 				resultDamage += Rnd.get(-diff, diff);
 			}
 		} else {
-			int rnd = (int) (resultDamage * 0.25);
+			int rnd = (int) (resultDamage * 0.20f);
 			resultDamage += Rnd.get(-rnd, rnd);
 		}
 
