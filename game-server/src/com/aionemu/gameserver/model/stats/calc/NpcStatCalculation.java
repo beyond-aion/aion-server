@@ -19,8 +19,8 @@ public class NpcStatCalculation {
 
 	private static float getBaseValue(StatEnum stat, byte level) {
 		switch (stat) {
-			case PHYSICAL_ATTACK: // https://www.wolframalpha.com/input/?i=-0.0007x%5E3+%2B+0.1x%5E2+%2B+5.3x+-+4.3
-				return -0.0007f * (float) Math.pow(level, 3) + 0.1f * (float) Math.pow(level, 2) + 5.3f * level - 4.3f;
+			case PHYSICAL_ATTACK: // https://www.wolframalpha.com/input/?i=-0.0007x%5E3+%2B+0.1x%5E2+%2B+5.3x
+				return -0.0007f * (float) Math.pow(level, 3) + 0.1f * (float) Math.pow(level, 2) + 5.3f * level;
 			case MAGICAL_DEFEND:
 				return level * 5f;
 			case MAGICAL_ATTACK:
@@ -65,7 +65,7 @@ public class NpcStatCalculation {
 			case ELITE:
 				switch (stat) {
 					case PHYSICAL_ATTACK:
-						return 1.1f;
+						return 1.7f;
 					case MAGICAL_ATTACK:
 						return 0.5f;
 					case MAGICAL_DEFEND:
@@ -87,7 +87,7 @@ public class NpcStatCalculation {
 			case HERO:
 				switch (stat) {
 					case PHYSICAL_ATTACK:
-						return 1.4f;
+						return 2.4f;
 					case MAGICAL_ATTACK:
 						return 0.6f;
 					case PHYSICAL_ACCURACY:
@@ -109,6 +109,7 @@ public class NpcStatCalculation {
 			case LEGENDARY:
 				switch (stat) {
 					case PHYSICAL_ATTACK:
+						return 2.6f;
 					case PHYSICAL_DEFENSE:
 					case MAGICAL_DEFEND:
 						return 1.75f;
@@ -142,7 +143,7 @@ public class NpcStatCalculation {
 			case DISCIPLINED:
 				switch (stat) {
 					case PHYSICAL_ATTACK:
-						return 1.1f;
+						return 1.2f;
 					case MAGICAL_RESIST:
 						return 1.02f;
 					case MAGICAL_DEFEND:
@@ -183,7 +184,7 @@ public class NpcStatCalculation {
 			case EXPERT:
 				switch (stat) {
 					case PHYSICAL_ATTACK:
-						return 1.95f;
+						return 1.65f;
 					case MAGICAL_RESIST:
 						return 1.04f;
 					case MAGICAL_DEFEND:
@@ -205,7 +206,7 @@ public class NpcStatCalculation {
 			case VETERAN:
 				switch (stat) {
 					case PHYSICAL_ATTACK:
-						return 2.2f;
+						return 1.7f;
 					case MAGICAL_DEFEND:
 					case PHYSICAL_DEFENSE:
 						return 1.4f;
@@ -227,7 +228,7 @@ public class NpcStatCalculation {
 			case MASTER:
 				switch (stat) {
 					case PHYSICAL_ATTACK:
-						return 2.5f;
+						return 1.85f;
 					case MAGICAL_DEFEND:
 					case PHYSICAL_DEFENSE:
 						return 1.5f;
