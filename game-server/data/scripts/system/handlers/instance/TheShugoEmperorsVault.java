@@ -22,6 +22,8 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_INSTANCE_SCORE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.item.ItemService;
+import com.aionemu.gameserver.skillengine.SkillEngine;
+import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
@@ -33,16 +35,15 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 @InstanceID(301400000)
 public class TheShugoEmperorsVault extends GeneralInstanceHandler {
 
-	private NormalReward instanceReward;
 	private Map<Integer, StaticDoor> doors;
-	private Future<?> timer = null;
-	private Future<?> failTimerTask = null;
-	private Long startTime;
-	private AtomicBoolean started = new AtomicBoolean(false);
-	private int amount = 0;
-	private int stage = 0;
-	private boolean lastStage = false;
+	private Map<Integer, Integer> transformationCache; // saves the applied transformation to avoid effect loss during sendlogs
 	private List<Integer> spawns = new ArrayList<>();
+	private AtomicBoolean started = new AtomicBoolean();
+	private NormalReward instanceReward;
+	private Future<?> timer, failTimerTask;
+	private long startTime;
+	private int amount, stage;
+	private boolean lastStage;
 
 	@Override
 	public void onInstanceCreate(WorldMapInstance instance) {
@@ -87,6 +88,22 @@ public class TheShugoEmperorsVault extends GeneralInstanceHandler {
 		}
 	}
 
+	@Override
+	public void onStartEffect(Effect effect) {
+		if (effect != null) {
+			switch (effect.getSkillId()) {
+				case 21829:
+				case 21830:
+				case 21831:
+				case 21832:
+				case 21833:
+				case 21834:
+					transformationCache.putIfAbsent(effect.getEffected().getObjectId(), effect.getSkillId());
+					break;
+			}
+		}
+	}
+
 	private void startFailTask() {
 		failTimerTask = ThreadPoolManager.getInstance().schedule(() -> {
 			if (!instanceReward.isRewarded()) {
@@ -103,9 +120,19 @@ public class TheShugoEmperorsVault extends GeneralInstanceHandler {
 	@Override
 	public void onEnterInstance(final Player player) {
 		super.onEnterInstance(player);
-		if (!instanceReward.isRewarded()) {
+		if (!instanceReward.isRewarded())
 			sendPacket(null, 0);
-		}
+		reApplyTransformation(player);
+	}
+
+	@Override
+	public void onPlayerLogin(Player player) {
+		reApplyTransformation(player);
+	}
+
+	private void reApplyTransformation(Player player) {
+		if (transformationCache.containsKey(player.getObjectId()))
+			SkillEngine.getInstance().applyEffectDirectly(transformationCache.get(player.getObjectId()), player, player);
 	}
 
 	private void spawnRoom1() {
