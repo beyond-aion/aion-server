@@ -35852,6 +35852,232 @@
 		<npc_skill id="21776" lv="65" prob="50" cd="50000" max_hp="95" />
 		<npc_skill id="21777" lv="65" prob="50" cd="90000" max_hp="50" />
 	</npc_skills>
+	<!-- Mitrakand Drakie -->
+	<npc_skills npc_ids="236435">
+		<npc_skill id="16570" lv="65" prob="25" />
+		<npc_skill id="19055" lv="65" prob="25" />
+	</npc_skills>
+	<!-- Mitrakand Drakan Destroyer -->
+	<npc_skills npc_ids="236436 236452 236453 236454 236455">
+		<npc_skill id="16519" lv="65" prob="25" />
+		<npc_skill id="16608" lv="65" prob="25" />
+		<npc_skill id="16785" lv="65" prob="25" />
+		<npc_skill id="18164" lv="65" prob="25" />
+		<npc_skill id="18165" lv="65" prob="25" />
+		<npc_skill id="18166" lv="65" prob="25" />
+		<npc_skill id="19125" lv="65" prob="25" />
+	</npc_skills>
+	<!-- Mitrakand Raider -->
+	<npc_skills npc_ids="236437 236456 236457 236458 236459">
+		<npc_skill id="16540" lv="65" prob="25" />
+		<npc_skill id="16608" lv="65" prob="25" />
+		<npc_skill id="17934" lv="65" prob="25" />
+		<npc_skill id="18158" lv="65" prob="25" />
+		<npc_skill id="18159" lv="65" prob="25" />
+		<npc_skill id="18160" lv="65" prob="25" />
+		<npc_skill id="19125" lv="65" prob="25" />
+	</npc_skills>
+	<!-- Mitrakand Hunterkiller -->
+	<npc_skills npc_ids="236438 236460 236461 236462 236463">
+		<npc_skill id="16543" lv="65" prob="25" />
+		<npc_skill id="16674" lv="65" prob="25" />
+		<npc_skill id="16812" lv="65" prob="25" />
+		<npc_skill id="16815" lv="65" prob="25" />
+		<npc_skill id="17003" lv="65" prob="25" />
+		<npc_skill id="18173" lv="65" prob="25" />
+		<npc_skill id="18178" lv="65" prob="25" />
+		<npc_skill id="19125" lv="65" prob="25" />
+	</npc_skills>
+	<!-- Mitrakand Gallowglass -->
+	<npc_skills npc_ids="236439 236464 236465 236466 236467">
+		<npc_skill id="16570" lv="65" prob="25" />
+		<npc_skill id="16775" lv="65" prob="25" />
+		<npc_skill id="17039" lv="65" prob="25" />
+		<npc_skill id="18157" lv="65" prob="25" />
+		<npc_skill id="18174" lv="65" prob="25" />
+		<npc_skill id="18175" lv="65" prob="25" />
+		<npc_skill id="19125" lv="65" prob="25" />
+	</npc_skills>
+	<!-- Mitrakand Lifekeeper -->
+	<npc_skills npc_ids="236440 236468 236469 236470 236471">
+		<npc_skill id="16638" lv="65" prob="25" />
+		<npc_skill id="17008" lv="65" prob="25" />
+		<npc_skill id="17450" lv="65" prob="25" />
+		<npc_skill id="19125" lv="65" prob="25" />
+		<npc_skill id="16563" lv="65" prob="25" />
+		<npc_skill id="16566" lv="65" prob="25" />
+	</npc_skills>
+	<!-- Pincer's Prime -->
+	<npc_skills npc_ids="236446">
+		<npc_skill id="16522" lv="65" prob="25" />
+		<npc_skill id="16523" lv="65" prob="25" />
+		<npc_skill id="16531" lv="65" prob="25" />
+	</npc_skills>
+	<!-- Hashak the Plough -->
+	<npc_skills npc_ids="236448">
+		<npc_skill id="16519" lv="65" prob="25" />
+		<npc_skill id="16608" lv="65" prob="25" />
+		<npc_skill id="18164" lv="65" prob="25" />
+		<npc_skill id="18165" lv="65" prob="25" />
+		<npc_skill id="18166" lv="65" prob="25" />
+		<npc_skill id="18167" lv="65" prob="25" />
+		<npc_skill id="19135" lv="65" prob="25" />
+	</npc_skills>
+	<!-- Elder Malekor -->
+	<npc_skills npc_ids="236449">
+		<npc_skill id="17294" lv="65" prob="25" />
+		<npc_skill id="17337" lv="65" prob="25" />
+		<npc_skill id="17340" lv="65" prob="25" />
+		<npc_skill id="17355" lv="65" prob="25" />
+		<npc_skill id="17697" lv="65" prob="25" />
+		<npc_skill id="19135" lv="65" prob="25" />
+		<npc_skill id="16837" lv="65" prob="25" />
+		<npc_skill id="17360" lv="65" prob="25" />
+	</npc_skills>
+	<!-- Hanarkand Thrasher -->
+	<npc_skills npc_ids="236472 236500 236501">
+		<npc_skill id="16519" lv="65" prob="25" />
+		<npc_skill id="16608" lv="65" prob="25" />
+		<npc_skill id="16785" lv="65" prob="25" />
+		<npc_skill id="18164" lv="65" prob="25" />
+		<npc_skill id="18165" lv="65" prob="25" />
+		<npc_skill id="18166" lv="65" prob="25" />
+		<npc_skill id="19135" lv="65" prob="25" />
+	</npc_skills>
+	<!-- Hanarkand Elite Raider -->
+	<npc_skills npc_ids="236473 236502 236503">
+		<npc_skill id="16540" lv="65" prob="25" />
+		<npc_skill id="16608" lv="65" prob="25" />
+		<npc_skill id="17934" lv="65" prob="25" />
+		<npc_skill id="18158" lv="65" prob="25" />
+		<npc_skill id="18159" lv="65" prob="25" />
+		<npc_skill id="18160" lv="65" prob="25" />
+		<npc_skill id="19125" lv="65" prob="25" />
+	</npc_skills>
+	<!-- Hanarkand Seeker -->
+	<npc_skills npc_ids="236474 236504 236505">
+		<npc_skill id="16543" lv="65" prob="25" />
+		<npc_skill id="16674" lv="65" prob="25" />
+		<npc_skill id="16812" lv="65" prob="25" />
+		<npc_skill id="16815" lv="65" prob="25" />
+		<npc_skill id="17003" lv="65" prob="25" />
+		<npc_skill id="18173" lv="65" prob="25" />
+		<npc_skill id="18178" lv="65" prob="25" />
+		<npc_skill id="19125" lv="65" prob="25" />
+	</npc_skills>
+	<!-- Hanarkand Mystic -->
+	<npc_skills npc_ids="236475 236506 236507">
+		<npc_skill id="16775" lv="65" prob="25" />
+		<npc_skill id="16797" lv="65" prob="25" />
+		<npc_skill id="17039" lv="65" prob="25" />
+		<npc_skill id="18157" lv="65" prob="25" />
+		<npc_skill id="18174" lv="65" prob="25" />
+		<npc_skill id="18175" lv="65" prob="25" />
+		<npc_skill id="19135" lv="65" prob="25" />
+	</npc_skills>
+	<!-- Hanarkand Boneminder -->
+	<npc_skills npc_ids="236476 236508 236509">
+		<npc_skill id="16565" lv="65" prob="25" />
+		<npc_skill id="16566" lv="65" prob="25" />
+		<npc_skill id="16638" lv="65" prob="25" />
+		<npc_skill id="16837" lv="65" prob="25" />
+		<npc_skill id="17008" lv="65" prob="25" />
+		<npc_skill id="17450" lv="65" prob="25" />
+		<npc_skill id="19135" lv="65" prob="25" />
+		<npc_skill id="16563" lv="65" prob="25" />
+	</npc_skills>
+	<!-- Hanarkand Legatus -->
+	<npc_skills npc_ids="236477 236510 236511">
+		<npc_skill id="16519" lv="65" prob="25" />
+		<npc_skill id="16608" lv="65" prob="25" />
+		<npc_skill id="18164" lv="65" prob="25" />
+		<npc_skill id="18165" lv="65" prob="25" />
+		<npc_skill id="18166" lv="65" prob="25" />
+		<npc_skill id="18167" lv="65" prob="25" />
+		<npc_skill id="19135" lv="65" prob="25" />
+	</npc_skills>
+	<!-- Hanarkand Rustler -->
+	<npc_skills npc_ids="236478 236512 236513">
+		<npc_skill id="16540" lv="65" prob="25" />
+		<npc_skill id="16608" lv="65" prob="25" />
+		<npc_skill id="17934" lv="65" prob="25" />
+		<npc_skill id="18159" lv="65" prob="25" />
+		<npc_skill id="18167" lv="65" prob="25" />
+		<npc_skill id="19135" lv="65" prob="25" />
+	</npc_skills>
+	<!-- Hanarkand Triaris -->
+	<npc_skills npc_ids="236479 236514 236515">
+		<npc_skill id="16543" lv="65" prob="25" />
+		<npc_skill id="16812" lv="65" prob="25" />
+		<npc_skill id="17003" lv="65" prob="25" />
+		<npc_skill id="18167" lv="65" prob="25" />
+		<npc_skill id="18173" lv="65" prob="25" />
+		<npc_skill id="19135" lv="65" prob="25" />
+	</npc_skills>
+	<!-- Hanarkand Diabolist -->
+	<npc_skills npc_ids="236480 236516 236517">
+		<npc_skill id="16570" lv="65" prob="25" />
+		<npc_skill id="16775" lv="65" prob="25" />
+		<npc_skill id="17039" lv="65" prob="25" />
+		<npc_skill id="18157" lv="65" prob="25" />
+		<npc_skill id="18174" lv="65" prob="25" />
+		<npc_skill id="18175" lv="65" prob="25" />
+		<npc_skill id="19135" lv="65" prob="25" />
+	</npc_skills>
+	<!-- Hanarkand Curatus -->
+	<npc_skills npc_ids="236481 236518 236519">
+		<npc_skill id="16563" lv="65" prob="10" />
+		<npc_skill id="16565" lv="65" prob="25" />
+		<npc_skill id="16566" lv="65" prob="25" />
+		<npc_skill id="16638" lv="65" prob="25" />
+		<npc_skill id="16837" lv="65" prob="25" />
+		<npc_skill id="17008" lv="65" prob="25" />
+		<npc_skill id="17450" lv="65" prob="25" />
+		<npc_skill id="19135" lv="65" prob="25" />
+	</npc_skills>
+	<!-- Hanarkand Laborer -->
+	<npc_skills npc_ids="236482">
+		<npc_skill id="16516" lv="65" prob="25" />
+		<npc_skill id="16742" lv="65" prob="25" />
+		<npc_skill id="16931" lv="65" prob="25" />
+	</npc_skills>
+	<!-- Hanarkand Worker -->
+	<npc_skills npc_ids="236483">
+		<npc_skill id="16516" lv="65" prob="25" />
+		<npc_skill id="16538" lv="65" prob="25" />
+		<npc_skill id="16564" lv="65" prob="25" />
+	</npc_skills>
+	<!-- Elder Zanuta -->
+	<npc_skills npc_ids="236492">
+		<npc_skill id="16775" lv="65" prob="25" />
+		<npc_skill id="17039" lv="65" prob="25" />
+		<npc_skill id="18157" lv="65" prob="25" />
+		<npc_skill id="18174" lv="65" prob="25" />
+		<npc_skill id="18175" lv="65" prob="25" />
+		<npc_skill id="16570" lv="65" prob="25" />
+		<npc_skill id="19135" lv="65" prob="25" />
+	</npc_skills>
+	<!-- Sukana the Learned -->
+	<npc_skills npc_ids="236493">
+		<npc_skill id="16570" lv="65" prob="25" />
+		<npc_skill id="16775" lv="65" prob="25" />
+		<npc_skill id="17039" lv="65" prob="25" />
+		<npc_skill id="18157" lv="65" prob="25" />
+		<npc_skill id="18174" lv="65" prob="25" />
+		<npc_skill id="18175" lv="65" prob="25" />
+		<npc_skill id="19135" lv="1" prob="25" />
+	</npc_skills>
+	<!-- Head Priest Nashuma -->
+	<npc_skills npc_ids="236494">
+		<npc_skill id="16826" lv="65" prob="25" />
+		<npc_skill id="16837" lv="65" prob="25" />
+		<npc_skill id="17294" lv="65" prob="25" />
+		<npc_skill id="17337" lv="65" prob="25" />
+		<npc_skill id="17355" lv="65" prob="25" />
+		<npc_skill id="17360" lv="65" prob="25" />
+		<npc_skill id="17697" lv="65" prob="25" />
+		<npc_skill id="19135" lv="65" prob="25" />
+	</npc_skills>
 	<npc_skills npc_ids="237174">
 		<npc_skill id="19140" lv="85" prob="75" />
 		<npc_skill id="19148" lv="1" prob="55" />

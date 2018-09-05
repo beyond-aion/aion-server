@@ -917,7 +917,7 @@
 			<spot x="2568.14" y="2863.5" z="477.614" h="115"/>
 		</spawn>
 		<!-- Crawling Serrator -->
-		<spawn npc_id="215924" respawn_time="105">
+		<spawn npc_id="236425" respawn_time="105">
 			<spot x="1491.13" y="1148.44" z="307.344" h="16"/>
 			<spot x="1507.36" y="1167.62" z="304.966" h="13"/>
 			<spot x="1520.97" y="1186.78" z="305.898" h="21"/>
@@ -1537,7 +1537,7 @@
 			<spot x="963.731" y="1038.9" z="320.724" static_id="1199"/>
 		</spawn>
 		<!-- Drana Crestlich -->
-		<spawn npc_id="216425" respawn_time="105">
+		<spawn npc_id="236441" respawn_time="105">
 			<spot x="482.599" y="921.034" z="361.167" h="114"/>
 			<spot x="482.82" y="952.642" z="361.96" h="113"/>
 			<spot x="484.257" y="999.545" z="355.432" h="82"/>
@@ -1570,7 +1570,7 @@
 			<spot x="915.993" y="998.936" z="314.182" h="65"/>
 		</spawn>
 		<!-- Drana Spaller -->
-		<spawn npc_id="216025" respawn_time="105">
+		<spawn npc_id="236428" respawn_time="105">
 			<spot x="506.279" y="892.692" z="360.212" h="15"/>
 			<spot x="592.766" y="1047.65" z="351.551" h="5"/>
 			<spot x="639.69" y="1067.09" z="339.25937" h="3"/>
@@ -1606,7 +1606,7 @@
 			<spot x="349.11" y="1979.17" z="375.67" h="54"/>
 		</spawn>
 		<!-- Elder Malekor -->
-		<spawn npc_id="216575" respawn_time="14400">
+		<spawn npc_id="236449" respawn_time="14400">
 			<spot x="829.268" y="582.042" z="366.24"/>
 		</spawn>
 		<!-- Enchanted Fungie -->
@@ -2290,7 +2290,7 @@
 			<spot x="842.556" y="965.637" z="315"/>
 		</spawn>
 		<!-- Hashak the Plough -->
-		<spawn npc_id="216574" respawn_time="14400" pool="1">
+		<spawn npc_id="236448" respawn_time="14400" pool="1">
 			<spot x="718.57" y="675.0" z="349.2231" walker_id="6CAEED7F49E2CD4BBE7D45EA6893A44396CEE523"/>
 			<spot x="906.77" y="807.21" z="331.68362" h="21" walker_id="CF61D993E74E18CCA10FC652FB2827E65DE39C8D"/>
 		</spawn>
@@ -2700,7 +2700,7 @@
 			<spot x="2251.2" y="1730.64" z="309.107" static_id="1588"/>
 		</spawn>
 		<!-- Lowland Leowasp -->
-		<spawn npc_id="216004" respawn_time="105">
+		<spawn npc_id="236426" respawn_time="105">
 			<spot x="1637.58" y="1485.29" z="342.607" h="61"/>
 			<spot x="1671.75" y="1492.64" z="340.5" h="74"/>
 			<spot x="1693.57" y="1513.81" z="341.875" h="72"/>
@@ -3068,17 +3068,17 @@
 			<spot x="1069.98" y="1237.92" z="365.068"/>
 		</spawn>
 		<!-- Mitrakand Drakan Destroyer -->
-		<spawn npc_id="216804" respawn_time="295">
+		<spawn npc_id="236436" respawn_time="295">
 			<spot x="841.011" y="717.659" z="347.437"/>
 			<spot x="952.691" y="727.376" z="342.168"/>
 			<spot x="1006.92" y="1015.16" z="327"/>
 		</spawn>
 		<!-- Mitrakand Drakan Destroyer -->
-		<spawn npc_id="216807" respawn_time="295">
+		<spawn npc_id="236452" respawn_time="295">
 			<spot x="1023.87" y="947.65" z="335.456"/>
 		</spawn>
 		<!-- Mitrakand Drakan Destroyer -->
-		<spawn npc_id="216119" respawn_time="105">
+		<spawn npc_id="236453" respawn_time="105">
 			<spot x="719.097" y="819.839" z="331.819" h="118"/>
 			<spot x="744.434" y="726.885" z="346.75" h="9"/>
 			<spot x="747.554" y="661.927" z="350.718" h="37"/>
@@ -3137,7 +3137,7 @@
 			<spot x="1027.3" y="925.568" z="342.305"/>
 		</spawn>
 		<!-- Mitrakand Drakie -->
-		<spawn npc_id="216040" respawn_time="295">
+		<spawn npc_id="236435" respawn_time="295">
 			<spot x="696.179" y="852.281" z="318.305"/>
 			<spot x="792.537" y="833.711" z="348.305"/>
 			<spot x="801.597" y="792.418" z="338.305"/>
@@ -3160,7 +3160,7 @@
 			<spot x="1024.69" y="844.428" z="344.305"/>
 		</spawn>
 		<!-- Mitrakand Gallowglass -->
-		<spawn npc_id="216817" respawn_time="295">
+		<spawn npc_id="236439" respawn_time="295">
 			<spot x="809.661" y="580.87" z="357.837"/>
 			<spot x="825.971" y="560.605" z="357.836"/>
 			<spot x="848.44" y="579.047" z="357.836"/>
@@ -3168,11 +3168,11 @@
 			<spot x="1017.49" y="770.201" z="343.57"/>
 		</spawn>
 		<!-- Mitrakand Gallowglass -->
-		<spawn npc_id="216816" respawn_time="295">
+		<spawn npc_id="236464" respawn_time="295">
 			<spot x="1035.08" y="894.171" z="341.443"/>
 		</spawn>
 		<!-- Mitrakand Gallowglass -->
-		<spawn npc_id="216122" respawn_time="295">
+		<spawn npc_id="236465" respawn_time="295">
 			<spot x="678.369" y="708.678" z="328.375"/>
 			<spot x="727.141" y="774.094" z="344.577"/>
 			<spot x="785.921" y="617.214" z="358.287"/>
@@ -3194,7 +3194,7 @@
 			<spot x="1013.8" y="986.948" z="334.707"/>
 		</spawn>
 		<!-- Mitrakand Gloriator -->
-		<spawn npc_id="216749" respawn_time="105">
+		<spawn npc_id="236451" respawn_time="105">
 			<spot x="517.04" y="993.79" z="360.893" h="89"/>
 			<spot x="526.477" y="937.51" z="361.125" h="10"/>
 			<spot x="538.998" y="1007.23" z="360.875" h="94"/>
@@ -3227,11 +3227,11 @@
 			<spot x="854.803" y="957.316" z="314.618" h="60"/>
 		</spawn>
 		<!-- Mitrakand Hunterkiller -->
-		<spawn npc_id="216812" respawn_time="295">
+		<spawn npc_id="236438" respawn_time="295">
 			<spot x="975.754" y="900.904" z="335.931"/>
 		</spawn>
 		<!-- Mitrakand Hunterkiller -->
-		<spawn npc_id="216121" respawn_time="295">
+		<spawn npc_id="236460" respawn_time="295">
 			<spot x="697.01" y="707.707" z="330.629"/>
 			<spot x="708.195" y="660.84" z="351.5"/>
 			<spot x="736.983" y="738.614" z="346.235"/>
@@ -3285,27 +3285,27 @@
 			<spot x="1049.71" y="1269.25" z="355.742"/>
 		</spawn>
 		<!-- Mitrakand Lifekeeper -->
-		<spawn npc_id="216821" respawn_time="295">
+		<spawn npc_id="236440" respawn_time="295">
 			<spot x="794.535" y="583.213" z="357.834"/>
 			<spot x="863.083" y="580.636" z="357.834"/>
 		</spawn>
 		<!-- Mitrakand Lifekeeper -->
-		<spawn npc_id="216820" respawn_time="295">
+		<spawn npc_id="236468" respawn_time="295">
 			<spot x="874.444" y="794.421" z="333.374"/>
 			<spot x="950.556" y="728.38" z="342.078"/>
 			<spot x="1020.06" y="797.848" z="341.5"/>
 		</spawn>
 		<!-- Mitrakand Lifekeeper -->
-		<spawn npc_id="216823" respawn_time="295">
+		<spawn npc_id="236469" respawn_time="295">
 			<spot x="973.862" y="898.966" z="335.935"/>
 		</spawn>
 		<!-- Mitrakand Lifekeeper -->
-		<spawn npc_id="216822" respawn_time="295">
+		<spawn npc_id="236470" respawn_time="295">
 			<spot x="873.363" y="647.739" z="353.201"/>
 			<spot x="1003.42" y="923.014" z="334.684"/>
 		</spawn>
 		<!-- Mitrakand Lifekeeper -->
-		<spawn npc_id="216123" respawn_time="295">
+		<spawn npc_id="236471" respawn_time="295">
 			<spot x="752.956" y="719.204" z="347.01"/>
 			<spot x="773.401" y="584.975" z="358.348"/>
 			<spot x="782.783" y="677.684" z="351.145"/>
@@ -3337,7 +3337,7 @@
 			<spot x="1389.18" y="1108.18" z="311.523"/>
 		</spawn>
 		<!-- Mitrakand Raider -->
-		<spawn npc_id="216808" respawn_time="295">
+		<spawn npc_id="236437" respawn_time="295">
 			<spot x="768.191" y="582.459" z="358.856"/>
 			<spot x="772.759" y="760.21" z="335.756"/>
 			<spot x="777.29" y="760.66" z="336.01437"/>
@@ -3372,17 +3372,14 @@
 			<spot x="1023.82" y="842.207" z="341.5"/>
 			<spot x="1032.66" y="892.345" z="341.375"/>
 			<spot x="1039.01" y="911.464" z="341.5"/>
-		</spawn>
-		<!-- Mitrakand Raider -->
-		<spawn npc_id="216810" respawn_time="295">
 			<spot x="2768.64" y="1175.26" z="211.697"/>
 		</spawn>
 		<!-- Mitrakand Raider -->
-		<spawn npc_id="216811" respawn_time="295">
+		<spawn npc_id="236456" respawn_time="295">
 			<spot x="1010.48" y="985.754" z="334.707"/>
 		</spawn>
 		<!-- Mitrakand Raider -->
-		<spawn npc_id="216120" respawn_time="295">
+		<spawn npc_id="236457" respawn_time="295">
 			<spot x="908.75" y="990.19" z="312.3125" walker_id="BBC58D1BE358AF3F5D1221D3FE2CC6867F04008E"/>
 			<spot x="973.37" y="745.69" z="340.51"/>
 			<spot x="981.16" y="1142.52" z="323.70508"/>
@@ -3783,7 +3780,7 @@
 			<spot x="390.99" y="1902.35" z="364.41998" h="93"/>
 		</spawn>
 		<!-- Naduka Gatherer -->
-		<spawn npc_id="216031" respawn_time="105">
+		<spawn npc_id="236434" respawn_time="105">
 			<spot x="482.499" y="936.826" z="361.147" h="87"/>
 			<spot x="491.749" y="978.966" z="361.008" h="78"/>
 			<spot x="491.903" y="903.07" z="360.753" h="97"/>
@@ -3849,7 +3846,7 @@
 			<spot x="2963.97" y="859.071" z="35.289" h="69"/>
 		</spawn>
 		<!-- Naduka Grunt -->
-		<spawn npc_id="216030" respawn_time="105">
+		<spawn npc_id="236433" respawn_time="105">
 			<spot x="502.723" y="955.862" z="361.392" h="88"/>
 			<spot x="519.89" y="958.092" z="360.874" h="119"/>
 			<spot x="521.785" y="973.576" z="361" h="113"/>
@@ -4657,7 +4654,7 @@
 			<spot x="185.417" y="1703.2" z="408.077"/>
 		</spawn>
 		<!-- Pincers Prime -->
-		<spawn npc_id="216572" respawn_time="14400">
+		<spawn npc_id="236446" respawn_time="14400">
 			<spot x="841.472" y="603.564" z="358.076" h="33"/>
 		</spawn>
 		<!-- Plains Baku -->
@@ -4779,7 +4776,7 @@
 			<spot x="708.86" y="2050.45" z="341.625"/>
 		</spawn>
 		<!-- Queen Klawtiar -->
-		<spawn npc_id="216573" respawn_time="295">
+		<spawn npc_id="236447" respawn_time="295">
 			<spot x="849.062" y="586.501" z="233.149" h="52"/>
 		</spawn>
 		<!-- Quenerk -->
@@ -4803,7 +4800,7 @@
 			<spot x="1824.36" y="2839.16" z="536.105" h="41"/>
 		</spawn>
 		<!-- Redtailed Neokin -->
-		<spawn npc_id="216432" respawn_time="105">
+		<spawn npc_id="236444" respawn_time="105">
 			<spot x="708.239" y="664.559" z="351.34" h="8"/>
 			<spot x="793.805" y="720.322" z="346.907"/>
 			<spot x="797.21" y="673.263" z="351.375" h="22"/>
@@ -7675,7 +7672,7 @@
 			<spot x="298.827" y="1495.78" z="368"/>
 		</spawn>
 		<!-- Xalvius -->
-		<spawn npc_id="216571" respawn_time="295">
+		<spawn npc_id="236445" respawn_time="295">
 			<spot x="532.51" y="1025.02" z="355.69763" walker_id="D2C7CDE201E30F9BDAD8AE96C682B8A3C770BF5F"/>
 		</spawn>
 		<!-- Xecotcovach -->
