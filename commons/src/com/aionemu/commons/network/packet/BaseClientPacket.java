@@ -1,5 +1,6 @@
 package com.aionemu.commons.network.packet;
 
+import java.nio.BufferUnderflowException;
 import java.nio.ByteBuffer;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
@@ -110,8 +111,8 @@ public abstract class BaseClientPacket<T extends AConnection<?>> extends BasePac
 	protected final int readD() {
 		try {
 			return buf.getInt();
-		} catch (Exception e) {
-			log.error("Missing D for: " + this);
+		} catch (BufferUnderflowException e) {
+			log.error("Missing D for: " + this + " (sent from " + client + ")");
 		}
 		return 0;
 	}
@@ -124,8 +125,8 @@ public abstract class BaseClientPacket<T extends AConnection<?>> extends BasePac
 	protected final byte readC() {
 		try {
 			return buf.get();
-		} catch (Exception e) {
-			log.error("Missing C for: " + this);
+		} catch (BufferUnderflowException e) {
+			log.error("Missing C for: " + this + " (sent from " + client + ")");
 		}
 		return 0;
 	}
@@ -138,8 +139,8 @@ public abstract class BaseClientPacket<T extends AConnection<?>> extends BasePac
 	protected final int readUC() {
 		try {
 			return buf.get() & 0xFF;
-		} catch (Exception e) {
-			log.error("Missing C for: " + this);
+		} catch (BufferUnderflowException e) {
+			log.error("Missing C for: " + this + " (sent from " + client + ")");
 		}
 		return 0;
 	}
@@ -152,8 +153,8 @@ public abstract class BaseClientPacket<T extends AConnection<?>> extends BasePac
 	protected final short readH() {
 		try {
 			return buf.getShort();
-		} catch (Exception e) {
-			log.error("Missing H for: " + this);
+		} catch (BufferUnderflowException e) {
+			log.error("Missing H for: " + this + " (sent from " + client + ")");
 		}
 		return 0;
 	}
@@ -166,8 +167,8 @@ public abstract class BaseClientPacket<T extends AConnection<?>> extends BasePac
 	protected final int readUH() {
 		try {
 			return buf.getShort() & 0xFFFF;
-		} catch (Exception e) {
-			log.error("Missing H for: " + this);
+		} catch (BufferUnderflowException e) {
+			log.error("Missing H for: " + this + " (sent from " + client + ")");
 		}
 		return 0;
 	}
@@ -180,8 +181,8 @@ public abstract class BaseClientPacket<T extends AConnection<?>> extends BasePac
 	protected final double readDF() {
 		try {
 			return buf.getDouble();
-		} catch (Exception e) {
-			log.error("Missing DF for: " + this);
+		} catch (BufferUnderflowException e) {
+			log.error("Missing DF for: " + this + " (sent from " + client + ")");
 		}
 		return 0;
 	}
@@ -194,8 +195,8 @@ public abstract class BaseClientPacket<T extends AConnection<?>> extends BasePac
 	protected final float readF() {
 		try {
 			return buf.getFloat();
-		} catch (Exception e) {
-			log.error("Missing F for: " + this);
+		} catch (BufferUnderflowException e) {
+			log.error("Missing F for: " + this + " (sent from " + client + ")");
 		}
 		return 0;
 	}
@@ -208,8 +209,8 @@ public abstract class BaseClientPacket<T extends AConnection<?>> extends BasePac
 	protected final long readQ() {
 		try {
 			return buf.getLong();
-		} catch (Exception e) {
-			log.error("Missing Q for: " + this);
+		} catch (BufferUnderflowException e) {
+			log.error("Missing Q for: " + this + " (sent from " + client + ")");
 		}
 		return 0;
 	}
@@ -225,8 +226,8 @@ public abstract class BaseClientPacket<T extends AConnection<?>> extends BasePac
 		try {
 			while ((ch = buf.getChar()) != 0)
 				sb.append(ch);
-		} catch (Exception e) {
-			log.error("Missing S for: " + this);
+		} catch (BufferUnderflowException e) {
+			log.error("Missing S for: " + this + " (sent from " + client + ")");
 		}
 		return sb.toString();
 	}
@@ -241,8 +242,8 @@ public abstract class BaseClientPacket<T extends AConnection<?>> extends BasePac
 		byte[] result = new byte[length];
 		try {
 			buf.get(result);
-		} catch (Exception e) {
-			log.error("Missing byte[] for: " + this);
+		} catch (BufferUnderflowException e) {
+			log.error("Missing byte[] for: " + this + " (sent from " + client + ")");
 		}
 		return result;
 	}
