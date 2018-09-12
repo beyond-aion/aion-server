@@ -398,19 +398,14 @@ public class StatFunctions {
 				resultDamage += Rnd.get(-diff, diff);
 			}
 		} else {
-			System.out.println("Basedamage: " + resultDamage);
 			int rnd = (int) (resultDamage * 0.20f);
-			System.out.println("Randombonus: " + rnd);
 			resultDamage += Rnd.get(-rnd, rnd);
-			System.out.println("Base+Bonus: " + resultDamage);
 		}
 
 		// subtract defense
 		float pDef = target.getGameStats().getPDef().getBonus()
 			+ getMovementModifier(target, StatEnum.PHYSICAL_DEFENSE, target.getGameStats().getPDef().getBase());
-		System.out.println("Pdef: " + pDef);
 		resultDamage -= (pDef * 0.10f);
-		System.out.println("Finaldamage: " + resultDamage);
 
 		if (resultDamage <= 0)
 			resultDamage = 1;
