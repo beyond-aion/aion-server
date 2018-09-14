@@ -1,6 +1,7 @@
 package instance;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Future;
@@ -36,7 +37,7 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 public class TheShugoEmperorsVault extends GeneralInstanceHandler {
 
 	private Map<Integer, StaticDoor> doors;
-	private Map<Integer, Integer> transformationCache; // saves the applied transformation to avoid effect loss during sendlogs
+	private Map<Integer, Integer> transformationCache = new HashMap<>(); // saves the applied transformation to avoid effect loss during sendlogs
 	private List<Integer> spawns = new ArrayList<>();
 	private AtomicBoolean started = new AtomicBoolean();
 	private NormalReward instanceReward;
