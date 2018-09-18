@@ -71,6 +71,14 @@ public class GeoService {
 		return geoData.getMap(worldId).getZ(x, y, zMax, zMin, instanceId);
 	}
 
+	/**
+	 * Only as temporarily solution to enable only siege door meshes
+	 * TODO: remove me
+	 */
+	public String getSiegeDoorName(int worldId, String meshFile, float x, float y, float z) {
+		return geoData.getMap(worldId).getDoorName(worldId, meshFile, x, y, z);
+	}
+
 	public String getDoorName(int worldId, String meshFile, float x, float y, float z) {
 		return GeoDataConfig.GEO_DOORS_ENABLE ? geoData.getMap(worldId).getDoorName(worldId, meshFile, x, y, z) : null;
 	}

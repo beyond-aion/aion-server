@@ -154,7 +154,8 @@ public class GeoWorldLoader {
 				if (node != null) {
 					try {
 						if ((node.getIntentions() & CollisionIntention.DOOR.getId()) != 0) {
-							if (!GeoDataConfig.GEO_DOORS_ENABLE) // ignore mesh for now (should be handled in collideWith() so it can be toggled during runtime)
+							// ignore mesh for now (should be handled in collideWith() so it can be toggled during runtime)
+							if (!GeoDataConfig.GEO_DOORS_ENABLE && !name.contains("castledoor") && !name.contains("fortress_door"))
 								continue;
 							for (Spatial door : node.getChildren()) {
 								DoorGeometry doorClone = (DoorGeometry) door.clone();

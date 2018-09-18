@@ -7,7 +7,6 @@ import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.AIRequest;
 import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.ai.poll.AIQuestion;
-import com.aionemu.gameserver.configs.main.GeoDataConfig;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -71,12 +70,14 @@ public class SiegeFortressGateAI extends NpcAI {
 					case 252116:
 					case 252117:
 						return "ldf5_fortress_door_01.cgf";
-					case 881578:
-						return "barricade_light_large_01a.cgf";
-					case 881579:
-						return "barricade_vritra_large_01a.cgf";
-					case 881580:
-						return "barricade_dark_large_01a.cgf";
+					/*
+					 * case 881578:
+					 * return "barricade_light_large_01a.cgf";
+					 * case 881579:
+					 * return "barricade_vritra_large_01a.cgf";
+					 * case 881580:
+					 * return "barricade_dark_large_01a.cgf";
+					 */
 				}
 				break;
 			default:
@@ -88,11 +89,9 @@ public class SiegeFortressGateAI extends NpcAI {
 	@Override
 	protected void handleSpawned() {
 		super.handleSpawned();
-		if (GeoDataConfig.GEO_DOORS_ENABLE) {
-			doorName = GeoService.getInstance().getDoorName(getOwner().getWorldId(), getMeshFileName(), getOwner().getX(), getOwner().getY(),
-				getOwner().getZ());
-			updateDoorState(false, true);
-		}
+		doorName = GeoService.getInstance().getSiegeDoorName(getOwner().getWorldId(), getMeshFileName(), getOwner().getX(), getOwner().getY(),
+			getOwner().getZ());
+		updateDoorState(false, true);
 	}
 
 	@Override
