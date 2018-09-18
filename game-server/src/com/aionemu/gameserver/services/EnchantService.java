@@ -186,12 +186,12 @@ public class EnchantService {
 		return result;
 	}
 
-	public static void enchantItemAct(Player player, Item parentItem, Item targetItem, Item supplementItem, int currentEnchant, boolean result) {
+	public static void enchantItemAct(Player player, Item parentItem, Item targetItem, Item supplementItem, int currentEnchant, boolean success) {
 		int addLevel = 1;
 
 		int maxEnchant = targetItem.getItemTemplate().getMaxEnchantLevel(); // max enchant level from item_templates
 		maxEnchant += targetItem.getEnchantBonus();
-		if (!targetItem.isAmplified()) {
+		if (targetItem.getEnchantLevel() < 20) {
 			float chance = Rnd.chance(); // crit modifier
 			if (chance < 5)
 				addLevel = 3;
@@ -207,15 +207,11 @@ public class EnchantService {
 		player.updateSupplements();
 
 		// Items that are Fabled or Eternal can get up to +15.
-		if (result) {
-			if (targetItem.isAmplified() && (parentItem.getItemId() == 166020000 || parentItem.getItemId() == 166020003)) { // Omega Enchantment Stone
-				currentEnchant += 1;
-			} else {
-				while (currentEnchant + addLevel > maxEnchant && addLevel > 0) {
-					addLevel--;
-				}
+		if (success) {
+			if (!targetItem.isAmplified() && currentEnchant + addLevel > maxEnchant)
+				currentEnchant = maxEnchant;
+			else
 				currentEnchant += addLevel;
-			}
 		} else {
 			// Retail: http://powerwiki.na.aiononline.com/aion/Patch+Notes:+1.9.0.1
 			// When socketing fails at +11~+15, the value falls back to +10.
@@ -268,7 +264,7 @@ public class EnchantService {
 
 		ItemPacketService.updateItemAfterInfoChange(player, targetItem, ItemUpdateType.STATS_CHANGE);
 
-		if (result)
+		if (success)
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_ENCHANT_ITEM_SUCCEED_NEW(targetItem.getL10n(), enchantLevel));
 		else {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ENCHANT_ITEM_FAILED(targetItem.getL10n()));
