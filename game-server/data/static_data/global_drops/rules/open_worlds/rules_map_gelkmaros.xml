@@ -81,7 +81,7 @@
 			<gd_item id="188053693" chance="25" /><!-- Gelkmaros Greater Conqueror's Mark Box -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Lv70 Composite Stone Bundle" base_chance="1" min_count="1">
+	<gd_rule rule_name="Lv70 Composite Stone Bundle" base_chance="3" min_count="1">
 		<gd_maps>
 			<gd_map map_id="220070000" /><!-- Gelkmaros -->
 		</gd_maps>
@@ -143,6 +143,21 @@
 			<gd_npc npc_id="236417" /><!-- Vulgar Gelkmaros Strigik Assailant -->
 			<gd_npc npc_id="236418" /><!-- Vulgar Gelkmaros Strigik Shaman -->
 		</gd_npcs>
+		<gd_items>
+			<gd_item id="188053745" /><!-- Elegant High Grade Composite Manastone Bundle -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Composite Stone Bundle" base_chance="1" min_count="1" fixed_chance="true">
+		<gd_maps>
+			<gd_map map_id="220070000" /><!-- Gelkmaros -->
+		</gd_maps>
+		<gd_zones>
+			<gd_zone zone="TWILIGHT_DRANA_FARM_220070000" />
+		</gd_zones>
+		<gd_ratings>
+			<gd_rating rating="ELITE" />
+			<gd_rating rating="HERO" />
+		</gd_ratings>
 		<gd_items>
 			<gd_item id="188053745" /><!-- Elegant High Grade Composite Manastone Bundle -->
 		</gd_items>
