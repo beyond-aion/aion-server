@@ -5,6 +5,8 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import org.slf4j.LoggerFactory;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
@@ -23,7 +25,8 @@ public class CM_ATREIAN_PASSPORT extends AionClientPacket {
 
 	@Override
 	protected void readImpl() {
-		int count = readUH();
+		int count = readUC();
+		byte unk = readC(); 
 		for (int i = 0; i < count; i++) {
 			int passportId = readD();
 			int timestamp = readD();
@@ -34,7 +37,8 @@ public class CM_ATREIAN_PASSPORT extends AionClientPacket {
 				return timestamps;
 			});
 		}
-
+		if (unk != 0)
+			LoggerFactory.getLogger(CM_ATREIAN_PASSPORT.class).warn("Received unknown flag [" + unk + "] from " + getConnection().getActivePlayer() + " with " + count + " passports");
 	}
 
 	@Override
