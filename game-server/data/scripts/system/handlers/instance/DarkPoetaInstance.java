@@ -97,7 +97,7 @@ public class DarkPoetaInstance extends GeneralInstanceHandler {
 
 	private int checkRank(int totalPoints) {
 		int timeRemain = getTime();
-		int rank = 0;
+		int rank = 8;
 		if (timeRemain > 7200000 && totalPoints >= 17817) {
 			spawn(215280, 1189f, 1244f, 141f, (byte) 76);
 			rank = 1;
@@ -113,8 +113,6 @@ public class DarkPoetaInstance extends GeneralInstanceHandler {
 		} else if (timeRemain > 1) {
 			spawn(215284, 1189f, 1244f, 141f, (byte) 76);
 			rank = 5;
-		} else {
-			return rank = 8;
 		}
 		schedulePortalDespawn((Npc) spawn(700478, 298.24423f, 316.21954f, 133.29759f, (byte) 56));
 		return rank;

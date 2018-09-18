@@ -194,9 +194,6 @@ public class _1922DeliveronYourPromises extends AbstractQuestHandler {
 			} else if (movieId == 165) {
 				QuestService.questTimerStart(env, 240);
 				return true;
-			} else if (movieId == 166) {
-				TeleportService.teleportTo(player, 110010000, 1466.036f, 1337.2749f, 566.41583f, (byte) 86);
-				return true;
 			}
 		}
 		return false;
