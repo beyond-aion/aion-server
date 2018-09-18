@@ -1,11 +1,13 @@
 package ai.instance.theShugoEmperorsVault;
 
+import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.instance.handlers.InstanceHandler;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.instance.InstanceProgressionType;
 import com.aionemu.gameserver.model.instance.instancereward.InstanceReward;
+import com.aionemu.gameserver.skillengine.model.Effect;
 
 import ai.AggressiveNpcAI;
 
@@ -14,9 +16,11 @@ import ai.AggressiveNpcAI;
  */
 @AIName("IDSweep_shugos")
 public class IDSweep_Shugos extends AggressiveNpcAI {
+	
+	private int baseDamage;
 
 	public IDSweep_Shugos(Npc owner) {
-		super(owner);
+		super(owner); 
 	}
 
 	@Override
@@ -27,11 +31,20 @@ public class IDSweep_Shugos extends AggressiveNpcAI {
 		if (handler != null) {
 			reward = handler.getInstanceReward();
 			if (reward != null) {
-				if (reward.getInstanceProgressionType() == InstanceProgressionType.END_PROGRESS) {
+				if (reward.getInstanceProgressionType() == InstanceProgressionType.END_PROGRESS)
 					getOwner().getController().delete();
-				}
 			}
 		}
+		baseDamage = getOwner().getGameStats().getStatsTemplate().getAttack();
+	}
+
+	@Override
+	public int modifyOwnerDamage(int damage, Effect effect) {
+		if (effect == null) {
+			int rndDamage = Rnd.get(-Math.round(baseDamage * 0.2f), Math.round(baseDamage * 0.25f));
+			damage = baseDamage + rndDamage;
+		}
+		return damage;
 	}
 
 	@Override
