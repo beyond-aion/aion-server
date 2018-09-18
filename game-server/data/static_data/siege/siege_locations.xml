@@ -88,7 +88,7 @@
 	<siege_location id="138" type="INDUN" world="210070000"/>
 	<siege_location id="140" type="INDUN" world="220080000"/>
 	<siege_location id="140" type="INDUN" world="210070000"/>
-	<siege_location id="1011" type="FORTRESS" world="400010000" name_id="400910" occupy_count="2" legion_gp="1000" siege_duration="3000" influence="10">
+	<siege_location id="1011" type="FORTRESS" world="400010000" name_id="400910" occupy_count="2" legion_gp="1000" siege_duration="3000" influence="10" kinah_rewards="100000000 90000000 80000000 50000000">
 		<artifact_activation item_id="188020000" count="1" skill="12078" cd="7200"/>
 		<siege_reward top="11" item_id="186000242" item_count="4" gp_win="300" gp_defeat="150"/>
 		<siege_reward top="22" item_id="186000242" item_count="3" gp_win="250" gp_defeat="125"/>
@@ -216,7 +216,7 @@
 	<siege_location id="1215" type="ARTIFACT" world="400010000">
 		<artifact_activation item_id="188020000" count="1" skill="12082" repeat_count="1" repeat_interval="1" cd="900"/>
 	</siege_location>
-	<siege_location id="1221" type="FORTRESS" world="400010000" name_id="400915" occupy_count="2" legion_gp="1000" siege_duration="3600" influence="9">
+	<siege_location id="1221" type="FORTRESS" world="400010000" name_id="400915" occupy_count="2" legion_gp="1000" siege_duration="3600" influence="9" kinah_rewards="80000000 70000000 60000000 25000000">
 		<artifact_activation item_id="188020000" count="1" skill="12152" cd="5400"/>
 		<siege_reward top="11" item_id="186000242" item_count="3" gp_win="250" gp_defeat="125"/>
 		<siege_reward top="22" item_id="186000242" item_count="2" gp_win="200" gp_defeat="100"/>
@@ -239,7 +239,7 @@
 	<siege_location id="1224" type="ARTIFACT" world="400010000">
 		<artifact_activation item_id="188020002" count="4" skill="12091" repeat_count="5" repeat_interval="3" cd="2700"/>
 	</siege_location>
-	<siege_location id="1231" type="FORTRESS" world="400010000" name_id="400916" occupy_count="2" legion_gp="1000" siege_duration="3600" influence="9">
+	<siege_location id="1231" type="FORTRESS" world="400010000" name_id="400916" occupy_count="2" legion_gp="1000" siege_duration="3600" influence="9" kinah_rewards="80000000 70000000 60000000 25000000">
 		<artifact_activation item_id="188020000" count="1" skill="12153" cd="5400"/>
 		<siege_reward top="11" item_id="186000242" item_count="3" gp_win="250" gp_defeat="125"/>
 		<siege_reward top="22" item_id="186000242" item_count="2" gp_win="200" gp_defeat="100"/>
@@ -259,7 +259,7 @@
 	<siege_location id="1233" type="ARTIFACT" world="400010000">
 		<artifact_activation item_id="188020002" count="1" skill="12089" repeat_count="6" repeat_interval="9" cd="900"/>
 	</siege_location>
-	<siege_location id="1241" type="FORTRESS" world="400010000" name_id="400917" occupy_count="2" legion_gp="1000" siege_duration="3600" influence="9">
+	<siege_location id="1241" type="FORTRESS" world="400010000" name_id="400917" occupy_count="2" legion_gp="1000" siege_duration="3600" influence="9" kinah_rewards="80000000 70000000 60000000 25000000">
 		<artifact_activation item_id="188020000" count="1" skill="12154" cd="5400"/>
 		<siege_reward top="11" item_id="186000242" item_count="3" gp_win="250" gp_defeat="125"/>
 		<siege_reward top="22" item_id="186000242" item_count="2" gp_win="200" gp_defeat="100"/>
@@ -309,7 +309,7 @@
 	<siege_location id="1403" type="ARTIFACT" world="400010000">
 		<artifact_activation item_id="188020002" count="2" skill="12159" repeat_count="1" repeat_interval="1" cd="2700"/>
 	</siege_location>
-	<siege_location id="2011" type="FORTRESS" world="210050000" name_id="401288" occupy_count="2" legion_gp="1000" siege_duration="2400" influence="8">
+	<siege_location id="2011" type="FORTRESS" world="210050000" name_id="401288" occupy_count="2" legion_gp="1000" siege_duration="2400" influence="8" kinah_rewards="50000000 40000000 30000000 10000000">
 		<artifact_activation item_id="188020001" count="3" skill="12155" cd="7200"/>
 		<siege_reward top="11" item_id="188053163" item_count="1" gp_win="200" gp_defeat="100"/>
 		<siege_reward top="22" item_id="188053164" item_count="1" gp_win="175" gp_defeat="90"/>
@@ -333,7 +333,7 @@
 	<siege_location id="2014" type="ARTIFACT" world="210050000">
 		<artifact_activation item_id="188020002" count="2" skill="12159" repeat_count="5" repeat_interval="3" cd="1800"/>
 	</siege_location>
-	<siege_location id="2021" type="FORTRESS" world="210050000" name_id="401290" occupy_count="2" legion_gp="1000" siege_duration="2400" influence="8">
+	<siege_location id="2021" type="FORTRESS" world="210050000" name_id="401290" occupy_count="2" legion_gp="1000" siege_duration="2400" influence="8" kinah_rewards="50000000 40000000 30000000 10000000">
 		<artifact_activation item_id="188020001" count="2" skill="12156" cd="7200"/>
 		<siege_reward top="11" item_id="188053159" item_count="1" gp_win="200" gp_defeat="100"/>
 		<siege_reward top="22" item_id="188053160" item_count="1" gp_win="175" gp_defeat="90"/>
@@ -363,7 +363,7 @@
 		<siege_reward top="33" item_id="188050708" item_count="1" gp_win="150" gp_defeat="75"/>
 		<siege_reward top="200" item_id="188050709" item_count="1" gp_win="100" gp_defeat="50"/>
 	</siege_location>
-	<siege_location id="3011" type="FORTRESS" world="220070000" name_id="401292" occupy_count="2" legion_gp="1000" siege_duration="2400" influence="8">
+	<siege_location id="3011" type="FORTRESS" world="220070000" name_id="401292" occupy_count="2" legion_gp="1000" siege_duration="2400" influence="8" kinah_rewards="50000000 40000000 30000000 10000000">
 		<artifact_activation item_id="188020001" count="2" skill="12157" cd="7200"/>
 		<siege_reward top="11" item_id="188053171" item_count="1" gp_win="200" gp_defeat="100"/>
 		<siege_reward top="22" item_id="188053172" item_count="1" gp_win="175" gp_defeat="90"/>
@@ -387,7 +387,7 @@
 	<siege_location id="3014" type="ARTIFACT" world="220070000">
 		<artifact_activation item_id="188020002" count="2" skill="12159" repeat_count="5" repeat_interval="3" cd="1800"/>
 	</siege_location>
-	<siege_location id="3021" type="FORTRESS" world="220070000" name_id="401294" occupy_count="2" legion_gp="1000" siege_duration="2400" influence="8">
+	<siege_location id="3021" type="FORTRESS" world="220070000" name_id="401294" occupy_count="2" legion_gp="1000" siege_duration="2400" influence="8" kinah_rewards="50000000 40000000 30000000 10000000">
 		<artifact_activation item_id="188020001" count="3" skill="12158" cd="7200"/>
 		<siege_reward top="11" item_id="188053167" item_count="1" gp_win="200" gp_defeat="100"/>
 		<siege_reward top="22" item_id="188053168" item_count="1" gp_win="175" gp_defeat="90"/>
@@ -418,7 +418,7 @@
 		<siege_reward top="200" item_id="188050705" item_count="1" gp_win="100" gp_defeat="50"/>
 	</siege_location>
 	<!-- Wealhtheow's Keep -->
-	<siege_location id="7011" type="FORTRESS" world="600090000" name_id="404142" occupy_count="2" legion_gp="1000" siege_duration="3600" influence="14">
+	<siege_location id="7011" type="FORTRESS" world="600090000" name_id="404142" occupy_count="2" legion_gp="1000" siege_duration="3600" influence="14" kinah_rewards="100000000 90000000 80000000 50000000">
 	    <siege_reward top="11" item_id="169610150" item_count="1" gp_win="0" gp_defeat="200"/>
 		<siege_reward top="30" item_id="169610150" item_count="1" gp_win="0" gp_defeat="150"/>
 		<siege_reward top="60" item_id="169610150" item_count="1" gp_win="0" gp_defeat="100"/>
