@@ -92,6 +92,7 @@ public class ChestAI extends ActionItemNpcAI {
 				long availableKeys = player.getInventory().getItemCountByItemId(keyItemId);
 				if (availableKeys >= keyCountToDecrease) {
 					player.getInventory().decreaseByItemId(keyItemId, keyCountToDecrease);
+					keyCountToDecrease = 0;
 				} else {
 					keyCountToDecrease -= availableKeys;
 					player.getInventory().decreaseByItemId(keyItemId, availableKeys);
