@@ -17492,10 +17492,10 @@
 	</decomposable>
 	<decomposable item_id="188052297"><!-- Noble Composite Manastone Bundle -->
 		<items chance="80">
-			<random_item type="MANASTONE_RARE_GRADE_60" />
+			<random_item type="MANASTONE_LEGEND_GRADE_60" />
 		</items>
 		<items chance="20">
-			<random_item type="MANASTONE_RARE_GRADE_70" />
+			<random_item type="MANASTONE_LEGEND_GRADE_70" />
 		</items>
 	</decomposable>
 	<decomposable item_id="188052298" /><!-- [Event] Flying Pagati Box -->
