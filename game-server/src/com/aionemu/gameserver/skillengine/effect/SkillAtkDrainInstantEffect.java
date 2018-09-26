@@ -23,19 +23,14 @@ public class SkillAtkDrainInstantEffect extends DamageEffect {
 
 	@Override
 	public void applyEffect(Effect effect) {
-		if (!effect.getStack().equalsIgnoreCase("AS_BACKPROCATK_PROC")) {
-			super.applyEffect(effect);
-		}
+		super.applyEffect(effect);
 		if (hp_percent != 0) {
-			effect
-				.getEffector()
-				.getLifeStats()
-				.increaseHp(TYPE.ABSORBED_HP, effect.getReserveds(this.position).getValue() * hp_percent / 100, effect.getSkillId(),
-					LOG.SKILLLATKDRAININSTANT);
+			effect.getEffector().getLifeStats().increaseHp(TYPE.ABSORBED_HP, effect.getReserveds(this.position).getValue() * hp_percent / 100,
+				effect.getSkillId(), LOG.SKILLLATKDRAININSTANT);
 		}
 		if (mp_percent != 0) {
-			effect.getEffector().getLifeStats()
-				.increaseMp(TYPE.MP, effect.getReserveds(this.position).getValue() * mp_percent / 100, effect.getSkillId(), LOG.SKILLLATKDRAININSTANT);
+			effect.getEffector().getLifeStats().increaseMp(TYPE.MP, effect.getReserveds(this.position).getValue() * mp_percent / 100, effect.getSkillId(),
+				LOG.SKILLLATKDRAININSTANT);
 		}
 	}
 }
