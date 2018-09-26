@@ -28,12 +28,16 @@ public abstract class AbstractHealEffect extends EffectTemplate {
 	public void calculate(Effect effect, HealType healType) {
 		if (!super.calculate(effect, null, null))
 			return;
-		Creature effector = effect.getEffector();
-		Creature effected = effect.getEffected();
 
 		int valueWithDelta = value + delta * effect.getSkillLevel();
-		int currentValue = getCurrentStatValue(effect);
-		int maxCurValue = getMaxStatValue(effect);
+		int finalHeal = calculateHeal(effect, healType, valueWithDelta, getCurrentStatValue(effect), getMaxStatValue(effect));
+
+		effect.setReserveds(new EffectReserved(position, finalHeal, ResourceType.of(healType), false), false);
+	}
+
+	public int calculateHeal(Effect effect, HealType type, int valueWithDelta, int currentValue, int maxCurValue) {
+		Creature effector = effect.getEffector();
+		Creature effected = effect.getEffected();
 		int possibleHealValue = 0;
 		if (percent)
 			possibleHealValue = maxCurValue * valueWithDelta / 100;
@@ -42,25 +46,23 @@ public abstract class AbstractHealEffect extends EffectTemplate {
 
 		int finalHeal = possibleHealValue;
 
-		if (healType == HealType.HP) {
-			int baseHeal = possibleHealValue;
+		if (type == HealType.HP) {
 			if (!(this instanceof ProcHealInstantEffect)) {
-				int boostHealAdd = effector.getGameStats().getStat(StatEnum.HEAL_BOOST, 0).getCurrent();
-				// Apply percent Heal Boost bonus (ex. Passive skills)
-				int boostHeal = (effector.getGameStats().getStat(StatEnum.HEAL_BOOST, baseHeal).getCurrent() - boostHealAdd);
-				// Apply Add Heal Boost bonus (ex. Skills like Benevolence)
-				boostHeal += boostHeal * boostHealAdd / 1000;
-				finalHeal = effector.getGameStats().getStat(StatEnum.HEAL_SKILL_BOOST, boostHeal).getCurrent();
+				int healBoost = effector.getGameStats().getStat(StatEnum.HEAL_BOOST, 0).getCurrent();
+				finalHeal += Math.round(finalHeal * healBoost / 1000f); // capped by 100%
+				// Apply caster's heal related effects (passive boosts, active buffs e.g. blessed shield)
+				finalHeal = effector.getGameStats().getStat(StatEnum.HEAL_SKILL_BOOST, finalHeal).getCurrent();
 			}
+			// Apply target's heal related effects (e.g. brilliant protection)
 			finalHeal = effected.getGameStats().getStat(StatEnum.HEAL_SKILL_DEBOOST, finalHeal).getCurrent();
 		}
 
-		if (healType == HealType.HP && effected.getEffectController().isAbnormalSet(AbnormalState.DISEASE))
+		if (type == HealType.HP && (effected.getEffectController().isAbnormalSet(AbnormalState.DISEASE) || finalHeal < 0))
 			finalHeal = 0;
 		else
 			finalHeal = maxCurValue - currentValue < finalHeal ? (maxCurValue - currentValue) : finalHeal;
 
-		effect.setReserveds(new EffectReserved(position, finalHeal, ResourceType.of(healType), false), false);
+		return finalHeal;
 	}
 
 	public void applyEffect(Effect effect, HealType healType) {

@@ -4,8 +4,6 @@ import javax.xml.bind.annotation.XmlAttribute;
 
 import com.aionemu.gameserver.controllers.observer.ActionObserver;
 import com.aionemu.gameserver.controllers.observer.ObserverType;
-import com.aionemu.gameserver.model.gameobjects.Creature;
-import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.LOG;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.TYPE;
 import com.aionemu.gameserver.skillengine.model.Effect;
@@ -23,22 +21,26 @@ public class CaseHealEffect extends AbstractHealEffect {
 
 	@Override
 	protected int getCurrentStatValue(Effect effect) {
-		if (type == HealType.HP)
-			return effect.getEffected().getLifeStats().getCurrentHp();
-		else if (type == HealType.MP)
-			return effect.getEffected().getLifeStats().getCurrentMp();
-
-		return 0;
+		switch (type) {
+			case HP:
+				return effect.getEffected().getLifeStats().getCurrentHp();
+			case MP:
+				return effect.getEffected().getLifeStats().getCurrentMp();
+			default:
+				return 0;
+		}
 	}
 
 	@Override
 	protected int getMaxStatValue(Effect effect) {
-		if (type == HealType.HP)
-			return effect.getEffected().getGameStats().getMaxHp().getCurrent();
-		else if (type == HealType.MP)
-			return effect.getEffected().getGameStats().getMaxMp().getCurrent();
-
-		return 0;
+		switch (type) {
+			case HP:
+				return effect.getEffected().getGameStats().getMaxHp().getCurrent();
+			case MP:
+				return effect.getEffected().getGameStats().getMaxMp().getCurrent();
+			default:
+				return 0;
+		}
 	}
 
 	@Override
@@ -55,35 +57,27 @@ public class CaseHealEffect extends AbstractHealEffect {
 
 	@Override
 	public void startEffect(final Effect effect) {
-		ActionObserver observer = new ActionObserver(ObserverType.ATTACKED) {
+		ActionObserver observer = new ActionObserver(ObserverType.HP_CHANGED) {
 
 			@Override
-			public void attacked(Creature creature, int skillId) {
-				calculateHeal(effect);
+			public void hpChanged(int value) {
+				tryHeal(effect);
 			}
+
 		};
 		effect.getEffected().getObserveController().addObserver(observer);
 		effect.setActionObserver(observer, position);
-		calculateHeal(effect);
+		tryHeal(effect);
 	}
 
-	private void calculateHeal(final Effect effect) {
-		final int valueWithDelta = value + delta * effect.getSkillLevel();
+	private void tryHeal(final Effect effect) {
+
 		final int currentValue = getCurrentStatValue(effect);
-		final int maxValue = getMaxStatValue(effect);
-		if (currentValue <= (maxValue * condValue / 100f)) {
-			int possibleHealValue = 0;
-			if (percent)
-				possibleHealValue = Math.round(maxValue * valueWithDelta / 100f);
-			else
-				possibleHealValue = valueWithDelta;
-
-			int finalHeal = effect.getEffected().getGameStats().getStat(StatEnum.HEAL_SKILL_BOOST, possibleHealValue).getCurrent();
-			finalHeal = effect.getEffected().getGameStats().getStat(StatEnum.HEAL_SKILL_DEBOOST, finalHeal).getCurrent();
-			finalHeal = maxValue - currentValue < finalHeal ? (maxValue - currentValue) : finalHeal;
-
-			if (type == HealType.HP && effect.getEffected().getEffectController().isAbnormalSet(AbnormalState.DISEASE))
-				finalHeal = 0;
+		final int maxCurValue = getMaxStatValue(effect);
+		if (currentValue <= (maxCurValue * condValue / 100f)) {
+			// calculate heal to the effective moment
+			int healValueWithDelta = value + delta * effect.getSkillLevel();
+			int finalHeal = calculateHeal(effect, type, healValueWithDelta, currentValue, maxCurValue);
 
 			// apply heal
 			if (type == HealType.HP)

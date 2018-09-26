@@ -100,6 +100,9 @@ public class StatCapUtil {
 				case PVP_DEFEND_RATIO:
 					value = 900;
 					break;
+				case HEAL_BOOST:
+					value = 1000;
+					break;
 			}
 			return value;
 		}
