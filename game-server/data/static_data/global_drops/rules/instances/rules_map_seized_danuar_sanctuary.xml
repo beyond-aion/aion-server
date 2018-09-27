@@ -1,5 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
 <global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../global_rules.xsd">
+	<gd_rule rule_name="Weapon (Unique)" base_chance="2">
+		<gd_maps>
+			<gd_map map_id="301140000" /><!-- Seized_Danuar_Sanctuary -->
+		</gd_maps>
+		<gd_races>
+			<gd_race race="SHULACK" />
+		</gd_races>
+		<gd_items>
+			<gd_item id="100001548" /><!-- Corsair's Sword -->
+			<gd_item id="100101181" /><!-- Corsair's Mace -->
+			<gd_item id="100201351" /><!-- Corsair's Dagger -->
+			<gd_item id="100501185" /><!-- Corsair's Jewel -->
+			<gd_item id="100601273" /><!-- Corsair's Spellbook -->
+			<gd_item id="100901202" /><!-- Corsair's Greatsword -->
+			<gd_item id="101301133" /><!-- Corsair's Polearm -->
+			<gd_item id="101501214" /><!-- Corsair's Staff -->
+			<gd_item id="101701232" /><!-- Corsair's Bow -->
+			<gd_item id="101801016" /><!-- Steel Rose Pirates' Pistol -->
+			<gd_item id="101900979" /><!-- Steel Rose Pirates' Aethercannon -->
+			<gd_item id="102001042" /><!-- Steel Rose Pirates' String Instrument -->
+			<gd_item id="102100818" /><!-- Corsair's Cipher-Blade -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Armor (Unique)" base_chance="4">
+		<gd_maps>
+			<gd_map map_id="301140000" /><!-- Seized_Danuar_Sanctuary -->
+		</gd_maps>
+		<gd_races>
+			<gd_race race="SHULACK" />
+		</gd_races>
+		<gd_items>
+			<gd_item id="110101551" /><!-- Steel Rose Pirates' Cloth Jacket -->
+			<gd_item id="110301447" /><!-- Steel Rose Pirates' Leather Vest -->
+			<gd_item id="110501408" /><!-- Steel Rose Pirates' Chain Armor -->
+			<gd_item id="110601383" /><!-- Steel Rose Pirates' Plate Breastplate -->
+			<gd_item id="111101395" /><!-- Steel Rose Pirates' Cloth Gloves -->
+			<gd_item id="111301387" /><!-- Steel Rose Pirates' Leather Gloves -->
+			<gd_item id="111501365" /><!-- Steel Rose Pirates' Chain Gloves -->
+			<gd_item id="111601345" /><!-- Steel Rose Pirates' Plate Gloves -->
+			<gd_item id="112101349" /><!-- Steel Rose Pirates' Cloth Pauldrons -->
+			<gd_item id="112301331" /><!-- Steel Rose Pirates' Leather Pauldrons -->
+			<gd_item id="112501307" /><!-- Steel Rose Pirates' Chain Pauldrons -->
+			<gd_item id="112601327" /><!-- Steel Rose Pirates' Plate Pauldrons -->
+			<gd_item id="113101413" /><!-- Steel Rose Pirates' Cloth Pants -->
+			<gd_item id="113301412" /><!-- Steel Rose Pirates' Leather Leg Protectors -->
+			<gd_item id="113501382" /><!-- Steel Rose Pirates' Chain Armor -->
+			<gd_item id="113601335" /><!-- Steel Rose Pirates' Plate Gaiters -->
+			<gd_item id="114101442" /><!-- Steel Rose Pirates' Cloth Shoes -->
+			<gd_item id="114301448" /><!-- Steel Rose Pirates' Leather Shoes -->
+			<gd_item id="114501390" /><!-- Steel Rose Pirates' Chain Boots -->
+			<gd_item id="114601333" /><!-- Steel Rose Pirates' Plate Boots -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Accessory (Unique)" base_chance="3">
+		<gd_maps>
+			<gd_map map_id="301140000" /><!-- Seized_Danuar_Sanctuary -->
+		</gd_maps>
+		<gd_races>
+			<gd_race race="SHULACK" />
+		</gd_races>
+		<gd_items>
+			<gd_item id="125300050" /><!-- Steel Rose Pirates' Plate Helmet -->
+			<gd_item id="125300051" /><!-- Steel Rose Pirates' Chain Helm -->
+			<gd_item id="125300052" /><!-- Steel Rose Pirates' Leather Hat -->
+			<gd_item id="125300053" /><!-- Steel Rose Pirates' Cloth Headband -->
+		</gd_items>
+	</gd_rule>
 	<gd_rule rule_name="Named Key" base_chance="100" no_reduction="true">
 		<gd_maps>
 			<gd_map map_id="301140000" /><!-- Seized_Danuar_Sanctuary -->
@@ -196,31 +263,6 @@
 			<gd_item id="185000174" /><!-- Sentry Post of Eternity Key -->
 		</gd_items>
 	</gd_rule>
-	<!-- SDS only -->
-	<gd_rule rule_name="Ancient Manastone (Epic)" base_chance="35" member_limit="6">
-		<gd_maps>
-			<gd_map map_id="301140000" /><!-- Seized_Danuar_Sanctuary -->
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="235619" /><!-- Warmage Suyaroka -->
-			<gd_npc npc_id="235620" /><!-- Chief Medic Tagnu -->
-			<gd_npc npc_id="235621" /><!-- Virulent Ukahim -->
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="167020072" /><!-- Ancient Manastone: Accuracy +35 -->
-			<gd_item id="167020073" /><!-- Ancient Manastone: Evasion +24 -->
-			<gd_item id="167020074" /><!-- Ancient Manastone: Crit Strike +24 -->
-			<gd_item id="167020075" /><!-- Ancient Manastone: Crit Spell +9 -->
-			<gd_item id="167020076" /><!-- Ancient Manastone: Spell Resist +11 -->
-			<gd_item id="167020077" /><!-- Ancient Manastone: Physical Defense +100 -->
-			<gd_item id="167020078" /><!-- Ancient Manastone: Resist Magic +20 -->
-			<gd_item id="167020079" /><!-- Ancient Manastone: Attack +8 -->
-			<gd_item id="167020080" /><!-- Ancient Manastone: Magical Accuracy +22 -->
-			<gd_item id="167020081" /><!-- Ancient Manastone: Magic Boost +35 -->
-			<gd_item id="167020082" /><!-- Ancient Manastone: Magic Suppression +50 -->
-			<gd_item id="167020083" /><!-- Ancient Manastone: Healing Boost +6 -->
-		</gd_items>
-	</gd_rule>
 	<!-- Bundles -->
 	<gd_rule rule_name="Captured Shelter Relics Bundle" base_chance="100" member_limit="6">
 		<gd_maps>
@@ -248,7 +290,7 @@
 			<gd_item id="188053708" /><!-- Stolen Shelter Consumables Bundle -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Captured Shelter Idian Bundle" base_chance="7">
+	<gd_rule rule_name="Captured Shelter Idian Bundle" base_chance="20">
 		<gd_maps>
 			<gd_map map_id="301140000" /><!-- Seized_Danuar_Sanctuary -->
 		</gd_maps>
@@ -261,20 +303,7 @@
 			<gd_item id="188053714" /><!-- Captured Shelter Idian Bundle -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Stigma Sack" base_chance="5">
-		<gd_maps>
-			<gd_map map_id="301140000" /><!-- Seized_Danuar_Sanctuary -->
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="235619" /><!-- Warmage Suyaroka -->
-			<gd_npc npc_id="235620" /><!-- Chief Medic Tagnu -->
-			<gd_npc npc_id="235621" /><!-- Virulent Ukahim -->
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="188053783" /><!-- Stigma Sack -->
-		</gd_items>
-	</gd_rule>
-	<gd_rule rule_name="Sanctuary Conquerer Mark Bundle" base_chance="20" member_limit="6">
+	<gd_rule rule_name="Sanctuary Conquerer Mark Bundle" base_chance="100" member_limit="6">
 		<gd_maps>
 			<gd_map map_id="301140000" /><!-- Seized_Danuar_Sanctuary -->
 		</gd_maps>
@@ -287,31 +316,30 @@
 			<gd_item id="188052583" /><!-- Sanctuary Conquerer Mark Bundle -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Conqueror's Mark" base_chance="100" member_limit="6" min_count="60" max_count="90">
+	<gd_rule rule_name="Recharger Bundle" base_chance="20">
 		<gd_maps>
-			<gd_map map_id="301140000" /><!-- Seized_Danuar_Sanctuary -->
+			<gd_map map_id="301140000"/><!-- Seized_Danuar_Sanctuary -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="235619" /><!-- Warmage Suyaroka -->
-			<gd_npc npc_id="235620" /><!-- Chief Medic Tagnu -->
-			<gd_npc npc_id="235621" /><!-- Virulent Ukahim -->
+			<gd_npc npc_id="235619"/><!-- Warmage Suyaroka -->
+			<gd_npc npc_id="235620"/><!-- Chief Medic Tagnu -->
+			<gd_npc npc_id="235621"/><!-- Virulent Ukahim -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="186000238" /><!-- Conqueror's Mark -->
+			<gd_item id="188053929"/><!-- Recharger Bundle -->
 		</gd_items>
 	</gd_rule>
-	<!-- TODO: find out what items this bundle contains -->
-	<!--<gd_rule rule_name="Recharger Bundle" base_chance="20">
+	<gd_rule rule_name="Weapon Shard" base_chance="15" fixed_chance="true">
 		<gd_maps>
-			<gd_map map_id="301140000"/><!- Seized_Danuar_Sanctuary ->
+			<gd_map map_id="301140000"/><!-- Seized_Danuar_Sanctuary -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="235619"/><!- Warmage Suyaroka ->
-			<gd_npc npc_id="235620"/><!- Chief Medic Tagnu ->
-			<gd_npc npc_id="235621"/><!- Virulent Ukahim ->
+			<gd_npc npc_id="235619"/><!-- Warmage Suyaroka -->
+			<gd_npc npc_id="235620"/><!-- Chief Medic Tagnu -->
+			<gd_npc npc_id="235621"/><!-- Virulent Ukahim -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="188053929"/><!- Recharger Bundle ->
+			<gd_item id="169405253" /><!-- Weapon Shard -->
 		</gd_items>
-	</gd_rule> -->
+	</gd_rule>
 </global_rules>

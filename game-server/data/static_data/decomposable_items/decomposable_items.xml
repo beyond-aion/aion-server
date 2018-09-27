@@ -21458,7 +21458,7 @@
 	<decomposable item_id="188052582" /><!-- Dragon's Conquerer Mark Box -->
 	<decomposable item_id="188052583"><!-- Sanctuary Conquerer Mark Bundle -->
 		<items>
-			<item id="186000238" /><!-- Conqueror's Mark -->
+			<item id="186000238" min_count="60" max_count="90" /><!-- Conqueror's Mark -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188052584" /><!-- Dragon's Crafting Box -->
@@ -21469,7 +21469,32 @@
 	</decomposable>
 	<decomposable item_id="188052586" /><!-- Sanctuary Fortress Crest Bundle -->
 	<decomposable item_id="188052587" /><!-- Dragon's Improvement Box -->
-	<decomposable item_id="188052588" /><!-- Sanctuary Idian Bundle -->
+	<decomposable item_id="188052588"><!-- Sanctuary Idian Bundle -->
+		<items>
+			<item id="166050031" /><!-- Esoteric Idian: Physical Attack -->
+		</items>
+		<items>
+			<item id="166050032" /><!-- Esoteric Idian: Magical Attack -->
+		</items>
+		<items>
+			<item id="166050033" /><!-- Esoteric Idian: Physical Defense -->
+		</items>
+		<items>
+			<item id="166050034" /><!-- Esoteric Idian: Magical Defense -->
+		</items>
+		<items>
+			<item id="166050035" /><!-- Esoteric Idian: Assistance -->
+		</items>
+		<items>
+			<item id="166050036" /><!-- Esoteric Idian: Resistance -->
+		</items>
+		<items>
+			<item id="166050037" /><!-- Esoteric Idian: Physical/Magical Attack -->
+		</items>
+		<items>
+			<item id="166050038" /><!-- Esoteric Idian: Physical/Magical Defense -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188052589" /><!-- [Event] Consumables Bundle -->
 	<decomposable item_id="188052590"><!-- Cuperine Ceramium Piece Case -->
 		<items chance="95.0">
@@ -22442,20 +22467,36 @@
 		</items>
 	</decomposable>
 	<decomposable item_id="188052613"><!-- Sanctuary Treasure Crate -->
-		<items>
-			<item id="152012588" /><!-- Wind Fragment -->
-		</items>
-		<items>
-			<item id="152012591" /><!-- Water Fragment -->
-		</items>
-		<items>
-			<item id="169405254" /><!-- Earth Trace -->
-		</items>
-		<items>
+		<items chance="20">
+			<item id="186000236" min_count="4" max_count="12" /><!-- Blood Mark -->
 			<item id="152012585" /><!-- Wind Mote -->
+			<item id="152012617" /><!-- Pure Crystal -->
+			<item id="169305252" /><!-- Fury Powder -->
+			<random_item type="ANCIENTITEMS" min_count="1" max_count="2" />
+			<random_item type="SPECIAL_MANASTONE_EPIC_GRADE" />
 		</items>
-		<items>
-			<item id="169405252" /><!-- Fury Powder -->
+		<items chance="20">
+			<item id="186000236" min_count="4" max_count="12" /><!-- Blood Mark -->
+			<item id="152012588" /><!-- Wind Fragment -->
+			<item id="152012619" /><!-- Pure Ore -->
+			<item id="169405254" /><!-- Earth Trace -->
+			<random_item type="ANCIENTITEMS" min_count="1" max_count="2" />
+			<random_item type="SPECIAL_MANASTONE_EPIC_GRADE" />
+		</items>
+		<items chance="20">
+			<item id="186000236" min_count="4" max_count="12" /><!-- Blood Mark -->
+			<item id="152012591" /><!-- Water Fragment -->
+			<item id="152012621" /><!-- Pure Gemstone -->
+			<item id="186000242" /><!-- Ceramium Medal -->
+			<random_item type="ANCIENTITEMS" min_count="1" max_count="3" />
+			<random_item type="SPECIAL_MANASTONE_UNIQUE_GRADE" />
+		</items>
+		<items chance="40">
+			<item id="186000236" min_count="4" max_count="12" /><!-- Blood Mark -->
+			<item id="152012585" /><!-- Wind Mote -->
+			<item id="169405268" min_count="5" /><!-- Lightning Vitality -->
+			<random_item type="ANCIENTITEMS" min_count="1" max_count="3" />
+			<random_item type="SPECIAL_MANASTONE_UNIQUE_GRADE" />
 		</items>
 	</decomposable>
 	<decomposable item_id="188052614"><!-- Defender's Augment Bundle -->
@@ -34006,7 +34047,16 @@
 	<decomposable item_id="188053926" /><!-- Middle Grade Katalium Snowball -->
 	<decomposable item_id="188053927" /><!-- Low Grade Katalium Snowball -->
 	<decomposable item_id="188053928" /><!-- Katalium Snowball -->
-	<decomposable item_id="188053929" /><!-- Recharger Bundle -->
+	<decomposable item_id="188053929"><!-- Recharger Bundle -->
+		<items>
+			<item id="168310016" race="ELYOS" /><!-- Major Deep Conditioning: Level 2 -->
+			<item id="168310017" race="ASMODIANS" /><!-- Major Deep Conditioning: Level 2 -->
+		</items>
+		<items>
+			<item id="168310018" race="ELYOS" /><!-- Major Deep Conditioning: Level 2 -->
+			<item id="168310019" race="ASMODIANS" /><!-- Major Deep Conditioning: Level 2 -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188053930" /><!-- Received Gift -->
 	<decomposable item_id="188053931" /><!-- Unknown Bundle -->
 	<decomposable item_id="188053932" /><!-- Unknown Bundle -->
