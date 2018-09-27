@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../global_rules.xsd">
+	<!-- Moltenus -->
+	<gd_rule rule_name="Named Weapon (Epic)" base_chance="100" fixed_chance="true">
+		<gd_maps>
+			<gd_map map_id="400010000" /><!-- Reshanta -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="251045" /><!-- Moltenus -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="100001379" /><!-- Moltenus' Sword -->
+			<gd_item id="100101055" /><!-- Moltenus' Mace -->
+			<gd_item id="100201223" /><!-- Moltenus' Dagger -->
+			<gd_item id="100501066" /><!-- Moltenus' Orb -->
+			<gd_item id="100601122" /><!-- Moltenus' Spellbook -->
+			<gd_item id="100901072" /><!-- Moltenus' Knife -->
+			<gd_item id="101301009" /><!-- Moltenus' Spear -->
+			<gd_item id="101501087" /><!-- Moltenus' Staff -->
+			<gd_item id="101701102" /><!-- Moltenus' Bow -->
+			<gd_item id="101800808" /><!-- Moltenus' Pistol -->
+			<gd_item id="101900812" /><!-- Moltenus' Aethercannon -->
+			<gd_item id="102000846" /><!-- Moltenus' Harp -->
+			<gd_item id="102100707" /><!-- Moltenus' Cipher-Blade -->
+			<gd_item id="115001427" /><!-- Moltenus' Shield -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Enchantment Stone" min_count="5" base_chance="100" fixed_chance="true" member_limit="192">
+		<gd_maps>
+			<gd_map map_id="400010000" /><!-- Reshanta -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="251045" /><!-- Moltenus -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="166020000" /><!-- Omega Enchantment Stone -->
+		</gd_items>
+	</gd_rule>
+	<!-- Menotios -->
+	<gd_rule rule_name="Named Weapon (Unique)" base_chance="100" fixed_chance="true">
+		<gd_maps>
+			<gd_map map_id="400010000" /><!-- Reshanta -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="251001" /><!-- Menotios -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="100000322" /><!-- Menotios' Sword -->
+			<gd_item id="100100235" /><!-- Menotios' Mace -->
+			<gd_item id="100200343" /><!-- Menotios' Dagger -->
+			<gd_item id="100500247" /><!-- Menotios' Jewel -->
+			<gd_item id="100600262" /><!-- Menotios' Tome -->
+			<gd_item id="100900240" /><!-- Menotios' Greatsword -->
+			<gd_item id="101300236" /><!-- Menotios' Spear -->
+			<gd_item id="101500249" /><!-- Menotios' Staff -->
+			<gd_item id="101700261" /><!-- Menotios' Bow -->
+			<gd_item id="101800316" /><!-- Menotios' Pistol -->
+			<gd_item id="101900318" /><!-- Menotios' Aethercannon -->
+			<gd_item id="102000330" /><!-- Menotios' Harp -->
+			<gd_item id="102100299" /><!-- Menotios' Cipher-Blade -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Unique)" base_chance="100" fixed_chance="true">
+		<gd_maps>
+			<gd_map map_id="400010000" /><!-- Reshanta -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="251001" /><!-- Menotios -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="110100579" /><!-- Menotios' Tunic -->
+			<gd_item id="110300540" /><!-- Menotios' Jerkin -->
+			<gd_item id="110500518" /><!-- Menotios' Hauberk -->
+			<gd_item id="110600513" /><!-- Menotios' Breastplate -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Unique)" base_chance="10" fixed_chance="true">
+		<gd_maps>
+			<gd_map map_id="400010000" /><!-- Reshanta -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="251001" /><!-- Menotios -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="123000656" /><!-- Menotios' Belt -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Legend)" base_chance="20" fixed_chance="true">
+		<gd_maps>
+			<gd_map map_id="400010000" /><!-- Reshanta -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="251001" /><!-- Menotios -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="125001267" /><!-- Menotios' Crown -->
+		</gd_items>
+	</gd_rule>
+</global_rules>
