@@ -93,7 +93,7 @@ public class TradeService {
 		}
 
 		if (!validateBuyItems(npc, tradeList, player)) {
-			PacketSendUtility.sendMessage(player, "Some items are not allowed to be selled from this npc");
+			PacketSendUtility.sendMessage(player, "Some items are not allowed to be sold from this NPC.");
 			return false;
 		}
 
@@ -178,27 +178,20 @@ public class TradeService {
 		return true;
 	}
 
-	/**
-	 * @param tradeList
-	 */
 	private static boolean validateBuyItems(Npc npc, TradeList tradeList, Player player) {
 		TradeListTemplate tradeListTemplate = tradeListData.getTradeListTemplate(npc.getObjectTemplate().getTemplateId());
 
 		Set<Integer> allowedItems = new HashSet<>();
 		for (TradeTab tradeTab : tradeListTemplate.getTradeTablist()) {
 			GoodsList goodsList = goodsListData.getGoodsListById(tradeTab.getId());
-			if (goodsList != null && goodsList.getItemIdList() != null) {
+			if (goodsList != null && goodsList.getItemIdList() != null)
 				allowedItems.addAll(goodsList.getItemIdList());
-			}
 		}
 
-		for (TradeItem tradeItem : tradeList.getTradeItems()) {
-			if (tradeItem.getCount() < 1) {
+		for (TradeItem tradeItem : tradeList.getTradeItems())
+			if (tradeItem.getCount() < 1 || !allowedItems.contains(tradeItem.getItemId()))
 				return false;
-			}
-			if (!allowedItems.contains(tradeItem.getItemId()))
-				return false;
-		}
+
 		return true;
 	}
 
