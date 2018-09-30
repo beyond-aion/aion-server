@@ -147,7 +147,7 @@ public abstract class CreatureGameStats<T extends Creature> {
 	}
 
 	public Stat2 getStat(StatEnum statEnum, Stat2 stat) {
-		TreeSet<IStatFunction> functions = getStatsByStatEnum(statEnum);
+		List<IStatFunction> functions = getStatsSorted(statEnum);
 		if (functions != null) {
 			for (IStatFunction func : functions) {
 				if (func.validate(stat)) {
@@ -160,7 +160,7 @@ public abstract class CreatureGameStats<T extends Creature> {
 	}
 
 	public Stat2 getItemStatBoost(StatEnum statEnum, Stat2 stat) {
-		TreeSet<IStatFunction> functions = getStatsByStatEnum(statEnum);
+		List<IStatFunction> functions = getStatsSorted(statEnum);
 		if (functions != null) {
 			for (IStatFunction func : functions) {
 				if (func.isBonus() && func.validate(stat) && (func.getOwner() instanceof Item || func.getOwner() instanceof ManaStone
@@ -319,27 +319,14 @@ public abstract class CreatureGameStats<T extends Creature> {
 	public void updateSpeedInfo() {
 	}
 
-	public TreeSet<IStatFunction> getStatsByStatEnum(StatEnum stat) {
+	/**
+	 * @return All stat functions for the given stat sorted by priority
+	 */
+	public List<IStatFunction> getStatsSorted(StatEnum stat) {
 		lock.readLock().lock();
 		try {
 			TreeSet<IStatFunction> allStats = stats.get(stat);
-			if (allStats == null)
-				return null;
-			List<IStatFunction> setFuncs = null;
-			for (IStatFunction func : allStats) {
-				if (func.getPriority() >= Integer.MAX_VALUE - 10) {
-					if (setFuncs == null)
-						setFuncs = new ArrayList<>();
-					setFuncs.add(func);
-				} else if (setFuncs != null) {
-					// all StatSetFunctions added
-					break;
-				}
-			}
-			if (setFuncs == null)
-				return new TreeSet<>(allStats);
-			else
-				return new TreeSet<>(setFuncs);
+			return allStats == null ? null : new ArrayList<>(allStats);
 		} finally {
 			lock.readLock().unlock();
 		}
