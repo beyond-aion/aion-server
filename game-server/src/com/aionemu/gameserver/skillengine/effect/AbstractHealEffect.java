@@ -57,7 +57,7 @@ public abstract class AbstractHealEffect extends EffectTemplate {
 			finalHeal = effected.getGameStats().getStat(StatEnum.HEAL_SKILL_DEBOOST, finalHeal).getCurrent();
 		}
 
-		if (type == HealType.HP && (effected.getEffectController().isAbnormalSet(AbnormalState.DISEASE) || finalHeal < 0))
+		if (type == HealType.HP && effected.getEffectController().isAbnormalSet(AbnormalState.DISEASE))
 			finalHeal = 0;
 		else
 			finalHeal = maxCurValue - currentValue < finalHeal ? (maxCurValue - currentValue) : finalHeal;
@@ -69,7 +69,7 @@ public abstract class AbstractHealEffect extends EffectTemplate {
 		Creature effected = effect.getEffected();
 		int healValue = effect.getReserveds(position).getValue();
 
-		if (healValue == 0)
+		if (healValue <= 0)
 			return;
 
 		switch (healType) {
