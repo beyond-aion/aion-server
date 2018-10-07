@@ -1082,10 +1082,6 @@
 			<spot x="1069.064" y="1048.692" z="168.0876" h="83"/>
 			<spot x="1069.404" y="1045.395" z="168.6673" h="111"/>
 		</spawn>
-		<!-- Rock -->
-		<spawn npc_id="882297" respawn_time="295">
-			<spot x="989.3865" y="508.6089" z="200.6633" h="30" static_id="131"/>
-		</spawn>
 		<!-- Rockhusk Agrint -->
 		<spawn npc_id="234267" respawn_time="295">
 			<spot x="1280.158" y="1033.623" z="150.0463" h="81"/>

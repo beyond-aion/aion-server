@@ -255,6 +255,10 @@
 						<spot x="596.9104" y="726.054" z="161.7644" static_id="86"/>
 						<spot x="982.3692" y="880.9028" z="171.757" static_id="60"/>
 					</spawn>
+					<!-- Rock -->
+					<spawn npc_id="882297" respawn_time="295">
+						<spot x="989.3865" y="508.6089" z="200.6633" h="30" static_id="131"/>
+					</spawn>
 					<!-- Squad Prime Knight (LDF5_Fortress_7011_Guard_Kn_MistOn_D_4) -->
 					<spawn npc_id="251963">
 						<spot x="747.99310" y="415.22891" z="141.95181" h="30"/>
@@ -897,6 +901,10 @@
 						<spot x="596.9104" y="726.054" z="161.7644" static_id="86"/>
 						<spot x="982.3692" y="880.9028" z="171.757" static_id="60"/>
 					</spawn>
+					<!-- Rock -->
+					<spawn npc_id="882297" respawn_time="295">
+						<spot x="989.3865" y="508.6089" z="200.6633" h="30" static_id="131"/>
+					</spawn>
 					<!-- Garrison Prime Templar (LDF5_Fortress_7011_Guard_Kn_MistOn_L_4) -->
 					<spawn npc_id="251883">
 						<spot x="747.99310" y="415.22891" z="141.95181" h="30"/>
@@ -1380,6 +1388,10 @@
 					</spawn>
 				</siege_mod>
 				<siege_mod mod="SIEGE">
+					<!-- Rock -->
+					<spawn npc_id="882296">
+						<spot x="989.3865" y="508.6089" z="200.6633" h="30" static_id="131"/>
+					</spawn>
 					<!-- Pashid Prime Dragoon (LDF5_Fortress_7011_Guard_Kn_MistOn_DR_4) -->
 					<spawn npc_id="252043">
 						<spot x="747.99310" y="415.22891" z="141.95181" h="30"/>
