@@ -25,9 +25,13 @@ public class CM_ATREIAN_PASSPORT extends AionClientPacket {
 
 	@Override
 	protected void readImpl() {
-		int count = readUC();
-		byte unk = readC(); 
+		int count = readUH();
 		for (int i = 0; i < count; i++) {
+			if (getRemainingBytes() < 8) {
+				LoggerFactory.getLogger(CM_ATREIAN_PASSPORT.class).warn("Received invalid passport count " + count + " with only data for " + i
+					+ " passports from " + getConnection().getActivePlayer() + "\nCurrent passport data: " + passports);
+				break;
+			}
 			int passportId = readD();
 			int timestamp = readD();
 			passports.compute(passportId, (ppId, timestamps) -> {
@@ -37,8 +41,6 @@ public class CM_ATREIAN_PASSPORT extends AionClientPacket {
 				return timestamps;
 			});
 		}
-		if (unk != 0)
-			LoggerFactory.getLogger(CM_ATREIAN_PASSPORT.class).warn("Received unknown flag [" + unk + "] from " + getConnection().getActivePlayer() + " with " + count + " passports");
 	}
 
 	@Override
