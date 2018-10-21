@@ -410,8 +410,12 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 	 */
 	public void addTask(TaskId taskId, Future<?> task) {
 		tasks.compute(taskId.ordinal(), (k, oldTask) -> {
-			if (oldTask != null)
+			if (oldTask != null) {
 				oldTask.cancel(false);
+				if (taskId == TaskId.DESPAWN) {
+					log.warn("Despawn task for " + getOwner() + " was cancelled and replaced with another one, possibly delaying the intended despawn time.");
+				}
+			}
 			return task;
 		});
 	}
