@@ -146,7 +146,23 @@
 			<gd_item id="188053745" /><!-- Elegant High Grade Composite Manastone Bundle -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Composite Stone Bundle" base_chance="1" min_count="1" fixed_chance="true">
+	<gd_rule rule_name="Composite Stone Bundle (Elyos)" base_chance="1" min_count="1" fixed_chance="true" restriction_race="ELYOS">
+		<gd_maps>
+			<gd_map map_id="210050000" /><!-- Inggison -->
+		</gd_maps>
+		<gd_zones>
+			<gd_zone zone="HANARKAND_210050000" />
+			<gd_zone zone="HANARKAND_ORACLE_CHAMBER_210050000" />
+		</gd_zones>
+		<gd_ratings>
+			<gd_rating rating="ELITE" />
+			<gd_rating rating="HERO" />
+		</gd_ratings>
+		<gd_items>
+			<gd_item id="188053745" /><!-- Elegant High Grade Composite Manastone Bundle -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Composite Stone Bundle (Asmodians)" base_chance="3" min_count="1" fixed_chance="true" restriction_race="ASMODIANS">
 		<gd_maps>
 			<gd_map map_id="210050000" /><!-- Inggison -->
 		</gd_maps>
