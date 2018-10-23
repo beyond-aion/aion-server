@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.model.team.group.events;
 
-import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.team.common.events.PlayerLeavedEvent;
 import com.aionemu.gameserver.model.team.common.legacy.GroupEvent;
@@ -8,11 +7,8 @@ import com.aionemu.gameserver.model.team.group.PlayerGroup;
 import com.aionemu.gameserver.model.team.group.PlayerGroupMember;
 import com.aionemu.gameserver.model.team.group.PlayerGroupService;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_GROUP_MEMBER_INFO;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_LEAVE_GROUP_MEMBER;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
-import com.aionemu.gameserver.services.instance.InstanceService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
  * @author ATracer
@@ -83,18 +79,6 @@ public class PlayerGroupLeavedEvent extends PlayerLeavedEvent<PlayerGroupMember,
 				break;
 		}
 
-		if (leavedPlayer.isOnline()) {
-			PacketSendUtility.sendPacket(leavedPlayer, new SM_LEAVE_GROUP_MEMBER());
-			if (team.equals(leavedPlayer.getPosition().getWorldMapInstance().getRegisteredTeam())) {
-				PacketSendUtility.sendPacket(leavedPlayer, SM_SYSTEM_MESSAGE.STR_MSG_LEAVE_INSTANCE_NOT_PARTY());
-				leavedPlayer.getController().addTask(TaskId.DESPAWN, ThreadPoolManager.getInstance().schedule(() -> {
-					if (leavedPlayer.getCurrentTeamId() != team.getObjectId()) {
-						if (leavedPlayer.getPosition().getWorldMapInstance().getRegisteredTeam() != null)
-							InstanceService.moveToExitPoint(leavedPlayer);
-					}
-				}, 30000));
-			}
-		}
 		super.handleEvent();
 	}
 
