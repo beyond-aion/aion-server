@@ -379,4 +379,36 @@
 			<gd_item id="152012577" /><!-- Wrathful Anima -->
 		</gd_items>
 	</gd_rule>
+	<gd_rule rule_name="Random Anima" base_chance="25" fixed_chance="true">
+		<gd_maps>
+			<gd_map map_id="210090000" /><!-- Idian Depths Light -->
+			<gd_map map_id="220100000" /><!-- Idian Depths Dark -->
+		</gd_maps>
+		<gd_ratings>
+			<gd_rating rating="NORMAL" />
+			<gd_rating rating="ELITE" />
+			<gd_rating rating="HERO" />
+		</gd_ratings>
+		<gd_items>
+			<gd_item id="152012559" /><!-- Grassy Anima -->
+			<gd_item id="152012560" /><!-- Tainted Anima -->
+			<gd_item id="152012561" /><!-- Frozen Anima -->
+			<gd_item id="152012562" /><!-- Windy Anima -->
+			<gd_item id="152012563" /><!-- Sylvan Anima -->
+			<gd_item id="152012564" /><!-- Mysterious Anima -->
+			<gd_item id="152012565" /><!-- Snowy Anima -->
+			<gd_item id="152012566" /><!-- Devasted Anima -->
+			<gd_item id="152012567" /><!-- Mossy Anima -->
+			<gd_item id="152012568" /><!-- Waterlogged Anima -->
+			<gd_item id="152012569" /><!-- Vengeful Anima -->
+			<gd_item id="152012570" /><!-- Hopeless Anima -->
+			<gd_item id="152012571" /><!-- Zealous Anima -->
+			<gd_item id="152012572" /><!-- Ambitious Anima -->
+			<gd_item id="152012573" /><!-- Remorseful Anima -->
+			<gd_item id="152012574" /><!-- Avaricious Anima -->
+			<gd_item id="152012575" /><!-- Desperate Anima -->
+			<gd_item id="152012576" /><!-- Deluded Anima -->
+			<gd_item id="152012577" /><!-- Wrathful Anima -->
+		</gd_items>
+	</gd_rule>
 </global_rules>
