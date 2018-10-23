@@ -18,7 +18,7 @@
 			<gd_item id="186000237" /> <!-- Ancient Coin" -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Crafting Material" base_chance="15">
+	<gd_rule rule_name="Named Crafting Material" base_chance="30">
 		<gd_maps>
 			<gd_map map_id="210090000" /><!-- Idian Depths Light -->
 			<gd_map map_id="220100000" /><!-- Idian Depths Dark -->
