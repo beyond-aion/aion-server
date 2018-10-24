@@ -6,6 +6,9 @@ import java.nio.channels.SocketChannel;
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.Queue;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadPoolExecutor;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,7 +17,6 @@ import com.aionemu.chatserver.network.factories.GsPacketHandlerFactory;
 import com.aionemu.chatserver.service.GameServerService;
 import com.aionemu.commons.network.AConnection;
 import com.aionemu.commons.network.Dispatcher;
-import com.aionemu.commons.network.util.ThreadPoolManager;
 
 /**
  * @author KID
@@ -22,10 +24,15 @@ import com.aionemu.commons.network.util.ThreadPoolManager;
 public class GsConnection extends AConnection<GsServerPacket> {
 
 	private static final Logger log = LoggerFactory.getLogger(GsConnection.class);
+	private static final Executor packetExecutor = Executors.newCachedThreadPool();
 	private final Deque<GsServerPacket> sendMsgQueue = new ArrayDeque<>();
 	private State state;
 
-	public static enum State {
+	static {
+		((ThreadPoolExecutor) packetExecutor).setCorePoolSize(1);
+	}
+
+	public enum State {
 		CONNECTED,
 		AUTHED
 	}
@@ -43,7 +50,7 @@ public class GsConnection extends AConnection<GsServerPacket> {
 	public boolean processData(ByteBuffer data) {
 		GsClientPacket pck = GsPacketHandlerFactory.handle(data, this);
 		if (pck != null && pck.read())
-			ThreadPoolManager.getInstance().execute(pck);
+			packetExecutor.execute(pck);
 		return true;
 	}
 

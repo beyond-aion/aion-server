@@ -18,7 +18,6 @@ import com.aionemu.chatserver.network.gameserver.GsConnectionFactoryImpl;
 import com.aionemu.chatserver.network.netty.pipeline.LoginToClientPipeLineFactory;
 import com.aionemu.commons.network.NioServer;
 import com.aionemu.commons.network.ServerCfg;
-import com.aionemu.commons.network.util.ThreadPoolManager;
 
 /**
  * @author ATracer
@@ -47,7 +46,7 @@ public class NettyServer {
 
 		nioServer = new NioServer(NetworkConfig.NIO_READ_WRITE_THREADS,
 			new ServerCfg(NetworkConfig.GAMESERVER_SOCKET_ADDRESS, "GS Connections", new GsConnectionFactoryImpl()));
-		nioServer.connect(ThreadPoolManager.getInstance());
+		nioServer.connect(Executors.newSingleThreadExecutor());
 	}
 
 	/**
