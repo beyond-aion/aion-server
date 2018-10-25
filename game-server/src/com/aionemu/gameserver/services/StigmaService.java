@@ -392,14 +392,12 @@ public class StigmaService {
 
 	public static void chargeStigma(Player player, Item stigma, Item chargeStone) {
 		Stigma stigmaInfo = stigma.getItemTemplate().getStigma();
-		if (stigma.getItemId() != chargeStone.getItemId() || chargeStone.getEnchantLevel() > 0)
+		if (stigma.getItemId() != chargeStone.getItemId() || chargeStone.getEnchantLevel() > 0 || stigma.getEnchantLevel() >= 10)
 			return;
 		if (!stigma.isStigmaChargeable())
 			return;
 
-		float success = 100f;
-		success -= Math.min(9, stigma.getEnchantLevel()) * 10f; // reduce by 10% per enchant level, cap at 10% end rate
-		final boolean isSuccess = Rnd.chance() < success;
+		final boolean isSuccess = Rnd.chance() < Math.max(25, 100 - (stigma.getEnchantLevel() * 10));
 
 		final int parentItemId = stigma.getItemId();
 		final int parentObjectId = stigma.getObjectId();
