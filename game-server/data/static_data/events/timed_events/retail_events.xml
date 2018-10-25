@@ -3328,22 +3328,40 @@
 			</spawn_map>
 		</spawns>
 	</event>
-	<event name="Alchemy Event" start="2018-06-08T00:00:00" end="2018-06-24T23:59:59">
+	<event name="Alchemy Event" start="2018-10-26T00:00:00" end="2018-11-04T23:59:59" theme="HALLOWEEN">
 		<!-- [Event] Alchemist's Pouch -->
 		<event_drops>
-			<gd_rule rule_name="Alchemy Event Drop" min_count="1" base_chance="100" min_diff="-15" max_diff="70">
+			<gd_rule rule_name="Alchemy Boss Event Drop" min_count="1" base_chance="100" min_diff="-15" max_diff="70">
 				<gd_maps>
-					<gd_map map_id="300240000" /><!-- Aturam_Sky_Fortress -->
-					<gd_map map_id="300610000" /><!-- Raksang_Ruins -->
-					<gd_map map_id="301270000" /><!-- Linkgate_Foundry -->
+					<gd_map map_id="301130000" /><!-- Sauro Supply Base -->
+					<gd_map map_id="301140000" /><!-- Seized Danuar Sanctuary -->
 				</gd_maps>
 				<gd_npcs>
-					<gd_npc npc_id="217376" /><!-- Ahunatal Shadowslip -->
-					<gd_npc npc_id="236306" /><!-- Reviver Nasto -->
-					<gd_npc npc_id="234990" /><!-- Wounded Belsagos -->
-					<gd_npc npc_id="233898" /><!-- Volatile Belsagos -->
-					<gd_npc npc_id="234991" /><!-- Furious Belsagos -->
+					<gd_npc npc_id="230849" /><!-- Guard Captain Rohuka -->
+					<gd_npc npc_id="230850" /><!-- Researcher Teselik -->
+					<gd_npc npc_id="230851" /><!-- Chief Gunner Kurmata -->
+					<gd_npc npc_id="230853" /><!-- Chief of Staff Moriata -->
+					<gd_npc npc_id="230857" /><!-- Guard Captain Ahuradim -->
+					<gd_npc npc_id="230858" /><!-- Brigade General Sheba -->
+					<gd_npc npc_id="233255" /><!-- Gatekeeper Stranir -->
+					<gd_npc npc_id="233256" /><!-- Darkblade Ovanuka -->
+					<gd_npc npc_id="233257" /><!-- Archmagus Sayahum -->
+					<gd_npc npc_id="233258" /><!-- Derakanak the Reaver -->
+					<gd_npc npc_id="233316" /><!-- Commander Ranodim -->
 				</gd_npcs>
+				<gd_items>
+					<gd_item id="188052642" /><!-- [Event] Alchemist's Pouch -->
+				</gd_items>
+			</gd_rule>
+			<gd_rule rule_name="Alchemy Random Event Drop" min_count="1" base_chance="10" min_diff="-15" max_diff="70" fixed_chance="true">
+				<gd_maps>
+					<gd_map map_id="301130000" /><!-- Sauro Supply Base -->
+					<gd_map map_id="301140000" /><!-- Seized Danuar Sanctuary -->
+				</gd_maps>
+				<gd_ratings>
+					<gd_rating rating="ELITE" />
+					<gd_rating rating="NORMAL" />
+				</gd_ratings>
 				<gd_items>
 					<gd_item id="188052642" /><!-- [Event] Alchemist's Pouch -->
 				</gd_items>
@@ -3365,29 +3383,29 @@
 				</spawn>
 				<!-- Premium Treasure Box -->
 				<spawn npc_id="831785" respawn_time="295">
-					<spot x="1270" y="1329" z="204" />
-					<spot x="1270" y="1324" z="204" />
-					<spot x="1270" y="1319" z="204" />
+					<spot x="1270" y="1329" z="204.42" />
+					<spot x="1270" y="1324" z="204.42" />
+					<spot x="1270" y="1319" z="204.42" />
 				</spawn>
 				<!-- Common Treasure Box -->
 				<spawn npc_id="831786" respawn_time="295">
-					<spot x="1282" y="1328" z="204" />
-					<spot x="1279" y="1328" z="204" />
-					<spot x="1282" y="1322" z="204" />
-					<spot x="1279" y="1322" z="204" />
-					<spot x="1279" y="1325" z="204" />
-					<spot x="1282" y="1325" z="204" />
+					<spot x="1282" y="1328" z="204.42" />
+					<spot x="1285" y="1328" z="204.42" />
+					<spot x="1282" y="1322" z="204.42" />
+					<spot x="1285" y="1322" z="204.42" />
+					<spot x="1285" y="1325" z="204.42" />
+					<spot x="1282" y="1325" z="204.42" />
 				</spawn>
 			</spawn_map>
 			<!-- Sanctum -->
 			<spawn_map map_id="110010000">
 				<!-- Suspicious Alchemist -->
 				<spawn npc_id="831787" respawn_time="295">
-					<spot x="1532" y="1511" z="566" h="67" />
+					<spot x="1533" y="1517" z="566" h="67" />
 				</spawn>
 				<!-- Suspicious Alchemist -->
 				<spawn npc_id="831788" respawn_time="295">
-					<spot x="1530" y="1508" z="566" h="60" />
+					<spot x="1533" y="1506" z="566" h="60" />
 				</spawn>
 				<!-- Premium Treasure Box -->
 				<spawn npc_id="831785" respawn_time="120">

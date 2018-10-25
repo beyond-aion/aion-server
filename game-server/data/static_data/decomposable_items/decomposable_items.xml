@@ -15090,10 +15090,68 @@
 	<decomposable item_id="188051868" /><!-- [Event] Strongest Inquin Form Candy Pouch -->
 	<decomposable item_id="188051869" /><!-- [Event] Lovely Dye Pouch -->
 	<decomposable item_id="188051870" /><!-- [Event] Heavy Scroll Bundle -->
-	<decomposable item_id="188051871" /><!-- [Harvest Revel] Display Furniture Shopping Bag -->
-	<decomposable item_id="188051872" /><!-- [Harvest Revel] Functional Furniture Shopping Bag -->
-	<decomposable item_id="188051873" /><!-- [Harvest Revel] Decorative Furniture Shopping Bag -->
-	<decomposable item_id="188051874" /><!-- Harvest Revel Furniture Set Box -->
+	<decomposable item_id="188051871"><!-- [Harvest Revel] Display Furniture Shopping Bag -->
+		<items>
+			<item id="170000048" /><!-- Harvest Revel Festival Shelf -->
+		</items>
+		<items>
+			<item id="170120034" /><!-- Harvest Revel Bed -->
+		</items>
+		<items>
+			<item id="170130053" /><!-- Harvest Revel Couch -->
+		</items>
+		<items>
+			<item id="170150001" /><!-- Harvest Revel Pumpkin Lighting -->
+		</items>
+		<items>
+			<item id="170150002" /><!-- Harvest Revel Wall Lighting -->
+		</items>
+		<items>
+			<item id="170160011" /><!-- Harvest Revel Partition -->
+		</items>
+		<items>
+			<item id="170200025" /><!-- Harvest Revel Rug -->
+		</items>
+		<items>
+			<item id="170410030" /><!-- Harvest Revel Chair -->
+		</items>
+		<items>
+			<item id="170420037" /><!-- Harvest Revel Ornament Pile -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188051872"><!-- [Harvest Revel] Functional Furniture Shopping Bag -->
+		<items>
+			<item id="170420035" /><!-- Harvest Revel Banquet Table -->
+		</items>
+		<items>
+			<item id="170100024" /><!-- Harvest Revel Log Cabinet -->
+		</items>
+		<items>
+			<item id="170100023" /><!-- Pumpkin-decorated Cabinet -->
+		</items>
+		<items>
+			<item id="170190054" /><!-- Pumpkin-decorated Tree -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188051873"><!-- [Harvest Revel] Decorative Furniture Shopping Bag -->
+		<items>
+			<item id="171110052" /><!-- Pumpkin Wallpaper -->
+		</items>
+		<items>
+			<item id="171130032" /><!-- Star-patterned Floor -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188051874"><!-- Harvest Revel Furniture Set Box -->
+		<items chance="50">
+			<item id="188051872" /><!-- [Harvest Revel] Functional Furniture Shopping Bag -->
+		</items>
+		<items chance="10">
+			<item id="188051873" /><!-- [Harvest Revel] Decorative Furniture Shopping Bag -->
+		</items>
+		<items chance="40">
+			<item id="188051871" /><!-- [Harvest Revel] Display Furniture Shopping Bag -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188051875" /><!-- [Solorius] Display Furniture Pack -->
 	<decomposable item_id="188051876" /><!-- [Solorius] Functional Furniture Pack -->
 	<decomposable item_id="188051877" /><!-- [Solorius] Decorative Furniture Pack -->
