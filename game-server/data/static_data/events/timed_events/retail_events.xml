@@ -3382,13 +3382,13 @@
 					<spot x="1277" y="1340" z="204" h="90" />
 				</spawn>
 				<!-- Premium Treasure Box -->
-				<spawn npc_id="831785" respawn_time="295">
+				<spawn npc_id="831785" respawn_time="120">
 					<spot x="1270" y="1329" z="204.42" />
 					<spot x="1270" y="1324" z="204.42" />
 					<spot x="1270" y="1319" z="204.42" />
 				</spawn>
 				<!-- Common Treasure Box -->
-				<spawn npc_id="831786" respawn_time="295">
+				<spawn npc_id="831786" respawn_time="120">
 					<spot x="1282" y="1328" z="204.42" />
 					<spot x="1285" y="1328" z="204.42" />
 					<spot x="1282" y="1322" z="204.42" />
