@@ -4127,8 +4127,6 @@
 		<drop_group race="ELYOS"><!-- CONSUMABLES --> 
 			<drop item_id="186000102" chance="100" min_amount="5" max_amount="15" no_reduce="true" /><!-- Fortuneers Token -->
 			<drop item_id="186000100" chance="100" min_amount="5" max_amount="15" no_reduce="true" /><!-- Progress Token -->
-			<drop item_id="186000105" chance="100" min_amount="5" max_amount="15" no_reduce="true" /><!-- Daemon Token -->
-			<drop item_id="186000103" chance="100" min_amount="5" max_amount="15" no_reduce="true" /><!-- Ward Token -->
 			<drop item_id="186000399" chance="100" min_amount="10" max_amount="10" no_reduce="true" /><!-- Honorable Conqueror's Mark -->
 			<drop item_id="186000399" chance="100" min_amount="10" max_amount="10" no_reduce="true" /><!-- Honorable Conqueror's Mark -->
 			<drop item_id="166000194" chance="100" min_amount="5" max_amount="5" no_reduce="true" /><!-- Delta Enchantment Stone -->
