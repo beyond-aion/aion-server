@@ -28,8 +28,6 @@ public final class ThreadPoolManager implements Executor {
 
 	private static final Logger log = LoggerFactory.getLogger(ThreadPoolManager.class);
 
-	private static final long MAX_DELAY = TimeUnit.NANOSECONDS.toMillis(Long.MAX_VALUE - System.nanoTime()) / 2;
-
 	private final ScheduledThreadPoolExecutor scheduledPool;
 	private final ThreadPoolExecutor instantPool;
 	private final ThreadPoolExecutor longRunningPool;
@@ -64,10 +62,6 @@ public final class ThreadPoolManager implements Executor {
 			+ longRunningPool.getPoolSize() + " long running, and " + workStealingPool.getPoolSize() + " forking thread(s).");
 	}
 
-	private long validate(long delay) {
-		return Math.max(0, Math.min(MAX_DELAY, delay));
-	}
-
 	private static final class ThreadPoolRunnableWrapper extends RunnableWrapper {
 
 		private ThreadPoolRunnableWrapper(Runnable runnable) {
@@ -77,7 +71,6 @@ public final class ThreadPoolManager implements Executor {
 
 	public final ScheduledFuture<?> schedule(Runnable r, long delay, TimeUnit unit) {
 		r = new ThreadPoolRunnableWrapper(r);
-		delay = validate(delay);
 		return scheduledPool.schedule(r, delay, unit);
 	}
 
@@ -87,8 +80,6 @@ public final class ThreadPoolManager implements Executor {
 
 	public final ScheduledFuture<?> scheduleAtFixedRate(Runnable r, long delay, long period) {
 		r = new ThreadPoolRunnableWrapper(r);
-		delay = validate(delay);
-		period = validate(period);
 		return scheduledPool.scheduleAtFixedRate(r, delay, period, TimeUnit.MILLISECONDS);
 	}
 
