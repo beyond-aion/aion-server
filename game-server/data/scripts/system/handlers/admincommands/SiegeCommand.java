@@ -1,6 +1,8 @@
 package admincommands;
 
-import org.apache.commons.lang3.StringUtils;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 import org.apache.commons.lang3.math.NumberUtils;
 
 import com.aionemu.commons.database.dao.DAOManager;
@@ -16,46 +18,43 @@ import com.aionemu.gameserver.services.LegionService;
 import com.aionemu.gameserver.services.SiegeService;
 import com.aionemu.gameserver.services.siege.BalaurAssaultService;
 import com.aionemu.gameserver.services.siege.Siege;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 
-@SuppressWarnings("rawtypes")
 public class SiegeCommand extends AdminCommand {
 
-	private static final String COMMAND_START = "start";
-	private static final String COMMAND_STOP = "stop";
-	private static final String COMMAND_LIST = "list";
-	private static final String COMMAND_LIST_LOCATIONS = "locations";
-	private static final String COMMAND_LIST_SIEGES = "sieges";
-	private static final String COMMAND_CAPTURE = "capture";
-	private static final String COMMAND_ASSAULT = "assault";
-
 	public SiegeCommand() {
-		super("siege");
+		super("siege", "Controls sieges and artifacts");
+
+		// @formatter:off
+		setSyntaxInfo(
+			"<start|stop> <locationId> - Starts/stops the siege at the given location.",
+			"<list> <locations> - Shows all fortress, outpost and artifact locations.",
+			"<list> <sieges> - Shows all currently active sieges.",
+			"<capture> <locationId> <ELYOS|ASMODIANS|BALAUR|legionName|legionId> - Captures the fortress at given location as the specified owner.",
+			"<assault> <locationId> <delaySec> - Starts an assault at the given location with the specified delay in seconds."
+		);
+		// @formatter:on
 	}
 
 	@Override
 	public void execute(Player player, String... params) {
-
 		if (params.length == 0) {
 			showHelp(player);
 			return;
 		}
 
-		if (COMMAND_STOP.equalsIgnoreCase(params[0]) || COMMAND_START.equalsIgnoreCase(params[0])) {
+		if ("stop".equalsIgnoreCase(params[0]) || "start".equalsIgnoreCase(params[0])) {
 			handleStartStopSiege(player, params);
-		} else if (COMMAND_LIST.equalsIgnoreCase(params[0])) {
+		} else if ("list".equalsIgnoreCase(params[0])) {
 			handleList(player, params);
-		} else if (COMMAND_LIST_SIEGES.equals(params[0])) {
-			listLocations(player);
-		} else if (COMMAND_CAPTURE.equals(params[0])) {
+		} else if ("capture".equals(params[0])) {
 			capture(player, params);
-		} else if (COMMAND_ASSAULT.equals(params[0])) {
+		} else if ("assault".equals(params[0])) {
 			assault(player, params);
 		}
 	}
 
-	protected void handleStartStopSiege(Player player, String... params) {
+	private void handleStartStopSiege(Player player, String... params) {
 		if (params.length != 2 || !NumberUtils.isDigits(params[1])) {
 			showHelp(player);
 			return;
@@ -67,73 +66,80 @@ public class SiegeCommand extends AdminCommand {
 			return;
 		}
 
-		if (COMMAND_START.equalsIgnoreCase(params[0])) {
+		if ("start".equalsIgnoreCase(params[0])) {
 			if (SiegeService.getInstance().isSiegeInProgress(siegeLocId)) {
-				PacketSendUtility.sendMessage(player, "Siege Location " + siegeLocId + " is already under siege");
+				sendInfo(player, "Siege Location " + siegeLocId + " is already under siege");
 			} else {
-				PacketSendUtility.sendMessage(player, "Siege Location " + siegeLocId + " - starting siege!");
+				sendInfo(player, "Siege Location " + siegeLocId + " - starting siege!");
 				SiegeService.getInstance().startSiege(siegeLocId);
 			}
-		} else if (COMMAND_STOP.equalsIgnoreCase(params[0])) {
+		} else if ("stop".equalsIgnoreCase(params[0])) {
 			if (!SiegeService.getInstance().isSiegeInProgress(siegeLocId)) {
-				PacketSendUtility.sendMessage(player, "Siege Location " + siegeLocId + " is not under siege");
+				sendInfo(player, "Siege Location " + siegeLocId + " is not under siege");
 			} else {
-				PacketSendUtility.sendMessage(player, "Siege Location " + siegeLocId + " - stopping siege!");
+				sendInfo(player, "Siege Location " + siegeLocId + " - stopping siege!");
 				SiegeService.getInstance().stopSiege(siegeLocId);
 			}
 		}
 	}
 
-	protected boolean isValidSiegeLocationId(Player player, int fortressId) {
+	private boolean isValidSiegeLocationId(Player player, int fortressId) {
 
 		if (!SiegeService.getInstance().getSiegeLocations().keySet().contains(fortressId)) {
-			PacketSendUtility.sendMessage(player, "Id " + fortressId + " is invalid");
+			sendInfo(player, "Id " + fortressId + " is invalid");
 			return false;
 		}
 
 		return true;
 	}
 
-	protected void handleList(Player player, String[] params) {
+	private void handleList(Player player, String[] params) {
 		if (params.length != 2) {
 			showHelp(player);
 			return;
 		}
 
-		if (COMMAND_LIST_LOCATIONS.equalsIgnoreCase(params[1])) {
+		if ("locations".equalsIgnoreCase(params[1])) {
 			listLocations(player);
-		} else if (COMMAND_LIST_SIEGES.equalsIgnoreCase(params[1])) {
+		} else if ("sieges".equalsIgnoreCase(params[1])) {
 			listSieges(player);
 		} else {
 			showHelp(player);
 		}
 	}
 
-	protected void listLocations(Player player) {
+	private void listLocations(Player player) {
 		for (FortressLocation f : SiegeService.getInstance().getFortresses().values()) {
-			PacketSendUtility.sendMessage(player, "Fortress: " + f.getLocationId() + " belongs to " + f.getRace());
+			sendInfo(player, "Fortress: " + f.getLocationId() + " belongs to " + f.getRace());
 		}
 		for (OutpostLocation o : SiegeService.getInstance().getOutposts().values()) {
-			PacketSendUtility.sendMessage(player, "Outpost: " + o.getLocationId() + " belongs to " + o.getRace());
+			sendInfo(player, "Outpost: " + o.getLocationId() + " belongs to " + o.getRace());
 		}
-		for (ArtifactLocation a : SiegeService.getInstance().getStandaloneArtifacts().values()) {
-			PacketSendUtility.sendMessage(player, "Artifact: " + a.getLocationId() + " belongs to " + a.getRace());
+		for (ArtifactLocation a : SiegeService.getInstance().getStandaloneArtifacts()) {
+			sendInfo(player, "Artifact: " + a.getLocationId() + " belongs to " + a.getRace());
 		}
 	}
 
-	protected void listSieges(Player player) {
+	private void listSieges(Player player) {
+		StringBuilder sb = new StringBuilder();
 		for (Integer i : SiegeService.getInstance().getSiegeLocations().keySet()) {
 			Siege s = SiegeService.getInstance().getSiege(i);
 			if (s != null) {
 				int secondsLeft = SiegeService.getInstance().getRemainingSiegeTimeInSeconds(i);
-				String minSec = secondsLeft / 60 + "m ";
-				minSec += secondsLeft % 60 + "s";
-				PacketSendUtility.sendMessage(player, "Location: " + i + ": " + minSec + " left.");
+				if (secondsLeft > 0) {
+					String minSec = secondsLeft / 60 + "m ";
+					minSec += secondsLeft % 60 + "s";
+					sb.append("Location: ").append(i).append(": ").append(minSec).append(" left.");
+				}
 			}
 		}
+		if (sb.length() == 0)
+			sendInfo(player, "There are currently no active sieges.");
+		else
+			sendInfo(player, sb.toString());
 	}
 
-	protected void capture(Player player, String[] params) {
+	private void capture(Player player, String[] params) {
 		if (params.length < 3 || !NumberUtils.isNumber(params[1])) {
 			showHelp(player);
 			return;
@@ -141,7 +147,7 @@ public class SiegeCommand extends AdminCommand {
 
 		int siegeLocationId = NumberUtils.toInt(params[1]);
 		if (!SiegeService.getInstance().getSiegeLocations().keySet().contains(siegeLocationId)) {
-			PacketSendUtility.sendMessage(player, "Invalid Siege Location Id: " + siegeLocationId);
+			sendInfo(player, "Invalid Siege Location Id: " + siegeLocationId);
 			return;
 		}
 
@@ -149,14 +155,12 @@ public class SiegeCommand extends AdminCommand {
 		SiegeRace sr = null;
 		try {
 			sr = SiegeRace.valueOf(params[2].toUpperCase());
-		} catch (IllegalArgumentException e) {
-			// ignore
+		} catch (IllegalArgumentException ignored) {
 		}
 
 		// try to find legion by name
 		Legion legion = null;
 		if (sr == null) {
-
 			try {
 				int legionId = Integer.valueOf(params[2]);
 				legion = LegionService.getInstance().getLegion(legionId);
@@ -170,22 +174,22 @@ public class SiegeCommand extends AdminCommand {
 			if (legion != null) {
 				int legionBGeneral = LegionService.getInstance().getBrigadeGeneralOfLegion(legion.getLegionId());
 				if (legionBGeneral != 0) {
-					PlayerCommonData BGeneral = DAOManager.getDAO(PlayerDAO.class).loadPlayerCommonData(legionBGeneral);
-					sr = SiegeRace.getByRace(BGeneral.getRace());
+					PlayerCommonData bGeneral = DAOManager.getDAO(PlayerDAO.class).loadPlayerCommonData(legionBGeneral);
+					sr = SiegeRace.getByRace(bGeneral.getRace());
 				}
 			}
 		}
 
 		// check if can capture
 		if (legion == null && sr == null) {
-			PacketSendUtility.sendMessage(player, params[2] + " is not valid siege race or legion name");
+			sendInfo(player, params[2] + " is not valid siege race or legion name");
 			return;
 		}
 
 		SiegeService.getInstance().captureSiege(sr, legion != null ? legion.getLegionId() : 0, siegeLocationId);
 	}
 
-	protected void assault(Player player, String[] params) {
+	private void assault(Player player, String[] params) {
 		if (params.length < 2 || (!NumberUtils.isNumber(params[1]) && !NumberUtils.isNumber(params[2]))) {
 			showHelp(player);
 			return;
@@ -194,23 +198,20 @@ public class SiegeCommand extends AdminCommand {
 		int siegeLocationId = NumberUtils.toInt(params[1]);
 		int delay = NumberUtils.toInt(params[2]);
 		if (!SiegeService.getInstance().getSiegeLocations().keySet().contains(siegeLocationId)) {
-			PacketSendUtility.sendMessage(player, "Invalid Siege Location Id: " + siegeLocationId);
+			sendInfo(player, "Invalid Siege Location Id: " + siegeLocationId);
 			return;
 		}
 
 		BalaurAssaultService.getInstance().startAssault(player, siegeLocationId, delay);
 	}
 
-	protected void showHelp(Player player) {
-		PacketSendUtility.sendMessage(player, "AdminCommand //siege Help\n" + "//siege start|stop <LocationId>\n" + "//siege list locations|sieges\n"
-			+ "//siege capture <LocationId> <siegeRaceName(ELYOS,ASMODIANS,BALAUR)|legionName|legionId>\n" + "//siege assault <LocationId> <delaySec>");
-
-		java.util.Set<Integer> fortressIds = SiegeService.getInstance().getFortresses().keySet();
-		java.util.Set<Integer> artifactIds = SiegeService.getInstance().getStandaloneArtifacts().keySet();
-		java.util.Set<Integer> outpostIds = SiegeService.getInstance().getOutposts().keySet();
-		PacketSendUtility.sendMessage(player, "Fortress: " + StringUtils.join(fortressIds, ", "));
-		PacketSendUtility.sendMessage(player, "Artifacts: " + StringUtils.join(artifactIds, ", "));
-		PacketSendUtility.sendMessage(player, "Outposts: " + StringUtils.join(outpostIds, ", "));
+	private void showHelp(Player player) {
+		sendInfo(player);
+		Stream<String> fortressIds = SiegeService.getInstance().getFortresses().keySet().stream().map(String::valueOf);
+		Stream<String> artifactIds = SiegeService.getInstance().getStandaloneArtifacts().stream().map(loc -> String.valueOf(loc.getLocationId()));
+		Stream<String> outpostIds = SiegeService.getInstance().getOutposts().keySet().stream().map(String::valueOf);
+		sendInfo(player, "Fortress: " + fortressIds.collect(Collectors.joining(", ")), "Artifacts: " + artifactIds.collect(Collectors.joining(", ")),
+			"Outposts: " + outpostIds.collect(Collectors.joining(", ")));
 	}
 
 }

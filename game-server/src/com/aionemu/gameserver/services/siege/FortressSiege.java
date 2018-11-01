@@ -408,7 +408,7 @@ public class FortressSiege extends Siege<FortressLocation> {
 	}
 
 	protected ArtifactLocation getArtifact() {
-		return SiegeService.getInstance().getFortressArtifacts().get(getSiegeLocationId());
+		return SiegeService.getInstance().getFortressArtifact(getSiegeLocationId());
 	}
 
 	protected boolean hasArtifact() {
