@@ -29,7 +29,7 @@ import ai.AggressiveNpcAI;
 public class IsbariyaTheResoluteAI extends AggressiveNpcAI {
 
 	private volatile int stage = 0;
-	private AtomicBoolean isStart = new AtomicBoolean(false);
+	private AtomicBoolean isStart = new AtomicBoolean();
 	private List<Point3D> soulLocations = new ArrayList<>();
 	private Future<?> basicSkillTask;
 	private Future<?> spawnTask;
@@ -62,30 +62,24 @@ public class IsbariyaTheResoluteAI extends AggressiveNpcAI {
 
 	@Override
 	protected void handleDied() {
+		cancelTasks(spawnTask, basicSkillTask);
 		super.handleDied();
 		PacketSendUtility.broadcastMessage(getOwner(), 342055);
 		getPosition().getWorldMapInstance().getDoors().get(535).setOpen(true);
-		cancelSkillTask();
-		if (spawnTask != null && !spawnTask.isCancelled()) {
-			spawnTask.cancel(true);
-		}
 	}
 
 	@Override
 	protected void handleDespawned() {
+		cancelTasks(spawnTask, basicSkillTask);
 		super.handleDespawned();
-		cancelSkillTask();
-		if (spawnTask != null && !spawnTask.isCancelled()) {
-			spawnTask.cancel(true);
-		}
 	}
 
 	@Override
 	protected void handleBackHome() {
 		PacketSendUtility.broadcastMessage(getOwner(), 342056);
+		cancelTasks(spawnTask, basicSkillTask);
 		super.handleBackHome();
 		isStart.set(false);
-		cancelSkillTask();
 		getPosition().getWorldMapInstance().getDoors().get(535).setOpen(true);
 		stage = 0;
 	}
@@ -111,7 +105,7 @@ public class IsbariyaTheResoluteAI extends AggressiveNpcAI {
 			@Override
 			public void run() {
 				if (isDead())
-					cancelSkillTask();
+					cancelTasks(basicSkillTask);
 				else
 					SkillEngine.getInstance().getSkill(getOwner(), 18912 + Rnd.get(2), 55, getOwner()).useNoAnimationSkill();
 			}
@@ -119,15 +113,9 @@ public class IsbariyaTheResoluteAI extends AggressiveNpcAI {
 		}, 0, 24000);
 	}
 
-	private void cancelSkillTask() {
-		if (basicSkillTask != null && !basicSkillTask.isCancelled()) {
-			basicSkillTask.cancel(true);
-		}
-	}
-
 	private void launchSpecial() {
 		if (isDead() || stage == 0 || getOwner().getPosition().getWorldMapInstance() == null) {
-			cancelSkillTask();
+			cancelTasks(basicSkillTask);
 			return;
 		}
 		int delay = 10000;
@@ -180,11 +168,7 @@ public class IsbariyaTheResoluteAI extends AggressiveNpcAI {
 	}
 
 	private void scheduleSpecial(int delay) {
-		if (getOwner().getPosition().getWorldMapInstance() == null) {
-			cancelSkillTask();
-			return;
-		}
-		spawnTask = ThreadPoolManager.getInstance().schedule(() -> launchSpecial(), delay);
+		spawnTask = ThreadPoolManager.getInstance().schedule(this::launchSpecial, delay);
 	}
 
 	private SpawnTemplate rndSpawnInRange(int npcId) {
@@ -193,6 +177,12 @@ public class IsbariyaTheResoluteAI extends AggressiveNpcAI {
 		float y1 = (float) (Math.sin(Math.PI * direction) * 5);
 		return SpawnEngine.newSingleTimeSpawn(getPosition().getMapId(), npcId, getPosition().getX() + x1, getPosition().getY() + y1, getPosition().getZ(),
 			getPosition().getHeading());
+	}
+
+	private void cancelTasks(Future<?>... tasks) {
+		for (Future<?> task : tasks)
+			if (task != null && !task.isCancelled())
+				task.cancel(true);
 	}
 
 }
