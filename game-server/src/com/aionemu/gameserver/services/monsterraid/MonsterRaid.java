@@ -3,6 +3,9 @@ package com.aionemu.gameserver.services.monsterraid;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.templates.monsterraid.MonsterRaidLocation;
@@ -19,6 +22,7 @@ import com.aionemu.gameserver.world.World;
  */
 public class MonsterRaid {
 
+	private final static Logger log = LoggerFactory.getLogger(MonsterRaid.class);
 	private final MonsterRaidDeathListener deathListener = new MonsterRaidDeathListener(this);
 	private final AtomicBoolean isFinished = new AtomicBoolean();
 	private final AtomicBoolean isStarted = new AtomicBoolean();
@@ -31,50 +35,54 @@ public class MonsterRaid {
 		this.mrl = mrl;
 	}
 
-	public final void startMonsterRaid() throws RuntimeException {
+	public final void startMonsterRaid() {
 		if (isStarted.compareAndSet(false, true))
 			onMonsterRaidStart();
-		else
-			throw new RuntimeException("Attempt to start monster raid twice! ID:" + getLocationId());
 	}
 
-	public final void stopMonsterRaid() throws RuntimeException {
+	public final void stopMonsterRaid() {
 		if (isFinished.compareAndSet(false, true))
 			onMonsterRaidFinish();
-		else
-			throw new RuntimeException("Attempt to stop monster raid twice! ID:" + getLocationId());
 	}
 
 	private final void onMonsterRaidStart() {
-		spawnFlag();
-		broadcastMessage(SM_SYSTEM_MESSAGE.STR_MSG_WORLDRAID_MESSAGE_01());
-		// TODO: Better Implementation for this latency period
-		ThreadPoolManager.getInstance().schedule(() -> {
-			spawnVortex();
-			broadcastMessage(SM_SYSTEM_MESSAGE.STR_MSG_WORLDRAID_MESSAGE_02());
-			ThreadPoolManager.getInstance().schedule(() -> {
-				broadcastMessage(SM_SYSTEM_MESSAGE.STR_MSG_WORLDRAID_MESSAGE_03());
-				ThreadPoolManager.getInstance().schedule(() -> {
-					spawnBoss();
-					regDeathListener();
-					broadcastMessage(SM_SYSTEM_MESSAGE.STR_MSG_WORLDRAID_MESSAGE_04());
-					scheduleDespawn();
-				}, 300000);
-				// }, Rnd.get(50, 100) * 6000); // 5 to 10 minutes after third announce
-			}, 900000);
-			// }, Rnd.get(50, 1000) * 6000); // 5 to 100 minutes after second announce
-		}, 600000);
-		// }, Rnd.get(100, 150) * 6000); // 10 to 15 minutes after initialization
+		ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
+			
+			int progress = 0;
+
+			@Override
+			public void run() {
+				switch (progress++) {
+					case 0:
+						spawnFlag();
+						broadcastMessage(SM_SYSTEM_MESSAGE.STR_MSG_WORLDRAID_MESSAGE_01());
+						break;
+					case 2: // 10 minutes
+						spawnVortex();
+						broadcastMessage(SM_SYSTEM_MESSAGE.STR_MSG_WORLDRAID_MESSAGE_02());
+						break;
+					case 5: // 25 minutes
+						broadcastMessage(SM_SYSTEM_MESSAGE.STR_MSG_WORLDRAID_MESSAGE_03());
+						break;
+					case 6: // 30 minutes
+						spawnBoss();
+						regDeathListener();
+						broadcastMessage(SM_SYSTEM_MESSAGE.STR_MSG_WORLDRAID_MESSAGE_04());
+						scheduleDespawn();
+						break;
+				}
+			}
+		}, 0, 300000);
 	}
 
 	private final void onMonsterRaidFinish() {
 		rmvDeathListener();
-		despawnVisiualNpcs();
+		despawnNpcs(flag, vortex);
 		if (isBossKilled()) { // TODO: Switch for different NPCs
 			broadcastMessage(SM_SYSTEM_MESSAGE.STR_MSG_WORLDRAID_MESSAGE_DIE_03());
 			cancelDespawn();
 		} else {
-			boss.getController().delete();
+			despawnNpcs(boss);
 		}
 	}
 
@@ -89,12 +97,11 @@ public class MonsterRaid {
 		if (despawnTask != null && !despawnTask.isCancelled())
 			despawnTask.cancel(true);
 	}
-
-	private void despawnVisiualNpcs() {
-		if (flag != null)
-			flag.getController().delete();
-		if (vortex != null)
-			vortex.getController().delete();
+	
+	private void despawnNpcs(Npc... npcs) {
+		for (Npc npc : npcs)
+			if (npc != null && !npc.isDead())
+				npc.getController().delete();
 	}
 
 	private void regDeathListener() {
@@ -121,29 +128,29 @@ public class MonsterRaid {
 		initVortex((Npc) SpawnEngine.spawnObject(temp, 1));
 	}
 
-	private void initBoss(Npc npc) throws RuntimeException, NullPointerException {
-		if (npc == null)
-			throw new NullPointerException("No boss found for Monster Raid! ID:" + getLocationId());
-		if (boss != null)
-			throw new RuntimeException("Tried to initialize boss twice for Monster Raid! ID:" + getLocationId());
+	private void initBoss(Npc npc) {
+		if (npc == null || boss != null) {
+			log.error("[MonsterRaid] Cannot initialize boss. Either no boss was spawned or attempted to initialize twice.");
+			return;
+		}
 
 		boss = npc;
 	}
 
-	private void initFlag(Npc npc) throws RuntimeException, NullPointerException {
-		if (npc == null)
-			throw new NullPointerException("No flag found for Monster Raid! ID:" + getLocationId());
-		if (flag != null)
-			throw new RuntimeException("Tried to initialize flag twice for Monster Raid! ID:" + getLocationId());
+	private void initFlag(Npc npc) {
+		if (npc == null || boss != null) {
+			log.error("[MonsterRaid] Cannot initialize flag. Either no flag was spawned or attempted to initialize twice.");
+			return;
+		}
 
 		flag = npc;
 	}
 
-	private void initVortex(Npc npc) throws RuntimeException, NullPointerException {
-		if (npc == null)
-			throw new NullPointerException("No vortex found for Monster Raid! ID:" + getLocationId());
-		if (vortex != null)
-			throw new RuntimeException("Tried to initialize vortex twice for Monster Raid! ID:" + getLocationId());
+	private void initVortex(Npc npc) {
+		if (npc == null || boss != null) {
+			log.error("[MonsterRaid] Cannot initialize vortex. Either no vortex was spawned or attempted to initialize twice.");
+			return;
+		}
 
 		vortex = npc;
 	}

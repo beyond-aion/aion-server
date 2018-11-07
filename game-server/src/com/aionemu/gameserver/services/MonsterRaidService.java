@@ -62,11 +62,9 @@ public class MonsterRaidService {
 			raid = newMonsterRaid(locId);
 			activeRaids.put(locId, raid);
 		}
-		try {
-			raid.startMonsterRaid();
-		} catch (RuntimeException e) {
-			log.error("MonsterRaid could not be started! ID:" + locId, e);
-		}
+
+		raid.startMonsterRaid();
+
 		log.debug("Finished monster raid start of raid location: " + locId);
 	}
 
@@ -80,11 +78,9 @@ public class MonsterRaidService {
 			log.debug("Attempt to stop monster raid twice for raid location: " + locId);
 			return;
 		}
-		try {
-			raid.stopMonsterRaid();
-		} catch (RuntimeException e) {
-			log.error("monster raid could not be finished! ID:" + locId, e);
-		}
+		
+		raid.stopMonsterRaid();
+
 		log.debug("Succeeded to finish monster raid of raid location: " + locId);
 	}
 
