@@ -13,7 +13,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import org.quartz.CronExpression;
 import org.slf4j.Logger;
@@ -60,7 +59,6 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.WorldType;
-import com.google.common.collect.Maps;
 
 /**
  * 3.0 siege update (https://docs.google.com/document/d/1HVOw8-w9AlRp4ci0ei4iAzNaSKzAHj_xORu-qIQJFmc/edit#)
@@ -153,7 +151,7 @@ public class SiegeService {
 		}
 
 		// spawn artifacts
-		for (ArtifactLocation a : getStandaloneArtifacts().values()) {
+		for (ArtifactLocation a : getStandaloneArtifacts()) {
 			spawnNpcs(a.getLocationId(), a.getRace(), SiegeModType.PEACE);
 		}
 
@@ -346,7 +344,7 @@ public class SiegeService {
 		loc.setLegionId(0);
 
 		if (loc instanceof FortressLocation) {
-			ArtifactLocation artifact = getFortressArtifacts().get(loc.getLocationId());
+			ArtifactLocation artifact = getFortressArtifact(loc.getLocationId());
 			if (artifact != null) {
 				artifact.setRace(SiegeRace.BALAUR);
 				artifact.setLegionId(0);
@@ -454,12 +452,13 @@ public class SiegeService {
 		return getArtifacts().get(id);
 	}
 
-	public Map<Integer, ArtifactLocation> getStandaloneArtifacts() {
-		return Maps.filterValues(artifacts, loc -> loc != null && loc.isStandAlone());
+	public List<ArtifactLocation> getStandaloneArtifacts() {
+		return artifacts.values().stream().filter(ArtifactLocation::isStandAlone).collect(Collectors.toList());
 	}
 
-	public Map<Integer, ArtifactLocation> getFortressArtifacts() {
-		return Maps.filterValues(artifacts, loc -> loc != null && loc.getOwningFortress() != null);
+	public ArtifactLocation getFortressArtifact(int siegeLocId) {
+		ArtifactLocation loc = getArtifact(siegeLocId);
+		return loc == null || loc.getOwningFortress() == null ? null : loc;
 	}
 
 	public Map<Integer, SiegeLocation> getSiegeLocations() {
@@ -783,7 +782,7 @@ public class SiegeService {
 			}
 			cronParts[1] = String.valueOf(minutes);
 			cronParts[2] = String.valueOf(hours);
-			return Stream.of(cronParts).collect(Collectors.joining(" "));
+			return String.join(" ", cronParts);
 		} catch (NumberFormatException e) {
 			throw new UnsupportedOperationException("Failed converting cron expression: " + siegeTime, e);
 		}

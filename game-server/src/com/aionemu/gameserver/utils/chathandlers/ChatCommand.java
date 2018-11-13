@@ -42,11 +42,8 @@ public abstract class ChatCommand {
 
 	public final boolean run(Player player, String... params) {
 		if (params.length == 1 && "help".equalsIgnoreCase(params[0])) {
-			StringBuilder sb = new StringBuilder();
-			sb.append("Command: ").append(ChatUtil.color(getAliasWithPrefix(), Color.WHITE)).append("\n");
-			sb.append("\t").append((getDescription().isEmpty() ? "No description available." : getDescription())).append("\n");
-			sb.append(getSyntaxInfo());
-			sendMessagePackets(player, sb.toString());
+			sendMessagePackets(player, "Command: " + ChatUtil.color(getAliasWithPrefix(), Color.WHITE) + "\n\t"
+				+ (getDescription().isEmpty() ? "No description available." : getDescription()) + "\n" + getSyntaxInfo());
 			return true;
 		}
 
@@ -91,20 +88,20 @@ public abstract class ChatCommand {
 		this.syntaxInfo = parseSyntaxInfo(lines);
 	}
 
-	private final String getSyntaxInfo() {
+	private String getSyntaxInfo() {
 		if (syntaxInfo == null) // init default info if handler did not set any syntax info
 			setSyntaxInfo();
 		return syntaxInfo;
 	}
 
-	private final String parseSyntaxInfo(String... lines) {
+	private String parseSyntaxInfo(String... lines) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Syntax:");
 		if (lines.length > 0) {
 			boolean containsSquareBrackets = false;
 			for (String info : lines) {
 				if (StringUtils.startsWithAny(info, " ", "<", "[")) {
-					if (!containsSquareBrackets && info.indexOf("[") > -1)
+					if (!containsSquareBrackets && info.contains("["))
 						containsSquareBrackets = true;
 					sb.append("\n\t").append(ChatUtil.color(getAliasWithPrefix(), Color.WHITE)).append(' ');
 					String[] split = info.split(" - ", 2);
@@ -160,7 +157,7 @@ public abstract class ChatCommand {
 
 	/**
 	 * Sends an info message to the player.<br>
-	 * If no (or <tt>null</tt>) message parameter is specified, the default syntax info will be sent.<br>
+	 * If no message parameter is specified, the default syntax info will be sent.<br>
 	 * You can set syntax info via {@link #setSyntaxInfo(String...)}
 	 * 
 	 * @param player
@@ -170,9 +167,11 @@ public abstract class ChatCommand {
 	 */
 	protected final void sendInfo(Player player, String... message) {
 		StringBuilder sb = new StringBuilder();
-		if (message.length > 1 || message.length == 1 && message[0] != null) {
+		if (message.length > 0) {
 			for (int i = 0; i < message.length; i++) {
-				sb.append((i > 0 ? "\n" : "") + message[i]);
+				if (i > 0)
+					sb.append('\n');
+				sb.append(message[i]);
 			}
 		} else {
 			sb.append(getSyntaxInfo());
@@ -206,8 +205,13 @@ public abstract class ChatCommand {
 		}
 	}
 
-	// only for backwards compatibility TODO: remove when all commands are updated
+	/**
+	 * Please use {@link #sendInfo(Player, String...)}.
+	 * Old commands still override this method to show syntax info and should be ported eventually.
+	 * TODO: remove this method when all commands are updated
+	 */
+	@Deprecated
 	protected void info(Player player, String message) {
-		sendInfo(player, new String[] { message });
+		throw new UnsupportedOperationException("Please don't call me and don't override me! Use sendInfo() instead. Syntax info can be initialized in constructor.");
 	}
 }
