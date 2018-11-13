@@ -21,6 +21,42 @@
 			<gd_item id="182204134" /><!-- quest_2343a -->
 		</gd_items>
 	</gd_rule>
+	<gd_rule rule_name="Quest Collecting Item" base_chance="50" fixed_chance="true">
+		<gd_maps>
+			<gd_map map_id="220020000" /><!-- Morheim -->
+		</gd_maps>
+		<gd_zones>
+			<gd_zone zone="LEPHARIST_CITADEL_220020000" />
+		</gd_zones>
+		<gd_ratings>
+			<gd_rating rating="ELITE" />
+			<gd_rating rating="HERO" />
+		</gd_ratings>
+		<gd_items>
+			<gd_item id="186000047" /><!-- Lepharist Written Oath -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Quest Collecting Item" base_chance="50" fixed_chance="true">
+		<gd_maps>
+			<gd_map map_id="220020000" /><!-- Morheim -->
+		</gd_maps>
+		<gd_races>
+			<gd_race race="LYCAN" />
+		</gd_races>
+		<gd_zones>
+			<gd_zone zone="MIST_MANE_VILLAGE_220020000" />
+			<gd_zone zone="NUNU_VILLAGE_220020000" />
+			<gd_zone zone="MIST_MANE_TRAINING_GROUND_220020000" />
+			<gd_zone zone="KASAKAS_WOOD_CAVE_220020000" />
+		</gd_zones>
+		<gd_ratings>
+			<gd_rating rating="ELITE" />
+			<gd_rating rating="HERO" />
+		</gd_ratings>
+		<gd_items>
+			<gd_item id="186000029" /><!-- Mist Mane Mau Hair -->
+		</gd_items>
+	</gd_rule>
 	<!-- Single Monster Drops -->
 	<gd_rule rule_name="Named Weapon (Rare)" base_chance="40">
 		<gd_maps>
