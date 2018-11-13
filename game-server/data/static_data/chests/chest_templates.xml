@@ -584,4 +584,9 @@
 	<chest npc_id="235644">
 		<key_item item_ids="0" count="1" />
 	</chest>
+	<!-- Event -->
+	<!-- Birthday Cake -->
+	<chest npc_id="701983">
+		<key_item item_ids="0" count="1" />
+	</chest>
 </chest_templates>

@@ -4276,4 +4276,46 @@
 			<drop item_id="162002034" chance="100" no_reduce="true" /><!-- Shugo Warrior's Greater Adrenaline -->
 		</drop_group>
 	</npc_drop>
+	<!-- Birthday Event -->
+	<npc_drop npc_id="701983">
+		<drop_group race="ELYOS">
+			<drop item_id="162000137" chance="100" min_amount="5" max_amount="5" no_reduce="true" /><!-- Sublime Life Serum -->
+			<drop item_id="162000139" chance="100" min_amount="5" max_amount="5" no_reduce="true" /><!-- Sublime Mana Serum -->
+			<drop item_id="162000141" chance="100" min_amount="5" max_amount="5" no_reduce="true" /><!-- Sublime Wind Serum -->
+			<drop item_id="186000236" chance="100" min_amount="10" max_amount="15" no_reduce="true" /><!-- Blood Mark -->
+			<drop item_id="186000051" chance="100" min_amount="2" max_amount="2" no_reduce="true" /><!-- Major Ancient Crown -->
+			<drop item_id="160010354" chance="100" no_reduce="true" /><!-- Greater Seed of Transformation -->
+		</drop_group>
+		<drop_group race="ASMODIANS">
+			<drop item_id="162000137" chance="100" min_amount="5" max_amount="5" no_reduce="true" /><!-- Sublime Life Serum -->
+			<drop item_id="162000139" chance="100" min_amount="5" max_amount="5" no_reduce="true" /><!-- Sublime Mana Serum -->
+			<drop item_id="162000141" chance="100" min_amount="5" max_amount="5" no_reduce="true" /><!-- Sublime Wind Serum -->
+			<drop item_id="186000236" chance="100" min_amount="10" max_amount="15" no_reduce="true" /><!-- Blood Mark -->
+			<drop item_id="186000051" chance="100" min_amount="2" max_amount="2" no_reduce="true" /><!-- Major Ancient Crown -->
+			<drop item_id="160010355" chance="100" no_reduce="true" /><!-- Greater Seed of Transformation -->
+		</drop_group>
+		<drop_group race="PC_ALL">
+			<drop item_id="188053618" chance="20" no_reduce="true" /><!-- Honorable Elim's Idian Bundle -->
+			<drop item_id="166500002" chance="20" min_amount="3" max_amount="3" no_reduce="true" /><!-- Amplification Stone -->
+			<drop item_id="166020000" chance="20" min_amount="3" max_amount="3" no_reduce="true" /><!-- Omega Enchantment Stone -->
+			<drop item_id="166030007" chance="20" min_amount="3" max_amount="3" no_reduce="true" /><!-- [Event] Tempering Solution -->
+			<drop item_id="186000242" chance="20" min_amount="2" max_amount="2" no_reduce="true" /><!-- Ceramium Medal -->
+			<drop item_id="188053610" chance="20" min_amount="3" max_amount="3" no_reduce="true" /><!-- [Event] Level 70 Composite Manastone Bundle -->
+			<drop item_id="186000247" chance="20" min_amount="5" max_amount="5" no_reduce="true" /><!-- Major Danuar Relic -->
+			<drop item_id="188053207" chance="20" no_reduce="true" /><!-- [Event] Ancient Spirit's Eternal Armor Chest -->
+			<drop item_id="188052073" chance="20" no_reduce="true" /><!-- [Event] Ancient Spirit's Wing Box -->
+		</drop_group>
+		<drop_group race="PC_ALL">
+			<drop item_id="188053099" chance="5" no_reduce="true" /><!-- Pure Modor's Equipment Crux Box -->
+			<drop item_id="188052831" chance="5" no_reduce="true" /><!-- Dynatoum's Brazen Armor Box -->
+			<drop item_id="188053295" chance="5" no_reduce="true" /><!-- Empyrean Plume Chest -->
+			<drop item_id="168310019" chance="5" no_reduce="true" /><!-- Major Blessed Augment: Level 2 -->
+			<drop item_id="188053728" chance="5" no_reduce="true" /><!-- Beritra's Equipment Box -->
+		</drop_group>
+		<drop_group race="PC_ALL">
+			<drop item_id="169610093" chance="1" no_reduce="true" /><!-- [Title Card] Top Gun -->
+			<drop item_id="188053611" chance="1" no_reduce="true" /><!-- [Event] Wing Box -->
+			<drop item_id="188054260" chance="1" no_reduce="true" /><!-- Ride Box of Conquest -->
+		</drop_group>
+	</npc_drop>
 </custom_drop>
