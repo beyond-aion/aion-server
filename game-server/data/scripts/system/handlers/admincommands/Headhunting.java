@@ -61,19 +61,21 @@ public class Headhunting extends AdminCommand {
 		);
 		// @formatter:on
 
-		/* Initialize seasonal headhunting rewards */
+		// Initialize seasonal headhunting rewards
 		rewards.put(1, new ArrayList<>());
 		rewards.put(2, new ArrayList<>());
 		rewards.put(3, new ArrayList<>());
 
-		rewards.get(1).add(new RewardItem(186000242, 40)); // Ceramium Medal
-		rewards.get(1).add(new RewardItem(186000051, 30)); // Major Ancient Crown
+		rewards.get(1).add(new RewardItem(164002276, 5)); // Eternal War Battle Scroll
 		rewards.get(1).add(new RewardItem(188950017, 3)); // Special Courier Pass (Abyss Eternal/Lv. 61-65)
+		rewards.get(1).add(new RewardItem(186000051, 15)); // Major Ancient Crown
 
-		rewards.get(2).add(new RewardItem(186000242, 20)); // Ceramium Medal
-		rewards.get(2).add(new RewardItem(186000051, 15)); // Major Ancient Crown
+		rewards.get(2).add(new RewardItem(164002276, 3)); // Eternal War Battle Scroll
+		rewards.get(2).add(new RewardItem(188950017, 3)); // Special Courier Pass (Abyss Eternal/Lv. 61-65)
+		rewards.get(2).add(new RewardItem(186000051, 10)); // Major Ancient Crown
 
-		rewards.get(3).add(new RewardItem(186000242, 10)); // Ceramium Medal
+		rewards.get(3).add(new RewardItem(164002276, 1)); // Eternal War Battle Scroll
+		rewards.get(3).add(new RewardItem(188950017, 2)); // Special Courier Pass (Abyss Eternal/Lv. 61-65)
 		rewards.get(3).add(new RewardItem(186000051, 5)); // Major Ancient Crown
 
 		consolationRewards.add(new RewardItem(186000051, 1)); // Major Ancient Crown
