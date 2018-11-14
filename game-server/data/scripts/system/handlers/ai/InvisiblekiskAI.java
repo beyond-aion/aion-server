@@ -1,14 +1,13 @@
 package ai;
 
+import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
-import com.aionemu.gameserver.model.TribeClass;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.skillengine.SkillEngine;
 
 /**
- * @author Cheatkiller, modified Bobobear
+ * @author Cheatkiller, Bobobear
  */
-@AIName("invisiblekisk")
+@AIName("invisible_kisk")
 public class InvisiblekiskAI extends KiskAI {
 
 	public InvisiblekiskAI(Npc owner) {
@@ -18,7 +17,18 @@ public class InvisiblekiskAI extends KiskAI {
 	@Override
 	protected void handleSpawned() {
 		super.handleSpawned();
-		int skill = getOwner().getTribe().equals(TribeClass.GENERAL_DARK) ? 21262 : 21261;
-		SkillEngine.getInstance().getSkill(getOwner(), skill, 60, getOwner()).useNoAnimationSkill();
+		AIActions.useSkill(this, getHideSkillId());
+	}
+
+	private int getHideSkillId() {
+		switch (getNpcId()) {
+			case 701768:
+			case 701770:
+				return 21261;
+			case 701769:
+			case 701771:
+				return 21262;
+		}
+		return 0;
 	}
 }
