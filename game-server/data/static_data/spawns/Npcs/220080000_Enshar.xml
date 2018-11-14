@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <spawns xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../spawns.xsd">
 	<spawn_map map_id="220080000">
+		<!-- Abyss Treasure Box -->
+		<spawn npc_id="832865" respawn_time="28800" pool="1">
+			<spot x="614.4" y="1733.4" z="289.6499" />
+			<spot x="1389.8" y="1990.7" z="310.375" />
+			<spot x="2524.7" y="1743.4" z="341.791" />
+			<spot x="376.6" y="2687.8" z="147.0325" />
+		</spawn>
 		<!-- acaresk -->
 		<spawn npc_id="804766" respawn_time="295">
 			<spot x="1580.17004" y="154.96001" z="186.81342" h="105"/>
