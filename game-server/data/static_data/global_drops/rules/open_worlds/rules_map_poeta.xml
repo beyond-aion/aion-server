@@ -10,11 +10,29 @@
 			<gd_npc npc_id="210205" /><!-- Pinkbeak Airon -->
 			<gd_npc npc_id="210259" /><!-- Brownbristle Brax -->
 			<gd_npc npc_id="210260" /><!-- Brownbristle Brax -->
-			<gd_npc npc_id="210668" /><!-- Pinkbeak Airo -->
+			<gd_npc npc_id="210668" /><!-- Pinkbeak Airon -->
 			<gd_npc npc_id="210672" /><!-- Brownbristle Braxie -->
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="182200501" /><!-- quest_1107 Broken Axe Handle -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Quest-Start Item" base_chance="3">
+		<gd_maps>
+			<gd_map map_id="210010000" /><!-- Poeta -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="210119" /><!-- Adult Sparkie -->
+			<gd_npc npc_id="210120" /><!-- Elder Sparkie -->
+			<gd_npc npc_id="210195" /><!-- Grove Abex -->
+			<gd_npc npc_id="210196" /><!-- Grove Abex -->
+			<gd_npc npc_id="210261" /><!-- Everglade Sylphen -->
+			<gd_npc npc_id="210262" /><!-- Shortbristle Bellepig -->
+			<gd_npc npc_id="210674" /><!-- Everglade Sylphen -->
+			<gd_npc npc_id="210675" /><!-- Shortbristle Bellepig -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="182200214" /><!-- quest_1114 Namus's Diary -->
 		</gd_items>
 	</gd_rule>
 	<!-- Single Monster Drops -->
