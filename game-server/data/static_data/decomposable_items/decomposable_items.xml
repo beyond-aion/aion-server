@@ -34583,7 +34583,7 @@
 			<item id="114601452" player_classes="GLADIATOR" /><!-- Bastion Defender Protector Sabatons -->
 		</items>
 	</decomposable>
-	<decomposable item_id="188054260"><!-- Ride Box of Conquest -->
+	<decomposable item_id="188054260" selectable="true"><!-- Ride Box of Conquest -->
 		<items>
 			<item id="190100139" /><!-- Sleek Hovercycle -->
 			<item id="190100164" /><!-- Magnificent Clucklich -->
