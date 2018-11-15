@@ -14540,10 +14540,38 @@
 	<decomposable item_id="188051837" /><!-- Random Enchantment Level Test Box 3 -->
 	<decomposable item_id="188051838" /><!-- Random Enchantment Level Test Box 4 -->
 	<decomposable item_id="188051839" /><!-- Random Enchantment Level Test Box 5 -->
-	<decomposable item_id="188051840" /><!-- Snowman Bundle -->
-	<decomposable item_id="188051841" /><!-- Ghost Bundle -->
-	<decomposable item_id="188051842" /><!-- Snowman Gift Box -->
-	<decomposable item_id="188051843" /><!-- Ghost Gift Box -->
+	<decomposable item_id="188051840"><!-- Snowman Bundle -->
+		<items chance="10">
+			<item id="188051429" /><!-- Felicitous Socketing (Fabled) -->
+		</items>
+		<items chance="22.5">
+			<item id="167000518" /><!-- Manastone: Attack +5 -->
+		</items>
+		<items chance="22.5">
+			<item id="167000558" /><!-- Manastone: Crit Strike +17 -->
+		</items>
+		<items chance="22.5">
+			<item id="167000551" /><!-- Manastone: HP +95 -->
+		</items>
+		<items chance="22.5">
+			<item id="167000555" /><!-- Manastone: Magic Boost +27 -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188051841"><!-- Ghost Bundle -->
+		<items>
+			<random_item type="ANCIENT_CROWN" />
+		</items>
+	</decomposable>
+	<decomposable item_id="188051842"><!-- Snowman Gift Box -->
+		<items>
+			<item id="188051429" /><!-- Felicitous Socketing (Fabled) -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188051843"><!-- Ghost Gift Box -->
+		<items>
+			<item id="186000051" /><!-- Major Ancient Crown -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188051844"><!-- Radiant Medal Chest -->
 		<items>
 			<item id="186000096" /><!-- Platinum Medal -->

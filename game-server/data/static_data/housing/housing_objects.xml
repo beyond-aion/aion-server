@@ -943,11 +943,11 @@
     </use_item>
     <passive area="INTERIOR" location="STACK" id="3190051" name_id="794797" category="DECORATION" quality="COMMON" talking_distance="5.0"/>
     <passive area="INTERIOR" location="STACK" id="3190052" name_id="794798" category="DECORATION" quality="COMMON" talking_distance="5.0"/>
-    <use_item use_count="6" delay="5000" cd="86400" owner="true" area="INTERIOR" location="STACK" limit="POT" id="3190053" name_id="798731" category="DECORATION" quality="UNIQUE" talking_distance="5.0">
-        <action check_type="0" remove_count="0" reward_id="188051840" final_reward_id="188051842"/>
+    <use_item required_item="186000159" use_count="6" delay="5000" cd="86400" owner="true" area="INTERIOR" location="STACK" limit="POT" id="3190053" name_id="798731" category="DECORATION" quality="UNIQUE" talking_distance="5.0">
+        <action check_type="2" remove_count="1" reward_id="188051840" final_reward_id="188051842"/>
     </use_item>
-    <use_item use_count="6" delay="5000" cd="86400" owner="true" area="INTERIOR" location="STACK" limit="POT" id="3190054" name_id="798733" category="DECORATION" quality="UNIQUE" talking_distance="5.0">
-        <action check_type="0" remove_count="0" reward_id="188051841" final_reward_id="188051843"/>
+    <use_item required_item="186000159" use_count="6" delay="5000" cd="86400" owner="true" area="INTERIOR" location="STACK" limit="POT" id="3190054" name_id="798733" category="DECORATION" quality="UNIQUE" talking_distance="5.0">
+        <action check_type="2" remove_count="1" reward_id="188051841" final_reward_id="188051843"/>
     </use_item>
     <use_item required_item="186000159" use_count="300" delay="5000" cd="180" owner="false" area="INTERIOR" location="STACK" limit="POT" id="3190055" name_id="798872" category="DECORATION" quality="UNIQUE" talking_distance="2.0">
         <action check_type="2" remove_count="1" reward_id="188051748" final_reward_id="188051739"/>
