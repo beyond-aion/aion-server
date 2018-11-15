@@ -103,6 +103,7 @@ public class CreatureEventHandler {
 	}
 
 	private static boolean validateAggro(Npc owner, Creature creature) {
-		return creature.getLevel() - owner.getLevel() < 10 || owner.getObjectTemplate().getNpcTemplateType() == NpcTemplateType.ABYSS_GUARD;
+		return creature.getLevel() - owner.getLevel() < 10 || owner.getObjectTemplate().getNpcTemplateType() == NpcTemplateType.GUARD
+			|| owner.getObjectTemplate().getNpcTemplateType() == NpcTemplateType.ABYSS_GUARD;
 	}
 }
