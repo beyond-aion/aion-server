@@ -95,9 +95,10 @@ public class CM_CASTSPELL extends AionClientPacket {
 		if (template == null || template.isPassive())
 			return;
 
-		if (player.isProtectionActive()) {
+		if (player.isProtectionActive())
 			player.getController().stopProtectionActiveTask();
-		}
+		if (player.isUsingItem())
+			player.getController().cancelUseItem();
 
 		long currentTime = System.currentTimeMillis();
 		if (player.getNextSkillUse() > currentTime) {
