@@ -773,6 +773,18 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 		spawnAndSetRespawn(219187, 581.25275f, 333.01978f, 227.84341f, (byte) 7, 295);
 		spawnAndSetRespawn(219187, 438.07648f, 695.8468f, 215.41328f, (byte) 109, 295);
 		spawnAndSetRespawn(219197, 591.01575f, 812.62335f, 186.81348f, (byte) 37, 295);
+		
+		// guardian tower
+		spawnAndSetRespawn(233509, 704.6f, 636.3f, 212.239f, (byte) 37, 295); // asmodian
+		spawnAndSetRespawn(233509, 712.0f, 639.2f, 212.271f, (byte) 37, 295); // asmodian
+		spawnAndSetRespawn(233509, 589.2f, 699.7f, 220.973f, (byte) 73, 295); // asmodian
+		spawnAndSetRespawn(233509, 583.7f, 706.6f, 221.170f, (byte) 73, 295); // asmodian
+		
+		spawnAndSetRespawn(233529, 288.5f, 391.0f, 238.445f, (byte) 14, 295); // elyos
+		spawnAndSetRespawn(233529, 282.9f, 397.2f, 238.200f, (byte) 14, 295); // elyos
+		spawnAndSetRespawn(233529, 330.5f, 626.5f, 247.564f, (byte) 45, 295); // elyos
+		spawnAndSetRespawn(233529, 336.0f, 632.0f, 247.601f, (byte) 45, 295); // elyos
+		
 	}
 
 	private void addRespawnLocations() {
