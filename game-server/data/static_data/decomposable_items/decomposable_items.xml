@@ -15180,10 +15180,80 @@
 			<item id="188051871" /><!-- [Harvest Revel] Display Furniture Shopping Bag -->
 		</items>
 	</decomposable>
-	<decomposable item_id="188051875" /><!-- [Solorius] Display Furniture Pack -->
-	<decomposable item_id="188051876" /><!-- [Solorius] Functional Furniture Pack -->
-	<decomposable item_id="188051877" /><!-- [Solorius] Decorative Furniture Pack -->
-	<decomposable item_id="188051878" /><!-- [Solorius] Garden Furniture Pack -->
+	<decomposable item_id="188051875"><!-- [Solorius] Display Furniture Pack -->
+		<items>
+			<item id="170030057" /><!-- Solorius Tree -->
+		</items>
+		<items>
+			<item id="170030058" /><!-- Solorius Gift Box -->
+		</items>
+		<items>
+			<item id="170030061" /><!-- Solorius Desk Tree -->
+		</items>
+		<items>
+			<item id="170120033" /><!-- Solorius Bed -->
+		</items>
+		<items>
+			<item id="170130052" /><!-- Solorius Couch -->
+		</items>
+		<items>
+			<item id="170150003" /><!-- Solorius Hearth -->
+		</items>
+		<items>
+			<item id="170160010" /><!-- Solorius Partition -->
+		</items>
+		<items>
+			<item id="170410029" /><!-- Solorius Chair -->
+		</items>
+		<items>
+			<item id="170420036" /><!-- Solorius Dining Table -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188051876"><!-- [Solorius] Functional Furniture Pack -->
+		<items>
+			<item id="170100022" /><!-- Small Snowman Cabinet -->
+		</items>
+		<items>
+			<item id="170190053" /><!-- Red Ribbon-decorated Tree -->
+		</items>
+		<items>
+			<item id="170190054" /><!-- Solorius Banquet Table -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188051877"><!-- [Solorius] Decorative Furniture Pack -->
+		<items>
+			<item id="170030054" /><!-- Solorius Wreath -->
+		</items>
+		<items>
+			<item id="170030055" /><!-- Solorius Candy Cane Accent -->
+		</items>
+		<items>
+			<item id="170030056" /><!-- Solorius Tree Stick Accessory -->
+		</items>
+		<items>
+			<item id="170030059" /><!-- Solorius Card -->
+		</items>
+		<items>
+			<item id="170030060" /><!-- Solorius Bell -->
+		</items>
+		<items>
+			<item id="170150004" /><!-- Solorius Candle -->
+		</items>
+		<items>
+			<item id="171110051" /><!-- Snowflake Wallpaper -->
+		</items>
+		<items>
+			<item id="171110053" /><!-- Solorius Wallpaper -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188051878"><!-- [Solorius] Garden Furniture Pack -->
+		<items>
+			<item id="170390116" /><!-- Solorius Garden Tree -->
+		</items>
+		<items>
+			<item id="170390117" /><!-- Solorius Garden Snowman -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188051879" /><!-- Solorius Furniture Set Box -->
 	<decomposable item_id="188051880" /><!-- Lesser Pink Point Radama Bundle -->
 	<decomposable item_id="188051881" /><!-- Pink Point Radama Bundle -->
@@ -26101,7 +26171,7 @@
 			<item id="188052822" min_count="2" /><!-- Noble Ancient Manastone Chest -->
 		</items>
 		<items>
-			<item id="188053113" min_count="1" /><!-- Ahserion's Flight Ancient Manastone Bundle -->
+			<item id="188053113" /><!-- Ahserion's Flight Ancient Manastone Bundle -->
 		</items>
 		<items>
 			<item id="166020000" min_count="3" /><!-- Omega Enchantment Stone -->
@@ -26111,6 +26181,9 @@
 		</items>
 		<items>
 			<item id="166100023" min_count="350" /><!-- [Stamp] Greater Supplements (Eternal) -->
+		</items>
+		<items>
+			<item id="188053610" /><!-- [Event] Level 70 Composite Manastone Bundle -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188052997"><!-- [Event] Crushed Snow Bundle -->
@@ -26139,23 +26212,20 @@
 		</items>
 	</decomposable>
 	<decomposable item_id="188052999"><!-- [Event] Brilliant Ice Prism -->
-		<items chance="20.0">
-			<item id="188053728" /><!-- Beritra's Equipment Box -->
-		</items>
-		<items chance="20.0">
+		<items chance="30.0">
 			<item id="188053033" /><!-- Kunax's Equipment Box -->
 		</items>
-		<items chance="20.0">
+		<items chance="35.0">
 			<item id="188053006" /><!-- [Event] Hyperion's Mythic Armor Chest -->
 		</items>
-		<items chance="20.0">
+		<items chance="10.0">
 			<item id="188053007" /><!-- [Event] Hyperion's Mythic Weapon Chest -->
 		</items>
-		<items chance="10.0">
-			<item id="187000090" /><!-- Tiamat's Spectral Wings -->
+		<items chance="5.0">
+			<item id="190100157" /><!-- Steampunk Sharptooth -->
 		</items>
-		<items chance="10.0">
-			<item id="190100163" /><!-- Magnificent Clucklich -->
+		<items chance="20.0">
+			<item id="168310019" /><!-- Major Blessed Augment: Level 2 -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188053000"><!-- [Event] Assured Greater Felicitous Socketing Box -->

@@ -1229,7 +1229,7 @@
 			</spawn_map>
 		</spawns>
 	</event>
-	<event name="Celebrate Solorius" start="2017-12-01T00:00:00" end="2017-12-31T23:59:59" theme="CHRISTMAS">
+	<event name="Celebrate Solorius" start="2018-12-01T00:00:00" end="2018-12-31T23:59:59" theme="CHRISTMAS">
 		<event_drops>
 			<gd_rule rule_name="Celebrate Solorius Event Drop" base_chance="100" no_reduction="true">
 				<gd_npcs>
@@ -3783,7 +3783,7 @@
 			</spawn_map>
 		</spawns>
 	</event>
-	<event name="Frozen Magic Event" start="2017-12-17T00:00:00" end="2017-12-31T23:59:59">
+	<event name="Frozen Magic Event" start="2018-12-15T00:00:00" end="2018-12-31T23:59:59">
 		<quests>
 			<maintainable>80575 80576 80577 80578 80579 80580</maintainable>
 		</quests>
@@ -3833,9 +3833,6 @@
 					<gd_item id="188052986" /><!-- +1 Snowball -->
 				</gd_items>
 				<gd_maps>
-					<gd_map map_id="210070000" /><!-- Cygnea -->
-					<gd_map map_id="220080000" /><!-- Enshar -->
-					<gd_map map_id="600090000" /><!-- Kaldor -->
 					<gd_map map_id="600100000" /><!-- Levinshor -->
 				</gd_maps>
 				<gd_ratings>
@@ -3844,7 +3841,7 @@
 					<gd_rating rating="HERO" />
 				</gd_ratings>
 			</gd_rule>
-			<gd_rule rule_name="Snowball (Shared)" base_chance="100" member_limit="12">
+			<gd_rule rule_name="Snowball (Shared)" min_count="3" max_count="5" base_chance="100" member_limit="12">
 				<gd_items>
 					<gd_item id="188052986" /><!-- +1 Snowball -->
 				</gd_items>
