@@ -26,6 +26,7 @@ import com.aionemu.gameserver.configs.main.ThreadConfig;
 import com.aionemu.gameserver.configs.network.NetworkConfig;
 import com.aionemu.gameserver.model.ChatType;
 import com.aionemu.gameserver.model.account.Account;
+import com.aionemu.gameserver.model.gameobjects.player.CustomPlayerState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.Crypt;
 import com.aionemu.gameserver.network.PacketFloodFilter;
@@ -429,7 +430,7 @@ public class AionConnection extends AConnection<AionServerPacket> {
 			int expectedPingIntervalMillis = getActivePlayer() == null ? CM_PING.CLIENT_PING_INTERVAL : CM_PING_INGAME.CLIENT_PING_INTERVAL;
 			// just checking lastPingTime is not sufficient, CM_PING_INGAME interval seems to vary or skip from time to time / under certain circumstances
 			long millisSinceLastClientPacket = System.currentTimeMillis() - lastClientMessageTime;
-			if (millisSinceLastClientPacket - 5000 > expectedPingIntervalMillis) {
+			if (!getActivePlayer().isInCustomState(CustomPlayerState.WATCHING_CUTSCENE) && millisSinceLastClientPacket - 5000 > expectedPingIntervalMillis) {
 				log.info("Closing hanged up connection of " + AionConnection.this + " (last sign of life was " + millisSinceLastClientPacket + "ms ago)");
 				close();
 			}
