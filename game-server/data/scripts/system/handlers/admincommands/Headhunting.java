@@ -19,6 +19,7 @@ import com.aionemu.gameserver.model.PlayerClass;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.event.Headhunter;
 import com.aionemu.gameserver.model.gameobjects.LetterType;
+import com.aionemu.gameserver.model.gameobjects.Persistable.PersistentState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.PlayerCommonData;
 import com.aionemu.gameserver.model.templates.rewards.RewardItem;
@@ -57,7 +58,8 @@ public class Headhunting extends AdminCommand {
 		setSyntaxInfo(
 			"<analyze> - Analyzes the season.", "<clear> - Clears the analayzed results",
 			"<show> <rewards|results> - Shows the registered rewards or analyzed results",
-			"<reward> - Executes the reward algorithm and clears all references (cached headhunters and database entries)."
+			"<reward> - Executes the reward algorithm and clears all references (cached headhunters and database entries).",
+			"<setKills> <playerId> <kills> - Set headhunting kills of specified player to given value."
 		);
 		// @formatter:on
 
@@ -110,8 +112,28 @@ public class Headhunting extends AdminCommand {
 			case "reward":
 				rewardPlayers(admin);
 				break;
+			case "setKills":
+				if (params.length < 3)
+					sendInfo(admin);
+				try {
+					setKills(admin, Integer.parseInt(params[1]), Integer.parseInt(params[2]));
+				} catch (NumberFormatException e) {
+					sendInfo(admin, "playerId and kills should be numbers.");
+				}
+				break;
 			default:
 				sendInfo(admin);
+		}
+	}
+
+	private void setKills(Player admin, int playerId, int kills) {
+		Headhunter hunter = PvpService.getInstance().getHeadhunter(playerId);
+		if (hunter != null) {
+			hunter.setKills(kills);
+			hunter.setPersistentState(PersistentState.UPDATE_REQUIRED);
+			sendInfo(admin, "Successfully set kills to " + kills + " for player ID = " + playerId);
+		} else {
+			sendInfo(admin, "The player could not be found. Either the player ID is wrong or the player did not participated.");
 		}
 	}
 
