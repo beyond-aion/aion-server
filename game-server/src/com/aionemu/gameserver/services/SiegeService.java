@@ -360,6 +360,8 @@ public class SiegeService {
 			PacketSendUtility.sendPacket(player, new SM_SIEGE_LOCATION_INFO(loc));
 		});
 
+		broadcastUpdate(loc);
+
 		// Spawn new npc
 		spawnNpcs(loc.getLocationId(), SiegeRace.BALAUR, SiegeModType.PEACE);
 
