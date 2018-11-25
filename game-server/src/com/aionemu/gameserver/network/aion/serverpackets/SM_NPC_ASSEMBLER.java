@@ -16,20 +16,25 @@ public class SM_NPC_ASSEMBLER extends AionServerPacket {
 
 	public SM_NPC_ASSEMBLER(AssembledNpc assembledNpc) {
 		this.assembledNpc = assembledNpc;
-		this.routeId = assembledNpc.getRouteId();
-		timeOnMap = assembledNpc.getTimeOnMap();
+		if (assembledNpc != null) {
+			this.routeId = assembledNpc.getRouteId();
+			timeOnMap = assembledNpc.getTimeOnMap();
+		}
 	}
 
 	@Override
 	protected void writeImpl(AionConnection con) {
-
-		writeD(assembledNpc.getAssembledParts().size()); // size
-		for (AssembledNpcPart npc : assembledNpc.getAssembledParts()) {
-			writeD(routeId); // routeId
-			writeD(npc.getObject()); // objectId
-			writeD(npc.getNpcId()); // npc Id
-			writeD(npc.getStaticId()); // static Id
-			writeQ(timeOnMap); // time
+		if (assembledNpc != null) {
+			writeD(assembledNpc.getAssembledParts().size()); // size
+			for (AssembledNpcPart npc : assembledNpc.getAssembledParts()) {
+				writeD(routeId); // routeId
+				writeD(npc.getObject()); // objectId
+				writeD(npc.getNpcId()); // npc Id
+				writeD(npc.getStaticId()); // static Id
+				writeQ(timeOnMap); // time
+			}
+		} else {
+			writeD(0);
 		}
 	}
 }

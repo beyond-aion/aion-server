@@ -1,212 +1,179 @@
 package com.aionemu.gameserver.services.siege;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.EnumMap;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.configs.main.SiegeConfig;
-import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.siege.AssaultType;
+import com.aionemu.gameserver.model.gameobjects.siege.SiegeNpc;
+import com.aionemu.gameserver.model.siege.Assaulter;
+import com.aionemu.gameserver.model.siege.AssaulterType;
 import com.aionemu.gameserver.model.siege.Influence;
-import com.aionemu.gameserver.model.siege.SiegeModType;
-import com.aionemu.gameserver.model.siege.SiegeRace;
-import com.aionemu.gameserver.model.templates.spawns.Spawn;
-import com.aionemu.gameserver.model.templates.spawns.SpawnSpotTemplate;
-import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
-import com.aionemu.gameserver.model.templates.spawns.assaults.AssaultSpawn;
-import com.aionemu.gameserver.model.templates.spawns.assaults.AssaultWave;
+import com.aionemu.gameserver.model.templates.npc.AbyssNpcType;
+import com.aionemu.gameserver.model.templates.npc.NpcRating;
+import com.aionemu.gameserver.model.templates.siegelocation.AssaultData;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_NPC_ASSEMBLER;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
-import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
+import com.aionemu.gameserver.world.World;
 
 /**
- * @author Luzien
- * @reworked Whoop
+ * @author Luzien, Estrayl
+ *         TODO: Fortress gate, gate restoration stone and aetheric field destruction
  */
 public class FortressAssault extends Assault<FortressSiege> {
 
-	private static final Logger log = LoggerFactory.getLogger(FortressAssault.class);
-
-	private boolean spawned = false;
+	private final static Logger log = LoggerFactory.getLogger("SIEGE_LOG");
+	private final List<Assaulter> commanderSpawnList = new ArrayList<>();
+	private final AssaultData assaultData;
+	private float difficulty, commanderSpawnChance, spawnBudget, startBudget;
+	private int minSpawnDelay, waveCount, possibleCommanderCount;
 
 	public FortressAssault(FortressSiege siege) {
 		super(siege);
+		assaultData = siegeLocation.getTemplate().getAssaultData();
+		calculateDifficultySettings();
 	}
 
 	@Override
-	protected void scheduleAssault(int delay) {
-		dredgionTask = ThreadPoolManager.getInstance().schedule(() -> {
-			BalaurAssaultService.getInstance().spawnDredgion(getSpawnIdByFortressId());
-			spawnTask = ThreadPoolManager.getInstance().schedule(() -> scheduleSpawns(), Rnd.get(240, 300) * 1000);
-		}, delay * 1000);
+	protected void handleAssault() {
+		BalaurAssaultService.getInstance().spawnDredgion(assaultData.getDredgionId());
+		scheduleSpawns();
 	}
 
 	@Override
-	protected void onAssaultFinish(boolean captured) {
-		if (!spawned)
-			return;
-
-		if (captured)
-			siegeLocation.forEachPlayer(p -> PacketSendUtility.sendPacket(p, SM_SYSTEM_MESSAGE.STR_ABYSS_DRAGON_BOSS_KILLED()));
+	protected void onAssaultFinish(boolean isCaptured) {
+		if (isCaptured)
+			announce(SM_SYSTEM_MESSAGE.STR_ABYSS_DRAGON_BOSS_KILLED());
 	}
 
 	private void scheduleSpawns() {
+		spawnTask = ThreadPoolManager.getInstance().schedule(this::spawnWave, Rnd.get(minSpawnDelay, assaultData.getBaseDelay()), TimeUnit.SECONDS);
+	}
 
-		if (spawned)
+	private void spawnWave() {
+		if (!siegeLocation.isVulnerable() || spawnBudget < 0.1f)
 			return;
 
-		spawned = true;
-
-		if (DataManager.SPAWNS_DATA.getAssaultSpawnBySiegeId(locationId).getAssaultWaves().isEmpty())
-			return;
-
-		initiateSpawn(getWave(AssaultType.TELEPORT));
-		ThreadPoolManager.getInstance().schedule(() -> {
-			if (initiateSpawn(getWave(AssaultType.FIRST_WAVE))) {
-				ThreadPoolManager.getInstance().schedule(() -> {
-					if (initiateSpawn(getWave(AssaultType.SECOND_WAVE))) {
-						ThreadPoolManager.getInstance().schedule(() -> {
-							if (siegeLocation.isVulnerable())
-								initiateSpawn(getWave(AssaultType.COMMANDER));
-						}, Rnd.get(90, 180) * 1000);
-					}
-				}, Rnd.get(90, 120) * 1000);
-			}
-		}, Rnd.get(30, 60) * 1000);
-	}
-
-	private boolean initiateSpawn(AssaultWave wave) {
-		if (!siegeLocation.isVulnerable())
-			return false;
-		int influenceMultiplier = getInfluenceMultiplier(siegeLocation.getRace());
-
-		for (Spawn spawn : wave.getSpawns()) {
-			for (SpawnSpotTemplate sst : spawn.getSpawnSpotTemplates()) {
-				for (int i = 0; i < influenceMultiplier; i++) {
-					if (Rnd.chance() < SiegeConfig.SIEGE_HEALTH_MULTIPLIER * 100)
-						spawnAssaulter(wave.getWorldId(), spawn.getNpcId(), locationId, sst.getX(), sst.getY(), sst.getZ(), (byte) 0, wave.getAssaultType());
-				}
-			}
-		}
-		if (wave.getAssaultType() == AssaultType.COMMANDER) {
-			for (int i = 0; i < influenceMultiplier; i++) {
-				spawnAssaulter(wave.getWorldId(), getCommanderIdByFortressId(), locationId, boss.getX(), boss.getY(), boss.getZ(), (byte) 0,
-					wave.getAssaultType());
-			}
-		}
-		announceInvasion(wave.getAssaultType());
-		return true;
-	}
-
-	private void spawnAssaulter(int mapId, int npcId, int locId, float x, float y, float z, byte heading, AssaultType aType) {
-		float x1 = (float) (x + Math.cos(Math.PI * Rnd.get()) * Rnd.get(1, 3));
-		float y1 = (float) (y + Math.sin(Math.PI * Rnd.get()) * Rnd.get(1, 3));
-
-		SpawnTemplate spawnTemplate = SpawnEngine.newSiegeSpawn(mapId, npcId, locId, SiegeRace.BALAUR, SiegeModType.ASSAULT, x1, y1, z, heading);
-		Npc invader = (Npc) SpawnEngine.spawnObject(spawnTemplate, 1);
-		if (aType != AssaultType.TELEPORT)
-			invader.getAggroList().addHate(boss, 100000);
-	}
-
-	private void announceInvasion(AssaultType aType) {
-		siegeLocation.forEachPlayer(p -> PacketSendUtility.sendPacket(p, aType == AssaultType.TELEPORT ? SM_SYSTEM_MESSAGE.STR_ABYSS_WARP_DRAGON()
-			: SM_SYSTEM_MESSAGE.STR_ABYSS_CARRIER_DROP_DRAGON()));
-	}
-
-	private AssaultWave getWave(AssaultType aType) {
-		AssaultWave wave = null;
-		AssaultSpawn spawn = DataManager.SPAWNS_DATA.getAssaultSpawnBySiegeId(locationId);
-		if (spawn == null) {
-			log.warn("There are no assault spawns for siege " + locationId + " and wave " + aType);
-			return wave;
-		}
-		for (AssaultWave awave : spawn.getAssaultWaves()) {
-			if (awave.getAssaultType() == aType) {
-				wave = awave;
+		switch (++waveCount) {
+			case 1:
+			case 10:
+				List<Assaulter> teleportWave = assaultData.getProcessedAssaulters().get(AssaulterType.TELEPORT);
+				for (SiegeNpc npc : World.getInstance().getLocalSiegeNpcs(locationId))
+					if (npc.getRating() != NpcRating.LEGENDARY && npc.getAbyssNpcType() != AbyssNpcType.ARTIFACT && Rnd.chance() < 50)
+						spawnAssaulter(Rnd.get(teleportWave), npc);
+				announce(SM_SYSTEM_MESSAGE.STR_ABYSS_WARP_DRAGON());
 				break;
+			default:
+				computeWave().forEach(a -> spawnAssaulter(a, boss));
+				if (!commanderSpawnList.isEmpty()) {
+					if (Rnd.chance() < commanderSpawnChance) {
+						spawnAssaulter(commanderSpawnList.remove(0), boss);
+						commanderSpawnChance = 0f;
+					} else {
+						commanderSpawnChance += 10 + 5 * difficulty;
+					}
+				}
+				announce(SM_SYSTEM_MESSAGE.STR_ABYSS_CARRIER_DROP_DRAGON());
+				break;
+		}
+		scheduleSpawns();
+	}
+
+	private List<Assaulter> computeWave() {
+		List<Assaulter> finalList = new ArrayList<>();
+		EnumMap<AssaulterType, List<Assaulter>> assaulterMap = assaultData.getProcessedAssaulters();
+		for (AssaulterType type : AssaulterType.values()) {
+			if (type == AssaulterType.TELEPORT || type == AssaulterType.COMMANDER)
+				continue;
+			computeAssaulterList(finalList, assaulterMap.get(type), spawnBudget * type.getSpawnStake());
+		}
+		return finalList;
+	}
+
+	private void computeAssaulterList(List<Assaulter> output, List<Assaulter> input, float budget) {
+		if (!input.isEmpty()) {
+			while (budget > 0.0f) {
+				float budgetCopy = budget;
+				Assaulter a = Rnd.get(input.stream().filter(assaulter -> assaulter.getSpawnCost() <= budgetCopy).collect(Collectors.toList()));
+				if (a == null)
+					a = input.get(0);
+				output.add(a);
+				budget -= a.getSpawnCost();
 			}
+		} else {
+			output = Collections.emptyList();
 		}
-		if (wave == null) {
-			log.warn("There is no assault wave for siege " + locationId + " and wave " + aType);
-			return wave;
-		}
-		return wave;
 	}
 
-	private int getInfluenceMultiplier(SiegeRace defender) { // TODO: Maybe more dynamical?
-		float influence;
-
-		if (defender == SiegeRace.ASMODIANS)
-			influence = Influence.getInstance().getAsmodianInfluenceRate();
-		else
-			influence = Influence.getInstance().getElyosInfluenceRate();
-
-		if (influence >= 0.9f)
-			return 3;
-		else if (influence >= 0.7f)
-			return 2;
-		else
-			return 1;
+	private void announce(SM_SYSTEM_MESSAGE msg) {
+		siegeLocation.forEachPlayer(p -> PacketSendUtility.sendPacket(p, msg));
 	}
 
-	private int getCommanderIdByFortressId() {
-		switch (locationId) {
-			case 1131: // Lower Abyss
-			case 1132:
-			case 1141:
-				return 276649; // Lv40
-			case 1211: // Outer Abyss
-			case 1251:
-				return 276871; // Lv50
-			case 1011: // Divine
-				return 882276;
-			case 1221: // Inner Upper Abyss
-			case 1231:
-			case 1241:
-				return 251385;
-			case 2011: // Inggison | Gelkmaros
-			case 2021:
-			case 3011:
-			case 3021:
-				return 258236;
+	private void calculateDifficultySettings() {
+		float factionBalance = getFactionBalanceMultiplier();
+		float influence = getInfluenceMultiplier();
+
+		difficulty = factionBalance / 3f * (1f + influence) * SiegeConfig.SIEGE_DIFFICULTY_MULTIPLIER;
+
+		spawnBudget = Math.max(assaultData.getBaseBudget() / 3f, Math.round(assaultData.getBaseBudget() * difficulty));
+		startBudget = spawnBudget;
+		computeAssaulterList(commanderSpawnList, assaultData.getProcessedAssaulters().get(AssaulterType.COMMANDER), difficulty);
+		possibleCommanderCount = commanderSpawnList.size();
+
+		minSpawnDelay = Math.min(Math.round(assaultData.getBaseDelay() / difficulty), assaultData.getBaseDelay() - 10);
+		if (minSpawnDelay < 30) // just in case SIEGE_DIFFICULTY_MULTIPLIER is set beyond 1.0 (100%)
+			minSpawnDelay = 30;
+
+		log.info("Initialized fortress assault on [locationID=" + locationId + "] with [difficulty=" + difficulty + "] [factionBalance=" + factionBalance
+			+ "] [influence=" + influence + "] [difficultyMultiplier=" + SiegeConfig.SIEGE_DIFFICULTY_MULTIPLIER + "]");
+	}
+
+	private float getFactionBalanceMultiplier() {
+		int factionBalance = siegeLocation.getFactionBalance();
+		switch (siegeLocation.getRace()) {
+			case ASMODIANS:
+				if (factionBalance < 0)
+					return Math.abs(factionBalance);
+				break;
+			case ELYOS:
+				if (factionBalance > 0)
+					return Math.abs(factionBalance);
+				break;
+		}
+		return 1f;
+	}
+
+	private float getInfluenceMultiplier() {
+		switch (siegeLocation.getRace()) {
+			case ASMODIANS:
+				return Influence.getInstance().getAsmodianInfluenceRate();
+			case ELYOS:
+				return Influence.getInstance().getElyosInfluenceRate();
 			default:
-				return 258236;
+				return 1f;
 		}
 	}
 
-	private int getSpawnIdByFortressId() {
-		switch (locationId) {
-			case 2011:
-				return 5;
-			case 2021:
-				return 6;
-			case 3021:
-				return 10;
-			case 3011:
-				return 11;
-			case 1141:
-				return 12;
-			case 1221:
-				return 13;
-			case 1131:
-				return 15;
-			case 1132:
-				return 14;
-			case 1241:
-				return 16;
-			case 1231:
-				return 17;
-			case 1211:
-				return 18;
-			case 1251:
-				return 19;
-			case 1011:
-				return 20;
-				// TODO: recheck 4.0
-			default:
-				return 1;
+	public void onDredgionCommanderKilled() {
+		spawnBudget -= startBudget * (1f / possibleCommanderCount);
+		if (spawnBudget < 0.1f) {
+			World.getInstance().forEachPlayer(p -> {
+				PacketSendUtility.sendPacket(p, new SM_NPC_ASSEMBLER(null));
+				PacketSendUtility.sendPacket(p, SM_SYSTEM_MESSAGE.STR_ABYSS_CARRIER_DESPAWN());
+			});
+			if (spawnTask != null)
+				spawnTask.cancel(true);
+			log.info("Finished fortress assault on [locationID=" + locationId + "] by defeating " + possibleCommanderCount + " dredgion commanders after "
+				+ waveCount + " waves.");
 		}
 	}
 }

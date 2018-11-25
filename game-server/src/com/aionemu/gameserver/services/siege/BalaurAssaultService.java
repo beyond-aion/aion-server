@@ -27,10 +27,9 @@ import com.aionemu.gameserver.utils.idfactory.IDFactory;
 import com.aionemu.gameserver.world.World;
 
 /**
- * @author synchro2
- * @reworked Luzien
- * @modified Estrayl
- * TODO: Send Peace Dredgion without assault
+ * @author synchro2, Luzien, Estrayl
+ *         TODO: Send Peace Dredgion without assault
+ *         TODO: Dredgion Battleship as real NPC
  */
 public class BalaurAssaultService {
 
@@ -42,7 +41,7 @@ public class BalaurAssaultService {
 		return SingletonHolder.INSTANCE;
 	}
 
-	public void onSiegeStart(final Siege<?> siege) {
+	public void onSiegeStart(Siege<?> siege) {
 		if (siege instanceof FortressSiege) {
 			if (!calculateFortressAssault(((FortressSiege) siege).getSiegeLocation()))
 				return;
@@ -50,29 +49,25 @@ public class BalaurAssaultService {
 		} else if (siege instanceof ArtifactSiege) {
 			if (artifactAssaults.containsKey(siege.getSiegeLocation().getLocationId()) || siege.getSiegeLocation().getRace() == SiegeRace.BALAUR)
 				return;
-			newAssault(siege, Rnd.get(180, 2880)); // between 3 and 48 hours
+			newAssault(siege, Rnd.get(10800, 172800)); // between 3 and 48 hours
 		}
 	}
 
 	public void onSiegeFinish(Siege<?> siege) {
 		int locId = siege.getSiegeLocationId();
+		boolean isBossKilled = siege.isBossKilled();
 		if (fortressAssaults.containsKey(locId)) {
-			Boolean bossIsKilled = siege.isBossKilled();
-			fortressAssaults.get(locId).finishAssault(bossIsKilled);
-			if (bossIsKilled && siege.getSiegeLocation().getRace().equals(SiegeRace.BALAUR))
+			fortressAssaults.remove(locId).finishAssault(isBossKilled);
+			if (isBossKilled && siege.getSiegeLocation().getRace().equals(SiegeRace.BALAUR))
 				log.info(siege + " has been captured by Balaur assault!");
 			else
 				log.info(siege + " Balaur assault finished without capture!");
-			fortressAssaults.remove(locId);
 		} else if (artifactAssaults.containsKey(locId)) {
-			boolean bossIsKilled = siege.isBossKilled();
-			artifactAssaults.get(locId).finishAssault(bossIsKilled);
-			if (bossIsKilled && siege.getSiegeLocation().getRace().equals(SiegeRace.BALAUR))
+			artifactAssaults.remove(locId).finishAssault(isBossKilled);
+			if (isBossKilled && siege.getSiegeLocation().getRace().equals(SiegeRace.BALAUR))
 				log.info(siege + " has been captured by Balaur assault!");
-			else {
+			else
 				log.info(siege + " Balaur assault finished without capture!");
-			}
-			artifactAssaults.remove(locId);
 		}
 	}
 
@@ -85,21 +80,18 @@ public class BalaurAssaultService {
 		if (fortressAssaults.containsKey(fortress.getLocationId()))
 			return false;
 
-		int count = 0; // Allow only 2 Balaur attacks per map, 1 per Balaurea map
+		int count = 0;
 		for (FortressAssault fa : fortressAssaults.values()) {
 			if (fa.getWorldId() == fortress.getWorldId())
 				count++;
 		}
-		if (count >= (isBalaurea ? 1 : 2))
+		if (count >= (isBalaurea ? 1 : 2)) // Allow only 2 Balaur attacks per map, 1 per Balaurea map
 			return false;
 
 		float influence = fortress.getRace() == SiegeRace.ASMODIANS ? Influence.getInstance().getAsmodianInfluenceRate()
 			: Influence.getInstance().getElyosInfluenceRate();
 
-		if (Rnd.nextFloat() >= influence / SiegeConfig.BALAUR_ASSAULT_RATE)
-			return false;
-
-		return true;
+		return Rnd.chance() < influence * 100f * SiegeConfig.BALAUR_ASSAULT_RATE;
 	}
 
 	public void startAssault(Player player, int location, int delay) {
@@ -115,28 +107,33 @@ public class BalaurAssaultService {
 			FortressAssault assault = new FortressAssault((FortressSiege) siege);
 			assault.startAssault(delay);
 			fortressAssaults.put(siege.getSiegeLocationId(), assault);
-			if (LoggingConfig.LOG_SIEGE)
-				log.info("Scheduled Balaur assault of " + siege + " in " + delay + "seconds");
 		} else if (siege instanceof ArtifactSiege) {
 			ArtifactAssault assault = new ArtifactAssault((ArtifactSiege) siege);
 			assault.startAssault(delay);
 			artifactAssaults.put(siege.getSiegeLocationId(), assault);
-			if (LoggingConfig.LOG_SIEGE)
-				log.info("Scheduled Balaur assault of " + siege + " in " + delay + " minutes");
 		}
+		if (LoggingConfig.LOG_SIEGE)
+			log.info("Scheduled assault of " + siege + " in " + delay + " seconds");
 	}
 
 	public void spawnDredgion(int spawnId) {
 		AssembledNpcTemplate template = DataManager.ASSEMBLED_NPC_DATA.getAssembledNpcTemplate(spawnId);
 		List<AssembledNpcPart> assembledParts = new ArrayList<>();
-		for (AssembledNpcTemplate.AssembledNpcPartTemplate npcPart : template.getAssembledNpcPartTemplates())
-			assembledParts.add(new AssembledNpcPart(IDFactory.getInstance().nextId(), npcPart));
+		template.getAssembledNpcPartTemplates().forEach(part -> assembledParts.add(new AssembledNpcPart(IDFactory.getInstance().nextId(), part)));
 
 		AssembledNpc npc = new AssembledNpc(template.getRouteId(), template.getMapId(), template.getLiveTime(), assembledParts);
-		for (Player p : World.getInstance().getAllPlayers()) {
+		World.getInstance().forEachPlayer(p -> {
 			PacketSendUtility.sendPacket(p, new SM_NPC_ASSEMBLER(npc));
 			PacketSendUtility.sendPacket(p, SM_SYSTEM_MESSAGE.STR_ABYSS_CARRIER_SPAWN());
-		}
+		});
+	}
+
+	/**
+	 * @return
+	 * 				- the FortressAssault object or null if none is active
+	 */
+	public FortressAssault getFortressAssaultBySiegeId(int siegeId) {
+		return fortressAssaults.get(siegeId);
 	}
 
 	private static class SingletonHolder {

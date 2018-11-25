@@ -14,7 +14,7 @@ import com.aionemu.gameserver.model.siege.SiegeType;
 import com.aionemu.gameserver.model.templates.L10n;
 
 /**
- * @author Sarynth modified by antness & Source & Wakizashi
+ * @author Sarynth, antness, Source, Wakizashi
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "siegelocation")
@@ -34,6 +34,9 @@ public class SiegeLocationTemplate implements L10n {
 	protected List<SiegeLegionReward> siegeLegionRewards;
 	@XmlElement(name = "merc_zone")
 	protected List<SiegeMercenaryZone> siegeMercenaryZones;
+	@XmlElement(name = "assault_data")
+	protected AssaultData assaultData;
+
 	@XmlAttribute(name = "name_id")
 	protected int nameId = 0;
 	@XmlAttribute(name = "repeat_count")
@@ -80,6 +83,10 @@ public class SiegeLocationTemplate implements L10n {
 
 	public List<SiegeMercenaryZone> getSiegeMercenaryZones() {
 		return siegeMercenaryZones;
+	}
+
+	public AssaultData getAssaultData() {
+		return assaultData;
 	}
 
 	@Override

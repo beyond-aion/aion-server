@@ -6,8 +6,11 @@ import com.aionemu.gameserver.configs.main.SiegeConfig;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
+import com.aionemu.gameserver.model.gameobjects.siege.SiegeNpc;
 import com.aionemu.gameserver.model.stats.calc.Stat2;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
+import com.aionemu.gameserver.services.siege.BalaurAssaultService;
+import com.aionemu.gameserver.services.siege.FortressAssault;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
@@ -54,7 +57,7 @@ public class DredgionCommanderAI extends SiegeNpcAI {
 	@Override
 	public int modifyOwnerDamage(int damage, Effect effect) {
 		if (fortressBoss != null && effect != null && effect.getEffected() == fortressBoss && effect.getStack().equals("DGFI_ONESHOTONEKILL_WARPDR"))
-			damage = Math.round(fortressBoss.getLifeStats().getMaxHp() * 0.2f);
+			damage = Math.round(fortressBoss.getLifeStats().getMaxHp() * 0.1f);
 		return damage;
 	}
 
@@ -72,6 +75,10 @@ public class DredgionCommanderAI extends SiegeNpcAI {
 
 	@Override
 	protected void handleDied() {
+		FortressAssault assault = BalaurAssaultService.getInstance().getFortressAssaultBySiegeId(((SiegeNpc) getOwner()).getSiegeId());
+		if (assault != null)
+			assault.onDredgionCommanderKilled();
+
 		fortressBoss = null;
 		super.handleDied();
 	}

@@ -639,4 +639,38 @@
 		<assembled_part npcId="295130" staticId="254"/>
 		<assembled_part npcId="276622" staticId="241"/>
 	</assembled_npc>
+	
+	<!-- Fake Dredgion for 7011 -->
+	<assembled_npc nr="21" routeId="0" liveTime="600000" mapId="600090000">
+		<assembled_part npcId="296126" staticId="376"/>
+		<assembled_part npcId="277024" staticId="70"/>
+		<assembled_part npcId="277025" staticId="67"/>
+		<assembled_part npcId="277025" staticId="69"/>
+		<assembled_part npcId="277026" staticId="73"/>
+		<assembled_part npcId="277029" staticId="36"/>
+		<assembled_part npcId="277028" staticId="1337"/>
+		<assembled_part npcId="277030" staticId="1336"/>
+		<assembled_part npcId="276724" staticId="35"/>
+		<assembled_part npcId="276724" staticId="77"/>
+		<assembled_part npcId="276724" staticId="366"/>
+		<assembled_part npcId="276724" staticId="89"/>
+		<assembled_part npcId="276724" staticId="74"/>
+		<assembled_part npcId="276724" staticId="1252"/>
+		<assembled_part npcId="276725" staticId="1242"/>
+		<assembled_part npcId="276725" staticId="78"/>
+		<assembled_part npcId="276724" staticId="83"/>
+		<assembled_part npcId="276724" staticId="75"/>
+		<assembled_part npcId="276724" staticId="76"/>
+		<assembled_part npcId="276724" staticId="40"/>
+		<assembled_part npcId="276724" staticId="154"/>
+		<assembled_part npcId="276724" staticId="384"/>
+		<assembled_part npcId="276724" staticId="79"/>
+		<assembled_part npcId="276724" staticId="90"/>
+		<assembled_part npcId="276724" staticId="372"/>
+		<assembled_part npcId="276724" staticId="388"/>
+		<assembled_part npcId="276724" staticId="1241"/>
+		<assembled_part npcId="276724" staticId="72"/>
+		<assembled_part npcId="295130" staticId="254"/>
+		<assembled_part npcId="276622" staticId="241"/>
+	</assembled_npc>
 </assembled_npcs>

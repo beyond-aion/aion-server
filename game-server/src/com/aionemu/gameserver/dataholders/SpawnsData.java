@@ -40,8 +40,6 @@ import com.aionemu.gameserver.model.templates.spawns.SpawnMap;
 import com.aionemu.gameserver.model.templates.spawns.SpawnSearchResult;
 import com.aionemu.gameserver.model.templates.spawns.SpawnSpotTemplate;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
-import com.aionemu.gameserver.model.templates.spawns.assaults.AssaultSpawn;
-import com.aionemu.gameserver.model.templates.spawns.assaults.AssaultWave;
 import com.aionemu.gameserver.model.templates.spawns.basespawns.BaseSpawn;
 import com.aionemu.gameserver.model.templates.spawns.mercenaries.MercenaryRace;
 import com.aionemu.gameserver.model.templates.spawns.mercenaries.MercenarySpawn;
@@ -80,7 +78,6 @@ public class SpawnsData {
 	private TIntObjectHashMap<List<SpawnGroup>> siegeSpawnMaps = new TIntObjectHashMap<>();
 	private TIntObjectHashMap<List<SpawnGroup>> vortexSpawnMaps = new TIntObjectHashMap<>();
 	private TIntObjectHashMap<MercenarySpawn> mercenarySpawns = new TIntObjectHashMap<>();
-	private TIntObjectHashMap<AssaultSpawn> assaultSpawns = new TIntObjectHashMap<>();
 	private TIntObjectHashMap<List<SpawnGroup>> ahserionSpawnMaps = new TIntObjectHashMap<>(); // Ahserion's flight
 	private Set<Integer> allNpcIds;
 
@@ -173,15 +170,6 @@ public class SpawnsData {
 				}
 			}
 
-			for (AssaultSpawn assaultSpawn : map.getAssaultSpawns()) {
-				int id = assaultSpawn.getSiegeId();
-				assaultSpawns.put(id, assaultSpawn);
-				for (AssaultWave awave : assaultSpawn.getAssaultWaves()) {
-					awave.setWorldId(map.getMapId());
-					awave.setSiegeId(assaultSpawn.getSiegeId());
-				}
-			}
-
 			for (AhserionsFlightSpawn ahserionSpawn : map.getAhserionSpawns()) {
 				int teamId = ahserionSpawn.getFaction().getId();
 				if (!ahserionSpawnMaps.containsKey(teamId)) {
@@ -247,10 +235,6 @@ public class SpawnsData {
 
 	public MercenarySpawn getMercenarySpawnBySiegeId(int id) {
 		return mercenarySpawns.get(id);
-	}
-
-	public AssaultSpawn getAssaultSpawnBySiegeId(int id) {
-		return assaultSpawns.get(id);
 	}
 
 	public synchronized boolean saveSpawn(VisibleObject visibleObject, boolean delete) {

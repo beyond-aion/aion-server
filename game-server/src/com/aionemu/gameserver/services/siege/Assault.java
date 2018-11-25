@@ -1,23 +1,31 @@
 package com.aionemu.gameserver.services.siege;
 
 import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicBoolean;
 
+import com.aionemu.commons.utils.Rnd;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.siege.SiegeNpc;
+import com.aionemu.gameserver.model.siege.Assaulter;
 import com.aionemu.gameserver.model.siege.SiegeLocation;
+import com.aionemu.gameserver.model.siege.SiegeModType;
 import com.aionemu.gameserver.model.siege.SiegeRace;
+import com.aionemu.gameserver.spawnengine.SpawnEngine;
+import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
- * @author Luzien
+ * @author Luzien, Estrayl
  */
 public abstract class Assault<siege extends Siege<?>> {
 
+	private final AtomicBoolean isStarted = new AtomicBoolean();
 	protected final SiegeLocation siegeLocation;
-	protected final int locationId;
 	protected final SiegeNpc boss;
+	protected final int locationId;
 	protected final int worldId;
 
-	protected Future<?> dredgionTask;
-	protected Future<?> spawnTask;
+	protected Future<?> dredgionTask, spawnTask;
 
 	public Assault(Siege<?> siege) {
 		this.siegeLocation = siege.getSiegeLocation();
@@ -31,7 +39,8 @@ public abstract class Assault<siege extends Siege<?>> {
 	}
 
 	public void startAssault(int delay) {
-		scheduleAssault(delay);
+		if (isStarted.compareAndSet(false, true))
+			dredgionTask = ThreadPoolManager.getInstance().schedule(this::handleAssault, delay, TimeUnit.SECONDS);
 	}
 
 	public void finishAssault(boolean captured) {
@@ -40,11 +49,23 @@ public abstract class Assault<siege extends Siege<?>> {
 		if (spawnTask != null && !spawnTask.isDone())
 			spawnTask.cancel(true);
 
-		onAssaultFinish(captured && siegeLocation.getRace().equals(SiegeRace.BALAUR));
+		onAssaultFinish(captured && siegeLocation.getRace() == SiegeRace.BALAUR);
 	}
 
 	protected abstract void onAssaultFinish(boolean captured);
 
-	protected abstract void scheduleAssault(int delay);
+	protected abstract void handleAssault();
+
+	protected void spawnAssaulter(Assaulter a, SiegeNpc target) {
+		int headingOffset = a.getHeadingOffset() * 10;
+		float randomDirection = Rnd.get(-headingOffset, headingOffset) / 10f + target.getSpawn().getHeading();
+		double radian = Math.toRadians(randomDirection * 3d);
+		float x1 = (float) (target.getX() + Math.cos(radian) * a.getDistanceOffset());
+		float y1 = (float) (target.getY() + Math.sin(radian) * a.getDistanceOffset());
+
+		Npc spawned = (Npc) SpawnEngine.spawnObject(
+			SpawnEngine.newSiegeSpawn(getWorldId(), a.getNpcId(), locationId, SiegeRace.BALAUR, SiegeModType.ASSAULT, x1, y1, target.getZ(), (byte) 0), 1);
+		spawned.getAggroList().addHate(target, 100000);
+	}
 
 }

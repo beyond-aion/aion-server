@@ -3,7 +3,7 @@
 	<!-- Enraged Veille -->
 	<npc_skills npc_ids="258200 258201 258202 258203 258204">
 		<npc_skill id="18704" lv="1" prob="100" max_hp="50" prio="1" cd="240000"/>
-		<npc_skill id="18707" lv="1" prob="20" max_hp="30" cd="300000" /><!-- Veille's Will 3 min -->
+		<npc_skill id="18707" lv="1" prob="20" max_hp="25" cd="600000" /><!-- Veille's Will 3 min -->
 		<npc_skill id="18709" lv="60" prob="100" cd="25000" /><!-- Agent's Call -->
 		<npc_skill id="18710" lv="60" prob="100" cd="25000" /><!-- Withering Stare -->
 		<npc_skill id="18711" lv="60" prob="100" cd="25000" /><!-- Agent's Wrath -->
@@ -36,7 +36,7 @@
 	<!-- Enraged Mastarius -->
 	<npc_skills npc_ids="258205 258206 258207 258208 258209">
 		<npc_skill id="18704" lv="1" prob="100" max_hp="50" prio="1" cd="240000"/>
-		<npc_skill id="18706" lv="1" prob="20" max_hp="30" cd="300000" /><!-- Blessing of Mastarius 3 min -->
+		<npc_skill id="18706" lv="1" prob="20" max_hp="30" cd="600000" /><!-- Blessing of Mastarius 3 min -->
 		<npc_skill id="18709" lv="60" prob="100" cd="25000" /><!-- Agent's Call -->
 		<npc_skill id="18710" lv="60" prob="100" cd="25000" /><!-- Withering Stare -->
 		<npc_skill id="18711" lv="60" prob="100" cd="25000" /><!-- Agent's Wrath -->
@@ -72,9 +72,9 @@
 		<npc_skill id="17791" lv="65" prob="100" />
 	</npc_skills>
 	<!-- Dredgion Commander Lv40 -->
-	<npc_skills npc_ids="276649">
-		<npc_skill id="19125" lv="1" prob="100" is_post_spawn="true" /><!-- Dragon's Blessing -->
-		<npc_skill id="17572" lv="65" prob="100" cd="45000" /><!-- Dragon Lord Blade I -->
+	<npc_skills npc_ids="276647 276648 276649 276650 276651">
+		<npc_skill id="19125" lv="1" prob="0" is_post_spawn="true" /><!-- Dragon's Blessing -->
+		<npc_skill id="17572" lv="65" prob="100" prio="1" cd="45000" /><!-- Dragon Lord Blade I -->
 		<npc_skill id="17299" lv="65" prob="100" cd="25000" /><!-- Wide Area Ferocious Strike III -->
 		<npc_skill id="17301" lv="65" prob="100" cd="25000" /><!-- Wide Area Cleave Armor -->
 		<npc_skill id="17303" lv="65" prob="100" cd="25000" next_skill_time="0" next_chain_id="2" /><!-- Wide Area Pull -->
@@ -86,9 +86,9 @@
 		<npc_skill id="17579" lv="1" prob="100" cd="90000" /><!-- Fear Shriek -->
 	</npc_skills>
 	<!-- Dredgion Commander Lv50 -->
-	<npc_skills npc_ids="276871 276872">
-		<npc_skill id="19125" lv="1" prob="100" is_post_spawn="true" /><!-- Dragon's Blessing -->
-		<npc_skill id="18411" lv="65" prob="100" cd="45000" /><!-- Dragon Lord Blade III -->
+	<npc_skills npc_ids="276869 276870 276871 276872 276873">
+		<npc_skill id="19125" lv="1" prob="0" is_post_spawn="true" /><!-- Dragon's Blessing -->
+		<npc_skill id="18411" lv="65" prob="100" prio="1" cd="45000" /><!-- Dragon Lord Blade III -->
 		<npc_skill id="17299" lv="65" prob="100" cd="25000" /><!-- Wide Area Ferocious Strike III -->
 		<npc_skill id="17301" lv="65" prob="100" cd="25000" /><!-- Wide Area Cleave Armor -->
 		<npc_skill id="17303" lv="65" prob="100" cd="25000" next_skill_time="0" next_chain_id="2" /><!-- Wide Area Pull -->
@@ -100,9 +100,9 @@
 		<npc_skill id="17579" lv="1" prob="100" cd="90000" /><!-- Fear Shriek -->
 	</npc_skills>
 	<!-- Dredgion Commander Lv65 -->
-	<npc_skills npc_ids="258236 273343">
-		<npc_skill id="19125" lv="1" prob="100" is_post_spawn="true" /><!-- Dragon's Blessing -->
-		<npc_skill id="18428" lv="65" prob="100" cd="45000" /><!-- Dragon Lord Blade IV -->
+	<npc_skills npc_ids="251383 251384 251385 251386 251387 882272 882273 882274 882275 882276 252133 252134 252135 252136 252137">
+		<npc_skill id="19125" lv="1" prob="0" is_post_spawn="true" /><!-- Dragon's Blessing -->
+		<npc_skill id="18428" lv="65" prob="100" prio="1" cd="45000" /><!-- Dragon Lord Blade IV -->
 		<npc_skill id="17299" lv="65" prob="100" cd="25000" /><!-- Wide Area Ferocious Strike III -->
 		<npc_skill id="17301" lv="65" prob="100" cd="25000" /><!-- Wide Area Cleave Armor -->
 		<npc_skill id="17303" lv="65" prob="100" cd="25000" next_skill_time="0" next_chain_id="2" /><!-- Wide Area Pull -->
@@ -112,5 +112,298 @@
 		<npc_skill id="17325" lv="65" prob="0" chain_id="2" next_skill_time="0" next_chain_id="3" /><!-- Wide Area Aerial Thrust -->
 		<npc_skill id="17327" lv="65" prob="0" chain_id="3" /><!-- Wide Area Crashing Wind Strike -->
 		<npc_skill id="17579" lv="1" prob="100" cd="90000" /><!-- Fear Shriek -->
+	</npc_skills>
+	<!-- Dredgion Priest Lv40 -->
+	<npc_skills npc_ids="276784 276785 276786 276787 276788">
+		<npc_skill id="19125" lv="1" prob="0" is_post_spawn="true" /><!-- Dragon's Blessing -->
+		<npc_skill id="17354" lv="40" prob="70" cd="15000" /><!-- Divine Touch -->
+		<npc_skill id="17355" lv="40" prob="70" cd="15000" /><!-- Wide Area Divine Touch -->
+		<npc_skill id="17356" lv="1" prob="70" cd="15000" /><!-- Blindness -->
+		<npc_skill id="17357" lv="1" prob="70" cd="15000" /><!-- Wide Area Blindness -->
+		<npc_skill id="17358" lv="1" prob="70" cd="15000" target="NONE"><!-- Circle of Steel -->
+			<cond cond_type="HELP_FRIEND" hp_below="60" range="30" />
+		</npc_skill>
+		<npc_skill id="17359" lv="40" prob="70" cd="15000" /><!-- Hallowed Strike -->
+		<npc_skill id="17360" lv="40" prob="70" cd="15000" /><!-- Wide Area Hallowed Strike -->
+		<npc_skill id="17361" lv="1" prob="70" cd="15000" prio="2" target="NONE"><!-- Healing Light -->
+			<cond cond_type="HELP_FRIEND" hp_below="60" range="25" />
+		</npc_skill>
+		<npc_skill id="17364" lv="1" prob="100" cd="15000" prio="1" target="NONE"><!-- Healing Wind I -->
+			<cond cond_type="HELP_FRIEND" hp_below="60" range="25" />
+		</npc_skill>
+		<npc_skill id="17367" lv="40" prob="70" cd="15000" /><!-- Wide Area Stun -->
+		<npc_skill id="17382" lv="1" prob="30" cd="15000"><!-- Treatment -->
+			<cond cond_type="HELP_FRIEND" hp_below="40" range="25" />
+		</npc_skill>
+	</npc_skills>
+	<!-- Dredgion Priest Lv50 -->
+	<npc_skills npc_ids="277004 277005 277006 277007 277008">
+		<npc_skill id="19125" lv="1" prob="0" is_post_spawn="true" /><!-- Dragon's Blessing -->
+		<npc_skill id="17354" lv="50" prob="70" cd="15000" /><!-- Divine Touch -->
+		<npc_skill id="17355" lv="50" prob="70" cd="15000" /><!-- Wide Area Divine Touch -->
+		<npc_skill id="17356" lv="1" prob="70" cd="15000" /><!-- Blindness -->
+		<npc_skill id="17357" lv="1" prob="70" cd="15000" /><!-- Wide Area Blindness -->
+		<npc_skill id="17358" lv="1" prob="70" cd="30000" target="NONE"><!-- Circle of Steel -->
+			<cond cond_type="HELP_FRIEND" hp_below="60" range="30" />
+		</npc_skill>
+		<npc_skill id="17359" lv="50" prob="70" cd="15000" /><!-- Hallowed Strike -->
+		<npc_skill id="17360" lv="50" prob="70" cd="15000" /><!-- Wide Area Hallowed Strike -->
+		<npc_skill id="17362" lv="1" prob="70" cd="15000" prio="2" target="NONE"><!-- Radiant Cure I -->
+			<cond cond_type="HELP_FRIEND" hp_below="60" range="25" />
+		</npc_skill>
+		<npc_skill id="17365" lv="1" prob="100" cd="15000" prio="1" target="NONE"><!-- Healing Wind II -->
+			<cond cond_type="HELP_FRIEND" hp_below="60" range="25" />
+		</npc_skill>
+		<npc_skill id="17367" lv="50" prob="70" cd="15000" /><!-- Wide Area Stun -->
+		<npc_skill id="17382" lv="1" prob="30" cd="15000"><!-- Treatment -->
+			<cond cond_type="HELP_FRIEND" hp_below="40" range="25" />
+		</npc_skill>
+	</npc_skills>
+	<!-- Dredgion Priest Lv65 -->
+	<npc_skills npc_ids="251410 251413 251415 251418 251409 251412 251414 251417 252123 252124 252126 252127">
+		<npc_skill id="19125" lv="1" prob="0" is_post_spawn="true" /><!-- Dragon's Blessing -->
+		<npc_skill id="17354" lv="65" prob="70" cd="15000" /><!-- Divine Touch -->
+		<npc_skill id="17355" lv="65" prob="70" cd="15000" /><!-- Wide Area Divine Touch -->
+		<npc_skill id="17356" lv="1" prob="70" cd="15000" /><!-- Blindness -->
+		<npc_skill id="17357" lv="1" prob="70" cd="15000" /><!-- Wide Area Blindness -->
+		<npc_skill id="17358" lv="1" prob="70" cd="30000" target="NONE"><!-- Circle of Steel -->
+			<cond cond_type="HELP_FRIEND" hp_below="60" range="30" />
+		</npc_skill>
+		<npc_skill id="17359" lv="65" prob="70" cd="15000" /><!-- Hallowed Strike -->
+		<npc_skill id="17360" lv="65" prob="70" cd="15000" /><!-- Wide Area Hallowed Strike -->
+		<npc_skill id="17363" lv="1" prob="70" cd="15000" prio="2" target="NONE"><!-- Light of Recovery -->
+			<cond cond_type="HELP_FRIEND" hp_below="60" range="25" />
+		</npc_skill>
+		<npc_skill id="17366" lv="1" prob="100" cd="15000" prio="1" target="NONE"><!-- Healing Wind III -->
+			<cond cond_type="HELP_FRIEND" hp_below="60" range="25" />
+		</npc_skill>
+		<npc_skill id="17367" lv="65" prob="70" cd="15000" /><!-- Wide Area Stun -->
+		<npc_skill id="17382" lv="1" prob="30" cd="15000"><!-- Treatment -->
+			<cond cond_type="HELP_FRIEND" hp_below="40" range="25" />
+		</npc_skill>
+	</npc_skills>
+	<!-- Dredgion Witch Lv40 -->
+	<npc_skills npc_ids="276779 276780 276781 276782 276783">
+		<npc_skill id="19125" lv="1" prob="0" is_post_spawn="true" /><!-- Dragon's Blessing -->
+		<npc_skill id="17334" lv="40" prob="70" /><!-- Erosion -->
+		<npc_skill id="17335" lv="40" prob="70" /><!-- Flame Bolt -->
+		<npc_skill id="17336" lv="40" prob="70" /><!-- Fire Burst -->
+		<npc_skill id="17337" lv="40" prob="70" cd="20000" prio="1" target="RANDOM" /><!-- Shooting Star Storm -->
+		<npc_skill id="17338" lv="40" prob="70" /><!-- Hydro Eruption -->
+		<npc_skill id="17349" lv="40" prob="70" /><!-- Ice Wave -->
+		<npc_skill id="17340" lv="40" prob="70" /><!-- Winter Binding -->
+		<npc_skill id="17341" lv="1" prob="70" cd="30000" /><!-- Fear Shriek -->
+		<npc_skill id="17342" lv="1" prob="70" cd="30000" target="RANDOM" /><!-- Curse of Roots -->
+		<npc_skill id="17343" lv="1" prob="70" cd="30000" /><!-- Wide Area Curse of Roots -->
+		<npc_skill id="17346" lv="1" prob="70" cd="30000" target="RANDOM" /><!-- Disenchant -->
+		<npc_skill id="17348" lv="40" prob="70" /><!-- Afterblast -->
+		<npc_skill id="17353" lv="40" prob="70" cd="18000" /><!-- Wide Area Soul Freeze -->
+	</npc_skills>
+	<!-- Dredgion Witch Lv50 -->
+	<npc_skills npc_ids="276999 277000 277001 277002 277003">
+		<npc_skill id="19125" lv="1" prob="0" is_post_spawn="true" /><!-- Dragon's Blessing -->
+		<npc_skill id="17334" lv="50" prob="70" /><!-- Erosion -->
+		<npc_skill id="17335" lv="50" prob="70" /><!-- Flame Bolt -->
+		<npc_skill id="17336" lv="50" prob="70" /><!-- Fire Burst -->
+		<npc_skill id="17337" lv="50" prob="70" cd="20000" prio="1" target="RANDOM" /><!-- Shooting Star Storm -->
+		<npc_skill id="17338" lv="50" prob="70" /><!-- Hydro Eruption -->
+		<npc_skill id="17349" lv="50" prob="70" /><!-- Ice Wave -->
+		<npc_skill id="17340" lv="50" prob="70" /><!-- Winter Binding -->
+		<npc_skill id="17341" lv="1" prob="70" cd="30000" /><!-- Fear Shriek -->
+		<npc_skill id="17342" lv="1" prob="70" cd="30000" target="RANDOM" /><!-- Curse of Roots -->
+		<npc_skill id="17343" lv="1" prob="70" cd="30000" /><!-- Wide Area Curse of Roots -->
+		<npc_skill id="17345" lv="1" prob="70" cd="30000" target="RANDOM" /><!-- Disenchant -->
+		<npc_skill id="17348" lv="50" prob="70" /><!-- Afterblast -->
+		<npc_skill id="17353" lv="50" prob="70" cd="18000" /><!-- Wide Area Soul Freeze -->
+	</npc_skills>
+	<!-- Dredgion Witch Lv65 -->
+	<npc_skills npc_ids="251420 251423 251425 251428 251419 251422 251424 251427 252128 252129 252131 252132">
+		<npc_skill id="19125" lv="1" prob="0" is_post_spawn="true" /><!-- Dragon's Blessing -->
+		<npc_skill id="17334" lv="65" prob="70" /><!-- Erosion -->
+		<npc_skill id="17335" lv="65" prob="70" /><!-- Flame Bolt -->
+		<npc_skill id="17336" lv="65" prob="70" /><!-- Fire Burst -->
+		<npc_skill id="17337" lv="65" prob="70" cd="20000" prio="1" target="RANDOM" /><!-- Shooting Star Storm -->
+		<npc_skill id="17338" lv="65" prob="70" /><!-- Hydro Eruption -->
+		<npc_skill id="17349" lv="65" prob="70" /><!-- Ice Wave -->
+		<npc_skill id="17340" lv="65" prob="70" /><!-- Winter Binding -->
+		<npc_skill id="17341" lv="1" prob="70" cd="30000" /><!-- Fear Shriek -->
+		<npc_skill id="17342" lv="1" prob="70" cd="30000" target="RANDOM" /><!-- Curse of Roots -->
+		<npc_skill id="17343" lv="1" prob="70" cd="30000" /><!-- Wide Area Curse of Roots -->
+		<npc_skill id="17344" lv="1" prob="70" cd="30000" target="RANDOM" /><!-- Disenchant -->
+		<npc_skill id="17348" lv="65" prob="70" /><!-- Afterblast -->
+		<npc_skill id="17353" lv="65" prob="70" cd="18000" /><!-- Wide Area Soul Freeze -->
+	</npc_skills>
+	<!-- Dredgion Ranger Lv40 -->
+	<npc_skills npc_ids="276766 276767 276768 276769 276770">
+		<npc_skill id="19125" lv="1" prob="0" is_post_spawn="true" /><!-- Dragon's Blessing -->
+		<npc_skill id="17314" lv="40" prob="70" cd="15000" /><!-- Arrow Deluge -->
+		<npc_skill id="17315" lv="40" prob="70" cd="15000" /><!-- Arrow Storm -->
+		<npc_skill id="17316" lv="40" prob="70" /><!-- Wedge Wave -->
+		<npc_skill id="17317" lv="40" prob="70" /><!-- Arrow Strike -->
+		<npc_skill id="17318" lv="40" prob="70" /><!-- Entangling Shot -->
+		<npc_skill id="17319" lv="40" prob="70" cd="15000" next_skill_time="0" next_chain_id="1" /><!-- Stunning Shot -->
+		<npc_skill id="17320" lv="40" prob="0" chain_id="1" /><!-- Frontal Strike -->
+	</npc_skills>
+	<!-- Dredgion Ranger Lv50 -->
+	<npc_skills npc_ids="276994 276995 276996 276997 276998">
+		<npc_skill id="19125" lv="1" prob="0" is_post_spawn="true" /><!-- Dragon's Blessing -->
+		<npc_skill id="17314" lv="50" prob="70" cd="15000" /><!-- Arrow Deluge -->
+		<npc_skill id="17315" lv="50" prob="70" cd="15000" /><!-- Arrow Storm -->
+		<npc_skill id="17316" lv="50" prob="70" /><!-- Wedge Wave -->
+		<npc_skill id="17317" lv="50" prob="70" /><!-- Arrow Strike -->
+		<npc_skill id="17318" lv="50" prob="70" /><!-- Entangling Shot -->
+		<npc_skill id="17319" lv="50" prob="70" cd="15000" next_skill_time="0" next_chain_id="1" /><!-- Stunning Shot -->
+		<npc_skill id="17320" lv="50" prob="0" chain_id="1" /><!-- Frontal Strike -->
+	</npc_skills>
+	<!-- Dredgion Ranger Lv65 -->
+	<npc_skills npc_ids="251430 251433 251435 251438 251429 251432 251434 251437">
+		<npc_skill id="19125" lv="1" prob="0" is_post_spawn="true" /><!-- Dragon's Blessing -->
+		<npc_skill id="17314" lv="65" prob="70" cd="15000" /><!-- Arrow Deluge -->
+		<npc_skill id="17315" lv="65" prob="70" cd="15000" /><!-- Arrow Storm -->
+		<npc_skill id="17316" lv="65" prob="70" /><!-- Wedge Wave -->
+		<npc_skill id="17317" lv="65" prob="70" /><!-- Arrow Strike -->
+		<npc_skill id="17318" lv="65" prob="70" /><!-- Entangling Shot -->
+		<npc_skill id="17319" lv="65" prob="70" cd="15000" next_skill_time="0" next_chain_id="1" /><!-- Stunning Shot -->
+		<npc_skill id="17320" lv="65" prob="0" chain_id="1" /><!-- Frontal Strike -->
+	</npc_skills>
+	<!-- Dredgion Assassin Lv40 -->
+	<npc_skills npc_ids="276789 276790 276791 276792 276793">
+		<npc_skill id="19125" lv="1" prob="0" is_post_spawn="true" /><!-- Dragon's Blessing -->
+		<npc_skill id="17320" lv="40" prob="70" cd="15000" next_skill_time="0" next_chain_id="1" /><!-- Frontal Strike -->
+		<npc_skill id="17321" lv="40" prob="0" chain_id="1" /><!-- Surprise Attack -->
+		<npc_skill id="17322" lv="40" prob="70" /><!-- Poison Slash -->
+		<npc_skill id="17323" lv="40" prob="70" cd="20000" /><!-- Wide Area Poison Slash -->
+		<npc_skill id="17324" lv="40" prob="70" cd="20000" next_skill_time="0" next_chain_id="2" /><!-- Aerial Thrust -->
+		<npc_skill id="17325" lv="40" prob="70" cd="30000" next_skill_time="0" next_chain_id="3" /><!-- Wide Area Aerial Thrust -->
+		<npc_skill id="17326" lv="40" prob="0" chain_id="2" /><!-- Fall -->
+		<npc_skill id="17327" lv="40" prob="0" chain_id="3" /><!-- Wide Area Crashing Wind Strike -->
+		<npc_skill id="17328" lv="40" prob="70" cd="15000" next_skill_time="0" next_chain_id="4" /><!-- Wide Area Dragon Rune Carve I -->
+		<npc_skill id="17329" lv="40" prob="0" chain_id="4" next_skill_time="0" next_chain_id="5" /><!-- Wide Area Dragon Rune Carve II -->
+		<npc_skill id="17330" lv="40" prob="0" chain_id="5" next_skill_time="0" next_chain_id="6" /><!-- Wide Area Dragon Rune Carve III -->
+		<npc_skill id="17331" lv="40" prob="0" chain_id="6" /><!-- Pain Rune -->
+		<npc_skill id="17332" lv="40" prob="70" /><!-- Swift Edge -->
+		<npc_skill id="17333" lv="40" prob="70" cd="20000" /><!-- Wide Area Swift Edge -->
+	</npc_skills>
+	<!-- Dredgion Assassin Lv50 -->
+	<npc_skills npc_ids="276949 276950 276951 276952 276953">
+		<npc_skill id="19125" lv="1" prob="0" is_post_spawn="true" /><!-- Dragon's Blessing -->
+		<npc_skill id="17320" lv="50" prob="70" cd="15000" next_skill_time="0" next_chain_id="1" /><!-- Frontal Strike -->
+		<npc_skill id="17321" lv="50" prob="0" chain_id="1" /><!-- Surprise Attack -->
+		<npc_skill id="17322" lv="50" prob="70" /><!-- Poison Slash -->
+		<npc_skill id="17323" lv="50" prob="70" cd="20000" /><!-- Wide Area Poison Slash -->
+		<npc_skill id="17324" lv="50" prob="70" cd="20000" next_skill_time="0" next_chain_id="2" /><!-- Aerial Thrust -->
+		<npc_skill id="17325" lv="50" prob="70" cd="30000" next_skill_time="0" next_chain_id="3" /><!-- Wide Area Aerial Thrust -->
+		<npc_skill id="17326" lv="50" prob="0" chain_id="2" /><!-- Fall -->
+		<npc_skill id="17327" lv="50" prob="0" chain_id="3" /><!-- Wide Area Crashing Wind Strike -->
+		<npc_skill id="17328" lv="50" prob="70" cd="15000" next_skill_time="0" next_chain_id="4" /><!-- Wide Area Dragon Rune Carve I -->
+		<npc_skill id="17329" lv="50" prob="0" chain_id="4" next_skill_time="0" next_chain_id="5" /><!-- Wide Area Dragon Rune Carve II -->
+		<npc_skill id="17330" lv="50" prob="0" chain_id="5" next_skill_time="0" next_chain_id="6" /><!-- Wide Area Dragon Rune Carve III -->
+		<npc_skill id="17331" lv="50" prob="0" chain_id="6" /><!-- Pain Rune -->
+		<npc_skill id="17332" lv="50" prob="70" /><!-- Swift Edge -->
+		<npc_skill id="17333" lv="50" prob="70" cd="20000" /><!-- Wide Area Swift Edge -->
+	</npc_skills>
+	<!-- Dredgion Assassin Lv65 -->
+	<npc_skills npc_ids="251406 251400 251403 251405 251408 251399 251402 251404 251407">
+		<npc_skill id="19125" lv="1" prob="0" is_post_spawn="true" /><!-- Dragon's Blessing -->
+		<npc_skill id="17320" lv="65" prob="70" cd="15000" next_skill_time="0" next_chain_id="1" /><!-- Frontal Strike -->
+		<npc_skill id="17321" lv="65" prob="0" chain_id="1" /><!-- Surprise Attack -->
+		<npc_skill id="17322" lv="65" prob="70" /><!-- Poison Slash -->
+		<npc_skill id="17323" lv="65" prob="70" cd="20000" /><!-- Wide Area Poison Slash -->
+		<npc_skill id="17324" lv="65" prob="70" cd="20000" next_skill_time="0" next_chain_id="2" /><!-- Aerial Thrust -->
+		<npc_skill id="17325" lv="65" prob="70" cd="30000" next_skill_time="0" next_chain_id="3" /><!-- Wide Area Aerial Thrust -->
+		<npc_skill id="17326" lv="65" prob="0" chain_id="2" /><!-- Fall -->
+		<npc_skill id="17327" lv="65" prob="0" chain_id="3" /><!-- Wide Area Crashing Wind Strike -->
+		<npc_skill id="17328" lv="65" prob="70" cd="15000" next_skill_time="0" next_chain_id="4" /><!-- Wide Area Dragon Rune Carve I -->
+		<npc_skill id="17329" lv="65" prob="0" chain_id="4" next_skill_time="0" next_chain_id="5" /><!-- Wide Area Dragon Rune Carve II -->
+		<npc_skill id="17330" lv="65" prob="0" chain_id="5" next_skill_time="0" next_chain_id="6" /><!-- Wide Area Dragon Rune Carve III -->
+		<npc_skill id="17331" lv="65" prob="0" chain_id="6" /><!-- Pain Rune -->
+		<npc_skill id="17332" lv="65" prob="70" /><!-- Swift Edge -->
+		<npc_skill id="17333" lv="65" prob="70" cd="20000" /><!-- Wide Area Swift Edge -->
+	</npc_skills>
+	<!-- Dredgion Fighter Lv40 -->
+	<npc_skills npc_ids="276717 276718 276719 276720 276721">
+		<npc_skill id="19125" lv="1" prob="0" is_post_spawn="true" /><!-- Dragon's Blessing -->
+		<npc_skill id="17289" lv="1" prob="70" cd="30000" max_hp="50" /><!-- Rage -->
+		<npc_skill id="17290" lv="1" prob="70"><!-- Wide Area Rage -->
+			<cond cond_type="HELP_FRIEND" hp_below="60" range="4" />
+		</npc_skill>
+		<npc_skill id="17291" lv="40" prob="70" /><!-- Cleave -->
+		<npc_skill id="17292" lv="40" prob="70" cd="18000" prio="1" /><!-- Force Cleave -->
+		<npc_skill id="17293" lv="40" prob="70" target="RANDOM" /><!-- Wide Area Force Cleave -->
+		<npc_skill id="17294" lv="40" prob="70" /><!-- Ferocious Strike I -->
+		<npc_skill id="17297" lv="40" prob="70" cd="18000" /><!-- Wide Area Ferocious Strike I -->
+		<npc_skill id="17300" lv="40" prob="70" /><!-- Cleave Armor -->
+		<npc_skill id="17301" lv="40" prob="70" cd="18000" /><!-- Wide Area Cleave Armor -->
+		<npc_skill id="17302" lv="40" prob="70" cd="18000" target="RANDOM" /><!-- Pull -->
+		<npc_skill id="17303" lv="40" prob="70" cd="30000" target="RANDOM" /><!-- Wide Area Pull -->
+		<npc_skill id="17304" lv="40" prob="70" cd="15000" /><!-- Wrathful Strike -->
+		<npc_skill id="17305" lv="40" prob="70" cd="25000" /><!-- Wide Area Wrathful Strike -->
+		<npc_skill id="17306" lv="40" prob="70" /><!-- Crippling Cut -->
+		<npc_skill id="17307" lv="40" prob="70" cd="18000" /><!-- Wide Area Crippling Cut -->
+		<npc_skill id="17308" lv="1" prob="70"><!-- Rage -->
+			<cond cond_type="HELP_FRIEND" hp_below="30" range="4" />
+		</npc_skill>
+	</npc_skills>
+	<!-- Dredgion Fighter Lv50 -->
+	<npc_skills npc_ids="276989 276990 276991 276992 276993">
+		<npc_skill id="19125" lv="1" prob="0" is_post_spawn="true" /><!-- Dragon's Blessing -->
+		<npc_skill id="17289" lv="1" prob="70" cd="30000" max_hp="50" /><!-- Rage -->
+		<npc_skill id="17290" lv="1" prob="70"><!-- Wide Area Rage -->
+			<cond cond_type="HELP_FRIEND" hp_below="60" range="4" />
+		</npc_skill>
+		<npc_skill id="17291" lv="50" prob="70" /><!-- Cleave -->
+		<npc_skill id="17292" lv="50" prob="70" cd="18000" prio="1" /><!-- Force Cleave -->
+		<npc_skill id="17293" lv="50" prob="70" target="RANDOM" /><!-- Wide Area Force Cleave -->
+		<npc_skill id="17295" lv="50" prob="70" /><!-- Ferocious Strike II -->
+		<npc_skill id="17398" lv="50" prob="70" cd="18000" /><!-- Wide Area Ferocious Strike II -->
+		<npc_skill id="17300" lv="50" prob="70" /><!-- Cleave Armor -->
+		<npc_skill id="17301" lv="50" prob="70" cd="18000" /><!-- Wide Area Cleave Armor -->
+		<npc_skill id="17302" lv="50" prob="70" cd="18000" target="RANDOM" /><!-- Pull -->
+		<npc_skill id="17303" lv="50" prob="70" cd="30000" target="RANDOM" /><!-- Wide Area Pull -->
+		<npc_skill id="17304" lv="50" prob="70" cd="15000" /><!-- Wrathful Strike -->
+		<npc_skill id="17305" lv="50" prob="70" cd="25000" /><!-- Wide Area Wrathful Strike -->
+		<npc_skill id="17306" lv="50" prob="70" /><!-- Crippling Cut -->
+		<npc_skill id="17307" lv="50" prob="70" cd="18000" /><!-- Wide Area Crippling Cut -->
+		<npc_skill id="17309" lv="1" prob="70"><!-- Rage -->
+			<cond cond_type="HELP_FRIEND" hp_below="30" range="4" />
+		</npc_skill>
+	</npc_skills>
+	<!-- Dredgion Fighter Lv65 -->
+	<npc_skills npc_ids="251390 251393 251395 251398 251389 251392 251394 251397 252118 252119 252121 252122">
+		<npc_skill id="19125" lv="1" prob="0" is_post_spawn="true" /><!-- Dragon's Blessing -->
+		<npc_skill id="17289" lv="1" prob="70" cd="30000" max_hp="50" /><!-- Rage -->
+		<npc_skill id="17290" lv="1" prob="70"><!-- Wide Area Rage -->
+			<cond cond_type="HELP_FRIEND" hp_below="60" range="4" />
+		</npc_skill>
+		<npc_skill id="17291" lv="65" prob="70" /><!-- Cleave -->
+		<npc_skill id="17292" lv="65" prob="70" cd="18000" prio="1" /><!-- Force Cleave -->
+		<npc_skill id="17293" lv="65" prob="70" target="RANDOM" /><!-- Wide Area Force Cleave -->
+		<npc_skill id="17296" lv="65" prob="70" /><!-- Ferocious Strike III -->
+		<npc_skill id="17399" lv="65" prob="70" cd="18000" /><!-- Wide Area Ferocious Strike III -->
+		<npc_skill id="17300" lv="65" prob="70" /><!-- Cleave Armor -->
+		<npc_skill id="17301" lv="65" prob="70" cd="18000" /><!-- Wide Area Cleave Armor -->
+		<npc_skill id="17302" lv="65" prob="70" cd="18000" target="RANDOM" /><!-- Pull -->
+		<npc_skill id="17303" lv="65" prob="70" cd="30000" target="RANDOM" /><!-- Wide Area Pull -->
+		<npc_skill id="17304" lv="65" prob="70" cd="15000" /><!-- Wrathful Strike -->
+		<npc_skill id="17305" lv="65" prob="70" cd="25000" /><!-- Wide Area Wrathful Strike -->
+		<npc_skill id="17306" lv="65" prob="70" /><!-- Crippling Cut -->
+		<npc_skill id="17307" lv="65" prob="70" cd="18000" /><!-- Wide Area Crippling Cut -->
+		<npc_skill id="17310" lv="1" prob="70"><!-- Rage -->
+			<cond cond_type="HELP_FRIEND" hp_below="30" range="4" />
+		</npc_skill>
+	</npc_skills>
+	<!-- Dredgion Gunner Lv65 -->
+	<npc_skills npc_ids="251440 251443 251445 251448 251439 251442 251444 251447">
+		<npc_skill id="19125" lv="1" prob="0" is_post_spawn="true" /><!-- Dragon's Blessing -->
+		<npc_skill id="20713" lv="65" prob="50" cd="15000" /><!-- Thunder Crash Fallout -->
+		<npc_skill id="20857" lv="65" prob="70" cd="15000" /><!-- Thunder Crash Fallout -->
+		<npc_skill id="20858" lv="65" prob="70" cd="15000" /><!-- Area Thunder Crash Fallout -->
+		<npc_skill id="21219" lv="65" prob="70" cd="15000" /><!-- Straight Shot -->
+		<npc_skill id="21226" lv="65" prob="70" cd="18000" next_skill_time="0" next_chain_id="1" /><!-- Mid-Range Binding -->
+		<npc_skill id="21227" lv="65" prob="0" chain_id="1" /><!-- Mid-Range Binding Explosion -->
+		<npc_skill id="21265" lv="65" prob="70" cd="21000" /><!-- Mid-Range Eruptive Shot -->
+		<npc_skill id="21292" lv="65" prob="70" cd="15000" /><!-- Powerful Shot -->
+		<npc_skill id="21293" lv="65" prob="70" cd="15000" /><!-- Deadeye -->
+		<npc_skill id="21299" lv="65" prob="70" cd="15000" /><!-- Area Shot -->
 	</npc_skills>
 </npc_skill_templates>

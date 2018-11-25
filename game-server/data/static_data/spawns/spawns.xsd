@@ -25,7 +25,6 @@
 			<xs:element name="siege_spawn" type="SiegeSpawn" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element name="vortex_spawn" type="VortexSpawn" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element name="mercenary_spawn" type="MercenarySpawn" minOccurs="0" maxOccurs="unbounded"/>
-			<xs:element name="assault_spawn" type="AssaultSpawn" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element name="ahserion_spawn" type="AhserionsFlightSpawn" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 		<xs:attribute name="map_id" type="xs:int"/>
@@ -125,18 +124,6 @@
 		</xs:sequence>
 		<xs:attribute name="zone" type="xs:int"/>
 	</xs:complexType>
-	<xs:complexType name="AssaultSpawn">
-		<xs:sequence>
-			<xs:element name="assault_wave" type="AssaultWave" minOccurs="0" maxOccurs="unbounded"/>
-		</xs:sequence>
-		<xs:attribute name="siege_id" type="xs:int"/>
-	</xs:complexType>
-	<xs:complexType name="AssaultWave">
-		<xs:sequence>
-			<xs:element name="spawn" type="Spawn" minOccurs="0" maxOccurs="unbounded"/>
-		</xs:sequence>
-		<xs:attribute name="wave" type="AssaultType"/>
-	</xs:complexType>
 	<xs:complexType name="Spawn">
 		<xs:sequence>
 			<xs:element name="temporary_spawn" type="TemporarySpawn" minOccurs="0" maxOccurs="1"/>
@@ -202,14 +189,6 @@
 			<xs:enumeration value="RIFT"/>
 			<xs:enumeration value="SENTINEL"/>
 			<xs:enumeration value="STATIC"/>
-		</xs:restriction>
-	</xs:simpleType>
-	<xs:simpleType name="AssaultType">
-		<xs:restriction base="xs:string">
-			<xs:enumeration value="TELEPORT"/>
-			<xs:enumeration value="FIRST_WAVE"/>
-			<xs:enumeration value="SECOND_WAVE"/>
-			<xs:enumeration value="COMMANDER"/>
 		</xs:restriction>
 	</xs:simpleType>
 </xs:schema>

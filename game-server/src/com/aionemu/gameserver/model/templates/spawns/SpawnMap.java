@@ -10,7 +10,6 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
-import com.aionemu.gameserver.model.templates.spawns.assaults.AssaultSpawn;
 import com.aionemu.gameserver.model.templates.spawns.basespawns.BaseSpawn;
 import com.aionemu.gameserver.model.templates.spawns.mercenaries.MercenarySpawn;
 import com.aionemu.gameserver.model.templates.spawns.panesterra.AhserionsFlightSpawn;
@@ -35,8 +34,6 @@ public class SpawnMap {
 	private List<SiegeSpawn> siegeSpawns;
 	@XmlElement(name = "mercenary_spawn")
 	private List<MercenarySpawn> mercenarySpawns;
-	@XmlElement(name = "assault_spawn")
-	private List<AssaultSpawn> assaultSpawns;
 	@XmlElement(name = "vortex_spawn")
 	private List<VortexSpawn> vortexSpawns;
 	@XmlElement(name = "ahserion_spawn")
@@ -66,10 +63,6 @@ public class SpawnMap {
 
 	public List<MercenarySpawn> getMercenarySpawns() {
 		return mercenarySpawns == null ? Collections.emptyList() : mercenarySpawns;
-	}
-
-	public List<AssaultSpawn> getAssaultSpawns() {
-		return assaultSpawns == null ? Collections.emptyList() : assaultSpawns;
 	}
 
 	public List<RiftSpawn> getRiftSpawns() {
