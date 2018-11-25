@@ -560,13 +560,10 @@ public class SiegeService {
 				broadcastStatusAndUpdate(outpost, outpost.isSilenteraAllowed());
 
 				// spawn NPC's or sieges
-				if (SiegeRace.BALAUR != outpost.getRace()) {
-					if (outpost.isSiegeAllowed()) {
-						startSiege(outpost.getLocationId());
-					} else {
-						spawnNpcs(outpost.getLocationId(), outpost.getRace(), SiegeModType.PEACE);
-					}
-				}
+				if (outpost.isSiegeAllowed())
+					startSiege(outpost.getLocationId());
+				else
+					spawnNpcs(outpost.getLocationId(), outpost.getRace(), SiegeModType.PEACE);
 			}
 		}
 	}
