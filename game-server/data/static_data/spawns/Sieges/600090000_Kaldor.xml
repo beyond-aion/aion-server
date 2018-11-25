@@ -438,62 +438,6 @@
 						<spot x="836.08160" y="562.39136" z="150.99133" h="30"/>
 						<spot x="824.21436" y="562.36316" z="150.18428" h="30"/>
 					</spawn>
-					<!-- Borghildr (LDF5_Fortress_D_L_warehouse) -->
-					<spawn npc_id="802406">
-						<spot x="820.061340" y="277.781799" z="156.987228" h="59"/>
-					</spawn>
-					<!-- Hildia (LDF5_Fortress_D_L_Apseller_good) -->
-					<spawn npc_id="802408">
-						<spot x="820.061340" y="289.781799" z="156.987228" h="59"/>
-					</spawn>
-					<!-- Ingvud (LDF5_Fortress_D_L_Exchange_v30abyss_35) -->
-					<spawn npc_id="802410">
-						<spot x="820.061340" y="280.781799" z="156.987228" h="59"/>
-					</spawn>
-					<!-- Thamril (LDF5_Fortress_D_L_component) -->
-					<spawn npc_id="802412">
-						<spot x="820.061340" y="286.781799" z="156.987228" h="59"/>
-					</spawn>
-					<!-- Winoa (LDF5_Fortress_D_L_exchange) -->
-					<spawn npc_id="802414">
-						<spot x="820.061340" y="283.781799" z="156.987228" h="59"/>
-					</spawn>
-					<!-- Vifo (LDF5_Fortress_D_Seller_PvPCoin_matter) -->
-					<spawn npc_id="802416">
-						<spot x="820.061340" y="292.781799" z="156.987228" h="59"/>
-					</spawn>
-					<!-- Gramul (LDF5_Fortress_D_warehouse) -->
-					<spawn npc_id="802418">
-						<spot x="754.054016" y="277.743774" z="156.987228"/>
-					</spawn>
-					<!-- Faftvin (LDF5_Fortress_D_Holy_Recharger) -->
-					<spawn npc_id="802420">
-						<spot x="754.067078" y="286.740662" z="156.987228"/>
-					</spawn>
-					<!-- Renga (LDF5_Fortress_D_Spell_Recharger) -->
-					<spawn npc_id="802422">
-						<spot x="754.061340" y="283.741882" z="156.987228"/>
-					</spawn>
-					<!-- Bergla (LDF5_Fortress_D_master_stigma) -->
-					<spawn npc_id="802424">
-						<spot x="754.059570" y="289.750824" z="156.987228"/>
-					</spawn>
-					<!-- Dungvar (LDF5_Fortress_D_seller_food) -->
-					<spawn npc_id="802426">
-						<spot x="754.070068" y="280.738647" z="156.987228"/>
-					</spawn>
-					<!-- Arunerk (LDF5_Fortress_D_Exchange_v30abyss_29) -->
-					<spawn npc_id="804610">
-						<spot x="754.059570" y="292.750824" z="156.987228"/>
-					</spawn>
-					<!-- Lihum (LDF5_Fortress_D_L_Material_PvE) -->
-					<spawn npc_id="804617">
-						<spot x="820.061340" y="274.781799" z="156.987228" h="59"/>
-					</spawn>
-					<!-- Kanita (LDF5_Fortress_D_L_Material_PvP) -->
-					<spawn npc_id="804618">
-						<spot x="820.061340" y="271.781799" z="156.987228" h="59"/>
-					</spawn>
 					<!-- Kilmorn (LDF5_Fortress_D_mercenary) -->
 					<spawn npc_id="802436">
 						<spot x="754.318298" y="281.967621" z="143.977325"/>
@@ -1082,62 +1026,6 @@
 						<spot x="836.08160" y="562.39136" z="150.99133" h="30"/>
 						<spot x="824.21436" y="562.36316" z="150.18428" h="30"/>
 					</spawn>
-					<!-- Donia (LDF5_Fortress_L_L_warehouse) -->
-					<spawn npc_id="802405">
-						<spot x="820.061340" y="277.781799" z="156.987228" h="59"/>
-					</spawn>
-					<!-- Luanon (LDF5_Fortress_L_L_Apseller_good) -->
-					<spawn npc_id="802407">
-						<spot x="820.061340" y="289.781799" z="156.987228" h="59"/>
-					</spawn>
-					<!-- Dafine (LDF5_Fortress_L_L_Exchange_v30abyss_35) -->
-					<spawn npc_id="802409">
-						<spot x="820.061340" y="280.781799" z="156.987228" h="59"/>
-					</spawn>
-					<!-- Gnaeus (LDF5_Fortress_L_L_component) -->
-					<spawn npc_id="802411">
-						<spot x="820.061340" y="286.781799" z="156.987228" h="59"/>
-					</spawn>
-					<!-- Gius (LDF5_Fortress_L_L_exchange) -->
-					<spawn npc_id="802413">
-						<spot x="820.061340" y="283.781799" z="156.987228" h="59"/>
-					</spawn>
-					<!-- Treia (LDF5_Fortress_L_Seller_PvPCoin_matter) -->
-					<spawn npc_id="802415">
-						<spot x="820.061340" y="292.781799" z="156.987228" h="59"/>
-					</spawn>
-					<!-- Elphina (LDF5_Fortress_L_warehouse) -->
-					<spawn npc_id="802417">
-						<spot x="754.054016" y="277.743774" z="156.987228"/>
-					</spawn>
-					<!-- Hasvinar (LDF5_Fortress_L_Holy_Recharger) -->
-					<spawn npc_id="802419">
-						<spot x="754.067078" y="286.740662" z="156.987228"/>
-					</spawn>
-					<!-- Ceidon (LDF5_Fortress_L_Spell_Recharger) -->
-					<spawn npc_id="802421">
-						<spot x="754.061340" y="283.741882" z="156.987228"/>
-					</spawn>
-					<!-- Anantus (LDF5_Fortress_L_master_stigma) -->
-					<spawn npc_id="802423">
-						<spot x="754.059570" y="289.750824" z="156.987228"/>
-					</spawn>
-					<!-- Chaerus (LDF5_Fortress_L_seller_food) -->
-					<spawn npc_id="802425">
-						<spot x="754.070068" y="280.738647" z="156.987228"/>
-					</spawn>
-					<!-- Arianerk (LDF5_Fortress_L_Exchange_v30abyss_29) -->
-					<spawn npc_id="804611">
-						<spot x="754.059570" y="292.750824" z="156.987228"/>
-					</spawn>
-					<!-- Mondus (LDF5_Fortress_L_L_Material_PvE) -->
-					<spawn npc_id="804615">
-						<spot x="820.061340" y="274.781799" z="156.987228" h="59"/>
-					</spawn>
-					<!--Tirdone" cName="LDF5_Fortress_L_L_Material_PvP) -->
-					<spawn npc_id="804616">
-						<spot x="820.061340" y="271.781799" z="156.987228" h="59"/>
-					</spawn>
 					<!-- Tilion (LDF5_Fortress_L_mercenary) -->
 					<spawn npc_id="802435">
 						<spot x="754.318298" y="281.967621" z="143.977325"/>
@@ -1255,7 +1143,7 @@
 						<spot x="802.72742" y="297.94226" z="143.00507" static_id="1018"/>
 					</spawn>
 					<!-- BLDF5_Fortress_Lhealer_3 -->
-					<spawn npc_id="297535">
+					<spawn npc_id="297536">
 						<spot x="771.23541" y="297.91895" z="143.00507" static_id="1044"/>
 					</spawn>
 					<!-- Elyos Defense Turret" cName="LDF5_Fortress_7011_SWHowitzer_L_1) -->
