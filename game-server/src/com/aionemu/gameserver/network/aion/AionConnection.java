@@ -8,6 +8,7 @@ import java.util.Deque;
 import java.util.Objects;
 import java.util.Queue;
 import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
 
 import org.slf4j.Logger;
@@ -427,10 +428,13 @@ public class AionConnection extends AConnection<AionServerPacket> {
 
 		@Override
 		public void run() {
-			int expectedPingIntervalMillis = getActivePlayer() == null ? CM_PING.CLIENT_PING_INTERVAL : CM_PING_INGAME.CLIENT_PING_INTERVAL;
+			Player player = getActivePlayer();
+			long expectedPingIntervalMillis = player == null ? CM_PING.CLIENT_PING_INTERVAL : CM_PING_INGAME.CLIENT_PING_INTERVAL;
+			if (player != null && player.isInCustomState(CustomPlayerState.WATCHING_CUTSCENE))
+				expectedPingIntervalMillis = TimeUnit.MINUTES.toMillis(4);
 			// just checking lastPingTime is not sufficient, CM_PING_INGAME interval seems to vary or skip from time to time / under certain circumstances
 			long millisSinceLastClientPacket = System.currentTimeMillis() - lastClientMessageTime;
-			if (!getActivePlayer().isInCustomState(CustomPlayerState.WATCHING_CUTSCENE) && millisSinceLastClientPacket - 5000 > expectedPingIntervalMillis) {
+			if (millisSinceLastClientPacket - 5000 > expectedPingIntervalMillis) {
 				log.info("Closing hanged up connection of " + AionConnection.this + " (last sign of life was " + millisSinceLastClientPacket + "ms ago)");
 				close();
 			}
