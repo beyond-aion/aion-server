@@ -116,6 +116,7 @@ public class NpcStatCalculation {
 					case MAGICAL_RESIST:
 						return 1.35f;
 					case MAGICAL_ACCURACY:
+						return 1.47f;
 					case MAGICAL_ATTACK:
 					case PARRY:
 					case PHYSICAL_ACCURACY:
