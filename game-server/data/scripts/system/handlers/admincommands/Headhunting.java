@@ -113,8 +113,10 @@ public class Headhunting extends AdminCommand {
 				rewardPlayers(admin);
 				break;
 			case "setKills":
-				if (params.length < 3)
+				if (params.length < 3) {
 					sendInfo(admin);
+					return;
+				}
 				try {
 					setKills(admin, Integer.parseInt(params[1]), Integer.parseInt(params[2]));
 				} catch (NumberFormatException e) {
