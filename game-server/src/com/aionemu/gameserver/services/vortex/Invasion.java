@@ -61,13 +61,13 @@ public class Invasion extends DimensionalVortex<VortexLocation> {
 
 	@Override
 	public void addPlayer(Player player, boolean isInvader) {
-		Map<Integer, Player> list = isInvader ? invaders : defenders;
+		Map<Integer, Player> participants = isInvader ? invaders : defenders;
 		PlayerAlliance alliance = isInvader ? invAlliance : defAlliance;
 
 		if (alliance != null && !alliance.isDisbanded()) {
 			PlayerAllianceService.addPlayer(alliance, player);
-		} else if (list.size() == 1) { // create alliance once two players participate in this invasion
-			Player otherPlayer = list.get(0);
+		} else if (participants.size() == 1) { // create alliance once two players participate in this invasion
+			Player otherPlayer = participants.values().iterator().next();
 			for (Player p : Arrays.asList(player, otherPlayer)) {
 				if (p.isInGroup()) {
 					PlayerGroupService.removePlayer(p);
@@ -80,20 +80,20 @@ public class Invasion extends DimensionalVortex<VortexLocation> {
 				invAlliance = PlayerAllianceService.createAlliance(otherPlayer, player, TeamType.ALLIANCE_OFFENCE);
 			else
 				defAlliance = PlayerAllianceService.createAlliance(otherPlayer, player, TeamType.ALLIANCE_DEFENCE);
-		} else if (list.size() > 1) { // should never happen
+		} else if (participants.size() > 1) { // should never happen
 			LoggerFactory.getLogger(Invasion.class).warn("Couldn't add " + player + " to " + (isInvader ? "invaders" : "defenders")
-				+ " (alliance not initialized). Current participants: " + list.size());
+				+ " (alliance not initialized). Current participants: " + participants.size());
 			return;
 		}
-		list.put(player.getObjectId(), player);
+		participants.put(player.getObjectId(), player);
 	}
 
 	@Override
 	public void kickPlayer(Player player, boolean isInvader) {
-		Map<Integer, Player> list = isInvader ? invaders : defenders;
+		Map<Integer, Player> participants = isInvader ? invaders : defenders;
 		PlayerAlliance alliance = isInvader ? invAlliance : defAlliance;
 
-		list.remove(player.getObjectId());
+		participants.remove(player.getObjectId());
 
 		if (alliance != null && alliance.hasMember(player.getObjectId())) {
 			if (player.isOnline()) {
