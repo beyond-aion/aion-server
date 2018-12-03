@@ -91,7 +91,10 @@ public class SiegeFortressGateAI extends NpcAI {
 		super.handleSpawned();
 		doorName = GeoService.getInstance().getSiegeDoorName(getOwner().getWorldId(), getMeshFileName(), getOwner().getX(), getOwner().getY(),
 			getOwner().getZ());
-		updateDoorState(false, true);
+		if (getNpcId() == 256694) // exception for Nochsana Fortress Gate - Remove it if geo will ever works as intended
+			updateDoorState(true, true);
+		else
+			updateDoorState(false, true);
 	}
 
 	@Override
