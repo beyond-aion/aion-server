@@ -3,6 +3,7 @@ package ai.instance.shugoImperialTomb;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.manager.EmoteManager;
 import com.aionemu.gameserver.ai.manager.WalkManager;
+import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.skillengine.model.Effect;
 
@@ -31,7 +32,7 @@ public class TombAttackerAI extends AggressiveNpcAI {
 	}
 
 	@Override
-	public int modifyOwnerDamage(int damage, Effect effect) {
+	public int modifyOwnerDamage(int damage, Creature effected, Effect effect) {
 		return 1;
 	}
 

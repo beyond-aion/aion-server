@@ -502,7 +502,7 @@ public abstract class AbstractAI<T extends Creature> extends AbstractEventSource
 	}
 
 	@Override
-	public int modifyOwnerDamage(int damage, Effect effect) {
+	public int modifyOwnerDamage(int damage, Creature effected, Effect effect) {
 		return damage;
 	}
 

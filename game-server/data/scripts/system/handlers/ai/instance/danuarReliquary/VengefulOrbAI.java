@@ -4,6 +4,7 @@ import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.NpcAI;
+import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
@@ -25,7 +26,7 @@ public class VengefulOrbAI extends NpcAI {
 	 * Damage here: 17000+
 	 */
 	@Override
-	public int modifyOwnerDamage(int damage, Effect effect) {
+	public int modifyOwnerDamage(int damage, Creature effected, Effect effect) {
 		return damage > 12500 ? Rnd.get(12000, 13000) : damage;
 	}
 

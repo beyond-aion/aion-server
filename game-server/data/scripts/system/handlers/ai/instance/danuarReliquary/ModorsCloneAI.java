@@ -36,7 +36,7 @@ public class ModorsCloneAI extends AggressiveNpcAI {
 	}
 
 	@Override
-	public int modifyOwnerDamage(int damage, Effect effect) {
+	public int modifyOwnerDamage(int damage, Creature effected, Effect effect) {
 		return Math.round(damage * 0.75f);
 	}
 

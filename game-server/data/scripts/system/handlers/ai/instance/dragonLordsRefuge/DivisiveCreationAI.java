@@ -6,6 +6,7 @@ import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.AIState;
 import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.model.EmotionType;
+import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.model.templates.item.ItemAttackType;
@@ -50,7 +51,7 @@ public class DivisiveCreationAI extends AggressiveNpcAI {
 	}
 
 	@Override
-	public int modifyOwnerDamage(int damage, Effect effect) {
+	public int modifyOwnerDamage(int damage, Creature effected, Effect effect) {
 		if (effect != null && effect.getSkillId() == 20986)
 			damage *= 0.5f;
 		return damage;

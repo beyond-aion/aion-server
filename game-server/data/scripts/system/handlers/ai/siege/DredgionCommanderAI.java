@@ -4,6 +4,7 @@ import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.configs.main.SiegeConfig;
 import com.aionemu.gameserver.model.Race;
+import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.siege.SiegeNpc;
@@ -55,7 +56,7 @@ public class DredgionCommanderAI extends SiegeNpcAI {
 	}
 
 	@Override
-	public int modifyOwnerDamage(int damage, Effect effect) {
+	public int modifyOwnerDamage(int damage, Creature effected, Effect effect) {
 		if (fortressBoss != null && effect != null && effect.getEffected() == fortressBoss && effect.getStack().equals("DGFI_ONESHOTONEKILL_WARPDR"))
 			damage = Math.round(fortressBoss.getLifeStats().getMaxHp() * 0.1f);
 		return damage;

@@ -468,7 +468,7 @@ public class AttackUtil {
 			damage = effected.getAi().modifyDamage(effector, damage, effect);
 		}
 		if (effector instanceof Npc) {
-			damage = effector.getAi().modifyOwnerDamage(damage, effect);
+			damage = effector.getAi().modifyOwnerDamage(damage, effected, effect);
 		}
 
 		if (shared && !effect.getSkill().getEffectedList().isEmpty())

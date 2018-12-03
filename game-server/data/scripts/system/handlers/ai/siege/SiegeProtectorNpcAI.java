@@ -2,6 +2,7 @@ package ai.siege;
 
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.configs.main.SiegeConfig;
+import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.siege.SiegeNpc;
 import com.aionemu.gameserver.model.stats.calc.Stat2;
@@ -11,6 +12,7 @@ import com.aionemu.gameserver.model.templates.npc.NpcRating;
 import com.aionemu.gameserver.services.SiegeService;
 import com.aionemu.gameserver.services.siege.Siege;
 import com.aionemu.gameserver.skillengine.SkillEngine;
+import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
@@ -43,6 +45,13 @@ public class SiegeProtectorNpcAI extends SiegeNpcAI {
 		Siege<?> siege = SiegeService.getInstance().getSiege(((SiegeNpc) getOwner()).getSiegeId());
 		if (siege != null)
 			siege.getSiegeCounter().clearDamageCounters();
+	}
+
+	@Override
+	public int modifyOwnerDamage(int damage, Creature effected, Effect effect) {
+		if (effected instanceof Npc)
+			return damage * 5;
+		return damage;
 	}
 
 	@Override

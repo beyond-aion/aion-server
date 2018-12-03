@@ -317,7 +317,7 @@ public class StatFunctions {
 		if (target instanceof Npc)
 			return target.getAi().modifyDamage(attacker, resultDamage, null);
 		if (attacker instanceof Npc)
-			return attacker.getAi().modifyOwnerDamage(resultDamage, null);
+			return attacker.getAi().modifyOwnerDamage(resultDamage, null, null);
 
 		return resultDamage;
 	}

@@ -22,7 +22,7 @@ public class FlagBaseNpcAI extends NpcAI {
 	}
 
 	@Override
-	public int modifyOwnerDamage(int damage, Effect effect) {
+	public int modifyOwnerDamage(int damage, Creature effected, Effect effect) {
 		return 0;
 	}
 }

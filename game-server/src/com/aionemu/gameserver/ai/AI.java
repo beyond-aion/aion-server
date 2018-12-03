@@ -58,10 +58,11 @@ public interface AI {
 	/**
 	 * @param damage
 	 *          - The calculated damage output of this creature
+	 * @param effected
 	 * @param effect
 	 * @return The effective damage output of this creature
 	 */
-	int modifyOwnerDamage(int damage, Effect effect);
+	int modifyOwnerDamage(int damage, Creature effected, Effect effect);
 
 	/**
 	 * Used to manipulate any game stat of the owner.
