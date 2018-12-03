@@ -68,7 +68,7 @@ public class FortressAssault extends Assault<FortressSiege> {
 			case 10:
 				List<Assaulter> teleportWave = assaultData.getProcessedAssaulters().get(AssaulterType.TELEPORT);
 				for (SiegeNpc npc : World.getInstance().getLocalSiegeNpcs(locationId))
-					if (npc.getRating() != NpcRating.LEGENDARY && npc.getAbyssNpcType() != AbyssNpcType.ARTIFACT && Rnd.chance() < 50)
+					if (npc.getRating() != NpcRating.LEGENDARY && npc.getAbyssNpcType() != AbyssNpcType.ARTIFACT && Rnd.chance() < 40)
 						spawnAssaulter(Rnd.get(teleportWave), npc);
 				announce(SM_SYSTEM_MESSAGE.STR_ABYSS_WARP_DRAGON());
 				break;
