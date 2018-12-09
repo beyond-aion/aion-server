@@ -43,21 +43,19 @@
 			<Pattern>${date} %logger - %message%n</Pattern>
 		</encoder>
 	</appender>
-	<appender name="app_status_hipchat" class="com.aionemu.commons.logging.HipChatRoomAppender">
+	<appender name="app_status_discord" class="com.aionemu.commons.logging.DiscordChannelAppender">
 		<layout>
-			<pattern>%logger{0} [%thread]:&lt;pre&gt;%msg%n%ex&lt;/pre&gt;</pattern>
+			<pattern>%logger{0} [%thread]|${gameserver.log.status.discord.avatar_url}|%msg%replace(%n```qml%n%ex```){\r?\n```qml\r?\n```, ''}%nopex</pattern>
 		</layout>
-		<room>${gameserver.log.status.hipchat.room}</room>
-		<apiKey>${gameserver.log.status.hipchat.token}</apiKey>
-		<color>level</color>
-		<messageFormat>html</messageFormat>
-		<senderSeparatorPattern>(?&lt;=\]):</senderSeparatorPattern> <!-- message content in front of this separator will be used as the sender name -->
+		<webhookUrl>${gameserver.log.status.discord.webhook_url}</webhookUrl>
+		<userName_avatarUrl_msg_separator>\|</userName_avatarUrl_msg_separator>
 	</appender>
-	<appender name="app_status_hipchat_async" class="ch.qos.logback.classic.AsyncAppender">
+	<appender name="app_status_discord_async" class="ch.qos.logback.classic.AsyncAppender">
 		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
 			<level>WARN</level>
 		</filter>
-		<appender-ref ref="app_status_hipchat" />
+		<neverBlock>true</neverBlock>
+		<appender-ref ref="app_status_discord" />
 	</appender>
 	<appender name="app_admincmd" class="ch.qos.logback.core.FileAppender">
 		<file>${logFolder}/adminaudit.log</file>
@@ -240,6 +238,6 @@
 		<appender-ref ref="app_console" />
 		<appender-ref ref="app_error" />
 		<appender-ref ref="app_warn" />
-		<appender-ref ref="app_status_hipchat_async" />
+		<appender-ref ref="app_status_discord_async" />
 	</root>
 </configuration>
