@@ -57,6 +57,8 @@ public class CaseHealEffect extends AbstractHealEffect {
 
 	@Override
 	public void startEffect(final Effect effect) {
+		if (tryHeal(effect))
+			return;
 		ActionObserver observer = new ActionObserver(ObserverType.HP_CHANGED) {
 
 			@Override
@@ -67,11 +69,10 @@ public class CaseHealEffect extends AbstractHealEffect {
 		};
 		effect.getEffected().getObserveController().addObserver(observer);
 		effect.setActionObserver(observer, position);
-		tryHeal(effect);
+		
 	}
 
-	private void tryHeal(final Effect effect) {
-
+	private boolean tryHeal(final Effect effect) {
 		final int currentValue = getCurrentStatValue(effect);
 		final int maxCurValue = getMaxStatValue(effect);
 		if (currentValue <= (maxCurValue * condValue / 100f)) {
@@ -84,7 +85,10 @@ public class CaseHealEffect extends AbstractHealEffect {
 				effect.getEffected().getLifeStats().increaseHp(TYPE.HP, finalHeal, effect.getSkillId(), LOG.CASEHEAL);
 			else if (type == HealType.MP)
 				effect.getEffected().getLifeStats().increaseMp(TYPE.MP, finalHeal, effect.getSkillId(), LOG.CASEHEAL);// TODO check
+			System.out.println(effect.getSkillName());
 			effect.endEffect();
+			return true;
 		}
+		return false;
 	}
 }
