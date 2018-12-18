@@ -429,15 +429,20 @@ public class AionConnection extends AConnection<AionServerPacket> {
 		@Override
 		public void run() {
 			Player player = getActivePlayer();
-			long expectedPingIntervalMillis = player == null ? CM_PING.CLIENT_PING_INTERVAL : CM_PING_INGAME.CLIENT_PING_INTERVAL;
-			if (player != null && player.isInCustomState(CustomPlayerState.WATCHING_CUTSCENE))
-				expectedPingIntervalMillis = TimeUnit.MINUTES.toMillis(4);
 			// just checking lastPingTime is not sufficient, CM_PING_INGAME interval seems to vary or skip from time to time / under certain circumstances
 			long millisSinceLastClientPacket = System.currentTimeMillis() - lastClientMessageTime;
-			if (millisSinceLastClientPacket - 5000 > expectedPingIntervalMillis) {
+			if (millisSinceLastClientPacket - 5000 > getMaxInactivityTimeMillis(player)) {
 				log.info("Closing hanged up connection of " + AionConnection.this + " (last sign of life was " + millisSinceLastClientPacket + "ms ago)");
 				close();
 			}
+		}
+
+		private long getMaxInactivityTimeMillis(Player player) {
+			if (player == null || !player.isSpawned())
+				return CM_PING.CLIENT_PING_INTERVAL;
+			if (player.isInCustomState(CustomPlayerState.WATCHING_CUTSCENE))
+				return TimeUnit.MINUTES.toMillis(4);
+			return CM_PING_INGAME.CLIENT_PING_INTERVAL;
 		}
 	}
 }
