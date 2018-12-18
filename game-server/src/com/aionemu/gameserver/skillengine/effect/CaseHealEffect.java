@@ -85,7 +85,6 @@ public class CaseHealEffect extends AbstractHealEffect {
 				effect.getEffected().getLifeStats().increaseHp(TYPE.HP, finalHeal, effect.getSkillId(), LOG.CASEHEAL);
 			else if (type == HealType.MP)
 				effect.getEffected().getLifeStats().increaseMp(TYPE.MP, finalHeal, effect.getSkillId(), LOG.CASEHEAL);// TODO check
-			System.out.println(effect.getSkillName());
 			effect.endEffect();
 			return true;
 		}
