@@ -1421,7 +1421,7 @@
 	</gd_rule>
 	<gd_rule rule_name="Moonflower Leaf" base_chance="24" min_diff="-4" max_diff="5">
 		<gd_worlds>
-			<gd_world wd_type="ELYSEA" />
+			<gd_world wd_type="BALAUREA" />
 		</gd_worlds>
 		<gd_npc_groups>
 			<gd_npc_group group="FELLIAL" />
