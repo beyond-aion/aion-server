@@ -1234,17 +1234,6 @@
 			<gd_item id="125001884" /><!-- Fascination Butterfly Mask -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Headgear (Rare)" base_chance="30">
-		<gd_maps>
-			<gd_map map_id="210020000" /><!-- Eltnen -->
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="211040" /><!-- Grand Chieftain Saendukal -->
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="125000951" /><!-- Kaidan Headband -->
-		</gd_items>
-	</gd_rule>
 	<gd_rule rule_name="Named Headgear (Unique)" base_chance="30">
 		<gd_maps>
 			<gd_map map_id="210020000" /><!-- Eltnen -->

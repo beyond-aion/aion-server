@@ -91,13 +91,18 @@
 	<!-- Eltnen -->
 	<npc_drop npc_id="211857">
 		<drop_group race="PC_ALL"><!-- Named Headband (Rare) -->
-			<drop item_id="125000943" chance="5" /><!-- Cursed Hat -->
-			<drop item_id="125000945" chance="5" /><!-- Cursed Helm -->
+			<drop item_id="125000942" chance="12" /><!-- Cursed Headband -->
+			<drop item_id="125000943" chance="12" /><!-- Cursed Hat -->
+			<drop item_id="125000944" chance="12" /><!-- Cursed Chain Helm -->
+			<drop item_id="125000945" chance="12" /><!-- Cursed Helm -->
 		</drop_group>
 	</npc_drop>
 	<npc_drop npc_id="211860">
 		<drop_group race="PC_ALL"><!-- Named Headband (Rare) -->
+			<drop item_id="125000951" chance="12" /><!-- Kaidan Headband -->
 			<drop item_id="125000952" chance="12" /><!-- Kaidan Hat -->
+			<drop item_id="125000953" chance="12" /><!-- Kaidan Chain Helm -->
+			<drop item_id="125000954" chance="12" /><!-- Kaidan Helm -->
 		</drop_group>
 	</npc_drop>
 	<!-- Heiron -->
