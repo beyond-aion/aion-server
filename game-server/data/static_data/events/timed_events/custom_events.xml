@@ -26,28 +26,41 @@
 			</buff>
 		</buffs>
 	</event>
-	<event name="Upgrade Arcade" start="2018-05-18T00:00:00" end="2018-05-27T23:59:59">
-		<inventory_drop item_id="186000389" interval="60" /> <!-- Arcade Token -->
+	<event name="Upgrade Arcade" start="2019-01-25T00:00:00" end="2019-02-03T23:59:59">
+		<inventory_drop item_id="186000389" interval="60" /><!-- Arcade Token -->
 		<event_drops>
 			<gd_rule rule_name="Instance Boss Arcade Token" base_chance="100" member_limit="12">
 				<gd_maps>
-					<gd_map map_id="300520000" /> <!-- Dragon Lords Refuge -->
-					<gd_map map_id="301110000" /> <!-- Danuar Reliquary -->
-					<gd_map map_id="301140000" /> <!-- Seized Danaur Sanctuary -->
-					<gd_map map_id="300590000" /> <!-- Ophidan Bridge -->
+					<gd_map map_id="300520000" /><!-- Dragon Lords Refuge -->
 				</gd_maps>
 				<gd_npcs>
-					<gd_npc npc_id="701542" /> <!-- Tiamat´s Huge Treasure Chest (Dragon Lords Refuge) -->
-					<gd_npc npc_id="701795" /> <!-- Treasue Box (Danuar Reliquary) -->
-					<gd_npc npc_id="235619" /> <!-- Warmage Suyaroka (Seized Danuar Sanctuary) -->
-					<gd_npc npc_id="235620" /> <!-- Chief Medic Tagnu (Seized Danuar Sanctuary) -->
-					<gd_npc npc_id="235621" /> <!-- Virulent Ukahim (Seized Danuar Sanctuary) -->
-					<gd_npc npc_id="235769" /> <!-- Velkur Aethercaster (Ophidan Bridge) -->
-					<gd_npc npc_id="235770" /> <!-- Velkur Aetherpriest (Ophidan Bridge) -->
-					<gd_npc npc_id="235771" /> <!-- Velkur Aetherknife (Ophidan Bridge) -->
+					<gd_npc npc_id="701542" /><!-- Tiamat´s Huge Treasure Chest (Dragon Lords Refuge) -->
 				</gd_npcs>
 				<gd_items>
-					<gd_item id="188053869"/> <!-- [Event] Arcade Token Bundle (3) -->
+					<gd_item id="188053512"/><!-- [Event] Arcade Token Bundle -->
+				</gd_items>
+			</gd_rule>
+			<gd_rule rule_name="Instance Boss Arcade Token" base_chance="100" member_limit="6">
+				<gd_maps>
+					<gd_map map_id="301110000" /> <!-- Danuar Reliquary -->
+					<gd_map map_id="301130000" /> <!-- Sauro Supply Base -->
+				</gd_maps>
+				<gd_npcs>
+					<gd_npc npc_id="701795" /><!-- Treasue Box (Danuar Reliquary) -->
+					<gd_npc npc_id="230857" /><!-- Guard Captain Ahuradim -->
+					<gd_npc npc_id="230858" /><!-- Brigade General Sheba -->
+				</gd_npcs>
+				<gd_items>
+					<gd_item id="188053869"/><!-- [Event] Arcade Token Bundle (3) -->
+				</gd_items>
+			</gd_rule>
+			<gd_rule rule_name="Siege Boss Arcade Token" base_chance="100" member_limit="192">
+				<gd_npcs>
+					<gd_npc npc_id="258203" /><!-- Enraged Veille -->
+					<gd_npc npc_id="258207" /><!-- Enraged Mastarius -->
+				</gd_npcs>
+				<gd_items>
+					<gd_item id="188053870"/><!-- [Event] Arcade Token Bundle (10) -->
 				</gd_items>
 			</gd_rule>
 		</event_drops>

@@ -11100,8 +11100,42 @@
 			<random_item type="ANCIENT_CROWN" />
 		</items>
 	</decomposable>
-	<decomposable item_id="188051460" /><!-- Box Blessed by Veille -->
-	<decomposable item_id="188051461" /><!-- Box Blessed by Mastarius -->
+	<decomposable item_id="188051460"><!-- Box Blessed by Veille -->
+		<items>
+			<item id="186000242" min_count="2" /><!-- Ceramium Medals -->
+			<item id="164002167" min_count="15" /><!-- Drana Coffee -->
+			<item id="166030005" min_count="5" /><!-- Tempering Solution -->
+			<random_item type="MANASTONE_LEGEND_GRADE_70" /><!-- Lv70 Composite -->
+			<random_item type="MANASTONE_LEGEND_GRADE_70" /><!-- Lv70 Composite -->
+			<random_item type="MANASTONE_LEGEND_GRADE_70" /><!-- Lv70 Composite -->
+		</items>
+		<items>
+			<item id="186000242" min_count="2" /><!-- Ceramium Medals -->
+			<item id="164002167" min_count="15" /><!-- Drana Coffee -->
+			<item id="166500002" min_count="5" /><!-- Amplification Stone -->
+			<random_item type="MANASTONE_LEGEND_GRADE_70" /><!-- Lv70 Composite -->
+			<random_item type="MANASTONE_LEGEND_GRADE_70" /><!-- Lv70 Composite -->
+			<random_item type="MANASTONE_LEGEND_GRADE_70" /><!-- Lv70 Composite -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188051461"><!-- Box Blessed by Mastarius -->
+		<items>
+			<item id="186000242" min_count="2" /><!-- Ceramium Medals -->
+			<item id="164002167" min_count="15" /><!-- Drana Coffee -->
+			<item id="166030005" min_count="5" /><!-- Tempering Solution -->
+			<random_item type="MANASTONE_LEGEND_GRADE_70" /><!-- Lv70 Composite -->
+			<random_item type="MANASTONE_LEGEND_GRADE_70" /><!-- Lv70 Composite -->
+			<random_item type="MANASTONE_LEGEND_GRADE_70" /><!-- Lv70 Composite -->
+		</items>
+		<items>
+			<item id="186000242" min_count="2" /><!-- Ceramium Medals -->
+			<item id="164002167" min_count="15" /><!-- Drana Coffee -->
+			<item id="166500002" min_count="5" /><!-- Amplification Stone -->
+			<random_item type="MANASTONE_LEGEND_GRADE_70" /><!-- Lv70 Composite -->
+			<random_item type="MANASTONE_LEGEND_GRADE_70" /><!-- Lv70 Composite -->
+			<random_item type="MANASTONE_LEGEND_GRADE_70" /><!-- Lv70 Composite -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188051462"><!-- Piloti's Balic Materials -->
 		<items>
 			<item id="152014015" min_count="2" max_count="5" /><!-- Fresh Balaur Meat -->
@@ -30159,7 +30193,11 @@
 	<decomposable item_id="188053509" /><!-- Changarnerk's Gift (Level 5 or higher) -->
 	<decomposable item_id="188053510" /><!-- Vindachinerk's Gift (Level 1 or higher) -->
 	<decomposable item_id="188053511" /><!-- [Event] Bonus Entry Scroll Bundle -->
-	<decomposable item_id="188053512" /><!-- [Event] Arcade Token Bundle -->
+	<decomposable item_id="188053512"><!-- [Event] Arcade Token Bundle -->
+		<items>
+			<item id="186000389" min_count="5" /><!-- Arcade Token -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188053513" /><!-- Porgus Costume Set -->
 	<decomposable item_id="188053514" /><!-- Gift-Wrapped Andu's Party Dress -->
 	<decomposable item_id="188053515" /><!-- Gift-Wrapped Daskin's Party Suit -->
