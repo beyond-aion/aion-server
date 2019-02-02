@@ -3,7 +3,6 @@ package com.aionemu.gameserver.model.templates.item.actions;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -130,11 +129,7 @@ public class DecomposeAction extends AbstractItemAction {
 		player.getController().cancelUseItem();
 		Collection<ResultedItem> selectable = DataManager.DECOMPOSABLE_ITEMS_DATA.getSelectableItems(parentItem.getItemId());
 		if (selectable != null) {
-			for (Iterator<ResultedItem> iter = selectable.iterator(); iter.hasNext();) {
-				ResultedItem item = iter.next();
-				if (!item.isObtainableFor(player))
-					iter.remove();
-			}
+			selectable.removeIf(item -> !item.isObtainableFor(player));
 			PacketSendUtility.sendPacket(player, new SM_FIRST_SHOW_DECOMPOSABLE(parentItem.getObjectId(), selectable));
 			return;
 		}
@@ -195,7 +190,7 @@ public class DecomposeAction extends AbstractItemAction {
 											randomId = 0;
 											break;
 										}
-									} while (!validateItemId(randomId));
+									} while (!isValidItemId(randomId));
 									break;
 								case MANASTONE:
 								case MANASTONE_COMMON_GRADE_10:
@@ -244,9 +239,6 @@ public class DecomposeAction extends AbstractItemAction {
 											.filter(t -> t.getItemQuality() != ItemQuality.LEGEND && !t.getName().contains(" MP ")).collect(Collectors.toList());
 										randomId = Rnd.get(selectedStones).getTemplateId();
 									}
-
-									if (!validateItemId(randomId))
-										return;
 									break;
 								case SPECIAL_MANASTONE_RARE_GRADE:
 								case SPECIAL_MANASTONE_LEGEND_GRADE:
@@ -271,9 +263,6 @@ public class DecomposeAction extends AbstractItemAction {
 									List<ItemTemplate> selectedStones = ancientStones.stream()
 										.filter(t -> t.getItemQuality() == itemQuality && !t.getName().contains(" MP ")).collect(Collectors.toList());
 									randomId = Rnd.get(selectedStones).getTemplateId();
-
-									if (!validateItemId(randomId))
-										return;
 									break;
 								case CHUNK_EARTH:
 									int[] earth = chunkEarth.get(player.getRace());
@@ -316,7 +305,7 @@ public class DecomposeAction extends AbstractItemAction {
 											randomId = 0;
 											break;
 										}
-									} while (!validateItemId(randomId));
+									} while (!isValidItemId(randomId));
 									break;
 								case ANCIENT_CROWN:
 									do {
@@ -326,7 +315,7 @@ public class DecomposeAction extends AbstractItemAction {
 											randomId = 0;
 											break;
 										}
-									} while (!validateItemId(randomId));
+									} while (!isValidItemId(randomId));
 									break;
 								case ANCIENT_GOBLET:
 									do {
@@ -336,7 +325,7 @@ public class DecomposeAction extends AbstractItemAction {
 											randomId = 0;
 											break;
 										}
-									} while (!validateItemId(randomId));
+									} while (!isValidItemId(randomId));
 									break;
 								case ANCIENT_SEAL:
 									do {
@@ -346,7 +335,7 @@ public class DecomposeAction extends AbstractItemAction {
 											randomId = 0;
 											break;
 										}
-									} while (!validateItemId(randomId));
+									} while (!isValidItemId(randomId));
 									break;
 								case ANCIENT_ICON:
 									do {
@@ -356,10 +345,10 @@ public class DecomposeAction extends AbstractItemAction {
 											randomId = 0;
 											break;
 										}
-									} while (!validateItemId(randomId));
+									} while (!isValidItemId(randomId));
 									break;
 							}
-							if (randomId != 0 && randomId != 167000524)
+							if (randomId != 0)
 								ItemService.addItem(player, randomId, randomItem.getResultCount(), true,
 									new ItemUpdatePredicate(ItemAddType.DECOMPOSABLE, ItemUpdateType.INC_ITEM_COLLECT));
 						}
@@ -457,14 +446,12 @@ public class DecomposeAction extends AbstractItemAction {
 	private static void validateItemIds(int[]... itemIds) {
 		for (int[] ids : itemIds) {
 			for (int itemId : ids)
-				validateItemId(itemId);
+				if (!isValidItemId(itemId))
+					throw new IllegalArgumentException("Decomposable random reward item ID is invalid: " + itemId);
 		}
 	}
 
-	private static boolean validateItemId(int itemId) {
-		boolean itemExists = DataManager.ITEM_DATA.getItemTemplate(itemId) != null;
-		if (!itemExists)
-			log.warn("Decomposable reward item ID is invalid: " + itemId);
-		return itemExists;
+	private static boolean isValidItemId(int itemId) {
+		return DataManager.ITEM_DATA.getItemTemplate(itemId) != null;
 	}
 }

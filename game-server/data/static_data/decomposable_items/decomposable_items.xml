@@ -17783,7 +17783,7 @@
 			<random_item type="POTION" min_count="20" />
 		</items>
 		<items chance="21.0">
-			<item id="1660000193" min_count="2" max_count="8" /><!-- Gamma Enchantment Stone -->
+			<item id="166000193" min_count="2" max_count="8" /><!-- Gamma Enchantment Stone -->
 		</items>
 		<items chance="3.0">
 			<item id="110600824" player_classes="GLADIATOR TEMPLAR" /><!-- Archon Centurion's Breastplate -->
@@ -22631,7 +22631,7 @@
 			<item id="186000236" min_count="4" max_count="12" /><!-- Blood Mark -->
 			<item id="152012585" /><!-- Wind Mote -->
 			<item id="152012617" /><!-- Pure Crystal -->
-			<item id="169305252" /><!-- Fury Powder -->
+			<item id="169405252" /><!-- Fury Powder -->
 			<random_item type="ANCIENTITEMS" min_count="1" max_count="2" />
 			<random_item type="SPECIAL_MANASTONE_EPIC_GRADE" />
 		</items>
@@ -26810,31 +26810,31 @@
 		<items>
 			<item id="186000237" min_count="35" /><!-- Ancient Coin -->
 			<item id="152012581" min_count="2" /><!-- Fire Breath -->
-			<item id="188057222" /><!-- Danuar Reliquary Expedition's Idian Bundle -->
+			<item id="188052500" /><!-- Danuar Reliquary Expedition's Idian Bundle -->
 			<random_item type="SPECIAL_MANASTONE_LEGEND_GRADE" />
 		</items>
 		<items>
 			<item id="186000237" min_count="35" /><!-- Ancient Coin -->
 			<item id="152012583" min_count="2" /><!-- Fire Source -->
-			<item id="188057222" /><!-- Danuar Reliquary Expedition's Idian Bundle -->
+			<item id="188052500" /><!-- Danuar Reliquary Expedition's Idian Bundle -->
 			<random_item type="SPECIAL_MANASTONE_LEGEND_GRADE" />
 		</items>
 		<items>
 			<item id="186000237" min_count="35" /><!-- Ancient Coin -->
 			<item id="152012616" min_count="2" /><!-- Passion Crystal -->
-			<item id="188057222" /><!-- Danuar Reliquary Expedition's Idian Bundle -->
+			<item id="188052500" /><!-- Danuar Reliquary Expedition's Idian Bundle -->
 			<random_item type="SPECIAL_MANASTONE_LEGEND_GRADE" min_count="2" />
 		</items>
 		<items>
 			<item id="186000237" min_count="35" /><!-- Ancient Coin -->
 			<item id="152012618" min_count="2" /><!-- Ore of Pssion -->
-			<item id="188057222" /><!-- Danuar Reliquary Expedition's Idian Bundle -->
+			<item id="188052500" /><!-- Danuar Reliquary Expedition's Idian Bundle -->
 			<random_item type="SPECIAL_MANASTONE_UNIQUE_GRADE" />
 		</items>
 		<items>
 			<item id="186000237" min_count="35" /><!-- Ancient Coin -->
 			<item id="152012620" min_count="2" /><!-- Passion Gemstone -->
-			<item id="188057222" /><!-- Danuar Reliquary Expedition's Idian Bundle -->
+			<item id="188052500" /><!-- Danuar Reliquary Expedition's Idian Bundle -->
 			<random_item type="SPECIAL_MANASTONE_UNIQUE_GRADE" min_count="2" />
 		</items>
 	</decomposable>
@@ -34608,7 +34608,7 @@
 		<items>
 			<item id="110501523" player_classes="CHANTER GLADIATOR TEMPLAR" /><!-- Bastion Defender Firm Hauberk -->
 			<item id="110501528" player_classes="CLERIC" /><!-- Bastion Protector Firm Hauberk -->
-			<item id="110501529" player_classes="RIDER" /><!-- Bastion Defender Firm Magic Hauberk -->
+			<item id="110550929" player_classes="RIDER" /><!-- Bastion Defender Firm Magic Hauberk -->
 		</items>
 		<items>
 			<item id="111501478" player_classes="CHANTER GLADIATOR TEMPLAR" /><!-- Bastion Defender Firm Handguards -->

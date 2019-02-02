@@ -53,6 +53,14 @@
 		* by merged xml file (because it'll be used for validation when loading)
 		* by every single xml file (IDE will use it to validate xml files, when editing)
 	-->
+	<import file="item_sets/item_sets.xml" />
+	<import file="items/assembly_items.xml" />
+	<import file="items/item_groups.xml" />
+	<import file="items/item_purifications.xml" />
+	<import file="items/item_random_bonuses.xml" />
+	<import file="items/item_restriction_cleanups.xml" />
+	<import file="items/item_templates.xml" />
+	<import file="items/multi_return_item.xml" />
 	<import file="ai" singleRootTag="true" />
 	<import file="assembled_npcs/assembled_npcs.xml" />
 	<import file="auto_group/auto_group.xml" />
@@ -86,14 +94,6 @@
 	<import file="instance_bonusattr/instance_bonusattr.xml" />
 	<import file="instance_cooltimes/instance_cooltimes.xml" />
 	<import file="instance_exit/instance_exit.xml" />
-	<import file="item_sets/item_sets.xml" />
-	<import file="items/assembly_items.xml" />
-	<import file="items/item_groups.xml" />
-	<import file="items/item_purifications.xml" />
-	<import file="items/item_random_bonuses.xml" />
-	<import file="items/item_restriction_cleanups.xml" />
-	<import file="items/item_templates.xml" />
-	<import file="items/multi_return_item.xml" />
 	<import file="legion_dominion_template.xml" />
 	<import file="mail_templates.xml" />
 	<import file="mesh_materials/material_templates.xml" />
