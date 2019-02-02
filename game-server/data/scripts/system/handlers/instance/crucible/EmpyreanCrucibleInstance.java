@@ -50,10 +50,11 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 			this.stageNpcs = npcs;
 		}
 
-		private boolean containNpc() {
-			for (Npc npc : stageNpcs) {
-				if (instance.getNpcs().contains(npc)) {
-					return true;
+		private boolean containsNpcs() {
+			for (Npc npc : instance.getNpcs()) {
+				for (Npc stageNpc : stageNpcs) {
+					if (npc.equals(stageNpc))
+						return true;
 				}
 			}
 			return false;
@@ -390,7 +391,7 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 						}
 						break;
 				}
-				if (es != null && !es.containNpc()) {
+				if (es != null && !es.containsNpcs()) {
 					startStage2Round5();
 				}
 				break;
@@ -426,7 +427,7 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 				break;
 			case 217506:
 				despawnNpc(npc);
-				if (es != null && !es.containNpc()) {
+				if (es != null && !es.containsNpcs()) {
 					startStage2Round5();
 				}
 				break;
@@ -558,7 +559,7 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 						}
 						break;
 					case START_STAGE_4_ROUND_2:
-						if (es != null && !es.containNpc()) {
+						if (es != null && !es.containsNpcs()) {
 							startStage4Round3();
 						}
 						break;
@@ -590,7 +591,7 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 						}
 						break;
 					case START_STAGE_4_ROUND_2:
-						if (es != null && !es.containNpc()) {
+						if (es != null && !es.containsNpcs()) {
 							startStage4Round3();
 						}
 						break;
@@ -599,7 +600,7 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 			case 217563:
 			case 217566:
 				despawnNpc(npc);
-				if (es != null && !es.containNpc()) {
+				if (es != null && !es.containsNpcs()) {
 					sendEventPacket(StageType.START_STAGE_4_ROUND_4, 2000);
 					sp(217567, 345.73895f, 349.49786f, 96.09097f, (byte) 0, 6000);
 				}

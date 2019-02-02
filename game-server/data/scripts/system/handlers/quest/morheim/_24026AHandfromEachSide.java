@@ -2,8 +2,6 @@ package quest.morheim;
 
 import static com.aionemu.gameserver.model.DialogAction.*;
 
-import java.util.List;
-
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -220,10 +218,8 @@ public class _24026AHandfromEachSide extends AbstractQuestHandler {
 	}
 
 	private void deleteBalaur(QuestEnv env) {
-		List<Npc> npcs = env.getPlayer().getPosition().getWorldMapInstance().getNpcs();
-		for (Npc npc : npcs) {
-			if (npc.getNpcId() == 213575 || npc.getNpcId() == 280818)
-				npc.getController().delete();
+		for (Npc npc : env.getPlayer().getPosition().getWorldMapInstance().getNpcs(213575, 280818)) {
+			npc.getController().delete();
 		}
 	}
 }

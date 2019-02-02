@@ -254,9 +254,7 @@ public class EternalBastionInstance extends GeneralInstanceHandler {
 		}
 		instanceReward.setInstanceProgressionType(InstanceProgressionType.END_PROGRESS);
 		instanceReward.setRank(rank);
-		for (Npc npc : instance.getNpcs()) {
-			npc.getController().delete();
-		}
+		instance.forEachNpc(npc -> npc.getController().delete());
 		doReward(rank);
 		return rank;
 	}

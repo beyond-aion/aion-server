@@ -42,17 +42,17 @@ public class TwinDoorDestroyerAI extends GeneralNpcAI {
 
 	private void removeTrap() {
 		ThreadPoolManager.getInstance().schedule(() -> {
-			for (Npc npc : getOwner().getPosition().getWorldMapInstance().getNpcs())
-				if (npc.getNpcId() == 207128 || npc.getNpcId() == 207129)
-					npc.getController().delete();
+			for (Npc npc : getOwner().getPosition().getWorldMapInstance().getNpcs(207128, 207129))
+				npc.getController().delete();
 		}, 1500);
 	}
 
 	private void scheduleGateAttack() {
 		ThreadPoolManager.getInstance().schedule(() -> {
-			for (Npc npc : getOwner().getPosition().getWorldMapInstance().getNpcs())
-				if (npc.getNpcId() == 731580 && isInRange(npc, 10))
+			for (Npc npc : getOwner().getPosition().getWorldMapInstance().getNpcs(731580)) {
+				if (isInRange(npc, 10))
 					SkillEngine.getInstance().getSkill(npc, 20840, 1, npc).useWithoutPropSkill();
+			}
 			PacketSendUtility.broadcastMessage(getOwner(), 1501311);
 		}, 3500);
 	}

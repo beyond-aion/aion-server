@@ -146,9 +146,10 @@ public class DragonLordsRefuge extends GeneralInstanceHandler {
 	}
 
 	private void endInstance(List<Integer> despawnExceptions) {
-		for (Npc npc : instance.getNpcs())
-			if (npc != null && !despawnExceptions.contains(npc.getNpcId()))
+		instance.forEachNpc(npc -> {
+			if (!despawnExceptions.contains(npc.getNpcId()))
 				npc.getController().delete();
+		});
 		spawn(730630, 548.18683f, 514.54523f, 420f, (byte) 0, 23);
 	}
 

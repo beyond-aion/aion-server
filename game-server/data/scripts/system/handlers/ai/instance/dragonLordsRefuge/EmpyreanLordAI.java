@@ -35,9 +35,10 @@ public class EmpyreanLordAI extends GeneralNpcAI {
 	protected void handleSpawned() {
 		super.handleSpawned();
 		ThreadPoolManager.getInstance().schedule(() -> {
-			for (Npc npc : getPosition().getWorldMapInstance().getNpcs())
-				if (npc != null && npc.getNpcId() >= 219532 && npc.getNpcId() <= 219539)
+			getPosition().getWorldMapInstance().forEachNpc(npc -> {
+				if (npc.getNpcId() >= 219532 && npc.getNpcId() <= 219539)
 					npc.getController().die();
+			});
 		}, 9000);
 		tiamat = getPosition().getWorldMapInstance().getNpc(219361);
 		switch (getNpcId()) {

@@ -140,9 +140,7 @@ public class DredgionInstance2 extends GeneralInstanceHandler {
 			QuestEnv env = new QuestEnv(null, player, 0);
 			QuestEngine.getInstance().onDredgionReward(env);
 		}
-		for (Npc npc : instance.getNpcs())
-			npc.getController().delete();
-
+		instance.forEachNpc(npc -> npc.getController().delete());
 		ThreadPoolManager.getInstance().schedule(() -> {
 			if (!isInstanceDestroyed) {
 				for (Player player : instance.getPlayersInside()) {

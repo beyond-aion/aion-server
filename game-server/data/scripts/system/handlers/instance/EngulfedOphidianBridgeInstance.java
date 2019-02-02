@@ -65,7 +65,6 @@ public class EngulfedOphidianBridgeInstance extends GeneralInstanceHandler {
 		sendPacket(new SM_INSTANCE_SCORE(new EngulfedOphidianBridgeScoreInfo(engulfedOBReward, 3, player.getObjectId()), engulfedOBReward, getTime()));
 		PacketSendUtility.sendPacket(player,
 			new SM_INSTANCE_SCORE(new EngulfedOphidianBridgeScoreInfo(engulfedOBReward, 6, player.getObjectId()), engulfedOBReward, getTime()));
-		// sendPacket();
 	}
 
 	protected void startInstanceTask() {
@@ -277,24 +276,16 @@ public class EngulfedOphidianBridgeInstance extends GeneralInstanceHandler {
 			}
 
 		});
-		for (Npc npc : instance.getNpcs()) {
-			npc.getController().delete();
-		}
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				if (!isInstanceDestroyed) {
-					for (Player player : instance.getPlayersInside()) {
-						if (player.isDead()) {
-							PlayerReviveService.duelRevive(player);
-						}
-						onExitInstance(player);
-					}
-					AutoGroupService.getInstance().unRegisterInstance(instanceId);
+		instance.forEachNpc(npc -> npc.getController().delete());
+		ThreadPoolManager.getInstance().schedule(() -> {
+			if (!isInstanceDestroyed) {
+				for (Player player : instance.getPlayersInside()) {
+					if (player.isDead())
+						PlayerReviveService.duelRevive(player);
+					onExitInstance(player);
 				}
+				AutoGroupService.getInstance().unRegisterInstance(instanceId);
 			}
-
 		}, 10000);
 	}
 

@@ -83,9 +83,7 @@ public class _2008Ascension extends AbstractQuestHandler {
 			}
 		} else if (targetId == 205041 && var == 5) {
 			playQuestMovie(env, 152);
-			for (Npc npcInside : player.getPosition().getWorldMapInstance().getNpcs()) {
-				NpcActions.delete(npcInside);
-			}
+			player.getPosition().getWorldMapInstance().forEachNpc(NpcActions::delete);
 			QuestService.addNewSpawn(320020000, instanceId, 203550, 301.92999f, 274.26001f, 205.7f, (byte) 0);
 			qs.setQuestVar(6);
 			updateQuestStatus(env);

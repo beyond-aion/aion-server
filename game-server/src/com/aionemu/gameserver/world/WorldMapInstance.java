@@ -1,7 +1,6 @@
 package com.aionemu.gameserver.world;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -64,10 +63,14 @@ public abstract class WorldMapInstance implements Iterable<VisibleObject> {
 	 */
 	private final Map<Integer, VisibleObject> worldMapObjects = new ConcurrentHashMap<>();
 	/**
+	 * All npcs spawned in this world map instance
+	 */
+	private final Map<Integer, Npc> worldMapNpcs = new ConcurrentHashMap<>();
+	/**
 	 * All players spawned in this world map instance
 	 */
 	private final Map<Integer, Player> worldMapPlayers = new ConcurrentHashMap<>();
-	private final Set<Integer> registeredObjects = Collections.newSetFromMap(new ConcurrentHashMap<Integer, Boolean>());
+	private final Set<Integer> registeredObjects = ConcurrentHashMap.newKeySet();
 	private GeneralTeam<?, ?> registeredTeam = null;
 	private Future<?> emptyInstanceTask = null;
 	private Future<?> updateNearbyQuestsTask = null;
@@ -77,7 +80,7 @@ public abstract class WorldMapInstance implements Iterable<VisibleObject> {
 	private int instanceId;
 	private final List<Integer> questIds = new ArrayList<>();
 	private InstanceHandler instanceHandler;
-	private Map<ZoneName, ZoneInstance> zones = new HashMap<>();
+	private final Map<ZoneName, ZoneInstance> zones;
 	// TODO: Merge this with owner
 	private int soloPlayer;
 	private WorldPosition startPos;
@@ -158,6 +161,7 @@ public abstract class WorldMapInstance implements Iterable<VisibleObject> {
 			throw new DuplicateAionObjectException(object, worldMapObjects.get(object.getObjectId()));
 		}
 		if (object instanceof Npc) {
+			worldMapNpcs.put(object.getObjectId(), (Npc) object);
 			QuestNpc qNpc = QuestEngine.getInstance().getQuestNpc(object.getObjectTemplate().getTemplateId());
 			if (qNpc != null) {
 				boolean updateNearbyQuests = false;
@@ -195,6 +199,8 @@ public abstract class WorldMapInstance implements Iterable<VisibleObject> {
 				((Player) object).getController().onLeaveFlyArea();
 			}
 			worldMapPlayers.remove(object.getObjectId());
+		} else if (object instanceof Npc) {
+			worldMapNpcs.remove(object.getObjectId());
 		}
 	}
 
@@ -221,28 +227,27 @@ public abstract class WorldMapInstance implements Iterable<VisibleObject> {
 	}
 
 	public Npc getNpc(int npcId) {
-		for (VisibleObject v : this) {
-			if (v instanceof Npc && v.getObjectTemplate().getTemplateId() == npcId)
-				return (Npc) v;
+		for (Npc npc : worldMapNpcs.values()) {
+			if (npc != null && npc.getNpcId() == npcId)
+				return npc;
 		}
 		return null;
 	}
 
-	public List<Npc> getNpcs(int npcId) {
+	public List<Npc> getNpcs(int... npcIds) {
 		List<Npc> npcs = new ArrayList<>();
-		for (VisibleObject v : this) {
-			if (v instanceof Npc && v.getObjectTemplate().getTemplateId() == npcId)
-				npcs.add((Npc) v);
-		}
+		forEachNpc(npc -> {
+			for (int npcId : npcIds) {
+				if (npc.getNpcId() == npcId)
+					npcs.add(npc);
+			}
+		});
 		return npcs;
 	}
 
 	public List<Npc> getNpcs() {
 		List<Npc> npcs = new ArrayList<>();
-		for (VisibleObject v : this) {
-			if (v instanceof Npc)
-				npcs.add((Npc) v);
-		}
+		forEachNpc(npcs::add);
 		return npcs;
 	}
 
@@ -339,17 +344,6 @@ public abstract class WorldMapInstance implements Iterable<VisibleObject> {
 		return startPos;
 	}
 
-	public void forEachPlayer(Consumer<Player> function) {
-		try {
-			worldMapPlayers.values().forEach(player -> {
-				if (player != null) // can be null if entry got removed after iterator allocation
-					function.accept(player);
-			});
-		} catch (Exception ex) {
-			log.error("Exception when iterating over players", ex);
-		}
-	}
-
 	protected ZoneInstance[] filterZones(int mapId, int regionId, float startX, float startY, float minZ, float maxZ) {
 		List<ZoneInstance> regionZones = new ArrayList<>();
 		RegionZone regionZone = new RegionZone(startX, startY, minZ, maxZ);
@@ -401,5 +395,24 @@ public abstract class WorldMapInstance implements Iterable<VisibleObject> {
 	@Override
 	public Iterator<VisibleObject> iterator() {
 		return worldMapObjects.values().iterator();
+	}
+
+	public void forEachNpc(Consumer<Npc> function) {
+		forEach(worldMapNpcs, function);
+	}
+
+	public void forEachPlayer(Consumer<Player> function) {
+		forEach(worldMapPlayers, function);
+	}
+
+	private <T extends VisibleObject> void forEach(Map<Integer, T> concurrentMap, Consumer<T> function) {
+		concurrentMap.values().forEach(object -> {
+			try {
+				if (object != null) // can be null if entry got removed after iterator allocation
+					function.accept(object);
+			} catch (Exception ex) {
+				log.error("Exception iterating over " + object, ex);
+			}
+		});
 	}
 }

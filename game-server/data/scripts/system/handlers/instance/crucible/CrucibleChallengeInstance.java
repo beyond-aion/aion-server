@@ -10,7 +10,6 @@ import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.drop.DropItem;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.instance.InstanceProgressionType;
 import com.aionemu.gameserver.model.instance.StageType;
@@ -345,13 +344,10 @@ public class CrucibleChallengeInstance extends CrucibleInstance {
 	}
 
 	private boolean allDeadOrDespawned(int... npcIds) {
-		for (VisibleObject obj : instance) {
-			if (obj instanceof Npc) {
-				Npc npc = (Npc) obj;
-				for (int npcId : npcIds) {
-					if (npc.getNpcId() == npcId && !npc.isDead())
-						return false;
-				}
+		for (Npc npc : instance.getNpcs()) {
+			for (int npcId : npcIds) {
+				if (npc.getNpcId() == npcId && !npc.isDead())
+					return false;
 			}
 		}
 		return true;

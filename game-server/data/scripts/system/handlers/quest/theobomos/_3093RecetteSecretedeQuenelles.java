@@ -87,8 +87,7 @@ public class _3093RecetteSecretedeQuenelles extends AbstractQuestHandler {
 				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 2034);
 				else if (env.getDialogActionId() == SETPRO3) {
-					if (giveQuestItem(env, 182208052, 1))
-						;
+					giveQuestItem(env, 182208052, 1);
 					qs.setStatus(QuestStatus.REWARD);
 					updateQuestStatus(env);
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));

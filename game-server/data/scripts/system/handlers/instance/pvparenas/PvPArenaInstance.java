@@ -446,22 +446,14 @@ public class PvPArenaInstance extends GeneralInstanceHandler {
 				}
 			}
 		}
-		for (Npc npc : instance.getNpcs()) {
-			npc.getController().delete();
-		}
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				if (!isInstanceDestroyed) {
-					for (Player player : instance.getPlayersInside()) {
-						onExitInstance(player);
-
-					}
-					AutoGroupService.getInstance().unRegisterInstance(instanceId);
+		instance.forEachNpc(npc -> npc.getController().delete());
+		ThreadPoolManager.getInstance().schedule(() -> {
+			if (!isInstanceDestroyed) {
+				for (Player player : instance.getPlayersInside()) {
+					onExitInstance(player);
 				}
+				AutoGroupService.getInstance().unRegisterInstance(instanceId);
 			}
-
 		}, 10000);
 	}
 

@@ -3,9 +3,9 @@ package ai;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
-import com.aionemu.gameserver.world.World;
 
 /**
  * @author Yeats 16.03.2016.
@@ -22,16 +22,14 @@ public class ConquestOfferingAggressiveAI extends AggressiveNpcAI {
 	@Override
 	public void handleSpawned() {
 		super.handleSpawned();
-		findCreator();
+		findAndSetCreator();
 	}
 
-	private void findCreator() {
+	private void findAndSetCreator() {
 		if (getCreatorId() != 0) {
-			for (Npc npc : World.getInstance().getWorldMap(getOwner().getWorldId()).getMainWorldMapInstance().getNpcs()) {
-				if (npc.getObjectId() == getOwner().getCreatorId()) {
-					spawner = npc;
-					break;
-				}
+			VisibleObject object = getPosition().getWorldMapInstance().getObject(getCreatorId());
+			if (object instanceof Npc) {
+				spawner = (Npc) object;
 			}
 		}
 	}

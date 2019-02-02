@@ -260,10 +260,10 @@ public class AhserionRaid {
 				panesterraTeams.get(faction).moveTeamMembersToFortressPosition();
 			}
 		}
-		for (Npc npc : World.getInstance().getWorldMap(400030000).getMainWorldMapInstance().getNpcs()) {
+		owner.getPosition().getWorldMapInstance().forEachNpc(npc -> {
 			if (npc.getNpcId() != owner.getNpcId())
 				npc.getController().delete();
-		}
+		});
 		SpawnEngine.spawnObject(SpawnEngine.newSingleTimeSpawn(400030000, 804680 + winnerFaction.getId(), 509.239f, 513.011f, 675.089f, (byte) 48), 1); // Pasha
 		ThreadPoolManager.getInstance().schedule(this::stop, 900000); // 15min
 	}
@@ -273,15 +273,15 @@ public class AhserionRaid {
 	}
 
 	private void deleteNpcs(PanesterraFaction eliminatedFaction, int flagToDelete) {
-		for (Npc npc : World.getInstance().getWorldMap(400030000).getMainWorldMapInstance().getNpcs()) {
-			if (npc.getNpcId() != flagToDelete && (npc.getSpawn().getStaticId() >= 180 && npc.getSpawn().getStaticId() <= 183 || npc.isFlag()))
-				continue;
-			if (!npc.isDead() && npc.getSpawn() instanceof AhserionsFlightSpawnTemplate) {
-				AhserionsFlightSpawnTemplate template = (AhserionsFlightSpawnTemplate) npc.getSpawn();
-				if (template.getFaction() == eliminatedFaction)
-					npc.getController().delete();
+		World.getInstance().getWorldMap(400030000).getMainWorldMapInstance().forEachNpc(npc -> {
+			if (npc.getNpcId() == flagToDelete || (!npc.isFlag() && (npc.getSpawn().getStaticId() < 180 || npc.getSpawn().getStaticId() > 183))) {
+				if (!npc.isDead() && npc.getSpawn() instanceof AhserionsFlightSpawnTemplate) {
+					AhserionsFlightSpawnTemplate template = (AhserionsFlightSpawnTemplate) npc.getSpawn();
+					if (template.getFaction() == eliminatedFaction)
+						npc.getController().delete();
+				}
 			}
-		}
+		});
 	}
 
 	private void cancelProgressTask() {

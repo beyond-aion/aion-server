@@ -1,8 +1,9 @@
 package admincommands;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 import com.aionemu.gameserver.model.ChatType;
 import com.aionemu.gameserver.model.Race;
-import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.StaticDoor;
 import com.aionemu.gameserver.model.gameobjects.player.CustomPlayerState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -164,11 +165,11 @@ public class Event extends AdminCommand {
 			sendInfo(admin, "This instance was created by another player, you cannot delete NPCs here. Use //goto to create a new one!");
 			return;
 		}
-		int count = 0;
-		for (Npc npc : map.getNpcs()) {
+		AtomicInteger count = new AtomicInteger();
+		map.forEachNpc(npc -> {
 			npc.getController().delete();
-			count++;
-		}
+			count.getAndIncrement();
+		});
 		for (StaticDoor door : map.getDoors().values())
 			door.setOpen(true);
 

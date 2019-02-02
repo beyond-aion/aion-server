@@ -367,10 +367,10 @@ public class DrakenspireDepths extends GeneralInstanceHandler {
 	}
 
 	private void deleteNpcById(int id) {
-		for (Npc npc : instance.getNpcs()) {
+		instance.forEachNpc(npc -> {
 			if (npc.getNpcId() == id)
 				npc.getController().delete();
-		}
+		});
 	}
 
 	@Override

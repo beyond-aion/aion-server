@@ -108,7 +108,7 @@ public class DanuarReliquaryInstance extends GeneralInstanceHandler {
 	}
 
 	private void onInstanceEnd(boolean successful) {
-		instance.getNpcs().stream().forEach(npc -> npc.getController().delete());
+		instance.forEachNpc(npc -> npc.getController().delete());
 		spawn(getExitId(), 255.66669f, 263.78525f, 241.7986f, (byte) 86); // Spawn exit portal
 		if (successful)
 			spawn(getTreasureBoxId(), 256.65f, 258.09f, 241.78f, (byte) 100); // Treasure Box
