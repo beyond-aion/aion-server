@@ -234,8 +234,8 @@ public class DropRegistrationService {
 
 	public float calculateEffectiveChance(GlobalRule rule, Npc npc, float dropRate) {
 		float chance = rule.getChance();
-		// if fixed_chance == true means all mobs will have the same base chance (npcRating and npcRank will be excluded from calculation)
-		if (!rule.isFixedChance())
+		// dynamic_chance means mobs will have different base chances based on their rank and rating
+		if (rule.isDynamicChance())
 			chance *= getRankModifier(npc) * getRatingModifier(npc);
 		// ignore chance reducing dropRate if it's a noReduction rule
 		if (dropRate > 1 || !rule.getNoReduction())

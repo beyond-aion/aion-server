@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../global_rules.xsd">
 	<!-- Map Drops -->
-	<gd_rule rule_name="Junk Taloc's Leaf Fragment" min_count="1" base_chance="40" min_diff="-5" max_diff="10">
+	<gd_rule rule_name="Junk Taloc's Leaf Fragment" base_chance="40">
 		<gd_maps>
 			<gd_map map_id="300190000" /><!-- Taloc's Hollow -->
 		</gd_maps>
@@ -14,17 +14,11 @@
 			<gd_zone zone="GARDEN_OF_LIFE_300190000" />
 			<gd_zone zone="COCCOONING_CHAMBER_300190000" />
 		</gd_zones>
-		<gd_ratings>
-			<gd_rating rating="NORMAL" />
-			<gd_rating rating="ELITE" />
-			<gd_rating rating="HERO" />
-			<gd_rating rating="LEGENDARY" />
-		</gd_ratings>
 		<gd_items>
 			<gd_item id="182005957" /><!-- Taloc's Leaf Fragment -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Junk Taloc's Stem Fragment" min_count="1" base_chance="40" min_diff="-5" max_diff="10">
+	<gd_rule rule_name="Junk Taloc's Stem Fragment" base_chance="40">
 		<gd_maps>
 			<gd_map map_id="300190000" /><!-- Taloc's Hollow -->
 		</gd_maps>
@@ -36,17 +30,11 @@
 			<gd_zone zone="DORKINS_NOOK_300190000" />
 			<gd_zone zone="TALOCS_TEARS_300190000" />
 		</gd_zones>
-		<gd_ratings>
-			<gd_rating rating="NORMAL" />
-			<gd_rating rating="ELITE" />
-			<gd_rating rating="HERO" />
-			<gd_rating rating="LEGENDARY" />
-		</gd_ratings>
 		<gd_items>
 			<gd_item id="182005958" /><!-- Taloc's Stem Fragment -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Junk Taloc's Root Fragment" min_count="1" base_chance="40" min_diff="-5" max_diff="10">
+	<gd_rule rule_name="Junk Taloc's Root Fragment" base_chance="40">
 		<gd_maps>
 			<gd_map map_id="300190000" /><!-- Taloc's Hollow -->
 		</gd_maps>
@@ -54,17 +42,11 @@
 			<gd_zone zone="TALOCS_HEART_300190000" />
 			<gd_zone zone="BLIGHTROOT_300190000" />
 		</gd_zones>
-		<gd_ratings>
-			<gd_rating rating="NORMAL" />
-			<gd_rating rating="ELITE" />
-			<gd_rating rating="HERO" />
-			<gd_rating rating="LEGENDARY" />
-		</gd_ratings>
 		<gd_items>
 			<gd_item id="182005959" /><!-- Taloc's Root Fragment -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Common Aether Permeated Taloc Leaf" min_count="1" base_chance="30" min_diff="-5" max_diff="10">
+	<gd_rule rule_name="Common Aether Permeated Taloc Leaf" base_chance="35">
 		<gd_maps>
 			<gd_map map_id="300190000" /><!-- Taloc's Hollow -->
 		</gd_maps>
@@ -77,17 +59,11 @@
 			<gd_zone zone="GARDEN_OF_LIFE_300190000" />
 			<gd_zone zone="COCCOONING_CHAMBER_300190000" />
 		</gd_zones>
-		<gd_ratings>
-			<gd_rating rating="NORMAL" />
-			<gd_rating rating="ELITE" />
-			<gd_rating rating="HERO" />
-			<gd_rating rating="LEGENDARY" />
-		</gd_ratings>
 		<gd_items>
 			<gd_item id="152012051" /><!-- Aether Permeated Taloc Leaf -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Common Poisoned Taloc Leaf" min_count="1" base_chance="30" min_diff="-5" max_diff="10">
+	<gd_rule rule_name="Common Poisoned Taloc Leaf" base_chance="35">
 		<gd_maps>
 			<gd_map map_id="300190000" /><!-- Taloc's Hollow -->
 		</gd_maps>
@@ -99,18 +75,12 @@
 			<gd_zone zone="DORKINS_NOOK_300190000" />
 			<gd_zone zone="TALOCS_TEARS_300190000" />
 		</gd_zones>
-		<gd_ratings>
-			<gd_rating rating="NORMAL" />
-			<gd_rating rating="ELITE" />
-			<gd_rating rating="HERO" />
-			<gd_rating rating="LEGENDARY" />
-		</gd_ratings>
 		<gd_items>
 			<gd_item id="152012052" /><!-- Poisoned Taloc Leaf -->
 		</gd_items>
 	</gd_rule>
 	<!-- Single Monster Drops -->
-	<gd_rule rule_name="Named Weapon (Rare)" base_chance="15">
+	<gd_rule rule_name="Named Weapon (Rare)" base_chance="20">
 		<gd_maps>
 			<gd_map map_id="300190000" /><!-- Talocs_Hollow -->
 		</gd_maps>
@@ -133,7 +103,7 @@
 			<gd_item id="102100561" /><!-- Siel's Supreme Cipher-Blade -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Legend)" base_chance="35">
+	<gd_rule rule_name="Named Weapon (Legend)" base_chance="45">
 		<gd_maps>
 			<gd_map map_id="300190000" /><!-- Talocs_Hollow -->
 		</gd_maps>
@@ -156,7 +126,7 @@
 			<gd_item id="102100560" /><!-- Celestius' Cipher-Blade -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="30">
+	<gd_rule rule_name="Named Armor (Rare)" base_chance="60">
 		<gd_maps>
 			<gd_map map_id="300190000" /><!-- Talocs_Hollow -->
 		</gd_maps>
@@ -170,7 +140,7 @@
 			<gd_item id="113600980" /><!-- Celestius' Greaves -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Legend)" base_chance="35">
+	<gd_rule rule_name="Named Armor (Legend)" base_chance="40">
 		<gd_maps>
 			<gd_map map_id="300190000" /><!-- Talocs_Hollow -->
 		</gd_maps>
@@ -184,7 +154,7 @@
 			<gd_item id="112601012" /><!-- Gellmar's Shoulderplates -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Accessory (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="300190000" /><!-- Talocs_Hollow -->
 		</gd_maps>
@@ -195,7 +165,7 @@
 			<gd_item id="125002276" /><!-- Mosqua's Hairpin -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Accessory (Rare)" base_chance="45">
 		<gd_maps>
 			<gd_map map_id="300190000" /><!-- Talocs_Hollow -->
 		</gd_maps>
@@ -207,7 +177,7 @@
 			<gd_item id="123001092" /><!-- Gellmar's Leather Belt -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Unique)" base_chance="20">
+	<gd_rule rule_name="Named Accessory (Unique)" base_chance="30">
 		<gd_maps>
 			<gd_map map_id="300190000" /><!-- Talocs_Hollow -->
 		</gd_maps>
@@ -230,7 +200,7 @@
 			<gd_item id="152012045" /><!-- Celestius' Sap -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Souvenir" base_chance="15" no_reduction="true">
+	<gd_rule rule_name="Named Souvenir" base_chance="20" no_reduction="true">
 		<gd_maps>
 			<gd_map map_id="300190000" /><!-- Talocs_Hollow -->
 		</gd_maps>

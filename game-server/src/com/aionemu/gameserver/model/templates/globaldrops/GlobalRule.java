@@ -71,8 +71,8 @@ public class GlobalRule {
 	private int memberLimit = 1;
 	@XmlAttribute(name = "max_drop_rule")
 	private int maxDropRule = 1;
-	@XmlAttribute(name = "fixed_chance")
-	private boolean fixedChance;
+	@XmlAttribute(name = "dynamic_chance")
+	private boolean dynamicChance;
 
 	public List<GlobalDropItem> getDropItems() {
 		return gdItems;
@@ -162,8 +162,8 @@ public class GlobalRule {
 		return maxDropRule;
 	}
 
-	public boolean isFixedChance() {
-		return fixedChance;
+	public boolean isDynamicChance() {
+		return dynamicChance;
 	}
 
 	@XmlType(name = "race_restriction")

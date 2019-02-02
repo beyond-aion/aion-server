@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../global_rules.xsd">
-	<gd_rule rule_name="Name Box" base_chance="100" fixed_chance="true" member_limit="100">
+	<gd_rule rule_name="Name Box" base_chance="100" member_limit="100">
 		<gd_maps>
 			<gd_map map_id="400030000" /><!-- Transidium_Annex -->
 		</gd_maps>

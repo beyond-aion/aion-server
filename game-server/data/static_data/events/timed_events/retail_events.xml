@@ -5,7 +5,7 @@
 			<maintainable>80162 80163 80164 80165 80166 80167 80168 80169</maintainable>
 		</quests>
 		<event_drops>
-			<gd_rule rule_name="Atreian City Festival Event Drop" min_count="1" base_chance="4" min_diff="-20" max_diff="70">
+			<gd_rule rule_name="Atreian City Festival Event Drop" base_chance="4" dynamic_chance="true" min_diff="-20" max_diff="70">
 				<gd_ratings>
 					<gd_rating rating="NORMAL" />
 					<gd_rating rating="ELITE" />
@@ -75,7 +75,7 @@
 	</event>
 	<event name="Valentine's Day" start="2015-02-13T00:00:00" end="2015-02-28T00:00:00" theme="VALENTINE">
 		<event_drops>
-			<gd_rule rule_name="Valentine's Day Event Drop" min_count="1" base_chance="10" min_diff="-30" max_diff="70">
+			<gd_rule rule_name="Valentine's Day Event Drop" base_chance="10" dynamic_chance="true" min_diff="-30" max_diff="70">
 				<gd_ratings>
 					<gd_rating rating="NORMAL" />
 					<gd_rating rating="ELITE" />
@@ -698,7 +698,7 @@
 			</spawn_map>
 		</spawns>
 		<event_drops>
-			<gd_rule rule_name="Ascension Energy" base_chance="50" fixed_chance="true">
+			<gd_rule rule_name="Ascension Energy" base_chance="50">
 				<gd_items>
 					<gd_item id="186000127" /><!-- Ascension Energy -->
 				</gd_items>
@@ -1242,7 +1242,7 @@
 					<gd_item id="160010203" /><!-- [Event] Red Nose Granker Horn -->
 				</gd_items>
 			</gd_rule>
-			<gd_rule rule_name="Celebrate Solorius Event Drop" base_chance="50" fixed_chance="true" no_reduction="true" member_limit="24">
+			<gd_rule rule_name="Celebrate Solorius Event Drop" base_chance="50" no_reduction="true" member_limit="24">
 				<gd_npcs>
 					<gd_npc npc_id="219292" /><!-- Red Nosed Granker King -->
 					<gd_npc npc_id="219294" /><!-- Red Nosed Granker King -->
@@ -1442,7 +1442,7 @@
 	</event>
 	<event name="New Year Event" start="2015-12-22T00:00:00" end="2016-01-12T00:00:00" theme="CHRISTMAS">
 		<event_drops>
-			<gd_rule rule_name="New Year Event Drop" min_count="1" base_chance="5" min_diff="-10" max_diff="70">
+			<gd_rule rule_name="New Year Event Drop" base_chance="5" dynamic_chance="true" min_diff="-10" max_diff="70">
 				<gd_ratings>
 					<gd_rating rating="NORMAL" />
 					<gd_rating rating="ELITE" />
@@ -1978,7 +1978,7 @@
 	</event>
 	<event name="Daru Days" start="2015-11-23T00:00:00" end="2015-11-30T00:00:00">
 		<event_drops>
-			<gd_rule rule_name="Daru Days Event Drop" min_count="1" base_chance="1" min_diff="-30" max_diff="70">
+			<gd_rule rule_name="Daru Days Event Drop" base_chance="1" dynamic_chance="true" min_diff="-30" max_diff="70">
 				<gd_ratings>
 					<gd_rating rating="NORMAL" />
 					<gd_rating rating="ELITE" />
@@ -1989,7 +1989,7 @@
 					<gd_item id="188051331" /><!-- [Event] Grazing Chest -->
 				</gd_items>
 			</gd_rule>
-			<gd_rule rule_name="Daru Days Event Drop" min_count="1" base_chance="5" min_diff="-30" max_diff="70">
+			<gd_rule rule_name="Daru Days Event Drop" base_chance="5" dynamic_chance="true" min_diff="-30" max_diff="70">
 				<gd_ratings>
 					<gd_rating rating="NORMAL" />
 					<gd_rating rating="ELITE" />
@@ -3145,7 +3145,7 @@
 	</event>
 	<event name="Shugo Emperor's Vault" start="2018-09-21T00:00:00" end="2018-10-07T23:59:59">
 		<event_drops>
-			<gd_rule rule_name="Emperor's Vault Entry Scroll" min_count="1" base_chance="100" fixed_chance="true" member_limit="12">
+			<gd_rule rule_name="Emperor's Vault Entry Scroll" base_chance="100" member_limit="12">
 				<gd_maps>
 					<gd_map map_id="300520000" /><!-- Dragon_Lords_Refuge -->
 					<gd_map map_id="301110000" /><!-- Danuar_Reliquary -->
@@ -3197,7 +3197,7 @@
 	</event>
 	<event name="Summer Block Party" start="2015-08-01T00:00:00" end="2015-09-04T00:00:00">
 		<event_drops>
-			<gd_rule rule_name="Summer Block Party Drop" min_count="1" base_chance="2" min_diff="-15" max_diff="70">
+			<gd_rule rule_name="Summer Block Party Drop" base_chance="2" dynamic_chance="true" min_diff="-15" max_diff="70">
 				<gd_worlds>
 					<gd_world wd_type="ABYSS_INSTANCE" />
 					<gd_world wd_type="ARENA_INSTANCE" />
@@ -3353,7 +3353,7 @@
 					<gd_item id="188052642" /><!-- [Event] Alchemist's Pouch -->
 				</gd_items>
 			</gd_rule>
-			<gd_rule rule_name="Alchemy Random Event Drop" min_count="1" base_chance="10" min_diff="-15" max_diff="70" fixed_chance="true">
+			<gd_rule rule_name="Alchemy Random Event Drop" base_chance="10" min_diff="-15" max_diff="70">
 				<gd_maps>
 					<gd_map map_id="301130000" /><!-- Sauro Supply Base -->
 					<gd_map map_id="301140000" /><!-- Seized Danuar Sanctuary -->
@@ -3494,7 +3494,7 @@
 	</event>
 	<event name="Aion Community Appreciation Event" start="2015-11-20T00:00:00" end="2015-12-04T00:00:00">
 		<event_drops>
-			<gd_rule rule_name="Aion Community Appreciation Event Drop" min_count="1" base_chance="5" min_diff="-20" max_diff="70">
+			<gd_rule rule_name="Aion Community Appreciation Event Drop" base_chance="5" dynamic_chance="true" min_diff="-20" max_diff="70">
 				<gd_ratings>
 					<gd_rating rating="NORMAL" />
 					<gd_rating rating="ELITE" />
@@ -3511,7 +3511,7 @@
 					<gd_world wd_type="BALAUREA_INSTANCE" />
 				</gd_worlds>
 			</gd_rule>
-			<gd_rule rule_name="Aion Community Appreciation Event Drop" min_count="1" base_chance="0.5" min_diff="-20" max_diff="70">
+			<gd_rule rule_name="Aion Community Appreciation Event Drop" base_chance="0.5" dynamic_chance="true" min_diff="-20" max_diff="70">
 				<gd_ratings>
 					<gd_rating rating="NORMAL" />
 					<gd_rating rating="ELITE" />
@@ -3533,7 +3533,7 @@
 			<maintainable>80567 80568 80569 80570 80571 80572 80573 80574</maintainable>
 		</quests>
 		<event_drops>
-			<gd_rule rule_name="Aion Community Appreciation Event Drop" min_count="1" base_chance="5" min_diff="-10" max_diff="70">
+			<gd_rule rule_name="Aion Community Appreciation Event Drop" base_chance="5" dynamic_chance="true" min_diff="-10" max_diff="70">
 				<gd_ratings>
 					<gd_rating rating="NORMAL" />
 					<gd_rating rating="ELITE" />
@@ -3557,7 +3557,7 @@
 					<gd_world wd_type="STEEL_RAKE_INSTANCE" />
 				</gd_worlds>
 			</gd_rule>
-			<gd_rule rule_name="Aion Community Appreciation Event Drop" min_count="1" base_chance="0.5" min_diff="-10" max_diff="60">
+			<gd_rule rule_name="Aion Community Appreciation Event Drop" base_chance="0.5" dynamic_chance="true" min_diff="-10" max_diff="60">
 				<gd_ratings>
 					<gd_rating rating="NORMAL" />
 					<gd_rating rating="ELITE" />
@@ -3828,7 +3828,7 @@
 			</spawn_map>
 		</spawns>
 		<event_drops>
-			<gd_rule rule_name="Snowball (Single)" base_chance="10" fixed_chance="true">
+			<gd_rule rule_name="Snowball (Single)" base_chance="10">
 				<gd_items>
 					<gd_item id="188052986" /><!-- +1 Snowball -->
 				</gd_items>
@@ -4052,7 +4052,7 @@
 	<event name="Legendary Symphony Drop" start="2016-07-01T00:00:00" end="2016-07-17T23:59:59">
 		<event_drops>
 			<!-- Green Garrisons -->
-			<gd_rule rule_name="Symphony of Legend - The First Movement" base_chance="40" fixed_chance="true">
+			<gd_rule rule_name="Symphony of Legend - The First Movement" base_chance="40">
 				<gd_maps>
 					<gd_map map_id="600100000"/><!-- Levinshor -->
 				</gd_maps>
@@ -4071,7 +4071,7 @@
 				</gd_items>
 			</gd_rule>
 			<!-- Blue Garrions -->
-			<gd_rule rule_name="Symphony of Legend - The Second Movement" base_chance="40" fixed_chance="true">
+			<gd_rule rule_name="Symphony of Legend - The Second Movement" base_chance="40">
 				<gd_maps>
 					<gd_map map_id="600100000"/><!-- Levinshor -->
 				</gd_maps>
@@ -4090,7 +4090,7 @@
 				</gd_items>
 			</gd_rule>
 			<!-- Yellow Garrions -->
-			<gd_rule rule_name="Symphony of Legend - The Third Movement" base_chance="40" fixed_chance="true">
+			<gd_rule rule_name="Symphony of Legend - The Third Movement" base_chance="40">
 				<gd_maps>
 					<gd_map map_id="600100000"/><!-- Levinshor -->
 				</gd_maps>
@@ -4109,7 +4109,7 @@
 				</gd_items>
 			</gd_rule>
 			<!-- Red Garrions -->
-			<gd_rule rule_name="Symphony of Legend - The Fourth Movement" base_chance="40" fixed_chance="true">
+			<gd_rule rule_name="Symphony of Legend - The Fourth Movement" base_chance="40">
 				<gd_maps>
 					<gd_map map_id="600100000"/><!-- Levinshor -->
 				</gd_maps>
@@ -4128,7 +4128,7 @@
 				</gd_items>
 			</gd_rule>
 			<!-- Central Garrions -->
-			<gd_rule rule_name="Symphony of Legend - Epilogue" base_chance="40" fixed_chance="true">
+			<gd_rule rule_name="Symphony of Legend - Epilogue" base_chance="40">
 				<gd_maps>
 					<gd_map map_id="600100000"/><!-- Levinshor -->
 				</gd_maps>
@@ -4150,7 +4150,7 @@
 	</event>
 	<event name="The Scattered Deck" start="2017-10-23T00:00:00" end="2017-11-05T23:59:59" theme="HALLOWEEN">
 		<event_drops>
-			<gd_rule rule_name="Mysterious Card" base_chance="10" fixed_chance="true">
+			<gd_rule rule_name="Mysterious Card" base_chance="10">
 				<gd_maps>
 					<gd_map map_id="600100000"/><!-- Levinshor -->
 				</gd_maps>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../global_rules.xsd">
 	<!-- Multiple Monster Drops -->
-	<gd_rule rule_name="Named Instance Tool" base_chance="3" no_reduction="true">
+	<gd_rule rule_name="Named Instance Tool" base_chance="4" no_reduction="true">
 		<gd_maps>
 			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
 		</gd_maps>
@@ -27,7 +27,7 @@
 			<gd_item id="188053294" /><!-- Dragon Flame Helmet Box -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Shield (Legend)" base_chance="30">
+	<gd_rule rule_name="Named Shield (Legend)" base_chance="60">
 		<gd_maps>
 			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
 		</gd_maps>
@@ -49,7 +49,7 @@
 			<gd_item id="188053289" /><!-- Fabled Dragon Flame Necklace Box -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Unique)" base_chance="15">
+	<gd_rule rule_name="Named Accessory (Unique)" base_chance="30">
 		<gd_maps>
 			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
 		</gd_maps>
@@ -60,7 +60,7 @@
 			<gd_item id="120000903" /><!-- Atmach's Earrings -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Legend)" base_chance="15">
+	<gd_rule rule_name="Named Accessory (Unique)" base_chance="30">
 		<gd_maps>
 			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
 		</gd_maps>
@@ -71,7 +71,7 @@
 			<gd_item id="122001039" /><!-- Noah's Tears -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Legend)" base_chance="30">
+	<gd_rule rule_name="Named Accessory (Legend)" base_chance="60">
 		<gd_maps>
 			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
 		</gd_maps>
@@ -82,7 +82,7 @@
 			<gd_item id="188053292" /><!-- Dhatra's Earrings Box -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Unique)" base_chance="15">
+	<gd_rule rule_name="Named Accessory (Unique)" base_chance="30">
 		<gd_maps>
 			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
 		</gd_maps>
@@ -93,7 +93,7 @@
 			<gd_item id="188053286" /><!-- Marabata's Fabled Ring Box -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Unique)" base_chance="25">
+	<gd_rule rule_name="Named Accessory (Unique)" base_chance="40">
 		<gd_maps>
 			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
 		</gd_maps>
@@ -104,7 +104,7 @@
 			<gd_item id="188053288" /><!-- Anuhart's Fabled Belt Box-->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Legend)" base_chance="30">
+	<gd_rule rule_name="Named Accessory (Legend)" base_chance="60">
 		<gd_maps>
 			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
 		</gd_maps>
@@ -116,7 +116,7 @@
 			<gd_item id="122001060" /><!-- Sapphire Ring of Telepathy Controller -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Unique)" base_chance="15">
+	<gd_rule rule_name="Named Accessory (Unique)" base_chance="30">
 		<gd_maps>
 			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
 		</gd_maps>
@@ -127,7 +127,7 @@
 			<gd_item id="120000902" /><!-- Earrings of Ascending -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Legend)" base_chance="40">
+	<gd_rule rule_name="Named Armor (Legend)" base_chance="70">
 		<gd_maps>
 			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
 		</gd_maps>
@@ -140,7 +140,7 @@
 			<gd_item id="188053284" /><!-- Anuhart's Chest Box-->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Unique)" base_chance="20">
+	<gd_rule rule_name="Named Armor (Unique)" base_chance="40">
 		<gd_maps>
 			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
 		</gd_maps>
@@ -153,7 +153,7 @@
 			<gd_item id="188053279" /><!-- Anuhart's Fabled Chest Box -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Legend)" base_chance="40">
+	<gd_rule rule_name="Named Armor (Legend)" base_chance="70">
 		<gd_maps>
 			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
 		</gd_maps>
@@ -165,7 +165,7 @@
 			<gd_item id="188053281" /><!-- Anuhart's Pants Box -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Unique)" base_chance="20">
+	<gd_rule rule_name="Named Armor (Unique)" base_chance="40">
 		<gd_maps>
 			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
 		</gd_maps>
@@ -176,7 +176,7 @@
 			<gd_item id="188053276" /><!-- Anuhart's Fabled Pants Box -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Legend)" base_chance="40">
+	<gd_rule rule_name="Named Armor (Legend)" base_chance="70">
 		<gd_maps>
 			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
 		</gd_maps>
@@ -188,7 +188,7 @@
 			<gd_item id="188053285" /><!-- Anuhart's Shoulders Box -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Unique)" base_chance="20">
+	<gd_rule rule_name="Named Armor (Unique)" base_chance="40">
 		<gd_maps>
 			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
 		</gd_maps>
@@ -199,7 +199,7 @@
 			<gd_item id="188053280" /><!-- Anuhart's Fabled Shoulders Box -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Legend)" base_chance="40">
+	<gd_rule rule_name="Named Armor (Legend)" base_chance="70">
 		<gd_maps>
 			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
 		</gd_maps>
@@ -211,7 +211,7 @@
 			<gd_item id="188053283" /><!-- Anuhart's Gloves Box -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Unique)" base_chance="20">
+	<gd_rule rule_name="Named Armor (Unique)" base_chance="40">
 		<gd_maps>
 			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
 		</gd_maps>
@@ -222,7 +222,7 @@
 			<gd_item id="188053278" /><!-- Anuhart's Fabled Gloves Box -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Legend)" base_chance="40">
+	<gd_rule rule_name="Named Armor (Legend)" base_chance="70">
 		<gd_maps>
 			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
 		</gd_maps>
@@ -234,7 +234,7 @@
 			<gd_item id="188053282" /><!-- Anuhart's Shoes Box -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Unique)" base_chance="20">
+	<gd_rule rule_name="Named Armor (Unique)" base_chance="40">
 		<gd_maps>
 			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
 		</gd_maps>
@@ -245,7 +245,7 @@
 			<gd_item id="188053277" /><!-- Anuhart's Fabled Shoes Box -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Unique)" base_chance="20">
+	<gd_rule rule_name="Named Weapon (Unique)" base_chance="40">
 		<gd_maps>
 			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
 		</gd_maps>
@@ -271,7 +271,7 @@
 			<gd_item id="102100765" /><!-- Anuhart Elite's Cipher-Blade -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Unique)" base_chance="5">
+	<gd_rule rule_name="Named Weapon (Unique)" base_chance="20">
 		<gd_maps>
 			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
 		</gd_maps>
@@ -286,7 +286,7 @@
 			<gd_item id="115000859" /><!-- Anuhart Elite's Shield -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Epic)" base_chance="10">
+	<gd_rule rule_name="Named Weapon (Epic)" base_chance="20">
 		<gd_maps>
 			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
 		</gd_maps>
@@ -309,7 +309,7 @@
 			<gd_item id="102100522" /><!-- Tahabata's Cipher-Blade -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Shield (Epic)" base_chance="10">
+	<gd_rule rule_name="Named Shield (Epic)" base_chance="20">
 		<gd_maps>
 			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
 		</gd_maps>
@@ -320,7 +320,7 @@
 			<gd_item id="115000860" /><!-- Tahabata's Shield -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Souvenir" base_chance="10" no_reduction="true">
+	<gd_rule rule_name="Named Souvenir" base_chance="15" no_reduction="true">
 		<gd_maps>
 			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
 		</gd_maps>
@@ -361,7 +361,7 @@
 			<gd_item id="114100905" /><!-- Mad Scientist's Shoes -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Souvenir" base_chance="10" no_reduction="true">
+	<gd_rule rule_name="Named Souvenir" base_chance="13" no_reduction="true">
 		<gd_maps>
 			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
 		</gd_maps>
@@ -372,7 +372,7 @@
 			<gd_item id="170195082" /><!-- [Souvenir] Shugo with a Pearl Earring -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Junk" base_chance="10">
+	<gd_rule rule_name="Junk" base_chance="15">
 		<gd_maps>
 			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
 		</gd_maps>
@@ -384,7 +384,7 @@
 			<gd_item id="182005431" /><!-- Noble Surkana Fragment -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Concentrated Drana" base_chance="25">
+	<gd_rule rule_name="Concentrated Drana" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
 		</gd_maps>
@@ -396,7 +396,7 @@
 			<gd_item id="152012805" /><!-- Concentrated Drana -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Candy" base_chance="10">
+	<gd_rule rule_name="Named Candy" base_chance="20">
 		<gd_maps>
 			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
 		</gd_maps>

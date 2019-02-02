@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../global_rules.xsd">
+	<!-- Map Drops -->
 	<gd_rule rule_name="Bronze Coin" base_chance="5" restriction_race="ASMODIANS">
 		<gd_maps>
 			<gd_map map_id="210020000" /><!-- Eltnen -->
@@ -21,7 +22,7 @@
 			<gd_item id="182204134" /><!-- quest_2343a -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Quest Collecting Item" base_chance="50" fixed_chance="true">
+	<gd_rule rule_name="Quest Collecting Item" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="220020000" /><!-- Morheim -->
 		</gd_maps>
@@ -36,7 +37,7 @@
 			<gd_item id="186000047" /><!-- Lepharist Written Oath -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Quest Collecting Item" base_chance="50" fixed_chance="true">
+	<gd_rule rule_name="Quest Collecting Item" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="220020000" /><!-- Morheim -->
 		</gd_maps>
@@ -58,7 +59,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Single Monster Drops -->
-	<gd_rule rule_name="Named Weapon (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Weapon (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="220020000" /><!-- Morheim -->
 		</gd_maps>
@@ -71,7 +72,7 @@
 			<gd_item id="100100195" /><!-- Hamina's Warhammer -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Weapon (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="220020000" /><!-- Morheim -->
 		</gd_maps>
@@ -84,7 +85,7 @@
 			<gd_item id="100600223" /><!-- Maropapa's Tome -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Weapon (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="220020000" /><!-- Morheim -->
 		</gd_maps>
@@ -97,7 +98,7 @@
 			<gd_item id="100100181" /><!-- Hamok's Warhammer -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Accessory (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="220020000" /><!-- Morheim -->
 		</gd_maps>
@@ -108,7 +109,7 @@
 			<gd_item id="123000573" /><!-- Hamok's Leather Belt -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Weapon (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="220020000" /><!-- Morheim -->
 		</gd_maps>
@@ -122,7 +123,7 @@
 			<gd_item id="101300186" /><!-- Subaku's Spear -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Armor (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="220020000" /><!-- Morheim -->
 		</gd_maps>
@@ -136,7 +137,7 @@
 			<gd_item id="111600428" /><!-- Subaku's Gauntlets -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Weapon (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="220020000" /><!-- Morheim -->
 		</gd_maps>
@@ -150,7 +151,7 @@
 			<gd_item id="101300189" /><!-- Fidelio's Spear -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Accessory (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="220020000" /><!-- Morheim -->
 		</gd_maps>
@@ -161,7 +162,7 @@
 			<gd_item id="122000555" /><!-- Fidelio's Soul -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Weapon (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="220020000" /><!-- Morheim -->
 		</gd_maps>
@@ -176,7 +177,7 @@
 			<gd_item id="101500203" /><!-- Harfuia's Staff -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Accessory (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="220020000" /><!-- Morheim -->
 		</gd_maps>
@@ -187,7 +188,7 @@
 			<gd_item id="121000457" /><!-- Harfuia's Heart -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Weapon (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="220020000" /><!-- Morheim -->
 		</gd_maps>
@@ -199,7 +200,7 @@
 			<gd_item id="101500199" /><!-- Natama's Staff -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Armor (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="220020000" /><!-- Morheim -->
 		</gd_maps>
@@ -218,7 +219,7 @@
 			<gd_item id="111500443" /><!-- Ice Claw Handguards -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Weapon (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="220020000" /><!-- Morheim -->
 		</gd_maps>
@@ -233,7 +234,7 @@
 			<gd_item id="100200293" /><!-- Zubaba's Dagger -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Armor (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="220020000" /><!-- Morheim -->
 		</gd_maps>
@@ -252,7 +253,7 @@
 			<gd_item id="111600431" /><!-- Ice Claw Gauntlets -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Weapon (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="220020000" /><!-- Morheim -->
 		</gd_maps>
@@ -268,7 +269,7 @@
 			<gd_item id="101500197" /><!-- Taran's Staff -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Armor (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="220020000" /><!-- Morheim -->
 		</gd_maps>
@@ -294,7 +295,7 @@
 			<gd_item id="121000454" /><!-- Taran's Heart -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Weapon (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="220020000" /><!-- Morheim -->
 		</gd_maps>
@@ -311,7 +312,7 @@
 			<gd_item id="100600222" /><!-- Kint's Tome -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Accessory (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="220020000" /><!-- Morheim -->
 		</gd_maps>
@@ -333,7 +334,7 @@
 			<gd_item id="152012531" /><!-- Queen Kint's Carapace -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Weapon (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="220020000" /><!-- Morheim -->
 		</gd_maps>
@@ -349,7 +350,7 @@
 			<gd_item id="102100272" /><!-- Ikeadi's Cipher-Blade -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Weapon (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="220020000" /><!-- Morheim -->
 		</gd_maps>
@@ -379,7 +380,7 @@
 			<gd_item id="115000864" /><!-- Harmilden's Shield -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Weapon (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="220020000" /><!-- Morheim -->
 		</gd_maps>
@@ -392,7 +393,7 @@
 			<gd_item id="100000279" /><!-- Humnadun's Sword -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Weapon (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="220020000" /><!-- Morheim -->
 		</gd_maps>
@@ -539,7 +540,7 @@
 			<gd_item id="100500198" /><!-- Octanu's Tear -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Armor (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="220020000" /><!-- Morheim -->
 		</gd_maps>
@@ -551,7 +552,7 @@
 			<gd_item id="110300433" /><!-- Web Jerkin -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Armor (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="220020000" /><!-- Morheim -->
 		</gd_maps>
@@ -567,7 +568,7 @@
 			<gd_item id="113300418" /><!-- Web Breeches -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Armor (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="220020000" /><!-- Morheim -->
 		</gd_maps>
@@ -595,7 +596,7 @@
 			<gd_item id="100200294" /><!-- Octanu's Fang -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Headgear (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Headgear (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="220020000" /><!-- Morheim -->
 		</gd_maps>
@@ -775,7 +776,7 @@
 			<gd_item id="111600437" /><!-- Grand Chieftain's Gauntlets -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Shield (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Shield (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="220020000" /><!-- Morheim -->
 		</gd_maps>
@@ -786,7 +787,7 @@
 			<gd_item id="115000433" /><!-- Quartz Head Shield -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Headgear (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Headgear (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="220020000" /><!-- Morheim -->
 		</gd_maps>
@@ -797,7 +798,7 @@
 			<gd_item id="125001094" /><!-- Quartz Head Helm -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Shield (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Shield (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="220020000" /><!-- Morheim -->
 		</gd_maps>
@@ -808,7 +809,7 @@
 			<gd_item id="115000438" /><!-- Tusker's Shield -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Accessory (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="220020000" /><!-- Morheim -->
 		</gd_maps>
@@ -819,7 +820,7 @@
 			<gd_item id="123000577" /><!-- Tusker's Belt -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Shield (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Shield (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="220020000" /><!-- Morheim -->
 		</gd_maps>
@@ -830,7 +831,7 @@
 			<gd_item id="115000485" /><!-- Nuk's Shield -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Armor (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="220020000" /><!-- Morheim -->
 		</gd_maps>
@@ -845,7 +846,7 @@
 			<gd_item id="112600411" /><!-- Contaminated Shoulderplates -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Armor (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="220020000" /><!-- Morheim -->
 		</gd_maps>
@@ -857,7 +858,7 @@
 			<gd_item id="113600431" /><!-- Kunnenar's Greaves -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Armor (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="220020000" /><!-- Morheim -->
 		</gd_maps>
@@ -872,7 +873,7 @@
 			<gd_item id="114600417" /><!-- Contaminated Sabatons -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Armor (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="220020000" /><!-- Morheim -->
 		</gd_maps>
@@ -888,7 +889,7 @@
 			<gd_item id="111600430" /><!-- Contaminated Gauntlets -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Accessory (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="220020000" /><!-- Morheim -->
 		</gd_maps>
@@ -901,7 +902,7 @@
 			<gd_item id="120000513" /><!-- Worker Klaw's Earrings -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Accessory (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="220020000" /><!-- Morheim -->
 		</gd_maps>
@@ -913,7 +914,7 @@
 			<gd_item id="122000553" /><!-- Guard Captain's Ring -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Weapon (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="220020000" /><!-- Morheim -->
 		</gd_maps>
@@ -928,7 +929,7 @@
 			<gd_item id="101300188" /><!-- Klawtun's Spear -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Armor (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="220020000" /><!-- Morheim -->
 		</gd_maps>
@@ -943,7 +944,7 @@
 			<gd_item id="113600424" /><!-- Contaminated Greaves -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Headgear (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Headgear (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="220020000" /><!-- Morheim -->
 		</gd_maps>
@@ -980,7 +981,7 @@
 			<gd_item id="110100473" /><!-- Lonely Protector's Tunic -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Accessory (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="220020000" /><!-- Morheim -->
 		</gd_maps>
@@ -992,7 +993,7 @@
 			<gd_item id="122000562" /><!-- Gerik's Ring -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Accessory (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="220020000" /><!-- Morheim -->
 		</gd_maps>
@@ -1005,7 +1006,7 @@
 			<gd_item id="121000455" /><!-- Sulfur Slime's Heart -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Shield (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Shield (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="220020000" /><!-- Morheim -->
 		</gd_maps>
@@ -1017,7 +1018,7 @@
 			<gd_item id="115000435" /><!-- Bigalia's Shield -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Armor (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="220020000" /><!-- Morheim -->
 		</gd_maps>
@@ -1030,7 +1031,7 @@
 			<gd_item id="110600457" /><!-- Sandy Breastplate -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Weapon (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="220020000" /><!-- Morheim -->
 		</gd_maps>
@@ -1046,7 +1047,7 @@
 			<gd_item id="100100184" /><!-- Sper's Warhammer -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Armor (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="220020000" /><!-- Morheim -->
 		</gd_maps>
@@ -1059,7 +1060,7 @@
 			<gd_item id="113600425" /><!-- Sandy Greaves -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Armor (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="220020000" /><!-- Morheim -->
 		</gd_maps>
@@ -1074,7 +1075,7 @@
 			<gd_item id="114600419" /><!-- Arkanis Sabatons -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Headgear (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Headgear (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="220020000" /><!-- Morheim -->
 		</gd_maps>
@@ -1089,7 +1090,7 @@
 			<gd_item id="125001105" /><!-- Arkanis Helm -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Accessory (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="220020000" /><!-- Morheim -->
 		</gd_maps>
@@ -1101,7 +1102,7 @@
 			<gd_item id="120000516" /><!-- Arkanis Earrings -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Armor (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="220020000" /><!-- Morheim -->
 		</gd_maps>
@@ -1116,7 +1117,7 @@
 			<gd_item id="111600432" /><!-- Arkanis Gauntlets -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Accessory (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="220020000" /><!-- Morheim -->
 		</gd_maps>
@@ -1128,7 +1129,7 @@
 			<gd_item id="120000517" /><!-- Lakrum's Earrings -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Armor (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="220020000" /><!-- Morheim -->
 		</gd_maps>
@@ -1141,7 +1142,7 @@
 			<gd_item id="112500408" /><!-- Arkanis Spaulders -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Accessory (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="220020000" /><!-- Morheim -->
 		</gd_maps>
@@ -1153,7 +1154,7 @@
 			<gd_item id="122000557" /><!-- Ilaina's Ring -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Armor (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="220020000" /><!-- Morheim -->
 		</gd_maps>
@@ -1166,7 +1167,7 @@
 			<gd_item id="112600413" /><!-- Arkanis Shoulderplates -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Accessory (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="220020000" /><!-- Morheim -->
 		</gd_maps>
@@ -1178,7 +1179,7 @@
 			<gd_item id="122000558" /><!-- Lehul's Ring -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Armor (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="220020000" /><!-- Morheim -->
 		</gd_maps>
@@ -1208,7 +1209,7 @@
 			<gd_item id="102000299" /><!-- Hazan's Harp -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Armor (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="220020000" /><!-- Morheim -->
 		</gd_maps>
@@ -1235,7 +1236,7 @@
 			<gd_item id="115000439" /><!-- Sentinel's Shield -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Armor (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="220020000" /><!-- Morheim -->
 		</gd_maps>
@@ -1280,7 +1281,7 @@
 			<gd_item id="100600215" /><!-- Ancient Ginseng's Tome -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Shield (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Shield (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="220020000" /><!-- Morheim -->
 		</gd_maps>
@@ -1292,7 +1293,7 @@
 			<gd_item id="115000442" /><!-- Tipolid's Shield -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Accessory (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="220020000" /><!-- Morheim -->
 		</gd_maps>
@@ -1304,7 +1305,7 @@
 			<gd_item id="123000580" /><!-- Tipolid's Belt -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Accessory (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="220020000" /><!-- Morheim -->
 		</gd_maps>
@@ -1326,7 +1327,7 @@
 			<gd_item id="120000520" /><!-- Farhir's Tears -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Accessory (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="220020000" /><!-- Morheim -->
 		</gd_maps>
@@ -1337,7 +1338,7 @@
 			<gd_item id="122000563" /><!-- Kruk's Ring -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Accessory (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="220020000" /><!-- Morheim -->
 		</gd_maps>

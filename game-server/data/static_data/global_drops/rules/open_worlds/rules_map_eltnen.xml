@@ -17,7 +17,7 @@
 			<gd_item id="100000125" /><!-- Fire Sword -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Krall Molar" base_chance="30">
+	<gd_rule rule_name="Krall Molar" base_chance="35">
 		<gd_maps>
 			<gd_map map_id="210020000" /><!-- Eltnen -->
 		</gd_maps>
@@ -42,7 +42,7 @@
 			<gd_item id="125000950" /><!-- Krukel's Horn Ornament -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Accessory (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="210020000" /><!-- Eltnen -->
 		</gd_maps>
@@ -53,7 +53,7 @@
 			<gd_item id="123000513" /><!-- Rabbit Leather Belt -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Weapon (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="210020000" /><!-- Eltnen -->
 		</gd_maps>
@@ -70,7 +70,7 @@
 			<gd_item id="102100248" /><!-- Manku's Cipher-Blade -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Accessory (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="210020000" /><!-- Eltnen -->
 		</gd_maps>
@@ -81,7 +81,7 @@
 			<gd_item id="122000507" /><!-- Manku's Ring -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Rare)" base_chance="20">
+	<gd_rule rule_name="Named Weapon (Rare)" base_chance="30">
 		<gd_maps>
 			<gd_map map_id="210020000" /><!-- Eltnen -->
 		</gd_maps>
@@ -97,7 +97,7 @@
 			<gd_item id="101900267" /><!-- Galatia's Aethercannon -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Weapon (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="210020000" /><!-- Eltnen -->
 		</gd_maps>
@@ -112,7 +112,7 @@
 			<gd_item id="101800269" /><!-- Lichna's Pistol -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Accessory (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="210020000" /><!-- Eltnen -->
 		</gd_maps>
@@ -123,7 +123,7 @@
 			<gd_item id="121000492" /><!-- Lichna's Necklace -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Rare)" base_chance="20">
+	<gd_rule rule_name="Named Weapon (Rare)" base_chance="30">
 		<gd_maps>
 			<gd_map map_id="210020000" /><!-- Eltnen -->
 		</gd_maps>
@@ -136,7 +136,7 @@
 			<gd_item id="101500151" /><!-- Klawtaka's Staff -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Belt (Rare)" base_chance="33">
+	<gd_rule rule_name="Named Belt (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="210020000" /><!-- Eltnen -->
 		</gd_maps>
@@ -147,7 +147,7 @@
 			<gd_item id="123000511" /><!-- Klawtaka's Leather Belt -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Weapon (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="210020000" /><!-- Eltnen -->
 		</gd_maps>
@@ -164,7 +164,7 @@
 			<gd_item id="102100255" /><!-- Tukroll's Cipher-Blade -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Accessory (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="210020000" /><!-- Eltnen -->
 		</gd_maps>
@@ -175,7 +175,7 @@
 			<gd_item id="120000471" /><!-- Tukroll's Skull Earrings -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Weapon (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="210020000" /><!-- Eltnen -->
 		</gd_maps>
@@ -191,7 +191,7 @@
 			<gd_item id="101900273" /><!-- Moomba's Aethercannon -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Accessory (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="210020000" /><!-- Eltnen -->
 		</gd_maps>
@@ -202,7 +202,7 @@
 			<gd_item id="122000511" /><!-- Moomba's Tear -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Weapon (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="210020000" /><!-- Eltnen -->
 		</gd_maps>
@@ -214,7 +214,7 @@
 			<gd_item id="101500156" /><!-- Rhipel's Staff -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Armor (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="210020000" /><!-- Eltnen -->
 		</gd_maps>
@@ -228,7 +228,7 @@
 			<gd_item id="110600419" /><!-- Commander's Breastplate -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Weapon (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="210020000" /><!-- Eltnen -->
 		</gd_maps>
@@ -241,7 +241,7 @@
 			<gd_item id="115000400" /><!-- Xenon's Shield -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Armor (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="210020000" /><!-- Eltnen -->
 		</gd_maps>
@@ -255,7 +255,7 @@
 			<gd_item id="113600389" /><!-- Commander's Greaves -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Weapon (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="210020000" /><!-- Eltnen -->
 		</gd_maps>
@@ -266,7 +266,7 @@
 			<gd_item id="100500155" /><!-- Wyron's Orb -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Armor (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="210020000" /><!-- Eltnen -->
 		</gd_maps>
@@ -280,7 +280,7 @@
 			<gd_item id="112600376" /><!-- Commander's Shoulderplates -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Accessory (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="210020000" /><!-- Eltnen -->
 		</gd_maps>
@@ -291,7 +291,7 @@
 			<gd_item id="120000472" /><!-- Wyron's Earrings -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Weapon (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="210020000" /><!-- Eltnen -->
 		</gd_maps>
@@ -303,7 +303,7 @@
 			<gd_item id="102000284" /><!-- Shapiel's Harp -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Armor (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="210020000" /><!-- Eltnen -->
 		</gd_maps>
@@ -317,7 +317,7 @@
 			<gd_item id="114600384" /><!-- Commander's Sabatons -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Accessory (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="210020000" /><!-- Eltnen -->
 		</gd_maps>
@@ -328,7 +328,7 @@
 			<gd_item id="122000512" /><!-- Spiritmaster's Ring -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Weapon (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="210020000" /><!-- Eltnen -->
 		</gd_maps>
@@ -341,7 +341,7 @@
 			<gd_item id="102000285" /><!-- Czubarto's Harp -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Armor (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="210020000" /><!-- Eltnen -->
 		</gd_maps>
@@ -355,7 +355,7 @@
 			<gd_item id="110600420" /><!-- Kaidan Breastplate -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Accessory (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="210020000" /><!-- Eltnen -->
 		</gd_maps>
@@ -366,7 +366,7 @@
 			<gd_item id="120000473" /><!-- Czubarto's Earrings -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Rare)" base_chance="20">
+	<gd_rule rule_name="Named Weapon (Rare)" base_chance="30">
 		<gd_maps>
 			<gd_map map_id="210020000" /><!-- Eltnen -->
 		</gd_maps>
@@ -381,7 +381,7 @@
 			<gd_item id="101700167" /><!-- Bladeclaw's Longbow -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Weapon (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="210020000" /><!-- Eltnen -->
 		</gd_maps>
@@ -430,7 +430,7 @@
 			<gd_item id="152012029" /><!-- Sartemon's Heart -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Weapon (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="210020000" /><!-- Eltnen -->
 		</gd_maps>
@@ -442,7 +442,7 @@
 			<gd_item id="101500157" /><!-- Laupede's Leg -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Accessory (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="210020000" /><!-- Eltnen -->
 		</gd_maps>
@@ -453,7 +453,7 @@
 			<gd_item id="122000513" /><!-- Millennium Laupede's Essence -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Weapon (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="210020000" /><!-- Eltnen -->
 		</gd_maps>
@@ -467,7 +467,7 @@
 			<gd_item id="101900274" /><!-- Lekion's Aethercannon -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Armor (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="210020000" /><!-- Eltnen -->
 		</gd_maps>
@@ -522,7 +522,7 @@
 			<gd_item id="115000863" /><!-- Penteros' Shield -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Headgear (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Headgear (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="210020000" /><!-- Eltnen -->
 		</gd_maps>
@@ -536,7 +536,7 @@
 			<gd_item id="125000949" /><!-- Commander's Helm -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Rare)" base_chance="10">
+	<gd_rule rule_name="Named Accessory (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="210020000" /><!-- Eltnen -->
 		</gd_maps>
@@ -755,7 +755,7 @@
 			<gd_item id="125000941" /><!-- Blue Sky Helm -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Accessory (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="210020000" /><!-- Eltnen -->
 		</gd_maps>
@@ -811,7 +811,7 @@
 			<gd_item id="102100764" /><!-- Kromede's Cipher-Blade -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Shield (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Shield (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="210020000" /><!-- Eltnen -->
 		</gd_maps>
@@ -822,7 +822,7 @@
 			<gd_item id="115000398" /><!-- Iceheart Queen's Shield -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Armor (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="210020000" /><!-- Eltnen -->
 		</gd_maps>
@@ -836,7 +836,7 @@
 			<gd_item id="113600386" /><!-- Iceheart's Greaves -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Shield (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Shield (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="210020000" /><!-- Eltnen -->
 		</gd_maps>
@@ -847,7 +847,7 @@
 			<gd_item id="115000396" /><!-- Razorjaw's Shield -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Accessory (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="210020000" /><!-- Eltnen -->
 		</gd_maps>
@@ -858,7 +858,7 @@
 			<gd_item id="122000509" /><!-- Lightning Horn Ring -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Shield (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Shield (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="210020000" /><!-- Eltnen -->
 		</gd_maps>
@@ -869,7 +869,7 @@
 			<gd_item id="115000401" /><!-- Mamaku's Shield -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Armor (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="210020000" /><!-- Eltnen -->
 		</gd_maps>
@@ -883,7 +883,7 @@
 			<gd_item id="113600390" /><!-- Kaidan Greaves -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Belt (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Belt (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="210020000" /><!-- Eltnen -->
 		</gd_maps>
@@ -905,7 +905,7 @@
 			<gd_item id="115000397" /><!-- Snaggletooth's Shield -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Armor (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="210020000" /><!-- Eltnen -->
 		</gd_maps>
@@ -919,7 +919,7 @@
 			<gd_item id="110600411" /><!-- Tyrant's Breastplate -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Belt (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Belt (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="210020000" /><!-- Eltnen -->
 		</gd_maps>
@@ -930,7 +930,7 @@
 			<gd_item id="123000509" /><!-- Trisqeek's Leather Belt -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Armor (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="210020000" /><!-- Eltnen -->
 		</gd_maps>
@@ -944,7 +944,7 @@
 			<gd_item id="110600415" /><!-- Klawterun's Breastplate -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Accessory (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="210020000" /><!-- Eltnen -->
 		</gd_maps>
@@ -955,7 +955,7 @@
 			<gd_item id="120000470" /><!-- Klawterun's Tears -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Armor (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="210020000" /><!-- Eltnen -->
 		</gd_maps>
@@ -985,7 +985,7 @@
 			<gd_item id="114600380" /><!-- Old Temple Sabatons -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Legend)" base_chance="20">
+	<gd_rule rule_name="Named Armor (Legend)" base_chance="35">
 		<gd_maps>
 			<gd_map map_id="210020000" /><!-- Eltnen -->
 		</gd_maps>
@@ -1014,7 +1014,7 @@
 			<gd_item id="110600416" /><!-- Blue Sky Breastplate -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Armor (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="210020000" /><!-- Eltnen -->
 		</gd_maps>
@@ -1042,7 +1042,7 @@
 			<gd_item id="111600391" /><!-- Blue Sky Gauntlets -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Armor (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="210020000" /><!-- Eltnen -->
 		</gd_maps>
@@ -1072,7 +1072,7 @@
 			<gd_item id="113600385" /><!-- Blue Sky Greaves -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Armor (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="210020000" /><!-- Eltnen -->
 		</gd_maps>
@@ -1100,7 +1100,7 @@
 			<gd_item id="114600381" /><!-- Blue Sky Sabatons -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Armor (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="210020000" /><!-- Eltnen -->
 		</gd_maps>
@@ -1128,7 +1128,7 @@
 			<gd_item id="112600373" /><!-- Blue Sky Shoulderplates -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Armor (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="210020000" /><!-- Eltnen -->
 		</gd_maps>
@@ -1139,7 +1139,7 @@
 			<gd_item id="113500403" /><!-- Cursed Chausses -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Armor (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="210020000" /><!-- Eltnen -->
 		</gd_maps>
@@ -1150,7 +1150,7 @@
 			<gd_item id="111500402" /><!-- Cursed Handguards -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Armor (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="210020000" /><!-- Eltnen -->
 		</gd_maps>
@@ -1161,7 +1161,7 @@
 			<gd_item id="114300391" /><!-- Cursed Boots -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Armor (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="210020000" /><!-- Eltnen -->
 		</gd_maps>
@@ -1172,7 +1172,7 @@
 			<gd_item id="112600374" /><!-- Cursed Shoulderplates -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Legend)" base_chance="48">
+	<gd_rule rule_name="Named Armor (Legend)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="210020000" /><!-- Eltnen -->
 		</gd_maps>
@@ -1201,7 +1201,7 @@
 			<gd_item id="113600391" /><!-- Anointed Greaves -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Rare)" base_chance="30">
+	<gd_rule rule_name="Named Accessory (Rare)" base_chance="33">
 		<gd_maps>
 			<gd_map map_id="210020000" /><!-- Eltnen -->
 		</gd_maps>
@@ -1223,7 +1223,7 @@
 			<gd_item id="121000419" /><!-- Bladeclaw's Neck Strap -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Headgear (Rare)" base_chance="1">
+	<gd_rule rule_name="Named Headgear (Rare)" base_chance="10">
 		<gd_maps>
 			<gd_map map_id="210020000" /><!-- Eltnen -->
 		</gd_maps>
@@ -1257,7 +1257,7 @@
 			<gd_item id="110600413" /><!-- Assault Leader's Breastplate -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Armor (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="210020000" /><!-- Eltnen -->
 		</gd_maps>
@@ -1272,7 +1272,7 @@
 			<gd_item id="114600379" /><!-- Assault Leader's Sabatons -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Accessory (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="210020000" /><!-- Eltnen -->
 		</gd_maps>
@@ -1295,7 +1295,7 @@
 			<gd_item id="110100427" /><!-- Archmage's Tunic -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Armor (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="210020000" /><!-- Eltnen -->
 		</gd_maps>
@@ -1310,7 +1310,7 @@
 			<gd_item id="114100379" /><!-- Archmage's Shoes -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Accessory (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="210020000" /><!-- Eltnen -->
 		</gd_maps>
@@ -1333,7 +1333,7 @@
 			<gd_item id="110500416" /><!-- Great Healer's Hauberk -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Armor (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="210020000" /><!-- Eltnen -->
 		</gd_maps>
@@ -1348,7 +1348,7 @@
 			<gd_item id="114500406" /><!-- Great Healer's Brogans -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Accessory (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="210020000" /><!-- Eltnen -->
 		</gd_maps>
@@ -1371,7 +1371,7 @@
 			<gd_item id="110300385" /><!-- Outrider's Jerkin -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Armor (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="210020000" /><!-- Eltnen -->
 		</gd_maps>
@@ -1386,7 +1386,7 @@
 			<gd_item id="114300388" /><!-- Outrider's Boots -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Accessory (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="210020000" /><!-- Eltnen -->
 		</gd_maps>
@@ -1420,7 +1420,7 @@
 			<gd_item id="102100250" /><!-- Klacha's Cipher-Blade -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Headgear (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Headgear (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="210020000" /><!-- Eltnen -->
 		</gd_maps>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../global_rules.xsd">
 	<!-- Zone Drops -->
-	<gd_rule rule_name="Tursin Armor (Rare)" base_chance="1">
+	<gd_rule rule_name="Tursin Armor (Rare)" base_chance="2">
 		<gd_maps>
 			<gd_map map_id="210030000" /><!-- Verteron -->
 		</gd_maps>
@@ -43,7 +43,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Multiple Monster Drops -->
-	<gd_rule rule_name="Named Accessory (Legend)" base_chance="25">
+	<gd_rule rule_name="Named Accessory (Legend)" base_chance="33">
 		<gd_maps>
 			<gd_map map_id="210030000" /><!-- Verteron -->
 		</gd_maps>
@@ -152,7 +152,7 @@
 			<gd_item id="122000506" /><!-- Kraka's Seal -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Head (Legend)" base_chance="20">
+	<gd_rule rule_name="Named Headgear (Legend)" base_chance="25">
 		<gd_maps>
 			<gd_map map_id="210030000" /><!-- Verteron -->
 		</gd_maps>
@@ -164,7 +164,7 @@
 			<gd_item id="125000929" /><!-- Kraka's Mask -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Souvenir (Legend)" base_chance="20" no_reduction="true">
+	<gd_rule rule_name="Named Souvenir (Legend)" base_chance="25" no_reduction="true">
 		<gd_maps>
 			<gd_map map_id="210030000" /><!-- Verteron -->
 		</gd_maps>

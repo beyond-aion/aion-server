@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../global_rules.xsd">
-	<gd_rule rule_name="Weapon (Unique)" base_chance="1">
+	<gd_rule rule_name="Weapon (Unique)" base_chance="1.33">
 		<gd_maps>
 			<gd_map map_id="301380000" /><!-- Danuar_Sanctuary -->
 		</gd_maps>
@@ -23,7 +23,7 @@
 			<gd_item id="102100818" /><!-- Corsair's Cipher-Blade -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Armor (Unique)" base_chance="2">
+	<gd_rule rule_name="Armor (Unique)" base_chance="2.5">
 		<gd_maps>
 			<gd_map map_id="301380000" /><!-- Danuar_Sanctuary -->
 		</gd_maps>
@@ -53,7 +53,7 @@
 			<gd_item id="114601332" /><!-- Steel Rose Sailor's Plate Boots -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Accessory (Unique)" base_chance="1.5">
+	<gd_rule rule_name="Accessory (Unique)" base_chance="2">
 		<gd_maps>
 			<gd_map map_id="301380000" /><!-- Danuar_Sanctuary -->
 		</gd_maps>
@@ -92,7 +92,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- named drop -->
-	<gd_rule rule_name="Named Shield (Unique)" base_chance="5">
+	<gd_rule rule_name="Named Shield (Unique)" base_chance="10">
 		<gd_maps>
 			<gd_map map_id="301380000" /><!-- Danuar_Sanctuary -->
 		</gd_maps>
@@ -106,7 +106,7 @@
 			<gd_item id="115001635" /><!-- Danann Divine Battle Shield -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Unique)" base_chance="3.5">
+	<gd_rule rule_name="Named Armor (Unique)" base_chance="10">
 		<gd_maps>
 			<gd_map map_id="301380000" /><!-- Danuar_Sanctuary -->
 		</gd_maps>
@@ -124,7 +124,7 @@
 			<gd_item id="110601383" /><!-- Steel Rose Pirates' Plate Breastplate -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Unique)" base_chance="3.5">
+	<gd_rule rule_name="Named Armor (Unique)" base_chance="10">
 		<gd_maps>
 			<gd_map map_id="301380000" /><!-- Danuar_Sanctuary -->
 		</gd_maps>
@@ -142,7 +142,7 @@
 			<gd_item id="112601327" /><!-- Steel Rose Pirates' Plate Pauldrons -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Unique)" base_chance="3.5">
+	<gd_rule rule_name="Named Armor (Unique)" base_chance="10">
 		<gd_maps>
 			<gd_map map_id="301380000" /><!-- Danuar_Sanctuary -->
 		</gd_maps>
@@ -156,7 +156,7 @@
 			<gd_item id="111601345" /><!-- Steel Rose Pirates' Plate Gloves -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Ancient Manastone (Unique)" base_chance="25">
+	<gd_rule rule_name="Named Ancient Manastone (Unique)" base_chance="35">
 		<gd_maps>
 			<gd_map map_id="301380000" /><!-- Danuar_Sanctuary -->
 		</gd_maps>
@@ -176,7 +176,7 @@
 			<gd_item id="167020065" /><!-- Ancient Manastone: Magic Boost +32 -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Unique)" base_chance="5">
+	<gd_rule rule_name="Named Weapon (Unique)" base_chance="10">
 		<gd_maps>
 			<gd_map map_id="301380000" /><!-- Danuar_Sanctuary -->
 		</gd_maps>
@@ -201,7 +201,7 @@
 			<gd_item id="102100848" /><!-- Danann Divine Cipher-Blade -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Unique)" base_chance="10">
+	<gd_rule rule_name="Named Armor (Unique)" base_chance="20">
 		<gd_maps>
 			<gd_map map_id="301380000" /><!-- Danuar_Sanctuary -->
 		</gd_maps>
@@ -233,7 +233,7 @@
 			<gd_item id="112601437" /><!-- Danann Divine Shoulderplates -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Helmet (Unique)" base_chance="8">
+	<gd_rule rule_name="Named Helmet (Unique)" base_chance="16">
 		<gd_maps>
 			<gd_map map_id="301380000" /><!-- Danuar_Sanctuary -->
 		</gd_maps>
@@ -250,7 +250,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Bundles -->
-	<gd_rule rule_name="Sanctuary Idian Bundle" base_chance="10">
+	<gd_rule rule_name="Sanctuary Idian Bundle" base_chance="20">
 		<gd_maps>
 			<gd_map map_id="301380000"/><!-- Danuar_Sanctuary -->
 		</gd_maps>
@@ -289,7 +289,7 @@
 			<gd_item id="188052613"/><!-- Sanctuary Treasure Crate -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Weapon Shard" base_chance="10" fixed_chance="true">
+	<gd_rule rule_name="Weapon Shard" base_chance="10">
 		<gd_maps>
 			<gd_map map_id="301380000" /><!-- Danuar_Sanctuary -->
 		</gd_maps>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../global_rules.xsd">
 	<!-- Map Drops -->
-	<gd_rule rule_name="Dragon Lord Guard Crest" base_chance="15">
+	<gd_rule rule_name="Dragon Lord Guard Crest" base_chance="20">
 		<gd_maps>
 			<gd_map map_id="300210000" /><!-- Chantra_Dredgion -->
 		</gd_maps>
@@ -9,7 +9,7 @@
 			<gd_item id="182005549" /><!-- Dragon Lord Guard Crest -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Contaminated Draconute Armor" base_chance="45">
+	<gd_rule rule_name="Contaminated Draconute Armor" base_chance="60">
 		<gd_maps>
 			<gd_map map_id="300210000" /><!-- Chantra_Dredgion -->
 		</gd_maps>
@@ -18,7 +18,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Single Monster Drops -->
-	<gd_rule rule_name="Named Accessory Legend" base_chance="25">
+	<gd_rule rule_name="Named Accessory (Legend)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="300210000" /><!-- Chantra_Dredgion -->
 		</gd_maps>
@@ -30,7 +30,7 @@
 			<gd_item id="123001097" /><!-- Rajaya's Belt -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory Unique" base_chance="10">
+	<gd_rule rule_name="Named Accessory (Unique)" base_chance="20">
 		<gd_maps>
 			<gd_map map_id="300210000" /><!-- Chantra_Dredgion -->
 		</gd_maps>
@@ -42,7 +42,7 @@
 			<gd_item id="121001032" /><!-- Rajaya's Turquoise Necklace -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory Legend" base_chance="25">
+	<gd_rule rule_name="Named Accessory (Legend)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="300210000" /><!-- Chantra_Dredgion -->
 		</gd_maps>
@@ -54,7 +54,7 @@
 			<gd_item id="123001096" /><!-- Kumar's Belt -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory Unique" base_chance="10">
+	<gd_rule rule_name="Named Accessory (Unique)" base_chance="20">
 		<gd_maps>
 			<gd_map map_id="300210000" /><!-- Chantra_Dredgion -->
 		</gd_maps>

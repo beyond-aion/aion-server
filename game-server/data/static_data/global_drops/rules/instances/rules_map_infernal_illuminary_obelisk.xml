@@ -34,7 +34,7 @@
 			<gd_item id="188053093" /><!-- Dynatoum's Curiosity Box -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Enhancement Chest" base_chance="20">
+	<gd_rule rule_name="Named Enhancement Chest" base_chance="42">
 		<gd_maps>
 			<gd_map map_id="301370000" /><!-- Infernal_Illuminary_Obelisk -->
 		</gd_maps>
@@ -45,7 +45,7 @@
 			<gd_item id="188052824" /><!-- Illuminary Obelisk Enhancement Box -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Wings" base_chance="10">
+	<gd_rule rule_name="Named Wings" base_chance="21">
 		<gd_maps>
 			<gd_map map_id="301370000" /><!-- Infernal_Illuminary_Obelisk -->
 		</gd_maps>

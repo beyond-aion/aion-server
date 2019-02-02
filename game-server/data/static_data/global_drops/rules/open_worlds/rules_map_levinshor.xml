@@ -572,7 +572,7 @@
 			<gd_item id="102101023"/><!-- Levinshor Conqueror's Cipher-Blade -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Vocolith Activation" base_chance="1" fixed_chance="true">
+	<gd_rule rule_name="Named Vocolith Activation" base_chance="1">
 		<gd_maps>
 			<gd_map map_id="600100000"/><!-- Levinshor -->
 		</gd_maps>

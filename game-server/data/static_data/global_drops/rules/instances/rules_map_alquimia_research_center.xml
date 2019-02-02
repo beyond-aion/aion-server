@@ -23,7 +23,7 @@
 			<gd_item id="185000007" /><!-- Lepharist Sanctuary Key -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Shield (Rare)" base_chance="15">
+	<gd_rule rule_name="Named Shield (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="320110000" /><!-- Alquimia_Research_Center -->
 		</gd_maps>
@@ -34,7 +34,7 @@
 			<gd_item id="115000780" /><!-- Odetu's Shield -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Rare)" base_chance="30">
+	<gd_rule rule_name="Named Accessory (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="320110000" /><!-- Alquimia_Research_Center -->
 		</gd_maps>
@@ -45,7 +45,7 @@
 			<gd_item id="122000898" /><!-- Odetu's Ring -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Legend)" base_chance="25">
+	<gd_rule rule_name="Named Accessory (Legend)" base_chance="40">
 		<gd_maps>
 			<gd_map map_id="320110000" /><!-- Alquimia_Research_Center -->
 		</gd_maps>
@@ -57,7 +57,7 @@
 			<gd_item id="120001347" /><!-- Odetu's Lazuli Earrings -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Unique)" base_chance="20">
+	<gd_rule rule_name="Named Accessory (Unique)" base_chance="30">
 		<gd_maps>
 			<gd_map map_id="320110000" /><!-- Alquimia_Research_Center -->
 		</gd_maps>
@@ -69,7 +69,7 @@
 			<gd_item id="123001306" /><!-- Odetu's Sash -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Rare)" base_chance="30">
+	<gd_rule rule_name="Named Accessory (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="320110000" /><!-- Alquimia_Research_Center -->
 		</gd_maps>
@@ -80,7 +80,7 @@
 			<gd_item id="120000856" /><!-- Mutant's Earrings -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Rare)" base_chance="30">
+	<gd_rule rule_name="Named Weapon (Rare)" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="320110000" /><!-- Alquimia_Research_Center -->
 		</gd_maps>

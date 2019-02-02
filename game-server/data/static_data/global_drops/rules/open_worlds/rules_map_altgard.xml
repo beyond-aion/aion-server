@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../global_rules.xsd">
 	<!-- Zone Drops -->
-	<gd_rule rule_name="Mau Armor (Rare)" base_chance="1">
+	<gd_rule rule_name="Mau Armor (Rare)" base_chance="2">
 		<gd_maps>
 			<gd_map map_id="220030000" /><!-- Altgard -->
 		</gd_maps>
@@ -67,7 +67,7 @@
 			<gd_item id="182203210" /><!-- quest_2216a -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Legend)" base_chance="25">
+	<gd_rule rule_name="Named Accessory (Legend)" base_chance="33">
 		<gd_maps>
 			<gd_map map_id="220030000" /><!-- Altgard -->
 		</gd_maps>
@@ -188,7 +188,7 @@
 			<gd_item id="125001194" /><!-- Mau Warrior's Helm -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Headgear (Legend)" base_chance="20">
+	<gd_rule rule_name="Named Headgear (Legend)" base_chance="25">
 		<gd_maps>
 			<gd_map map_id="220030000" /><!-- Altgard -->
 		</gd_maps>

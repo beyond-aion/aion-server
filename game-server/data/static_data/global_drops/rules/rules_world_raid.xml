@@ -130,7 +130,7 @@
 			<gd_item id="188053131" /><!-- Level 1 Invader Reward Box -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="TUNING_SCROLL_WORLD_RAID" min_count="1" base_chance="15" fixed_chance="true">
+	<gd_rule rule_name="TUNING_SCROLL_WORLD_RAID" base_chance="15">
 		<gd_npcs>
 			<gd_npc npc_id="234589" /><!-- Prime Raedon III -->
 			<gd_npc npc_id="234590" /><!-- Prime Raedon III -->
