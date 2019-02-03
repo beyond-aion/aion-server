@@ -12,7 +12,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Multiple Monster Drops -->
-	<gd_rule rule_name="Named Life Potion" base_chance="100" min_count="5">
+	<gd_rule rule_name="Named Life Potion" base_chance="100">
 		<gd_maps>
 			<gd_map map_id="301270000" /><!-- Linkgate_Foundry -->
 		</gd_maps>
@@ -22,10 +22,10 @@
 			<gd_npc npc_id="234991" /><!-- Furious Belsagos -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="162000119" /><!-- Superior Life Potion -->
+			<gd_item id="162000119" min_count="5" /><!-- Superior Life Potion -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Mana Potion" base_chance="100" min_count="5">
+	<gd_rule rule_name="Named Mana Potion" base_chance="100">
 		<gd_maps>
 			<gd_map map_id="301270000" /><!-- Linkgate_Foundry -->
 		</gd_maps>
@@ -35,10 +35,10 @@
 			<gd_npc npc_id="234991" /><!-- Furious Belsagos -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="162000120" /><!-- Superior Mana Potion -->
+			<gd_item id="162000120" min_count="5" /><!-- Superior Mana Potion -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Coin" base_chance="100" min_count="15" max_count="45">
+	<gd_rule rule_name="Named Coin" base_chance="100">
 		<gd_maps>
 			<gd_map map_id="301270000" /><!-- Linkgate_Foundry -->
 		</gd_maps>
@@ -48,10 +48,10 @@
 			<gd_npc npc_id="234991" /><!-- Furious Belsagos -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="186000237" /><!-- Ancient Coin -->
+			<gd_item id="186000237" min_count="15" max_count="45" /><!-- Ancient Coin -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Supplements" base_chance="100" min_count="20" max_count="50">
+	<gd_rule rule_name="Named Supplements" base_chance="100">
 		<gd_maps>
 			<gd_map map_id="301270000" /><!-- Linkgate_Foundry -->
 		</gd_maps>
@@ -60,8 +60,8 @@
 			<gd_npc npc_id="234991" /><!-- Furious Belsagos -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="166100008" /><!-- Greater Supplements (Eternal) -->
-			<gd_item id="166100011" /><!-- Greater Supplements (Mythic) -->
+			<gd_item id="166100008" min_count="20" max_count="50" /><!-- Greater Supplements (Eternal) -->
+			<gd_item id="166100011" min_count="20" max_count="50" /><!-- Greater Supplements (Mythic) -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Earths" base_chance="52.5">
@@ -101,7 +101,7 @@
 			<gd_item id="185000196" /><!-- Abyss Gap Sealing Key -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Blood Marks" base_chance="100" min_count="8">
+	<gd_rule rule_name="Named Blood Marks" base_chance="100">
 		<gd_maps>
 			<gd_map map_id="301270000" /><!-- Linkgate_Foundry -->
 		</gd_maps>
@@ -109,10 +109,10 @@
 			<gd_npc npc_id="234990" /><!-- Wounded Belsagos -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="186000236" /><!-- Blood Mark -->
+			<gd_item id="186000236" min_count="8" /><!-- Blood Mark -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Blood Marks" base_chance="100" min_count="16">
+	<gd_rule rule_name="Named Blood Marks" base_chance="100">
 		<gd_maps>
 			<gd_map map_id="301270000" /><!-- Linkgate_Foundry -->
 		</gd_maps>
@@ -120,10 +120,10 @@
 			<gd_npc npc_id="233898" /><!-- Volatile Belsagos -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="186000236" /><!-- Blood Mark -->
+			<gd_item id="186000236" min_count="16" /><!-- Blood Mark -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Blood Marks" base_chance="100" min_count="24">
+	<gd_rule rule_name="Named Blood Marks" base_chance="100">
 		<gd_maps>
 			<gd_map map_id="301270000" /><!-- Linkgate_Foundry -->
 		</gd_maps>
@@ -131,7 +131,7 @@
 			<gd_npc npc_id="234991" /><!-- Furious Belsagos -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="186000236" /><!-- Blood Mark -->
+			<gd_item id="186000236" min_count="24" /><!-- Blood Mark -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Manastone Bundle" base_chance="100">

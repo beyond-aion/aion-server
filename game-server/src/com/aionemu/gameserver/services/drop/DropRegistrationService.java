@@ -24,6 +24,7 @@ import com.aionemu.gameserver.model.gameobjects.DropNpc;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.Rates;
+import com.aionemu.gameserver.model.items.ItemId;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.model.team.common.legacy.LootGroupRules;
 import com.aionemu.gameserver.model.templates.globaldrops.GlobalDropItem;
@@ -255,7 +256,7 @@ public class DropRegistrationService {
 				for (Player member : members) {
 					for (GlobalDropItem itemListed : alloweditems) {
 						DropItem dropitem = new DropItem(new Drop(itemListed.getId(), 1, 1, 100, false));
-						dropitem.setCount(getItemCount(itemListed.getId(), rule, npc));
+						dropitem.setCount(getItemCount(itemListed, npc));
 						dropitem.setIndex(index++);
 						dropitem.setPlayerObjId(member.getObjectId());
 						dropitem.setWinningPlayer(member);
@@ -267,7 +268,7 @@ public class DropRegistrationService {
 				}
 			} else {
 				for (GlobalDropItem itemListed : alloweditems) {
-					droppedItems.add(regDropItem(index++, winnerObj, npc.getObjectId(), itemListed.getId(), getItemCount(itemListed.getId(), rule, npc)));
+					droppedItems.add(regDropItem(index++, winnerObj, npc.getObjectId(), itemListed.getId(), getItemCount(itemListed, npc)));
 				}
 			}
 		}
@@ -471,9 +472,9 @@ public class DropRegistrationService {
 		return sum;
 	}
 
-	public long getItemCount(int itemId, GlobalRule rule, Npc npc) {
-		long count = rule.getMaxCount() > 1 ? Rnd.get((int) rule.getMinCount(), (int) rule.getMaxCount()) : rule.getMinCount();
-		if (itemId == 182400001)
+	public long getItemCount(GlobalDropItem item, Npc npc) {
+		long count = item.getResultCount();
+		if (item.getId() == ItemId.KINAH.value())
 			count *= npc.getLevel() * Math.pow(getRankModifier(npc) * getRatingModifier(npc), 6);
 		return count;
 	}

@@ -53,10 +53,6 @@ public class GlobalRule {
 
 	@XmlAttribute(name = "rule_name", required = true)
 	private String ruleName;
-	@XmlAttribute(name = "min_count")
-	private Long minCount = 1L;
-	@XmlAttribute(name = "max_count")
-	private Long maxCount = 1L;
 	@XmlAttribute(name = "base_chance", required = true)
 	private float chance;
 	@XmlAttribute(name = "min_diff")
@@ -126,14 +122,6 @@ public class GlobalRule {
 		return ruleName;
 	}
 
-	public long getMinCount() {
-		return minCount;
-	}
-
-	public long getMaxCount() {
-		return maxCount;
-	}
-
 	public float getChance() {
 		return chance;
 	}
@@ -170,6 +158,6 @@ public class GlobalRule {
 	@XmlEnum
 	public enum RestrictionRace {
 		ASMODIANS,
-		ELYOS;
+		ELYOS
 	}
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../global_rules.xsd">
 	<!-- Kinah -->
-	<gd_rule rule_name="Kinah" base_chance="50" dynamic_chance="true" min_count="5" max_count="25">
+	<gd_rule rule_name="Kinah" base_chance="50" dynamic_chance="true">
 		<gd_races>
 			<gd_race race="ELYOS" />
 			<gd_race race="ASMODIANS" />
@@ -23,7 +23,7 @@
 		</gd_races>
 		<gd_items>
 			<!-- Level 1 -->
-			<gd_item id="182400001" /><!-- Kinah -->
+			<gd_item id="182400001" min_count="5" max_count="25" /><!-- Kinah -->
 		</gd_items>
 	</gd_rule>
 	<!-- Buff Food -->
@@ -166,26 +166,26 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Power Shards -->
-	<gd_rule rule_name="Power Shards" base_chance="6" dynamic_chance="true" min_count="2" max_count="15" min_diff="0" max_diff="9">
+	<gd_rule rule_name="Power Shards" base_chance="6" dynamic_chance="true" min_diff="0" max_diff="9">
 		<gd_ratings>
 			<gd_rating rating="NORMAL" />
 			<gd_rating rating="ELITE" />
 		</gd_ratings>
 		<gd_items>
 			<!-- Level 1 -->
-			<gd_item id="169000003" /><!-- Minor Power Shard -->
+			<gd_item id="169000003" min_count="2" max_count="15" /><!-- Minor Power Shard -->
 			<!-- Level 10 -->
-			<gd_item id="169000004" /><!-- Lesser Power Shard -->
+			<gd_item id="169000004" min_count="2" max_count="15" /><!-- Lesser Power Shard -->
 			<!-- Level 20 -->
-			<gd_item id="169000005" /><!-- Power Shard -->
+			<gd_item id="169000005" min_count="2" max_count="15" /><!-- Power Shard -->
 			<!-- Level 30 -->
-			<gd_item id="169000007" /><!-- Greater Power Shard -->
+			<gd_item id="169000007" min_count="2" max_count="15" /><!-- Greater Power Shard -->
 			<!-- Level 40 -->
-			<gd_item id="169000008" /><!-- Fine Power Shard -->
+			<gd_item id="169000008" min_count="2" max_count="15" /><!-- Fine Power Shard -->
 			<!-- Level 50 -->
-			<gd_item id="169000009" /><!-- Premium Power Shard -->
+			<gd_item id="169000009" min_count="2" max_count="15" /><!-- Premium Power Shard -->
 			<!-- Level 60 -->
-			<gd_item id="169000010" /><!-- Superior Power Shard -->
+			<gd_item id="169000010" min_count="2" max_count="15" /><!-- Superior Power Shard -->
 		</gd_items>
 	</gd_rule>
 	<!-- Stigmas -->

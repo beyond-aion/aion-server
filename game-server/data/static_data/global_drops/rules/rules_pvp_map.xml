@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../global_rules.xsd">
-	<gd_rule rule_name="Random Boss ancient coin" base_chance="100" min_count="50" max_count="150" member_limit="6">
+	<gd_rule rule_name="Random Boss ancient coin" base_chance="100" member_limit="6">
 		<gd_maps>
 			<gd_map map_id="301220000" /><!-- Iron_Wall_Warfront -->
 		</gd_maps>
@@ -28,10 +28,10 @@
 			<gd_npc npc_id="231304" /><!-- cursed queen modor -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="186000237" /> <!-- Ancient Coin -->
+			<gd_item id="186000237" min_count="50" max_count="150" /> <!-- Ancient Coin -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Random Boss blood mark" base_chance="100" min_count="5" max_count="20" member_limit="6">
+	<gd_rule rule_name="Random Boss blood mark" base_chance="100" member_limit="6">
 		<gd_maps>
 			<gd_map map_id="301220000" /><!-- Iron_Wall_Warfront -->
 		</gd_maps>
@@ -59,7 +59,7 @@
 			<gd_npc npc_id="231304" /><!-- cursed queen modor -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="186000236" /> <!-- Blood Mark -->
+			<gd_item id="186000236" min_count="5" max_count="20" /> <!-- Blood Mark -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Random Boss omega enchantment stone" base_chance="20" member_limit="3">
@@ -124,7 +124,7 @@
 			<gd_item id="166500002" /> <!-- Amplification Stone -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Random Boss Faded High Grade Composite Manastone Bundle" base_chance="25" min_count="1" max_count="3" member_limit="6">
+	<gd_rule rule_name="Random Boss Faded High Grade Composite Manastone Bundle" base_chance="25" member_limit="6">
 		<gd_maps>
 			<gd_map map_id="301220000" /><!-- Iron_Wall_Warfront -->
 		</gd_maps>
@@ -152,7 +152,7 @@
 			<gd_npc npc_id="231304" /><!-- cursed queen modor -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="188053905" /> <!-- Faded High Grade Composite Manastone Bundle -->
+			<gd_item id="188053905" min_count="1" max_count="3" /> <!-- Faded High Grade Composite Manastone Bundle -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Random Boss tempering solution" base_chance="15">

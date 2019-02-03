@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../global_rules.xsd">
 	<!-- Vasharti -->
-	<gd_rule rule_name="Conqueror's Mark" base_chance="100" member_limit="6" min_count="60" max_count="90">
+	<gd_rule rule_name="Conqueror's Mark" base_chance="100" member_limit="6">
 		<gd_maps>
 			<gd_map map_id="300620000" /><!-- Occupied_Rentus_Base -->
 		</gd_maps>
@@ -9,7 +9,7 @@
 			<gd_npc npc_id="236300" /><!-- Brigade General Vasharti -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="186000238" /><!-- Conqueror's Mark -->
+			<gd_item id="186000238" min_count="60" max_count="90" /><!-- Conqueror's Mark -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Epic)" base_chance="50">

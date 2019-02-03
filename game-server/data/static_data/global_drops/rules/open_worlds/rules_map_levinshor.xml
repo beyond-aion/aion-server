@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../global_rules.xsd">
-	<gd_rule rule_name="Named Ancient Coin" base_chance="50" min_count="5" max_count="10">
+	<gd_rule rule_name="Named Ancient Coin" base_chance="50">
 		<gd_maps>
 			<gd_map map_id="600100000"/><!-- Levinshor -->
 		</gd_maps>
@@ -47,10 +47,10 @@
 			<gd_npc npc_id="235385"/><!-- Denku Feralmage -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="186000237"/><!-- Ancient Coin -->
+			<gd_item id="186000237" min_count="5" max_count="10"/><!-- Ancient Coin -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Blood Mark" base_chance="10" min_count="3" max_count="5">
+	<gd_rule rule_name="Named Blood Mark" base_chance="10">
 		<gd_maps>
 			<gd_map map_id="600100000"/><!-- Levinshor -->
 		</gd_maps>
@@ -97,10 +97,10 @@
 			<gd_npc npc_id="235385"/><!-- Denku Feralmage -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="186000236"/><!-- Blood Mark -->
+			<gd_item id="186000236" min_count="3" max_count="5"/><!-- Blood Mark -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Conqueror's Mark" base_chance="25" min_count="7" max_count="11">
+	<gd_rule rule_name="Named Conqueror's Mark" base_chance="25">
 		<gd_maps>
 			<gd_map map_id="600100000"/><!-- Levinshor -->
 		</gd_maps>
@@ -147,7 +147,7 @@
 			<gd_npc npc_id="235385"/><!-- Denku Feralmage -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="186000238"/><!-- Conqueror's Mark -->
+			<gd_item id="186000238" min_count="7" max_count="11"/><!-- Conqueror's Mark -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Amplification Stone" base_chance="1.5">

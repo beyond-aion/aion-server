@@ -29,8 +29,6 @@
 			<xs:element minOccurs="0" name="gd_zones" type="GlobalDropZones" />
 		</xs:all>
 		<xs:attribute name="rule_name" type="xs:string" use="required" />
-		<xs:attribute name="min_count" type="xs:long" default="1" />
-		<xs:attribute name="max_count" type="xs:long" default="1" />
 		<xs:attribute name="base_chance" type="xs:float" use="required" />
 		<xs:attribute name="dynamic_chance" type="xs:boolean" default="false" />
 		<xs:attribute name="min_diff" type="xs:int" default="-99" />
@@ -49,6 +47,8 @@
 
 	<xs:complexType name="GlobalDropItem">
 		<xs:attribute type="xs:int" name="id" use="required" />
+		<xs:attribute name="min_count" type="xs:int" default="1" />
+		<xs:attribute name="max_count" type="xs:int" />
 		<xs:attribute type="xs:float" name="chance" default="100" />
 	</xs:complexType>
 

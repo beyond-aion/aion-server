@@ -31,7 +31,7 @@
 			<gd_item id="114601266" /><!-- Tiamat Guard's Sabatons -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Supplements" base_chance="60" min_count="10" max_count="20">
+	<gd_rule rule_name="Named Supplements" base_chance="60">
 		<gd_maps>
 			<gd_map map_id="300520000" /><!-- Dragon_Lords_Refuge -->
 		</gd_maps>
@@ -39,7 +39,7 @@
 			<gd_npc npc_id="219359" /><!-- Calindi Flamelord -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="166100011" /><!-- Greater Supplements (Mythic) -->
+			<gd_item id="166100011" min_count="10" max_count="20" /><!-- Greater Supplements (Mythic) -->
 		</gd_items>
 	</gd_rule>
 </global_rules>

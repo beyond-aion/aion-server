@@ -453,7 +453,7 @@
 			<gd_item id="114601610" /><!-- Wave Song Plate Boots -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Power Shards" base_chance="100" min_count="500" max_count="500">
+	<gd_rule rule_name="Named Power Shards" base_chance="100">
 		<gd_maps>
 			<gd_map map_id="210070000" /><!-- Cygnea -->
 		</gd_maps>
@@ -480,8 +480,8 @@
 			<gd_npc npc_id="235962" /><!-- Serrated Sandthorn Arachna -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="169000009" /><!-- Premium Power Shard -->
-			<gd_item id="169000010" /><!-- Superior Power Shard -->
+			<gd_item id="169000009" min_count="500" /><!-- Premium Power Shard -->
+			<gd_item id="169000010" min_count="500" /><!-- Superior Power Shard -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Idian Pouch" base_chance="100">

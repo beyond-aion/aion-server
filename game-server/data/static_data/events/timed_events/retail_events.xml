@@ -2313,7 +2313,7 @@
 			</spawn_map>
 		</spawns>
 		<event_drops>
-			<gd_rule rule_name="Growth Event Drop Elyos" min_count="1" base_chance="10" min_diff="-10" max_diff="70" restriction_race="ELYOS">
+			<gd_rule rule_name="Growth Event Drop Elyos" base_chance="10" min_diff="-10" max_diff="70" restriction_race="ELYOS">
 				<gd_items>
 					<gd_item id="182215196" /><!-- Fiery Heart -->
 				</gd_items>
@@ -2329,7 +2329,7 @@
 					<gd_npc npc_id="214621" /><!-- Vile Judge Kromede -->
 				</gd_npcs>
 			</gd_rule>
-			<gd_rule rule_name="Growth Event Drop Asmodians" min_count="1" base_chance="10" min_diff="-10" max_diff="70" restriction_race="ASMODIANS">
+			<gd_rule rule_name="Growth Event Drop Asmodians" base_chance="10" min_diff="-10" max_diff="70" restriction_race="ASMODIANS">
 				<gd_items>
 					<gd_item id="182215197" /><!-- Fiery Heart -->
 				</gd_items>
@@ -3331,7 +3331,7 @@
 	<event name="Alchemy Event" start="2018-10-26T00:00:00" end="2018-11-04T23:59:59" theme="HALLOWEEN">
 		<!-- [Event] Alchemist's Pouch -->
 		<event_drops>
-			<gd_rule rule_name="Alchemy Boss Event Drop" min_count="1" base_chance="100" min_diff="-15" max_diff="70">
+			<gd_rule rule_name="Alchemy Boss Event Drop" base_chance="100" min_diff="-15" max_diff="70">
 				<gd_maps>
 					<gd_map map_id="301130000" /><!-- Sauro Supply Base -->
 					<gd_map map_id="301140000" /><!-- Seized Danuar Sanctuary -->
@@ -3678,7 +3678,7 @@
 			<maintainable>51035 51036 51037 50035 50036 50037</maintainable>
 		</quests>
 		<event_drops>
-			<gd_rule rule_name="Boiling Point Event Drop 1" min_count="1" base_chance="10" min_diff="-10" max_diff="70" member_limit="12">
+			<gd_rule rule_name="Boiling Point Event Drop 1" base_chance="10" min_diff="-10" max_diff="70" member_limit="12">
 				<gd_items>
 					<gd_item id="186000387" /><!-- [Event] Rice Cake -->
 				</gd_items>
@@ -3711,7 +3711,7 @@
 					<gd_npc npc_id="230093" /><!-- Furious Barukan -->
 				</gd_npcs>
 			</gd_rule>
-			<gd_rule rule_name="Boiling Point Event Drop 2" min_count="1" base_chance="50" min_diff="-10" max_diff="70" member_limit="12">
+			<gd_rule rule_name="Boiling Point Event Drop 2" base_chance="50" min_diff="-10" max_diff="70" member_limit="12">
 				<gd_items>
 					<gd_item id="186000388" /><!-- [Event] Beef Bone Broth -->
 				</gd_items>
@@ -3841,9 +3841,9 @@
 					<gd_rating rating="HERO" />
 				</gd_ratings>
 			</gd_rule>
-			<gd_rule rule_name="Snowball (Shared)" min_count="3" max_count="5" base_chance="100" member_limit="12">
+			<gd_rule rule_name="Snowball (Shared)" base_chance="100" member_limit="12">
 				<gd_items>
-					<gd_item id="188052986" /><!-- +1 Snowball -->
+					<gd_item id="188052986" min_count="3" max_count="5" /><!-- +1 Snowball -->
 				</gd_items>
 				<gd_maps>
 					<gd_map map_id="300240000" /><!-- Aturam_Sky_Fortress -->
@@ -5320,7 +5320,7 @@
 			</spawn_map>
 		</spawns>
 		<event_drops>
-			<gd_rule rule_name="Aether Bloom Bouquet" min_count="1" base_chance="100" min_diff="-20" max_diff="40" member_limit="6">
+			<gd_rule rule_name="Aether Bloom Bouquet" base_chance="100" min_diff="-20" max_diff="40" member_limit="6">
 				<gd_maps>
 					<gd_map map_id="300590000" /><!-- Ophidan Bridge -->
 					<gd_map map_id="301380000" /><!-- Danuar Sanctuary -->

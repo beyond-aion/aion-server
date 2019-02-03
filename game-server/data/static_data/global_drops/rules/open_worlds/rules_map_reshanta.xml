@@ -25,7 +25,7 @@
 			<gd_item id="115001427" /><!-- Moltenus' Shield -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Enchantment Stone" min_count="5" base_chance="100" member_limit="192">
+	<gd_rule rule_name="Named Enchantment Stone" base_chance="100" member_limit="192">
 		<gd_maps>
 			<gd_map map_id="400010000" /><!-- Reshanta -->
 		</gd_maps>
@@ -33,7 +33,7 @@
 			<gd_npc npc_id="251045" /><!-- Moltenus -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="166020000" /><!-- Omega Enchantment Stone -->
+			<gd_item id="166020000" min_count="5" /><!-- Omega Enchantment Stone -->
 		</gd_items>
 	</gd_rule>
 	<!-- Menotios -->
