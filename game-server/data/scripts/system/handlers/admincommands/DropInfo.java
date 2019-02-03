@@ -94,15 +94,17 @@ public class DropInfo extends AdminCommand {
 				if (!showAll && chance <= 0)
 					continue;
 
-				List<GlobalDropItem> alloweditems = DropRegistrationService.getInstance().getAllowedItems(rule, npc, player);
-				if (!alloweditems.isEmpty()) {
+				List<GlobalDropItem> drops = DropRegistrationService.getInstance().collectDrops(rule, npc, player, Integer.MAX_VALUE);
+				if (!drops.isEmpty()) {
 					info += "\n" + dropGroupPrefix + " drop group: \"" + rule.getRuleName() + "\", max drops: " + rule.getMaxDropRule();
 					if (rule.getMemberLimit() != 1)
 						info += ", member limit: " + rule.getMemberLimit();
 					info += "\n\tBase chance: " + rule.getChance() + "%, effective: " + chance + "%";
 					counts[1]++;
-					for (GlobalDropItem item : alloweditems) {
-						info += "\n\t" + ChatUtil.item(item.getId()) + "\tSub chance: " + item.getChance() + "%";
+					for (GlobalDropItem item : drops) {
+						info += "\n\t" + ChatUtil.item(item.getId());
+						if (item.getChance() != 100f)
+							info += "\tSub chance: " + item.getChance() + "%";
 						counts[0]++;
 					}
 				}

@@ -246,17 +246,17 @@ public class DropRegistrationService {
 
 	private int addDropItems(int index, Set<DropItem> droppedItems, GlobalRule rule, Npc npc, Player player, Collection<Player> groupMembers,
 		int winnerObj) {
-		List<GlobalDropItem> alloweditems = getAllowedItems(rule, npc, player);
-		if (!alloweditems.isEmpty()) {
+		List<GlobalDropItem> drops = collectDrops(rule, npc, player, rule.getMaxDropRule());
+		if (!drops.isEmpty()) {
 			if (rule.getMemberLimit() > 1 && player.isInTeam()) {
 				List<Player> members = new ArrayList<>(groupMembers);
 				if (rule.getMemberLimit() > members.size())
 					Collections.shuffle(members);
 				int distributedItems = 0;
 				for (Player member : members) {
-					for (GlobalDropItem itemListed : alloweditems) {
-						DropItem dropitem = new DropItem(new Drop(itemListed.getId(), 1, 1, 100, false));
-						dropitem.setCount(getItemCount(itemListed, npc));
+					for (GlobalDropItem drop : drops) {
+						DropItem dropitem = new DropItem(new Drop(drop.getId(), 1, 1, 100, false));
+						dropitem.setCount(getItemCount(drop, npc));
 						dropitem.setIndex(index++);
 						dropitem.setPlayerObjId(member.getObjectId());
 						dropitem.setWinningPlayer(member);
@@ -267,8 +267,8 @@ public class DropRegistrationService {
 						break;
 				}
 			} else {
-				for (GlobalDropItem itemListed : alloweditems) {
-					droppedItems.add(regDropItem(index++, winnerObj, npc.getObjectId(), itemListed.getId(), getItemCount(itemListed, npc)));
+				for (GlobalDropItem drop : drops) {
+					droppedItems.add(regDropItem(index++, winnerObj, npc.getObjectId(), drop.getId(), getItemCount(drop, npc)));
 				}
 			}
 		}
@@ -432,26 +432,15 @@ public class DropRegistrationService {
 		return true;
 	}
 
-	public List<GlobalDropItem> getAllowedItems(GlobalRule rule, Npc npc, Player player) {
-		if (!checkRuleRestrictions(rule, player.getRace(), npc))
-			return Collections.emptyList();
-		List<GlobalDropItem> tempItems = new ArrayList<>();
-		List<GlobalDropItem> allowedItems = new ArrayList<>();
-		for (GlobalDropItem globalItem : rule.getDropItems()) {
-			ItemTemplate itemTemplate = DataManager.ITEM_DATA.getItemTemplate(globalItem.getId());
-			if (player.getOppositeRace() == itemTemplate.getRace()) {
-				continue;
-			}
-			int diff = npc.getLevel() - itemTemplate.getLevel();
-			if (diff >= rule.getMinDiff() && diff <= rule.getMaxDiff())
-				tempItems.add(globalItem);
-		}
-		if (tempItems.size() >= 1) {
-			for (int i = 0; i < rule.getMaxDropRule(); i++) { // TODO: Evaluate if necessary
-				float sumOfChances = calculateSumOfChances(tempItems);
+	public List<GlobalDropItem> collectDrops(GlobalRule rule, Npc npc, Player player, int maxDrops) {
+		List<GlobalDropItem> drops = collectAllowedDrops(rule, npc, player);
+		if (drops.size() > maxDrops) {
+			List<GlobalDropItem> allowedItems = new ArrayList<>();
+			for (int i = 0; i < maxDrops; i++) {
+				float sumOfChances = calculateSumOfChances(drops);
 				float currentSum = 0f;
 				float rnd = Rnd.get((int) (sumOfChances * 1000)) / 1000f;
-				for (Iterator<GlobalDropItem> iter = tempItems.iterator(); iter.hasNext();) {
+				for (Iterator<GlobalDropItem> iter = drops.iterator(); iter.hasNext();) {
 					GlobalDropItem item = iter.next();
 					currentSum += item.getChance();
 					if (rnd < currentSum) {
@@ -461,8 +450,25 @@ public class DropRegistrationService {
 					}
 				}
 			}
+			return allowedItems;
 		}
-		return allowedItems;
+		return drops;
+	}
+
+	private List<GlobalDropItem> collectAllowedDrops(GlobalRule rule, Npc npc, Player player) {
+		if (!checkRuleRestrictions(rule, player.getRace(), npc))
+			return Collections.emptyList();
+		List<GlobalDropItem> tempItems = new ArrayList<>();
+		for (GlobalDropItem globalItem : rule.getDropItems()) {
+			ItemTemplate itemTemplate = DataManager.ITEM_DATA.getItemTemplate(globalItem.getId());
+			if (player.getOppositeRace() == itemTemplate.getRace()) {
+				continue;
+			}
+			int diff = npc.getLevel() - itemTemplate.getLevel();
+			if (diff >= rule.getMinDiff() && diff <= rule.getMaxDiff())
+				tempItems.add(globalItem);
+		}
+		return tempItems;
 	}
 
 	private float calculateSumOfChances(List<GlobalDropItem> items) {
