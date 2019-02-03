@@ -29,11 +29,9 @@ public class DecomposableItemsData {
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		decomposableItemsInfo.clear();
-		ItemData itemData = parent instanceof StaticData ? ((StaticData) parent).itemData : DataManager.ITEM_DATA;
 		for (DecomposableItemInfo template : decomposableItemsTemplates) {
 			List<ExtractedItemsCollection> itemGroups = template.getItemsCollections();
 			if (itemGroups != null) {
-				validateRewardItemIds(itemData, itemGroups);
 				if (template.isIsSelectable()) {
 					selectableDecomposables.put(template.getItemId(), itemGroups.get(0).getItems());
 				} else {
@@ -42,15 +40,6 @@ public class DecomposableItemsData {
 			}
 		}
 		decomposableItemsTemplates = null;
-	}
-
-	private void validateRewardItemIds(ItemData itemData, List<ExtractedItemsCollection> groups) {
-		for (ExtractedItemsCollection itemsCollection : groups) {
-			for (ResultedItem item : itemsCollection.getItems()) {
-				if (itemData.getItemTemplate(item.getItemId()) == null)
-					throw new IllegalArgumentException("Decomposable reward item ID is invalid: " + item.getItemId());
-			}
-		}
 	}
 
 	public int size() {

@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.model.templates.item;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -14,19 +13,15 @@ import javax.xml.bind.annotation.XmlType;
 public class ResultedItemsCollection {
 
 	@XmlElement(name = "item")
-	protected List<ResultedItem> items;
+	private List<ResultedItem> items;
 	@XmlElement(name = "random_item")
-	protected List<RandomItem> randomItems;
+	private List<RandomItem> randomItems;
 
 	public List<ResultedItem> getItems() {
-		return items != null ? items : Collections.<ResultedItem> emptyList();
+		return items != null ? items : Collections.emptyList();
 	}
 
 	public List<RandomItem> getRandomItems() {
-		if (randomItems != null) {
-			return randomItems;
-		} else {
-			return new ArrayList<>();
-		}
+		return randomItems != null ? randomItems : Collections.emptyList();
 	}
 }

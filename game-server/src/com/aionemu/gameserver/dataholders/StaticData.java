@@ -9,6 +9,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.aionemu.gameserver.dataholders.loadingutils.StaticDataListener;
 import com.aionemu.gameserver.model.templates.mail.Mails;
 
 /**
@@ -292,6 +293,10 @@ public class StaticData {
 
 	@XmlElement(name = "legion_dominion_template")
 	public LegionDominionData legionDominionData;
+
+	void beforeUnmarshal(Unmarshaller unmarshaller, Object parent) {
+		unmarshaller.setListener(new StaticDataListener(this));
+	}
 
 	void afterUnmarshal(Unmarshaller unmarshaller, Object parent) {
 		Logger log = LoggerFactory.getLogger(StaticData.class);

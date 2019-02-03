@@ -4,8 +4,6 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
-import org.slf4j.LoggerFactory;
-
 import com.aionemu.commons.utils.Rnd;
 
 /**
@@ -16,26 +14,29 @@ import com.aionemu.commons.utils.Rnd;
 public class RandomItem {
 
 	@XmlAttribute(name = "type")
-	protected RandomType type;
+	private RandomType type;
 	@XmlAttribute(name = "min_count")
-	public int minCount = 1;
+	private int minCount = 1;
 	@XmlAttribute(name = "max_count")
-	public int maxCount;
+	private int maxCount;
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
-		if (maxCount > 0 && maxCount < minCount)
-			LoggerFactory.getLogger(ResultedItem.class).warn("Wrong count for decomposable random item:{}, min:{} max:{}", type, minCount, maxCount);
+		if (minCount <= 0)
+			throw new IllegalArgumentException("Decomposable random reward item of type " + type + " min_count (" + minCount + ") must be greater than 0");
+		if (maxCount != 0 && maxCount <= minCount)
+			throw new IllegalArgumentException(
+				"Decomposable random reward item of type " + type + " max_count (" + maxCount + ") must be unset or greater than min_count (" + minCount + ")");
 	}
 
 	public RandomType getType() {
 		return type;
 	}
 
-	public int getRndMin() {
+	public int getMinCount() {
 		return minCount;
 	}
 
-	public int getRndMax() {
+	public int getMaxCount() {
 		return maxCount;
 	}
 

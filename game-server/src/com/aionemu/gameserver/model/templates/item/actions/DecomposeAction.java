@@ -136,7 +136,7 @@ public class DecomposeAction extends AbstractItemAction {
 		List<ExtractedItemsCollection> itemsCollections = DataManager.DECOMPOSABLE_ITEMS_DATA.getInfoByItemId(parentItem.getItemId());
 		Collection<ExtractedItemsCollection> levelSuitableItems = filterItemsByLevel(player, itemsCollections);
 		final ExtractedItemsCollection selectedCollection = selectItemByChance(levelSuitableItems);
-		if (selectedCollection.getItems().stream().filter(i -> i.isObtainableFor(player)).count() == 0 && selectedCollection.getRandomItems().isEmpty()) {
+		if (selectedCollection.getRandomItems().isEmpty() && selectedCollection.getItems().stream().noneMatch(i -> i.isObtainableFor(player))) {
 			log.warn(
 				"Empty decomposable " + parentItem.getItemId() + " for " + player + ", class: " + player.getPlayerClass() + ", level: " + player.getLevel());
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_DECOMPOSE_ITEM_FAILED(parentItem.getL10n()));

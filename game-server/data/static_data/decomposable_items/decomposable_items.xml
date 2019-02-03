@@ -3454,7 +3454,7 @@
 			<item id="162000006" min_count="20" /><!-- Major Life Potion -->
 		</items>
 		<items chance="3.0">
-			<item id="162000011" min_count="0" /><!-- Major Mana Potion -->
+			<item id="162000011" min_count="20" /><!-- Major Mana Potion -->
 		</items>
 		<items chance="3.0">
 			<item id="162000056" min_count="20" /><!-- Major Life Elixir -->
@@ -3881,7 +3881,7 @@
 			<item id="186000064" min_count="1" max_count="2" /><!-- Greater Ancient Icon -->
 		</items>
 		<items chance="10.0">
-			<item id="186000063" min_count="1" max_count="1" /><!-- Major Ancient Icon -->
+			<item id="186000063" /><!-- Major Ancient Icon -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050573"><!-- Radiant Ops Reward -->
@@ -3895,7 +3895,7 @@
 			<item id="186000060" min_count="1" max_count="2" /><!-- Greater Ancient Seal -->
 		</items>
 		<items chance="10.0">
-			<item id="186000059" min_count="1" max_count="1" /><!-- Major Ancient Seal -->
+			<item id="186000059" /><!-- Major Ancient Seal -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050574"><!-- Greater Radiant Ops Reward -->
@@ -3909,7 +3909,7 @@
 			<item id="186000056" min_count="1" max_count="2" /><!-- Greater Ancient Goblet -->
 		</items>
 		<items chance="10.0">
-			<item id="186000055" min_count="1" max_count="1" /><!-- Major Ancient Goblet -->
+			<item id="186000055" /><!-- Major Ancient Goblet -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050575"><!-- Major Radiant Ops Reward -->
@@ -3923,7 +3923,7 @@
 			<item id="186000052" min_count="1" max_count="2" /><!-- Greater Ancient Crown -->
 		</items>
 		<items chance="10.0">
-			<item id="186000051" min_count="1" max_count="1" /><!-- Major Ancient Crown -->
+			<item id="186000051" /><!-- Major Ancient Crown -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050576"><!-- Lesser Blood Crusade Reward -->
@@ -3937,7 +3937,7 @@
 			<item id="186000064" min_count="1" max_count="2" /><!-- Greater Ancient Icon -->
 		</items>
 		<items chance="10.0">
-			<item id="186000063" min_count="1" max_count="1" /><!-- Major Ancient Icon -->
+			<item id="186000063" /><!-- Major Ancient Icon -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050577"><!-- Blood Crusade Reward -->
@@ -3951,7 +3951,7 @@
 			<item id="186000060" min_count="1" max_count="2" /><!-- Greater Ancient Seal -->
 		</items>
 		<items chance="10.0">
-			<item id="186000059" min_count="1" max_count="1" /><!-- Major Ancient Seal -->
+			<item id="186000059" /><!-- Major Ancient Seal -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050578"><!-- Greater Blood Crusade Reward -->
@@ -3965,7 +3965,7 @@
 			<item id="186000056" min_count="1" max_count="2" /><!-- Greater Ancient Goblet -->
 		</items>
 		<items chance="10.0">
-			<item id="186000055" min_count="1" max_count="1" /><!-- Major Ancient Goblet -->
+			<item id="186000055" /><!-- Major Ancient Goblet -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050579"><!-- Major Blood Crusade Reward -->
@@ -3979,7 +3979,7 @@
 			<item id="186000052" min_count="1" max_count="2" /><!-- Greater Ancient Crown -->
 		</items>
 		<items chance="10.0">
-			<item id="186000051" min_count="1" max_count="1" /><!-- Major Ancient Crown -->
+			<item id="186000051" /><!-- Major Ancient Crown -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050580"><!-- Silver Medal Chest -->
@@ -6468,46 +6468,46 @@
 	</decomposable>
 	<decomposable item_id="188050992"><!-- Major Rotund Ayas Bundle -->
 		<items>
-			<item id="169240001" min_count="5" max_count="5" /><!-- Wiki Petal -->
+			<item id="169240001" min_count="5" /><!-- Wiki Petal -->
 		</items>
 		<items>
-			<item id="169240002" min_count="5" max_count="5" /><!-- Omblic Petal -->
+			<item id="169240002" min_count="5" /><!-- Omblic Petal -->
 		</items>
 		<items>
-			<item id="169240003" min_count="5" max_count="5" /><!-- Meon Petal -->
+			<item id="169240003" min_count="5" /><!-- Meon Petal -->
 		</items>
 		<items>
-			<item id="169240004" min_count="5" max_count="5" /><!-- Ormea Petal -->
+			<item id="169240004" min_count="5" /><!-- Ormea Petal -->
 		</items>
 		<items>
-			<item id="169240005" min_count="5" max_count="5" /><!-- Tange Petal -->
+			<item id="169240005" min_count="5" /><!-- Tange Petal -->
 		</items>
 		<items>
-			<item id="169240006" min_count="5" max_count="5" /><!-- Ervio Petal -->
+			<item id="169240006" min_count="5" /><!-- Ervio Petal -->
 		</items>
 		<items>
-			<item id="169240007" min_count="5" max_count="5" /><!-- Lunime Petal -->
+			<item id="169240007" min_count="5" /><!-- Lunime Petal -->
 		</items>
 		<items>
-			<item id="169240008" min_count="5" max_count="5" /><!-- Vinna Petal -->
+			<item id="169240008" min_count="5" /><!-- Vinna Petal -->
 		</items>
 		<items>
-			<item id="169240009" min_count="5" max_count="5" /><!-- Kirka Petal -->
+			<item id="169240009" min_count="5" /><!-- Kirka Petal -->
 		</items>
 		<items>
-			<item id="169240010" min_count="5" max_count="5" /><!-- Brommel Petal -->
+			<item id="169240010" min_count="5" /><!-- Brommel Petal -->
 		</items>
 		<items>
-			<item id="169240011" min_count="5" max_count="5" /><!-- Pressa Petal -->
+			<item id="169240011" min_count="5" /><!-- Pressa Petal -->
 		</items>
 		<items>
-			<item id="169240012" min_count="5" max_count="5" /><!-- Merone Petal -->
+			<item id="169240012" min_count="5" /><!-- Merone Petal -->
 		</items>
 		<items>
-			<item id="169240013" min_count="5" max_count="5" /><!-- Kukar Petal -->
+			<item id="169240013" min_count="5" /><!-- Kukar Petal -->
 		</items>
 		<items>
-			<item id="169240014" min_count="5" max_count="5" /><!-- Leopis Petal -->
+			<item id="169240014" min_count="5" /><!-- Leopis Petal -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050993" /><!-- Minor Hungry Porgus Bundle -->
@@ -26320,7 +26320,7 @@
 	</decomposable>
 	<decomposable item_id="188053003"><!-- [Event] Weapon Shard Box -->
 		<items>
-			<item id="169405253" min_count="1" max_count="1" /><!-- Weapon Shard -->
+			<item id="169405253" /><!-- Weapon Shard -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188053004" selectable="true"><!-- [Event] Dragon Lord's Weapon Chest -->
