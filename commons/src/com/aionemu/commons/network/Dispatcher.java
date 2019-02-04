@@ -14,6 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.options.Assertion;
+import com.aionemu.commons.utils.NetworkUtils;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
@@ -214,12 +215,12 @@ public abstract class Dispatcher extends Thread {
 				sz -= 2;
 			ByteBuffer b = (ByteBuffer) buf.slice().limit(sz);
 			b.order(ByteOrder.LITTLE_ENDIAN);
-			/** read message fully */
+			// read message fully
 			buf.position(buf.position() + sz);
 
 			return con.processData(b);
-		} catch (IllegalArgumentException e) {
-			log.warn("Error on parsing input from client - account: " + con + " packet size: " + sz + " real size:" + buf.remaining(), e);
+		} catch (Exception e) {
+			log.error("Error parsing input from " + con + ", packet size: " + sz + ", unread bytes: " + NetworkUtils.toHex(buf), e);
 			return false;
 		}
 	}

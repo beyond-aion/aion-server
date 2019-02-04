@@ -162,18 +162,16 @@ public class AionConnection extends AConnection<AionServerPacket> {
 	 */
 	@Override
 	protected final boolean processData(ByteBuffer data) {
-		try {
-			if (!crypt.decrypt(data)) {
-				if (++corruptPackets >= MAX_CORRUPT_PACKETS_BEFORE_DISCONNECT) {
-					log.warn("Client packet decryption failed " + corruptPackets + " times, disconnecting " + this);
-					return false;
-				}
-				log.debug("[" + corruptPackets + "/" + MAX_CORRUPT_PACKETS_BEFORE_DISCONNECT + "] Decrypt fail, client packet passed...");
-				return true;
+		if (!crypt.isEnabled()) // skip unprocessable packet (client sends crap upon reconnect, just before Crypt gets initialized and sent via SM_KEY)
+			return true;
+
+		if (!crypt.decrypt(data)) {
+			if (++corruptPackets >= MAX_CORRUPT_PACKETS_BEFORE_DISCONNECT) {
+				log.warn("Client packet decryption failed " + corruptPackets + " times, disconnecting " + this);
+				return false;
 			}
-		} catch (Exception ex) {
-			log.error(null, ex);
-			return false;
+			log.debug("[" + corruptPackets + "/" + MAX_CORRUPT_PACKETS_BEFORE_DISCONNECT + "] Decrypt fail, client packet passed...");
+			return true;
 		}
 
 		if (data.remaining() < 5) {// op + static code + op == 5 bytes
