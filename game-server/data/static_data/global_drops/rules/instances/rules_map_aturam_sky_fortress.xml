@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../global_rules.xsd">
 	<!-- Single Monster Drops -->
-	<gd_rule rule_name="Named Armor Box (Legend)" base_chance="30">
+	<gd_rule rule_name="Named Armor Box (Legend)" base_chance="30" no_reduction="true">
 		<gd_maps>
 			<gd_map map_id="300240000" /><!-- Aturam_Sky_Fortress -->
 		</gd_maps>
@@ -13,7 +13,7 @@
 			<gd_item id="188051567" /><!-- Hugen's Pauldrons Box -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Belt Box (Unique)" base_chance="15">
+	<gd_rule rule_name="Named Belt Box (Unique)" base_chance="15" no_reduction="true">
 		<gd_maps>
 			<gd_map map_id="300240000" /><!-- Aturam_Sky_Fortress -->
 		</gd_maps>
@@ -24,7 +24,7 @@
 			<gd_item id="188051573" /><!-- Hugen's Belt Box -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor Box (Legend)" base_chance="30">
+	<gd_rule rule_name="Named Armor Box (Legend)" base_chance="30" no_reduction="true">
 		<gd_maps>
 			<gd_map map_id="300240000" /><!-- Aturam_Sky_Fortress -->
 		</gd_maps>
@@ -35,7 +35,7 @@
 			<gd_item id="188051569" /><!-- Popuchin's Shoebox -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Hairpin Box (Legend)" base_chance="30">
+	<gd_rule rule_name="Named Hairpin Box (Legend)" base_chance="30" no_reduction="true">
 		<gd_maps>
 			<gd_map map_id="300240000" /><!-- Aturam_Sky_Fortress -->
 		</gd_maps>
@@ -46,7 +46,7 @@
 			<gd_item id="188051570" /><!-- Popuchin's Hairpin Box -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory Box (Unique)" base_chance="15">
+	<gd_rule rule_name="Named Accessory Box (Unique)" base_chance="15" no_reduction="true">
 		<gd_maps>
 			<gd_map map_id="300240000" /><!-- Aturam_Sky_Fortress -->
 		</gd_maps>
@@ -57,7 +57,7 @@
 			<gd_item id="188051572" /><!-- Popuchin's Ring Box -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor Box (Legend)" base_chance="30">
+	<gd_rule rule_name="Named Armor Box (Legend)" base_chance="30" no_reduction="true">
 		<gd_maps>
 			<gd_map map_id="300240000" /><!-- Aturam_Sky_Fortress -->
 		</gd_maps>
@@ -69,7 +69,7 @@
 			<gd_item id="188051568" /><!-- Ashunatal's Glove Box -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory Box (Unique)" base_chance="15">
+	<gd_rule rule_name="Named Accessory Box (Unique)" base_chance="15" no_reduction="true">
 		<gd_maps>
 			<gd_map map_id="300240000" /><!-- Aturam_Sky_Fortress -->
 		</gd_maps>
@@ -80,7 +80,7 @@
 			<gd_item id="188051571" /><!-- Ashunatal's Earrings Box -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Custome (Rare)" base_chance="20">
+	<gd_rule rule_name="Named Custome (Rare)" base_chance="20" no_reduction="true">
 		<gd_maps>
 			<gd_map map_id="300240000" /><!-- Aturam_Sky_Fortress -->
 		</gd_maps>

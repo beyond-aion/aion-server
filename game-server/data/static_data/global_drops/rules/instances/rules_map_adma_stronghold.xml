@@ -15,7 +15,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Single Monster Drops -->
-	<gd_rule rule_name="Named Weapon (Unique)" base_chance="30">
+	<gd_rule rule_name="Named Weapon (Unique)" base_chance="30" no_reduction="true">
 		<gd_maps>
 			<gd_map map_id="320130000" /><!-- Adma_Stronghold -->
 		</gd_maps>
@@ -40,7 +40,7 @@
 			<gd_item id="102100769" /><!-- Lannok's Cipher-Blade -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Shield (Legend)" base_chance="40">
+	<gd_rule rule_name="Named Shield (Legend)" base_chance="40" no_reduction="true">
 		<gd_maps>
 			<gd_map map_id="320130000" /><!-- Adma_Stronghold -->
 		</gd_maps>
@@ -51,7 +51,7 @@
 			<gd_item id="115000833" /><!-- Liches' Shield -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="60">
+	<gd_rule rule_name="Named Armor (Rare)" base_chance="60" no_reduction="true">
 		<gd_maps>
 			<gd_map map_id="320130000" /><!-- Adma_Stronghold -->
 		</gd_maps>
@@ -65,7 +65,7 @@
 			<gd_item id="114600799" /><!-- Adma Guard's Sabatons -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="60">
+	<gd_rule rule_name="Named Armor (Rare)" base_chance="60" no_reduction="true">
 		<gd_maps>
 			<gd_map map_id="320130000" /><!-- Adma_Stronghold -->
 		</gd_maps>
@@ -79,7 +79,7 @@
 			<gd_item id="114300897" /><!-- Adma Guard's Boots -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="60">
+	<gd_rule rule_name="Named Armor (Rare)" base_chance="60" no_reduction="true">
 		<gd_maps>
 			<gd_map map_id="320130000" /><!-- Adma_Stronghold -->
 		</gd_maps>
@@ -93,7 +93,7 @@
 			<gd_item id="112600790" /><!-- Adma Guard's Shoulderplates -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="60">
+	<gd_rule rule_name="Named Armor (Rare)" base_chance="60" no_reduction="true">
 		<gd_maps>
 			<gd_map map_id="320130000" /><!-- Adma_Stronghold -->
 		</gd_maps>
@@ -105,7 +105,7 @@
 			<gd_item id="113500830" /><!-- Adma Guard's Chausses -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="60">
+	<gd_rule rule_name="Named Armor (Rare)" base_chance="60" no_reduction="true">
 		<gd_maps>
 			<gd_map map_id="320130000" /><!-- Adma_Stronghold -->
 		</gd_maps>
@@ -119,7 +119,7 @@
 			<gd_item id="113600805" /><!-- Adma Guard's Greaves -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="65">
+	<gd_rule rule_name="Named Armor (Rare)" base_chance="65" no_reduction="true">
 		<gd_maps>
 			<gd_map map_id="320130000" /><!-- Adma_Stronghold -->
 		</gd_maps>
@@ -133,7 +133,7 @@
 			<gd_item id="110600839" /><!-- Adma Guard's Breastplate -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Legend)" base_chance="35">
+	<gd_rule rule_name="Named Armor (Legend)" base_chance="35" no_reduction="true">
 		<gd_maps>
 			<gd_map map_id="320130000" /><!-- Adma_Stronghold -->
 		</gd_maps>
@@ -147,7 +147,7 @@
 			<gd_item id="114600807" /><!-- Adma Elite's Sabatons -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Legend)" base_chance="35">
+	<gd_rule rule_name="Named Armor (Legend)" base_chance="35" no_reduction="true">
 		<gd_maps>
 			<gd_map map_id="320130000" /><!-- Adma_Stronghold -->
 		</gd_maps>
@@ -161,7 +161,7 @@
 			<gd_item id="111600824" /><!-- Adma Elite's Gauntlets -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Legend)" base_chance="35">
+	<gd_rule rule_name="Named Armor (Legend)" base_chance="35" no_reduction="true">
 		<gd_maps>
 			<gd_map map_id="320130000" /><!-- Adma_Stronghold -->
 		</gd_maps>
@@ -175,7 +175,7 @@
 			<gd_item id="112600798" /><!-- Adma Elite's Shoulderplates -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Legend)" base_chance="35">
+	<gd_rule rule_name="Named Armor (Legend)" base_chance="35" no_reduction="true">
 		<gd_maps>
 			<gd_map map_id="320130000" /><!-- Adma_Stronghold -->
 		</gd_maps>
@@ -189,7 +189,7 @@
 			<gd_item id="113600813" /><!-- Adma Elite's Greaves -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Legend)" base_chance="40">
+	<gd_rule rule_name="Named Armor (Legend)" base_chance="40" no_reduction="true">
 		<gd_maps>
 			<gd_map map_id="320130000" /><!-- Adma_Stronghold -->
 		</gd_maps>
@@ -203,7 +203,7 @@
 			<gd_item id="110600847" /><!-- Adma Elite's Breastplate -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Rare)" base_chance="80">
+	<gd_rule rule_name="Named Accessory (Rare)" base_chance="80" no_reduction="true">
 		<gd_maps>
 			<gd_map map_id="320130000" /><!-- Adma_Stronghold -->
 		</gd_maps>
@@ -214,7 +214,7 @@
 			<gd_item id="125002032" /><!-- Princess' Crown -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Unique)" base_chance="25">
+	<gd_rule rule_name="Named Accessory (Unique)" base_chance="25" no_reduction="true">
 		<gd_maps>
 			<gd_map map_id="320130000" /><!-- Adma_Stronghold -->
 		</gd_maps>
@@ -226,7 +226,7 @@
 			<gd_item id="120000899" /><!-- Lonely Ruby Earrings -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Unique)" base_chance="25">
+	<gd_rule rule_name="Named Accessory (Unique)" base_chance="25" no_reduction="true">
 		<gd_maps>
 			<gd_map map_id="320130000" /><!-- Adma_Stronghold -->
 		</gd_maps>
@@ -238,7 +238,7 @@
 			<gd_item id="122001036" /><!-- Lonely Ruby Ring -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Unique)" base_chance="25">
+	<gd_rule rule_name="Named Accessory (Unique)" base_chance="25" no_reduction="true">
 		<gd_maps>
 			<gd_map map_id="320130000" /><!-- Adma_Stronghold -->
 		</gd_maps>
@@ -250,7 +250,7 @@
 			<gd_item id="122001037" /><!-- Lonely Sapphire Ring -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Unique)" base_chance="25">
+	<gd_rule rule_name="Named Accessory (Unique)" base_chance="25" no_reduction="true">
 		<gd_maps>
 			<gd_map map_id="320130000" /><!-- Adma_Stronghold -->
 		</gd_maps>
@@ -262,7 +262,7 @@
 			<gd_item id="123000927" /><!-- Karemiwen's Leather Belt -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Unique)" base_chance="30">
+	<gd_rule rule_name="Named Accessory (Unique)" base_chance="30" no_reduction="true">
 		<gd_maps>
 			<gd_map map_id="320130000" /><!-- Adma_Stronghold -->
 		</gd_maps>

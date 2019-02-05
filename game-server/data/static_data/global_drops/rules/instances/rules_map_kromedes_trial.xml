@@ -45,7 +45,7 @@
 			<gd_item id="185000100" /><!-- Dungeon Door Key -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Accessory (Rare)" base_chance="40" no_reduction="true">
 		<gd_maps>
 			<gd_map map_id="300230000" /><!-- Kromedes_Trial -->
 		</gd_maps>
@@ -57,7 +57,7 @@
 			<gd_item id="120001120" /><!-- Corrupt Judge's Aquamarine Earrings -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Legend)" base_chance="20">
+	<gd_rule rule_name="Named Armor (Legend)" base_chance="20" no_reduction="true">
 		<gd_maps>
 			<gd_map map_id="300230000" /><!-- Kromedes_Trial -->
 		</gd_maps>
@@ -73,7 +73,7 @@
 			<gd_item id="111601074" /><!-- Corrupt Judge's Gauntlets -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Accessory (Rare)" base_chance="40" no_reduction="true">
 		<gd_maps>
 			<gd_map map_id="300230000" /><!-- Kromedes_Trial -->
 		</gd_maps>
@@ -85,7 +85,7 @@
 			<gd_item id="121001034" /><!-- Corrupt Judge's Aquamarine Necklace -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Legend)" base_chance="20">
+	<gd_rule rule_name="Named Armor (Legend)" base_chance="20" no_reduction="true">
 		<gd_maps>
 			<gd_map map_id="300230000" /><!-- Kromedes_Trial -->
 		</gd_maps>
@@ -101,7 +101,7 @@
 			<gd_item id="114601054" /><!-- Corrupt Judge's Sabatons -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Accessory (Rare)" base_chance="40" no_reduction="true">
 		<gd_maps>
 			<gd_map map_id="300230000" /><!-- Kromedes_Trial -->
 		</gd_maps>
@@ -113,7 +113,7 @@
 			<gd_item id="122001269" /><!-- Corrupt Judge's Aquamarine Ring -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Legend)" base_chance="20">
+	<gd_rule rule_name="Named Armor (Legend)" base_chance="20" no_reduction="true">
 		<gd_maps>
 			<gd_map map_id="300230000" /><!-- Kromedes_Trial -->
 		</gd_maps>
@@ -129,7 +129,7 @@
 			<gd_item id="112601049" /><!-- Corrupt Judge's Shoulderplates -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Legend)" base_chance="30">
+	<gd_rule rule_name="Named Armor (Legend)" base_chance="30" no_reduction="true">
 		<gd_maps>
 			<gd_map map_id="300230000" /><!-- Kromedes_Trial -->
 		</gd_maps>
@@ -151,7 +151,7 @@
 			<gd_item id="113601058" /><!-- Corrupt Judge's Greaves -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Legend)" base_chance="42">
+	<gd_rule rule_name="Named Accessory (Legend)" base_chance="42" no_reduction="true">
 		<gd_maps>
 			<gd_map map_id="300230000" /><!-- Kromedes_Trial -->
 		</gd_maps>
@@ -165,7 +165,7 @@
 			<gd_item id="125002432" /><!-- Corrupt Judge's Helm -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Legend)" base_chance="65">
+	<gd_rule rule_name="Named Accessory (Legend)" base_chance="65" no_reduction="true">
 		<gd_maps>
 			<gd_map map_id="300230000" /><!-- Kromedes_Trial -->
 		</gd_maps>
@@ -178,7 +178,7 @@
 			<gd_item id="123001334" /><!-- Corrupt Judge's Belt -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Key" base_chance="32.5">
+	<gd_rule rule_name="Named Key" base_chance="32.5" no_reduction="true">
 		<gd_maps>
 			<gd_map map_id="300230000" /><!-- Kromedes_Trial -->
 		</gd_maps>

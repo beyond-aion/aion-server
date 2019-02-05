@@ -14,7 +14,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Single Monster Drops -->
-	<gd_rule rule_name="Named Box (Unique)" base_chance="32.5">
+	<gd_rule rule_name="Named Box (Unique)" base_chance="32.5" no_reduction="true">
 		<gd_maps>
 			<gd_map map_id="300460000" /><!-- Steel_Rake_Cabin -->
 		</gd_maps>
@@ -25,7 +25,7 @@
 			<gd_item id="188051414" /><!-- Mantutu's Fabled Shoe Chest -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="60">
+	<gd_rule rule_name="Named Armor (Rare)" base_chance="60" no_reduction="true">
 		<gd_maps>
 			<gd_map map_id="300460000" /><!-- Steel_Rake_Cabin -->
 		</gd_maps>
@@ -39,7 +39,7 @@
 			<gd_item id="111600851" /><!-- Shulack Sailor's Gauntlets -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="60">
+	<gd_rule rule_name="Named Armor (Rare)" base_chance="60" no_reduction="true">
 		<gd_maps>
 			<gd_map map_id="300460000" /><!-- Steel_Rake_Cabin -->
 		</gd_maps>
@@ -53,7 +53,7 @@
 			<gd_item id="112600825" /><!-- Shulack Sailor's Shoulderplates -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="60">
+	<gd_rule rule_name="Named Armor (Rare)" base_chance="60" no_reduction="true">
 		<gd_maps>
 			<gd_map map_id="300460000" /><!-- Steel_Rake_Cabin -->
 		</gd_maps>
@@ -67,7 +67,7 @@
 			<gd_item id="114600834" /><!-- Shulack Sailor's Sabatons -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="60">
+	<gd_rule rule_name="Named Armor (Rare)" base_chance="60" no_reduction="true">
 		<gd_maps>
 			<gd_map map_id="300460000" /><!-- Steel_Rake_Cabin -->
 		</gd_maps>
@@ -81,7 +81,7 @@
 			<gd_item id="110600874" /><!-- Shulack Sailor's Breastplate -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="60">
+	<gd_rule rule_name="Named Armor (Rare)" base_chance="60" no_reduction="true">
 		<gd_maps>
 			<gd_map map_id="300460000" /><!-- Steel_Rake_Cabin -->
 		</gd_maps>
@@ -95,7 +95,7 @@
 			<gd_item id="113600839" /><!-- Shulack Sailor's Greaves -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Legend)" base_chance="35">
+	<gd_rule rule_name="Named Armor (Legend)" base_chance="35" no_reduction="true">
 		<gd_maps>
 			<gd_map map_id="300460000" /><!-- Steel_Rake_Cabin -->
 		</gd_maps>
@@ -109,7 +109,7 @@
 			<gd_item id="112600824" /><!-- Shulack Pirate's Shoulderplates -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Legend)" base_chance="35">
+	<gd_rule rule_name="Named Armor (Legend)" base_chance="35" no_reduction="true">
 		<gd_maps>
 			<gd_map map_id="300460000" /><!-- Steel_Rake_Cabin -->
 		</gd_maps>
@@ -123,7 +123,7 @@
 			<gd_item id="111600850" /><!-- Shulack Pirate's Gauntlets -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Legend)" base_chance="35">
+	<gd_rule rule_name="Named Armor (Legend)" base_chance="35" no_reduction="true">
 		<gd_maps>
 			<gd_map map_id="300460000" /><!-- Steel_Rake_Cabin -->
 		</gd_maps>
@@ -137,7 +137,7 @@
 			<gd_item id="113600838" /><!-- Shulack Pirate's Greaves -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Legend)" base_chance="35">
+	<gd_rule rule_name="Named Armor (Legend)" base_chance="35" no_reduction="true">
 		<gd_maps>
 			<gd_map map_id="300460000" /><!-- Steel_Rake_Cabin -->
 		</gd_maps>
@@ -151,7 +151,7 @@
 			<gd_item id="114600833" /><!-- Shulack Pirate's Sabatons -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Legend)" base_chance="35">
+	<gd_rule rule_name="Named Armor (Legend)" base_chance="35" no_reduction="true">
 		<gd_maps>
 			<gd_map map_id="300460000" /><!-- Steel_Rake_Cabin -->
 		</gd_maps>
@@ -165,7 +165,7 @@
 			<gd_item id="110600873" /><!-- Shulack Pirate's Breastplate -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Rare)" base_chance="60">
+	<gd_rule rule_name="Named Accessory (Rare)" base_chance="60" no_reduction="true">
 		<gd_maps>
 			<gd_map map_id="300460000" /><!-- Steel_Rake_Cabin -->
 		</gd_maps>
@@ -176,7 +176,7 @@
 			<gd_item id="122001046" /><!-- Bovariki's Ring -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Legend)" base_chance="35">
+	<gd_rule rule_name="Named Accessory (Legend)" base_chance="35" no_reduction="true">
 		<gd_maps>
 			<gd_map map_id="300460000" /><!-- Steel_Rake_Cabin -->
 		</gd_maps>
@@ -187,7 +187,7 @@
 			<gd_item id="123000937" /><!-- Bovariki's Belt -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Unique)" base_chance="30">
+	<gd_rule rule_name="Named Accessory (Unique)" base_chance="30" no_reduction="true">
 		<gd_maps>
 			<gd_map map_id="300460000" /><!-- Steel_Rake_Cabin -->
 		</gd_maps>

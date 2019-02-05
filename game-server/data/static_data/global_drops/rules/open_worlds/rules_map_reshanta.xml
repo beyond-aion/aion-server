@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../global_rules.xsd">
 	<!-- Moltenus -->
-	<gd_rule rule_name="Named Weapon (Epic)" base_chance="100">
+	<gd_rule rule_name="Named Weapon (Epic)" base_chance="100" no_reduction="true">
 		<gd_maps>
 			<gd_map map_id="400010000" /><!-- Reshanta -->
 		</gd_maps>
@@ -25,7 +25,7 @@
 			<gd_item id="115001427" /><!-- Moltenus' Shield -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Enchantment Stone" base_chance="100" member_limit="192">
+	<gd_rule rule_name="Named Enchantment Stone" base_chance="100" member_limit="192" no_reduction="true">
 		<gd_maps>
 			<gd_map map_id="400010000" /><!-- Reshanta -->
 		</gd_maps>
@@ -37,7 +37,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Menotios -->
-	<gd_rule rule_name="Named Weapon (Unique)" base_chance="100">
+	<gd_rule rule_name="Named Weapon (Unique)" base_chance="100" no_reduction="true">
 		<gd_maps>
 			<gd_map map_id="400010000" /><!-- Reshanta -->
 		</gd_maps>
@@ -60,7 +60,7 @@
 			<gd_item id="102100299" /><!-- Menotios' Cipher-Blade -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Unique)" base_chance="100">
+	<gd_rule rule_name="Named Armor (Unique)" base_chance="100" no_reduction="true">
 		<gd_maps>
 			<gd_map map_id="400010000" /><!-- Reshanta -->
 		</gd_maps>
@@ -74,7 +74,7 @@
 			<gd_item id="110600513" /><!-- Menotios' Breastplate -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Unique)" base_chance="10">
+	<gd_rule rule_name="Named Accessory (Unique)" base_chance="10" no_reduction="true">
 		<gd_maps>
 			<gd_map map_id="400010000" /><!-- Reshanta -->
 		</gd_maps>
@@ -85,7 +85,7 @@
 			<gd_item id="123000656" /><!-- Menotios' Belt -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Legend)" base_chance="20">
+	<gd_rule rule_name="Named Accessory (Legend)" base_chance="20" no_reduction="true">
 		<gd_maps>
 			<gd_map map_id="400010000" /><!-- Reshanta -->
 		</gd_maps>

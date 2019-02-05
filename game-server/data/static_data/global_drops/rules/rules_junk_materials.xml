@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../global_rules.xsd">
-	<gd_rule rule_name="JUNK_AGRINT_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_AGRINT_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182003823" /><!-- Rotten Agrint Root -->
 			<gd_item id="182003824" /><!-- Wilted Agrint Root -->
@@ -28,7 +28,7 @@
 			<gd_world wd_type="ELYSEA" />
 		</gd_worlds>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_A_AGRINT_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_A_AGRINT_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182003473" /><!-- Desiccated Root -->
 			<gd_item id="182003474" /><!-- Moist Root -->
@@ -49,7 +49,7 @@
 			<gd_world wd_type="PANESTERRA" />
 		</gd_worlds>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_AGRINT02_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_AGRINT02_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182006333" /><!-- Enos' Heart Powder -->
 			<gd_item id="182006334" /><!-- Shattered Enos Heart -->
@@ -68,7 +68,7 @@
 			<gd_npc_group group="AGRINT_GHOSTELIM" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_BAKU_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_BAKU_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182003833" /><!-- Baku Bone Powder -->
 			<gd_item id="182003834" /><!-- Crushed Baku Bone Fragment -->
@@ -87,7 +87,7 @@
 			<gd_npc_group group="BAKU" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_BANSHEE_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_BANSHEE_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182003843" /><!-- Tattered Banshee Clothes -->
 			<gd_item id="182003844" /><!-- Shabby Banshee Clothes -->
@@ -106,7 +106,7 @@
 			<gd_npc_group group="BANSHEE" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_BASILISK_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_BASILISK_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182003853" /><!-- Basilisk Bone Powder -->
 			<gd_item id="182003854" /><!-- Crushed Basilisk Bone Fragment -->
@@ -125,7 +125,7 @@
 			<gd_npc_group group="BASILISK" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_BAT_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_BAT_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182003863" /><!-- Bloodwing Claw Fragment -->
 			<gd_item id="182003864" /><!-- Broken Bloodwing Claw -->
@@ -144,7 +144,7 @@
 			<gd_npc_group group="BAT" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_BEE_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_BEE_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182006188" /><!-- Fragmented Bee Wing -->
 			<gd_item id="182006189" /><!-- Tattered Bee Wing -->
@@ -163,7 +163,7 @@
 			<gd_npc_group group="BEES" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_BEHOLDER_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_BEHOLDER_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182003873" /><!-- Tattered Overlord Leather -->
 			<gd_item id="182003874" /><!-- Rough Overlord Leather -->
@@ -182,7 +182,7 @@
 			<gd_npc_group group="BEHOLDER" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_BIGHANDS_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_BIGHANDS_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182006672" /><!-- Tyrhund Fingernail -->
 			<gd_item id="182006673" /><!-- Tyrhund Fingernail -->
@@ -201,7 +201,7 @@
 			<gd_npc_group group="MAGICHANDS" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_BONEDRAKE_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_BONEDRAKE_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182003883" /><!-- Bonedrake Bone Powder -->
 			<gd_item id="182003884" /><!-- Crushed Bonedrake Bone Fragment -->
@@ -229,7 +229,7 @@
 			<gd_world wd_type="STEEL_RAKE_INSTANCE" />
 		</gd_worlds>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_A_BONEDRAKE_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_A_BONEDRAKE_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182003479" /><!-- Worn Claw -->
 			<gd_item id="182003480" /><!-- Crooked Claw -->
@@ -249,7 +249,7 @@
 			<gd_world wd_type="PANESTERRA" />
 		</gd_worlds>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_BOOKIE_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_BOOKIE_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182003893" /><!-- Tattered Boggart Cloak -->
 			<gd_item id="182003894" /><!-- Shabby Boggart Cloak -->
@@ -268,7 +268,7 @@
 			<gd_npc_group group="BOOKIE" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_BOOKIE_CRK_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_BOOKIE_CRK_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182006068" /><!-- Broken Puca Soul -->
 			<gd_item id="182006069" /><!-- Shattered Puca Soul -->
@@ -287,7 +287,7 @@
 			<gd_npc_group group="BOOKIE_FAIRY" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_BRAX_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_BRAX_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182003903" /><!-- Brax Bone Powder -->
 			<gd_item id="182003904" /><!-- Crushed Brax Bone Fragment -->
@@ -306,7 +306,7 @@
 			<gd_npc_group group="BRAX" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_BRAXBABY_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_BRAXBABY_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182003913" /><!-- Tattered Braxie Leather -->
 			<gd_item id="182003914" /><!-- Rough Braxie Leather -->
@@ -325,7 +325,7 @@
 			<gd_npc_group group="BRAXBABY" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_BROHUM_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_BROHUM_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182005297" /><!-- Motheaten Brohum Mane -->
 			<gd_item id="182005298" /><!-- Dirty Brohum Mane -->
@@ -345,7 +345,7 @@
 			<gd_npc_group group="BROHUM_M" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_CALYDON_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_CALYDON_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182005287" /><!-- Calydon Tusk Fragment -->
 			<gd_item id="182005288" /><!-- Broken Calydon Tusk -->
@@ -367,7 +367,7 @@
 			<gd_npc_group group="CALYDON_PRIEST" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_CATOS_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_CATOS_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182003923" /><!-- Keraton Claw Fragment -->
 			<gd_item id="182003924" /><!-- Broken Keraton Claw -->
@@ -386,7 +386,7 @@
 			<gd_npc_group group="CATOS" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_CELLATU_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_CELLATU_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182005327" /><!-- Cellatu Scale Fragment -->
 			<gd_item id="182005328" /><!-- Tattered Cellatu Scale -->
@@ -405,7 +405,7 @@
 			<gd_npc_group group="CELLATU" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_CENTIPEDE_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_CENTIPEDE_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182003933" /><!-- Tattered Laupede Leg -->
 			<gd_item id="182003934" /><!-- Rotten Laupede Leg -->
@@ -424,7 +424,7 @@
 			<gd_npc_group group="CENTIPEDE" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_CHERUBIM1_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_CHERUBIM1_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182003943" /><!-- Kerub Scale Fragment -->
 			<gd_item id="182003944" /><!-- Tattered Kerub Scale -->
@@ -443,7 +443,7 @@
 			<gd_npc_group group="CHERUBIM" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_CHERUBIM2_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_CHERUBIM2_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182003953" /><!-- Tattered Kerubian Leather -->
 			<gd_item id="182003954" /><!-- Rough Kerubian Leather -->
@@ -462,7 +462,7 @@
 			<gd_npc_group group="CHERUBIM2" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_CHERUBIM3_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_CHERUBIM3_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182003963" /><!-- Kerubiel Carapace Fragment -->
 			<gd_item id="182003964" /><!-- Broken Kerubiel Carapace -->
@@ -481,7 +481,7 @@
 			<gd_npc_group group="CHERUBIM3" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_CHERUBIM4_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_CHERUBIM4_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182003973" /><!-- Tattered Arch Kerubiel Pelt -->
 			<gd_item id="182003974" /><!-- Rough Arch Kerubiel Pelt -->
@@ -500,7 +500,7 @@
 			<gd_npc_group group="CHERUBIM4" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_CHIMERA_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_CHIMERA_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182006576" /><!-- Chimera Claw -->
 			<gd_item id="182006577" /><!-- Chimera Claw -->
@@ -519,7 +519,7 @@
 			<gd_npc_group group="CHIMERA" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_CLODWORM_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_CLODWORM_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182003983" /><!-- Rotten Clodworm Meat -->
 			<gd_item id="182003984" /><!-- Decayed Clodworm Meat -->
@@ -538,7 +538,7 @@
 			<gd_npc_group group="CLODWORM" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_COCKATRICE_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_COCKATRICE_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182003993" /><!-- Pecku Claw Fragment -->
 			<gd_item id="182003994" /><!-- Broken Pecku Claw -->
@@ -557,7 +557,7 @@
 			<gd_npc_group group="COCKATRICE" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_CONDOR_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_CONDOR_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182004003" /><!-- Broken Claw Fragment -->
 			<gd_item id="182004004" /><!-- Broken Claw -->
@@ -576,7 +576,7 @@
 			<gd_npc_group group="CONDOR" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_CORN_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_CORN_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182005193" /><!-- Rotten Frightcorn Root -->
 			<gd_item id="182005194" /><!-- Wilted Frightcorn Root -->
@@ -595,7 +595,7 @@
 			<gd_npc_group group="CORN" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_CRESTLICH_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_CRESTLICH_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182004013" /><!-- Crestlich Bone Powder -->
 			<gd_item id="182004014" /><!-- Crushed Crestlich Bone Fragment -->
@@ -614,7 +614,7 @@
 			<gd_npc_group group="CRESTLICH" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_CRITON_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_CRITON_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182004023" /><!-- Crynac Scale Fragment -->
 			<gd_item id="182004024" /><!-- Tattered Crynac Scale -->
@@ -633,7 +633,7 @@
 			<gd_npc_group group="CRITON" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_CURES_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_CURES_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182004033" /><!-- Tattered Kurin Leather -->
 			<gd_item id="182004034" /><!-- Rough Kurin Leather -->
@@ -652,7 +652,7 @@
 			<gd_npc_group group="CURES" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_CYCLOPS_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_CYCLOPS_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182004043" /><!-- Crushed Petrahulk Fragment -->
 			<gd_item id="182004044" /><!-- Useless Petrahulk Fragment -->
@@ -671,7 +671,7 @@
 			<gd_npc_group group="CYCLOPS" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_D2_DRAGON_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_D2_DRAGON_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182006393" /><!-- Broken Balaur Scale Fragment -->
 			<gd_item id="182006394" /><!-- Cracked Balaur Scale Fragment -->
@@ -697,7 +697,7 @@
 			<gd_npc_group group="DRAGONTOOTH" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_D3_DARK_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_D3_DARK_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182003723" /><!-- Archon Recruit Rank Pin -->
 			<gd_item id="182003724" /><!-- Archon Soldier Rank Pin -->
@@ -716,7 +716,7 @@
 			<gd_npc_group group="DARK" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_D3_DRAKAN_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_D3_DRAKAN_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182003783" /><!-- Drakan Recruit Crest -->
 			<gd_item id="182003784" /><!-- Drakan Soldier Crest -->
@@ -757,7 +757,7 @@
 			<gd_npc_group group="DRAKANSPELL" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_D3_GURURU_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_D3_GURURU_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182006612" /><!-- Gurriki Fluid -->
 			<gd_item id="182006613" /><!-- Gurriki Fluid -->
@@ -779,7 +779,7 @@
 			<gd_npc_group group="GURURUWIZARD" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_D3_HUMAN_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_D3_HUMAN_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182003813" /><!-- Tattered Pouch -->
 			<gd_item id="182003814" /><!-- Shabby Pouch -->
@@ -798,7 +798,7 @@
 			<gd_npc_group group="HUMAN" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_D3_KRALL_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_D3_KRALL_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182003753" /><!-- Broken Krall Armor -->
 			<gd_item id="182003754" /><!-- Rusted Krall Armor -->
@@ -819,7 +819,7 @@
 			<gd_npc_group group="KRALLWARRIOR" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_D3_LEHPAR_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_D3_LEHPAR_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182003733" /><!-- Rusted Lepharist Insignia -->
 			<gd_item id="182003734" /><!-- Damaged Lepharist Insignia -->
@@ -838,7 +838,7 @@
 			<gd_npc_group group="LEPHAR" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_D3_LIGHT_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_D3_LIGHT_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182003713" /><!-- Guardian Recruit Rank Pin -->
 			<gd_item id="182003714" /><!-- Guardian Soldier Rank Pin -->
@@ -857,7 +857,7 @@
 			<gd_npc_group group="LIGHT" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_D3_LIZARDMAN_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_D3_LIZARDMAN_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182003793" /><!-- Broken Draconute Armor -->
 			<gd_item id="182003794" /><!-- Rusted Draconute Armor -->
@@ -880,7 +880,7 @@
 			<gd_npc_group group="LIZARDMANWIZARD" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_D3_LYCAN_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_D3_LYCAN_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182003763" /><!-- Broken Mau Armor -->
 			<gd_item id="182003764" /><!-- Rusted Mau Armor -->
@@ -900,7 +900,7 @@
 			<gd_npc_group group="LYCANM" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_D3_NAGA_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_D3_NAGA_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182003803" /><!-- Naga Scale Fragment -->
 			<gd_item id="182003804" /><!-- Tattered Naga Scale -->
@@ -923,7 +923,7 @@
 			<gd_npc_group group="NAGAWIZCH1" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_D3_NAGAGUARD_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_D3_NAGAGUARD_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182006516" /><!-- Nagarant Scale -->
 			<gd_item id="182006517" /><!-- Nagarant Scale -->
@@ -942,7 +942,7 @@
 			<gd_npc_group group="NAGAWARRIOR" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_D3_OWLLAU_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_D3_OWLLAU_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182006212" /><!-- Broken Strigik Feather -->
 			<gd_item id="182006213" /><!-- Tattered Strigik Feather -->
@@ -964,7 +964,7 @@
 			<gd_npc_group group="OWLLAUWIZARD" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_D3_RATMAN_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_D3_RATMAN_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182003773" /><!-- Tattered Herb Sack -->
 			<gd_item id="182003774" /><!-- Shabby Herb Sack -->
@@ -987,7 +987,7 @@
 			<gd_npc_group group="RATMANWIZARDM" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_D3_SHULACK_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_D3_SHULACK_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182005442" /><!-- Broken Compass -->
 			<gd_item id="182005443" /><!-- Unscrewed Compass -->
@@ -1015,7 +1015,7 @@
 			<gd_npc_group group="SHULACKWIZARD" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_D3_SHULACK2_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_D3_SHULACK2_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182006248" /><!-- Tattered Pouch -->
 			<gd_item id="182006249" /><!-- Shabby Pouch -->
@@ -1043,7 +1043,7 @@
 			<gd_npc_group group="SHULACKWIZARD" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_D3_YUN_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_D3_YUN_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182006540" /><!-- Reian Seal -->
 			<gd_item id="182006541" /><!-- Reian Seal -->
@@ -1062,7 +1062,7 @@
 			<gd_npc_group group="ANCIENTCLAN" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_DARU_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_DARU_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182004053" /><!-- Tattered Daru Leather -->
 			<gd_item id="182004054" /><!-- Rough Daru Leather -->
@@ -1081,7 +1081,7 @@
 			<gd_npc_group group="DARU" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_DEATHKNIGHT_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_DEATHKNIGHT_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182004063" /><!-- Broken Equitatus Armor -->
 			<gd_item id="182004064" /><!-- Rusted Equitatus Armor -->
@@ -1100,7 +1100,7 @@
 			<gd_npc_group group="DEATHKNIGHT" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_DEBRIE_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_DEBRIE_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182004073" /><!-- Tattered Ribbit Leg -->
 			<gd_item id="182004074" /><!-- Decayed Ribbit Leg -->
@@ -1119,7 +1119,7 @@
 			<gd_npc_group group="DEBRIE" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_DIONAEA_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_DIONAEA_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182005307" /><!-- Rotten Dionae Root -->
 			<gd_item id="182005308" /><!-- Wilted Dionae Root -->
@@ -1138,7 +1138,7 @@
 			<gd_npc_group group="DIONAEA" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_DIREBEAST_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_DIREBEAST_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182004083" /><!-- Tayga Bone Powder -->
 			<gd_item id="182004084" /><!-- Crushed Tayga Bone Fragment -->
@@ -1157,7 +1157,7 @@
 			<gd_npc_group group="DIREBEAST" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_DISPLACER_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_DISPLACER_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182004093" /><!-- Tattered Maeki Leather -->
 			<gd_item id="182004094" /><!-- Rough Maeki Leather -->
@@ -1176,7 +1176,7 @@
 			<gd_npc_group group="DISPLACERBEAST" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_DRAGONFLY_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_DRAGONFLY_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182006044" /><!-- Leowasp Fragment Scale -->
 			<gd_item id="182006045" /><!-- Tattered Leowasp Scale -->
@@ -1195,7 +1195,7 @@
 			<gd_npc_group group="DRAGONFLY" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_DRAGONSNAKE_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_DRAGONSNAKE_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182006200" /><!-- Serrator Fragment Scale -->
 			<gd_item id="182006201" /><!-- Tattered Serrator Scale -->
@@ -1214,7 +1214,7 @@
 			<gd_npc_group group="DRAGONSNAKE" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_DRAKAN_WORKER_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_DRAKAN_WORKER_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182006128" /><!-- Dracuni Fragment Claw -->
 			<gd_item id="182006129" /><!-- Broken Dracuni Claw -->
@@ -1233,7 +1233,7 @@
 			<gd_npc_group group="DRAKAN_WORKER" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_DRAKE_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_DRAKE_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182004103" /><!-- Drake Claw Fragment -->
 			<gd_item id="182004104" /><!-- Broken Drake Claw -->
@@ -1262,7 +1262,7 @@
 			<gd_world wd_type="STEEL_RAKE_INSTANCE" />
 		</gd_worlds>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_A_DRAKE_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_A_DRAKE_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182003485" /><!-- Broken Bone -->
 			<gd_item id="182003486" /><!-- Cracked Bone -->
@@ -1282,7 +1282,7 @@
 			<gd_world wd_type="PANESTERRA" />
 		</gd_worlds>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_DRAKY_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_DRAKY_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182004113" /><!-- Drakie Tooth Fragment -->
 			<gd_item id="182004114" /><!-- Broken Drakie Tooth -->
@@ -1301,7 +1301,7 @@
 			<gd_npc_group group="DRAKY" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_DRITON_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_DRITON_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182004123" /><!-- Skyray Bone Powder -->
 			<gd_item id="182004124" /><!-- Crushed Skyray Bone Fragment -->
@@ -1320,7 +1320,7 @@
 			<gd_npc_group group="DRITON" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_DRYNAC_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_DRYNAC_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182004133" /><!-- Drynac Bone Powder -->
 			<gd_item id="182004134" /><!-- Crushed Drynac Bone Fragment -->
@@ -1339,7 +1339,7 @@
 			<gd_npc_group group="DRYNAC" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_ELEMENTALAIR_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_ELEMENTALAIR_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182004143" /><!-- Crushed Wind Fragment -->
 			<gd_item id="182004144" /><!-- Useless Wind Fragment -->
@@ -1372,7 +1372,7 @@
 			<gd_world wd_type="STEEL_RAKE_INSTANCE" />
 		</gd_worlds>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_A_ELEMENTALAIR_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_A_ELEMENTALAIR_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182003491" /><!-- Wind Fragment -->
 			<gd_item id="182003492" /><!-- Coarse Wind Fragment -->
@@ -1396,7 +1396,7 @@
 			<gd_world wd_type="PANESTERRA" />
 		</gd_worlds>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_ELEMENTALEARTH_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_ELEMENTALEARTH_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182004153" /><!-- Crushed Earth Fragment -->
 			<gd_item id="182004154" /><!-- Useless Earth Fragment -->
@@ -1429,7 +1429,7 @@
 			<gd_world wd_type="STEEL_RAKE_INSTANCE" />
 		</gd_worlds>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_A_ELEMENTALEARTH_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_A_ELEMENTALEARTH_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182003509" /><!-- Earth Fragment -->
 			<gd_item id="182003510" /><!-- Coarse Earth Fragment -->
@@ -1453,7 +1453,7 @@
 			<gd_world wd_type="PANESTERRA" />
 		</gd_worlds>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_ELEMENTALFIRE_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_ELEMENTALFIRE_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182004163" /><!-- Crushed Fire Fragment -->
 			<gd_item id="182004164" /><!-- Useless Fire Fragment -->
@@ -1486,7 +1486,7 @@
 			<gd_world wd_type="STEEL_RAKE_INSTANCE" />
 		</gd_worlds>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_A_ELEMENTALFIRE_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_A_ELEMENTALFIRE_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182003497" /><!-- Fire Fragment -->
 			<gd_item id="182003498" /><!-- Coarse Fire Fragment -->
@@ -1510,7 +1510,7 @@
 			<gd_world wd_type="PANESTERRA" />
 		</gd_worlds>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_ELEMENTALWATER_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_ELEMENTALWATER_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182004173" /><!-- Crushed Water Essence -->
 			<gd_item id="182004174" /><!-- Rotten Water Essence -->
@@ -1543,7 +1543,7 @@
 			<gd_world wd_type="STEEL_RAKE_INSTANCE" />
 		</gd_worlds>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_A_ELEMENTALWATER_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_A_ELEMENTALWATER_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182003503" /><!-- Water Essence -->
 			<gd_item id="182003504" /><!-- Fresh Water Essence -->
@@ -1567,7 +1567,7 @@
 			<gd_world wd_type="PANESTERRA" />
 		</gd_worlds>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_ETTIN_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_ETTIN_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182004183" /><!-- Ettin Claw Fragment -->
 			<gd_item id="182004184" /><!-- Broken Ettin Claw -->
@@ -1586,7 +1586,7 @@
 			<gd_npc_group group="ETTIN" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_EVILEYE_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_EVILEYE_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182005337" /><!-- Ashulagen Quartz Powder -->
 			<gd_item id="182005338" /><!-- Broken Ashulagen Quartz -->
@@ -1615,7 +1615,7 @@
 			<gd_world wd_type="STEEL_RAKE_INSTANCE" />
 		</gd_worlds>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_A_EVILEYE_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_A_EVILEYE_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182003515" /><!-- Broken Lens -->
 			<gd_item id="182003516" /><!-- Intact Lens -->
@@ -1635,7 +1635,7 @@
 			<gd_world wd_type="PANESTERRA" />
 		</gd_worlds>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_FANATICPET_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_FANATICPET_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182005881" /><!-- Manticore Claw Fragment -->
 			<gd_item id="182005882" /><!-- Broken Manticore Claw -->
@@ -1654,7 +1654,7 @@
 			<gd_npc_group group="FANATIC_PET" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_FELLIAL_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_FELLIAL_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182004193" /><!-- Broken Moonflower Thorn -->
 			<gd_item id="182004194" /><!-- Cracked Moonflower Thorn -->
@@ -1673,7 +1673,7 @@
 			<gd_npc_group group="FELLIAL" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_FENNECFOX_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_FENNECFOX_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182006648" /><!-- Nojolf Claw -->
 			<gd_item id="182006649" /><!-- Nojolf Claw -->
@@ -1692,7 +1692,7 @@
 			<gd_npc_group group="FOX" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_FETHLOT_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_FETHLOT_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182004203" /><!-- Abex Hoof Fragment -->
 			<gd_item id="182004204" /><!-- Broken Abex Hoof -->
@@ -1711,7 +1711,7 @@
 			<gd_npc_group group="FETHLOT" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_FETHLOT_HIGHLAND_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_FETHLOT_HIGHLAND_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182006176" /><!-- Tattered Caprex Leather -->
 			<gd_item id="182006177" /><!-- Rough Caprex Leather -->
@@ -1730,7 +1730,7 @@
 			<gd_npc_group group="FETHLOT_CAPREX" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_FLYINGEYE_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_FLYINGEYE_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182004213" /><!-- Tattered Oculazen Leather -->
 			<gd_item id="182004214" /><!-- Rough Oculazen Leather -->
@@ -1759,7 +1759,7 @@
 			<gd_world wd_type="STEEL_RAKE_INSTANCE" />
 		</gd_worlds>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_A_FLYINGEYE_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_A_FLYINGEYE_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182003521" /><!-- Broken Crystal -->
 			<gd_item id="182003522" /><!-- Intact Crystal -->
@@ -1779,7 +1779,7 @@
 			<gd_world wd_type="PANESTERRA" />
 		</gd_worlds>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_FLYINGFOAM_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_FLYINGFOAM_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182005093" /><!-- Water Crystal Powder -->
 			<gd_item id="182005094" /><!-- Faded Water Crystal -->
@@ -1798,7 +1798,7 @@
 			<gd_npc_group group="FOAM" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_FLYINGWORM_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_FLYINGWORM_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182006309" /><!-- Broken Lapilima Soul -->
 			<gd_item id="182006310" /><!-- Shattered Lapilima Soul -->
@@ -1817,7 +1817,7 @@
 			<gd_npc_group group="FLYINGWORM" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_FOAM_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_FOAM_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182006164" /><!-- Stinking Seafoam Fluid -->
 			<gd_item id="182006165" /><!-- Tidal Seafoam Fluid -->
@@ -1836,7 +1836,7 @@
 			<gd_npc_group group="FOAM" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_FOAM_SPRING_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_FOAM_SPRING_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182006552" /><!-- Seafoam Soul -->
 			<gd_item id="182006553" /><!-- Seafoam Soul -->
@@ -1855,7 +1855,7 @@
 			<gd_npc_group group="FOAM" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_FRILLFAIMAM_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_FRILLFAIMAM_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182004223" /><!-- Frillneck's Bone Powder -->
 			<gd_item id="182004224" /><!-- Crushed Frillneck Bone Fragment -->
@@ -1874,7 +1874,7 @@
 			<gd_npc_group group="FRILLFAIMAM" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_FRILLFAIMAMBABY_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_FRILLFAIMAMBABY_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182004233" /><!-- Frillneck Hatchling Claw Fragment -->
 			<gd_item id="182004234" /><!-- Broken Frillneck Hatchling Claw -->
@@ -1893,7 +1893,7 @@
 			<gd_npc_group group="FRILLFAIMAM_BABY" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_FRILLFAIMAMSWAMP_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_FRILLFAIMAMSWAMP_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182005237" /><!-- Orfaimam Claw Fragment -->
 			<gd_item id="182005238" /><!-- Broken Orfaimam Claw -->
@@ -1912,7 +1912,7 @@
 			<gd_npc_group group="FRILLFAIMAM_SWAMP" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_FUNGUS_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_FUNGUS_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182004243" /><!-- Tattered Spore Pouch -->
 			<gd_item id="182004244" /><!-- Shabby Spore Pouch -->
@@ -1931,7 +1931,7 @@
 			<gd_npc_group group="FUNGUS" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_FUNGY_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_FUNGY_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182004253" /><!-- Stinking Fungie Fluid -->
 			<gd_item id="182004254" /><!-- Sticky Fungie Fluid -->
@@ -1960,7 +1960,7 @@
 			<gd_world wd_type="STEEL_RAKE_INSTANCE" />
 		</gd_worlds>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_A_FUNGY_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_A_FUNGY_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182003527" /><!-- Broken Hoverstone -->
 			<gd_item id="182003528" /><!-- Intact Hoverstone -->
@@ -1980,7 +1980,7 @@
 			<gd_world wd_type="PANESTERRA" />
 		</gd_worlds>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_FUNGY_DR_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_FUNGY_DR_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182006032" /><!-- Broken Mookie Needle -->
 			<gd_item id="182006033" /><!-- Cracked Mookie Needle -->
@@ -1999,7 +1999,7 @@
 			<gd_npc_group group="FUNGY_MOOKIE" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_GARGOYLE_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_GARGOYLE_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182004263" /><!-- Crushed Gargoyle Fragment -->
 			<gd_item id="182004264" /><!-- Useless Gargoyle Fragment -->
@@ -2028,7 +2028,7 @@
 			<gd_world wd_type="STEEL_RAKE_INSTANCE" />
 		</gd_worlds>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_A_GARGOYLE_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_A_GARGOYLE_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182003533" /><!-- Shabby Fragment -->
 			<gd_item id="182003534" /><!-- Coarse Fragment -->
@@ -2048,7 +2048,7 @@
 			<gd_world wd_type="PANESTERRA" />
 		</gd_worlds>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_GHOST_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_GHOST_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182004273" /><!-- Tattered Ghost Rags -->
 			<gd_item id="182004274" /><!-- Shabby Ghost Rags -->
@@ -2067,7 +2067,7 @@
 			<gd_npc_group group="GHOST" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_GHOSTELIM_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_GHOSTELIM_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182005392" /><!-- Crushed Elim Soul -->
 			<gd_item id="182005393" /><!-- Useless Elim Soul -->
@@ -2086,7 +2086,7 @@
 			<gd_npc_group group="AGRINT_GHOSTELIM" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_GIANTDEER_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_GIANTDEER_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182005113" /><!-- Crushed Granker Horn -->
 			<gd_item id="182005114" /><!-- Granker Horn Fragment -->
@@ -2115,7 +2115,7 @@
 			<gd_world wd_type="STEEL_RAKE_INSTANCE" />
 		</gd_worlds>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_A_GIANTDEER_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_A_GIANTDEER_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182003539" /><!-- Cracked Granker Horn -->
 			<gd_item id="182003540" /><!-- Worn Granker Horn -->
@@ -2135,7 +2135,7 @@
 			<gd_world wd_type="PANESTERRA" />
 		</gd_worlds>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_GOLEM_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_GOLEM_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182006224" /><!-- Broken Soul -->
 			<gd_item id="182006225" /><!-- Shattered Soul -->
@@ -2154,7 +2154,7 @@
 			<gd_npc_group group="GOLEM" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_GORGON_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_GORGON_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182004283" /><!-- Gorgon Hoof Fragment -->
 			<gd_item id="182004284" /><!-- Broken Gorgon Hoof -->
@@ -2173,7 +2173,7 @@
 			<gd_npc_group group="GORGON" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_GORGONBABY_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_GORGONBABY_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182005123" /><!-- Crushed Crystal Horn -->
 			<gd_item id="182005124" /><!-- Crystal Horn Fragment -->
@@ -2192,7 +2192,7 @@
 			<gd_npc_group group="GORGON_BABY" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_GRAVEKNIGHT_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_GRAVEKNIGHT_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182004293" /><!-- Bone Powder -->
 			<gd_item id="182004294" /><!-- Crushed Bone Piece -->
@@ -2221,7 +2221,7 @@
 			<gd_world wd_type="STEEL_RAKE_INSTANCE" />
 		</gd_worlds>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_A_GRAVEKNIGHT_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_A_GRAVEKNIGHT_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182003545" /><!-- Old Armor -->
 			<gd_item id="182003546" /><!-- Oiled Armor -->
@@ -2241,7 +2241,7 @@
 			<gd_world wd_type="PANESTERRA" />
 		</gd_worlds>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_GRIFFO_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_GRIFFO_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182004303" /><!-- Griffo Claw Fragment -->
 			<gd_item id="182004304" /><!-- Broken Griffo Claw -->
@@ -2260,7 +2260,7 @@
 			<gd_npc_group group="GRIFFO" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_GRIFFON_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_GRIFFON_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182004313" /><!-- Tattered Griffon Leather -->
 			<gd_item id="182004314" /><!-- Rough Griffon Leather -->
@@ -2279,7 +2279,7 @@
 			<gd_npc_group group="GRIFFON" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_GRIFFON_DR_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_GRIFFON_DR_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182006056" /><!-- Broken Manticore Fang -->
 			<gd_item id="182006057" /><!-- Cracked Manticore Fang -->
@@ -2298,7 +2298,7 @@
 			<gd_npc_group group="DIREBEAST_FANATIC" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_GUARDIAN_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_GUARDIAN_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182006504" /><!-- Defender Soul -->
 			<gd_item id="182006505" /><!-- Defender Soul -->
@@ -2317,7 +2317,7 @@
 			<gd_npc_group group="GUARDIAN" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_HARPY_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_HARPY_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182004323" /><!-- Virago Claw Fragment -->
 			<gd_item id="182004324" /><!-- Broken Virago Claw -->
@@ -2336,7 +2336,7 @@
 			<gd_npc_group group="HARPY" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_HELLHOUND_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_HELLHOUND_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182004333" /><!-- Barghest Claw Fragment -->
 			<gd_item id="182004334" /><!-- Broken Barghest Claw -->
@@ -2355,7 +2355,7 @@
 			<gd_npc_group group="HELLHOUND" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_HEXIGG_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_HEXIGG_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182004343" /><!-- Tattered Buffalid Leather -->
 			<gd_item id="182004344" /><!-- Rough Buffalid Leather -->
@@ -2374,7 +2374,7 @@
 			<gd_npc_group group="HEXIGG" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_HIIV_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_HIIV_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182004353" /><!-- Airon Claw Fragment -->
 			<gd_item id="182004354" /><!-- Broken Airon Claw -->
@@ -2393,7 +2393,7 @@
 			<gd_npc_group group="HIIV" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_HIPPOLIZARD_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_HIPPOLIZARD_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182004363" /><!-- Tattered Tipolid Leather -->
 			<gd_item id="182004364" /><!-- Rough Tipolid Leather -->
@@ -2412,7 +2412,7 @@
 			<gd_npc_group group="HIPPOLIZARD" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_HOLYSERVANT_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_HOLYSERVANT_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182005133" /><!-- Malekor Crystal Powder -->
 			<gd_item id="182005134" /><!-- Broken Malekor Crystal -->
@@ -2431,7 +2431,7 @@
 			<gd_npc_group group="MALEKOR" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_KALNIF_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_KALNIF_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182004373" /><!-- Karnif Claw Fragment -->
 			<gd_item id="182004374" /><!-- Broken Karnif Claw -->
@@ -2450,7 +2450,7 @@
 			<gd_npc_group group="KALNIF" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_KOMADE_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_KOMADE_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182005921" /><!-- (Komade Item) -->
 			<gd_item id="182005922" /><!-- (Komade Item) -->
@@ -2469,7 +2469,7 @@
 			<gd_npc_group group="COMAD" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_KUILLUS_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_KUILLUS_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182004383" /><!-- Kirrin Claw Fragment -->
 			<gd_item id="182004384" /><!-- Broken Kirrin Claw -->
@@ -2488,7 +2488,7 @@
 			<gd_npc_group group="KUILLUS" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_KUILLUS_CRK_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_KUILLUS_CRK_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182005972" /><!-- Piece of Neokin Claw -->
 			<gd_item id="182005973" /><!-- Broken Neokin Claw -->
@@ -2507,7 +2507,7 @@
 			<gd_npc_group group="KUILLUS_FEELER" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_LEPISMA_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_LEPISMA_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182004393" /><!-- Slink Bone Powder -->
 			<gd_item id="182004394" /><!-- Crushed Slink Bone Fragment -->
@@ -2526,7 +2526,7 @@
 			<gd_npc_group group="LEPISMA" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_LF4_ETTIN_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_LF4_ETTIN_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182006152" /><!-- Rotten Crettin Root -->
 			<gd_item id="182006153" /><!-- Wilted Crettin Root -->
@@ -2545,7 +2545,7 @@
 			<gd_npc_group group="ETTIN_NAKED" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_LICH_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_LICH_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182004403" /><!-- Lich Bone Powder -->
 			<gd_item id="182004404" /><!-- Crushed Lich Bone Fragment -->
@@ -2564,7 +2564,7 @@
 			<gd_npc_group group="LICH" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_LOBNITE_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_LOBNITE_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182004413" /><!-- Tattered Lobnite Leg -->
 			<gd_item id="182004414" /><!-- Rotten Lobnite Leg -->
@@ -2583,7 +2583,7 @@
 			<gd_npc_group group="LOBNITE" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_LOBSTER_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_LOBSTER_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182004423" /><!-- Spiner Bone Powder -->
 			<gd_item id="182004424" /><!-- Crushed Spiner Bone Fragment -->
@@ -2602,7 +2602,7 @@
 			<gd_npc_group group="LOBSTER" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_LUPYLLINI_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_LUPYLLINI_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182004433" /><!-- Pluma Claw Fragment -->
 			<gd_item id="182004434" /><!-- Broken Pluma Claw -->
@@ -2631,7 +2631,7 @@
 			<gd_world wd_type="STEEL_RAKE_INSTANCE" />
 		</gd_worlds>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_A_LUPYLLINI_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_A_LUPYLLINI_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182003551" /><!-- Stiff Feather -->
 			<gd_item id="182003552" /><!-- Soft Feather -->
@@ -2651,7 +2651,7 @@
 			<gd_world wd_type="PANESTERRA" />
 		</gd_worlds>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_LYCANGHOST_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_LYCANGHOST_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182005143" /><!-- Broken Mau Soul -->
 			<gd_item id="182005144" /><!-- Shattered Mau Soul -->
@@ -2670,7 +2670,7 @@
 			<gd_npc_group group="LYCAN_GHOST" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_MAIDENGOLEM_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_MAIDENGOLEM_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182004443" /><!-- Crushed Golem Fragment -->
 			<gd_item id="182004444" /><!-- Useless Golem Fragment -->
@@ -2699,7 +2699,7 @@
 			<gd_world wd_type="STEEL_RAKE_INSTANCE" />
 		</gd_worlds>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_A_MAIDENGOLEM_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_A_MAIDENGOLEM_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182003557" /><!-- Villager Soul -->
 			<gd_item id="182003558" /><!-- Intact Villager Soul -->
@@ -2719,7 +2719,7 @@
 			<gd_world wd_type="PANESTERRA" />
 		</gd_worlds>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_MAMMOTH_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_MAMMOTH_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182004453" /><!-- Tattered Mamut Leather -->
 			<gd_item id="182004454" /><!-- Rough Mamut Leather -->
@@ -2738,7 +2738,7 @@
 			<gd_npc_group group="MAMMOTH" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_MAMMOTHBABY_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_MAMMOTHBABY_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182005153" /><!-- Mamut Tusk Fragment -->
 			<gd_item id="182005154" /><!-- Broken Mamut Tusk -->
@@ -2757,7 +2757,7 @@
 			<gd_npc_group group="MAMMOTH_BABY" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_MAMMOTHGHOST_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_MAMMOTHGHOST_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182005163" /><!-- Broken Mamut Soul -->
 			<gd_item id="182005164" /><!-- Shattered Mamut Soul -->
@@ -2776,7 +2776,7 @@
 			<gd_npc_group group="MAMMOTH_GHOST" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_MANDURIB_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_MANDURIB_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182004463" /><!-- Manduri Bone Powder -->
 			<gd_item id="182004464" /><!-- Crushed Manduri Bone Fragment -->
@@ -2795,7 +2795,7 @@
 			<gd_npc_group group="MANDURIB" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_MANDURIT_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_MANDURIT_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182004473" /><!-- Manduri Tooth Fragment -->
 			<gd_item id="182004474" /><!-- Broken Manduri Tooth -->
@@ -2814,7 +2814,7 @@
 			<gd_npc_group group="MANDURIT" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_MANDURIT_LEAF_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_MANDURIT_LEAF_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182006600" /><!-- Macori Fur -->
 			<gd_item id="182006601" /><!-- Macori Fur -->
@@ -2833,7 +2833,7 @@
 			<gd_npc_group group="MANDURIT_LEAF" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_MEPIGUSS_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_MEPIGUSS_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182004483" /><!-- Tattered Bellepig Leather -->
 			<gd_item id="182004484" /><!-- Rough Bellepig Leather -->
@@ -2852,7 +2852,7 @@
 			<gd_npc_group group="MEPIGUSS" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_MERDION_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_MERDION_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182004493" /><!-- Snuffler Bone Powder -->
 			<gd_item id="182004494" /><!-- Crushed Snuffler Bone Fragment -->
@@ -2871,7 +2871,7 @@
 			<gd_npc_group group="MERDION" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_MILLIPEDE_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_MILLIPEDE_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182004503" /><!-- Stinking Wriggot Fluid -->
 			<gd_item id="182004504" /><!-- Sticky Wriggot Fluid -->
@@ -2900,7 +2900,7 @@
 			<gd_world wd_type="STEEL_RAKE_INSTANCE" />
 		</gd_worlds>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_A_MILLIPEDE_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_A_MILLIPEDE_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182003563" /><!-- Scratched Scale -->
 			<gd_item id="182003564" /><!-- Intact Scale -->
@@ -2920,7 +2920,7 @@
 			<gd_world wd_type="PANESTERRA" />
 		</gd_worlds>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_MILLIPEDEFISH_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_MILLIPEDEFISH_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182005247" /><!-- Glugga Scale Fragment -->
 			<gd_item id="182005248" /><!-- Tattered Glugga Scale -->
@@ -2939,7 +2939,7 @@
 			<gd_npc_group group="MILLIPEDE_FISH" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_MIMIC_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_MIMIC_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182004513" /><!-- Crushed Box Fragment -->
 			<gd_item id="182004514" /><!-- Useless Box Fragment -->
@@ -2958,7 +2958,7 @@
 			<gd_npc_group group="MIMIC" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_MIMIC2_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_MIMIC2_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182004523" /><!-- Stinking Caltrops Fluid -->
 			<gd_item id="182004524" /><!-- Sticky Caltrops Fluid -->
@@ -2977,7 +2977,7 @@
 			<gd_npc_group group="MIMIC_CALTROPS" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_MIMIC3_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_MIMIC3_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182005357" /><!-- Broken Plant Thorn -->
 			<gd_item id="182005358" /><!-- Cracked Plant Thorn -->
@@ -2996,7 +2996,7 @@
 			<gd_npc_group group="MIMIC_PLANTS" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_MOSBEAR_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_MOSBEAR_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182004533" /><!-- Tattered Mosbear Leather -->
 			<gd_item id="182004534" /><!-- Rough Mosbear Leather -->
@@ -3015,7 +3015,7 @@
 			<gd_npc_group group="MOSBEAR" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_MOSBEAR_DR_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_MOSBEAR_DR_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182005984" /><!-- Crushed Bosbear Horn -->
 			<gd_item id="182005985" /><!-- Bosbear Fragment Horn -->
@@ -3034,7 +3034,7 @@
 			<gd_npc_group group="MOSBEAR" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_MOSBEARBABY_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_MOSBEARBABY_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182004543" /><!-- Tattered Mosbear Cub Leather -->
 			<gd_item id="182004544" /><!-- Rough Mosbear Cub Leather -->
@@ -3053,7 +3053,7 @@
 			<gd_npc_group group="BABYMOSBEAR" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_MUDTHORN_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_MUDTHORN_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182004553" /><!-- Broken Mudthorn Thorn -->
 			<gd_item id="182004554" /><!-- Cracked Mudthorn Thorn -->
@@ -3072,7 +3072,7 @@
 			<gd_npc_group group="MUDTHORN" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_MUTA_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_MUTA_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182004563" /><!-- Fragmented Sylphen Wing -->
 			<gd_item id="182004564" /><!-- Tattered Sylphen Wing -->
@@ -3091,7 +3091,7 @@
 			<gd_npc_group group="MUTA" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_NEPILIM_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_NEPILIM_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182005893" /><!-- Broken Jotun Soul -->
 			<gd_item id="182005894" /><!-- Shattered Jotun Soul -->
@@ -3110,7 +3110,7 @@
 			<gd_npc_group group="NEPILIM" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_NEUT_FLY_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_NEUT_FLY_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182006020" /><!-- Fragmented Supraklaw Wing -->
 			<gd_item id="182006021" /><!-- Tattered Supraklaw Wing -->
@@ -3129,7 +3129,7 @@
 			<gd_npc_group group="NEUTFLY" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_NEUTH_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_NEUTH_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182004573" /><!-- Tattered Klaw Leg -->
 			<gd_item id="182004574" /><!-- Decayed Klaw Leg -->
@@ -3159,7 +3159,7 @@
 			<gd_world wd_type="STEEL_RAKE_INSTANCE" />
 		</gd_worlds>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_A_NEUTH_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_A_NEUTH_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182003569" /><!-- Stinking Leg -->
 			<gd_item id="182003570" /><!-- Scratched Leg -->
@@ -3180,7 +3180,7 @@
 			<gd_world wd_type="PANESTERRA" />
 		</gd_worlds>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_NEUTL_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_NEUTL_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182004583" /><!-- Klaw Shell Fragment -->
 			<gd_item id="182004584" /><!-- Tattered Klaw Shell -->
@@ -3210,7 +3210,7 @@
 			<gd_world wd_type="STEEL_RAKE_INSTANCE" />
 		</gd_worlds>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_A_NEUTL_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_A_NEUTL_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182003575" /><!-- Worn Pincer -->
 			<gd_item id="182003576" /><!-- Crooked Pincer -->
@@ -3231,7 +3231,7 @@
 			<gd_world wd_type="PANESTERRA" />
 		</gd_worlds>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_OCTASIDE_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_OCTASIDE_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182004593" /><!-- Tattered Arachna Leg -->
 			<gd_item id="182004594" /><!-- Decayed Arachna Leg -->
@@ -3250,7 +3250,7 @@
 			<gd_npc_group group="OCTASIDE" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_OCTASIDEBABY_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_OCTASIDEBABY_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182004603" /><!-- Tattered Tiny Arachna Leg -->
 			<gd_item id="182004604" /><!-- Rotten Tiny Arachna Leg -->
@@ -3269,7 +3269,7 @@
 			<gd_npc_group group="OCTASIDE_BABY" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_PAGATI_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_PAGATI_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182006468" /><!-- Pagati Scale -->
 			<gd_item id="182006469" /><!-- Pagati Scale -->
@@ -3288,7 +3288,7 @@
 			<gd_npc_group group="DRAKANSTRIDER" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_PHAINI_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_PHAINI_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182004613" /><!-- Crasaur Scale Fragment -->
 			<gd_item id="182004614" /><!-- Tattered Crasaur Scale -->
@@ -3307,7 +3307,7 @@
 			<gd_npc_group group="PHAINI" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_POTCRAB_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_POTCRAB_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182004623" /><!-- Tattered Potcrab Leg -->
 			<gd_item id="182004624" /><!-- Rotten Potcrab Leg -->
@@ -3326,7 +3326,7 @@
 			<gd_npc_group group="POTCRAB" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_PRETOR_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_PRETOR_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182004633" /><!-- Pretor Claw Fragment -->
 			<gd_item id="182004634" /><!-- Broken Pretor Claw -->
@@ -3355,7 +3355,7 @@
 			<gd_world wd_type="STEEL_RAKE_INSTANCE" />
 		</gd_worlds>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_A_PRETOR_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_A_PRETOR_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182003581" /><!-- Worn Tusk -->
 			<gd_item id="182003582" /><!-- Crooked Tusk -->
@@ -3375,7 +3375,7 @@
 			<gd_world wd_type="PANESTERRA" />
 		</gd_worlds>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_RAFFLESIA_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_RAFFLESIA_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182004643" /><!-- Rotten Malodor Root -->
 			<gd_item id="182004644" /><!-- Wilted Malodor Root -->
@@ -3394,7 +3394,7 @@
 			<gd_npc_group group="RAFFLESIA" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_RHINOCE_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_RHINOCE_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182004653" /><!-- Tattered Rynoce Leather -->
 			<gd_item id="182004654" /><!-- Rough Rynoce Leather -->
@@ -3413,7 +3413,7 @@
 			<gd_npc_group group="RHINOCE" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_ROTTENTREE_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_ROTTENTREE_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182004673" /><!-- Broken Rotron Thorn -->
 			<gd_item id="182004674" /><!-- Cracked Rotron Thorn -->
@@ -3442,7 +3442,7 @@
 			<gd_world wd_type="STEEL_RAKE_INSTANCE" />
 		</gd_worlds>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_A_ROTTENTREE_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_A_ROTTENTREE_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182003587" /><!-- Intact Thorn -->
 			<gd_item id="182003588" /><!-- Solid Thorn -->
@@ -3462,7 +3462,7 @@
 			<gd_world wd_type="PANESTERRA" />
 		</gd_worlds>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_RUKHA_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_RUKHA_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182005402" /><!-- Rotten Dragrint Root -->
 			<gd_item id="182005403" /><!-- Wilted Dragrint Root -->
@@ -3481,7 +3481,7 @@
 			<gd_npc_group group="AGRINT_DRANA" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_SAAM_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_SAAM_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182004683" /><!-- Rotten Ginseng Root -->
 			<gd_item id="182004684" /><!-- Wilted Ginseng Root -->
@@ -3500,7 +3500,7 @@
 			<gd_npc_group group="SAAM" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_SALIVADO_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_SALIVADO_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182005317" /><!-- Stinking Hornskull Fluid -->
 			<gd_item id="182005318" /><!-- Sticky Hornskull Fluid -->
@@ -3519,7 +3519,7 @@
 			<gd_npc_group group="SALIVADO" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_SAM_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_SAM_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182004693" /><!-- Crushed Mugolem Fragment -->
 			<gd_item id="182004694" /><!-- Useless Mugolem Fragment -->
@@ -3548,7 +3548,7 @@
 			<gd_world wd_type="STEEL_RAKE_INSTANCE" />
 		</gd_worlds>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_A_SAM_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_A_SAM_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182003593" /><!-- Wardstone Fragment -->
 			<gd_item id="182003594" /><!-- Coarse Wardstone Fragment -->
@@ -3568,7 +3568,7 @@
 			<gd_world wd_type="PANESTERRA" />
 		</gd_worlds>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_SANDSHARK_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_SANDSHARK_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182006140" /><!-- Broken Zanthay Tooth -->
 			<gd_item id="182006141" /><!-- Cracked Zanthay Tooth -->
@@ -3587,7 +3587,7 @@
 			<gd_npc_group group="SANDSHARK" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_SCORPION_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_SCORPION_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182004703" /><!-- Tattered Scolopen Leg -->
 			<gd_item id="182004704" /><!-- Decayed Scolopen Leg -->
@@ -3606,7 +3606,7 @@
 			<gd_npc_group group="SCORPION" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_SEIREN_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_SEIREN_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182005173" /><!-- Piece of Aika's Scale -->
 			<gd_item id="182005174" /><!-- Tattered Aika's Scale -->
@@ -3625,7 +3625,7 @@
 			<gd_npc_group group="SEIREN" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_SHADOWSTALKER_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_SHADOWSTALKER_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182004713" /><!-- Crushed Obscura Fragment -->
 			<gd_item id="182004714" /><!-- Useless Obscura Fragment -->
@@ -3654,7 +3654,7 @@
 			<gd_world wd_type="STEEL_RAKE_INSTANCE" />
 		</gd_worlds>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_A_SHADOWSTALKER_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_A_SHADOWSTALKER_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182003599" /><!-- Vengeful Soul -->
 			<gd_item id="182003600" /><!-- Intact Vengeful Soul -->
@@ -3674,7 +3674,7 @@
 			<gd_world wd_type="PANESTERRA" />
 		</gd_worlds>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_SHADOWSTALKER_DR_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_SHADOWSTALKER_DR_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182005996" /><!-- Broken Excura Branch -->
 			<gd_item id="182005997" /><!-- Cracked Excura Branch -->
@@ -3693,7 +3693,7 @@
 			<gd_npc_group group="SHADOWSTALKER" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_SHELLIZARD_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_SHELLIZARD_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182004723" /><!-- Rotten Lump of Flesh -->
 			<gd_item id="182004724" /><!-- Rotten Lump of Flesh -->
@@ -3712,7 +3712,7 @@
 			<gd_npc_group group="SHELLIZARD" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_SHELLIZARDBABY_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_SHELLIZARDBABY_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182004733" /><!-- Tattered Kselliki Leather -->
 			<gd_item id="182004734" /><!-- Rough Kselliki Leather -->
@@ -3731,7 +3731,7 @@
 			<gd_npc_group group="SHELLIZARD_BABY" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_SHELUK_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_SHELUK_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182004743" /><!-- Stinking Sheluk Fluid -->
 			<gd_item id="182004744" /><!-- Sticky Sheluk Fluid -->
@@ -3750,7 +3750,7 @@
 			<gd_npc_group group="SHELUK" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_SILIKACANNON_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_SILIKACANNON_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182006285" /><!-- Orkanimum Crystal Powder -->
 			<gd_item id="182006286" /><!-- Shattered Orkanimum Crystal -->
@@ -3769,7 +3769,7 @@
 			<gd_npc_group group="SILIKA" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_SKELETON_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_SKELETON_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182004753" /><!-- Broken Anubite Armor -->
 			<gd_item id="182004754" /><!-- Rusted Anubite Armor -->
@@ -3798,7 +3798,7 @@
 			<gd_world wd_type="STEEL_RAKE_INSTANCE" />
 		</gd_worlds>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_A_SKELETON_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_A_SKELETON_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182003605" /><!-- Soldier Soul -->
 			<gd_item id="182003606" /><!-- Intact Soldier Soul -->
@@ -3818,7 +3818,7 @@
 			<gd_world wd_type="PANESTERRA" />
 		</gd_worlds>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_SLIME_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_SLIME_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182004763" /><!-- Stinking Slime Fluid -->
 			<gd_item id="182004764" /><!-- Sticky Slime Fluid -->
@@ -3837,7 +3837,7 @@
 			<gd_npc_group group="SLIME" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_SOULEDSTONE_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_SOULEDSTONE_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182004773" /><!-- Crushed Kalgolem Fragment -->
 			<gd_item id="182004774" /><!-- Useless Kalgolem Fragment -->
@@ -3866,7 +3866,7 @@
 			<gd_world wd_type="STEEL_RAKE_INSTANCE" />
 		</gd_worlds>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_A_SOULEDSTONE_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_A_SOULEDSTONE_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182003617" /><!-- Golem Fragment -->
 			<gd_item id="182003618" /><!-- Coarse Golem Fragment -->
@@ -3886,7 +3886,7 @@
 			<gd_world wd_type="PANESTERRA" />
 		</gd_worlds>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_SOULEDSTONE02_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_SOULEDSTONE02_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182006297" /><!-- Crushed Ametgolem Shard -->
 			<gd_item id="182006298" /><!-- Useless Ametgolem Shard -->
@@ -3905,7 +3905,7 @@
 			<gd_npc_group group="SOULEDSTONE_CRYSTAL" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_SPAKLE_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_SPAKLE_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182004783" /><!-- Tattered Sparkle Leg -->
 			<gd_item id="182004784" /><!-- Decayed Sparkle Leg -->
@@ -3924,7 +3924,7 @@
 			<gd_npc_group group="SPAKLE" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_SPAKY_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_SPAKY_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182004793" /><!-- Sparkie Carapace Fragment -->
 			<gd_item id="182004794" /><!-- Tattered Sparkie Carapace -->
@@ -3943,7 +3943,7 @@
 			<gd_npc_group group="SPAKY" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_SPAKYBUTTERFLY_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_SPAKYBUTTERFLY_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182005257" /><!-- Moskie Carapace Fragment -->
 			<gd_item id="182005258" /><!-- Tattered Moskie Carapace -->
@@ -3962,7 +3962,7 @@
 			<gd_npc_group group="SPAKY_BUTTERFLY" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_SPALLER_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_SPALLER_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182005412" /><!-- Broken Claw Fragment -->
 			<gd_item id="182005413" /><!-- Broken Claw -->
@@ -3981,7 +3981,7 @@
 			<gd_npc_group group="SPALLER" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_SPECTRE_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_SPECTRE_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182004803" /><!-- Tattered Specter Rags -->
 			<gd_item id="182004804" /><!-- Shabby Specter Rags -->
@@ -4010,7 +4010,7 @@
 			<gd_world wd_type="STEEL_RAKE_INSTANCE" />
 		</gd_worlds>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_A_SPECTRE_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_A_SPECTRE_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182003623" /><!-- Worn Rags -->
 			<gd_item id="182003624" /><!-- Old Rags -->
@@ -4030,7 +4030,7 @@
 			<gd_world wd_type="PANESTERRA" />
 		</gd_worlds>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_SPRIGG1_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_SPRIGG1_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182004813" /><!-- Tattered Sprigg Leather -->
 			<gd_item id="182004814" /><!-- Rough Sprigg Leather -->
@@ -4049,7 +4049,7 @@
 			<gd_npc_group group="SPRIGG" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_SPRIGG2_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_SPRIGG2_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182004823" /><!-- Tattered Spriggan Pelt -->
 			<gd_item id="182004824" /><!-- Rough Spriggan Pelt -->
@@ -4068,7 +4068,7 @@
 			<gd_npc_group group="SPRIGG2" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_SPRIGG3_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_SPRIGG3_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182004833" /><!-- Tattered Spriggan Leather -->
 			<gd_item id="182004834" /><!-- Rough Spriggan Leather -->
@@ -4087,7 +4087,7 @@
 			<gd_npc_group group="SPRIGG3" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_SPRIGG4_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_SPRIGG4_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182004843" /><!-- Tattered Arch Spriggan Pelt -->
 			<gd_item id="182004844" /><!-- Rough Arch Spriggan Pelt -->
@@ -4106,7 +4106,7 @@
 			<gd_npc_group group="SPRIGG4" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_STARCRAB_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_STARCRAB_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182004853" /><!-- Tattered Starcrab Leg -->
 			<gd_item id="182004854" /><!-- Rotten Starcrab Leg -->
@@ -4125,7 +4125,7 @@
 			<gd_npc_group group="STARCRAB" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_STARTURTLE_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_STARTURTLE_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182004863" /><!-- Shell Piece -->
 			<gd_item id="182004864" /><!-- Tattered Shell -->
@@ -4144,7 +4144,7 @@
 			<gd_npc_group group="STARTURTLE" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_SUCCUBUS_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_SUCCUBUS_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182004873" /><!-- Chopped Temptress Tail -->
 			<gd_item id="182004874" /><!-- Tattered Temptress Tail -->
@@ -4163,7 +4163,7 @@
 			<gd_npc_group group="SUCCUBUS" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_TAURIC_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_TAURIC_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182004883" /><!-- Tigric Claw Fragment -->
 			<gd_item id="182004884" /><!-- Broken Tigric Claw -->
@@ -4192,7 +4192,7 @@
 			<gd_world wd_type="STEEL_RAKE_INSTANCE" />
 		</gd_worlds>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_A_TAURIC_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_A_TAURIC_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182003629" /><!-- Flame Tribe Claw -->
 			<gd_item id="182003630" /><!-- Crooked Flame Tribe Claw -->
@@ -4212,7 +4212,7 @@
 			<gd_world wd_type="PANESTERRA" />
 		</gd_worlds>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_TAURIC2_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_TAURIC2_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182004893" /><!-- Kentari Claw Fragment -->
 			<gd_item id="182004894" /><!-- Broken Kentari Claw -->
@@ -4231,7 +4231,7 @@
 			<gd_npc_group group="TAURIC_KENTARI" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_TESINONSEAMAN_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_TESINONSEAMAN_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182005207" /><!-- Tattered Krahumus Rags -->
 			<gd_item id="182005208" /><!-- Shabby Krahumus Rags -->
@@ -4250,7 +4250,7 @@
 			<gd_npc_group group="TESINON_SEAMAN" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_TESINONWATCHER_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_TESINONWATCHER_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182005267" /><!-- Titanium Bone Powder -->
 			<gd_item id="182005268" /><!-- Crushed Titanium Bone Fragment -->
@@ -4269,7 +4269,7 @@
 			<gd_npc_group group="TESINON_WATCHER" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_TOG_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_TOG_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182004903" /><!-- Tattered Tog Leather -->
 			<gd_item id="182004904" /><!-- Rough Tog Leather -->
@@ -4288,7 +4288,7 @@
 			<gd_npc_group group="TOG" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_TRICO_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_TRICO_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182004913" /><!-- Trico Bone Powder -->
 			<gd_item id="182004914" /><!-- Crushed Trico Bone Fragment -->
@@ -4317,7 +4317,7 @@
 			<gd_world wd_type="STEEL_RAKE_INSTANCE" />
 		</gd_worlds>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_A_TRICO_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_A_TRICO_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182003635" /><!-- Stiff Mane -->
 			<gd_item id="182003636" /><!-- Soft Mane -->
@@ -4337,7 +4337,7 @@
 			<gd_world wd_type="PANESTERRA" />
 		</gd_worlds>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_TRICORN_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_TRICORN_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182004923" /><!-- Tattered Tricorn Leather -->
 			<gd_item id="182004924" /><!-- Rough Tricorn Leather -->
@@ -4366,7 +4366,7 @@
 			<gd_world wd_type="STEEL_RAKE_INSTANCE" />
 		</gd_worlds>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_A_TRICORN_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_A_TRICORN_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182003641" /><!-- Cracked Horn -->
 			<gd_item id="182003642" /><!-- Worn Horn -->
@@ -4386,7 +4386,7 @@
 			<gd_world wd_type="PANESTERRA" />
 		</gd_worlds>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_TROLL_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_TROLL_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182004933" /><!-- Troll Bone Powder -->
 			<gd_item id="182004934" /><!-- Crushed Troll Bone Fragment -->
@@ -4405,7 +4405,7 @@
 			<gd_npc_group group="TROLL" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_TROLLKIN_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_TROLLKIN_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182004943" /><!-- Trollkin Bone Powder -->
 			<gd_item id="182004944" /><!-- Crushed Trollkin Bone Fragment -->
@@ -4424,7 +4424,7 @@
 			<gd_npc_group group="TROLLKIN" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_TROLLKINSEAMAN_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_TROLLKINSEAMAN_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182005217" /><!-- Kranuum Tooth Fragment -->
 			<gd_item id="182005218" /><!-- Broken Kranuum Tooth -->
@@ -4443,7 +4443,7 @@
 			<gd_npc_group group="TROLLKIN_SEAMAN" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_UNDEADDARK_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_UNDEADDARK_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182004953" /><!-- Crushed Asmodian Fragment -->
 			<gd_item id="182004954" /><!-- Useless Asmodian Fragment -->
@@ -4476,7 +4476,7 @@
 			<gd_world wd_type="STEEL_RAKE_INSTANCE" />
 		</gd_worlds>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_A_UNDEADDARK_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_A_UNDEADDARK_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182003647" /><!-- Asmodian Soul -->
 			<gd_item id="182003648" /><!-- Intact Asmodian Soul -->
@@ -4500,7 +4500,7 @@
 			<gd_world wd_type="PANESTERRA" />
 		</gd_worlds>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_UNDEADLIGHT_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_UNDEADLIGHT_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182004973" /><!-- Crushed Soul Fragment -->
 			<gd_item id="182004974" /><!-- Useless Soul Fragment -->
@@ -4534,7 +4534,7 @@
 			<gd_world wd_type="STEEL_RAKE_INSTANCE" />
 		</gd_worlds>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_A_UNDEADLIGHT_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_A_UNDEADLIGHT_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182003653" /><!-- Elyos Soul -->
 			<gd_item id="182003654" /><!-- Intact Elyos Soul -->
@@ -4559,7 +4559,7 @@
 			<gd_world wd_type="PANESTERRA" />
 		</gd_worlds>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_UNDEADLIZARD_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_UNDEADLIZARD_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182005347" /><!-- Broken Draconute Armor -->
 			<gd_item id="182005348" /><!-- Rusted Draconute Armor -->
@@ -4578,7 +4578,7 @@
 			<gd_npc_group group="UNDEAD_LIZARD" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_UNDEADPORGUSS_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_UNDEADPORGUSS_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182004983" /><!-- Rotten Porgus Meat -->
 			<gd_item id="182004984" /><!-- Decayed Porgus Meat -->
@@ -4597,7 +4597,7 @@
 			<gd_npc_group group="UNDEAD_PORGUS" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_UNDEADZAIF_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_UNDEADZAIF_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182005183" /><!-- Broken Worg Fang -->
 			<gd_item id="182005184" /><!-- Cracked Worg Fang -->
@@ -4616,7 +4616,7 @@
 			<gd_npc_group group="UNDEAD_ZAIF" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_UNICORN_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_UNICORN_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182006528" /><!-- Zefirun Horn -->
 			<gd_item id="182006529" /><!-- Zefirun Horn -->
@@ -4635,7 +4635,7 @@
 			<gd_npc_group group="UNICORN" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_VAMPIRE_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_VAMPIRE_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182004993" /><!-- Tattered Vampire Cloak -->
 			<gd_item id="182004994" /><!-- Shabby Vampire Cloak -->
@@ -4654,7 +4654,7 @@
 			<gd_npc_group group="VAMPIRE" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_VAMPIRE_D_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_VAMPIRE_D_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182006104" /><!-- Broken Wraithling Thorn -->
 			<gd_item id="182006105" /><!-- Cracked Wraithling Thorn -->
@@ -4673,7 +4673,7 @@
 			<gd_npc_group group="VAMPIRE" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_VAMPIRE_TREE_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_VAMPIRE_TREE_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182006720" /><!-- Plata Thorn -->
 			<gd_item id="182006721" /><!-- Plata Thorn -->
@@ -4692,7 +4692,7 @@
 			<gd_npc_group group="TREEMON" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_VAPOR_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_VAPOR_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182005003" /><!-- Windwisp Claw Fragment -->
 			<gd_item id="182005004" /><!-- Broken Windwisp Claw -->
@@ -4711,7 +4711,7 @@
 			<gd_npc_group group="VAPOR" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_VARANUS_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_VARANUS_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182005013" /><!-- Monitor Scale Fragment -->
 			<gd_item id="182005014" /><!-- Tattered Monitor Scale -->
@@ -4730,7 +4730,7 @@
 			<gd_npc_group group="VARANUS" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_VARANUS_DR_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_VARANUS_DR_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182006116" /><!-- Piece of Vortile Scale -->
 			<gd_item id="182006117" /><!-- Tattered Vortile Scale -->
@@ -4749,7 +4749,7 @@
 			<gd_npc_group group="VARANUS" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_VARANUSALLIGATOR_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_VARANUSALLIGATOR_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182005227" /><!-- Alitaur Tooth Fragment -->
 			<gd_item id="182005228" /><!-- Broken Alitaur Tooth -->
@@ -4768,7 +4768,7 @@
 			<gd_npc_group group="VARANUS_ALLIGATOR" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_VESPA_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_VESPA_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182005023" /><!-- Vespine Shell Fragment -->
 			<gd_item id="182005024" /><!-- Tattered Vespine Shell -->
@@ -4787,7 +4787,7 @@
 			<gd_npc_group group="VESPA" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_VIVRE_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_VIVRE_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182005033" /><!-- Fangwing Tooth Fragment -->
 			<gd_item id="182005034" /><!-- Broken Fangwing Tooth -->
@@ -4806,7 +4806,7 @@
 			<gd_npc_group group="VIVIRE" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_WATERWORM_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_WATERWORM_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182005043" /><!-- Stinking Ampha Fluid -->
 			<gd_item id="182005044" /><!-- Sticky Ampha Fluid -->
@@ -4835,7 +4835,7 @@
 			<gd_world wd_type="STEEL_RAKE_INSTANCE" />
 		</gd_worlds>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_A_WATERWORM_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_A_WATERWORM_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182003659" /><!-- Thin Fluid -->
 			<gd_item id="182003660" /><!-- Thick Fluid -->
@@ -4855,7 +4855,7 @@
 			<gd_world wd_type="PANESTERRA" />
 		</gd_worlds>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_WORM_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_WORM_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182005053" /><!-- Stinking Worm Fluid -->
 			<gd_item id="182005054" /><!-- Sticky Worm Fluid -->
@@ -4884,7 +4884,7 @@
 			<gd_world wd_type="STEEL_RAKE_INSTANCE" />
 		</gd_worlds>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_A_WORM_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_A_WORM_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182003665" /><!-- Stinking Meat -->
 			<gd_item id="182003666" /><!-- Fresh Meat -->
@@ -4904,7 +4904,7 @@
 			<gd_world wd_type="PANESTERRA" />
 		</gd_worlds>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_XIPETO_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_XIPETO_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182005063" /><!-- Broken Gnarl Thorn -->
 			<gd_item id="182005064" /><!-- Cracked Gnarl Thorn -->
@@ -4933,7 +4933,7 @@
 			<gd_world wd_type="STEEL_RAKE_INSTANCE" />
 		</gd_worlds>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_A_XIPETO_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_A_XIPETO_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182003671" /><!-- Thin Sap -->
 			<gd_item id="182003672" /><!-- Thick Sap -->
@@ -4953,7 +4953,7 @@
 			<gd_world wd_type="PANESTERRA" />
 		</gd_worlds>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_XIPETOSALT_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_XIPETOSALT_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182005368" /><!-- Lobsek Shell Fragment -->
 			<gd_item id="182005369" /><!-- Tattered Lobsek Shell -->
@@ -4972,7 +4972,7 @@
 			<gd_npc_group group="XIPETO_SALT" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_YUN_GHOST_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_YUN_GHOST_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182006588" /><!-- Reian Ashes -->
 			<gd_item id="182006589" /><!-- Reian Ashes -->
@@ -4991,7 +4991,7 @@
 			<gd_npc_group group="ANCIENTCLAN_GHOST" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_YUN_UNDEAD_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_YUN_UNDEAD_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182006696" /><!-- Reian Ectoplasm -->
 			<gd_item id="182006697" /><!-- Reian Ectoplasm -->
@@ -5010,7 +5010,7 @@
 			<gd_npc_group group="ANCIENTCLAN_UNDEAD" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_ZAIF_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_ZAIF_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182005073" /><!-- Worg Claw Fragment -->
 			<gd_item id="182005074" /><!-- Broken Worg Claw -->
@@ -5029,7 +5029,7 @@
 			<gd_npc_group group="ZAIF" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_ZOMBIE_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_ZOMBIE_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182005083" /><!-- Zombie Bone Powder -->
 			<gd_item id="182005084" /><!-- Crushed Zombie Bone Fragment -->
@@ -5048,7 +5048,7 @@
 			<gd_npc_group group="ZOMBIE" />
 		</gd_npc_groups>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_A_AGRINTGUARDIAN_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_A_AGRINTGUARDIAN_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182003677" /><!-- Nature's Defender's Crystal -->
 			<gd_item id="182003678" /><!-- Intact Nature's Defender's Crystal -->
@@ -5068,7 +5068,7 @@
 			<gd_world wd_type="PANESTERRA" />
 		</gd_worlds>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_A_BONEDRAKEGUARDIAN_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_A_BONEDRAKEGUARDIAN_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182003683" /><!-- Ancient Defender's -->
 			<gd_item id="182003684" /><!-- Intact Ancient Defender's -->
@@ -5088,7 +5088,7 @@
 			<gd_world wd_type="PANESTERRA" />
 		</gd_worlds>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_A_CYCLOPSFIREGUARDIAN_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_A_CYCLOPSFIREGUARDIAN_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182003689" /><!-- Fire's Defender's Crystal -->
 			<gd_item id="182003690" /><!-- Intact Fire's Defender's Crystal -->
@@ -5108,7 +5108,7 @@
 			<gd_world wd_type="PANESTERRA" />
 		</gd_worlds>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_A_CYCLOPSODGUARDIAN_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_A_CYCLOPSODGUARDIAN_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182003695" /><!-- Aether's Defender's Crystal -->
 			<gd_item id="182003696" /><!-- Intact Aether's Defender's Crystal -->
@@ -5128,7 +5128,7 @@
 			<gd_world wd_type="PANESTERRA" />
 		</gd_worlds>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_A_DARKGUARDIAN_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_A_DARKGUARDIAN_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182003701" /><!-- Shadow's Defender's Crystal -->
 			<gd_item id="182003702" /><!-- Intact Shadow's Defender's Crystal -->
@@ -5148,7 +5148,7 @@
 			<gd_world wd_type="PANESTERRA" />
 		</gd_worlds>
 	</gd_rule>
-	<gd_rule rule_name="JUNK_A_LIGHTGUARDIAN_MATERIAL" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="JUNK_A_LIGHTGUARDIAN_MATERIAL" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_items>
 			<gd_item id="182003707" /><!-- Light's Defender's Crystal -->
 			<gd_item id="182003708" /><!-- Intact Light's Defender's Crystal -->
@@ -5169,7 +5169,7 @@
 		</gd_worlds>
 	</gd_rule>
 	<!-- Zombie -->
-	<gd_rule rule_name="Zombie Rags" base_chance="40" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="Zombie Rags" base_chance="40" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_worlds>
 			<gd_world wd_type="ASMODAE" />
 		</gd_worlds>

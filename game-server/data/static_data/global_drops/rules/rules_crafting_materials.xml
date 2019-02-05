@@ -4,7 +4,7 @@
 		Special Crafting Materials
 	-->
 	<!-- Candy Essences -->
-	<gd_rule rule_name="Candy Essence" base_chance="4" dynamic_chance="true" min_diff="-9">
+	<gd_rule rule_name="Candy Essence" base_chance="4" dynamic_chance="true" min_diff="-9" no_reduction="true">
 		<gd_npc_groups>
 			<gd_npc_group group="SPAKLE" />
 		</gd_npc_groups>
@@ -13,7 +13,7 @@
 			<gd_item id="152016001" /><!-- Sparkie Essence -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Candy Essence" base_chance="4" dynamic_chance="true" min_diff="-9">
+	<gd_rule rule_name="Candy Essence" base_chance="4" dynamic_chance="true" min_diff="-9" no_reduction="true">
 		<gd_npc_groups>
 			<gd_npc_group group="LUPYLLINI" />
 		</gd_npc_groups>
@@ -22,7 +22,7 @@
 			<gd_item id="152016002" /><!-- Pluma Essence -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Candy Essence" base_chance="4" dynamic_chance="true" min_diff="-9">
+	<gd_rule rule_name="Candy Essence" base_chance="4" dynamic_chance="true" min_diff="-9" no_reduction="true">
 		<gd_npc_groups>
 			<gd_npc_group group="FLYINGEYE" />
 		</gd_npc_groups>
@@ -31,7 +31,7 @@
 			<gd_item id="152016003" /><!-- Oculazen Essence -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Candy Essence" base_chance="4" dynamic_chance="true" min_diff="-9">
+	<gd_rule rule_name="Candy Essence" base_chance="4" dynamic_chance="true" min_diff="-9" no_reduction="true">
 		<gd_npc_groups>
 			<gd_npc_group group="FUNGY" />
 			<gd_npc_group group="FUNGUS" />
@@ -41,7 +41,7 @@
 			<gd_item id="152016004" /><!-- Oculazen Essence -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Candy Essence" base_chance="4" dynamic_chance="true" min_diff="-9">
+	<gd_rule rule_name="Candy Essence" base_chance="4" dynamic_chance="true" min_diff="-9" no_reduction="true">
 		<gd_npc_groups>
 			<gd_npc_group group="DRAKY" />
 		</gd_npc_groups>
@@ -50,7 +50,7 @@
 			<gd_item id="152016005" /><!-- Wasteland Drakie Essence -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Candy Essence" base_chance="4" dynamic_chance="true" min_diff="-9">
+	<gd_rule rule_name="Candy Essence" base_chance="4" dynamic_chance="true" min_diff="-9" no_reduction="true">
 		<gd_npc_groups>
 			<gd_npc_group group="GRIFFO" />
 		</gd_npc_groups>
@@ -59,7 +59,7 @@
 			<gd_item id="152016006" /><!-- Griffo Essence -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Candy Essence" base_chance="4" dynamic_chance="true" min_diff="-9">
+	<gd_rule rule_name="Candy Essence" base_chance="4" dynamic_chance="true" min_diff="-9" no_reduction="true">
 		<gd_npc_groups>
 			<gd_npc_group group="AGRINT_GHOSTELIM" />
 			<gd_npc_group group="AGRINT_GUARDIAN" />
@@ -71,7 +71,7 @@
 			<gd_item id="152016007" /><!-- Agrint Essence -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Candy Essence" base_chance="4" dynamic_chance="true" min_diff="-9">
+	<gd_rule rule_name="Candy Essence" base_chance="4" dynamic_chance="true" min_diff="-9" no_reduction="true">
 		<gd_npc_groups>
 			<gd_npc_group group="MAHISHA_DRAKY" />
 		</gd_npc_groups>
@@ -83,7 +83,7 @@
 			<gd_item id="152016008" /><!-- Malek Drake Essence -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Candy Essence" base_chance="4" dynamic_chance="true" min_diff="-9">
+	<gd_rule rule_name="Candy Essence" base_chance="4" dynamic_chance="true" min_diff="-9" no_reduction="true">
 		<gd_npc_groups>
 			<gd_npc_group group="AGRINT_ICE" />
 		</gd_npc_groups>
@@ -92,7 +92,7 @@
 			<gd_item id="152016009" /><!-- Frozen Agrint Essence -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Candy Essence" base_chance="4" dynamic_chance="true" min_diff="-9">
+	<gd_rule rule_name="Candy Essence" base_chance="4" dynamic_chance="true" min_diff="-9" no_reduction="true">
 		<gd_npc_groups>
 			<gd_npc_group group="BROWNIEF" />
 		</gd_npc_groups>
@@ -104,7 +104,7 @@
 			<gd_item id="152016010" /><!-- Kobold Essence -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Candy Essence" base_chance="4" dynamic_chance="true" min_diff="-9">
+	<gd_rule rule_name="Candy Essence" base_chance="4" dynamic_chance="true" min_diff="-9" no_reduction="true">
 		<gd_npc_groups>
 			<gd_npc_group group="KRALLSCOUT" />
 		</gd_npc_groups>
@@ -113,7 +113,7 @@
 			<gd_item id="152016011" /><!-- Krall Essence -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Candy Essence" base_chance="4" dynamic_chance="true" min_diff="-9">
+	<gd_rule rule_name="Candy Essence" base_chance="4" dynamic_chance="true" min_diff="-9" no_reduction="true">
 		<gd_npc_groups>
 			<gd_npc_group group="SKELETON" />
 		</gd_npc_groups>
@@ -122,7 +122,7 @@
 			<gd_item id="152016012" /><!-- Anubite Essence -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Candy Essence" base_chance="4" dynamic_chance="true" min_diff="-9">
+	<gd_rule rule_name="Candy Essence" base_chance="4" dynamic_chance="true" min_diff="-9" no_reduction="true">
 		<gd_npc_groups>
 			<gd_npc_group group="GRAVEKNIGHT" />
 		</gd_npc_groups>
@@ -131,7 +131,7 @@
 			<gd_item id="152016013" /><!-- Unfest Essence -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Candy Essence" base_chance="4" dynamic_chance="true" min_diff="-5">
+	<gd_rule rule_name="Candy Essence" base_chance="4" dynamic_chance="true" min_diff="-5" no_reduction="true">
 		<gd_npc_groups>
 			<gd_npc_group group="FUNGY_MOOKIE" />
 		</gd_npc_groups>
@@ -145,7 +145,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Enigmatic Ore -->
-	<gd_rule rule_name="Enigmatic Ore" base_chance="2" dynamic_chance="true" min_diff="0" max_diff="4">
+	<gd_rule rule_name="Enigmatic Ore" base_chance="2" dynamic_chance="true" min_diff="0" max_diff="4" no_reduction="true">
 		<gd_maps>
 			<gd_map map_id="210090000" /><!-- Idian Depths Light -->
 			<gd_map map_id="220100000" /><!-- Idian Depths Dark -->
@@ -162,7 +162,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Rawhide -->
-	<gd_rule rule_name="Rawhide (Common)" base_chance="25" dynamic_chance="true" min_diff="0" max_diff="9">
+	<gd_rule rule_name="Rawhide (Common)" base_chance="25" dynamic_chance="true" min_diff="0" max_diff="9" no_reduction="true">
 		<gd_ratings>
 			<gd_rating rating="NORMAL" />
 			<gd_rating rating="ELITE" />
@@ -194,7 +194,7 @@
 			<gd_item id="152010318" /><!-- Firm Rawhide -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Rawhide (Common)" base_chance="25" dynamic_chance="true" min_diff="0" max_diff="4">
+	<gd_rule rule_name="Rawhide (Common)" base_chance="25" dynamic_chance="true" min_diff="0" max_diff="4" no_reduction="true">
 		<gd_ratings>
 			<gd_rating rating="NORMAL" />
 			<gd_rating rating="ELITE" />
@@ -218,7 +218,7 @@
 			<gd_item id="152010322" /><!-- Sublime Rawhide -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Rawhide (Rare)" base_chance="15" dynamic_chance="true" min_diff="0" max_diff="4">
+	<gd_rule rule_name="Rawhide (Rare)" base_chance="15" dynamic_chance="true" min_diff="0" max_diff="4" no_reduction="true">
 		<gd_ratings>
 			<gd_rating rating="NORMAL" />
 			<gd_rating rating="ELITE" />
@@ -242,7 +242,7 @@
 			<gd_item id="152010323" /><!-- Buttery Rawhide -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Rawhide (Legend)" base_chance="5" dynamic_chance="true" min_diff="0" max_diff="4">
+	<gd_rule rule_name="Rawhide (Legend)" base_chance="5" dynamic_chance="true" min_diff="0" max_diff="4" no_reduction="true">
 		<gd_ratings>
 			<gd_rating rating="NORMAL" />
 			<gd_rating rating="ELITE" />
@@ -267,7 +267,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Elemental Stones -->
-	<gd_rule rule_name="Elemental Stones (Common)" base_chance="38.5" dynamic_chance="true" min_diff="0" max_diff="9">
+	<gd_rule rule_name="Elemental Stones (Common)" base_chance="38.5" dynamic_chance="true" min_diff="0" max_diff="9" no_reduction="true">
 		<gd_ratings>
 			<gd_rating rating="NORMAL" />
 			<gd_rating rating="ELITE" />
@@ -301,7 +301,7 @@
 			<gd_item id="152010319" /><!-- Fine Elemental Stone -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Elemental Stones (Common)" base_chance="27.5" dynamic_chance="true" min_diff="-1" max_diff="4">
+	<gd_rule rule_name="Elemental Stones (Common)" base_chance="27.5" dynamic_chance="true" min_diff="-1" max_diff="4" no_reduction="true">
 		<gd_ratings>
 			<gd_rating rating="NORMAL" />
 			<gd_rating rating="ELITE" />
@@ -327,7 +327,7 @@
 			<gd_item id="152010325" /><!-- Wispy Elemental Stone -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Elemental Stones (Rare)" base_chance="16.5" dynamic_chance="true" min_diff="-1" max_diff="4">
+	<gd_rule rule_name="Elemental Stones (Rare)" base_chance="16.5" dynamic_chance="true" min_diff="-1" max_diff="4" no_reduction="true">
 		<gd_ratings>
 			<gd_rating rating="NORMAL" />
 			<gd_rating rating="ELITE" />
@@ -338,7 +338,7 @@
 			<gd_item id="152010326" /><!-- Sublime Wispy Elemental Stone -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Elemental Stones (Legend)" base_chance="5.5" dynamic_chance="true" min_diff="-1" max_diff="4">
+	<gd_rule rule_name="Elemental Stones (Legend)" base_chance="5.5" dynamic_chance="true" min_diff="-1" max_diff="4" no_reduction="true">
 		<gd_ratings>
 			<gd_rating rating="NORMAL" />
 			<gd_rating rating="ELITE" />
@@ -365,7 +365,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Flux -->
-	<gd_rule rule_name="Flux (Common)" base_chance="20" dynamic_chance="true" min_diff="-2" max_diff="2">
+	<gd_rule rule_name="Flux (Common)" base_chance="20" dynamic_chance="true" min_diff="-2" max_diff="2" no_reduction="true">
 		<gd_ratings>
 			<gd_rating rating="NORMAL" />
 			<gd_rating rating="ELITE" />
@@ -413,7 +413,7 @@
 			<gd_item id="152011088" /><!-- Finest Accessory Flux -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Flux (Common)" base_chance="20" dynamic_chance="true" min_diff="0" max_diff="4">
+	<gd_rule rule_name="Flux (Common)" base_chance="20" dynamic_chance="true" min_diff="0" max_diff="4" no_reduction="true">
 		<gd_ratings>
 			<gd_rating rating="NORMAL" />
 			<gd_rating rating="ELITE" />
@@ -425,7 +425,7 @@
 			<gd_item id="152011106" /><!-- Lesser Mystic Accessory Flux -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Flux (Rare)" base_chance="10" dynamic_chance="true" min_diff="-2" max_diff="2">
+	<gd_rule rule_name="Flux (Rare)" base_chance="10" dynamic_chance="true" min_diff="-2" max_diff="2" no_reduction="true">
 		<gd_ratings>
 			<gd_rating rating="NORMAL" />
 			<gd_rating rating="ELITE" />
@@ -466,7 +466,7 @@
 			<gd_item id="152011089" /><!-- Worthy Finest Accessory Flux -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Flux (Rare)" base_chance="10" dynamic_chance="true" min_diff="0" max_diff="4">
+	<gd_rule rule_name="Flux (Rare)" base_chance="10" dynamic_chance="true" min_diff="0" max_diff="4" no_reduction="true">
 		<gd_ratings>
 			<gd_rating rating="NORMAL" />
 			<gd_rating rating="ELITE" />
@@ -479,7 +479,7 @@
 			<gd_item id="152011107" /><!-- Mystic Accessory Flux -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Flux (Legend)" base_chance="5" dynamic_chance="true" min_diff="-2" max_diff="2">
+	<gd_rule rule_name="Flux (Legend)" base_chance="5" dynamic_chance="true" min_diff="-2" max_diff="2" no_reduction="true">
 		<gd_ratings>
 			<gd_rating rating="NORMAL" />
 			<gd_rating rating="ELITE" />
@@ -513,7 +513,7 @@
 			<gd_item id="152011090" /><!-- Expert Finest Accessory Flux -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Flux (Legend)" base_chance="5" dynamic_chance="true" min_diff="0" max_diff="4">
+	<gd_rule rule_name="Flux (Legend)" base_chance="5" dynamic_chance="true" min_diff="0" max_diff="4" no_reduction="true">
 		<gd_ratings>
 			<gd_rating rating="NORMAL" />
 			<gd_rating rating="ELITE" />
@@ -527,7 +527,7 @@
 			<gd_item id="152011108" /><!-- Greater Mystic Accessory Flux -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Flux (Unique)" base_chance="2" dynamic_chance="true" min_diff="-2" max_diff="2">
+	<gd_rule rule_name="Flux (Unique)" base_chance="2" dynamic_chance="true" min_diff="-2" max_diff="2" no_reduction="true">
 		<gd_ratings>
 			<gd_rating rating="ELITE" />
 			<gd_rating rating="HERO" />
@@ -552,7 +552,7 @@
 			<gd_item id="152011091" /><!-- Master Finest Accessory Flux -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Construction Flux" base_chance="2.5" dynamic_chance="true" min_diff="-8" max_diff="32">
+	<gd_rule rule_name="Construction Flux" base_chance="2.5" dynamic_chance="true" min_diff="-8" max_diff="32" no_reduction="true">
 		<gd_ratings>
 			<gd_rating rating="NORMAL" />
 			<gd_rating rating="ELITE" />
@@ -571,7 +571,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Balic Hearts -->
-	<gd_rule rule_name="Balaur Heart" base_chance="10" dynamic_chance="true" min_diff="-9" max_diff="0">
+	<gd_rule rule_name="Balaur Heart" base_chance="10" dynamic_chance="true" min_diff="-9" max_diff="0" no_reduction="true">
 		<gd_races>
 			<gd_race race="DRAKAN" />
 			<gd_race race="NAGA" />
@@ -584,7 +584,7 @@
 			<gd_item id="186000097" /><!-- Burning Balaur Heart -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Balaur Heart" base_chance="10" dynamic_chance="true" min_diff="0" max_diff="4">
+	<gd_rule rule_name="Balaur Heart" base_chance="10" dynamic_chance="true" min_diff="0" max_diff="4" no_reduction="true">
 		<gd_races>
 			<gd_race race="DRAKAN" />
 			<gd_race race="NAGA" />
@@ -596,7 +596,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Balic Souls -->
-	<gd_rule rule_name="Balaur Souls (Common)" base_chance="12" dynamic_chance="true" min_diff="0" max_diff="4">
+	<gd_rule rule_name="Balaur Souls (Common)" base_chance="12" dynamic_chance="true" min_diff="0" max_diff="4" no_reduction="true">
 		<gd_races>
 			<gd_race race="DRAKAN" />
 			<gd_race race="NAGA" />
@@ -609,7 +609,7 @@
 			<gd_item id="152013043" /><!-- Mortal Pride -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Balaur Souls (Rare)" base_chance="12" dynamic_chance="true" min_diff="-5" max_diff="4">
+	<gd_rule rule_name="Balaur Souls (Rare)" base_chance="12" dynamic_chance="true" min_diff="-5" max_diff="4" no_reduction="true">
 		<gd_races>
 			<gd_race race="DRAKAN" />
 			<gd_race race="NAGA" />
@@ -630,7 +630,7 @@
 			<gd_item id="152013015" /><!-- Violent Ego -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Balaur Souls (Rare)" base_chance="12" dynamic_chance="true" min_diff="-2" max_diff="2">
+	<gd_rule rule_name="Balaur Souls (Rare)" base_chance="12" dynamic_chance="true" min_diff="-2" max_diff="2" no_reduction="true">
 		<gd_races>
 			<gd_race race="DRAKAN" />
 			<gd_race race="NAGA" />
@@ -643,7 +643,7 @@
 			<gd_item id="152013025" /><!-- Execration of Pleasure -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Balaur Souls (Rare)" base_chance="12" dynamic_chance="true" min_diff="-2" max_diff="0">
+	<gd_rule rule_name="Balaur Souls (Rare)" base_chance="12" dynamic_chance="true" min_diff="-2" max_diff="0" no_reduction="true">
 		<gd_races>
 			<gd_race race="DRAKAN" />
 			<gd_race race="NAGA" />
@@ -656,7 +656,7 @@
 			<gd_item id="152013034" /><!-- Urge of Pleasure -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Balaur Souls (Rare)" base_chance="6" dynamic_chance="true" min_diff="0" max_diff="4">
+	<gd_rule rule_name="Balaur Souls (Rare)" base_chance="6" dynamic_chance="true" min_diff="0" max_diff="4" no_reduction="true">
 		<gd_races>
 			<gd_race race="DRAKAN" />
 			<gd_race race="NAGA" />
@@ -669,7 +669,7 @@
 			<gd_item id="152013044" /><!-- Deadly Pride -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Balaur Souls (Legend)" base_chance="6" dynamic_chance="true" min_diff="-5" max_diff="4">
+	<gd_rule rule_name="Balaur Souls (Legend)" base_chance="6" dynamic_chance="true" min_diff="-5" max_diff="4" no_reduction="true">
 		<gd_races>
 			<gd_race race="DRAKAN" />
 			<gd_race race="NAGA" />
@@ -691,7 +691,7 @@
 			<gd_item id="152013018" /><!-- Fatal Violent Ego -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Balaur Souls (Legend)" base_chance="6" dynamic_chance="true" min_diff="-2" max_diff="2">
+	<gd_rule rule_name="Balaur Souls (Legend)" base_chance="6" dynamic_chance="true" min_diff="-2" max_diff="2" no_reduction="true">
 		<gd_races>
 			<gd_race race="DRAKAN" />
 			<gd_race race="NAGA" />
@@ -704,7 +704,7 @@
 			<gd_item id="152013026" /><!-- Fatal Execration of Pleasure -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Balaur Souls (Legend)" base_chance="6" dynamic_chance="true" min_diff="-2" max_diff="0">
+	<gd_rule rule_name="Balaur Souls (Legend)" base_chance="6" dynamic_chance="true" min_diff="-2" max_diff="0" no_reduction="true">
 		<gd_races>
 			<gd_race race="DRAKAN" />
 			<gd_race race="NAGA" />
@@ -717,7 +717,7 @@
 			<gd_item id="152013035" /><!-- Fatal Urge of Pleasure -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Balaur Souls (Legend)" base_chance="4.5" dynamic_chance="true" min_diff="0" max_diff="4">
+	<gd_rule rule_name="Balaur Souls (Legend)" base_chance="4.5" dynamic_chance="true" min_diff="0" max_diff="4" no_reduction="true">
 		<gd_races>
 			<gd_race race="DRAKAN" />
 			<gd_race race="NAGA" />
@@ -730,7 +730,7 @@
 			<gd_item id="152013045" /><!-- Malicious Pride -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Balaur Souls (Unique)" base_chance="3" dynamic_chance="true" min_diff="-2" max_diff="2">
+	<gd_rule rule_name="Balaur Souls (Unique)" base_chance="3" dynamic_chance="true" min_diff="-2" max_diff="2" no_reduction="true">
 		<gd_races>
 			<gd_race race="DRAKAN" />
 			<gd_race race="NAGA" />
@@ -743,7 +743,7 @@
 			<gd_item id="152013027" /><!-- Inescapable Execration of Pleasure -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Balaur Souls (Unique)" base_chance="3" dynamic_chance="true" min_diff="-2" max_diff="0">
+	<gd_rule rule_name="Balaur Souls (Unique)" base_chance="3" dynamic_chance="true" min_diff="-2" max_diff="0" no_reduction="true">
 		<gd_races>
 			<gd_race race="DRAKAN" />
 			<gd_race race="NAGA" />
@@ -757,7 +757,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Balic Horns & Scales -->
-	<gd_rule rule_name="Balaur Horns + Scales" base_chance="12.5" dynamic_chance="true" min_diff="-9" max_diff="0">
+	<gd_rule rule_name="Balaur Horns + Scales" base_chance="12.5" dynamic_chance="true" min_diff="-9" max_diff="0" no_reduction="true">
 		<gd_races>
 			<gd_race race="DRAGON" />
 			<gd_race race="DRAKAN" />
@@ -779,7 +779,7 @@
 			<gd_item id="152014017" /><!-- Firm Balaur Scale -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Balaur Horns + Scales" base_chance="12.5" dynamic_chance="true" min_diff="0" max_diff="4">
+	<gd_rule rule_name="Balaur Horns + Scales" base_chance="12.5" dynamic_chance="true" min_diff="0" max_diff="4" no_reduction="true">
 		<gd_races>
 			<gd_race race="DRAKAN" />
 			<gd_race race="NAGA" />
@@ -792,7 +792,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Balic Skin & Meat -->
-	<gd_rule rule_name="Balaur Flesh" base_chance="12.5" dynamic_chance="true" min_diff="-9" max_diff="0">
+	<gd_rule rule_name="Balaur Flesh" base_chance="12.5" dynamic_chance="true" min_diff="-9" max_diff="0" no_reduction="true">
 		<gd_races>
 			<gd_race race="DRAKAN" />
 			<gd_race race="NAGA" />
@@ -813,7 +813,7 @@
 			<gd_item id="152014020" /><!-- Lustrous Balaur Meat -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Balaur Flesh" base_chance="12.5" dynamic_chance="true" min_diff="0" max_diff="4">
+	<gd_rule rule_name="Balaur Flesh" base_chance="12.5" dynamic_chance="true" min_diff="0" max_diff="4" no_reduction="true">
 		<gd_races>
 			<gd_race race="DRAKAN" />
 			<gd_race race="NAGA" />
@@ -826,7 +826,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Balic Blood -->
-	<gd_rule rule_name="Balaur Blood" base_chance="12.5" dynamic_chance="true" min_diff="-9" max_diff="0">
+	<gd_rule rule_name="Balaur Blood" base_chance="12.5" dynamic_chance="true" min_diff="-9" max_diff="0" no_reduction="true">
 		<gd_races>
 			<gd_race race="DRAKAN" />
 			<gd_race race="NAGA" />
@@ -843,7 +843,7 @@
 			<gd_item id="152014019" /><!-- Burning Balaur Blood Stain -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Balaur Blood" base_chance="12.5" dynamic_chance="true" min_diff="0" max_diff="4">
+	<gd_rule rule_name="Balaur Blood" base_chance="12.5" dynamic_chance="true" min_diff="0" max_diff="4" no_reduction="true">
 		<gd_races>
 			<gd_race race="DRAKAN" />
 			<gd_race race="NAGA" />
@@ -855,7 +855,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Elyos Spirit -->
-	<gd_rule rule_name="Ectoplasm Fragment" base_chance="3.5" dynamic_chance="true" min_diff="-2" max_diff="2">
+	<gd_rule rule_name="Ectoplasm Fragment" base_chance="3.5" dynamic_chance="true" min_diff="-2" max_diff="2" no_reduction="true">
 		<gd_worlds>
 			<gd_world wd_type="ELYSEA" />
 		</gd_worlds>
@@ -868,7 +868,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Wriggot -->
-	<gd_rule rule_name="Wriggot Scale" base_chance="4" dynamic_chance="true" min_diff="-2" max_diff="2">
+	<gd_rule rule_name="Wriggot Scale" base_chance="4" dynamic_chance="true" min_diff="-2" max_diff="2" no_reduction="true">
 		<gd_worlds>
 			<gd_world wd_type="ELYSEA" />
 		</gd_worlds>
@@ -881,7 +881,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Manduri -->
-	<gd_rule rule_name="Manduri Fur Ball" base_chance="2.5" dynamic_chance="true" min_diff="-2" max_diff="2">
+	<gd_rule rule_name="Manduri Fur Ball" base_chance="2.5" dynamic_chance="true" min_diff="-2" max_diff="2" no_reduction="true">
 		<gd_worlds>
 			<gd_world wd_type="ELYSEA" />
 		</gd_worlds>
@@ -894,7 +894,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Monitor -->
-	<gd_rule rule_name="Monitor Back Skin" base_chance="2.5" dynamic_chance="true" min_diff="-2" max_diff="2">
+	<gd_rule rule_name="Monitor Back Skin" base_chance="2.5" dynamic_chance="true" min_diff="-2" max_diff="2" no_reduction="true">
 		<gd_worlds>
 			<gd_world wd_type="ELYSEA" />
 		</gd_worlds>
@@ -906,7 +906,7 @@
 			<gd_item id="152012004" /><!-- Monitor Back Skin -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Monitor Meat" base_chance="20" dynamic_chance="true" min_diff="-2" max_diff="2">
+	<gd_rule rule_name="Monitor Meat" base_chance="20" dynamic_chance="true" min_diff="-2" max_diff="2" no_reduction="true">
 		<gd_worlds>
 			<gd_world wd_type="ASMODAE" />
 		</gd_worlds>
@@ -919,7 +919,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Spiner -->
-	<gd_rule rule_name="Spiner Red Carapace" base_chance="2" dynamic_chance="true" min_diff="-2" max_diff="2">
+	<gd_rule rule_name="Spiner Red Carapace" base_chance="2" dynamic_chance="true" min_diff="-2" max_diff="2" no_reduction="true">
 		<gd_worlds>
 			<gd_world wd_type="ELYSEA" />
 		</gd_worlds>
@@ -932,7 +932,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Caryatid -->
-	<gd_rule rule_name="Ancient Caryatid Fragment" base_chance="2" dynamic_chance="true" min_diff="-2" max_diff="2">
+	<gd_rule rule_name="Ancient Caryatid Fragment" base_chance="2" dynamic_chance="true" min_diff="-2" max_diff="2" no_reduction="true">
 		<gd_worlds>
 			<gd_world wd_type="ELYSEA" />
 		</gd_worlds>
@@ -944,7 +944,7 @@
 			<gd_item id="152012006" /><!-- Ancient Caryatid Fragment -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Desert Caryatid Fragment" base_chance="20" dynamic_chance="true" min_diff="-2" max_diff="2">
+	<gd_rule rule_name="Desert Caryatid Fragment" base_chance="20" dynamic_chance="true" min_diff="-2" max_diff="2" no_reduction="true">
 		<gd_worlds>
 			<gd_world wd_type="OTHER_INSTANCES" />
 		</gd_worlds>
@@ -957,7 +957,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Basilisk -->
-	<gd_rule rule_name="Basilisk Backbone" base_chance="2" dynamic_chance="true" min_diff="-2" max_diff="2">
+	<gd_rule rule_name="Basilisk Backbone" base_chance="2" dynamic_chance="true" min_diff="-2" max_diff="2" no_reduction="true">
 		<gd_worlds>
 			<gd_world wd_type="ELYSEA" />
 		</gd_worlds>
@@ -969,7 +969,7 @@
 			<gd_item id="152012007" /><!-- Basilisk Backbone -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Basilisk Meat" base_chance="2" dynamic_chance="true" min_diff="-2" max_diff="2">
+	<gd_rule rule_name="Basilisk Meat" base_chance="2" dynamic_chance="true" min_diff="-2" max_diff="2" no_reduction="true">
 		<gd_worlds>
 			<gd_world wd_type="ELYSEA" />
 		</gd_worlds>
@@ -981,7 +981,7 @@
 			<gd_item id="152015009" /><!-- Raw Basilisk Meat -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Basilisk Back Skin" base_chance="5" dynamic_chance="true" min_diff="-2" max_diff="2">
+	<gd_rule rule_name="Basilisk Back Skin" base_chance="5" dynamic_chance="true" min_diff="-2" max_diff="2" no_reduction="true">
 		<gd_worlds>
 			<gd_world wd_type="ASMODAE" />
 		</gd_worlds>
@@ -994,7 +994,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Wind Spirit -->
-	<gd_rule rule_name="Wind Spirit Mane" base_chance="6" dynamic_chance="true" min_diff="-2" max_diff="2">
+	<gd_rule rule_name="Wind Spirit Mane" base_chance="6" dynamic_chance="true" min_diff="-2" max_diff="2" no_reduction="true">
 		<gd_worlds>
 			<gd_world wd_type="ELYSEA" />
 		</gd_worlds>
@@ -1008,7 +1008,7 @@
 			<gd_item id="152012009" /><!-- Wind Spirit Mane -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Gust Crystal" base_chance="24" dynamic_chance="true" min_diff="-2" max_diff="2">
+	<gd_rule rule_name="Gust Crystal" base_chance="24" dynamic_chance="true" min_diff="-2" max_diff="2" no_reduction="true">
 		<gd_worlds>
 			<gd_world wd_type="ELYSEA" />
 		</gd_worlds>
@@ -1023,7 +1023,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Gargoyle -->
-	<gd_rule rule_name="Eracus Gargoyle Fragment" base_chance="6" dynamic_chance="true" min_diff="-2" max_diff="2">
+	<gd_rule rule_name="Eracus Gargoyle Fragment" base_chance="6" dynamic_chance="true" min_diff="-2" max_diff="2" no_reduction="true">
 		<gd_maps>
 			<gd_map map_id="210020000" /><!-- Eltnen -->
 		</gd_maps>
@@ -1036,7 +1036,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Temptress -->
-	<gd_rule rule_name="Seduction Blood" base_chance="2" dynamic_chance="true" min_diff="-2" max_diff="2">
+	<gd_rule rule_name="Seduction Blood" base_chance="2" dynamic_chance="true" min_diff="-2" max_diff="2" no_reduction="true">
 		<gd_worlds>
 			<gd_world wd_type="ELYSEA" />
 		</gd_worlds>
@@ -1049,7 +1049,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Virago -->
-	<gd_rule rule_name="Virago Feather" base_chance="2" dynamic_chance="true" min_diff="-2" max_diff="2">
+	<gd_rule rule_name="Virago Feather" base_chance="2" dynamic_chance="true" min_diff="-2" max_diff="2" no_reduction="true">
 		<gd_worlds>
 			<gd_world wd_type="ELYSEA" />
 		</gd_worlds>
@@ -1062,7 +1062,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Keraton -->
-	<gd_rule rule_name="Horn of Keraton" base_chance="2" dynamic_chance="true" min_diff="-2" max_diff="2">
+	<gd_rule rule_name="Horn of Keraton" base_chance="2" dynamic_chance="true" min_diff="-2" max_diff="2" no_reduction="true">
 		<gd_worlds>
 			<gd_world wd_type="ELYSEA" />
 		</gd_worlds>
@@ -1075,7 +1075,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Agrint -->
-	<gd_rule rule_name="Agrint Branch" base_chance="2" dynamic_chance="true" min_diff="-2" max_diff="2">
+	<gd_rule rule_name="Agrint Branch" base_chance="2" dynamic_chance="true" min_diff="-2" max_diff="2" no_reduction="true">
 		<gd_worlds>
 			<gd_world wd_type="ELYSEA" />
 		</gd_worlds>
@@ -1088,7 +1088,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Troll -->
-	<gd_rule rule_name="Troll Blood" base_chance="2" dynamic_chance="true" min_diff="-2" max_diff="2">
+	<gd_rule rule_name="Troll Blood" base_chance="2" dynamic_chance="true" min_diff="-2" max_diff="2" no_reduction="true">
 		<gd_worlds>
 			<gd_world wd_type="ELYSEA" />
 		</gd_worlds>
@@ -1101,7 +1101,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Kerubian / Kerubiel -->
-	<gd_rule rule_name="Kerubian Big Horn" base_chance="2" dynamic_chance="true" min_diff="-2" max_diff="2">
+	<gd_rule rule_name="Kerubian Big Horn" base_chance="2" dynamic_chance="true" min_diff="-2" max_diff="2" no_reduction="true">
 		<gd_worlds>
 			<gd_world wd_type="ELYSEA" />
 		</gd_worlds>
@@ -1115,7 +1115,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Adult/Giant Mamut -->
-	<gd_rule rule_name="Named Material" base_chance="2.5" dynamic_chance="true" min_diff="-2" max_diff="2">
+	<gd_rule rule_name="Named Material" base_chance="2.5" dynamic_chance="true" min_diff="-2" max_diff="2" no_reduction="true">
 		<gd_worlds>
 			<gd_world wd_type="ELYSEA" />
 		</gd_worlds>
@@ -1128,7 +1128,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Frillneck -->
-	<gd_rule rule_name="Huge Frillneck Claw" base_chance="10" dynamic_chance="true" min_diff="-5" max_diff="0">
+	<gd_rule rule_name="Huge Frillneck Claw" base_chance="10" dynamic_chance="true" min_diff="-5" max_diff="0" no_reduction="true">
 		<gd_worlds>
 			<gd_world wd_type="ELYSEA" />
 		</gd_worlds>
@@ -1140,7 +1140,7 @@
 			<gd_item id="152012019" /><!-- Huge Frillneck Claw -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Raw Frillneck Meat" base_chance="10" dynamic_chance="true" min_diff="-15" max_diff="-10">
+	<gd_rule rule_name="Raw Frillneck Meat" base_chance="10" dynamic_chance="true" min_diff="-15" max_diff="-10" no_reduction="true">
 		<gd_worlds>
 			<gd_world wd_type="ELYSEA" />
 		</gd_worlds>
@@ -1153,7 +1153,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Spirit -->
-	<gd_rule rule_name="Vengeful Spirit Shard" base_chance="2" dynamic_chance="true" min_diff="-2" max_diff="2">
+	<gd_rule rule_name="Vengeful Spirit Shard" base_chance="2" dynamic_chance="true" min_diff="-2" max_diff="2" no_reduction="true">
 		<gd_worlds>
 			<gd_world wd_type="ELYSEA" />
 		</gd_worlds>
@@ -1169,7 +1169,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Krall -->
-	<gd_rule rule_name="Boiling Turquoise Blood" base_chance="2" dynamic_chance="true" min_diff="-2" max_diff="2">
+	<gd_rule rule_name="Boiling Turquoise Blood" base_chance="2" dynamic_chance="true" min_diff="-2" max_diff="2" no_reduction="true">
 		<gd_worlds>
 			<gd_world wd_type="ELYSEA" />
 		</gd_worlds>
@@ -1184,7 +1184,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Windwisp -->
-	<gd_rule rule_name="Hazy Fluid" base_chance="2" dynamic_chance="true" min_diff="-2" max_diff="2">
+	<gd_rule rule_name="Hazy Fluid" base_chance="2" dynamic_chance="true" min_diff="-2" max_diff="2" no_reduction="true">
 		<gd_worlds>
 			<gd_world wd_type="ELYSEA" />
 		</gd_worlds>
@@ -1197,7 +1197,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Griffon -->
-	<gd_rule rule_name="Griffon Plume" base_chance="24" dynamic_chance="true" min_diff="-2" max_diff="2">
+	<gd_rule rule_name="Griffon Plume" base_chance="24" dynamic_chance="true" min_diff="-2" max_diff="2" no_reduction="true">
 		<gd_worlds>
 			<gd_world wd_type="ELYSEA" />
 		</gd_worlds>
@@ -1210,7 +1210,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Petrahulk -->
-	<gd_rule rule_name="Stone Fist Petrahulk Fragment" base_chance="24" dynamic_chance="true" min_diff="-2" max_diff="2">
+	<gd_rule rule_name="Stone Fist Petrahulk Fragment" base_chance="24" dynamic_chance="true" min_diff="-2" max_diff="2" no_reduction="true">
 		<gd_worlds>
 			<gd_world wd_type="ELYSEA" />
 		</gd_worlds>
@@ -1223,7 +1223,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Gryphu -->
-	<gd_rule rule_name="Gryphu Feather" base_chance="24" dynamic_chance="true" min_diff="-2" max_diff="2">
+	<gd_rule rule_name="Gryphu Feather" base_chance="24" dynamic_chance="true" min_diff="-2" max_diff="2" no_reduction="true">
 		<gd_worlds>
 			<gd_world wd_type="ELYSEA" />
 		</gd_worlds>
@@ -1236,7 +1236,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Dionae -->
-	<gd_rule rule_name="Dionae Vine" base_chance="2" dynamic_chance="true" min_diff="-2" max_diff="2">
+	<gd_rule rule_name="Dionae Vine" base_chance="2" dynamic_chance="true" min_diff="-2" max_diff="2" no_reduction="true">
 		<gd_worlds>
 			<gd_world wd_type="ELYSEA" />
 		</gd_worlds>
@@ -1248,7 +1248,7 @@
 			<gd_item id="152012041" /><!-- Dionae Vine -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Dionae Stem" base_chance="2" dynamic_chance="true" min_diff="-2" max_diff="2">
+	<gd_rule rule_name="Dionae Stem" base_chance="2" dynamic_chance="true" min_diff="-2" max_diff="2" no_reduction="true">
 		<gd_worlds>
 			<gd_world wd_type="ASMODAE" />
 		</gd_worlds>
@@ -1261,7 +1261,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Nagolem -->
-	<gd_rule rule_name="Nagolem Core" base_chance="2" dynamic_chance="true" min_diff="-2" max_diff="2">
+	<gd_rule rule_name="Nagolem Core" base_chance="2" dynamic_chance="true" min_diff="-2" max_diff="2" no_reduction="true">
 		<gd_worlds>
 			<gd_world wd_type="ELYSEA" />
 		</gd_worlds>
@@ -1275,7 +1275,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Pluma -->
-	<gd_rule rule_name="Raw Pluma Meat" base_chance="20" dynamic_chance="true" min_diff="-2" max_diff="2">
+	<gd_rule rule_name="Raw Pluma Meat" base_chance="20" dynamic_chance="true" min_diff="-2" max_diff="2" no_reduction="true">
 		<gd_worlds>
 			<gd_world wd_type="ELYSEA" />
 		</gd_worlds>
@@ -1288,7 +1288,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Kurin -->
-	<gd_rule rule_name="Raw Kurin Meat" base_chance="27" dynamic_chance="true" min_diff="-2" max_diff="2">
+	<gd_rule rule_name="Raw Kurin Meat" base_chance="27" dynamic_chance="true" min_diff="-2" max_diff="2" no_reduction="true">
 		<gd_worlds>
 			<gd_world wd_type="ELYSEA" />
 		</gd_worlds>
@@ -1301,7 +1301,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Crestlich -->
-	<gd_rule rule_name="Crestlich Breast Meat" base_chance="27" dynamic_chance="true" min_diff="-2" max_diff="2">
+	<gd_rule rule_name="Crestlich Breast Meat" base_chance="27" dynamic_chance="true" min_diff="-2" max_diff="2" no_reduction="true">
 		<gd_worlds>
 			<gd_world wd_type="ELYSEA" />
 		</gd_worlds>
@@ -1313,7 +1313,7 @@
 			<gd_item id="152015003" /><!-- Crestlich Breast Meat -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Crestlich Meat" base_chance="27" dynamic_chance="true" min_diff="-2" max_diff="2">
+	<gd_rule rule_name="Crestlich Meat" base_chance="27" dynamic_chance="true" min_diff="-2" max_diff="2" no_reduction="true">
 		<gd_worlds>
 			<gd_world wd_type="ASMODAE" />
 		</gd_worlds>
@@ -1326,7 +1326,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Rynoce -->
-	<gd_rule rule_name="Raw Rynoce Meat" base_chance="24" dynamic_chance="true" min_diff="-2" max_diff="2">
+	<gd_rule rule_name="Raw Rynoce Meat" base_chance="24" dynamic_chance="true" min_diff="-2" max_diff="2" no_reduction="true">
 		<gd_worlds>
 			<gd_world wd_type="ELYSEA" />
 		</gd_worlds>
@@ -1339,7 +1339,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Klaw -->
-	<gd_rule rule_name="Raw Klaw Meat" base_chance="24" dynamic_chance="true" min_diff="-2" max_diff="2">
+	<gd_rule rule_name="Raw Klaw Meat" base_chance="24" dynamic_chance="true" min_diff="-2" max_diff="2" no_reduction="true">
 		<gd_worlds>
 			<gd_world wd_type="ELYSEA" />
 		</gd_worlds>
@@ -1352,7 +1352,7 @@
 			<gd_item id="152015006" /><!-- Raw Klaw Meat -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Gigantic Klaw Carapace" base_chance="2" dynamic_chance="true" min_diff="-2" max_diff="2">
+	<gd_rule rule_name="Gigantic Klaw Carapace" base_chance="2" dynamic_chance="true" min_diff="-2" max_diff="2" no_reduction="true">
 		<gd_worlds>
 			<gd_world wd_type="ELYSEA" />
 		</gd_worlds>
@@ -1366,7 +1366,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Cellatu -->
-	<gd_rule rule_name="Cellatu Meat" base_chance="24" dynamic_chance="true" min_diff="-2" max_diff="2">
+	<gd_rule rule_name="Cellatu Meat" base_chance="24" dynamic_chance="true" min_diff="-2" max_diff="2" no_reduction="true">
 		<gd_worlds>
 			<gd_world wd_type="ELYSEA" />
 		</gd_worlds>
@@ -1379,7 +1379,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Calydon -->
-	<gd_rule rule_name="Calydon Meat" base_chance="100" min_diff="-2" max_diff="2">
+	<gd_rule rule_name="Calydon Meat" base_chance="100" min_diff="-2" max_diff="2" no_reduction="true">
 		<gd_npc_groups>
 			<gd_npc_group group="CALYDON_ASSASSIN" />
 			<gd_npc_group group="CALYDON_FIGHTER" />
@@ -1391,7 +1391,7 @@
 			<gd_item id="152015012" /><!-- Calydon Meat -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Calydon Molar" base_chance="24" dynamic_chance="true" min_diff="-2" max_diff="2">
+	<gd_rule rule_name="Calydon Molar" base_chance="24" dynamic_chance="true" min_diff="-2" max_diff="2" no_reduction="true">
 		<gd_worlds>
 			<gd_world wd_type="ELYSEA" />
 		</gd_worlds>
@@ -1407,7 +1407,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Moonflower -->
-	<gd_rule rule_name="Moonflower Fruit" base_chance="24" dynamic_chance="true" min_diff="-14" max_diff="-5">
+	<gd_rule rule_name="Moonflower Fruit" base_chance="24" dynamic_chance="true" min_diff="-14" max_diff="-5" no_reduction="true">
 		<gd_worlds>
 			<gd_world wd_type="ELYSEA" />
 		</gd_worlds>
@@ -1419,7 +1419,7 @@
 			<gd_item id="152015010" /><!-- Moonflower Fruit -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Moonflower Leaf" base_chance="24" dynamic_chance="true" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="Moonflower Leaf" base_chance="24" dynamic_chance="true" min_diff="-4" max_diff="5" no_reduction="true">
 		<gd_worlds>
 			<gd_world wd_type="BALAUREA" />
 		</gd_worlds>
@@ -1432,7 +1432,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Specter -->
-	<gd_rule rule_name="Bone with Specter Magic" base_chance="24" dynamic_chance="true" min_diff="-2" max_diff="2">
+	<gd_rule rule_name="Bone with Specter Magic" base_chance="24" dynamic_chance="true" min_diff="-2" max_diff="2" no_reduction="true">
 		<gd_worlds>
 			<gd_world wd_type="ELYSEA" />
 		</gd_worlds>
@@ -1445,7 +1445,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Hornskull -->
-	<gd_rule rule_name="Hornskull Scale" base_chance="15" dynamic_chance="true" min_diff="-2" max_diff="3">
+	<gd_rule rule_name="Hornskull Scale" base_chance="15" dynamic_chance="true" min_diff="-2" max_diff="3" no_reduction="true">
 		<gd_worlds>
 			<gd_world wd_type="ELYSEA" />
 		</gd_worlds>
@@ -1458,7 +1458,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Mosbear -->
-	<gd_rule rule_name="Mosbear Skin" base_chance="5" dynamic_chance="true" min_diff="-2" max_diff="2">
+	<gd_rule rule_name="Mosbear Skin" base_chance="5" dynamic_chance="true" min_diff="-2" max_diff="2" no_reduction="true">
 		<gd_worlds>
 			<gd_world wd_type="ASMODAE" />
 		</gd_worlds>
@@ -1471,7 +1471,7 @@
 			<gd_item id="152012501" /><!-- Mosbear Skin -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Mosbear Skin" base_chance="10" dynamic_chance="true" min_diff="-2" max_diff="2">
+	<gd_rule rule_name="Mosbear Skin" base_chance="10" dynamic_chance="true" min_diff="-2" max_diff="2" no_reduction="true">
 		<gd_worlds>
 			<gd_world wd_type="ASMODAE" />
 		</gd_worlds>
@@ -1484,7 +1484,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Drake -->
-	<gd_rule rule_name="Drake Claw" base_chance="10" dynamic_chance="true" min_diff="-2" max_diff="2">
+	<gd_rule rule_name="Drake Claw" base_chance="10" dynamic_chance="true" min_diff="-2" max_diff="2" no_reduction="true">
 		<gd_worlds>
 			<gd_world wd_type="ASMODAE" />
 		</gd_worlds>
@@ -1497,7 +1497,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Granker -->
-	<gd_rule rule_name="Granker Horn" base_chance="20" dynamic_chance="true" min_diff="-2" max_diff="2">
+	<gd_rule rule_name="Granker Horn" base_chance="20" dynamic_chance="true" min_diff="-2" max_diff="2" no_reduction="true">
 		<gd_worlds>
 			<gd_world wd_type="ASMODAE" />
 		</gd_worlds>
@@ -1509,7 +1509,7 @@
 			<gd_item id="152012518" /><!-- Noble Granker Horn -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Granker Meat" base_chance="20" dynamic_chance="true" min_diff="-2" max_diff="2">
+	<gd_rule rule_name="Granker Meat" base_chance="20" dynamic_chance="true" min_diff="-2" max_diff="2" no_reduction="true">
 		<gd_worlds>
 			<gd_world wd_type="ASMODAE" />
 		</gd_worlds>
@@ -1522,7 +1522,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Frightcorn -->
-	<gd_rule rule_name="Corn's Candy" base_chance="15" dynamic_chance="true" min_diff="-2" max_diff="2">
+	<gd_rule rule_name="Corn's Candy" base_chance="15" dynamic_chance="true" min_diff="-2" max_diff="2" no_reduction="true">
 		<gd_worlds>
 			<gd_world wd_type="ASMODAE" />
 		</gd_worlds>
@@ -1535,7 +1535,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Cellatu -->
-	<gd_rule rule_name="Cellatu Heart" base_chance="10" dynamic_chance="true" min_diff="-2" max_diff="3">
+	<gd_rule rule_name="Cellatu Heart" base_chance="10" dynamic_chance="true" min_diff="-2" max_diff="3" no_reduction="true">
 		<gd_worlds>
 			<gd_world wd_type="ASMODAE" />
 		</gd_worlds>
@@ -1547,7 +1547,7 @@
 			<gd_item id="152012542" /><!-- Cellatu Heart -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Trico Horn" base_chance="10" dynamic_chance="true" min_diff="-2" max_diff="0">
+	<gd_rule rule_name="Trico Horn" base_chance="10" dynamic_chance="true" min_diff="-2" max_diff="0" no_reduction="true">
 		<gd_worlds>
 			<gd_world wd_type="ASMODAE" />
 		</gd_worlds>
@@ -1561,7 +1561,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Rotron -->
-	<gd_rule rule_name="Wild Ginseng" base_chance="20" dynamic_chance="true" min_diff="-2" max_diff="2">
+	<gd_rule rule_name="Wild Ginseng" base_chance="20" dynamic_chance="true" min_diff="-2" max_diff="2" no_reduction="true">
 		<gd_worlds>
 			<gd_world wd_type="ASMODAE" />
 		</gd_worlds>
@@ -1574,7 +1574,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Ettin -->
-	<gd_rule rule_name="Ettin Skin" base_chance="5" dynamic_chance="true" min_diff="-2" max_diff="2">
+	<gd_rule rule_name="Ettin Skin" base_chance="5" dynamic_chance="true" min_diff="-2" max_diff="2" no_reduction="true">
 		<gd_worlds>
 			<gd_world wd_type="ASMODAE" />
 		</gd_worlds>
@@ -1587,7 +1587,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Sulfur Slime -->
-	<gd_rule rule_name="Sulfur Slime Core" base_chance="40" dynamic_chance="true" min_diff="-2" max_diff="2">
+	<gd_rule rule_name="Sulfur Slime Core" base_chance="40" dynamic_chance="true" min_diff="-2" max_diff="2" no_reduction="true">
 		<gd_worlds>
 			<gd_world wd_type="ASMODAE" />
 		</gd_worlds>
@@ -1602,7 +1602,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Arkanis Gargoyle -->
-	<gd_rule rule_name="Arkanis Gargoyle Fragment" base_chance="40" dynamic_chance="true" min_diff="-2" max_diff="2">
+	<gd_rule rule_name="Arkanis Gargoyle Fragment" base_chance="40" dynamic_chance="true" min_diff="-2" max_diff="2" no_reduction="true">
 		<gd_worlds>
 			<gd_world wd_type="ASMODAE" />
 		</gd_worlds>
@@ -1617,7 +1617,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Fungy -->
-	<gd_rule rule_name="Fungen Cap" base_chance="40" dynamic_chance="true" min_diff="-2" max_diff="2">
+	<gd_rule rule_name="Fungen Cap" base_chance="40" dynamic_chance="true" min_diff="-2" max_diff="2" no_reduction="true">
 		<gd_worlds>
 			<gd_world wd_type="ASMODAE" />
 		</gd_worlds>
@@ -1630,7 +1630,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Ksellid -->
-	<gd_rule rule_name="Ksellid Meat" base_chance="40" dynamic_chance="true" min_diff="-2" max_diff="2">
+	<gd_rule rule_name="Ksellid Meat" base_chance="40" dynamic_chance="true" min_diff="-2" max_diff="2" no_reduction="true">
 		<gd_worlds>
 			<gd_world wd_type="ASMODAE" />
 		</gd_worlds>
@@ -1643,7 +1643,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Hornskull -->
-	<gd_rule rule_name="Hornskull Scale" base_chance="20" dynamic_chance="true" min_diff="-1" max_diff="4">
+	<gd_rule rule_name="Hornskull Scale" base_chance="20" dynamic_chance="true" min_diff="-1" max_diff="4" no_reduction="true">
 		<gd_worlds>
 			<gd_world wd_type="ASMODAE" />
 		</gd_worlds>
@@ -1656,7 +1656,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Fresh Meat -->
-	<gd_rule rule_name="Fresh Marbled Meat" base_chance="10" dynamic_chance="true" min_diff="0" max_diff="4">
+	<gd_rule rule_name="Fresh Marbled Meat" base_chance="10" dynamic_chance="true" min_diff="0" max_diff="4" no_reduction="true">
 		<gd_worlds>
 			<gd_world wd_type="BALAUREA_HIGH" />
 		</gd_worlds>
@@ -1680,7 +1680,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Ceramium Fragment -->
-	<gd_rule rule_name="Ceramium Fragment" base_chance="1.5" dynamic_chance="true">
+	<gd_rule rule_name="Ceramium Fragment" base_chance="1.5" dynamic_chance="true" no_reduction="true">
 		<gd_worlds>
 			<gd_world wd_type="BALAUREA_HIGH" />
 		</gd_worlds>

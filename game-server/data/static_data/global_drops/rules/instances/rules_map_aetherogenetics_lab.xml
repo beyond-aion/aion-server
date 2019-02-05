@@ -14,7 +14,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Single Monster Drops -->
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="70">
+	<gd_rule rule_name="Named Armor (Rare)" base_chance="70" no_reduction="true">
 		<gd_maps>
 			<gd_map map_id="310050000" /><!-- Aetherogenetics_Lab -->
 		</gd_maps>
@@ -30,7 +30,7 @@
 			<gd_item id="114600684" /><!-- Researcher's Sabatons -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="70">
+	<gd_rule rule_name="Named Armor (Rare)" base_chance="70" no_reduction="true">
 		<gd_maps>
 			<gd_map map_id="310050000" /><!-- Aetherogenetics_Lab -->
 		</gd_maps>
@@ -45,7 +45,7 @@
 			<gd_item id="111500705" /><!-- Researcher's Handguards -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Head (Rare)" base_chance="70">
+	<gd_rule rule_name="Named Head (Rare)" base_chance="70" no_reduction="true">
 		<gd_maps>
 			<gd_map map_id="310050000" /><!-- Aetherogenetics_Lab -->
 		</gd_maps>
@@ -78,7 +78,7 @@
 			<gd_item id="185000003" /><!-- Lepharist Research Center Key 3 -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Legend)" base_chance="30">
+	<gd_rule rule_name="Named Weapon (Legend)" base_chance="30" no_reduction="true">
 		<gd_maps>
 			<gd_map map_id="310050000" /><!-- Aetherogenetics_Lab -->
 		</gd_maps>
@@ -101,7 +101,7 @@
 			<gd_item id="102000847" /><!-- Complete Subject's Harp -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="70">
+	<gd_rule rule_name="Named Armor (Rare)" base_chance="70" no_reduction="true">
 		<gd_maps>
 			<gd_map map_id="310050000" /><!-- Aetherogenetics_Lab -->
 		</gd_maps>
