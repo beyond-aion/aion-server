@@ -81,8 +81,10 @@ public abstract class Base<T extends BaseLocation> {
 		List<Npc> spawned = World.getInstance().getBaseSpawns(id);
 		if (spawned != null) {
 			for (Npc npc : spawned) {
-				if (npc != null)
-					npc.getController().delete();
+				if (npc != null) {
+					if (npc.isDead() || !npc.getController().delete())
+						RespawnService.cancelRespawn(npc);
+				}
 			}
 		}
 	}
