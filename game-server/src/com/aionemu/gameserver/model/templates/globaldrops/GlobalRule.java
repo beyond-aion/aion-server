@@ -138,7 +138,7 @@ public class GlobalRule {
 		return restrictionRace;
 	}
 
-	public boolean getNoReduction() {
+	public boolean isNoReduction() {
 		return noReduction;
 	}
 

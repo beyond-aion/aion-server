@@ -61,13 +61,6 @@ public class Drop {
 		return chance;
 	}
 
-	public float getFinalChance(float dropModifier) {
-		float finalChance = chance;
-		if (!noReduce)
-			finalChance *= dropModifier;
-		return finalChance;
-	}
-
 	public boolean isNoReduction() {
 		return noReduce;
 	}

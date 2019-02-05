@@ -24,16 +24,13 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 public class DropGroup {
 
 	@XmlElement(name = "drop")
-	protected List<Drop> drops;
+	private List<Drop> drops;
 	@XmlAttribute(name = "race")
-	protected Race race = Race.PC_ALL;
+	private Race race = Race.PC_ALL;
 	@XmlAttribute(name = "name")
-	protected String name;
+	private String name;
 	@XmlAttribute(name = "max_items")
-	protected int maxItems = 1;
-
-	public DropGroup() {
-	}
+	private int maxItems = 1;
 
 	public List<Drop> getDrop() {
 		return drops;
@@ -51,14 +48,14 @@ public class DropGroup {
 		return name;
 	}
 
-	public int tryAddDropItems(Set<DropItem> result, int index, float dropModifier, Collection<Player> groupMembers) {
+	public int tryAddDropItems(Set<DropItem> result, int index, DropModifiers dropModifiers, Collection<Player> groupMembers) {
 		Set<Drop> remainingDrops = new HashSet<>(drops);
 		for (int i = 0; i < maxItems && !remainingDrops.isEmpty(); i++) {
 			float chance = Rnd.chance();
 			float nearestChanceDiff = Float.MAX_VALUE;
 			List<Drop> nearestDropsOfSameChance = new ArrayList<>();
 			for (Drop drop : remainingDrops) {
-				float finalChance = drop.getFinalChance(dropModifier);
+				float finalChance = dropModifiers.calculateDropChance(drop.getChance(), drop.isNoReduction());
 				if (chance < finalChance) {
 					float chanceDiff = finalChance - chance;
 					if (nearestDropsOfSameChance.isEmpty() || chanceDiff <= nearestChanceDiff) {

@@ -19,6 +19,7 @@ import com.aionemu.gameserver.dataholders.GlobalNpcExclusionData;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.drop.Drop;
 import com.aionemu.gameserver.model.drop.DropItem;
+import com.aionemu.gameserver.model.drop.DropModifiers;
 import com.aionemu.gameserver.model.drop.NpcDrop;
 import com.aionemu.gameserver.model.gameobjects.DropNpc;
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -76,8 +77,6 @@ public class DropRegistrationService {
 
 		// Getting all possible drops for this Npc
 		NpcDrop npcDrop = DataManager.CUSTOM_NPC_DROP.getNpcDrop(npc.getNpcId());
-		String dropType = npc.getGroupDrop().name().toLowerCase();
-		boolean isChest = npc.getAi().getName().equals("chest") || dropType.startsWith("treasure") || dropType.endsWith("box");
 
 		List<Player> allowedLooters = new ArrayList<>();
 		Player looter = player;
@@ -90,10 +89,10 @@ public class DropRegistrationService {
 
 		int index = 1;
 		Set<DropItem> droppedItems = new HashSet<>();
-		float dropRate = calculateDropRate(looter, npc, isChest, highestLevel);
+		DropModifiers dropModifiers = createDropModifiers(npc, looter, highestLevel);
 
 		if (npcDrop != null) // add custom drops
-			index = npcDrop.dropCalculator(droppedItems, index, dropRate, looter.getRace(), groupMembers);
+			index = npcDrop.dropCalculator(droppedItems, index, dropModifiers, groupMembers);
 
 		// Updating current dropMap
 		currentDropMap.put(npcObjId, droppedItems);
@@ -104,14 +103,14 @@ public class DropRegistrationService {
 		boolean isNpcQuest = npc.getAi().getName().equals("quest_use_item");
 		if (!isNpcQuest) {
 			boolean hasGlobalNpcExclusions = hasGlobalNpcExclusions(npc);
-			boolean isAllowedDefaultGlobalDropNpc = isAllowedDefaultGlobalDropNpc(npc, isChest);
+			boolean isAllowedDefaultGlobalDropNpc = isAllowedDefaultGlobalDropNpc(npc, dropModifiers.isDropNpcChest());
 			// instances with WorldDropType.NONE must not have global drops (example Arenas)
 			if (!hasGlobalNpcExclusions && npc.getWorldDropType() != WorldDropType.NONE) {
-				index = addGlobalDrops(index, dropRate, looter, npc, isAllowedDefaultGlobalDropNpc, DataManager.GLOBAL_DROP_DATA.getAllRules(), droppedItems,
-					groupMembers, winnerObj);
+				index = addGlobalDrops(index, dropModifiers, looter, npc, isAllowedDefaultGlobalDropNpc, DataManager.GLOBAL_DROP_DATA.getAllRules(),
+					droppedItems, groupMembers, winnerObj);
 			}
-			if (!hasGlobalNpcExclusions || isChest)
-				addGlobalDrops(index, dropRate, looter, npc, isAllowedDefaultGlobalDropNpc, EventService.getInstance().getActiveEventDropRules(),
+			if (!hasGlobalNpcExclusions || dropModifiers.isDropNpcChest())
+				addGlobalDrops(index, dropModifiers, looter, npc, isAllowedDefaultGlobalDropNpc, EventService.getInstance().getActiveEventDropRules(),
 					droppedItems, groupMembers, winnerObj);
 		}
 
@@ -125,6 +124,17 @@ public class DropRegistrationService {
 		}
 
 		DropService.getInstance().scheduleFreeForAll(npcObjId);
+	}
+
+	public DropModifiers createDropModifiers(Npc npc, Player player, int highestLevel) {
+		DropModifiers dropModifiers = new DropModifiers();
+		String dropType = npc.getGroupDrop().name().toLowerCase();
+		boolean isChest = npc.getAi().getName().equals("chest") || dropType.startsWith("treasure") || dropType.endsWith("box");
+		dropModifiers.setIsDropNpcChest(isChest);
+		dropModifiers.setDropRace(player.getRace());
+		dropModifiers.setBoostDropRate(calculateBoostDropRate(player, npc));
+		dropModifiers.setReductionDropRate(getReductionDropRate(npc, isChest, highestLevel));
+		return dropModifiers;
 	}
 
 	private Player initDropNpc(Player player, int npcObjId, List<Player> allowedLooters, Collection<Player> groupMembers) {
@@ -188,65 +198,57 @@ public class DropRegistrationService {
 		return true;
 	}
 
-	private int addGlobalDrops(int index, float dropRate, Player player, Npc npc, boolean isAllowedDefaultGlobalDropNpc, List<GlobalRule> rules,
-		Set<DropItem> droppedItems, Collection<Player> groupMembers, int winnerObj) {
+	private int addGlobalDrops(int index, DropModifiers dropModifiers, Player player, Npc npc, boolean isAllowedDefaultGlobalDropNpc,
+		List<GlobalRule> rules, Set<DropItem> droppedItems, Collection<Player> groupMembers, int winnerObj) {
 		for (GlobalRule rule : rules) {
 			// if getGlobalRuleNpcs() != null means drops are for specified npcs (like named drops) so the default restrictions will be ignored
 			if (isAllowedDefaultGlobalDropNpc || rule.getGlobalRuleNpcs() != null) {
-				float chance = calculateEffectiveChance(rule, npc, dropRate);
+				float chance = calculateEffectiveChance(rule, npc, dropModifiers);
 				if (Rnd.chance() >= chance)
 					continue;
 
-				index = addDropItems(index, droppedItems, rule, npc, player, groupMembers, winnerObj);
+				index = addDropItems(index, droppedItems, rule, npc, player, groupMembers, winnerObj, dropModifiers);
 			}
 		}
 		return index;
 	}
 
-	public float calculateDropRate(Player player, Npc npc, boolean isChest, int highestLevel) {
+	private Float getReductionDropRate(Npc npc, boolean isChest, int highestLevel) {
 		int dropChance = 100;
 		if (!DropConfig.DISABLE_REDUCTION && (!isChest || npc.getLevel() != 1) && !DropConfig.NO_REDUCTION_MAPS.contains(npc.getWorldId()))
 			dropChance = DropRewardEnum.dropRewardFrom(npc.getLevel() - highestLevel); // reduce chance depending on level
-		float boostDropRate = calculateBoostDropRate(player, npc);
-		float dropRate = Rates.get(player, RatesConfig.DROP_RATES) * boostDropRate * dropChance / 100F;
-		return dropRate;
+		return dropChance == 100 ? null : dropChance / 100f;
 	}
 
-	private float calculateBoostDropRate(Player genesis, Npc npc) {
+	private float calculateBoostDropRate(Player killer, Npc npc) {
 		// Drop rate from NPC can be boosted by Spiritmaster Erosion skill
-		float boostDropRate = npc.getGameStats().getStat(StatEnum.BOOST_DROP_RATE, 100).getCurrent() / 100f;
-
-		// Drop rate can be boosted by player buff too
-		boostDropRate += genesis.getGameStats().getStat(StatEnum.DR_BOOST, 0).getCurrent() / 100f;
-
-		// Some personal drop boost
-		// EoR 5% Boost drop rate
-		boostDropRate += genesis.getCommonData().getCurrentReposeEnergy() > 0 ? 0.05f : 0;
-		// EoS 5% Boost drop rate
-		boostDropRate += genesis.getCommonData().getCurrentSalvationPercent() > 0 ? 0.05f : 0;
-		// Deed to Palace 5% Boost drop rate
-		boostDropRate += genesis.getActiveHouse() != null && genesis.getActiveHouse().getHouseType() == HouseType.PALACE ? 0.05f : 0;
-		// Hmm.. 169625013 have boost drop rate 5% info but no such desc on buff
-
+		int boostDropRate = npc.getGameStats().getStat(StatEnum.BOOST_DROP_RATE, 100).getCurrent();
 		// can be exploited on duel with Spiritmaster Erosion skill
-		boostDropRate += genesis.getGameStats().getStat(StatEnum.BOOST_DROP_RATE, 100).getCurrent() / 100f - 1;
-		return boostDropRate;
+		boostDropRate = killer.getGameStats().getStat(StatEnum.BOOST_DROP_RATE, boostDropRate).getCurrent();
+		// Drop rate can be boosted by player buff too
+		boostDropRate = killer.getGameStats().getStat(StatEnum.DR_BOOST, boostDropRate).getCurrent();
+
+		if (killer.getCommonData().getCurrentReposeEnergy() > 0) // EoR 5% Boost drop rate
+			boostDropRate += 5;
+		if (killer.getCommonData().getCurrentSalvationPercent() > 0) // EoS 5% Boost drop rate
+			boostDropRate += 5;
+		if (killer.getActiveHouse() != null && killer.getActiveHouse().getHouseType() == HouseType.PALACE) // Deed to Palace 5% Boost drop rate
+			boostDropRate += 5;
+
+		return Rates.get(killer, RatesConfig.DROP_RATES) * boostDropRate / 100f;
 	}
 
-	public float calculateEffectiveChance(GlobalRule rule, Npc npc, float dropRate) {
+	public float calculateEffectiveChance(GlobalRule rule, Npc npc, DropModifiers dropModifiers) {
 		float chance = rule.getChance();
 		// dynamic_chance means mobs will have different base chances based on their rank and rating
 		if (rule.isDynamicChance())
 			chance *= getRankModifier(npc) * getRatingModifier(npc);
-		// ignore chance reducing dropRate if it's a noReduction rule
-		if (dropRate > 1 || !rule.getNoReduction())
-			chance *= dropRate;
-		return chance;
+		return dropModifiers.calculateDropChance(chance, rule.isNoReduction());
 	}
 
 	private int addDropItems(int index, Set<DropItem> droppedItems, GlobalRule rule, Npc npc, Player player, Collection<Player> groupMembers,
-		int winnerObj) {
-		List<GlobalDropItem> drops = collectDrops(rule, npc, player, rule.getMaxDropRule());
+		int winnerObj, DropModifiers dropModifiers) {
+		List<GlobalDropItem> drops = collectDrops(rule, npc, dropModifiers);
 		if (!drops.isEmpty()) {
 			if (rule.getMemberLimit() > 1 && player.isInTeam()) {
 				List<Player> members = new ArrayList<>(groupMembers);
@@ -432,8 +434,9 @@ public class DropRegistrationService {
 		return true;
 	}
 
-	public List<GlobalDropItem> collectDrops(GlobalRule rule, Npc npc, Player player, int maxDrops) {
-		List<GlobalDropItem> drops = collectAllowedDrops(rule, npc, player);
+	public List<GlobalDropItem> collectDrops(GlobalRule rule, Npc npc, DropModifiers dropModifiers) {
+		int maxDrops = dropModifiers.getMaxDropsPerGroup() == null ? rule.getMaxDropRule() : dropModifiers.getMaxDropsPerGroup();
+		List<GlobalDropItem> drops = collectAllowedDrops(rule, npc, dropModifiers);
 		if (drops.size() > maxDrops) {
 			List<GlobalDropItem> allowedItems = new ArrayList<>();
 			for (int i = 0; i < maxDrops; i++) {
@@ -455,18 +458,17 @@ public class DropRegistrationService {
 		return drops;
 	}
 
-	private List<GlobalDropItem> collectAllowedDrops(GlobalRule rule, Npc npc, Player player) {
-		if (!checkRuleRestrictions(rule, player.getRace(), npc))
+	private List<GlobalDropItem> collectAllowedDrops(GlobalRule rule, Npc npc, DropModifiers dropModifiers) {
+		if (!checkRuleRestrictions(rule, dropModifiers.getDropRace(), npc))
 			return Collections.emptyList();
 		List<GlobalDropItem> tempItems = new ArrayList<>();
 		for (GlobalDropItem globalItem : rule.getDropItems()) {
 			ItemTemplate itemTemplate = DataManager.ITEM_DATA.getItemTemplate(globalItem.getId());
-			if (player.getOppositeRace() == itemTemplate.getRace()) {
-				continue;
+			if (itemTemplate.getRace() == Race.PC_ALL || itemTemplate.getRace() == dropModifiers.getDropRace()) {
+				int diff = npc.getLevel() - itemTemplate.getLevel();
+				if (diff >= rule.getMinDiff() && diff <= rule.getMaxDiff())
+					tempItems.add(globalItem);
 			}
-			int diff = npc.getLevel() - itemTemplate.getLevel();
-			if (diff >= rule.getMinDiff() && diff <= rule.getMaxDiff())
-				tempItems.add(globalItem);
 		}
 		return tempItems;
 	}
@@ -478,14 +480,14 @@ public class DropRegistrationService {
 		return sum;
 	}
 
-	public long getItemCount(GlobalDropItem item, Npc npc) {
+	private long getItemCount(GlobalDropItem item, Npc npc) {
 		long count = item.getResultCount();
 		if (item.getId() == ItemId.KINAH.value())
 			count *= npc.getLevel() * Math.pow(getRankModifier(npc) * getRatingModifier(npc), 6);
 		return count;
 	}
 
-	public float getRankModifier(Npc npc) {
+	private float getRankModifier(Npc npc) {
 		switch (npc.getRank()) {
 			case NOVICE:
 				return 0.9f;
@@ -503,7 +505,7 @@ public class DropRegistrationService {
 		return 1f;
 	}
 
-	public float getRatingModifier(Npc npc) {
+	private float getRatingModifier(Npc npc) {
 		switch (npc.getRating()) {
 			case JUNK:
 				return 0.5f;

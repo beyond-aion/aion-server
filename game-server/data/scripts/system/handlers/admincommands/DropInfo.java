@@ -6,6 +6,7 @@ import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.drop.Drop;
 import com.aionemu.gameserver.model.drop.DropGroup;
+import com.aionemu.gameserver.model.drop.DropModifiers;
 import com.aionemu.gameserver.model.drop.NpcDrop;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
@@ -42,19 +43,18 @@ public class DropInfo extends AdminCommand {
 		boolean showAll = params.length > 0 && params[0].equals("all");
 		Npc npc = (Npc) visibleObject;
 		NpcDrop npcDrop = DataManager.CUSTOM_NPC_DROP.getNpcDrop(npc.getNpcId());
-		String dropType = npc.getGroupDrop().name().toLowerCase();
-		boolean isChest = npc.getAi().getName().equals("chest") || dropType.startsWith("treasure") || dropType.endsWith("box");
-		float dropRate = DropRegistrationService.getInstance().calculateDropRate(player, npc, isChest, player.getLevel());
+		DropModifiers dropModifiers = DropRegistrationService.getInstance().createDropModifiers(npc, player, player.getLevel());
+		dropModifiers.setMaxDropsPerGroup(Integer.MAX_VALUE);
 
 		int[] counts = { 0, 0 };
 		String info = "[" + npc.getObjectTemplate().getL10n() + "'s drops]";
 		if (npcDrop != null) {
 			for (DropGroup dropGroup : npcDrop.getDropGroup()) {
-				if (dropGroup.getRace() == Race.PC_ALL || dropGroup.getRace() == player.getRace()) {
+				if (dropGroup.getRace() == Race.PC_ALL || dropGroup.getRace() == dropModifiers.getDropRace()) {
 					info += "\nCustom drop group: " + dropGroup.getName() + ", max drops: " + dropGroup.getMaxItems();
 					counts[1]++;
 					for (Drop drop : dropGroup.getDrop()) {
-						float finalChance = drop.getFinalChance(dropRate);
+						float finalChance = dropModifiers.calculateDropChance(drop.getChance(), drop.isNoReduction());
 						if (!showAll && finalChance <= 0)
 							continue;
 						info += "\n\t" + ChatUtil.item(drop.getItemId()) + "\tBase chance: " + drop.getChance() + "%, effective: " + finalChance + "%";
@@ -68,14 +68,14 @@ public class DropInfo extends AdminCommand {
 		boolean isNpcQuest = npc.getAi().getName().equals("quest_use_item");
 		if (!isNpcQuest) {
 			boolean hasGlobalNpcExclusions = DropRegistrationService.getInstance().hasGlobalNpcExclusions(npc);
-			boolean isAllowedDefaultGlobalDropNpc = DropRegistrationService.getInstance().isAllowedDefaultGlobalDropNpc(npc, isChest);
+			boolean isAllowedDefaultGlobalDropNpc = DropRegistrationService.getInstance().isAllowedDefaultGlobalDropNpc(npc, dropModifiers.isDropNpcChest());
 			// instances with WorldDropType.NONE must not have global drops (example Arenas)
 			if (!hasGlobalNpcExclusions && npc.getWorldDropType() != WorldDropType.NONE) {
-				info += collectDropInfo("Global", DataManager.GLOBAL_DROP_DATA.getAllRules(), player, npc, dropRate, isAllowedDefaultGlobalDropNpc, showAll,
+				info += collectDropInfo("Global", DataManager.GLOBAL_DROP_DATA.getAllRules(), npc, dropModifiers, isAllowedDefaultGlobalDropNpc, showAll,
 					counts);
 			}
-			if (!hasGlobalNpcExclusions || isChest)
-				info += collectDropInfo("Event", EventService.getInstance().getActiveEventDropRules(), player, npc, dropRate, isAllowedDefaultGlobalDropNpc,
+			if (!hasGlobalNpcExclusions || dropModifiers.isDropNpcChest())
+				info += collectDropInfo("Event", EventService.getInstance().getActiveEventDropRules(), npc, dropModifiers, isAllowedDefaultGlobalDropNpc,
 					showAll, counts);
 		}
 
@@ -83,18 +83,18 @@ public class DropInfo extends AdminCommand {
 		sendInfo(player, info);
 	}
 
-	private String collectDropInfo(String dropGroupPrefix, List<GlobalRule> rules, Player player, Npc npc, float dropRate,
+	private String collectDropInfo(String dropGroupPrefix, List<GlobalRule> rules, Npc npc, DropModifiers dropModifiers,
 		boolean isAllowedDefaultGlobalDropNpc, boolean showAll, int[] counts) {
 		String info = "";
 		for (GlobalRule rule : rules) {
 			// if getGlobalRuleNpcs() != null means drops are for specified npcs (like named drops) so the default restrictions will be ignored
 			if (isAllowedDefaultGlobalDropNpc || rule.getGlobalRuleNpcs() != null) {
 
-				float chance = DropRegistrationService.getInstance().calculateEffectiveChance(rule, npc, dropRate);
+				float chance = DropRegistrationService.getInstance().calculateEffectiveChance(rule, npc, dropModifiers);
 				if (!showAll && chance <= 0)
 					continue;
 
-				List<GlobalDropItem> drops = DropRegistrationService.getInstance().collectDrops(rule, npc, player, Integer.MAX_VALUE);
+				List<GlobalDropItem> drops = DropRegistrationService.getInstance().collectDrops(rule, npc, dropModifiers);
 				if (!drops.isEmpty()) {
 					info += "\n" + dropGroupPrefix + " drop group: \"" + rule.getRuleName() + "\", max drops: " + rule.getMaxDropRule();
 					if (rule.getMemberLimit() != 1)
