@@ -16,7 +16,6 @@ import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.model.templates.spawns.basespawns.BaseSpawnTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.BaseService;
-import com.aionemu.gameserver.services.RespawnService;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.spawnengine.SpawnHandlerType;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -81,10 +80,8 @@ public abstract class Base<T extends BaseLocation> {
 		List<Npc> spawned = World.getInstance().getBaseSpawns(id);
 		if (spawned != null) {
 			for (Npc npc : spawned) {
-				if (npc != null) {
-					if (npc.isDead() || !npc.getController().delete())
-						RespawnService.cancelRespawn(npc);
-				}
+				if (npc != null)
+					npc.getController().deleteIfAliveOrCancelRespawn();
 			}
 		}
 	}
@@ -164,8 +161,8 @@ public abstract class Base<T extends BaseLocation> {
 
 	private void despawnAssaulter() {
 		for (Npc npc : assaulter) {
-			if (npc != null && !npc.isDead())
-				npc.getController().delete();
+			if (npc != null)
+				npc.getController().deleteIfAliveOrCancelRespawn();
 		}
 		assaulter.clear();
 	}
@@ -222,10 +219,7 @@ public abstract class Base<T extends BaseLocation> {
 	public void despawnByHandlerType(SpawnHandlerType type) {
 		for (Npc npc : World.getInstance().getBaseSpawns(id)) {
 			if (npc != null && npc.getSpawn().getHandlerType() == type) {
-				if (!npc.isDead())
-					npc.getController().delete();
-				else
-					RespawnService.cancelRespawn(npc);
+				npc.getController().deleteIfAliveOrCancelRespawn();
 			}
 		}
 	}

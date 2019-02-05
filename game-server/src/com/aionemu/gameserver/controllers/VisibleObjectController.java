@@ -1,7 +1,9 @@
 package com.aionemu.gameserver.controllers;
 
 import com.aionemu.gameserver.model.animations.ObjectDeleteAnimation;
+import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
+import com.aionemu.gameserver.services.RespawnService;
 import com.aionemu.gameserver.world.World;
 
 /**
@@ -65,6 +67,17 @@ public abstract class VisibleObjectController<T extends VisibleObject> {
 	 */
 	public final boolean delete() {
 		return World.getInstance().removeObject(getOwner());
+	}
+
+	/**
+	 * Despawns the object and deletes it from the world if alive. Otherwise, cancels its respawn task if present.
+	 * 
+	 * @see #delete()
+	 */
+	public final void deleteIfAliveOrCancelRespawn() {
+		boolean isDead = getOwner() instanceof Creature && ((Creature) getOwner()).isDead();
+		if (isDead || !delete())
+			RespawnService.cancelRespawn(getOwner());
 	}
 
 	/**

@@ -26,10 +26,10 @@ public class VortexSpawn {
 	}
 
 	@XmlElement(name = "state_type")
-	private List<VortexSpawn.VortexStateTemplate> VortexStateTemplate;
+	private List<VortexStateTemplate> stateTemplates;
 
 	public List<VortexStateTemplate> getSiegeModTemplates() {
-		return VortexStateTemplate;
+		return stateTemplates;
 	}
 
 	@XmlAccessorType(XmlAccessType.FIELD)

@@ -99,8 +99,8 @@ public class OutpostSiege extends Siege<OutpostLocation> {
 	public void despawnSiegeNpcs() {
 		Collection<SiegeNpc> npcs = World.getInstance().getLocalSiegeNpcs(getSiegeLocationId());
 		for (SiegeNpc npc : npcs) {
-			if (npc != null && !npc.isDead())
-				npc.getController().delete();
+			if (npc != null)
+				npc.getController().deleteIfAliveOrCancelRespawn();
 		}
 	}
 
