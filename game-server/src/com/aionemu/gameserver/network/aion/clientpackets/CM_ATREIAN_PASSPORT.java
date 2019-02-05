@@ -25,11 +25,12 @@ public class CM_ATREIAN_PASSPORT extends AionClientPacket {
 
 	@Override
 	protected void readImpl() {
-		int count = readUH();
-		for (int i = 0; i < count; i++) {
+		int count = readH();
+		for (int i = 0; i < count || count == -1; i++) {
 			if (getRemainingBytes() < 8) {
-				LoggerFactory.getLogger(CM_ATREIAN_PASSPORT.class).warn("Received invalid passport count " + count + " with only data for " + i
-					+ " passports from " + getConnection().getActivePlayer() + "\nCurrent passport data: " + passports);
+				if (count != -1)
+					LoggerFactory.getLogger(CM_ATREIAN_PASSPORT.class).warn("Received invalid passport count " + count + " with only data for " + i
+						+ " passports from " + getConnection().getActivePlayer() + "\nCurrent passport data: " + passports);
 				break;
 			}
 			int passportId = readD();
