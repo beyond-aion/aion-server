@@ -92,7 +92,7 @@ public class IdgelDomeInstance extends GeneralInstanceHandler {
 				reward.setBaseGp(50);
 				reward.addItemReward(new RewardItem(186000242, 3));
 				reward.addItemReward(new RewardItem(188053030, 1));
-				reward.addItemReward(spacer);
+				reward.addItemReward(new RewardItem(188053870, 1)); // FIXME: Remove me when arcade event ends
 				if (isKunaxKilled) {
 					RewardItem mythicKunaxEq = null;
 					if (Rnd.chance() < 20)
@@ -109,7 +109,7 @@ public class IdgelDomeInstance extends GeneralInstanceHandler {
 				reward.setBaseGp(10);
 				reward.addItemReward(new RewardItem(186000242, 1));
 				reward.addItemReward(new RewardItem(188053031, 1));
-				reward.addItemReward(spacer);
+				reward.addItemReward(new RewardItem(188053869, 1)); // FIXME: Remove me when arcade event ends
 				reward.addItemReward(spacer);
 				reward.addItemReward(spacer);
 			}
