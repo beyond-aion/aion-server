@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../global_rules.xsd">
 	<!-- Zone Drops -->
-	<gd_rule rule_name="Tursin Armor (Rare)" base_chance="2" no_reduction="true">
+	<gd_rule rule_name="Tursin Armor (Rare)" chance="2">
 		<gd_maps>
 			<gd_map map_id="210030000" /><!-- Verteron -->
 		</gd_maps>
@@ -43,7 +43,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Multiple Monster Drops -->
-	<gd_rule rule_name="Named Accessory (Legend)" base_chance="33" no_reduction="true">
+	<gd_rule rule_name="Named Accessory (Legend)" chance="33">
 		<gd_maps>
 			<gd_map map_id="210030000" /><!-- Verteron -->
 		</gd_maps>
@@ -60,7 +60,7 @@
 			<gd_item id="123000889" /><!-- Tursin Leather Belt -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Lepharist Crest" base_chance="20" no_reduction="true">
+	<gd_rule rule_name="Lepharist Crest" chance="20">
 		<gd_maps>
 			<gd_map map_id="210030000" /><!-- Verteron -->
 		</gd_maps>
@@ -77,7 +77,7 @@
 			<gd_item id="186000013" /><!-- Lepharist Crest -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Dukaki Amulet" base_chance="7.5" no_reduction="true">
+	<gd_rule rule_name="Dukaki Amulet" chance="7.5">
 		<gd_maps>
 			<gd_map map_id="210030000" /><!-- Verteron -->
 		</gd_maps>
@@ -92,7 +92,7 @@
 			<gd_item id="186000011" /><!-- Dukaki Amulet -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Krall Ration" base_chance="4" min_diff="0" max_diff="4" no_reduction="true">
+	<gd_rule rule_name="Krall Ration" chance="4" min_diff="0" max_diff="4">
 		<gd_maps>
 			<gd_map map_id="210030000" /><!-- Verteron -->
 		</gd_maps>
@@ -104,7 +104,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Single Monster Drops -->
-	<gd_rule rule_name="Named Quest-Item" base_chance="5" no_reduction="true">
+	<gd_rule rule_name="Named Quest-Item" chance="5">
 		<gd_maps>
 			<gd_map map_id="210030000" /><!-- Verteron -->
 		</gd_maps>
@@ -116,7 +116,7 @@
 			<gd_item id="182200558" /><!-- Odium Refining Method -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Weapon (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="210030000" /><!-- Verteron -->
 		</gd_maps>
@@ -140,7 +140,7 @@
 			<gd_item id="102100247" /><!-- Commander's Cipher-Blade -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Accessory (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="210030000" /><!-- Verteron -->
 		</gd_maps>
@@ -152,7 +152,7 @@
 			<gd_item id="122000506" /><!-- Kraka's Seal -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Headgear (Legend)" base_chance="25" no_reduction="true">
+	<gd_rule rule_name="Named Headgear (Legend)" chance="25">
 		<gd_maps>
 			<gd_map map_id="210030000" /><!-- Verteron -->
 		</gd_maps>
@@ -164,7 +164,7 @@
 			<gd_item id="125000929" /><!-- Kraka's Mask -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Souvenir (Legend)" base_chance="25" no_reduction="true">
+	<gd_rule rule_name="Named Souvenir (Legend)" chance="25">
 		<gd_maps>
 			<gd_map map_id="210030000" /><!-- Verteron -->
 		</gd_maps>
@@ -175,7 +175,7 @@
 			<gd_item id="170490005" /><!-- [Souvenir] Chieftain Kraka's Drum -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Legend)" base_chance="35" no_reduction="true">
+	<gd_rule rule_name="Named Armor (Legend)" chance="35">
 		<gd_maps>
 			<gd_map map_id="210030000" /><!-- Verteron -->
 		</gd_maps>
@@ -187,7 +187,7 @@
 			<gd_item id="110100424" /><!-- Chankaki's Tunic -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Legend)" base_chance="35" no_reduction="true">
+	<gd_rule rule_name="Named Armor (Legend)" chance="35">
 		<gd_maps>
 			<gd_map map_id="210030000" /><!-- Verteron -->
 		</gd_maps>
@@ -199,7 +199,7 @@
 			<gd_item id="114300386" /><!-- Shalph's Boots -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Weapon (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="210030000" /><!-- Verteron -->
 		</gd_maps>
@@ -212,7 +212,7 @@
 			<gd_item id="101800262" /><!-- Hakka's Pistol -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Armor (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="210030000" /><!-- Verteron -->
 		</gd_maps>
@@ -227,7 +227,7 @@
 			<gd_item id="114600377" /><!-- Bodyguard's Sabatons -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Weapon (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="210030000" /><!-- Verteron -->
 		</gd_maps>
@@ -241,7 +241,7 @@
 			<gd_item id="102100246" /><!-- Tunkara's Cipher-Blade -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Armor (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="210030000" /><!-- Verteron -->
 		</gd_maps>
@@ -256,7 +256,7 @@
 			<gd_item id="111600386" /><!-- Bodyguard's Gauntlets -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Weapon (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="210030000" /><!-- Verteron -->
 		</gd_maps>
@@ -270,7 +270,7 @@
 			<gd_item id="101900264" /><!-- Blindeye's Aethercannon -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Armor (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="210030000" /><!-- Verteron -->
 		</gd_maps>
@@ -285,7 +285,7 @@
 			<gd_item id="112600369" /><!-- Bodyguard's Shoulderplates -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Weapon (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="210030000" /><!-- Verteron -->
 		</gd_maps>
@@ -299,7 +299,7 @@
 			<gd_item id="102000275" /><!-- Kuntura's Harp -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Armor (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="210030000" /><!-- Verteron -->
 		</gd_maps>
@@ -314,7 +314,7 @@
 			<gd_item id="113600380" /><!-- Bodyguard's Greaves -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Weapon (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="210030000" /><!-- Verteron -->
 		</gd_maps>
@@ -327,7 +327,7 @@
 			<gd_item id="101500145" /><!-- Kumbacha's Staff -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Armor (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="210030000" /><!-- Verteron -->
 		</gd_maps>
@@ -342,7 +342,7 @@
 			<gd_item id="110600410" /><!-- Bodyguard's Breastplate -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Weapon (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="210030000" /><!-- Verteron -->
 		</gd_maps>
@@ -356,7 +356,7 @@
 			<gd_item id="102000534" /><!-- Aishi's Harp -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Accessory (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="210030000" /><!-- Verteron -->
 		</gd_maps>
@@ -368,7 +368,7 @@
 			<gd_item id="120000553" /><!-- Aishi's Earrings -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Weapon (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="210030000" /><!-- Verteron -->
 		</gd_maps>
@@ -383,7 +383,7 @@
 			<gd_item id="125000928" /><!-- Bodyguard's Helm -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Accessory (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="210030000" /><!-- Verteron -->
 		</gd_maps>
@@ -395,7 +395,7 @@
 			<gd_item id="120000552" /><!-- Takata's Earrings -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Shield (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Shield (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="210030000" /><!-- Verteron -->
 		</gd_maps>
@@ -407,7 +407,7 @@
 			<gd_item id="115000477" /><!-- Tambaku's Shield -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Accessory (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="210030000" /><!-- Verteron -->
 		</gd_maps>
@@ -419,7 +419,7 @@
 			<gd_item id="123000616" /><!-- Tambaku's Belt -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Shield (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Shield (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="210030000" /><!-- Verteron -->
 		</gd_maps>
@@ -431,7 +431,7 @@
 			<gd_item id="115000394" /><!-- Lamega Shell -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Accessory (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="210030000" /><!-- Verteron -->
 		</gd_maps>
@@ -443,7 +443,7 @@
 			<gd_item id="122000884" /><!-- Lamega's Ring -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Legend)" base_chance="35" no_reduction="true">
+	<gd_rule rule_name="Named Armor (Legend)" chance="35">
 		<gd_maps>
 			<gd_map map_id="210030000" /><!-- Verteron -->
 		</gd_maps>

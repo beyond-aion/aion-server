@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../global_rules.xsd">
 	<!-- Single Monster Drops -->
-	<gd_rule rule_name="Named Weapon (Unique)" base_chance="20">
+	<gd_rule rule_name="Named Weapon (Unique)" chance="20">
 		<gd_maps>
 			<gd_map map_id="600090000"/><!-- Kaldor -->
 		</gd_maps>
@@ -24,7 +24,7 @@
 			<gd_item id="100601385"/><!-- Darok's Spellbook -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Legend)" base_chance="30">
+	<gd_rule rule_name="Named Armor (Legend)" chance="30">
 		<gd_maps>
 			<gd_map map_id="600090000"/><!-- Kaldor -->
 		</gd_maps>
@@ -38,7 +38,7 @@
 			<gd_item id="112601519"/><!-- Throil's Shoulderplates -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Legend)" base_chance="30">
+	<gd_rule rule_name="Named Armor (Legend)" chance="30">
 		<gd_maps>
 			<gd_map map_id="600090000"/><!-- Kaldor -->
 		</gd_maps>
@@ -52,7 +52,7 @@
 			<gd_item id="111601537"/><!-- Minorda's Gauntlets -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Legend)" base_chance="30">
+	<gd_rule rule_name="Named Armor (Legend)" chance="30">
 		<gd_maps>
 			<gd_map map_id="600090000"/><!-- Kaldor -->
 		</gd_maps>
@@ -66,7 +66,7 @@
 			<gd_item id="110601574"/><!-- Buldon's Breastplate -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Unique)" base_chance="5">
+	<gd_rule rule_name="Named Armor (Unique)" chance="5">
 		<gd_maps>
 			<gd_map map_id="600090000"/><!-- Kaldor -->
 		</gd_maps>
@@ -80,7 +80,7 @@
 			<gd_item id="110601573"/><!-- Throil's Breastplate -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Unique)" base_chance="5">
+	<gd_rule rule_name="Named Armor (Unique)" chance="5">
 		<gd_maps>
 			<gd_map map_id="600090000"/><!-- Kaldor -->
 		</gd_maps>
@@ -94,7 +94,7 @@
 			<gd_item id="113601519"/><!-- Minorda’s Greaves -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Unique)" base_chance="10">
+	<gd_rule rule_name="Named Armor (Unique)" chance="10">
 		<gd_maps>
 			<gd_map map_id="600090000"/><!-- Kaldor -->
 		</gd_maps>
@@ -108,7 +108,7 @@
 			<gd_item id="114601526"/><!-- Buldon's Sabatons -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Epic)" base_chance="10">
+	<gd_rule rule_name="Named Accessory (Epic)" chance="10">
 		<gd_maps>
 			<gd_map map_id="600090000"/><!-- Kaldor -->
 		</gd_maps>
@@ -119,7 +119,7 @@
 			<gd_item id="125004021"/><!-- Darok's Mask -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Material Burning Vitality" base_chance="3">
+	<gd_rule rule_name="Material Burning Vitality" chance="3">
 		<gd_maps>
 			<gd_map map_id="600090000"/><!-- Kaldor -->
 		</gd_maps>
@@ -148,7 +148,7 @@
 			<gd_item id="152012613"/><!-- Burning Vitality -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Material Burning Sulfur" base_chance="3">
+	<gd_rule rule_name="Material Burning Sulfur" chance="3">
 		<gd_maps>
 			<gd_map map_id="600090000"/><!-- Kaldor -->
 		</gd_maps>
@@ -189,7 +189,7 @@
 			<gd_item id="152012614"/><!-- Burning Sulfur -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Material Burning Mind" base_chance="3">
+	<gd_rule rule_name="Material Burning Mind" chance="3">
 		<gd_maps>
 			<gd_map map_id="600090000"/><!-- Kaldor -->
 		</gd_maps>

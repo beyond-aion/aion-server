@@ -53,7 +53,7 @@ public class GlobalRule {
 
 	@XmlAttribute(name = "rule_name", required = true)
 	private String ruleName;
-	@XmlAttribute(name = "base_chance", required = true)
+	@XmlAttribute(name = "chance", required = true)
 	private float chance;
 	@XmlAttribute(name = "min_diff")
 	private int minDiff = -99;
@@ -61,8 +61,8 @@ public class GlobalRule {
 	private int maxDiff = 99;
 	@XmlAttribute(name = "restriction_race")
 	private RestrictionRace restrictionRace;
-	@XmlAttribute(name = "no_reduction")
-	private boolean noReduction;
+	@XmlAttribute(name = "level_based_chance_reduction")
+	private boolean useLevelBasedChanceReduction;
 	@XmlAttribute(name = "member_limit")
 	private int memberLimit = 1;
 	@XmlAttribute(name = "max_drop_rule")
@@ -138,8 +138,8 @@ public class GlobalRule {
 		return restrictionRace;
 	}
 
-	public boolean isNoReduction() {
-		return noReduction;
+	public boolean isUseLevelBasedChanceReduction() {
+		return useLevelBasedChanceReduction;
 	}
 
 	public int getMemberLimit() {

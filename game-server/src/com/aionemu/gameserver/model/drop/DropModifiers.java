@@ -50,8 +50,8 @@ public class DropModifiers {
 		this.maxDropsPerGroup = maxDropsPerGroup;
 	}
 
-	public float calculateDropChance(float chance, boolean isNoReductionDrop) {
-		if (!isNoReductionDrop && reductionDropRate != null)
+	public float calculateDropChance(float chance, boolean allowReductionDropRate) {
+		if (allowReductionDropRate && reductionDropRate != null)
 			chance *= reductionDropRate;
 		return chance * boostDropRate;
 	}

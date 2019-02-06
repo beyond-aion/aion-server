@@ -862,7 +862,7 @@ public final class QuestService {
 	}
 
 	private static DropItem regQuestDropItem(QuestDrop drop, int index, Integer winner) {
-		DropItem item = new DropItem(new Drop(drop.getItemId(), 1, 1, drop.getChance(), false));
+		DropItem item = new DropItem(new Drop(drop.getItemId(), 1, 1, drop.getChance()));
 		item.setPlayerObjId(winner);
 		item.setIndex(index);
 		item.setCount(1);

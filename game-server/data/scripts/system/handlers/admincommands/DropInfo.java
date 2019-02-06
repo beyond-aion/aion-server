@@ -54,7 +54,7 @@ public class DropInfo extends AdminCommand {
 					info += "\nCustom drop group: " + dropGroup.getName() + ", max drops: " + dropGroup.getMaxItems();
 					counts[1]++;
 					for (Drop drop : dropGroup.getDrop()) {
-						float finalChance = dropModifiers.calculateDropChance(drop.getChance(), drop.isNoReduction());
+						float finalChance = dropModifiers.calculateDropChance(drop.getChance(), dropGroup.isUseLevelBasedChanceReduction());
 						if (!showAll && finalChance <= 0)
 							continue;
 						info += "\n\t" + ChatUtil.item(drop.getItemId()) + "\tBase chance: " + drop.getChance() + "%, effective: " + finalChance + "%";

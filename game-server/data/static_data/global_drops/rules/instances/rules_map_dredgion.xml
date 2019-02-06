@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../global_rules.xsd">
 	<!-- Map Drops -->
-	<gd_rule rule_name="Noble Draconute Armor" base_chance="35">
+	<gd_rule rule_name="Noble Draconute Armor" chance="35">
 		<gd_maps>
 			<gd_map map_id="300110000" /><!-- Dredgion -->
 		</gd_maps>
@@ -9,7 +9,7 @@
 			<gd_item id="182003802" /><!-- Noble Draconute Armor -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Blue Balaur Scale" base_chance="15">
+	<gd_rule rule_name="Blue Balaur Scale" chance="15">
 		<gd_maps>
 			<gd_map map_id="300110000" /><!-- Dredgion -->
 		</gd_maps>
@@ -18,7 +18,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Multiple Monster Drops -->
-	<gd_rule rule_name="Brig Keys" base_chance="6" no_reduction="true">
+	<gd_rule rule_name="Brig Keys" chance="6">
 		<gd_maps>
 			<gd_map map_id="300110000" /><!-- Dredgion -->
 		</gd_maps>
@@ -34,7 +34,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Single Monster Drops -->
-	<gd_rule rule_name="Named Key" base_chance="75" no_reduction="true">
+	<gd_rule rule_name="Named Key" chance="75">
 		<gd_maps>
 			<gd_map map_id="300110000" /><!-- Dredgion -->
 		</gd_maps>
@@ -45,7 +45,7 @@
 			<gd_item id="185000040" /><!-- The Brig Key -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Key" base_chance="75" no_reduction="true">
+	<gd_rule rule_name="Named Key" chance="75">
 		<gd_maps>
 			<gd_map map_id="300110000" /><!-- Dredgion -->
 		</gd_maps>
@@ -56,7 +56,7 @@
 			<gd_item id="185000072" /><!-- Secondary Brig Key -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Legend)" base_chance="50">
+	<gd_rule rule_name="Named Accessory (Legend)" chance="50">
 		<gd_maps>
 			<gd_map map_id="300110000" /><!-- Dredgion -->
 		</gd_maps>
@@ -68,7 +68,7 @@
 			<gd_item id="122001053" /><!-- Kalanadi's Ring -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Unique)" base_chance="35">
+	<gd_rule rule_name="Named Accessory (Unique)" chance="35">
 		<gd_maps>
 			<gd_map map_id="300110000" /><!-- Dredgion -->
 		</gd_maps>
@@ -80,7 +80,7 @@
 			<gd_item id="123000942" /><!-- Kalanadi's Band -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Legend)" base_chance="50">
+	<gd_rule rule_name="Named Accessory (Legend)" chance="50">
 		<gd_maps>
 			<gd_map map_id="300110000" /><!-- Dredgion -->
 		</gd_maps>
@@ -92,7 +92,7 @@
 			<gd_item id="122001054" /><!-- Lakhane's Ring -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Headband (Unique)" base_chance="35">
+	<gd_rule rule_name="Named Headband (Unique)" chance="35">
 		<gd_maps>
 			<gd_map map_id="300110000" /><!-- Dredgion -->
 		</gd_maps>

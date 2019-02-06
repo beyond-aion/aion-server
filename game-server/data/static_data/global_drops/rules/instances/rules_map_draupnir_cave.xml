@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../global_rules.xsd">
 	<!-- Map Drops -->
-	<gd_rule rule_name="Balaur Scales" base_chance="35" no_reduction="true">
+	<gd_rule rule_name="Balaur Scales" chance="35">
 		<gd_maps>
 			<gd_map map_id="320080000" /><!-- Draupnir_Cave -->
 		</gd_maps>
@@ -11,7 +11,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Multiple Monster Drops -->
-	<gd_rule rule_name="Named Armor (Legend)" base_chance="40" no_reduction="true">
+	<gd_rule rule_name="Named Armor (Legend)" chance="40">
 		<gd_maps>
 			<gd_map map_id="320080000" /><!-- Draupnir_Cave -->
 		</gd_maps>
@@ -31,7 +31,7 @@
 			<gd_item id="111600631" /><!-- Bakarma Elite's Gauntlets -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Material" base_chance="70" no_reduction="true">
+	<gd_rule rule_name="Named Material" chance="70">
 		<gd_maps>
 			<gd_map map_id="320080000" /><!-- Draupnir_Cave -->
 		</gd_maps>
@@ -46,7 +46,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Single Monster Drops -->
-	<gd_rule rule_name="Named Headband (Legend)" base_chance="45" no_reduction="true">
+	<gd_rule rule_name="Named Headband (Legend)" chance="45">
 		<gd_maps>
 			<gd_map map_id="320080000" /><!-- Draupnir_Cave -->
 		</gd_maps>
@@ -60,7 +60,7 @@
 			<gd_item id="125001500" /><!-- Bakarma Elite's Headband -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Rare)" base_chance="70" no_reduction="true">
+	<gd_rule rule_name="Named Accessory (Rare)" chance="70">
 		<gd_maps>
 			<gd_map map_id="320080000" /><!-- Draupnir_Cave -->
 		</gd_maps>
@@ -71,7 +71,7 @@
 			<gd_item id="123000767" /><!-- Ooze's Belt -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Legend)" base_chance="45" no_reduction="true">
+	<gd_rule rule_name="Named Accessory (Legend)" chance="45">
 		<gd_maps>
 			<gd_map map_id="320080000" /><!-- Draupnir_Cave -->
 		</gd_maps>
@@ -82,7 +82,7 @@
 			<gd_item id="122000766" /><!-- Bakarma's Sapphire Ring -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Shield (Legend)" base_chance="45" no_reduction="true">
+	<gd_rule rule_name="Named Shield (Legend)" chance="45">
 		<gd_maps>
 			<gd_map map_id="320080000" /><!-- Draupnir_Cave -->
 		</gd_maps>
@@ -93,7 +93,7 @@
 			<gd_item id="115000674" /><!-- Golden Saam's Shield -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Legend)" base_chance="60" no_reduction="true">
+	<gd_rule rule_name="Named Accessory (Legend)" chance="60">
 		<gd_maps>
 			<gd_map map_id="320080000" /><!-- Draupnir_Cave -->
 		</gd_maps>
@@ -104,7 +104,7 @@
 			<gd_item id="123000768" /><!-- Golden Saam's Belt -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Unique)" base_chance="35" no_reduction="true">
+	<gd_rule rule_name="Named Armor (Unique)" chance="35">
 		<gd_maps>
 			<gd_map map_id="320080000" /><!-- Draupnir_Cave -->
 		</gd_maps>
@@ -120,7 +120,7 @@
 			<gd_item id="113600626" /><!-- Ice Black Greaves -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Souvenir" base_chance="15" no_reduction="true">
+	<gd_rule rule_name="Named Souvenir" chance="15">
 		<gd_maps>
 			<gd_map map_id="320080000" /><!-- Draupnir_Cave -->
 		</gd_maps>
@@ -131,7 +131,7 @@
 			<gd_item id="170170031" /><!-- [Souvenir] Centennial Golden Saam Statue -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Legend)" base_chance="40" no_reduction="true">
+	<gd_rule rule_name="Named Armor (Legend)" chance="40">
 		<gd_maps>
 			<gd_map map_id="320080000" /><!-- Draupnir_Cave -->
 		</gd_maps>
@@ -143,7 +143,7 @@
 			<gd_item id="112300613" /><!-- Bakarma Elite's Shoulderguards -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Rare)" base_chance="70" no_reduction="true">
+	<gd_rule rule_name="Named Accessory (Rare)" chance="70">
 		<gd_maps>
 			<gd_map map_id="320080000" /><!-- Draupnir_Cave -->
 		</gd_maps>
@@ -154,7 +154,7 @@
 			<gd_item id="122000763" /><!-- Dragashum's Ring -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Legend)" base_chance="40" no_reduction="true">
+	<gd_rule rule_name="Named Armor (Legend)" chance="40">
 		<gd_maps>
 			<gd_map map_id="320080000" /><!-- Draupnir_Cave -->
 		</gd_maps>
@@ -166,7 +166,7 @@
 			<gd_item id="112600609" /><!-- Bakarma Elite's Shoulderplates -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Rare)" base_chance="70" no_reduction="true">
+	<gd_rule rule_name="Named Accessory (Rare)" chance="70">
 		<gd_maps>
 			<gd_map map_id="320080000" /><!-- Draupnir_Cave -->
 		</gd_maps>
@@ -177,7 +177,7 @@
 			<gd_item id="122000764" /><!-- Jaadis' Ring -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Rare)" base_chance="70" no_reduction="true">
+	<gd_rule rule_name="Named Accessory (Rare)" chance="70">
 		<gd_maps>
 			<gd_map map_id="320080000" /><!-- Draupnir_Cave -->
 		</gd_maps>
@@ -188,7 +188,7 @@
 			<gd_item id="120000710" /><!-- Afrane's Earrings -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Legend)" base_chance="45" no_reduction="true">
+	<gd_rule rule_name="Named Armor (Legend)" chance="45">
 		<gd_maps>
 			<gd_map map_id="320080000" /><!-- Draupnir_Cave -->
 		</gd_maps>
@@ -200,7 +200,7 @@
 			<gd_item id="113600625" /><!-- Bakarma Elite's Greaves -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Unique)" base_chance="40" no_reduction="true">
+	<gd_rule rule_name="Named Armor (Unique)" chance="40">
 		<gd_maps>
 			<gd_map map_id="320080000" /><!-- Draupnir_Cave -->
 		</gd_maps>
@@ -216,7 +216,7 @@
 			<gd_item id="114600617" /><!-- Ice Black Sabatons -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Rare)" base_chance="70" no_reduction="true">
+	<gd_rule rule_name="Named Accessory (Rare)" chance="70">
 		<gd_maps>
 			<gd_map map_id="320080000" /><!-- Draupnir_Cave -->
 		</gd_maps>
@@ -227,7 +227,7 @@
 			<gd_item id="121000648" /><!-- Lakshmi's Necklace -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Legend)" base_chance="45" no_reduction="true">
+	<gd_rule rule_name="Named Armor (Legend)" chance="45">
 		<gd_maps>
 			<gd_map map_id="320080000" /><!-- Draupnir_Cave -->
 		</gd_maps>
@@ -239,7 +239,7 @@
 			<gd_item id="110300695" /><!-- Bakarma Elite's Jerkin -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Unique)" base_chance="40" no_reduction="true">
+	<gd_rule rule_name="Named Armor (Unique)" chance="40">
 		<gd_maps>
 			<gd_map map_id="320080000" /><!-- Draupnir_Cave -->
 		</gd_maps>
@@ -255,7 +255,7 @@
 			<gd_item id="111600632" /><!-- Ice Black Gauntlets -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Rare)" base_chance="70" no_reduction="true">
+	<gd_rule rule_name="Named Accessory (Rare)" chance="70">
 		<gd_maps>
 			<gd_map map_id="320080000" /><!-- Draupnir_Cave -->
 		</gd_maps>
@@ -266,7 +266,7 @@
 			<gd_item id="121000647" /><!-- Nimbarka's Necklace -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Legend)" base_chance="45" no_reduction="true">
+	<gd_rule rule_name="Named Armor (Legend)" chance="45">
 		<gd_maps>
 			<gd_map map_id="320080000" /><!-- Draupnir_Cave -->
 		</gd_maps>
@@ -278,7 +278,7 @@
 			<gd_item id="110600658" /><!-- Bakarma Elite's Breastplate -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Unique)" base_chance="40" no_reduction="true">
+	<gd_rule rule_name="Named Armor (Unique)" chance="40">
 		<gd_maps>
 			<gd_map map_id="320080000" /><!-- Draupnir_Cave -->
 		</gd_maps>
@@ -294,7 +294,7 @@
 			<gd_item id="112600610" /><!-- Ice Black Shoulderplates -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Legend)" base_chance="75" no_reduction="true">
+	<gd_rule rule_name="Named Accessory (Legend)" chance="75">
 		<gd_maps>
 			<gd_map map_id="320080000" /><!-- Draupnir_Cave -->
 		</gd_maps>
@@ -305,7 +305,7 @@
 			<gd_item id="122000765" /><!-- Bakarma's Ruby Ring -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Unique)" base_chance="40" no_reduction="true">
+	<gd_rule rule_name="Named Weapon (Unique)" chance="40">
 		<gd_maps>
 			<gd_map map_id="320080000" /><!-- Draupnir_Cave -->
 		</gd_maps>
@@ -328,7 +328,7 @@
 			<gd_item id="102100538" /><!-- Commander Bakarma's Cipher-Blade -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Unique)" base_chance="45" no_reduction="true">
+	<gd_rule rule_name="Named Armor (Unique)" chance="45">
 		<gd_maps>
 			<gd_map map_id="320080000" /><!-- Draupnir_Cave -->
 		</gd_maps>
@@ -344,7 +344,7 @@
 			<gd_item id="110600659" /><!-- Ice Black Breastplate -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Legend)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Weapon (Legend)" chance="50">
 		<gd_maps>
 			<gd_map map_id="320080000" /><!-- Draupnir_Cave -->
 		</gd_maps>
@@ -367,7 +367,7 @@
 			<gd_item id="102100435" /><!-- Commander Bakarma's Cipher-Blade -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Rare)" base_chance="70" no_reduction="true">
+	<gd_rule rule_name="Named Accessory (Rare)" chance="70">
 		<gd_maps>
 			<gd_map map_id="320080000" /><!-- Draupnir_Cave -->
 		</gd_maps>
@@ -378,7 +378,7 @@
 			<gd_item id="120000711" /><!-- Saraswati's Earrings -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Legend)" base_chance="45" no_reduction="true">
+	<gd_rule rule_name="Named Armor (Legend)" chance="45">
 		<gd_maps>
 			<gd_map map_id="320080000" /><!-- Draupnir_Cave -->
 		</gd_maps>
@@ -390,7 +390,7 @@
 			<gd_item id="113300677" /><!-- Bakarma Elite's Breeches -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Unique)" base_chance="40" no_reduction="true">
+	<gd_rule rule_name="Named Armor (Unique)" chance="40">
 		<gd_maps>
 			<gd_map map_id="320080000" /><!-- Draupnir_Cave -->
 		</gd_maps>
@@ -406,7 +406,7 @@
 			<gd_item id="112600610" /><!-- Ice Black Shoulderplates -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Unique)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Accessory (Unique)" chance="50">
 		<gd_maps>
 			<gd_map map_id="320080000" /><!-- Draupnir_Cave -->
 		</gd_maps>

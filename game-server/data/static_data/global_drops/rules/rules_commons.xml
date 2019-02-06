@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../global_rules.xsd">
 	<!-- Kinah -->
-	<gd_rule rule_name="Kinah" base_chance="50" dynamic_chance="true" no_reduction="true">
+	<gd_rule rule_name="Kinah" chance="50" dynamic_chance="true">
 		<gd_races>
 			<gd_race race="ELYOS" />
 			<gd_race race="ASMODIANS" />
@@ -27,7 +27,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Buff Food -->
-	<gd_rule rule_name="Buff Food" base_chance="3.5" dynamic_chance="true" min_diff="-9" max_diff="0" no_reduction="true">
+	<gd_rule rule_name="Buff Food" chance="3.5" dynamic_chance="true" min_diff="-9" max_diff="0">
 		<gd_items>
 			<!-- Level 10 -->
 			<gd_item id="160003551" /><!-- Minor Rally Serum -->
@@ -50,7 +50,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Potions (white, 1-60) -->
-	<gd_rule rule_name="Potions (Common)" base_chance="3.5" dynamic_chance="true" min_diff="-9" max_diff="0" no_reduction="true">
+	<gd_rule rule_name="Potions (Common)" chance="3.5" dynamic_chance="true" min_diff="-9" max_diff="0">
 		<gd_ratings>
 			<gd_rating rating="NORMAL" />
 			<gd_rating rating="ELITE" />
@@ -96,7 +96,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Potions (white, 61-65) -->
-	<gd_rule rule_name="Potions (Common)" base_chance="3.5" dynamic_chance="true" min_diff="1" max_diff="5" no_reduction="true">
+	<gd_rule rule_name="Potions (Common)" chance="3.5" dynamic_chance="true" min_diff="1" max_diff="5">
 		<gd_ratings>
 			<gd_rating rating="NORMAL" />
 			<gd_rating rating="ELITE" />
@@ -109,7 +109,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Potions (green, 1-60) -->
-	<gd_rule rule_name="Potions (Rare)" base_chance="2.5" dynamic_chance="true" min_diff="-9" max_diff="0" no_reduction="true">
+	<gd_rule rule_name="Potions (Rare)" chance="2.5" dynamic_chance="true" min_diff="-9" max_diff="0">
 		<gd_ratings>
 			<gd_rating rating="NORMAL" />
 			<gd_rating rating="ELITE" />
@@ -153,7 +153,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Potions (green, 61-65) -->
-	<gd_rule rule_name="Potions (Rare)" base_chance="2.5" dynamic_chance="true" min_diff="1" max_diff="5" no_reduction="true">
+	<gd_rule rule_name="Potions (Rare)" chance="2.5" dynamic_chance="true" min_diff="1" max_diff="5">
 		<gd_ratings>
 			<gd_rating rating="NORMAL" />
 			<gd_rating rating="ELITE" />
@@ -166,7 +166,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Power Shards -->
-	<gd_rule rule_name="Power Shards" base_chance="6" dynamic_chance="true" min_diff="0" max_diff="9" no_reduction="true">
+	<gd_rule rule_name="Power Shards" chance="6" dynamic_chance="true" min_diff="0" max_diff="9">
 		<gd_ratings>
 			<gd_rating rating="NORMAL" />
 			<gd_rating rating="ELITE" />
@@ -189,7 +189,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Stigmas -->
-	<gd_rule rule_name="Stigmas (Rare)" base_chance="1.75" dynamic_chance="true" min_diff="0">
+	<gd_rule rule_name="Stigmas (Rare)" chance="1.75" dynamic_chance="true" min_diff="0" level_based_chance_reduction="true">
 		<gd_ratings>
 			<gd_rating rating="NORMAL" />
 			<gd_rating rating="ELITE" />
@@ -201,7 +201,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Godstones -->
-	<gd_rule rule_name="Illusion Godstones (Legend)" base_chance="0.02">
+	<gd_rule rule_name="Illusion Godstones (Legend)" chance="0.02" level_based_chance_reduction="true">
 		<gd_items>
 			<gd_item id="168000212" /><!-- Illusion Godstone: Aion's Sorrow -->
 			<gd_item id="168000213" /><!-- Illusion Godstone: Fasimedes' Authority -->
@@ -222,7 +222,7 @@
 			<gd_item id="168000228" /><!-- Illusion Godstone: Khrudgelmir's Silence -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Illusion Godstones (Unique)" base_chance="0.01">
+	<gd_rule rule_name="Illusion Godstones (Unique)" chance="0.01" level_based_chance_reduction="true">
 		<gd_items>
 			<gd_item id="168000229" /><!-- Illusion Godstone: Lumiel's Interference -->
 			<gd_item id="168000230" /><!-- Illusion Godstone: Meslamtaeda's Ambition -->
@@ -244,7 +244,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Manastones (white) -->
-	<gd_rule rule_name="Manastones (Common)" base_chance="15" dynamic_chance="true" min_diff="-9" max_diff="0" no_reduction="true">
+	<gd_rule rule_name="Manastones (Common)" chance="15" dynamic_chance="true" min_diff="-9" max_diff="0">
 		<gd_ratings>
 			<gd_rating rating="NORMAL" />
 			<gd_rating rating="ELITE" />
@@ -325,7 +325,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Manastones (white, with odd lvl diffs) -->
-	<gd_rule rule_name="Manastones (Common)" base_chance="1.5" dynamic_chance="true" min_diff="1" max_diff="10" no_reduction="true">
+	<gd_rule rule_name="Manastones (Common)" chance="1.5" dynamic_chance="true" min_diff="1" max_diff="10">
 		<gd_ratings>
 			<gd_rating rating="NORMAL" />
 			<gd_rating rating="ELITE" />
@@ -338,7 +338,7 @@
 			<gd_item id="167000294" /><!-- Manastone: Attack +2 -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Manastones (Common)" base_chance="1.5" dynamic_chance="true" min_diff="1" max_diff="15" no_reduction="true">
+	<gd_rule rule_name="Manastones (Common)" chance="1.5" dynamic_chance="true" min_diff="1" max_diff="15">
 		<gd_ratings>
 			<gd_rating rating="NORMAL" />
 			<gd_rating rating="ELITE" />
@@ -351,7 +351,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Manastones (green) -->
-	<gd_rule rule_name="Manastones (Rare)" base_chance="7.5" dynamic_chance="true" min_diff="-9" max_diff="0" no_reduction="true">
+	<gd_rule rule_name="Manastones (Rare)" chance="7.5" dynamic_chance="true" min_diff="-9" max_diff="0">
 		<gd_ratings>
 			<gd_rating rating="NORMAL" />
 			<gd_rating rating="ELITE" />
@@ -423,7 +423,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Manastones (green, with odd level diffs) -->
-	<gd_rule rule_name="Manastones (Rare)" base_chance="0.75" dynamic_chance="true" min_diff="1" max_diff="10" no_reduction="true">
+	<gd_rule rule_name="Manastones (Rare)" chance="0.75" dynamic_chance="true" min_diff="1" max_diff="10">
 		<gd_ratings>
 			<gd_rating rating="NORMAL" />
 			<gd_rating rating="ELITE" />
@@ -434,7 +434,7 @@
 			<gd_item id="167000454" /><!-- Manastone: Attack +4 -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Manastones (Rare)" base_chance="0.75" dynamic_chance="true" min_diff="1" max_diff="15" no_reduction="true">
+	<gd_rule rule_name="Manastones (Rare)" chance="0.75" dynamic_chance="true" min_diff="1" max_diff="15">
 		<gd_ratings>
 			<gd_rating rating="NORMAL" />
 			<gd_rating rating="ELITE" />
@@ -445,7 +445,7 @@
 			<gd_item id="167000518" /><!-- Manastone: Attack +5 -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Manastones (Rare)" base_chance="0.75" dynamic_chance="true" min_diff="1" max_diff="5" no_reduction="true">
+	<gd_rule rule_name="Manastones (Rare)" chance="0.75" dynamic_chance="true" min_diff="1" max_diff="5">
 		<gd_ratings>
 			<gd_rating rating="NORMAL" />
 			<gd_rating rating="ELITE" />
@@ -457,7 +457,7 @@
 			<gd_item id="167000563" /><!-- Manastone: Healing Boost +3 -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Amplification Stone (Single)" base_chance="6" dynamic_chance="true">
+	<gd_rule rule_name="Amplification Stone (Single)" chance="6" dynamic_chance="true" level_based_chance_reduction="true">
 		<gd_maps>
 			<gd_map map_id="310110000" /><!-- Theobomos_Lab -->
 			<gd_map map_id="320130000" /><!-- Adma_Stronghold -->
@@ -571,7 +571,7 @@
 			<gd_item id="166500002" /><!-- Amplification Stone -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Amplification Stone (Multi)" base_chance="6" dynamic_chance="true" member_limit="192">
+	<gd_rule rule_name="Amplification Stone (Multi)" chance="6" dynamic_chance="true" member_limit="192" level_based_chance_reduction="true">
 		<gd_maps>
 			<gd_map map_id="310110000" /><!-- Theobomos_Lab -->
 			<gd_map map_id="320130000" /><!-- Adma_Stronghold -->
@@ -638,7 +638,7 @@
 			<gd_item id="166500002" /><!-- Amplification Stone -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Tempering Solution (World Drop)" base_chance="0.05">
+	<gd_rule rule_name="Tempering Solution (World Drop)" chance="0.05" level_based_chance_reduction="true">
 		<gd_ratings>
 			<gd_rating rating="NORMAL" />
 			<gd_rating rating="ELITE" />
@@ -655,7 +655,7 @@
 			<gd_item id="166030005" /><!-- Tempering Solution -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Omega Enchantment Stone" base_chance="1">
+	<gd_rule rule_name="Omega Enchantment Stone" chance="1" level_based_chance_reduction="true">
 		<gd_ratings>
 			<gd_rating rating="NORMAL" />
 			<gd_rating rating="ELITE" />
@@ -672,7 +672,7 @@
 			<gd_item id="166020000" /><!-- Omega Enchantment Stone -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Tempering Solution (Single)" base_chance="6" dynamic_chance="true">
+	<gd_rule rule_name="Tempering Solution (Single)" chance="6" dynamic_chance="true" level_based_chance_reduction="true">
 		<gd_maps>
 			<gd_map map_id="320100000" /><!-- Fire_Temple -->
 			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
@@ -723,7 +723,7 @@
 			<gd_item id="166030005" /><!-- Tempering Solution -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Tempering Solution Chest (Shared)" base_chance="6" dynamic_chance="true" member_limit="192">
+	<gd_rule rule_name="Tempering Solution Chest (Shared)" chance="6" dynamic_chance="true" member_limit="192" level_based_chance_reduction="true">
 		<gd_maps>
 			<gd_map map_id="310110000" /><!-- Theobomos_Lab -->
 			<gd_map map_id="320080000" /><!-- Draupnir_Cave -->
@@ -761,7 +761,7 @@
 			<gd_item id="188053083" /><!-- Tempering Solution Chest -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Empyrean Plume Chest (Single)" base_chance="1">
+	<gd_rule rule_name="Empyrean Plume Chest (Single)" chance="1">
 		<gd_maps>
 			<gd_map map_id="301270000" /><!-- Linkgate_Foundry -->
 		</gd_maps>
@@ -772,7 +772,7 @@
 			<gd_item id="188053295" /><!-- Empyrean Plume Chest -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Empyrean Plume Chest (Single)" base_chance="2">
+	<gd_rule rule_name="Empyrean Plume Chest (Single)" chance="2">
 		<gd_maps>
 			<gd_map map_id="301270000" /><!-- Linkgate_Foundry -->
 		</gd_maps>
@@ -783,7 +783,7 @@
 			<gd_item id="188053295" /><!-- Empyrean Plume Chest -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Empyrean Plume Chest (Single)" base_chance="3">
+	<gd_rule rule_name="Empyrean Plume Chest (Single)" chance="3" level_based_chance_reduction="true">
 		<gd_maps>
 			<gd_map map_id="320100000" /><!-- Fire_Temple -->
 			<gd_map map_id="320080000" /><!-- Draupnir_Cave -->
@@ -811,7 +811,7 @@
 			<gd_item id="188053295" /><!-- Empyrean Plume Chest -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Empyrean Plume Chest (Shared)" base_chance="3" member_limit="192">
+	<gd_rule rule_name="Empyrean Plume Chest (Shared)" chance="3" member_limit="192" level_based_chance_reduction="true">
 		<gd_maps>
 			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
 			<gd_map map_id="300150000" /><!-- Udas_Temple -->
@@ -869,7 +869,7 @@
 			<gd_item id="188053295" /><!-- Empyrean Plume Chest -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Courier Pass Lv.50" base_chance="4" no_reduction="true">
+	<gd_rule rule_name="Courier Pass Lv.50" chance="4">
 		<gd_maps>
 			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
 		</gd_maps>
@@ -881,7 +881,7 @@
 			<gd_item id="188950005" /><!-- Special Courier Pass (Eternal/Lv.50 and lower) -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Fabled Courier Pass Lv.51-55" base_chance="4" no_reduction="true">
+	<gd_rule rule_name="Fabled Courier Pass Lv.51-55" chance="4">
 		<gd_maps>
 			<gd_map map_id="300190000" /><!-- Talocs_Hollow -->
 			<gd_map map_id="300150000" /><!-- Udas_Temple -->
@@ -896,7 +896,7 @@
 			<gd_item id="188950003" /><!-- Special Courier Pass (Fabled/Lv.51-55) -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Eternal Courier Pass Lv.51-55" base_chance="4" no_reduction="true">
+	<gd_rule rule_name="Eternal Courier Pass Lv.51-55" chance="4">
 		<gd_maps>
 			<gd_map map_id="300170000" /><!-- Beshmundir_Temple -->
 			<gd_map map_id="320150000" /><!-- Padmarashkas_Cave -->
@@ -909,7 +909,7 @@
 			<gd_item id="188950006" /><!-- Special Courier Pass (Eternal/Lv.51-55) -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Eternal Courier Pass Lv.56-60" base_chance="4" no_reduction="true">
+	<gd_rule rule_name="Eternal Courier Pass Lv.56-60" chance="4">
 		<gd_maps>
 			<gd_map map_id="300280000" /><!-- Rentus_Base -->
 			<gd_map map_id="300510000" /><!-- Tiamat_Stronghold -->
@@ -919,10 +919,10 @@
 			<gd_npc npc_id="701541" /><!-- Tahabata's Treasure Chest -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="188950007"  /><!-- Special Courier Pass (Eternal/Lv.56-60) -->
+			<gd_item id="188950007" /><!-- Special Courier Pass (Eternal/Lv.56-60) -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Mythic Courier Pass Lv.56-60" base_chance="4" no_reduction="true">
+	<gd_rule rule_name="Mythic Courier Pass Lv.56-60" chance="4">
 		<gd_maps>
 			<gd_map map_id="300520000" /><!-- Dragon_Lords_Refuge -->
 		</gd_maps>
@@ -933,7 +933,7 @@
 			<gd_item id="188950018" /><!-- Special Courier Pass (Mythic/Lv.56-60) -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Eternal Courier Pass Lv.61-65" base_chance="4" no_reduction="true">
+	<gd_rule rule_name="Eternal Courier Pass Lv.61-65" chance="4">
 		<gd_maps>
 			<gd_map map_id="300610000" /><!-- Raksang_Ruins -->
 			<gd_map map_id="301380000" /><!-- Danuar_Sanctuary -->
@@ -963,7 +963,7 @@
 			<gd_item id="188950015" /><!-- Special Courier Pass (Eternal/Lv.61-65) -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Mythic Courier Pass Lv.61-65" base_chance="4" no_reduction="true">
+	<gd_rule rule_name="Mythic Courier Pass Lv.61-65" chance="4">
 		<gd_maps>
 			<gd_map map_id="301370000" /><!-- Infernal_Illuminary_Obelisk -->
 			<gd_map map_id="301360000" /><!-- Infernal_Danuar_Reliquary -->

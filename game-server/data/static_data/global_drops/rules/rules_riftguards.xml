@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../global_rules.xsd">
-	<gd_rule rule_name="RIFT_GUARD_MAJOR_AP_POTION" base_chance="40">
+	<gd_rule rule_name="RIFT_GUARD_MAJOR_AP_POTION" chance="40">
 		<gd_npcs>
 			<gd_npc npc_id="209518" /><!-- Eltnen Sentinel -->
 			<gd_npc npc_id="209519" /><!-- Heiron Protector -->
@@ -44,7 +44,7 @@
 			<gd_item id="162000070" /><!-- Major Divine Mana Serum -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="RIFT_GUARD_RELICS" base_chance="40">
+	<gd_rule rule_name="RIFT_GUARD_RELICS" chance="40">
 		<gd_npcs>
 			<gd_npc npc_id="209518" /><!-- Eltnen Sentinel -->
 			<gd_npc npc_id="209519" /><!-- Heiron Protector -->
@@ -88,7 +88,7 @@
 			<gd_item id="186000052" /><!-- Greater Ancient Crown -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="RIFT_GUARD_MEDAL" base_chance="35">
+	<gd_rule rule_name="RIFT_GUARD_MEDAL" chance="35">
 		<gd_npcs>
 			<gd_npc npc_id="209518" /><!-- Eltnen Sentinel -->
 			<gd_npc npc_id="209519" /><!-- Heiron Protector -->
@@ -131,7 +131,7 @@
 			<gd_item id="186000147" /><!-- Mithril Medal -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Boss Volatile Bundle" base_chance="100" member_limit="144">
+	<gd_rule rule_name="Named Boss Volatile Bundle" chance="100" member_limit="144">
 		<gd_npcs>
 			<gd_npc npc_id="219887" /><!-- Captain Brimas -->
 			<gd_npc npc_id="219906" /><!-- Captain Meriward  -->
@@ -144,7 +144,7 @@
 			<gd_item id="188053717" /><!-- Volatile Rift Victory Loot Bundle -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Volatile Bundle" base_chance="100" member_limit="6">
+	<gd_rule rule_name="Named Volatile Bundle" chance="100" member_limit="6">
 		<gd_npcs>
 			<gd_npc npc_id="235830" /><!-- Mutated Gatorback Skilex -->
 			<gd_npc npc_id="235832" /><!-- Aggressive Coral Corask  -->

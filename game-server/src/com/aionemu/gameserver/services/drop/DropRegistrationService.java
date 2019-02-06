@@ -12,7 +12,6 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.event.AIEventType;
-import com.aionemu.gameserver.configs.main.DropConfig;
 import com.aionemu.gameserver.configs.main.RatesConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.dataholders.GlobalNpcExclusionData;
@@ -133,7 +132,7 @@ public class DropRegistrationService {
 		dropModifiers.setIsDropNpcChest(isChest);
 		dropModifiers.setDropRace(player.getRace());
 		dropModifiers.setBoostDropRate(calculateBoostDropRate(player, npc));
-		dropModifiers.setReductionDropRate(getReductionDropRate(npc, isChest, highestLevel));
+		dropModifiers.setReductionDropRate(getReductionDropRate(npc, highestLevel));
 		return dropModifiers;
 	}
 
@@ -213,10 +212,8 @@ public class DropRegistrationService {
 		return index;
 	}
 
-	private Float getReductionDropRate(Npc npc, boolean isChest, int highestLevel) {
-		int dropChance = 100;
-		if (!DropConfig.DISABLE_REDUCTION && (!isChest || npc.getLevel() != 1) && !DropConfig.NO_REDUCTION_MAPS.contains(npc.getWorldId()))
-			dropChance = DropRewardEnum.dropRewardFrom(npc.getLevel() - highestLevel); // reduce chance depending on level
+	private Float getReductionDropRate(Npc npc, int highestLevel) {
+		int dropChance = DropRewardEnum.dropRewardFrom(npc.getLevel() - highestLevel); // reduced chance depending on level
 		return dropChance == 100 ? null : dropChance / 100f;
 	}
 
@@ -243,7 +240,7 @@ public class DropRegistrationService {
 		// dynamic_chance means mobs will have different base chances based on their rank and rating
 		if (rule.isDynamicChance())
 			chance *= getRankModifier(npc) * getRatingModifier(npc);
-		return dropModifiers.calculateDropChance(chance, rule.isNoReduction());
+		return dropModifiers.calculateDropChance(chance, rule.isUseLevelBasedChanceReduction());
 	}
 
 	private int addDropItems(int index, Set<DropItem> droppedItems, GlobalRule rule, Npc npc, Player player, Collection<Player> groupMembers,
@@ -257,7 +254,7 @@ public class DropRegistrationService {
 				int distributedItems = 0;
 				for (Player member : members) {
 					for (GlobalDropItem drop : drops) {
-						DropItem dropitem = new DropItem(new Drop(drop.getId(), 1, 1, 100, false));
+						DropItem dropitem = new DropItem(new Drop(drop.getId(), 1, 1, 100));
 						dropitem.setCount(getItemCount(drop, npc));
 						dropitem.setIndex(index++);
 						dropitem.setPlayerObjId(member.getObjectId());
@@ -278,7 +275,7 @@ public class DropRegistrationService {
 	}
 
 	public DropItem regDropItem(int index, int playerObjId, int objId, int itemId, long count) {
-		DropItem item = new DropItem(new Drop(itemId, 1, 1, 100, false));
+		DropItem item = new DropItem(new Drop(itemId, 1, 1, 100));
 		item.setPlayerObjId(playerObjId);
 		item.setNpcObj(objId);
 		item.setCount(count);

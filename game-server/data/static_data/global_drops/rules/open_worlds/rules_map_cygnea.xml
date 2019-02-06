@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../global_rules.xsd">
-	<gd_rule rule_name="Aetheric Field Fragment" base_chance="1">
+	<gd_rule rule_name="Aetheric Field Fragment" chance="1">
 		<gd_maps>
 			<gd_map map_id="210070000" /><!-- Cygnea -->
 		</gd_maps>
@@ -9,7 +9,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Sunayaka -->
-	<gd_rule rule_name="Named Hairpin" base_chance="100">
+	<gd_rule rule_name="Named Hairpin" chance="100">
 		<gd_maps>
 			<gd_map map_id="210070000" /><!-- Cygnea -->
 		</gd_maps>
@@ -20,7 +20,7 @@
 			<gd_item id="125003135" /><!-- Sunayaka's Hairpin -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon Chest" base_chance="100">
+	<gd_rule rule_name="Named Weapon Chest" chance="100">
 		<gd_maps>
 			<gd_map map_id="210070000" /><!-- Cygnea -->
 		</gd_maps>
@@ -44,7 +44,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Tatar -->
-	<gd_rule rule_name="Named Helm" base_chance="100">
+	<gd_rule rule_name="Named Helm" chance="100">
 		<gd_maps>
 			<gd_map map_id="210070000" /><!-- Cygnea -->
 		</gd_maps>
@@ -58,7 +58,7 @@
 			<gd_item id="125003133" /><!-- Tatar's Helm -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Souvenir" base_chance="40">
+	<gd_rule rule_name="Named Souvenir" chance="40">
 		<gd_maps>
 			<gd_map map_id="210070000" /><!-- Cygnea -->
 		</gd_maps>
@@ -69,7 +69,7 @@
 			<gd_item id="170490017" /><!-- [Souvenir] Golden Tatar Statue -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Fabled Weapon" base_chance="100">
+	<gd_rule rule_name="Named Fabled Weapon" chance="100">
 		<gd_maps>
 			<gd_map map_id="210070000" /><!-- Cygnea -->
 		</gd_maps>
@@ -92,7 +92,7 @@
 			<gd_item id="188051833" /><!-- Tatar's Cipher-Blade -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Eternal Weapon" base_chance="50">
+	<gd_rule rule_name="Named Eternal Weapon" chance="50">
 		<gd_maps>
 			<gd_map map_id="210070000" /><!-- Cygnea -->
 		</gd_maps>
@@ -115,7 +115,7 @@
 			<gd_item id="188051833" /><!-- Tatar's Cipher-Blade Box -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Eternal Shield" base_chance="40">
+	<gd_rule rule_name="Named Eternal Shield" chance="40">
 		<gd_maps>
 			<gd_map map_id="210070000" /><!-- Cygnea -->
 		</gd_maps>
@@ -128,7 +128,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Machine Spirit Tottal -->
-	<gd_rule rule_name="Named Mythic Hairpin" base_chance="70">
+	<gd_rule rule_name="Named Mythic Hairpin" chance="70">
 		<gd_maps>
 			<gd_map map_id="210070000" /><!-- Cygnea -->
 		</gd_maps>
@@ -139,7 +139,7 @@
 			<gd_item id="125004300" /><!-- Deep Sea Feast Hairpin -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Eternal Weapon" base_chance="100">
+	<gd_rule rule_name="Named Eternal Weapon" chance="100">
 		<gd_maps>
 			<gd_map map_id="210070000" /><!-- Cygnea -->
 		</gd_maps>
@@ -164,7 +164,7 @@
 			<gd_item id="115001861" /><!-- Scale Shield of Reviving Earth -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Enchantment Stone" base_chance="100" max_drop_rule="5">
+	<gd_rule rule_name="Named Enchantment Stone" chance="100" max_drop_rule="5">
 		<gd_maps>
 			<gd_map map_id="210070000" /><!-- Cygnea -->
 		</gd_maps>
@@ -185,7 +185,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Gatekeeper Flox -->
-	<gd_rule rule_name="Named Mythic Weapon" base_chance="60">
+	<gd_rule rule_name="Named Mythic Weapon" chance="60">
 		<gd_maps>
 			<gd_map map_id="210070000" /><!-- Cygnea -->
 		</gd_maps>
@@ -208,7 +208,7 @@
 			<gd_item id="102101103" /><!-- Wave Song Cipher-Blade -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Mythic Shield" base_chance="60">
+	<gd_rule rule_name="Named Mythic Shield" chance="60">
 		<gd_maps>
 			<gd_map map_id="210070000" /><!-- Cygnea -->
 		</gd_maps>
@@ -220,7 +220,7 @@
 			<gd_item id="115001863" /><!-- Flox's Scale Shield -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Eternal Armor" base_chance="100">
+	<gd_rule rule_name="Named Eternal Armor" chance="100">
 		<gd_maps>
 			<gd_map map_id="210070000" /><!-- Cygnea -->
 		</gd_maps>
@@ -250,7 +250,7 @@
 			<gd_item id="114601610" /><!-- Wave Song Plate Boots -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Enchantment Stone" base_chance="100" max_drop_rule="10">
+	<gd_rule rule_name="Named Enchantment Stone" chance="100" max_drop_rule="10">
 		<gd_maps>
 			<gd_map map_id="210070000" /><!-- Cygnea -->
 		</gd_maps>
@@ -283,7 +283,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Chromaleaf Flowershot -->
-	<gd_rule rule_name="Named Fabled Weapon" base_chance="100">
+	<gd_rule rule_name="Named Fabled Weapon" chance="100">
 		<gd_maps>
 			<gd_map map_id="210070000" /><!-- Cygnea -->
 		</gd_maps>
@@ -296,7 +296,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Shatterroar Kirrin -->
-	<gd_rule rule_name="Named Fabled Weapon" base_chance="100">
+	<gd_rule rule_name="Named Fabled Weapon" chance="100">
 		<gd_maps>
 			<gd_map map_id="210070000" /><!-- Cygnea -->
 		</gd_maps>
@@ -309,7 +309,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Betrayer Squallo -->
-	<gd_rule rule_name="Named Fabled Weapon" base_chance="100">
+	<gd_rule rule_name="Named Fabled Weapon" chance="100">
 		<gd_maps>
 			<gd_map map_id="210070000" /><!-- Cygnea -->
 		</gd_maps>
@@ -322,7 +322,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Garden Protector Nenupar -->
-	<gd_rule rule_name="Named Fabled Weapon" base_chance="100">
+	<gd_rule rule_name="Named Fabled Weapon" chance="100">
 		<gd_maps>
 			<gd_map map_id="210070000" /><!-- Cygnea -->
 		</gd_maps>
@@ -335,7 +335,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Tenacious Sashirr -->
-	<gd_rule rule_name="Named Fabled Weapon" base_chance="100">
+	<gd_rule rule_name="Named Fabled Weapon" chance="100">
 		<gd_maps>
 			<gd_map map_id="210070000" /><!-- Cygnea -->
 		</gd_maps>
@@ -348,7 +348,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Commander Ratash -->
-	<gd_rule rule_name="Named Fabled Weapon" base_chance="100">
+	<gd_rule rule_name="Named Fabled Weapon" chance="100">
 		<gd_maps>
 			<gd_map map_id="210070000" /><!-- Cygnea -->
 		</gd_maps>
@@ -361,7 +361,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Fierce Sandmane Tigric -->
-	<gd_rule rule_name="Named Fabled Weapon" base_chance="100">
+	<gd_rule rule_name="Named Fabled Weapon" chance="100">
 		<gd_maps>
 			<gd_map map_id="210070000" /><!-- Cygnea -->
 		</gd_maps>
@@ -374,7 +374,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Others -->
-	<gd_rule rule_name="Named Eternal Armor" base_chance="50">
+	<gd_rule rule_name="Named Eternal Armor" chance="50">
 		<gd_maps>
 			<gd_map map_id="210070000" /><!-- Cygnea -->
 		</gd_maps>
@@ -389,7 +389,7 @@
 			<gd_item id="110601657" /><!-- Wave Song Breastplate -->
 		</gd_items>
 	</gd_rule> 
-	<gd_rule rule_name="Named Eternal Gloves" base_chance="50">
+	<gd_rule rule_name="Named Eternal Gloves" chance="50">
 		<gd_maps>
 			<gd_map map_id="210070000" /><!-- Cygnea -->
 		</gd_maps>
@@ -405,7 +405,7 @@
 			<gd_item id="111601620" /><!-- Wave Song Gauntlets -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Eternal Shoulders" base_chance="50">
+	<gd_rule rule_name="Named Eternal Shoulders" chance="50">
 		<gd_maps>
 			<gd_map map_id="210070000" /><!-- Cygnea -->
 		</gd_maps>
@@ -421,7 +421,7 @@
 			<gd_item id="112601602" /><!-- Wave Song Shoulderplates -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Eternal Pants" base_chance="50">
+	<gd_rule rule_name="Named Eternal Pants" chance="50">
 		<gd_maps>
 			<gd_map map_id="210070000" /><!-- Cygnea -->
 		</gd_maps>
@@ -437,7 +437,7 @@
 			<gd_item id="113601603" /><!-- Wave Song Greaves -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Eternal Boots" base_chance="50">
+	<gd_rule rule_name="Named Eternal Boots" chance="50">
 		<gd_maps>
 			<gd_map map_id="210070000" /><!-- Cygnea -->
 		</gd_maps>
@@ -453,7 +453,7 @@
 			<gd_item id="114601610" /><!-- Wave Song Plate Boots -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Power Shards" base_chance="100">
+	<gd_rule rule_name="Named Power Shards" chance="100">
 		<gd_maps>
 			<gd_map map_id="210070000" /><!-- Cygnea -->
 		</gd_maps>
@@ -484,7 +484,7 @@
 			<gd_item id="169000010" min_count="500" /><!-- Superior Power Shard -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Idian Pouch" base_chance="100">
+	<gd_rule rule_name="Named Idian Pouch" chance="100">
 		<gd_maps>
 			<gd_map map_id="210070000" /><!-- Cygnea -->
 		</gd_maps>
@@ -501,7 +501,7 @@
 			<gd_item id="188053746" /><!-- Faded Middle Grade Idian Bundle -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Idian Pouch" base_chance="100">
+	<gd_rule rule_name="Named Idian Pouch" chance="100">
 		<gd_maps>
 			<gd_map map_id="210070000" /><!-- Cygnea -->
 		</gd_maps>
@@ -516,7 +516,7 @@
 			<gd_item id="188053747" /><!-- Faded High Grade Idian Bundle -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Idian Pouch" base_chance="100">
+	<gd_rule rule_name="Named Idian Pouch" chance="100">
 		<gd_maps>
 			<gd_map map_id="210070000" /><!-- Cygnea -->
 		</gd_maps>
@@ -528,7 +528,7 @@
 			<gd_item id="188053748" /><!-- Elegant High Grade Idian Bundle -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Manastone Bundle" base_chance="100">
+	<gd_rule rule_name="Named Manastone Bundle" chance="100">
 		<gd_maps>
 			<gd_map map_id="210070000" /><!-- Cygnea -->
 		</gd_maps>
@@ -546,7 +546,7 @@
 			<gd_item id="188053904" chance="20" /><!-- Faded Middle Grade Composite Manastone Bundle -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Manastone Bundle" base_chance="100">
+	<gd_rule rule_name="Named Manastone Bundle" chance="100">
 		<gd_maps>
 			<gd_map map_id="210070000" /><!-- Cygnea -->
 		</gd_maps>
@@ -562,7 +562,7 @@
 			<gd_item id="188053905" chance="20" /><!-- Faded High Grade Composite Manastone Bundle -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Composite Manastone Bundle" base_chance="100">
+	<gd_rule rule_name="Named Composite Manastone Bundle" chance="100">
 		<gd_maps>
 			<gd_map map_id="210070000" /><!-- Cygnea -->
 		</gd_maps>
@@ -580,7 +580,7 @@
 			<gd_item id="188053744" /><!-- Elegant Middle Grade Composite Manastone Bundle -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Manastone Pouch" base_chance="100" max_drop_rule="3">
+	<gd_rule rule_name="Named Manastone Pouch" chance="100" max_drop_rule="3">
 		<gd_maps>
 			<gd_map map_id="210070000" /><!-- Cygnea -->
 		</gd_maps>

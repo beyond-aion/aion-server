@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../global_rules.xsd">
 	<!-- Reviver Nasto -->
-	<gd_rule rule_name="Named Coins" base_chance="100">
+	<gd_rule rule_name="Named Coins" chance="100">
 		<gd_maps>
 			<gd_map map_id="300610000" /><!-- Raksang_Ruins -->
 		</gd_maps>
@@ -12,7 +12,7 @@
 			<gd_item id="186000237" min_count="15" max_count="45" /><!-- Ancient Coin -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon Box" base_chance="40">
+	<gd_rule rule_name="Named Weapon Box" chance="40">
 		<gd_maps>
 			<gd_map map_id="300610000" /><!-- Raksang_Ruins -->
 		</gd_maps>
@@ -23,7 +23,7 @@
 			<gd_item id="188053678" /><!-- Nasto's Unique Weapon Box -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor Box" base_chance="100">
+	<gd_rule rule_name="Named Armor Box" chance="100">
 		<gd_maps>
 			<gd_map map_id="300610000" /><!-- Raksang_Ruins -->
 		</gd_maps>
@@ -38,7 +38,7 @@
 			<gd_item id="188053683" /><!-- Nasto's Unique Shoes Box -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor Box" base_chance="70">
+	<gd_rule rule_name="Named Armor Box" chance="70">
 		<gd_maps>
 			<gd_map map_id="300610000" /><!-- Raksang_Ruins -->
 		</gd_maps>
@@ -50,7 +50,7 @@
 			<gd_item id="188053680" /><!-- Nasto's Unique Pants Box -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory Box" base_chance="40">
+	<gd_rule rule_name="Named Accessory Box" chance="40">
 		<gd_maps>
 			<gd_map map_id="300610000" /><!-- Raksang_Ruins -->
 		</gd_maps>
@@ -61,7 +61,7 @@
 			<gd_item id="188053684" /><!-- Nasto's Hero Accessory Box -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Head" base_chance="70">
+	<gd_rule rule_name="Named Head" chance="70">
 		<gd_maps>
 			<gd_map map_id="300610000" /><!-- Raksang_Ruins -->
 		</gd_maps>

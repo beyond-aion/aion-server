@@ -29,12 +29,12 @@
 			<xs:element minOccurs="0" name="gd_zones" type="GlobalDropZones" />
 		</xs:all>
 		<xs:attribute name="rule_name" type="xs:string" use="required" />
-		<xs:attribute name="base_chance" type="xs:float" use="required" />
+		<xs:attribute name="chance" type="xs:float" use="required" />
 		<xs:attribute name="dynamic_chance" type="xs:boolean" default="false" />
 		<xs:attribute name="min_diff" type="xs:int" default="-99" />
 		<xs:attribute name="max_diff" type="xs:int" default="99" />
 		<xs:attribute name="restriction_race" type="RestrictionRace" />
-		<xs:attribute name="no_reduction" type="xs:boolean" default="false" />
+		<xs:attribute name="level_based_chance_reduction" type="xs:boolean" default="false" />
 		<xs:attribute name="member_limit" type="xs:int" default="1" />
 		<xs:attribute name="max_drop_rule" type="xs:int" default="1" />
 	</xs:complexType>

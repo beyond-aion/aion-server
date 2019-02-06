@@ -29,6 +29,8 @@ public class DropGroup {
 	private Race race = Race.PC_ALL;
 	@XmlAttribute(name = "name")
 	private String name;
+	@XmlAttribute(name = "level_based_chance_reduction")
+	private boolean useLevelBasedChanceReduction;
 	@XmlAttribute(name = "max_items")
 	private int maxItems = 1;
 
@@ -48,6 +50,10 @@ public class DropGroup {
 		return name;
 	}
 
+	public boolean isUseLevelBasedChanceReduction() {
+		return useLevelBasedChanceReduction;
+	}
+
 	public int tryAddDropItems(Set<DropItem> result, int index, DropModifiers dropModifiers, Collection<Player> groupMembers) {
 		Set<Drop> remainingDrops = new HashSet<>(drops);
 		for (int i = 0; i < maxItems && !remainingDrops.isEmpty(); i++) {
@@ -55,7 +61,7 @@ public class DropGroup {
 			float nearestChanceDiff = Float.MAX_VALUE;
 			List<Drop> nearestDropsOfSameChance = new ArrayList<>();
 			for (Drop drop : remainingDrops) {
-				float finalChance = dropModifiers.calculateDropChance(drop.getChance(), drop.isNoReduction());
+				float finalChance = dropModifiers.calculateDropChance(drop.getChance(), isUseLevelBasedChanceReduction());
 				if (chance < finalChance) {
 					float chanceDiff = finalChance - chance;
 					if (nearestDropsOfSameChance.isEmpty() || chanceDiff <= nearestChanceDiff) {

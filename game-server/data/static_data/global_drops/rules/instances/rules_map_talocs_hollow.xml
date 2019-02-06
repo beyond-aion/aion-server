@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../global_rules.xsd">
 	<!-- Map Drops -->
-	<gd_rule rule_name="Junk Taloc's Leaf Fragment" base_chance="40" no_reduction="true">
+	<gd_rule rule_name="Junk Taloc's Leaf Fragment" chance="40">
 		<gd_maps>
 			<gd_map map_id="300190000" /><!-- Taloc's Hollow -->
 		</gd_maps>
@@ -18,7 +18,7 @@
 			<gd_item id="182005957" /><!-- Taloc's Leaf Fragment -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Junk Taloc's Stem Fragment" base_chance="40" no_reduction="true">
+	<gd_rule rule_name="Junk Taloc's Stem Fragment" chance="40">
 		<gd_maps>
 			<gd_map map_id="300190000" /><!-- Taloc's Hollow -->
 		</gd_maps>
@@ -34,7 +34,7 @@
 			<gd_item id="182005958" /><!-- Taloc's Stem Fragment -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Junk Taloc's Root Fragment" base_chance="40" no_reduction="true">
+	<gd_rule rule_name="Junk Taloc's Root Fragment" chance="40">
 		<gd_maps>
 			<gd_map map_id="300190000" /><!-- Taloc's Hollow -->
 		</gd_maps>
@@ -46,7 +46,7 @@
 			<gd_item id="182005959" /><!-- Taloc's Root Fragment -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Common Aether Permeated Taloc Leaf" base_chance="35" no_reduction="true">
+	<gd_rule rule_name="Common Aether Permeated Taloc Leaf" chance="35">
 		<gd_maps>
 			<gd_map map_id="300190000" /><!-- Taloc's Hollow -->
 		</gd_maps>
@@ -63,7 +63,7 @@
 			<gd_item id="152012051" /><!-- Aether Permeated Taloc Leaf -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Common Poisoned Taloc Leaf" base_chance="35" no_reduction="true">
+	<gd_rule rule_name="Common Poisoned Taloc Leaf" chance="35">
 		<gd_maps>
 			<gd_map map_id="300190000" /><!-- Taloc's Hollow -->
 		</gd_maps>
@@ -80,7 +80,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Single Monster Drops -->
-	<gd_rule rule_name="Named Weapon (Rare)" base_chance="20" no_reduction="true">
+	<gd_rule rule_name="Named Weapon (Rare)" chance="20">
 		<gd_maps>
 			<gd_map map_id="300190000" /><!-- Talocs_Hollow -->
 		</gd_maps>
@@ -103,7 +103,7 @@
 			<gd_item id="102100561" /><!-- Siel's Supreme Cipher-Blade -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Legend)" base_chance="45" no_reduction="true">
+	<gd_rule rule_name="Named Weapon (Legend)" chance="45">
 		<gd_maps>
 			<gd_map map_id="300190000" /><!-- Talocs_Hollow -->
 		</gd_maps>
@@ -126,7 +126,7 @@
 			<gd_item id="102100560" /><!-- Celestius' Cipher-Blade -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="60" no_reduction="true">
+	<gd_rule rule_name="Named Armor (Rare)" chance="60">
 		<gd_maps>
 			<gd_map map_id="300190000" /><!-- Talocs_Hollow -->
 		</gd_maps>
@@ -140,7 +140,7 @@
 			<gd_item id="113600980" /><!-- Celestius' Greaves -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Legend)" base_chance="40" no_reduction="true">
+	<gd_rule rule_name="Named Armor (Legend)" chance="40">
 		<gd_maps>
 			<gd_map map_id="300190000" /><!-- Talocs_Hollow -->
 		</gd_maps>
@@ -154,7 +154,7 @@
 			<gd_item id="112601012" /><!-- Gellmar's Shoulderplates -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Accessory (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="300190000" /><!-- Talocs_Hollow -->
 		</gd_maps>
@@ -165,7 +165,7 @@
 			<gd_item id="125002276" /><!-- Mosqua's Hairpin -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Rare)" base_chance="45" no_reduction="true">
+	<gd_rule rule_name="Named Accessory (Rare)" chance="45">
 		<gd_maps>
 			<gd_map map_id="300190000" /><!-- Talocs_Hollow -->
 		</gd_maps>
@@ -177,7 +177,7 @@
 			<gd_item id="123001092" /><!-- Gellmar's Leather Belt -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Unique)" base_chance="30" no_reduction="true">
+	<gd_rule rule_name="Named Accessory (Unique)" chance="30">
 		<gd_maps>
 			<gd_map map_id="300190000" /><!-- Talocs_Hollow -->
 		</gd_maps>
@@ -189,7 +189,7 @@
 			<gd_item id="120001028" /><!-- Celestius' Turquoise Earrings -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Material (Legend)" base_chance="100" no_reduction="true">
+	<gd_rule rule_name="Named Material (Legend)" chance="100">
 		<gd_maps>
 			<gd_map map_id="300190000" /><!-- Talocs_Hollow -->
 		</gd_maps>
@@ -200,7 +200,7 @@
 			<gd_item id="152012045" /><!-- Celestius' Sap -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Souvenir" base_chance="20" no_reduction="true">
+	<gd_rule rule_name="Named Souvenir" chance="20">
 		<gd_maps>
 			<gd_map map_id="300190000" /><!-- Talocs_Hollow -->
 		</gd_maps>
@@ -211,7 +211,7 @@
 			<gd_item id="170170044" /><!-- [Souvenir] Taloc's Komad Statue -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Key" base_chance="100" no_reduction="true">
+	<gd_rule rule_name="Named Key" chance="100">
 		<gd_maps>
 			<gd_map map_id="300190000" /><!-- Talocs_Hollow -->
 		</gd_maps>
@@ -222,7 +222,7 @@
 			<gd_item id="185000088" /><!-- Shishir's Corrosive Fluid -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Key" base_chance="100" no_reduction="true">
+	<gd_rule rule_name="Named Key" chance="100">
 		<gd_maps>
 			<gd_map map_id="300190000" /><!-- Talocs_Hollow -->
 		</gd_maps>
@@ -233,7 +233,7 @@
 			<gd_item id="185000108" /><!-- Dorkin's Pocket Knife -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Instance Tool" base_chance="100" no_reduction="true">
+	<gd_rule rule_name="Named Instance Tool" chance="100">
 		<gd_maps>
 			<gd_map map_id="300190000" /><!-- Talocs_Hollow -->
 		</gd_maps>
@@ -244,7 +244,7 @@
 			<gd_item id="164000137" /><!-- Shishir's Powerstone -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Instance Tool" base_chance="100" no_reduction="true">
+	<gd_rule rule_name="Named Instance Tool" chance="100">
 		<gd_maps>
 			<gd_map map_id="300190000" /><!-- Talocs_Hollow -->
 		</gd_maps>
@@ -255,7 +255,7 @@
 			<gd_item id="164000139" /><!-- Neith's Sleepstone -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Instance Tool" base_chance="100" no_reduction="true">
+	<gd_rule rule_name="Named Instance Tool" chance="100">
 		<gd_maps>
 			<gd_map map_id="300190000" /><!-- Talocs_Hollow -->
 		</gd_maps>

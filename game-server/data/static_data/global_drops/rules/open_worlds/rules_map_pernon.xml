@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../global_rules.xsd">
 	<!-- Multiple Monster Drops -->
-	<gd_rule rule_name="Named Mount" base_chance="20">
+	<gd_rule rule_name="Named Mount" chance="20">
 		<gd_maps>
 			<gd_map map_id="710010000"/><!-- Pernon -->
 		</gd_maps>
@@ -15,7 +15,7 @@
 			<gd_item id="190100012"/><!-- Waveform Surfrider -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Bundle" base_chance="100">
+	<gd_rule rule_name="Named Bundle" chance="100">
 		<gd_maps>
 			<gd_map map_id="710010000"/><!-- Pernon -->
 		</gd_maps>
@@ -29,7 +29,7 @@
 			<gd_item id="188051564" max_count="2"/><!-- Housing Accessory Bundle -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Season Light" base_chance="100" member_limit="6">
+	<gd_rule rule_name="Named Season Light" chance="100" member_limit="6">
 		<gd_maps>
 			<gd_map map_id="710010000"/><!-- Pernon -->
 		</gd_maps>
@@ -43,7 +43,7 @@
 			<gd_item id="182006984"/><!-- Season's Light -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Aether Gem" base_chance="80">
+	<gd_rule rule_name="Named Aether Gem" chance="80">
 		<gd_maps>
 			<gd_map map_id="710010000"/><!-- Pernon -->
 		</gd_maps>
@@ -63,7 +63,7 @@
 			<gd_item id="182006853"/><!-- Hard Aether Gem -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Fertile Soil" base_chance="100">
+	<gd_rule rule_name="Named Fertile Soil" chance="100">
 		<gd_maps>
 			<gd_map map_id="710010000"/><!-- Pernon -->
 		</gd_maps>
@@ -82,7 +82,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Single Monster Drops -->
-	<gd_rule rule_name="Named Season Crystal" base_chance="100">
+	<gd_rule rule_name="Named Season Crystal" chance="100">
 		<gd_maps>
 			<gd_map map_id="710010000"/><!-- Pernon -->
 		</gd_maps>
@@ -93,7 +93,7 @@
 			<gd_item id="182006839" max_count="3"/><!-- Spring Crystal -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Season Crystal" base_chance="100">
+	<gd_rule rule_name="Named Season Crystal" chance="100">
 		<gd_maps>
 			<gd_map map_id="710010000"/><!-- Pernon -->
 		</gd_maps>
@@ -104,7 +104,7 @@
 			<gd_item id="182006840" max_count="3"/><!-- Summer Crystal -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Season Crystal" base_chance="100">
+	<gd_rule rule_name="Named Season Crystal" chance="100">
 		<gd_maps>
 			<gd_map map_id="710010000"/><!-- Pernon -->
 		</gd_maps>
@@ -115,7 +115,7 @@
 			<gd_item id="182006841" max_count="3"/><!-- Fall Crystal -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Season Crystal" base_chance="100">
+	<gd_rule rule_name="Named Season Crystal" chance="100">
 		<gd_maps>
 			<gd_map map_id="710010000"/><!-- Pernon -->
 		</gd_maps>
@@ -126,7 +126,7 @@
 			<gd_item id="182006842" max_count="3"/><!-- Winter Crystal -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Season Leaf" base_chance="100" member_limit="6">
+	<gd_rule rule_name="Named Season Leaf" chance="100" member_limit="6">
 		<gd_maps>
 			<gd_map map_id="710010000"/><!-- Pernon -->
 		</gd_maps>
@@ -137,7 +137,7 @@
 			<gd_item id="182006843"/><!-- Spring Leaf -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Season Leaf" base_chance="100" member_limit="6">
+	<gd_rule rule_name="Named Season Leaf" chance="100" member_limit="6">
 		<gd_maps>
 			<gd_map map_id="710010000"/><!-- Pernon -->
 		</gd_maps>
@@ -148,7 +148,7 @@
 			<gd_item id="182006844"/><!-- Summer Leaf -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Season Leaf" base_chance="100" member_limit="6">
+	<gd_rule rule_name="Named Season Leaf" chance="100" member_limit="6">
 		<gd_maps>
 			<gd_map map_id="710010000"/><!-- Pernon -->
 		</gd_maps>
@@ -159,7 +159,7 @@
 			<gd_item id="182006845"/><!-- Autumn Leaf -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Season Leaf" base_chance="100" member_limit="6">
+	<gd_rule rule_name="Named Season Leaf" chance="100" member_limit="6">
 		<gd_maps>
 			<gd_map map_id="710010000"/><!-- Pernon -->
 		</gd_maps>

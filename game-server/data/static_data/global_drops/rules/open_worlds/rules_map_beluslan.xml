@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../global_rules.xsd">
 	<!-- Multiple Monster Drops -->
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Armor (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="220040000"/><!-- Beluslan -->
 		</gd_maps>
@@ -21,7 +21,7 @@
 			<gd_item id="111600623"/><!-- Digging Team's Gauntlets -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Armor (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="220040000"/><!-- Beluslan -->
 		</gd_maps>
@@ -42,7 +42,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Single Monster Drops -->
-	<gd_rule rule_name="Named Weapon (Rare)" base_chance="45" no_reduction="true">
+	<gd_rule rule_name="Named Weapon (Rare)" chance="45">
 		<gd_maps>
 			<gd_map map_id="220040000"/><!-- Beluslan -->
 		</gd_maps>
@@ -56,7 +56,7 @@
 			<gd_item id="102000460"/><!-- Gyrinne's Harp -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Rare)" base_chance="45" no_reduction="true">
+	<gd_rule rule_name="Named Weapon (Rare)" chance="45">
 		<gd_maps>
 			<gd_map map_id="220040000"/><!-- Beluslan -->
 		</gd_maps>
@@ -68,7 +68,7 @@
 			<gd_item id="101500390"/><!-- Baza's Staff -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Rare)" base_chance="45" no_reduction="true">
+	<gd_rule rule_name="Named Weapon (Rare)" chance="45">
 		<gd_maps>
 			<gd_map map_id="220040000"/><!-- Beluslan -->
 		</gd_maps>
@@ -80,7 +80,7 @@
 			<gd_item id="101300378"/><!-- Eto's Spear -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Rare)" base_chance="45" no_reduction="true">
+	<gd_rule rule_name="Named Weapon (Rare)" chance="45">
 		<gd_maps>
 			<gd_map map_id="220040000"/><!-- Beluslan -->
 		</gd_maps>
@@ -93,7 +93,7 @@
 			<gd_item id="101900432"/><!-- Alfi's Aethercannon -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Rare)" base_chance="45" no_reduction="true">
+	<gd_rule rule_name="Named Weapon (Rare)" chance="45">
 		<gd_maps>
 			<gd_map map_id="220040000"/><!-- Beluslan -->
 		</gd_maps>
@@ -105,7 +105,7 @@
 			<gd_item id="100900383"/><!-- Dalloki's Greatsword -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Rare)" base_chance="45" no_reduction="true">
+	<gd_rule rule_name="Named Weapon (Rare)" chance="45">
 		<gd_maps>
 			<gd_map map_id="220040000"/><!-- Beluslan -->
 		</gd_maps>
@@ -120,7 +120,7 @@
 			<gd_item id="101900433"/><!-- Tufu's Aethercannon -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Rare)" base_chance="45" no_reduction="true">
+	<gd_rule rule_name="Named Weapon (Rare)" chance="45">
 		<gd_maps>
 			<gd_map map_id="220040000"/><!-- Beluslan -->
 		</gd_maps>
@@ -137,7 +137,7 @@
 			<gd_item id="102000463"/><!-- Chantara's Harp -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Legend)" base_chance="30" no_reduction="true">
+	<gd_rule rule_name="Named Weapon (Legend)" chance="30">
 		<gd_maps>
 			<gd_map map_id="220040000"/><!-- Beluslan -->
 		</gd_maps>
@@ -148,7 +148,7 @@
 			<gd_item id="100100391"/><!-- Huntzner's Pick -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Legend)" base_chance="30" no_reduction="true">
+	<gd_rule rule_name="Named Weapon (Legend)" chance="30">
 		<gd_maps>
 			<gd_map map_id="220040000"/><!-- Beluslan -->
 		</gd_maps>
@@ -171,7 +171,7 @@
 			<gd_item id="102000466"/><!-- Brhekman's Harp -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Unique)" base_chance="25" no_reduction="true">
+	<gd_rule rule_name="Named Weapon (Unique)" chance="25">
 		<gd_maps>
 			<gd_map map_id="220040000"/><!-- Beluslan -->
 		</gd_maps>
@@ -194,7 +194,7 @@
 			<gd_item id="102100767"/><!-- Alukina's Cipher-Blade -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Shield (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Shield (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="220040000"/><!-- Beluslan -->
 		</gd_maps>
@@ -205,7 +205,7 @@
 			<gd_item id="115000666"/><!-- Mahiki's Shield -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Shield (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Shield (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="220040000"/><!-- Beluslan -->
 		</gd_maps>
@@ -216,7 +216,7 @@
 			<gd_item id="115000668"/><!-- Horst's Shield -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Shield (Legend)" base_chance="33" no_reduction="true">
+	<gd_rule rule_name="Named Shield (Legend)" chance="33">
 		<gd_maps>
 			<gd_map map_id="220040000"/><!-- Beluslan -->
 		</gd_maps>
@@ -227,7 +227,7 @@
 			<gd_item id="115000670"/><!-- Aarien's Shield -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Shield (Legend)" base_chance="33" no_reduction="true">
+	<gd_rule rule_name="Named Shield (Legend)" chance="33">
 		<gd_maps>
 			<gd_map map_id="220040000"/><!-- Beluslan -->
 		</gd_maps>
@@ -238,7 +238,7 @@
 			<gd_item id="115000671"/><!-- Skiron's Shell -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Shield (Legend)" base_chance="33" no_reduction="true">
+	<gd_rule rule_name="Named Shield (Legend)" chance="33">
 		<gd_maps>
 			<gd_map map_id="220040000"/><!-- Beluslan -->
 		</gd_maps>
@@ -249,7 +249,7 @@
 			<gd_item id="115000673"/><!-- Brhekman's Shield -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Armor (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="220040000"/><!-- Beluslan -->
 		</gd_maps>
@@ -263,7 +263,7 @@
 			<gd_item id="112600601"/><!-- Snowfur's Shoulderplates -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Armor (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="220040000"/><!-- Beluslan -->
 		</gd_maps>
@@ -277,7 +277,7 @@
 			<gd_item id="114600610"/><!-- Gyrinne's Sabatons -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Armor (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="220040000"/><!-- Beluslan -->
 		</gd_maps>
@@ -291,7 +291,7 @@
 			<gd_item id="111600625"/><!-- Jungan's Gauntlets -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Armor (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="220040000"/><!-- Beluslan -->
 		</gd_maps>
@@ -305,7 +305,7 @@
 			<gd_item id="112600604"/><!-- Cynix's Shoulderplates -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Armor (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="220040000"/><!-- Beluslan -->
 		</gd_maps>
@@ -319,7 +319,7 @@
 			<gd_item id="113600619"/><!-- Alfi's Greaves -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Armor (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="220040000"/><!-- Beluslan -->
 		</gd_maps>
@@ -333,7 +333,7 @@
 			<gd_item id="112600603"/><!-- Endangered Crasaur's Shoulderplates -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Armor (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="220040000"/><!-- Beluslan -->
 		</gd_maps>
@@ -347,7 +347,7 @@
 			<gd_item id="111600626"/><!-- Veribe's Gauntlets -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Armor (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="220040000"/><!-- Beluslan -->
 		</gd_maps>
@@ -361,7 +361,7 @@
 			<gd_item id="111600629"/><!-- Deep Sea Gauntlets -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Armor (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="220040000"/><!-- Beluslan -->
 		</gd_maps>
@@ -375,7 +375,7 @@
 			<gd_item id="112600607"/><!-- Deep Sea Shoulderplates -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Armor (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="220040000"/><!-- Beluslan -->
 		</gd_maps>
@@ -389,7 +389,7 @@
 			<gd_item id="114600611"/><!-- Doni's Sabatons -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Armor (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="220040000"/><!-- Beluslan -->
 		</gd_maps>
@@ -403,7 +403,7 @@
 			<gd_item id="112600606"/><!-- Alquimia Lepharist Shoulderplates -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Armor (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="220040000"/><!-- Beluslan -->
 		</gd_maps>
@@ -414,7 +414,7 @@
 			<gd_item id="114300691"/><!-- Bakarma Legionary's Boots -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Armor (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="220040000"/><!-- Beluslan -->
 		</gd_maps>
@@ -432,7 +432,7 @@
 			<gd_item id="113600624"/><!-- Bakarma Legionary's Greaves -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Legend)" base_chance="33" no_reduction="true">
+	<gd_rule rule_name="Named Armor (Legend)" chance="33">
 		<gd_maps>
 			<gd_map map_id="220040000"/><!-- Beluslan -->
 		</gd_maps>
@@ -446,7 +446,7 @@
 			<gd_item id="113600622"/><!-- Aarien's Greaves -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Legend)" base_chance="33" no_reduction="true">
+	<gd_rule rule_name="Named Armor (Legend)" chance="33">
 		<gd_maps>
 			<gd_map map_id="220040000"/><!-- Beluslan -->
 		</gd_maps>
@@ -460,7 +460,7 @@
 			<gd_item id="113600623"/><!-- Deep Sea Greaves -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Accessory (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="220040000"/><!-- Beluslan -->
 		</gd_maps>
@@ -471,7 +471,7 @@
 			<gd_item id="123000753"/><!-- Snowfur's Belt -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Accessory (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="220040000"/><!-- Beluslan -->
 		</gd_maps>
@@ -483,7 +483,7 @@
 			<gd_item id="122000750"/><!-- Mahiki's Lazuli Ring -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Accessory (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="220040000"/><!-- Beluslan -->
 		</gd_maps>
@@ -494,7 +494,7 @@
 			<gd_item id="121000638"/><!-- Jungan's Necklace -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Accessory (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="220040000"/><!-- Beluslan -->
 		</gd_maps>
@@ -505,7 +505,7 @@
 			<gd_item id="122000755"/><!-- Baza's Ring -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Accessory (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="220040000"/><!-- Beluslan -->
 		</gd_maps>
@@ -516,7 +516,7 @@
 			<gd_item id="122000759"/><!-- Eto's Ring -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Accessory (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="220040000"/><!-- Beluslan -->
 		</gd_maps>
@@ -528,7 +528,7 @@
 			<gd_item id="100500391"/><!-- Icehorn's Jewel -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Accessory (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="220040000"/><!-- Beluslan -->
 		</gd_maps>
@@ -539,7 +539,7 @@
 			<gd_item id="120000701"/><!-- Dalloki's Earrings -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Accessory (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="220040000"/><!-- Beluslan -->
 		</gd_maps>
@@ -550,7 +550,7 @@
 			<gd_item id="122000754"/><!-- Endangered Crasaur's Ring -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Accessory (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="220040000"/><!-- Beluslan -->
 		</gd_maps>
@@ -561,7 +561,7 @@
 			<gd_item id="121000639"/><!-- Veribe's Necklace -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Accessory (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="220040000"/><!-- Beluslan -->
 		</gd_maps>
@@ -572,7 +572,7 @@
 			<gd_item id="120000702"/><!-- Doni's Earrings -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Accessory (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="220040000"/><!-- Beluslan -->
 		</gd_maps>
@@ -583,7 +583,7 @@
 			<gd_item id="122000756"/><!-- Tufu's Ring -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Accessory (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="220040000"/><!-- Beluslan -->
 		</gd_maps>
@@ -594,7 +594,7 @@
 			<gd_item id="120000705"/><!-- Chantara's Earrings -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Accessory (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="220040000"/><!-- Beluslan -->
 		</gd_maps>
@@ -605,7 +605,7 @@
 			<gd_item id="120000709"/><!-- Brhekman's Earrings -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Legend)" base_chance="33" no_reduction="true">
+	<gd_rule rule_name="Named Accessory (Legend)" chance="33">
 		<gd_maps>
 			<gd_map map_id="220040000"/><!-- Beluslan -->
 		</gd_maps>
@@ -617,7 +617,7 @@
 			<gd_item id="121000644"/><!-- Elime's Sapphire Necklace -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Legend)" base_chance="33" no_reduction="true">
+	<gd_rule rule_name="Named Accessory (Legend)" chance="33">
 		<gd_maps>
 			<gd_map map_id="220040000"/><!-- Beluslan -->
 		</gd_maps>
@@ -629,7 +629,7 @@
 			<gd_item id="122000761"/><!-- Skiron's Sapphire Ring -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Legend)" base_chance="33" no_reduction="true">
+	<gd_rule rule_name="Named Accessory (Legend)" chance="33">
 		<gd_maps>
 			<gd_map map_id="220040000"/><!-- Beluslan -->
 		</gd_maps>
@@ -641,7 +641,7 @@
 			<gd_item id="120000707"/><!-- Alukina's Diamond Earrings -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Unique)" base_chance="25" no_reduction="true">
+	<gd_rule rule_name="Named Accessory (Unique)" chance="25">
 		<gd_maps>
 			<gd_map map_id="220040000"/><!-- Beluslan -->
 		</gd_maps>
@@ -653,7 +653,7 @@
 			<gd_item id="122000758"/><!-- Aarien's Diamond Ring -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Belt (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Belt (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="220040000"/><!-- Beluslan -->
 		</gd_maps>
@@ -664,7 +664,7 @@
 			<gd_item id="123000754"/><!-- Horst's Belt -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Belt (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Belt (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="220040000"/><!-- Beluslan -->
 		</gd_maps>
@@ -675,7 +675,7 @@
 			<gd_item id="123000758"/><!-- Cynix's Belt -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Belt (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Belt (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="220040000"/><!-- Beluslan -->
 		</gd_maps>
@@ -687,7 +687,7 @@
 			<gd_item id="123000761"/><!-- Sepra's Leather Belt -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Belt (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Belt (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="220040000"/><!-- Beluslan -->
 		</gd_maps>
@@ -698,7 +698,7 @@
 			<gd_item id="123000760"/><!-- Alquimia Lepharist Belt -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Belt (Legend)" base_chance="33" no_reduction="true">
+	<gd_rule rule_name="Named Belt (Legend)" chance="33">
 		<gd_maps>
 			<gd_map map_id="220040000"/><!-- Beluslan -->
 		</gd_maps>
@@ -709,7 +709,7 @@
 			<gd_item id="123000756"/><!-- Royd's Leather Belt -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Material" base_chance="100" no_reduction="true">
+	<gd_rule rule_name="Named Material" chance="100">
 		<gd_maps>
 			<gd_map map_id="220040000"/><!-- Beluslan -->
 		</gd_maps>
@@ -720,7 +720,7 @@
 			<gd_item id="152012527"/><!-- Ice Petrahulk Fragment -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Material" base_chance="100" no_reduction="true">
+	<gd_rule rule_name="Named Material" chance="100">
 		<gd_maps>
 			<gd_map map_id="220040000"/><!-- Beluslan -->
 		</gd_maps>
@@ -731,7 +731,7 @@
 			<gd_item id="152012535"/><!-- Core of the Seacaller -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Material" base_chance="100" no_reduction="true">
+	<gd_rule rule_name="Named Material" chance="100">
 		<gd_maps>
 			<gd_map map_id="220040000"/><!-- Beluslan -->
 		</gd_maps>
@@ -742,7 +742,7 @@
 			<gd_item id="152012536"/><!-- Ntuamu's Blood -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Material" base_chance="100" no_reduction="true">
+	<gd_rule rule_name="Named Material" chance="100">
 		<gd_maps>
 			<gd_map map_id="220040000"/><!-- Beluslan -->
 		</gd_maps>
@@ -753,7 +753,7 @@
 			<gd_item id="152012524"/><!-- Fang Troll Blood -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Material" base_chance="100" no_reduction="true">
+	<gd_rule rule_name="Named Material" chance="100">
 		<gd_maps>
 			<gd_map map_id="220040000"/><!-- Beluslan -->
 		</gd_maps>
@@ -764,7 +764,7 @@
 			<gd_item id="152012525"/><!-- Mau Soul Crystal -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Material" base_chance="100" no_reduction="true">
+	<gd_rule rule_name="Named Material" chance="100">
 		<gd_maps>
 			<gd_map map_id="220040000"/><!-- Beluslan -->
 		</gd_maps>

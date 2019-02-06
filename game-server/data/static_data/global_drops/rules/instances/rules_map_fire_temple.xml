@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../global_rules.xsd">
 	<!-- Multiple Monster Drops -->
-	<gd_rule rule_name="Named Weapon (Unique)" base_chance="20" no_reduction="true">
+	<gd_rule rule_name="Named Weapon (Unique)" chance="20">
 		<gd_maps>
 			<gd_map map_id="320100000" /><!-- Fire_Temple -->
 		</gd_maps>
@@ -25,7 +25,7 @@
 			<gd_item id="102100766" /><!-- White Flame Cipher-Blade -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Rare)" base_chance="70" no_reduction="true">
+	<gd_rule rule_name="Named Accessory (Rare)" chance="70">
 		<gd_maps>
 			<gd_map map_id="320100000" /><!-- Fire_Temple -->
 		</gd_maps>
@@ -40,7 +40,7 @@
 			<gd_item id="125001110" /><!-- Flame Helm -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Legend)" base_chance="60" no_reduction="true">
+	<gd_rule rule_name="Named Accessory (Legend)" chance="60">
 		<gd_maps>
 			<gd_map map_id="320100000" /><!-- Fire_Temple -->
 		</gd_maps>
@@ -53,7 +53,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Single Monster Drops -->
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="70" no_reduction="true">
+	<gd_rule rule_name="Named Armor (Rare)" chance="70">
 		<gd_maps>
 			<gd_map map_id="320100000" /><!-- Fire_Temple -->
 		</gd_maps>
@@ -67,7 +67,7 @@
 			<gd_item id="111600433" /><!-- Flame Gauntlets -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Legend)" base_chance="35" no_reduction="true">
+	<gd_rule rule_name="Named Armor (Legend)" chance="35">
 		<gd_maps>
 			<gd_map map_id="320100000" /><!-- Fire_Temple -->
 		</gd_maps>
@@ -81,7 +81,7 @@
 			<gd_item id="114601060" /><!-- Fire Temple Sabatons -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="70" no_reduction="true">
+	<gd_rule rule_name="Named Armor (Rare)" chance="70">
 		<gd_maps>
 			<gd_map map_id="320100000" /><!-- Fire_Temple -->
 		</gd_maps>
@@ -95,7 +95,7 @@
 			<gd_item id="111500445" /><!-- Flame Handguards -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Legend)" base_chance="35" no_reduction="true">
+	<gd_rule rule_name="Named Armor (Legend)" chance="35">
 		<gd_maps>
 			<gd_map map_id="320100000" /><!-- Fire_Temple -->
 		</gd_maps>
@@ -109,7 +109,7 @@
 			<gd_item id="111601080" /><!-- Fire Temple Gauntlets -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="70" no_reduction="true">
+	<gd_rule rule_name="Named Armor (Rare)" chance="70">
 		<gd_maps>
 			<gd_map map_id="320100000" /><!-- Fire_Temple -->
 		</gd_maps>
@@ -123,7 +123,7 @@
 			<gd_item id="112500409" /><!-- Flame Spaulders -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Legend)" base_chance="35" no_reduction="true">
+	<gd_rule rule_name="Named Armor (Legend)" chance="35">
 		<gd_maps>
 			<gd_map map_id="320100000" /><!-- Fire_Temple -->
 		</gd_maps>
@@ -137,7 +137,7 @@
 			<gd_item id="110601104" /><!-- Fire Temple Breastplate -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="70" no_reduction="true">
+	<gd_rule rule_name="Named Armor (Rare)" chance="70">
 		<gd_maps>
 			<gd_map map_id="320100000" /><!-- Fire_Temple -->
 		</gd_maps>
@@ -151,7 +151,7 @@
 			<gd_item id="112600414" /><!-- Flame Shoulderplates -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Legend)" base_chance="35" no_reduction="true">
+	<gd_rule rule_name="Named Armor (Legend)" chance="35">
 		<gd_maps>
 			<gd_map map_id="320100000" /><!-- Fire_Temple -->
 		</gd_maps>
@@ -165,7 +165,7 @@
 			<gd_item id="112601055" /><!-- Fire Temple Shoulderplates -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Shield (Legend)" base_chance="30" no_reduction="true">
+	<gd_rule rule_name="Named Shield (Legend)" chance="30">
 		<gd_maps>
 			<gd_map map_id="320100000" /><!-- Fire_Temple -->
 		</gd_maps>
@@ -176,7 +176,7 @@
 			<gd_item id="115000440" /><!-- Sipus' Shield -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Rare)" base_chance="70" no_reduction="true">
+	<gd_rule rule_name="Named Accessory (Rare)" chance="70">
 		<gd_maps>
 			<gd_map map_id="320100000" /><!-- Fire_Temple -->
 		</gd_maps>
@@ -188,7 +188,7 @@
 			<gd_item id="123000949" /><!-- Sipus' Sash -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Rare)" base_chance="100" no_reduction="true">
+	<gd_rule rule_name="Named Accessory (Rare)" chance="100">
 		<gd_maps>
 			<gd_map map_id="320100000" /><!-- Fire_Temple -->
 		</gd_maps>
@@ -200,7 +200,7 @@
 			<gd_item id="122001061" /><!-- Rotan's Link -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="70" no_reduction="true">
+	<gd_rule rule_name="Named Armor (Rare)" chance="70">
 		<gd_maps>
 			<gd_map map_id="320100000" /><!-- Fire_Temple -->
 		</gd_maps>
@@ -212,7 +212,7 @@
 			<gd_item id="110500464" /><!-- Flame Hauberk -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Rare)" base_chance="70" no_reduction="true">
+	<gd_rule rule_name="Named Accessory (Rare)" chance="70">
 		<gd_maps>
 			<gd_map map_id="320100000" /><!-- Fire_Temple -->
 		</gd_maps>
@@ -224,7 +224,7 @@
 			<gd_item id="120000928" /><!-- Kutisen's Tears -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="70" no_reduction="true">
+	<gd_rule rule_name="Named Armor (Rare)" chance="70">
 		<gd_maps>
 			<gd_map map_id="320100000" /><!-- Fire_Temple -->
 		</gd_maps>
@@ -238,7 +238,7 @@
 			<gd_item id="110600460" /><!-- Flame Breastplate -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Legend)" base_chance="35" no_reduction="true">
+	<gd_rule rule_name="Named Armor (Legend)" chance="35">
 		<gd_maps>
 			<gd_map map_id="320100000" /><!-- Fire_Temple -->
 		</gd_maps>
@@ -252,7 +252,7 @@
 			<gd_item id="113601064" /><!-- Fire Temple Greaves -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Legend)" base_chance="35" no_reduction="true">
+	<gd_rule rule_name="Named Weapon (Legend)" chance="35">
 		<gd_maps>
 			<gd_map map_id="320100000" /><!-- Fire_Temple -->
 		</gd_maps>
@@ -275,7 +275,7 @@
 			<gd_item id="102100770" /><!-- Reaper's Cipher-Blade -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Legend)" base_chance="52" no_reduction="true">
+	<gd_rule rule_name="Named Weapon (Legend)" chance="52">
 		<gd_maps>
 			<gd_map map_id="320100000" /><!-- Fire_Temple -->
 		</gd_maps>
@@ -298,7 +298,7 @@
 			<gd_item id="102100770" /><!-- Reaper's Cipher-Blade -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Unique)" base_chance="37" no_reduction="true">
+	<gd_rule rule_name="Named Weapon (Unique)" chance="37">
 		<gd_maps>
 			<gd_map map_id="320100000" /><!-- Fire_Temple -->
 		</gd_maps>
@@ -309,7 +309,7 @@
 			<gd_item id="188051396" /><!-- Judge's Fabled Weapon Chest -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Unique)" base_chance="52" no_reduction="true">
+	<gd_rule rule_name="Named Weapon (Unique)" chance="52">
 		<gd_maps>
 			<gd_map map_id="320100000" /><!-- Fire_Temple -->
 		</gd_maps>
@@ -320,7 +320,7 @@
 			<gd_item id="188051396" /><!-- Judge's Fabled Weapon Chest -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Stone of Silence" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Stone of Silence" chance="50">
 		<gd_maps>
 			<gd_map map_id="320100000" /><!-- Fire_Temple -->
 		</gd_maps>

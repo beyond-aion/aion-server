@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../global_rules.xsd">
 	<!-- Map Drops -->
-	<gd_rule rule_name="Kishar Armor (Rare)" base_chance="3" dynamic_chance="true" no_reduction="true">
+	<gd_rule rule_name="Kishar Armor (Rare)" chance="3" dynamic_chance="true">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -26,7 +26,7 @@
 			<gd_item id="111600694"/><!-- Kishar Gauntlets -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Crazed Armor (Rare)" base_chance="3" dynamic_chance="true" no_reduction="true">
+	<gd_rule rule_name="Crazed Armor (Rare)" chance="3" dynamic_chance="true">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -51,7 +51,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Single Monster Drops -->
-	<gd_rule rule_name="Named Weapon (Rare)" base_chance="45" no_reduction="true">
+	<gd_rule rule_name="Named Weapon (Rare)" chance="45">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -63,7 +63,7 @@
 			<gd_item id="100500441"/><!-- Firescar's Jewel -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Rare)" base_chance="45" no_reduction="true">
+	<gd_rule rule_name="Named Weapon (Rare)" chance="45">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -77,7 +77,7 @@
 			<gd_item id="100000584"/><!-- Gojira's Sword -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Rare)" base_chance="45" no_reduction="true">
+	<gd_rule rule_name="Named Weapon (Rare)" chance="45">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -90,7 +90,7 @@
 			<gd_item id="101500448"/><!-- Takun's Staff -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Rare)" base_chance="45" no_reduction="true">
+	<gd_rule rule_name="Named Weapon (Rare)" chance="45">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -106,7 +106,7 @@
 			<gd_item id="102100469"/><!-- Greybeard's Cipher-Blade -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Rare)" base_chance="45" no_reduction="true">
+	<gd_rule rule_name="Named Weapon (Rare)" chance="45">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -123,7 +123,7 @@
 			<gd_item id="102100470"/><!-- Melita's Cipher-Blade -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Rare)" base_chance="45" no_reduction="true">
+	<gd_rule rule_name="Named Weapon (Rare)" chance="45">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -139,7 +139,7 @@
 			<gd_item id="101700456"/><!-- Rinokero's Longbow -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Rare)" base_chance="45" no_reduction="true">
+	<gd_rule rule_name="Named Weapon (Rare)" chance="45">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -153,7 +153,7 @@
 			<gd_item id="102100472"/><!-- Duterran's Cipher-Blade -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Rare)" base_chance="45" no_reduction="true">
+	<gd_rule rule_name="Named Weapon (Rare)" chance="45">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -166,7 +166,7 @@
 			<gd_item id="101300428"/><!-- Ragenon's Spear -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Rare)" base_chance="45" no_reduction="true">
+	<gd_rule rule_name="Named Weapon (Rare)" chance="45">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -178,7 +178,7 @@
 			<gd_item id="100000578"/><!-- Paparu's Kitchen Knife -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Legend)" base_chance="30" no_reduction="true">
+	<gd_rule rule_name="Named Weapon (Legend)" chance="30">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -191,7 +191,7 @@
 			<gd_item id="101500445"/><!-- Dedrun's Staff -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Legend)" base_chance="100" no_reduction="true">
+	<gd_rule rule_name="Named Weapon (Legend)" chance="100">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -202,7 +202,7 @@
 			<gd_item id="101500443"/><!-- Fortune's Branch -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Legend)" base_chance="30" no_reduction="true">
+	<gd_rule rule_name="Named Weapon (Legend)" chance="30">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -213,7 +213,7 @@
 			<gd_item id="102000507"/><!-- Medeus' Harp -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Legend)" base_chance="30" no_reduction="true">
+	<gd_rule rule_name="Named Weapon (Legend)" chance="30">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -226,7 +226,7 @@
 			<gd_item id="102000505"/><!-- Spirit King's Harp -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Legend)" base_chance="30" no_reduction="true">
+	<gd_rule rule_name="Named Weapon (Legend)" chance="30">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -241,7 +241,7 @@
 			<gd_item id="101700457"/><!-- Chantar's Longbow -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Legend)" base_chance="30" no_reduction="true">
+	<gd_rule rule_name="Named Weapon (Legend)" chance="30">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -254,7 +254,7 @@
 			<gd_item id="101300427"/><!-- Kunpapa's Spear -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Legend)" base_chance="30" no_reduction="true">
+	<gd_rule rule_name="Named Weapon (Legend)" chance="30">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -269,7 +269,7 @@
 			<gd_item id="102100474"/><!-- Ashutang's Cipher-Blade -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Legend)" base_chance="30" no_reduction="true">
+	<gd_rule rule_name="Named Weapon (Legend)" chance="30">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -281,7 +281,7 @@
 			<gd_item id="101500446"/><!-- Mahashi's Staff -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Legend)" base_chance="30" no_reduction="true">
+	<gd_rule rule_name="Named Weapon (Legend)" chance="30">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -294,7 +294,7 @@
 			<gd_item id="100600477"/><!-- Shivhaz's Tome -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Legend)" base_chance="30" no_reduction="true">
+	<gd_rule rule_name="Named Weapon (Legend)" chance="30">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -310,7 +310,7 @@
 			<gd_item id="102100479"/><!-- Ulan's Cipher-Blade -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Legend)" base_chance="30" no_reduction="true">
+	<gd_rule rule_name="Named Weapon (Legend)" chance="30">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -323,7 +323,7 @@
 			<gd_item id="101300435"/><!-- Hallion's Spear -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Legend)" base_chance="30" no_reduction="true">
+	<gd_rule rule_name="Named Weapon (Legend)" chance="30">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -337,7 +337,7 @@
 			<gd_item id="101500452"/><!-- Exedil's Staff -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Legend)" base_chance="30" no_reduction="true">
+	<gd_rule rule_name="Named Weapon (Legend)" chance="30">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -351,7 +351,7 @@
 			<gd_item id="102100504"/><!-- Inshar's Cipher-Blade -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Legend)" base_chance="30" no_reduction="true">
+	<gd_rule rule_name="Named Weapon (Legend)" chance="30">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -363,7 +363,7 @@
 			<gd_item id="100100524"/><!-- Ursanafi's Warhammer -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Unique)" base_chance="30" no_reduction="true">
+	<gd_rule rule_name="Named Weapon (Unique)" chance="30">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -374,7 +374,7 @@
 			<gd_item id="100500445"/><!-- Medeus' Heart -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Unique)" base_chance="16.5" no_reduction="true">
+	<gd_rule rule_name="Named Weapon (Unique)" chance="16.5">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -393,7 +393,7 @@
 			<gd_item id="100900447"/><!-- Black Heart's Greatsword -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Shield (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Shield (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -404,7 +404,7 @@
 			<gd_item id="115000720"/><!-- Medeus' Shield -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Shield (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Shield (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -416,7 +416,7 @@
 			<gd_item id="115000721"/><!-- Kishar Elite's Shield -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Shield (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Shield (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -427,7 +427,7 @@
 			<gd_item id="115000726"/><!-- Skinripper's Shield -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Shield (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Shield (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -438,7 +438,7 @@
 			<gd_item id="115000725"/><!-- Geschphalt's Shield -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Shield (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Shield (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -449,7 +449,7 @@
 			<gd_item id="115000788"/><!-- Inshar's Shield -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Shield (Legend)" base_chance="33" no_reduction="true">
+	<gd_rule rule_name="Named Shield (Legend)" chance="33">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -460,7 +460,7 @@
 			<gd_item id="115000724"/><!-- Spirit King's Shield -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Shield (Legend)" base_chance="33" no_reduction="true">
+	<gd_rule rule_name="Named Shield (Legend)" chance="33">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -471,7 +471,7 @@
 			<gd_item id="115000723"/><!-- Kunpapa's Shield -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Shield (Unique)" base_chance="16.5" no_reduction="true">
+	<gd_rule rule_name="Named Shield (Unique)" chance="16.5">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -482,7 +482,7 @@
 			<gd_item id="115000731"/><!-- Black Heart's Shield -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Armor (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -496,7 +496,7 @@
 			<gd_item id="114600680"/><!-- Greybeard's Sabatons -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Armor (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -510,7 +510,7 @@
 			<gd_item id="112600669"/><!-- Floel's Shoulderplates -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Armor (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -524,7 +524,7 @@
 			<gd_item id="111600695"/><!-- Stench's Gauntlets -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Armor (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -538,7 +538,7 @@
 			<gd_item id="113600686"/><!-- Iscraw's Greaves -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Armor (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -552,7 +552,7 @@
 			<gd_item id="114600681"/><!-- Furol's Sabatons -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Armor (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -566,7 +566,7 @@
 			<gd_item id="110600720"/><!-- Midas' Breastplate -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Armor (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -580,7 +580,7 @@
 			<gd_item id="112600673"/><!-- Butler's Shoulderplates -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Armor (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -594,7 +594,7 @@
 			<gd_item id="111600698"/><!-- Ragenon's Gauntlets -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Armor (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -624,7 +624,7 @@
 			<gd_item id="110600725"/><!-- Indratu Legionary's Breastplate -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Armor (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -638,7 +638,7 @@
 			<gd_item id="114600685"/><!-- Geschphalt's Sabatons -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Legend)" base_chance="33" no_reduction="true">
+	<gd_rule rule_name="Named Armor (Legend)" chance="33">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -652,7 +652,7 @@
 			<gd_item id="110600724"/><!-- Dedrun's Breastplate -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Legend)" base_chance="33" no_reduction="true">
+	<gd_rule rule_name="Named Armor (Legend)" chance="33">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -663,7 +663,7 @@
 			<gd_item id="110100805"/><!-- Medeus' Cloth -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Legend)" base_chance="33" no_reduction="true">
+	<gd_rule rule_name="Named Armor (Legend)" chance="33">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -674,7 +674,7 @@
 			<gd_item id="110300761"/><!-- Jungle King's Jerkin -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Legend)" base_chance="33" no_reduction="true">
+	<gd_rule rule_name="Named Armor (Legend)" chance="33">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -685,7 +685,7 @@
 			<gd_item id="113300744"/><!-- Jungle King's Breeches -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Legend)" base_chance="33" no_reduction="true">
+	<gd_rule rule_name="Named Armor (Legend)" chance="33">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -696,7 +696,7 @@
 			<gd_item id="110100800"/><!-- Depie's Tunic -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Legend)" base_chance="33" no_reduction="true">
+	<gd_rule rule_name="Named Armor (Legend)" chance="33">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -710,7 +710,7 @@
 			<gd_item id="113600690"/><!-- Prote's Greaves -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Legend)" base_chance="33" no_reduction="true">
+	<gd_rule rule_name="Named Armor (Legend)" chance="33">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -724,7 +724,7 @@
 			<gd_item id="113300739"/><!-- Kishar Breeches -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Legend)" base_chance="33" no_reduction="true">
+	<gd_rule rule_name="Named Armor (Legend)" chance="33">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -738,7 +738,7 @@
 			<gd_item id="113600687"/><!-- Kishar Greaves -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Legend)" base_chance="33" no_reduction="true">
+	<gd_rule rule_name="Named Armor (Legend)" chance="33">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -752,7 +752,7 @@
 			<gd_item id="113600688"/><!-- Crazed Greaves -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Legend)" base_chance="33" no_reduction="true">
+	<gd_rule rule_name="Named Armor (Legend)" chance="33">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -765,7 +765,7 @@
 			<gd_item id="114500727"/><!-- Indratu Elite's Brogans -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Legend)" base_chance="33" no_reduction="true">
+	<gd_rule rule_name="Named Armor (Legend)" chance="33">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -776,7 +776,7 @@
 			<gd_item id="112100680"/><!-- Indratu Elite's Pauldrons -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Legend)" base_chance="33" no_reduction="true">
+	<gd_rule rule_name="Named Armor (Legend)" chance="33">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -790,7 +790,7 @@
 			<gd_item id="114600689"/><!-- Ulan's Sabatons -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Legend)" base_chance="33" no_reduction="true">
+	<gd_rule rule_name="Named Armor (Legend)" chance="33">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -804,7 +804,7 @@
 			<gd_item id="111600702"/><!-- Hallion's Gauntlets -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Legend)" base_chance="33" no_reduction="true">
+	<gd_rule rule_name="Named Armor (Legend)" chance="33">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -818,7 +818,7 @@
 			<gd_item id="112600678"/><!-- Exedil's Shoulderplates -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Unique)" base_chance="20" no_reduction="true">
+	<gd_rule rule_name="Named Armor (Unique)" chance="20">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -830,7 +830,7 @@
 			<gd_item id="113100731"/><!-- Bollvig's Leggings -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Accessory (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -842,7 +842,7 @@
 			<gd_item id="120000735"/><!-- Firescar's Lazuli Earrings -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Accessory (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -853,7 +853,7 @@
 			<gd_item id="122000796"/><!-- Gojira's Ring -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Accessory (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -864,7 +864,7 @@
 			<gd_item id="120000747"/><!-- Takun's Earrings -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Accessory (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -875,7 +875,7 @@
 			<gd_item id="122000790"/><!-- Agro's Ring -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Accessory (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -887,7 +887,7 @@
 			<gd_item id="121000676"/><!-- Viper's Sapphire Necklace -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Accessory (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -898,7 +898,7 @@
 			<gd_item id="120000739"/><!-- Lutis' Earrings -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Accessory (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -910,7 +910,7 @@
 			<gd_item id="122000785"/><!-- Rinokero's Moonstone Ring -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Accessory (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -921,7 +921,7 @@
 			<gd_item id="120000736"/><!-- Iscraw's Earrings -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Rare)" base_chance="100" no_reduction="true">
+	<gd_rule rule_name="Named Accessory (Rare)" chance="100">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -932,7 +932,7 @@
 			<gd_item id="122000786"/><!-- Midas' Ring -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Accessory (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -946,7 +946,7 @@
 			<gd_item id="122000793"/><!-- Lambos' Diamond Ring -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Rare)" base_chance="100" no_reduction="true">
+	<gd_rule rule_name="Named Accessory (Rare)" chance="100">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -960,7 +960,7 @@
 			<gd_item id="122000787"/><!-- Dishella's Ruby Ring -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Accessory (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -972,7 +972,7 @@
 			<gd_item id="121000671"/><!-- Chantar's Moonstone Necklace -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Accessory (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -984,7 +984,7 @@
 			<gd_item id="121000674"/><!-- Raky's Necklace -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Accessory (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -996,7 +996,7 @@
 			<gd_item id="123000887"/><!-- Inshar's Leather Belt -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Accessory (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -1008,7 +1008,7 @@
 			<gd_item id="121000784"/><!-- Lahumu's Sapphire Necklace -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Accessory (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -1020,7 +1020,7 @@
 			<gd_item id="122000900"/><!-- Ursanafi's Ring -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Legend)" base_chance="33" no_reduction="true">
+	<gd_rule rule_name="Named Accessory (Legend)" chance="33">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -1031,7 +1031,7 @@
 			<gd_item id="120000740"/><!-- Dedrun's Earrings -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Legend)" base_chance="33" no_reduction="true">
+	<gd_rule rule_name="Named Accessory (Legend)" chance="33">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -1042,7 +1042,7 @@
 			<gd_item id="122000795"/><!-- Medeus' Ring -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Legend)" base_chance="66" no_reduction="true">
+	<gd_rule rule_name="Named Accessory (Legend)" chance="66">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -1053,7 +1053,7 @@
 			<gd_item id="121000673"/><!-- Flinch's Necklace -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Legend)" base_chance="33" no_reduction="true">
+	<gd_rule rule_name="Named Accessory (Legend)" chance="33">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -1064,7 +1064,7 @@
 			<gd_item id="122000794"/><!-- Prote's Ring -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Legend)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Accessory (Legend)" chance="50">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -1075,7 +1075,7 @@
 			<gd_item id="120000743"/><!-- Ashutang's Earrings -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Legend)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Accessory (Legend)" chance="50">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -1086,7 +1086,7 @@
 			<gd_item id="120000744"/><!-- Mahashi's Earrings -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Legend)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Accessory (Legend)" chance="50">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -1097,7 +1097,7 @@
 			<gd_item id="122000791"/><!-- Raky's Tears -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Legend)" base_chance="33" no_reduction="true">
+	<gd_rule rule_name="Named Accessory (Legend)" chance="33">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -1108,7 +1108,7 @@
 			<gd_item id="120000748"/><!-- Yatri's Earrings -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Legend)" base_chance="33" no_reduction="true">
+	<gd_rule rule_name="Named Accessory (Legend)" chance="33">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -1119,7 +1119,7 @@
 			<gd_item id="121000679"/><!-- Bollvig's Necklace -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Legend)" base_chance="33" no_reduction="true">
+	<gd_rule rule_name="Named Accessory (Legend)" chance="33">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -1130,7 +1130,7 @@
 			<gd_item id="122000799"/><!-- Hallion's Ring -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Legend)" base_chance="33" no_reduction="true">
+	<gd_rule rule_name="Named Accessory (Legend)" chance="33">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -1141,7 +1141,7 @@
 			<gd_item id="120000750"/><!-- Exedil's Earrings -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Unique)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Accessory (Unique)" chance="50">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -1153,7 +1153,7 @@
 			<gd_item id="121000678"/><!-- Jeshuchi's Necklace -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Unique)" base_chance="25" no_reduction="true">
+	<gd_rule rule_name="Named Accessory (Unique)" chance="25">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -1164,7 +1164,7 @@
 			<gd_item id="122000800"/><!-- Ulan's Golem -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Unique)" base_chance="25" no_reduction="true">
+	<gd_rule rule_name="Named Accessory (Unique)" chance="25">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -1175,7 +1175,7 @@
 			<gd_item id="120000751"/><!-- Hallion's Golem -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Headband (Rare)" base_chance="20" no_reduction="true">
+	<gd_rule rule_name="Named Headband (Rare)" chance="20">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -1186,7 +1186,7 @@
 			<gd_item id="125001562"/><!-- Raffles Hat -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Headband (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Headband (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -1200,7 +1200,7 @@
 			<gd_item id="125001561"/><!-- Melita's Helm -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Headband (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Headband (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -1211,7 +1211,7 @@
 			<gd_item id="125001863"/><!-- Eirin's Glasses -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Headband (Legend)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Headband (Legend)" chance="50">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -1222,7 +1222,7 @@
 			<gd_item id="125001563"/><!-- Saam's Laurel -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Headband (Legend)" base_chance="33" no_reduction="true">
+	<gd_rule rule_name="Named Headband (Legend)" chance="33">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -1233,7 +1233,7 @@
 			<gd_item id="125001565"/><!-- Viper's Mask -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Headband (Legend)" base_chance="33" no_reduction="true">
+	<gd_rule rule_name="Named Headband (Legend)" chance="33">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -1244,7 +1244,7 @@
 			<gd_item id="125001885"/><!-- Lahumu's Silver Diadem -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Headband (Unique)" base_chance="16.5" no_reduction="true">
+	<gd_rule rule_name="Named Headband (Unique)" chance="16.5">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -1255,7 +1255,7 @@
 			<gd_item id="125001586"/><!-- Punishment Hat -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Belt (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Belt (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -1267,7 +1267,7 @@
 			<gd_item id="123000788"/><!-- Viper's Belt -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Belt (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Belt (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -1279,7 +1279,7 @@
 			<gd_item id="123000784"/><!-- Floel's Belt -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Belt (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Belt (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -1290,7 +1290,7 @@
 			<gd_item id="123000786"/><!-- Lutis' Belt -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Belt (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Belt (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -1301,7 +1301,7 @@
 			<gd_item id="123000789"/><!-- Skinripper's Belt -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Belt (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Belt (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -1312,7 +1312,7 @@
 			<gd_item id="123000886"/><!-- Eirin's Belt -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Belt (Legend)" base_chance="40" no_reduction="true">
+	<gd_rule rule_name="Named Belt (Legend)" chance="40">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -1323,7 +1323,7 @@
 			<gd_item id="123000790"/><!-- Medeus' Belt -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Belt (Legend)" base_chance="33" no_reduction="true">
+	<gd_rule rule_name="Named Belt (Legend)" chance="33">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -1334,7 +1334,7 @@
 			<gd_item id="123000793"/><!-- Ulan's Belt -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Belt (Unique)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Belt (Unique)" chance="50">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -1345,7 +1345,7 @@
 			<gd_item id="123000785"/><!-- Dishella's Vine -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Quest-Start-Item" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Quest-Start-Item" chance="50">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -1356,7 +1356,7 @@
 			<gd_item id="186000017"/><!-- Yellowish Ring -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Quest-Start-Item" base_chance="10" no_reduction="true">
+	<gd_rule rule_name="Named Quest-Start-Item" chance="10">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -1367,7 +1367,7 @@
 			<gd_item id="182201770"/><!-- doc_quest_1670a -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Material" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Material" chance="50">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -1378,7 +1378,7 @@
 			<gd_item id="152012031"/><!-- Sentinel's Branch -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Material" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Material" chance="50">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -1389,7 +1389,7 @@
 			<gd_item id="152012032"/><!-- Rancorous Energy -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Material" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Material" chance="50">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -1400,7 +1400,7 @@
 			<gd_item id="152012034"/><!-- Devourer's Fang -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Material" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Material" chance="50">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -1411,7 +1411,7 @@
 			<gd_item id="152012035"/><!-- Boiling Blood of Takun -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Material" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Material" chance="50">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>

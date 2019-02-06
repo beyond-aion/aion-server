@@ -5,7 +5,7 @@
 			<maintainable>80162 80163 80164 80165 80166 80167 80168 80169</maintainable>
 		</quests>
 		<event_drops>
-			<gd_rule rule_name="Atreian City Festival Event Drop" base_chance="4" dynamic_chance="true" min_diff="-20" max_diff="70">
+			<gd_rule rule_name="Atreian City Festival Event Drop" chance="4" dynamic_chance="true" level_based_chance_reduction="true">
 				<gd_ratings>
 					<gd_rating rating="NORMAL" />
 					<gd_rating rating="ELITE" />
@@ -75,7 +75,7 @@
 	</event>
 	<event name="Valentine's Day" start="2015-02-13T00:00:00" end="2015-02-28T00:00:00" theme="VALENTINE">
 		<event_drops>
-			<gd_rule rule_name="Valentine's Day Event Drop" base_chance="10" dynamic_chance="true" min_diff="-30" max_diff="70">
+			<gd_rule rule_name="Valentine's Day Event Drop" chance="10" dynamic_chance="true" level_based_chance_reduction="true">
 				<gd_ratings>
 					<gd_rating rating="NORMAL" />
 					<gd_rating rating="ELITE" />
@@ -698,7 +698,7 @@
 			</spawn_map>
 		</spawns>
 		<event_drops>
-			<gd_rule rule_name="Ascension Energy" base_chance="50">
+			<gd_rule rule_name="Ascension Energy" chance="50" level_based_chance_reduction="true">
 				<gd_items>
 					<gd_item id="186000127" /><!-- Ascension Energy -->
 				</gd_items>
@@ -718,7 +718,7 @@
 	</event>
 	<event name="Crab Fest" start="2016-12-01T00:00:00" end="2017-01-01T00:00:00" theme="CHRISTMAS">
 		<event_drops>
-			<gd_rule rule_name="Crab Fest Event Drop" base_chance="100" min_diff="0" max_diff="70" no_reduction="true">
+			<gd_rule rule_name="Crab Fest Event Drop" chance="100">
 				<gd_npcs>
 					<gd_npc npc_id="217717" /><!-- Scuttling Potcrab -->
 					<gd_npc npc_id="217718" /><!-- Scuttling Potcrab -->
@@ -733,7 +733,7 @@
 					<gd_item id="160010154" /><!-- [Event] Stunned Potcrab -->
 				</gd_items>
 			</gd_rule>
-			<gd_rule rule_name="Crab Fest Event Drop" base_chance="100" min_diff="0" max_diff="70" no_reduction="true">
+			<gd_rule rule_name="Crab Fest Event Drop" chance="100">
 				<gd_npcs>
 					<gd_npc npc_id="217725" /><!-- Scuttling Starcrab -->
 					<gd_npc npc_id="217726" /><!-- Scuttling Starcrab -->
@@ -748,7 +748,7 @@
 					<gd_item id="160010155" /><!-- [Event] Stunned Starcrab -->
 				</gd_items>
 			</gd_rule>
-			<gd_rule rule_name="Crab Fest Event Drop" base_chance="2" no_reduction="true">
+			<gd_rule rule_name="Crab Fest Event Drop" chance="2">
 				<gd_npcs>
 					<gd_npc npc_id="217733" /><!-- Epiclone -->
 				</gd_npcs>
@@ -1231,7 +1231,7 @@
 	</event>
 	<event name="Celebrate Solorius" start="2018-12-01T00:00:00" end="2018-12-31T23:59:59" theme="CHRISTMAS">
 		<event_drops>
-			<gd_rule rule_name="Celebrate Solorius Event Drop" base_chance="100" no_reduction="true">
+			<gd_rule rule_name="Celebrate Solorius Event Drop" chance="100">
 				<gd_npcs>
 					<gd_npc npc_id="219292" /><!-- Red Nosed Granker King -->
 					<gd_npc npc_id="219293" /><!-- Granker King's Second -->
@@ -1242,7 +1242,7 @@
 					<gd_item id="160010203" /><!-- [Event] Red Nose Granker Horn -->
 				</gd_items>
 			</gd_rule>
-			<gd_rule rule_name="Celebrate Solorius Event Drop" base_chance="50" member_limit="24" no_reduction="true">
+			<gd_rule rule_name="Celebrate Solorius Event Drop" chance="50" member_limit="24">
 				<gd_npcs>
 					<gd_npc npc_id="219292" /><!-- Red Nosed Granker King -->
 					<gd_npc npc_id="219294" /><!-- Red Nosed Granker King -->
@@ -1252,7 +1252,7 @@
 					<gd_item id="188052132" /><!-- [Event] Granker's Gratitude Box -->
 				</gd_items>
 			</gd_rule>
-			<gd_rule rule_name="Celebrate Solorius Event Drop" base_chance="100" no_reduction="true">
+			<gd_rule rule_name="Celebrate Solorius Event Drop" chance="100">
 				<gd_npcs>
 					<gd_npc npc_id="219292" /><!-- Red Nosed Granker King -->
 					<gd_npc npc_id="219294" /><!-- Red Nosed Granker King -->
@@ -1261,7 +1261,7 @@
 					<gd_item id="171110045" /><!-- Solorius Wallpaper -->
 				</gd_items>
 			</gd_rule>
-			<gd_rule rule_name="Celebrate Solorius Event Drop" base_chance="100" restriction_race="ELYOS" no_reduction="true">
+			<gd_rule rule_name="Celebrate Solorius Event Drop" chance="100" restriction_race="ELYOS">
 				<gd_npcs>
 					<gd_npc npc_id="219292" /><!-- Red Nosed Granker King -->
 				</gd_npcs>
@@ -1270,7 +1270,7 @@
 					<gd_item id="170170086" /><!-- Desktop Solorius Tree -->
 				</gd_items>
 			</gd_rule>
-			<gd_rule rule_name="Celebrate Solorius Event Drop" base_chance="100" restriction_race="ASMODIANS" no_reduction="true">
+			<gd_rule rule_name="Celebrate Solorius Event Drop" chance="100" restriction_race="ASMODIANS">
 				<gd_npcs>
 					<gd_npc npc_id="219294" /><!-- Red Nosed Granker King -->
 				</gd_npcs>
@@ -1442,7 +1442,7 @@
 	</event>
 	<event name="New Year Event" start="2015-12-22T00:00:00" end="2016-01-12T00:00:00" theme="CHRISTMAS">
 		<event_drops>
-			<gd_rule rule_name="New Year Event Drop" base_chance="5" dynamic_chance="true" min_diff="-10" max_diff="70">
+			<gd_rule rule_name="New Year Event Drop" chance="5" dynamic_chance="true" level_based_chance_reduction="true">
 				<gd_ratings>
 					<gd_rating rating="NORMAL" />
 					<gd_rating rating="ELITE" />
@@ -1476,12 +1476,12 @@
 	</event>
 	<event name="Trick or treat! The witch and the king" start="2017-10-29T18:00:00" end="2017-11-02T20:00:00" theme="HALLOWEEN">
 		<event_drops>
-			<gd_rule rule_name="Event Potion" base_chance="50" min_diff="-29">
+			<gd_rule rule_name="Event Potion" chance="50" min_diff="-29" level_based_chance_reduction="true">
 				<gd_items>
 					<gd_item id="162001009" /><!-- [Event] Pumpkin Lollipop -->
 				</gd_items>
 			</gd_rule>
-			<gd_rule rule_name="Event Scroll" base_chance="33" no_reduction="true">
+			<gd_rule rule_name="Event Scroll" chance="33">
 				<gd_npcs>
 					<gd_npc npc_id="217161" /><!-- Shulack Sugarcrook -->
 				</gd_npcs>
@@ -1489,7 +1489,7 @@
 					<gd_item id="164002037" /><!-- [Event] Castings -->
 				</gd_items>
 			</gd_rule>
-			<gd_rule rule_name="Event Food" base_chance="80" no_reduction="true">
+			<gd_rule rule_name="Event Food" chance="80">
 				<gd_npcs>
 					<gd_npc npc_id="217161" /><!-- Shulack Sugarcrook -->
 				</gd_npcs>
@@ -1498,7 +1498,7 @@
 					<gd_item id="160010148" /><!-- [Event] Dry Pumpkin Ale -->
 				</gd_items>
 			</gd_rule>
-			<gd_rule rule_name="Event Bundle" base_chance="50" no_reduction="true">
+			<gd_rule rule_name="Event Bundle" chance="50">
 				<gd_npcs>
 					<gd_npc npc_id="217161" /><!-- Shulack Sugarcrook -->
 				</gd_npcs>
@@ -1978,7 +1978,7 @@
 	</event>
 	<event name="Daru Days" start="2015-11-23T00:00:00" end="2015-11-30T00:00:00">
 		<event_drops>
-			<gd_rule rule_name="Daru Days Event Drop" base_chance="1" dynamic_chance="true" min_diff="-30" max_diff="70">
+			<gd_rule rule_name="Daru Days Event Drop" chance="1" dynamic_chance="true" level_based_chance_reduction="true">
 				<gd_ratings>
 					<gd_rating rating="NORMAL" />
 					<gd_rating rating="ELITE" />
@@ -1989,7 +1989,7 @@
 					<gd_item id="188051331" /><!-- [Event] Grazing Chest -->
 				</gd_items>
 			</gd_rule>
-			<gd_rule rule_name="Daru Days Event Drop" base_chance="5" dynamic_chance="true" min_diff="-30" max_diff="70">
+			<gd_rule rule_name="Daru Days Event Drop" chance="5" dynamic_chance="true" level_based_chance_reduction="true">
 				<gd_ratings>
 					<gd_rating rating="NORMAL" />
 					<gd_rating rating="ELITE" />
@@ -2313,7 +2313,7 @@
 			</spawn_map>
 		</spawns>
 		<event_drops>
-			<gd_rule rule_name="Growth Event Drop Elyos" base_chance="10" min_diff="-10" max_diff="70" restriction_race="ELYOS">
+			<gd_rule rule_name="Growth Event Drop Elyos" chance="10" restriction_race="ELYOS" level_based_chance_reduction="true">
 				<gd_items>
 					<gd_item id="182215196" /><!-- Fiery Heart -->
 				</gd_items>
@@ -2329,7 +2329,7 @@
 					<gd_npc npc_id="214621" /><!-- Vile Judge Kromede -->
 				</gd_npcs>
 			</gd_rule>
-			<gd_rule rule_name="Growth Event Drop Asmodians" base_chance="10" min_diff="-10" max_diff="70" restriction_race="ASMODIANS">
+			<gd_rule rule_name="Growth Event Drop Asmodians" chance="10" restriction_race="ASMODIANS" level_based_chance_reduction="true">
 				<gd_items>
 					<gd_item id="182215197" /><!-- Fiery Heart -->
 				</gd_items>
@@ -3145,7 +3145,7 @@
 	</event>
 	<event name="Shugo Emperor's Vault" start="2018-09-21T00:00:00" end="2018-10-07T23:59:59">
 		<event_drops>
-			<gd_rule rule_name="Emperor's Vault Entry Scroll" base_chance="100" member_limit="12">
+			<gd_rule rule_name="Emperor's Vault Entry Scroll" chance="100" member_limit="12">
 				<gd_maps>
 					<gd_map map_id="300520000" /><!-- Dragon_Lords_Refuge -->
 					<gd_map map_id="301110000" /><!-- Danuar_Reliquary -->
@@ -3197,7 +3197,7 @@
 	</event>
 	<event name="Summer Block Party" start="2015-08-01T00:00:00" end="2015-09-04T00:00:00">
 		<event_drops>
-			<gd_rule rule_name="Summer Block Party Drop" base_chance="2" dynamic_chance="true" min_diff="-15" max_diff="70">
+			<gd_rule rule_name="Summer Block Party Drop" chance="2" dynamic_chance="true" level_based_chance_reduction="true">
 				<gd_worlds>
 					<gd_world wd_type="ABYSS_INSTANCE" />
 					<gd_world wd_type="ARENA_INSTANCE" />
@@ -3331,7 +3331,7 @@
 	<event name="Alchemy Event" start="2018-10-26T00:00:00" end="2018-11-04T23:59:59" theme="HALLOWEEN">
 		<!-- [Event] Alchemist's Pouch -->
 		<event_drops>
-			<gd_rule rule_name="Alchemy Boss Event Drop" base_chance="100" min_diff="-15" max_diff="70">
+			<gd_rule rule_name="Alchemy Boss Event Drop" chance="100" level_based_chance_reduction="true">
 				<gd_maps>
 					<gd_map map_id="301130000" /><!-- Sauro Supply Base -->
 					<gd_map map_id="301140000" /><!-- Seized Danuar Sanctuary -->
@@ -3353,7 +3353,7 @@
 					<gd_item id="188052642" /><!-- [Event] Alchemist's Pouch -->
 				</gd_items>
 			</gd_rule>
-			<gd_rule rule_name="Alchemy Random Event Drop" base_chance="10" min_diff="-15" max_diff="70">
+			<gd_rule rule_name="Alchemy Random Event Drop" chance="10">
 				<gd_maps>
 					<gd_map map_id="301130000" /><!-- Sauro Supply Base -->
 					<gd_map map_id="301140000" /><!-- Seized Danuar Sanctuary -->
@@ -3494,7 +3494,7 @@
 	</event>
 	<event name="Aion Community Appreciation Event" start="2015-11-20T00:00:00" end="2015-12-04T00:00:00">
 		<event_drops>
-			<gd_rule rule_name="Aion Community Appreciation Event Drop" base_chance="5" dynamic_chance="true" min_diff="-20" max_diff="70">
+			<gd_rule rule_name="Aion Community Appreciation Event Drop" chance="5" dynamic_chance="true" level_based_chance_reduction="true">
 				<gd_ratings>
 					<gd_rating rating="NORMAL" />
 					<gd_rating rating="ELITE" />
@@ -3511,7 +3511,7 @@
 					<gd_world wd_type="BALAUREA_INSTANCE" />
 				</gd_worlds>
 			</gd_rule>
-			<gd_rule rule_name="Aion Community Appreciation Event Drop" base_chance="0.5" dynamic_chance="true" min_diff="-20" max_diff="70">
+			<gd_rule rule_name="Aion Community Appreciation Event Drop" chance="0.5" dynamic_chance="true" level_based_chance_reduction="true">
 				<gd_ratings>
 					<gd_rating rating="NORMAL" />
 					<gd_rating rating="ELITE" />
@@ -3533,7 +3533,7 @@
 			<maintainable>80567 80568 80569 80570 80571 80572 80573 80574</maintainable>
 		</quests>
 		<event_drops>
-			<gd_rule rule_name="Aion Community Appreciation Event Drop" base_chance="5" dynamic_chance="true" min_diff="-10" max_diff="70">
+			<gd_rule rule_name="Aion Community Appreciation Event Drop" chance="5" dynamic_chance="true" level_based_chance_reduction="true">
 				<gd_ratings>
 					<gd_rating rating="NORMAL" />
 					<gd_rating rating="ELITE" />
@@ -3557,7 +3557,7 @@
 					<gd_world wd_type="STEEL_RAKE_INSTANCE" />
 				</gd_worlds>
 			</gd_rule>
-			<gd_rule rule_name="Aion Community Appreciation Event Drop" base_chance="0.5" dynamic_chance="true" min_diff="-10" max_diff="60">
+			<gd_rule rule_name="Aion Community Appreciation Event Drop" chance="0.5" dynamic_chance="true" level_based_chance_reduction="true">
 				<gd_ratings>
 					<gd_rating rating="NORMAL" />
 					<gd_rating rating="ELITE" />
@@ -3678,7 +3678,7 @@
 			<maintainable>51035 51036 51037 50035 50036 50037</maintainable>
 		</quests>
 		<event_drops>
-			<gd_rule rule_name="Boiling Point Event Drop 1" base_chance="10" min_diff="-10" max_diff="70" member_limit="12">
+			<gd_rule rule_name="Boiling Point Event Drop 1" chance="10" member_limit="12" level_based_chance_reduction="true">
 				<gd_items>
 					<gd_item id="186000387" /><!-- [Event] Rice Cake -->
 				</gd_items>
@@ -3711,7 +3711,7 @@
 					<gd_npc npc_id="230093" /><!-- Furious Barukan -->
 				</gd_npcs>
 			</gd_rule>
-			<gd_rule rule_name="Boiling Point Event Drop 2" base_chance="50" min_diff="-10" max_diff="70" member_limit="12">
+			<gd_rule rule_name="Boiling Point Event Drop 2" chance="50" member_limit="12" level_based_chance_reduction="true">
 				<gd_items>
 					<gd_item id="186000388" /><!-- [Event] Beef Bone Broth -->
 				</gd_items>
@@ -3828,7 +3828,7 @@
 			</spawn_map>
 		</spawns>
 		<event_drops>
-			<gd_rule rule_name="Snowball (Single)" base_chance="10">
+			<gd_rule rule_name="Snowball (Single)" chance="10">
 				<gd_items>
 					<gd_item id="188052986" /><!-- +1 Snowball -->
 				</gd_items>
@@ -3841,7 +3841,7 @@
 					<gd_rating rating="HERO" />
 				</gd_ratings>
 			</gd_rule>
-			<gd_rule rule_name="Snowball (Shared)" base_chance="100" member_limit="12">
+			<gd_rule rule_name="Snowball (Shared)" chance="100" member_limit="12" level_based_chance_reduction="true">
 				<gd_items>
 					<gd_item id="188052986" min_count="3" max_count="5" /><!-- +1 Snowball -->
 				</gd_items>
@@ -4052,7 +4052,7 @@
 	<event name="Legendary Symphony Drop" start="2016-07-01T00:00:00" end="2016-07-17T23:59:59">
 		<event_drops>
 			<!-- Green Garrisons -->
-			<gd_rule rule_name="Symphony of Legend - The First Movement" base_chance="40">
+			<gd_rule rule_name="Symphony of Legend - The First Movement" chance="40">
 				<gd_maps>
 					<gd_map map_id="600100000"/><!-- Levinshor -->
 				</gd_maps>
@@ -4071,7 +4071,7 @@
 				</gd_items>
 			</gd_rule>
 			<!-- Blue Garrions -->
-			<gd_rule rule_name="Symphony of Legend - The Second Movement" base_chance="40">
+			<gd_rule rule_name="Symphony of Legend - The Second Movement" chance="40">
 				<gd_maps>
 					<gd_map map_id="600100000"/><!-- Levinshor -->
 				</gd_maps>
@@ -4090,7 +4090,7 @@
 				</gd_items>
 			</gd_rule>
 			<!-- Yellow Garrions -->
-			<gd_rule rule_name="Symphony of Legend - The Third Movement" base_chance="40">
+			<gd_rule rule_name="Symphony of Legend - The Third Movement" chance="40">
 				<gd_maps>
 					<gd_map map_id="600100000"/><!-- Levinshor -->
 				</gd_maps>
@@ -4109,7 +4109,7 @@
 				</gd_items>
 			</gd_rule>
 			<!-- Red Garrions -->
-			<gd_rule rule_name="Symphony of Legend - The Fourth Movement" base_chance="40">
+			<gd_rule rule_name="Symphony of Legend - The Fourth Movement" chance="40">
 				<gd_maps>
 					<gd_map map_id="600100000"/><!-- Levinshor -->
 				</gd_maps>
@@ -4128,7 +4128,7 @@
 				</gd_items>
 			</gd_rule>
 			<!-- Central Garrions -->
-			<gd_rule rule_name="Symphony of Legend - Epilogue" base_chance="40">
+			<gd_rule rule_name="Symphony of Legend - Epilogue" chance="40">
 				<gd_maps>
 					<gd_map map_id="600100000"/><!-- Levinshor -->
 				</gd_maps>
@@ -4150,7 +4150,7 @@
 	</event>
 	<event name="The Scattered Deck" start="2017-10-23T00:00:00" end="2017-11-05T23:59:59" theme="HALLOWEEN">
 		<event_drops>
-			<gd_rule rule_name="Mysterious Card" base_chance="10">
+			<gd_rule rule_name="Mysterious Card" chance="10">
 				<gd_maps>
 					<gd_map map_id="600100000"/><!-- Levinshor -->
 				</gd_maps>
@@ -5320,7 +5320,7 @@
 			</spawn_map>
 		</spawns>
 		<event_drops>
-			<gd_rule rule_name="Aether Bloom Bouquet" base_chance="100" min_diff="-20" max_diff="40" member_limit="6">
+			<gd_rule rule_name="Aether Bloom Bouquet" chance="100" member_limit="6">
 				<gd_maps>
 					<gd_map map_id="300590000" /><!-- Ophidan Bridge -->
 					<gd_map map_id="301380000" /><!-- Danuar Sanctuary -->

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../global_rules.xsd">
 	<!-- Zone Drops -->
-	<gd_rule rule_name="Dispassionate Armor (Rare)" base_chance="1.5" restriction_race="ASMODIANS" no_reduction="true">
+	<gd_rule rule_name="Dispassionate Armor (Rare)" chance="1.5" restriction_race="ASMODIANS">
 		<gd_maps>
 			<gd_map map_id="220050000" /><!-- Brusthonin -->
 		</gd_maps>
@@ -33,7 +33,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Single Monster Drops -->
-	<gd_rule rule_name="Named Weapon (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Weapon (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="220050000" /><!-- Brusthonin -->
 		</gd_maps>
@@ -50,7 +50,7 @@
 			<gd_item id="102100468" /><!-- Aello's Cipher-Blade -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Accessory (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="220050000" /><!-- Brusthonin -->
 		</gd_maps>
@@ -62,7 +62,7 @@
 			<gd_item id="123000781" /><!-- Aello's Belt -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Weapon (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="220050000" /><!-- Brusthonin -->
 		</gd_maps>
@@ -73,7 +73,7 @@
 			<gd_item id="101500554" /><!-- Kianir's Staff -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Armor (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="220050000" /><!-- Brusthonin -->
 		</gd_maps>
@@ -86,7 +86,7 @@
 			<gd_item id="113500817" /><!-- Kianir's Chausses -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Accessory (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="220050000" /><!-- Brusthonin -->
 		</gd_maps>
@@ -97,7 +97,7 @@
 			<gd_item id="122000917" /><!-- Kianir's Ring -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Weapon (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="220050000" /><!-- Brusthonin -->
 		</gd_maps>
@@ -108,7 +108,7 @@
 			<gd_item id="100100555" /><!-- Narka's Warhammer -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Armor (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="220050000" /><!-- Brusthonin -->
 		</gd_maps>
@@ -121,7 +121,7 @@
 			<gd_item id="114600785" /><!-- Narka's Sabatons -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Accessory (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="220050000" /><!-- Brusthonin -->
 		</gd_maps>
@@ -132,7 +132,7 @@
 			<gd_item id="120000870" /><!-- Narka's Earrings -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Weapon (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="220050000" /><!-- Brusthonin -->
 		</gd_maps>
@@ -143,7 +143,7 @@
 			<gd_item id="100900538" /><!-- Shalba's Greatsword -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Armor (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="220050000" /><!-- Brusthonin -->
 		</gd_maps>
@@ -157,7 +157,7 @@
 			<gd_item id="112600774" /><!-- Shalba's Shoulderplates -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Accessory (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="220050000" /><!-- Brusthonin -->
 		</gd_maps>
@@ -169,7 +169,7 @@
 			<gd_item id="123000906" /><!-- Shalba's Belt -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Weapon (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="220050000" /><!-- Brusthonin -->
 		</gd_maps>
@@ -180,7 +180,7 @@
 			<gd_item id="100500556" /><!-- Latulatu's Jewel -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Armor (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="220050000" /><!-- Brusthonin -->
 		</gd_maps>
@@ -193,7 +193,7 @@
 			<gd_item id="113600790" /><!-- Latulatu's Greaves -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Accessory (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="220050000" /><!-- Brusthonin -->
 		</gd_maps>
@@ -204,7 +204,7 @@
 			<gd_item id="122000916" /><!-- Latulatu's Ring -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Weapon (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="220050000" /><!-- Brusthonin -->
 		</gd_maps>
@@ -216,7 +216,7 @@
 			<gd_item id="101800561" /><!-- Agueria's Pistol -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Armor (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="220050000" /><!-- Brusthonin -->
 		</gd_maps>
@@ -229,7 +229,7 @@
 			<gd_item id="111600799" /><!-- Agueria's Gauntlets -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Accessory (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="220050000" /><!-- Brusthonin -->
 		</gd_maps>
@@ -240,7 +240,7 @@
 			<gd_item id="120000871" /><!-- Agueria's Earrings -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Rare)" base_chance="25" no_reduction="true">
+	<gd_rule rule_name="Named Weapon (Rare)" chance="25">
 		<gd_maps>
 			<gd_map map_id="220050000" /><!-- Brusthonin -->
 		</gd_maps>
@@ -253,7 +253,7 @@
 			<gd_item id="101900551" /><!-- Kitarpa's Aethercannon -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Shield (Legend)" base_chance="35" no_reduction="true">
+	<gd_rule rule_name="Named Shield (Legend)" chance="35">
 		<gd_maps>
 			<gd_map map_id="220050000" /><!-- Brusthonin -->
 		</gd_maps>
@@ -264,7 +264,7 @@
 			<gd_item id="115000816" /><!-- Kitarpa's Shield -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Armor (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="220050000" /><!-- Brusthonin -->
 		</gd_maps>
@@ -276,7 +276,7 @@
 			<gd_item id="110500841" /><!-- Kitarpa's Hauberk -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Material" base_chance="100" no_reduction="true">
+	<gd_rule rule_name="Named Material" chance="100">
 		<gd_maps>
 			<gd_map map_id="220050000" /><!-- Brusthonin -->
 		</gd_maps>
@@ -287,7 +287,7 @@
 			<gd_item id="152012547" /><!-- Chieftain Kitarpa's Horn -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Weapon (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="220050000" /><!-- Brusthonin -->
 		</gd_maps>
@@ -301,7 +301,7 @@
 			<gd_item id="102100513" /><!-- Devahanson's Cipher-Blade -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Armor (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="220050000" /><!-- Brusthonin -->
 		</gd_maps>
@@ -313,7 +313,7 @@
 			<gd_item id="110600826" /><!-- Devahanson's Breastplate -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Headgear (Legend)" base_chance="20" no_reduction="true">
+	<gd_rule rule_name="Named Headgear (Legend)" chance="20">
 		<gd_maps>
 			<gd_map map_id="220050000" /><!-- Brusthonin -->
 		</gd_maps>
@@ -324,7 +324,7 @@
 			<gd_item id="125001907" /><!-- Devahanson's Hat -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Legend)" base_chance="35" no_reduction="true">
+	<gd_rule rule_name="Named Weapon (Legend)" chance="35">
 		<gd_maps>
 			<gd_map map_id="220050000" /><!-- Brusthonin -->
 		</gd_maps>
@@ -335,7 +335,7 @@
 			<gd_item id="100900430" /><!-- Havenjark Scimitar -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Legend)" base_chance="35" no_reduction="true">
+	<gd_rule rule_name="Named Armor (Legend)" chance="35">
 		<gd_maps>
 			<gd_map map_id="220050000" /><!-- Brusthonin -->
 		</gd_maps>
@@ -349,7 +349,7 @@
 			<gd_item id="112600620" /><!-- Havenjark Shoulderplates -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Accessory (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="220050000" /><!-- Brusthonin -->
 		</gd_maps>
@@ -361,7 +361,7 @@
 			<gd_item id="122000783" /><!-- Havenjark Seal -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Legend)" base_chance="35" no_reduction="true">
+	<gd_rule rule_name="Named Weapon (Legend)" chance="35">
 		<gd_maps>
 			<gd_map map_id="220050000" /><!-- Brusthonin -->
 		</gd_maps>
@@ -376,7 +376,7 @@
 			<gd_item id="101500555" /><!-- Ntuamu's Staff -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Legend)" base_chance="35" no_reduction="true">
+	<gd_rule rule_name="Named Accessory (Legend)" chance="35">
 		<gd_maps>
 			<gd_map map_id="220050000" /><!-- Brusthonin -->
 		</gd_maps>
@@ -389,7 +389,7 @@
 			<gd_item id="122000918" /><!-- Ntuamu's Seal -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Material" base_chance="100" no_reduction="true">
+	<gd_rule rule_name="Named Material" chance="100">
 		<gd_maps>
 			<gd_map map_id="220050000" /><!-- Brusthonin -->
 		</gd_maps>
@@ -400,7 +400,7 @@
 			<gd_item id="152012536" /><!-- Ntuamu's Blood -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Armor (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="220050000" /><!-- Brusthonin -->
 		</gd_maps>
@@ -414,7 +414,7 @@
 			<gd_item id="114600631" /><!-- Frightcorn's Sabatons -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Rare)" base_chance="50" no_reduction="true">
+	<gd_rule rule_name="Named Accessory (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="220050000" /><!-- Brusthonin -->
 		</gd_maps>
@@ -426,7 +426,7 @@
 			<gd_item id="121000669" /><!-- Frightcorn's Aquamarine Necklace -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Legend)" base_chance="35" no_reduction="true">
+	<gd_rule rule_name="Named Armor (Legend)" chance="35">
 		<gd_maps>
 			<gd_map map_id="220050000" /><!-- Brusthonin -->
 		</gd_maps>

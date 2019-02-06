@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../global_rules.xsd">
-	<gd_rule rule_name="Named Key" base_chance="100" no_reduction="true">
+	<gd_rule rule_name="Named Key" chance="100">
 		<gd_maps>
 			<gd_map map_id="300280000" /><!-- Rentus_Base -->
 		</gd_maps>
@@ -11,7 +11,7 @@
 			<gd_item id="185000228" /><!-- Rentus Supplies Storage Box Key -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Epic)" base_chance="50">
+	<gd_rule rule_name="Named Armor (Epic)" chance="50">
 		<gd_maps>
 			<gd_map map_id="300280000" /><!-- Rentus_Base -->
 		</gd_maps>
@@ -27,7 +27,7 @@
 			<gd_item id="110601654" /><!-- Breastplate of Rentus Recovery Squad -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Epic)" base_chance="50">
+	<gd_rule rule_name="Named Armor (Epic)" chance="50">
 		<gd_maps>
 			<gd_map map_id="300280000" /><!-- Rentus_Base -->
 		</gd_maps>
@@ -43,7 +43,7 @@
 			<gd_item id="111601617" /><!-- Gauntlets of Rentus Recovery Squad -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Epic)" base_chance="50">
+	<gd_rule rule_name="Named Armor (Epic)" chance="50">
 		<gd_maps>
 			<gd_map map_id="300280000" /><!-- Rentus_Base -->
 		</gd_maps>
@@ -59,7 +59,7 @@
 			<gd_item id="112601599" /><!-- Shoulderplates of Rentus Recovery Squad -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Epic)" base_chance="70">
+	<gd_rule rule_name="Named Armor (Epic)" chance="70">
 		<gd_maps>
 			<gd_map map_id="300280000" /><!-- Rentus_Base -->
 		</gd_maps>
@@ -76,7 +76,7 @@
 			<gd_item id="114601607" /><!-- Plate Boots of Rentus Recovery Squad -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Shield (Epic)" base_chance="50">
+	<gd_rule rule_name="Named Shield (Epic)" chance="50">
 		<gd_maps>
 			<gd_map map_id="300280000" /><!-- Rentus_Base -->
 		</gd_maps>
@@ -89,7 +89,7 @@
 			<gd_item id="115001813" /><!-- Scale Shield of Rentus Recovery Squad -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Epic)" base_chance="54">
+	<gd_rule rule_name="Named Weapon (Epic)" chance="54">
 		<gd_maps>
 			<gd_map map_id="300280000" /><!-- Rentus_Base -->
 		</gd_maps>
@@ -112,7 +112,7 @@
 			<gd_item id="102100747" /><!-- Vasharti's Cipher-Blade -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Souvenir (Unique)" base_chance="43">
+	<gd_rule rule_name="Named Souvenir (Unique)" chance="43">
 		<gd_maps>
 			<gd_map map_id="300280000" /><!-- Rentus_Base -->
 		</gd_maps>
@@ -123,7 +123,7 @@
 			<gd_item id="170030052" /><!-- [Souvenir] Vasharti's Gloves Wall Decoration -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Wings (Epic)" base_chance="11">
+	<gd_rule rule_name="Named Wings (Epic)" chance="11">
 		<gd_maps>
 			<gd_map map_id="300280000" /><!-- Rentus_Base -->
 		</gd_maps>
@@ -134,7 +134,7 @@
 			<gd_item id="187000158" /><!-- Wing Feather of Rentus Recovery Squad -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Mount (Epic)" base_chance="5.5">
+	<gd_rule rule_name="Named Mount (Epic)" chance="5.5">
 		<gd_maps>
 			<gd_map map_id="300280000" /><!-- Rentus_Base -->
 		</gd_maps>

@@ -6,16 +6,9 @@ import com.aionemu.commons.configuration.Property;
 import com.aionemu.gameserver.model.templates.item.ItemQuality;
 
 /**
- * @author Tiger0319
- * @reworked Neon
+ * @author Tiger0319, Neon
  */
 public class DropConfig {
-
-	/**
-	 * Disable drop rate reduction based on level difference between players and mobs
-	 */
-	@Property(key = "gameserver.drop.disable_reduction", defaultValue = "false")
-	public static boolean DISABLE_REDUCTION;
 
 	/**
 	 * Announce when a player drops an item with the configured minimum item quality
@@ -24,12 +17,6 @@ public class DropConfig {
 	 */
 	@Property(key = "gameserver.drop.announce_quality")
 	public static ItemQuality MIN_ANNOUNCE_QUALITY;
-
-	/**
-	 * Disable drop rate reduction based on level difference for maps
-	 */
-	@Property(key = "gameserver.drop.no_reduction_maps")
-	public static Set<Integer> NO_REDUCTION_MAPS;
 
 	/**
 	 * Disable range checks for specified maps

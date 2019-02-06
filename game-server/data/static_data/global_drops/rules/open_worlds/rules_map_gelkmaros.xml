@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../global_rules.xsd">
-	<gd_rule rule_name="Gelkmaros Conqueror's Mark Box (Normal)" base_chance="100" member_limit="2">
+	<gd_rule rule_name="Gelkmaros Conqueror's Mark Box (Normal)" chance="100" member_limit="2">
 		<gd_maps>
 			<gd_map map_id="220070000" /><!-- Gelkmaros -->
 		</gd_maps>
@@ -41,7 +41,7 @@
 			<gd_item id="188053693" chance="20" /><!-- Gelkmaros Greater Conqueror's Mark Box -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Gelkmaros Conqueror's Mark Box (Vulgar)" base_chance="100" member_limit="2">
+	<gd_rule rule_name="Gelkmaros Conqueror's Mark Box (Vulgar)" chance="100" member_limit="2">
 		<gd_maps>
 			<gd_map map_id="220070000" /><!-- Gelkmaros -->
 		</gd_maps>
@@ -81,7 +81,7 @@
 			<gd_item id="188053693" min_count="3" chance="25" /><!-- Gelkmaros Greater Conqueror's Mark Box -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Lv70 Composite Stone Bundle" base_chance="3">
+	<gd_rule rule_name="Lv70 Composite Stone Bundle" chance="3">
 		<gd_maps>
 			<gd_map map_id="220070000" /><!-- Gelkmaros -->
 		</gd_maps>
@@ -147,7 +147,7 @@
 			<gd_item id="188053745" /><!-- Elegant High Grade Composite Manastone Bundle -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Composite Stone Bundle (Asmodian)" base_chance="1" restriction_race="ASMODIANS">
+	<gd_rule rule_name="Composite Stone Bundle (Asmodian)" chance="1" restriction_race="ASMODIANS">
 		<gd_maps>
 			<gd_map map_id="220070000" /><!-- Gelkmaros -->
 		</gd_maps>
@@ -162,7 +162,7 @@
 			<gd_item id="188053745" /><!-- Elegant High Grade Composite Manastone Bundle -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Composite Stone Bundle (Elyos)" base_chance="3" restriction_race="ELYOS">
+	<gd_rule rule_name="Composite Stone Bundle (Elyos)" chance="3" restriction_race="ELYOS">
 		<gd_maps>
 			<gd_map map_id="220070000" /><!-- Gelkmaros -->
 		</gd_maps>
@@ -177,7 +177,7 @@
 			<gd_item id="188053745" /><!-- Elegant High Grade Composite Manastone Bundle -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Mastarius Weapon" base_chance="100">
+	<gd_rule rule_name="Mastarius Weapon" chance="100">
 		<gd_maps>
 			<gd_map map_id="220070000" /><!-- Gelkmaros -->
 		</gd_maps>
@@ -200,7 +200,7 @@
 			<gd_item id="102100699" /><!-- Enraged Mastarius' Cipher-Blade -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Mastarius Armor" base_chance="100" max_drop_rule="3">
+	<gd_rule rule_name="Mastarius Armor" chance="100" max_drop_rule="3">
 		<gd_maps>
 			<gd_map map_id="220070000" /><!-- Gelkmaros -->
 		</gd_maps>
@@ -240,7 +240,7 @@
 			<gd_item id="114601224" /><!-- Enraged Mastarius' Sabatons -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Mastarius Shield" base_chance="10">
+	<gd_rule rule_name="Mastarius Shield" chance="10">
 		<gd_maps>
 			<gd_map map_id="220070000" /><!-- Gelkmaros -->
 		</gd_maps>
@@ -252,7 +252,7 @@
 			<gd_item id="115001360" /><!-- Enraged Mastarius' Scale Shield -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Mastarius Accessory" base_chance="100">
+	<gd_rule rule_name="Mastarius Accessory" chance="100">
 		<gd_maps>
 			<gd_map map_id="220070000" /><!-- Gelkmaros -->
 		</gd_maps>
