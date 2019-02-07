@@ -24,10 +24,6 @@ public class PackAction extends AbstractItemAction {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_PACK_ITEM_NO_TARGET_ITEM());
 			return false;
 		}
-		if (targetItem.getItemTemplate().getPackCount() == 0) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_PACK_ITEM_CANNOT(targetItem.getL10n()));
-			return false;
-		}
 		if (targetItem.isEquipped()) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_PACK_ITEM_WRONG_EQUIPED());
 			return false;
@@ -119,7 +115,12 @@ public class PackAction extends AbstractItemAction {
 		if (packCount < 0) {
 			packCount *= -1;
 		}
-		if (packCount >= targetItem.getItemTemplate().getPackCount() || targetItem.isEquipped()) {
+		int allowedPackCount = targetItem.getItemTemplate().getPackCount();
+		if (targetItem.getEnchantLevel() >= 20) {
+			allowedPackCount += targetItem.getEnchantLevel() - 19;
+		}
+		if (packCount >= allowedPackCount) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_PACK_ITEM_CANNOT(targetItem.getL10n()));
 			return false;
 		}
 		return target == type;
