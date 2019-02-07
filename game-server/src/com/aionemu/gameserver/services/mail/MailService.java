@@ -192,7 +192,7 @@ public class MailService {
 
 			// unpack
 			if (attachedItem.getPackCount() > 0)
-				attachedItem.setPackCount(attachedItem.getPackCount() - 1);
+				attachedItem.setPackCount(attachedItem.getPackCount() * -1);
 
 			attachedItem.setItemLocation(StorageType.MAILBOX.getId());
 		}
