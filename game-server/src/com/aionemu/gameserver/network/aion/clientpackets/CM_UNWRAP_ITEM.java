@@ -14,11 +14,11 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 /**
  * @author xTz
  */
-public class CM_UNWARP_ITEM extends AionClientPacket {
+public class CM_UNWRAP_ITEM extends AionClientPacket {
 
 	private int objectId;
 
-	public CM_UNWARP_ITEM(int opcode, Set<State> validStates) {
+	public CM_UNWRAP_ITEM(int opcode, Set<State> validStates) {
 		super(opcode, validStates);
 	}
 
