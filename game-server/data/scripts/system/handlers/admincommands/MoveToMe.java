@@ -43,7 +43,7 @@ public class MoveToMe extends AdminCommand {
 				return;
 			}
 			TemporaryPlayerTeam<?> teamToMove;
-			switch (params[2].toLowerCase()) {
+			switch (params[1].toLowerCase()) {
 				case "g":
 				case "grp":
 				case "group":
