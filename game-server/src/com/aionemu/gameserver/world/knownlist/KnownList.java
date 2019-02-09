@@ -220,24 +220,20 @@ public class KnownList {
 		WorldPosition position = owner.getPosition();
 		if (owner instanceof Npc) {
 			if (((Creature) owner).isFlag()) {
-				position.getWorldMapInstance().forEachPlayer(new Consumer<Player>() {
-
-					@Override
-					public void accept(Player player) {
-						if (add(player)) {
-							player.getKnownList().add(owner);
-						}
+				position.getWorldMapInstance().forEachPlayer(player -> {
+					if (add(player)) {
+						player.getKnownList().add(owner);
 					}
 				});
 			}
 		} else if (owner instanceof Player) {
-			for (Npc npc : position.getWorldMapInstance().getNpcs()) {
+			position.getWorldMapInstance().forEachNpc(npc -> {
 				if (npc.isFlag()) {
 					if (add(npc)) {
 						npc.getKnownList().add(owner);
 					}
 				}
-			}
+			});
 		}
 		for (MapRegion region : position.getMapRegion().getNeighbours()) {
 			for (VisibleObject newObject : region.getObjects().values()) {

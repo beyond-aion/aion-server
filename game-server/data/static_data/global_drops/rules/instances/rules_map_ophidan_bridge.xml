@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../global_rules.xsd">
 	<!-- Single Monster Drops -->
-	<gd_rule rule_name="Conqueror's Mark" base_chance="100" member_limit="6" min_count="60" max_count="90">
+	<gd_rule rule_name="Conqueror's Mark" chance="100" member_limit="6">
 		<gd_maps>
 			<gd_map map_id="300590000" /><!-- Ophidan_Bridge -->
 		</gd_maps>
@@ -12,10 +12,10 @@
 			<gd_npc npc_id="235771" /><!-- Velkur Aetherknife -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="186000238" /><!-- Conqueror's Mark -->
+			<gd_item id="186000238" min_count="60" max_count="90" /><!-- Conqueror's Mark -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Treasure Crate" base_chance="100" member_limit="6">
+	<gd_rule rule_name="Named Treasure Crate" chance="100" member_limit="6">
 		<gd_maps>
 			<gd_map map_id="300590000" /><!-- Ophidan_Bridge -->
 		</gd_maps>
@@ -29,7 +29,7 @@
 			<gd_item id="188052612" /><!-- Vera's Treasure Crate -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Shield (Epic)" base_chance="4">
+	<gd_rule rule_name="Named Shield (Epic)" chance="8.3">
 		<gd_maps>
 			<gd_map map_id="300590000" /><!-- Ophidan_Bridge -->
 		</gd_maps>
@@ -44,7 +44,7 @@
 			<gd_item id="115001628" /><!-- Vera Defender Captain's Scale Shield -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Epic)" base_chance="3">
+	<gd_rule rule_name="Named Weapon (Epic)" chance="6.2">
 		<gd_maps>
 			<gd_map map_id="300590000" /><!-- Ophidan_Bridge -->
 		</gd_maps>
@@ -70,7 +70,7 @@
 			<gd_item id="102100845" /><!-- Vera Defender Captain's Cipher-Blade -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Unique)" base_chance="10">
+	<gd_rule rule_name="Named Weapon (Unique)" chance="20.7">
 		<gd_maps>
 			<gd_map map_id="300590000" /><!-- Ophidan_Bridge -->
 		</gd_maps>
@@ -96,7 +96,7 @@
 			<gd_item id="102100844" /><!-- Vera Defender Cipher-Blade -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Shield (Unique)" base_chance="12">
+	<gd_rule rule_name="Named Shield (Unique)" chance="24.8">
 		<gd_maps>
 			<gd_map map_id="300590000" /><!-- Ophidan_Bridge -->
 		</gd_maps>
@@ -111,7 +111,7 @@
 			<gd_item id="115001626" /><!-- Vera Defender Scale Shield -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Unique)" base_chance="15">
+	<gd_rule rule_name="Named Armor (Unique)" chance="31">
 		<gd_maps>
 			<gd_map map_id="300590000" /><!-- Ophidan_Bridge -->
 		</gd_maps>
@@ -148,7 +148,7 @@
 			<gd_item id="112601436" /><!-- Vera Defender Shoulderplates -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Head (Unique)" base_chance="15">
+	<gd_rule rule_name="Named Head (Unique)" chance="31">
 		<gd_maps>
 			<gd_map map_id="300590000" /><!-- Ophidan_Bridge -->
 		</gd_maps>
@@ -165,7 +165,7 @@
 			<gd_item id="125003740" /><!-- Vera Defender Helm -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Epic)" base_chance="5">
+	<gd_rule rule_name="Named Armor (Epic)" chance="10.4">
 		<gd_maps>
 			<gd_map map_id="300590000" /><!-- Ophidan_Bridge -->
 		</gd_maps>
@@ -202,7 +202,7 @@
 			<gd_item id="112601438" /><!-- Vera Defender Captain's Shoulderplates -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Head (Epic)" base_chance="7">
+	<gd_rule rule_name="Named Head (Epic)" chance="14.5">
 		<gd_maps>
 			<gd_map map_id="300590000" /><!-- Ophidan_Bridge -->
 		</gd_maps>
@@ -219,7 +219,7 @@
 			<gd_item id="125003742" /><!-- Vera Defender Captain's Helm -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Bundle A" base_chance="100" member_limit="6">
+	<gd_rule rule_name="Bundle A" chance="100" member_limit="6">
 		<gd_maps>
 			<gd_map map_id="300590000" /><!-- Ophidan_Bridge -->
 		</gd_maps>
@@ -232,7 +232,7 @@
 			<gd_item id="188053685" /><!-- Sand Wanderers Trader's Bundle -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Bundle B" base_chance="100" member_limit="6">
+	<gd_rule rule_name="Bundle B" chance="100" member_limit="6">
 		<gd_maps>
 			<gd_map map_id="300590000" /><!-- Ophidan_Bridge -->
 		</gd_maps>
@@ -245,7 +245,7 @@
 			<gd_item id="188053686" /><!-- Sand Wanderers Trader's Treasure Box -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Bundle" base_chance="100">
+	<gd_rule rule_name="Named Bundle" chance="100">
 		<gd_maps>
 			<gd_map map_id="300590000" /><!-- Ophidan_Bridge -->
 		</gd_maps>

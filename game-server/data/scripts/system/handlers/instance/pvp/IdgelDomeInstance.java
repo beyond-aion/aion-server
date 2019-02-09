@@ -120,7 +120,7 @@ public class IdgelDomeInstance extends GeneralInstanceHandler {
 				if (ri.getId() != 0)
 					ItemService.addItem(p, ri.getId(), ri.getCount());
 		});
-		instance.getNpcs().forEach(n -> n.getController().delete());
+		instance.forEachNpc(npc -> npc.getController().delete());
 		tasks.add(ThreadPoolManager.getInstance().schedule(() -> {
 			for (Player player : instance.getPlayersInside()) {
 				if (player.isDead())

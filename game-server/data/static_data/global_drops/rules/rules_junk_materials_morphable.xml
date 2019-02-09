@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../global_rules.xsd">
 	<!-- Idian Depths, Levinshor, Kaldor, Enshar, Cygnea drops -->
-	<gd_rule rule_name="Morphable Insect Parts" base_chance="25" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="Morphable Insect Parts" chance="25" min_diff="-4" max_diff="5">
 		<gd_items>
 			<gd_item id="182007000" /><!-- Pitted Carapace -->
 			<gd_item id="182007018" /><!-- Bumpy Carapace -->
@@ -30,7 +30,7 @@
 			<gd_world wd_type="BALAUREA_HIGH_INSTANCE" />
 		</gd_worlds>
 	</gd_rule>
-	<gd_rule rule_name="Morphable Beast Parts" base_chance="25" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="Morphable Beast Parts" chance="25" min_diff="-4" max_diff="5">
 		<gd_items>
 			<gd_item id="182007001" /><!-- Splintered Talon -->
 			<gd_item id="182007019" /><!-- Fractured Talon -->
@@ -68,7 +68,7 @@
 			<gd_world wd_type="BALAUREA_HIGH_INSTANCE" />
 		</gd_worlds>
 	</gd_rule>
-	<gd_rule rule_name="Morphable Minerals" base_chance="25" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="Morphable Minerals" chance="25" min_diff="-4" max_diff="5">
 		<gd_items>
 			<gd_item id="182007002" /><!-- Pitted Ore -->
 			<gd_item id="182007020" /><!-- Jagged Ore -->
@@ -98,7 +98,7 @@
 			<gd_world wd_type="BALAUREA_HIGH_INSTANCE" />
 		</gd_worlds>
 	</gd_rule>
-	<gd_rule rule_name="Morphable Crystals" base_chance="25" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="Morphable Crystals" chance="25" min_diff="-4" max_diff="5">
 		<gd_items>
 			<gd_item id="182007003" /><!-- Pitted Idium Crystal -->
 			<gd_item id="182007021" /><!-- Jagged Idium Crystal -->
@@ -132,7 +132,7 @@
 			<gd_world wd_type="BALAUREA_HIGH_INSTANCE" />
 		</gd_worlds>
 	</gd_rule>
-	<gd_rule rule_name="Morphable Elim Essences" base_chance="25" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="Morphable Elim Essences" chance="25" min_diff="-4" max_diff="5">
 		<gd_items>
 			<gd_item id="182007004" /><!-- Chunky Elim Sap -->
 			<gd_item id="182007022" /><!-- Lumpy Elim Sap -->
@@ -164,7 +164,7 @@
 			<gd_world wd_type="BALAUREA_HIGH_INSTANCE" />
 		</gd_worlds>
 	</gd_rule>
-	<gd_rule rule_name="Morphable Danuar Pieces" base_chance="25" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="Morphable Danuar Pieces" chance="25" min_diff="-4" max_diff="5">
 		<gd_items>
 			<gd_item id="182007005" /><!-- Pitted Accessory Bits -->
 			<gd_item id="182007023" /><!-- Jagged Accessory Bits -->
@@ -189,7 +189,7 @@
 			<gd_world wd_type="BALAUREA_HIGH_INSTANCE" />
 		</gd_worlds>
 	</gd_rule>
-	<gd_rule rule_name="Morphable Spirit Essences" base_chance="25" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="Morphable Spirit Essences" chance="25" min_diff="-4" max_diff="5">
 		<gd_items>
 			<gd_item id="182007006" /><!-- Damaged Spirit Fragment -->
 			<gd_item id="182007024" /><!-- Rough Spirit Fragment -->
@@ -216,7 +216,7 @@
 			<gd_world wd_type="BALAUREA_HIGH_INSTANCE" />
 		</gd_worlds>
 	</gd_rule>
-	<gd_rule rule_name="Morphable Old Manastones" base_chance="25" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="Morphable Old Manastones" chance="25" min_diff="-4" max_diff="5">
 		<gd_items>
 			<gd_item id="182007007" /><!-- Old Used Manastone -->
 			<gd_item id="182007025" /><!-- Jagged Old Manastone -->
@@ -261,7 +261,7 @@
 			<gd_world wd_type="BALAUREA_HIGH_INSTANCE" />
 		</gd_worlds>
 	</gd_rule>
-	<gd_rule rule_name="Morphable Skin" base_chance="25" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="Morphable Skin" chance="25" min_diff="-4" max_diff="5">
 		<gd_items>
 			<gd_item id="182007008" /><!-- Pitted Scale -->
 			<gd_item id="182007026" /><!-- Jagged Scale -->

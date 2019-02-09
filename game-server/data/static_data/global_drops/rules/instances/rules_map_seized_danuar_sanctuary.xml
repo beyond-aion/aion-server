@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../global_rules.xsd">
-	<gd_rule rule_name="Weapon (Unique)" base_chance="2">
+	<gd_rule rule_name="Weapon (Unique)" chance="3">
 		<gd_maps>
 			<gd_map map_id="301140000" /><!-- Seized_Danuar_Sanctuary -->
 		</gd_maps>
@@ -23,7 +23,7 @@
 			<gd_item id="102100818" /><!-- Corsair's Cipher-Blade -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Armor (Unique)" base_chance="4">
+	<gd_rule rule_name="Armor (Unique)" chance="6">
 		<gd_maps>
 			<gd_map map_id="301140000" /><!-- Seized_Danuar_Sanctuary -->
 		</gd_maps>
@@ -53,7 +53,7 @@
 			<gd_item id="114601333" /><!-- Steel Rose Pirates' Plate Boots -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Accessory (Unique)" base_chance="3">
+	<gd_rule rule_name="Accessory (Unique)" chance="4.5">
 		<gd_maps>
 			<gd_map map_id="301140000" /><!-- Seized_Danuar_Sanctuary -->
 		</gd_maps>
@@ -67,7 +67,7 @@
 			<gd_item id="125300053" /><!-- Steel Rose Pirates' Cloth Headband -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Key" base_chance="100" no_reduction="true">
+	<gd_rule rule_name="Named Key" chance="100">
 		<gd_maps>
 			<gd_map map_id="301140000" /><!-- Seized_Danuar_Sanctuary -->
 		</gd_maps>
@@ -79,7 +79,7 @@
 			<gd_item id="185000173" /><!-- Blue Key -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Shield (Unique)" base_chance="10">
+	<gd_rule rule_name="Named Shield (Unique)" chance="20">
 		<gd_maps>
 			<gd_map map_id="301140000" /><!-- Seized_Danuar_Sanctuary -->
 		</gd_maps>
@@ -93,7 +93,7 @@
 			<gd_item id="115001635" /><!-- Danann Divine Battle Shield -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Shield (Epic)" base_chance="5">
+	<gd_rule rule_name="Named Shield (Epic)" chance="10">
 		<gd_maps>
 			<gd_map map_id="301140000" /><!-- Seized_Danuar_Sanctuary -->
 		</gd_maps>
@@ -107,7 +107,7 @@
 			<gd_item id="115001638" /><!-- Danann Noble Scale Shield -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Unique)" base_chance="5">
+	<gd_rule rule_name="Named Armor (Unique)" chance="7.5">
 		<gd_maps>
 			<gd_map map_id="301140000" /><!-- Seized_Danuar_Sanctuary -->
 		</gd_maps>
@@ -125,7 +125,7 @@
 			<gd_item id="110601383" /><!-- Steel Rose Pirates' Plate Breastplate -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Unique)" base_chance="5">
+	<gd_rule rule_name="Named Armor (Unique)" chance="7.5">
 		<gd_maps>
 			<gd_map map_id="301140000" /><!-- Seized_Danuar_Sanctuary -->
 		</gd_maps>
@@ -143,7 +143,7 @@
 			<gd_item id="112601327" /><!-- Steel Rose Pirates' Plate Pauldrons -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Blood Mark Bundle" base_chance="100" no_reduction="true" member_limit="6">
+	<gd_rule rule_name="Blood Mark Bundle" chance="100" member_limit="6">
 		<gd_maps>
 			<gd_map map_id="301140000" /><!-- Seized_Danuar_Sanctuary -->
 		</gd_maps>
@@ -154,7 +154,7 @@
 			<gd_item id="188053713" /><!-- Blood Mark Bundle -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Unique)" base_chance="5">
+	<gd_rule rule_name="Named Armor (Unique)" chance="7.5">
 		<gd_maps>
 			<gd_map map_id="301140000" /><!-- Seized_Danuar_Sanctuary -->
 		</gd_maps>
@@ -168,7 +168,7 @@
 			<gd_item id="111601345" /><!-- Steel Rose Pirates' Plate Gloves -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Unique)" base_chance="10">
+	<gd_rule rule_name="Named Armor (Unique)" chance="20">
 		<gd_maps>
 			<gd_map map_id="301140000" /><!-- Seized_Danuar_Sanctuary -->
 		</gd_maps>
@@ -200,7 +200,7 @@
 			<gd_item id="112601437" /><!-- Danann Divine Shoulderplates -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Epic)" base_chance="5">
+	<gd_rule rule_name="Named Armor (Epic)" chance="10">
 		<gd_maps>
 			<gd_map map_id="301140000" /><!-- Seized_Danuar_Sanctuary -->
 		</gd_maps>
@@ -232,7 +232,7 @@
 			<gd_item id="112601439" /><!-- Danann Noble Shoulderplates -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Ancient Manastone (Unique)" base_chance="35">
+	<gd_rule rule_name="Named Ancient Manastone (Unique)" chance="52">
 		<gd_maps>
 			<gd_map map_id="301140000" /><!-- Seized_Danuar_Sanctuary -->
 		</gd_maps>
@@ -252,7 +252,7 @@
 			<gd_item id="167020065" /><!-- Ancient Manastone: Magic Boost +32 -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Key" base_chance="100" no_reduction="true">
+	<gd_rule rule_name="Named Key" chance="100">
 		<gd_maps>
 			<gd_map map_id="301140000" /><!-- Seized_Danuar_Sanctuary -->
 		</gd_maps>
@@ -264,7 +264,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Bundles -->
-	<gd_rule rule_name="Captured Shelter Relics Bundle" base_chance="100" member_limit="6">
+	<gd_rule rule_name="Captured Shelter Relics Bundle" chance="100" member_limit="6">
 		<gd_maps>
 			<gd_map map_id="301140000" /><!-- Seized_Danuar_Sanctuary -->
 		</gd_maps>
@@ -277,7 +277,7 @@
 			<gd_item id="188053710" /><!-- Captured Shelter Relics Bundle -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Stolen Shelter Consumables Bundle" base_chance="100" member_limit="6">
+	<gd_rule rule_name="Stolen Shelter Consumables Bundle" chance="100" member_limit="6">
 		<gd_maps>
 			<gd_map map_id="301140000" /><!-- Seized_Danuar_Sanctuary -->
 		</gd_maps>
@@ -290,7 +290,7 @@
 			<gd_item id="188053708" /><!-- Stolen Shelter Consumables Bundle -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Captured Shelter Idian Bundle" base_chance="20">
+	<gd_rule rule_name="Captured Shelter Idian Bundle" chance="40">
 		<gd_maps>
 			<gd_map map_id="301140000" /><!-- Seized_Danuar_Sanctuary -->
 		</gd_maps>
@@ -303,7 +303,7 @@
 			<gd_item id="188053714" /><!-- Captured Shelter Idian Bundle -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Sanctuary Conquerer Mark Bundle" base_chance="100" member_limit="6">
+	<gd_rule rule_name="Sanctuary Conquerer Mark Bundle" chance="100" member_limit="6">
 		<gd_maps>
 			<gd_map map_id="301140000" /><!-- Seized_Danuar_Sanctuary -->
 		</gd_maps>
@@ -316,7 +316,7 @@
 			<gd_item id="188052583" /><!-- Sanctuary Conquerer Mark Bundle -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Recharger Bundle" base_chance="20">
+	<gd_rule rule_name="Recharger Bundle" chance="40">
 		<gd_maps>
 			<gd_map map_id="301140000"/><!-- Seized_Danuar_Sanctuary -->
 		</gd_maps>
@@ -329,7 +329,7 @@
 			<gd_item id="188053929"/><!-- Recharger Bundle -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Weapon Shard" base_chance="15" fixed_chance="true">
+	<gd_rule rule_name="Weapon Shard" chance="15">
 		<gd_maps>
 			<gd_map map_id="301140000"/><!-- Seized_Danuar_Sanctuary -->
 		</gd_maps>

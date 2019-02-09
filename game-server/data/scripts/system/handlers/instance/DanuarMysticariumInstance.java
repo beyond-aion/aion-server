@@ -109,9 +109,10 @@ public class DanuarMysticariumInstance extends GeneralInstanceHandler {
 		tasks.add(ThreadPoolManager.getInstance().schedule(() -> sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDLDF5Re_solo_game1_3()), 155000));
 		tasks.add(ThreadPoolManager.getInstance().schedule(() -> sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDLDF5Re_solo_game1_4()), 175000));
 		tasks.add(ThreadPoolManager.getInstance().schedule(() -> {
-			instance.getNpcs().stream()
-				.filter(npc -> npc != null && (npc.getNpcId() == 219958 || npc.getNpcId() == 219959 || npc.getNpcId() == 702700 || npc.getNpcId() == 702701))
-				.forEach(npc -> npc.getController().delete());
+			instance.forEachNpc(npc -> {
+				if (npc.getNpcId() == 219958 || npc.getNpcId() == 219959 || npc.getNpcId() == 702700 || npc.getNpcId() == 702701)
+					npc.getController().delete();
+			});
 			spawn(702715, 169.366f, 208.93f, 188.02f, (byte) 0);
 			sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDLDF5Re_solo_game1_5());
 			sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDLDF5Re_solo_game1_6());

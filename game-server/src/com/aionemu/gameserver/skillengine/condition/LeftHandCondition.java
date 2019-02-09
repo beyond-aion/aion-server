@@ -5,6 +5,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
+import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.item.LeftHandSlot;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
@@ -27,8 +28,10 @@ public class LeftHandCondition extends Condition {
 			Player player = (Player) env.getEffector();
 			switch (type) {
 				case DUAL:
-					if ((player.getEquipment().getOffHandWeapon() != null && player.getEquipment().getOffHandWeapon().getItemTemplate().isWeapon())
-						|| player.getEquipment().getMainHandWeapon().getItemTemplate().isTwoHandWeapon())
+					Item offHandWeapon = player.getEquipment().getOffHandWeapon();
+					Item mainHandWeapon;
+					if (offHandWeapon != null && offHandWeapon.getItemTemplate().isWeapon()
+						|| (mainHandWeapon = player.getEquipment().getMainHandWeapon()) != null && mainHandWeapon.getItemTemplate().isTwoHandWeapon())
 						return true;
 					else {
 						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_NEED_DUAL_WEAPON());

@@ -256,7 +256,7 @@ public class MySQL5InventoryDAO extends InventoryDAO {
 			insertResult = insertItems(con, itemsToInsert, playerId, accountId, legionId);
 			updateResult = updateItems(con, itemsToUpdate, playerId, accountId, legionId);
 		} catch (SQLException e) {
-			log.error("Can't open connection to save player inventory: " + playerId);
+			log.error("Can't save inventory for player: " + playerId, e);
 		}
 
 		for (Item item : items) {

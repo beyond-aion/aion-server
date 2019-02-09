@@ -99,16 +99,7 @@ public class RespawnService {
 	}
 
 	public static void cancelRespawn(VisibleObject object) {
-		cancelRespawn(object.getObjectId());
-	}
-
-	public static boolean cancelRespawn(int objectId) {
-		RespawnTask respawn = pendingRespawns.get(objectId);
-		if (respawn != null) {
-			respawn.cancel();
-			return true;
-		}
-		return false;
+		cancelRespawn(object.getObjectId(), object.getSpawn());
 	}
 
 	/**

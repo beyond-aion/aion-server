@@ -12,7 +12,6 @@ import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.templates.spawns.SpawnGroup;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.model.templates.spawns.TemporarySpawn;
-import com.aionemu.gameserver.services.RespawnService;
 
 /**
  * @author xTz, Neon
@@ -43,8 +42,7 @@ public class TemporarySpawnEngine {
 					if (!npc.isDead() && object.getSpawn().hasPool())
 						object.getSpawn().setUse(npc.getInstanceId(), false);
 				}
-				if (!object.getController().delete())
-					RespawnService.cancelRespawn(object);
+				object.getController().deleteIfAliveOrCancelRespawn();
 			} else {
 				remainingObjects.add(object);
 			}

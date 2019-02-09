@@ -20,17 +20,14 @@ public class Drop {
 	private int maxAmount;
 	@XmlAttribute(name = "chance")
 	private float chance;
-	@XmlAttribute(name = "no_reduce")
-	private boolean noReduce = false;
-	@XmlAttribute(name = "each_member", required = false)
+	@XmlAttribute(name = "each_member")
 	private boolean eachMember = false;
 
-	public Drop(int itemId, int minAmount, int maxAmount, float chance, boolean noReduce) {
+	public Drop(int itemId, int minAmount, int maxAmount, float chance) {
 		this.itemId = itemId;
 		this.minAmount = minAmount;
 		this.maxAmount = maxAmount;
 		this.chance = chance;
-		this.noReduce = noReduce;
 	}
 
 	public Drop() {
@@ -61,25 +58,13 @@ public class Drop {
 		return chance;
 	}
 
-	public float getFinalChance(float dropModifier) {
-		float finalChance = chance;
-		if (!noReduce)
-			finalChance *= dropModifier;
-		return finalChance;
-	}
-
-	public boolean isNoReduction() {
-		return noReduce;
-	}
-
 	public Boolean isEachMember() {
 		return eachMember;
 	}
 
 	@Override
 	public String toString() {
-		return "Drop [itemId=" + itemId + ", minAmount=" + minAmount + ", maxAmount=" + maxAmount + ", chance=" + chance + ", noReduce=" + noReduce
-			+ ", eachMember=" + eachMember + "]";
+		return "Drop [itemId=" + itemId + ", minAmount=" + minAmount + ", maxAmount=" + maxAmount + ", chance=" + chance + ", eachMember=" + eachMember + "]";
 	}
 
 }

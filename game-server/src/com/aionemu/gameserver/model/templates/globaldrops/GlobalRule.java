@@ -53,11 +53,7 @@ public class GlobalRule {
 
 	@XmlAttribute(name = "rule_name", required = true)
 	private String ruleName;
-	@XmlAttribute(name = "min_count")
-	private Long minCount = 1L;
-	@XmlAttribute(name = "max_count")
-	private Long maxCount = 1L;
-	@XmlAttribute(name = "base_chance", required = true)
+	@XmlAttribute(name = "chance", required = true)
 	private float chance;
 	@XmlAttribute(name = "min_diff")
 	private int minDiff = -99;
@@ -65,14 +61,14 @@ public class GlobalRule {
 	private int maxDiff = 99;
 	@XmlAttribute(name = "restriction_race")
 	private RestrictionRace restrictionRace;
-	@XmlAttribute(name = "no_reduction")
-	private boolean noReduction;
+	@XmlAttribute(name = "level_based_chance_reduction")
+	private boolean useLevelBasedChanceReduction;
 	@XmlAttribute(name = "member_limit")
 	private int memberLimit = 1;
 	@XmlAttribute(name = "max_drop_rule")
 	private int maxDropRule = 1;
-	@XmlAttribute(name = "fixed_chance")
-	private boolean fixedChance;
+	@XmlAttribute(name = "dynamic_chance")
+	private boolean dynamicChance;
 
 	public List<GlobalDropItem> getDropItems() {
 		return gdItems;
@@ -126,14 +122,6 @@ public class GlobalRule {
 		return ruleName;
 	}
 
-	public long getMinCount() {
-		return minCount;
-	}
-
-	public long getMaxCount() {
-		return maxCount;
-	}
-
 	public float getChance() {
 		return chance;
 	}
@@ -150,8 +138,8 @@ public class GlobalRule {
 		return restrictionRace;
 	}
 
-	public boolean getNoReduction() {
-		return noReduction;
+	public boolean isUseLevelBasedChanceReduction() {
+		return useLevelBasedChanceReduction;
 	}
 
 	public int getMemberLimit() {
@@ -162,14 +150,14 @@ public class GlobalRule {
 		return maxDropRule;
 	}
 
-	public boolean isFixedChance() {
-		return fixedChance;
+	public boolean isDynamicChance() {
+		return dynamicChance;
 	}
 
 	@XmlType(name = "race_restriction")
 	@XmlEnum
 	public enum RestrictionRace {
 		ASMODIANS,
-		ELYOS;
+		ELYOS
 	}
 }

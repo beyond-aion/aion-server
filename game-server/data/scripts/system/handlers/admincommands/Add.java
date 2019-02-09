@@ -1,12 +1,14 @@
 package admincommands;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import org.apache.commons.lang3.math.NumberUtils;
 
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.templates.item.ItemTemplate;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.AdminService;
 import com.aionemu.gameserver.services.item.ItemService;
+import com.aionemu.gameserver.utils.ChatUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.Util;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
@@ -18,7 +20,14 @@ import com.aionemu.gameserver.world.World;
 public class Add extends AdminCommand {
 
 	public Add() {
-		super("add");
+		super("add", "Adds items to the targets inventory.");
+
+		// @formatter:off
+		setSyntaxInfo(
+			"<item link|ID> [count] - Adds the specified item(s) to your inventory.",
+			"<player> <item link|ID> [count] - Adds the specified item(s) to the players inventory."
+		);
+		// @formatter:on
 	}
 
 	@Override
@@ -27,77 +36,30 @@ public class Add extends AdminCommand {
 			info(player, null);
 			return;
 		}
-		int itemId = 0;
-		long itemCount = 1;
-		Player receiver;
 
-		try {
-			String item = params[0];
-			// Some item links have space before Id
-			if (item.equals("[item:")) {
-				item = params[1];
-				Pattern id = Pattern.compile("(\\d{9})");
-				Matcher result = id.matcher(item);
-				if (result.find())
-					itemId = Integer.parseInt(result.group(1));
-
-				if (params.length == 3)
-					itemCount = Long.parseLong(params[2]);
-			} else {
-				Pattern id = Pattern.compile("\\[item:(\\d{9})");
-				Matcher result = id.matcher(item);
-
-				if (result.find())
-					itemId = Integer.parseInt(result.group(1));
-				else
-					itemId = Integer.parseInt(params[0]);
-
-				if (params.length == 2)
-					itemCount = Long.parseLong(params[1]);
-			}
-			receiver = player;
-		} catch (NumberFormatException e) {
-			receiver = World.getInstance().findPlayer(Util.convertName(params[0]));
+		int index = 0;
+		Player receiver = player;
+		int itemId = ChatUtil.getItemId(params[index]);
+		if (itemId == 0) {
+			String playerName = Util.convertName(params[index]);
+			receiver = World.getInstance().findPlayer(playerName);
 			if (receiver == null) {
-				PacketSendUtility.sendMessage(player, "Could not find a player by that name.");
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_NO_SUCH_USER(playerName));
 				return;
 			}
-
-			try {
-				String item = params[1];
-				// Some item links have space before Id
-				if (item.equals("[item:")) {
-					item = params[2];
-					Pattern id = Pattern.compile("(\\d{9})");
-					Matcher result = id.matcher(item);
-					if (result.find())
-						itemId = Integer.parseInt(result.group(1));
-
-					if (params.length == 4)
-						itemCount = Long.parseLong(params[3]);
-				} else {
-					Pattern id = Pattern.compile("\\[item:(\\d{9})");
-					Matcher result = id.matcher(item);
-
-					if (result.find())
-						itemId = Integer.parseInt(result.group(1));
-					else
-						itemId = Integer.parseInt(params[1]);
-
-					if (params.length == 3)
-						itemCount = Long.parseLong(params[2]);
-				}
-			} catch (NumberFormatException ex) {
-				PacketSendUtility.sendMessage(player, "You must give number to itemid.");
-				return;
-			} catch (Exception ex2) {
-				PacketSendUtility.sendMessage(player, "Occurs an error.");
-				return;
-			}
+			if (++index < params.length)
+				itemId = ChatUtil.getItemId(params[index]);
 		}
 
-		if (DataManager.ITEM_DATA.getItemTemplate(itemId) == null) {
-			PacketSendUtility.sendMessage(player, "Item id is incorrect: " + itemId);
+		ItemTemplate itemTemplate;
+		if (itemId == 0 || (itemTemplate = DataManager.ITEM_DATA.getItemTemplate(itemId)) == null) {
+			sendInfo(player, "Invalid item.");
+			return;
+		}
+
+		long itemCount = params.length > ++index ? NumberUtils.toLong(params[index]) : 1;
+		if (itemCount <= 0 || itemCount / itemTemplate.getMaxStackCount() > 126) {
+			sendInfo(player, "Invalid item count.");
 			return;
 		}
 
@@ -108,20 +70,12 @@ public class Add extends AdminCommand {
 
 		if (count == 0) {
 			if (player != receiver) {
-				PacketSendUtility.sendMessage(player, "You successfully gave " + itemCount + " x [item:" + itemId + "] to " + receiver.getName() + ".");
-				PacketSendUtility.sendMessage(receiver, "You successfully received " + itemCount + " x [item:" + itemId + "] from " + player.getName() + ".");
-			} else
-				PacketSendUtility.sendMessage(player, "You successfully received " + itemCount + " x [item:" + itemId + "]");
+				PacketSendUtility.sendMessage(player, "You gave " + itemCount + " x [item:" + itemId + "] to " + receiver.getName() + ".");
+				PacketSendUtility.sendMessage(receiver, "You received " + itemCount + " x [item:" + itemId + "] from " + player.getName() + ".");
+			}
 		} else {
 			PacketSendUtility.sendMessage(player, "Item couldn't be added");
 		}
-	}
-
-	@Override
-	public void info(Player player, String message) {
-		PacketSendUtility.sendMessage(player, "syntax //add <player> <item Id | link> <quantity>");
-		PacketSendUtility.sendMessage(player, "syntax //add <item Id | link> <quantity>");
-		PacketSendUtility.sendMessage(player, "syntax //add <item Id | link>");
 	}
 
 }

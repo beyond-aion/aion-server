@@ -7,9 +7,11 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlList;
 import javax.xml.bind.annotation.XmlType;
 
-import org.slf4j.LoggerFactory;
-
 import com.aionemu.commons.utils.Rnd;
+import com.aionemu.gameserver.dataholders.DataManager;
+import com.aionemu.gameserver.dataholders.ItemData;
+import com.aionemu.gameserver.dataholders.StaticData;
+import com.aionemu.gameserver.dataholders.loadingutils.StaticDataListener;
 import com.aionemu.gameserver.model.PlayerClass;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -22,20 +24,27 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 public class ResultedItem {
 
 	@XmlAttribute(name = "id")
-	public int itemId;
+	private int itemId;
 	@XmlAttribute(name = "min_count")
-	public int minCount = 1;
+	private int minCount = 1;
 	@XmlAttribute(name = "max_count")
-	public int maxCount;
+	private int maxCount;
 	@XmlAttribute(name = "race")
-	public Race race = Race.PC_ALL;
+	private Race race = Race.PC_ALL;
 	@XmlList
 	@XmlAttribute(name = "player_classes")
-	public List<PlayerClass> playerClasses;
+	private List<PlayerClass> playerClasses;
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
-		if (maxCount > 0 && maxCount < minCount)
-			LoggerFactory.getLogger(ResultedItem.class).warn("Wrong count for decomposable result item:{}, min:{} max:{}", itemId, minCount, maxCount);
+		StaticData staticData = StaticDataListener.get(u);
+		ItemData itemData = staticData != null ? staticData.itemData : DataManager.ITEM_DATA;
+		if (itemData.getItemTemplate(itemId) == null)
+			throw new IllegalArgumentException("Decomposable reward item ID is invalid: " + itemId);
+		if (minCount <= 0)
+			throw new IllegalArgumentException("Decomposable reward item [" + itemId + "] min_count (" + minCount + ") must be greater than 0");
+		if (maxCount != 0 && maxCount <= minCount)
+			throw new IllegalArgumentException(
+					"Decomposable reward item [" + itemId + "] max_count (" + maxCount + ") must be unset or greater than min_count (" + minCount + ")");
 	}
 
 	public int getItemId() {

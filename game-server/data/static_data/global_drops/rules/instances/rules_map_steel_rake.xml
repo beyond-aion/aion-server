@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../global_rules.xsd">
 	<!-- Multiple Monster Drops -->
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="30">
+	<gd_rule rule_name="Named Armor (Rare)" chance="60">
 		<gd_maps>
 			<gd_map map_id="300100000" /><!-- Steel_Rake -->
 		</gd_maps>
@@ -14,7 +14,7 @@
 			<gd_item id="114300932" /><!-- Shulack Sailor's Boots -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Shield (Legend)" base_chance="15">
+	<gd_rule rule_name="Named Shield (Legend)" chance="35">
 		<gd_maps>
 			<gd_map map_id="300100000" /><!-- Steel_Rake -->
 		</gd_maps>
@@ -31,7 +31,7 @@
 			<gd_item id="115000871" /><!-- Grengamam's Shield -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Legend)" base_chance="15">
+	<gd_rule rule_name="Named Accessory (Legend)" chance="35">
 		<gd_maps>
 			<gd_map map_id="300100000" /><!-- Steel_Rake -->
 		</gd_maps>
@@ -48,7 +48,7 @@
 			<gd_item id="122001044" /><!-- Grengamam's Sapphire Ring -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Unique)" base_chance="5">
+	<gd_rule rule_name="Named Accessory (Unique)" chance="20">
 		<gd_maps>
 			<gd_map map_id="300100000" /><!-- Steel_Rake -->
 		</gd_maps>
@@ -66,7 +66,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Single Monster Drops -->
-	<gd_rule rule_name="Named Weapon Box (Unique)" base_chance="20" member_limit="6">
+	<gd_rule rule_name="Named Weapon Box (Unique)" chance="30" member_limit="6">
 		<gd_maps>
 			<gd_map map_id="300100000" /><!-- Steel_Rake -->
 		</gd_maps>
@@ -77,7 +77,7 @@
 			<gd_item id="188051416" /><!-- Grogget's Fabled Weapon Chest -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Rare)" base_chance="10">
+	<gd_rule rule_name="Named Weapon (Rare)" chance="20">
 		<gd_maps>
 			<gd_map map_id="300100000" /><!-- Steel_Rake -->
 		</gd_maps>
@@ -88,7 +88,7 @@
 			<gd_item id="100200740" /><!-- Lahulahu's Pincers -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Shield (Legend)" base_chance="30">
+	<gd_rule rule_name="Named Shield (Legend)" chance="40">
 		<gd_maps>
 			<gd_map map_id="300100000" /><!-- Steel_Rake -->
 		</gd_maps>
@@ -99,7 +99,7 @@
 			<gd_item id="115000500" /><!-- Oblate Shield -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor Box (Unique)" base_chance="25" member_limit="6">
+	<gd_rule rule_name="Named Armor Box (Unique)" chance="35" member_limit="6">
 		<gd_maps>
 			<gd_map map_id="300100000" /><!-- Steel_Rake -->
 		</gd_maps>
@@ -110,7 +110,7 @@
 			<gd_item id="188051413" /><!-- Koakoa's Fabled Pants Chest -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="20">
+	<gd_rule rule_name="Named Armor (Rare)" chance="60">
 		<gd_maps>
 			<gd_map map_id="300100000" /><!-- Steel_Rake -->
 		</gd_maps>
@@ -122,7 +122,7 @@
 			<gd_item id="114600834" /><!-- Shulack Sailor's Sabatons -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="50">
+	<gd_rule rule_name="Named Armor (Rare)" chance="60">
 		<gd_maps>
 			<gd_map map_id="300100000" /><!-- Steel_Rake -->
 		</gd_maps>
@@ -134,7 +134,7 @@
 			<gd_item id="112300823" /><!-- Shulack Sailor's Shoulderguards -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="50">
+	<gd_rule rule_name="Named Armor (Rare)" chance="60">
 		<gd_maps>
 			<gd_map map_id="300100000" /><!-- Steel_Rake -->
 		</gd_maps>
@@ -146,7 +146,7 @@
 			<gd_item id="111600851" /><!-- Shulack Sailor's Gauntlets -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="35">
+	<gd_rule rule_name="Named Armor (Rare)" chance="60">
 		<gd_maps>
 			<gd_map map_id="300100000" /><!-- Steel_Rake -->
 		</gd_maps>
@@ -160,7 +160,7 @@
 			<gd_item id="110600874" /><!-- Shulack Sailor's Breastplate -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Legend)" base_chance="15">
+	<gd_rule rule_name="Named Armor (Legend)" chance="35">
 		<gd_maps>
 			<gd_map map_id="300100000" /><!-- Steel_Rake -->
 		</gd_maps>
@@ -172,7 +172,7 @@
 			<gd_item id="114600833" /><!-- Shulack Pirate's Sabatons -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Legend)" base_chance="10">
+	<gd_rule rule_name="Named Armor (Legend)" chance="35">
 		<gd_maps>
 			<gd_map map_id="300100000" /><!-- Steel_Rake -->
 		</gd_maps>
@@ -186,7 +186,7 @@
 			<gd_item id="113600838" /><!-- Shulack Pirate's Greaves -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Unique)" base_chance="15">
+	<gd_rule rule_name="Named Armor (Unique)" chance="30">
 		<gd_maps>
 			<gd_map map_id="300100000" /><!-- Steel_Rake -->
 		</gd_maps>
@@ -202,7 +202,7 @@
 			<gd_item id="110600871" /><!-- Steel Beard Pirate's Breastplate -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Rare)" base_chance="50">
+	<gd_rule rule_name="Named Accessory (Rare)" chance="60">
 		<gd_maps>
 			<gd_map map_id="300100000" /><!-- Steel_Rake -->
 		</gd_maps>
@@ -213,7 +213,7 @@
 			<gd_item id="122001045" /><!-- Genie's Ring -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Rare)" base_chance="50">
+	<gd_rule rule_name="Named Accessory (Rare)" chance="60">
 		<gd_maps>
 			<gd_map map_id="300100000" /><!-- Steel_Rake -->
 		</gd_maps>
@@ -225,7 +225,7 @@
 			<gd_item id="121000827" /><!-- Koakoa's Sapphire Necklace -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Rare)" base_chance="50">
+	<gd_rule rule_name="Named Accessory (Rare)" chance="60">
 		<gd_maps>
 			<gd_map map_id="300100000" /><!-- Steel_Rake -->
 		</gd_maps>
@@ -237,7 +237,7 @@
 			<gd_item id="120000909" /><!-- Menekiki's Sapphire Earrings -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Legend)" base_chance="30">
+	<gd_rule rule_name="Named Accessory (Legend)" chance="35">
 		<gd_maps>
 			<gd_map map_id="300100000" /><!-- Steel_Rake -->
 		</gd_maps>
@@ -248,7 +248,7 @@
 			<gd_item id="123000938" /><!-- Genie's Belt -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Headband (Rare)" base_chance="35">
+	<gd_rule rule_name="Named Headband (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="300100000" /><!-- Steel_Rake -->
 		</gd_maps>
@@ -261,7 +261,7 @@
 			<gd_item id="125002017" /><!-- Grogget's Helm -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Headband (Legend)" base_chance="30">
+	<gd_rule rule_name="Named Headband (Legend)" chance="35">
 		<gd_maps>
 			<gd_map map_id="300100000" /><!-- Steel_Rake -->
 		</gd_maps>
@@ -275,7 +275,7 @@
 			<gd_item id="125001982" /><!-- Menekiki's Helm -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Souvenir" base_chance="100" no_reduction="true">
+	<gd_rule rule_name="Named Souvenir" chance="50">
 		<gd_maps>
 			<gd_map map_id="300100000" /><!-- Steel_Rake -->
 		</gd_maps>
@@ -286,7 +286,7 @@
 			<gd_item id="170170030" /><!-- [Souvenir] Steel Rake Statue -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Key" base_chance="100" no_reduction="true">
+	<gd_rule rule_name="Named Key" chance="100">
 		<gd_maps>
 			<gd_map map_id="300100000" /><!-- Steel_Rake -->
 		</gd_maps>
@@ -297,7 +297,7 @@
 			<gd_item id="185000049" /><!-- Engine Room Key -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Key" base_chance="100" no_reduction="true">
+	<gd_rule rule_name="Named Key" chance="100">
 		<gd_maps>
 			<gd_map map_id="300100000" /><!-- Steel_Rake -->
 		</gd_maps>
@@ -309,7 +309,7 @@
 			<gd_item id="185000079" /><!-- The Brig Key -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Key" base_chance="100" no_reduction="true">
+	<gd_rule rule_name="Named Key" chance="100">
 		<gd_maps>
 			<gd_map map_id="300100000" /><!-- Steel_Rake -->
 		</gd_maps>
@@ -321,7 +321,7 @@
 			<gd_item id="185000077" /><!-- Grogget's Safe Key -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Key" base_chance="100" no_reduction="true">
+	<gd_rule rule_name="Named Key" chance="100">
 		<gd_maps>
 			<gd_map map_id="300100000" /><!-- Steel_Rake -->
 		</gd_maps>
@@ -335,7 +335,7 @@
 			<gd_item id="185000078" /><!-- Right Eye Key -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Key" base_chance="100" no_reduction="true">
+	<gd_rule rule_name="Named Key" chance="100">
 		<gd_maps>
 			<gd_map map_id="300100000" /><!-- Steel_Rake -->
 		</gd_maps>
@@ -347,7 +347,7 @@
 			<gd_item id="185000080" /><!-- Generator Room Key -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Key" base_chance="100" no_reduction="true">
+	<gd_rule rule_name="Named Key" chance="100">
 		<gd_maps>
 			<gd_map map_id="300100000" /><!-- Steel_Rake -->
 		</gd_maps>
@@ -358,7 +358,7 @@
 			<gd_item id="185000052" /><!-- Largimark's Flint -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Key" base_chance="100" no_reduction="true">
+	<gd_rule rule_name="Named Key" chance="100">
 		<gd_maps>
 			<gd_map map_id="300100000" /><!-- Steel_Rake -->
 		</gd_maps>
@@ -369,7 +369,7 @@
 			<gd_item id="185000051" /><!-- Anchor Point Key -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Key" base_chance="100" no_reduction="true">
+	<gd_rule rule_name="Named Key" chance="100">
 		<gd_maps>
 			<gd_map map_id="300100000" /><!-- Steel_Rake -->
 		</gd_maps>
@@ -380,7 +380,7 @@
 			<gd_item id="185000048" /><!-- Menagerie Key -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Key" base_chance="100" no_reduction="true">
+	<gd_rule rule_name="Named Key" chance="100">
 		<gd_maps>
 			<gd_map map_id="300100000" /><!-- Steel_Rake -->
 		</gd_maps>
@@ -392,7 +392,7 @@
 			<gd_item id="185000081" /><!-- Large Gun Deck Key -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Key" base_chance="100" no_reduction="true">
+	<gd_rule rule_name="Named Key" chance="100">
 		<gd_maps>
 			<gd_map map_id="300100000" /><!-- Steel_Rake -->
 		</gd_maps>
@@ -403,7 +403,7 @@
 			<gd_item id="185000042" /><!-- Sailor Waiting Room Key -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Key" base_chance="100" no_reduction="true">
+	<gd_rule rule_name="Named Key" chance="100">
 		<gd_maps>
 			<gd_map map_id="300100000" /><!-- Steel_Rake -->
 		</gd_maps>
@@ -414,7 +414,7 @@
 			<gd_item id="185000074" /><!-- Gun Repair Deck Key -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Key" base_chance="100" no_reduction="true">
+	<gd_rule rule_name="Named Key" chance="100">
 		<gd_maps>
 			<gd_map map_id="300100000" /><!-- Steel_Rake -->
 		</gd_maps>

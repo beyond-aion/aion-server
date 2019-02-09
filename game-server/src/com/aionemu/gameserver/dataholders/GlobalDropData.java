@@ -2,7 +2,6 @@ package com.aionemu.gameserver.dataholders;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -11,9 +10,6 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import org.slf4j.LoggerFactory;
-
-import com.aionemu.gameserver.model.templates.globaldrops.GlobalDropItem;
 import com.aionemu.gameserver.model.templates.globaldrops.GlobalDropNpc;
 import com.aionemu.gameserver.model.templates.globaldrops.GlobalDropNpcName;
 import com.aionemu.gameserver.model.templates.globaldrops.GlobalDropNpcs;
@@ -31,18 +27,6 @@ public class GlobalDropData {
 
 	@XmlElement(name = "gd_rule")
 	private List<GlobalRule> globalDropRules;
-
-	public void validateItemIds() {
-		for (GlobalRule rule : globalDropRules) {
-			for (Iterator<GlobalDropItem> iter = rule.getDropItems().iterator(); iter.hasNext();) {
-				GlobalDropItem item = iter.next();
-				if (DataManager.ITEM_DATA.getItemTemplate(item.getId()) == null) {
-					LoggerFactory.getLogger(GlobalDropData.class).warn("Invalid item ID " + item.getId() + " for drop rule: " + rule.getRuleName());
-					iter.remove();
-				}
-			}
-		}
-	}
 
 	public void processRules(Collection<NpcTemplate> npcs) {
 		List<NpcTemplate> npcList = new ArrayList<>(npcs);

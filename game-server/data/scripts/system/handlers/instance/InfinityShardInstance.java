@@ -133,7 +133,10 @@ public class InfinityShardInstance extends GeneralInstanceHandler {
 	}
 
 	private void despawnInstance() {
-		instance.getNpcs().stream().filter(npc -> npc != null && npc.getNpcId() != 231073).forEach(npc -> npc.getController().delete());
+		instance.forEachNpc(npc -> {
+			if (npc.getNpcId() != 231073)
+				npc.getController().delete();
+		});
 	}
 
 	/*

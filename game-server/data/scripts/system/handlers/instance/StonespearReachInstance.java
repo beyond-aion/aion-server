@@ -788,7 +788,7 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 	}
 
 	private void despawnAll() {
-		instance.getNpcs().stream().filter(npc -> npc != null).forEach(npc -> npc.getController().delete());
+		instance.forEachNpc(npc -> npc.getController().delete());
 	}
 
 	private void cancelAllTasks() {

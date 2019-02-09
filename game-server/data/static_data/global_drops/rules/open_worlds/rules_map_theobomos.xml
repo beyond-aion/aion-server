@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../global_rules.xsd">
 	<!-- Zone Drops -->
-	<gd_rule rule_name="Erudite's Armor (Rare)" base_chance="1.5" restriction_race="ELYOS">
+	<gd_rule rule_name="Erudite's Armor (Rare)" chance="1.5" restriction_race="ELYOS">
 		<gd_maps>
 			<gd_map map_id="210060000" /><!-- Theobomos -->
 		</gd_maps>
@@ -33,7 +33,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Single Monster Drops -->
-	<gd_rule rule_name="Named Weapon (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Weapon (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="210060000" /><!-- Theobomos -->
 		</gd_maps>
@@ -49,7 +49,7 @@
 			<gd_item id="101900472" /><!-- Sinorel's Aethercannon -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Headgear (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Headgear (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="210060000" /><!-- Theobomos -->
 		</gd_maps>
@@ -63,7 +63,7 @@
 			<gd_item id="125001549" /><!-- Sinorel's Helm -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Weapon (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="210060000" /><!-- Theobomos -->
 		</gd_maps>
@@ -75,7 +75,7 @@
 			<gd_item id="100200661" /><!-- Shaula's Dagger -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Armor (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="210060000" /><!-- Theobomos -->
 		</gd_maps>
@@ -87,7 +87,7 @@
 			<gd_item id="114600784" /><!-- Shaula's Sabatons -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Weapon (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="210060000" /><!-- Theobomos -->
 		</gd_maps>
@@ -98,7 +98,7 @@
 			<gd_item id="100900536" /><!-- Amatas' Greatsword -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Armor (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="210060000" /><!-- Theobomos -->
 		</gd_maps>
@@ -110,7 +110,7 @@
 			<gd_item id="114500827" /><!-- Amatas' Brogans -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Weapon (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="210060000" /><!-- Theobomos -->
 		</gd_maps>
@@ -121,7 +121,7 @@
 			<gd_item id="101500552" /><!-- Clorint's Staff -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Armor (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="210060000" /><!-- Theobomos -->
 		</gd_maps>
@@ -133,7 +133,7 @@
 			<gd_item id="113600789" /><!-- Clorint's Greaves -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Legend)" base_chance="35">
+	<gd_rule rule_name="Named Accessory (Legend)" chance="35">
 		<gd_maps>
 			<gd_map map_id="210060000" /><!-- Theobomos -->
 		</gd_maps>
@@ -144,7 +144,7 @@
 			<gd_item id="121000795" /><!-- Clorint's Necklace -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Weapon (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="210060000" /><!-- Theobomos -->
 		</gd_maps>
@@ -156,7 +156,7 @@
 			<gd_item id="102000582" /><!-- Koar's Harp -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Armor (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="210060000" /><!-- Theobomos -->
 		</gd_maps>
@@ -168,7 +168,7 @@
 			<gd_item id="111500806" /><!-- Koar's Handguards -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Weapon (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="210060000" /><!-- Theobomos -->
 		</gd_maps>
@@ -180,7 +180,7 @@
 			<gd_item id="101700574" /><!-- Chooh's Longbow -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Armor (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="210060000" /><!-- Theobomos -->
 		</gd_maps>
@@ -192,7 +192,7 @@
 			<gd_item id="112600773" /><!-- Chooh's Shoulderplates -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Weapon (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="210060000" /><!-- Theobomos -->
 		</gd_maps>
@@ -206,7 +206,7 @@
 			<gd_item id="102100512" /><!-- Gudomka's Cipher-Blade -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Shield (Legend)" base_chance="35">
+	<gd_rule rule_name="Named Shield (Legend)" chance="35">
 		<gd_maps>
 			<gd_map map_id="210060000" /><!-- Theobomos -->
 		</gd_maps>
@@ -217,7 +217,7 @@
 			<gd_item id="115000815" /><!-- Gudomka's Shield -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Accessory (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="210060000" /><!-- Theobomos -->
 		</gd_maps>
@@ -229,7 +229,7 @@
 			<gd_item id="122000915" /><!-- Gudomka's Sapphire Ring -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Legend)" base_chance="35">
+	<gd_rule rule_name="Named Weapon (Legend)" chance="35">
 		<gd_maps>
 			<gd_map map_id="210060000" /><!-- Theobomos -->
 		</gd_maps>
@@ -240,7 +240,7 @@
 			<gd_item id="100100439" /><!-- Halbrin's Warhammer -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Legend)" base_chance="35">
+	<gd_rule rule_name="Named Weapon (Legend)" chance="35">
 		<gd_maps>
 			<gd_map map_id="210060000" /><!-- Theobomos -->
 		</gd_maps>
@@ -251,7 +251,7 @@
 			<gd_item id="100500555" /><!-- Panoptes' Jewel -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Armor (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="210060000" /><!-- Theobomos -->
 		</gd_maps>
@@ -263,7 +263,7 @@
 			<gd_item id="111600798" /><!-- Panoptes' Gauntlets -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Legend)" base_chance="35">
+	<gd_rule rule_name="Named Weapon (Legend)" chance="35">
 		<gd_maps>
 			<gd_map map_id="210060000" /><!-- Theobomos -->
 		</gd_maps>
@@ -279,7 +279,7 @@
 			<gd_item id="101900550" /><!-- Balor's Aethercannon -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Legend)" base_chance="35">
+	<gd_rule rule_name="Named Accessory (Legend)" chance="35">
 		<gd_maps>
 			<gd_map map_id="210060000" /><!-- Theobomos -->
 		</gd_maps>
@@ -291,7 +291,7 @@
 			<gd_item id="120000869" /><!-- Balor's Sapphire Earrings -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Belt (Legend)" base_chance="35">
+	<gd_rule rule_name="Named Belt (Legend)" chance="35">
 		<gd_maps>
 			<gd_map map_id="210060000" /><!-- Theobomos -->
 		</gd_maps>
@@ -303,7 +303,7 @@
 			<gd_item id="123000904" /><!-- Balor's Belt -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Armor (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="210060000" /><!-- Theobomos -->
 		</gd_maps>
@@ -317,7 +317,7 @@
 			<gd_item id="113600637" /><!-- Ramnodase's Greaves -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Accessory (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="210060000" /><!-- Theobomos -->
 		</gd_maps>
@@ -329,7 +329,7 @@
 			<gd_item id="120000729" /><!-- Ramnodase's Zircon Earrings -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Armor (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="210060000" /><!-- Theobomos -->
 		</gd_maps>
@@ -343,7 +343,7 @@
 			<gd_item id="110500840" /><!-- Sirotata's Hauberk -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="40">
+	<gd_rule rule_name="Named Armor (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="210060000" /><!-- Theobomos -->
 		</gd_maps>
@@ -357,7 +357,7 @@
 			<gd_item id="110600825" /><!-- Octaku's Breastplate -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Legend)" base_chance="35">
+	<gd_rule rule_name="Named Accessory (Legend)" chance="35">
 		<gd_maps>
 			<gd_map map_id="210060000" /><!-- Theobomos -->
 		</gd_maps>

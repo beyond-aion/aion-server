@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../global_rules.xsd">
-	<gd_rule rule_name="LV_7_WORLDRAID_BOX" min_count="1" base_chance="100" member_limit="6">
+	<gd_rule rule_name="LV_7_WORLDRAID_BOX" chance="100" member_limit="6">
 		<gd_npcs>
 			<gd_npc npc_id="234558" /><!-- Eiter III -->
 			<gd_npc npc_id="234559" /><!-- Tumon III -->
@@ -13,7 +13,7 @@
 			<gd_item id="188053125" /><!-- Level 7 Invader Reward Box (Level 45 or lower) -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="LV_6_WORLDRAID_BOX" min_count="1" base_chance="100" member_limit="6">
+	<gd_rule rule_name="LV_6_WORLDRAID_BOX" chance="100" member_limit="6">
 		<gd_npcs>
 			<gd_npc npc_id="234564" /><!-- Tarmat II -->
 			<gd_npc npc_id="234565" /><!-- Tarmat III -->
@@ -26,7 +26,7 @@
 			<gd_item id="188053126" /><!-- Level 6 Invader Reward Box (Level 45 or lower) -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="LV_5_WORLDRAID_BOX_T3" min_count="1" base_chance="100" member_limit="6">
+	<gd_rule rule_name="LV_5_WORLDRAID_BOX_T3" chance="100" member_limit="6">
 		<gd_npcs>
 			<gd_npc npc_id="234571" /><!-- Eiter III -->
 			<gd_npc npc_id="234572" /><!-- Benoid III -->
@@ -41,7 +41,7 @@
 			<gd_item id="188053127" /><!-- Level 5 Invader Reward Box (Level 60 or lower) -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="LV_5_WORLDRAID_BOX_T2" min_count="1" base_chance="100" member_limit="12">
+	<gd_rule rule_name="LV_5_WORLDRAID_BOX_T2" chance="100" member_limit="12">
 		<gd_npcs>
 			<gd_npc npc_id="234570" /><!-- Magnorion II -->
 			<gd_npc npc_id="234573" /><!-- Magnorion II -->
@@ -52,7 +52,7 @@
 			<gd_item id="188053127" /><!-- Level 5 Invader Reward Box (Level 60 or lower) -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="LV_4_WORLDRAID_BOX_T3" min_count="1" base_chance="100" member_limit="6">
+	<gd_rule rule_name="LV_4_WORLDRAID_BOX_T3" chance="100" member_limit="6">
 		<gd_npcs>
 			<gd_npc npc_id="234582" /><!-- Elite Benoid III -->
 			<gd_npc npc_id="234583" /><!-- Elite Eiter III -->
@@ -62,7 +62,7 @@
 			<gd_item id="188053128" /><!-- Level 4 Invader Reward Box (Level 60 or lower) -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="LV_4_WORLDRAID_BOX_T2" min_count="1" base_chance="100" member_limit="12">
+	<gd_rule rule_name="LV_4_WORLDRAID_BOX_T2" chance="100" member_limit="12">
 		<gd_npcs>
 			<gd_npc npc_id="234582" /><!-- Elite Benoid III -->
 			<gd_npc npc_id="234583" /><!-- Elite Eiter III -->
@@ -75,7 +75,7 @@
 			<gd_item id="188053128" /><!-- Level 4 Invader Reward Box (Level 60 or lower) -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="LV_3_WORLDRAID_BOX" min_count="1" base_chance="100" member_limit="12">
+	<gd_rule rule_name="LV_3_WORLDRAID_BOX" chance="100" member_limit="12">
 		<gd_npcs>
 			<gd_npc npc_id="234589" /><!-- Prime Raedon III -->
 			<gd_npc npc_id="234590" /><!-- Prime Raedon III -->
@@ -86,7 +86,7 @@
 			<gd_item id="188053129" /><!-- Level 3 Invader Reward Box -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="LV_2_WORLDRAID_BOX" min_count="1" base_chance="100" member_limit="18">
+	<gd_rule rule_name="LV_2_WORLDRAID_BOX" chance="100" member_limit="18">
 		<gd_npcs>
 			<gd_npc npc_id="234588" /><!-- Prime Benoid II -->
 			<gd_npc npc_id="234595" /><!-- Prime Benoid II -->
@@ -108,7 +108,7 @@
 			<gd_item id="188053130" /><!-- Level 2 Invader Reward Box -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="LV_1_WORLDRAID_BOX" min_count="1" base_chance="100" member_limit="48">
+	<gd_rule rule_name="LV_1_WORLDRAID_BOX" chance="100" member_limit="48">
 		<gd_npcs>
 			<gd_npc npc_id="234591" /><!-- Prime Tumon I -->
 			<gd_npc npc_id="234592" /><!-- Prime Tumon I -->
@@ -130,7 +130,7 @@
 			<gd_item id="188053131" /><!-- Level 1 Invader Reward Box -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="TUNING_SCROLL_WORLD_RAID" min_count="1" base_chance="15" fixed_chance="true">
+	<gd_rule rule_name="TUNING_SCROLL_WORLD_RAID" chance="15">
 		<gd_npcs>
 			<gd_npc npc_id="234589" /><!-- Prime Raedon III -->
 			<gd_npc npc_id="234590" /><!-- Prime Raedon III -->

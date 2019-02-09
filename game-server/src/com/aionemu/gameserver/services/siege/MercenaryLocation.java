@@ -68,8 +68,7 @@ public class MercenaryLocation {
 		if (spawnedMercs.isEmpty())
 			return;
 		for (VisibleObject merc : spawnedMercs) {
-			if (merc.isSpawned() && !((Npc) merc).isDead())
-				merc.getController().delete();
+			merc.getController().deleteIfAliveOrCancelRespawn();
 		}
 		spawnedMercs.clear();
 	}

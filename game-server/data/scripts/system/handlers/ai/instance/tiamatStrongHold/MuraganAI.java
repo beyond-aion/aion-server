@@ -96,11 +96,9 @@ public class MuraganAI extends GeneralNpcAI {
 
 	private void killGuardCaptain() {
 		WorldMapInstance instance = getOwner().getPosition().getWorldMapInstance();
-		for (Npc npc : instance.getNpcs()) {
-			if (npc.getNpcId() == 219392) {// 4.0
-				spawn(283145, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading());// 4.0
-				npc.getController().delete();
-			}
+		for (Npc npc : instance.getNpcs(219392)) {
+			spawn(283145, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading());// 4.0
+			npc.getController().delete();
 		}
 	}
 

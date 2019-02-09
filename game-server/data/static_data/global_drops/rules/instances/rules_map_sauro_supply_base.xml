@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../global_rules.xsd">
 	<!-- Multiple Monster Drops -->
-	<gd_rule rule_name="Named Manastone Bundle" base_chance="100">
+	<gd_rule rule_name="Named Manastone Bundle" chance="100">
 		<gd_maps>
 			<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
 		</gd_maps>
@@ -17,7 +17,7 @@
 			<gd_item id="188052577" /><!-- Veteran's Composite Manastone Bundle -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Mark" base_chance="100" member_limit="6" min_count="60" max_count="90">
+	<gd_rule rule_name="Named Mark" chance="100" member_limit="6">
 		<gd_maps>
 			<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
 		</gd_maps>
@@ -26,10 +26,10 @@
 			<gd_npc npc_id="230858" /><!-- Brigade General Sheba -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="186000238" /><!-- Conqueror's Mark -->
+			<gd_item id="186000238" min_count="60" max_count="90" /><!-- Conqueror's Mark -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Coin" base_chance="100" min_count="5" max_count="10">
+	<gd_rule rule_name="Named Coin" chance="100">
 		<gd_maps>
 			<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
 		</gd_maps>
@@ -41,10 +41,10 @@
 			<gd_npc npc_id="233316" /><!-- Commander Ranodim -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="186000237" /><!-- Ancient Coin -->
+			<gd_item id="186000237" min_count="5" max_count="10" /><!-- Ancient Coin -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Coin" base_chance="100" min_count="10" max_count="15">
+	<gd_rule rule_name="Named Coin" chance="100">
 		<gd_maps>
 			<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
 		</gd_maps>
@@ -53,10 +53,10 @@
 			<gd_npc npc_id="230858" /><!-- Brigade General Sheba -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="186000237" /><!-- Ancient Coin -->
+			<gd_item id="186000237" min_count="10" max_count="15" /><!-- Ancient Coin -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon Shard" base_chance="7.5">
+	<gd_rule rule_name="Named Weapon Shard" chance="15">
 		<gd_maps>
 			<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
 		</gd_maps>
@@ -68,7 +68,7 @@
 			<gd_item id="169405253" /><!-- Weapon Shard -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Material" base_chance="100">
+	<gd_rule rule_name="Named Material" chance="100">
 		<gd_maps>
 			<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
 		</gd_maps>
@@ -80,7 +80,7 @@
 			<gd_item id="188052575" /><!-- Veteran's Crafting Bundle -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Unique)" base_chance="50" fixed_chance="true">
+	<gd_rule rule_name="Named Weapon (Unique)" chance="50">
 		<gd_maps>
 			<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
 		</gd_maps>
@@ -112,7 +112,7 @@
 			<gd_item id="115001622" /><!-- Sauro Guard's Shield -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Unique)" base_chance="100" fixed_chance="true">
+	<gd_rule rule_name="Named Armor (Unique)" chance="100">
 		<gd_maps>
 			<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
 		</gd_maps>
@@ -150,7 +150,7 @@
 			<gd_item id="114601436" /><!-- Sauro Guard's Sabatons -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Unique)" base_chance="60" fixed_chance="true">
+	<gd_rule rule_name="Named Accessory (Unique)" chance="60">
 		<gd_maps>
 			<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
 		</gd_maps>
@@ -180,7 +180,7 @@
 			<gd_item id="125003698" chance="5" /><!-- Sauro Guard's Helm -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Epic)" base_chance="25" fixed_chance="true">
+	<gd_rule rule_name="Named Weapon (Epic)" chance="25">
 		<gd_maps>
 			<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
 		</gd_maps>
@@ -215,7 +215,7 @@
 			<gd_item id="115001621" /><!-- Sauren Scale Shield -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Epic)" base_chance="50" fixed_chance="true">
+	<gd_rule rule_name="Named Armor (Epic)" chance="50">
 		<gd_maps>
 			<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
 		</gd_maps>
@@ -275,7 +275,7 @@
 			<gd_item id="114601435" /><!-- Sauren Sabatons -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Epic)" base_chance="30" fixed_chance="true">
+	<gd_rule rule_name="Named Accessory (Epic)" chance="30">
 		<gd_maps>
 			<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
 		</gd_maps>
@@ -311,7 +311,7 @@
 			<gd_item id="125003697" chance="2.5" /><!-- Sauren Helm -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Mythic)" base_chance="12.5" fixed_chance="true">
+	<gd_rule rule_name="Named Weapon (Mythic)" chance="12.5">
 		<gd_maps>
 			<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
 		</gd_maps>
@@ -336,7 +336,7 @@
 			<gd_item id="115001624" /><!-- Sauro Commander's Scale Shield -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Mythic)" base_chance="16.5" fixed_chance="true">
+	<gd_rule rule_name="Named Weapon (Mythic)" chance="16.5">
 		<gd_maps>
 			<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
 		</gd_maps>
@@ -361,7 +361,7 @@
 			<gd_item id="115001624" /><!-- Sauro Commander's Scale Shield -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Mythic)" base_chance="25" fixed_chance="true">
+	<gd_rule rule_name="Named Armor (Mythic)" chance="25">
 		<gd_maps>
 			<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
 		</gd_maps>
@@ -412,7 +412,7 @@
 			<gd_item id="114601433" /><!-- Sauro Commander's Sabatons -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Mythic)" base_chance="18.6" fixed_chance="true">
+	<gd_rule rule_name="Named Accessory (Mythic)" chance="18.6">
 		<gd_maps>
 			<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
 		</gd_maps>
@@ -445,7 +445,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Single Monster Drops -->
-	<gd_rule rule_name="Named Key" base_chance="100" no_reduction="true">
+	<gd_rule rule_name="Named Key" chance="100">
 		<gd_maps>
 			<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
 		</gd_maps>
@@ -456,7 +456,7 @@
 			<gd_item id="185000175" /><!-- The 1st Lounge Key -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Key" base_chance="100" no_reduction="true">
+	<gd_rule rule_name="Named Key" chance="100">
 		<gd_maps>
 			<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
 		</gd_maps>
@@ -467,7 +467,7 @@
 			<gd_item id="185000176" /><!-- Red Storeroom Key -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Key" base_chance="100" no_reduction="true">
+	<gd_rule rule_name="Named Key" chance="100">
 		<gd_maps>
 			<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
 		</gd_maps>
@@ -478,7 +478,7 @@
 			<gd_item id="185000177" /><!-- Blue Storeroom Key -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Key" base_chance="100" no_reduction="true">
+	<gd_rule rule_name="Named Key" chance="100">
 		<gd_maps>
 			<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
 		</gd_maps>
@@ -489,7 +489,7 @@
 			<gd_item id="185000178" /><!-- Green Storeroom Key -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Key" base_chance="100" no_reduction="true">
+	<gd_rule rule_name="Named Key" chance="100">
 		<gd_maps>
 			<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
 		</gd_maps>
@@ -500,7 +500,7 @@
 			<gd_item id="185000179" /><!-- Danuar Omphanium Key -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Key" base_chance="100" no_reduction="true">
+	<gd_rule rule_name="Named Key" chance="100">
 		<gd_maps>
 			<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
 		</gd_maps>
@@ -511,7 +511,7 @@
 			<gd_item id="185000180" /><!-- The 2nd Lounge Key -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Legend)" base_chance="15">
+	<gd_rule rule_name="Named Weapon (Legend)" chance="20">
 		<gd_maps>
 			<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
 		</gd_maps>
@@ -536,7 +536,7 @@
 			<gd_item id="102100843" /><!-- Danuar Cipher-Blade Skin -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Legend)" base_chance="15">
+	<gd_rule rule_name="Named Accessory (Legend)" chance="20">
 		<gd_maps>
 			<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
 		</gd_maps>

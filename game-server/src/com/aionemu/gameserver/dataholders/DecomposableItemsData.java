@@ -29,12 +29,17 @@ public class DecomposableItemsData {
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		decomposableItemsInfo.clear();
-		for (DecomposableItemInfo template : decomposableItemsTemplates)
-			if (template.isIsSelectable()) {
-				selectableDecomposables.put(template.getItemId(), template.getItemsCollections().get(0).getItems());
-			} else {
-				decomposableItemsInfo.put(template.getItemId(), template.getItemsCollections());
+		for (DecomposableItemInfo template : decomposableItemsTemplates) {
+			List<ExtractedItemsCollection> itemGroups = template.getItemsCollections();
+			if (itemGroups != null) {
+				if (template.isIsSelectable()) {
+					selectableDecomposables.put(template.getItemId(), itemGroups.get(0).getItems());
+				} else {
+					decomposableItemsInfo.put(template.getItemId(), itemGroups);
+				}
 			}
+		}
+		decomposableItemsTemplates = null;
 	}
 
 	public int size() {

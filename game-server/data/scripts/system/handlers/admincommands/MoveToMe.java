@@ -49,9 +49,14 @@ public class MoveToMe extends AdminCommand {
 				case "group":
 					teamToMove = playerToMove.getPlayerGroup();
 					break;
-				default:
+				case "a":
+				case "alli":
+				case "alliance":
 					teamToMove = playerToMove.getCurrentTeam();
 					break;
+				default:
+					sendInfo(admin);
+					return;
 			}
 			teamToMove.getOnlineMembers().stream().forEach(p -> teleportPlayer(p, admin));
 		} else {

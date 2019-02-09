@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../global_rules.xsd">
 	<!-- Single Monster Drops -->
-	<gd_rule rule_name="Named Weapon (Unique)" base_chance="10">
+	<gd_rule rule_name="Named Weapon (Unique)" chance="15">
 		<gd_maps>
 			<gd_map map_id="300150000" /><!-- Udas_Temple -->
 		</gd_maps>
@@ -14,7 +14,7 @@
 			<gd_item id="101800864" /><!-- Anurati's Pistol -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="50">
+	<gd_rule rule_name="Named Armor (Rare)" chance="60">
 		<gd_maps>
 			<gd_map map_id="300150000" /><!-- Udas_Temple -->
 		</gd_maps>
@@ -26,7 +26,7 @@
 			<gd_item id="112500901" /><!-- Deserter's Spaulders -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="50">
+	<gd_rule rule_name="Named Armor (Rare)" chance="60">
 		<gd_maps>
 			<gd_map map_id="300150000" /><!-- Udas_Temple -->
 		</gd_maps>
@@ -38,7 +38,7 @@
 			<gd_item id="112600916" /><!-- Deserter's Shoulderplates -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" base_chance="60">
+	<gd_rule rule_name="Named Armor (Rare)" chance="60">
 		<gd_maps>
 			<gd_map map_id="300150000" /><!-- Udas_Temple -->
 		</gd_maps>
@@ -52,7 +52,7 @@
 			<gd_item id="110600962" /><!-- Deserter's Breastplate -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Legend)" base_chance="30">
+	<gd_rule rule_name="Named Armor (Legend)" chance="30">
 		<gd_maps>
 			<gd_map map_id="300150000" /><!-- Udas_Temple -->
 		</gd_maps>
@@ -66,7 +66,7 @@
 			<gd_item id="111601081" /><!-- Gauntlets of the Destroyed Temple -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Legend)" base_chance="25">
+	<gd_rule rule_name="Named Armor (Legend)" chance="30">
 		<gd_maps>
 			<gd_map map_id="300150000" /><!-- Udas_Temple -->
 		</gd_maps>
@@ -80,7 +80,7 @@
 			<gd_item id="111501091" /><!-- Handguards of the Destroyed Temple -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Legend)" base_chance="25">
+	<gd_rule rule_name="Named Armor (Legend)" chance="30">
 		<gd_maps>
 			<gd_map map_id="300150000" /><!-- Udas_Temple -->
 		</gd_maps>
@@ -98,7 +98,7 @@
 			<gd_item id="113601065" /><!-- Greaves of the Destroyed Temple -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Unique)" base_chance="15">
+	<gd_rule rule_name="Named Armor (Unique)" chance="20">
 		<gd_maps>
 			<gd_map map_id="300150000" /><!-- Udas_Temple -->
 		</gd_maps>
@@ -112,7 +112,7 @@
 			<gd_item id="111600943" /><!-- Malika's Gauntlets -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Unique)" base_chance="15">
+	<gd_rule rule_name="Named Armor (Unique)" chance="20">
 		<gd_maps>
 			<gd_map map_id="300150000" /><!-- Udas_Temple -->
 		</gd_maps>
@@ -126,7 +126,7 @@
 			<gd_item id="112600918" /><!-- Malika's Shoulderplates -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Legend)" base_chance="40">
+	<gd_rule rule_name="Named Accessory (Legend)" chance="50">
 		<gd_maps>
 			<gd_map map_id="300150000" /><!-- Udas_Temple -->
 		</gd_maps>
@@ -137,7 +137,7 @@
 			<gd_item id="122001160" /><!-- Vallakhan's Ring -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Legend)" base_chance="60">
+	<gd_rule rule_name="Named Accessory (Legend)" chance="60">
 		<gd_maps>
 			<gd_map map_id="300150000" /><!-- Udas_Temple -->
 		</gd_maps>
@@ -148,7 +148,7 @@
 			<gd_item id="120001023" /><!-- Ruler Malika's Earrings -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Legend)" base_chance="60">
+	<gd_rule rule_name="Named Accessory (Legend)" chance="60">
 		<gd_maps>
 			<gd_map map_id="300150000" /><!-- Udas_Temple -->
 		</gd_maps>
@@ -159,7 +159,7 @@
 			<gd_item id="121000939" /><!-- Anurati's Necklace -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Unique)" base_chance="20">
+	<gd_rule rule_name="Named Accessory (Unique)" chance="20">
 		<gd_maps>
 			<gd_map map_id="300150000" /><!-- Udas_Temple -->
 		</gd_maps>
@@ -171,7 +171,7 @@
 			<gd_item id="123001101" /><!-- Malika's Sash -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Unique)" base_chance="15">
+	<gd_rule rule_name="Named Accessory (Unique)" chance="20">
 		<gd_maps>
 			<gd_map map_id="300150000" /><!-- Udas_Temple -->
 		</gd_maps>
@@ -183,7 +183,7 @@
 			<gd_item id="120001125" /><!-- Anurati's Corundum Earrings -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Epic)" base_chance="5">
+	<gd_rule rule_name="Named Accessory (Epic)" chance="10">
 		<gd_maps>
 			<gd_map map_id="300150000" /><!-- Udas_Temple -->
 		</gd_maps>
@@ -195,7 +195,7 @@
 			<gd_item id="122001173" /><!-- Anurati's Turquoise Ring -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Food (Rare)" base_chance="100">
+	<gd_rule rule_name="Named Food (Rare)" chance="100">
 		<gd_maps>
 			<gd_map map_id="300150000" /><!-- Udas_Temple -->
 		</gd_maps>
@@ -206,7 +206,7 @@
 			<gd_item id="160001277" /><!-- Wasteland Drakie Candy -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Key" base_chance="100" no_reduction="true">
+	<gd_rule rule_name="Named Key" chance="100">
 		<gd_maps>
 			<gd_map map_id="300150000" /><!-- Udas_Temple -->
 		</gd_maps>
@@ -217,7 +217,7 @@
 			<gd_item id="185000084" /><!-- Great Chapel Key -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Key" base_chance="100" no_reduction="true">
+	<gd_rule rule_name="Named Key" chance="100">
 		<gd_maps>
 			<gd_map map_id="300150000" /><!-- Udas_Temple -->
 		</gd_maps>
@@ -228,7 +228,7 @@
 			<gd_item id="185000083" /><!-- Silent Chapel Key -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Key" base_chance="100" no_reduction="true">
+	<gd_rule rule_name="Named Key" chance="100">
 		<gd_maps>
 			<gd_map map_id="300150000" /><!-- Udas_Temple -->
 		</gd_maps>

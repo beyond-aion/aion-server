@@ -283,8 +283,7 @@ public class IlluminaryObeliskInstance extends GeneralInstanceHandler {
 			cancelTasks();
 			PacketSendUtility.broadcastToMap(instance, SM_SYSTEM_MESSAGE.STR_MSG_IDF5_U3_OBJ_ALL_COMPLETE());
 
-			for (Npc npc : instance.getNpcs())
-				npc.getController().delete();
+			instance.forEachNpc(npc -> npc.getController().delete());
 
 			spawn(730886, 255.49f, 293.03f, 321.1850f, (byte) 30);
 			spawn(730886, 255.49f, 215.80f, 321.2134f, (byte) 30);

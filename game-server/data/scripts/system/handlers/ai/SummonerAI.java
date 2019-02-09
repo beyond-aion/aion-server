@@ -7,6 +7,7 @@ import java.util.List;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
+import com.aionemu.gameserver.ai.AIState;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -24,7 +25,7 @@ public class SummonerAI extends AggressiveNpcAI {
 
 	private final List<Integer> spawnedNpc = new ArrayList<>();
 	private List<Percentage> percentage = Collections.emptyList();
-	private int spawnedPercent = 0;
+	private volatile int spawnedPercent = 0;
 
 	public SummonerAI(Npc owner) {
 		super(owner);
@@ -39,15 +40,21 @@ public class SummonerAI extends AggressiveNpcAI {
 	@Override
 	protected void handleDespawned() {
 		super.handleDespawned();
-		removeHelpersSpawns();
+		removeAndResetHelperSpawns();
 		percentage.clear();
 	}
 
 	@Override
 	protected void handleBackHome() {
 		super.handleBackHome();
-		removeHelpersSpawns();
-		spawnedPercent = 0;
+		removeAndResetHelperSpawns();
+	}
+
+	@Override
+	protected void handleNotAtHome() {
+		super.handleNotAtHome();
+		if (getState() == AIState.WALKING)
+			removeAndResetHelperSpawns();
 	}
 
 	@Override
@@ -59,11 +66,11 @@ public class SummonerAI extends AggressiveNpcAI {
 	@Override
 	protected void handleDied() {
 		super.handleDied();
-		removeHelpersSpawns();
+		removeAndResetHelperSpawns();
 		percentage.clear();
 	}
 
-	private void removeHelpersSpawns() {
+	private void removeAndResetHelperSpawns() {
 		synchronized (spawnedNpc) {
 			for (Integer object : spawnedNpc) {
 				VisibleObject npc = World.getInstance().findVisibleObject(object);
@@ -73,6 +80,7 @@ public class SummonerAI extends AggressiveNpcAI {
 			}
 			spawnedNpc.clear();
 		}
+		spawnedPercent = 0;
 	}
 
 	protected void addHelpersSpawn(int objId) {
@@ -108,14 +116,14 @@ public class SummonerAI extends AggressiveNpcAI {
 
 	protected void spawnHelpers(SummonGroup summonGroup) {
 		if (!isDead() && checkBeforeSpawn()) {
-			int count = 0;
+			int count;
 			if (summonGroup.getCount() != 0)
 				count = summonGroup.getCount();
 			else
 				count = Rnd.get(summonGroup.getMinCount(), summonGroup.getMaxCount());
 
 			for (int i = 0; i < count; i++) {
-				VisibleObject npc = null;
+				VisibleObject npc;
 				if (summonGroup.getDistance() != 0)
 					npc = rndSpawnInRange(summonGroup.getNpcId(), summonGroup.getDistance());
 				else

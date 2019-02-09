@@ -45,10 +45,8 @@ public class _1114TheNymphsGown extends AbstractQuestHandler {
 			if (qs == null || qs.isStartable()) {
 				if (env.getDialogActionId() == QUEST_ACCEPT_1) {
 					QuestService.startQuest(env);
-					if (!giveQuestItem(env, 182200226, 1))
-						;
-					removeQuestItem(env, 182200214, 1); // Namus's Diary with double-click to start the
-																							// quest
+					giveQuestItem(env, 182200226, 1);
+					removeQuestItem(env, 182200214, 1); // Namus's Diary (which started the quest via double-click)
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(0, 0));
 					return true;
 				} else
@@ -85,16 +83,10 @@ public class _1114TheNymphsGown extends AbstractQuestHandler {
 						return sendQuestDialog(env, 2375);
 					return false;
 				case SELECT_QUEST_REWARD:
-					if (var == 2) {
-						qs.setQuestVarById(0, var + 2);
+					if (var == 2 || var == 3) {
+						qs.setQuestVarById(0, 4);
 						qs.setStatus(QuestStatus.REWARD);
-						updateQuestStatus(env);
-						removeQuestItem(env, 182200217, 1);
-						return sendQuestDialog(env, 6);
-					}
-					if (var == 3) {
-						qs.setQuestVarById(0, var + 1);
-						qs.setStatus(QuestStatus.REWARD);
+						qs.setRewardGroup(1);
 						updateQuestStatus(env);
 						removeQuestItem(env, 182200217, 1);
 						return sendQuestDialog(env, 6);
@@ -142,6 +134,7 @@ public class _1114TheNymphsGown extends AbstractQuestHandler {
 				case SETPRO3:
 					if (var == 3) {
 						qs.setStatus(QuestStatus.REWARD);
+						qs.setRewardGroup(0);
 						updateQuestStatus(env);
 						removeQuestItem(env, 182200217, 1);
 						return sendQuestDialog(env, 5);

@@ -2466,6 +2466,10 @@
 		<spawn npc_id="279018" respawn_time="295">
 			<spot x="786.182" y="2293.67" z="2849.03"/>
 		</spawn>
+		<!-- Kalix -->
+		<spawn npc_id="279062" respawn_time="295">
+			<spot x="2980.7" y="867.1" z="1546.1357" h="62"/>
+		</spawn>
 		<!-- Kanomene -->
 		<spawn npc_id="278577" respawn_time="295">
 			<spot x="2093.38" y="762.125" z="1568.38"/>

@@ -26,8 +26,10 @@ public class FortressInstanceDukeAI extends AggressiveNpcAI {
 	}
 
 	private void deleteSummons() {
-		getPosition().getWorldMapInstance().getNpcs().stream().filter(n -> n.getNpcId() >= 284978 && n.getNpcId() <= 284981)
-			.forEach(n -> n.getController().delete());
+		getPosition().getWorldMapInstance().forEachNpc(npc -> {
+			if (npc.getNpcId() >= 284978 && npc.getNpcId() <= 284981)
+				npc.getController().delete();
+		});
 	}
 
 	@Override

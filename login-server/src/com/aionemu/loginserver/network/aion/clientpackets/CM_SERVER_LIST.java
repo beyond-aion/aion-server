@@ -31,7 +31,10 @@ public class CM_SERVER_LIST extends AionClientPacket {
 	protected void readImpl() {
 		accountId = readD();
 		loginOk = readD();
-		readD();// unk
+		readC(); // always 7
+		readB(6); // static per session when coming from char selection, random otherwise
+		readD(); // always random
+		readD(); // 60222 when coming from char selection, random otherwise
 	}
 
 	@Override

@@ -3,7 +3,6 @@ package com.aionemu.gameserver.spawnengine;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.templates.walker.RouteStep;
 import com.aionemu.gameserver.model.templates.walker.WalkerTemplate;
-import com.aionemu.gameserver.services.RespawnService;
 
 /**
  * Stores for the spawn needed information, used for forming walker groups and spawning NPCs
@@ -41,8 +40,7 @@ public class ClusteredNpc {
 
 	public void despawn() {
 		npc.getMoveController().abortMove();
-		if (!npc.getController().delete())
-			RespawnService.cancelRespawn(npc);
+		npc.getController().deleteIfAliveOrCancelRespawn();
 	}
 
 	public void setNpc(Npc npc, RouteStep step) {

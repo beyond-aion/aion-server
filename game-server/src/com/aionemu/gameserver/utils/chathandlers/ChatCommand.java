@@ -186,14 +186,14 @@ public abstract class ChatCommand {
 	 * @param message
 	 */
 	private static void sendMessagePackets(Player player, String message) {
-		if (message.length() <= SM_MESSAGE.MESSAGE_SIZE_LIMIT) {
+		int lineLimit = 15; // length limit check alone is not safe if you send chat links (they can exceeded the display limit on client side)
+		String[] lines = message.split("\n", -1);
+		if (message.length() <= SM_MESSAGE.MESSAGE_SIZE_LIMIT && lines.length <= lineLimit) {
 			PacketSendUtility.sendMessage(player, message);
 		} else {
-			String[] lines = message.split("\n", -1);
 			StringBuilder sb = new StringBuilder(lines[0]);
 			for (int i = 1; i < lines.length; i++) {
-				// flush every 15 lines since size limit check is not safe if you send chat links (they can exceeded the display limit on client side)
-				if (i % 15 == 0 || sb.length() + 1 + lines[i].length() > SM_MESSAGE.MESSAGE_SIZE_LIMIT) { // current length + newLine char + next line length
+				if (i % lineLimit == 0 || sb.length() + 1 + lines[i].length() > SM_MESSAGE.MESSAGE_SIZE_LIMIT) { // current length + newLine char + next line length
 					PacketSendUtility.sendMessage(player, sb.toString());
 					sb.setLength(0);
 				} else {

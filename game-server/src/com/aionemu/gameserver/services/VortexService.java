@@ -132,8 +132,7 @@ public class VortexService {
 
 		// Despawn all NPC
 		for (VisibleObject npc : loc.getSpawned()) {
-			if (!npc.getController().delete())
-				RespawnService.cancelRespawn(npc);
+			npc.getController().deleteIfAliveOrCancelRespawn();
 		}
 
 		loc.getSpawned().clear();

@@ -60,9 +60,9 @@ public abstract class PlayerLeavedEvent<TM extends TeamMember<Player>, T extends
 			PacketSendUtility.sendPacket(leavedPlayer, new SM_LEAVE_GROUP_MEMBER());
 			if (team.equals(leavedPlayer.getPosition().getWorldMapInstance().getRegisteredTeam())) {
 				PacketSendUtility.sendPacket(leavedPlayer, SM_SYSTEM_MESSAGE.STR_MSG_LEAVE_INSTANCE_NOT_PARTY());
-				leavedPlayer.getController().addTask(TaskId.TELEPORT, ThreadPoolManager.getInstance().schedule(() -> {
+				leavedPlayer.getController().addTask(TaskId.INSTANCE_KICK, ThreadPoolManager.getInstance().schedule(() -> {
 					if (leavedPlayer.getCurrentTeamId() != team.getObjectId()) {
-						if (leavedPlayer.getPosition().getWorldMapInstance().getRegisteredTeam() != null)
+						if (team.equals(leavedPlayer.getPosition().getWorldMapInstance().getRegisteredTeam()))
 							InstanceService.moveToExitPoint(leavedPlayer);
 					}
 				}, 30000));

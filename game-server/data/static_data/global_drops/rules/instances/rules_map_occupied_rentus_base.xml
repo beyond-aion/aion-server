@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../global_rules.xsd">
+<global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../global_rules.xsd">
 	<!-- Vasharti -->
-	<gd_rule rule_name="Conqueror's Mark" base_chance="100" member_limit="6" min_count="60" max_count="90">
+	<gd_rule rule_name="Conqueror's Mark" chance="100" member_limit="6">
 		<gd_maps>
 			<gd_map map_id="300620000" /><!-- Occupied_Rentus_Base -->
 		</gd_maps>
@@ -9,10 +9,10 @@
 			<gd_npc npc_id="236300" /><!-- Brigade General Vasharti -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="186000238" /><!-- Conqueror's Mark -->
+			<gd_item id="186000238" min_count="60" max_count="90" /><!-- Conqueror's Mark -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Epic)" base_chance="35">
+	<gd_rule rule_name="Named Armor (Epic)" chance="50">
 		<gd_maps>
 			<gd_map map_id="300620000" /><!-- Occupied_Rentus_Base -->
 		</gd_maps>
@@ -28,7 +28,7 @@
 			<gd_item id="110601664" /><!-- Vasharti Legionnaire's Breastplate -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Epic)" base_chance="35">
+	<gd_rule rule_name="Named Armor (Epic)" chance="50">
 		<gd_maps>
 			<gd_map map_id="300620000" /><!-- Occupied_Rentus_Base -->
 		</gd_maps>
@@ -44,7 +44,7 @@
 			<gd_item id="111601627" /><!-- Vasharti Legionnaire's Gauntlets -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Epic)" base_chance="35">
+	<gd_rule rule_name="Named Armor (Epic)" chance="50">
 		<gd_maps>
 			<gd_map map_id="300620000" /><!-- Occupied_Rentus_Base -->
 		</gd_maps>
@@ -60,7 +60,7 @@
 			<gd_item id="112601609" /><!-- Vasharti Legionnaire's Shoulderplates -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Epic)" base_chance="35">
+	<gd_rule rule_name="Named Armor (Epic)" chance="70">
 		<gd_maps>
 			<gd_map map_id="300620000" /><!-- Occupied_Rentus_Base -->
 		</gd_maps>
@@ -77,7 +77,7 @@
 			<gd_item id="114601617" /><!-- Vasharti Legionnaire's Sabatons -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Shield (Epic)" base_chance="25">
+	<gd_rule rule_name="Named Shield (Epic)" chance="50">
 		<gd_maps>
 			<gd_map map_id="300620000" /><!-- Occupied_Rentus_Base -->
 		</gd_maps>
@@ -90,7 +90,7 @@
 			<gd_item id="115001826" /><!-- Vasharti Legionnaire's Scale Shield -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Equipment Box" base_chance="100" member_limit="6">
+	<gd_rule rule_name="Named Equipment Box" chance="100" member_limit="6">
 		<gd_maps>
 			<gd_map map_id="300620000" /><!-- Occupied_Rentus_Base -->
 		</gd_maps>
@@ -101,7 +101,7 @@
 			<gd_item id="188053702" /><!-- Vasharti's Equipment Box -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Supply Box" base_chance="100" member_limit="6">
+	<gd_rule rule_name="Named Supply Box" chance="100" member_limit="6">
 		<gd_maps>
 			<gd_map map_id="300620000" /><!-- Occupied_Rentus_Base -->
 		</gd_maps>
@@ -112,7 +112,7 @@
 			<gd_item id="188053706" /><!-- Rentus Base Supplies -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Stigma Bundle" base_chance="40">
+	<gd_rule rule_name="Named Stigma Bundle" chance="85">
 		<gd_maps>
 			<gd_map map_id="300620000" /><!-- Occupied_Rentus_Base -->
 		</gd_maps>
@@ -123,7 +123,7 @@
 			<gd_item id="188053783" /><!-- Stigma Sack -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Wings" base_chance="2.5">
+	<gd_rule rule_name="Named Wings" chance="5.5">
 		<gd_maps>
 			<gd_map map_id="300620000" /><!-- Occupied_Rentus_Base -->
 		</gd_maps>
@@ -135,7 +135,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Common -->
-	<gd_rule rule_name="Named Blood Mark Bundle" base_chance="80" member_limit="6">
+	<gd_rule rule_name="Named Blood Mark Bundle" chance="90" member_limit="6">
 		<gd_maps>
 			<gd_map map_id="300620000" /><!-- Occupied_Rentus_Base -->
 		</gd_maps>
@@ -152,7 +152,7 @@
 			<gd_item id="188053713" /><!-- Blood Mark Bundle -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Key" base_chance="100">
+	<gd_rule rule_name="Named Key" chance="100">
 		<gd_maps>
 			<gd_map map_id="300620000" /><!-- Occupied_Rentus_Base -->
 		</gd_maps>

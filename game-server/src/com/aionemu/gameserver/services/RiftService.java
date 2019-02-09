@@ -8,12 +8,13 @@ import java.util.Map;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
+import org.slf4j.LoggerFactory;
+
 import com.aionemu.commons.services.CronService;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.configs.schedule.RiftSchedule;
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.rift.RiftLocation;
 import com.aionemu.gameserver.model.templates.rift.OpenRift;
@@ -191,12 +192,15 @@ public class RiftService {
 			int npcObjectId = entry.getKey();
 			SpawnTemplate npcSpawnTemplate = entry.getValue();
 			VisibleObject npc = World.getInstance().findVisibleObject(npcObjectId);
-			boolean tryCancelRespawn = true;
-			// non matching spawn template means the object ID belongs no longer to an npc originally spawned by this rift
-			if (npc != null && npc.getSpawn() == npcSpawnTemplate && !((Creature) npc).getLifeStats().isDead())
-				tryCancelRespawn = !npc.getController().delete();
-			if (tryCancelRespawn)
-				RespawnService.cancelRespawn(npcObjectId, npcSpawnTemplate);
+			if (npc != null) {
+				if (npc.getSpawn() == npcSpawnTemplate) {
+					npc.getController().deleteIfAliveOrCancelRespawn();
+					continue;
+				}
+				LoggerFactory.getLogger(getClass()).error("ObjectId " + npcObjectId + " of npc " + npcSpawnTemplate.getNpcId()
+					+ " got released too early (current owner: " + npc + ")! Should have been locked until RiftService.updateSpawned got called");
+			}
+			RespawnService.cancelRespawn(npcObjectId, npcSpawnTemplate);
 		}
 
 		// Clear spawned list

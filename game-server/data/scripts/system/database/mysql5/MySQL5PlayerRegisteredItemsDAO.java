@@ -193,7 +193,7 @@ public class MySQL5PlayerRegisteredItemsDAO extends PlayerRegisteredItemsDAO {
 			storeParts(con, partsToAdd, playerId, true);
 			registry.setPersistentState(PersistentState.UPDATED);
 		} catch (SQLException e) {
-			log.error("Can't open connection to save player inventory: " + playerId);
+			log.error("Can't save registered items for player: " + playerId, e);
 		} finally {
 			DatabaseFactory.close(con);
 		}

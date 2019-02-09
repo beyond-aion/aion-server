@@ -3,7 +3,6 @@ package instance.pvparenas;
 import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE.STR_REBIRTH_MASSAGE_ME;
 
 import java.util.Objects;
-import java.util.function.Consumer;
 
 import com.aionemu.gameserver.configs.main.RatesConfig;
 import com.aionemu.gameserver.controllers.attack.AggroInfo;
@@ -18,7 +17,6 @@ import com.aionemu.gameserver.model.instance.instancereward.HarmonyArenaReward;
 import com.aionemu.gameserver.model.instance.instancereward.InstanceReward;
 import com.aionemu.gameserver.model.instance.playerreward.HarmonyGroupReward;
 import com.aionemu.gameserver.model.instance.playerreward.PvPArenaPlayerReward;
-import com.aionemu.gameserver.network.aion.AionServerPacket;
 import com.aionemu.gameserver.network.aion.instanceinfo.HarmonyScoreInfo;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_INSTANCE_SCORE;
@@ -195,7 +193,7 @@ public class HarmonyArenaInstance extends GeneralInstanceHandler {
 							door.setOpen(true);
 						}
 					}
-					sendPacket(new SM_SYSTEM_MESSAGE(1401058));
+					sendMsg(new SM_SYSTEM_MESSAGE(1401058));
 					instanceReward.setInstanceProgressionType(InstanceProgressionType.START_PROGRESS);
 					instanceReward.sendPacket(10, null);
 					instanceReward.sendPacket(2, null);
@@ -218,7 +216,7 @@ public class HarmonyArenaInstance extends GeneralInstanceHandler {
 										if (!isInstanceDestroyed && !instanceReward.isRewarded()) {
 											instanceReward.setRound(3);
 											instanceReward.setRndZone();
-											sendPacket(new SM_SYSTEM_MESSAGE(1401203));
+											sendMsg(new SM_SYSTEM_MESSAGE(1401203));
 											instanceReward.sendPacket(10, null);
 											instanceReward.sendPacket(2, null);
 											changeZone();
@@ -255,7 +253,7 @@ public class HarmonyArenaInstance extends GeneralInstanceHandler {
 
 	private boolean canStart() {
 		if (instanceReward.getHarmonyGroupInside().size() < 2) {
-			sendPacket(new SM_SYSTEM_MESSAGE(1401303));
+			sendMsg(new SM_SYSTEM_MESSAGE(1401303));
 			instanceReward.setInstanceProgressionType(InstanceProgressionType.END_PROGRESS);
 			reward();
 			instanceReward.sendPacket(5, null);
@@ -276,17 +274,6 @@ public class HarmonyArenaInstance extends GeneralInstanceHandler {
 			}
 
 		}, 1000);
-	}
-
-	private void sendPacket(final AionServerPacket packet) {
-		instance.forEachPlayer(new Consumer<Player>() {
-
-			@Override
-			public void accept(Player player) {
-				PacketSendUtility.sendPacket(player, packet);
-			}
-
-		});
 	}
 
 	@Override
@@ -345,24 +332,16 @@ public class HarmonyArenaInstance extends GeneralInstanceHandler {
 				}
 			}
 		}
-		for (Npc npc : instance.getNpcs()) {
-			npc.getController().delete();
-		}
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				if (!isInstanceDestroyed) {
-					for (Player player : instance.getPlayersInside()) {
-						if (player.isDead()) {
-							PlayerReviveService.duelRevive(player);
-						}
-						onExitInstance(player);
-					}
-					AutoGroupService.getInstance().unRegisterInstance(instanceId);
+		instance.forEachNpc(npc -> npc.getController().delete());
+		ThreadPoolManager.getInstance().schedule(() -> {
+			if (!isInstanceDestroyed) {
+				for (Player player : instance.getPlayersInside()) {
+					if (player.isDead())
+						PlayerReviveService.duelRevive(player);
+					onExitInstance(player);
 				}
+				AutoGroupService.getInstance().unRegisterInstance(instanceId);
 			}
-
 		}, 10000);
 	}
 
