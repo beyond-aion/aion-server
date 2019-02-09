@@ -7,21 +7,18 @@ import com.aionemu.gameserver.model.templates.item.ItemTemplate;
  */
 public class BrokerMinMaxFilter extends BrokerFilter {
 
-	private int min;
-	private int max;
+	private final int min;
+	private final int max;
 
-	/**
-	 * @param min
-	 * @param max
-	 */
 	public BrokerMinMaxFilter(int min, int max) {
-		this.min = min * 100000;
-		this.max = max * 100000;
+		this.min = min;
+		this.max = max;
 	}
 
 	@Override
 	public boolean accept(ItemTemplate template) {
-		return template.getTemplateId() >= min && template.getTemplateId() < max;
+		int templateMask = template.getTemplateId() / 100000;
+		return templateMask >= min && templateMask <= max;
 	}
 
 }

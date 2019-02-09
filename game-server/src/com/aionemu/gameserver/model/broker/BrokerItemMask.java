@@ -72,12 +72,12 @@ public enum BrokerItemMask {
 	/**
 	 * Accessory Section + sub categories
 	 */
-	ACCESSORY(9030, new BrokerMinMaxFilter(1200, 1270), null, true),
+	ACCESSORY(9030, new BrokerContainsFilter(1200, 1210, 1220, 1230, 1250, 1871), null, true),
 	ACCESSORY_EARRINGS(1200, new BrokerContainsFilter(1200), BrokerItemMask.ACCESSORY, false),
 	ACCESSORY_NECKLACE(1210, new BrokerContainsFilter(1210), BrokerItemMask.ACCESSORY, false),
 	ACCESSORY_RING(1220, new BrokerContainsFilter(1220), BrokerItemMask.ACCESSORY, false),
 	ACCESSORY_BELT(1230, new BrokerContainsFilter(1230), BrokerItemMask.ACCESSORY, false),
-	ACCESSORY_HEADGEAR(7030, new BrokerMinMaxFilter(1250, 1270), BrokerItemMask.ACCESSORY, false),
+	ACCESSORY_HEADGEAR(7030, new BrokerContainsFilter(1250), BrokerItemMask.ACCESSORY, false),
 	ACCESSORY_PLUME(1871, new BrokerContainsFilter(1871), BrokerItemMask.ACCESSORY, false),
 	/**
 	 * Skill related Section + sub categories
