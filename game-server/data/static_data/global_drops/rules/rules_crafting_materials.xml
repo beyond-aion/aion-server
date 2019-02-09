@@ -1428,7 +1428,8 @@
 		</gd_npc_groups>
 		<gd_items>
 			<!-- Level 55 -->
-			<gd_item id="152015514" /><!-- Moonflower Leaf -->
+			<gd_item id="152015014" /><!-- Moonflower Leaf [Elyos] -->
+			<gd_item id="152015514" /><!-- Moonflower Leaf [Asmodians] -->
 		</gd_items>
 	</gd_rule>
 	<!-- Specter -->
