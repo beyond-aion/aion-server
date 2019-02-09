@@ -1419,17 +1419,28 @@
 			<gd_item id="152015010" /><!-- Moonflower Fruit -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Moonflower Leaf" chance="24" dynamic_chance="true" min_diff="-4" max_diff="5">
-		<gd_worlds>
-			<gd_world wd_type="BALAUREA" />
-		</gd_worlds>
+	<gd_rule rule_name="Moonflower Leaf (Elyos)" chance="24" dynamic_chance="true" min_diff="-4" max_diff="5">
+		<gd_maps>
+			<gd_map map_id="210050000" /><!-- Inggison -->
+		</gd_maps>
 		<gd_npc_groups>
 			<gd_npc_group group="FELLIAL" />
 		</gd_npc_groups>
 		<gd_items>
 			<!-- Level 55 -->
-			<gd_item id="152015014" /><!-- Moonflower Leaf [Elyos] -->
-			<gd_item id="152015514" /><!-- Moonflower Leaf [Asmodians] -->
+			<gd_item id="152015014" /><!-- Moonflower Leaf -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Moonflower Leaf (Asmodians)" chance="24" dynamic_chance="true" min_diff="-4" max_diff="5">
+		<gd_maps>
+			<gd_map map_id="220070000" /><!-- Gelkmaros -->
+		</gd_maps>
+		<gd_npc_groups>
+			<gd_npc_group group="FELLIAL" />
+		</gd_npc_groups>
+		<gd_items>
+			<!-- Level 55 -->
+			<gd_item id="152015514" /><!-- Moonflower Leaf -->
 		</gd_items>
 	</gd_rule>
 	<!-- Specter -->
