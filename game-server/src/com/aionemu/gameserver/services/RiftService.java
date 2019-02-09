@@ -8,8 +8,6 @@ import java.util.Map;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-import org.slf4j.LoggerFactory;
-
 import com.aionemu.commons.services.CronService;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.configs.main.CustomConfig;
@@ -192,15 +190,12 @@ public class RiftService {
 			int npcObjectId = entry.getKey();
 			SpawnTemplate npcSpawnTemplate = entry.getValue();
 			VisibleObject npc = World.getInstance().findVisibleObject(npcObjectId);
-			if (npc != null) {
-				if (npc.getSpawn() == npcSpawnTemplate) {
-					npc.getController().deleteIfAliveOrCancelRespawn();
-					continue;
-				}
-				LoggerFactory.getLogger(getClass()).error("ObjectId " + npcObjectId + " of npc " + npcSpawnTemplate.getNpcId()
-					+ " got released too early (current owner: " + npc + ")! Should have been locked until RiftService.updateSpawned got called");
-			}
-			RespawnService.cancelRespawn(npcObjectId, npcSpawnTemplate);
+			// npcObjectId may have been released and reassigned to a completely unrelated mob, if the original (now despawned) rift npc was a non
+			// respawning mob. spawned list doesn't clean up removed spawns but only updates respawning npcObjectIds, therefore the npcSpawnTemplate check 
+			if (npc != null && npc.getSpawn() == npcSpawnTemplate)
+				npc.getController().deleteIfAliveOrCancelRespawn();
+			else
+				RespawnService.cancelRespawn(npcObjectId, npcSpawnTemplate);
 		}
 
 		// Clear spawned list

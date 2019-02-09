@@ -2,8 +2,8 @@ package com.aionemu.gameserver.ai;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
+import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.locks.Lock;
@@ -52,11 +52,7 @@ public abstract class AbstractAI<T extends Creature> extends AbstractEventSource
 			Map<AIEventType, Method> listenableMethods = listenableMethodsByClass.get(getClass());
 			if (listenableMethods != null) {
 				// Clean null values after the method map was filled in
-				Iterator<Method> iter = listenableMethods.values().iterator();
-				while (iter.hasNext()) {
-					if (iter.next() == null)
-						iter.remove();
-				}
+				listenableMethods.values().removeIf(Objects::isNull);
 			}
 		}
 	}
@@ -149,7 +145,14 @@ public abstract class AbstractAI<T extends Creature> extends AbstractEventSource
 			if (isLogging()) {
 				AILogger.info(this, "Creature event " + event + ": " + creature.getObjectTemplate().getTemplateId());
 			}
-			handleCreatureEvent(event, creature);
+			try {
+				handleCreatureEvent(event, creature);
+			} catch (StackOverflowError e) {
+				StackOverflowError error = new StackOverflowError(
+					"Aborted never ending AI event loop for " + getOwner() + " with AIEventType." + event + " in " + getClass().getSimpleName());
+				error.setStackTrace(Arrays.copyOf(e.getStackTrace(), 42));
+				throw error;
+			}
 		}
 	}
 
@@ -296,14 +299,8 @@ public abstract class AbstractAI<T extends Creature> extends AbstractEventSource
 			AIListenable listenable = (AIListenable) annotation;
 			if (listenableMethodsByClass == null)
 				listenableMethodsByClass = new HashMap<>();
-			Map<AIEventType, Method> listenableMethods = listenableMethodsByClass.get(getClass());
-			if (listenableMethods == null) {
-				// won't be called again because is cached by the AnnotationManager
-				listenableMethods = new HashMap<>();
-				listenableMethodsByClass.put(getClass(), listenableMethods);
-			}
-			// The first method added is at the top of class inheritance hierarchy,
-			// so, if not enabled we add null value and others won't be added again
+			Map<AIEventType, Method> listenableMethods = listenableMethodsByClass.computeIfAbsent(getClass(), k -> new HashMap<>());
+			// The first method added is at the top of class inheritance hierarchy. so, if not enabled we add null value and others won't be added again
 			if (listenableMethods.containsKey(listenable.type()))
 				return false;
 			if (!listenable.enabled()) {
