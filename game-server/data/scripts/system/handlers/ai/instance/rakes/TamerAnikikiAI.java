@@ -58,19 +58,21 @@ public class TamerAnikikiAI extends GeneralNpcAI {
 
 	@Override
 	protected void handleMoveArrived() {
-		int point = getOwner().getMoveController().getCurrentStep().getStepIndex();
-		super.handleMoveArrived();
 		if (getNpcId() == 219040) {
-			if (point == 8) {
-				getOwner().setState(CreatureState.WALK_MODE, true);
-				PacketSendUtility.broadcastPacket(getOwner(), new SM_EMOTION(getOwner(), EmotionType.START_EMOTE2, 0, getObjectId()));
-			}
+			int point = getOwner().getMoveController().getCurrentStep().getStepIndex();
 			if (point == 12) {
 				getSpawnTemplate().setWalkerId(null);
 				WalkManager.stopWalking(this);
 				AIActions.deleteOwner(this);
+				return;
+			} else if (point == 8) {
+				super.handleMoveArrived();
+				getOwner().setState(CreatureState.WALK_MODE, true);
+				PacketSendUtility.broadcastPacket(getOwner(), new SM_EMOTION(getOwner(), EmotionType.START_EMOTE2, 0, getObjectId()));
+				return;
 			}
 		}
+		super.handleMoveArrived();
 	}
 
 	@Override
