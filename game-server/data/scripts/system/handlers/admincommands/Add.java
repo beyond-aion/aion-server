@@ -33,7 +33,7 @@ public class Add extends AdminCommand {
 	@Override
 	public void execute(Player player, String... params) {
 		if (params.length < 1) {
-			info(player, null);
+			sendInfo(player);
 			return;
 		}
 

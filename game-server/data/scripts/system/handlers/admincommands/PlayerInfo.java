@@ -4,7 +4,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.model.account.PlayerAccountData;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.skill.PlayerSkillEntry;
@@ -50,37 +49,12 @@ public class PlayerInfo extends AdminCommand {
 			return;
 
 		if (params[1].equals("item")) {
-			StringBuilder strbld = new StringBuilder("-items in inventory:\n");
-			List<Item> items = target.getInventory().getItemsWithKinah();
-			Iterator<Item> it = items.iterator();
-			if (items.isEmpty())
-				strbld.append("none\n");
-			else
-				while (it.hasNext()) {
-					Item act = it.next();
-					strbld.append("\t" + act.getItemCount() + "x " + ChatUtil.item(act.getItemId()) + "\n");
-				}
-			items.clear();
-			items = target.getEquipment().getEquippedItems();
-			it = items.iterator();
-			strbld.append("-equipped items:\n");
-			if (items.isEmpty())
-				strbld.append("none\n");
-			else
-				while (it.hasNext()) {
-					Item act = it.next();
-					strbld.append("\t" + act.getItemCount() + "x " + ChatUtil.item(act.getItemId()) + "\n");
-				}
-			items = target.getWarehouse().getItemsWithKinah();
-			it = items.iterator();
-			strbld.append("-items in warehouse:\n");
-			if (items.isEmpty())
-				strbld.append("none\n");
-			else
-				while (it.hasNext()) {
-					Item act = it.next();
-					strbld.append("\t" + act.getItemCount() + "x " + ChatUtil.item(act.getItemId()) + "\n");
-				}
+			StringBuilder strbld = new StringBuilder("-items in inventory:");
+			appendItems(strbld, target.getInventory().getItemsWithKinah());
+			strbld.append("-equipped items:");
+			appendItems(strbld, target.getEquipment().getEquippedItems());
+			strbld.append("-items in warehouse:");
+			appendItems(strbld, target.getWarehouse().getItemsWithKinah());
 			sendInfo(admin, strbld.toString());
 		} else if (params[1].equals("group")) {
 			final StringBuilder strbld = new StringBuilder("-group info:\n\tLeader: ");
@@ -112,7 +86,7 @@ public class PlayerInfo extends AdminCommand {
 				strbld.append("-legion info:\n\tname: " + legion.getName() + ", level: " + legion.getLegionLevel() + "\n\tmembers(online):\n");
 				while (it.hasNext()) {
 					LegionMemberEx act = it.next();
-					strbld.append("\t\t" + act.getName() + "(" + ((act.isOnline() == true) ? "online" : "offline") + ")" + act.getRank().toString() + "\n");
+					strbld.append("\t\t" + act.getName() + "(" + (act.isOnline() ? "online" : "offline") + ")" + act.getRank().toString() + "\n");
 				}
 				sendInfo(admin, strbld.toString());
 			}
@@ -124,25 +98,22 @@ public class PlayerInfo extends AdminCommand {
 			sendInfo(admin, "Today AP = " + target.getAbyssRank().getDailyAP());
 		} else if (params[1].equals("chars")) {
 			sendInfo(admin, "Others characters of " + target.getName() + " (" + target.getClientConnection().getAccount().size() + ") :");
-			Iterator<PlayerAccountData> data = target.getClientConnection().getAccount().iterator();
-			while (data.hasNext()) {
-				PlayerAccountData d = data.next();
-				if (d != null && d.getPlayerCommonData() != null) {
-					sendInfo(admin, d.getPlayerCommonData().getName());
-				}
-			}
+			target.getClientConnection().getAccount().forEach(d -> sendInfo(admin, d.getPlayerCommonData().getName()));
 		} else if (params[1].equals("knownlist")) {
 			sendInfo(admin, "KnownList of " + target.getName());
-			target.getKnownList().forEachObject(obj -> {
-				sendInfo(admin, obj.getName() + " objectId:" + obj.getObjectId());
-			});
+			target.getKnownList().forEachObject(obj -> sendInfo(admin, obj.getName() + " objectId:" + obj.getObjectId()));
 		} else if (params[1].equals("visuallist")) {
 			sendInfo(admin, "VisualList of " + target.getName());
-			target.getKnownList().forEachVisibleObject(obj -> {
-				sendInfo(admin, obj.getName() + " objectId:" + obj.getObjectId());
-			});
+			target.getKnownList().forEachVisibleObject(obj -> sendInfo(admin, obj.getName() + " objectId:" + obj.getObjectId()));
 		} else {
 			sendInfo(admin);
 		}
+	}
+
+	private void appendItems(StringBuilder strbld, List<Item> items) {
+		if (items.isEmpty())
+			strbld.append("\nnone");
+		else
+			items.forEach(item -> strbld.append("\n\t" + item.getItemCount() + "x " + ChatUtil.item(item.getItemId())));
 	}
 }

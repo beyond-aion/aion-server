@@ -5,6 +5,7 @@ import java.lang.reflect.Field;
 import java.nio.channels.SelectionKey;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 import com.aionemu.commons.network.NioServer;
@@ -80,10 +81,8 @@ public class Debug extends AdminCommand {
 	private List<Player> findConnectedPlayers(Player admin) {
 		List<AionConnection> connections = findAionConnections(admin);
 		if (connections != null) {
-			List<Player> connectedPlayers = connections.stream().filter(c -> c.getActivePlayer() != null).map(AionConnection::getActivePlayer)
-				.collect(Collectors.toList());
-			connectedPlayers.sort(Comparator.comparing(Player::getName));
-			return connectedPlayers;
+			return connections.stream().map(AionConnection::getActivePlayer).filter(Objects::nonNull)
+				.sorted(Comparator.comparing(Player::getName)).collect(Collectors.toList());
 		}
 		return null;
 	}

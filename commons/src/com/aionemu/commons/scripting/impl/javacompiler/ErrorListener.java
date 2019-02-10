@@ -42,6 +42,9 @@ public class ErrorListener implements DiagnosticListener<JavaFileObject> {
 			sb.append("Column: ");
 			sb.append(diagnostic.getColumnNumber());
 		}
-		log.error(sb.toString());
+		if (diagnostic.getKind() == Diagnostic.Kind.ERROR)
+			log.error(sb.toString());
+		else
+			log.warn(sb.toString());
 	}
 }

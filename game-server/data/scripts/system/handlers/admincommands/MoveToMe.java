@@ -58,7 +58,7 @@ public class MoveToMe extends AdminCommand {
 					sendInfo(admin);
 					return;
 			}
-			teamToMove.getOnlineMembers().stream().forEach(p -> teleportPlayer(p, admin));
+			teamToMove.getOnlineMembers().forEach(p -> teleportPlayer(p, admin));
 		} else {
 			teleportPlayer(playerToMove, admin);
 		}
