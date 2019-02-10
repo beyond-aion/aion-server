@@ -184,6 +184,8 @@ public class HyperionAI extends AggressiveNpcAI {
 		Npc npc = (Npc) spawn(npcId == 0 ? Rnd.get(possibleSummons) : 231103, p.getX(), p.getY(), p.getZ(), (byte) 0);
 		if (walkerId != null) {
 			ThreadPoolManager.getInstance().schedule(() -> {
+				if (npc.isDead())
+					return;
 				npc.getSpawn().setWalkerId(walkerId);
 				WalkManager.startWalking((NpcAI) npc.getAi());
 				npc.setState(CreatureState.ACTIVE, true);
@@ -235,6 +237,6 @@ public class HyperionAI extends AggressiveNpcAI {
 
 	private void addPercent() {
 		percents.clear();
-		Collections.addAll(percents, new Integer[] { 100, 90, 78, 65, 50, 45, 25, 15, 10 });
+		Collections.addAll(percents, 100, 90, 78, 65, 50, 45, 25, 15, 10);
 	}
 }
