@@ -35,5 +35,5 @@ public interface AnnotatedMethod {
 	 *          of the annotation to find.
 	 * @return the inherited or declared annotation of the specified class.
 	 */
-	Annotation getAnnotation(Class<?> annotationClass);
+	<T extends Annotation> T getAnnotation(Class<T> annotationClass);
 }

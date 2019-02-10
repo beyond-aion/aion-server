@@ -1,8 +1,6 @@
 package com.aionemu.gameserver.events;
 
-import java.lang.reflect.Method;
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.slf4j.Logger;
@@ -20,21 +18,20 @@ public abstract class AbstractEventSource<T extends AbstractEvent<?>> {
 	private static Logger log = LoggerFactory.getLogger(AbstractEventSource.class);
 
 	private Collection<EventListener<T>> listeners = new CopyOnWriteArrayList<>();
-	protected boolean isFirstMethodFill;
 
 	public AbstractEventSource() {
 		Class<?> theClass = getClass();
-		if (AnnotationManager.containsClass(theClass))
-			return;
+		AnnotatedClass annotatedClass;
+		synchronized (theClass) {
+			if (AnnotationManager.containsClass(theClass))
+				return;
 
-		isFirstMethodFill = true;
-		AnnotatedClass annotatedClass = AnnotationManager.getAnnotatedClass(getClass());
-		AnnotatedMethod[] annotated = annotatedClass.getAnnotatedMethods();
+			annotatedClass = AnnotationManager.getAnnotatedClass(theClass);
 
-		for (AnnotatedMethod method : annotated) {
-			if (!addListenable(method))
-				continue;
-			log.debug("Added method {}", method.getMethod());
+			for (AnnotatedMethod method : annotatedClass.getAnnotatedMethods()) {
+				if (addListenable(method))
+					log.debug("Added method {}", method.getMethod());
+			}
 		}
 	}
 
@@ -75,9 +72,8 @@ public abstract class AbstractEventSource<T extends AbstractEvent<?>> {
 		if (!canHaveEventNotifications(event))
 			return false;
 		event.callingArguments = callingArguments;
-		Iterator<EventListener<T>> i = listeners.iterator();
-		while (i.hasNext()) {
-			i.next().onBeforeEvent(event);
+		for (EventListener<T> listener : listeners) {
+			listener.onBeforeEvent(event);
 		}
 		return true;
 	}
@@ -103,59 +99,10 @@ public abstract class AbstractEventSource<T extends AbstractEvent<?>> {
 		if (!canHaveEventNotifications(event) || !event.isHandled())
 			return false;
 		event.callingArguments = callingArguments;
-		Iterator<EventListener<T>> i = listeners.iterator();
-		while (i.hasNext()) {
-			i.next().onAfterEvent(event);
+		for (EventListener<T> listener : listeners) {
+			listener.onAfterEvent(event);
 		}
 		return true;
-	}
-
-	public static final Method getCurrentMethod(Object o) {
-		String s = getCallerClass(2).getName();
-		Method cm = null;
-		for (Method m : o.getClass().getMethods()) {
-			if (m.getName().equals(s)) {
-				cm = m;
-				break;
-			}
-		}
-		return cm;
-	}
-
-	/**
-	 * Returns the {@link Class} object that contains a caller's method.
-	 * 
-	 * @param i
-	 *          the offset on the call stack of the method of interest
-	 * @return the Class found from the calling context, or {@code null} if not found
-	 */
-	public static Class<?> getCallerClass(int i) {
-		Class<?>[] classContext = new SecurityManager() {
-
-			@Override
-			public Class<?>[] getClassContext() {
-				return super.getClassContext();
-			}
-		}.getClassContext();
-
-		if (classContext != null) {
-			for (int j = 0; j < classContext.length; j++) {
-				if (classContext[j] == AbstractEventSource.class) {
-					return classContext[i + j];
-				}
-			}
-		} else {
-			try {
-				StackTraceElement[] classNames = Thread.currentThread().getStackTrace();
-				for (int j = 0; j < classNames.length; j++) {
-					if (Class.forName(classNames[j].getClassName()) == AbstractEventSource.class) {
-						return Class.forName(classNames[i + j].getClassName());
-					}
-				}
-			} catch (ClassNotFoundException e) {
-			}
-		}
-		return null;
 	}
 
 }

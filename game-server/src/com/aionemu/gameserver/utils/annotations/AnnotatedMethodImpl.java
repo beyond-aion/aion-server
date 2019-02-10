@@ -31,12 +31,12 @@ class AnnotatedMethodImpl implements AnnotatedMethod {
 		HashMap<Class<?>, Annotation> result = new HashMap<>();
 
 		final Class<?> superClass = getAnnotatedClass().getTheClass().getSuperclass();
-		// Get the superclass's overriden method annotations
+		// Get the superclass's overridden method annotations
 		if (superClass != null)
 			fillAnnotationsForOneMethod(result,
 				AnnotationManager.getAnnotatedClass(superClass).getAnnotatedMethod(getMethod().getName(), getMethod().getParameterTypes()));
 
-		// Get the superinterfaces' overriden method annotations
+		// Get the superinterfaces' overridden method annotations
 		for (Class<?> c : getAnnotatedClass().getTheClass().getInterfaces()) {
 			fillAnnotationsForOneMethod(result,
 				AnnotationManager.getAnnotatedClass(c).getAnnotatedMethod(getMethod().getName(), getMethod().getParameterTypes()));
@@ -97,9 +97,10 @@ class AnnotatedMethodImpl implements AnnotatedMethod {
 		return annotatedClass;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public Annotation getAnnotation(Class<?> annotationClass) {
-		return getAllAnnotationMap().get(annotationClass);
+	public <T extends Annotation> T getAnnotation(Class<T> annotationClass) {
+		return (T) getAllAnnotationMap().get(annotationClass);
 	}
 
 	@Override

@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.controllers.attack;
 
-import java.lang.annotation.Annotation;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -357,10 +356,7 @@ public class AggroList extends AbstractEventSource<AddDamageEvent> {
 
 	@Override
 	protected boolean addListenable(AnnotatedMethod annotatedMethod) {
-		Annotation annotation = annotatedMethod.getAnnotation(Listenable.class);
-		if (annotation instanceof Listenable)
-			return true;
-		return false;
+		return annotatedMethod.getAnnotation(Listenable.class) != null;
 	}
 
 	@Override

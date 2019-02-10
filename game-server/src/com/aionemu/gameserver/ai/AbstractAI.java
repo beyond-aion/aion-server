@@ -1,13 +1,15 @@
 package com.aionemu.gameserver.ai;
 
-import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
+
+import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.ai.event.AIEventLog;
 import com.aionemu.gameserver.ai.event.AIEventType;
@@ -35,7 +37,7 @@ public abstract class AbstractAI<T extends Creature> extends AbstractEventSource
 	private final T owner;
 	private AIState currentState;
 	private AISubState currentSubState;
-	private static volatile Map<Class<?>, Map<AIEventType, Method>> listenableMethodsByClass;
+	private static final Map<Class<?>, Map<AIEventType, Method>> listenableMethodsByClass = new ConcurrentHashMap<>();
 
 	private final Lock thinkLock = new ReentrantLock();
 
@@ -47,14 +49,6 @@ public abstract class AbstractAI<T extends Creature> extends AbstractEventSource
 		this.owner = owner;
 		this.currentState = AIState.CREATED;
 		this.currentSubState = AISubState.NONE;
-
-		if (isFirstMethodFill) {
-			Map<AIEventType, Method> listenableMethods = listenableMethodsByClass.get(getClass());
-			if (listenableMethods != null) {
-				// Clean null values after the method map was filled in
-				listenableMethods.values().removeIf(Objects::isNull);
-			}
-		}
 	}
 
 	public AIEventLog getEventLog() {
@@ -81,11 +75,8 @@ public abstract class AbstractAI<T extends Creature> extends AbstractEventSource
 
 	@Override
 	public String getName() {
-		if (getClass().isAnnotationPresent(AIName.class)) {
-			AIName annotation = getClass().getAnnotation(AIName.class);
-			return annotation.value();
-		}
-		return "noname";
+		AIName annotation = getClass().getAnnotation(AIName.class);
+		return annotation == null ? "noname" : annotation.value();
 	}
 
 	protected boolean canHandleEvent(AIEventType eventType) {
@@ -294,21 +285,12 @@ public abstract class AbstractAI<T extends Creature> extends AbstractEventSource
 
 	@Override
 	protected final boolean addListenable(AnnotatedMethod annotatedMethod) {
-		Annotation annotation = annotatedMethod.getAnnotation(AIListenable.class);
-		if (annotation instanceof AIListenable) {
-			AIListenable listenable = (AIListenable) annotation;
-			if (listenableMethodsByClass == null)
-				listenableMethodsByClass = new HashMap<>();
+		AIListenable listenable = annotatedMethod.getAnnotation(AIListenable.class);
+		if (listenable != null && listenable.enabled()) {
 			Map<AIEventType, Method> listenableMethods = listenableMethodsByClass.computeIfAbsent(getClass(), k -> new HashMap<>());
-			// The first method added is at the top of class inheritance hierarchy. so, if not enabled we add null value and others won't be added again
-			if (listenableMethods.containsKey(listenable.type()))
-				return false;
-			if (!listenable.enabled()) {
-				listenableMethods.put(listenable.type(), null);
-				return false;
-			}
-			listenableMethods.put(listenable.type(), annotatedMethod.getMethod());
-			return true;
+			if (listenableMethods.putIfAbsent(listenable.type(), annotatedMethod.getMethod()) == null)
+				return true;
+			LoggerFactory.getLogger(getClass()).warn("Cannot register more than one listener for AIEventType." + listenable.type());
 		}
 		return false;
 	}
@@ -319,8 +301,6 @@ public abstract class AbstractAI<T extends Creature> extends AbstractEventSource
 	}
 
 	public final boolean canHaveEventNotifications(AIEventType event) {
-		if (listenableMethodsByClass == null)
-			return false;
 		Map<AIEventType, Method> listenableMethods = listenableMethodsByClass.get(getClass());
 		return listenableMethods != null && listenableMethods.containsKey(event);
 	}
