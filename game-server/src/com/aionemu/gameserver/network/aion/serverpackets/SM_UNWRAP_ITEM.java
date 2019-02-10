@@ -6,11 +6,11 @@ import com.aionemu.gameserver.network.aion.AionServerPacket;
 /**
  * @author xTz
  */
-public class SM_UNWARP_ITEM extends AionServerPacket {
+public class SM_UNWRAP_ITEM extends AionServerPacket {
 
 	private final int objectId, count;
 
-	public SM_UNWARP_ITEM(int objectId, int count) {
+	public SM_UNWRAP_ITEM(int objectId, int count) {
 		this.objectId = objectId;
 		this.count = count;
 	}

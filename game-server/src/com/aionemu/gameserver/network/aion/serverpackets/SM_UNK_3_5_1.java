@@ -5,6 +5,8 @@ import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 
 /**
+ * Fast track info and response when trying to switch servers
+ * 
  * @author xTz
  */
 public class SM_UNK_3_5_1 extends AionServerPacket {

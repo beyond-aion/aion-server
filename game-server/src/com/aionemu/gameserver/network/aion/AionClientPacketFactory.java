@@ -99,6 +99,7 @@ public class AionClientPacketFactory {
 			packets.put(0x12B, new PacketInfo<>(CM_GET_MAIL_ATTACHMENT.class, State.IN_GAME));
 			packets.put(0x12C, new PacketInfo<>(CM_DELETE_MAIL.class, State.IN_GAME));
 			packets.put(0x12E, new PacketInfo<>(CM_TITLE_SET.class, State.IN_GAME));
+			// packets.put(0x130, new PacketInfo<>(CM_SHOW_LOCATION.class, State.IN_GAME)); // when writing /loc or /location in chat (response is SM_SYSTEM_MESSAGE.STR_CMD_LOCATION_DESC)
 			packets.put(0x131, new PacketInfo<>(CM_MARK_FRIENDLIST.class, State.IN_GAME));
 			packets.put(0x132, new PacketInfo<>(CM_FRIEND_ADD.class, State.IN_GAME));
 			packets.put(0x133, new PacketInfo<>(CM_FRIEND_DEL.class, State.IN_GAME));
@@ -138,6 +139,7 @@ public class AionClientPacketFactory {
 			packets.put(0x161, new PacketInfo<>(CM_SHOW_BLOCKLIST.class, State.IN_GAME));
 			packets.put(0x162, new PacketInfo<>(CM_PLAYER_SEARCH.class, State.IN_GAME));
 			packets.put(0x163, new PacketInfo<>(CM_LEGION_UPLOAD_INFO.class, State.IN_GAME));
+			// packets.put(0x165, new PacketInfo<>(CM_SHOW_RESTRICTIONS.class, State.IN_GAME)); // when writing /restriction in chat
 			packets.put(0x167, new PacketInfo<>(CM_SHOW_MAP.class, State.IN_GAME));
 			packets.put(0x168, new PacketInfo<>(CM_APPEARANCE.class, State.IN_GAME));
 			packets.put(0x16B, new PacketInfo<>(CM_AUTO_GROUP.class, State.IN_GAME));
@@ -158,6 +160,7 @@ public class AionClientPacketFactory {
 			packets.put(0x17E, new PacketInfo<>(CM_LOOT_ITEM.class, State.IN_GAME));
 			packets.put(0x17F, new PacketInfo<>(CM_MOVE_ITEM.class, State.IN_GAME));
 			packets.put(0x180, new PacketInfo<>(CM_MAC_ADDRESS.class, State.CONNECTED, State.AUTHED, State.IN_GAME));
+			// packets.put(0x181, new PacketInfo<>(CM_UNK_RESPONSE.class, State.IN_GAME)); // when receiving server packet opcode 0x50
 			packets.put(0x182, new PacketInfo<>(CM_REPORT_PLAYER.class, State.IN_GAME));
 			packets.put(0x183, new PacketInfo<>(CM_INSTANCE_INFO.class, State.IN_GAME));
 			packets.put(0x184, new PacketInfo<>(CM_RELEASE_OBJECT.class, State.IN_GAME));

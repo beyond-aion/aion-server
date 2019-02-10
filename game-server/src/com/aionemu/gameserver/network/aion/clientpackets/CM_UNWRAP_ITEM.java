@@ -8,7 +8,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_INVENTORY_UPDATE_ITEM;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_UNWARP_ITEM;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_UNWRAP_ITEM;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
@@ -36,7 +36,7 @@ public class CM_UNWRAP_ITEM extends AionClientPacket {
 		Item item = player.getInventory().getItemByObjId(objectId);
 		if (item != null) {
 			if (item.getPackCount() > 0) {
-				sendPacket(new SM_UNWARP_ITEM(objectId, item.getPackCount()));
+				sendPacket(new SM_UNWRAP_ITEM(objectId, item.getPackCount()));
 				item.setPackCount(item.getPackCount() * -1);
 				item.setPersistentState(PersistentState.UPDATE_REQUIRED);
 				PacketSendUtility.sendPacket(player, new SM_INVENTORY_UPDATE_ITEM(player, item));
