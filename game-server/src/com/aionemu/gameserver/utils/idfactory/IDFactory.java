@@ -24,11 +24,36 @@ import com.aionemu.gameserver.model.gameobjects.AionObject;
  * This class is Thread-Safe.<br>
  * This class is designed to be very strict with id usage. Any illegal ID acquiring operation will throw {@link IDFactoryError}
  *
- * @author SoulKeeper
+ * @author SoulKeeper, Neon
  */
 public class IDFactory {
 
 	private static final Logger log = LoggerFactory.getLogger(IDFactory.class);
+
+	/**
+	 * Npcs with objectIds that match this bit pattern are always invisible on client side, not sure why:
+	 * 
+	 * <pre>
+	 * ??0??000000??00?0?11001010101??
+	 * </pre>
+	 * 
+	 * Invalid ID examples:
+	 * 
+	 * <pre>
+	 * 6484, 6485, 6486, 6487,
+	 * 14676, 14677, 14678, 14679,
+	 * 39252, 39253, 39254, 39255,
+	 * 47444, 47445, 47446, 47447,
+	 * 268628, 268629, 268630, 268631,
+	 * ...
+	 * 1812773204, 1812773205, 1812773206, 1812773207
+	 * </pre>
+	 * 
+	 * We forbid them to ensure they'll never get assigned to an npc.
+	 */
+	private static final int INVALID_ID_BIT_MASK = 0b0010011111100110101111111111100;
+	private static final int INVALID_ID_BITCHECK = 0b0000000000000000001100101010100; // 6484
+
 	/**
 	 * Bitset that is used for all id's.<br>
 	 * We are allowing BitSet to grow over time, so in the end it can be as big as {@link Integer#MAX_VALUE}
@@ -62,7 +87,7 @@ public class IDFactory {
 		log.info("IDFactory: " + getUsedCount() + " IDs used.");
 	}
 
-	public static final IDFactory getInstance() {
+	public static IDFactory getInstance() {
 		return SingletonHolder.instance;
 	}
 
@@ -77,28 +102,25 @@ public class IDFactory {
 		try {
 			lock.lock();
 
-			int id;
-			if (nextMinId == Integer.MIN_VALUE) {
-				// Error will be thrown few lines later, we have no more free id's.
-				// BitSet will throw IllegalArgumentException if nextMinId is negative
-				id = Integer.MIN_VALUE;
-			} else {
-				id = idList.nextClearBit(nextMinId);
-			}
-
-			// If BitSet reached Integer.MAX_VALUE size and returned last free id before - it will return
-			// Intger.MIN_VALUE as the next id, so we must catch such case and throw error (no free id's left)
-			if (id == Integer.MIN_VALUE) {
-				throw new IDFactoryError("All id's are used, please clear your database");
-			}
+			int id = nextValidId(nextMinId);
 			idList.set(id);
 
-			// It ok to have Integer OverFlow here, on next ID request IDFactory will throw error
 			nextMinId = id + 1;
 			return id;
 		} finally {
 			lock.unlock();
 		}
+	}
+
+	private int nextValidId(int searchIndex) {
+		int id = idList.nextClearBit(searchIndex);
+		if (id == Integer.MIN_VALUE) // Integer.MIN_VALUE means we have used up all available IDs
+			throw new IDFactoryError("All IDs are used, please clear your database");
+		return isInvalidId(id) ? nextValidId(id + 1) : id;
+	}
+
+	private boolean isInvalidId(int id) {
+		return (id & INVALID_ID_BIT_MASK) == INVALID_ID_BITCHECK;
 	}
 
 	/**
