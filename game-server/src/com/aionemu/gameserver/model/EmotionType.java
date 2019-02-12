@@ -22,6 +22,7 @@ public enum EmotionType {
 	LAND(14),
 	RIDE(15),
 	RIDE_END(16),
+	ATTACK(17),
 	DIE(18),
 	RESURRECT(19),
 	EMOTE(21),
@@ -43,6 +44,9 @@ public enum EmotionType {
 	END_LOOT(41),
 	START_QUESTLOOT(42),
 	END_QUESTLOOT(43),
+	TURN_RIGHT(44),
+	TURN_LEFT(45),
+	START_GLIDE(46),
 	STOP_GLIDE(47),
 	STOP_FLY(48),
 	SUMMON_STOP_JUMP(49),
@@ -52,9 +56,9 @@ public enum EmotionType {
 	START_SPRINT(53),
 	END_SPRINT(54);
 
-	private int id;
+	private final int id;
 
-	private EmotionType(int id) {
+	EmotionType(int id) {
 		this.id = id;
 	}
 
