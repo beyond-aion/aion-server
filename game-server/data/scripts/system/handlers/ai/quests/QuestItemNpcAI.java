@@ -26,8 +26,6 @@ import ai.ActionItemNpcAI;
 @AIName("quest_use_item")
 public class QuestItemNpcAI extends ActionItemNpcAI {
 
-	private List<Player> registeredPlayers = new ArrayList<>();
-
 	public QuestItemNpcAI(Npc owner) {
 		super(owner);
 	}
@@ -53,32 +51,23 @@ public class QuestItemNpcAI extends ActionItemNpcAI {
 		if (QuestService.getQuestDrop(getNpcId()).isEmpty())
 			return;
 
-		if (registeredPlayers.isEmpty()) {
-			AIActions.scheduleRespawn(this);
-			if (player.isInGroup()) {
-				registeredPlayers = QuestService.getEachDropMembersGroup(player.getPlayerGroup(), getNpcId(), env.getQuestId());
-				if (registeredPlayers.isEmpty()) {
-					registeredPlayers.add(player);
-				}
-			} else if (player.isInAlliance()) {
-				registeredPlayers = QuestService.getEachDropMembersAlliance(player.getPlayerAlliance(), getNpcId(), env.getQuestId());
-				if (registeredPlayers.isEmpty()) {
-					registeredPlayers.add(player);
-				}
-			} else {
+		List<Player> registeredPlayers = new ArrayList<>();
+		if (player.isInGroup()) {
+			registeredPlayers = QuestService.getEachDropMembersGroup(player.getPlayerGroup(), getNpcId(), env.getQuestId());
+			if (registeredPlayers.isEmpty()) {
 				registeredPlayers.add(player);
 			}
-			AIActions.registerDrop(this, player, registeredPlayers);
-			DropService.getInstance().requestDropList(player, getObjectId());
-		} else if (registeredPlayers.contains(player)) {
-			DropService.getInstance().requestDropList(player, getObjectId());
+		} else if (player.isInAlliance()) {
+			registeredPlayers = QuestService.getEachDropMembersAlliance(player.getPlayerAlliance(), getNpcId(), env.getQuestId());
+			if (registeredPlayers.isEmpty()) {
+				registeredPlayers.add(player);
+			}
+		} else {
+			registeredPlayers.add(player);
 		}
-	}
-
-	@Override
-	protected void handleDespawned() {
-		super.handleDespawned();
-		registeredPlayers.clear();
+		AIActions.registerDrop(this, player, registeredPlayers);
+		AIActions.die(this, player);
+		DropService.getInstance().requestDropList(player, getObjectId());
 	}
 
 	@Override
