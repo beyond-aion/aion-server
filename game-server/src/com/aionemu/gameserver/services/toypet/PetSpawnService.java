@@ -6,7 +6,9 @@ import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Pet;
 import com.aionemu.gameserver.model.gameobjects.player.PetCommonData;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_PET;
 import com.aionemu.gameserver.spawnengine.VisibleObjectSpawner;
+import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
 
@@ -48,9 +50,11 @@ public class PetSpawnService {
 			petCommonData.scheduleRefeed(petCommonData.getRefeedDelay());
 		} else if (petCommonData.getFeedProgress() != null)
 			petCommonData.getFeedProgress().setHungryLevel(PetHungryLevel.HUNGRY);
-		if (System.currentTimeMillis() - pet.getCommonData().getDespawnTime().getTime() > 10 * 60 * 1000) // reset mood if pet was despawned for > 10 minutes
-			player.getPet().getCommonData().clearMoodStatistics();
+		if (System.currentTimeMillis() - petCommonData.getDespawnTime().getTime() > 10 * 60 * 1000) // reset mood if pet was despawned for > 10 minutes
+			petCommonData.clearMoodStatistics();
 		player.getPetList().setLastUsedPetTemplateId(templateId);
+		if (petCommonData.isLooting())
+			PacketSendUtility.sendPacket(player, new SM_PET(true));
 	}
 
 }
