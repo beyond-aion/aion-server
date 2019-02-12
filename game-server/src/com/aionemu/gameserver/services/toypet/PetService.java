@@ -35,6 +35,7 @@ import com.aionemu.gameserver.skillengine.model.Effect.ForceType;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.Util;
+import com.aionemu.gameserver.utils.audit.AuditLogger;
 import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
@@ -44,7 +45,7 @@ public class PetService {
 
 	private static final Logger log = LoggerFactory.getLogger(PetService.class);
 
-	public static final PetService getInstance() {
+	public static PetService getInstance() {
 		return SingletonHolder.instance;
 	}
 
@@ -95,19 +96,11 @@ public class PetService {
 			PetFunction func = pet.getObjectTemplate().getPetFunction(PetFunctionType.FOOD);
 			PetFlavour flavour = DataManager.PET_FEED_DATA.getFlavourById(func.getId());
 			FoodType foodType = flavour.getFoodType(item.getItemId());
-			PetFeedResult reward = null;
 
 			if (flavour.isLovedFood(foodType, item.getItemId()) && progress.getLovedFoodRemaining() == 0)
 				foodType = null;
 
-			if (foodType != null) {
-				player.getInventory().decreaseItemCount(item, 1, ItemUpdateType.DEC_PET_FOOD);
-				reward = flavour.processFeedResult(progress, foodType, item.getItemTemplate().getLevel(), player.getCommonData().getLevel());
-				if (progress.getHungryLevel() == PetHungryLevel.FULL && reward != null)
-					PacketSendUtility.sendPacket(player, new SM_PET(2, item.getObjectId(), 0, pet));
-				else
-					PacketSendUtility.sendPacket(player, new SM_PET(2, item.getObjectId(), --count, pet));
-			} else {
+			if (foodType == null) {
 				// non eatable item
 				PacketSendUtility.sendPacket(player, new SM_PET(5, 0, 0, pet));
 				PacketSendUtility.sendPacket(player, new SM_EMOTION(player, EmotionType.END_FEEDING, 0, player.getObjectId()));
@@ -115,8 +108,11 @@ public class PetService {
 					SM_SYSTEM_MESSAGE.STR_MSG_TOYPET_FEED_FOOD_NOT_LOVEFLAVOR(pet.getName(), item.getItemTemplate().getL10n()));
 				return;
 			}
+			player.getInventory().decreaseItemCount(item, 1, ItemUpdateType.DEC_PET_FOOD);
+			PetFeedResult reward = flavour.processFeedResult(progress, foodType, item.getItemTemplate().getLevel(), player.getCommonData().getLevel());
 
 			if (progress.getHungryLevel() == PetHungryLevel.FULL && reward != null) {
+				PacketSendUtility.sendPacket(player, new SM_PET(2, item.getObjectId(), 0, pet));
 				PacketSendUtility.sendPacket(player, new SM_PET(6, reward.getItem(), 0, pet));
 				PacketSendUtility.sendPacket(player, new SM_PET(5, 0, 0, pet));
 				PacketSendUtility.sendPacket(player, new SM_EMOTION(player, EmotionType.END_FEEDING, 0, player.getObjectId()));
@@ -129,11 +125,14 @@ public class PetService {
 				commonData.setRefeedTime(refeedTime);
 				DAOManager.getDAO(PlayerPetsDAO.class).setTime(pet.getObjectId(), refeedTime);
 				progress.reset();
-			} else if (count > 0)
-				schedule(pet, player, item, count);
-			else {
-				PacketSendUtility.sendPacket(player, new SM_PET(5, 0, 0, pet));
-				PacketSendUtility.sendPacket(player, new SM_EMOTION(player, EmotionType.END_FEEDING, 0, player.getObjectId()));
+			} else {
+				PacketSendUtility.sendPacket(player, new SM_PET(2, item.getObjectId(), --count, pet));
+				if (count > 0)
+					schedule(pet, player, item, count);
+				else {
+					PacketSendUtility.sendPacket(player, new SM_PET(5, 0, 0, pet));
+					PacketSendUtility.sendPacket(player, new SM_EMOTION(player, EmotionType.END_FEEDING, 0, player.getObjectId()));
+				}
 			}
 		}
 	}
@@ -242,10 +241,15 @@ public class PetService {
 	}
 
 	public void activateLoot(Player player, boolean activate) {
-		if (player.getPet() == null)
+		Pet pet = player.getPet();
+		if (pet == null)
 			return;
 
 		if (activate) {
+			if (!pet.getObjectTemplate().containsFunction(PetFunctionType.LOOT)) {
+				AuditLogger.log(player, "tried to enable auto-loot on non-looting " + pet);
+				return;
+			}
 			if (player.isInTeam()) {
 				LootRuleType lootType = player.getLootGroupRules().getLootRule();
 				if (lootType == LootRuleType.FREEFORALL) {
@@ -255,7 +259,7 @@ public class PetService {
 			}
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_LOOTING_PET_MESSAGE01());
 		}
-		player.getPet().getCommonData().setIsLooting(activate);
+		pet.getCommonData().setIsLooting(activate);
 		PacketSendUtility.sendPacket(player, new SM_PET(activate));
 	}
 

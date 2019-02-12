@@ -26,7 +26,6 @@ import com.aionemu.gameserver.model.gameobjects.player.Rates;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.model.team.TemporaryPlayerTeam;
 import com.aionemu.gameserver.model.team.common.service.PlayerTeamDistributionService;
-import com.aionemu.gameserver.model.templates.pet.PetFunctionType;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.LOG;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.TYPE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_PET;
@@ -144,25 +143,24 @@ public class NpcController extends CreatureController<Npc> {
 			RespawnService.scheduleRespawn(getOwner());
 
 		if (shouldDecay) {
+			if (shouldLoot && lastAttacker.getActingCreature() instanceof Player)
+				petLoot((Player) lastAttacker.getActingCreature(), owner);
 			RespawnService.scheduleDecayTask(owner);
-			if (lastAttacker.getActingCreature() instanceof Player && shouldLoot) { // pet loot
-				Player player = (Player) lastAttacker.getActingCreature();
-				int npcObjId = owner.getObjectId();
-				if (player.getPet() != null && player.getPet().getObjectTemplate().getPetFunction(PetFunctionType.LOOT) != null
-					&& player.getPet().getCommonData().isLooting()) {
-					PacketSendUtility.sendPacket(player, new SM_PET(true, npcObjId));
-					Set<DropItem> drops = DropRegistrationService.getInstance().getCurrentDropMap().get(npcObjId);
-					if (drops != null) {
-						for (DropItem dropItem : drops.toArray(new DropItem[drops.size()])) // array copy since the drops get removed on retrieval
-							DropService.getInstance().requestDropItem(player, npcObjId, dropItem.getIndex(), true);
-					}
-					PacketSendUtility.sendPacket(player, new SM_PET(false, npcObjId));
-					if (shouldDecay && (drops == null || drops.size() == 0)) // without drop it's 2 seconds, re-schedule it
-						RespawnService.scheduleDecayTask(owner, RespawnService.IMMEDIATE_DECAY);
-				}
-			}
 		} else { // instant despawn (no decay time = no loot)
 			delete();
+		}
+	}
+
+	private void petLoot(Player player, Npc owner) {
+		if (player.getPet() != null && player.getPet().getCommonData().isLooting()) {
+			int npcObjId = owner.getObjectId();
+			PacketSendUtility.sendPacket(player, new SM_PET(true, npcObjId));
+			Set<DropItem> drops = DropRegistrationService.getInstance().getCurrentDropMap().get(npcObjId);
+			if (drops != null && !drops.isEmpty()) {
+				for (DropItem dropItem : drops.toArray(new DropItem[drops.size()])) // array copy since the drops get removed on retrieval
+					DropService.getInstance().requestDropItem(player, npcObjId, dropItem.getIndex(), true);
+			}
+			PacketSendUtility.sendPacket(player, new SM_PET(false, npcObjId));
 		}
 	}
 
