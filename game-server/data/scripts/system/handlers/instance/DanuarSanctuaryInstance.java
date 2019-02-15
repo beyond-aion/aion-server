@@ -70,7 +70,7 @@ public class DanuarSanctuaryInstance extends GeneralInstanceHandler {
 					Npc target = instance.getNpc(730866);
 					SkillEngine.getInstance().getSkill(npc, 20385, 1, target).useWithoutPropSkill();
 					if (target != null) {
-						ThreadPoolManager.getInstance().schedule(() -> target.getController().onDie(target), 5700);
+						ThreadPoolManager.getInstance().schedule(() -> target.getController().die(), 5700);
 					}
 				}
 				break;
@@ -91,7 +91,7 @@ public class DanuarSanctuaryInstance extends GeneralInstanceHandler {
 	}
 
 	private void spawnRndBoss() {
-		/**
+		/*
 		 * 235624 Warmage Suyaroka
 		 * 235625 Chief Medic Tagnu
 		 * 235626 Virulent Ukahim

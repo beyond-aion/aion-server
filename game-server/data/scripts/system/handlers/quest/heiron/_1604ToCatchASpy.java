@@ -76,7 +76,7 @@ public class _1604ToCatchASpy extends AbstractQuestHandler {
 		}
 
 		if (PositionUtil.getDistance(env.getVisibleObject(), 717.78f, 623.50f, 130) < 30) {
-			((Npc) env.getVisibleObject()).getController().onDie(player);
+			((Npc) env.getVisibleObject()).getController().die(player);
 			qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
 			qs.setStatus(QuestStatus.REWARD);
 			updateQuestStatus(env);

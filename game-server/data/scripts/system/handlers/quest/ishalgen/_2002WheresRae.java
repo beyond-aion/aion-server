@@ -152,7 +152,7 @@ public class _2002WheresRae extends AbstractQuestHandler {
 						Npc npc = (Npc) env.getVisibleObject();
 						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 						QuestService.addNewSpawn(player.getWorldId(), player.getInstanceId(), 203553, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading());
-						npc.getController().onDie(npc);
+						npc.getController().die();
 						return true;
 					}
 					break;

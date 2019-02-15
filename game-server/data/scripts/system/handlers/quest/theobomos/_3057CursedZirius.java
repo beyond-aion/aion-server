@@ -63,7 +63,7 @@ public class _3057CursedZirius extends AbstractQuestHandler {
 			int targetId = env.getTargetId();
 			if (targetId == 214576) {
 				if (PositionUtil.getDistance(env.getVisibleObject(), 1691.41f, 219.09f, 72.62f) <= 30) {
-					((Npc) env.getVisibleObject()).getController().onDie(player);
+					((Npc) env.getVisibleObject()).getController().die(player);
 					changeQuestStep(env, 0, 1, true);
 					return true;
 				}

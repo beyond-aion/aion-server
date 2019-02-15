@@ -922,7 +922,7 @@ public abstract class AbstractQuestHandler {
 				Npc npc = (Npc) player.getTarget();
 				if (!env.getVisibleObject().equals(npc))
 					return false;
-				npc.getController().onDie(player);
+				npc.getController().die(player);
 			}
 			changeQuestStep(env, step, nextStep, reward, varNum);
 			return true;

@@ -27,24 +27,17 @@ public class AIActions {
 	}
 
 	/**
-	 * Target will die with all notifications using ai's owner as the last attacker
-	 */
-	public static void kill(AbstractAI<? extends Creature> ai, Creature target) {
-		target.getController().onDie(ai.getOwner());
-	}
-
-	/**
 	 * AI's owner will die
 	 */
 	public static void die(AbstractAI<? extends Creature> ai) {
-		ai.getOwner().getController().onDie(ai.getOwner());
+		ai.getOwner().getController().die(ai.getOwner());
 	}
 
 	/**
 	 * AI's owner will die from specified attacker
 	 */
 	public static void die(AbstractAI<? extends Creature> ai, Creature attacker) {
-		ai.getOwner().getController().onDie(attacker);
+		ai.getOwner().getController().die(attacker);
 	}
 
 	/**

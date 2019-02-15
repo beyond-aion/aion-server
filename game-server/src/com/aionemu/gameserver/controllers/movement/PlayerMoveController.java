@@ -35,7 +35,7 @@ public class PlayerMoveController extends PlayableMoveController<Player> {
 			if (fallDistance >= FallDamageConfig.MAXIMUM_DISTANCE_MIDAIR) {
 				fallDistance = 0;
 				lastFallZ = 0;
-				if (!owner.getController().die(TYPE.FALL_DAMAGE, LOG.REGULAR)) // invulnerable players cannot die
+				if (!owner.getController().die(TYPE.FALL_DAMAGE, LOG.REGULAR, owner)) // invulnerable players cannot die
 					return;
 				owner.getController().onStopMove(); // stops and notifies move observers
 				if (!owner.isInInstance()) { // instant revive at kisk or bind point

@@ -128,11 +128,10 @@ public class _24043LazyLanguageLessons extends AbstractQuestHandler {
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			if (var == 2) {
-				final Npc npc = (Npc) env.getVisibleObject();
-				final SpawnSearchResult searchResult = DataManager.SPAWNS_DATA.getFirstSpawnByNpcId(npc.getWorldId(), 278086); // Sinjah
-				if (PositionUtil.getDistance(searchResult.getSpot().getX(), searchResult.getSpot().getY(), searchResult.getSpot().getZ(), npc.getX(), npc.getY(),
-					npc.getZ()) <= 15) {
-					npc.getController().onDie(player);
+				Npc npc = (Npc) env.getVisibleObject();
+				SpawnSearchResult searchResult = DataManager.SPAWNS_DATA.getFirstSpawnByNpcId(npc.getWorldId(), 278086); // Sinjah
+				if (PositionUtil.isInRange(npc, searchResult.getSpot().getX(), searchResult.getSpot().getY(), searchResult.getSpot().getZ(), 15)) {
+					npc.getController().die(player);
 					changeQuestStep(env, 2, 3); // 3
 					return true;
 				}

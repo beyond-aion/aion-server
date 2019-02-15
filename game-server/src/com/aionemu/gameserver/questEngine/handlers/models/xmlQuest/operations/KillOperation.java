@@ -17,8 +17,7 @@ public class KillOperation extends QuestOperation {
 	@Override
 	public void doOperate(QuestEnv env) {
 		if (env.getVisibleObject() instanceof Npc)
-			((Npc) env.getVisibleObject()).getController().onDie(env.getPlayer());
-
+			((Npc) env.getVisibleObject()).getController().die(env.getPlayer());
 	}
 
 }

@@ -28,7 +28,6 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.model.items.GodStone;
 import com.aionemu.gameserver.model.skill.NpcSkillEntry;
-import com.aionemu.gameserver.model.stats.container.CreatureLifeStats;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.model.templates.item.GodstoneInfo;
 import com.aionemu.gameserver.model.templates.item.ItemAttackType;
@@ -153,7 +152,9 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 	}
 
 	/**
-	 * Perform tasks on Creature death
+	 * Perform tasks on Creature death.<br>
+	 * Should ONLY be called from {@link com.aionemu.gameserver.model.stats.container.CreatureLifeStats#reduceHp(TYPE, int, int, LOG, Creature)
+	 * reduceHp()} to avoid duplicate death events.
 	 * 
 	 * @param lastAttacker
 	 */
@@ -442,12 +443,15 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 	 * Die by reducing HP to 0
 	 */
 	public boolean die() {
-		return die(null, null);
+		return die(null, null, getOwner());
 	}
 
-	public boolean die(TYPE type, LOG log) {
-		CreatureLifeStats<?> lifeStats = getOwner().getLifeStats();
-		return lifeStats.reduceHp(type, lifeStats.getCurrentHp(), 0, log, getOwner()) == 0;
+	public boolean die(Creature lastAttacker) {
+		return die(null, null, lastAttacker);
+	}
+
+	public boolean die(TYPE type, LOG log, Creature lastAttacker) {
+		return getOwner().getLifeStats().reduceHp(type, Integer.MAX_VALUE, 0, log, lastAttacker) == 0;
 	}
 
 	/**

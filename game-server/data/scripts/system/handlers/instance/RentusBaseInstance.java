@@ -216,7 +216,7 @@ public class RentusBaseInstance extends GeneralInstanceHandler {
 				spawn(217310, 354.53f, 596.26f, 148.298f, (byte) 100);
 			else
 				spawn(217309, 354.53f, 596.26f, 148.298f, (byte) 100);
-			getNpc(856015).getController().onDie(npc);
+			getNpc(856015).getController().die(npc);
 			despawnNpc(npc);
 		}
 	}
