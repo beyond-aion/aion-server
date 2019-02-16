@@ -205,7 +205,7 @@ public abstract class Siege<SL extends SiegeLocation> {
 	}
 
 	protected void updateOutpostStatusByFortress(FortressLocation location) {
-		SiegeService.getInstance().updateOutpostStatusByFortress(location);
+		SiegeService.getInstance().updateOutpostSiegeState(location);
 	}
 
 	protected void sendRewardsToParticipants(SiegeRaceCounter raceCounter, SiegeResult raceResult) {

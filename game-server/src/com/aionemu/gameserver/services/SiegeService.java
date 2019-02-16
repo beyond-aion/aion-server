@@ -319,7 +319,7 @@ public class SiegeService {
 				case 2021:
 				case 3011:
 				case 3021:
-					SiegeService.getInstance().updateOutpostStatusByFortress((FortressLocation) loc);
+					SiegeService.getInstance().updateOutpostSiegeState((FortressLocation) loc);
 					break;
 			}
 		}
@@ -506,11 +506,7 @@ public class SiegeService {
 		}
 	}
 
-	/**
-	 * Maybe we can implement some fancy features for cases where balaur captured the both fortresses
-	 * or successful home defenses in future.
-	 */
-	public void updateOutpostStatusByFortress(FortressLocation fortressLoc) {
+	public void updateOutpostSiegeState(FortressLocation fortressLoc) {
 		for (OutpostLocation outpost : getOutposts().values()) {
 			List<Integer> dependencies = outpost.getFortressDependency();
 			if (!dependencies.contains(fortressLoc.getLocationId()))
@@ -518,53 +514,28 @@ public class SiegeService {
 			if (dependencies.stream().anyMatch(dependency -> getSiegeLocation(dependency).isVulnerable()))
 				break;
 
-			SiegeRace newFortressRace;
-			SiegeRace newOutpostRace;
+			SiegeRace validRaceForSiege = outpost.getLocationId() == 2111 ? SiegeRace.ASMODIANS : SiegeRace.ELYOS;
+			boolean isSiegeAllowed = true;
 
-			if (outpost.areFortressesOccupiedByAnotherFaction()) {
-				// Check if all fortresses are captured by the same owner
-				// If not - common fortress race is balaur
-				newFortressRace = fortressLoc.getRace();
-				for (Integer fortressId : dependencies) {
-					SiegeRace dependencyFortressSiegeRace = getFortresses().get(fortressId).getRace();
-					if (newFortressRace != dependencyFortressSiegeRace) {
-						newFortressRace = SiegeRace.BALAUR;
-						break;
-					}
+			for (Integer fortressId : dependencies) {
+				SiegeRace dependencyFortressRace = getFortresses().get(fortressId).getRace();
+				if (validRaceForSiege != dependencyFortressRace) {
+					isSiegeAllowed = false;
+					break;
 				}
-			} else {
-				newFortressRace = outpost.getLocationRace();
 			}
+			
+			stopSiege(outpost.getLocationId());
+			deSpawnNpcs(outpost.getLocationId());
 
-			if (SiegeRace.BALAUR == newFortressRace) {
-				// In case of balaur fortress ownership
-				// oupost also belongs to balaur
-				newOutpostRace = SiegeRace.BALAUR;
-			} else {
-				// if fortress owner is non-balaur
-				// then outpost owner is opposite to fortress owner
-				// Example: if fortresses are captured by Elyos, then outpost should be captured by Asmo
-				newOutpostRace = newFortressRace == SiegeRace.ELYOS ? SiegeRace.ASMODIANS : SiegeRace.ELYOS;
-			}
+			// broadcast to all new Silentera infiltration route state
+			broadcastStatusAndUpdate(outpost, outpost.isSilenteraAllowed());
 
-			// update outpost race status
-			if (outpost.getRace() != newOutpostRace) {
-				stopSiege(outpost.getLocationId());
-				deSpawnNpcs(outpost.getLocationId());
-
-				// update outpost race and store in DB
-				outpost.setRace(newOutpostRace);
-				DAOManager.getDAO(SiegeDAO.class).updateSiegeLocation(outpost);
-
-				// broadcast to all new Silentera infiltration route state
-				broadcastStatusAndUpdate(outpost, outpost.isSilenteraAllowed());
-
-				// spawn NPC's or sieges
-				if (outpost.isSiegeAllowed())
-					startSiege(outpost.getLocationId());
-				else
-					spawnNpcs(outpost.getLocationId(), outpost.getRace(), SiegeModType.PEACE);
-			}
+			// spawn NPC's or sieges
+			if (isSiegeAllowed)
+				startSiege(outpost.getLocationId());
+			else
+				spawnNpcs(outpost.getLocationId(), outpost.getRace(), SiegeModType.PEACE);
 		}
 	}
 

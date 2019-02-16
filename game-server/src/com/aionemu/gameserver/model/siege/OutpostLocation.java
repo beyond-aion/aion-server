@@ -3,7 +3,6 @@ package com.aionemu.gameserver.model.siege;
 import java.util.List;
 
 import com.aionemu.gameserver.model.templates.siegelocation.SiegeLocationTemplate;
-import com.aionemu.gameserver.services.SiegeService;
 
 /**
  * These bosses only appear when a faction conquers the balaurea fortresses of their enemy map.
@@ -26,41 +25,17 @@ public class OutpostLocation extends SiegeLocation {
 	}
 
 	/**
-	 * @return Outpost Location Race
-	 */
-	public SiegeRace getLocationRace() {
-		// TODO Should be configured from datapack
-		switch (getLocationId()) {
-			case 3111:
-				return SiegeRace.ASMODIANS;
-			case 2111:
-				return SiegeRace.ELYOS;
-			default:
-				throw new RuntimeException("Please move this to datapack");
-		}
-	}
-
-	/**
 	 * @return Fortresses that must be captured to own this outpost
 	 */
 	public List<Integer> getFortressDependency() {
 		return getTemplate().getFortressDependency();
 	}
 
-	public boolean isSiegeAllowed() {
-		return getLocationRace() == getRace();
-	}
-
+	/**
+	 * Shouldn't be necessary anymore, but re-check packets first before removing this.
+	 * Silentera entrances do not depend on fortresses since 4.x.
+	 */
 	public boolean isSilenteraAllowed() {
-		return !isSiegeAllowed() && !getRace().equals(SiegeRace.BALAUR);
-	}
-
-	public boolean areFortressesOccupiedByAnotherFaction() {
-		for (Integer fortressId : getFortressDependency()) {
-			SiegeRace fortressSiegeRace = SiegeService.getInstance().getFortresses().get(fortressId).getRace();
-			if (fortressSiegeRace == getLocationRace())
-				return false;
-		}
 		return true;
 	}
 }
