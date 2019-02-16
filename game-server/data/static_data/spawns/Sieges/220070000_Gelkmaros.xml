@@ -214,10 +214,6 @@
 					<spawn npc_id="799305">
 						<spot x="1253.2438" y="863.8610" z="310.1369" h="60"/>
 					</spawn>
-					<!-- Nipulungen -->
-					<spawn npc_id="832178">
-						<spot x="1134.605" y="865.1863" z="310.7146" h="90"/>
-					</spawn>
 					<!-- Ranack -->
 					<spawn npc_id="799327">
 						<spot x="1176.0325" y="888.7786" z="307.287"/>
@@ -630,6 +626,10 @@
 					<spawn npc_id="832207" respawn_time="295">
 						<spot x="1226.8173" y="861.5574" z="310.56888" h="90"/>
 					</spawn>
+					<!-- Oxiateres -->
+					<spawn npc_id="832174" respawn_time="295">
+						<spot x="1134.605" y="865.1863" z="310.7146" h="90"/>
+					</spawn>
 					<!-- Ois -->
 					<spawn npc_id="832208" respawn_time="295">
 						<spot x="1230.1857" y="861.5375" z="310.56888" h="90"/>
@@ -671,10 +671,6 @@
 					<!-- Madonia -->
 					<spawn npc_id="799040">
 						<spot x="1253.238" y="860.0521" z="310.1744" h="60"/>
-					</spawn>
-					<!-- Oxiateres -->
-					<spawn npc_id="832174">
-						<spot x="1134.605" y="865.1863" z="310.7146" h="90"/>
 					</spawn>
 					<!-- Prodicus -->
 					<spawn npc_id="832054">
@@ -1242,10 +1238,6 @@
 					<spawn npc_id="296905">
 						<spot x="1879.970" y="1029.890" z="330.7799"/>
 					</spawn>
-					<!-- Edao -->
-					<spawn npc_id="832179">
-						<spot x="1817.400" y="1101.612" z="327.5649" h="90"/>
-					</spawn>
 					<!-- Eistin -->
 					<spawn npc_id="799373">
 						<spot x="1817.654" y="1086.576" z="327.5649" h="30"/>
@@ -1634,6 +1626,10 @@
 						<spot x="1874.66" y="1153.81" z="321.997"/>
 						<spot x="1908.5" y="1154.51" z="320.846" h="43"/>
 					</spawn>
+					<!-- Damasanor -->
+					<spawn npc_id="832175" respawn_time="295">
+						<spot x="1817.400" y="1101.612" z="327.5649" h="90"/>
+					</spawn>
 					<!-- Ateleia -->
 					<spawn npc_id="799046" respawn_time="295">
 						<spot x="1936.902" y="1098.720" z="327.0212" h="60"/>
@@ -1691,10 +1687,6 @@
 					<!-- Ateleia -->
 					<spawn npc_id="799046">
 						<spot x="1936.902" y="1098.720" z="327.0212" h="60"/>
-					</spawn>
-					<!-- Damasanor -->
-					<spawn npc_id="832175">
-						<spot x="1817.400" y="1101.612" z="327.5649" h="90"/>
 					</spawn>
 					<!-- Eleusis -->
 					<spawn npc_id="799048">
