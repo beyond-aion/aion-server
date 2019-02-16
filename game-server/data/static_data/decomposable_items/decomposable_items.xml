@@ -31583,7 +31583,7 @@
 	</decomposable>
 	<decomposable item_id="188053716"><!-- Volatile Rift Loot Bundle -->
 		<items>
-			<item id="186000236" min_count="5" max_count="10" /><!-- Blood Mark -->
+			<item id="186000236" min_count="2" max_count="8" /><!-- Blood Mark -->
 			<item id="188053628" /><!-- Pallasite Bundle -->
 			<random_item type="SPECIAL_MANASTONE_UNIQUE_GRADE" />
 		</items>
