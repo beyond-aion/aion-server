@@ -79,7 +79,7 @@ public class FortressAssault extends Assault<FortressSiege> {
 						spawnAssaulter(commanderSpawnList.remove(0), boss);
 						commanderSpawnChance = 0f;
 					} else {
-						commanderSpawnChance += 10 + 5 * difficulty;
+						commanderSpawnChance += 15 + 5 * difficulty;
 					}
 				}
 				announce(SM_SYSTEM_MESSAGE.STR_ABYSS_CARRIER_DROP_DRAGON());
