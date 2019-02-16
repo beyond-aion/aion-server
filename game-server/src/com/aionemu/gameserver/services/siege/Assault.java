@@ -64,7 +64,7 @@ public abstract class Assault<siege extends Siege<?>> {
 		float y1 = (float) (target.getY() + Math.sin(radian) * a.getDistanceOffset());
 
 		Npc spawned = (Npc) SpawnEngine.spawnObject(
-			SpawnEngine.newSiegeSpawn(getWorldId(), a.getNpcId(), locationId, SiegeRace.BALAUR, SiegeModType.ASSAULT, x1, y1, target.getZ(), (byte) 0), 1);
+			SpawnEngine.newSiegeSpawn(getWorldId(), a.getNpcId(), locationId, SiegeRace.BALAUR, SiegeModType.ASSAULT, x1, y1, target.getZ() + 0.5f, (byte) 0), 1);
 		spawned.getAggroList().addHate(target, 100000);
 	}
 
