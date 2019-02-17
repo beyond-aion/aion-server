@@ -83,8 +83,8 @@ public class CM_MOVE extends AionClientPacket {
 			if (oldMask == MovementMask.IMMEDIATE) { // turning
 				player.getController().onMove();
 			} else {
+				m.setNewDirection(x, y, z, heading);
 				if ((oldMask & MovementMask.ABSOLUTE) == MovementMask.ABSOLUTE) { // update target destination coordinates
-					m.setNewDirection(x, y, z, heading);
 					PacketSendUtility.broadcastToSightedPlayers(player,
 						new SM_MOVE(player, (byte) (MovementMask.POSITION | MovementMask.MANUAL | MovementMask.ABSOLUTE)));
 				}
@@ -99,8 +99,8 @@ public class CM_MOVE extends AionClientPacket {
 			}
 
 			if ((type & MovementMask.POSITION) == MovementMask.POSITION && (type & MovementMask.MANUAL) == MovementMask.MANUAL) { // start move or change direction
+				m.setNewDirection(x2, y2, z2, heading);
 				if ((type & MovementMask.ABSOLUTE) == MovementMask.ABSOLUTE) {
-					m.setNewDirection(x2, y2, z2, heading);
 					if (player.isInCustomState(CustomPlayerState.TELEPORTATION_MODE)) {
 						World.getInstance().updatePosition(player, x2, y2, z2, heading);
 						m.updateLastMove();
@@ -111,7 +111,6 @@ public class CM_MOVE extends AionClientPacket {
 					m.vectorX = vectorX;
 					m.vectorY = vectorY;
 					m.vectorZ = vectorZ;
-					m.setNewDirection(x, y, z, heading);
 				}
 				if (!m.isInMove())
 					player.getController().onStartMove();
@@ -120,7 +119,8 @@ public class CM_MOVE extends AionClientPacket {
 				if ((type & MovementMask.ABSOLUTE) == 0) {
 					float speed = player.getGameStats().getMovementSpeedFloat();
 					m.setNewDirection(x + m.vectorX * speed, y + m.vectorY * speed, player.isFlying() ? z + m.vectorZ * speed : z + m.vectorZ, heading);
-				}
+				} else if (heading != player.getHeading())
+					m.setNewDirection(m.getTargetX2(), m.getTargetY2(), m.getTargetZ2(), heading);
 			}
 
 			if ((type & MovementMask.VEHICLE) == MovementMask.VEHICLE) {
