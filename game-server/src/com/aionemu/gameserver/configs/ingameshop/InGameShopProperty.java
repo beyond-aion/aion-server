@@ -1,6 +1,7 @@
 package com.aionemu.gameserver.configs.ingameshop;
 
 import java.io.File;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,14 +43,12 @@ public class InGameShopProperty {
 	}
 
 	public static InGameShopProperty load() {
-		InGameShopProperty ing = null;
 		try {
-			String xml = FileUtils.readFileToString(new File("./config/ingameshop/in_game_shop.xml"), "UTF-8");
-			ing = JAXBUtil.deserialize(xml, InGameShopProperty.class);
+			String xml = FileUtils.readFileToString(new File("./config/ingameshop/in_game_shop.xml"), StandardCharsets.UTF_8);
+			return JAXBUtil.deserialize(xml, InGameShopProperty.class);
 		} catch (Exception e) {
 			throw new RuntimeException("Failed to initialize ingameshop", e);
 		}
-		return ing;
 	}
 
 }

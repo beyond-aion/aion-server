@@ -1,6 +1,6 @@
 package com.aionemu.loginserver.utils;
 
-import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
@@ -22,9 +22,9 @@ public class AccountUtils {
 	public static String encodePassword(String password) {
 		try {
 			MessageDigest messageDigest = MessageDigest.getInstance("SHA-1");
-			messageDigest.update(password.getBytes("UTF-8"));
+			messageDigest.update(password.getBytes(StandardCharsets.UTF_8));
 			return Base64.getEncoder().encodeToString(messageDigest.digest());
-		} catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
+		} catch (NoSuchAlgorithmException e) {
 			throw new Error("Exception while encoding password", e);
 		}
 	}

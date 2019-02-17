@@ -43,13 +43,11 @@ public class MySQL5HouseScriptsDAO extends HouseScriptsDAO {
 	@Override
 	public PlayerScripts getPlayerScripts(int houseId) {
 		PlayerScripts scripts = new PlayerScripts(houseId);
-		try {
-			try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(SELECT_QUERY)) {
-				stmt.setInt(1, houseId);
-				try (ResultSet rset = stmt.executeQuery()) {
-					while (rset.next()) {
-						addScript(scripts, rset.getInt("script_id"), rset.getString("script"));
-					}
+		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(SELECT_QUERY)) {
+			stmt.setInt(1, houseId);
+			try (ResultSet rset = stmt.executeQuery()) {
+				while (rset.next()) {
+					addScript(scripts, rset.getInt("script_id"), rset.getString("script"));
 				}
 			}
 		} catch (Exception e) {
@@ -71,7 +69,7 @@ public class MySQL5HouseScriptsDAO extends HouseScriptsDAO {
 		}
 	}
 
-	private boolean addScript(PlayerScripts scripts, int id, String scriptXML) throws Exception {
+	private boolean addScript(PlayerScripts scripts, int id, String scriptXML) {
 		if (scriptXML == null || scriptXML.length() == 0) {
 			return scripts.set(id, new byte[0], 0, false);
 		} else {
