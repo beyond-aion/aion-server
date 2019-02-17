@@ -80,9 +80,7 @@ public class PositionUtil {
 	 */
 	public static float calculateAngleFrom(float obj1X, float obj1Y, float obj2X, float obj2Y) {
 		float angleTarget = (float) Math.toDegrees(Math.atan2(obj2Y - obj1Y, obj2X - obj1X));
-		if (angleTarget < 0)
-			angleTarget += 360;
-		return angleTarget;
+		return normalizeAngle(angleTarget);
 	}
 
 	/**
@@ -97,7 +95,7 @@ public class PositionUtil {
 	 * @return Angle in degrees
 	 */
 	public static float convertHeadingToAngle(byte clientHeading) {
-		return clientHeading * 3f;
+		return normalizeAngle(clientHeading * 3f);
 	}
 
 	/**
@@ -140,8 +138,8 @@ public class PositionUtil {
 		float y1 = (float) (object1.getY() + object1.getObjectTemplate().getBoundRadius().getFront() * Math.sin(radians));
 		float x2 = (float) (object2.getX() + object2.getObjectTemplate().getBoundRadius().getSide() * Math.cos(Math.PI + radians));
 		float y2 = (float) (object2.getY() + object2.getObjectTemplate().getBoundRadius().getFront() * Math.sin(Math.PI + radians));
-		float bound1 = (float) PositionUtil.getDistance(object1.getX(), object1.getY(), x1, y1);
-		float bound2 = (float) PositionUtil.getDistance(object2.getX(), object2.getY(), x2, y2);
+		float bound1 = (float) getDistance(object1.getX(), object1.getY(), x1, y1);
+		float bound2 = (float) getDistance(object2.getX(), object2.getY(), x2, y2);
 		return bound1 - bound2;
 	}
 
@@ -350,5 +348,20 @@ public class PositionUtil {
 		}
 
 		return closestPoint;
+	}
+
+	/**
+	 * @return Normalized angle between 0 (inclusive) and 360 (exclusive) degrees.
+	 */
+	public static float normalizeAngle(float angle) {
+		if (angle >= 360) {
+			angle %= 360;
+		} else if (angle < 0) {
+			if (angle <= -360)
+				angle %= 360;
+			if (angle < 0)
+				angle += 360;
+		}
+		return angle;
 	}
 }
