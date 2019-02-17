@@ -75,7 +75,6 @@ public class CM_MOVE extends AionClientPacket {
 		if (player.isInCustomState(CustomPlayerState.WATCHING_CUTSCENE)) // client sends crap when watching cutscenes in transform state
 			return;
 
-		float speed = player.getGameStats().getMovementSpeedFloat();
 		PlayerMoveController m = player.getMoveController();
 		byte oldMask = m.movementMask;
 		m.movementMask = type;
@@ -118,8 +117,10 @@ public class CM_MOVE extends AionClientPacket {
 					player.getController().onStartMove();
 			} else {
 				player.getController().onMove();
-				if ((type & MovementMask.ABSOLUTE) == 0)
+				if ((type & MovementMask.ABSOLUTE) == 0) {
+					float speed = player.getGameStats().getMovementSpeedFloat();
 					m.setNewDirection(x + m.vectorX * speed, y + m.vectorY * speed, player.isFlying() ? z + m.vectorZ * speed : z + m.vectorZ, heading);
+				}
 			}
 
 			if ((type & MovementMask.VEHICLE) == MovementMask.VEHICLE) {
@@ -131,7 +132,7 @@ public class CM_MOVE extends AionClientPacket {
 			}
 		}
 
-		if (!AntiHackService.canMove(player, x, y, z, speed, type))
+		if (!AntiHackService.canMove(player, x, y, z, type))
 			return;
 
 		if (!player.isSpawned()) // should be checked as late as possible, to prevent false warnings from World.updatePosition

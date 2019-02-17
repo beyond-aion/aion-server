@@ -8,7 +8,6 @@ import com.aionemu.gameserver.controllers.movement.MovementMask;
 import com.aionemu.gameserver.controllers.movement.PlayerMoveController;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionConnection;
-import com.aionemu.gameserver.network.aion.AionServerPacket;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_FORCED_MOVE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_MOVE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUIT_RESPONSE;
@@ -24,17 +23,15 @@ public class AntiHackService {
 
 	private static Logger log = LoggerFactory.getLogger(AntiHackService.class);
 
-	public static boolean canMove(Player player, float x, float y, float z, float speed, byte type) {
+	public static boolean canMove(Player player, float x, float y, float z, byte type) {
 		if (player.getPrevPos() == null)
 			return true;
-
-		AionServerPacket forcedMove = new SM_FORCED_MOVE(player, player.getObjectId(), x, y, z);
 
 		if (SecurityConfig.ABNORMAL) {
 			if (!player.canPerformMove() && !player.getEffectController().isAbnormalSet(AbnormalState.PULLED)
 				&& (type & MovementMask.GLIDE) != MovementMask.GLIDE) {
 				if (player.abnormalHackCounter > SecurityConfig.ABNORMAL_COUNTER) {
-					punish(player, x, y, type, forcedMove, "possibly performed illegal move action (Anti-Abnormal Hack)");
+					punish(player, x, y, z, type, "possibly performed illegal move action (Anti-Abnormal Hack)");
 					return false;
 				} else
 					player.abnormalHackCounter++;
@@ -42,6 +39,7 @@ public class AntiHackService {
 				player.abnormalHackCounter = 0;
 		}
 
+		float speed = player.getGameStats().getMovementSpeedFloat();
 		if (SecurityConfig.SPEEDHACK) {
 			if (type != 0) {
 				if ((type & MovementMask.POSITION) == MovementMask.POSITION) {
@@ -57,8 +55,8 @@ public class AntiHackService {
 							player.speedHackCounter--;
 
 						if (player.speedHackCounter > SecurityConfig.SPEEDHACK_COUNTER) {
-							return punish(player, x, y, type, forcedMove, "possibly used speed hack - SHC:" + player.speedHackCounter + " S:"
-								+ speed + " V:" + Math.rint(1000.0 * vector2D) / 1000.0 + " type:" + type);
+							return punish(player, x, y, z, type, "possibly used speed hack - SHC:" + player.speedHackCounter + " S:" + speed + " V:"
+								+ Math.rint(1000.0 * vector2D) / 1000.0 + " type:" + type);
 						}
 					}
 				} else if ((type & MovementMask.ABSOLUTE) == MovementMask.ABSOLUTE && (type & MovementMask.GLIDE) != MovementMask.GLIDE) {
@@ -87,12 +85,12 @@ public class AntiHackService {
 						player.speedHackCounter--;
 
 					if (SecurityConfig.PUNISH > 0 && player.speedHackCounter > SecurityConfig.SPEEDHACK_COUNTER + 5) {
-						return punish(player, x, y, type, forcedMove,
-							"possibly used speed hack - SHC:" + player.speedHackCounter + " SMS:"
-								+ Math.rint(100.0 * (timeDiff * (speed + 0.25) * 0.001)) / 100.0 + " TDF:" + timeDiff + " VTD:"
-								+ Math.rint(1000.0 * (timeDiff * (speed + 0.85) * 0.001)) / 1000.0 + " VS:" + Math.rint(100.0 * vector) / 100.0 + " type:" + type);
+						return punish(player, x, y, z, type,
+							"possibly used speed hack - SHC:" + player.speedHackCounter + " SMS:" + Math.rint(100.0 * (timeDiff * (speed + 0.25) * 0.001)) / 100.0
+								+ " TDF:" + timeDiff + " VTD:" + Math.rint(1000.0 * (timeDiff * (speed + 0.85) * 0.001)) / 1000.0 + " VS:"
+								+ Math.rint(100.0 * vector) / 100.0 + " type:" + type);
 					} else if (player.speedHackCounter > SecurityConfig.SPEEDHACK_COUNTER) {
-						moveBack(player, x, y, type, forcedMove);
+						moveBack(player, x, y, z, type);
 						return false;
 					}
 				}
@@ -104,11 +102,11 @@ public class AntiHackService {
 					player.speedHackCounter++;
 
 				if (SecurityConfig.PUNISH > 0 && player.speedHackCounter > SecurityConfig.SPEEDHACK_COUNTER + 5) {
-					return punish(player, x, y, type, forcedMove,
+					return punish(player, x, y, z, type,
 						"possibly used speed hack - SHC:" + player.speedHackCounter + " TD:" + Math.rint(1000.0 * timeDiff) / 1000.0 + " VTD:"
 							+ Math.rint(1000.0 * (timeDiff * speed * 0.00075)) / 1000.0 + " VS:" + Math.rint(100.0 * vector) / 100.0 + " type:" + type);
 				} else if (player.speedHackCounter > SecurityConfig.SPEEDHACK_COUNTER + 2) {
-					moveBack(player, x, y, type, forcedMove);
+					moveBack(player, x, y, z, type);
 					return false;
 				}
 			}
@@ -123,7 +121,7 @@ public class AntiHackService {
 		if (SecurityConfig.TELEPORTATION) {
 			double delta = PositionUtil.getDistance(x, y, player.getX(), player.getY()) / speed;
 			if (speed > 5.0 && delta > 5.0 && (type & MovementMask.GLIDE) != MovementMask.GLIDE) {
-				return punish(player, x, y, type, new SM_MOVE(player),
+				return punish(player, 0, 0, 0, type,
 					"possibly used teleport hack - S:" + speed + " D:" + Math.rint(1000.0 * delta) / 1000.0 + " type:" + type);
 			}
 		}
@@ -131,14 +129,14 @@ public class AntiHackService {
 		return true;
 	}
 
-	protected static boolean punish(Player player, float x, float y, byte type, AionServerPacket pkt, String message) {
+	private static boolean punish(Player player, float x, float y, float z, byte type, String message) {
 		AuditLogger.log(player, message);
 		switch (SecurityConfig.PUNISH) {
 			case 1:
-				moveBack(player, x, y, type, pkt);
+				moveBack(player, x, y, z, type);
 				return false;
 			case 2:
-				moveBack(player, x, y, type, pkt);
+				moveBack(player, x, y, z, type);
 				if (player.speedHackCounter > SecurityConfig.SPEEDHACK_COUNTER * 3 || player.abnormalHackCounter > SecurityConfig.ABNORMAL_COUNTER * 3)
 					player.getClientConnection().close(new SM_QUIT_RESPONSE());
 				return false;
@@ -150,8 +148,11 @@ public class AntiHackService {
 		}
 	}
 
-	protected static void moveBack(Player player, float x, float y, byte type, AionServerPacket pkt) {
-		PacketSendUtility.broadcastPacketAndReceive(player, pkt);
+	private static void moveBack(Player player, float x, float y, float z, byte type) {
+		if (x == 0 && y == 0 && z == 0)
+			PacketSendUtility.broadcastPacketAndReceive(player, new SM_MOVE(player));
+		else
+			PacketSendUtility.broadcastPacketAndReceive(player, new SM_FORCED_MOVE(player, player.getObjectId(), x, y, z));
 		player.getMoveController().updateLastMove();
 		player.prevPosUT = System.currentTimeMillis();
 		if (player.prevMoveType != type)
