@@ -2904,7 +2904,7 @@
 			<drop item_id="125002903" chance="100" /><!-- Rebel Templar's Helm -->
 		</drop_group>
 		<drop_group><!-- Named Guestbloom (Unique) -->
-			<drop item_id="170195085" chance="20" /><!-- Resistance Army's Guestbloom -->
+			<drop item_id="170195109" chance="20" /><!-- Resistance Army's Guestbloom -->
 		</drop_group>
 	</npc_drop>
 	<npc_drop npc_id="219215">
