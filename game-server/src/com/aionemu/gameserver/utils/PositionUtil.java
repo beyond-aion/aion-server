@@ -28,51 +28,60 @@ public class PositionUtil {
 	 * @return True if the object is behind the target.
 	 */
 	public static boolean isBehind(VisibleObject object, VisibleObject target) {
-		float angleObject1 = PositionUtil.calculateAngleFrom(object, target);
-		float angleObject2 = PositionUtil.convertHeadingToAngle(target.getHeading());
-		float angleDiff = angleObject1 - angleObject2;
+		return isBehind(object, target, MAX_ANGLE_DIFF);
+	}
 
-		if (angleDiff <= -360 + MAX_ANGLE_DIFF)
-			angleDiff += 360;
-		if (angleDiff >= 360 - MAX_ANGLE_DIFF)
-			angleDiff -= 360;
-		return Math.abs(angleDiff) <= MAX_ANGLE_DIFF;
+	/**
+	 * @return True if the object is behind the target inside maxAngleDiff (e.g. ±90 degrees, meaning effective 180 degree coverage).
+	 */
+	public static boolean isBehind(VisibleObject object, VisibleObject target, float maxAngleDiff) {
+		float angle1 = calculateAngleFrom(object, target);
+		float angle2 = convertHeadingToAngle(target.getHeading());
+		return checkAngleDiff(angle1, angle2, maxAngleDiff);
 	}
 
 	/**
 	 * @return True if the object is in front of the target.
 	 */
 	public static boolean isInFrontOf(VisibleObject object, VisibleObject target) {
-		float angleObject2 = PositionUtil.calculateAngleFrom(target, object);
-		float angleObject1 = PositionUtil.convertHeadingToAngle(target.getHeading());
-		float angleDiff = angleObject1 - angleObject2;
+		return isInFrontOf(object, target, MAX_ANGLE_DIFF);
+	}
 
-		if (angleDiff <= -360 + MAX_ANGLE_DIFF)
-			angleDiff += 360;
-		if (angleDiff >= 360 - MAX_ANGLE_DIFF)
+	/**
+	 * @return True if the object is in front of the target inside maxAngleDiff (e.g. ±90 degrees, meaning effective 180 degree coverage).
+	 */
+	public static boolean isInFrontOf(VisibleObject object, VisibleObject target, float maxAngleDiff) {
+		float angle1 = calculateAngleFrom(target, object);
+		float angle2 = convertHeadingToAngle(target.getHeading());
+		return checkAngleDiff(angle1, angle2, maxAngleDiff);
+	}
+
+	/**
+	 * @return True if both angles are within ±maxAngleDiff degrees of each other. The shortest distance between both angles will be checked, so the
+	 *         effective difference between 345° and 5° will be 20 degrees instead of 340.
+	 */
+	private static boolean checkAngleDiff(float angle1, float angle2, float maxAngleDiff) {
+		float angleDiff = Math.abs(angle1 - angle2);
+		if (angleDiff > 180)
 			angleDiff -= 360;
-		return Math.abs(angleDiff) <= MAX_ANGLE_DIFF;
+		return Math.abs(angleDiff) <= maxAngleDiff;
 	}
 
 	/**
 	 * Calculates the angle where the target is located, relative to object's heading.<br>
-	 * 0 degrees means directly looking at target and 180 degrees means target stands behind object
+	 * 0 degrees means directly looking at target and ±180 degrees means target stands behind object
 	 * 
 	 * <pre>
 	 *       0 (head view)
-	 *  270     90
-	 *      180  (back)
+	 *  -90     90
+	 *      ±180  (back)
 	 * </pre>
 	 */
 	public static float calculateAngleTowards(VisibleObject object, VisibleObject target) {
-		float angleObject1 = PositionUtil.convertHeadingToAngle(object.getHeading()) - 180;
-		if (angleObject1 < 0)
-			angleObject1 += 360;
-		float angleObject2 = PositionUtil.calculateAngleFrom(object, target);
-		float angleDiff = angleObject1 - angleObject2 - 180;
-		if (angleDiff < 0)
-			angleDiff += 360;
-		return angleDiff;
+		float angle1 = convertHeadingToAngle(object.getHeading());
+		float angle2 = calculateAngleFrom(object, target);
+		float angleDiff = Math.abs(angle1 - angle2);
+		return angleDiff > 180 ? angleDiff - 360 : angleDiff;
 	}
 
 	/**
@@ -131,8 +140,6 @@ public class PositionUtil {
 
 	public static float getDirectionalBound(VisibleObject object1, VisibleObject object2, boolean inverseTarget) {
 		float angle = 90 - (inverseTarget ? calculateAngleTowards(object2, object1) : calculateAngleTowards(object1, object2));
-		if (angle < 0)
-			angle += 360;
 		double radians = Math.toRadians(angle);
 		float x1 = (float) (object1.getX() + object1.getObjectTemplate().getBoundRadius().getSide() * Math.cos(radians));
 		float y1 = (float) (object1.getY() + object1.getObjectTemplate().getBoundRadius().getFront() * Math.sin(radians));
