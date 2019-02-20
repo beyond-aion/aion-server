@@ -17,8 +17,8 @@
 	<!-- Cygnea -->
 	<rift id="210070000">
 		<open schedule="0 0 * ? * *"/>
-		<open schedule="0 0 20 ? * MON,WED,SAT" spawn="true"/>
-		<open schedule="0 0 15 ? * SUN" spawn="true"/>
+		<open schedule="0 0 20 ? * MON,WED" spawn="true"/>
+		<open schedule="0 0 18 ? * SAT" spawn="true"/>
 	</rift>
 	
 	<!-- Morheim -->
@@ -38,7 +38,7 @@
 	<!-- Enshar -->
 	<rift id="220080000">
 		<open schedule="0 0 * ? * *"/>
-		<open schedule="0 0 20 ? * TUE,THU,SUN" spawn="true"/>
-		<open schedule="0 0 15 ? * SAT" spawn="true"/>
+		<open schedule="0 0 20 ? * TUE,THU" spawn="true"/>
+		<open schedule="0 0 18 ? * SUN" spawn="true"/>
 	</rift>
 </rift_schedule>
