@@ -197,9 +197,9 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 	}
 
 	/**
-	 * Perform tasks when Creature was attacked //TODO maybe pass only Skill object - but need to add properties in it
+	 * Perform tasks when Creature was attacked
 	 */
-	public void onAttack(final Creature attacker, int skillId, TYPE type, int damage, boolean notifyAttack, LOG logId, AttackStatus status,
+	public void onAttack(Creature attacker, int skillId, TYPE type, int damage, boolean notifyAttack, LOG logId, AttackStatus status,
 		boolean allowGodstoneActivation) {
 		if (damage != 0 && notifyAttack) {
 			Skill skill = getOwner().getCastingSkill();
@@ -222,8 +222,8 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 			getOwner().getObserveController().notifyAttackedObservers(attacker, skillId);
 		}
 
-		// attacker should not earn more aggrolist dmg than the owner had hp left
-		getOwner().getAggroList().addDamage(attacker, Math.min(getOwner().getLifeStats().getCurrentHp(), damage));
+		boolean addHate = notifyAttack || type != TYPE.REGULAR; // !notifyAttack && TYPE.REGULAR = reflect dmg, which should not increase hate
+		getOwner().getAggroList().addDamage(attacker, damage, addHate);
 		getOwner().getLifeStats().reduceHp(type, damage, skillId, logId, attacker);
 
 		getOwner().incrementAttackedCount();
