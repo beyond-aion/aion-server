@@ -101,7 +101,8 @@ public abstract class CreatureGameStats<T extends Creature> {
 		} finally {
 			lock.writeLock().unlock();
 		}
-		onStatsChange();
+		if (!owner.isDead())
+			onStatsChange();
 	}
 
 	public int getPositiveStat(StatEnum statEnum, int base) {

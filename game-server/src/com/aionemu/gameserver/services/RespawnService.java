@@ -104,7 +104,7 @@ public class RespawnService {
 		String stackTrace = "";
 		String[] lines = ExceptionUtils.getStackTrace(new Exception()).split("\n");
 		int elements = Math.min(lines.length, 9);
-		for (int i = 1; i <= elements; i++) {
+		for (int i = 2; i <= elements; i++) {
 			if (!stackTrace.isEmpty())
 				stackTrace += '\n';
 			stackTrace += lines[i].replace("com.aionemu.gameserver.", "");
