@@ -120,19 +120,19 @@
 		<npc_skill id="17355" lv="40" prob="70" cd="15000" /><!-- Wide Area Divine Touch -->
 		<npc_skill id="17356" lv="1" prob="70" cd="15000" /><!-- Blindness -->
 		<npc_skill id="17357" lv="1" prob="70" cd="15000" /><!-- Wide Area Blindness -->
-		<npc_skill id="17358" lv="1" prob="70" cd="15000" target="NONE"><!-- Circle of Steel -->
+		<npc_skill id="17358" lv="1" prob="70" min_time="15000" cd="15000" target="NONE"><!-- Circle of Steel -->
 			<cond cond_type="HELP_FRIEND" hp_below="60" range="30" />
 		</npc_skill>
 		<npc_skill id="17359" lv="40" prob="70" cd="15000" /><!-- Hallowed Strike -->
 		<npc_skill id="17360" lv="40" prob="70" cd="15000" /><!-- Wide Area Hallowed Strike -->
-		<npc_skill id="17361" lv="1" prob="70" cd="15000" prio="2" target="NONE"><!-- Healing Light -->
+		<npc_skill id="17361" lv="1" prob="70" min_time="30000" cd="15000" prio="2" target="NONE"><!-- Healing Light -->
 			<cond cond_type="HELP_FRIEND" hp_below="60" range="25" />
 		</npc_skill>
-		<npc_skill id="17364" lv="1" prob="100" cd="15000" prio="1" target="NONE"><!-- Healing Wind I -->
+		<npc_skill id="17364" lv="1" prob="100" min_time="30000" cd="15000" prio="1" target="NONE"><!-- Healing Wind I -->
 			<cond cond_type="HELP_FRIEND" hp_below="60" range="25" />
 		</npc_skill>
 		<npc_skill id="17367" lv="40" prob="70" cd="15000" /><!-- Wide Area Stun -->
-		<npc_skill id="17382" lv="1" prob="30" cd="15000"><!-- Treatment -->
+		<npc_skill id="17382" lv="1" prob="30" min_time="30000" cd="15000"><!-- Treatment -->
 			<cond cond_type="HELP_FRIEND" hp_below="40" range="25" />
 		</npc_skill>
 	</npc_skills>
@@ -143,19 +143,19 @@
 		<npc_skill id="17355" lv="50" prob="70" cd="15000" /><!-- Wide Area Divine Touch -->
 		<npc_skill id="17356" lv="1" prob="70" cd="15000" /><!-- Blindness -->
 		<npc_skill id="17357" lv="1" prob="70" cd="15000" /><!-- Wide Area Blindness -->
-		<npc_skill id="17358" lv="1" prob="70" cd="30000" target="NONE"><!-- Circle of Steel -->
+		<npc_skill id="17358" lv="1" prob="70" min_time="15000" cd="30000" target="NONE"><!-- Circle of Steel -->
 			<cond cond_type="HELP_FRIEND" hp_below="60" range="30" />
 		</npc_skill>
 		<npc_skill id="17359" lv="50" prob="70" cd="15000" /><!-- Hallowed Strike -->
 		<npc_skill id="17360" lv="50" prob="70" cd="15000" /><!-- Wide Area Hallowed Strike -->
-		<npc_skill id="17362" lv="1" prob="70" cd="15000" prio="2" target="NONE"><!-- Radiant Cure I -->
+		<npc_skill id="17362" lv="1" prob="70" min_time="30000" cd="15000" prio="2" target="NONE"><!-- Radiant Cure I -->
 			<cond cond_type="HELP_FRIEND" hp_below="60" range="25" />
 		</npc_skill>
-		<npc_skill id="17365" lv="1" prob="100" cd="15000" prio="1" target="NONE"><!-- Healing Wind II -->
+		<npc_skill id="17365" lv="1" prob="100" min_time="30000" cd="15000" prio="1" target="NONE"><!-- Healing Wind II -->
 			<cond cond_type="HELP_FRIEND" hp_below="60" range="25" />
 		</npc_skill>
 		<npc_skill id="17367" lv="50" prob="70" cd="15000" /><!-- Wide Area Stun -->
-		<npc_skill id="17382" lv="1" prob="30" cd="15000"><!-- Treatment -->
+		<npc_skill id="17382" lv="1" prob="30" min_time="30000" cd="15000"><!-- Treatment -->
 			<cond cond_type="HELP_FRIEND" hp_below="40" range="25" />
 		</npc_skill>
 	</npc_skills>
@@ -166,19 +166,19 @@
 		<npc_skill id="17355" lv="65" prob="70" cd="15000" /><!-- Wide Area Divine Touch -->
 		<npc_skill id="17356" lv="1" prob="70" cd="15000" /><!-- Blindness -->
 		<npc_skill id="17357" lv="1" prob="70" cd="15000" /><!-- Wide Area Blindness -->
-		<npc_skill id="17358" lv="1" prob="70" cd="30000" target="NONE"><!-- Circle of Steel -->
+		<npc_skill id="17358" lv="1" prob="70" min_time="15000" cd="30000" target="NONE"><!-- Circle of Steel -->
 			<cond cond_type="HELP_FRIEND" hp_below="60" range="30" />
 		</npc_skill>
 		<npc_skill id="17359" lv="65" prob="70" cd="15000" /><!-- Hallowed Strike -->
 		<npc_skill id="17360" lv="65" prob="70" cd="15000" /><!-- Wide Area Hallowed Strike -->
-		<npc_skill id="17363" lv="1" prob="70" cd="15000" prio="2" target="NONE"><!-- Light of Recovery -->
+		<npc_skill id="17363" lv="1" prob="70" min_time="30000" cd="15000" prio="2" target="NONE"><!-- Light of Recovery -->
 			<cond cond_type="HELP_FRIEND" hp_below="60" range="25" />
 		</npc_skill>
-		<npc_skill id="17366" lv="1" prob="100" cd="15000" prio="1" target="NONE"><!-- Healing Wind III -->
+		<npc_skill id="17366" lv="1" prob="100" min_time="30000" cd="15000" prio="1" target="NONE"><!-- Healing Wind III -->
 			<cond cond_type="HELP_FRIEND" hp_below="60" range="25" />
 		</npc_skill>
 		<npc_skill id="17367" lv="65" prob="70" cd="15000" /><!-- Wide Area Stun -->
-		<npc_skill id="17382" lv="1" prob="30" cd="15000"><!-- Treatment -->
+		<npc_skill id="17382" lv="1" prob="30" min_time="20000" cd="30000"><!-- Treatment -->
 			<cond cond_type="HELP_FRIEND" hp_below="40" range="25" />
 		</npc_skill>
 	</npc_skills>
