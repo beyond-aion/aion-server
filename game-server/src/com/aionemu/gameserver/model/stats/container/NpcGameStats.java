@@ -20,7 +20,6 @@ import com.aionemu.gameserver.utils.PositionUtil;
  */
 public class NpcGameStats extends CreatureGameStats<Npc> {
 
-	int currentRunSpeed = 0;
 	private long lastAttackTime = 0;
 	private long lastAttackedTime = 0;
 	private long nextAttackTime = 0;
@@ -78,16 +77,16 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
 		if (cachedSpeedStat != null && cachedState == currentState && cachedSubState == currentSubState) {
 			return cachedSpeedStat;
 		}
-		Stat2 newSpeedStat = null;
+		Stat2 newSpeedStat;
 		if (owner.isInState(CreatureState.WEAPON_EQUIPPED)) {
-			float speed = 0;
+			float speed;
 			if (owner.getWalkerGroup() != null)
 				speed = getStatsTemplate().getGroupRunSpeedFight();
 			else
 				speed = getStatsTemplate().getRunSpeedFight();
 			newSpeedStat = getStat(StatEnum.SPEED, Math.round(speed * 1000));
 		} else if (owner.isInState(CreatureState.WALK_MODE)) {
-			float speed = 0;
+			float speed;
 			if (owner.getWalkerGroup() != null && owner.getAi().getSubState() == AISubState.WALK_PATH)
 				speed = getStatsTemplate().getGroupWalkSpeed();
 			else

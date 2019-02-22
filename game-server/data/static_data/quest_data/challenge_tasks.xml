@@ -13,7 +13,7 @@
     <task id="301" type="LEGION" race="ELYOS" prev_task="300" min_level="6" max_level="7" name_id="1199508" repeat="true">
         <quest id="17003" repeat_count="12" score="111"/>
         <quest id="17004" repeat_count="24" score="159"/>
-        <quest id="17005" repeat_count="84" score="720"/>
+        <quest id="17005" repeat_count="60" score="720"/>
         <contrib rank="1" number="3" reward_id="186000199" item_count="68"/>
         <contrib rank="2" number="4" reward_id="186000199" item_count="38"/>
         <contrib rank="3" number="5" reward_id="186000199" item_count="30"/>
@@ -23,7 +23,7 @@
     <task id="302" type="LEGION" race="ELYOS" prev_task="301" min_level="7" max_level="8" name_id="1199510" repeat="true">
         <quest id="17006" repeat_count="24" score="150"/>
         <quest id="17007" repeat_count="48" score="165"/>
-        <quest id="17008" repeat_count="168" score="720"/>
+        <quest id="17008" repeat_count="84" score="720"/>
         <contrib rank="1" number="4" reward_id="186000199" item_count="106"/>
         <contrib rank="2" number="5" reward_id="186000199" item_count="64"/>
         <contrib rank="3" number="6" reward_id="186000199" item_count="53"/>
@@ -85,7 +85,7 @@
     <task id="401" type="LEGION" race="ASMODIANS" prev_task="400" min_level="6" max_level="7" name_id="1199520" repeat="true">
         <quest id="27003" repeat_count="12" score="111"/>
         <quest id="27004" repeat_count="24" score="159"/>
-        <quest id="27005" repeat_count="84" score="720"/>
+        <quest id="27005" repeat_count="60" score="720"/>
         <contrib rank="1" number="3" reward_id="186000199" item_count="68"/>
         <contrib rank="2" number="4" reward_id="186000199" item_count="38"/>
         <contrib rank="3" number="5" reward_id="186000199" item_count="30"/>
@@ -95,7 +95,7 @@
     <task id="402" type="LEGION" race="ASMODIANS" prev_task="401" min_level="7" max_level="8" name_id="1199522" repeat="true">
         <quest id="27006" repeat_count="24" score="150"/>
         <quest id="27007" repeat_count="48" score="165"/>
-        <quest id="27008" repeat_count="168" score="720"/>
+        <quest id="27008" repeat_count="84" score="720"/>
         <contrib rank="1" number="4" reward_id="186000199" item_count="106"/>
         <contrib rank="2" number="5" reward_id="186000199" item_count="64"/>
         <contrib rank="3" number="6" reward_id="186000199" item_count="53"/>

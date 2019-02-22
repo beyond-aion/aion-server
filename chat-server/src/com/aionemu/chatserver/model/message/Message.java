@@ -1,6 +1,6 @@
 package com.aionemu.chatserver.model.message;
 
-import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 
 import com.aionemu.chatserver.model.ChatClient;
 import com.aionemu.chatserver.model.channel.Channel;
@@ -25,11 +25,7 @@ public class Message {
 	}
 
 	public void setText(String str) {
-		try {
-			this.text = str.getBytes("utf-16le");
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		}
+		this.text = str.getBytes(StandardCharsets.UTF_16LE);
 	}
 
 	/**
@@ -58,10 +54,6 @@ public class Message {
 	}
 
 	public String getTextString() {
-		try {
-			return new String(text, "UTF-16le");
-		} catch (Exception e) {
-			return "";
-		}
+		return new String(text, StandardCharsets.UTF_16LE);
 	}
 }

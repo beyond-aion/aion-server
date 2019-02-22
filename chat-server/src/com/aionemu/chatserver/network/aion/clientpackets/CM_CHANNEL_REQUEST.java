@@ -1,10 +1,8 @@
 package com.aionemu.chatserver.network.aion.clientpackets;
 
-import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 
 import org.jboss.netty.buffer.ChannelBuffer;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.aionemu.chatserver.network.aion.AbstractClientPacket;
 import com.aionemu.chatserver.network.netty.handler.ClientChannelHandler;
@@ -17,7 +15,6 @@ import com.aionemu.chatserver.service.ChatService;
  */
 public class CM_CHANNEL_REQUEST extends AbstractClientPacket {
 
-	private static final Logger log = LoggerFactory.getLogger(CM_CHANNEL_REQUEST.class);
 	private int channelRequestId;
 	private byte[] channelIdentifier;
 
@@ -38,10 +35,6 @@ public class CM_CHANNEL_REQUEST extends AbstractClientPacket {
 
 	@Override
 	protected void runImpl() {
-		try {
-			ChatService.getInstance().registerPlayerWithChannel(clientChannelHandler, channelRequestId, new String(channelIdentifier, "UTF-16le"));
-		} catch (UnsupportedEncodingException e) {
-			log.error("Could not read channel identifier from: " + new String(channelIdentifier));
-		}
+		ChatService.getInstance().registerPlayerWithChannel(clientChannelHandler, channelRequestId, new String(channelIdentifier, StandardCharsets.UTF_16LE));
 	}
 }

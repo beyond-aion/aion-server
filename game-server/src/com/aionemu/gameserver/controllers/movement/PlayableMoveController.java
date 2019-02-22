@@ -14,13 +14,16 @@ import com.aionemu.gameserver.world.World;
  */
 public abstract class PlayableMoveController<T extends Creature> extends CreatureMoveController<T> {
 
+	private static final int MOVEMENT_DIRECTIONS = 8;
+	private static final float ANGLE_DIVISOR = 360f / MOVEMENT_DIRECTIONS; // 45
+	private static final float ANGLE_OFFSET = ANGLE_DIVISOR / 2f; // 22.5
+
 	private boolean sendMovePacket = true;
 	private int movementHeading = -1;
 
 	public float vehicleX;
 	public float vehicleY;
 	public float vehicleZ;
-	public int vehicleSpeed;
 
 	public float vectorX;
 	public float vectorY;
@@ -45,7 +48,7 @@ public abstract class PlayableMoveController<T extends Creature> extends Creatur
 		}
 	}
 
-	private final boolean isControlled() {
+	private boolean isControlled() {
 		return owner.getEffectController().isUnderFear();
 	}
 
@@ -112,19 +115,11 @@ public abstract class PlayableMoveController<T extends Creature> extends Creatur
 		if (targetDestX != x || targetDestY != y || targetDestZ != z) {
 			sendMovePacket = true;
 		}
-		this.targetDestX = x;
-		this.targetDestY = y;
-		this.targetDestZ = z;
+		super.setNewDirection(x, y, z);
 
-		float h = PositionUtil.calculateAngleFrom(owner.getX(), owner.getY(), targetDestX, targetDestY);
-		if (h != 0) {
-			int value = (int) (((heading * 3) - h) / 45);
-			if (value < 0)
-				value += 8;
-			if (movementHeading != value) {
-				movementHeading = value;
-			}
-		}
+		float absoluteMovementAngle = PositionUtil.calculateAngleFrom(owner.getX(), owner.getY(), targetDestX, targetDestY);
+		float relativeMovementAngle = heading * 3 - absoluteMovementAngle;
+		movementHeading = toMovementHeading(relativeMovementAngle);
 	}
 
 	public int getMovementHeading() {
@@ -133,4 +128,18 @@ public abstract class PlayableMoveController<T extends Creature> extends Creatur
 		return movementHeading;
 	}
 
+	/**
+	 * <pre>
+	 *  7  0  1
+	 *   \ | /
+	 * 6 ―   ― 2
+	 *   / | \
+	 *  5  4  3
+	 * </pre>
+	 *
+	 * @return Heading from 0 to 7
+	 */
+	public static int toMovementHeading(float angle) {
+		return (int) (PositionUtil.normalizeAngle(angle + ANGLE_OFFSET) / ANGLE_DIVISOR);
+	}
 }

@@ -438,9 +438,11 @@ public class AionConnection extends AConnection<AionServerPacket> {
 		private long getMaxInactivityTimeMillis(Player player) {
 			if (player == null || !player.isSpawned())
 				return CM_PING.CLIENT_PING_INTERVAL;
+			if (player.getController().isInCombat())
+				return CM_PING_INGAME.CLIENT_PING_INTERVAL;
 			if (player.isInCustomState(CustomPlayerState.WATCHING_CUTSCENE))
 				return TimeUnit.MINUTES.toMillis(4);
-			return CM_PING_INGAME.CLIENT_PING_INTERVAL;
+			return CM_PING_INGAME.CLIENT_PING_INTERVAL * 2;
 		}
 	}
 }

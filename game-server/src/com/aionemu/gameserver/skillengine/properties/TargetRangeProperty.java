@@ -32,7 +32,7 @@ public class TargetRangeProperty {
 	 * @param properties
 	 * @return
 	 */
-	public static final boolean set(final Skill skill, Properties properties) {
+	public static boolean set(final Skill skill, Properties properties) {
 		Creature skillEffector = skill.getEffector();
 		TargetRangeAttribute value = properties.getTargetType();
 		int distanceToTarget = properties.getTargetDistance();
@@ -85,16 +85,11 @@ public class TargetRangeProperty {
 						// for target_range_area_type = firestorm
 						if (properties.getEffectiveAngle() < 360) {
 							float angle = properties.getEffectiveAngle() / 2f; // e.g. 60 degrees (always positive) = 30 degrees in positive and negative direction
-							float angleToTarget = PositionUtil.calculateAngleTowards(skillEffector, nextCreature);
-							if (angleToTarget > 180) // convert 0 to 360 range => -180 to 180 range (0 is in front of effector)
-								angleToTarget -= 360;
-							angleToTarget = Math.abs(angleToTarget); // flip negative to positive angles for easier checks
-							if (properties.getDirection() != AreaDirections.BACK) {
-								if (angleToTarget > angle) // e.g. range from -30 to 30, not inside means miss
+							if (properties.getDirection() == AreaDirections.BACK) {
+								if (!PositionUtil.isBehind(nextCreature, skillEffector, angle))
 									continue;
 							} else {
-								angle = 180 - angle; // convert effective angle to ineffective angle
-								if (angleToTarget <= angle) // e.g. range from -150 to 150, inside means miss
+								if (!PositionUtil.isInFrontOf(nextCreature, skillEffector, angle))
 									continue;
 							}
 						}
@@ -173,7 +168,7 @@ public class TargetRangeProperty {
 		return true;
 	}
 
-	private static final boolean checkCommonRequirements(Creature creature, Skill skill) {
+	private static boolean checkCommonRequirements(Creature creature, Skill skill) {
 		if (skill.getSkillTemplate().hasResurrectEffect()) {
 			if (!creature.isDead())
 				return false;
@@ -190,7 +185,7 @@ public class TargetRangeProperty {
 	}
 
 	@SuppressWarnings("unused")
-	private static final boolean isInsideDisablePvpZone(Creature creature) {
+	private static boolean isInsideDisablePvpZone(Creature creature) {
 		if (creature.isInsideZoneType(ZoneType.PVP)) {
 			for (ZoneInstance zone : creature.findZones()) {
 				if (zone.getZoneTemplate().getFlags() == 0)

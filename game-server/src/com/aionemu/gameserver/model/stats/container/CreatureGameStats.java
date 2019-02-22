@@ -2,7 +2,6 @@ package com.aionemu.gameserver.model.stats.container;
 
 import java.util.ArrayList;
 import java.util.EnumMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -76,15 +75,11 @@ public abstract class CreatureGameStats<T extends Creature> {
 		lock.writeLock().lock();
 		try {
 			for (IStatFunction function : functions) {
-				TreeSet<IStatFunction> statFunctions = stats.get(function.getName());
-				if (statFunctions == null) {
-					statFunctions = new TreeSet<>();
-					stats.put(function.getName(), statFunctions);
-				}
-				IStatFunction func = function;
+				TreeSet<IStatFunction> statFunctions = stats.computeIfAbsent(function.getName(), k -> new TreeSet<>());
 				if (function instanceof StatFunction)
-					func = new StatFunctionProxy(statOwner, function);
-				statFunctions.add(func);
+					statFunctions.add(new StatFunctionProxy(statOwner, function));
+				else
+					statFunctions.add(function);
 			}
 		} finally {
 			lock.writeLock().unlock();
@@ -101,17 +96,13 @@ public abstract class CreatureGameStats<T extends Creature> {
 		try {
 			for (Entry<StatEnum, TreeSet<IStatFunction>> e : stats.entrySet()) {
 				TreeSet<IStatFunction> value = e.getValue();
-				for (Iterator<IStatFunction> iter = value.iterator(); iter.hasNext();) {
-					IStatFunction ownedMod = iter.next();
-					if (ownedMod.getOwner() != null && ownedMod.getOwner().equals(statOwner)) {
-						iter.remove();
-					}
-				}
+				value.removeIf(statFunction -> statOwner.equals(statFunction.getOwner()));
 			}
 		} finally {
 			lock.writeLock().unlock();
 		}
-		onStatsChange();
+		if (!owner.isDead())
+			onStatsChange();
 	}
 
 	public int getPositiveStat(StatEnum statEnum, int base) {

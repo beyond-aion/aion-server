@@ -40,8 +40,8 @@ public class CM_CHANNEL_JOIN extends AbstractClientPacket {
 		 */
 //		try {
 //			System.out.println("Request id: " + channelRequestId);
-//			System.out.println("Channel identifier: " + new String(channelIdentifier, "UTF-16le"));
-//			System.out.println("Password: " + new String(password, "UTF-16le"));
+//			System.out.println("Channel identifier: " + new String(channelIdentifier, StandardCharsets.UTF_16LE));
+//			System.out.println("Password: " + new String(password, StandardCharsets.UTF_16LE));
 //		} catch (UnsupportedEncodingException e) {
 //			e.printStackTrace();
 //		}

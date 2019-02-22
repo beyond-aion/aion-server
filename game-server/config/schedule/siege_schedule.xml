@@ -23,17 +23,17 @@
 	<!-- Krotan Refuge -->
 	<fortress id="1221">
 		<siegeTime>0 0 19 ? * MON</siegeTime>
-		<siegeTime>0 0 21 ? * THU,SAT</siegeTime>
+		<siegeTime>0 0 21 ? * SAT</siegeTime>
 	</fortress>
 	<!-- Kysis Fortress -->
 	<fortress id="1231">
 		<siegeTime>0 0 19 ? * MON</siegeTime>
-		<siegeTime>0 0 21 ? * THU,SAT</siegeTime>
+		<siegeTime>0 0 21 ? * SAT</siegeTime>
 	</fortress>
 	<!-- Miren Fortress -->
 	<fortress id="1241">
 		<siegeTime>0 0 19 ? * MON</siegeTime>
-		<siegeTime>0 0 21 ? * THU,SAT</siegeTime>
+		<siegeTime>0 0 21 ? * SAT</siegeTime>
 	</fortress>
 	<!-- Asteria Fortress -->
 	<fortress id="1251">

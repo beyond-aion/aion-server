@@ -77,11 +77,16 @@ public class RespawnService {
 			return null;
 		RespawnTask respawnTask = new RespawnTask(visibleObject);
 		respawnTask.future = ThreadPoolManager.getInstance().schedule(respawnTask, spawnTemplate.getRespawnTime() * 1000);
-		RespawnTask oldRespawnTask = pendingRespawns.put(visibleObject.getObjectId(), respawnTask);
+		String lastRespawn;
+		RespawnTask oldRespawnTask;
+		synchronized (spawnTemplate) {
+			lastRespawn = lastRespawnTrigger.put(visibleObject.getObjectId(), ServerTime.now() + " for " + visibleObject + ":\n" + getShortStackTrace());
+			oldRespawnTask = pendingRespawns.put(visibleObject.getObjectId(), respawnTask);
+		}
 		if (oldRespawnTask != null) { // objectId should not have been in pendingRespawns
-			if (visibleObject.getSpawn() == oldRespawnTask.spawnTemplate) {
+			if (spawnTemplate == oldRespawnTask.spawnTemplate) {
 				LoggerFactory.getLogger(RespawnService.class).warn("Duplicate respawn task initiated for " + visibleObject + ", last trigger at "
-					+ lastRespawnTrigger.get(visibleObject.getObjectId()) + "\nThis trigger:", new IllegalStateException());
+					+ lastRespawn + "\nThis trigger:", new IllegalStateException());
 			} else {
 				String oldOwnerInfo = "Old owner: Npc ID: " + oldRespawnTask.spawnTemplate.getNpcId() + ", map ID: "
 					+ oldRespawnTask.spawnTemplate.getWorldId();
@@ -92,7 +97,6 @@ public class RespawnService {
 						+ newOwnerInfo);
 			}
 		}
-		lastRespawnTrigger.put(visibleObject.getObjectId(), ServerTime.now() + " for " + visibleObject + ":\n" + getShortStackTrace());
 		return respawnTask;
 	}
 
@@ -100,7 +104,7 @@ public class RespawnService {
 		String stackTrace = "";
 		String[] lines = ExceptionUtils.getStackTrace(new Exception()).split("\n");
 		int elements = Math.min(lines.length, 9);
-		for (int i = 1; i <= elements; i++) {
+		for (int i = 2; i <= elements; i++) {
 			if (!stackTrace.isEmpty())
 				stackTrace += '\n';
 			stackTrace += lines[i].replace("com.aionemu.gameserver.", "");

@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.model.gameobjects.player;
 
+import java.nio.charset.StandardCharsets;
 import java.util.LinkedHashMap;
 import java.util.Set;
 
@@ -92,14 +93,14 @@ public class PlayerScripts {
 		if (compressedXML != null && compressedXML.length > 0) {
 			try {
 				scriptXML = CompressUtil.decompress(compressedXML);
-				byte[] bytes = scriptXML.getBytes("UTF-16LE");
-				if (bytes.length != uncompressedSize) {
-					log.error("New housing script data had unexpected file size after decompression: Expected " + uncompressedSize + " bytes, got "
-						+ bytes.length + " bytes:\n" + scriptXML);
-					return null;
-				}
 			} catch (Exception ex) {
-				log.error("New housing script data could not be decompressed");
+				log.error("New housing script data could not be decompressed", ex);
+				return null;
+			}
+			byte[] bytes = scriptXML.getBytes(StandardCharsets.UTF_16LE);
+			if (bytes.length != uncompressedSize) {
+				log.error("New housing script data had unexpected file size after decompression: Expected " + uncompressedSize + " bytes, got "
+					+ bytes.length + " bytes:\n" + scriptXML);
 				return null;
 			}
 		}

@@ -37,7 +37,7 @@ public class AggroList extends AbstractEventSource<AddDamageEvent> {
 	 * @param damage
 	 */
 	@Listenable
-	public void addDamage(Creature attacker, int damage) {
+	public void addDamage(Creature attacker, int damage, boolean addHate) {
 		if (!isAware(attacker))
 			return;
 		// If the incoming damage is higher than the rest life it will decreased to the rest life
@@ -54,10 +54,12 @@ public class AggroList extends AbstractEventSource<AddDamageEvent> {
 		AggroInfo ai = getAggroInfo(attacker);
 		ai.addDamage(damage);
 
-		// for now we add hate equal to each damage received, additionally effectHate will be broadcast to all hating creatures
-		boolean isNewInAggroList = ai.getHate() == 0;
-		ai.addHate(damage);
-		owner.getController().onAddHate(attacker, isNewInAggroList);
+		if (addHate) {
+			// for now we add hate equal to each damage received, additionally effectHate will be broadcast to all hating creatures
+			boolean isNewInAggroList = ai.getHate() == 0;
+			ai.addHate(damage);
+			owner.getController().onAddHate(attacker, isNewInAggroList);
+		}
 
 		if (evObj != null)
 			super.fireAfterEvent(evObj);

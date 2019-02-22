@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import java.nio.charset.StandardCharsets;
 import java.util.Set;
 
 import com.aionemu.commons.database.dao.DAOManager;
@@ -33,12 +34,9 @@ public class CM_CHARACTER_PASSKEY extends AionClientPacket {
 	@Override
 	protected void readImpl() {
 		type = readH(); // 0:new, 2:update, 3:input
-		try {
-			passkey = new String(readB(48), "UTF-16le");
-			if (type == 2)
-				newPasskey = new String(readB(48), "UTF-16le");
-		} catch (Exception e) {
-		}
+		passkey = new String(readB(48), StandardCharsets.UTF_16LE);
+		if (type == 2)
+			newPasskey = new String(readB(48), StandardCharsets.UTF_16LE);
 	}
 
 	@Override
