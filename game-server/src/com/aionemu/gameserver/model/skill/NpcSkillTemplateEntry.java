@@ -73,13 +73,10 @@ public class NpcSkillTemplateEntry extends NpcSkillEntry {
 	}
 
 	@Override
-	public boolean timeReady(long fightingTimeInMSec) {
-		if (template.getMaxTime() == 0 && template.getMinTime() == 0) // it's not about time
-			return true;
-		else if (template.getMaxTime() >= fightingTimeInMSec && template.getMinTime() <= fightingTimeInMSec) // in time range
-			return true;
-		else
-			return false;
+	public boolean timeReady(long elapsedFightTime) {
+		long minTime = template.getMinTime();
+		long maxTime = template.getMaxTime();
+		return maxTime == 0 && minTime == 0 || maxTime == 0 && minTime <= elapsedFightTime || maxTime >= elapsedFightTime && minTime <= elapsedFightTime;
 	}
 
 	@Override
