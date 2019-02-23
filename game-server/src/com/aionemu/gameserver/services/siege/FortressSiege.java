@@ -26,6 +26,7 @@ import com.aionemu.gameserver.model.siege.SiegeRace;
 import com.aionemu.gameserver.model.team.legion.Legion;
 import com.aionemu.gameserver.model.team.legion.LegionHistoryType;
 import com.aionemu.gameserver.model.templates.npc.AbyssNpcType;
+import com.aionemu.gameserver.model.templates.npc.NpcRating;
 import com.aionemu.gameserver.model.templates.siegelocation.SiegeLegionReward;
 import com.aionemu.gameserver.model.templates.siegelocation.SiegeMercenaryZone;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
@@ -105,12 +106,12 @@ public class FortressSiege extends Siege<FortressLocation> {
 
 		final int worldId = getSiegeLocation().getWorldId();
 		for (SiegeNpc sn : World.getInstance().getLocalSiegeNpcs(getSiegeLocationId())) {
-			if (sn.getAbyssNpcType() == AbyssNpcType.ARTIFACT || Rnd.chance() < 35)
+			if (sn.getAbyssNpcType() == AbyssNpcType.ARTIFACT || sn.getRating() == NpcRating.LEGENDARY || Rnd.chance() < 35)
 				continue;
 			final int amount = Rnd.get(1, 2);
 			for (int i = 0; i < amount; i++) {
-				float x1 = (float) (sn.getX() + Math.cos(Math.PI * Rnd.get()) * Rnd.get(1, 3));
-				float y1 = (float) (sn.getY() + Math.sin(Math.PI * Rnd.get()) * Rnd.get(1, 3));
+				float x1 = (float) (sn.getX() + Math.cos(Math.PI * Rnd.get()) * Rnd.get(1, 2));
+				float y1 = (float) (sn.getY() + Math.sin(Math.PI * Rnd.get()) * Rnd.get(1, 2));
 				SpawnTemplate temp = SpawnEngine.newSiegeSpawn(worldId, race == SiegeRace.ELYOS ? Rnd.get(252408, 252412) : Rnd.get(252413, 252417),
 					getSiegeLocationId(), race, SiegeModType.ASSAULT, x1, y1, sn.getZ(), (byte) 0);
 				SpawnEngine.spawnObject(temp, 1);
