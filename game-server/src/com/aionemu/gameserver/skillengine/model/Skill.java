@@ -20,6 +20,7 @@ import com.aionemu.gameserver.controllers.observer.ActionObserver;
 import com.aionemu.gameserver.controllers.observer.ObserverType;
 import com.aionemu.gameserver.controllers.observer.StartMovingListener;
 import com.aionemu.gameserver.dataholders.DataManager;
+import com.aionemu.gameserver.model.PlayerClass;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -319,37 +320,46 @@ public class Skill {
 
 		int boostValue;
 		boolean noBaseDurationCap = false;
+		boolean isPhysicalCharge = false;
+		if (skillMethod == SkillMethod.CHARGE && (effector instanceof Player) && (((Player) effector).getPlayerClass() == PlayerClass.PHYSICAL_CLASS
+			|| ((Player) effector).getPlayerClass() == PlayerClass.RIDER || ((Player) effector).getPlayerClass() == PlayerClass.GUNNER))
+			isPhysicalCharge = true;
+
 		if (skillTemplate.getType() == SkillType.MAGICAL || skillMethod == SkillMethod.CHARGE) {
-			castDuration = effector.getGameStats().getPositiveReverseStat(StatEnum.BOOST_CASTING_TIME, baseCastDuration);
-			boostValue = effector.getGameStats().getPositiveReverseStat(StatEnum.BOOST_CASTING_TIME_SKILL, baseCastDuration);
-			switch (skillTemplate.getSubType()) {
-				case SUMMON:
-					boostValue = effector.getGameStats().getPositiveReverseStat(StatEnum.BOOST_CASTING_TIME_SUMMON, boostValue);
-					if (effector.getEffectController().hasAbnormalEffect(3779))
-						noBaseDurationCap = true;
-					break;
-				case SUMMONHOMING:
-					boostValue = effector.getGameStats().getPositiveReverseStat(StatEnum.BOOST_CASTING_TIME_SUMMONHOMING, boostValue);
-					if (effector.getEffectController().hasAbnormalEffect(3779))
-						noBaseDurationCap = true;
-					break;
-				case SUMMONTRAP:
-					int tempBoostVal = boostValue;
-					boostValue = effector.getGameStats().getPositiveReverseStat(StatEnum.BOOST_CASTING_TIME_TRAP, boostValue);
-					if (boostValue == 0 && castDuration < tempBoostVal) {
-						boostValue = tempBoostVal - castDuration;
-					}
-					if (effector.getEffectController().hasAbnormalEffect(913))
-						noBaseDurationCap = true;
-					break;
-				case HEAL:
-					boostValue = effector.getGameStats().getPositiveReverseStat(StatEnum.BOOST_CASTING_TIME_HEAL, boostValue);
-					break;
-				case ATTACK:
-					boostValue = effector.getGameStats().getPositiveReverseStat(StatEnum.BOOST_CASTING_TIME_ATTACK, boostValue);
-					break;
+			if (!isPhysicalCharge) {
+				castDuration = effector.getGameStats().getPositiveReverseStat(StatEnum.BOOST_CASTING_TIME, baseCastDuration);
+				boostValue = effector.getGameStats().getPositiveReverseStat(StatEnum.BOOST_CASTING_TIME_SKILL, baseCastDuration);
+				switch (skillTemplate.getSubType()) {
+					case SUMMON:
+						boostValue = effector.getGameStats().getPositiveReverseStat(StatEnum.BOOST_CASTING_TIME_SUMMON, boostValue);
+						if (effector.getEffectController().hasAbnormalEffect(3779))
+							noBaseDurationCap = true;
+						break;
+					case SUMMONHOMING:
+						boostValue = effector.getGameStats().getPositiveReverseStat(StatEnum.BOOST_CASTING_TIME_SUMMONHOMING, boostValue);
+						if (effector.getEffectController().hasAbnormalEffect(3779))
+							noBaseDurationCap = true;
+						break;
+					case SUMMONTRAP:
+						int tempBoostVal = boostValue;
+						boostValue = effector.getGameStats().getPositiveReverseStat(StatEnum.BOOST_CASTING_TIME_TRAP, boostValue);
+						if (boostValue == 0 && castDuration < tempBoostVal) {
+							boostValue = tempBoostVal - castDuration;
+						}
+						if (effector.getEffectController().hasAbnormalEffect(913))
+							noBaseDurationCap = true;
+						break;
+					case HEAL:
+						boostValue = effector.getGameStats().getPositiveReverseStat(StatEnum.BOOST_CASTING_TIME_HEAL, boostValue);
+						break;
+					case ATTACK:
+						boostValue = effector.getGameStats().getPositiveReverseStat(StatEnum.BOOST_CASTING_TIME_ATTACK, boostValue);
+						break;
+				}
+				castDuration -= baseCastDuration - boostValue;
+			} else {
+				castDuration = effector.getGameStats().getPositiveStat(StatEnum.ATTACK_SPEED, baseCastDuration);
 			}
-			castDuration -= baseCastDuration - boostValue;
 		}
 
 		// 70% of base skill castDuration cap
@@ -561,6 +571,7 @@ public class Skill {
 				return;
 			}
 			firstTargetDieObserver = new ActionObserver(ObserverType.DEATH) {
+
 				@Override
 				public void died(Creature creature) {
 					getEffector().getController().cancelCurrentSkill(null, SM_SYSTEM_MESSAGE.STR_SKILL_TARGET_LOST());
