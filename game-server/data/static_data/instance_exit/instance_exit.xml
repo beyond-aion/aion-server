@@ -143,37 +143,48 @@
 	<!-- Danuar Reliquary
 	<instance_exit instance_id="301110000" exit_world="600090000" race="PC_ALL" x="775.7178" y="1029.159" z="112.1926"/>
 	-->
-	<!-- 4.3 Sauro Supply Base -->
-	<instance_exit instance_id="301130000" exit_world="600100000" race="ELYOS" x="351.01273" y="154.34937" z="352.5" h="112"/>
-	<instance_exit instance_id="301130000" exit_world="600100000" race="ASMODIANS" x="1578.6261" y="1729.967" z="284.375" h="66"/>
-	<!-- 4.8 Seized Danuar Sanctuary -->
-	<instance_exit instance_id="301140000" exit_world="210070000" race="ASMODIANS" x="2099.2441" y="2280.8606" z="294.625" h="83"/>
-	<instance_exit instance_id="301140000" exit_world="220080000" race="ELYOS" x="1672.2477" y="561.77155" z="257.77853" h="55"/>
-	<!-- 4.8 Danuar Sanctuary -->
-	<instance_exit instance_id="301380000" exit_world="210070000" race="ELYOS" x="2099.2441" y="2280.8606" z="294.625" h="83"/>
-	<instance_exit instance_id="301380000" exit_world="220080000" race="ASMODIANS" x="1672.2477" y="561.77155" z="257.77853" h="55"/>
-	 <!-- 4.8 Sealed Danuar Mysticarium -->
+	
+	<!-- Sealed Danuar Mysticarium -->
 	<instance_exit instance_id="300480000" exit_world="210070000" race="ELYOS" x="2905" y="803" z="569.53" h="22"/>
 	<instance_exit instance_id="300480000" exit_world="220080000" race="ASMODIANS" x="454" y="2262" z="220.1" h="22"/>
-	
-	<!-- 4.8 Ophidian Bridge -->
+	<!-- Ophidan Bridge -->
 	<instance_exit instance_id="300590000" exit_world="210070000" race="ELYOS" x="2783.5369" y="3003.8613" z="274.875" h="24"/>
 	<instance_exit instance_id="300590000" exit_world="220080000" race="ASMODIANS" x="490.745" y="93.0318" z="199.121" h="99"/>
 	<!-- Infinity Shard -->
 	<instance_exit instance_id="300800000" exit_world="600100000" race="PC_ALL" x="1072.4126" y="982.45844" z="337.7758"/>
+	<!-- Sauro Supply Base -->
+	<instance_exit instance_id="301130000" exit_world="600100000" race="ELYOS" x="351.01273" y="154.34937" z="352.5" h="112"/>
+	<instance_exit instance_id="301130000" exit_world="600100000" race="ASMODIANS" x="1578.6261" y="1729.967" z="284.375" h="66"/>
+	<!-- Seized Danuar Sanctuary -->
+	<instance_exit instance_id="301140000" exit_world="210070000" race="ASMODIANS" x="2099.2441" y="2280.8606" z="294.625" h="83"/>
+	<instance_exit instance_id="301140000" exit_world="220080000" race="ELYOS" x="1672.2477" y="561.77155" z="257.77853" h="55"/>
 	<!-- Rukibuki Circus Troupe -->
 	<instance_exit instance_id="301160000" exit_world="110010000" race="ELYOS" x="1450.5635" y="1502.4572" z="573.0719"/>
 	<instance_exit instance_id="301160000" exit_world="120010000" race="ASMODIANS" x="1611.5364" y="1403.6775" z="193.12807"/>
-	<!-- 4.6 Krotan Barracks -->
+	<!-- Illuminary Obelisk -->
+	<instance_exit instance_id="301230000" exit_world="600100000" race="ELYOS" x="462.56534" y="1539.8868" z="242.66449" h="102"/>
+	<instance_exit instance_id="301230000" exit_world="600100000" race="ASMODIANS" x="1398.4855" y="378.34225" z="248.37592" h="29"/>
+	<!-- Legion Kysis Barracks -->
+	<instance_exit instance_id="301240000" exit_world="400010000" race="PC_ALL" x="2531.199" y="2063.3718" z="3031.8384" h="5"/>
+	<!-- Legion Miren Barracks -->
+	<instance_exit instance_id="301250000" exit_world="400010000" race="PC_ALL" x="1817.1262" y="2319.7" z="2931.5413" h="12"/>
+	<!-- Legion Krotan Barracks -->
 	<instance_exit instance_id="301260000" exit_world="400010000" race="PC_ALL" x="2010.7422" y="1254.336" z="2945.4092"/>
 	<!-- Linkgate Foundry -->
 	<instance_exit instance_id="301270000" exit_world="600100000" race="ELYOS" x="334.91916" y="409.39972" z="318.5" h="89"/>
 	<instance_exit instance_id="301270000" exit_world="600100000" race="ASMODIANS" x="1763.6152" y="1608.1003" z="289.643" h="23"/>
-	<!-- 4.6 Legion Krotan Barracks -->
+	<!-- Kysis Barracks -->
+	<instance_exit instance_id="301280000" exit_world="400010000" race="PC_ALL" x="2531.199" y="2063.3718" z="3031.8384" h="5"/>
+	<!-- Miren Barracks -->
+	<instance_exit instance_id="301290000" exit_world="400010000" race="PC_ALL" x="1817.1262" y="2319.7" z="2931.5413" h="12"/>
+	<!-- Krotan Barracks -->
 	<instance_exit instance_id="301300000" exit_world="400010000" race="PC_ALL" x="2010.7422" y="1254.336" z="2945.4092"/>
-	<!-- Illuminary Obelisk -->
-	<instance_exit instance_id="301230000" exit_world="600100000" race="ELYOS" x="462.56534" y="1539.8868" z="242.66449" h="102"/>
-	<instance_exit instance_id="301230000" exit_world="600100000" race="ASMODIANS" x="1398.4855" y="378.34225" z="248.37592" h="29"/>
+	<!-- Infernal Illuminary Obelisk -->
+	<instance_exit instance_id="301370000" exit_world="600100000" race="ELYOS" x="462.56534" y="1539.8868" z="242.66449" h="102"/>
+	<instance_exit instance_id="301370000" exit_world="600100000" race="ASMODIANS" x="1398.4855" y="378.34225" z="248.37592" h="29"/>
+	<!-- Danuar Sanctuary -->
+	<instance_exit instance_id="301380000" exit_world="210070000" race="ELYOS" x="2099.2441" y="2280.8606" z="294.625" h="83"/>
+	<instance_exit instance_id="301380000" exit_world="220080000" race="ASMODIANS" x="1672.2477" y="561.77155" z="257.77853" h="55"/>
 	<!-- Engulfed Ophidian Bridge
 	<instance_exit instance_id="301210000" exit_world="600070000" race="ELYOS" x="687.22705" y="653.72125" z="514.68646"/>
 	<instance_exit instance_id="301210000" exit_world="600070000" race="ASMODIANS" x="716.3487" y="871.67554" z="514.59405" h="60"/>
