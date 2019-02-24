@@ -13710,32 +13710,24 @@
 	<decomposable item_id="188051722"><!-- [Event] Guardian Squad Leader's Shoe/Glove Box -->
 		<items>
 			<item id="114100926" /><!-- Elite Guardian Squad Leader's Shoes -->
-		</items>
-		<items>
 			<item id="111100887" /><!-- Elite Guardian Squad Leader's Gloves -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051723"><!-- [Event] Archon Squad Leader's Shoe/Glove Box -->
 		<items>
 			<item id="114100853" /><!-- Archon Squad Leader's Shoes -->
-		</items>
-		<items>
 			<item id="111100817" /><!-- Archon Squad Leader's Gloves -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051724"><!-- [Event] Guardian Centurion's Shoe/Glove Box -->
 		<items>
 			<item id="114100852" /><!-- Guardian Centurion's Shoes -->
-		</items>
-		<items>
 			<item id="111100816" /><!-- Guardian Centurion's Gloves -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051725"><!-- [Event] Archon Centurion's Shoe/Glove Box -->
 		<items>
 			<item id="114100854" /><!-- Archon Centurion's Shoes -->
-		</items>
-		<items>
 			<item id="111100818" /><!-- Archon Centurion's Gloves -->
 		</items>
 	</decomposable>
