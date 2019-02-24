@@ -57,7 +57,7 @@
     </npc_skills>
 	<!-- Terath Thaumaturge -->
     <npc_skills npc_ids="233354">
-        <npc_skill id="20512" lv="60" prob="24" min_hp="0"/>
+        <npc_skill id="20512" lv="60" prob="24"/>
         <npc_skill id="20511" lv="60" prob="43"/>
         <npc_skill id="20508" lv="60" prob="33"/>
     </npc_skills>
@@ -91,7 +91,7 @@
     </npc_skills>
 	<!-- Terath Worldwarper -->
     <npc_skills npc_ids="233358">
-        <npc_skill id="20512" lv="60" prob="75" min_hp="0"/>
+        <npc_skill id="20512" lv="60" prob="75"/>
         <npc_skill id="20511" lv="60" prob="13"/>
         <npc_skill id="20508" lv="60" prob="13"/>
     </npc_skills>

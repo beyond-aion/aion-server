@@ -46,8 +46,8 @@
 	</npc_skills>
 	<!-- Hyperion Defense Elite Medic -->
 	<npc_skills npc_ids="231081">
-		<npc_skill id="17359" lv="56" prob="25" min_hp="95" />
-		<npc_skill id="16566" lv="56" prob="25" min_hp="93" />
+		<npc_skill id="17359" lv="56" prob="25" />
+		<npc_skill id="16566" lv="56" prob="25" />
 	</npc_skills>
 	<!-- Hyperion Defense Elite Assaulter -->
 	<npc_skills npc_ids="231084">
@@ -63,6 +63,6 @@
 	</npc_skills>
 	<!-- Ide Pool -->
 	<npc_skills npc_ids="231104">
-		<npc_skill id="21356" lv="56" prob="20" min_hp="0" />
+		<npc_skill id="21356" lv="56" prob="20" />
 	</npc_skills>
 </npc_skill_templates>
