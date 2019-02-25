@@ -33,7 +33,7 @@
 						<spot x="2144.903" y="1951.235" z="2322.073" h="30"/>
 						<spot x="2146.495" y="1906.252" z="2322.073" h="90"/>
 						<spot x="2147.519" y="1951.180" z="2322.073" h="30"/>
-						<spot x="2149.392" y="1906.173" z="2322.073" h="90"/>	
+						<spot x="2149.392" y="1906.173" z="2322.073" h="90"/>
 					</spawn>
 					<!-- Divine Fortress Hired Assailant -->
 					<spawn npc_id="881545">
@@ -42,7 +42,7 @@
 						<spot x="2149.176" y="1949.182" z="2322.073" h="30"/>
 						<spot x="2150.754" y="1909.024" z="2322.073" h="90"/>
 					</spawn>
-				</mercenary_zone>					
+				</mercenary_zone>
 			</mercenary_race>
 			<mercenary_race race="ELYOS">
 				<mercenary_zone zone="1">
@@ -53,7 +53,7 @@
 						<spot x="2136.299" y="1847.520" z="2316.173" h="90"/>
 						<spot x="2139.333" y="1847.217" z="2316.061" h="90"/>
 						<spot x="2148.864" y="2008.138" z="2320.165" h="30"/>
-						<spot x="2151.744" y="2009.589" z="2320.156" h="30"/>						
+						<spot x="2151.744" y="2009.589" z="2320.156" h="30"/>
 					</spawn>
 					<!-- Divine Fortress Hired Challenger -->
 					<spawn npc_id="881542">
@@ -75,7 +75,7 @@
 						<spot x="2144.903" y="1951.235" z="2322.073" h="30"/>
 						<spot x="2146.495" y="1906.252" z="2322.073" h="90"/>
 						<spot x="2147.519" y="1951.180" z="2322.073" h="30"/>
-						<spot x="2149.392" y="1906.173" z="2322.073" h="90"/>						
+						<spot x="2149.392" y="1906.173" z="2322.073" h="90"/>
 					</spawn>
 					<!-- Divine Fortress Hired Challenger -->
 					<spawn npc_id="881542">
@@ -84,7 +84,7 @@
 						<spot x="2149.176" y="1949.182" z="2322.073" h="30"/>
 						<spot x="2150.754" y="1909.024" z="2322.073" h="90"/>
 					</spawn>
-				</mercenary_zone>						
+				</mercenary_zone>
 			</mercenary_race>
 		</mercenary_spawn>
 		<mercenary_spawn siege_id="1221">
