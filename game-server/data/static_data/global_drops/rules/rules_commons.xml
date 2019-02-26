@@ -942,19 +942,25 @@
 			<gd_map map_id="301230000" /><!-- Illuminary_Obelisk -->
 			<gd_map map_id="301110000" /><!-- Danuar_Reliquary -->
 			<gd_map map_id="300620000" /><!-- Occupied_Rentus_Base -->
-			<gd_map map_id="301140000"/><!-- Seized_Danuar_Sanctuary -->
+			<gd_map map_id="301140000" /><!-- Seized_Danuar_Sanctuary -->
 			<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
 		</gd_maps>
 		<gd_npcs>
 			<gd_npc npc_id="236306" /><!-- Reviver Nasto -->
 			<gd_npc npc_id="235624" /><!-- Warmage Suyaroka -->
+			<gd_npc npc_id="235625" /><!-- Chief Medic Tagnu -->
+			<gd_npc npc_id="235626" /><!-- Virulent Ukahim -->
 			<gd_npc npc_id="235768" /><!-- Spirited Velkur -->
+			<gd_npc npc_id="235769" /><!-- Velkur Aethercaster -->
+			<gd_npc npc_id="235770" /><!-- Velkur Aetherpriest -->
 			<gd_npc npc_id="235771" /><!-- Velkur Aetherknife -->
 			<gd_npc npc_id="234991" /><!-- Furious Belsagos -->
 			<gd_npc npc_id="233740" /><!-- Test Weapon Dynatoum -->
 			<gd_npc npc_id="701795" /><!-- Treasure Box -->
 			<gd_npc npc_id="236300" /><!-- Brigade General Vasharti -->
 			<gd_npc npc_id="833048" /><!-- Rentus Quality Supplies Story Box -->
+			<gd_npc npc_id="235619" /><!-- Warmage Suyaroka -->
+			<gd_npc npc_id="235620" /><!-- Chief Medic Tagnu -->
 			<gd_npc npc_id="235621" /><!-- Virulent Ukahim -->
 			<gd_npc npc_id="230857" /><!-- Guard Captain Ahuradim -->
 			<gd_npc npc_id="230858" /><!-- Brigade General Sheba -->
@@ -973,7 +979,7 @@
 			<gd_map map_id="301360000" /><!-- Infernal_Danuar_Reliquary -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="284858" /><!-- Boss -->
+			<gd_npc npc_id="234686" /><!-- Remodeled Dynatoum -->
 			<gd_npc npc_id="284376" /><!-- Enraged Queen Modor -->
 			<gd_npc npc_id="231073" /><!-- Hyperion -->
 			<gd_npc npc_id="702729" /><!-- Tiamat's Huge Treasure Crate -->
