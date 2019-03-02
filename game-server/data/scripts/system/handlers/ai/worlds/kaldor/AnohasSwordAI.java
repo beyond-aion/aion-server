@@ -42,9 +42,8 @@ public class AnohasSwordAI extends NpcAI {
 
 	@Override
 	protected void handleDialogStart(Player player) {
-		int siegeId = SiegeService.getInstance().getFortress(7011).getLegionId();
-		int legionId = player.getLegion().getLegionId();
-		if (legionId == siegeId && player.getLegionMember().isBrigadeGeneral())
+		int fortressLegionId = SiegeService.getInstance().getFortress(7011).getLegionId();
+		if (player.getLegion() != null && player.getLegion().getLegionId() == fortressLegionId && player.getLegionMember().isBrigadeGeneral())
 			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 10));
 		else
 			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 1011));
