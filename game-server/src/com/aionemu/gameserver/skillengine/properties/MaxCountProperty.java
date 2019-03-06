@@ -15,9 +15,11 @@ import com.aionemu.gameserver.utils.PositionUtil;
  */
 public class MaxCountProperty {
 
-	public static boolean set(final Skill skill, Properties properties) {
+	public static boolean set(Skill skill, Properties properties) {
 		TargetRangeAttribute value = properties.getTargetType();
 		int maxCount = properties.getTargetMaxCount();
+		if (properties.getFirstTarget() == FirstTargetAttribute.TARGET && value == TargetRangeAttribute.AREA) // firstTarget doesn't count on AREA skills (see skill 1245 or 16689)
+			maxCount += 1;
 		if (maxCount == 0 || skill.getEffectedList().size() <= maxCount)
 			return true;
 
