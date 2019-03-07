@@ -1,17 +1,16 @@
 package com.aionemu.gameserver.skillengine.properties;
 
 import java.util.Comparator;
-import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.aionemu.gameserver.model.gameobjects.Creature;
-import com.aionemu.gameserver.model.gameobjects.Summon;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.skillengine.model.Skill;
 import com.aionemu.gameserver.utils.PositionUtil;
 
 /**
- * @author MrPoke
+ * @author MrPoke, Neon
  */
 public class MaxCountProperty {
 
@@ -31,20 +30,20 @@ public class MaxCountProperty {
 				if (firstTarget == null)
 					return false;
 
-				// filter out summons (we want nearest masters), then order by distance, limit to max count
-				List<Creature> nearestCreatures = skill.getEffectedList().stream().filter(c -> !(c instanceof Summon))
-					.sorted(Comparator.comparingDouble(c -> PositionUtil.getDistance(firstTarget, c))).limit(maxCount).collect(Collectors.toList());
+				Set<Creature> nearestCreatures = skill.getEffectedList().stream()
+					.sorted(Comparator.comparingDouble(c -> PositionUtil.getDistance(firstTarget, c)))
+					.limit(maxCount)
+					.collect(Collectors.toSet());
 
 				// rebuild effected list with correct number of creatures and their summons
-				skill.getEffectedList().clear();
-				nearestCreatures.forEach(c -> {
-					skill.getEffectedList().add(c);
-					if (value == TargetRangeAttribute.PARTY_WITHPET && c instanceof Player) {
-						Summon summon = ((Player) c).getSummon();
-						if (summon != null)
-							skill.getEffectedList().add(summon);
+				if (value == TargetRangeAttribute.PARTY_WITHPET) {
+					for (Object creature : nearestCreatures.toArray()) {
+						Creature summon = creature instanceof Player ? ((Player) creature).getSummon() : null;
+						if (summon != null && skill.getEffectedList().contains(summon))
+							nearestCreatures.add(summon);
 					}
-				});
+				}
+				skill.getEffectedList().retainAll(nearestCreatures);
 		}
 		return true;
 	}
