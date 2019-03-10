@@ -1,6 +1,7 @@
 package com.aionemu.gameserver.services.item;
 
-import static com.aionemu.gameserver.services.item.ItemPacketService.*;
+import static com.aionemu.gameserver.services.item.ItemPacketService.sendItemDeletePacket;
+import static com.aionemu.gameserver.services.item.ItemPacketService.sendStorageUpdatePacket;
 
 import java.util.List;
 
@@ -30,14 +31,18 @@ public class ItemMoveService {
 			return;
 
 		IStorage sourceStorage = player.getStorage(sourceStorageType);
-		Item item = player.getStorage(sourceStorageType).getItemByObjId(itemObjId);
+		if (sourceStorage == null) {
+			log.error(player + " tried to move itemObjId " + itemObjId + " from unknown sourceStorageType: " + sourceStorageType);
+			return;
+		}
+		Item item = sourceStorage.getItemByObjId(itemObjId);
 
 		if (item == null)
 			return;
 
 		IStorage targetStorage = player.getStorage(destinationStorageType);
 		if (targetStorage == null) {
-			log.error("Try moving item to null storage! destinationStorageType:" + destinationStorageType);
+			log.error(player + " tried to move itemObjId " + itemObjId + " to unknown destinationStorageType: " + destinationStorageType);
 			return;
 		}
 
