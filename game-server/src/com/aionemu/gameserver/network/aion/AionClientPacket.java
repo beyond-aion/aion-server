@@ -48,8 +48,7 @@ public abstract class AionClientPacket extends BaseClientPacket<AionConnection> 
 			}
 			runImpl();
 		} catch (Throwable e) {
-			String name = getConnection().getAccount() == null ? getConnection().getIP() : getConnection().getAccount().toString();
-			log.error("Error handling client packet from " + name + ": " + this, e);
+			log.error("Error handling client packet from " + getConnection() + ": " + this, e);
 		}
 	}
 
