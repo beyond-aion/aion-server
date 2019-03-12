@@ -208,7 +208,7 @@ CREATE TABLE `headhunting` (
   `accumulated_kills` int(11) NOT NULL,
   `last_update` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`hunter_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for `house_bids`
@@ -809,7 +809,7 @@ CREATE TABLE `player_veteran_rewards` (
   `received_months` tinyint(3) NOT NULL DEFAULT '0',
   PRIMARY KEY (`player_id`),
   CONSTRAINT `player_veteran_rewards_ibfk_1` FOREIGN KEY (`player_id`) REFERENCES `players` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for `player_web_rewards`

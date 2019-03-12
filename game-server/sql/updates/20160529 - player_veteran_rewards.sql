@@ -4,4 +4,4 @@ CREATE TABLE `player_veteran_rewards` (
   `received_months` tinyint(3) NOT NULL DEFAULT '0',
   PRIMARY KEY (`player_id`),
   CONSTRAINT `player_veteran_rewards_ibfk_1` FOREIGN KEY (`player_id`) REFERENCES `players` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

@@ -3,4 +3,4 @@ CREATE TABLE IF NOT EXISTS `headhunting` (
   `accumulated_kills`int(11) NOT NULL,
   `last_update` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`hunter_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
