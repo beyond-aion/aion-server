@@ -15,7 +15,7 @@ public class CustomConfig {
 	public static boolean CHALLENGE_TASKS_ENABLED;
 
 	/**
-	 * Enable announce when a player succes enchant item 15
+	 * Announce when a player successfully enchants an item to +15 or +20
 	 */
 	@Property(key = "gameserver.enchant.announce.enable", defaultValue = "true")
 	public static boolean ENABLE_ENCHANT_ANNOUNCE;
@@ -31,6 +31,12 @@ public class CustomConfig {
 	 */
 	@Property(key = "gameserver.chat.whisper.level", defaultValue = "10")
 	public static int LEVEL_TO_WHISPER;
+
+	/**
+	 * Time in days after which an item in broker will be unregistered (client cannot display more than 255 days)
+	 */
+	@Property(key = "gameserver.broker.registration_expiration_days", defaultValue = "8")
+	public static int BROKER_REGISTRATION_EXPIRATION_DAYS;
 
 	/**
 	 * Factions search mode

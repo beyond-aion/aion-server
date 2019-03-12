@@ -6,6 +6,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.model.broker.BrokerRace;
 
 /**
@@ -54,7 +55,7 @@ public class BrokerItem implements Comparable<BrokerItem>, Persistable {
 		this.isSold = false;
 		this.isSettled = false;
 		this.splittingAvailable = splittingAvailable;
-		this.expireTime = new Timestamp(System.currentTimeMillis() + TimeUnit.DAYS.toMillis(8));
+		this.expireTime = new Timestamp(System.currentTimeMillis() + TimeUnit.DAYS.toMillis(CustomConfig.BROKER_REGISTRATION_EXPIRATION_DAYS));
 		this.settleTime = new Timestamp(System.currentTimeMillis());
 		this.state = PersistentState.NEW;
 	}
