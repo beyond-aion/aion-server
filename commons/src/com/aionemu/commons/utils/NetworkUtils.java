@@ -49,54 +49,55 @@ public class NetworkUtils {
 	}
 
 	/**
-	 * Convert data from given ByteBuffer to hex
-	 *
-	 * @param data
-	 * @return hex
+	 * @return Formatted hex string of the buffers data.
 	 */
-	public static String toHex(ByteBuffer data) {
-		StringBuilder result = new StringBuilder();
-		int counter = 0;
-		int b;
-		while (data.hasRemaining()) {
-			if (counter % 16 == 0)
-				result.append(String.format("%04X: ", counter));
+	public static String toHex(ByteBuffer buffer) {
+		return toHex(buffer, 0, buffer.capacity());
+	}
 
-			b = data.get() & 0xff;
+	/**
+	 * @param buffer
+	 * @param start position to start read from
+	 * @param end end position (exclusive)
+	 * @return Formatted hex string of the buffers data.
+	 */
+	public static String toHex(ByteBuffer buffer, int start, int end) {
+		StringBuilder result = new StringBuilder();
+		for (int i = start, bytes = 0; i < end; bytes++) {
+			if (bytes % 16 == 0) {
+				if (result.length() > 0)
+					result.append("\n");
+				result.append(String.format("%04X: ", bytes));
+			}
+
+			int b = buffer.get(i) & 0xff;
 			result.append(String.format("%02X ", b));
 
-			counter++;
-			if (counter % 16 == 0) {
-				result.append("  ");
-				toText(data, result, 16);
-				result.append("\n");
+			int bytesInRow = (bytes % 16) + 1;
+			if (++i == buffer.capacity() || bytesInRow == 16) {
+				for (int j = bytesInRow; j <= 16; j++)
+					result.append("   ");
+				toText(buffer, result, i - bytesInRow, i);
 			}
-		}
-		int rest = counter % 16;
-		if (rest > 0) {
-			for (int i = 0; i < 17 - rest; i++) {
-				result.append("   ");
-			}
-			toText(data, result, rest);
 		}
 		return result.toString();
 	}
 
 	/**
-	 * Gets last <tt>cnt</tt> read bytes from the <tt>data</tt> buffer and puts into <tt>result</tt> buffer in special format:
+	 * Writes bytes from the <tt>buffer</tt>'s startIndex (inclusive) to the endIndex (exclusive) as string representable characters into <tt>result</tt>:
 	 * <ul>
 	 * <li>if byte represents char from partition 0x1F to 0x80 (which are normal ascii chars) then it's put into buffer as it is</li>
 	 * <li>otherwise dot is put into buffer</li>
 	 * </ul>
 	 *
-	 * @param data
+	 * @param buffer
 	 * @param result
-	 * @param cnt
+	 * @param startIndex
+	 * @param endIndex exclusive
 	 */
-	private static void toText(ByteBuffer data, StringBuilder result, int cnt) {
-		int charPos = data.position() - cnt;
-		for (int a = 0; a < cnt; a++) {
-			int c = data.get(charPos++) & 0xFF; // unsigned byte
+	private static void toText(ByteBuffer buffer, StringBuilder result, int startIndex, int endIndex) {
+		for (int charPos = startIndex; charPos < endIndex; charPos++) {
+			int c = buffer.get(charPos) & 0xFF; // unsigned byte
 			if (c > 0x1f && c < 0x80)
 				result.append((char) c);
 			else

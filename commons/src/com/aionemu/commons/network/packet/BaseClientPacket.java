@@ -78,15 +78,20 @@ public abstract class BaseClientPacket<T extends AConnection<?>> extends BasePac
 	 * @return <code>true</code> if reading was successful, otherwise <code>false</code>
 	 */
 	public final boolean read() {
+		int startPos = buf.position();
 		try {
 			readImpl();
 
 			if (getRemainingBytes() > 0 && partiallyReadPackets.add(getOpCode()))
-				log.warn(this + " was not fully read! Remaining bytes:\n" + NetworkUtils.toHex(buf));
+				log.warn(this + " was not fully read! Last " + getRemainingBytes() + " bytes were not read from buffer:\n" + NetworkUtils.toHex(buf, startPos, buf.limit()));
 
 			return true;
-		} catch (Exception re) {
-			log.error("Reading failed for packet " + this, re);
+		} catch (Exception ex) {
+			String msg = "Reading failed for packet " + this + ". Buffer Info";
+			if (getRemainingBytes() > 0)
+				msg += " (last " + getRemainingBytes() + " bytes were not read)";
+			msg += ":\n" + NetworkUtils.toHex(buf, startPos, buf.limit());
+			log.error(msg, ex);
 			return false;
 		}
 	}

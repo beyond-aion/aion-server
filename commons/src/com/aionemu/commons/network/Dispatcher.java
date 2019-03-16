@@ -203,7 +203,7 @@ public abstract class Dispatcher extends Thread {
 	private boolean parse(AConnection<?> con, ByteBuffer buf) {
 		int size = (buf.getShort() & 0xFFFF) - 2; // size includes size of the read short, so we need to subtract two bytes
 		if (size <= 0) {
-			log.error("Received empty packet without opCode from " + con);
+			log.error("Received empty packet without opCode from " + con + ", content: " + NetworkUtils.toHex(buf));
 			return false;
 		}
 		ByteBuffer b = buf.slice().order(buf.order());
@@ -214,7 +214,7 @@ public abstract class Dispatcher extends Thread {
 
 			return con.processData(b);
 		} catch (Exception e) {
-			log.error("Error parsing input from " + con + ", packet size: " + size + ", unread bytes: " + NetworkUtils.toHex(b), e);
+			log.error("Error parsing input from " + con + ", packet size: " + size + ", content: " + NetworkUtils.toHex(b), e);
 			return false;
 		}
 	}

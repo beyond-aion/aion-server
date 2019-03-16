@@ -1,9 +1,10 @@
 package com.aionemu.chatserver.common.netty;
 
-import com.aionemu.commons.utils.NetworkUtils;
 import org.jboss.netty.buffer.ChannelBuffer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.aionemu.commons.utils.NetworkUtils;
 
 public abstract class BaseClientPacket extends AbstractPacket {
 
@@ -30,13 +31,18 @@ public abstract class BaseClientPacket extends AbstractPacket {
 	 * @return boolean
 	 */
 	public boolean read() {
+		int startPos = buf.readerIndex();
 		try {
 			readImpl();
 			if (getRemainingBytes() > 0)
-				log.warn("Packet " + this + " not fully read! Remaining bytes:\n" + NetworkUtils.toHex(buf.toByteBuffer()));
+				log.warn(this + " was not fully read! Last " + getRemainingBytes() + " bytes were not read from buffer:\n" + NetworkUtils.toHex(buf.toByteBuffer(startPos, buf.writerIndex() - startPos)));
 			return true;
 		} catch (Exception ex) {
-			log.error("Reading failed for packet " + this, ex);
+			String msg = "Reading failed for packet " + this + ". Buffer Info";
+			if (getRemainingBytes() > 0)
+				msg += " (last " + getRemainingBytes() + " bytes were not read)";
+			msg += ":\n" + NetworkUtils.toHex(buf.toByteBuffer(startPos, buf.writerIndex() - startPos));
+			log.error(msg, ex);
 			return false;
 		}
 	}
