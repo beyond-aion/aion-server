@@ -1,7 +1,6 @@
 package com.aionemu.gameserver.services.siege;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -94,23 +93,22 @@ public class FortressAssault extends Assault<FortressSiege> {
 		for (AssaulterType type : AssaulterType.values()) {
 			if (type == AssaulterType.TELEPORT || type == AssaulterType.COMMANDER)
 				continue;
-			computeAssaulterList(finalList, assaulterMap.get(type), spawnBudget * type.getSpawnStake());
+			addAssaulters(finalList, assaulterMap.get(type), spawnBudget * type.getSpawnStake());
 		}
 		return finalList;
 	}
 
-	private void computeAssaulterList(List<Assaulter> output, List<Assaulter> input, float budget) {
-		if (!input.isEmpty()) {
-			while (budget > 0.0f) {
-				float budgetCopy = budget;
-				Assaulter a = Rnd.get(input.stream().filter(assaulter -> assaulter.getSpawnCost() <= budgetCopy).collect(Collectors.toList()));
-				if (a == null)
-					a = input.get(0);
-				output.add(a);
-				budget -= a.getSpawnCost();
+	private void addAssaulters(List<Assaulter> output, List<Assaulter> input, float budget) {
+		if (input == null || input.isEmpty())
+			return;
+		while (budget > 0.0f) {
+			float budgetCopy = budget;
+			Assaulter a = Rnd.get(input.stream().filter(assaulter -> assaulter.getSpawnCost() <= budgetCopy).collect(Collectors.toList()));
+			if (a == null) {
+				a = input.get(0);
 			}
-		} else {
-			output = Collections.emptyList();
+			output.add(a);
+			budget -= a.getSpawnCost();
 		}
 	}
 
@@ -126,7 +124,7 @@ public class FortressAssault extends Assault<FortressSiege> {
 
 		spawnBudget = Math.max(assaultData.getBaseBudget() / 3f, Math.round(assaultData.getBaseBudget() * difficulty));
 		startBudget = spawnBudget;
-		computeAssaulterList(commanderSpawnList, assaultData.getProcessedAssaulters().get(AssaulterType.COMMANDER), difficulty);
+		addAssaulters(commanderSpawnList, assaultData.getProcessedAssaulters().get(AssaulterType.COMMANDER), difficulty);
 		possibleCommanderCount = commanderSpawnList.size();
 
 		minSpawnDelay = Math.min(Math.round(assaultData.getBaseDelay() / difficulty), assaultData.getBaseDelay() - 10);
