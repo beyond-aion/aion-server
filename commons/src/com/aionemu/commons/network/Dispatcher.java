@@ -2,7 +2,6 @@ package com.aionemu.commons.network;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
 import java.nio.channels.SelectableChannel;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
@@ -151,14 +150,12 @@ public abstract class Dispatcher extends Thread {
 
 		ByteBuffer rb = con.readBuffer;
 
-		/**
-		 * Test if this build should use assertion. If NetworkAssertion == false javac will remove this code block
-		 */
+		// Test if this build should use assertion. If NetworkAssertion == false javac will remove this code block
 		if (Assertion.NetworkAssertion) {
-			assert con.readBuffer.hasRemaining();
+			assert rb.hasRemaining();
 		}
 
-		/** Attempt to read off the channel */
+		// Attempt to read off the channel
 		int numRead;
 		try {
 			numRead = socketChannel.read(rb);
@@ -168,9 +165,7 @@ public abstract class Dispatcher extends Thread {
 		}
 
 		if (numRead == -1) {
-			/**
-			 * Remote entity shut the socket down cleanly. Do the same from our end and cancel the channel.
-			 */
+			// Remote entity shut the socket down cleanly. Do the same from our end and cancel the channel.
 			closeConnectionImpl(con);
 			return;
 		} else if (numRead == 0) {
@@ -179,20 +174,18 @@ public abstract class Dispatcher extends Thread {
 
 		rb.flip();
 		while (rb.remaining() > 2 && rb.remaining() >= rb.getShort(rb.position())) {
-			/** got full message */
+			// got full message
 			if (!parse(con, rb)) {
 				closeConnectionImpl(con);
 				return;
 			}
 		}
 		if (rb.hasRemaining()) {
-			con.readBuffer.compact();
+			rb.compact();
 
-			/**
-			 * Test if this build should use assertion. If NetworkAssertion == false javac will remove this code block
-			 */
+			// Test if this build should use assertion. If NetworkAssertion == false javac will remove this code block
 			if (Assertion.NetworkAssertion) {
-				assert con.readBuffer.hasRemaining();
+				assert rb.hasRemaining();
 			}
 		} else
 			rb.clear();
@@ -208,19 +201,20 @@ public abstract class Dispatcher extends Thread {
 	 * @return True if packet was parsed.
 	 */
 	private boolean parse(AConnection<?> con, ByteBuffer buf) {
-		short sz = 0;
+		int size = (buf.getShort() & 0xFFFF) - 2; // size includes size of the read short, so we need to subtract two bytes
+		if (size <= 0) {
+			log.error("Received empty packet without opCode from " + con);
+			return false;
+		}
+		ByteBuffer b = buf.slice().order(buf.order());
 		try {
-			sz = buf.getShort();
-			if (sz > 1)
-				sz -= 2;
-			ByteBuffer b = (ByteBuffer) buf.slice().limit(sz);
-			b.order(ByteOrder.LITTLE_ENDIAN);
+			b.limit(size);
 			// read message fully
-			buf.position(buf.position() + sz);
+			buf.position(buf.position() + size);
 
 			return con.processData(b);
 		} catch (Exception e) {
-			log.error("Error parsing input from " + con + ", packet size: " + sz + ", unread bytes: " + NetworkUtils.toHex(buf), e);
+			log.error("Error parsing input from " + con + ", packet size: " + size + ", unread bytes: " + NetworkUtils.toHex(b), e);
 			return false;
 		}
 	}
@@ -236,7 +230,7 @@ public abstract class Dispatcher extends Thread {
 
 		int numWrite;
 		ByteBuffer wb = con.writeBuffer;
-		/** We have not written data */
+		// We have not written data
 		if (wb.hasRemaining()) {
 			try {
 				numWrite = socketChannel.write(wb);
@@ -250,7 +244,7 @@ public abstract class Dispatcher extends Thread {
 				return;
 			}
 
-			/** Again not all data was send */
+			// Again not all data was send
 			if (wb.hasRemaining())
 				return;
 		}
@@ -264,7 +258,7 @@ public abstract class Dispatcher extends Thread {
 				break;
 			}
 
-			/** Attempt to write to the channel */
+			// Attempt to write to the channel
 			try {
 				numWrite = socketChannel.write(wb);
 			} catch (IOException e) {
@@ -277,21 +271,17 @@ public abstract class Dispatcher extends Thread {
 				return;
 			}
 
-			/** not all data was send */
+			// not all data was send
 			if (wb.hasRemaining())
 				return;
 		}
 
-		/**
-		 * Test if this build should use assertion. If NetworkAssertion == false javac will remove this code block
-		 */
+		// Test if this build should use assertion. If NetworkAssertion == false javac will remove this code block
 		if (Assertion.NetworkAssertion) {
 			assert !wb.hasRemaining();
 		}
 
-		/**
-		 * We wrote away all data, so we're no longer interested in writing on this socket.
-		 */
+		// We wrote away all data, so we're no longer interested in writing on this socket.
 		key.interestOps(key.interestOps() & ~SelectionKey.OP_WRITE);
 	}
 
@@ -301,9 +291,7 @@ public abstract class Dispatcher extends Thread {
 	 * @param con
 	 */
 	protected final void closeConnectionImpl(AConnection<?> con) {
-		/**
-		 * Test if this build should use assertion. If NetworkAssertion == false javac will remove this code block
-		 */
+		// Test if this build should use assertion. If NetworkAssertion == false javac will remove this code block
 		if (Assertion.NetworkAssertion)
 			assert Thread.currentThread() == this;
 
