@@ -3,13 +3,13 @@ package com.aionemu.commons.scripting.impl.javacompiler;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 import javax.tools.SimpleJavaFileObject;
 
-import org.apache.commons.io.FileUtils;
-
 /**
- * This class is simple wrapper for SimpleJavaFileObject that load class source from file sytem
+ * This class is a simple wrapper for SimpleJavaFileObject that loads a class source from file system
  * 
  * @author SoulKeeper
  */
@@ -38,6 +38,6 @@ public class JavaSourceFromFile extends SimpleJavaFileObject {
 	 */
 	@Override
 	public CharSequence getCharContent(boolean ignoreEncodingErrors) throws IOException {
-		return FileUtils.readFileToString(new File(toUri()), StandardCharsets.UTF_8);
+		return new String(Files.readAllBytes(Paths.get(toUri())), StandardCharsets.UTF_8);
 	}
 }

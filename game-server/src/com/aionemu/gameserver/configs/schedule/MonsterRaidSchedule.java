@@ -1,7 +1,6 @@
 package com.aionemu.gameserver.configs.schedule;
 
 import java.io.File;
-import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,8 +8,6 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-
-import org.apache.commons.io.FileUtils;
 
 import com.aionemu.commons.utils.xml.JAXBUtil;
 
@@ -47,13 +44,6 @@ public class MonsterRaidSchedule {
 	}
 
 	public static MonsterRaidSchedule load() {
-		MonsterRaidSchedule mrs;
-		try {
-			String xml = FileUtils.readFileToString(new File("./config/schedule/monster_raid_schedule.xml"), StandardCharsets.UTF_8);
-			mrs = JAXBUtil.deserialize(xml, MonsterRaidSchedule.class);
-		} catch (Exception e) {
-			throw new RuntimeException("Failed to initialize worldraids", e);
-		}
-		return mrs;
+		return JAXBUtil.deserialize(new File("./config/schedule/monster_raid_schedule.xml"), MonsterRaidSchedule.class);
 	}
 }

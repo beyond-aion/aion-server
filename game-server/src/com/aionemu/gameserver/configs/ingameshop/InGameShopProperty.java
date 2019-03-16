@@ -1,7 +1,6 @@
 package com.aionemu.gameserver.configs.ingameshop;
 
 import java.io.File;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,8 +8,6 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-
-import org.apache.commons.io.FileUtils;
 
 import com.aionemu.commons.utils.xml.JAXBUtil;
 import com.aionemu.gameserver.model.templates.ingameshop.IGCategory;
@@ -43,12 +40,7 @@ public class InGameShopProperty {
 	}
 
 	public static InGameShopProperty load() {
-		try {
-			String xml = FileUtils.readFileToString(new File("./config/ingameshop/in_game_shop.xml"), StandardCharsets.UTF_8);
-			return JAXBUtil.deserialize(xml, InGameShopProperty.class);
-		} catch (Exception e) {
-			throw new RuntimeException("Failed to initialize ingameshop", e);
-		}
+		return JAXBUtil.deserialize(new File("./config/ingameshop/in_game_shop.xml"), InGameShopProperty.class);
 	}
 
 }

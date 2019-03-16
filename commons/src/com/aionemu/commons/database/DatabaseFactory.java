@@ -65,8 +65,7 @@ public class DatabaseFactory {
 		try {
 			DatabaseConfig.DATABASE_DRIVER.newInstance();
 		} catch (Exception e) {
-			log.error("Error obtaining DB driver", e);
-			throw new Error("DB Driver doesnt exist!");
+			throw new Error("Error initializing DB driver", e);
 		}
 
 		HikariConfig config = new HikariConfig();
