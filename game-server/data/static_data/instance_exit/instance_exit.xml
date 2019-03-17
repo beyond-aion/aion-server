@@ -16,7 +16,8 @@
 	<instance_exit instance_id="300200000" exit_world="210030000" race="ELYOS" x="2533.8564" y="835.055" z="103.967476" h="59"/>
 	<instance_exit instance_id="300200000" exit_world="220030000" race="ASMODIANS" x="2907.624" y="1464.1887" z="252.59264" h="36"/>
 	<!-- Chamber Of Roah -->
-	<instance_exit instance_id="300070000" exit_world="400010000" race="PC_ALL" x="2712.53" y="757.89" z="2854.295"/>
+	<instance_exit instance_id="300070000" exit_world="110010000" race="ELYOS" x="1366.35" y="1487.45" z="569.039" h="90"/>
+	<instance_exit instance_id="300070000" exit_world="120010000" race="ASMODIANS" x="1616.83" y="1382.95" z="193.128" h="90"/>
 	<!-- Fire Temple -->
 	<instance_exit instance_id="320100000" exit_world="210020000" race="ELYOS" x="1343.28" y="350.96" z="348.67"/>
 	<instance_exit instance_id="320100000" exit_world="220020000" race="ASMODIANS" x="1592.178" y="977.2572" z="140.75"/>

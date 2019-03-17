@@ -19,6 +19,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureSeeState;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureVisualState;
+import com.aionemu.gameserver.model.items.NpcEquippedGear;
 import com.aionemu.gameserver.model.stats.container.CreatureGameStats;
 import com.aionemu.gameserver.model.stats.container.CreatureLifeStats;
 import com.aionemu.gameserver.model.templates.item.ItemAttackType;
@@ -347,7 +348,7 @@ public abstract class Creature extends VisibleObject {
 
 		return false;
 	}
-	
+
 	public boolean isInAnyHide() {
 		return visualState != CreatureVisualState.VISIBLE.getId() && visualState != CreatureVisualState.BLINKING.getId();
 	}
@@ -706,6 +707,10 @@ public abstract class Creature extends VisibleObject {
 
 	public boolean isWorldRaidMonster() {
 		return getTribe() == TribeClass.WORLDRAID_MONSTER || getTribe() == TribeClass.WORLDRAID_MONSTER_SANDWORMSUM && isRaidMonster();
+	}
+
+	public NpcEquippedGear getOverrideEquipment() {
+		return null;
 	}
 
 }

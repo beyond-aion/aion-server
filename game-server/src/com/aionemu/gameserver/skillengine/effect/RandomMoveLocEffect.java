@@ -6,6 +6,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
 import com.aionemu.gameserver.geoEngine.math.Vector3f;
+import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.skillengine.model.DashStatus;
 import com.aionemu.gameserver.skillengine.model.Effect;
@@ -44,14 +45,14 @@ public class RandomMoveLocEffect extends EffectTemplate {
 		SkillMoveType mt = direction == 1 ? SkillMoveType.MOVEBEHIND : SkillMoveType.DODGE;
 		effect.setSkillMoveType(mt);
 		effect.setDashStatus(ds);
-		final Player effector = (Player) effect.getEffector();
+		
+		Creature effector = effect.getEffector();
 		// Move Effector backwards direction=1 or frontwards direction=0
 		if (distance != 0) {
 			double radian = Math.toRadians(PositionUtil.convertHeadingToAngle(effector.getHeading()));
 			float x1 = (float) (Math.cos(Math.PI * direction + radian) * distance);
 			float y1 = (float) (Math.sin(Math.PI * direction + radian) * distance);
-			Vector3f closestCollision = GeoService.getInstance().getClosestCollision(effector, effector.getX() + x1, effector.getY() + y1,
-				effector.getZ());
+			Vector3f closestCollision = GeoService.getInstance().getClosestCollision(effector, effector.getX() + x1, effector.getY() + y1, effector.getZ());
 			effect.getSkill().setTargetPosition(closestCollision.getX(), closestCollision.getY(), closestCollision.getZ(), effector.getHeading());
 		} else
 			effect.getSkill().setTargetPosition(effector.getX(), effector.getY(), effector.getZ(), effector.getHeading());

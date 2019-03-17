@@ -21,6 +21,7 @@ import com.aionemu.gameserver.dao.AbyssRankDAO;
 import com.aionemu.gameserver.dao.AccountPassportsDAO;
 import com.aionemu.gameserver.dao.BlockListDAO;
 import com.aionemu.gameserver.dao.CraftCooldownsDAO;
+import com.aionemu.gameserver.dao.CustomInstanceDAO;
 import com.aionemu.gameserver.dao.FriendListDAO;
 import com.aionemu.gameserver.dao.HeadhuntingDAO;
 import com.aionemu.gameserver.dao.HouseObjectCooldownsDAO;
@@ -152,6 +153,7 @@ public class PlayerService {
 		DAOManager.getDAO(AccountPassportsDAO.class).storePassport(player.getAccount());
 		if (EventsConfig.ENABLE_HEADHUNTING)
 			DAOManager.getDAO(HeadhuntingDAO.class).storeHeadhunter(player.getObjectId());
+		DAOManager.getDAO(CustomInstanceDAO.class).storePlayer(player.getObjectId());
 	}
 
 	/**

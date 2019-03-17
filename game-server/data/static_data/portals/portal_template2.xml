@@ -1160,6 +1160,12 @@
 	<portal_use npc_id="880118">
 		<portal_path loc_id="4000511" />
 	</portal_use>
+	
+	<!-- Custom -->
+	<portal_use npc_id="730588">
+		<portal_path loc_id="1100106" race="ELYOS" />
+		<portal_path loc_id="1200109" race="ASMODIANS" />
+	</portal_use>
 	<!-- ############### PORTAL USE END ############### -->
 
 	<!-- ############### PORTAL DIALOG ############### -->

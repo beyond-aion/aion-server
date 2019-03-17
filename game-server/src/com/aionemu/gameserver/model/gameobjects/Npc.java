@@ -8,11 +8,13 @@ import org.apache.commons.lang3.StringUtils;
 import com.aionemu.gameserver.controllers.NpcController;
 import com.aionemu.gameserver.controllers.movement.NpcMoveController;
 import com.aionemu.gameserver.dataholders.DataManager;
+import com.aionemu.gameserver.dataholders.loadingutils.adapters.NpcEquipmentList;
 import com.aionemu.gameserver.model.CreatureType;
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.TribeClass;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.items.NpcEquippedGear;
 import com.aionemu.gameserver.model.skill.NpcSkillEntry;
 import com.aionemu.gameserver.model.skill.NpcSkillList;
 import com.aionemu.gameserver.model.stats.container.NpcGameStats;
@@ -50,6 +52,8 @@ public class Npc extends Creature {
 	private int townId;
 	private CreatureType type = null;
 	private ItemAttackType attacktype = ItemAttackType.PHYSICAL;
+
+	private NpcEquippedGear overridenEquipment;
 
 	public Npc(int objId, NpcController controller, SpawnTemplate spawnTemplate, NpcTemplate objectTemplate) {
 		super(objId, controller, spawnTemplate, objectTemplate, new WorldPosition(spawnTemplate.getWorldId()));
@@ -360,5 +364,16 @@ public class Npc extends Creature {
 	@Override
 	protected boolean autoReleaseObjectId() {
 		return true;
+	}
+
+	public void overrideEquipmentList(NpcEquipmentList v) {
+		overridenEquipment = new NpcEquippedGear(v);
+	}
+
+	@Override
+	public NpcEquippedGear getOverrideEquipment() {
+		if (overridenEquipment != null)
+			return overridenEquipment;
+		return getObjectTemplate().getEquipment();
 	}
 }

@@ -19,6 +19,7 @@ import com.aionemu.gameserver.controllers.attack.AttackStatus;
 import com.aionemu.gameserver.controllers.observer.ActionObserver;
 import com.aionemu.gameserver.controllers.observer.ObserverType;
 import com.aionemu.gameserver.controllers.observer.StartMovingListener;
+import com.aionemu.gameserver.custom.instance.CustomInstanceService;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.PlayerClass;
 import com.aionemu.gameserver.model.gameobjects.Creature;
@@ -754,6 +755,8 @@ public class Skill {
 			if (effector instanceof Player)
 				effector.getObserveController().notifyEndSkillCastObservers(this);
 		}
+		if (effector instanceof Player)
+			CustomInstanceService.getInstance().recordPlayerModelEntry((Player) effector, this, effector.getTarget());
 	}
 
 	private void addResistedEffectHateAndNotifyFriends(List<Effect> effects) {
