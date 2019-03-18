@@ -2,9 +2,15 @@ package ai.instance.custom;
 
 import java.util.concurrent.Future;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.aionemu.gameserver.ai.AIName;
+import com.aionemu.gameserver.custom.instance.CustomInstanceRank;
 import com.aionemu.gameserver.custom.instance.CustomInstanceRankEnum;
 import com.aionemu.gameserver.custom.instance.CustomInstanceService;
+import com.aionemu.gameserver.custom.instance.RoahCustomInstanceHandler;
+import com.aionemu.gameserver.instance.handlers.InstanceHandler;
 import com.aionemu.gameserver.model.PlayerClass;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -24,7 +30,8 @@ import ai.AggressiveNpcAI;
 @AIName("custom_instance_dominator")
 public class CustomInstanceDominatorAI extends AggressiveNpcAI {
 
-	private int rank;
+	private static final Logger log = LoggerFactory.getLogger("CUSTOM_INSTANCE_LOG");
+	private CustomInstanceRank rankObj;
 	private Future<?> debuffTask, playerPositionCheckTask;
 
 	public CustomInstanceDominatorAI(Npc owner) {
@@ -34,18 +41,25 @@ public class CustomInstanceDominatorAI extends AggressiveNpcAI {
 	@Override
 	protected void handleSpawned() {
 		super.handleSpawned();
+
+		InstanceHandler ih = getPosition().getWorldMapInstance().getInstanceHandler();
+		if (!(ih instanceof RoahCustomInstanceHandler))
+			return;
+
+		int playerId = ((RoahCustomInstanceHandler) ih).getPlayerId();
+		rankObj = CustomInstanceService.getInstance().getPlayerRankObject(playerId);
+		if (rankObj == null) {
+			log.error("[CI_ROAH] No rank object found for player id: " + playerId + ".", new Exception());
+			return;
+		}
+
 		debuffTask = ThreadPoolManager.getInstance().schedule(this::debuffTarget, 1000);
 		playerPositionCheckTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(this::checkPlayerPosition, 15000, 15000);
-
-		// get rank
-		Player player = getPlayer();
-		if (player != null)
-			rank = CustomInstanceService.getInstance().getPlayerRankObject(player.getObjectId()).getRank();
 	}
 
 	private void checkPlayerPosition() {
 		if (!isDead() && getOwner().getGameStats().getLastAttackedTimeDelta() > 10) {
-			Player p = getPlayer();
+			Player p = World.getInstance().findPlayer(rankObj.getPlayerId());
 			if (p != null && PositionUtil.isInRange(p, getOwner(), 60)) {
 				double radian = Math.toRadians(PositionUtil.convertHeadingToAngle(p.getHeading()));
 				float x = (float) (p.getX() + Math.cos(Math.PI * 1 + radian) * 2);
@@ -56,19 +70,11 @@ public class CustomInstanceDominatorAI extends AggressiveNpcAI {
 		}
 	}
 
-	private Player getPlayer() {
-		for (Player p : getKnownList().getKnownPlayers().values()) {
-			if (p != null)
-				return p;
-		}
-		return null;
-	}
-
 	private void debuffTarget() {
 		if (!isDead()) {
 			if (getOwner().getSkillCoolDowns() != null)
 				getOwner().getSkillCoolDowns().clear(); // Make CD rank-dependent, not skill-dependent
-
+			int rank = rankObj.getRank();
 			if (rank >= CustomInstanceRankEnum.ANCIENT.getValue())
 				getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(3539, 65, 100))); // Ignite Aether
 
@@ -123,7 +129,6 @@ public class CustomInstanceDominatorAI extends AggressiveNpcAI {
 	protected void handleDied() {
 		cancelTasks();
 		super.handleDied();
-
 	}
 
 	@Override

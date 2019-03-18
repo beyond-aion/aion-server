@@ -1,16 +1,21 @@
 package ai.instance.custom;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.Future;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.aionemu.gameserver.ai.AIName;
+import com.aionemu.gameserver.custom.instance.CustomInstanceRank;
 import com.aionemu.gameserver.custom.instance.CustomInstanceService;
+import com.aionemu.gameserver.custom.instance.RoahCustomInstanceHandler;
 import com.aionemu.gameserver.custom.instance.neuralnetwork.PlayerModel;
 import com.aionemu.gameserver.custom.instance.neuralnetwork.PlayerModelController;
 import com.aionemu.gameserver.custom.instance.neuralnetwork.PlayerModelEntry;
 import com.aionemu.gameserver.dataholders.loadingutils.adapters.NpcEquipmentList;
+import com.aionemu.gameserver.instance.handlers.InstanceHandler;
 import com.aionemu.gameserver.model.ChatType;
 import com.aionemu.gameserver.model.PlayerClass;
 import com.aionemu.gameserver.model.SkillElement;
@@ -18,11 +23,13 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.gameobjects.state.CreatureSeeState;
 import com.aionemu.gameserver.model.stats.calc.functions.StatSetFunction;
 import com.aionemu.gameserver.model.stats.container.PlayerGameStats;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.model.templates.item.ItemTemplate;
 import com.aionemu.gameserver.model.templates.item.enums.EquipType;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_MESSAGE;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.skillengine.condition.Condition;
 import com.aionemu.gameserver.skillengine.condition.DpCondition;
@@ -36,6 +43,7 @@ import com.aionemu.gameserver.skillengine.properties.Properties.CastState;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
+import com.aionemu.gameserver.world.World;
 
 import ai.GeneralNpcAI;
 
@@ -45,13 +53,11 @@ import ai.GeneralNpcAI;
 @AIName("custom_instance_boss")
 public class CustomInstanceBossAI extends GeneralNpcAI {
 
-	private final static List<Integer> restrictedSkills = Arrays.asList(243, 244, 277, 282, 302, 912, 1178, 1346, 1347, 1757, 2106, 2167, 2400, 2425,
-		2565, 3331, 3663, 3705, 3729, 3683, 3788, 3789, 3835, 3837, 3643, 3839, 3833, 3991, 4407, 2778, 2425, 8291, 10164, 11011, 13010, 13234, 13231);
-
-	private Player player;
+	private static final Logger log = LoggerFactory.getLogger("CUSTOM_INSTANCE_LOG");
+	private CustomInstanceRank rankObj;
 	private PlayerModel model;
 	private Future<?> skillTask, castTimeout;
-	private int previousSkill, rank;
+	private int previousSkill;
 
 	private List<Integer> skillSet;
 	private boolean onlyAttack;
@@ -74,20 +80,36 @@ public class CustomInstanceBossAI extends GeneralNpcAI {
 	protected void handleSpawned() {
 		super.handleSpawned();
 		previousSkill = -1;
-		player = getOwner().getPosition().getWorldMapInstance().getPlayersInside().get(0);
 
-		if (player.getPlayerClass() == PlayerClass.RIDER)
+		InstanceHandler ih = getPosition().getWorldMapInstance().getInstanceHandler();
+		if (!(ih instanceof RoahCustomInstanceHandler))
+			return;
+
+		int playerId = ((RoahCustomInstanceHandler) ih).getPlayerId();
+		rankObj = CustomInstanceService.getInstance().getPlayerRankObject(playerId);
+		if (rankObj == null) {
+			log.error("[CI_ROAH] No rank object found for player id: " + playerId + ".", new Exception());
+			return;
+		}
+
+		Player p = World.getInstance().findPlayer(playerId);
+		if (p == null) {
+			log.error("[CI_ROAH] No player object found for player id: " + playerId
+				+ ". Either the player is offline or the central artifact was destroyed by something else.", new Exception());
+			return;
+		}
+
+		if (p.getPlayerClass() == PlayerClass.RIDER) {
 			onlyAttack = true;
-		else {
+		} else {
 			// model player behavior
-			skillSet = PlayerModelController.getSkillSetForPlayer(player.getObjectId());
-			model = PlayerModelController.trainModelForPlayer(player, skillSet);
+			skillSet = PlayerModelController.getSkillSetForPlayer(playerId);
+			model = PlayerModelController.trainModelForPlayer(playerId, skillSet);
 			onlyAttack = false;
 		}
-		// adapt player parameters
-		rank = CustomInstanceService.getInstance().getPlayerRankObject(player.getObjectId()).getRank();
-		adaptAppearance();
-		adaptStats();
+		adaptAppearance(p);
+		adaptStats(p);
+		getOwner().setSeeState(CreatureSeeState.SEARCH2);
 	}
 
 	@Override
@@ -104,8 +126,8 @@ public class CustomInstanceBossAI extends GeneralNpcAI {
 		super.handleCreatureDetected(creature);
 
 		if (PositionUtil.getDistance(getPosition().getX(), getPosition().getY(), getPosition().getZ(), creature.getX(), creature.getY(),
-			creature.getZ()) <= 45 && creature == player) {
-			getOwner().getAggroList().addHate(creature, 100); // early aggro
+			creature.getZ()) <= 45 && creature.getObjectId() == rankObj.getPlayerId()) {
+			getAggroList().addHate(creature, 100); // early aggro
 
 			if (skillTask == null && !onlyAttack)
 				skillTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(this::checkSkillRotation, 200, 200);
@@ -145,15 +167,18 @@ public class CustomInstanceBossAI extends GeneralNpcAI {
 			return -1;
 
 		// remove shock
-		if ((getEffectController().isAbnormalSet(AbnormalState.ANY_STUN) || getEffectController().isAbnormalSet(AbnormalState.OPENAERIAL))
-			&& getOwner().getSkillCoolDown(283) <= System.currentTimeMillis())
+		if ((getEffectController().isInAnyAbnormalState(AbnormalState.ANY_STUN) || getEffectController().isAbnormalSet(AbnormalState.OPENAERIAL))
+			&& getOwner().getSkillCoolDown(1968) <= System.currentTimeMillis())
 			return 283;
 
-		// assess game state:
-		double[] inputArray = new PlayerModelEntry(getOwner(), -1, player).toStateInputArray(skillSet, previousSkill);
+		if (getEffectController().isInAnyAbnormalState(AbnormalState.CANT_ATTACK_STATE))
+			return -1;
 
 		// compute skill selection:
 		if (model != null) {
+			// assess game state:
+			double[] inputArray = new PlayerModelEntry(getOwner(), -1, (Creature) getTarget()).toStateInputArray(skillSet, previousSkill);
+
 			List<Double> output = model.getOutputEstimation(inputArray);
 			for (int i = 0; i < output.size(); i++) {
 				Skill skillI = SkillEngine.getInstance().getSkill(getOwner(), skillSet.get(i), 1, getTarget());
@@ -162,15 +187,16 @@ public class CustomInstanceBossAI extends GeneralNpcAI {
 				boolean isDPskill = false;
 				if (skillI.getSkillTemplate().getStartconditions() != null)
 					for (Condition c : skillI.getSkillTemplate().getStartconditions().getConditions())
-						if (c instanceof DpCondition)
+						if (c instanceof DpCondition) {
 							isDPskill = true;
+							break;
+						}
 
 				// rule out:
-				if (isDPskill || getEffectController().isInAnyAbnormalState(AbnormalState.CANT_ATTACK_STATE) || !skillI.canUseSkill(CastState.CAST_START)
+				if (isDPskill || !skillI.canUseSkill(CastState.CAST_START)
 					|| (skillI.getSkillTemplate().getType() == SkillType.MAGICAL && getEffectController().isAbnormalSet(AbnormalState.SILENCE))
 					|| (skillI.getSkillTemplate().getType() == SkillType.PHYSICAL && getEffectController().isAbnormalSet(AbnormalState.BIND))
-					|| restrictedSkills.contains(skillSet.get(i)) || skillI.getSkillMethod() == SkillMethod.CHARGE || skillI.isPointSkill()
-					|| getOwner().getSkillCoolDown(cdID) > System.currentTimeMillis())
+					|| skillI.getSkillMethod() == SkillMethod.CHARGE || skillI.isPointSkill() || getOwner().getSkillCoolDown(cdID) > System.currentTimeMillis())
 					output.set(i, -1d); // -1 = minimum probability
 			}
 
@@ -199,10 +225,7 @@ public class CustomInstanceBossAI extends GeneralNpcAI {
 		getEffectController().unsetAbnormal(AbnormalState.SANCTUARY);
 	}
 
-	private void adaptAppearance() {
-		if (player == null)
-			return;
-
+	private void adaptAppearance(Player player) {
 		List<ItemTemplate> equipmentList = new ArrayList<>();
 		if (player.getEquipment().getMainHandWeapon() != null) // weapons manually to exclude swap weapon slots
 			equipmentList.add(player.getEquipment().getMainHandWeapon().getItemSkinTemplate());
@@ -217,10 +240,7 @@ public class CustomInstanceBossAI extends GeneralNpcAI {
 		getOwner().overrideEquipmentList(v);
 	}
 
-	private void adaptStats() {
-		if (player == null)
-			return;
-
+	private void adaptStats(Player player) {
 		PlayerGameStats pgs = player.getGameStats();
 		List<StatSetFunction> functions = new ArrayList<>();
 		functions.add(new StatSetFunction(StatEnum.EARTH_RESISTANCE, pgs.getMagicalDefenseFor(SkillElement.EARTH)));
@@ -241,7 +261,7 @@ public class CustomInstanceBossAI extends GeneralNpcAI {
 		functions.add(new StatSetFunction(StatEnum.MAGICAL_CRITICAL, pgs.getMCritical().getCurrent()));
 		functions.add(new StatSetFunction(StatEnum.MAIN_HAND_POWER, pgs.getMainHandPAttack().getCurrent()));
 		int maxHP = pgs.getMaxHp().getCurrent();
-		maxHP += maxHP * rank / 10f;
+		maxHP += maxHP * rankObj.getRank() / 10f;
 		if (onlyAttack)
 			maxHP *= 10;
 		functions.add(new StatSetFunction(StatEnum.MAXHP, maxHP));
@@ -275,7 +295,7 @@ public class CustomInstanceBossAI extends GeneralNpcAI {
 		}
 
 		getOwner().getGameStats().addEffect(null, functions);
-		getOwner().getLifeStats().setCurrentHp(getOwner().getLifeStats().getMaxHp());
+		getLifeStats().setCurrentHp(getLifeStats().getMaxHp());
 	}
 
 	private void cancelTasks() {
@@ -290,19 +310,18 @@ public class CustomInstanceBossAI extends GeneralNpcAI {
 		cancelTasks();
 		if (model == null)
 			if (onlyAttack)
-				PacketSendUtility.sendMessage(player, "Remarkable... ", ChatType.BRIGHT_YELLOW_CENTER);
+				PacketSendUtility.broadcastToMap(getOwner(), new SM_MESSAGE(getOwner(), "Remarkable... ", ChatType.BRIGHT_YELLOW_CENTER));
 			else
-				PacketSendUtility.sendMessage(player, "Remarkable ... I will ... remember you.", ChatType.BRIGHT_YELLOW_CENTER);
+				PacketSendUtility.broadcastToMap(getOwner(),
+					new SM_MESSAGE(getOwner(), "Remarkable ... I will ... remember you.", ChatType.BRIGHT_YELLOW_CENTER));
 		else
-			PacketSendUtility.sendMessage(player, "One day ... I will ... suppress you!", ChatType.BRIGHT_YELLOW_CENTER);
-		player = null;
+			PacketSendUtility.broadcastToMap(getOwner(), new SM_MESSAGE(getOwner(), "One day ... I will ... suppress you!", ChatType.BRIGHT_YELLOW_CENTER));
 		super.handleDied();
 	}
 
 	@Override
 	protected void handleDespawned() {
 		cancelTasks();
-		player = null;
 		super.handleDespawned();
 	}
 }

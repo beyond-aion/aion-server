@@ -14,6 +14,7 @@ import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.custom.instance.neuralnetwork.PlayerModelEntry;
 import com.aionemu.gameserver.dao.CustomInstanceDAO;
 import com.aionemu.gameserver.dao.CustomInstancePlayerModelEntryDAO;
+import com.aionemu.gameserver.instance.handlers.InstanceHandler;
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Persistable;
@@ -48,7 +49,7 @@ public class CustomInstanceService {
 	public boolean canEnter(int playerId) {
 		CustomInstanceRank rankObject = rankCache.get(playerId);
 		if (rankObject == null) {
-			rankObject = new CustomInstanceRank(0, ServerTime.now().with(LocalTime.of(1, 0)).toEpochSecond(), PersistentState.NEW);
+			rankObject = new CustomInstanceRank(playerId, 0, ServerTime.now().with(LocalTime.of(1, 0)).toEpochSecond(), PersistentState.NEW);
 			rankCache.put(playerId, rankObject);
 		}
 		return rankObject.getLastEntry() < ServerTime.now().with(LocalTime.of(9, 0)).toEpochSecond();
@@ -58,12 +59,12 @@ public class CustomInstanceService {
 		CustomInstanceRank rankObject = rankCache.get(player.getObjectId());
 		rankObject.setLastEntry(System.currentTimeMillis());
 
-		WorldMapInstance wmi = InstanceService.getNextAvailableInstance(CUSTOM_INSTANCE_WORLD_ID, 0, (byte) 1, new RoahCustomInstance());
+		WorldMapInstance wmi = InstanceService.getNextAvailableInstance(CUSTOM_INSTANCE_WORLD_ID, 0, (byte) 1, new RoahCustomInstanceHandler());
 		InstanceService.registerPlayerWithInstance(wmi, player);
 		TeleportService.teleportTo(player, wmi.getMapId(), wmi.getInstanceId(), 504.0f, 396.0f, 94.0f, (byte) 30, TeleportAnimation.FADE_OUT_BEAM);
 
-		log.info("[CI_ROAH] " + player + " entered custom instance with difficulty " + CustomInstanceRankEnum.getRankDescription(rankObject.getRank()) + "("
-			+ rankObject.getRank() + ").");
+		log.info("[CI_ROAH] " + player + " entered custom instance with difficulty " + CustomInstanceRankEnum.getRankDescription(rankObject.getRank())
+			+ "(" + rankObject.getRank() + ").");
 	}
 
 	public CustomInstanceRank getPlayerRankObject(int playerId) {
@@ -73,7 +74,7 @@ public class CustomInstanceService {
 	public void changePlayerRank(int playerId, int newRank) {
 		CustomInstanceRank rankObject = rankCache.get(playerId);
 		if (rankObject == null) {
-			rankObject = new CustomInstanceRank(0, 0, PersistentState.NEW);
+			rankObject = new CustomInstanceRank(playerId, 0, ServerTime.now().with(LocalTime.of(1, 0)).toEpochSecond(), PersistentState.NEW);
 			rankCache.put(playerId, rankObject);
 		}
 		rankObject.setRank(newRank);
@@ -82,8 +83,12 @@ public class CustomInstanceService {
 	public void recordPlayerModelEntry(Player player, Skill skill, VisibleObject target) {
 
 		// FILTER: Only record roah custom instance skills for the moment
-		if (player.getWorldId() != CUSTOM_INSTANCE_WORLD_ID
-			&& player.getPosition().getWorldMapInstance().getInstanceHandler() instanceof RoahCustomInstance)
+		if (player.getWorldId() != CUSTOM_INSTANCE_WORLD_ID)
+			return;
+
+		InstanceHandler ih = player.getPosition().getWorldMapInstance().getInstanceHandler();
+		if (!(ih instanceof RoahCustomInstanceHandler) || !((RoahCustomInstanceHandler) ih).isBossPhase()
+			|| ((RoahCustomInstanceHandler) ih).getPlayerId() != player.getObjectId())
 			return;
 
 		List<PlayerModelEntry> entries = playerModelEntriesCache.get(player.getObjectId());

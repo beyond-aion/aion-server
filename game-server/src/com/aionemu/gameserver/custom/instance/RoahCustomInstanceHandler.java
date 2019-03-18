@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.Future;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicLong;
 
 import org.slf4j.Logger;
@@ -35,7 +36,7 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 /**
  * @author Jo
  */
-public class RoahCustomInstance extends GeneralInstanceHandler {
+public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 
 	private static final Logger log = LoggerFactory.getLogger("CUSTOM_INSTANCE_LOG");
 
@@ -58,8 +59,9 @@ public class RoahCustomInstance extends GeneralInstanceHandler {
 	private static final float REWARD_SCALE = 2f;
 
 	private AtomicLong startTime = new AtomicLong();
+	private AtomicBoolean isInitialized = new AtomicBoolean();
 	private boolean isBossPhase;
-	private int rank;
+	private int rank, playerId;
 	private Future<?> despawnTask, trashMobSpawnTask, bulkyMobSpawnTask, dominatorMobSpawnTask;
 
 	@Override
@@ -218,13 +220,16 @@ public class RoahCustomInstance extends GeneralInstanceHandler {
 
 	@Override
 	public void onEnterInstance(Player player) {
-		rank = CustomInstanceService.getInstance().getPlayerRankObject(player.getObjectId()).getRank();
-		PacketSendUtility.sendMessage(player, "Welcome to the 'Eternal Challenge', " + CustomInstanceRankEnum.getRankDescription(rank) + " challenger!",
-			ChatType.BRIGHT_YELLOW_CENTER);
-		Npc artifact = getNpc(CENTER_ARTIFACT_ID);
-		if (artifact != null) {
-			adaptNPC(artifact, rank);
-			spawnUnlockableNpcs(player);
+		if (isInitialized.compareAndSet(false, true)) {
+			playerId = player.getObjectId();
+			rank = CustomInstanceService.getInstance().getPlayerRankObject(player.getObjectId()).getRank();
+			PacketSendUtility.sendMessage(player, "Welcome to the 'Eternal Challenge', " + CustomInstanceRankEnum.getRankDescription(rank) + " challenger!",
+				ChatType.BRIGHT_YELLOW_CENTER);
+			Npc artifact = getNpc(CENTER_ARTIFACT_ID);
+			if (artifact != null) {
+				adaptNPC(artifact, rank);
+				spawnUnlockableNpcs(player);
+			}
 		}
 	}
 
@@ -373,4 +378,11 @@ public class RoahCustomInstance extends GeneralInstanceHandler {
 		return true;
 	}
 
+	public int getPlayerId() {
+		return playerId;
+	}
+
+	public boolean isBossPhase() {
+		return isBossPhase;
+	}
 }

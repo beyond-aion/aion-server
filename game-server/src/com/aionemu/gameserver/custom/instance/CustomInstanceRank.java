@@ -7,14 +7,20 @@ import com.aionemu.gameserver.model.gameobjects.Persistable.PersistentState;
  */
 public class CustomInstanceRank {
 
+	private int playerId;
 	private int rank;
 	private long lastEntry;
 	private PersistentState state;
 
-	public CustomInstanceRank(int rank, long lastEntry, PersistentState state) {
+	public CustomInstanceRank(int playerId, int rank, long lastEntry, PersistentState state) {
+		this.playerId = playerId;
 		this.rank = rank;
 		this.lastEntry = lastEntry;
 		this.state = state;
+	}
+
+	public int getPlayerId() {
+		return playerId;
 	}
 
 	public int getRank() {

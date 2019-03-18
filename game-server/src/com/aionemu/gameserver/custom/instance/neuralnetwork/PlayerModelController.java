@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.aionemu.gameserver.custom.instance.CustomInstanceService;
-import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
@@ -12,16 +11,14 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
  */
 public class PlayerModelController {
 
-	public static PlayerModel trainModelForPlayer(Player player, List<Integer> skillSet) {
+	public static PlayerModel trainModelForPlayer(int playerId, List<Integer> skillSet) {
 		// get input data:
-		List<PlayerModelEntry> playerModelEntries = CustomInstanceService.getInstance().getPlayerModelEntries(player.getObjectId());
+		List<PlayerModelEntry> playerModelEntries = CustomInstanceService.getInstance().getPlayerModelEntries(playerId);
 
 		// specify model:
 		List<DataSet> dataSets = new ArrayList<>();
 
 		for (int i = 0; i < playerModelEntries.size(); i++) {
-			if (!playerModelEntries.get(i).isBossPhase())
-				continue;
 			int previousSkillID = -1;
 			if (i > 0)
 				previousSkillID = playerModelEntries.get(i - 1).getSkillID();
@@ -35,7 +32,7 @@ public class PlayerModelController {
 		PlayerModel model = new PlayerModel(dataSets.get(0).getValues().length, 10, dataSets.get(0).getTargets().length, 1, null, null);
 
 		// train
-		ThreadPoolManager.getInstance().execute(() -> model.train(dataSets, 1000));
+		ThreadPoolManager.getInstance().executeLongRunning(() -> model.train(dataSets, 1000));
 		return model;
 	}
 

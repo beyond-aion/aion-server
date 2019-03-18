@@ -36,7 +36,7 @@ public class MySQL5CustomInstanceDAO extends CustomInstanceDAO {
 					if (!loadedRanks.containsKey(playerId)) {
 						int rank = rset.getInt("rank");
 						long lastEntry = rset.getTimestamp("last_entry").getTime();
-						loadedRanks.put(playerId, new CustomInstanceRank(rank, lastEntry, PersistentState.UPDATED));
+						loadedRanks.put(playerId, new CustomInstanceRank(playerId, rank, lastEntry, PersistentState.UPDATED));
 					}
 				}
 			}

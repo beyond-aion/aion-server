@@ -2,6 +2,7 @@ package com.aionemu.gameserver.custom.instance.neuralnetwork;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import com.aionemu.gameserver.model.gameobjects.Creature;
@@ -18,6 +19,9 @@ import com.google.common.primitives.Doubles;
  */
 public class PlayerModelEntry implements Persistable {
 
+	private final static List<Integer> restrictedSkills = Arrays.asList(243, 244, 277, 282, 302, 912, 1178, 1346, 1347, 1757, 2106, 2167, 2400, 2425,
+		2565, 3331, 3663, 3705, 3729, 3683, 3788, 3789, 3835, 3837, 3643, 3839, 3833, 3991, 4407, 2778, 2425, 8291, 10164, 11011, 13010, 13234, 13231);
+
 	private PersistentState persistentState;
 
 	private Timestamp timestamp;
@@ -26,27 +30,24 @@ public class PlayerModelEntry implements Persistable {
 	private int playerID; // used for selection
 	private int playerClassID;
 	private float playerHPpercentage, playerMPpercentage; // used for input
-	private float playerX, playerY, playerZ;
 
 	private boolean playerIsRooted, playerIsSilenced, playerIsBound, playerIsStunned, playerIsAetherhold; // used for input
 	private int playerBuffCount; // used for input
 	private int playerDebuffCount; // used for input
 	private boolean playerIsShielded; // used for input
 
-	private int targetID;
-	private int targetClassID; // -1 for NPCs
 	private float targetHPpercentage, targetMPpercentage; // used for input
-	private boolean targetIsPvP, targetFocusesPlayer; // used for input
+	private boolean targetFocusesPlayer; // used for input
 	private float distance; // used for input
-	private float targetX, targetY, targetZ;
 	private boolean targetIsRooted, targetIsSilenced, targetIsBound, targetIsStunned, targetIsAetherhold; // used for input
 	private int targetBuffCount, targetDebuffCount; // used for input
 	private boolean targetIsShielded; // used for input
 
-	private boolean isBossPhase;
-
 	// live constructor
 	public PlayerModelEntry(Creature playerOrBoss, int skillID, Creature target) {
+		if (restrictedSkills.contains(skillID))
+			return;
+
 		timestamp = new Timestamp(System.currentTimeMillis());
 
 		this.skillID = skillID;
@@ -54,9 +55,6 @@ public class PlayerModelEntry implements Persistable {
 		playerClassID = playerOrBoss instanceof Player ? ((Player) playerOrBoss).getPlayerClass().getClassId() : -1;
 		playerHPpercentage = playerOrBoss.getLifeStats().getHpPercentage();
 		playerMPpercentage = playerOrBoss.getLifeStats().getMpPercentage();
-		playerX = playerOrBoss.getX();
-		playerY = playerOrBoss.getY();
-		playerZ = playerOrBoss.getZ();
 
 		playerIsRooted = playerOrBoss.getEffectController().isAbnormalSet(AbnormalState.ROOT);
 		playerIsSilenced = playerOrBoss.getEffectController().isAbnormalSet(AbnormalState.SILENCE);
@@ -75,8 +73,6 @@ public class PlayerModelEntry implements Persistable {
 				playerDebuffCount++;
 		}
 		if (target != null) {
-			targetID = target.getObjectId();
-			targetClassID = target instanceof Player ? ((Player) target).getPlayerClass().getClassId() : -1;
 			if (target.getLifeStats().getMaxHp() > 0)
 				targetHPpercentage = target.getLifeStats().getHpPercentage();
 			else
@@ -85,12 +81,8 @@ public class PlayerModelEntry implements Persistable {
 				targetMPpercentage = target.getLifeStats().getMpPercentage();
 			else
 				targetMPpercentage = 0;
-			targetIsPvP = target instanceof Player;
 			targetFocusesPlayer = target.getTarget() == playerOrBoss;
 			distance = (float) PositionUtil.getDistance(playerOrBoss, target);
-			targetX = target.getX();
-			targetY = target.getY();
-			targetZ = target.getZ();
 			targetIsRooted = target.getEffectController().isAbnormalSet(AbnormalState.ROOT);
 			targetIsSilenced = target.getEffectController().isAbnormalSet(AbnormalState.SILENCE);
 			targetIsBound = target.getEffectController().isAbnormalSet(AbnormalState.BIND);
@@ -107,32 +99,25 @@ public class PlayerModelEntry implements Persistable {
 				else // debuffs
 					targetDebuffCount++;
 		} else {
-			targetID = targetClassID = targetBuffCount = targetDebuffCount = -1;
-			targetHPpercentage = distance = targetMPpercentage = targetX = targetY = targetZ = -1;
-			targetIsPvP = targetFocusesPlayer = targetIsRooted = targetIsSilenced = targetIsBound = targetIsStunned = targetIsAetherhold = targetIsShielded = false;
+			targetBuffCount = targetDebuffCount = -1;
+			targetHPpercentage = distance = targetMPpercentage = -1;
+			targetFocusesPlayer = targetIsRooted = targetIsSilenced = targetIsBound = targetIsStunned = targetIsAetherhold = targetIsShielded = false;
 		}
-		if (playerOrBoss.getPosition().getY() > 550) // in throne room
-			isBossPhase = true;
-
 		setPersistentState(PersistentState.NEW);
 	}
 
 	// constructor from persistence
 	public PlayerModelEntry(int playerID, Timestamp timestamp, int skillID, int playerClassID, float playerHPpercentage, float playerMPpercentage,
-		float playerX, float playerY, float playerZ, boolean playerIsRooted, boolean playerIsSilenced, boolean playerIsBound, boolean playerIsStunned,
-		boolean playerIsAetherhold, int playerBuffCount, int playerDebuffCount, boolean playerIsShielded, int targetID, float targetHPpercentage,
-		float targetMPpercentage, boolean targetIsPvP, boolean targetFocusesPlayer, float distance, float targetX, float targetY, float targetZ,
+		boolean playerIsRooted, boolean playerIsSilenced, boolean playerIsBound, boolean playerIsStunned, boolean playerIsAetherhold, int playerBuffCount,
+		int playerDebuffCount, boolean playerIsShielded, float targetHPpercentage, float targetMPpercentage, boolean targetFocusesPlayer, float distance,
 		boolean targetIsRooted, boolean targetIsSilenced, boolean targetIsBound, boolean targetIsStunned, boolean targetIsAetherhold, int targetBuffCount,
-		int targetDebuffCount, boolean targetIsShielded, boolean isBossPhase) {
+		int targetDebuffCount, boolean targetIsShielded) {
 		this.timestamp = timestamp;
 		this.skillID = skillID;
 		this.playerID = playerID;
 		this.playerClassID = playerClassID;
 		this.playerHPpercentage = playerHPpercentage;
 		this.playerMPpercentage = playerMPpercentage;
-		this.playerX = playerX;
-		this.playerY = playerY;
-		this.playerZ = playerZ;
 		this.playerIsRooted = playerIsRooted;
 		this.playerIsSilenced = playerIsSilenced;
 		this.playerIsBound = playerIsBound;
@@ -141,15 +126,10 @@ public class PlayerModelEntry implements Persistable {
 		this.playerBuffCount = playerBuffCount;
 		this.playerDebuffCount = playerDebuffCount;
 		this.playerIsShielded = playerIsShielded;
-		this.targetID = targetID;
 		this.targetHPpercentage = targetHPpercentage;
 		this.targetMPpercentage = targetMPpercentage;
-		this.targetIsPvP = targetIsPvP;
 		this.targetFocusesPlayer = targetFocusesPlayer;
 		this.distance = distance;
-		this.targetX = targetX;
-		this.targetY = targetY;
-		this.targetZ = targetZ;
 		this.targetIsRooted = targetIsRooted;
 		this.targetIsSilenced = targetIsSilenced;
 		this.targetIsBound = targetIsBound;
@@ -158,7 +138,6 @@ public class PlayerModelEntry implements Persistable {
 		this.targetBuffCount = targetBuffCount;
 		this.targetDebuffCount = targetDebuffCount;
 		this.targetIsShielded = targetIsShielded;
-		this.isBossPhase = isBossPhase;
 		setPersistentState(PersistentState.UPDATED);
 	}
 
@@ -177,7 +156,6 @@ public class PlayerModelEntry implements Persistable {
 
 		input.add((double) targetHPpercentage);
 		input.add((double) targetMPpercentage);
-		input.add((double) (targetIsPvP ? 1 : 0));
 		input.add((double) (targetFocusesPlayer ? 1 : 0));
 		input.add((double) distance);
 		input.add((double) (targetIsRooted ? 1 : 0));
@@ -230,18 +208,6 @@ public class PlayerModelEntry implements Persistable {
 		return playerMPpercentage;
 	}
 
-	public float getPlayerX() {
-		return playerX;
-	}
-
-	public float getPlayerY() {
-		return playerY;
-	}
-
-	public float getPlayerZ() {
-		return playerZ;
-	}
-
 	public boolean isPlayerRooted() {
 		return playerIsRooted;
 	}
@@ -274,14 +240,6 @@ public class PlayerModelEntry implements Persistable {
 		return playerIsShielded;
 	}
 
-	public int getTargetID() {
-		return targetID;
-	}
-
-	public int getTargetClassID() {
-		return targetClassID;
-	}
-
 	public float getTargetHPpercentage() {
 		return targetHPpercentage;
 	}
@@ -290,28 +248,12 @@ public class PlayerModelEntry implements Persistable {
 		return targetMPpercentage;
 	}
 
-	public boolean isTargetIsPvP() {
-		return targetIsPvP;
-	}
-
 	public boolean isTargetFocusesPlayer() {
 		return targetFocusesPlayer;
 	}
 
 	public float getDistance() {
 		return distance;
-	}
-
-	public float getTargetX() {
-		return targetX;
-	}
-
-	public float getTargetY() {
-		return targetY;
-	}
-
-	public float getTargetZ() {
-		return targetZ;
 	}
 
 	public boolean isTargetRooted() {
@@ -344,10 +286,6 @@ public class PlayerModelEntry implements Persistable {
 
 	public boolean isTargetIsShielded() {
 		return targetIsShielded;
-	}
-
-	public boolean isBossPhase() {
-		return isBossPhase;
 	}
 
 	@Override
