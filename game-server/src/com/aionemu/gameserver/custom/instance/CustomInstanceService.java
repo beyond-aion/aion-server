@@ -52,7 +52,7 @@ public class CustomInstanceService {
 			rankObject = new CustomInstanceRank(playerId, 0, ServerTime.now().with(LocalTime.of(1, 0)).toEpochSecond(), PersistentState.NEW);
 			rankCache.put(playerId, rankObject);
 		}
-		return rankObject.getLastEntry() < ServerTime.now().with(LocalTime.of(9, 0)).toEpochSecond();
+		return rankObject.getLastEntry() < ServerTime.now().with(LocalTime.of(9, 0)).toEpochSecond() * 1000;
 	}
 
 	public void onEnter(Player player) {
