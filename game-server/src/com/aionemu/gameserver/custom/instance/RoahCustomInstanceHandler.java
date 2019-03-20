@@ -12,7 +12,11 @@ import java.util.concurrent.atomic.AtomicLong;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.commons.utils.Rnd;
+import com.aionemu.gameserver.custom.instance.neuralnetwork.PlayerModel;
+import com.aionemu.gameserver.custom.instance.neuralnetwork.PlayerModelController;
+import com.aionemu.gameserver.dao.PlayerDAO;
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
 import com.aionemu.gameserver.model.ChatType;
 import com.aionemu.gameserver.model.PlayerClass;
@@ -22,11 +26,13 @@ import com.aionemu.gameserver.model.flyring.FlyRing;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.gameobjects.player.PlayerCommonData;
 import com.aionemu.gameserver.model.stats.calc.functions.StatSetFunction;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.model.templates.flyring.FlyRingTemplate;
 import com.aionemu.gameserver.model.utils3d.Point3D;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_MESSAGE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_ACTION;
 import com.aionemu.gameserver.services.drop.DropRegistrationService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -60,8 +66,11 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 
 	private AtomicLong startTime = new AtomicLong();
 	private AtomicBoolean isInitialized = new AtomicBoolean();
+	private PlayerModel model;
+	private List<Integer> skillSet;
+
 	private boolean isBossPhase;
-	private int rank, playerId;
+	private int rank;
 	private Future<?> despawnTask, trashMobSpawnTask, bulkyMobSpawnTask, dominatorMobSpawnTask;
 
 	@Override
@@ -82,13 +91,13 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 	@Override
 	public boolean onPassFlyingRing(Player player, String flyingRing) {
 		if (flyingRing.equals("ROAH_WING_1") && startTime.compareAndSet(0, System.currentTimeMillis())) {
-			PacketSendUtility.sendPacket(player, STR_MSG_INSTANCE_START_IDABRE());
-			PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(0, TIME_LIMIT));
-			PacketSendUtility.sendMessage(player, "You have 15 minutes to demolish the central Aether Stone. Beware for its protectors!",
-				ChatType.BRIGHT_YELLOW_CENTER);
+			PacketSendUtility.broadcastToMap(instance, STR_MSG_INSTANCE_START_IDABRE());
+			PacketSendUtility.broadcastToMap(instance, new SM_QUEST_ACTION(0, TIME_LIMIT));
+			PacketSendUtility.broadcastToMap(instance, new SM_MESSAGE(0, null,
+				"You have 15 minutes to demolish the central Aether Stone. Beware for its protectors!", ChatType.BRIGHT_YELLOW_CENTER));
 
 			despawnTask = ThreadPoolManager.getInstance().schedule(() -> {
-				setResult(player, false);
+				setResult(false);
 				despawnNpcs(CENTER_ARTIFACT_ID, TRASH_MOB_ID, BULKY_MOB_ID, DOMINATOR_MOB_ID, BOSS_MOB_A_M_ID, BOSS_MOB_A_F_ID, BOSS_MOB_E_M_ID,
 					BOSS_MOB_E_F_ID, BOSS_MOB_AT_ID);
 			}, TIME_LIMIT * 1000);
@@ -109,7 +118,7 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 							adaptNPC(mob, rank);
 							mob.getAggroList().addHate(player, 1000);
 						}
-						PacketSendUtility.sendMessage(player, "Artifact Protectors have appeared!", ChatType.BRIGHT_YELLOW_CENTER);
+						PacketSendUtility.broadcastToMap(instance, new SM_MESSAGE(0, null, "Artifact Protectors have appeared!", ChatType.BRIGHT_YELLOW_CENTER));
 					}
 				}
 			}, 60000, 60000 - rank * 1000); // 60s ... 30s
@@ -124,13 +133,14 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 						if (bulky != null && !bulky.getLifeStats().isAboutToDie() && !bulky.isDead()) {
 							if (bulky.getLifeStats().getCurrentHp() < bulky.getLifeStats().getMaxHp()) {
 								bulky.getLifeStats().setCurrentHp(bulky.getLifeStats().getMaxHp());
-								PacketSendUtility.sendMessage(player, "Protector Vord recovered energy!", ChatType.BRIGHT_YELLOW_CENTER);
+								PacketSendUtility.broadcastToMap(instance,
+									new SM_MESSAGE(0, null, "Protector Vord recovered energy!", ChatType.BRIGHT_YELLOW_CENTER));
 							}
 						} else {
 							bulky = (Npc) spawn(BULKY_MOB_ID, 493.923f, 488.16794f, 87.18341f, (byte) 0);
 							adaptNPC(bulky, rank);
 							bulky.getAggroList().addHate(player, 1000);
-							PacketSendUtility.sendMessage(player, "A tough protector has appeared!", ChatType.BRIGHT_YELLOW_CENTER);
+							PacketSendUtility.broadcastToMap(instance, new SM_MESSAGE(0, null, "A tough protector has appeared!", ChatType.BRIGHT_YELLOW_CENTER));
 						}
 					}
 				}, 80000, 60000);
@@ -146,13 +156,14 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 						if (dominator != null && !dominator.getLifeStats().isAboutToDie() && !dominator.isDead()) {
 							if (dominator.getLifeStats().getCurrentHp() < dominator.getLifeStats().getMaxHp()) {
 								dominator.getLifeStats().setCurrentHp(dominator.getLifeStats().getMaxHp());
-								PacketSendUtility.sendMessage(player, "Protector Vala recovered energy!", ChatType.BRIGHT_YELLOW_CENTER);
+								PacketSendUtility.broadcastToMap(instance,
+									new SM_MESSAGE(0, null, "Protector Vala recovered energy!", ChatType.BRIGHT_YELLOW_CENTER));
 							}
 						} else {
 							dominator = (Npc) spawn(DOMINATOR_MOB_ID, 515.23114f, 487.94998f, 87.176056f, (byte) 60);
 							adaptNPC(dominator, rank);
 							dominator.getAggroList().addHate(player, 1000);
-							PacketSendUtility.sendMessage(player, "A vile protector has appeared!", ChatType.BRIGHT_YELLOW_CENTER);
+							PacketSendUtility.broadcastToMap(instance, new SM_MESSAGE(0, null, "A vile protector has appeared!", ChatType.BRIGHT_YELLOW_CENTER));
 						}
 					}
 				}, 100000, 60000);
@@ -164,24 +175,27 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 
 	@Override
 	public void onDie(Npc npc) {
-		Player player = npc.getAggroList().getMostPlayerDamage();
 		switch (npc.getNpcId()) {
 			case CENTER_ARTIFACT_ID:
 				cancelAllTasks();
+				// use pcd for rare cases in which the artifact got destroyed by dots/servants and the player got DC'ed before
+				PlayerCommonData pcd = DAOManager.getDAO(PlayerDAO.class).loadPlayerCommonData(instance.getSoloPlayerObj());
 				float usedTime = (System.currentTimeMillis() - startTime.get()) / 1000f;
-				log.info("[CI_ROAH] " + player + " [PlayerClass: " + player.getPlayerClass() + "] [Rank: " + CustomInstanceRankEnum.getRankDescription(rank)
-					+ "(" + rank + ")] succeeded in destroying the artifact in " + usedTime + "s (DPS:" + npc.getLifeStats().getMaxHp() / usedTime + ").");
+				log.info("[CI_ROAH] Player [id=" + pcd.getPlayerObjId() + ", name=" + pcd.getName() + ", class=" + pcd.getPlayerClass() + ", rank="
+					+ CustomInstanceRankEnum.getRankDescription(rank) + "(" + rank + ")] succeeded in destroying the artifact in " + usedTime + "s (DPS:"
+					+ npc.getLifeStats().getMaxHp() / usedTime + ").");
 				despawnNpcs(TRASH_MOB_ID, BULKY_MOB_ID, DOMINATOR_MOB_ID);
 
-				PacketSendUtility.sendMessage(player, "You feel a shadowy presence from the throne room.", ChatType.BRIGHT_YELLOW_CENTER);
+				PacketSendUtility.broadcastToMap(instance,
+					new SM_MESSAGE(0, null, "You feel a shadowy presence from the throne room.", ChatType.BRIGHT_YELLOW_CENTER));
 
-				PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(0, 0));
+				PacketSendUtility.broadcastToMap(instance, new SM_QUEST_ACTION(0, 0));
 
 				int bossID = BOSS_MOB_AT_ID;
-				if (player.getPlayerClass() != PlayerClass.RIDER) {
-					switch (player.getRace()) {
+				if (pcd.getPlayerClass() != PlayerClass.RIDER) {
+					switch (pcd.getRace()) {
 						case ASMODIANS:
-							switch (player.getGender()) {
+							switch (pcd.getGender()) {
 								case MALE:
 									bossID = BOSS_MOB_A_M_ID;
 									break;
@@ -191,7 +205,7 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 							}
 							break;
 						case ELYOS:
-							switch (player.getGender()) {
+							switch (pcd.getGender()) {
 								case MALE:
 									bossID = BOSS_MOB_E_M_ID;
 									break;
@@ -211,9 +225,9 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 			case BOSS_MOB_E_M_ID:
 			case BOSS_MOB_E_F_ID:
 			case BOSS_MOB_AT_ID:
-				setResult(player, true);
-				calcBossDrop(npc.getObjectId(), player.getObjectId());
-				PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(0, 0));
+				setResult(true);
+				calcBossDrop(npc.getObjectId(), instance.getSoloPlayerObj());
+				PacketSendUtility.broadcastToMap(instance, new SM_QUEST_ACTION(0, 0));
 				break;
 		}
 	}
@@ -221,15 +235,17 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 	@Override
 	public void onEnterInstance(Player player) {
 		if (isInitialized.compareAndSet(false, true)) {
-			playerId = player.getObjectId();
-			rank = CustomInstanceService.getInstance().getPlayerRankObject(player.getObjectId()).getRank();
-			PacketSendUtility.sendMessage(player, "Welcome to the 'Eternal Challenge', " + CustomInstanceRankEnum.getRankDescription(rank) + " challenger!",
-				ChatType.BRIGHT_YELLOW_CENTER);
+			rank = CustomInstanceService.getInstance().getPlayerRankObject(instance.getSoloPlayerObj()).getRank();
+			PacketSendUtility.broadcastToMap(instance, new SM_MESSAGE(0, null,
+				"Welcome to the 'Eternal Challenge', " + CustomInstanceRankEnum.getRankDescription(rank) + " challenger!", ChatType.BRIGHT_YELLOW_CENTER));
 			Npc artifact = getNpc(CENTER_ARTIFACT_ID);
 			if (artifact != null) {
 				adaptNPC(artifact, rank);
 				spawnUnlockableNpcs(player);
 			}
+			// train player model from previous boss runs
+			skillSet = PlayerModelController.getSkillSetForPlayer(instance.getSoloPlayerObj());
+			model = PlayerModelController.trainModelForPlayer(instance.getSoloPlayerObj(), skillSet);
 		}
 	}
 
@@ -259,7 +275,7 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 				functions.add(new StatSetFunction(StatEnum.MAXHP, 300 * AVG_DPS + rank * 10 * AVG_DPS));
 				break;
 			case TRASH_MOB_ID: // ~1s fix (AoE-able)
-				functions.add(new StatSetFunction(StatEnum.MAXHP, AVG_DPS));
+				functions.add(new StatSetFunction(StatEnum.MAXHP, 1));
 				functions.add(new StatSetFunction(StatEnum.SPEED, 6000 + rank * 100));
 				break;
 			case BULKY_MOB_ID: // ~10 ... 25s
@@ -280,26 +296,29 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 		adaptNPC(npc, rank, null);
 	}
 
-	public void setResult(Player player, boolean success) {
+	public void setResult(boolean success) {
 		cancelAllTasks();
 		int oldRank = rank;
 		if (success) {
 			// upgrade rank
 			rank++;
-			PacketSendUtility.sendMessage(player, "Your rank has been increased to " + CustomInstanceRankEnum.getRankDescription(rank)
-				+ ". Stay steadfast for tougher challenges and higher rewards!", ChatType.BRIGHT_YELLOW_CENTER);
+			PacketSendUtility.broadcastToMap(instance,
+				new SM_MESSAGE(0, null, "Your rank has been increased to " + CustomInstanceRankEnum.getRankDescription(rank)
+					+ ". Stay steadfast for tougher challenges and higher rewards!", ChatType.BRIGHT_YELLOW_CENTER));
 		} else {
 			// degrade rank
 			if (rank >= 24)
 				rank = 21; // to Ancient
 			else
 				rank = Math.max(0, (rank - 3) - (rank % 3)); // to 1st rank of last category
-			PacketSendUtility.sendMessage(player, "Your rank has been decreased to " + CustomInstanceRankEnum.getRankDescription(rank) + ".",
-				ChatType.BRIGHT_YELLOW_CENTER);
+			PacketSendUtility.broadcastToMap(instance, new SM_MESSAGE(0, null,
+				"Your rank has been decreased to " + CustomInstanceRankEnum.getRankDescription(rank) + ".", ChatType.BRIGHT_YELLOW_CENTER));
 		}
-		log.info("[CI_ROAH] Changing player rank for " + player + " from " + oldRank + " to " + rank + ".");
-		CustomInstanceService.getInstance().changePlayerRank(player.getObjectId(), rank);
-		CustomInstanceService.getInstance().writePlayerModelEntriesToDB(player.getObjectId());
+		CustomInstanceService.getInstance().changePlayerRank(instance.getSoloPlayerObj(), rank);
+		CustomInstanceService.getInstance().writePlayerModelEntriesToDB(instance.getSoloPlayerObj());
+		log.info(
+			"[CI_ROAH] Changing instance rank for [playerId=" + instance.getSoloPlayerObj() + "] from " + CustomInstanceRankEnum.getRankDescription(oldRank)
+				+ "(" + oldRank + ") to " + CustomInstanceRankEnum.getRankDescription(rank) + "(" + rank + ").");
 	}
 
 	private void cancelAllTasks() {
@@ -366,7 +385,7 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 
 	@Override
 	public boolean onDie(Player player, Creature lastAttacker) {
-		setResult(player, false);
+		setResult(false);
 		if (isBossPhase) {
 			PacketSendUtility.sendMessage(player, "At last! I have become .. your greatest nightmare!", ChatType.BRIGHT_YELLOW_CENTER);
 			despawnNpcs(BOSS_MOB_A_M_ID, BOSS_MOB_A_F_ID, BOSS_MOB_E_M_ID, BOSS_MOB_E_F_ID, BOSS_MOB_AT_ID);
@@ -378,11 +397,15 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 		return true;
 	}
 
-	public int getPlayerId() {
-		return playerId;
-	}
-
 	public boolean isBossPhase() {
 		return isBossPhase;
+	}
+
+	public PlayerModel getPlayerModel() {
+		return model;
+	}
+
+	public List<Integer> getSkillSet() {
+		return skillSet;
 	}
 }

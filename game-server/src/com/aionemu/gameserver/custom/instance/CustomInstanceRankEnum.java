@@ -26,8 +26,6 @@ public enum CustomInstanceRankEnum {
 	}
 
 	public static String getRankDescription(int value) {
-		if (value >= 24)
-			return "ANCIENT +" + (value - 23);
-		return values()[value / 3].name();
+		return value >= 24 ? "ANCIENT +" + (value - 23) : values()[value / 3].name();
 	}
 }

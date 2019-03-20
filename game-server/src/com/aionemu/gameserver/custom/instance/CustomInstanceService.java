@@ -14,7 +14,6 @@ import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.custom.instance.neuralnetwork.PlayerModelEntry;
 import com.aionemu.gameserver.dao.CustomInstanceDAO;
 import com.aionemu.gameserver.dao.CustomInstancePlayerModelEntryDAO;
-import com.aionemu.gameserver.instance.handlers.InstanceHandler;
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Persistable;
@@ -49,7 +48,7 @@ public class CustomInstanceService {
 	public boolean canEnter(int playerId) {
 		CustomInstanceRank rankObject = rankCache.get(playerId);
 		if (rankObject == null) {
-			rankObject = new CustomInstanceRank(playerId, 0, ServerTime.now().with(LocalTime.of(1, 0)).toEpochSecond(), PersistentState.NEW);
+			rankObject = new CustomInstanceRank(playerId, 0, ServerTime.now().with(LocalTime.of(1, 0)).toEpochSecond() * 1000, PersistentState.NEW);
 			rankCache.put(playerId, rankObject);
 		}
 		return rankObject.getLastEntry() < ServerTime.now().with(LocalTime.of(9, 0)).toEpochSecond() * 1000;
@@ -74,7 +73,7 @@ public class CustomInstanceService {
 	public void changePlayerRank(int playerId, int newRank) {
 		CustomInstanceRank rankObject = rankCache.get(playerId);
 		if (rankObject == null) {
-			rankObject = new CustomInstanceRank(playerId, 0, ServerTime.now().with(LocalTime.of(1, 0)).toEpochSecond(), PersistentState.NEW);
+			rankObject = new CustomInstanceRank(playerId, 0, ServerTime.now().with(LocalTime.of(1, 0)).toEpochSecond() * 1000, PersistentState.NEW);
 			rankCache.put(playerId, rankObject);
 		}
 		rankObject.setRank(newRank);
@@ -86,9 +85,9 @@ public class CustomInstanceService {
 		if (player.getWorldId() != CUSTOM_INSTANCE_WORLD_ID)
 			return;
 
-		InstanceHandler ih = player.getPosition().getWorldMapInstance().getInstanceHandler();
-		if (!(ih instanceof RoahCustomInstanceHandler) || !((RoahCustomInstanceHandler) ih).isBossPhase()
-			|| ((RoahCustomInstanceHandler) ih).getPlayerId() != player.getObjectId())
+		WorldMapInstance wmi = player.getPosition().getWorldMapInstance();
+		if (!(wmi.getInstanceHandler() instanceof RoahCustomInstanceHandler) || !((RoahCustomInstanceHandler) wmi.getInstanceHandler()).isBossPhase()
+			|| player.getPosition().getWorldMapInstance().getSoloPlayerObj() != player.getObjectId())
 			return;
 
 		List<PlayerModelEntry> entries = playerModelEntriesCache.get(player.getObjectId());

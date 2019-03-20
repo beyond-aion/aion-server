@@ -8,14 +8,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.ai.AIName;
-import com.aionemu.gameserver.custom.instance.CustomInstanceRank;
 import com.aionemu.gameserver.custom.instance.CustomInstanceService;
 import com.aionemu.gameserver.custom.instance.RoahCustomInstanceHandler;
 import com.aionemu.gameserver.custom.instance.neuralnetwork.PlayerModel;
 import com.aionemu.gameserver.custom.instance.neuralnetwork.PlayerModelController;
 import com.aionemu.gameserver.custom.instance.neuralnetwork.PlayerModelEntry;
 import com.aionemu.gameserver.dataholders.loadingutils.adapters.NpcEquipmentList;
-import com.aionemu.gameserver.instance.handlers.InstanceHandler;
 import com.aionemu.gameserver.model.ChatType;
 import com.aionemu.gameserver.model.PlayerClass;
 import com.aionemu.gameserver.model.SkillElement;
@@ -44,6 +42,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.World;
+import com.aionemu.gameserver.world.WorldMapInstance;
 
 import ai.GeneralNpcAI;
 
@@ -54,10 +53,9 @@ import ai.GeneralNpcAI;
 public class CustomInstanceBossAI extends GeneralNpcAI {
 
 	private static final Logger log = LoggerFactory.getLogger("CUSTOM_INSTANCE_LOG");
-	private CustomInstanceRank rankObj;
 	private PlayerModel model;
 	private Future<?> skillTask, castTimeout;
-	private int previousSkill;
+	private int previousSkill, rank;
 
 	private List<Integer> skillSet;
 	private boolean onlyAttack;
@@ -81,16 +79,12 @@ public class CustomInstanceBossAI extends GeneralNpcAI {
 		super.handleSpawned();
 		previousSkill = -1;
 
-		InstanceHandler ih = getPosition().getWorldMapInstance().getInstanceHandler();
-		if (!(ih instanceof RoahCustomInstanceHandler))
+		WorldMapInstance wmi = getPosition().getWorldMapInstance();
+		if (!(wmi.getInstanceHandler() instanceof RoahCustomInstanceHandler))
 			return;
 
-		int playerId = ((RoahCustomInstanceHandler) ih).getPlayerId();
-		rankObj = CustomInstanceService.getInstance().getPlayerRankObject(playerId);
-		if (rankObj == null) {
-			log.error("[CI_ROAH] No rank object found for player id: " + playerId + ".", new Exception());
-			return;
-		}
+		int playerId = wmi.getSoloPlayerObj();
+		rank = CustomInstanceService.getInstance().getPlayerRankObject(playerId).getRank();
 
 		Player p = World.getInstance().findPlayer(playerId);
 		if (p == null) {
@@ -102,14 +96,15 @@ public class CustomInstanceBossAI extends GeneralNpcAI {
 		if (p.getPlayerClass() == PlayerClass.RIDER) {
 			onlyAttack = true;
 		} else {
-			// model player behavior
-			skillSet = PlayerModelController.getSkillSetForPlayer(playerId);
-			model = PlayerModelController.trainModelForPlayer(playerId, skillSet);
 			onlyAttack = false;
+			adaptAppearance(p);
+			adaptStats(p);
+			getOwner().setSeeState(CreatureSeeState.SEARCH2);
+			// model player behavior
+			skillSet = ((RoahCustomInstanceHandler) wmi.getInstanceHandler()).getSkillSet();
+			model = ((RoahCustomInstanceHandler) wmi.getInstanceHandler()).getPlayerModel();
 		}
-		adaptAppearance(p);
-		adaptStats(p);
-		getOwner().setSeeState(CreatureSeeState.SEARCH2);
+
 	}
 
 	@Override
@@ -119,14 +114,18 @@ public class CustomInstanceBossAI extends GeneralNpcAI {
 		// prevent reset-abusing
 		if (getOwner().getSkillCoolDowns() != null)
 			getOwner().getSkillCoolDowns().clear();
+		getLifeStats().setCurrentHpPercent(100);
 	}
 
 	@Override
 	public void handleCreatureDetected(Creature creature) {
 		super.handleCreatureDetected(creature);
+		WorldMapInstance wmi = getPosition().getWorldMapInstance();
+		if (!(wmi.getInstanceHandler() instanceof RoahCustomInstanceHandler))
+			return;
 
 		if (PositionUtil.getDistance(getPosition().getX(), getPosition().getY(), getPosition().getZ(), creature.getX(), creature.getY(),
-			creature.getZ()) <= 45 && creature.getObjectId() == rankObj.getPlayerId()) {
+			creature.getZ()) <= 45 && creature.getObjectId() == wmi.getSoloPlayerObj()) {
 			getAggroList().addHate(creature, 100); // early aggro
 
 			if (skillTask == null && !onlyAttack)
@@ -182,7 +181,15 @@ public class CustomInstanceBossAI extends GeneralNpcAI {
 			List<Double> output = model.getOutputEstimation(inputArray);
 			for (int i = 0; i < output.size(); i++) {
 				Skill skillI = SkillEngine.getInstance().getSkill(getOwner(), skillSet.get(i), 1, getTarget());
-				int cdID = skillI.getSkillTemplate().getCooldownId();
+				if (skillI == null) {
+					log.warn("Detected a skill input with not existent template [skillId=" + skillSet.get(i) + "].");
+					output.set(i, -1d);
+					continue;
+				}
+
+				int cdID = -1; // item skills that have no cdID
+				if (skillI.getSkillTemplate() != null)
+					cdID = skillI.getSkillTemplate().getCooldownId();
 
 				boolean isDPskill = false;
 				if (skillI.getSkillTemplate().getStartconditions() != null)
@@ -196,7 +203,8 @@ public class CustomInstanceBossAI extends GeneralNpcAI {
 				if (isDPskill || !skillI.canUseSkill(CastState.CAST_START)
 					|| (skillI.getSkillTemplate().getType() == SkillType.MAGICAL && getEffectController().isAbnormalSet(AbnormalState.SILENCE))
 					|| (skillI.getSkillTemplate().getType() == SkillType.PHYSICAL && getEffectController().isAbnormalSet(AbnormalState.BIND))
-					|| skillI.getSkillMethod() == SkillMethod.CHARGE || skillI.isPointSkill() || getOwner().getSkillCoolDown(cdID) > System.currentTimeMillis())
+					|| skillI.getSkillMethod() == SkillMethod.CHARGE || skillI.isPointSkill()
+					|| (cdID != -1 && getOwner().getSkillCoolDown(cdID) > System.currentTimeMillis()))
 					output.set(i, -1d); // -1 = minimum probability
 			}
 
@@ -261,7 +269,7 @@ public class CustomInstanceBossAI extends GeneralNpcAI {
 		functions.add(new StatSetFunction(StatEnum.MAGICAL_CRITICAL, pgs.getMCritical().getCurrent()));
 		functions.add(new StatSetFunction(StatEnum.MAIN_HAND_POWER, pgs.getMainHandPAttack().getCurrent()));
 		int maxHP = pgs.getMaxHp().getCurrent();
-		maxHP += maxHP * rankObj.getRank() / 10f;
+		maxHP += maxHP * rank / 10f;
 		if (onlyAttack)
 			maxHP *= 10;
 		functions.add(new StatSetFunction(StatEnum.MAXHP, maxHP));
@@ -278,7 +286,12 @@ public class CustomInstanceBossAI extends GeneralNpcAI {
 		functions.add(new StatSetFunction(StatEnum.SPEED, pgs.getMovementSpeed().getCurrent()));
 		functions.add(new StatSetFunction(StatEnum.WILL, pgs.getWill().getCurrent()));
 		functions.add(new StatSetFunction(StatEnum.ATTACK_SPEED, pgs.getAttackSpeed().getCurrent()));
-
+		// Work-around for not considered dual wield stats for NPCs
+		int pAtk = pgs.getMainHandPAttack().getCurrent();
+		if (player.getEquipment().getOffHandWeapon() != null)
+			pAtk += pgs.getOffHandPAttack().getCurrent() / 2;
+		functions.add(new StatSetFunction(StatEnum.PHYSICAL_ATTACK, pAtk));
+		
 		switch (player.getPlayerClass()) { // npcs dont use Magical Attack
 			case BARD:
 			case CLERIC:
@@ -286,11 +299,9 @@ public class CustomInstanceBossAI extends GeneralNpcAI {
 			case SPIRIT_MASTER:
 			case GUNNER:
 			case RIDER:
-				functions.add(new StatSetFunction(StatEnum.PHYSICAL_ATTACK, pgs.getMainHandMAttack().getCurrent()));
 				functions.add(new StatSetFunction(StatEnum.PHYSICAL_CRITICAL, pgs.getMCritical().getCurrent()));
 				break;
 			default:
-				functions.add(new StatSetFunction(StatEnum.PHYSICAL_ATTACK, pgs.getMainHandPAttack().getCurrent()));
 				functions.add(new StatSetFunction(StatEnum.PHYSICAL_CRITICAL, pgs.getMainHandPCritical().getCurrent()));
 		}
 
