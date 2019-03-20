@@ -3,6 +3,9 @@ package com.aionemu.gameserver.custom.instance.neuralnetwork;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.aionemu.commons.utils.Rnd;
 
 /**
@@ -10,6 +13,8 @@ import com.aionemu.commons.utils.Rnd;
  */
 public class PlayerModel {
 
+	private static final Logger log = LoggerFactory.getLogger("CUSTOM_INSTANCE_LOG");
+	private static final int MAX_TRAINING_TIME = 180000;
 	public boolean isReady;
 	public double learnRate;
 	public double momentum;
@@ -47,14 +52,21 @@ public class PlayerModel {
 	}
 
 	public void train(List<DataSet> dataSets, int numEpochs) {
+		long startTime = System.currentTimeMillis();
 		isReady = false;
 		for (int i = 0; i < numEpochs; i++) {
 			for (DataSet dataSet : dataSets) {
 				processInput(dataSet.getValues());
 				valideToOutput(dataSet.getTargets());
 			}
+			if (System.currentTimeMillis() >= startTime + MAX_TRAINING_TIME) {
+				numEpochs = i;
+				break;
+			}
 		}
 		isReady = true;
+		log.info(
+			"Training took " + (System.currentTimeMillis() - startTime) + "ms with " + dataSets.size() + " data sets after " + numEpochs + " epochs.");
 	}
 
 	private void processInput(double... inputs) {
