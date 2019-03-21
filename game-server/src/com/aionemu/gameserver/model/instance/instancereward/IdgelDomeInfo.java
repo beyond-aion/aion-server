@@ -10,7 +10,6 @@ import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.instance.playerreward.IdgelDomePlayerInfo;
-import com.aionemu.gameserver.model.templates.rewards.RewardItem;
 import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.world.WorldPosition;
 
@@ -98,7 +97,7 @@ public class IdgelDomeInfo extends InstanceReward<IdgelDomePlayerInfo> {
 		TeleportService.teleportTo(player, p.getMapId(), instanceId, p.getX(), p.getY(), p.getZ(), p.getHeading());
 	}
 
-	public RewardItem getMythicKunaxEquipment(Player player) {
+	public int getMythicKunaxEquipment(Player player) {
 		int[] weapons;
 		int[] armor;
 		switch (player.getPlayerClass()) { // armor: Chest, Gloves, Shoulders, Pants, Shoes, Helmet
@@ -149,9 +148,9 @@ public class IdgelDomeInfo extends InstanceReward<IdgelDomePlayerInfo> {
 			default:
 				LoggerFactory.getLogger(IdgelDomeInfo.class)
 					.warn("Couldn't get mythic Kunax equipment for " + player + ". Rewards for " + player.getPlayerClass() + " are not implemented");
-				return null;
+				return 0;
 		}
 		int[] possibleRewards = Rnd.chance() < 17.5f ? weapons : armor;
-		return new RewardItem(Rnd.get(possibleRewards), 1);
+		return Rnd.get(possibleRewards);
 	}
 }

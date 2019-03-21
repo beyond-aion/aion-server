@@ -10,7 +10,6 @@ import com.aionemu.gameserver.model.instance.InstanceProgressionType;
 import com.aionemu.gameserver.model.instance.InstanceScoreType;
 import com.aionemu.gameserver.model.instance.instancereward.IdgelDomeInfo;
 import com.aionemu.gameserver.model.instance.playerreward.IdgelDomePlayerInfo;
-import com.aionemu.gameserver.model.templates.rewards.RewardItem;
 
 /**
  * @author Ritsu, Estrayl
@@ -78,22 +77,19 @@ public class IdgelDomeScoreInfo extends InstanceScoreInfo {
 				writeD(buf, info.getBonusAp());
 				writeD(buf, info.getBaseGp());
 				writeD(buf, info.getBonusGp());
-				RewardItem ri = info.getItemRewards().get(0);
-				writeD(buf, ri.getId());
-				writeQ(buf, ri.getCount());
-				ri = info.getItemRewards().get(1);
-				writeD(buf, ri.getId());
-				writeQ(buf, ri.getCount());
-				ri = info.getItemRewards().get(2);
-				writeD(buf, ri.getId());
-				writeD(buf, (int) ri.getCount());
-				ri = info.getItemRewards().get(3);
-				writeD(buf, ri.getId());
-				writeD(buf, (int) ri.getCount());
-				ri = info.getItemRewards().get(4);
-				writeD(buf, ri.getId());
-				writeD(buf, (int) ri.getCount());
-				writeC(buf, ri.getId() != 0 ? 1 : 0);
+				writeD(buf, info.getReward1ItemId());
+				writeD(buf, info.getReward1Count());
+				writeD(buf, info.getReward1BonusCount());
+				writeD(buf, info.getReward2ItemId());
+				writeD(buf, info.getReward2Count());
+				writeD(buf, info.getReward2BonusCount());
+				writeD(buf, info.getReward3ItemId());
+				writeD(buf, info.getReward3Count());
+				writeD(buf, info.getReward4ItemId());
+				writeD(buf, info.getReward4Count());
+				writeD(buf, info.getBonusRewardItemId());
+				writeD(buf, info.getBonusRewardCount());
+				writeC(buf, info.getBonusRewardItemId() > 0 ? 1 : 0); // showBonusReward flag
 				break;
 			case UPDATE_SCORE:
 				writeD(buf, 100);

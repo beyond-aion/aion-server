@@ -20,7 +20,6 @@ import com.aionemu.gameserver.model.instance.InstanceScoreType;
 import com.aionemu.gameserver.model.instance.instancereward.IdgelDomeInfo;
 import com.aionemu.gameserver.model.instance.instancereward.InstanceReward;
 import com.aionemu.gameserver.model.instance.playerreward.IdgelDomePlayerInfo;
-import com.aionemu.gameserver.model.templates.rewards.RewardItem;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 import com.aionemu.gameserver.network.aion.instanceinfo.IdgelDomeScoreInfo;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_CUSTOM_SETTINGS;
@@ -81,7 +80,6 @@ public class IdgelDomeInstance extends GeneralInstanceHandler {
 		sendPacket(new SM_INSTANCE_SCORE(new IdgelDomeScoreInfo(idi, InstanceScoreType.UPDATE_SCORE, instance.getPlayersInside()), idi, getTime()));
 		sendPacket(new SM_INSTANCE_SCORE(new IdgelDomeScoreInfo(idi, InstanceScoreType.UPDATE_PLAYER_INFO, instance.getPlayersInside()), idi, getTime()));
 		Race winningrace = idi.getWinningRace();
-		RewardItem spacer = new RewardItem(0, 0);
 		int winnerBonusAp = Rnd.get(10000, 14000);
 		int loserBonusAp = Rnd.get(3000, 6000);
 		instance.forEachPlayer(p -> {
@@ -90,33 +88,35 @@ public class IdgelDomeInstance extends GeneralInstanceHandler {
 				reward.setBaseAp(IdgelDomeInfo.WIN_AP);
 				reward.setBonusAp(winnerBonusAp);
 				reward.setBaseGp(50);
-				reward.addItemReward(new RewardItem(186000242, 3));
-				reward.addItemReward(new RewardItem(188053030, 1));
+				reward.setReward1(186000242, 3, 0);
+				reward.setReward2(188053030, 1, 0);
 				if (isKunaxKilled) {
-					RewardItem mythicKunaxEq = null;
+					int mythicKunaxEqItemId = 0;
 					if (Rnd.chance() < 20)
-						mythicKunaxEq = idi.getMythicKunaxEquipment(p);
-					reward.addItemReward(mythicKunaxEq == null ? spacer : mythicKunaxEq);
-					reward.addItemReward(new RewardItem(188053032, 1));
-				} else {
-					reward.addItemReward(spacer);
-					reward.addItemReward(spacer);
+						mythicKunaxEqItemId = idi.getMythicKunaxEquipment(p);
+					reward.setReward3(mythicKunaxEqItemId, mythicKunaxEqItemId == 0 ? 0 : 1);
+					reward.setReward4(188053032, 1);
 				}
 			} else {
 				reward.setBaseAp(IdgelDomeInfo.DEFEAT_AP);
 				reward.setBonusAp(loserBonusAp);
 				reward.setBaseGp(10);
-				reward.addItemReward(new RewardItem(186000242, 1));
-				reward.addItemReward(new RewardItem(188053031, 1));
-				reward.addItemReward(spacer);
-				reward.addItemReward(spacer);
+				reward.setReward1(186000242, 1, 0);
+				reward.setReward2(188053031, 1, 0);
 			}
 			sendPacket(new SM_INSTANCE_SCORE(new IdgelDomeScoreInfo(idi, InstanceScoreType.SHOW_REWARD, p.getObjectId(), 0), idi, getTime()));
 			AbyssPointsService.addAp(p, reward.getBaseAp() + reward.getBonusAp());
 			GloryPointsService.addGp(p, reward.getBaseGp() + reward.getBonusGp());
-			for (RewardItem ri : reward.getItemRewards())
-				if (ri.getId() != 0)
-					ItemService.addItem(p, ri.getId(), ri.getCount());
+			if (reward.getReward1ItemId() > 0)
+				ItemService.addItem(p, reward.getReward1ItemId(), reward.getReward1Count() + reward.getReward1BonusCount());
+			if (reward.getReward2ItemId() > 0)
+				ItemService.addItem(p, reward.getReward2ItemId(), reward.getReward2Count() + reward.getReward2BonusCount());
+			if (reward.getReward3ItemId() > 0)
+				ItemService.addItem(p, reward.getReward3ItemId(), reward.getReward3Count());
+			if (reward.getReward4ItemId() > 0)
+				ItemService.addItem(p, reward.getReward4ItemId(), reward.getReward4Count());
+			if (reward.getBonusRewardItemId() > 0)
+				ItemService.addItem(p, reward.getBonusRewardItemId(), reward.getBonusRewardCount());
 		});
 		instance.forEachNpc(npc -> npc.getController().delete());
 		tasks.add(ThreadPoolManager.getInstance().schedule(() -> {

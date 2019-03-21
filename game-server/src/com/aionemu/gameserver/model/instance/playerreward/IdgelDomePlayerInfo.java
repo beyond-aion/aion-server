@@ -1,10 +1,6 @@
 package com.aionemu.gameserver.model.instance.playerreward;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.aionemu.gameserver.model.Race;
-import com.aionemu.gameserver.model.templates.rewards.RewardItem;
 
 /**
  * @author Estrayl
@@ -12,7 +8,11 @@ import com.aionemu.gameserver.model.templates.rewards.RewardItem;
 public class IdgelDomePlayerInfo extends InstancePlayerReward {
 
 	private final Race race;
-	private final List<RewardItem> itemRewards = new ArrayList<>();
+	private int[] reward1;
+	private int[] reward2;
+	private int[] reward3;
+	private int[] reward4;
+	private int[] bonusReward;
 	private int baseAp;
 	private int bonusAp;
 	private int baseGp;
@@ -23,12 +23,72 @@ public class IdgelDomePlayerInfo extends InstancePlayerReward {
 		this.race = race;
 	}
 
-	public List<RewardItem> getItemRewards() {
-		return itemRewards;
+	public int getReward1ItemId() {
+		return reward1 == null ? 0 : reward1[0];
 	}
 
-	public void addItemReward(RewardItem itemReward) {
-		itemRewards.add(itemReward);
+	public int getReward1Count() {
+		return reward1 == null ? 0 : reward1[1];
+	}
+
+	public int getReward1BonusCount() {
+		return reward1 == null ? 0 : reward1[2];
+	}
+
+	public void setReward1(int itemId, int count, int bonusCount) {
+		reward1 = new int[] { itemId, count, bonusCount };
+	}
+
+	public int getReward2ItemId() {
+		return reward2 == null ? 0 : reward2[0];
+	}
+
+	public int getReward2Count() {
+		return reward2 == null ? 0 : reward2[1];
+	}
+
+	public int getReward2BonusCount() {
+		return reward2 == null ? 0 : reward2[2];
+	}
+
+	public void setReward2(int itemId, int count, int bonusCount) {
+		reward2 = new int[] { itemId, count, bonusCount };
+	}
+
+	public int getReward3ItemId() {
+		return reward3 == null ? 0 : reward3[0];
+	}
+
+	public int getReward3Count() {
+		return reward3 == null ? 0 : reward3[1];
+	}
+
+	public void setReward3(int itemId, int count) {
+		reward3 = new int[] { itemId, count };
+	}
+
+	public int getReward4ItemId() {
+		return reward4 == null ? 0 : reward4[0];
+	}
+
+	public int getReward4Count() {
+		return reward4 == null ? 0 : reward4[1];
+	}
+
+	public void setReward4(int itemId, int count) {
+		reward4 = new int[] { itemId, count };
+	}
+
+	public int getBonusRewardItemId() {
+		return bonusReward == null ? 0 : bonusReward[0];
+	}
+
+	public int getBonusRewardCount() {
+		return bonusReward == null ? 0 : bonusReward[1];
+	}
+
+	public void setBonusReward(int itemId, int count) {
+		bonusReward = new int[] { itemId, count };
 	}
 
 	public int getBaseAp() {
