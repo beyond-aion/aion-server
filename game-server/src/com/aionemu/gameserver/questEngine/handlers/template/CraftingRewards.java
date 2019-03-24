@@ -4,7 +4,6 @@ import static com.aionemu.gameserver.model.DialogAction.*;
 
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.skill.PlayerSkillEntry;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -38,9 +37,6 @@ public class CraftingRewards extends AbstractTemplateQuestHandler {
 			qe.registerQuestNpc(startNpcId).addOnQuestStart(questId);
 			qe.registerQuestNpc(startNpcId).addOnTalkEvent(questId);
 		}
-		if (questMovie != 0) {
-			qe.registerOnMovieEndQuest(questMovie, questId);
-		}
 		if (endNpcId != startNpcId) {
 			qe.registerQuestNpc(endNpcId).addOnTalkEvent(questId);
 		}
@@ -52,28 +48,18 @@ public class CraftingRewards extends AbstractTemplateQuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		int dialogActionId = env.getDialogActionId();
 		int targetId = env.getTargetId();
-		PlayerSkillEntry skill = player.getSkillList().getSkillEntry(skillId);
 
-		if (skill != null) {
-			int playerSkillLevel = skill.getSkillLevel();
-			if (dialogActionId == QUEST_SELECT) {
-				if (playerSkillLevel != levelReward && !canLearn(player)) {
-					return sendQuestSelectionDialog(env);
-				}
-			}
-		}
-		if (qs == null || qs.isStartable()) {
-			if (targetId == startNpcId) {
+		if ((qs == null || qs.isStartable())) {
+			if (targetId == startNpcId && canLearn(player)) {
 				switch (dialogActionId) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, isDataDriven ? 4762 : 1011);
-					default: {
+					default:
 						return sendQuestStartDialog(env);
-					}
 				}
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
-			if (targetId == endNpcId) {
+			if (targetId == endNpcId && canLearn(player)) {
 				switch (dialogActionId) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, isDataDriven ? 1011 : 2375);
@@ -81,11 +67,9 @@ public class CraftingRewards extends AbstractTemplateQuestHandler {
 						qs.setQuestVar(0);
 						qs.setStatus(QuestStatus.REWARD);
 						updateQuestStatus(env);
-						if (questMovie != 0) {
+						player.getSkillList().addSkill(player, skillId, levelReward);
+						if (questMovie != 0)
 							playQuestMovie(env, questMovie);
-						} else {
-							player.getSkillList().addSkill(player, skillId, levelReward);
-						}
 						return sendQuestEndDialog(env);
 				}
 			}
@@ -98,20 +82,10 @@ public class CraftingRewards extends AbstractTemplateQuestHandler {
 	}
 
 	private boolean canLearn(Player player) {
-		return levelReward == 400 ? CraftSkillUpdateService.getInstance().canLearnMoreExpertCraftingSkill(player)
-			: levelReward == 500 ? CraftSkillUpdateService.getInstance().canLearnMoreMasterCraftingSkill(player) : true;
-	}
-
-	@Override
-	public boolean onMovieEndEvent(QuestEnv env, int movieId) {
-		Player player = env.getPlayer();
-		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		if (qs.getStatus() == QuestStatus.REWARD) {
-			if (movieId == questMovie && canLearn(player)) {
-				player.getSkillList().addSkill(player, skillId, levelReward);
-				return true;
-			}
-		}
-		return false;
+		if (levelReward == 400)
+			return CraftSkillUpdateService.getInstance().canLearnMoreExpertCraftingSkill(player);
+		if (levelReward == 500)
+			return CraftSkillUpdateService.getInstance().canLearnMoreMasterCraftingSkill(player);
+		throw new IllegalStateException("Unhandled levelReward " + levelReward);
 	}
 }
