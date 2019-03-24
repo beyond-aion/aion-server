@@ -185,7 +185,7 @@ public class CraftSkillUpdateService {
 		if (getTotalExpertCraftingSkills(player) + getTotalMasterCraftingSkills(player) < CraftConfig.MAX_EXPERT_CRAFTING_SKILLS) {
 			return true;
 		} else {
-			PacketSendUtility.sendMessage(player, "You can only have " + CraftConfig.MAX_EXPERT_CRAFTING_SKILLS + " expert crafting skills.");
+			PacketSendUtility.sendMessage(player, "You can only be an expert in " + CraftConfig.MAX_EXPERT_CRAFTING_SKILLS + " professions.");
 			return false;
 		}
 	}
@@ -200,7 +200,7 @@ public class CraftSkillUpdateService {
 		if (getTotalMasterCraftingSkills(player) < CraftConfig.MAX_MASTER_CRAFTING_SKILLS) {
 			return true;
 		} else {
-			PacketSendUtility.sendMessage(player, "You can only have " + CraftConfig.MAX_MASTER_CRAFTING_SKILLS + " master crafting skills.");
+			PacketSendUtility.sendMessage(player, "You can only be a master in " + CraftConfig.MAX_MASTER_CRAFTING_SKILLS + " professions.");
 			return false;
 		}
 	}

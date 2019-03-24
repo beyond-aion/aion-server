@@ -1,6 +1,7 @@
 package com.aionemu.gameserver.questEngine.handlers.template;
 
-import static com.aionemu.gameserver.model.DialogAction.*;
+import static com.aionemu.gameserver.model.DialogAction.QUEST_SELECT;
+import static com.aionemu.gameserver.model.DialogAction.SELECT_QUEST_REWARD;
 
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -49,7 +50,7 @@ public class CraftingRewards extends AbstractTemplateQuestHandler {
 		int dialogActionId = env.getDialogActionId();
 		int targetId = env.getTargetId();
 
-		if ((qs == null || qs.isStartable())) {
+		if (qs == null || qs.isStartable()) {
 			if (targetId == startNpcId && canLearn(player)) {
 				switch (dialogActionId) {
 					case QUEST_SELECT:
