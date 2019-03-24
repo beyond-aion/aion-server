@@ -1,22 +1,17 @@
 package com.aionemu.gameserver.services.craft;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.List;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.configs.main.CraftConfig;
-import com.aionemu.gameserver.dataholders.DataManager;
+import com.aionemu.gameserver.model.craft.Profession;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.RequestResponseHandler;
 import com.aionemu.gameserver.model.skill.PlayerSkillList;
-import com.aionemu.gameserver.model.templates.CraftLearnTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUESTION_WINDOW;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.item.ItemPacketService.ItemUpdateType;
@@ -30,86 +25,63 @@ public class CraftSkillUpdateService {
 
 	private static final Logger log = LoggerFactory.getLogger(CraftSkillUpdateService.class);
 
-	private static final Map<Integer, CraftLearnTemplate> npcBySkill = new LinkedHashMap<>();
-	private static final Map<Integer, Integer> cost = new LinkedHashMap<>();
-	private static final List<Integer> craftingSkillIds = new ArrayList<>();
+	private static final Map<Integer, Profession> professionByNpc = new HashMap<>();
 
-	public static final CraftSkillUpdateService getInstance() {
+	public static CraftSkillUpdateService getInstance() {
 		return SingletonHolder.instance;
 	}
 
 	private CraftSkillUpdateService() {
 		// Asmodian
-		npcBySkill.put(204096, new CraftLearnTemplate(30002, false, "Extract Vitality"));
-		npcBySkill.put(830150, new CraftLearnTemplate(30002, false, "Extract Vitality"));
-		npcBySkill.put(204257, new CraftLearnTemplate(30003, false, "Extract Aether"));
-		npcBySkill.put(830148, new CraftLearnTemplate(30003, false, "Extract Aether"));
+		professionByNpc.put(204096, Profession.ESSENCETAPPING);
+		professionByNpc.put(830150, Profession.ESSENCETAPPING);
+		professionByNpc.put(204257, Profession.AETHERTAPPING);
+		professionByNpc.put(830148, Profession.AETHERTAPPING);
 
-		npcBySkill.put(204100, new CraftLearnTemplate(40001, true, "Cooking"));
-		npcBySkill.put(830142, new CraftLearnTemplate(40001, true, "Cooking"));
-		npcBySkill.put(204104, new CraftLearnTemplate(40002, true, "Weaponsmithing"));
-		npcBySkill.put(830146, new CraftLearnTemplate(40002, true, "Weaponsmithing"));
-		npcBySkill.put(204106, new CraftLearnTemplate(40003, true, "Armorsmithing"));
-		npcBySkill.put(830144, new CraftLearnTemplate(40003, true, "Armorsmithing"));
-		npcBySkill.put(204110, new CraftLearnTemplate(40004, true, "Tailoring"));
-		npcBySkill.put(830136, new CraftLearnTemplate(40004, true, "Tailoring"));
-		npcBySkill.put(204102, new CraftLearnTemplate(40007, true, "Alchemy"));
-		npcBySkill.put(830138, new CraftLearnTemplate(40007, true, "Alchemy"));
-		npcBySkill.put(204108, new CraftLearnTemplate(40008, true, "Handicrafting"));
-		npcBySkill.put(830140, new CraftLearnTemplate(40008, true, "Handicrafting"));
-		npcBySkill.put(798452, new CraftLearnTemplate(40010, true, "Menusier"));
-		npcBySkill.put(798456, new CraftLearnTemplate(40010, true, "Menusier"));
+		professionByNpc.put(204100, Profession.COOKING);
+		professionByNpc.put(830142, Profession.COOKING);
+		professionByNpc.put(204104, Profession.WEAPONSMITHING);
+		professionByNpc.put(830146, Profession.WEAPONSMITHING);
+		professionByNpc.put(204106, Profession.ARMORSMITHING);
+		professionByNpc.put(830144, Profession.ARMORSMITHING);
+		professionByNpc.put(204110, Profession.TAILORING);
+		professionByNpc.put(830136, Profession.TAILORING);
+		professionByNpc.put(204102, Profession.ALCHEMY);
+		professionByNpc.put(830138, Profession.ALCHEMY);
+		professionByNpc.put(204108, Profession.HANDICRAFTING);
+		professionByNpc.put(830140, Profession.HANDICRAFTING);
+		professionByNpc.put(798452, Profession.CONSTRUCTION);
+		professionByNpc.put(798456, Profession.CONSTRUCTION);
 
 		// Elyos
-		npcBySkill.put(203780, new CraftLearnTemplate(30002, false, "Extract Vitality"));
-		npcBySkill.put(830066, new CraftLearnTemplate(30002, false, "Extract Vitality"));
-		npcBySkill.put(203782, new CraftLearnTemplate(30003, false, "Extract Aether"));
-		npcBySkill.put(830064, new CraftLearnTemplate(30003, false, "Extract Aether"));
+		professionByNpc.put(203780, Profession.ESSENCETAPPING);
+		professionByNpc.put(830066, Profession.ESSENCETAPPING);
+		professionByNpc.put(203782, Profession.AETHERTAPPING);
+		professionByNpc.put(830064, Profession.AETHERTAPPING);
 
-		npcBySkill.put(203784, new CraftLearnTemplate(40001, true, "Cooking"));
-		npcBySkill.put(830058, new CraftLearnTemplate(40001, true, "Cooking"));
-		npcBySkill.put(203788, new CraftLearnTemplate(40002, true, "Weaponsmithing"));
-		npcBySkill.put(830062, new CraftLearnTemplate(40002, true, "Weaponsmithing"));
-		npcBySkill.put(203790, new CraftLearnTemplate(40003, true, "Armorsmithing"));
-		npcBySkill.put(830060, new CraftLearnTemplate(40003, true, "Armorsmithing"));
-		npcBySkill.put(203793, new CraftLearnTemplate(40004, true, "Tailoring"));
-		npcBySkill.put(830052, new CraftLearnTemplate(40004, true, "Tailoring"));
-		npcBySkill.put(203786, new CraftLearnTemplate(40007, true, "Alchemy"));
-		npcBySkill.put(830054, new CraftLearnTemplate(40007, true, "Alchemy"));
-		npcBySkill.put(203792, new CraftLearnTemplate(40008, true, "Handicrafting"));
-		npcBySkill.put(830056, new CraftLearnTemplate(40008, true, "Handicrafting"));
-		npcBySkill.put(798450, new CraftLearnTemplate(40010, true, "Menusier"));
-		npcBySkill.put(798454, new CraftLearnTemplate(40010, true, "Menusier"));
-
-		
-		cost.put(0, 3500);
-		cost.put(99, 17000);
-		cost.put(199, 115000);
-		cost.put(299, 460000);
-		cost.put(399, 0);
-		cost.put(449, 6004900);
-		cost.put(499, 12000000);
-
-		
-		craftingSkillIds.add(40001);
-		craftingSkillIds.add(40002);
-		craftingSkillIds.add(40003);
-		craftingSkillIds.add(40004);
-		craftingSkillIds.add(40007);
-		craftingSkillIds.add(40008);
-		craftingSkillIds.add(40010);
+		professionByNpc.put(203784, Profession.COOKING);
+		professionByNpc.put(830058, Profession.COOKING);
+		professionByNpc.put(203788, Profession.WEAPONSMITHING);
+		professionByNpc.put(830062, Profession.WEAPONSMITHING);
+		professionByNpc.put(203790, Profession.ARMORSMITHING);
+		professionByNpc.put(830060, Profession.ARMORSMITHING);
+		professionByNpc.put(203793, Profession.TAILORING);
+		professionByNpc.put(830052, Profession.TAILORING);
+		professionByNpc.put(203786, Profession.ALCHEMY);
+		professionByNpc.put(830054, Profession.ALCHEMY);
+		professionByNpc.put(203792, Profession.HANDICRAFTING);
+		professionByNpc.put(830056, Profession.HANDICRAFTING);
+		professionByNpc.put(798450, Profession.CONSTRUCTION);
+		professionByNpc.put(798454, Profession.CONSTRUCTION);
 
 		log.info("CraftSkillUpdateService: Initialized.");
 	}
 
 	/**
-	 * returns the respective CraftingLearnTemplate for a specific Npc
-	 * 
-	 * @param npc
-	 * @return the corresponding CraftingLearnTemplate
+	 * @return the corresponding profession for the given npc
 	 */
-	public CraftLearnTemplate getCLTemplateByNpc(Npc npc) {
-		return npcBySkill.get(npc.getNpcId());
+	public Profession getProfessionByNpc(Npc npc) {
+		return professionByNpc.get(npc.getNpcId());
 	}
 
 	/**
@@ -121,74 +93,33 @@ public class CraftSkillUpdateService {
 	public void learnSkill(Player player, Npc npc) {
 		if (player.getLevel() < 10)
 			return;
-		final CraftLearnTemplate template = npcBySkill.get(npc.getNpcId());
-		if (template == null)
+		Profession profession = professionByNpc.get(npc.getNpcId());
+		if (profession == null)
 			return;
-		final int skillId = template.getSkillId();
+		int skillId = profession.getSkillId();
 		if (skillId == 0)
 			return;
 
-		int skillLvl = 0;
 		PlayerSkillList skillList = player.getSkillList();
-		if (skillList.isSkillPresent(skillId))
-			skillLvl = skillList.getSkillLevel(skillId);
-
-		if (!cost.containsKey(skillLvl)) {
-			if (skillLvl < cost.keySet().stream().max(Comparator.naturalOrder()).get())
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_DONT_RANK_UP());
+		int skillLevel = skillList.isSkillPresent(skillId) ? skillList.getSkillLevel(skillId) : 0;
+		Integer price = profession.getUpgradeCost(skillLevel);
+		if (price == null) {
+			if (skillLevel > profession.getMaxUpgradableLevel())
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_DONT_RANK_UP_GATHERING());
+			else if (skillLevel == 399) // expert is granted by quest
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CRAFT_CANT_EXTEND_MONEY());
+			else if (skillLevel == 499) // master is granted by quest
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CRAFT_CANT_EXTEND_GRAND_MASTER());
 			else
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_COMBINE_CBT_CAP());
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_DONT_RANK_UP());
 			return;
 		}
 
-		// Retail : Max 2 expert crafting skill
-		if (isCraftingSkill(skillId) && skillLvl == 399 && !canLearnMoreExpertCraftingSkill(player)) {
-			return;
-		}
-
-		// Retail : Max 1 master crafting skill
-		if (isCraftingSkill(skillId) && skillLvl == 499 && !canLearnMoreMasterCraftingSkill(player)) {
-			return;
-		}
-
-		// Prevents player from buying expert craft upgrade (399 to 400)
-		if (skillLvl == 399) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CRAFT_CANT_EXTEND_MONEY());
-			return;
-		}
-
-		// There is no upgrade payment for Essence and Aether tapping at 449, skip.
-		if (skillLvl == 449 && (skillId == 30002 || skillId == 30003)) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_DONT_RANK_UP());
-			return;
-		}
-
-		// You must do quest before being able to buy master update (499 to 500)
-		if (skillLvl == 499 && ((skillId == 40001 && (!player.isCompleteQuest(29039) || !player.isCompleteQuest(19039)))
-			|| (skillId == 40002 && (!player.isCompleteQuest(29009) || !player.isCompleteQuest(19009)))
-			|| (skillId == 40003 && (!player.isCompleteQuest(29015) || !player.isCompleteQuest(19015)))
-			|| (skillId == 40004 && (!player.isCompleteQuest(29021) || !player.isCompleteQuest(19021)))
-			|| (skillId == 40007 && (!player.isCompleteQuest(29033) || !player.isCompleteQuest(19033)))
-			|| (skillId == 40008 && (!player.isCompleteQuest(29027) || !player.isCompleteQuest(19027)))
-			|| (skillId == 40010 && (!player.isCompleteQuest(29058) || !player.isCompleteQuest(19058))))) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CRAFT_CANT_EXTEND_GRAND_MASTER());
-			return;
-		}
-
-		// There is no Master upgrade for Aether and Essence tapping yet.
-		if (skillLvl >= 499 && (skillId == 30002 || skillId == 30003)) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_GATHER_CBT_CAP());
-			return;
-		}
-
-		final int price = cost.get(skillLvl);
-		final long kinah = player.getInventory().getKinah();
-		final int skillLevel = skillLvl;
 		RequestResponseHandler<Npc> responseHandler = new RequestResponseHandler<Npc>(npc) {
 
 			@Override
 			public void acceptRequest(Npc requester, Player responder) {
-				if (price < kinah && responder.getInventory().tryDecreaseKinah(price, ItemUpdateType.DEC_KINAH_LEARN)) {
+				if (responder.getInventory().tryDecreaseKinah(price, ItemUpdateType.DEC_KINAH_LEARN)) {
 					PlayerSkillList skillList = responder.getSkillList();
 					skillList.addSkill(responder, skillId, skillLevel + 1);
 				} else {
@@ -198,26 +129,11 @@ public class CraftSkillUpdateService {
 
 		};
 
-		boolean result = player.getResponseRequester().putRequest(SM_QUESTION_WINDOW.STR_CRAFT_ADDSKILL_CONFIRM, responseHandler);
-		if (result) {
-			PacketSendUtility.sendPacket(player, new SM_QUESTION_WINDOW(SM_QUESTION_WINDOW.STR_CRAFT_ADDSKILL_CONFIRM, 0, 0,
-				DataManager.SKILL_DATA.getSkillTemplate(skillId).getL10n(), String.valueOf(price)));
+		if (player.getResponseRequester().putRequest(SM_QUESTION_WINDOW.STR_CRAFT_ADDSKILL_CONFIRM, responseHandler)) {
+			String professionName = skillLevel == 0 ? profession.getClientName() : profession.getClientName(skillLevel + 1);
+			PacketSendUtility.sendPacket(player,
+				new SM_QUESTION_WINDOW(SM_QUESTION_WINDOW.STR_CRAFT_ADDSKILL_CONFIRM, 0, 0, professionName, String.valueOf(price)));
 		}
-	}
-
-	/**
-	 * check if skillId is crafting skill or not
-	 * 
-	 * @param skillId
-	 * @return true or false
-	 */
-	public boolean isCraftingSkill(int skillId) {
-		Iterator<Integer> it = craftingSkillIds.iterator();
-		while (it.hasNext()) {
-			if (it.next() == skillId)
-				return true;
-		}
-		return false;
 	}
 
 	/**
@@ -229,12 +145,9 @@ public class CraftSkillUpdateService {
 	public int getTotalExpertCraftingSkills(Player player) {
 		int mastered = 0;
 
-		Iterator<Integer> it = craftingSkillIds.iterator();
-		while (it.hasNext()) {
-			int skillId = it.next();
-			int skillLvl = 0;
-			if (player.getSkillList().isSkillPresent(skillId)) {
-				skillLvl = player.getSkillList().getSkillLevel(skillId);
+		for (Profession profession : Profession.values()) {
+			if (profession.isCrafting() && player.getSkillList().isSkillPresent(profession.getSkillId())) {
+				int skillLvl = player.getSkillList().getSkillLevel(profession.getSkillId());
 				if (skillLvl > 399 && skillLvl <= 499)
 					mastered++;
 			}
@@ -251,12 +164,9 @@ public class CraftSkillUpdateService {
 	public int getTotalMasterCraftingSkills(Player player) {
 		int mastered = 0;
 
-		Iterator<Integer> it = craftingSkillIds.iterator();
-		while (it.hasNext()) {
-			int skillId = it.next();
-			int skillLvl = 0;
-			if (player.getSkillList().isSkillPresent(skillId)) {
-				skillLvl = player.getSkillList().getSkillLevel(skillId);
+		for (Profession profession : Profession.values()) {
+			if (profession.isCrafting() && player.getSkillList().isSkillPresent(profession.getSkillId())) {
+				int skillLvl = player.getSkillList().getSkillLevel(profession.getSkillId());
 				if (skillLvl > 499)
 					mastered++;
 			}
@@ -275,7 +185,7 @@ public class CraftSkillUpdateService {
 		if (getTotalExpertCraftingSkills(player) + getTotalMasterCraftingSkills(player) < CraftConfig.MAX_EXPERT_CRAFTING_SKILLS) {
 			return true;
 		} else {
-			PacketSendUtility.sendMessage(player, "You can only have " + CraftConfig.MAX_EXPERT_CRAFTING_SKILLS + " Expert crafting skills.");
+			PacketSendUtility.sendMessage(player, "You can only have " + CraftConfig.MAX_EXPERT_CRAFTING_SKILLS + " expert crafting skills.");
 			return false;
 		}
 	}
@@ -290,7 +200,7 @@ public class CraftSkillUpdateService {
 		if (getTotalMasterCraftingSkills(player) < CraftConfig.MAX_MASTER_CRAFTING_SKILLS) {
 			return true;
 		} else {
-			PacketSendUtility.sendMessage(player, "You can only have " + CraftConfig.MAX_MASTER_CRAFTING_SKILLS + " Master crafting skill.");
+			PacketSendUtility.sendMessage(player, "You can only have " + CraftConfig.MAX_MASTER_CRAFTING_SKILLS + " master crafting skills.");
 			return false;
 		}
 	}

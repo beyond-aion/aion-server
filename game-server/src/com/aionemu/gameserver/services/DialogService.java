@@ -316,10 +316,10 @@ public class DialogService {
 					PacketSendUtility.sendPacket(player, new SM_SELL_ITEM(npc));
 					break;
 				case GIVEUP_CRAFT_EXPERT: // relinquish Expert Status
-					RelinquishCraftStatus.relinquishExpertStatus(player, npc);
+					RelinquishCraftStatus.relinquishExpertStatus(player, CraftSkillUpdateService.getInstance().getProfessionByNpc(npc));
 					break;
 				case GIVEUP_CRAFT_MASTER: // relinquish Master Status
-					RelinquishCraftStatus.relinquishMasterStatus(player, npc);
+					RelinquishCraftStatus.relinquishMasterStatus(player, CraftSkillUpdateService.getInstance().getProfessionByNpc(npc));
 					break;
 				case HOUSING_PERSONAL_AUCTION: // housing auction
 					if (!player.hasHouseOwnerState(HouseOwnerState.BIDDING_ALLOWED)) {

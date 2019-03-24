@@ -1,10 +1,10 @@
 package admincommands;
 
-import com.aionemu.gameserver.model.gameobjects.VisibleObject;
+import org.apache.commons.lang3.math.NumberUtils;
+
+import com.aionemu.gameserver.model.craft.Profession;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.skill.PlayerSkillEntry;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_SKILL_LIST;
-import com.aionemu.gameserver.services.craft.CraftSkillUpdateService;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.craft.RelinquishCraftStatus;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.Util;
@@ -12,92 +12,63 @@ import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 import com.aionemu.gameserver.world.World;
 
 /**
- * @author synchro2
+ * @author synchro2, Neon
  */
 public class RelinquishCraft extends AdminCommand {
 
 	public RelinquishCraft() {
-		super("relinquishcraft");
+		super("relinquishcraft", "Removes a players crafting expert or master status.");
+
+		// @formatter:off
+		setSyntaxInfo(
+			"<skillId> <expert|master> - Removes master or expert status of your target for the given crafting skill.",
+			"<name> <skillId> <expert|master> - Removes the players master or expert status for the given crafting skill."
+		);
+		// @formatter:on
 	}
 
 	@Override
 	public void execute(Player admin, String... params) {
-
-		Player player;
-		int skillId;
-		boolean isExpert = false;
-		String skillIdParam = "";
-		String isExpertParam = "";
-
-		if (params.length < 2 || params.length > 3) {
-			PacketSendUtility.sendMessage(admin, "syntax //relinquishcraft <character_name | target> <skillId> <expert | master>");
+		if (params.length < 2) {
+			sendInfo(admin);
 			return;
 		}
 
-		if (params.length == 2) {
-			VisibleObject target = admin.getTarget();
-			if (target == null || !(target instanceof Player)) {
-				PacketSendUtility.sendMessage(admin, "Select target first.");
+		int i = 0;
+		Player target;
+		if (params.length == 3) {
+			String playerName = Util.convertName(params[i++]);
+			target = World.getInstance().findPlayer(playerName);
+			if (target == null) {
+				PacketSendUtility.sendPacket(admin, SM_SYSTEM_MESSAGE.STR_NO_SUCH_USER(playerName));
 				return;
 			}
-
-			player = (Player) target;
-			skillIdParam = params[0];
-			isExpertParam = params[1];
-
 		} else {
-			player = World.getInstance().findPlayer(Util.convertName(params[0]));
-			skillIdParam = params[1];
-			isExpertParam = params[2];
-
-			if (player == null) {
-				PacketSendUtility.sendMessage(admin, "The specified player is not online.");
+			if (admin.getTarget() instanceof Player)
+				target = (Player) admin.getTarget();
+			else {
+				PacketSendUtility.sendPacket(admin, SM_SYSTEM_MESSAGE.STR_INVALID_TARGET());
 				return;
 			}
 		}
 
-		try {
-			skillId = Integer.parseInt(skillIdParam);
-		} catch (NumberFormatException e) {
-			PacketSendUtility.sendMessage(admin, "You must using only numbers in skillId.");
+		Profession profession = Profession.getBySkillId(NumberUtils.toInt(params[i++]));
+		if (profession == null || !profession.isCrafting()) {
+			sendInfo(admin, "Invalid skill ID.");
 			return;
 		}
 
-		if (!isExpertParam.equalsIgnoreCase("Expert") && !isExpertParam.equalsIgnoreCase("Master")) {
-			PacketSendUtility.sendMessage(admin, "Only master or expert.");
-			return;
-		}
-		if (isExpertParam.equalsIgnoreCase("Expert")) {
-			isExpert = true;
-		}
-		if (isExpertParam.equalsIgnoreCase("Master")) {
-			isExpert = false;
-		}
-
-		PlayerSkillEntry skill = player.getSkillList().getSkillEntry(skillId);
-		int minValue = isExpert ? RelinquishCraftStatus.getExpertMinValue() : RelinquishCraftStatus.getMasterMinValue();
-		int maxValue = isExpert ? RelinquishCraftStatus.getExpertMaxValue() : RelinquishCraftStatus.getMasterMaxValue();
-		int skillMessageId = RelinquishCraftStatus.getSkillMessageId();
-
-		if (!CraftSkillUpdateService.getInstance().isCraftingSkill(skillId)) {
-			PacketSendUtility.sendMessage(admin, "It's not skillId.");
-			return;
-		}
-
-		if (skill == null || skill.getSkillLevel() < minValue || skill.getSkillLevel() > maxValue) {
-			PacketSendUtility.sendMessage(admin, "Wrong skill level.");
-			return;
-		}
-
-		skill.setSkillLvl(minValue - 1);
-		PacketSendUtility.sendPacket(player, new SM_SKILL_LIST(skill, skillMessageId));
-		RelinquishCraftStatus.removeRecipesAbove(player, skillId, minValue);
-		RelinquishCraftStatus.deleteCraftStatusQuests(skillId, player, false);
-		PacketSendUtility.sendMessage(admin, "Craft status successfull relinquished.");
-	}
-
-	@Override
-	public void info(Player player, String message) {
-		PacketSendUtility.sendMessage(player, "syntax //relinquishcraft <character_name | target> <skillId> <expert | master>");
+		if ("expert".equalsIgnoreCase(params[i])) {
+			if (RelinquishCraftStatus.relinquishExpertStatus(target, profession, 0))
+				sendInfo(admin, "Successfully removed expert status for " + profession);
+			else
+				sendInfo(admin, target.getName() + " doesn't have " + profession + " on expert.");
+		} else if ("master".equalsIgnoreCase(params[i])) {
+			if (RelinquishCraftStatus.relinquishMasterStatus(target, profession, 0))
+				sendInfo(admin, "Successfully removed master status for " + profession);
+			else
+				sendInfo(admin, target.getName() + " doesn't have " + profession + " on master.");
+		} else
+			sendInfo(admin);
 	}
 }

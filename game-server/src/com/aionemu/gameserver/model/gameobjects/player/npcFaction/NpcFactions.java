@@ -26,7 +26,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_ACTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_TITLE_INFO;
 import com.aionemu.gameserver.services.QuestService;
-import com.aionemu.gameserver.services.craft.CraftSkillUpdateService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.time.ServerTime;
 
@@ -137,7 +136,7 @@ public class NpcFactions {
 			boolean canEnter = false;
 			if (npcFactionTemplate.getCategory() == FactionCategory.COMBINESKILL) {
 				for (PlayerSkillEntry skill : owner.getSkillList().getAllSkills()) {
-					if (CraftSkillUpdateService.getInstance().isCraftingSkill(skill.getSkillId()) && skill.getSkillLevel() >= skillPoints) {
+					if (skill.isCraftingSkill() && skill.getSkillLevel() >= skillPoints) {
 						canEnter = true;
 						break;
 					}

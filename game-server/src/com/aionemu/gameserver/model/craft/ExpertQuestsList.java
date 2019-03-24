@@ -21,12 +21,12 @@ public enum ExpertQuestsList {
 	MENUSIER_ELYOS(new int[] { 19050, 19053, 19052, 19056, 19055, 19054 }, Race.ELYOS, 40010),
 	MENUSIER_ASMODIANS(new int[] { 29050, 29053, 29052, 29056, 29055, 29054 }, Race.ASMODIANS, 40010);
 
-	private int[] skillsIds;
+	private int[] questIds;
 	private Race race;
 	private int craftSkillId;
 
-	private ExpertQuestsList(int[] skillsIds, Race race, int craftSkillId) {
-		this.skillsIds = skillsIds;
+	ExpertQuestsList(int[] questIds, Race race, int craftSkillId) {
+		this.questIds = questIds;
 		this.race = race;
 		this.craftSkillId = craftSkillId;
 	}
@@ -39,10 +39,10 @@ public enum ExpertQuestsList {
 		return craftSkillId;
 	}
 
-	public static int[] getSkillsIds(int craftSkillId, Race race) {
+	public static int[] getQuestIds(int craftSkillId, Race race) {
 		for (ExpertQuestsList eql : values()) {
-			if (race.equals(eql.getRace()) && craftSkillId == eql.getCraftSkillId())
-				return eql.skillsIds;
+			if (race == eql.getRace() && craftSkillId == eql.getCraftSkillId())
+				return eql.questIds;
 		}
 		throw new IllegalArgumentException("Invalid craftSkillId: " + craftSkillId + " or race: " + race);
 	}
