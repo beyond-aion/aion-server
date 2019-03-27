@@ -18,11 +18,6 @@ import com.aionemu.commons.utils.PropertiesUtils;
 public class Config {
 
 	/**
-	 * Logger for this class.
-	 */
-	protected static final Logger log = LoggerFactory.getLogger(Config.class);
-
-	/**
 	 * Local address where LS will listen for Aion client connections (* = bind any local IP)
 	 */
 	@Property(key = "loginserver.network.client.socket_address", defaultValue = "*:2106")
@@ -105,24 +100,24 @@ public class Config {
 	 * Load configs from files.
 	 */
 	public static void load() {
+		Properties properties = loadProperties();
+
+		ConfigurableProcessor.process(Config.class, properties);
+		ConfigurableProcessor.process(CommonsConfig.class, properties);
+		ConfigurableProcessor.process(DatabaseConfig.class, properties);
+	}
+
+	private static Properties loadProperties() {
+		Logger log = LoggerFactory.getLogger(Config.class);
+		Properties defaults = new Properties();
 		try {
-			Properties myProps = null;
-			try {
-				log.info("Loading: ./config/myls.properties");
-				myProps = PropertiesUtils.load("./config/myls.properties");
-			} catch (Exception e) {
+			log.info("Loading default configuration values from: ./config/network/*");
+			PropertiesUtils.loadFromDirectory(defaults, "./config/network", false);
+			log.info("Loading: ./config/myls.properties");
+			Properties properties = PropertiesUtils.load("./config/myls.properties", defaults);
+			if (properties.isEmpty())
 				log.info("No override properties found");
-			}
-
-			String network = "./config/network";
-			log.info("Loading: " + network + "/*");
-			Properties[] props = PropertiesUtils.loadAllFromDirectory(network);
-			PropertiesUtils.overrideProperties(props, myProps);
-
-			ConfigurableProcessor.process(Config.class, props);
-			ConfigurableProcessor.process(CommonsConfig.class, props);
-			ConfigurableProcessor.process(DatabaseConfig.class, props);
-
+			return properties;
 		} catch (Exception e) {
 			throw new Error("Can't load loginserver configuration:", e);
 		}

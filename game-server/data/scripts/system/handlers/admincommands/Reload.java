@@ -93,7 +93,7 @@ public class Reload extends AdminCommand {
 			ChatProcessor.getInstance().reload();
 			sendInfo(admin, "Chat commands successfully reloaded!");
 		} else if (params[0].equalsIgnoreCase("config")) {
-			Config.reload();
+			Config.load();
 			sendInfo(admin, "Configs successfully reloaded!");
 		} else if (params[0].equalsIgnoreCase("customdrops")) {
 			File xml = new File("./data/static_data/custom_drop/custom_drop.xml");

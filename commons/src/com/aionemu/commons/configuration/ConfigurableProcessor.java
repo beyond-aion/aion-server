@@ -33,7 +33,7 @@ public class ConfigurableProcessor {
 	 * @param properties
 	 *          Properties that should be used while searching for a {@link Property#key()}
 	 */
-	public static void process(Object object, Properties... properties) {
+	public static void process(Object object, Properties properties) {
 		Class<?> clazz;
 
 		if (object instanceof Class) {
@@ -56,7 +56,7 @@ public class ConfigurableProcessor {
 	 * @param props
 	 *          Properties with keys\values
 	 */
-	private static void process(Class<?> clazz, Object obj, Properties[] props) {
+	private static void process(Class<?> clazz, Object obj, Properties props) {
 		processFields(clazz, obj, props);
 
 		// Interfaces can't have any object fields, only static
@@ -85,7 +85,7 @@ public class ConfigurableProcessor {
 	 * @param props
 	 *          Properties with keys\values
 	 */
-	private static void processFields(Class<?> clazz, Object obj, Properties[] props) {
+	private static void processFields(Class<?> clazz, Object obj, Properties props) {
 		for (Field f : clazz.getDeclaredFields()) {
 			// Static fields should not be modified when processing object
 			if (Modifier.isStatic(f.getModifiers()) && obj != null) {
@@ -120,13 +120,13 @@ public class ConfigurableProcessor {
 	 * @param props
 	 *          Properties with keys & default values
 	 */
-	private static void processField(Field f, Object obj, Properties[] props) {
+	private static void processField(Field f, Object obj, Properties props) {
 		boolean oldAccessible = f.isAccessible();
 		try {
 			if (!oldAccessible)
 				f.setAccessible(true);
 			Property property = f.getAnnotation(Property.class);
-			if (!Property.DEFAULT_VALUE.equals(property.defaultValue()) || isKeyPresent(property.key(), props)) {
+			if (!Property.DEFAULT_VALUE.equals(property.defaultValue()) || props.getProperty(property.key()) != null) {
 				f.set(obj, getFieldValue(f, props));
 			} else
 				log.debug("Field " + f.getName() + " of class " + f.getDeclaringClass().getName() + " wasn't modified");
@@ -153,7 +153,7 @@ public class ConfigurableProcessor {
 	 * @throws TransformationException
 	 *           if something goes wrong during transformation
 	 */
-	private static Object getFieldValue(Field field, Properties[] props) throws TransformationException {
+	private static Object getFieldValue(Field field, Properties props) throws TransformationException {
 		Property property = field.getAnnotation(Property.class);
 		String defaultValue = property.defaultValue();
 		String key = property.key();
@@ -161,7 +161,7 @@ public class ConfigurableProcessor {
 		if (key.isEmpty())
 			throw new TransformationException("Property for field" + field.getName() + " of class " + field.getDeclaringClass().getName() + " has empty key");
 
-		String value = findPropertyByKey(key, props);
+		String value = props.getProperty(key);
 		if (value == null || value.trim().equals("")) {
 			value = defaultValue;
 			log.debug("Using default value for field " + field.getName() + " of class " + field.getDeclaringClass().getName());
@@ -174,12 +174,12 @@ public class ConfigurableProcessor {
 		return transformValueToFieldType(field, value);
 	}
 
-	private static String replacePropertyPlaceholders(String value, Properties[] props) {
+	private static String replacePropertyPlaceholders(String value, Properties props) {
 		Matcher matcher = propertyPattern.matcher(value);
 		while (matcher.find()) {
 			String completeToken = matcher.group(); // ${property.name}
 			String token = matcher.group(1); // property.name
-			String replacement = findPropertyByKey(token, props);
+			String replacement = props.getProperty(token);
 			value = value.replace(completeToken, replacement == null ? "" : replacement);
 		}
 		return value;
@@ -195,37 +195,5 @@ public class ConfigurableProcessor {
 			throw new TransformationException("Property transformer for class " + cls + " is not implemented (referenced field: " + field.getName() + ", class: "
 				+ field.getDeclaringClass().getName());
 		return pt.transform(value, field, genericTypeArgs);
-	}
-
-	/**
-	 * Finds value by key in properties
-	 * 
-	 * @param key
-	 *          value key
-	 * @param props
-	 *          properties to look for the key
-	 * @return value if found, null otherwise
-	 */
-	private static String findPropertyByKey(String key, Properties[] props) {
-		for (Properties p : props) {
-			if (p.containsKey(key)) {
-				return p.getProperty(key);
-			}
-		}
-
-		return null;
-	}
-
-	/**
-	 * Checks if key is present in the given properties
-	 * 
-	 * @param key
-	 *          key to check
-	 * @param props
-	 *          properties to look for key
-	 * @return true if key present, false in other case
-	 */
-	private static boolean isKeyPresent(String key, Properties[] props) {
-		return findPropertyByKey(key, props) != null;
 	}
 }

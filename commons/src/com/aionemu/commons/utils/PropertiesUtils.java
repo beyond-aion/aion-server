@@ -3,10 +3,10 @@ package com.aionemu.commons.utils;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.Collection;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.Iterator;
 import java.util.Properties;
-
-import org.apache.commons.io.FileUtils;
 
 /**
  * This class is designed to simplify routine job with properties
@@ -16,156 +16,72 @@ import org.apache.commons.io.FileUtils;
 public class PropertiesUtils {
 
 	/**
-	 * Loads properties by given file
-	 * 
-	 * @param file
-	 *          filename
-	 * @return loaded properties
-	 * @throws java.io.IOException
-	 *           if can't load file
+	 * @see #load(String, Properties)
 	 */
-	public static Properties load(String file) throws IOException {
-		return load(new File(file));
+	public static Properties load(String filename) throws IOException {
+		return load(new File(filename), null);
 	}
 
 	/**
-	 * Loads properties by given file
+	 * @see #load(String, Properties)
+	 */
+	public static Properties load(String filename, Properties defaults) throws IOException {
+		return load(new File(filename), defaults);
+	}
+
+	/**
+	 * Loads properties from a file with the specified defaults as a backup.
 	 * 
 	 * @param file
-	 *          filename
-	 * @return loaded properties
-	 * @throws java.io.IOException
-	 *           if can't load file
+	 *          File to load properties from
+	 * @param defaults
+	 *          Default values for the new properties, can be null
+	 * @return Loaded properties (empty if file doesn't exist or is a directory)
 	 */
-	public static Properties load(File file) throws IOException {
-		FileInputStream fis = new FileInputStream(file);
-		Properties p = new Properties();
-		p.load(fis);
-		fis.close();
+	public static Properties load(File file, Properties defaults) throws IOException {
+		Properties p = new Properties(defaults);
+		if (file.isFile())
+			loadProperties(p, file);
 		return p;
 	}
 
-	/**
-	 * Loades properties from given files
-	 * 
-	 * @param files
-	 *          list of string that represents files
-	 * @return array of loaded properties
-	 * @throws IOException
-	 *           if was unable to read properties
-	 */
-	public static Properties[] load(String... files) throws IOException {
-		Properties[] result = new Properties[files.length];
-		for (int i = 0; i < result.length; i++) {
-			result[i] = load(files[i]);
+	private static void loadProperties(Properties properties, File file) throws IOException {
+		try (FileInputStream fis = new FileInputStream(file)) {
+			properties.load(fis);
+		} catch (IOException e) {
+			throw new IOException("Could not parse " + file, e);
 		}
-		return result;
 	}
 
 	/**
-	 * Loades properties from given files
-	 * 
-	 * @param files
-	 *          list of files
-	 * @return array of loaded properties
-	 * @throws IOException
-	 *           if was unable to read properties
+	 * @see #loadFromDirectory(Properties, File, boolean)
 	 */
-	public static Properties[] load(File... files) throws IOException {
-		Properties[] result = new Properties[files.length];
-		for (int i = 0; i < result.length; i++) {
-			result[i] = load(files[i]);
-		}
-		return result;
+	public static void loadFromDirectory(Properties properties, String dir, boolean recursive) throws IOException {
+		loadFromDirectory(properties, new File(dir), recursive);
 	}
 
 	/**
-	 * Loads non-recursively all .property files form directory
-	 * 
-	 * @param dir
-	 *          string that represents directory
-	 * @return array of loaded properties
-	 * @throws IOException
-	 *           if was unable to read properties
-	 */
-	public static Properties[] loadAllFromDirectory(String dir) throws IOException {
-		return loadAllFromDirectory(new File(dir), false);
-	}
-
-	/**
-	 * Loads non-recursively all .property files form directory
-	 * 
-	 * @param dir
-	 *          directory
-	 * @return array of loaded properties
-	 * @throws IOException
-	 *           if was unable to read properties
-	 */
-	public static Properties[] loadAllFromDirectory(File dir) throws IOException {
-		return loadAllFromDirectory(dir, false);
-	}
-
-	/**
-	 * Loads all .property files form directory
-	 * 
-	 * @param dir
-	 *          string that represents directory
-	 * @param recursive
-	 *          parse subdirectories or not
-	 * @return array of loaded properties
-	 * @throws IOException
-	 *           if was unable to read properties
-	 */
-	public static Properties[] loadAllFromDirectory(String dir, boolean recursive) throws IOException {
-		return loadAllFromDirectory(new File(dir), recursive);
-	}
-
-	/**
-	 * Loads all .property files form directory
-	 * 
-	 * @param dir
-	 *          directory
-	 * @param recursive
-	 *          parse subdirectories or not
-	 * @return array of loaded properties
-	 * @throws IOException
-	 *           if was unable to read properties
-	 */
-	public static Properties[] loadAllFromDirectory(File dir, boolean recursive) throws IOException {
-		Collection<File> files = FileUtils.listFiles(dir, new String[] { "properties" }, recursive);
-		return load(files.toArray(new File[files.size()]));
-	}
-
-	/**
-	 * All initial properties will be overriden with properties supplied as second argument
-	 * 
-	 * @param initialProperties
-	 *          to be overriden
+	 * Loads all .properties files from a directory and fills the loaded values into given Properties object
+	 *
 	 * @param properties
-	 * @return merged properties
+	 *          Properties to fill
+	 * @param dir
+	 *          Directory where the .properties files are located
+	 * @param recursive
+	 *          Whether to parse subdirectories or not
+	 * @throws IOException
+	 *           If a file could not be read
 	 */
-	public static Properties[] overrideProperties(Properties[] initialProperties, Properties[] properties) {
-		if (properties != null) {
-			for (Properties props : properties) {
-				overrideProperties(initialProperties, props);
-			}
+	public static void loadFromDirectory(Properties properties, File dir, boolean recursive) throws IOException {
+		for (Iterator<File> iter = propertiesFileIterator(dir, recursive); iter.hasNext();) {
+			loadProperties(properties, iter.next());
 		}
-		return initialProperties;
 	}
 
-	/**
-	 * All initial properties will be overriden with properties supplied as second argument
-	 * 
-	 * @param initialProperties
-	 * @param properties
-	 * @return
-	 */
-	public static Properties[] overrideProperties(Properties[] initialProperties, Properties properties) {
-		if (properties != null) {
-			for (Properties initialProps : initialProperties) {
-				initialProps.putAll(properties);
-			}
-		}
-		return initialProperties;
+	private static Iterator<File> propertiesFileIterator(File dir, boolean recursive) throws IOException {
+		return Files.walk(dir.toPath(), recursive ? Integer.MAX_VALUE : 1)
+			.filter(p -> p.toString().endsWith(".properties") && p.toFile().isFile())
+			.map(Path::toFile)
+			.iterator();
 	}
 }

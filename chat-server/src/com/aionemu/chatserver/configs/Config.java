@@ -1,5 +1,7 @@
 package com.aionemu.chatserver.configs;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Properties;
 
 import org.slf4j.Logger;
@@ -18,40 +20,36 @@ import com.aionemu.commons.utils.PropertiesUtils;
  */
 public class Config {
 
-	protected static final Logger log = LoggerFactory.getLogger(Config.class);
-
 	/**
 	 * Load configs from files.
 	 */
 	public static void load() {
+		Properties properties = loadProperties();
+
+		// Main
+		ConfigurableProcessor.process(CommonsConfig.class, properties);
+		ConfigurableProcessor.process(CSConfig.class, properties);
+		ConfigurableProcessor.process(LoggingConfig.class, properties);
+
+		// Network
+		ConfigurableProcessor.process(DatabaseConfig.class, properties);
+		ConfigurableProcessor.process(NetworkConfig.class, properties);
+	}
+
+	private static Properties loadProperties() {
+		Logger log = LoggerFactory.getLogger(Config.class);
+		List<String> defaultsFolders = Arrays.asList("./config/main", "./config/network");
+		Properties defaults = new Properties();
 		try {
-			Properties myProps = null;
-			try {
-				log.info("Loading: ./config/mycs.properties");
-				myProps = PropertiesUtils.load("./config/mycs.properties");
-			} catch (Exception e) {
-				log.info("No override properties found");
+			for (String configDir : defaultsFolders) {
+				log.info("Loading default configuration values from: " + configDir + "/*");
+				PropertiesUtils.loadFromDirectory(defaults, configDir, false);
 			}
-
-			// Main
-			String main = "./config/main";
-			log.info("Loading: " + main + "/*");
-			Properties[] mainProps = PropertiesUtils.loadAllFromDirectory(main);
-			PropertiesUtils.overrideProperties(mainProps, myProps);
-
-			ConfigurableProcessor.process(CommonsConfig.class, mainProps);
-			ConfigurableProcessor.process(CSConfig.class, mainProps);
-			ConfigurableProcessor.process(LoggingConfig.class, mainProps);
-
-			// Network
-			String network = "./config/network";
-			log.info("Loading: " + network + "/*");
-			Properties[] networkProps = PropertiesUtils.loadAllFromDirectory(network);
-			PropertiesUtils.overrideProperties(networkProps, myProps);
-
-			ConfigurableProcessor.process(DatabaseConfig.class, networkProps);
-			ConfigurableProcessor.process(NetworkConfig.class, networkProps);
-
+			log.info("Loading: ./config/mycs.properties");
+			Properties properties = PropertiesUtils.load("./config/mycs.properties", defaults);
+			if (properties.isEmpty())
+				log.info("No override properties found");
+			return properties;
 		} catch (Exception e) {
 			throw new Error("Can't load chatserver configuration:", e);
 		}
