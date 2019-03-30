@@ -11,20 +11,16 @@ import org.quartz.CronExpression;
 
 import com.aionemu.commons.configuration.transformers.ArrayTransformer;
 import com.aionemu.commons.configuration.transformers.BooleanTransformer;
-import com.aionemu.commons.configuration.transformers.ByteTransformer;
 import com.aionemu.commons.configuration.transformers.CharTransformer;
 import com.aionemu.commons.configuration.transformers.ClassTransformer;
 import com.aionemu.commons.configuration.transformers.CollectionTransformer;
 import com.aionemu.commons.configuration.transformers.CronExpressionTransformer;
-import com.aionemu.commons.configuration.transformers.DoubleTransformer;
 import com.aionemu.commons.configuration.transformers.EnumTransformer;
 import com.aionemu.commons.configuration.transformers.FileTransformer;
-import com.aionemu.commons.configuration.transformers.FloatTransformer;
 import com.aionemu.commons.configuration.transformers.InetSocketAddressTransformer;
-import com.aionemu.commons.configuration.transformers.IntegerTransformer;
-import com.aionemu.commons.configuration.transformers.LongTransformer;
+import com.aionemu.commons.configuration.transformers.NumberTransformer;
 import com.aionemu.commons.configuration.transformers.PatternTransformer;
-import com.aionemu.commons.configuration.transformers.ShortTransformer;
+import com.aionemu.commons.configuration.transformers.PropertyTransformer;
 import com.aionemu.commons.configuration.transformers.StringTransformer;
 import com.aionemu.commons.configuration.transformers.TimeZoneTransformer;
 import com.aionemu.commons.configuration.transformers.ZoneIdTransformer;
@@ -32,57 +28,47 @@ import com.aionemu.commons.configuration.transformers.ZoneIdTransformer;
 /**
  * This class is responsible for creating property transformers. Uses shared instances to avoid overhead.
  * 
- * @author SoulKeeper
- * @modified Neon
+ * @author SoulKeeper, Neon
  */
 public class PropertyTransformerFactory {
 
 	/**
-	 * @param clazzToTransform
-	 *          Class that is going to be transformed
-	 * @param tc
-	 *          {@link PropertyTransformer} class that will be instantiated
-	 * @return A shared instance of the {@link PropertyTransformer} or null if no implementation is present
+	 * @param targetType
+	 *          The value type that strings should be transformed into.
+	 * @return A shared instance of the {@link PropertyTransformer} that can transform strings into given targetType.
+	 * @throws IllegalArgumentException
+	 *           If there's no transformer for given target class.
 	 */
-	public static PropertyTransformer<?> getTransformer(Class<?> clazzToTransform) {
-		if (clazzToTransform == Boolean.class || clazzToTransform == Boolean.TYPE)
-			return BooleanTransformer.SHARED_INSTANCE;
-		else if (clazzToTransform == Byte.class || clazzToTransform == Byte.TYPE)
-			return ByteTransformer.SHARED_INSTANCE;
-		else if (clazzToTransform == Character.class || clazzToTransform == Character.TYPE)
-			return CharTransformer.SHARED_INSTANCE;
-		else if (clazzToTransform == Double.class || clazzToTransform == Double.TYPE)
-			return DoubleTransformer.SHARED_INSTANCE;
-		else if (clazzToTransform == Float.class || clazzToTransform == Float.TYPE)
-			return FloatTransformer.SHARED_INSTANCE;
-		else if (clazzToTransform == Integer.class || clazzToTransform == Integer.TYPE)
-			return IntegerTransformer.SHARED_INSTANCE;
-		else if (clazzToTransform == Long.class || clazzToTransform == Long.TYPE)
-			return LongTransformer.SHARED_INSTANCE;
-		else if (clazzToTransform == Short.class || clazzToTransform == Short.TYPE)
-			return ShortTransformer.SHARED_INSTANCE;
-		else if (clazzToTransform == String.class)
-			return StringTransformer.SHARED_INSTANCE;
-		else if (clazzToTransform.isEnum())
-			return EnumTransformer.SHARED_INSTANCE;
-		else if (Collection.class.isAssignableFrom(clazzToTransform))
-			return CollectionTransformer.SHARED_INSTANCE;
-		else if (clazzToTransform.isArray())
-			return ArrayTransformer.SHARED_INSTANCE;
-		else if (clazzToTransform == File.class)
-			return FileTransformer.SHARED_INSTANCE;
-		else if (InetSocketAddress.class.isAssignableFrom(clazzToTransform))
-			return InetSocketAddressTransformer.SHARED_INSTANCE;
-		else if (clazzToTransform == Pattern.class)
-			return PatternTransformer.SHARED_INSTANCE;
-		else if (clazzToTransform == Class.class)
-			return ClassTransformer.SHARED_INSTANCE;
-		else if (TimeZone.class.isAssignableFrom(clazzToTransform))
-			return TimeZoneTransformer.SHARED_INSTANCE;
-		else if (ZoneId.class.isAssignableFrom(clazzToTransform))
-			return ZoneIdTransformer.SHARED_INSTANCE;
-		else if (clazzToTransform == CronExpression.class)
-			return CronExpressionTransformer.SHARED_INSTANCE;
-		return null;
+	@SuppressWarnings("unchecked")
+	public static <T> PropertyTransformer<T> getTransformer(Class<T> targetType) {
+		if (Number.class.isAssignableFrom(NumberTransformer.toWrapper(targetType)))
+			return (PropertyTransformer<T>) NumberTransformer.SHARED_INSTANCE;
+		if (targetType == Boolean.class || targetType == Boolean.TYPE)
+			return (PropertyTransformer<T>) BooleanTransformer.SHARED_INSTANCE;
+		if (targetType == Character.class || targetType == Character.TYPE)
+			return (PropertyTransformer<T>) CharTransformer.SHARED_INSTANCE;
+		if (targetType == String.class)
+			return (PropertyTransformer<T>) StringTransformer.SHARED_INSTANCE;
+		if (targetType.isEnum())
+			return (PropertyTransformer<T>) EnumTransformer.SHARED_INSTANCE;
+		if (Collection.class.isAssignableFrom(targetType))
+			return (PropertyTransformer<T>) CollectionTransformer.SHARED_INSTANCE;
+		if (targetType.isArray())
+			return (PropertyTransformer<T>) ArrayTransformer.SHARED_INSTANCE;
+		if (targetType == File.class)
+			return (PropertyTransformer<T>) FileTransformer.SHARED_INSTANCE;
+		if (InetSocketAddress.class.isAssignableFrom(targetType))
+			return (PropertyTransformer<T>) InetSocketAddressTransformer.SHARED_INSTANCE;
+		if (targetType == Pattern.class)
+			return (PropertyTransformer<T>) PatternTransformer.SHARED_INSTANCE;
+		if (targetType == Class.class)
+			return (PropertyTransformer<T>) ClassTransformer.SHARED_INSTANCE;
+		if (TimeZone.class.isAssignableFrom(targetType))
+			return (PropertyTransformer<T>) TimeZoneTransformer.SHARED_INSTANCE;
+		if (ZoneId.class.isAssignableFrom(targetType))
+			return (PropertyTransformer<T>) ZoneIdTransformer.SHARED_INSTANCE;
+		if (targetType == CronExpression.class)
+			return (PropertyTransformer<T>) CronExpressionTransformer.SHARED_INSTANCE;
+		throw new IllegalArgumentException("Transformer for " + targetType.getSimpleName() + " is not implemented.");
 	}
 }

@@ -107,11 +107,9 @@ public class ConfigurableProcessor {
 	}
 
 	/**
-	 * This method takes {@link Property} annotation and does sets value according to annotation property. For this reason
-	 * {@link #getFieldValue(java.lang.reflect.Field, java.util.Properties[])} can be called, however if method sees that there is no need - field can
+	 * This method takes {@link Property} annotation and sets value according to annotation property. For this reason
+	 * {@link #getFieldValue(java.lang.reflect.Field, java.util.Properties)} can be called, however if method sees that there is no need - field can
 	 * remain with it's initial value.
-	 * <p/>
-	 * Also this method is capturing and logging all {@link Exception} that are thrown by underlying methods.
 	 * 
 	 * @param f
 	 *          field that is going to be processed
@@ -155,17 +153,13 @@ public class ConfigurableProcessor {
 	 */
 	private static Object getFieldValue(Field field, Properties props) throws TransformationException {
 		Property property = field.getAnnotation(Property.class);
-		String defaultValue = property.defaultValue();
 		String key = property.key();
 
 		if (key.isEmpty())
 			throw new TransformationException("Property for field" + field.getName() + " of class " + field.getDeclaringClass().getName() + " has empty key");
 
-		String value = props.getProperty(key);
-		if (value == null || value.trim().equals("")) {
-			value = defaultValue;
-			log.debug("Using default value for field " + field.getName() + " of class " + field.getDeclaringClass().getName());
-		} else if (value.trim().equals("\"\"")) {
+		String value = props.getProperty(key, property.defaultValue());
+		if (value.trim().equals("\"\"")) {
 			value = "";
 		} else {
 			value = replacePropertyPlaceholders(value, props);
@@ -190,10 +184,6 @@ public class ConfigurableProcessor {
 		Type[] genericTypeArgs = {};
 		if (field.getGenericType() instanceof ParameterizedType)
 			genericTypeArgs = ((ParameterizedType) field.getGenericType()).getActualTypeArguments();
-		PropertyTransformer<?> pt = PropertyTransformerFactory.getTransformer(cls);
-		if (pt == null)
-			throw new TransformationException("Property transformer for class " + cls + " is not implemented (referenced field: " + field.getName() + ", class: "
-				+ field.getDeclaringClass().getName());
-		return pt.transform(value, field, genericTypeArgs);
+		return PropertyTransformerFactory.getTransformer(cls).transform(value, cls, genericTypeArgs);
 	}
 }

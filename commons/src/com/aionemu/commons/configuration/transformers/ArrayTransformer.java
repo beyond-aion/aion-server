@@ -1,17 +1,13 @@
 package com.aionemu.commons.configuration.transformers;
 
 import java.lang.reflect.Array;
-import java.lang.reflect.Field;
-import java.lang.reflect.Type;
 import java.util.List;
 
-import com.aionemu.commons.configuration.Property;
-import com.aionemu.commons.configuration.PropertyTransformer;
 import com.aionemu.commons.configuration.PropertyTransformerFactory;
+import com.aionemu.commons.configuration.TransformationTypeInfo;
 
 /**
- * Returns an <code>Array</code> containing the comma separated items.<br>
- * Currently only 1-dimensional arrays are supported.
+ * Creates an <code>Array</code> containing the comma separated items.
  * 
  * @author Neon
  */
@@ -20,18 +16,16 @@ public class ArrayTransformer extends CommaSeparatedValueTransformer<Object> {
 	public static final ArrayTransformer SHARED_INSTANCE = new ArrayTransformer();
 
 	@Override
-	protected Object parseObject(List<String> values, Field field, Type... genericTypeArgs) throws Exception {
-		Class<?> type = field.getType().getComponentType();
-		if (type.isArray())
-			throw new UnsupportedOperationException("Multidimensional arrays are not implemented.");
+	protected Object parseObject(List<String> values, TransformationTypeInfo typeInfo) {
+		Class<?> arrayType = typeInfo.getType().getComponentType();
 
-		if (values.isEmpty() || values.get(0).equals(Property.DEFAULT_VALUE))
-			return Array.newInstance(type, 0); // return empty
+		Object array = Array.newInstance(arrayType, values.size());
 
-		PropertyTransformer<?> pt = PropertyTransformerFactory.getTransformer(type);
-		Object array = Array.newInstance(type, values.size());
-		for (int i = 0; i < values.size(); i++)
-			Array.set(array, i, pt.transform(values.get(i), field));
+		if (!values.isEmpty()) {
+			PropertyTransformer<?> pt = PropertyTransformerFactory.getTransformer(arrayType);
+			for (int i = 0; i < values.size(); i++)
+				Array.set(array, i, pt.transform(values.get(i), arrayType));
+		}
 
 		return array;
 	}

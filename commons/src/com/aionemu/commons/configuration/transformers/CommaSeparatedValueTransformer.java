@@ -1,11 +1,9 @@
 package com.aionemu.commons.configuration.transformers;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.aionemu.commons.configuration.PropertyTransformer;
+import com.aionemu.commons.configuration.TransformationTypeInfo;
 
 /**
  * @author Neon
@@ -13,11 +11,11 @@ import com.aionemu.commons.configuration.PropertyTransformer;
 public abstract class CommaSeparatedValueTransformer<T> extends PropertyTransformer<T> {
 
 	@Override
-	protected final T parseObject(String value, Field field, Type... genericTypeArgs) throws Exception {
-		return parseObject(splitAndTrimValues(value), field, genericTypeArgs);
+	protected final T parseObject(String value, TransformationTypeInfo typeInfo) throws Exception {
+		return parseObject(splitAndTrimValues(value), typeInfo);
 	}
 
-	protected abstract T parseObject(List<String> value, Field field, Type... genericTypeArgs) throws Exception;
+	protected abstract T parseObject(List<String> value, TransformationTypeInfo typeInfo) throws Exception;
 
 	/**
 	 * Modified version of http://stackoverflow.com/a/24078092<br>

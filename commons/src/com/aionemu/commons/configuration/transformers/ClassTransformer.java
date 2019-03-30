@@ -1,17 +1,13 @@
 package com.aionemu.commons.configuration.transformers;
 
 import java.io.InvalidClassException;
-import java.lang.reflect.Field;
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
-import java.lang.reflect.WildcardType;
 
 import org.reflections.Reflections;
 import org.reflections.scanners.SubTypesScanner;
 import org.reflections.util.ClasspathHelper;
 import org.reflections.util.ConfigurationBuilder;
 
-import com.aionemu.commons.configuration.PropertyTransformer;
+import com.aionemu.commons.configuration.TransformationTypeInfo;
 
 /**
  * Returns the {@link Class} object associated with the class or interface with the given string name. The class is not being initialized.<br>
@@ -27,16 +23,10 @@ public class ClassTransformer extends PropertyTransformer<Class<?>> {
 	private static Reflections rfl = null;
 
 	@Override
-	protected Class<?> parseObject(String value, Field field, Type... genericTypeArgs) throws Exception {
+	protected Class<?> parseObject(String value, TransformationTypeInfo typeInfo) throws Exception {
 		Class<?> superClass = null;
-		if (genericTypeArgs.length > 0) {
-			if (genericTypeArgs[0] instanceof Class)
-				superClass = (Class<?>) genericTypeArgs[0];
-			else if (genericTypeArgs[0] instanceof ParameterizedType)
-				superClass = (Class<?>) ((ParameterizedType) genericTypeArgs[0]).getRawType();
-			else if (genericTypeArgs[0] instanceof WildcardType)
-				superClass = (Class<?>) ((WildcardType) genericTypeArgs[0]).getUpperBounds()[0];
-		}
+		if (typeInfo.getGenericTypeCount() > 0)
+			superClass = typeInfo.getGenericType(0).getType();
 		return findClass(value, superClass);
 	}
 
@@ -47,7 +37,7 @@ public class ClassTransformer extends PropertyTransformer<Class<?>> {
 				throw new InvalidClassException(cls.getName() + " is not an instance of " + superClass.getName());
 			return cls;
 		} catch (ClassNotFoundException e) {
-			if (superClass != null) { // search for class via reflection: this supports simple class names without class paths
+			if (superClass != null) { // search for class via reflection: this supports simple class names without package names
 				if (rfl == null) // initialize reflections only for servers class paths, so it loads faster
 					rfl = new Reflections(new ConfigurationBuilder().setUrls(ClasspathHelper.forPackage("com.aionemu", getClass().getClassLoader()))
 						.setScanners(new SubTypesScanner()));

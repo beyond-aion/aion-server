@@ -1,10 +1,6 @@
 package com.aionemu.commons.configuration.transformers;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Type;
-
-import com.aionemu.commons.configuration.Property;
-import com.aionemu.commons.configuration.PropertyTransformer;
+import com.aionemu.commons.configuration.TransformationTypeInfo;
 
 /**
  * Transforms enum string representation to enum. String must match case definition of enum, for instance:
@@ -27,22 +23,9 @@ public class EnumTransformer extends PropertyTransformer<Enum<?>> {
 	 */
 	public static final EnumTransformer SHARED_INSTANCE = new EnumTransformer();
 
-	/**
-	 * Transforms string to enum
-	 * 
-	 * @param value
-	 *          value that will be transformed
-	 * @param field
-	 *          value will be assigned to this field
-	 * @return Enum object representing the value
-	 * @throws Exception
-	 *           if something went wrong
-	 */
 	@Override
 	@SuppressWarnings("unchecked")
-	protected Enum<?> parseObject(String value, Field field, Type... genericTypeArgs) throws Exception {
-		@SuppressWarnings("rawtypes")
-		Class<? extends Enum> clazz = (Class<? extends Enum>) field.getType();
-		return value.isEmpty() || value.equals(Property.DEFAULT_VALUE) ? null : Enum.valueOf(clazz, value);
+	protected Enum<?> parseObject(String value, TransformationTypeInfo typeInfo) {
+		return value.isEmpty() ? null : Enum.valueOf((Class<? extends Enum>) typeInfo.getType(), value);
 	}
 }
