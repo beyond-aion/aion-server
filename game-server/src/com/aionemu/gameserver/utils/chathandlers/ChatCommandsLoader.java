@@ -22,11 +22,10 @@ public class ChatCommandsLoader implements ClassListener {
 		for (Class<?> c : classes) {
 			if (!isValidClass(c))
 				continue;
-			Class<?> tmp = c;
 			try {
-				processor.registerCommand((ChatCommand) tmp.newInstance());
+				processor.registerCommand((ChatCommand) c.newInstance());
 			} catch (InstantiationException | IllegalAccessException e) {
-				e.printStackTrace();
+				throw new RuntimeException(e);
 			}
 		}
 	}

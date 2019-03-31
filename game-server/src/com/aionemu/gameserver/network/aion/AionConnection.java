@@ -5,8 +5,10 @@ import java.nio.ByteBuffer;
 import java.nio.channels.SocketChannel;
 import java.util.ArrayDeque;
 import java.util.Deque;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Queue;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
@@ -22,15 +24,14 @@ import com.aionemu.commons.network.packet.BasePacket;
 import com.aionemu.commons.utils.concurrent.ExecuteWrapper;
 import com.aionemu.commons.utils.concurrent.RunnableStatsManager;
 import com.aionemu.gameserver.GameServer;
-import com.aionemu.gameserver.configs.main.SecurityConfig;
 import com.aionemu.gameserver.configs.main.ThreadConfig;
 import com.aionemu.gameserver.configs.network.NetworkConfig;
+import com.aionemu.gameserver.configs.network.PffConfig;
 import com.aionemu.gameserver.model.ChatType;
 import com.aionemu.gameserver.model.account.Account;
 import com.aionemu.gameserver.model.gameobjects.player.CustomPlayerState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.Crypt;
-import com.aionemu.gameserver.network.PacketFloodFilter;
 import com.aionemu.gameserver.network.aion.clientpackets.CM_PING;
 import com.aionemu.gameserver.network.aion.clientpackets.CM_PING_INGAME;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_KEY;
@@ -108,16 +109,8 @@ public class AionConnection extends AConnection<AionServerPacket> {
 	private ConnectionAliveChecker connectionAliveChecker;
 
 	/** packet flood filter **/
-	private int[] pff;
-	private long[] pffRequests;
+	private Map<Integer, Long> pffRequests;
 
-	/**
-	 * Constructor
-	 * 
-	 * @param sc
-	 * @param d
-	 * @throws IOException
-	 */
 	public AionConnection(SocketChannel sc, Dispatcher d) throws IOException {
 		super(sc, d, 8192 * 4, 8192 * 4);
 
@@ -128,10 +121,8 @@ public class AionConnection extends AConnection<AionServerPacket> {
 
 		connectionAliveChecker = new ConnectionAliveChecker();
 
-		if (SecurityConfig.PFF_ENABLE) {
-			pff = PacketFloodFilter.getInstance().getPackets();
-			pffRequests = new long[pff.length];
-		}
+		if (PffConfig.PFF_MODE > 0 && PffConfig.THRESHOLD_MILLIS_BY_PACKET_OPCODE != null)
+			pffRequests = new ConcurrentHashMap<>();
 	}
 
 	@Override
@@ -184,16 +175,15 @@ public class AionConnection extends AConnection<AionServerPacket> {
 		// Execute packet only if packet exist (!= null) and read was ok.
 		if (pck != null) {
 			lastClientMessageTime = System.currentTimeMillis();
-			if (SecurityConfig.PFF_ENABLE) {
-				int opcode = pck.getOpCode();
-				if (pff.length > opcode && pff[opcode] > 0) {
-					long last = pffRequests[opcode];
-					pffRequests[opcode] = lastClientMessageTime;
-					if (last > 0) {
+			if (pffRequests != null) {
+				int msBetweenPackets = PffConfig.getAllowedMillisBetweenPackets(pck);
+				if (msBetweenPackets > 0) {
+					Long last = pffRequests.put(pck.getOpCode(), lastClientMessageTime);
+					if (last != null) {
 						long diff = lastClientMessageTime - last;
-						if (diff < pff[opcode]) {
+						if (diff < msBetweenPackets) {
 							log.warn(this + " is flooding " + pck.getClass().getSimpleName() + " (last diff: " + diff + "ms)");
-							if (SecurityConfig.PFF_LEVEL == 1) // disconnect
+							if (PffConfig.PFF_MODE == 1) // disconnect
 								return false;
 						}
 					}

@@ -4,12 +4,17 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.aionemu.commons.configuration.transformers.MapTransformer;
 
 /**
  * This class is designed to process classes and interfaces that have fields marked with {@link Property} annotation
@@ -97,7 +102,7 @@ public class ConfigurableProcessor {
 				continue;
 			}
 
-			if (f.isAnnotationPresent(Property.class)) {
+			if (f.isAnnotationPresent(Property.class) || f.isAnnotationPresent(com.aionemu.commons.configuration.Properties.class)) {
 				// Final fields should not be processed
 				if (Modifier.isFinal(f.getModifiers()))
 					throw new RuntimeException("Can't process final field " + f.getName() + " of class " + clazz.getName());
@@ -124,48 +129,63 @@ public class ConfigurableProcessor {
 			if (!oldAccessible)
 				f.setAccessible(true);
 			Property property = f.getAnnotation(Property.class);
-			if (!Property.DEFAULT_VALUE.equals(property.defaultValue()) || props.getProperty(property.key()) != null) {
-				f.set(obj, getFieldValue(f, props));
-			} else
-				log.debug("Field " + f.getName() + " of class " + f.getDeclaringClass().getName() + " wasn't modified");
-		} catch (TransformationException e) {
-			throw e;
+			com.aionemu.commons.configuration.Properties properties = f.getAnnotation(com.aionemu.commons.configuration.Properties.class);
+			if (property != null) {
+				if (properties != null)
+					throw new UnsupportedOperationException("Field can only be annotated with @Property or @Properties, not both.");
+				String key = Objects.requireNonNull(property.key(), "@Property key must not be empty");
+				String value = getValue(key, property.defaultValue(), props);
+				if (!Property.DEFAULT_VALUE.equals(value))
+					f.set(obj, transform(value, f));
+				else
+					log.debug("Field " + f.getName() + " of class " + f.getDeclaringClass().getName() + " wasn't modified");
+			} else {
+				Pattern pattern = Pattern.compile(properties.keyPattern());
+				Map<String, String> values = filterProperties(pattern, props);
+				f.set(obj, transform(values, f));
+			}
 		} catch (Exception e) {
-			throw new RuntimeException("Error modifying field " + f.getName() + " of " + f.getDeclaringClass(), e);
+			throw new RuntimeException("Error modifying field " + f.getName() + " of " + (obj != null ? obj : f.getDeclaringClass()), e);
 		} finally {
 			if (!oldAccessible)
 				f.setAccessible(false);
 		}
 	}
 
-	/**
-	 * This method is responsible for receiving field value.<br>
-	 * It tries to load property by key, if not found - it uses default value.<br>
-	 * Transformation is done using {@link com.aionemu.commons.configuration.PropertyTransformerFactory}
-	 * 
-	 * @param field
-	 *          field that has to be transformed
-	 * @param props
-	 *          properties with key\values
-	 * @return transformed object that will be used as field value
-	 * @throws TransformationException
-	 *           if something goes wrong during transformation
-	 */
-	private static Object getFieldValue(Field field, Properties props) throws TransformationException {
-		Property property = field.getAnnotation(Property.class);
-		String key = property.key();
+	public static Object transform(String value, Field field) throws TransformationException {
+		Type[] genericTypeArgs = {};
+		if (field.getGenericType() instanceof ParameterizedType)
+			genericTypeArgs = ((ParameterizedType) field.getGenericType()).getActualTypeArguments();
+		return PropertyTransformerFactory.getTransformer(field.getType()).transform(value, field.getType(), genericTypeArgs);
+	}
 
-		if (key.isEmpty())
-			throw new TransformationException("Property for field" + field.getName() + " of class " + field.getDeclaringClass().getName() + " has empty key");
-
-		String value = props.getProperty(key, property.defaultValue());
-		if (value.trim().equals("\"\"")) {
-			value = "";
-		} else {
-			value = replacePropertyPlaceholders(value, props);
+	private static Map<String, String> filterProperties(Pattern pattern, Properties props) {
+		Map<String, String> input = new HashMap<>();
+		for (String k : props.stringPropertyNames()) {
+			Matcher matcher = pattern.matcher(k);
+			if (matcher.find()) {
+				String key = matcher.groupCount() > 0 ? matcher.group(1) : k;
+				String value = getValue(k, "", props);
+				input.put(key, value);
+			}
 		}
+		return input;
+	}
 
-		return transformValueToFieldType(field, value);
+	private static Map<?, ?> transform(Map<String, String> values, Field field) throws Exception {
+		Type[] genericTypeArgs = {};
+		if (field.getGenericType() instanceof ParameterizedType)
+			genericTypeArgs = ((ParameterizedType) field.getGenericType()).getActualTypeArguments();
+		return MapTransformer.transform(values, field.getType(), genericTypeArgs);
+	}
+
+	private static String getValue(String key, String defaultValue, Properties props) {
+		String value = props.getProperty(key, defaultValue);
+		if (value.trim().equals("\"\""))
+			value = "";
+		else
+			value = replacePropertyPlaceholders(value, props);
+		return value;
 	}
 
 	private static String replacePropertyPlaceholders(String value, Properties props) {
@@ -177,13 +197,5 @@ public class ConfigurableProcessor {
 			value = value.replace(completeToken, replacement == null ? "" : replacement);
 		}
 		return value;
-	}
-
-	public static Object transformValueToFieldType(Field field, String value) throws TransformationException {
-		Class<?> cls = field.getType();
-		Type[] genericTypeArgs = {};
-		if (field.getGenericType() instanceof ParameterizedType)
-			genericTypeArgs = ((ParameterizedType) field.getGenericType()).getActualTypeArguments();
-		return PropertyTransformerFactory.getTransformer(cls).transform(value, cls, genericTypeArgs);
 	}
 }

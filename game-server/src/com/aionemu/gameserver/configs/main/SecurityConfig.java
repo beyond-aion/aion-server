@@ -73,12 +73,6 @@ public class SecurityConfig {
 	@Property(key = "gameserver.security.flood.msg", defaultValue = "6")
 	public static int FLOOD_MSG;
 
-	@Property(key = "gameserver.security.pff.enable", defaultValue = "false")
-	public static boolean PFF_ENABLE;
-
-	@Property(key = "gameserver.security.pff.level", defaultValue = "1")
-	public static int PFF_LEVEL;
-
 	@Property(key = "gameserver.security.broker.prebuy", defaultValue = "true")
 	public static boolean BROKER_PREBUY_CHECK;
 

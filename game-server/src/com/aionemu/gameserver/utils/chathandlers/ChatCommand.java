@@ -6,6 +6,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.aionemu.gameserver.configs.administration.CommandsConfig;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_MESSAGE;
 import com.aionemu.gameserver.utils.ChatUtil;
@@ -22,7 +23,6 @@ public abstract class ChatCommand {
 	private final String alias;
 	private final String description;
 	private String syntaxInfo;
-	private byte level;
 
 	/**
 	 * Initializes a chat command.
@@ -49,9 +49,9 @@ public abstract class ChatCommand {
 
 		try {
 			execute(player, params);
-		} catch (Exception e) {
-			log.error("Exception executing chat command " + getAliasWithPrefix() + " " + String.join(" ", params) + "\nPlayer: " + player.getName()
-				+ "\nTarget: " + player.getTarget(), e);
+		} catch (Throwable t) {
+			log.error("Exception executing chat command \"" + getAliasWithPrefix() + " " + String.join(" ", params) + "\" - Player: " + player.getName()
+				+ ", Target: " + player.getTarget(), t);
 			return false;
 		}
 		return true;
@@ -124,11 +124,10 @@ public abstract class ChatCommand {
 		return sb.toString();
 	}
 
-	public final void setAccessLevel(byte level) {
-		this.level = level;
-	}
-
 	public final byte getLevel() {
+		Byte level = CommandsConfig.ACCESS_LEVELS.get(alias);
+		if (level == null)
+			throw new NullPointerException("Missing access level for " + getAliasWithPrefix());
 		return level;
 	}
 

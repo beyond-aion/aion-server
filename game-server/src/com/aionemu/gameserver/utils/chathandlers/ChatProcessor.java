@@ -1,12 +1,10 @@
 package com.aionemu.gameserver.utils.chathandlers;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 import java.util.concurrent.CountDownLatch;
 
 import org.apache.commons.lang3.StringUtils;
@@ -17,8 +15,9 @@ import com.aionemu.commons.scripting.classlistener.AggregatedClassListener;
 import com.aionemu.commons.scripting.classlistener.OnClassLoadUnloadListener;
 import com.aionemu.commons.scripting.classlistener.ScheduledTaskClassListener;
 import com.aionemu.commons.scripting.scriptmanager.ScriptManager;
-import com.aionemu.commons.utils.PropertiesUtils;
 import com.aionemu.gameserver.GameServerError;
+import com.aionemu.gameserver.configs.Config;
+import com.aionemu.gameserver.configs.administration.CommandsConfig;
 import com.aionemu.gameserver.model.GameEngine;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -31,9 +30,7 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 public class ChatProcessor implements GameEngine {
 
 	private static final Logger log = LoggerFactory.getLogger(ChatProcessor.class);
-	private ScriptManager scriptManager = new ScriptManager();
-	private Map<String, ChatCommand> commandHandlers = new HashMap<>();
-	private Map<String, Byte> accessLevel = new HashMap<>();
+	private final Map<String, ChatCommand> commandHandlers = new HashMap<>();
 
 	private ChatProcessor() {
 	}
@@ -42,21 +39,11 @@ public class ChatProcessor implements GameEngine {
 	public void load() {
 		log.info("Chat processor load started");
 
-		try {
-			Properties props = PropertiesUtils.load("config/administration/commands.properties");
-
-			for (Object key : props.keySet()) {
-				String str = (String) key;
-				accessLevel.put(str, Byte.valueOf(props.getProperty(str).trim()));
-			}
-		} catch (IOException e) {
-			log.error("Can't read commands.properties", e);
-		}
-
 		AggregatedClassListener acl = new AggregatedClassListener();
 		acl.addClassListener(new OnClassLoadUnloadListener());
 		acl.addClassListener(new ScheduledTaskClassListener());
 		acl.addClassListener(new ChatCommandsLoader(this));
+		ScriptManager scriptManager = new ScriptManager();
 		scriptManager.setGlobalClassListener(acl);
 
 		File[] files = new File[] { new File("./data/scripts/system/adminhandlers.xml"), new File("./data/scripts/system/playerhandlers.xml"),
@@ -79,6 +66,8 @@ public class ChatProcessor implements GameEngine {
 		try {
 			loadLatch.await();
 		} catch (InterruptedException e1) {
+		} finally {
+			scriptManager.shutdown();
 		}
 
 		if (throwable[0] != null)
@@ -88,40 +77,29 @@ public class ChatProcessor implements GameEngine {
 	}
 
 	public void reload() {
-		Map<String, Byte> backupAccessLevels = new HashMap<>(accessLevel);
-		Map<String, ChatCommand> backupCommands = new HashMap<>(commandHandlers);
-		shutdown();
-
+		Map<String, ChatCommand> oldCommands = new HashMap<>(commandHandlers);
 		try {
+			Config.load(CommandsConfig.class);
+			commandHandlers.clear();
 			load();
 		} catch (Throwable e) {
-			accessLevel = backupAccessLevels;
-			commandHandlers = backupCommands;
-			log.warn("Can't reload chat handlers, restored previously loaded commands.", e);
+			commandHandlers.clear();
+			commandHandlers.putAll(oldCommands);
+			throw e;
 		}
 	}
 
 	@Override
 	public void shutdown() {
-		log.info("Chat processor shutdown started");
-		scriptManager.shutdown();
-		accessLevel.clear();
-		commandHandlers.clear();
-		log.info("Chat processor shutdown complete");
 	}
 
 	public void registerCommand(ChatCommand cmd) {
-		if (commandHandlers.containsKey(cmd.getAlias())) {
-			log.warn("Failed to register chat command: " + cmd.getAlias() + " is already registered.");
-			return;
-		}
+		if (commandHandlers.containsKey(cmd.getAlias()))
+			throw new IllegalArgumentException("Failed to register chat command: " + cmd.getAlias() + " is already registered.");
 
-		if (!accessLevel.containsKey(cmd.getAlias())) {
-			log.warn("Failed to register chat command: Missing access level for " + cmd.getAlias() + ".");
-			return;
-		}
+		if (cmd.getLevel() < 0)
+			throw new NullPointerException("Failed to register chat command: Invalid access level for " + cmd.getAlias() + ".");
 
-		cmd.setAccessLevel(accessLevel.get(cmd.getAlias()));
 		commandHandlers.put(cmd.getAlias(), cmd);
 	}
 
@@ -192,7 +170,7 @@ public class ChatProcessor implements GameEngine {
 		return commandHandlers.containsKey(alias);
 	}
 
-	public static final ChatProcessor getInstance() {
+	public static ChatProcessor getInstance() {
 		return SingletonHolder.instance;
 	}
 

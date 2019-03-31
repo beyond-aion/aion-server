@@ -3,45 +3,18 @@ package admincommands;
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
 
 import com.aionemu.commons.configuration.ConfigurableProcessor;
+import com.aionemu.commons.configuration.Property;
 import com.aionemu.commons.configuration.TransformationException;
-import com.aionemu.gameserver.configs.administration.AdminConfig;
-import com.aionemu.gameserver.configs.administration.DeveloperConfig;
-import com.aionemu.gameserver.configs.main.AIConfig;
-import com.aionemu.gameserver.configs.main.AutoGroupConfig;
-import com.aionemu.gameserver.configs.main.CacheConfig;
-import com.aionemu.gameserver.configs.main.CraftConfig;
-import com.aionemu.gameserver.configs.main.CustomConfig;
-import com.aionemu.gameserver.configs.main.DropConfig;
-import com.aionemu.gameserver.configs.main.EventsConfig;
-import com.aionemu.gameserver.configs.main.FallDamageConfig;
-import com.aionemu.gameserver.configs.main.GSConfig;
-import com.aionemu.gameserver.configs.main.GeoDataConfig;
-import com.aionemu.gameserver.configs.main.GroupConfig;
-import com.aionemu.gameserver.configs.main.HTMLConfig;
-import com.aionemu.gameserver.configs.main.HousingConfig;
-import com.aionemu.gameserver.configs.main.InGameShopConfig;
-import com.aionemu.gameserver.configs.main.LegionConfig;
-import com.aionemu.gameserver.configs.main.LoggingConfig;
-import com.aionemu.gameserver.configs.main.MembershipConfig;
-import com.aionemu.gameserver.configs.main.NameConfig;
-import com.aionemu.gameserver.configs.main.PeriodicSaveConfig;
-import com.aionemu.gameserver.configs.main.PricesConfig;
-import com.aionemu.gameserver.configs.main.PunishmentConfig;
-import com.aionemu.gameserver.configs.main.RankingConfig;
-import com.aionemu.gameserver.configs.main.RatesConfig;
-import com.aionemu.gameserver.configs.main.SecurityConfig;
-import com.aionemu.gameserver.configs.main.ShutdownConfig;
-import com.aionemu.gameserver.configs.main.SiegeConfig;
-import com.aionemu.gameserver.configs.main.ThreadConfig;
-import com.aionemu.gameserver.configs.main.WorldConfig;
-import com.aionemu.gameserver.configs.network.NetworkConfig;
+import com.aionemu.gameserver.configs.Config;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 
@@ -55,14 +28,10 @@ public class Configure extends AdminCommand {
 	private static final Map<String, Class<?>> configs = new LinkedHashMap<>();
 
 	static {
-		List<Class<?>> classes = Arrays.asList(AIConfig.class, AdminConfig.class, AutoGroupConfig.class, CacheConfig.class, CraftConfig.class,
-			CustomConfig.class, DeveloperConfig.class, DropConfig.class, EventsConfig.class, FallDamageConfig.class, GSConfig.class,
-			GeoDataConfig.class, GroupConfig.class, HTMLConfig.class, HousingConfig.class, InGameShopConfig.class, LegionConfig.class, LoggingConfig.class,
-			MembershipConfig.class, NameConfig.class, NetworkConfig.class, PeriodicSaveConfig.class, PricesConfig.class, PunishmentConfig.class,
-			RankingConfig.class, RatesConfig.class, SecurityConfig.class, ShutdownConfig.class, SiegeConfig.class, ThreadConfig.class, WorldConfig.class);
-
-		for (Class<?> cls : classes)
-			configs.put(cls.getSimpleName().toLowerCase().replace("config", ""), cls);
+		Config.getClasses().stream()
+				.filter(cls -> !getPropertyFields(cls).isEmpty())
+				.sorted(Comparator.comparing(Class::getSimpleName, String.CASE_INSENSITIVE_ORDER))
+				.forEach(cls -> configs.put(cls.getSimpleName().toLowerCase().replace("config", ""), cls));
 	}
 
 	public Configure() {
@@ -98,7 +67,7 @@ public class Configure extends AdminCommand {
 			}
 			if (params.length < 2) {
 				StringBuilder sb = new StringBuilder("List of available properties for ").append(cls.getSimpleName()).append(":");
-				for (Field field : cls.getDeclaredFields()) {
+				for (Field field : getPropertyFields(cls)) {
 					try {
 						String value = getFieldValue(field);
 						sb.append("\n\t").append(field.getName()).append("\t=\t").append(value);
@@ -111,11 +80,15 @@ public class Configure extends AdminCommand {
 			String fieldName = params[1].toUpperCase();
 			try {
 				Field field = cls.getDeclaredField(fieldName);
+				if (!field.isAnnotationPresent(Property.class)) {
+					sendInfo(admin, cls.getSimpleName() + "." + fieldName + " is not configurable.");
+					return;
+				}
 				String value = getFieldValue(field);
 				if (params.length > 2) {
 					String newValue = StringUtils.join(params, ' ', 2, params.length);
 					try {
-						field.set(null, ConfigurableProcessor.transformValueToFieldType(field, newValue));
+						field.set(null, ConfigurableProcessor.transform(newValue, field));
 					} catch (TransformationException e) {
 						sendInfo(admin, "The new value could not be set: " + e.getCause().getMessage());
 						return;
@@ -146,5 +119,9 @@ public class Configure extends AdminCommand {
 				value = Arrays.toString((Object[]) value);
 		}
 		return String.valueOf(value);
+	}
+
+	private static List<Field> getPropertyFields(Class<?> cls) {
+		return Arrays.stream(cls.getDeclaredFields()).filter(f -> f.isAnnotationPresent(Property.class)).collect(Collectors.toList());
 	}
 }
