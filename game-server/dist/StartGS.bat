@@ -3,7 +3,7 @@ TITLE Aion Emu - Game Server Console
 
 :START
 CLS
-JAVA -Xms1024m -Xmx2560m -XX:+UseNUMA -server -ea -javaagent:libs/${javaagentlib} -cp "libs/*" com.aionemu.gameserver.GameServer
+JAVA -Xms1024m -Xmx2560m -XX:+UseNUMA -ea -javaagent:libs/${javaagentlib} -cp "libs/*" com.aionemu.gameserver.GameServer
 IF ERRORLEVEL 2 GOTO START
 IF ERRORLEVEL 1 GOTO ERROR
 IF ERRORLEVEL 0 GOTO END
