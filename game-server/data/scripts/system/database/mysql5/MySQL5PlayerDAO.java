@@ -9,10 +9,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -93,57 +91,41 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 	}
 
 	@Override
-	public void changePlayerAccountId(final Player player, final int accountId) {
-		try {
-			try (Connection con = DatabaseFactory.getConnection();
-				PreparedStatement stmt = con.prepareStatement("UPDATE players SET account_id=? WHERE id=?")) {
-				stmt.setInt(1, accountId);
-				stmt.setInt(2, player.getObjectId());
-				stmt.execute();
-			}
-		} catch (Exception e) {
-			log.error("Error saving player: " + player.getObjectId() + " " + player.getName(), e);
-		}
-	}
-
-	@Override
 	public void storePlayer(final Player player) {
-		try {
-			try (Connection con = DatabaseFactory.getConnection();
-				PreparedStatement stmt = con.prepareStatement(
-					"UPDATE players SET name=?, exp=?, recoverexp=?, x=?, y=?, z=?, heading=?, world_id=?, gender=?, race=?, player_class=?, quest_expands=?, npc_expands=?, item_expands=?, wh_npc_expands=?, wh_bonus_expands=?, note=?, title_id=?, bonus_title_id=?, dp=?, soul_sickness=?, mailbox_letters=?, reposte_energy=?, mentor_flag_time=?, world_owner=? WHERE id=?")) {
-				log.debug("[DAO: MySQL5PlayerDAO] storing player " + player.getObjectId() + " " + player.getName());
-				PlayerCommonData pcd = player.getCommonData();
-				stmt.setString(1, player.getName());
-				stmt.setLong(2, pcd.getExp());
-				stmt.setLong(3, pcd.getExpRecoverable());
-				stmt.setFloat(4, player.getX());
-				stmt.setFloat(5, player.getY());
-				stmt.setFloat(6, player.getZ());
-				stmt.setInt(7, player.getHeading());
-				stmt.setInt(8, player.getWorldId());
-				stmt.setString(9, player.getGender().toString());
-				stmt.setString(10, player.getRace().toString());
-				stmt.setString(11, pcd.getPlayerClass().toString());
-				stmt.setInt(12, player.getQuestExpands());
-				stmt.setInt(13, player.getNpcExpands());
-				stmt.setInt(14, player.getItemExpands());
-				stmt.setInt(15, player.getWhNpcExpands());
-				stmt.setInt(16, player.getWhBonusExpands());
-				stmt.setString(17, pcd.getNote());
-				stmt.setInt(18, pcd.getTitleId());
-				stmt.setInt(19, pcd.getBonusTitleId());
-				stmt.setInt(20, pcd.getDp());
-				stmt.setInt(21, pcd.getDeathCount());
-				Mailbox mailBox = player.getMailbox();
-				int mails = mailBox != null ? mailBox.size() : pcd.getMailboxLetters();
-				stmt.setInt(22, mails);
-				stmt.setLong(23, pcd.getCurrentReposeEnergy());
-				stmt.setInt(24, pcd.getMentorFlagTime());
-				stmt.setInt(25, player.getPosition().getMapRegion() == null ? 0 : player.getPosition().getWorldMapInstance().getOwnerId());
-				stmt.setInt(26, player.getObjectId());
-				stmt.execute();
-			}
+		try (Connection con = DatabaseFactory.getConnection();
+			PreparedStatement stmt = con.prepareStatement(
+				"UPDATE players SET name=?, exp=?, recoverexp=?, x=?, y=?, z=?, heading=?, world_id=?, gender=?, race=?, player_class=?, quest_expands=?, npc_expands=?, item_expands=?, wh_npc_expands=?, wh_bonus_expands=?, note=?, title_id=?, bonus_title_id=?, dp=?, soul_sickness=?, mailbox_letters=?, reposte_energy=?, mentor_flag_time=?, world_owner=? WHERE id=?")) {
+			log.debug("[DAO: MySQL5PlayerDAO] storing player " + player.getObjectId() + " " + player.getName());
+			PlayerCommonData pcd = player.getCommonData();
+			stmt.setString(1, player.getName());
+			stmt.setLong(2, pcd.getExp());
+			stmt.setLong(3, pcd.getExpRecoverable());
+			stmt.setFloat(4, player.getX());
+			stmt.setFloat(5, player.getY());
+			stmt.setFloat(6, player.getZ());
+			stmt.setInt(7, player.getHeading());
+			stmt.setInt(8, player.getWorldId());
+			stmt.setString(9, player.getGender().toString());
+			stmt.setString(10, player.getRace().toString());
+			stmt.setString(11, pcd.getPlayerClass().toString());
+			stmt.setInt(12, player.getQuestExpands());
+			stmt.setInt(13, player.getNpcExpands());
+			stmt.setInt(14, player.getItemExpands());
+			stmt.setInt(15, player.getWhNpcExpands());
+			stmt.setInt(16, player.getWhBonusExpands());
+			stmt.setString(17, pcd.getNote());
+			stmt.setInt(18, pcd.getTitleId());
+			stmt.setInt(19, pcd.getBonusTitleId());
+			stmt.setInt(20, pcd.getDp());
+			stmt.setInt(21, pcd.getDeathCount());
+			Mailbox mailBox = player.getMailbox();
+			int mails = mailBox != null ? mailBox.size() : pcd.getMailboxLetters();
+			stmt.setInt(22, mails);
+			stmt.setLong(23, pcd.getCurrentReposeEnergy());
+			stmt.setInt(24, pcd.getMentorFlagTime());
+			stmt.setInt(25, player.getPosition().getMapRegion() == null ? 0 : player.getPosition().getWorldMapInstance().getOwnerId());
+			stmt.setInt(26, player.getObjectId());
+			stmt.execute();
 		} catch (Exception e) {
 			log.error("Error saving player: " + player.getObjectId() + " " + player.getName(), e);
 		}
@@ -513,38 +495,30 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 
 	@Override
 	public int getAccountIdByName(final String name) {
-		int accountId = 0;
-		try {
-			try (Connection con = DatabaseFactory.getConnection();
-				PreparedStatement stmt = con.prepareStatement("SELECT `account_id` FROM `players` WHERE `name` = ?")) {
-				stmt.setString(1, name);
-				try (ResultSet rs = stmt.executeQuery()) {
-					rs.next();
-					accountId = rs.getInt("account_id");
-				}
+		try (Connection con = DatabaseFactory.getConnection();
+			PreparedStatement stmt = con.prepareStatement("SELECT `account_id` FROM `players` WHERE `name` = ?")) {
+			stmt.setString(1, name);
+			try (ResultSet rs = stmt.executeQuery()) {
+				rs.next();
+				return rs.getInt("account_id");
 			}
 		} catch (Exception e) {
 			return 0;
 		}
-		return accountId;
 	}
 
 	@Override
 	public int getAccountId(final int playerId) {
-		int accountId = 0;
-		try {
-			try (Connection con = DatabaseFactory.getConnection();
-				PreparedStatement stmt = con.prepareStatement("SELECT `account_id` FROM `players` WHERE `id` = ?")) {
-				stmt.setInt(1, playerId);
-				try (ResultSet rs = stmt.executeQuery()) {
-					rs.next();
-					accountId = rs.getInt("account_id");
-				}
+		try (Connection con = DatabaseFactory.getConnection();
+			PreparedStatement stmt = con.prepareStatement("SELECT `account_id` FROM `players` WHERE `id` = ?")) {
+			stmt.setInt(1, playerId);
+			try (ResultSet rs = stmt.executeQuery()) {
+				rs.next();
+				return rs.getInt("account_id");
 			}
 		} catch (Exception e) {
 			return 0;
 		}
-		return accountId;
 	}
 
 	/**
@@ -552,13 +526,11 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 	 */
 	@Override
 	public void storePlayerName(final PlayerCommonData recipientCommonData) {
-		try {
-			try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement("UPDATE players SET name=? WHERE id=?")) {
-				log.debug("[DAO: MySQL5PlayerDAO] storing playerName " + recipientCommonData.getPlayerObjId() + " " + recipientCommonData.getName());
-				stmt.setString(1, recipientCommonData.getName());
-				stmt.setInt(2, recipientCommonData.getPlayerObjId());
-				stmt.execute();
-			}
+		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement("UPDATE players SET name=? WHERE id=?")) {
+			log.debug("[DAO: MySQL5PlayerDAO] storing playerName " + recipientCommonData.getPlayerObjId() + " " + recipientCommonData.getName());
+			stmt.setString(1, recipientCommonData.getName());
+			stmt.setInt(2, recipientCommonData.getPlayerObjId());
+			stmt.execute();
 		} catch (Exception e) {
 			log.error("Error saving playerName: " + recipientCommonData.getPlayerObjId() + " " + recipientCommonData.getName(), e);
 		}
@@ -566,48 +538,40 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 
 	@Override
 	public int getCharacterCountOnAccount(final int accountId) {
-		int cnt = 0;
-		try {
-			try (Connection con = DatabaseFactory.getConnection();
-				PreparedStatement stmt = con.prepareStatement(
-					"SELECT COUNT(*) AS cnt FROM `players` WHERE `account_id` = ? AND (players.deletion_date IS NULL || players.deletion_date > CURRENT_TIMESTAMP)")) {
-				stmt.setInt(1, accountId);
-				try (ResultSet rs = stmt.executeQuery()) {
-					rs.next();
-					cnt = rs.getInt("cnt");
-				}
+		try (Connection con = DatabaseFactory.getConnection();
+			PreparedStatement stmt = con.prepareStatement(
+				"SELECT COUNT(*) AS cnt FROM `players` WHERE `account_id` = ? AND (players.deletion_date IS NULL || players.deletion_date > CURRENT_TIMESTAMP)")) {
+			stmt.setInt(1, accountId);
+			try (ResultSet rs = stmt.executeQuery()) {
+				rs.next();
+				return rs.getInt("cnt");
 			}
 		} catch (Exception e) {
 			return 0;
 		}
-		return cnt;
 	}
 
 	@Override
 	public int getCharacterCountForRace(Race race) {
-		int count = 0;
-		try {
-			try (Connection con = DatabaseFactory.getConnection();
-				PreparedStatement stmt = con
-					.prepareStatement("SELECT COUNT(DISTINCT(`account_id`)) AS `count` FROM `players` WHERE `race` = ? AND `exp` >= ?")) {
-				stmt.setString(1, race.name());
-				stmt.setLong(2, DataManager.PLAYER_EXPERIENCE_TABLE.getStartExpForLevel(GSConfig.RATIO_MIN_REQUIRED_LEVEL));
-				try (ResultSet rs = stmt.executeQuery()) {
-					rs.next();
-					count = rs.getInt("count");
-				}
+		try (Connection con = DatabaseFactory.getConnection();
+			PreparedStatement stmt = con
+				.prepareStatement("SELECT COUNT(DISTINCT(`account_id`)) AS `count` FROM `players` WHERE `race` = ? AND `exp` >= ?")) {
+			stmt.setString(1, race.name());
+			stmt.setLong(2, DataManager.PLAYER_EXPERIENCE_TABLE.getStartExpForLevel(GSConfig.RATIO_MIN_REQUIRED_LEVEL));
+			try (ResultSet rs = stmt.executeQuery()) {
+				rs.next();
+				return rs.getInt("count");
 			}
 		} catch (Exception e) {
 			return 0;
 		}
-		return count;
 	}
 
 	@Override
 	public Set<Integer> getInactiveAccounts(final int daysOfInactivity) {
 		String SELECT_QUERY = "SELECT account_id FROM players WHERE UNIX_TIMESTAMP(CURDATE())-UNIX_TIMESTAMP(last_online) > ? * 24 * 60 * 60";
 
-		final Map<Integer, Integer> inactiveAccounts = new HashMap<>();
+		Map<Integer, Integer> inactiveCharsByAccId = new HashMap<>();
 
 		DB.select(SELECT_QUERY, new ParamReadStH() {
 
@@ -621,28 +585,15 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 				while (rset.next()) {
 					int accountId = rset.getInt("account_id");
 					// number of inactive chars on account
-					Integer numberOfChars = 0;
-
-					if ((numberOfChars = inactiveAccounts.get(accountId)) != null) {
-						inactiveAccounts.put(accountId, numberOfChars + 1);
-					} else {
-						inactiveAccounts.put(accountId, 1);
-					}
+					inactiveCharsByAccId.merge(accountId, 1, (a, b) -> a + b);
 				}
 			}
 		});
 
-		// filter accounts with active chars on them
-		for (Iterator<Entry<Integer, Integer>> i = inactiveAccounts.entrySet().iterator(); i.hasNext();) {
-			Entry<Integer, Integer> entry = i.next();
+		// exclude accounts with at least one active char on account
+		inactiveCharsByAccId.entrySet().removeIf(entry -> entry.getValue() < getCharacterCountOnAccount(entry.getKey()));
 
-			// atleast one active char on account
-			if (entry.getValue() < this.getCharacterCountOnAccount(entry.getKey())) {
-				i.remove();
-			}
-		}
-
-		return inactiveAccounts.keySet();
+		return inactiveCharsByAccId.keySet();
 	}
 
 	@Override
