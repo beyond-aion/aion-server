@@ -6,15 +6,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,7 +19,6 @@ import com.aionemu.commons.database.DB;
 import com.aionemu.commons.database.DatabaseFactory;
 import com.aionemu.commons.database.IUStH;
 import com.aionemu.commons.database.ParamReadStH;
-import com.aionemu.commons.utils.GenericValidator;
 import com.aionemu.gameserver.configs.main.CacheConfig;
 import com.aionemu.gameserver.configs.main.GSConfig;
 import com.aionemu.gameserver.dao.MySQL5DAOUtils;
@@ -60,34 +56,6 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 		} finally {
 			DB.close(s);
 		}
-	}
-
-	@Override
-	public Map<Integer, String> getPlayerNames(Collection<Integer> playerObjectIds) {
-
-		if (GenericValidator.isBlankOrNull(playerObjectIds)) {
-			return Collections.emptyMap();
-		}
-
-		Map<Integer, String> result = new HashMap<>();
-
-		String sql = "SELECT id, `name` FROM players WHERE id IN(%s)";
-		sql = String.format(sql, StringUtils.join(playerObjectIds, ", "));
-		PreparedStatement s = DB.prepareStatement(sql);
-		try {
-			ResultSet rs = s.executeQuery();
-			while (rs.next()) {
-				int id = rs.getInt("id");
-				String name = rs.getString("name");
-				result.put(id, name);
-			}
-		} catch (SQLException e) {
-			throw new RuntimeException("Failed to load player names", e);
-		} finally {
-			DB.close(s);
-		}
-
-		return result;
 	}
 
 	@Override

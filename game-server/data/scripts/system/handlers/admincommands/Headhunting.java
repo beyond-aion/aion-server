@@ -26,6 +26,7 @@ import com.aionemu.gameserver.model.templates.rewards.RewardItem;
 import com.aionemu.gameserver.services.HTMLService;
 import com.aionemu.gameserver.services.PvpService;
 import com.aionemu.gameserver.services.mail.SystemMailService;
+import com.aionemu.gameserver.services.player.PlayerService;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 
 /**
@@ -186,7 +187,7 @@ public class Headhunting extends AdminCommand {
 					if (pos + 1 > rewards.size() && hunter.getKills() < EventsConfig.HEADHUNTING_CONSOLATION_PRIZE_KILLS)
 						break;
 
-					String name = DAOManager.getDAO(PlayerDAO.class).getPlayerNameByObjId(hunter.getHunterId());
+					String name = PlayerService.getPlayerName(hunter.getHunterId());
 					builder.append("<br>" + (pos + 1) + ". " + name + " Kills: " + hunter.getKills());
 				}
 			}
@@ -247,7 +248,7 @@ public class Headhunting extends AdminCommand {
 					if (items == null || items.isEmpty())
 						continue;
 
-					String name = DAOManager.getDAO(PlayerDAO.class).getPlayerNameByObjId(hunter.getHunterId());
+					String name = PlayerService.getPlayerName(hunter.getHunterId());
 					String rank;
 					switch (pos) {
 						case 0:

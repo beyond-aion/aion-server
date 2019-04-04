@@ -1,9 +1,7 @@
 package com.aionemu.gameserver.dao;
 
 import java.sql.Timestamp;
-import java.util.Collection;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import com.aionemu.gameserver.model.Race;
@@ -27,15 +25,6 @@ public abstract class PlayerDAO implements IDFactoryAwareDAO {
 	 * @return true if name is used, false in other case
 	 */
 	public abstract boolean isNameUsed(String name);
-
-	/**
-	 * Returns player name by player object id
-	 *
-	 * @param playerObjectIds
-	 *          player object ids to get name
-	 * @return map ObjectID-To-Name
-	 */
-	public abstract Map<Integer, String> getPlayerNames(Collection<Integer> playerObjectIds);
 
 	/**
 	 * Stores player to db

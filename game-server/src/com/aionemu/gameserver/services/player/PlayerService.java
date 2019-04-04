@@ -1,17 +1,9 @@
 package com.aionemu.gameserver.services.player;
 
 import java.sql.Timestamp;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.function.Consumer;
 
 import com.aionemu.commons.database.dao.DAOManager;
-import com.aionemu.commons.utils.GenericValidator;
 import com.aionemu.gameserver.configs.main.CacheConfig;
 import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.configs.main.EventsConfig;
@@ -167,9 +159,7 @@ public class PlayerService {
 			return player;
 		}
 
-		/**
-		 * Player common data and appearance should be already loaded in account
-		 */
+		// Player common data and appearance should be already loaded in account
 		PlayerAccountData playerAccountData = account.getPlayerAccountData(playerObjId);
 		player = new Player(playerAccountData, account);
 		LegionMember legionMember = LegionService.getInstance().getLegionMember(player.getObjectId());
@@ -235,9 +225,7 @@ public class PlayerService {
 		}
 		player.setHouseRegistry(houseRegistry);
 
-		/**
-		 * Apply equipment stats (items and manastones were loaded in account)
-		 */
+		// Apply equipment stats (items and manastones were loaded in account)
 		player.getEquipment().onLoadApplyEquipmentStats();
 
 		DAOManager.getDAO(PlayerPunishmentsDAO.class).loadPlayerPunishments(player, PunishmentType.PRISON);
@@ -322,9 +310,7 @@ public class PlayerService {
 		newPlayer.setEquipment(equipment);
 		newPlayer.setMailbox(new Mailbox(newPlayer));
 
-		/**
-		 * Mark inventory and equipment as UPDATE_REQUIRED to be saved during character creation
-		 */
+		// Mark inventory and equipment as UPDATE_REQUIRED to be saved during character creation
 		playerInventory.setPersistentState(PersistentState.UPDATE_REQUIRED);
 		equipment.setPersistentState(PersistentState.UPDATE_REQUIRED);
 		return newPlayer;
@@ -452,37 +438,9 @@ public class PlayerService {
 	}
 
 	public static String getPlayerName(int objectId) {
-		return getPlayerNames(Collections.singleton(objectId)).get(objectId);
-	}
-
-	public static Map<Integer, String> getPlayerNames(Collection<Integer> playerObjIds) {
-
-		// if there is no ids - return just empty map
-		if (GenericValidator.isBlankOrNull(playerObjIds)) {
-			return Collections.emptyMap();
-		}
-
-		final Map<Integer, String> result = new HashMap<>();
-
-		// Copy ids to separate set
-		// It's dangerous to modify input collection, can have side results
-		final Set<Integer> playerObjIdsCopy = new HashSet<>(playerObjIds);
-
-		// Get names of all online players
-		// Certain names can be changed in runtime
-		// this should prevent errors
-		World.getInstance().forEachPlayer(new Consumer<Player>() {
-
-			@Override
-			public void accept(Player object) {
-				if (playerObjIdsCopy.contains(object.getObjectId())) {
-					result.put(object.getObjectId(), object.getName());
-					playerObjIdsCopy.remove(object.getObjectId());
-				}
-			}
-		});
-
-		result.putAll(DAOManager.getDAO(PlayerDAO.class).getPlayerNames(playerObjIdsCopy));
-		return result;
+		Player player = World.getInstance().findPlayer(objectId);
+		if (player != null)
+			return player.getName();
+		return DAOManager.getDAO(PlayerDAO.class).getPlayerNameByObjId(objectId);
 	}
 }

@@ -2,7 +2,6 @@ package com.aionemu.gameserver.model.house;
 
 import java.io.ByteArrayOutputStream;
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.HashMap;
@@ -20,7 +19,6 @@ import com.aionemu.gameserver.configs.main.HousingConfig;
 import com.aionemu.gameserver.controllers.HouseController;
 import com.aionemu.gameserver.dao.HouseScriptsDAO;
 import com.aionemu.gameserver.dao.HousesDAO;
-import com.aionemu.gameserver.dao.PlayerDAO;
 import com.aionemu.gameserver.dao.PlayerRegisteredItemsDAO;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.Race;
@@ -190,13 +188,11 @@ public class House extends VisibleObject implements Persistable {
 		int creatorId = getAddress().getId();
 		String masterName = StringUtils.EMPTY;
 		if (playerObjectId != 0) {
-			List<Integer> players = new ArrayList<>();
-			players.add(playerObjectId);
-			Map<Integer, String> playerNames = DAOManager.getDAO(PlayerDAO.class).getPlayerNames(players);
-			if (playerNames.containsKey(playerObjectId)) {
-				masterName = playerNames.get(playerObjectId);
-			} else
-				this.revokeOwner(); // Something bad happened :P
+			masterName = PlayerService.getPlayerName(playerObjectId);
+			if (masterName == null) {
+				revokeOwner();
+				log.warn("Owner (Player ID: " + playerObjectId + ") of house " + getAddress() + " doesn't exist anymore, revoked ownership.");
+			}
 		}
 
 		for (HouseSpawn spawn : templates) {
