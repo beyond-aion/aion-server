@@ -18,41 +18,41 @@ public class HousingLand {
 
 	@XmlElementWrapper(name = "addresses", required = true)
 	@XmlElement(name = "address")
-	protected List<HouseAddress> addresses;
+	private List<HouseAddress> addresses;
 
 	@XmlElementWrapper(name = "buildings", required = true)
 	@XmlElement(name = "building")
-	protected List<Building> buildings;
+	private List<Building> buildings;
 
 	@XmlElement(required = true)
-	protected Sale sale;
+	private Sale sale;
 
 	@XmlElement(required = true)
-	protected long fee;
+	private long fee;
 
 	@XmlElement(required = true)
-	protected BuildingCapabilities caps;
+	private BuildingCapabilities caps;
 
 	@XmlAttribute(name = "sign_nosale", required = true)
-	protected int signNosale;
+	private int signNosale;
 
 	@XmlAttribute(name = "sign_sale", required = true)
-	protected int signSale;
+	private int signSale;
 
 	@XmlAttribute(name = "sign_waiting", required = true)
-	protected int signWaiting;
+	private int signWaiting;
 
 	@XmlAttribute(name = "sign_home", required = true)
-	protected int signHome;
+	private int signHome;
 
 	@XmlAttribute(name = "manager_npc", required = true)
-	protected int managerNpc;
+	private int managerNpc;
 
 	@XmlAttribute(name = "teleport_npc", required = true)
-	protected int teleportNpc;
+	private int teleportNpc;
 
 	@XmlAttribute(required = true)
-	protected int id;
+	private int id;
 
 	public List<HouseAddress> getAddresses() {
 		return addresses;
@@ -88,10 +88,6 @@ public class HousingLand {
 
 	public int getSaleSignNpcId() {
 		return signSale;
-	}
-
-	public void setSignSale(int value) {
-		this.signSale = value;
 	}
 
 	public int getWaitingSignNpcId() {

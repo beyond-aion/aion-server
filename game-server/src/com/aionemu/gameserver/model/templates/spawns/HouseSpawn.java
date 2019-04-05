@@ -8,7 +8,6 @@ import javax.xml.bind.annotation.XmlType;
 /**
  * @author Rolandas
  */
-
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "HouseSpawn")
 public class HouseSpawn {
@@ -23,10 +22,7 @@ public class HouseSpawn {
 	protected float z;
 
 	@XmlAttribute(name = "h")
-	protected Byte h;
-
-	@XmlAttribute(name = "static_id")
-	private int staticId;
+	protected byte h;
 
 	@XmlAttribute(name = "type", required = true)
 	protected SpawnType type;
@@ -35,51 +31,20 @@ public class HouseSpawn {
 		return x;
 	}
 
-	public void setX(float value) {
-		this.x = value;
-	}
-
 	public float getY() {
 		return y;
-	}
-
-	public void setY(float value) {
-		this.y = value;
 	}
 
 	public float getZ() {
 		return z;
 	}
 
-	public void setZ(float value) {
-		this.z = value;
-	}
-
 	public byte getH() {
-		if (h == null)
-			return ((byte) 0);
-
 		return h;
-	}
-
-	public void setH(Byte value) {
-		this.h = value;
 	}
 
 	public SpawnType getType() {
 		return type;
-	}
-
-	public void setType(SpawnType value) {
-		this.type = value;
-	}
-
-	public int getStaticId() {
-		return staticId;
-	}
-
-	public void setStaticId(int staticId) {
-		this.staticId = staticId;
 	}
 
 }
