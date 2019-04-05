@@ -231,11 +231,14 @@ public class PlayerAllianceService {
 	 */
 	public static void changeMemberGroup(Player player, int firstPlayer, int secondPlayer, int allianceGroupId) {
 		PlayerAlliance alliance = player.getPlayerAlliance();
-		Objects.requireNonNull(alliance, "Alliance should not be null for group change");
-		if (alliance.isLeader(player) || alliance.isViceCaptain(player)) {
+		if (alliance == null) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_FORCE_YOU_ARE_NOT_FORCE_MEMBER());
+			return;
+		}
+		if (alliance.isSomeCaptain(player)) {
 			alliance.onEvent(new ChangeMemberGroupEvent(alliance, firstPlayer, secondPlayer, allianceGroupId));
 		} else {
-			PacketSendUtility.sendMessage(player, "You do not have the authority for that.");
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_FORCE_RIGHT_NOT_HAVE());
 		}
 	}
 

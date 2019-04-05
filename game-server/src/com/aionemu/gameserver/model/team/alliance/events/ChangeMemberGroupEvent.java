@@ -1,7 +1,5 @@
 package com.aionemu.gameserver.model.team.alliance.events;
 
-import java.util.Objects;
-
 import com.aionemu.gameserver.model.team.alliance.PlayerAlliance;
 import com.aionemu.gameserver.model.team.alliance.PlayerAllianceGroup;
 import com.aionemu.gameserver.model.team.alliance.PlayerAllianceMember;
@@ -29,11 +27,12 @@ public class ChangeMemberGroupEvent extends AlwaysTrueTeamEvent {
 	@Override
 	public void handleEvent() {
 		PlayerAllianceMember firstMember = alliance.getMember(firstMemberId);
-		PlayerAllianceMember secondMember = null;
-		Objects.requireNonNull(firstMember, "First member should not be null");
+		if (firstMember == null) // probably left or got kicked right before handleEvent() was called
+			return;
 		if (secondMemberId != 0) {
-			secondMember = alliance.getMember(secondMemberId);
-			Objects.requireNonNull(secondMember, "Second member should not be null");
+			PlayerAllianceMember secondMember = alliance.getMember(secondMemberId);
+			if (secondMember == null) // probably left or got kicked right before handleEvent() was called
+				return;
 			swapMembersInGroup(firstMember, secondMember);
 		} else {
 			moveMemberToGroup(firstMember, allianceGroupId);
