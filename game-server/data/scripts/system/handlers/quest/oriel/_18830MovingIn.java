@@ -2,9 +2,8 @@ package quest.oriel;
 
 import static com.aionemu.gameserver.model.DialogAction.*;
 
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
+import java.util.Arrays;
+import java.util.List;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.house.House;
@@ -20,16 +19,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 public class _18830MovingIn extends AbstractQuestHandler {
 
-	private static final Set<Integer> butlers;
-
-	static {
-		butlers = new HashSet<>();
-		butlers.add(810017);
-		butlers.add(810018);
-		butlers.add(810019);
-		butlers.add(810020);
-		butlers.add(810021);
-	}
+	private static final List<Integer> butlers = Arrays.asList(810017, 810018, 810019, 810020, 810021);
 
 	public _18830MovingIn() {
 		super(18830);
@@ -38,12 +28,8 @@ public class _18830MovingIn extends AbstractQuestHandler {
 	@Override
 	public void register() {
 		qe.registerQuestNpc(830584).addOnQuestStart(questId);
-
-		Iterator<Integer> iter = butlers.iterator();
-		while (iter.hasNext()) {
-			int butlerId = iter.next();
+		for (int butlerId : butlers)
 			qe.registerQuestNpc(butlerId).addOnTalkEvent(questId);
-		}
 		qe.registerQuestNpc(830645).addOnTalkEvent(questId);
 		qe.registerQuestHouseItem(questId);
 	}
@@ -74,9 +60,7 @@ public class _18830MovingIn extends AbstractQuestHandler {
 				}
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
-			if (butlers.contains(targetId) && qs.getQuestVarById(0) == 0) {
-				if (house.getButler().getNpcId() != targetId)
-					return false;
+			if (qs.getQuestVarById(0) == 0 && butlers.contains(targetId)) {
 				switch (dialogActionId) {
 					case USE_OBJECT:
 						return sendQuestDialog(env, 1352);

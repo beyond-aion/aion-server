@@ -2,9 +2,8 @@ package quest.pernon;
 
 import static com.aionemu.gameserver.model.DialogAction.*;
 
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
+import java.util.Arrays;
+import java.util.List;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.house.House;
@@ -20,16 +19,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 public class _28830InteriorDecorator extends AbstractQuestHandler {
 
-	private static final Set<Integer> butlers;
-
-	static {
-		butlers = new HashSet<>();
-		butlers.add(810022);
-		butlers.add(810023);
-		butlers.add(810024);
-		butlers.add(810025);
-		butlers.add(810026);
-	}
+	private static final List<Integer> butlers = Arrays.asList(810022, 810023, 810024, 810025, 810026);
 
 	public _28830InteriorDecorator() {
 		super(28830);
@@ -38,12 +28,8 @@ public class _28830InteriorDecorator extends AbstractQuestHandler {
 	@Override
 	public void register() {
 		qe.registerQuestNpc(830585).addOnQuestStart(questId);
-
-		Iterator<Integer> iter = butlers.iterator();
-		while (iter.hasNext()) {
-			int butlerId = iter.next();
+		for (int butlerId : butlers)
 			qe.registerQuestNpc(butlerId).addOnTalkEvent(questId);
-		}
 		qe.registerQuestNpc(830651).addOnTalkEvent(questId);
 		qe.registerQuestHouseItem(questId);
 	}
@@ -74,9 +60,7 @@ public class _28830InteriorDecorator extends AbstractQuestHandler {
 				}
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
-			if (butlers.contains(targetId) && qs.getQuestVarById(0) == 0) {
-				if (house.getButler().getNpcId() != targetId)
-					return false;
+			if (qs.getQuestVarById(0) == 0 && butlers.contains(targetId)) {
 				switch (dialogActionId) {
 					case USE_OBJECT:
 						return sendQuestDialog(env, 1352);

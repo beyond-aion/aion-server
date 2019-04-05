@@ -4,7 +4,7 @@ import java.io.ByteArrayOutputStream;
 import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.Collection;
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
@@ -26,7 +26,6 @@ import com.aionemu.gameserver.model.TribeClass;
 import com.aionemu.gameserver.model.gameobjects.HouseDecoration;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.Persistable;
-import com.aionemu.gameserver.model.gameobjects.SummonedHouseNpc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.HouseOwnerState;
 import com.aionemu.gameserver.model.gameobjects.player.PlayerScripts;
@@ -43,6 +42,7 @@ import com.aionemu.gameserver.model.templates.spawns.SpawnType;
 import com.aionemu.gameserver.model.templates.zone.ZoneClassName;
 import com.aionemu.gameserver.services.HousingBidService;
 import com.aionemu.gameserver.services.HousingService;
+import com.aionemu.gameserver.services.player.PlayerService;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.spawnengine.VisibleObjectSpawner;
 import com.aionemu.gameserver.utils.idfactory.IDFactory;
@@ -69,7 +69,7 @@ public class House extends VisibleObject implements Persistable {
 	private boolean feePaid = true;
 	private Timestamp nextPay;
 	private Timestamp sellStarted;
-	private Map<SpawnType, Npc> spawns = new HashMap<>(3);
+	private Map<SpawnType, Npc> spawns = new EnumMap<>(SpawnType.class);
 	private HouseRegistry houseRegistry;
 	private byte houseOwnerStates = HouseOwnerState.SINGLE_HOUSE.getId();
 	private PlayerScripts playerScripts;
@@ -196,23 +196,28 @@ public class House extends VisibleObject implements Persistable {
 		}
 
 		for (HouseSpawn spawn : templates) {
-			SpawnTemplate t = null;
-			if (spawn.getType() == SpawnType.MANAGER && spawns.get(SpawnType.MANAGER) == null) {
-				t = SpawnEngine.newSingleTimeSpawn(getAddress().getMapId(), getLand().getManagerNpcId(), spawn.getX(), spawn.getY(), spawn.getZ(),
-					spawn.getH());
-				SummonedHouseNpc npc = VisibleObjectSpawner.spawnHouseNpc(t, getInstanceId(), this, masterName);
-				spawns.put(SpawnType.MANAGER, npc);
-			} else if (spawn.getType() == SpawnType.TELEPORT && spawns.get(SpawnType.TELEPORT) == null) {
-				t = SpawnEngine.newSingleTimeSpawn(getAddress().getMapId(), getLand().getTeleportNpcId(), spawn.getX(), spawn.getY(), spawn.getZ(),
-					spawn.getH());
-				SummonedHouseNpc npc = VisibleObjectSpawner.spawnHouseNpc(t, getInstanceId(), this, masterName);
-				spawns.put(SpawnType.TELEPORT, npc);
-			} else if (spawn.getType() == SpawnType.SIGN && spawns.get(SpawnType.SIGN) == null) {
+			Npc npc;
+			if (spawn.getType() == SpawnType.MANAGER) {
+				SpawnTemplate t = SpawnEngine.newSingleTimeSpawn(getAddress().getMapId(), getLand().getManagerNpcId(), spawn.getX(), spawn.getY(),
+					spawn.getZ(), spawn.getH());
+				npc = VisibleObjectSpawner.spawnHouseNpc(t, getInstanceId(), this, masterName);
+			} else if (spawn.getType() == SpawnType.TELEPORT) {
+				SpawnTemplate t = SpawnEngine.newSingleTimeSpawn(getAddress().getMapId(), getLand().getTeleportNpcId(), spawn.getX(), spawn.getY(),
+					spawn.getZ(), spawn.getH());
+				npc = VisibleObjectSpawner.spawnHouseNpc(t, getInstanceId(), this, masterName);
+			} else if (spawn.getType() == SpawnType.SIGN) {
 				// Signs do not have master name displayed, but have creatorId
-				t = SpawnEngine.newSingleTimeSpawn(getAddress().getMapId(), getCurrentSignNpcId(), spawn.getX(), spawn.getY(), spawn.getZ(), spawn.getH(),
-					creatorId);
-				spawns.put(SpawnType.SIGN, (Npc) SpawnEngine.spawnObject(t, getInstanceId()));
+				SpawnTemplate t = SpawnEngine.newSingleTimeSpawn(getAddress().getMapId(), getCurrentSignNpcId(), spawn.getX(), spawn.getY(), spawn.getZ(),
+					spawn.getH(), creatorId);
+				npc = (Npc) SpawnEngine.spawnObject(t, getInstanceId());
+			} else {
+				log.warn("Unhandled spawn type " + spawn.getType());
+				continue;
 			}
+			if (npc == null)
+				log.warn("Invalid " + spawn.getType() + " npc ID for house " + getAddress());
+			else if (spawns.putIfAbsent(spawn.getType(), npc) != null)
+				log.warn("Duplicate " + spawn.getType() + " spawn for house " + getAddress());
 		}
 	}
 
