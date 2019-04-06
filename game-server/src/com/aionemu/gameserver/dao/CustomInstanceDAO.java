@@ -1,7 +1,5 @@
 package com.aionemu.gameserver.dao;
 
-import java.util.Map;
-
 import com.aionemu.commons.database.dao.DAO;
 import com.aionemu.gameserver.custom.instance.CustomInstanceRank;
 
@@ -10,9 +8,11 @@ import com.aionemu.gameserver.custom.instance.CustomInstanceRank;
  */
 public abstract class CustomInstanceDAO implements DAO {
 
-	public abstract Map<Integer, CustomInstanceRank> loadPlayerRanks();
+	public abstract CustomInstanceRank loadPlayerRankObject(int playerId);
 
-	public abstract void storePlayer(int playerId);
+	public abstract boolean storePlayer(CustomInstanceRank rankObj);
+
+	public abstract void deletePlayer(int playerId);
 
 	@Override
 	public String getClassName() {

@@ -22,8 +22,7 @@ public class CustomInstance extends AdminCommand {
 		setSyntaxInfo(
 			"<removecd> - Removes the custom instance cooldown of selected player.",
 			"<getrank> - Gets the current custom instance rank of selected player.",
-			"<setrank> [newRank] - Changes the custom instance rank of selected player to given value.",
-			"<getentries> - Shows how much player model entries are cached about the selected player."
+			"<setrank> [newRank] - Changes the custom instance rank of selected player to given value."
 		);
 		// @formatter:on
 	}
@@ -38,9 +37,9 @@ public class CustomInstance extends AdminCommand {
 		switch (params[0].toLowerCase()) {
 			case "removecd":
 				if (player.getTarget() instanceof Player) {
-					CustomInstanceService.getInstance().getPlayerRankObject(player.getTarget().getObjectId())
-						.setLastEntry(ServerTime.now().with(LocalTime.of(8, 0)).toEpochSecond());
-					PacketSendUtility.sendMessage(player, "Successfully removed custom instance cooldown for " + player.getTarget().getName());
+					if (CustomInstanceService.getInstance().updateLastEntry(player.getObjectId(),
+						ServerTime.now().with(LocalTime.of(8, 0)).toEpochSecond() * 1000))
+						PacketSendUtility.sendMessage(player, "Successfully removed custom instance cooldown for " + player.getTarget().getName());
 				} else {
 					PacketSendUtility.sendMessage(player, "Please select a player first.");
 				}

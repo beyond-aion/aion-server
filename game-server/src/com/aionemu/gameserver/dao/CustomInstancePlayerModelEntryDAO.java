@@ -2,7 +2,6 @@ package com.aionemu.gameserver.dao;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.Map;
 
 import com.aionemu.commons.database.dao.DAO;
 import com.aionemu.gameserver.custom.instance.neuralnetwork.PlayerModelEntry;
@@ -12,9 +11,11 @@ import com.aionemu.gameserver.custom.instance.neuralnetwork.PlayerModelEntry;
  */
 public abstract class CustomInstancePlayerModelEntryDAO implements DAO {
 
-	public abstract Map<Integer, List<PlayerModelEntry>> loadPlayerModelEntries();
+	public abstract List<PlayerModelEntry> loadPlayerModelEntries(int playerId);
 
 	public abstract void insertNewRecords(Collection<PlayerModelEntry> filteredEntries);
+
+	public abstract void deletePlayer(int playerId);
 
 	@Override
 	public String getClassName() {

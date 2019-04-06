@@ -7,14 +7,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.commons.database.DB;
 import com.aionemu.commons.database.DatabaseFactory;
-import com.aionemu.commons.database.ParamReadStH;
 import com.aionemu.gameserver.custom.instance.neuralnetwork.PlayerModelEntry;
 import com.aionemu.gameserver.dao.CustomInstancePlayerModelEntryDAO;
 import com.aionemu.gameserver.dao.MySQL5DAOUtils;
@@ -25,49 +22,38 @@ import com.aionemu.gameserver.model.gameobjects.Persistable.PersistentState;
  */
 public class MySQL5CustomInstancePlayerModelEntryDAO extends CustomInstancePlayerModelEntryDAO {
 
-	private static final String SELECT_QUERY = "SELECT * FROM `custom_instance_records`";
+	private static final Logger log = LoggerFactory.getLogger(MySQL5CustomInstancePlayerModelEntryDAO.class);
+	private static final String SELECT_QUERY = "SELECT * FROM `custom_instance_records` WHERE ? = player_id";
 	private static final String INSERT_QUERY = "INSERT INTO `custom_instance_records` ( `player_id`, `timestamp`, `skill_id`, `player_class_id`, `player_hp_percentage`,"
 		+ "`player_mp_percentage`, `player_is_rooted`, `player_is_silenced`, `player_is_bound`, `player_is_stunned`, `player_is_aetherhold`,"
 		+ "`player_buff_count`, `player_debuff_count`, `player_is_shielded`, `target_hp_percentage`, `target_mp_percentage`,"
 		+ "`target_focuses_player`, `distance`, `target_is_rooted`, `target_is_silenced`, `target_is_bound`, `target_is_stunned`,"
-		+ "`target_is_aetherhold`, `target_buff_count`, `target_debuff_count`, `target_is_shielded`) VALUES (?, ?, ?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, "
+		+ "`target_is_aetherhold`, `target_buff_count`, `target_debuff_count`, `target_is_shielded`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, "
 		+ "?, ?, ?, ?, ?, ?, ?, ?)";
+	private static final String DELETE_QUERY = "DELETE FROM `custom_instance_records` WHERE ? = player_id";
 
 	@Override
-	public Map<Integer, List<PlayerModelEntry>> loadPlayerModelEntries() {
-		Map<Integer, List<PlayerModelEntry>> playerModelEntries = new ConcurrentHashMap<>();
-
-		DB.select(SELECT_QUERY, new ParamReadStH() {
-
-			@Override
-			public void handleRead(ResultSet rset) throws SQLException {
-				while (rset.next()) {
-					int playerId = rset.getInt("player_id");
-					PlayerModelEntry pme = new PlayerModelEntry(playerId, rset.getTimestamp("timestamp"), rset.getInt("skill_id"),
-						rset.getInt("player_class_id"), rset.getFloat("player_hp_percentage"), rset.getFloat("player_mp_percentage"),
-						rset.getBoolean("player_is_rooted"), rset.getBoolean("player_is_silenced"), rset.getBoolean("player_is_bound"),
-						rset.getBoolean("player_is_stunned"), rset.getBoolean("player_is_aetherhold"), rset.getInt("player_buff_count"),
-						rset.getInt("player_debuff_count"), rset.getBoolean("player_is_shielded"), rset.getFloat("target_hp_percentage"),
-						rset.getFloat("target_mp_percentage"), rset.getBoolean("target_focuses_player"), rset.getFloat("distance"),
-						rset.getBoolean("target_is_rooted"), rset.getBoolean("target_is_silenced"), rset.getBoolean("target_is_bound"),
-						rset.getBoolean("target_is_stunned"), rset.getBoolean("target_is_aetherhold"), rset.getInt("target_buff_count"),
-						rset.getInt("target_debuff_count"), rset.getBoolean("target_is_shielded"));
-
-					List<PlayerModelEntry> entries = playerModelEntries.get(playerId);
-					if (entries == null) {
-						entries = new ArrayList<>();
-						playerModelEntries.put(playerId, entries);
-					}
-					entries.add(pme);
-				}
+	public List<PlayerModelEntry> loadPlayerModelEntries(int playerId) {
+		List<PlayerModelEntry> entries = new ArrayList<>();
+		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(SELECT_QUERY)) {
+			stmt.setInt(1, playerId);
+			ResultSet rset = stmt.executeQuery();
+			while (rset.next()) {
+				PlayerModelEntry pme = new PlayerModelEntry(playerId, rset.getTimestamp("timestamp"), rset.getInt("skill_id"), rset.getInt("player_class_id"),
+					rset.getFloat("player_hp_percentage"), rset.getFloat("player_mp_percentage"), rset.getBoolean("player_is_rooted"),
+					rset.getBoolean("player_is_silenced"), rset.getBoolean("player_is_bound"), rset.getBoolean("player_is_stunned"),
+					rset.getBoolean("player_is_aetherhold"), rset.getInt("player_buff_count"), rset.getInt("player_debuff_count"),
+					rset.getBoolean("player_is_shielded"), rset.getFloat("target_hp_percentage"), rset.getFloat("target_mp_percentage"),
+					rset.getBoolean("target_focuses_player"), rset.getFloat("distance"), rset.getBoolean("target_is_rooted"),
+					rset.getBoolean("target_is_silenced"), rset.getBoolean("target_is_bound"), rset.getBoolean("target_is_stunned"),
+					rset.getBoolean("target_is_aetherhold"), rset.getInt("target_buff_count"), rset.getInt("target_debuff_count"),
+					rset.getBoolean("target_is_shielded"));
+				entries.add(pme);
 			}
-
-			@Override
-			public void setParams(PreparedStatement stmt) throws SQLException {
-			}
-		});
-
-		return playerModelEntries;
+		} catch (SQLException e) {
+			log.error("[CUSTOM_INSTANCE] Error loading player model entries on player id " + playerId, e);
+		}
+		return entries;
 	}
 
 	@Override
@@ -108,7 +94,17 @@ public class MySQL5CustomInstancePlayerModelEntryDAO extends CustomInstancePlaye
 			stmt.executeBatch();
 			con.commit();
 		} catch (Exception e) {
-			LoggerFactory.getLogger(MySQL5CustomInstancePlayerModelEntryDAO.class).error("Error occured while saving player model entries.", e);
+			log.error("Error occured while saving player model entries.", e);
+		}
+	}
+	
+	@Override
+	public void deletePlayer(int playerId) {
+		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(DELETE_QUERY)) {
+			stmt.setInt(1, playerId);
+			stmt.execute();
+		} catch (SQLException e) {
+			log.error("[CUSTOM_INSTANCE] Error deleting models of player id " + playerId, e);
 		}
 	}
 

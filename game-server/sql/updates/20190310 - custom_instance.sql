@@ -2,7 +2,7 @@ DROP TABLE IF EXISTS `custom_instance`;
 CREATE TABLE `custom_instance` (
   `player_id` int(11) NOT NULL,
   `rank` int(11) NOT NULL,
-  `last_entry` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `last_entry` timestamp NOT NULL,
   PRIMARY KEY (`player_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
