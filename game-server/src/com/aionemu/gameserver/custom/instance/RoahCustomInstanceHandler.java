@@ -35,12 +35,13 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_MESSAGE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_ACTION;
 import com.aionemu.gameserver.services.drop.DropRegistrationService;
+import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
 /**
- * @author Jo
+ * @author Jo, Estrayl
  */
 public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 
@@ -66,6 +67,7 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 
 	private AtomicLong startTime = new AtomicLong();
 	private AtomicBoolean isInitialized = new AtomicBoolean();
+
 	private PlayerModel model;
 	private List<Integer> skillSet;
 
@@ -102,48 +104,50 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 					BOSS_MOB_E_F_ID, BOSS_MOB_AT_ID);
 			}, TIME_LIMIT * 1000);
 
-			// spawn trash mobs: 1 wave/min after 1min
-			trashMobSpawnTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
+			// spawn bulky mob: 1/min after 1:20min
+			bulkyMobSpawnTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
 
 				@Override
 				public void run() {
-					int newTrash = 6;
-					for (Npc n : instance.getNpcs(TRASH_MOB_ID)) // always spawn until 6 total
-						if (!n.isDead())
-							newTrash--;
-
-					if (newTrash > 0) {
-						for (int i = 0; i < newTrash; i++) {
-							Npc mob = (Npc) spawn(TRASH_MOB_ID, 500.1f + Rnd.get() * 8, 460f + Rnd.get() * 4, 86.7112f, (byte) 30);
-							adaptNPC(mob, rank);
-							mob.getAggroList().addHate(player, 1000);
+					Npc bulky = null;
+					for (Npc n : instance.getNpcs(BULKY_MOB_ID)) {
+						if (!n.isDead() && !n.getLifeStats().isAboutToDie()) {
+							bulky = n;
+							break;
 						}
-						PacketSendUtility.broadcastToMap(instance, new SM_MESSAGE(0, null, "Artifact Protectors have appeared!", ChatType.BRIGHT_YELLOW_CENTER));
+					}
+					if (bulky != null) {
+						bulky.getLifeStats().setCurrentHp(bulky.getLifeStats().getMaxHp());
+						PacketSendUtility.broadcastToMap(instance, new SM_MESSAGE(0, null, "Protector Vord recovered energy!", ChatType.BRIGHT_YELLOW_CENTER));
+					} else {
+						bulky = (Npc) spawn(BULKY_MOB_ID, 493.923f, 488.16794f, 87.18341f, (byte) 0);
+						adaptNPC(bulky, rank);
+						bulky.getAggroList().addHate(player, 1000);
+						PacketSendUtility.broadcastToMap(instance, new SM_MESSAGE(0, null, "A tough protector has appeared!", ChatType.BRIGHT_YELLOW_CENTER));
 					}
 				}
-			}, 60000, 60000 - rank * 1000); // 60s ... 30s
+			}, 80000, 60000);
 
 			if (rank >= CustomInstanceRankEnum.BRONZE.getValue()) {
-				// spawn bulky mob: 1/min after 1:20min
-				bulkyMobSpawnTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
+				// spawn trash mobs: 1 wave/min after 1min
+				trashMobSpawnTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
 
 					@Override
 					public void run() {
-						Npc bulky = getNpc(BULKY_MOB_ID);
-						if (bulky != null && !bulky.getLifeStats().isAboutToDie() && !bulky.isDead()) {
-							if (bulky.getLifeStats().getCurrentHp() < bulky.getLifeStats().getMaxHp()) {
-								bulky.getLifeStats().setCurrentHp(bulky.getLifeStats().getMaxHp());
-								PacketSendUtility.broadcastToMap(instance,
-									new SM_MESSAGE(0, null, "Protector Vord recovered energy!", ChatType.BRIGHT_YELLOW_CENTER));
+						int newTrash = 6;
+						for (Npc n : instance.getNpcs(TRASH_MOB_ID)) // always spawn until 6 total
+							if (!n.isDead())
+								newTrash--;
+
+						if (newTrash > 0) {
+							for (int i = 0; i < newTrash; i++) {
+								Npc mob = (Npc) spawn(TRASH_MOB_ID, 500.1f + Rnd.get() * 8, 460f + Rnd.get() * 4, 86.7112f, (byte) 30);
+								adaptNPC(mob, rank);
+								mob.getAggroList().addHate(player, 1000);
 							}
-						} else {
-							bulky = (Npc) spawn(BULKY_MOB_ID, 493.923f, 488.16794f, 87.18341f, (byte) 0);
-							adaptNPC(bulky, rank);
-							bulky.getAggroList().addHate(player, 1000);
-							PacketSendUtility.broadcastToMap(instance, new SM_MESSAGE(0, null, "A tough protector has appeared!", ChatType.BRIGHT_YELLOW_CENTER));
 						}
 					}
-				}, 80000, 60000);
+				}, 60000, 60000 - rank * 1000); // 60s ... 30s
 			}
 
 			if (rank >= CustomInstanceRankEnum.SILVER.getValue()) {
@@ -152,13 +156,17 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 
 					@Override
 					public void run() {
-						Npc dominator = getNpc(DOMINATOR_MOB_ID);
-						if (dominator != null && !dominator.getLifeStats().isAboutToDie() && !dominator.isDead()) {
-							if (dominator.getLifeStats().getCurrentHp() < dominator.getLifeStats().getMaxHp()) {
-								dominator.getLifeStats().setCurrentHp(dominator.getLifeStats().getMaxHp());
-								PacketSendUtility.broadcastToMap(instance,
-									new SM_MESSAGE(0, null, "Protector Vala recovered energy!", ChatType.BRIGHT_YELLOW_CENTER));
+						Npc dominator = null;
+						for (Npc n : instance.getNpcs(DOMINATOR_MOB_ID)) {
+							if (!n.isDead() && !n.getLifeStats().isAboutToDie()) {
+								dominator = n;
+								break;
 							}
+						}
+						if (dominator != null) {
+							dominator.getLifeStats().setCurrentHp(dominator.getLifeStats().getMaxHp());
+							PacketSendUtility.broadcastToMap(instance, new SM_MESSAGE(0, null, "Protector Vala recovered energy!", ChatType.BRIGHT_YELLOW_CENTER));
+
 						} else {
 							dominator = (Npc) spawn(DOMINATOR_MOB_ID, 515.23114f, 487.94998f, 87.176056f, (byte) 60);
 							adaptNPC(dominator, rank);
@@ -263,8 +271,11 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 		if (DropRegistrationService.getInstance().getCurrentDropMap().get(npcObjId) != null)
 			DropRegistrationService.getInstance().getCurrentDropMap().get(npcObjId).clear();
 		int index = 0;
-		dropItems
-			.add(DropRegistrationService.getInstance().regDropItem(index++, playerId, npcObjId, REWARD_COIN_ID, (int) (MIN_REWARD + rank * REWARD_SCALE)));
+		dropItems.add(DropRegistrationService.getInstance().regDropItem(index++, playerId, npcObjId, REWARD_COIN_ID, getRewardCoinAmount(rank)));
+	}
+
+	private int getRewardCoinAmount(int rank) {
+		return Math.round(MIN_REWARD + rank * REWARD_SCALE);
 	}
 
 	public void adaptNPC(Npc npc, int rank, Player player) {
@@ -272,7 +283,10 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 
 		switch (npc.getNpcId()) { // IRON ... ANCIENT+
 			case CENTER_ARTIFACT_ID: // ~5 ... 10min
-				functions.add(new StatSetFunction(StatEnum.MAXHP, 300 * AVG_DPS + rank * 10 * AVG_DPS));
+				int maxHP = 300 * AVG_DPS + rank * 10 * AVG_DPS;
+				if (rank > 21)
+					maxHP += (rank - 21) * 150000;
+				functions.add(new StatSetFunction(StatEnum.MAXHP, maxHP));
 				break;
 			case TRASH_MOB_ID: // ~1s fix (AoE-able)
 				functions.add(new StatSetFunction(StatEnum.MAXHP, 1));
@@ -298,7 +312,6 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 
 	public void setResult(boolean success) {
 		cancelAllTasks();
-		int oldRank = rank;
 		if (success) {
 			// upgrade rank
 			rank++;
@@ -313,12 +326,12 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 				rank = Math.max(0, (rank - 3) - (rank % 3)); // to 1st rank of last category
 			PacketSendUtility.broadcastToMap(instance, new SM_MESSAGE(0, null,
 				"Your rank has been decreased to " + CustomInstanceRankEnum.getRankDescription(rank) + ".", ChatType.BRIGHT_YELLOW_CENTER));
+
+			if (rank > 0) // prevent suicide abuse || loss rewards
+				ItemService.addItem(instance.getPlayer(instance.getSoloPlayerObj()), REWARD_COIN_ID, getRewardCoinAmount(rank), true);
 		}
 		CustomInstanceService.getInstance().changePlayerRank(instance.getSoloPlayerObj(), rank);
-		CustomInstanceService.getInstance().writePlayerModelEntriesToDB(instance.getSoloPlayerObj());
-		log.info(
-			"[CI_ROAH] Changing instance rank for [playerId=" + instance.getSoloPlayerObj() + "] from " + CustomInstanceRankEnum.getRankDescription(oldRank)
-				+ "(" + oldRank + ") to " + CustomInstanceRankEnum.getRankDescription(rank) + "(" + rank + ").");
+		CustomInstanceService.getInstance().saveNewPlayerModelEntries(instance.getSoloPlayerObj());
 	}
 
 	private void cancelAllTasks() {
