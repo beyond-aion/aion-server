@@ -44,7 +44,7 @@ public class QuestTemplate implements L10n {
 	@XmlElement(name = "rewards")
 	private List<Rewards> rewards;
 	@XmlElement(name = "bonus")
-	private List<QuestBonuses> bonus;
+	private QuestBonuses bonus;
 	@XmlElement(name = "extended_rewards")
 	private Rewards extendedRewards;
 	@XmlElement(name = "quest_drop")
@@ -152,8 +152,8 @@ public class QuestTemplate implements L10n {
 		return extendedRewards;
 	}
 
-	public List<QuestBonuses> getBonus() {
-		return bonus == null ? Collections.emptyList() : bonus;
+	public QuestBonuses getBonus() {
+		return bonus;
 	}
 
 	public List<QuestDrop> getQuestDrop() {

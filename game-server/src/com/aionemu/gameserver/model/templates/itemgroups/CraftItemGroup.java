@@ -1,6 +1,6 @@
 package com.aionemu.gameserver.model.templates.itemgroups;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -10,10 +10,6 @@ import javax.xml.bind.annotation.XmlType;
 
 import com.aionemu.gameserver.model.templates.rewards.CraftItem;
 
-/**
- * @author Rolandas
- *
- */
 /**
  * <p>
  * Java class for CraftItemGroup complex type.
@@ -31,38 +27,19 @@ import com.aionemu.gameserver.model.templates.rewards.CraftItem;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
+ * 
+ * @author Rolandas
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "CraftItemGroup")
 public class CraftItemGroup extends CraftGroup {
 
 	@XmlElement(name = "item")
-	protected List<CraftItem> items;
-
-	/**
-	 * Gets the value of the item property.
-	 * <p>
-	 * This accessor method returns a reference to the live list, not a snapshot. Therefore any modification you make to the returned list will be
-	 * present inside the JAXB object. This is why there is not a <CODE>set</CODE> method for the item property.
-	 * <p>
-	 * For example, to add a new item, do as follows:
-	 * 
-	 * <pre>
-	 * getItems().add(newItem);
-	 * </pre>
-	 * <p>
-	 * Objects of the following type(s) are allowed in the list {@link CraftItem }
-	 */
-	public List<CraftItem> getItems() {
-		if (items == null) {
-			items = new ArrayList<>();
-		}
-		return this.items;
-	}
+	private List<CraftItem> items;
 
 	@Override
-	public ItemRaceEntry[] getRewards() {
-		return getItems().toArray(new ItemRaceEntry[0]);
+	public List<CraftItem> getItems() {
+		return items == null ? Collections.emptyList() : items;
 	}
 
 }

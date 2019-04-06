@@ -493,7 +493,7 @@ public abstract class AbstractQuestHandler {
 	private boolean isAcceptableQuest(QuestTemplate quest) {
 		if (quest.getMinlevelPermitted() == 99)
 			return false;
-		if (quest.getRewards().isEmpty() && quest.getExtendedRewards() == null && quest.getBonus().isEmpty() && quest.getQuestDrop().isEmpty()
+		if (quest.getRewards().isEmpty() && quest.getExtendedRewards() == null && quest.getBonus() == null && quest.getQuestDrop().isEmpty()
 			&& Stream.of(PlayerClass.values()).allMatch(c -> quest.getSelectableRewardByClass(c).isEmpty())) {
 			return false;
 		}

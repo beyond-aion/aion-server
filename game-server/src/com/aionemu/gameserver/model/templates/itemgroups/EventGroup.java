@@ -1,6 +1,6 @@
 package com.aionemu.gameserver.model.templates.itemgroups;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -18,18 +18,11 @@ import com.aionemu.gameserver.model.templates.rewards.FullRewardItem;
 public class EventGroup extends BonusItemGroup {
 
 	@XmlElement(name = "item")
-	protected List<FullRewardItem> items;
-
-	public List<FullRewardItem> getItems() {
-		if (items == null) {
-			items = new ArrayList<>();
-		}
-		return this.items;
-	}
+	private List<FullRewardItem> items;
 
 	@Override
-	public FullRewardItem[] getRewards() {
-		return getItems().toArray(new FullRewardItem[0]);
+	public List<FullRewardItem> getItems() {
+		return items == null ? Collections.emptyList() : items;
 	}
 
 }

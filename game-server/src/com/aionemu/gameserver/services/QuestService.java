@@ -49,7 +49,6 @@ import com.aionemu.gameserver.model.templates.quest.CollectItems;
 import com.aionemu.gameserver.model.templates.quest.HandlerSideDrop;
 import com.aionemu.gameserver.model.templates.quest.InventoryItem;
 import com.aionemu.gameserver.model.templates.quest.InventoryItems;
-import com.aionemu.gameserver.model.templates.quest.QuestBonuses;
 import com.aionemu.gameserver.model.templates.quest.QuestCategory;
 import com.aionemu.gameserver.model.templates.quest.QuestDrop;
 import com.aionemu.gameserver.model.templates.quest.QuestItems;
@@ -119,7 +118,7 @@ public final class QuestService {
 			questItems.addAll(getRewardItems(env, template, true, null));
 			extendedRewards = template.getExtendedRewards();
 		}
-		if (!template.getRewards().isEmpty() || !template.getBonus().isEmpty()) {
+		if (!template.getRewards().isEmpty() || template.getBonus() != null) {
 			questItems.addAll(getRewardItems(env, template, false, qs.getRewardGroup()));
 			if (qs.getRewardGroup() != null)
 				rewards = template.getRewards().get(qs.getRewardGroup());
@@ -222,10 +221,9 @@ public final class QuestService {
 					}
 				}
 			}
-			if (!template.getBonus().isEmpty()) {
-				QuestBonuses bonus = template.getBonus().get(0);
+			if (template.getBonus() != null) {
 				// Handler can add additional bonuses on repeat (for event quests no data)
-				HandlerResult result = QuestEngine.getInstance().onBonusApplyEvent(env, bonus.getType(), questItems);
+				HandlerResult result = QuestEngine.getInstance().onBonusApplyEvent(env, template.getBonus().getType(), questItems);
 				if (result != HandlerResult.FAILED) {
 					QuestItems additional = BonusService.getInstance().getQuestBonus(player, template);
 					if (additional != null)

@@ -1,17 +1,12 @@
 package com.aionemu.gameserver.model.templates.itemgroups;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
-
-/**
- * @author Rolandas
- *
- */
 
 /**
  * <p>
@@ -30,38 +25,19 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
+ * 
+ * @author Rolandas
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "OreGroup")
 public class OreGroup extends BonusItemGroup {
 
 	@XmlElement(name = "item")
-	protected List<ItemRaceEntry> items;
-
-	/**
-	 * Gets the value of the item property.
-	 * <p>
-	 * This accessor method returns a reference to the live list, not a snapshot. Therefore any modification you make to the returned list will be
-	 * present inside the JAXB object. This is why there is not a <CODE>set</CODE> method for the item property.
-	 * <p>
-	 * For example, to add a new item, do as follows:
-	 * 
-	 * <pre>
-	 * getItems().add(newItem);
-	 * </pre>
-	 * <p>
-	 * Objects of the following type(s) are allowed in the list {@link ItemRaceEntry }
-	 */
-	public List<ItemRaceEntry> getItems() {
-		if (items == null) {
-			items = new ArrayList<>();
-		}
-		return this.items;
-	}
+	private List<ItemRaceEntry> items;
 
 	@Override
-	public ItemRaceEntry[] getRewards() {
-		return getItems().toArray(new ItemRaceEntry[0]);
+	public List<ItemRaceEntry> getItems() {
+		return items == null ? Collections.emptyList() : items;
 	}
 
 }

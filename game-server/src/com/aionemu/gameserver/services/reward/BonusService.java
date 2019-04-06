@@ -17,9 +17,7 @@ import com.aionemu.gameserver.model.templates.item.ItemTemplate;
 import com.aionemu.gameserver.model.templates.itemgroups.BonusItemGroup;
 import com.aionemu.gameserver.model.templates.itemgroups.CraftGroup;
 import com.aionemu.gameserver.model.templates.itemgroups.ItemRaceEntry;
-import com.aionemu.gameserver.model.templates.itemgroups.ManastoneGroup;
 import com.aionemu.gameserver.model.templates.itemgroups.MedalGroup;
-import com.aionemu.gameserver.model.templates.itemgroups.MedicineGroup;
 import com.aionemu.gameserver.model.templates.quest.QuestBonuses;
 import com.aionemu.gameserver.model.templates.quest.QuestItems;
 import com.aionemu.gameserver.model.templates.rewards.BonusType;
@@ -101,30 +99,26 @@ public class BonusService {
 	}
 
 	public QuestItems getQuestBonus(Player player, QuestTemplate questTemplate) {
-		List<QuestBonuses> bonuses = questTemplate.getBonus();
-
-		if (bonuses.isEmpty())
+		if (questTemplate.getBonus() == null)
 			return null;
 
-		QuestBonuses bonus = bonuses.get(0);
-		if (bonus.getType() == BonusType.NONE)
+		if (questTemplate.getBonus().getType() == BonusType.NONE)
 			return null;
 
-		switch (bonus.getType()) {
+		switch (questTemplate.getBonus().getType()) {
 			case TASK:
 				return getCraftBonus(player, questTemplate);
 			case EVENTS:
-				return getEventBonus(player, bonus);
+				return getEventBonus(player, questTemplate.getBonus());
 			case MANASTONE:
-				return getManastoneBonus(player, bonus);
+			case MEDICINE:
+				return getRandomBonus(player, questTemplate.getBonus());
 			case MEDAL:
 				return getMedalBonus(player, questTemplate);
-			case MEDICINE:
-				return getMedicineBonus(player, bonus);
 			case MOVIE:
 				return null;
 			default:
-				log.warn("Quest bonus of type " + bonus.getType() + " is not implemented (quest " + questTemplate.getId() + ")");
+				log.warn("Quest bonus of type " + questTemplate.getBonus().getType() + " is not implemented (quest " + questTemplate.getId() + ")");
 				return null;
 		}
 	}
@@ -210,7 +204,7 @@ public class BonusService {
 		BonusItemGroup[] groups = itemGroups.getMedalGroups();
 		MedalGroup group = (MedalGroup) getRandomGroup(groups);
 		FullRewardItem finalReward = null;
-		int bonusLevel = template.getBonus().get(0).getLevel();
+		int bonusLevel = template.getBonus().getLevel();
 		float total = 0;
 
 		for (FullRewardItem medal : group.getItems()) {
@@ -236,12 +230,11 @@ public class BonusService {
 		return finalReward != null ? new QuestItems(finalReward.getId(), finalReward.getCount()) : null;
 	}
 
-	private QuestItems getManastoneBonus(Player player, QuestBonuses bonus) {
-		ManastoneGroup group = (ManastoneGroup) getRandomGroup(BonusType.MANASTONE);
-		ItemRaceEntry[] allRewards = group.getRewards();
+	private QuestItems getRandomBonus(Player player, QuestBonuses bonus) {
+		BonusItemGroup group = getRandomGroup(bonus.getType());
 		List<ItemRaceEntry> finalList = new ArrayList<>();
 
-		for (ItemRaceEntry r : allRewards) {
+		for (ItemRaceEntry r : group.getItems()) {
 			ItemTemplate template = DataManager.ITEM_DATA.getItemTemplate(r.getId());
 
 			if (bonus.getLevel() != template.getLevel())
@@ -250,31 +243,7 @@ public class BonusService {
 			finalList.add(r);
 		}
 
-		if (finalList.isEmpty())
-			return null;
-
 		ItemRaceEntry reward = Rnd.get(finalList);
-		return new QuestItems(reward.getId(), 1);
-	}
-
-	private QuestItems getMedicineBonus(Player player, QuestBonuses bonus) {
-		MedicineGroup group = (MedicineGroup) getRandomGroup(BonusType.MEDICINE);
-		ItemRaceEntry[] allRewards = group.getRewards();
-		List<ItemRaceEntry> finalList = new ArrayList<>();
-
-		for (ItemRaceEntry r : allRewards) {
-			ItemTemplate template = DataManager.ITEM_DATA.getItemTemplate(r.getId());
-
-			if (bonus.getLevel() != template.getLevel())
-				continue;
-
-			finalList.add(r);
-		}
-
-		if (finalList.isEmpty())
-			return null;
-
-		ItemRaceEntry reward = Rnd.get(finalList);
-		return new QuestItems(reward.getId(), 1);
+		return reward == null ? null : new QuestItems(reward.getId(), 1);
 	}
 }
