@@ -6,12 +6,8 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlType;
 
+import com.aionemu.gameserver.model.templates.QuestTemplate;
 import com.aionemu.gameserver.model.templates.itemgroups.ItemRaceEntry;
-
-/**
- * @author Rolandas
- *
- */
 
 /**
  * <p>
@@ -30,6 +26,8 @@ import com.aionemu.gameserver.model.templates.itemgroups.ItemRaceEntry;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
+ * 
+ * @author Rolandas
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "CraftReward")
@@ -37,15 +35,14 @@ import com.aionemu.gameserver.model.templates.itemgroups.ItemRaceEntry;
 public abstract class CraftReward extends ItemRaceEntry {
 
 	@XmlAttribute(name = "skill")
-	protected Integer skill;
+	private int skill;
 
-	/**
-	 * Gets the value of the skill property.
-	 * 
-	 * @return possible object is {@link Integer }
-	 */
-	public Integer getSkill() {
+	public int getSkill() {
 		return skill;
 	}
 
+	@Override
+	protected boolean matchesQuest(QuestTemplate questTemplate) {
+		return questTemplate.getCombineSkill() == skill;
+	}
 }

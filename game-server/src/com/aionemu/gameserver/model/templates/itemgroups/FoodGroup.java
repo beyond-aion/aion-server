@@ -8,7 +8,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
-import com.aionemu.gameserver.model.templates.rewards.IdLevelReward;
+import com.aionemu.gameserver.model.templates.rewards.FoodItem;
 
 /**
  * <p>
@@ -35,10 +35,10 @@ import com.aionemu.gameserver.model.templates.rewards.IdLevelReward;
 public class FoodGroup extends BonusItemGroup {
 
 	@XmlElement(name = "item")
-	private List<IdLevelReward> items;
+	private List<FoodItem> items;
 
 	@Override
-	public List<IdLevelReward> getItems() {
+	public List<FoodItem> getItems() {
 		return items == null ? Collections.emptyList() : items;
 	}
 

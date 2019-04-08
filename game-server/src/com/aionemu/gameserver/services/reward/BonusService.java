@@ -3,247 +3,80 @@ package com.aionemu.gameserver.services.reward;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
-import org.apache.commons.lang3.ArrayUtils;
-import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.dataholders.ItemGroupsData;
+import com.aionemu.gameserver.model.Chance;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.QuestTemplate;
-import com.aionemu.gameserver.model.templates.item.ItemTemplate;
 import com.aionemu.gameserver.model.templates.itemgroups.BonusItemGroup;
-import com.aionemu.gameserver.model.templates.itemgroups.CraftGroup;
 import com.aionemu.gameserver.model.templates.itemgroups.ItemRaceEntry;
-import com.aionemu.gameserver.model.templates.itemgroups.MedalGroup;
-import com.aionemu.gameserver.model.templates.quest.QuestBonuses;
 import com.aionemu.gameserver.model.templates.quest.QuestItems;
 import com.aionemu.gameserver.model.templates.rewards.BonusType;
-import com.aionemu.gameserver.model.templates.rewards.CraftItem;
-import com.aionemu.gameserver.model.templates.rewards.FullRewardItem;
 
 /**
- * @author Rolandas
- * @modified Pad
+ * @author Rolandas, Pad, Neon
  */
 public class BonusService {
-
-	private static BonusService instance = new BonusService();
-	private ItemGroupsData itemGroups = DataManager.ITEM_GROUPS_DATA;
-	private static final Logger log = LoggerFactory.getLogger(BonusService.class);
 
 	private BonusService() {
 	}
 
-	public static BonusService getInstance() {
-		return instance;
-	}
-
-	public BonusItemGroup[] getGroupsByType(BonusType type) {
-		switch (type) {
-			case BOSS:
-				return itemGroups.getBossGroups();
-			case ENCHANT:
-				return itemGroups.getEnchantGroups();
-			case FOOD:
-				return itemGroups.getFoodGroups();
-			case GATHER:
-				return ArrayUtils.addAll(itemGroups.getOreGroups(), itemGroups.getGatherGroups());
-			case MANASTONE:
-				return itemGroups.getManastoneGroups();
-			case MEDICINE:
-				return itemGroups.getMedicineGroups();
-			case TASK:
-				return itemGroups.getCraftGroups();
-			case MOVIE:
-				return null;
-			default:
-				log.warn("Bonus of type " + type + " is not implemented");
-				return null;
-		}
-	}
-
-	public BonusItemGroup getRandomGroup(BonusItemGroup[] groups) {
-		float total = 0;
-
-		if (groups == null)
-			return null;
-
-		for (BonusItemGroup gr : groups)
-			total += gr.getChance();
-
-		if (total == 0)
-			return null;
-
-		BonusItemGroup chosenGroup = null;
-		int percent = 100;
-		for (BonusItemGroup gr : groups) {
-			float chance = getNormalizedChance(gr.getChance(), total);
-			if (Rnd.get(0, percent) <= chance) {
-				chosenGroup = gr;
-				break;
-			} else
-				percent -= chance;
-		}
-		return chosenGroup;
-	}
-
-	private float getNormalizedChance(float chance, float total) {
-		return chance * 100f / total;
-	}
-
-	public BonusItemGroup getRandomGroup(BonusType type) {
-		return getRandomGroup(getGroupsByType(type));
-	}
-
-	public QuestItems getQuestBonus(Player player, QuestTemplate questTemplate) {
+	public static QuestItems getQuestBonus(Player player, QuestTemplate questTemplate) {
 		if (questTemplate.getBonus() == null)
 			return null;
 
-		if (questTemplate.getBonus().getType() == BonusType.NONE)
+		List<? extends ItemRaceEntry> itemsOfRandomGroup = getMatchingItemsOfRandomGroup(player, questTemplate);
+		if (itemsOfRandomGroup == null)
 			return null;
 
-		switch (questTemplate.getBonus().getType()) {
-			case TASK:
-				return getCraftBonus(player, questTemplate);
-			case EVENTS:
-				return getEventBonus(player, questTemplate.getBonus());
-			case MANASTONE:
-			case MEDICINE:
-				return getRandomBonus(player, questTemplate.getBonus());
-			case MEDAL:
-				return getMedalBonus(player, questTemplate);
-			case MOVIE:
-				return null;
-			default:
-				log.warn("Quest bonus of type " + questTemplate.getBonus().getType() + " is not implemented (quest " + questTemplate.getId() + ")");
-				return null;
-		}
+		ItemRaceEntry item = Chance.selectElement(itemsOfRandomGroup);
+		return item == null ? null : new QuestItems(item.getId(), item.getCount());
 	}
 
-	private QuestItems getCraftBonus(Player player, QuestTemplate questTemplate) {
-		BonusItemGroup[] groups = itemGroups.getCraftGroups();
-		CraftGroup group = null;
-		ItemRaceEntry[] allRewards = null;
+	public static List<? extends ItemRaceEntry> getMatchingItemsOfRandomGroup(Player player, QuestTemplate questTemplate) {
+		List<BonusItemGroup> remainingGroups = new ArrayList<>(getBonusGroups(questTemplate.getBonus().getType()));
+		List<? extends ItemRaceEntry> allRewards = null;
 
-		while (groups != null && groups.length > 0 && group == null) {
-			group = (CraftGroup) getRandomGroup(groups);
+		while (!remainingGroups.isEmpty()) {
+			BonusItemGroup group = Chance.selectElement(remainingGroups, true);
 			if (group == null)
 				break;
-			allRewards = group.getRewards(questTemplate.getCombineSkill(), questTemplate.getCombineSkillPoint());
-			if (allRewards.length == 0) {
-				List<BonusItemGroup> temp = new ArrayList<>();
-				Collections.addAll(temp, groups);
-				temp.remove(group);
-				group = null;
-				groups = temp.toArray(new BonusItemGroup[0]);
-			}
-		}
-
-		if (group == null || allRewards == null)
-			return null;
-
-		List<ItemRaceEntry> finalList = new ArrayList<>();
-		for (ItemRaceEntry allReward : allRewards) {
-			ItemRaceEntry r = allReward;
-			ItemTemplate template = DataManager.ITEM_DATA.getItemTemplate(r.getId());
-
-			if (template == null) {
-				log.warn("Item " + r.getId() + " absent in ItemTemplate");
-				continue;
-			}
-			if (!r.checkRace(player.getCommonData().getRace()))
-				continue;
-
-			finalList.add(r);
-		}
-
-		if (finalList.isEmpty())
-			return null;
-
-		int itemCount = 1;
-
-		ItemRaceEntry reward = Rnd.get(finalList);
-		if (reward instanceof CraftItem)
-			itemCount = Rnd.get(3, 5);
-
-		return new QuestItems(reward.getId(), itemCount);
-	}
-
-	private QuestItems getEventBonus(Player player, QuestBonuses bonus) {
-		List<FullRewardItem> possibleRewards = new ArrayList<>();
-
-		float total = 0;
-		for (FullRewardItem fRI : itemGroups.getEventGroups().getItems()) {
-			if (fRI.getLevel() != bonus.getLevel()) {
-				continue;
-			}
-			total += fRI.getChance();
-			possibleRewards.add(fRI);
-		}
-
-		if (total == 0)
-			return null;
-
-		float rnd = Rnd.get() * total;
-		float luck = 0;
-
-		for (FullRewardItem fRI : possibleRewards) {
-			luck += fRI.getChance();
-
-			if (rnd <= luck) {
-				return new QuestItems(fRI.getId(), fRI.getCount());
-			}
-		}
-		return null;
-	}
-
-	private QuestItems getMedalBonus(Player player, QuestTemplate template) {
-		BonusItemGroup[] groups = itemGroups.getMedalGroups();
-		MedalGroup group = (MedalGroup) getRandomGroup(groups);
-		FullRewardItem finalReward = null;
-		int bonusLevel = template.getBonus().getLevel();
-		float total = 0;
-
-		for (FullRewardItem medal : group.getItems()) {
-			if (medal.getLevel() == bonusLevel)
-				total += medal.getChance();
-		}
-
-		if (total == 0)
-			return null;
-
-		float rnd = Rnd.get() * total;
-		float luck = 0;
-		for (FullRewardItem medal : group.getItems()) {
-			if (medal.getLevel() != bonusLevel)
-				continue;
-
-			luck += medal.getChance();
-			if (rnd <= luck) {
-				finalReward = medal;
+			allRewards = group.getItems().stream().filter(i -> i.matches(player.getRace(), questTemplate)).collect(Collectors.toList());
+			if (!allRewards.isEmpty())
 				break;
-			}
 		}
-		return finalReward != null ? new QuestItems(finalReward.getId(), finalReward.getCount()) : null;
+		return allRewards;
 	}
 
-	private QuestItems getRandomBonus(Player player, QuestBonuses bonus) {
-		BonusItemGroup group = getRandomGroup(bonus.getType());
-		List<ItemRaceEntry> finalList = new ArrayList<>();
-
-		for (ItemRaceEntry r : group.getItems()) {
-			ItemTemplate template = DataManager.ITEM_DATA.getItemTemplate(r.getId());
-
-			if (bonus.getLevel() != template.getLevel())
-				continue;
-
-			finalList.add(r);
+	private static List<BonusItemGroup> getBonusGroups(BonusType type) {
+		switch (type) {
+			// case GATHER:
+			// return DataManager.ITEM_GROUPS_DATA.getGatherGroups();
+			// case BOSS:
+			// return DataManager.ITEM_GROUPS_DATA.getBossGroups();
+			// case ENCHANT:
+			// return DataManager.ITEM_GROUPS_DATA.getEnchantGroups();
+			case EVENTS:
+				return DataManager.ITEM_GROUPS_DATA.getEventGroups();
+			case FOOD:
+				return DataManager.ITEM_GROUPS_DATA.getFoodGroups();
+			case MANASTONE:
+				return DataManager.ITEM_GROUPS_DATA.getManastoneGroups();
+			case MEDICINE:
+				return DataManager.ITEM_GROUPS_DATA.getMedicineGroups();
+			case MEDAL:
+				return DataManager.ITEM_GROUPS_DATA.getMedalGroups();
+			case TASK:
+				return DataManager.ITEM_GROUPS_DATA.getCraftGroups();
+			case MOVIE:
+			case NONE:
+				break;
+			default:
+				LoggerFactory.getLogger(BonusService.class).warn("Bonus of type " + type + " is not implemented");
 		}
-
-		ItemRaceEntry reward = Rnd.get(finalList);
-		return reward == null ? null : new QuestItems(reward.getId(), 1);
+		return Collections.emptyList();
 	}
 }

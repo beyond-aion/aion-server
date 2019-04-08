@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <item_groups xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="item_groups.xsd">
-	<craft_materials bonusType="TASK" chance="48">
+	<craft_materials bonusType="TASK" chance="47">
 		<item id="152020112" skill="40007" minLevel="5" maxLevel="40"/>
 		<item id="152020111" skill="40007" minLevel="10" maxLevel="60"/>
 		<item id="152020114" skill="40007" minLevel="40" maxLevel="99"/>
@@ -264,7 +264,7 @@
 		<item id="152025012" skill="40002" minLevel="310" maxLevel="450"/>
 		<item id="152025011" skill="40002" minLevel="310" maxLevel="450"/>
 	</craft_materials>
-	<craft_shop bonusType="TASK" chance="48">
+	<craft_shop bonusType="TASK" chance="47">
 		<item id="169400086" skill="40007" minLevel="5" maxLevel="460"/>
 		<item id="169400074" skill="40007" minLevel="10" maxLevel="90"/>
 		<item id="169400088" skill="40007" minLevel="10" maxLevel="380"/>
@@ -419,7 +419,7 @@
 		<item id="169400053" skill="40004" race="ASMODIANS" minLevel="200" maxLevel="290"/>
 		<item id="169400054" skill="40004" race="ASMODIANS" minLevel="300" maxLevel="399"/>
 	</craft_shop>
-	<craft_bundles bonusType="TASK" chance="1">
+	<craft_bundles bonusType="TASK" chance="2">
 		<item id="152202476" skill="40007" level="1"/>
 		<item id="152202477" skill="40007" level="1"/>
 		<item id="152202458" skill="40007" level="10"/>
@@ -4538,7 +4538,7 @@
 		<item id="182005206" level="6" count="1" chance="67"/>
 		<item id="186000242" level="6" count="1" chance="33"/>
 	</medals>
-	<food_common bonusType="FOOD" chance="100">
+	<food bonusType="FOOD" chance="100">
 		<item id="152015001" level="30"/>
 		<item id="152015004" level="40"/>
 		<item id="152015007" level="50"/>
@@ -4647,8 +4647,7 @@
 		<item id="160002293" race="ASMODIANS" level="60"/>
 		<item id="160002294" race="ASMODIANS" level="60"/>
 		<item id="160002295" race="ASMODIANS" level="60"/>
-	</food_common>
-	<food_rare bonusType="FOOD" chance="0">
+		<!-- HP / Mana regen cocktails -->
 		<item id="160001109" race="ELYOS" level="30"/>
 		<item id="160001117" race="ELYOS" level="40"/>
 		<item id="160001125" race="ELYOS" level="50"/>
@@ -4657,23 +4656,7 @@
 		<item id="160002117" race="ASMODIANS" level="40"/>
 		<item id="160002125" race="ASMODIANS" level="50"/>
 		<item id="160002306" race="ASMODIANS" level="60"/>
-		<!-- Not sure -->
-<!--
-		<item id="160002416" level="70"/>
-		<item id="160002460" level="70"/>
--->
-	</food_rare>
-	<food_legendary bonusType="FOOD" chance="0">
-		<item id="160001273" race="ELYOS" level="40"/>
-		<item id="160001274" race="ELYOS" level="50"/>
-		<item id="160002273" race="ASMODIANS" level="40"/>
-		<item id="160002274" race="ASMODIANS" level="50"/>
-		<!-- Not sure -->
-<!--
-		<item id="160002424" level="70"/>
-		<item id="160003587" level="70"/>
--->
-	</food_legendary>
+	</food>
 	<medicine_common bonusType="MEDICINE" chance="100">
 		<item id="162000002" level="10"/>
 		<item id="162000003" level="20"/>

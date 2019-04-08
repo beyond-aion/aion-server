@@ -14,15 +14,17 @@ import javax.xml.bind.annotation.XmlType;
 public class FullRewardItem extends IdLevelReward {
 
 	@XmlAttribute(name = "count")
-	protected int count;
+	private long count;
 
 	@XmlAttribute(name = "chance")
-	protected float chance;
+	private float chance;
 
-	public int getCount() {
+	@Override
+	public long getCount() {
 		return count;
 	}
 
+	@Override
 	public float getChance() {
 		return chance;
 	}

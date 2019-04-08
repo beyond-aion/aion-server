@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -15,6 +14,7 @@ import com.aionemu.gameserver.ai.event.AIEventType;
 import com.aionemu.gameserver.configs.main.RatesConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.dataholders.GlobalNpcExclusionData;
+import com.aionemu.gameserver.model.Chance;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.drop.Drop;
 import com.aionemu.gameserver.model.drop.DropItem;
@@ -436,19 +436,10 @@ public class DropRegistrationService {
 		List<GlobalDropItem> drops = collectAllowedDrops(rule, npc, dropModifiers);
 		if (drops.size() > maxDrops) {
 			List<GlobalDropItem> allowedItems = new ArrayList<>();
-			for (int i = 0; i < maxDrops; i++) {
-				float sumOfChances = calculateSumOfChances(drops);
-				float currentSum = 0f;
-				float rnd = Rnd.get((int) (sumOfChances * 1000)) / 1000f;
-				for (Iterator<GlobalDropItem> iter = drops.iterator(); iter.hasNext();) {
-					GlobalDropItem item = iter.next();
-					currentSum += item.getChance();
-					if (rnd < currentSum) {
-						allowedItems.add(item);
-						iter.remove();
-						break;
-					}
-				}
+			for (int i = 0; i < maxDrops && !drops.isEmpty(); i++) {
+				GlobalDropItem item = Chance.selectElement(drops, true);
+				if (item != null)
+					allowedItems.add(item);
 			}
 			return allowedItems;
 		}
@@ -468,13 +459,6 @@ public class DropRegistrationService {
 			}
 		}
 		return tempItems;
-	}
-
-	private float calculateSumOfChances(List<GlobalDropItem> items) {
-		float sum = 0f;
-		for (GlobalDropItem item : items)
-			sum += item.getChance();
-		return sum;
 	}
 
 	private long getItemCount(GlobalDropItem item, Npc npc) {

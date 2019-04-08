@@ -11,13 +11,14 @@ import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.dataholders.ItemData;
 import com.aionemu.gameserver.dataholders.StaticData;
 import com.aionemu.gameserver.dataholders.loadingutils.StaticDataListener;
+import com.aionemu.gameserver.model.Chance;
 
 /**
  * @author AionCool
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "GlobalDropItem")
-public class GlobalDropItem {
+public class GlobalDropItem implements Chance {
 
 	@XmlAttribute(name = "id", required = true)
 	private int itemId;
@@ -56,6 +57,7 @@ public class GlobalDropItem {
 		return maxCount == 0 ? minCount : Rnd.get(minCount, maxCount);
 	}
 
+	@Override
 	public float getChance() {
 		return chance;
 	}

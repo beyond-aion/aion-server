@@ -40,4 +40,8 @@ public class IdLevelReward extends ItemRaceEntry {
 		return level;
 	}
 
+	@Override
+	protected boolean matchesLevel(ItemTemplate itemTemplate, int bonusItemLevel) {
+		return bonusItemLevel == 0 || level == bonusItemLevel;
+	}
 }

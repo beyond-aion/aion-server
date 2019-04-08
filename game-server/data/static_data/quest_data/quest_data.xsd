@@ -105,8 +105,7 @@
 	</xs:complexType>
 	<xs:complexType name="QuestBonuses">
 		<xs:attribute name="type" type="BonusType" use="required"/>
-		<xs:attribute name="level" type="xs:int" use="optional"/>
-		<xs:attribute name="skill" type="xs:int" use="optional"/>
+		<xs:attribute name="level" type="xs:int"/>
 	</xs:complexType>
 	<xs:complexType name="CollectItem">
 		<xs:attribute name="item_id" type="xs:int"/>

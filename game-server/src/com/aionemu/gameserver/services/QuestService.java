@@ -225,7 +225,7 @@ public final class QuestService {
 				// Handler can add additional bonuses on repeat (for event quests no data)
 				HandlerResult result = QuestEngine.getInstance().onBonusApplyEvent(env, template.getBonus().getType(), questItems);
 				if (result != HandlerResult.FAILED) {
-					QuestItems additional = BonusService.getInstance().getQuestBonus(player, template);
+					QuestItems additional = BonusService.getQuestBonus(player, template);
 					if (additional != null)
 						questItems.add(additional);
 				}

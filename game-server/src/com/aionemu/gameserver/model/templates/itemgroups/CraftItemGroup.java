@@ -32,7 +32,7 @@ import com.aionemu.gameserver.model.templates.rewards.CraftItem;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "CraftItemGroup")
-public class CraftItemGroup extends CraftGroup {
+public class CraftItemGroup extends BonusItemGroup {
 
 	@XmlElement(name = "item")
 	private List<CraftItem> items;

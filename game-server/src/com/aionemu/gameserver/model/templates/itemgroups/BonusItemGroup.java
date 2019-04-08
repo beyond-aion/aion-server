@@ -8,6 +8,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlType;
 
+import com.aionemu.gameserver.model.Chance;
 import com.aionemu.gameserver.model.templates.rewards.BonusType;
 
 /**
@@ -33,7 +34,7 @@ import com.aionemu.gameserver.model.templates.rewards.BonusType;
 @XmlType(name = "BonusItemGroup")
 @XmlSeeAlso({ CraftItemGroup.class, CraftRecipeGroup.class, EventGroup.class, ManastoneGroup.class, FoodGroup.class, MedicineGroup.class,
 	OreGroup.class, GatherGroup.class, EnchantGroup.class, BossGroup.class })
-public abstract class BonusItemGroup {
+public abstract class BonusItemGroup implements Chance {
 
 	@XmlAttribute(name = "bonusType", required = true)
 	protected BonusType bonusType;
@@ -41,20 +42,11 @@ public abstract class BonusItemGroup {
 	@XmlAttribute(name = "chance")
 	protected float chance;
 
-	/**
-	 * Gets the value of the bonusType property.
-	 * 
-	 * @return possible object is {@link BonusType }
-	 */
 	public BonusType getBonusType() {
 		return bonusType;
 	}
 
-	/**
-	 * Gets the value of the chance property.
-	 * 
-	 * @return possible object is {@link Float }
-	 */
+	@Override
 	public float getChance() {
 		return chance;
 	}

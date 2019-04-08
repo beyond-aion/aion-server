@@ -5,10 +5,8 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
-/**
- * @author Rolandas
- *
- */
+import com.aionemu.commons.utils.Rnd;
+import com.aionemu.gameserver.model.templates.QuestTemplate;
 
 /**
  * <p>
@@ -26,16 +24,18 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
+ * 
+ * @author Rolandas
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "CraftItem")
 public class CraftItem extends CraftReward {
 
 	@XmlAttribute(name = "minLevel", required = true)
-	protected int minLevel;
+	private int minLevel;
 
 	@XmlAttribute(name = "maxLevel", required = true)
-	protected int maxLevel;
+	private int maxLevel;
 
 	/**
 	 * Gets the value of the minLevel property.
@@ -51,4 +51,19 @@ public class CraftItem extends CraftReward {
 		return maxLevel;
 	}
 
+	@Override
+	public long getCount() {
+		return Rnd.get(3, 5);
+	}
+
+	@Override
+	protected boolean matchesQuest(QuestTemplate questTemplate) {
+		if (!super.matchesQuest(questTemplate))
+			return false;
+		if (questTemplate.getCombineSkillPoint() < minLevel)
+			return false;
+		if (questTemplate.getCombineSkillPoint() > maxLevel)
+			return false;
+		return true;
+	}
 }
