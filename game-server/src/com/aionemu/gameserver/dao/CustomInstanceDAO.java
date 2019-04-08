@@ -12,8 +12,6 @@ public abstract class CustomInstanceDAO implements DAO {
 
 	public abstract boolean storePlayer(CustomInstanceRank rankObj);
 
-	public abstract void deletePlayer(int playerId);
-
 	@Override
 	public String getClassName() {
 		return CustomInstanceDAO.class.getName();

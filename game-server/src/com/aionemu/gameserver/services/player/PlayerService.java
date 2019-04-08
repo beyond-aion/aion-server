@@ -21,8 +21,6 @@ import com.aionemu.gameserver.dao.AbyssRankDAO;
 import com.aionemu.gameserver.dao.AccountPassportsDAO;
 import com.aionemu.gameserver.dao.BlockListDAO;
 import com.aionemu.gameserver.dao.CraftCooldownsDAO;
-import com.aionemu.gameserver.dao.CustomInstanceDAO;
-import com.aionemu.gameserver.dao.CustomInstancePlayerModelEntryDAO;
 import com.aionemu.gameserver.dao.FriendListDAO;
 import com.aionemu.gameserver.dao.HeadhuntingDAO;
 import com.aionemu.gameserver.dao.HouseObjectCooldownsDAO;
@@ -376,8 +374,6 @@ public class PlayerService {
 	public static void deletePlayerFromDB(int playerId) {
 		DAOManager.getDAO(InventoryDAO.class).deletePlayerItems(playerId);
 		DAOManager.getDAO(PlayerDAO.class).deletePlayer(playerId);
-		DAOManager.getDAO(CustomInstanceDAO.class).deletePlayer(playerId);
-		DAOManager.getDAO(CustomInstancePlayerModelEntryDAO.class).deletePlayer(playerId);
 	}
 
 	/**

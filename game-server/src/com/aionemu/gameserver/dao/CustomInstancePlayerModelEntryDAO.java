@@ -15,8 +15,6 @@ public abstract class CustomInstancePlayerModelEntryDAO implements DAO {
 
 	public abstract void insertNewRecords(Collection<PlayerModelEntry> filteredEntries);
 
-	public abstract void deletePlayer(int playerId);
-
 	@Override
 	public String getClassName() {
 		return CustomInstancePlayerModelEntryDAO.class.getName();

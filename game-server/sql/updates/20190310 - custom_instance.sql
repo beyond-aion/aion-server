@@ -3,7 +3,8 @@ CREATE TABLE `custom_instance` (
   `player_id` int(11) NOT NULL,
   `rank` int(11) NOT NULL,
   `last_entry` timestamp NOT NULL,
-  PRIMARY KEY (`player_id`)
+  PRIMARY KEY (`player_id`),
+  CONSTRAINT `custom_instance_ibfk_1` FOREIGN KEY (`player_id`) REFERENCES `players` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `custom_instance_records`;
@@ -33,5 +34,6 @@ CREATE TABLE `custom_instance_records` (
   `target_is_aetherhold`  tinyint(1) NULL,
   `target_buff_count`  int NULL,
   `target_debuff_count`  int NULL,
-  `target_is_shielded`  tinyint(1) NULL
+  `target_is_shielded`  tinyint(1) NULL,
+  CONSTRAINT `custom_instance_records_ibfk_1` FOREIGN KEY (`player_id`) REFERENCES `players` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

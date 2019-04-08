@@ -24,7 +24,6 @@ public class MySQL5CustomInstanceDAO extends CustomInstanceDAO {
 	private static final Logger log = LoggerFactory.getLogger(MySQL5CustomInstanceDAO.class);
 	private static final String SELECT_QUERY = "SELECT * FROM `custom_instance` WHERE ? = player_id";
 	private static final String UPDATE_QUERY = "REPLACE INTO `custom_instance` (`player_id`, `rank`, `last_entry`) VALUES (?,?,?)";
-	private static final String DELETE_QUERY = "DELETE FROM `custom_instance` WHERE ? = player_id";
 
 	@Override
 	public CustomInstanceRank loadPlayerRankObject(int playerId) {
@@ -51,16 +50,6 @@ public class MySQL5CustomInstanceDAO extends CustomInstanceDAO {
 		} catch (SQLException e) {
 			log.error("[CUSTOM_INSTANCE] Error storing last entries on player id " + rankObj.getPlayerId(), e);
 			return false;
-		}
-	}
-
-	@Override
-	public void deletePlayer(int playerId) {
-		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(DELETE_QUERY)) {
-			stmt.setInt(1, playerId);
-			stmt.execute();
-		} catch (SQLException e) {
-			log.error("[CUSTOM_INSTANCE] Error deleting player id " + playerId, e);
 		}
 	}
 

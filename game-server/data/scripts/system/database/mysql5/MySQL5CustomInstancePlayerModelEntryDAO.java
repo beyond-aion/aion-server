@@ -30,7 +30,6 @@ public class MySQL5CustomInstancePlayerModelEntryDAO extends CustomInstancePlaye
 		+ "`target_focuses_player`, `distance`, `target_is_rooted`, `target_is_silenced`, `target_is_bound`, `target_is_stunned`,"
 		+ "`target_is_aetherhold`, `target_buff_count`, `target_debuff_count`, `target_is_shielded`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, "
 		+ "?, ?, ?, ?, ?, ?, ?, ?)";
-	private static final String DELETE_QUERY = "DELETE FROM `custom_instance_records` WHERE ? = player_id";
 
 	@Override
 	public List<PlayerModelEntry> loadPlayerModelEntries(int playerId) {
@@ -95,16 +94,6 @@ public class MySQL5CustomInstancePlayerModelEntryDAO extends CustomInstancePlaye
 			con.commit();
 		} catch (Exception e) {
 			log.error("Error occured while saving player model entries.", e);
-		}
-	}
-	
-	@Override
-	public void deletePlayer(int playerId) {
-		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(DELETE_QUERY)) {
-			stmt.setInt(1, playerId);
-			stmt.execute();
-		} catch (SQLException e) {
-			log.error("[CUSTOM_INSTANCE] Error deleting models of player id " + playerId, e);
 		}
 	}
 
