@@ -79,7 +79,7 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.DuelService;
 import com.aionemu.gameserver.services.HousingService;
-import com.aionemu.gameserver.services.serialkillers.SerialKiller;
+import com.aionemu.gameserver.services.conquerorAndProtectorSystem.CPInfo;
 import com.aionemu.gameserver.skillengine.condition.ChainCondition;
 import com.aionemu.gameserver.skillengine.effect.AbnormalState;
 import com.aionemu.gameserver.skillengine.effect.RebirthEffect;
@@ -203,7 +203,7 @@ public class Player extends Creature {
 	private byte portAnimation;
 	private boolean isInSprintMode;
 	private List<ActionObserver> rideObservers;
-	private SerialKiller skList;
+	private CPInfo cpInfo;
 
 	private byte houseOwnerStates = HouseOwnerState.BUY_STUDIO_ALLOWED.getId();
 	private int battleReturnMap;
@@ -231,7 +231,7 @@ public class Player extends Creature {
 		setGameStats(new PlayerGameStats(this));
 		setLifeStats(new PlayerLifeStats(this));
 		inGameShop = new InGameShop();
-		skList = new SerialKiller(this);
+		cpInfo = new CPInfo(this);
 		absStatsHolder = new AbsoluteStatOwner(this, 0);
 	}
 
@@ -1257,12 +1257,12 @@ public class Player extends Creature {
 		return houseObjectCooldownList;
 	}
 
-	public SerialKiller getSKInfo() {
-		return skList;
+	public CPInfo getCPInfo() {
+		return cpInfo;
 	}
 
-	public void setSKInfo(SerialKiller serialKiller) {
-		skList = serialKiller;
+	public void setCPInfo(CPInfo cpInfo) {
+		this.cpInfo = cpInfo;
 	}
 
 	public Npc getPostman() {

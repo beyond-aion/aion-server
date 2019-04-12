@@ -24,10 +24,10 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_UPGRADE_ARCADE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_WINDSTREAM_ANNOUNCE;
 import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.services.AutoGroupService;
-import com.aionemu.gameserver.services.SerialKillerService;
 import com.aionemu.gameserver.services.SiegeService;
 import com.aionemu.gameserver.services.TownService;
 import com.aionemu.gameserver.services.WeatherService;
+import com.aionemu.gameserver.services.conquerorAndProtectorSystem.ConquerorAndProtectorService;
 import com.aionemu.gameserver.services.event.EventService;
 import com.aionemu.gameserver.services.instance.InstanceService;
 import com.aionemu.gameserver.services.rift.RiftInformer;
@@ -68,9 +68,7 @@ public class CM_LEVEL_READY extends AionClientPacket {
 				sendPacket(new SM_WINDSTREAM_ANNOUNCE(location.getFlyPathType().getId(), template.getMapId(), location.getId(), location.getState()));
 			}
 
-		/**
-		 * Spawn player into the world.
-		 */
+		// Spawn player into the world.
 		World.getInstance().spawn(activePlayer);
 
 		if (activePlayer.isInFlyState(FlyState.FLYING)) // notify client if we are still flying (client always ends flying after teleport)
@@ -81,8 +79,8 @@ public class CM_LEVEL_READY extends AionClientPacket {
 			SiegeService.getInstance().onEnterSiegeWorld(activePlayer);
 		}
 
-		// SM_SERIAL_KILLER
-		SerialKillerService.getInstance().onEnterMap(activePlayer);
+		// SM_CONQUEROR_PROTECTOR
+		ConquerorAndProtectorService.getInstance().onEnterMap(activePlayer);
 
 		// SM_RIFT_ANNOUNCE
 		RiftInformer.sendRiftsInfo(activePlayer);
@@ -102,9 +100,7 @@ public class CM_LEVEL_READY extends AionClientPacket {
 		// SM_QUEST_REPEAT
 		activePlayer.getController().updateRepeatableQuests();
 
-		/**
-		 * Loading weather for the player's region
-		 */
+		// Loading weather for the player's region
 		WeatherService.getInstance().loadWeather(activePlayer);
 
 		QuestEngine.getInstance().onEnterWorld(activePlayer);

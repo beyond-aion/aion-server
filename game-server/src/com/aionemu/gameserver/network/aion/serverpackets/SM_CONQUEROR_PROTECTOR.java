@@ -7,33 +7,35 @@ import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 
 /**
- * @author Source & xTz
+ * SM_SERIAL_KILLER pre 4.8
+ * 
+ * @author Source, xTz
  */
-public class SM_SERIAL_KILLER extends AionServerPacket {
+public class SM_CONQUEROR_PROTECTOR extends AionServerPacket {
 
 	private int type;
-	private int debuffLvl;
+	private int buffLvl;
 	private int cooldown;
 	private Player player;
 	private Collection<Player> players;
 
-	public SM_SERIAL_KILLER(int type, int debuffLvl, int cooldown) {
+	public SM_CONQUEROR_PROTECTOR(int type, int buffLvl, int cooldown) {
 		this.type = type;
-		this.debuffLvl = debuffLvl;
+		this.buffLvl = buffLvl;
 		this.cooldown = cooldown;
 	}
 
-	public SM_SERIAL_KILLER(int type, int debuffLvl) {
+	public SM_CONQUEROR_PROTECTOR(int type, int buffLvl) {
 		this.type = type;
-		this.debuffLvl = debuffLvl;
+		this.buffLvl = buffLvl;
 	}
-	
-	public SM_SERIAL_KILLER(int type, Player player) {
+
+	public SM_CONQUEROR_PROTECTOR(int type, Player player) {
 		this.type = type;
 		this.player = player;
 	}
 
-	public SM_SERIAL_KILLER(Collection<Player> players) {
+	public SM_CONQUEROR_PROTECTOR(Collection<Player> players) {
 		this.type = 5;
 		this.players = players;
 	}
@@ -44,18 +46,18 @@ public class SM_SERIAL_KILLER extends AionServerPacket {
 		writeD(0x01);
 		writeD(0x01);
 		switch (type) {
-			case 0: //killer + no announcement
-			case 1: //killer + announcement
-			case 7: //guard + cd no announcement
-			case 8: //guard + announcement
+			case 0: // conqueror + no announcement
+			case 1: // conqueror + announcement
+			case 7: // protector + cd no announcement
+			case 8: // protector + announcement
 				writeH(0x01);
-				writeD(debuffLvl);
-				writeD(cooldown); //cooldown
+				writeD(buffLvl);
+				writeD(cooldown); // cooldown
 				break;
 			case 5:
 				writeH(players.size());
 				for (Player player : players) {
-					writeD(player.getSKInfo().getRank());
+					writeD(player.getCPInfo().getRank());
 					writeD(player.getObjectId());
 					writeD(0x01); // unk
 					writeD(player.getAbyssRank().getRank().getId());
@@ -70,10 +72,10 @@ public class SM_SERIAL_KILLER extends AionServerPacket {
 					writeH(7); // unk
 				}
 				break;
-			case 6: //killer
-			case 9: //guard
+			case 6: // conqueror
+			case 9: // protector
 				writeH(0x01);// unk
-				writeD(player.getSKInfo().getRank());
+				writeD(player.getCPInfo().getRank());
 				writeD(player.getObjectId());
 				break;
 		}

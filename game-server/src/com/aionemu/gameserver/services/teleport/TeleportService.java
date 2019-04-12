@@ -52,8 +52,8 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_TELEPORT_LOC;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_TELEPORT_MAP;
 import com.aionemu.gameserver.services.DuelService;
 import com.aionemu.gameserver.services.PrivateStoreService;
-import com.aionemu.gameserver.services.SerialKillerService;
 import com.aionemu.gameserver.services.SiegeService;
+import com.aionemu.gameserver.services.conquerorAndProtectorSystem.ConquerorAndProtectorService;
 import com.aionemu.gameserver.services.instance.InstanceService;
 import com.aionemu.gameserver.services.item.ItemPacketService.ItemUpdateType;
 import com.aionemu.gameserver.services.player.PlayerReviveService;
@@ -238,7 +238,7 @@ public class TeleportService {
 
 	public static void teleportDeadTo(Player player, int worldId, int instanceId, float x, float y, float z, byte heading) {
 		if (player.getWorldId() != worldId || player.getInstanceId() != instanceId) {
-			SerialKillerService.getInstance().onLeaveMap(player);
+			ConquerorAndProtectorService.getInstance().onLeaveMap(player);
 			InstanceService.onLeaveInstance(player);
 		}
 		World.getInstance().setPosition(player, worldId, instanceId, x, y, z, heading);
@@ -550,7 +550,7 @@ public class TeleportService {
 			int currentWorldId = player.getWorldId();
 			int currentInstance = player.getInstanceId();
 			if (currentWorldId != worldId || currentInstance != instanceId) {
-				SerialKillerService.getInstance().onLeaveMap(player);
+				ConquerorAndProtectorService.getInstance().onLeaveMap(player);
 				InstanceService.onLeaveInstance(player);
 			}
 			World.getInstance().setPosition(player, worldId, instanceId, x, y, z, h);

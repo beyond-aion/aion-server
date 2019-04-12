@@ -77,7 +77,6 @@ import com.aionemu.gameserver.services.MonsterRaidService;
 import com.aionemu.gameserver.services.PeriodicSaveService;
 import com.aionemu.gameserver.services.RiftService;
 import com.aionemu.gameserver.services.RoadService;
-import com.aionemu.gameserver.services.SerialKillerService;
 import com.aionemu.gameserver.services.ShieldService;
 import com.aionemu.gameserver.services.SiegeService;
 import com.aionemu.gameserver.services.TownService;
@@ -85,6 +84,7 @@ import com.aionemu.gameserver.services.VortexService;
 import com.aionemu.gameserver.services.WeatherService;
 import com.aionemu.gameserver.services.abyss.AbyssRankUpdateService;
 import com.aionemu.gameserver.services.abyss.AbyssRankingCache;
+import com.aionemu.gameserver.services.conquerorAndProtectorSystem.ConquerorAndProtectorService;
 import com.aionemu.gameserver.services.drop.DropRegistrationService;
 import com.aionemu.gameserver.services.event.EventService;
 import com.aionemu.gameserver.services.instance.InstanceService;
@@ -278,8 +278,8 @@ public class GameServer {
 		ConsoleUtil.printSection("Monster Raid");
 		MonsterRaidService.getInstance().initMonsterRaids();
 
-		ConsoleUtil.printSection("Serial Killers");
-		SerialKillerService.getInstance().initSerialKillers();
+		ConsoleUtil.printSection("Conqueror And Protector system");
+		ConquerorAndProtectorService.getInstance().init();
 
 		ConsoleUtil.printSection("TaskManagers");
 		AnnouncementService.getInstance();

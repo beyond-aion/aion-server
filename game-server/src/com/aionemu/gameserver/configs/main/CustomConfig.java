@@ -213,22 +213,22 @@ public class CustomConfig {
 	@Property(key = "gameserver.vortex.duration", defaultValue = "1")
 	public static int VORTEX_DURATION;
 
-	@Property(key = "gameserver.serialkiller.enable", defaultValue = "true")
-	public static boolean SERIALKILLER_ENABLED;
-	@Property(key = "gameserver.serialkiller.handledworlds", defaultValue = "210020000,210040000,210050000,210070000,220020000,220040000,220070000,220080000")
-	public static Set<Integer> SERIALKILLER_WORLDS;
-	@Property(key = "gameserver.serialkiller.kills.refresh", defaultValue = "10")
-	public static int SERIALKILLER_REFRESH;
-	@Property(key = "gameserver.serialkiller.kills.decrease", defaultValue = "1")
-	public static int SERIALKILLER_DECREASE;
-	@Property(key = "gameserver.serialkiller.level.diff", defaultValue = "5")
-	public static int SERIALKILLER_LEVEL_DIFF;
-	@Property(key = "gameserver.serialkiller.1st.rank.kills", defaultValue = "1")
-	public static int KILLER_1ST_RANK_KILLS;
-	@Property(key = "gameserver.serialkiller.2nd.rank.kills", defaultValue = "10")
-	public static int KILLER_2ND_RANK_KILLS;
-	@Property(key = "gameserver.serialkiller.3nd.rank.kills", defaultValue = "30")
-	public static int KILLER_3ND_RANK_KILLS;
+	@Property(key = "gameserver.cp.enable", defaultValue = "true")
+	public static boolean CONQUEROR_AND_PROTECTOR_SYSTEM_ENABLED;
+	@Property(key = "gameserver.cp.worlds", defaultValue = "210020000,210040000,210050000,210070000,220020000,220040000,220070000,220080000")
+	public static Set<Integer> CONQUEROR_AND_PROTECTOR_WORLDS;
+	@Property(key = "gameserver.cp.level.diff", defaultValue = "5")
+	public static int CONQUEROR_AND_PROTECTOR_LEVEL_DIFF;
+	@Property(key = "gameserver.cp.kills.decrease_interval_minutes", defaultValue = "10")
+	public static int CONQUEROR_AND_PROTECTOR_KILLS_DECREASE_INTERVAL;
+	@Property(key = "gameserver.cp.kills.decrease_count", defaultValue = "1")
+	public static int CONQUEROR_AND_PROTECTOR_KILLS_DECREASE_COUNT;
+	@Property(key = "gameserver.cp.kills.rank1", defaultValue = "1")
+	public static int CONQUEROR_AND_PROTECTOR_KILLS_RANK1;
+	@Property(key = "gameserver.cp.kills.rank2", defaultValue = "10")
+	public static int CONQUEROR_AND_PROTECTOR_KILLS_RANK2;
+	@Property(key = "gameserver.cp.kills.rank3", defaultValue = "20")
+	public static int CONQUEROR_AND_PROTECTOR_KILLS_RANK3;
 
 	/**
 	 * Limits Config

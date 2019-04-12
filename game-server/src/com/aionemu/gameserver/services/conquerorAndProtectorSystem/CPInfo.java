@@ -1,21 +1,21 @@
-package com.aionemu.gameserver.services.serialkillers;
+package com.aionemu.gameserver.services.conquerorAndProtectorSystem;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 
 /**
  * @author Source
  */
-public class SerialKiller {
+public class CPInfo {
 
 	private final int playerId;
-	private int killerRank;
+	private int rank;
 	private int ldRank;
 	private int victims;
-	private SerialKillerDebuff buff;
+	private CPBuff buff;
 
-	public SerialKiller(Player owner) {
+	public CPInfo(Player owner) {
 		playerId = owner.getObjectId();
-		buff = new SerialKillerDebuff();
+		buff = new CPBuff();
 	}
 
 	public int getPlayerId() {
@@ -23,7 +23,7 @@ public class SerialKiller {
 	}
 
 	public void setRank(int rank) {
-		killerRank = rank;
+		this.rank = rank;
 	}
 
 	public void setLDRank(int rank) {
@@ -31,7 +31,7 @@ public class SerialKiller {
 	}
 
 	public int getRank() {
-		return killerRank;
+		return rank;
 	}
 
 	public int getLDRank() {
@@ -46,7 +46,7 @@ public class SerialKiller {
 		this.victims = victims;
 	}
 
-	public SerialKillerDebuff getBuff() {
+	public CPBuff getBuff() {
 		return buff;
 	}
 

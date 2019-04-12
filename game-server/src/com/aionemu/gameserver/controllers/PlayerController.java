@@ -88,8 +88,8 @@ import com.aionemu.gameserver.services.HTMLService;
 import com.aionemu.gameserver.services.LegionService;
 import com.aionemu.gameserver.services.PvpService;
 import com.aionemu.gameserver.services.QuestService;
-import com.aionemu.gameserver.services.SerialKillerService;
 import com.aionemu.gameserver.services.SkillLearnService;
+import com.aionemu.gameserver.services.conquerorAndProtectorSystem.ConquerorAndProtectorService;
 import com.aionemu.gameserver.services.drop.DropService;
 import com.aionemu.gameserver.services.instance.InstanceService;
 import com.aionemu.gameserver.services.reward.PromotionKitService;
@@ -225,7 +225,7 @@ public class PlayerController extends CreatureController<Player> {
 		Player player = getOwner();
 		if (!zone.canRide() && player.isInPlayerMode(PlayerMode.RIDE))
 			player.unsetPlayerMode(PlayerMode.RIDE);
-		SerialKillerService.getInstance().onEnterZone(player, zone);
+		ConquerorAndProtectorService.getInstance().onEnterZone(player, zone);
 		InstanceService.onEnterZone(player, zone);
 		ZoneName zoneName = zone.getAreaTemplate().getZoneName();
 		if (zoneName == null)
@@ -237,7 +237,7 @@ public class PlayerController extends CreatureController<Player> {
 	@Override
 	public void onLeaveZone(ZoneInstance zone) {
 		Player player = getOwner();
-		SerialKillerService.getInstance().onLeaveZone(player, zone);
+		ConquerorAndProtectorService.getInstance().onLeaveZone(player, zone);
 		InstanceService.onLeaveZone(player, zone);
 		ZoneName zoneName = zone.getAreaTemplate().getZoneName();
 		if (zoneName == null)
@@ -391,7 +391,7 @@ public class PlayerController extends CreatureController<Player> {
 			return;
 		}
 		int kiskTimeRemaining = (player.getKisk() != null ? player.getKisk().getRemainingLifetime() : 0);
-		if (player.getSKInfo().getRank() > 1)
+		if (player.getCPInfo().getRank() > 1)
 			kiskTimeRemaining = 0;
 		PacketSendUtility.sendPacket(player, new SM_DIE(player.canUseRebirthRevive(), player.haveSelfRezItem(), kiskTimeRemaining, 0, isInvader(player)));
 	}

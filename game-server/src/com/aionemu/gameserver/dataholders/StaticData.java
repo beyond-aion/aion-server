@@ -246,8 +246,8 @@ public class StaticData {
 	@XmlElement(name = "challenge_tasks")
 	public ChallengeData challengeData;
 
-	@XmlElement(name = "serial_killers")
-	public SerialKillerData serialKillerData;
+	@XmlElement(name = "conqueror_protector_ranks")
+	public ConquerorAndProtectorData conquerorAndProtectorData;
 
 	@XmlElement(name = "town_spawns_data")
 	public TownSpawnsData townSpawnsData;
@@ -376,7 +376,7 @@ public class StaticData {
 		log.info("Loaded " + curingObjectsData.size() + " curing object entries");
 		log.info("Loaded " + assemblyItemData.size() + " assembly items entries");
 		log.info("Loaded " + challengeData.size() + " challenge tasks entries");
-		log.info("Loaded " + serialKillerData.size() + " serialKiller entries");
+		log.info("Loaded " + conquerorAndProtectorData.size() + " conqueror and protector entries");
 		log.info("Loaded " + townSpawnsData.getSpawnsCount() + " town spawns");
 		log.info("Loaded " + temperingData.size() + " temperings");
 		log.info("Loaded " + enchantData.size() + " enchants");

@@ -86,7 +86,7 @@ public final class DataManager {
 	public static RideData RIDE_DATA;
 	public static RiftData RIFT_DATA;
 	public static RoadData ROAD_DATA;
-	public static SerialKillerData SERIAL_KILLER_DATA;
+	public static ConquerorAndProtectorData CONQUEROR_AND_PROTECTOR_DATA;
 	public static ShieldData SHIELD_DATA;
 	public static SiegeLocationData SIEGE_LOCATION_DATA;
 	public static SkillChargeData SKILL_CHARGE_DATA;
@@ -200,7 +200,7 @@ public final class DataManager {
 		SYSTEM_MAIL_TEMPLATES = data.systemMailTemplates;
 		CHALLENGE_DATA = data.challengeData;
 		TOWN_SPAWNS_DATA = data.townSpawnsData;
-		SERIAL_KILLER_DATA = data.serialKillerData;
+		CONQUEROR_AND_PROTECTOR_DATA = data.conquerorAndProtectorData;
 		ENCHANT_DATA = data.enchantData;
 		TEMPERING_DATA = data.temperingData;
 		GLOBAL_DROP_DATA = data.globalDropData;

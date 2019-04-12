@@ -123,7 +123,7 @@
 	<import file="ride/ride.xml" />
 	<import file="rift/rift_locations.xml" />
 	<import file="roads/roads.xml" />
-	<import file="serial_killer/serial_killer.xml" />
+	<import file="conqueror_protector_ranks/conqueror_protector_ranks.xml" />
 	<import file="siege/siege_locations.xml" />
 	<import file="siege/siege_shields.xml" />
 	<import file="skills/motion_times.xml" />

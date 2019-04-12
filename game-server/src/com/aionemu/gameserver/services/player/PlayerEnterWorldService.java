@@ -105,13 +105,13 @@ import com.aionemu.gameserver.services.KiskService;
 import com.aionemu.gameserver.services.LegionService;
 import com.aionemu.gameserver.services.PunishmentService;
 import com.aionemu.gameserver.services.PunishmentService.PunishmentType;
-import com.aionemu.gameserver.services.SerialKillerService;
 import com.aionemu.gameserver.services.SiegeService;
 import com.aionemu.gameserver.services.StigmaService;
 import com.aionemu.gameserver.services.SurveyService;
 import com.aionemu.gameserver.services.VortexService;
 import com.aionemu.gameserver.services.WarehouseService;
 import com.aionemu.gameserver.services.abyss.AbyssSkillService;
+import com.aionemu.gameserver.services.conquerorAndProtectorSystem.ConquerorAndProtectorService;
 import com.aionemu.gameserver.services.craft.RelinquishCraftStatus;
 import com.aionemu.gameserver.services.event.EventService;
 import com.aionemu.gameserver.services.instance.InstanceService;
@@ -444,7 +444,7 @@ public final class PlayerEnterWorldService {
 		// Trigger restore services on login.
 		player.getLifeStats().updateCurrentStats();
 		player.getObserveController().notifyHPChangeObservers(player.getLifeStats().getCurrentHp());
-		SerialKillerService.getInstance().onLogin(player);
+		ConquerorAndProtectorService.getInstance().onLogin(player);
 
 		if (HTMLConfig.ENABLE_HTML_WELCOME)
 			HTMLService.showHTML(player, HTMLCache.getInstance().getHTML("welcome.xhtml"));

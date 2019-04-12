@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<serial_killers xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="serial_killer.xsd">
+<conqueror_protector_ranks xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="conqueror_protector_ranks.xsd">
 	<rank_restriction type="KILLER" race="ELYOS" rank_num="1" restrict_direct_portal="false" restrict_dynamic_bindstone="false">
 		<penalty_attr stat="PVP_ATTACK_RATIO" func="PERCENT" value="10"/>
 	</rank_restriction>
@@ -36,4 +36,4 @@
 	<rank_restriction type="GUARD" race="ASMODIANS" rank_num="3" restrict_direct_portal="false" restrict_dynamic_bindstone="false">
 		<penalty_attr stat="PVP_DEFEND_RATIO" func="PERCENT" value="60"/>
 	</rank_restriction>
-</serial_killers>
+</conqueror_protector_ranks>

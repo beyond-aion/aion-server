@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
-import com.aionemu.gameserver.services.SerialKillerService;
+import com.aionemu.gameserver.services.conquerorAndProtectorSystem.ConquerorAndProtectorService;
 
 /**
  * @author Lyahim
@@ -32,7 +32,7 @@ public class CM_SHOW_MAP extends AionClientPacket {
 		Player player = getConnection().getActivePlayer();
 		switch (action) {
 			case 0:
-				SerialKillerService.getInstance().intruderScan(player);
+				ConquerorAndProtectorService.getInstance().intruderScan(player);
 				break;
 			case 1:
 				// TODO unk

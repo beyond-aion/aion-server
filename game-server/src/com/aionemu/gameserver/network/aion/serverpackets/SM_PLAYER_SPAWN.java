@@ -45,7 +45,7 @@ public class SM_PLAYER_SPAWN extends AionServerPacket {
 		// 7 - Boost Moral, boost pvp physical and magical defense by 90%, movement speed by 50%, magical resist by 9999, all altered state resist by 1000
 		// 8 - Boost Moral, boost pvp physical and magical defense by 90%, movement speed by 50%, magical resist by 9999, all altered state resist by 1000
 		// 9 - I never lose, boost pvp physical/magical attack/defense by 10%
-		if (player.getSKInfo().getRank() > 0) {
+		if (player.getCPInfo().getRank() > 0) {
 			writeD(1);
 		} else {
 			writeD(0);

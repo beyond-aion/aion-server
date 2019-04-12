@@ -1,4 +1,4 @@
-package com.aionemu.gameserver.services.serialkillers;
+package com.aionemu.gameserver.services.conquerorAndProtectorSystem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +15,7 @@ import com.aionemu.gameserver.model.templates.serial_killer.RankRestriction;
 /**
  * @author Dtem
  */
-public class SerialKillerDebuff implements StatOwner {
+public class CPBuff implements StatOwner {
 
 	private List<IStatFunction> functions = new ArrayList<>();
 	private RankRestriction rankRestriction;
@@ -23,7 +23,7 @@ public class SerialKillerDebuff implements StatOwner {
 	public void applyEffect(Player player, String type, Race race, int rank) {
 		if (rank == 0)
 			return;
-		rankRestriction = DataManager.SERIAL_KILLER_DATA.getRankRestriction(type, race, rank);
+		rankRestriction = DataManager.CONQUEROR_AND_PROTECTOR_DATA.getRankRestriction(type, race, rank);
 		if (rankRestriction == null) {
 			return;
 		}
@@ -33,7 +33,7 @@ public class SerialKillerDebuff implements StatOwner {
 		for (RankPenaltyAttr rankPenaltyAttr : rankRestriction.getPenaltyAttr()) {
 				functions.add(new StatAddFunction(rankPenaltyAttr.getStat(), rankPenaltyAttr.getValue(), true));
 		}
-		player.getGameStats().addEffect(SerialKillerDebuff.this, functions);
+		player.getGameStats().addEffect(CPBuff.this, functions);
 	}
 
 	public boolean hasDebuff() {

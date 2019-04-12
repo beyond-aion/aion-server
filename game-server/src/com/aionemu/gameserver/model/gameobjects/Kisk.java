@@ -17,7 +17,7 @@ import com.aionemu.gameserver.model.templates.stats.KiskStatsTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_KISK_UPDATE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.LegionService;
-import com.aionemu.gameserver.services.SerialKillerService;
+import com.aionemu.gameserver.services.conquerorAndProtectorSystem.ConquerorAndProtectorService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.World;
 
@@ -152,7 +152,7 @@ public class Kisk extends SummonedObject<Player> {
 	}
 
 	private boolean isUseAllowed(Player player) {
-		if (SerialKillerService.getInstance().isRestrictDynamicBindstone(player))
+		if (ConquerorAndProtectorService.getInstance().isRestrictDynamicBindstone(player))
 			return false;
 
 		switch (getUseMask()) {

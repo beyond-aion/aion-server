@@ -145,7 +145,7 @@ public class PlayerReviveService {
 			TeleportService.teleportToEvent(player);
 
 		// TODO: find right place for this
-		if (player.getSKInfo().getRank() > 1) {
+		if (player.getCPInfo().getRank() > 1) {
 			bindRevive(player);
 			return;
 		}

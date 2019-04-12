@@ -16,8 +16,8 @@ import com.aionemu.gameserver.model.templates.serial_killer.RankRestriction;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = { "rankRestriction" })
-@XmlRootElement(name = "serial_killers")
-public class SerialKillerData {
+@XmlRootElement(name = "conqueror_protector_ranks")
+public class ConquerorAndProtectorData {
 
 	@XmlElement(name = "rank_restriction")
 	protected List<RankRestriction> rankRestriction;

@@ -71,7 +71,7 @@
 	<xs:include schemaLocation="ride/ride.xsd" />
 	<xs:include schemaLocation="rift/rift_locations.xsd" />
 	<xs:include schemaLocation="roads/roads.xsd" />
-	<xs:include schemaLocation="serial_killer/serial_killer.xsd" />
+	<xs:include schemaLocation="conqueror_protector_ranks/conqueror_protector_ranks.xsd" />
 	<xs:include schemaLocation="siege/siege_locations.xsd" />
 	<xs:include schemaLocation="siege/siege_shields.xsd" />
 	<xs:include schemaLocation="skill_tree/skill_tree.xsd" />
@@ -170,7 +170,7 @@
 					<xs:element ref="rides" minOccurs="0" />
 					<xs:element ref="rift_locations" minOccurs="0" />
 					<xs:element ref="roads" minOccurs="0" />
-					<xs:element ref="serial_killers" minOccurs="0" />
+					<xs:element ref="conqueror_protector_ranks" minOccurs="0" />
 					<xs:element ref="shields" minOccurs="0" />
 					<xs:element ref="siege_locations" minOccurs="0" />
 					<xs:element ref="skill_charge" minOccurs="0" />

@@ -99,7 +99,7 @@ public class ServerPacketsOpcodes {
 		addPacketOpcode(SM_TARGET_UPDATE.class, 0x51);
 		addPacketOpcode(SM_HOUSE_EDIT.class, 0x52);
 		addPacketOpcode(SM_PLASTIC_SURGERY.class, 0x53);
-		addPacketOpcode(SM_SERIAL_KILLER.class, 0x54);
+		addPacketOpcode(SM_CONQUEROR_PROTECTOR.class, 0x54);
 		addPacketOpcode(SM_INFLUENCE_RATIO.class, 0x55);
 		addPacketOpcode(SM_FORTRESS_STATUS.class, 0x56);
 		addPacketOpcode(SM_CAPTCHA.class, 0x57);

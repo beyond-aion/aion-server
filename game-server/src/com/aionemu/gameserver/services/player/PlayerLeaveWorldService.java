@@ -39,7 +39,7 @@ import com.aionemu.gameserver.services.KiskService;
 import com.aionemu.gameserver.services.LegionService;
 import com.aionemu.gameserver.services.PunishmentService;
 import com.aionemu.gameserver.services.RepurchaseService;
-import com.aionemu.gameserver.services.SerialKillerService;
+import com.aionemu.gameserver.services.conquerorAndProtectorSystem.ConquerorAndProtectorService;
 import com.aionemu.gameserver.services.drop.DropService;
 import com.aionemu.gameserver.services.findgroup.FindGroupService;
 import com.aionemu.gameserver.services.instance.InstanceService;
@@ -103,7 +103,7 @@ public class PlayerLeaveWorldService {
 		RepurchaseService.getInstance().removeRepurchaseItems(player);
 		if (AutoGroupConfig.AUTO_GROUP_ENABLE)
 			AutoGroupService.getInstance().onPlayerLogOut(player);
-		SerialKillerService.getInstance().onLeaveMap(player);
+		ConquerorAndProtectorService.getInstance().onLeaveMap(player);
 		InstanceService.onLogOut(player);
 		GMService.getInstance().onPlayerLogout(player);
 		KiskService.getInstance().onLogout(player);

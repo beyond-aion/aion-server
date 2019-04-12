@@ -14,8 +14,8 @@ import com.aionemu.gameserver.model.vortex.VortexLocation;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUESTION_WINDOW;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.RiftService;
-import com.aionemu.gameserver.services.SerialKillerService;
 import com.aionemu.gameserver.services.VortexService;
+import com.aionemu.gameserver.services.conquerorAndProtectorSystem.ConquerorAndProtectorService;
 import com.aionemu.gameserver.services.rift.RiftEnum;
 import com.aionemu.gameserver.services.rift.RiftInformer;
 import com.aionemu.gameserver.services.rift.RiftManager;
@@ -88,7 +88,7 @@ public class RVController extends NpcController {
 			return;
 		}
 
-		if (SerialKillerService.getInstance().isRestrictPortal(player)) {
+		if (ConquerorAndProtectorService.getInstance().isRestrictPortal(player)) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_USE_DIRECT_PORTAL_BY_SLAYER());
 			return;
 		}

@@ -36,6 +36,7 @@ import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.services.abyss.AbyssPointsService;
 import com.aionemu.gameserver.services.abyss.AbyssService;
+import com.aionemu.gameserver.services.conquerorAndProtectorSystem.ConquerorAndProtectorService;
 import com.aionemu.gameserver.services.event.EventService;
 import com.aionemu.gameserver.services.item.ItemPacketService.ItemAddType;
 import com.aionemu.gameserver.services.item.ItemPacketService.ItemUpdateType;
@@ -181,9 +182,9 @@ public class PvpService {
 				playerDamage += aggro.getDamage();
 		}
 
-		SerialKillerService.getInstance().updateRank(winner, victim);
+		ConquerorAndProtectorService.getInstance().updateRank(winner, victim);
 
-		SerialKillerService.getInstance().onKillSerialKiller(winner, victim);
+		ConquerorAndProtectorService.getInstance().onKillSerialKiller(winner, victim);
 
 		if (winner.getRace() != victim.getRace()) {
 			// notify Quest engine for winner + his group
