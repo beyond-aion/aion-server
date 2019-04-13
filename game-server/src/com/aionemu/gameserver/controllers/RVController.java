@@ -15,7 +15,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_QUESTION_WINDOW;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.RiftService;
 import com.aionemu.gameserver.services.VortexService;
-import com.aionemu.gameserver.services.conquerorAndProtectorSystem.ConquerorAndProtectorService;
 import com.aionemu.gameserver.services.rift.RiftEnum;
 import com.aionemu.gameserver.services.rift.RiftInformer;
 import com.aionemu.gameserver.services.rift.RiftManager;
@@ -84,16 +83,8 @@ public class RVController extends NpcController {
 
 	@Override
 	public void onDialogRequest(Player player) {
-		if (!isMaster && !isAccepting) {
-			return;
-		}
-
-		if (ConquerorAndProtectorService.getInstance().isRestrictPortal(player)) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_USE_DIRECT_PORTAL_BY_SLAYER());
-			return;
-		}
-
-		onRequest(player);
+		if (isMaster || isAccepting)
+			onRequest(player);
 	}
 
 	private void onRequest(Player player) {

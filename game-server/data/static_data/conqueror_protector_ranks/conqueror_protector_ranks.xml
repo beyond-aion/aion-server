@@ -1,39 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <conqueror_protector_ranks xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="conqueror_protector_ranks.xsd">
-	<rank_restriction type="KILLER" race="ELYOS" rank_num="1" restrict_direct_portal="false" restrict_dynamic_bindstone="false">
-		<penalty_attr stat="PVP_ATTACK_RATIO" func="PERCENT" value="10"/>
-	</rank_restriction>
-	<rank_restriction type="KILLER" race="ELYOS" rank_num="2" restrict_direct_portal="false" restrict_dynamic_bindstone="false">
-		<penalty_attr stat="PVP_ATTACK_RATIO" func="PERCENT" value="20"/>
-	</rank_restriction>
-	<rank_restriction type="KILLER" race="ELYOS" rank_num="3" restrict_direct_portal="false" restrict_dynamic_bindstone="false">
-		<penalty_attr stat="PVP_ATTACK_RATIO" func="PERCENT" value="30"/>
-	</rank_restriction>
-	<rank_restriction type="KILLER" race="ASMODIANS" rank_num="1" restrict_direct_portal="false" restrict_dynamic_bindstone="false">
-		<penalty_attr stat="PVP_ATTACK_RATIO" func="PERCENT" value="10"/>
-	</rank_restriction>
-	<rank_restriction type="KILLER" race="ASMODIANS" rank_num="2" restrict_direct_portal="false" restrict_dynamic_bindstone="false">
-		<penalty_attr stat="PVP_ATTACK_RATIO" func="PERCENT" value="20"/>
-	</rank_restriction>
-	<rank_restriction type="KILLER" race="ASMODIANS" rank_num="3" restrict_direct_portal="false" restrict_dynamic_bindstone="false">
-		<penalty_attr stat="PVP_ATTACK_RATIO" func="PERCENT" value="30"/>
-	</rank_restriction>
-	<rank_restriction type="GUARD" race="ELYOS" rank_num="1" restrict_direct_portal="false" restrict_dynamic_bindstone="false">
-		<penalty_attr stat="PVP_DEFEND_RATIO" func="PERCENT" value="20"/>
-	</rank_restriction>
-	<rank_restriction type="GUARD" race="ELYOS" rank_num="2" restrict_direct_portal="false" restrict_dynamic_bindstone="false">
-		<penalty_attr stat="PVP_DEFEND_RATIO" func="PERCENT" value="40"/>
-	</rank_restriction>
-	<rank_restriction type="GUARD" race="ELYOS" rank_num="3" restrict_direct_portal="false" restrict_dynamic_bindstone="false">
-		<penalty_attr stat="PVP_DEFEND_RATIO" func="PERCENT" value="60"/>
-	</rank_restriction>
-	<rank_restriction type="GUARD" race="ASMODIANS" rank_num="1" restrict_direct_portal="false" restrict_dynamic_bindstone="false">
-		<penalty_attr stat="PVP_DEFEND_RATIO" func="PERCENT" value="20"/>
-	</rank_restriction>
-	<rank_restriction type="GUARD" race="ASMODIANS" rank_num="2" restrict_direct_portal="false" restrict_dynamic_bindstone="false">
-		<penalty_attr stat="PVP_DEFEND_RATIO" func="PERCENT" value="40"/>
-	</rank_restriction>
-	<rank_restriction type="GUARD" race="ASMODIANS" rank_num="3" restrict_direct_portal="false" restrict_dynamic_bindstone="false">
-		<penalty_attr stat="PVP_DEFEND_RATIO" func="PERCENT" value="60"/>
-	</rank_restriction>
+	<rank type="CONQUEROR" rank_num="1">
+		<modifiers>
+			<add name="PVP_ATTACK_RATIO" value="10" bonus="true"/>
+		</modifiers>
+	</rank>
+	<rank type="CONQUEROR" rank_num="2">
+		<modifiers>
+			<add name="PVP_ATTACK_RATIO" value="20" bonus="true"/>
+		</modifiers>
+	</rank>
+	<rank type="CONQUEROR" rank_num="3">
+		<modifiers>
+			<add name="PVP_ATTACK_RATIO" value="30" bonus="true"/>
+		</modifiers>
+	</rank>
+	<rank type="PROTECTOR" rank_num="1" visible_intruder_min_rank="3">
+		<modifiers>
+			<add name="PVP_DEFEND_RATIO" value="20" bonus="true"/>
+		</modifiers>
+	</rank>
+	<rank type="PROTECTOR" rank_num="2" visible_intruder_min_rank="2">
+		<modifiers>
+			<add name="PVP_DEFEND_RATIO" value="40" bonus="true"/>
+		</modifiers>
+	</rank>
+	<rank type="PROTECTOR" rank_num="3" visible_intruder_min_rank="1">
+		<modifiers>
+			<add name="PVP_DEFEND_RATIO" value="60" bonus="true"/>
+		</modifiers>
+	</rank>
 </conqueror_protector_ranks>

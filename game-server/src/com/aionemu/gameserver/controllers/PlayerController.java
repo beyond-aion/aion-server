@@ -391,8 +391,6 @@ public class PlayerController extends CreatureController<Player> {
 			return;
 		}
 		int kiskTimeRemaining = (player.getKisk() != null ? player.getKisk().getRemainingLifetime() : 0);
-		if (player.getCPInfo().getRank() > 1)
-			kiskTimeRemaining = 0;
 		PacketSendUtility.sendPacket(player, new SM_DIE(player.canUseRebirthRevive(), player.haveSelfRezItem(), kiskTimeRemaining, 0, isInvader(player)));
 	}
 

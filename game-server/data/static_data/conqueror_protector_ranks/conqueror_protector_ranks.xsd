@@ -4,35 +4,22 @@
 	<xs:element name="conqueror_protector_ranks">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:element name="rank_restriction" type="RankRestriction" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element name="rank" type="CPRank" minOccurs="0" maxOccurs="unbounded"/>
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
-	<xs:complexType name="RankRestriction">
+	<xs:complexType name="CPRank">
 		<xs:sequence>
-			<xs:element name="penalty_attr" type="RankPenaltyAttr" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="modifiers" type="Modifiers" minOccurs="0"/>
 		</xs:sequence>
-		<xs:attribute name="type" type="rankType" use="required"/>
-		<xs:attribute name="race" type="rankRace" use="required"/>
+		<xs:attribute name="type" type="CPType" use="required"/>
 		<xs:attribute name="rank_num" type="xs:int" use="required"/>
-		<xs:attribute name="restrict_direct_portal" type="xs:boolean" use="required"/>
-		<xs:attribute name="restrict_dynamic_bindstone" type="xs:boolean" use="required"/>
+		<xs:attribute name="visible_intruder_min_rank" type="xs:int"/>
 	</xs:complexType>
-	<xs:complexType name="RankPenaltyAttr">
-		<xs:attribute name="stat" type="modifiersenum" use="required"/>
-		<xs:attribute name="func" type="StatFunc" use="required"/>
-		<xs:attribute name="value" type="xs:int" use="required"/>
-	</xs:complexType>
-	<xs:simpleType name="rankType">
+	<xs:simpleType name="CPType">
 		<xs:restriction base="xs:string">
-			<xs:enumeration value="KILLER"/>
-			<xs:enumeration value="GUARD"/>
-		</xs:restriction>
-	</xs:simpleType>
-	<xs:simpleType name="rankRace">
-		<xs:restriction base="xs:string">
-			<xs:enumeration value="ELYOS"/>
-			<xs:enumeration value="ASMODIANS"/>
+			<xs:enumeration value="CONQUEROR"/>
+			<xs:enumeration value="PROTECTOR"/>
 		</xs:restriction>
 	</xs:simpleType>
 </xs:schema>

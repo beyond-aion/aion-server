@@ -10,8 +10,10 @@ import com.aionemu.gameserver.model.gameobjects.player.PlayerAppearance;
 import com.aionemu.gameserver.model.gameobjects.player.PlayerCommonData;
 import com.aionemu.gameserver.model.items.ItemSlot;
 import com.aionemu.gameserver.model.stats.calc.Stat2;
+import com.aionemu.gameserver.model.templates.cp.CPType;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
+import com.aionemu.gameserver.services.conquerorAndProtectorSystem.CPInfo;
 import com.aionemu.gameserver.services.conquerorAndProtectorSystem.ConquerorAndProtectorService;
 
 /**
@@ -239,9 +241,9 @@ public class SM_PLAYER_INFO extends AionServerPacket {
 		writeD(0x01); // unk 4.7
 		writeC(3); // can be 3 or 5 on elyos side (3 is more common), not sure what it's for (TODO: check asmo side)
 
-		boolean isEnemyWorld = ConquerorAndProtectorService.getInstance().isEnemyWorld(player);
-		writeC(isEnemyWorld ? player.getCPInfo().getRank() : 0); // Conqueror rank
-		writeC(!isEnemyWorld ? player.getCPInfo().getRank() : 0); // Protector rank
+		CPInfo cpInfo = ConquerorAndProtectorService.getInstance().getCPInfoForCurrentMap(player);
+		writeC(cpInfo != null && cpInfo.getType() == CPType.CONQUEROR ? cpInfo.getRank() : 0); // Conqueror rank
+		writeC(cpInfo != null && cpInfo.getType() == CPType.PROTECTOR ? cpInfo.getRank() : 0); // Protector rank
 
 		writeC(0); // Officer rank icon
 	}

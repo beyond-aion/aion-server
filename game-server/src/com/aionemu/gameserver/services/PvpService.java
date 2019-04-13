@@ -66,7 +66,7 @@ public class PvpService {
 		pvpKillLists = new LinkedHashMap<>();
 	}
 
-	public static final PvpService getInstance() {
+	public static PvpService getInstance() {
 		return SingletonHolder.INSTANCE;
 	}
 
@@ -78,8 +78,7 @@ public class PvpService {
 			if (type == BountyType.PER_X_KILLS) {
 				bounties.add(Rnd.get(template.getBounties()));
 			} else {
-				for (BountyTemplate bounty : template.getBounties())
-					bounties.add(bounty);
+				bounties.addAll(template.getBounties());
 			}
 			for (BountyTemplate bounty : bounties)
 				ItemService.addItem(player, bounty.getItemId(), bounty.getCount(), true,
@@ -182,9 +181,7 @@ public class PvpService {
 				playerDamage += aggro.getDamage();
 		}
 
-		ConquerorAndProtectorService.getInstance().updateRank(winner, victim);
-
-		ConquerorAndProtectorService.getInstance().onKillSerialKiller(winner, victim);
+		ConquerorAndProtectorService.getInstance().onKill(winner, victim);
 
 		if (winner.getRace() != victim.getRace()) {
 			// notify Quest engine for winner + his group

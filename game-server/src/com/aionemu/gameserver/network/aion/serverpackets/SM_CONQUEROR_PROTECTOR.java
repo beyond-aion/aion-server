@@ -5,6 +5,8 @@ import java.util.Collection;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
+import com.aionemu.gameserver.services.conquerorAndProtectorSystem.CPInfo;
+import com.aionemu.gameserver.services.conquerorAndProtectorSystem.ConquerorAndProtectorService;
 
 /**
  * SM_SERIAL_KILLER pre 4.8
@@ -17,7 +19,7 @@ public class SM_CONQUEROR_PROTECTOR extends AionServerPacket {
 	private int buffLvl;
 	private int cooldown;
 	private Player player;
-	private Collection<Player> players;
+	private Collection<Player> intruders;
 
 	public SM_CONQUEROR_PROTECTOR(int type, int buffLvl, int cooldown) {
 		this.type = type;
@@ -35,9 +37,9 @@ public class SM_CONQUEROR_PROTECTOR extends AionServerPacket {
 		this.player = player;
 	}
 
-	public SM_CONQUEROR_PROTECTOR(Collection<Player> players) {
+	public SM_CONQUEROR_PROTECTOR(Collection<Player> intruders) {
 		this.type = 5;
-		this.players = players;
+		this.intruders = intruders;
 	}
 
 	@Override
@@ -52,19 +54,21 @@ public class SM_CONQUEROR_PROTECTOR extends AionServerPacket {
 			case 8: // protector + announcement
 				writeH(0x01);
 				writeD(buffLvl);
-				writeD(cooldown); // cooldown
+				writeD(cooldown); // intruder scan cooldown
 				break;
-			case 5:
-				writeH(players.size());
-				for (Player player : players) {
-					writeD(player.getCPInfo().getRank());
+			case 5: // intruder scan
+				writeH(intruders.size());
+				for (Player player : intruders) {
+					CPInfo info = ConquerorAndProtectorService.getInstance().getCPInfoForCurrentMap(player);
+					writeD(info == null ? 0 : info.getRank());
 					writeD(player.getObjectId());
 					writeD(0x01); // unk
 					writeD(player.getAbyssRank().getRank().getId());
 					writeH(player.getLevel());
 					writeF(player.getX());
 					writeF(player.getY());
-					writeS(player.getName(), 118);
+					writeS(player.getName(true), 52);
+					writeB(new byte[66]); // unk
 					writeD(1941); // unk
 					writeD(1942); // unk
 					writeD(1943); // unk
@@ -75,7 +79,8 @@ public class SM_CONQUEROR_PROTECTOR extends AionServerPacket {
 			case 6: // conqueror
 			case 9: // protector
 				writeH(0x01);// unk
-				writeD(player.getCPInfo().getRank());
+				CPInfo info = ConquerorAndProtectorService.getInstance().getCPInfoForCurrentMap(player);
+				writeD(info == null ? 0 : info.getRank());
 				writeD(player.getObjectId());
 				break;
 		}

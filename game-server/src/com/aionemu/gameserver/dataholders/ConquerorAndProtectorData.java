@@ -6,31 +6,29 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
 
-import com.aionemu.gameserver.model.Race;
-import com.aionemu.gameserver.model.templates.serial_killer.RankRestriction;
+import com.aionemu.gameserver.model.templates.cp.CPRank;
+import com.aionemu.gameserver.model.templates.cp.CPType;
 
 /**
  * @author Dtem
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = { "rankRestriction" })
 @XmlRootElement(name = "conqueror_protector_ranks")
 public class ConquerorAndProtectorData {
 
-	@XmlElement(name = "rank_restriction")
-	protected List<RankRestriction> rankRestriction;
+	@XmlElement(name = "rank")
+	private List<CPRank> ranks;
 
-	public RankRestriction getRankRestriction(String type, Race race, int rank) {
-		for (RankRestriction template : rankRestriction) {
-			if (template.getType().equals(type) && template.getRace() == race && template.getRankNum() == rank)
+	public CPRank getRank(CPType type, int rank) {
+		for (CPRank template : ranks) {
+			if (template.getType() == type && template.getRankNum() == rank)
 				return template;
 		}
 		return null;
 	}
 
 	public int size() {
-		return rankRestriction.size();
+		return ranks.size();
 	}
 }

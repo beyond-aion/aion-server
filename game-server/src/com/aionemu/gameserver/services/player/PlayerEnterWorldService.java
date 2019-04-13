@@ -111,7 +111,6 @@ import com.aionemu.gameserver.services.SurveyService;
 import com.aionemu.gameserver.services.VortexService;
 import com.aionemu.gameserver.services.WarehouseService;
 import com.aionemu.gameserver.services.abyss.AbyssSkillService;
-import com.aionemu.gameserver.services.conquerorAndProtectorSystem.ConquerorAndProtectorService;
 import com.aionemu.gameserver.services.craft.RelinquishCraftStatus;
 import com.aionemu.gameserver.services.event.EventService;
 import com.aionemu.gameserver.services.instance.InstanceService;
@@ -444,7 +443,6 @@ public final class PlayerEnterWorldService {
 		// Trigger restore services on login.
 		player.getLifeStats().updateCurrentStats();
 		player.getObserveController().notifyHPChangeObservers(player.getLifeStats().getCurrentHp());
-		ConquerorAndProtectorService.getInstance().onLogin(player);
 
 		if (HTMLConfig.ENABLE_HTML_WELCOME)
 			HTMLService.showHTML(player, HTMLCache.getInstance().getHTML("welcome.xhtml"));

@@ -144,12 +144,6 @@ public class PlayerReviveService {
 		else if (player.isInCustomState(CustomPlayerState.EVENT_MODE))
 			TeleportService.teleportToEvent(player);
 
-		// TODO: find right place for this
-		if (player.getCPInfo().getRank() > 1) {
-			bindRevive(player);
-			return;
-		}
-
 		Kisk kisk = player.getKisk();
 		if (kisk != null && kisk.isActive()) {
 			kisk.resurrectionUsed();
