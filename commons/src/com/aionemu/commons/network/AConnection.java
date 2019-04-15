@@ -143,8 +143,8 @@ public abstract class AConnection<T extends BaseServerPacket> {
 			if (closePacket != null) {
 				getSendMsgQueue().clear();
 				getSendMsgQueue().add(closePacket);
-				dispatcher.closeConnection(this);
 				enableWriteInterest();
+				dispatcher.closeConnection(this);
 			} else {
 				dispatcher.closeConnection(this);
 				if (key.isValid())
@@ -159,9 +159,7 @@ public abstract class AConnection<T extends BaseServerPacket> {
 	 * This will close the connection and call onDisconnect() on another thread. May be called only by Dispatcher Thread.
 	 */
 	final void disconnect(Executor dcExecutor) {
-		/**
-		 * Test if this build should use assertion. If NetworkAssertion == false javac will remove this code block
-		 */
+		// Test if this build should use assertion. If NetworkAssertion == false javac will remove this code block
 		if (Assertion.NetworkAssertion)
 			assert Thread.currentThread() == dispatcher;
 
@@ -171,11 +169,11 @@ public abstract class AConnection<T extends BaseServerPacket> {
 			closed = true;
 		}
 
+		key.cancel();
 		try {
 			socketChannel.close();
-		} catch (IOException e) {
+		} catch (IOException ignored) {
 		}
-		key.cancel();
 		key.attach(null);
 
 		dcExecutor.execute(this::onDisconnect);

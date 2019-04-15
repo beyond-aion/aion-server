@@ -1,6 +1,5 @@
 package com.aionemu.loginserver.network.gameserver.clientpackets;
 
-import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.utils.Rnd;
@@ -11,18 +10,14 @@ import com.aionemu.loginserver.network.gameserver.GsClientPacket;
 import com.aionemu.loginserver.network.gameserver.serverpackets.SM_ACCOUNT_RECONNECT_KEY;
 
 /**
- * This packet is sended by GameServer when player is requesting fast reconnect to login server. LoginServer in response will send reconectKey.
+ * This packet is sent by GameServer when player is requesting fast reconnect to login server. LoginServer in response will send reconectKey.
  * 
  * @author -Nemesiss-
  */
 public class CM_ACCOUNT_RECONNECT_KEY extends GsClientPacket {
 
 	/**
-	 * Logger for this class.
-	 */
-	private static final Logger log = LoggerFactory.getLogger(CM_ACCOUNT_RECONNECT_KEY.class);
-	/**
-	 * accoundId of account that will be reconnecting.
+	 * accountId of account that will be reconnecting.
 	 */
 	private int accountId;
 
@@ -34,9 +29,9 @@ public class CM_ACCOUNT_RECONNECT_KEY extends GsClientPacket {
 	@Override
 	protected void runImpl() {
 		int reconectKey = Rnd.nextInt();
-		Account acc = this.getConnection().getGameServerInfo().removeAccountFromGameServer(accountId);
+		Account acc = getConnection().getGameServerInfo().removeAccountFromGameServer(accountId);
 		if (acc == null)
-			log.info("This shouldnt happend! [Error]");
+			LoggerFactory.getLogger(CM_ACCOUNT_RECONNECT_KEY.class).warn(getConnection() + " requested reconnection for account " + accountId + ", but account is not registered on game server");
 		else
 			AccountController.addReconnectingAccount(new ReconnectingAccount(acc, reconectKey));
 		sendPacket(new SM_ACCOUNT_RECONNECT_KEY(accountId, reconectKey));

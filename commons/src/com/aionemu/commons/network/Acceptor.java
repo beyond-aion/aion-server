@@ -77,12 +77,12 @@ public class Acceptor {
 	 * @see com.aionemu.commons.network.ConnectionFactory
 	 */
 	public final void accept(SelectionKey key) throws IOException {
-		/** For an accept to be pending the channel must be a server socket channel. */
+		// For an accept to be pending the channel must be a server socket channel
 		ServerSocketChannel serverSocketChannel = (ServerSocketChannel) key.channel();
-		/** Accept the connection and make it non-blocking */
+		// Accept the connection and make it non-blocking
 		SocketChannel socketChannel = serverSocketChannel.accept();
 		socketChannel.configureBlocking(false);
-		socketChannel.socket().setSoLinger(true, 0);
+		socketChannel.socket().setSoLinger(true, 10);
 		socketChannel.socket().setTcpNoDelay(true);
 
 		Dispatcher dispatcher = nioServer.getReadWriteDispatcher();
