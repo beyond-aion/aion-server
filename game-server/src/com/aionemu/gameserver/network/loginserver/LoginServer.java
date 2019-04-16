@@ -4,9 +4,9 @@ import java.io.IOException;
 import java.net.SocketException;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.SocketChannel;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -56,7 +56,7 @@ public class LoginServer {
 	private NioServer nioServer = null;
 	private int gameServerCount = 1;
 
-	public static final LoginServer getInstance() {
+	public static LoginServer getInstance() {
 		return SingletonHolder.instance;
 	}
 
@@ -66,12 +66,6 @@ public class LoginServer {
 	private LoginServer() {
 	}
 
-	/**
-	 * Connects to LoginServer and returns an object representing this connection.
-	 * 
-	 * @return The {@link LoginServerConnection}.
-	 * @throws IOException
-	 */
 	public void connect(NioServer nioServer) {
 		if (lsCon != null)
 			throw new IllegalStateException("LoginServer is already connected.");
@@ -165,11 +159,6 @@ public class LoginServer {
 
 	/**
 	 * This method is called by CM_ACCOUNT_AUTH_RESPONSE LoginServer packets to notify GameServer about results of client authentication.
-	 * 
-	 * @param accountId
-	 * @param accountName
-	 * @param result
-	 * @param accountTime
 	 */
 	public void accountAuthenticationResponse(int accountId, String accountName, boolean result, long creationDate, AccountTime accountTime,
 		byte accessLevel, byte membership, long toll, String allowedHddSerial) {
@@ -242,7 +231,7 @@ public class LoginServer {
 	}
 
 	public void sendLoggedInAccounts() {
-		sendPacket(new SM_ACCOUNT_LIST(loggedInAccounts.values().stream().collect(Collectors.toList())));
+		sendPacket(new SM_ACCOUNT_LIST(new ArrayList<>(loggedInAccounts.values())));
 	}
 
 	public void sendLsControlPacket(String accountName, String playerName, String adminName, int param, int type) {
