@@ -4181,7 +4181,7 @@
 			</spawn_map>
 		</spawns>
 	</event>
-	<event name="Blessing Of The Magic Fountain" start="2018-04-06T00:00:00" end="2018-04-22T23:59:59">
+	<event name="Blessing Of The Magic Fountain" start="2019-04-19T00:00:00" end="2019-05-05T23:59:59">
 		<inventory_drop item_id="186000406" startlevel="1" interval="60" />
 		<spawns>
 			<!-- Sanctum -->
@@ -4262,9 +4262,9 @@
 					<spot x="1194.5529" y="1388.4427" z="208.2309" h="2" />
 				</spawn>
 			</spawn_map>
-			<!-- Cygnea -->
-			<spawn_map map_id="210070000">
-				<!-- Yellow Aether Blossom 395 spawns -->
+			<!-- Cygnea
+			<spawn_map map_id="210070000"> -->
+				<!-- Yellow Aether Blossom 395 spawns
 				<spawn npc_id="702786" respawn_time="900" pool="80">
 					<spot x="2757.2935" y="815.5407" z="545.75745" />
 					<spot x="2726.0662" y="891.7112" z="545.6028" />
@@ -4662,10 +4662,10 @@
 					<spot x="452.25812" y="2784.2336" z="263.28125" />
 					<spot x="339.69775" y="2995.223" z="273.77606" />
 				</spawn>
-			</spawn_map>
-			<!-- Enshar -->
-			<spawn_map map_id="220080000">
-				<!-- Ruby Aether Blossom 395 spawns -->
+			</spawn_map> -->
+			<!-- Enshar
+			<spawn_map map_id="220080000"> -->
+				<!-- Ruby Aether Blossom 395 spawns
 				<spawn npc_id="702787" respawn_time="900" pool="80">
 					<spot x="577.8776" y="2005.2991" z="298.8903" />
 					<spot x="620.264" y="2029.7533" z="298.2984" />
@@ -5063,11 +5063,11 @@
 					<spot x="2769.2153" y="784.4176" z="230.125" />
 					<spot x="2932.894" y="810.8425" z="233.23676" />
 				</spawn>
-			</spawn_map>
+			</spawn_map> -->
 			<!-- Levinshor -->
 			<spawn_map map_id="600100000">
 				<!-- Pure Aether Blossom 227 spawns -->
-				<spawn npc_id="702788" respawn_time="900" pool="70">
+				<spawn npc_id="702788" respawn_time="900" pool="80">
 					<spot x="656.5611" y="401.55518" z="274.81287" />
 					<spot x="673.021" y="530.87054" z="260.33" />
 					<spot x="642.94336" y="592.8402" z="250.38144" />
