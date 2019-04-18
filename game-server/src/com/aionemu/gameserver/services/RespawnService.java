@@ -5,7 +5,6 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Future;
 
-import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.controllers.NpcController;
@@ -21,7 +20,6 @@ import com.aionemu.gameserver.services.instance.InstanceService;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.idfactory.IDFactory;
-import com.aionemu.gameserver.utils.time.ServerTime;
 import com.aionemu.gameserver.world.World;
 
 /**
@@ -33,7 +31,6 @@ public class RespawnService {
 	public static final int IMMEDIATE_DECAY = 2 * 1000;
 	public static final int WITH_DROP_DECAY = 5 * 60 * 1000;
 	private static final Map<Integer, RespawnTask> pendingRespawns = new ConcurrentHashMap<>();
-	private static final Map<Integer, String> lastRespawnTrigger = new ConcurrentHashMap<>();
 
 	/**
 	 * Schedules decay (despawn) of the npc with the default delay time. If there is already a decay task, it will be replaced with this one. The task
@@ -77,16 +74,10 @@ public class RespawnService {
 			return null;
 		RespawnTask respawnTask = new RespawnTask(visibleObject);
 		respawnTask.future = ThreadPoolManager.getInstance().schedule(respawnTask, spawnTemplate.getRespawnTime() * 1000);
-		String lastRespawn;
-		RespawnTask oldRespawnTask;
-		synchronized (spawnTemplate) {
-			lastRespawn = lastRespawnTrigger.put(visibleObject.getObjectId(), ServerTime.now() + " for " + visibleObject + ":\n" + getShortStackTrace());
-			oldRespawnTask = pendingRespawns.put(visibleObject.getObjectId(), respawnTask);
-		}
+		RespawnTask oldRespawnTask = pendingRespawns.put(visibleObject.getObjectId(), respawnTask);
 		if (oldRespawnTask != null) { // objectId should not have been in pendingRespawns
 			if (spawnTemplate == oldRespawnTask.spawnTemplate) {
-				LoggerFactory.getLogger(RespawnService.class).warn("Duplicate respawn task initiated for " + visibleObject + ", last trigger at "
-					+ lastRespawn + "\nThis trigger:", new IllegalStateException());
+				LoggerFactory.getLogger(RespawnService.class).warn("Duplicate respawn task initiated for " + visibleObject, new IllegalStateException());
 			} else {
 				String oldOwnerInfo = "Old owner: Npc ID: " + oldRespawnTask.spawnTemplate.getNpcId() + ", map ID: "
 					+ oldRespawnTask.spawnTemplate.getWorldId();
@@ -100,16 +91,8 @@ public class RespawnService {
 		return respawnTask;
 	}
 
-	private static String getShortStackTrace() {
-		String stackTrace = "";
-		String[] lines = ExceptionUtils.getStackTrace(new Exception()).split("\n");
-		int elements = Math.min(lines.length, 9);
-		for (int i = 2; i <= elements; i++) {
-			if (!stackTrace.isEmpty())
-				stackTrace += '\n';
-			stackTrace += lines[i].replace("com.aionemu.gameserver.", "");
-		}
-		return stackTrace;
+	public static boolean hasRespawnTask(VisibleObject visibleObject) {
+		return pendingRespawns.containsKey(visibleObject.getObjectId());
 	}
 
 	public static boolean setAutoReleaseId(int objectId) {
