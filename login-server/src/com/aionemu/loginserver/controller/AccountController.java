@@ -2,6 +2,7 @@ package com.aionemu.loginserver.controller;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.commons.utils.NetworkUtils;
@@ -41,7 +42,7 @@ public class AccountController {
 	/**
 	 * Map with accounts that are active on LoginServer or joined GameServer and are not authenticated yet.
 	 */
-	private static final Map<Integer, LoginConnection> accountsOnLS = new HashMap<>();
+	private static final Map<Integer, LoginConnection> accountsOnLS = new ConcurrentHashMap<>();
 
 	/**
 	 * Map with accounts that are reconnecting to LoginServer ie was joined GameServer.
@@ -59,7 +60,7 @@ public class AccountController {
 	 * @param account
 	 *          account
 	 */
-	public static synchronized void removeAccountOnLS(Account account) {
+	public static void removeAccountOnLS(Account account) {
 		accountsOnLS.remove(account.getId());
 	}
 
@@ -69,30 +70,24 @@ public class AccountController {
 	 * @param key
 	 * @param gsConnection
 	 */
-	public static synchronized void checkAuth(SessionKey key, GsConnection gsConnection) {
+	public static void checkAuth(SessionKey key, GsConnection gsConnection) {
 		LoginConnection con = accountsOnLS.get(key.accountId);
 
 		if (con != null && con.getSessionKey().checkSessionKey(key)) {
-			/**
-			 * account is successful logged in on gs remove it from here
-			 */
+			// account is successful logged in on gs remove it from here
 			accountsOnLS.remove(key.accountId);
 
 			GameServerInfo gsi = gsConnection.getGameServerInfo();
 			Account acc = con.getAccount();
 
-			/**
-			 * Add account to accounts on GameServer list and update accounts last server
-			 */
+			// Add account to accounts on GameServer list and update accounts last server
 			gsi.addAccountToGameServer(acc);
 
 			acc.setLastServer(gsi.getId());
 			getAccountDAO().updateLastServer(acc.getId(), acc.getLastServer());
 
 			long toll = DAOManager.getDAO(PremiumDAO.class).getPoints(acc.getId());
-			/**
-			 * Send response to GameServer
-			 */
+			// Send response to GameServer
 			gsConnection.sendPacket(new SM_ACCOUNT_AUTH_RESPONSE(key.accountId, true, acc.getName(), acc.getCreationDate().getTime(), acc.getAccessLevel(), acc.getMembership(), toll, acc.getAllowedHddSerial()));
 		} else {
 			gsConnection.sendPacket(new SM_ACCOUNT_AUTH_RESPONSE(key.accountId, false, null, 0, (byte) 0, (byte) 0, 0, null));
@@ -238,10 +233,9 @@ public class AccountController {
 				return AionAuthResponse.STR_L2AUTH_S_ALREADY_LOGIN;
 
 			// If someone is at loginserver, he should be disconnected
-			if (accountsOnLS.containsKey(account.getId())) {
-				LoginConnection aionConnection = accountsOnLS.remove(account.getId());
-
-				aionConnection.close(new SM_ACCOUNT_KICK(AionAuthResponse.STR_L2AUTH_S_KICKED_DOUBLE_LOGIN));
+			LoginConnection con = accountsOnLS.remove(account.getId());
+			if (con != null) {
+				con.close(new SM_ACCOUNT_KICK(AionAuthResponse.STR_L2AUTH_S_KICKED_DOUBLE_LOGIN));
 				return AionAuthResponse.STR_L2AUTH_S_ALREADY_LOGIN;
 			}
 			connection.setAccount(account);
@@ -268,10 +262,9 @@ public class AccountController {
 		synchronized (AccountController.class) {
 			GameServerTable.kickAccountFromGameServer(accountId, false);
 
-			if (accountsOnLS.containsKey(accountId)) {
-				LoginConnection conn = accountsOnLS.remove(accountId);
+			LoginConnection conn = accountsOnLS.remove(accountId);
+			if (conn != null)
 				conn.close(new SM_ACCOUNT_KICK(AionAuthResponse.STR_L2AUTH_S_BLOCKED_IP));
-			}
 		}
 	}
 
@@ -284,24 +277,23 @@ public class AccountController {
 	 */
 	public static Account loadAccount(String name) {
 		Account account = getAccountDAO().getAccount(name);
-		if (account != null) {
-			AccountTime accTime = DAOManager.getDAO(AccountTimeDAO.class).getAccountTime(account.getId());
-			if (accTime == null)
-				throw new NullPointerException("Account Time for account " + account + " is null");
-			account.setAccountTime(accTime);
-		}
+		if (account != null)
+			setAccountTime(account);
 		return account;
 	}
 
 	public static Account loadAccount(int id) {
 		Account account = getAccountDAO().getAccount(id);
-		if (account != null) {
-			AccountTime accTime = DAOManager.getDAO(AccountTimeDAO.class).getAccountTime(account.getId());
-			if (accTime == null)
-				throw new NullPointerException("Account Time for account " + account + " is null");
-			account.setAccountTime(accTime);
-		}
+		if (account != null)
+			setAccountTime(account);
 		return account;
+	}
+
+	private static void setAccountTime(Account account) {
+		AccountTime accTime = DAOManager.getDAO(AccountTimeDAO.class).getAccountTime(account.getId());
+		if (accTime == null)
+			throw new NullPointerException("Account Time for account " + account + " is null");
+		account.setAccountTime(accTime);
 	}
 
 	/**
@@ -342,24 +334,16 @@ public class AccountController {
 	 * @param accountId
 	 */
 	public static synchronized void loadGSCharactersCount(int accountId) {
-		GsConnection gsc = null;
-		Map<Byte, Integer> accountCharacterCount = null;
-
-		if (accountsGSCharacterCounts.containsKey(accountId))
-			accountsGSCharacterCounts.remove(accountId);
-
-		accountsGSCharacterCounts.put(accountId, new HashMap<>());
-
-		accountCharacterCount = accountsGSCharacterCounts.get(accountId);
-
+		Map<Byte, Integer> accountCharacterCount = new HashMap<>();
 		for (GameServerInfo gsi : GameServerTable.getGameServers()) {
-			gsc = gsi.getConnection();
+			GsConnection gsc = gsi.getConnection();
 
 			if (gsc != null)
 				gsc.sendPacket(new SM_GS_CHARACTER_RESPONSE(accountId));
 			else
 				accountCharacterCount.put(gsi.getId(), 0);
 		}
+		accountsGSCharacterCounts.put(accountId, accountCharacterCount);
 
 		if (hasAllGSCharacterCounts(accountId))
 			sendServerListFor(accountId);
@@ -371,13 +355,7 @@ public class AccountController {
 	 */
 	public static synchronized boolean hasAllGSCharacterCounts(int accountId) {
 		Map<Byte, Integer> characterCount = accountsGSCharacterCounts.get(accountId);
-
-		if (characterCount != null) {
-			if (characterCount.size() == GameServerTable.size())
-				return true;
-		}
-
-		return false;
+		return characterCount != null && characterCount.size() == GameServerTable.size();
 	}
 
 	/**
@@ -386,9 +364,9 @@ public class AccountController {
 	 * @param accountId
 	 */
 	public static void sendServerListFor(int accountId) {
-		if (accountsOnLS.containsKey(accountId)) {
-			accountsOnLS.get(accountId).sendPacket(new SM_SERVER_LIST());
-		}
+		LoginConnection con = accountsOnLS.get(accountId);
+		if (con != null)
+			con.sendPacket(new SM_SERVER_LIST());
 	}
 
 	/**
@@ -405,9 +383,13 @@ public class AccountController {
 	 * @param characterCount
 	 */
 	public static synchronized void addGSCharacterCountFor(int accountId, byte gsid, int characterCount) {
-		if (!accountsGSCharacterCounts.containsKey(accountId))
-			accountsGSCharacterCounts.put(accountId, new HashMap<>());
+		accountsGSCharacterCounts.computeIfAbsent(accountId, k -> new HashMap<>()).put(gsid, characterCount);
+	}
 
-		accountsGSCharacterCounts.get(accountId).put(gsid, characterCount);
+	public static void updateServerListForAllLoggedInPlayers() {
+		accountsOnLS.values().forEach(con -> {
+			if (con.getState() == State.AUTHED_LOGIN && !con.isJoinedGs() && hasAllGSCharacterCounts(con.getAccount().getId()))
+				con.sendPacket(new SM_SERVER_LIST());
+		});
 	}
 }

@@ -40,7 +40,7 @@ public abstract class BonusItemGroup implements Chance {
 	protected BonusType bonusType;
 
 	@XmlAttribute(name = "chance")
-	protected float chance;
+	protected float chance = 100f;
 
 	public BonusType getBonusType() {
 		return bonusType;

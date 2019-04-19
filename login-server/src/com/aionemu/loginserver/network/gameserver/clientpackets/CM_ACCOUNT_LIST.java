@@ -4,10 +4,13 @@ import com.aionemu.loginserver.GameServerInfo;
 import com.aionemu.loginserver.GameServerTable;
 import com.aionemu.loginserver.controller.AccountController;
 import com.aionemu.loginserver.network.gameserver.GsClientPacket;
+import com.aionemu.loginserver.network.gameserver.serverpackets.SM_HDDBAN_LIST;
+import com.aionemu.loginserver.network.gameserver.serverpackets.SM_MACBAN_LIST;
 import com.aionemu.loginserver.network.gameserver.serverpackets.SM_REQUEST_KICK_ACCOUNT;
 
 /**
- * Reads the list of account id's that are logged to game server
+ * Reads the list of account id's that are logged in to game server. This packet is sent by game server once it successfully registered on this login
+ * server.
  * 
  * @author SoulKeeper, Neon
  */
@@ -34,5 +37,8 @@ public class CM_ACCOUNT_LIST extends GsClientPacket {
 			else if (gsi.getId() != getConnection().getGameServerInfo().getId()) // account already plays on another gameserver
 				getConnection().sendPacket(new SM_REQUEST_KICK_ACCOUNT(id, false));
 		}
+		getConnection().sendPacket(new SM_MACBAN_LIST());
+		getConnection().sendPacket(new SM_HDDBAN_LIST());
+		AccountController.updateServerListForAllLoggedInPlayers();
 	}
 }

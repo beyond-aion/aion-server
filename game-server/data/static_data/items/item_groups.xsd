@@ -47,7 +47,7 @@
   
   <xs:complexType name="BonusItemGroup" abstract="true">
     <xs:attribute name="bonusType" type="BonusType" use="required"/>
-    <xs:attribute default="0" name="chance" type="xs:float"/>
+    <xs:attribute default="100" name="chance" type="xs:float"/>
   </xs:complexType>
   
   <xs:complexType name="FeedItemGroup" abstract="true">

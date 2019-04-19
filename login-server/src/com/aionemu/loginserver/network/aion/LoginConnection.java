@@ -83,7 +83,7 @@ public class LoginConnection extends AConnection<AionServerPacket> {
 	/**
 	 * Possible states of AionConnection
 	 */
-	public static enum State {
+	public enum State {
 		/**
 		 * Means that client just connects
 		 */
@@ -131,10 +131,8 @@ public class LoginConnection extends AConnection<AionServerPacket> {
 
 		AionClientPacket pck = AionPacketHandlerFactory.handle(data, this);
 
-		/**
-		 * Execute packet only if packet exist (!= null) and read was ok.
-		 */
-		if ((pck != null) && pck.read())
+		// Execute packet only if packet exists and read was ok.
+		if (pck != null && pck.read())
 			processor.executePacket(pck);
 
 		return true;
@@ -162,10 +160,8 @@ public class LoginConnection extends AConnection<AionServerPacket> {
 
 	@Override
 	protected final void onDisconnect() {
-		/**
-		 * Remove account only if not joined GameServer yet.
-		 */
-		if ((account != null) && !joinedGs) {
+		// Remove account only if not joined GameServer yet.
+		if (account != null && !joinedGs) {
 			AccountController.removeAccountOnLS(account);
 			AccountTimeController.updateOnLogout(account);
 		}
@@ -289,6 +285,10 @@ public class LoginConnection extends AConnection<AionServerPacket> {
 	 */
 	public final void setSessionKey(SessionKey sessionKey) {
 		this.sessionKey = sessionKey;
+	}
+
+	public boolean isJoinedGs() {
+		return joinedGs;
 	}
 
 	/**
