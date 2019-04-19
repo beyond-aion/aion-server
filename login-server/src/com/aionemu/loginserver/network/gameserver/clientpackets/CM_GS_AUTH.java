@@ -9,9 +9,6 @@ import com.aionemu.loginserver.network.gameserver.GsClientPacket;
 import com.aionemu.loginserver.network.gameserver.GsConnection;
 import com.aionemu.loginserver.network.gameserver.GsConnection.State;
 import com.aionemu.loginserver.network.gameserver.serverpackets.SM_GS_AUTH_RESPONSE;
-import com.aionemu.loginserver.network.gameserver.serverpackets.SM_HDDBAN_LIST;
-import com.aionemu.loginserver.network.gameserver.serverpackets.SM_MACBAN_LIST;
-import com.aionemu.loginserver.utils.ThreadPoolManager;
 
 /**
  * This is authentication packet that gs will send to login server for registration.
@@ -61,7 +58,7 @@ public class CM_GS_AUTH extends GsClientPacket {
 
 	@Override
 	protected void runImpl() {
-		final GsConnection client = this.getConnection();
+		GsConnection client = getConnection();
 
 		GsAuthResponse resp = GameServerTable.registerGameServer(client, gameServerId, password, ip, port, minAccessLevel, maxPlayers);
 		switch (resp) {
@@ -69,14 +66,6 @@ public class CM_GS_AUTH extends GsClientPacket {
 				log.info("Gameserver #" + gameServerId + " is now online");
 				client.setState(State.AUTHED);
 				client.sendPacket(new SM_GS_AUTH_RESPONSE(resp));
-				ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-					@Override
-					public void run() {
-						client.sendPacket(new SM_MACBAN_LIST());
-						client.sendPacket(new SM_HDDBAN_LIST());
-					}
-				}, 500);
 				break;
 			default:
 				client.close(new SM_GS_AUTH_RESPONSE(resp));
