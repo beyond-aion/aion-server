@@ -147,7 +147,7 @@
 			<gd_item id="188053745" /><!-- Elegant High Grade Composite Manastone Bundle -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Composite Stone Bundle (Asmodian)" chance="1" restriction_race="ASMODIANS">
+	<gd_rule rule_name="Composite Stone Bundle (Asmodian)" chance="1.5" restriction_race="ASMODIANS">
 		<gd_maps>
 			<gd_map map_id="220070000" /><!-- Gelkmaros -->
 		</gd_maps>
@@ -162,7 +162,7 @@
 			<gd_item id="188053745" /><!-- Elegant High Grade Composite Manastone Bundle -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Composite Stone Bundle (Elyos)" chance="3" restriction_race="ELYOS">
+	<gd_rule rule_name="Composite Stone Bundle (Elyos)" chance="4.5" restriction_race="ELYOS">
 		<gd_maps>
 			<gd_map map_id="220070000" /><!-- Gelkmaros -->
 		</gd_maps>
