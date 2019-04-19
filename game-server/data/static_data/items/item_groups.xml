@@ -4657,7 +4657,7 @@
 		<item id="160002125" race="ASMODIANS" level="50"/>
 		<item id="160002306" race="ASMODIANS" level="60"/>
 	</food>
-	<medicine_common bonusType="MEDICINE" chance="100">
+	<medicine_common bonusType="MEDICINE" chance="60">
 		<item id="162000002" level="10"/>
 		<item id="162000003" level="20"/>
 		<item id="162000004" level="30"/>
@@ -4675,7 +4675,7 @@
 		<item id="162000119" level="70"/>
 		<item id="162000120" level="70"/>
 	</medicine_common>
-	<medicine_rare bonusType="MEDICINE" chance="0">
+	<medicine_rare bonusType="MEDICINE" chance="20">
 		<item id="162000012" level="10"/>
 		<item id="162000013" level="20"/>
 		<item id="162000014" level="30"/>
@@ -4702,16 +4702,9 @@
 		<item id="162000121" level="70"/>
 		<item id="162000122" level="70"/>
 		<item id="162000123" level="70"/>
-		<item id="162000125" level="70"/>
-		<item id="162000151" level="1"/>
-		<item id="162000154" level="1"/>
-<!--
-		<item id="162000130" level="70"/> 
-		<item id="164002167" level="60"/>
-		<item id="169405254" level="61"/>
--->
+		<item id="162000130" level="70"/>
 	</medicine_rare>
-	<medicine_legendary bonusType="MEDICINE" chance="0">
+	<medicine_legendary bonusType="MEDICINE" chance="20">
 		<item id="162000046" level="10"/>
 		<item id="162000047" level="20"/>
 		<item id="162000048" level="30"/>
@@ -4719,6 +4712,7 @@
 		<item id="162000050" level="50"/>
 		<item id="162000080" level="60"/>
 		<item id="162000124" level="70"/>
+		<item id="162000125" level="70"/>
 	</medicine_legendary>
 	<ores_rare bonusType="GATHER" chance="0">
 		<item id="152000301"/>
