@@ -52,7 +52,7 @@ public class NetworkUtils {
 	 * @return Formatted hex string of the buffers data.
 	 */
 	public static String toHex(ByteBuffer buffer) {
-		return toHex(buffer, 0, buffer.capacity());
+		return toHex(buffer, 0, Math.min(buffer.limit(), buffer.capacity()));
 	}
 
 	/**
