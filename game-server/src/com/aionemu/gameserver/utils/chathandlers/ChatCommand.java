@@ -101,7 +101,7 @@ public abstract class ChatCommand {
 			boolean containsSquareBrackets = false;
 			for (String info : lines) {
 				if (StringUtils.startsWithAny(info, " ", "<", "[")) {
-					if (!containsSquareBrackets && info.contains("["))
+					if (!containsSquareBrackets && info.split(" - ", 2)[0].contains("["))
 						containsSquareBrackets = true;
 					sb.append("\n\t").append(ChatUtil.color(getAliasWithPrefix(), Color.WHITE)).append(' ');
 					String[] split = info.split(" - ", 2);
