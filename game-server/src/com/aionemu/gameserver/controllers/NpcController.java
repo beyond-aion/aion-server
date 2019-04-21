@@ -18,15 +18,15 @@ import com.aionemu.gameserver.model.animations.ObjectDeleteAnimation;
 import com.aionemu.gameserver.model.drop.DropItem;
 import com.aionemu.gameserver.model.gameobjects.AionObject;
 import com.aionemu.gameserver.model.gameobjects.Creature;
+import com.aionemu.gameserver.model.gameobjects.DropNpc;
 import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.model.gameobjects.Pet;
 import com.aionemu.gameserver.model.gameobjects.Summon;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.Rates;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
-import com.aionemu.gameserver.model.team.TeamMember;
 import com.aionemu.gameserver.model.team.TemporaryPlayerTeam;
-import com.aionemu.gameserver.model.team.common.legacy.LootRuleType;
 import com.aionemu.gameserver.model.team.common.service.PlayerTeamDistributionService;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.LOG;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.TYPE;
@@ -46,6 +46,7 @@ import com.aionemu.gameserver.taskmanager.tasks.MoveTaskManager;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.stats.StatFunctions;
+import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
 
 /**
@@ -145,28 +146,39 @@ public class NpcController extends CreatureController<Npc> {
 			RespawnService.scheduleRespawn(getOwner());
 
 		if (shouldDecay) {
-			if (shouldLoot && lastAttacker.getActingCreature() instanceof Player)
-				petLoot((Player) lastAttacker.getActingCreature(), owner);
+			if (shouldLoot)
+				petLoot(owner);
 			RespawnService.scheduleDecayTask(owner);
 		} else { // instant despawn (no decay time = no loot)
 			delete();
 		}
 	}
 
-	private void petLoot(Player player, Npc owner) {
-		if (player.getPet() != null && player.getPet().getCommonData().isLooting()) {
-			TemporaryPlayerTeam<? extends TeamMember<Player>> team = player.getCurrentTeam();
-			if (team != null && team.getLootGroupRules().getLootRule() == LootRuleType.FREEFORALL) // not available in FFA loot mode
-				return;
+	private void petLoot(Npc owner) {
+		Pet lootingPet = findPetForLooting(owner);
+		if (lootingPet != null) {
 			int npcObjId = owner.getObjectId();
 			Set<DropItem> drops = DropRegistrationService.getInstance().getCurrentDropMap().get(npcObjId);
 			if (drops != null && !drops.isEmpty()) {
-				PacketSendUtility.sendPacket(player, new SM_PET(true, npcObjId));
+				PacketSendUtility.sendPacket(lootingPet.getMaster(), new SM_PET(true, npcObjId));
 				for (DropItem dropItem : drops.toArray(new DropItem[drops.size()])) // array copy since the drops get removed on retrieval
-					DropService.getInstance().requestDropItem(player, npcObjId, dropItem.getIndex(), true);
-				PacketSendUtility.sendPacket(player, new SM_PET(false, npcObjId));
+					DropService.getInstance().requestDropItem(lootingPet.getMaster(), npcObjId, dropItem.getIndex(), true);
+				PacketSendUtility.sendPacket(lootingPet.getMaster(), new SM_PET(false, npcObjId));
 			}
 		}
+	}
+
+	private Pet findPetForLooting(Npc npc) {
+		DropNpc dropNpc = DropRegistrationService.getInstance().getDropRegistrationMap().get(npc.getObjectId());
+		if (dropNpc == null) // npc didn't drop anything
+			return null;
+		if (dropNpc.getAllowedLooters().size() != 1) // auto looting is not available in FFA loot mode
+			return null;
+		Player player = World.getInstance().findPlayer(dropNpc.getAllowedLooters().iterator().next());
+		if (player == null) // looter got disconnected
+			return null;
+		Pet pet = player.getPet();
+		return pet != null && pet.getCommonData().isLooting() ? pet : null;
 	}
 
 	@Override
