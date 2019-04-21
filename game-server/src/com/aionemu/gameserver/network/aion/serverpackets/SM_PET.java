@@ -86,10 +86,10 @@ public class SM_PET extends AionServerPacket {
 		this.lootNpcObjId = npcObjId;
 	}
 
-	public SM_PET(int dopeAction, boolean isBuffing) {
+	public SM_PET(int dopeAction, boolean isActing) {
 		this.action = PetAction.SPECIAL_FUNCTION;
 		this.dopeAction = dopeAction;
-		this.isActing = isBuffing;
+		this.isActing = isActing;
 		this.subType = 2;
 	}
 

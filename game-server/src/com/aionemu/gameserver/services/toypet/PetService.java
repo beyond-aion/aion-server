@@ -214,23 +214,6 @@ public class PetService {
 		}
 
 		PacketSendUtility.sendPacket(player, new SM_PET(action, itemId, slot));
-
-		itemId = pet.getCommonData().getDopingBag().getFoodItem();
-		long totalDopes = player.getInventory().getItemCountByItemId(itemId);
-
-		itemId = pet.getCommonData().getDopingBag().getDrinkItem();
-		totalDopes += player.getInventory().getItemCountByItemId(itemId);
-
-		int[] scrollBag = pet.getCommonData().getDopingBag().getScrollsUsed();
-		for (int element : scrollBag) {
-			if (element != 0)
-				totalDopes += player.getInventory().getItemCountByItemId(element);
-		}
-
-		if (totalDopes == 0) {
-			pet.getCommonData().setIsBuffing(false);
-			PacketSendUtility.sendPacket(player, new SM_PET(1, false));
-		}
 	}
 
 	private boolean validateSetDopeItem(Pet pet, int itemId, int slot) {
