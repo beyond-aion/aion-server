@@ -20,6 +20,7 @@ import com.aionemu.gameserver.model.templates.item.actions.AbstractItemAction;
 import com.aionemu.gameserver.model.templates.item.actions.ItemActions;
 import com.aionemu.gameserver.model.templates.item.actions.SkillUseAction;
 import com.aionemu.gameserver.model.templates.pet.FoodType;
+import com.aionemu.gameserver.model.templates.pet.PetDopingEntry;
 import com.aionemu.gameserver.model.templates.pet.PetFeedResult;
 import com.aionemu.gameserver.model.templates.pet.PetFlavour;
 import com.aionemu.gameserver.model.templates.pet.PetFunction;
@@ -169,6 +170,8 @@ public class PetService {
 			return;
 
 		if (action < 2) { // add, replace or delete item
+			if (!validateSetDopeItem(pet, itemId, slot))
+				return;
 			pet.getCommonData().getDopingBag().setItem(itemId, slot);
 			action = 0;
 		} else if (action == 3) { // use item
@@ -228,6 +231,30 @@ public class PetService {
 			pet.getCommonData().setIsBuffing(false);
 			PacketSendUtility.sendPacket(player, new SM_PET(1, false));
 		}
+	}
+
+	private boolean validateSetDopeItem(Pet pet, int itemId, int slot) {
+		PetFunction petFunction = pet.getObjectTemplate().getPetFunction(PetFunctionType.DOPING);
+		if (petFunction == null) {
+			AuditLogger.log(pet.getMaster(), "tried to set buff item " + itemId + " but " + pet + " doesn't support buffing");
+			return false;
+		}
+		short dopeId = (short) petFunction.getId();
+		PetDopingEntry dope = DataManager.PET_DOPING_DATA.getDopingTemplate(dopeId);
+		if (slot == 0 && !dope.isUseFood()) {
+			AuditLogger.log(pet.getMaster(), "tried to set item " + itemId + " in pet buff food slot but " + pet + " doesn't support buffing with food");
+			return false;
+		}
+		if (slot == 1 && !dope.isUseDrink()) {
+			AuditLogger.log(pet.getMaster(), "tried to set item " + itemId + " in pet buff drink slot but " + pet + " doesn't support buffing with drinks");
+			return false;
+		}
+		if (slot > 1 && slot - 1 > dope.getScrollsUsed()) {
+			AuditLogger.log(pet.getMaster(), "tried to set item " + itemId + " in pet buff scroll slot " + (slot - 1) + " but " + pet + " only supports "
+				+ dope.getScrollsUsed() + " scrolls");
+			return false;
+		}
+		return true;
 	}
 
 	private boolean isPetItemUseAllowed(Player player, Item item) {

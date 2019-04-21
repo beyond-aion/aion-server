@@ -7,7 +7,7 @@ import com.aionemu.gameserver.model.animations.ObjectDeleteAnimation;
 import com.aionemu.gameserver.model.gameobjects.Pet;
 import com.aionemu.gameserver.model.gameobjects.PetAction;
 import com.aionemu.gameserver.model.gameobjects.player.PetCommonData;
-import com.aionemu.gameserver.model.templates.pet.PetDopingEntry;
+import com.aionemu.gameserver.model.templates.pet.PetDopingBag;
 import com.aionemu.gameserver.model.templates.pet.PetFunctionType;
 import com.aionemu.gameserver.model.templates.pet.PetTemplate;
 import com.aionemu.gameserver.network.aion.AionConnection;
@@ -291,37 +291,27 @@ public class SM_PET extends AionServerPacket {
 
 		int specialtyCount = 0;
 		if (petTemplate.containsFunction(PetFunctionType.WAREHOUSE)) {
-			writeH(PetFunctionType.WAREHOUSE.getId());
+			writeC(PetFunctionType.WAREHOUSE.getId());
+			writeC(0); // length of following bytes
 			specialtyCount++;
 		}
 		if (petTemplate.containsFunction(PetFunctionType.LOOT)) {
-			writeH(PetFunctionType.LOOT.getId());
+			writeC(PetFunctionType.LOOT.getId());
+			writeC(1); // length of following bytes
 			writeC(0);
 			specialtyCount++;
 		}
 		if (petTemplate.containsFunction(PetFunctionType.DOPING)) {
-			writeH(PetFunctionType.DOPING.getId());
-			short dopeId = (short) petTemplate.getPetFunction(PetFunctionType.DOPING).getId();
-			PetDopingEntry dope = DataManager.PET_DOPING_DATA.getDopingTemplate(dopeId);
-			writeD(dope.isUseFood() ? petCommonData.getDopingBag().getFoodItem() : 0);
-			writeD(dope.isUseDrink() ? petCommonData.getDopingBag().getDrinkItem() : 0);
-			int[] scrollBag = petCommonData.getDopingBag().getScrollsUsed();
-			if (scrollBag.length == 0) {
-				writeQ(0);
-				writeQ(0);
-				writeQ(0);
-			} else {
-				writeD(scrollBag[0]); // Scroll 1
-				writeD(scrollBag.length > 1 ? scrollBag[1] : 0); // Scroll 2
-				writeD(scrollBag.length > 2 ? scrollBag[2] : 0); // Scroll 3 - no pet supports it yet
-				writeD(scrollBag.length > 3 ? scrollBag[3] : 0); // Scroll 4 - no pet supports it yet
-				writeD(scrollBag.length > 4 ? scrollBag[4] : 0); // Scroll 5 - no pet supports it yet
-				writeD(scrollBag.length > 5 ? scrollBag[5] : 0); // Scroll 6 - no pet supports it yet
-			}
+			writeC(PetFunctionType.DOPING.getId());
+			writeC(PetDopingBag.MAX_ITEMS * 4); // length of following bytes (always write MAX_ITEMS, otherwise some pets show items of other pets) 
+			int[] items = petCommonData.getDopingBag().getItems();
+			for (int i = 0; i < PetDopingBag.MAX_ITEMS; i++)
+				writeD(i < items.length ? items[i] : 0);
 			specialtyCount++;
 		}
 		if (petTemplate.containsFunction(PetFunctionType.FOOD)) {
-			writeH(PetFunctionType.FOOD.getId());
+			writeC(PetFunctionType.FOOD.getId());
+			writeC(8); // length of following bytes
 			writeD(petCommonData.getFeedProgress().getDataForPacket());
 			writeD((int) (petCommonData.getRefeedDelay() / 1000));
 			specialtyCount++;

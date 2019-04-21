@@ -7,6 +7,7 @@ import java.util.Arrays;
  */
 public class PetDopingBag {
 
+	public static final int MAX_ITEMS = 8; // food slot, drink slot and 6 scroll slots
 	private int[] itemBag = null;
 	private boolean isDirty = false;
 
@@ -56,6 +57,10 @@ public class PetDopingBag {
 		if (itemBag == null || itemBag.length < 3)
 			return new int[0];
 		return Arrays.copyOfRange(itemBag, 2, itemBag.length);
+	}
+
+	public int[] getItems() {
+		return itemBag == null ? new int[0] : itemBag;
 	}
 
 	/**

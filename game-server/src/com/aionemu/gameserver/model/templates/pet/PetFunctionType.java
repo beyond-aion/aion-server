@@ -4,38 +4,33 @@ package com.aionemu.gameserver.model.templates.pet;
  * @author IlBuono, Rolandas
  */
 public enum PetFunctionType {
-	WAREHOUSE(0, true),
-	FOOD(1, 64),
-	DOPING(2, 256),
-	LOOT(3, 8),
-	BUFF(4, 8), //FIXME: find correct value
-	MERCHANT(5, true),
+	WAREHOUSE(0),
+	FOOD(1),
+	DOPING(2),
+	LOOT(3),
+	BUFF(4),
+	MERCHANT(5),
+	NONE(6),
 
-	APPEARANCE(1),
-	NONE(6, true),
+	APPEARANCE(1, false),
 
 	// non writable to packets
-	BAG(-1),
-	WING(-2);
+	BAG(-1, false),
+	WING(-2, false);
 
-	private short id;
-	private boolean isPlayerFunc = false;
+	private final byte id;
+	private final boolean isPlayerFunc;
+
+	PetFunctionType(int id) {
+		this(id, true);
+	}
 
 	PetFunctionType(int id, boolean isPlayerFunc) {
-		this(id);
+		this.id = (byte) id;
 		this.isPlayerFunc = isPlayerFunc;
 	}
 
-	PetFunctionType(int id, int dataBitCount) {
-		this(dataBitCount << 5 | id);
-		this.isPlayerFunc = true;
-	}
-
-	PetFunctionType(int id) {
-		this.id = (short) (id & 0xFFFF);
-	}
-
-	public int getId() {
+	public byte getId() {
 		return id;
 	}
 
