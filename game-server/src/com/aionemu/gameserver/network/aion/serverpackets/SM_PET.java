@@ -6,6 +6,7 @@ import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.animations.ObjectDeleteAnimation;
 import com.aionemu.gameserver.model.gameobjects.Pet;
 import com.aionemu.gameserver.model.gameobjects.PetAction;
+import com.aionemu.gameserver.model.gameobjects.PetSpecialFunction;
 import com.aionemu.gameserver.model.gameobjects.player.PetCommonData;
 import com.aionemu.gameserver.model.templates.pet.PetDopingBag;
 import com.aionemu.gameserver.model.templates.pet.PetFunctionType;
@@ -75,21 +76,21 @@ public class SM_PET extends AionServerPacket {
 		this.pets = pets;
 	}
 
-	public SM_PET(boolean isLooting) {
-		this(isLooting, 0);
+	public SM_PET(PetSpecialFunction specialFunction, boolean active) {
+		this(specialFunction, active, 0);
 	}
 
-	public SM_PET(boolean isLooting, int npcObjId) {
+	public SM_PET(PetSpecialFunction specialFunction, boolean active, int npcObjId) {
 		this.action = PetAction.SPECIAL_FUNCTION;
-		this.isActing = isLooting;
-		this.subType = 3;
+		this.isActing = active;
+		this.subType = specialFunction.getId();
 		this.lootNpcObjId = npcObjId;
 	}
 
 	public SM_PET(int dopeAction, int itemId, int slot) {
 		this.action = PetAction.SPECIAL_FUNCTION;
 		this.dopeAction = dopeAction;
-		this.subType = 2;
+		this.subType = PetSpecialFunction.DOPING.getId();
 		itemObjectId = itemId; // it's template ID, not objectId though. also it's misused as slot2 for slot switch action (dopeAction 2)
 		dopeSlot = slot;
 	}
@@ -270,6 +271,9 @@ public class SM_PET extends AionServerPacket {
 						writeC(0);
 						writeC(isActing ? 1 : 0);
 					}
+				} else if (subType == 4) {
+					writeC(0);
+					writeC(isActing ? 1 : 0);
 				}
 				break;
 		}

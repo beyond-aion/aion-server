@@ -12,6 +12,7 @@ import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Pet;
+import com.aionemu.gameserver.model.gameobjects.PetSpecialFunction;
 import com.aionemu.gameserver.model.gameobjects.player.PetCommonData;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.team.common.legacy.LootRuleType;
@@ -25,10 +26,12 @@ import com.aionemu.gameserver.model.templates.pet.PetFeedResult;
 import com.aionemu.gameserver.model.templates.pet.PetFlavour;
 import com.aionemu.gameserver.model.templates.pet.PetFunction;
 import com.aionemu.gameserver.model.templates.pet.PetFunctionType;
+import com.aionemu.gameserver.model.trade.TradeList;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ITEM_USAGE_ANIMATION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_PET;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
+import com.aionemu.gameserver.services.TradeService;
 import com.aionemu.gameserver.services.item.ItemPacketService.ItemUpdateType;
 import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
@@ -138,11 +141,11 @@ public class PetService {
 		}
 	}
 
-	public void useDoping(Player player, int action, int itemId, int slot, int slot2) {
-		Pet pet = player.getPet();
-		if (pet == null || pet.getCommonData().getDopingBag() == null)
+	public void useDoping(Pet pet, int action, int itemId, int slot, int slot2) {
+		if (pet.getCommonData().getDopingBag() == null)
 			return;
 
+		Player player = pet.getMaster();
 		if (action < 2) { // add, replace or delete item
 			if (!validateSetDopeItem(pet, itemId, slot))
 				return;
@@ -223,27 +226,47 @@ public class PetService {
 		return true;
 	}
 
-	public void activateLoot(Player player, boolean activate) {
-		Pet pet = player.getPet();
-		if (pet == null)
-			return;
-
+	public void activateLoot(Pet pet, boolean activate) {
 		if (activate) {
 			if (!pet.getObjectTemplate().containsFunction(PetFunctionType.LOOT)) {
-				AuditLogger.log(player, "tried to enable auto-loot on non-looting " + pet);
+				AuditLogger.log(pet.getMaster(), "tried to enable auto-loot on non-looting " + pet);
 				return;
 			}
-			if (player.isInTeam()) {
-				LootRuleType lootType = player.getLootGroupRules().getLootRule();
+			if (pet.getMaster().isInTeam()) {
+				LootRuleType lootType = pet.getMaster().getLootGroupRules().getLootRule();
 				if (lootType == LootRuleType.FREEFORALL) {
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_LOOTING_PET_MESSAGE03());
+					PacketSendUtility.sendPacket(pet.getMaster(), SM_SYSTEM_MESSAGE.STR_MSG_LOOTING_PET_MESSAGE03());
 					return;
 				}
 			}
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_LOOTING_PET_MESSAGE01());
+			PacketSendUtility.sendPacket(pet.getMaster(), SM_SYSTEM_MESSAGE.STR_MSG_LOOTING_PET_MESSAGE01());
 		}
 		pet.getCommonData().setIsLooting(activate);
-		PacketSendUtility.sendPacket(player, new SM_PET(activate));
+		PacketSendUtility.sendPacket(pet.getMaster(), new SM_PET(PetSpecialFunction.AUTOLOOT, activate));
+	}
+
+	public void activateAutoSell(Pet pet, boolean activate) {
+		if (activate && !pet.getObjectTemplate().containsFunction(PetFunctionType.MERCHANT)) {
+			AuditLogger.log(pet.getMaster(), "tried to enable auto-sell on non-selling " + pet);
+			return;
+		}
+		pet.getCommonData().setIsSelling(activate);
+		PacketSendUtility.sendPacket(pet.getMaster(), new SM_PET(PetSpecialFunction.AUTOSELL, activate));
+	}
+
+	public void sell(Pet pet, List<Item> items) {
+		if (pet == null || !pet.getCommonData().isSelling())
+			return;
+		PetFunction pf = pet.getObjectTemplate().getPetFunction(PetFunctionType.MERCHANT);
+		if (pf != null) {
+			TradeList tradeList = new TradeList(pet.getObjectId());
+			for (Item item : items)
+				tradeList.addItem(item.getObjectId(), item.getItemCount());
+			if (tradeList.size() > 0) {
+				TradeService.performSellToShop(pet.getMaster(), tradeList, null, pf.getRatePrice());
+				PacketSendUtility.sendPacket(pet.getMaster(), SM_SYSTEM_MESSAGE.STR_MSG_MERCHANT_PET_GET_SELL_ITEM(pet.getName()));
+			}
+		}
 	}
 
 	private static class SingletonHolder {

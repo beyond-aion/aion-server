@@ -39,6 +39,7 @@ public class PetCommonData implements Expirable {
 	private int expireTime;
 	private Timestamp despawnTime;
 	private boolean isLooting = false;
+	private boolean isSelling = false;
 	private volatile Future<?> refeedTask;
 
 	public PetCommonData(int objectId, int templateId, int masterObjectId, int expireTime) {
@@ -273,6 +274,14 @@ public class PetCommonData implements Expirable {
 
 	public boolean isLooting() {
 		return this.isLooting;
+	}
+
+	public boolean isSelling() {
+		return isSelling;
+	}
+
+	public void setIsSelling(boolean selling) {
+		isSelling = selling;
 	}
 
 	public PetDopingBag getDopingBag() {

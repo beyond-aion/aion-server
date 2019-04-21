@@ -4,6 +4,7 @@ import com.aionemu.gameserver.configs.main.PeriodicSaveConfig;
 import com.aionemu.gameserver.controllers.PetController;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Pet;
+import com.aionemu.gameserver.model.gameobjects.PetSpecialFunction;
 import com.aionemu.gameserver.model.gameobjects.player.PetCommonData;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_PET;
@@ -21,7 +22,7 @@ public class PetSpawnService {
 	 * @param player
 	 * @param petId
 	 */
-	public static final void summonPet(Player player, int templateId) {
+	public static void summonPet(Player player, int templateId) {
 		PetCommonData lastPetCommonData;
 
 		if (player.getPet() != null) {
@@ -54,7 +55,9 @@ public class PetSpawnService {
 			petCommonData.clearMoodStatistics();
 		player.getPetList().setLastUsedPetTemplateId(templateId);
 		if (petCommonData.isLooting())
-			PacketSendUtility.sendPacket(player, new SM_PET(true));
+			PacketSendUtility.sendPacket(player, new SM_PET(PetSpecialFunction.AUTOLOOT, true));
+		if (petCommonData.isSelling())
+			PacketSendUtility.sendPacket(player, new SM_PET(PetSpecialFunction.AUTOSELL, true));
 	}
 
 }

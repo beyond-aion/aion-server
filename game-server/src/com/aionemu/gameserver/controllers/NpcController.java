@@ -21,6 +21,7 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.DropNpc;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.Pet;
+import com.aionemu.gameserver.model.gameobjects.PetSpecialFunction;
 import com.aionemu.gameserver.model.gameobjects.Summon;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -160,10 +161,10 @@ public class NpcController extends CreatureController<Npc> {
 			int npcObjId = owner.getObjectId();
 			Set<DropItem> drops = DropRegistrationService.getInstance().getCurrentDropMap().get(npcObjId);
 			if (drops != null && !drops.isEmpty()) {
-				PacketSendUtility.sendPacket(lootingPet.getMaster(), new SM_PET(true, npcObjId));
+				PacketSendUtility.sendPacket(lootingPet.getMaster(), new SM_PET(PetSpecialFunction.AUTOLOOT, true, npcObjId));
 				for (DropItem dropItem : drops.toArray(new DropItem[drops.size()])) // array copy since the drops get removed on retrieval
 					DropService.getInstance().requestDropItem(lootingPet.getMaster(), npcObjId, dropItem.getIndex(), true);
-				PacketSendUtility.sendPacket(lootingPet.getMaster(), new SM_PET(false, npcObjId));
+				PacketSendUtility.sendPacket(lootingPet.getMaster(), new SM_PET(PetSpecialFunction.AUTOLOOT, false, npcObjId));
 			}
 		}
 	}

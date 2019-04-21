@@ -27670,6 +27670,13 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	}
 
 	/**
+	 * %0 sold the item automatically.
+	 */
+	public static AionServerPacket STR_MSG_MERCHANT_PET_GET_SELL_ITEM(String name) {
+		return new SM_SYSTEM_MESSAGE(1402570, name);
+	}
+
+	/**
 	 * You do not have enough Abyss Points to perform an Equipment Blessing.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_REGISTER_ITEM_MSG_UPGRADE_CANNOT_NEED_AP() {

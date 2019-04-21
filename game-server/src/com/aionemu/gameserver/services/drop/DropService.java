@@ -21,6 +21,7 @@ import com.aionemu.gameserver.model.drop.DropItem;
 import com.aionemu.gameserver.model.gameobjects.DropNpc;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.model.gameobjects.Pet;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.InRoll;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -38,6 +39,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.RespawnService;
 import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.services.item.ItemService.ItemUpdatePredicate;
+import com.aionemu.gameserver.services.toypet.PetService;
 import com.aionemu.gameserver.taskmanager.tasks.TemporaryTradeTimeTask;
 import com.aionemu.gameserver.utils.ChatUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -432,6 +434,7 @@ public class DropService {
 			}
 		}
 
+		long acquiredCount = requestedItem.getCount() - remainingCount;
 		if (remainingCount <= 0) {
 			synchronized (dropItems) {
 				dropItems.remove(requestedItem);
@@ -439,6 +442,14 @@ public class DropService {
 			announceDrop(requestedItem.getWinningPlayer() != null ? requestedItem.getWinningPlayer() : player, template);
 		} else
 			requestedItem.setCount(remainingCount);
+
+		Pet pet = player.getPet();
+		if (acquiredCount > 0 && pet != null && pet.getCommonData().isSelling()) {
+			List<Item> stacks = player.getInventory().getItemsByItemId(requestedItem.getDropTemplate().getItemId());
+			if (stacks.stream().anyMatch(item -> item.isSellable() && item.getItemTemplate().getItemQuality() == ItemQuality.JUNK)) {
+				PetService.getInstance().sell(pet, stacks);
+			}
+		}
 
 		if (!autoLoot)
 			resendDropList(dropNpc.getLootingPlayer(), npcObjectId, dropItems);

@@ -37,7 +37,7 @@ public class CM_PET extends AionClientPacket {
 	private int dopingAction;
 	private int dopingSlot1;
 	private int dopingSlot2;
-	private int activateLoot;
+	private int activateSpecialFunction;
 
 	@SuppressWarnings("unused")
 	private int unk2, unk3, unk5, unk6;
@@ -67,9 +67,11 @@ public class CM_PET extends AionClientPacket {
 				break;
 			case FOOD:
 				actionType = readD();
-				if (actionType == 3)
-					activateLoot = readD();
-				else if (actionType == 2) {
+				if (actionType == 3 || actionType == 4) { // auto loot (3), or auto sell items (4)
+					activateSpecialFunction = readD();
+					readD(); // always 0
+					readD(); // always 0
+				} else if (actionType == 2) {
 					dopingAction = readD();
 					if (dopingAction == 0) { // add item
 						dopingItemId = readD();
@@ -141,9 +143,11 @@ public class CM_PET extends AionClientPacket {
 				if (pet == null)
 					return;
 				if (actionType == 2) { // Pet doping
-					PetService.getInstance().useDoping(player, dopingAction, dopingItemId, dopingSlot1, dopingSlot2);
+					PetService.getInstance().useDoping(pet, dopingAction, dopingItemId, dopingSlot1, dopingSlot2);
 				} else if (actionType == 3) { // Pet looting
-					PetService.getInstance().activateLoot(player, activateLoot != 0);
+					PetService.getInstance().activateLoot(pet, activateSpecialFunction != 0);
+				} else if (actionType == 4) { // Pet auto sell items
+					PetService.getInstance().activateAutoSell(pet, activateSpecialFunction != 0);
 				} else if (objectId == 0) {
 					pet.getCommonData().setCancelFeed(true);
 					PacketSendUtility.sendPacket(player, new SM_PET(4, 0, 0, player.getPet()));
