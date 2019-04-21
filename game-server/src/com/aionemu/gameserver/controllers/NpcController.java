@@ -157,7 +157,7 @@ public class NpcController extends CreatureController<Npc> {
 
 	private void petLoot(Npc owner) {
 		Pet lootingPet = findPetForLooting(owner);
-		if (lootingPet != null) {
+		if (lootingPet != null && PositionUtil.isInRange(owner, lootingPet.getMaster(), 28, false)) {
 			int npcObjId = owner.getObjectId();
 			Set<DropItem> drops = DropRegistrationService.getInstance().getCurrentDropMap().get(npcObjId);
 			if (drops != null && !drops.isEmpty()) {
