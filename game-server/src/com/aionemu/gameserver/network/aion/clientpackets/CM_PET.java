@@ -77,7 +77,7 @@ public class CM_PET extends AionClientPacket {
 					} else if (dopingAction == 1) { // remove item
 						dopingSlot1 = readD();
 						dopingItemId = readD();
-					} else if (dopingAction == 2) { // move item
+					} else if (dopingAction == 2) { // switch items in two occupied slots
 						dopingSlot1 = readD();
 						dopingSlot2 = readD();
 					} else if (dopingAction == 3) { // use doping
@@ -138,25 +138,20 @@ public class CM_PET extends AionClientPacket {
 					pet.getController().delete();
 				break;
 			case FOOD:
-				if (actionType == 2) {
-					// Pet doping
-					if (dopingAction == 2)
-						PetService.getInstance().relocateDoping(player, dopingSlot1, dopingSlot2);
-					else
-						PetService.getInstance().useDoping(player, dopingAction, dopingItemId, dopingSlot1);
-				} else if (actionType == 3) {
-					// Pet looting
+				if (pet == null)
+					return;
+				if (actionType == 2) { // Pet doping
+					PetService.getInstance().useDoping(player, dopingAction, dopingItemId, dopingSlot1, dopingSlot2);
+				} else if (actionType == 3) { // Pet looting
 					PetService.getInstance().activateLoot(player, activateLoot != 0);
-				} else if (pet != null) {
-					if (objectId == 0) {
-						pet.getCommonData().setCancelFeed(true);
-						PacketSendUtility.sendPacket(player, new SM_PET(4, 0, 0, player.getPet()));
-						PacketSendUtility.sendPacket(player, new SM_EMOTION(player, EmotionType.END_FEEDING, 0, player.getObjectId()));
-					} else if (!pet.getCommonData().isFeedingTime()) {
-						PacketSendUtility.sendPacket(player, new SM_PET(8, objectId, count, player.getPet()));
-					} else
-						PetService.getInstance().removeObject(objectId, count, player);
-				}
+				} else if (objectId == 0) {
+					pet.getCommonData().setCancelFeed(true);
+					PacketSendUtility.sendPacket(player, new SM_PET(4, 0, 0, player.getPet()));
+					PacketSendUtility.sendPacket(player, new SM_EMOTION(player, EmotionType.END_FEEDING, 0, player.getObjectId()));
+				} else if (!pet.getCommonData().isFeedingTime()) {
+					PacketSendUtility.sendPacket(player, new SM_PET(8, objectId, count, player.getPet()));
+				} else
+					PetService.getInstance().removeObject(objectId, count, player);
 				break;
 			case RENAME:
 				if (!NameRestrictionService.isValidPetName(petName) || NameRestrictionService.isForbidden(petName))

@@ -138,33 +138,7 @@ public class PetService {
 		}
 	}
 
-	/**
-	 * Currently only scrolls are can be relocated
-	 * 
-	 * @param player
-	 * @param targetSlot
-	 * @param destinationSlot
-	 */
-	public void relocateDoping(Player player, int targetSlot, int destinationSlot) {
-		Pet pet = player.getPet();
-		if (pet == null || pet.getCommonData().getDopingBag() == null)
-			return;
-		int[] scrollBag = pet.getCommonData().getDopingBag().getScrollsUsed();
-		int targetItem = scrollBag[targetSlot - 2];
-		if (destinationSlot - 2 > scrollBag.length - 1) {
-			pet.getCommonData().getDopingBag().setItem(targetItem, destinationSlot);
-			PacketSendUtility.sendPacket(player, new SM_PET(0, targetItem, destinationSlot));
-			pet.getCommonData().getDopingBag().setItem(0, targetSlot);
-			PacketSendUtility.sendPacket(player, new SM_PET(0, 0, targetSlot));
-		} else {
-			pet.getCommonData().getDopingBag().setItem(scrollBag[destinationSlot - 2], targetSlot);
-			PacketSendUtility.sendPacket(player, new SM_PET(0, scrollBag[destinationSlot - 2], targetSlot));
-			pet.getCommonData().getDopingBag().setItem(targetItem, destinationSlot);
-			PacketSendUtility.sendPacket(player, new SM_PET(0, targetItem, destinationSlot));
-		}
-	}
-
-	public void useDoping(final Player player, int action, int itemId, int slot) {
+	public void useDoping(Player player, int action, int itemId, int slot, int slot2) {
 		Pet pet = player.getPet();
 		if (pet == null || pet.getCommonData().getDopingBag() == null)
 			return;
@@ -173,7 +147,10 @@ public class PetService {
 			if (!validateSetDopeItem(pet, itemId, slot))
 				return;
 			pet.getCommonData().getDopingBag().setItem(itemId, slot);
-			action = 0;
+			PacketSendUtility.sendPacket(player, new SM_PET(action, itemId, slot));
+		} else if (action == 2) {
+			pet.getCommonData().getDopingBag().switchItems(slot, slot2);
+			PacketSendUtility.sendPacket(pet.getMaster(), new SM_PET(action, slot2, slot));
 		} else if (action == 3) { // use item
 			List<Item> items = player.getInventory().getItemsByItemId(itemId);
 			Item useItem = items.get(0);
@@ -190,11 +167,8 @@ public class PetService {
 			limit.setDelayTime(useDelay);
 
 			if (player.isItemUseDisabled(limit)) {
-				final int useAction = action;
-				final int useItemId = itemId;
-				final int useSlot = slot;
 				// schedule re-check
-				ThreadPoolManager.getInstance().schedule(() -> PacketSendUtility.sendPacket(player, new SM_PET(useAction, useItemId, useSlot)), useDelay);
+				ThreadPoolManager.getInstance().schedule(() -> PacketSendUtility.sendPacket(player, new SM_PET(action, itemId, slot)), useDelay);
 				return;
 			}
 
@@ -211,9 +185,8 @@ public class PetService {
 				} else
 					log.warn("Pet attempt to use not skill use item");
 			}
+			PacketSendUtility.sendPacket(player, new SM_PET(action, itemId, slot));
 		}
-
-		PacketSendUtility.sendPacket(player, new SM_PET(action, itemId, slot));
 	}
 
 	private boolean validateSetDopeItem(Pet pet, int itemId, int slot) {

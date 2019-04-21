@@ -39,14 +39,11 @@ public class PetDopingBag {
 	 * @param slot
 	 *          - slot number; 0 for food, 1 for drink, the rest are for scrolls
 	 */
-	public void setItem(int itemId, int slot) {
-		if (itemBag == null) {
-			itemBag = new int[slot + 1];
-			isDirty = true;
-		} else if (slot > itemBag.length - 1) {
-			itemBag = Arrays.copyOf(itemBag, slot + 1);
-			isDirty = true;
-		}
+	public synchronized void setItem(int itemId, int slot) {
+		if (slot < 0 || slot >= MAX_ITEMS)
+			throw new IllegalArgumentException("Slot index " + slot + " for item " + itemId + " is invalid.");
+		if (itemBag == null || slot >= itemBag.length)
+			itemBag = itemBag == null ? new int[slot + 1] : Arrays.copyOf(itemBag, slot + 1);
 		if (itemBag[slot] != itemId) {
 			itemBag[slot] = itemId;
 			isDirty = true;
@@ -61,6 +58,18 @@ public class PetDopingBag {
 
 	public int[] getItems() {
 		return itemBag == null ? new int[0] : itemBag;
+	}
+
+	/**
+	 * Currently only scrolls can be relocated
+	 */
+	public void switchItems(int slot1, int slot2) {
+		if (slot1 < 2 || slot2 < 2)
+			return;
+		int slot1Item = itemBag.length > slot1 ? itemBag[slot1] : 0;
+		int slot2Item = itemBag.length > slot2 ? itemBag[slot2] : 0;
+		setItem(slot1Item, slot2);
+		setItem(slot2Item, slot1);
 	}
 
 	/**

@@ -86,16 +86,11 @@ public class SM_PET extends AionServerPacket {
 		this.lootNpcObjId = npcObjId;
 	}
 
-	public SM_PET(int dopeAction, boolean isActing) {
+	public SM_PET(int dopeAction, int itemId, int slot) {
 		this.action = PetAction.SPECIAL_FUNCTION;
 		this.dopeAction = dopeAction;
-		this.isActing = isActing;
 		this.subType = 2;
-	}
-
-	public SM_PET(int dopeAction, int itemId, int slot) {
-		this(dopeAction, true);
-		itemObjectId = itemId; // it's template ID, not objectId though
+		itemObjectId = itemId; // it's template ID, not objectId though. also it's misused as slot2 for slot switch action (dopeAction 2)
 		dopeSlot = slot;
 	}
 
@@ -255,9 +250,11 @@ public class SM_PET extends AionServerPacket {
 							writeD(dopeSlot);
 							break;
 						case 1: // remove item
-							writeD(0);
+							writeD(dopeSlot);
 							break;
-						case 2: // TODO: move item from one slot to other
+						case 2: // move item from one slot to other
+							writeD(dopeSlot); // slot 1
+							writeD(itemObjectId); // slot 2
 							break;
 						case 3: // use item
 							writeD(itemObjectId);
