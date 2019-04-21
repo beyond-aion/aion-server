@@ -13,7 +13,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.LOG;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.TYPE;
 import com.aionemu.gameserver.services.LifeStatsRestoreService;
-import com.aionemu.gameserver.services.RespawnService;
 import com.aionemu.gameserver.skillengine.effect.AbnormalState;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
@@ -129,6 +128,7 @@ public abstract class CreatureLifeStats<T extends Creature> {
 			return currentHp;
 
 		int hpReduced = 0;
+		boolean died = false;
 		hpLock.lock();
 		try {
 			if (isDead)
@@ -140,7 +140,7 @@ public abstract class CreatureLifeStats<T extends Creature> {
 				currentHp = newHp;
 				if (currentHp == 0) {
 					currentMp = 0;
-					isDead = true;
+					isDead = died = true;
 					unsetIsAboutToDie();
 				}
 			}
@@ -150,14 +150,10 @@ public abstract class CreatureLifeStats<T extends Creature> {
 
 		if (hpReduced > 0 || skillId != 0)
 			onReduceHp(type, hpReduced, skillId, log);
-		if (hpReduced > 0) {
-			if (isDead) {
-				if (RespawnService.hasRespawnTask(getOwner())) // TODO remove this once duplicate respawns are fully fixed
-					CreatureLifeStats.log.warn(getOwner() + " (state: " + getOwner().getState() + ", HP reduced " + hpReduced + ") is about to get a second respawn task!", new IllegalStateException());
-				getOwner().getController().onDie(attacker);
-			}
+		if (died)
+			getOwner().getController().onDie(attacker);
+		if (hpReduced > 0)
 			getOwner().getObserveController().notifyHPChangeObservers(currentHp);
-		}
 		return currentHp;
 	}
 
@@ -423,11 +419,8 @@ public abstract class CreatureLifeStats<T extends Creature> {
 		try {
 			currentHp = (int) (hpPercent / 100f * getMaxHp());
 			getOwner().getObserveController().notifyHPChangeObservers(currentHp);
-			if (currentHp > 0) {
-				if (isDead && RespawnService.hasRespawnTask(getOwner())) // TODO remove this once duplicate respawns are fully fixed
-					log.warn(getOwner() + " (state: " + getOwner().getState() + ", set HP to " + hpPercent + "%) got revived with a respawn task already present!", new IllegalStateException());
+			if (currentHp > 0)
 				isDead = false;
-			}
 		} finally {
 			hpLock.unlock();
 		}
@@ -441,8 +434,6 @@ public abstract class CreatureLifeStats<T extends Creature> {
 		hpLock.lock();
 		try {
 			currentHp = Math.max(0, hp);
-			if (isDead && currentHp > 0 && RespawnService.hasRespawnTask(getOwner())) // TODO remove this once duplicate respawns are fully fixed
-				log.warn(getOwner() + " (state: " + getOwner().getState() + ", set HP to " + hp + ") got revived with a respawn task already present!", new IllegalStateException());
 			isDead = currentHp == 0;
 		} finally {
 			hpLock.unlock();
