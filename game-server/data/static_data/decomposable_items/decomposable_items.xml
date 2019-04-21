@@ -34495,16 +34495,16 @@
 	</decomposable>
 	<decomposable item_id="188054029"><!-- [Event] Blooming Gift -->
 		<items chance="4">
-			<item id="186000242" min_count="4" /><!-- Ceramium Medal -->
+			<item id="186000242" min_count="3" /><!-- Ceramium Medal -->
 		</items>
 		<items chance="7">
-			<item id="186000051" min_count="7" /><!-- Major Ancient Crown -->
+			<item id="186000051" min_count="5" /><!-- Major Ancient Crown -->
 		</items>
 		<items chance="7">
 			<item id="188053610" min_count="3" max_count="5" /><!-- [Event] Level 70 Composite Manastone Bundle -->
 		</items>
 		<items chance="11.7">
-			<item id="166020000" min_count="8" /><!-- Omega Enchantment Stone -->
+			<item id="166020000" min_count="4" /><!-- Omega Enchantment Stone -->
 		</items>
 		<items chance="25.98">
 			<item id="186000237" min_count="25" /><!-- Ancient Coin -->
