@@ -12,15 +12,14 @@ public enum PetEmote {
 	NO_INTERACTION(128), // not sure when this is sent, sometimes after miol status action
 	FLY_START(129),
 	FLY_STOP(130),
+	FLY(131),
 	EMOTION(133), // when stroking, etc.
+	ALARM(142),
 	INIT_INTERACTION(145), // init miol status action
 	PERFORM_INTERACTION(146), // perform miol status action
-	ALARM(-114),
-	UNK_M110(-110),
-	UNK_M111(-111),
-	UNK_M123(-123),
-	FLY(-125),
-	UNK_M128(-128),
+	BUFF(148),
+	LOOT_START(149),
+	LOOT_STOP(150),
 	UNKNOWN(255);
 
 	private static TIntObjectHashMap<PetEmote> petEmotes;
@@ -32,9 +31,9 @@ public enum PetEmote {
 		}
 	}
 
-	private int emoteId;
+	private final int emoteId;
 
-	private PetEmote(int emoteId) {
+	PetEmote(int emoteId) {
 		this.emoteId = emoteId;
 	}
 

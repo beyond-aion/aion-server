@@ -75,6 +75,7 @@ public class CM_PET_EMOTE extends AionClientPacket {
 				pet.getMoveController().setNewDirection(x2, y2, z2, h);
 				PacketSendUtility.broadcastToSightedPlayers(pet, new SM_PET_EMOTE(pet, emote));
 				break;
+			case BUFF:
 			case UNKNOWN:
 				break;
 			default:
