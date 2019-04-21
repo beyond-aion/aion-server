@@ -46,11 +46,11 @@ public class HealCastorOnAttackedEffect extends EffectTemplate {
 				if (group != null) {
 					for (Player p : group.getOnlineMembers()) {
 						if (PositionUtil.isInRange(effect.getEffected(), p, range))
-							p.getLifeStats().increaseHp(TYPE.HP, valueWithDelta, effect.getSkillId(), LOG.REGULAR);
+							p.getLifeStats().increaseHp(TYPE.HP, valueWithDelta, effect, LOG.REGULAR);
 					}
 				} else {
 					if (PositionUtil.isInRange(effect.getEffected(), player, range))
-						effect.getEffector().getLifeStats().increaseHp(TYPE.HP, valueWithDelta, effect.getSkillId(), LOG.REGULAR);
+						effect.getEffector().getLifeStats().increaseHp(TYPE.HP, valueWithDelta, effect, LOG.REGULAR);
 				}
 			}
 		};

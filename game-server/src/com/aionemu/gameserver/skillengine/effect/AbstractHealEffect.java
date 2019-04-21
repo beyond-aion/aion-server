@@ -38,13 +38,8 @@ public abstract class AbstractHealEffect extends EffectTemplate {
 	public int calculateHeal(Effect effect, HealType type, int valueWithDelta, int currentValue, int maxCurValue) {
 		Creature effector = effect.getEffector();
 		Creature effected = effect.getEffected();
-		int possibleHealValue = 0;
-		if (percent)
-			possibleHealValue = maxCurValue * valueWithDelta / 100;
-		else
-			possibleHealValue = valueWithDelta;
 
-		int finalHeal = possibleHealValue;
+		int finalHeal = percent ? maxCurValue * valueWithDelta / 100 : valueWithDelta;
 
 		if (type == HealType.HP) {
 			if (!(this instanceof ProcHealInstantEffect)) {
@@ -75,9 +70,9 @@ public abstract class AbstractHealEffect extends EffectTemplate {
 		switch (healType) {
 			case HP:
 				if (this instanceof ProcHealInstantEffect)// item heal, eg potions
-					effected.getLifeStats().increaseHp(TYPE.HP, healValue, 0, LOG.REGULAR);
+					effected.getLifeStats().increaseHp(TYPE.HP, healValue, effect.getEffector());
 				else
-					effected.getLifeStats().increaseHp(healValue);
+					effected.getLifeStats().increaseHp(TYPE.REGULAR, healValue, effect.getEffector());
 				break;
 			case MP:
 				if (this instanceof ProcMPHealInstantEffect)// item heal, eg potions

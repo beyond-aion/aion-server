@@ -23,7 +23,7 @@ public class Announcements extends AdminCommand {
 		setSyntaxInfo(
 			"<list> - Shows all announcements including their ID.",
 			"<reload> - Reloads all announcements from DB.",
-			"<add> <elyos|asmodians|all> <chatType> <delay> <message> - Adds the specified message (delay is in seconds, chatType can be system, white, orange, shout or yellow",
+			"<add> <elyos|asmodians|all> <chatType> <delay> <message> - Adds the specified message (delay is in seconds, chatType can be system, white, orange, shout or yellow).",
 			"<delete> <id> - Deletes the announcement with the specified ID."
 		);
 		// @formatter:on

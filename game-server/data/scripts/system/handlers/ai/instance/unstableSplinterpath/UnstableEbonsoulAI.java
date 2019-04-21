@@ -6,7 +6,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.LOG;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.TYPE;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PositionUtil;
@@ -73,7 +72,7 @@ public class UnstableEbonsoulAI extends AggressiveNpcAI {
 		Npc rukril = getPosition().getWorldMapInstance().getNpc(219551);
 		if (rukril != null && !rukril.isDead() && PositionUtil.isInRange(getOwner(), rukril, 5))
 			if (!getOwner().getLifeStats().isFullyRestoredHp())
-				getOwner().getLifeStats().increaseHp(TYPE.HP, 10000, 0, LOG.REGULAR);
+				getOwner().getLifeStats().increaseHp(TYPE.HP, 10000);
 
 	}
 

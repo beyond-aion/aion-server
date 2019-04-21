@@ -210,7 +210,7 @@ public class AttackShieldObserver extends AttackCalcObserver {
 
 				switch (healType) {
 					case HP:
-						effect.getEffected().getLifeStats().increaseHp(TYPE.HP, healValue, effect.getSkillId(), LOG.REGULAR);
+						effect.getEffected().getLifeStats().increaseHp(TYPE.HP, healValue, effect, LOG.REGULAR);
 						break;
 					case MP:
 						effect.getEffected().getLifeStats().increaseMp(TYPE.HEAL_MP, healValue, effect.getSkillId(), LOG.REGULAR);

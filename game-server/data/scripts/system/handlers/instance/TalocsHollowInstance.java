@@ -19,7 +19,6 @@ import com.aionemu.gameserver.model.templates.flyring.FlyRingTemplate;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.model.utils3d.Point3D;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.LOG;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_PLAY_MOVIE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
@@ -121,11 +120,11 @@ public class TalocsHollowInstance extends GeneralInstanceHandler {
 	public void handleUseItemFinish(Player player, Npc npc) {
 		switch (npc.getNpcId()) {
 			case 700940:
-				player.getLifeStats().increaseHp(SM_ATTACK_STATUS.TYPE.HP, 20000, 0, LOG.REGULAR);
+				player.getLifeStats().increaseHp(SM_ATTACK_STATUS.TYPE.HP, 20000, npc);
 				NpcActions.delete(npc);
 				break;
 			case 700941:
-				player.getLifeStats().increaseHp(SM_ATTACK_STATUS.TYPE.HP, 30000, 0, LOG.REGULAR);
+				player.getLifeStats().increaseHp(SM_ATTACK_STATUS.TYPE.HP, 30000, npc);
 				NpcActions.delete(npc);
 				break;
 		}

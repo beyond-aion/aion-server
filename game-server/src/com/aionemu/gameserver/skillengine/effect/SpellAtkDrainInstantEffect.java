@@ -17,22 +17,20 @@ import com.aionemu.gameserver.skillengine.model.Effect;
 public class SpellAtkDrainInstantEffect extends DamageEffect {
 
 	@XmlAttribute(name = "hp_percent")
-	protected int hp_percent;
+	private int hpPercent;
 	@XmlAttribute(name = "mp_percent")
-	protected int mp_percent;
+	private int mpPercent;
 
 	@Override
 	public void applyEffect(Effect effect) {
 		super.applyEffect(effect);
-		if (hp_percent != 0) {
-			effect.getEffector().getLifeStats()
-				.increaseHp(TYPE.HP, effect.getReserveds(this.position).getValue() * hp_percent / 100, effect.getSkillId(), LOG.SPELLATKDRAININSTANT);
+		if (hpPercent != 0) {
+			effect.getEffector().getLifeStats().increaseHp(TYPE.HP, effect.getReserveds(position).getValue() * hpPercent / 100, effect,
+				LOG.SPELLATKDRAININSTANT);
 		}
-		if (mp_percent != 0) {
-			effect
-				.getEffector()
-				.getLifeStats()
-				.increaseMp(TYPE.ABSORBED_MP, effect.getReserveds(this.position).getValue() * mp_percent / 100, effect.getSkillId(), LOG.SPELLATKDRAININSTANT);
+		if (mpPercent != 0) {
+			effect.getEffector().getLifeStats().increaseMp(TYPE.ABSORBED_MP, effect.getReserveds(position).getValue() * mpPercent / 100,
+				effect.getSkillId(), LOG.SPELLATKDRAININSTANT);
 		}
 	}
 }

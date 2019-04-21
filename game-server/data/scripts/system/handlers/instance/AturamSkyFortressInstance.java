@@ -205,7 +205,7 @@ public class AturamSkyFortressInstance extends GeneralInstanceHandler {
 	public void handleUseItemFinish(Player player, Npc npc) {
 		switch (npc.getNpcId()) {
 			case 730398:
-				player.getLifeStats().increaseHp(SM_ATTACK_STATUS.TYPE.HP, 5205, 0, LOG.REGULAR);
+				player.getLifeStats().increaseHp(SM_ATTACK_STATUS.TYPE.HP, 5205, npc);
 				player.getLifeStats().increaseMp(SM_ATTACK_STATUS.TYPE.MP, 5205, 0, LOG.REGULAR);
 				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDStation_Doping_02());
 				despawnNpc(npc);

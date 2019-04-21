@@ -18,24 +18,24 @@ import com.aionemu.gameserver.skillengine.model.Effect;
 public class SpellAtkDrainEffect extends AbstractOverTimeEffect {
 
 	@XmlAttribute(name = "hp_percent")
-	protected int hp_percent;
+	private int hpPercent;
 	@XmlAttribute(name = "mp_percent")
-	protected int mp_percent;
+	private int mpPercent;
 
 	@Override
 	public void onPeriodicAction(Effect effect) {
 		int valueWithDelta = value + delta * effect.getSkillLevel();
-		int critAddDmg = this.critAddDmg2 + this.critAddDmg1 * effect.getSkillLevel();
-		int damage = AttackUtil.calculateMagicalOverTimeSkillResult(effect, valueWithDelta, element, this.position, true, this.critProbMod2, critAddDmg);
+		int critAddDmg = critAddDmg2 + critAddDmg1 * effect.getSkillLevel();
+		int damage = AttackUtil.calculateMagicalOverTimeSkillResult(effect, valueWithDelta, element, position, true, critProbMod2, critAddDmg);
 		effect.getEffected().getController().onAttack(effect, TYPE.REGULAR, damage, true, LOG.SPELLATKDRAIN);
 		effect.getEffector().getObserveController().notifyAttackObservers(effect.getEffected());
 
 		// Drain (heal) portion of damage inflicted
-		if (hp_percent != 0) {
-			effect.getEffector().getLifeStats().increaseHp(TYPE.HP, damage * hp_percent / 100, effect.getSkillId(), LOG.SPELLATKDRAIN);
+		if (hpPercent != 0) {
+			effect.getEffector().getLifeStats().increaseHp(TYPE.HP, damage * hpPercent / 100, effect, LOG.SPELLATKDRAIN);
 		}
-		if (mp_percent != 0) {
-			effect.getEffector().getLifeStats().increaseMp(TYPE.MP, damage * mp_percent / 100, effect.getSkillId(), LOG.SPELLATKDRAIN);
+		if (mpPercent != 0) {
+			effect.getEffector().getLifeStats().increaseMp(TYPE.MP, damage * mpPercent / 100, effect.getSkillId(), LOG.SPELLATKDRAIN);
 		}
 	}
 }

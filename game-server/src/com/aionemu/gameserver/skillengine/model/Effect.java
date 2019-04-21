@@ -22,6 +22,7 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.stats.calc.StatOwner;
 import com.aionemu.gameserver.model.templates.item.ItemTemplate;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.TYPE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_PLAYER_STANCE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SKILL_ACTIVATION;
 import com.aionemu.gameserver.services.event.Event;
@@ -740,7 +741,7 @@ public class Effect implements StatOwner {
 		Creature effected = getEffected();
 		// TODO better way to finish
 		if (getSkillTemplate().getTargetSlot() == SkillTargetSlot.SPEC2) {
-			effected.getLifeStats().increaseHp((int) (effected.getLifeStats().getMaxHp() * 0.2f));
+			effected.getLifeStats().increaseHp(TYPE.REGULAR, (int) (effected.getLifeStats().getMaxHp() * 0.2f), getEffector());
 			effected.getLifeStats().increaseMp((int) (effected.getLifeStats().getMaxMp() * 0.2f));
 		}
 
@@ -748,7 +749,7 @@ public class Effect implements StatOwner {
 			deactivateToggleSkill();
 		}
 		effected.getEffectController().clearEffect(this, broadcast);
-		
+
 		if (effected instanceof Npc)
 			effected.getAi().onEffectEnd(this);
 		effected.getPosition().getWorldMapInstance().getInstanceHandler().onEndEffect(this);

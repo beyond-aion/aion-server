@@ -82,9 +82,9 @@ public class CaseHealEffect extends AbstractHealEffect {
 
 			// apply heal
 			if (type == HealType.HP)
-				effect.getEffected().getLifeStats().increaseHp(TYPE.HP, finalHeal, effect.getSkillId(), LOG.CASEHEAL);
+				effect.getEffected().getLifeStats().increaseHp(TYPE.HP, finalHeal, effect, LOG.CASEHEAL);
 			else if (type == HealType.MP)
-				effect.getEffected().getLifeStats().increaseMp(TYPE.MP, finalHeal, effect.getSkillId(), LOG.CASEHEAL);// TODO check
+				effect.getEffected().getLifeStats().increaseMp(TYPE.MP, finalHeal, effect.getSkillId(), LOG.CASEHEAL);
 			effect.endEffect();
 			return true;
 		}

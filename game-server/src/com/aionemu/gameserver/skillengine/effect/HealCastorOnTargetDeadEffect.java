@@ -53,7 +53,7 @@ public class HealCastorOnTargetDeadEffect extends EffectTemplate {
 			public void died(Creature creature) {
 				// Heal Caster first
 				if (PositionUtil.isInRange(effect.getEffected(), player, range))
-					player.getLifeStats().increaseHp(TYPE.HP, valueWithDelta, effect.getSkillId(), LOG.REGULAR);
+					player.getLifeStats().increaseHp(TYPE.HP, valueWithDelta, effect, LOG.REGULAR);
 				// Then check for party if healparty parameter is set
 				if (healparty) {
 					if (player.getPlayerGroup() != null) {
@@ -61,7 +61,7 @@ public class HealCastorOnTargetDeadEffect extends EffectTemplate {
 							if (p == player)
 								continue;
 							if (PositionUtil.isInRange(effect.getEffected(), p, range))
-								player.getLifeStats().increaseHp(TYPE.HP, valueWithDelta, effect.getSkillId(), LOG.REGULAR);
+								player.getLifeStats().increaseHp(TYPE.HP, valueWithDelta, effect, LOG.REGULAR);
 						}
 					} else if (player.isInAlliance()) {
 						for (Player p : player.getPlayerAllianceGroup().getMembers()) {
@@ -70,7 +70,7 @@ public class HealCastorOnTargetDeadEffect extends EffectTemplate {
 							if (p.equals(player))
 								continue;
 							if (PositionUtil.isInRange(effect.getEffected(), p, range))
-								player.getLifeStats().increaseHp(TYPE.HP, valueWithDelta, effect.getSkillId(), LOG.REGULAR);
+								player.getLifeStats().increaseHp(TYPE.HP, valueWithDelta, effect, LOG.REGULAR);
 						}
 					}
 				}

@@ -161,7 +161,7 @@ public class SkillCooltimeResetAI extends NpcAI {
 
 					if (resetSkillCoolDowns.size() > 0) {
 						if (responder.getInventory().tryDecreaseKinah(price)) {
-							responder.getLifeStats().increaseHp(SM_ATTACK_STATUS.TYPE.HP, responder.getLifeStats().getMaxHp(), 0, SM_ATTACK_STATUS.LOG.REGULAR);
+							responder.getLifeStats().increaseHp(SM_ATTACK_STATUS.TYPE.HP, responder.getLifeStats().getMaxHp(), getOwner());
 							responder.getLifeStats().increaseMp(SM_ATTACK_STATUS.TYPE.HEAL_MP, responder.getLifeStats().getMaxMp(), 0, SM_ATTACK_STATUS.LOG.MPHEAL);
 							PacketSendUtility.sendPacket(responder, new SM_SKILL_COOLDOWN(resetSkillCoolDowns));
 							if (PvpMapService.getInstance().isOnPvPMap(getOwner())) {

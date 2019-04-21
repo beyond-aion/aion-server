@@ -14,6 +14,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.LOG;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.TYPE;
 import com.aionemu.gameserver.services.LifeStatsRestoreService;
 import com.aionemu.gameserver.skillengine.effect.AbnormalState;
+import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
@@ -199,18 +200,26 @@ public abstract class CreatureLifeStats<T extends Creature> {
 	/**
 	 * This method is called whenever caller wants to restore creatures's HP
 	 * 
-	 * @param value
 	 * @return currentHp
 	 */
-	public int increaseHp(int value) {
-		return increaseHp(TYPE.REGULAR, value, 0, LOG.REGULAR);
+	public int increaseHp(TYPE type, int value) {
+		return increaseHp(type, value, getOwner(), 0, LOG.REGULAR);
 	}
 
-	public int increaseHp(TYPE type, int value, int skillId, LOG log) {
+	public int increaseHp(TYPE type, int value, Creature effector) {
+		return increaseHp(type, value, effector, 0, LOG.REGULAR);
+	}
+
+	public int increaseHp(TYPE type, int value, Effect effect, LOG log) {
+		return increaseHp(type, value, effect.getEffector(), effect.getSkillId(), log);
+	}
+
+	private int increaseHp(TYPE type, int value, Creature effector, int skillId, LOG log) {
 		if (getOwner().getEffectController().isAbnormalSet(AbnormalState.DISEASE))
 			return currentHp;
 
 		int hpIncreased;
+		boolean died = false;
 		hpLock.lock();
 		try {
 			if (isDead)
@@ -221,7 +230,7 @@ public abstract class CreatureLifeStats<T extends Creature> {
 			currentHp = newHp;
 			if (hpIncreased < 0 && currentHp <= 0) { // some skills reduce hp via a negative heal (ghost absorption)
 				currentHp = 0;
-				isDead = true;
+				isDead = died = true;
 			}
 		} finally {
 			hpLock.unlock();
@@ -229,7 +238,8 @@ public abstract class CreatureLifeStats<T extends Creature> {
 
 		if (hpIncreased > 0 || skillId != 0)
 			onIncreaseHp(type, hpIncreased, skillId, log);
-
+		if (died)
+			getOwner().getController().onDie(effector == null ? getOwner() : effector);
 		if (hpIncreased > 0) {
 			if (killingBlow != 0 && currentHp > killingBlow)
 				unsetIsAboutToDie();
@@ -273,7 +283,7 @@ public abstract class CreatureLifeStats<T extends Creature> {
 	 * Restores HP with value set as HP_RESTORE_TICK
 	 */
 	public final void restoreHp() {
-		increaseHp(TYPE.NATURAL_HP, getOwner().getGameStats().getHpRegenRate().getCurrent(), 0, LOG.REGULAR);
+		increaseHp(TYPE.NATURAL_HP, getOwner().getGameStats().getHpRegenRate().getCurrent());
 	}
 
 	/**
