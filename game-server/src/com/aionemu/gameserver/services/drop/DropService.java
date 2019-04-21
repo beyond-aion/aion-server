@@ -378,16 +378,7 @@ public class DropService {
 			remainingCount = ItemService.addItem(player, itemId, remainingCount);
 		}
 
-		if (autoLoot) {
-			if (remainingCount <= 0) {
-				synchronized (dropItems) {
-					dropItems.remove(requestedItem);
-				}
-				announceDrop(player, template);
-			} else
-				requestedItem.setCount(remainingCount);
-			return;
-		} else if (!requestedItem.isDistributeItem()) {
+		if (!requestedItem.isDistributeItem()) {
 			if (player.isInTeam()) {
 				lootGrouRules = player.getLootGroupRules();
 				ItemQuality quality = DataManager.ITEM_DATA.getItemTemplate(itemId).getItemQuality();
@@ -420,7 +411,7 @@ public class DropService {
 
 				winningNormalActions(player, dropNpc, requestedItem);
 			}
-		} else if (requestedItem.isDistributeItem()) { // handles distribution of item to correct player and messages accordingly
+		} else if (!autoLoot && requestedItem.isDistributeItem()) { // handles distribution of item to correct player and messages accordingly
 			if (!player.equals(requestedItem.getWinningPlayer()) && requestedItem.isItemWonNotCollected()) {
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_LOOT_ANOTHER_OWNER_ITEM());
 				return;
@@ -449,7 +440,8 @@ public class DropService {
 		} else
 			requestedItem.setCount(remainingCount);
 
-		resendDropList(dropNpc.getLootingPlayer(), npcObjectId, dropItems);
+		if (!autoLoot)
+			resendDropList(dropNpc.getLootingPlayer(), npcObjectId, dropItems);
 	}
 
 	private void resendDropList(Player player, int npcObjectId, Set<DropItem> dropItems) {
