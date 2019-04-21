@@ -24,7 +24,9 @@ import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.Rates;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
+import com.aionemu.gameserver.model.team.TeamMember;
 import com.aionemu.gameserver.model.team.TemporaryPlayerTeam;
+import com.aionemu.gameserver.model.team.common.legacy.LootRuleType;
 import com.aionemu.gameserver.model.team.common.service.PlayerTeamDistributionService;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.LOG;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.TYPE;
@@ -153,14 +155,17 @@ public class NpcController extends CreatureController<Npc> {
 
 	private void petLoot(Player player, Npc owner) {
 		if (player.getPet() != null && player.getPet().getCommonData().isLooting()) {
+			TemporaryPlayerTeam<? extends TeamMember<Player>> team = player.getCurrentTeam();
+			if (team != null && team.getLootGroupRules().getLootRule() == LootRuleType.FREEFORALL) // not available in FFA loot mode
+				return;
 			int npcObjId = owner.getObjectId();
-			PacketSendUtility.sendPacket(player, new SM_PET(true, npcObjId));
 			Set<DropItem> drops = DropRegistrationService.getInstance().getCurrentDropMap().get(npcObjId);
 			if (drops != null && !drops.isEmpty()) {
+				PacketSendUtility.sendPacket(player, new SM_PET(true, npcObjId));
 				for (DropItem dropItem : drops.toArray(new DropItem[drops.size()])) // array copy since the drops get removed on retrieval
 					DropService.getInstance().requestDropItem(player, npcObjId, dropItem.getIndex(), true);
+				PacketSendUtility.sendPacket(player, new SM_PET(false, npcObjId));
 			}
-			PacketSendUtility.sendPacket(player, new SM_PET(false, npcObjId));
 		}
 	}
 
