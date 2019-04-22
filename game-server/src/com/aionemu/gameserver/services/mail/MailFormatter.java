@@ -89,7 +89,7 @@ public final class MailFormatter {
 				if ("address".equals(name))
 					return Integer.toString(ownedHouse.getAddress().getId());
 				else if ("datetime".equals(name))
-					return Long.toString(time / 60000);
+					return Long.toString(time / 1000);
 				else if ("resultid".equals(name))
 					return Integer.toString(result.getId());
 				else if ("raceid".equals(name))

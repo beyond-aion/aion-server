@@ -34,9 +34,9 @@ public abstract class MailPart extends StringParamList implements IMailFormatter
 
 		String result = getFormattedString(getType());
 
-		String[] paramValues = new String[getParam().size()];
-		for (int i = 0; i < getParam().size(); i++) {
-			Param param = getParam().get(i);
+		String[] paramValues = new String[getParams().size()];
+		for (int i = 0; i < getParams().size(); i++) {
+			Param param = getParams().get(i);
 			paramValues[i] = formatter.getParamValue(param.getId());
 		}
 		String joinedParams = String.join(",", paramValues);

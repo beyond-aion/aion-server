@@ -114,6 +114,7 @@ Formatting rules:
 			<body id="0">
 				<param id="datetime"/>
 				<param id="address"/>
+				<param id="datetime"/> <!-- only for AuctionResult.GRACE_START / AuctionResult.GRACE_SUCCESS: they need first param at pos 3... -->
 			</body>
 			<tail id="0"/>
 		</template>
