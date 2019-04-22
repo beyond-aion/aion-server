@@ -34363,9 +34363,10 @@
 		<npc_skill id="20724" lv="47" prob="10" />
 	</npc_skills>
 	<npc_skills npc_ids="219357">
-		<npc_skill id="20744" lv="47" prob="10" />
-		<npc_skill id="20745" lv="47" prob="10" />
-		<npc_skill id="20746" lv="47" prob="10" />
+		<npc_skill id="20744" lv="47" prob="40" cd="12000" />
+		<npc_skill id="20745" lv="47" prob="40" cd="16000" />
+		<npc_skill id="20746" lv="47" prob="40" cd="20000" />
+		<npc_skill id="20747" lv="55" min_time="20000" prob="100" prio="1" cd="40000" />
 	</npc_skills>
 	<npc_skills npc_ids="219358">
 		<npc_skill id="20750" lv="47" prob="15" />

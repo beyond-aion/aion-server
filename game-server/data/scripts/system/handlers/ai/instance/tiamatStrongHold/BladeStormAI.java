@@ -24,24 +24,8 @@ public class BladeStormAI extends NpcAI {
 	@Override
 	protected void handleSpawned() {
 		super.handleSpawned();
-		spinTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
-
-			@Override
-			public void run() {
-				AIActions.useSkill(BladeStormAI.this, 20748);
-			}
-		}, 0, 1000);
-		despawn();
-	}
-
-	private void despawn() {
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				getOwner().getController().delete();
-			}
-		}, 10000);
+		spinTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> AIActions.useSkill(this, 20748), 0, 1000);
+		ThreadPoolManager.getInstance().schedule(() -> getOwner().getController().delete(), 10000);
 	}
 
 	@Override
