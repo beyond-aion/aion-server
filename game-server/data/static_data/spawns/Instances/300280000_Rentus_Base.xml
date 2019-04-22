@@ -54,6 +54,14 @@
 		<spawn npc_id="701097">
 			<spot x="243.4088" y="717.4462" z="164.4402" static_id="34" />
 		</spawn>
+		<!-- Dancing Blue Flame -->
+		<spawn npc_id="282999">
+			<spot x="208.580" y="410.710" z="262.540"/>
+		</spawn>
+		<!-- Dancing Red Flame -->
+		<spawn npc_id="282998">
+			<spot x="167.600" y="418.220" z="262.540"/>
+		</spawn>
 		<!-- Destroyed Building -->
 		<spawn npc_id="282470">
 			<spot x="482.1451" y="564.4037" z="149.6161" state="2" />

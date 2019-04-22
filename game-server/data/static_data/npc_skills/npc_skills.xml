@@ -61028,12 +61028,6 @@
 	<npc_skills npc_ids="282990">
 		<npc_skill id="20527" lv="60" prob="25" min_hp="95" max_hp="100" />
 	</npc_skills>
-	<npc_skills npc_ids="282998">
-		<npc_skill id="20536" lv="60" prob="100" />
-	</npc_skills>
-	<npc_skills npc_ids="282999">
-		<npc_skill id="20535" lv="60" prob="100" />
-	</npc_skills>
 	<npc_skills npc_ids="283000">
 		<npc_skill id="19345" lv="1" prob="0" is_post_spawn="true" />
 		<npc_skill id="19707" lv="60" prob="50" />
