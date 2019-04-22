@@ -11383,7 +11383,18 @@
 	<decomposable item_id="188051513" /><!-- Tough Scroll Bundle -->
 	<decomposable item_id="188051514" /><!-- Tough Greater Scroll Bundle -->
 	<decomposable item_id="188051515" /><!-- Smart Scroll Bundle -->
-	<decomposable item_id="188051516" /><!-- Smart Greater Scroll Bundle -->
+	<decomposable item_id="188051516" selectable="true"><!-- Smart Greater Scroll Bundle -->
+		<items>
+			<item id="164000076" min_count="100" /><!--	Greater Running Scroll -->
+			<item id="164000073" min_count="100" /><!--	Greater Courage Scroll -->
+			<item id="164000079" min_count="100" /><!--	Greater Raging Wind Scroll -->
+			<item id="164000134" min_count="100" /><!--	Greater Awakening Scroll -->
+			<item id="164000257" min_count="50" /><!--	Fine Strike Resist Scroll -->
+			<item id="164000258" min_count="50" /><!--	Fine Spell Resist Scroll -->
+			<item id="164000255" min_count="100" /><!--	Fine Crit Strike Scroll -->
+			<item id="164000256" min_count="100" /><!-- Fine Crit Spell Scroll -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188051517" /><!-- Random Option Class Drop Test Item -->
 	<decomposable item_id="188051518" /><!-- Random Option Disassemble Test Item -->
 	<decomposable item_id="188051519"><!-- Odella Bundle -->
@@ -15141,7 +15152,30 @@
 			<item id="162000019" min_count="20" /><!-- Mana Serum -->
 		</items>
 	</decomposable>
-	<decomposable item_id="188051868" /><!-- [Event] Strongest Inquin Form Candy Pouch -->
+	<decomposable item_id="188051868" selectable="true"><!-- [Event] Strongest Inquin Form Candy Pouch -->
+		<items>
+			<item id="160010176" min_count="3" race="ELYOS" /><!-- Invincible Red Inquin Form Candy -->
+			<item id="160010177" min_count="3" race="ASMODIANS" /><!-- Invincible Red Inquin Form Candy -->
+			<item id="160010178" min_count="3" race="ELYOS" /><!-- Invincible Gold Inquin Form Candy -->
+			<item id="160010179" min_count="3" race="ASMODIANS" /><!-- Invincible Gold Inquin Form Candy -->
+			<item id="160010180" min_count="3" race="ELYOS" /><!-- Invincible Yellow Inquin Form Candy -->
+			<item id="160010181" min_count="3" race="ASMODIANS" /><!-- Invincible Yellow Inquin Form Candy -->
+			<item id="160010182" min_count="3" race="ELYOS" /><!-- Invincible Green Inquin Form Candy -->
+			<item id="160010183" min_count="3" race="ASMODIANS" /><!-- Invincible Green Inquin Form Candy -->
+			<item id="160010184" min_count="3" race="ELYOS" /><!-- Invincible Violet Inquin Form Candy -->
+			<item id="160010185" min_count="3" race="ASMODIANS" /><!-- Invincible Violet Inquin Form Candy -->
+			<item id="160010186" min_count="3" race="ELYOS" /><!-- Strongest Red Inquin Form Candy -->
+			<item id="160010187" min_count="3" race="ASMODIANS" /><!-- Strongest Red Inquin Form Candy -->
+			<item id="160010188" min_count="3" race="ELYOS" /><!-- Strongest Gold Inquin Form Candy -->
+			<item id="160010189" min_count="3" race="ASMODIANS" /><!-- Strongest Gold Inquin Form Candy -->
+			<item id="160010190" min_count="3" race="ELYOS" /><!-- Strongest Yellow Inquin Form Candy -->
+			<item id="160010191" min_count="3" race="ASMODIANS" /><!-- Strongest Yellow Inquin Form Candy -->
+			<item id="160010192" min_count="3" race="ELYOS" /><!-- Strongest Green Inquin Form Candy -->
+			<item id="160010193" min_count="3" race="ASMODIANS" /><!-- Strongest Green Inquin Form Candy -->
+			<item id="160010194" min_count="3" race="ELYOS" /><!-- Strongest Violet Inquin Form Candy -->
+			<item id="160010195" min_count="3" race="ASMODIANS" /><!-- Strongest Violet Inquin Form Candy -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188051869" /><!-- [Event] Lovely Dye Pouch -->
 	<decomposable item_id="188051870" /><!-- [Event] Heavy Scroll Bundle -->
 	<decomposable item_id="188051871"><!-- [Harvest Revel] Display Furniture Shopping Bag -->

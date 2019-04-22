@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../global_rules.xsd">
+	<gd_rule rule_name="Loyalty Coins" chance="100" member_limit="6">
+		<gd_maps>
+			<gd_map map_id="300620000" /><!-- Occupied_Rentus_Base -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="236300" /><!-- Brigade General Vasharti -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="186000409" min_count="8" /><!-- Daeva's Respite Coin -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Loyalty Coins" chance="100" member_limit="6">
+		<gd_maps>
+			<gd_map map_id="300590000" /><!-- Ophidan_Bridge -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="235768" /><!-- Spirited Velkur -->
+			<gd_npc npc_id="235769" /><!-- Velkur Aethercaster -->
+			<gd_npc npc_id="235770" /><!-- Velkur Aetherpriest -->
+			<gd_npc npc_id="235771" /><!-- Velkur Aetherknife -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="186000409" min_count="6" /><!-- Daeva's Respite Coin -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Loyalty Coins" chance="100" member_limit="6">
+		<gd_maps>
+			<gd_map map_id="301140000"/><!-- Seized_Danuar_Sanctuary -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="235619"/><!-- Warmage Suyaroka -->
+			<gd_npc npc_id="235620"/><!-- Chief Medic Tagnu -->
+			<gd_npc npc_id="235621"/><!-- Virulent Ukahim -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="186000409" min_count="10" /><!-- Daeva's Respite Coin -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Loyalty Coins" chance="100" member_limit="6">
+		<gd_maps>
+			<gd_map map_id="301300000" /><!-- Krotan_Barracks -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="233632" /><!-- Weakened Krotan Lord -->
+			<gd_npc npc_id="233633" /><!-- Enraged Krotan Lord -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="186000409" min_count="26" /><!-- Daeva's Respite Coin -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Loyalty Coins" chance="100" member_limit="6">
+		<gd_maps>
+			<gd_map map_id="301280000" /><!-- Kysis_Barracks -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="233675" /><!-- Weakened Kysis Duke -->
+			<gd_npc npc_id="233676" /><!-- Enraged Kysis Duke -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="186000409" min_count="26" /><!-- Daeva's Respite Coin -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Loyalty Coins" chance="100" member_limit="6">
+		<gd_maps>
+			<gd_map map_id="301290000" /><!-- Miren_Barracks -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="233718" /><!-- Weakened Miren Prince -->
+			<gd_npc npc_id="233719" /><!-- Enraged Miren Prince -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="186000409" min_count="26" /><!-- Daeva's Respite Coin -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Loyalty Coins" chance="100" member_limit="6">
+		<gd_maps>
+			<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="230857" /><!-- Guard Captain Ahuradim -->
+			<gd_npc npc_id="230858" /><!-- Brigade General Sheba -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="186000409" min_count="23" /><!-- Daeva's Respite Coin -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Loyalty Coins" chance="100" member_limit="6">
+		<gd_maps>
+			<gd_map map_id="301230000" /><!-- Illuminary_Obelisk -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="233740" /><!-- Test Weapon Dynatoum -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="186000409" min_count="29" /><!-- Daeva's Respite Coin -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Loyalty Coins" chance="100" member_limit="6">
+		<gd_maps>
+			<gd_map map_id="301370000" /><!-- Infernal_Illuminary_Obelisk -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="234686" /><!-- Remodeled Dynatoum -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="186000409" min_count="32" /><!-- Daeva's Respite Coin -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Loyalty Coins" chance="100" member_limit="12">
+		<gd_maps>
+			<gd_map map_id="300800000" /><!-- Infinity_Shard -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="231073" /><!-- Hyperion -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="186000409" min_count="32" /><!-- Daeva's Respite Coin -->
+		</gd_items>
+	</gd_rule>
+	<!-- TODO: Padmarashka's Cave min_count="34" -->
+	<!-- TODO: Anguished Dragon Lord's Refuge min_count="62" -->
+	<!-- TODO: Drakenspire Depths min_count="122 146 170" -->
+</global_rules>

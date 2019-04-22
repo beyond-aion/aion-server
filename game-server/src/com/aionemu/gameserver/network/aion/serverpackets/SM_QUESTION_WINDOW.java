@@ -199,6 +199,11 @@ public class SM_QUESTION_WINDOW extends AionServerPacket {
 	public static final int STR_CRAFT_ADDSKILL_CONFIRM = 900852;
 
 	/**
+	 * You need %num0 %1 to buy the item. Proceed with the purchase?
+	 */
+	public static final int STR_AIONJEWEL_SHOP_BUY_CONFIRM = 901972;
+
+	/**
 	 * &lt;p align="left"&gt;%0 is about to summon you using %1. Will you accept?&lt;/p&gt; &lt;p&gt;&lt;/p&gt;&lt;p align="left"&gt;You must decide in
 	 * %2 seconds.&lt;/p&gt;
 	 */
