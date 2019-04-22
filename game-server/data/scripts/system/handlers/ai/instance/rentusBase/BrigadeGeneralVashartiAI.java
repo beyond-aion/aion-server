@@ -4,25 +4,24 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.stream.Collectors;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.AIState;
-import com.aionemu.gameserver.ai.AISubState;
 import com.aionemu.gameserver.ai.manager.EmoteManager;
 import com.aionemu.gameserver.ai.manager.WalkManager;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.model.geometry.Point3D;
 import com.aionemu.gameserver.model.skill.QueuedNpcSkillEntry;
 import com.aionemu.gameserver.model.templates.npcskill.QueuedNpcSkillTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.skillengine.SkillEngine;
+import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.PositionUtil;
@@ -33,27 +32,18 @@ import ai.AggressiveNpcAI;
 
 /**
  * @author xTz
+ * @modified Yeats, Estrayl
  */
 @AIName("brigade_general_vasharti")
 public class BrigadeGeneralVashartiAI extends AggressiveNpcAI {
 
 	private List<Integer> percents = new ArrayList<>();
 	private AtomicBoolean isHome = new AtomicBoolean(true);
-	private boolean canThink = true;
-	private Future<?> flameBuffTask;
-	private Future<?> flameSmashTask;
-	private List<Point3D> blueFlameSmashs = new ArrayList<>();
-	private List<Point3D> redFlameSmashs = new ArrayList<>();
-	private int flameSmashCount = 1;
-	private AtomicBoolean isInFlameShowerTask = new AtomicBoolean();
+	private AtomicBoolean isInFlameShowerEvent = new AtomicBoolean();
+	private Future<?> enrageSchedule, flameShieldBuffSchedule, seaOfFireSpawnTask;
 
 	public BrigadeGeneralVashartiAI(Npc owner) {
 		super(owner);
-	}
-
-	@Override
-	public boolean canThink() {
-		return canThink;
 	}
 
 	@Override
@@ -61,54 +51,59 @@ public class BrigadeGeneralVashartiAI extends AggressiveNpcAI {
 		super.handleAttack(creature);
 		if (isHome.compareAndSet(true, false)) {
 			getPosition().getWorldMapInstance().getDoors().get(70).setOpen(false);
-			startFlameBuffEvent();
+			enrageSchedule = ThreadPoolManager.getInstance().schedule(this::handleEnrageEvent, 10, TimeUnit.MINUTES);
+			scheduleFlameShieldBuffEvent(5000);
 		}
 		checkPercentage(getLifeStats().getHpPercentage());
 	}
 
-	private void checkPercentage(int hpPercentage) {
-		if (isInFlameShowerTask.get())
+	private synchronized void checkPercentage(int hpPercentage) {
+		if (isInFlameShowerEvent.get())
 			return;
 		for (Integer percent : percents) {
 			if (hpPercentage <= percent) {
 				percents.remove(percent);
-				cancelFlameBuffEvent();
+				cancelTasks(flameShieldBuffSchedule);
 				getOwner().getQueuedSkills().clear();
-				getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(20532, 1, 100, 0, 10000)));
+				getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(20532, 1, 100, 0, 10000))); // off (skill name)
 				break;
 			}
 		}
 	}
 
-	@Override
-	public void handleMoveArrived() {
-		if (isInState(AIState.FORCED_WALKING) && isInFlameShowerTask.get()
-			&& PositionUtil.getDistance(getOwner().getX(), getOwner().getY(), 188.17f, 414.06f) <= 1f) {
-			getOwner().getMoveController().abortMove();
-			setStateIfNot(AIState.FIGHT);
-			setSubStateIfNot(AISubState.NONE);
-			Creature creature = getAggroList().getMostHated();
-			if (creature != null && !creature.isDead() && getOwner().canSee(creature)) {
-				getOwner().getQueuedSkills().clear();
-				getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(20533, 1, 100)));
-				getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(20534, 1, 100, 0, 10000)));
-				getOwner().setTarget(creature);
-				getOwner().getGameStats().renewLastAttackTime();
-				getOwner().getGameStats().renewLastAttackedTime();
-				getOwner().getGameStats().renewLastChangeTargetTime();
-				getOwner().getGameStats().renewLastSkillTime();
-				getOwner().getGameStats().setNextSkillDelay(7000);
+	private void scheduleFlameShieldBuffEvent(int delay) {
+		flameShieldBuffSchedule = ThreadPoolManager.getInstance().schedule(() -> {
+			getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(Rnd.get(0, 1) == 0 ? 20530 : 20531, 60, 100)));
+		}, delay);
+	}
+
+	private void handleEnrageEvent() {
+		getOwner().getQueuedSkills().clear();
+		getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(19962, 1, 100, 0, 15000))); // Purple Flame Weapon
+		getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(19907, 1, 100, 0, 0))); // Chastise
+	}
+
+	private void handleSeaOfFireEvent() {
+		int percent = getLifeStats().getHpPercentage();
+		int npcId = percent <= 70 ? percent <= 40 ? 283012 : 283011 : 283010;
+
+		spawn(npcId, 188.33f, 414.61f, 260.61f, (byte) 244); // FX
+		spawn(283007, 188.33f, 414.61f, 260.61f, (byte) 0); // de-buff
+
+		seaOfFireSpawnTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
+			int smashCount = (npcId - 283007) * 5 + 1; // 15, 20, 25
+			for (int i = 2; i < smashCount; i++) {
+				Point3D p = getRndPos();
+				spawn(i % 2 == 0 ? 283008 : 283009, p.getX(), p.getY(), p.getZ(), (byte) 0);
 			}
-			think();
-		}
-		super.handleMoveArrived();
+		}, 750, 7000);
 	}
 
 	@Override
 	public void onStartUseSkill(SkillTemplate skillTemplate) {
 		switch (skillTemplate.getSkillId()) {
 			case 20534:
-				startAirEvent();
+				handleSeaOfFireEvent();
 				break;
 		}
 	}
@@ -116,282 +111,122 @@ public class BrigadeGeneralVashartiAI extends AggressiveNpcAI {
 	@Override
 	public void onEndUseSkill(SkillTemplate skillTemplate) {
 		switch (skillTemplate.getSkillId()) {
+			case 19907: // repeat until reset
+				getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(19907, 1, 100, 0, 0))); // Chastise
+				break;
 			case 20530:
 			case 20531:
 				WorldMapInstance instance = getPosition().getWorldMapInstance();
 				if (instance != null) {
-					if (instance.getNpc(283000) == null && instance.getNpc(283001) == null) {
-						VisibleObject ice = spawn(283001, 205.280f, 410.53f, 261f, (byte) 56);
-						VisibleObject fire = spawn(283000, 171.330f, 417.57f, 261f, (byte) 116);
-						if (ice != null) {
-							useKissBuff((Npc) ice);
-						}
-						if (fire != null) {
-							useKissBuff((Npc) fire);
-						}
-					}
+					if (instance.getNpc(283000) == null)
+						spawn(283000, 171.330f, 417.57f, 261f, (byte) 116);
+					if (instance.getNpc(283001) == null)
+						spawn(283001, 205.280f, 410.53f, 261f, (byte) 56);
 				}
+				scheduleFlameShieldBuffEvent(33000);
 				break;
 			case 20532:
-				if (isInFlameShowerTask.compareAndSet(false, true)) {
-					EmoteManager.emoteStopAttacking(getOwner());
-					getOwner().getQueuedSkills().clear();
-					ThreadPoolManager.getInstance().schedule(() -> {
-						setStateIfNot(AIState.FIGHT);
-						setSubStateIfNot(AISubState.NONE);
-						WalkManager.startForcedWalking(this, 188.17f, 414.06f, 260.75488f);
-						getOwner().setState(CreatureState.ACTIVE, true);
-						PacketSendUtility.broadcastPacket(getOwner(), new SM_EMOTION(getOwner(), EmotionType.START_EMOTE2, 0, getObjectId()));
-					}, 1200);
-				}
+				EmoteManager.emoteStopAttacking(getOwner());
+				getOwner().getQueuedSkills().clear();
+				ThreadPoolManager.getInstance().schedule(() -> {
+					WalkManager.startForcedWalking(this, 188.17f, 414.06f, 260.75488f);
+					getOwner().setState(CreatureState.ACTIVE, true);
+					PacketSendUtility.broadcastPacket(getOwner(), new SM_EMOTION(getOwner(), EmotionType.START_EMOTE2, 0, getObjectId()));
+				}, 800);
+				break;
+			case 20533:
+				SkillEngine.getInstance().getSkill(getOwner(), 20534, 1, getOwner()).useSkill(); // Sea of Fire
 				break;
 		}
+
 	}
 
-	private void startAirEvent() {
-		int percent = getLifeStats().getHpPercentage();
-		int npcId = 0;
-		if (percent <= 25) {
-			npcId = 283012;
-		} else if (percent <= 40) {
-			npcId = 283012;
-		} else if (percent <= 50) {
-			npcId = 283011;
-		} else if (percent <= 70) {
-			npcId = 283011;
-		} else if (percent <= 80) {
-			npcId = 283010;
-		}
-
-		spawn(npcId, 188.33f, 414.61f, 260.61f, (byte) 244);
-		final Npc buffNpc = (Npc) spawn(283007, 188.33f, 414.61f, 260.61f, (byte) 0);
-
-		ThreadPoolManager.getInstance().schedule(() -> {
-			if (!buffNpc.isDead()) {
-				startFlameSmashEvent(percent);
-				SkillEngine.getInstance().getSkill(buffNpc, 20538, 60, buffNpc).useNoAnimationSkill();
-				ThreadPoolManager.getInstance().schedule(() -> buffNpc.getController().delete(), 4000);
-			}
-		}, 1000);
-
-		ThreadPoolManager.getInstance().schedule(() -> {
-			cancelFlameSmashTask();
-			cancelAirEvent();
-			startFlameBuffEvent();
-			Creature creature = getAggroList().getMostHated();
-			if (creature == null || creature.isDead() || !getOwner().canSee(creature)) {
-				setStateIfNot(AIState.FIGHT);
-				think();
-			} else {
-				getMoveController().abortMove();
-				getOwner().setTarget(creature);
-				getOwner().getGameStats().renewLastAttackTime();
-				getOwner().getGameStats().renewLastAttackedTime();
-				getOwner().getGameStats().renewLastChangeTargetTime();
-				getOwner().getGameStats().renewLastSkillTime();
-				setStateIfNot(AIState.FIGHT);
-				handleMoveValidate();
-			}
-		}, 40000);
-	}
-
-	private void cancelFlameSmashTask() {
-		flameSmashCount = 1;
-		if (flameSmashTask != null && !flameSmashTask.isDone()) {
-			flameSmashTask.cancel(true);
+	@Override
+	public void onEffectEnd(Effect effect) {
+		if (effect != null && effect.getSkillId() == 20534 && isInFlameShowerEvent.compareAndSet(true, false)) {
+			cancelTasks(seaOfFireSpawnTask);
+			scheduleFlameShieldBuffEvent(10000);
 		}
 	}
 
-	private void startFlameSmashEvent(final int percent) {
-		flameSmashTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
-			if (isDead()) {
-				cancelFlameSmashTask();
-			} else {
-				List<Point3D> redFlameSmashs1 = getRedFlameSmashs(283008);
-				List<Point3D> blueFlameSmashs1 = getRedFlameSmashs(283009);
-				WorldMapInstance instance = getPosition().getWorldMapInstance();
-				if (instance != null) {
-					if (percent > 40 && flameSmashCount == 1) {
-						flameSmashCount++;
-						spawnFlameSmash(redFlameSmashs1, 283008);
-						spawnFlameSmash(blueFlameSmashs1, 283009);
-					} else {
-						if (instance.getNpc(283010) != null) {
-							flameSmashCount = 1;
-							spawnFlameSmash(redFlameSmashs1, 283008);
-							spawnFlameSmash(redFlameSmashs1, 283008);
-							spawnFlameSmash(redFlameSmashs1, 283008);
-						} else if (instance.getNpc(283011) != null) {
-							flameSmashCount = 1;
-							spawnFlameSmash(blueFlameSmashs1, 283009);
-							spawnFlameSmash(blueFlameSmashs1, 283009);
-							spawnFlameSmash(blueFlameSmashs1, 283009);
-						} else if (instance.getNpc(283012) != null) {
-							if (flameSmashCount == 1) {
-								flameSmashCount++;
-								spawnFlameSmash(redFlameSmashs1, 283008);
-								spawnFlameSmash(redFlameSmashs1, 283008);
-								spawnFlameSmash(blueFlameSmashs1, 283009);
-								spawnFlameSmash(blueFlameSmashs1, 283009);
-							} else if (flameSmashCount == 2) {
-								flameSmashCount++;
-								spawnFlameSmash(redFlameSmashs1, 283008);
-								spawnFlameSmash(redFlameSmashs1, 283008);
-								spawnFlameSmash(redFlameSmashs1, 283008);
-							} else {
-								flameSmashCount = 1;
-								spawnFlameSmash(blueFlameSmashs1, 283009);
-								spawnFlameSmash(blueFlameSmashs1, 283009);
-								spawnFlameSmash(blueFlameSmashs1, 283009);
-							}
-						}
-					}
-				}
-				redFlameSmashs1.clear();
-				blueFlameSmashs1.clear();
-			}
-		}, 3000, 3000);
-	}
-
-	private void spawnFlameSmash(List<Point3D> flameSmashs, int npcId) {
-		if (!flameSmashs.isEmpty()) {
-			Point3D spawn = flameSmashs.remove(Rnd.get(flameSmashs.size()));
-			spawn(npcId, spawn.getX(), spawn.getY(), spawn.getZ(), (byte) 0);
+	@Override
+	protected boolean isDestinationReached() {
+		if (getState() == AIState.FORCED_WALKING && PositionUtil.getDistance(getOwner().getX(), getOwner().getY(), 188.17f, 414.06f) <= 1f
+			&& isInFlameShowerEvent.compareAndSet(false, true)) {
+			SkillEngine.getInstance().getSkill(getOwner(), 20533, 1, getOwner()).useSkill(); // off (skill name)
 		}
+		return super.isDestinationReached();
 	}
 
-	private boolean isSpawned(int npcId, Point3D position) {
-		for (Npc npc : getPosition().getWorldMapInstance().getNpcs(npcId)) {
-			if (npc.getX() == position.getX() && npc.getY() == position.getY()) {
-				return true;
-			}
+	private Point3D getRndPos() {
+		double radian = Math.toRadians(Rnd.get(1, 360));
+		float distance = Rnd.get() * 29f;
+		float x1 = (float) (Math.cos(Math.PI * radian) * distance);
+		float y1 = (float) (Math.sin(Math.PI * radian) * distance);
+		return new Point3D(getOwner().getSpawn().getX() + x1, getOwner().getSpawn().getY() + y1, getOwner().getSpawn().getZ());
+	}
+
+	private void clearSpawns() {
+		WorldMapInstance instance = getPosition().getWorldMapInstance();
+		if (instance != null) {
+			deleteNpcs(instance.getNpcs(283002));
+			deleteNpcs(instance.getNpcs(283003));
+			deleteNpcs(instance.getNpcs(283004));
+			deleteNpcs(instance.getNpcs(283005));
+			deleteNpcs(instance.getNpcs(283006));
+			deleteNpcs(instance.getNpcs(283007));
+			deleteNpcs(instance.getNpcs(283010));
+			deleteNpcs(instance.getNpcs(283011));
+			deleteNpcs(instance.getNpcs(283012));
+			deleteNpcs(instance.getNpcs(283000));
+			deleteNpcs(instance.getNpcs(283001));
 		}
-		return false;
-	}
-
-	private List<Point3D> getRedFlameSmashs(int npcId) {
-		return (npcId == 283008 ? redFlameSmashs : blueFlameSmashs).stream().filter(flameSmash -> !isSpawned(npcId, flameSmash))
-			.collect(Collectors.toList());
 	}
 
 	private void deleteNpcs(List<Npc> npcs) {
 		npcs.stream().filter(npc -> npc != null).forEach(npc -> npc.getController().delete());
 	}
 
-	private void cancelAirEvent() {
-		isInFlameShowerTask.set(false);
-		if (!isDead()) {
-			getOwner().getEffectController().removeEffect(20534);
-		}
-		if (getPosition() != null) {
-			WorldMapInstance instance = getPosition().getWorldMapInstance();
-			if (instance != null) {
-				deleteNpcs(instance.getNpcs(283002));
-				deleteNpcs(instance.getNpcs(283003));
-				deleteNpcs(instance.getNpcs(283004));
-				deleteNpcs(instance.getNpcs(283005));
-				deleteNpcs(instance.getNpcs(283006));
-				deleteNpcs(instance.getNpcs(283007));
-				deleteNpcs(instance.getNpcs(283010));
-				deleteNpcs(instance.getNpcs(283011));
-				deleteNpcs(instance.getNpcs(283012));
-				deleteNpcs(instance.getNpcs(283000));
-				deleteNpcs(instance.getNpcs(283001));
-			}
-		}
-	}
-
-	private void cancelFlameBuffEvent() {
-		if (flameBuffTask != null && !flameBuffTask.isDone()) {
-			flameBuffTask.cancel(true);
-		}
-		getOwner().getQueuedSkills().clear();
-	}
-
-	private void startFlameBuffEvent() {
-		flameBuffTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
-			if (isDead() || !getOwner().isSpawned()) {
-				cancelFlameBuffEvent();
-			} else {
-				getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(Rnd.get(0, 1) == 0 ? 20530 : 20531, 60, 100)));
-			}
-		}, 4000, 40000);
-	}
-
-	private void useKissBuff(Npc npc) {
-		npc.getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate((npc.getNpcId() == 283001 ? 19346 : 19345), 60, 100)));
-	}
-
 	private void addPercent() {
 		percents.clear();
-		Collections.addAll(percents, 80, 70, 50, 40, 25);
+		Collections.addAll(percents, 75, 50, 25, 10);
+	}
+
+	private void cancelTasks(Future<?>... tasks) {
+		for (Future<?> task : tasks)
+			if (task != null && !task.isCancelled())
+				task.cancel(true);
 	}
 
 	@Override
 	protected void handleSpawned() {
-		addPercent();
 		super.handleSpawned();
-		PacketSendUtility.broadcastMessage(getOwner(), 1500405, 2000);
-		blueFlameSmashs.add(new Point3D(176.184f, 415.782f, 260.572f));
-		blueFlameSmashs.add(new Point3D(159.480f, 412.495f, 260.555f));
-		blueFlameSmashs.add(new Point3D(183.784f, 413.475f, 260.755f));
-		blueFlameSmashs.add(new Point3D(211.497f, 398.355f, 260.550f));
-		blueFlameSmashs.add(new Point3D(173.654f, 419.605f, 260.571f));
-		blueFlameSmashs.add(new Point3D(168.923f, 397.403f, 260.571f));
-		blueFlameSmashs.add(new Point3D(189.839f, 385.524f, 260.571f));
-		blueFlameSmashs.add(new Point3D(209.488f, 398.908f, 260.552f));
-		blueFlameSmashs.add(new Point3D(171.938f, 419.449f, 260.571f));
-		blueFlameSmashs.add(new Point3D(202.292f, 403.402f, 260.559f));
-		blueFlameSmashs.add(new Point3D(184.120f, 384.201f, 260.571f));
-		blueFlameSmashs.add(new Point3D(178.429f, 415.372f, 260.572f));
-		redFlameSmashs.add(new Point3D(177.106f, 413.678f, 260.569f));
-		redFlameSmashs.add(new Point3D(167.271f, 418.102f, 260.721f));
-		redFlameSmashs.add(new Point3D(188.180f, 406.594f, 260.572f));
-		redFlameSmashs.add(new Point3D(181.117f, 402.296f, 260.571f));
-		redFlameSmashs.add(new Point3D(176.960f, 411.328f, 260.550f));
-		redFlameSmashs.add(new Point3D(196.692f, 408.827f, 260.564f));
-		redFlameSmashs.add(new Point3D(204.483f, 390.333f, 260.565f));
-		redFlameSmashs.add(new Point3D(205.820f, 412.985f, 260.571f));
-		redFlameSmashs.add(new Point3D(167.999f, 416.711f, 260.721f));
-		redFlameSmashs.add(new Point3D(192.086f, 419.873f, 260.572f));
-		redFlameSmashs.add(new Point3D(173.963f, 412.215f, 260.557f));
-		redFlameSmashs.add(new Point3D(175.762f, 422.974f, 260.572f));
+		addPercent();
 	}
 
 	@Override
 	protected void handleDespawned() {
-		percents.clear();
-		blueFlameSmashs.clear();
-		redFlameSmashs.clear();
-		cancelFlameBuffEvent();
-		cancelAirEvent();
-		cancelFlameSmashTask();
+		cancelTasks(enrageSchedule, flameShieldBuffSchedule, seaOfFireSpawnTask);
+		clearSpawns();
 		super.handleDespawned();
 	}
 
 	@Override
 	protected void handleBackHome() {
-		canThink = true;
 		addPercent();
-		cancelFlameBuffEvent();
-		cancelFlameSmashTask();
-		cancelAirEvent();
 		isHome.set(true);
 		getPosition().getWorldMapInstance().getDoors().get(70).setOpen(true);
+		cancelTasks(enrageSchedule, flameShieldBuffSchedule, seaOfFireSpawnTask);
+		clearSpawns();
 		super.handleBackHome();
 	}
 
 	@Override
 	protected void handleDied() {
-		percents.clear();
-		blueFlameSmashs.clear();
-		redFlameSmashs.clear();
-		cancelFlameBuffEvent();
-		cancelFlameSmashTask();
-		cancelAirEvent();
 		getPosition().getWorldMapInstance().getDoors().get(70).setOpen(true);
+		cancelTasks(enrageSchedule, flameShieldBuffSchedule, seaOfFireSpawnTask);
 		PacketSendUtility.broadcastMessage(getOwner(), 1500410);
+		clearSpawns();
 		super.handleDied();
 	}
-
 }

@@ -61045,13 +61045,19 @@
 		<npc_skill id="19668" lv="65" prob="70" cd="30000" next_skill_time="12000" />
 	</npc_skills>
 	<npc_skills npc_ids="283007">
-		<npc_skill id="20538" lv="60" prob="25" min_hp="95" max_hp="100" />
+		<npc_skill id="20538" lv="60" prob="100">
+			<cond delay="1000" despawn_time="3000" />
+		</npc_skill>
 	</npc_skills>
 	<npc_skills npc_ids="283008">
-		<npc_skill id="20540" lv="60" prob="100" />
+		<npc_skill id="20540" lv="60" prob="100">
+			<cond delay="1000" despawn_time="8000" />
+		</npc_skill>
 	</npc_skills>
 	<npc_skills npc_ids="283009">
-		<npc_skill id="20539" lv="60" prob="100" />
+		<npc_skill id="20539" lv="60" prob="100">
+			<cond delay="1000" despawn_time="8000" />
+		</npc_skill>
 	</npc_skills>
 	<npc_skills npc_ids="283140">
 		<npc_skill id="20966" lv="47" prob="0" />

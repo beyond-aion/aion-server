@@ -12,6 +12,17 @@
 			<gd_item id="186000238" min_count="60" max_count="90" /><!-- Conqueror's Mark -->
 		</gd_items>
 	</gd_rule>
+	<gd_rule rule_name="Named Weapon Shard" chance="5">
+		<gd_maps>
+			<gd_map map_id="300620000" /><!-- Occupied_Rentus_Base -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="236300" /><!-- Brigade General Vasharti -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="169405253" /><!-- Weapon Shard -->
+		</gd_items>
+	</gd_rule>
 	<gd_rule rule_name="Named Armor (Epic)" chance="50">
 		<gd_maps>
 			<gd_map map_id="300620000" /><!-- Occupied_Rentus_Base -->
