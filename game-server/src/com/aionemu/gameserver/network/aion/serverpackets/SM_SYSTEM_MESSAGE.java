@@ -25216,7 +25216,7 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	 * You cannot mount while %0.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_CANT_RIDE(String l10n) {
-		return new SM_SYSTEM_MESSAGE(1401211);
+		return new SM_SYSTEM_MESSAGE(1401211, l10n);
 	}
 
 	/**
