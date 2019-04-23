@@ -11,6 +11,7 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.Servant;
+import com.aionemu.gameserver.model.gameobjects.SummonedObject;
 import com.aionemu.gameserver.model.gameobjects.Trap;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.items.ItemSlot;
@@ -289,7 +290,7 @@ public class AttackUtil {
 		int bonus = 0;
 		HitType ht = HitType.PHHIT;
 		if (!useTemplateDmg) {
-			if (effector instanceof Npc && !(effector instanceof Servant)) {
+			if (effector instanceof SummonedObject && !(effector instanceof Servant)) {
 				ht = effect.getSkillType() == SkillType.MAGICAL ? HitType.MAHIT : HitType.PHHIT;
 				baseAttack = effector.getGameStats().getMainHandPAttack().getBase();
 

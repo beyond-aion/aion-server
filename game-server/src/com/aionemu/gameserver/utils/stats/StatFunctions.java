@@ -17,6 +17,7 @@ import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.Servant;
 import com.aionemu.gameserver.model.gameobjects.Summon;
+import com.aionemu.gameserver.model.gameobjects.SummonedObject;
 import com.aionemu.gameserver.model.gameobjects.Trap;
 import com.aionemu.gameserver.model.gameobjects.player.Equipment;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -521,6 +522,11 @@ public class StatFunctions {
 			damage = Math.round(damage * (1 - (elementalDef / 1250f)));
 			// magic defense for test purpose
 			damage -= Math.round(damage * Math.min(tgs.getMDef().getCurrent() * 0.0001f, 99f));
+		}
+
+		if (speller instanceof Npc && !(speller instanceof SummonedObject<?>)) {
+			int rnd = (int) (damage * 0.08f);
+			damage += Rnd.get(-rnd, rnd);
 		}
 
 		return Math.round(damage);
