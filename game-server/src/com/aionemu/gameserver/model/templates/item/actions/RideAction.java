@@ -27,6 +27,7 @@ import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.skillengine.effect.AbnormalState;
 import com.aionemu.gameserver.skillengine.model.Effect;
+import com.aionemu.gameserver.utils.ChatUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
@@ -55,6 +56,14 @@ public class RideAction extends AbstractItemAction {
 				}
 			}
 		}
+		if (player.isInState(CreatureState.RESTING)) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANT_RIDE(ChatUtil.l10n(1400057)));
+			return false;
+		}
+		if (player.getEffectController().isInAnyAbnormalState(AbnormalState.DISMOUNT_RIDE)) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANNOT_RIDE_ABNORMAL_STATE());
+			return false;
+		}
 		return true;
 	}
 
@@ -66,8 +75,8 @@ public class RideAction extends AbstractItemAction {
 			return;
 		}
 
-		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(),
-			3000, 0, 0), true);
+		PacketSendUtility.broadcastPacket(player,
+			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), 3000, 0, 0), true);
 		final ItemUseObserver observer = new ItemUseObserver() {
 
 			@Override
@@ -75,8 +84,8 @@ public class RideAction extends AbstractItemAction {
 				player.getController().cancelTask(TaskId.ITEM_USE);
 				player.removeItemCoolDown(parentItem.getItemTemplate().getUseLimits().getDelayId());
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_CANCELED());
-				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem
-					.getItemId(), 0, 3, 0), true);
+				PacketSendUtility.broadcastPacket(player,
+					new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), 0, 3, 0), true);
 				player.getObserveController().removeObserver(this);
 			}
 
@@ -96,8 +105,8 @@ public class RideAction extends AbstractItemAction {
 				player.setPlayerMode(PlayerMode.RIDE, getRideInfo());
 				PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.START_EMOTE2, 0, 0), true);
 				PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.RIDE, 0, getRideInfo().getNpcId()), true);
-				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(),
-					0, 1, 1), true);
+				PacketSendUtility.broadcastPacket(player,
+					new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), 0, 1, 1), true);
 				player.getController().cancelTask(TaskId.ITEM_USE);
 				QuestEngine.getInstance().rideAction(new QuestEnv(null, player, 0), itemTemplate.getTemplateId());
 			}
@@ -108,8 +117,10 @@ public class RideAction extends AbstractItemAction {
 
 			@Override
 			public void abnormalsetted(AbnormalState state) {
-				if ((state.getId() & AbnormalState.DISMOUT_RIDE.getId()) != 0)
+				if ((state.getId() & AbnormalState.DISMOUNT_RIDE.getId()) != 0) {
 					player.unsetPlayerMode(PlayerMode.RIDE);
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_UNRIDE_ABNORMAL_STATE());
+				}
 			}
 		};
 		player.getObserveController().addObserver(rideObserver);

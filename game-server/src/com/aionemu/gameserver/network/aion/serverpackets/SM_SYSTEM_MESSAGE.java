@@ -25211,6 +25211,13 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	public static final SM_SYSTEM_MESSAGE STR_MSG_CANT_USE_HOUSE_OBJECT_INVENTORY_IS_FULL() {
 		return new SM_SYSTEM_MESSAGE(1401200);
 	}
+	
+	/**
+	 * You cannot mount while %0.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_CANT_RIDE(String l10n) {
+		return new SM_SYSTEM_MESSAGE(1401211);
+	}
 
 	/**
 	 * You cannot make a bid for your own house.
@@ -25301,6 +25308,20 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_ENTER_ONLY_UNION_DON() {
 		return new SM_SYSTEM_MESSAGE(1401251);
+	}
+
+	/**
+	 * You cannot ride while in an Altered State.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_UNRIDE_ABNORMAL_STATE() {
+		return new SM_SYSTEM_MESSAGE(1401254);
+	}
+
+	/**
+	 * You cannot ride while in an Altered State.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_CANNOT_RIDE_ABNORMAL_STATE() {
+		return new SM_SYSTEM_MESSAGE(1401255);
 	}
 
 	/**
