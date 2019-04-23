@@ -12,7 +12,7 @@ import com.aionemu.gameserver.services.mail.MailService;
  */
 public class CM_DELETE_MAIL extends AionClientPacket {
 
-	int[] mailObjId;
+	private int[] mailObjIds;
 
 	public CM_DELETE_MAIL(int opcode, Set<State> validStates) {
 		super(opcode, validStates);
@@ -20,17 +20,16 @@ public class CM_DELETE_MAIL extends AionClientPacket {
 
 	@Override
 	protected void readImpl() {
-		int count = readUC();
-		mailObjId = new int[count];
-		for (int i = 0; i < count; i++) {
+		mailObjIds = new int[readUH()];
+		for (int i = 0; i < mailObjIds.length; i++) {
+			mailObjIds[i] = readD();
 			readC(); // unk
-			mailObjId[i] = readD();
 		}
 	}
 
 	@Override
 	protected void runImpl() {
 		Player player = getConnection().getActivePlayer();
-		MailService.getInstance().deleteMail(player, mailObjId);
+		MailService.getInstance().deleteMail(player, mailObjIds);
 	}
 }

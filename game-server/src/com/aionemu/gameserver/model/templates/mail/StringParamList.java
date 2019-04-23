@@ -1,11 +1,12 @@
 package com.aionemu.gameserver.model.templates.mail;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlType;
 
@@ -13,16 +14,14 @@ import javax.xml.bind.annotation.XmlType;
  * @author Rolandas
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "StringParamList", propOrder = { "param" })
 @XmlSeeAlso({ MailPart.class })
 public class StringParamList {
 
-	protected List<StringParamList.Param> param;
+	@XmlElement(name = "param")
+	protected List<Param> params;
 
-	public List<StringParamList.Param> getParam() {
-		if (param == null)
-			param = new ArrayList<>();
-		return this.param;
+	public List<Param> getParams() {
+		return params == null ? Collections.emptyList() : params;
 	}
 
 	@XmlAccessorType(XmlAccessType.FIELD)
