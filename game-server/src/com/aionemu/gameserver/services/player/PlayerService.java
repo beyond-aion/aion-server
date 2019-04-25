@@ -56,8 +56,6 @@ import com.aionemu.gameserver.model.gameobjects.player.Mailbox;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.PlayerCommonData;
 import com.aionemu.gameserver.model.house.House;
-import com.aionemu.gameserver.model.house.HouseRegistry;
-import com.aionemu.gameserver.model.house.HouseStatus;
 import com.aionemu.gameserver.model.items.ItemSlot;
 import com.aionemu.gameserver.model.items.storage.PlayerStorage;
 import com.aionemu.gameserver.model.items.storage.Storage;
@@ -216,14 +214,8 @@ public class PlayerService {
 		ItemService.loadItemStones(warehouse.getItems());
 		player.setStorage(warehouse);
 
-		HouseRegistry houseRegistry = null;
-		for (House house : player.getHouses()) {
-			if (house.getStatus() == HouseStatus.ACTIVE || house.getStatus() == HouseStatus.SELL_WAIT) {
-				houseRegistry = house.getRegistry();
-				break;
-			}
-		}
-		player.setHouseRegistry(houseRegistry);
+		House activeHouse = player.getActiveHouse();
+		player.setHouseRegistry(activeHouse == null ? null : activeHouse.getRegistry());
 
 		// Apply equipment stats (items and manastones were loaded in account)
 		player.getEquipment().onLoadApplyEquipmentStats();
