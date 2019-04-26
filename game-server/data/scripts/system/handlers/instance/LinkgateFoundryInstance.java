@@ -26,24 +26,23 @@ public class LinkgateFoundryInstance extends GeneralInstanceHandler {
 	private Future<?> timeCheckTask;
 	private byte timeInMin = -1;
 	private byte secretLabEntranceCount = 0;
-	private boolean isAgentSpawned = false;
+	private Race instanceRace;
 
 	@Override
 	public void onEnterInstance(Player player) {
-		if (!isAgentSpawned) {
-			isAgentSpawned = true;
-			spawn(player.getRace() == Race.ELYOS ? 206361 : 206362, 348.00464f, 252.13882f, 311.36136f, (byte) 10);
+		if (instanceRace == null) {
+			instanceRace = player.getRace();
+			spawn(instanceRace == Race.ELYOS ? 206361 : 206362, 348.00464f, 252.13882f, 311.36136f, (byte) 10);
 		}
 	}
 
 	@Override
 	public void onDie(Npc npc) {
-		Player player = npc.getAggroList().getMostPlayerDamage();
 		switch (npc.getNpcId()) {
 			case 233898:
 			case 234990:
 			case 234991:
-				spawn(player.getRace() == Race.ELYOS ? 702338 : 702389, 246.74345f, 258.35843f, 312.32327f, (byte) 10);
+				spawn(instanceRace == Race.ELYOS ? 702338 : 702389, 246.74345f, 258.35843f, 312.32327f, (byte) 10);
 				break;
 		}
 	}

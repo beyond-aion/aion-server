@@ -196,11 +196,9 @@ public class HousingBidService extends AbstractCronTask {
 
 		// check to see if bids were not removed from DB manually
 		for (House house : housesById.values()) {
-			if (house.getOwnerId() == 0)
-				continue;
 			if (house.getStatus() == HouseStatus.SELL_WAIT && !houseBids.containsKey(house.getObjectId())) {
-				log.warn("House address=" + house.getAddress().getId() + " has status SELL_WAIT but no bid exists. Activated.");
-				house.setStatus(HouseStatus.ACTIVE);
+				log.warn("House address=" + house.getAddress().getId() + " still has status SELL_WAIT but auction is over. Set to NOSALE.");
+				house.setStatus(HouseStatus.NOSALE);
 				house.setSellStarted(null);
 				house.save();
 			}
@@ -374,14 +372,14 @@ public class HousingBidService extends AbstractCronTask {
 		}
 
 		copy.forEach((houseObjId, houseBid) -> {
+			House house = HousingService.getInstance().getHouseByAddress(houseBid.getAddress());
 			DAOManager.getDAO(HouseBidsDAO.class).deleteHouseBids(houseObjId);
-			if (houseBid.getLastBiddingPlayer() == 0) {
-				House house = HousingService.getInstance().getHouseByAddress(houseBid.getAddress());
+			if (house.getStatus() == HouseStatus.SELL_WAIT) {
 				house.setStatus(HouseStatus.NOSALE);
 				addHouseToAuction(house);
 				house.save();
 				if (LoggingConfig.LOG_HOUSE_AUCTION)
-					log.info("Address " + houseBid.getAddress() + " not sold for price " + houseBid.getBidPrice());
+					log.info("Address " + houseBid.getAddress() + " not sold, reauctioned.");
 			}
 		});
 	}
@@ -399,7 +397,7 @@ public class HousingBidService extends AbstractCronTask {
 	 * @return one week ago before the auction time
 	 */
 	public long getAuctionStartTime() {
-		return (long) (getRunTime() - 7 * 24 * 3600) * 1000;
+		return (getRunTime() - TimeUnit.DAYS.toSeconds(7)) * 1000;
 	}
 
 	public int getSecondsTillAuction() {

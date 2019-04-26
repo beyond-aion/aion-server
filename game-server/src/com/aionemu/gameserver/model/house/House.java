@@ -351,9 +351,8 @@ public class House extends VisibleObject implements Persistable {
 	}
 
 	public boolean isInGracePeriod() {
-		return playerObjectId > 0 && HousingService.getInstance().searchPlayerHouses(playerObjectId).size() == 2
-			&& (status == HouseStatus.ACTIVE || status == HouseStatus.SELL_WAIT) && sellStarted != null
-			&& sellStarted.getTime() <= HousingBidService.getInstance().getAuctionStartTime();
+		return playerObjectId > 0 && status != HouseStatus.INACTIVE && HousingService.getInstance().searchPlayerHouses(playerObjectId).size() > 1
+			&& sellStarted != null && sellStarted.getTime() <= HousingBidService.getInstance().getAuctionStartTime();
 	}
 
 	public synchronized Npc getButler() {

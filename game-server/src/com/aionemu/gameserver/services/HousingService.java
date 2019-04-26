@@ -272,13 +272,8 @@ public class HousingService {
 	}
 
 	public void onPlayerLogin(Player player) {
-		House activeHouse = null;
 		byte buildingState = HouseOwnerState.BUY_STUDIO_ALLOWED.getId();
-		for (House house : player.getHouses()) {
-			if (house.getStatus() == HouseStatus.ACTIVE || house.getStatus() == HouseStatus.SELL_WAIT) {
-				activeHouse = house;
-			}
-		}
+		House activeHouse = player.getActiveHouse();
 		if (activeHouse == null) {
 			QuestState qs;
 			qs = player.getQuestStateList().getQuestState(player.getRace() == Race.ELYOS ? 18802 : 28802);

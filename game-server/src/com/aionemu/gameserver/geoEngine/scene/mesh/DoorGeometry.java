@@ -13,7 +13,7 @@ import com.aionemu.gameserver.geoEngine.scene.Geometry;
  */
 public class DoorGeometry extends Geometry {
 
-	BitSet instances = new BitSet();
+	private BitSet instances = new BitSet();
 	private boolean foundTemplate = false;
 
 	public DoorGeometry(String name) {
@@ -28,11 +28,8 @@ public class DoorGeometry extends Geometry {
 	public int collideWith(Collidable other, CollisionResults results) {
 		if (foundTemplate && instances.get(results.getInstanceId()))
 			return 0;
-		if (other instanceof Ray) {
-			// no collision if inside arena spheres, so just check volume
-			int result = getWorldBound().collideWith(other, results);
-			return result;
-		}
+		if (other instanceof Ray) // no collision if inside arena spheres, so just check volume
+			return getWorldBound().collideWith(other, results);
 		return super.collideWith(other, results);
 	}
 
@@ -50,5 +47,12 @@ public class DoorGeometry extends Geometry {
 			mesh.updateBound();
 			worldBound = new BoundingBox((BoundingBox)mesh.getBound());
 		}
+	}
+
+	@Override
+	public DoorGeometry clone() throws CloneNotSupportedException {
+		DoorGeometry clone = (DoorGeometry) super.clone();
+		clone.instances = (BitSet) instances.clone();
+		return clone;
 	}
 }
