@@ -282,13 +282,7 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 
 	@Override
 	public boolean onReviveEvent(Player player) {
-		PlayerReviveService.revive(player, 100, 100, false, 0);
-		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REBIRTH_MASSAGE_ME());
-		player.getGameStats().updateStatsAndSpeedVisually();
-		PacketSendUtility.sendPacket(player, new SM_PLAYER_INFO(player));
-		PacketSendUtility.sendPacket(player, new SM_MOTION(player.getObjectId(), player.getMotions().getActiveMotions()));
-		player.unsetResPosState();
-
+		revive(player);
 		if (!canJoin.get() || respawnLocations.isEmpty()) {
 			if (instance.getPlayer(player.getObjectId()) != null) {
 				removePlayer(player);
@@ -488,16 +482,22 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 
 	private synchronized void removePlayer(Player p) {
 		updateJoinOrLeaveTime(p);
-		if (p.isDead()) {
-			PacketSendUtility.broadcastPacket(p, new SM_EMOTION(p, EmotionType.RESURRECT), true);
-			PlayerReviveService.revive(p, 25, 25, true, 0);
-		}
+		if (p.isDead())
+			revive(p);
 		WorldPosition position = origins.remove(p.getObjectId());
 		if (position != null && !isAtVulnerableFortress(position.getMapId(), position.getX(), position.getY(), position.getZ())) {
 			TeleportService.teleportTo(p, position);
 		} else {
 			TeleportService.moveToBindLocation(p);
 		}
+	}
+
+	private void revive(Player player) {
+		PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.RESURRECT), true);
+		PlayerReviveService.revive(player, 100, 100, false, 0);
+		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REBIRTH_MASSAGE_ME());
+		player.getGameStats().updateStatsAndSpeedVisually();
+		player.unsetResPosState();
 	}
 
 	public boolean isAtVulnerableFortress(int worldId, float x, float y, float z) {
