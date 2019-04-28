@@ -528,9 +528,6 @@ public class StatFunctions {
 		if (damages < 1)
 			damages = 1;
 
-		if (target instanceof Npc)
-			return target.getAi().modifyDamage(speller, (int) damages, null);
-
 		return Math.round(damages);
 	}
 

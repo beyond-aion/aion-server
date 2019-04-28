@@ -353,14 +353,13 @@ public class AttackUtil {
 			switch (element) {
 				case NONE:
 					damage += bonus;
-					damage = Math.round(StatFunctions.adjustDamages(effect.getEffector(), effect.getEffected(), damage, effect.getPvpDamage(), true, element,
-						false));
+					damage = Math.round(StatFunctions.adjustDamages(effector, effected, damage, effect.getPvpDamage(), true, element, false));
 					damageMultiplier = effector.getObserveController().getBasePhysicalDamageMultiplier(true);
 					damage = Math.round(damage * damageMultiplier);
 					break;
 				default:
-					damage = StatFunctions.calculateMagicalSkillDamage(effect.getEffector(), effect.getEffected(), damage, bonus, element, useMagicBoost,
-						useKnowledge, noReduce, effect.getSkillTemplate().getPvpDamage());
+					damage = StatFunctions.calculateMagicalSkillDamage(effector, effected, damage, bonus, element, useMagicBoost, useKnowledge, noReduce,
+						effect.getSkillTemplate().getPvpDamage());
 					damageMultiplier = effector.getObserveController().getBaseMagicalDamageMultiplier();
 					damage = Math.round(damage * damageMultiplier);
 					break;
@@ -556,8 +555,8 @@ public class AttackUtil {
 			// TODO is damage multiplier used on dot?
 			float damageMultiplier = effector.getObserveController().getBaseMagicalDamageMultiplier();
 
-			damage = Math.round(StatFunctions.calculateMagicalSkillDamage(effect.getEffector(), effect.getEffected(), skillDamage, 0, element,
-				useMagicBoost, false, false, effect.getSkillTemplate().getPvpDamage()) * damageMultiplier);
+			damage = Math.round(StatFunctions.calculateMagicalSkillDamage(effector, effected, skillDamage, 0, element, useMagicBoost, false, false,
+				effect.getSkillTemplate().getPvpDamage()) * damageMultiplier);
 
 			AttackStatus status = effect.getAttackStatus();
 			// calculate attack status only if it has not been forced already
