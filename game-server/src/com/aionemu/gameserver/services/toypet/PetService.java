@@ -154,6 +154,11 @@ public class PetService {
 			pet.getCommonData().getDopingBag().switchItems(slot, slot2);
 			PacketSendUtility.sendPacket(pet.getMaster(), new SM_PET(action, slot2, slot));
 		} else if (action == 3) { // use item
+			if (!player.isSpawned()) { // player may be just despawned because of a pending teleport, schedule re-check
+				ThreadPoolManager.getInstance().schedule(() -> PacketSendUtility.sendPacket(player, new SM_PET(action, itemId, slot)), 5, TimeUnit.SECONDS);
+				return;
+			}
+
 			Item useItem = player.getInventory().getItemsByItemId(itemId).get(0);
 
 			if (!isPetItemUseAllowed(player, useItem)) { // pet currently is not allowed to buff, schedule re-check
