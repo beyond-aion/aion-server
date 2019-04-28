@@ -17,9 +17,7 @@ import com.aionemu.gameserver.model.gameobjects.PetSpecialFunction;
 import com.aionemu.gameserver.model.gameobjects.player.PetCommonData;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.team.common.legacy.LootRuleType;
-import com.aionemu.gameserver.model.templates.item.ItemUseLimits;
 import com.aionemu.gameserver.model.templates.item.actions.AbstractItemAction;
-import com.aionemu.gameserver.model.templates.item.actions.ItemActions;
 import com.aionemu.gameserver.model.templates.item.actions.SkillUseAction;
 import com.aionemu.gameserver.model.templates.pet.FoodType;
 import com.aionemu.gameserver.model.templates.pet.PetDopingEntry;
@@ -156,36 +154,28 @@ public class PetService {
 			pet.getCommonData().getDopingBag().switchItems(slot, slot2);
 			PacketSendUtility.sendPacket(pet.getMaster(), new SM_PET(action, slot2, slot));
 		} else if (action == 3) { // use item
-			List<Item> items = player.getInventory().getItemsByItemId(itemId);
-			Item useItem = items.get(0);
-			ItemActions itemActions = useItem.getItemTemplate().getActions();
+			Item useItem = player.getInventory().getItemsByItemId(itemId).get(0);
 
 			if (!isPetItemUseAllowed(player, useItem)) { // pet currently is not allowed to buff, schedule re-check
 				ThreadPoolManager.getInstance().schedule(() -> PacketSendUtility.sendPacket(player, new SM_PET(action, itemId, slot)), 20, TimeUnit.SECONDS);
 				return;
 			}
 
-			ItemUseLimits limit = new ItemUseLimits();
-			int useDelay = player.getItemCooldown(useItem.getItemTemplate()) / 3;
-			if (useDelay < 3000)
-				useDelay = 3000;
-			limit.setDelayId(useItem.getItemTemplate().getUseLimits().getDelayId());
-			limit.setDelayTime(useDelay);
-
-			if (player.isItemUseDisabled(limit)) {
-				// schedule re-check
-				ThreadPoolManager.getInstance().schedule(() -> PacketSendUtility.sendPacket(player, new SM_PET(action, itemId, slot)), useDelay);
+			long now = System.currentTimeMillis();
+			long reuseTime = player.getItemReuseTime(useItem.getItemTemplate().getUseLimits().getDelayId());
+			if (reuseTime != 0 && reuseTime > now) { // player still has cooldown, schedule re-check
+				ThreadPoolManager.getInstance().schedule(() -> PacketSendUtility.sendPacket(player, new SM_PET(action, itemId, slot)), reuseTime - now);
 				return;
 			}
 
-			for (AbstractItemAction itemAction : itemActions.getItemActions()) {
+			for (AbstractItemAction itemAction : useItem.getItemTemplate().getActions().getItemActions()) {
 				if (itemAction instanceof SkillUseAction) {
 					PacketSendUtility.broadcastPacket(player,
 						new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), player.getObjectId(), useItem.getObjectId(), useItem.getItemId(), 0, 1, 1, 1, 0, 15360),
 						true);
 					SkillEngine.getInstance().applyEffectDirectly(((SkillUseAction) itemAction).getSkillId(), ((SkillUseAction) itemAction).getLevel(), player,
 						player, null, ForceType.DEFAULT);
-					player.addItemCoolDown(limit.getDelayId(), System.currentTimeMillis() + player.getItemCooldown(useItem.getItemTemplate()),
+					player.addItemCoolDown(useItem.getItemTemplate().getUseLimits().getDelayId(), now + player.getItemCooldown(useItem.getItemTemplate()),
 						player.getItemCooldown(useItem.getItemTemplate()) / 1000);
 					player.getInventory().decreaseByItemId(itemId, 1);
 				} else

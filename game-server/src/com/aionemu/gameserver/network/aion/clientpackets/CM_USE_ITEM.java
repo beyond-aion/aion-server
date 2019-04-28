@@ -126,7 +126,7 @@ public class CM_USE_ITEM extends AionClientPacket {
 			return;
 		}
 		// Prevents potion spamming, and relogging to use kisks/aether jelly/long CD items.
-		if (player.isItemUseDisabled(item.getItemTemplate().getUseLimits())) {
+		if (player.hasCooldown(item)) {
 			PacketSendUtility.sendPacket(player, STR_ITEM_CANT_USE_UNTIL_DELAY_TIME());
 			return;
 		}

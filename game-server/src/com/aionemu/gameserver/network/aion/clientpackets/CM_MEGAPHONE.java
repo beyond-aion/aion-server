@@ -84,9 +84,7 @@ public class CM_MEGAPHONE extends AionClientPacket {
 			return;
 		}
 
-		// Store Item CD in server Player variable.
-		// Prevents potion spamming, and relogging to use.
-		if (player.isItemUseDisabled(item.getItemTemplate().getUseLimits())) {
+		if (player.hasCooldown(item)) {
 			PacketSendUtility.sendPacket(player, STR_ITEM_CANT_USE_UNTIL_DELAY_TIME());
 			return;
 		}
