@@ -454,11 +454,14 @@ public abstract class EffectTemplate {
 
 		SkillTemplate template = DataManager.SKILL_DATA.getSkillTemplate(subEffect.getSkillId());
 		int level = 1;
-		if (subEffect.isAddEffect())
+		int accBoost = effect.getAccModBoost();
+		if (subEffect.isAddEffect()) { // Only used by signet bursts
 			level = effect.getSignetBurstedCount();
+			accBoost = Short.MAX_VALUE; // sub effects cannot be resisted by magic resist in case of signet bursts
+		}
 		Effect newEffect = new Effect(effect.getEffector(), effect.getOriginalEffected(), template, level, null, effect.getForceType());
 		newEffect.setShieldDefense(effect.getShieldDefense());
-		newEffect.setAccModBoost(effect.getAccModBoost());
+		newEffect.setAccModBoost(accBoost);
 		newEffect.initialize();
 		if (newEffect.getSpellStatus() != SpellStatus.DODGE && newEffect.getSpellStatus() != SpellStatus.RESIST)
 			effect.setSpellStatus(newEffect.getSpellStatus());
