@@ -269,7 +269,7 @@ public class AttackUtil {
 		ActionModifier modifier = template.getActionModifiers(effect);
 		SkillElement element = template.getElement();
 		Func func = (template instanceof DamageEffect ? ((DamageEffect) template).getMode() : Func.ADD);
-		int randomDamage = (template instanceof SkillAttackInstantEffect ? ((SkillAttackInstantEffect) template).getRnddmg() : 0);
+		int randomDamageType = (template instanceof SkillAttackInstantEffect ? ((SkillAttackInstantEffect) template).getRnddmg() : 0);
 		int skillLvl = effect.getSkillLevel();
 		int accMod = template.getAccMod2() + template.getAccMod1() * skillLvl;
 		int criticalProb = template.getCritProbMod2();
@@ -278,18 +278,16 @@ public class AttackUtil {
 		int critAddDmg = template.getCritAddDmg2() + template.getCritAddDmg1() * skillLvl;
 		boolean useMagicBoost = true;
 		boolean useKnowledge = true;
-		boolean cannotMiss = (template instanceof SkillAttackInstantEffect ? ((SkillAttackInstantEffect) template).isCannotmiss() : false);
-		boolean shared = (template instanceof DamageEffect ? ((DamageEffect) template).isShared() : false);
-		boolean noReduce = (template instanceof NoReduceSpellATKInstantEffect);
+		boolean cannotMiss = template instanceof SkillAttackInstantEffect && ((SkillAttackInstantEffect) template).isCannotmiss();
+		boolean shared = template instanceof DamageEffect && ((DamageEffect) template).isShared();
+		boolean noReduce = template instanceof NoReduceSpellATKInstantEffect;
 		if (template instanceof ProcAtkInstantEffect) {
 			if (effect.getStack().equalsIgnoreCase("KN_TURNAGGRESSIVEEFFECT")) { // more info
 				useKnowledge = false;
 				useMagicBoost = false;
 			}
 		}
-		/**
-		 * for sm_castspell_result packet
-		 */
+		// for sm_castspell_result packet
 		int position = template.getPosition();
 		boolean send = true;
 		if (template instanceof DelayedSpellAttackInstantEffect || template instanceof ProcAtkInstantEffect)
@@ -299,7 +297,7 @@ public class AttackUtil {
 		int baseAttack = 0;
 		int bonus = 0;
 		HitType ht = HitType.PHHIT;
-		float damageMultiplier = 0;
+		float damageMultiplier;
 		if (!noReduce) {
 			if (effector instanceof Npc && !(effector instanceof Servant)) {
 				ht = effect.getSkillType() == SkillType.MAGICAL ? HitType.MAHIT : HitType.PHHIT;
@@ -369,56 +367,10 @@ public class AttackUtil {
 			}
 		}
 
-		if (randomDamage > 0) {
-			float chance = Rnd.chance();
-			int dmgMod = Rnd.get(1, 3);
-			// TODO Hard fix
-			if (effect.getSkillId() == 20033)
-				damage *= 10;
-			switch (randomDamage) {
-				case 1:
-					switch (dmgMod) {
-						case 1:
-							damage *= 0.5f;
-							break;
-						case 2:
-							damage *= 1.5f;
-							break;
-						case 3:
-							damage *= 1;
-							break;
-					}
-					break;
-				case 2:
-					if (chance < 70)
-						damage *= 0.6f;
-					else
-						damage *= 2;
-					break;
-				case 3:
-					switch (dmgMod) {
-						case 1:
-							damage *= 1;
-							break;
-						case 2:
-							damage *= 1.15f;
-							break;
-						case 3:
-							damage *= 1.25f;
-							break;
-					}
-					break;
-				case 6:
-					if (chance < 30)
-						damage *= 2;
-					break;
-				default:
-					damage *= (Rnd.get(25, 100) * 0.02f);
-					break;
-			}
-		}
+		if (randomDamageType > 0)
+			damage = randomizeDamage(randomDamageType, damage);
 
-		AttackStatus status = AttackStatus.NORMALHIT;
+		AttackStatus status;
 		switch (element) {
 			case NONE:
 				status = calculatePhysicalStatus(effector, effected, true, accMod, criticalProb, true, cannotMiss);
@@ -483,6 +435,47 @@ public class AttackUtil {
 			damage = 0;
 
 		calculateEffectResult(effect, effected, damage, status, ht, ignoreShield, position, send);
+	}
+
+	private static int randomizeDamage(int randomDamageType, int damage) {
+		switch (randomDamageType) {
+			case 1:
+				switch (Rnd.get(1, 3)) {
+					case 1:
+						damage *= 0.5f;
+						break;
+					case 2:
+						damage *= 1.5f;
+						break;
+				}
+				break;
+			case 2:
+				if (Rnd.chance() < 70)
+					damage *= 0.6f;
+				else
+					damage *= 2;
+				break;
+			case 3:
+				switch (Rnd.get(1, 3)) {
+					case 1:
+						damage *= 1.15f;
+						break;
+					case 2:
+						damage *= 1.25f;
+						break;
+				}
+				break;
+			case 4:
+				damage *= (Rnd.get(25, 100) * 0.02f);
+				break;
+			case 6:
+				if (Rnd.chance() < 30)
+					damage *= 2;
+				break;
+			default:
+				throw new IllegalArgumentException("Unhandled random damage type rnddmg=\"" + randomDamageType + "\"");
+		}
+		return damage;
 	}
 
 	private static void calculateEffectResult(Effect effect, Creature effected, int damage, AttackStatus status, HitType hitType, boolean ignoreShield,
