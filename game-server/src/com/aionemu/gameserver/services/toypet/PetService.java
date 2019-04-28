@@ -2,6 +2,7 @@ package com.aionemu.gameserver.services.toypet;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -159,8 +160,10 @@ public class PetService {
 			Item useItem = items.get(0);
 			ItemActions itemActions = useItem.getItemTemplate().getActions();
 
-			if (!isPetItemUseAllowed(player, useItem))
+			if (!isPetItemUseAllowed(player, useItem)) { // pet currently is not allowed to buff, schedule re-check
+				ThreadPoolManager.getInstance().schedule(() -> PacketSendUtility.sendPacket(player, new SM_PET(action, itemId, slot)), 20, TimeUnit.SECONDS);
 				return;
+			}
 
 			ItemUseLimits limit = new ItemUseLimits();
 			int useDelay = player.getItemCooldown(useItem.getItemTemplate()) / 3;
