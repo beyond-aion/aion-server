@@ -296,7 +296,6 @@ public class AttackUtil {
 		int baseAttack = 0;
 		int bonus = 0;
 		HitType ht = HitType.PHHIT;
-		float damageMultiplier;
 		if (!noReduce) {
 			if (effector instanceof Npc && !(effector instanceof Servant)) {
 				ht = effect.getSkillType() == SkillType.MAGICAL ? HitType.MAHIT : HitType.PHHIT;
@@ -349,20 +348,19 @@ public class AttackUtil {
 		}
 
 		if (!noReduce) {
+			float damageMultiplier;
 			switch (element) {
 				case NONE:
-					damage += bonus;
-					damage = Math.round(StatFunctions.adjustDamages(effector, effected, damage, effect.getPvpDamage(), true, element, false));
 					damageMultiplier = effector.getObserveController().getBasePhysicalDamageMultiplier(true);
-					damage = Math.round(damage * damageMultiplier);
+					damage += bonus;
 					break;
 				default:
-					damage = StatFunctions.calculateMagicalSkillDamage(effector, effected, damage, bonus, element, useMagicBoost, useKnowledge, noReduce,
-						effect.getSkillTemplate().getPvpDamage());
 					damageMultiplier = effector.getObserveController().getBaseMagicalDamageMultiplier();
-					damage = Math.round(damage * damageMultiplier);
+					damage = StatFunctions.calculateMagicalSkillDamage(effector, effected, damage, bonus, element, useMagicBoost, useKnowledge);
 					break;
 			}
+			damage = StatFunctions.adjustDamages(effector, effected, damage, effect.getPvpDamage(), true, element);
+			damage = Math.round(damage * damageMultiplier);
 		}
 
 		if (randomDamageType > 0)
@@ -544,8 +542,9 @@ public class AttackUtil {
 			// TODO is damage multiplier used on dot?
 			float damageMultiplier = effector.getObserveController().getBaseMagicalDamageMultiplier();
 
-			damage = Math.round(StatFunctions.calculateMagicalSkillDamage(effector, effected, skillDamage, 0, element, useMagicBoost, false, false,
-				effect.getSkillTemplate().getPvpDamage()) * damageMultiplier);
+			damage = StatFunctions.calculateMagicalSkillDamage(effector, effected, skillDamage, 0, element, useMagicBoost, false);
+			damage = StatFunctions.adjustDamages(effector, effected, damage, effect.getPvpDamage(), false, element);
+			damage = Math.round(damage * damageMultiplier);
 
 			AttackStatus status = effect.getAttackStatus();
 			// calculate attack status only if it has not been forced already

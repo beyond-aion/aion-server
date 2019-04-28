@@ -302,7 +302,7 @@ public class StatFunctions {
 	 * @return Damage made to target (-hp value)
 	 */
 	public static int calculateAttackDamage(Creature attacker, Creature target, boolean isMainHand, SkillElement element) {
-		int resultDamage = 0;
+		int resultDamage;
 		if (element == SkillElement.NONE) {
 			// physical damage
 			resultDamage = calculatePhysicalAttackDamage(attacker, target, isMainHand, false);
@@ -312,7 +312,7 @@ public class StatFunctions {
 		}
 
 		// adjusting baseDamages according to attacker and target level
-		resultDamage = (int) adjustDamages(attacker, target, resultDamage, 0, true, element, false);
+		resultDamage = adjustDamages(attacker, target, resultDamage, 0, true, element);
 
 		if (target instanceof Npc)
 			return target.getAi().modifyDamage(attacker, resultDamage, null);
@@ -493,8 +493,8 @@ public class StatFunctions {
 		return Math.round(resultDamage);
 	}
 
-	public static int calculateMagicalSkillDamage(Creature speller, Creature target, int baseDamages, int bonus, SkillElement element,
-		boolean useMagicBoost, boolean useKnowledge, boolean noReduce, int pvpDamage) {
+	public static int calculateMagicalSkillDamage(Creature speller, Creature target, int baseDamage, int bonus, SkillElement element,
+		boolean useMagicBoost, boolean useKnowledge) {
 		CreatureGameStats<?> sgs = speller.getGameStats();
 		CreatureGameStats<?> tgs = target.getGameStats();
 
@@ -507,28 +507,22 @@ public class StatFunctions {
 			magicBoost = 2900;
 		}
 		int knowledge = useKnowledge ? sgs.getKnowledge().getCurrent() : 100; // this line might be wrong now
-		float damages = baseDamages * (1 + (magicBoost / (knowledge * 10f)));
+		float damage = baseDamage * (1 + (magicBoost / (knowledge * 10f)));
 
-		damages = sgs.getStat(StatEnum.BOOST_SPELL_ATTACK, (int) damages).getCurrent();
+		damage = sgs.getStat(StatEnum.BOOST_SPELL_ATTACK, (int) damage).getCurrent();
 		// add bonus damage
-		damages += bonus;
+		damage += bonus;
 		/*
-		 * element resist: fire, wind, water, earth 10 elemental resist ~ 1% reduce of magical baseDamages
+		 * element resist: fire, wind, water, earth 10 elemental resist ~ 1% reduce of magical baseDamage
 		 */
-		if (!noReduce && element != SkillElement.NONE) {
+		if (element != SkillElement.NONE) {
 			float elementalDef = getMovementModifier(target, SkillElement.getResistanceForElement(element), tgs.getMagicalDefenseFor(element));
-			damages = Math.round(damages * (1 - (elementalDef / 1250f)));
+			damage = Math.round(damage * (1 - (elementalDef / 1250f)));
 			// magic defense for test purpose
-			damages -= Math.round(damages * Math.min(tgs.getMDef().getCurrent() * 0.0001f, 99f));
+			damage -= Math.round(damage * Math.min(tgs.getMDef().getCurrent() * 0.0001f, 99f));
 		}
 
-		// useKnowledge? This boolean is later used to determine whether movement boni are applied or not. Therefore this might not be correct.
-		damages = adjustDamages(speller, target, damages, pvpDamage, useKnowledge, element, noReduce);
-
-		if (damages < 1)
-			damages = 1;
-
-		return Math.round(damages);
+		return Math.round(damage);
 	}
 
 	/**
@@ -618,67 +612,50 @@ public class StatFunctions {
 	}
 
 	/**
-	 * @param attacker
-	 * @param target
-	 * @param damages
-	 * @param pvpDamage
-	 * @param useMovement
-	 * @param element
-	 * @param noReduce
-	 * @return adjusted baseDamage according to their level || is PVP?
+	 * @return adjusted damage according to PVE or PVP modifiers
 	 */
-	public static float adjustDamages(Creature attacker, Creature target, float damages, int pvpDamage, boolean useMovement, SkillElement element,
-		boolean noReduce) {
-
-		float attackBonus = 0;
-		float defenceBonus = 0;
-
+	public static int adjustDamages(Creature attacker, Creature target, int baseDamage, int pvpDamage, boolean useMovement, SkillElement element) {
+		float attackBonus, defenseBonus;
+		float damage = baseDamage;
+		if (useMovement)
+			damage = movementDamageBonus(attacker, damage);
 		if (attacker.isPvpTarget(target)) {
 			if (pvpDamage > 0)
-				damages *= pvpDamage * 0.01f;
-			if (!noReduce)
-				damages = Math.round(damages * 0.42f);// 0.42 checked on NA (4.9) 19.03.2016
+				damage *= pvpDamage * 0.01f;
+			damage *= 0.42f; // PVP modifier 42%, last checked on NA (4.9) 19.03.2016
+			if (attacker.getRace() != target.getRace() && !attacker.isInInstance())
+				damage *= Influence.getInstance().getPvpRaceBonus(attacker.getRace());
 
 			attackBonus = attacker.getGameStats().getStat(StatEnum.PVP_ATTACK_RATIO, 0).getCurrent() * 0.001f;
-			defenceBonus = target.getGameStats().getStat(StatEnum.PVP_DEFEND_RATIO, 0).getCurrent() * 0.001f;
+			defenseBonus = target.getGameStats().getStat(StatEnum.PVP_DEFEND_RATIO, 0).getCurrent() * 0.001f;
 			switch (element) {
 				case NONE:
 					attackBonus += attacker.getGameStats().getStat(StatEnum.PVP_ATTACK_RATIO_PHYSICAL, 0).getCurrent() * 0.001f;
-					defenceBonus += target.getGameStats().getStat(StatEnum.PVP_DEFEND_RATIO_PHYSICAL, 0).getCurrent() * 0.001f;
+					defenseBonus += target.getGameStats().getStat(StatEnum.PVP_DEFEND_RATIO_PHYSICAL, 0).getCurrent() * 0.001f;
 					break;
 				default:
 					attackBonus += attacker.getGameStats().getStat(StatEnum.PVP_ATTACK_RATIO_MAGICAL, 0).getCurrent() * 0.001f;
-					defenceBonus += target.getGameStats().getStat(StatEnum.PVP_DEFEND_RATIO_MAGICAL, 0).getCurrent() * 0.001f;
-					break;
-			}
-			damages = Math.round(damages + (damages * attackBonus) - (damages * defenceBonus));
-			if (attacker.getRace() != target.getRace() && !attacker.isInInstance()) {
-				damages *= Influence.getInstance().getPvpRaceBonus(attacker.getRace());
+					defenseBonus += target.getGameStats().getStat(StatEnum.PVP_DEFEND_RATIO_MAGICAL, 0).getCurrent() * 0.001f;
 			}
 		} else {
 			if (attacker instanceof Player) {
-				damages = damages * 1.15f; // 15% pve boost. Checked on NA & GF (4.9) 19.03.2016
+				damage *= 1.15f; // 15% pve boost, last checked on NA & GF (4.9) 19.03.2016
 				int levelDiff = target.getLevel() - attacker.getLevel(); // npcs dmg is not reduced because of the level difference GF (4.9) 23.04.2016
-				damages *= (1f - getNpcLevelDiffMod(levelDiff, 0));
+				damage *= (1f - getNpcLevelDiffMod(levelDiff, 0));
 			}
 			attackBonus = attacker.getGameStats().getStat(StatEnum.PVE_ATTACK_RATIO, 0).getCurrent() * 0.001f;
-			defenceBonus = target.getGameStats().getStat(StatEnum.PVE_DEFEND_RATIO, 0).getCurrent() * 0.001f;
+			defenseBonus = target.getGameStats().getStat(StatEnum.PVE_DEFEND_RATIO, 0).getCurrent() * 0.001f;
 			switch (element) {
 				case NONE:
 					attackBonus += attacker.getGameStats().getStat(StatEnum.PVE_ATTACK_RATIO_PHYSICAL, 0).getCurrent() * 0.001f;
-					defenceBonus += target.getGameStats().getStat(StatEnum.PVE_DEFEND_RATIO_PHYSICAL, 0).getCurrent() * 0.001f;
+					defenseBonus += target.getGameStats().getStat(StatEnum.PVE_DEFEND_RATIO_PHYSICAL, 0).getCurrent() * 0.001f;
 					break;
 				default:
 					attackBonus += attacker.getGameStats().getStat(StatEnum.PVE_ATTACK_RATIO_MAGICAL, 0).getCurrent() * 0.001f;
-					defenceBonus += target.getGameStats().getStat(StatEnum.PVE_DEFEND_RATIO_MAGICAL, 0).getCurrent() * 0.001f;
-					break;
+					defenseBonus += target.getGameStats().getStat(StatEnum.PVE_DEFEND_RATIO_MAGICAL, 0).getCurrent() * 0.001f;
 			}
-			damages = Math.round(damages + (damages * attackBonus) - (damages * defenceBonus));
 		}
-		if (useMovement)
-			damages = movementDamageBonus(attacker, damages);
-
-		return damages;
+		return Math.round(damage + (damage * attackBonus) - (damage * defenseBonus));
 	}
 
 	/**
