@@ -338,7 +338,7 @@ public final class PlayerEnterWorldService {
 		if (player.getSkillCoolDowns() != null)
 			client.sendPacket(new SM_SKILL_COOLDOWN(player.getSkillCoolDowns(), true));
 
-		if (player.getItemCoolDowns() != null)
+		if (!player.getItemCoolDowns().isEmpty())
 			client.sendPacket(new SM_ITEM_COOLDOWN(player.getItemCoolDowns()));
 
 		QuestEngine.getInstance().sendCompletedQuests(player);

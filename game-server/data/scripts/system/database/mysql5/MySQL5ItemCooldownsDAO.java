@@ -60,7 +60,7 @@ public class MySQL5ItemCooldownsDAO extends ItemCooldownsDAO {
 		deleteItemCooldowns(player);
 
 		Map<Integer, ItemCooldown> itemCoolDowns = player.getItemCoolDowns();
-		if (itemCoolDowns == null || itemCoolDowns.isEmpty())
+		if (itemCoolDowns.isEmpty())
 			return;
 
 		itemCoolDowns = new HashMap<>(itemCoolDowns);

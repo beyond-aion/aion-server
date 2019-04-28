@@ -159,7 +159,7 @@ public class Player extends Creature {
 
 	private BindPointPosition bindPoint;
 
-	private Map<Integer, ItemCooldown> itemCoolDowns;
+	private final Map<Integer, ItemCooldown> itemCoolDowns = new ConcurrentHashMap<>();
 	private PortalCooldownList portalCooldownList;
 	private CraftCooldownList craftCooldownList;
 	private HouseObjectCooldownList houseObjectCooldownList;
@@ -1117,36 +1117,27 @@ public class Player extends Creature {
 		return kisk;
 	}
 
-	public boolean isItemUseDisabled(ItemUseLimits limits) {
+	public boolean hasCooldown(Item item) {
+		ItemUseLimits limits = item.getItemTemplate().getUseLimits();
 		if (limits == null)
 			return false;
 
-		if (itemCoolDowns == null || !itemCoolDowns.containsKey(limits.getDelayId()))
+		long reuseTime = getItemReuseTime(limits.getDelayId());
+		if (reuseTime == 0)
 			return false;
 
-		Long coolDown = itemCoolDowns.get(limits.getDelayId()).getReuseTime();
-
-		if (coolDown < System.currentTimeMillis()) {
+		if (reuseTime <= System.currentTimeMillis()) {
 			itemCoolDowns.remove(limits.getDelayId());
 			return false;
 		}
 		return true;
 	}
 
-	/**
-	 * @param delayId
-	 * @return
-	 */
-	public long getItemCoolDown(int delayId) {
-		if (itemCoolDowns == null || !itemCoolDowns.containsKey(delayId))
-			return 0;
-
-		return itemCoolDowns.get(delayId).getReuseTime();
+	public long getItemReuseTime(int delayId) {
+		ItemCooldown cd = itemCoolDowns.get(delayId);
+		return cd == null ? 0 : cd.getReuseTime();
 	}
 
-	/**
-	 * @return the itemCoolDowns
-	 */
 	public Map<Integer, ItemCooldown> getItemCoolDowns() {
 		return itemCoolDowns;
 	}
@@ -1157,19 +1148,11 @@ public class Player extends Creature {
 	 * @param useDelay
 	 */
 	public void addItemCoolDown(int delayId, long time, int useDelay) {
-		if (itemCoolDowns == null)
-			itemCoolDowns = new ConcurrentHashMap<>();
-
 		itemCoolDowns.put(delayId, new ItemCooldown(time, useDelay));
 	}
 
-	/**
-	 * @param itemMask
-	 */
-	public void removeItemCoolDown(int itemMask) {
-		if (itemCoolDowns == null)
-			return;
-		itemCoolDowns.remove(itemMask);
+	public void removeItemCoolDown(int delayId) {
+		itemCoolDowns.remove(delayId);
 	}
 
 	public void setPlayerResActivate(boolean isActivated) {
@@ -1568,7 +1551,7 @@ public class Player extends Creature {
 	 */
 	private Item getReviveStone(int stoneId) {
 		Item item = getInventory().getFirstItemByItemId(stoneId);
-		if (item != null && isItemUseDisabled(item.getItemTemplate().getUseLimits()))
+		if (item != null && hasCooldown(item))
 			item = null;
 		return item;
 	}

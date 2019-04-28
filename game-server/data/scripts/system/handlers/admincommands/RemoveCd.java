@@ -35,11 +35,9 @@ public class RemoveCd extends AdminCommand {
 					PacketSendUtility.sendPacket(player, new SM_SKILL_COOLDOWN(player.getSkillCoolDowns()));
 				}
 
-				if (player.getItemCoolDowns() != null) {
-					for (Entry<Integer, ItemCooldown> en : player.getItemCoolDowns().entrySet())
-						player.addItemCoolDown(en.getKey(), 0, 0);
-					PacketSendUtility.sendPacket(player, new SM_ITEM_COOLDOWN(player.getItemCoolDowns()));
-				}
+				for (Entry<Integer, ItemCooldown> en : player.getItemCoolDowns().entrySet())
+					player.addItemCoolDown(en.getKey(), 0, 0);
+				PacketSendUtility.sendPacket(player, new SM_ITEM_COOLDOWN(player.getItemCoolDowns()));
 
 				if (player.getHouseRegistry() != null && player.getHouseObjectCooldownList().getHouseObjectCooldowns() != null) {
 					for (Integer objId : player.getHouseObjectCooldownList().getHouseObjectCooldowns().keySet())
