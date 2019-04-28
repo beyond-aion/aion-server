@@ -3,7 +3,6 @@ package com.aionemu.gameserver.controllers.attack;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.function.Consumer;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.dataholders.DataManager;
@@ -62,10 +61,10 @@ public class AttackUtil {
 	/**
 	 * Calculate physical attack status and damage of the MAIN hand
 	 */
-	private static final AttackStatus calculateMainHandResult(Creature attacker, Creature attacked, AttackStatus attackerStatus, int damage,
+	private static AttackStatus calculateMainHandResult(Creature attacker, Creature attacked, AttackStatus attackerStatus, int damage,
 		List<AttackResult> attackList, SkillElement elem) {
 		AttackStatus mainHandStatus = attackerStatus;
-		Item mainHandWeapon = null;
+		Item mainHandWeapon;
 		int mainHandHits = 1;
 		switch (elem) {
 			case NONE:
@@ -96,7 +95,7 @@ public class AttackUtil {
 	/**
 	 * Calculate physical attack status and damage of the OFF hand
 	 */
-	private static final void calculateOffHandResult(Creature attacker, Creature attacked, AttackStatus mainHandStatus, List<AttackResult> attackList,
+	private static void calculateOffHandResult(Creature attacker, Creature attacked, AttackStatus mainHandStatus, List<AttackResult> attackList,
 		SkillElement element) {
 		AttackStatus offHandStatus = AttackStatus.getOffHandStats(mainHandStatus);
 		Item offHandWeapon = ((Player) attacker).getEquipment().getOffHandWeapon();
@@ -115,22 +114,12 @@ public class AttackUtil {
 	/**
 	 * Generate attack results based on weapon hit count
 	 */
-	private static final List<AttackResult> splitPhysicalDamage(final Creature attacker, final Creature attacked, int hitCount, int damage,
-		AttackStatus status, List<AttackResult> attackList, SkillElement element, boolean isMain) {
+	private static List<AttackResult> splitPhysicalDamage(Creature attacker, Creature attacked, int hitCount, int damage, AttackStatus status,
+		List<AttackResult> attackList, SkillElement element, boolean isMain) {
 
 		switch (AttackStatus.getBaseStatus(status)) {
 			case BLOCK:
-				int reduceStat = 50 + attacked.getGameStats().getStat(StatEnum.DAMAGE_REDUCE, 0).getCurrent();
-				float reduceVal = (damage * 0.01f) * reduceStat;
-				if (attacked instanceof Player) {
-					Item shield = ((Player) attacked).getEquipment().getEquippedShield();
-					if (shield != null) {
-						int reduceMax = shield.getItemTemplate().getWeaponStats().getReduceMax();
-						if (reduceMax > 0 && reduceMax < reduceVal)
-							reduceVal = reduceMax;
-					}
-				}
-				damage -= reduceVal;
+				damage = calculateBlockedDamage(attacked, damage);
 				break;
 			case DODGE:
 				damage = 0;
@@ -160,8 +149,22 @@ public class AttackUtil {
 		return attackList;
 	}
 
-	private static final List<AttackResult> splitMagicalDamage(final Creature attacker, final Creature attacked, int hitCount, int damage,
-		AttackStatus status, List<AttackResult> attackList, SkillElement element, boolean isMain) {
+	private static int calculateBlockedDamage(Creature attacked, int damage) {
+		int reduceStat = 50 + attacked.getGameStats().getStat(StatEnum.DAMAGE_REDUCE, 0).getCurrent();
+		int reduceVal = (int) ((damage * 0.01f) * reduceStat);
+		if (attacked instanceof Player) {
+			Item shield = ((Player) attacked).getEquipment().getEquippedShield();
+			if (shield != null) {
+				int reduceMax = shield.getItemTemplate().getWeaponStats().getReduceMax();
+				if (reduceMax > 0 && reduceMax < reduceVal)
+					reduceVal = reduceMax;
+			}
+		}
+		return damage - reduceVal;
+	}
+
+	private static List<AttackResult> splitMagicalDamage(Creature attacker, Creature attacked, int hitCount, int damage, AttackStatus status,
+		List<AttackResult> attackList, SkillElement element, boolean isMain) {
 
 		switch (AttackStatus.getBaseStatus(status)) {
 			case RESIST:
@@ -217,17 +220,13 @@ public class AttackUtil {
 			coeficient = getWeaponMultiplier(group);
 		}
 
-		if (stat != null) {
-			if (attacked instanceof Player) { // Strike Fortitude lowers the crit multiplier
-				Player player = (Player) attacked;
-				int fortitude = 0;
-				switch (stat) {
-					case PHYSICAL_CRITICAL_DAMAGE_REDUCE:
-					case MAGICAL_CRITICAL_DAMAGE_REDUCE:
-						fortitude = player.getGameStats().getStat(stat, 0).getCurrent();
-						coeficient = isMain ? (coeficient - fortitude / 1000f) : (coeficient + fortitude / 1000f);
-						break;
-				}
+		if (stat != null && attacked instanceof Player) { // Strike Fortitude lowers the crit multiplier
+			switch (stat) {
+				case PHYSICAL_CRITICAL_DAMAGE_REDUCE:
+				case MAGICAL_CRITICAL_DAMAGE_REDUCE:
+					int fortitude = attacked.getGameStats().getStat(stat, 0).getCurrent();
+					coeficient = isMain ? (coeficient - fortitude / 1000f) : (coeficient + fortitude / 1000f);
+					break;
 			}
 		}
 
@@ -381,17 +380,7 @@ public class AttackUtil {
 
 		switch (AttackStatus.getBaseStatus(status)) {
 			case BLOCK:
-				int reduceStat = 50 + effected.getGameStats().getStat(StatEnum.DAMAGE_REDUCE, 0).getCurrent();
-				float reduceVal = (damage * 0.01f) * reduceStat;
-				if (effected instanceof Player) {
-					Item shield = ((Player) effected).getEquipment().getEquippedShield();
-					if (shield != null) {
-						int reduceMax = shield.getItemTemplate().getWeaponStats().getReduceMax();
-						if (reduceMax > 0 && reduceMax < reduceVal)
-							reduceVal = reduceMax;
-					}
-				}
-				damage -= reduceVal;
+				damage = calculateBlockedDamage(effected, damage);
 				break;
 			case PARRY:
 				damage *= 0.6;
@@ -608,9 +597,7 @@ public class AttackUtil {
 				status = AttackStatus.DODGE;
 			}
 		} else {
-			/**
-			 * Check AlwaysDodge Check AlwaysParry Check AlwaysBlock
-			 */
+			// Check AlwaysDodge Check AlwaysParry Check AlwaysBlock
 			StatFunctions.calculatePhysicalDodgeRate(attacker, attacked, accMod);
 			StatFunctions.calculatePhysicalParryRate(attacker, attacked);
 			StatFunctions.calculatePhysicalBlockRate(attacker, attacked);
@@ -683,33 +670,14 @@ public class AttackUtil {
 
 	}
 
-	public static void cancelCastOn(final Creature target) {
-		target.getKnownList().forEachPlayer(new Consumer<Player>() {
-
-			@Override
-			public void accept(Player observer) {
-				if (observer.getTarget() == target)
-					cancelCast(observer, target);
+	public static void cancelCastOn(Creature target) {
+		target.getKnownList().forEachObject(visibleObject -> {
+			if (visibleObject instanceof Creature && visibleObject.getTarget() == target) {
+				Creature creature = (Creature) visibleObject;
+				if (creature.getCastingSkill() != null && creature.getCastingSkill().getFirstTarget().equals(target))
+					creature.getController().cancelCurrentSkill(null);
 			}
-
 		});
-
-		target.getKnownList().forEachNpc(new Consumer<Npc>() {
-
-			@Override
-			public void accept(Npc observer) {
-				if (observer.getTarget() == target)
-					cancelCast(observer, target);
-			}
-
-		});
-
-	}
-
-	private static void cancelCast(Creature creature, Creature target) {
-		if (target != null && creature.getCastingSkill() != null)
-			if (creature.getCastingSkill().getFirstTarget().equals(target))
-				creature.getController().cancelCurrentSkill(null);
 	}
 
 	/**
@@ -717,24 +685,18 @@ public class AttackUtil {
 	 * 
 	 * @param object
 	 */
-	public static void removeTargetFrom(final Creature object) {
+	public static void removeTargetFrom(Creature object) {
 		removeTargetFrom(object, false);
 	}
 
-	public static void removeTargetFrom(final Creature object, final boolean validateSee) {
-		object.getKnownList().forEachPlayer(new Consumer<Player>() {
-
-			@Override
-			public void accept(Player observer) {
-				if (observer.getTarget() == object) {
-					if (!validateSee || !observer.canSee(object)) {
-						observer.setTarget(null);
-						// retail packet (//fsc 0x44 dhdd 0 0 0 0) right after SM_PLAYER_STATE
-						PacketSendUtility.sendPacket(observer, new SM_TARGET_SELECTED(observer));
-					}
+	public static void removeTargetFrom(Creature object, boolean validateSee) {
+		object.getKnownList().forEachPlayer(player -> {
+			if (player.getTarget() == object) {
+				if (!validateSee || !player.canSee(object)) {
+					player.setTarget(null);
+					PacketSendUtility.sendPacket(player, new SM_TARGET_SELECTED(player));
 				}
 			}
-
 		});
 	}
 
