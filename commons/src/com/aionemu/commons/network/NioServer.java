@@ -159,7 +159,7 @@ public class NioServer {
 				key.cancel();
 			log.info("ServerChannel closed.");
 		} catch (Exception e) {
-			log.error("Error during closing ServerChannel, " + e, e);
+			log.error("Error closing ServerChannel", e);
 		}
 
 		// find active connections once, at this point new ones cannot be added anymore
@@ -167,22 +167,23 @@ public class NioServer {
 		log.info("\tClosing " + activeConnections.size() + " active connections...");
 
 		// notify connections about server close (they should close themselves)
-		activeConnections.forEach(con -> con.onServerClose());
+		activeConnections.forEach(AConnection::onServerClose);
 
 		// wait max 10s for connections to close, else force close and wait another 5s
 		long timeout = System.currentTimeMillis() + 10000;
 		while (isAnyConnectionClosePending(activeConnections)) {
 			if (System.currentTimeMillis() > timeout) {
-				activeConnections.removeIf(con -> con.isClosed());
+				activeConnections.removeIf(AConnection::isClosed);
 				log.info("\tForcing " + activeConnections.size() + " non responding connections to disconnect...");
-				activeConnections.forEach(con -> con.close());
+				activeConnections.forEach(AConnection::close);
 				timeout = System.currentTimeMillis() + 5000;
 				while (isAnyConnectionClosePending(activeConnections) && timeout > System.currentTimeMillis()) {
 				}
 				break;
 			}
 		}
-		log.info("\tActive connections left: " + findAllConnections().stream().filter(con -> !con.isClosed()).count());
+		activeConnections.removeIf(AConnection::isClosed);
+		log.info("\tActive connections left: " + activeConnections.size());
 	}
 
 	private Set<AConnection<?>> findAllConnections() {
@@ -205,6 +206,6 @@ public class NioServer {
 	}
 
 	private boolean isAnyConnectionClosePending(Collection<AConnection<?>> connections) {
-		return connections.stream().anyMatch(con -> con.isPendingClose());
+		return connections.stream().anyMatch(AConnection::isPendingClose);
 	}
 }
