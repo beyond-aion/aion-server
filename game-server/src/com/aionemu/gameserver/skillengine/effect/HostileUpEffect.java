@@ -32,6 +32,6 @@ public class HostileUpEffect extends EffectTemplate {
 	public void calculate(Effect effect) {
 		if (!super.calculate(effect, null, null))
 			return;
-		effect.setTauntHate(value + delta * effect.getSkillLevel());
+		effect.setTauntHate(calculateBaseValue(effect));
 	}
 }

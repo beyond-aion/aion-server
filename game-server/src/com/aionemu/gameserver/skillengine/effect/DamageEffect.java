@@ -31,8 +31,7 @@ public abstract class DamageEffect extends EffectTemplate {
 
 	@Override
 	public void calculateDamage(Effect effect) {
-		int skillLvl = effect.getSkillLevel();
-		int valueWithDelta = value + delta * skillLvl;
+		int valueWithDelta = calculateBaseValue(effect);
 
 		switch (element) {
 			case NONE:

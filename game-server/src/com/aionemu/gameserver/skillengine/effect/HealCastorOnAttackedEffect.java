@@ -36,7 +36,7 @@ public class HealCastorOnAttackedEffect extends EffectTemplate {
 		super.startEffect(effect);
 
 		Player player = (Player) effect.getEffector();
-		int valueWithDelta = value + delta * effect.getSkillLevel();
+		int valueWithDelta = calculateBaseValue(effect);
 
 		ActionObserver observer = new ActionObserver(ObserverType.ATTACKED) {
 

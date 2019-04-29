@@ -77,7 +77,7 @@ public class CaseHealEffect extends AbstractHealEffect {
 		final int maxCurValue = getMaxStatValue(effect);
 		if (currentValue <= (maxCurValue * condValue / 100f)) {
 			// calculate heal to the effective moment
-			int healValueWithDelta = value + delta * effect.getSkillLevel();
+			int healValueWithDelta = calculateBaseValue(effect);
 			int finalHeal = calculateHeal(effect, type, healValueWithDelta, currentValue, maxCurValue);
 
 			// apply heal

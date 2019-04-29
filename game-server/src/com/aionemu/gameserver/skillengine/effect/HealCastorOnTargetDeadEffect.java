@@ -45,7 +45,7 @@ public class HealCastorOnTargetDeadEffect extends EffectTemplate {
 		super.startEffect(effect);
 
 		final Player player = (Player) effect.getEffector();
-		final int valueWithDelta = value + delta * effect.getSkillLevel();
+		final int valueWithDelta = calculateBaseValue(effect);
 
 		ActionObserver observer = new ActionObserver(ObserverType.DEATH) {
 

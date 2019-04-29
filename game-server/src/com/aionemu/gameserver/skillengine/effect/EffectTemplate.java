@@ -271,6 +271,13 @@ public abstract class EffectTemplate {
 	}
 
 	/**
+	 * @return the base value (damage, heal, etc.) according to the skill template, it should equal the value stated in the skill description 
+	 */
+	protected int calculateBaseValue(Effect effect) {
+		return value + delta * effect.getSkillLevel();
+	}
+
+	/**
 	 * Calculate effect result
 	 * 
 	 * @param effect
@@ -298,7 +305,7 @@ public abstract class EffectTemplate {
 			return true;
 		}
 
-		if (statEnum != null && isAlteredState(statEnum) && isImuneToAbnormal(effect, statEnum)) {
+		if (statEnum != null && isAlteredState(statEnum) && isImmuneToAbnormal(effect, statEnum)) {
 			return false;
 		}
 
@@ -577,7 +584,7 @@ public abstract class EffectTemplate {
 		return Rnd.get(1, 1000) <= effectPower;
 	}
 
-	private boolean isImuneToAbnormal(Effect effect, StatEnum statEnum) {
+	private boolean isImmuneToAbnormal(Effect effect, StatEnum statEnum) {
 		Creature effected = effect.getEffected();
 		if (effected != effect.getEffector()) {
 			if (effected instanceof Npc) {

@@ -19,4 +19,12 @@ public class ProcAtkInstantEffect extends DamageEffect {
 	public void applyEffect(Effect effect) {
 		effect.getEffected().getController().onAttack(effect, TYPE.DAMAGE, effect.getReserveds(this.position).getValue(), false, LOG.PROCATKINSTANT);
 	}
+
+	@Override
+	protected int calculateBaseValue(Effect effect) {
+		if (delta == 1 && effect.getSkillTemplate().isProvoked())
+			return value;
+		else
+			return super.calculateBaseValue(effect);
+	}
 }

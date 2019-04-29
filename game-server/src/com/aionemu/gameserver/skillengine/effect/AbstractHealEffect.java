@@ -29,7 +29,7 @@ public abstract class AbstractHealEffect extends EffectTemplate {
 		if (!super.calculate(effect, null, null))
 			return;
 
-		int valueWithDelta = value + delta * effect.getSkillLevel();
+		int valueWithDelta = calculateBaseValue(effect);
 		int finalHeal = calculateHeal(effect, healType, valueWithDelta, getCurrentStatValue(effect), getMaxStatValue(effect));
 
 		effect.setReserveds(new EffectReserved(position, finalHeal, ResourceType.of(healType), false), false);

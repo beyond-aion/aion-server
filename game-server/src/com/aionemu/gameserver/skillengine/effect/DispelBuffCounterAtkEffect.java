@@ -35,7 +35,7 @@ public class DispelBuffCounterAtkEffect extends DamageEffect {
 	@Override
 	public void calculateDamage(Effect effect) {
 		Creature effected = effect.getEffected();
-		int count = value + delta * effect.getSkillLevel();
+		int count = calculateBaseValue(effect);
 		finalPower = power + dpower * effect.getSkillLevel();
 
 		i = effected.getEffectController().calculateNumberOfEffects(dispelLevel);

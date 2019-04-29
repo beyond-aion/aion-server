@@ -24,7 +24,7 @@ public class SignetBurstEffect extends DamageEffect {
 	@Override
 	public void calculateDamage(Effect effect) {
 		Effect signetEffect = effect.getEffected().getEffectController().getAbnormalEffect(signet);
-		int valueWithDelta = value + delta * effect.getSkillLevel();
+		int valueWithDelta = calculateBaseValue(effect);
 
 		if (signetEffect == null) {
 			valueWithDelta *= 0.05f;

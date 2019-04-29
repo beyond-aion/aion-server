@@ -19,9 +19,8 @@ public class ConvertHealEffect extends ShieldEffect {
 
 	@Override
 	public void startEffect(final Effect effect) {
-		int skillLvl = effect.getSkillLevel();
-		int valueWithDelta = value + delta * skillLvl;
-		int hitValueWithDelta = hitvalue + hitdelta * skillLvl;
+		int valueWithDelta = calculateBaseValue(effect);
+		int hitValueWithDelta = hitvalue + hitdelta * effect.getSkillLevel();
 
 		AttackShieldObserver asObserver = new AttackShieldObserver(hitValueWithDelta, valueWithDelta, percent, hitPercent, effect, hitType, getType(),
 			hitTypeProb, 0, 0, type, 0);

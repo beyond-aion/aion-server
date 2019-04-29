@@ -22,9 +22,8 @@ public class DelayedSpellAttackInstantEffect extends DamageEffect {
 	protected int delay;
 
 	@Override
-	public void applyEffect(final Effect effect) {
-		int skillLvl = effect.getSkillLevel();
-		int valueWithDelta = value + delta * skillLvl;
+	public void applyEffect(Effect effect) {
+		int valueWithDelta = calculateBaseValue(effect);
 
 		AttackUtil.calculateSkillResult(effect, valueWithDelta, this, true);// ignores shields on retail
 		final int finalPosition = this.position;

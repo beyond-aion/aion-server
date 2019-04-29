@@ -21,10 +21,9 @@ public class MPShieldEffect extends ShieldEffect {
 	protected int mpValue;
 
 	@Override
-	public void startEffect(final Effect effect) {
-		int skillLvl = effect.getSkillLevel();
-		int valueWithDelta = value + delta * skillLvl;
-		int hitValueWithDelta = hitvalue + hitdelta * skillLvl;
+	public void startEffect(Effect effect) {
+		int valueWithDelta = calculateBaseValue(effect);
+		int hitValueWithDelta = hitvalue + hitdelta * effect.getSkillLevel();
 		AttackShieldObserver asObserver = new AttackShieldObserver(hitValueWithDelta, valueWithDelta, percent, effect, hitType, this.getType(),
 			this.hitTypeProb, this.mpValue);
 

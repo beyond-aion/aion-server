@@ -35,13 +35,11 @@ public class ShieldEffect extends EffectTemplate {
 	}
 
 	@Override
-	public void startEffect(final Effect effect) {
-		int skillLvl = effect.getSkillLevel();
-		int valueWithDelta = value + delta * skillLvl;
-		int hitValueWithDelta = hitvalue + hitdelta * skillLvl;
+	public void startEffect(Effect effect) {
+		int valueWithDelta = calculateBaseValue(effect);
+		int hitValueWithDelta = hitvalue + hitdelta * effect.getSkillLevel();
 
-		AttackShieldObserver asObserver = new AttackShieldObserver(hitValueWithDelta, valueWithDelta, percent, effect, hitType, this.getType(),
-			this.hitTypeProb);
+		AttackShieldObserver asObserver = new AttackShieldObserver(hitValueWithDelta, valueWithDelta, percent, effect, hitType, getType(), hitTypeProb);
 
 		effect.getEffected().getObserveController().addAttackCalcObserver(asObserver);
 		effect.setAttackShieldObserver(asObserver, position);

@@ -25,7 +25,7 @@ public abstract class AbstractDispelEffect extends EffectTemplate {
 
 	public void applyEffect(Effect effect, DispelCategoryType type, SkillTargetSlot slot) {
 		boolean isItemTriggered = (effect.getItemTemplate() != null);
-		int count = value + delta * effect.getSkillLevel();
+		int count = calculateBaseValue(effect);
 		int finalPower = power + dpower * effect.getSkillLevel();
 
 		effect.getEffected().getEffectController().removeEffectByDispelCat(type, slot, count, dispelLevel, finalPower, isItemTriggered);

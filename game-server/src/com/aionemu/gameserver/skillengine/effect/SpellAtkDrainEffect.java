@@ -24,7 +24,7 @@ public class SpellAtkDrainEffect extends AbstractOverTimeEffect {
 
 	@Override
 	public void onPeriodicAction(Effect effect) {
-		int valueWithDelta = value + delta * effect.getSkillLevel();
+		int valueWithDelta = calculateBaseValue(effect);
 		int critAddDmg = critAddDmg2 + critAddDmg1 * effect.getSkillLevel();
 		int damage = AttackUtil.calculateMagicalOverTimeSkillResult(effect, valueWithDelta, element, position, true, critProbMod2, critAddDmg);
 		effect.getEffected().getController().onAttack(effect, TYPE.REGULAR, damage, true, LOG.SPELLATKDRAIN);

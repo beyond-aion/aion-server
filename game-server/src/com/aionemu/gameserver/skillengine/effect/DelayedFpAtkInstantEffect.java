@@ -39,7 +39,7 @@ public class DelayedFpAtkInstantEffect extends EffectTemplate {
 	private void calculateAndApplyDamage(Effect effect) {
 		if (!effect.getEffector().isEnemy(effect.getEffected()))
 			return;
-		int valueWithDelta = value + delta * effect.getSkillLevel();
+		int valueWithDelta = calculateBaseValue(effect);
 		Player player = (Player) effect.getEffected();
 		int maxFP = player.getLifeStats().getMaxFp();
 

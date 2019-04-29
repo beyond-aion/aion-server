@@ -34,7 +34,7 @@ public abstract class HealOverTimeEffect extends AbstractOverTimeEffect {
 		// calculate value of heals
 		Creature effector = effect.getEffector();
 		Creature effected = effect.getEffected();
-		int valueWithDelta = value + delta * effect.getSkillLevel();
+		int valueWithDelta = calculateBaseValue(effect);
 		int maxCurValue = getMaxStatValue(effect);
 		int possibleHealValue = 0;
 		if (percent)

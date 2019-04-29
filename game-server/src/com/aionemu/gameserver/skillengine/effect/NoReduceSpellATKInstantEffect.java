@@ -22,7 +22,7 @@ public class NoReduceSpellATKInstantEffect extends DamageEffect {
 
 	@Override
 	public void calculateDamage(Effect effect) {
-		int valueWithDelta = value + delta * effect.getSkillLevel();
+		int valueWithDelta = calculateBaseValue(effect);
 		if (percent) {
 			float percentToCount = valueWithDelta / 100f;
 			valueWithDelta = (int) (effect.getEffected().getLifeStats().getMaxHp() * percentToCount);

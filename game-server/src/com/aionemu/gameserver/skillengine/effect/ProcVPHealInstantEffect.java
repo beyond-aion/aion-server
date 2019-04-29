@@ -27,7 +27,7 @@ public class ProcVPHealInstantEffect extends EffectTemplate {
 			long cap = pcd.getMaxReposeEnergy() * value2 / 100;
 
 			if (pcd.isReadyForReposeEnergy() && pcd.getCurrentReposeEnergy() < cap) {
-				int valueWithDelta = value + delta * effect.getSkillLevel();
+				int valueWithDelta = calculateBaseValue(effect);
 				long addEnergy = 0;
 				if (percent)
 					addEnergy = (int) (pcd.getMaxReposeEnergy() * valueWithDelta * 0.001);// recheck when more skills
