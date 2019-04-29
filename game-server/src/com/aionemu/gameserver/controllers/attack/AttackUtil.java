@@ -275,17 +275,9 @@ public class AttackUtil {
 		if (template instanceof DispelBuffCounterAtkEffect)
 			criticalProb = 0;// critprob 0, dispelbuffcounteratkeffect can not crit
 		int critAddDmg = template.getCritAddDmg2() + template.getCritAddDmg1() * skillLvl;
-		boolean useMagicBoost = true;
-		boolean useKnowledge = true;
 		boolean cannotMiss = template instanceof SkillAttackInstantEffect && ((SkillAttackInstantEffect) template).isCannotmiss();
 		boolean shared = template instanceof DamageEffect && ((DamageEffect) template).isShared();
-		boolean noReduce = template instanceof NoReduceSpellATKInstantEffect;
-		if (template instanceof ProcAtkInstantEffect) {
-			if (effect.getStack().equalsIgnoreCase("KN_TURNAGGRESSIVEEFFECT")) { // more info
-				useKnowledge = false;
-				useMagicBoost = false;
-			}
-		}
+		boolean useTemplateDmg = isUseTemplateDmg(effect, template);
 		// for sm_castspell_result packet
 		int position = template.getPosition();
 		boolean send = true;
@@ -296,7 +288,7 @@ public class AttackUtil {
 		int baseAttack = 0;
 		int bonus = 0;
 		HitType ht = HitType.PHHIT;
-		if (!noReduce) {
+		if (!useTemplateDmg) {
 			if (effector instanceof Npc && !(effector instanceof Servant)) {
 				ht = effect.getSkillType() == SkillType.MAGICAL ? HitType.MAHIT : HitType.PHHIT;
 				baseAttack = effector.getGameStats().getMainHandPAttack().getBase();
@@ -347,7 +339,7 @@ public class AttackUtil {
 			}
 		}
 
-		if (!noReduce) {
+		if (!useTemplateDmg) {
 			float damageMultiplier;
 			switch (element) {
 				case NONE:
@@ -356,12 +348,13 @@ public class AttackUtil {
 					break;
 				default:
 					damageMultiplier = effector.getObserveController().getBaseMagicalDamageMultiplier();
-					damage = StatFunctions.calculateMagicalSkillDamage(effector, effected, damage, bonus, element, useMagicBoost, useKnowledge);
+					damage = StatFunctions.calculateMagicalSkillDamage(effector, effected, damage, bonus, element, true, true);
 					break;
 			}
-			damage = StatFunctions.adjustDamages(effector, effected, damage, effect.getPvpDamage(), true, element);
+			damage = StatFunctions.adjustDamageByMovementModifier(effector, damage);
 			damage = Math.round(damage * damageMultiplier);
 		}
+		damage = StatFunctions.adjustDamageByPvpOrPveModifiers(effector, effected, damage, effect.getPvpDamage(), useTemplateDmg, element);
 
 		if (randomDamageType > 0)
 			damage = randomizeDamage(randomDamageType, damage);
@@ -412,15 +405,20 @@ public class AttackUtil {
 		if (shared && !effect.getSkill().getEffectedList().isEmpty())
 			damage /= effect.getSkill().getEffectedList().size();
 
-		if (damage > skillDamage && template instanceof ProcAtkInstantEffect) { // FIXME better handling: some skills have fixed damage
-			if (!effect.getStack().startsWith("ITEM_SKILL_PROC") && !effect.getStack().startsWith("BA_N_")) // exclude godstones and some bard skills
-				damage = skillDamage;
-		}
-
 		if (damage < 0)
 			damage = 0;
 
 		calculateEffectResult(effect, effected, damage, status, ht, ignoreShield, position, send);
+	}
+
+	private static boolean isUseTemplateDmg(Effect effect, EffectTemplate template) {
+		if (template instanceof NoReduceSpellATKInstantEffect)
+			return true;
+		if (template instanceof ProcAtkInstantEffect && effect.getSkillTemplate().isProvoked()) { // proc effects of skills like 8583
+			if (!effect.getStack().startsWith("ITEM_SKILL_PROC") && !effect.getStack().startsWith("BA_N_")) // exclude godstones and bard skills
+				return true;
+		}
+		return false;
 	}
 
 	private static int randomizeDamage(int randomDamageType, int damage) {
@@ -541,10 +539,9 @@ public class AttackUtil {
 		} else {
 			// TODO is damage multiplier used on dot?
 			float damageMultiplier = effector.getObserveController().getBaseMagicalDamageMultiplier();
-
 			damage = StatFunctions.calculateMagicalSkillDamage(effector, effected, skillDamage, 0, element, useMagicBoost, false);
-			damage = StatFunctions.adjustDamages(effector, effected, damage, effect.getPvpDamage(), false, element);
 			damage = Math.round(damage * damageMultiplier);
+			damage = StatFunctions.adjustDamageByPvpOrPveModifiers(effector, effected, damage, effect.getPvpDamage(), false, element);
 
 			AttackStatus status = effect.getAttackStatus();
 			// calculate attack status only if it has not been forced already

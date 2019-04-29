@@ -311,8 +311,9 @@ public class StatFunctions {
 			resultDamage = calculateMagicalAttackDamage(attacker, target, element, isMainHand);
 		}
 
-		// adjusting baseDamages according to attacker and target level
-		resultDamage = adjustDamages(attacker, target, resultDamage, 0, true, element);
+		resultDamage = adjustDamageByMovementModifier(attacker, resultDamage);
+		// adjusting baseDamages by pve/pvp modifiers
+		resultDamage = adjustDamageByPvpOrPveModifiers(attacker, target, resultDamage, 0, false, element);
 
 		if (target instanceof Npc)
 			return target.getAi().modifyDamage(attacker, resultDamage, null);
@@ -614,30 +615,31 @@ public class StatFunctions {
 	/**
 	 * @return adjusted damage according to PVE or PVP modifiers
 	 */
-	public static int adjustDamages(Creature attacker, Creature target, int baseDamage, int pvpDamage, boolean useMovement, SkillElement element) {
-		float attackBonus, defenseBonus;
+	public static int adjustDamageByPvpOrPveModifiers(Creature attacker, Creature target, int baseDamage, int pvpDamage, boolean useTemplateDmg, SkillElement element) {
+		float attackBonus = 1;
+		float defenseBonus = 1;
 		float damage = baseDamage;
-		if (useMovement)
-			damage = movementDamageBonus(attacker, damage);
 		if (attacker.isPvpTarget(target)) {
 			if (pvpDamage > 0)
 				damage *= pvpDamage * 0.01f;
 			damage *= 0.42f; // PVP modifier 42%, last checked on NA (4.9) 19.03.2016
-			if (attacker.getRace() != target.getRace() && !attacker.isInInstance())
-				damage *= Influence.getInstance().getPvpRaceBonus(attacker.getRace());
+			if (!useTemplateDmg) {
+				if (attacker.getRace() != target.getRace() && !attacker.isInInstance())
+					damage *= Influence.getInstance().getPvpRaceBonus(attacker.getRace());
 
-			attackBonus = attacker.getGameStats().getStat(StatEnum.PVP_ATTACK_RATIO, 0).getCurrent() * 0.001f;
-			defenseBonus = target.getGameStats().getStat(StatEnum.PVP_DEFEND_RATIO, 0).getCurrent() * 0.001f;
-			switch (element) {
-				case NONE:
-					attackBonus += attacker.getGameStats().getStat(StatEnum.PVP_ATTACK_RATIO_PHYSICAL, 0).getCurrent() * 0.001f;
-					defenseBonus += target.getGameStats().getStat(StatEnum.PVP_DEFEND_RATIO_PHYSICAL, 0).getCurrent() * 0.001f;
-					break;
-				default:
-					attackBonus += attacker.getGameStats().getStat(StatEnum.PVP_ATTACK_RATIO_MAGICAL, 0).getCurrent() * 0.001f;
-					defenseBonus += target.getGameStats().getStat(StatEnum.PVP_DEFEND_RATIO_MAGICAL, 0).getCurrent() * 0.001f;
+				attackBonus = attacker.getGameStats().getStat(StatEnum.PVP_ATTACK_RATIO, 0).getCurrent() * 0.001f;
+				defenseBonus = target.getGameStats().getStat(StatEnum.PVP_DEFEND_RATIO, 0).getCurrent() * 0.001f;
+				switch (element) {
+					case NONE:
+						attackBonus += attacker.getGameStats().getStat(StatEnum.PVP_ATTACK_RATIO_PHYSICAL, 0).getCurrent() * 0.001f;
+						defenseBonus += target.getGameStats().getStat(StatEnum.PVP_DEFEND_RATIO_PHYSICAL, 0).getCurrent() * 0.001f;
+						break;
+					default:
+						attackBonus += attacker.getGameStats().getStat(StatEnum.PVP_ATTACK_RATIO_MAGICAL, 0).getCurrent() * 0.001f;
+						defenseBonus += target.getGameStats().getStat(StatEnum.PVP_DEFEND_RATIO_MAGICAL, 0).getCurrent() * 0.001f;
+				}
 			}
-		} else {
+		} else if (!useTemplateDmg) {
 			if (attacker instanceof Player) {
 				damage *= 1.15f; // 15% pve boost, last checked on NA & GF (4.9) 19.03.2016
 				int levelDiff = target.getLevel() - attacker.getLevel(); // npcs dmg is not reduced because of the level difference GF (4.9) 23.04.2016
@@ -884,30 +886,29 @@ public class StatFunctions {
 		return value;
 	}
 
-	private static float movementDamageBonus(Creature creature, float value) {
+	public static int adjustDamageByMovementModifier(Creature creature, int value) {
 		if (!(creature instanceof Player))
 			return value;
-		Player player = (Player) creature;
-		int h = player.getMoveController().getMovementHeading();
+		int h = ((Player) creature).getMoveController().getMovementHeading();
 		if (h < 0)
 			return value;
 		switch (h) {
 			case 7:
 			case 0:
 			case 1:
-				value = value * 1.1f;
+				value *= 1.1f;
 				break;
 			case 6:
 			case 2:
-				value -= value * 0.2f;
+				value *= 0.8f; // correct? it's only 30% according to https://web.archive.org/web/20170429204823/gameguide.na.aiononline.com/aion/Combat
 				break;
 			case 5:
 			case 4:
 			case 3:
-				value -= value * 0.2f;
+				value *= 0.8f; // correct? it's only 30% according to https://web.archive.org/web/20170429204823/gameguide.na.aiononline.com/aion/Combat
 				break;
 		}
-		return value;
+		return Math.round(value);
 	}
 
 	private static float getNpcLevelDiffMod(int levelDiff, int base) {
