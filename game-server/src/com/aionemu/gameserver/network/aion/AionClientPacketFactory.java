@@ -139,7 +139,7 @@ public class AionClientPacketFactory {
 			packets.put(0x161, new PacketInfo<>(CM_SHOW_BLOCKLIST.class, State.IN_GAME));
 			packets.put(0x162, new PacketInfo<>(CM_PLAYER_SEARCH.class, State.IN_GAME));
 			packets.put(0x163, new PacketInfo<>(CM_LEGION_UPLOAD_INFO.class, State.IN_GAME));
-			// packets.put(0x165, new PacketInfo<>(CM_SHOW_RESTRICTIONS.class, State.IN_GAME)); // when writing /restriction in chat
+			packets.put(0x165, new PacketInfo<>(CM_SHOW_RESTRICTIONS.class, State.IN_GAME)); // when writing /restriction in chat
 			packets.put(0x167, new PacketInfo<>(CM_SHOW_MAP.class, State.IN_GAME));
 			packets.put(0x168, new PacketInfo<>(CM_APPEARANCE.class, State.IN_GAME));
 			packets.put(0x16B, new PacketInfo<>(CM_AUTO_GROUP.class, State.IN_GAME));
