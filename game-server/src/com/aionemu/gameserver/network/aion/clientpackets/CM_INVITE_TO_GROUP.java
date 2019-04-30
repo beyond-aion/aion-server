@@ -44,7 +44,7 @@ public class CM_INVITE_TO_GROUP extends AionClientPacket {
 			return;
 		}
 
-		final Player invited = World.getInstance().findPlayer(ChatUtil.getRealAdminName(playerName));
+		final Player invited = World.getInstance().findPlayer(ChatUtil.getRealCharName(playerName));
 		if (invited == null) {
 			sendPacket(SM_SYSTEM_MESSAGE.STR_NO_SUCH_USER(playerName));
 			return;

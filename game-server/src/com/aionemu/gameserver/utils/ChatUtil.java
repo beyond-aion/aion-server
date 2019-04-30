@@ -285,7 +285,10 @@ public class ChatUtil {
 		return 0;
 	}
 
-	public static String getRealAdminName(String name) {
+	/**
+	 * @return The character name without custom tags.
+	 */
+	public static String getRealCharName(String name) {
 		// don't perform expensive checks if name is already qualified
 		if (name.matches("^[A-Za-z]+$"))
 			return Util.convertName(name);
