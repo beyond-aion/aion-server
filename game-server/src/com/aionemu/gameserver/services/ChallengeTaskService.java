@@ -13,7 +13,6 @@ import org.slf4j.LoggerFactory;
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.dao.ChallengeTasksDAO;
-import com.aionemu.gameserver.dao.LegionMemberDAO;
 import com.aionemu.gameserver.dao.PlayerDAO;
 import com.aionemu.gameserver.dao.TownDAO;
 import com.aionemu.gameserver.dataholders.DataManager;
@@ -46,7 +45,7 @@ public class ChallengeTaskService {
 		protected static final ChallengeTaskService instance = new ChallengeTaskService();
 	}
 
-	public static final ChallengeTaskService getInstance() {
+	public static ChallengeTaskService getInstance() {
 		return SingletonHolder.instance;
 	}
 
@@ -76,7 +75,7 @@ public class ChallengeTaskService {
 	}
 
 	private List<ChallengeTask> buildTaskList(Player player, ChallengeType challengeType, int ownerId, int ownerLevel) {
-		Map<Integer, Map<Integer, ChallengeTask>> taskMap = null;
+		Map<Integer, Map<Integer, ChallengeTask>> taskMap;
 		if (challengeType == ChallengeType.LEGION)
 			taskMap = legionTasks;
 		else
@@ -88,9 +87,7 @@ public class ChallengeTaskService {
 			taskMap.put(ownerId, tasks);
 		}
 		for (ChallengeTask ct : taskMap.get(ownerId).values()) {
-			if (ct.getTemplate().isRepeatable())
-				availableTasks.add(ct);
-			else if (!ct.isCompleted())
+			if (ct.getTemplate().isRepeatable() || !ct.isCompleted())
 				availableTasks.add(ct);
 		}
 		for (ChallengeTaskTemplate template : DataManager.CHALLENGE_DATA.getTasks().values()) {
@@ -105,7 +102,6 @@ public class ChallengeTaskService {
 							taskMap.get(ownerId).put(task.getTaskId(), task);
 							DAOManager.getDAO(ChallengeTasksDAO.class).storeTask(task);
 							availableTasks.add(task);
-							continue;
 						} else {
 							int prevTaskId = template.getPrevTask();
 							if (taskMap.get(ownerId).containsKey(prevTaskId)) {
@@ -182,20 +178,14 @@ public class ChallengeTaskService {
 	}
 
 	private void onLegionTaskFinish(Player player, ChallengeTaskTemplate taskTemplate, int questId) {
-		/**
-		 * Player could take challenge task and after that leave legion.
-		 */
+		// Player could take challenge task and after that leave legion.
 		if (player.getLegion() == null)
 			return;
 		int legionId = player.getLegion().getLegionId();
-		/**
-		 * If player took challenge task in one legion, then leave that legion and enter another.
-		 */
+		// If player took challenge task in one legion, then leave that legion and enter another.
 		if (!legionTasks.containsKey(legionId))
 			return;
-		/**
-		 * If player took challenge task in one legion, then leave that legion and enter another, and after that completed this task in new legion.
-		 */
+		// If player took challenge task in one legion, then leave that legion and enter another, and after that completed this task in new legion.
 		if (legionTasks.get(legionId).get(taskTemplate.getId()) == null)
 			return;
 		ChallengeTask task = legionTasks.get(player.getLegion().getLegionId()).get(taskTemplate.getId());
@@ -206,28 +196,16 @@ public class ChallengeTaskService {
 		if (!task.isCompleted()) {
 			task.updateCompleteTime();
 			quest.increaseCompleteCount();
-			player.getLegion().getOnlineLegionMembers().stream().forEach(p -> showTaskList(p, ChallengeType.LEGION, legionId));
+			player.getLegion().getOnlineLegionMembers().forEach(p -> showTaskList(p, ChallengeType.LEGION, legionId));
 			DAOManager.getDAO(ChallengeTasksDAO.class).storeTask(task);
 			if (task.isCompleted()) {
 				TreeMap<Integer, List<Integer>> winnersByPoints = new TreeMap<>();
 				for (Integer memberObjId : player.getLegion().getLegionMembers()) {
-					Player member = World.getInstance().findPlayer(memberObjId);
-					if (member != null) {
-						int score = member.getLegionMember().getChallengeScore();
-						if (winnersByPoints.get(score) == null)
-							winnersByPoints.put(score, new ArrayList<>());
-						winnersByPoints.get(score).add(member.getObjectId());
-						member.getLegionMember().setChallengeScore(0);
-						continue;
-					} else {
-						LegionMember legionMember = DAOManager.getDAO(LegionMemberDAO.class).loadLegionMember(memberObjId);
-						int score = legionMember.getChallengeScore();
-						if (winnersByPoints.get(score) == null)
-							winnersByPoints.put(score, new ArrayList<>());
-						winnersByPoints.get(score).add(legionMember.getObjectId());
-						legionMember.setChallengeScore(0);
-						DAOManager.getDAO(LegionMemberDAO.class).storeLegionMember(memberObjId, legionMember);
-					}
+					LegionMember legionMember = LegionService.getInstance().getLegionMember(memberObjId);
+					winnersByPoints.computeIfAbsent(legionMember.getChallengeScore(), k -> new ArrayList<>()).add(memberObjId);
+					legionMember.setChallengeScore(0);
+					if (World.getInstance().findPlayer(memberObjId) == null) // save legionMember to DB since owning player is not online (no autosave schedule)
+						LegionService.getInstance().storeLegionMember(legionMember);
 				}
 				int rewardsAdded = 0, itemId, itemCount;
 				for (Entry<Integer, List<Integer>> e : winnersByPoints.descendingMap().entrySet()) {
@@ -245,8 +223,6 @@ public class ChallengeTaskService {
 					}
 					e.getValue().clear();
 				}
-				winnersByPoints.clear();
-				winnersByPoints = null;
 			}
 		}
 	}

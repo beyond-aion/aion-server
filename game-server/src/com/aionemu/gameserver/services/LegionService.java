@@ -138,7 +138,7 @@ public class LegionService {
 	 * @param legionMember
 	 *          legion member to store
 	 */
-	private void storeLegionMember(LegionMember legionMember) {
+	public void storeLegionMember(LegionMember legionMember) {
 		storeLegionMember(legionMember, false);
 	}
 
