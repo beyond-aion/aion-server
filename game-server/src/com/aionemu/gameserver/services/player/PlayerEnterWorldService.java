@@ -412,7 +412,6 @@ public final class PlayerEnterWorldService {
 		PlayerAllianceService.onPlayerLogin(player);
 
 		PunishmentService.updatePrisonStatus(player);
-		PunishmentService.updateGatherableStatus(player);
 
 		PlayerGroupService.onPlayerLogin(player);
 		PetService.getInstance().onPlayerLogin(player);

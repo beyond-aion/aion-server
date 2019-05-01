@@ -64,9 +64,10 @@ public class GatherableController extends VisibleObjectController<Gatherable> {
 		if (PositionUtil.getDistance(getOwner(), player) > 6)
 			return;
 
-		// check is gatherable
-		if (!checkGatherable(player, template))
+		if (player.isGatherRestricted()) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CAPTCHA_REMAIN_RESTRICT_TIME(player.getGatherRestrictionDurationSeconds()));
 			return;
+		}
 
 		if (!checkPlayerSkill(player, template))
 			return;
@@ -193,21 +194,6 @@ public class GatherableController extends VisibleObjectController<Gatherable> {
 		}
 
 		return 2;
-	}
-
-	/**
-	 * @param player
-	 * @param template
-	 * @return
-	 * @author Cura
-	 */
-	private boolean checkGatherable(final Player player, final GatherableTemplate template) {
-		if (player.isNotGatherable()) {
-			int duration = (int) ((player.getGatherableTimer() - (System.currentTimeMillis() - player.getStopGatherable())) / 1000);
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CAPTCHA_REMAIN_RESTRICT_TIME(duration));
-			return false;
-		}
-		return true;
 	}
 
 	public void completeInteraction() {

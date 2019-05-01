@@ -37,7 +37,6 @@ import com.aionemu.gameserver.services.DuelService;
 import com.aionemu.gameserver.services.ExchangeService;
 import com.aionemu.gameserver.services.KiskService;
 import com.aionemu.gameserver.services.LegionService;
-import com.aionemu.gameserver.services.PunishmentService;
 import com.aionemu.gameserver.services.RepurchaseService;
 import com.aionemu.gameserver.services.conquerorAndProtectorSystem.ConquerorAndProtectorService;
 import com.aionemu.gameserver.services.drop.DropService;
@@ -111,13 +110,6 @@ public class PlayerLeaveWorldService {
 		if (player.isLooting())
 			DropService.getInstance().closeDropList(player, player.getLootingNpcOid());
 
-		// Update prison timer
-		if (player.isInPrison()) {
-			long prisonTimer = System.currentTimeMillis() - player.getStartPrison();
-			prisonTimer = player.getPrisonTimer() - prisonTimer;
-			player.setPrisonTimer(prisonTimer);
-			log.debug("Update prison timer to " + prisonTimer / 1000 + " seconds !");
-		}
 		if (player.isDead()) {
 			if (player.isInInstance() || player.getWorldId() == 400030000)
 				PlayerReviveService.instanceRevive(player);
@@ -148,8 +140,6 @@ public class PlayerLeaveWorldService {
 		if (player.getPostman() != null)
 			player.getPostman().getController().delete();
 
-		PunishmentService.stopPrisonTask(player, true);
-		PunishmentService.stopGatherableTask(player, true);
 		ExpireTimerTask.getInstance().unregisterExpirables(player);
 		if (player.getCraftingTask() != null)
 			player.getCraftingTask().stop();

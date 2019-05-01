@@ -9,38 +9,7 @@ import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.configs.main.EventsConfig;
 import com.aionemu.gameserver.controllers.FlyController;
 import com.aionemu.gameserver.controllers.effect.PlayerEffectController;
-import com.aionemu.gameserver.dao.AbyssRankDAO;
-import com.aionemu.gameserver.dao.AccountPassportsDAO;
-import com.aionemu.gameserver.dao.BlockListDAO;
-import com.aionemu.gameserver.dao.CraftCooldownsDAO;
-import com.aionemu.gameserver.dao.FriendListDAO;
-import com.aionemu.gameserver.dao.HeadhuntingDAO;
-import com.aionemu.gameserver.dao.HouseObjectCooldownsDAO;
-import com.aionemu.gameserver.dao.HousesDAO;
-import com.aionemu.gameserver.dao.InventoryDAO;
-import com.aionemu.gameserver.dao.ItemCooldownsDAO;
-import com.aionemu.gameserver.dao.ItemStoneListDAO;
-import com.aionemu.gameserver.dao.MailDAO;
-import com.aionemu.gameserver.dao.MotionDAO;
-import com.aionemu.gameserver.dao.OldNamesDAO;
-import com.aionemu.gameserver.dao.PlayerAppearanceDAO;
-import com.aionemu.gameserver.dao.PlayerBindPointDAO;
-import com.aionemu.gameserver.dao.PlayerCooldownsDAO;
-import com.aionemu.gameserver.dao.PlayerDAO;
-import com.aionemu.gameserver.dao.PlayerEffectsDAO;
-import com.aionemu.gameserver.dao.PlayerEmotionListDAO;
-import com.aionemu.gameserver.dao.PlayerLifeStatsDAO;
-import com.aionemu.gameserver.dao.PlayerMacrossesDAO;
-import com.aionemu.gameserver.dao.PlayerNpcFactionsDAO;
-import com.aionemu.gameserver.dao.PlayerPunishmentsDAO;
-import com.aionemu.gameserver.dao.PlayerQuestListDAO;
-import com.aionemu.gameserver.dao.PlayerRecipesDAO;
-import com.aionemu.gameserver.dao.PlayerRegisteredItemsDAO;
-import com.aionemu.gameserver.dao.PlayerSettingsDAO;
-import com.aionemu.gameserver.dao.PlayerSkillListDAO;
-import com.aionemu.gameserver.dao.PlayerTitleListDAO;
-import com.aionemu.gameserver.dao.PlayerVarsDAO;
-import com.aionemu.gameserver.dao.PortalCooldownsDAO;
+import com.aionemu.gameserver.dao.*;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.dataholders.PlayerInitialData;
 import com.aionemu.gameserver.dataholders.PlayerInitialData.LocationData;
@@ -125,8 +94,8 @@ public class PlayerService {
 		DAOManager.getDAO(PlayerSettingsDAO.class).saveSettings(player);
 		DAOManager.getDAO(PlayerQuestListDAO.class).store(player);
 		DAOManager.getDAO(AbyssRankDAO.class).storeAbyssRank(player);
-		DAOManager.getDAO(PlayerPunishmentsDAO.class).storePlayerPunishments(player, PunishmentType.PRISON);
-		DAOManager.getDAO(PlayerPunishmentsDAO.class).storePlayerPunishments(player, PunishmentType.GATHER);
+		DAOManager.getDAO(PlayerPunishmentsDAO.class).storePlayerPunishment(player, PunishmentType.PRISON);
+		DAOManager.getDAO(PlayerPunishmentsDAO.class).storePlayerPunishment(player, PunishmentType.GATHER);
 		DAOManager.getDAO(InventoryDAO.class).store(player);
 		for (House house : player.getHouses()) {
 			DAOManager.getDAO(HousesDAO.class).storeHouse(house);
@@ -220,8 +189,7 @@ public class PlayerService {
 		// Apply equipment stats (items and manastones were loaded in account)
 		player.getEquipment().onLoadApplyEquipmentStats();
 
-		DAOManager.getDAO(PlayerPunishmentsDAO.class).loadPlayerPunishments(player, PunishmentType.PRISON);
-		DAOManager.getDAO(PlayerPunishmentsDAO.class).loadPlayerPunishments(player, PunishmentType.GATHER);
+		DAOManager.getDAO(PlayerPunishmentsDAO.class).loadPlayerPunishments(player);
 
 		// load saved effects
 		DAOManager.getDAO(PlayerEffectsDAO.class).loadPlayerEffects(player);

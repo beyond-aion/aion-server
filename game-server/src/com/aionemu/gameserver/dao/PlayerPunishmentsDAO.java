@@ -15,15 +15,15 @@ public abstract class PlayerPunishmentsDAO implements DAO {
 		return PlayerPunishmentsDAO.class.getName();
 	}
 
-	public abstract void loadPlayerPunishments(final Player player, final PunishmentType punishmentType);
+	public abstract void loadPlayerPunishments(Player player);
 
-	public abstract void storePlayerPunishments(final Player player, final PunishmentType punishmentType);
+	public abstract void storePlayerPunishment(Player player, PunishmentType punishmentType);
 
-	public abstract void punishPlayer(final int playerId, final PunishmentType punishmentType, final long expireTime, final String reason);
+	public abstract void punishPlayer(int playerId, PunishmentType punishmentType, long expireTime, String reason);
 
-	public abstract void punishPlayer(final Player player, final PunishmentType punishmentType, final String reason);
+	public abstract void punishPlayer(Player player, PunishmentType punishmentType, String reason);
 
-	public abstract void unpunishPlayer(final int playerId, final PunishmentType punishmentType);
+	public abstract void unpunishPlayer(int playerId, PunishmentType punishmentType);
 
-	public abstract CharacterBanInfo getCharBanInfo(final int playerId);
+	public abstract CharacterBanInfo getCharBanInfo(int playerId);
 }

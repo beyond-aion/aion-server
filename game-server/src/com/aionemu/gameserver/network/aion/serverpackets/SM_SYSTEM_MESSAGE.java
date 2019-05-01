@@ -19534,7 +19534,7 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * You were poisoned during extraction and cannot extract for %DURATIONTIME0.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_CAPTCHA_RESTRICTED(String durationtime0) {
+	public static final SM_SYSTEM_MESSAGE STR_MSG_CAPTCHA_RESTRICTED(int durationtime0) {
 		return new SM_SYSTEM_MESSAGE(1400268, durationtime0);
 	}
 

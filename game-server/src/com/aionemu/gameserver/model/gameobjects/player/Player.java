@@ -135,8 +135,6 @@ public class Player extends Creature {
 
 	private int flyState = 0;
 	private boolean isTrading;
-	private long prisonTimer = 0;
-	private long startPrison;
 	private FlyController flyController;
 	private CraftingTask craftingTask;
 	private int flightTeleportId;
@@ -168,11 +166,8 @@ public class Player extends Creature {
 	private Map<AttackStatus, Long> lastCounterSkill = new HashMap<>();
 
 	private int dualEffectValue = 0;
-	/**
-	 * Static information for players
-	 */
-	private long gatherableTimer = 0;
-	private long stopGatherable;
+	private long prisonEndTimeMillis = 0;
+	private long gatherRestrictionMillis;
 	private String captchaWord;
 	private byte[] captchaImage;
 
@@ -353,27 +348,21 @@ public class Player extends Creature {
 		return isInState(CreatureState.WEAPON_EQUIPPED);
 	}
 
-	public boolean isNotGatherable() {
-		return gatherableTimer != 0;
+	public boolean isGatherRestricted() {
+		return getGatherRestrictionDurationSeconds() > 0;
 	}
 
-	public void setGatherableTimer(long gatherableTimer) {
-		if (gatherableTimer < 0)
-			gatherableTimer = 0;
-
-		this.gatherableTimer = gatherableTimer;
+	public void setGatherRestrictionExpirationTime(long millis) {
+		gatherRestrictionMillis = millis;
 	}
 
-	public long getGatherableTimer() {
-		return gatherableTimer;
-	}
-
-	public long getStopGatherable() {
-		return stopGatherable;
-	}
-
-	public void setStopGatherable(long stopGatherable) {
-		this.stopGatherable = stopGatherable;
+	public int getGatherRestrictionDurationSeconds() {
+		if (gatherRestrictionMillis == 0)
+			return 0;
+		int durationSeconds = (int) ((gatherRestrictionMillis - System.currentTimeMillis()) / 1000);
+		if (durationSeconds < 0)
+			gatherRestrictionMillis = durationSeconds = 0;
+		return durationSeconds;
 	}
 
 	public String getCaptchaWord() {
@@ -821,45 +810,22 @@ public class Player extends Creature {
 	 * @return the isInPrison
 	 */
 	public boolean isInPrison() {
-		return prisonTimer != 0;
+		return getPrisonDurationSeconds() > 0;
 	}
 
-	/**
-	 * @param prisonTimer
-	 *          the prisonTimer to set
-	 */
-	public void setPrisonTimer(long prisonTimer) {
-		if (prisonTimer < 0)
-			prisonTimer = 0;
-
-		this.prisonTimer = prisonTimer;
+	public void setPrisonEndTimeMillis(long prisonEndTimeMillis) {
+		this.prisonEndTimeMillis = prisonEndTimeMillis;
 	}
 
-	/**
-	 * @return the prisonTimer
-	 */
-	public long getPrisonTimer() {
-		return prisonTimer;
+	public int getPrisonDurationSeconds() {
+		if (prisonEndTimeMillis == 0)
+			return 0;
+		int durationSeconds = (int) ((prisonEndTimeMillis - System.currentTimeMillis()) / 1000);
+		if (durationSeconds < 0)
+			prisonEndTimeMillis = durationSeconds = 0;
+		return durationSeconds;
 	}
 
-	/**
-	 * @return the time in ms of start prison
-	 */
-	public long getStartPrison() {
-		return startPrison;
-	}
-
-	/**
-	 * @param start
-	 *          : The time in ms of start prison
-	 */
-	public void setStartPrison(long start) {
-		this.startPrison = start;
-	}
-
-	/**
-	 * @return
-	 */
 	public boolean isProtectionActive() {
 		return isInVisualState(CreatureVisualState.BLINKING);
 	}

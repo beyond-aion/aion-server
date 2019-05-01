@@ -68,19 +68,20 @@ public class PunishmentService {
 	 * @param delayInMinutes
 	 */
 	public static void setIsInPrison(Player player, boolean state, long delayInMinutes, String reason) {
-		stopPrisonTask(player, false);
 		if (state) {
 			if (delayInMinutes > 0) {
-				schedulePrisonTask(player, TimeUnit.MINUTES.toMillis(delayInMinutes));
+				long duration = TimeUnit.MINUTES.toMillis(delayInMinutes);
+				schedulePrisonTask(player, duration);
 				ChatBanService.banPlayer(player, delayInMinutes);
-				player.setStartPrison(System.currentTimeMillis());
+				player.setPrisonEndTimeMillis(System.currentTimeMillis() + duration);
 				TeleportService.teleportToPrison(player);
 				DAOManager.getDAO(PlayerPunishmentsDAO.class).punishPlayer(player, PunishmentType.PRISON, reason);
 				PacketSendUtility.sendMessage(player, "You have been teleported to prison for a time of " + delayInMinutes
 					+ " minutes.\n If you disconnect the time stops and the timer of the prison'll see at your next login.");
 			}
 		} else {
-			player.setPrisonTimer(0);
+			player.getController().cancelTask(TaskId.PRISON);
+			player.setPrisonEndTimeMillis(0);
 			ChatBanService.unbanPlayer(player);
 			TeleportService.moveToBindLocation(player);
 			DAOManager.getDAO(PlayerPunishmentsDAO.class).unpunishPlayer(player.getObjectId(), PunishmentType.PRISON);
@@ -89,52 +90,24 @@ public class PunishmentService {
 	}
 
 	/**
-	 * This method will stop the prison task
-	 * 
-	 * @param playerObjId
-	 */
-	public static void stopPrisonTask(Player player, boolean save) {
-		if (player.getController().hasTask(TaskId.PRISON)) {
-			if (save) {
-				long delay = player.getPrisonTimer();
-				if (delay < 0)
-					delay = 0;
-				player.setPrisonTimer(delay);
-			}
-			player.getController().cancelTask(TaskId.PRISON);
-		}
-	}
-
-	/**
 	 * This method will update the prison status
 	 * 
 	 * @param player
 	 */
-	public static void updatePrisonStatus(final Player player) {
-		if (player.isInPrison()) {
-			long prisonTimer = player.getPrisonTimer();
-			if (prisonTimer > 0) {
-				schedulePrisonTask(player, prisonTimer);
-				int timeInPrison = (int) (prisonTimer / 60000);
+	public static void updatePrisonStatus(Player player) {
+		int prisonDurationSeconds = player.getPrisonDurationSeconds();
+		if (prisonDurationSeconds > 0) {
+			schedulePrisonTask(player, TimeUnit.SECONDS.toMillis(prisonDurationSeconds));
+			int remainingMinutes = prisonDurationSeconds / 60;
+			if (remainingMinutes <= 0)
+				remainingMinutes = 1;
 
-				if (timeInPrison <= 0)
-					timeInPrison = 1;
-
-				ChatBanService.banPlayer(player, timeInPrison);
-				PacketSendUtility.sendMessage(player, "You are still in prison for " + timeInPrison + " minute" + (timeInPrison > 1 ? "s" : "") + ".");
-
-				player.setStartPrison(System.currentTimeMillis());
-			}
+			ChatBanService.banPlayer(player, remainingMinutes);
+			PacketSendUtility.sendMessage(player, "You are still in prison for " + remainingMinutes + " minute" + (remainingMinutes > 1 ? "s" : "") + ".");
 
 			if (player.getWorldId() != WorldMapType.DF_PRISON.getId() && player.getWorldId() != WorldMapType.DE_PRISON.getId()) {
-				PacketSendUtility.sendMessage(player, "You will be teleported to prison in one minute!");
-				ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-					@Override
-					public void run() {
-						TeleportService.teleportToPrison(player);
-					}
-				}, 60000);
+				PacketSendUtility.sendMessage(player, "You will be teleported to prison in a moment!");
+				ThreadPoolManager.getInstance().schedule(() -> TeleportService.teleportToPrison(player), 10000);
 			}
 		}
 	}
@@ -145,15 +118,8 @@ public class PunishmentService {
 	 * @param player
 	 * @param prisonTimer
 	 */
-	private static void schedulePrisonTask(final Player player, long prisonTimer) {
-		player.setPrisonTimer(prisonTimer);
-		player.getController().addTask(TaskId.PRISON, ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				setIsInPrison(player, false, 0, "");
-			}
-		}, prisonTimer));
+	private static void schedulePrisonTask(Player player, long prisonTimer) {
+		player.getController().addTask(TaskId.PRISON, ThreadPoolManager.getInstance().schedule(() -> setIsInPrison(player, false, 0, ""), prisonTimer));
 	}
 
 	/**
@@ -166,8 +132,6 @@ public class PunishmentService {
 	 * @author Cura
 	 */
 	public static void setIsNotGatherable(Player player, int captchaCount, boolean state, long delay) {
-		stopGatherableTask(player, false);
-
 		if (state) {
 			if (captchaCount < 3) {
 				PacketSendUtility.sendPacket(player, new SM_CAPTCHA(captchaCount + 1, player.getCaptchaImage()));
@@ -175,73 +139,15 @@ public class PunishmentService {
 				player.setCaptchaWord(null);
 				player.setCaptchaImage(null);
 			}
-
-			player.setGatherableTimer(delay);
-			player.setStopGatherable(System.currentTimeMillis());
-			scheduleGatherableTask(player, delay);
+			player.setGatherRestrictionExpirationTime(System.currentTimeMillis() + delay);
 			DAOManager.getDAO(PlayerPunishmentsDAO.class).punishPlayer(player, PunishmentType.GATHER, "Possible gatherbot");
 		} else {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CAPTCHA_RECOVERED());
 			player.setCaptchaWord(null);
 			player.setCaptchaImage(null);
-			player.setGatherableTimer(0);
-			player.setStopGatherable(0);
+			player.setGatherRestrictionExpirationTime(0);
 			DAOManager.getDAO(PlayerPunishmentsDAO.class).unpunishPlayer(player.getObjectId(), PunishmentType.GATHER);
 		}
-	}
-
-	/**
-	 * This method will stop the gathering task
-	 * 
-	 * @param player
-	 * @param save
-	 * @author Cura
-	 */
-	public static void stopGatherableTask(Player player, boolean save) {
-		if (player.getController().hasTask(TaskId.GATHERABLE)) {
-			if (save) {
-				long delay = player.getGatherableTimer();
-				if (delay < 0)
-					delay = 0;
-				player.setGatherableTimer(delay);
-			}
-			player.getController().cancelTask(TaskId.GATHERABLE);
-		}
-	}
-
-	/**
-	 * This method will update the gathering status
-	 * 
-	 * @param player
-	 * @author Cura
-	 */
-	public static void updateGatherableStatus(Player player) {
-		if (player.isNotGatherable()) {
-			long gatherableTimer = player.getGatherableTimer();
-
-			if (gatherableTimer > 0) {
-				scheduleGatherableTask(player, gatherableTimer);
-				player.setStopGatherable(System.currentTimeMillis());
-			}
-		}
-	}
-
-	/**
-	 * This method will schedule a gathering task
-	 * 
-	 * @param player
-	 * @param gatherableTimer
-	 * @author Cura
-	 */
-	private static void scheduleGatherableTask(final Player player, long gatherableTimer) {
-		player.setGatherableTimer(gatherableTimer);
-		player.getController().addTask(TaskId.GATHERABLE, ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				setIsNotGatherable(player, 0, false, 0);
-			}
-		}, gatherableTimer));
 	}
 
 	/**
