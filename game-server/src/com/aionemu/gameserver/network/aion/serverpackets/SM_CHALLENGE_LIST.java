@@ -51,7 +51,7 @@ public class SM_CHALLENGE_LIST extends AionServerPacket {
 					writeC(1); // unk
 					writeC(21); // unk
 					writeC(0); // unk
-					writeD((int) (task.getCompleteTime().getTime() / 1000));
+					writeD(task.getCompleteTimeEpochSeconds());
 				}
 				break;
 			case 7: // send individual challenge task info

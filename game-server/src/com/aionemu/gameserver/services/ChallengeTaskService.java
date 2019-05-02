@@ -1,6 +1,7 @@
 package com.aionemu.gameserver.services;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -37,8 +38,9 @@ import com.aionemu.gameserver.world.World;
 public class ChallengeTaskService {
 
 	private static final Logger log = LoggerFactory.getLogger(ChallengeTaskService.class);
-	private Map<Integer, Map<Integer, ChallengeTask>> cityTasks;
-	private Map<Integer, Map<Integer, ChallengeTask>> legionTasks;
+	private final Map<Integer, Map<Integer, Integer>> taskAcceptTownIds;
+	private final Map<Integer, Map<Integer, ChallengeTask>> cityTasks;
+	private final Map<Integer, Map<Integer, ChallengeTask>> legionTasks;
 
 	private static class SingletonHolder {
 
@@ -50,6 +52,7 @@ public class ChallengeTaskService {
 	}
 
 	private ChallengeTaskService() {
+		taskAcceptTownIds = new ConcurrentHashMap<>();
 		cityTasks = new ConcurrentHashMap<>();
 		legionTasks = new ConcurrentHashMap<>();
 		log.info("ChallengeTaskService initialized.");
@@ -133,25 +136,26 @@ public class ChallengeTaskService {
 		}
 	}
 
-	private void onCityTaskFinish(Player player, ChallengeTaskTemplate taskTemplate, int questId) {
+	public void onAcceptTask(Player player, int questId) {
 		int townId = TownService.getInstance().getTownIdByPosition(player);
-		if (cityTasks.get(townId) == null) {
-			buildTaskList(player, ChallengeType.TOWN, townId, TownService.getInstance().getTownById(townId).getLevel());
-			if (cityTasks.get(townId) == null) {
-				log.warn("Town not in CityTasks! TownId:" + townId + "; Player town residence:" + TownService.getInstance().getTownResidence(player));
-				return;
-			}
-		}
-		ChallengeTask task = cityTasks.get(townId).get(taskTemplate.getId());
-		if (task == null || task.getQuests().get(questId) == null) {
-			log.warn("Player " + player.getName() + " trying to finish city task in the city which haven't task with this id. Town id:" + townId
-				+ ", task id:" + taskTemplate.getId() + ", quest id:" + questId);
+		if (townId != 0)
+			taskAcceptTownIds.computeIfAbsent(player.getObjectId(), k -> new HashMap<>()).put(questId, townId);
+	}
+
+	private void onCityTaskFinish(Player player, ChallengeTaskTemplate taskTemplate, int questId) {
+		Map<Integer, Integer> townsByQuestId = taskAcceptTownIds.get(player.getObjectId());
+		Integer townId = townsByQuestId == null ? null : townsByQuestId.remove(questId);
+		if (townId == null) // server got restarted after player accepted the quest or quest got started outside town (by chat command)
+			return;
+		ChallengeTask task = getChallengeTask(player, taskTemplate, townId);
+		if (task == null) // task may be not available anymore due to town levelup
+			return;
+		ChallengeQuest quest = task.getQuest(questId);
+		if (quest == null) {
+			log.warn(player + " finished city task " + task.getTaskId() + " of town " + townId + " but info for quest " + questId + " is missing.");
 			return;
 		}
-		ChallengeQuest quest = task.getQuests().get(questId);
-		if (quest.getCompleteCount() >= quest.getMaxRepeats())
-			return;
-		if (!task.isCompleted()) {
+		if (quest.getCompleteCount() < quest.getMaxRepeats() && !task.isCompleted()) {
 			task.updateCompleteTime();
 			quest.increaseCompleteCount();
 			DAOManager.getDAO(ChallengeTasksDAO.class).storeTask(task);
@@ -175,6 +179,19 @@ public class ChallengeTaskService {
 				DAOManager.getDAO(TownDAO.class).store(town);
 			}
 		}
+	}
+
+	private ChallengeTask getChallengeTask(Player player, ChallengeTaskTemplate taskTemplate, int townId) {
+		Map<Integer, ChallengeTask> taskMap = cityTasks.get(townId);
+		if (taskMap == null) {
+			buildTaskList(player, ChallengeType.TOWN, townId, TownService.getInstance().getTownById(townId).getLevel());
+			taskMap = cityTasks.get(townId);
+			if (taskMap == null) {
+				log.warn("Town " + townId + " has no CityTasks! " + player + ", town residence:" + TownService.getInstance().getTownResidence(player));
+				return null;
+			}
+		}
+		return taskMap.get(taskTemplate.getId());
 	}
 
 	private void onLegionTaskFinish(Player player, ChallengeTaskTemplate taskTemplate, int questId) {

@@ -51,7 +51,6 @@ public class ChallengeTask {
 			quests.put(qt.getId(), quest);
 		}
 		this.quests = quests;
-		this.completeTime = new Timestamp(1000);
 		this.template = template;
 	}
 
@@ -79,8 +78,12 @@ public class ChallengeTask {
 		return completeTime;
 	}
 
+	public int getCompleteTimeEpochSeconds() {
+		return completeTime == null ? 0 : (int) (completeTime.getTime() / 1000);
+	}
+
 	public synchronized void updateCompleteTime() {
-		completeTime.setTime(System.currentTimeMillis());
+		completeTime = new Timestamp(System.currentTimeMillis());
 	}
 
 	public ChallengeTaskTemplate getTemplate() {

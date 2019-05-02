@@ -466,6 +466,8 @@ public final class QuestService {
 		if (template.getNpcFactionId() != 0 && !template.isTimeBased()) {
 			player.getNpcFactions().startQuest(template);
 		}
+		if (template.getCategory() == QuestCategory.CHALLENGE_TASK)
+			ChallengeTaskService.getInstance().onAcceptTask(player, id);
 
 		PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(actionType, qs));
 		player.getController().updateNearbyQuests();
