@@ -25757,10 +25757,17 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	}
 
 	/**
+	 * You have achieved %1 of %0.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_TOWN_MISSION_COMPLETE(String town, String task) {
+		return new SM_SYSTEM_MESSAGE(1401519, town, task);
+	}
+
+	/**
 	 * %0 has reached level %1.
 	 */
-	public static final SM_SYSTEM_MESSAGE STR_MSG_TOWN_LEVEL_LEVEL_UP(int townId, int level) {
-		return new SM_SYSTEM_MESSAGE(1401520, townId, level);
+	public static final SM_SYSTEM_MESSAGE STR_MSG_TOWN_LEVEL_LEVEL_UP(String town, int level) {
+		return new SM_SYSTEM_MESSAGE(1401520, town, level);
 	}
 
 	/**

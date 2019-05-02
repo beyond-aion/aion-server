@@ -13,6 +13,7 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.Persistable;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.templates.L10n;
 import com.aionemu.gameserver.model.templates.spawns.Spawn;
 import com.aionemu.gameserver.model.templates.spawns.SpawnGroup;
 import com.aionemu.gameserver.model.templates.spawns.SpawnSpotTemplate;
@@ -25,7 +26,7 @@ import com.aionemu.gameserver.world.World;
 /**
  * @author ViAl
  */
-public class Town implements Persistable {
+public class Town implements Persistable, L10n {
 
 	private int id;
 	private int level;
@@ -65,6 +66,12 @@ public class Town implements Persistable {
 
 	public int getId() {
 		return id;
+	}
+
+	@Override
+	public int getL10nId() {
+		int idOffset = id - (race == Race.ELYOS ? 1001 : 2001);
+		return (race == Race.ELYOS ? 403330 : 403360) + idOffset;
 	}
 
 	public int getLevel() {
@@ -156,9 +163,7 @@ public class Town implements Persistable {
 
 	@Override
 	public void setPersistentState(PersistentState state) {
-		if (this.persistentState == PersistentState.NEW && state == PersistentState.UPDATE_REQUIRED)
-			return;
-		else
+		if (this.persistentState != PersistentState.NEW || state != PersistentState.UPDATE_REQUIRED)
 			this.persistentState = state;
 	}
 

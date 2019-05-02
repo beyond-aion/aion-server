@@ -168,10 +168,10 @@ public class ChallengeTaskService {
 							// TODO
 							break;
 					}
-					// PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1401519, new DescriptionId(804307), 601));
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_TOWN_MISSION_COMPLETE(town.getL10n(), task.getTemplate().getL10n()));
 				}
 				if (town.getLevel() != oldLevel)
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_TOWN_LEVEL_LEVEL_UP(town.getId(), town.getLevel()));
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_TOWN_LEVEL_LEVEL_UP(town.getL10n(), town.getLevel()));
 				DAOManager.getDAO(TownDAO.class).store(town);
 			}
 		}
