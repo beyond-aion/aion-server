@@ -156,7 +156,7 @@ public abstract class ChatCommand {
 
 	/**
 	 * Sends an info message to the player.<br>
-	 * If no message parameter is specified, the default syntax info will be sent.<br>
+	 * If no message parameter (or <tt>null</tt>) is specified, the default syntax info will be sent.<br>
 	 * You can set syntax info via {@link #setSyntaxInfo(String...)}
 	 * 
 	 * @param player
@@ -166,7 +166,7 @@ public abstract class ChatCommand {
 	 */
 	protected final void sendInfo(Player player, String... message) {
 		StringBuilder sb = new StringBuilder();
-		if (message.length > 0) {
+		if (message.length > 1 || message.length == 1 && message[0] != null) {
 			for (int i = 0; i < message.length; i++) {
 				if (i > 0)
 					sb.append('\n');
