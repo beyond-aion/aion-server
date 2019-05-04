@@ -22,7 +22,8 @@ public class _4702GeneralDeath extends AbstractQuestHandler {
 		qe.registerQuestNpc(278016).addOnQuestStart(questId);
 		qe.registerQuestNpc(278016).addOnTalkEvent(questId);
 		qe.registerQuestNpc(256694).addOnKillEvent(questId);
-		qe.registerQuestNpc(256693).addOnKillEvent(questId);
+		qe.registerQuestNpc(256693).addOnKillEvent(questId); // nochsana general
+		qe.registerQuestNpc(290161).addOnKillEvent(questId); // nochsana general
 	}
 
 	@Override
@@ -61,7 +62,7 @@ public class _4702GeneralDeath extends AbstractQuestHandler {
 			if (var == 0) {
 				return defaultOnKillEvent(env, 256694, 0, 1); // 1
 			} else if (var == 1) {
-				return defaultOnKillEvent(env, 256693, 1, true); // reward
+				return defaultOnKillEvent(env, new int[] { 256693, 290161 }, 1, true); // reward
 			}
 		}
 		return false;
