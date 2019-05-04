@@ -353,7 +353,8 @@ public class PlayerController extends CreatureController<Player> {
 				player.getCommonData().calculateExpLoss();
 		}
 
-		sendDieFromCreature(lastAttacker);
+		if (!player.getController().hasTask(TaskId.TELEPORT)) // don't show res options if the player is about to get teleported (see ResurrectBaseEffect)
+			sendDieFromCreature(lastAttacker);
 
 		QuestEngine.getInstance().onDie(new QuestEnv(null, player, 0));
 	}

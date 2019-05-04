@@ -8,13 +8,14 @@ import com.aionemu.gameserver.controllers.observer.ActionObserver;
 import com.aionemu.gameserver.controllers.observer.ObserverType;
 import com.aionemu.gameserver.custom.pvpmap.PvpMapService;
 import com.aionemu.gameserver.model.EmotionType;
+import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_PLAYER_SPAWN;
 import com.aionemu.gameserver.services.player.PlayerReviveService;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ResurrectBaseEffect")
@@ -31,30 +32,29 @@ public class ResurrectBaseEffect extends ResurrectEffect {
 	}
 
 	@Override
-	public void startEffect(final Effect effect) {
-		final Creature effected = effect.getEffected();
+	public void startEffect(Effect effect) {
+		Creature effected = effect.getEffected();
 
 		if (effected instanceof Player) {
+			Player player = (Player) effected;
 			ActionObserver observer = new ActionObserver(ObserverType.DEATH) {
 
 				@Override
-				public void died(Creature creature) {
-					if (effected instanceof Player) {
-						Player effected = (Player) effect.getEffected();
-						if (!PvpMapService.getInstance().isOnPvPMap(effected)) {
-							if (effected.isInInstance())
-								PlayerReviveService.instanceRevive(effected, skillId);
-							else if (effected.getKisk() != null)
-								PlayerReviveService.kiskRevive(effected, skillId);
+				public void died(Creature lastAttacker) {
+					if (!PvpMapService.getInstance().isOnPvPMap(player)) {
+						player.getController().addTask(TaskId.TELEPORT, ThreadPoolManager.getInstance().schedule(() -> {
+							PacketSendUtility.sendPacket(player, new SM_EMOTION(player, EmotionType.RESURRECT));
+							if (player.isInInstance())
+								PlayerReviveService.instanceRevive(player, skillId);
+							else if (player.getKisk() != null)
+								PlayerReviveService.kiskRevive(player, skillId);
 							else
-								PlayerReviveService.bindRevive(effected, skillId);
-							PacketSendUtility.broadcastPacket(effected, new SM_EMOTION(effected, EmotionType.RESURRECT), true);
-							PacketSendUtility.sendPacket(effected, new SM_PLAYER_SPAWN(effected));
-						}
+								PlayerReviveService.bindRevive(player, skillId);
+						}, 2500));
 					}
 				}
 			};
-			effect.getEffected().getObserveController().attach(observer);
+			player.getObserveController().attach(observer);
 			effect.setActionObserver(observer, position);
 		}
 	}
