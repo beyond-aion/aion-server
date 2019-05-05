@@ -44,25 +44,26 @@ public class RideAction extends AbstractItemAction {
 
 	@Override
 	public boolean canAct(Player player, Item parentItem, Item targetItem) {
-		if (parentItem == null) {
-			return false;
-		}
+		if (!player.isInPlayerMode(PlayerMode.RIDE)) { // RideAction is for mounting and dismounting, canAct should never forbid dismounting
+			if (parentItem == null)
+				return false;
 
-		if (CustomConfig.ENABLE_RIDE_RESTRICTION) {
-			for (ZoneInstance zone : player.findZones()) {
-				if (!zone.canRide()) {
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANNOT_RIDE_INVALID_LOCATION());
-					return false;
+			if (CustomConfig.ENABLE_RIDE_RESTRICTION) {
+				for (ZoneInstance zone : player.findZones()) {
+					if (!zone.canRide()) {
+						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANNOT_RIDE_INVALID_LOCATION());
+						return false;
+					}
 				}
 			}
-		}
-		if (player.isInState(CreatureState.RESTING)) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANT_RIDE(ChatUtil.l10n(1400057)));
-			return false;
-		}
-		if (player.getEffectController().isInAnyAbnormalState(AbnormalState.DISMOUNT_RIDE)) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANNOT_RIDE_ABNORMAL_STATE());
-			return false;
+			if (player.isInState(CreatureState.RESTING)) {
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANT_RIDE(ChatUtil.l10n(1400057)));
+				return false;
+			}
+			if (player.getEffectController().isInAnyAbnormalState(AbnormalState.DISMOUNT_RIDE)) {
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANNOT_RIDE_ABNORMAL_STATE());
+				return false;
+			}
 		}
 		return true;
 	}
