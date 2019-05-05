@@ -30,13 +30,14 @@ import com.aionemu.gameserver.utils.chathandlers.PlayerCommand;
 public class Preview extends PlayerCommand {
 
 	private static final Map<Integer, ScheduledFuture<?>> PREVIEW_RESETS = new ConcurrentHashMap<>();
-	private static final byte PREVIEW_TIME = 10;
+	private static final int PREVIEW_TIME_SECONDS = 10;
 
 	public Preview() {
 		super("preview", "Previews equipment.");
 
 		// @formatter:off
 		setSyntaxInfo(
+			"<color> - Previews your equipped items in the specified color (dye item, color name or color HEX code).",
 			"<item(s)> [color] - Previews the specified item(s) on your character (default: standard item color, optional: dye item, color name or color HEX code).",
 			"Multiple items may be separated with commas, but not with spaces.",
 			"If a single item is given and it's a part of an item set, you will get a preview of the whole item set."
@@ -56,20 +57,19 @@ public class Preview extends PlayerCommand {
 			return;
 		}
 
+		int i = 0;
+		boolean onlyColor = params.length == 1 && !params[0].contains("[") && !params[0].matches("[1-9][0-9]*");
 		List<ItemTemplate> items = new ArrayList<>();
-		if (!parseItems(player, params[0], items))
+		if (onlyColor)
+			player.getEquipment().getEquippedForAppearance().forEach(item -> items.add(item.getItemTemplate()));
+		else if (!parseItems(player, params[i++], items))
 			return;
 
 		Integer itemColor = null; // null = default item color
 		String colorText = "default";
-		if (params.length > 1) {
-			if (items.stream().noneMatch(ItemTemplate::isItemDyePermitted)) {
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_COLOR_CHANGE_ERROR_CANNOTDYE(items.get(0).getL10n()));
-				return;
-			}
-
+		if (params.length > i) {
 			// try to get itemId of a dyeing item
-			String colorParam = params[1];
+			String colorParam = params[i];
 			itemColor = ChatUtil.getItemId(colorParam);
 			ItemTemplate dyeItemTemplate = DataManager.ITEM_DATA.getItemTemplate(itemColor);
 
@@ -94,9 +94,13 @@ public class Preview extends PlayerCommand {
 					}
 					colorText = ChatUtil.color("#" + String.format("%06X", itemColor & 0xFFFFFF), itemColor);
 				} catch (NumberFormatException e) {
-					sendInfo(player, "Invalid color.");
+					sendInfo(player, colorParam + " is not a valid color.");
 					return;
 				}
+			}
+			if (items.stream().noneMatch(ItemTemplate::isItemDyePermitted)) {
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_COLOR_CHANGE_ERROR_CANNOTDYE(items.get(0).getL10n()));
+				return;
 			}
 		}
 
@@ -117,8 +121,11 @@ public class Preview extends PlayerCommand {
 		addOwnEquipment(player, previewItems, previewItemsSlotMask);
 		previewItems.sort(Comparator.comparingLong(Item::getEquipmentSlot)); // order by equipment slot ids (ascending) to avoid display bugs
 		PacketSendUtility.sendPacket(player, new SM_UPDATE_PLAYER_APPEARANCE(player.getObjectId(), previewItems));
-		registerPreviewReset(player, PREVIEW_TIME);
-		sendInfo(player, "Previewing the following items for " + PREVIEW_TIME + " seconds (color: " + colorText + "):" + itemNames);
+		schedulePreviewReset(player, PREVIEW_TIME_SECONDS);
+		if (onlyColor)
+			sendInfo(player, "Previewing your equipment for " + PREVIEW_TIME_SECONDS + " seconds in color " + colorText);
+		else
+			sendInfo(player, "Previewing the following items for " + PREVIEW_TIME_SECONDS + " seconds (color: " + colorText + "):" + itemNames);
 	}
 
 	private boolean parseItems(Player player, String param, List<ItemTemplate> items) {
@@ -196,25 +203,16 @@ public class Preview extends PlayerCommand {
 		}
 	}
 
-	private static void registerPreviewReset(final Player player, int duration) {
-		int objId = player.getObjectId();
-
-		// cancel previous scheduled preview reset thread
-		if (PREVIEW_RESETS.containsKey(objId))
-			PREVIEW_RESETS.get(objId).cancel(true);
-
-		ScheduledFuture<?> resetThread = ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				if (player.isOnline()) {
-					PacketSendUtility.sendPacket(player, new SM_UPDATE_PLAYER_APPEARANCE(objId, player.getEquipment().getEquippedForAppearance()));
-					PacketSendUtility.sendMessage(player, "Preview time ended.");
-				}
-				PREVIEW_RESETS.remove(objId);
-			}
-		}, duration * 1000);
-
-		PREVIEW_RESETS.put(objId, resetThread);
+	private static void schedulePreviewReset(Player player, int duration) {
+		PREVIEW_RESETS.compute(player.getObjectId(), (k, resetTask) -> {
+			if (resetTask != null) // cancel previous scheduled preview reset thread
+				resetTask.cancel(true);
+			resetTask = ThreadPoolManager.getInstance().schedule(() -> {
+				PacketSendUtility.sendPacket(player, new SM_UPDATE_PLAYER_APPEARANCE(player.getObjectId(), player.getEquipment().getEquippedForAppearance()));
+				PacketSendUtility.sendMessage(player, "Preview time ended.");
+				PREVIEW_RESETS.remove(player.getObjectId());
+			}, duration * 1000);
+			return resetTask;
+		});
 	}
 }
