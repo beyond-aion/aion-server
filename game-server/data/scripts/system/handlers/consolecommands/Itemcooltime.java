@@ -1,5 +1,7 @@
 package consolecommands;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Map.Entry;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -20,9 +22,12 @@ public class Itemcooltime extends ConsoleCommand {
 	@Override
 	public void execute(Player player, String... params) {
 		if (player.getItemCoolDowns() != null) {
-			for (Entry<Integer, ItemCooldown> en : player.getItemCoolDowns().entrySet())
-				player.addItemCoolDown(en.getKey(), 0, 0);
-			PacketSendUtility.sendPacket(player, new SM_ITEM_COOLDOWN(player.getItemCoolDowns()));
+			Map<Integer, ItemCooldown> dummyCds = new HashMap<>(); // 4.8 client ignores reuseTime <= currentTime, but sending old cds + useDelay 0 works
+			for (Entry<Integer, ItemCooldown> en : player.getItemCoolDowns().entrySet()) {
+				dummyCds.put(en.getKey(), new ItemCooldown(en.getValue().getReuseTime(), 0));
+				player.removeItemCoolDown(en.getKey());
+			}
+			PacketSendUtility.sendPacket(player, new SM_ITEM_COOLDOWN(dummyCds));
 		}
 	}
 }
