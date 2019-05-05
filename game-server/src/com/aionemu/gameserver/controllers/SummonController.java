@@ -12,12 +12,13 @@ import com.aionemu.gameserver.model.summons.UnsummonType;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.LOG;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.TYPE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SUMMON_UPDATE;
-import com.aionemu.gameserver.restrictions.RestrictionsManager;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.summons.SummonsService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.skillengine.model.Skill;
 import com.aionemu.gameserver.taskmanager.tasks.PlayerMoveTaskManager;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.audit.AuditLogger;
 
 /**
  * @author ATracer
@@ -25,14 +26,14 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 public class SummonController extends CreatureController<Summon> {
 
-	private long lastAttackMilis = 0;
+	private long lastAttackMillis = 0;
 
 	@Override
 	public void notKnow(VisibleObject object) {
 		super.notKnow(object);
 		if (getOwner().getMaster().equals(object))
 			SummonsService.release(getOwner(), UnsummonType.DISTANCE);
-		}
+	}
 
 	/**
 	 * Release summon
@@ -71,20 +72,19 @@ public class SummonController extends CreatureController<Summon> {
 
 	@Override
 	public void attackTarget(Creature target, int time, boolean skipChecks) {
-		Player master = getOwner().getMaster();
-
-		if (!RestrictionsManager.canAttack(master, target))
-			return;
-
-		int attackSpeed = getOwner().getGameStats().getAttackSpeed().getCurrent();
-		long milis = System.currentTimeMillis();
-		if (milis - lastAttackMilis < attackSpeed) {
-			/**
-			 * Hack!
-			 */
+		if (target.isDead() || target.getLifeStats().isAboutToDie() || !getOwner().isEnemy(target)) {
+			PacketSendUtility.sendPacket(getMaster(), SM_SYSTEM_MESSAGE.STR_INVALID_TARGET());
 			return;
 		}
-		lastAttackMilis = milis;
+
+		int attackSpeed = getOwner().getGameStats().getAttackSpeed().getCurrent();
+		long now = System.currentTimeMillis();
+		long msSinceLastAttack = now - lastAttackMillis;
+		if (msSinceLastAttack < attackSpeed) {
+			AuditLogger.log(getMaster(), " possibly used hack to speed up summon auto-attack (" + msSinceLastAttack + "ms instead of" + attackSpeed + ")");
+			return;
+		}
+		lastAttackMillis = now;
 		super.attackTarget(target, time, false);
 	}
 
