@@ -538,47 +538,40 @@ public abstract class EffectTemplate {
 	 * @return true = no resist, false = resisted
 	 */
 	public boolean calculateEffectResistRate(Effect effect, StatEnum statEnum) {
-		if (effect.getEffected() == null || effect.getEffected().getGameStats() == null || effect.getEffector() == null
-			|| effect.getEffector().getGameStats() == null)
-			return false;
+		if (statEnum == null)
+			return true;
 
 		Creature effected = effect.getEffected();
 		Creature effector = effect.getEffector();
 
-		if (statEnum == null)
-			return true;
+		if (effected == null || effected.getGameStats() == null || effector == null || effector.getGameStats() == null)
+			return false;
 
-		if (effect.getSkillTemplate().getGroup() != null && effect.getSkillTemplate().getGroup().equals("WA_AVENGINGCRASH")) {
+		if (effect.getSkillTemplate().getGroup() != null && effect.getSkillTemplate().getGroup().equals("WA_AVENGINGCRASH"))
 			return true;
-		}
 
 		int effectPower = 1000;
 
-		if (isAlteredState(statEnum)) {
-			effectPower -= effect.getEffected().getGameStats()
-				.getStat(StatEnum.ABNORMAL_RESISTANCE_ALL, effect.getEffected().getGameStats().getAbnormalResistance()).getCurrent();
-		}
+		if (isAlteredState(statEnum))
+			effectPower -= effected.getGameStats().getStat(StatEnum.ABNORMAL_RESISTANCE_ALL, effected.getGameStats().getAbnormalResistance()).getCurrent();
 
 		// effect resistance
-		effectPower -= effect.getEffected().getGameStats().getStat(statEnum, 0).getCurrent();
+		effectPower -= effected.getGameStats().getStat(statEnum, 0).getCurrent();
 
 		// penetration
 		StatEnum penetrationStat = this.getPenetrationStat(statEnum);
 		if (penetrationStat != null)
 			effectPower += effector.getGameStats().getStat(penetrationStat, 0).getCurrent();
 
-		// resist mod pvp
-		if (effector.isPvpTarget(effect.getEffected())) {
-			int differ = (effected.getLevel() - effector.getLevel());
-			if (differ > 2 && differ < 8)
-				effectPower -= Math.round((effectPower * (differ - 2) / 15f));
-			else if (differ >= 8)
-				effectPower *= 0.1f;
-		}
-		// resist mod PvE
-		if (effect.getEffected() instanceof Npc) {
-			Npc effectrd = (Npc) effect.getEffected();
-			int hpGaugeMod = effectrd.getObjectTemplate().getRank().ordinal() - 1;
+		// resist mod
+		if (effector.isPvpTarget(effected)) { // pvp
+			int lvlDiff = effected.getLevel() - effector.getLevel();
+			if (lvlDiff > 4) {
+				float reductionRate = 0.1f * (lvlDiff - 4); // see https://forums.aiononline.com/topic/25-arena-of-discipline-entries/?page=2#elComment_2213
+				effectPower *= Math.max(1 - reductionRate, 0.1f);
+			}
+		} else if (effected instanceof Npc) { // resist mod PvE
+			int hpGaugeMod = ((Npc) effected).getObjectTemplate().getRank().ordinal();
 			effectPower -= hpGaugeMod * 100;
 		}
 		return Rnd.get(1, 1000) <= effectPower;
