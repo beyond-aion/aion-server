@@ -150,6 +150,7 @@ public class AionClientPacketFactory {
 			packets.put(0x172, new PacketInfo<>(CM_MACRO_CREATE.class, State.IN_GAME));
 			packets.put(0x173, new PacketInfo<>(CM_MACRO_DELETE.class, State.IN_GAME));
 			packets.put(0x174, new PacketInfo<>(CM_QUESTIONNAIRE.class, State.IN_GAME));
+			packets.put(0x175, new PacketInfo<>(CM_REJECT_REVIVE.class, State.IN_GAME));
 			packets.put(0x177, new PacketInfo<>(CM_TELEPORT_SELECT.class, State.IN_GAME));
 			packets.put(0x178, new PacketInfo<>(CM_L2AUTH_LOGIN_CHECK.class, State.CONNECTED));
 			packets.put(0x179, new PacketInfo<>(CM_CHARACTER_LIST.class, State.AUTHED));

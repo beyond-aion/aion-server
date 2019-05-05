@@ -95,7 +95,7 @@ public class ServerPacketsOpcodes {
 		addPacketOpcode(SM_EXCHANGE_ADD_KINAH.class, 0x4D);
 		addPacketOpcode(SM_EXCHANGE_CONFIRMATION.class, 0x4E);
 		addPacketOpcode(SM_EMOTION_LIST.class, 0x4F);
-		// 80 - client answers with CM_UNK_RESPONSE. opcode 0x181, bytes (static): 6F 41 8A 50 C3 47 41 E4 51 68 B1 D8 12 E2 CC 60
+		// 80 - client answers with CM_UNK_RESPONSE: opcode 0x181 with 16 (static) bytes which change every 5s, maybe some kind of consistency check
 		addPacketOpcode(SM_TARGET_UPDATE.class, 0x51);
 		addPacketOpcode(SM_HOUSE_EDIT.class, 0x52);
 		addPacketOpcode(SM_PLASTIC_SURGERY.class, 0x53);
@@ -130,7 +130,7 @@ public class ServerPacketsOpcodes {
 		addPacketOpcode(SM_LEGION_LEAVE_MEMBER.class, 0x70);
 		addPacketOpcode(SM_LEGION_UPDATE_MEMBER.class, 0x71);
 		addPacketOpcode(SM_LEGION_UPDATE_TITLE.class, 0x72);
-		// 115 TODO: format c (some msg ids 1-6)
+		// 115 TODO: format c (msg id 1-6) geo related messages, like target invalid, too far away or behind obstacle
 		addPacketOpcode(SM_HOUSE_REGISTRY.class, 0x74);
 		// 117
 		// 118
@@ -267,7 +267,7 @@ public class ServerPacketsOpcodes {
 		// 248
 		addPacketOpcode(SM_SHOW_BRAND.class, 0xF9);
 		addPacketOpcode(SM_ALLIANCE_READY_CHECK.class, 0xFA);
-		// 251
+		// 251 first c or h must be size or type since nonzero leads to a client crash, because of incorrect following data 
 		addPacketOpcode(SM_PRICES.class, 0xFC);
 		addPacketOpcode(SM_TRADELIST.class, 0xFD);
 		// 254
