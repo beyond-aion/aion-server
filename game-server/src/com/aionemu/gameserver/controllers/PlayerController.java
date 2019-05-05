@@ -21,8 +21,7 @@ import com.aionemu.gameserver.configs.main.MembershipConfig;
 import com.aionemu.gameserver.configs.main.SecurityConfig;
 import com.aionemu.gameserver.controllers.attack.AttackStatus;
 import com.aionemu.gameserver.controllers.attack.AttackUtil;
-import com.aionemu.gameserver.controllers.observer.ActionObserver;
-import com.aionemu.gameserver.controllers.observer.ObserverType;
+import com.aionemu.gameserver.controllers.observer.StanceObserver;
 import com.aionemu.gameserver.custom.pvpmap.PvpMapService;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.EmotionType;
@@ -95,7 +94,6 @@ import com.aionemu.gameserver.services.instance.InstanceService;
 import com.aionemu.gameserver.services.reward.PromotionKitService;
 import com.aionemu.gameserver.services.summons.SummonsService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
-import com.aionemu.gameserver.skillengine.effect.AbnormalState;
 import com.aionemu.gameserver.skillengine.effect.EffectTemplate;
 import com.aionemu.gameserver.skillengine.effect.RebirthEffect;
 import com.aionemu.gameserver.skillengine.model.DispelCategoryType;
@@ -127,7 +125,7 @@ public class PlayerController extends CreatureController<Player> {
 	private static final Logger log = LoggerFactory.getLogger(PlayerController.class);
 	private long lastAttackMillis = 0;
 	private long lastAttackedMillis = 0;
-	private int stance = 0;
+	private StanceObserver stanceObserver;
 
 	@Override
 	public void see(VisibleObject object) {
@@ -737,34 +735,27 @@ public class PlayerController extends CreatureController<Player> {
 		}
 	}
 
-	public void startStance(final int skillId) {
-		stance = skillId;
-		if (skillId != 0) {
-			getOwner().getObserveController().attach(new ActionObserver(ObserverType.ABNORMALSETTED) {
-
-				@Override
-				public void abnormalsetted(AbnormalState state) {
-					if ((state.getId() & AbnormalState.STANCE_OFF.getId()) != 0)
-						stopStance();
-				}
-			});
-		}
+	public void startStance(int skillId) {
+		stopStance();
+		stanceObserver = new StanceObserver(getOwner(), skillId);
+		getOwner().getObserveController().addObserver(stanceObserver);
 	}
 
 	public void stopStance() {
-		if (stance != 0) {
-			getOwner().getEffectController().removeEffect(stance);
-			stance = 0;
+		if (stanceObserver != null) {
+			getOwner().getObserveController().removeObserver(stanceObserver);
+			getOwner().getEffectController().removeEffect(stanceObserver.getStanceSkillId());
+			PacketSendUtility.sendPacket(getOwner(), new SM_PLAYER_STANCE(getOwner(), 0));
+			stanceObserver = null;
 		}
-		PacketSendUtility.sendPacket(getOwner(), new SM_PLAYER_STANCE(getOwner(), 0));
 	}
 
 	public int getStanceSkillId() {
-		return stance;
+		return stanceObserver == null ? 0 : stanceObserver.getStanceSkillId();
 	}
 
 	public boolean isUnderStance() {
-		return stance != 0;
+		return stanceObserver != null;
 	}
 
 	public void updateSoulSickness(int skillId) {

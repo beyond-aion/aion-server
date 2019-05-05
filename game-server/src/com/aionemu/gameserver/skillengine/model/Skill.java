@@ -689,19 +689,12 @@ public class Skill {
 			}
 		}
 
-		if (effector instanceof Player && skillMethod == SkillMethod.CAST) {
-			Player playerEffector = (Player) effector;
-			if (playerEffector.getController().isUnderStance()) {
-				playerEffector.getController().stopStance();
-			}
-			if (skillTemplate.isStance() && !blockedStance) {
-				playerEffector.getController().startStance(skillTemplate.getSkillId());
-			}
-		}
-
 		boolean setCooldowns = true;
 		if (effector instanceof Player) {
-			if (isMulticast() && ((Player) effector).getChainSkills().getCurrentChainCount(chainCategory) > 0)
+			Player playerEffector = (Player) effector;
+			if (skillTemplate.isStance() && !blockedStance && skillMethod == SkillMethod.CAST)
+				playerEffector.getController().startStance(skillTemplate.getSkillId());
+			if (isMulticast() && playerEffector.getChainSkills().getCurrentChainCount(chainCategory) > 0)
 				setCooldowns = false;
 
 			// Check Chain Skill Trigger Rate, only for chain skills and only for player
@@ -712,9 +705,9 @@ public class Skill {
 					chainSuccess = Rnd.chance() < skillTemplate.getChainSkillProb() || CustomConfig.SKILL_CHAIN_DISABLE_TRIGGERRATE;
 
 				if (chainSuccess)
-					((Player) effector).getChainSkills().updateChain(chainCategory, chainUsageDuration);
+					playerEffector.getChainSkills().updateChain(chainCategory, chainUsageDuration);
 				else
-					((Player) effector).getChainSkills().resetChain();
+					playerEffector.getChainSkills().resetChain();
 			}
 
 			QuestEngine.getInstance().onUseSkill(new QuestEnv(effector.getTarget(), (Player) effector, 0), skillTemplate.getSkillId());
