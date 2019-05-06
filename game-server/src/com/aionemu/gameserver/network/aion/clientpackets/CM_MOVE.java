@@ -80,18 +80,7 @@ public class CM_MOVE extends AionClientPacket {
 		m.movementMask = type;
 
 		if (type == MovementMask.IMMEDIATE) { // stopping or turning
-			if (oldMask == MovementMask.IMMEDIATE) { // turning
-				player.getController().onMove();
-			} else {
-				m.setNewDirection(x, y, z, heading);
-				if ((oldMask & MovementMask.ABSOLUTE) == MovementMask.ABSOLUTE) { // update target destination coordinates
-					PacketSendUtility.broadcastToSightedPlayers(player,
-						new SM_MOVE(player, (byte) (MovementMask.POSITION | MovementMask.MANUAL | MovementMask.ABSOLUTE)));
-				}
-			}
-			// notify arrived
-			player.getController().onStopMove();
-			player.getFlyController().onStopGliding();
+			m.setNewDirection(x, y, z, heading);
 		} else {
 			if ((type & MovementMask.GLIDE) == MovementMask.GLIDE) {
 				m.glideFlag = glideFlag;
@@ -112,10 +101,7 @@ public class CM_MOVE extends AionClientPacket {
 					m.vectorY = vectorY;
 					m.vectorZ = vectorZ;
 				}
-				if (!m.isInMove())
-					player.getController().onStartMove();
 			} else {
-				player.getController().onMove();
 				if ((type & MovementMask.ABSOLUTE) == 0) {
 					float speed = player.getGameStats().getMovementSpeedFloat();
 					m.setNewDirection(x + m.vectorX * speed, y + m.vectorY * speed, player.isFlying() ? z + m.vectorZ * speed : z + m.vectorZ, heading);
@@ -141,6 +127,7 @@ public class CM_MOVE extends AionClientPacket {
 			player.getController().stopProtectionActiveTask();
 		World.getInstance().updatePosition(player, x, y, z, heading);
 		m.updateLastMove();
+		notifyControllers(player, oldMask);
 
 		if ((type & MovementMask.POSITION) == MovementMask.POSITION && (type & MovementMask.MANUAL) == MovementMask.MANUAL
 			|| type == MovementMask.IMMEDIATE)
@@ -151,6 +138,21 @@ public class CM_MOVE extends AionClientPacket {
 			m.updateFalling(z);
 		} else {
 			m.stopFalling(z);
+		}
+	}
+
+	private void notifyControllers(Player player, byte oldMovementMask) {
+		if (player.getMoveController().getMovementMask() == MovementMask.IMMEDIATE) { // stopping or turning
+			if (oldMovementMask == MovementMask.IMMEDIATE) // turning
+				player.getController().onMove();
+			// notify arrived
+			player.getController().onStopMove();
+			player.getFlyController().onStopGliding();
+		} else if ((type & MovementMask.POSITION) == MovementMask.POSITION && (type & MovementMask.MANUAL) == MovementMask.MANUAL
+			&& !player.getMoveController().isInMove()) { // start move or change direction
+			player.getController().onStartMove();
+		} else {
+			player.getController().onMove();
 		}
 	}
 
