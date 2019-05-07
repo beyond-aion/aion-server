@@ -1393,9 +1393,6 @@ public class Player extends Creature {
 
 	public int speedHackCounter;
 	public int abnormalHackCounter;
-	public long prevPosUT;
-	public byte prevMoveType;
-	private WorldPosition prevPos;
 
 	@Override
 	public ItemAttackType getAttackType() {
@@ -1790,16 +1787,6 @@ public class Player extends Creature {
 
 	public AbsoluteStatOwner getAbsoluteStats() {
 		return absStatsHolder;
-	}
-
-	public WorldPosition getPrevPos() {
-		if (getPosition() == null || !getPosition().isSpawned())
-			return null;
-		if (prevPos == null || prevPos.getMapId() != getPosition().getMapId()) {
-			prevPos = new WorldPosition(getPosition().getMapId());
-			prevPos.setXYZH(getPosition().getX(), getPosition().getY(), getPosition().getZ(), getPosition().getHeading());
-		}
-		return prevPos;
 	}
 
 	@Override

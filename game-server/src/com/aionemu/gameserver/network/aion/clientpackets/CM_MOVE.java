@@ -92,7 +92,7 @@ public class CM_MOVE extends AionClientPacket {
 				if ((type & MovementMask.ABSOLUTE) == MovementMask.ABSOLUTE) {
 					if (player.isInCustomState(CustomPlayerState.TELEPORTATION_MODE)) {
 						World.getInstance().updatePosition(player, x2, y2, z2, heading);
-						m.updateLastMove();
+						m.onMoveFromClient();
 						PacketSendUtility.broadcastToSightedPlayers(player, new SM_MOVE(player), true);
 						return;
 					}
@@ -126,7 +126,7 @@ public class CM_MOVE extends AionClientPacket {
 		if (player.isProtectionActive() && (player.getX() != x || player.getY() != y || player.getZ() > z + 0.5f))
 			player.getController().stopProtectionActiveTask();
 		World.getInstance().updatePosition(player, x, y, z, heading);
-		m.updateLastMove();
+		m.onMoveFromClient();
 		notifyControllers(player, oldMask);
 
 		if ((type & MovementMask.POSITION) == MovementMask.POSITION && (type & MovementMask.MANUAL) == MovementMask.MANUAL

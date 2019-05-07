@@ -246,22 +246,25 @@ public class AionConnection extends AConnection<AionServerPacket> {
 		}
 
 		String msg = "";
-		if (getAccount() != null) {
-			int id = getAccount().getId();
-			msg += " [Account ID: " + id + " Name: " + getAccount().getName() + "]";
-			LoginServer.getInstance().aionClientDisconnected(id);
+		Account account = getAccount();
+		if (account != null) {
+			msg += " " + account;
+			LoginServer.getInstance().aionClientDisconnected(account.getId());
 		}
 
 		Player player = getActivePlayer();
 		if (player != null) {
-			msg += " [Player: " + player.getName() + "]";
-			// force stop movement of player
-			player.getMoveController().abortMove();
-			PlayerLeaveWorldService.leaveWorldDelayed(player, 10 * 1000); // delayed to prevent ctrl+alt+del / close window exploit
+			msg += " " + player + " (client crash or connection loss)";
+			player.getMoveController().resetToLastPositionFromClient(); // avoid mapkick and bugging through walls
+			long millisSinceLastClientPacket = System.currentTimeMillis() - lastClientMessageTime;
+			long delayMs = Math.max(0, TimeUnit.SECONDS.toMillis(10) - millisSinceLastClientPacket);
+			PlayerLeaveWorldService.leaveWorldDelayed(player, delayMs); // delayed to prevent ctrl+alt+del / close window exploit
 		}
 
-		if (!msg.isEmpty())
-			log.info("Client disconnected" + msg);
+		if (msg.isEmpty())
+			msg = " " + this;
+
+		log.info("Client disconnected:" + msg);
 	}
 
 	@Override

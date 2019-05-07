@@ -10,6 +10,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.services.player.PlayerReviveService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.stats.StatFunctions;
+import com.aionemu.gameserver.world.WorldPosition;
 
 /**
  * @author ATracer
@@ -18,6 +19,9 @@ public class PlayerMoveController extends PlayableMoveController<Player> {
 
 	private float fallDistance;
 	private float lastFallZ;
+	private byte lastMovementMask;
+	private long lastPositionFromClientMillis;
+	private WorldPosition lastPositionFromClient;
 
 	public PlayerMoveController(Player owner) {
 		super(owner);
@@ -27,6 +31,38 @@ public class PlayerMoveController extends PlayableMoveController<Player> {
 	public void abortMove() {
 		super.abortMove();
 		stopFalling(owner.getZ());
+	}
+
+	public byte getLastMovementMask() {
+		return lastMovementMask;
+	}
+
+	public long getLastPositionFromClientMillis() {
+		return lastPositionFromClientMillis;
+	}
+
+	public WorldPosition getLastPositionFromClient() {
+		return lastPositionFromClient;
+	}
+
+	/**
+	 * This method should only be called from player move packets, not any calculated intermediate position updates by the server
+	 */
+	public void onMoveFromClient() {
+		updateLastMove();
+		lastMovementMask = getMovementMask();
+		lastPositionFromClientMillis = System.currentTimeMillis();
+		if (lastPositionFromClient == null || lastPositionFromClient.getMapId() != owner.getWorldId())
+			lastPositionFromClient = new WorldPosition(owner.getWorldId(), owner.getX(), owner.getY(), owner.getZ(), owner.getHeading());
+		else
+			lastPositionFromClient.setXYZH(owner.getX(), owner.getY(), owner.getZ(), owner.getHeading());
+	}
+
+	public void resetToLastPositionFromClient() {
+		abortMove();
+		if (lastPositionFromClient != null && owner.getWorldId() == lastPositionFromClient.getMapId())
+			owner.getPosition().setXYZH(lastPositionFromClient.getX(), lastPositionFromClient.getY(), lastPositionFromClient.getZ(),
+					lastPositionFromClient.getHeading());
 	}
 
 	public void updateFalling(float newZ) {

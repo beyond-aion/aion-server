@@ -15,6 +15,7 @@ import com.aionemu.gameserver.skillengine.effect.AbnormalState;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
+import com.aionemu.gameserver.world.WorldPosition;
 
 /**
  * @author Source
@@ -24,15 +25,16 @@ public class AntiHackService {
 	private static Logger log = LoggerFactory.getLogger(AntiHackService.class);
 
 	public static boolean canMove(Player player, float x, float y, float z, byte type) {
-		if (player.getPrevPos() == null)
+		PlayerMoveController m = player.getMoveController();
+		WorldPosition lastPositionFromClient = m.getLastPositionFromClient();
+		if (lastPositionFromClient == null || lastPositionFromClient.getMapId() != player.getWorldId())
 			return true;
 
 		if (SecurityConfig.ABNORMAL) {
 			if (!player.canPerformMove() && !player.getEffectController().isAbnormalSet(AbnormalState.PULLED)
 				&& (type & MovementMask.GLIDE) != MovementMask.GLIDE) {
 				if (player.abnormalHackCounter > SecurityConfig.ABNORMAL_COUNTER) {
-					punish(player, x, y, z, type, "possibly performed illegal move action (Anti-Abnormal Hack)");
-					return false;
+					return punish(player, false, "possibly performed illegal move action (Anti-Abnormal Hack)");
 				} else
 					player.abnormalHackCounter++;
 			} else
@@ -43,7 +45,6 @@ public class AntiHackService {
 		if (SecurityConfig.SPEEDHACK) {
 			if (type != 0) {
 				if ((type & MovementMask.POSITION) == MovementMask.POSITION) {
-					PlayerMoveController m = player.getMoveController();
 					double vector2D = PositionUtil.getDistance(x, y, m.getTargetX2(), m.getTargetY2());
 
 					if (vector2D != 0) {
@@ -55,20 +56,18 @@ public class AntiHackService {
 							player.speedHackCounter--;
 
 						if (player.speedHackCounter > SecurityConfig.SPEEDHACK_COUNTER) {
-							return punish(player, x, y, z, type, "possibly used speed hack - SHC:" + player.speedHackCounter + " S:" + speed + " V:"
+							return punish(player, false, "possibly used speed hack - SHC:" + player.speedHackCounter + " S:" + speed + " V:"
 								+ Math.rint(1000.0 * vector2D) / 1000.0 + " type:" + type);
 						}
 					}
 				} else if ((type & MovementMask.ABSOLUTE) == MovementMask.ABSOLUTE && (type & MovementMask.GLIDE) != MovementMask.GLIDE) {
-					double vector = PositionUtil.getDistance(x, y, player.getPrevPos().getX(), player.getPrevPos().getY());
-					long timeDiff = System.currentTimeMillis() - player.prevPosUT;
+					double vector = PositionUtil.getDistance(x, y, lastPositionFromClient.getX(), lastPositionFromClient.getY());
+					long timeDiff = System.currentTimeMillis() - m.getLastPositionFromClientMillis();
 
 					if ((type & MovementMask.POSITION) == MovementMask.POSITION) {
 						boolean isMoveToTarget = false;
 						if (player.getTarget() != null && player.getTarget() != player) {
-							PlayerMoveController m = player.getMoveController();
-							double distDiff = PositionUtil.getDistance(Math.round(player.getTarget().getX()), Math.round(player.getTarget().getY()),
-								Math.round(m.getTargetX2()), Math.round(m.getTargetY2()));
+							double distDiff = PositionUtil.getDistance(player.getTarget().getX(), player.getTarget().getY(), m.getTargetX2(), m.getTargetY2());
 							isMoveToTarget = distDiff <= 5;
 						}
 
@@ -85,58 +84,50 @@ public class AntiHackService {
 						player.speedHackCounter--;
 
 					if (SecurityConfig.PUNISH > 0 && player.speedHackCounter > SecurityConfig.SPEEDHACK_COUNTER + 5) {
-						return punish(player, x, y, z, type,
+						return punish(player, false,
 							"possibly used speed hack - SHC:" + player.speedHackCounter + " SMS:" + Math.rint(100.0 * (timeDiff * (speed + 0.25) * 0.001)) / 100.0
 								+ " TDF:" + timeDiff + " VTD:" + Math.rint(1000.0 * (timeDiff * (speed + 0.85) * 0.001)) / 1000.0 + " VS:"
 								+ Math.rint(100.0 * vector) / 100.0 + " type:" + type);
 					} else if (player.speedHackCounter > SecurityConfig.SPEEDHACK_COUNTER) {
-						moveBack(player, x, y, z, type);
+						moveBack(player, false);
 						return false;
 					}
 				}
 			} else {
-				double vector = PositionUtil.getDistance(x, y, player.getPrevPos().getX(), player.getPrevPos().getY());
-				long timeDiff = System.currentTimeMillis() - player.prevPosUT;
+				double vector = PositionUtil.getDistance(x, y, lastPositionFromClient.getX(), lastPositionFromClient.getY());
+				long timeDiff = System.currentTimeMillis() - m.getLastPositionFromClientMillis();
 
-				if (player.prevMoveType == 0 && vector > timeDiff * speed * 0.00075)
+				if (m.getLastMovementMask() == 0 && vector > timeDiff * speed * 0.00075)
 					player.speedHackCounter++;
 
 				if (SecurityConfig.PUNISH > 0 && player.speedHackCounter > SecurityConfig.SPEEDHACK_COUNTER + 5) {
-					return punish(player, x, y, z, type,
-						"possibly used speed hack - SHC:" + player.speedHackCounter + " TD:" + Math.rint(1000.0 * timeDiff) / 1000.0 + " VTD:"
-							+ Math.rint(1000.0 * (timeDiff * speed * 0.00075)) / 1000.0 + " VS:" + Math.rint(100.0 * vector) / 100.0 + " type:" + type);
+					return punish(player, false, "possibly used speed hack - SHC:" + player.speedHackCounter + " TD:" + Math.rint(1000.0 * timeDiff) / 1000.0
+						+ " VTD:" + Math.rint(1000.0 * (timeDiff * speed * 0.00075)) / 1000.0 + " VS:" + Math.rint(100.0 * vector) / 100.0 + " type:" + type);
 				} else if (player.speedHackCounter > SecurityConfig.SPEEDHACK_COUNTER + 2) {
-					moveBack(player, x, y, z, type);
+					moveBack(player, false);
 					return false;
 				}
 			}
-
-			// Store prev. move info
-			player.getPrevPos().setXYZH(x, y, z, player.getHeading());
-			player.prevPosUT = System.currentTimeMillis();
-			if (player.prevMoveType != type)
-				player.prevMoveType = type;
 		}
 
 		if (SecurityConfig.TELEPORTATION) {
 			double delta = PositionUtil.getDistance(x, y, player.getX(), player.getY()) / speed;
 			if (speed > 5.0 && delta > 5.0 && (type & MovementMask.GLIDE) != MovementMask.GLIDE) {
-				return punish(player, 0, 0, 0, type,
-					"possibly used teleport hack - S:" + speed + " D:" + Math.rint(1000.0 * delta) / 1000.0 + " type:" + type);
+				return punish(player, true, "possibly used teleport hack - S:" + speed + " D:" + Math.rint(1000.0 * delta) / 1000.0 + " type:" + type);
 			}
 		}
 
 		return true;
 	}
 
-	private static boolean punish(Player player, float x, float y, float z, byte type, String message) {
+	private static boolean punish(Player player, boolean normalMovePacket, String message) {
 		AuditLogger.log(player, message);
 		switch (SecurityConfig.PUNISH) {
 			case 1:
-				moveBack(player, x, y, z, type);
+				moveBack(player, normalMovePacket);
 				return false;
 			case 2:
-				moveBack(player, x, y, z, type);
+				moveBack(player, normalMovePacket);
 				if (player.speedHackCounter > SecurityConfig.SPEEDHACK_COUNTER * 3 || player.abnormalHackCounter > SecurityConfig.ABNORMAL_COUNTER * 3)
 					player.getClientConnection().close(new SM_QUIT_RESPONSE());
 				return false;
@@ -148,15 +139,16 @@ public class AntiHackService {
 		}
 	}
 
-	private static void moveBack(Player player, float x, float y, float z, byte type) {
-		if (x == 0 && y == 0 && z == 0)
+	private static void moveBack(Player player, boolean normalMovePacket) {
+		if (normalMovePacket)
 			PacketSendUtility.broadcastPacketAndReceive(player, new SM_MOVE(player));
-		else
-			PacketSendUtility.broadcastPacketAndReceive(player, new SM_FORCED_MOVE(player, player.getObjectId(), x, y, z));
+		else {
+			WorldPosition lastPos = player.getMoveController().getLastPositionFromClient();
+			PacketSendUtility.broadcastPacketAndReceive(player,
+				new SM_FORCED_MOVE(player, player.getObjectId(), lastPos.getX(), lastPos.getY(), lastPos.getZ()));
+		}
 		player.getMoveController().updateLastMove();
-		player.prevPosUT = System.currentTimeMillis();
-		if (player.prevMoveType != type)
-			player.prevMoveType = type;
+		player.speedHackCounter = 0;
 	}
 
 	public static void checkAionBin(int size, AionConnection con) {

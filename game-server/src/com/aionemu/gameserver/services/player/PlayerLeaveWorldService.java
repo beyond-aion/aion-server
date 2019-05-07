@@ -64,7 +64,7 @@ public class PlayerLeaveWorldService {
 	 * 
 	 * @see #leaveWorld(Player)
 	 */
-	public static void leaveWorldDelayed(Player player, int delayInMillis) {
+	public static void leaveWorldDelayed(Player player, long delayInMillis) {
 		Future<?> leaveWorldTask = ThreadPoolManager.getInstance().schedule(() -> leaveWorld(player), delayInMillis);
 		player.getController().addTask(TaskId.DESPAWN, leaveWorldTask);
 	}
