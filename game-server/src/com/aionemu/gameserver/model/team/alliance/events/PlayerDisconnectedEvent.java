@@ -10,7 +10,6 @@ import com.aionemu.gameserver.model.team.alliance.PlayerAllianceService;
 import com.aionemu.gameserver.model.team.common.legacy.PlayerAllianceEvent;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ALLIANCE_INFO;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ALLIANCE_MEMBER_INFO;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_SHOW_BRAND;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
@@ -51,7 +50,6 @@ public class PlayerDisconnectedEvent implements TeamEvent {
 				PacketSendUtility.sendPacket(member, SM_SYSTEM_MESSAGE.STR_FORCE_HE_BECOME_OFFLINE(disconnected.getName()));
 				PacketSendUtility.sendPacket(member, new SM_ALLIANCE_MEMBER_INFO(disconnectedMember, PlayerAllianceEvent.DISCONNECTED));
 				PacketSendUtility.sendPacket(member, new SM_ALLIANCE_INFO(alliance));
-				PacketSendUtility.sendPacket(member, new SM_SHOW_BRAND(0, 0, alliance.isInLeague()));
 			}
 		});
 

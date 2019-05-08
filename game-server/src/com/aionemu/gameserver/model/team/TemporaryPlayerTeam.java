@@ -39,12 +39,12 @@ public abstract class TemporaryPlayerTeam<TM extends TeamMember<Player>> extends
 	public abstract int getMaxExpPlayerLevel();
 
 	public void onBrand(int targetObjectId, int brandId) {
-		brands.put(targetObjectId, brandId);
+		if (targetObjectId == 0) {
+			brands.values().removeIf(bId -> bId == brandId);
+		} else {
+			brands.put(targetObjectId, brandId);
+		}
 		onEvent(new ShowBrandEvent<>(this, targetObjectId, brandId));
-	}
-
-	public void removeBrand(int targetObjectId) {
-		brands.remove(targetObjectId);
 	}
 
 	public void sendBrands(Player member) {

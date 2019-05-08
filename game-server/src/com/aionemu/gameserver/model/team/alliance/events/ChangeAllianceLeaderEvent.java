@@ -7,7 +7,6 @@ import com.aionemu.gameserver.model.team.alliance.PlayerAllianceService;
 import com.aionemu.gameserver.model.team.alliance.events.AssignViceCaptainEvent.AssignType;
 import com.aionemu.gameserver.model.team.common.events.ChangeLeaderEvent;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ALLIANCE_INFO;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_SHOW_BRAND;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.collections.Predicates;
@@ -54,7 +53,6 @@ public class ChangeAllianceLeaderEvent extends ChangeLeaderEvent<PlayerAlliance>
 		team.forEach(member -> {
 			if (!inLeague) {
 				PacketSendUtility.sendPacket(member, new SM_ALLIANCE_INFO(team));
-				PacketSendUtility.sendPacket(member, new SM_SHOW_BRAND(0, 0, false));
 			}
 			if (!player.equals(member)) {
 				// eventPlayer null only when leader leave by own will and wee not must inform him about new leader

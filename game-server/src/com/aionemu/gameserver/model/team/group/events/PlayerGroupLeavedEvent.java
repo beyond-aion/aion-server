@@ -35,7 +35,6 @@ public class PlayerGroupLeavedEvent extends PlayerLeavedEvent<PlayerGroupMember,
 			team.onEvent(new PlayerGroupStopMentoringEvent(team, leavedPlayer));
 		}
 
-		team.removeBrand(leavedPlayer.getObjectId());
 		team.forEach(member -> {
 			PacketSendUtility.sendPacket(member, new SM_GROUP_MEMBER_INFO(team, leavedPlayer, GroupEvent.LEAVE));
 

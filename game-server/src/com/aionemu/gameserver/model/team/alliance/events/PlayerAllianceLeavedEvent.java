@@ -8,7 +8,6 @@ import com.aionemu.gameserver.model.team.common.events.PlayerLeavedEvent;
 import com.aionemu.gameserver.model.team.common.legacy.PlayerAllianceEvent;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ALLIANCE_INFO;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ALLIANCE_MEMBER_INFO;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_SHOW_BRAND;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
@@ -54,13 +53,11 @@ public class PlayerAllianceLeavedEvent extends PlayerLeavedEvent<PlayerAllianceM
 				leaveMsg = SM_SYSTEM_MESSAGE.STR_PARTY_ALLIANCE_DISPERSED();
 				break;
 		}
-		team.removeBrand(leavedPlayer.getObjectId());
 		team.forEach(player -> {
 			PacketSendUtility.sendPacket(player, leaveMsg);
 			if (reason != LeaveReson.DISBAND) {
 				PacketSendUtility.sendPacket(player, new SM_ALLIANCE_MEMBER_INFO(leavedTeamMember, PlayerAllianceEvent.LEAVE));
 				PacketSendUtility.sendPacket(player, new SM_ALLIANCE_INFO(team));
-				PacketSendUtility.sendPacket(player, new SM_SHOW_BRAND(0, 0, team.isInLeague()));
 			}
 		});
 		switch (reason) {
