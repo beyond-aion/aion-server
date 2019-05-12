@@ -28,6 +28,6 @@ public class CM_GET_MAIL_ATTACHMENT extends AionClientPacket {
 	@Override
 	protected void runImpl() {
 		Player player = getConnection().getActivePlayer();
-		MailService.getInstance().getAttachments(player, mailObjId, attachmentType);
+		MailService.getAttachments(player, mailObjId, attachmentType);
 	}
 }

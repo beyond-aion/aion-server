@@ -418,7 +418,7 @@ public final class PlayerEnterWorldService {
 
 		// ----------------------------- Retail sequence -----------------------------
 		client.sendPacket(new SM_LEGION_DOMINION_LOC_INFO());
-		MailService.getInstance().onPlayerLogin(player);
+		MailService.onPlayerLogin(player);
 		HousingBidService.getInstance().onPlayerLogin(player); // must ensure player mailbox is initialized first
 		AtreianPassportService.getInstance().onLogin(player);
 		sendMacroList(client, player);

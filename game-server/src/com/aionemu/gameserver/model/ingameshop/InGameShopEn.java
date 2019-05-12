@@ -274,8 +274,8 @@ public class InGameShopEn {
 					}
 
 					if (request.gift) {
-						SystemMailService.getInstance().sendMail(player.getName(), request.receiver, "In Game Shop", request.message, item.getItemId(),
-							item.getItemCount(), 0, LetterType.BLACKCLOUD);
+						SystemMailService.sendMail(player.getName(), request.receiver, "In Game Shop", request.message, item.getItemId(), item.getItemCount(), 0,
+							LetterType.BLACKCLOUD);
 						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_INGAMESHOP_GIFT_SUCCESS());
 						if (LoggingConfig.LOG_INGAMESHOP)
 							log.info("[INGAMESHOP] > Account name: " + player.getAcountName() + ", PlayerName: " + player.getName() + " BUY ITEM: "

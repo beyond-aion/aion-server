@@ -26,6 +26,6 @@ public class CM_READ_MAIL extends AionClientPacket {
 	@Override
 	protected void runImpl() {
 		Player player = getConnection().getActivePlayer();
-		MailService.getInstance().readMail(player, mailObjId);
+		MailService.readMail(player, mailObjId);
 	}
 }

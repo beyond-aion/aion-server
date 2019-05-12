@@ -77,8 +77,7 @@ public class RvrBossAI extends AggressiveNpcAI {
 			int hour = ServerTime.now().getHour();
 			if (hour >= 19 && hour <= 23) {
 				for (Player rewardedPlayer : SiegeService.getInstance().getRvrEventPlayers()) {
-					SystemMailService.getInstance().sendMail("EventService", rewardedPlayer.getName(), "EventReward", "Medal", 186000147, 1, 0,
-						LetterType.NORMAL);
+					SystemMailService.sendMail("EventService", rewardedPlayer.getName(), "EventReward", "Medal", 186000147, 1, 0, LetterType.NORMAL);
 				}
 			}
 			SiegeService.getInstance().clearRvrEventPlayers();

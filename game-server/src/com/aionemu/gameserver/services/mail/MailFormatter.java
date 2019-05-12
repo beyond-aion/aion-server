@@ -37,7 +37,7 @@ public final class MailFormatter {
 		String title = template.getFormattedTitle(formatter);
 		String body = template.getFormattedMessage(formatter);
 
-		SystemMailService.getInstance().sendMail("$$CASH_ITEM_MAIL", recipientName, title, body, itemObjectId, itemCount, 0, LetterType.BLACKCLOUD);
+		SystemMailService.sendMail("$$CASH_ITEM_MAIL", recipientName, title, body, itemObjectId, itemCount, 0, LetterType.BLACKCLOUD);
 	}
 
 	public static void sendHouseMaintenanceMail(House ownedHouse, int warnCount, long impoundTime) {
@@ -74,7 +74,7 @@ public final class MailFormatter {
 		String title = template.getFormattedTitle(null);
 		String message = template.getFormattedMessage(formatter);
 
-		SystemMailService.getInstance().sendMail(templateName, ownedHouse.getButler().getMasterName(), title, message, 0, 0, 0, LetterType.NORMAL);
+		SystemMailService.sendMail(templateName, ownedHouse.getButler().getMasterName(), title, message, 0, 0, 0, LetterType.NORMAL);
 	}
 
 	public static void sendHouseAuctionMail(House ownedHouse, PlayerCommonData playerData, AuctionResult result, long time, long returnKinah) {
@@ -101,7 +101,7 @@ public final class MailFormatter {
 		String title = template.getFormattedTitle(formatter);
 		String message = template.getFormattedMessage(formatter);
 
-		SystemMailService.getInstance().sendMail("$$HS_AUCTION_MAIL", playerData.getName(), title, message, 0, 0, returnKinah, LetterType.NORMAL);
+		SystemMailService.sendMail("$$HS_AUCTION_MAIL", playerData.getName(), title, message, 0, 0, returnKinah, LetterType.NORMAL);
 	}
 
 	public static void sendAbyssRewardMail(SiegeLocation siegeLocation, PlayerCommonData playerData, AbyssSiegeLevel level, SiegeResult result,
@@ -130,7 +130,7 @@ public final class MailFormatter {
 		String title = template.getFormattedTitle(formatter);
 		String message = template.getFormattedMessage(formatter);
 
-		SystemMailService.getInstance().sendMail("$$ABYSS_REWARD_MAIL", playerData.getName(), title, message, attachedItemObjId, attachedItemCount,
-			attachedKinahCount, LetterType.NORMAL);
+		SystemMailService.sendMail("$$ABYSS_REWARD_MAIL", playerData.getName(), title, message, attachedItemObjId, attachedItemCount, attachedKinahCount,
+			LetterType.NORMAL);
 	}
 }

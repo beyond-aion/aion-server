@@ -132,8 +132,8 @@ public abstract class GameEvent extends GeneralInstanceHandler implements Compar
 			Player p = iter.next();
 			TeleportService.teleportTo(p, statistics.get(p).getOrigin());
 			if (BattleService.getInstance().getRewardId() != 0) {
-				SystemMailService.getInstance().sendMail("Beyond Aion", p.getName(), "Reward for Participating", text,
-					BattleService.getInstance().getRewardId(), 1, 0, LetterType.NORMAL);
+				SystemMailService.sendMail("Beyond Aion", p.getName(), "Reward for Participating", text, BattleService.getInstance().getRewardId(), 1, 0,
+					LetterType.NORMAL);
 			}
 		}
 	}

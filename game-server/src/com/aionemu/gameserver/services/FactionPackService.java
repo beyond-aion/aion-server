@@ -72,8 +72,7 @@ public class FactionPackService {
 			ItemTemplate template = DataManager.ITEM_DATA.getItemTemplate(e.getId());
 			if (template != null && template.getRace() == player.getOppositeRace())
 				continue;
-			SystemMailService.getInstance().sendMail("Beyond Aion",
-				player.getName(), "Faction Pack", "Greetings Daeva!\n\n"
+			SystemMailService.sendMail("Beyond Aion", player.getName(), "Faction Pack", "Greetings Daeva!\n\n"
 					+ "In gratitude for your decision to join the Elyos faction we prepared an additional item pack.\n\n" + "Enjoy your stay on Beyond Aion!",
 				e.getId(), e.getCount(), 0, LetterType.EXPRESS);
 		}

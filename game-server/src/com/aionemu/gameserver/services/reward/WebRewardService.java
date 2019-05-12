@@ -83,7 +83,7 @@ public class WebRewardService {
 			itemCount = item.getCount();
 		}
 
-		return SystemMailService.getInstance().sendMail("$$CASH_ITEM_MAIL", player.getName(), item.getId() + ", " + item.getCount(),
+		return SystemMailService.sendMail("$$CASH_ITEM_MAIL", player.getName(), item.getId() + ", " + item.getCount(),
 			"0, " + (System.currentTimeMillis() / 1000) + ",", itemId, itemCount, kinahCount, LetterType.BLACKCLOUD);
 	}
 

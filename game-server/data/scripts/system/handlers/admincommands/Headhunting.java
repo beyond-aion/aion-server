@@ -264,7 +264,7 @@ public class Headhunting extends AdminCommand {
 							rank = "consolation";
 					}
 					for (RewardItem item : items) {
-						if (SystemMailService.getInstance().sendMail("Headhunting Corp", name, "Rewards",
+						if (SystemMailService.sendMail("Headhunting Corp", name, "Rewards",
 							"We congratulate you for reaching the " + rank + " rank in this season with a total of " + hunter.getKills() + " kills.", item.getId(),
 							item.getCount(), 0, LetterType.BLACKCLOUD)) {
 							sentMails++;

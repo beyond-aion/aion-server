@@ -137,14 +137,14 @@ public class SysMail extends AdminCommand {
 			if (letterType == LetterType.BLACKCLOUD)
 				MailFormatter.sendBlackCloudMail(recipient, item, count);
 			else
-				SystemMailService.getInstance().sendMail(sender, recipient, title, message, item, count, kinah, letterType);
+				SystemMailService.sendMail(sender, recipient, title, message, item, count, kinah, letterType);
 		} else {
 			for (Player player : World.getInstance().getAllPlayers()) {
 				if (recipientType.isAllowed(player.getRace())) {
 					if (letterType == LetterType.BLACKCLOUD)
 						MailFormatter.sendBlackCloudMail(player.getName(), item, count);
 					else
-						SystemMailService.getInstance().sendMail(sender, player.getName(), title, message, item, count, kinah, letterType);
+						SystemMailService.sendMail(sender, player.getName(), title, message, item, count, kinah, letterType);
 				}
 			}
 		}

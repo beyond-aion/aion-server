@@ -233,7 +233,7 @@ public class ChallengeTaskService {
 								itemId = reward.getRewardId();
 								itemCount = reward.getItemCount();
 								String recipientName = DAOManager.getDAO(PlayerDAO.class).loadPlayerCommonData(objectId).getName();
-								SystemMailService.getInstance().sendMail("Legion reward", recipientName, "", "", itemId, itemCount, 0, LetterType.NORMAL);
+								SystemMailService.sendMail("Legion reward", recipientName, "", "", itemId, itemCount, 0, LetterType.NORMAL);
 								break;
 							}
 						}

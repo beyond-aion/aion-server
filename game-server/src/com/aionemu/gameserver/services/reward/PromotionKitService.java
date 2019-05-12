@@ -58,7 +58,7 @@ public class PromotionKitService {
 			if (!itemMap.containsKey(level))
 				continue;
 			for (RewardItem e : itemMap.get(level)) {
-				SystemMailService.getInstance().sendMail("Beyond Aion", player.getName(), "Promotion Kit",
+				SystemMailService.sendMail("Beyond Aion", player.getName(), "Promotion Kit",
 					"Greetings Daeva!\n\n"
 						+ "In gratitude for your decision to level your character during our promotion phase we prepared an additional item pack.\n\n"
 						+ "Enjoy your stay on Beyond Aion!",

@@ -25,7 +25,6 @@ import com.aionemu.gameserver.services.item.ItemFactory;
 import com.aionemu.gameserver.services.player.PlayerMailboxState;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.idfactory.IDFactory;
-import com.aionemu.gameserver.world.World;
 
 /**
  * @author xTz
@@ -34,25 +33,10 @@ public class SystemMailService {
 
 	private static final Logger log = LoggerFactory.getLogger("SYSMAIL_LOG");
 
-	public static final SystemMailService getInstance() {
-		return SingletonHolder.instance;
-	}
-
 	private SystemMailService() {
-		log.info("SystemMailService: Initialized.");
 	}
 
-	/**
-	 * @param sender
-	 * @param recipientName
-	 * @param title
-	 * @param message
-	 * @param attachedItemId
-	 * @param attachedItemCount
-	 * @param attachedKinahCount
-	 * @param express
-	 */
-	public boolean sendMail(String sender, String recipientName, String title, String message, int attachedItemId, long attachedItemCount,
+	public static boolean sendMail(String sender, String recipientName, String title, String message, int attachedItemId, long attachedItemCount,
 		long attachedKinahCount, LetterType letterType) {
 
 		if (attachedItemId != 0) {
@@ -60,21 +44,21 @@ public class SystemMailService {
 				return false;
 			ItemTemplate itemTemplate = DataManager.ITEM_DATA.getItemTemplate(attachedItemId);
 			if (itemTemplate == null) {
-				log.info("[SYSMAILSERVICE] > [SenderName: " + sender + "] [RecipientName: " + recipientName + "] RETURN ITEM ID:" + attachedItemId
+				log.warn("[SYSMAILSERVICE] > [SenderName: " + sender + "] [RecipientName: " + recipientName + "] RETURN ITEM ID:" + attachedItemId
 					+ " ITEM COUNT " + attachedItemCount + " KINAH COUNT " + attachedKinahCount + " ITEM TEMPLATE IS MISSING ");
 				return false;
 			}
 		}
 
 		if (recipientName.length() > 16) {
-			log.info("[SYSMAILSERVICE] > [SenderName: " + sender + "] [RecipientName: " + recipientName + "] ITEM RETURN" + attachedItemId
-				+ " ITEM COUNT " + attachedItemCount + " KINAH COUNT " + attachedKinahCount + " RECIPIENT NAME LENGTH > 16 ");
+			log.warn("[SYSMAILSERVICE] > [SenderName: " + sender + "] [RecipientName: " + recipientName + "] ITEM RETURN" + attachedItemId + " ITEM COUNT "
+				+ attachedItemCount + " KINAH COUNT " + attachedKinahCount + " RECIPIENT NAME LENGTH > 16 ");
 			return false;
 		}
 
 		if (!sender.startsWith("$$") && sender.length() > 16) {
-			log.info("[SYSMAILSERVICE] > [SenderName: " + sender + "] [RecipientName: " + recipientName + "] ITEM RETURN" + attachedItemId
-				+ " ITEM COUNT " + attachedItemCount + " KINAH COUNT " + attachedKinahCount + " SENDER NAME LENGTH > 16 ");
+			log.warn("[SYSMAILSERVICE] > [SenderName: " + sender + "] [RecipientName: " + recipientName + "] ITEM RETURN" + attachedItemId + " ITEM COUNT "
+				+ attachedItemCount + " KINAH COUNT " + attachedKinahCount + " SENDER NAME LENGTH > 16 ");
 			return false;
 		}
 
@@ -91,23 +75,16 @@ public class SystemMailService {
 			return false;
 		}
 
-		Player recipient = World.getInstance().findPlayer(recipientCommonData.getPlayerObjId());
-		if (recipient != null) {
-			if (recipient.getMailbox() != null && !(recipient.getMailbox().size() < 200)) {
-				log.info("[SYSMAILSERVICE] > [SenderName: " + sender + "] [RecipientName: " + recipientCommonData.getName() + "] ITEM RETURN"
-					+ attachedItemId + " ITEM COUNT " + attachedItemCount + " KINAH COUNT " + attachedKinahCount + " MAILBOX FULL ");
-				return false;
-			}
-		} else if (recipientCommonData.getMailboxLetters() > 199) {
+		if (recipientCommonData.getMailboxLetters() > 199) {
+			log.info("[SYSMAILSERVICE] > [SenderName: " + sender + "] [RecipientName: " + recipientCommonData.getName() + "] ITEM RETURN" + attachedItemId
+				+ " ITEM COUNT " + attachedItemCount + " KINAH COUNT " + attachedKinahCount + " MAILBOX FULL ");
 			return false;
 		}
 		Item attachedItem = null;
 		long finalAttachedKinahCount = 0;
-		int itemId = attachedItemId;
-		long count = attachedItemCount;
 
-		if (itemId != 0) {
-			Item senderItem = ItemFactory.newItem(itemId, count);
+		if (attachedItemId != 0) {
+			Item senderItem = ItemFactory.newItem(attachedItemId, attachedItemCount);
 			if (senderItem != null) {
 				senderItem.setEquipped(false);
 				senderItem.setEquipmentSlot(0);
@@ -119,10 +96,9 @@ public class SystemMailService {
 		if (attachedKinahCount > 0)
 			finalAttachedKinahCount = attachedKinahCount;
 
-		String finalSender = sender;
 		Timestamp time = new Timestamp(System.currentTimeMillis());
 		Letter newLetter = new Letter(IDFactory.getInstance().nextId(), recipientCommonData.getPlayerObjId(), attachedItem, finalAttachedKinahCount,
-			title, message, finalSender, time, true, letterType);
+			title, message, sender, time, true, letterType);
 
 		if (!DAOManager.getDAO(MailDAO.class).storeLetter(time, newLetter))
 			return false;
@@ -131,45 +107,35 @@ public class SystemMailService {
 			if (!DAOManager.getDAO(InventoryDAO.class).store(attachedItem, recipientCommonData.getPlayerObjId()))
 				return false;
 
-		/**
-		 * Send mail update packets
-		 */
-		if (recipient != null && recipient.getMailbox() != null) {
-			Mailbox recipientMailbox = recipient.getMailbox();
-			recipientMailbox.putLetterToMailbox(newLetter);
-
-			PacketSendUtility.sendPacket(recipient, new SM_MAIL_SERVICE(recipient.getMailbox()));
-			recipientMailbox.isMailListUpdateRequired = true;
-
-			// if recipient have opened mail list we should update it
-			if (recipientMailbox.mailBoxState != 0) {
-				boolean isPostman = (recipientMailbox.mailBoxState & PlayerMailboxState.EXPRESS) == PlayerMailboxState.EXPRESS;
-				PacketSendUtility.sendPacket(recipient, new SM_MAIL_SERVICE(recipient, recipientMailbox.getLetters(), isPostman));
-			}
-
-			if (letterType == LetterType.EXPRESS)
-				PacketSendUtility.sendPacket(recipient, SM_SYSTEM_MESSAGE.STR_POSTMAN_NOTIFY());
-			/*
-			 * else if (letterType == LetterType.BLACKCLOUD) PacketSendUtility.sendPacket(recipient, SM_SYSTEM_MESSAGE.STR_MAIL_CASHITEM_BUY(itemId));
-			 */
-		}
-
-		/**
-		 * Update loaded common data and db if player is offline
-		 */
-		if (!recipientCommonData.isOnline()) {
-			recipientCommonData.setMailboxLetters(recipientCommonData.getMailboxLetters() + 1);
-			DAOManager.getDAO(MailDAO.class).updateOfflineMailCounter(recipientCommonData);
-		}
 		if (LoggingConfig.LOG_SYSMAIL)
-			log.info("[SYSMAILSERVICE] > [SenderName: " + sender + "] [RecipientName: " + recipientName + "] RETURN ITEM ID:" + itemId + " ITEM COUNT "
-				+ attachedItemCount + " KINAH COUNT " + attachedKinahCount + " MESSAGE SUCCESSFULLY SENDED ");
+			log.info("[SYSMAILSERVICE] > [SenderName: " + sender + "] [RecipientName: " + recipientName + "] RETURN ITEM ID:" + attachedItemId
+				+ " ITEM COUNT " + attachedItemCount + " KINAH COUNT " + attachedKinahCount + " MESSAGE SUCCESSFULLY SENDED ");
+
+		updateRecipientMailbox(recipientCommonData, newLetter);
 		return true;
 	}
 
-	private static class SingletonHolder {
+	static void updateRecipientMailbox(PlayerCommonData recipientCommonData, Letter newLetter) {
+		Player recipient = recipientCommonData.getPlayer();
+		if (recipient == null) {
+			recipientCommonData.setMailboxLetters(recipientCommonData.getMailboxLetters() + 1);
+			DAOManager.getDAO(MailDAO.class).updateOfflineMailCounter(recipientCommonData);
+		} else if (recipient.getMailbox() != null) { // Send mail update packets
+			Mailbox mailbox = recipient.getMailbox();
+			mailbox.putLetterToMailbox(newLetter);
+			recipientCommonData.setMailboxLetters(mailbox.size());
 
-		protected static final SystemMailService instance = new SystemMailService();
+			PacketSendUtility.sendPacket(recipient, new SM_MAIL_SERVICE());
+
+			// refresh letters if recipient is currently looking into his mailbox
+			if (mailbox.mailBoxState != 0) {
+				boolean isPostman = (mailbox.mailBoxState & PlayerMailboxState.EXPRESS) == PlayerMailboxState.EXPRESS;
+				PacketSendUtility.sendPacket(recipient, new SM_MAIL_SERVICE(recipient, mailbox.getLetters(), isPostman));
+			}
+
+			if (newLetter.getLetterType() == LetterType.EXPRESS)
+				PacketSendUtility.sendPacket(recipient, SM_SYSTEM_MESSAGE.STR_POSTMAN_NOTIFY());
+			// else if (newLetter.getLetterType() == LetterType.BLACKCLOUD) PacketSendUtility.sendPacket(recipient, SM_SYSTEM_MESSAGE.STR_MAIL_CASHITEM_BUY(itemId));
+		}
 	}
-
 }

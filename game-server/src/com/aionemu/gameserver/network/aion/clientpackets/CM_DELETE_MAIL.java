@@ -30,6 +30,6 @@ public class CM_DELETE_MAIL extends AionClientPacket {
 	@Override
 	protected void runImpl() {
 		Player player = getConnection().getActivePlayer();
-		MailService.getInstance().deleteMail(player, mailObjIds);
+		MailService.deleteMail(player, mailObjIds);
 	}
 }

@@ -24,7 +24,6 @@ public class Mailbox {
 	private Map<Integer, Letter> mails = new ConcurrentHashMap<>();
 	private Map<Integer, Letter> reserveMail = new ConcurrentHashMap<>();
 	private Player owner;
-	public boolean isMailListUpdateRequired;
 
 	// 0x00 - closed
 	// 0x01 - regular
@@ -142,28 +141,21 @@ public class Mailbox {
 		return count;
 	}
 
-	/**
-	 * @return
-	 */
 	public boolean haveFreeSlots() {
 		return mails.size() < 100;
 	}
 
-	/**
-	 * @param letterId
-	 */
 	public void removeLetter(int letterId) {
 		mails.remove(letterId);
 		uploadReserveLetters();
+		owner.getCommonData().setMailboxLetters(size());
 	}
 
 	/**
-	 * Current size of mailbox
-	 * 
-	 * @return
+	 * Current size of mailbox (including those in overflow storage)
 	 */
 	public int size() {
-		return mails.size();
+		return mails.size() + reserveMail.size();
 	}
 
 	public void uploadReserveLetters() {
@@ -175,7 +167,7 @@ public class Mailbox {
 				} else
 					break;
 			}
-			MailService.getInstance().refreshMail(getOwner());
+			MailService.refreshMail(getOwner());
 		}
 	}
 

@@ -57,7 +57,7 @@ public class BonusPackService {
 			return;
 
 		for (Map.Entry<Integer, Integer> e : rewards.entrySet()) {
-			SystemMailService.getInstance().sendMail("Beyond Aion",	player.getName(), "Bonus Pack",
+			SystemMailService.sendMail("Beyond Aion",	player.getName(), "Bonus Pack",
 				"Greetings Daeva!\n\n" + "You have reached level 65 with your first character and therefore we have a special something for you."
 					+ " In gratitude for your support we have prepared a package with valuable items for you.\n\n"
 					+ "Enjoy your stay on Beyond Aion!", e.getKey(), e.getValue(), 0, LetterType.EXPRESS);

@@ -1,7 +1,7 @@
 package com.aionemu.gameserver.services.mail;
 
 import java.sql.Timestamp;
-import java.util.Arrays;
+import java.util.Collections;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,6 +17,7 @@ import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Letter;
 import com.aionemu.gameserver.model.gameobjects.LetterType;
 import com.aionemu.gameserver.model.gameobjects.Persistable.PersistentState;
+import com.aionemu.gameserver.model.gameobjects.player.BlockList;
 import com.aionemu.gameserver.model.gameobjects.player.Mailbox;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.PlayerCommonData;
@@ -30,7 +31,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.AdminService;
 import com.aionemu.gameserver.services.item.ItemFactory;
 import com.aionemu.gameserver.services.item.ItemPacketService;
-import com.aionemu.gameserver.services.player.PlayerMailboxState;
 import com.aionemu.gameserver.services.trade.PricesService;
 import com.aionemu.gameserver.taskmanager.tasks.ExpireTimerTask;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -45,30 +45,17 @@ public class MailService {
 
 	private static final Logger log = LoggerFactory.getLogger("MAIL_LOG");
 
-	public static final MailService getInstance() {
-		return SingletonHolder.instance;
-	}
-
 	private MailService() {
 	}
 
-	/**
-	 * TODO split this method
-	 * 
-	 * @param sender
-	 * @param recipientName
-	 * @param title
-	 * @param message
-	 * @param attachedItemObjId
-	 * @param attachedItemCount
-	 * @param attachedKinahCount
-	 * @param letterType
-	 */
-	public void sendMail(Player sender, String recipientName, String title, String message, int attachedItemObjId, long attachedItemCount,
-		long attachedKinahCount, LetterType letterType) {
-
-		if (letterType == LetterType.BLACKCLOUD || recipientName.length() > 16)
+	public static void sendMail(Player sender, String recipientName, String title, String message, int attachedItemObjId, long attachedItemCount,
+		long attachedKinah, LetterType letterType) {
+		if (sender.isTrading() || recipientName.length() > 16)
 			return;
+		if (letterType == LetterType.BLACKCLOUD || attachedKinah < 0 || attachedItemCount < 0) {
+			AuditLogger.log(sender, "tried to send letter of type " + letterType + " with " + attachedKinah + " Kinah and " + attachedItemCount + " items");
+			return;
+		}
 
 		if (title.length() > 20)
 			title = title.substring(0, 20);
@@ -77,33 +64,9 @@ public class MailService {
 			message = message.substring(0, 1000);
 
 		PlayerCommonData recipientCommonData = DAOManager.getDAO(PlayerDAO.class).loadPlayerCommonDataByName(recipientName);
-
-		if (recipientCommonData == null) {
-			PacketSendUtility.sendPacket(sender, new SM_MAIL_SERVICE(MailMessage.NO_SUCH_CHARACTER_NAME));
-			return;
-		}
-
-		int recipientObjId = recipientCommonData.getPlayerObjId();
-
-		if ((recipientCommonData.getRace() != sender.getRace()) && !sender.isStaff()) {
-			PacketSendUtility.sendPacket(sender, new SM_MAIL_SERVICE(MailMessage.MAIL_IS_ONE_RACE_ONLY));
-			return;
-		}
-
-		Player recipient = World.getInstance().findPlayer(recipientObjId);
-		if (recipient != null) {
-			if (!recipient.getMailbox().haveFreeSlots()) {
-				PacketSendUtility.sendPacket(sender, new SM_MAIL_SERVICE(MailMessage.RECIPIENT_MAILBOX_FULL));
-				return;
-			} else if (recipient.getBlockList().contains(sender.getObjectId())) {
-				PacketSendUtility.sendPacket(sender, new SM_MAIL_SERVICE(MailMessage.YOU_ARE_IN_RECIPIENT_IGNORE_LIST));
-				return;
-			}
-		} else if (recipientCommonData.getMailboxLetters() > 99) {
-			PacketSendUtility.sendPacket(sender, new SM_MAIL_SERVICE(MailMessage.RECIPIENT_MAILBOX_FULL));
-			return;
-		} else if (DAOManager.getDAO(BlockListDAO.class).load(recipientObjId).contains(sender.getObjectId())) {
-			PacketSendUtility.sendPacket(sender, new SM_MAIL_SERVICE(MailMessage.YOU_ARE_IN_RECIPIENT_IGNORE_LIST));
+		MailMessage status = validateRecipient(sender, recipientCommonData);
+		if (status != MailMessage.MAIL_SEND_SUCCESS) {
+			PacketSendUtility.sendPacket(sender, new SM_MAIL_SERVICE(status));
 			return;
 		}
 
@@ -131,32 +94,13 @@ public class MailService {
 			if (!AdminService.getInstance().canOperate(sender, null, senderItem, "mail"))
 				return;
 
-			float qualityPriceRate = 0.02f;
-			switch (senderItem.getItemTemplate().getItemQuality()) {
-				case JUNK:
-				case COMMON:
-					qualityPriceRate = 0.02f;
-					break;
-				case RARE:
-					qualityPriceRate = 0.03f;
-					break;
-				case LEGEND:
-				case UNIQUE:
-					qualityPriceRate = 0.04f;
-					break;
-				case MYTHIC:
-				case EPIC:
-					qualityPriceRate = 0.05f;
-					break;
-			}
-
-			itemMailCommission = (long) (senderItem.getItemTemplate().getPrice() * qualityPriceRate * attachedItemCount * costFactor);
+			itemMailCommission = (long) (senderItem.getItemTemplate().getPrice() * getQualityPriceRate(senderItem) * attachedItemCount * costFactor);
 		}
 
-		if (attachedKinahCount > 0)
-			kinahMailCommission = (long) (attachedKinahCount * 0.01f * costFactor);
+		if (attachedKinah > 0)
+			kinahMailCommission = (long) (attachedKinah * 0.01f * costFactor);
 
-		long finalMailKinah = PricesService.getPriceForService(baseCost + kinahMailCommission + itemMailCommission, sender.getRace()) + attachedKinahCount;
+		long finalMailKinah = PricesService.getPriceForService(baseCost + kinahMailCommission + itemMailCommission, sender.getRace()) + attachedKinah;
 
 		if (senderInventory.getKinah() < finalMailKinah) {
 			PacketSendUtility.sendPacket(sender, SM_SYSTEM_MESSAGE.STR_NOT_ENOUGH_MONEY());
@@ -199,68 +143,61 @@ public class MailService {
 
 		senderInventory.decreaseKinah(finalMailKinah);
 		Timestamp time = new Timestamp(System.currentTimeMillis());
-		Letter newLetter = new Letter(IDFactory.getInstance().nextId(), recipientObjId, attachedItem, attachedKinahCount, title, message,
+		Letter newLetter = new Letter(IDFactory.getInstance().nextId(), recipientCommonData.getPlayerObjId(), attachedItem, attachedKinah, title, message,
 			sender.getName(), time, true, letterType);
 
 		// first save attached item for FK consistency
 		if (attachedItem != null) {
-			if (!DAOManager.getDAO(InventoryDAO.class).store(attachedItem, recipientObjId)) {
+			if (!DAOManager.getDAO(InventoryDAO.class).store(attachedItem, recipientCommonData.getPlayerObjId()))
 				return;
-			}
-			// save item stones too.
-			DAOManager.getDAO(ItemStoneListDAO.class).save(Arrays.asList(attachedItem));
+			// save item stones too
+			DAOManager.getDAO(ItemStoneListDAO.class).save(Collections.singletonList(attachedItem));
 		}
 		// save letter
 		if (!DAOManager.getDAO(MailDAO.class).storeLetter(time, newLetter))
 			return;
 
-		/**
-		 * Send mail update packets
-		 */
-		if (recipient != null) {
-			Mailbox recipientMailbox = recipient.getMailbox();
-			recipientMailbox.putLetterToMailbox(newLetter);
+		if (attachedItem != null && LoggingConfig.LOG_MAIL)
+			log.info("Player: " + sender.getName() + " sent item " + attachedItem.getItemId() + " [" + attachedItem.getItemName() + "] (count: "
+				+ attachedItem.getItemCount() + ") to player " + recipientName);
 
-			// packets for sender
-			PacketSendUtility.sendPacket(sender, new SM_MAIL_SERVICE(MailMessage.MAIL_SEND_SUCCESS));
+		PacketSendUtility.sendPacket(sender, new SM_MAIL_SERVICE(status));
+		SystemMailService.updateRecipientMailbox(recipientCommonData, newLetter);
+	}
 
-			// packets for recipient
-			PacketSendUtility.sendPacket(recipient, new SM_MAIL_SERVICE(recipientMailbox));
-			recipientMailbox.isMailListUpdateRequired = true;
+	private static MailMessage validateRecipient(Player sender, PlayerCommonData recipientCommonData) {
+		if (recipientCommonData == null)
+			return MailMessage.NO_SUCH_CHARACTER_NAME;
+		if (recipientCommonData.getRace() != sender.getRace() && !sender.isStaff())
+			return MailMessage.MAIL_IS_ONE_RACE_ONLY;
+		if (recipientCommonData.getMailboxLetters() >= 100)
+			return MailMessage.RECIPIENT_MAILBOX_FULL;
+		Player p = World.getInstance().findPlayer(recipientCommonData.getPlayerObjId());
+		BlockList blockList = p != null ? p.getBlockList() : DAOManager.getDAO(BlockListDAO.class).load(recipientCommonData.getPlayerObjId());
+		if (blockList.contains(sender.getObjectId()))
+			return MailMessage.YOU_ARE_IN_RECIPIENT_IGNORE_LIST;
+		return MailMessage.MAIL_SEND_SUCCESS;
+	}
 
-			// if recipient have opened mail list we should update it
-			if (recipientMailbox.mailBoxState != 0) {
-				boolean isPostman = (recipientMailbox.mailBoxState & PlayerMailboxState.EXPRESS) == PlayerMailboxState.EXPRESS;
-				PacketSendUtility.sendPacket(recipient, new SM_MAIL_SERVICE(recipient, recipientMailbox.getLetters(), isPostman));
-			}
-
-			if (letterType == LetterType.EXPRESS)
-				PacketSendUtility.sendPacket(recipient, SM_SYSTEM_MESSAGE.STR_POSTMAN_NOTIFY());
-		}
-
-		if (attachedItem != null) {
-			if (LoggingConfig.LOG_MAIL)
-				log.info("Player: " + sender.getName() + " sent item " + attachedItem.getItemId() + " [" + attachedItem.getItemName() + "] (count: "
-					+ attachedItem.getItemCount() + ") to player " + recipientName);
-		}
-
-		/**
-		 * Update loaded common data and db if player is offline
-		 */
-		if (!recipientCommonData.isOnline()) {
-			PacketSendUtility.sendPacket(sender, new SM_MAIL_SERVICE(MailMessage.MAIL_SEND_SUCCESS));
-			recipientCommonData.setMailboxLetters(recipientCommonData.getMailboxLetters() + 1);
-			DAOManager.getDAO(MailDAO.class).updateOfflineMailCounter(recipientCommonData);
+	private static float getQualityPriceRate(Item senderItem) {
+		switch (senderItem.getItemTemplate().getItemQuality()) {
+			case MYTHIC:
+			case EPIC:
+				return 0.05f;
+			case UNIQUE:
+			case LEGEND:
+				return 0.04f;
+			case RARE:
+				return 0.03f;
+			default:
+				return 0.02f;
 		}
 	}
 
 	/**
 	 * Read letter with specified letter id
-	 * 
-	 * @param player
-	 * @param letterId
 	 */
-	public void readMail(Player player, int letterId) {
+	public static void readMail(Player player, int letterId) {
 		Letter letter = player.getMailbox().getLetterFromMailbox(letterId);
 		if (letter == null) {
 			log.warn("Cannot read mail " + player.getObjectId() + " " + letterId);
@@ -271,12 +208,7 @@ public class MailService {
 		letter.setReadLetter();
 	}
 
-	/**
-	 * @param player
-	 * @param letterId
-	 * @param attachmentType
-	 */
-	public void getAttachments(Player player, int letterId, byte attachmentType) {
+	public static void getAttachments(Player player, int letterId, byte attachmentType) {
 		Letter letter = player.getMailbox().getLetterFromMailbox(letterId);
 
 		if (letter == null)
@@ -317,11 +249,7 @@ public class MailService {
 		}
 	}
 
-	/**
-	 * @param player
-	 * @param mailObjId
-	 */
-	public void deleteMail(Player player, int[] mailObjId) {
+	public static void deleteMail(Player player, int[] mailObjId) {
 		Mailbox mailbox = player.getMailbox();
 
 		for (int letterId : mailObjId) {
@@ -331,22 +259,13 @@ public class MailService {
 		PacketSendUtility.sendPacket(player, new SM_MAIL_SERVICE(mailObjId));
 	}
 
-	/**
-	 * @param player
-	 */
-	public void onPlayerLogin(Player player) {
+	public static void onPlayerLogin(Player player) {
 		player.setMailbox(DAOManager.getDAO(MailDAO.class).loadPlayerMailbox(player));
-		PacketSendUtility.sendPacket(player, new SM_MAIL_SERVICE(player.getMailbox()));
+		PacketSendUtility.sendPacket(player, new SM_MAIL_SERVICE());
 	}
 
-	public void refreshMail(Player player) {
-		PacketSendUtility.sendPacket(player, new SM_MAIL_SERVICE(player.getMailbox()));
+	public static void refreshMail(Player player) {
+		PacketSendUtility.sendPacket(player, new SM_MAIL_SERVICE());
 		PacketSendUtility.sendPacket(player, new SM_MAIL_SERVICE(player, player.getMailbox().getLetters(), false));
 	}
-
-	private static class SingletonHolder {
-
-		protected static final MailService instance = new MailService();
-	}
-
 }
