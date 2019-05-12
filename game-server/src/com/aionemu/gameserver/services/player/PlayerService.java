@@ -4,7 +4,6 @@ import java.sql.Timestamp;
 import java.util.List;
 
 import com.aionemu.commons.database.dao.DAOManager;
-import com.aionemu.gameserver.configs.main.CacheConfig;
 import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.configs.main.EventsConfig;
 import com.aionemu.gameserver.controllers.FlyController;
@@ -38,8 +37,6 @@ import com.aionemu.gameserver.services.PunishmentService.PunishmentType;
 import com.aionemu.gameserver.services.SkillLearnService;
 import com.aionemu.gameserver.services.item.ItemFactory;
 import com.aionemu.gameserver.services.item.ItemService;
-import com.aionemu.gameserver.utils.collections.cachemap.CacheMap;
-import com.aionemu.gameserver.utils.collections.cachemap.CacheMapFactory;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.WorldPosition;
 import com.aionemu.gameserver.world.knownlist.KnownList;
@@ -52,8 +49,6 @@ import com.aionemu.gameserver.world.knownlist.KnownList;
  * @author SoulKeeper, Saelya, Cura
  */
 public class PlayerService {
-
-	private static final CacheMap<Integer, Player> playerCache = CacheMapFactory.createSoftCacheMap("Player", "player");
 
 	/**
 	 * Checks if name is already taken or not
@@ -121,14 +116,9 @@ public class PlayerService {
 	 * @return Player
 	 */
 	public static Player getPlayer(int playerObjId, Account account) {
-		Player player = playerCache.get(playerObjId);
-		if (player != null) {
-			return player;
-		}
-
 		// Player common data and appearance should be already loaded in account
 		PlayerAccountData playerAccountData = account.getPlayerAccountData(playerObjId);
-		player = new Player(playerAccountData, account);
+		Player player = new Player(playerAccountData, account);
 		LegionMember legionMember = LegionService.getInstance().getLegionMember(player.getObjectId());
 		if (legionMember != null) {
 			player.setLegionMember(legionMember);
@@ -208,10 +198,6 @@ public class PlayerService {
 
 		DAOManager.getDAO(PlayerLifeStatsDAO.class).loadPlayerLifeStat(player);
 		DAOManager.getDAO(PlayerEmotionListDAO.class).loadEmotions(player);
-
-		if (CacheConfig.CACHE_PLAYERS) {
-			playerCache.put(playerObjId, player);
-		}
 
 		return player;
 	}
@@ -386,15 +372,6 @@ public class PlayerService {
 		if (player.getMacroList().removeMacro(macroOrder)) {
 			DAOManager.getDAO(PlayerMacrossesDAO.class).deleteMacro(player.getObjectId(), macroOrder);
 		}
-	}
-
-	/**
-	 * Gets a player ONLY if he is in the cache
-	 *
-	 * @return Player or null if not cached
-	 */
-	public static Player getCachedPlayer(int playerObjectId) {
-		return playerCache.get(playerObjectId);
 	}
 
 	public static String getPlayerName(int objectId) {

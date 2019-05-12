@@ -8,7 +8,6 @@ import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.GameServer;
-import com.aionemu.gameserver.configs.main.CacheConfig;
 import com.aionemu.gameserver.configs.main.GSConfig;
 import com.aionemu.gameserver.dao.InventoryDAO;
 import com.aionemu.gameserver.dao.LegionMemberDAO;
@@ -28,8 +27,6 @@ import com.aionemu.gameserver.model.items.storage.StorageType;
 import com.aionemu.gameserver.model.team.legion.LegionMember;
 import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.services.player.PlayerService;
-import com.aionemu.gameserver.utils.collections.cachemap.CacheMap;
-import com.aionemu.gameserver.utils.collections.cachemap.CacheMapFactory;
 
 /**
  * This class is a front-end for daos and it's responsibility is to retrieve the Account objects
@@ -40,8 +37,6 @@ import com.aionemu.gameserver.utils.collections.cachemap.CacheMapFactory;
 public class AccountService {
 
 	private static final Logger log = LoggerFactory.getLogger(AccountService.class);
-
-	private static CacheMap<Integer, Account> accountsMap = CacheMapFactory.createSoftCacheMap("Account", "account");
 
 	/**
 	 * Returns {@link Account} object that has given id.
@@ -57,12 +52,7 @@ public class AccountService {
 		long toll, String allowedHddSerial) {
 		log.debug("[AS] request for account: " + accountId);
 
-		Account account = accountsMap.get(accountId);
-		if (account == null) {
-			account = loadAccount(accountId);
-			if (CacheConfig.CACHE_ACCOUNTS)
-				accountsMap.put(accountId, account);
-		}
+		Account account = loadAccount(accountId);
 		account.setName(accountName);
 		account.setCreationDate(creationDate);
 		account.setAccountTime(accountTime);

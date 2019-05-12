@@ -10,7 +10,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,7 +18,6 @@ import com.aionemu.commons.database.DB;
 import com.aionemu.commons.database.DatabaseFactory;
 import com.aionemu.commons.database.IUStH;
 import com.aionemu.commons.database.ParamReadStH;
-import com.aionemu.gameserver.configs.main.CacheConfig;
 import com.aionemu.gameserver.configs.main.GSConfig;
 import com.aionemu.gameserver.dao.MySQL5DAOUtils;
 import com.aionemu.gameserver.dao.PlayerDAO;
@@ -39,27 +37,23 @@ import com.aionemu.gameserver.world.World;
 public class MySQL5PlayerDAO extends PlayerDAO {
 
 	private static final Logger log = LoggerFactory.getLogger(MySQL5PlayerDAO.class);
-	private ConcurrentHashMap<Integer, PlayerCommonData> playerCommonData = new ConcurrentHashMap<>();
-	private ConcurrentHashMap<String, PlayerCommonData> playerCommonDataByName = new ConcurrentHashMap<>();
 
 	@Override
-	public boolean isNameUsed(final String name) {
-		PreparedStatement s = DB.prepareStatement("SELECT count(id) as cnt FROM players WHERE ? = players.name");
-		try {
-			s.setString(1, name);
-			ResultSet rs = s.executeQuery();
+	public boolean isNameUsed(String name) {
+		try (Connection con = DatabaseFactory.getConnection();
+			PreparedStatement stmt = con.prepareStatement("SELECT count(id) as cnt FROM players WHERE ? = players.name")) {
+			stmt.setString(1, name);
+			ResultSet rs = stmt.executeQuery();
 			rs.next();
 			return rs.getInt("cnt") > 0;
 		} catch (SQLException e) {
-			log.error("Can't check if name " + name + ", is used, returning possitive result", e);
+			log.error("Can't check if name " + name + " is used, returning positive result", e);
 			return true;
-		} finally {
-			DB.close(s);
 		}
 	}
 
 	@Override
-	public void storePlayer(final Player player) {
+	public void storePlayer(Player player) {
 		try (Connection con = DatabaseFactory.getConnection();
 			PreparedStatement stmt = con.prepareStatement(
 				"UPDATE players SET name=?, exp=?, recoverexp=?, x=?, y=?, z=?, heading=?, world_id=?, gender=?, race=?, player_class=?, quest_expands=?, npc_expands=?, item_expands=?, wh_npc_expands=?, wh_bonus_expands=?, note=?, title_id=?, bonus_title_id=?, dp=?, soul_sickness=?, mailbox_letters=?, reposte_energy=?, mentor_flag_time=?, world_owner=? WHERE id=?")) {
@@ -97,17 +91,10 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 		} catch (Exception e) {
 			log.error("Error saving player: " + player.getObjectId() + " " + player.getName(), e);
 		}
-		if (CacheConfig.CACHE_COMMONDATA) {
-			PlayerCommonData cached = playerCommonData.get(player.getObjectId());
-			if (cached != null) {
-				playerCommonData.put(player.getCommonData().getPlayerObjId(), player.getCommonData());
-				playerCommonDataByName.put(player.getName().toLowerCase(), player.getCommonData());
-			}
-		}
 	}
 
 	@Override
-	public boolean saveNewPlayer(final Player player, final int accountId, final String accountName) {
+	public boolean saveNewPlayer(Player player, int accountId, String accountName) {
 		try {
 			try (Connection con = DatabaseFactory.getConnection();
 				PreparedStatement stmt = con.prepareStatement(
@@ -138,33 +125,22 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 			log.error("Error saving new player: " + player.getObjectId() + " " + player.getName(), e);
 			return false;
 		}
-		if (CacheConfig.CACHE_COMMONDATA) {
-			playerCommonData.put(player.getObjectId(), player.getCommonData());
-			playerCommonDataByName.put(player.getName().toLowerCase(), player.getCommonData());
-		}
 		return true;
 	}
 
 	@Override
-	public PlayerCommonData loadPlayerCommonDataByName(final String name) {
+	public PlayerCommonData loadPlayerCommonDataByName(String name) {
 		Player player = World.getInstance().findPlayer(name);
 		if (player != null) {
 			return player.getCommonData();
 		}
-		PlayerCommonData pcd = playerCommonDataByName.get(name.toLowerCase());
-		if (pcd != null) {
-			return pcd;
-		}
 		int playerObjId = 0;
 
-		try {
-			try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement("SELECT id FROM players WHERE name = ?")) {
-				stmt.setString(1, name);
-				try (ResultSet rset = stmt.executeQuery()) {
-					if (rset.next()) {
-						playerObjId = rset.getInt("id");
-					}
-				}
+		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement("SELECT id FROM players WHERE name = ?")) {
+			stmt.setString(1, name);
+			try (ResultSet rset = stmt.executeQuery()) {
+				if (rset.next())
+					playerObjId = rset.getInt("id");
 			}
 		} catch (Exception e) {
 			log.error("Could not restore playerId data for player name: " + name + " from DB: " + e.getMessage(), e);
@@ -177,68 +153,48 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 	}
 
 	@Override
-	public PlayerCommonData loadPlayerCommonData(final int playerObjId) {
+	public PlayerCommonData loadPlayerCommonData(int playerObjId) {
+		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement("SELECT * FROM players WHERE id = ?")) {
+			stmt.setInt(1, playerObjId);
+			try (ResultSet resultSet = stmt.executeQuery()) {
+				log.debug("[DAO: MySQL5PlayerDAO] loading from db " + playerObjId);
 
-		PlayerCommonData cached = playerCommonData.get(playerObjId);
-		if (cached != null) {
-			log.debug("[DAO: MySQL5PlayerDAO] PlayerCommonData for id: " + playerObjId + " obtained from cache");
-			return cached;
-		}
-		final PlayerCommonData cd = new PlayerCommonData(playerObjId);
-		boolean success = false;
-
-		try {
-			try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement("SELECT * FROM players WHERE id = ?")) {
-				stmt.setInt(1, playerObjId);
-				try (ResultSet resultSet = stmt.executeQuery()) {
-					log.debug("[DAO: MySQL5PlayerDAO] loading from db " + playerObjId);
-
-					if (resultSet.next()) {
-						success = true;
-						cd.setName(resultSet.getString("name"));
-						cd.setPlayerClass(PlayerClass.valueOf(resultSet.getString("player_class")));
-						cd.setExp(resultSet.getLong("exp")); // set class before exp for daeva determination
-						cd.setRecoverableExp(resultSet.getLong("recoverexp"));
-						cd.setRace(Race.valueOf(resultSet.getString("race")));
-						cd.setGender(Gender.valueOf(resultSet.getString("gender")));
-						cd.setLastOnline(resultSet.getTimestamp("last_online"));
-						cd.setNote(resultSet.getString("note"));
-						cd.setQuestExpands(resultSet.getInt("quest_expands"));
-						cd.setNpcExpands(resultSet.getInt("npc_expands"));
-						cd.setItemExpands(resultSet.getInt("item_expands"));
-						cd.setTitleId(resultSet.getInt("title_id"));
-						cd.setBonusTitleId(resultSet.getInt("bonus_title_id"));
-						cd.setWhNpcExpands(resultSet.getInt("wh_npc_expands"));
-						cd.setWhBonusExpands(resultSet.getInt("wh_bonus_expands"));
-						cd.setOnline(resultSet.getBoolean("online"));
-						cd.setMailboxLetters(resultSet.getInt("mailbox_letters"));
-						cd.setDp(resultSet.getInt("dp"));
-						cd.setDeathCount(resultSet.getInt("soul_sickness"));
-						cd.setCurrentReposeEnergy(resultSet.getLong("reposte_energy"));
-						float x = resultSet.getFloat("x");
-						float y = resultSet.getFloat("y");
-						float z = resultSet.getFloat("z");
-						byte heading = resultSet.getByte("heading");
-						int worldId = resultSet.getInt("world_id");
-						cd.setPosition(World.getInstance().createPosition(worldId, x, y, z, heading, 0));
-						cd.setWorldOwnerId(resultSet.getInt("world_owner"));
-						cd.setMentorFlagTime(resultSet.getInt("mentor_flag_time"));
-						cd.setLastTransferTime(resultSet.getLong("last_transfer_time"));
-					} else {
-						log.info("Missing PlayerCommonData from db " + playerObjId);
-					}
+				if (resultSet.next()) {
+					PlayerCommonData cd = new PlayerCommonData(playerObjId);
+					cd.setName(resultSet.getString("name"));
+					cd.setPlayerClass(PlayerClass.valueOf(resultSet.getString("player_class")));
+					cd.setExp(resultSet.getLong("exp")); // set class before exp for daeva determination
+					cd.setRecoverableExp(resultSet.getLong("recoverexp"));
+					cd.setRace(Race.valueOf(resultSet.getString("race")));
+					cd.setGender(Gender.valueOf(resultSet.getString("gender")));
+					cd.setLastOnline(resultSet.getTimestamp("last_online"));
+					cd.setNote(resultSet.getString("note"));
+					cd.setQuestExpands(resultSet.getInt("quest_expands"));
+					cd.setNpcExpands(resultSet.getInt("npc_expands"));
+					cd.setItemExpands(resultSet.getInt("item_expands"));
+					cd.setTitleId(resultSet.getInt("title_id"));
+					cd.setBonusTitleId(resultSet.getInt("bonus_title_id"));
+					cd.setWhNpcExpands(resultSet.getInt("wh_npc_expands"));
+					cd.setWhBonusExpands(resultSet.getInt("wh_bonus_expands"));
+					cd.setOnline(resultSet.getBoolean("online"));
+					cd.setMailboxLetters(resultSet.getInt("mailbox_letters"));
+					cd.setDp(resultSet.getInt("dp"));
+					cd.setDeathCount(resultSet.getInt("soul_sickness"));
+					cd.setCurrentReposeEnergy(resultSet.getLong("reposte_energy"));
+					float x = resultSet.getFloat("x");
+					float y = resultSet.getFloat("y");
+					float z = resultSet.getFloat("z");
+					byte heading = resultSet.getByte("heading");
+					int worldId = resultSet.getInt("world_id");
+					cd.setPosition(World.getInstance().createPosition(worldId, x, y, z, heading, 0));
+					cd.setWorldOwnerId(resultSet.getInt("world_owner"));
+					cd.setMentorFlagTime(resultSet.getInt("mentor_flag_time"));
+					cd.setLastTransferTime(resultSet.getLong("last_transfer_time"));
+					return cd;
 				}
 			}
 		} catch (Exception e) {
-			log.error("Could not restore PlayerCommonData data for player: " + playerObjId + " from DB: " + e.getMessage(), e);
-		}
-
-		if (success) {
-			if (CacheConfig.CACHE_COMMONDATA) {
-				playerCommonData.put(playerObjId, cd);
-				playerCommonDataByName.put(cd.getName().toLowerCase(), cd);
-			}
-			return cd;
+			log.error("Could not load PlayerCommonData data for player: " + playerObjId, e);
 		}
 		return null;
 	}
@@ -251,18 +207,12 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 		} catch (SQLException e) {
 			log.error("Some crap, can't set int parameter to PreparedStatement", e);
 		}
-		if (CacheConfig.CACHE_COMMONDATA) {
-			PlayerCommonData pcd = playerCommonData.remove(playerId);
-			if (pcd != null) {
-				playerCommonDataByName.remove(pcd.getName().toLowerCase());
-			}
-		}
 		DB.executeUpdateAndClose(statement);
 	}
 
 	@Override
-	public List<Integer> getPlayerOidsOnAccount(final int accountId) {
-		final List<Integer> result = new ArrayList<>();
+	public List<Integer> getPlayerOidsOnAccount(int accountId) {
+		List<Integer> result = new ArrayList<>();
 		boolean success = DB.select("SELECT id FROM players WHERE account_id = ?", new ParamReadStH() {
 
 			@Override
@@ -282,8 +232,8 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 	}
 
 	@Override
-	public List<Integer> getPlayerOidsOnAccount(final int accountId, final long exp) {
-		final List<Integer> result = new ArrayList<>();
+	public List<Integer> getPlayerOidsOnAccount(int accountId, long exp) {
+		List<Integer> result = new ArrayList<>();
 		boolean success = DB.select("SELECT id FROM players WHERE account_id = ? AND exp <= ?", new ParamReadStH() {
 
 			@Override
@@ -304,7 +254,7 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 	}
 
 	@Override
-	public void setCreationDeletionTime(final PlayerAccountData acData) {
+	public void setCreationDeletionTime(PlayerAccountData acData) {
 		DB.select("SELECT creation_date, deletion_date FROM players WHERE id = ?", new ParamReadStH() {
 
 			@Override
@@ -323,7 +273,7 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 	}
 
 	@Override
-	public void updateDeletionTime(final int objectId, final Timestamp deletionDate) {
+	public void updateDeletionTime(int objectId, Timestamp deletionDate) {
 		DB.insertUpdate("UPDATE players set deletion_date = ? where id = ?", new IUStH() {
 
 			@Override
@@ -336,7 +286,7 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 	}
 
 	@Override
-	public void storeCreationTime(final int objectId, final Timestamp creationDate) {
+	public void storeCreationTime(int objectId, Timestamp creationDate) {
 		DB.insertUpdate("UPDATE players set creation_date = ? where id = ?", new IUStH() {
 
 			@Override
@@ -349,7 +299,7 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 	}
 
 	@Override
-	public void storeLastOnlineTime(final int objectId, final Timestamp lastOnline) {
+	public void storeLastOnlineTime(int objectId, Timestamp lastOnline) {
 		DB.insertUpdate("UPDATE players set last_online = ? where id = ?", new IUStH() {
 
 			@Override
@@ -393,7 +343,7 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 	}
 
 	@Override
-	public void onlinePlayer(final Player player, final boolean online) {
+	public void onlinePlayer(Player player, boolean online) {
 		DB.insertUpdate("UPDATE players SET online=? WHERE id=?", new IUStH() {
 
 			@Override
@@ -420,20 +370,18 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 	}
 
 	@Override
-	public String getPlayerNameByObjId(final int playerObjId) {
-		final String[] result = new String[1];
+	public String getPlayerNameByObjId(int playerObjId) {
+		String[] result = new String[1];
 		DB.select("SELECT name FROM players WHERE id = ?", new ParamReadStH() {
 
 			@Override
 			public void handleRead(ResultSet arg0) throws SQLException {
-				// TODO: Auto-generated method stub
-				arg0.next();
-				result[0] = arg0.getString("name");
+				if (arg0.next())
+					result[0] = arg0.getString("name");
 			}
 
 			@Override
 			public void setParams(PreparedStatement arg0) throws SQLException {
-				// TODO: Auto-generated method stub
 				arg0.setInt(1, playerObjId);
 			}
 		});
@@ -441,20 +389,18 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 	}
 
 	@Override
-	public int getPlayerIdByName(final String playerName) {
-		final int[] result = new int[1];
+	public int getPlayerIdByName(String playerName) {
+		int[] result = new int[1];
 		DB.select("SELECT id FROM players WHERE name = ?", new ParamReadStH() {
 
 			@Override
 			public void handleRead(ResultSet arg0) throws SQLException {
-				// TODO: Auto-generated method stub
-				arg0.next();
-				result[0] = arg0.getInt("id");
+				if (arg0.next())
+					result[0] = arg0.getInt("id");
 			}
 
 			@Override
 			public void setParams(PreparedStatement arg0) throws SQLException {
-				// TODO: Auto-generated method stub
 				arg0.setString(1, playerName);
 			}
 		});
@@ -462,38 +408,40 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 	}
 
 	@Override
-	public int getAccountIdByName(final String name) {
+	public int getAccountIdByName(String name) {
 		try (Connection con = DatabaseFactory.getConnection();
 			PreparedStatement stmt = con.prepareStatement("SELECT `account_id` FROM `players` WHERE `name` = ?")) {
 			stmt.setString(1, name);
 			try (ResultSet rs = stmt.executeQuery()) {
-				rs.next();
-				return rs.getInt("account_id");
+				if (rs.next())
+					return rs.getInt("account_id");
 			}
 		} catch (Exception e) {
-			return 0;
+			log.error("", e);
 		}
+		return 0;
 	}
 
 	@Override
-	public int getAccountId(final int playerId) {
+	public int getAccountId(int playerId) {
 		try (Connection con = DatabaseFactory.getConnection();
 			PreparedStatement stmt = con.prepareStatement("SELECT `account_id` FROM `players` WHERE `id` = ?")) {
 			stmt.setInt(1, playerId);
 			try (ResultSet rs = stmt.executeQuery()) {
-				rs.next();
-				return rs.getInt("account_id");
+				if (rs.next())
+					return rs.getInt("account_id");
 			}
 		} catch (Exception e) {
-			return 0;
+			log.error("", e);
 		}
+		return 0;
 	}
 
 	/**
 	 * @author xTz
 	 */
 	@Override
-	public void storePlayerName(final PlayerCommonData recipientCommonData) {
+	public void storePlayerName(PlayerCommonData recipientCommonData) {
 		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement("UPDATE players SET name=? WHERE id=?")) {
 			log.debug("[DAO: MySQL5PlayerDAO] storing playerName " + recipientCommonData.getPlayerObjId() + " " + recipientCommonData.getName());
 			stmt.setString(1, recipientCommonData.getName());
@@ -505,7 +453,7 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 	}
 
 	@Override
-	public int getCharacterCountOnAccount(final int accountId) {
+	public int getCharacterCountOnAccount(int accountId) {
 		try (Connection con = DatabaseFactory.getConnection();
 			PreparedStatement stmt = con.prepareStatement(
 				"SELECT COUNT(*) AS cnt FROM `players` WHERE `account_id` = ? AND (players.deletion_date IS NULL || players.deletion_date > CURRENT_TIMESTAMP)")) {
@@ -536,7 +484,7 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 	}
 
 	@Override
-	public Set<Integer> getInactiveAccounts(final int daysOfInactivity) {
+	public Set<Integer> getInactiveAccounts(int daysOfInactivity) {
 		String SELECT_QUERY = "SELECT account_id FROM players WHERE UNIX_TIMESTAMP(CURDATE())-UNIX_TIMESTAMP(last_online) > ? * 24 * 60 * 60";
 
 		Map<Integer, Integer> inactiveCharsByAccId = new HashMap<>();
@@ -565,7 +513,7 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 	}
 
 	@Override
-	public void setPlayerLastTransferTime(final int playerId, final long time) {
+	public void setPlayerLastTransferTime(int playerId, long time) {
 		DB.insertUpdate("UPDATE players SET last_transfer_time=? WHERE id=?", new IUStH() {
 
 			@Override
@@ -584,8 +532,8 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 			PreparedStatement stmt = con.prepareStatement("SELECT old_level FROM players WHERE id=?")) {
 			stmt.setInt(1, playerObjectId);
 			try (ResultSet rs = stmt.executeQuery()) {
-				rs.next();
-				oldLevel = rs.getInt("old_level");
+				if (rs.next())
+					oldLevel = rs.getInt("old_level");
 			}
 		} catch (Exception e) {
 			log.error("Error reading old_level for player: " + playerObjectId, e);

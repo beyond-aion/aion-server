@@ -11,7 +11,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_BLOCK_RESPONSE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_FRIEND_LIST;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_FRIEND_NOTIFY;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_FRIEND_RESPONSE;
-import com.aionemu.gameserver.services.player.PlayerService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.World;
 
@@ -125,11 +124,7 @@ public class SocialService {
 	public static boolean deleteFriend(Player deleter, Friend friend) {
 		int friendObjId = friend.getObjectId();
 		if (DAOManager.getDAO(FriendListDAO.class).delFriends(deleter.getObjectId(), friendObjId)) {
-			// Try to get the target player from the cache
-			Player friendPlayer = PlayerService.getCachedPlayer(friendObjId);
-			// If the cache doesn't have this player, try to get him from the world
-			if (friendPlayer == null)
-				friendPlayer = World.getInstance().findPlayer(friendObjId);
+			Player friendPlayer = World.getInstance().findPlayer(friendObjId);
 			if (friendPlayer != null) {
 				friendPlayer.getFriendList().delFriend(deleter.getObjectId());
 				PacketSendUtility.sendPacket(friendPlayer, new SM_FRIEND_LIST());
