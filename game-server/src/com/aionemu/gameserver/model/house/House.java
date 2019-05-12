@@ -403,7 +403,10 @@ public class House extends VisibleObject implements Persistable {
 		if (playerObjectId == 0)
 			return false;
 		getRegistry().despawnObjects();
-		if (this.getBuilding().getType() == BuildingType.PERSONAL_INS) {
+		if (playerScripts == null)
+			playerScripts = DAOManager.getDAO(HouseScriptsDAO.class).getPlayerScripts(getObjectId());
+		playerScripts.removeAll();
+		if (getBuilding().getType() == BuildingType.PERSONAL_INS) {
 			HousingService.getInstance().removeStudio(playerObjectId);
 			DAOManager.getDAO(HousesDAO.class).deleteHouse(playerObjectId);
 			return true;
@@ -416,10 +419,10 @@ public class House extends VisibleObject implements Persistable {
 
 		Building defaultBuilding = getLand().getDefaultBuilding();
 		setOwnerId(0);
-		if (defaultBuilding != building) {
+		if (defaultBuilding != building)
 			HousingService.getInstance().switchHouseBuilding(this, defaultBuilding.getId());
-		}
-		setStatus(HouseStatus.NOSALE);
+		if (getStatus() != HouseStatus.SELL_WAIT)
+			setStatus(HouseStatus.NOSALE);
 		save();
 		return true;
 	}

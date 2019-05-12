@@ -18,7 +18,7 @@ public class HousingConfig {
 	@Property(key = "gameserver.housing.auction.enable", defaultValue = "false")
 	public static boolean ENABLE_HOUSE_AUCTIONS;
 
-	@Property(key = "gameserver.housing.pay.enable", defaultValue = "false")
+	@Property(key = "gameserver.housing.pay.enable", defaultValue = "true")
 	public static boolean ENABLE_HOUSE_PAY;
 
 	@Property(key = "gameserver.housing.auction.time", defaultValue = "0 5 12 ? * SUN")

@@ -271,6 +271,16 @@ public class HousingService {
 		}
 	}
 
+	public void onPlayerDeleted(int playerObjId) {
+		House studio = getPlayerStudio(playerObjId);
+		if (studio != null)
+			studio.revokeOwner();
+		customHouses.values().forEach(house -> {
+			if (house.getOwnerId() == playerObjId)
+				house.revokeOwner();
+		});
+	}
+
 	public void onPlayerLogin(Player player) {
 		byte buildingState = HouseOwnerState.BUY_STUDIO_ALLOWED.getId();
 		House activeHouse = player.getActiveHouse();

@@ -32,6 +32,7 @@ import com.aionemu.gameserver.model.skill.PlayerSkillList;
 import com.aionemu.gameserver.model.stats.calc.functions.PlayerStatFunctions;
 import com.aionemu.gameserver.model.team.legion.LegionMember;
 import com.aionemu.gameserver.model.templates.item.ItemTemplate;
+import com.aionemu.gameserver.services.HousingService;
 import com.aionemu.gameserver.services.LegionService;
 import com.aionemu.gameserver.services.PunishmentService.PunishmentType;
 import com.aionemu.gameserver.services.SkillLearnService;
@@ -306,6 +307,7 @@ public class PlayerService {
 	public static void deletePlayerFromDB(int playerId) {
 		DAOManager.getDAO(InventoryDAO.class).deletePlayerItems(playerId);
 		DAOManager.getDAO(PlayerDAO.class).deletePlayer(playerId);
+		HousingService.getInstance().onPlayerDeleted(playerId);
 	}
 
 	/**

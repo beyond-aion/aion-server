@@ -1,6 +1,7 @@
 package com.aionemu.gameserver.model.gameobjects.player;
 
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Set;
 
@@ -57,18 +58,17 @@ public class PlayerScripts {
 	}
 
 	public boolean remove(int id) {
-		return remove(id, true);
-	}
-
-	public boolean remove(int id, boolean doStore) {
 		if (!scripts.containsKey(id))
 			return false;
 
-		if (doStore)
-			DAOManager.getDAO(HouseScriptsDAO.class).deleteScript(houseObjId, id);
+		DAOManager.getDAO(HouseScriptsDAO.class).deleteScript(houseObjId, id);
 
 		scripts.remove(id);
 		return true;
+	}
+
+	public void removeAll() {
+		new ArrayList<>(getIds()).forEach(this::remove);
 	}
 
 	public PlayerScript get(int id) {

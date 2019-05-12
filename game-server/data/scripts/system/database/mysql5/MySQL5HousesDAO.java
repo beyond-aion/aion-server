@@ -6,7 +6,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Types;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -15,7 +14,6 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.commons.database.DB;
 import com.aionemu.commons.database.DatabaseFactory;
 import com.aionemu.gameserver.dao.HousesDAO;
 import com.aionemu.gameserver.dao.MySQL5DAOUtils;
@@ -69,17 +67,15 @@ public class MySQL5HousesDAO extends HousesDAO {
 
 	@Override
 	public boolean isIdUsed(int houseObjectId) {
-		PreparedStatement s = DB.prepareStatement("SELECT count(id) as cnt FROM houses WHERE ? = houses.id");
-		try {
-			s.setInt(1, houseObjectId);
-			ResultSet rs = s.executeQuery();
+		try (Connection con = DatabaseFactory.getConnection();
+			PreparedStatement stmt = con.prepareStatement("SELECT count(id) as cnt FROM houses WHERE ? = houses.id")) {
+			stmt.setInt(1, houseObjectId);
+			ResultSet rs = stmt.executeQuery();
 			rs.next();
 			return rs.getInt(1) > 0;
 		} catch (SQLException e) {
 			log.error("Can't check if house " + houseObjectId + ", is used, returning possitive result", e);
 			return true;
-		} finally {
-			DB.close(s);
 		}
 	}
 
@@ -92,85 +88,45 @@ public class MySQL5HousesDAO extends HousesDAO {
 	}
 
 	private void insertNewHouse(House house) {
-		try {
-			try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(ADD_HOUSE_QUERY)) {
-				stmt.setInt(1, house.getObjectId());
-				stmt.setInt(2, house.getAddress().getId());
-				stmt.setInt(3, house.getBuilding().getId());
-				stmt.setInt(4, house.getOwnerId());
-				if (house.getAcquiredTime() == null)
-					stmt.setNull(5, Types.TIMESTAMP);
-				else
-					stmt.setTimestamp(5, house.getAcquiredTime());
+		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(ADD_HOUSE_QUERY)) {
+			stmt.setInt(1, house.getObjectId());
+			stmt.setInt(2, house.getAddress().getId());
+			stmt.setInt(3, house.getBuilding().getId());
+			stmt.setInt(4, house.getOwnerId());
+			stmt.setTimestamp(5, house.getAcquiredTime());
+			stmt.setInt(6, house.getPermissions());
+			stmt.setString(7, house.getStatus().toString());
+			stmt.setInt(8, house.isFeePaid() ? 1 : 0);
+			stmt.setTimestamp(9, house.getNextPay());
+			stmt.setTimestamp(10, house.getSellStarted());
+			byte[] signNotice = house.getSignNotice();
+			stmt.setBinaryStream(11, signNotice.length == 0 ? null : new ByteArrayInputStream(signNotice));
 
-				stmt.setInt(6, house.getPermissions());
-				stmt.setString(7, house.getStatus().toString());
-				stmt.setInt(8, house.isFeePaid() ? 1 : 0);
-
-				if (house.getNextPay() == null)
-					stmt.setNull(9, Types.TIMESTAMP);
-				else
-					stmt.setTimestamp(9, house.getNextPay());
-
-				if (house.getSellStarted() == null)
-					stmt.setNull(10, Types.TIMESTAMP);
-				else
-					stmt.setTimestamp(10, house.getSellStarted());
-
-				byte[] signNotice = house.getSignNotice();
-				if (signNotice.length == 0)
-					stmt.setNull(11, Types.BINARY);
-				else
-					stmt.setBinaryStream(11, new ByteArrayInputStream(signNotice));
-
-				stmt.execute();
-			}
+			stmt.execute();
 			house.setPersistentState(PersistentState.UPDATED);
 		} catch (Exception e) {
-			log.error("Could not store studio data. " + e.getMessage(), e);
-			return;
+			log.error("Could not insert house " + house.getObjectId(), e);
 		}
-		return;
 	}
 
 	private void updateHouse(House house) {
-		try {
-			try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(UPDATE_HOUSE_QUERY)) {
-				stmt.setInt(1, house.getBuilding().getId());
-				stmt.setInt(2, house.getOwnerId());
-				if (house.getAcquiredTime() == null)
-					stmt.setNull(3, Types.TIMESTAMP);
-				else
-					stmt.setTimestamp(3, house.getAcquiredTime());
+		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(UPDATE_HOUSE_QUERY)) {
+			stmt.setInt(1, house.getBuilding().getId());
+			stmt.setInt(2, house.getOwnerId());
+			stmt.setTimestamp(3, house.getAcquiredTime());
+			stmt.setInt(4, house.getPermissions());
+			stmt.setString(5, house.getStatus().toString());
+			stmt.setInt(6, house.isFeePaid() ? 1 : 0);
+			stmt.setTimestamp(7, house.getNextPay());
+			stmt.setTimestamp(8, house.getSellStarted());
+			byte[] signNotice = house.getSignNotice();
+			stmt.setBinaryStream(9, signNotice.length == 0 ? null : new ByteArrayInputStream(signNotice));
 
-				stmt.setInt(4, house.getPermissions());
-				stmt.setString(5, house.getStatus().toString());
-				stmt.setInt(6, house.isFeePaid() ? 1 : 0);
-
-				if (house.getNextPay() == null)
-					stmt.setNull(7, Types.TIMESTAMP);
-				else
-					stmt.setTimestamp(7, house.getNextPay());
-
-				if (house.getSellStarted() == null)
-					stmt.setNull(8, Types.TIMESTAMP);
-				else
-					stmt.setTimestamp(8, house.getSellStarted());
-
-				byte[] signNotice = house.getSignNotice();
-				if (signNotice.length == 0)
-					stmt.setNull(9, Types.BINARY);
-				else
-					stmt.setBinaryStream(9, new ByteArrayInputStream(signNotice));
-
-				stmt.setInt(10, house.getObjectId());
-				stmt.execute();
-			}
+			stmt.setInt(10, house.getObjectId());
+			stmt.execute();
 		} catch (Exception e) {
-			log.error("Could not store house data. " + e.getMessage(), e);
-			return;
+			log.error("Could not store house " + house.getObjectId(), e);
 		}
-		return;
 	}
 
 	@Override
@@ -202,7 +158,7 @@ public class MySQL5HousesDAO extends HousesDAO {
 						}
 					}
 
-					House house = null;
+					House house;
 					if (building == null) {
 						log.warn("Missing building type for address " + address.getId());
 						continue;
@@ -236,25 +192,18 @@ public class MySQL5HousesDAO extends HousesDAO {
 				}
 			}
 		} catch (Exception e) {
-			log.error("Could not restore House data from DB: " + e.getMessage(), e);
+			log.error("Could not load houses", e);
 		}
 		return houses;
 	}
 
 	@Override
 	public void deleteHouse(int playerId) {
-		Connection con = null;
-
-		try {
-			con = DatabaseFactory.getConnection();
-			PreparedStatement stmt = con.prepareStatement(DELETE_HOUSE_QUERY);
-
+		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(DELETE_HOUSE_QUERY)) {
 			stmt.setInt(1, playerId);
 			stmt.execute();
 		} catch (SQLException e) {
 			log.error("Delete House failed", e);
-		} finally {
-			DatabaseFactory.close(con);
 		}
 	}
 
