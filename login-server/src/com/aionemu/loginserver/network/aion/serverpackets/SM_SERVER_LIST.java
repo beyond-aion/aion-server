@@ -45,9 +45,9 @@ public class SM_SERVER_LIST extends AionServerPacket {
 			writeH(0); // unk, always 0
 			writeC(0);// server.brackets ? 1 : 0
 		}
-		writeH(++maxIdWithChars);
+		writeH(maxIdWithChars);
 		writeC(1); // enable "last server" button & auto-connection ? 1 : 0
-		for (byte i = 1; i < maxIdWithChars; i++)
+		for (byte i = 1; i <= maxIdWithChars; i++)
 			writeC(charCountOnServer.getOrDefault(i, 0));
 		writeB(new byte[13]); // unk (44 77 90 A8 5D 75 C9 98 6D 20 53 2A 97)
 	}
