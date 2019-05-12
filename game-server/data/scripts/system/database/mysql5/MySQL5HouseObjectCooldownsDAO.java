@@ -27,15 +27,13 @@ public class MySQL5HouseObjectCooldownsDAO extends HouseObjectCooldownsDAO {
 
 	@Override
 	public void loadHouseObjectCooldowns(final Player player) {
-		try {
-			try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(SELECT_QUERY)) {
-				stmt.setInt(1, player.getObjectId());
-				try (ResultSet rset = stmt.executeQuery()) {
-					while (rset.next()) {
-						int objectId = rset.getInt("object_id");
-						long reuseTime = rset.getLong("reuse_time");
-						player.getHouseObjectCooldownList().setHouseObjectCooldown(objectId, reuseTime);
-					}
+		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(SELECT_QUERY)) {
+			stmt.setInt(1, player.getObjectId());
+			try (ResultSet rset = stmt.executeQuery()) {
+				while (rset.next()) {
+					int objectId = rset.getInt("object_id");
+					long reuseTime = rset.getLong("reuse_time");
+					player.getHouseObjectCooldownList().setHouseObjectCooldown(objectId, reuseTime);
 				}
 			}
 		} catch (SQLException e) {
@@ -58,37 +56,23 @@ public class MySQL5HouseObjectCooldownsDAO extends HouseObjectCooldownsDAO {
 			if (reuseTime < System.currentTimeMillis())
 				continue;
 
-			Connection con = null;
-
-			try {
-				con = DatabaseFactory.getConnection();
-				PreparedStatement stmt = con.prepareStatement(INSERT_QUERY);
-
+			try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(INSERT_QUERY)) {
 				stmt.setInt(1, player.getObjectId());
 				stmt.setInt(2, templateId);
 				stmt.setLong(3, reuseTime);
 				stmt.execute();
 			} catch (SQLException e) {
 				log.error("storeHouseObjectCoolDowns", e);
-			} finally {
-				DatabaseFactory.close(con);
 			}
 		}
 	}
 
 	private void deleteHouseObjectCoolDowns(final Player player) {
-		Connection con = null;
-
-		try {
-			con = DatabaseFactory.getConnection();
-			PreparedStatement stmt = con.prepareStatement(DELETE_QUERY);
-
+		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(DELETE_QUERY)) {
 			stmt.setInt(1, player.getObjectId());
 			stmt.execute();
 		} catch (SQLException e) {
 			log.error("deleteHouseObjectCoolDowns", e);
-		} finally {
-			DatabaseFactory.close(con);
 		}
 	}
 

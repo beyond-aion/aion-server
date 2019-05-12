@@ -230,7 +230,9 @@ CREATE TABLE `house_object_cooldowns` (
   `player_id` int(11) NOT NULL,
   `object_id` int(11) NOT NULL,
   `reuse_time` bigint(20) NOT NULL,
-  PRIMARY KEY (`player_id`,`object_id`)
+  PRIMARY KEY (`player_id`,`object_id`),
+  CONSTRAINT `house_object_cooldowns_ibfk_1` FOREIGN KEY (`player_id`) REFERENCES `players` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `house_object_cooldowns_ibfk_2` FOREIGN KEY (`object_id`) REFERENCES `player_registered_items` (`item_unique_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -753,6 +755,7 @@ CREATE TABLE `player_registered_items` (
   `area` enum('NONE','INTERIOR','EXTERIOR','ALL','DECOR') NOT NULL DEFAULT 'NONE',
   `room` tinyint(4) NOT NULL DEFAULT '0',
   PRIMARY KEY (`player_id`,`item_unique_id`,`item_id`),
+  KEY `item_unique_id` (`item_unique_id`),
   CONSTRAINT `player_regitems_ibfk_1` FOREIGN KEY (`player_id`) REFERENCES `players` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
