@@ -3,7 +3,6 @@ package admincommands;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.team.TemporaryPlayerTeam;
 import com.aionemu.gameserver.services.teleport.TeleportService;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.Util;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 import com.aionemu.gameserver.world.World;
@@ -28,10 +27,6 @@ public class MoveToMe extends AdminCommand {
 			sendInfo(admin);
 			return;
 		}
-		handlePlayerTeleport(admin, params);
-	}
-
-	private void handlePlayerTeleport(Player admin, String... params) {
 		Player playerToMove = World.getInstance().findPlayer(Util.convertName(params[0]));
 		if (playerToMove == null) {
 			sendInfo(admin, "The specified player is not online.");
@@ -58,6 +53,10 @@ public class MoveToMe extends AdminCommand {
 					sendInfo(admin);
 					return;
 			}
+			if (teamToMove == null) {
+				sendInfo(admin, playerToMove.getName() + " currently has no team.");
+				return;
+			}
 			teamToMove.getOnlineMembers().forEach(p -> teleportPlayer(p, admin));
 		} else {
 			teleportPlayer(playerToMove, admin);
@@ -66,7 +65,7 @@ public class MoveToMe extends AdminCommand {
 
 	private void teleportPlayer(Player playerToMove, Player admin) {
 		TeleportService.teleportTo(playerToMove, admin.getPosition());
-		PacketSendUtility.sendMessage(admin, "Teleported player " + playerToMove.getName() + " to your location.");
-		PacketSendUtility.sendMessage(playerToMove, "You have been teleported by " + admin.getName() + ".");
+		sendInfo(admin, "Teleported " + playerToMove.getName() + " to your location.");
+		sendInfo(playerToMove, "You have been teleported by " + admin.getName() + ".");
 	}
 }
