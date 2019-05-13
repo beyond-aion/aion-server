@@ -2,7 +2,6 @@ package com.aionemu.gameserver.network.aion.serverpackets;
 
 import com.aionemu.gameserver.model.account.PlayerAccountData;
 import com.aionemu.gameserver.network.aion.AionConnection;
-import com.aionemu.gameserver.network.aion.PlayerInfo;
 
 /**
  * This packet is response for CM_CREATE_CHARACTER
@@ -10,7 +9,7 @@ import com.aionemu.gameserver.network.aion.PlayerInfo;
  * @author Nemesiss, AEJTester
  * @modified Neon
  */
-public class SM_CREATE_CHARACTER extends PlayerInfo {
+public class SM_CREATE_CHARACTER extends AbstractPlayerInfoPacket {
 
 	/** If response is ok */
 	public static final int RESPONSE_OK = 0x00;

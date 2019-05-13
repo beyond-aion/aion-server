@@ -3,7 +3,6 @@ package com.aionemu.gameserver.network.aion.serverpackets;
 import com.aionemu.gameserver.model.account.Account;
 import com.aionemu.gameserver.model.account.PlayerAccountData;
 import com.aionemu.gameserver.network.aion.AionConnection;
-import com.aionemu.gameserver.network.aion.PlayerInfo;
 
 /**
  * In this packet Server is sending Character List to client.
@@ -11,7 +10,7 @@ import com.aionemu.gameserver.network.aion.PlayerInfo;
  * @author Nemesiss, AEJTester
  * @modified Neon
  */
-public class SM_CHARACTER_LIST extends PlayerInfo {
+public class SM_CHARACTER_LIST extends AbstractPlayerInfoPacket {
 
 	/**
 	 * PlayOk2 - we dont care...

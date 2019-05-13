@@ -1,13 +1,11 @@
 package com.aionemu.gameserver.model.house;
 
-import java.io.ByteArrayOutputStream;
 import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateUtils;
@@ -74,13 +72,7 @@ public class House extends VisibleObject implements Persistable {
 	private byte houseOwnerStates = HouseOwnerState.SINGLE_HOUSE.getId();
 	private PlayerScripts playerScripts;
 	private PersistentState persistentState;
-
-	private final ReentrantReadWriteLock lock = new ReentrantReadWriteLock();
-	private final ReentrantReadWriteLock.WriteLock writeLock = lock.writeLock();
-	private final ReentrantReadWriteLock.ReadLock readLock = lock.readLock();
-	private ByteArrayOutputStream signNoticeStream;
-
-	public static final int NOTICE_LENGTH = 130;
+	private String signNotice;
 
 	public House(Building building, HouseAddress address, int instanceId) {
 		this(IDFactory.getInstance().nextId(), building, address, instanceId);
@@ -232,20 +224,8 @@ public class House extends VisibleObject implements Persistable {
 
 	public void setOwnerId(int playerObjectId) {
 		if (this.playerObjectId != playerObjectId) {
-			writeLock.lock();
-			try {
-				if (playerObjectId == 0)
-					signNoticeStream = null;
-				else {
-					if (signNoticeStream == null)
-						signNoticeStream = new ByteArrayOutputStream(NOTICE_LENGTH);
-					signNoticeStream.reset();
-					signNoticeStream.write(new byte[] { 0, 0 }, 0, 2);
-				}
-				this.playerObjectId = playerObjectId;
-			} finally {
-				writeLock.unlock();
-			}
+			this.playerObjectId = playerObjectId;
+			signNotice = null;
 		}
 		fixBuildingStates();
 	}
@@ -492,30 +472,12 @@ public class House extends VisibleObject implements Persistable {
 		}
 	}
 
-	public byte[] getSignNotice() {
-		byte[] notice;
-		readLock.lock();
-		try {
-			if (signNoticeStream == null || status == HouseStatus.INACTIVE)
-				notice = new byte[0];
-			else
-				notice = signNoticeStream.toByteArray();
-		} finally {
-			readLock.unlock();
-		}
-		return notice;
+	public String getSignNotice() {
+		return signNotice;
 	}
 
-	public void setSignNotice(byte[] noticeStream) {
-		writeLock.lock();
-		try {
-			if (signNoticeStream == null)
-				signNoticeStream = new ByteArrayOutputStream(NOTICE_LENGTH);
-			signNoticeStream.reset();
-			signNoticeStream.write(noticeStream, 0, Math.min(noticeStream.length, NOTICE_LENGTH));
-		} finally {
-			writeLock.unlock();
-		}
+	public void setSignNotice(String notice) {
+		signNotice = notice;
 	}
 
 	public int getLevelRestrict() {

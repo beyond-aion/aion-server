@@ -1,7 +1,5 @@
 package mysql5;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -99,8 +97,7 @@ public class MySQL5HousesDAO extends HousesDAO {
 			stmt.setInt(8, house.isFeePaid() ? 1 : 0);
 			stmt.setTimestamp(9, house.getNextPay());
 			stmt.setTimestamp(10, house.getSellStarted());
-			byte[] signNotice = house.getSignNotice();
-			stmt.setBinaryStream(11, signNotice.length == 0 ? null : new ByteArrayInputStream(signNotice));
+			stmt.setString(11, house.getSignNotice());
 
 			stmt.execute();
 			house.setPersistentState(PersistentState.UPDATED);
@@ -119,8 +116,7 @@ public class MySQL5HousesDAO extends HousesDAO {
 			stmt.setInt(6, house.isFeePaid() ? 1 : 0);
 			stmt.setTimestamp(7, house.getNextPay());
 			stmt.setTimestamp(8, house.getSellStarted());
-			byte[] signNotice = house.getSignNotice();
-			stmt.setBinaryStream(9, signNotice.length == 0 ? null : new ByteArrayInputStream(signNotice));
+			stmt.setString(9, house.getSignNotice());
 
 			stmt.setInt(10, house.getObjectId());
 			stmt.execute();
@@ -178,14 +174,7 @@ public class MySQL5HousesDAO extends HousesDAO {
 					house.setFeePaid(rset.getInt("fee_paid") != 0);
 					house.setNextPay(rset.getTimestamp("next_pay"));
 					house.setSellStarted(rset.getTimestamp("sell_started"));
-
-					InputStream binaryStream = rset.getBinaryStream("sign_notice");
-					if (binaryStream != null) {
-						byte[] bytes = new byte[House.NOTICE_LENGTH];
-						int bytesRead = binaryStream.read(bytes);
-						if (bytesRead > 0)
-							house.setSignNotice(bytes);
-					}
+					house.setSignNotice(rset.getString("sign_notice"));
 
 					int id = studios ? house.getOwnerId() : address.getId();
 					houses.put(id, house);

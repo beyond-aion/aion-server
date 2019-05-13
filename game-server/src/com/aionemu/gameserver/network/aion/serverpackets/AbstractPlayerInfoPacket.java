@@ -1,4 +1,4 @@
-package com.aionemu.gameserver.network.aion;
+package com.aionemu.gameserver.network.aion.serverpackets;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,18 +12,15 @@ import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.PlayerAppearance;
 import com.aionemu.gameserver.model.gameobjects.player.PlayerCommonData;
 import com.aionemu.gameserver.model.items.ItemSlot;
+import com.aionemu.gameserver.network.aion.AionServerPacket;
 import com.aionemu.gameserver.services.BrokerService;
 
 /**
  * @author AEJTester, Nemesiss, Niato
  * @modified Neon
  */
-public abstract class PlayerInfo extends AionServerPacket {
+public abstract class AbstractPlayerInfoPacket extends AionServerPacket {
 
-	protected PlayerInfo() {
-	}
-
-	@SuppressWarnings("null")
 	protected void writePlayerInfo(PlayerAccountData accPlData) {
 		PlayerCommonData pcd = accPlData.getPlayerCommonData();
 		int playerId = pcd.getPlayerObjId();
@@ -146,5 +143,24 @@ public abstract class PlayerInfo extends AionServerPacket {
 		writeD(isBanned ? (int) cbi.getStart() : 0); // startPunishDate
 		writeD(isBanned ? (int) cbi.getEnd() : 0); // endPunishDate
 		writeS(isBanned ? cbi.getReason() : "");
+	}
+
+	protected void writeEquippedItems(List<Item> items) {
+		int mask = 0;
+		for (Item item : items) {
+			mask |= item.getEquipmentSlot();
+			// remove sub hand mask bits (sub hand is present on TwoHandeds by default and would produce display bugs)
+			if (ItemSlot.isTwoHandedWeapon(item.getEquipmentSlot()))
+				mask &= ~ItemSlot.SUB_HAND.getSlotIdMask();
+		}
+
+		writeD(mask);
+		for (Item item : items) {
+			writeD(item.getItemSkinTemplate().getTemplateId());
+			writeD(item.getGodStoneId());
+			writeDyeInfo(item.getItemColor());
+			writeH(item.getItemEnchantParam());
+			writeH(0); // 4.7
+		}
 	}
 }

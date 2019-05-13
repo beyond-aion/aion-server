@@ -1,18 +1,13 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
-import java.util.List;
-
 import com.aionemu.gameserver.model.actions.PlayerMode;
-import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.CustomPlayerState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.PlayerAppearance;
 import com.aionemu.gameserver.model.gameobjects.player.PlayerCommonData;
-import com.aionemu.gameserver.model.items.ItemSlot;
 import com.aionemu.gameserver.model.stats.calc.Stat2;
 import com.aionemu.gameserver.model.templates.cp.CPType;
 import com.aionemu.gameserver.network.aion.AionConnection;
-import com.aionemu.gameserver.network.aion.AionServerPacket;
 import com.aionemu.gameserver.services.conquerorAndProtectorSystem.CPInfo;
 import com.aionemu.gameserver.services.conquerorAndProtectorSystem.ConquerorAndProtectorService;
 
@@ -22,7 +17,7 @@ import com.aionemu.gameserver.services.conquerorAndProtectorSystem.ConquerorAndP
  * @author -Nemesiss-, Avol, srx47
  * @modified cura, -Enomine-, -Artur-, Neon
  */
-public class SM_PLAYER_INFO extends AionServerPacket {
+public class SM_PLAYER_INFO extends AbstractPlayerInfoPacket {
 
 	/**
 	 * Visible player
@@ -104,23 +99,7 @@ public class SM_PLAYER_INFO extends AionServerPacket {
 		writeH(pcd.getDp());// current dp
 		writeC(0x00);// unk (0x00)
 
-		List<Item> items = player.getEquipment().getEquippedForAppearance();
-		int mask = 0;
-		for (Item item : items) {
-			mask |= item.getEquipmentSlot();
-			// remove sub hand mask bits (sub hand is present on TwoHandeds by default and would produce display bugs)
-			if (ItemSlot.isTwoHandedWeapon(item.getEquipmentSlot()))
-				mask &= ~ItemSlot.SUB_HAND.getSlotIdMask();
-		}
-
-		writeD(mask);
-		for (Item item : items) {
-			writeD(item.getItemSkinTemplate().getTemplateId());
-			writeD(item.getGodStoneId());
-			writeDyeInfo(item.getItemColor());
-			writeH(item.getItemEnchantParam()); // enchant lvl
-			writeH(0); // 4.7
-		}
+		writeEquippedItems(player.getEquipment().getEquippedForAppearance());
 
 		writeD(playerAppearance.getSkinRGB());
 		writeD(playerAppearance.getHairRGB());
