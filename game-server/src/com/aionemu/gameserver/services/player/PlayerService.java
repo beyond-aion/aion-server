@@ -263,6 +263,13 @@ public class PlayerService {
 		return newPlayer;
 	}
 
+	public static PlayerCommonData getOrLoadPlayerCommonData(int playerObjId) {
+		Player player = World.getInstance().findPlayer(playerObjId);
+		if (player == null)
+			return DAOManager.getDAO(PlayerDAO.class).loadPlayerCommonData(playerObjId);
+		return player.getCommonData();
+	}
+
 	/**
 	 * Cancel Player deletion process if its possible.
 	 *

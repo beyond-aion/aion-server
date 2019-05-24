@@ -13,7 +13,6 @@ import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.cache.HTMLCache;
 import com.aionemu.gameserver.configs.main.EventsConfig;
 import com.aionemu.gameserver.dao.HeadhuntingDAO;
-import com.aionemu.gameserver.dao.PlayerDAO;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.PlayerClass;
 import com.aionemu.gameserver.model.Race;
@@ -151,7 +150,7 @@ public class Headhunting extends AdminCommand {
 		results.put(Race.ASMODIANS, new EnumMap<>(PlayerClass.class));
 		results.put(Race.ELYOS, new EnumMap<>(PlayerClass.class));
 		for (Headhunter hunter : headhunters.values()) {
-			PlayerCommonData pcd = DAOManager.getDAO(PlayerDAO.class).loadPlayerCommonData(hunter.getHunterId());
+			PlayerCommonData pcd = PlayerService.getOrLoadPlayerCommonData(hunter.getHunterId());
 			if (pcd == null) {
 				log.warn("PlayerID: " + hunter.getHunterId() + " did not exist anymore.");
 				continue;

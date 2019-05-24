@@ -7,24 +7,22 @@ package com.aionemu.gameserver.model.gameobjects.player;
  */
 public class BlockedPlayer {
 
-	PlayerCommonData pcd;
-	String reason;
+	private final int objId;
+	private final String name;
+	private String reason;
 
-	public BlockedPlayer(PlayerCommonData pcd) {
-		this(pcd, "");
-	}
-
-	public BlockedPlayer(PlayerCommonData pcd, String reason) {
-		this.pcd = pcd;
+	public BlockedPlayer(int objId, String name, String reason) {
+		this.objId = objId;
+		this.name = name;
 		this.reason = reason;
 	}
 
 	public int getObjId() {
-		return pcd.getPlayerObjId();
+		return objId;
 	}
 
 	public String getName() {
-		return pcd.getName();
+		return name;
 	}
 
 	public synchronized String getReason() {

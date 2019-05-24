@@ -5,8 +5,6 @@ import java.util.stream.Stream;
 
 import org.apache.commons.lang3.math.NumberUtils;
 
-import com.aionemu.commons.database.dao.DAOManager;
-import com.aionemu.gameserver.dao.PlayerDAO;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.PlayerCommonData;
 import com.aionemu.gameserver.model.siege.ArtifactLocation;
@@ -16,6 +14,7 @@ import com.aionemu.gameserver.model.siege.SiegeRace;
 import com.aionemu.gameserver.model.team.legion.Legion;
 import com.aionemu.gameserver.services.LegionService;
 import com.aionemu.gameserver.services.SiegeService;
+import com.aionemu.gameserver.services.player.PlayerService;
 import com.aionemu.gameserver.services.siege.BalaurAssaultService;
 import com.aionemu.gameserver.services.siege.Siege;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
@@ -174,7 +173,7 @@ public class SiegeCommand extends AdminCommand {
 			if (legion != null) {
 				int legionBGeneral = LegionService.getInstance().getBrigadeGeneralOfLegion(legion.getLegionId());
 				if (legionBGeneral != 0) {
-					PlayerCommonData bGeneral = DAOManager.getDAO(PlayerDAO.class).loadPlayerCommonData(legionBGeneral);
+					PlayerCommonData bGeneral = PlayerService.getOrLoadPlayerCommonData(legionBGeneral);
 					sr = SiegeRace.getByRace(bGeneral.getRace());
 				}
 			}

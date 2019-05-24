@@ -12,13 +12,11 @@ import org.slf4j.LoggerFactory;
 import com.aionemu.commons.database.DB;
 import com.aionemu.commons.database.IUStH;
 import com.aionemu.commons.database.ParamReadStH;
-import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.dao.BlockListDAO;
 import com.aionemu.gameserver.dao.MySQL5DAOUtils;
-import com.aionemu.gameserver.dao.PlayerDAO;
 import com.aionemu.gameserver.model.gameobjects.player.BlockList;
 import com.aionemu.gameserver.model.gameobjects.player.BlockedPlayer;
-import com.aionemu.gameserver.model.gameobjects.player.PlayerCommonData;
+import com.aionemu.gameserver.services.player.PlayerService;
 
 /**
  * @author Ben
@@ -66,14 +64,13 @@ public class MySQL5BlockListDAO extends BlockListDAO {
 
 			@Override
 			public void handleRead(ResultSet rset) throws SQLException {
-				PlayerDAO playerDao = DAOManager.getDAO(PlayerDAO.class);
 				while (rset.next()) {
 					int blockedOid = rset.getInt("blocked_player");
-					PlayerCommonData pcd = playerDao.loadPlayerCommonData(blockedOid);
-					if (pcd == null) {
-						log.error("Attempt to load block list for " + playerObjId + " tried to load a player which does not exist: " + blockedOid);
+					String name = PlayerService.getPlayerName(blockedOid);
+					if (name == null) {
+						log.error("Attempt to load block list for player " + playerObjId + " tried to load a player which does not exist: " + blockedOid);
 					} else {
-						list.put(blockedOid, new BlockedPlayer(pcd, rset.getString("reason")));
+						list.put(blockedOid, new BlockedPlayer(blockedOid, name, rset.getString("reason")));
 					}
 				}
 

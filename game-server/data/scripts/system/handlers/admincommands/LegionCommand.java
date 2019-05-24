@@ -7,7 +7,6 @@ import java.util.List;
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.dao.LegionDAO;
 import com.aionemu.gameserver.dao.LegionMemberDAO;
-import com.aionemu.gameserver.dao.PlayerDAO;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.PlayerCommonData;
 import com.aionemu.gameserver.model.team.legion.Legion;
@@ -19,6 +18,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_LEGION_UPDATE_MEMBER
 import com.aionemu.gameserver.network.aion.serverpackets.SM_LEGION_UPDATE_TITLE;
 import com.aionemu.gameserver.services.LegionService;
 import com.aionemu.gameserver.services.NameRestrictionService;
+import com.aionemu.gameserver.services.player.PlayerService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.Util;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
@@ -139,18 +139,9 @@ public class LegionCommand extends AdminCommand {
 			Collection<Integer> members = legion.getLegionMembers();
 			message.add("members: " + members.size());
 
-			PlayerDAO dao = null;
 			for (int memberId : members) {
-				Player pl = World.getInstance().findPlayer(memberId);
-				if (pl != null)
-					online.add(pl.getName() + " (lv" + pl.getLevel() + ") classId " + pl.getPlayerClass().getClassId());
-				else {
-					if (dao == null)
-						dao = DAOManager.getDAO(PlayerDAO.class);
-
-					PlayerCommonData pcd = dao.loadPlayerCommonData(memberId);
-					offline.add(pcd.getName() + " (lv" + pcd.getLevel() + ") classId " + pcd.getPlayerClass().getClassId());
-				}
+				PlayerCommonData pcd = PlayerService.getOrLoadPlayerCommonData(memberId);
+				offline.add(pcd.getName() + " (lv" + pcd.getLevel() + ") classId " + pcd.getPlayerClass().getClassId());
 			}
 
 			message.add("--ONLINE-------- " + online.size());

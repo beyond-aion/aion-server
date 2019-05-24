@@ -38,13 +38,11 @@ public class PlayerTransferService {
 		return instance;
 	}
 
-	private PlayerDAO dao;
 	private Map<Integer, TransferablePlayer> transfers = new LinkedHashMap<>();
 	private HashMap<Integer, PlayerTransfer> playerTransfers = new HashMap<>();
 	private List<Integer> rsList = new ArrayList<>();
 
 	public PlayerTransferService() {
-		this.dao = DAOManager.getDAO(PlayerDAO.class);
 		if (!PlayerTransferConfig.REMOVE_SKILL_LIST.equals("*")) {
 			for (String skillId : PlayerTransferConfig.REMOVE_SKILL_LIST.split(","))
 				rsList.add(Integer.parseInt(skillId));
@@ -93,7 +91,7 @@ public class PlayerTransferService {
 			return;
 		}
 
-		PlayerCommonData common = dao.loadPlayerCommonData(playerId);
+		PlayerCommonData common = PlayerService.getOrLoadPlayerCommonData(playerId);
 		if (common.isOnline()) {
 			log.warn("cannot transfer #" + taskId + " online players " + playerId + ".");
 			LoginServer.getInstance().sendPacket(

@@ -9,13 +9,10 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.configs.main.LoggingConfig;
 import com.aionemu.gameserver.configs.main.SiegeConfig;
-import com.aionemu.gameserver.dao.PlayerDAO;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.gameobjects.player.PlayerCommonData;
 import com.aionemu.gameserver.model.gameobjects.siege.SiegeNpc;
 import com.aionemu.gameserver.model.siege.FortressLocation;
 import com.aionemu.gameserver.model.siege.SiegeLocation;
@@ -29,6 +26,7 @@ import com.aionemu.gameserver.services.abyss.GloryPointsService;
 import com.aionemu.gameserver.services.mail.AbyssSiegeLevel;
 import com.aionemu.gameserver.services.mail.MailFormatter;
 import com.aionemu.gameserver.services.mail.SiegeResult;
+import com.aionemu.gameserver.services.player.PlayerService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.World;
 
@@ -229,8 +227,8 @@ public abstract class Siege<SL extends SiegeLocation> {
 					if (kinahReward > 40000000)
 						kinahReward = 40000000;
 					if (isWinner)
-						MailFormatter.sendAbyssRewardMail(getSiegeLocation(), getPlayerCommonData(playerId), level, raceResult, timeMillis, topGrade.getItemId(),
-							topGrade.getItemCount(), kinahReward);
+						MailFormatter.sendAbyssRewardMail(getSiegeLocation(), PlayerService.getOrLoadPlayerCommonData(playerId), level, raceResult, timeMillis,
+							topGrade.getItemId(), topGrade.getItemCount(), kinahReward);
 					if (gp > 0) {
 						rewardedGpPlayers.add(playerId);
 						GloryPointsService.increaseGp(playerId, gp);
@@ -244,14 +242,6 @@ public abstract class Siege<SL extends SiegeLocation> {
 		} catch (Exception e) {
 			log.error("Error while distributing rewards for " + this, e);
 		}
-	}
-
-	protected final PlayerCommonData getPlayerCommonData(int playerId) {
-		Player player = World.getInstance().findPlayer(playerId);
-		if (player != null)
-			return player.getCommonData();
-		else
-			return DAOManager.getDAO(PlayerDAO.class).loadPlayerCommonData(playerId);
 	}
 
 	@Override

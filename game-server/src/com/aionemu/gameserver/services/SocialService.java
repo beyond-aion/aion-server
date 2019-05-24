@@ -29,7 +29,7 @@ public class SocialService {
 	 */
 	public static boolean addBlockedUser(Player player, Player blockedPlayer, String reason) {
 		if (DAOManager.getDAO(BlockListDAO.class).addBlockedUser(player.getObjectId(), blockedPlayer.getObjectId(), reason)) {
-			player.getBlockList().add(new BlockedPlayer(blockedPlayer.getCommonData(), reason));
+			player.getBlockList().add(new BlockedPlayer(blockedPlayer.getObjectId(), blockedPlayer.getName(), reason));
 			PacketSendUtility.sendPacket(player, new SM_BLOCK_LIST());
 			PacketSendUtility.sendPacket(player, new SM_BLOCK_RESPONSE(SM_BLOCK_RESPONSE.BLOCK_SUCCESSFUL, blockedPlayer.getName()));
 			return true;

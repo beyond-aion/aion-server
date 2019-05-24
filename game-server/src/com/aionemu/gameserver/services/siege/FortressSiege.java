@@ -39,6 +39,7 @@ import com.aionemu.gameserver.services.abyss.GloryPointsService;
 import com.aionemu.gameserver.services.mail.AbyssSiegeLevel;
 import com.aionemu.gameserver.services.mail.MailFormatter;
 import com.aionemu.gameserver.services.mail.SiegeResult;
+import com.aionemu.gameserver.services.player.PlayerService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -370,7 +371,7 @@ public class FortressSiege extends Siege<FortressLocation> {
 		try {
 			long totalKinah = 0;
 			int nonKinahItems = 0;
-			PlayerCommonData brigadeGeneral = getPlayerCommonData(legion.getBrigadeGeneral());
+			PlayerCommonData brigadeGeneral = PlayerService.getOrLoadPlayerCommonData(legion.getBrigadeGeneral());
 			for (SiegeLegionReward item : legionRewards) {
 				if (item.getItemId() == 182400001) { // handles kinah rewards
 					long kinah = isBossKilled() ? item.getItemCount() : Math.round(item.getItemCount() * 0.7f);
