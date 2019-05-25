@@ -63,10 +63,6 @@ public class AIActions {
 		ai.getPosition().getWorldMapInstance().getInstanceHandler().handleUseItemFinish(player, ((Npc) ai.getOwner()));
 	}
 
-	public static void fireNpcKillInstanceEvent(AbstractAI<? extends Creature> ai, Player player) {
-		ai.getPosition().getWorldMapInstance().getInstanceHandler().onDie((Npc) ai.getOwner());
-	}
-
 	public static void registerDrop(AbstractAI<? extends Creature> ai, Player player, Collection<Player> registeredPlayers) {
 		DropRegistrationService.getInstance().registerDrop((Npc) ai.getOwner(), player, registeredPlayers);
 	}

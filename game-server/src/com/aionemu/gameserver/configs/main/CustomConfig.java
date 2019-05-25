@@ -116,12 +116,6 @@ public class CustomConfig {
 	public static int NPC_CUBE_EXPANDS_SIZE_LIMIT;
 
 	/**
-	 * Enable instances mob always aggro player ignore level
-	 */
-	@Property(key = "gameserver.instances.mob.aggro", defaultValue = "300080000,300090000,300060000")
-	public static String INSTANCES_MOB_AGGRO;
-
-	/**
 	 * Enable instances cooldown filtring
 	 */
 	@Property(key = "gameserver.instances.cooldown.filter", defaultValue = "0")

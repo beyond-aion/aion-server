@@ -43,14 +43,10 @@ import com.aionemu.gameserver.world.zone.ZoneInstance;
 public class InstanceService {
 
 	private static final Logger log = LoggerFactory.getLogger(InstanceService.class);
-	private static final List<Integer> instanceAggro = new ArrayList<>();
 	private static final List<Integer> instanceCoolDownFilter = new ArrayList<>();
 	public static final int INSTANCE_DESTROY_DELAY = 10 * 60 * 1000; // 10 minutes
 
 	public static void load() {
-		for (String s : CustomConfig.INSTANCES_MOB_AGGRO.split(",")) {
-			instanceAggro.add(Integer.parseInt(s));
-		}
 		for (String s : CustomConfig.INSTANCES_COOL_DOWN_FILTER.split(",")) {
 			instanceCoolDownFilter.add(Integer.parseInt(s));
 		}
@@ -363,10 +359,6 @@ public class InstanceService {
 
 	public static void onLeaveZone(Player player, ZoneInstance zone) {
 		player.getPosition().getWorldMapInstance().getInstanceHandler().onLeaveZone(player, zone);
-	}
-
-	public static boolean isAggro(int mapId) {
-		return instanceAggro.contains(mapId);
 	}
 
 	public static int getInstanceRate(Player player, int mapId) {
