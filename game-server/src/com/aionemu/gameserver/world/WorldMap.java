@@ -14,7 +14,7 @@ import com.aionemu.gameserver.world.zone.ZoneAttributes;
  * 
  * @author -Nemesiss-
  */
-public class WorldMap {
+public class WorldMap implements Iterable<WorldMapInstance> {
 
 	private WorldMapTemplate worldMapTemplate;
 	private AtomicInteger nextInstanceId = new AtomicInteger(0);
@@ -199,9 +199,6 @@ public class WorldMap {
 		return worldMapTemplate.isInstance();
 	}
 
-	/**
-	 * @return
-	 */
 	public Iterator<WorldMapInstance> iterator() {
 		return instances.values().iterator();
 	}

@@ -354,7 +354,7 @@ public class PortalService {
 
 	private static WorldMapInstance registerTeam(GeneralTeam<?, ?> team, int mapId, int playerSize, byte difficult) {
 		WorldMapInstance instance = InstanceService.getNextAvailableInstance(mapId, difficult);
-		InstanceService.registerTeamWithInstance(instance, team, playerSize);
+		instance.registerTeam(team, playerSize);
 		return instance;
 	}
 

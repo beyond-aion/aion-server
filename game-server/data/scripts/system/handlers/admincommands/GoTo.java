@@ -1,12 +1,11 @@
 package admincommands;
 
+import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.services.instance.InstanceService;
 import com.aionemu.gameserver.services.teleport.TeleportService;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 import com.aionemu.gameserver.world.World;
-import com.aionemu.gameserver.world.WorldMap;
 import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.WorldMapType;
 
@@ -19,23 +18,21 @@ import com.aionemu.gameserver.world.WorldMapType;
 public class GoTo extends AdminCommand {
 
 	public GoTo() {
-		super("goto");
+		super("goto", "Teleports you to regions by name.");
+
+		setSyntaxInfo("<location name> - Teleports you to the given location.");
 	}
 
 	@Override
 	public void execute(Player player, String... params) {
-		if (params == null || params.length < 1) {
-			PacketSendUtility.sendMessage(player, "syntax //goto <location>");
+		if (params.length == 0) {
+			sendInfo(player);
 			return;
 		}
 
-		StringBuilder sbDestination = new StringBuilder();
-		for (String p : params)
-			sbDestination.append(p + " ");
+		String destination = String.join(" ", params).trim();
 
-		String destination = sbDestination.toString().trim();
-
-		/**
+		/*
 		 * Elysea
 		 */
 		// Sanctum
@@ -111,7 +108,7 @@ public class GoTo extends AdminCommand {
 		else if (destination.equalsIgnoreCase("Arbolu") || destination.equalsIgnoreCase("Arbolus Oase"))
 			goTo(player, WorldMapType.HEIRON.getId(), 170, 1662, 120);
 
-		/**
+		/*
 		 * Asmodae
 		 */
 		// Pandaemonium
@@ -183,7 +180,7 @@ public class GoTo extends AdminCommand {
 		else if (destination.equalsIgnoreCase("Hoarfrost") || destination.equalsIgnoreCase("raureif"))
 			goTo(player, WorldMapType.BELUSLAN.getId(), 2431, 2063, 579);
 
-		/**
+		/*
 		 * Balaurea
 		 */
 		// Inggison
@@ -208,7 +205,7 @@ public class GoTo extends AdminCommand {
 		else if (destination.equalsIgnoreCase("Silentera"))
 			goTo(player, 600010000, 583, 767, 300);
 
-		/**
+		/*
 		 * Abyss
 		 */
 		else if (destination.equalsIgnoreCase("Reshanta"))
@@ -226,7 +223,7 @@ public class GoTo extends AdminCommand {
 		else if (destination.equalsIgnoreCase("Divine Fortress") || destination.equalsIgnoreCase("Divine"))
 			goTo(player, WorldMapType.RESHANTA.getId(), 2130, 1925, 2322);
 
-		/**
+		/*
 		 * Instances
 		 */
 		else if (destination.equalsIgnoreCase("Haramel"))
@@ -382,7 +379,7 @@ public class GoTo extends AdminCommand {
 						|| destination.equalsIgnoreCase("Schutzturm"))
 			goTo(player, 301230000, 322.38f, 324.47f, 405.49997f);
 
-		/**
+		/*
 		 * Quest Instance Maps
 		 */
 		// TODO : Changer id maps
@@ -412,7 +409,7 @@ public class GoTo extends AdminCommand {
 		else if (destination.equalsIgnoreCase("Nidalber"))
 			goTo(player, 320040000, 275, 168, 205);
 
-		/**
+		/*
 		 * Arenas
 		 */
 		else if (destination.equalsIgnoreCase("Sanctum Arena") || destination.equalsIgnoreCase("Unterirdische Arena von Sanctum"))
@@ -462,7 +459,7 @@ public class GoTo extends AdminCommand {
 		else if (destination.equalsIgnoreCase("Arena Of Chaos - 6"))
 			goTo(player, 300350000, 1949, 946, 224);
 
-		/**
+		/*
 		 * Miscellaneous
 		 */
 		// Prison
@@ -486,7 +483,7 @@ public class GoTo extends AdminCommand {
 		else if (destination.equalsIgnoreCase("gm"))
 			TeleportService.teleportTo(player, 900110000, 2594.29f, 85.48f, 121f, (byte) 20);
 
-		/**
+		/*
 		 * 2.5 Maps
 		 */
 		else if (destination.equalsIgnoreCase("Kaisinel Academy") || destination.equalsIgnoreCase("Kaisinels Akademie"))
@@ -496,7 +493,7 @@ public class GoTo extends AdminCommand {
 		else if (destination.equalsIgnoreCase("Esoterrace") || destination.equalsIgnoreCase("Esoterrasse"))
 			goTo(player, 300250000, 333, 437, 326);
 
-		/**
+		/*
 		 * 3.0 Maps
 		 */
 		else if (destination.equalsIgnoreCase("Pernon"))
@@ -507,7 +504,7 @@ public class GoTo extends AdminCommand {
 						|| destination.equalsIgnoreCase("Rentus Basis"))
 			goTo(player, 300280000, 557, 593, 154);
 
-		/**
+		/*
 		 * 3.5
 		 */
 		else if (destination.equalsIgnoreCase("Tiamat Stronghold") || destination.equalsIgnoreCase("Tiamats Festung")
@@ -519,7 +516,7 @@ public class GoTo extends AdminCommand {
 						|| destination.equalsIgnoreCase("Blutthron") || destination.equalsIgnoreCase("tu"))
 			goTo(player, 300520000, 495, 528, 417);
 
-		/**
+		/*
 		 * 4.7 Instances
 		 */
 		else if (destination.equalsIgnoreCase("idgel_dome") || destination.equalsIgnoreCase("idgel dome")
@@ -587,30 +584,17 @@ public class GoTo extends AdminCommand {
 			goTo(player, 210090000, 684, 654, 515);
 
 		else
-			PacketSendUtility.sendMessage(player, "Could not find the specified destination !");
+			sendInfo(player, "Could not find the specified destination.");
 	}
 
-	private static void goTo(final Player player, int worldId, float x, float y, float z) {
-		WorldMap destinationMap = World.getInstance().getWorldMap(worldId);
-		if (destinationMap.isInstanceType())
-			TeleportService.teleportTo(player, worldId, getInstanceId(worldId, player), x, y, z);
+	private static void goTo(Player player, int worldId, float x, float y, float z) {
+		WorldMapInstance instance;
+		if (player.getWorldId() == worldId)
+			instance = player.getPosition().getWorldMapInstance();
+		else if (World.getInstance().getWorldMap(worldId).isInstanceType())
+			instance = InstanceService.getOrRegisterInstance(worldId, player);
 		else
-			TeleportService.teleportTo(player, worldId, x, y, z);
-	}
-
-	private static int getInstanceId(int worldId, Player player) {
-		if (player.getWorldId() == worldId) {
-			WorldMapInstance registeredInstance = InstanceService.getRegisteredInstance(worldId, player.getObjectId());
-			if (registeredInstance != null)
-				return registeredInstance.getInstanceId();
-		}
-		WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(worldId);
-		InstanceService.registerPlayerWithInstance(newInstance, player);
-		return newInstance.getInstanceId();
-	}
-
-	@Override
-	public void info(Player player, String message) {
-		PacketSendUtility.sendMessage(player, "Syntax : //goto <location>");
+			instance = World.getInstance().getWorldMap(worldId).getMainWorldMapInstance();
+		TeleportService.teleportTo(player, instance, x, y, z, player.getHeading(), TeleportAnimation.NONE);
 	}
 }

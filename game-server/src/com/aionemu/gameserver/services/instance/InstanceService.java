@@ -1,7 +1,6 @@
 package com.aionemu.gameserver.services.instance;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -144,23 +143,18 @@ public class InstanceService {
 		instance.setSoloPlayerObjId(obj);
 	}
 
-	public static void registerTeamWithInstance(WorldMapInstance instance, GeneralTeam<?, ?> team, int playerSize) {
-		instance.registerTeam(team, playerSize);
+	public static WorldMapInstance getOrRegisterInstance(int worldId, Player player) {
+		WorldMapInstance instance = getRegisteredInstance(worldId, player.getObjectId());
+		if (instance == null)
+			instance = getNextAvailableInstance(worldId);
+		instance.register(player.getObjectId());
+		return instance;
 	}
 
-	/**
-	 * @param worldId
-	 * @param objectId
-	 * @return instance or null
-	 */
 	public static WorldMapInstance getRegisteredInstance(int worldId, int objectId) {
-		Iterator<WorldMapInstance> iterator = World.getInstance().getWorldMap(worldId).iterator();
-		while (iterator.hasNext()) {
-			WorldMapInstance instance = iterator.next();
-
-			if (instance.isRegistered(objectId)) {
+		for (WorldMapInstance instance : World.getInstance().getWorldMap(worldId)) {
+			if (instance.isRegistered(objectId))
 				return instance;
-			}
 		}
 		return null;
 	}
@@ -169,9 +163,7 @@ public class InstanceService {
 		if (ownerId == 0)
 			return null;
 
-		Iterator<WorldMapInstance> iterator = World.getInstance().getWorldMap(worldId).iterator();
-		while (iterator.hasNext()) {
-			WorldMapInstance instance = iterator.next();
+		for (WorldMapInstance instance : World.getInstance().getWorldMap(worldId)) {
 			if (instance.isPersonal() && instance.getOwnerId() == ownerId)
 				return instance;
 		}

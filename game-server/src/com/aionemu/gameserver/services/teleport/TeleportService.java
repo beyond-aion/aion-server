@@ -5,7 +5,6 @@ import java.util.concurrent.FutureTask;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.gameserver.configs.main.GeoDataConfig;
 import com.aionemu.gameserver.configs.main.SecurityConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.dataholders.PlayerInitialData;
@@ -37,7 +36,6 @@ import com.aionemu.gameserver.model.templates.teleport.TelelocationTemplate;
 import com.aionemu.gameserver.model.templates.teleport.TeleportLocation;
 import com.aionemu.gameserver.model.templates.teleport.TeleportType;
 import com.aionemu.gameserver.model.templates.teleport.TeleporterTemplate;
-import com.aionemu.gameserver.model.templates.world.WorldMapTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_BIND_POINT_INFO;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_CHANNEL_INFO;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
@@ -272,6 +270,10 @@ public class TeleportService {
 		teleportTo(player, worldId, instanceId, x, y, z, h, TeleportAnimation.NONE);
 	}
 
+	public static void teleportTo(Player player, WorldMapInstance instance, float x, float y, float z, byte h, TeleportAnimation animation) {
+		teleportTo(player, instance.getMapId(), instance.getInstanceId(), x, y, z, h, animation);
+	}
+
 	public static void teleportTo(final Player player, final int worldId, final int instanceId, final float x, final float y, final float z,
 		final byte heading, TeleportAnimation animation) {
 		if (player.isDead()) {
@@ -326,32 +328,25 @@ public class TeleportService {
 		}
 
 		SpawnSpotTemplate spot = searchResult.getSpot();
-		WorldMapTemplate worldTemplate = DataManager.WORLD_MAPS_DATA.getTemplate(searchResult.getWorldId());
 		NpcTemplate npcTemplate = DataManager.NPC_DATA.getNpcTemplate(npcId);
-		int instanceId = player.getInstanceId();
-		float x = spot.getX(), y = spot.getY(), z = spot.getZ();
+		WorldMapInstance instance;
+		if (player.getWorldId() == searchResult.getWorldId())
+			instance = player.getPosition().getWorldMapInstance();
+		else if (World.getInstance().getWorldMap(searchResult.getWorldId()).isInstanceType())
+			instance = InstanceService.getOrRegisterInstance(searchResult.getWorldId(), player);
+		else
+			instance = World.getInstance().getWorldMap(searchResult.getWorldId()).getMainWorldMapInstance();
+
+		// calculate position 1m in front of the npc
+		double radian = Math.toRadians(PositionUtil.convertHeadingToAngle(spot.getHeading()));
+		float x = spot.getX() + (float) Math.cos(radian) * (1f + npcTemplate.getBoundRadius().getFront());
+		float y = spot.getY() + (float) Math.sin(radian) * (1f + npcTemplate.getBoundRadius().getFront());
+		float z = GeoService.getInstance().getZ(searchResult.getWorldId(), x, y, spot.getZ(), instance.getInstanceId());
+		if (Float.isNaN(z)) // no collision found or geo disabled
+			z = spot.getZ() + 0.5f;
 		byte heading = (byte) ((spot.getHeading() & 0xFF) >= 60 ? spot.getHeading() - 60 : spot.getHeading() + 60); // look towards npc
 
-		if (GeoDataConfig.GEO_ENABLE) {
-			// calculate position 1m in front of the npc
-			double radian = Math.toRadians(PositionUtil.convertHeadingToAngle(spot.getHeading()));
-			x += Math.cos(radian) * (1f + npcTemplate.getBoundRadius().getFront());
-			y += Math.sin(radian) * (1f + npcTemplate.getBoundRadius().getFront());
-			z = GeoService.getInstance().getZ(searchResult.getWorldId(), x, y, spot.getZ(), 1);
-			if (Float.isNaN(z))
-				z = spot.getZ() + 0.5f;
-		}
-
-		if (player.getWorldId() != searchResult.getWorldId()) {
-			if (worldTemplate.isInstance()) {
-				WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(searchResult.getWorldId());
-				InstanceService.registerPlayerWithInstance(newInstance, player);
-				instanceId = newInstance.getInstanceId();
-			} else
-				instanceId = 1;
-		}
-
-		teleportTo(player, searchResult.getWorldId(), instanceId, x, y, z, heading);
+		teleportTo(player, instance, x, y, z, heading, TeleportAnimation.NONE);
 	}
 
 	/**
@@ -509,8 +504,7 @@ public class TeleportService {
 
 		if (!player.getResponseRequester().putRequest(questionMsgId, handler))
 			return false;
-		PacketSendUtility.sendPacket(player,
-			new SM_QUESTION_WINDOW(questionMsgId, 0, 0, DataManager.NPC_DATA.getNpcTemplate(npcId).getL10n()));
+		PacketSendUtility.sendPacket(player, new SM_QUESTION_WINDOW(questionMsgId, 0, 0, DataManager.NPC_DATA.getNpcTemplate(npcId).getL10n()));
 		return true;
 	}
 
