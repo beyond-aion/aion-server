@@ -3,7 +3,6 @@ package com.aionemu.gameserver.world.zone;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
@@ -94,8 +93,6 @@ public final class ZoneService implements GameEngine {
 		if (zoneClass != null) {
 			try {
 				zoneHandler = zoneClass.newInstance();
-			} catch (IllegalAccessException ex) {
-				log.warn("Can't instantiate zone handler " + zoneName, ex);
 			} catch (Exception ex) {
 				log.warn("Can't instantiate zone handler " + zoneName, ex);
 			}
@@ -147,7 +144,7 @@ public final class ZoneService implements GameEngine {
 		ShieldService.getInstance().load(mapId);
 
 		for (ZoneInfo area : areas) {
-			ZoneInstance instance = null;
+			ZoneInstance instance;
 			switch (area.getZoneTemplate().getZoneType()) {
 				case FLY:
 					instance = new FlyZoneInstance(mapId, area);
@@ -229,13 +226,7 @@ public final class ZoneService implements GameEngine {
 				}
 			}
 		}
-		Collections.sort(templates, new Comparator<ZoneTemplate>() {
-
-			@Override
-			public int compare(ZoneTemplate o1, ZoneTemplate o2) {
-				return o1.getMapid() - o2.getMapid();
-			}
-		});
+		templates.sort(Comparator.comparingInt(ZoneTemplate::getMapid));
 
 		ZoneData zoneData = new ZoneData();
 		zoneData.zoneList = templates;

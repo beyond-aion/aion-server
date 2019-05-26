@@ -88,7 +88,7 @@ public abstract class ChatCommand {
 		this.syntaxInfo = parseSyntaxInfo(lines);
 	}
 
-	private String getSyntaxInfo() {
+	public String getSyntaxInfo() {
 		if (syntaxInfo == null) // init default info if handler did not set any syntax info
 			setSyntaxInfo();
 		return syntaxInfo;

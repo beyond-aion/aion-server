@@ -1,9 +1,9 @@
 package com.aionemu.commons.scripting.scriptmanager;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.util.TimeZone;
 
@@ -38,7 +38,7 @@ public class ScriptManagerTest {
 	}
 
 	@Test
-	public void testOnClassLoadAndUnload() {
+	public void testOnClassLoadAndUnload() throws IOException {
 		ScriptManager sm = new ScriptManager();
 		sm.setGlobalClassListener(new OnClassLoadUnloadListener());
 		sm.loadDirectory(new File(FILE_TEST_DATA_DIR));
@@ -49,7 +49,7 @@ public class ScriptManagerTest {
 	}
 
 	@Test
-	public void testScheduledAnnotation() {
+	public void testScheduledAnnotation() throws IOException {
 		ScriptManager sm = new ScriptManager();
 		sm.setGlobalClassListener(new ScheduledTaskClassListenerTestAdapter(cronService));
 		sm.loadDirectory(new File(FILE_TEST_DATA_DIR));

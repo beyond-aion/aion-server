@@ -2,11 +2,8 @@ package com.aionemu.commons.database.dao;
 
 import static com.aionemu.commons.database.DatabaseFactory.*;
 
-import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.Map;
-
-import javax.xml.bind.JAXBException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -56,12 +53,8 @@ public class DAOManager {
 			scriptManager.load(DatabaseConfig.DATABASE_SCRIPTCONTEXT_DESCRIPTOR);
 		} catch (RuntimeException e) {
 			throw new Error(e.getMessage(), e);
-		} catch (FileNotFoundException e) {
-			throw new Error("Can't load database script context: " + DatabaseConfig.DATABASE_SCRIPTCONTEXT_DESCRIPTOR, e);
-		} catch (JAXBException e) {
-			throw new Error("Can't compile database handlers - check your MySQL5 implementations", e);
 		} catch (Exception e) {
-			throw new Error("A fatal error occured during loading or compiling the database handlers", e);
+			throw new Error("A fatal error occurred during loading or compiling the database handlers", e);
 		}
 
 		log.info("Loaded " + daoMap.size() + " DAO implementations.");

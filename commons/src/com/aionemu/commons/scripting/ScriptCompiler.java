@@ -3,8 +3,8 @@ package com.aionemu.commons.scripting;
 import java.io.File;
 
 /**
- * This interface reperesents common functionality list that should be available for any commpiler that is going to be used with scripting engine. For
- * instance, groovy can be used, hoever it produces by far not the best bytecode so by default javac from sun is used.
+ * This interface represents common functionality list that should be available for any compiler that is going to be used with scripting engine. For
+ * instance, groovy can be used, however it produces by far not the best bytecode so by default javac from sun is used.
  * 
  * @author SoulKeeper
  */
@@ -18,7 +18,7 @@ public interface ScriptCompiler {
 	 * @param classLoader
 	 *          ScriptClassLoader that will be used as parent
 	 */
-	public void setParentClassLoader(ScriptClassLoader classLoader);
+	void setParentClassLoader(ScriptClassLoader classLoader);
 
 	/**
 	 * List of jar files that are required for compilation
@@ -26,7 +26,7 @@ public interface ScriptCompiler {
 	 * @param files
 	 *          list of jar files
 	 */
-	public void setLibraires(Iterable<File> files);
+	void setLibraries(Iterable<File> files);
 
 	/**
 	 * Compiles single class that is represented as string
@@ -37,7 +37,7 @@ public interface ScriptCompiler {
 	 *          class sourse code
 	 * @return {@link com.aionemu.commons.scripting.CompilationResult}
 	 */
-	public CompilationResult compile(String className, String sourceCode);
+	CompilationResult compile(String className, String sourceCode);
 
 	/**
 	 * Compiles classes that are represented as strings
@@ -50,7 +50,7 @@ public interface ScriptCompiler {
 	 * @throws IllegalArgumentException
 	 *           if number of class names != number of sources
 	 */
-	public CompilationResult compile(String[] className, String[] sourceCode) throws IllegalArgumentException;
+	CompilationResult compile(String[] className, String[] sourceCode) throws IllegalArgumentException;
 
 	/**
 	 * Compiles list of files
@@ -59,12 +59,5 @@ public interface ScriptCompiler {
 	 *          list of files
 	 * @return {@link com.aionemu.commons.scripting.CompilationResult}
 	 */
-	public CompilationResult compile(Iterable<File> compilationUnits);
-
-	/**
-	 * Returns array of supported file types. This files will be threated as source files.
-	 * 
-	 * @return array of supported file types.
-	 */
-	public String[] getSupportedFileTypes();
+	CompilationResult compile(Iterable<File> compilationUnits);
 }

@@ -1,27 +1,27 @@
 package com.aionemu.commons.scripting.scriptmanager;
 
 import java.io.File;
-import java.util.ArrayList;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
-import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.commons.scripting.ScriptCompiler;
 import com.aionemu.commons.scripting.ScriptContext;
 import com.aionemu.commons.scripting.ScriptContextFactory;
 import com.aionemu.commons.scripting.classlistener.ClassListener;
-import com.aionemu.commons.scripting.impl.javacompiler.ScriptCompilerImpl;
 import com.aionemu.commons.utils.xml.JAXBUtil;
 
 /**
  * Class that represents managers of script contexts. It loads, reloads and unload script contexts. In the future it may be extended to support
- * programatic manipulation of contexts, but for now it's not needed. <br />
+ * programmatic manipulation of contexts, but for now it's not needed. <br />
  * Example:
  * 
  * <pre>
@@ -42,8 +42,6 @@ public class ScriptManager {
 	 */
 	private static final Logger log = LoggerFactory.getLogger(ScriptManager.class);
 
-	public static final Class<? extends ScriptCompiler> DEFAULT_COMPILER_CLASS = ScriptCompilerImpl.class;
-
 	/**
 	 * Collection of script contexts
 	 */
@@ -59,18 +57,14 @@ public class ScriptManager {
 	 * 
 	 * @param scriptDescriptor
 	 *          xml file that describes contexts
-	 * @throws Exception
-	 *           if can't load file
 	 */
-	public synchronized void load(File scriptDescriptor) throws Exception {
+	public synchronized void load(File scriptDescriptor) {
 		ScriptList list = JAXBUtil.deserialize(scriptDescriptor, ScriptList.class);
 
 		for (ScriptInfo si : list.getScriptInfos()) {
 			ScriptContext context = createContext(si, null);
-			if (context != null) {
-				contexts.add(context);
-				context.init();
-			}
+			contexts.add(context);
+			context.init();
 		}
 	}
 
@@ -84,18 +78,16 @@ public class ScriptManager {
 	 * .jar files are treated as libraries.<br>
 	 * Both .java and .jar files will be loaded recursively
 	 *
-	 * @see #DEFAULT_COMPILER_CLASS
 	 * @param directory
 	 *          - directory with .java and .jar files
-	 * @throws RuntimeException
-	 *           if failed to load script context
+	 * @throws IOException
+	 *           if failed to read the directory contents
 	 */
-	public synchronized void loadDirectory(File directory) throws RuntimeException {
-		Collection<File> libraries = FileUtils.listFiles(directory, new String[] { "jar" }, true);
-		List<File> list = new ArrayList<>();
-		list.addAll(libraries);
+	public synchronized void loadDirectory(File directory) throws IOException {
+		List<File> libraries = Files.walk(directory.toPath(), Integer.MAX_VALUE).filter(Files::isRegularFile)
+			.filter(path -> path.toString().toLowerCase().endsWith(".jar")).map(Path::toFile).collect(Collectors.toList());
 		try {
-			loadDirectory(directory, list, DEFAULT_COMPILER_CLASS.getName());
+			loadDirectory(directory.getAbsolutePath(), libraries);
 		} catch (Exception e) {
 			throw new RuntimeException("Failed to load script context from directory " + directory.getAbsolutePath(), e);
 		}
@@ -111,21 +103,11 @@ public class ScriptManager {
 	 *          - directory with source files
 	 * @param libraries
 	 *          - collection with libraries to load
-	 * @param compilerClassName
-	 *          -
-	 * @throws Exception
-	 *           if failed to load script context
 	 */
-	public synchronized void loadDirectory(File directory, List<File> libraries, String compilerClassName) throws Exception {
-
-		if (!directory.isDirectory()) {
-			throw new IllegalArgumentException("File should be directory");
-		}
-
+	public synchronized void loadDirectory(String directory, List<File> libraries) {
 		ScriptInfo si = new ScriptInfo();
 		si.setRoot(directory);
-		si.setCompilerClass(compilerClassName);
-		si.setScriptInfos(Collections.<ScriptInfo> emptyList());
+		si.setScriptInfos(Collections.emptyList());
 		si.setLibraries(libraries);
 
 		ScriptContext sc = createContext(si, null);
@@ -141,16 +123,13 @@ public class ScriptManager {
 	 * @param parent
 	 *          parent script context
 	 * @return created script context
-	 * @throws Exception
-	 *           if can't create context
 	 */
-	protected ScriptContext createContext(ScriptInfo si, ScriptContext parent) throws Exception {
+	protected ScriptContext createContext(ScriptInfo si, ScriptContext parent) {
 		ScriptContext context = ScriptContextFactory.getScriptContext(si.getRoot(), parent);
 		context.setLibraries(si.getLibraries());
-		context.setCompilerClassName(si.getCompilerClass());
 
 		if (parent == null && contexts.contains(context)) {
-			log.warn("Double root script context definition: " + si.getRoot().getAbsolutePath());
+			log.warn("Double root script context definition: " + si.getRoot());
 			return null;
 		}
 

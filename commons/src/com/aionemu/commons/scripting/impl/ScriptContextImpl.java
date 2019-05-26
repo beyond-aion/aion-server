@@ -1,21 +1,25 @@
 package com.aionemu.commons.scripting.impl;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
 import java.util.Set;
+import java.util.regex.PatternSyntaxException;
 
-import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.scripting.CompilationResult;
 import com.aionemu.commons.scripting.ScriptCompiler;
 import com.aionemu.commons.scripting.ScriptContext;
-import com.aionemu.commons.scripting.classlistener.AggregatedClassListener;
 import com.aionemu.commons.scripting.classlistener.ClassListener;
-import com.aionemu.commons.scripting.classlistener.OnClassLoadUnloadListener;
-import com.aionemu.commons.scripting.classlistener.ScheduledTaskClassListener;
+import com.aionemu.commons.scripting.impl.javacompiler.ScriptCompilerImpl;
 
 /**
  * This class is actual implementation of {@link com.aionemu.commons.scripting.ScriptContext}
@@ -40,9 +44,9 @@ public class ScriptContextImpl implements ScriptContext {
 	private Iterable<File> libraries;
 
 	/**
-	 * Root directory of this script context. It and it's subdirectories will be scanned for .java files.
+	 * Root directories of this script context. It and it's subdirectories will be scanned for .java files.
 	 */
-	private final File root;
+	private final String dirPattern;
 
 	/**
 	 * Result of compilation of script context
@@ -60,47 +64,36 @@ public class ScriptContextImpl implements ScriptContext {
 	private ClassListener classListener;
 
 	/**
-	 * Class name of the compiler that will be used to compile sources
-	 */
-	private String compilerClassName;
-
-	/**
 	 * Creates new scriptcontext with given root file
 	 * 
-	 * @param root
-	 *          file that represents root directory of this script context
+	 * @param dirPattern
+	 *          directory pattern where java files will be loaded from
 	 * @throws NullPointerException
-	 *           if root is null
+	 *           if dirPattern is null
 	 * @throws IllegalArgumentException
-	 *           if root directory doesn't exists or is not a directory
+	 *           if no directory exists for dirPattern
 	 */
-	public ScriptContextImpl(File root) {
-		this(root, null);
+	public ScriptContextImpl(String dirPattern) {
+		this(dirPattern, null);
 	}
 
 	/**
-	 * Creates new ScriptContext with given file as root and another ScriptContext as parent
+	 * Creates new ScriptContext with given file as dirPattern and another ScriptContext as parent
 	 * 
-	 * @param root
-	 *          file that represents root directory of this script context
+	 * @param dirPattern
+	 *          directory pattern where java files will be loaded from
 	 * @param parent
 	 *          parent ScriptContex. It's classes and libraries will be accessible for this script context
 	 * @throws NullPointerException
-	 *           if root is null
+	 *           if dirPattern is null
 	 * @throws IllegalArgumentException
-	 *           if root directory doesn't exists or is not a directory
+	 *           if no directory exists for dirPattern
 	 */
-	public ScriptContextImpl(File root, ScriptContext parent) {
-		if (root == null) {
-			throw new NullPointerException("Root file must be specified");
-		}
-
-		if (!root.exists() || !root.isDirectory()) {
-			throw new IllegalArgumentException("Root directory not exists or is not a directory");
-		}
-
-		this.root = root;
+	public ScriptContextImpl(String dirPattern, ScriptContext parent) {
+		this.dirPattern = dirPattern;
 		this.parentScriptContext = parent;
+		if (getDirectories().isEmpty())
+			throw new IllegalArgumentException("No valid directories found for pattern: " + dirPattern);
 	}
 
 	@Override
@@ -111,16 +104,14 @@ public class ScriptContextImpl implements ScriptContext {
 			return;
 		}
 
-		ScriptCompiler scriptCompiler = instantiateCompiler();
-
-		Collection<File> files = FileUtils.listFiles(root, scriptCompiler.getSupportedFileTypes(), true);
+		ScriptCompiler scriptCompiler = new ScriptCompilerImpl();
 
 		if (parentScriptContext != null) {
 			scriptCompiler.setParentClassLoader(parentScriptContext.getCompilationResult().getClassLoader());
 		}
 
-		scriptCompiler.setLibraires(libraries);
-		compilationResult = scriptCompiler.compile(files);
+		scriptCompiler.setLibraries(libraries);
+		compilationResult = scriptCompiler.compile(findFiles());
 
 		getClassListener().postLoad(compilationResult.getCompiledClasses());
 
@@ -131,11 +122,47 @@ public class ScriptContextImpl implements ScriptContext {
 		}
 	}
 
+	private List<File> getDirectories() {
+		List<File> files = new ArrayList<>();
+		int globIndex = dirPattern.indexOf('*');
+		if (globIndex == -1) {
+			files.add(new File(dirPattern));
+		} else {
+			String rootDir = dirPattern.substring(0, globIndex);
+			int lastSlashBeforeGlob = rootDir.lastIndexOf('/');
+			if (lastSlashBeforeGlob > -1)
+				rootDir = rootDir.substring(0, lastSlashBeforeGlob);
+			String globPattern = dirPattern.substring(rootDir.length() + 1);
+			try {
+				Files.newDirectoryStream(Paths.get(rootDir), globPattern).forEach(path -> files.add(path.toFile()));
+			} catch (PatternSyntaxException e) {
+				throw new IllegalArgumentException("Root directory is not a valid directory pattern: " + dirPattern, e);
+			} catch (IOException e) {
+				throw new IllegalArgumentException("Couldn't match directory " + rootDir + " with pattern: " + dirPattern, e);
+			}
+		}
+		files.removeIf(file -> !file.exists() || !file.isDirectory());
+		return files;
+	}
+
+	private List<File> findFiles() {
+		List<File> files = new ArrayList<>();
+		for (File dir : getDirectories()) {
+			try {
+				Files.find(dir.toPath(), Integer.MAX_VALUE, (path, attrs) -> attrs.isRegularFile() && path.toString().endsWith(".java"))
+					.forEach(path -> files.add(path.toFile()));
+			} catch (IOException e) {
+				throw new RuntimeException("Error scanning " + dir, e);
+			}
+		}
+		return files;
+	}
+
 	@Override
 	public synchronized void shutdown() {
 
 		if (compilationResult == null) {
-			log.error("Shutdown of not initialized stript context", new Exception());
+			log.error("Shutdown of not initialized script context", new Exception());
 			return;
 		}
 
@@ -156,8 +183,8 @@ public class ScriptContextImpl implements ScriptContext {
 	}
 
 	@Override
-	public File getRoot() {
-		return root;
+	public String getDirPattern() {
+		return dirPattern;
 	}
 
 	@Override
@@ -199,7 +226,7 @@ public class ScriptContextImpl implements ScriptContext {
 			}
 
 			if (childScriptContexts.contains(context)) {
-				log.error("Double child definition, root: " + root.getAbsolutePath() + ", child: " + context.getRoot().getAbsolutePath());
+				log.error("Double child definition, dirPattern: " + dirPattern + ", child: " + context.getDirPattern());
 				return;
 			}
 
@@ -218,51 +245,10 @@ public class ScriptContextImpl implements ScriptContext {
 
 	@Override
 	public ClassListener getClassListener() {
-		if (classListener == null) {
-			if (getParentScriptContext() == null) {
-				AggregatedClassListener acl = new AggregatedClassListener();
-				acl.addClassListener(new OnClassLoadUnloadListener());
-				acl.addClassListener(new ScheduledTaskClassListener());
-				setClassListener(acl);
-				return classListener;
-			}
+		if (classListener == null && getParentScriptContext() != null) {
 			return getParentScriptContext().getClassListener();
 		}
 		return classListener;
-	}
-
-	@Override
-	public void setCompilerClassName(String className) {
-		this.compilerClassName = className;
-	}
-
-	@Override
-	public String getCompilerClassName() {
-		return this.compilerClassName;
-	}
-
-	/**
-	 * Creates new instance of ScriptCompiler that should be used with this ScriptContext
-	 * 
-	 * @return instance of ScriptCompiler
-	 * @throws RuntimeException
-	 *           if failed to create instance
-	 */
-	protected ScriptCompiler instantiateCompiler() throws RuntimeException {
-		ClassLoader cl = getClass().getClassLoader();
-		if (getParentScriptContext() != null) {
-			cl = getParentScriptContext().getCompilationResult().getClassLoader();
-		}
-
-		ScriptCompiler sc;
-		try {
-			sc = (ScriptCompiler) Class.forName(getCompilerClassName(), true, cl).newInstance();
-		} catch (Exception e) {
-			log.error("Can't create instance of compiler");
-			throw new RuntimeException(e);
-		}
-
-		return sc;
 	}
 
 	@Override
@@ -274,16 +260,14 @@ public class ScriptContextImpl implements ScriptContext {
 		ScriptContextImpl another = (ScriptContextImpl) obj;
 
 		if (parentScriptContext == null) {
-			return another.getRoot().equals(root);
+			return another.getDirPattern().equals(dirPattern);
 		}
-		return another.getRoot().equals(root) && parentScriptContext.equals(another.parentScriptContext);
+		return another.getDirPattern().equals(dirPattern) && parentScriptContext.equals(another.parentScriptContext);
 	}
 
 	@Override
 	public int hashCode() {
-		int result = parentScriptContext != null ? parentScriptContext.hashCode() : 0;
-		result = 31 * result + root.hashCode();
-		return result;
+		return Objects.hash(parentScriptContext, dirPattern);
 	}
 
 	@Override

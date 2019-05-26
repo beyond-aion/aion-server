@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 /**
  * Simple class that represents script info.<br>
  * <br>
- * It contains Script root, list of libraries and list of child contexes
+ * It contains Script root, list of libraries and list of child contexts
  * 
  * @author SoulKeeper
  */
@@ -24,7 +24,7 @@ public class ScriptInfo {
 	 * Root of this script context. Child directories of root will be scanned for script files
 	 */
 	@XmlAttribute(required = true)
-	private File root;
+	private String root;
 
 	/**
 	 * List of libraries of this script context
@@ -39,17 +39,11 @@ public class ScriptInfo {
 	private List<ScriptInfo> scriptInfos;
 
 	/**
-	 * Default compiler class name.
-	 */
-	@XmlElement(name = "compiler")
-	private String compilerClass = ScriptManager.DEFAULT_COMPILER_CLASS.getName();
-
-	/**
 	 * Returns root of script context
 	 * 
 	 * @return root of script context
 	 */
-	public File getRoot() {
+	public String getRoot() {
 		return root;
 	}
 
@@ -59,7 +53,7 @@ public class ScriptInfo {
 	 * @param root
 	 *          root for script context
 	 */
-	public void setRoot(File root) {
+	public void setRoot(String root) {
 		this.root = root;
 	}
 
@@ -102,30 +96,9 @@ public class ScriptInfo {
 	}
 
 	/**
-	 * Returns compiler class name
-	 * 
-	 * @return name of compiler class
-	 */
-	public String getCompilerClass() {
-		return compilerClass;
-	}
-
-	/**
-	 * Sets compiler class name
-	 * 
-	 * @param compilerClass
-	 *          name of compiler class
-	 */
-	public void setCompilerClass(String compilerClass) {
-		this.compilerClass = compilerClass;
-	}
-
-	/**
-	 * Returns true if roots are quals
-	 * 
 	 * @param o
 	 *          object to compare with
-	 * @return true if this ScriptInfo and anothers ScriptInfo has same root
+	 * @return true if this ScriptInfo and another ScriptInfo have the same root
 	 */
 	@Override
 	public boolean equals(Object o) {
@@ -141,8 +114,6 @@ public class ScriptInfo {
 	}
 
 	/**
-	 * Returns hashcode of root
-	 * 
 	 * @return hashcode of root
 	 */
 	@Override
@@ -152,13 +123,6 @@ public class ScriptInfo {
 
 	@Override
 	public String toString() {
-		final StringBuilder sb = new StringBuilder();
-		sb.append("ScriptInfo");
-		sb.append("{root=").append(root);
-		sb.append(", libraries=").append(libraries);
-		sb.append(", compilerClass='").append(compilerClass).append('\'');
-		sb.append(", scriptInfos=").append(scriptInfos);
-		sb.append('}');
-		return sb.toString();
+		return "ScriptInfo{root=" + root + ", libraries=" + libraries + ", scriptInfos=" + scriptInfos + '}';
 	}
 }

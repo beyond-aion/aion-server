@@ -5,15 +5,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.CountDownLatch;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.commons.scripting.classlistener.AggregatedClassListener;
-import com.aionemu.commons.scripting.classlistener.OnClassLoadUnloadListener;
-import com.aionemu.commons.scripting.classlistener.ScheduledTaskClassListener;
 import com.aionemu.commons.scripting.scriptmanager.ScriptManager;
 import com.aionemu.gameserver.GameServerError;
 import com.aionemu.gameserver.configs.Config;
@@ -21,7 +17,6 @@ import com.aionemu.gameserver.configs.administration.CommandsConfig;
 import com.aionemu.gameserver.model.GameEngine;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
  * @author KID
@@ -39,39 +34,16 @@ public class ChatProcessor implements GameEngine {
 	public void load() {
 		log.info("Chat processor load started");
 
-		AggregatedClassListener acl = new AggregatedClassListener();
-		acl.addClassListener(new OnClassLoadUnloadListener());
-		acl.addClassListener(new ScheduledTaskClassListener());
-		acl.addClassListener(new ChatCommandsLoader(this));
 		ScriptManager scriptManager = new ScriptManager();
-		scriptManager.setGlobalClassListener(acl);
-
-		File[] files = new File[] { new File("./data/scripts/system/adminhandlers.xml"), new File("./data/scripts/system/playerhandlers.xml"),
-			new File("./data/scripts/system/consolehandlers.xml") };
-		CountDownLatch loadLatch = new CountDownLatch(files.length);
-		Throwable[] throwable = new Throwable[1];
-
-		for (File file : files) {
-			ThreadPoolManager.getInstance().execute(() -> {
-				try {
-					scriptManager.load(file);
-				} catch (Throwable t) {
-					throwable[0] = t;
-				} finally {
-					loadLatch.countDown();
-				}
-			});
-		}
+		scriptManager.setGlobalClassListener(new ChatCommandsLoader(this));
 
 		try {
-			loadLatch.await();
-		} catch (InterruptedException e1) {
+			scriptManager.load(new File("./data/scripts/system/chatcommandhandlers.xml"));
+		} catch (Exception e) {
+			throw new GameServerError("Can't initialize chat handlers.", e);
 		} finally {
 			scriptManager.shutdown();
 		}
-
-		if (throwable[0] != null)
-			throw new GameServerError("Can't initialize chat handlers.", throwable[0]);
 
 		log.info("Loaded " + commandHandlers.size() + " commands.");
 	}
@@ -152,6 +124,16 @@ public class ChatProcessor implements GameEngine {
 
 	private ChatCommand getCommand(String alias) {
 		return commandHandlers.get(alias);
+	}
+
+	/**
+	 * @return Command of the given type. It will not find a command if you call this method from any non-chatcommand class.
+	 *         This is because of different class loaders. You can still get a command from a core class via {@link #getCommand(String)} but won't be
+	 *         able to cast it to it's runtime type (supertypes like {@link ChatCommand} however will work).
+	 */
+	@SuppressWarnings("unchecked")
+	public <T extends ChatCommand> T getCommand(Class<T> commandType) {
+		return (T) commandHandlers.values().stream().filter(c -> commandType == c.getClass()).findAny().orElse(null);
 	}
 
 	public List<ChatCommand> getCommandList() {

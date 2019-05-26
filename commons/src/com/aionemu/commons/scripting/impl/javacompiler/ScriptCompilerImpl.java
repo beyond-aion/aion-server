@@ -77,7 +77,7 @@ public class ScriptCompilerImpl implements ScriptCompiler {
 	 *          list of jar files
 	 */
 	@Override
-	public void setLibraires(Iterable<File> files) {
+	public void setLibraries(Iterable<File> files) {
 		libraries = files;
 	}
 
@@ -207,15 +207,5 @@ public class ScriptCompilerImpl implements ScriptCompiler {
 		}
 
 		return classes;
-	}
-
-	/**
-	 * Only java files are supported by java compiler
-	 * 
-	 * @return "java";
-	 */
-	@Override
-	public String[] getSupportedFileTypes() {
-		return new String[] { "java" };
 	}
 }

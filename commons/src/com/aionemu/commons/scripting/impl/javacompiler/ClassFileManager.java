@@ -55,7 +55,7 @@ public class ClassFileManager extends ForwardingJavaFileManager<JavaFileManager>
 	}
 
 	/**
-	 * Returns JavaFileObject that will be used to write class data into it by compier
+	 * Returns JavaFileObject that will be used to write class data into it by compiler
 	 *
 	 * @param location
 	 *          not used
@@ -65,19 +65,17 @@ public class ClassFileManager extends ForwardingJavaFileManager<JavaFileManager>
 	 *          not used
 	 * @param sibling
 	 *          not used
-	 * @return JavaFileObject that will be uesd to store compiled class data
-	 * @throws IOException
-	 *           never thrown
+	 * @return JavaFileObject that will be used to store compiled class data
 	 */
 	@Override
-	public JavaFileObject getJavaFileForOutput(Location location, String className, Kind kind, FileObject sibling) throws IOException {
+	public JavaFileObject getJavaFileForOutput(Location location, String className, Kind kind, FileObject sibling) {
 		BinaryClass co = new BinaryClass(className);
 		compiledClasses.put(className, co);
 		return co;
 	}
 
 	/**
-	 * Returns classloaded of this ClassFileManager. If not exists, creates new
+	 * Returns or creates a classloader for this ClassFileManager.
 	 *
 	 * @param location
 	 *          not used
@@ -96,7 +94,7 @@ public class ClassFileManager extends ForwardingJavaFileManager<JavaFileManager>
 	}
 
 	/**
-	 * Sets paraentClassLoader for this classLoader
+	 * Sets parentClassLoader for this classLoader
 	 *
 	 * @param classLoader
 	 *          parent class loader
@@ -106,10 +104,10 @@ public class ClassFileManager extends ForwardingJavaFileManager<JavaFileManager>
 	}
 
 	/**
-	 * Adds library file. Library file must be a .jar archieve
+	 * Adds library file. Library file must be a .jar archive
 	 *
 	 * @param file
-	 *          link to jar archieve
+	 *          link to jar archive
 	 * @throws IOException
 	 *           if something goes wrong
 	 */
@@ -119,7 +117,7 @@ public class ClassFileManager extends ForwardingJavaFileManager<JavaFileManager>
 	}
 
 	/**
-	 * Adds list of files as libraries. Files must be jar archieves
+	 * Adds list of files as libraries. Files must be jar archives
 	 *
 	 * @param files
 	 *          list of jar archives
@@ -153,7 +151,7 @@ public class ClassFileManager extends ForwardingJavaFileManager<JavaFileManager>
 	 *          FileTypes to search
 	 * @param recurse
 	 *          not used
-	 * @return list of requered files
+	 * @return list of required files
 	 * @throws IOException
 	 *           if something foes wrong
 	 */
@@ -177,7 +175,7 @@ public class ClassFileManager extends ForwardingJavaFileManager<JavaFileManager>
 	@Override
 	public String inferBinaryName(Location location, JavaFileObject file) {
 		if (file instanceof BinaryClass) {
-			return ((BinaryClass) file).getName();
+			return file.getName();
 		}
 
 		return super.inferBinaryName(location, file);
