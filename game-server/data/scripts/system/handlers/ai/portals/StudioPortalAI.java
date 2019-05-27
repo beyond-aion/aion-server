@@ -13,6 +13,7 @@ import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.WorldMapInstance;
+import com.aionemu.gameserver.world.WorldMapType;
 
 import ai.ActionItemNpcAI;
 
@@ -33,43 +34,30 @@ public class StudioPortalAI extends ActionItemNpcAI {
 
 	@Override
 	protected void handleUseItemFinish(Player player) {
-		int ownerId = player.getPosition().getWorldMapInstance().getOwnerId();
-		House studio = HousingService.getInstance().getPlayerStudio(player.getObjectId());
-		if (studio == null && ownerId == 0) // Doesn't own studio and not in studio
-		{
-			PacketSendUtility.sendPacket(player, STR_HOUSING_ENTER_NEED_HOUSE());
-			return;
-		}
-
-		int exitMapId = 0;
-		float x = 0, y = 0, z = 0;
+		WorldMapInstance instance;
+		float x, y, z;
 		byte heading = 0;
-		int instanceId = 0;
-
-		if (ownerId > 0) { // leaving
-			studio = HousingService.getInstance().getPlayerStudio(ownerId);
-			exitMapId = studio.getAddress().getExitMapId();
-			instanceId = World.getInstance().getWorldMap(exitMapId).getMainWorldMapInstance().getInstanceId();
+		WorldMapType mapType = WorldMapType.getWorld(player.getWorldId());
+		if (mapType == WorldMapType.HOUSING_IDLF_PERSONAL || mapType == WorldMapType.HOUSING_IDDF_PERSONAL) { // leaving studio
+			House studio = HousingService.getInstance().getPlayerStudio(player.getPosition().getWorldMapInstance().getOwnerId());
+			if (studio == null) // should not happen unless this instance was custom spawned by admin
+				return;
+			instance = World.getInstance().getWorldMap(studio.getAddress().getExitMapId()).getMainWorldMapInstance();
 			x = studio.getAddress().getExitX();
 			y = studio.getAddress().getExitY();
 			z = studio.getAddress().getExitZ();
-		} else if (studio == null) {
-			return; // doesn't own studio
 		} else { // entering own studio
-			exitMapId = studio.getAddress().getMapId();
-			WorldMapInstance instance = InstanceService.getPersonalInstance(exitMapId, player.getObjectId());
-			if (instance == null) {
-				instance = InstanceService.getNextAvailableInstance(exitMapId, player.getObjectId());
-				instance.register(player.getObjectId());
+			House studio = HousingService.getInstance().getPlayerStudio(player.getObjectId());
+			if (studio == null) { // doesn't own studio
+				PacketSendUtility.sendPacket(player, STR_HOUSING_ENTER_NEED_HOUSE());
+				return;
 			}
-			instanceId = instance.getInstanceId();
+			instance = InstanceService.getOrCreateHouseInstance(studio);
 			x = studio.getAddress().getX();
 			y = studio.getAddress().getY();
 			z = studio.getAddress().getZ();
-			if (exitMapId == 710010000) {
-				heading = 36;
-			}
+			heading = studio.getAddress().getTeleportHeading();
 		}
-		TeleportService.teleportTo(player, exitMapId, instanceId, x, y, z, heading, TeleportAnimation.FADE_OUT_BEAM);
+		TeleportService.teleportTo(player, instance, x, y, z, heading, TeleportAnimation.FADE_OUT_BEAM);
 	}
 }

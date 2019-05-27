@@ -9,7 +9,6 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.house.House;
-import com.aionemu.gameserver.model.templates.housing.BuildingType;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_HOUSE_TELEPORT;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUESTION_WINDOW;
 import com.aionemu.gameserver.services.HousingService;
@@ -38,10 +37,12 @@ public class HouseGateAI extends NpcAI {
 				return;
 		}
 
-		House house = HousingService.getInstance().getPlayerStudio(creatorId);
-		if (house == null) {
+		House house;
+		if (HousingService.getInstance().getPlayerStudio(creatorId) == null) {
 			int address = HousingService.getInstance().getPlayerAddress(creatorId);
 			house = HousingService.getInstance().getHouseByAddress(address);
+		} else {
+			house = HousingService.getInstance().getPlayerStudio(creatorId);
 		}
 		// Uses skill but doesn't have house
 		if (house == null)
@@ -70,33 +71,7 @@ public class HouseGateAI extends NpcAI {
 				if (decided)
 					return;
 
-				House house = HousingService.getInstance().getPlayerStudio(creatorId);
-				if (house == null) {
-					int address = HousingService.getInstance().getPlayerAddress(creatorId);
-					house = HousingService.getInstance().getHouseByAddress(address);
-				}
-
-				float x, y, z;
-				byte heading = 0;
-				int instanceId;
-				int exitMapId = house.getAddress().getMapId();
-				if (house.getBuilding().getType() == BuildingType.PERSONAL_INS) { // entering studio
-					WorldMapInstance instance = InstanceService.getPersonalInstance(exitMapId, creatorId);
-					if (instance == null) {
-						instance = InstanceService.getNextAvailableInstance(exitMapId, creatorId);
-						instance.register(responder.getObjectId());
-					}
-					instanceId = instance.getInstanceId();
-				} else { // entering ordinary house
-					instanceId = house.getInstanceId();
-				}
-				x = house.getAddress().getX();
-				y = house.getAddress().getY();
-				z = house.getAddress().getZ();
-				if (exitMapId == 710010000) // pernon apartment
-					heading = 36;
-				else if (exitMapId == 720010000) // oriel apartment
-					heading = 63;
+				WorldMapInstance instance = InstanceService.getOrCreateHouseInstance(house);
 				boolean canReturnToBattle = true;
 				for (ZoneInstance zone : responder.findZones()) {
 					if (!zone.canReturnToBattle()) {
@@ -110,7 +85,8 @@ public class HouseGateAI extends NpcAI {
 					PacketSendUtility.sendPacket(responder, new SM_HOUSE_TELEPORT(house.getAddress().getId(), responder.getObjectId()));
 					responder.setBattleReturnCoords(responder.getWorldId(), new float[] { responder.getX(), responder.getY(), responder.getZ() });
 				}
-				TeleportService.teleportTo(responder, exitMapId, instanceId, x, y, z, heading, TeleportAnimation.JUMP_IN_GATE);
+				TeleportService.teleportTo(responder, instance, house.getX(), house.getY(), house.getZ(), house.getAddress().getTeleportHeading(),
+					TeleportAnimation.JUMP_IN_GATE);
 				decided = true;
 			}
 

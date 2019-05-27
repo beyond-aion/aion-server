@@ -16,8 +16,10 @@ import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.house.House;
 import com.aionemu.gameserver.model.items.storage.Storage;
 import com.aionemu.gameserver.model.team.GeneralTeam;
+import com.aionemu.gameserver.model.templates.housing.BuildingType;
 import com.aionemu.gameserver.model.templates.world.WorldMapTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.AutoGroupService;
@@ -49,10 +51,6 @@ public class InstanceService {
 		for (String s : CustomConfig.INSTANCES_COOL_DOWN_FILTER.split(",")) {
 			instanceCoolDownFilter.add(Integer.parseInt(s));
 		}
-	}
-
-	public synchronized static WorldMapInstance getNextAvailableInstance(int worldId, int ownerId) {
-		return getNextAvailableInstance(worldId, ownerId, (byte) 0);
 	}
 
 	/**
@@ -149,7 +147,20 @@ public class InstanceService {
 		return null;
 	}
 
-	public static WorldMapInstance getPersonalInstance(int worldId, int ownerId) {
+	/**
+	 * @return Instance for the given house or studio.
+	 */
+	public static WorldMapInstance getOrCreateHouseInstance(House house) {
+		WorldMapInstance instance = house.getPosition() == null ? null : house.getPosition().getWorldMapInstance();
+		if (instance == null && house.getBuilding().getType() == BuildingType.PERSONAL_INS) { // studio
+			instance = getOrCreatePersonalInstance(house.getAddress().getMapId(), house.getOwnerId());
+		}
+		if (instance == null) // should never happen since only studios are spawned on demand
+			throw new NullPointerException(house + " has no instance");
+		return instance;
+	}
+
+	private static WorldMapInstance getOrCreatePersonalInstance(int worldId, int ownerId) {
 		if (ownerId == 0)
 			return null;
 
@@ -157,7 +168,7 @@ public class InstanceService {
 			if (instance.isPersonal() && instance.getOwnerId() == ownerId)
 				return instance;
 		}
-		return null;
+		return getNextAvailableInstance(worldId, ownerId, (byte) 0);
 	}
 
 	public static WorldMapInstance getBeginnerInstance(int worldId, int registeredId) {
@@ -185,32 +196,13 @@ public class InstanceService {
 		return lookupId;
 	}
 
-	/**
-	 * @param player
-	 */
 	public static void onPlayerLogin(Player player) {
 		int worldId = player.getWorldId();
 		int lookupId = getLastRegisteredId(player);
-
-		WorldMapInstance beginnerInstance = getBeginnerInstance(worldId, lookupId);
-		if (beginnerInstance != null) {
-			// set to correct twin instanceId, not to #1
-			World.getInstance().setPosition(player, worldId, beginnerInstance.getInstanceId(), player.getX(), player.getY(), player.getZ(),
-				player.getHeading());
-		}
-
 		WorldMapTemplate worldTemplate = DataManager.WORLD_MAPS_DATA.getTemplate(worldId);
 		if (worldTemplate.isInstance()) {
 			boolean isPersonal = WorldMapType.getWorld(player.getWorldId()).isPersonal();
-			WorldMapInstance registeredInstance = isPersonal ? getPersonalInstance(worldId, lookupId) : getRegisteredInstance(worldId, lookupId);
-
-			if (isPersonal) {
-				if (registeredInstance == null)
-					registeredInstance = getNextAvailableInstance(player.getWorldId(), lookupId, (byte) 0);
-
-				if (!registeredInstance.isRegistered(player.getObjectId()))
-					registeredInstance.register(player.getObjectId());
-			}
+			WorldMapInstance registeredInstance = isPersonal ? getOrCreatePersonalInstance(worldId, lookupId) : getRegisteredInstance(worldId, lookupId);
 
 			if (registeredInstance != null) {
 				int maxSize = registeredInstance.getPlayerMaxSize();
@@ -225,6 +217,13 @@ public class InstanceService {
 			}
 
 			moveToExitPoint(player);
+		} else {
+			WorldMapInstance beginnerInstance = getBeginnerInstance(worldId, lookupId);
+			if (beginnerInstance != null) {
+				// set to correct twin instanceId, not to #1
+				World.getInstance().setPosition(player, worldId, beginnerInstance.getInstanceId(), player.getX(), player.getY(), player.getZ(),
+						player.getHeading());
+			}
 		}
 	}
 
