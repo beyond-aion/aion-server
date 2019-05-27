@@ -98,8 +98,8 @@ public class _1006Ascension extends AbstractQuestHandler {
 							return true;
 						case SETPRO3:
 							WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(310020000);
-							InstanceService.registerPlayerWithInstance(newInstance, player);
-							TeleportService.teleportTo(player, 310020000, newInstance.getInstanceId(), 52, 174, 229, (byte) 10);
+							newInstance.register(player.getObjectId());
+							TeleportService.teleportTo(player, newInstance, 52, 174, 229, (byte) 10, TeleportAnimation.NONE);
 							qs.setQuestVar(99); // 99
 							updateQuestStatus(env);
 							removeQuestItem(env, 182200009, 1);

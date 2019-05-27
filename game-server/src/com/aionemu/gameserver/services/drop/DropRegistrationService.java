@@ -114,7 +114,7 @@ public class DropRegistrationService {
 		}
 
 		if (npc.isInInstance()) {
-			npc.getPosition().getWorldMapInstance().getInstanceHandler().onDropRegistered(npc);
+			npc.getPosition().getWorldMapInstance().getInstanceHandler().onDropRegistered(npc, winnerObj);
 		}
 		npc.getAi().onGeneralEvent(AIEventType.DROP_REGISTERED);
 

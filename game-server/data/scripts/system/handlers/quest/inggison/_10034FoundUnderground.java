@@ -18,7 +18,7 @@ import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
 /**
- * @Author Majka
+ * @author Majka
  */
 public class _10034FoundUnderground extends AbstractQuestHandler {
 
@@ -104,14 +104,10 @@ public class _10034FoundUnderground extends AbstractQuestHandler {
 							break;
 						case SETPRO4:
 							if (var == 3) {
-								if (player.getInventory().getItemCountByItemId(182215627) > 0) {
-									removeQuestItem(env, 182215627, 1);
-									WorldMapInstance oldInstance = InstanceService.getRegisteredInstance(300160000, player.getObjectId());
-									if (oldInstance == null)
-										oldInstance = InstanceService.getNextAvailableInstance(300160000);
-									InstanceService.registerPlayerWithInstance(oldInstance, player);
-									TeleportService.teleportTo(player, 300160000, oldInstance.getInstanceId(), 795.28143f, 918.806f, 149.80243f, (byte) 73,
-										TeleportAnimation.FADE_OUT_BEAM);
+								if (removeQuestItem(env, 182215627, 1)) {
+									WorldMapInstance instance = InstanceService.getNextAvailableInstance(300160000);
+									instance.register(player.getObjectId());
+									TeleportService.teleportTo(player, instance, 795.28143f, 918.806f, 149.80243f, (byte) 73, TeleportAnimation.FADE_OUT_BEAM);
 									return true;
 								} else {
 									return sendQuestDialog(env, 10001);

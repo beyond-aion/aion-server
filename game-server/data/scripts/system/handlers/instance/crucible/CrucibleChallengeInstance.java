@@ -72,86 +72,13 @@ public class CrucibleChallengeInstance extends CrucibleInstance {
 	}
 
 	private void sendEventPacket() {
-		instance.forEachPlayer(new Consumer<Player>() {
-
-			@Override
-			public void accept(Player player) {
-				if (player.isOnline()) {
-					PacketSendUtility.sendPacket(player, new SM_INSTANCE_STAGE_INFO(2, stageType.getId(), stageType.getType()));
-				}
-			}
-		});
+		PacketSendUtility.broadcastToMap(instance, new SM_INSTANCE_STAGE_INFO(2, stageType.getId(), stageType.getType()));
 	}
 
 	@Override
-	public void onDie(final Npc npc) {
-		final int npcId = npc.getNpcId();
-		int points = 0;
-		switch (npcId) {
-			case 217784:
-			case 217785:
-				points = 120;
-				break;
-			case 217786:
-			case 217787:
-				points = 200;
-				break;
-			case 217797:
-			case 217798:
-			case 217799:
-				points = 1100;
-				break;
-			case 217788:
-			case 217789:
-			case 217790:
-			case 217791:
-			case 217792:
-			case 217793:
-				points = 1300;
-				break;
-			case 217843:
-			case 217845:
-				points = 1400;
-				break;
-			case 217783:
-				points = 1600;
-				break;
-			case 217800:
-			case 217801:
-				points = 1650;
-				break;
-			case 217807: // ely
-			case 217808: // ely
-			case 217809: // ely
-			case 217810: // ely
-			case 217811: // asmo
-			case 217812: // asmo
-			case 217813: // asmo
-			case 217814: // asmo
-			case 217815: // ely
-			case 217816: // asmo
-				points = 2500;
-				break;
-			case 217847:
-				points = 4600;
-				break;
-			case 217795:
-			case 217794:
-				points = 5000;
-				break;
-			case 217806:
-			case 218562:
-			case 218565:
-				points = 5800;
-				break;
-			case 217819:
-				points = 7200;
-				break;
-		}
-		if (points != 0) {
-			getPlayerReward(instance.getSoloPlayerObj()).addPoints(points);
-			sendPacket(npc.getObjectTemplate().getL10n(), points);
-		}
+	public void onDie(Npc npc) {
+		int npcId = npc.getNpcId();
+		increasePointsForKill(npc, npc.getAggroList().getMostPlayerDamage());
 		switch (npcId) {
 			case 217784: // ely
 			case 217785: // asmo
@@ -341,6 +268,77 @@ public class CrucibleChallengeInstance extends CrucibleInstance {
 				return; // don't despawn
 		}
 		despawnNpc(npc);
+	}
+
+	private void increasePointsForKill(Npc npc, Player killer) {
+		if (killer == null)
+			return;
+		int points = 0;
+		switch (npc.getNpcId()) {
+			case 217784:
+			case 217785:
+				points = 120;
+				break;
+			case 217786:
+			case 217787:
+				points = 200;
+				break;
+			case 217797:
+			case 217798:
+			case 217799:
+				points = 1100;
+				break;
+			case 217788:
+			case 217789:
+			case 217790:
+			case 217791:
+			case 217792:
+			case 217793:
+				points = 1300;
+				break;
+			case 217843:
+			case 217845:
+				points = 1400;
+				break;
+			case 217783:
+				points = 1600;
+				break;
+			case 217800:
+			case 217801:
+				points = 1650;
+				break;
+			case 217807: // ely
+			case 217808: // ely
+			case 217809: // ely
+			case 217810: // ely
+			case 217811: // asmo
+			case 217812: // asmo
+			case 217813: // asmo
+			case 217814: // asmo
+			case 217815: // ely
+			case 217816: // asmo
+				points = 2500;
+				break;
+			case 217847:
+				points = 4600;
+				break;
+			case 217795:
+			case 217794:
+				points = 5000;
+				break;
+			case 217806:
+			case 218562:
+			case 218565:
+				points = 5800;
+				break;
+			case 217819:
+				points = 7200;
+				break;
+		}
+		if (points != 0) {
+			getPlayerReward(killer.getObjectId()).addPoints(points);
+			sendPacket(npc.getObjectTemplate().getL10n(), points);
+		}
 	}
 
 	private boolean allDeadOrDespawned(int... npcIds) {
@@ -692,15 +690,9 @@ public class CrucibleChallengeInstance extends CrucibleInstance {
 	}
 
 	private void sp(int npcId, float x, float y, float z, byte h, int time) {
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				if (!isInstanceDestroyed) {
-					spawn(npcId, x, y, z, h);
-				}
-			}
-
+		ThreadPoolManager.getInstance().schedule(() -> {
+			if (!isInstanceDestroyed)
+				spawn(npcId, x, y, z, h);
 		}, time);
 	}
 
@@ -708,7 +700,7 @@ public class CrucibleChallengeInstance extends CrucibleInstance {
 		if (this.stageType == type)
 			return false;
 		this.stageType = type;
-		ThreadPoolManager.getInstance().schedule(() -> sendEventPacket(), time);
+		ThreadPoolManager.getInstance().schedule(this::sendEventPacket, time);
 		return true;
 	}
 
@@ -722,14 +714,13 @@ public class CrucibleChallengeInstance extends CrucibleInstance {
 	}
 
 	@Override
-	public void onDropRegistered(Npc npc) {
+	public void onDropRegistered(Npc npc, int winnerObj) {
 		Set<DropItem> dropItems = DropRegistrationService.getInstance().getCurrentDropMap().get(npc.getObjectId());
 		int npcId = npc.getNpcId();
 		int itemId = 0;
-		int objectId = instance.getSoloPlayerObj();
 		switch (npcId) {
 			case 217758:
-				dropItems.add(DropRegistrationService.getInstance().regDropItem(1, objectId, npcId, 186000134, 1));
+				dropItems.add(DropRegistrationService.getInstance().regDropItem(1, winnerObj, npcId, 186000134, 1));
 				break;
 			case 218571:
 				dropItems.clear();
@@ -744,11 +735,11 @@ public class CrucibleChallengeInstance extends CrucibleInstance {
 						itemId = 182006431;
 						break;
 				}
-				dropItems.add(DropRegistrationService.getInstance().regDropItem(1, objectId, npcId, itemId, 1));
+				dropItems.add(DropRegistrationService.getInstance().regDropItem(1, winnerObj, npcId, itemId, 1));
 				break;
 			case 218185:
 				dropItems.clear();
-				dropItems.add(DropRegistrationService.getInstance().regDropItem(1, objectId, npcId, 188051349, 1));
+				dropItems.add(DropRegistrationService.getInstance().regDropItem(1, winnerObj, npcId, 188051349, 1));
 				break;
 			case 217827:
 			case 217828:
@@ -821,10 +812,7 @@ public class CrucibleChallengeInstance extends CrucibleInstance {
 					return;
 				}
 				rewardCount++;
-				Player player = null;
-				if (!instance.getPlayersInside().isEmpty()) {
-					player = instance.getPlayersInside().get(0);
-				}
+				Player player = instance.getPlayer(winnerObj);
 				if (player != null) {
 					if (player.isInsideZone(ZoneName.get("ILLUSION_STADIUM_1_300320000"))) {
 						sp(205667, 1258.8464f, 237.85518f, 405.39673f, (byte) 0, 0);
@@ -833,7 +821,7 @@ public class CrucibleChallengeInstance extends CrucibleInstance {
 					}
 				}
 				dropItems.clear();
-				dropItems.add(DropRegistrationService.getInstance().regDropItem(1, objectId, npcId, 186000130, count));
+				dropItems.add(DropRegistrationService.getInstance().regDropItem(1, winnerObj, npcId, 186000130, count));
 				break;
 		}
 	}

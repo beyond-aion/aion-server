@@ -123,9 +123,8 @@ public class _2900NoEscapingDestiny extends AbstractQuestHandler {
 							if (var == 4) {
 								changeQuestStep(env, 4, 95); // 95
 								WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(320070000);
-								InstanceService.registerPlayerWithInstance(newInstance, player);
-								TeleportService.teleportTo(player, 320070000, newInstance.getInstanceId(), 270.8424f, 249.1182f, 125.8369f, (byte) 60,
-									TeleportAnimation.FADE_OUT_BEAM);
+								newInstance.register(player.getObjectId());
+								TeleportService.teleportTo(player, newInstance, 270.8424f, 249.1182f, 125.8369f, (byte) 60, TeleportAnimation.FADE_OUT_BEAM);
 								return closeDialogWindow(env);
 							}
 							return false;

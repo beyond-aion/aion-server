@@ -123,8 +123,8 @@ public class _2002WheresRae extends AbstractQuestHandler {
 								PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 0));
 								// Create instance
 								WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(320010000);
-								InstanceService.registerPlayerWithInstance(newInstance, player);
-								TeleportService.teleportTo(player, 320010000, newInstance.getInstanceId(), 457.65f, 426.8f, 230.4f);
+								newInstance.register(player.getObjectId());
+								TeleportService.teleportTo(player, newInstance, 457.65f, 426.8f, 230.4f);
 								return true;
 							}
 							return false;

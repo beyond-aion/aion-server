@@ -2,6 +2,7 @@ package quest.abyss_entry;
 
 import static com.aionemu.gameserver.model.DialogAction.*;
 
+import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -94,8 +95,8 @@ public class _1922DeliveronYourPromises extends AbstractQuestHandler {
 							return false;
 						case SETPRO3:
 							WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(310080000);
-							InstanceService.registerPlayerWithInstance(newInstance, player);
-							TeleportService.teleportTo(player, 310080000, newInstance.getInstanceId(), 276, 293, 163, (byte) 90);
+							newInstance.register(player.getObjectId());
+							TeleportService.teleportTo(player, newInstance, 276, 293, 163, (byte) 90, TeleportAnimation.NONE);
 							if (var == 4 || var == 6)
 								changeQuestStep(env, var, 5, false); // 5
 							return closeDialogWindow(env);

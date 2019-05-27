@@ -34,8 +34,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_BIND_POINT_TELEPORT;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_MESSAGE;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_MOTION;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_PLAYER_INFO;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.PvpService;
 import com.aionemu.gameserver.services.SiegeService;
@@ -226,7 +224,7 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 					} else {
 						updateOrigin(p);
 						updateJoinOrLeaveTime(p);
-						InstanceService.registerPlayerWithInstance(instance, p);
+						instance.register(p.getObjectId());
 						WorldPosition pos = Rnd.get(respawnLocations.get(p.getRace()));
 						TeleportService.teleportTo(p, pos.getMapId(), instanceId, pos.getX(), pos.getY(), pos.getZ(), pos.getHeading(),
 							TeleportAnimation.BATTLEGROUND);

@@ -340,12 +340,11 @@ public class PortalService {
 	}
 
 	private static void port(Player requester, PortalLoc loc, boolean reenter, boolean isInstance) {
-		WorldMapInstance instance = null;
-
+		WorldMapInstance instance;
 		if (isInstance) {
 			boolean isPersonal = WorldMapType.getWorld(loc.getWorldId()).isPersonal();
 			instance = InstanceService.getNextAvailableInstance(loc.getWorldId(), isPersonal ? requester.getObjectId() : 0, (byte) 0);
-			InstanceService.registerPlayerWithInstance(instance, requester);
+			instance.register(requester.getObjectId());
 			transfer(requester, loc, instance, reenter);
 		} else {
 			TeleportService.teleportTo(requester, loc.getWorldId(), loc.getX(), loc.getY(), loc.getZ(), loc.getH(), TeleportAnimation.FADE_OUT_BEAM);
@@ -361,7 +360,7 @@ public class PortalService {
 	private static void transfer(Player player, PortalLoc loc, WorldMapInstance instance, boolean reenter) {
 		if (instance.getStartPos() == null)
 			instance.setStartPos(new WorldPosition(loc.getWorldId(), loc.getX(), loc.getY(), loc.getZ(), loc.getH()));
-		InstanceService.registerPlayerWithInstance(instance, player);
+		instance.register(player.getObjectId());
 		TeleportService.teleportTo(player, loc.getWorldId(), instance.getInstanceId(), loc.getX(), loc.getY(), loc.getZ(), loc.getH(),
 			TeleportAnimation.FADE_OUT_BEAM);
 		long useDelay = DataManager.INSTANCE_COOLTIME_DATA.calculateInstanceEntranceCooltime(player, instance.getMapId());

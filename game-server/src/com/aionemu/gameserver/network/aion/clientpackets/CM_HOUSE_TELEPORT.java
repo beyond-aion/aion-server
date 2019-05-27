@@ -107,7 +107,7 @@ public class CM_HOUSE_TELEPORT extends AionClientPacket {
 				instance = InstanceService.getNextAvailableInstance(address.getMapId(), playerId2);
 			}
 			instanceId = instance.getInstanceId();
-			InstanceService.registerPlayerWithInstance(instance, player1);
+			instance.register(player1.getObjectId());
 		} else {
 			int addressId = HousingService.getInstance().getPlayerAddress(playerId2);
 			house = HousingService.getInstance().getHouseByAddress(addressId);

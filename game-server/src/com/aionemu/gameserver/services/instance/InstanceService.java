@@ -133,16 +133,6 @@ public class InstanceService {
 		WalkerFormator.onInstanceDestroy(worldId, instanceId);
 	}
 
-	/**
-	 * @param instance
-	 * @param player
-	 */
-	public static void registerPlayerWithInstance(WorldMapInstance instance, Player player) {
-		int obj = player.getObjectId();
-		instance.register(obj);
-		instance.setSoloPlayerObjId(obj);
-	}
-
 	public static WorldMapInstance getOrRegisterInstance(int worldId, Player player) {
 		WorldMapInstance instance = getRegisteredInstance(worldId, player.getObjectId());
 		if (instance == null)
@@ -219,7 +209,7 @@ public class InstanceService {
 					registeredInstance = getNextAvailableInstance(player.getWorldId(), lookupId, (byte) 0);
 
 				if (!registeredInstance.isRegistered(player.getObjectId()))
-					registerPlayerWithInstance(registeredInstance, player);
+					registeredInstance.register(player.getObjectId());
 			}
 
 			if (registeredInstance != null) {

@@ -81,8 +81,6 @@ public abstract class WorldMapInstance implements Iterable<VisibleObject> {
 	private final List<Integer> questIds = new ArrayList<>();
 	private InstanceHandler instanceHandler;
 	private final Map<ZoneName, ZoneInstance> zones;
-	// TODO: Merge this with owner
-	private int soloPlayer;
 	private WorldPosition startPos;
 	private int playerSize;
 
@@ -291,11 +289,15 @@ public abstract class WorldMapInstance implements Iterable<VisibleObject> {
 		this.playerSize = playerSize;
 	}
 
-	/**
-	 * @param objectId
-	 */
 	public void register(int objectId) {
 		registeredObjects.add(objectId);
+	}
+
+	/**
+	 * @return Count of all registered objects with this instance. Since objects can be players or teams, it does not resemble registered player count.
+	 */
+	public int getRegisteredCount() {
+		return registeredObjects.size();
 	}
 
 	public boolean isRegistered(int objectId) {
@@ -378,14 +380,6 @@ public abstract class WorldMapInstance implements Iterable<VisibleObject> {
 	public boolean isInsideZone(WorldPosition pos, ZoneName zoneName) {
 		MapRegion mapRegion = this.getRegion(pos.getX(), pos.getY(), pos.getZ());
 		return mapRegion.isInsideZone(zoneName, pos.getX(), pos.getY(), pos.getZ());
-	}
-
-	public void setSoloPlayerObjId(int obj) {
-		soloPlayer = obj;
-	}
-
-	public int getSoloPlayerObj() {
-		return soloPlayer;
 	}
 
 	public int getPlayerMaxSize() {

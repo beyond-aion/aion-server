@@ -112,9 +112,8 @@ public class _18602NightmareinShiningArmor extends AbstractQuestHandler {
 					return sendQuestDialog(env, 1011);
 				} else if (env.getDialogActionId() == SETPRO1) {
 					WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(300230000);
-					InstanceService.registerPlayerWithInstance(newInstance, player);
-					TeleportService.teleportTo(player, 300230000, newInstance.getInstanceId(), 244.98566f, 244.14162f, 189.52058f, (byte) 30,
-						TeleportAnimation.FADE_OUT_BEAM);
+					newInstance.register(player.getObjectId());
+					TeleportService.teleportTo(player, newInstance, 244.98566f, 244.14162f, 189.52058f, (byte) 30, TeleportAnimation.FADE_OUT_BEAM);
 					changeQuestStep(env, 0, 1); // 1
 					return closeDialogWindow(env);
 				}

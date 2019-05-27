@@ -33,7 +33,7 @@ public class Event extends AdminCommand {
 			"<setStatus> [name] - Disables ap gain/loss for the given player and sets him to event state.",
 			"<setGroupStatus> [name] - Gets and sets the group of the given player to event state and disables ap gain/loss for them.",
 			"<setEnemy> <cancel|team|ffa> [name] - Sets the specific state (cancel: normal, team: everyone outside the players team is an enemy, ffa: everyone is an enemy).",
-			"<pvpSpawn> [asmo|elyos] - Sets a ressurrection point for the given race.",
+			"<pvpSpawn> [asmo|elyos] - Sets a resurrection point for the given race.",
 			"<clearInstance> - Clears the whole instance you have created.",
 			"<announce> <text> - Sends a yellow message for all players in event state.",
 			"<list> - Lists all players in event state.",
@@ -63,7 +63,7 @@ public class Event extends AdminCommand {
 			clearInstance(admin);
 		} else if (params[0].equalsIgnoreCase("announce")) {
 			StringBuilder sb = new StringBuilder();
-			sb.append(ChatUtil.name(admin) + ":");
+			sb.append(ChatUtil.name(admin)).append(':');
 			for (int i = 1; i < params.length; i++)
 				sb.append(" ").append(params[i]);
 
@@ -161,8 +161,8 @@ public class Event extends AdminCommand {
 			sendInfo(admin, "This map is not an instance!");
 			return;
 		}
-		if (admin.getObjectId() != map.getSoloPlayerObj()) {
-			sendInfo(admin, "This instance was created by another player, you cannot delete NPCs here. Use //goto to create a new one!");
+		if (map.getRegisteredCount() != 1 || !map.isRegistered(admin.getObjectId())) {
+			sendInfo(admin, "This instance was not created by you, you cannot delete NPCs here. Use //goto to create a new one!");
 			return;
 		}
 		AtomicInteger count = new AtomicInteger();

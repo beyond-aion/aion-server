@@ -17,7 +17,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
 /**
- * @Author Majka
+ * @author Majka
  */
 public class _10032HelpintheHollow extends AbstractQuestHandler {
 
@@ -89,9 +89,8 @@ public class _10032HelpintheHollow extends AbstractQuestHandler {
 						} else if (giveQuestItem(env, 182215618, 1) && giveQuestItem(env, 182215619, 1)) {
 							changeQuestStep(env, 2, 3); // 3
 							WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(300190000);
-							InstanceService.registerPlayerWithInstance(newInstance, player);
-							TeleportService.teleportTo(player, 300190000, newInstance.getInstanceId(), 202.26694f, 226.0532f, 1098.236f, (byte) 30,
-								TeleportAnimation.FADE_OUT_BEAM);
+							newInstance.register(player.getObjectId());
+							TeleportService.teleportTo(player, newInstance, 202.26694f, 226.0532f, 1098.236f, (byte) 30, TeleportAnimation.FADE_OUT_BEAM);
 							return closeDialogWindow(env);
 						} else {
 							PacketSendUtility.sendPacket(player, STR_MSG_FULL_INVENTORY());
@@ -100,9 +99,8 @@ public class _10032HelpintheHollow extends AbstractQuestHandler {
 					case SETPRO4:
 						changeQuestStep(env, 2, 3); // 3
 						WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(300190000);
-						InstanceService.registerPlayerWithInstance(newInstance, player);
-						TeleportService.teleportTo(player, 300190000, newInstance.getInstanceId(), 202.26694f, 226.0532f, 1098.236f, (byte) 30,
-							TeleportAnimation.FADE_OUT_BEAM);
+						newInstance.register(player.getObjectId());
+						TeleportService.teleportTo(player, newInstance, 202.26694f, 226.0532f, 1098.236f, (byte) 30, TeleportAnimation.FADE_OUT_BEAM);
 						return closeDialogWindow(env);
 				}
 			} else if (targetId == 799503) { // Taloc's Mirage

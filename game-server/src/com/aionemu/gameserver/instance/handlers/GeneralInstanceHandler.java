@@ -161,7 +161,7 @@ public class GeneralInstanceHandler implements InstanceHandler {
 	}
 
 	@Override
-	public void onDropRegistered(Npc npc) {
+	public void onDropRegistered(Npc npc, int winnerObj) {
 	}
 
 	@Override

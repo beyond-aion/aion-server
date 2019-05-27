@@ -124,7 +124,8 @@ public class _1002RequestoftheElim extends AbstractQuestHandler {
 							return false;
 						case SETPRO5:
 							WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(310010000);
-							TeleportService.teleportTo(player, 310010000, newInstance.getInstanceId(), 52, 174, 229);
+							newInstance.register(player.getObjectId());
+							TeleportService.teleportTo(player, newInstance, 52, 174, 229);
 							changeQuestStep(env, 13, 20); // 20
 							return closeDialogWindow(env);
 						case SETPRO6:

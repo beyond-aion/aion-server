@@ -68,14 +68,14 @@ public class Buff {
 	@XmlType(name = "BuffMapType")
 	@XmlEnum
 	public enum BuffMapType {
-		WORLD_MAP(instance -> instance.getSoloPlayerObj() == 0 && instance.getPlayerMaxSize() < 1),
-		SOLO_INSTANCE(instance -> instance.getSoloPlayerObj() != 0 || instance.getPlayerMaxSize() == 1),
+		WORLD_MAP(instance -> !instance.getTemplate().isInstance()),
+		SOLO_INSTANCE(instance -> instance.getPlayerMaxSize() == 1),
 		GROUP_INSTANCE(instance -> instance.getPlayerMaxSize() > 1 && instance.getPlayerMaxSize() <= 6),
 		ALLIANCE_INSTANCE(instance -> instance.getPlayerMaxSize() > 6 && instance.getPlayerMaxSize() <= 24);
 
 		private final Predicate<WorldMapInstance> matches;
 
-		private BuffMapType(Predicate<WorldMapInstance> matches) {
+		BuffMapType(Predicate<WorldMapInstance> matches) {
 			this.matches = matches;
 		}
 

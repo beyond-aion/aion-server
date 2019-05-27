@@ -96,8 +96,8 @@ public class _24046TheShadowCalls extends AbstractQuestHandler {
 					}
 					if (dialogActionId == SETPRO4) {
 						WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(320120000);
-						InstanceService.registerPlayerWithInstance(newInstance, player);
-						TeleportService.teleportTo(player, 320120000, newInstance.getInstanceId(), 591.47894f, 420.20865f, 202.97754f);
+						newInstance.register(player.getObjectId());
+						TeleportService.teleportTo(player, newInstance, 591.47894f, 420.20865f, 202.97754f);
 						playQuestMovie(env, 423);
 						changeQuestStep(env, 3, 5); // 5
 						return closeDialogWindow(env);

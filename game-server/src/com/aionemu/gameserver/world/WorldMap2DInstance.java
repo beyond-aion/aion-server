@@ -7,7 +7,7 @@ import com.aionemu.gameserver.world.zone.ZoneInstance;
  */
 public class WorldMap2DInstance extends WorldMapInstance {
 
-	private int ownerId;
+	private final int ownerId;
 
 	public WorldMap2DInstance(WorldMap parent, int instanceId, int ownerId) {
 		super(parent, instanceId);
@@ -60,20 +60,9 @@ public class WorldMap2DInstance extends WorldMapInstance {
 		return regions.get(regionId);
 	}
 
-	/**
-	 * @return the ownerId
-	 */
 	@Override
 	public int getOwnerId() {
 		return ownerId;
-	}
-
-	/**
-	 * @param ownerId
-	 *          the ownerId to set
-	 */
-	public void setOwnerId(int ownerId) {
-		this.ownerId = ownerId;
 	}
 
 	@Override

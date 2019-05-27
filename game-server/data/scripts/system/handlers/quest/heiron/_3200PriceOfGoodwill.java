@@ -86,9 +86,9 @@ public class _3200PriceOfGoodwill extends AbstractQuestHandler {
 					case SETPRO1:
 						// Create instance
 						WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(300100000);
-						InstanceService.registerPlayerWithInstance(newInstance, player);
-						// teleport to cell in steel rake: 300100000 403.55 508.11 885.77 0
-						TeleportService.teleportTo(player, 300100000, newInstance.getInstanceId(), 403.55f, 508.11f, 885.77f);
+						newInstance.register(player.getObjectId());
+						// teleport to cell in steel rake
+						TeleportService.teleportTo(player, newInstance, 403.55f, 508.11f, 885.77f);
 						qs.setQuestVarById(0, var + 1);
 						updateQuestStatus(env);
 						return true;

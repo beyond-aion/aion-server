@@ -117,31 +117,25 @@ public class _14031AHyperVention extends AbstractQuestHandler {
 							qs.setQuestVar(9);
 							updateQuestStatus(env);
 							WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(320040000);
-							InstanceService.registerPlayerWithInstance(newInstance, player);
-							TeleportService.teleportTo(player, 320040000, newInstance.getInstanceId(), 274, 167, 204);
+							newInstance.register(player.getObjectId());
+							TeleportService.teleportTo(player, newInstance, 274, 167, 204);
 							return closeDialogWindow(env);
 					}
 					break;
 				case 730888:// Large Teleporter
 					switch (dialogActionId) {
 						case QUEST_SELECT:
-							Npc npc = (Npc) env.getVisibleObject();
-							if (targetId == 730888)
-								NpcActions.delete(npc);
+							NpcActions.delete(env.getVisibleObject());
 							qs.setQuestVar(11);
 							updateQuestStatus(env);
 							playQuestMovie(env, 888);
-							QuestService.addNewSpawn(320040000, player.getInstanceId(), 730898, 257, 257, (float) 226.35, (byte) 95);// Broken
-																																																												// Teleporter
-																																																												// Device
+							QuestService.addNewSpawn(320040000, player.getInstanceId(), 730898, 257, 257, (float) 226.35, (byte) 95); // Broken Teleporter Device
 					}
 					break;
 				case 730898:// Broken Large Teleporter
 					switch (dialogActionId) {
 						case QUEST_SELECT:
-							Npc npc = (Npc) env.getVisibleObject();
-							if (targetId == 730898)
-								NpcActions.delete(npc);
+							NpcActions.delete(env.getVisibleObject());
 							qs.setStatus(QuestStatus.REWARD);
 							updateQuestStatus(env);
 							TeleportService.teleportTo(player, 110010000, 1876.29f, 1511f, 812.675f, (byte) 60, TeleportAnimation.FADE_OUT_BEAM);

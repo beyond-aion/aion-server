@@ -98,8 +98,8 @@ public class _1929ASliverofDarkness extends AbstractQuestHandler {
 							if (var == 2) {
 								changeQuestStep(env, 2, 93); // 93
 								WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(310070000);
-								InstanceService.registerPlayerWithInstance(newInstance, player);
-								TeleportService.teleportTo(player, 310070000, newInstance.getInstanceId(), 338, 101, 1191);
+								newInstance.register(player.getObjectId());
+								TeleportService.teleportTo(player, newInstance, 338, 101, 1191);
 								return closeDialogWindow(env);
 							}
 							return false;

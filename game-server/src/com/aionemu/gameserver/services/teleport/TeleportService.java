@@ -270,6 +270,10 @@ public class TeleportService {
 		teleportTo(player, worldId, instanceId, x, y, z, h, TeleportAnimation.NONE);
 	}
 
+	public static void teleportTo(Player player, WorldMapInstance instance, float x, float y, float z) {
+		teleportTo(player, instance.getMapId(), instance.getInstanceId(), x, y, z, player.getHeading(), TeleportAnimation.NONE);
+	}
+
 	public static void teleportTo(Player player, WorldMapInstance instance, float x, float y, float z, byte h, TeleportAnimation animation) {
 		teleportTo(player, instance.getMapId(), instance.getInstanceId(), x, y, z, h, animation);
 	}

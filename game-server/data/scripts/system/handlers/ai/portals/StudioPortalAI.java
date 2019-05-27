@@ -60,7 +60,7 @@ public class StudioPortalAI extends ActionItemNpcAI {
 			WorldMapInstance instance = InstanceService.getPersonalInstance(exitMapId, player.getObjectId());
 			if (instance == null) {
 				instance = InstanceService.getNextAvailableInstance(exitMapId, player.getObjectId());
-				InstanceService.registerPlayerWithInstance(instance, player);
+				instance.register(player.getObjectId());
 			}
 			instanceId = instance.getInstanceId();
 			x = studio.getAddress().getX();

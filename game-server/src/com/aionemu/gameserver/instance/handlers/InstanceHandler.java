@@ -70,7 +70,7 @@ public interface InstanceHandler {
 
 	StageType getStage();
 
-	void onDropRegistered(Npc npc);
+	void onDropRegistered(Npc npc, int winnerObj);
 
 	void onGather(Player player, Gatherable gatherable);
 

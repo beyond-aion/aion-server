@@ -84,7 +84,7 @@ public class HouseGateAI extends NpcAI {
 					WorldMapInstance instance = InstanceService.getPersonalInstance(exitMapId, creatorId);
 					if (instance == null) {
 						instance = InstanceService.getNextAvailableInstance(exitMapId, creatorId);
-						InstanceService.registerPlayerWithInstance(instance, responder);
+						instance.register(responder.getObjectId());
 					}
 					instanceId = instance.getInstanceId();
 				} else { // entering ordinary house
