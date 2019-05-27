@@ -1,7 +1,5 @@
 package com.aionemu.gameserver.model.team.common.events;
 
-import org.apache.commons.lang3.StringUtils;
-
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.team.TeamEvent;
@@ -36,7 +34,7 @@ public abstract class PlayerLeavedEvent<TM extends TeamMember<Player>, T extends
 	}
 
 	public PlayerLeavedEvent(T team, Player player, LeaveReson reason) {
-		this(team, player, reason, StringUtils.EMPTY);
+		this(team, player, reason, "");
 	}
 
 	public PlayerLeavedEvent(T team, Player player, LeaveReson reason, String banPersonName) {

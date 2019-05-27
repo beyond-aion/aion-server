@@ -7,7 +7,6 @@ import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -178,7 +177,7 @@ public class House extends VisibleObject implements Persistable {
 		}
 
 		int creatorId = getAddress().getId();
-		String masterName = StringUtils.EMPTY;
+		String masterName = "";
 		if (playerObjectId != 0) {
 			masterName = PlayerService.getPlayerName(playerObjectId);
 			if (masterName == null) {

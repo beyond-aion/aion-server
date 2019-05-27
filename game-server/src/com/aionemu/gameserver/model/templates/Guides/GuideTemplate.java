@@ -9,8 +9,6 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
-import org.apache.commons.lang3.StringUtils;
-
 import com.aionemu.gameserver.model.PlayerClass;
 import com.aionemu.gameserver.model.Race;
 
@@ -30,11 +28,11 @@ public class GuideTemplate {
 	@XmlAttribute(name = "race")
 	private Race race;
 	@XmlElement(name = "reward_info")
-	private String rewardInfo = StringUtils.EMPTY;
+	private String rewardInfo = "";
 	@XmlElement(name = "message")
-	private String message = StringUtils.EMPTY;
+	private String message = "";
 	@XmlElement(name = "select")
-	private String select = StringUtils.EMPTY;
+	private String select = "";
 	@XmlElement(name = "survey")
 	private List<SurveyTemplate> surveys;
 	@XmlAttribute(name = "rewardCount")

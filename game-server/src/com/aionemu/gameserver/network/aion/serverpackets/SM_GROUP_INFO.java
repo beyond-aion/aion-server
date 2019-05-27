@@ -1,7 +1,5 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
-import org.apache.commons.lang3.StringUtils;
-
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.team.TeamType;
 import com.aionemu.gameserver.model.team.common.legacy.LootGroupRules;
@@ -45,7 +43,7 @@ public class SM_GROUP_INFO extends AionServerPacket {
 		writeD(type.getType());
 		writeD(type.getSubType());
 		writeD(0x00); // message id
-		writeS(StringUtils.EMPTY); // name
+		writeS(""); // name
 	}
 
 }

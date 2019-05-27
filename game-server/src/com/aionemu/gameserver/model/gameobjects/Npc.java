@@ -3,8 +3,6 @@ package com.aionemu.gameserver.model.gameobjects;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
-import org.apache.commons.lang3.StringUtils;
-
 import com.aionemu.gameserver.controllers.NpcController;
 import com.aionemu.gameserver.controllers.movement.NpcMoveController;
 import com.aionemu.gameserver.dataholders.DataManager;
@@ -237,7 +235,7 @@ public class Npc extends Creature {
 	 * @return Name of the Master
 	 */
 	public String getMasterName() {
-		return masterName == null ? StringUtils.EMPTY : masterName;
+		return masterName == null ? "" : masterName;
 	}
 
 	public void setMasterName(String masterName) {

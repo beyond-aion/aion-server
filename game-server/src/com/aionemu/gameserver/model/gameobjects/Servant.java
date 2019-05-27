@@ -1,7 +1,5 @@
 package com.aionemu.gameserver.model.gameobjects;
 
-import org.apache.commons.lang3.StringUtils;
-
 import com.aionemu.gameserver.controllers.NpcController;
 import com.aionemu.gameserver.model.stats.container.NpcLifeStats;
 import com.aionemu.gameserver.model.stats.container.ServantGameStats;
@@ -43,7 +41,7 @@ public class Servant extends SummonedObject<Creature> {
 
 	@Override
 	public String getMasterName() {
-		return StringUtils.EMPTY;
+		return "";
 	}
 
 	public void setUpStats() {

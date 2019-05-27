@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import org.apache.commons.lang3.StringUtils;
-
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.team.alliance.PlayerAlliance;
 import com.aionemu.gameserver.model.team.common.legacy.LootGroupRules;
@@ -88,11 +86,11 @@ public class SM_ALLIANCE_INFO extends AionServerPacket {
 	}
 
 	public SM_ALLIANCE_INFO(PlayerAlliance alliance) {
-		this(alliance, 0, StringUtils.EMPTY, null);
+		this(alliance, 0, "", null);
 	}
 
 	public SM_ALLIANCE_INFO(PlayerAlliance alliance, PlayerAlliance skipped) {
-		this(alliance, 0, StringUtils.EMPTY, skipped);
+		this(alliance, 0, "", skipped);
 	}
 
 	public SM_ALLIANCE_INFO(PlayerAlliance alliance, int messageId, String message) {
@@ -160,7 +158,7 @@ public class SM_ALLIANCE_INFO extends AionServerPacket {
 			writeD(1000 + a); // group id
 		}
 		writeD(messageId); // System message ID
-		writeS(messageId != 0 ? message : StringUtils.EMPTY); // System message
+		writeS(messageId != 0 ? message : ""); // System message
 		if (!leagueData.isEmpty()) {
 			writeH(leagueData.size());
 			writeD(lootLeagueRules.getLootRule().getId());

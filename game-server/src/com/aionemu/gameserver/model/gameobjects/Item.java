@@ -7,7 +7,6 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.TreeSet;
 
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -189,9 +188,7 @@ public class Item extends AionObject implements Expirable, StatOwner, Persistabl
 	 * @return itemCreator
 	 */
 	public String getItemCreator() {
-		if (itemCreator == null)
-			return StringUtils.EMPTY;
-		return itemCreator;
+		return itemCreator == null ? "" : itemCreator;
 	}
 
 	/**

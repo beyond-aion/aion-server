@@ -1,7 +1,5 @@
 package admincommands;
 
-import org.apache.commons.lang3.StringUtils;
-
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.dao.InGameShopDAO;
 import com.aionemu.gameserver.dataholders.DataManager;
@@ -103,7 +101,7 @@ public class Gameshop extends AdminCommand {
 				return;
 			}
 			if (titleDescription.equals("empty")) {
-				titleDescription = StringUtils.EMPTY;
+				titleDescription = "";
 			}
 			DAOManager.getDAO(InGameShopDAO.class).saveIngameShopItem(IDFactory.getInstance().nextId(), itemId, count, price, category, subCategory,
 				list - 1, 1, itemType, gift, titleDescription, description);
@@ -142,7 +140,7 @@ public class Gameshop extends AdminCommand {
 				return;
 			}
 			if (titleDescription.equals("empty")) {
-				titleDescription = StringUtils.EMPTY;
+				titleDescription = "";
 			}
 			DAOManager.getDAO(InGameShopDAO.class).saveIngameShopItem(IDFactory.getInstance().nextId(), itemId, count, price, (byte) -1, (byte) -1, -1, 0,
 				itemType, gift, titleDescription, description);

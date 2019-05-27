@@ -2,8 +2,6 @@ package com.aionemu.gameserver.model.team.league.events;
 
 import java.util.function.Consumer;
 
-import org.apache.commons.lang3.StringUtils;
-
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.team.alliance.PlayerAlliance;
 import com.aionemu.gameserver.model.team.common.events.AlwaysTrueTeamEvent;
@@ -62,7 +60,7 @@ public class LeagueLeftEvent extends AlwaysTrueTeamEvent implements Consumer<Pla
 				checkDisband();
 				break;
 			case DISBAND:
-				alliance.sendPackets(new SM_ALLIANCE_INFO(alliance, SM_ALLIANCE_INFO.LEAGUE_DISPERSED, StringUtils.EMPTY));
+				alliance.sendPackets(new SM_ALLIANCE_INFO(alliance, SM_ALLIANCE_INFO.LEAGUE_DISPERSED, ""));
 				alliance.sendPackets(new SM_SHOW_BRAND(0, 0, alliance.isInLeague()));
 				break;
 		}

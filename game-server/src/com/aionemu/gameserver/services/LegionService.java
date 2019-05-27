@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
 
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -1143,7 +1142,7 @@ public class LegionService {
 	}
 
 	private void addHistory(Legion legion, String text, LegionHistoryType legionHistoryType) {
-		addHistory(legion, text, legionHistoryType, 0, StringUtils.EMPTY);
+		addHistory(legion, text, legionHistoryType, 0, "");
 	}
 
 	public void addRewardHistory(Legion legion, long kinahAmount, LegionHistoryType lht, int fortressId) {
