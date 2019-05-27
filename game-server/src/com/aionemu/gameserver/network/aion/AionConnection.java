@@ -97,7 +97,7 @@ public class AionConnection extends AConnection<AionServerPacket> {
 	private final AtomicReference<Player> activePlayer = new AtomicReference<>();
 
 	private volatile long lastClientMessageTime;
-	private volatile long lastPingTime;
+	private volatile long lastPingTime, lastPingPongPingTime;
 	private volatile int pingFailCount;
 
 	private final static int MAX_CORRUPT_PACKETS_BEFORE_DISCONNECT = 3;
@@ -364,12 +364,22 @@ public class AionConnection extends AConnection<AionServerPacket> {
 		return lastClientMessageTime;
 	}
 
-	public long getLastPingTime() {
+	/**
+	 * @param pingPong
+	 *          if true returns CM_PING time (less frequent than CM_PING_INGAME)
+	 * @return Last ping time from client. Either from CM_PING or from CM_PING_INGAME.
+	 */
+	public long getLastPingTime(boolean pingPong) {
+		if (pingPong)
+			return lastPingPongPingTime;
 		return lastPingTime;
 	}
 
-	public void setLastPingTime(long time) {
-		this.lastPingTime = time;
+	public void setLastPingTime(long time, boolean pingPong) {
+		if (pingPong)
+			lastPingPongPingTime = time;
+		else
+			lastPingTime = time;
 	}
 
 	public int increaseAndGetPingFailCount() {

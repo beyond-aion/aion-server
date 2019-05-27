@@ -28,14 +28,14 @@ public class CM_PING_INGAME extends AionClientPacket {
 	@Override
 	protected void runImpl() {
 		Player player = getConnection().getActivePlayer();
-		long lastPingMillis = getConnection().getLastPingTime();
+		long lastPingMillis = getConnection().getLastPingTime(false);
 		long nowMillis = System.currentTimeMillis();
-		getConnection().setLastPingTime(nowMillis);
+		getConnection().setLastPingTime(nowMillis, false);
 
 		if (lastPingMillis > 0) {
 			long pingInterval = nowMillis - lastPingMillis;
 			if (pingInterval + 2000 < CLIENT_PING_INTERVAL) { // client timer cheat
-				if (getConnection().increaseAndGetPingFailCount() == 3) { // CM_PING_INGAME + CM_PING both update ping time, so don't immediately trigger
+				if (getConnection().increaseAndGetPingFailCount() == 3) {
 					if (SecurityConfig.PINGCHECK_KICK) {
 						AuditLogger.log(player,
 								"possibly using time/speed hack (client ping interval: " + pingInterval + "/" + CLIENT_PING_INTERVAL + "), kicking player");

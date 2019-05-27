@@ -25,7 +25,7 @@ public class CM_PING extends AionClientPacket {
 
 	@Override
 	protected void runImpl() {
-		getConnection().setLastPingTime(System.currentTimeMillis());
+		getConnection().setLastPingTime(System.currentTimeMillis(), true);
 		sendPacket(new SM_PONG());
 	}
 }
