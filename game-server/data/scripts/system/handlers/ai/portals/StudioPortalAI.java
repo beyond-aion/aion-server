@@ -56,7 +56,7 @@ public class StudioPortalAI extends ActionItemNpcAI {
 			x = studio.getAddress().getX();
 			y = studio.getAddress().getY();
 			z = studio.getAddress().getZ();
-			heading = studio.getAddress().getTeleportHeading();
+			heading = studio.getTeleportHeading();
 		}
 		TeleportService.teleportTo(player, instance, x, y, z, heading, TeleportAnimation.FADE_OUT_BEAM);
 	}

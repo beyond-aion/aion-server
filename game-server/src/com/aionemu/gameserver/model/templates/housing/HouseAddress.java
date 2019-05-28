@@ -6,8 +6,6 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-import com.aionemu.gameserver.world.WorldMapType;
-
 /**
  * @author Rolandas
  */
@@ -84,13 +82,5 @@ public class HouseAddress {
 
 	public int getTownId() {
 		return townId;
-	}
-
-	public byte getTeleportHeading() {
-		if (getMapId() == WorldMapType.HOUSING_IDDF_PERSONAL.getId()) // pernon apartment
-			return 36;
-		else if (getMapId() == WorldMapType.HOUSING_IDLF_PERSONAL.getId()) // oriel apartment
-			return 63;
-		return 0;
 	}
 }

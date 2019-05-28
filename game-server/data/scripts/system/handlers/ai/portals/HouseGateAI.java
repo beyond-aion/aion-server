@@ -88,7 +88,7 @@ public class HouseGateAI extends NpcAI {
 					PacketSendUtility.sendPacket(responder, new SM_HOUSE_TELEPORT(house.getAddress().getId(), responder.getObjectId()));
 					responder.setBattleReturnCoords(responder.getWorldId(), new float[] { responder.getX(), responder.getY(), responder.getZ() });
 				}
-				TeleportService.teleportTo(responder, instance, house.getX(), house.getY(), house.getZ(), house.getAddress().getTeleportHeading(),
+				TeleportService.teleportTo(responder, instance, house.getX(), house.getY(), house.getZ(), house.getTeleportHeading(),
 					TeleportAnimation.JUMP_IN_GATE);
 				decided = true;
 			}

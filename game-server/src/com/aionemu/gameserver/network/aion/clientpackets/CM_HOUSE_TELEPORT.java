@@ -92,7 +92,7 @@ public class CM_HOUSE_TELEPORT extends AionClientPacket {
 			return;
 
 		WorldMapInstance instance = InstanceService.getOrCreateHouseInstance(house);
-		TeleportService.teleportTo(player, instance, house.getX(), house.getY(), house.getZ(), house.getAddress().getTeleportHeading(),
+		TeleportService.teleportTo(player, instance, house.getX(), house.getY(), house.getZ(), house.getTeleportHeading(),
 			TeleportAnimation.FADE_OUT_BEAM);
 	}
 

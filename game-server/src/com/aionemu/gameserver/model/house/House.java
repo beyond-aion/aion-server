@@ -44,6 +44,7 @@ import com.aionemu.gameserver.services.HousingService;
 import com.aionemu.gameserver.services.player.PlayerService;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.spawnengine.VisibleObjectSpawner;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.idfactory.IDFactory;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.WorldPosition;
@@ -521,5 +522,12 @@ public class House extends VisibleObject implements Persistable {
 				break;
 		}
 		return saleOptions.getGoldPrice();
+	}
+
+	/**
+	 * @return Calculated heading for a player inside looking towards the wall where butler, relationship crystal and the door are located.
+	 */
+	public byte getTeleportHeading() {
+		return PositionUtil.getHeadingTowards(getX(), getY(), getRelationshipCrystal().getSpawn().getX(), getRelationshipCrystal().getSpawn().getY());
 	}
 }
