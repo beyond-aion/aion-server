@@ -71,11 +71,7 @@ public class MySQL5PlayerRegisteredItemsDAO extends PlayerRegisteredItemsDAO {
 
 	@Override
 	public void loadRegistry(int playerId) {
-		House house = HousingService.getInstance().getPlayerStudio(playerId);
-		if (house == null) {
-			int address = HousingService.getInstance().getPlayerAddress(playerId);
-			house = HousingService.getInstance().getHouseByAddress(address);
-		}
+		House house = HousingService.getInstance().findActiveHouse(playerId);
 		HouseRegistry registry = house.getRegistry();
 		try {
 			try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(SELECT_QUERY)) {
@@ -92,12 +88,7 @@ public class MySQL5PlayerRegisteredItemsDAO extends PlayerRegisteredItemsDAO {
 							if (dec.isUsed()) {
 								if (house.getHouseType() != HouseType.PALACE && dec.getRoom() > 0)
 									dec.setRoom(0);
-								List<HouseDecoration> usedForType = usedParts.get(dec.getTemplate().getType());
-								if (usedForType == null) {
-									usedForType = new ArrayList<>();
-									usedParts.put(dec.getTemplate().getType(), usedForType);
-								}
-								usedForType.add(dec);
+								usedParts.computeIfAbsent(dec.getTemplate().getType(), k -> new ArrayList<>()).add(dec);
 							}
 							dec.setPersistentState(PersistentState.UPDATED);
 						} else {
@@ -125,14 +116,14 @@ public class MySQL5PlayerRegisteredItemsDAO extends PlayerRegisteredItemsDAO {
 				}
 			}
 		} catch (Exception e) {
-			log.error("Could not restore house registry data for player: " + playerId + " from DB: " + e.getMessage(), e);
+			log.error("Could not load house registry data for player " + playerId, e);
 		}
 	}
 
 	private HouseObject<?> constructObject(final HouseRegistry registry, House house, ResultSet rset) throws SQLException, IllegalAccessException {
 		int itemUniqueId = rset.getInt("item_unique_id");
 		VisibleObject visObj = World.getInstance().findVisibleObject(itemUniqueId);
-		HouseObject<?> obj = null;
+		HouseObject<?> obj;
 		if (visObj != null) {
 			if (visObj instanceof HouseObject<?>)
 				obj = (HouseObject<?>) visObj;

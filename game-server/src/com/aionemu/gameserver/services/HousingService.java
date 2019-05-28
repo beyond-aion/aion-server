@@ -137,17 +137,17 @@ public class HousingService {
 		return houses;
 	}
 
-	public int getPlayerAddress(int playerId) {
-		if (studios.containsKey(playerId))
-			return studios.get(playerId).getAddress().getId();
-
+	/**
+	 * @return The players studio or current active house.
+	 */
+	public House findActiveHouse(int playerObjId) {
+		if (studios.containsKey(playerObjId))
+			return studios.get(playerObjId);
 		for (House house : customHouses.values()) {
-			if (house.getStatus() == HouseStatus.INACTIVE)
-				continue;
-			if (house.getOwnerId() == playerId && (house.getStatus() == HouseStatus.ACTIVE || house.getStatus() == HouseStatus.SELL_WAIT))
-				return house.getAddress().getId();
+			if (house.getOwnerId() == playerObjId && (house.getStatus() == HouseStatus.ACTIVE || house.getStatus() == HouseStatus.SELL_WAIT))
+				return house;
 		}
-		return 0;
+		return null;
 	}
 
 	public void resetAppearance(House house) {
@@ -217,7 +217,7 @@ public class HousingService {
 	}
 
 	private void createStudio(Player player) {
-		if (getPlayerAddress(player.getObjectId()) != 0) // should not happen
+		if (player.getActiveHouse() != null) // should not happen
 			return;
 		HousingLand land = DataManager.HOUSE_DATA.getLand(player.getRace() == Race.ELYOS ? 329001 : 339001);
 		House studio = new House(land.getDefaultBuilding(), land.getAddresses().get(0), 0);

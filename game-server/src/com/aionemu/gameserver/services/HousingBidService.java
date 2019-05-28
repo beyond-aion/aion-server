@@ -447,9 +447,8 @@ public class HousingBidService extends AbstractCronTask {
 		if (winnerHouse != null) {
 			winnerHouse.revokeOwner();
 		} else {
-			int address = HousingService.getInstance().getPlayerAddress(winner.getPlayerObjId());
-			if (address > 0) { // old house exists
-				winnerHouse = HousingService.getInstance().getHouseByAddress(address);
+			winnerHouse = HousingService.getInstance().findActiveHouse(winner.getPlayerObjId());
+			if (winnerHouse != null) { // old house exists
 				// grace period start, sell time remains from this auction
 				winnerHouse.setSellStarted(new Timestamp(getAuctionStartTime()));
 				// make the new house inactive until the old one is sold
@@ -591,8 +590,7 @@ public class HousingBidService extends AbstractCronTask {
 			return;
 		}
 
-		int playerAddress = HousingService.getInstance().getPlayerAddress(player.getObjectId());
-		House playerHouse = HousingService.getInstance().getHouseByAddress(playerAddress);
+		House playerHouse = player.getActiveHouse();
 		if (playerHouse != null && playerHouse.isInGracePeriod()) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_CANT_BID_GRACE_HOUSE());
 			return;

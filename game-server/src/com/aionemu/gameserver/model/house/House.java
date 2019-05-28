@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.database.dao.DAOManager;
+import com.aionemu.gameserver.configs.administration.AdminConfig;
 import com.aionemu.gameserver.configs.main.HousingConfig;
 import com.aionemu.gameserver.controllers.HouseController;
 import com.aionemu.gameserver.dao.HouseScriptsDAO;
@@ -25,6 +26,7 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.Persistable;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.HouseOwnerState;
+import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.PlayerScripts;
 import com.aionemu.gameserver.model.templates.housing.Building;
 import com.aionemu.gameserver.model.templates.housing.BuildingType;
@@ -481,6 +483,21 @@ public class House extends VisibleObject implements Persistable {
 
 	public int getLevelRestrict() {
 		return land != null ? land.getSaleOptions().getMinLevel() : 10;
+	}
+
+	public boolean canEnter(Player player) {
+		if (getOwnerId() != player.getObjectId() && !player.hasAccess(AdminConfig.HOUSE_ENTER_ALL)) {
+			if (getLevelRestrict() > player.getLevel())
+				return false;
+			switch (getDoorState()) {
+				case DOOR_CLOSED:
+					return false;
+				case DOOR_OPENED_FRIENDS:
+					if (player.getFriendList().getFriend(getOwnerId()) == null && (player.getLegion() == null || !player.getLegion().isMember(getOwnerId())))
+						return false;
+			}
+		}
+		return true;
 	}
 
 	public final long getDefaultAuctionPrice() {

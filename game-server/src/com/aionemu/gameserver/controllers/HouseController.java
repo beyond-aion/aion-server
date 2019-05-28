@@ -48,7 +48,7 @@ public class HouseController extends VisibleObjectController<House> {
 		PacketSendUtility.broadcastPacket(getOwner(), new SM_HOUSE_RENDER(getOwner()));
 	}
 
-	public void kickVisitors(Player kicker, boolean kickFriends, boolean onSettingsChange) {
+	public void kickVisitors(Player kicker, boolean kickFriends, boolean ownerChanged) {
 		List<ZoneInfo> zoneInfo = DataManager.ZONE_DATA.getZones().get(getOwner().getWorldId());
 		for (ZoneInfo info : zoneInfo) {
 			if (info.getZoneTemplate().getName().name().equals(getOwner().getName())) {
@@ -58,7 +58,7 @@ public class HouseController extends VisibleObjectController<House> {
 					if (!kickFriends && kicker != null && kicker.getFriendList().getFriend(player.getObjectId()) != null)
 						return;
 					if (player.isInsideZone(info.getZoneTemplate().getName()))
-						moveOutside(player, onSettingsChange);
+						moveOutside(player, ownerChanged);
 				});
 				break;
 			}
@@ -72,7 +72,7 @@ public class HouseController extends VisibleObjectController<House> {
 		}
 	}
 
-	private void moveOutside(Player player, boolean onSettingsChange) {
+	private void moveOutside(Player player, boolean ownerChanged) {
 		if (getOwner().getHouseType() == HouseType.STUDIO) {
 			float x = getOwner().getAddress().getExitX();
 			float y = getOwner().getAddress().getExitY();
@@ -85,7 +85,7 @@ public class HouseController extends VisibleObjectController<House> {
 			float y = (float) (sign.getY() + (8 * Math.sin(radian)));
 			TeleportService.teleportTo(player, getOwner().getWorldId(), 1, x, y, player.getZ() + 1, player.getHeading(), TeleportAnimation.FADE_OUT_BEAM);
 		}
-		if (onSettingsChange)
+		if (ownerChanged)
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_CHANGE_OWNER());
 		else
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_REQUEST_OUT());

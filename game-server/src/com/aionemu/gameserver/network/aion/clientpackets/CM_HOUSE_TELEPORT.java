@@ -1,33 +1,32 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import org.slf4j.LoggerFactory;
+
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Friend;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.house.House;
-import com.aionemu.gameserver.model.house.HousePermissions;
 import com.aionemu.gameserver.model.team.legion.Legion;
-import com.aionemu.gameserver.model.templates.housing.HouseAddress;
+import com.aionemu.gameserver.model.templates.npc.NpcTemplateType;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.HousingService;
 import com.aionemu.gameserver.services.instance.InstanceService;
 import com.aionemu.gameserver.services.teleport.TeleportService;
-import com.aionemu.gameserver.utils.PacketSendUtility;
-import com.aionemu.gameserver.world.World;
+import com.aionemu.gameserver.utils.audit.AuditLogger;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
 /**
  * Packet for teleporting by using relationship crystal
- * 
+ *
  * @author Rolandas
  */
 public class CM_HOUSE_TELEPORT extends AionClientPacket {
@@ -43,81 +42,78 @@ public class CM_HOUSE_TELEPORT extends AionClientPacket {
 	@Override
 	protected void readImpl() {
 		actionId = readUC();
-		playerId1 = readD();
+		playerId1 = readD(); // just why? without this field we wouldn't even have to check exploitations
 		playerId2 = readD();
 	}
 
 	@Override
 	protected void runImpl() {
-		Player player1 = World.getInstance().findPlayer(playerId1);
-		if (player1 == null || !player1.isOnline())
+		Player player = getConnection().getActivePlayer();
+		if (player == null)
+			return;
+		if (playerId1 != player.getObjectId()) {
+			AuditLogger.log(player, "tried to teleport playerId " + playerId1 + " instead of himself");
+			return;
+		}
+
+		VisibleObject target = player.getTarget();
+		if (!(target instanceof Npc))
+			return;
+		Npc relationshipCrystal = (Npc) target;
+		if (relationshipCrystal.getNpcTemplateType() != NpcTemplateType.HOUSING || !relationshipCrystal.getAi().getName().equals("friendportal")) {
+			AuditLogger.log(player, "tried to use house teleport without targeting a relationship crystal: " + target);
+			return;
+		}
+
+		House house;
+		switch (actionId) {
+			case 1: // to own house
+				house = player.getActiveHouse();
+				break;
+			case 2: // to friends house
+				if (playerId2 == 0)
+					return;
+				List<House> friendsAccessibleHouses = findFriendsAccessibleHouses(player);
+				house = friendsAccessibleHouses.stream().filter(h -> h.getOwnerId() == playerId2).findAny().orElse(null);
+				break;
+			case 3: // to random friend's house
+				house = Rnd.get(findFriendsAccessibleHouses(player));
+				if (house == null) {
+					sendPacket(SM_SYSTEM_MESSAGE.STR_MSG_NO_RELATIONSHIP_RECENTLY());
+					return;
+				}
+				break;
+			default:
+				LoggerFactory.getLogger(getClass()).warn("Unhandled house teleport actionId " + actionId);
+				return;
+		}
+
+		if (house == null)
 			return;
 
-		House house = null;
-		if (actionId == 1) {
-			playerId2 = playerId1;
-		} else if (actionId == 3) {
-			List<Integer> relationIds = new ArrayList<>();
-			Iterator<Friend> friends = player1.getFriendList().iterator();
-			int address = 0;
-
-			while (friends.hasNext()) {
-				int friendId = friends.next().getObjectId();
-				address = HousingService.getInstance().getPlayerAddress(friendId);
-				if (address != 0) {
-					house = HousingService.getInstance().getPlayerStudio(friendId);
-					if (house == null)
-						house = HousingService.getInstance().getHouseByAddress(address);
-					if (house.getDoorState() == HousePermissions.DOOR_CLOSED || house.getLevelRestrict() > player1.getLevel())
-						continue; // closed doors | level restrict
-					relationIds.add(friendId);
-				}
-			}
-			Legion legion = player1.getLegion();
-			if (legion != null) {
-				for (int memberId : legion.getLegionMembers()) {
-					address = HousingService.getInstance().getPlayerAddress(memberId);
-					if (address != 0) {
-						house = HousingService.getInstance().getPlayerStudio(memberId);
-						if (house == null)
-							house = HousingService.getInstance().getHouseByAddress(address);
-						if (house.getDoorState() == HousePermissions.DOOR_CLOSED || house.getLevelRestrict() > player1.getLevel())
-							continue; // closed doors | level restrict
-						relationIds.add(memberId);
-					}
-				}
-			}
-			if (relationIds.size() == 0) {
-				PacketSendUtility.sendPacket(player1, SM_SYSTEM_MESSAGE.STR_MSG_NO_RELATIONSHIP_RECENTLY());
-				return;
-			}
-			playerId2 = Rnd.get(relationIds);
-		}
-
-		if (playerId2 == 0)
-			return;
-
-		house = HousingService.getInstance().getPlayerStudio(playerId2);
-		HouseAddress address = null;
-		int instanceId = 0;
-		if (house != null) {
-			address = house.getAddress();
-			WorldMapInstance instance = InstanceService.getOrCreateHouseInstance(house);
-			instanceId = instance.getInstanceId();
-		} else {
-			int addressId = HousingService.getInstance().getPlayerAddress(playerId2);
-			house = HousingService.getInstance().getHouseByAddress(addressId);
-			if (house == null || house.getLevelRestrict() > player1.getLevel())
-				return;
-			address = house.getAddress();
-			instanceId = house.getInstanceId();
-		}
-		VisibleObject target = player1.getTarget();
-		if (target != null) {
-			PacketSendUtility.sendPacket(player1, new SM_DIALOG_WINDOW(target.getObjectId(), 0));
-		}
-		TeleportService.teleportTo(player1, address.getMapId(), instanceId, address.getX(), address.getY(), address.getZ(), address.getTeleportHeading(),
+		WorldMapInstance instance = InstanceService.getOrCreateHouseInstance(house);
+		TeleportService.teleportTo(player, instance, house.getX(), house.getY(), house.getZ(), house.getAddress().getTeleportHeading(),
 			TeleportAnimation.FADE_OUT_BEAM);
+	}
+
+	private List<House> findFriendsAccessibleHouses(Player player) {
+		List<House> houses = new ArrayList<>();
+		for (Friend friend : player.getFriendList())
+			addHouseIfAccessible(player, houses, friend.getObjectId());
+		Legion legion = player.getLegion();
+		if (legion != null) {
+			for (int memberId : legion.getLegionMembers()) {
+				if (memberId != player.getObjectId())
+					addHouseIfAccessible(player, houses, memberId);
+			}
+		}
+		return houses;
+	}
+
+	private void addHouseIfAccessible(Player player, List<House> relationIds, int friendId) {
+		House house = HousingService.getInstance().findActiveHouse(friendId);
+		if (house != null && house.canEnter(player))
+			relationIds.add(house);
 	}
 
 }

@@ -11,6 +11,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.house.House;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_HOUSE_TELEPORT;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUESTION_WINDOW;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.HousingService;
 import com.aionemu.gameserver.services.instance.InstanceService;
 import com.aionemu.gameserver.services.teleport.TeleportService;
@@ -33,24 +34,26 @@ public class HouseGateAI extends NpcAI {
 		final int creatorId = getCreatorId();
 		// Only group member and creator may use gate
 		if (!player.equals(getCreator())) {
-			if (player.getCurrentGroup() == null || !player.getCurrentGroup().hasMember(creatorId))
+			if (player.getCurrentGroup() == null || !player.getCurrentGroup().hasMember(creatorId)) {
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_HOUSING_TELEPORT_CANT_USE());
 				return;
+			}
 		}
 
-		House house;
-		if (HousingService.getInstance().getPlayerStudio(creatorId) == null) {
-			int address = HousingService.getInstance().getPlayerAddress(creatorId);
-			house = HousingService.getInstance().getHouseByAddress(address);
-		} else {
-			house = HousingService.getInstance().getPlayerStudio(creatorId);
-		}
+		House house = HousingService.getInstance().findActiveHouse(creatorId);
 		// Uses skill but doesn't have house
-		if (house == null)
+		if (house == null) {
+			if (player.getObjectId() == creatorId)
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_HOUSING_TELEPORT_NEED_HOUSE());
+			else
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_HOUSING_TELEPORT_CANT_USE());
 			return;
+		}
 
-		if (house.getLevelRestrict() > player.getLevel())
-			// msg
+		if (!house.canEnter(player)) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_CANT_ENTER_NO_RIGHT2());
 			return;
+		}
 		boolean returnBattle = true;
 		for (ZoneInstance zone : player.findZones()) {
 			if (!zone.canReturnToBattle()) {

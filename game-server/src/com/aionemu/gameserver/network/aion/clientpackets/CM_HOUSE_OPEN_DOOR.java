@@ -6,7 +6,6 @@ import com.aionemu.gameserver.configs.administration.AdminConfig;
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.house.House;
-import com.aionemu.gameserver.model.house.HousePermissions;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
@@ -55,16 +54,9 @@ public class CM_HOUSE_OPEN_DOOR extends AionClientPacket {
 		} else {
 			if (player.hasAccess(AdminConfig.HOUSE_SHOW_ADDRESS))
 				PacketSendUtility.sendMessage(player, "House address: " + address);
-			if (house.getOwnerId() != player.getObjectId() && !player.hasAccess(AdminConfig.HOUSE_ENTER_ALL)) {
-				boolean allowed = false;
-				if (house.getDoorState() == HousePermissions.DOOR_OPENED_FRIENDS) {
-					allowed = player.getFriendList().getFriend(house.getOwnerId()) != null
-						|| (player.getLegion() != null && player.getLegion().isMember(house.getOwnerId()));
-				}
-				if (!allowed) {
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_CANT_ENTER_NO_RIGHT2());
-					return;
-				}
+			if (!house.canEnter(player)) {
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_CANT_ENTER_NO_RIGHT2());
+				return;
 			}
 			teleportNearHouseDoor(player, house, false);
 		}
