@@ -5,11 +5,11 @@ import java.util.List;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.HouseObject;
-import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.house.House;
-import com.aionemu.gameserver.model.templates.housing.HouseType;
+import com.aionemu.gameserver.model.templates.housing.HouseAddress;
+import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.model.templates.zone.ZoneInfo;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_HOUSE_RENDER;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_HOUSE_UPDATE;
@@ -73,21 +73,34 @@ public class HouseController extends VisibleObjectController<House> {
 	}
 
 	private void moveOutside(Player player, boolean ownerChanged) {
-		if (getOwner().getHouseType() == HouseType.STUDIO) {
-			float x = getOwner().getAddress().getExitX();
-			float y = getOwner().getAddress().getExitY();
-			float z = getOwner().getAddress().getExitZ();
-			TeleportService.teleportTo(player, getOwner().getAddress().getExitMapId(), 1, x, y, z, player.getHeading(), TeleportAnimation.FADE_OUT_BEAM);
+		if (getOwner().getAddress().getExitMapId() != null) {
+			HouseAddress address = getOwner().getAddress();
+			TeleportService.teleportTo(player, address.getExitMapId(), address.getExitX(), address.getExitY(), address.getExitZ(), (byte) 0,
+				TeleportAnimation.FADE_OUT_BEAM);
 		} else {
-			Npc sign = getOwner().getCurrentSign();
-			double radian = Math.toRadians(PositionUtil.convertHeadingToAngle(sign.getHeading()));
-			float x = (float) (sign.getX() + (8 * Math.cos(radian)));
-			float y = (float) (sign.getY() + (8 * Math.sin(radian)));
-			TeleportService.teleportTo(player, getOwner().getWorldId(), 1, x, y, player.getZ() + 1, player.getHeading(), TeleportAnimation.FADE_OUT_BEAM);
+			teleportNearHouseDoor(player, true);
 		}
 		if (ownerChanged)
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_CHANGE_OWNER());
 		else
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_REQUEST_OUT());
+	}
+
+	public void teleportNearHouseDoor(Player player, boolean outsideHouse) {
+		SpawnTemplate butler = getOwner().getButler().getSpawn(), relationshipCrystal = getOwner().getRelationshipCrystal().getSpawn();
+		float x, y, z; // midpoint between butler and relationship crystal, since we currently have no door coordinates in templates
+		byte h = PositionUtil.getHeadingTowards(getOwner().getRelationshipCrystal(), butler.getX(), butler.getY());
+		h -= 30; // this is the supposed heading towards the door (crystal is right from the door, so offset direction towards butler by 90 degrees)
+		x = (butler.getX() + relationshipCrystal.getX()) / 2;
+		y = (butler.getY() + relationshipCrystal.getY()) / 2;
+		z = Math.max(butler.getZ(), relationshipCrystal.getZ());
+		if (outsideHouse) { // offset the midpoint 2.5m behind the butler, to get coords outside the house, near the door
+			double radian = Math.toRadians(PositionUtil.convertHeadingToAngle(h));
+			x += (float) (Math.cos(radian) * 2.5f);
+			y += (float) (Math.sin(radian) * 2.5f);
+		} else {
+			h += h < 60 ? 60 : -60; // opposite direction (player should look inside house)
+		}
+		TeleportService.teleportTo(player, getOwner().getWorldId(), getOwner().getInstanceId(), x, y, z, h, TeleportAnimation.FADE_OUT_BEAM);
 	}
 }
