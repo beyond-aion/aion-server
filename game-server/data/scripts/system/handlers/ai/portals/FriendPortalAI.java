@@ -9,6 +9,7 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.SummonedHouseNpc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_FRIEND_LIST;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
@@ -30,6 +31,7 @@ public class FriendPortalAI extends NpcAI {
 			|| (player.getLegion() != null && player.getLegion().isMember(playerOwner));
 
 		if (allowed) {
+			PacketSendUtility.sendPacket(player, new SM_FRIEND_LIST()); // client needs friendlist info to list entries in housing friendlist
 			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getOwner().getObjectId(), DialogPage.HOUSING_FRIENDLIST.id()));
 		} else {
 			PacketSendUtility.sendPacket(player, STR_HOUSING_TELEPORT_CANT_USE());
