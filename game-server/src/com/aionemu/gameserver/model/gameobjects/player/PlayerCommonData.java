@@ -420,11 +420,9 @@ public class PlayerCommonData extends CreatureTemplate {
 		this.bonusTitleId = bonusTitleId;
 	}
 
-	/**
-	 * @param position
-	 */
 	public void setPosition(WorldPosition position) {
 		this.position = position;
+		setWorldOwnerId(position.getMapRegion() == null ? 0 : position.getWorldMapInstance().getOwnerId());
 	}
 
 	/**

@@ -85,7 +85,7 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 			stmt.setInt(22, mails);
 			stmt.setLong(23, pcd.getCurrentReposeEnergy());
 			stmt.setInt(24, pcd.getMentorFlagTime());
-			stmt.setInt(25, player.getPosition().getMapRegion() == null ? 0 : player.getPosition().getWorldMapInstance().getOwnerId());
+			stmt.setInt(25, player.getCommonData().getWorldOwnerId());
 			stmt.setInt(26, player.getObjectId());
 			stmt.execute();
 		} catch (Exception e) {
