@@ -268,6 +268,7 @@ public class HousingService {
 		if (studio != null) {
 			studio.despawnNpcs();
 			studio.save();
+			studio.setPosition(null); // release mapregion with destroyed worldmapinstance
 		}
 	}
 

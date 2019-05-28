@@ -97,7 +97,7 @@ public class PrisonRestrictions extends AbstractRestrictions {
 	}
 
 	private boolean isInPrison(Player player) {
-		return player.isInPrison() || player.getWorldId() == WorldMapType.DE_PRISON.getId() || player.getWorldId() == WorldMapType.DF_PRISON.getId();
+		return player.isInPrison() || player.getWorldId() == WorldMapType.LF_PRISON.getId() || player.getWorldId() == WorldMapType.DF_PRISON.getId();
 	}
 
 	@Override

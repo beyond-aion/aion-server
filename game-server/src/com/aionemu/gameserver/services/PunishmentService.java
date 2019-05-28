@@ -105,7 +105,7 @@ public class PunishmentService {
 			ChatBanService.banPlayer(player, remainingMinutes);
 			PacketSendUtility.sendMessage(player, "You are still in prison for " + remainingMinutes + " minute" + (remainingMinutes > 1 ? "s" : "") + ".");
 
-			if (player.getWorldId() != WorldMapType.DF_PRISON.getId() && player.getWorldId() != WorldMapType.DE_PRISON.getId()) {
+			if (player.getWorldId() != WorldMapType.DF_PRISON.getId() && player.getWorldId() != WorldMapType.LF_PRISON.getId()) {
 				PacketSendUtility.sendMessage(player, "You will be teleported to prison in a moment!");
 				ThreadPoolManager.getInstance().schedule(() -> TeleportService.teleportToPrison(player), 10000);
 			}

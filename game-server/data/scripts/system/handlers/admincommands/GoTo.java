@@ -341,7 +341,7 @@ public class GoTo extends AdminCommand {
 		 * Miscellaneous
 		 */
 		// Prison
-		addLocation(DE_PRISON, 256, 256, 49, "Prison LF", "Prison Elyos");
+		addLocation(LF_PRISON, 256, 256, 49, "Prison LF", "Prison Elyos");
 		addLocation(DF_PRISON, 256, 256, 49, "Prison DF", "Prison Asmos");
 		// Test
 		addLocation(ID_TEST_DUNGEON, 104, 66, 25, "Test Dungeon");
