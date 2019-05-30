@@ -466,8 +466,8 @@ public final class PlayerEnterWorldService {
 		expirables.addAll(player.getTitleList().getTitles());
 		ExpireTimerTask.getInstance().registerExpirables(expirables, player);
 
-		if (player.getHouseRegistry() != null) {
-			for (HouseObject<?> obj : player.getHouseRegistry().getObjects()) {
+		if (player.getActiveHouse() != null) {
+			for (HouseObject<?> obj : player.getActiveHouse().getRegistry().getObjects()) {
 				if (obj.getPersistentState() != PersistentState.DELETED)
 					ExpireTimerTask.getInstance().registerExpirable(obj, player);
 			}

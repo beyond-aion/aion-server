@@ -174,9 +174,6 @@ public class PlayerService {
 		ItemService.loadItemStones(warehouse.getItems());
 		player.setStorage(warehouse);
 
-		House activeHouse = player.getActiveHouse();
-		player.setHouseRegistry(activeHouse == null ? null : activeHouse.getRegistry());
-
 		// Apply equipment stats (items and manastones were loaded in account)
 		player.getEquipment().onLoadApplyEquipmentStats();
 

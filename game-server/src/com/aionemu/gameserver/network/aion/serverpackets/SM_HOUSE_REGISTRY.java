@@ -4,6 +4,7 @@ import com.aionemu.gameserver.model.gameobjects.HouseDecoration;
 import com.aionemu.gameserver.model.gameobjects.HouseObject;
 import com.aionemu.gameserver.model.gameobjects.UseableItemObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.house.HouseRegistry;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 
@@ -12,7 +13,7 @@ import com.aionemu.gameserver.network.aion.AionServerPacket;
  */
 public class SM_HOUSE_REGISTRY extends AionServerPacket {
 
-	int action;
+	private final int action;
 
 	public SM_HOUSE_REGISTRY(int action) {
 		this.action = action;
@@ -23,15 +24,16 @@ public class SM_HOUSE_REGISTRY extends AionServerPacket {
 		Player player = con.getActivePlayer();
 		if (player == null)
 			return;
+		HouseRegistry houseRegistry = player.getActiveHouse().getRegistry();
 
 		writeC(action);
 		if (action == 1) { // Display registered objects
-			if (player.getHouseRegistry() == null) {
+			if (houseRegistry == null) {
 				writeH(0);
 				return;
 			}
-			writeH(player.getHouseRegistry().getNotSpawnedObjects().size());
-			for (HouseObject<?> obj : player.getHouseRegistry().getNotSpawnedObjects()) {
+			writeH(houseRegistry.getNotSpawnedObjects().size());
+			for (HouseObject<?> obj : houseRegistry.getNotSpawnedObjects()) {
 				if (obj == null)
 					continue;
 				writeD(obj.getObjectId());
@@ -49,12 +51,12 @@ public class SM_HOUSE_REGISTRY extends AionServerPacket {
 				}
 			}
 		} else if (action == 2) { // Display default and registered decoration items
-			writeH(player.getHouseRegistry().getDefaultParts().size() + player.getHouseRegistry().getCustomParts().size());
-			for (HouseDecoration deco : player.getHouseRegistry().getDefaultParts()) {
+			writeH(houseRegistry.getDefaultParts().size() + houseRegistry.getCustomParts().size());
+			for (HouseDecoration deco : houseRegistry.getDefaultParts()) {
 				writeD(0);
 				writeD(deco.getTemplate().getId());
 			}
-			for (HouseDecoration houseDecor : player.getHouseRegistry().getCustomParts()) {
+			for (HouseDecoration houseDecor : houseRegistry.getCustomParts()) {
 				writeD(houseDecor.getObjectId());
 				writeD(houseDecor.getTemplate().getId());
 			}

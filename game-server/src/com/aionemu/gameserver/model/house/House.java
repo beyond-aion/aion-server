@@ -96,19 +96,6 @@ public class House extends VisibleObject implements Persistable {
 		return (HouseController) super.getController();
 	}
 
-	private void putDefaultParts() {
-		for (PartType partType : PartType.values()) {
-			Integer partId = building.getDefaultPartId(partType);
-			if (partId == null)
-				continue;
-			for (int line = partType.getStartLineNr(); line <= partType.getEndLineNr(); line++) {
-				int room = partType.getEndLineNr() - line;
-				HouseDecoration decor = new HouseDecoration(0, partId, room);
-				getRegistry().putDefaultPart(decor, room);
-			}
-		}
-	}
-
 	/**
 	 * TODO: improve this, now it's inefficient during startup
 	 */
@@ -146,9 +133,8 @@ public class House extends VisibleObject implements Persistable {
 	public synchronized void spawn(int instanceId) {
 		playerScripts = DAOManager.getDAO(HouseScriptsDAO.class).getPlayerScripts(getObjectId());
 
-		if (ownerId > 0 && (status == HouseStatus.ACTIVE || status == HouseStatus.SELL_WAIT)) {
-			DAOManager.getDAO(PlayerRegisteredItemsDAO.class).loadRegistry(ownerId);
-		}
+		if (ownerId > 0 && (status == HouseStatus.ACTIVE || status == HouseStatus.SELL_WAIT))
+			reloadHouseRegistry();
 
 		fixBuildingStates();
 
@@ -226,10 +212,22 @@ public class House extends VisibleObject implements Persistable {
 
 	public void setOwnerId(int ownerId) {
 		if (this.ownerId != ownerId) {
+			int oldOwnerId = this.ownerId;
 			this.ownerId = ownerId;
 			signNotice = null;
+			houseRegistry = null;
+			resetCachedHousesOfPlayer(oldOwnerId);
+			resetCachedHousesOfPlayer(ownerId);
 		}
 		fixBuildingStates();
+	}
+
+	private void resetCachedHousesOfPlayer(int ownerId) {
+		if (ownerId > 0) {
+			Player player = World.getInstance().findPlayer(ownerId);
+			if (player != null)
+				player.resetHouses();
+		}
 	}
 
 	public Timestamp getAcquiredTime() {
@@ -387,6 +385,7 @@ public class House extends VisibleObject implements Persistable {
 		if (ownerId == 0)
 			return false;
 		getRegistry().despawnObjects();
+		setOwnerId(0);
 		if (playerScripts == null)
 			playerScripts = DAOManager.getDAO(HouseScriptsDAO.class).getPlayerScripts(getObjectId());
 		playerScripts.removeAll();
@@ -395,14 +394,12 @@ public class House extends VisibleObject implements Persistable {
 			DAOManager.getDAO(HousesDAO.class).deleteHouse(ownerId);
 			return true;
 		}
-		houseRegistry = null;
 		acquiredTime = null;
 		sellStarted = null;
 		nextPay = null;
 		feePaid = true;
 
 		Building defaultBuilding = getLand().getDefaultBuilding();
-		setOwnerId(0);
 		if (defaultBuilding != building)
 			HousingService.getInstance().switchHouseBuilding(this, defaultBuilding.getId());
 		if (getStatus() != HouseStatus.SELL_WAIT)
@@ -412,18 +409,15 @@ public class House extends VisibleObject implements Persistable {
 	}
 
 	public HouseRegistry getRegistry() {
-		if (houseRegistry == null) {
-			houseRegistry = new HouseRegistry(this);
-			putDefaultParts();
-		}
+		if (houseRegistry == null)
+			reloadHouseRegistry();
 		return houseRegistry;
 	}
 
 	public synchronized void reloadHouseRegistry() {
-		houseRegistry = null;
-		getRegistry();
+		houseRegistry = new HouseRegistry(this);
 		if (ownerId != 0)
-			DAOManager.getDAO(PlayerRegisteredItemsDAO.class).loadRegistry(ownerId);
+			DAOManager.getDAO(PlayerRegisteredItemsDAO.class).loadRegistry(houseRegistry);
 	}
 
 	public HouseDecoration getRenderPart(PartType partType, int room) {

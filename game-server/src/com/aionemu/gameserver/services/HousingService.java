@@ -91,10 +91,6 @@ public class HousingService {
 					SpawnEngine.bringIntoWorld(studio);
 				// spawn only npcs
 				studio.spawn(instanceId);
-
-				Player enteredPlayer = World.getInstance().findPlayer(registeredId);
-				if (enteredPlayer != null)
-					enteredPlayer.setHouseRegistry(studio.getRegistry());
 			}
 			return;
 		}
@@ -181,7 +177,6 @@ public class HousingService {
 				house.setFeePaid(true);
 				house.setNextPay(null);
 				house.setSellStarted(null);
-				house.reloadHouseRegistry();
 				house.save();
 				return house;
 			}

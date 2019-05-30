@@ -12,7 +12,7 @@ public abstract class PlayerRegisteredItemsDAO implements IDFactoryAwareDAO {
 		return PlayerRegisteredItemsDAO.class.getName();
 	}
 
-	public abstract void loadRegistry(int playerId);
+	public abstract void loadRegistry(HouseRegistry registry);
 
 	public abstract boolean store(HouseRegistry registry, int playerId);
 

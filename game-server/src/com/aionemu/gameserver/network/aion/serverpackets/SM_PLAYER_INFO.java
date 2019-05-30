@@ -44,7 +44,7 @@ public class SM_PLAYER_INFO extends AbstractPlayerInfoPacket {
 	@Override
 	protected void writeImpl(AionConnection con) {
 		Player activePlayer = con.getActivePlayer();
-		if (activePlayer == null || player == null)
+		if (activePlayer == null)
 			return;
 
 		PlayerCommonData pcd = player.getCommonData();
@@ -211,7 +211,7 @@ public class SM_PLAYER_INFO extends AbstractPlayerInfoPacket {
 		writeC(0); // suspect id
 		writeD(player.getCurrentTeamId());
 		writeC(player.isMentor() ? 1 : 0);
-		writeD(player.getHouseOwnerId()); // 3.0
+		writeD(player.getActiveHouse() == null ? 0 : player.getActiveHouse().getAddress().getId()); // 3.0
 
 		if (player.getAccount().getMembership() > 0)
 			writeD(0x03 + player.getAccount().getMembership());// 1 = normal, 2 = new player(ascension boost), 3 = returning player, 4 = vip 1

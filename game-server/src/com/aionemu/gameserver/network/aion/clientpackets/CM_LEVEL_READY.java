@@ -52,8 +52,8 @@ public class CM_LEVEL_READY extends AionClientPacket {
 	protected void runImpl() {
 		Player activePlayer = getConnection().getActivePlayer();
 
-		if (activePlayer.getHouseRegistry() != null)
-			sendPacket(new SM_HOUSE_OBJECTS(activePlayer));
+		if (activePlayer.getActiveHouse() != null)
+			sendPacket(new SM_HOUSE_OBJECTS(activePlayer.getActiveHouse().getRegistry().getSpawnedObjects()));
 		if (activePlayer.isInInstance()) {
 			sendPacket(new SM_INSTANCE_COUNT_INFO(activePlayer.getWorldId(), activePlayer.getInstanceId()));
 		}

@@ -47,7 +47,6 @@ import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureVisualState;
 import com.aionemu.gameserver.model.gameobjects.state.FlyState;
 import com.aionemu.gameserver.model.house.House;
-import com.aionemu.gameserver.model.house.HouseRegistry;
 import com.aionemu.gameserver.model.house.HouseStatus;
 import com.aionemu.gameserver.model.ingameshop.InGameShop;
 import com.aionemu.gameserver.model.items.ItemCooldown;
@@ -122,7 +121,6 @@ public class Player extends Creature {
 	private Storage[] cabinets = new Storage[StorageType.HOUSE_WH_MAX - StorageType.HOUSE_WH_MIN + 1];
 	private Storage regularWarehouse;
 	private Equipment equipment;
-	private HouseRegistry houseRegistry;
 
 	private final AbsoluteStatOwner absStatsHolder;
 	private PlayerSettings playerSettings;
@@ -158,9 +156,9 @@ public class Player extends Creature {
 	private BindPointPosition bindPoint;
 
 	private final Map<Integer, ItemCooldown> itemCoolDowns = new ConcurrentHashMap<>();
-	private PortalCooldownList portalCooldownList;
-	private CraftCooldownList craftCooldownList;
-	private HouseObjectCooldownList houseObjectCooldownList;
+	private final PortalCooldownList portalCooldownList;
+	private final CraftCooldownList craftCooldownList;
+	private final HouseObjectCooldownList houseObjectCooldownList;
 	private long nextSkillUse;
 	private ChainSkills chainSkills;
 	private Map<AttackStatus, Long> lastCounterSkill = new HashMap<>();
@@ -1683,24 +1681,14 @@ public class Player extends Creature {
 		return super.isSkillDisabled(template);
 	}
 
-	/**
-	 * @return the houses
-	 */
 	public List<House> getHouses() {
-		if (houses == null) {
-			List<House> found = HousingService.getInstance().findPlayerHouses(getObjectId());
-			if (found.isEmpty())
-				return found;
-			houses = found;
-		}
+		if (houses == null)
+			resetHouses();
 		return houses;
 	}
 
 	public void resetHouses() {
-		if (houses != null) {
-			houses.clear();
-			houses = null;
-		}
+		houses = HousingService.getInstance().findPlayerHouses(getObjectId());
 	}
 
 	public House getActiveHouse() {
@@ -1709,22 +1697,6 @@ public class Player extends Creature {
 				return house;
 
 		return null;
-	}
-
-	public int getHouseOwnerId() {
-		House house = getActiveHouse();
-		if (house != null)
-			return house.getAddress().getId();
-
-		return 0;
-	}
-
-	public HouseRegistry getHouseRegistry() {
-		return houseRegistry;
-	}
-
-	public void setHouseRegistry(HouseRegistry houseRegistry) {
-		this.houseRegistry = houseRegistry;
 	}
 
 	public byte getHouseOwnerStates() {

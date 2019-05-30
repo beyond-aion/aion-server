@@ -295,17 +295,13 @@ public class HousingBidService extends AbstractCronTask {
 				// activate previously obtained house
 				House newHouse = HousingService.getInstance().activateBoughtHouse(sellerPcd.getPlayerObjId());
 				if (sellerPcd.isOnline()) {
-					sellerPcd.getPlayer().resetHouses();
 					PacketSendUtility.sendPacket(sellerPcd.getPlayer(), new SM_HOUSE_ACQUIRE(sellerPcd.getPlayerObjId(), newHouse.getAddress().getId(), true));
 					PacketSendUtility.sendPacket(sellerPcd.getPlayer(), new SM_HOUSE_OWNER_INFO(sellerPcd.getPlayer()));
-					sellerPcd.getPlayer().setHouseRegistry(newHouse.getRegistry());
 				}
 				MailFormatter.sendHouseAuctionMail(newHouse, sellerPcd, AuctionResult.GRACE_SUCCESS, time, returnKinah);
 			} else {
 				MailFormatter.sendHouseAuctionMail(soldHouse, sellerPcd, AuctionResult.SUCCESS_SALE, time, returnKinah);
 				soldHouse.revokeOwner();
-				if (sellerPcd.isOnline())
-					sellerPcd.getPlayer().resetHouses();
 			}
 
 			AuctionResult result = completeHouseSell(buyerPcd, soldHouse);
@@ -337,8 +333,6 @@ public class HousingBidService extends AbstractCronTask {
 					bidHouse.revokeOwner();
 					House activatedHouse = HousingService.getInstance().activateBoughtHouse(sellerPcd.getPlayerObjId());
 					if (seller != null && activatedHouse != null) {
-						seller.resetHouses();
-						seller.setHouseRegistry(activatedHouse.getRegistry());
 						PacketSendUtility.sendPacket(seller, new SM_HOUSE_ACQUIRE(seller.getObjectId(), activatedHouse.getAddress().getId(), true));
 						PacketSendUtility.sendPacket(seller, new SM_HOUSE_OWNER_INFO(seller));
 					}
@@ -464,13 +458,10 @@ public class HousingBidService extends AbstractCronTask {
 			obtainedHouse.setFeePaid(true);
 			obtainedHouse.setNextPay(null);
 			obtainedHouse.setSellStarted(null);
-			obtainedHouse.reloadHouseRegistry();
 			obtainedHouse.save();
 		}
 		if (winner.isOnline()) {
-			winner.getPlayer().resetHouses();
 			if (result == AuctionResult.WIN_BID) {
-				winner.getPlayer().setHouseRegistry(obtainedHouse.getRegistry());
 				winner.getPlayer().setHouseOwnerState(HouseOwnerState.HOUSE_OWNER.getId());
 				PacketSendUtility.sendPacket(winner.getPlayer(), new SM_HOUSE_ACQUIRE(winner.getPlayerObjId(), obtainedHouse.getAddress().getId(), true));
 				PacketSendUtility.sendPacket(winner.getPlayer(), new SM_HOUSE_OWNER_INFO(winner.getPlayer()));

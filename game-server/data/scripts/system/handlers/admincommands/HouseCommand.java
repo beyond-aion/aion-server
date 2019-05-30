@@ -2,19 +2,24 @@ package admincommands;
 
 import java.sql.Timestamp;
 
+import org.apache.commons.lang3.math.NumberUtils;
+
+import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.HouseOwnerState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.house.House;
 import com.aionemu.gameserver.model.house.HouseStatus;
 import com.aionemu.gameserver.model.templates.housing.BuildingType;
-import com.aionemu.gameserver.model.templates.housing.HouseAddress;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_HOUSE_ACQUIRE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_HOUSE_OWNER_INFO;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.HousingService;
+import com.aionemu.gameserver.services.player.PlayerService;
 import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
+import com.aionemu.gameserver.world.World;
 
 /**
  * @author Rolandas
@@ -22,131 +27,100 @@ import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 public class HouseCommand extends AdminCommand {
 
 	public HouseCommand() {
-		super("house");
+		super("house", "House teleport and ownership management.");
+
+		// @formatter:off
+		setSyntaxInfo(
+			"<tp> <address> - Teleports you to the house with the given address.",
+			"<own> <address> - Gives ownership of given house to your target.",
+			"<revoke> <address> - Revokes ownership of given house."
+		);
+		// @formatter:on
 	}
 
 	@Override
 	public void execute(Player admin, String... params) {
 		if (params.length == 0) {
-			PacketSendUtility.sendMessage(admin, "Syntax: //house <tp | acquire | revoke>");
+			sendInfo(admin);
 			return;
 		}
 
-		if (params[0].equals("acquire")) {
-			if (params.length == 1) {
-				PacketSendUtility.sendMessage(admin, "Syntax: //house acquire <name>");
-				return;
-			}
-			ChangeHouseOwner(admin, params[1].toUpperCase(), true);
-		} else if (params[0].equals("revoke")) {
-			if (params.length == 1) {
-				PacketSendUtility.sendMessage(admin, "Syntax: //house revoke <name>");
-				return;
-			}
-			ChangeHouseOwner(admin, params[1].toUpperCase(), false);
-		} else if (params[0].equals("tp")) {
-			if (params.length == 1) {
-				PacketSendUtility.sendMessage(admin, "Syntax: //house tp <name>");
-				return;
-			}
-			House house = HousingService.getInstance().getHouseByName(params[1].toUpperCase());
-			if (house == null) {
-				PacketSendUtility.sendMessage(admin, "No such house!");
-				return;
-			}
-			HouseAddress address = house.getAddress();
-			TeleportService.teleportTo(admin, address.getMapId(), address.getX(), address.getY(), address.getZ());
-		}
-
-	}
-
-	private void ChangeHouseOwner(Player admin, String houseName, boolean acquire) {
-		Player target = null;
-		VisibleObject creature = admin.getTarget();
-
-		if (admin.getTarget() instanceof Player) {
-			target = (Player) creature;
-		}
-
-		if (target == null) {
-			PacketSendUtility.sendMessage(admin, "You should select a target first!");
+		int address = NumberUtils.toInt(params[1]);
+		House house = HousingService.getInstance().getHouseByAddress(address);
+		if (house == null) {
+			sendInfo(admin, "Invalid address.");
 			return;
 		}
-
-		if (acquire) {
-			if (target.getHouses().size() == 2) {
-				PacketSendUtility.sendMessage(admin, "Player can not own more than 2 houses!");
-				return;
-			}
-			House house = HousingService.getInstance().getHouseByName(houseName);
-			if (house == null) {
-				PacketSendUtility.sendMessage(admin, "No such house!");
-				return;
-			}
-			if (target.getHouses().size() == 1) {
-				House current = target.getHouses().get(0);
-				current.revokeOwner();
-				if (current.getBuilding().getType() == BuildingType.PERSONAL_INS) {
-					target.getHouses().remove(current);
-					PacketSendUtility.sendMessage(admin, "Deleted studio.");
-				} else {
-					current.setStatus(HouseStatus.ACTIVE);
-					current.setFeePaid(true);
-					current.setNextPay(null);
-					current.save();
-					PacketSendUtility.sendMessage(admin, current.getName() + " status is now " + current.getStatus().toString());
-				}
-			}
-			house.setAcquiredTime(new Timestamp(System.currentTimeMillis()));
-			house.setOwnerId(target.getCommonData().getPlayerObjId());
-			house.setStatus(HouseStatus.ACTIVE);
-			house.setFeePaid(true);
-			house.setNextPay(null); // TODO: fix it
-			house.reloadHouseRegistry();
-			house.save();
-			target.getHouses().add(house);
-			target.setHouseRegistry(house.getRegistry());
-			target.setHouseOwnerState(HouseOwnerState.HOUSE_OWNER.getId());
-			PacketSendUtility.sendMessage(admin, "House " + house.getName() + " acquired");
-			PacketSendUtility.sendPacket(target, new SM_HOUSE_OWNER_INFO(target));
-			PacketSendUtility.sendPacket(target, new SM_HOUSE_ACQUIRE(target.getObjectId(), house.getAddress().getId(), true));
+		if ("own".equalsIgnoreCase(params[0])) {
+			acquireHouse(admin, house);
+		} else if ("revoke".equalsIgnoreCase(params[0])) {
+			revokeOwnership(admin, house);
+		} else if ("tp".equalsIgnoreCase(params[0])) {
+			TeleportService.teleportTo(admin, house.getPosition().getWorldMapInstance(), house.getX(), house.getY(), house.getZ(),
+				house.getTeleportHeading(), TeleportAnimation.NONE);
 		} else {
-			if (target.getHouses().size() == 0) {
-				PacketSendUtility.sendMessage(admin, "Nothing to revoke!");
-				return;
-			}
-			House revokedHouse = null;
-			for (House house : target.getHouses()) {
-				if (house.getName().equals(houseName)) {
-					revokedHouse = house;
-					house.revokeOwner();
-				} else if (house.getStatus() != HouseStatus.ACTIVE) {
-					house.setStatus(HouseStatus.ACTIVE);
-					house.setSellStarted(null);
-					house.save();
-				}
-			}
-			if (revokedHouse == null) {
-				PacketSendUtility.sendMessage(admin, "Target doesn't own this house!");
-				return;
-			}
-			target.getHouses().remove(revokedHouse);
-			House oldHouse = null;
-			if (target.getHouses().size() != 0)
-				oldHouse = target.getHouses().get(0);
-			else
-				target.setHouseOwnerState(HouseOwnerState.BUY_STUDIO_ALLOWED.getId());
-			target.setHouseRegistry(oldHouse == null ? null : oldHouse.getRegistry());
-			PacketSendUtility.sendMessage(admin, "House " + revokedHouse.getName() + " revoked");
-			PacketSendUtility.sendPacket(target, new SM_HOUSE_OWNER_INFO(target));
-			PacketSendUtility.sendPacket(target, new SM_HOUSE_ACQUIRE(target.getObjectId(), revokedHouse.getAddress().getId(), false));
-			revokedHouse.getController().updateAppearance();
+			sendInfo(admin);
 		}
 	}
 
-	@Override
-	public void info(Player player, String message) {
-		PacketSendUtility.sendMessage(player, "syntax //house <tp | list | acquire | revoke>");
+	private void acquireHouse(Player admin, House house) {
+		VisibleObject creature = admin.getTarget();
+		if (!(creature instanceof Player)) {
+			PacketSendUtility.sendPacket(admin, SM_SYSTEM_MESSAGE.STR_INVALID_TARGET());
+			return;
+		}
+		Player target = (Player) creature;
+
+		if (target.getHouses().size() >= 2) {
+			sendInfo(admin, target.getName() + " must sell his old house which is currently in grace time first!");
+			return;
+		}
+		House current = target.getActiveHouse();
+		if (current != null) {
+			current.revokeOwner();
+			if (current.getBuilding().getType() == BuildingType.PERSONAL_INS) {
+				sendInfo(admin, "Deleted studio.");
+			} else {
+				sendInfo(admin, current.getName() + " status is now " + current.getStatus().toString());
+			}
+		}
+		house.setAcquiredTime(new Timestamp(System.currentTimeMillis()));
+		house.setOwnerId(target.getObjectId());
+		house.setStatus(HouseStatus.ACTIVE);
+		house.setFeePaid(true);
+		house.setNextPay(null);
+		house.save();
+		target.setHouseOwnerState(HouseOwnerState.HOUSE_OWNER.getId());
+		PacketSendUtility.sendPacket(target, new SM_HOUSE_OWNER_INFO(target));
+		PacketSendUtility.sendPacket(target, new SM_HOUSE_ACQUIRE(target.getObjectId(), house.getAddress().getId(), true));
+		sendInfo(admin, "House " + house.getName() + " is now owned by " + target.getName());
 	}
 
+	private void revokeOwnership(Player admin, House house) {
+		int ownerId = house.getOwnerId();
+		if (ownerId == 0) {
+			sendInfo(admin, "House has no owner.");
+			return;
+		}
+		house.revokeOwner();
+		house.getController().updateAppearance();
+		for (House inactiveHouse : HousingService.getInstance().findPlayerHouses(ownerId)) {
+			if (inactiveHouse.getStatus() == HouseStatus.INACTIVE) {
+				inactiveHouse.setStatus(HouseStatus.ACTIVE);
+				inactiveHouse.setSellStarted(null);
+				inactiveHouse.save();
+				break;
+			}
+		}
+		Player owner = World.getInstance().findPlayer(ownerId);
+		if (owner != null) {
+			if (owner.getHouses().isEmpty())
+				owner.setHouseOwnerState(HouseOwnerState.BUY_STUDIO_ALLOWED.getId());
+			PacketSendUtility.sendPacket(owner, new SM_HOUSE_OWNER_INFO(owner));
+			PacketSendUtility.sendPacket(owner, new SM_HOUSE_ACQUIRE(owner.getObjectId(), house.getAddress().getId(), false));
+			sendInfo(admin, "Ownership of house " + house.getAddress().getId() + " was revoked from " + owner.getName());
+		} else {
+			sendInfo(admin, "Ownership of house " + house.getAddress().getId() + " was revoked from " + PlayerService.getPlayerName(ownerId));
+		}
+	}
 }

@@ -4,6 +4,7 @@ import com.aionemu.gameserver.model.gameobjects.HouseDecoration;
 import com.aionemu.gameserver.model.gameobjects.HouseObject;
 import com.aionemu.gameserver.model.gameobjects.UseableItemObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.house.House;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 
@@ -40,16 +41,16 @@ public class SM_HOUSE_EDIT extends AionServerPacket {
 	@Override
 	protected void writeImpl(AionConnection con) {
 		Player player = con.getActivePlayer();
-		if (player == null || player.getHouseRegistry() == null)
+		if (player == null)
 			return;
-
-		HouseObject<?> obj = player.getHouseRegistry().getObjectByObjId(itemObjectId);
+		House house = player.getActiveHouse();
+		HouseObject<?> obj = house.getRegistry().getObjectByObjId(itemObjectId);
 
 		if (action == 3) { // Add item
-			int templateId = 0;
+			int templateId;
 			int typeId = 0;
 			if (obj == null) {
-				HouseDecoration deco = player.getHouseRegistry().getCustomPartByObjId(itemObjectId);
+				HouseDecoration deco = house.getRegistry().getCustomPartByObjId(itemObjectId);
 				templateId = deco.getTemplate().getId();
 			} else {
 				templateId = obj.getObjectTemplate().getTemplateId();
@@ -76,7 +77,7 @@ public class SM_HOUSE_EDIT extends AionServerPacket {
 			writeD(itemObjectId);
 		} else if (action == 5) { // Spawn or move object
 			writeC(action);
-			writeD(player.getHouseOwnerId()); // if painted 0 ?
+			writeD(house.getAddress().getId()); // if painted 0 ?
 			writeD(player.getCommonData().getPlayerObjId());
 			writeD(itemObjectId);
 			writeD(obj.getObjectTemplate().getTemplateId());
@@ -86,18 +87,7 @@ public class SM_HOUSE_EDIT extends AionServerPacket {
 			writeH(rotation);
 			writeD(player.getHouseObjectCooldownList().getReuseDelay(itemObjectId));
 			writeD(obj.secondsUntilExpiration());
-
-			Integer color = obj.getColor();
-			writeC(color == null ? 0 : 1); // Is dyed
-			if (color == null) {
-				writeC(0);
-				writeC(0);
-				writeC(0);
-			} else {
-				writeC((color & 0xFF0000) >> 16);
-				writeC((color & 0xFF00) >> 8);
-				writeC((color & 0xFF));
-			}
+			writeDyeInfo(obj.getColor());
 			writeD(0); // expiration as for armor ?
 
 			writeC(obj.getObjectTemplate().getTypeId());

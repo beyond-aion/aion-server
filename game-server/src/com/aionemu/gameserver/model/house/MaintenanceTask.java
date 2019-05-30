@@ -174,8 +174,6 @@ public class MaintenanceTask extends AbstractCronTask {
 			return;
 		if (playerCommonData.isOnline()) {
 			Player player = playerCommonData.getPlayer();
-			player.getHouses().remove(house);
-			player.setHouseRegistry(null);
 			// TODO: check this
 			PacketSendUtility.sendPacket(player, new SM_HOUSE_ACQUIRE(player.getObjectId(), house.getAddress().getId(), false));
 			PacketSendUtility.sendPacket(player, new SM_HOUSE_OWNER_INFO(player));

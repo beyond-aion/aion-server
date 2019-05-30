@@ -23,11 +23,9 @@ import com.aionemu.gameserver.model.gameobjects.HouseObject;
 import com.aionemu.gameserver.model.gameobjects.Persistable;
 import com.aionemu.gameserver.model.gameobjects.Persistable.PersistentState;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
-import com.aionemu.gameserver.model.house.House;
 import com.aionemu.gameserver.model.house.HouseRegistry;
 import com.aionemu.gameserver.model.templates.housing.HouseType;
 import com.aionemu.gameserver.model.templates.housing.PartType;
-import com.aionemu.gameserver.services.HousingService;
 import com.aionemu.gameserver.services.item.HouseObjectFactory;
 import com.aionemu.gameserver.utils.idfactory.IDFactory;
 import com.aionemu.gameserver.world.World;
@@ -70,57 +68,53 @@ public class MySQL5PlayerRegisteredItemsDAO extends PlayerRegisteredItemsDAO {
 	}
 
 	@Override
-	public void loadRegistry(int playerId) {
-		House house = HousingService.getInstance().findActiveHouse(playerId);
-		HouseRegistry registry = house.getRegistry();
-		try {
-			try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(SELECT_QUERY)) {
-				stmt.setInt(1, playerId);
-				try (ResultSet rset = stmt.executeQuery()) {
-					HashMap<PartType, List<HouseDecoration>> usedParts = new HashMap<>();
-					while (rset.next()) {
-						String area = rset.getString("area");
-						if ("DECOR".equals(area)) {
-							HouseDecoration dec = createDecoration(rset);
-							if (!dec.getTemplate().getTags().contains(house.getBuilding().getPartsMatchTag()))
-								continue;
-							registry.putCustomPart(dec);
-							if (dec.isUsed()) {
-								if (house.getHouseType() != HouseType.PALACE && dec.getRoom() > 0)
-									dec.setRoom(0);
-								usedParts.computeIfAbsent(dec.getTemplate().getType(), k -> new ArrayList<>()).add(dec);
-							}
-							dec.setPersistentState(PersistentState.UPDATED);
-						} else {
-							HouseObject<?> obj = constructObject(registry, house, rset);
-							registry.putObject(obj);
-							obj.setPersistentState(PersistentState.UPDATED);
-						}
-					}
-					for (PartType partType : PartType.values()) {
-						if (usedParts.containsKey(partType)) {
-							for (HouseDecoration usedDeco : usedParts.get(partType))
-								registry.setPartInUse(usedDeco, usedDeco.getRoom());
+	public void loadRegistry(HouseRegistry registry) {
+		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(SELECT_QUERY)) {
+			stmt.setInt(1, registry.getOwner().getOwnerId());
+			try (ResultSet rset = stmt.executeQuery()) {
+				HashMap<PartType, List<HouseDecoration>> usedParts = new HashMap<>();
+				while (rset.next()) {
+					String area = rset.getString("area");
+					if ("DECOR".equals(area)) {
+						HouseDecoration dec = createDecoration(rset);
+						if (!dec.getTemplate().getTags().contains(registry.getOwner().getBuilding().getPartsMatchTag()))
 							continue;
+						registry.putCustomPart(dec);
+						if (dec.isUsed()) {
+							if (registry.getOwner().getHouseType() != HouseType.PALACE && dec.getRoom() > 0)
+								dec.setRoom(0);
+							usedParts.computeIfAbsent(dec.getTemplate().getType(), k -> new ArrayList<>()).add(dec);
 						}
-						int roomCount = 1;
-						if (house.getHouseType() == HouseType.PALACE && (partType == PartType.INFLOOR_ANY || partType == PartType.INWALL_ANY))
-							roomCount = 6;
-						for (int i = 0; i < roomCount; i++) {
-							HouseDecoration def = registry.getDefaultPartByType(partType, i);
-							if (def != null)
-								registry.setPartInUse(def, i);
-						}
+						dec.setPersistentState(PersistentState.UPDATED);
+					} else {
+						HouseObject<?> obj = constructObject(registry, rset);
+						registry.putObject(obj);
+						obj.setPersistentState(PersistentState.UPDATED);
 					}
-					registry.setPersistentState(PersistentState.UPDATED);
 				}
+				for (PartType partType : PartType.values()) {
+					if (usedParts.containsKey(partType)) {
+						for (HouseDecoration usedDeco : usedParts.get(partType))
+							registry.setPartInUse(usedDeco, usedDeco.getRoom());
+						continue;
+					}
+					int roomCount = 1;
+					if (registry.getOwner().getHouseType() == HouseType.PALACE && (partType == PartType.INFLOOR_ANY || partType == PartType.INWALL_ANY))
+						roomCount = 6;
+					for (int i = 0; i < roomCount; i++) {
+						HouseDecoration def = registry.getDefaultPartByType(partType, i);
+						if (def != null)
+							registry.setPartInUse(def, i);
+					}
+				}
+				registry.setPersistentState(PersistentState.UPDATED);
 			}
 		} catch (Exception e) {
-			log.error("Could not load house registry data for player " + playerId, e);
+			log.error("Could not load house registry data for player " + registry.getOwner().getOwnerId(), e);
 		}
 	}
 
-	private HouseObject<?> constructObject(final HouseRegistry registry, House house, ResultSet rset) throws SQLException, IllegalAccessException {
+	private HouseObject<?> constructObject(HouseRegistry registry, ResultSet rset) throws SQLException, IllegalAccessException {
 		int itemUniqueId = rset.getInt("item_unique_id");
 		VisibleObject visObj = World.getInstance().findVisibleObject(itemUniqueId);
 		HouseObject<?> obj;
@@ -133,7 +127,7 @@ public class MySQL5PlayerRegisteredItemsDAO extends PlayerRegisteredItemsDAO {
 		} else {
 			obj = registry.getObjectByObjId(itemUniqueId);
 			if (obj == null)
-				obj = HouseObjectFactory.createNew(house, itemUniqueId, rset.getInt("item_id"));
+				obj = HouseObjectFactory.createNew(registry.getOwner(), itemUniqueId, rset.getInt("item_id"));
 		}
 		obj.setOwnerUsedCount(rset.getInt("owner_use_count"));
 		obj.setVisitorUsedCount(rset.getInt("visitor_use_count"));

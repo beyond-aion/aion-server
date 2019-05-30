@@ -3,6 +3,7 @@ package com.aionemu.gameserver.model.house;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,16 +21,15 @@ import com.aionemu.gameserver.model.templates.housing.PartType;
 public class HouseRegistry implements Persistable {
 
 	private static final Logger log = LoggerFactory.getLogger(HouseRegistry.class);
-	private House owner;
-	private LinkedHashMap<Integer, HouseObject<?>> objects;
-	private LinkedHashMap<Integer, HouseDecoration> customParts;
-	private HouseDecoration[] defaultParts = new HouseDecoration[28];
+	private final House owner;
+	private final Map<Integer, HouseObject<?>> objects = new LinkedHashMap<>();
+	private final Map<Integer, HouseDecoration> customParts = new LinkedHashMap<>();
+	private final HouseDecoration[] defaultParts = new HouseDecoration[28];
 	private PersistentState persistentState = PersistentState.UPDATED;
 
 	public HouseRegistry(House owner) {
 		this.owner = owner;
-		this.objects = new LinkedHashMap<>();
-		this.customParts = new LinkedHashMap<>();
+		putDefaultParts();
 	}
 
 	public House getOwner() {
@@ -37,20 +37,14 @@ public class HouseRegistry implements Persistable {
 	}
 
 	/**
-	 * Get all objects including deleted
-	 * 
-	 * @return
+	 * @return All objects including deleted
 	 */
-	public ArrayList<HouseObject<?>> getObjects() {
-		ArrayList<HouseObject<?>> temp = new ArrayList<>();
-		for (HouseObject<?> obj : objects.values()) {
-			temp.add(obj);
-		}
-		return temp;
+	public List<HouseObject<?>> getObjects() {
+		return new ArrayList<>(objects.values());
 	}
 
-	public ArrayList<HouseObject<?>> getSpawnedObjects() {
-		ArrayList<HouseObject<?>> temp = new ArrayList<>();
+	public List<HouseObject<?>> getSpawnedObjects() {
+		List<HouseObject<?>> temp = new ArrayList<>();
 		for (HouseObject<?> obj : objects.values()) {
 			if (obj.isSpawnedByPlayer() && obj.getPersistentState() != PersistentState.DELETED)
 				temp.add(obj);
@@ -58,8 +52,8 @@ public class HouseRegistry implements Persistable {
 		return temp;
 	}
 
-	public ArrayList<HouseObject<?>> getNotSpawnedObjects() {
-		ArrayList<HouseObject<?>> temp = new ArrayList<>();
+	public List<HouseObject<?>> getNotSpawnedObjects() {
+		List<HouseObject<?>> temp = new ArrayList<>();
 		for (HouseObject<?> obj : objects.values()) {
 			if (!obj.isSpawnedByPlayer() && obj.getPersistentState() != PersistentState.DELETED)
 				temp.add(obj);
@@ -178,24 +172,32 @@ public class HouseRegistry implements Persistable {
 	}
 
 	/**
-	 * Returns default decoration for the part type<br>
-	 * 
-	 * @param partType
-	 * @return
+	 * @return Default decoration for the part type
 	 */
 	public HouseDecoration getDefaultPartByType(PartType partType, int room) {
 		return defaultParts[partType.getStartLineNr() + room];
 	}
 
-	public void putDefaultPart(HouseDecoration houseDeco, int room) {
+	private void putDefaultParts() {
+		for (PartType partType : PartType.values()) {
+			Integer partId = owner.getBuilding().getDefaultPartId(partType);
+			if (partId == null)
+				continue;
+			for (int line = partType.getStartLineNr(); line <= partType.getEndLineNr(); line++) {
+				int room = partType.getEndLineNr() - line;
+				HouseDecoration decor = new HouseDecoration(0, partId, room);
+				putDefaultPart(decor, room);
+			}
+		}
+	}
+
+	private void putDefaultPart(HouseDecoration houseDeco, int room) {
 		defaultParts[houseDeco.getTemplate().getType().getStartLineNr() + room] = houseDeco;
 		houseDeco.setPersistentState(PersistentState.NOACTION);
 	}
 
 	/**
-	 * Get all decoration parts including deleted
-	 * 
-	 * @return
+	 * @return All decoration parts including deleted
 	 */
 	public List<HouseDecoration> getAllParts() {
 		List<HouseDecoration> temp = new ArrayList<>();
@@ -203,9 +205,7 @@ public class HouseRegistry implements Persistable {
 			if (deco != null)
 				temp.add(deco);
 		}
-		for (HouseDecoration decor : customParts.values()) {
-			temp.add(decor);
-		}
+		temp.addAll(customParts.values());
 		return temp;
 	}
 

@@ -18,9 +18,9 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
  */
 public class CM_HOUSE_DECORATE extends AionClientPacket {
 
-	int objectId;
-	int templateId;
-	int lineNr; // Line number (starts from 1 in 3.0 and from 2 in 3.5) of part in House render/update packet
+	private int objectId;
+	private int templateId;
+	private int lineNr; // Line number (starts from 1 in 3.0 and from 2 in 3.5) of part in House render/update packet
 
 	public CM_HOUSE_DECORATE(int opcode, Set<State> validStates) {
 		super(opcode, validStates);
@@ -39,7 +39,7 @@ public class CM_HOUSE_DECORATE extends AionClientPacket {
 		if (player == null)
 			return;
 
-		House house = player.getHouseRegistry().getOwner();
+		House house = player.getActiveHouse();
 
 		PartType partType = PartType.getForLineNr(lineNr);
 		int room = lineNr - partType.getStartLineNr();
