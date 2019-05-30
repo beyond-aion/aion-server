@@ -1688,7 +1688,7 @@ public class Player extends Creature {
 	 */
 	public List<House> getHouses() {
 		if (houses == null) {
-			List<House> found = HousingService.getInstance().searchPlayerHouses(getObjectId());
+			List<House> found = HousingService.getInstance().findPlayerHouses(getObjectId());
 			if (found.isEmpty())
 				return found;
 			houses = found;

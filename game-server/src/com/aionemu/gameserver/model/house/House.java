@@ -62,7 +62,7 @@ public class House extends VisibleObject implements Persistable {
 	private HouseAddress address;
 	private Building building;
 	private String name;
-	private int playerObjectId;
+	private int ownerId;
 	private Timestamp acquiredTime;
 	private int permissions;
 	private HouseStatus status;
@@ -146,8 +146,8 @@ public class House extends VisibleObject implements Persistable {
 	public synchronized void spawn(int instanceId) {
 		playerScripts = DAOManager.getDAO(HouseScriptsDAO.class).getPlayerScripts(getObjectId());
 
-		if (playerObjectId > 0 && (status == HouseStatus.ACTIVE || status == HouseStatus.SELL_WAIT)) {
-			DAOManager.getDAO(PlayerRegisteredItemsDAO.class).loadRegistry(playerObjectId);
+		if (ownerId > 0 && (status == HouseStatus.ACTIVE || status == HouseStatus.SELL_WAIT)) {
+			DAOManager.getDAO(PlayerRegisteredItemsDAO.class).loadRegistry(ownerId);
 		}
 
 		fixBuildingStates();
@@ -181,11 +181,11 @@ public class House extends VisibleObject implements Persistable {
 
 		int creatorId = getAddress().getId();
 		String masterName = "";
-		if (playerObjectId != 0) {
-			masterName = PlayerService.getPlayerName(playerObjectId);
+		if (ownerId != 0) {
+			masterName = PlayerService.getPlayerName(ownerId);
 			if (masterName == null) {
 				revokeOwner();
-				log.warn("Owner (Player ID: " + playerObjectId + ") of house " + getAddress() + " doesn't exist anymore, revoked ownership.");
+				log.warn("Owner (Player ID: " + ownerId + ") of house " + getAddress() + " doesn't exist anymore, revoked ownership.");
 			}
 		}
 
@@ -221,12 +221,12 @@ public class House extends VisibleObject implements Persistable {
 	}
 
 	public int getOwnerId() {
-		return playerObjectId;
+		return ownerId;
 	}
 
-	public void setOwnerId(int playerObjectId) {
-		if (this.playerObjectId != playerObjectId) {
-			this.playerObjectId = playerObjectId;
+	public void setOwnerId(int ownerId) {
+		if (this.ownerId != ownerId) {
+			this.ownerId = ownerId;
 			signNotice = null;
 		}
 		fixBuildingStates();
@@ -241,7 +241,7 @@ public class House extends VisibleObject implements Persistable {
 	}
 
 	public int getPermissions() {
-		if (playerObjectId == 0) {
+		if (ownerId == 0) {
 			setDoorState(status == HouseStatus.SELL_WAIT ? HousePermissions.DOOR_OPENED_ALL : HousePermissions.DOOR_CLOSED);
 			setNoticeState(HousePermissions.NOT_SET);
 		} else {
@@ -282,7 +282,7 @@ public class House extends VisibleObject implements Persistable {
 	public synchronized void setStatus(HouseStatus status) {
 		if (this.status != status) {
 			// fix invalid status from DB, or automatically remove sign from not auctioned houses
-			if (this.playerObjectId == 0 && status == HouseStatus.ACTIVE) {
+			if (this.ownerId == 0 && status == HouseStatus.ACTIVE) {
 				status = HouseStatus.NOSALE;
 			}
 			this.status = status;
@@ -332,9 +332,12 @@ public class House extends VisibleObject implements Persistable {
 		this.sellStarted = sellStarted;
 	}
 
+	/**
+	 * @return True if this house is currently still owned by a player who just bought a new house. The new house is inactive until the grace period
+	 *         ends (when this house is sold).
+	 */
 	public boolean isInGracePeriod() {
-		return playerObjectId > 0 && status != HouseStatus.INACTIVE && HousingService.getInstance().searchPlayerHouses(playerObjectId).size() > 1
-			&& sellStarted != null && sellStarted.getTime() <= HousingBidService.getInstance().getAuctionStartTime();
+		return ownerId > 0 && status != HouseStatus.INACTIVE && HousingService.getInstance().findPlayerHouses(ownerId).size() > 1;
 	}
 
 	public synchronized Npc getButler() {
@@ -374,23 +377,22 @@ public class House extends VisibleObject implements Persistable {
 		else if (status == HouseStatus.SELL_WAIT) {
 			if (HousingBidService.getInstance().isBiddingAllowed())
 				npcId = getLand().getSaleSignNpcId(); // bidding open
-		} else if (playerObjectId != 0) {
-			if (status == HouseStatus.ACTIVE)
-				npcId = getLand().getHomeSignNpcId(); // resident information
+		} else if (ownerId != 0 && status == HouseStatus.ACTIVE) {
+			npcId = getLand().getHomeSignNpcId(); // resident information
 		}
 		return npcId;
 	}
 
 	public synchronized boolean revokeOwner() {
-		if (playerObjectId == 0)
+		if (ownerId == 0)
 			return false;
 		getRegistry().despawnObjects();
 		if (playerScripts == null)
 			playerScripts = DAOManager.getDAO(HouseScriptsDAO.class).getPlayerScripts(getObjectId());
 		playerScripts.removeAll();
 		if (getBuilding().getType() == BuildingType.PERSONAL_INS) {
-			HousingService.getInstance().removeStudio(playerObjectId);
-			DAOManager.getDAO(HousesDAO.class).deleteHouse(playerObjectId);
+			HousingService.getInstance().removeStudio(ownerId);
+			DAOManager.getDAO(HousesDAO.class).deleteHouse(ownerId);
 			return true;
 		}
 		houseRegistry = null;
@@ -420,8 +422,8 @@ public class House extends VisibleObject implements Persistable {
 	public synchronized void reloadHouseRegistry() {
 		houseRegistry = null;
 		getRegistry();
-		if (playerObjectId != 0)
-			DAOManager.getDAO(PlayerRegisteredItemsDAO.class).loadRegistry(playerObjectId);
+		if (ownerId != 0)
+			DAOManager.getDAO(PlayerRegisteredItemsDAO.class).loadRegistry(ownerId);
 	}
 
 	public HouseDecoration getRenderPart(PartType partType, int room) {
@@ -463,7 +465,7 @@ public class House extends VisibleObject implements Persistable {
 
 	public void fixBuildingStates() {
 		houseOwnerStates = HouseOwnerState.SINGLE_HOUSE.getId();
-		if (playerObjectId != 0) {
+		if (ownerId != 0) {
 			houseOwnerStates |= HouseOwnerState.HAS_OWNER.getId();
 			if (status == HouseStatus.ACTIVE) {
 				houseOwnerStates |= HouseOwnerState.BIDDING_ALLOWED.getId();

@@ -2,6 +2,7 @@ package com.aionemu.gameserver.services;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -124,12 +125,11 @@ public class HousingService {
 		}
 	}
 
-	public List<House> searchPlayerHouses(int playerObjId) {
-		List<House> houses = new ArrayList<>();
+	public List<House> findPlayerHouses(int playerObjId) {
 		if (studios.containsKey(playerObjId)) {
-			houses.add(studios.get(playerObjId));
-			return houses;
+			return Collections.singletonList(studios.get(playerObjId));
 		}
+		List<House> houses = new ArrayList<>();
 		for (House house : customHouses.values()) {
 			if (house.getOwnerId() == playerObjId)
 				houses.add(house);
