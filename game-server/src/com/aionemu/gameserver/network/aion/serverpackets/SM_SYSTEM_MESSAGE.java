@@ -25514,6 +25514,13 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	}
 
 	/**
+	 * You are not allowed to enter %addr0.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_MSG_HOUSING_CANT_ENTER_NO_RIGHT(int address) {
+		return new SM_SYSTEM_MESSAGE(1401322, address);
+	}
+
+	/**
 	 * The home you have made an offer for has a new high bid of %num0 Kinah.
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_MSG_HOUSING_PRICE_CHANGE(long kinah) {

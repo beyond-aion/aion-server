@@ -478,14 +478,8 @@ public class House extends VisibleObject implements Persistable {
 		signNotice = notice;
 	}
 
-	public int getLevelRestrict() {
-		return land != null ? land.getSaleOptions().getMinLevel() : 10;
-	}
-
 	public boolean canEnter(Player player) {
 		if (getOwnerId() != player.getObjectId() && !player.hasAccess(AdminConfig.HOUSE_ENTER_ALL)) {
-			if (getLevelRestrict() > player.getLevel())
-				return false;
 			switch (getDoorState()) {
 				case DOOR_CLOSED:
 					return false;

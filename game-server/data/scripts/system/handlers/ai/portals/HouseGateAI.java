@@ -50,6 +50,11 @@ public class HouseGateAI extends NpcAI {
 			return;
 		}
 
+		if (!player.getCommonData().isDaeva()) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_CANT_ENTER_NO_RIGHT(house.getAddress().getId()));
+			return;
+		}
+
 		if (!house.canEnter(player)) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_CANT_ENTER_NO_RIGHT2());
 			return;
