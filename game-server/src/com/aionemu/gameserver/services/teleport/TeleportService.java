@@ -333,6 +333,7 @@ public class TeleportService {
 
 		SpawnSpotTemplate spot = searchResult.getSpot();
 		NpcTemplate npcTemplate = DataManager.NPC_DATA.getNpcTemplate(npcId);
+		float npcRadius = npcTemplate == null ? 1 : npcTemplate.getBoundRadius().getFront(); // StaticObject has no npcTemplate since it's no npc
 		WorldMapInstance instance;
 		if (player.getWorldId() == searchResult.getWorldId())
 			instance = player.getPosition().getWorldMapInstance();
@@ -343,8 +344,8 @@ public class TeleportService {
 
 		// calculate position 1m in front of the npc
 		double radian = Math.toRadians(PositionUtil.convertHeadingToAngle(spot.getHeading()));
-		float x = spot.getX() + (float) Math.cos(radian) * (1f + npcTemplate.getBoundRadius().getFront());
-		float y = spot.getY() + (float) Math.sin(radian) * (1f + npcTemplate.getBoundRadius().getFront());
+		float x = spot.getX() + (float) Math.cos(radian) * (1f + npcRadius);
+		float y = spot.getY() + (float) Math.sin(radian) * (1f + npcRadius);
 		float z = GeoService.getInstance().getZ(searchResult.getWorldId(), x, y, spot.getZ(), instance.getInstanceId());
 		if (Float.isNaN(z)) // no collision found or geo disabled
 			z = spot.getZ() + 0.5f;
