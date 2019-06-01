@@ -1,9 +1,13 @@
 package com.aionemu.gameserver.model.templates.housing;
 
+import java.util.Objects;
+
+import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
 /**
@@ -14,35 +18,46 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement(name = "address")
 public class HouseAddress {
 
+	@XmlTransient
+	private HousingLand land;
+
 	@XmlAttribute(name = "exit_z")
-	protected Float exitZ;
+	private Float exitZ;
 
 	@XmlAttribute(name = "exit_y")
-	protected Float exitY;
+	private Float exitY;
 
 	@XmlAttribute(name = "exit_x")
-	protected Float exitX;
+	private Float exitX;
 
 	@XmlAttribute(name = "exit_map")
-	protected Integer exitMap;
+	private Integer exitMap;
 
 	@XmlAttribute(required = true)
-	protected float z;
+	private float z;
 
 	@XmlAttribute(required = true)
-	protected float y;
+	private float y;
 
 	@XmlAttribute(required = true)
-	protected float x;
+	private float x;
 
 	@XmlAttribute(name = "town", required = true)
 	private int townId;
 
 	@XmlAttribute(required = true)
-	protected int map;
+	private int map;
 
 	@XmlAttribute(required = true)
-	protected int id;
+	private int id;
+
+	void afterUnmarshal(Unmarshaller u, Object parent) {
+		this.land = Objects.requireNonNull((HousingLand) parent);
+	}
+
+	public HousingLand getLand() {
+		return land;
+	}
 
 	public Float getExitZ() {
 		return exitZ;

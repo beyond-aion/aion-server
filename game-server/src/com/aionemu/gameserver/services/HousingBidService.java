@@ -34,6 +34,7 @@ import com.aionemu.gameserver.model.house.House;
 import com.aionemu.gameserver.model.house.HouseBidEntry;
 import com.aionemu.gameserver.model.house.HouseStatus;
 import com.aionemu.gameserver.model.house.PlayerHouseBid;
+import com.aionemu.gameserver.model.templates.housing.HouseAddress;
 import com.aionemu.gameserver.model.templates.housing.HouseType;
 import com.aionemu.gameserver.model.templates.housing.HousingLand;
 import com.aionemu.gameserver.model.templates.housing.Sale;
@@ -146,7 +147,7 @@ public class HousingBidService extends AbstractCronTask {
 	private int getBidsCountByType(Race race, HouseType type) {
 		int count = 0;
 		for (HouseBidEntry entry : houseBids.values()) {
-			HousingLand land = DataManager.HOUSE_DATA.getLand(entry.getLandId());
+			HousingLand land = DataManager.HOUSE_DATA.getAddress(entry.getAddress()).getLand();
 			Race entryRace = DataManager.NPC_DATA.getNpcTemplate(land.getManagerNpcId()).getTribe() == TribeClass.GENERAL ? Race.ELYOS : Race.ASMODIANS;
 			if (entryRace == race && entry.getHouseType() == type)
 				count++;
@@ -587,7 +588,7 @@ public class HousingBidService extends AbstractCronTask {
 			return;
 		}
 
-		int minLevel = getMinBidLevel(player, entry.getMapId(), entry.getLandId());
+		int minLevel = getMinBidLevel(player, entry.getAddress());
 		if (minLevel > player.getLevel()) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_CANT_BID_LOW_LEVEL(minLevel));
 			return;
@@ -716,7 +717,7 @@ public class HousingBidService extends AbstractCronTask {
 		synchronized (houseBids) {
 			List<HouseBidEntry> bids = new ArrayList<>();
 			for (HouseBidEntry bid : houseBids.values()) {
-				HousingLand land = DataManager.HOUSE_DATA.getLand(bid.getLandId());
+				HousingLand land = DataManager.HOUSE_DATA.getAddress(bid.getAddress()).getLand();
 				boolean isEly = DataManager.NPC_DATA.getNpcTemplate(land.getManagerNpcId()).getTribe() == TribeClass.GENERAL;
 				if (isEly && playerRace == Race.ELYOS)
 					bids.add(bid);
@@ -737,16 +738,16 @@ public class HousingBidService extends AbstractCronTask {
 		}
 	}
 
-	private static int getMinBidLevel(Player player, int mapId, int landId) {
-		HousingLand land = DataManager.HOUSE_DATA.getLand(landId);
-		Sale saleOptions = land.getSaleOptions();
+	private static int getMinBidLevel(Player player, int addressId) {
+		HouseAddress address = DataManager.HOUSE_DATA.getAddress(addressId);
+		Sale saleOptions = address.getLand().getSaleOptions();
 		// all types are the same for the land, take the first
-		HouseType houseType = HouseType.fromValue(land.getBuildings().get(0).getSize());
+		HouseType houseType = HouseType.fromValue(address.getLand().getBuildings().get(0).getSize());
 
 		if (player.getRace() == Race.ELYOS) {
-			if (mapId == WorldMapType.HEIRON.getId() || mapId == WorldMapType.INGGISON.getId())
+			if (address.getMapId() == WorldMapType.HEIRON.getId() || address.getMapId() == WorldMapType.INGGISON.getId())
 				return saleOptions.getMinLevel();
-		} else if (mapId == WorldMapType.BELUSLAN.getId() || mapId == WorldMapType.GELKMAROS.getId())
+		} else if (address.getMapId() == WorldMapType.BELUSLAN.getId() || address.getMapId() == WorldMapType.GELKMAROS.getId())
 			return saleOptions.getMinLevel();
 
 		switch (houseType) {
@@ -771,7 +772,7 @@ public class HousingBidService extends AbstractCronTask {
 		return saleOptions.getMinLevel();
 	}
 
-	public static boolean canBidHouse(Player player, int mapId, int landId) {
-		return player.getLevel() >= getMinBidLevel(player, mapId, landId);
+	public static boolean canBidHouse(Player player, int address) {
+		return player.getLevel() >= getMinBidLevel(player, address);
 	}
 }

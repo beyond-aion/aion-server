@@ -71,7 +71,7 @@ public class SM_HOUSE_BIDS extends AionServerPacket {
 			writeD(entry.getBuildingId());
 			if (sellData != null && entry.getEntryIndex() == sellData.getEntryIndex())
 				writeD(0);
-			else if (HousingBidService.canBidHouse(player, entry.getMapId(), entry.getLandId()))
+			else if (HousingBidService.canBidHouse(player, entry.getAddress()))
 				writeD(entry.getHouseType().getId());
 			else
 				writeD(0);

@@ -3,6 +3,7 @@ package com.aionemu.gameserver.model.house;
 import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.Collection;
+import java.util.Date;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
@@ -58,10 +59,8 @@ import com.aionemu.gameserver.world.zone.ZoneService;
 public class House extends VisibleObject implements Persistable {
 
 	private static final Logger log = LoggerFactory.getLogger(House.class);
-	private HousingLand land;
-	private HouseAddress address;
+	private final HouseAddress address;
 	private Building building;
-	private String name;
 	private int ownerId;
 	private Timestamp acquiredTime;
 	private int permissions;
@@ -76,8 +75,8 @@ public class House extends VisibleObject implements Persistable {
 	private PersistentState persistentState;
 	private String signNotice;
 
-	public House(Building building, HouseAddress address, int instanceId) {
-		this(IDFactory.getInstance().nextId(), building, address, instanceId);
+	public House(HouseAddress address, int instanceId) {
+		this(IDFactory.getInstance().nextId(), address.getLand().getDefaultBuilding(), address, instanceId);
 	}
 
 	public House(int objectId, Building building, HouseAddress address, int instanceId) {
@@ -85,7 +84,6 @@ public class House extends VisibleObject implements Persistable {
 		getController().setOwner(this);
 		this.address = address;
 		this.building = building;
-		this.name = "HOUSE_" + address.getId();
 		setKnownlist(new PlayerAwareKnownList(this));
 		setPersistentState(PersistentState.UPDATED);
 		getRegistry();
@@ -96,26 +94,13 @@ public class House extends VisibleObject implements Persistable {
 		return (HouseController) super.getController();
 	}
 
-	/**
-	 * TODO: improve this, now it's inefficient during startup
-	 */
 	public HousingLand getLand() {
-		if (land == null) {
-			for (HousingLand housingland : DataManager.HOUSE_DATA.getLands()) {
-				for (HouseAddress houseAddress : housingland.getAddresses()) {
-					if (this.getAddress().getId() == houseAddress.getId()) {
-						this.land = housingland;
-						break;
-					}
-				}
-			}
-		}
-		return this.land;
+		return address.getLand();
 	}
 
 	@Override
 	public String getName() {
-		return name;
+		return "HOUSE_" + address.getId();
 	}
 
 	public HouseAddress getAddress() {

@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.slf4j.Logger;
@@ -18,7 +17,6 @@ import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.HouseDecoration;
 import com.aionemu.gameserver.model.gameobjects.Persistable.PersistentState;
-import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.HouseOwnerState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.house.House;
@@ -26,7 +24,6 @@ import com.aionemu.gameserver.model.house.HouseStatus;
 import com.aionemu.gameserver.model.templates.housing.Building;
 import com.aionemu.gameserver.model.templates.housing.BuildingType;
 import com.aionemu.gameserver.model.templates.housing.HouseAddress;
-import com.aionemu.gameserver.model.templates.housing.HousingLand;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_HOUSE_ACQUIRE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_HOUSE_OWNER_INFO;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
@@ -35,7 +32,6 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.World;
-import com.aionemu.gameserver.world.WorldPosition;
 
 /**
  * @author Rolandas
@@ -63,62 +59,43 @@ public class HousingService {
 		log.info("Housing Service loaded.");
 	}
 
-	/**
-	 * @param worldId
-	 * @param instanceId
-	 * @param registredId
-	 */
 	public void spawnHouses(int worldId, int instanceId, int registeredId) {
-		Set<HousingLand> lands = DataManager.HOUSE_DATA.getLandsForWorldId(worldId);
-		if (lands == null) {
-			if (registeredId > 0) {
-				House studio;
-				studio = studios.get(registeredId);
-				if (studio == null)
-					return;
-				HouseAddress addr = studio.getAddress();
-				if (addr.getMapId() != worldId)
-					return;
-				VisibleObject existing = World.getInstance().findVisibleObject(studio.getObjectId());
-				WorldPosition position = null;
-				if (existing != null)
-					position = existing.getPosition();
-				if (position == null) {
-					position = World.getInstance().createPosition(addr.getMapId(), addr.getX(), addr.getY(), addr.getZ(), (byte) 0, instanceId);
-					studio.setPosition(position);
-				}
-				if (!position.isSpawned())
-					SpawnEngine.bringIntoWorld(studio);
-				// spawn only npcs
-				studio.spawn(instanceId);
-			}
+		if (registeredId > 0) {
+			spawnStudio(worldId, instanceId, registeredId);
 			return;
 		}
-
 		int spawnedCounter = 0;
-		for (HousingLand land : lands) {
-			Building defaultBuilding = land.getDefaultBuilding();
-			if (defaultBuilding.getType() == BuildingType.PERSONAL_INS)
+		for (HouseAddress address : DataManager.HOUSE_DATA.getAddresses(worldId)) {
+			if (address.getLand().getDefaultBuilding().getType() == BuildingType.PERSONAL_INS)
 				continue; // ignore studios
 
-			for (HouseAddress address : land.getAddresses()) {
-				if (address.getMapId() != worldId)
-					continue;
-
-				House customHouse = customHouses.get(address.getId());
-				if (customHouse == null) {
-					customHouse = new House(defaultBuilding, address, instanceId);
-					// house without owner when acquired will be inserted to DB
-					customHouse.setPersistentState(PersistentState.NEW);
-					customHouses.put(address.getId(), customHouse);
-				}
-				customHouse.spawn(instanceId);
-				spawnedCounter++;
+			House customHouse = customHouses.get(address.getId());
+			if (customHouse == null) {
+				customHouse = new House(address, instanceId);
+				// house without owner when acquired will be inserted to DB
+				customHouse.setPersistentState(PersistentState.NEW);
+				customHouses.put(address.getId(), customHouse);
 			}
+			customHouse.spawn(instanceId);
+			spawnedCounter++;
 		}
 		if (spawnedCounter > 0) {
 			log.info("Spawned houses " + worldId + " [" + instanceId + "]: " + spawnedCounter);
 		}
+	}
+
+	private void spawnStudio(int worldId, int instanceId, int registeredId) {
+		House studio = getPlayerStudio(registeredId);
+		if (studio == null || studio.getAddress().getMapId() != worldId)
+			return;
+		if (studio.getPosition() == null || studio.getInstanceId() != instanceId) {
+			HouseAddress addr = studio.getAddress();
+			studio.setPosition(World.getInstance().createPosition(addr.getMapId(), addr.getX(), addr.getY(), addr.getZ(), (byte) 0, instanceId));
+		}
+		if (!studio.isSpawned())
+			SpawnEngine.bringIntoWorld(studio);
+		// spawn only npcs
+		studio.spawn(instanceId);
 	}
 
 	public List<House> findPlayerHouses(int playerObjId) {
@@ -195,27 +172,25 @@ public class HousingService {
 	}
 
 	public void registerPlayerStudio(Player player) {
-		createStudio(player);
+		createStudio(player, false);
 	}
 
 	public void recreatePlayerStudio(Player player) {
-		// Price for both races is the same, use any template
-		HousingLand land = DataManager.HOUSE_DATA.getLand(329001);
-		final long fee = land.getSaleOptions().getGoldPrice();
-		if (player.getInventory().getKinah() < fee) {
+		createStudio(player, true);
+	}
+
+	private void createStudio(Player player, boolean chargeFee) {
+		if (!player.getHouses().isEmpty()) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_INS_CANT_OWN_MORE_HOUSE());
+			return;
+		}
+		HouseAddress address = DataManager.HOUSE_DATA.getStudioAddress(player.getRace());
+		if (chargeFee && !player.getInventory().tryDecreaseKinah(address.getLand().getSaleOptions().getGoldPrice())) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_NOT_ENOUGH_MONEY());
 			return;
 		}
-		createStudio(player);
 
-		player.getInventory().decreaseKinah(fee);
-	}
-
-	private void createStudio(Player player) {
-		if (player.getActiveHouse() != null) // should not happen
-			return;
-		HousingLand land = DataManager.HOUSE_DATA.getLand(player.getRace() == Race.ELYOS ? 329001 : 339001);
-		House studio = new House(land.getDefaultBuilding(), land.getAddresses().get(0), 0);
+		House studio = new House(address, 0);
 		studio.setOwnerId(player.getObjectId());
 
 		studios.put(player.getObjectId(), studio);
