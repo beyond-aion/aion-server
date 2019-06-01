@@ -31,9 +31,9 @@ public class MySQL5HouseObjectCooldownsDAO extends HouseObjectCooldownsDAO {
 			stmt.setInt(1, player.getObjectId());
 			try (ResultSet rset = stmt.executeQuery()) {
 				while (rset.next()) {
-					int objectId = rset.getInt("object_id");
 					long reuseTime = rset.getLong("reuse_time");
-					player.getHouseObjectCooldownList().setHouseObjectCooldown(objectId, reuseTime);
+					if (reuseTime > System.currentTimeMillis())
+						player.getHouseObjectCooldowns().put(rset.getInt("object_id"), reuseTime);
 				}
 			}
 		} catch (SQLException e) {
@@ -44,12 +44,8 @@ public class MySQL5HouseObjectCooldownsDAO extends HouseObjectCooldownsDAO {
 	@Override
 	public void storeHouseObjectCooldowns(final Player player) {
 		deleteHouseObjectCoolDowns(player);
-		Map<Integer, Long> houseObjectCoolDowns = player.getHouseObjectCooldownList().getHouseObjectCooldowns();
 
-		if (houseObjectCoolDowns == null)
-			return;
-
-		for (Map.Entry<Integer, Long> entry : houseObjectCoolDowns.entrySet()) {
+		for (Map.Entry<Integer, Long> entry : player.getHouseObjectCooldowns().entrySet()) {
 			final int templateId = entry.getKey();
 			final long reuseTime = entry.getValue();
 

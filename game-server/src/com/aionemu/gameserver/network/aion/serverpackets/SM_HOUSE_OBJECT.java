@@ -44,7 +44,7 @@ public class SM_HOUSE_OBJECT extends AionServerPacket {
 		writeF(houseObject.getZ());
 		writeH(houseObject.getRotation());
 
-		writeD(player.getHouseObjectCooldownList().getReuseDelay(houseObject.getObjectId()));
+		writeD(player.getHouseObjectCooldowns().remainingSeconds(houseObject.getObjectId()));
 		writeD(houseObject.secondsUntilExpiration());
 
 		writeDyeInfo(houseObject == null ? null : houseObject.getColor());

@@ -92,7 +92,8 @@ public class CraftService {
 		}
 
 		if (recipetemplate.getCraftDelayId() != null) {
-			player.getCraftCooldownList().addCraftCooldown(recipetemplate.getCraftDelayId(), recipetemplate.getCraftDelayTime());
+			long reuseTimeMillis = System.currentTimeMillis() + recipetemplate.getCraftDelayTime() * 1000;
+			player.getCraftCooldowns().put(recipetemplate.getCraftDelayId(), reuseTimeMillis);
 		}
 	}
 
@@ -185,7 +186,7 @@ public class CraftService {
 			return false;
 		}
 
-		if (recipeTemplate.getCraftDelayId() != null && !player.getCraftCooldownList().isCanCraft(recipeTemplate.getCraftDelayId())) {
+		if (recipeTemplate.getCraftDelayId() != null && player.getCraftCooldowns().hasCooldown(recipeTemplate.getCraftDelayId())) {
 			AuditLogger.log(player, "tried to craft before cooldown expired");
 			return false;
 		}

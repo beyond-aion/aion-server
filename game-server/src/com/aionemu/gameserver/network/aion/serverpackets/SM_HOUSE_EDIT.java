@@ -85,7 +85,7 @@ public class SM_HOUSE_EDIT extends AionServerPacket {
 			writeF(y);
 			writeF(z);
 			writeH(rotation);
-			writeD(player.getHouseObjectCooldownList().getReuseDelay(itemObjectId));
+			writeD(player.getHouseObjectCooldowns().remainingSeconds(itemObjectId));
 			writeD(obj.secondsUntilExpiration());
 			writeDyeInfo(obj.getColor());
 			writeD(0); // expiration as for armor ?

@@ -28,7 +28,7 @@ import com.aionemu.gameserver.utils.time.ServerTime;
 public class UseableItemObject extends UseableHouseObject<HousingUseableItem> {
 
 	private volatile boolean mustGiveLastReward = false;
-	private UseDataWriter entryWriter = null;
+	private final UseDataWriter entryWriter;
 
 	public UseableItemObject(House owner, int objId, int templateId) {
 		super(owner, objId, templateId);
@@ -69,7 +69,7 @@ public class UseableItemObject extends UseableHouseObject<HousingUseableItem> {
 			return;
 		}
 
-		if (!player.getHouseObjectCooldownList().isCanUseObject(getObjectId())) {
+		if (player.getHouseObjectCooldowns().hasCooldown(getObjectId())) {
 			if (getObjectTemplate().getCd() != null && getObjectTemplate().getCd() > 0)
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_CANNOT_USE_FLOWERPOT_COOLTIME());
 			else
@@ -199,7 +199,7 @@ public class UseableItemObject extends UseableHouseObject<HousingUseableItem> {
 						reuseTime = ServerTime.now().with(LocalTime.MAX).toEpochSecond() * 1000;
 					else
 						reuseTime = System.currentTimeMillis() + cd * 1000;
-					player.getHouseObjectCooldownList().setHouseObjectCooldown(getObjectId(), reuseTime);
+					player.getHouseObjectCooldowns().put(getObjectId(), reuseTime);
 				}
 			}
 		}, delay));

@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashMap;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -27,74 +26,49 @@ public class MySQL5CraftCooldownsDAO extends CraftCooldownsDAO {
 	public static final String SELECT_QUERY = "SELECT `delay_id`, `reuse_time` FROM `craft_cooldowns` WHERE `player_id`=?";
 
 	@Override
-	public void loadCraftCooldowns(final Player player) {
-		Map<Integer, Long> craftCoolDowns = new HashMap<>();
-		try {
-			try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(SELECT_QUERY)) {
-				stmt.setInt(1, player.getObjectId());
-				try (ResultSet rset = stmt.executeQuery()) {
-					while (rset.next()) {
-						int delayId = rset.getInt("delay_id");
-						long reuseTime = rset.getLong("reuse_time");
-						int delay = (int) ((reuseTime - System.currentTimeMillis()) / 1000);
-						if (delay > 0) {
-							craftCoolDowns.put(delayId, reuseTime);
-						}
-					}
-					player.getCraftCooldownList().setCraftCoolDowns(craftCoolDowns);
+	public void loadCraftCooldowns(Player player) {
+		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(SELECT_QUERY)) {
+			stmt.setInt(1, player.getObjectId());
+			try (ResultSet rset = stmt.executeQuery()) {
+				while (rset.next()) {
+					int delayId = rset.getInt("delay_id");
+					long reuseTime = rset.getLong("reuse_time");
+					player.getCraftCooldowns().put(delayId, reuseTime);
 				}
 			}
 		} catch (SQLException e) {
-			log.error("LoadcraftCoolDowns", e);
+			log.error("Couldn't load craft cooldowns for " + player, e);
 		}
 	}
 
 	@Override
-	public void storeCraftCooldowns(final Player player) {
+	public void storeCraftCooldowns(Player player) {
 		deleteCraftCoolDowns(player);
-		Map<Integer, Long> craftCoolDowns = player.getCraftCooldownList().getCraftCoolDowns();
 
-		if (craftCoolDowns == null)
-			return;
-
-		for (Map.Entry<Integer, Long> entry : craftCoolDowns.entrySet()) {
+		for (Map.Entry<Integer, Long> entry : player.getCraftCooldowns().entrySet()) {
 			final int delayId = entry.getKey();
 			final long reuseTime = entry.getValue();
 
 			if (reuseTime < System.currentTimeMillis())
 				continue;
 
-			Connection con = null;
-
-			try {
-				con = DatabaseFactory.getConnection();
-				PreparedStatement stmt = con.prepareStatement(INSERT_QUERY);
-
+			try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(INSERT_QUERY)) {
 				stmt.setInt(1, player.getObjectId());
 				stmt.setInt(2, delayId);
 				stmt.setLong(3, reuseTime);
 				stmt.execute();
 			} catch (SQLException e) {
-				log.error("storecraftCoolDowns", e);
-			} finally {
-				DatabaseFactory.close(con);
+				log.error("Couldn't store craft cooldowns for " + player, e);
 			}
 		}
 	}
 
-	private void deleteCraftCoolDowns(final Player player) {
-		Connection con = null;
-
-		try {
-			con = DatabaseFactory.getConnection();
-			PreparedStatement stmt = con.prepareStatement(DELETE_QUERY);
-
+	private void deleteCraftCoolDowns(Player player) {
+		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(DELETE_QUERY)) {
 			stmt.setInt(1, player.getObjectId());
 			stmt.execute();
 		} catch (SQLException e) {
-			log.error("deletecraftCoolDowns", e);
-		} finally {
-			DatabaseFactory.close(con);
+			log.error("Couldn't delete craft cooldowns for " + player, e);
 		}
 	}
 

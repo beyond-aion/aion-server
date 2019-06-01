@@ -157,8 +157,8 @@ public class Player extends Creature {
 
 	private final Map<Integer, ItemCooldown> itemCoolDowns = new ConcurrentHashMap<>();
 	private final PortalCooldownList portalCooldownList;
-	private final CraftCooldownList craftCooldownList;
-	private final HouseObjectCooldownList houseObjectCooldownList;
+	private final Cooldowns craftCooldowns;
+	private final Cooldowns houseObjectCooldowns;
 	private long nextSkillUse;
 	private ChainSkills chainSkills;
 	private Map<AttackStatus, Long> lastCounterSkill = new HashMap<>();
@@ -213,8 +213,8 @@ public class Player extends Creature {
 		this.questStateList = new QuestStateList();
 		this.titleList = new TitleList();
 		this.portalCooldownList = new PortalCooldownList(this);
-		this.craftCooldownList = new CraftCooldownList(this);
-		this.houseObjectCooldownList = new HouseObjectCooldownList();
+		this.craftCooldowns = new Cooldowns();
+		this.houseObjectCooldowns = new Cooldowns();
 		this.toyPetList = new PetList(this);
 		getController().setOwner(this);
 		moveController = new PlayerMoveController(this);
@@ -1193,12 +1193,12 @@ public class Player extends Creature {
 		return portalCooldownList;
 	}
 
-	public CraftCooldownList getCraftCooldownList() {
-		return craftCooldownList;
+	public Cooldowns getCraftCooldowns() {
+		return craftCooldowns;
 	}
 
-	public HouseObjectCooldownList getHouseObjectCooldownList() {
-		return houseObjectCooldownList;
+	public Cooldowns getHouseObjectCooldowns() {
+		return houseObjectCooldowns;
 	}
 
 	public Npc getPostman() {
