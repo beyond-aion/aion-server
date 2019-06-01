@@ -9,7 +9,6 @@ import org.slf4j.LoggerFactory;
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.configs.main.AutoGroupConfig;
 import com.aionemu.gameserver.custom.BattleService;
-import com.aionemu.gameserver.dao.HouseObjectCooldownsDAO;
 import com.aionemu.gameserver.dao.ItemCooldownsDAO;
 import com.aionemu.gameserver.dao.PlayerCooldownsDAO;
 import com.aionemu.gameserver.dao.PlayerDAO;
@@ -122,7 +121,6 @@ public class PlayerLeaveWorldService {
 		DAOManager.getDAO(PlayerEffectsDAO.class).storePlayerEffects(player);
 		DAOManager.getDAO(PlayerCooldownsDAO.class).storePlayerCooldowns(player);
 		DAOManager.getDAO(ItemCooldownsDAO.class).storeItemCooldowns(player);
-		DAOManager.getDAO(HouseObjectCooldownsDAO.class).storeHouseObjectCooldowns(player);
 		DAOManager.getDAO(PlayerLifeStatsDAO.class).updatePlayerLifeStat(player);
 
 		PlayerGroupService.onPlayerLogout(player);

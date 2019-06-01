@@ -103,6 +103,7 @@ public class PlayerService {
 		DAOManager.getDAO(MailDAO.class).storeMailbox(player);
 		DAOManager.getDAO(PortalCooldownsDAO.class).storePortalCooldowns(player);
 		DAOManager.getDAO(CraftCooldownsDAO.class).storeCraftCooldowns(player);
+		DAOManager.getDAO(HouseObjectCooldownsDAO.class).storeHouseObjectCooldowns(player);
 		DAOManager.getDAO(PlayerNpcFactionsDAO.class).storeNpcFactions(player);
 		DAOManager.getDAO(AccountPassportsDAO.class).storePassport(player.getAccount());
 		if (EventsConfig.ENABLE_HEADHUNTING)
