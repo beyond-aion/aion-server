@@ -2,6 +2,7 @@ package com.aionemu.commons.scripting.impl.javacompiler;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -64,12 +65,12 @@ public class ClassFileManager extends ForwardingJavaFileManager<JavaFileManager>
 	 * @param kind
 	 *          not used
 	 * @param sibling
-	 *          not used
+	 *          source file for the class
 	 * @return JavaFileObject that will be used to store compiled class data
 	 */
 	@Override
 	public JavaFileObject getJavaFileForOutput(Location location, String className, Kind kind, FileObject sibling) {
-		BinaryClass co = new BinaryClass(className);
+		BinaryClass co = new BinaryClass(className, sibling);
 		compiledClasses.put(className, co);
 		return co;
 	}
@@ -127,6 +128,15 @@ public class ClassFileManager extends ForwardingJavaFileManager<JavaFileManager>
 	public void addLibraries(Iterable<File> files) throws IOException {
 		for (File f : files) {
 			addLibrary(f);
+		}
+	}
+
+	public void addClass(String className, File classFile) {
+		try {
+			byte[] bytes = Files.readAllBytes(classFile.toPath());
+			getJavaFileForOutput(null, className, null, null).openOutputStream().write(bytes);
+		} catch (IOException e) {
+			throw new RuntimeException("Couldn't load cached class " + classFile, e);
 		}
 	}
 

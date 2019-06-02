@@ -1,6 +1,7 @@
 package com.aionemu.commons.scripting;
 
 import java.io.File;
+import java.util.Map;
 
 /**
  * This interface represents common functionality list that should be available for any compiler that is going to be used with scripting engine. For
@@ -29,12 +30,20 @@ public interface ScriptCompiler {
 	void setLibraries(Iterable<File> files);
 
 	/**
+	 * List of class files that are already compiled and should be loaded just like compilable source files
+	 *
+	 * @param classFiles
+	 *          map of class files with their fully qualified name
+	 */
+	void setClasses(Map<String, File> classFiles);
+
+	/**
 	 * Compiles single class that is represented as string
 	 * 
 	 * @param className
 	 *          class name
 	 * @param sourceCode
-	 *          class sourse code
+	 *          class source code
 	 * @return {@link com.aionemu.commons.scripting.CompilationResult}
 	 */
 	CompilationResult compile(String className, String sourceCode);

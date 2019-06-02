@@ -1,14 +1,16 @@
 commons/target/
+chat-server/cache/
+chat-server/config/mycs.properties
 chat-server/log/
 chat-server/target/
-chat-server/config/mycs.properties
 game-server/cache/
 game-server/config/mygs.properties
 game-server/log/
 game-server/target/
+login-server/cache/
+login-server/config/myls.properties
 login-server/log/
 login-server/target/
-login-server/config/myls.properties
 
 .idea/
 **.iml

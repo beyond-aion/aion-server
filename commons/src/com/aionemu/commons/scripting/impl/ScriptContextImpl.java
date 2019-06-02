@@ -15,8 +15,10 @@ import java.util.regex.PatternSyntaxException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.aionemu.commons.configs.CommonsConfig;
 import com.aionemu.commons.scripting.CompilationResult;
 import com.aionemu.commons.scripting.ScriptCompiler;
+import com.aionemu.commons.scripting.ScriptCompilerCache;
 import com.aionemu.commons.scripting.ScriptContext;
 import com.aionemu.commons.scripting.classlistener.ClassListener;
 import com.aionemu.commons.scripting.impl.javacompiler.ScriptCompilerImpl;
@@ -83,7 +85,7 @@ public class ScriptContextImpl implements ScriptContext {
 	 * @param dirPattern
 	 *          directory pattern where java files will be loaded from
 	 * @param parent
-	 *          parent ScriptContex. It's classes and libraries will be accessible for this script context
+	 *          parent ScriptContext. It's classes and libraries will be accessible for this script context
 	 * @throws NullPointerException
 	 *           if dirPattern is null
 	 * @throws IllegalArgumentException
@@ -111,7 +113,12 @@ public class ScriptContextImpl implements ScriptContext {
 		}
 
 		scriptCompiler.setLibraries(libraries);
-		compilationResult = scriptCompiler.compile(findFiles());
+		List<File> sourceFiles = findFiles();
+		if (CommonsConfig.SCRIPT_COMPILER_CACHING)
+			scriptCompiler.setClasses(ScriptCompilerCache.findValidCachedClassFiles(sourceFiles));
+		compilationResult = scriptCompiler.compile(sourceFiles);
+		if (CommonsConfig.SCRIPT_COMPILER_CACHING)
+			ScriptCompilerCache.cacheClasses(compilationResult.getBinaryClasses());
 
 		getClassListener().postLoad(compilationResult.getCompiledClasses());
 

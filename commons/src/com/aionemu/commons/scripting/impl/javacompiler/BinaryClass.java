@@ -8,10 +8,11 @@ import java.io.OutputStream;
 import java.io.Writer;
 import java.net.URI;
 
+import javax.tools.FileObject;
 import javax.tools.SimpleJavaFileObject;
 
 /**
- * This class is just a hack to make javac compiler work with classes loaded by prevoius classloader. Also it's used as container for loaded class
+ * This class is just a hack to make javac compiler work with classes loaded by previous classloader. Also it's used as container for loaded class
  * 
  * @author SoulKeeper
  */
@@ -23,7 +24,12 @@ public class BinaryClass extends SimpleJavaFileObject {
 	private final ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
 	/**
-	 * Locaded class will be set here
+	 * The source file for this class
+	 */
+	private final URI sourceFile;
+
+	/**
+	 * Loaded class will be set here
 	 */
 	private Class<?> definedClass;
 
@@ -33,8 +39,9 @@ public class BinaryClass extends SimpleJavaFileObject {
 	 * @param name
 	 *          class name
 	 */
-	protected BinaryClass(String name) {
+	protected BinaryClass(String name, FileObject source) {
 		super(URI.create(name), Kind.CLASS);
+		this.sourceFile = source == null ? null : source.toUri();
 	}
 
 	/**
@@ -91,8 +98,12 @@ public class BinaryClass extends SimpleJavaFileObject {
 		throw new UnsupportedOperationException();
 	}
 
+	public URI getSourceFile() {
+		return sourceFile;
+	}
+
 	/**
-	 * Unsupported operation, always reutrns 0
+	 * Unsupported operation, always returns 0
 	 * 
 	 * @return 0
 	 */

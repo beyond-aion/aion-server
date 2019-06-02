@@ -4,8 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 import javax.tools.DiagnosticListener;
 import javax.tools.JavaCompiler;
@@ -18,7 +18,6 @@ import org.slf4j.LoggerFactory;
 import com.aionemu.commons.scripting.CompilationResult;
 import com.aionemu.commons.scripting.ScriptClassLoader;
 import com.aionemu.commons.scripting.ScriptCompiler;
-import com.aionemu.commons.utils.ExitCode;
 
 /**
  * Wrapper for JavaCompiler api
@@ -40,13 +39,16 @@ public class ScriptCompilerImpl implements ScriptCompiler {
 	protected Iterable<File> libraries;
 
 	/**
+	 * List of class files
+	 */
+	protected Map<String, File> classFiles;
+
+	/**
 	 * Parent classloader that has to be used for this compiler
 	 */
 	protected ScriptClassLoader parentClassLoader;
 
 	/**
-	 * Creates new instance of JavaCompilerImpl. If system compiler is not available - throws RuntimeExcetion
-	 * 
 	 * @throws RuntimeException
 	 *           if compiler is not available
 	 */
@@ -54,8 +56,7 @@ public class ScriptCompilerImpl implements ScriptCompiler {
 		javaCompiler = ToolProvider.getSystemJavaCompiler();
 		if (javaCompiler == null) {
 			log.info("JAVA_HOME={}", System.getenv("JAVA_HOME"));
-			log.error("Could not find compiler! Make sure javac is in PATH.");
-			Runtime.getRuntime().halt(ExitCode.CODE_ERROR);
+			throw new IllegalStateException("Could not find compiler! Make sure javac is in PATH.");
 		}
 	}
 
@@ -81,6 +82,11 @@ public class ScriptCompilerImpl implements ScriptCompiler {
 		libraries = files;
 	}
 
+	@Override
+	public void setClasses(Map<String, File> classFiles) {
+		this.classFiles = classFiles;
+	}
+
 	/**
 	 * Compiles given class.
 	 * 
@@ -90,7 +96,7 @@ public class ScriptCompilerImpl implements ScriptCompiler {
 	 *          source code
 	 * @return CompilationResult with the class
 	 * @throws RuntimeException
-	 *           if compilation failed with errros
+	 *           if compilation failed with errors
 	 */
 	@Override
 	public CompilationResult compile(String className, String sourceCode) {
@@ -108,7 +114,7 @@ public class ScriptCompilerImpl implements ScriptCompiler {
 	 * @throws IllegalArgumentException
 	 *           if size of classNames not equals to size of sourceCodes
 	 * @throws RuntimeException
-	 *           if compilation failed with errros
+	 *           if compilation failed with errors
 	 */
 	@Override
 	public CompilationResult compile(String[] classNames, String[] sourceCode) throws IllegalArgumentException {
@@ -134,7 +140,7 @@ public class ScriptCompilerImpl implements ScriptCompiler {
 	 *          files to compile
 	 * @return CompilationResult with classes
 	 * @throws RuntimeException
-	 *           if compilation failed with errros
+	 *           if compilation failed with errors
 	 */
 	@Override
 	public CompilationResult compile(Iterable<File> compilationUnits) {
@@ -154,7 +160,7 @@ public class ScriptCompilerImpl implements ScriptCompiler {
 	 *          Units that will be compiled
 	 * @return CompilationResult with compiledClasses
 	 * @throws RuntimeException
-	 *           if compilation failed with errros
+	 *           if compilation failed with errors
 	 */
 	protected CompilationResult doCompilation(Iterable<JavaFileObject> compilationUnits) {
 		List<String> options = Arrays.asList("-encoding", "UTF-8", "-g");
@@ -169,43 +175,17 @@ public class ScriptCompilerImpl implements ScriptCompiler {
 				log.error("Can't set libraries for compiler.", e);
 			}
 		}
+		if (classFiles != null)
+			classFiles.forEach(manager::addClass);
 
-		JavaCompiler.CompilationTask task = javaCompiler.getTask(null, manager, listener, options, null, compilationUnits);
+		if (compilationUnits.iterator().hasNext()) {
+			JavaCompiler.CompilationTask task = javaCompiler.getTask(null, manager, listener, options, null, compilationUnits);
 
-		if (!task.call()) {
-			throw new RuntimeException("Error while compiling classes");
+			if (!task.call())
+				throw new RuntimeException("Error while compiling classes");
 		}
 
 		ScriptClassLoader cl = manager.getClassLoader(null);
-		Class<?>[] compiledClasses = classNamesToClasses(manager.getCompiledClasses().keySet(), cl);
-		return new CompilationResult(compiledClasses, cl);
-	}
-
-	/**
-	 * Reolves list of classes by their names
-	 * 
-	 * @param classNames
-	 *          names of the classes
-	 * @param cl
-	 *          classLoader to use to resove classes
-	 * @return resolved classes
-	 * @throws RuntimeException
-	 *           if can't find class
-	 */
-	protected Class<?>[] classNamesToClasses(Collection<String> classNames, ScriptClassLoader cl) {
-		Class<?>[] classes = new Class<?>[classNames.size()];
-
-		int i = 0;
-		for (String className : classNames) {
-			try {
-				Class<?> clazz = cl.loadClass(className);
-				classes[i] = clazz;
-			} catch (ClassNotFoundException e) {
-				throw new RuntimeException(e);
-			}
-			i++;
-		}
-
-		return classes;
+		return new CompilationResult(manager.getCompiledClasses().values(), cl);
 	}
 }

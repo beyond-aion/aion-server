@@ -134,7 +134,7 @@ public class ScriptClassLoaderImpl extends ScriptClassLoader {
 		// load classes for class names from this classloader
 		for (String cn : classNames) {
 			if (ClassUtils.isPackageMember(cn, packageName)) {
-				BinaryClass bc = new BinaryClass(cn);
+				BinaryClass bc = new BinaryClass(cn, null);
 				try {
 					byte[] data = getRawClassByName(cn);
 					OutputStream os = bc.openOutputStream();
