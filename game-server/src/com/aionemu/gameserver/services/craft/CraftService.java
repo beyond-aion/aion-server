@@ -187,7 +187,9 @@ public class CraftService {
 		}
 
 		if (recipeTemplate.getCraftDelayId() != null && player.getCraftCooldowns().hasCooldown(recipeTemplate.getCraftDelayId())) {
-			AuditLogger.log(player, "tried to craft before cooldown expired");
+			// since there's no SM_CRAFT_COOLDOWN (at least we didn't find it yet), we must send some sys message to the player instead of audit logging
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_CANT_USE_UNTIL_DELAY_TIME());
+			// AuditLogger.log(player, "tried to craft before cooldown expired");
 			return false;
 		}
 

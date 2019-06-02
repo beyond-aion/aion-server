@@ -140,12 +140,14 @@ public class AionClientPacketFactory {
 			packets.put(0x162, new PacketInfo<>(CM_PLAYER_SEARCH.class, State.IN_GAME));
 			packets.put(0x163, new PacketInfo<>(CM_LEGION_UPLOAD_INFO.class, State.IN_GAME));
 			packets.put(0x165, new PacketInfo<>(CM_SHOW_RESTRICTIONS.class, State.IN_GAME)); // when writing /restriction in chat
+			// packets.put(0x166, new PacketInfo<>(CM_SUMMON_TELEPORT_RESPONSE.class, State.IN_GAME)); // when player accepts/declines SM_SUMMON_TELEPORT_REQUEST window
 			packets.put(0x167, new PacketInfo<>(CM_SHOW_MAP.class, State.IN_GAME));
 			packets.put(0x168, new PacketInfo<>(CM_APPEARANCE.class, State.IN_GAME));
 			packets.put(0x16B, new PacketInfo<>(CM_AUTO_GROUP.class, State.IN_GAME));
 			packets.put(0x16C, new PacketInfo<>(CM_SUMMON_MOVE.class, State.IN_GAME));
 			packets.put(0x16D, new PacketInfo<>(CM_SUMMON_EMOTION.class, State.IN_GAME));
 			packets.put(0x16E, new PacketInfo<>(CM_SUMMON_ATTACK.class, State.IN_GAME));
+			// packets.put(0x16F, new PacketInfo<>(CM_UNK_RESPONSE2.class, State.IN_GAME)); // answer to SM_UNK_REQUEST2
 			packets.put(0x171, new PacketInfo<>(CM_CHAT_AUTH.class, State.IN_GAME));
 			packets.put(0x172, new PacketInfo<>(CM_MACRO_CREATE.class, State.IN_GAME));
 			packets.put(0x173, new PacketInfo<>(CM_MACRO_DELETE.class, State.IN_GAME));

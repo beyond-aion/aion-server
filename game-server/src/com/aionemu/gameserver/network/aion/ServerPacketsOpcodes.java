@@ -84,7 +84,7 @@ public class ServerPacketsOpcodes {
 		addPacketOpcode(SM_GM_SHOW_LEGION_MEMBERLIST.class, 0x42);
 		addPacketOpcode(SM_WEATHER.class, 0x43);
 		addPacketOpcode(SM_PLAYER_STATE.class, 0x44);
-		// 69 some teleport/summon dialog not sure..
+		// 0x45 SM_SUMMON_TELEPORT_REQUEST some teleport/summon dialog. response when accepting/declining the dialog is 0x166. first D in SM and CM packets is identical (dialog ID?)
 		addPacketOpcode(SM_LEVEL_UPDATE.class, 0x46);
 		addPacketOpcode(SM_QUEST_LIST.class, 0x47);
 		addPacketOpcode(SM_KEY.class, 0x48);
@@ -95,7 +95,7 @@ public class ServerPacketsOpcodes {
 		addPacketOpcode(SM_EXCHANGE_ADD_KINAH.class, 0x4D);
 		addPacketOpcode(SM_EXCHANGE_CONFIRMATION.class, 0x4E);
 		addPacketOpcode(SM_EMOTION_LIST.class, 0x4F);
-		// 80 - client answers with CM_UNK_RESPONSE: opcode 0x181 with 16 (static) bytes which change every 5s, maybe some kind of consistency check
+		// 0x50 SM_UNK_REQUEST client answers with CM_UNK_RESPONSE (0x181) with 16 (static) bytes which change every 5s, maybe some kind of consistency check
 		addPacketOpcode(SM_TARGET_UPDATE.class, 0x51);
 		addPacketOpcode(SM_HOUSE_EDIT.class, 0x52);
 		addPacketOpcode(SM_PLASTIC_SURGERY.class, 0x53);
@@ -124,7 +124,7 @@ public class ServerPacketsOpcodes {
 		// 106
 		// 0x6B
 		// 0x6C
-		// 109
+		// 109 sends error message boxes like "Authorization error" (//fsc 0x6D c 1) or "Unknown error" (//fsc 0x6D c 2). clicking ok closes the client
 		addPacketOpcode(SM_LEGION_INFO.class, 0x6E); // 2.7
 		addPacketOpcode(SM_LEGION_ADD_MEMBER.class, 0x6F);
 		addPacketOpcode(SM_LEGION_LEAVE_MEMBER.class, 0x70);
@@ -202,7 +202,7 @@ public class ServerPacketsOpcodes {
 		addPacketOpcode(SM_ITEM_USAGE_ANIMATION.class, 0xB7);
 		addPacketOpcode(SM_CUSTOM_SETTINGS.class, 0xB8);
 		addPacketOpcode(SM_DUEL.class, 0xB9);
-		// 186
+		// 0xBA SM_UNK_REQUEST2 client answers with CM_UNK_RESPONSE2 (0x16F). first D in CM and SM is identical (//fsc 0xBA d 1)
 		addPacketOpcode(SM_PET_EMOTE.class, 0xBB);
 		// 188 destroy your ui & get kicked!
 		// 189
@@ -244,7 +244,7 @@ public class ServerPacketsOpcodes {
 		addPacketOpcode(SM_FRIEND_NOTIFY.class, 0xE1);
 		addPacketOpcode(SM_TOWNS_LIST.class, 0xE2);
 		addPacketOpcode(SM_FRIEND_STATUS.class, 0xE3);
-		// addPacketOpcode(SM_VIRTUAL_AUTH.class, 0xE4); //  1.5.0
+		// addPacketOpcode(SM_VIRTUAL_AUTH.class, 0xE4); // 1.5.0 - client answers with CM_MAC_ADDRESS and CM_L2AUTH_LOGIN_CHECK
 		addPacketOpcode(SM_CHANNEL_INFO.class, 0xE5);
 		addPacketOpcode(SM_CHAT_INIT.class, 0xE6);
 		addPacketOpcode(SM_MACRO_LIST.class, 0xE7);
