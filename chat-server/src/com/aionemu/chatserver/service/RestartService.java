@@ -9,7 +9,6 @@ import org.slf4j.LoggerFactory;
 
 import com.aionemu.chatserver.ShutdownHook;
 import com.aionemu.chatserver.configs.main.CSConfig;
-import com.aionemu.chatserver.model.RestartFrequency;
 
 /**
  * @author nrg
@@ -20,17 +19,11 @@ public class RestartService {
 	private static final RestartService instance = new RestartService();
 
 	private RestartService() {
-		RestartFrequency rf;
-		try {
-			rf = RestartFrequency.valueOf(CSConfig.CHATSERVER_RESTART_FREQUENCY);
-		} catch (Exception e) {
-			log.warn("Could not find stated RestartFrequency. Using NEVER as default value!");
-			rf = RestartFrequency.NEVER;
-		}
-		setTimer(rf);
+		if (CSConfig.CHATSERVER_RESTART_FREQUENCY != null)
+			setTimer();
 	}
 
-	private void setTimer(RestartFrequency frequency) {
+	private void setTimer() {
 		// get time to restart
 		String[] time = getRestartTime();
 		int hour = Integer.parseInt(time[0]);
@@ -44,9 +37,7 @@ public class RestartService {
 		boolean isMissed = calendar.getTimeInMillis() < System.currentTimeMillis();
 
 		// switch frequency
-		switch (frequency) {
-			case NEVER:
-				return;
+		switch (CSConfig.CHATSERVER_RESTART_FREQUENCY) {
 			case DAILY:
 				if (isMissed) // execute next day if we missed the time today (what is mostly the case)
 					calendar.add(Calendar.DAY_OF_YEAR, 1);
