@@ -1,13 +1,13 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
-import java.sql.Timestamp;
 import java.time.DayOfWeek;
+import java.time.Duration;
+import java.time.ZonedDateTime;
 
 import com.aionemu.gameserver.model.gameobjects.player.HouseOwnerState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.house.House;
 import com.aionemu.gameserver.model.house.HouseStatus;
-import com.aionemu.gameserver.model.house.MaintenanceTask;
 import com.aionemu.gameserver.model.town.Town;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
@@ -56,32 +56,7 @@ public class SM_HOUSE_OWNER_INFO extends AionServerPacket {
 			townLevel = town.getLevel();
 		}
 		writeC(townLevel);
-		// Maintenance bill weeks left ?, if 0 maintenance date is in red
-		if (activeHouse == null || !activeHouse.isFeePaid()) {
-			writeC(0);
-		} else {
-			Timestamp nextPay = activeHouse.getNextPay();
-			float diff;
-			if (nextPay == null) {
-				// See MaintenanceTask.updateMaintainedHouses()
-				// all just obtained houses have fee paid true and time is null;
-				// means they should pay next week
-				diff = MaintenanceTask.getInstance().getPeriod();
-			} else {
-				long paytime = activeHouse.getNextPay().getTime();
-				diff = paytime - ((long) MaintenanceTask.getInstance().getRunTime() * 1000);
-			}
-			if (diff < 0) {
-				writeC(0);
-			} else {
-				int weeks = (Math.round(diff / MaintenanceTask.getInstance().getPeriod()));
-				if (ServerTime.now().getDayOfWeek() != DayOfWeek.SUNDAY) // Hack for auction Day, client counts sunday to new week
-					weeks++;
-				writeC(weeks);
-			}
-		}
-		writeH(0); // unk
-		writeC(0); // unk
+		writeD(calculateWeeksUntilNextPay()); // controls date and color in player profile house icon tooltip, as well as overdue pay amount when paying
 
 		if (inactiveHouse == null) {
 			writeD(0);
@@ -96,5 +71,24 @@ public class SM_HOUSE_OWNER_INFO extends AionServerPacket {
 			writeD(inactiveHouse.getBuilding().getId());
 			writeD(timeLeft);
 		}
+	}
+
+	private int calculateWeeksUntilNextPay() {
+		int weeks = 0;
+		if (activeHouse != null) {
+			if (activeHouse.getNextPay() == null) { // newly acquired houses have one week free, nextPay will be set on the next house maintenance
+				weeks = 1;
+			} else {
+				ZonedDateTime now = ServerTime.now();
+				boolean isSundayAfterAuction = now.getDayOfWeek() == DayOfWeek.SUNDAY && now.getHour() >= 12;
+				long days = Duration.between(now.toInstant(), activeHouse.getNextPay().toInstant()).toDays();
+				weeks = (int) (days / 7);
+				if (days < 0 && isSundayAfterAuction) // workaround for auction day, client counts sunday afternoon to new week
+					weeks--;
+				else if (days >= 0 && !isSundayAfterAuction)
+					weeks++;
+			}
+		}
+		return weeks;
 	}
 }

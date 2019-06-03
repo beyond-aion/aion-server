@@ -62,7 +62,7 @@ public class HousingBidService extends AbstractCronTask {
 	private final Map<Integer, HouseBidEntry> houseBids = new LinkedHashMap<>();
 	private final Map<Integer, HouseBidEntry> playerBids = new LinkedHashMap<>();
 	private final Map<Integer, HouseBidEntry> bidsByIndex = new HashMap<>();
-	private int timeProlonged = 0;
+	private int timeProlonged = DAOManager.getDAO(ServerVariablesDAO.class).loadInt("auctionProlonged");
 	private volatile boolean isDataLoaded;
 
 	private HousingBidService() {
@@ -71,26 +71,6 @@ public class HousingBidService extends AbstractCronTask {
 
 	public static HousingBidService getInstance() {
 		return instance;
-	}
-
-	@Override
-	protected long getRunDelay() {
-		return (long) getSecondsTillAuction() * 1000;
-	}
-
-	@Override
-	protected String getServerTimeVariable() {
-		return "auctionTime";
-	}
-
-	@Override
-	protected boolean canRunOnInit() {
-		return true;
-	}
-
-	@Override
-	protected void postInit() {
-		timeProlonged = DAOManager.getDAO(ServerVariablesDAO.class).load("auctionProlonged");
 	}
 
 	public void start() {
@@ -217,6 +197,11 @@ public class HousingBidService extends AbstractCronTask {
 			} catch (InterruptedException e) {
 				return;
 			}
+		}
+
+		if (getSecondsTillAuction() > 0) {
+			ThreadPoolManager.getInstance().schedule(this, getSecondsTillAuction() * 1000);
+			return;
 		}
 
 		Map<HouseBidEntry, Integer> winners = new HashMap<>();
@@ -377,13 +362,8 @@ public class HousingBidService extends AbstractCronTask {
 					log.info("Address " + houseBid.getAddress() + " not sold, reauctioned.");
 			}
 		});
-	}
-
-	@Override
-	protected void postRun() {
-		ServerVariablesDAO dao = DAOManager.getDAO(ServerVariablesDAO.class);
 		timeProlonged = 0;
-		dao.store("auctionProlonged", timeProlonged);
+		DAOManager.getDAO(ServerVariablesDAO.class).store("auctionProlonged", timeProlonged);
 	}
 
 	/**
@@ -392,11 +372,11 @@ public class HousingBidService extends AbstractCronTask {
 	 * @return one week ago before the auction time
 	 */
 	public long getAuctionStartTime() {
-		return (getRunTime() - TimeUnit.DAYS.toSeconds(7)) * 1000;
+		return getLastPlannedRun().getTime();
 	}
 
 	public int getSecondsTillAuction() {
-		int left = (int) (getRunTime() - System.currentTimeMillis() / 1000);
+		int left = (int) (getNextRun().getTime() - System.currentTimeMillis() / 1000);
 		left += timeProlonged * 60;
 		if (left < 0)
 			return 0;
@@ -409,7 +389,7 @@ public class HousingBidService extends AbstractCronTask {
 
 	public boolean isBiddingAllowed() {
 		ZonedDateTime now = ServerTime.now();
-		ZonedDateTime auctionEnd = ServerTime.ofEpochSecond(getRunTime() + timeProlonged * 60);
+		ZonedDateTime auctionEnd = ServerTime.ofEpochSecond(getNextRun().getTime() + timeProlonged * 60);
 		if (now.getDayOfWeek() == auctionEnd.getDayOfWeek() && auctionEnd.minusDays(1).isAfter(now)) {
 			// Auction is unavailable from Sunday 12 PM to Monday
 			return false;
@@ -420,7 +400,7 @@ public class HousingBidService extends AbstractCronTask {
 	public boolean isRegisteringAllowed() {
 		ZonedDateTime now = ServerTime.now();
 		ZonedDateTime registerEnd = ServerTime.atDate(HousingConfig.HOUSE_REGISTER_END.getNextValidTimeAfter(new Date()));
-		ZonedDateTime auctionEnd = ServerTime.ofEpochSecond(getRunTime() + timeProlonged * 60);
+		ZonedDateTime auctionEnd = ServerTime.ofEpochSecond(getNextRun().getTime() + timeProlonged * 60);
 		if (now.getDayOfWeek() == registerEnd.getDayOfWeek() && now.getHour() >= registerEnd.getHour()
 			|| (now.getDayOfWeek() == auctionEnd.getDayOfWeek() && now.getHour() <= auctionEnd.getHour())) {
 			return false;
@@ -449,14 +429,13 @@ public class HousingBidService extends AbstractCronTask {
 				// make the new house inactive until the old one is sold
 				obtainedHouse.setStatus(HouseStatus.INACTIVE);
 				result = AuctionResult.GRACE_START;
-				time = (getRunTime() + TimeUnit.DAYS.toSeconds(14)) * 1000;
+				time = (getNextRun().getTime() + TimeUnit.DAYS.toSeconds(14)) * 1000;
 			}
 		}
 		obtainedHouse.setOwnerId(winner.getPlayerObjId());
 		if (result == AuctionResult.WIN_BID) {
 			obtainedHouse.setAcquiredTime(new Timestamp(System.currentTimeMillis()));
 			obtainedHouse.setStatus(HouseStatus.ACTIVE);
-			obtainedHouse.setFeePaid(true);
 			obtainedHouse.setNextPay(null);
 			obtainedHouse.setSellStarted(null);
 			obtainedHouse.save();

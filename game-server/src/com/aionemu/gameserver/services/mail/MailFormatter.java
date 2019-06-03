@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.services.mail;
 
+import java.time.Duration;
+
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.LetterType;
@@ -40,21 +42,17 @@ public final class MailFormatter {
 		SystemMailService.sendMail("$$CASH_ITEM_MAIL", recipientName, title, body, itemObjectId, itemCount, 0, LetterType.BLACKCLOUD);
 	}
 
-	public static void sendHouseMaintenanceMail(House ownedHouse, int warnCount, long impoundTime) {
+	public static void sendHouseMaintenanceMail(House ownedHouse, long impoundTimeMillis, long kinah) {
 		String templateName;
-		switch (warnCount) {
-			case 1:
-				templateName = "$$HS_OVERDUE_1ST";
-				break;
-			case 2:
-				templateName = "$$HS_OVERDUE_2ND";
-				break;
-			case 3:
-				templateName = "$$HS_OVERDUE_3RD";
-				break;
-			default:
-				return;
-		}
+		long daysUntilImpoundment = Duration.ofMillis(impoundTimeMillis - System.currentTimeMillis()).toDays();
+		if (daysUntilImpoundment <= 0)
+			templateName = "$$HS_OVERDUE_3RD";
+		else if (daysUntilImpoundment <= 7)
+			templateName = "$$HS_OVERDUE_2ND";
+		else if (daysUntilImpoundment <= 14)
+			templateName = "$$HS_OVERDUE_1ST";
+		else
+			return;
 
 		MailTemplate template = DataManager.SYSTEM_MAIL_TEMPLATES.getMailTemplate(templateName, "", ownedHouse.getPlayerRace());
 
@@ -65,7 +63,7 @@ public final class MailFormatter {
 				if ("address".equals(name))
 					return Integer.toString(ownedHouse.getAddress().getId());
 				else if ("datetime".equals(name))
-					return Long.toString(impoundTime / 60000);
+					return Long.toString(impoundTimeMillis / 60000);
 				return "";
 			}
 
@@ -74,7 +72,7 @@ public final class MailFormatter {
 		String title = template.getFormattedTitle(null);
 		String message = template.getFormattedMessage(formatter);
 
-		SystemMailService.sendMail(templateName, ownedHouse.getButler().getMasterName(), title, message, 0, 0, 0, LetterType.NORMAL);
+		SystemMailService.sendMail(templateName, ownedHouse.getButler().getMasterName(), title, message, 0, 0, kinah, LetterType.NORMAL);
 	}
 
 	public static void sendHouseAuctionMail(House ownedHouse, PlayerCommonData playerData, AuctionResult result, long time, long returnKinah) {

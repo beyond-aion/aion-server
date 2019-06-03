@@ -65,7 +65,6 @@ public class House extends VisibleObject implements Persistable {
 	private Timestamp acquiredTime;
 	private int permissions;
 	private HouseStatus status;
-	private boolean feePaid = true;
 	private Timestamp nextPay;
 	private Timestamp sellStarted;
 	private Map<SpawnType, Npc> spawns = new EnumMap<>(SpawnType.class);
@@ -288,18 +287,14 @@ public class House extends VisibleObject implements Persistable {
 	}
 
 	public boolean isFeePaid() {
-		return feePaid;
-	}
-
-	public void setFeePaid(boolean feePaid) {
-		this.feePaid = feePaid;
+		return nextPay == null || nextPay.getTime() >= System.currentTimeMillis();
 	}
 
 	public Timestamp getNextPay() {
 		return nextPay;
 	}
 
-	public void setNextPay(Timestamp nextPay) {
+	public void setNextPay(Date nextPay) {
 		Timestamp result = null;
 		if (nextPay != null) { // round to midnight
 			result = new Timestamp(DateUtils.round(nextPay, Calendar.DAY_OF_MONTH).getTime());
@@ -382,7 +377,6 @@ public class House extends VisibleObject implements Persistable {
 		acquiredTime = null;
 		sellStarted = null;
 		nextPay = null;
-		feePaid = true;
 
 		Building defaultBuilding = getLand().getDefaultBuilding();
 		if (defaultBuilding != building)

@@ -1,7 +1,9 @@
 package com.aionemu.gameserver.services;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,6 +12,7 @@ import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.configs.main.PeriodicSaveConfig;
 import com.aionemu.gameserver.dao.InventoryDAO;
 import com.aionemu.gameserver.dao.ItemStoneListDAO;
+import com.aionemu.gameserver.dao.ServerVariablesDAO;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.team.legion.Legion;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
@@ -21,20 +24,30 @@ public class PeriodicSaveService {
 
 	private static final Logger log = LoggerFactory.getLogger(PeriodicSaveService.class);
 
-	private Future<?> legionWhUpdateTask;
+	private final List<PeriodicSaveTask> tasks;
 
-	public static final PeriodicSaveService getInstance() {
+	public static PeriodicSaveService getInstance() {
 		return SingletonHolder.instance;
 	}
 
 	private PeriodicSaveService() {
-
-		int DELAY_LEGION_ITEM = PeriodicSaveConfig.LEGION_ITEMS * 1000;
-
-		legionWhUpdateTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new LegionWhUpdateTask(), DELAY_LEGION_ITEM, DELAY_LEGION_ITEM);
+		tasks = Arrays.asList(new LegionWarehouseSaveTask(), new ServerRunTimeSaveTask());
 	}
 
-	private class LegionWhUpdateTask implements Runnable {
+	/**
+	 * Save data on shutdown
+	 */
+	public void onShutdown() {
+		log.info("Starting data save on shutdown.");
+		tasks.forEach(PeriodicSaveTask::storeDataAndCancel);
+		log.info("Data successfully saved.");
+	}
+
+	private class LegionWarehouseSaveTask extends PeriodicSaveTask {
+
+		private LegionWarehouseSaveTask() {
+			super(PeriodicSaveConfig.LEGION_ITEMS * 1000);
+		}
 
 		@Override
 		public void run() {
@@ -60,15 +73,30 @@ public class PeriodicSaveService {
 		}
 	}
 
-	/**
-	 * Save data on shutdown
-	 */
-	public void onShutdown() {
-		log.info("Starting data save on shutdown.");
-		// save legion warehouse
-		legionWhUpdateTask.cancel(false);
-		new LegionWhUpdateTask().run();
-		log.info("Data successfully saved.");
+	private class ServerRunTimeSaveTask extends PeriodicSaveTask {
+
+		private ServerRunTimeSaveTask() {
+			super(TimeUnit.MINUTES.toMillis(2));
+		}
+
+		@Override
+		public void run() {
+			DAOManager.getDAO(ServerVariablesDAO.class).store("serverLastRun", System.currentTimeMillis());
+		}
+	}
+
+	private abstract class PeriodicSaveTask implements Runnable {
+
+		private final Future<?> future;
+
+		private PeriodicSaveTask(long periodMillis) {
+			future = ThreadPoolManager.getInstance().scheduleAtFixedRate(this, periodMillis, periodMillis);
+		}
+
+		private void storeDataAndCancel() {
+			future.cancel(false);
+			run();
+		}
 	}
 
 	private static class SingletonHolder {

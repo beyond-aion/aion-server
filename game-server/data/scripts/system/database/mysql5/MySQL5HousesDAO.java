@@ -33,10 +33,10 @@ public class MySQL5HousesDAO extends HousesDAO {
 	private static final String SELECT_HOUSES_QUERY = "SELECT * FROM houses WHERE address <> 2001 AND address <> 3001";
 	private static final String SELECT_STUDIOS_QUERY = "SELECT * FROM houses WHERE address = 2001 OR address = 3001";
 
-	private static final String ADD_HOUSE_QUERY = "INSERT INTO houses (id, address, building_id, player_id, acquire_time, settings, status, fee_paid, next_pay, sell_started, sign_notice) "
+	private static final String ADD_HOUSE_QUERY = "INSERT INTO houses (id, address, building_id, player_id, acquire_time, settings, status, next_pay, sell_started, sign_notice) "
 		+ " VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 
-	private static final String UPDATE_HOUSE_QUERY = "UPDATE houses SET building_id=?, player_id=?, acquire_time=?, settings=?, status=?, fee_paid=?, next_pay=?, sell_started=?, sign_notice=? WHERE id=?";
+	private static final String UPDATE_HOUSE_QUERY = "UPDATE houses SET building_id=?, player_id=?, acquire_time=?, settings=?, status=?, next_pay=?, sell_started=?, sign_notice=? WHERE id=?";
 	private static final String DELETE_HOUSE_QUERY = "DELETE FROM houses WHERE player_id=?";
 
 	@Override
@@ -64,20 +64,6 @@ public class MySQL5HousesDAO extends HousesDAO {
 	}
 
 	@Override
-	public boolean isIdUsed(int houseObjectId) {
-		try (Connection con = DatabaseFactory.getConnection();
-			PreparedStatement stmt = con.prepareStatement("SELECT count(id) as cnt FROM houses WHERE ? = houses.id")) {
-			stmt.setInt(1, houseObjectId);
-			ResultSet rs = stmt.executeQuery();
-			rs.next();
-			return rs.getInt(1) > 0;
-		} catch (SQLException e) {
-			log.error("Can't check if house " + houseObjectId + ", is used, returning possitive result", e);
-			return true;
-		}
-	}
-
-	@Override
 	public void storeHouse(House house) {
 		if (house.getPersistentState() == PersistentState.NEW)
 			insertNewHouse(house);
@@ -94,10 +80,9 @@ public class MySQL5HousesDAO extends HousesDAO {
 			stmt.setTimestamp(5, house.getAcquiredTime());
 			stmt.setInt(6, house.getPermissions());
 			stmt.setString(7, house.getStatus().toString());
-			stmt.setInt(8, house.isFeePaid() ? 1 : 0);
-			stmt.setTimestamp(9, house.getNextPay());
-			stmt.setTimestamp(10, house.getSellStarted());
-			stmt.setString(11, house.getSignNotice());
+			stmt.setTimestamp(8, house.getNextPay());
+			stmt.setTimestamp(9, house.getSellStarted());
+			stmt.setString(10, house.getSignNotice());
 
 			stmt.execute();
 			house.setPersistentState(PersistentState.UPDATED);
@@ -113,12 +98,11 @@ public class MySQL5HousesDAO extends HousesDAO {
 			stmt.setTimestamp(3, house.getAcquiredTime());
 			stmt.setInt(4, house.getPermissions());
 			stmt.setString(5, house.getStatus().toString());
-			stmt.setInt(6, house.isFeePaid() ? 1 : 0);
-			stmt.setTimestamp(7, house.getNextPay());
-			stmt.setTimestamp(8, house.getSellStarted());
-			stmt.setString(9, house.getSignNotice());
+			stmt.setTimestamp(6, house.getNextPay());
+			stmt.setTimestamp(7, house.getSellStarted());
+			stmt.setString(8, house.getSignNotice());
 
-			stmt.setInt(10, house.getObjectId());
+			stmt.setInt(9, house.getObjectId());
 			stmt.execute();
 		} catch (Exception e) {
 			log.error("Could not store house " + house.getObjectId(), e);
@@ -171,7 +155,6 @@ public class MySQL5HousesDAO extends HousesDAO {
 					house.setAcquiredTime(rset.getTimestamp("acquire_time"));
 					house.setPermissions(rset.getInt("settings"));
 					house.setStatus(HouseStatus.valueOf(rset.getString("status")));
-					house.setFeePaid(rset.getInt("fee_paid") != 0);
 					house.setNextPay(rset.getTimestamp("next_pay"));
 					house.setSellStarted(rset.getTimestamp("sell_started"));
 					house.setSignNotice(rset.getString("sign_notice"));

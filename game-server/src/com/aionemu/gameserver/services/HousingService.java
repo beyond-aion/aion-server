@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.database.dao.DAOManager;
+import com.aionemu.gameserver.configs.main.HousingConfig;
 import com.aionemu.gameserver.controllers.HouseController;
 import com.aionemu.gameserver.dao.HousesDAO;
 import com.aionemu.gameserver.dataholders.DataManager;
@@ -151,7 +152,6 @@ public class HousingService {
 				house.revokeOwner();
 				house.setOwnerId(playerId);
 				house.setStatus(HouseStatus.ACTIVE);
-				house.setFeePaid(true);
 				house.setNextPay(null);
 				house.setSellStarted(null);
 				house.save();
@@ -196,7 +196,6 @@ public class HousingService {
 		studios.put(player.getObjectId(), studio);
 		studio.setStatus(HouseStatus.ACTIVE);
 		studio.setAcquiredTime(new Timestamp(System.currentTimeMillis()));
-		studio.setFeePaid(true);
 		studio.setNextPay(null);
 		studio.setPersistentState(PersistentState.NEW);
 		player.setHouseOwnerState(HouseOwnerState.HOUSE_OWNER.getId());
@@ -266,6 +265,8 @@ public class HousingService {
 				buildingState = HouseOwnerState.SELLING_HOUSE.getId();
 			else
 				buildingState = HouseOwnerState.HOUSE_OWNER.getId();
+			if (HousingConfig.ENABLE_HOUSE_PAY && activeHouse.getNextPay() != null && activeHouse.getNextPay().getTime() <= System.currentTimeMillis())
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_OVERDUE());
 		}
 		player.setHouseOwnerState(buildingState);
 

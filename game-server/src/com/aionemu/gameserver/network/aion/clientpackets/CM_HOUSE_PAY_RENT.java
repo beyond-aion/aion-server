@@ -1,18 +1,18 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
-import java.sql.Timestamp;
-import java.time.ZonedDateTime;
+import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
+import java.util.Date;
 import java.util.Set;
 
 import com.aionemu.gameserver.configs.main.HousingConfig;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.house.House;
-import com.aionemu.gameserver.model.house.MaintenanceTask;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_HOUSE_PAY_RENT;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
-import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.taskmanager.tasks.MaintenanceTask;
 import com.aionemu.gameserver.utils.time.ServerTime;
 
 /**
@@ -20,7 +20,7 @@ import com.aionemu.gameserver.utils.time.ServerTime;
  */
 public class CM_HOUSE_PAY_RENT extends AionClientPacket {
 
-	int weekCount;
+	private int weekCount;
 
 	public CM_HOUSE_PAY_RENT(int opcode, Set<State> validStates) {
 		super(opcode, validStates);
@@ -34,37 +34,30 @@ public class CM_HOUSE_PAY_RENT extends AionClientPacket {
 	@Override
 	protected void runImpl() {
 		Player player = getConnection().getActivePlayer();
-
-		if (!HousingConfig.ENABLE_HOUSE_PAY) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_F2P_CASH_HOUSE_FEE_FREE());
-			return;
-		}
-
 		House house = player.getActiveHouse();
-		long toPay = house.getLand().getMaintenanceFee() * weekCount;
-		if (toPay <= 0) {
-			return;
-		}
-		if (player.getInventory().getKinah() < toPay) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_NOT_ENOUGH_MONEY());
-			return;
-		}
+		long cost = HousingConfig.ENABLE_HOUSE_PAY ? house.getLand().getMaintenanceFee() * weekCount : 0;
 
-		long payTime = house.getNextPay() != null ? house.getNextPay().getTime() : (long) MaintenanceTask.getInstance().getRunTime() * 1000;
-		int counter = weekCount;
-		while ((--counter) >= 0) {
-			payTime += MaintenanceTask.getInstance().getPeriod();
-		}
-
-		ZonedDateTime nextRun = ServerTime.ofEpochSecond(MaintenanceTask.getInstance().getRunTime());
-		if (nextRun.plusWeeks(4).isBefore(ServerTime.ofEpochMilli(payTime))) { // client cap
+		if (cost <= 0) {
+			sendPacket(SM_SYSTEM_MESSAGE.STR_MSG_F2P_CASH_HOUSE_FEE_FREE());
 			return;
 		}
 
-		player.getInventory().decreaseKinah(toPay);
-		house.setNextPay(new Timestamp(payTime));
-		house.setFeePaid(true);
+		if (player.getInventory().getKinah() < cost) {
+			sendPacket(SM_SYSTEM_MESSAGE.STR_NOT_ENOUGH_MONEY());
+			return;
+		}
+
+		Date nextPay = house.getNextPay() != null ? house.getNextPay() : MaintenanceTask.getInstance().getNextRun();
+		for (int counter = 0; counter < weekCount; counter++)
+			nextPay = MaintenanceTask.getInstance().getNextRunAfter(nextPay);
+
+		long totalWeeksPaid = ChronoUnit.WEEKS.between(ServerTime.now().with(LocalTime.MIDNIGHT), ServerTime.atDate(nextPay));
+		if (totalWeeksPaid > 4) // client cap
+			return;
+
+		player.getInventory().decreaseKinah(cost);
+		house.setNextPay(nextPay);
 		house.save();
-		PacketSendUtility.sendPacket(player, new SM_HOUSE_PAY_RENT(weekCount));
+		sendPacket(new SM_HOUSE_PAY_RENT(weekCount));
 	}
 }

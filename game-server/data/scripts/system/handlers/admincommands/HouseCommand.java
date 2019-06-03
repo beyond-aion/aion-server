@@ -87,7 +87,6 @@ public class HouseCommand extends AdminCommand {
 		house.setAcquiredTime(new Timestamp(System.currentTimeMillis()));
 		house.setOwnerId(target.getObjectId());
 		house.setStatus(HouseStatus.ACTIVE);
-		house.setFeePaid(true);
 		house.setNextPay(null);
 		house.save();
 		target.setHouseOwnerState(HouseOwnerState.HOUSE_OWNER.getId());

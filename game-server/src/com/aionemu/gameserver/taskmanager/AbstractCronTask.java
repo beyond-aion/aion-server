@@ -7,123 +7,85 @@ import org.quartz.CronExpression;
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.commons.services.CronService;
 import com.aionemu.gameserver.dao.ServerVariablesDAO;
-import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
- * @author Rolandas
+ * @author Rolandas, Neon
  */
 public abstract class AbstractCronTask implements Runnable {
 
+	private static final Long SERVER_STOP_MILLIS = DAOManager.getDAO(ServerVariablesDAO.class).loadLong("serverLastRun");
 	private final CronExpression cronExpression;
-	private int runTime;
-	private long period;
-
-	/**
-	 * Timestamp in Seconds of the task run start, based on DB server variable
-	 */
-	public final int getRunTime() {
-		return runTime;
-	}
-
-	/**
-	 * The same as a milliseconds left, but any extended class may specify a little delay. if delay is not needed then it's simple "runTime" minus "now"
-	 * function
-	 */
-	abstract protected long getRunDelay();
-
-	/**
-	 * Any pre-init, pre-load tasks when the instance is created
-	 */
-	protected void preInit() {
-	}
-
-	/**
-	 * Any post-init, post-load tasks when the instance is created
-	 */
-	protected void postInit() {
-	}
-
-	public final CronExpression getCronExpression() {
-		return cronExpression;
-	}
-
-	/**
-	 * Variable name of the task start time stored in the server_variables DB table
-	 */
-	abstract protected String getServerTimeVariable();
-
-	public long getPeriod() {
-		return period;
-	}
-
-	/**
-	 * Tasks which have to be run before the actual scheduled task
-	 */
-	protected void preRun() {
-	}
-
-	/**
-	 * The main execution code goes here
-	 */
-	abstract protected void executeTask();
-
-	/**
-	 * Is the task allowed to run on its initialization (if runDelay = 0) or only at times defined by cron
-	 */
-	abstract protected boolean canRunOnInit();
-
-	/**
-	 * Tasks which have to be run after the task is complete and saved to DB
-	 */
-	protected void postRun() {
-	}
+	private Date lastPlannedRunBeforeServerStart;
+	private Date lastRun;
+	private Date nextRun;
 
 	public AbstractCronTask(CronExpression cronExpression) {
-		if (cronExpression == null)
-			throw new NullPointerException("cronExpressionString");
-
-		ServerVariablesDAO dao = DAOManager.getDAO(ServerVariablesDAO.class);
-		runTime = dao.load(getServerTimeVariable());
-
-		preInit();
 		this.cronExpression = cronExpression;
-		Date nextDate = cronExpression.getTimeAfter(new Date());
-		Date nextAfterDate = cronExpression.getTimeAfter(nextDate);
-		period = nextAfterDate.getTime() - nextDate.getTime();
-		postInit();
-
-		if (getRunDelay() == 0) {
-			if (canRunOnInit())
-				ThreadPoolManager.getInstance().schedule(this, 0);
-			else {
-				saveNextRunTime();
-			}
-		}
-		scheduleNextRun();
-	}
-
-	private void scheduleNextRun() {
+		this.nextRun = getNextRunAfter(new Date());
+		this.lastPlannedRunBeforeServerStart = findLastPlannedRun();
+		if (SERVER_STOP_MILLIS != null && lastPlannedRunBeforeServerStart != null && SERVER_STOP_MILLIS < lastPlannedRunBeforeServerStart.getTime())
+			run(); // server was down when task should have run, so we run it now
 		CronService.getInstance().schedule(this, cronExpression, true);
 	}
 
-	private void saveNextRunTime() {
-		Date nextDate = cronExpression.getTimeAfter(new Date());
-		ServerVariablesDAO dao = DAOManager.getDAO(ServerVariablesDAO.class);
-		runTime = (int) (nextDate.getTime() / 1000);
-		dao.store(getServerTimeVariable(), runTime);
+	/**
+	 * @return The last time this task started, null if it didn't during this uptime yet
+	 */
+	public final Date getLastRun() {
+		return lastRun;
 	}
+
+	/**
+	 * @return The last time this task started or should have started (in case task hasn't yet run since the server got restarted)
+	 */
+	public final Date getLastPlannedRun() {
+		return lastRun == null ? lastPlannedRunBeforeServerStart : lastRun;
+	}
+
+	public final long getMillisSinceLastRun() {
+		return lastRun == null ? -1 : System.currentTimeMillis() - lastRun.getTime();
+	}
+
+	/**
+	 * @return Time of the next task start
+	 */
+	public final Date getNextRun() {
+		return nextRun;
+	}
+
+	/**
+	 * @return Time of the next task start after given date
+	 */
+	public final Date getNextRunAfter(Date date) {
+		return cronExpression.getTimeAfter(date);
+	}
+
+	public final long getMillisUntilNextRun() {
+		return nextRun.getTime() - System.currentTimeMillis();
+	}
+
+	protected abstract void executeTask();
 
 	@Override
 	public final void run() {
-		if (getRunDelay() > 0) {
-			ThreadPoolManager.getInstance().schedule(this, getRunDelay());
-		} else {
-			preRun();
+		lastRun = new Date();
+		nextRun = getNextRunAfter(lastRun);
+		executeTask();
+	}
 
-			executeTask();
-			saveNextRunTime();
-
-			postRun();
-		}
+	/**
+	 * @return Date when this task last should have run, whether the server was online or not. <b>NOTE</b>: The current implementation may not find the
+	 *         correct date if the underlying cron expression is irregular
+	 */
+	private Date findLastPlannedRun() {
+		long interval = getNextRunAfter(nextRun).getTime() - nextRun.getTime();
+		long now = System.currentTimeMillis();
+		long millis = now;
+		Date lastRun;
+		do {
+			millis -= interval / 2;
+			lastRun = cronExpression.getTimeAfter(new Date(millis));
+		} while (lastRun.getTime() >= now);
+		return lastRun;
 	}
 }
