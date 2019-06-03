@@ -29,7 +29,7 @@ public class MonsterRaid {
 	private final MonsterRaidLocation mrl;
 	private boolean isBossKilled;
 	private Npc boss, flag, vortex;
-	private Future<?> despawnTask;
+	private Future<?> despawnTask, preparationTask;
 
 	public MonsterRaid(MonsterRaidLocation mrl) {
 		this.mrl = mrl;
@@ -45,10 +45,12 @@ public class MonsterRaid {
 			onMonsterRaidFinish();
 	}
 
-	private final void onMonsterRaidStart() {
-		ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
-			
-			int progress = 0;
+	private void onMonsterRaidStart() {
+		if (preparationTask != null)
+			preparationTask.cancel(false);
+		preparationTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
+
+			private int progress = 0;
 
 			@Override
 			public void run() {
@@ -65,6 +67,8 @@ public class MonsterRaid {
 						broadcastMessage(SM_SYSTEM_MESSAGE.STR_MSG_WORLDRAID_MESSAGE_03());
 						break;
 					case 6: // 30 minutes
+						preparationTask.cancel(false);
+						preparationTask = null;
 						spawnBoss();
 						regDeathListener();
 						broadcastMessage(SM_SYSTEM_MESSAGE.STR_MSG_WORLDRAID_MESSAGE_04());
@@ -75,7 +79,7 @@ public class MonsterRaid {
 		}, 0, 300000);
 	}
 
-	private final void onMonsterRaidFinish() {
+	private void onMonsterRaidFinish() {
 		rmvDeathListener();
 		despawnNpcs(flag, vortex);
 		if (isBossKilled()) { // TODO: Switch for different NPCs
@@ -86,18 +90,18 @@ public class MonsterRaid {
 		}
 	}
 
-	private final void scheduleDespawn() {
+	private void scheduleDespawn() {
 		despawnTask = ThreadPoolManager.getInstance().schedule(() -> {
 			if (!boss.isDead())
 				MonsterRaidService.getInstance().stopRaid(getLocationId());
 		}, 3600 * 1000);
 	}
 
-	private final void cancelDespawn() {
+	private void cancelDespawn() {
 		if (despawnTask != null && !despawnTask.isCancelled())
 			despawnTask.cancel(true);
 	}
-	
+
 	private void despawnNpcs(Npc... npcs) {
 		for (Npc npc : npcs)
 			if (npc != null && !npc.isDead())
@@ -113,8 +117,7 @@ public class MonsterRaid {
 	}
 
 	private void spawnBoss() {
-		SpawnTemplate temp = SpawnEngine.newSingleTimeSpawn(mrl.getWorldId(), Rnd.get(mrl.getNpcIds()), mrl.getX(), mrl.getY(), mrl.getZ(),
-			mrl.getH());
+		SpawnTemplate temp = SpawnEngine.newSingleTimeSpawn(mrl.getWorldId(), Rnd.get(mrl.getNpcIds()), mrl.getX(), mrl.getY(), mrl.getZ(), mrl.getH());
 		initBoss((Npc) SpawnEngine.spawnObject(temp, 1));
 	}
 

@@ -39,8 +39,8 @@ public class MonsterRaidService {
 		if (!EventsConfig.ENABLE_MONSTER_RAID)
 			return;
 		// Initialize Raid Schedules
-		MonsterRaidSchedule.load().getMonsterRaidsList().stream()
-			.forEach(r -> r.getRaidTimes().stream().forEach(rt -> CronService.getInstance().schedule(new MonsterRaidStartRunnable(r.getRaidId()), rt)));
+		MonsterRaidSchedule.load().getMonsterRaidsList()
+			.forEach(r -> r.getRaidTimes().forEach(rt -> CronService.getInstance().schedule(new MonsterRaidStartRunnable(r.getRaidId()), rt)));
 		log.debug("Finished initialization of monster raid schedules.");
 	}
 

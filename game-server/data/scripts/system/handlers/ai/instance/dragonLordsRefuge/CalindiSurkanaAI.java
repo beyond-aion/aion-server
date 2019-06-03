@@ -1,5 +1,7 @@
 package ai.instance.dragonLordsRefuge;
 
+import java.util.concurrent.Future;
+
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.ai.poll.AIQuestion;
@@ -14,7 +16,7 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 @AIName("calindi_surkana")
 public class CalindiSurkanaAI extends NpcAI {
 
-	Npc calindi;
+	private Future<?> reflectTask;
 
 	public CalindiSurkanaAI(Npc owner) {
 		super(owner);
@@ -23,25 +25,28 @@ public class CalindiSurkanaAI extends NpcAI {
 	@Override
 	protected void handleSpawned() {
 		super.handleSpawned();
-		calindi = getPosition().getWorldMapInstance().getNpc(219359);
-		reflect();
+		if (getNpcId() == 730695)
+			startReflectBuffTask(20590);
+		else if (getNpcId() == 730696)
+			startReflectBuffTask(20591);
 	}
 
-	private void reflect() {
-		ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
-			if (!isDead()) {
-				int buffId = 0;
-				switch (getNpcId()) {
-					case 730695:
-						buffId = 20590;
-						break;
-					case 730696:
-						buffId = 20591;
-						break;
-				}
-				SkillEngine.getInstance().applyEffectDirectly(buffId, getOwner(), calindi);
+	private void startReflectBuffTask(int buffId) {
+		reflectTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
+			Npc calindi = getPosition().getWorldMapInstance().getNpc(219359);
+			if (isDead() || calindi == null || calindi.isDead()) {
+				reflectTask.cancel(false);
+				return;
 			}
+			SkillEngine.getInstance().applyEffectDirectly(buffId, getOwner(), calindi);
 		}, 2500, 5000);
+	}
+
+	@Override
+	protected void handleDied() {
+		super.handleDied();
+		if (reflectTask != null && !reflectTask.isCancelled())
+			reflectTask.cancel(false);
 	}
 
 	@Override
