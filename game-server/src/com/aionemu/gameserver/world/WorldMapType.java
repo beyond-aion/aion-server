@@ -239,11 +239,16 @@ public enum WorldMapType {
 		return null;
 	}
 
-	public static int getMapId(String worldName) {
+	public static WorldMapType of(String worldName) {
 		worldName = worldName.toLowerCase().replace(" ", "_");
 		for (WorldMapType type : values())
 			if (type.name().toLowerCase().equals(worldName))
-				return type.getId();
-		return 0;
+				return type;
+		return null;
+	}
+
+	public static int getMapId(String worldName) {
+		WorldMapType worldMapType = of(worldName);
+		return worldMapType == null ? 0 : worldMapType.getId();
 	}
 }
